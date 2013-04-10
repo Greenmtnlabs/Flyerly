@@ -6,15 +6,16 @@
 //  Copyright __MyCompanyName__ 2009. All rights reserved.
 //
 
-#import "ARRollerView.h"
-#import "ARRollerProtocol.h"
+//#import "ARRollerView.h"
+//#import "ARRollerProtocol.h"
 #import "FBConnect/FBConnect.h"
 @class FBSession;
 #import "TwitLogin.h"
 
 
 @class SaveFlyerController;
-@interface FlyrAppDelegate : NSObject <UIApplicationDelegate,ARRollerDelegate> {
+@interface FlyrAppDelegate : NSObject <UIApplicationDelegate> {
+//@interface FlyrAppDelegate : NSObject <UIApplicationDelegate,ARRollerDelegate> {
 	UIScrollView *fontScrollView;
 	UIScrollView *colorScrollView;
 	UIScrollView *sizeScrollView;
@@ -30,7 +31,7 @@
 	TwitLogin *_tSession;
 	BOOL faceBookPermissionFlag;
 	BOOL changesFlag;
-	ARRollerView *adwhirl;
+	//ARRollerView *adwhirl;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
@@ -46,7 +47,7 @@
 @property (nonatomic,retain) TwitLogin *_tSession;
 @property (nonatomic,assign)	BOOL faceBookPermissionFlag;
 @property (nonatomic,assign) BOOL changesFlag;
-@property(nonatomic,retain) ARRollerView *adwhirl;
+//@property(nonatomic,retain) ARRollerView *adwhirl;
 -(void)next;
 //@property (nonatomic, retain) NSMutableArray *templateArray;
 //@property (nonatomic, retain) NSMutableArray *iconArray;

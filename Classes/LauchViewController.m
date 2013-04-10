@@ -16,7 +16,7 @@
 
 @implementation LauchViewController
 
-@synthesize ptController,spController,tpController;
+@synthesize ptController,spController,tpController,faceBookButton;
 @synthesize loadingView;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
@@ -66,17 +66,25 @@
 
 -(void)viewWillAppear:(BOOL)animated{
 	[super viewWillAppear:YES];
-	loadingViewFlag = NO;
+    
+    // Create right bar button
+    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Right" style:UIBarButtonItemStyleBordered target:nil action:nil];
+    self.navigationItem.rightBarButtonItem = rightBarButton;
+    
+    // Set the background image on navigation bar
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"mail.png"] forBarMetrics:UIBarMetricsDefault];
+
+    loadingViewFlag = NO;
 }
 
 - (void)viewDidLoad {
          [super viewDidLoad];
-	self.navigationItem.title = @"Menu";
+	//self.navigationItem.title = @"Menu";
 	loadingViewFlag = NO;
 	loadingView = nil;
 	loadingView = [[LoadingView alloc]init];
-	self.navigationController.navigationBarHidden = YES;
-	spController = [[SettingViewController alloc]initWithNibName:@"SettingViewController" bundle:nil];
+
+    spController = [[SettingViewController alloc]initWithNibName:@"SettingViewController" bundle:nil];
 	//[spController initSession];
 }
 
@@ -84,13 +92,23 @@
 #pragma mark View Disappear
 -(void)viewWillDisappear:(BOOL)animated{
 	[super viewWillDisappear:YES];
-	self.navigationItem.title = @"Menu";
-	self.navigationController.navigationBarHidden = YES;
+	//self.navigationItem.title = @"Menu";
+	//self.navigationController.navigationBarHidden = YES;
 	if(loadingViewFlag)
 	{
 		[loadingView removeFromSuperview];
 		loadingViewFlag=NO;
 	}
+}
+
+-(IBAction)createTwitLogin:(id)sender{
+	TwitLogin *twitDialog = [[TwitLogin alloc]init];
+	//twitDialog.flyerImage = flyrImg;
+	FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
+	twitDialog.svController = appDele.svController;
+	appDele._tSession = twitDialog;
+	[twitDialog show];
+	[self.view addSubview:twitDialog];
 }
 
 #pragma mark Dealloc

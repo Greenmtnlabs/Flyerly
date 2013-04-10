@@ -7,13 +7,12 @@
 //
 
 #import "FlyrAppDelegate.h"
-#import "LauchViewController.h"
 #import "Common.h"
 #import "PhotoController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "ImageCache.h"
-#import "ARRollerView.h"
-#import "ARRollerProtocol.h"
+//#import "ARRollerView.h"
+//#import "ARRollerProtocol.h"
 
 //#define kAdWhirlApplicationKey @"b9c3615f2c88102da8949a322e50052a "
 #define kAdWhirlApplicationKey @"b7dfccec5016102d840c2e1e0de86337"
@@ -26,7 +25,7 @@
 @synthesize window;
 @synthesize navigationController,faceBookPermissionFlag,perDialog,changesFlag;
 @synthesize fontScrollView,colorScrollView,templateScrollView,sizeScrollView,svController,dialog,_session,_tSession;
-@synthesize adwhirl;
+//@synthesize adwhirl;
 
 
 
@@ -42,16 +41,16 @@
 	return kAdWhirlApplicationKey;  //Return your AdWhirl application key here
 }
 
-- (void)rollerDidReceiveAd:(ARRollerView*)rollerView
-{
-	NSString* mostRecentNetworkName = [rollerView mostRecentNetworkName];
-	NSLog(@"Received ad from %@!", mostRecentNetworkName);	
-	
-}
-- (void)rollerDidFailToReceiveAd:(ARRollerView*)rollerView usingBackup:(BOOL)YesOrNo
-{
-	NSLog(@"Failed to receive ad from %@.  Using Backup: %@", [rollerView mostRecentNetworkName], YesOrNo ? @"YES" : @"NO");
-}
+//- (void)rollerDidReceiveAd:(ARRollerView*)rollerView
+//{
+//	NSString* mostRecentNetworkName = [rollerView mostRecentNetworkName];
+//	NSLog(@"Received ad from %@!", mostRecentNetworkName);
+//
+//}
+//- (void)rollerDidFailToReceiveAd:(ARRollerView*)rollerView usingBackup:(BOOL)YesOrNo
+//{
+//	NSLog(@"Failed to receive ad from %@.  Using Backup: %@", [rollerView mostRecentNetworkName], YesOrNo ? @"YES" : @"NO");
+//}
 
 
 #pragma mark -
@@ -66,7 +65,7 @@
 	[window addSubview:[navigationController view]];
 	[window makeKeyAndVisible];
 	
-	adwhirl = [ARRollerView requestRollerViewWithDelegate:self];
+	//adwhirl = [ARRollerView requestRollerViewWithDelegate:self];
 	//adwhirl.
 	//[adwhirl setFrame:CGRectMake(0, 318, 320, 50)];
 	//[self.view addSubview:adwhirl];
@@ -130,7 +129,7 @@
 #pragma mark Memory management
 
 - (void)dealloc {
-	[adwhirl release];
+//	[adwhirl release];
 	[navigationController release];
 	[window release];
 	[super dealloc];
