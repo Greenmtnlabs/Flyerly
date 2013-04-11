@@ -67,13 +67,16 @@
 -(void)viewWillAppear:(BOOL)animated{
 	[super viewWillAppear:YES];
     
-    // Create right bar button
-    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Right" style:UIBarButtonItemStyleBordered target:nil action:nil];
-    self.navigationItem.rightBarButtonItem = rightBarButton;
-    
     // Set the background image on navigation bar
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"mail.png"] forBarMetrics:UIBarMetricsDefault];
-
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_with_logo"] forBarMetrics:UIBarMetricsDefault];
+    
+    // Create right bar button
+    UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 31, 30)];
+    [menuButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+    [menuButton setBackgroundImage:[UIImage imageNamed:@"menu_button"] forState:UIControlStateNormal];
+    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
+    [self.navigationItem setRightBarButtonItem:rightBarButton];
+    
     loadingViewFlag = NO;
 }
 
@@ -83,7 +86,7 @@
 	loadingViewFlag = NO;
 	loadingView = nil;
 	loadingView = [[LoadingView alloc]init];
-
+    
     spController = [[SettingViewController alloc]initWithNibName:@"SettingViewController" bundle:nil];
 	//[spController initSession];
 }
