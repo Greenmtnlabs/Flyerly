@@ -11,13 +11,17 @@
 
 @interface MyCustomCell : UITableViewCell {
 	UILabel * nameLabel;
+	UILabel * descriptionLabel;
+	UILabel * dateLabel;
 	UIImageView *cellImage;
 	UIImageView *indicator;
 	
 }
 @property(nonatomic, retain) UILabel * nameLabel;
+@property(nonatomic, retain) UILabel * descriptionLabel;
+@property(nonatomic, retain) UILabel * dateLabel;
 @property(nonatomic, retain) UIImageView *cellImage;
 @property(nonatomic, retain) UIImageView *indicator;
-- (void) addToCell: (NSString *)nameText:  (UIImage *)imageName ;
+- (void) addToCell: (NSString *)title:  (NSString *)description: (NSString *)created: (UIImage *)imageName;
 
 @end

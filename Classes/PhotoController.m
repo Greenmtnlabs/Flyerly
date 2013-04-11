@@ -32,6 +32,7 @@
 -(void)viewWillAppear:(BOOL)animated{
 	
 	[super viewWillAppear:YES];	
+	self.navigationController.navigationBarHidden = YES;
 	imgPicker = [[UIImagePickerController alloc] init];
 	imgPicker.allowsImageEditing = NO;
 	photoTouchFlag=NO;

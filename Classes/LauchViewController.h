@@ -23,6 +23,11 @@
 	FlyrViewController *tpController;
 	SettingViewController *spController;
 	LoadingView *loadingView;
+    
+    IBOutlet UILabel *createFlyrLabel;
+    IBOutlet UILabel *savedFlyrLabel;
+    IBOutlet UILabel *inviteFriendLabel;
+
 	IBOutlet FBLoginButton *faceBookButton;
 	BOOL loadingViewFlag;
 }
@@ -31,6 +36,11 @@
 @property(nonatomic,retain) FlyrViewController *tpController;
 @property(nonatomic,retain) SettingViewController *spController;
 @property (nonatomic, retain) IBOutlet FBLoginButton *faceBookButton;
+
+@property (nonatomic, retain) IBOutlet UILabel *createFlyrLabel;
+@property (nonatomic, retain) IBOutlet UILabel *savedFlyrLabel;
+@property (nonatomic, retain) IBOutlet UILabel *inviteFriendLabel;
+
 -(IBAction)doNew:(id)sender;
 -(IBAction)doOpen:(id)sender;
 -(IBAction)doAbout:(id)sender;

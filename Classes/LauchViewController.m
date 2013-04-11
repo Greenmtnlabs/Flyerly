@@ -16,7 +16,7 @@
 
 @implementation LauchViewController
 
-@synthesize ptController,spController,tpController,faceBookButton;
+@synthesize ptController,spController,tpController,faceBookButton,createFlyrLabel,savedFlyrLabel,inviteFriendLabel;
 @synthesize loadingView;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
@@ -66,7 +66,8 @@
 
 -(void)viewWillAppear:(BOOL)animated{
 	[super viewWillAppear:YES];
-    
+    self.navigationController.navigationBarHidden = NO;
+
     // Set the background image on navigation bar
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_with_logo"] forBarMetrics:UIBarMetricsDefault];
     
@@ -75,9 +76,33 @@
     [menuButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [menuButton setBackgroundImage:[UIImage imageNamed:@"menu_button"] forState:UIControlStateNormal];
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
+    
     [self.navigationItem setRightBarButtonItem:rightBarButton];
+
+    // Set left bar items
+    [self.navigationItem setLeftBarButtonItems: [self leftBarItems]];
+    
     
     loadingViewFlag = NO;
+}
+
+/*
+ * Returns the left items on navigation bar
+ * Add space item with help icon
+ */
+-(NSArray *)leftBarItems{
+    // Space item
+    UIBarButtonItem *spaceBarButton = [[UIBarButtonItem alloc] initWithCustomView:[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 30)]];
+    
+    // Create left bar help button
+    UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 13, 16)];
+    [helpButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+    [helpButton setBackgroundImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
+    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:helpButton];
+    
+    NSMutableArray *leftItems = [NSMutableArray arrayWithObjects:spaceBarButton,leftBarButton,nil];
+    
+    return leftItems;
 }
 
 - (void)viewDidLoad {
@@ -86,6 +111,10 @@
 	loadingViewFlag = NO;
 	loadingView = nil;
 	loadingView = [[LoadingView alloc]init];
+    
+    [createFlyrLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
+    [savedFlyrLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
+    [inviteFriendLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
     
     spController = [[SettingViewController alloc]initWithNibName:@"SettingViewController" bundle:nil];
 	//[spController initSession];

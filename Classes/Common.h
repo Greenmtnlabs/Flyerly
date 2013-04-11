@@ -221,14 +221,14 @@ nil]
 
 
 
-#define SET_GLOBAL_CUSTOM_CELL_PROPERTIES(name,img){\
+#define SET_GLOBAL_CUSTOM_CELL_PROPERTIES(title,description,created,img){\
 static NSString *cellId = @"Cell";\
 MyCustomCell *cell = (MyCustomCell *)[tableView dequeueReusableCellWithIdentifier:cellId];\
 if (cell == nil) {\
 cell = [[[MyCustomCell alloc] initWithFrame:CGRectZero reuseIdentifier:cellId] autorelease];\
 }\
 [cell setAccessoryType:UITableViewCellAccessoryNone]; \
-[cell addToCell: name :img];\
+[cell addToCell: title :description :created :img];\
 return cell;\
 }
 
