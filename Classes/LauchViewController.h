@@ -28,6 +28,11 @@
     IBOutlet UILabel *savedFlyrLabel;
     IBOutlet UILabel *inviteFriendLabel;
 
+    IBOutlet UIImageView *firstFlyer;
+    IBOutlet UIImageView *secondFlyer;
+    IBOutlet UIImageView *thirdFlyer;
+    IBOutlet UIImageView *fourthFlyer;
+
 	IBOutlet FBLoginButton *faceBookButton;
 	BOOL loadingViewFlag;
 }
@@ -40,6 +45,11 @@
 @property (nonatomic, retain) IBOutlet UILabel *createFlyrLabel;
 @property (nonatomic, retain) IBOutlet UILabel *savedFlyrLabel;
 @property (nonatomic, retain) IBOutlet UILabel *inviteFriendLabel;
+
+@property (nonatomic, retain) IBOutlet UIImageView *firstFlyer;
+@property (nonatomic, retain) IBOutlet UIImageView *secondFlyer;
+@property (nonatomic, retain) IBOutlet UIImageView *thirdFlyer;
+@property (nonatomic, retain) IBOutlet UIImageView *fourthFlyer;
 
 -(IBAction)doNew:(id)sender;
 -(IBAction)doOpen:(id)sender;

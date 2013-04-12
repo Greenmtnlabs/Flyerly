@@ -17,6 +17,7 @@
 @implementation LauchViewController
 
 @synthesize ptController,spController,tpController,faceBookButton,createFlyrLabel,savedFlyrLabel,inviteFriendLabel;
+@synthesize firstFlyer, secondFlyer, thirdFlyer, fourthFlyer;
 @synthesize loadingView;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
@@ -113,13 +114,63 @@
 	loadingView = [[LoadingView alloc]init];
     
     [createFlyrLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
-    [savedFlyrLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
-    [inviteFriendLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
+    [createFlyrLabel setText:NSLocalizedString(@"create_flyer", nil)];
     
+    [savedFlyrLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
+    [savedFlyrLabel setText:NSLocalizedString(@"saved_flyers", nil)];
+
+    [inviteFriendLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
+    [inviteFriendLabel setText:NSLocalizedString(@"invite_friends", nil)];
+
     spController = [[SettingViewController alloc]initWithNibName:@"SettingViewController" bundle:nil];
 	//[spController initSession];
+        
+	[self filesByModDate];
 }
 
+-(void)filesByModDate
+{
+	NSString *homeDirectoryPath = NSHomeDirectory();
+	NSString *unexpandedPath = [homeDirectoryPath stringByAppendingString:@"/Documents/Flyr/"];
+	NSString *folderPath = [NSString pathWithComponents:[NSArray arrayWithObjects:[NSString stringWithString:[unexpandedPath stringByExpandingTildeInPath]], nil]];
+	
+	NSArray *files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:folderPath error:nil];
+	NSString *finalImagePath;
+	//NSArray* sortedFiles;
+    
+	for(int i =0;i< [files count];i++)
+	{
+		NSString *img = [files objectAtIndex:i];
+		img = [@"/" stringByAppendingString:img];
+		finalImagePath= [folderPath stringByAppendingString:img];
+        
+        //NSString *imageName = [photoArray objectAtIndex:0];
+        NSData *imageData = [[NSData alloc ]initWithContentsOfMappedFile:finalImagePath];
+        UIImage *currentFlyerImage = [UIImage imageWithData:imageData];
+        
+        CGSize size = CGSizeMake(108, 99);
+
+        if(i == 0){
+            firstFlyer.image = [LauchViewController imageWithImage:currentFlyerImage scaledToSize:size];
+        } else if(i  == 1){
+            //secondFlyer.image = [LauchViewController imageWithImage:currentFlyerImage scaledToSize:size];
+        } else if(i  == 2){
+            thirdFlyer.image = [LauchViewController imageWithImage:currentFlyerImage scaledToSize:size];
+        } else if(i  == 3){
+            fourthFlyer.image = [LauchViewController imageWithImage:currentFlyerImage scaledToSize:size];
+        }
+	}
+
+}
+
++ (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
+    //UIGraphicsBeginImageContext(newSize);
+    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
 
 #pragma mark View Disappear
 -(void)viewWillDisappear:(BOOL)animated{

@@ -48,7 +48,6 @@
 		0DE7188B10B66D0C007333A2 /* FBSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DE7187E10B66D0C007333A2 /* FBSession.m */; };
 		0DE7188C10B66D0C007333A2 /* FBStreamDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DE7188010B66D0C007333A2 /* FBStreamDialog.m */; };
 		0DE7188D10B66D0C007333A2 /* FBXMLHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DE7188210B66D0C007333A2 /* FBXMLHandler.m */; };
-		0DE71B7110B6A6E3007333A2 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0DE71B7010B6A6E3007333A2 /* Settings.bundle */; };
 		0DEE01A0108ED97400967DA5 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DEE019F108ED97400967DA5 /* QuartzCore.framework */; };
 		0DEE01A2108ED97400967DA5 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DEE01A1108ED97400967DA5 /* Security.framework */; };
 		0DEE03E4108F41BB00967DA5 /* LoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DEE03E1108F41BB00967DA5 /* LoginController.m */; };
@@ -268,6 +267,8 @@
 		652CFEE317169CC800F52836 /* blue_divider@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 652CFEE117169CC800F52836 /* blue_divider@2x.png */; };
 		65BC9C37171694DD00570E4D /* top_bg_with_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 65BC9C35171694DD00570E4D /* top_bg_with_logo.png */; };
 		65BC9C38171694DD00570E4D /* top_bg_with_logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65BC9C36171694DD00570E4D /* top_bg_with_logo@2x.png */; };
+		65CC0AB6171802DF003D0BE7 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 65CC0AB5171802DF003D0BE7 /* Settings.bundle */; };
+		65CC0AB7171803FB003D0BE7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 65CC0AB9171803FB003D0BE7 /* Localizable.strings */; };
 		E8A7347D1092CFF300661AAD /* DraftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8A7347B1092CFF300661AAD /* DraftViewController.m */; };
 		E8A7347E1092CFF300661AAD /* DraftViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E8A7347C1092CFF300661AAD /* DraftViewController.xib */; };
 		E8C7C36910976BFC0064935A /* SaveFlyerController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8C7C36710976BFC0064935A /* SaveFlyerController.m */; };
@@ -344,7 +345,6 @@
 		0DE7188010B66D0C007333A2 /* FBStreamDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBStreamDialog.m; sourceTree = "<group>"; };
 		0DE7188110B66D0C007333A2 /* FBXMLHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBXMLHandler.h; sourceTree = "<group>"; };
 		0DE7188210B66D0C007333A2 /* FBXMLHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBXMLHandler.m; sourceTree = "<group>"; };
-		0DE71B7010B6A6E3007333A2 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		0DEE019F108ED97400967DA5 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		0DEE01A1108ED97400967DA5 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		0DEE03E0108F41BB00967DA5 /* LoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginController.h; path = ../Classes/LoginController.h; sourceTree = "<group>"; };
@@ -592,6 +592,9 @@
 		652CFEE117169CC800F52836 /* blue_divider@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blue_divider@2x.png"; sourceTree = "<group>"; };
 		65BC9C35171694DD00570E4D /* top_bg_with_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = top_bg_with_logo.png; sourceTree = "<group>"; };
 		65BC9C36171694DD00570E4D /* top_bg_with_logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "top_bg_with_logo@2x.png"; sourceTree = "<group>"; };
+		65CC0AB5171802DF003D0BE7 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		65CC0AB8171803FB003D0BE7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		65CC0ABA17180411003D0BE7 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Flyr-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Flyr-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		E8A7347A1092CFF300661AAD /* DraftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DraftViewController.h; sourceTree = "<group>"; };
 		E8A7347B1092CFF300661AAD /* DraftViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DraftViewController.m; sourceTree = "<group>"; };
@@ -878,8 +881,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				65CC0AB5171802DF003D0BE7 /* Settings.bundle */,
 				6513C1AB1716FE0F00355FC3 /* Fonts */,
-				0DE71B7010B6A6E3007333A2 /* Settings.bundle */,
 				0DF3A361108DF47400D6C887 /* Data */,
 				0DFC5317109576AB00B18478 /* LauchViewController.xib */,
 				0DFC5318109576AB00B18478 /* LoginController.xib */,
@@ -890,6 +893,7 @@
 				0D4903BA1091893B00855C30 /* FlyrViewController.xib */,
 				E8C7C36810976BFC0064935A /* SaveFlyerController.xib */,
 				8D1107310486CEB800E47090 /* Flyr-Info.plist */,
+				65CC0AB9171803FB003D0BE7 /* Localizable.strings */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1121,6 +1125,7 @@
 				French,
 				German,
 				en,
+				es,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
@@ -1171,7 +1176,6 @@
 				0DE1F283109883A20012819A /* twit1.png in Resources */,
 				0DF258FA10B194A000397105 /* lauchViewbutton.png in Resources */,
 				0DE7188310B66D0C007333A2 /* FBConnect.bundle in Resources */,
-				0DE71B7110B6A6E3007333A2 /* Settings.bundle in Resources */,
 				30D58CFF10FB1BF800E0C7E8 /* icon0.jpg in Resources */,
 				30D58D0010FB1BF800E0C7E8 /* icon1.jpg in Resources */,
 				30D58D0110FB1BF800E0C7E8 /* icon10.jpg in Resources */,
@@ -1352,6 +1356,8 @@
 				6513C1A81716FE0200355FC3 /* Signika-Light.otf in Resources */,
 				6513C1A91716FE0200355FC3 /* Signika-Regular.otf in Resources */,
 				6513C1AA1716FE0200355FC3 /* Signika-Semibold.otf in Resources */,
+				65CC0AB7171803FB003D0BE7 /* Localizable.strings in Resources */,
+				65CC0AB6171802DF003D0BE7 /* Settings.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1406,6 +1412,18 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		65CC0AB9171803FB003D0BE7 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				65CC0AB8171803FB003D0BE7 /* en */,
+				65CC0ABA17180411003D0BE7 /* es */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		0DEE02C2108F097600967DA5 /* Ad Hoc */ = {

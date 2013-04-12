@@ -135,8 +135,8 @@
 	
 	FlyrAppDelegate *appDele =(FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
 	appDele.svController = self;
+    
 }
-
 
 - (void) killHUD
 {

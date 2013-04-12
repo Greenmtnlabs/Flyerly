@@ -11,6 +11,7 @@
 #import "DraftViewController.h"
 #import "MyNavigationBar.h"
 #import "Common.h"
+#import "LauchViewController.h"
 @implementation FlyrViewController
 @synthesize photoArray,navBar,tView,iconArray;
 
@@ -106,6 +107,15 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    self.navigationController.navigationBarHidden=NO;
+    self.navigationItem.leftItemsSupplementBackButton = YES;
+    // Set left bar items
+    [self.navigationItem setLeftBarButtonItems: [self leftBarItems]];
+    // Set right bar items
+    [self.navigationItem setRightBarButtonItems: [self rightBarItems]];
+
+    /*
 	navBar= [[MyNavigationBar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
 	[self.view addSubview:navBar];
 	[navBar show:@"Saved Flyrs" left:@"Menu" right:@""];
@@ -117,10 +127,35 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
 	[navBar.leftButton addTarget:self action:@selector(callMenu) forControlEvents:UIControlEventTouchUpInside];
 	[navBar.rightButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
 	navBar.alpha = ALPHA1;
+     */
 }
 
+-(NSArray *)leftBarItems{
+    
+    // Create left bar help button
+    UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 13, 16)];
+    [helpButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+    [helpButton setBackgroundImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
+    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:helpButton];
 
+    return [NSMutableArray arrayWithObjects:leftBarButton,nil];
+}
 
+-(NSArray *)rightBarItems{
+    
+    // Create right bar help button
+    UILabel *saveFlyrLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
+    [saveFlyrLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:8.5]];
+    [saveFlyrLabel setTextColor:[MyCustomCell colorWithHexString:@"008ec0"]];
+    [saveFlyrLabel setBackgroundColor:[UIColor clearColor]];
+    [saveFlyrLabel setText:@"Share flyer"];
+    UIBarButtonItem *barLabel = [[UIBarButtonItem alloc] initWithCustomView:saveFlyrLabel];
+
+    UIBarButtonItem *shareBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Share" style:UIControlStateNormal
+                                                                      target:nil action:nil ];
+    
+    return [NSMutableArray arrayWithObjects:shareBarButton,barLabel,nil];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

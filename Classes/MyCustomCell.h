@@ -23,5 +23,6 @@
 @property(nonatomic, retain) UIImageView *cellImage;
 @property(nonatomic, retain) UIImageView *indicator;
 - (void) addToCell: (NSString *)title:  (NSString *)description: (NSString *)created: (UIImage *)imageName;
++(UIColor*)colorWithHexString:(NSString*)hex;
 
 @end

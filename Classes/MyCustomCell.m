@@ -38,31 +38,31 @@
 	
 	CGRect tRect2 = CGRectMake(98, 13, 195,10);
 	nameLabel = [[UILabel alloc] initWithFrame:tRect2];
-    [nameLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:10]];
-    [nameLabel setTextColor:[UIColor blueColor]];
+    [nameLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:9]];
+    [nameLabel setTextColor:[MyCustomCell colorWithHexString:@"00628f"]];
     nameLabel.backgroundColor = [UIColor clearColor];
 	[self.contentView addSubview:nameLabel];
 	
 	CGRect descriptionRect = CGRectMake(98, 18, 195,38.0f);
 	descriptionLabel = [[UILabel alloc] initWithFrame:descriptionRect];
     descriptionLabel.numberOfLines = 2;
-    [descriptionLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:10]];
+    [descriptionLabel setFont:[UIFont fontWithName:@"Signika-Regular" size:9]];
     [descriptionLabel setTextColor:[UIColor blackColor]];
     descriptionLabel.backgroundColor = [UIColor clearColor];
 	[self.contentView addSubview:descriptionLabel];
 	
 	CGRect createdRect = CGRectMake(98, 50, 35.0f,19);
 	UILabel *createLabel = [[UILabel alloc] initWithFrame:createdRect];
-    [createLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:8]];
-    [createLabel setTextColor:[UIColor grayColor]];
+    [createLabel setFont:[UIFont fontWithName:@"Signika-Regular" size:8]];
+    [createLabel setTextColor:[MyCustomCell colorWithHexString:@"929292"]];
     [createLabel setText:@"Created:"];
     createLabel.backgroundColor = [UIColor clearColor];
 	[self.contentView addSubview:createLabel];
 	
 	CGRect dateRect = CGRectMake(130, 50, 195,19);
 	dateLabel = [[UILabel alloc] initWithFrame:dateRect];
-    [dateLabel setFont:[UIFont systemFontOfSize:8]];
-    [dateLabel setTextColor:[UIColor grayColor]];
+    [dateLabel setFont:[UIFont fontWithName:@"Signika-Regular" size:8]];
+    [dateLabel setTextColor:[MyCustomCell colorWithHexString:@"929292"]];
     dateLabel.backgroundColor = [UIColor clearColor];
 	[self.contentView addSubview:dateLabel];	
 	
@@ -156,6 +156,41 @@
     // Configure the view for the selected state
 }
 
++(UIColor*)colorWithHexString:(NSString*)hex
+{
+    NSString *cString = [[hex stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] uppercaseString];
+    
+    // String should be 6 or 8 characters
+    if ([cString length] < 6) return [UIColor grayColor];
+    
+    // strip 0X if it appears
+    if ([cString hasPrefix:@"0X"]) cString = [cString substringFromIndex:2];
+    
+    if ([cString length] != 6) return  [UIColor grayColor];
+    
+    // Separate into r, g, b substrings
+    NSRange range;
+    range.location = 0;
+    range.length = 2;
+    NSString *rString = [cString substringWithRange:range];
+    
+    range.location = 2;
+    NSString *gString = [cString substringWithRange:range];
+    
+    range.location = 4;
+    NSString *bString = [cString substringWithRange:range];
+    
+    // Scan values
+    unsigned int r, g, b;
+    [[NSScanner scannerWithString:rString] scanHexInt:&r];
+    [[NSScanner scannerWithString:gString] scanHexInt:&g];
+    [[NSScanner scannerWithString:bString] scanHexInt:&b];
+    
+    return [UIColor colorWithRed:((float) r / 255.0f)
+                           green:((float) g / 255.0f)
+                            blue:((float) b / 255.0f)
+                           alpha:1.0f];
+}
 
 - (void)dealloc {
     [super dealloc];
