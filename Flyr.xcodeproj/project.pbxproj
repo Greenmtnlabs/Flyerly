@@ -269,6 +269,28 @@
 		65BC9C38171694DD00570E4D /* top_bg_with_logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65BC9C36171694DD00570E4D /* top_bg_with_logo@2x.png */; };
 		65CC0AB6171802DF003D0BE7 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 65CC0AB5171802DF003D0BE7 /* Settings.bundle */; };
 		65CC0AB7171803FB003D0BE7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 65CC0AB9171803FB003D0BE7 /* Localizable.strings */; };
+		65E26157171C2EC400C485B5 /* AddFriendScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65E26156171C2EC400C485B5 /* AddFriendScreen.xib */; };
+		65E2615D171C2FA800C485B5 /* AddFriendsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E2615C171C2FA800C485B5 /* AddFriendsController.m */; };
+		65E26164171C345D00C485B5 /* facebook_tab_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E2615E171C345C00C485B5 /* facebook_tab_selected.png */; };
+		65E26165171C345D00C485B5 /* facebook_tab.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E2615F171C345C00C485B5 /* facebook_tab.png */; };
+		65E26166171C345D00C485B5 /* invite_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E26160171C345C00C485B5 /* invite_selected@2x.png */; };
+		65E26167171C345D00C485B5 /* invite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E26161171C345D00C485B5 /* invite@2x.png */; };
+		65E26168171C345D00C485B5 /* twitter_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E26162171C345D00C485B5 /* twitter_selected.png */; };
+		65E26169171C345D00C485B5 /* twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E26163171C345D00C485B5 /* twitter.png */; };
+		65E2616C171C34C600C485B5 /* contact_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E2616A171C34C600C485B5 /* contact_selected.png */; };
+		65E2616D171C34C600C485B5 /* contact.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E2616B171C34C600C485B5 /* contact.png */; };
+		65E26173171C361400C485B5 /* done_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E2616E171C361400C485B5 /* done_selected@2x.png */; };
+		65E26174171C361400C485B5 /* done@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E2616F171C361400C485B5 /* done@2x.png */; };
+		65E26175171C361400C485B5 /* select_all_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E26170171C361400C485B5 /* select_all_selected.png */; };
+		65E26176171C361400C485B5 /* select_all.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E26171171C361400C485B5 /* select_all.png */; };
+		65E26177171C361400C485B5 /* unselect.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E26172171C361400C485B5 /* unselect.png */; };
+		65E26179171C366200C485B5 /* bottom_buttons_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E26178171C366200C485B5 /* bottom_buttons_bg.png */; };
+		65E2617C171C372D00C485B5 /* done_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E2617A171C372C00C485B5 /* done_selected.png */; };
+		65E2617D171C372D00C485B5 /* done.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E2617B171C372C00C485B5 /* done.png */; };
+		65E26181171C59D100C485B5 /* AddFriendItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65E26180171C59D100C485B5 /* AddFriendItem.xib */; };
+		65E26184171C5B7600C485B5 /* checkbox_checked.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E26182171C5B7600C485B5 /* checkbox_checked.png */; };
+		65E26185171C5B7600C485B5 /* checkbox.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E26183171C5B7600C485B5 /* checkbox.png */; };
+		65E26188171C5C9900C485B5 /* AddFriendItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E26187171C5C9800C485B5 /* AddFriendItem.m */; };
 		E8A7347D1092CFF300661AAD /* DraftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8A7347B1092CFF300661AAD /* DraftViewController.m */; };
 		E8A7347E1092CFF300661AAD /* DraftViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E8A7347C1092CFF300661AAD /* DraftViewController.xib */; };
 		E8C7C36910976BFC0064935A /* SaveFlyerController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8C7C36710976BFC0064935A /* SaveFlyerController.m */; };
@@ -595,6 +617,30 @@
 		65CC0AB5171802DF003D0BE7 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		65CC0AB8171803FB003D0BE7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		65CC0ABA17180411003D0BE7 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		65E26156171C2EC400C485B5 /* AddFriendScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddFriendScreen.xib; sourceTree = "<group>"; };
+		65E2615B171C2FA800C485B5 /* AddFriendsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFriendsController.h; sourceTree = "<group>"; };
+		65E2615C171C2FA800C485B5 /* AddFriendsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFriendsController.m; sourceTree = "<group>"; };
+		65E2615E171C345C00C485B5 /* facebook_tab_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook_tab_selected.png; sourceTree = "<group>"; };
+		65E2615F171C345C00C485B5 /* facebook_tab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook_tab.png; sourceTree = "<group>"; };
+		65E26160171C345C00C485B5 /* invite_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "invite_selected@2x.png"; sourceTree = "<group>"; };
+		65E26161171C345D00C485B5 /* invite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "invite@2x.png"; sourceTree = "<group>"; };
+		65E26162171C345D00C485B5 /* twitter_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twitter_selected.png; sourceTree = "<group>"; };
+		65E26163171C345D00C485B5 /* twitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twitter.png; sourceTree = "<group>"; };
+		65E2616A171C34C600C485B5 /* contact_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = contact_selected.png; sourceTree = "<group>"; };
+		65E2616B171C34C600C485B5 /* contact.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = contact.png; sourceTree = "<group>"; };
+		65E2616E171C361400C485B5 /* done_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "done_selected@2x.png"; sourceTree = "<group>"; };
+		65E2616F171C361400C485B5 /* done@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "done@2x.png"; sourceTree = "<group>"; };
+		65E26170171C361400C485B5 /* select_all_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = select_all_selected.png; sourceTree = "<group>"; };
+		65E26171171C361400C485B5 /* select_all.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = select_all.png; sourceTree = "<group>"; };
+		65E26172171C361400C485B5 /* unselect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unselect.png; sourceTree = "<group>"; };
+		65E26178171C366200C485B5 /* bottom_buttons_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bottom_buttons_bg.png; sourceTree = "<group>"; };
+		65E2617A171C372C00C485B5 /* done_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = done_selected.png; sourceTree = "<group>"; };
+		65E2617B171C372C00C485B5 /* done.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = done.png; sourceTree = "<group>"; };
+		65E26180171C59D100C485B5 /* AddFriendItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddFriendItem.xib; sourceTree = "<group>"; };
+		65E26182171C5B7600C485B5 /* checkbox_checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkbox_checked.png; sourceTree = "<group>"; };
+		65E26183171C5B7600C485B5 /* checkbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkbox.png; sourceTree = "<group>"; };
+		65E26186171C5C9800C485B5 /* AddFriendItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFriendItem.h; sourceTree = "<group>"; };
+		65E26187171C5C9800C485B5 /* AddFriendItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFriendItem.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Flyr-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Flyr-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		E8A7347A1092CFF300661AAD /* DraftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DraftViewController.h; sourceTree = "<group>"; };
 		E8A7347B1092CFF300661AAD /* DraftViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DraftViewController.m; sourceTree = "<group>"; };
@@ -616,6 +662,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0D33511D109ABB6A0082810A /* AddressBookUI.framework in Frameworks */,
+				0D33511B109ABB6A0082810A /* AddressBook.framework in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */,
@@ -625,8 +673,6 @@
 				0DEE01A0108ED97400967DA5 /* QuartzCore.framework in Frameworks */,
 				0DEE01A2108ED97400967DA5 /* Security.framework in Frameworks */,
 				0DE0243110959098005F699B /* MessageUI.framework in Frameworks */,
-				0D33511B109ABB6A0082810A /* AddressBook.framework in Frameworks */,
-				0D33511D109ABB6A0082810A /* AddressBookUI.framework in Frameworks */,
 				0D33511F109ABB6A0082810A /* CFNetwork.framework in Frameworks */,
 				0D335121109ABB6A0082810A /* libxml2.dylib in Frameworks */,
 				0D335123109ABB6A0082810A /* libz.dylib in Frameworks */,
@@ -657,6 +703,10 @@
 				0DFC531C109576AB00B18478 /* SettingViewController.m */,
 				E8C7C36610976BFC0064935A /* SaveFlyerController.h */,
 				E8C7C36710976BFC0064935A /* SaveFlyerController.m */,
+				65E2615B171C2FA800C485B5 /* AddFriendsController.h */,
+				65E2615C171C2FA800C485B5 /* AddFriendsController.m */,
+				65E26186171C5C9800C485B5 /* AddFriendItem.h */,
+				65E26187171C5C9800C485B5 /* AddFriendItem.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -759,6 +809,24 @@
 		0DF3A361108DF47400D6C887 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				65E26182171C5B7600C485B5 /* checkbox_checked.png */,
+				65E26183171C5B7600C485B5 /* checkbox.png */,
+				65E2617A171C372C00C485B5 /* done_selected.png */,
+				65E2617B171C372C00C485B5 /* done.png */,
+				65E26178171C366200C485B5 /* bottom_buttons_bg.png */,
+				65E2616E171C361400C485B5 /* done_selected@2x.png */,
+				65E2616F171C361400C485B5 /* done@2x.png */,
+				65E26170171C361400C485B5 /* select_all_selected.png */,
+				65E26171171C361400C485B5 /* select_all.png */,
+				65E26172171C361400C485B5 /* unselect.png */,
+				65E2616A171C34C600C485B5 /* contact_selected.png */,
+				65E2616B171C34C600C485B5 /* contact.png */,
+				65E2615E171C345C00C485B5 /* facebook_tab_selected.png */,
+				65E2615F171C345C00C485B5 /* facebook_tab.png */,
+				65E26160171C345C00C485B5 /* invite_selected@2x.png */,
+				65E26161171C345D00C485B5 /* invite@2x.png */,
+				65E26162171C345D00C485B5 /* twitter_selected.png */,
+				65E26163171C345D00C485B5 /* twitter.png */,
 				6513C19F1716E04B00355FC3 /* blue_flyer_dot.png */,
 				6513C1A01716E04B00355FC3 /* blue_flyer_dot@2x.png */,
 				6513C19B1716DF2E00355FC3 /* pinned_flyer_bg.png */,
@@ -882,18 +950,20 @@
 			isa = PBXGroup;
 			children = (
 				65CC0AB5171802DF003D0BE7 /* Settings.bundle */,
-				6513C1AB1716FE0F00355FC3 /* Fonts */,
-				0DF3A361108DF47400D6C887 /* Data */,
+				8D1107310486CEB800E47090 /* Flyr-Info.plist */,
+				65E26156171C2EC400C485B5 /* AddFriendScreen.xib */,
+				E8A7347C1092CFF300661AAD /* DraftViewController.xib */,
+				0D4903BA1091893B00855C30 /* FlyrViewController.xib */,
 				0DFC5317109576AB00B18478 /* LauchViewController.xib */,
 				0DFC5318109576AB00B18478 /* LoginController.xib */,
 				0DFC5319109576AB00B18478 /* MainWindow.xib */,
 				0DFC531A109576AB00B18478 /* PhotoController.xib */,
-				0DFC531D109576AB00B18478 /* SettingViewController.xib */,
-				E8A7347C1092CFF300661AAD /* DraftViewController.xib */,
-				0D4903BA1091893B00855C30 /* FlyrViewController.xib */,
 				E8C7C36810976BFC0064935A /* SaveFlyerController.xib */,
-				8D1107310486CEB800E47090 /* Flyr-Info.plist */,
+				0DFC531D109576AB00B18478 /* SettingViewController.xib */,
+				0DF3A361108DF47400D6C887 /* Data */,
+				6513C1AB1716FE0F00355FC3 /* Fonts */,
 				65CC0AB9171803FB003D0BE7 /* Localizable.strings */,
+				65E26180171C59D100C485B5 /* AddFriendItem.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1358,6 +1428,26 @@
 				6513C1AA1716FE0200355FC3 /* Signika-Semibold.otf in Resources */,
 				65CC0AB7171803FB003D0BE7 /* Localizable.strings in Resources */,
 				65CC0AB6171802DF003D0BE7 /* Settings.bundle in Resources */,
+				65E26157171C2EC400C485B5 /* AddFriendScreen.xib in Resources */,
+				65E26164171C345D00C485B5 /* facebook_tab_selected.png in Resources */,
+				65E26165171C345D00C485B5 /* facebook_tab.png in Resources */,
+				65E26166171C345D00C485B5 /* invite_selected@2x.png in Resources */,
+				65E26167171C345D00C485B5 /* invite@2x.png in Resources */,
+				65E26168171C345D00C485B5 /* twitter_selected.png in Resources */,
+				65E26169171C345D00C485B5 /* twitter.png in Resources */,
+				65E2616C171C34C600C485B5 /* contact_selected.png in Resources */,
+				65E2616D171C34C600C485B5 /* contact.png in Resources */,
+				65E26173171C361400C485B5 /* done_selected@2x.png in Resources */,
+				65E26174171C361400C485B5 /* done@2x.png in Resources */,
+				65E26175171C361400C485B5 /* select_all_selected.png in Resources */,
+				65E26176171C361400C485B5 /* select_all.png in Resources */,
+				65E26177171C361400C485B5 /* unselect.png in Resources */,
+				65E26179171C366200C485B5 /* bottom_buttons_bg.png in Resources */,
+				65E2617C171C372D00C485B5 /* done_selected.png in Resources */,
+				65E2617D171C372D00C485B5 /* done.png in Resources */,
+				65E26181171C59D100C485B5 /* AddFriendItem.xib in Resources */,
+				65E26184171C5B7600C485B5 /* checkbox_checked.png in Resources */,
+				65E26185171C5B7600C485B5 /* checkbox.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1408,6 +1498,8 @@
 				0DE7188C10B66D0C007333A2 /* FBStreamDialog.m in Sources */,
 				0DE7188D10B66D0C007333A2 /* FBXMLHandler.m in Sources */,
 				30D8562410CF7FDB0016D5AB /* HudView.m in Sources */,
+				65E2615D171C2FA800C485B5 /* AddFriendsController.m in Sources */,
+				65E26188171C5C9900C485B5 /* AddFriendItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1433,9 +1525,8 @@
 					"$(ARCHS_STANDARD_32_BIT)",
 					i386,
 				);
-				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: MR RATNAPARKHI N V";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: MR RATNAPARKHI N V";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Khurram Ali (WBYWJEG82J)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Khurram Ali (WBYWJEG82J)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -1448,8 +1539,8 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PREBINDING = NO;
-				PROVISIONING_PROFILE = "98E19A13-C1AF-4743-8E28-910890DAE554";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "98E19A13-C1AF-4743-8E28-910890DAE554";
+				PROVISIONING_PROFILE = "06325F62-98C3-4D8E-8411-DEC3E678D12A";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "06325F62-98C3-4D8E-8411-DEC3E678D12A";
 				SDKROOT = iphoneos6.0;
 			};
 			name = "Ad Hoc";
@@ -1460,8 +1551,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Startup Artist";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Startup Artist";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Khurram Ali (WBYWJEG82J)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Khurram Ali (WBYWJEG82J)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Flyr_Prefix.pch;
@@ -1474,8 +1565,8 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = Flyr;
-				PROVISIONING_PROFILE = "8DA46157-A647-4651-A7D8-353A2768C4B3";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8DA46157-A647-4651-A7D8-353A2768C4B3";
+				PROVISIONING_PROFILE = "06325F62-98C3-4D8E-8411-DEC3E678D12A";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "06325F62-98C3-4D8E-8411-DEC3E678D12A";
 				SDKROOT = iphoneos6.0;
 			};
 			name = "Ad Hoc";
@@ -1485,8 +1576,9 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: MR RATNAPARKHI N V";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: MR RATNAPARKHI N V";
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Khurram Ali (WBYWJEG82J)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Khurram Ali (WBYWJEG82J)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1501,8 +1593,8 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = Flyr;
-				PROVISIONING_PROFILE = "98E19A13-C1AF-4743-8E28-910890DAE554";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "98E19A13-C1AF-4743-8E28-910890DAE554";
+				PROVISIONING_PROFILE = "06325F62-98C3-4D8E-8411-DEC3E678D12A";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "06325F62-98C3-4D8E-8411-DEC3E678D12A";
 				SDKROOT = iphoneos6.0;
 			};
 			name = Debug;
@@ -1512,6 +1604,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Khurram Ali (WBYWJEG82J)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Khurram Ali (WBYWJEG82J)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Flyr_Prefix.pch;
@@ -1524,6 +1618,8 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = Flyr;
+				PROVISIONING_PROFILE = "06325F62-98C3-4D8E-8411-DEC3E678D12A";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "06325F62-98C3-4D8E-8411-DEC3E678D12A";
 				SDKROOT = iphoneos6.0;
 			};
 			name = Release;
@@ -1535,9 +1631,9 @@
 					"$(ARCHS_STANDARD_32_BIT)",
 					i386,
 				);
-				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: MR RATNAPARKHI N V";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: MR RATNAPARKHI N V";
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Khurram Ali (WBYWJEG82J)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Khurram Ali (WBYWJEG82J)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -1546,8 +1642,8 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				PREBINDING = NO;
-				PROVISIONING_PROFILE = "98E19A13-C1AF-4743-8E28-910890DAE554";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "98E19A13-C1AF-4743-8E28-910890DAE554";
+				PROVISIONING_PROFILE = "06325F62-98C3-4D8E-8411-DEC3E678D12A";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "06325F62-98C3-4D8E-8411-DEC3E678D12A";
 				SDKROOT = iphoneos6.0;
 			};
 			name = Debug;
@@ -1560,8 +1656,8 @@
 					i386,
 				);
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Startup Artist";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Startup Artist";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Khurram Ali (WBYWJEG82J)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Khurram Ali (WBYWJEG82J)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -1569,8 +1665,8 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PREBINDING = NO;
-				PROVISIONING_PROFILE = "8DA46157-A647-4651-A7D8-353A2768C4B3";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8DA46157-A647-4651-A7D8-353A2768C4B3";
+				PROVISIONING_PROFILE = "06325F62-98C3-4D8E-8411-DEC3E678D12A";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "06325F62-98C3-4D8E-8411-DEC3E678D12A";
 				SDKROOT = iphoneos6.0;
 			};
 			name = Release;

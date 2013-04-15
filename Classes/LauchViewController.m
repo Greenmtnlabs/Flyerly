@@ -10,13 +10,13 @@
 #import "PhotoController.h"
 #import "FlyrViewController.h"
 #import "SettingViewController.h"
+#import "AddFriendsController.h"
 #import "LoadingView.h"
 #import "FlyrAppDelegate.h"
 
-
 @implementation LauchViewController
 
-@synthesize ptController,spController,tpController,faceBookButton,createFlyrLabel,savedFlyrLabel,inviteFriendLabel;
+@synthesize ptController,spController,tpController,faceBookButton,createFlyrLabel,savedFlyrLabel,inviteFriendLabel,addFriendsController;
 @synthesize firstFlyer, secondFlyer, thirdFlyer, fourthFlyer;
 @synthesize loadingView;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -62,6 +62,14 @@
 }
 //End
 
+// Load invite friends
+-(IBAction)doInvite:(id)sender{
+    
+	addFriendsController = [[AddFriendsController alloc]initWithNibName:@"AddFriendScreen" bundle:nil];
+
+	[self.navigationController pushViewController:addFriendsController animated:YES];
+}
+//End
 
 #pragma mark View Appear 
 
@@ -124,7 +132,7 @@
 
     spController = [[SettingViewController alloc]initWithNibName:@"SettingViewController" bundle:nil];
 	//[spController initSession];
-        
+    
 	[self filesByModDate];
 }
 

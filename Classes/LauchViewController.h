@@ -12,6 +12,7 @@
 @class FlyrViewController;
 @class SettingViewController;
 @class PhotoController ;
+@class AddFriendsController;
 @class LoadingView;
 @class FBSession;
 
@@ -22,6 +23,7 @@
 	PhotoController *ptController;
 	FlyrViewController *tpController;
 	SettingViewController *spController;
+	AddFriendsController *addFriendsController;
 	LoadingView *loadingView;
     
     IBOutlet UILabel *createFlyrLabel;
@@ -40,6 +42,7 @@
 @property (nonatomic, retain) LoadingView *loadingView;
 @property(nonatomic,retain) FlyrViewController *tpController;
 @property(nonatomic,retain) SettingViewController *spController;
+@property(nonatomic,retain) AddFriendsController *addFriendsController;
 @property (nonatomic, retain) IBOutlet FBLoginButton *faceBookButton;
 
 @property (nonatomic, retain) IBOutlet UILabel *createFlyrLabel;
@@ -54,4 +57,5 @@
 -(IBAction)doNew:(id)sender;
 -(IBAction)doOpen:(id)sender;
 -(IBAction)doAbout:(id)sender;
+-(IBAction)doInvite:(id)sender;
 @end
