@@ -141,8 +141,7 @@
                 contactPicture = [UIImage imageWithData:(NSData *)ABPersonCopyImageData(ref)];
                 [dOfPerson setObject:contactPicture forKey:@"image"];
             }
-        }
-        
+        }        
         
         //For Phone number
         NSString* mobileLabel;
