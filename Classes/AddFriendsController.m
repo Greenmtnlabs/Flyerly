@@ -9,29 +9,55 @@
 #import "AddFriendsController.h"
 #import "Common.h"
 #import "AddFriendItem.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation AddFriendsController
-@synthesize tableContainer, uiTableView, contactsArray;
+@synthesize uiTableView, contactsArray, deviceContactItems, contactsLabel, facebookLabel, twitterLabel, doneLabel, selectAllLabel, unSelectAllLabel, inviteLabel;
 
 - (void)viewDidLoad {
     
     [super viewDidLoad];
     
-    CGRect targetRect = CGRectMake(0, 0, self.tableContainer.frame.size.width, self.tableContainer.frame.size.height);
-	uiTableView = [[UITableView alloc] initWithFrame:targetRect style:UITableViewStylePlain];
-	
-    [self.uiTableView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Default.png"]]];
+    // By default first tab is selected 'Contacts'
+    selectedTab = 0;
     
-    uiTableView.dataSource = self;
-	uiTableView.delegate = self;
-	[self.tableContainer addSubview:uiTableView];
-	self.uiTableView.rowHeight =40;
+    // set borders on the table
+    [[uiTableView layer] setBorderColor:[[UIColor grayColor] CGColor]];
+    [[uiTableView layer] setBorderWidth:1];
     
+    // Set fonts type and sizes
+    [contactsLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
+    [contactsLabel setText:NSLocalizedString(@"contacts", nil)];
+
+    [facebookLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
+    [facebookLabel setText:NSLocalizedString(@"facebook", nil)];
+
+    [twitterLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
+    [twitterLabel setText:NSLocalizedString(@"twitter", nil)];
+
+    [doneLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
+    [doneLabel setText:NSLocalizedString(@"done", nil)];
+
+    [selectAllLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
+    [selectAllLabel setText:NSLocalizedString(@"select_all", nil)];
+
+    [unSelectAllLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
+    [unSelectAllLabel setText:NSLocalizedString(@"unselect_all", nil)];
+
+    [inviteLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
+    [inviteLabel setText:NSLocalizedString(@"invite", nil)];
+
+    // Load device contacts
     [self loadLocalContacts];
+
 }
 
+/*
+ * This method is used to load device contact details
+ */
 -(void)loadLocalContacts{
 
+    // init contact array
     contactsArray = [[NSMutableArray alloc] init];
     ABAddressBookRef m_addressbook = ABAddressBookCreate();
     
@@ -72,6 +98,9 @@
     }
 }
 
+/*
+ * Mehod called to get contacts
+ */
 -(void)constructInThread:(ABAddressBookRef)m_addressbook{
     
     if (!m_addressbook) {
@@ -92,15 +121,28 @@
         firstName = ABRecordCopyValue(ref, kABPersonFirstNameProperty);
         lastName  = ABRecordCopyValue(ref, kABPersonLastNameProperty);
         [dOfPerson setObject:[NSString stringWithFormat:@"%@ %@", firstName, lastName] forKey:@"name"];
-        
-        NSLog(@"First Name:%@ -- Last Name: %@", firstName, lastName);
+        //NSLog(@"First Name:%@ -- Last Name: %@", firstName, lastName);
         
         //For Email ids
         ABMutableMultiValueRef eMail  = ABRecordCopyValue(ref, kABPersonEmailProperty);
         if(ABMultiValueGetCount(eMail) > 0) {
-            [dOfPerson setObject:(NSString *)ABMultiValueCopyValueAtIndex(eMail, 0) forKey:@"email"];
-            
+            [dOfPerson setObject:(NSString *)ABMultiValueCopyValueAtIndex(eMail, 0) forKey:@"email"];            
         }
+        
+        // For contact picture
+        UIImage *contactPicture;
+        if (ref != nil && ABPersonHasImageData(ref)) {
+            if ( &ABPersonCopyImageDataWithFormat != nil ) {
+                // iOS >= 4.1
+                contactPicture = [UIImage imageWithData:(NSData *)ABPersonCopyImageDataWithFormat(ref, kABPersonImageFormatThumbnail)];
+                [dOfPerson setObject:contactPicture forKey:@"image"];
+            } else {
+                // iOS < 4.1
+                contactPicture = [UIImage imageWithData:(NSData *)ABPersonCopyImageData(ref)];
+                [dOfPerson setObject:contactPicture forKey:@"image"];
+            }
+        }
+        
         
         //For Phone number
         NSString* mobileLabel;
@@ -117,13 +159,15 @@
             }
             
             [contactsArray addObject:dOfPerson];
-            
         }
         
         //CFRelease(ref);
         //CFRelease(firstName);
         //CFRelease(lastName);
     }
+    
+    // Reload table data after all the contacts get loaded
+    [uiTableView reloadData];
 }
 
 #pragma mark Table view methods
@@ -132,15 +176,27 @@
     return 1;
 }
 
-
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    return  [contactsArray count];
+    // since we have two contacts in single row we have to divide it by 2
+    int count = ([contactsArray count]) / 2;
+    
+    // Add one if contact counts are odd
+    if(([contactsArray count] % 2) == 1){
+        count++;
+    }
+    
+    // return count
+    return count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {    
     
+    // Get index like 0, 2, 4, 6 etc
+    int index = (indexPath.row * 2);
+    
+    // Get cell
     static NSString *cellId = @"AddFriendItem";
     AddFriendItem *cell = (AddFriendItem *)[uiTableView dequeueReusableCellWithIdentifier:cellId];
     
@@ -150,65 +206,73 @@
         cell=[nib objectAtIndex:0];
     }
     
-    NSMutableDictionary *dict = [contactsArray objectAtIndex:indexPath.row];
-    NSString *name = [dict objectForKey:@"name"];
+    // Get left contact data
+    NSMutableDictionary *dict1 = [contactsArray objectAtIndex:index];
+    NSString *name1 = [dict1 objectForKey:@"name"];
+    UIImage *image1 = [dict1 objectForKey:@"image"];
     
-    [cell setValues:name title2:name];
+    // Get right contact data
+    NSMutableDictionary *dict2;
+    NSString *name2;
+    UIImage *image2;
 
+    // Check index
+    if([contactsArray count] > (index+ 1)){
+        dict2 = [contactsArray objectAtIndex:(index + 1)];
+        name2 = [dict2 objectForKey:@"name"];
+        image2 = [dict2 objectForKey:@"image"];
+    } else {
+        name2 = @"";
+        image2 = nil;
+    }
+
+    // Set data on screen
+    [cell setValues:name1 title2:name2];
+    [cell setImages:image1 image2:image2];
+    
+    // Set consecutive colors on rows
     if (indexPath.row % 2) {
         cell.contentView.backgroundColor = [UIColor whiteColor];
     } else {
-        cell.contentView.backgroundColor = [UIColor grayColor];
+        cell.contentView.backgroundColor = [[UIColor alloc]initWithRed:244.0/255.0 green:242.0/255.0 blue:243.0/255.0 alpha:1];
     }
     
+    // init cell array if null
+    if(!deviceContactItems){
+        deviceContactItems = [[NSMutableArray alloc] init];
+    }
+    
+    // Add cell in array for tracking
+    [deviceContactItems addObject:cell];
+
+    // return cell
     return cell;
 }
 
-- (void) deselect
-{
-	//[self.tView deselectRowAtIndexPath:[self.tView indexPathForSelectedRow] animated:YES];
+/*
+ * Method use to select all checkboxes
+ */
+- (IBAction)selectAllCheckBoxes:(UIButton *)sender{
+    
+    for(AddFriendItem *cell in deviceContactItems){
+        [cell.leftCheckBox setSelected:YES];
+        [cell.rightCheckBox setSelected:YES];
+    }
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+/*
+ * Method use to unselect al checkboxes
+ */
+- (IBAction)unSelectAllCheckBoxes:(UIButton *)sender{
     
-    /*
-    DraftViewController *draftViewController = [[DraftViewController alloc] initWithNibName:@"DraftViewController" bundle:nil];
-	NSString *imageName = [photoArray objectAtIndex:indexPath.row];
-    NSData *imageData = [[NSData alloc ]initWithContentsOfMappedFile:imageName];
-	UIImage *currentFlyerImage = [UIImage imageWithData:imageData];
-	draftViewController.fvController = self;
-	draftViewController.selectedFlyerImage = currentFlyerImage;
-	[self.navigationController pushViewController:draftViewController animated:YES];
-    [draftViewController release];
-	[self performSelector:@selector(deselect) withObject:nil afterDelay:0.2f];
-    */
-}
-
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    /*
-	[tableView beginUpdates];
-	[tableView setEditing:YES animated:YES];
-    
-    if (editingStyle == UITableViewCellEditingStyleDelete)
-	{
-        [tableView deleteRowsAtIndexPaths:
-         [NSArray arrayWithObjects:[NSIndexPath indexPathForRow:indexPath.row  inSection:indexPath.section],nil]
-                         withRowAnimation:UITableViewRowAnimationLeft];
-        
-        NSString *imageName = [photoArray objectAtIndex:[indexPath row]];
-        [[NSFileManager defaultManager] removeItemAtPath:imageName error:nil];
-        [photoArray removeObjectAtIndex:[indexPath row]];
-		[iconArray removeObjectAtIndex:[indexPath row]];
-	}
-	[tableView endUpdates];
-	[tableView reloadData];
-     */
+    for(AddFriendItem *cell in deviceContactItems){
+        [cell.leftCheckBox setSelected:NO];
+        [cell.rightCheckBox setSelected:NO];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-	
+    [super didReceiveMemoryWarning];	
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

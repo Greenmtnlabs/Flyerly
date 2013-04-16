@@ -12,12 +12,35 @@
 
 @interface AddFriendsController : UIViewController<UITableViewDelegate,UITableViewDataSource>{
 
-    UITableView *uiTableView;
-    IBOutlet UIView *tableContainer;
+    IBOutlet UILabel *contactsLabel;
+    IBOutlet UILabel *facebookLabel;
+    IBOutlet UILabel *twitterLabel;
+    IBOutlet UILabel *doneLabel;
+    IBOutlet UILabel *selectAllLabel;
+    IBOutlet UILabel *unSelectAllLabel;
+    IBOutlet UILabel *inviteLabel;
+
+    IBOutlet UITableView *uiTableView;
 	NSMutableArray *contactsArray;
+    
+    NSMutableArray *deviceContactItems;
+    int selectedTab;
+
 }
 
-@property(nonatomic,retain) UITableView *uiTableView;
-@property(nonatomic,retain) IBOutlet UIView *tableContainer;
+@property(nonatomic,retain) IBOutlet UILabel *contactsLabel;
+@property(nonatomic,retain) IBOutlet UILabel *facebookLabel;
+@property(nonatomic,retain) IBOutlet UILabel *twitterLabel;
+@property(nonatomic,retain) IBOutlet UILabel *doneLabel;
+@property(nonatomic,retain) IBOutlet UILabel *selectAllLabel;
+@property(nonatomic,retain) IBOutlet UILabel *unSelectAllLabel;
+@property(nonatomic,retain) IBOutlet UILabel *inviteLabel;
+
+@property(nonatomic,retain) IBOutlet UITableView *uiTableView;
 @property(nonatomic,retain) NSMutableArray *contactsArray;
+@property(nonatomic,retain) NSMutableArray *deviceContactItems;
+
+- (IBAction)selectAllCheckBoxes:(UIButton *)sender;
+- (IBAction)unSelectAllCheckBoxes:(UIButton *)sender;
+
 @end

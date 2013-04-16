@@ -44,22 +44,30 @@
 							<object class="IBUIImageView" id="618899362">
 								<reference key="NSNextResponder" ref="547505395"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{26, 3}, {37, 37}}</string>
+								<string key="NSFrame">{{26, 5}, {35, 35}}</string>
 								<reference key="NSSuperview" ref="547505395"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="472896825"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
+								<object class="NSColor" key="IBUIBackgroundColor">
+									<int key="NSColorSpace">1</int>
+									<bytes key="NSRGB">MC40OTQxMTc2NDcxIDAuNDk0MTE3NjQ3MSAwLjQ5NDExNzY0NzEAA</bytes>
+								</object>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
 							<object class="IBUIImageView" id="878998382">
 								<reference key="NSNextResponder" ref="547505395"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{190, 3}, {37, 37}}</string>
+								<string key="NSFrame">{{190, 5}, {35, 35}}</string>
 								<reference key="NSSuperview" ref="547505395"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="992104382"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
+								<object class="NSColor" key="IBUIBackgroundColor">
+									<int key="NSColorSpace">1</int>
+									<bytes key="NSRGB">MC40OTQxMTc2NDcxIDAuNDk0MTE3NjQ3MSAwLjQ5NDExNzY0NzEAA</bytes>
+								</object>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
@@ -104,7 +112,6 @@
 								<string key="NSFrame">{{233, 11}, {87, 21}}</string>
 								<reference key="NSSuperview" ref="547505395"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -207,6 +214,7 @@
 				<string key="NSReuseIdentifierKey">_NS:9</string>
 				<string key="IBUIRestorationIdentifier"/>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+				<int key="IBUISelectionStyle">0</int>
 				<reference key="IBUIContentView" ref="547505395"/>
 				<string key="IBUIReuseIdentifier">AddFriendItem</string>
 			</object>
@@ -244,6 +252,40 @@
 						<reference key="destination" ref="986059033"/>
 					</object>
 					<int key="connectionID">20</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">leftImage</string>
+						<reference key="source" ref="324660052"/>
+						<reference key="destination" ref="618899362"/>
+					</object>
+					<int key="connectionID">23</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">rightImage</string>
+						<reference key="source" ref="324660052"/>
+						<reference key="destination" ref="878998382"/>
+					</object>
+					<int key="connectionID">24</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">onCheckBoxClick:</string>
+						<reference key="source" ref="551197228"/>
+						<reference key="destination" ref="324660052"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">21</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">onCheckBoxClick:</string>
+						<reference key="source" ref="986059033"/>
+						<reference key="destination" ref="324660052"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">22</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -318,7 +360,7 @@
 				<string key="12.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="13.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="15.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<real value="2" key="15.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
+				<real value="0.0" key="15.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 				<string key="16.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<real value="2" key="16.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 				<string key="3.CustomClassName">AddFriendItem</string>
@@ -329,19 +371,30 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">20</int>
+			<int key="maxID">24</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<object class="IBPartialClassDescription">
 					<string key="className">AddFriendItem</string>
 					<string key="superclassName">UITableViewCell</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">onCheckBoxClick:</string>
+						<string key="NS.object.0">UIButton</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">onCheckBoxClick:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">onCheckBoxClick:</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+					</object>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="leftCheckBox">UIButton</string>
-						<string key="leftImage">UIImage</string>
+						<string key="leftImage">UIImageView</string>
 						<string key="leftName">UILabel</string>
 						<string key="rightCheckBox">UIButton</string>
-						<string key="rightImage">UIImage</string>
+						<string key="rightImage">UIImageView</string>
 						<string key="rightName">UILabel</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -351,7 +404,7 @@
 						</object>
 						<object class="IBToOneOutletInfo" key="leftImage">
 							<string key="name">leftImage</string>
-							<string key="candidateClassName">UIImage</string>
+							<string key="candidateClassName">UIImageView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="leftName">
 							<string key="name">leftName</string>
@@ -363,7 +416,7 @@
 						</object>
 						<object class="IBToOneOutletInfo" key="rightImage">
 							<string key="name">rightImage</string>
-							<string key="candidateClassName">UIImage</string>
+							<string key="candidateClassName">UIImageView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="rightName">
 							<string key="name">rightName</string>
