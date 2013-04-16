@@ -9,8 +9,9 @@
 #import <Foundation/Foundation.h>
 #import <AddressBookUI/AddressBookUI.h>
 #import <AddressBook/AddressBook.h>
+#import "FBConnect/FBConnect.h"
 
-@interface AddFriendsController : UIViewController<UITableViewDelegate,UITableViewDataSource>{
+@interface AddFriendsController : UIViewController<UITableViewDelegate,UITableViewDataSource,FBRequestDelegate>{
 
     IBOutlet UILabel *contactsLabel;
     IBOutlet UILabel *facebookLabel;
@@ -42,5 +43,7 @@
 
 - (IBAction)selectAllCheckBoxes:(UIButton *)sender;
 - (IBAction)unSelectAllCheckBoxes:(UIButton *)sender;
+- (IBAction)loadLocalContacts;
+- (IBAction)loadFacebookContacts;
 
 @end

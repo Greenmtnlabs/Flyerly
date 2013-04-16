@@ -10,6 +10,7 @@
 #import "Common.h"
 #import "AddFriendItem.h"
 #import <QuartzCore/QuartzCore.h>
+#import "FlyrAppDelegate.h"
 
 @implementation AddFriendsController
 @synthesize uiTableView, contactsArray, deviceContactItems, contactsLabel, facebookLabel, twitterLabel, doneLabel, selectAllLabel, unSelectAllLabel, inviteLabel;
@@ -55,7 +56,7 @@
 /*
  * This method is used to load device contact details
  */
--(void)loadLocalContacts{
+- (IBAction)loadLocalContacts{
 
     // init contact array
     contactsArray = [[NSMutableArray alloc] init];
@@ -167,6 +168,83 @@
     
     // Reload table data after all the contacts get loaded
     [uiTableView reloadData];
+}
+
+- (IBAction)loadFacebookContacts{
+
+    FlyrAppDelegate *appDele =(FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+
+    if(appDele._session.uid != 0){
+        
+        NSString* fql = [NSString stringWithFormat:@"SELECT uid,name,birthday_date FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 == %lld))", appDele._session.uid];
+        //select uid,name from user where uid == %lld
+        NSDictionary* params = [NSDictionary dictionaryWithObject:fql forKey:@"query"];
+        
+        if(params){
+            
+            [[FBRequest requestWithDelegate:self] call:@"facebook.friends.get" params:params];
+        }
+    
+    } else {
+    
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No facebook connection"
+                                                        message:@"You must be connected to Facebook to get contact list."
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+    }
+}
+
+NSArray *myList;
+int totalFacebookUserCounts;
+
+-(void)request:(FBRequest *)request didLoad:(id)result{
+
+    //NSLog(@"result: %@", result);
+    
+    if(myList==nil) {
+        NSArray* users = result;
+        myList =[[NSArray alloc] initWithArray: users];
+
+        // init contact array with number of friends counts
+        totalFacebookUserCounts = [users count];
+        contactsArray = [[NSMutableArray alloc] initWithCapacity:totalFacebookUserCounts];
+
+        for(NSInteger i=0;i<[users count];i++) {
+            NSDictionary* user = [users objectAtIndex:i];
+            NSString* uid = [user objectForKey:@"uid"];
+            NSString* fql = [NSString stringWithFormat:
+                             @"select name from user where uid == %@", uid];
+            
+            NSDictionary* params = [NSDictionary dictionaryWithObject:fql forKey:@"query"];
+            [[FBRequest requestWithDelegate:self] call:@"facebook.fql.query" params:params];
+        }
+    }
+    else {
+        
+        NSMutableDictionary *dOfPerson=[NSMutableDictionary dictionary];
+
+        NSArray* users = result;
+        NSDictionary* user = [users objectAtIndex:0];
+        NSString* name = [user objectForKey:@"name"];
+        
+        [dOfPerson setObject:name forKey:@"name"];
+        [contactsArray addObject:dOfPerson];
+                
+        //NSLog(@"Name: %@", name);
+    }
+    
+    if([contactsArray count] == totalFacebookUserCounts){
+        [uiTableView reloadData];
+        myList = nil;
+        totalFacebookUserCounts = 0;
+    }
+}
+
+-(void)loadTwitterContacts{
+    
 }
 
 #pragma mark Table view methods

@@ -214,7 +214,7 @@
 						<string key="NSFrame">{{244, 76}, {52, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="410004916"/>
+						<reference key="NSNextKeyView" ref="1070197935"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -229,7 +229,7 @@
 						<reference key="IBUIFont" ref="449525685"/>
 						<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 					</object>
-					<object class="IBUITableView" id="410004916">
+					<object class="IBUITableView" id="1070197935">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">274</int>
 						<string key="NSFrame">{{3, 106}, {314, 384}}</string>
@@ -489,7 +489,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">uiTableView</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="410004916"/>
+						<reference key="destination" ref="1070197935"/>
 					</object>
 					<int key="connectionID">186</int>
 				</object>
@@ -551,6 +551,24 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">loadLocalContacts</string>
+						<reference key="source" ref="500510736"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">195</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">loadFacebookContacts</string>
+						<reference key="source" ref="1014950534"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">194</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">selectAllCheckBoxes:</string>
 						<reference key="source" ref="918368270"/>
 						<reference key="destination" ref="372490531"/>
@@ -570,7 +588,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">dataSource</string>
-						<reference key="source" ref="410004916"/>
+						<reference key="source" ref="1070197935"/>
 						<reference key="destination" ref="372490531"/>
 					</object>
 					<int key="connectionID">184</int>
@@ -578,7 +596,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">delegate</string>
-						<reference key="source" ref="410004916"/>
+						<reference key="source" ref="1070197935"/>
 						<reference key="destination" ref="372490531"/>
 					</object>
 					<int key="connectionID">185</int>
@@ -613,7 +631,7 @@
 							<reference ref="172970481"/>
 							<reference ref="416089540"/>
 							<reference ref="404638529"/>
-							<reference ref="410004916"/>
+							<reference ref="1070197935"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -718,7 +736,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">183</int>
-						<reference key="object" ref="410004916"/>
+						<reference key="object" ref="1070197935"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 				</array>
@@ -759,7 +777,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">193</int>
+			<int key="maxID">195</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -767,10 +785,20 @@
 					<string key="className">AddFriendsController</string>
 					<string key="superclassName">UIViewController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="loadFacebookContacts">id</string>
+						<string key="loadLocalContacts">id</string>
 						<string key="selectAllCheckBoxes:">UIButton</string>
 						<string key="unSelectAllCheckBoxes:">UIButton</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="loadFacebookContacts">
+							<string key="name">loadFacebookContacts</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="loadLocalContacts">
+							<string key="name">loadLocalContacts</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="selectAllCheckBoxes:">
 							<string key="name">selectAllCheckBoxes:</string>
 							<string key="candidateClassName">UIButton</string>
