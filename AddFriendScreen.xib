@@ -560,6 +560,15 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">loadTwitterContacts</string>
+						<reference key="source" ref="941120112"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">196</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">loadFacebookContacts</string>
 						<reference key="source" ref="1014950534"/>
 						<reference key="destination" ref="372490531"/>
@@ -777,7 +786,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">195</int>
+			<int key="maxID">196</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -787,6 +796,7 @@
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="loadFacebookContacts">id</string>
 						<string key="loadLocalContacts">id</string>
+						<string key="loadTwitterContacts">id</string>
 						<string key="selectAllCheckBoxes:">UIButton</string>
 						<string key="unSelectAllCheckBoxes:">UIButton</string>
 					</dictionary>
@@ -797,6 +807,10 @@
 						</object>
 						<object class="IBActionInfo" key="loadLocalContacts">
 							<string key="name">loadLocalContacts</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="loadTwitterContacts">
+							<string key="name">loadTwitterContacts</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="selectAllCheckBoxes:">

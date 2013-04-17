@@ -10,6 +10,11 @@
 #import <AddressBookUI/AddressBookUI.h>
 #import <AddressBook/AddressBook.h>
 #import "FBConnect/FBConnect.h"
+#import <Twitter/Twitter.h>
+#import <Accounts/Accounts.h>
+#import <Accounts/ACAccountStore.h>
+#import <Accounts/ACAccountType.h>
+#import <UIKit/UIKit.h>
 
 @interface AddFriendsController : UIViewController<UITableViewDelegate,UITableViewDataSource,FBRequestDelegate>{
 
@@ -45,5 +50,6 @@
 - (IBAction)unSelectAllCheckBoxes:(UIButton *)sender;
 - (IBAction)loadLocalContacts;
 - (IBAction)loadFacebookContacts;
+- (IBAction)loadTwitterContacts;
 
 @end

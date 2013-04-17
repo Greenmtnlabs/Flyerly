@@ -243,8 +243,72 @@ int totalFacebookUserCounts;
     }
 }
 
--(void)loadTwitterContacts{
+- (IBAction)loadTwitterContacts{
     
+    ACAccountStore *account = [[ACAccountStore alloc] init];
+    ACAccountType *accountType = [account accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+    
+    // Request access from the user to access their Twitter account
+    [account requestAccessToAccountsWithType:accountType withCompletionHandler:^(BOOL granted, NSError *error) {
+         // Did user allow us access?
+         if (granted == YES) {
+             
+             // Populate array with all available Twitter accounts
+             NSArray *arrayOfAccounts = [account accountsWithAccountType:accountType];
+             
+             // Sanity check
+             if ([arrayOfAccounts count] > 0) {
+                 
+                 // Keep it simple, use the first account available
+                 ACAccount *acct = [arrayOfAccounts objectAtIndex:0];
+                 
+                 /*
+                 // Build a twitter request
+                 TWRequest *postRequest = [[TWRequest alloc] initWithURL:
+                                           [NSURL URLWithString:@"http://api.twitter.com/1/statuses/update.json"]
+                                                              parameters:[NSDictionary dictionaryWithObject:@"tweet goes here"
+                                                                                                     forKey:@"status"] requestMethod:TWRequestMethodPOST];
+                 */
+                 // Build a twitter request
+                 TWRequest *getRequest = [[TWRequest alloc] initWithURL:
+                                           [NSURL URLWithString:@"http://api.twitter.com/1/followers.json"]
+                                                              parameters:nil requestMethod:TWRequestMethodGET];
+                 // Post the request
+                 [getRequest setAccount:acct];
+                 
+                 // Block handler to manage the response
+                 [getRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+                     
+                    NSError *jsonError = nil;
+                    // id resp = [NSJSONSerialization JSONObjectWithData:responseData
+                    //                                           options:0
+                    //                                             error:&jsonError];
+                     
+                    //NSDictionary *userObject =
+                    // (NSDictionary *)[NSJSONSerialization JSONObjectWithData:
+                    //                  responseData options:
+                    //                  NSJSONReadingAllowFragments error:NULL];
+                     
+                    // NSDictionary *dict =
+                    // [NSJSONSerialization JSONObjectWithData:responseData
+                    //  options
+                    //                                        :NSJSONReadingAllowFragments error:NULL];
+                    
+                     if(responseData){
+                         //NSArray *tweets = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableLeaves error:&jsonError];
+                         
+                        id followers =  [NSJSONSerialization JSONObjectWithData:responseData
+                                                         options:NSJSONReadingMutableLeaves
+                                                           error:&jsonError];
+                         
+                         NSLog(@"Response Data: %@" , followers);
+                     }
+
+                     NSLog(@"Twitter response, HTTP response: %i", [urlResponse statusCode]);
+                  }];
+             }
+         }
+    }];
 }
 
 #pragma mark Table view methods
