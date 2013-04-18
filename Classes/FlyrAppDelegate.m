@@ -11,6 +11,8 @@
 #import "PhotoController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "ImageCache.h"
+#import "LauchViewController.h"
+#import "AfterUpdateController.h"
 //#import "ARRollerView.h"
 //#import "ARRollerProtocol.h"
 
@@ -57,12 +59,29 @@
 #pragma mark Application lifecycle
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application
-{    
+{
 	[self clearCache];
 	changesFlag = NO;
 	[[UIApplication sharedApplication] setStatusBarStyle: UIStatusBarStyleBlackTranslucent];
 	navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
-	[window addSubview:[navigationController view]];
+
+    NSString *greeted = [[NSUserDefaults standardUserDefaults] stringForKey:@"greeted"];
+    
+    if(!greeted){
+        NSLog(@"Welcome to the world of Flyerly");
+        [[NSUserDefaults standardUserDefaults] setObject:@"greeted" forKey:@"greeted"];
+        
+        AfterUpdateController *afterUpdateView = [[AfterUpdateController alloc]initWithNibName:@"AfterUpdateController" bundle:nil];
+        [navigationController pushViewController:afterUpdateView animated:NO];
+        [window addSubview:[navigationController view]];
+    } else {
+        NSLog(@"User already Greeted !");
+
+        LauchViewController *launchView = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
+        [navigationController pushViewController:launchView animated:NO];
+        [window addSubview:[navigationController view]];
+    }
+
 	[window makeKeyAndVisible];
 	
 	//adwhirl = [ARRollerView requestRollerViewWithDelegate:self];

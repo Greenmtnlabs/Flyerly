@@ -578,6 +578,15 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">invite</string>
+						<reference key="source" ref="3669256"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">197</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">selectAllCheckBoxes:</string>
 						<reference key="source" ref="918368270"/>
 						<reference key="destination" ref="372490531"/>
@@ -786,7 +795,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">196</int>
+			<int key="maxID">197</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -794,6 +803,7 @@
 					<string key="className">AddFriendsController</string>
 					<string key="superclassName">UIViewController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="invite">id</string>
 						<string key="loadFacebookContacts">id</string>
 						<string key="loadLocalContacts">id</string>
 						<string key="loadTwitterContacts">id</string>
@@ -801,6 +811,10 @@
 						<string key="unSelectAllCheckBoxes:">UIButton</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="invite">
+							<string key="name">invite</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="loadFacebookContacts">
 							<string key="name">loadFacebookContacts</string>
 							<string key="candidateClassName">id</string>

@@ -14,6 +14,9 @@
 
 
 @class SaveFlyerController;
+@class LauchViewController;
+@class AfterUpdateController;
+
 @interface FlyrAppDelegate : NSObject <UIApplicationDelegate> {
 //@interface FlyrAppDelegate : NSObject <UIApplicationDelegate,ARRollerDelegate> {
 	UIScrollView *fontScrollView;

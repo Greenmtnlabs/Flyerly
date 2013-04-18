@@ -17,6 +17,8 @@
 	IBOutlet UIImageView *leftImage;
 	IBOutlet UIImageView *rightImage;
 	
+    NSString *identifier1;
+    NSString *identifier2;
 }
 @property(nonatomic, retain) IBOutlet UIButton *leftCheckBox;
 @property(nonatomic, retain) IBOutlet UILabel *leftName;
@@ -24,6 +26,10 @@
 @property(nonatomic, retain) IBOutlet UILabel *rightName;
 @property(nonatomic, retain) IBOutlet UIImageView *leftImage;
 @property(nonatomic, retain) IBOutlet UIImageView *rightImage;
+@property(nonatomic, retain) NSString *identifier1;
+@property(nonatomic, retain) NSString *identifier2;
+
+
 -(void)setValues:(NSString *)title1 title2:(NSString *)title2;
 -(void)setImages:(UIImage *)image1 image2:(UIImage *)image2;
 - (IBAction)onCheckBoxClick:(UIButton *)sender;

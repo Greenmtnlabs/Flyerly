@@ -265,6 +265,12 @@
 		652CFEDF17169BF200F52836 /* saved_flyer@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 652CFED317169BF200F52836 /* saved_flyer@2x.png */; };
 		652CFEE217169CC800F52836 /* blue_divider.png in Resources */ = {isa = PBXBuildFile; fileRef = 652CFEE017169CC800F52836 /* blue_divider.png */; };
 		652CFEE317169CC800F52836 /* blue_divider@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 652CFEE117169CC800F52836 /* blue_divider@2x.png */; };
+		654B254A17202A4C0047C8F6 /* afterupdatescreen_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 654B254617202A4C0047C8F6 /* afterupdatescreen_bg.png */; };
+		654B254B17202A4C0047C8F6 /* afterupdatescreen_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 654B254717202A4C0047C8F6 /* afterupdatescreen_bg@2x.png */; };
+		654B254C17202A4C0047C8F6 /* ok_button_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 654B254817202A4C0047C8F6 /* ok_button_bg.png */; };
+		654B254D17202A4C0047C8F6 /* ok_button_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 654B254917202A4C0047C8F6 /* ok_button_bg@2x.png */; };
+		654B255017202B1C0047C8F6 /* AfterUpdateController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 654B254F17202B1C0047C8F6 /* AfterUpdateController.xib */; };
+		654B255317202B360047C8F6 /* AfterUpdateController.m in Sources */ = {isa = PBXBuildFile; fileRef = 654B255217202B360047C8F6 /* AfterUpdateController.m */; };
 		65B303FD171EDDEA006632E3 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65B303FA171ED8C8006632E3 /* Accounts.framework */; };
 		65B303FF171EDE0C006632E3 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65B303FE171EDE0C006632E3 /* Twitter.framework */; };
 		65BC9C37171694DD00570E4D /* top_bg_with_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 65BC9C35171694DD00570E4D /* top_bg_with_logo.png */; };
@@ -617,6 +623,13 @@
 		652CFED317169BF200F52836 /* saved_flyer@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "saved_flyer@2x.png"; sourceTree = "<group>"; };
 		652CFEE017169CC800F52836 /* blue_divider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blue_divider.png; sourceTree = "<group>"; };
 		652CFEE117169CC800F52836 /* blue_divider@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blue_divider@2x.png"; sourceTree = "<group>"; };
+		654B254617202A4C0047C8F6 /* afterupdatescreen_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = afterupdatescreen_bg.png; sourceTree = "<group>"; };
+		654B254717202A4C0047C8F6 /* afterupdatescreen_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "afterupdatescreen_bg@2x.png"; sourceTree = "<group>"; };
+		654B254817202A4C0047C8F6 /* ok_button_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ok_button_bg.png; sourceTree = "<group>"; };
+		654B254917202A4C0047C8F6 /* ok_button_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ok_button_bg@2x.png"; sourceTree = "<group>"; };
+		654B254F17202B1C0047C8F6 /* AfterUpdateController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AfterUpdateController.xib; sourceTree = "<group>"; };
+		654B255117202B360047C8F6 /* AfterUpdateController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AfterUpdateController.h; sourceTree = "<group>"; };
+		654B255217202B360047C8F6 /* AfterUpdateController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AfterUpdateController.m; sourceTree = "<group>"; };
 		65B303FA171ED8C8006632E3 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		65B303FE171EDE0C006632E3 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		65BC9C35171694DD00570E4D /* top_bg_with_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = top_bg_with_logo.png; sourceTree = "<group>"; };
@@ -719,6 +732,8 @@
 				65E2615C171C2FA800C485B5 /* AddFriendsController.m */,
 				65E26186171C5C9800C485B5 /* AddFriendItem.h */,
 				65E26187171C5C9800C485B5 /* AddFriendItem.m */,
+				654B255117202B360047C8F6 /* AfterUpdateController.h */,
+				654B255217202B360047C8F6 /* AfterUpdateController.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -821,6 +836,10 @@
 		0DF3A361108DF47400D6C887 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				654B254617202A4C0047C8F6 /* afterupdatescreen_bg.png */,
+				654B254717202A4C0047C8F6 /* afterupdatescreen_bg@2x.png */,
+				654B254817202A4C0047C8F6 /* ok_button_bg.png */,
+				654B254917202A4C0047C8F6 /* ok_button_bg@2x.png */,
 				65BE6715171D3F7A0019C1FE /* contact@2x.png */,
 				65BE6716171D3F7A0019C1FE /* facebook_tab@2x.png */,
 				65BE6717171D3F7A0019C1FE /* twitter@2x.png */,
@@ -981,6 +1000,7 @@
 				6513C1AB1716FE0F00355FC3 /* Fonts */,
 				65CC0AB9171803FB003D0BE7 /* Localizable.strings */,
 				65E26180171C59D100C485B5 /* AddFriendItem.xib */,
+				654B254F17202B1C0047C8F6 /* AfterUpdateController.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1468,6 +1488,11 @@
 				65BE6718171D3F7A0019C1FE /* contact@2x.png in Resources */,
 				65BE6719171D3F7A0019C1FE /* facebook_tab@2x.png in Resources */,
 				65BE671A171D3F7A0019C1FE /* twitter@2x.png in Resources */,
+				654B254A17202A4C0047C8F6 /* afterupdatescreen_bg.png in Resources */,
+				654B254B17202A4C0047C8F6 /* afterupdatescreen_bg@2x.png in Resources */,
+				654B254C17202A4C0047C8F6 /* ok_button_bg.png in Resources */,
+				654B254D17202A4C0047C8F6 /* ok_button_bg@2x.png in Resources */,
+				654B255017202B1C0047C8F6 /* AfterUpdateController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1520,6 +1545,7 @@
 				30D8562410CF7FDB0016D5AB /* HudView.m in Sources */,
 				65E2615D171C2FA800C485B5 /* AddFriendsController.m in Sources */,
 				65E26188171C5C9900C485B5 /* AddFriendItem.m in Sources */,
+				654B255317202B360047C8F6 /* AfterUpdateController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

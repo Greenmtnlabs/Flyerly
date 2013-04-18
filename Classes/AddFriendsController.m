@@ -58,6 +58,8 @@
  */
 - (IBAction)loadLocalContacts{
 
+    selectedTab = 0;
+    
     // init contact array
     contactsArray = [[NSMutableArray alloc] init];
     ABAddressBookRef m_addressbook = ABAddressBookCreate();
@@ -122,7 +124,6 @@
         firstName = ABRecordCopyValue(ref, kABPersonFirstNameProperty);
         lastName  = ABRecordCopyValue(ref, kABPersonLastNameProperty);
         [dOfPerson setObject:[NSString stringWithFormat:@"%@ %@", firstName, lastName] forKey:@"name"];
-        //NSLog(@"First Name:%@ -- Last Name: %@", firstName, lastName);
         
         //For Email ids
         ABMutableMultiValueRef eMail  = ABRecordCopyValue(ref, kABPersonEmailProperty);
@@ -170,23 +171,30 @@
     [uiTableView reloadData];
 }
 
+/**
+ * Called when facebook  button is selected on screen
+ */
 - (IBAction)loadFacebookContacts{
 
+    selectedTab = 1;
+    
+    // Get facebook session from app delegate
     FlyrAppDelegate *appDele =(FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-
     if(appDele._session.uid != 0){
         
+        // Create fql to loggedin user's info
         NSString* fql = [NSString stringWithFormat:@"SELECT uid,name,birthday_date FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 == %lld))", appDele._session.uid];
-        //select uid,name from user where uid == %lld
         NSDictionary* params = [NSDictionary dictionaryWithObject:fql forKey:@"query"];
         
         if(params){
             
+            // Send request
             [[FBRequest requestWithDelegate:self] call:@"facebook.friends.get" params:params];
         }
     
     } else {
     
+        // IF facebook is not connected then show this alert
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No facebook connection"
                                                         message:@"You must be connected to Facebook to get contact list."
                                                        delegate:nil
@@ -197,22 +205,22 @@
     }
 }
 
-NSArray *myList;
-int totalFacebookUserCounts;
-
 -(void)request:(FBRequest *)request didLoad:(id)result{
-
-    //NSLog(@"result: %@", result);
     
-    if(myList==nil) {
+    // check if not my facebook record
+    if(!secondRequest) {
         NSArray* users = result;
-        myList =[[NSArray alloc] initWithArray: users];
-
+        secondRequest = YES;
+        
         // init contact array with number of friends counts
         totalFacebookUserCounts = [users count];
+        [contactsArray release];
+        contactsArray = nil;
         contactsArray = [[NSMutableArray alloc] initWithCapacity:totalFacebookUserCounts];
 
         for(NSInteger i=0;i<[users count];i++) {
+            
+            // Send second request for my  facebook contacts
             NSDictionary* user = [users objectAtIndex:i];
             NSString* uid = [user objectForKey:@"uid"];
             NSString* fql = [NSString stringWithFormat:
@@ -221,9 +229,10 @@ int totalFacebookUserCounts;
             NSDictionary* params = [NSDictionary dictionaryWithObject:fql forKey:@"query"];
             [[FBRequest requestWithDelegate:self] call:@"facebook.fql.query" params:params];
         }
-    }
-    else {
         
+    } else {
+        
+        // Here we will get the facebook contacts
         NSMutableDictionary *dOfPerson=[NSMutableDictionary dictionary];
 
         NSArray* users = result;
@@ -232,18 +241,19 @@ int totalFacebookUserCounts;
         
         [dOfPerson setObject:name forKey:@"name"];
         [contactsArray addObject:dOfPerson];
-                
-        //NSLog(@"Name: %@", name);
     }
     
     if([contactsArray count] == totalFacebookUserCounts){
         [uiTableView reloadData];
-        myList = nil;
+        secondRequest = NO;
         totalFacebookUserCounts = 0;
     }
 }
 
+//BOOL grantedBool;
 - (IBAction)loadTwitterContacts{
+    
+    selectedTab = 2;
     
     ACAccountStore *account = [[ACAccountStore alloc] init];
     ACAccountType *accountType = [account accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
@@ -252,6 +262,8 @@ int totalFacebookUserCounts;
     [account requestAccessToAccountsWithType:accountType withCompletionHandler:^(BOOL granted, NSError *error) {
          // Did user allow us access?
          if (granted == YES) {
+             
+             //grantedBool = YES;
              
              // Populate array with all available Twitter accounts
              NSArray *arrayOfAccounts = [account accountsWithAccountType:accountType];
@@ -262,17 +274,14 @@ int totalFacebookUserCounts;
                  // Keep it simple, use the first account available
                  ACAccount *acct = [arrayOfAccounts objectAtIndex:0];
                  
-                 /*
                  // Build a twitter request
-                 TWRequest *postRequest = [[TWRequest alloc] initWithURL:
-                                           [NSURL URLWithString:@"http://api.twitter.com/1/statuses/update.json"]
-                                                              parameters:[NSDictionary dictionaryWithObject:@"tweet goes here"
-                                                                                                     forKey:@"status"] requestMethod:TWRequestMethodPOST];
-                 */
-                 // Build a twitter request
+                 NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+                 [params setObject:@"-1" forKey:@"cursor"];
+                 [params setObject:[acct username] forKey:@"screen_name"];
+                 
                  TWRequest *getRequest = [[TWRequest alloc] initWithURL:
-                                           [NSURL URLWithString:@"http://api.twitter.com/1/followers.json"]
-                                                              parameters:nil requestMethod:TWRequestMethodGET];
+                                           [NSURL URLWithString:@"https://api.twitter.com/1.1/followers/list.json"]
+                                                             parameters:params requestMethod:TWRequestMethodGET];
                  // Post the request
                  [getRequest setAccount:acct];
                  
@@ -280,35 +289,108 @@ int totalFacebookUserCounts;
                  [getRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
                      
                     NSError *jsonError = nil;
-                    // id resp = [NSJSONSerialization JSONObjectWithData:responseData
-                    //                                           options:0
-                    //                                             error:&jsonError];
-                     
-                    //NSDictionary *userObject =
-                    // (NSDictionary *)[NSJSONSerialization JSONObjectWithData:
-                    //                  responseData options:
-                    //                  NSJSONReadingAllowFragments error:NULL];
-                     
-                    // NSDictionary *dict =
-                    // [NSJSONSerialization JSONObjectWithData:responseData
-                    //  options
-                    //                                        :NSJSONReadingAllowFragments error:NULL];
                     
                      if(responseData){
-                         //NSArray *tweets = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableLeaves error:&jsonError];
                          
-                        id followers =  [NSJSONSerialization JSONObjectWithData:responseData
+                         NSDictionary *followers =  [NSJSONSerialization JSONObjectWithData:responseData
                                                          options:NSJSONReadingMutableLeaves
                                                            error:&jsonError];
+                         NSDictionary *users = [followers objectForKey:@"users"];                      
                          
-                         NSLog(@"Response Data: %@" , followers);
+                         [contactsArray release];
+                         contactsArray = nil;
+                         contactsArray = [[NSMutableArray alloc] initWithCapacity:[users count]];
+
+                         for (id user in users) {                             
+                             NSMutableDictionary *dOfPerson=[NSMutableDictionary dictionary];
+                             [dOfPerson setObject:[user objectForKey:@"name"] forKey:@"name"];
+                             [dOfPerson setObject:[user objectForKey:@"screen_name"] forKey:@"identifier"];
+                             [contactsArray addObject:dOfPerson];
+                         }
                      }
 
                      NSLog(@"Twitter response, HTTP response: %i", [urlResponse statusCode]);
+                     [uiTableView reloadData];
                   }];
              }
          }
     }];
+    
+    /*if(!grantedBool){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No Twitter connection"
+                                                        message:@"You must be connected to Twitter to get contact list."
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+        grantedBool =  NO;
+    }*/
+}
+
+/**
+ *
+ */
+- (void)sendTwitterMessage:(NSString *)message screenName:(NSString *)screenName{
+    
+    ACAccountStore *account = [[ACAccountStore alloc] init];
+    ACAccountType *accountType = [account accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+    
+    // Request access from the user to access their Twitter account
+    [account requestAccessToAccountsWithType:accountType withCompletionHandler:^(BOOL granted, NSError *error) {
+        // Did user allow us access?
+        if (granted == YES) {
+            
+            // Populate array with all available Twitter accounts
+            NSArray *arrayOfAccounts = [account accountsWithAccountType:accountType];
+            
+            // Sanity check
+            if ([arrayOfAccounts count] > 0) {
+                
+                // Keep it simple, use the first account available
+                ACAccount *acct = [arrayOfAccounts objectAtIndex:0];
+                
+                NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+                [params setObject:message forKey:@"text"];
+                [params setObject:screenName forKey:@"screen_name"];
+
+                 // Build a twitter request
+                 TWRequest *postRequest = [[TWRequest alloc] initWithURL: [NSURL URLWithString:@"http://api.twitter.com/1/direct_messages/new.json"] parameters:params requestMethod:TWRequestMethodPOST];
+                
+                // Post the request
+                [postRequest setAccount:acct];                                         
+                                         
+                // Block handler to manage the response
+                [postRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {                    
+                    NSLog(@"Twitter response, HTTP response: %i", [urlResponse statusCode]);
+                    
+                    [uiTableView reloadData];
+                }];
+            }
+        }
+    }];
+}
+
+/**
+ * invite contacts
+ */
+-(IBAction)invite{
+    
+    for(AddFriendItem *cell in deviceContactItems){
+        
+        // Send messages to twitter contacts 
+        if(selectedTab == 2){
+            if([cell.leftCheckBox isSelected]){
+                NSString *follower = cell.identifier1;
+                [self sendTwitterMessage:@"Join Flyerly !" screenName:follower];
+            }
+            
+            if([cell.rightCheckBox isSelected]){
+                NSString *follower = cell.identifier2;
+                [self sendTwitterMessage:@"Join Flyerly !" screenName:follower];
+            }
+        }
+    }
 }
 
 #pragma mark Table view methods
@@ -370,6 +452,8 @@ int totalFacebookUserCounts;
     // Set data on screen
     [cell setValues:name1 title2:name2];
     [cell setImages:image1 image2:image2];
+    cell.identifier1 = [dict1 objectForKey:@"identifier"];
+    cell.identifier2 = [dict2 objectForKey:@"identifier"];
     
     // Set consecutive colors on rows
     if (indexPath.row % 2) {

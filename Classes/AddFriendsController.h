@@ -32,6 +32,10 @@
     NSMutableArray *deviceContactItems;
     int selectedTab;
 
+    //facebook
+    BOOL secondRequest;
+    int totalFacebookUserCounts;
+    
 }
 
 @property(nonatomic,retain) IBOutlet UILabel *contactsLabel;
@@ -51,5 +55,6 @@
 - (IBAction)loadLocalContacts;
 - (IBAction)loadFacebookContacts;
 - (IBAction)loadTwitterContacts;
+- (IBAction)invite;
 
 @end

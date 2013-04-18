@@ -9,7 +9,7 @@
 #import "AddFriendItem.h"
 
 @implementation AddFriendItem
-@synthesize leftCheckBox, leftName, rightCheckBox, rightName, leftImage, rightImage;
+@synthesize leftCheckBox, leftName, rightCheckBox, rightName, leftImage, rightImage, identifier1, identifier2;
 
 - (id)initWithFrame:(CGRect)frame reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithFrame:frame reuseIdentifier:reuseIdentifier]) {
