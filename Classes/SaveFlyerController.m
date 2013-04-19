@@ -16,6 +16,7 @@
 #import "DraftViewController.h"
 #import "Common.h"
 #import "HudView.h"
+#import "FBConnectGlobal.h"
 
 @implementation SaveFlyerController
 

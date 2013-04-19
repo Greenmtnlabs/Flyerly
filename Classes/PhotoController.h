@@ -21,6 +21,11 @@
 	UIImageView *textBackgrnd;
 	UIImageView *photoImgView;
 
+    UIButton *takePhotoButton;
+	UIButton *cameraRollButton;
+    UILabel *takePhotoLabel;
+	UILabel *cameraRollLabel;
+
 	UIScrollView *fontScrollView;
 	UIScrollView *colorScrollView;
 	UIScrollView *sizeScrollView;
@@ -76,6 +81,11 @@
 @property (nonatomic, retain)UIImageView *textBackgrnd;
 @property (nonatomic, retain) UIImagePickerController *imgPicker;
 @property (nonatomic, retain) UITextView *msgTextView;
+
+@property (nonatomic,retain)  UIButton *takePhotoButton;
+@property (nonatomic,retain)  UIButton *cameraRollButton;
+@property (nonatomic,retain)  UILabel *takePhotoLabel;
+@property (nonatomic,retain)  UILabel *cameraRollLabel;
 
 @property (nonatomic, retain) UIScrollView *templateScrollView;
 @property (nonatomic, retain) UIScrollView *fontScrollView;

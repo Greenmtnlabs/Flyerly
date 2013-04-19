@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FBConnect.h"
 #import "FBConnect/FBConnect.h"
 
 @class FlyrViewController;

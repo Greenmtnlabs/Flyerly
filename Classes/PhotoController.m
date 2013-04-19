@@ -25,6 +25,7 @@
 @synthesize templateBckgrnd,textBackgrnd,aHUD;
 @synthesize widthScrollView,heightScrollView,photoTabButton,widthTabButton,heightTabButton,photoImgView;
 @synthesize photoTouchFlag,lableTouchFlag,lableLocation,warningAlert;
+@synthesize takePhotoButton, cameraRollButton, takePhotoLabel, cameraRollLabel;
 
 
 
@@ -32,7 +33,7 @@
 -(void)viewWillAppear:(BOOL)animated{
 	
 	[super viewWillAppear:YES];	
-	self.navigationController.navigationBarHidden = YES;
+	self.navigationController.navigationBarHidden = NO;
 	imgPicker = [[UIImagePickerController alloc] init];
 	imgPicker.allowsImageEditing = NO;
 	photoTouchFlag=NO;
@@ -63,20 +64,50 @@
 	
 	navBar= [[MyNavigationBar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
 	[self.view addSubview:navBar];
+    
+    // Create right bar button
+    UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 31, 30)];
+    [menuButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+    [menuButton setBackgroundImage:[UIImage imageNamed:@"menu_button"] forState:UIControlStateNormal];
+    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
+    [self.navigationItem setRightBarButtonItem:rightBarButton];
 
 	//Default Selection for start
 	selectedFont = [UIFont fontWithName:@"Arial" size:16];
 	selectedColor = [UIColor blackColor];	
 	selectedText = @"";
 	selectedSize = 16;
-	selectedTemplate  = [UIImage imageNamed:@"Default.png"];
+	selectedTemplate  = [UIImage imageNamed:@"main_area_bg"];
 	lableLocation = CGPointMake(160,100);
 	
 	
 	// Create Main Image View
-	imgView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, 480)];
+	imgView = [[UIImageView alloc]initWithFrame:CGRectMake(5, 44, 310, 309)];
 	imgView.image = selectedTemplate;
 	[self.view addSubview:imgView];
+
+    takePhotoButton = [[UIButton alloc] initWithFrame:CGRectMake(30, 354, 135, 40)];
+    [takePhotoButton setBackgroundImage:[UIImage imageNamed:@"take_photo"] forState:UIControlStateNormal];
+    [takePhotoButton addTarget:self action:@selector(openCamera) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:takePhotoButton];
+    cameraRollButton = [[UIButton alloc] initWithFrame:CGRectMake(165, 354, 135, 40)];
+    [cameraRollButton setBackgroundImage:[UIImage imageNamed:@"camera_roll"] forState:UIControlStateNormal];
+    [cameraRollButton addTarget:self action:@selector(loadPhotoLibrary) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:cameraRollButton];
+
+    takePhotoLabel = [[UILabel alloc] initWithFrame:CGRectMake(85, 359, 80, 30)];
+    [takePhotoLabel setText:@"Take a Photo"];
+    [takePhotoLabel setBackgroundColor:[UIColor clearColor]];
+    [takePhotoLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
+    [takePhotoLabel setTextColor:[UIColor whiteColor]];
+    [self.view addSubview:takePhotoLabel];
+    cameraRollLabel = [[UILabel alloc] initWithFrame:CGRectMake(225, 359, 80, 30)];
+    [cameraRollLabel setText:@"Camera Roll"];
+    [cameraRollLabel setBackgroundColor:[UIColor clearColor]];
+    [cameraRollLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
+    [cameraRollLabel setTextColor:[UIColor whiteColor]];
+    [self.view addSubview:cameraRollLabel];
+    
 
 	photoImgView = [[UIImageView alloc]initWithFrame:CGRectMake(50, 50, 220, 200)];
 	[photoImgView setUserInteractionEnabled:NO];
@@ -689,7 +720,7 @@
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
-	[[picker parentViewController] dismissModalViewControllerAnimated:YES];
+	[[self parentViewController] dismissModalViewControllerAnimated:YES];
 	if(imgPickerFlag == 2){
 		photoTouchFlag = YES;
 		lableTouchFlag = NO;
@@ -698,11 +729,25 @@
 
 -(void)loadPhotoLibrary{
 	
+    self.imgPicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
 	[self presentModalViewController:self.imgPicker animated:YES];
 	if(imgPickerFlag == 2){
 		photoTouchFlag = YES;
 		lableTouchFlag = NO;
 	}
+}
+
+-(void)openCamera{
+	
+    self.imgPicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+	[self presentModalViewController:self.imgPicker animated:YES];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+
+    NSLog(@"Image Taken");
+    [self.imgView setImage:info[UIImagePickerControllerOriginalImage]];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark UIAlertView delegate
@@ -752,6 +797,15 @@
 	[navBar.leftButton addTarget:self action:@selector(callMenu) forControlEvents:UIControlEventTouchUpInside];
 	[navBar.rightButton addTarget:self action:@selector(callWrite) forControlEvents:UIControlEventTouchUpInside];
 	
+    // Create right bar button
+    UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 31, 30)];
+    [menuButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+    [menuButton setBackgroundImage:[UIImage imageNamed:@"t_button"] forState:UIControlStateNormal];
+	[menuButton addTarget:self action:@selector(callWrite) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
+    [self.navigationItem setRightBarButtonItem:rightBarButton];
+    [self showPictureTab];
+
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationDuration:0.4f];
 	templateScrollView.alpha = ALPHA1;
@@ -772,6 +826,18 @@
 		[msgTextView becomeFirstResponder];
 }
 
+-(void)hidePictureTab{
+    [self.cameraRollButton setHidden:YES];
+    [self.cameraRollLabel setHidden:YES];
+    [self.takePhotoLabel setHidden:YES];
+    [self.takePhotoButton setHidden:YES];
+}
+-(void)showPictureTab{
+    [self.cameraRollButton setHidden:NO];
+    [self.cameraRollLabel setHidden:NO];
+    [self.takePhotoLabel setHidden:NO];
+    [self.takePhotoButton setHidden:NO];
+}
 
 -(void)callWrite{
 	photoTouchFlag=NO;
@@ -785,6 +851,11 @@
 	[navBar.leftButton addTarget:self action:@selector(chooseTemplate) forControlEvents:UIControlEventTouchUpInside];
 	[navBar.rightButton addTarget:self action:@selector(callStyle) forControlEvents:UIControlEventTouchUpInside];
 	
+    // Create right bar button
+    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Next" style:UIBarButtonItemStylePlain target:self action:@selector(callStyle)];
+    [self.navigationItem setRightBarButtonItem:rightBarButton];
+    [self hidePictureTab];
+
 	msgTextView.backgroundColor = [ UIColor colorWithWhite:1 alpha:0.3f];
 	msgLabel.alpha =ALPHA0;
  	msgTextView.text = msgLabel.text ;
@@ -821,6 +892,11 @@
 	[navBar.leftButton addTarget:self action:@selector(callWrite) forControlEvents:UIControlEventTouchUpInside];
 	[navBar.rightButton addTarget:self action:@selector(choosePhoto) forControlEvents:UIControlEventTouchUpInside];
 	
+    // Create right bar button
+    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Photo" style:UIBarButtonItemStylePlain target:self action:@selector(choosePhoto)];
+    [self.navigationItem setRightBarButtonItem:rightBarButton];
+    [self hidePictureTab];
+
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationDuration:0.4f];
 	fontScrollView.frame = CGRectMake(0, 385, 320, 44);
@@ -883,6 +959,11 @@
 	[navBar.leftButton addTarget:self action:@selector(callStyle) forControlEvents:UIControlEventTouchUpInside];
 	[navBar.rightButton addTarget:self action:@selector(callSaveAndShare) forControlEvents:UIControlEventTouchUpInside];
 		
+    // Create right bar button
+    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Save/Share" style:UIBarButtonItemStylePlain target:self action:@selector(callSaveAndShare)];
+    [self.navigationItem setRightBarButtonItem:rightBarButton];
+    [self hidePictureTab];
+
 	CALayer * l = [photoImgView layer];
 	[l setMasksToBounds:YES];
 	[l setCornerRadius:10];
@@ -941,6 +1022,11 @@
 	[navBar.leftButton addTarget:self action:@selector(callStyle) forControlEvents:UIControlEventTouchUpInside];
 	[navBar.rightButton addTarget:self action:@selector(callMenu) forControlEvents:UIControlEventTouchUpInside];
 	
+    // Create right bar button
+    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStylePlain target:self action:@selector(callMenu)];
+    [self.navigationItem setRightBarButtonItem:rightBarButton];
+    [self hidePictureTab];
+
 	fontTabButton.alpha = ALPHA0;
 	colorTabButton.alpha = ALPHA0;
 	sizeTabButton.alpha = ALPHA0;

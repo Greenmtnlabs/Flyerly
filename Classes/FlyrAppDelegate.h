@@ -11,6 +11,7 @@
 #import "FBConnect/FBConnect.h"
 @class FBSession;
 #import "TwitLogin.h"
+#import "FBPermissionDialog.h"
 
 
 @class SaveFlyerController;
@@ -30,6 +31,7 @@
 	//NSMutableArray *iconArray;
 	FBDialog* dialog;
 	FBPermissionDialog* perDialog;
+	FBStreamDialog* streamDialog;
 	FBSession* _session;
 	TwitLogin *_tSession;
 	BOOL faceBookPermissionFlag;
@@ -46,6 +48,7 @@
 @property (nonatomic, retain) SaveFlyerController *svController;
 @property (nonatomic, retain) FBDialog* dialog;
 @property (nonatomic,retain) FBPermissionDialog* perDialog;
+@property (nonatomic,retain) FBStreamDialog* streamDialog;
 @property (nonatomic,retain)  FBSession* _session;
 @property (nonatomic,retain) TwitLogin *_tSession;
 @property (nonatomic,assign)	BOOL faceBookPermissionFlag;

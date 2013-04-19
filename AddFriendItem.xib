@@ -112,6 +112,7 @@
 								<string key="NSFrame">{{233, 11}, {87, 21}}</string>
 								<reference key="NSSuperview" ref="547505395"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -129,7 +130,7 @@
 							<object class="IBUIButton" id="551197228">
 								<reference key="NSNextResponder" ref="547505395"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{7, 15}, {15, 14}}</string>
+								<string key="NSFrame">{{4, 12}, {20, 19}}</string>
 								<reference key="NSSuperview" ref="547505395"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="618899362"/>
@@ -138,7 +139,6 @@
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
-								<string key="IBUINormalTitle">Button</string>
 								<reference key="IBUIHighlightedTitleColor" ref="249155770"/>
 								<object class="NSColor" key="IBUINormalTitleColor">
 									<int key="NSColorSpace">1</int>
@@ -148,11 +148,11 @@
 									<int key="NSColorSpace">3</int>
 									<bytes key="NSWhite">MC41AA</bytes>
 								</object>
-								<object class="NSCustomResource" key="IBUISelectedBackgroundImage" id="563278888">
+								<object class="NSCustomResource" key="IBUISelectedImage" id="177035700">
 									<string key="NSClassName">NSImage</string>
 									<string key="NSResourceName">checkbox_checked.png</string>
 								</object>
-								<object class="NSCustomResource" key="IBUINormalBackgroundImage" id="893955570">
+								<object class="NSCustomResource" key="IBUINormalImage" id="842833137">
 									<string key="NSClassName">NSImage</string>
 									<string key="NSResourceName">checkbox.png</string>
 								</object>
@@ -169,7 +169,7 @@
 							<object class="IBUIButton" id="986059033">
 								<reference key="NSNextResponder" ref="547505395"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{169, 15}, {15, 14}}</string>
+								<string key="NSFrame">{{168, 12}, {20, 19}}</string>
 								<reference key="NSSuperview" ref="547505395"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="878998382"/>
@@ -185,8 +185,8 @@
 									<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 								</object>
 								<reference key="IBUINormalTitleShadowColor" ref="454667036"/>
-								<reference key="IBUISelectedBackgroundImage" ref="563278888"/>
-								<reference key="IBUINormalBackgroundImage" ref="893955570"/>
+								<reference key="IBUISelectedImage" ref="177035700"/>
+								<reference key="IBUINormalImage" ref="842833137"/>
 								<reference key="IBUIFontDescription" ref="516100360"/>
 								<reference key="IBUIFont" ref="432066434"/>
 							</object>
@@ -360,9 +360,9 @@
 				<string key="12.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="13.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="15.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<real value="0.0" key="15.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
+				<real value="2" key="15.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 				<string key="16.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<real value="2" key="16.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
+				<real value="0.0" key="16.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 				<string key="3.CustomClassName">AddFriendItem</string>
 				<string key="3.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="9.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>

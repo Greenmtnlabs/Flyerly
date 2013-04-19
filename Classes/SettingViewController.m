@@ -11,6 +11,7 @@
 #import <CoreGraphics/CoreGraphics.h>
 #import "Common.h"
 #import "FlyrAppDelegate.h"
+#import "FBConnectGlobal.h"
 
 /*extern NSString* kApiKey;
 extern NSString* kApiSecret; 

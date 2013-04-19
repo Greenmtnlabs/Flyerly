@@ -16,6 +16,7 @@
 
 #import "FBConnect/FBStreamDialog.h"
 #import "FBConnect/FBSession.h"
+#import "FlyrAppDelegate.h"
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // global
@@ -36,6 +37,10 @@ static NSString* kStreamURL = @"http://www.facebook.com/connect/prompt_feed.php"
 
 - (id)initWithSession:(FBSession*)session {
 	if (self = [super initWithSession:session]) {
+
+        FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
+        appDele.streamDialog = self;
+
 		_attachment        = @"";
 		_actionLinks       = @"";
 		_targetId          = @"";

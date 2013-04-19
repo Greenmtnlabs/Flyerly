@@ -336,6 +336,7 @@
 						<string key="NSFrame">{{268, 508}, {33, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -550,31 +551,55 @@
 					<int key="connectionID">193</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">contactsButton</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="500510736"/>
+					</object>
+					<int key="connectionID">198</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">facebookButton</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="1014950534"/>
+					</object>
+					<int key="connectionID">199</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">twitterButton</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="941120112"/>
+					</object>
+					<int key="connectionID">200</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">loadLocalContacts</string>
+						<string key="label">loadLocalContacts:</string>
 						<reference key="source" ref="500510736"/>
 						<reference key="destination" ref="372490531"/>
 						<int key="IBEventType">7</int>
 					</object>
-					<int key="connectionID">195</int>
+					<int key="connectionID">202</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">loadTwitterContacts</string>
+						<string key="label">loadTwitterContacts:</string>
 						<reference key="source" ref="941120112"/>
 						<reference key="destination" ref="372490531"/>
 						<int key="IBEventType">7</int>
 					</object>
-					<int key="connectionID">196</int>
+					<int key="connectionID">201</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">loadFacebookContacts</string>
+						<string key="label">loadFacebookContacts:</string>
 						<reference key="source" ref="1014950534"/>
 						<reference key="destination" ref="372490531"/>
 						<int key="IBEventType">7</int>
 					</object>
-					<int key="connectionID">194</int>
+					<int key="connectionID">203</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -767,7 +792,7 @@
 				<string key="1.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="10.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="11.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<real value="0.0" key="11.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
+				<real value="2" key="11.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 				<string key="158.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<real value="0.0" key="158.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 				<string key="161.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -787,15 +812,15 @@
 				<string key="37.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="7.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="8.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<real value="0.0" key="8.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
+				<real value="2" key="8.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 				<string key="9.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<real value="0.0" key="9.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
+				<real value="2" key="9.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">197</int>
+			<int key="maxID">203</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -804,9 +829,9 @@
 					<string key="superclassName">UIViewController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="invite">id</string>
-						<string key="loadFacebookContacts">id</string>
-						<string key="loadLocalContacts">id</string>
-						<string key="loadTwitterContacts">id</string>
+						<string key="loadFacebookContacts:">UIButton</string>
+						<string key="loadLocalContacts:">UIButton</string>
+						<string key="loadTwitterContacts:">UIButton</string>
 						<string key="selectAllCheckBoxes:">UIButton</string>
 						<string key="unSelectAllCheckBoxes:">UIButton</string>
 					</dictionary>
@@ -815,17 +840,17 @@
 							<string key="name">invite</string>
 							<string key="candidateClassName">id</string>
 						</object>
-						<object class="IBActionInfo" key="loadFacebookContacts">
-							<string key="name">loadFacebookContacts</string>
-							<string key="candidateClassName">id</string>
+						<object class="IBActionInfo" key="loadFacebookContacts:">
+							<string key="name">loadFacebookContacts:</string>
+							<string key="candidateClassName">UIButton</string>
 						</object>
-						<object class="IBActionInfo" key="loadLocalContacts">
-							<string key="name">loadLocalContacts</string>
-							<string key="candidateClassName">id</string>
+						<object class="IBActionInfo" key="loadLocalContacts:">
+							<string key="name">loadLocalContacts:</string>
+							<string key="candidateClassName">UIButton</string>
 						</object>
-						<object class="IBActionInfo" key="loadTwitterContacts">
-							<string key="name">loadTwitterContacts</string>
-							<string key="candidateClassName">id</string>
+						<object class="IBActionInfo" key="loadTwitterContacts:">
+							<string key="name">loadTwitterContacts:</string>
+							<string key="candidateClassName">UIButton</string>
 						</object>
 						<object class="IBActionInfo" key="selectAllCheckBoxes:">
 							<string key="name">selectAllCheckBoxes:</string>
@@ -837,16 +862,23 @@
 						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="contactsButton">UIButton</string>
 						<string key="contactsLabel">UILabel</string>
 						<string key="doneLabel">UILabel</string>
+						<string key="facebookButton">UIButton</string>
 						<string key="facebookLabel">UILabel</string>
 						<string key="inviteLabel">UILabel</string>
 						<string key="selectAllLabel">UILabel</string>
+						<string key="twitterButton">UIButton</string>
 						<string key="twitterLabel">UILabel</string>
 						<string key="uiTableView">UITableView</string>
 						<string key="unSelectAllLabel">UILabel</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="contactsButton">
+							<string key="name">contactsButton</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="contactsLabel">
 							<string key="name">contactsLabel</string>
 							<string key="candidateClassName">UILabel</string>
@@ -854,6 +886,10 @@
 						<object class="IBToOneOutletInfo" key="doneLabel">
 							<string key="name">doneLabel</string>
 							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="facebookButton">
+							<string key="name">facebookButton</string>
+							<string key="candidateClassName">UIButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="facebookLabel">
 							<string key="name">facebookLabel</string>
@@ -866,6 +902,10 @@
 						<object class="IBToOneOutletInfo" key="selectAllLabel">
 							<string key="name">selectAllLabel</string>
 							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="twitterButton">
+							<string key="name">twitterButton</string>
+							<string key="candidateClassName">UIButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="twitterLabel">
 							<string key="name">twitterLabel</string>

@@ -13,14 +13,18 @@
 #import "FlyrAppDelegate.h"
 
 @implementation AddFriendsController
-@synthesize uiTableView, contactsArray, deviceContactItems, contactsLabel, facebookLabel, twitterLabel, doneLabel, selectAllLabel, unSelectAllLabel, inviteLabel;
+@synthesize uiTableView, contactsArray, deviceContactItems, contactsLabel, facebookLabel, twitterLabel, doneLabel, selectAllLabel, unSelectAllLabel, inviteLabel, contactsButton, facebookButton, twitterButton;
+
+const int TWITTER_TAB = 2;
+const int FACEBOOK_TAB = 1;
+const int CONTACTS_TAB = 0;
 
 - (void)viewDidLoad {
     
     [super viewDidLoad];
     
     // By default first tab is selected 'Contacts'
-    selectedTab = 0;
+    selectedTab = -1;
     
     // set borders on the table
     [[uiTableView layer] setBorderColor:[[UIColor grayColor] CGColor]];
@@ -49,17 +53,22 @@
     [inviteLabel setText:NSLocalizedString(@"invite", nil)];
 
     // Load device contacts
-    [self loadLocalContacts];
+    [self loadLocalContacts:contactsButton];
 
 }
 
 /*
  * This method is used to load device contact details
  */
-- (IBAction)loadLocalContacts{
+- (IBAction)loadLocalContacts:(UIButton *)sender{
 
-    selectedTab = 0;
-    
+    if(selectedTab == CONTACTS_TAB){
+        return;
+    }
+
+    selectedTab = CONTACTS_TAB;
+    [self setUnselectTab:sender];
+
     // init contact array
     contactsArray = [[NSMutableArray alloc] init];
     ABAddressBookRef m_addressbook = ABAddressBookCreate();
@@ -152,6 +161,7 @@
             if([mobileLabel isEqualToString:(NSString *)kABPersonPhoneMobileLabel])
             {
                 [dOfPerson setObject:(NSString*)ABMultiValueCopyValueAtIndex(phones, i) forKey:@"Phone"];
+                [dOfPerson setObject:(NSString*)ABMultiValueCopyValueAtIndex(phones, i) forKey:@"identifier"];
             }
             else if ([mobileLabel isEqualToString:(NSString*)kABPersonPhoneIPhoneLabel])
             {
@@ -174,10 +184,15 @@
 /**
  * Called when facebook  button is selected on screen
  */
-- (IBAction)loadFacebookContacts{
+- (IBAction)loadFacebookContacts:(UIButton *)sender{
 
-    selectedTab = 1;
-    
+    if(selectedTab == FACEBOOK_TAB){
+        return;
+    }
+
+    selectedTab = FACEBOOK_TAB;
+    [self setUnselectTab:sender];
+
     // Get facebook session from app delegate
     FlyrAppDelegate *appDele =(FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     if(appDele._session.uid != 0){
@@ -251,72 +266,82 @@
 }
 
 //BOOL grantedBool;
-- (IBAction)loadTwitterContacts{
+- (IBAction)loadTwitterContacts:(UIButton *)sender{
     
-    selectedTab = 2;
+    if(selectedTab == TWITTER_TAB){
+        return;
+    }
     
-    ACAccountStore *account = [[ACAccountStore alloc] init];
-    ACAccountType *accountType = [account accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+    selectedTab = TWITTER_TAB;
+    [self setUnselectTab:sender];
     
-    // Request access from the user to access their Twitter account
-    [account requestAccessToAccountsWithType:accountType withCompletionHandler:^(BOOL granted, NSError *error) {
-         // Did user allow us access?
-         if (granted == YES) {
-             
-             //grantedBool = YES;
-             
-             // Populate array with all available Twitter accounts
-             NSArray *arrayOfAccounts = [account accountsWithAccountType:accountType];
-             
-             // Sanity check
-             if ([arrayOfAccounts count] > 0) {
-                 
-                 // Keep it simple, use the first account available
-                 ACAccount *acct = [arrayOfAccounts objectAtIndex:0];
-                 
-                 // Build a twitter request
-                 NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
-                 [params setObject:@"-1" forKey:@"cursor"];
-                 [params setObject:[acct username] forKey:@"screen_name"];
-                 
-                 TWRequest *getRequest = [[TWRequest alloc] initWithURL:
-                                           [NSURL URLWithString:@"https://api.twitter.com/1.1/followers/list.json"]
-                                                             parameters:params requestMethod:TWRequestMethodGET];
-                 // Post the request
-                 [getRequest setAccount:acct];
-                 
-                 // Block handler to manage the response
-                 [getRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
-                     
-                    NSError *jsonError = nil;
+    if([TWTweetComposeViewController canSendTweet]){
+
+        ACAccountStore *account = [[ACAccountStore alloc] init];
+        ACAccountType *accountType = [account accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+        
+        // Request access from the user to access their Twitter account
+        [account requestAccessToAccountsWithType:accountType withCompletionHandler:^(BOOL granted, NSError *error) {
+            // Did user allow us access?
+            if (granted == YES) {
+                
+                //grantedBool = YES;
+                
+                // Populate array with all available Twitter accounts
+                NSArray *arrayOfAccounts = [account accountsWithAccountType:accountType];
+                
+                // Sanity check
+                if ([arrayOfAccounts count] > 0) {
                     
-                     if(responseData){
-                         
-                         NSDictionary *followers =  [NSJSONSerialization JSONObjectWithData:responseData
-                                                         options:NSJSONReadingMutableLeaves
-                                                           error:&jsonError];
-                         NSDictionary *users = [followers objectForKey:@"users"];                      
-                         
-                         [contactsArray release];
-                         contactsArray = nil;
-                         contactsArray = [[NSMutableArray alloc] initWithCapacity:[users count]];
-
-                         for (id user in users) {                             
-                             NSMutableDictionary *dOfPerson=[NSMutableDictionary dictionary];
-                             [dOfPerson setObject:[user objectForKey:@"name"] forKey:@"name"];
-                             [dOfPerson setObject:[user objectForKey:@"screen_name"] forKey:@"identifier"];
-                             [contactsArray addObject:dOfPerson];
-                         }
-                     }
-
-                     NSLog(@"Twitter response, HTTP response: %i", [urlResponse statusCode]);
-                     [uiTableView reloadData];
-                  }];
-             }
-         }
-    }];
+                    // Keep it simple, use the first account available
+                    ACAccount *acct = [arrayOfAccounts objectAtIndex:0];
+                    
+                    // Build a twitter request
+                    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+                    [params setObject:@"-1" forKey:@"cursor"];
+                    [params setObject:[acct identifier] forKey:@"user_id"];
+                    //NSLog(@"Account: %@", [acct username]);
+                    //NSLog(@"Account Id: %@", [acct identifier]);
+                    
+                    TWRequest *getRequest = [[TWRequest alloc] initWithURL:
+                                             [NSURL URLWithString:@"https://api.twitter.com/1.1/followers/list.json"]
+                                                                parameters:params requestMethod:TWRequestMethodGET];
+                    // Post the request
+                    [getRequest setAccount:acct];
+                    
+                    // Block handler to manage the response
+                    [getRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+                        
+                        NSError *jsonError = nil;
+                        
+                        if(responseData){
+                            
+                            NSDictionary *followers =  [NSJSONSerialization JSONObjectWithData:responseData
+                                                                                       options:NSJSONReadingMutableLeaves
+                                                                                         error:&jsonError];
+                            NSDictionary *users = [followers objectForKey:@"users"];
+                            
+                            [contactsArray release];
+                            contactsArray = nil;
+                            contactsArray = [[NSMutableArray alloc] initWithCapacity:[users count]];
+                            
+                            for (id user in users) {
+                                NSMutableDictionary *dOfPerson=[NSMutableDictionary dictionary];
+                                [dOfPerson setObject:[user objectForKey:@"name"] forKey:@"name"];
+                                [dOfPerson setObject:[user objectForKey:@"screen_name"] forKey:@"identifier"];
+                                [contactsArray addObject:dOfPerson];
+                            }
+                        }
+                        
+                        NSLog(@"Twitter response, HTTP response: %i", [urlResponse statusCode]);
+                        [uiTableView reloadData];
+                    }];
+                }
+            }
+        }];
     
-    /*if(!grantedBool){
+    } else {
+
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No Twitter connection"
                                                         message:@"You must be connected to Twitter to get contact list."
                                                        delegate:nil
@@ -324,8 +349,8 @@
                                               otherButtonTitles:nil];
         [alert show];
         [alert release];
-        grantedBool =  NO;
-    }*/
+    }
+    
 }
 
 /**
@@ -351,12 +376,15 @@
                 ACAccount *acct = [arrayOfAccounts objectAtIndex:0];
                 
                 NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
-                [params setObject:message forKey:@"text"];
-                [params setObject:screenName forKey:@"screen_name"];
+                [params setObject:[NSString stringWithFormat:@"@%@ %@", screenName, message] forKey:@"status"];
 
                  // Build a twitter request
-                 TWRequest *postRequest = [[TWRequest alloc] initWithURL: [NSURL URLWithString:@"http://api.twitter.com/1/direct_messages/new.json"] parameters:params requestMethod:TWRequestMethodPOST];
+                 TWRequest *postRequest = [[TWRequest alloc] initWithURL:[NSURL URLWithString:@"http://api.twitter.com/1/statuses/update.json"] parameters:params requestMethod:TWRequestMethodPOST];
                 
+                 // Build a twitter request
+                 //TWRequest *postRequest = [[TWRequest alloc] initWithURL: [NSURL URLWithString:@"http://api.twitter.com/1/direct_messages/new.json"] parameters:params requestMethod:TWRequestMethodPOST];
+                //[params setObject:screenName forKey:@"screen_name"];
+
                 // Post the request
                 [postRequest setAccount:acct];                                         
                                          
@@ -376,21 +404,83 @@
  */
 -(IBAction)invite{
     
+    NSMutableArray *identifiers = [[NSMutableArray alloc] init];
+    
     for(AddFriendItem *cell in deviceContactItems){
         
-        // Send messages to twitter contacts 
+        // prepare users to tweet
         if(selectedTab == 2){
             if([cell.leftCheckBox isSelected]){
-                NSString *follower = cell.identifier1;
-                [self sendTwitterMessage:@"Join Flyerly !" screenName:follower];
+                [identifiers addObject:cell.identifier1];
             }
             
             if([cell.rightCheckBox isSelected]){
-                NSString *follower = cell.identifier2;
-                [self sendTwitterMessage:@"Join Flyerly !" screenName:follower];
+                [identifiers addObject:cell.identifier2];
             }
+            
+            // prepare facebook contacts
+        } else if(selectedTab == 1){
+            
+            // Post a status update to the user's feedm via the Graph API, and display an alert view
+            // with the results or an error.
+
+            if([cell.leftCheckBox isSelected]){
+                FBStreamDialog *dialog = [[[FBStreamDialog alloc] init] autorelease];
+                dialog.userMessagePrompt = @"Enter your message:";
+                dialog.attachment = [NSString stringWithFormat:@"{\"name\":\"Facebook Connect for iPhone\",\"href\":\"http://developers.facebook.com/connect.php?tab=iphone\",\"caption\":\"Caption\",\"description\":\"Description\",\"media\":[{\"type\":\"image\",\"src\":\"http://img40.yfrog.com/img40/5914/iphoneconnectbtn.jpg\",\"href\":\"http://developers.facebook.com/connect.php?tab=iphone/\"}],\"properties\":{\"another link\":{\"text\":\"Facebook home page\",\"href\":\"http://www.facebook.com\"}}}"];
+                [dialog show];
+            }
+
+            if([cell.rightCheckBox isSelected]){
+                                
+                FBStreamDialog *dialog = [[[FBStreamDialog alloc] init] autorelease];
+                dialog.userMessagePrompt = @"Enter your message:";
+                dialog.attachment = [NSString stringWithFormat:@"{\"name\":\"Facebook Connect for iPhone\",\"href\":\"http://developers.facebook.com/connect.php?tab=iphone\",\"caption\":\"Caption\",\"description\":\"Description\",\"media\":[{\"type\":\"image\",\"src\":\"http://img40.yfrog.com/img40/5914/iphoneconnectbtn.jpg\",\"href\":\"http://developers.facebook.com/connect.php?tab=iphone/\"}],\"properties\":{\"another link\":{\"text\":\"Facebook home page\",\"href\":\"http://www.facebook.com\"}}}"];
+                [dialog show];
+            }            
+            
+            // prepare contacts to sms
+        } else if(selectedTab == 0){
+        
+            if([cell.leftCheckBox isSelected]){
+                [identifiers addObject:cell.identifier1];
+            }
+            
+            if([cell.rightCheckBox isSelected]){
+                [identifiers addObject:cell.identifier2];
+            }
+        
+        } 
+    }
+    
+    // Send invitations
+    if(selectedTab == 0){
+        
+        // send tweets to contacts
+        [self sendSMS:@"Test SMS" recipients:identifiers];
+        
+    }else if(selectedTab == 2){
+        // Send tweets to twitter contacts
+        for(NSString *follower in identifiers){
+            [self sendTwitterMessage:@"I am using the flyerly app to create and share flyers on the go! - https://itunes.apple.com/app/socialflyr/id344130515?ls=1&mt=8" screenName:follower];
         }
     }
+}
+
+-(void)sendSMS:(NSString *)message recipients:(NSArray*)recipients {
+    
+    //send SMS
+    MFMessageComposeViewController *messageInstance = [[MFMessageComposeViewController alloc] init];
+    
+    if([MFMessageComposeViewController canSendText]) {
+
+        [messageInstance setRecipients:recipients];
+        messageInstance.body = message;
+        messageInstance.messageComposeDelegate = self;
+        [self presentModalViewController:messageInstance animated:YES];
+        
+    }
+    
 }
 
 #pragma mark Table view methods
@@ -410,6 +500,10 @@
         count++;
     }
     
+    [deviceContactItems release];
+    deviceContactItems = nil;
+    deviceContactItems = [[NSMutableArray alloc] init];
+
     // return count
     return count;
 }
@@ -444,6 +538,7 @@
         dict2 = [contactsArray objectAtIndex:(index + 1)];
         name2 = [dict2 objectForKey:@"name"];
         image2 = [dict2 objectForKey:@"image"];
+        cell.identifier2 = [dict2 objectForKey:@"identifier"];
     } else {
         name2 = @"";
         image2 = nil;
@@ -453,7 +548,6 @@
     [cell setValues:name1 title2:name2];
     [cell setImages:image1 image2:image2];
     cell.identifier1 = [dict1 objectForKey:@"identifier"];
-    cell.identifier2 = [dict2 objectForKey:@"identifier"];
     
     // Set consecutive colors on rows
     if (indexPath.row % 2) {
@@ -494,6 +588,15 @@
         [cell.leftCheckBox setSelected:NO];
         [cell.rightCheckBox setSelected:NO];
     }
+}
+
+-(void)setUnselectTab:(UIButton *)selectButton{
+
+    [contactsButton setSelected:NO];
+    [facebookButton setSelected:NO];
+    [twitterButton setSelected:NO];
+    
+    [selectButton setSelected:YES];
 }
 
 - (void)didReceiveMemoryWarning {

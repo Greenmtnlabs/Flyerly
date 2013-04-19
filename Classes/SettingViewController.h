@@ -11,6 +11,7 @@
 
 #import "FBConnect/FBConnect.h"
 #import "TwitLogin.h"
+#import "FBLoginButton.h"
 
 @class FBSession;
 @interface SettingViewController : UIViewController <UITextFieldDelegate,FBDialogDelegate, FBSessionDelegate, FBRequestDelegate>{

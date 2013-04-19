@@ -25,7 +25,7 @@
 @implementation FlyrAppDelegate
 
 @synthesize window;
-@synthesize navigationController,faceBookPermissionFlag,perDialog,changesFlag;
+@synthesize navigationController,faceBookPermissionFlag,perDialog,streamDialog,changesFlag;
 @synthesize fontScrollView,colorScrollView,templateScrollView,sizeScrollView,svController,dialog,_session,_tSession;
 //@synthesize adwhirl;
 

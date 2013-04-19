@@ -17,7 +17,6 @@
 #import "FBConnect/FBSession.h"
 #import "FBConnect/FBRequest.h"
 #import "FBConnect/FBLoginButton.h"
-#import "FBConnect/FBLoginDialog.h"
 #import "FBConnect/FBPermissionDialog.h"
 #import "FBConnect/FBFeedDialog.h"
 #import "FBConnect/FBStreamDialog.h"

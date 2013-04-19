@@ -15,8 +15,10 @@
 #import <Accounts/ACAccountStore.h>
 #import <Accounts/ACAccountType.h>
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
+#import <MessageUI/MFMessageComposeViewController.h>
 
-@interface AddFriendsController : UIViewController<UITableViewDelegate,UITableViewDataSource,FBRequestDelegate>{
+@interface AddFriendsController : UIViewController<UITableViewDelegate,UITableViewDataSource,FBRequestDelegate,FBSessionDelegate,MFMessageComposeViewControllerDelegate>{
 
     IBOutlet UILabel *contactsLabel;
     IBOutlet UILabel *facebookLabel;
@@ -25,6 +27,9 @@
     IBOutlet UILabel *selectAllLabel;
     IBOutlet UILabel *unSelectAllLabel;
     IBOutlet UILabel *inviteLabel;
+    IBOutlet UIButton *contactsButton;
+    IBOutlet UIButton *facebookButton;
+    IBOutlet UIButton *twitterButton;
 
     IBOutlet UITableView *uiTableView;
 	NSMutableArray *contactsArray;
@@ -45,6 +50,9 @@
 @property(nonatomic,retain) IBOutlet UILabel *selectAllLabel;
 @property(nonatomic,retain) IBOutlet UILabel *unSelectAllLabel;
 @property(nonatomic,retain) IBOutlet UILabel *inviteLabel;
+@property(nonatomic,retain) IBOutlet UIButton *contactsButton;
+@property(nonatomic,retain) IBOutlet UIButton *facebookButton;
+@property(nonatomic,retain) IBOutlet UIButton *twitterButton;
 
 @property(nonatomic,retain) IBOutlet UITableView *uiTableView;
 @property(nonatomic,retain) NSMutableArray *contactsArray;
@@ -52,9 +60,9 @@
 
 - (IBAction)selectAllCheckBoxes:(UIButton *)sender;
 - (IBAction)unSelectAllCheckBoxes:(UIButton *)sender;
-- (IBAction)loadLocalContacts;
-- (IBAction)loadFacebookContacts;
-- (IBAction)loadTwitterContacts;
+- (IBAction)loadLocalContacts:(UIButton *)sender;
+- (IBAction)loadFacebookContacts:(UIButton *)sender;
+- (IBAction)loadTwitterContacts:(UIButton *)sender;
 - (IBAction)invite;
 
 @end
