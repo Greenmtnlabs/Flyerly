@@ -11,7 +11,7 @@
 #import <CoreGraphics/CoreGraphics.h>
 #import "Common.h"
 #import "FlyrAppDelegate.h"
-#import "FBConnectGlobal.h"
+//#import "FBConnectGlobal.h"
 
 /*extern NSString* kApiKey;
 extern NSString* kApiSecret; 
@@ -23,8 +23,8 @@ static NSString* kGetSessionProxy=nil; // @"<YOUR SESSION CALLBACK)>";
 
 
 @implementation SettingViewController
-
-@synthesize password,user,doneButton,scrollView,navBar,faceBookButton,twitDialog;
+/*
+@synthesize password,user,doneButton,scrollView,navBar,twitDialog;
 
 -(void)initSession{
 	if (kGetSessionProxy) {
@@ -46,8 +46,8 @@ static NSString* kGetSessionProxy=nil; // @"<YOUR SESSION CALLBACK)>";
 
 - (void)session:(FBSession*)session didLogin:(FBUID)uid{
 	NSLog(@"45");
-	FlyrAppDelegate *appDele =(FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-	appDele._session = _session;
+	//FlyrAppDelegate *appDele =(FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+	//appDele._session = _session;
 	
 }
 
@@ -122,8 +122,8 @@ static NSString* kGetSessionProxy=nil; // @"<YOUR SESSION CALLBACK)>";
 
 
 - (void)postDismissCleanup {
-	FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
-	[appDele.dialog dismiss:YES];
+	//FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
+	//[appDele.dialog dismiss:YES];
 	[navBar removeFromSuperview];
 	[navBar release];
 }
@@ -226,5 +226,5 @@ static NSString* kGetSessionProxy=nil; // @"<YOUR SESSION CALLBACK)>";
     [super dealloc];
 }
 
-
+*/
 @end

@@ -16,7 +16,7 @@
 #import "DraftViewController.h"
 #import "Common.h"
 #import "HudView.h"
-#import "FBConnectGlobal.h"
+//#import "FBConnectGlobal.h"
 
 @implementation SaveFlyerController
 
@@ -355,6 +355,7 @@
 	}
 	else if(sender == faceBookButton)
 	{
+        /*
 		FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
 		if(appDele._session)
 		{
@@ -373,6 +374,7 @@
 			UIAlertView *fail = [[UIAlertView alloc]initWithTitle:@"Facebook" message:@"Authentication failed: \n Set username and password in Preferences" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
 			[fail show];
 		}
+         */
 	}
 	else if(sender == mailButton)
 	{	
@@ -391,17 +393,17 @@
 }
 
 
-- (void)session:(FBSession*)session didLogin:(FBUID)uid{
-	NSLog(@"45");
+//- (void)session:(FBSession*)session didLogin:(FBUID)uid{
+//	NSLog(@"45");
 	
 	//FlyrAppDelegate *appDele = [[UIApplication sharedApplication]delegate];
 	//appDele._session = _session;
-}
+//}
 
 
 - (void)postDismissCleanup {
-	FlyrAppDelegate *appDele =(FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
-	[appDele.perDialog dismiss:YES];
+	//FlyrAppDelegate *appDele =(FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
+	//[appDele.perDialog dismiss:YES];
 	[twitDialog dismiss:YES];
 	[navBar release];
 }

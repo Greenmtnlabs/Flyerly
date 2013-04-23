@@ -17,7 +17,6 @@
 #define SOURCETYPE UIImagePickerControllerSourceTypePhotoLibrary
 #define DOCSFOLDER [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"]
 
-
 #define COLOR_ARRAY [NSArray arrayWithObjects: [UIColor whiteColor], [UIColor darkGrayColor], [UIColor grayColor], [UIColor orangeColor], [UIColor blackColor], [UIColor blueColor], [UIColor redColor], [UIColor greenColor], [UIColor purpleColor], [UIColor yellowColor], [UIColor brownColor], [UIColor cyanColor], [UIColor magentaColor],nil]
 
 /*

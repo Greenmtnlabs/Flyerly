@@ -16,7 +16,7 @@
 
 @implementation LauchViewController
 
-@synthesize ptController,spController,tpController,faceBookButton,createFlyrLabel,savedFlyrLabel,inviteFriendLabel,addFriendsController;
+@synthesize ptController,spController,tpController,createFlyrLabel,savedFlyrLabel,inviteFriendLabel,addFriendsController;
 @synthesize firstFlyer, secondFlyer, thirdFlyer, fourthFlyer;
 @synthesize loadingView;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -133,6 +133,15 @@
     spController = [[SettingViewController alloc]initWithNibName:@"SettingViewController" bundle:nil];
 	//[spController initSession];
     
+    //get facebook app id
+    /*NSString *path = [[NSBundle mainBundle] pathForResource: @"Flyr-Info" ofType: @"plist"];
+    NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile: path];
+    id obj = [dict objectForKey: @"FacebookAppID"];
+
+    //initialize facebook
+	FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
+    appDele.facebook = [[Facebook alloc] initWithAppId:obj andDelegate:self];
+     */
 	[self filesByModDate];
 }
 

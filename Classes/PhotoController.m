@@ -12,8 +12,9 @@
 #import "LoginController.h"
 #import "FlyrAppDelegate.h"
 #import "MyNavigationBar.h"
-#import  "SaveFlyerController.h"
+#import "SaveFlyerController.h"
 #import "ImageCache.h"
+#import "CameraOverlayView.h"
 
 @implementation PhotoController
 @synthesize imgView,imgPicker;
@@ -182,22 +183,35 @@
 	}
 	[pool1 release];
 
+    //NSLog(@"Famiy Names: %@", [UIFont familyNames]);
+    
 	fontArray =[[NSArray  alloc] initWithObjects: 
-				[UIFont fontWithName:@"Courier" size:16],
-				[UIFont fontWithName:@"Courier-BoldOblique" size:16],
-				[UIFont fontWithName:@"Courier-Oblique" size:16],
-				[UIFont fontWithName:@"Courier-Bold" size:16],
-				[UIFont fontWithName:@"ArialMT" size:16],
-				[UIFont fontWithName:@"Arial-BoldMT" size:16],
-				[UIFont fontWithName:@"Arial-BoldItalicMT" size:16],
-				[UIFont fontWithName:@"Arial-ItalicMT" size:16],
-				[UIFont fontWithName:@"STHeitiTC-Light" size:16],
-				[UIFont fontWithName:@"AppleGothic" size:16],
-				[UIFont fontWithName:@"CourierNewPS-BoldMT" size:16],
-				[UIFont fontWithName:@"CourierNewPS-ItalicMT" size:16],
-				[UIFont fontWithName:@"Zapfino" size:16],
-				[UIFont fontWithName:@"TimesNewRomanPSMT" size:16],
-				[UIFont fontWithName:@"Verdana-Italic" size:16],
+				[UIFont fontWithName:@"Signika-Regular" size:16],
+				[UIFont fontWithName:@"Arial" size:16],
+				[UIFont fontWithName:@"GoodDog" size:16],
+				[UIFont fontWithName:@"GrandHotel-Regular" size:16],
+				[UIFont fontWithName:@"Kankin" size:16],
+				[UIFont fontWithName:@"Molot" size:16],
+				[UIFont fontWithName:@"Nexa Bold" size:16],
+				[UIFont fontWithName:@"Quicksand" size:16],
+				[UIFont fontWithName:@"StMarie-Thin" size:16],
+				[UIFont fontWithName:@"BlackJack" size:16],
+				//[UIFont fontWithName:@"Comfortaa-Bold" size:16],
+				//[UIFont fontWithName:@"swiss721BT" size:16], // Missing
+				[UIFont fontWithName:@"Algerian" size:16],
+				[UIFont fontWithName:@"HelveticaInseratCyr Upright" size:16],
+				//[UIFont fontWithName:@"HalveticaRoundedLTStd-BdCn_0" size:16],
+				[UIFont fontWithName:@"Lucida Handwriting" size:16],
+				[UIFont fontWithName:@"Anjelika Rose" size:16],
+				[UIFont fontWithName:@"BankGothic DB" size:16],
+				[UIFont fontWithName:@"Segoe UI" size:16],
+				[UIFont fontWithName:@"AvantGarde CE" size:16],
+				[UIFont fontWithName:@"BlueNoon" size:16],
+				//[UIFont fontWithName:@"danielbk" size:16],
+                nil];
+                
+                
+				/*[UIFont fontWithName:@"Verdana-Italic" size:16],
 				[UIFont fontWithName:@"Verdana" size:16],
 				[UIFont fontWithName:@"Georgia" size:16],
 				[UIFont fontWithName:@"Georgia-BoldItalic" size:16],
@@ -211,7 +225,7 @@
 				[UIFont fontWithName:@"AmericanTypewriter-Bold" size:16],
 				[UIFont fontWithName:@"ArialUnicodeMS" size:16],
 				[UIFont fontWithName:@"HiraKakuProN-W6" size:16],
-				nil];
+				nil];*/
 	
 	
 	NSInteger fontScrollWidth = 44;
@@ -574,9 +588,9 @@
 				curXLoc += (kScrollObjWidth)+5;
 				
 				imgPickerFlag =1;
-				if(view.tag == 0)
-					[view addTarget:self action:@selector(loadPhotoLibrary) forControlEvents:UIControlEventTouchUpInside];
-				else
+				//if(view.tag == 0)
+				//	[view addTarget:self action:@selector(loadPhotoLibrary) forControlEvents:UIControlEventTouchUpInside];
+				//else
 					[view addTarget:self action:@selector(selectTemplate:) forControlEvents:UIControlEventTouchUpInside];
 				
 			}
@@ -739,13 +753,17 @@
 
 -(void)openCamera{
 	
+    CameraOverlayView *overlay = [[CameraOverlayView alloc]
+                            initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     self.imgPicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-	[self presentModalViewController:self.imgPicker animated:YES];
+    self.imgPicker.cameraOverlayView = overlay;
+
+    [self presentModalViewController:self.imgPicker animated:YES];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
 
-    NSLog(@"Image Taken");
+    NSLog(@"Image Taken");    
     [self.imgView setImage:info[UIImagePickerControllerOriginalImage]];
     [self dismissViewControllerAnimated:YES completion:nil];
 }

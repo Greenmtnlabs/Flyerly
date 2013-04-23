@@ -18,6 +18,7 @@
 
 //#define kAdWhirlApplicationKey @"b9c3615f2c88102da8949a322e50052a "
 #define kAdWhirlApplicationKey @"b7dfccec5016102d840c2e1e0de86337"
+//#define facebookAppID @"136691489852349"
 
 #define TIME 10
 
@@ -25,9 +26,10 @@
 @implementation FlyrAppDelegate
 
 @synthesize window;
-@synthesize navigationController,faceBookPermissionFlag,perDialog,streamDialog,changesFlag;
-@synthesize fontScrollView,colorScrollView,templateScrollView,sizeScrollView,svController,dialog,_session,_tSession;
+@synthesize navigationController,faceBookPermissionFlag,changesFlag;
+@synthesize fontScrollView,colorScrollView,templateScrollView,sizeScrollView,svController,_tSession;
 //@synthesize adwhirl;
+@synthesize session = _session;
 
 
 
@@ -84,6 +86,9 @@
 
 	[window makeKeyAndVisible];
 	
+    //initialize facebook
+    //self.facebook = [[Facebook alloc] initWithAppId:facebookAppID andDelegate:self];
+
 	//adwhirl = [ARRollerView requestRollerViewWithDelegate:self];
 	//adwhirl.
 	//[adwhirl setFrame:CGRectMake(0, 318, 320, 50)];
@@ -140,8 +145,37 @@
 	// NSLog(filename);
 	
 	[[ImageCache sharedImageCache] removeAllImagesInMemory];
+    [self.session close];
 	
-	
+}
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    // attempt to extract a token from the url
+
+    return [[self facebook] handleOpenURL:url];
+
+    //return [FBAppCall handleOpenURL:url
+    //              sourceApplication:sourceApplication
+    //                    withSession:self.session];
+}
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+
+    return [[self facebook] handleOpenURL:url];
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+    /*
+     Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+     */
+    
+    // FBSample logic
+    // We need to properly handle activation of the application with regards to SSO
+    //  (e.g., returning from iOS 6.0 authorization dialog or from fast app switching).
+    [FBAppCall handleDidBecomeActiveWithSession:self.session];
 }
 
 #pragma mark -

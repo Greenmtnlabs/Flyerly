@@ -11,6 +11,7 @@
 #import "AddFriendItem.h"
 #import <QuartzCore/QuartzCore.h>
 #import "FlyrAppDelegate.h"
+#import "FBRequestConnection.h"
 
 @implementation AddFriendsController
 @synthesize uiTableView, contactsArray, deviceContactItems, contactsLabel, facebookLabel, twitterLabel, doneLabel, selectAllLabel, unSelectAllLabel, inviteLabel, contactsButton, facebookButton, twitterButton;
@@ -27,33 +28,33 @@ const int CONTACTS_TAB = 0;
     selectedTab = -1;
     
     // set borders on the table
-    [[uiTableView layer] setBorderColor:[[UIColor grayColor] CGColor]];
-    [[uiTableView layer] setBorderWidth:1];
+    [[self.uiTableView layer] setBorderColor:[[UIColor grayColor] CGColor]];
+    [[self.uiTableView layer] setBorderWidth:1];
     
     // Set fonts type and sizes
-    [contactsLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
-    [contactsLabel setText:NSLocalizedString(@"contacts", nil)];
+    [self.contactsLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
+    [self.contactsLabel setText:NSLocalizedString(@"contacts", nil)];
 
-    [facebookLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
-    [facebookLabel setText:NSLocalizedString(@"facebook", nil)];
+    [self.facebookLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
+    [self.facebookLabel setText:NSLocalizedString(@"facebook", nil)];
 
-    [twitterLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
-    [twitterLabel setText:NSLocalizedString(@"twitter", nil)];
+    [self.twitterLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
+    [self.twitterLabel setText:NSLocalizedString(@"twitter", nil)];
 
-    [doneLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
-    [doneLabel setText:NSLocalizedString(@"done", nil)];
+    [self.doneLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
+    [self.doneLabel setText:NSLocalizedString(@"done", nil)];
 
-    [selectAllLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
-    [selectAllLabel setText:NSLocalizedString(@"select_all", nil)];
+    [self.selectAllLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
+    [self.selectAllLabel setText:NSLocalizedString(@"select_all", nil)];
 
-    [unSelectAllLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
-    [unSelectAllLabel setText:NSLocalizedString(@"unselect_all", nil)];
+    [self.unSelectAllLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
+    [self.unSelectAllLabel setText:NSLocalizedString(@"unselect_all", nil)];
 
-    [inviteLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
-    [inviteLabel setText:NSLocalizedString(@"invite", nil)];
-
+    [self.inviteLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
+    [self.inviteLabel setText:NSLocalizedString(@"invite", nil)];
+    
     // Load device contacts
-    [self loadLocalContacts:contactsButton];
+    [self loadLocalContacts:self.contactsButton];
 
 }
 
@@ -178,7 +179,7 @@ const int CONTACTS_TAB = 0;
     }
     
     // Reload table data after all the contacts get loaded
-    [uiTableView reloadData];
+    [self.uiTableView reloadData];
 }
 
 /**
@@ -186,86 +187,62 @@ const int CONTACTS_TAB = 0;
  */
 - (IBAction)loadFacebookContacts:(UIButton *)sender{
 
-    if(selectedTab == FACEBOOK_TAB){
-        return;
-    }
+    //if(selectedTab == FACEBOOK_TAB){
+    ////    return;
+    //}
 
     selectedTab = FACEBOOK_TAB;
     [self setUnselectTab:sender];
+    
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
 
-    // Get facebook session from app delegate
-    FlyrAppDelegate *appDele =(FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-    if(appDele._session.uid != 0){
+    if(!appDelegate.facebook) {
         
-        // Create fql to loggedin user's info
-        NSString* fql = [NSString stringWithFormat:@"SELECT uid,name,birthday_date FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 == %lld))", appDele._session.uid];
-        NSDictionary* params = [NSDictionary dictionaryWithObject:fql forKey:@"query"];
-        
-        if(params){
-            
-            // Send request
-            [[FBRequest requestWithDelegate:self] call:@"facebook.friends.get" params:params];
-        }
+        //get facebook app id
+        NSString *path = [[NSBundle mainBundle] pathForResource: @"Flyr-Info" ofType: @"plist"];
+        NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile: path];
+        appDelegate.facebook = [[Facebook alloc] initWithAppId:[dict objectForKey: @"FacebookAppID"] andDelegate:self];
+    }
     
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults objectForKey:@"FBAccessTokenKey"] && [defaults objectForKey:@"FBExpirationDateKey"]) {
+        appDelegate.facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
+        appDelegate.facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
+    }
+    
+    if([appDelegate.facebook isSessionValid]) {
+        
+        [appDelegate.facebook requestWithGraphPath:@"me/friends?fields=name,picture" andDelegate:self];
+        
     } else {
-    
-        // IF facebook is not connected then show this alert
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No facebook connection"
-                                                        message:@"You must be connected to Facebook to get contact list."
-                                                       delegate:nil
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil];
-        [alert show];
-        [alert release];
+        
+        [appDelegate.facebook authorize:[NSArray arrayWithObjects: @"read_stream",
+                                      @"publish_stream", nil]];
+        
     }
 }
 
 -(void)request:(FBRequest *)request didLoad:(id)result{
     
-    // check if not my facebook record
-    if(!secondRequest) {
-        NSArray* users = result;
-        secondRequest = YES;
-        
-        // init contact array with number of friends counts
-        totalFacebookUserCounts = [users count];
-        [contactsArray release];
-        contactsArray = nil;
-        contactsArray = [[NSMutableArray alloc] initWithCapacity:totalFacebookUserCounts];
+    NSArray* users = result;   
 
-        for(NSInteger i=0;i<[users count];i++) {
-            
-            // Send second request for my  facebook contacts
-            NSDictionary* user = [users objectAtIndex:i];
-            NSString* uid = [user objectForKey:@"uid"];
-            NSString* fql = [NSString stringWithFormat:
-                             @"select name from user where uid == %@", uid];
-            
-            NSDictionary* params = [NSDictionary dictionaryWithObject:fql forKey:@"query"];
-            [[FBRequest requestWithDelegate:self] call:@"facebook.fql.query" params:params];
-        }
-        
-    } else {
-        
+    self.contactsArray = [[NSMutableArray alloc] initWithCapacity:[users count]];
+    
+    for (NSDictionary *friendData in [result objectForKey:@"data"])
+    {
         // Here we will get the facebook contacts
-        NSMutableDictionary *dOfPerson=[NSMutableDictionary dictionary];
-
-        NSArray* users = result;
-        NSDictionary* user = [users objectAtIndex:0];
-        NSString* name = [user objectForKey:@"name"];
-        
-        [dOfPerson setObject:name forKey:@"name"];
-        [contactsArray addObject:dOfPerson];
+        NSMutableDictionary *dOfPerson=[NSMutableDictionary dictionary];        
+        [dOfPerson setObject:[friendData objectForKey:@"name"] forKey:@"name"];
+        [dOfPerson setObject:[friendData objectForKey:@"id"] forKey:@"identifier"];
+        [self.contactsArray addObject:dOfPerson];
     }
     
-    if([contactsArray count] == totalFacebookUserCounts){
-        [uiTableView reloadData];
-        secondRequest = NO;
-        totalFacebookUserCounts = 0;
-    }
+    [self.uiTableView reloadData];    
 }
 
-//BOOL grantedBool;
+/*
+ *
+ */
 - (IBAction)loadTwitterContacts:(UIButton *)sender{
     
     if(selectedTab == TWITTER_TAB){
@@ -321,20 +298,18 @@ const int CONTACTS_TAB = 0;
                                                                                          error:&jsonError];
                             NSDictionary *users = [followers objectForKey:@"users"];
                             
-                            [contactsArray release];
-                            contactsArray = nil;
-                            contactsArray = [[NSMutableArray alloc] initWithCapacity:[users count]];
+                            self.contactsArray = [[NSMutableArray alloc] initWithCapacity:[users count]];
                             
                             for (id user in users) {
                                 NSMutableDictionary *dOfPerson=[NSMutableDictionary dictionary];
                                 [dOfPerson setObject:[user objectForKey:@"name"] forKey:@"name"];
                                 [dOfPerson setObject:[user objectForKey:@"screen_name"] forKey:@"identifier"];
-                                [contactsArray addObject:dOfPerson];
+                                [self.contactsArray addObject:dOfPerson];
                             }
                         }
                         
                         NSLog(@"Twitter response, HTTP response: %i", [urlResponse statusCode]);
-                        [uiTableView reloadData];
+                        [self.uiTableView reloadData];
                     }];
                 }
             }
@@ -392,7 +367,7 @@ const int CONTACTS_TAB = 0;
                 [postRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {                    
                     NSLog(@"Twitter response, HTTP response: %i", [urlResponse statusCode]);
                     
-                    [uiTableView reloadData];
+                    [self.uiTableView reloadData];
                 }];
             }
         }
@@ -408,49 +383,13 @@ const int CONTACTS_TAB = 0;
     
     for(AddFriendItem *cell in deviceContactItems){
         
-        // prepare users to tweet
-        if(selectedTab == 2){
-            if([cell.leftCheckBox isSelected]){
-                [identifiers addObject:cell.identifier1];
-            }
-            
-            if([cell.rightCheckBox isSelected]){
-                [identifiers addObject:cell.identifier2];
-            }
-            
-            // prepare facebook contacts
-        } else if(selectedTab == 1){
-            
-            // Post a status update to the user's feedm via the Graph API, and display an alert view
-            // with the results or an error.
-
-            if([cell.leftCheckBox isSelected]){
-                FBStreamDialog *dialog = [[[FBStreamDialog alloc] init] autorelease];
-                dialog.userMessagePrompt = @"Enter your message:";
-                dialog.attachment = [NSString stringWithFormat:@"{\"name\":\"Facebook Connect for iPhone\",\"href\":\"http://developers.facebook.com/connect.php?tab=iphone\",\"caption\":\"Caption\",\"description\":\"Description\",\"media\":[{\"type\":\"image\",\"src\":\"http://img40.yfrog.com/img40/5914/iphoneconnectbtn.jpg\",\"href\":\"http://developers.facebook.com/connect.php?tab=iphone/\"}],\"properties\":{\"another link\":{\"text\":\"Facebook home page\",\"href\":\"http://www.facebook.com\"}}}"];
-                [dialog show];
-            }
-
-            if([cell.rightCheckBox isSelected]){
-                                
-                FBStreamDialog *dialog = [[[FBStreamDialog alloc] init] autorelease];
-                dialog.userMessagePrompt = @"Enter your message:";
-                dialog.attachment = [NSString stringWithFormat:@"{\"name\":\"Facebook Connect for iPhone\",\"href\":\"http://developers.facebook.com/connect.php?tab=iphone\",\"caption\":\"Caption\",\"description\":\"Description\",\"media\":[{\"type\":\"image\",\"src\":\"http://img40.yfrog.com/img40/5914/iphoneconnectbtn.jpg\",\"href\":\"http://developers.facebook.com/connect.php?tab=iphone/\"}],\"properties\":{\"another link\":{\"text\":\"Facebook home page\",\"href\":\"http://www.facebook.com\"}}}"];
-                [dialog show];
-            }            
-            
-            // prepare contacts to sms
-        } else if(selectedTab == 0){
+        if([cell.leftCheckBox isSelected]){
+            [identifiers addObject:cell.identifier1];
+        }
         
-            if([cell.leftCheckBox isSelected]){
-                [identifiers addObject:cell.identifier1];
-            }
-            
-            if([cell.rightCheckBox isSelected]){
-                [identifiers addObject:cell.identifier2];
-            }
-        
-        } 
+        if([cell.rightCheckBox isSelected]){
+            [identifiers addObject:cell.identifier2];
+        }
     }
     
     // Send invitations
@@ -464,6 +403,85 @@ const int CONTACTS_TAB = 0;
         for(NSString *follower in identifiers){
             [self sendTwitterMessage:@"I am using the flyerly app to create and share flyers on the go! - https://itunes.apple.com/app/socialflyr/id344130515?ls=1&mt=8" screenName:follower];
         }
+        
+    }else if(selectedTab == 1){
+        
+        [self tagFacebookUsersWithFeed:identifiers];
+    }
+}
+
+- (IBAction)tagFacebookUsersWithFeed:(NSArray *)identifiers {
+    
+    // Post a status update to the user's feed via the Graph API, and display an alert view
+    // with the results or an error.
+
+    [self performPublishAction:^{
+        
+        [FBRequestConnection startForPostStatusUpdate:@"I am using the flyerly app to create and share flyers on the go! - https://itunes.apple.com/app/socialflyr/id344130515?ls=1&mt=8" place:@"144479625584966" tags:identifiers completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+            
+            NSLog(@"New Result: %@", result);
+        
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Tagged !"
+                                                            message:@"Users has been tagged with your message."
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alert show];
+            [alert release];
+
+        }];
+    }];
+}
+
+// Convenience method to perform some action that requires the "publish_actions" permissions.
+- (void) performPublishAction:(void (^)(void)) action {    
+    
+    if ([[FBSession activeSession]isOpen]) {
+        /*
+         * if the current session has no publish permission we need to reauthorize
+         */
+        if ([[[FBSession activeSession]permissions]indexOfObject:@"publish_actions"] == NSNotFound) {
+            
+            [[FBSession activeSession] reauthorizeWithPublishPermissions:[NSArray arrayWithObject:@"publish_actions"] defaultAudience:FBSessionDefaultAudienceOnlyMe completionHandler:^(FBSession *session, NSError *error) {
+                
+                [self publish_action:action];
+            }];
+            
+        }else{
+
+            [self publish_action:action];
+
+        }
+    }else{
+        /*
+         * open a new session with publish permission
+         */
+        [FBSession openActiveSessionWithPublishPermissions:[NSArray arrayWithObject:@"publish_actions"] defaultAudience:FBSessionDefaultAudienceOnlyMe allowLoginUI:YES completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
+            
+            if (!error && status == FBSessionStateOpen) {
+                [self publish_action:action];
+            }else{
+                NSLog(@"error");
+            }
+        }];
+    }
+}
+
+-(void)publish_action:(void (^)(void)) action{
+
+    // we defer request for permission to post to the moment of post, then we check for the permission
+    if ([FBSession.activeSession.permissions indexOfObject:@"publish_actions"] == NSNotFound) {
+        // if we don't already have the permission, then we request it now
+        [FBSession.activeSession requestNewPublishPermissions:@[@"publish_actions"]
+                                              defaultAudience:FBSessionDefaultAudienceFriends
+                                            completionHandler:^(FBSession *session, NSError *error) {
+                                                if (!error) {
+                                                    action();
+                                                }
+                                                //For this example, ignore errors (such as if user cancels).
+                                            }];
+    } else {
+        action();
     }
 }
 
@@ -496,13 +514,13 @@ const int CONTACTS_TAB = 0;
     int count = ([contactsArray count]) / 2;
     
     // Add one if contact counts are odd
-    if(([contactsArray count] % 2) == 1){
+    if(([self.contactsArray count] % 2) == 1){
         count++;
     }
     
-    [deviceContactItems release];
-    deviceContactItems = nil;
-    deviceContactItems = [[NSMutableArray alloc] init];
+    [self.deviceContactItems release];
+    self.deviceContactItems = nil;
+    self.deviceContactItems = [[NSMutableArray alloc] init];
 
     // return count
     return count;
@@ -515,7 +533,7 @@ const int CONTACTS_TAB = 0;
     
     // Get cell
     static NSString *cellId = @"AddFriendItem";
-    AddFriendItem *cell = (AddFriendItem *)[uiTableView dequeueReusableCellWithIdentifier:cellId];
+    AddFriendItem *cell = (AddFriendItem *)[self.uiTableView dequeueReusableCellWithIdentifier:cellId];
     
     if (cell == nil) {
         
@@ -524,7 +542,7 @@ const int CONTACTS_TAB = 0;
     }
     
     // Get left contact data
-    NSMutableDictionary *dict1 = [contactsArray objectAtIndex:index];
+    NSMutableDictionary *dict1 = [self.contactsArray objectAtIndex:index];
     NSString *name1 = [dict1 objectForKey:@"name"];
     UIImage *image1 = [dict1 objectForKey:@"image"];
     
@@ -534,8 +552,8 @@ const int CONTACTS_TAB = 0;
     UIImage *image2;
 
     // Check index
-    if([contactsArray count] > (index+ 1)){
-        dict2 = [contactsArray objectAtIndex:(index + 1)];
+    if([self.contactsArray count] > (index+ 1)){
+        dict2 = [self.contactsArray objectAtIndex:(index + 1)];
         name2 = [dict2 objectForKey:@"name"];
         image2 = [dict2 objectForKey:@"image"];
         cell.identifier2 = [dict2 objectForKey:@"identifier"];
@@ -557,12 +575,12 @@ const int CONTACTS_TAB = 0;
     }
     
     // init cell array if null
-    if(!deviceContactItems){
-        deviceContactItems = [[NSMutableArray alloc] init];
+    if(!self.deviceContactItems){
+        self.deviceContactItems = [[NSMutableArray alloc] init];
     }
     
     // Add cell in array for tracking
-    [deviceContactItems addObject:cell];
+    [self.deviceContactItems addObject:cell];
 
     // return cell
     return cell;
@@ -573,7 +591,7 @@ const int CONTACTS_TAB = 0;
  */
 - (IBAction)selectAllCheckBoxes:(UIButton *)sender{
     
-    for(AddFriendItem *cell in deviceContactItems){
+    for(AddFriendItem *cell in self.deviceContactItems){
         [cell.leftCheckBox setSelected:YES];
         [cell.rightCheckBox setSelected:YES];
     }
@@ -584,7 +602,7 @@ const int CONTACTS_TAB = 0;
  */
 - (IBAction)unSelectAllCheckBoxes:(UIButton *)sender{
     
-    for(AddFriendItem *cell in deviceContactItems){
+    for(AddFriendItem *cell in self.deviceContactItems){
         [cell.leftCheckBox setSelected:NO];
         [cell.rightCheckBox setSelected:NO];
     }
@@ -592,11 +610,24 @@ const int CONTACTS_TAB = 0;
 
 -(void)setUnselectTab:(UIButton *)selectButton{
 
-    [contactsButton setSelected:NO];
-    [facebookButton setSelected:NO];
-    [twitterButton setSelected:NO];
+    [self.contactsButton setSelected:NO];
+    [self.facebookButton setSelected:NO];
+    [self.twitterButton setSelected:NO];
     
     [selectButton setSelected:YES];
+}
+
+- (void)fbDidLogin {
+	NSLog(@"logged in");
+
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+
+    //save to session
+    [[NSUserDefaults standardUserDefaults] setObject:appDelegate.facebook.accessToken forKey:@"FBAccessToken"];
+    [[NSUserDefaults standardUserDefaults] setObject:appDelegate.facebook.expirationDate forKey:@"FBSExpirationDate"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [self loadFacebookContacts:self.facebookButton];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -608,6 +639,22 @@ const int CONTACTS_TAB = 0;
 }
 
 - (void)dealloc {
+    
+    contactsLabel = nil;
+    facebookLabel = nil;
+    twitterLabel = nil;
+    doneLabel = nil;
+    selectAllLabel = nil;
+    unSelectAllLabel = nil;
+    inviteLabel = nil;
+    contactsButton = nil;
+    facebookButton = nil;
+    twitterButton = nil;
+    
+    uiTableView = nil;
+    contactsArray = nil;
+    deviceContactItems = nil;
+    
     [super dealloc];
 }
 

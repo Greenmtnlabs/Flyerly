@@ -20,7 +20,7 @@
 
 
 
-@interface LauchViewController : UIViewController {
+@interface LauchViewController : UIViewController<FBDialogDelegate,FBSessionDelegate> {
 	PhotoController *ptController;
 	FlyrViewController *tpController;
 	SettingViewController *spController;
@@ -36,7 +36,7 @@
     IBOutlet UIImageView *thirdFlyer;
     IBOutlet UIImageView *fourthFlyer;
 
-	IBOutlet FBLoginButton *faceBookButton;
+	//IBOutlet FBLoginButton *faceBookButton;
 	BOOL loadingViewFlag;
 }
 @property(nonatomic,retain) PhotoController *ptController;
@@ -44,7 +44,7 @@
 @property(nonatomic,retain) FlyrViewController *tpController;
 @property(nonatomic,retain) SettingViewController *spController;
 @property(nonatomic,retain) AddFriendsController *addFriendsController;
-@property (nonatomic, retain) IBOutlet FBLoginButton *faceBookButton;
+//@property (nonatomic, retain) IBOutlet FBLoginButton *faceBookButton;
 
 @property (nonatomic, retain) IBOutlet UILabel *createFlyrLabel;
 @property (nonatomic, retain) IBOutlet UILabel *savedFlyrLabel;

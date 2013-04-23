@@ -11,7 +11,7 @@
 #import "FBConnect/FBConnect.h"
 @class FBSession;
 #import "TwitLogin.h"
-#import "FBPermissionDialog.h"
+//#import "FBPermissionDialog.h"
 
 
 @class SaveFlyerController;
@@ -29,10 +29,12 @@
 	SaveFlyerController *svController;
 	//NSMutableArray *templateArray;
 	//NSMutableArray *iconArray;
-	FBDialog* dialog;
-	FBPermissionDialog* perDialog;
-	FBStreamDialog* streamDialog;
-	FBSession* _session;
+    
+	//FBDialog* dialog;
+	//FBPermissionDialog* perDialog;
+	//FBStreamDialog* streamDialog;
+	//FBSession* _session;
+
 	TwitLogin *_tSession;
 	BOOL faceBookPermissionFlag;
 	BOOL changesFlag;
@@ -46,13 +48,19 @@
 @property (nonatomic, retain) UIScrollView *sizeScrollView;
 @property (nonatomic, retain) UIScrollView *templateScrollView;
 @property (nonatomic, retain) SaveFlyerController *svController;
-@property (nonatomic, retain) FBDialog* dialog;
-@property (nonatomic,retain) FBPermissionDialog* perDialog;
-@property (nonatomic,retain) FBStreamDialog* streamDialog;
-@property (nonatomic,retain)  FBSession* _session;
+
+//@property (nonatomic, retain) FBDialog* dialog;
+//@property (nonatomic,retain) FBPermissionDialog* perDialog;
+//@property (nonatomic,retain) FBStreamDialog* streamDialog;
+//@property (nonatomic,retain)  FBSession* _session;
+@property (strong, nonatomic) Facebook *facebook;
+
 @property (nonatomic,retain) TwitLogin *_tSession;
 @property (nonatomic,assign)	BOOL faceBookPermissionFlag;
 @property (nonatomic,assign) BOOL changesFlag;
+
+@property (strong, nonatomic) FBSession *session;
+
 //@property(nonatomic,retain) ARRollerView *adwhirl;
 -(void)next;
 //@property (nonatomic, retain) NSMutableArray *templateArray;

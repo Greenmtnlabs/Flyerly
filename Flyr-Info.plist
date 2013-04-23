@@ -20,14 +20,44 @@
 	<string>APPL</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb_ 136691489852349</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>1.25</string>
+	<key>FacebookAppID</key>
+	<string>136691489852349</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSMainNibFile</key>
 	<string>MainWindow</string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>HalveticaRoundedLTStd-BdCn_0.otf</string>
+		<string>Anjelika Rose.ttf</string>
+		<string>segoeui.ttf</string>
+		<string>ITC Avant Garde CE Gothic Book.ttf</string>
+		<string>danielbk.ttf</string>
+		<string>BlueNoon.ttf</string>
+		<string>BankGothic-Regular DB.ttf</string>
+		<string>LHANDW.TTF</string>
+		<string>Helvetica Inserat Cyrillic Upright.ttf</string>
+		<string>ALGER.TTF</string>
+		<string>Comfortaa_Bolf.ttf</string>
+		<string>black_jack.ttf</string>
+		<string>StMarie-Thin.otf</string>
+		<string>Quicksand_Bold.otf</string>
+		<string>Nexa Bold.otf</string>
+		<string>Molot.otf</string>
+		<string>Kankin.otf</string>
+		<string>GrandHotel-Regular.otf</string>
+		<string>GoodDog.otf</string>
 		<string>Signika-Bold.otf</string>
 		<string>Signika-Light.otf</string>
 		<string>Signika-Regular.otf</string>

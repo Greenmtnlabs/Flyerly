@@ -17,8 +17,9 @@
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMessageComposeViewController.h>
+#import "FlyrAppDelegate.h"
 
-@interface AddFriendsController : UIViewController<UITableViewDelegate,UITableViewDataSource,FBRequestDelegate,FBSessionDelegate,MFMessageComposeViewControllerDelegate>{
+@interface AddFriendsController : UIViewController<UITableViewDelegate,UITableViewDataSource,FBRequestDelegate,FBSessionDelegate,MFMessageComposeViewControllerDelegate,FBDialogDelegate,FBLoginDialogDelegate>{
 
     IBOutlet UILabel *contactsLabel;
     IBOutlet UILabel *facebookLabel;
@@ -36,11 +37,6 @@
     
     NSMutableArray *deviceContactItems;
     int selectedTab;
-
-    //facebook
-    BOOL secondRequest;
-    int totalFacebookUserCounts;
-    
 }
 
 @property(nonatomic,retain) IBOutlet UILabel *contactsLabel;
@@ -63,6 +59,6 @@
 - (IBAction)loadLocalContacts:(UIButton *)sender;
 - (IBAction)loadFacebookContacts:(UIButton *)sender;
 - (IBAction)loadTwitterContacts:(UIButton *)sender;
-- (IBAction)invite;
+-(IBAction)invite;
 
 @end
