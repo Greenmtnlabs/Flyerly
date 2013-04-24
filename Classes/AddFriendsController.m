@@ -19,6 +19,7 @@
 const int TWITTER_TAB = 2;
 const int FACEBOOK_TAB = 1;
 const int CONTACTS_TAB = 0;
+BOOL firstTableLoad = YES;
 
 - (void)viewDidLoad {
     
@@ -316,14 +317,8 @@ const int CONTACTS_TAB = 0;
         }];
     
     } else {
-
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No Twitter connection"
-                                                        message:@"You must be connected to Twitter to get contact list."
-                                                       delegate:nil
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil];
-        [alert show];
-        [alert release];
+        
+        [self showAlert:@"No Twitter connection" message:@"You must be connected to Twitter to get contact list."];
     }
     
 }
@@ -392,22 +387,47 @@ const int CONTACTS_TAB = 0;
         }
     }
     
-    // Send invitations
-    if(selectedTab == 0){
-        
-        // send tweets to contacts
-        [self sendSMS:@"Test SMS" recipients:identifiers];
-        
-    }else if(selectedTab == 2){
-        // Send tweets to twitter contacts
-        for(NSString *follower in identifiers){
-            [self sendTwitterMessage:@"I am using the flyerly app to create and share flyers on the go! - https://itunes.apple.com/app/socialflyr/id344130515?ls=1&mt=8" screenName:follower];
+    if([identifiers count] > 0){
+        // Send invitations
+        if(selectedTab == 0){
+            
+            // send tweets to contacts
+            [self sendSMS:@"Test SMS" recipients:identifiers];
+            
+        }else if(selectedTab == 2){
+            // Send tweets to twitter contacts
+            for(NSString *follower in identifiers){
+                [self sendTwitterMessage:@"I am using the flyerly app to create and share flyers on the go! - https://itunes.apple.com/app/socialflyr/id344130515?ls=1&mt=8" screenName:follower];
+            }
+            
+        }else if(selectedTab == 1){
+            
+            [self tagFacebookUsersWithFeed:identifiers];
         }
         
-    }else if(selectedTab == 1){
-        
-        [self tagFacebookUsersWithFeed:identifiers];
+    } else {
+        [self showAlert:@"Nothing Selected !" message:@"Please select any contact to invite"];
     }
+}
+
+- (void)messageComposeViewController:
+(MFMessageComposeViewController *)controller
+                 didFinishWithResult:(MessageComposeResult)result
+{
+    switch (result)
+    {
+        case MessageComposeResultCancelled:
+            NSLog(@"Cancelled");
+            break;
+        case MessageComposeResultFailed:
+            NSLog(@"Failed");
+            break;
+        case MessageComposeResultSent:
+            break;
+        default:
+            break;
+    }
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 - (IBAction)tagFacebookUsersWithFeed:(NSArray *)identifiers {
@@ -421,16 +441,19 @@ const int CONTACTS_TAB = 0;
             
             NSLog(@"New Result: %@", result);
         
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Tagged !"
-                                                            message:@"Users has been tagged with your message."
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil];
-            [alert show];
-            [alert release];
-
+            [self showAlert:@"Tagged !" message:@"Users has been tagged with your message."];
         }];
     }];
+}
+
+-(void)showAlert:(NSString *)title message:(NSString *)message{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+                                                    message:message
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+    [alert release];
 }
 
 // Convenience method to perform some action that requires the "publish_actions" permissions.
@@ -495,7 +518,7 @@ const int CONTACTS_TAB = 0;
         [messageInstance setRecipients:recipients];
         messageInstance.body = message;
         messageInstance.messageComposeDelegate = self;
-        [self presentModalViewController:messageInstance animated:YES];
+        [self presentViewController:messageInstance animated:YES completion:nil];
         
     }
     
@@ -531,12 +554,23 @@ const int CONTACTS_TAB = 0;
     // Get index like 0, 2, 4, 6 etc
     int index = (indexPath.row * 2);
     
+    // init cell array if null
+    if(!self.deviceContactItems){
+        self.deviceContactItems = [[NSMutableArray alloc] init];
+    }
+    
     // Get cell
     static NSString *cellId = @"AddFriendItem";
-    AddFriendItem *cell = (AddFriendItem *)[self.uiTableView dequeueReusableCellWithIdentifier:cellId];
+    //AddFriendItem *cell = [(AddFriendItem *)[self.uiTableView dequeueReusableCellWithIdentifier:cellId] autorelease];
+    
+    AddFriendItem *cell = nil;
+    
+    if([self.deviceContactItems count] > indexPath.row){
+        NSLog(@"Reusing Row");
+        cell = [self.deviceContactItems objectAtIndex:indexPath.row];
+    }
     
     if (cell == nil) {
-        
         NSArray *nib=[[NSBundle mainBundle] loadNibNamed:cellId owner:self options:nil];
         cell=[nib objectAtIndex:0];
     }
@@ -545,7 +579,7 @@ const int CONTACTS_TAB = 0;
     NSMutableDictionary *dict1 = [self.contactsArray objectAtIndex:index];
     NSString *name1 = [dict1 objectForKey:@"name"];
     UIImage *image1 = [dict1 objectForKey:@"image"];
-    
+
     // Get right contact data
     NSMutableDictionary *dict2;
     NSString *name2;
@@ -574,17 +608,27 @@ const int CONTACTS_TAB = 0;
         cell.contentView.backgroundColor = [[UIColor alloc]initWithRed:244.0/255.0 green:242.0/255.0 blue:243.0/255.0 alpha:1];
     }
     
-    // init cell array if null
-    if(!self.deviceContactItems){
-        self.deviceContactItems = [[NSMutableArray alloc] init];
-    }
-    
     // Add cell in array for tracking
     [self.deviceContactItems addObject:cell];
 
     // return cell
     return cell;
 }
+
+/*-(void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+
+    NSLog(@"index path: %d", [indexPath row]);
+    NSLog(@"indexPathsForVisibleRows: %d", ((NSIndexPath*)[[tableView indexPathsForVisibleRows] lastObject]).row);
+
+    if([indexPath row] == ((NSIndexPath*)[[tableView indexPathsForVisibleRows] lastObject]).row){
+
+        if(firstTableLoad){
+            [self selectAllCheckBoxes:nil];
+            firstTableLoad = NO;
+        }
+        
+    }
+}*/
 
 /*
  * Method use to select all checkboxes

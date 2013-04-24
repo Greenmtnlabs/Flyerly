@@ -15,6 +15,7 @@
 #import "SaveFlyerController.h"
 #import "ImageCache.h"
 #import "CameraOverlayView.h"
+#import "CustomPhotoController.h"
 
 @implementation PhotoController
 @synthesize imgView,imgPicker;
@@ -119,7 +120,7 @@
 	templateBckgrnd.alpha = ALPHA0;
 	
 	textBackgrnd = [[UIImageView alloc]initWithFrame:CGRectMake(0, 385, 320, 44)];
-	textBackgrnd.image = [UIImage imageNamed:@"scroll2.png"];
+	//textBackgrnd.image = [UIImage imageNamed:@"scroll2.png"];
 	[self.view addSubview:textBackgrnd];
 	textBackgrnd.alpha = ALPHA0;
 
@@ -163,8 +164,7 @@
 		UIImage *iconImg =   [UIImage  imageWithContentsOfFile:iconName];
 		//UIImage *iconImg = [appDele.iconArray objectAtIndex:i];
 		//[appDele.iconArray addObject:iconImg];
-		//UIImage *templateImg = [appDele.templateArray objectAtIndex:i];
-		
+		//UIImage *templateImg = [appDele.templateArray objectAtIndex:i];		
 		
 		UIButton *templateButton = [UIButton  buttonWithType:UIButtonTypeCustom];
 		templateButton.frame =CGRectMake(0, 5,templateScrollWidth, templateScrollHeight);
@@ -185,28 +185,28 @@
 
     //NSLog(@"Famiy Names: %@", [UIFont familyNames]);
     
-	fontArray =[[NSArray  alloc] initWithObjects: 
-				[UIFont fontWithName:@"Signika-Regular" size:16],
-				[UIFont fontWithName:@"Arial" size:16],
-				[UIFont fontWithName:@"GoodDog" size:16],
-				[UIFont fontWithName:@"GrandHotel-Regular" size:16],
-				[UIFont fontWithName:@"Kankin" size:16],
-				[UIFont fontWithName:@"Molot" size:16],
-				[UIFont fontWithName:@"Nexa Bold" size:16],
-				[UIFont fontWithName:@"Quicksand" size:16],
-				[UIFont fontWithName:@"StMarie-Thin" size:16],
-				[UIFont fontWithName:@"BlackJack" size:16],
+	fontArray =[[NSArray  alloc] initWithObjects:
+				[UIFont fontWithName:@"Signika-Regular" size:27],
+				[UIFont fontWithName:@"Arial" size:27],
+				[UIFont fontWithName:@"GoodDog" size:27],
+				[UIFont fontWithName:@"GrandHotel-Regular" size:27],
+				[UIFont fontWithName:@"Kankin" size:27],
+				[UIFont fontWithName:@"Molot" size:27],
+				[UIFont fontWithName:@"Nexa Bold" size:27],
+				[UIFont fontWithName:@"Quicksand" size:27],
+				[UIFont fontWithName:@"StMarie-Thin" size:27],
+				[UIFont fontWithName:@"BlackJack" size:27],
 				//[UIFont fontWithName:@"Comfortaa-Bold" size:16],
 				//[UIFont fontWithName:@"swiss721BT" size:16], // Missing
-				[UIFont fontWithName:@"Algerian" size:16],
-				[UIFont fontWithName:@"HelveticaInseratCyr Upright" size:16],
+				[UIFont fontWithName:@"Algerian" size:27],
+				[UIFont fontWithName:@"HelveticaInseratCyr Upright" size:27],
 				//[UIFont fontWithName:@"HalveticaRoundedLTStd-BdCn_0" size:16],
-				[UIFont fontWithName:@"Lucida Handwriting" size:16],
-				[UIFont fontWithName:@"Anjelika Rose" size:16],
-				[UIFont fontWithName:@"BankGothic DB" size:16],
-				[UIFont fontWithName:@"Segoe UI" size:16],
-				[UIFont fontWithName:@"AvantGarde CE" size:16],
-				[UIFont fontWithName:@"BlueNoon" size:16],
+				[UIFont fontWithName:@"Lucida Handwriting" size:27],
+				[UIFont fontWithName:@"Anjelika Rose" size:27],
+				[UIFont fontWithName:@"BankGothic DB" size:27],
+				[UIFont fontWithName:@"Segoe UI" size:27],
+				[UIFont fontWithName:@"AvantGarde CE" size:27],
+				[UIFont fontWithName:@"BlueNoon" size:27],
 				//[UIFont fontWithName:@"danielbk" size:16],
                 nil];
                 
@@ -233,7 +233,7 @@
 	for (int i = 1; i <=[fontArray count] ; i++)
 	{
 		UIButton *font = [UIButton buttonWithType:UIButtonTypeCustom];
-		font.frame = CGRectMake(0, 5, fontScrollWidth, fontScrollHeight);
+		font.frame = CGRectMake(0, 0, fontScrollWidth, fontScrollHeight);
 
 		
 		[font setTitle:@"A" forState:UIControlStateNormal];
@@ -241,8 +241,8 @@
 		[font.titleLabel setFont: fontname];
 		[font setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 		font.tag = i;	
-		font.alpha = ALPHA1;
-		[font setBackgroundImage:[UIImage imageNamed:@"button1.png"] forState:UIControlStateNormal];
+		//font.alpha = ALPHA1;
+		[font setBackgroundImage:[UIImage imageNamed:@"a_bg"] forState:UIControlStateNormal];
 		[fontScrollView addSubview:font];
 		//[font release];
 	}
@@ -386,9 +386,11 @@
 	 
 	
 	fontTabButton =[UIButton buttonWithType:UIButtonTypeCustom];
-	fontTabButton.frame = CGRectMake(-1, 429, 107, 32);
-	[fontTabButton setBackgroundImage:[UIImage imageNamed:@"tabButton.png"] forState:UIControlStateNormal];
-	[fontTabButton setTitle:@"Font" forState:UIControlStateNormal];
+	fontTabButton.frame = CGRectMake(-1, 415, 80, 46);
+	//fontTabButton.frame = CGRectMake(-1, 429, 107, 32);
+	//[fontTabButton setBackgroundImage:[UIImage imageNamed:@"tabButton.png"] forState:UIControlStateNormal];
+	//[fontTabButton setTitle:@"Font" forState:UIControlStateNormal];
+	[fontTabButton setBackgroundImage:[UIImage imageNamed:@"font_button"] forState:UIControlStateNormal];
 	[fontTabButton.titleLabel setFont:[UIFont fontWithName:@"Arial-BoldMT" size:15]];
 	[fontTabButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 	[fontTabButton addTarget:self action:@selector(setStyleTabAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -397,9 +399,11 @@
 	[self.view addSubview:fontTabButton];
 	
 	colorTabButton =[UIButton buttonWithType:UIButtonTypeCustom];
-	colorTabButton.frame = CGRectMake(106, 429, 109, 32);
-	[colorTabButton setBackgroundImage:[UIImage imageNamed:@"tabButton.png"] forState:UIControlStateNormal];
-	[colorTabButton setTitle:@"Color" forState:UIControlStateNormal];
+	colorTabButton.frame = CGRectMake(79, 415, 80, 46);
+	[colorTabButton setBackgroundImage:[UIImage imageNamed:@"color_button"] forState:UIControlStateNormal];
+	//colorTabButton.frame = CGRectMake(106, 429, 109, 32);
+	//[colorTabButton setBackgroundImage:[UIImage imageNamed:@"tabButton.png"] forState:UIControlStateNormal];
+	//[colorTabButton setTitle:@"Color" forState:UIControlStateNormal];
 	[colorTabButton.titleLabel setFont:[UIFont fontWithName:@"Arial-BoldMT" size:15]];
 	[colorTabButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 	[colorTabButton addTarget:self action:@selector(setStyleTabAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -408,9 +412,11 @@
 	[self.view addSubview:colorTabButton];
 	
 	sizeTabButton =[UIButton buttonWithType:UIButtonTypeCustom];
-	sizeTabButton.frame = CGRectMake(107+107, 429, 107, 32);
-	[sizeTabButton setBackgroundImage:[UIImage imageNamed:@"tabButton.png"] forState:UIControlStateNormal];
-	[sizeTabButton setTitle:@"Size" forState:UIControlStateNormal];
+	sizeTabButton.frame = CGRectMake(159, 415, 80, 46);
+	//sizeTabButton.frame = CGRectMake(107+107, 429, 107, 32);
+	//[sizeTabButton setBackgroundImage:[UIImage imageNamed:@"tabButton.png"] forState:UIControlStateNormal];
+	[sizeTabButton setBackgroundImage:[UIImage imageNamed:@"size_button"] forState:UIControlStateNormal];
+	//[sizeTabButton setTitle:@"Size" forState:UIControlStateNormal];
 	[sizeTabButton.titleLabel setFont:[UIFont fontWithName:@"Arial-BoldMT" size:15]];
 	[sizeTabButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 	[sizeTabButton addTarget:self action:@selector(setStyleTabAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -753,19 +759,64 @@
 
 -(void)openCamera{
 	
-    CameraOverlayView *overlay = [[CameraOverlayView alloc]
-                            initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-    self.imgPicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-    self.imgPicker.cameraOverlayView = overlay;
+    //CustomPhotoController *customPhotoController =
+    //[[CustomPhotoController alloc] initWithNibName:@"CustomPhotoController" bundle:nil];
+    //customPhotoController.callbackObject = self;
+    //customPhotoController.callbackOnComplete = @selector(onCompleteSelectingImage:);
+
+    //self.imgPicker.delegate = self;
+    self.imgPicker.sourceType = UIImagePickerControllerSourceTypeCamera | UIImagePickerControllerSourceTypePhotoLibrary;
+    //self.imgPicker.showsCameraControls = NO;
+    //self.imgPicker.cameraOverlayView = customPhotoController.view;
+    //self.imgPicker.wantsFullScreenLayout = YES;
 
     [self presentModalViewController:self.imgPicker animated:YES];
+    //[customPhotoController release];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
 
-    NSLog(@"Image Taken");    
-    [self.imgView setImage:info[UIImagePickerControllerOriginalImage]];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    // Access the uncropped image from info dictionary
+    UIImage *image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+    
+    // Show the custom controller and get this image cropped.
+    CustomPhotoController *customPhotoController =
+    [[CustomPhotoController alloc] initWithNibName:@"CustomPhotoController" bundle:nil];
+    customPhotoController.image = image;
+    customPhotoController.callbackObject = self;
+    customPhotoController.callbackOnComplete = @selector(onCompleteSelectingImage:);
+    [self.navigationController pushViewController:customPhotoController animated:YES];
+    [customPhotoController release];
+
+     [self dismissModalViewControllerAnimated:YES];
+
+    
+    
+    
+   // NSLog(@"Image Taken");
+   // [self.imgView setImage:info[UIImagePickerControllerOriginalImage]];
+   // [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+/**
+ * Completed image.
+ */
+- (void) onCompleteSelectingImage:(UIImage *)selectedImage {
+    
+	if(imgPickerFlag == 1){
+		
+		//[[self.imgPicker parentViewController] dismissModalViewControllerAnimated:YES];
+		UIImage *testImage = [selectedImage retain];
+		[self.imgView setImage:testImage] ;
+	}
+	else if(imgPickerFlag == 2){
+        
+		[[self.imgPicker parentViewController] dismissModalViewControllerAnimated:YES];
+		UIImage *testImage = [selectedImage retain];
+		[self.photoImgView setImage:testImage] ;
+		photoTouchFlag = YES;
+		lableTouchFlag = NO;
+	}
 }
 
 #pragma mark UIAlertView delegate
@@ -917,17 +968,20 @@
 
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationDuration:0.4f];
-	fontScrollView.frame = CGRectMake(0, 385, 320, 44);
-	colorScrollView.frame = CGRectMake(0, 385, 320, 44);
-	sizeScrollView.frame = CGRectMake(0, 385, 320, 44);
+	fontScrollView.frame = CGRectMake(0, 360, 320, 44);
+	colorScrollView.frame = CGRectMake(0, 360, 320, 44);
+	sizeScrollView.frame = CGRectMake(0, 360, 320, 44);
 	textBackgrnd.alpha = ALPHA1;
 	fontScrollView.alpha = ALPHA1;
 	colorScrollView.alpha = ALPHA0;
 	sizeScrollView.alpha = ALPHA0;
 	
-	[fontTabButton setBackgroundImage:[UIImage imageNamed:@"selTab.png"] forState:UIControlStateNormal];
-	[colorTabButton setBackgroundImage:[UIImage imageNamed:@"tabButton.png"] forState:UIControlStateNormal];
-	[sizeTabButton setBackgroundImage:[UIImage imageNamed:@"tabButton.png"] forState:UIControlStateNormal];
+	[fontTabButton setBackgroundImage:[UIImage imageNamed:@"font_button"] forState:UIControlStateNormal];
+	//[fontTabButton setBackgroundImage:[UIImage imageNamed:@"selTab.png"] forState:UIControlStateNormal];
+	//[colorTabButton setBackgroundImage:[UIImage imageNamed:@"tabButton.png"] forState:UIControlStateNormal];
+    [colorTabButton setBackgroundImage:[UIImage imageNamed:@"color_button"] forState:UIControlStateNormal];
+    //[sizeTabButton setBackgroundImage:[UIImage imageNamed:@"tabButton.png"] forState:UIControlStateNormal];
+    [sizeTabButton setBackgroundImage:[UIImage imageNamed:@"size_button"] forState:UIControlStateNormal];
 	fontTabButton.alpha = ALPHA1;
 	colorTabButton.alpha = ALPHA1;
 	sizeTabButton.alpha = ALPHA1;
@@ -1146,9 +1200,12 @@
 		[fontScrollView setAlpha:ALPHA1];
 		[colorScrollView setAlpha:ALPHA0];
 		[sizeScrollView setAlpha:ALPHA0];
-		[fontTabButton setBackgroundImage:[UIImage imageNamed:@"selTab.png"] forState:UIControlStateNormal];
-		[colorTabButton setBackgroundImage:[UIImage imageNamed:@"tabButton.png"] forState:UIControlStateNormal];
-		[sizeTabButton setBackgroundImage:[UIImage imageNamed:@"tabButton.png"] forState:UIControlStateNormal];
+		[fontTabButton setBackgroundImage:[UIImage imageNamed:@"font_button"] forState:UIControlStateNormal];
+		//[fontTabButton setBackgroundImage:[UIImage imageNamed:@"selTab.png"] forState:UIControlStateNormal];
+		//[colorTabButton setBackgroundImage:[UIImage imageNamed:@"tabButton.png"] forState:UIControlStateNormal];
+		[colorTabButton setBackgroundImage:[UIImage imageNamed:@"color_button"] forState:UIControlStateNormal];
+		//[sizeTabButton setBackgroundImage:[UIImage imageNamed:@"tabButton.png"] forState:UIControlStateNormal];
+		[sizeTabButton setBackgroundImage:[UIImage imageNamed:@"size_button"] forState:UIControlStateNormal];
 		[UIView commitAnimations];
 	}
 	else if(selectedButton == colorTabButton)
@@ -1158,9 +1215,12 @@
 		[fontScrollView setAlpha:ALPHA0];
 		[colorScrollView setAlpha:ALPHA1];
 		[sizeScrollView setAlpha:ALPHA0];
-		[fontTabButton setBackgroundImage:[UIImage imageNamed:@"tabButton.png"] forState:UIControlStateNormal];
-		[colorTabButton setBackgroundImage:[UIImage imageNamed:@"selTab.png"] forState:UIControlStateNormal];
-		[sizeTabButton setBackgroundImage:[UIImage imageNamed:@"tabButton.png"] forState:UIControlStateNormal];
+		[fontTabButton setBackgroundImage:[UIImage imageNamed:@"font_button"] forState:UIControlStateNormal];
+		//[fontTabButton setBackgroundImage:[UIImage imageNamed:@"tabButton.png"] forState:UIControlStateNormal];
+		//[colorTabButton setBackgroundImage:[UIImage imageNamed:@"selTab.png"] forState:UIControlStateNormal];
+		[colorTabButton setBackgroundImage:[UIImage imageNamed:@"color_button"] forState:UIControlStateNormal];
+		//[sizeTabButton setBackgroundImage:[UIImage imageNamed:@"tabButton.png"] forState:UIControlStateNormal];
+		[sizeTabButton setBackgroundImage:[UIImage imageNamed:@"size_button"] forState:UIControlStateNormal];
 		[UIView commitAnimations];
 	}
 	else if(selectedButton == sizeTabButton)
@@ -1170,9 +1230,11 @@
 		[fontScrollView setAlpha:ALPHA0];
 		[colorScrollView setAlpha:ALPHA0];
 		[sizeScrollView setAlpha:ALPHA1];
-		[fontTabButton setBackgroundImage:[UIImage imageNamed:@"tabButton.png"] forState:UIControlStateNormal];
-		[colorTabButton setBackgroundImage:[UIImage imageNamed:@"tabButton.png"] forState:UIControlStateNormal];
-		[sizeTabButton setBackgroundImage:[UIImage imageNamed:@"selTab.png"] forState:UIControlStateNormal];
+		[fontTabButton setBackgroundImage:[UIImage imageNamed:@"font_button"] forState:UIControlStateNormal];
+		//[fontTabButton setBackgroundImage:[UIImage imageNamed:@"tabButton.png"] forState:UIControlStateNormal];
+		[colorTabButton setBackgroundImage:[UIImage imageNamed:@"color_button"] forState:UIControlStateNormal];
+		//[sizeTabButton setBackgroundImage:[UIImage imageNamed:@"selTab.png"] forState:UIControlStateNormal];
+		[sizeTabButton setBackgroundImage:[UIImage imageNamed:@"size_button"] forState:UIControlStateNormal];
 		[UIView commitAnimations];
 	}
 }

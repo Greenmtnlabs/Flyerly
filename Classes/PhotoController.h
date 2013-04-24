@@ -55,7 +55,7 @@
 	UIButton *fontTabButton;
 	UIButton *colorTabButton;
 	UIButton *sizeTabButton;
-	
+
 	UIButton *photoTabButton;
 	UIButton *widthTabButton;
 	UIButton *heightTabButton;
