@@ -7,12 +7,15 @@
 //
 
 #import "CustomPhotoController.h"
+#import "CustomGalleryItem.h"
 
-#define IMAGE_HEIGHT 204
-#define IMAGE_WIDTH  204
+//#define IMAGE_HEIGHT 204
+//#define IMAGE_WIDTH  204
+#define IMAGE_HEIGHT 400
+#define IMAGE_WIDTH  320
 @implementation CustomPhotoController
 
-@synthesize scrollView, imageView, image, callbackObject, callbackOnComplete;
+@synthesize scrollView, imageView, image, callbackObject, callbackOnComplete, galleryTable, deviceContactItems;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -25,6 +28,8 @@
 }
 
 - (void)dealloc {
+    [deviceContactItems release];
+    [galleryTable release];
     [scrollView release];
     [imageView release];
     [image release];
@@ -202,8 +207,7 @@
 
 #pragma mark - View lifecycle
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     UIImage *tmpImage = [self scaleAndRotateImage:image];
@@ -227,6 +231,13 @@
     [imageView setFrame:CGRectMake((contentSize.width - imageSize.width)/2,
                                    (contentSize.height - imageSize.height)/2,
                                    imageSize.width, imageSize.height)];
+    
+
+    
+    [self imageCount];
+    
+    // Reload table data after all the contacts get loaded
+    //[self.galleryTable reloadData];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -263,6 +274,142 @@
     // Content size for scrollview needs to be twice this size.
     CGSize contentSize = CGSizeMake(self.view.frame.size.width + (imageSize.width * scale), self.view.frame.size.height + ( imageSize.height * scale));
     [self.scrollView setContentSize:contentSize];
+}
+
+#pragma mark Table view methods
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+// Customize the number of rows in the table view.
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    // since we have four images in single row we have to divide it by 4
+    int count = counter/4;
+    
+    counter =  0;
+    [self.deviceContactItems release];
+    self.deviceContactItems = nil;
+    self.deviceContactItems = [[NSMutableArray alloc] init];
+
+    return count;
+}
+
+static NSString *cellId = @"CustomGalleryItem";
+int counter = 0;
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    // init cell array if null
+    if(!self.deviceContactItems){
+        self.deviceContactItems = [[NSMutableArray alloc] init];
+    }
+
+    // Get cell
+    //CustomGalleryItem *cell = (CustomGalleryItem *) [tableView dequeueReusableCellWithIdentifier:cellId];
+    CustomGalleryItem *cell = nil;
+    
+    if([self.deviceContactItems count] > indexPath.row){
+        NSLog(@"Reusing Cell at index: %d", indexPath.row);
+        cell = [self.deviceContactItems objectAtIndex:indexPath.row];
+    }
+
+    if (cell == nil) {
+        NSArray *nib=[[NSBundle mainBundle] loadNibNamed:cellId owner:self options:nil];
+        cell=[nib objectAtIndex:0];
+        
+        cell.controller = self;
+        [self load4ImagesAtaTime:indexPath.row image1:cell.image1 image2:cell.image2 image3:cell.image3 image4:cell.image4];
+    }
+    
+    [self.deviceContactItems addObject:cell];
+
+    // return cell
+    return cell;
+}
+
+-(void)imageCount{
+    
+    ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];    
+    
+    // Enumerate just the photos and videos group by using ALAssetsGroupSavedPhotos.
+    [library enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos                                                                   usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+        
+        // Within the group enumeration block, filter to enumerate just photos.
+        [group setAssetsFilter:[ALAssetsFilter allPhotos]];       
+        
+
+        [group enumerateAssetsUsingBlock:^(ALAsset *alAsset, NSUInteger index, BOOL *innerStop) {
+            
+            // The end of the enumeration is signaled by asset == nil.
+            if (alAsset) {
+            
+                counter++;
+                
+            } else {
+            
+                NSLog(@"photos count:%d", counter);                
+                [self.galleryTable reloadData];
+
+            }
+        }];
+    }
+                         failureBlock: ^(NSError *error) {
+                             // Typically you should handle an error more gracefully than this.
+                             NSLog(@"No groups");
+                         }];
+}
+
+-(void)load4ImagesAtaTime:(int)rowNumber image1:(UIImageView *)image1 image2:(UIImageView *)image2 image3:(UIImageView *)image3 image4:(UIImageView *)image4{
+    
+    ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+    
+    // Enumerate just the photos and videos group by using ALAssetsGroupSavedPhotos.
+    [library enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos                                                                   usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+        
+        // Within the group enumeration block, filter to enumerate just photos.
+        [group setAssetsFilter:[ALAssetsFilter allPhotos]];
+        
+        __block int imageCounter = 0;
+        for(int i=(rowNumber * 4); i<(rowNumber * 4) + 4; i++){
+
+            // Chooses the photo at the last index
+            [group enumerateAssetsAtIndexes:[NSIndexSet indexSetWithIndex:i] options:0 usingBlock:^(ALAsset *alAsset, NSUInteger index, BOOL *innerStop) {
+                
+                // The end of the enumeration is signaled by asset == nil.
+                if (alAsset) {
+                    
+                    ALAssetRepresentation *representation = [alAsset defaultRepresentation];
+                    NSDictionary *thumbnailOptions = [NSDictionary dictionaryWithObjectsAndKeys:
+                                                      (id)kCFBooleanTrue, (id)kCGImageSourceCreateThumbnailWithTransform,
+                                                      (id)kCFBooleanTrue, (id)kCGImageSourceCreateThumbnailFromImageAlways,
+                                                      (id)[NSNumber numberWithFloat:200], kCGImageSourceThumbnailMaxPixelSize,
+                                                      nil];
+
+                    if(imageCounter == 0){
+                        [image1 setImage:[UIImage imageWithCGImage:[representation CGImageWithOptions:thumbnailOptions]]];
+                        //[image1 setBackgroundImage:[UIImage imageWithCGImage:[representation CGImageWithOptions:thumbnailOptions]] forState:UIControlStateNormal];
+                    } else if(imageCounter == 1){
+                        [image2 setImage:[UIImage imageWithCGImage:[representation CGImageWithOptions:thumbnailOptions]]];
+                        //[image2 setBackgroundImage:[UIImage imageWithCGImage:[representation CGImageWithOptions:thumbnailOptions]] forState:UIControlStateNormal];
+                    } else if(imageCounter == 2){
+                        [image3 setImage:[UIImage imageWithCGImage:[representation CGImageWithOptions:thumbnailOptions]]];
+                        //[image3 setBackgroundImage:[UIImage imageWithCGImage:[representation CGImageWithOptions:thumbnailOptions]] forState:UIControlStateNormal];
+                    } else if(imageCounter == 3){
+                        [image4 setImage:[UIImage imageWithCGImage:[representation CGImageWithOptions:thumbnailOptions]]];
+                        //[image4 setBackgroundImage:[UIImage imageWithCGImage:[representation CGImageWithOptions:thumbnailOptions]] forState:UIControlStateNormal];
+                    }
+                    
+                    imageCounter++;
+                }
+            }];
+
+        }
+    } failureBlock: ^(NSError *error) {
+        // Typically you should handle an error more gracefully than this.
+        NSLog(@"No groups");
+    }];
 }
 
 @end

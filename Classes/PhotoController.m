@@ -27,7 +27,7 @@
 @synthesize templateBckgrnd,textBackgrnd,aHUD;
 @synthesize widthScrollView,heightScrollView,photoTabButton,widthTabButton,heightTabButton,photoImgView;
 @synthesize photoTouchFlag,lableTouchFlag,lableLocation,warningAlert;
-@synthesize takePhotoButton, cameraRollButton, takePhotoLabel, cameraRollLabel;
+@synthesize takePhotoButton, cameraRollButton, takePhotoLabel, cameraRollLabel, imgPickerFlag;
 
 
 
@@ -757,72 +757,45 @@
 	}
 }
 
--(void)openCamera{
-	
-    //CustomPhotoController *customPhotoController =
-    //[[CustomPhotoController alloc] initWithNibName:@"CustomPhotoController" bundle:nil];
-    //customPhotoController.callbackObject = self;
-    //customPhotoController.callbackOnComplete = @selector(onCompleteSelectingImage:);
-
-    //self.imgPicker.delegate = self;
-    self.imgPicker.sourceType = UIImagePickerControllerSourceTypeCamera | UIImagePickerControllerSourceTypePhotoLibrary;
-    //self.imgPicker.showsCameraControls = NO;
-    //self.imgPicker.cameraOverlayView = customPhotoController.view;
-    //self.imgPicker.wantsFullScreenLayout = YES;
-
-    [self presentModalViewController:self.imgPicker animated:YES];
-    //[customPhotoController release];
-}
-
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-
-    // Access the uncropped image from info dictionary
-    UIImage *image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
-    
-    // Show the custom controller and get this image cropped.
-    CustomPhotoController *customPhotoController =
-    [[CustomPhotoController alloc] initWithNibName:@"CustomPhotoController" bundle:nil];
-    customPhotoController.image = image;
-    customPhotoController.callbackObject = self;
-    customPhotoController.callbackOnComplete = @selector(onCompleteSelectingImage:);
-    [self.navigationController pushViewController:customPhotoController animated:YES];
-    [customPhotoController release];
-
-     [self dismissModalViewControllerAnimated:YES];
-
-    
-    
-    
-   // NSLog(@"Image Taken");
-   // [self.imgView setImage:info[UIImagePickerControllerOriginalImage]];
-   // [self dismissViewControllerAnimated:YES completion:nil];
-}
-
 /**
  * Completed image.
  */
 - (void) onCompleteSelectingImage:(UIImage *)selectedImage {
     
-	if(imgPickerFlag == 1){
+	if(self.imgPickerFlag == 1){
 		
 		//[[self.imgPicker parentViewController] dismissModalViewControllerAnimated:YES];
 		UIImage *testImage = [selectedImage retain];
 		[self.imgView setImage:testImage] ;
 	}
-	else if(imgPickerFlag == 2){
+	else if(self.imgPickerFlag == 2){
         
 		[[self.imgPicker parentViewController] dismissModalViewControllerAnimated:YES];
 		UIImage *testImage = [selectedImage retain];
 		[self.photoImgView setImage:testImage] ;
-		photoTouchFlag = YES;
-		lableTouchFlag = NO;
+		self.photoTouchFlag = YES;
+		self.lableTouchFlag = NO;
 	}
+}
+
+-(void)openCamera{
+    CameraOverlayView *cameraOverlay =[[CameraOverlayView alloc] initWithNibName:@"CameraOverlayView" bundle:nil];
+    cameraOverlay.photoController = self;
+    self.imgPicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    self.imgPicker.cameraOverlayView = cameraOverlay.view;
+    self.imgPicker.showsCameraControls = NO;
+    [self presentModalViewController:self.imgPicker animated:YES];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    
+    [self.imgView setImage:info[UIImagePickerControllerOriginalImage]];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark UIAlertView delegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-	if(alertView == warningAlert && buttonIndex == 1)
-	{
+	if(alertView == warningAlert && buttonIndex == 1) {
 		[navBar show:@"" left:@"" right:@""];
 		[self.view bringSubviewToFront:navBar];
 		[navBar.leftButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];

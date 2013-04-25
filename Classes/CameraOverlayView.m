@@ -7,41 +7,25 @@
 //
 
 #import "CameraOverlayView.h"
+#import "CustomPhotoController.h"
 
 @implementation CameraOverlayView
+@synthesize photoController, gridImageView, libraryLatestPhoto;
 
-- (id)initWithFrame:(CGRect)frame {
-    if (self = [super initWithFrame:frame]) {
-        //clear the background color of the overlay
-        self.opaque = NO;
-        self.backgroundColor = [UIColor clearColor];
-        
-        //show flash button
-        UIImageView *gridImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"main_area_bg"]];
-        [gridImage setFrame:frame];
-        [self addSubview:gridImage];
-
-        //show flash button
-        UIButton *flashButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 10, 30, 30)];
-        [flashButton setBackgroundImage:[UIImage imageNamed:@"menu_button"] forState:UIControlStateNormal];
-        [flashButton addTarget:self action:@selector(toggleFlash) forControlEvents:UIControlEventTouchUpInside];
-        
-        [self addSubview:flashButton];
-        [flashButton release];
-
-        //show flash button
-        UIButton *gridButton = [[UIButton alloc] initWithFrame:CGRectMake(50, 10, 30, 30)];
-        [gridButton setBackgroundImage:[UIImage imageNamed:@"menu_button"] forState:UIControlStateNormal];
-        [gridButton addTarget:self action:@selector(toggleGrid) forControlEvents:UIControlEventTouchUpInside];
-        
-        [self addSubview:gridButton];
-        [gridButton release];
-        
-    }
-    return self;
+-(void)viewDidLoad{
+    NSLog(@"Camera Overlay Loaded...");
+    
+    customPhotoController = [[CustomPhotoController alloc] initWithNibName:@"CustomPhotoController" bundle:nil];
+    
+    [self setLatestImage];
 }
 
--(void)toggleFlash {
+- (IBAction)onBack{
+    [self.photoController.imgPicker dismissModalViewControllerAnimated:YES];
+}
+
+- (IBAction)toggleFlash{
+    NSLog(@"Toggle Flash...");
     
     AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     
@@ -61,17 +45,70 @@
     }
 }
 
+- (IBAction)toggleGrid{
+    NSLog(@"Toggle Grid...");
+    [gridImageView setHidden:![gridImageView isHidden]];
+}
 
+- (IBAction)invertCamera{
+    NSLog(@"Invert Camera...");
+}
 
--(void)toggleGrid {
+- (IBAction)smile{
+    NSLog(@"Take picture...");
+    [photoController.imgPicker takePicture];
+}
 
-    NSLog(@"Toggle Grid");
+- (IBAction)loadLibrary{
+    NSLog(@"Load Library...");
     
-    //show flash button
-    UIImageView *gridImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"main_area_bg"]];
-    [gridImage setFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
-    [self addSubview:gridImage];
+    // Access the uncropped image from info dictionary
+    //UIImage *image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+    
+    // Show the custom controller and get this image cropped.
+    //customPhotoController.image = image;
+    customPhotoController.callbackObject = photoController;
+    customPhotoController.callbackOnComplete = @selector(onCompleteSelectingImage:);
+    [photoController.navigationController pushViewController:customPhotoController animated:YES];
+    [customPhotoController release];
+    [photoController dismissModalViewControllerAnimated:YES];
+}
 
+-(void)setLatestImage{
+    ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+    
+    // Enumerate just the photos and videos group by using ALAssetsGroupSavedPhotos.
+    [library enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+        
+        // Within the group enumeration block, filter to enumerate just photos.
+        [group setAssetsFilter:[ALAssetsFilter allPhotos]];
+        
+        // Chooses the photo at the last index
+        [group enumerateAssetsAtIndexes:[NSIndexSet indexSetWithIndex:([group numberOfAssets] - 1)] options:0 usingBlock:^(ALAsset *alAsset, NSUInteger index, BOOL *innerStop) {
+            
+            // The end of the enumeration is signaled by asset == nil.
+            if (alAsset) {
+                ALAssetRepresentation *representation = [alAsset defaultRepresentation];
+                UIImage *latestPhoto = [UIImage imageWithCGImage:[representation fullScreenImage]];
+                
+                if([latestPhoto isKindOfClass:[UIImageView class]]){
+                }
+                // Do something interesting with the AV asset.
+                [libraryLatestPhoto setBackgroundImage:latestPhoto forState:UIControlStateNormal];
+                customPhotoController.image = latestPhoto;
+                
+            }
+        }];
+    } failureBlock: ^(NSError *error) {
+        // Typically you should handle an error more gracefully than this.
+        NSLog(@"No groups");
+    }];
+}
+
+-(void)dealloc{
+    gridImageView = nil;
+    photoController = nil;
+    [super dealloc];
 }
 
 @end

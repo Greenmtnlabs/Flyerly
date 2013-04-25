@@ -7,9 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AssetsLibrary/AssetsLibrary.h>
+#import <ImageIO/ImageIO.h>
 
-@interface CustomPhotoController : UIViewController<UIScrollViewDelegate> {
+@interface CustomPhotoController : UIViewController<UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource> {
     
+    IBOutlet UITableView *galleryTable;
+    NSMutableArray *deviceContactItems;
+
     // Navigation bar state.
     BOOL    previosNavigationBarState;
     
@@ -27,11 +32,13 @@
     id  callbackObject;
 }
 
+@property (nonatomic, retain) IBOutlet UITableView *galleryTable;
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, retain) IBOutlet UIImageView *imageView;
 @property (nonatomic, retain) UIImage *image;
 @property (nonatomic, retain) id callbackObject;
 @property (nonatomic) SEL callbackOnComplete;
+@property(nonatomic,retain) NSMutableArray *deviceContactItems;
 
 - (IBAction)onSelectImage:(UIButton *)sender;
 

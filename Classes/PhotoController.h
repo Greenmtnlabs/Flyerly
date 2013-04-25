@@ -114,6 +114,8 @@
 @property (nonatomic, assign) CGPoint lableLocation;
 @property (nonatomic,retain) UIAlertView *warningAlert;
 
+@property (nonatomic, assign) NSInteger imgPickerFlag;
+
 - (void)showHUD;
 - (void)killHUD;
 -(void) chooseTemplate;

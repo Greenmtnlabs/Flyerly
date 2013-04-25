@@ -268,6 +268,11 @@
 		6560C1D3172812DC005BE8DD /* box_seperator@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6560C1CF172812DC005BE8DD /* box_seperator@2x.png */; };
 		6560C1D4172812DC005BE8DD /* crop_box.png in Resources */ = {isa = PBXBuildFile; fileRef = 6560C1D0172812DC005BE8DD /* crop_box.png */; };
 		6560C1D5172812DC005BE8DD /* crop_box@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6560C1D1172812DC005BE8DD /* crop_box@2x.png */; };
+		65A212441729196500ED0B9A /* CameraOverlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65A212431729196500ED0B9A /* CameraOverlayView.xib */; };
+		65A212461729496F00ED0B9A /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65A212451729496F00ED0B9A /* AssetsLibrary.framework */; };
+		65A2126317295F1900ED0B9A /* CustomGalleryItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65A2126217295F1900ED0B9A /* CustomGalleryItem.xib */; };
+		65A21266172960AB00ED0B9A /* CustomGalleryItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A21265172960AB00ED0B9A /* CustomGalleryItem.m */; };
+		65A21268172981A000ED0B9A /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65A212671729819F00ED0B9A /* ImageIO.framework */; };
 		65A2CEFA1725494F005C03B7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65A2CEF8172548D6005C03B7 /* AVFoundation.framework */; };
 		65A2CEFD172558A0005C03B7 /* CameraOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A2CEFC172558A0005C03B7 /* CameraOverlayView.m */; };
 		65A2CF82172573AA005C03B7 /* Facebook.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A2CF00172573A9005C03B7 /* Facebook.m */; };
@@ -724,6 +729,12 @@
 		6560C1CF172812DC005BE8DD /* box_seperator@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "box_seperator@2x.png"; sourceTree = "<group>"; };
 		6560C1D0172812DC005BE8DD /* crop_box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = crop_box.png; sourceTree = "<group>"; };
 		6560C1D1172812DC005BE8DD /* crop_box@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "crop_box@2x.png"; sourceTree = "<group>"; };
+		65A212431729196500ED0B9A /* CameraOverlayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraOverlayView.xib; sourceTree = "<group>"; };
+		65A212451729496F00ED0B9A /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		65A2126217295F1900ED0B9A /* CustomGalleryItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CustomGalleryItem.xib; path = Classes/CustomGalleryItem.xib; sourceTree = "<group>"; };
+		65A21264172960AA00ED0B9A /* CustomGalleryItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomGalleryItem.h; sourceTree = "<group>"; };
+		65A21265172960AB00ED0B9A /* CustomGalleryItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomGalleryItem.m; sourceTree = "<group>"; };
+		65A212671729819F00ED0B9A /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		65A2CEF8172548D6005C03B7 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		65A2CEFB172558A0005C03B7 /* CameraOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraOverlayView.h; sourceTree = "<group>"; };
 		65A2CEFC172558A0005C03B7 /* CameraOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraOverlayView.m; sourceTree = "<group>"; };
@@ -969,6 +980,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65A21268172981A000ED0B9A /* ImageIO.framework in Frameworks */,
+				65A212461729496F00ED0B9A /* AssetsLibrary.framework in Frameworks */,
 				65A2CFC3172574F4005C03B7 /* AdSupport.framework in Frameworks */,
 				65A2CFC117257480005C03B7 /* Social.framework in Frameworks */,
 				65A2CEFA1725494F005C03B7 /* AVFoundation.framework in Frameworks */,
@@ -1026,6 +1039,8 @@
 				65A2CEFC172558A0005C03B7 /* CameraOverlayView.m */,
 				6560C1BD1727F5C7005BE8DD /* CustomPhotoController.h */,
 				6560C1BE1727F5C7005BE8DD /* CustomPhotoController.m */,
+				65A21264172960AA00ED0B9A /* CustomGalleryItem.h */,
+				65A21265172960AB00ED0B9A /* CustomGalleryItem.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1401,6 +1416,8 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				65A212671729819F00ED0B9A /* ImageIO.framework */,
+				65A212451729496F00ED0B9A /* AssetsLibrary.framework */,
 				65A2CFC2172574F3005C03B7 /* AdSupport.framework */,
 				65A2CFC01725747F005C03B7 /* Social.framework */,
 				65A2CEF8172548D6005C03B7 /* AVFoundation.framework */,
@@ -1429,6 +1446,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				65A2126217295F1900ED0B9A /* CustomGalleryItem.xib */,
 				65CC0AB5171802DF003D0BE7 /* Settings.bundle */,
 				8D1107310486CEB800E47090 /* Flyr-Info.plist */,
 				65E26156171C2EC400C485B5 /* AddFriendScreen.xib */,
@@ -1446,6 +1464,7 @@
 				65E26180171C59D100C485B5 /* AddFriendItem.xib */,
 				654B254F17202B1C0047C8F6 /* AfterUpdateController.xib */,
 				6560C1C01727F836005BE8DD /* CustomPhotoController.xib */,
+				65A212431729196500ED0B9A /* CameraOverlayView.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -2039,6 +2058,8 @@
 				6560C1D3172812DC005BE8DD /* box_seperator@2x.png in Resources */,
 				6560C1D4172812DC005BE8DD /* crop_box.png in Resources */,
 				6560C1D5172812DC005BE8DD /* crop_box@2x.png in Resources */,
+				65A212441729196500ED0B9A /* CameraOverlayView.xib in Resources */,
+				65A2126317295F1900ED0B9A /* CustomGalleryItem.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2138,6 +2159,7 @@
 				65A2CFBB17257416005C03B7 /* FBBase64.m in Sources */,
 				65A2CFBF1725742D005C03B7 /* FBCrypto.m in Sources */,
 				6560C1BF1727F5C7005BE8DD /* CustomPhotoController.m in Sources */,
+				65A21266172960AB00ED0B9A /* CustomGalleryItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
