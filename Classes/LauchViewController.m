@@ -80,17 +80,17 @@
     // Set the background image on navigation bar
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_with_logo"] forBarMetrics:UIBarMetricsDefault];
     
+    [self.navigationItem setHidesBackButton:YES];
     // Create right bar button
-    UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 31, 30)];
-    [menuButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-    [menuButton setBackgroundImage:[UIImage imageNamed:@"menu_button"] forState:UIControlStateNormal];
-    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
+    //UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 31, 30)];
+    //[menuButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+    //[menuButton setBackgroundImage:[UIImage imageNamed:@"menu_button"] forState:UIControlStateNormal];
+    //UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
     
-    [self.navigationItem setRightBarButtonItem:rightBarButton];
+    //[self.navigationItem setRightBarButtonItem:rightBarButton];
 
     // Set left bar items
-    [self.navigationItem setLeftBarButtonItems: [self leftBarItems]];
-    
+    //[self.navigationItem setLeftBarButtonItems: [self leftBarItems]];   
     
     loadingViewFlag = NO;
 }

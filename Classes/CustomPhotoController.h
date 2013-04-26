@@ -13,7 +13,7 @@
 @interface CustomPhotoController : UIViewController<UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource> {
     
     IBOutlet UITableView *galleryTable;
-    NSMutableArray *deviceContactItems;
+    //NSMutableArray *deviceContactItems;
 
     // Navigation bar state.
     BOOL    previosNavigationBarState;
@@ -38,7 +38,7 @@
 @property (nonatomic, retain) UIImage *image;
 @property (nonatomic, retain) id callbackObject;
 @property (nonatomic) SEL callbackOnComplete;
-@property(nonatomic,retain) NSMutableArray *deviceContactItems;
+//@property(nonatomic,retain) NSMutableArray *deviceContactItems;
 
 - (IBAction)onSelectImage:(UIButton *)sender;
 

@@ -19,7 +19,7 @@
         UIImageView *imageView = (UIImageView *) [touch view];
         controller.imageView.image = imageView.image;
         controller.image = imageView.image;
-        [imageView release];
+        //[imageView release];
     }
 }
 

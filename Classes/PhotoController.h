@@ -29,6 +29,7 @@
 	UIScrollView *fontScrollView;
 	UIScrollView *colorScrollView;
 	UIScrollView *sizeScrollView;
+	UIScrollView *borderScrollView;
 	UIScrollView *templateScrollView;
 	UIScrollView *heightScrollView;
 	UIScrollView *widthScrollView;
@@ -55,6 +56,7 @@
 	UIButton *fontTabButton;
 	UIButton *colorTabButton;
 	UIButton *sizeTabButton;
+	UIButton *borderTabButton;
 
 	UIButton *photoTabButton;
 	UIButton *widthTabButton;
@@ -69,6 +71,7 @@
 	NSMutableArray *iconArray;
 
 	NSArray *colorArray;
+	NSArray *borderArray;
 	NSArray *fontArray;
 	UIAlertView *warningAlert ;
 }
@@ -91,6 +94,7 @@
 @property (nonatomic, retain) UIScrollView *fontScrollView;
 @property (nonatomic, retain) UIScrollView *colorScrollView;
 @property (nonatomic, retain) UIScrollView *sizeScrollView;
+@property (nonatomic, retain) UIScrollView *borderScrollView;
 @property (nonatomic,retain) UIScrollView *heightScrollView;
 @property (nonatomic,retain) UIScrollView *widthScrollView;
 
@@ -103,6 +107,7 @@
 @property (nonatomic, retain) UIButton *fontTabButton;
 @property (nonatomic, retain) UIButton *colorTabButton;
 @property (nonatomic, retain) UIButton *sizeTabButton;
+@property (nonatomic, retain) UIButton *borderTabButton;
 @property (nonatomic, retain) UIImage *finalFlyer;
 
 @property (nonatomic,retain) UIButton *photoTabButton;

@@ -12,8 +12,16 @@
 @implementation CameraOverlayView
 @synthesize photoController, gridImageView, libraryLatestPhoto;
 
+#define HEIGHT_IPHONE_5 568
+#define IS_IPHONE   ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+#define IS_IPHONE_5 ([[UIScreen mainScreen] bounds ].size.height == HEIGHT_IPHONE_5 )
+
 -(void)viewDidLoad{
     NSLog(@"Camera Overlay Loaded...");
+    
+    if (IS_IPHONE_5) {
+        self.view.frame = CGRectMake(0, 0, 320, HEIGHT_IPHONE_5);
+    }
     
     customPhotoController = [[CustomPhotoController alloc] initWithNibName:@"CustomPhotoController" bundle:nil];
     
@@ -108,6 +116,7 @@
 -(void)dealloc{
     gridImageView = nil;
     photoController = nil;
+    libraryLatestPhoto = nil;
     [super dealloc];
 }
 

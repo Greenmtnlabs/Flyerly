@@ -14,8 +14,7 @@
 #define IMAGE_HEIGHT 400
 #define IMAGE_WIDTH  320
 @implementation CustomPhotoController
-
-@synthesize scrollView, imageView, image, callbackObject, callbackOnComplete, galleryTable, deviceContactItems;
+@synthesize scrollView, imageView, image, callbackObject, callbackOnComplete, galleryTable;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -28,7 +27,7 @@
 }
 
 - (void)dealloc {
-    [deviceContactItems release];
+    //[deviceContactItems release];
     [galleryTable release];
     [scrollView release];
     [imageView release];
@@ -230,14 +229,10 @@
     [imageView setImage:self.image];
     [imageView setFrame:CGRectMake((contentSize.width - imageSize.width)/2,
                                    (contentSize.height - imageSize.height)/2,
-                                   imageSize.width, imageSize.height)];
-    
+                                   imageSize.width, imageSize.height)];   
 
     
     [self imageCount];
-    
-    // Reload table data after all the contacts get loaded
-    //[self.galleryTable reloadData];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -289,41 +284,47 @@
     int count = counter/4;
     
     counter =  0;
-    [self.deviceContactItems release];
-    self.deviceContactItems = nil;
-    self.deviceContactItems = [[NSMutableArray alloc] init];
+    //[self.deviceContactItems release];
+    //self.deviceContactItems = nil;
+    //self.deviceContactItems = [[NSMutableArray alloc] init];
 
     return count;
 }
 
-static NSString *cellId = @"CustomGalleryItem";
 int counter = 0;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     // init cell array if null
-    if(!self.deviceContactItems){
-        self.deviceContactItems = [[NSMutableArray alloc] init];
-    }
+    //if(!self.deviceContactItems){
+    //    self.deviceContactItems = [[NSMutableArray alloc] init];
+    //}
 
-    // Get cell
-    //CustomGalleryItem *cell = (CustomGalleryItem *) [tableView dequeueReusableCellWithIdentifier:cellId];
-    CustomGalleryItem *cell = nil;
+    //NSLog(@"Cell Index: %d", indexPath.row);
     
-    if([self.deviceContactItems count] > indexPath.row){
-        NSLog(@"Reusing Cell at index: %d", indexPath.row);
-        cell = [self.deviceContactItems objectAtIndex:indexPath.row];
-    }
+    NSString *cellId = @"CustomGalleryItem";
+    
+    // Get cell
+    CustomGalleryItem *cell = (CustomGalleryItem *) [tableView dequeueReusableCellWithIdentifier:cellId];
+    //CustomGalleryItem *cell = nil;
+    
+    //if([self.deviceContactItems count] > indexPath.row){
+    //    NSLog(@"Reusing Cell at index: %d", indexPath.row);
+    //    cell = [self.deviceContactItems objectAtIndex:indexPath.row];
+    //}
 
     if (cell == nil) {
         NSArray *nib=[[NSBundle mainBundle] loadNibNamed:cellId owner:self options:nil];
-        cell=[nib objectAtIndex:0];
+        cell=(CustomGalleryItem *)[nib objectAtIndex:0];
+        //cell = [[CustomGalleryItem alloc]
+        //        initWithStyle:uitableviewce
+        //        reuseIdentifier:cellId];
         
-        cell.controller = self;
-        [self load4ImagesAtaTime:indexPath.row image1:cell.image1 image2:cell.image2 image3:cell.image3 image4:cell.image4];
     }
     
-    [self.deviceContactItems addObject:cell];
+    cell.controller = self;
+    [self load4ImagesAtaTime:indexPath.row image1:cell.image1 image2:cell.image2 image3:cell.image3 image4:cell.image4];
+    //[self.deviceContactItems addObject:cell];
 
     // return cell
     return cell;
@@ -363,8 +364,14 @@ int counter = 0;
 
 -(void)load4ImagesAtaTime:(int)rowNumber image1:(UIImageView *)image1 image2:(UIImageView *)image2 image3:(UIImageView *)image3 image4:(UIImageView *)image4{
     
-    ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+    ALAssetsLibrary *library = [[[ALAssetsLibrary alloc] init] autorelease];
     
+    //NSDictionary *thumbnailOptions = [NSDictionary dictionaryWithObjectsAndKeys:
+    //                                  (id)kCFBooleanTrue, kCGImageSourceCreateThumbnailWithTransform,
+    //                                  (id)kCFBooleanTrue, kCGImageSourceCreateThumbnailFromImageAlways,
+    //                                  (id)[NSNumber numberWithFloat:50], kCGImageSourceThumbnailMaxPixelSize,
+    //                                  nil];
+
     // Enumerate just the photos and videos group by using ALAssetsGroupSavedPhotos.
     [library enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos                                                                   usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
         
@@ -380,24 +387,27 @@ int counter = 0;
                 // The end of the enumeration is signaled by asset == nil.
                 if (alAsset) {
                     
-                    ALAssetRepresentation *representation = [alAsset defaultRepresentation];
-                    NSDictionary *thumbnailOptions = [NSDictionary dictionaryWithObjectsAndKeys:
-                                                      (id)kCFBooleanTrue, (id)kCGImageSourceCreateThumbnailWithTransform,
-                                                      (id)kCFBooleanTrue, (id)kCGImageSourceCreateThumbnailFromImageAlways,
-                                                      (id)[NSNumber numberWithFloat:200], kCGImageSourceThumbnailMaxPixelSize,
-                                                      nil];
-
+                    //ALAssetRepresentation *representation = [alAsset defaultRepresentation];
+                    //NSLog(@"image index: %d", i);
+                    
                     if(imageCounter == 0){
-                        [image1 setImage:[UIImage imageWithCGImage:[representation CGImageWithOptions:thumbnailOptions]]];
+                        
+                        //UIImage *immm = [self thumbnailForAsset:alAsset maxPixelSize:50];
+                        //UIImage *immm =[UIImage imageWithCGImage:[representation CGImageWithOptions:thumbnailOptions]];
+                        //NSLog(@"Image Width: %f", immm.size.width);
+                        //NSLog(@"Image Height: %f", immm.size.height);
+                        [image1 setImage:[self thumbnailForAsset:alAsset maxPixelSize:90]];
+                        
+                        //[image1 setImage:[UIImage imageWithCGImage:[representation CGImageWithOptions:thumbnailOptions]]];
                         //[image1 setBackgroundImage:[UIImage imageWithCGImage:[representation CGImageWithOptions:thumbnailOptions]] forState:UIControlStateNormal];
                     } else if(imageCounter == 1){
-                        [image2 setImage:[UIImage imageWithCGImage:[representation CGImageWithOptions:thumbnailOptions]]];
+                        [image2 setImage:[self thumbnailForAsset:alAsset maxPixelSize:90]];
                         //[image2 setBackgroundImage:[UIImage imageWithCGImage:[representation CGImageWithOptions:thumbnailOptions]] forState:UIControlStateNormal];
                     } else if(imageCounter == 2){
-                        [image3 setImage:[UIImage imageWithCGImage:[representation CGImageWithOptions:thumbnailOptions]]];
+                        [image3 setImage:[self thumbnailForAsset:alAsset maxPixelSize:90]];
                         //[image3 setBackgroundImage:[UIImage imageWithCGImage:[representation CGImageWithOptions:thumbnailOptions]] forState:UIControlStateNormal];
                     } else if(imageCounter == 3){
-                        [image4 setImage:[UIImage imageWithCGImage:[representation CGImageWithOptions:thumbnailOptions]]];
+                        [image4 setImage:[self thumbnailForAsset:alAsset maxPixelSize:90]];
                         //[image4 setBackgroundImage:[UIImage imageWithCGImage:[representation CGImageWithOptions:thumbnailOptions]] forState:UIControlStateNormal];
                     }
                     
@@ -410,6 +420,63 @@ int counter = 0;
         // Typically you should handle an error more gracefully than this.
         NSLog(@"No groups");
     }];
+}
+
+- (UIImage *)thumbnailForAsset:(ALAsset *)asset maxPixelSize:(NSUInteger)size {
+    NSParameterAssert(asset != nil);
+    NSParameterAssert(size > 0);
+    
+    ALAssetRepresentation *rep = [asset defaultRepresentation];
+    
+    CGDataProviderDirectCallbacks callbacks = {
+        .version = 0,
+        .getBytePointer = NULL,
+        .releaseBytePointer = NULL,
+        .getBytesAtPosition = getAssetBytesCallback,
+        .releaseInfo = releaseAssetCallback,
+    };
+    
+    CGDataProviderRef provider = CGDataProviderCreateDirect((void *)CFBridgingRetain(rep), [rep size], &callbacks);
+    CGImageSourceRef source = CGImageSourceCreateWithDataProvider(provider, NULL);
+    
+    CGImageRef imageRef = CGImageSourceCreateThumbnailAtIndex(source, 0, (__bridge CFDictionaryRef) @{
+                                                              (NSString *)kCGImageSourceCreateThumbnailFromImageAlways : @YES,
+                                                              (NSString *)kCGImageSourceThumbnailMaxPixelSize : [NSNumber numberWithInt:size],
+                                                              (NSString *)kCGImageSourceCreateThumbnailWithTransform : @YES,
+                                                              });
+    CFRelease(source);
+    CFRelease(provider);
+    
+    if (!imageRef) {
+        return nil;
+    }
+    
+    UIImage *toReturn = [UIImage imageWithCGImage:imageRef];
+    
+    CFRelease(imageRef);
+    
+    return toReturn;
+}
+
+// Helper methods for thumbnailForAsset:maxPixelSize:
+static size_t getAssetBytesCallback(void *info, void *buffer, off_t position, size_t count) {
+    ALAssetRepresentation *rep = (__bridge id)info;
+    
+    NSError *error = nil;
+    size_t countRead = [rep getBytes:(uint8_t *)buffer fromOffset:position length:count error:&error];
+    
+    if (countRead == 0 && error) {
+        // We have no way of passing this info back to the caller, so we log it, at least.
+        NSLog(@"thumbnailForAsset:maxPixelSize: got an error reading an asset: %@", error);
+    }
+    
+    return countRead;
+}
+
+static void releaseAssetCallback(void *info) {
+    // The info here is an ALAssetRepresentation which we CFRetain in thumbnailForAsset:maxPixelSize:.
+    // This release balances that retain.
+    CFRelease(info);
 }
 
 @end

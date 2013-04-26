@@ -151,8 +151,13 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
     [saveFlyrLabel setText:@"Share flyer"];
     UIBarButtonItem *barLabel = [[UIBarButtonItem alloc] initWithCustomView:saveFlyrLabel];
 
-    UIBarButtonItem *shareBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Share" style:UIControlStateNormal
-                                                                      target:nil action:nil ];
+    // Create left bar help button
+    UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 54, 35)];
+    [shareButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+    [shareButton setBackgroundImage:[UIImage imageNamed:@"create_button"] forState:UIControlStateNormal];
+    UIBarButtonItem *shareBarButton = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
+    //UIBarButtonItem *shareBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Share" style:UIControlStateNormal
+    //                                                                  target:nil action:nil ];
     
     return [NSMutableArray arrayWithObjects:shareBarButton,barLabel,nil];
 }

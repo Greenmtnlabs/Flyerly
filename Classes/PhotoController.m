@@ -19,11 +19,11 @@
 
 @implementation PhotoController
 @synthesize imgView,imgPicker;
-@synthesize fontScrollView,colorScrollView,templateScrollView,sizeScrollView;
+@synthesize fontScrollView,colorScrollView,templateScrollView,sizeScrollView,borderScrollView;
 @synthesize msgTextView,finalFlyer;
 @synthesize selectedFont,selectedColor,navBar;
 @synthesize selectedTemplate;
-@synthesize fontTabButton,colorTabButton,sizeTabButton,selectedText,selectedSize;
+@synthesize fontTabButton,colorTabButton,sizeTabButton,selectedText,selectedSize,borderTabButton;
 @synthesize templateBckgrnd,textBackgrnd,aHUD;
 @synthesize widthScrollView,heightScrollView,photoTabButton,widthTabButton,heightTabButton,photoImgView;
 @synthesize photoTouchFlag,lableTouchFlag,lableLocation,warningAlert;
@@ -115,8 +115,9 @@
 	[photoImgView setUserInteractionEnabled:NO];
 
 	templateBckgrnd = [[UIImageView alloc]initWithFrame:CGRectMake(0, 395, 320, 65)];
-	templateBckgrnd.image = [UIImage imageNamed:@"scroll1.png"];
-	[self.view addSubview:templateBckgrnd];
+	//templateBckgrnd.image = [UIImage imageNamed:@"scroll1.png"];
+    templateBckgrnd.image = [UIImage imageNamed:@"ad_bg_bg"];
+    [self.view addSubview:templateBckgrnd];
 	templateBckgrnd.alpha = ALPHA0;
 	
 	textBackgrnd = [[UIImageView alloc]initWithFrame:CGRectMake(0, 385, 320, 44)];
@@ -140,6 +141,7 @@
 	fontScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(-320, 385,320,44)];
 	colorScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(-320, 385,320,44)];
 	sizeScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(-320, 385, 320, 44)];
+	borderScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(-320, 385, 320, 44)];
 	widthScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(-320, 385,320,44)];
 	heightScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(-320, 385, 320, 44)];
 	
@@ -168,13 +170,15 @@
 		
 		UIButton *templateButton = [UIButton  buttonWithType:UIButtonTypeCustom];
 		templateButton.frame =CGRectMake(0, 5,templateScrollWidth, templateScrollHeight);
-		[templateButton setBackgroundImage:[UIImage imageNamed:@"button1.png"] forState:UIControlStateNormal];
+        [templateButton setBackgroundColor:[UIColor whiteColor]];
+		//[templateButton setBackgroundImage:[UIImage imageNamed:@"white_bg_thumbnail"] forState:UIControlStateNormal];
+		//[templateButton setBackgroundImage:[UIImage imageNamed:@"button1.png"] forState:UIControlStateNormal];
 		
 		//UIImageView *img = [[[UIImageView alloc]initWithFrame:CGRectMake(templateButton.frame.origin.x+5, templateButton.frame.origin.y+2, templateButton.frame.size.width-10, templateButton.frame.size.height-14)]autorelease];
 		//[img setImage:iconImg];
 		UIImageView *img = [[UIImageView alloc]initWithImage:iconImg];
 		//[img initWithImage:iconImg];
-		img.frame  = CGRectMake(templateButton.frame.origin.x+5, templateButton.frame.origin.y+2, templateButton.frame.size.width-10, templateButton.frame.size.height-14);
+		img.frame  = CGRectMake(templateButton.frame.origin.x+5, templateButton.frame.origin.y-2, templateButton.frame.size.width-10, templateButton.frame.size.height-7);
 		[templateButton addSubview:img];
 		//templateButton.alpha = ALPHA1;
 		templateButton.tag = i;	
@@ -277,13 +281,32 @@
 		[size setTitle:sizeValue forState:UIControlStateNormal];
 		[size.titleLabel setFont:[UIFont fontWithName:@"Arial-BoldMT" size:15]];
 		[size setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-		size.tag = i+60;	
+		size.tag = i+60;
 		size.alpha = ALPHA1;
 		[sizeScrollView addSubview:size];
 		//[size release];
 	}
 	
-	
+    borderArray = 	[[NSArray  alloc] initWithObjects: [UIColor blackColor], [UIColor grayColor], [UIColor darkGrayColor], [UIColor blueColor], [UIColor purpleColor], [UIColor colorWithRed:115.0/255.0 green:134.0/255.0 blue:144.0/255.0 alpha:1], [UIColor orangeColor], [UIColor greenColor], [UIColor redColor], [UIColor colorWithRed:14.0/255.0 green:95.0/255.0 blue:111.0/255.0 alpha:1], [UIColor colorWithRed:180.0/255.0 green:180.0/255.0 blue:149.0/255.0 alpha:1], [UIColor colorWithRed:228.0/255.0 green:128.0/255.0 blue:144.0/255.0 alpha:1], [UIColor colorWithRed:213.0/255.0 green:110.0/255.0 blue:86.0/255.0 alpha:1],[UIColor colorWithRed:156.0/255.0 green:195.0/255.0 blue:233.0/255.0 alpha:1],[UIColor colorWithRed:27.0/255.0 green:70.0/255.0 blue:148.0/255.0 alpha:1],[UIColor colorWithRed:234.0/255.0 green:230.0/255.0 blue:51.0/255.0 alpha:1],[UIColor cyanColor], [UIColor colorWithRed:232.0/255.0 green:236.0/255.0 blue:51.0/224.0 alpha:1],[UIColor magentaColor],[UIColor colorWithRed:57.0/255.0 green:87.0/255.0 blue:13.0/224.0 alpha:1], [UIColor colorWithRed:93.0/255.0 green:97.0/255.0 blue:196.0/224.0 alpha:1],nil];	
+
+    NSInteger borderScrollWidth = 44;
+	NSInteger borderScrollHeight = 35;
+	for (int i = 1; i <=  [borderArray count] ; i++)
+	{
+		UIButton *color = [UIButton buttonWithType:UIButtonTypeCustom];
+		color.frame = CGRectMake(0, 5, borderScrollWidth, borderScrollHeight);
+		//[color setBackgroundImage:[UIImage imageNamed:@"button1.png"] forState:UIControlStateNormal];
+		UIColor *colorName =[borderArray objectAtIndex:(i-1)];
+		UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(color.frame.origin.x, color.frame.origin.y-3, color.frame.size.width, color.frame.size.height)];
+        label.layer.borderColor = colorName.CGColor;
+        label.layer.borderWidth = 3.0;
+		[color addSubview:label];
+		color.tag = i+90;
+		color.alpha = ALPHA1;
+		[borderScrollView addSubview:color];
+		//[color release];
+	}
+
 	NSInteger widthScrollWidth = 44;
 	NSInteger widthScrollHeight = 35;
 	for (int i = 1; i <=[WIDTH_ARRAY count] ; i++)
@@ -362,6 +385,17 @@
 	[self.view addSubview:sizeScrollView];
 	[self layoutScrollImages:sizeScrollView scrollWidth:sizeScrollWidth scrollHeight:sizeScrollHeight];
 	
+	[borderScrollView setCanCancelContentTouches:NO];
+	borderScrollView.indicatorStyle = UIScrollViewIndicatorStyleBlack;
+	borderScrollView.clipsToBounds = YES;
+	borderScrollView.scrollEnabled = YES;
+	borderScrollView.pagingEnabled = NO;
+	borderScrollView.showsHorizontalScrollIndicator = NO;
+	borderScrollView.showsVerticalScrollIndicator = NO;
+	borderScrollView.alpha = ALPHA0;
+	[self.view addSubview:borderScrollView];
+	[self layoutScrollImages:borderScrollView scrollWidth:borderScrollWidth scrollHeight:borderScrollHeight];
+
 	[widthScrollView setCanCancelContentTouches:NO];
 	widthScrollView.indicatorStyle = UIScrollViewIndicatorStyleBlack;
 	widthScrollView.clipsToBounds = YES;	
@@ -424,6 +458,16 @@
 	sizeTabButton.tag = 10003;
 	[self.view addSubview:sizeTabButton];
 
+	borderTabButton =[UIButton buttonWithType:UIButtonTypeCustom];
+	borderTabButton.frame = CGRectMake(239, 415, 81, 46);
+	[borderTabButton setBackgroundImage:[UIImage imageNamed:@"outline_button"] forState:UIControlStateNormal];
+	[borderTabButton.titleLabel setFont:[UIFont fontWithName:@"Arial-BoldMT" size:15]];
+	[borderTabButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+	[borderTabButton addTarget:self action:@selector(setStyleTabAction:) forControlEvents:UIControlEventTouchUpInside];
+	borderTabButton.alpha =  ALPHA0;
+	borderTabButton.tag = 10004;
+	[self.view addSubview:borderTabButton];
+    
 	photoTabButton =[UIButton buttonWithType:UIButtonTypeCustom];
 	photoTabButton.frame = CGRectMake(-1, 429, 107, 32);
 	[photoTabButton setBackgroundImage:[UIImage imageNamed:@"tabButton.png"] forState:UIControlStateNormal];
@@ -523,7 +567,7 @@
 	appDele.changesFlag = YES;
 	int  i=1;
 	UIButton *view = sender;
-	for(UIView *tempView  in [sizeScrollView subviews]) 
+	for(UIView *tempView  in [sizeScrollView subviews])
 	{
 		if(tempView == view)
 		{
@@ -540,6 +584,24 @@
 	}
 }
 
+-(void)selectBorder:(id)sender
+{
+	FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
+	appDele.changesFlag = YES;
+	int  i=1;
+	UIButton *view = sender;
+	for(UIView *tempView  in [borderScrollView subviews])
+	{
+		if(tempView == view)
+		{
+			UIColor *borderColor = [borderArray objectAtIndex:i-1];
+            
+            imgView.layer.borderColor = borderColor.CGColor;
+            imgView.layer.borderWidth = 3.0;
+		}
+		i++;
+	}
+}
 
 -(void)selectWidth:(id)sender{
 	FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
@@ -663,7 +725,26 @@
 		}
 		[sizeScrollView setContentSize:CGSizeMake((  [SIZE_ARRAY count]*(kScrollObjWidth+5)), [sizeScrollView bounds].size.height)];
 	}
-	else if (selectedScrollView == widthScrollView)
+    else if (selectedScrollView == borderScrollView)
+	{
+		UIButton *view = nil;
+		NSArray *subviews = [borderScrollView subviews];
+		
+		CGFloat curXLoc = 0;
+		for (view in subviews)
+		{
+			if ([view isKindOfClass:[UIButton class]])
+			{
+				CGRect frame = view.frame;
+				frame.origin = CGPointMake(curXLoc, 5);
+				view.frame = frame;
+				curXLoc += (kScrollObjWidth)+5;
+				[view addTarget:self action:@selector(selectBorder:) forControlEvents:UIControlEventTouchUpInside];
+				
+			}
+		}
+		[borderScrollView setContentSize:CGSizeMake((  [borderArray count]*(kScrollObjWidth+5)), [borderScrollView bounds].size.height)];
+	}	else if (selectedScrollView == widthScrollView)
 	{
 		UIButton *view = nil;
 		NSArray *subviews = [widthScrollView subviews];
@@ -859,6 +940,7 @@
 	fontTabButton.alpha = ALPHA0;
 	colorTabButton.alpha = ALPHA0;
 	sizeTabButton.alpha = ALPHA0;
+	borderTabButton.alpha = ALPHA0;
 	[msgTextView removeFromSuperview];
 	[UIView commitAnimations];
 
@@ -919,6 +1001,7 @@
 	fontScrollView.frame = CGRectMake(-320, 385, 320, 44);
 	colorScrollView.frame = CGRectMake(-320, 385, 320, 44);
 	sizeScrollView.frame = CGRectMake(-320, 385, 320, 44);
+	borderScrollView.frame = CGRectMake(-320, 385, 320, 44);
 	[UIView commitAnimations];
 
 }
@@ -944,20 +1027,24 @@
 	fontScrollView.frame = CGRectMake(0, 360, 320, 44);
 	colorScrollView.frame = CGRectMake(0, 360, 320, 44);
 	sizeScrollView.frame = CGRectMake(0, 360, 320, 44);
+	borderScrollView.frame = CGRectMake(0, 360, 320, 44);
 	textBackgrnd.alpha = ALPHA1;
 	fontScrollView.alpha = ALPHA1;
 	colorScrollView.alpha = ALPHA0;
 	sizeScrollView.alpha = ALPHA0;
-	
-	[fontTabButton setBackgroundImage:[UIImage imageNamed:@"font_button"] forState:UIControlStateNormal];
+    borderScrollView.alpha = ALPHA0;
+
+	[fontTabButton setBackgroundImage:[UIImage imageNamed:@"font_button_selected"] forState:UIControlStateNormal];
 	//[fontTabButton setBackgroundImage:[UIImage imageNamed:@"selTab.png"] forState:UIControlStateNormal];
 	//[colorTabButton setBackgroundImage:[UIImage imageNamed:@"tabButton.png"] forState:UIControlStateNormal];
     [colorTabButton setBackgroundImage:[UIImage imageNamed:@"color_button"] forState:UIControlStateNormal];
     //[sizeTabButton setBackgroundImage:[UIImage imageNamed:@"tabButton.png"] forState:UIControlStateNormal];
     [sizeTabButton setBackgroundImage:[UIImage imageNamed:@"size_button"] forState:UIControlStateNormal];
+    [borderTabButton setBackgroundImage:[UIImage imageNamed:@"outline_button"] forState:UIControlStateNormal];
 	fontTabButton.alpha = ALPHA1;
 	colorTabButton.alpha = ALPHA1;
 	sizeTabButton.alpha = ALPHA1;
+	borderTabButton.alpha = ALPHA1;
 	msgLabel.alpha=1;
 	
 	
@@ -1022,9 +1109,11 @@
 	fontTabButton.alpha = ALPHA0;
 	colorTabButton.alpha = ALPHA0;
 	sizeTabButton.alpha = ALPHA0;
+	borderTabButton.alpha = ALPHA0;
 	fontScrollView.frame = CGRectMake(-320, 385, 320, 44);
 	colorScrollView.frame = CGRectMake(-320, 385, 320, 44);
 	sizeScrollView.frame = CGRectMake(-320, 385, 320, 44);
+	borderScrollView.frame = CGRectMake(-320, 385, 320, 44);
 	msgLabel.alpha=1;
 	[photoTabButton setBackgroundImage:[UIImage imageNamed:@"tabButton.png"] forState:UIControlStateNormal];
 	[widthTabButton setBackgroundImage:[UIImage imageNamed:@"selTab.png"] forState:UIControlStateNormal];
@@ -1075,10 +1164,12 @@
 	fontTabButton.alpha = ALPHA0;
 	colorTabButton.alpha = ALPHA0;
 	sizeTabButton.alpha = ALPHA0;
+	borderTabButton.alpha = ALPHA0;
 	textBackgrnd.alpha = ALPHA0;
 	fontScrollView.frame = CGRectMake(-320, 385, 320, 44);
 	colorScrollView.frame = CGRectMake(-320, 385, 320, 44);
 	sizeScrollView.frame = CGRectMake(-320, 385, 320, 44);
+	borderScrollView.frame = CGRectMake(-320, 385, 320, 44);
 	msgLabel.alpha=1;
 	[self saveMyFlyer];
 }
@@ -1173,12 +1264,14 @@
 		[fontScrollView setAlpha:ALPHA1];
 		[colorScrollView setAlpha:ALPHA0];
 		[sizeScrollView setAlpha:ALPHA0];
-		[fontTabButton setBackgroundImage:[UIImage imageNamed:@"font_button"] forState:UIControlStateNormal];
+		[borderScrollView setAlpha:ALPHA0];
+		[fontTabButton setBackgroundImage:[UIImage imageNamed:@"font_button_selected"] forState:UIControlStateNormal];
 		//[fontTabButton setBackgroundImage:[UIImage imageNamed:@"selTab.png"] forState:UIControlStateNormal];
 		//[colorTabButton setBackgroundImage:[UIImage imageNamed:@"tabButton.png"] forState:UIControlStateNormal];
 		[colorTabButton setBackgroundImage:[UIImage imageNamed:@"color_button"] forState:UIControlStateNormal];
 		//[sizeTabButton setBackgroundImage:[UIImage imageNamed:@"tabButton.png"] forState:UIControlStateNormal];
 		[sizeTabButton setBackgroundImage:[UIImage imageNamed:@"size_button"] forState:UIControlStateNormal];
+		[borderTabButton setBackgroundImage:[UIImage imageNamed:@"outline_button"] forState:UIControlStateNormal];
 		[UIView commitAnimations];
 	}
 	else if(selectedButton == colorTabButton)
@@ -1188,12 +1281,14 @@
 		[fontScrollView setAlpha:ALPHA0];
 		[colorScrollView setAlpha:ALPHA1];
 		[sizeScrollView setAlpha:ALPHA0];
+		[borderScrollView setAlpha:ALPHA0];
 		[fontTabButton setBackgroundImage:[UIImage imageNamed:@"font_button"] forState:UIControlStateNormal];
 		//[fontTabButton setBackgroundImage:[UIImage imageNamed:@"tabButton.png"] forState:UIControlStateNormal];
 		//[colorTabButton setBackgroundImage:[UIImage imageNamed:@"selTab.png"] forState:UIControlStateNormal];
-		[colorTabButton setBackgroundImage:[UIImage imageNamed:@"color_button"] forState:UIControlStateNormal];
+		[colorTabButton setBackgroundImage:[UIImage imageNamed:@"color_button_selected"] forState:UIControlStateNormal];
 		//[sizeTabButton setBackgroundImage:[UIImage imageNamed:@"tabButton.png"] forState:UIControlStateNormal];
 		[sizeTabButton setBackgroundImage:[UIImage imageNamed:@"size_button"] forState:UIControlStateNormal];
+		[borderTabButton setBackgroundImage:[UIImage imageNamed:@"outline_button"] forState:UIControlStateNormal];
 		[UIView commitAnimations];
 	}
 	else if(selectedButton == sizeTabButton)
@@ -1203,11 +1298,29 @@
 		[fontScrollView setAlpha:ALPHA0];
 		[colorScrollView setAlpha:ALPHA0];
 		[sizeScrollView setAlpha:ALPHA1];
+		[borderScrollView setAlpha:ALPHA0];
+		[fontTabButton setBackgroundImage:[UIImage imageNamed:@"font_button"] forState:UIControlStateNormal];
+		//[fontTabButton setBackgroundImage:[UIImage imageNamed:@"tabButton.png"] forState:UIControlStateNormal];
+		[colorTabButton setBackgroundImage:[UIImage imageNamed:@"color_button"] forState:UIControlStateNormal];
+		//[sizeTabButton setBackgroundImage:[UIImage imageNamed:@"selTab.png"] forState:UIControlStateNormal];
+		[sizeTabButton setBackgroundImage:[UIImage imageNamed:@"size_button_selected"] forState:UIControlStateNormal];
+		[borderTabButton setBackgroundImage:[UIImage imageNamed:@"outline_button"] forState:UIControlStateNormal];
+		[UIView commitAnimations];
+	}
+	else if(selectedButton == borderTabButton)
+	{
+		[UIView beginAnimations:nil context:NULL];
+		[UIView setAnimationDuration:0.4f];
+		[fontScrollView setAlpha:ALPHA0];
+		[colorScrollView setAlpha:ALPHA0];
+		[sizeScrollView setAlpha:ALPHA0];
+		[borderScrollView setAlpha:ALPHA1];
 		[fontTabButton setBackgroundImage:[UIImage imageNamed:@"font_button"] forState:UIControlStateNormal];
 		//[fontTabButton setBackgroundImage:[UIImage imageNamed:@"tabButton.png"] forState:UIControlStateNormal];
 		[colorTabButton setBackgroundImage:[UIImage imageNamed:@"color_button"] forState:UIControlStateNormal];
 		//[sizeTabButton setBackgroundImage:[UIImage imageNamed:@"selTab.png"] forState:UIControlStateNormal];
 		[sizeTabButton setBackgroundImage:[UIImage imageNamed:@"size_button"] forState:UIControlStateNormal];
+		[borderTabButton setBackgroundImage:[UIImage imageNamed:@"outline_button_selected"] forState:UIControlStateNormal];
 		[UIView commitAnimations];
 	}
 }
@@ -1502,6 +1615,7 @@
 	[msgLabel release];
 	[colorScrollView release];
 	[sizeScrollView release];
+	[borderScrollView release];
 	[fontScrollView release];
 	
     [super dealloc];
