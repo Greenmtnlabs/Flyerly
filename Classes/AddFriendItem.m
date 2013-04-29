@@ -9,7 +9,7 @@
 #import "AddFriendItem.h"
 
 @implementation AddFriendItem
-@synthesize leftCheckBox, leftName, rightCheckBox, rightName, leftImage, rightImage, identifier1, identifier2;
+@synthesize leftCheckBox, leftName, rightCheckBox, rightName, leftImage, rightImage, identifier1, identifier2, leftSelected, rightSelected;
 
 - (id)initWithFrame:(CGRect)frame reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithFrame:frame reuseIdentifier:reuseIdentifier]) {
@@ -35,12 +35,24 @@
 }
 
 /**
- * This is called when any check box is pressed
+ * This is called when left check box is pressed
  */
-- (IBAction)onCheckBoxClick:(UIButton *)sender{
+- (IBAction)onLeftCheckBoxClick:(UIButton *)sender{
     
     BOOL isSelected = [sender isSelected];
-    [sender setSelected:!isSelected];
+    [leftCheckBox setSelected:!isSelected];
+    leftSelected = !isSelected;
+    
+}
+
+/**
+ * This is called when right check box is pressed
+ */
+- (IBAction)onRightCheckBoxClick:(UIButton *)sender{
+    
+    BOOL isSelected = [sender isSelected];
+    [rightCheckBox setSelected:!isSelected];
+    rightSelected = !isSelected;
     
 }
 

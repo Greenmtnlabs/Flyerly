@@ -12,9 +12,10 @@
 #import <QuartzCore/QuartzCore.h>
 #import "FlyrAppDelegate.h"
 #import "FBRequestConnection.h"
+#import "LoadingView.h"
 
 @implementation AddFriendsController
-@synthesize uiTableView, contactsArray, deviceContactItems, contactsLabel, facebookLabel, twitterLabel, doneLabel, selectAllLabel, unSelectAllLabel, inviteLabel, contactsButton, facebookButton, twitterButton;
+@synthesize uiTableView, contactsArray, deviceContactItems, contactsLabel, facebookLabel, twitterLabel, doneLabel, selectAllLabel, unSelectAllLabel, inviteLabel, contactsButton, facebookButton, twitterButton, loadingView;
 
 const int TWITTER_TAB = 2;
 const int FACEBOOK_TAB = 1;
@@ -27,7 +28,17 @@ BOOL firstTableLoad = YES;
     
     // By default first tab is selected 'Contacts'
     selectedTab = -1;
+	loadingViewFlag = NO;
+    loadingView = nil;
+	loadingView = [[LoadingView alloc]init];
     
+    UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 31, 30)];
+    [menuButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+    [menuButton setBackgroundImage:[UIImage imageNamed:@"menu_button"] forState:UIControlStateNormal];
+	[menuButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
+    [self.navigationItem setRightBarButtonItem:rightBarButton];
+
     // set borders on the table
     [[self.uiTableView layer] setBorderColor:[[UIColor grayColor] CGColor]];
     [[self.uiTableView layer] setBorderWidth:1];
@@ -54,9 +65,11 @@ BOOL firstTableLoad = YES;
     [self.inviteLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
     [self.inviteLabel setText:NSLocalizedString(@"invite", nil)];
     
-    // Load device contacts
-    [self loadLocalContacts:self.contactsButton];
+}
 
+-(void)goBack{
+
+	[self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 /*
@@ -67,6 +80,9 @@ BOOL firstTableLoad = YES;
     if(selectedTab == CONTACTS_TAB){
         return;
     }
+
+    loadingView =[LoadingView loadingViewInView:self.view];
+    loadingViewFlag = YES;
 
     selectedTab = CONTACTS_TAB;
     [self setUnselectTab:sender];
@@ -193,6 +209,10 @@ BOOL firstTableLoad = YES;
     //}
 
     selectedTab = FACEBOOK_TAB;
+    
+    //loadingView =[LoadingView loadingViewInView:self.view];
+    //loadingViewFlag = YES;
+
     [self setUnselectTab:sender];
     
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
@@ -250,6 +270,9 @@ BOOL firstTableLoad = YES;
         return;
     }
     
+    loadingView =[LoadingView loadingViewInView:self.view];
+    loadingViewFlag = YES;
+
     selectedTab = TWITTER_TAB;
     [self setUnselectTab:sender];
     
@@ -400,6 +423,8 @@ BOOL firstTableLoad = YES;
                 [self sendTwitterMessage:@"I am using the flyerly app to create and share flyers on the go! - https://itunes.apple.com/app/socialflyr/id344130515?ls=1&mt=8" screenName:follower];
             }
             
+            [self showAlert:@"Invited !" message:@"Your selected contacts have been invited to flyerly!"];
+
         }else if(selectedTab == 1){
             
             [self tagFacebookUsersWithFeed:identifiers];
@@ -423,6 +448,7 @@ BOOL firstTableLoad = YES;
             NSLog(@"Failed");
             break;
         case MessageComposeResultSent:
+            [self showAlert:@"Invited !" message:@"Your selected contacts have been invited to flyerly!"];
             break;
         default:
             break;
@@ -441,7 +467,7 @@ BOOL firstTableLoad = YES;
             
             NSLog(@"New Result: %@", result);
         
-            [self showAlert:@"Tagged !" message:@"Users has been tagged with your message."];
+            [self showAlert:@"Invited !" message:@"Your selected contacts have been invited to flyerly!"];
         }];
     }];
 }
@@ -551,8 +577,14 @@ BOOL firstTableLoad = YES;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {    
     
+    if(loadingViewFlag){
+        [loadingView removeView];
+        loadingViewFlag = NO;
+    }
+
     // Get index like 0, 2, 4, 6 etc
     int index = (indexPath.row * 2);
+    NSLog(@"index: %d", index);
     
     // init cell array if null
     if(!self.deviceContactItems){
@@ -561,6 +593,7 @@ BOOL firstTableLoad = YES;
     
     // Get cell
     static NSString *cellId = @"AddFriendItem";
+   // AddFriendItem *cell = (AddFriendItem *) [uiTableView dequeueReusableCellWithIdentifier:cellId];
     //AddFriendItem *cell = [(AddFriendItem *)[self.uiTableView dequeueReusableCellWithIdentifier:cellId] autorelease];
     
     AddFriendItem *cell = nil;
@@ -573,6 +606,28 @@ BOOL firstTableLoad = YES;
     if (cell == nil) {
         NSArray *nib=[[NSBundle mainBundle] loadNibNamed:cellId owner:self options:nil];
         cell=[nib objectAtIndex:0];
+        [cell.leftCheckBox setSelected:YES];
+        [cell.rightCheckBox setSelected:YES];
+        cell.leftSelected = YES;
+        cell.rightSelected = YES;
+        // Add cell in array for tracking
+        [self.deviceContactItems addObject:cell];
+        
+    } else {
+        NSLog(@"Reusing Row");
+        /*
+        if(cell.leftSelected){
+            [cell.leftCheckBox setSelected:YES];
+        }else{
+            [cell.leftCheckBox setSelected:NO];
+        }
+
+        if(cell.rightSelected){
+            [cell.rightCheckBox setSelected:YES];
+        }else{
+            [cell.rightCheckBox setSelected:NO];
+        }
+         */
     }
     
     // Get left contact data
@@ -608,9 +663,6 @@ BOOL firstTableLoad = YES;
         cell.contentView.backgroundColor = [[UIColor alloc]initWithRed:244.0/255.0 green:242.0/255.0 blue:243.0/255.0 alpha:1];
     }
     
-    // Add cell in array for tracking
-    [self.deviceContactItems addObject:cell];
-
     // return cell
     return cell;
 }
@@ -638,6 +690,8 @@ BOOL firstTableLoad = YES;
     for(AddFriendItem *cell in self.deviceContactItems){
         [cell.leftCheckBox setSelected:YES];
         [cell.rightCheckBox setSelected:YES];
+        cell.leftSelected = YES;
+        cell.rightSelected = YES;
     }
 }
 
@@ -649,6 +703,8 @@ BOOL firstTableLoad = YES;
     for(AddFriendItem *cell in self.deviceContactItems){
         [cell.leftCheckBox setSelected:NO];
         [cell.rightCheckBox setSelected:NO];
+        cell.leftSelected = NO;
+        cell.rightSelected = NO;
     }
 }
 
@@ -678,8 +734,23 @@ BOOL firstTableLoad = YES;
     [super didReceiveMemoryWarning];	
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+
+    //loadingViewFlag = NO;
+    
+    // Load device contacts
+    [self loadLocalContacts:self.contactsButton];
+    loadingViewFlag = YES;
+}
+
 - (void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
+    
+	if(loadingViewFlag)
+	{
+		[loadingView removeFromSuperview];
+		loadingViewFlag=NO;
+	}
 }
 
 - (void)dealloc {

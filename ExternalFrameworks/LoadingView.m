@@ -62,7 +62,7 @@ CGPathRef NewPathWithRoundRect(CGRect rect, CGFloat cornerRadius)
 + (id)loadingViewInView:(UIView *)aSuperview
 {
 	LoadingView *loadingView =
-		[[[LoadingView alloc] initWithFrame:CGRectMake(65, 300, 200,120 )] autorelease];
+		[[[LoadingView alloc] initWithFrame:CGRectMake(65, 250, 200,120 )] autorelease];
 	if (!loadingView)
 	{
 		return nil;
@@ -79,8 +79,8 @@ CGPathRef NewPathWithRoundRect(CGRect rect, CGFloat cornerRadius)
 	UILabel *loadingLabel =[[[UILabel alloc]initWithFrame:labelFrame]autorelease];
 	
 	loadingLabel.text = NSLocalizedString(@"Loading...", nil);
-	loadingLabel.textColor = [UIColor whiteColor];
-	loadingLabel.backgroundColor = [UIColor clearColor];
+	loadingLabel.textColor = [UIColor blackColor];
+	loadingLabel.backgroundColor = [UIColor lightGrayColor];
 	loadingLabel.textAlignment = UITextAlignmentCenter;
 	loadingLabel.font = [UIFont boldSystemFontOfSize:[UIFont labelFontSize]];
 	loadingLabel.autoresizingMask =
@@ -91,7 +91,7 @@ CGPathRef NewPathWithRoundRect(CGRect rect, CGFloat cornerRadius)
 	
 	[loadingView addSubview:loadingLabel];
 	UIActivityIndicatorView *activityIndicatorView = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(5, 5, 30,30)];
-	[activityIndicatorView setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleWhiteLarge];
+	[activityIndicatorView setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleGray];
 			//initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge]autorelease];
 	[loadingView addSubview:activityIndicatorView];
 	activityIndicatorView.autoresizingMask =

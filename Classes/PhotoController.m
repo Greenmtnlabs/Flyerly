@@ -54,6 +54,7 @@
 -(void)viewDidLoad{
 	[super viewDidLoad];
 	aHUD = [[HudView alloc]init];
+    
 	FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
 	appDele.changesFlag = YES;
 
@@ -61,8 +62,6 @@
 											 selector:@selector(handleMemoryWarning:)
 												 name:@"UIApplicationMemoryWarningNotification"
 											   object:nil];
-	
-
 	
 	navBar= [[MyNavigationBar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
 	[self.view addSubview:navBar];
@@ -84,26 +83,38 @@
 	
 	
 	// Create Main Image View
-	imgView = [[UIImageView alloc]initWithFrame:CGRectMake(5, 44, 310, 309)];
+    if(IS_IPHONE_5){
+        imgView = [[UIImageView alloc]initWithFrame:CGRectMake(5, 48, 310, 309)];
+        templateBckgrnd = [[UIImageView alloc]initWithFrame:CGRectMake(0, 413, 320, 135)];
+        cameraRollButton = [[UIButton alloc] initWithFrame:CGRectMake(160, 365, 135, 40)];
+        takePhotoButton = [[UIButton alloc] initWithFrame:CGRectMake(25, 365, 135, 40)];
+        takePhotoLabel = [[UILabel alloc] initWithFrame:CGRectMake(80, 370, 80, 30)];
+        cameraRollLabel = [[UILabel alloc] initWithFrame:CGRectMake(220, 370, 80, 30)];
+        templateScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(-320, 413,320,130)];
+    }else{
+        imgView = [[UIImageView alloc]initWithFrame:CGRectMake(5, 44, 310, 309)];
+        templateBckgrnd = [[UIImageView alloc]initWithFrame:CGRectMake(0, 395, 320, 65)];
+        cameraRollButton = [[UIButton alloc] initWithFrame:CGRectMake(160, 354, 135, 40)];
+        takePhotoButton = [[UIButton alloc] initWithFrame:CGRectMake(25, 354, 135, 40)];
+        takePhotoLabel = [[UILabel alloc] initWithFrame:CGRectMake(80, 359, 80, 30)];
+        cameraRollLabel = [[UILabel alloc] initWithFrame:CGRectMake(220, 359, 80, 30)];
+        templateScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(-320, 395,320,60)];
+    }
 	imgView.image = selectedTemplate;
 	[self.view addSubview:imgView];
 
-    takePhotoButton = [[UIButton alloc] initWithFrame:CGRectMake(30, 354, 135, 40)];
     [takePhotoButton setBackgroundImage:[UIImage imageNamed:@"take_photo"] forState:UIControlStateNormal];
     [takePhotoButton addTarget:self action:@selector(openCamera) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:takePhotoButton];
-    cameraRollButton = [[UIButton alloc] initWithFrame:CGRectMake(165, 354, 135, 40)];
     [cameraRollButton setBackgroundImage:[UIImage imageNamed:@"camera_roll"] forState:UIControlStateNormal];
     [cameraRollButton addTarget:self action:@selector(loadPhotoLibrary) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:cameraRollButton];
 
-    takePhotoLabel = [[UILabel alloc] initWithFrame:CGRectMake(85, 359, 80, 30)];
     [takePhotoLabel setText:@"Take a Photo"];
     [takePhotoLabel setBackgroundColor:[UIColor clearColor]];
     [takePhotoLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
     [takePhotoLabel setTextColor:[UIColor whiteColor]];
     [self.view addSubview:takePhotoLabel];
-    cameraRollLabel = [[UILabel alloc] initWithFrame:CGRectMake(225, 359, 80, 30)];
     [cameraRollLabel setText:@"Camera Roll"];
     [cameraRollLabel setBackgroundColor:[UIColor clearColor]];
     [cameraRollLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
@@ -114,7 +125,6 @@
 	photoImgView = [[UIImageView alloc]initWithFrame:CGRectMake(50, 50, 220, 200)];
 	[photoImgView setUserInteractionEnabled:NO];
 
-	templateBckgrnd = [[UIImageView alloc]initWithFrame:CGRectMake(0, 395, 320, 65)];
 	//templateBckgrnd.image = [UIImage imageNamed:@"scroll1.png"];
     templateBckgrnd.image = [UIImage imageNamed:@"ad_bg_bg"];
     [self.view addSubview:templateBckgrnd];
@@ -137,7 +147,6 @@
 	msgTextView.textColor = [UIColor blackColor];
 	msgTextView.textAlignment = UITextAlignmentCenter;
 	
-	templateScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(-320, 395,320,60)];
 	fontScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(-320, 385,320,44)];
 	colorScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(-320, 385,320,44)];
 	sizeScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(-320, 385, 320, 44)];
@@ -190,7 +199,6 @@
     //NSLog(@"Famiy Names: %@", [UIFont familyNames]);
     
 	fontArray =[[NSArray  alloc] initWithObjects:
-				[UIFont fontWithName:@"Signika-Regular" size:27],
 				[UIFont fontWithName:@"Arial" size:27],
 				[UIFont fontWithName:@"GoodDog" size:27],
 				[UIFont fontWithName:@"GrandHotel-Regular" size:27],
@@ -213,9 +221,10 @@
 				[UIFont fontWithName:@"BlueNoon" size:27],
 				//[UIFont fontWithName:@"danielbk" size:16],
                 nil];
-                
-                
-				/*[UIFont fontWithName:@"Verdana-Italic" size:16],
+    
+				/*
+                [UIFont fontWithName:@"Signika-Regular" size:27],
+                [UIFont fontWithName:@"Verdana-Italic" size:16],
 				[UIFont fontWithName:@"Verdana" size:16],
 				[UIFont fontWithName:@"Georgia" size:16],
 				[UIFont fontWithName:@"Georgia-BoldItalic" size:16],
@@ -234,6 +243,24 @@
 	
 	NSInteger fontScrollWidth = 44;
 	NSInteger fontScrollHeight = 35;
+	NSInteger colorScrollWidth = 44;
+	NSInteger colorScrollHeight = 35;
+	NSInteger sizeScrollWidth = 44;
+	NSInteger sizeScrollHeight = 35;
+    NSInteger borderScrollWidth = 44;
+	NSInteger borderScrollHeight = 35;
+
+    if(IS_IPHONE_5){
+        fontScrollWidth = 35;
+        fontScrollHeight = 35;
+        colorScrollWidth = 35;
+        colorScrollHeight = 35;
+        sizeScrollWidth = 35;
+        sizeScrollHeight = 35;
+        borderScrollWidth = 35;
+        borderScrollHeight = 35;
+    }
+
 	for (int i = 1; i <=[fontArray count] ; i++)
 	{
 		UIButton *font = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -247,50 +274,71 @@
 		font.tag = i;	
 		//font.alpha = ALPHA1;
 		[font setBackgroundImage:[UIImage imageNamed:@"a_bg"] forState:UIControlStateNormal];
+        
+        if(i>5){
+            UIImageView *lock = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lock"]];
+            lock.frame = CGRectMake(20, 20, 17, 19);
+            [font addSubview:lock];
+            lock.userInteractionEnabled = NO;
+        }
+
 		[fontScrollView addSubview:font];
 		//[font release];
 	}
 	
-	colorArray = 	[[NSArray  alloc] initWithObjects: [UIColor whiteColor], [UIColor darkGrayColor], [UIColor grayColor], [UIColor orangeColor], [UIColor blackColor], [UIColor blueColor], [UIColor redColor], [UIColor greenColor], [UIColor purpleColor], [UIColor yellowColor], [UIColor brownColor], [UIColor cyanColor], [UIColor magentaColor],nil];
+	colorArray = 	[[NSArray  alloc] initWithObjects: [UIColor redColor], [UIColor blueColor], [UIColor greenColor], [UIColor blackColor], [UIColor colorWithRed:253.0/255.0 green:191.0/255.0 blue:38.0/224.0 alpha:1], [UIColor whiteColor], [UIColor grayColor], [UIColor magentaColor], [UIColor yellowColor], [UIColor colorWithRed:163.0/255.0 green:25.0/255.0 blue:2.0/224.0 alpha:1], [UIColor colorWithRed:3.0/255.0 green:15.0/255.0 blue:41.0/224.0 alpha:1], [UIColor purpleColor], [UIColor colorWithRed:85.0/255.0 green:86.0/255.0 blue:12.0/224.0 alpha:1], [UIColor orangeColor], [UIColor colorWithRed:98.0/255.0 green:74.0/255.0 blue:9.0/224.0 alpha:1], [UIColor colorWithRed:80.0/255.0 green:7.0/255.0 blue:1.0/224.0 alpha:1], [UIColor colorWithRed:150.0/255.0 green:150.0/255.0 blue:97.0/224.0 alpha:1], [UIColor colorWithRed:111.0/255.0 green:168.0/255.0 blue:100.0/224.0 alpha:1], [UIColor cyanColor], [UIColor colorWithRed:17.0/255.0 green:69.0/255.0 blue:70.0/224.0 alpha:1], [UIColor colorWithRed:173.0/255.0 green:127.0/255.0 blue:251.0/224.0 alpha:1], nil];
 	
-	NSInteger colorScrollWidth = 44;
-	NSInteger colorScrollHeight = 35;
 	for (int i = 1; i <=  [colorArray count] ; i++)
 	{
 		UIButton *color = [UIButton buttonWithType:UIButtonTypeCustom];
 		color.frame = CGRectMake(0, 5, colorScrollWidth, colorScrollHeight);
-		[color setBackgroundImage:[UIImage imageNamed:@"button1.png"] forState:UIControlStateNormal];
+		//[color setBackgroundImage:[UIImage imageNamed:@"button1.png"] forState:UIControlStateNormal];
+        color.layer.borderColor = [UIColor grayColor].CGColor;
+        color.layer.borderWidth = 1.0;
+
 		id colorName =[colorArray objectAtIndex:(i-1)];
 		UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(color.frame.origin.x+5, color.frame.origin.y-1, color.frame.size.width-10, color.frame.size.height-8)];
 		[label setBackgroundColor:colorName];
 		[color addSubview:label];
 		color.tag = i+30;	
-		color.alpha = ALPHA1;
+		//color.alpha = ALPHA1;
+        
+        if(i>5){
+            UIImageView *lock = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lock"]];
+            lock.frame = CGRectMake(20, 20, 17, 19);
+            [color addSubview:lock];
+            color.userInteractionEnabled = NO;
+        }
+        
 		[colorScrollView addSubview:color];
 		//[color release];
 	}
 	
-	NSInteger sizeScrollWidth = 44;
-	NSInteger sizeScrollHeight = 35;
 	for (int i = 1; i <=  [SIZE_ARRAY count] ; i++)
 	{
 		UIButton *size = [UIButton buttonWithType:UIButtonTypeCustom];
 		size.frame = CGRectMake(0, 5, sizeScrollWidth, sizeScrollHeight);
 		NSString *sizeValue =[SIZE_ARRAY objectAtIndex:(i-1)];
-		[size setBackgroundImage:[UIImage imageNamed:@"button1.png"] forState:UIControlStateNormal];
+		[size setBackgroundImage:[UIImage imageNamed:@"a_bg"] forState:UIControlStateNormal];
 		[size setTitle:sizeValue forState:UIControlStateNormal];
 		[size.titleLabel setFont:[UIFont fontWithName:@"Arial-BoldMT" size:15]];
 		[size setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 		size.tag = i+60;
 		size.alpha = ALPHA1;
+        
+        if(i>5){
+            UIImageView *lock = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lock"]];
+            lock.frame = CGRectMake(20, 20, 17, 19);
+            [size addSubview:lock];
+            size.userInteractionEnabled = NO;
+        }
+
 		[sizeScrollView addSubview:size];
 		//[size release];
 	}
 	
     borderArray = 	[[NSArray  alloc] initWithObjects: [UIColor blackColor], [UIColor grayColor], [UIColor darkGrayColor], [UIColor blueColor], [UIColor purpleColor], [UIColor colorWithRed:115.0/255.0 green:134.0/255.0 blue:144.0/255.0 alpha:1], [UIColor orangeColor], [UIColor greenColor], [UIColor redColor], [UIColor colorWithRed:14.0/255.0 green:95.0/255.0 blue:111.0/255.0 alpha:1], [UIColor colorWithRed:180.0/255.0 green:180.0/255.0 blue:149.0/255.0 alpha:1], [UIColor colorWithRed:228.0/255.0 green:128.0/255.0 blue:144.0/255.0 alpha:1], [UIColor colorWithRed:213.0/255.0 green:110.0/255.0 blue:86.0/255.0 alpha:1],[UIColor colorWithRed:156.0/255.0 green:195.0/255.0 blue:233.0/255.0 alpha:1],[UIColor colorWithRed:27.0/255.0 green:70.0/255.0 blue:148.0/255.0 alpha:1],[UIColor colorWithRed:234.0/255.0 green:230.0/255.0 blue:51.0/255.0 alpha:1],[UIColor cyanColor], [UIColor colorWithRed:232.0/255.0 green:236.0/255.0 blue:51.0/224.0 alpha:1],[UIColor magentaColor],[UIColor colorWithRed:57.0/255.0 green:87.0/255.0 blue:13.0/224.0 alpha:1], [UIColor colorWithRed:93.0/255.0 green:97.0/255.0 blue:196.0/224.0 alpha:1],nil];	
 
-    NSInteger borderScrollWidth = 44;
-	NSInteger borderScrollHeight = 35;
 	for (int i = 1; i <=  [borderArray count] ; i++)
 	{
 		UIButton *color = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -303,6 +351,14 @@
 		[color addSubview:label];
 		color.tag = i+90;
 		color.alpha = ALPHA1;
+        
+        if(i>5){
+            UIImageView *lock = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lock"]];
+            lock.frame = CGRectMake(20, 20, 17, 19);
+            [color addSubview:lock];
+            color.userInteractionEnabled = NO;
+        }
+
 		[borderScrollView addSubview:color];
 		//[color release];
 	}
@@ -418,9 +474,23 @@
 	[self.view addSubview:heightScrollView];
 	[self layoutScrollImages:heightScrollView scrollWidth:heightScrollWidth scrollHeight:heightScrollHeight];
 	 
-	
-	fontTabButton =[UIButton buttonWithType:UIButtonTypeCustom];
-	fontTabButton.frame = CGRectMake(-1, 415, 80, 46);
+    fontTabButton =[UIButton buttonWithType:UIButtonTypeCustom];
+    colorTabButton =[UIButton buttonWithType:UIButtonTypeCustom];
+    sizeTabButton =[UIButton buttonWithType:UIButtonTypeCustom];
+    borderTabButton =[UIButton buttonWithType:UIButtonTypeCustom];
+
+	if(IS_IPHONE_5){
+        fontTabButton.frame = CGRectMake(-1, 502, 80, 46);
+        colorTabButton.frame = CGRectMake(79, 502, 80, 46);
+        sizeTabButton.frame = CGRectMake(159, 502, 80, 46);
+        borderTabButton.frame = CGRectMake(239, 502, 81, 46);
+    }else{
+        fontTabButton.frame = CGRectMake(-1, 415, 80, 46);
+        colorTabButton.frame = CGRectMake(79, 415, 80, 46);
+        sizeTabButton.frame = CGRectMake(159, 415, 80, 46);
+        borderTabButton.frame = CGRectMake(239, 415, 81, 46);
+    }
+    
 	//fontTabButton.frame = CGRectMake(-1, 429, 107, 32);
 	//[fontTabButton setBackgroundImage:[UIImage imageNamed:@"tabButton.png"] forState:UIControlStateNormal];
 	//[fontTabButton setTitle:@"Font" forState:UIControlStateNormal];
@@ -432,8 +502,6 @@
 	fontTabButton.tag = 10001;
 	[self.view addSubview:fontTabButton];
 	
-	colorTabButton =[UIButton buttonWithType:UIButtonTypeCustom];
-	colorTabButton.frame = CGRectMake(79, 415, 80, 46);
 	[colorTabButton setBackgroundImage:[UIImage imageNamed:@"color_button"] forState:UIControlStateNormal];
 	//colorTabButton.frame = CGRectMake(106, 429, 109, 32);
 	//[colorTabButton setBackgroundImage:[UIImage imageNamed:@"tabButton.png"] forState:UIControlStateNormal];
@@ -445,8 +513,6 @@
 	colorTabButton.tag = 10002;
 	[self.view addSubview:colorTabButton];
 	
-	sizeTabButton =[UIButton buttonWithType:UIButtonTypeCustom];
-	sizeTabButton.frame = CGRectMake(159, 415, 80, 46);
 	//sizeTabButton.frame = CGRectMake(107+107, 429, 107, 32);
 	//[sizeTabButton setBackgroundImage:[UIImage imageNamed:@"tabButton.png"] forState:UIControlStateNormal];
 	[sizeTabButton setBackgroundImage:[UIImage imageNamed:@"size_button"] forState:UIControlStateNormal];
@@ -458,8 +524,6 @@
 	sizeTabButton.tag = 10003;
 	[self.view addSubview:sizeTabButton];
 
-	borderTabButton =[UIButton buttonWithType:UIButtonTypeCustom];
-	borderTabButton.frame = CGRectMake(239, 415, 81, 46);
 	[borderTabButton setBackgroundImage:[UIImage imageNamed:@"outline_button"] forState:UIControlStateNormal];
 	[borderTabButton.titleLabel setFont:[UIFont fontWithName:@"Arial-BoldMT" size:15]];
 	[borderTabButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -646,12 +710,17 @@
 		UIButton *view = nil;
 		NSArray *subviews = [templateScrollView subviews];
 		CGFloat curXLoc = 0;
+		CGFloat curYLoc = 5;
+
+        if(IS_IPHONE_5)
+            curYLoc = 10;
+        
 		for (view in subviews)
 		{
 			if ([view isKindOfClass:[UIButton class]] )
 			{
 				CGRect frame = view.frame;
-				frame.origin = CGPointMake(curXLoc, 5);
+				frame.origin = CGPointMake(curXLoc, curYLoc);
 				view.frame = frame;
 				curXLoc += (kScrollObjWidth)+5;
 				
@@ -661,9 +730,20 @@
 				//else
 					[view addTarget:self action:@selector(selectTemplate:) forControlEvents:UIControlEventTouchUpInside];
 				
+                if(IS_IPHONE_5){
+                    if(curXLoc >= 320){
+                        curXLoc = 0;
+                        curYLoc = curYLoc + kScrollObjHeight + 7;
+                    }
+                }
 			}
 		}
-		[templateScrollView setContentSize:CGSizeMake(([templateArray count]*(kScrollObjWidth+5)), [templateScrollView bounds].size.height)];
+        
+        if(IS_IPHONE_5){
+            [templateScrollView setContentSize:CGSizeMake(320, curYLoc + kScrollObjHeight)];
+        } else {
+            [templateScrollView setContentSize:CGSizeMake(([templateArray count]*(kScrollObjWidth+5)), [templateScrollView bounds].size.height)];
+        }
 	}
 	else if(selectedScrollView == fontScrollView)
 	{
@@ -672,18 +752,38 @@
 		NSArray *subviews = [fontScrollView subviews];
 		
 		CGFloat curXLoc = 0;
+		CGFloat curYLoc = 5;
+        int increment = 5;
+
+        if(IS_IPHONE_5){
+            curYLoc = 10;
+            increment = 8;
+        }
+        
 		for (view in subviews)
 		{
 			if ([view isKindOfClass:[UIButton class]] )
 			{
 				CGRect frame = view.frame;
-				frame.origin = CGPointMake(curXLoc, 5);
+				frame.origin = CGPointMake(curXLoc, curYLoc);
 				view.frame = frame;
-				curXLoc += (kScrollObjWidth)+5;
+				curXLoc += (kScrollObjWidth)+increment;
 				[view addTarget:self action:@selector(selectFont:) forControlEvents:UIControlEventTouchUpInside];
-			}
+			
+                if(IS_IPHONE_5){
+                    if(curXLoc >= 300){
+                        curXLoc = 0;
+                        curYLoc = curYLoc + kScrollObjHeight + 7;
+                    }
+                }
+            }
 		}
-		[fontScrollView setContentSize:CGSizeMake((  [fontArray count]*(kScrollObjWidth+5)), [fontScrollView bounds].size.height)];
+        
+        if(IS_IPHONE_5){
+            [fontScrollView setContentSize:CGSizeMake(320, curYLoc + kScrollObjHeight)];
+        } else {
+            [fontScrollView setContentSize:CGSizeMake((  [fontArray count]*(kScrollObjWidth+5)), [fontScrollView bounds].size.height)];
+        }
 	}
 	else if (selectedScrollView == colorScrollView)
 	{
@@ -691,19 +791,39 @@
 		NSArray *subviews = [colorScrollView subviews];
 		
 		CGFloat curXLoc = 0;
+		CGFloat curYLoc = 5;
+        int increment = 5;
+        
+        if(IS_IPHONE_5){
+            curYLoc = 10;
+            increment = 8;
+        }
+        
 		for (view in subviews)
 		{
 			if ([view isKindOfClass:[UIButton class]] )
 			{
 				CGRect frame = view.frame;
-				frame.origin = CGPointMake(curXLoc, 5);
+				frame.origin = CGPointMake(curXLoc, curYLoc);
 				view.frame = frame;
-				curXLoc += (kScrollObjWidth)+5;
+				curXLoc += (kScrollObjWidth)+increment;
 				[view addTarget:self action:@selector(selectColor:) forControlEvents:UIControlEventTouchUpInside];
 				
+                if(IS_IPHONE_5){
+                    if(curXLoc >= 300){
+                        curXLoc = 0;
+                        curYLoc = curYLoc + kScrollObjHeight + 7;
+                    }
+                }
+
 			}
 		}
-		[colorScrollView setContentSize:CGSizeMake((  [colorArray count]*(kScrollObjWidth+5)), [colorScrollView bounds].size.height)];
+        
+        if(IS_IPHONE_5){
+            [colorScrollView setContentSize:CGSizeMake(320, curYLoc + kScrollObjHeight)];
+        } else {
+            [colorScrollView setContentSize:CGSizeMake((  [colorArray count]*(kScrollObjWidth+5)), [colorScrollView bounds].size.height)];
+        }
 	}
 	else if (selectedScrollView == sizeScrollView)
 	{
@@ -711,19 +831,39 @@
 		NSArray *subviews = [sizeScrollView subviews];
 		
 		CGFloat curXLoc = 0;
+		CGFloat curYLoc = 5;
+        int increment = 5;
+
+        if(IS_IPHONE_5){
+            curYLoc = 10;
+            increment = 8;
+        }
+
 		for (view in subviews)
 		{
 			if ([view isKindOfClass:[UIButton class]])
 			{
 				CGRect frame = view.frame;
-				frame.origin = CGPointMake(curXLoc, 5);
+				frame.origin = CGPointMake(curXLoc, curYLoc);
 				view.frame = frame;
-				curXLoc += (kScrollObjWidth)+5;
+				curXLoc += (kScrollObjWidth)+increment;
 				[view addTarget:self action:@selector(selectSize:) forControlEvents:UIControlEventTouchUpInside];
 				
+                if(IS_IPHONE_5){
+                    if(curXLoc >= 300){
+                        curXLoc = 0;
+                        curYLoc = curYLoc + kScrollObjHeight + 7;
+                    }
+                }
+
 			}
 		}
-		[sizeScrollView setContentSize:CGSizeMake((  [SIZE_ARRAY count]*(kScrollObjWidth+5)), [sizeScrollView bounds].size.height)];
+        
+        if(IS_IPHONE_5){
+            [sizeScrollView setContentSize:CGSizeMake(320, curYLoc + kScrollObjHeight)];
+        } else {
+            [sizeScrollView setContentSize:CGSizeMake((  [SIZE_ARRAY count]*(kScrollObjWidth+5)), [sizeScrollView bounds].size.height)];
+        }
 	}
     else if (selectedScrollView == borderScrollView)
 	{
@@ -731,19 +871,39 @@
 		NSArray *subviews = [borderScrollView subviews];
 		
 		CGFloat curXLoc = 0;
+		CGFloat curYLoc = 5;
+        int increment = 5;
+
+        if(IS_IPHONE_5){
+            curYLoc = 10;
+            increment = 8;
+        }
+        
 		for (view in subviews)
 		{
 			if ([view isKindOfClass:[UIButton class]])
 			{
 				CGRect frame = view.frame;
-				frame.origin = CGPointMake(curXLoc, 5);
+				frame.origin = CGPointMake(curXLoc, curYLoc);
 				view.frame = frame;
-				curXLoc += (kScrollObjWidth)+5;
+				curXLoc += (kScrollObjWidth)+increment;
 				[view addTarget:self action:@selector(selectBorder:) forControlEvents:UIControlEventTouchUpInside];
 				
+                if(IS_IPHONE_5){
+                    if(curXLoc >= 300){
+                        curXLoc = 0;
+                        curYLoc = curYLoc + kScrollObjHeight + 7;
+                    }
+                }
+
 			}
 		}
-		[borderScrollView setContentSize:CGSizeMake((  [borderArray count]*(kScrollObjWidth+5)), [borderScrollView bounds].size.height)];
+        
+        if(IS_IPHONE_5){
+            [borderScrollView setContentSize:CGSizeMake(320, curYLoc + kScrollObjHeight)];
+        } else {
+            [borderScrollView setContentSize:CGSizeMake((  [borderArray count]*(kScrollObjWidth+5)), [borderScrollView bounds].size.height)];
+        }
 	}	else if (selectedScrollView == widthScrollView)
 	{
 		UIButton *view = nil;
@@ -921,12 +1081,20 @@
 	[navBar.rightButton addTarget:self action:@selector(callWrite) forControlEvents:UIControlEventTouchUpInside];
 	
     // Create right bar button
+    UIButton *textButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 31, 30)];
+    [textButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+    [textButton setBackgroundImage:[UIImage imageNamed:@"t_button"] forState:UIControlStateNormal];
+	[textButton addTarget:self action:@selector(callWrite) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:textButton];
+    [self.navigationItem setRightBarButtonItem:rightBarButton];
+    
     UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 31, 30)];
     [menuButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-    [menuButton setBackgroundImage:[UIImage imageNamed:@"t_button"] forState:UIControlStateNormal];
-	[menuButton addTarget:self action:@selector(callWrite) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
-    [self.navigationItem setRightBarButtonItem:rightBarButton];
+    [menuButton setBackgroundImage:[UIImage imageNamed:@"menu_button"] forState:UIControlStateNormal];
+	[menuButton addTarget:self action:@selector(callMenu) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
+    [self.navigationItem setLeftBarButtonItem:leftBarButton];
+    
     [self showPictureTab];
 
 	[UIView beginAnimations:nil context:NULL];
@@ -934,7 +1102,11 @@
 	templateScrollView.alpha = ALPHA1;
 	templateBckgrnd.alpha = ALPHA1;
 	[self.templateBckgrnd bringSubviewToFront:templateScrollView];
-	templateScrollView.frame= CGRectMake(0, 395,320 ,60);
+    if(IS_IPHONE_5){
+        templateScrollView.frame= CGRectMake(0, 413,320 ,130);
+    }else{
+        templateScrollView.frame= CGRectMake(0, 395,320 ,60);
+    }
 	msgLabel.alpha= 1;
 	textBackgrnd.alpha  =ALPHA0;
 	fontTabButton.alpha = ALPHA0;
@@ -978,6 +1150,14 @@
     // Create right bar button
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Next" style:UIBarButtonItemStylePlain target:self action:@selector(callStyle)];
     [self.navigationItem setRightBarButtonItem:rightBarButton];
+    
+    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
+    [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+	[backButton addTarget:self action:@selector(chooseTemplate) forControlEvents:UIControlEventTouchUpInside];
+    [backButton setBackgroundImage:[UIImage imageNamed:@"back_blue"] forState:UIControlStateNormal];
+    UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    [self.navigationItem setLeftBarButtonItem:backBarButton];
+
     [self hidePictureTab];
 
 	msgTextView.backgroundColor = [ UIColor colorWithWhite:1 alpha:0.3f];
@@ -997,11 +1177,19 @@
 	msgTextView.frame = CGRectMake(20, 50, 280, 150);
 	templateBckgrnd.alpha = ALPHA0;
 
-	templateScrollView.frame= CGRectMake(-320, 395,320 ,60);
-	fontScrollView.frame = CGRectMake(-320, 385, 320, 44);
-	colorScrollView.frame = CGRectMake(-320, 385, 320, 44);
-	sizeScrollView.frame = CGRectMake(-320, 385, 320, 44);
-	borderScrollView.frame = CGRectMake(-320, 385, 320, 44);
+    if(IS_IPHONE_5){
+        templateScrollView.frame= CGRectMake(-320, 413,320 ,130);
+        fontScrollView.frame = CGRectMake(-320, 385, 320, 130);
+        colorScrollView.frame = CGRectMake(-320, 385, 320, 130);
+        sizeScrollView.frame = CGRectMake(-320, 385, 320, 130);
+        borderScrollView.frame = CGRectMake(-320, 385, 320, 130);
+    }else{
+        templateScrollView.frame= CGRectMake(-320, 395,320 ,60);
+        fontScrollView.frame = CGRectMake(-320, 385, 320, 44);
+        colorScrollView.frame = CGRectMake(-320, 385, 320, 44);
+        sizeScrollView.frame = CGRectMake(-320, 385, 320, 44);
+        borderScrollView.frame = CGRectMake(-320, 385, 320, 44);
+    }
 	[UIView commitAnimations];
 
 }
@@ -1020,14 +1208,30 @@
     // Create right bar button
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Photo" style:UIBarButtonItemStylePlain target:self action:@selector(choosePhoto)];
     [self.navigationItem setRightBarButtonItem:rightBarButton];
+    
+    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
+    [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+	[backButton addTarget:self action:@selector(callWrite) forControlEvents:UIControlEventTouchUpInside];
+    [backButton setBackgroundImage:[UIImage imageNamed:@"back_blue"] forState:UIControlStateNormal];
+    UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    [self.navigationItem setLeftBarButtonItem:backBarButton];
+
     [self hidePictureTab];
 
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationDuration:0.4f];
-	fontScrollView.frame = CGRectMake(0, 360, 320, 44);
-	colorScrollView.frame = CGRectMake(0, 360, 320, 44);
-	sizeScrollView.frame = CGRectMake(0, 360, 320, 44);
-	borderScrollView.frame = CGRectMake(0, 360, 320, 44);
+    
+    if(IS_IPHONE_5){
+        fontScrollView.frame = CGRectMake(10, 354, 320, 130);
+        colorScrollView.frame = CGRectMake(10, 354, 320, 130);
+        sizeScrollView.frame = CGRectMake(10, 354, 320, 130);
+        borderScrollView.frame = CGRectMake(10, 354, 320, 130);
+    }else{
+        fontScrollView.frame = CGRectMake(0, 360, 320, 44);
+        colorScrollView.frame = CGRectMake(0, 360, 320, 44);
+        sizeScrollView.frame = CGRectMake(0, 360, 320, 44);
+        borderScrollView.frame = CGRectMake(0, 360, 320, 44);
+    }
 	textBackgrnd.alpha = ALPHA1;
 	fontScrollView.alpha = ALPHA1;
 	colorScrollView.alpha = ALPHA0;
@@ -1094,6 +1298,14 @@
     // Create right bar button
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Save/Share" style:UIBarButtonItemStylePlain target:self action:@selector(callSaveAndShare)];
     [self.navigationItem setRightBarButtonItem:rightBarButton];
+    
+    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
+    [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+	[backButton addTarget:self action:@selector(callStyle) forControlEvents:UIControlEventTouchUpInside];
+    [backButton setBackgroundImage:[UIImage imageNamed:@"back_blue"] forState:UIControlStateNormal];
+    UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    [self.navigationItem setLeftBarButtonItem:backBarButton];
+
     [self hidePictureTab];
 
 	CALayer * l = [photoImgView layer];
@@ -1110,10 +1322,19 @@
 	colorTabButton.alpha = ALPHA0;
 	sizeTabButton.alpha = ALPHA0;
 	borderTabButton.alpha = ALPHA0;
-	fontScrollView.frame = CGRectMake(-320, 385, 320, 44);
-	colorScrollView.frame = CGRectMake(-320, 385, 320, 44);
-	sizeScrollView.frame = CGRectMake(-320, 385, 320, 44);
-	borderScrollView.frame = CGRectMake(-320, 385, 320, 44);
+
+    if(IS_IPHONE_5){
+        fontScrollView.frame = CGRectMake(-320, 385, 320, 130);
+        colorScrollView.frame = CGRectMake(-320, 385, 320, 130);
+        sizeScrollView.frame = CGRectMake(-320, 385, 320, 130);
+        borderScrollView.frame = CGRectMake(-320, 385, 320, 130);
+    }else{
+        fontScrollView.frame = CGRectMake(-320, 385, 320, 44);
+        colorScrollView.frame = CGRectMake(-320, 385, 320, 44);
+        sizeScrollView.frame = CGRectMake(-320, 385, 320, 44);
+        borderScrollView.frame = CGRectMake(-320, 385, 320, 44);
+    }
+
 	msgLabel.alpha=1;
 	[photoTabButton setBackgroundImage:[UIImage imageNamed:@"tabButton.png"] forState:UIControlStateNormal];
 	[widthTabButton setBackgroundImage:[UIImage imageNamed:@"selTab.png"] forState:UIControlStateNormal];
@@ -1166,10 +1387,18 @@
 	sizeTabButton.alpha = ALPHA0;
 	borderTabButton.alpha = ALPHA0;
 	textBackgrnd.alpha = ALPHA0;
-	fontScrollView.frame = CGRectMake(-320, 385, 320, 44);
-	colorScrollView.frame = CGRectMake(-320, 385, 320, 44);
-	sizeScrollView.frame = CGRectMake(-320, 385, 320, 44);
-	borderScrollView.frame = CGRectMake(-320, 385, 320, 44);
+    
+    if(IS_IPHONE_5){
+        fontScrollView.frame = CGRectMake(-320, 385, 320, 130);
+        colorScrollView.frame = CGRectMake(-320, 385, 320, 130);
+        sizeScrollView.frame = CGRectMake(-320, 385, 320, 130);
+        borderScrollView.frame = CGRectMake(-320, 385, 320, 130);
+    }else{
+        fontScrollView.frame = CGRectMake(-320, 385, 320, 44);
+        colorScrollView.frame = CGRectMake(-320, 385, 320, 44);
+        sizeScrollView.frame = CGRectMake(-320, 385, 320, 44);
+        borderScrollView.frame = CGRectMake(-320, 385, 320, 44);
+    }
 	msgLabel.alpha=1;
 	[self saveMyFlyer];
 }

@@ -323,7 +323,11 @@ int counter = 0;
     }
     
     cell.controller = self;
-    [self load4ImagesAtaTime:indexPath.row image1:cell.image1 image2:cell.image2 image3:cell.image3 image4:cell.image4];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self load4ImagesAtaTime:indexPath.row image1:cell.image1 image2:cell.image2 image3:cell.image3 image4:cell.image4];
+    });
+    
     //[self.deviceContactItems addObject:cell];
 
     // return cell

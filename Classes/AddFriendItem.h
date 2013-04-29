@@ -16,7 +16,9 @@
 	IBOutlet UILabel *rightName;
 	IBOutlet UIImageView *leftImage;
 	IBOutlet UIImageView *rightImage;
-	
+    
+	BOOL leftSelected;
+    BOOL rightSelected;
     NSString *identifier1;
     NSString *identifier2;
 }
@@ -28,10 +30,13 @@
 @property(nonatomic, retain) IBOutlet UIImageView *rightImage;
 @property(nonatomic, retain) NSString *identifier1;
 @property(nonatomic, retain) NSString *identifier2;
+@property BOOL leftSelected;
+@property BOOL rightSelected;
 
 
 -(void)setValues:(NSString *)title1 title2:(NSString *)title2;
 -(void)setImages:(UIImage *)image1 image2:(UIImage *)image2;
-- (IBAction)onCheckBoxClick:(UIButton *)sender;
+- (IBAction)onLeftCheckBoxClick:(UIButton *)sender;
+- (IBAction)onRightCheckBoxClick:(UIButton *)sender;
 
 @end

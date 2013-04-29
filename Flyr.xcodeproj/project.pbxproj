@@ -268,6 +268,10 @@
 		6560C1D3172812DC005BE8DD /* box_seperator@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6560C1CF172812DC005BE8DD /* box_seperator@2x.png */; };
 		6560C1D4172812DC005BE8DD /* crop_box.png in Resources */ = {isa = PBXBuildFile; fileRef = 6560C1D0172812DC005BE8DD /* crop_box.png */; };
 		6560C1D5172812DC005BE8DD /* crop_box@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6560C1D1172812DC005BE8DD /* crop_box@2x.png */; };
+		659B5EB7172E8B0D0082B8EB /* back_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 659B5EB5172E8B0D0082B8EB /* back_blue.png */; };
+		659B5EB8172E8B0D0082B8EB /* back_blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 659B5EB6172E8B0D0082B8EB /* back_blue@2x.png */; };
+		659B5EBB172EA5290082B8EB /* lock.png in Resources */ = {isa = PBXBuildFile; fileRef = 659B5EB9172EA5290082B8EB /* lock.png */; };
+		659B5EBC172EA5290082B8EB /* lock@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 659B5EBA172EA5290082B8EB /* lock@2x.png */; };
 		65A212441729196500ED0B9A /* CameraOverlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65A212431729196500ED0B9A /* CameraOverlayView.xib */; };
 		65A212461729496F00ED0B9A /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65A212451729496F00ED0B9A /* AssetsLibrary.framework */; };
 		65A2126317295F1900ED0B9A /* CustomGalleryItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65A2126217295F1900ED0B9A /* CustomGalleryItem.xib */; };
@@ -757,6 +761,10 @@
 		6560C1CF172812DC005BE8DD /* box_seperator@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "box_seperator@2x.png"; sourceTree = "<group>"; };
 		6560C1D0172812DC005BE8DD /* crop_box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = crop_box.png; sourceTree = "<group>"; };
 		6560C1D1172812DC005BE8DD /* crop_box@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "crop_box@2x.png"; sourceTree = "<group>"; };
+		659B5EB5172E8B0D0082B8EB /* back_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back_blue.png; sourceTree = "<group>"; };
+		659B5EB6172E8B0D0082B8EB /* back_blue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back_blue@2x.png"; sourceTree = "<group>"; };
+		659B5EB9172EA5290082B8EB /* lock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lock.png; sourceTree = "<group>"; };
+		659B5EBA172EA5290082B8EB /* lock@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lock@2x.png"; sourceTree = "<group>"; };
 		65A212431729196500ED0B9A /* CameraOverlayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraOverlayView.xib; sourceTree = "<group>"; };
 		65A212451729496F00ED0B9A /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		65A2126217295F1900ED0B9A /* CustomGalleryItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CustomGalleryItem.xib; path = Classes/CustomGalleryItem.xib; sourceTree = "<group>"; };
@@ -1312,6 +1320,10 @@
 		0DF3A361108DF47400D6C887 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				659B5EB9172EA5290082B8EB /* lock.png */,
+				659B5EBA172EA5290082B8EB /* lock@2x.png */,
+				659B5EB5172E8B0D0082B8EB /* back_blue.png */,
+				659B5EB6172E8B0D0082B8EB /* back_blue@2x.png */,
 				65C03158172ACCBB001F9E7B /* create_button.png */,
 				65C03159172ACCBB001F9E7B /* create_button@2x.png */,
 				65B3F194172AB2F400BEE7A4 /* camera_border.png */,
@@ -2172,6 +2184,10 @@
 				65B3F1B7172AB2F500BEE7A4 /* camera_lastpic@2x.png in Resources */,
 				65C0315A172ACCBB001F9E7B /* create_button.png in Resources */,
 				65C0315B172ACCBB001F9E7B /* create_button@2x.png in Resources */,
+				659B5EB7172E8B0D0082B8EB /* back_blue.png in Resources */,
+				659B5EB8172E8B0D0082B8EB /* back_blue@2x.png in Resources */,
+				659B5EBB172EA5290082B8EB /* lock.png in Resources */,
+				659B5EBC172EA5290082B8EB /* lock@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -88,7 +88,11 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-	tView = [[UITableView alloc]initWithFrame:CGRectMake(0, 44, 320, 416) style:UITableViewStyleGrouped];
+    if(IS_IPHONE_5){
+        tView = [[UITableView alloc]initWithFrame:CGRectMake(0, 44, 320, HEIGHT_IPHONE_5) style:UITableViewStyleGrouped];
+    }else{
+        tView = [[UITableView alloc]initWithFrame:CGRectMake(0, 44, 320, 416) style:UITableViewStyleGrouped];
+    }
 	[self.tView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Default.png"]]];
 	tView.dataSource = self;
 	tView.delegate = self;

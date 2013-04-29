@@ -212,7 +212,7 @@ nil]
 [UIFont fontWithName:@"HiraKakuProN-W6" size:16],\
 nil]
 
-#define SIZE_ARRAY [NSArray arrayWithObjects: @"8", @"10" ,@"12",@"14",@"16",@"18",@"20",@"22",@"24",@"30",@"34",@"40",@"50",@"60",nil]
+#define SIZE_ARRAY [NSArray arrayWithObjects: @"8",  @"9", @"10", @"11" ,@"12",@"14",@"16",@"18",@"20",@"22",@"24",  @"26", @"28", @"30",@"36",@"42",@"48",@"52",@"60",@"72",@"74",nil]
 
 #define WIDTH_ARRAY [NSArray arrayWithObjects: @"50", @"75" ,@"100",@"120",@"140",@"160",@"175",@"200",@"220",@"240",@"260",nil]
 
@@ -231,6 +231,9 @@ cell = [[[MyCustomCell alloc] initWithFrame:CGRectZero reuseIdentifier:cellId] a
 return cell;\
 }
 
+#define HEIGHT_IPHONE_5 568
+#define IS_IPHONE   ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+#define IS_IPHONE_5 ([[UIScreen mainScreen] bounds ].size.height == HEIGHT_IPHONE_5 )
 
 /*#define FONT_ARRAY [NSArray arrayWithObjects:@"Courier",@"Courier-BoldOblique",@"Courier-Oblique",@"Courier-Bold",@"ArialMT",@"Arial-BoldMT",@"Arial-BoldItalicMT",@"Arial-ItalicMT",@"STHeitiTC-Light",@"STHeitiTC-Medium",@"AppleGothic",@"CourierNewPS-BoldMT",@"CourierNewPS-ItalicMT",@"CourierNewPS-BoldItalicMT",@"CourierNewPSMT",@"Zapfino",@"HiraKakuProN-W6",@"ArialUnicodeMS",@"STHeitiSC-Medium",@"STHeitiSC-Light",@"AmericanTypewriter",@"AmericanTypewriter-Bold",@"Helvetica-Oblique",@"Helvetica-BoldOblique",@"Helvetica",@"Helvetica-Bold",@"MarkerFelt-Thin",@"HelveticaNeue",@"HelveticaNeue-Bold",@"DBLCDTempBlack",@"Verdana-Bold",@"Verdana-BoldItalic",@"Verdana",@"Verdana-Italic",@"TimesNewRomanPSMT",@"TimesNewRomanPS-BoldMT",@"TimesNewRomanPS-BoldItalicMT",@"TimesNewRomanPS-ItalicMT",@"Georgia-Bold",@"Georgia",@"Georgia-BoldItalic",@"Georgia-Italic",@"STHeitiJ-Medium",@"STHeitiJ-Light",@"ArialRoundedMTBold",@"TrebuchetMS-Italic",@"TrebuchetMS",@"Trebuchet-BoldItalic",@"TrebuchetMS-Bold",@"STHeitiK-Medium",@"STHeitiK-Light",nil]
  */

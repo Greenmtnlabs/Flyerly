@@ -19,6 +19,8 @@
 #import <MessageUI/MFMessageComposeViewController.h>
 #import "FlyrAppDelegate.h"
 
+@class LoadingView;
+
 @interface AddFriendsController : UIViewController<UITableViewDelegate,UITableViewDataSource,FBRequestDelegate,FBSessionDelegate,MFMessageComposeViewControllerDelegate,FBDialogDelegate,FBLoginDialogDelegate>{
 
     IBOutlet UILabel *contactsLabel;
@@ -31,12 +33,14 @@
     IBOutlet UIButton *contactsButton;
     IBOutlet UIButton *facebookButton;
     IBOutlet UIButton *twitterButton;
+	LoadingView *loadingView;
 
     IBOutlet UITableView *uiTableView;
 	NSMutableArray *contactsArray;
     
     NSMutableArray *deviceContactItems;
     int selectedTab;
+	BOOL loadingViewFlag;
 }
 
 @property(nonatomic,retain) IBOutlet UILabel *contactsLabel;
@@ -49,6 +53,7 @@
 @property(nonatomic,retain) IBOutlet UIButton *contactsButton;
 @property(nonatomic,retain) IBOutlet UIButton *facebookButton;
 @property(nonatomic,retain) IBOutlet UIButton *twitterButton;
+@property (nonatomic, retain) LoadingView *loadingView;
 
 @property(nonatomic,retain) IBOutlet UITableView *uiTableView;
 @property(nonatomic,retain) NSMutableArray *contactsArray;

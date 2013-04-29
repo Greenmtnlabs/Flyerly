@@ -37,7 +37,7 @@
 	//svController.ptController = self;
 	
 	//self.navigationItem.title = @"Social Flyer";
-	self.navigationController.navigationBarHidden = YES;
+	self.navigationController.navigationBarHidden = NO;
 	//self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
 	[UIView commitAnimations];
 	imgView = [[UIImageView alloc]initWithImage:selectedFlyerImage];
