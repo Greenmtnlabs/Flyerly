@@ -689,9 +689,12 @@ BOOL firstTableLoad = YES;
     
     for(AddFriendItem *cell in self.deviceContactItems){
         [cell.leftCheckBox setSelected:YES];
-        [cell.rightCheckBox setSelected:YES];
         cell.leftSelected = YES;
-        cell.rightSelected = YES;
+        
+        if(![cell.rightCheckBox isHidden]){
+            [cell.rightCheckBox setSelected:YES];
+            cell.rightSelected = YES;
+        }
     }
 }
 
@@ -702,9 +705,12 @@ BOOL firstTableLoad = YES;
     
     for(AddFriendItem *cell in self.deviceContactItems){
         [cell.leftCheckBox setSelected:NO];
-        [cell.rightCheckBox setSelected:NO];
         cell.leftSelected = NO;
-        cell.rightSelected = NO;
+        
+        if(![cell.rightCheckBox isHidden]){
+            [cell.rightCheckBox setSelected:NO];
+            cell.rightSelected = NO;
+        }
     }
 }
 

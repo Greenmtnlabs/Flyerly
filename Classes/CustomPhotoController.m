@@ -400,18 +400,18 @@ int counter = 0;
                         //UIImage *immm =[UIImage imageWithCGImage:[representation CGImageWithOptions:thumbnailOptions]];
                         //NSLog(@"Image Width: %f", immm.size.width);
                         //NSLog(@"Image Height: %f", immm.size.height);
-                        [image1 setImage:[self thumbnailForAsset:alAsset maxPixelSize:90]];
+                        [image1 setImage:[self thumbnailForAsset:alAsset maxPixelSize:200]];
                         
                         //[image1 setImage:[UIImage imageWithCGImage:[representation CGImageWithOptions:thumbnailOptions]]];
                         //[image1 setBackgroundImage:[UIImage imageWithCGImage:[representation CGImageWithOptions:thumbnailOptions]] forState:UIControlStateNormal];
                     } else if(imageCounter == 1){
-                        [image2 setImage:[self thumbnailForAsset:alAsset maxPixelSize:90]];
+                        [image2 setImage:[self thumbnailForAsset:alAsset maxPixelSize:200]];
                         //[image2 setBackgroundImage:[UIImage imageWithCGImage:[representation CGImageWithOptions:thumbnailOptions]] forState:UIControlStateNormal];
                     } else if(imageCounter == 2){
-                        [image3 setImage:[self thumbnailForAsset:alAsset maxPixelSize:90]];
+                        [image3 setImage:[self thumbnailForAsset:alAsset maxPixelSize:200]];
                         //[image3 setBackgroundImage:[UIImage imageWithCGImage:[representation CGImageWithOptions:thumbnailOptions]] forState:UIControlStateNormal];
                     } else if(imageCounter == 3){
-                        [image4 setImage:[self thumbnailForAsset:alAsset maxPixelSize:90]];
+                        [image4 setImage:[self thumbnailForAsset:alAsset maxPixelSize:200]];
                         //[image4 setBackgroundImage:[UIImage imageWithCGImage:[representation CGImageWithOptions:thumbnailOptions]] forState:UIControlStateNormal];
                     }
                     

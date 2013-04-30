@@ -25,7 +25,9 @@
     [rightName setText:title2];
     
     if([title2 isEqualToString:@""]){
-        [rightCheckBox setHidden:true];
+        [rightCheckBox setHidden:YES];
+        [rightCheckBox setSelected:FALSE];
+        [rightImage setHidden:YES];
     }
 }
 

@@ -18,7 +18,7 @@
 @implementation LauchViewController
 
 @synthesize ptController,spController,tpController,createFlyrLabel,savedFlyrLabel,inviteFriendLabel,addFriendsController;
-@synthesize firstFlyer, secondFlyer, thirdFlyer, fourthFlyer, photoArray;
+@synthesize firstFlyer, secondFlyer, thirdFlyer, fourthFlyer, photoArray, photoDetailArray;
 @synthesize loadingView;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
@@ -29,7 +29,7 @@
 
 // Load Create Flyr Method With Thread
  -(void)loadPhotoView{
-	loadingViewFlag = YES;
+	//loadingViewFlag = YES;
 	ptController = [[PhotoController alloc]initWithNibName:@"PhotoController" bundle:nil];
 	[self.navigationController pushViewController:ptController animated:YES];
 	[ptController release];
@@ -44,14 +44,14 @@
 
 // Load View Flyr Method With Thread
 -(void)loadFlyerView{
-	loadingViewFlag = YES;
+	//loadingViewFlag = YES;
 	tpController = [[FlyrViewController alloc]initWithNibName:@"FlyrViewController" bundle:nil];
 	[self.navigationController pushViewController:tpController animated:YES];
 	[tpController release];
 }
 
 -(IBAction)doOpen:(id)sender{
-	loadingView =[LoadingView loadingViewInView:self.view];
+	//loadingView =[LoadingView loadingViewInView:self.view];
 	[NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(loadFlyerView) userInfo:nil repeats:NO];
 }
 //End
@@ -119,9 +119,9 @@
 - (void)viewDidLoad {
          [super viewDidLoad];
 	//self.navigationItem.title = @"Menu";
-	loadingViewFlag = NO;
-	loadingView = nil;
-	loadingView = [[LoadingView alloc]init];
+	//loadingViewFlag = NO;
+	//loadingView = nil;
+	//loadingView = [[LoadingView alloc]init];
     
     [createFlyrLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
     [createFlyrLabel setText:NSLocalizedString(@"create_flyer", nil)];
@@ -149,44 +149,102 @@
 -(void)filesByModDate
 {
 	photoArray =[[NSMutableArray alloc]initWithCapacity:4];
+	photoDetailArray =[[NSMutableArray alloc]initWithCapacity:4];
 	NSString *homeDirectoryPath = NSHomeDirectory();
 	NSString *unexpandedPath = [homeDirectoryPath stringByAppendingString:@"/Documents/Flyr/"];
 	NSString *folderPath = [NSString pathWithComponents:[NSArray arrayWithObjects:[NSString stringWithString:[unexpandedPath stringByExpandingTildeInPath]], nil]];
+	//NSString *unexpandedDetailPath = [homeDirectoryPath stringByAppendingString:@"/Documents/Detail/"];
+	//NSString *detailFolderPath = [NSString pathWithComponents:[NSArray arrayWithObjects:[NSString stringWithString:[unexpandedDetailPath stringByExpandingTildeInPath]], nil]];
 	
 	NSArray *files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:folderPath error:nil];
 	NSString *finalImagePath;
-	//NSArray* sortedFiles;
-    int fileCount = [files count] - 1;
+	//NSArray *detailFiles = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:detailFolderPath error:nil];
+	NSString *detailFinalImagePath;
+
+	NSArray* sortedFiles;
+	NSArray* detailSortedFiles;
+    int fileCount = [files count];
+    //int detailFileCount = [detailFiles count];
     
-	for(int i = fileCount; i > 0; i--)
+	for(int i = 0; i < fileCount; i++)
 	{
 		NSString *img = [files objectAtIndex:i];
 		img = [@"/" stringByAppendingString:img];
 		finalImagePath= [folderPath stringByAppendingString:img];
         
-        //NSString *imageName = [photoArray objectAtIndex:0];
+        if([finalImagePath hasSuffix:@".jpg"]){
+            [photoArray addObject:finalImagePath];
+        } else if([finalImagePath hasSuffix:@".txt"]){
+            [photoDetailArray addObject:finalImagePath];
+        }
+	}
+	//for(int j = 0; j < detailFileCount; j++)
+	//{
+	//	NSString *fileName = [detailFiles objectAtIndex:j];
+	//	fileName = [@"/" stringByAppendingString:fileName];
+	//	detailFinalImagePath= [detailFolderPath stringByAppendingString:fileName];
+    //
+    //    [photoDetailArray addObject:detailFinalImagePath];
+	//}
+
+    sortedFiles = [photoArray sortedArrayUsingFunction:dateModifiedSortMain context:nil];
+    detailSortedFiles = [photoDetailArray sortedArrayUsingFunction:dateModifiedSortMain context:nil];
+
+	[photoArray removeAllObjects];
+	[photoDetailArray removeAllObjects];
+	for(int i =0;i< [sortedFiles count];i++)
+	{
+        CGSize size = CGSizeMake(108, 99);
+        
+        finalImagePath = [sortedFiles objectAtIndex:i];
         NSData *imageData = [[NSData alloc ]initWithContentsOfMappedFile:finalImagePath];
         UIImage *currentFlyerImage = [UIImage imageWithData:imageData];
+
         [photoArray addObject:finalImagePath];
 
-        CGSize size = CGSizeMake(108, 99);
-
-        if(i == fileCount){
+        if(i == 0){
             firstFlyer.image = [LauchViewController imageWithImage:currentFlyerImage scaledToSize:size];
-            firstFlyer.tag = fileCount - i;
-        } else if(i  == (fileCount - 1)){
+            firstFlyer.tag = i;
+        } else if(i  == 1){
             secondFlyer.image = [LauchViewController imageWithImage:currentFlyerImage scaledToSize:size];
-            secondFlyer.tag = fileCount - i;
-        } else if(i  == (fileCount - 2)){
+            secondFlyer.tag = i;
+        } else if(i  == 2){
             thirdFlyer.image = [LauchViewController imageWithImage:currentFlyerImage scaledToSize:size];
-            thirdFlyer.tag = fileCount - i;
-        } else if(i  == (fileCount - 3)){
+            thirdFlyer.tag = i;
+        } else if(i  == 3){
             fourthFlyer.image = [LauchViewController imageWithImage:currentFlyerImage scaledToSize:size];
-            fourthFlyer.tag = fileCount - i;
+            fourthFlyer.tag = i;
             break;
         }
 	}
 
+	for(int j =0;j< [detailSortedFiles count];j++)
+	{
+        detailFinalImagePath = [detailSortedFiles objectAtIndex:j];
+        NSLog(@"detailFinalImagePath: %@", detailFinalImagePath);
+        NSArray *myArray = [NSArray arrayWithContentsOfFile:detailFinalImagePath];
+
+        if(j < 4){
+            [photoDetailArray addObject:myArray];
+        }
+	}
+}
+
+NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
+    NSDictionary *attrs1 = [[NSFileManager defaultManager]
+                            attributesOfItemAtPath:file1
+                            error:nil];
+    NSDictionary *attrs2 = [[NSFileManager defaultManager]
+                            attributesOfItemAtPath:file2
+                            error:nil];
+	
+    if ((NSInteger *)reverse == 0) {
+        return [[attrs2 objectForKey:NSFileModificationDate]
+                compare:[attrs1 objectForKey:NSFileModificationDate]];
+    }
+	
+    return [[attrs1 objectForKey:NSFileModificationDate]
+            compare:[attrs2 objectForKey:NSFileModificationDate]];
 }
 
 + (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
@@ -203,11 +261,11 @@
 	[super viewWillDisappear:YES];
 	//self.navigationItem.title = @"Menu";
 	//self.navigationController.navigationBarHidden = YES;
-	if(loadingViewFlag)
-	{
-		[loadingView removeFromSuperview];
-		loadingViewFlag=NO;
-	}
+	//if(loadingViewFlag)
+	//{
+	//	[loadingView removeFromSuperview];
+	//	loadingViewFlag=NO;
+	//}
 }
 
 -(IBAction)createTwitLogin:(id)sender{
@@ -222,15 +280,32 @@
 
 -(IBAction)showFlyerDetail:(UIImageView *)sender{
 
-    DraftViewController *draftViewController = [[DraftViewController alloc] initWithNibName:@"DraftViewController" bundle:nil];
-	NSString *imageName = [photoArray objectAtIndex:sender.tag];
-    NSData *imageData = [[NSData alloc ]initWithContentsOfMappedFile:imageName];
-	UIImage *currentFlyerImage = [UIImage imageWithData:imageData];
-	//draftViewController.fvController = self;
-	draftViewController.selectedFlyerImage = currentFlyerImage;
-	[self.navigationController pushViewController:draftViewController animated:YES];
-    [draftViewController release];
-	//[self performSelector:@selector(deselect) withObject:nil afterDelay:0.2f];
+    if(photoArray.count > sender.tag){
+
+        DraftViewController *draftViewController = [[DraftViewController alloc] initWithNibName:@"DraftViewController" bundle:nil];
+        
+        NSString *imageName = [photoArray objectAtIndex:sender.tag];
+        NSData *imageData = [[NSData alloc ]initWithContentsOfMappedFile:imageName];
+        UIImage *currentFlyerImage = [UIImage imageWithData:imageData];
+        //draftViewController.fvController = self;
+        draftViewController.selectedFlyerImage = currentFlyerImage;
+        
+        if(photoDetailArray.count > sender.tag){
+            NSArray *detailArray = [photoDetailArray objectAtIndex:sender.tag];
+            NSString *title = [detailArray objectAtIndex:0];
+            NSString *description = [detailArray objectAtIndex:1];
+            draftViewController.selectedFlyerTitle = title;
+            draftViewController.selectedFlyerDescription = description;
+            draftViewController.imageFileName = imageName;
+
+            NSString *newText = [imageName stringByReplacingOccurrencesOfString:@".jpg" withString:@".txt"];
+            draftViewController.detailFileName = newText;
+        }
+        
+        [self.navigationController pushViewController:draftViewController animated:YES];
+        [draftViewController release];
+        //[self performSelector:@selector(deselect) withObject:nil afterDelay:0.2f];
+    }
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {

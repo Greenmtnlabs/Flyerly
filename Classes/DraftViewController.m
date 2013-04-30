@@ -13,7 +13,7 @@
 #import "Common.h"
 @implementation DraftViewController
 
-@synthesize selectedFlyerImage,imgView,navBar,fvController,svController;
+@synthesize selectedFlyerImage,imgView,navBar,fvController,svController,titleView,descriptionView,selectedFlyerDescription,selectedFlyerTitle, detailFileName, imageFileName;
 
 -(void)callFlyrView{
 	[self.navigationController popToViewController:fvController animated:YES];
@@ -40,10 +40,16 @@
 	self.navigationController.navigationBarHidden = NO;
 	//self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
 	[UIView commitAnimations];
-	imgView = [[UIImageView alloc]initWithImage:selectedFlyerImage];
-	[self.view addSubview:imgView];
-	
+	//imgView = [[UIImageView alloc]initWithImage:selectedFlyerImage];
+	//[self.view addSubview:imgView];
+	[imgView setImage:selectedFlyerImage];
 
+    [titleView setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
+	[titleView setText:selectedFlyerTitle];
+    
+    [descriptionView setFont:[UIFont fontWithName:@"Signika-Regular" size:10]];
+    [descriptionView setTextColor:[UIColor grayColor]];
+	[descriptionView setText:selectedFlyerDescription];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -86,8 +92,31 @@
 - (void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
 	[self dismissNavBar:YES];
+    
+    // If text changed then save it again
+   if(![selectedFlyerTitle isEqualToString:titleView.text] || ![titleView.text isEqualToString:@""]){
+        [self updateFlyerDetail];
+    }
 }
 
+-(void)updateFlyerDetail {
+	
+    // delete already existing file and
+    // Add file with same name
+    [[NSFileManager defaultManager] removeItemAtPath:detailFileName error:nil];
+	NSMutableArray *array = [[[NSMutableArray alloc] init] autorelease];
+    [array addObject:titleView.text];
+    [array addObject:descriptionView.text];
+    [array writeToFile:detailFileName atomically:YES];
+	
+    // delete already exsiting file and
+    // add same image with same name
+    //  This is done to match the update time when sorting the files
+    [[NSFileManager defaultManager] removeItemAtPath:imageFileName error:nil];
+	NSData *imgData = UIImagePNGRepresentation(selectedFlyerImage);
+	[[NSFileManager defaultManager] createFileAtPath:imageFileName contents:imgData attributes:nil];
+
+}
 
 - (void)didReceiveMemoryWarning {
 	// Releases the view if it doesn't have a superview.

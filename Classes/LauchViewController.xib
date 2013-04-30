@@ -310,6 +310,7 @@
 								<string key="NSFrame">{{125, 392}, {71, 69}}</string>
 								<reference key="NSSuperview" ref="87613878"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -341,6 +342,7 @@
 								<reference key="NSNextKeyView" ref="412557744"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<int key="IBUIContentMode">4</int>
+								<int key="IBUITag">1000</int>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<object class="NSCustomResource" key="IBUIImage" id="80935975">
 									<string key="NSClassName">NSImage</string>
@@ -356,6 +358,7 @@
 								<reference key="NSNextKeyView" ref="384374429"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<int key="IBUIContentMode">4</int>
+								<int key="IBUITag">1000</int>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<reference key="IBUIImage" ref="80935975"/>
 							</object>
@@ -368,6 +371,7 @@
 								<reference key="NSNextKeyView" ref="872870109"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<int key="IBUIContentMode">4</int>
+								<int key="IBUITag">1000</int>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<reference key="IBUIImage" ref="80935975"/>
 							</object>
@@ -380,6 +384,7 @@
 								<reference key="NSNextKeyView" ref="721317128"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<int key="IBUIContentMode">4</int>
+								<int key="IBUITag">1000</int>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<reference key="IBUIImage" ref="80935975"/>
 							</object>

@@ -13,7 +13,7 @@
 #import "Common.h"
 #import "LauchViewController.h"
 @implementation FlyrViewController
-@synthesize photoArray,navBar,tView,iconArray;
+@synthesize photoArray,navBar,tView,iconArray,photoDetailArray,ptController;
 
 
 - (UIImage *)scale:(NSString *)imageName toSize:(CGSize)size
@@ -55,6 +55,7 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
 -(void)filesByModDate
 {
 	photoArray =[[NSMutableArray alloc]init];
+	photoDetailArray =[[NSMutableArray alloc]init];
 	iconArray = [[NSMutableArray alloc]init];
 	NSString *homeDirectoryPath = NSHomeDirectory();
 	NSString *unexpandedPath = [homeDirectoryPath stringByAppendingString:@"/Documents/Flyr/"];
@@ -63,18 +64,27 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
 	NSArray *files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:folderPath error:nil];
 	NSString *finalImagePath;
 	NSArray* sortedFiles;
+	NSArray* detailSortedFiles;
+	NSString *detailFinalImagePath;
 
 	for(int i =0;i< [files count];i++)
 	{
 		NSString *img = [files objectAtIndex:i];
 		img = [@"/" stringByAppendingString:img];
 		finalImagePath= [folderPath stringByAppendingString:img];
-		[photoArray addObject:finalImagePath];
+        
+        if([finalImagePath hasSuffix:@".jpg"]){
+            [photoArray addObject:finalImagePath];
+        } else if([finalImagePath hasSuffix:@".txt"]){
+            [photoDetailArray addObject:finalImagePath];
+        }
 	}
-           sortedFiles = [photoArray sortedArrayUsingFunction:dateModifiedSort
-                                                       context:nil];
-        //NSLog(@"sortedFiles: %@", sortedFiles);            
+    
+    sortedFiles = [photoArray sortedArrayUsingFunction:dateModifiedSort context:nil];
+    detailSortedFiles = [photoDetailArray sortedArrayUsingFunction:dateModifiedSort context:nil];
+
 	[photoArray removeAllObjects];
+	[photoDetailArray removeAllObjects];
 	for(int i =0;i< [sortedFiles count];i++)
 	{
 			finalImagePath = [sortedFiles objectAtIndex:i];
@@ -82,8 +92,17 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
 			[photoArray addObject:finalImagePath];
 			[iconArray addObject:temp];
 		//NSLog(@"photoArray:%@",[photoArray objectAtIndex:i]);
-	}	
-}
+	}
+    
+    
+    
+	for(int j =0;j< [detailSortedFiles count];j++)
+	{
+        detailFinalImagePath = [detailSortedFiles objectAtIndex:j];
+        NSLog(@"detailFinalImagePath: %@", detailFinalImagePath);
+        NSArray *myArray = [NSArray arrayWithContentsOfFile:detailFinalImagePath];
+        [photoDetailArray addObject:myArray];
+	}}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -157,7 +176,7 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
 
     // Create left bar help button
     UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 54, 35)];
-    [shareButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+    [shareButton addTarget:self action:@selector(doNew:) forControlEvents:UIControlEventTouchUpInside];
     [shareButton setBackgroundImage:[UIImage imageNamed:@"create_button"] forState:UIControlStateNormal];
     UIBarButtonItem *shareBarButton = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
     //UIBarButtonItem *shareBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Share" style:UIControlStateNormal
@@ -206,6 +225,19 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
 	UIImage *currentFlyerImage = [UIImage imageWithData:imageData];
 	draftViewController.fvController = self;
 	draftViewController.selectedFlyerImage = currentFlyerImage;
+    
+    if(photoDetailArray.count > indexPath.row){
+        NSArray *detailArray = [photoDetailArray objectAtIndex:indexPath.row];
+        NSString *title = [detailArray objectAtIndex:0];
+        NSString *description = [detailArray objectAtIndex:1];
+        draftViewController.selectedFlyerTitle = title;
+        draftViewController.selectedFlyerDescription = description;
+        draftViewController.imageFileName = imageName;
+        
+        NSString *newText = [imageName stringByReplacingOccurrencesOfString:@".jpg" withString:@".txt"];
+        draftViewController.detailFileName = newText;
+    }
+
 	[self.navigationController pushViewController:draftViewController animated:YES];
 	 [draftViewController release];
 	[self performSelector:@selector(deselect) withObject:nil afterDelay:0.2f];
@@ -232,6 +264,11 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
 	[tableView reloadData];
 }
 
+-(IBAction)doNew:(id)sender{
+	ptController = [[PhotoController alloc]initWithNibName:@"PhotoController" bundle:nil];
+	[self.navigationController pushViewController:ptController animated:YES];
+	//[ptController release];
+}
 
 - (void)postDismissCleanup {
 	[navBar removeFromSuperview];	
@@ -264,6 +301,7 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
 	[iconArray release];
 	[tView release];
 	[photoArray release];
+    [ptController release];
     [super dealloc];
 }
 

@@ -279,7 +279,7 @@
             UIImageView *lock = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lock"]];
             lock.frame = CGRectMake(20, 20, 17, 19);
             [font addSubview:lock];
-            lock.userInteractionEnabled = NO;
+            font.userInteractionEnabled = NO;
         }
 
 		[fontScrollView addSubview:font];
@@ -1665,7 +1665,8 @@
 			[self.imgView bringSubviewToFront:msgLabel];
 
 			for (UITouch *touch in touches) {
-				[self dispatchFirstTouchAtPoint:msgLabel point:[touch locationInView:self.view] forEvent:nil];
+				//[self dispatchFirstTouchAtPoint:msgLabel point:[touch locationInView:self.view] forEvent:nil];
+				[self dispatchFirstTouchAtPoint:msgLabel point:[touch locationInView:self.imgView] forEvent:nil];
 			}
 		}	
 		else if (CGRectContainsPoint([photoImgView frame], [touch locationInView:self.view]) && photoTouchFlag)
@@ -1673,7 +1674,8 @@
 			[self.imgView sendSubviewToBack:photoImgView];
 			[self.imgView bringSubviewToFront:msgLabel];
 			for (UITouch *touch in touches) {
-				[self dispatchFirstTouchAtPoint:photoImgView point:[touch locationInView:self.view] forEvent:nil];
+				[self dispatchFirstTouchAtPoint:photoImgView point:[touch locationInView:self.imgView] forEvent:nil];
+				//[self dispatchFirstTouchAtPoint:photoImgView point:[touch locationInView:self.view] forEvent:nil];
 			}
 		}	
 	}
@@ -1688,19 +1690,23 @@
 	UITouch *touch = [touches anyObject];
 
 		
-	if (CGRectContainsPoint([msgLabel frame], [touch locationInView:self.view]) && lableTouchFlag)
+	//if (CGRectContainsPoint([msgLabel frame], [touch locationInView:self.view]) && lableTouchFlag)
+    if (CGRectContainsPoint([msgLabel frame], [touch locationInView:self.imgView]) && lableTouchFlag)
 	{
 		
 		for (UITouch *touch in touches){
 			lableLocation = [touch locationInView:self.imgView];
-			[self dispatchTouchEvent:msgLabel toPosition:[touch locationInView:self.view]];
+			[self dispatchTouchEvent:msgLabel toPosition:[touch locationInView:self.imgView]];
+			//[self dispatchTouchEvent:msgLabel toPosition:[touch locationInView:self.view]];
 		}
 		
 	}
-	else if (CGRectContainsPoint([photoImgView frame], [touch locationInView:self.view]) && photoTouchFlag)
+	else if (CGRectContainsPoint([photoImgView frame], [touch locationInView:self.imgView]) && photoTouchFlag)
+	//else if (CGRectContainsPoint([photoImgView frame], [touch locationInView:self.view]) && photoTouchFlag)
 	{
 		for (UITouch *touch in touches){
-			[self dispatchTouchEvent:photoImgView toPosition:[touch locationInView:self.view]];
+			[self dispatchTouchEvent:photoImgView toPosition:[touch locationInView:self.imgView]];
+			//[self dispatchTouchEvent:photoImgView toPosition:[touch locationInView:self.view]];
 		}
 	}
 }
@@ -1709,19 +1715,26 @@
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	UITouch *touch = [touches anyObject];
-	[self dispatchTouchEndEvent:msgLabel toPosition:[touch locationInView:self.view]];
-	[self dispatchTouchEndEvent:photoImgView toPosition:[touch locationInView:self.view]];
-	if (!CGRectContainsPoint([msgLabel frame], [touch locationInView:self.view])&& lableTouchFlag)
+	[self dispatchTouchEndEvent:msgLabel toPosition:[touch locationInView:self.imgView]];
+	[self dispatchTouchEndEvent:photoImgView toPosition:[touch locationInView:self.imgView]];
+	//[self dispatchTouchEndEvent:msgLabel toPosition:[touch locationInView:self.view]];
+	//[self dispatchTouchEndEvent:photoImgView toPosition:[touch locationInView:self.view]];
+	if (!CGRectContainsPoint([msgLabel frame], [touch locationInView:self.imgView])&& lableTouchFlag)
 	{
+	//if (!CGRectContainsPoint([msgLabel frame], [touch locationInView:self.view])&& lableTouchFlag)
+	//{
 		[self.view bringSubviewToFront:msgLabel];
 		for (UITouch *touch in touches) {
-			[self dispatchFirstTouchAtPoint:msgLabel point:[touch locationInView:self.view] forEvent:nil];
+			//[self dispatchFirstTouchAtPoint:msgLabel point:[touch locationInView:self.view] forEvent:nil];
+			[self dispatchFirstTouchAtPoint:msgLabel point:[touch locationInView:self.imgView] forEvent:nil];
 		}
 	}
-	else if (!CGRectContainsPoint([photoImgView frame], [touch locationInView:self.view]) && photoTouchFlag)
+	else if (!CGRectContainsPoint([photoImgView frame], [touch locationInView:self.imgView]) && photoTouchFlag)
+	//else if (!CGRectContainsPoint([photoImgView frame], [touch locationInView:self.view]) && photoTouchFlag)
 	{
 		for (UITouch *touch in touches){
-			[self dispatchFirstTouchAtPoint:photoImgView point:[touch locationInView:self.view] forEvent:nil];
+			[self dispatchFirstTouchAtPoint:photoImgView point:[touch locationInView:self.imgView] forEvent:nil];
+			//[self dispatchFirstTouchAtPoint:photoImgView point:[touch locationInView:self.view] forEvent:nil];
 		}
 	}
 }
@@ -1746,11 +1759,18 @@
 	NSInteger largestImgCount=-1;
 	NSArray *files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:folderPath error:nil];
 	
+	NSString *finalImgDetailWritePath;	
+    //NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    //NSString *documentsDirectory = [paths objectAtIndex:0];
+	//NSString *detailFlyerPath = [documentsDirectory stringByAppendingString:@"/Detail/"];
+
 	/************************ CREATE UNIQUE NAME FOR IMAGE ***********************************/
 	if(files == nil)
 	{
 		finalImgWritePath = [folderPath stringByAppendingString:@"/IMG_0.jpg"];
-		
+		//finalImgDetailWritePath = [detailFlyerPath stringByAppendingString:@"/IMG_DETAIL_0.txt"];
+        finalImgDetailWritePath = [folderPath stringByAppendingString:@"/IMG_0.txt"];
+
 	}
 	else
 	{
@@ -1770,6 +1790,11 @@
 		[ap release];
 		NSString *newImgName = [NSString stringWithFormat:@"/IMG_%d.jpg",++largestImgCount];
 		finalImgWritePath = [folderPath stringByAppendingString:newImgName];
+		//NSString *newImgDetailName = [NSString stringWithFormat:@"/IMG_DETAIL_%d.txt",largestImgCount];
+		//finalImgDetailWritePath = [detailFlyerPath stringByAppendingString:newImgDetailName];
+		NSString *newImgDetailName = [NSString stringWithFormat:@"/IMG_%d.txt",largestImgCount];
+		finalImgDetailWritePath = [folderPath stringByAppendingString:newImgDetailName];
+
 	}
 	/************************ END OF CREATE UNIQUE NAME FOR IMAGE ***********************************/
 
@@ -1778,10 +1803,20 @@
 		[[NSFileManager defaultManager] createDirectoryAtPath:folderPath attributes:nil];
 	}
 
-	[aHUD.loadingLabel setText:@"Saved"];
+	//NSString *imgDetailPath = [NSString pathWithComponents:[NSArray arrayWithObjects:[NSString stringWithString:[finalImgDetailWritePath stringByExpandingTildeInPath]], nil]];
+    //
+	//if (![[NSFileManager defaultManager] fileExistsAtPath:detailFlyerPath isDirectory:NULL]) {
+	//	[[NSFileManager defaultManager] createDirectoryAtPath:detailFlyerPath attributes:nil];
+	//}
+    
+	NSMutableArray *array = [[[NSMutableArray alloc] init] autorelease];
+    [array addObject:@"Title"];
+    [array addObject:msgTextView.text];
+    [array writeToFile:finalImgDetailWritePath atomically:YES];
+	
+    [aHUD.loadingLabel setText:@"Saved"];
 	[NSTimer scheduledTimerWithTimeInterval:0.4f target:self selector:@selector(killHUD) userInfo:nil repeats:NO];
 
-	
 	NSData *imgData = UIImagePNGRepresentation(screenImage);
 	//[imgData writeToFile:imgPath atomically:YES];
 	//(BOOL)createFileAtPath:(NSString *)path contents:(NSData *)data attributes:(NSDictionary *)attr
