@@ -10,6 +10,7 @@
 #import "MyNavigationBar.h"
 #import "FlyrAppDelegate.h"
 #import "HudView.h"
+#import "CustomLabel.h"
 
 @interface PhotoController : UIViewController<UIActionSheetDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 {
@@ -25,17 +26,20 @@
 	UIButton *cameraRollButton;
     UILabel *takePhotoLabel;
 	UILabel *cameraRollLabel;
+    UIButton *moreLayersButton;
+    UILabel *moreLayersLabel;
 
 	UIScrollView *fontScrollView;
 	UIScrollView *colorScrollView;
 	UIScrollView *sizeScrollView;
 	UIScrollView *borderScrollView;
+	UIScrollView *fontBorderScrollView;
 	UIScrollView *templateScrollView;
-	UIScrollView *heightScrollView;
-	UIScrollView *widthScrollView;
+	//UIScrollView *heightScrollView;
+	//UIScrollView *widthScrollView;
 	
 	UITextView *msgTextView;
-	UILabel *msgLabel;
+	CustomLabel *msgLabel;
 	UIImagePickerController *imgPicker;
 	
 	bool keyboardShown;
@@ -57,7 +61,9 @@
 	UIButton *colorTabButton;
 	UIButton *sizeTabButton;
 	UIButton *borderTabButton;
+	UIButton *fontBorderTabButton;
 
+	UIButton *cameraTabButton;
 	UIButton *photoTabButton;
 	UIButton *widthTabButton;
 	UIButton *heightTabButton;
@@ -89,14 +95,17 @@
 @property (nonatomic,retain)  UIButton *cameraRollButton;
 @property (nonatomic,retain)  UILabel *takePhotoLabel;
 @property (nonatomic,retain)  UILabel *cameraRollLabel;
+@property (nonatomic,retain)  UIButton *moreLayersButton;
+@property (nonatomic,retain)  UILabel *moreLayersLabel;
 
 @property (nonatomic, retain) UIScrollView *templateScrollView;
 @property (nonatomic, retain) UIScrollView *fontScrollView;
 @property (nonatomic, retain) UIScrollView *colorScrollView;
 @property (nonatomic, retain) UIScrollView *sizeScrollView;
 @property (nonatomic, retain) UIScrollView *borderScrollView;
-@property (nonatomic,retain) UIScrollView *heightScrollView;
-@property (nonatomic,retain) UIScrollView *widthScrollView;
+@property (nonatomic, retain) UIScrollView *fontBorderScrollView;
+//@property (nonatomic,retain) UIScrollView *heightScrollView;
+//@property (nonatomic,retain) UIScrollView *widthScrollView;
 
 @property (nonatomic, retain) UIFont *selectedFont;
 @property (nonatomic, assign) id selectedColor;
@@ -108,8 +117,10 @@
 @property (nonatomic, retain) UIButton *colorTabButton;
 @property (nonatomic, retain) UIButton *sizeTabButton;
 @property (nonatomic, retain) UIButton *borderTabButton;
+@property (nonatomic, retain) UIButton *fontBorderTabButton;
 @property (nonatomic, retain) UIImage *finalFlyer;
 
+@property (nonatomic,retain) UIButton *cameraTabButton;
 @property (nonatomic,retain) UIButton *photoTabButton;
 @property (nonatomic,retain) UIButton *widthTabButton;
 @property (nonatomic,retain) UIButton *heightTabButton;
@@ -130,4 +141,5 @@
 -(NSData*)getCurrentFrameAndSaveIt;
 -(void)loadPhotoLibrary;
 -(void)setPhotoTabAction:(id) sender;
++ (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize;
 @end

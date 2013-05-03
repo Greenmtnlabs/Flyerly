@@ -212,7 +212,7 @@ nil]
 [UIFont fontWithName:@"HiraKakuProN-W6" size:16],\
 nil]
 
-#define SIZE_ARRAY [NSArray arrayWithObjects: @"8",  @"9", @"10", @"11" ,@"12",@"14",@"16",@"18",@"20",@"22",@"24",  @"26", @"28", @"30",@"36",@"42",@"48",@"52",@"60",@"72",@"74",nil]
+#define SIZE_ARRAY [NSArray arrayWithObjects: @"10", @"11" ,@"12",@"14",@"16",@"18",@"20",@"22",@"24",  @"26", @"28", @"30",@"36",@"42",@"48",@"52",@"60",@"72",@"74",@"80",@"90",nil]
 
 #define WIDTH_ARRAY [NSArray arrayWithObjects: @"50", @"75" ,@"100",@"120",@"140",@"160",@"175",@"200",@"220",@"240",@"260",nil]
 

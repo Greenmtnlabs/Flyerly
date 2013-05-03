@@ -41,6 +41,7 @@
     NSMutableArray *deviceContactItems;
     int selectedTab;
 	BOOL loadingViewFlag;
+    BOOL unSelectAll;
 }
 
 @property(nonatomic,retain) IBOutlet UILabel *contactsLabel;

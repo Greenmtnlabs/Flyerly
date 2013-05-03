@@ -8,10 +8,12 @@
 
 #import "CustomPhotoController.h"
 #import "CustomGalleryItem.h"
+#import "Common.h"
+#import "PhotoController.h"
 
 //#define IMAGE_HEIGHT 204
 //#define IMAGE_WIDTH  204
-#define IMAGE_HEIGHT 400
+#define IMAGE_HEIGHT 309
 #define IMAGE_WIDTH  320
 @implementation CustomPhotoController
 @synthesize scrollView, imageView, image, callbackObject, callbackOnComplete, galleryTable;
@@ -161,8 +163,8 @@
     
     // Get the content offset in scroll view.
     CGPoint scrollOffset = CGPointMake(
-                                       scrollView.contentOffset.x + ((self.view.frame.size.width - IMAGE_WIDTH) / 2),
-                                       scrollView.contentOffset.y + ((self.view.frame.size.height - IMAGE_HEIGHT) /2));
+                                       scrollView.contentOffset.x,
+                                       scrollView.contentOffset.y);
     
     // Get the offset of the image.
     CGPoint imageOffset = CGPointMake( imageView.frame.origin.x,
@@ -170,10 +172,8 @@
     
     // Create rectangle that represents a cropped image
     // from the middle of the current view.
-    float deltaX = ( scrollOffset.x - imageOffset.x ) /
-    scrollView.zoomScale;
-    float deltaY = ( scrollOffset.y - imageOffset.y ) /
-    scrollView.zoomScale;
+    float deltaX = ( scrollOffset.x - imageOffset.x ) / scrollView.zoomScale;
+    float deltaY = ( scrollOffset.y - imageOffset.y ) / scrollView.zoomScale;
     float imageWidth = ( IMAGE_WIDTH + (( deltaX < 0 ) ? deltaX : 0 ) ) / scrollView.zoomScale;
     float imageHeight = ( IMAGE_HEIGHT + (( deltaY < 0 ) ? deltaY : 0) ) / scrollView.zoomScale;
     
@@ -182,6 +182,12 @@
     deltaX = (deltaX < 0) ? 0 : deltaX;
     deltaY = (deltaY < 0) ? 0 : deltaY;
     
+    NSLog(@"%f",deltaX);
+    NSLog(@"%f",deltaY);
+    NSLog(@"%f",imageWidth);
+    NSLog(@"%f",imageHeight);
+    NSLog(@"%f",scrollView.zoomScale);
+
     CGRect rect = CGRectMake(deltaX,
                              deltaY,
                              imageWidth, imageHeight);
@@ -230,7 +236,6 @@
     [imageView setFrame:CGRectMake((contentSize.width - imageSize.width)/2,
                                    (contentSize.height - imageSize.height)/2,
                                    imageSize.width, imageSize.height)];   
-
     
     [self imageCount];
 }
@@ -400,18 +405,18 @@ int counter = 0;
                         //UIImage *immm =[UIImage imageWithCGImage:[representation CGImageWithOptions:thumbnailOptions]];
                         //NSLog(@"Image Width: %f", immm.size.width);
                         //NSLog(@"Image Height: %f", immm.size.height);
-                        [image1 setImage:[self thumbnailForAsset:alAsset maxPixelSize:200]];
+                        [image1 setImage:[self thumbnailForAsset:alAsset maxPixelSize:300]];
                         
                         //[image1 setImage:[UIImage imageWithCGImage:[representation CGImageWithOptions:thumbnailOptions]]];
                         //[image1 setBackgroundImage:[UIImage imageWithCGImage:[representation CGImageWithOptions:thumbnailOptions]] forState:UIControlStateNormal];
                     } else if(imageCounter == 1){
-                        [image2 setImage:[self thumbnailForAsset:alAsset maxPixelSize:200]];
+                        [image2 setImage:[self thumbnailForAsset:alAsset maxPixelSize:300]];
                         //[image2 setBackgroundImage:[UIImage imageWithCGImage:[representation CGImageWithOptions:thumbnailOptions]] forState:UIControlStateNormal];
                     } else if(imageCounter == 2){
-                        [image3 setImage:[self thumbnailForAsset:alAsset maxPixelSize:200]];
+                        [image3 setImage:[self thumbnailForAsset:alAsset maxPixelSize:300]];
                         //[image3 setBackgroundImage:[UIImage imageWithCGImage:[representation CGImageWithOptions:thumbnailOptions]] forState:UIControlStateNormal];
                     } else if(imageCounter == 3){
-                        [image4 setImage:[self thumbnailForAsset:alAsset maxPixelSize:200]];
+                        [image4 setImage:[self thumbnailForAsset:alAsset maxPixelSize:300]];
                         //[image4 setBackgroundImage:[UIImage imageWithCGImage:[representation CGImageWithOptions:thumbnailOptions]] forState:UIControlStateNormal];
                     }
                     

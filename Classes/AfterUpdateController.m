@@ -8,6 +8,8 @@
 
 #import "AfterUpdateController.h"
 #import "LauchViewController.h"
+#import "Common.h"
+#import "FlyrAppDelegate.h"
 
 @implementation AfterUpdateController
 @synthesize launchController;
@@ -17,9 +19,10 @@
 }
 
 -(IBAction)ok{
-	launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
-	[self.navigationController pushViewController:launchController animated:YES];
-	[launchController release];
+    
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    
+    [self.navigationController popToViewController:appDelegate.lauchController animated:YES];
 }
 
 @end

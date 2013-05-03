@@ -35,11 +35,14 @@
     IBOutlet UIImageView *secondFlyer;
     IBOutlet UIImageView *thirdFlyer;
     IBOutlet UIImageView *fourthFlyer;
+    IBOutlet UIImageView *fifthFlyer;
+    IBOutlet UIImageView *sixthFlyer;
 
 	//IBOutlet FBLoginButton *faceBookButton;
 	BOOL loadingViewFlag;
 	NSMutableArray *photoArray;
 	NSMutableArray *photoDetailArray;
+    int numberOfFlyers;
 }
 @property(nonatomic,retain) PhotoController *ptController;
 @property (nonatomic, retain) LoadingView *loadingView;
@@ -56,6 +59,8 @@
 @property (nonatomic, retain) IBOutlet UIImageView *secondFlyer;
 @property (nonatomic, retain) IBOutlet UIImageView *thirdFlyer;
 @property (nonatomic, retain) IBOutlet UIImageView *fourthFlyer;
+@property (nonatomic, retain) IBOutlet UIImageView *fifthFlyer;
+@property (nonatomic, retain) IBOutlet UIImageView *sixthFlyer;
 @property(nonatomic,retain) NSMutableArray *photoArray;
 @property(nonatomic,retain) NSMutableArray *photoDetailArray;
 

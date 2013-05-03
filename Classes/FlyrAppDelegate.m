@@ -27,7 +27,7 @@
 
 @synthesize window;
 @synthesize navigationController,faceBookPermissionFlag,changesFlag;
-@synthesize fontScrollView,colorScrollView,templateScrollView,sizeScrollView,svController,_tSession;
+@synthesize fontScrollView,colorScrollView,templateScrollView,sizeScrollView,svController,_tSession,lauchController;
 //@synthesize adwhirl;
 @synthesize session = _session;
 
@@ -73,14 +73,29 @@
         NSLog(@"Welcome to the world of Flyerly");
         [[NSUserDefaults standardUserDefaults] setObject:@"greeted" forKey:@"greeted"];
         
+        if(IS_IPHONE_5){
+            lauchController = [[LauchViewController alloc]initWithNibName:@"LauchViewControllerIPhone5" bundle:nil];
+        }else{
+            lauchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
+        }
+
+        [navigationController pushViewController:lauchController animated:NO];
+        [window addSubview:[navigationController view]];
+
         AfterUpdateController *afterUpdateView = [[AfterUpdateController alloc]initWithNibName:@"AfterUpdateController" bundle:nil];
         [navigationController pushViewController:afterUpdateView animated:NO];
-        [window addSubview:[navigationController view]];
+        
     } else {
+        
         NSLog(@"User already Greeted !");
 
-        LauchViewController *launchView = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
-        [navigationController pushViewController:launchView animated:NO];
+        if(IS_IPHONE_5){
+            lauchController = [[LauchViewController alloc]initWithNibName:@"LauchViewControllerIPhone5" bundle:nil];
+        }else{
+            lauchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
+        }
+
+        [navigationController pushViewController:lauchController animated:NO];
         [window addSubview:[navigationController view]];
     }
 
@@ -183,6 +198,7 @@
 
 - (void)dealloc {
 //	[adwhirl release];
+    [lauchController release];
 	[navigationController release];
 	[window release];
 	[super dealloc];

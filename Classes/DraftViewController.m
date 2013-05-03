@@ -38,6 +38,14 @@
 	
 	//self.navigationItem.title = @"Social Flyer";
 	self.navigationController.navigationBarHidden = NO;
+    
+    UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 33)];
+    [shareButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+    [shareButton setBackgroundImage:[UIImage imageNamed:@"share"] forState:UIControlStateNormal];
+	//[shareButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
+    [self.navigationItem setRightBarButtonItem:rightBarButton];
+
 	//self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
 	[UIView commitAnimations];
 	//imgView = [[UIImageView alloc]initWithImage:selectedFlyerImage];
@@ -94,7 +102,7 @@
 	[self dismissNavBar:YES];
     
     // If text changed then save it again
-   if(![selectedFlyerTitle isEqualToString:titleView.text] || ![titleView.text isEqualToString:@""]){
+   if(![selectedFlyerTitle isEqualToString:titleView.text]){
         [self updateFlyerDetail];
     }
 }

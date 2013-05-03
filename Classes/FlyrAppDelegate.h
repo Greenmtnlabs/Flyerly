@@ -27,6 +27,7 @@
          UIWindow *window;
          UINavigationController *navigationController;
 	SaveFlyerController *svController;
+    LauchViewController *lauchController;
 	//NSMutableArray *templateArray;
 	//NSMutableArray *iconArray;
     
@@ -48,6 +49,7 @@
 @property (nonatomic, retain) UIScrollView *sizeScrollView;
 @property (nonatomic, retain) UIScrollView *templateScrollView;
 @property (nonatomic, retain) SaveFlyerController *svController;
+@property (nonatomic, retain) LauchViewController *lauchController;
 
 //@property (nonatomic, retain) FBDialog* dialog;
 //@property (nonatomic,retain) FBPermissionDialog* perDialog;

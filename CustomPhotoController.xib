@@ -53,17 +53,6 @@
 							<string key="NSResourceName">top_bg_with_logo.png</string>
 						</object>
 					</object>
-					<object class="IBUIImageView" id="203438037">
-						<reference key="NSNextResponder" ref="580389505"/>
-						<int key="NSvFlags">304</int>
-						<string key="NSFrame">{{0, 44}, {320, 301}}</string>
-						<reference key="NSSuperview" ref="580389505"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="349486089"/>
-						<string key="NSReuseIdentifierKey">_NS:9</string>
-						<bool key="IBUIUserInteractionEnabled">NO</bool>
-						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-					</object>
 					<object class="IBUIScrollView" id="349486089">
 						<reference key="NSNextResponder" ref="580389505"/>
 						<int key="NSvFlags">304</int>
@@ -92,6 +81,21 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<float key="IBUIMinimumZoomScale">0.5</float>
 						<float key="IBUIMaximumZoomScale">6</float>
+					</object>
+					<object class="IBUIImageView" id="203438037">
+						<reference key="NSNextResponder" ref="580389505"/>
+						<int key="NSvFlags">304</int>
+						<string key="NSFrame">{{0, 44}, {320, 290}}</string>
+						<reference key="NSSuperview" ref="580389505"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="349486089"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<object class="NSCustomResource" key="IBUIImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">grids.png</string>
+						</object>
 					</object>
 					<object class="IBUIButton" id="825172111">
 						<reference key="NSNextResponder" ref="580389505"/>
@@ -163,7 +167,6 @@
 						<string key="NSFrame">{{0, 376}, {320, 84}}</string>
 						<reference key="NSSuperview" ref="580389505"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<reference key="IBUIBackgroundColor" ref="1058426456"/>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -286,8 +289,8 @@
 						<array class="NSMutableArray" key="children">
 							<reference ref="349486089"/>
 							<reference ref="825172111"/>
-							<reference ref="203438037"/>
 							<reference ref="216645937"/>
+							<reference ref="203438037"/>
 							<reference ref="168500089"/>
 							<reference ref="480766704"/>
 						</array>
@@ -308,11 +311,6 @@
 						<reference key="parent" ref="349486089"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">31</int>
-						<reference key="object" ref="203438037"/>
-						<reference key="parent" ref="580389505"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">50</int>
 						<reference key="object" ref="825172111"/>
 						<reference key="parent" ref="580389505"/>
@@ -330,6 +328,11 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">68</int>
 						<reference key="object" ref="168500089"/>
+						<reference key="parent" ref="580389505"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">31</int>
+						<reference key="object" ref="203438037"/>
 						<reference key="parent" ref="580389505"/>
 					</object>
 				</array>
@@ -405,6 +408,7 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
+			<string key="grids.png">{307, 304}</string>
 			<string key="icon_bg.png">{320, 38}</string>
 			<string key="menu_icon.png">{23, 13}</string>
 			<string key="top_bg_with_logo.png">{320, 44}</string>

@@ -99,7 +99,7 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
 	for(int j =0;j< [detailSortedFiles count];j++)
 	{
         detailFinalImagePath = [detailSortedFiles objectAtIndex:j];
-        NSLog(@"detailFinalImagePath: %@", detailFinalImagePath);
+        //NSLog(@"detailFinalImagePath: %@", detailFinalImagePath);
         NSArray *myArray = [NSArray arrayWithContentsOfFile:detailFinalImagePath];
         [photoDetailArray addObject:myArray];
 	}}
@@ -171,7 +171,7 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
     [saveFlyrLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:8.5]];
     [saveFlyrLabel setTextColor:[MyCustomCell colorWithHexString:@"008ec0"]];
     [saveFlyrLabel setBackgroundColor:[UIColor clearColor]];
-    [saveFlyrLabel setText:@"Share flyer"];
+    [saveFlyrLabel setText:@"Saved flyer"];
     UIBarButtonItem *barLabel = [[UIBarButtonItem alloc] initWithCustomView:saveFlyrLabel];
 
     // Create left bar help button

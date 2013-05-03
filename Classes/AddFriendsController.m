@@ -31,13 +31,7 @@ BOOL firstTableLoad = YES;
 	loadingViewFlag = NO;
     loadingView = nil;
 	loadingView = [[LoadingView alloc]init];
-    
-    UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 31, 30)];
-    [menuButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-    [menuButton setBackgroundImage:[UIImage imageNamed:@"menu_button"] forState:UIControlStateNormal];
-	[menuButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
-    [self.navigationItem setRightBarButtonItem:rightBarButton];
+    [self.navigationItem setRightBarButtonItems: [self rightBarItems]];
 
     // set borders on the table
     [[self.uiTableView layer] setBorderColor:[[UIColor grayColor] CGColor]];
@@ -65,6 +59,27 @@ BOOL firstTableLoad = YES;
     [self.inviteLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
     [self.inviteLabel setText:NSLocalizedString(@"invite", nil)];
     
+}
+
+-(NSArray *)rightBarItems{
+    
+    // Create right bar help button
+    UILabel *saveFlyrLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 75, 50)];
+    [saveFlyrLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:8.5]];
+    [saveFlyrLabel setTextColor:[MyCustomCell colorWithHexString:@"008ec0"]];
+    [saveFlyrLabel setBackgroundColor:[UIColor clearColor]];
+    [saveFlyrLabel setText:@"Invite Friends"];
+    UIBarButtonItem *barLabel = [[UIBarButtonItem alloc] initWithCustomView:saveFlyrLabel];
+    
+    UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 31, 30)];
+    [menuButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+    [menuButton setBackgroundImage:[UIImage imageNamed:@"menu_button"] forState:UIControlStateNormal];
+    [menuButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *menuBarButton = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
+    //[self.navigationItem setRightBarButtonItem:rightBarButton];
+    
+    
+    return [NSMutableArray arrayWithObjects:menuBarButton,barLabel,nil];
 }
 
 -(void)goBack{
@@ -249,12 +264,20 @@ BOOL firstTableLoad = YES;
 
     self.contactsArray = [[NSMutableArray alloc] initWithCapacity:[users count]];
     
-    for (NSDictionary *friendData in [result objectForKey:@"data"])
-    {
+    for (NSDictionary *friendData in [result objectForKey:@"data"]) {
+        
+        //NSLog(@"Facebook picture: %@",[friendData objectForKey:@"picture"]);
+        NSDictionary *pictureDict = [friendData objectForKey:@"picture"];
+        NSDictionary *pictureData = [pictureDict objectForKey:@"data"];
+        NSURL *imageURL = [NSURL URLWithString:[pictureData objectForKey:@"url"]];
+        NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+        UIImage *image = [UIImage imageWithData:imageData];
+
         // Here we will get the facebook contacts
         NSMutableDictionary *dOfPerson=[NSMutableDictionary dictionary];        
         [dOfPerson setObject:[friendData objectForKey:@"name"] forKey:@"name"];
         [dOfPerson setObject:[friendData objectForKey:@"id"] forKey:@"identifier"];
+        [dOfPerson setObject:image forKey:@"image"];
         [self.contactsArray addObject:dOfPerson];
     }
     
@@ -294,47 +317,9 @@ BOOL firstTableLoad = YES;
                 // Sanity check
                 if ([arrayOfAccounts count] > 0) {
                     
-                    // Keep it simple, use the first account available
-                    ACAccount *acct = [arrayOfAccounts objectAtIndex:0];
-                    
-                    // Build a twitter request
-                    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
-                    [params setObject:@"-1" forKey:@"cursor"];
-                    [params setObject:[acct identifier] forKey:@"user_id"];
-                    //NSLog(@"Account: %@", [acct username]);
-                    //NSLog(@"Account Id: %@", [acct identifier]);
-                    
-                    TWRequest *getRequest = [[TWRequest alloc] initWithURL:
-                                             [NSURL URLWithString:@"https://api.twitter.com/1.1/followers/list.json"]
-                                                                parameters:params requestMethod:TWRequestMethodGET];
-                    // Post the request
-                    [getRequest setAccount:acct];
-                    
-                    // Block handler to manage the response
-                    [getRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
-                        
-                        NSError *jsonError = nil;
-                        
-                        if(responseData){
-                            
-                            NSDictionary *followers =  [NSJSONSerialization JSONObjectWithData:responseData
-                                                                                       options:NSJSONReadingMutableLeaves
-                                                                                         error:&jsonError];
-                            NSDictionary *users = [followers objectForKey:@"users"];
-                            
-                            self.contactsArray = [[NSMutableArray alloc] initWithCapacity:[users count]];
-                            
-                            for (id user in users) {
-                                NSMutableDictionary *dOfPerson=[NSMutableDictionary dictionary];
-                                [dOfPerson setObject:[user objectForKey:@"name"] forKey:@"name"];
-                                [dOfPerson setObject:[user objectForKey:@"screen_name"] forKey:@"identifier"];
-                                [self.contactsArray addObject:dOfPerson];
-                            }
-                        }
-                        
-                        NSLog(@"Twitter response, HTTP response: %i", [urlResponse statusCode]);
-                        [self.uiTableView reloadData];
-                    }];
+                    self.contactsArray = [[NSMutableArray alloc] init];
+
+                    [self cursoredTwitterContacts:[NSString stringWithFormat:@"%d", -1] arrayOfAccounts:arrayOfAccounts];
                 }
             }
         }];
@@ -346,6 +331,70 @@ BOOL firstTableLoad = YES;
     
 }
 
+-(void)cursoredTwitterContacts:(NSString *)cursor arrayOfAccounts:(NSArray *)arrayOfAccounts{
+
+    // Keep it simple, use the first account available
+    ACAccount *acct = [arrayOfAccounts objectAtIndex:0];
+    
+    // Build a twitter request
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    [params setObject:cursor forKey:@"cursor"];
+    [params setObject:[acct identifier] forKey:@"user_id"];
+    //NSLog(@"Account: %@", [acct username]);
+    //NSLog(@"Account Id: %@", [acct identifier]);
+    
+    TWRequest *getRequest = [[TWRequest alloc] initWithURL:
+                             [NSURL URLWithString:[NSString stringWithFormat:@"https://api.twitter.com/1.1/followers/list.json"]]
+                                                parameters:params requestMethod:TWRequestMethodGET];
+    // Post the request
+    [getRequest setAccount:acct];
+    
+    // Block handler to manage the response
+    [getRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+        
+        NSError *jsonError = nil;
+        NSDecimalNumber *nextCursor;
+
+        if(responseData){
+            
+            NSDictionary *followers =  [NSJSONSerialization JSONObjectWithData:responseData
+                                                                       options:NSJSONReadingMutableLeaves
+                                                                         error:&jsonError];
+            NSDictionary *users = [followers objectForKey:@"users"];            
+            //NSLog(@"User Count: %d", [users count]);
+            //NSLog(@"Users: %@", users);
+
+            for (id user in users) {
+                
+                //NSLog(@"Image URL: %@", [user objectForKey:@"profile_image_url"]);
+                NSMutableDictionary *dOfPerson=[NSMutableDictionary dictionary];
+                [dOfPerson setObject:[user objectForKey:@"name"] forKey:@"name"];
+                [dOfPerson setObject:[user objectForKey:@"screen_name"] forKey:@"identifier"];
+                
+                NSURL *imageURL = [NSURL URLWithString:[user objectForKey:@"profile_image_url"]];
+                NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+                UIImage *image = [UIImage imageWithData:imageData];
+                
+                if(image){
+                    [dOfPerson setObject:image forKey:@"image"];
+                }
+                
+                [self.contactsArray addObject:dOfPerson];
+            }
+
+            nextCursor = [followers objectForKey:@"next_cursor"];
+            
+        }
+
+        if([nextCursor compare:[NSDecimalNumber zero]] == NSOrderedSame){
+            [self.uiTableView reloadData];
+        }else{
+            [self cursoredTwitterContacts:[NSString stringWithFormat:@"%@", nextCursor] arrayOfAccounts:arrayOfAccounts];
+        }
+
+        NSLog(@"Twitter response, HTTP response: %i", [urlResponse statusCode]);
+    }];
+}
 /**
  *
  */
@@ -415,12 +464,12 @@ BOOL firstTableLoad = YES;
         if(selectedTab == 0){
             
             // send tweets to contacts
-            [self sendSMS:@"Test SMS" recipients:identifiers];
+            [self sendSMS:@"I am using the flyerly app to create and share flyers on the go! - http://www.flyr.us" recipients:identifiers];
             
         }else if(selectedTab == 2){
             // Send tweets to twitter contacts
             for(NSString *follower in identifiers){
-                [self sendTwitterMessage:@"I am using the flyerly app to create and share flyers on the go! - https://itunes.apple.com/app/socialflyr/id344130515?ls=1&mt=8" screenName:follower];
+                [self sendTwitterMessage:@"I am using the flyerly app to create and share flyers on the go! -                                    http://www.flyr.us" screenName:follower];
             }
             
             [self showAlert:@"Invited !" message:@"Your selected contacts have been invited to flyerly!"];
@@ -463,10 +512,9 @@ BOOL firstTableLoad = YES;
 
     [self performPublishAction:^{
         
-        [FBRequestConnection startForPostStatusUpdate:@"I am using the flyerly app to create and share flyers on the go! - https://itunes.apple.com/app/socialflyr/id344130515?ls=1&mt=8" place:@"144479625584966" tags:identifiers completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+        [FBRequestConnection startForPostStatusUpdate:@"I am using the flyerly app to create and share flyers on the go! - http://www.flyr.us" place:@"144479625584966" tags:identifiers completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
             
-            NSLog(@"New Result: %@", result);
-        
+            //NSLog(@"New Result: %@", result);
             [self showAlert:@"Invited !" message:@"Your selected contacts have been invited to flyerly!"];
         }];
     }];
@@ -584,7 +632,7 @@ BOOL firstTableLoad = YES;
 
     // Get index like 0, 2, 4, 6 etc
     int index = (indexPath.row * 2);
-    NSLog(@"index: %d", index);
+    //NSLog(@"index: %d", index);
     
     // init cell array if null
     if(!self.deviceContactItems){
@@ -599,22 +647,31 @@ BOOL firstTableLoad = YES;
     AddFriendItem *cell = nil;
     
     if([self.deviceContactItems count] > indexPath.row){
-        NSLog(@"Reusing Row");
+        //NSLog(@"Reusing Row");
         cell = [self.deviceContactItems objectAtIndex:indexPath.row];
     }
     
     if (cell == nil) {
         NSArray *nib=[[NSBundle mainBundle] loadNibNamed:cellId owner:self options:nil];
         cell=[nib objectAtIndex:0];
-        [cell.leftCheckBox setSelected:YES];
-        [cell.rightCheckBox setSelected:YES];
-        cell.leftSelected = YES;
-        cell.rightSelected = YES;
+        
+        if(unSelectAll){
+            [cell.leftCheckBox setSelected:NO];
+            [cell.rightCheckBox setSelected:NO];
+            cell.leftSelected = NO;
+            cell.rightSelected = NO;
+        } else {
+            [cell.leftCheckBox setSelected:YES];
+            [cell.rightCheckBox setSelected:YES];
+            cell.leftSelected = YES;
+            cell.rightSelected = YES;
+        }
+
         // Add cell in array for tracking
         [self.deviceContactItems addObject:cell];
         
     } else {
-        NSLog(@"Reusing Row");
+        //NSLog(@"Reusing Row");
         /*
         if(cell.leftSelected){
             [cell.leftCheckBox setSelected:YES];
@@ -687,6 +744,8 @@ BOOL firstTableLoad = YES;
  */
 - (IBAction)selectAllCheckBoxes:(UIButton *)sender{
     
+    unSelectAll = NO;
+
     for(AddFriendItem *cell in self.deviceContactItems){
         [cell.leftCheckBox setSelected:YES];
         cell.leftSelected = YES;
@@ -703,6 +762,8 @@ BOOL firstTableLoad = YES;
  */
 - (IBAction)unSelectAllCheckBoxes:(UIButton *)sender{
     
+    unSelectAll = YES;
+
     for(AddFriendItem *cell in self.deviceContactItems){
         [cell.leftCheckBox setSelected:NO];
         cell.leftSelected = NO;

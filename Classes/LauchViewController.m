@@ -14,11 +14,12 @@
 #import "LoadingView.h"
 #import "FlyrAppDelegate.h"
 #import "DraftViewController.h"
+#import "Common.h"
 
 @implementation LauchViewController
 
 @synthesize ptController,spController,tpController,createFlyrLabel,savedFlyrLabel,inviteFriendLabel,addFriendsController;
-@synthesize firstFlyer, secondFlyer, thirdFlyer, fourthFlyer, photoArray, photoDetailArray;
+@synthesize firstFlyer, secondFlyer, thirdFlyer, fourthFlyer, fifthFlyer, sixthFlyer, photoArray, photoDetailArray;
 @synthesize loadingView;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
@@ -123,6 +124,12 @@
 	//loadingView = nil;
 	//loadingView = [[LoadingView alloc]init];
     
+    if(IS_IPHONE_5){
+        numberOfFlyers = 6;
+    }else{
+        numberOfFlyers = 4;
+    }
+    
     [createFlyrLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
     [createFlyrLabel setText:NSLocalizedString(@"create_flyer", nil)];
     
@@ -148,8 +155,8 @@
 
 -(void)filesByModDate
 {
-	photoArray =[[NSMutableArray alloc]initWithCapacity:4];
-	photoDetailArray =[[NSMutableArray alloc]initWithCapacity:4];
+	photoArray =[[NSMutableArray alloc]initWithCapacity:numberOfFlyers];
+	photoDetailArray =[[NSMutableArray alloc]initWithCapacity:numberOfFlyers];
 	NSString *homeDirectoryPath = NSHomeDirectory();
 	NSString *unexpandedPath = [homeDirectoryPath stringByAppendingString:@"/Documents/Flyr/"];
 	NSString *folderPath = [NSString pathWithComponents:[NSArray arrayWithObjects:[NSString stringWithString:[unexpandedPath stringByExpandingTildeInPath]], nil]];
@@ -194,7 +201,7 @@
 	[photoDetailArray removeAllObjects];
 	for(int i =0;i< [sortedFiles count];i++)
 	{
-        CGSize size = CGSizeMake(108, 99);
+        CGSize size = CGSizeMake(firstFlyer.frame.size.width, firstFlyer.frame.size.height);
         
         finalImagePath = [sortedFiles objectAtIndex:i];
         NSData *imageData = [[NSData alloc ]initWithContentsOfMappedFile:finalImagePath];
@@ -214,6 +221,17 @@
         } else if(i  == 3){
             fourthFlyer.image = [LauchViewController imageWithImage:currentFlyerImage scaledToSize:size];
             fourthFlyer.tag = i;
+            
+            if(!IS_IPHONE_5){
+                break;
+            }
+            
+        } else if(i  == 4){
+            fifthFlyer.image = [LauchViewController imageWithImage:currentFlyerImage scaledToSize:size];
+            fifthFlyer.tag = i;
+        } else if(i  == 5){
+            sixthFlyer.image = [LauchViewController imageWithImage:currentFlyerImage scaledToSize:size];
+            sixthFlyer.tag = i;
             break;
         }
 	}
@@ -221,10 +239,10 @@
 	for(int j =0;j< [detailSortedFiles count];j++)
 	{
         detailFinalImagePath = [detailSortedFiles objectAtIndex:j];
-        NSLog(@"detailFinalImagePath: %@", detailFinalImagePath);
+        //NSLog(@"detailFinalImagePath: %@", detailFinalImagePath);
         NSArray *myArray = [NSArray arrayWithContentsOfFile:detailFinalImagePath];
 
-        if(j < 4){
+        if(j < numberOfFlyers){
             [photoDetailArray addObject:myArray];
         }
 	}
@@ -320,6 +338,10 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
         [self showFlyerDetail:thirdFlyer];
     } else if ([touch view] == fourthFlyer) {
         [self showFlyerDetail:fourthFlyer];
+    } else if ([touch view] == fifthFlyer) {
+        [self showFlyerDetail:fifthFlyer];
+    } else if ([touch view] == sixthFlyer) {
+        [self showFlyerDetail:sixthFlyer];
     }
     
 }

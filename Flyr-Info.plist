@@ -11,7 +11,7 @@
 	<key>CFBundleIconFile</key>
 	<string></string>
 	<key>CFBundleIdentifier</key>
-	<string>com.riksof.Flyerly</string>
+	<string>com.socialflyr.paid</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -30,7 +30,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.26</string>
+	<string>1.28</string>
 	<key>FacebookAppID</key>
 	<string>136691489852349</string>
 	<key>LSRequiresIPhoneOS</key>
@@ -39,7 +39,8 @@
 	<string>MainWindow</string>
 	<key>UIAppFonts</key>
 	<array>
-		<string>HalveticaRoundedLTStd-BdCn_0.otf</string>
+		<string>HelveticaRoundedLTStd-BdCn_0.otf</string>
+		<string>Swiss_721_Black_Extended_BT.ttf</string>
 		<string>Anjelika Rose.ttf</string>
 		<string>segoeui.ttf</string>
 		<string>ITC Avant Garde CE Gothic Book.ttf</string>
@@ -49,7 +50,7 @@
 		<string>LHANDW.TTF</string>
 		<string>Helvetica Inserat Cyrillic Upright.ttf</string>
 		<string>ALGER.TTF</string>
-		<string>Comfortaa_Bolf.ttf</string>
+		<string>Comfortaa_Bold.ttf</string>
 		<string>black_jack.ttf</string>
 		<string>StMarie-Thin.otf</string>
 		<string>Quicksand_Bold.otf</string>
