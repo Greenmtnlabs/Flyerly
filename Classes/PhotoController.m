@@ -88,8 +88,8 @@
         imgView = [[UIImageView alloc]initWithFrame:CGRectMake(5, 48, 310, 309)];
         templateBckgrnd = [[UIImageView alloc]initWithFrame:CGRectMake(0, 413, 320, 135)];
         cameraRollButton = [[UIButton alloc] initWithFrame:CGRectMake(160, 365, 135, 40)];
-        moreLayersButton = [[UIButton alloc] initWithFrame:CGRectMake(82, 365, 156, 43)];
-        moreLayersLabel = [[UILabel alloc] initWithFrame:CGRectMake(125, 365, 156, 43)];
+        moreLayersButton = [[UIButton alloc] initWithFrame:CGRectMake(82, 445, 156, 43)];
+        moreLayersLabel = [[UILabel alloc] initWithFrame:CGRectMake(125, 445, 156, 43)];
         takePhotoButton = [[UIButton alloc] initWithFrame:CGRectMake(25, 365, 135, 40)];
         takePhotoLabel = [[UILabel alloc] initWithFrame:CGRectMake(80, 370, 80, 30)];
         cameraRollLabel = [[UILabel alloc] initWithFrame:CGRectMake(220, 370, 80, 30)];
@@ -1259,7 +1259,7 @@
         if(IS_IPHONE_5){
             rect = CGRectMake(45,
                               110,
-                              550, 950);
+                              550, 750);
         }else{
             rect = CGRectMake(5,
                               50,
@@ -1341,13 +1341,20 @@
 	[navBar.leftButton addTarget:self action:@selector(callMenu) forControlEvents:UIControlEventTouchUpInside];
 	[navBar.rightButton addTarget:self action:@selector(callWrite) forControlEvents:UIControlEventTouchUpInside];
 	
-    // Create right bar button
+    UILabel *addBackgroundLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 75, 50)];
+    [addBackgroundLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:8.5]];
+    [addBackgroundLabel setTextColor:[MyCustomCell colorWithHexString:@"008ec0"]];
+    [addBackgroundLabel setBackgroundColor:[UIColor clearColor]];
+    [addBackgroundLabel setText:@"Add Background"];
+    UIBarButtonItem *barLabel = [[UIBarButtonItem alloc] initWithCustomView:addBackgroundLabel];
+
     UIButton *textButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 31, 30)];
     [textButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [textButton setBackgroundImage:[UIImage imageNamed:@"t_button"] forState:UIControlStateNormal];
 	[textButton addTarget:self action:@selector(callWrite) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:textButton];
-    [self.navigationItem setRightBarButtonItem:rightBarButton];
+    
+    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,barLabel,nil]];
     
     UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 31, 30)];
     [menuButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
@@ -1419,11 +1426,22 @@
 	[navBar.rightButton addTarget:self action:@selector(callStyle) forControlEvents:UIControlEventTouchUpInside];
 	
     // Create right bar button
-    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Next" style:UIBarButtonItemStylePlain target:self action:@selector(callStyle)];
-    [self.navigationItem setRightBarButtonItem:rightBarButton];
+    //UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Next" style:UIBarButtonItemStylePlain target:self action:@selector(callStyle)];
+    
+    UILabel *addBackgroundLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 55, 50)];
+    [addBackgroundLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:8.5]];
+    [addBackgroundLabel setTextColor:[MyCustomCell colorWithHexString:@"008ec0"]];
+    [addBackgroundLabel setBackgroundColor:[UIColor clearColor]];
+    [addBackgroundLabel setText:@"Add Text"];
+    UIBarButtonItem *barLabel = [[UIBarButtonItem alloc] initWithCustomView:addBackgroundLabel];
+    
+    UIButton *nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
+	[nextButton addTarget:self action:@selector(callStyle) forControlEvents:UIControlEventTouchUpInside];
+    [nextButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
+    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
+    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,barLabel,nil]];
     
     UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
-    [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
 	[backButton addTarget:self action:@selector(chooseTemplate) forControlEvents:UIControlEventTouchUpInside];
     [backButton setBackgroundImage:[UIImage imageNamed:@"back_blue"] forState:UIControlStateNormal];
     UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
@@ -1480,8 +1498,18 @@
 	[navBar.rightButton addTarget:self action:@selector(choosePhoto) forControlEvents:UIControlEventTouchUpInside];
 	
     // Create right bar button
-    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Photo" style:UIBarButtonItemStylePlain target:self action:@selector(choosePhoto)];
-    [self.navigationItem setRightBarButtonItem:rightBarButton];
+    UILabel *addBackgroundLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
+    [addBackgroundLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:8.5]];
+    [addBackgroundLabel setTextColor:[MyCustomCell colorWithHexString:@"008ec0"]];
+    [addBackgroundLabel setBackgroundColor:[UIColor clearColor]];
+    [addBackgroundLabel setText:@"Add Text"];
+    UIBarButtonItem *barLabel = [[UIBarButtonItem alloc] initWithCustomView:addBackgroundLabel];
+    
+    UIButton *photoButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
+	[photoButton addTarget:self action:@selector(choosePhoto) forControlEvents:UIControlEventTouchUpInside];
+    [photoButton setBackgroundImage:[UIImage imageNamed:@"photo_button"] forState:UIControlStateNormal];
+    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:photoButton];
+    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,barLabel,nil]];
     
     UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
     [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
@@ -1576,9 +1604,22 @@
 	[navBar.leftButton addTarget:self action:@selector(callStyle) forControlEvents:UIControlEventTouchUpInside];
 	[navBar.rightButton addTarget:self action:@selector(callSaveAndShare) forControlEvents:UIControlEventTouchUpInside];
 		
+    UILabel *saveShareLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 55, 50)];
+    [saveShareLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:8.5]];
+    [saveShareLabel setTextColor:[MyCustomCell colorWithHexString:@"008ec0"]];
+    [saveShareLabel setBackgroundColor:[UIColor clearColor]];
+    [saveShareLabel setText:@"Add photo"];
+    UIBarButtonItem *barLabel = [[UIBarButtonItem alloc] initWithCustomView:saveShareLabel];
+    
+    UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
+	[shareButton addTarget:self action:@selector(callSaveAndShare) forControlEvents:UIControlEventTouchUpInside];
+    [shareButton setBackgroundImage:[UIImage imageNamed:@"share"] forState:UIControlStateNormal];
+    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
+    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,barLabel,nil]];
+
     // Create right bar button
-    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Save/Share" style:UIBarButtonItemStylePlain target:self action:@selector(callSaveAndShare)];
-    [self.navigationItem setRightBarButtonItem:rightBarButton];
+    //UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Save/Share" style:UIBarButtonItemStylePlain target:self action:@selector(callSaveAndShare)];
+    //[self.navigationItem setRightBarButtonItem:rightBarButton];
     
     UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
     [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
@@ -1848,8 +1889,8 @@
 		[colorTabButton setBackgroundImage:[UIImage imageNamed:@"color_button"] forState:UIControlStateNormal];
 		//[sizeTabButton setBackgroundImage:[UIImage imageNamed:@"selTab.png"] forState:UIControlStateNormal];
 		[sizeTabButton setBackgroundImage:[UIImage imageNamed:@"size_button"] forState:UIControlStateNormal];
-		[borderTabButton setBackgroundImage:[UIImage imageNamed:@"outline_button"] forState:UIControlStateNormal];
-		[fontBorderTabButton setBackgroundImage:[UIImage imageNamed:@"background_button_selected"] forState:UIControlStateNormal];
+		[borderTabButton setBackgroundImage:[UIImage imageNamed:@"outline_button_selected"] forState:UIControlStateNormal];
+		[fontBorderTabButton setBackgroundImage:[UIImage imageNamed:@"background_button"] forState:UIControlStateNormal];
 		[UIView commitAnimations];
 	}
 	else if(selectedButton == fontBorderTabButton)
@@ -1866,8 +1907,8 @@
 		[colorTabButton setBackgroundImage:[UIImage imageNamed:@"color_button"] forState:UIControlStateNormal];
 		//[sizeTabButton setBackgroundImage:[UIImage imageNamed:@"selTab.png"] forState:UIControlStateNormal];
 		[sizeTabButton setBackgroundImage:[UIImage imageNamed:@"size_button"] forState:UIControlStateNormal];
-		[borderTabButton setBackgroundImage:[UIImage imageNamed:@"outline_button_selected"] forState:UIControlStateNormal];
-		[fontBorderTabButton setBackgroundImage:[UIImage imageNamed:@"background_button"] forState:UIControlStateNormal];
+		[borderTabButton setBackgroundImage:[UIImage imageNamed:@"outline_button"] forState:UIControlStateNormal];
+		[fontBorderTabButton setBackgroundImage:[UIImage imageNamed:@"background_button_selected"] forState:UIControlStateNormal];
 		[UIView commitAnimations];
 	}
 }

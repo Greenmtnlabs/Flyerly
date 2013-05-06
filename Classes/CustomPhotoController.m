@@ -161,6 +161,12 @@
 
 - (IBAction)onSelectImage:(UIButton *)sender{
     
+    if(IS_IPHONE_5){
+        image = [PhotoController imageWithImage:image scaledToSize:CGSizeMake(IMAGE_WIDTH - 135, IMAGE_HEIGHT+50)];
+    }else{
+        image = [PhotoController imageWithImage:image scaledToSize:CGSizeMake(360, 500)];
+    }
+    
     // Get the content offset in scroll view.
     CGPoint scrollOffset = CGPointMake(
                                        scrollView.contentOffset.x,
@@ -223,7 +229,7 @@
     CGSize imageSize = [image size];
     
     // Content size for scrollview needs to be twice this size.
-    CGSize contentSize = CGSizeMake(imageSize.width  + self.view.frame.size.width, imageSize.height + self.view.frame.size.height);
+    CGSize contentSize = CGSizeMake(imageSize.width, imageSize.height);
     [scrollView setContentSize:contentSize];
     
     // Center on the scroll view.
@@ -287,11 +293,7 @@
     
     // since we have four images in single row we have to divide it by 4
     int count = counter/4;
-    
     counter =  0;
-    //[self.deviceContactItems release];
-    //self.deviceContactItems = nil;
-    //self.deviceContactItems = [[NSMutableArray alloc] init];
 
     return count;
 }
@@ -300,43 +302,30 @@ int counter = 0;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    // init cell array if null
-    //if(!self.deviceContactItems){
-    //    self.deviceContactItems = [[NSMutableArray alloc] init];
-    //}
-
-    //NSLog(@"Cell Index: %d", indexPath.row);
-    
     NSString *cellId = @"CustomGalleryItem";
     
     // Get cell
     CustomGalleryItem *cell = (CustomGalleryItem *) [tableView dequeueReusableCellWithIdentifier:cellId];
-    //CustomGalleryItem *cell = nil;
-    
-    //if([self.deviceContactItems count] > indexPath.row){
-    //    NSLog(@"Reusing Cell at index: %d", indexPath.row);
-    //    cell = [self.deviceContactItems objectAtIndex:indexPath.row];
-    //}
 
     if (cell == nil) {
         NSArray *nib=[[NSBundle mainBundle] loadNibNamed:cellId owner:self options:nil];
         cell=(CustomGalleryItem *)[nib objectAtIndex:0];
-        //cell = [[CustomGalleryItem alloc]
-        //        initWithStyle:uitableviewce
-        //        reuseIdentifier:cellId];
-        
     }
     
     cell.controller = self;
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self load4ImagesAtaTime:indexPath.row image1:cell.image1 image2:cell.image2 image3:cell.image3 image4:cell.image4];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self load4ImagesAtaTime:indexPath.row cell:cell];
+        });
     });
-    
-    //[self.deviceContactItems addObject:cell];
 
     // return cell
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 93.0;
 }
 
 -(void)imageCount{
@@ -371,15 +360,9 @@ int counter = 0;
                          }];
 }
 
--(void)load4ImagesAtaTime:(int)rowNumber image1:(UIImageView *)image1 image2:(UIImageView *)image2 image3:(UIImageView *)image3 image4:(UIImageView *)image4{
+-(void)load4ImagesAtaTime:(int)rowNumber cell:(CustomGalleryItem *)cell {
     
     ALAssetsLibrary *library = [[[ALAssetsLibrary alloc] init] autorelease];
-    
-    //NSDictionary *thumbnailOptions = [NSDictionary dictionaryWithObjectsAndKeys:
-    //                                  (id)kCFBooleanTrue, kCGImageSourceCreateThumbnailWithTransform,
-    //                                  (id)kCFBooleanTrue, kCGImageSourceCreateThumbnailFromImageAlways,
-    //                                  (id)[NSNumber numberWithFloat:50], kCGImageSourceThumbnailMaxPixelSize,
-    //                                  nil];
 
     // Enumerate just the photos and videos group by using ALAssetsGroupSavedPhotos.
     [library enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos                                                                   usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
@@ -396,28 +379,21 @@ int counter = 0;
                 // The end of the enumeration is signaled by asset == nil.
                 if (alAsset) {
                     
-                    //ALAssetRepresentation *representation = [alAsset defaultRepresentation];
-                    //NSLog(@"image index: %d", i);
+                    ALAssetRepresentation *representation = [alAsset defaultRepresentation];
                     
                     if(imageCounter == 0){
                         
-                        //UIImage *immm = [self thumbnailForAsset:alAsset maxPixelSize:50];
-                        //UIImage *immm =[UIImage imageWithCGImage:[representation CGImageWithOptions:thumbnailOptions]];
-                        //NSLog(@"Image Width: %f", immm.size.width);
-                        //NSLog(@"Image Height: %f", immm.size.height);
-                        [image1 setImage:[self thumbnailForAsset:alAsset maxPixelSize:300]];
-                        
-                        //[image1 setImage:[UIImage imageWithCGImage:[representation CGImageWithOptions:thumbnailOptions]]];
-                        //[image1 setBackgroundImage:[UIImage imageWithCGImage:[representation CGImageWithOptions:thumbnailOptions]] forState:UIControlStateNormal];
+                        [cell.image1 setImage:[self thumbnailForAsset:alAsset maxPixelSize:300]];
+                        cell.imageName1 = [representation url];
                     } else if(imageCounter == 1){
-                        [image2 setImage:[self thumbnailForAsset:alAsset maxPixelSize:300]];
-                        //[image2 setBackgroundImage:[UIImage imageWithCGImage:[representation CGImageWithOptions:thumbnailOptions]] forState:UIControlStateNormal];
+                        [cell.image2 setImage:[self thumbnailForAsset:alAsset maxPixelSize:300]];
+                        cell.imageName2 = [representation url];
                     } else if(imageCounter == 2){
-                        [image3 setImage:[self thumbnailForAsset:alAsset maxPixelSize:300]];
-                        //[image3 setBackgroundImage:[UIImage imageWithCGImage:[representation CGImageWithOptions:thumbnailOptions]] forState:UIControlStateNormal];
+                        [cell.image3 setImage:[self thumbnailForAsset:alAsset maxPixelSize:300]];
+                        cell.imageName3 = [representation url];
                     } else if(imageCounter == 3){
-                        [image4 setImage:[self thumbnailForAsset:alAsset maxPixelSize:300]];
-                        //[image4 setBackgroundImage:[UIImage imageWithCGImage:[representation CGImageWithOptions:thumbnailOptions]] forState:UIControlStateNormal];
+                        [cell.image4 setImage:[self thumbnailForAsset:alAsset maxPixelSize:300]];
+                        cell.imageName4 = [representation url];
                     }
                     
                     imageCounter++;

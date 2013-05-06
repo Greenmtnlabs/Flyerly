@@ -512,6 +512,11 @@
 		65E26184171C5B7600C485B5 /* checkbox_checked.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E26182171C5B7600C485B5 /* checkbox_checked.png */; };
 		65E26185171C5B7600C485B5 /* checkbox.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E26183171C5B7600C485B5 /* checkbox.png */; };
 		65E26188171C5C9900C485B5 /* AddFriendItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E26187171C5C9800C485B5 /* AddFriendItem.m */; };
+		65F7FFEE173817E600FBB061 /* camera_border-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F7FFE9173817E500FBB061 /* camera_border-568h@2x.png */; };
+		65F7FFEF173817E600FBB061 /* next_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F7FFEA173817E600FBB061 /* next_button.png */; };
+		65F7FFF0173817E600FBB061 /* next_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F7FFEB173817E600FBB061 /* next_button@2x.png */; };
+		65F7FFF1173817E600FBB061 /* photo_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F7FFEC173817E600FBB061 /* photo_button.png */; };
+		65F7FFF2173817E600FBB061 /* photo_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F7FFED173817E600FBB061 /* photo_button@2x.png */; };
 		65F851F617258D4D00B1E009 /* Flyr-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D1107310486CEB800E47090 /* Flyr-Info.plist */; };
 		E8A7347D1092CFF300661AAD /* DraftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8A7347B1092CFF300661AAD /* DraftViewController.m */; };
 		E8A7347E1092CFF300661AAD /* DraftViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E8A7347C1092CFF300661AAD /* DraftViewController.xib */; };
@@ -1158,6 +1163,11 @@
 		65E26183171C5B7600C485B5 /* checkbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkbox.png; sourceTree = "<group>"; };
 		65E26186171C5C9800C485B5 /* AddFriendItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFriendItem.h; sourceTree = "<group>"; };
 		65E26187171C5C9800C485B5 /* AddFriendItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFriendItem.m; sourceTree = "<group>"; };
+		65F7FFE9173817E500FBB061 /* camera_border-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera_border-568h@2x.png"; sourceTree = "<group>"; };
+		65F7FFEA173817E600FBB061 /* next_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = next_button.png; sourceTree = "<group>"; };
+		65F7FFEB173817E600FBB061 /* next_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "next_button@2x.png"; sourceTree = "<group>"; };
+		65F7FFEC173817E600FBB061 /* photo_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photo_button.png; sourceTree = "<group>"; };
+		65F7FFED173817E600FBB061 /* photo_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photo_button@2x.png"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Flyr-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Flyr-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		E8A7347A1092CFF300661AAD /* DraftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DraftViewController.h; sourceTree = "<group>"; };
 		E8A7347B1092CFF300661AAD /* DraftViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DraftViewController.m; sourceTree = "<group>"; };
@@ -1457,6 +1467,11 @@
 		0DF3A361108DF47400D6C887 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				65F7FFE9173817E500FBB061 /* camera_border-568h@2x.png */,
+				65F7FFEA173817E600FBB061 /* next_button.png */,
+				65F7FFEB173817E600FBB061 /* next_button@2x.png */,
+				65F7FFEC173817E600FBB061 /* photo_button.png */,
+				65F7FFED173817E600FBB061 /* photo_button@2x.png */,
 				65BDB2D5173404B60084E032 /* background_button_selected.png */,
 				65BDB2D6173404B60084E032 /* background_button_selected@2x.png */,
 				65BDB2D7173404B60084E032 /* background_button.png */,
@@ -2457,6 +2472,11 @@
 				65BDB2DA173404B60084E032 /* background_button_selected@2x.png in Resources */,
 				65BDB2DB173404B60084E032 /* background_button.png in Resources */,
 				65BDB2DC173404B60084E032 /* background_button@2x.png in Resources */,
+				65F7FFEE173817E600FBB061 /* camera_border-568h@2x.png in Resources */,
+				65F7FFEF173817E600FBB061 /* next_button.png in Resources */,
+				65F7FFF0173817E600FBB061 /* next_button@2x.png in Resources */,
+				65F7FFF1173817E600FBB061 /* photo_button.png in Resources */,
+				65F7FFF2173817E600FBB061 /* photo_button@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2609,8 +2629,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Flyr_Prefix.pch;
@@ -2624,8 +2644,8 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = Flyr;
-				PROVISIONING_PROFILE = "89EEFADE-B677-49D0-BB7B-48803AC8479D";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "89EEFADE-B677-49D0-BB7B-48803AC8479D";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos6.0;
 			};
 			name = "Ad Hoc";
@@ -2636,8 +2656,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -2654,8 +2674,8 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = Flyr;
-				PROVISIONING_PROFILE = "89EEFADE-B677-49D0-BB7B-48803AC8479D";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "89EEFADE-B677-49D0-BB7B-48803AC8479D";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos6.0;
 			};
 			name = Debug;
@@ -2665,8 +2685,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Flyr_Prefix.pch;
@@ -2681,8 +2701,8 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = Flyr;
-				PROVISIONING_PROFILE = "89EEFADE-B677-49D0-BB7B-48803AC8479D";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "89EEFADE-B677-49D0-BB7B-48803AC8479D";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos6.0;
 			};
 			name = Release;

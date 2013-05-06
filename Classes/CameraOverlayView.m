@@ -11,13 +11,15 @@
 #import "Common.h"
 
 @implementation CameraOverlayView
-@synthesize photoController, gridImageView, libraryLatestPhoto;
+@synthesize photoController, gridImageView, libraryLatestPhoto, borderImage;
 
 -(void)viewDidLoad{
     NSLog(@"Camera Overlay Loaded...");
     
     if (IS_IPHONE_5) {
         self.view.frame = CGRectMake(0, 0, 320, HEIGHT_IPHONE_5);
+        [borderImage  setImage:[UIImage imageNamed:@"camera_border-568h@2x"]];
+        [gridImageView setFrame:CGRectMake(gridImageView.frame.origin.x, gridImageView.frame.origin.y +  12, gridImageView.frame.size.width, gridImageView.frame.size.height)];
     }
     
     customPhotoController = [[CustomPhotoController alloc] initWithNibName:@"CustomPhotoController" bundle:nil];
@@ -55,8 +57,19 @@
     [gridImageView setHidden:![gridImageView isHidden]];
 }
 
+BOOL frontCamera = NO;
+
 - (IBAction)invertCamera{
+    
     NSLog(@"Invert Camera...");
+    
+    if(frontCamera){
+        photoController.imgPicker.cameraDevice = UIImagePickerControllerCameraDeviceRear;
+        frontCamera = NO;
+    } else {
+        photoController.imgPicker.cameraDevice = UIImagePickerControllerCameraDeviceFront;
+        frontCamera = YES;
+    }
 }
 
 - (IBAction)smile{

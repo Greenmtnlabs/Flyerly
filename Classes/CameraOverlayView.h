@@ -14,12 +14,14 @@
 
 @interface CameraOverlayView : UIViewController{
 
+    IBOutlet UIImageView *borderImage;
     IBOutlet UIImageView *gridImageView;
     IBOutlet UIButton *libraryLatestPhoto;
     PhotoController *photoController;
     CustomPhotoController *customPhotoController;
 }
 
+@property (nonatomic, retain) IBOutlet UIImageView *borderImage;
 @property (nonatomic, retain) IBOutlet UIImageView *gridImageView;
 @property (nonatomic, retain) IBOutlet UIButton *libraryLatestPhoto;
 @property (nonatomic, retain) PhotoController *photoController;

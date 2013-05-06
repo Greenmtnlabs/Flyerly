@@ -39,12 +39,18 @@
 	//self.navigationItem.title = @"Social Flyer";
 	self.navigationController.navigationBarHidden = NO;
     
+    UILabel *addBackgroundLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
+    [addBackgroundLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:8.5]];
+    [addBackgroundLabel setTextColor:[MyCustomCell colorWithHexString:@"008ec0"]];
+    [addBackgroundLabel setBackgroundColor:[UIColor clearColor]];
+    [addBackgroundLabel setText:@"Share flyer"];
+    UIBarButtonItem *barLabel = [[UIBarButtonItem alloc] initWithCustomView:addBackgroundLabel];
+    
     UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 33)];
     [shareButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [shareButton setBackgroundImage:[UIImage imageNamed:@"share"] forState:UIControlStateNormal];
-	//[shareButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
-    [self.navigationItem setRightBarButtonItem:rightBarButton];
+    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,barLabel,nil]];
 
 	//self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
 	[UIView commitAnimations];
