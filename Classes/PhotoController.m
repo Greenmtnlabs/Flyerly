@@ -835,6 +835,8 @@
     [photoTabButton setBackgroundImage:[UIImage imageNamed:@"07_roll"] forState:UIControlStateNormal];
     [widthTabButton setBackgroundImage:[UIImage imageNamed:@"07_width_selected"] forState:UIControlStateNormal];
     [heightTabButton setBackgroundImage:[UIImage imageNamed:@"07_height"] forState:UIControlStateNormal];
+    [widthTabButton  setSelected:YES];
+    [heightTabButton  setSelected:NO];
     
     photoImgView.frame = CGRectMake(photoImgView.frame.origin.x, photoImgView.frame.origin.y,photoImgView.frame.size.width-10,photoImgView.frame.size.height);
 }
@@ -860,6 +862,8 @@
     [photoTabButton setBackgroundImage:[UIImage imageNamed:@"07_roll"] forState:UIControlStateNormal];
     [widthTabButton setBackgroundImage:[UIImage imageNamed:@"07_width"] forState:UIControlStateNormal];
     [heightTabButton setBackgroundImage:[UIImage imageNamed:@"07_height_selected"] forState:UIControlStateNormal];
+    [widthTabButton  setSelected:NO];
+    [heightTabButton  setSelected:YES];
 
     photoImgView.frame = CGRectMake(photoImgView.frame.origin.x, photoImgView.frame.origin.y,photoImgView.frame.size.width,photoImgView.frame.size.height-10);
 }
@@ -1666,6 +1670,9 @@
 	[photoTabButton setBackgroundImage:[UIImage imageNamed:@"07_roll"] forState:UIControlStateNormal];
 	[widthTabButton setBackgroundImage:[UIImage imageNamed:@"07_width_selected"] forState:UIControlStateNormal];
 	[heightTabButton setBackgroundImage:[UIImage imageNamed:@"07_height"] forState:UIControlStateNormal];
+    [widthTabButton setSelected:YES];
+    [heightTabButton setSelected:NO];
+    
 	cameraTabButton.alpha = ALPHA1;
 	photoTabButton.alpha = ALPHA1;
 	widthTabButton.alpha = ALPHA1;
@@ -1677,12 +1684,43 @@
 	textBackgrnd.alpha = ALPHA1;
 	[UIView commitAnimations];
 	
+    UIPinchGestureRecognizer *twoFingerPinch =
+    [[[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(twoFingerPinch:)] autorelease];
+    [[self view] addGestureRecognizer:twoFingerPinch];
+    
 	lableTouchFlag = NO;
 	photoTouchFlag = YES;
 	[self.imgView sendSubviewToBack:photoImgView];
 	[self.imgView bringSubviewToFront:msgLabel];
 }
 
+CGRect initialBounds;
+
+- (void)twoFingerPinch:(UIPinchGestureRecognizer *)gestureRecognizer
+{
+    NSLog(@"Pinch scale: %f", gestureRecognizer.scale);
+        
+    if (gestureRecognizer.state == UIGestureRecognizerStateBegan)
+    {
+        initialBounds = photoImgView.bounds;
+    }
+    CGFloat factor = [(UIPinchGestureRecognizer *)gestureRecognizer scale];
+    
+    CGAffineTransform zt;
+    
+    if([widthTabButton isSelected]){
+        zt = CGAffineTransformScale(CGAffineTransformIdentity, factor, 1);
+    } else if([heightTabButton isSelected]){
+        zt = CGAffineTransformScale(CGAffineTransformIdentity, 1, factor);
+    }
+
+    photoImgView.bounds = CGRectApplyAffineTransform(initialBounds, zt);
+}
+
+CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
+{
+    return CGPointMake(point2.x - point1.x, point2.y - point1.y);
+};
 
 
 -(void)callSaveAndShare
@@ -1959,6 +1997,9 @@
 		[photoTabButton setBackgroundImage:[UIImage imageNamed:@"07_roll"] forState:UIControlStateNormal];
 		[widthTabButton setBackgroundImage:[UIImage imageNamed:@"07_width_selected"] forState:UIControlStateNormal];
 		[heightTabButton setBackgroundImage:[UIImage imageNamed:@"07_height"] forState:UIControlStateNormal];
+
+        [widthTabButton setSelected:YES];
+        [heightTabButton setSelected:NO];
 		[UIView commitAnimations];
 	}
 	else if(selectedButton == heightTabButton)
@@ -1974,6 +2015,9 @@
 		[photoTabButton setBackgroundImage:[UIImage imageNamed:@"07_roll"] forState:UIControlStateNormal];
 		[widthTabButton setBackgroundImage:[UIImage imageNamed:@"07_width"] forState:UIControlStateNormal];
 		[heightTabButton setBackgroundImage:[UIImage imageNamed:@"07_height_selected"] forState:UIControlStateNormal];
+        
+        [widthTabButton setSelected:NO];
+        [heightTabButton setSelected:YES];
 		[UIView commitAnimations];
 		
 	}
@@ -2135,16 +2179,13 @@
 	NSInteger largestImgCount=-1;
 	NSArray *files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:folderPath error:nil];
 	
-	NSString *finalImgDetailWritePath;	
-    //NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    //NSString *documentsDirectory = [paths objectAtIndex:0];
-	//NSString *detailFlyerPath = [documentsDirectory stringByAppendingString:@"/Detail/"];
-
+	NSString *finalImgDetailWritePath;
+    NSString *newImgName;
+    
 	/************************ CREATE UNIQUE NAME FOR IMAGE ***********************************/
 	if(files == nil)
 	{
 		finalImgWritePath = [folderPath stringByAppendingString:@"/IMG_0.jpg"];
-		//finalImgDetailWritePath = [detailFlyerPath stringByAppendingString:@"/IMG_DETAIL_0.txt"];
         finalImgDetailWritePath = [folderPath stringByAppendingString:@"/IMG_0.txt"];
 
 	}
@@ -2164,10 +2205,8 @@
 			
 		}
 		[ap release];
-		NSString *newImgName = [NSString stringWithFormat:@"/IMG_%d.jpg",++largestImgCount];
+		newImgName = [NSString stringWithFormat:@"/IMG_%d.jpg",++largestImgCount];
 		finalImgWritePath = [folderPath stringByAppendingString:newImgName];
-		//NSString *newImgDetailName = [NSString stringWithFormat:@"/IMG_DETAIL_%d.txt",largestImgCount];
-		//finalImgDetailWritePath = [detailFlyerPath stringByAppendingString:newImgDetailName];
 		NSString *newImgDetailName = [NSString stringWithFormat:@"/IMG_%d.txt",largestImgCount];
 		finalImgDetailWritePath = [folderPath stringByAppendingString:newImgDetailName];
 
@@ -2178,18 +2217,29 @@
 	if (![[NSFileManager defaultManager] fileExistsAtPath:folderPath isDirectory:NULL]) {
 		[[NSFileManager defaultManager] createDirectoryAtPath:folderPath attributes:nil];
 	}
-
-	//NSString *imgDetailPath = [NSString pathWithComponents:[NSArray arrayWithObjects:[NSString stringWithString:[finalImgDetailWritePath stringByExpandingTildeInPath]], nil]];
-    //
-	//if (![[NSFileManager defaultManager] fileExistsAtPath:detailFlyerPath isDirectory:NULL]) {
-	//	[[NSFileManager defaultManager] createDirectoryAtPath:detailFlyerPath attributes:nil];
-	//}
     
 	NSMutableArray *array = [[[NSMutableArray alloc] init] autorelease];
     [array addObject:@"Title"];
     [array addObject:msgTextView.text];
     [array writeToFile:finalImgDetailWritePath atomically:YES];
 	
+    // Save states of all supported social media
+	NSMutableArray *socialArray = [[[NSMutableArray alloc] init] autorelease];
+    [socialArray addObject:@"0"]; //Facebook
+    [socialArray addObject:@"0"]; //Twitter
+    [socialArray addObject:@"0"]; //Email
+    [socialArray addObject:@"0"]; //Tumblr
+    [socialArray addObject:@"0"]; //Flickr
+    [socialArray addObject:@"0"]; //Instagram
+    [socialArray addObject:@"0"]; //SMS
+    [socialArray addObject:@"0"]; //Clipboard
+    
+    if(files){
+        [self saveSocialStates:folderPath imageName:newImgName stateArray:socialArray];
+    }else{
+        [self saveSocialStates:folderPath imageName:@"/IMG_0.jpg" stateArray:socialArray];
+    }
+    
     [aHUD.loadingLabel setText:@"Saved"];
 	[NSTimer scheduledTimerWithTimeInterval:0.4f target:self selector:@selector(killHUD) userInfo:nil repeats:NO];
 
@@ -2199,6 +2249,22 @@
 	[[NSFileManager defaultManager] createFileAtPath:imgPath contents:imgData attributes:nil];
 	//UIImage *tempImage = [[UIImage alloc]initWithData:imgData];
 	return imgData;
+}
+
+-(void)saveSocialStates:(NSString *)directory imageName:(NSString *)imageName stateArray:(NSArray *)stateArray{
+
+	NSString *socialFlyerPath = [NSString stringWithFormat:@"%@/Social/", directory];
+	//NSString *folderPath = [NSString pathWithComponents:[NSArray arrayWithObjects:[NSString stringWithString:[socialFlyerPath stringByStandardizingPath]],nil]];
+    
+    NSString *str = [imageName stringByReplacingOccurrencesOfString:@".jpg" withString:@".soc"];
+	NSString *finalImgWritePath = [socialFlyerPath stringByAppendingString:str];
+   
+	//NSString *imgPath = [NSString pathWithComponents:[NSArray arrayWithObjects:[NSString stringWithString:[finalImgWritePath stringByExpandingTildeInPath]], nil]];
+	if (![[NSFileManager defaultManager] fileExistsAtPath:socialFlyerPath isDirectory:NULL]) {
+		[[NSFileManager defaultManager] createDirectoryAtPath:socialFlyerPath attributes:nil];
+	}
+    
+    [stateArray writeToFile:finalImgWritePath atomically:YES];
 }
 
 #pragma mark  View Disappear Methods

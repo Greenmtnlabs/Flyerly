@@ -15,6 +15,7 @@
 	UILabel * dateLabel;
 	UIImageView *cellImage;
 	UIImageView *indicator;
+    NSString *filePath;
 	
 }
 @property(nonatomic, retain) UILabel * nameLabel;
@@ -22,7 +23,9 @@
 @property(nonatomic, retain) UILabel * dateLabel;
 @property(nonatomic, retain) UIImageView *cellImage;
 @property(nonatomic, retain) UIImageView *indicator;
-- (void) addToCell: (NSString *)title:  (NSString *)description: (NSString *)created: (UIImage *)imageName;
+@property(nonatomic, retain) NSString *filePath;
+
+- (void) addToCell: (NSString *)title:  (NSString *)description: (NSString *)created: (UIImage *)image: (NSString *)imagePath;
 +(UIColor*)colorWithHexString:(NSString*)hex;
 
 @end

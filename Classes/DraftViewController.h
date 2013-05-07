@@ -8,13 +8,27 @@
 
 #import <UIKit/UIKit.h>
 #import "MyNavigationBar.h"
+#import "FBConnect/FBConnect.h"
+#import <Twitter/Twitter.h>
+
 @class FlyrViewController;
 @class SaveFlyerController;
-@interface DraftViewController : UIViewController {
+@class LoadingView;
+
+@interface DraftViewController : UIViewController<FBRequestDelegate> {
 
 	IBOutlet UIImageView *imgView;
 	IBOutlet UITextField *titleView;
 	IBOutlet UILabel *descriptionView;
+
+    IBOutlet UIButton *facebookButton;
+	IBOutlet UIButton *twitterButton;
+	IBOutlet UIButton *emailButton;
+	IBOutlet UIButton *tumblrButton;
+	IBOutlet UIButton *flickrButton;
+	IBOutlet UIButton *instagramButton;
+	IBOutlet UIButton *smsButton;
+	IBOutlet UIButton *clipboardButton;
 
 	UIImage *selectedFlyerImage;
 	NSString *selectedFlyerTitle;
@@ -25,10 +39,20 @@
 	MyNavigationBar *navBar;
 	FlyrViewController *fvController;
 	SaveFlyerController *svController;
+	LoadingView *loadingView;
 }
 @property(nonatomic,retain) IBOutlet UILabel *descriptionView;
 @property(nonatomic,retain) IBOutlet UITextField *titleView;
 @property(nonatomic,retain) IBOutlet UIImageView *imgView;
+
+@property(nonatomic,retain) IBOutlet UIButton *facebookButton;
+@property(nonatomic,retain) IBOutlet UIButton *twitterButton;
+@property(nonatomic,retain) IBOutlet UIButton *emailButton;
+@property(nonatomic,retain) IBOutlet UIButton *tumblrButton;
+@property(nonatomic,retain) IBOutlet UIButton *flickrButton;
+@property(nonatomic,retain) IBOutlet UIButton *instagramButton;
+@property(nonatomic,retain) IBOutlet UIButton *smsButton;
+@property(nonatomic,retain) IBOutlet UIButton *clipboardButton;
 
 @property(nonatomic,retain)UIImage *selectedFlyerImage;
 @property(nonatomic,retain)NSString *selectedFlyerTitle;
@@ -39,4 +63,5 @@
 @property(nonatomic,retain) MyNavigationBar *navBar;
 @property(nonatomic,retain)FlyrViewController *fvController;
 @property(nonatomic,retain)SaveFlyerController *svController;
+@property (nonatomic, retain) LoadingView *loadingView;
 @end

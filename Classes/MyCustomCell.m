@@ -20,7 +20,7 @@
 
 #define CELL_HEIGHT				100
 
-@synthesize nameLabel, descriptionLabel, dateLabel;
+@synthesize nameLabel, descriptionLabel, dateLabel, filePath;
 @synthesize cellImage,indicator;
 
 - (id)initWithFrame:(CGRect)frame reuseIdentifier:(NSString *)reuseIdentifier {
@@ -120,11 +120,18 @@
 }
 
 
-- (void) addToCell: (NSString *)title:  (NSString *)description: (NSString *)created: (UIImage *)imageName{
+- (void) addToCell: (NSString *)title:  (NSString *)description: (NSString *)created: (UIImage *)image: (NSString*)imagePath{
 	
 	[self.nameLabel setText: title];
     [self.descriptionLabel setText:description];
     [self.dateLabel setText:created];
+    self.filePath = imagePath;
+
+    NSString *socialFlyerPath = [self.filePath stringByReplacingOccurrencesOfString:@"/Flyr/" withString:@"/Flyr/Social/"];
+	NSString *finalImgWritePath = [socialFlyerPath stringByReplacingOccurrencesOfString:@".jpg" withString:@".soc"];
+
+    NSArray *arr = [[NSArray alloc] initWithContentsOfFile:finalImgWritePath];
+    NSLog(@"%@", arr);    
 
 	//NSData *imageData = [NSData dataWithContentsOfMappedFile:imageName];
 	//UIImage *currentFlyerImage = [UIImage imageWithData:imageData];  
@@ -132,7 +139,7 @@
 	//currentFlyerImage = [self scale:currentFlyerImage toSize:CGSizeMake(100,100)];
 	//[self.cellImage setImage:[UIImage imageNamed:@"T0.Your device currently can’t connect to the internet. This may be due to cell signal or you may be in airplane mode."]];
 	//NSData *jpegData = UIImageJPEGRepresentation(currentFlyerImage, 0.2);
-	[self.cellImage setImage:imageName];
+	[self.cellImage setImage:image];
 	//[currentFlyerImage release];
 }
 

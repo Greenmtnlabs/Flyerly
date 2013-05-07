@@ -96,7 +96,7 @@ BOOL firstTableLoad = YES;
         return;
     }
 
-    loadingView =[LoadingView loadingViewInView:self.view];
+    loadingView =[LoadingView loadingViewInView:self.view  text:@"Loading..."];
     loadingViewFlag = YES;
 
     selectedTab = CONTACTS_TAB;
@@ -228,24 +228,11 @@ BOOL firstTableLoad = YES;
     [self setUnselectTab:sender];
     
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-
-    if(!appDelegate.facebook) {
-        
-        //get facebook app id
-        NSString *path = [[NSBundle mainBundle] pathForResource: @"Flyr-Info" ofType: @"plist"];
-        NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile: path];
-        appDelegate.facebook = [[Facebook alloc] initWithAppId:[dict objectForKey: @"FacebookAppID"] andDelegate:self];
-    }
-    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if ([defaults objectForKey:@"FBAccessTokenKey"] && [defaults objectForKey:@"FBExpirationDateKey"]) {
-        appDelegate.facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
-        appDelegate.facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
-    }
+    appDelegate.facebook.sessionDelegate = self;
     
     if([appDelegate.facebook isSessionValid]) {
 
-        loadingView =[LoadingView loadingViewInView:self.view];
+        loadingView =[LoadingView loadingViewInView:self.view  text:@"Loading..."];
         loadingViewFlag = YES;
         
         //self.contactsArray = [[NSMutableArray alloc] initWithCapacity:[users count]];
@@ -292,7 +279,7 @@ int totalCount = 0;
         FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
         [appDelegate.facebook requestWithGraphPath:[NSString stringWithFormat:@"me/friends?fields=name,picture.height(35).width(35).type(small)&limit=30&offset=%d", totalCount] andDelegate:self];
 
-        loadingView =[LoadingView loadingViewInView:self.view];
+        loadingView =[LoadingView loadingViewInView:self.view text:@"Loading..."];
         loadingViewFlag = YES;
         
     } else {
@@ -315,7 +302,7 @@ int totalCount = 0;
         return;
     }
     
-    loadingView =[LoadingView loadingViewInView:self.view];
+    loadingView =[LoadingView loadingViewInView:self.view text:@"Loading..."];
     loadingViewFlag = YES;
 
     selectedTab = TWITTER_TAB;
@@ -647,9 +634,18 @@ int totalCount = 0;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {    
     
+    //if(loadingViewFlag){
+    //    [loadingView removeView];
+    //    loadingViewFlag = NO;
+    //}
+    
     if(loadingViewFlag){
-        [loadingView removeView];
-        loadingViewFlag = NO;
+        for (UIView *subview in self.view.subviews) {
+            if([subview isKindOfClass:[LoadingView class]]){
+                [subview removeFromSuperview];
+                loadingViewFlag = NO;
+            }
+        }
     }
 
     // Get index like 0, 2, 4, 6 etc
@@ -845,8 +841,11 @@ int totalCount = 0;
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
 
     //save to session
-    [[NSUserDefaults standardUserDefaults] setObject:appDelegate.facebook.accessToken forKey:@"FBAccessToken"];
-    [[NSUserDefaults standardUserDefaults] setObject:appDelegate.facebook.expirationDate forKey:@"FBSExpirationDate"];
+    NSLog(@"%@",appDelegate.facebook.accessToken);
+    NSLog(@"%@",appDelegate.facebook.expirationDate);
+
+    [[NSUserDefaults standardUserDefaults] setObject:appDelegate.facebook.accessToken forKey:@"FBAccessTokenKey"];
+    [[NSUserDefaults standardUserDefaults] setObject:appDelegate.facebook.expirationDate forKey:@"FBExpirationDateKey"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     [self loadFacebookContacts:self.facebookButton];
@@ -868,11 +867,20 @@ int totalCount = 0;
 - (void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
     
-	if(loadingViewFlag)
-	{
-		[loadingView removeFromSuperview];
-		loadingViewFlag=NO;
-	}
+	//if(loadingViewFlag)
+	//{
+	//	[loadingView removeFromSuperview];
+	//	loadingViewFlag=NO;
+	//}
+    
+    if(loadingViewFlag){
+        for (UIView *subview in self.view.subviews) {
+            if([subview isKindOfClass:[LoadingView class]]){
+                [subview removeFromSuperview];
+                loadingViewFlag = NO;
+            }
+        }
+    }
 }
 
 - (void)dealloc {

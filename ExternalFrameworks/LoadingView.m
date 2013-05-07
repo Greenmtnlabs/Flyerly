@@ -59,7 +59,7 @@ CGPathRef NewPathWithRoundRect(CGRect rect, CGFloat cornerRadius)
 @implementation LoadingView
 
 
-+ (id)loadingViewInView:(UIView *)aSuperview
++ (id)loadingViewInView:(UIView *)aSuperview text:(NSString *)text
 {
 	LoadingView *loadingView =
 		[[[LoadingView alloc] initWithFrame:CGRectMake(85, 250, 200,120 )] autorelease];
@@ -78,7 +78,7 @@ CGPathRef NewPathWithRoundRect(CGRect rect, CGFloat cornerRadius)
 	CGRect labelFrame = CGRectMake(0, 0, DEFAULT_LABEL_WIDTH, DEFAULT_LABEL_HEIGHT);
 	UILabel *loadingLabel =[[[UILabel alloc]initWithFrame:labelFrame]autorelease];
 	
-	loadingLabel.text = NSLocalizedString(@"Loading...", nil);
+	loadingLabel.text = NSLocalizedString(text, nil);
 	loadingLabel.textColor = [UIColor blackColor];
 	loadingLabel.backgroundColor = [UIColor lightGrayColor];
 	loadingLabel.textAlignment = UITextAlignmentCenter;

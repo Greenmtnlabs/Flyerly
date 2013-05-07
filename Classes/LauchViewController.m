@@ -141,16 +141,25 @@
 
     spController = [[SettingViewController alloc]initWithNibName:@"SettingViewController" bundle:nil];
 	//[spController initSession];
-    
-    //get facebook app id
-    /*NSString *path = [[NSBundle mainBundle] pathForResource: @"Flyr-Info" ofType: @"plist"];
-    NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile: path];
-    id obj = [dict objectForKey: @"FacebookAppID"];
 
     //initialize facebook
-	FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
-    appDele.facebook = [[Facebook alloc] initWithAppId:obj andDelegate:self];
-     */
+	FlyrAppDelegate *appDelegate = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
+    
+    if(!appDelegate.facebook) {
+        
+        //get facebook app id
+        NSString *path = [[NSBundle mainBundle] pathForResource: @"Flyr-Info" ofType: @"plist"];
+        NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile: path];
+        appDelegate.facebook = [[Facebook alloc] initWithAppId:[dict objectForKey: @"FacebookAppID"] andDelegate:self];
+    }
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults objectForKey:@"FBAccessTokenKey"] && [defaults objectForKey:@"FBExpirationDateKey"]) {
+        appDelegate.facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
+        appDelegate.facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
+    }
+    
+
 }
 
 -(void)filesByModDate
