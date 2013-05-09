@@ -512,6 +512,56 @@
 		65E26184171C5B7600C485B5 /* checkbox_checked.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E26182171C5B7600C485B5 /* checkbox_checked.png */; };
 		65E26185171C5B7600C485B5 /* checkbox.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E26183171C5B7600C485B5 /* checkbox.png */; };
 		65E26188171C5C9900C485B5 /* AddFriendItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E26187171C5C9800C485B5 /* AddFriendItem.m */; };
+		65F1BE8E173AA13400EE6F9F /* email_disabled_saved.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F1BE6B173AA11E00EE6F9F /* email_disabled_saved.png */; };
+		65F1BE8F173AA13400EE6F9F /* email_disabled_saved@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F1BE6C173AA11E00EE6F9F /* email_disabled_saved@2x.png */; };
+		65F1BE90173AA13400EE6F9F /* email_share_saved.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F1BE6D173AA11E00EE6F9F /* email_share_saved.png */; };
+		65F1BE91173AA13400EE6F9F /* email_share_saved@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F1BE6E173AA11F00EE6F9F /* email_share_saved@2x.png */; };
+		65F1BE94173AA13400EE6F9F /* facebook_disabled_saved.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F1BE71173AA12000EE6F9F /* facebook_disabled_saved.png */; };
+		65F1BE95173AA13400EE6F9F /* facebook_disabled_saved@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F1BE72173AA12000EE6F9F /* facebook_disabled_saved@2x.png */; };
+		65F1BE96173AA13400EE6F9F /* facebook_share_saved.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F1BE73173AA12000EE6F9F /* facebook_share_saved.png */; };
+		65F1BE97173AA13400EE6F9F /* facebook_share_saved@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F1BE74173AA12100EE6F9F /* facebook_share_saved@2x.png */; };
+		65F1BE9A173AA13400EE6F9F /* flickr_disabled_saved.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F1BE77173AA12100EE6F9F /* flickr_disabled_saved.png */; };
+		65F1BE9B173AA13400EE6F9F /* flickr_disabled_saved@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F1BE78173AA12100EE6F9F /* flickr_disabled_saved@2x.png */; };
+		65F1BE9C173AA13400EE6F9F /* flickr_share_saved.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F1BE79173AA12200EE6F9F /* flickr_share_saved.png */; };
+		65F1BE9D173AA13400EE6F9F /* flickr_share_saved@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F1BE7A173AA12200EE6F9F /* flickr_share_saved@2x.png */; };
+		65F1BEA0173AA13400EE6F9F /* instagram_disabled_saved.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F1BE7D173AA12A00EE6F9F /* instagram_disabled_saved.png */; };
+		65F1BEA1173AA13400EE6F9F /* instagram_disabled_saved@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F1BE7E173AA12A00EE6F9F /* instagram_disabled_saved@2x.png */; };
+		65F1BEA2173AA13400EE6F9F /* instagram_share_saved.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F1BE7F173AA12B00EE6F9F /* instagram_share_saved.png */; };
+		65F1BEA3173AA13400EE6F9F /* instagram_share_saved@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F1BE80173AA12B00EE6F9F /* instagram_share_saved@2x.png */; };
+		65F1BEA7173AA13400EE6F9F /* tumblr_disabled_saved.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F1BE84173AA12F00EE6F9F /* tumblr_disabled_saved.png */; };
+		65F1BEA8173AA13400EE6F9F /* tumblr_disabled_saved@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F1BE85173AA12F00EE6F9F /* tumblr_disabled_saved@2x.png */; };
+		65F1BEA9173AA13400EE6F9F /* tumblr_share_saved.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F1BE86173AA13000EE6F9F /* tumblr_share_saved.png */; };
+		65F1BEAA173AA13400EE6F9F /* tumblr_share_saved@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F1BE87173AA13000EE6F9F /* tumblr_share_saved@2x.png */; };
+		65F1BEAB173AA13400EE6F9F /* twitter_disabled_saved.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F1BE88173AA13100EE6F9F /* twitter_disabled_saved.png */; };
+		65F1BEAC173AA13400EE6F9F /* twitter_disabled_saved@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F1BE89173AA13100EE6F9F /* twitter_disabled_saved@2x.png */; };
+		65F1BEAD173AA13400EE6F9F /* twitter_share_saved.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F1BE8A173AA13400EE6F9F /* twitter_share_saved.png */; };
+		65F1BEAE173AA13400EE6F9F /* twitter_share_saved@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F1BE8B173AA13400EE6F9F /* twitter_share_saved@2x.png */; };
+		65F41BD8173B84ED000BA8CB /* JXHTTPDataBody.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F41BC0173B84ED000BA8CB /* JXHTTPDataBody.m */; };
+		65F41BD9173B84ED000BA8CB /* JXHTTPFileBody.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F41BC2173B84ED000BA8CB /* JXHTTPFileBody.m */; };
+		65F41BDA173B84ED000BA8CB /* JXHTTPFormEncodedBody.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F41BC4173B84ED000BA8CB /* JXHTTPFormEncodedBody.m */; };
+		65F41BDB173B84ED000BA8CB /* JXHTTPJSONBody.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F41BC6173B84ED000BA8CB /* JXHTTPJSONBody.m */; };
+		65F41BDC173B84ED000BA8CB /* JXHTTPMultipartBody.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F41BC8173B84ED000BA8CB /* JXHTTPMultipartBody.m */; };
+		65F41BDD173B84ED000BA8CB /* JXHTTPOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F41BCA173B84ED000BA8CB /* JXHTTPOperation.m */; };
+		65F41BDE173B84ED000BA8CB /* JXHTTPOperation+Convenience.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F41BCC173B84ED000BA8CB /* JXHTTPOperation+Convenience.m */; };
+		65F41BDF173B84ED000BA8CB /* JXHTTPOperationQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F41BCF173B84ED000BA8CB /* JXHTTPOperationQueue.m */; };
+		65F41BE0173B84ED000BA8CB /* JXOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F41BD3173B84ED000BA8CB /* JXOperation.m */; };
+		65F41BE1173B84ED000BA8CB /* JXURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F41BD5173B84ED000BA8CB /* JXURLConnectionOperation.m */; };
+		65F41BE2173B84ED000BA8CB /* JXURLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F41BD7173B84ED000BA8CB /* JXURLEncoding.m */; };
+		65F41BEA173B8845000BA8CB /* TMTumblrActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F41BE5173B8845000BA8CB /* TMTumblrActivity.m */; };
+		65F41BEB173B8845000BA8CB /* UIActivityTumblr.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F41BE6173B8845000BA8CB /* UIActivityTumblr.png */; };
+		65F41BEC173B8845000BA8CB /* UIActivityTumblr@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F41BE7173B8845000BA8CB /* UIActivityTumblr@2x.png */; };
+		65F41BED173B8845000BA8CB /* UIActivityTumblr@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F41BE8173B8845000BA8CB /* UIActivityTumblr@2x~ipad.png */; };
+		65F41BEE173B8845000BA8CB /* UIActivityTumblr~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F41BE9173B8845000BA8CB /* UIActivityTumblr~ipad.png */; };
+		65F41BF2173B886E000BA8CB /* TMAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F41BF1173B886E000BA8CB /* TMAPIClient.m */; };
+		65F41BF6173B8887000BA8CB /* TMTumblrAppClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F41BF5173B8887000BA8CB /* TMTumblrAppClient.m */; };
+		65F41BFC173B88A2000BA8CB /* TMOAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F41BF9173B88A2000BA8CB /* TMOAuth.m */; };
+		65F41BFD173B88A2000BA8CB /* TMTumblrAuthenticator.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F41BFB173B88A2000BA8CB /* TMTumblrAuthenticator.m */; };
+		65F41C01173B88BC000BA8CB /* TMSDKFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F41C00173B88BC000BA8CB /* TMSDKFunctions.m */; };
+		65F41C8B173BDC03000BA8CB /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F41C8A173BDC02000BA8CB /* libxml2.2.dylib */; };
+		65F41CD8173BE958000BA8CB /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F41CD1173BE958000BA8CB /* NSData+Base64.m */; };
+		65F41CD9173BE958000BA8CB /* NSData+URLEncode.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F41CD3173BE958000BA8CB /* NSData+URLEncode.m */; };
+		65F41CDA173BE958000BA8CB /* NSString+URLEncode.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F41CD5173BE958000BA8CB /* NSString+URLEncode.m */; };
+		65F41CDB173BE958000BA8CB /* TumblrUploadr.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F41CD7173BE958000BA8CB /* TumblrUploadr.m */; };
 		65F7FFEE173817E600FBB061 /* camera_border-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F7FFE9173817E500FBB061 /* camera_border-568h@2x.png */; };
 		65F7FFEF173817E600FBB061 /* next_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F7FFEA173817E600FBB061 /* next_button.png */; };
 		65F7FFF0173817E600FBB061 /* next_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F7FFEB173817E600FBB061 /* next_button@2x.png */; };
@@ -1163,6 +1213,83 @@
 		65E26183171C5B7600C485B5 /* checkbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkbox.png; sourceTree = "<group>"; };
 		65E26186171C5C9800C485B5 /* AddFriendItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFriendItem.h; sourceTree = "<group>"; };
 		65E26187171C5C9800C485B5 /* AddFriendItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFriendItem.m; sourceTree = "<group>"; };
+		65F1BE6B173AA11E00EE6F9F /* email_disabled_saved.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = email_disabled_saved.png; sourceTree = "<group>"; };
+		65F1BE6C173AA11E00EE6F9F /* email_disabled_saved@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "email_disabled_saved@2x.png"; sourceTree = "<group>"; };
+		65F1BE6D173AA11E00EE6F9F /* email_share_saved.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = email_share_saved.png; sourceTree = "<group>"; };
+		65F1BE6E173AA11F00EE6F9F /* email_share_saved@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "email_share_saved@2x.png"; sourceTree = "<group>"; };
+		65F1BE71173AA12000EE6F9F /* facebook_disabled_saved.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook_disabled_saved.png; sourceTree = "<group>"; };
+		65F1BE72173AA12000EE6F9F /* facebook_disabled_saved@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook_disabled_saved@2x.png"; sourceTree = "<group>"; };
+		65F1BE73173AA12000EE6F9F /* facebook_share_saved.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook_share_saved.png; sourceTree = "<group>"; };
+		65F1BE74173AA12100EE6F9F /* facebook_share_saved@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook_share_saved@2x.png"; sourceTree = "<group>"; };
+		65F1BE77173AA12100EE6F9F /* flickr_disabled_saved.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flickr_disabled_saved.png; sourceTree = "<group>"; };
+		65F1BE78173AA12100EE6F9F /* flickr_disabled_saved@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flickr_disabled_saved@2x.png"; sourceTree = "<group>"; };
+		65F1BE79173AA12200EE6F9F /* flickr_share_saved.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flickr_share_saved.png; sourceTree = "<group>"; };
+		65F1BE7A173AA12200EE6F9F /* flickr_share_saved@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flickr_share_saved@2x.png"; sourceTree = "<group>"; };
+		65F1BE7D173AA12A00EE6F9F /* instagram_disabled_saved.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = instagram_disabled_saved.png; sourceTree = "<group>"; };
+		65F1BE7E173AA12A00EE6F9F /* instagram_disabled_saved@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "instagram_disabled_saved@2x.png"; sourceTree = "<group>"; };
+		65F1BE7F173AA12B00EE6F9F /* instagram_share_saved.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = instagram_share_saved.png; sourceTree = "<group>"; };
+		65F1BE80173AA12B00EE6F9F /* instagram_share_saved@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "instagram_share_saved@2x.png"; sourceTree = "<group>"; };
+		65F1BE84173AA12F00EE6F9F /* tumblr_disabled_saved.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tumblr_disabled_saved.png; sourceTree = "<group>"; };
+		65F1BE85173AA12F00EE6F9F /* tumblr_disabled_saved@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tumblr_disabled_saved@2x.png"; sourceTree = "<group>"; };
+		65F1BE86173AA13000EE6F9F /* tumblr_share_saved.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tumblr_share_saved.png; sourceTree = "<group>"; };
+		65F1BE87173AA13000EE6F9F /* tumblr_share_saved@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tumblr_share_saved@2x.png"; sourceTree = "<group>"; };
+		65F1BE88173AA13100EE6F9F /* twitter_disabled_saved.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twitter_disabled_saved.png; sourceTree = "<group>"; };
+		65F1BE89173AA13100EE6F9F /* twitter_disabled_saved@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter_disabled_saved@2x.png"; sourceTree = "<group>"; };
+		65F1BE8A173AA13400EE6F9F /* twitter_share_saved.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twitter_share_saved.png; sourceTree = "<group>"; };
+		65F1BE8B173AA13400EE6F9F /* twitter_share_saved@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter_share_saved@2x.png"; sourceTree = "<group>"; };
+		65F1BECB173AAEBC00EE6F9F /* TMTumblrSDK-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "TMTumblrSDK-Prefix.pch"; path = "TMTumblrSDK/TMTumblrSDK-Prefix.pch"; sourceTree = "<group>"; };
+		65F41BBE173B84ED000BA8CB /* JXHTTP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JXHTTP.h; path = TMTumblrSDK/JXHTTP/JXHTTP.h; sourceTree = "<group>"; };
+		65F41BBF173B84ED000BA8CB /* JXHTTPDataBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JXHTTPDataBody.h; path = TMTumblrSDK/JXHTTP/JXHTTPDataBody.h; sourceTree = "<group>"; };
+		65F41BC0173B84ED000BA8CB /* JXHTTPDataBody.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JXHTTPDataBody.m; path = TMTumblrSDK/JXHTTP/JXHTTPDataBody.m; sourceTree = "<group>"; };
+		65F41BC1173B84ED000BA8CB /* JXHTTPFileBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JXHTTPFileBody.h; path = TMTumblrSDK/JXHTTP/JXHTTPFileBody.h; sourceTree = "<group>"; };
+		65F41BC2173B84ED000BA8CB /* JXHTTPFileBody.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JXHTTPFileBody.m; path = TMTumblrSDK/JXHTTP/JXHTTPFileBody.m; sourceTree = "<group>"; };
+		65F41BC3173B84ED000BA8CB /* JXHTTPFormEncodedBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JXHTTPFormEncodedBody.h; path = TMTumblrSDK/JXHTTP/JXHTTPFormEncodedBody.h; sourceTree = "<group>"; };
+		65F41BC4173B84ED000BA8CB /* JXHTTPFormEncodedBody.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JXHTTPFormEncodedBody.m; path = TMTumblrSDK/JXHTTP/JXHTTPFormEncodedBody.m; sourceTree = "<group>"; };
+		65F41BC5173B84ED000BA8CB /* JXHTTPJSONBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JXHTTPJSONBody.h; path = TMTumblrSDK/JXHTTP/JXHTTPJSONBody.h; sourceTree = "<group>"; };
+		65F41BC6173B84ED000BA8CB /* JXHTTPJSONBody.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JXHTTPJSONBody.m; path = TMTumblrSDK/JXHTTP/JXHTTPJSONBody.m; sourceTree = "<group>"; };
+		65F41BC7173B84ED000BA8CB /* JXHTTPMultipartBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JXHTTPMultipartBody.h; path = TMTumblrSDK/JXHTTP/JXHTTPMultipartBody.h; sourceTree = "<group>"; };
+		65F41BC8173B84ED000BA8CB /* JXHTTPMultipartBody.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JXHTTPMultipartBody.m; path = TMTumblrSDK/JXHTTP/JXHTTPMultipartBody.m; sourceTree = "<group>"; };
+		65F41BC9173B84ED000BA8CB /* JXHTTPOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JXHTTPOperation.h; path = TMTumblrSDK/JXHTTP/JXHTTPOperation.h; sourceTree = "<group>"; };
+		65F41BCA173B84ED000BA8CB /* JXHTTPOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JXHTTPOperation.m; path = TMTumblrSDK/JXHTTP/JXHTTPOperation.m; sourceTree = "<group>"; };
+		65F41BCB173B84ED000BA8CB /* JXHTTPOperation+Convenience.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "JXHTTPOperation+Convenience.h"; path = "TMTumblrSDK/JXHTTP/JXHTTPOperation+Convenience.h"; sourceTree = "<group>"; };
+		65F41BCC173B84ED000BA8CB /* JXHTTPOperation+Convenience.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "JXHTTPOperation+Convenience.m"; path = "TMTumblrSDK/JXHTTP/JXHTTPOperation+Convenience.m"; sourceTree = "<group>"; };
+		65F41BCD173B84ED000BA8CB /* JXHTTPOperationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JXHTTPOperationDelegate.h; path = TMTumblrSDK/JXHTTP/JXHTTPOperationDelegate.h; sourceTree = "<group>"; };
+		65F41BCE173B84ED000BA8CB /* JXHTTPOperationQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JXHTTPOperationQueue.h; path = TMTumblrSDK/JXHTTP/JXHTTPOperationQueue.h; sourceTree = "<group>"; };
+		65F41BCF173B84ED000BA8CB /* JXHTTPOperationQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JXHTTPOperationQueue.m; path = TMTumblrSDK/JXHTTP/JXHTTPOperationQueue.m; sourceTree = "<group>"; };
+		65F41BD0173B84ED000BA8CB /* JXHTTPOperationQueueDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JXHTTPOperationQueueDelegate.h; path = TMTumblrSDK/JXHTTP/JXHTTPOperationQueueDelegate.h; sourceTree = "<group>"; };
+		65F41BD1173B84ED000BA8CB /* JXHTTPRequestBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JXHTTPRequestBody.h; path = TMTumblrSDK/JXHTTP/JXHTTPRequestBody.h; sourceTree = "<group>"; };
+		65F41BD2173B84ED000BA8CB /* JXOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JXOperation.h; path = TMTumblrSDK/JXHTTP/JXOperation.h; sourceTree = "<group>"; };
+		65F41BD3173B84ED000BA8CB /* JXOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JXOperation.m; path = TMTumblrSDK/JXHTTP/JXOperation.m; sourceTree = "<group>"; };
+		65F41BD4173B84ED000BA8CB /* JXURLConnectionOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JXURLConnectionOperation.h; path = TMTumblrSDK/JXHTTP/JXURLConnectionOperation.h; sourceTree = "<group>"; };
+		65F41BD5173B84ED000BA8CB /* JXURLConnectionOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JXURLConnectionOperation.m; path = TMTumblrSDK/JXHTTP/JXURLConnectionOperation.m; sourceTree = "<group>"; };
+		65F41BD6173B84ED000BA8CB /* JXURLEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JXURLEncoding.h; path = TMTumblrSDK/JXHTTP/JXURLEncoding.h; sourceTree = "<group>"; };
+		65F41BD7173B84ED000BA8CB /* JXURLEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JXURLEncoding.m; path = TMTumblrSDK/JXHTTP/JXURLEncoding.m; sourceTree = "<group>"; };
+		65F41BE4173B8845000BA8CB /* TMTumblrActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TMTumblrActivity.h; path = TMTumblrSDK/Activity/TMTumblrActivity.h; sourceTree = "<group>"; };
+		65F41BE5173B8845000BA8CB /* TMTumblrActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TMTumblrActivity.m; path = TMTumblrSDK/Activity/TMTumblrActivity.m; sourceTree = "<group>"; };
+		65F41BE6173B8845000BA8CB /* UIActivityTumblr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = UIActivityTumblr.png; path = TMTumblrSDK/Activity/UIActivityTumblr.png; sourceTree = "<group>"; };
+		65F41BE7173B8845000BA8CB /* UIActivityTumblr@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "UIActivityTumblr@2x.png"; path = "TMTumblrSDK/Activity/UIActivityTumblr@2x.png"; sourceTree = "<group>"; };
+		65F41BE8173B8845000BA8CB /* UIActivityTumblr@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "UIActivityTumblr@2x~ipad.png"; path = "TMTumblrSDK/Activity/UIActivityTumblr@2x~ipad.png"; sourceTree = "<group>"; };
+		65F41BE9173B8845000BA8CB /* UIActivityTumblr~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "UIActivityTumblr~ipad.png"; path = "TMTumblrSDK/Activity/UIActivityTumblr~ipad.png"; sourceTree = "<group>"; };
+		65F41BF0173B886E000BA8CB /* TMAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TMAPIClient.h; path = TMTumblrSDK/APIClient/TMAPIClient.h; sourceTree = "<group>"; };
+		65F41BF1173B886E000BA8CB /* TMAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TMAPIClient.m; path = TMTumblrSDK/APIClient/TMAPIClient.m; sourceTree = "<group>"; };
+		65F41BF4173B8887000BA8CB /* TMTumblrAppClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TMTumblrAppClient.h; path = TMTumblrSDK/AppClient/TMTumblrAppClient.h; sourceTree = "<group>"; };
+		65F41BF5173B8887000BA8CB /* TMTumblrAppClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TMTumblrAppClient.m; path = TMTumblrSDK/AppClient/TMTumblrAppClient.m; sourceTree = "<group>"; };
+		65F41BF8173B88A2000BA8CB /* TMOAuth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TMOAuth.h; path = TMTumblrSDK/Authentication/TMOAuth.h; sourceTree = "<group>"; };
+		65F41BF9173B88A2000BA8CB /* TMOAuth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TMOAuth.m; path = TMTumblrSDK/Authentication/TMOAuth.m; sourceTree = "<group>"; };
+		65F41BFA173B88A2000BA8CB /* TMTumblrAuthenticator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TMTumblrAuthenticator.h; path = TMTumblrSDK/Authentication/TMTumblrAuthenticator.h; sourceTree = "<group>"; };
+		65F41BFB173B88A2000BA8CB /* TMTumblrAuthenticator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TMTumblrAuthenticator.m; path = TMTumblrSDK/Authentication/TMTumblrAuthenticator.m; sourceTree = "<group>"; };
+		65F41BFF173B88BC000BA8CB /* TMSDKFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TMSDKFunctions.h; path = TMTumblrSDK/Core/TMSDKFunctions.h; sourceTree = "<group>"; };
+		65F41C00173B88BC000BA8CB /* TMSDKFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TMSDKFunctions.m; path = TMTumblrSDK/Core/TMSDKFunctions.m; sourceTree = "<group>"; };
+		65F41C02173BCB2E000BA8CB /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		65F41C8A173BDC02000BA8CB /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
+		65F41CD0173BE958000BA8CB /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+Base64.h"; path = "TumblrUploader/NSData+Base64.h"; sourceTree = "<group>"; };
+		65F41CD1173BE958000BA8CB /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+Base64.m"; path = "TumblrUploader/NSData+Base64.m"; sourceTree = "<group>"; };
+		65F41CD2173BE958000BA8CB /* NSData+URLEncode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+URLEncode.h"; path = "TumblrUploader/NSData+URLEncode.h"; sourceTree = "<group>"; };
+		65F41CD3173BE958000BA8CB /* NSData+URLEncode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+URLEncode.m"; path = "TumblrUploader/NSData+URLEncode.m"; sourceTree = "<group>"; };
+		65F41CD4173BE958000BA8CB /* NSString+URLEncode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+URLEncode.h"; path = "TumblrUploader/NSString+URLEncode.h"; sourceTree = "<group>"; };
+		65F41CD5173BE958000BA8CB /* NSString+URLEncode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+URLEncode.m"; path = "TumblrUploader/NSString+URLEncode.m"; sourceTree = "<group>"; };
+		65F41CD6173BE958000BA8CB /* TumblrUploadr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TumblrUploadr.h; path = TumblrUploader/TumblrUploadr.h; sourceTree = "<group>"; };
+		65F41CD7173BE958000BA8CB /* TumblrUploadr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TumblrUploadr.m; path = TumblrUploader/TumblrUploadr.m; sourceTree = "<group>"; };
 		65F7FFE9173817E500FBB061 /* camera_border-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera_border-568h@2x.png"; sourceTree = "<group>"; };
 		65F7FFEA173817E600FBB061 /* next_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = next_button.png; sourceTree = "<group>"; };
 		65F7FFEB173817E600FBB061 /* next_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "next_button@2x.png"; sourceTree = "<group>"; };
@@ -1189,6 +1316,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65F41C8B173BDC03000BA8CB /* libxml2.2.dylib in Frameworks */,
+				0D335121109ABB6A0082810A /* libxml2.dylib in Frameworks */,
 				65A21268172981A000ED0B9A /* ImageIO.framework in Frameworks */,
 				65A212461729496F00ED0B9A /* AssetsLibrary.framework in Frameworks */,
 				65A2CFC3172574F4005C03B7 /* AdSupport.framework in Frameworks */,
@@ -1209,7 +1338,6 @@
 				0DEE01A2108ED97400967DA5 /* Security.framework in Frameworks */,
 				0DE0243110959098005F699B /* MessageUI.framework in Frameworks */,
 				0D33511F109ABB6A0082810A /* CFNetwork.framework in Frameworks */,
-				0D335121109ABB6A0082810A /* libxml2.dylib in Frameworks */,
 				0D335123109ABB6A0082810A /* libz.dylib in Frameworks */,
 				30D58E3510FB260200E0C7E8 /* MediaPlayer.framework in Frameworks */,
 			);
@@ -1401,6 +1529,8 @@
 		0DF3A2D7108DF27200D6C887 /* ExternalFrameworks */ = {
 			isa = PBXGroup;
 			children = (
+				65F41CCF173BE944000BA8CB /* TumblrUploader */,
+				65F1BEC5173AAE8A00EE6F9F /* TMTumblrSDK */,
 				30D58EA710FB28F500E0C7E8 /* AdWhirl */,
 				30D8562210CF7FDB0016D5AB /* HudView.h */,
 				30D8562310CF7FDB0016D5AB /* HudView.m */,
@@ -1467,6 +1597,30 @@
 		0DF3A361108DF47400D6C887 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				65F1BE6B173AA11E00EE6F9F /* email_disabled_saved.png */,
+				65F1BE6C173AA11E00EE6F9F /* email_disabled_saved@2x.png */,
+				65F1BE6D173AA11E00EE6F9F /* email_share_saved.png */,
+				65F1BE6E173AA11F00EE6F9F /* email_share_saved@2x.png */,
+				65F1BE71173AA12000EE6F9F /* facebook_disabled_saved.png */,
+				65F1BE72173AA12000EE6F9F /* facebook_disabled_saved@2x.png */,
+				65F1BE73173AA12000EE6F9F /* facebook_share_saved.png */,
+				65F1BE74173AA12100EE6F9F /* facebook_share_saved@2x.png */,
+				65F1BE77173AA12100EE6F9F /* flickr_disabled_saved.png */,
+				65F1BE78173AA12100EE6F9F /* flickr_disabled_saved@2x.png */,
+				65F1BE79173AA12200EE6F9F /* flickr_share_saved.png */,
+				65F1BE7A173AA12200EE6F9F /* flickr_share_saved@2x.png */,
+				65F1BE7D173AA12A00EE6F9F /* instagram_disabled_saved.png */,
+				65F1BE7E173AA12A00EE6F9F /* instagram_disabled_saved@2x.png */,
+				65F1BE7F173AA12B00EE6F9F /* instagram_share_saved.png */,
+				65F1BE80173AA12B00EE6F9F /* instagram_share_saved@2x.png */,
+				65F1BE84173AA12F00EE6F9F /* tumblr_disabled_saved.png */,
+				65F1BE85173AA12F00EE6F9F /* tumblr_disabled_saved@2x.png */,
+				65F1BE86173AA13000EE6F9F /* tumblr_share_saved.png */,
+				65F1BE87173AA13000EE6F9F /* tumblr_share_saved@2x.png */,
+				65F1BE88173AA13100EE6F9F /* twitter_disabled_saved.png */,
+				65F1BE89173AA13100EE6F9F /* twitter_disabled_saved@2x.png */,
+				65F1BE8A173AA13400EE6F9F /* twitter_share_saved.png */,
+				65F1BE8B173AA13400EE6F9F /* twitter_share_saved@2x.png */,
 				65F7FFE9173817E500FBB061 /* camera_border-568h@2x.png */,
 				65F7FFEA173817E600FBB061 /* next_button.png */,
 				65F7FFEB173817E600FBB061 /* next_button@2x.png */,
@@ -1728,6 +1882,8 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				65F41C8A173BDC02000BA8CB /* libxml2.2.dylib */,
+				65F41C02173BCB2E000BA8CB /* SenTestingKit.framework */,
 				65A212671729819F00ED0B9A /* ImageIO.framework */,
 				65A212451729496F00ED0B9A /* AssetsLibrary.framework */,
 				65A2CFC2172574F3005C03B7 /* AdSupport.framework */,
@@ -2017,6 +2173,119 @@
 				65A2CFBE1725742C005C03B7 /* FBCrypto.m */,
 			);
 			name = Cryptography;
+			sourceTree = "<group>";
+		};
+		65F1BEC5173AAE8A00EE6F9F /* TMTumblrSDK */ = {
+			isa = PBXGroup;
+			children = (
+				65F41BFE173B88A7000BA8CB /* Core */,
+				65F41BF7173B888C000BA8CB /* Authentication */,
+				65F41BF3173B8874000BA8CB /* AppClient */,
+				65F41BEF173B8854000BA8CB /* APIClient */,
+				65F41BE3173B882A000BA8CB /* Activity */,
+				65F41BBD173B84DA000BA8CB /* JXHTTP */,
+				65F1BECB173AAEBC00EE6F9F /* TMTumblrSDK-Prefix.pch */,
+			);
+			name = TMTumblrSDK;
+			sourceTree = "<group>";
+		};
+		65F41BBD173B84DA000BA8CB /* JXHTTP */ = {
+			isa = PBXGroup;
+			children = (
+				65F41BBE173B84ED000BA8CB /* JXHTTP.h */,
+				65F41BBF173B84ED000BA8CB /* JXHTTPDataBody.h */,
+				65F41BC0173B84ED000BA8CB /* JXHTTPDataBody.m */,
+				65F41BC1173B84ED000BA8CB /* JXHTTPFileBody.h */,
+				65F41BC2173B84ED000BA8CB /* JXHTTPFileBody.m */,
+				65F41BC3173B84ED000BA8CB /* JXHTTPFormEncodedBody.h */,
+				65F41BC4173B84ED000BA8CB /* JXHTTPFormEncodedBody.m */,
+				65F41BC5173B84ED000BA8CB /* JXHTTPJSONBody.h */,
+				65F41BC6173B84ED000BA8CB /* JXHTTPJSONBody.m */,
+				65F41BC7173B84ED000BA8CB /* JXHTTPMultipartBody.h */,
+				65F41BC8173B84ED000BA8CB /* JXHTTPMultipartBody.m */,
+				65F41BC9173B84ED000BA8CB /* JXHTTPOperation.h */,
+				65F41BCA173B84ED000BA8CB /* JXHTTPOperation.m */,
+				65F41BCB173B84ED000BA8CB /* JXHTTPOperation+Convenience.h */,
+				65F41BCC173B84ED000BA8CB /* JXHTTPOperation+Convenience.m */,
+				65F41BCD173B84ED000BA8CB /* JXHTTPOperationDelegate.h */,
+				65F41BCE173B84ED000BA8CB /* JXHTTPOperationQueue.h */,
+				65F41BCF173B84ED000BA8CB /* JXHTTPOperationQueue.m */,
+				65F41BD0173B84ED000BA8CB /* JXHTTPOperationQueueDelegate.h */,
+				65F41BD1173B84ED000BA8CB /* JXHTTPRequestBody.h */,
+				65F41BD2173B84ED000BA8CB /* JXOperation.h */,
+				65F41BD3173B84ED000BA8CB /* JXOperation.m */,
+				65F41BD4173B84ED000BA8CB /* JXURLConnectionOperation.h */,
+				65F41BD5173B84ED000BA8CB /* JXURLConnectionOperation.m */,
+				65F41BD6173B84ED000BA8CB /* JXURLEncoding.h */,
+				65F41BD7173B84ED000BA8CB /* JXURLEncoding.m */,
+			);
+			name = JXHTTP;
+			sourceTree = "<group>";
+		};
+		65F41BE3173B882A000BA8CB /* Activity */ = {
+			isa = PBXGroup;
+			children = (
+				65F41BE4173B8845000BA8CB /* TMTumblrActivity.h */,
+				65F41BE5173B8845000BA8CB /* TMTumblrActivity.m */,
+				65F41BE6173B8845000BA8CB /* UIActivityTumblr.png */,
+				65F41BE7173B8845000BA8CB /* UIActivityTumblr@2x.png */,
+				65F41BE8173B8845000BA8CB /* UIActivityTumblr@2x~ipad.png */,
+				65F41BE9173B8845000BA8CB /* UIActivityTumblr~ipad.png */,
+			);
+			name = Activity;
+			sourceTree = "<group>";
+		};
+		65F41BEF173B8854000BA8CB /* APIClient */ = {
+			isa = PBXGroup;
+			children = (
+				65F41BF0173B886E000BA8CB /* TMAPIClient.h */,
+				65F41BF1173B886E000BA8CB /* TMAPIClient.m */,
+			);
+			name = APIClient;
+			sourceTree = "<group>";
+		};
+		65F41BF3173B8874000BA8CB /* AppClient */ = {
+			isa = PBXGroup;
+			children = (
+				65F41BF4173B8887000BA8CB /* TMTumblrAppClient.h */,
+				65F41BF5173B8887000BA8CB /* TMTumblrAppClient.m */,
+			);
+			name = AppClient;
+			sourceTree = "<group>";
+		};
+		65F41BF7173B888C000BA8CB /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				65F41BF8173B88A2000BA8CB /* TMOAuth.h */,
+				65F41BF9173B88A2000BA8CB /* TMOAuth.m */,
+				65F41BFA173B88A2000BA8CB /* TMTumblrAuthenticator.h */,
+				65F41BFB173B88A2000BA8CB /* TMTumblrAuthenticator.m */,
+			);
+			name = Authentication;
+			sourceTree = "<group>";
+		};
+		65F41BFE173B88A7000BA8CB /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				65F41BFF173B88BC000BA8CB /* TMSDKFunctions.h */,
+				65F41C00173B88BC000BA8CB /* TMSDKFunctions.m */,
+			);
+			name = Core;
+			sourceTree = "<group>";
+		};
+		65F41CCF173BE944000BA8CB /* TumblrUploader */ = {
+			isa = PBXGroup;
+			children = (
+				65F41CD0173BE958000BA8CB /* NSData+Base64.h */,
+				65F41CD1173BE958000BA8CB /* NSData+Base64.m */,
+				65F41CD2173BE958000BA8CB /* NSData+URLEncode.h */,
+				65F41CD3173BE958000BA8CB /* NSData+URLEncode.m */,
+				65F41CD4173BE958000BA8CB /* NSString+URLEncode.h */,
+				65F41CD5173BE958000BA8CB /* NSString+URLEncode.m */,
+				65F41CD6173BE958000BA8CB /* TumblrUploadr.h */,
+				65F41CD7173BE958000BA8CB /* TumblrUploadr.m */,
+			);
+			name = TumblrUploader;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2477,6 +2746,34 @@
 				65F7FFF0173817E600FBB061 /* next_button@2x.png in Resources */,
 				65F7FFF1173817E600FBB061 /* photo_button.png in Resources */,
 				65F7FFF2173817E600FBB061 /* photo_button@2x.png in Resources */,
+				65F1BE8E173AA13400EE6F9F /* email_disabled_saved.png in Resources */,
+				65F1BE8F173AA13400EE6F9F /* email_disabled_saved@2x.png in Resources */,
+				65F1BE90173AA13400EE6F9F /* email_share_saved.png in Resources */,
+				65F1BE91173AA13400EE6F9F /* email_share_saved@2x.png in Resources */,
+				65F1BE94173AA13400EE6F9F /* facebook_disabled_saved.png in Resources */,
+				65F1BE95173AA13400EE6F9F /* facebook_disabled_saved@2x.png in Resources */,
+				65F1BE96173AA13400EE6F9F /* facebook_share_saved.png in Resources */,
+				65F1BE97173AA13400EE6F9F /* facebook_share_saved@2x.png in Resources */,
+				65F1BE9A173AA13400EE6F9F /* flickr_disabled_saved.png in Resources */,
+				65F1BE9B173AA13400EE6F9F /* flickr_disabled_saved@2x.png in Resources */,
+				65F1BE9C173AA13400EE6F9F /* flickr_share_saved.png in Resources */,
+				65F1BE9D173AA13400EE6F9F /* flickr_share_saved@2x.png in Resources */,
+				65F1BEA0173AA13400EE6F9F /* instagram_disabled_saved.png in Resources */,
+				65F1BEA1173AA13400EE6F9F /* instagram_disabled_saved@2x.png in Resources */,
+				65F1BEA2173AA13400EE6F9F /* instagram_share_saved.png in Resources */,
+				65F1BEA3173AA13400EE6F9F /* instagram_share_saved@2x.png in Resources */,
+				65F1BEA7173AA13400EE6F9F /* tumblr_disabled_saved.png in Resources */,
+				65F1BEA8173AA13400EE6F9F /* tumblr_disabled_saved@2x.png in Resources */,
+				65F1BEA9173AA13400EE6F9F /* tumblr_share_saved.png in Resources */,
+				65F1BEAA173AA13400EE6F9F /* tumblr_share_saved@2x.png in Resources */,
+				65F1BEAB173AA13400EE6F9F /* twitter_disabled_saved.png in Resources */,
+				65F1BEAC173AA13400EE6F9F /* twitter_disabled_saved@2x.png in Resources */,
+				65F1BEAD173AA13400EE6F9F /* twitter_share_saved.png in Resources */,
+				65F1BEAE173AA13400EE6F9F /* twitter_share_saved@2x.png in Resources */,
+				65F41BEB173B8845000BA8CB /* UIActivityTumblr.png in Resources */,
+				65F41BEC173B8845000BA8CB /* UIActivityTumblr@2x.png in Resources */,
+				65F41BED173B8845000BA8CB /* UIActivityTumblr@2x~ipad.png in Resources */,
+				65F41BEE173B8845000BA8CB /* UIActivityTumblr~ipad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2578,6 +2875,27 @@
 				6560C1BF1727F5C7005BE8DD /* CustomPhotoController.m in Sources */,
 				65A21266172960AB00ED0B9A /* CustomGalleryItem.m in Sources */,
 				65BDB2DF17341D290084E032 /* CustomLabel.m in Sources */,
+				65F41BD8173B84ED000BA8CB /* JXHTTPDataBody.m in Sources */,
+				65F41BD9173B84ED000BA8CB /* JXHTTPFileBody.m in Sources */,
+				65F41BDA173B84ED000BA8CB /* JXHTTPFormEncodedBody.m in Sources */,
+				65F41BDB173B84ED000BA8CB /* JXHTTPJSONBody.m in Sources */,
+				65F41BDC173B84ED000BA8CB /* JXHTTPMultipartBody.m in Sources */,
+				65F41BDD173B84ED000BA8CB /* JXHTTPOperation.m in Sources */,
+				65F41BDE173B84ED000BA8CB /* JXHTTPOperation+Convenience.m in Sources */,
+				65F41BDF173B84ED000BA8CB /* JXHTTPOperationQueue.m in Sources */,
+				65F41BE0173B84ED000BA8CB /* JXOperation.m in Sources */,
+				65F41BE1173B84ED000BA8CB /* JXURLConnectionOperation.m in Sources */,
+				65F41BE2173B84ED000BA8CB /* JXURLEncoding.m in Sources */,
+				65F41BEA173B8845000BA8CB /* TMTumblrActivity.m in Sources */,
+				65F41BF2173B886E000BA8CB /* TMAPIClient.m in Sources */,
+				65F41BF6173B8887000BA8CB /* TMTumblrAppClient.m in Sources */,
+				65F41BFC173B88A2000BA8CB /* TMOAuth.m in Sources */,
+				65F41BFD173B88A2000BA8CB /* TMTumblrAuthenticator.m in Sources */,
+				65F41C01173B88BC000BA8CB /* TMSDKFunctions.m in Sources */,
+				65F41CD8173BE958000BA8CB /* NSData+Base64.m in Sources */,
+				65F41CD9173BE958000BA8CB /* NSData+URLEncode.m in Sources */,
+				65F41CDA173BE958000BA8CB /* NSString+URLEncode.m in Sources */,
+				65F41CDB173BE958000BA8CB /* TumblrUploadr.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2632,6 +2950,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Flyr_Prefix.pch;
 				INFOPLIST_FILE = "Flyr-Info.plist";
@@ -2643,6 +2965,10 @@
 					"\"$(SRCROOT)/ExternalFrameworks/FBConnect",
 				);
 				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lxml2",
+				);
 				PRODUCT_NAME = Flyr;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -2659,6 +2985,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2688,6 +3018,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Flyr_Prefix.pch;
 				HEADER_SEARCH_PATHS = "./ExternalFrameworks/**";
@@ -2700,6 +3034,10 @@
 					"\"$(SRCROOT)/ExternalFrameworks/FBConnect",
 				);
 				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lxml2",
+				);
 				PRODUCT_NAME = Flyr;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";

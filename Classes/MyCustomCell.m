@@ -66,38 +66,6 @@
     dateLabel.backgroundColor = [UIColor clearColor];
 	[self.contentView addSubview:dateLabel];	
 	
-	CGRect facebookRect = CGRectMake(95, 70, 22, 22);
-	UIButton *facebookButon = [[UIButton alloc] initWithFrame:facebookRect];
-    facebookButon.backgroundColor = [UIColor clearColor];
-    //[facebookButon addTarget:self action:@selector(changeButtonBackGroundColor:) forControlEvents:UIControlEventTouchDown];
-    //[facebookButon addTarget:self action:@selector(resetButtonBackGroundColor:) forControlEvents:UIControlEventTouchUpInside];
-	[self.contentView addSubview:facebookButon];
-	
-	CGRect twitterRect = CGRectMake(119, 70, 22, 22);
-	UIButton *twitterButon = [[UIButton alloc] initWithFrame:twitterRect];
-    twitterButon.backgroundColor = [UIColor clearColor];
-	[self.contentView addSubview:twitterButon];
-	
-	CGRect inboxRect = CGRectMake(143, 70, 32, 22);
-	UIButton *inboxButon = [[UIButton alloc] initWithFrame:inboxRect];
-    inboxButon.backgroundColor = [UIColor clearColor];
-	[self.contentView addSubview:inboxButon];
-	
-	CGRect cameraRect = CGRectMake(177, 70, 29, 22);
-	UIButton *cameraButon = [[UIButton alloc] initWithFrame:cameraRect];
-    cameraButon.backgroundColor = [UIColor clearColor];
-	[self.contentView addSubview:cameraButon];
-	
-	CGRect flickrRect = CGRectMake(208, 70, 29, 22);
-	UIButton *flickrButon = [[UIButton alloc] initWithFrame:flickrRect];
-    flickrButon.backgroundColor = [UIColor clearColor];
-	[self.contentView addSubview:flickrButon];
-	
-	CGRect tumblrRect = CGRectMake(239, 70, 32, 22);
-	UIButton *tumblrButon = [[UIButton alloc] initWithFrame:tumblrRect];
-    tumblrButon.backgroundColor = [UIColor clearColor];
-	[self.contentView addSubview:tumblrButon];
-	
     return self;
 }
 
@@ -131,16 +99,89 @@
 	NSString *finalImgWritePath = [socialFlyerPath stringByReplacingOccurrencesOfString:@".jpg" withString:@".soc"];
 
     NSArray *arr = [[NSArray alloc] initWithContentsOfFile:finalImgWritePath];
-    NSLog(@"%@", arr);    
+    //NSLog(@"%@", arr);
 
-	//NSData *imageData = [NSData dataWithContentsOfMappedFile:imageName];
-	//UIImage *currentFlyerImage = [UIImage imageWithData:imageData];  
-	//currentFlyerImage = [currentFlyerImage imageByScalingAndCroppingForSize:CGSizeMake(100, 100)];
-	//currentFlyerImage = [self scale:currentFlyerImage toSize:CGSizeMake(100,100)];
-	//[self.cellImage setImage:[UIImage imageNamed:@"T0.Your device currently can’t connect to the internet. This may be due to cell signal or you may be in airplane mode."]];
-	//NSData *jpegData = UIImageJPEGRepresentation(currentFlyerImage, 0.2);
 	[self.cellImage setImage:image];
-	//[currentFlyerImage release];
+    
+    CGRect facebookRect = CGRectMake(95, 70, 22, 22);
+	UIButton *facebookButon = [[UIButton alloc] initWithFrame:facebookRect];
+    facebookButon.backgroundColor = [UIColor clearColor];
+    
+    if([[arr objectAtIndex:0] isEqualToString:@"1"]){
+        [facebookButon setImage:[UIImage imageNamed:@"facebook_share_saved"] forState:UIControlStateNormal];
+    } else {
+        [facebookButon setImage:[UIImage imageNamed:@"facebook_disabled_saved"] forState:UIControlStateNormal];
+    }
+    
+    facebookButon.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+	[self.contentView addSubview:facebookButon];
+	
+	CGRect twitterRect = CGRectMake(119, 70, 22, 22);
+	UIButton *twitterButon = [[UIButton alloc] initWithFrame:twitterRect];
+    twitterButon.backgroundColor = [UIColor clearColor];
+    
+    if([[arr objectAtIndex:1] isEqualToString:@"1"]){
+        [twitterButon setImage:[UIImage imageNamed:@"twitter_share_saved"] forState:UIControlStateNormal];
+    } else {
+        [twitterButon setImage:[UIImage imageNamed:@"twitter_disabled_saved"] forState:UIControlStateNormal];
+    }
+    
+    twitterButon.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+	[self.contentView addSubview:twitterButon];
+	
+	CGRect inboxRect = CGRectMake(143, 70, 32, 22);
+	UIButton *inboxButon = [[UIButton alloc] initWithFrame:inboxRect];
+    inboxButon.backgroundColor = [UIColor clearColor];
+    
+    if([[arr objectAtIndex:2] isEqualToString:@"1"]){
+        [inboxButon setImage:[UIImage imageNamed:@"email_share_saved"] forState:UIControlStateNormal];
+    } else {
+        [inboxButon setImage:[UIImage imageNamed:@"email_disabled_saved"] forState:UIControlStateNormal];
+    }
+    
+    inboxButon.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+	[self.contentView addSubview:inboxButon];
+	
+	CGRect cameraRect = CGRectMake(177, 70, 29, 22);
+	UIButton *cameraButon = [[UIButton alloc] initWithFrame:cameraRect];
+    cameraButon.backgroundColor = [UIColor clearColor];
+    
+    if([[arr objectAtIndex:5] isEqualToString:@"1"]){
+        [cameraButon setImage:[UIImage imageNamed:@"instagram_share_saved"] forState:UIControlStateNormal];
+    } else {
+        [cameraButon setImage:[UIImage imageNamed:@"instagram_disabled_saved"] forState:UIControlStateNormal];
+    }
+    
+    cameraButon.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+	[self.contentView addSubview:cameraButon];
+	
+	CGRect flickrRect = CGRectMake(208, 70, 29, 22);
+	UIButton *flickrButon = [[UIButton alloc] initWithFrame:flickrRect];
+    flickrButon.backgroundColor = [UIColor clearColor];
+    
+    if([[arr objectAtIndex:4] isEqualToString:@"1"]){
+        [flickrButon setImage:[UIImage imageNamed:@"flickr_share_saved"] forState:UIControlStateNormal];
+    } else {
+        [flickrButon setImage:[UIImage imageNamed:@"flickr_disabled_saved"] forState:UIControlStateNormal];
+    }
+    
+    flickrButon.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+	[self.contentView addSubview:flickrButon];
+	
+	CGRect tumblrRect = CGRectMake(239, 70, 32, 22);
+	UIButton *tumblrButon = [[UIButton alloc] initWithFrame:tumblrRect];
+    tumblrButon.backgroundColor = [UIColor clearColor];
+    
+    if([[arr objectAtIndex:3] isEqualToString:@"1"]){
+        [tumblrButon setImage:[UIImage imageNamed:@"tumblr_share_saved"] forState:UIControlStateNormal];
+    } else {
+        [tumblrButon setImage:[UIImage imageNamed:@"tumblr_disabled_saved"] forState:UIControlStateNormal];
+    }
+    
+    tumblrButon.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+	[self.contentView addSubview:tumblrButon];
+	
+
 }
 
 - (void)layoutSubviews

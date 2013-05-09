@@ -205,12 +205,12 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-          
 
 	UIImage *image = [iconArray objectAtIndex:indexPath.row];
 	NSString *imageName = [photoArray objectAtIndex:indexPath.row];
-    
-	SET_GLOBAL_CUSTOM_CELL_PROPERTIES(@"Title", @"Description of two lines to test the multiple line label", @"24/03/2013",image, imageName)
+    NSArray *detailArray = [photoDetailArray objectAtIndex:indexPath.row];
+
+	SET_GLOBAL_CUSTOM_CELL_PROPERTIES([detailArray objectAtIndex:0], [detailArray objectAtIndex:1], @"24/03/2013",image, imageName)
 	
 }
 

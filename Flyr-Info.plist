@@ -25,6 +25,7 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
+				<string>Flyerly</string>
 				<string>fb_136691489852349</string>
 			</array>
 		</dict>

@@ -33,4 +33,7 @@
 	@result	The base 64 encoded data. */
 - (NSString *) base64EncodingWithLineLength:(unsigned int) lineLength;
 
+- (NSString *)base64EncodedString;
+- (NSString *)base64EncodedStringWithWrapWidth:(NSUInteger)wrapWidth;
+
 @end

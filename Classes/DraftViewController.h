@@ -10,12 +10,13 @@
 #import "MyNavigationBar.h"
 #import "FBConnect/FBConnect.h"
 #import <Twitter/Twitter.h>
+#import "TumblrUploadr.h"
 
 @class FlyrViewController;
 @class SaveFlyerController;
 @class LoadingView;
 
-@interface DraftViewController : UIViewController<FBRequestDelegate> {
+@interface DraftViewController : UIViewController<FBRequestDelegate,UIWebViewDelegate,UIDocumentInteractionControllerDelegate,FBSessionDelegate,FBDialogDelegate,FBLoginDialogDelegate,TumblrUploadrDelegate> {
 
 	IBOutlet UIImageView *imgView;
 	IBOutlet UITextField *titleView;
@@ -40,6 +41,7 @@
 	FlyrViewController *fvController;
 	SaveFlyerController *svController;
 	LoadingView *loadingView;
+    UIDocumentInteractionController *dic;
 }
 @property(nonatomic,retain) IBOutlet UILabel *descriptionView;
 @property(nonatomic,retain) IBOutlet UITextField *titleView;
@@ -53,6 +55,7 @@
 @property(nonatomic,retain) IBOutlet UIButton *instagramButton;
 @property(nonatomic,retain) IBOutlet UIButton *smsButton;
 @property(nonatomic,retain) IBOutlet UIButton *clipboardButton;
+@property (nonatomic, retain) UIDocumentInteractionController *dic;
 
 @property(nonatomic,retain)UIImage *selectedFlyerImage;
 @property(nonatomic,retain)NSString *selectedFlyerTitle;
@@ -64,4 +67,14 @@
 @property(nonatomic,retain)FlyrViewController *fvController;
 @property(nonatomic,retain)SaveFlyerController *svController;
 @property (nonatomic, retain) LoadingView *loadingView;
+
+-(IBAction)onClickFacebookButton;
+-(IBAction)onClickTwitterButton;
+-(IBAction)onClickInstagramButton;
+-(IBAction)onClickEmailButton;
+-(IBAction)onClickTumblrButton;
+-(IBAction)onClickFlickrButton;
+-(IBAction)onClickSMSButton;
+-(IBAction)onClickClipboardButton;
+
 @end

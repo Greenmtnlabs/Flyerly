@@ -13,6 +13,7 @@
 #import "ImageCache.h"
 #import "LauchViewController.h"
 #import "AfterUpdateController.h"
+#import "TMAPIClient.h"
 //#import "ARRollerView.h"
 //#import "ARRollerProtocol.h"
 
@@ -164,22 +165,21 @@
 	
 }
 
-- (BOOL)application:(UIApplication *)application
-            openURL:(NSURL *)url
-  sourceApplication:(NSString *)sourceApplication
-         annotation:(id)annotation {
+//- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication
+//         annotation:(id)annotation {
     // attempt to extract a token from the url
 
-    return [[self facebook] handleOpenURL:url];
-
-    //return [FBAppCall handleOpenURL:url
-    //              sourceApplication:sourceApplication
-    //                    withSession:self.session];
-}
+//    return [[self facebook] handleOpenURL:url];
+//}
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
 
     return [[self facebook] handleOpenURL:url];
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    return [[TMAPIClient sharedInstance] handleOpenURL:url];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
