@@ -14,11 +14,12 @@
 #import "LauchViewController.h"
 #import "AfterUpdateController.h"
 #import "TMAPIClient.h"
+#import "DraftViewController.h"
 //#import "ARRollerView.h"
 //#import "ARRollerProtocol.h"
 
-//#define kAdWhirlApplicationKey @"b9c3615f2c88102da8949a322e50052a "
 #define kAdWhirlApplicationKey @"b7dfccec5016102d840c2e1e0de86337"
+//#define kAdWhirlApplicationKey @"b9c3615f2c88102da8949a322e50052a "
 //#define facebookAppID @"136691489852349"
 
 #define TIME 10
@@ -28,12 +29,9 @@
 
 @synthesize window;
 @synthesize navigationController,faceBookPermissionFlag,changesFlag;
-@synthesize fontScrollView,colorScrollView,templateScrollView,sizeScrollView,svController,_tSession,lauchController;
-//@synthesize adwhirl;
+@synthesize fontScrollView,colorScrollView,templateScrollView,sizeScrollView,svController,_tSession,lauchController,flickrContext,flickrRequest;
 @synthesize session = _session;
-
-
-
+//@synthesize adwhirl;
 
 #pragma mark Ad whirl delegate methods
 
@@ -56,7 +54,6 @@
 //{
 //	NSLog(@"Failed to receive ad from %@.  Using Backup: %@", [rollerView mostRecentNetworkName], YesOrNo ? @"YES" : @"NO");
 //}
-
 
 #pragma mark -
 #pragma mark Application lifecycle
@@ -102,9 +99,6 @@
 
 	[window makeKeyAndVisible];
 	
-    //initialize facebook
-    //self.facebook = [[Facebook alloc] initWithAppId:facebookAppID andDelegate:self];
-
 	//adwhirl = [ARRollerView requestRollerViewWithDelegate:self];
 	//adwhirl.
 	//[adwhirl setFrame:CGRectMake(0, 318, 320, 50)];
@@ -165,21 +159,67 @@
 	
 }
 
-//- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication
-//         annotation:(id)annotation {
-    // attempt to extract a token from the url
-
-//    return [[self facebook] handleOpenURL:url];
-//}
-
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
 
     return [[self facebook] handleOpenURL:url];
 }
 
+- (OFFlickrAPIRequest *)flickrRequest
+{
+	if (!flickrRequest) {
+		flickrRequest = [[OFFlickrAPIRequest alloc] initWithAPIContext:flickrContext];
+		flickrRequest.delegate = self;
+	}
+	
+	return flickrRequest;
+}
+
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation {
-    return [[TMAPIClient sharedInstance] handleOpenURL:url];
+    
+    if([[url absoluteString] hasPrefix:kCallbackURLBaseStringPrefix]){
+        
+        if ([self flickrRequest].sessionInfo) {
+            // already running some other request
+            NSLog(@"Already running some other request");
+        }
+        else {
+            NSString *token = nil;
+            NSString *verifier = nil;
+            BOOL result = OFExtractOAuthCallback(url, [NSURL URLWithString:kCallbackURLBaseString], &token, &verifier);
+            
+            if (!result) {
+                NSLog(@"Cannot obtain token/secret from URL: %@", [url absoluteString]);
+                return NO;
+            }
+            
+            [self flickrRequest].sessionInfo = kTryObtainAuthToken;
+            [flickrRequest fetchOAuthAccessTokenWithRequestToken:token verifier:verifier];
+        }
+        
+        return YES;
+
+    } else {
+        
+        return [[TMAPIClient sharedInstance] handleOpenURL:url];
+    }
+}
+
+- (OFFlickrAPIContext *)flickrContext
+{
+    if (!flickrContext) {
+        flickrContext = [[OFFlickrAPIContext alloc] initWithAPIKey:FlickrAPIKey sharedSecret:FlickrSecretKey];
+        
+        NSString *authToken = [[NSUserDefaults standardUserDefaults] objectForKey:kStoredAuthTokenKeyName];
+        NSString *authTokenSecret = [[NSUserDefaults standardUserDefaults] objectForKey:kStoredAuthTokenSecretKeyName];
+        
+        if (([authToken length] > 0) && ([authTokenSecret length] > 0)) {
+            flickrContext.OAuthToken = authToken;
+            flickrContext.OAuthTokenSecret = authTokenSecret;
+        }
+    }
+    
+    return flickrContext;
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -191,6 +231,89 @@
     // We need to properly handle activation of the application with regards to SSO
     //  (e.g., returning from iOS 6.0 authorization dialog or from fast app switching).
     [FBAppCall handleDidBecomeActiveWithSession:self.session];
+}
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    
+    [self clearCache];
+	changesFlag = NO;
+	[[UIApplication sharedApplication] setStatusBarStyle: UIStatusBarStyleBlackTranslucent];
+	navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
+    
+    NSString *greeted = [[NSUserDefaults standardUserDefaults] stringForKey:@"greeted"];
+    
+    if(!greeted){
+        NSLog(@"Welcome to the world of Flyerly");
+        [[NSUserDefaults standardUserDefaults] setObject:@"greeted" forKey:@"greeted"];
+        
+        if(IS_IPHONE_5){
+            lauchController = [[LauchViewController alloc]initWithNibName:@"LauchViewControllerIPhone5" bundle:nil];
+        }else{
+            lauchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
+        }
+        
+        [navigationController pushViewController:lauchController animated:NO];
+        [window addSubview:[navigationController view]];
+        
+        AfterUpdateController *afterUpdateView = [[AfterUpdateController alloc]initWithNibName:@"AfterUpdateController" bundle:nil];
+        [navigationController pushViewController:afterUpdateView animated:NO];
+        
+    } else {
+        
+        NSLog(@"User already Greeted !");
+        
+        if(IS_IPHONE_5){
+            lauchController = [[LauchViewController alloc]initWithNibName:@"LauchViewControllerIPhone5" bundle:nil];
+        }else{
+            lauchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
+        }
+        
+        [navigationController pushViewController:lauchController animated:NO];
+        [window addSubview:[navigationController view]];
+    }
+    
+	[window makeKeyAndVisible];
+
+    return YES;
+}
+
+- (void)flickrAPIRequest:(OFFlickrAPIRequest *)inRequest didCompleteWithResponse:(NSDictionary *)inResponseDictionary {    
+    NSLog(@"Request Complete With Response: %@", inResponseDictionary);
+    [self flickrRequest].sessionInfo = nil;
+}
+
+
+- (void)flickrAPIRequest:(OFFlickrAPIRequest *)inRequest didObtainOAuthAccessToken:(NSString *)inAccessToken secret:(NSString *)inSecret userFullName:(NSString *)inFullName userName:(NSString *)inUserName userNSID:(NSString *)inNSID {
+    [self setAndStoreFlickrAuthToken:inAccessToken secret:inSecret];
+}
+
+- (void)setAndStoreFlickrAuthToken:(NSString *)inAuthToken secret:(NSString *)inSecret {
+	if (![inAuthToken length] || ![inSecret length]) {
+		self.flickrContext.OAuthToken = nil;
+        self.flickrContext.OAuthTokenSecret = nil;
+		[[NSUserDefaults standardUserDefaults] removeObjectForKey:kStoredAuthTokenKeyName];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:kStoredAuthTokenSecretKeyName];
+        
+	}
+	else {
+		self.flickrContext.OAuthToken = inAuthToken;
+        self.flickrContext.OAuthTokenSecret = inSecret;
+		[[NSUserDefaults standardUserDefaults] setObject:inAuthToken forKey:kStoredAuthTokenKeyName];
+		[[NSUserDefaults standardUserDefaults] setObject:inSecret forKey:kStoredAuthTokenSecretKeyName];
+	}
+}
+
+- (void)flickrAPIRequest:(OFFlickrAPIRequest *)inRequest didObtainOAuthRequestToken:(NSString *)inRequestToken secret:(NSString *)inSecret; {
+    flickrContext.OAuthToken = inRequestToken;
+    flickrContext.OAuthTokenSecret = inSecret;
+    
+}
+
+
+- (void)flickrAPIRequest:(OFFlickrAPIRequest *)inRequest didFailWithError:(NSError *)inError{
+    NSLog(@"Fail request %@, error: %@", inRequest, inError);
+
 }
 
 #pragma mark -

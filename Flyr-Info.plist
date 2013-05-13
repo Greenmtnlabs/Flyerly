@@ -25,6 +25,7 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
+				<string>oatransdemo</string>
 				<string>Flyerly</string>
 				<string>fb_136691489852349</string>
 			</array>

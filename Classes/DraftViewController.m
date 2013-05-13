@@ -14,6 +14,7 @@
 #import "LoadingView.h"
 #import <QuartzCore/QuartzCore.h>
 #import "TMAPIClient.h"
+#import "JSON.h"
 
 @implementation DraftViewController
 
@@ -112,7 +113,15 @@
             [self shareOnTwitter];
         }
         
-        if([instagramButton isSelected]){
+        if([flickrButton isSelected]){
+            [self shareOnFlickr];
+        }
+        
+        if([tumblrButton isSelected]){
+            [self shareOnTumblr];
+        }
+        
+        if([instagramButton isSelected] && ![tumblrButton isSelected]){
             [self shareOnInstagram];
         }
         
@@ -202,26 +211,92 @@
         [tumblrButton setSelected:NO];
     } else {
         
-        [TMAPIClient sharedInstance].OAuthConsumerKey = @"7g8ugn9opLIb2oKLQBlnbDjBoYKQHbVd9TgtVZRMz5NK1GXgXS";
-        [TMAPIClient sharedInstance].OAuthConsumerSecret = @"4uAmyM6YOL0UyGykUPaRpkCVVELLze9Nu1I2bNWXRWYOuDQA6u";
+        [tumblrButton setSelected:YES];
+
+        [TMAPIClient sharedInstance].OAuthConsumerKey = TumblrAPIKey;
+        [TMAPIClient sharedInstance].OAuthConsumerSecret = TumblrSecretKey;
         
-        [[TMAPIClient sharedInstance] authenticate:@"Flyerly" callback:^(NSError *error) {
-            if (error){
-                NSLog(@"Authentication failed: %@ %@", error, [error description]);
-            }else{
-                NSLog(@"Authentication successful!");
-                [tumblrButton setSelected:YES];
-            }
-        }];
+        if((![[[TMAPIClient sharedInstance] OAuthToken] length] > 0) ||
+           (![[[TMAPIClient sharedInstance] OAuthTokenSecret] length] > 0)){
+        
+            [[TMAPIClient sharedInstance] authenticate:@"Flyerly" callback:^(NSError *error) {
+                if (error){
+                    NSLog(@"Authentication failed: %@ %@", error, [error description]);
+                }else{
+                    NSLog(@"Authentication successful!");
+                    
+                }
+            }];
+        }
     }
+}
+
+- (void)authorizeAction {
+    
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+
+    // if there's already OAuthToken, we want to reauthorize
+    if ([appDelegate.flickrContext.OAuthToken length]) {
+        [appDelegate.flickrContext  setAuthToken:nil];
+    }
+    
+    self.flickrRequest.sessionInfo = kTryObtainAuthToken;
+    [self.flickrRequest  fetchOAuthRequestTokenWithCallbackURL:[NSURL URLWithString:kCallbackURLBaseString]];
 }
 
 -(IBAction)onClickFlickrButton{
     if([flickrButton isSelected]){
         [flickrButton setSelected:NO];
     } else {
+        
         [flickrButton setSelected:YES];
+        [flickrRequest setDelegate:self];
+        
+        NSString *authToken = [[NSUserDefaults standardUserDefaults] objectForKey:kStoredAuthTokenKeyName];
+        NSString *authTokenSecret = [[NSUserDefaults standardUserDefaults] objectForKey:kStoredAuthTokenSecretKeyName];
+
+        if((![authToken length] > 0) || (![authTokenSecret length] > 0)){
+            [self authorizeAction];
+        }
     }
+}
+
+- (void)flickrAPIRequest:(OFFlickrAPIRequest *)inRequest didObtainOAuthRequestToken:(NSString *)inRequestToken secret:(NSString *)inSecret;
+{
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    // these two lines are important
+    appDelegate.flickrContext.OAuthToken = inRequestToken;
+    appDelegate.flickrContext.OAuthTokenSecret = inSecret;
+    
+    NSURL *authURL = [appDelegate.flickrContext userAuthorizationURLWithRequestToken:inRequestToken requestedPermission:OFFlickrWritePermission];
+    [[UIApplication sharedApplication] openURL:authURL];
+}
+
+- (OFFlickrAPIRequest *)flickrRequest
+{
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+
+    if (!flickrRequest) {
+        flickrRequest = [[OFFlickrAPIRequest alloc] initWithAPIContext:appDelegate.flickrContext];
+        flickrRequest.delegate = self;
+		flickrRequest.requestTimeoutInterval = 60.0;
+    }
+    
+    return flickrRequest;
+}
+
+- (void)flickrAPIRequest:(OFFlickrAPIRequest *)inRequest imageUploadSentBytes:(NSUInteger)inSentBytes totalBytes:(NSUInteger)inTotalBytes {
+    NSLog(@"Success");
+}
+
+- (void)flickrAPIRequest:(OFFlickrAPIRequest *)inRequest didFailWithError:(NSError *)inError {
+    NSLog(@"%s %@ %@", __PRETTY_FUNCTION__, inRequest.sessionInfo, inError);
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[inError description] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    [alert show];
+}
+
+- (void)flickrAPIRequest:(OFFlickrAPIRequest *)inRequest didCompleteWithResponse:(NSDictionary *)inResponseDictionary
+{
 }
 
 -(IBAction)onClickSMSButton{
@@ -248,6 +323,63 @@
                                           otherButtonTitles:nil];
     [alert show];
     [alert release];
+}
+
+/*- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+{
+    // Store incoming data into a string
+	NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    
+    // Create a dictionary from the JSON string
+	NSDictionary *results = [jsonString JSONValue];
+	
+    // Build an array from the dictionary for easy access to each entry
+	NSArray *photos = [[results objectForKey:@"photos"] objectForKey:@"photo"];
+    
+    // Loop through each entry in the dictionary...
+	for (NSDictionary *photo in photos)
+    {
+        // Get title of the image
+		NSString *title = [photo objectForKey:@"title"];
+        
+        // Save the title to the photo titles array
+		[photoTitles addObject:(title.length > 0 ? title : @"Untitled")];
+		
+        // Build the URL to where the image is stored (see the Flickr API)
+        // In the format http://farmX.static.flickr.com/server/id/secret
+        // Notice the "_s" which requests a "small" image 75 x 75 pixels
+		NSString *photoURLString = [NSString stringWithFormat:@"http://farm%@.static.flickr.com/%@/%@_%@_s.jpg", [photo objectForKey:@"farm"], [photo objectForKey:@"server"], [photo objectForKey:@"id"], [photo objectForKey:@"secret"]];
+        NSLog(@"photoURLString: %@", photoURLString);
+        
+        // The performance (scrolling) of the table will be much better if we
+        // build an array of the image data here, and then add this data as
+        // the cell.image value (see cellForRowAtIndexPath:)
+		[photoSmallImageData addObject:[NSData dataWithContentsOfURL:[NSURL URLWithString:photoURLString]]];
+        
+        // Build and save the URL to the large image so we can zoom
+        // in on the image if requested
+		photoURLString = [NSString stringWithFormat:@"http://farm%@.static.flickr.com/%@/%@_%@_m.jpg", [photo objectForKey:@"farm"], [photo objectForKey:@"server"], [photo objectForKey:@"id"], [photo objectForKey:@"secret"]];
+		[photoURLsLargeImage addObject:[NSURL URLWithString:photoURLString]];
+        NSLog(@"photoURLsLareImage: %@", photoURLString);
+	}
+    
+}*/
+
+-(void)searchFlickrPhotos:(NSString *)text
+{
+    
+    // Build the string to call the Flickr API
+	NSString *urlString = [NSString stringWithFormat:@"http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=%@&tags=%@&per_page=15&format=json&nojsoncallback=1", FlickrAPIKey, text];
+    
+    // Create NSURL string from formatted string
+	NSURL *url = [NSURL URLWithString:urlString];
+    
+    // Setup and start async download
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL: url];
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    [connection release];
+    [request release];
+    
 }
 
 - (void)fbDidLogin {
@@ -327,8 +459,7 @@
 
 }
 
-- (void)dismissNavBar:(BOOL)animated {
-	
+- (void)dismissNavBar:(BOOL)animated {	
 	
 	if (animated) {
 		[UIView beginAnimations:nil context:nil];
@@ -394,7 +525,29 @@
 }
 
 -(void)shareOnTumblr{
-    [self uploadFiles:[TMAPIClient sharedInstance].OAuthToken oauthSecretKey:[TMAPIClient sharedInstance].OAuthTokenSecret];
+    
+    [[TMAPIClient sharedInstance] userInfo:^(id data, NSError *error) {
+        if (error){
+            NSLog(@"User Data failed: %@ %@", error, [error description]);
+        }else{
+            NSLog(@"User data fetched successful! %@", data);
+            
+            NSDictionary *userData = [data objectForKey:@"user"];
+            NSString *name = [userData objectForKey:@"name"];
+            NSLog(@"%@", name);
+            
+            [self uploadFiles:[TMAPIClient sharedInstance].OAuthToken oauthSecretKey:[TMAPIClient sharedInstance].OAuthTokenSecret blogName:name];
+
+        }
+    }];
+}
+
+-(void)shareOnFlickr{
+    
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    NSData *imageData = UIImageJPEGRepresentation(selectedFlyerImage, 0.9);
+    
+    [appDelegate.flickrRequest uploadImageStream:[NSInputStream inputStreamWithData:imageData] suggestedFilename:@"Test" MIMEType:@"image/jpeg" arguments:[NSDictionary dictionaryWithObjectsAndKeys:@"0", @"is_public", nil]];
 }
 
 - (UIDocumentInteractionController *) setupControllerWithURL: (NSURL*) fileURL usingDelegate: (id <UIDocumentInteractionControllerDelegate>) interactionDelegate {
@@ -415,7 +568,6 @@
                                        andParams:params
                                    andHttpMethod:@"POST"
                                      andDelegate:self];
-
 }
 
 - (void)shareOnTwitter {
@@ -462,14 +614,14 @@
     [super dealloc];
 }
 
-- (void) uploadFiles:(NSString *)oauthToken oauthSecretKey:(NSString *)oauthSecretKey {
+- (void) uploadFiles:(NSString *)oauthToken oauthSecretKey:(NSString *)oauthSecretKey blogName:(NSString *)blogName{
     
     UIImage *originalImage = [UIImage imageWithContentsOfFile:imageFileName];
     NSData *data1 = [NSData dataWithData:UIImagePNGRepresentation(originalImage)];
     
     NSArray *array = [NSArray arrayWithObjects:data1, nil];
     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        TumblrUploadr *tu = [[TumblrUploadr alloc] initWithNSDataForPhotos:array andBlogName:@"rizzz86gmail.tumblr.com" andDelegate:self andCaption:@"Great Photos!"];
+        TumblrUploadr *tu = [[TumblrUploadr alloc] initWithNSDataForPhotos:array andBlogName:[NSString stringWithFormat:@"%@.tumblr.com", blogName] andDelegate:self andCaption:@"Great Photos!"];
         dispatch_async( dispatch_get_main_queue(), ^{
             
             [tu signAndSendWithTokenKey:oauthToken andSecret:oauthSecretKey];
@@ -480,10 +632,20 @@
 - (void) tumblrUploadr:(TumblrUploadr *)tu didFailWithError:(NSError *)error {
     NSLog(@"connection failed with error %@",[error localizedDescription]);
     [tu release];
+    
+    if([instagramButton isSelected]){
+        [self shareOnInstagram];
+    }
+
 }
 - (void) tumblrUploadrDidSucceed:(TumblrUploadr *)tu withResponse:(NSString *)response {
     NSLog(@"connection succeeded with response: %@", response);
     [tu release];
+    
+    if([instagramButton isSelected]){
+        [self shareOnInstagram];
+    }
+
 }
 
 @end

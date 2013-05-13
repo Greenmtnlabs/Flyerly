@@ -149,6 +149,7 @@ static NSTimeInterval JXHTTPActivityTimerInterval = 0.25;
 
         dispatch_async(dispatch_get_main_queue(), ^{
             ++JXHTTPOperationCount;
+            JXHTTPActivityTimer = nil;
             [JXHTTPActivityTimer invalidate];
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
         });

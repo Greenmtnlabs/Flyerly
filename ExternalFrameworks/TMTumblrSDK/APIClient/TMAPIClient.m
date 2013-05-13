@@ -461,15 +461,15 @@ fileNameArray:(NSArray *)fileNameArrayOrNil parameters:(NSDictionary *)parameter
                 error = [NSError errorWithDomain:@"Request failed" code:statusCode userInfo:nil];
             
             [queue addOperationWithBlock:^{
-                blockCallback(response[@"response"], error);
-                blockCallback = nil;
+                callback(response[@"response"], error);
+                //callback = nil;
             }];
         };
         
         request.didFailBlock = ^(JXHTTPOperation *operation) {
             [queue addOperationWithBlock:^{
-                blockCallback(nil, operation.error);
-                blockCallback = nil;
+                callback(nil, operation.error);
+                //callback = nil;
             }];
         };
     }

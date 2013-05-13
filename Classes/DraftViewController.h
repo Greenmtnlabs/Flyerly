@@ -11,12 +11,13 @@
 #import "FBConnect/FBConnect.h"
 #import <Twitter/Twitter.h>
 #import "TumblrUploadr.h"
+#import <ObjectiveFlickr.h>
 
 @class FlyrViewController;
 @class SaveFlyerController;
 @class LoadingView;
 
-@interface DraftViewController : UIViewController<FBRequestDelegate,UIWebViewDelegate,UIDocumentInteractionControllerDelegate,FBSessionDelegate,FBDialogDelegate,FBLoginDialogDelegate,TumblrUploadrDelegate> {
+@interface DraftViewController : UIViewController<FBRequestDelegate,UIWebViewDelegate,UIDocumentInteractionControllerDelegate,FBSessionDelegate,FBDialogDelegate,FBLoginDialogDelegate,TumblrUploadrDelegate,OFFlickrAPIRequestDelegate> {
 
 	IBOutlet UIImageView *imgView;
 	IBOutlet UITextField *titleView;
@@ -42,6 +43,12 @@
 	SaveFlyerController *svController;
 	LoadingView *loadingView;
     UIDocumentInteractionController *dic;
+    
+    NSMutableArray  *photoTitles;         // Titles of images
+    NSMutableArray  *photoSmallImageData; // Image data (thumbnail)
+    NSMutableArray  *photoURLsLargeImage; // URL to larger image
+	//OFFlickrAPIContext *flickrContext;
+	OFFlickrAPIRequest *flickrRequest;
 }
 @property(nonatomic,retain) IBOutlet UILabel *descriptionView;
 @property(nonatomic,retain) IBOutlet UITextField *titleView;
