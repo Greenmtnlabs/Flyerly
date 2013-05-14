@@ -18,7 +18,7 @@
 
 @implementation DraftViewController
 
-@synthesize selectedFlyerImage,imgView,navBar,fvController,svController,titleView,descriptionView,selectedFlyerDescription,selectedFlyerTitle, detailFileName, imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,loadingView,dic;
+@synthesize selectedFlyerImage,imgView,navBar,fvController,svController,titleView,descriptionView,selectedFlyerDescription,selectedFlyerTitle, detailFileName, imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,loadingView,dic,fromPhotoController;
 
 -(void)callFlyrView{
 	[self.navigationController popToViewController:fvController animated:YES];
@@ -48,6 +48,8 @@
     [smsButton setSelected:NO];
     [clipboardButton setSelected:NO];
 
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(flickrSharingSuccess) name:FlickrSharingSuccessNotification object:nil];
+
 	svController = [[SaveFlyerController alloc]initWithNibName:@"SaveFlyerController" bundle:nil];
 	svController.flyrImg = selectedFlyerImage;
 	svController.isDraftView = YES;
@@ -56,6 +58,17 @@
 	
 	//self.navigationItem.title = @"Social Flyer";
 	self.navigationController.navigationBarHidden = NO;
+    
+    if(fromPhotoController){
+        self.navigationItem.hidesBackButton = YES;
+        
+        // Create right bar button
+        UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 31, 30)];
+        [menuButton setBackgroundImage:[UIImage imageNamed:@"menu_button"] forState:UIControlStateNormal];
+        [menuButton addTarget:self action:@selector(callMenu) forControlEvents:UIControlEventTouchUpInside];
+        UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
+        [self.navigationItem setLeftBarButtonItem:rightBarButton];
+    }
     
     UILabel *addBackgroundLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
     [addBackgroundLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:8.5]];
@@ -83,6 +96,11 @@
     [descriptionView setTextColor:[UIColor grayColor]];
 	[descriptionView setText:selectedFlyerDescription];
 }
+
+-(void) callMenu {
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -121,7 +139,11 @@
             [self shareOnTumblr];
         }
         
-        if([instagramButton isSelected] && ![tumblrButton isSelected]){
+        //if([smsButton isSelected]){
+        //    [self shareOnMMS];
+        //}
+        
+        if([instagramButton isSelected] && ( ![tumblrButton isSelected] && ![flickrButton isSelected])){
             [self shareOnInstagram];
         }
         
@@ -252,12 +274,12 @@
         [flickrButton setSelected:YES];
         [flickrRequest setDelegate:self];
         
-        NSString *authToken = [[NSUserDefaults standardUserDefaults] objectForKey:kStoredAuthTokenKeyName];
-        NSString *authTokenSecret = [[NSUserDefaults standardUserDefaults] objectForKey:kStoredAuthTokenSecretKeyName];
+        //NSString *authToken = [[NSUserDefaults standardUserDefaults] objectForKey:kStoredAuthTokenKeyName];
+        //NSString *authTokenSecret = [[NSUserDefaults standardUserDefaults] objectForKey:kStoredAuthTokenSecretKeyName];
 
-        if((![authToken length] > 0) || (![authTokenSecret length] > 0)){
+        //if((![authToken length] > 0) || (![authTokenSecret length] > 0)){
             [self authorizeAction];
-        }
+        //}
     }
 }
 
@@ -290,9 +312,16 @@
 }
 
 - (void)flickrAPIRequest:(OFFlickrAPIRequest *)inRequest didFailWithError:(NSError *)inError {
+    
+    /*
     NSLog(@"%s %@ %@", __PRETTY_FUNCTION__, inRequest.sessionInfo, inError);
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[inError description] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
     [alert show];
+     */
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    [appDelegate setAndStoreFlickrAuthToken:nil secret:nil];
+    [self authorizeAction];
+
 }
 
 - (void)flickrAPIRequest:(OFFlickrAPIRequest *)inRequest didCompleteWithResponse:(NSDictionary *)inResponseDictionary
@@ -304,6 +333,8 @@
         [smsButton setSelected:NO];
     } else {
         [smsButton setSelected:YES];
+        
+        [UIPasteboard generalPasteboard].image = selectedFlyerImage;
     }
 }
 
@@ -312,6 +343,8 @@
         [clipboardButton setSelected:NO];
     } else {
         [clipboardButton setSelected:YES];
+
+        [UIPasteboard generalPasteboard].image = selectedFlyerImage;
     }
 }
 
@@ -502,6 +535,18 @@
 
 }
 
+-(void)shareOnMMS{
+    
+    MFMessageComposeViewController *controller = [[[MFMessageComposeViewController alloc] init] autorelease];
+    if([MFMessageComposeViewController canSendText])
+    {
+        controller.body = selectedFlyerTitle;
+        //controller.recipients = [NSArray arrayWithObjects:@"1(234)567-8910", nil];
+        controller.messageComposeDelegate = self;
+        [self presentModalViewController:controller animated:YES];
+    }
+}
+
 -(void)shareOnInstagram{
 
      CGRect rect = CGRectMake(0 ,0 , 0, 0);
@@ -509,7 +554,10 @@
      [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
      UIGraphicsEndImageContext();
      
-     UIImage *originalImage = [UIImage imageWithContentsOfFile:imageFileName];     
+     UIImage *originalImage = [UIImage imageWithContentsOfFile:imageFileName];
+     NSLog(@"width: %f", originalImage.size.width);
+     NSLog(@"width: %f", originalImage.size.height);
+    
      UIImage *instagramImage = [PhotoController imageWithImage:originalImage scaledToSize:CGSizeMake(612, 612)];
      
      NSString  *updatedImagePath = [imageFileName stringByReplacingOccurrencesOfString:@".jpg" withString:@".igo"];
@@ -537,7 +585,6 @@
             NSLog(@"%@", name);
             
             [self uploadFiles:[TMAPIClient sharedInstance].OAuthToken oauthSecretKey:[TMAPIClient sharedInstance].OAuthTokenSecret blogName:name];
-
         }
     }];
 }
@@ -547,7 +594,14 @@
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     NSData *imageData = UIImageJPEGRepresentation(selectedFlyerImage, 0.9);
     
-    [appDelegate.flickrRequest uploadImageStream:[NSInputStream inputStreamWithData:imageData] suggestedFilename:@"Test" MIMEType:@"image/jpeg" arguments:[NSDictionary dictionaryWithObjectsAndKeys:@"0", @"is_public", nil]];
+    [appDelegate.flickrRequest uploadImageStream:[NSInputStream inputStreamWithData:imageData] suggestedFilename:selectedFlyerTitle MIMEType:@"image/jpeg" arguments:[NSDictionary dictionaryWithObjectsAndKeys:@"0", @"is_public", nil]];
+}
+
+-(void)flickrSharingSuccess{
+
+    if([instagramButton isSelected] && ![tumblrButton isSelected]){
+        [self shareOnInstagram];
+    }
 }
 
 - (UIDocumentInteractionController *) setupControllerWithURL: (NSURL*) fileURL usingDelegate: (id <UIDocumentInteractionControllerDelegate>) interactionDelegate {
@@ -561,7 +615,7 @@
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                   @"", @"message",  //whatever message goes here
+                                   selectedFlyerTitle, @"message",  //whatever message goes here
                                    selectedFlyerImage, @"picture",   //img is your UIImage
                                    nil];
     [[appDelegate facebook] requestWithGraphPath:@"me/photos"
@@ -583,7 +637,7 @@
             TWRequest *postRequest = [[TWRequest alloc] initWithURL:[NSURL URLWithString:@"https://upload.twitter.com/1/statuses/update_with_media.json"] parameters:nil requestMethod:TWRequestMethodPOST];
             
             //add text
-            [postRequest addMultiPartData:[@"My new Flyer !" dataUsingEncoding:NSUTF8StringEncoding] withName:@"status" type:@"multipart/form-data"];
+            [postRequest addMultiPartData:[selectedFlyerTitle dataUsingEncoding:NSUTF8StringEncoding] withName:@"status" type:@"multipart/form-data"];
             //add image
             [postRequest addMultiPartData:UIImagePNGRepresentation(selectedFlyerImage) withName:@"media" type:@"multipart/form-data"];
             
@@ -621,7 +675,7 @@
     
     NSArray *array = [NSArray arrayWithObjects:data1, nil];
     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        TumblrUploadr *tu = [[TumblrUploadr alloc] initWithNSDataForPhotos:array andBlogName:[NSString stringWithFormat:@"%@.tumblr.com", blogName] andDelegate:self andCaption:@"Great Photos!"];
+        TumblrUploadr *tu = [[TumblrUploadr alloc] initWithNSDataForPhotos:array andBlogName:[NSString stringWithFormat:@"%@.tumblr.com", blogName] andDelegate:self andCaption:selectedFlyerTitle];
         dispatch_async( dispatch_get_main_queue(), ^{
             
             [tu signAndSendWithTokenKey:oauthToken andSecret:oauthSecretKey];

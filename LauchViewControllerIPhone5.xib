@@ -112,7 +112,7 @@
 								<string key="NSFrame">{{213, 43}, {108, 60}}</string>
 								<reference key="NSSuperview" ref="970294404"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="180820924"/>
+								<reference key="NSNextKeyView" ref="859419481"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -137,7 +137,7 @@
 								<string key="NSFrame">{{172, 102}, {121, 121}}</string>
 								<reference key="NSSuperview" ref="970294404"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="133273070"/>
+								<reference key="NSNextKeyView" ref="399719554"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -152,7 +152,7 @@
 								<string key="NSFrame">{{20, 350}, {121, 121}}</string>
 								<reference key="NSSuperview" ref="970294404"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="238923721"/>
+								<reference key="NSNextKeyView" ref="130865421"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -164,7 +164,7 @@
 								<string key="NSFrame">{{172, 351}, {121, 121}}</string>
 								<reference key="NSSuperview" ref="970294404"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="916230510"/>
+								<reference key="NSNextKeyView" ref="122004284"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -176,7 +176,7 @@
 								<string key="NSFrame">{{20, 102}, {121, 121}}</string>
 								<reference key="NSSuperview" ref="970294404"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="20820496"/>
+								<reference key="NSNextKeyView" ref="24525491"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -232,11 +232,14 @@
 											<int key="NSColorSpace">3</int>
 											<bytes key="NSWhite">MC41AA</bytes>
 										</object>
-										<object class="NSCustomResource" key="IBUISelectedBackgroundImage" id="974287373">
+										<object class="NSCustomResource" key="IBUISelectedBackgroundImage">
 											<string key="NSClassName">NSImage</string>
 											<string key="NSResourceName">twitter_selected_button.png</string>
 										</object>
-										<reference key="IBUINormalBackgroundImage" ref="974287373"/>
+										<object class="NSCustomResource" key="IBUINormalBackgroundImage">
+											<string key="NSClassName">NSImage</string>
+											<string key="NSResourceName">twitter_follow_selected.png</string>
+										</object>
 										<object class="IBUIFontDescription" key="IBUIFontDescription" id="689705409">
 											<int key="type">2</int>
 											<double key="pointSize">15</double>
@@ -266,11 +269,14 @@
 											<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 										</object>
 										<reference key="IBUINormalTitleShadowColor" ref="350055627"/>
-										<object class="NSCustomResource" key="IBUISelectedBackgroundImage" id="908178595">
+										<object class="NSCustomResource" key="IBUISelectedBackgroundImage">
 											<string key="NSClassName">NSImage</string>
 											<string key="NSResourceName">facebook_selected_button.png</string>
 										</object>
-										<reference key="IBUINormalBackgroundImage" ref="908178595"/>
+										<object class="NSCustomResource" key="IBUINormalBackgroundImage">
+											<string key="NSClassName">NSImage</string>
+											<string key="NSResourceName">facebook_like_selected.png</string>
+										</object>
 										<reference key="IBUIFontDescription" ref="689705409"/>
 										<reference key="IBUIFont" ref="280861376"/>
 									</object>
@@ -334,6 +340,7 @@
 								<string key="NSFrame">{{125, 480}, {71, 69}}</string>
 								<reference key="NSSuperview" ref="970294404"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -362,7 +369,7 @@
 								<string key="NSFrame">{{20, 102}, {121, 121}}</string>
 								<reference key="NSSuperview" ref="970294404"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="399719554"/>
+								<reference key="NSNextKeyView" ref="20820496"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<int key="IBUIContentMode">1</int>
 								<int key="IBUITag">1000</int>
@@ -378,7 +385,7 @@
 								<string key="NSFrame">{{172, 102}, {121, 121}}</string>
 								<reference key="NSSuperview" ref="970294404"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="859419481"/>
+								<reference key="NSNextKeyView" ref="133273070"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<int key="IBUIContentMode">1</int>
 								<int key="IBUITag">1000</int>
@@ -391,7 +398,7 @@
 								<string key="NSFrame">{{172, 227}, {121, 121}}</string>
 								<reference key="NSSuperview" ref="970294404"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="130865421"/>
+								<reference key="NSNextKeyView" ref="280731597"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<int key="IBUIContentMode">1</int>
 								<int key="IBUITag">1000</int>
@@ -417,7 +424,7 @@
 								<string key="NSFrame">{{20, 350}, {121, 121}}</string>
 								<reference key="NSSuperview" ref="970294404"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="280731597"/>
+								<reference key="NSNextKeyView" ref="916230510"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<int key="IBUIContentMode">1</int>
 								<int key="IBUITag">1000</int>
@@ -430,7 +437,7 @@
 								<string key="NSFrame">{{172, 350}, {121, 121}}</string>
 								<reference key="NSSuperview" ref="970294404"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="122004284"/>
+								<reference key="NSNextKeyView" ref="238923721"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<int key="IBUIContentMode">1</int>
 								<int key="IBUITag">1000</int>
@@ -475,7 +482,7 @@
 								<string key="NSFrame">{{124, 73}, {82, 21}}</string>
 								<reference key="NSSuperview" ref="970294404"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="848890059"/>
+								<reference key="NSNextKeyView" ref="180820924"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -496,7 +503,7 @@
 								<string key="NSFrame">{{223, 73}, {86, 21}}</string>
 								<reference key="NSSuperview" ref="970294404"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="24525491"/>
+								<reference key="NSNextKeyView" ref="848890059"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -994,6 +1001,7 @@
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="blue_divider.png">{1, 60}</string>
 			<string key="create_flyer.png">{108, 60}</string>
+			<string key="facebook_like_selected.png">{80, 49}</string>
 			<string key="facebook_selected_button.png">{80, 49}</string>
 			<string key="invite_friends.png">{108, 60}</string>
 			<string key="pinned_flyer.png">{141, 141}</string>
@@ -1002,6 +1010,7 @@
 			<string key="settings.png">{71, 69}</string>
 			<string key="settings_bg.png">{156, 47}</string>
 			<string key="settings_selected.png">{71, 69}</string>
+			<string key="twitter_follow_selected.png">{79, 49}</string>
 			<string key="twitter_selected_button.png">{79, 49}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">2083</string>

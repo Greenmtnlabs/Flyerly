@@ -18,6 +18,7 @@
 //#import "ARRollerView.h"
 //#import "ARRollerProtocol.h"
 
+NSString *FlickrSharingSuccessNotification = @"FlickrSharingSuccessNotification";
 #define kAdWhirlApplicationKey @"b7dfccec5016102d840c2e1e0de86337"
 //#define kAdWhirlApplicationKey @"b9c3615f2c88102da8949a322e50052a "
 //#define facebookAppID @"136691489852349"
@@ -164,8 +165,7 @@
     return [[self facebook] handleOpenURL:url];
 }
 
-- (OFFlickrAPIRequest *)flickrRequest
-{
+- (OFFlickrAPIRequest *)flickrRequest {
 	if (!flickrRequest) {
 		flickrRequest = [[OFFlickrAPIRequest alloc] initWithAPIContext:flickrContext];
 		flickrRequest.delegate = self;
@@ -223,13 +223,6 @@
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    /*
-     Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-     */
-    
-    // FBSample logic
-    // We need to properly handle activation of the application with regards to SSO
-    //  (e.g., returning from iOS 6.0 authorization dialog or from fast app switching).
     [FBAppCall handleDidBecomeActiveWithSession:self.session];
 }
 
@@ -281,8 +274,8 @@
 - (void)flickrAPIRequest:(OFFlickrAPIRequest *)inRequest didCompleteWithResponse:(NSDictionary *)inResponseDictionary {    
     NSLog(@"Request Complete With Response: %@", inResponseDictionary);
     [self flickrRequest].sessionInfo = nil;
+	[[NSNotificationCenter defaultCenter] postNotificationName:FlickrSharingSuccessNotification object:self];
 }
-
 
 - (void)flickrAPIRequest:(OFFlickrAPIRequest *)inRequest didObtainOAuthAccessToken:(NSString *)inAccessToken secret:(NSString *)inSecret userFullName:(NSString *)inFullName userName:(NSString *)inUserName userNSID:(NSString *)inNSID {
     [self setAndStoreFlickrAuthToken:inAccessToken secret:inSecret];

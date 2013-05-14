@@ -698,7 +698,6 @@ static NSData *NSDataFromOAuthPreferredWebForm(NSDictionary *formDictionary)
         [request setSessionInfo:nil];
 
         NSString *response = [[[NSString alloc] initWithData:[request receivedData] encoding:NSUTF8StringEncoding] autorelease];
-        NSLog(@"response: %@", response);
         
         NSDictionary *params = OFExtractURLQueryParameter(response);
         

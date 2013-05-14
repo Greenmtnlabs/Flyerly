@@ -12,12 +12,13 @@
 #import <Twitter/Twitter.h>
 #import "TumblrUploadr.h"
 #import <ObjectiveFlickr.h>
+#import <MessageUI/MessageUI.h>
 
 @class FlyrViewController;
 @class SaveFlyerController;
 @class LoadingView;
 
-@interface DraftViewController : UIViewController<FBRequestDelegate,UIWebViewDelegate,UIDocumentInteractionControllerDelegate,FBSessionDelegate,FBDialogDelegate,FBLoginDialogDelegate,TumblrUploadrDelegate,OFFlickrAPIRequestDelegate> {
+@interface DraftViewController : UIViewController<FBRequestDelegate,UIWebViewDelegate,UIDocumentInteractionControllerDelegate,FBSessionDelegate,FBDialogDelegate,FBLoginDialogDelegate,TumblrUploadrDelegate,OFFlickrAPIRequestDelegate,MFMessageComposeViewControllerDelegate> {
 
 	IBOutlet UIImageView *imgView;
 	IBOutlet UITextField *titleView;
@@ -49,6 +50,8 @@
     NSMutableArray  *photoURLsLargeImage; // URL to larger image
 	//OFFlickrAPIContext *flickrContext;
 	OFFlickrAPIRequest *flickrRequest;
+    
+    BOOL fromPhotoController;
 }
 @property(nonatomic,retain) IBOutlet UILabel *descriptionView;
 @property(nonatomic,retain) IBOutlet UITextField *titleView;
@@ -74,6 +77,7 @@
 @property(nonatomic,retain)FlyrViewController *fvController;
 @property(nonatomic,retain)SaveFlyerController *svController;
 @property (nonatomic, retain) LoadingView *loadingView;
+@property BOOL fromPhotoController;
 
 -(IBAction)onClickFacebookButton;
 -(IBAction)onClickTwitterButton;

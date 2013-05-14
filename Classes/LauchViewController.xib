@@ -176,7 +176,7 @@
 								<string key="NSFrame">{{11, 252}, {138, 138}}</string>
 								<reference key="NSSuperview" ref="87613878"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="284000909"/>
+								<reference key="NSNextKeyView" ref="384374429"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -192,7 +192,7 @@
 										<string key="NSFrame">{{241, 1}, {79, 49}}</string>
 										<reference key="NSSuperview" ref="580046517"/>
 										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView"/>
+										<reference key="NSNextKeyView" ref="284000909"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<bool key="IBUIOpaque">NO</bool>
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -208,11 +208,14 @@
 											<int key="NSColorSpace">3</int>
 											<bytes key="NSWhite">MC41AA</bytes>
 										</object>
-										<object class="NSCustomResource" key="IBUISelectedBackgroundImage" id="673657157">
+										<object class="NSCustomResource" key="IBUISelectedBackgroundImage">
 											<string key="NSClassName">NSImage</string>
 											<string key="NSResourceName">twitter_selected_button.png</string>
 										</object>
-										<reference key="IBUINormalBackgroundImage" ref="673657157"/>
+										<object class="NSCustomResource" key="IBUINormalBackgroundImage">
+											<string key="NSClassName">NSImage</string>
+											<string key="NSResourceName">twitter_follow_selected.png</string>
+										</object>
 										<object class="IBUIFontDescription" key="IBUIFontDescription" id="311371421">
 											<int key="type">2</int>
 											<double key="pointSize">15</double>
@@ -242,11 +245,14 @@
 											<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 										</object>
 										<reference key="IBUINormalTitleShadowColor" ref="384320666"/>
-										<object class="NSCustomResource" key="IBUISelectedBackgroundImage" id="1034104884">
+										<object class="NSCustomResource" key="IBUISelectedBackgroundImage">
 											<string key="NSClassName">NSImage</string>
 											<string key="NSResourceName">facebook_selected_button.png</string>
 										</object>
-										<reference key="IBUINormalBackgroundImage" ref="1034104884"/>
+										<object class="NSCustomResource" key="IBUINormalBackgroundImage">
+											<string key="NSClassName">NSImage</string>
+											<string key="NSResourceName">facebook_like_selected.png</string>
+										</object>
 										<reference key="IBUIFontDescription" ref="311371421"/>
 										<reference key="IBUIFont" ref="1051223800"/>
 									</object>
@@ -310,7 +316,7 @@
 								<string key="NSFrame">{{125, 392}, {71, 69}}</string>
 								<reference key="NSSuperview" ref="87613878"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="384374429"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -896,6 +902,7 @@
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="blue_divider.png">{1, 60}</string>
 			<string key="create_flyer.png">{108, 60}</string>
+			<string key="facebook_like_selected.png">{80, 49}</string>
 			<string key="facebook_selected_button.png">{80, 49}</string>
 			<string key="invite_friends.png">{108, 60}</string>
 			<string key="pinned_flyer.png">{141, 141}</string>
@@ -904,6 +911,7 @@
 			<string key="settings.png">{71, 69}</string>
 			<string key="settings_bg.png">{156, 47}</string>
 			<string key="settings_selected.png">{71, 69}</string>
+			<string key="twitter_follow_selected.png">{79, 49}</string>
 			<string key="twitter_selected_button.png">{79, 49}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">2083</string>

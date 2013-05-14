@@ -13,6 +13,7 @@
 #import "TwitLogin.h"
 #import <ObjectiveFlickr.h>
 
+extern NSString *FlickrSharingSuccessNotification;
 @class FBSession;
 @class SaveFlyerController;
 @class LauchViewController;
@@ -75,5 +76,6 @@
 
 -(void)next;
 -(void)clearCache;
+- (void)setAndStoreFlickrAuthToken:(NSString *)inAuthToken secret:(NSString *)inSecret;
 @end
 

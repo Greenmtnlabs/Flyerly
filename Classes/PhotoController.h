@@ -44,6 +44,8 @@
 	
 	bool keyboardShown;
 	
+	NSString *finalImgWritePath;
+	NSString *newImgName;
 	UIFont *selectedFont;
 	NSString *selectedText;
 	UIImage *selectedTemplate;
@@ -107,6 +109,8 @@
 //@property (nonatomic,retain) UIScrollView *heightScrollView;
 //@property (nonatomic,retain) UIScrollView *widthScrollView;
 
+@property (nonatomic, retain) NSString *finalImgWritePath;
+@property (nonatomic, retain) NSString *newImgName;
 @property (nonatomic, retain) UIFont *selectedFont;
 @property (nonatomic, assign) id selectedColor;
 @property (nonatomic, retain) NSString *selectedText;

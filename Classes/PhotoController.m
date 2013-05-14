@@ -16,6 +16,7 @@
 #import "ImageCache.h"
 #import "CameraOverlayView.h"
 #import "CustomPhotoController.h"
+#import "DraftViewController.h"
 
 @implementation PhotoController
 @synthesize imgView,imgPicker;
@@ -28,7 +29,7 @@
 //@synthesize widthScrollView,heightScrollView
 @synthesize cameraTabButton,photoTabButton,widthTabButton,heightTabButton,photoImgView;
 @synthesize photoTouchFlag,lableTouchFlag,lableLocation,warningAlert;
-@synthesize moreLayersLabel, moreLayersButton, takePhotoButton, cameraRollButton, takePhotoLabel, cameraRollLabel, imgPickerFlag;
+@synthesize moreLayersLabel, moreLayersButton, takePhotoButton, cameraRollButton, takePhotoLabel, cameraRollLabel, imgPickerFlag,finalImgWritePath,newImgName;
 
 
 
@@ -1616,8 +1617,10 @@
     UIBarButtonItem *barLabel = [[UIBarButtonItem alloc] initWithCustomView:saveShareLabel];
     
     UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
+    shareButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
+    [shareButton setTitle:@"Save" forState:UIControlStateNormal];
 	[shareButton addTarget:self action:@selector(callSaveAndShare) forControlEvents:UIControlEventTouchUpInside];
-    [shareButton setBackgroundImage:[UIImage imageNamed:@"share"] forState:UIControlStateNormal];
+    [shareButton setBackgroundImage:[UIImage imageNamed:@"crop_button"] forState:UIControlStateNormal];
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
     [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,barLabel,nil]];
 
@@ -1725,6 +1728,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 -(void)callSaveAndShare
 {
+
 	CALayer * l = [photoImgView layer];
 	[l setMasksToBounds:YES];
 	[l setCornerRadius:10];
@@ -1735,7 +1739,8 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	lableTouchFlag = NO;
 	photoTouchFlag = NO;
 	photoImgView.userInteractionEnabled = NO;
-	[navBar show:@"Save/Share" left:@"Style" right:@"Menu"];
+	
+    [navBar show:@"Save/Share" left:@"Style" right:@"Menu"];
 	[self.view bringSubviewToFront:navBar];
 	[navBar.leftButton removeTarget:self action:@selector(callStyle) forControlEvents:UIControlEventTouchUpInside];
 	[navBar.rightButton removeTarget:self action:@selector(callSaveAndShare) forControlEvents:UIControlEventTouchUpInside];
@@ -1770,7 +1775,23 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         fontBorderScrollView.frame = CGRectMake(-320, 385, 320, 44);
     }
 	msgLabel.alpha=1;
-	[self saveMyFlyer];
+
+    FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
+    NSData *data = [self getCurrentFrameAndSaveIt];
+    [self showHUD];
+    appDele.changesFlag = NO;
+    
+    DraftViewController *draftViewController = [[DraftViewController alloc] initWithNibName:@"DraftViewController" bundle:nil];
+    draftViewController.fromPhotoController = YES;
+    draftViewController.selectedFlyerImage = [UIImage imageWithData:data];
+    draftViewController.selectedFlyerTitle = @"Title";
+    draftViewController.selectedFlyerDescription = msgTextView.text;
+    draftViewController.imageFileName = finalImgWritePath;
+    draftViewController.detailFileName = [finalImgWritePath stringByReplacingOccurrencesOfString:@".jpg" withString:@".txt"];
+    [self.navigationController pushViewController:draftViewController animated:YES];
+    [draftViewController release];
+    
+	//[self saveMyFlyer];
 }
 
 
@@ -1829,12 +1850,14 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 		
 		finalFlyer = [UIImage imageWithData:data];
 		//[self loadDistributeView];
+        
 		SaveFlyerController *svController = [[SaveFlyerController alloc]initWithNibName:@"SaveFlyerController" bundle:nil];
 		svController.flyrImg = finalFlyer;
 		svController.flyrImgData = data;
 		svController.ptController = self;
 		[self.navigationController pushViewController:svController animated:YES];
-		[svController release];
+        [svController release];
+        
 		appDele.changesFlag = NO;
 	}
 	else if(buttonIndex == 2)
@@ -2164,7 +2187,9 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 -(NSData*)getCurrentFrameAndSaveIt
 {
-	
+	NSLog(@"%f",self.imgView.bounds.size.width);
+	NSLog(@"%f",self.imgView.bounds.size.height);
+
 	CGSize size = CGSizeMake(self.imgView.bounds.size.width,self.imgView.bounds.size.height );
 	UIGraphicsBeginImageContext(size);
 	[self.imgView.layer renderInContext:UIGraphicsGetCurrentContext()];
@@ -2174,14 +2199,12 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	NSString *homeDirectoryPath = NSHomeDirectory();
 	NSString *MyFlyerPath = [homeDirectoryPath stringByAppendingString:@"/Documents/Flyr/"];
 	NSString *folderPath = [NSString pathWithComponents:[NSArray arrayWithObjects:[NSString stringWithString:[MyFlyerPath stringByStandardizingPath]],nil]];
-	NSString *finalImgWritePath;
 	NSInteger imgCount;
 	NSInteger largestImgCount=-1;
 	NSArray *files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:folderPath error:nil];
 	
 	NSString *finalImgDetailWritePath;
-    NSString *newImgName;
-    
+
 	/************************ CREATE UNIQUE NAME FOR IMAGE ***********************************/
 	if(files == nil)
 	{
@@ -2324,7 +2347,8 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	[borderScrollView release];
 	[fontBorderScrollView release];
 	[fontScrollView release];
-	
+	//[newImgName release];
+    
     [super dealloc];
 }
 
