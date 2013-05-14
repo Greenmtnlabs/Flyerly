@@ -80,7 +80,7 @@
     self.navigationController.navigationBarHidden = NO;
 
     // Set the background image on navigation bar
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_with_logo"] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg"] forBarMetrics:UIBarMetricsDefault];
     
     [self.navigationItem setHidesBackButton:YES];
     // Create right bar button

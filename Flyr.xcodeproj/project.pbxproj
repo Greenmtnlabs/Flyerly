@@ -69,6 +69,9 @@
 		0DFC5322109576AB00B18478 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DFC531C109576AB00B18478 /* SettingViewController.m */; };
 		0DFC5323109576AB00B18478 /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DFC531D109576AB00B18478 /* SettingViewController.xib */; };
 		0DFC532C1095781500B18478 /* backgrnd.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DFC532B1095781500B18478 /* backgrnd.png */; };
+		0F734B541742737D0084A2F4 /* top_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F734B521742737D0084A2F4 /* top_bg.png */; };
+		0F734B551742737D0084A2F4 /* top_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F734B531742737D0084A2F4 /* top_bg@2x.png */; };
+		0F734B5617427B790084A2F4 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65B303FA171ED8C8006632E3 /* Accounts.framework */; };
 		1D3623260D0F684500981E51 /* FlyrAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* FlyrAppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
@@ -387,7 +390,6 @@
 		65A465111726F24A002C32FB /* font_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 65A4650D1726F24A002C32FB /* font_button.png */; };
 		65A465121726F24A002C32FB /* outline_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 65A4650E1726F24A002C32FB /* outline_button.png */; };
 		65A465131726F24A002C32FB /* size_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 65A4650F1726F24A002C32FB /* size_button.png */; };
-		65B303FD171EDDEA006632E3 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65B303FA171ED8C8006632E3 /* Accounts.framework */; };
 		65B303FF171EDE0C006632E3 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65B303FE171EDE0C006632E3 /* Twitter.framework */; };
 		65B3F18C172A836400BEE7A4 /* color_button_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 65B3F184172A836400BEE7A4 /* color_button_selected.png */; };
 		65B3F18D172A836400BEE7A4 /* color_button_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65B3F185172A836400BEE7A4 /* color_button_selected@2x.png */; };
@@ -763,6 +765,8 @@
 		0DFC531C109576AB00B18478 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		0DFC531D109576AB00B18478 /* SettingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SettingViewController.xib; path = Classes/SettingViewController.xib; sourceTree = "<group>"; };
 		0DFC532B1095781500B18478 /* backgrnd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backgrnd.png; sourceTree = "<group>"; };
+		0F734B521742737D0084A2F4 /* top_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = top_bg.png; sourceTree = "<group>"; };
+		0F734B531742737D0084A2F4 /* top_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "top_bg@2x.png"; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* FlyrAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlyrAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* FlyrAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlyrAppDelegate.m; sourceTree = "<group>"; };
@@ -1508,6 +1512,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F734B5617427B790084A2F4 /* Accounts.framework in Frameworks */,
 				65F41C8B173BDC03000BA8CB /* libxml2.2.dylib in Frameworks */,
 				0D335121109ABB6A0082810A /* libxml2.dylib in Frameworks */,
 				65A21268172981A000ED0B9A /* ImageIO.framework in Frameworks */,
@@ -1517,7 +1522,6 @@
 				65A2CEFA1725494F005C03B7 /* AVFoundation.framework in Frameworks */,
 				65C7A50517216E71003F1A84 /* MobileCoreServices.framework in Frameworks */,
 				65B303FF171EDE0C006632E3 /* Twitter.framework in Frameworks */,
-				65B303FD171EDDEA006632E3 /* Accounts.framework in Frameworks */,
 				0D33511D109ABB6A0082810A /* AddressBookUI.framework in Frameworks */,
 				0D33511B109ABB6A0082810A /* AddressBook.framework in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
@@ -1790,6 +1794,8 @@
 		0DF3A361108DF47400D6C887 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				0F734B521742737D0084A2F4 /* top_bg.png */,
+				0F734B531742737D0084A2F4 /* top_bg@2x.png */,
 				65C1A46717425FCA00947D5E /* facebook_like_selected.png */,
 				65C1A46817425FCA00947D5E /* facebook_like.png */,
 				65C1A46917425FCB00947D5E /* twitter_follow_selected.png */,
@@ -3178,6 +3184,8 @@
 				65C1A46C17425FCB00947D5E /* facebook_like.png in Resources */,
 				65C1A46D17425FCB00947D5E /* twitter_follow_selected.png in Resources */,
 				65C1A46E17425FCB00947D5E /* twitter_follow.png in Resources */,
+				0F734B541742737D0084A2F4 /* top_bg.png in Resources */,
+				0F734B551742737D0084A2F4 /* top_bg@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
