@@ -167,12 +167,13 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
 -(NSArray *)rightBarItems{
     
     // Create right bar help button
-    UILabel *saveFlyrLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
-    [saveFlyrLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:8.5]];
-    [saveFlyrLabel setTextColor:[MyCustomCell colorWithHexString:@"008ec0"]];
-    [saveFlyrLabel setBackgroundColor:[UIColor clearColor]];
-    [saveFlyrLabel setText:@"Saved flyer"];
-    UIBarButtonItem *barLabel = [[UIBarButtonItem alloc] initWithCustomView:saveFlyrLabel];
+    //UILabel *saveFlyrLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
+    //[saveFlyrLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:8.5]];
+    //[saveFlyrLabel setTextColor:[MyCustomCell colorWithHexString:@"008ec0"]];
+    //[saveFlyrLabel setBackgroundColor:[UIColor clearColor]];
+    //[saveFlyrLabel setText:@"Saved flyer"];
+    //UIBarButtonItem *barLabel = [[UIBarButtonItem alloc] initWithCustomView:saveFlyrLabel];
+    self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Saved flyer"];
 
     // Create left bar help button
     UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 54, 35)];
@@ -182,7 +183,7 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
     //UIBarButtonItem *shareBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Share" style:UIControlStateNormal
     //                                                                  target:nil action:nil ];
     
-    return [NSMutableArray arrayWithObjects:shareBarButton,barLabel,nil];
+    return [NSMutableArray arrayWithObjects:shareBarButton,nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -210,7 +211,7 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
 	NSString *imageName = [photoArray objectAtIndex:indexPath.row];
     NSArray *detailArray = [photoDetailArray objectAtIndex:indexPath.row];
 
-	SET_GLOBAL_CUSTOM_CELL_PROPERTIES([detailArray objectAtIndex:0], [detailArray objectAtIndex:1], @"24/03/2013",image, imageName)
+	SET_GLOBAL_CUSTOM_CELL_PROPERTIES([detailArray objectAtIndex:0], [detailArray objectAtIndex:1], [detailArray objectAtIndex:2],image, imageName)
 	
 }
 

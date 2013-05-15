@@ -18,11 +18,11 @@
 @class SaveFlyerController;
 @class LoadingView;
 
-@interface DraftViewController : UIViewController<FBRequestDelegate,UIWebViewDelegate,UIDocumentInteractionControllerDelegate,FBSessionDelegate,FBDialogDelegate,FBLoginDialogDelegate,TumblrUploadrDelegate,OFFlickrAPIRequestDelegate,MFMessageComposeViewControllerDelegate> {
+@interface DraftViewController : UIViewController<FBRequestDelegate,UIWebViewDelegate,UIDocumentInteractionControllerDelegate,FBSessionDelegate,FBDialogDelegate,FBLoginDialogDelegate,TumblrUploadrDelegate,OFFlickrAPIRequestDelegate,MFMessageComposeViewControllerDelegate,MFMailComposeViewControllerDelegate,UITextViewDelegate> {
 
 	IBOutlet UIImageView *imgView;
 	IBOutlet UITextField *titleView;
-	IBOutlet UILabel *descriptionView;
+	IBOutlet UITextView *descriptionView;
 
     IBOutlet UIButton *facebookButton;
 	IBOutlet UIButton *twitterButton;
@@ -53,7 +53,7 @@
     
     BOOL fromPhotoController;
 }
-@property(nonatomic,retain) IBOutlet UILabel *descriptionView;
+@property(nonatomic,retain) IBOutlet UITextView *descriptionView;
 @property(nonatomic,retain) IBOutlet UITextField *titleView;
 @property(nonatomic,retain) IBOutlet UIImageView *imgView;
 

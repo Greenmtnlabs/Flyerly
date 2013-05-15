@@ -146,4 +146,5 @@
 -(void)loadPhotoLibrary;
 -(void)setPhotoTabAction:(id) sender;
 + (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize;
++(UILabel *)setTitleViewWithTitle:(NSString *)title;
 @end

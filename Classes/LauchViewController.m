@@ -331,6 +331,11 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
         [self.navigationController pushViewController:draftViewController animated:YES];
         [draftViewController release];
         //[self performSelector:@selector(deselect) withObject:nil afterDelay:0.2f];
+    
+    } else {
+    
+        // Open create flyer screen
+        [NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(loadPhotoView) userInfo:nil repeats:NO];
     }
 }
 

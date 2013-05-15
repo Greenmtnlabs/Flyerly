@@ -13,6 +13,7 @@
 #import "FlyrAppDelegate.h"
 #import "FBRequestConnection.h"
 #import "LoadingView.h"
+#import "PhotoController.h"
 
 @implementation AddFriendsController
 @synthesize uiTableView, contactsArray, deviceContactItems, contactsLabel, facebookLabel, twitterLabel, doneLabel, selectAllLabel, unSelectAllLabel, inviteLabel, contactsButton, facebookButton, twitterButton, loadingView;
@@ -64,13 +65,14 @@ BOOL firstTableLoad = YES;
 -(NSArray *)rightBarItems{
     
     // Create right bar help button
-    UILabel *saveFlyrLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 75, 50)];
-    [saveFlyrLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:8.5]];
-    [saveFlyrLabel setTextColor:[MyCustomCell colorWithHexString:@"008ec0"]];
-    [saveFlyrLabel setBackgroundColor:[UIColor clearColor]];
-    [saveFlyrLabel setText:@"Invite Friends"];
-    UIBarButtonItem *barLabel = [[UIBarButtonItem alloc] initWithCustomView:saveFlyrLabel];
-    
+    //UILabel *saveFlyrLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 75, 50)];
+    //[saveFlyrLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:8.5]];
+    //[saveFlyrLabel setTextColor:[MyCustomCell colorWithHexString:@"008ec0"]];
+    //[saveFlyrLabel setBackgroundColor:[UIColor clearColor]];
+    //[saveFlyrLabel setText:@"Invite Friends"];
+    //UIBarButtonItem *barLabel = [[UIBarButtonItem alloc] initWithCustomView:saveFlyrLabel];
+    self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Invite Friends"];
+
     UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 31, 30)];
     [menuButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [menuButton setBackgroundImage:[UIImage imageNamed:@"menu_button"] forState:UIControlStateNormal];
@@ -79,7 +81,7 @@ BOOL firstTableLoad = YES;
     //[self.navigationItem setRightBarButtonItem:rightBarButton];
     
     
-    return [NSMutableArray arrayWithObjects:menuBarButton,barLabel,nil];
+    return [NSMutableArray arrayWithObjects:menuBarButton,nil];
 }
 
 -(void)goBack{
