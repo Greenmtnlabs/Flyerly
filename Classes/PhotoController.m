@@ -151,7 +151,7 @@
 	[self.view addSubview:textBackgrnd];
 	textBackgrnd.alpha = ALPHA0;
 
-	msgLabel = [[CustomLabel alloc]initWithFrame:CGRectMake(0, 30, 320, 200)];
+	msgLabel = [[CustomLabel alloc]initWithFrame:CGRectMake(0, 30, 320, 500)];
 	msgLabel.backgroundColor = [UIColor clearColor];
 	msgLabel.textColor = [UIColor blackColor];
 	msgLabel.textAlignment = UITextAlignmentCenter;
@@ -726,7 +726,7 @@
 			msgLabel.font =selectedFont;
 			//msgLabel.frame = CGRectMake(lableLocation.x,lableLocation.y,msgTextView.frame.size.width, msgTextView.contentSize.height);
 			//msgLabel.frame = CGRectMake(0,44,320,msgTextView.contentSize.height);
-			msgLabel.frame = CGRectMake(0, 10, 320,200 );
+			//msgLabel.frame = CGRectMake(0, 10, 320,500 );
 		}
 		i++;	
 	}

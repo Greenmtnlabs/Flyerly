@@ -642,10 +642,10 @@
      NSLog(@"width: %f", originalImage.size.width);
      NSLog(@"width: %f", originalImage.size.height);
     
-     UIImage *instagramImage = [PhotoController imageWithImage:originalImage scaledToSize:CGSizeMake(612, 612)];
+     //UIImage *instagramImage = [PhotoController imageWithImage:originalImage scaledToSize:CGSizeMake(612, 612)];
      
      NSString  *updatedImagePath = [imageFileName stringByReplacingOccurrencesOfString:@".jpg" withString:@".igo"];
-     NSData *imgData = UIImagePNGRepresentation(instagramImage);
+     NSData *imgData = UIImagePNGRepresentation(originalImage);
      [[NSFileManager defaultManager] createFileAtPath:updatedImagePath contents:imgData attributes:nil];
      
      NSURL *igImageHookFile = [NSURL fileURLWithPath:updatedImagePath];
@@ -769,11 +769,15 @@
 		case MessageComposeResultFailed:
 			break;
 	}
-    [controller dismissModalViewControllerAnimated:YES];
     
-    if([emailButton isSelected]){
-        [self shareOnEmail];
-    }
+    [controller dismissViewControllerAnimated:YES
+                             completion:^{
+
+                                 // Open email composer if selected
+                                 if([emailButton isSelected]){
+                                     [self shareOnEmail];
+                                 }
+                             }];
 }
 
 - (void)didReceiveMemoryWarning {
