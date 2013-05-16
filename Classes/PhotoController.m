@@ -186,6 +186,7 @@
 
 		NSString* templateName = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"Template%d",i] ofType:@"jpg"];
 		UIImage *templateImg =  [UIImage imageWithContentsOfFile:templateName];
+        
 		[templateArray addObject:templateImg];
 		
 		NSString* iconName = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"icon%d",i] ofType:@"jpg"];
@@ -2207,11 +2208,13 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 -(NSData*)getCurrentFrameAndSaveIt
 {
-	NSLog(@"%f",self.imgView.bounds.size.width);
-	NSLog(@"%f",self.imgView.bounds.size.height);
-
 	CGSize size = CGSizeMake(self.imgView.bounds.size.width,self.imgView.bounds.size.height );
-	UIGraphicsBeginImageContext(size);
+    //if ([UIScreen instancesRespondToSelector:@selector(scale)]) {
+        //UIGraphicsBeginImageContextWithOptions(size, NO, 2.0);
+        UIGraphicsBeginImageContextWithOptions(size, NO, 2.0);
+    //} else {
+    //    UIGraphicsBeginImageContext(size);
+    //}
 	[self.imgView.layer renderInContext:UIGraphicsGetCurrentContext()];
 	UIImage *screenImage = UIGraphicsGetImageFromCurrentImageContext();
 	UIGraphicsEndImageContext();

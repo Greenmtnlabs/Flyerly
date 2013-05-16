@@ -21,7 +21,7 @@
 
 @class LoadingView;
 
-@interface AddFriendsController : UIViewController<UITableViewDelegate,UITableViewDataSource,FBRequestDelegate,FBSessionDelegate,MFMessageComposeViewControllerDelegate,FBDialogDelegate,FBLoginDialogDelegate>{
+@interface AddFriendsController : UIViewController<UITableViewDelegate,UITableViewDataSource,FBRequestDelegate,FBSessionDelegate,MFMessageComposeViewControllerDelegate,FBDialogDelegate,FBLoginDialogDelegate,UITextFieldDelegate>{
 
     IBOutlet UILabel *contactsLabel;
     IBOutlet UILabel *facebookLabel;
@@ -33,10 +33,13 @@
     IBOutlet UIButton *contactsButton;
     IBOutlet UIButton *facebookButton;
     IBOutlet UIButton *twitterButton;
+    IBOutlet UITextField *searchTextField;
 	LoadingView *loadingView;
 
     IBOutlet UITableView *uiTableView;
 	NSMutableArray *contactsArray;
+    NSMutableArray *filteredArray;
+    NSMutableArray *backupArray;
     
     NSMutableArray *deviceContactItems;
     int selectedTab;
@@ -54,10 +57,13 @@
 @property(nonatomic,retain) IBOutlet UIButton *contactsButton;
 @property(nonatomic,retain) IBOutlet UIButton *facebookButton;
 @property(nonatomic,retain) IBOutlet UIButton *twitterButton;
+@property(nonatomic,retain) IBOutlet UITextField *searchTextField;
 @property (nonatomic, retain) LoadingView *loadingView;
 
 @property(nonatomic,retain) IBOutlet UITableView *uiTableView;
 @property(nonatomic,retain) NSMutableArray *contactsArray;
+@property(nonatomic,retain) NSMutableArray *filteredArray;
+@property(nonatomic,retain) NSMutableArray *backupArray;
 @property(nonatomic,retain) NSMutableArray *deviceContactItems;
 
 - (IBAction)selectAllCheckBoxes:(UIButton *)sender;
@@ -65,6 +71,7 @@
 - (IBAction)loadLocalContacts:(UIButton *)sender;
 - (IBAction)loadFacebookContacts:(UIButton *)sender;
 - (IBAction)loadTwitterContacts:(UIButton *)sender;
+- (IBAction)onSearchClick:(UIButton *)sender;
 -(IBAction)invite;
 
 @end

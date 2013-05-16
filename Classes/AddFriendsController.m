@@ -16,7 +16,7 @@
 #import "PhotoController.h"
 
 @implementation AddFriendsController
-@synthesize uiTableView, contactsArray, deviceContactItems, contactsLabel, facebookLabel, twitterLabel, doneLabel, selectAllLabel, unSelectAllLabel, inviteLabel, contactsButton, facebookButton, twitterButton, loadingView;
+@synthesize uiTableView, contactsArray, deviceContactItems, contactsLabel, facebookLabel, twitterLabel, doneLabel, selectAllLabel, unSelectAllLabel, inviteLabel, contactsButton, facebookButton, twitterButton, loadingView, filteredArray, searchTextField, backupArray;
 
 const int TWITTER_TAB = 2;
 const int FACEBOOK_TAB = 1;
@@ -60,6 +60,8 @@ BOOL firstTableLoad = YES;
     [self.inviteLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
     [self.inviteLabel setText:NSLocalizedString(@"invite", nil)];
     
+    [searchTextField setReturnKeyType:UIReturnKeyDone];
+
 }
 
 -(NSArray *)rightBarItems{
@@ -213,6 +215,8 @@ BOOL firstTableLoad = YES;
     }
     
     // Reload table data after all the contacts get loaded
+    backupArray = nil;
+    backupArray = contactsArray;
     [self.uiTableView reloadData];
 }
 
@@ -267,7 +271,9 @@ int totalCount = 0;
         NSMutableDictionary *dOfPerson=[NSMutableDictionary dictionary];        
         [dOfPerson setObject:[friendData objectForKey:@"name"] forKey:@"name"];
         [dOfPerson setObject:[friendData objectForKey:@"id"] forKey:@"identifier"];
-        [dOfPerson setObject:image forKey:@"image"];
+        if(image){
+            [dOfPerson setObject:image forKey:@"image"];
+        }
         //[dOfPerson setObject:[[[friendData objectForKey:@"picture"] objectForKey:@"data"] objectForKey:@"url"] forKey:@"image"];
         [self.contactsArray addObject:dOfPerson];
         
@@ -275,6 +281,8 @@ int totalCount = 0;
         totalCount++;
     }
     
+    backupArray = nil;
+    backupArray = contactsArray;
     [self.uiTableView reloadData];
     
     if(count == 30){
@@ -282,7 +290,7 @@ int totalCount = 0;
         [appDelegate.facebook requestWithGraphPath:[NSString stringWithFormat:@"me/friends?fields=name,picture.height(35).width(35).type(small)&limit=30&offset=%d", totalCount] andDelegate:self];
 
         loadingView =[LoadingView loadingViewInView:self.view text:@"Loading..."];
-        loadingViewFlag = YES;
+        //loadingViewFlag = YES;
         
     } else {
         totalCount = 0;
@@ -338,6 +346,15 @@ int totalCount = 0;
     } else {
         
         [self showAlert:@"No Twitter connection" message:@"You must be connected to Twitter to get contact list."];
+        
+        if(loadingViewFlag){
+            for (UIView *subview in self.view.subviews) {
+                if([subview isKindOfClass:[LoadingView class]]){
+                    [subview removeFromSuperview];
+                    loadingViewFlag = NO;
+                }
+            }
+        }
     }
     
 }
@@ -397,6 +414,8 @@ int totalCount = 0;
             
         }
 
+        backupArray = nil;
+        backupArray = contactsArray;
         if([nextCursor compare:[NSDecimalNumber zero]] == NSOrderedSame){
             [self.uiTableView reloadData];
         }else{
@@ -445,6 +464,8 @@ int totalCount = 0;
                 [postRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {                    
                     NSLog(@"Twitter response, HTTP response: %i", [urlResponse statusCode]);
                     
+                    backupArray = nil;
+                    backupArray = contactsArray;
                     [self.uiTableView reloadData];
                 }];
             }
@@ -853,6 +874,49 @@ int totalCount = 0;
     [self loadFacebookContacts:self.facebookButton];
 }
 
+- (IBAction)onSearchClick:(UIButton *)sender{
+    [searchTextField resignFirstResponder];
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+
+    if([string isEqualToString:@"\n"]){
+        [searchTextField resignFirstResponder];
+        return NO;
+    }
+    
+    NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+
+    if([newString isEqualToString:@""]){
+        contactsArray = backupArray;
+        [self.uiTableView reloadData];
+        return YES;
+    }
+    
+    filteredArray = nil;
+    filteredArray = [[NSMutableArray alloc] init];
+    
+    for(int contactIndex=0; contactIndex<[backupArray count]; contactIndex++){
+        // Get left contact data
+        NSMutableDictionary *dict1 = [self.backupArray objectAtIndex:contactIndex];
+        NSString *name1 = [dict1 objectForKey:@"name"];
+        
+        if([[name1 lowercaseString] hasPrefix:[newString lowercaseString]]){
+            [filteredArray addObject:dict1];
+        }
+    }
+    
+    //NSSortDescriptor *sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES] autorelease];
+    //NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+    //sortedArray = [contactsArray sortedArrayUsingDescriptors:sortDescriptors];
+    
+    contactsArray = filteredArray;
+    
+    [self.uiTableView reloadData];
+
+    return YES;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];	
 }
@@ -901,6 +965,8 @@ int totalCount = 0;
     uiTableView = nil;
     contactsArray = nil;
     deviceContactItems = nil;
+    
+    [backupArray release];
     
     [super dealloc];
 }

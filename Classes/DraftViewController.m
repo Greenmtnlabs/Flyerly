@@ -593,6 +593,14 @@
 
 -(void)shareOnMMS{
     
+    /*
+    NSString *phoneToCall = @"sms:123-456-7890";
+    NSString *phoneToCallEncoded = [phoneToCall stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
+    NSURL *url = [[NSURL alloc] initWithString:phoneToCallEncoded];
+    
+    [[UIApplication sharedApplication] openURL:url];
+     */
+
     MFMessageComposeViewController *controller = [[[MFMessageComposeViewController alloc] init] autorelease];
     if([MFMessageComposeViewController canSendText])
     {
