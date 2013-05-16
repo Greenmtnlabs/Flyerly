@@ -627,7 +627,6 @@ int totalCount = 0;
         [self presentViewController:messageInstance animated:YES completion:nil];
         
     }
-    
 }
 
 #pragma mark Table view methods
