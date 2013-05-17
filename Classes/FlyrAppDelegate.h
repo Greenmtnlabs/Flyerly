@@ -14,6 +14,7 @@
 #import <ObjectiveFlickr.h>
 
 extern NSString *FlickrSharingSuccessNotification;
+extern NSString *FlickrSharingFailureNotification;
 @class FBSession;
 @class SaveFlyerController;
 @class LauchViewController;

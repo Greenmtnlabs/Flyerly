@@ -13,12 +13,16 @@
 #import "TumblrUploadr.h"
 #import <ObjectiveFlickr.h>
 #import <MessageUI/MessageUI.h>
+#import "ShareProgressView.h"
 
 @class FlyrViewController;
 @class SaveFlyerController;
 @class LoadingView;
 
 @interface DraftViewController : UIViewController<FBRequestDelegate,UIWebViewDelegate,UIDocumentInteractionControllerDelegate,FBSessionDelegate,FBDialogDelegate,FBLoginDialogDelegate,TumblrUploadrDelegate,OFFlickrAPIRequestDelegate,MFMessageComposeViewControllerDelegate,MFMailComposeViewControllerDelegate,UITextViewDelegate> {
+
+	IBOutlet UIScrollView *scrollView;
+	IBOutlet UIView *progressView;
 
 	IBOutlet UIImageView *imgView;
 	IBOutlet UITextField *titleView;
@@ -52,7 +56,22 @@
 	OFFlickrAPIRequest *flickrRequest;
     
     BOOL fromPhotoController;
+    int countOfSharingNetworks;
+    
+    ShareProgressView *facebookPogressView;
+    ShareProgressView *twitterPogressView;
+    ShareProgressView *tumblrPogressView;
+    ShareProgressView *flickrPogressView;
 }
+
+@property(nonatomic,retain) IBOutlet ShareProgressView *facebookPogressView;
+@property(nonatomic,retain) IBOutlet ShareProgressView *twitterPogressView;
+@property(nonatomic,retain) IBOutlet ShareProgressView *tumblrPogressView;
+@property(nonatomic,retain) IBOutlet ShareProgressView *flickrPogressView;
+
+@property(nonatomic,retain) IBOutlet UIScrollView *scrollView;
+@property(nonatomic,retain) IBOutlet UIView *progressView;
+
 @property(nonatomic,retain) IBOutlet UITextView *descriptionView;
 @property(nonatomic,retain) IBOutlet UITextField *titleView;
 @property(nonatomic,retain) IBOutlet UIImageView *imgView;

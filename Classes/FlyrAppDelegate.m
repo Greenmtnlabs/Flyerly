@@ -19,6 +19,7 @@
 //#import "ARRollerProtocol.h"
 
 NSString *FlickrSharingSuccessNotification = @"FlickrSharingSuccessNotification";
+NSString *FlickrSharingFailureNotification = @"FlickrSharingFailureNotification";
 #define kAdWhirlApplicationKey @"b7dfccec5016102d840c2e1e0de86337"
 //#define kAdWhirlApplicationKey @"b9c3615f2c88102da8949a322e50052a "
 //#define facebookAppID @"136691489852349"
@@ -306,6 +307,7 @@ NSString *FlickrSharingSuccessNotification = @"FlickrSharingSuccessNotification"
 
 - (void)flickrAPIRequest:(OFFlickrAPIRequest *)inRequest didFailWithError:(NSError *)inError{
     NSLog(@"Fail request %@, error: %@", inRequest, inError);
+	[[NSNotificationCenter defaultCenter] postNotificationName:FlickrSharingFailureNotification object:self];
 
 }
 
