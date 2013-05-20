@@ -13,8 +13,8 @@ NSString *CloseShareProgressNotification = @"CloseShareProgressNotification";
 @synthesize networkIcon, statusIcon, statusText, refreshIcon, cancelIcon;
 
 -(IBAction)cancelPressed:(id)sender{
-	[[NSNotificationCenter defaultCenter] postNotificationName:CloseShareProgressNotification object:self];
     [self removeFromSuperview];
+	[[NSNotificationCenter defaultCenter] postNotificationName:CloseShareProgressNotification object:nil];
 }
 
 @end

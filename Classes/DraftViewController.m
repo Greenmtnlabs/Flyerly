@@ -32,6 +32,10 @@
 	[self.navigationController pushViewController:svController animated:YES];
 }
 
+-(void) callMenu {
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 	[UIView beginAnimations:nil context:NULL];
@@ -110,11 +114,23 @@
     }
 }
 
--(void)increaseProgressViewHeightBy:(int)height{
-    [progressView setFrame:CGRectMake(progressView.frame.origin.x, progressView.frame.origin.y, progressView.frame.size.width, progressView.frame.size.height + height)];
-    [scrollView setFrame:CGRectMake(scrollView.frame.origin.x, scrollView.frame.origin.y, scrollView.frame.size.width, scrollView.frame.size.height + height)];
-    [scrollView setContentSize:CGSizeMake(scrollView.frame.size.width, scrollView.frame.size.height + height)];
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+	navBar= [[MyNavigationBar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
+	[self.view addSubview:navBar];
+	[navBar show:@"SocialFlyr" left:@"Browser" right:@"Share"];
+	[self.view bringSubviewToFront:navBar];
+	
+	[navBar.leftButton removeTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+	[navBar.rightButton removeTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+	
+	[navBar.leftButton addTarget:self action:@selector(callFlyrView) forControlEvents:UIControlEventTouchUpInside];
+	[navBar.rightButton addTarget:self action:@selector(loadDistributeView) forControlEvents:UIControlEventTouchUpInside];
+	navBar.alpha = ALPHA1;
+	
 }
+
+#pragma text field and text view delegates
 
 - (BOOL) textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     if([text isEqualToString:@"\n"]){
@@ -142,28 +158,9 @@
     // [sender resignFirstResponder];
 }
 
--(void) callMenu {
-    [self.navigationController popToRootViewControllerAnimated:YES];
-}
+#pragma on click buttons
 
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-	navBar= [[MyNavigationBar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
-	[self.view addSubview:navBar];
-	[navBar show:@"SocialFlyr" left:@"Browser" right:@"Share"];
-	[self.view bringSubviewToFront:navBar];
-	
-	[navBar.leftButton removeTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-	[navBar.rightButton removeTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-	
-	[navBar.leftButton addTarget:self action:@selector(callFlyrView) forControlEvents:UIControlEventTouchUpInside];
-	[navBar.rightButton addTarget:self action:@selector(loadDistributeView) forControlEvents:UIControlEventTouchUpInside];
-	navBar.alpha = ALPHA1;
-	
-}
-
--(void)share{    
+-(void)share{
     
     [self remoAllSharingViews];
     [self setDefaultProgressViewHeight];
@@ -174,19 +171,27 @@
         loadingView =[LoadingView loadingViewInView:self.view  text:@"Sharing..."];
         
         if([facebookButton isSelected]){
+            [self showFacebookProgressRow];
             [self shareOnFacebook];
+            //[self fillSuccessStatus:facebookPogressView];
         }
         
         if([twitterButton isSelected]){
+            [self showTwitterProgressRow];
             [self shareOnTwitter];
+            //[self fillSuccessStatus:twitterPogressView];
         }
         
         if([flickrButton isSelected]){
+            [self showFlickrProgressRow];
             [self shareOnFlickr];
+            //[self fillSuccessStatus:flickrPogressView];
         }
         
         if([tumblrButton isSelected]){
+            [self showTumblrProgressRow];
             [self shareOnTumblr];
+            //[self fillSuccessStatus:tumblrPogressView];
         }
         
         if([smsButton isSelected]){
@@ -202,16 +207,16 @@
         }
         
         [self showAlert];
-    
+        
     } else {
-    
+        
         [self showAlert:@"Nothing Selected !" message:@"Please select a sharing option."];
         
     }
 }
 
 -(BOOL)isAnyNetworkSelected{
-
+    
     if([facebookButton isSelected])
         return true;
     if([twitterButton isSelected])
@@ -311,19 +316,6 @@
     }
 }
 
-- (void)authorizeAction {
-    
-    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-
-    // if there's already OAuthToken, we want to reauthorize
-    if ([appDelegate.flickrContext.OAuthToken length]) {
-        [appDelegate.flickrContext  setAuthToken:nil];
-    }
-    
-    self.flickrRequest.sessionInfo = kTryObtainAuthToken;
-    [self.flickrRequest  fetchOAuthRequestTokenWithCallbackURL:[NSURL URLWithString:kCallbackURLBaseString]];
-}
-
 -(IBAction)onClickFlickrButton{
     if([flickrButton isSelected]){
         [flickrButton setSelected:NO];
@@ -339,51 +331,6 @@
             [self authorizeAction];
         //}
     }
-}
-
-- (void)flickrAPIRequest:(OFFlickrAPIRequest *)inRequest didObtainOAuthRequestToken:(NSString *)inRequestToken secret:(NSString *)inSecret;
-{
-    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-    // these two lines are important
-    appDelegate.flickrContext.OAuthToken = inRequestToken;
-    appDelegate.flickrContext.OAuthTokenSecret = inSecret;
-    
-    NSURL *authURL = [appDelegate.flickrContext userAuthorizationURLWithRequestToken:inRequestToken requestedPermission:OFFlickrWritePermission];
-    [[UIApplication sharedApplication] openURL:authURL];
-}
-
-- (OFFlickrAPIRequest *)flickrRequest
-{
-    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-
-    if (!flickrRequest) {
-        flickrRequest = [[OFFlickrAPIRequest alloc] initWithAPIContext:appDelegate.flickrContext];
-        flickrRequest.delegate = self;
-		flickrRequest.requestTimeoutInterval = 60.0;
-    }
-    
-    return flickrRequest;
-}
-
-- (void)flickrAPIRequest:(OFFlickrAPIRequest *)inRequest imageUploadSentBytes:(NSUInteger)inSentBytes totalBytes:(NSUInteger)inTotalBytes {
-    NSLog(@"Success");
-}
-
-- (void)flickrAPIRequest:(OFFlickrAPIRequest *)inRequest didFailWithError:(NSError *)inError {
-    
-    /*
-    NSLog(@"%s %@ %@", __PRETTY_FUNCTION__, inRequest.sessionInfo, inError);
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[inError description] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-    [alert show];
-     */
-    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-    [appDelegate setAndStoreFlickrAuthToken:nil secret:nil];
-    [self authorizeAction];
-
-}
-
-- (void)flickrAPIRequest:(OFFlickrAPIRequest *)inRequest didCompleteWithResponse:(NSDictionary *)inResponseDictionary
-{
 }
 
 -(IBAction)onClickSMSButton{
@@ -416,46 +363,6 @@
     [alert release];
 }
 
-/*- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
-{
-    // Store incoming data into a string
-	NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    
-    // Create a dictionary from the JSON string
-	NSDictionary *results = [jsonString JSONValue];
-	
-    // Build an array from the dictionary for easy access to each entry
-	NSArray *photos = [[results objectForKey:@"photos"] objectForKey:@"photo"];
-    
-    // Loop through each entry in the dictionary...
-	for (NSDictionary *photo in photos)
-    {
-        // Get title of the image
-		NSString *title = [photo objectForKey:@"title"];
-        
-        // Save the title to the photo titles array
-		[photoTitles addObject:(title.length > 0 ? title : @"Untitled")];
-		
-        // Build the URL to where the image is stored (see the Flickr API)
-        // In the format http://farmX.static.flickr.com/server/id/secret
-        // Notice the "_s" which requests a "small" image 75 x 75 pixels
-		NSString *photoURLString = [NSString stringWithFormat:@"http://farm%@.static.flickr.com/%@/%@_%@_s.jpg", [photo objectForKey:@"farm"], [photo objectForKey:@"server"], [photo objectForKey:@"id"], [photo objectForKey:@"secret"]];
-        NSLog(@"photoURLString: %@", photoURLString);
-        
-        // The performance (scrolling) of the table will be much better if we
-        // build an array of the image data here, and then add this data as
-        // the cell.image value (see cellForRowAtIndexPath:)
-		[photoSmallImageData addObject:[NSData dataWithContentsOfURL:[NSURL URLWithString:photoURLString]]];
-        
-        // Build and save the URL to the large image so we can zoom
-        // in on the image if requested
-		photoURLString = [NSString stringWithFormat:@"http://farm%@.static.flickr.com/%@/%@_%@_m.jpg", [photo objectForKey:@"farm"], [photo objectForKey:@"server"], [photo objectForKey:@"id"], [photo objectForKey:@"secret"]];
-		[photoURLsLargeImage addObject:[NSURL URLWithString:photoURLString]];
-        NSLog(@"photoURLsLareImage: %@", photoURLString);
-	}
-    
-}*/
-
 -(void)searchFlickrPhotos:(NSString *)text
 {
     
@@ -471,18 +378,6 @@
     [connection release];
     [request release];
     
-}
-
-- (void)fbDidLogin {
-	NSLog(@"logged in");
-    
-    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-    
-    [[NSUserDefaults standardUserDefaults] setObject:appDelegate.facebook.accessToken forKey:@"FBAccessTokenKey"];
-    [[NSUserDefaults standardUserDefaults] setObject:appDelegate.facebook.expirationDate forKey:@"FBExpirationDateKey"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-
-    [facebookButton setSelected:YES];
 }
 
 -(void)showAlert{
@@ -543,37 +438,6 @@
     [socialArray writeToFile:finalImgWritePath atomically:YES];
 }
 
-- (void)postDismissCleanup {
-	[navBar removeFromSuperview];
-	[navBar release];
-
-
-}
-
-- (void)dismissNavBar:(BOOL)animated {	
-	
-	if (animated) {
-		[UIView beginAnimations:nil context:nil];
-		[UIView setAnimationDuration:1];
-		[UIView setAnimationDelegate:self];
-		[UIView setAnimationDidStopSelector:@selector(postDismissCleanup)];
-		navBar.alpha = 0;
-		[UIView commitAnimations];
-	} else {
-		[self postDismissCleanup];
-	}
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-	[super viewWillDisappear:animated];
-	[self dismissNavBar:YES];
-    
-    // If text changed then save it again
-   if(![selectedFlyerTitle isEqualToString:titleView.text] || ![selectedFlyerDescription isEqualToString:descriptionView.text]){
-        [self updateFlyerDetail];
-    }
-}
-
 -(void)updateFlyerDetail {
 	
     // delete already existing file and
@@ -603,6 +467,8 @@
 	[[NSFileManager defaultManager] createFileAtPath:imageFileName contents:imgData attributes:nil];
 
 }
+
+#pragma Sharing code
 
 -(void)shareOnMMS{
     
@@ -660,8 +526,6 @@
      UIGraphicsEndImageContext();
      
      UIImage *originalImage = [UIImage imageWithContentsOfFile:imageFileName];
-     NSLog(@"width: %f", originalImage.size.width);
-     NSLog(@"width: %f", originalImage.size.height);
     
      //UIImage *instagramImage = [PhotoController imageWithImage:originalImage scaledToSize:CGSizeMake(612, 612)];
      
@@ -678,19 +542,6 @@
 }
 
 -(void)shareOnTumblr{
-    
-    tumblrPogressView = [[[NSBundle mainBundle] loadNibNamed:@"ShareProgressView" owner:self options:nil] objectAtIndex:0];
-    [tumblrPogressView setFrame:CGRectMake(tumblrPogressView.frame.origin.x, 36 * countOfSharingNetworks++, tumblrPogressView.frame.size.width, tumblrPogressView.frame.size.height)];
-    
-    [tumblrPogressView.statusText setText:@""];
-    [tumblrPogressView.networkIcon setBackgroundImage:[UIImage imageNamed:@"status_icon_tumblr"] forState:UIControlStateNormal];
-    [tumblrPogressView.cancelIcon setBackgroundImage:nil forState:UIControlStateNormal];
-    [tumblrPogressView.statusIcon setBackgroundImage:nil forState:UIControlStateNormal];
-    [tumblrPogressView.refreshIcon setBackgroundImage:nil forState:UIControlStateNormal];
-    
-    [progressView addSubview:tumblrPogressView];
-    [self increaseProgressViewHeightBy:36];
-    
 
     [[TMAPIClient sharedInstance] userInfo:^(id data, NSError *error) {
         if (error){
@@ -710,18 +561,6 @@
 
 -(void)shareOnFlickr{
     
-    flickrPogressView = [[[NSBundle mainBundle] loadNibNamed:@"ShareProgressView" owner:self options:nil] objectAtIndex:0];
-    [flickrPogressView setFrame:CGRectMake(flickrPogressView.frame.origin.x, 36 * countOfSharingNetworks++, flickrPogressView.frame.size.width, flickrPogressView.frame.size.height)];
-    
-    [flickrPogressView.statusText setText:@""];
-    [flickrPogressView.networkIcon setBackgroundImage:[UIImage imageNamed:@"status_icon_flickr"] forState:UIControlStateNormal];
-    [flickrPogressView.cancelIcon setBackgroundImage:nil forState:UIControlStateNormal];
-    [flickrPogressView.statusIcon setBackgroundImage:nil forState:UIControlStateNormal];
-    [flickrPogressView.refreshIcon setBackgroundImage:nil forState:UIControlStateNormal];
-    
-    [progressView addSubview:flickrPogressView];
-    [self increaseProgressViewHeightBy:36];
-    
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     NSData *imageData = UIImageJPEGRepresentation(selectedFlyerImage, 0.9);
     
@@ -735,18 +574,6 @@
 }
 
 -(void)shareOnFacebook{
-    
-    facebookPogressView = [[[NSBundle mainBundle] loadNibNamed:@"ShareProgressView" owner:self options:nil] objectAtIndex:0];
-    [facebookPogressView setFrame:CGRectMake(facebookPogressView.frame.origin.x, 36 * countOfSharingNetworks++, facebookPogressView.frame.size.width, facebookPogressView.frame.size.height)];
-
-    [facebookPogressView.statusText setText:@""];
-    [facebookPogressView.networkIcon setBackgroundImage:[UIImage imageNamed:@"status_icon_fb"] forState:UIControlStateNormal];
-    [facebookPogressView.cancelIcon setBackgroundImage:nil forState:UIControlStateNormal];
-    [facebookPogressView.statusIcon setBackgroundImage:nil forState:UIControlStateNormal];
-    [facebookPogressView.refreshIcon setBackgroundImage:nil forState:UIControlStateNormal];
-    
-    [progressView addSubview:facebookPogressView];
-    [self increaseProgressViewHeightBy:36];
 
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
@@ -761,21 +588,6 @@
 
 - (void)shareOnTwitter {
     
-    NSArray *arr = [[[NSBundle mainBundle] loadNibNamed:@"ShareProgressView" owner:self options:nil] objectAtIndex:0];
-    NSLog(@"%@", arr);
-    
-    twitterPogressView = [[[NSBundle mainBundle] loadNibNamed:@"ShareProgressView" owner:[[ShareProgressView alloc] init] options:nil] objectAtIndex:0];
-    [twitterPogressView setFrame:CGRectMake(twitterPogressView.frame.origin.x, 36 * countOfSharingNetworks++, twitterPogressView.frame.size.width, twitterPogressView.frame.size.height)];
-    [twitterPogressView.statusText setText:@""];
-
-    [twitterPogressView.networkIcon setBackgroundImage:[UIImage imageNamed:@"status_icon_twitter"] forState:UIControlStateNormal];
-    [twitterPogressView.cancelIcon setBackgroundImage:nil forState:UIControlStateNormal];
-    [twitterPogressView.statusIcon setBackgroundImage:nil forState:UIControlStateNormal];
-    [twitterPogressView.refreshIcon setBackgroundImage:nil forState:UIControlStateNormal];
-    
-    [progressView addSubview:twitterPogressView];
-    [self increaseProgressViewHeightBy:36];
-
     ACAccountStore *account = [[ACAccountStore alloc] init];
     ACAccountType *accountType = [account accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
     
@@ -813,25 +625,90 @@
     }];
 }
 
-- (void)request:(FBRequest *)request didReceiveResponse:(NSURLResponse *)response{
-    NSLog(@"Response: %@", response);
-    [self fillSuccessStatus:facebookPogressView];
+#pragma show sharing progress row
+
+-(void)showFacebookProgressRow{
+    
+    facebookPogressView = [[[NSBundle mainBundle] loadNibNamed:@"ShareProgressView" owner:self options:nil] objectAtIndex:0];
+    [facebookPogressView setFrame:CGRectMake(facebookPogressView.frame.origin.x, 36 * countOfSharingNetworks++, facebookPogressView.frame.size.width, facebookPogressView.frame.size.height)];
+    
+    [facebookPogressView.statusText setText:@""];
+    [facebookPogressView.networkIcon setBackgroundImage:[UIImage imageNamed:@"status_icon_fb"] forState:UIControlStateNormal];
+    [facebookPogressView.cancelIcon setBackgroundImage:nil forState:UIControlStateNormal];
+    [facebookPogressView.statusIcon setBackgroundImage:nil forState:UIControlStateNormal];
+    [facebookPogressView.refreshIcon setBackgroundImage:[UIImage imageNamed:@"retry_share"] forState:UIControlStateNormal];
+    [facebookPogressView.refreshIcon setHidden:YES];
+    [facebookPogressView.refreshIcon addTarget:self action:@selector(shareOnFacebook) forControlEvents:UIControlEventTouchUpInside];
+    
+    [progressView addSubview:facebookPogressView];
+    [self increaseProgressViewHeightBy:36];
+    
+}
+-(void)showTwitterProgressRow{
+    
+    NSArray *arr = [[[NSBundle mainBundle] loadNibNamed:@"ShareProgressView" owner:self options:nil] objectAtIndex:0];
+    NSLog(@"%@", arr);
+    
+    twitterPogressView = [[[NSBundle mainBundle] loadNibNamed:@"ShareProgressView" owner:[[ShareProgressView alloc] init] options:nil] objectAtIndex:0];
+    [twitterPogressView setFrame:CGRectMake(twitterPogressView.frame.origin.x, 36 * countOfSharingNetworks++, twitterPogressView.frame.size.width, twitterPogressView.frame.size.height)];
+
+    [twitterPogressView.statusText setText:@""];
+    [twitterPogressView.networkIcon setBackgroundImage:[UIImage imageNamed:@"status_icon_twitter"] forState:UIControlStateNormal];
+    [twitterPogressView.cancelIcon setBackgroundImage:nil forState:UIControlStateNormal];
+    [twitterPogressView.statusIcon setBackgroundImage:nil forState:UIControlStateNormal];
+    [twitterPogressView.refreshIcon setBackgroundImage:[UIImage imageNamed:@"retry_share"] forState:UIControlStateNormal];
+    [twitterPogressView.refreshIcon setHidden:YES];
+    [twitterPogressView.refreshIcon addTarget:self action:@selector(shareOnTwitter) forControlEvents:UIControlEventTouchUpInside];
+    [progressView addSubview:twitterPogressView];
+    [self increaseProgressViewHeightBy:36];
+    
 }
 
-- (void)request:(FBRequest *)request didFailWithError:(NSError *)error{
-    NSLog(@"Error: %@", error);
-    [self fillErrorStatus:facebookPogressView];
+-(void)showTumblrProgressRow{
+    
+    tumblrPogressView = [[[NSBundle mainBundle] loadNibNamed:@"ShareProgressView" owner:self options:nil] objectAtIndex:0];
+    [tumblrPogressView setFrame:CGRectMake(tumblrPogressView.frame.origin.x, 36 * countOfSharingNetworks++, tumblrPogressView.frame.size.width, tumblrPogressView.frame.size.height)];
+
+    [tumblrPogressView.statusText setText:@""];
+    [tumblrPogressView.networkIcon setBackgroundImage:[UIImage imageNamed:@"status_icon_tumblr"] forState:UIControlStateNormal];
+    [tumblrPogressView.cancelIcon setBackgroundImage:nil forState:UIControlStateNormal];
+    [tumblrPogressView.statusIcon setBackgroundImage:nil forState:UIControlStateNormal];
+    [tumblrPogressView.refreshIcon setBackgroundImage:[UIImage imageNamed:@"retry_share"] forState:UIControlStateNormal];
+    [tumblrPogressView.refreshIcon setHidden:YES];
+    [tumblrPogressView.refreshIcon addTarget:self action:@selector(shareOnTumblr) forControlEvents:UIControlEventTouchUpInside];
+    
+    [progressView addSubview:tumblrPogressView];
+    [self increaseProgressViewHeightBy:36];
 }
 
+-(void)showFlickrProgressRow{
+
+    flickrPogressView = [[[NSBundle mainBundle] loadNibNamed:@"ShareProgressView" owner:self options:nil] objectAtIndex:0];
+    [flickrPogressView setFrame:CGRectMake(flickrPogressView.frame.origin.x, 36 * countOfSharingNetworks++, flickrPogressView.frame.size.width, flickrPogressView.frame.size.height)];
+
+    [flickrPogressView.statusText setText:@""];
+    [flickrPogressView.networkIcon setBackgroundImage:[UIImage imageNamed:@"status_icon_flickr"] forState:UIControlStateNormal];
+    [flickrPogressView.cancelIcon setBackgroundImage:nil forState:UIControlStateNormal];
+    [flickrPogressView.statusIcon setBackgroundImage:nil forState:UIControlStateNormal];
+    [flickrPogressView.refreshIcon setBackgroundImage:[UIImage imageNamed:@"retry_share"] forState:UIControlStateNormal];
+    [flickrPogressView.refreshIcon setHidden:YES];
+    [flickrPogressView.refreshIcon addTarget:self action:@selector(shareOnFlickr) forControlEvents:UIControlEventTouchUpInside];
+    
+    [progressView addSubview:flickrPogressView];
+    [self increaseProgressViewHeightBy:36];
+}
+
+#pragma update state text and icons
 -(void)fillErrorStatus:(ShareProgressView *)view{
     [view.statusText setText:@"Sharing Failed!"];
     [view.statusText setTextColor:[UIColor yellowColor]];
     [view.statusIcon setBackgroundImage:[UIImage imageNamed:@"status_failed"] forState:UIControlStateNormal];
-    [view.refreshIcon setBackgroundImage:[UIImage imageNamed:@"retry_share"] forState:UIControlStateNormal];
+    [view.refreshIcon setHidden:NO];
     [view.cancelIcon setBackgroundImage:[UIImage imageNamed:@"share_status_close"] forState:UIControlStateNormal];
 }
 
 -(void)fillSuccessStatus:(ShareProgressView *)view{
+    [view.statusText setTextColor:[UIColor greenColor]];
     [view.statusText setText:@"Successfully Shared!"];
     [view.cancelIcon setBackgroundImage:[UIImage imageNamed:@"share_status_close"] forState:UIControlStateNormal];
     [view.statusIcon setBackgroundImage:[UIImage imageNamed:@"status_success"] forState:UIControlStateNormal];
@@ -839,12 +716,31 @@
 
 -(void)closeSharingProgressSuccess{
     countOfSharingNetworks--;
-    //[self increaseProgressViewHeightBy:-36];
+    [self increaseProgressViewHeightBy:-36];
+    
+    // Take backup of progress views
+    NSArray *subViews = [progressView subviews];
+    // Remove all progress views
+    [[progressView subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    
+    // Re insert all progress view with new y axis
+    int yAxis = 0;
+    for(UIView *subview in subViews){
+        [subview setFrame:CGRectMake(subview.frame.origin.x, yAxis, subview.frame.size.width, subview.frame.size.height)];
+        [progressView addSubview:subview];
+        yAxis = yAxis + 36;
+    }
     
     if(countOfSharingNetworks <= 0){
         [self setDefaultProgressViewHeight];
         [progressView setHidden:YES];
     }
+}
+
+-(void)increaseProgressViewHeightBy:(int)height{
+    [progressView setFrame:CGRectMake(progressView.frame.origin.x, progressView.frame.origin.y, progressView.frame.size.width, progressView.frame.size.height + height)];
+    [scrollView setFrame:CGRectMake(scrollView.frame.origin.x, scrollView.frame.origin.y, scrollView.frame.size.width, scrollView.frame.size.height + height)];
+    [scrollView setContentSize:CGSizeMake(scrollView.frame.size.width, scrollView.frame.size.height + height)];
 }
 
 -(void)setDefaultProgressViewHeight{
@@ -857,6 +753,30 @@
     for(UIView *view in progressView.subviews){
         [view removeFromSuperview];
     }
+}
+
+#pragma Request receive code
+
+- (void)fbDidLogin {
+	NSLog(@"logged in");
+    
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:appDelegate.facebook.accessToken forKey:@"FBAccessTokenKey"];
+    [[NSUserDefaults standardUserDefaults] setObject:appDelegate.facebook.expirationDate forKey:@"FBExpirationDateKey"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [facebookButton setSelected:YES];
+}
+
+- (void)request:(FBRequest *)request didReceiveResponse:(NSURLResponse *)response{
+    NSLog(@"Response: %@", response);
+    [self fillSuccessStatus:facebookPogressView];
+}
+
+- (void)request:(FBRequest *)request didFailWithError:(NSError *)error{
+    NSLog(@"Error: %@", error);
+    [self fillErrorStatus:facebookPogressView];
 }
 
 - (BOOL)presentOptionsMenuFromRect:(CGRect)rect inView:(UIView *)view animated:(BOOL)animated{
@@ -882,6 +802,64 @@
     if([instagramButton isSelected] && ![tumblrButton isSelected]){
         [self shareOnInstagram];
     }
+}
+
+- (void)authorizeAction {
+    
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    
+    // if there's already OAuthToken, we want to reauthorize
+    if ([appDelegate.flickrContext.OAuthToken length]) {
+        [appDelegate.flickrContext  setAuthToken:nil];
+    }
+    
+    self.flickrRequest.sessionInfo = kTryObtainAuthToken;
+    [self.flickrRequest  fetchOAuthRequestTokenWithCallbackURL:[NSURL URLWithString:kCallbackURLBaseString]];
+}
+
+- (void)flickrAPIRequest:(OFFlickrAPIRequest *)inRequest didObtainOAuthRequestToken:(NSString *)inRequestToken secret:(NSString *)inSecret;
+{
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    // these two lines are important
+    appDelegate.flickrContext.OAuthToken = inRequestToken;
+    appDelegate.flickrContext.OAuthTokenSecret = inSecret;
+    
+    NSURL *authURL = [appDelegate.flickrContext userAuthorizationURLWithRequestToken:inRequestToken requestedPermission:OFFlickrWritePermission];
+    [[UIApplication sharedApplication] openURL:authURL];
+}
+
+- (OFFlickrAPIRequest *)flickrRequest
+{
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    
+    if (!flickrRequest) {
+        flickrRequest = [[OFFlickrAPIRequest alloc] initWithAPIContext:appDelegate.flickrContext];
+        flickrRequest.delegate = self;
+		flickrRequest.requestTimeoutInterval = 60.0;
+    }
+    
+    return flickrRequest;
+}
+
+- (void)flickrAPIRequest:(OFFlickrAPIRequest *)inRequest imageUploadSentBytes:(NSUInteger)inSentBytes totalBytes:(NSUInteger)inTotalBytes {
+    NSLog(@"Success");
+}
+
+- (void)flickrAPIRequest:(OFFlickrAPIRequest *)inRequest didFailWithError:(NSError *)inError {
+    
+    /*
+     NSLog(@"%s %@ %@", __PRETTY_FUNCTION__, inRequest.sessionInfo, inError);
+     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[inError description] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+     [alert show];
+     */
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    [appDelegate setAndStoreFlickrAuthToken:nil secret:nil];
+    [self authorizeAction];
+    
+}
+
+- (void)flickrAPIRequest:(OFFlickrAPIRequest *)inRequest didCompleteWithResponse:(NSDictionary *)inResponseDictionary
+{
 }
 
 - (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
@@ -918,19 +896,6 @@
                              }];
 }
 
-- (void)didReceiveMemoryWarning {
-	// Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-	
-	// Release any cached data, images, etc that aren't in use.
-}
-
-
-- (void)dealloc {
-	[svController release];
-    [super dealloc];
-}
-
 - (void) uploadFiles:(NSString *)oauthToken oauthSecretKey:(NSString *)oauthSecretKey blogName:(NSString *)blogName{
     
     UIImage *originalImage = [UIImage imageWithContentsOfFile:imageFileName];
@@ -955,15 +920,15 @@
     if([instagramButton isSelected]){
         [self shareOnInstagram];
     }
-
+    
 }
 - (void) tumblrUploadrDidSucceed:(TumblrUploadr *)tu withResponse:(NSString *)response {
     NSLog(@"connection succeeded with response: %@", response);
     [tu release];
     
     NSDictionary *dict = [NSJSONSerialization JSONObjectWithData: [response dataUsingEncoding:NSUTF8StringEncoding]
-                                    options: NSJSONReadingMutableContainers
-                                      error: nil];
+                                                         options: NSJSONReadingMutableContainers
+                                                           error: nil];
     NSDictionary *meta = [dict objectForKey:@"meta"];
     NSString *status = [[meta objectForKey:@"status"] stringValue];
     
@@ -976,7 +941,51 @@
     if([instagramButton isSelected]){
         [self shareOnInstagram];
     }
+    
+}
 
+- (void)postDismissCleanup {
+	[navBar removeFromSuperview];
+	[navBar release];
+    
+    
+}
+
+- (void)dismissNavBar:(BOOL)animated {
+	
+	if (animated) {
+		[UIView beginAnimations:nil context:nil];
+		[UIView setAnimationDuration:1];
+		[UIView setAnimationDelegate:self];
+		[UIView setAnimationDidStopSelector:@selector(postDismissCleanup)];
+		navBar.alpha = 0;
+		[UIView commitAnimations];
+	} else {
+		[self postDismissCleanup];
+	}
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+	[super viewWillDisappear:animated];
+	[self dismissNavBar:YES];
+    
+    // If text changed then save it again
+    if(![selectedFlyerTitle isEqualToString:titleView.text] || ![selectedFlyerDescription isEqualToString:descriptionView.text]){
+        [self updateFlyerDetail];
+    }
+}
+
+- (void)didReceiveMemoryWarning {
+	// Releases the view if it doesn't have a superview.
+    [super didReceiveMemoryWarning];
+	
+	// Release any cached data, images, etc that aren't in use.
+}
+
+
+- (void)dealloc {
+	[svController release];
+    [super dealloc];
 }
 
 @end

@@ -406,6 +406,7 @@
 								<string key="NSFrame">{{234, 355}, {82, 40}}</string>
 								<reference key="NSSuperview" ref="82517146"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -997,6 +998,7 @@
 							<string>facebookButton</string>
 							<string>facebookPogressView</string>
 							<string>flickrButton</string>
+							<string>flickrPogressView</string>
 							<string>imgView</string>
 							<string>instagramButton</string>
 							<string>progressView</string>
@@ -1004,6 +1006,7 @@
 							<string>smsButton</string>
 							<string>titleView</string>
 							<string>tumblrButton</string>
+							<string>tumblrPogressView</string>
 							<string>twitterButton</string>
 							<string>twitterPogressView</string>
 						</object>
@@ -1015,6 +1018,7 @@
 							<string>UIButton</string>
 							<string>ShareProgressView</string>
 							<string>UIButton</string>
+							<string>ShareProgressView</string>
 							<string>UIImageView</string>
 							<string>UIButton</string>
 							<string>UIView</string>
@@ -1022,6 +1026,7 @@
 							<string>UIButton</string>
 							<string>UITextField</string>
 							<string>UIButton</string>
+							<string>ShareProgressView</string>
 							<string>UIButton</string>
 							<string>ShareProgressView</string>
 						</object>
@@ -1036,6 +1041,7 @@
 							<string>facebookButton</string>
 							<string>facebookPogressView</string>
 							<string>flickrButton</string>
+							<string>flickrPogressView</string>
 							<string>imgView</string>
 							<string>instagramButton</string>
 							<string>progressView</string>
@@ -1043,6 +1049,7 @@
 							<string>smsButton</string>
 							<string>titleView</string>
 							<string>tumblrButton</string>
+							<string>tumblrPogressView</string>
 							<string>twitterButton</string>
 							<string>twitterPogressView</string>
 						</object>
@@ -1073,6 +1080,10 @@
 								<string key="candidateClassName">UIButton</string>
 							</object>
 							<object class="IBToOneOutletInfo">
+								<string key="name">flickrPogressView</string>
+								<string key="candidateClassName">ShareProgressView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
 								<string key="name">imgView</string>
 								<string key="candidateClassName">UIImageView</string>
 							</object>
@@ -1099,6 +1110,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">tumblrButton</string>
 								<string key="candidateClassName">UIButton</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">tumblrPogressView</string>
+								<string key="candidateClassName">ShareProgressView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">twitterButton</string>
@@ -1194,6 +1209,10 @@
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencies">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaTouchPlugin.iPhoneOS</string>
 			<integer value="768" key="NS.object.0"/>
+		</object>
+		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">
+			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaTouchPlugin.iPhoneOS</string>
+			<real value="1536" key="NS.object.0"/>
 		</object>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDevelopmentDependencies">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaTouchPlugin.InterfaceBuilder3</string>
