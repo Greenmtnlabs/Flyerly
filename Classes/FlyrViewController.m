@@ -138,6 +138,8 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
     // Set right bar items
     [self.navigationItem setRightBarButtonItems: [self rightBarItems]];
 
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg"] forBarMetrics:UIBarMetricsDefault];
+
     /*
 	navBar= [[MyNavigationBar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
 	[self.view addSubview:navBar];
@@ -173,7 +175,7 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
     //[saveFlyrLabel setBackgroundColor:[UIColor clearColor]];
     //[saveFlyrLabel setText:@"Saved flyer"];
     //UIBarButtonItem *barLabel = [[UIBarButtonItem alloc] initWithCustomView:saveFlyrLabel];
-    self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Saved flyer"];
+    self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Saved flyers"];
 
     // Create left bar help button
     UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 54, 35)];

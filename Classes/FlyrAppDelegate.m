@@ -6,6 +6,7 @@
 //  Copyright __MyCompanyName__ 2009. All rights reserved.
 //
 
+#import "Crittercism.h"
 #import "FlyrAppDelegate.h"
 #import "Common.h"
 #import "PhotoController.h"
@@ -230,6 +231,9 @@ NSString *FlickrSharingFailureNotification = @"FlickrSharingFailureNotification"
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
+    // Crittercism for crash reports.
+    [Crittercism initWithAppID: @"519a14f897c8f27969000019"];
+
     [self clearCache];
 	changesFlag = NO;
 	[[UIApplication sharedApplication] setStatusBarStyle: UIStatusBarStyleBlackTranslucent];

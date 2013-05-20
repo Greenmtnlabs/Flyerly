@@ -27,6 +27,8 @@ BOOL firstTableLoad = YES;
     
     [super viewDidLoad];
     
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg"] forBarMetrics:UIBarMetricsDefault];
+
     // By default first tab is selected 'Contacts'
     selectedTab = -1;
 	loadingViewFlag = NO;

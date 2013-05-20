@@ -57,7 +57,7 @@
 					<object class="IBUIButton" id="500510736">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{0, 46}, {108, 60}}</string>
+						<string key="NSFrame">{{0, 46}, {108, 61}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="291714416"/>
@@ -101,7 +101,7 @@
 					<object class="IBUIButton" id="941120112">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{212, 46}, {108, 60}}</string>
+						<string key="NSFrame">{{212, 46}, {108, 61}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="1024677100"/>
@@ -142,7 +142,7 @@
 					<object class="IBUIButton" id="1014950534">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{109, 46}, {102, 60}}</string>
+						<string key="NSFrame">{{109, 46}, {102, 61}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="687780361"/>
@@ -349,7 +349,6 @@
 						<string key="NSFrame">{{268, 508}, {33, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -959,7 +958,6 @@
 						<string key="loadTwitterContacts:">UIButton</string>
 						<string key="onSearchClick:">UIButton</string>
 						<string key="selectAllCheckBoxes:">UIButton</string>
-						<string key="tagFacebookUsersWithFeed:">NSArray</string>
 						<string key="unSelectAllCheckBoxes:">UIButton</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
@@ -986,10 +984,6 @@
 						<object class="IBActionInfo" key="selectAllCheckBoxes:">
 							<string key="name">selectAllCheckBoxes:</string>
 							<string key="candidateClassName">UIButton</string>
-						</object>
-						<object class="IBActionInfo" key="tagFacebookUsersWithFeed:">
-							<string key="name">tagFacebookUsersWithFeed:</string>
-							<string key="candidateClassName">NSArray</string>
 						</object>
 						<object class="IBActionInfo" key="unSelectAllCheckBoxes:">
 							<string key="name">unSelectAllCheckBoxes:</string>

@@ -12,6 +12,7 @@
 #import "FBConnect/FBConnect.h"
 #import "TwitLogin.h"
 #import <ObjectiveFlickr.h>
+#import "Crittercism.h"
 
 extern NSString *FlickrSharingSuccessNotification;
 extern NSString *FlickrSharingFailureNotification;

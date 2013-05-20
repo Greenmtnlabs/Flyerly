@@ -19,7 +19,7 @@
 
 @implementation DraftViewController
 
-@synthesize selectedFlyerImage,imgView,navBar,fvController,svController,titleView,descriptionView,selectedFlyerDescription,selectedFlyerTitle, detailFileName, imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,loadingView,dic,fromPhotoController,progressView,scrollView,facebookPogressView,twitterPogressView, tumblrPogressView, flickrPogressView;
+@synthesize selectedFlyerImage,imgView,navBar,fvController,svController,titleView,descriptionView,selectedFlyerDescription,selectedFlyerTitle, detailFileName, imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,loadingView,dic,fromPhotoController,progressView,scrollView,facebookPogressView,twitterPogressView, tumblrPogressView, flickrPogressView, saveToCameraRollLabel;
 
 -(void)callFlyrView{
 	[self.navigationController popToViewController:fvController animated:YES];
@@ -85,6 +85,8 @@
     //UIBarButtonItem *barLabel = [[UIBarButtonItem alloc] initWithCustomView:addBackgroundLabel];
     self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Share flyer"];
 
+    [saveToCameraRollLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
+
     UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 33)];
     [shareButton addTarget:self action:@selector(share) forControlEvents:UIControlEventTouchUpInside];
     [shareButton setBackgroundImage:[UIImage imageNamed:@"share"] forState:UIControlStateNormal];
@@ -107,8 +109,8 @@
     [descriptionView setReturnKeyType:UIReturnKeyDone];
     if([selectedFlyerDescription isEqualToString:@""]){
         [descriptionView setText:AddCaptionText];
-        //UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(textViewTapped:)];
-        //[descriptionView addGestureRecognizer:gestureRecognizer];
+        UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(textViewTapped:)];
+        [descriptionView addGestureRecognizer:gestureRecognizer];
     }else{
         [descriptionView setText:selectedFlyerDescription];
     }
@@ -121,6 +123,8 @@
 	[navBar show:@"SocialFlyr" left:@"Browser" right:@"Share"];
 	[self.view bringSubviewToFront:navBar];
 	
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg"] forBarMetrics:UIBarMetricsDefault];
+
 	[navBar.leftButton removeTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
 	[navBar.rightButton removeTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
 	
@@ -210,7 +214,7 @@
         
     } else {
         
-        [self showAlert:@"Nothing Selected !" message:@"Please select a sharing option."];
+        [self showAlert:@"Warning!" message:@"Please select at least one sharing option."];
         
     }
 }
@@ -418,9 +422,23 @@
         [socialArray addObject:@"0"]; //Twitter
     }
     
-    [socialArray addObject:@"0"]; //Email
-    [socialArray addObject:@"0"]; //Tumblr
-    [socialArray addObject:@"0"]; //Flickr
+    if([emailButton isSelected]){
+        [socialArray addObject:@"1"]; //Email
+    } else  {
+        [socialArray addObject:@"0"]; //Email
+    }
+
+    if([tumblrButton isSelected]){
+        [socialArray addObject:@"1"]; //Tumblr
+    } else  {
+        [socialArray addObject:@"0"]; //Tumblr
+    }
+
+    if([flickrButton isSelected]){
+        [socialArray addObject:@"1"]; //Flickr
+    } else  {
+        [socialArray addObject:@"0"]; //Flickr
+    }
     
     if([instagramButton isSelected]){
         [socialArray addObject:@"1"]; //Instagram
@@ -535,13 +553,16 @@
      
      NSURL *igImageHookFile = [NSURL fileURLWithPath:updatedImagePath];
      
-    self.dic=[UIDocumentInteractionController interactionControllerWithURL:igImageHookFile];
+     self.dic=[UIDocumentInteractionController interactionControllerWithURL:igImageHookFile];
      self.dic.UTI = @"com.instagram.photo";
      //self.dic = [self setupControllerWithURL:igImageHookFile usingDelegate:self];
-     [self.dic presentOpenInMenuFromRect:rect inView: self.view animated:YES];
+     self.dic.annotation = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%@ %@", selectedFlyerDescription, @"#flyerly"] forKey:@"InstagramCaption"];     [self.dic presentOpenInMenuFromRect:rect inView: self.view animated:YES];
 }
 
 -(void)shareOnTumblr{
+
+    [tumblrPogressView.statusText setText:@""];
+    [tumblrPogressView.statusIcon setBackgroundImage:nil forState:UIControlStateNormal];
 
     [[TMAPIClient sharedInstance] userInfo:^(id data, NSError *error) {
         if (error){
@@ -561,10 +582,13 @@
 
 -(void)shareOnFlickr{
     
+    [flickrPogressView.statusText setText:@""];
+    [flickrPogressView.statusIcon setBackgroundImage:nil forState:UIControlStateNormal];
+
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     NSData *imageData = UIImageJPEGRepresentation(selectedFlyerImage, 0.9);
     
-    [appDelegate.flickrRequest uploadImageStream:[NSInputStream inputStreamWithData:imageData] suggestedFilename:selectedFlyerTitle MIMEType:@"image/jpeg" arguments:[NSDictionary dictionaryWithObjectsAndKeys:@"0", @"is_public", nil]];
+    [appDelegate.flickrRequest uploadImageStream:[NSInputStream inputStreamWithData:imageData] suggestedFilename:selectedFlyerTitle MIMEType:@"image/jpeg" arguments:[NSDictionary dictionaryWithObjectsAndKeys:@"0", @"is_public",@"Title", @"title", [NSString stringWithFormat:@"%@ %@", selectedFlyerDescription, @"#flyerly"], @"description", nil]];
 }
 
 - (UIDocumentInteractionController *) setupControllerWithURL: (NSURL*) fileURL usingDelegate: (id <UIDocumentInteractionControllerDelegate>) interactionDelegate {
@@ -574,6 +598,9 @@
 }
 
 -(void)shareOnFacebook{
+
+    [facebookPogressView.statusText setText:@""];
+    [facebookPogressView.statusIcon setBackgroundImage:nil forState:UIControlStateNormal];
 
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
@@ -588,6 +615,9 @@
 
 - (void)shareOnTwitter {
     
+    [twitterPogressView.statusText setText:@""];
+    [twitterPogressView.statusIcon setBackgroundImage:nil forState:UIControlStateNormal];
+
     ACAccountStore *account = [[ACAccountStore alloc] init];
     ACAccountType *accountType = [account accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
     
@@ -610,14 +640,18 @@
             // Perform the request created above and create a handler block to handle the response.
             [postRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
                 
-                NSMutableDictionary *responseDictionary  = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:nil];
-                NSLog(@"%@",responseDictionary);
-                NSString *errors = [responseDictionary objectForKey:@"errors"];
-                
-                if(errors){
+                if(responseData){
+                    NSMutableDictionary *responseDictionary  = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:nil];
+                    NSLog(@"%@",responseDictionary);
+                    NSString *errors = [responseDictionary objectForKey:@"errors"];
+                    
+                    if(errors){
+                        [self fillErrorStatus:twitterPogressView];
+                    }else{
+                        [self fillSuccessStatus:twitterPogressView];
+                    }
+                } else {
                     [self fillErrorStatus:twitterPogressView];
-                }else{
-                    [self fillSuccessStatus:twitterPogressView];
                 }
             }];
 
@@ -712,6 +746,7 @@
     [view.statusText setText:@"Successfully Shared!"];
     [view.cancelIcon setBackgroundImage:[UIImage imageNamed:@"share_status_close"] forState:UIControlStateNormal];
     [view.statusIcon setBackgroundImage:[UIImage imageNamed:@"status_success"] forState:UIControlStateNormal];
+    [view.refreshIcon setHidden:YES];
 }
 
 -(void)closeSharingProgressSuccess{

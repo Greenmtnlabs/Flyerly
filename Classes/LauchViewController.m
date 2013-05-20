@@ -19,7 +19,7 @@
 @implementation LauchViewController
 
 @synthesize ptController,spController,tpController,createFlyrLabel,savedFlyrLabel,inviteFriendLabel,addFriendsController;
-@synthesize firstFlyer, secondFlyer, thirdFlyer, fourthFlyer, fifthFlyer, sixthFlyer, photoArray, photoDetailArray;
+@synthesize firstFlyer, secondFlyer, thirdFlyer, fourthFlyer, fifthFlyer, sixthFlyer, photoArray, photoDetailArray, createFlyrButton, savedFlyrButton, inviteFriendButton;
 @synthesize loadingView;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
@@ -38,7 +38,8 @@
 
 -(IBAction)doNew:(id)sender{
 	//loadingView =[LoadingView loadingViewInView:self.view];
-	[NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(loadPhotoView) userInfo:nil repeats:NO];
+    [self loadPhotoView];
+	//[NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(loadPhotoView) userInfo:nil repeats:NO];
 }
 //End
 
@@ -80,7 +81,7 @@
     self.navigationController.navigationBarHidden = NO;
 
     // Set the background image on navigation bar
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg"] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_with_logo"] forBarMetrics:UIBarMetricsDefault];
     
     [self.navigationItem setHidesBackButton:YES];
     // Create right bar button
@@ -335,7 +336,8 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
     } else {
     
         // Open create flyer screen
-        [NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(loadPhotoView) userInfo:nil repeats:NO];
+        //[NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(loadPhotoView) userInfo:nil repeats:NO];
+        [self loadPhotoView];
     }
 }
 

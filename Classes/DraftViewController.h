@@ -36,6 +36,8 @@
 	IBOutlet UIButton *instagramButton;
 	IBOutlet UIButton *smsButton;
 	IBOutlet UIButton *clipboardButton;
+    
+	IBOutlet UILabel *saveToCameraRollLabel;
 
 	UIImage *selectedFlyerImage;
 	NSString *selectedFlyerTitle;
@@ -68,6 +70,8 @@
 @property(nonatomic,retain) IBOutlet ShareProgressView *twitterPogressView;
 @property(nonatomic,retain) IBOutlet ShareProgressView *tumblrPogressView;
 @property(nonatomic,retain) IBOutlet ShareProgressView *flickrPogressView;
+
+@property(nonatomic,retain) IBOutlet UILabel *saveToCameraRollLabel;
 
 @property(nonatomic,retain) IBOutlet UIScrollView *scrollView;
 @property(nonatomic,retain) IBOutlet UIView *progressView;

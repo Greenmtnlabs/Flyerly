@@ -72,6 +72,7 @@
 		0F734B541742737D0084A2F4 /* top_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F734B521742737D0084A2F4 /* top_bg.png */; };
 		0F734B551742737D0084A2F4 /* top_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F734B531742737D0084A2F4 /* top_bg@2x.png */; };
 		0F734B5617427B790084A2F4 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65B303FA171ED8C8006632E3 /* Accounts.framework */; };
+		0FEDD799174A9DF000DF71C0 /* libCrittercismCrashOnly_v3_3_4.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FEDD76E174A91A800DF71C0 /* libCrittercismCrashOnly_v3_3_4.a */; };
 		0FF29F2D174616280007B309 /* share_flyer_details_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FF29F2B174616280007B309 /* share_flyer_details_bg.png */; };
 		0FF29F2E174616280007B309 /* share_flyer_details_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FF29F2C174616280007B309 /* share_flyer_details_bg@2x.png */; };
 		0FF29F30174629270007B309 /* ShareProgressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FF29F2F174629270007B309 /* ShareProgressView.xib */; };
@@ -793,6 +794,36 @@
 		0DFC532B1095781500B18478 /* backgrnd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backgrnd.png; sourceTree = "<group>"; };
 		0F734B521742737D0084A2F4 /* top_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = top_bg.png; sourceTree = "<group>"; };
 		0F734B531742737D0084A2F4 /* top_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "top_bg@2x.png"; sourceTree = "<group>"; };
+		0FEDD76A174A91A800DF71C0 /* CrashReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrashReporter.h; path = Crittercism/CrashReporter.h; sourceTree = "<group>"; };
+		0FEDD76B174A91A800DF71C0 /* Crittercism.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Crittercism.h; path = Crittercism/Crittercism.h; sourceTree = "<group>"; };
+		0FEDD76C174A91A800DF71C0 /* CrittercismJSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrittercismJSONKit.h; path = Crittercism/CrittercismJSONKit.h; sourceTree = "<group>"; };
+		0FEDD76D174A91A800DF71C0 /* CrittercismReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrittercismReachability.h; path = Crittercism/CrittercismReachability.h; sourceTree = "<group>"; };
+		0FEDD76E174A91A800DF71C0 /* libCrittercismCrashOnly_v3_3_4.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libCrittercismCrashOnly_v3_3_4.a; path = Crittercism/libCrittercismCrashOnly_v3_3_4.a; sourceTree = "<group>"; };
+		0FEDD76F174A91A800DF71C0 /* PLCrashAsync.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLCrashAsync.h; path = Crittercism/PLCrashAsync.h; sourceTree = "<group>"; };
+		0FEDD770174A91A800DF71C0 /* PLCrashAsyncImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLCrashAsyncImage.h; path = Crittercism/PLCrashAsyncImage.h; sourceTree = "<group>"; };
+		0FEDD771174A91A800DF71C0 /* PLCrashAsyncSignalInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLCrashAsyncSignalInfo.h; path = Crittercism/PLCrashAsyncSignalInfo.h; sourceTree = "<group>"; };
+		0FEDD772174A91A800DF71C0 /* PLCrashFrameWalker_arm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLCrashFrameWalker_arm.h; path = Crittercism/PLCrashFrameWalker_arm.h; sourceTree = "<group>"; };
+		0FEDD773174A91A800DF71C0 /* PLCrashFrameWalker_i386.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLCrashFrameWalker_i386.h; path = Crittercism/PLCrashFrameWalker_i386.h; sourceTree = "<group>"; };
+		0FEDD774174A91A800DF71C0 /* PLCrashFrameWalker_ppc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLCrashFrameWalker_ppc.h; path = Crittercism/PLCrashFrameWalker_ppc.h; sourceTree = "<group>"; };
+		0FEDD775174A91A800DF71C0 /* PLCrashFrameWalker_x86_64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLCrashFrameWalker_x86_64.h; path = Crittercism/PLCrashFrameWalker_x86_64.h; sourceTree = "<group>"; };
+		0FEDD776174A91A800DF71C0 /* PLCrashFrameWalker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLCrashFrameWalker.h; path = Crittercism/PLCrashFrameWalker.h; sourceTree = "<group>"; };
+		0FEDD777174A91A800DF71C0 /* PLCrashLogWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLCrashLogWriter.h; path = Crittercism/PLCrashLogWriter.h; sourceTree = "<group>"; };
+		0FEDD778174A91A800DF71C0 /* PLCrashLogWriterEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLCrashLogWriterEncoding.h; path = Crittercism/PLCrashLogWriterEncoding.h; sourceTree = "<group>"; };
+		0FEDD779174A91A800DF71C0 /* PLCrashReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLCrashReport.h; path = Crittercism/PLCrashReport.h; sourceTree = "<group>"; };
+		0FEDD77A174A91A800DF71C0 /* PLCrashReportApplicationInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLCrashReportApplicationInfo.h; path = Crittercism/PLCrashReportApplicationInfo.h; sourceTree = "<group>"; };
+		0FEDD77B174A91A800DF71C0 /* PLCrashReportBinaryImageInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLCrashReportBinaryImageInfo.h; path = Crittercism/PLCrashReportBinaryImageInfo.h; sourceTree = "<group>"; };
+		0FEDD77C174A91A800DF71C0 /* PLCrashReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLCrashReporter.h; path = Crittercism/PLCrashReporter.h; sourceTree = "<group>"; };
+		0FEDD77D174A91A800DF71C0 /* PLCrashReportExceptionInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLCrashReportExceptionInfo.h; path = Crittercism/PLCrashReportExceptionInfo.h; sourceTree = "<group>"; };
+		0FEDD77E174A91A800DF71C0 /* PLCrashReportFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLCrashReportFormatter.h; path = Crittercism/PLCrashReportFormatter.h; sourceTree = "<group>"; };
+		0FEDD77F174A91A800DF71C0 /* PLCrashReportMachineInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLCrashReportMachineInfo.h; path = Crittercism/PLCrashReportMachineInfo.h; sourceTree = "<group>"; };
+		0FEDD780174A91A800DF71C0 /* PLCrashReportProcessInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLCrashReportProcessInfo.h; path = Crittercism/PLCrashReportProcessInfo.h; sourceTree = "<group>"; };
+		0FEDD781174A91A800DF71C0 /* PLCrashReportProcessorInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLCrashReportProcessorInfo.h; path = Crittercism/PLCrashReportProcessorInfo.h; sourceTree = "<group>"; };
+		0FEDD782174A91A800DF71C0 /* PLCrashReportSignalInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLCrashReportSignalInfo.h; path = Crittercism/PLCrashReportSignalInfo.h; sourceTree = "<group>"; };
+		0FEDD783174A91A800DF71C0 /* PLCrashReportSystemInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLCrashReportSystemInfo.h; path = Crittercism/PLCrashReportSystemInfo.h; sourceTree = "<group>"; };
+		0FEDD784174A91A800DF71C0 /* PLCrashReportTextFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLCrashReportTextFormatter.h; path = Crittercism/PLCrashReportTextFormatter.h; sourceTree = "<group>"; };
+		0FEDD785174A91A800DF71C0 /* PLCrashReportThreadInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLCrashReportThreadInfo.h; path = Crittercism/PLCrashReportThreadInfo.h; sourceTree = "<group>"; };
+		0FEDD786174A91A800DF71C0 /* PLCrashSignalHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLCrashSignalHandler.h; path = Crittercism/PLCrashSignalHandler.h; sourceTree = "<group>"; };
+		0FEDD787174A91A800DF71C0 /* PLCrashSysctl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLCrashSysctl.h; path = Crittercism/PLCrashSysctl.h; sourceTree = "<group>"; };
 		0FF29F2B174616280007B309 /* share_flyer_details_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share_flyer_details_bg.png; sourceTree = "<group>"; };
 		0FF29F2C174616280007B309 /* share_flyer_details_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share_flyer_details_bg@2x.png"; sourceTree = "<group>"; };
 		0FF29F2F174629270007B309 /* ShareProgressView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareProgressView.xib; sourceTree = "<group>"; };
@@ -1565,6 +1596,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0FEDD799174A9DF000DF71C0 /* libCrittercismCrashOnly_v3_3_4.a in Frameworks */,
 				0F734B5617427B790084A2F4 /* Accounts.framework in Frameworks */,
 				65F41C8B173BDC03000BA8CB /* libxml2.2.dylib in Frameworks */,
 				0D335121109ABB6A0082810A /* libxml2.dylib in Frameworks */,
@@ -1780,6 +1812,7 @@
 		0DF3A2D7108DF27200D6C887 /* ExternalFrameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0FEDD769174A918C00DF71C0 /* Crittercism */,
 				65A12EA0173D003E00B39DCB /* ObjectiveFlickr */,
 				65F41CCF173BE944000BA8CB /* TumblrUploader */,
 				65F1BEC5173AAE8A00EE6F9F /* TMTumblrSDK */,
@@ -2157,6 +2190,43 @@
 				0DFA8B3510AD851300F779CA /* ImageCache.m */,
 			);
 			path = imageCache;
+			sourceTree = "<group>";
+		};
+		0FEDD769174A918C00DF71C0 /* Crittercism */ = {
+			isa = PBXGroup;
+			children = (
+				0FEDD76E174A91A800DF71C0 /* libCrittercismCrashOnly_v3_3_4.a */,
+				0FEDD76A174A91A800DF71C0 /* CrashReporter.h */,
+				0FEDD76B174A91A800DF71C0 /* Crittercism.h */,
+				0FEDD76C174A91A800DF71C0 /* CrittercismJSONKit.h */,
+				0FEDD76D174A91A800DF71C0 /* CrittercismReachability.h */,
+				0FEDD76F174A91A800DF71C0 /* PLCrashAsync.h */,
+				0FEDD770174A91A800DF71C0 /* PLCrashAsyncImage.h */,
+				0FEDD771174A91A800DF71C0 /* PLCrashAsyncSignalInfo.h */,
+				0FEDD772174A91A800DF71C0 /* PLCrashFrameWalker_arm.h */,
+				0FEDD773174A91A800DF71C0 /* PLCrashFrameWalker_i386.h */,
+				0FEDD774174A91A800DF71C0 /* PLCrashFrameWalker_ppc.h */,
+				0FEDD775174A91A800DF71C0 /* PLCrashFrameWalker_x86_64.h */,
+				0FEDD776174A91A800DF71C0 /* PLCrashFrameWalker.h */,
+				0FEDD777174A91A800DF71C0 /* PLCrashLogWriter.h */,
+				0FEDD778174A91A800DF71C0 /* PLCrashLogWriterEncoding.h */,
+				0FEDD779174A91A800DF71C0 /* PLCrashReport.h */,
+				0FEDD77A174A91A800DF71C0 /* PLCrashReportApplicationInfo.h */,
+				0FEDD77B174A91A800DF71C0 /* PLCrashReportBinaryImageInfo.h */,
+				0FEDD77C174A91A800DF71C0 /* PLCrashReporter.h */,
+				0FEDD77D174A91A800DF71C0 /* PLCrashReportExceptionInfo.h */,
+				0FEDD77E174A91A800DF71C0 /* PLCrashReportFormatter.h */,
+				0FEDD77F174A91A800DF71C0 /* PLCrashReportMachineInfo.h */,
+				0FEDD780174A91A800DF71C0 /* PLCrashReportProcessInfo.h */,
+				0FEDD781174A91A800DF71C0 /* PLCrashReportProcessorInfo.h */,
+				0FEDD782174A91A800DF71C0 /* PLCrashReportSignalInfo.h */,
+				0FEDD783174A91A800DF71C0 /* PLCrashReportSystemInfo.h */,
+				0FEDD784174A91A800DF71C0 /* PLCrashReportTextFormatter.h */,
+				0FEDD785174A91A800DF71C0 /* PLCrashReportThreadInfo.h */,
+				0FEDD786174A91A800DF71C0 /* PLCrashSignalHandler.h */,
+				0FEDD787174A91A800DF71C0 /* PLCrashSysctl.h */,
+			);
+			name = Crittercism;
 			sourceTree = "<group>";
 		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
@@ -3461,7 +3531,7 @@
 					../,
 					./,
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PREBINDING = NO;
@@ -3492,7 +3562,8 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/ExternalFrameworks/AdWhirl\"",
 					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/ExternalFrameworks/FBConnect",
+					"\"$(SRCROOT)/ExternalFrameworks/FBConnect\"",
+					"\"$(SRCROOT)/ExternalFrameworks/Crittercism\"",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
@@ -3530,7 +3601,8 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/ExternalFrameworks/AdWhirl\"",
 					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/ExternalFrameworks/FBConnect",
+					"\"$(SRCROOT)/ExternalFrameworks/FBConnect\"",
+					"\"$(SRCROOT)/ExternalFrameworks/Crittercism\"",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = Flyr;
@@ -3561,7 +3633,8 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/ExternalFrameworks/AdWhirl\"",
 					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/ExternalFrameworks/FBConnect",
+					"\"$(SRCROOT)/ExternalFrameworks/FBConnect\"",
+					"\"$(SRCROOT)/ExternalFrameworks/Crittercism\"",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
@@ -3589,7 +3662,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "./ExternalFrameworks/**";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				PREBINDING = NO;
@@ -3612,7 +3685,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PREBINDING = NO;

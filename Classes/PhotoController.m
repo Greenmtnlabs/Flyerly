@@ -45,6 +45,7 @@
 	imgPicker.delegate =self;
 	imgPicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
 	navBar.alpha =ALPHA1;
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg"] forBarMetrics:UIBarMetricsDefault];
 }
 
 - (void) handleMemoryWarning:(NSNotification *)notification
@@ -1283,12 +1284,13 @@
 	}
 	else if(self.imgPickerFlag == 2){
         
-		[[self.imgPicker parentViewController] dismissModalViewControllerAnimated:YES];
+		[picker dismissModalViewControllerAnimated:YES];
 		UIImage *testImage = [info[UIImagePickerControllerOriginalImage] retain];
 		[self.photoImgView setImage:testImage] ;
 		self.photoTouchFlag = YES;
 		self.lableTouchFlag = NO;
-        [self dismissViewControllerAnimated:YES completion:nil];
+        //[self dismissViewControllerAnimated:YES completion:nil];
+		//[self dismissModalViewControllerAnimated:YES];
 	}
 }
 
@@ -1318,7 +1320,7 @@
 	FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
 	if(appDele.changesFlag)
 	{
-		warningAlert = [[UIAlertView alloc]initWithTitle:@"Warning" message:@"You have not saved your flyr.\nAll progress will be lost." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Continue",nil];
+		warningAlert = [[UIAlertView alloc]initWithTitle:@"Warning" message:@"You have not saved your flyer.\nAll progress will be lost if you continue." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Continue",nil];
 		[warningAlert show];
 	}
 	else
@@ -1337,11 +1339,12 @@
 +(UILabel *)setTitleViewWithTitle:(NSString *)title{
     UILabel *label = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
     label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont boldSystemFontOfSize:16.0];
-    label.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
+    label.font = [UIFont boldSystemFontOfSize:18.0];
     label.textAlignment = NSTextAlignmentCenter;
-    label.textColor = [MyCustomCell colorWithHexString:@"008ec0"];
-    label.text = NSLocalizedString(title, @"");
+    //label.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
+    //label.textColor = [MyCustomCell colorWithHexString:@"008ec0"];
+    label.textColor = [UIColor darkGrayColor];
+    label.text = NSLocalizedString([title uppercaseString], @"");
     [label sizeToFit];
 
     return label;
@@ -1368,7 +1371,7 @@
     //UIBarButtonItem *barLabel = [[UIBarButtonItem alloc] initWithCustomView:addBackgroundLabel];
     self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Add Background"];
     
-    UIButton *textButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 31, 30)];
+    UIButton *textButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 32, 29)];
     [textButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [textButton setBackgroundImage:[UIImage imageNamed:@"t_button"] forState:UIControlStateNormal];
 	[textButton addTarget:self action:@selector(callWrite) forControlEvents:UIControlEventTouchUpInside];

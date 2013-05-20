@@ -31,6 +31,10 @@
     IBOutlet UILabel *savedFlyrLabel;
     IBOutlet UILabel *inviteFriendLabel;
 
+    IBOutlet UIButton *createFlyrButton;
+    IBOutlet UIButton *savedFlyrButton;
+    IBOutlet UIButton *inviteFriendButton;
+    
     IBOutlet UIImageView *firstFlyer;
     IBOutlet UIImageView *secondFlyer;
     IBOutlet UIImageView *thirdFlyer;
@@ -54,6 +58,10 @@
 @property (nonatomic, retain) IBOutlet UILabel *createFlyrLabel;
 @property (nonatomic, retain) IBOutlet UILabel *savedFlyrLabel;
 @property (nonatomic, retain) IBOutlet UILabel *inviteFriendLabel;
+
+@property (nonatomic, retain) IBOutlet UIButton *createFlyrButton;
+@property (nonatomic, retain) IBOutlet UIButton *savedFlyrButton;
+@property (nonatomic, retain) IBOutlet UIButton *inviteFriendButton;
 
 @property (nonatomic, retain) IBOutlet UIImageView *firstFlyer;
 @property (nonatomic, retain) IBOutlet UIImageView *secondFlyer;
