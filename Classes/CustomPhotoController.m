@@ -16,7 +16,7 @@
 #define IMAGE_HEIGHT 309
 #define IMAGE_WIDTH  320
 @implementation CustomPhotoController
-@synthesize scrollView, imageView, image, callbackObject, callbackOnComplete, galleryTable;
+@synthesize scrollView, imageView, image, callbackObject, callbackOnComplete, galleryTable, moveUpButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -34,6 +34,7 @@
     [scrollView release];
     [imageView release];
     [image release];
+    [moveUpButton release];
     [callbackObject release];
     [super dealloc];
 }
@@ -220,6 +221,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    //UIGestureRecognizer *gesture = [[[UIGestureRecognizer alloc] initWithTarget:self action:@selector(increaseHeight:)] autorelease];
+    //gesture.delegate = self;
+    //[moveUpButton addGestureRecognizer:gesture];
+    
     // Do any additional setup after loading the view from its nib.
     UIImage *tmpImage = [self scaleAndRotateImage:image];
     [image release];
@@ -246,6 +252,61 @@
     [self imageCount];
 }
 
+BOOL galleryExpanded = NO;
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    
+    UITouch *anyTouch = [touches anyObject];
+    
+    if ((anyTouch.view == moveUpButton)){
+        
+        if(!galleryExpanded){
+
+            CGPoint location = [anyTouch locationInView:self.view];
+            CGPoint prevLocation = [anyTouch previousLocationInView:self.view];
+            
+            if (prevLocation.y > location.y){
+                moveUpButton.frame = CGRectMake(moveUpButton.frame.origin.x, 133, moveUpButton.frame.size.width, moveUpButton.frame.size.height);
+                
+                galleryTable.frame = CGRectMake(galleryTable.frame.origin.x, 176, galleryTable.frame.size.width, 384);
+                
+            }
+            galleryExpanded = YES;
+            
+        } else {
+            
+            CGPoint location = [anyTouch locationInView:self.view];
+            CGPoint prevLocation = [anyTouch previousLocationInView:self.view];
+            
+            if (prevLocation.y < location.y){
+                moveUpButton.frame = CGRectMake(moveUpButton.frame.origin.x, 333, moveUpButton.frame.size.width, moveUpButton.frame.size.height);
+                
+                galleryTable.frame = CGRectMake(galleryTable.frame.origin.x, 376, galleryTable.frame.size.width, 184);
+                
+            }            
+            galleryExpanded = NO;    
+        }
+    }
+}
+
+/*
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    
+    if ([touch locationInView:self.view].y - [touch previousLocationInView:self.view].y > 0){
+        moveUpButton.frame = CGRectMake(moveUpButton.frame.origin.x, 133, moveUpButton.frame.size.width, moveUpButton.frame.size.height);
+        
+        galleryTable.frame = CGRectMake(galleryTable.frame.origin.x, 176, galleryTable.frame.size.width, galleryTable.frame.size.height + 200);
+        return YES;
+    }
+    
+    // Disallow recognition of tap gestures in the segmented control.
+    //if ((touch.view == moveUpButton)) {//change it to your condition
+    //
+    //}
+    return YES;
+}
+*/
+
 - (void)viewWillAppear:(BOOL)animated {
     // Remember the state so that we may revert once we leave this screen.
     //previosNavigationBarState = self.navigationController.navigationBarHidden;
@@ -255,6 +316,7 @@
     
     [self.navigationItem setRightBarButtonItem:rightBarButton];
 
+    self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"SCALE & CROP"];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

@@ -11,12 +11,14 @@
 #import "FlyrAppDelegate.h"
 #import "HudView.h"
 #import "CustomLabel.h"
+#import "CustomPhotoController.h"
 
 @interface PhotoController : UIViewController<UIActionSheetDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 {
 	MyNavigationBar *navBar;
 	HudView *aHUD;
-	
+    CustomPhotoController *customPhotoController;
+
 	UIImageView *imgView;				
 	UIImageView *templateBckgrnd;
 	UIImageView *textBackgrnd;

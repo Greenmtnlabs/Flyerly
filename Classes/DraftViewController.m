@@ -19,7 +19,7 @@
 
 @implementation DraftViewController
 
-@synthesize selectedFlyerImage,imgView,navBar,fvController,svController,titleView,descriptionView,selectedFlyerDescription,selectedFlyerTitle, detailFileName, imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,loadingView,dic,fromPhotoController,progressView,scrollView,facebookPogressView,twitterPogressView, tumblrPogressView, flickrPogressView, saveToCameraRollLabel;
+@synthesize selectedFlyerImage,imgView,navBar,fvController,svController,titleView,descriptionView,selectedFlyerDescription,selectedFlyerTitle, detailFileName, imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,loadingView,dic,fromPhotoController,progressView,scrollView,facebookPogressView,twitterPogressView, tumblrPogressView, flickrPogressView, saveToCameraRollLabel, saveToRollSwitch;
 
 -(void)callFlyrView{
 	[self.navigationController popToViewController:fvController animated:YES];
@@ -174,16 +174,16 @@
     if([self isAnyNetworkSelected]){
         loadingView =[LoadingView loadingViewInView:self.view  text:@"Sharing..."];
         
-        if([facebookButton isSelected]){
-            [self showFacebookProgressRow];
-            [self shareOnFacebook];
-            //[self fillSuccessStatus:facebookPogressView];
-        }
-        
         if([twitterButton isSelected]){
             [self showTwitterProgressRow];
             [self shareOnTwitter];
             //[self fillSuccessStatus:twitterPogressView];
+        }
+        
+        if([facebookButton isSelected]){
+            [self showFacebookProgressRow];
+            [self shareOnFacebook];
+            //[self fillSuccessStatus:facebookPogressView];
         }
         
         if([flickrButton isSelected]){
@@ -198,16 +198,20 @@
             //[self fillSuccessStatus:tumblrPogressView];
         }
         
-        if([smsButton isSelected]){
-            [self shareOnMMS];
-        }
-        
-        if([emailButton isSelected] && ![smsButton isSelected]){
+        if([emailButton isSelected]){
             [self shareOnEmail];
         }
         
-        if([instagramButton isSelected] && ( ![tumblrButton isSelected] && ![flickrButton isSelected])){
+        if([smsButton isSelected] && ![emailButton isSelected]){
+            [self shareOnMMS];
+        }
+        
+        if([instagramButton isSelected] && ( ![tumblrButton isSelected] && ![flickrButton isSelected] && ![smsButton isSelected])  && ![emailButton isSelected]){
             [self shareOnInstagram];
+        }
+        
+        if([saveToRollSwitch isOn]){
+            UIImageWriteToSavedPhotosAlbum(selectedFlyerImage, nil, nil, nil);
         }
         
         [self showAlert];
@@ -235,8 +239,8 @@
         return true;
     if([smsButton isSelected])
         return true;
-    if([clipboardButton isSelected])
-        return true;
+    //if([clipboardButton isSelected])
+    //    return true;
     
     return false;
 }
@@ -561,7 +565,7 @@
 
 -(void)shareOnTumblr{
 
-    [tumblrPogressView.statusText setText:@""];
+    [tumblrPogressView.statusText setText:@"Sharing..."];
     [tumblrPogressView.statusIcon setBackgroundImage:nil forState:UIControlStateNormal];
 
     [[TMAPIClient sharedInstance] userInfo:^(id data, NSError *error) {
@@ -582,7 +586,7 @@
 
 -(void)shareOnFlickr{
     
-    [flickrPogressView.statusText setText:@""];
+    [flickrPogressView.statusText setText:@"Sharing..."];
     [flickrPogressView.statusIcon setBackgroundImage:nil forState:UIControlStateNormal];
 
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
@@ -599,7 +603,7 @@
 
 -(void)shareOnFacebook{
 
-    [facebookPogressView.statusText setText:@""];
+    [facebookPogressView.statusText setText:@"Sharing..."];
     [facebookPogressView.statusIcon setBackgroundImage:nil forState:UIControlStateNormal];
 
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
@@ -615,7 +619,7 @@
 
 - (void)shareOnTwitter {
     
-    [twitterPogressView.statusText setText:@""];
+    [twitterPogressView.statusText setText:@"Sharing..."];
     [twitterPogressView.statusIcon setBackgroundImage:nil forState:UIControlStateNormal];
 
     ACAccountStore *account = [[ACAccountStore alloc] init];
@@ -651,7 +655,8 @@
                         [self fillSuccessStatus:twitterPogressView];
                     }
                 } else {
-                    [self fillErrorStatus:twitterPogressView];
+                    [self shareOnTwitter];
+                    //[self fillErrorStatus:twitterPogressView];
                 }
             }];
 
@@ -908,7 +913,23 @@
 		case MFMailComposeResultFailed:
 			break;
 	}
-	[controller dismissModalViewControllerAnimated:YES];
+    
+    [controller dismissViewControllerAnimated:YES
+                                   completion:^{
+                                       
+                                       // Open email composer if selected
+                                       if([smsButton isSelected]){
+                                           [self shareOnMMS];
+                                       } else {
+                                           
+                                           if([instagramButton isSelected] && (![tumblrButton isSelected] && ![flickrButton isSelected])){
+
+                                               [self shareOnInstagram];
+                                           }
+                                       }
+                                       
+                                   }];
+	//[controller dismissModalViewControllerAnimated:YES];
 }
 
 -(void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result{
@@ -922,13 +943,13 @@
 	}
     
     [controller dismissViewControllerAnimated:YES
-                             completion:^{
-
-                                 // Open email composer if selected
-                                 if([emailButton isSelected]){
-                                     [self shareOnEmail];
-                                 }
-                             }];
+                                   completion:^{
+                                       
+                                       if([instagramButton isSelected] && (![tumblrButton isSelected] && ![flickrButton isSelected] && ![emailButton isSelected])){
+                                           
+                                           [self shareOnInstagram];
+                                       }
+                                   }];
 }
 
 - (void) uploadFiles:(NSString *)oauthToken oauthSecretKey:(NSString *)oauthSecretKey blogName:(NSString *)blogName{

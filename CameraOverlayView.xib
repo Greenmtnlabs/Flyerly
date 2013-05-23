@@ -175,8 +175,8 @@
 					</object>
 					<object class="IBUIImageView" id="1024412536">
 						<reference key="NSNextResponder" ref="937108305"/>
-						<int key="NSvFlags">304</int>
-						<string key="NSFrame">{{5, 44}, {310, 332}}</string>
+						<int key="NSvFlags">288</int>
+						<string key="NSFrame">{{6, 47}, {308, 305}}</string>
 						<reference key="NSSuperview" ref="937108305"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="739936933"/>
@@ -185,7 +185,7 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">grids</string>
+							<string key="NSResourceName">new_grid_line.png</string>
 						</object>
 					</object>
 					<object class="IBUIImageView" id="1024542996">
@@ -581,7 +581,7 @@
 			<string key="camera_flash.png">{20, 27}</string>
 			<string key="camera_grid.png">{26, 27}</string>
 			<string key="camera_lastpic.png">{54, 54}</string>
-			<string key="grids">{16, 16}</string>
+			<string key="new_grid_line.png">{305, 303}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">2083</string>
 	</data>

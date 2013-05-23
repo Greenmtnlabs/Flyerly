@@ -38,6 +38,7 @@
 	IBOutlet UIButton *clipboardButton;
     
 	IBOutlet UILabel *saveToCameraRollLabel;
+    IBOutlet UISwitch *saveToRollSwitch;
 
 	UIImage *selectedFlyerImage;
 	NSString *selectedFlyerTitle;
@@ -72,6 +73,7 @@
 @property(nonatomic,retain) IBOutlet ShareProgressView *flickrPogressView;
 
 @property(nonatomic,retain) IBOutlet UILabel *saveToCameraRollLabel;
+@property(nonatomic,retain) IBOutlet UISwitch *saveToRollSwitch;
 
 @property(nonatomic,retain) IBOutlet UIScrollView *scrollView;
 @property(nonatomic,retain) IBOutlet UIView *progressView;

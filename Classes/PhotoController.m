@@ -118,7 +118,7 @@
     [takePhotoButton addTarget:self action:@selector(openCustomCamera) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:takePhotoButton];
     [cameraRollButton setBackgroundImage:[UIImage imageNamed:@"camera_roll"] forState:UIControlStateNormal];
-    [cameraRollButton addTarget:self action:@selector(loadPhotoLibrary) forControlEvents:UIControlEventTouchUpInside];
+    [cameraRollButton addTarget:self action:@selector(loadCustomPhotoLibrary) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:cameraRollButton];
 
     [moreLayersLabel setText:@"Add more layers"];
@@ -767,55 +767,10 @@
             msgLabel.borderColor = borderColor;
             msgLabel.lineWidth = 2;
             [msgLabel drawRect:CGRectMake(msgLabel.frame.origin.x, msgLabel.frame.origin.y, msgLabel.frame.size.width, msgLabel.frame.size.height)];
-            
-            /*CGContextRef ctx = UIGraphicsGetCurrentContext();
-            CGContextSetStrokeColorWithColor(ctx, [UIColor blackColor].CGColor );
-            CGContextSetFillColorWithColor(ctx, [UIColor redColor].CGColor );
-            CGContextSetTextDrawingMode(ctx, kCGTextFill);
-            CGContextSetTextDrawingMode(ctx, kCGTextFillStroke);
-            [msgLabel.text drawAtPoint:CGPointMake(0,30) withFont:selectedFont];*/
-            
-            /*msgLabel.layer.shadowColor = [borderColor CGColor];
-            msgLabel.layer.shadowRadius = 4.0f;
-            msgLabel.layer.shadowOpacity = 1;
-            msgLabel.layer.shadowOffset = CGSizeZero;
-            msgLabel.layer.masksToBounds = NO;*/
-            
-            //msgLabel.layer.borderColor = borderColor.CGColor;
-            //msgLabel.layer.borderWidth = 3.0;
 		}
 		i++;
 	}
 }
-
-/*- (void)drawTextInRect:(CGRect)rect{
-    
-    [msgLabel drawTextInRect:rect]; // let super do the work
-    
-    CGSize shadowOffset = msgLabel.shadowOffset;
-    UIColor *textColor = [UIColor blueColor];
-    
-    CGContextRef ctx = UIGraphicsGetCurrentContext();
-    CGContextSetLineWidth(ctx, 1);
-    CGContextSetLineJoin(ctx, kCGLineJoinRound);
-    CGContextSetStrokeColorWithColor(ctx, [UIColor blackColor].CGColor );
-    CGContextSetFillColorWithColor(ctx, [UIColor redColor].CGColor );
-    CGContextSetTextDrawingMode(ctx, kCGTextFill);
-    CGContextSetTextDrawingMode(ctx, kCGTextFillStroke);
-    
-    CGContextSetTextDrawingMode(ctx, kCGTextStroke);
-    msgLabel.textColor = [UIColor greenColor];
-    [msgLabel drawTextInRect:rect];
-    
-    CGContextSetTextDrawingMode(ctx, kCGTextFill);
-    msgLabel.textColor = textColor;
-    msgLabel.shadowOffset = CGSizeMake(0, 0);
-    [msgLabel drawTextInRect:rect];
-    
-    [msgLabel.text drawAtPoint:CGPointMake(0,30) withFont:selectedFont];
-
-    msgLabel.shadowOffset = shadowOffset;
-}*/
 
 -(void)selectWidth:(id)sender{
     
@@ -1200,6 +1155,50 @@
 	}
 }
 
+-(void)loadCustomPhotoLibrary{
+    
+    customPhotoController = [[CustomPhotoController alloc] initWithNibName:@"CustomPhotoController" bundle:nil];
+    customPhotoController.callbackObject = self;    
+    customPhotoController.callbackOnComplete = @selector(onCompleteSelectingImage:);
+    [self setLatestImageAndLoadPhotoLibrary];
+
+    photoTouchFlag = YES;
+    lableTouchFlag = NO;
+
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+-(void)setLatestImageAndLoadPhotoLibrary{
+    ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+    
+    // Enumerate just the photos and videos group by using ALAssetsGroupSavedPhotos.
+    [library enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+        
+        // Within the group enumeration block, filter to enumerate just photos.
+        [group setAssetsFilter:[ALAssetsFilter allPhotos]];
+        
+        // Chooses the photo at the last index
+        [group enumerateAssetsAtIndexes:[NSIndexSet indexSetWithIndex:([group numberOfAssets] - 1)] options:0 usingBlock:^(ALAsset *alAsset, NSUInteger index, BOOL *innerStop) {
+            
+            // The end of the enumeration is signaled by asset == nil.
+            if (alAsset) {
+                ALAssetRepresentation *representation = [alAsset defaultRepresentation];
+                UIImage *latestPhoto = [UIImage imageWithCGImage:[representation fullScreenImage]];
+                
+                if([latestPhoto isKindOfClass:[UIImageView class]]){
+                }
+                // Do something interesting with the AV asset.
+                customPhotoController.image = latestPhoto;
+                [self.navigationController pushViewController:customPhotoController animated:YES];
+                [customPhotoController release];
+            }
+        }];
+    } failureBlock: ^(NSError *error) {
+        // Typically you should handle an error more gracefully than this.
+        NSLog(@"No groups");
+    }];
+}
+
 -(void)loadPhotoLibrary{
 	
     self.imgPicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
@@ -1223,7 +1222,7 @@
 	}
 	else if(self.imgPickerFlag == 2){
         
-		[[self.imgPicker parentViewController] dismissModalViewControllerAnimated:YES];
+		//[[self.imgPicker parentViewController] dismissModalViewControllerAnimated:YES];
 		UIImage *testImage = [selectedImage retain];
 		[self.photoImgView setImage:testImage] ;
 		self.photoTouchFlag = YES;
@@ -1725,7 +1724,7 @@ CGRect initialBounds;
 
 - (void)twoFingerPinch:(UIPinchGestureRecognizer *)gestureRecognizer
 {
-    NSLog(@"Pinch scale: %f", gestureRecognizer.scale);
+    //NSLog(@"Pinch scale: %f", gestureRecognizer.scale);
         
     if (gestureRecognizer.state == UIGestureRecognizerStateBegan)
     {
@@ -2013,12 +2012,12 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 		[heightTabButton setBackgroundImage:[UIImage imageNamed:@"07_height"] forState:UIControlStateNormal];
 		[UIView commitAnimations];
 
-		[self openCamera];
+		[self openCustomCamera];
 	}
     else if(selectedButton == photoTabButton)
 	{
 		imgPickerFlag =2;
-		[self loadPhotoLibrary];
+		[self loadCustomPhotoLibrary];
 		[UIView beginAnimations:nil context:NULL];
 		[UIView setAnimationDuration:0.4f];
 		textBackgrnd.alpha = ALPHA0;
@@ -2124,9 +2123,12 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	UITouch *touch = [touches anyObject];
 	NSInteger numTaps = [touch tapCount];
 
+    CGPoint loc = [touch locationInView:self.imgView];
+    
 	if(numTaps == 1)
 	{
-		if (CGRectContainsPoint([msgLabel frame], [touch locationInView:self.imgView]) && lableTouchFlag )
+		//if (CGRectContainsPoint([self.imgView frame], [touch locationInView:self.imgView]) && lableTouchFlag )
+        if (loc.y <= imgView.frame.size.height && lableTouchFlag )
 		{
 			[self.imgView sendSubviewToBack:photoImgView];
 			[self.imgView bringSubviewToFront:msgLabel];
@@ -2136,7 +2138,8 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 				[self dispatchFirstTouchAtPoint:msgLabel point:[touch locationInView:self.imgView] forEvent:nil];
 			}
 		}	
-		else if (CGRectContainsPoint([photoImgView frame], [touch locationInView:self.imgView]) && photoTouchFlag)
+		//else if (CGRectContainsPoint([photoImgView frame], [touch locationInView:self.imgView]) && photoTouchFlag)
+		else if (loc.y <= (imgView.frame.size.height-(photoImgView.frame.size.height/2)) && photoTouchFlag)
 		{
 			[self.imgView sendSubviewToBack:photoImgView];
 			[self.imgView bringSubviewToFront:msgLabel];
@@ -2155,10 +2158,11 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {  
 	UITouch *touch = [touches anyObject];
-
+    CGPoint loc = [touch locationInView:self.imgView];
 		
 	//if (CGRectContainsPoint([msgLabel frame], [touch locationInView:self.view]) && lableTouchFlag)
-    if (CGRectContainsPoint([msgLabel frame], [touch locationInView:self.imgView]) && lableTouchFlag)
+    //if (CGRectContainsPoint([self.imgView frame], [touch locationInView:self.imgView]) && lableTouchFlag)
+    if (loc.y <= imgView.frame.size.height && lableTouchFlag)
 	{
 		
 		for (UITouch *touch in touches){
@@ -2168,8 +2172,9 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 		}
 		
 	}
-	else if (CGRectContainsPoint([photoImgView frame], [touch locationInView:self.imgView]) && photoTouchFlag)
 	//else if (CGRectContainsPoint([photoImgView frame], [touch locationInView:self.view]) && photoTouchFlag)
+	//else if (CGRectContainsPoint([photoImgView frame], [touch locationInView:self.imgView]) && photoTouchFlag)
+	else if (loc.y <= (imgView.frame.size.height-(photoImgView.frame.size.height/2)) && photoTouchFlag)
 	{
 		for (UITouch *touch in touches){
 			[self dispatchTouchEvent:photoImgView toPosition:[touch locationInView:self.imgView]];
@@ -2181,6 +2186,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    /*
 	UITouch *touch = [touches anyObject];
 	[self dispatchTouchEndEvent:msgLabel toPosition:[touch locationInView:self.imgView]];
 	[self dispatchTouchEndEvent:photoImgView toPosition:[touch locationInView:self.imgView]];
@@ -2204,6 +2210,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 			//[self dispatchFirstTouchAtPoint:photoImgView point:[touch locationInView:self.view] forEvent:nil];
 		}
 	}
+     */
 }
 /************************************************************************************************/
 

@@ -38,6 +38,8 @@
 
     IBOutlet UITableView *uiTableView;
 	NSMutableArray *contactsArray;
+	NSMutableArray *facebookArray;
+	NSMutableArray *twitterArray;
     NSMutableArray *filteredArray;
     NSMutableArray *backupArray;
     
@@ -62,6 +64,8 @@
 
 @property(nonatomic,retain) IBOutlet UITableView *uiTableView;
 @property(nonatomic,retain) NSMutableArray *contactsArray;
+@property(nonatomic,retain) NSMutableArray *facebookArray;
+@property(nonatomic,retain) NSMutableArray *twitterArray;
 @property(nonatomic,retain) NSMutableArray *filteredArray;
 @property(nonatomic,retain) NSMutableArray *backupArray;
 @property(nonatomic,retain) NSMutableArray *deviceContactItems;

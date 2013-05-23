@@ -122,6 +122,7 @@
 								<bool key="IBUIAdjustsFontSizeToFit">YES</bool>
 								<float key="IBUIMinimumFontSize">17</float>
 								<object class="IBUITextInputTraits" key="IBUITextInputTraits">
+									<int key="IBUIAutocapitalizationType">2</int>
 									<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								</object>
 								<object class="IBUIFontDescription" key="IBUIFontDescription" id="857520876">
@@ -147,7 +148,7 @@
 								<int key="IBUIContentMode">7</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<string key="IBUIText">Save to camera roll</string>
+								<string key="IBUIText">Save to Camera Roll</string>
 								<object class="NSColor" key="IBUITextColor">
 									<int key="NSColorSpace">1</int>
 									<bytes key="NSRGB">MCAwIDAAA</bytes>
@@ -406,6 +407,7 @@
 								<string key="NSFrame">{{234, 355}, {82, 40}}</string>
 								<reference key="NSSuperview" ref="82517146"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -597,6 +599,14 @@
 						<reference key="destination" ref="748439247"/>
 					</object>
 					<int key="connectionID">49</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">saveToRollSwitch</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="1031333957"/>
+					</object>
+					<int key="connectionID">50</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -913,7 +923,7 @@
 				<reference key="dict.values" ref="317526666"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">49</int>
+			<int key="maxID">50</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1010,6 +1020,7 @@
 							<string>instagramButton</string>
 							<string>progressView</string>
 							<string>saveToCameraRollLabel</string>
+							<string>saveToRollSwitch</string>
 							<string>scrollView</string>
 							<string>smsButton</string>
 							<string>titleView</string>
@@ -1031,6 +1042,7 @@
 							<string>UIButton</string>
 							<string>UIView</string>
 							<string>UILabel</string>
+							<string>UISwitch</string>
 							<string>UIScrollView</string>
 							<string>UIButton</string>
 							<string>UITextField</string>
@@ -1055,6 +1067,7 @@
 							<string>instagramButton</string>
 							<string>progressView</string>
 							<string>saveToCameraRollLabel</string>
+							<string>saveToRollSwitch</string>
 							<string>scrollView</string>
 							<string>smsButton</string>
 							<string>titleView</string>
@@ -1108,6 +1121,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">saveToCameraRollLabel</string>
 								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">saveToRollSwitch</string>
+								<string key="candidateClassName">UISwitch</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">scrollView</string>

@@ -16,7 +16,7 @@
 #import "PhotoController.h"
 
 @implementation AddFriendsController
-@synthesize uiTableView, contactsArray, deviceContactItems, contactsLabel, facebookLabel, twitterLabel, doneLabel, selectAllLabel, unSelectAllLabel, inviteLabel, contactsButton, facebookButton, twitterButton, loadingView, filteredArray, searchTextField, backupArray;
+@synthesize uiTableView, contactsArray, deviceContactItems, contactsLabel, facebookLabel, twitterLabel, doneLabel, selectAllLabel, unSelectAllLabel, inviteLabel, contactsButton, facebookButton, twitterButton, loadingView, filteredArray, searchTextField, backupArray, facebookArray, twitterArray;
 
 const int TWITTER_TAB = 2;
 const int FACEBOOK_TAB = 1;
@@ -109,42 +109,52 @@ BOOL firstTableLoad = YES;
     [self setUnselectTab:sender];
 
     // init contact array
-    contactsArray = [[NSMutableArray alloc] init];
-    ABAddressBookRef m_addressbook = ABAddressBookCreate();
-    
-    // ABAddressBookCreateWithOptions is iOS 6 and up.
-    if (&ABAddressBookCreateWithOptions) {
-        NSError *error = nil;
-        m_addressbook = ABAddressBookCreateWithOptions(NULL, (CFErrorRef *)&error);
+    if(contactsArray){
+        
+        // Reload table data after all the contacts get loaded
+        backupArray = nil;
+        backupArray = contactsArray;
+        [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+        //[self.uiTableView reloadData];
+
+    } else {
+        contactsArray = [[NSMutableArray alloc] init];
+        ABAddressBookRef m_addressbook = ABAddressBookCreate();
+        
+        // ABAddressBookCreateWithOptions is iOS 6 and up.
+        if (&ABAddressBookCreateWithOptions) {
+            NSError *error = nil;
+            m_addressbook = ABAddressBookCreateWithOptions(NULL, (CFErrorRef *)&error);
 #if DEBUG
-        if (error) { NSLog(@"%@", error); }
+            if (error) { NSLog(@"%@", error); }
 #endif
-    }
-    
-    if (m_addressbook == NULL) {
-        m_addressbook = ABAddressBookCreate();
-    }
-    
-    if (m_addressbook) {
-        // ABAddressBookRequestAccessWithCompletion is iOS 6 and up.
-        if (&ABAddressBookRequestAccessWithCompletion) {
-            ABAddressBookRequestAccessWithCompletion(m_addressbook,
-                                                     ^(bool granted, CFErrorRef error) {
-                                                         if (granted) {
-                                                             // constructInThread: will CFRelease ab.
-                                                             [NSThread detachNewThreadSelector:@selector(constructInThread:)
-                                                                                      toTarget:self
-                                                                                    withObject:m_addressbook];
-                                                         } else {
-                                                             CFRelease(m_addressbook);
-                                                             // Ignore the error
-                                                         }
-                                                     });
-        } else {
-            // constructInThread: will CFRelease ab.
-            [NSThread detachNewThreadSelector:@selector(constructInThread:)
-                                     toTarget:self
-                                   withObject:m_addressbook];
+        }
+        
+        if (m_addressbook == NULL) {
+            m_addressbook = ABAddressBookCreate();
+        }
+        
+        if (m_addressbook) {
+            // ABAddressBookRequestAccessWithCompletion is iOS 6 and up.
+            if (&ABAddressBookRequestAccessWithCompletion) {
+                ABAddressBookRequestAccessWithCompletion(m_addressbook,
+                                                         ^(bool granted, CFErrorRef error) {
+                                                             if (granted) {
+                                                                 // constructInThread: will CFRelease ab.
+                                                                 [NSThread detachNewThreadSelector:@selector(constructInThread:)
+                                                                                          toTarget:self
+                                                                                        withObject:m_addressbook];
+                                                             } else {
+                                                                 CFRelease(m_addressbook);
+                                                                 // Ignore the error
+                                                             }
+                                                         });
+            } else {
+                // constructInThread: will CFRelease ab.
+                [NSThread detachNewThreadSelector:@selector(constructInThread:)
+                                         toTarget:self
+                                       withObject:m_addressbook];
+            }
         }
     }
 }
@@ -219,7 +229,8 @@ BOOL firstTableLoad = YES;
     // Reload table data after all the contacts get loaded
     backupArray = nil;
     backupArray = contactsArray;
-    [self.uiTableView reloadData];
+    [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+    //[self.uiTableView reloadData];
 }
 
 /**
@@ -235,24 +246,35 @@ BOOL firstTableLoad = YES;
     
     [self setUnselectTab:sender];
     
-    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-    appDelegate.facebook.sessionDelegate = self;
-    
-    if([appDelegate.facebook isSessionValid]) {
-
-        loadingView =[LoadingView loadingViewInView:self.view  text:@"Loading..."];
-        loadingViewFlag = YES;
+    // init facebook array
+    if(facebookArray){
         
-        //self.contactsArray = [[NSMutableArray alloc] initWithCapacity:[users count]];
-        self.contactsArray = [[NSMutableArray alloc] init];
-
-        [appDelegate.facebook requestWithGraphPath:@"me/friends?fields=name,picture.height(35).width(35).type(small)&limit=30&offset=0" andDelegate:self];
-
-    } else {
+        // Reload table data after all the contacts get loaded
+        backupArray = nil;
+        backupArray = facebookArray;
+        [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+        //[self.uiTableView reloadData];
         
-        [appDelegate.facebook authorize:[NSArray arrayWithObjects: @"read_stream",
-                                      @"publish_stream", nil]];
+    } else{
         
+        FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+        appDelegate.facebook.sessionDelegate = self;
+        
+        if([appDelegate.facebook isSessionValid]) {
+            
+            //loadingView =[LoadingView loadingViewInView:self.view  text:@"Loading..."];
+            //loadingViewFlag = YES;
+            
+            self.facebookArray = [[NSMutableArray alloc] init];
+            
+            [appDelegate.facebook requestWithGraphPath:@"me/friends?fields=name,picture.height(35).width(35).type(small)&limit=2&offset=0" andDelegate:self];
+            
+        } else {
+            
+            [appDelegate.facebook authorize:[NSArray arrayWithObjects: @"read_stream",
+                                             @"publish_stream", nil]];
+            
+        }
     }
 }
 
@@ -277,22 +299,22 @@ int totalCount = 0;
             [dOfPerson setObject:image forKey:@"image"];
         }
         //[dOfPerson setObject:[[[friendData objectForKey:@"picture"] objectForKey:@"data"] objectForKey:@"url"] forKey:@"image"];
-        [self.contactsArray addObject:dOfPerson];
+        [self.facebookArray addObject:dOfPerson];
         
         count++;
         totalCount++;
     }
     
     backupArray = nil;
-    backupArray = contactsArray;
-    [self.uiTableView reloadData];
+    backupArray = facebookArray;
+    [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+    //[self.uiTableView reloadData];
     
-    if(count == 30){
+    if(count == 2){
         FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-        [appDelegate.facebook requestWithGraphPath:[NSString stringWithFormat:@"me/friends?fields=name,picture.height(35).width(35).type(small)&limit=30&offset=%d", totalCount] andDelegate:self];
+        [appDelegate.facebook requestWithGraphPath:[NSString stringWithFormat:@"me/friends?fields=name,picture.height(35).width(35).type(small)&limit=2&offset=%d", totalCount] andDelegate:self];
 
-        loadingView =[LoadingView loadingViewInView:self.view text:@"Loading..."];
-        //loadingViewFlag = YES;
+        //loadingView =[LoadingView loadingViewInView:self.view text:@"Loading..."];
         
     } else {
         totalCount = 0;
@@ -314,51 +336,62 @@ int totalCount = 0;
         return;
     }
     
-    loadingView =[LoadingView loadingViewInView:self.view text:@"Loading..."];
-    loadingViewFlag = YES;
-
     selectedTab = TWITTER_TAB;
     [self setUnselectTab:sender];
     
-    if([TWTweetComposeViewController canSendTweet]){
-
-        ACAccountStore *account = [[ACAccountStore alloc] init];
-        ACAccountType *accountType = [account accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+    // init twitter array
+    if(twitterArray){
         
-        // Request access from the user to access their Twitter account
-        [account requestAccessToAccountsWithType:accountType withCompletionHandler:^(BOOL granted, NSError *error) {
-            // Did user allow us access?
-            if (granted == YES) {
-                
-                //grantedBool = YES;
-                
-                // Populate array with all available Twitter accounts
-                NSArray *arrayOfAccounts = [account accountsWithAccountType:accountType];
-                
-                // Sanity check
-                if ([arrayOfAccounts count] > 0) {
+        // Reload table data after all the contacts get loaded
+        backupArray = nil;
+        backupArray = twitterArray;
+        [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+        //[self.uiTableView reloadData];
+        
+    } else{
+
+        loadingView =[LoadingView loadingViewInView:self.view text:@"Loading..."];
+        loadingViewFlag = YES;
+
+        if([TWTweetComposeViewController canSendTweet]){
+            
+            ACAccountStore *account = [[ACAccountStore alloc] init];
+            ACAccountType *accountType = [account accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+            
+            // Request access from the user to access their Twitter account
+            [account requestAccessToAccountsWithType:accountType withCompletionHandler:^(BOOL granted, NSError *error) {
+                // Did user allow us access?
+                if (granted == YES) {
                     
-                    self.contactsArray = [[NSMutableArray alloc] init];
-
-                    [self cursoredTwitterContacts:[NSString stringWithFormat:@"%d", -1] arrayOfAccounts:arrayOfAccounts];
+                    //grantedBool = YES;
+                    
+                    // Populate array with all available Twitter accounts
+                    NSArray *arrayOfAccounts = [account accountsWithAccountType:accountType];
+                    
+                    // Sanity check
+                    if ([arrayOfAccounts count] > 0) {
+                        
+                        self.twitterArray = [[NSMutableArray alloc] init];
+                        
+                        [self cursoredTwitterContacts:[NSString stringWithFormat:@"%d", -1] arrayOfAccounts:arrayOfAccounts];
+                    }
                 }
-            }
-        }];
-    
-    } else {
-        
-        [self showAlert:@"No Twitter connection" message:@"You must be connected to Twitter to get contact list."];
-        
-        if(loadingViewFlag){
-            for (UIView *subview in self.view.subviews) {
-                if([subview isKindOfClass:[LoadingView class]]){
-                    [subview removeFromSuperview];
-                    loadingViewFlag = NO;
+            }];
+            
+        } else {
+            
+            [self showAlert:@"No Twitter connection" message:@"You must be connected to Twitter to get contact list."];
+            
+            if(loadingViewFlag){
+                for (UIView *subview in self.view.subviews) {
+                    if([subview isKindOfClass:[LoadingView class]]){
+                        [subview removeFromSuperview];
+                        loadingViewFlag = NO;
+                    }
                 }
             }
         }
     }
-    
 }
 
 -(void)cursoredTwitterContacts:(NSString *)cursor arrayOfAccounts:(NSArray *)arrayOfAccounts{
@@ -409,7 +442,7 @@ int totalCount = 0;
                     [dOfPerson setObject:image forKey:@"image"];
                 }
                 
-                [self.contactsArray addObject:dOfPerson];
+                [self.twitterArray addObject:dOfPerson];
             }
 
             nextCursor = [followers objectForKey:@"next_cursor"];
@@ -417,9 +450,12 @@ int totalCount = 0;
         }
 
         backupArray = nil;
-        backupArray = contactsArray;
+        backupArray = twitterArray;
         if([nextCursor compare:[NSDecimalNumber zero]] == NSOrderedSame){
-            [self.uiTableView reloadData];
+            
+            [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+            
+            //[self.uiTableView reloadData];
         }else{
             [self cursoredTwitterContacts:[NSString stringWithFormat:@"%@", nextCursor] arrayOfAccounts:arrayOfAccounts];
         }
@@ -467,8 +503,9 @@ int totalCount = 0;
                     NSLog(@"Twitter response, HTTP response: %i", [urlResponse statusCode]);
                     
                     backupArray = nil;
-                    backupArray = contactsArray;
-                    [self.uiTableView reloadData];
+                    backupArray = twitterArray;
+                    [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+                    //[self.uiTableView reloadData];
                 }];
             }
         }
@@ -548,7 +585,9 @@ int totalCount = 0;
         
         [FBRequestConnection startForPostStatusUpdate:@"I am using the flyerly app to create and share flyers on the go! - http://www.flyr.us" place:@"144479625584966" tags:identifiers completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
             
-            //NSLog(@"New Result: %@", result);
+            NSLog(@"New Result: %@", result);
+            NSLog(@"Error: %@", error);
+
             [self showAlert:@"Invited !" message:@"Your selected contacts have been invited to flyerly!"];
         }];
     }];
@@ -637,14 +676,23 @@ int totalCount = 0;
     return 1;
 }
 
+-(NSArray *) getArrayOfSelectedTab{
+    if(selectedTab == CONTACTS_TAB)
+        return contactsArray;
+    else if(selectedTab == FACEBOOK_TAB)
+        return facebookArray;
+    else if(selectedTab == TWITTER_TAB)
+        return twitterArray;
+}
+
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
     // since we have two contacts in single row we have to divide it by 2
-    int count = ([contactsArray count]) / 2;
+    int count = ([[self getArrayOfSelectedTab] count]) / 2;
     
     // Add one if contact counts are odd
-    if(([self.contactsArray count] % 2) == 1){
+    if(([[self getArrayOfSelectedTab] count] % 2) == 1){
         count++;
     }
     
@@ -730,7 +778,7 @@ int totalCount = 0;
     }
     
     // Get left contact data
-    NSMutableDictionary *dict1 = [self.contactsArray objectAtIndex:index];
+    NSMutableDictionary *dict1 = [[self getArrayOfSelectedTab] objectAtIndex:index];
     NSString *name1 = [dict1 objectForKey:@"name"];
     __block UIImage *image1 = nil;
     if(selectedTab == FACEBOOK_TAB){
@@ -746,8 +794,8 @@ int totalCount = 0;
     __block UIImage *image2 = nil;
 
     // Check index
-    if([self.contactsArray count] > (index+ 1)){
-        dict2 = [self.contactsArray objectAtIndex:(index + 1)];
+    if([[self getArrayOfSelectedTab] count] > (index+ 1)){
+        dict2 = [[self getArrayOfSelectedTab] objectAtIndex:(index + 1)];
         name2 = [dict2 objectForKey:@"name"];
         
         if(selectedTab == FACEBOOK_TAB){
@@ -889,8 +937,16 @@ int totalCount = 0;
     NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
 
     if([newString isEqualToString:@""]){
-        contactsArray = backupArray;
-        [self.uiTableView reloadData];
+        
+        if(selectedTab == CONTACTS_TAB)
+            contactsArray = backupArray;
+        else if (selectedTab == FACEBOOK_TAB)
+            facebookArray = backupArray;
+        else if(selectedTab == TWITTER_TAB)
+            twitterArray = backupArray;
+        
+        [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+        //[self.uiTableView reloadData];
         return YES;
     }
     
@@ -902,7 +958,9 @@ int totalCount = 0;
         NSMutableDictionary *dict1 = [self.backupArray objectAtIndex:contactIndex];
         NSString *name1 = [dict1 objectForKey:@"name"];
         
-        if([[name1 lowercaseString] hasPrefix:[newString lowercaseString]]){
+        if([[name1 lowercaseString] rangeOfString:[newString lowercaseString]].location == NSNotFound){
+        } else {
+            //if([[name1 lowercaseString] hasPrefix:[newString lowercaseString]]){
             [filteredArray addObject:dict1];
         }
     }
@@ -911,9 +969,15 @@ int totalCount = 0;
     //NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
     //sortedArray = [contactsArray sortedArrayUsingDescriptors:sortDescriptors];
     
-    contactsArray = filteredArray;
+    if(selectedTab == CONTACTS_TAB)
+        contactsArray = filteredArray;
+    else if (selectedTab == FACEBOOK_TAB)
+        facebookArray = filteredArray;
+    else if(selectedTab == TWITTER_TAB)
+        twitterArray = filteredArray;
     
-    [self.uiTableView reloadData];
+    [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+    //[self.uiTableView reloadData];
 
     return YES;
 }
@@ -965,6 +1029,8 @@ int totalCount = 0;
     
     uiTableView = nil;
     contactsArray = nil;
+    facebookArray = nil;
+    twitterArray = nil;
     deviceContactItems = nil;
     
     [backupArray release];

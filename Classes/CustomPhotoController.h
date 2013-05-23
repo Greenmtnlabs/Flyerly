@@ -27,6 +27,9 @@
     // The image to be cropped.
     UIImage      *image;
     
+    // Move up view.
+    UIImageView      *moveUpButton;
+    
     // Report back the image.
     SEL callbackOnComplete;
     id  callbackObject;
@@ -35,6 +38,7 @@
 @property (nonatomic, retain) IBOutlet UITableView *galleryTable;
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, retain) IBOutlet UIImageView *imageView;
+@property (nonatomic, retain) IBOutlet UIImageView *moveUpButton;
 @property (nonatomic, retain) UIImage *image;
 @property (nonatomic, retain) id callbackObject;
 @property (nonatomic) SEL callbackOnComplete;
