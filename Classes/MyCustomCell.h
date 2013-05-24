@@ -16,8 +16,9 @@
 	UIImageView *cellImage;
 	UIImageView *indicator;
     NSString *filePath;
-	
+    UILabel *createLabel;
 }
+@property(nonatomic, retain) UILabel *createLabel;
 @property(nonatomic, retain) UILabel * nameLabel;
 @property(nonatomic, retain) UILabel * descriptionLabel;
 @property(nonatomic, retain) UILabel * dateLabel;

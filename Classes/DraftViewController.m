@@ -519,7 +519,7 @@
     if([MFMailComposeViewController canSendMail]){
         
         picker.mailComposeDelegate = self;
-        [picker setSubject:@"Check out my Flyr..."];
+        [picker setSubject:@"You've received a NEW flyerly..."];
         
         // Set up recipients
         NSArray *toRecipients = [[[NSArray alloc]init]autorelease];
@@ -529,12 +529,14 @@
         [picker setCcRecipients:ccRecipients];
         [picker setBccRecipients:bccRecipients];
 
+        //NSString *emailBody = [NSString stringWithFormat:@"%@ %@", selectedFlyerDescription, @"#flyerly"];
+        NSString *emailBody = [NSString stringWithFormat:@"<font size='4'><a href = '%@'>Share a flyer</a></font>", @"http://www.flyer.us"];
+        [picker setMessageBody:emailBody isHTML:YES];
+
         // Fill out the email body text
         NSData *imageData = UIImagePNGRepresentation(selectedFlyerImage);
         [picker addAttachmentData:imageData mimeType:@"image/png" fileName:@"flyr.png"];
         
-        NSString *emailBody = [NSString stringWithFormat:@"%@ %@", selectedFlyerDescription, @"#flyerly"];
-        [picker setMessageBody:emailBody isHTML:NO];
         [self presentModalViewController:picker animated:YES];
         [picker release];
     }

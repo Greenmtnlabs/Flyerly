@@ -906,7 +906,7 @@
 		}
         
         if(IS_IPHONE_5){
-            [fontScrollView setContentSize:CGSizeMake(320, curYLoc + kScrollObjHeight)];
+            [fontScrollView setContentSize:CGSizeMake(320, curYLoc)];
         } else {
             [fontScrollView setContentSize:CGSizeMake((  [fontArray count]*(kScrollObjWidth+5)), [fontScrollView bounds].size.height)];
         }
@@ -946,7 +946,7 @@
 		}
         
         if(IS_IPHONE_5){
-            [colorScrollView setContentSize:CGSizeMake(320, curYLoc + kScrollObjHeight)];
+            [colorScrollView setContentSize:CGSizeMake(320, curYLoc)];
         } else {
             [colorScrollView setContentSize:CGSizeMake((  [colorArray count]*(kScrollObjWidth+5)), [colorScrollView bounds].size.height)];
         }
@@ -986,7 +986,7 @@
 		}
         
         if(IS_IPHONE_5){
-            [sizeScrollView setContentSize:CGSizeMake(320, curYLoc + kScrollObjHeight)];
+            [sizeScrollView setContentSize:CGSizeMake(320, curYLoc)];
         } else {
             [sizeScrollView setContentSize:CGSizeMake((  [SIZE_ARRAY count]*(kScrollObjWidth+5)), [sizeScrollView bounds].size.height)];
         }
@@ -1026,7 +1026,7 @@
 		}
         
         if(IS_IPHONE_5){
-            [borderScrollView setContentSize:CGSizeMake(320, curYLoc + kScrollObjHeight)];
+            [borderScrollView setContentSize:CGSizeMake(320, curYLoc)];
         } else {
             [borderScrollView setContentSize:CGSizeMake((  [borderArray count]*(kScrollObjWidth+5)), [borderScrollView bounds].size.height)];
         }
@@ -1066,7 +1066,7 @@
 		}
         
         if(IS_IPHONE_5){
-            [fontBorderScrollView setContentSize:CGSizeMake(320, curYLoc + kScrollObjHeight)];
+            [fontBorderScrollView setContentSize:CGSizeMake(320, curYLoc)];
         } else {
             [fontBorderScrollView setContentSize:CGSizeMake((  [borderArray count]*(kScrollObjWidth+5)), [fontBorderScrollView bounds].size.height)];
         }

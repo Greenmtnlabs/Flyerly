@@ -20,7 +20,7 @@
 
 #define CELL_HEIGHT				100
 
-@synthesize nameLabel, descriptionLabel, dateLabel, filePath;
+@synthesize nameLabel, descriptionLabel, dateLabel, filePath, createLabel;
 @synthesize cellImage,indicator;
 
 - (id)initWithFrame:(CGRect)frame reuseIdentifier:(NSString *)reuseIdentifier {
@@ -52,10 +52,10 @@
 	[self.contentView addSubview:descriptionLabel];
 	
 	CGRect createdRect = CGRectMake(98, 50, 35.0f,19);
-	UILabel *createLabel = [[UILabel alloc] initWithFrame:createdRect];
+	createLabel = [[UILabel alloc] initWithFrame:createdRect];
     [createLabel setFont:[UIFont fontWithName:@"Signika-Regular" size:8]];
     [createLabel setTextColor:[MyCustomCell colorWithHexString:@"929292"]];
-    [createLabel setText:@"Created:"];
+    [createLabel setText:@"Saved:"];
     createLabel.backgroundColor = [UIColor clearColor];
 	[self.contentView addSubview:createLabel];
 	
@@ -109,6 +109,7 @@
     
     if([[arr objectAtIndex:0] isEqualToString:@"1"]){
         [facebookButon setImage:[UIImage imageNamed:@"facebook_share_saved"] forState:UIControlStateNormal];
+        [createLabel setText:@"Shared:"];
     } else {
         [facebookButon setImage:[UIImage imageNamed:@"facebook_disabled_saved"] forState:UIControlStateNormal];
     }
@@ -122,6 +123,7 @@
     
     if([[arr objectAtIndex:1] isEqualToString:@"1"]){
         [twitterButon setImage:[UIImage imageNamed:@"twitter_share_saved"] forState:UIControlStateNormal];
+        [createLabel setText:@"Shared:"];
     } else {
         [twitterButon setImage:[UIImage imageNamed:@"twitter_disabled_saved"] forState:UIControlStateNormal];
     }
@@ -135,6 +137,7 @@
     
     if([[arr objectAtIndex:2] isEqualToString:@"1"]){
         [inboxButon setImage:[UIImage imageNamed:@"email_share_saved"] forState:UIControlStateNormal];
+        [createLabel setText:@"Shared:"];
     } else {
         [inboxButon setImage:[UIImage imageNamed:@"email_disabled_saved"] forState:UIControlStateNormal];
     }
@@ -148,6 +151,7 @@
     
     if([[arr objectAtIndex:5] isEqualToString:@"1"]){
         [cameraButon setImage:[UIImage imageNamed:@"instagram_share_saved"] forState:UIControlStateNormal];
+        [createLabel setText:@"Shared:"];
     } else {
         [cameraButon setImage:[UIImage imageNamed:@"instagram_disabled_saved"] forState:UIControlStateNormal];
     }
@@ -161,6 +165,7 @@
     
     if([[arr objectAtIndex:4] isEqualToString:@"1"]){
         [flickrButon setImage:[UIImage imageNamed:@"flickr_share_saved"] forState:UIControlStateNormal];
+        [createLabel setText:@"Shared:"];
     } else {
         [flickrButon setImage:[UIImage imageNamed:@"flickr_disabled_saved"] forState:UIControlStateNormal];
     }
@@ -174,6 +179,7 @@
     
     if([[arr objectAtIndex:3] isEqualToString:@"1"]){
         [tumblrButon setImage:[UIImage imageNamed:@"tumblr_share_saved"] forState:UIControlStateNormal];
+        [createLabel setText:@"Shared:"];
     } else {
         [tumblrButon setImage:[UIImage imageNamed:@"tumblr_disabled_saved"] forState:UIControlStateNormal];
     }

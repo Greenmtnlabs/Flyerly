@@ -257,6 +257,56 @@ BOOL firstTableLoad = YES;
         
     } else{
         
+        /*
+        ACAccountStore *accountStore = [[ACAccountStore alloc]init];
+        ACAccountType *FBaccountType= [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
+        NSDictionary *options = @{ACFacebookAppIdKey : @"136691489852349",
+                                  ACFacebookPermissionsKey : @[@"email", @"publish_stream"],
+                                  ACFacebookAudienceKey:ACFacebookAudienceFriends};
+
+        [accountStore requestAccessToAccountsWithType:FBaccountType options:options completion:^(BOOL granted, NSError *error) {
+            
+            if (granted) {
+
+                // Populate array with all available Twitter accounts
+                NSArray *arrayOfAccounts = [accountStore accountsWithAccountType:FBaccountType];
+                ACAccount *account = [arrayOfAccounts lastObject];
+                
+                // Sanity check
+                if ([arrayOfAccounts count] > 0) {
+                    
+                    NSURL *requestURL = [NSURL URLWithString:@"https://graph.facebook.com/me/friends"];
+                    SLRequest *request = [SLRequest requestForServiceType:SLServiceTypeFacebook
+                                                            requestMethod:SLRequestMethodGET
+                                                                      URL:requestURL
+                                                               parameters:@{@"fields":@"name,picture.height(35).width(35).type(small)", @"limit":@"2&offset=0"}];
+                    request.account = account;
+
+                    [request performRequestWithHandler:^(NSData *data,
+                                                         NSHTTPURLResponse *response,
+                                                         NSError *error) {
+                        
+                        if(!error){
+                            NSDictionary *list =[NSJSONSerialization JSONObjectWithData:data
+                                                                                options:kNilOptions error:&error];
+                            NSLog(@"Dictionary contains: %@", list );
+                            [self request:nil didLoad:list];
+                        }
+                        else{
+                            //handle error gracefully
+                        }
+                        
+                    }];
+                }
+
+            } else {
+                //Fail gracefully...
+                NSLog(@"error getting permission %@",error);
+            }
+        }];
+        */
+        
+        
         FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
         appDelegate.facebook.sessionDelegate = self;
         
@@ -546,7 +596,7 @@ int totalCount = 0;
                 [self sendTwitterMessage:@"I am using the flyerly app to create and share flyers on the go! -                                    http://www.flyr.us" screenName:follower];
             }
             
-            [self showAlert:@"Invited !" message:@"Your selected contacts have been invited to flyerly!"];
+            [self showAlert:@"Invited !" message:@"You have successfully invited your friends to join flyerly."];
 
         }else if(selectedTab == 1){
             
@@ -571,7 +621,7 @@ int totalCount = 0;
             NSLog(@"Failed");
             break;
         case MessageComposeResultSent:
-            [self showAlert:@"Invited !" message:@"Your selected contacts have been invited to flyerly!"];
+            [self showAlert:@"Invited !" message:@"You have successfully invited your friends to join flyerly."];
             break;
         default:
             break;
@@ -591,7 +641,7 @@ int totalCount = 0;
             NSLog(@"New Result: %@", result);
             NSLog(@"Error: %@", error);
 
-            [self showAlert:@"Invited !" message:@"Your selected contacts have been invited to flyerly!"];
+            [self showAlert:@"Invited !" message:@"You have successfully invited your friends to join flyerly."];
         }];
     }];
 }
