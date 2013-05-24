@@ -44,14 +44,53 @@
     loadingView = nil;
 	loadingView = [[LoadingView alloc]init];
 
-    [facebookButton setSelected:NO];
-    [twitterButton setSelected:NO];
-    [instagramButton setSelected:NO];
-    [emailButton setSelected:NO];
-    [tumblrButton setSelected:NO];
-    [flickrButton setSelected:NO];
-    [smsButton setSelected:NO];
-    [clipboardButton setSelected:NO];
+    if([[NSUserDefaults standardUserDefaults] stringForKey:@"facebookSetting"]){
+        [facebookButton setSelected:YES];
+    }else{
+        [facebookButton setSelected:NO];
+    }
+    
+    if([[NSUserDefaults standardUserDefaults] stringForKey:@"twitterSetting"]){
+        [twitterButton setSelected:YES];
+    }else{
+        [twitterButton setSelected:NO];
+    }
+    
+    if([[NSUserDefaults standardUserDefaults] stringForKey:@"instagramSetting"]){
+        [instagramButton setSelected:YES];
+    }else{
+        [instagramButton setSelected:NO];
+    }
+
+    if([[NSUserDefaults standardUserDefaults] stringForKey:@"emailSetting"]){
+        [emailButton setSelected:YES];
+    }else{
+        [emailButton setSelected:NO];
+    }
+
+    if([[NSUserDefaults standardUserDefaults] stringForKey:@"smsSetting"]){
+        [smsButton setSelected:YES];
+    }else{
+        [smsButton setSelected:NO];
+    }
+    
+    if([[NSUserDefaults standardUserDefaults] stringForKey:@"clipSetting"]){
+        [clipboardButton setSelected:YES];
+    }else{
+        [clipboardButton setSelected:NO];
+    }
+
+    if([[NSUserDefaults standardUserDefaults] stringForKey:@"tumblrSetting"]){
+        [tumblrButton setSelected:YES];
+    }else{
+        [tumblrButton setSelected:NO];
+    }
+
+    if([[NSUserDefaults standardUserDefaults] stringForKey:@"flickrSetting"]){
+        [flickrButton setSelected:YES];
+    }else{
+        [flickrButton setSelected:NO];
+    }
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(flickrSharingSuccess) name:FlickrSharingSuccessNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(flickrSharingFailure) name:FlickrSharingFailureNotification object:nil];

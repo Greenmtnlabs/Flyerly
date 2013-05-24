@@ -11,18 +11,290 @@
 #import <CoreGraphics/CoreGraphics.h>
 #import "Common.h"
 #import "FlyrAppDelegate.h"
+#import "TMAPIClient.h"
+#import "HelpController.h"
+#import "PhotoController.h"
 //#import "FBConnectGlobal.h"
 
 /*extern NSString* kApiKey;
 extern NSString* kApiSecret; 
 extern NSString* kGetSessionProxy;  
 */
-static NSString* kApiKey = @"64a5dc77bd0a8fd3fbbabd3a5e943ed8";
-static NSString* kApiSecret = @"e9861b57e32abb6821c6853854786302"; // @"<YOUR SECRET KEY>";
-static NSString* kGetSessionProxy=nil; // @"<YOUR SESSION CALLBACK)>";
+//static NSString* kApiKey = @"64a5dc77bd0a8fd3fbbabd3a5e943ed8";
+//static NSString* kApiSecret = @"e9861b57e32abb6821c6853854786302"; // @"<YOUR SECRET KEY>";
+//static NSString* kGetSessionProxy=nil; // @"<YOUR SESSION CALLBACK)>";
 
 
 @implementation SettingViewController
+@synthesize flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,helpTab;
+
+-(void)viewWillAppear:(BOOL)animated{
+
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg"] forBarMetrics:UIBarMetricsDefault];
+    self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Settings"];
+    
+    UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 31, 30)];
+    [menuButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+    [menuButton setBackgroundImage:[UIImage imageNamed:@"menu_button"] forState:UIControlStateNormal];
+    [menuButton addTarget:self action:@selector(goToMain) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *menuBarButton = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
+    [self.navigationItem setRightBarButtonItem:menuBarButton];
+}
+
+-(void)viewDidLoad{
+
+    
+    if([[NSUserDefaults standardUserDefaults] stringForKey:@"facebookSetting"]){
+        [facebookButton setSelected:YES];
+    }else{
+        [facebookButton setSelected:NO];
+    }
+    
+    if([[NSUserDefaults standardUserDefaults] stringForKey:@"twitterSetting"]){
+        [twitterButton setSelected:YES];
+    }else{
+        [twitterButton setSelected:NO];
+    }
+
+    if([[NSUserDefaults standardUserDefaults] stringForKey:@"instagramSetting"]){
+        [instagramButton setSelected:YES];
+    }else{
+        [instagramButton setSelected:NO];
+    }
+    
+    if([[NSUserDefaults standardUserDefaults] stringForKey:@"emailSetting"]){
+        [emailButton setSelected:YES];
+    }else{
+        [emailButton setSelected:NO];
+    }
+    
+    if([[NSUserDefaults standardUserDefaults] stringForKey:@"smsSetting"]){
+        [smsButton setSelected:YES];
+    }else{
+        [smsButton setSelected:NO];
+    }
+    
+    if([[NSUserDefaults standardUserDefaults] stringForKey:@"clipSetting"]){
+        [clipboardButton setSelected:YES];
+    }else{
+        [clipboardButton setSelected:NO];
+    }
+    
+    if([[NSUserDefaults standardUserDefaults] stringForKey:@"tumblrSetting"]){
+        [tumblrButton setSelected:YES];
+    }else{
+        [tumblrButton setSelected:NO];
+    }
+    
+    if([[NSUserDefaults standardUserDefaults] stringForKey:@"flickrSetting"]){
+        [flickrButton setSelected:YES];
+    }else{
+        [flickrButton setSelected:NO];
+    }
+
+}
+
+-(void)goToMain{
+    
+	[self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+-(IBAction)onClickFacebookButton{
+    
+    if([facebookButton isSelected]){
+        [facebookButton setSelected:NO];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"facebookSetting"];
+    } else {
+        
+        FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+        appDelegate.facebook.sessionDelegate = self;
+        
+        if([appDelegate.facebook isSessionValid]) {
+            [facebookButton setSelected:YES];
+            [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"facebookSetting"];
+            
+        } else {
+            [appDelegate.facebook authorize:[NSArray arrayWithObjects: @"read_stream",
+                                             @"publish_stream", nil]];
+        }
+    }
+}
+
+#pragma Request receive code
+- (void)fbDidLogin {
+	NSLog(@"logged in");
+    
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:appDelegate.facebook.accessToken forKey:@"FBAccessTokenKey"];
+    [[NSUserDefaults standardUserDefaults] setObject:appDelegate.facebook.expirationDate forKey:@"FBExpirationDateKey"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [facebookButton setSelected:YES];
+    [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"facebookSetting"];    
+}
+
+-(IBAction)onClickTwitterButton{
+    
+    if([twitterButton isSelected]){
+        [twitterButton setSelected:NO];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"twitterSetting"];
+        
+    } else {
+        
+        if([TWTweetComposeViewController canSendTweet]){
+            [twitterButton setSelected:YES];
+            [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"twitterSetting"];
+        }  else {
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"twitterSetting"];
+            [self showAlert:@"No Twitter connection" message:@"You must be connected to Twitter from device settings."];
+        }
+    }
+}
+
+-(IBAction)onClickInstagramButton{
+    if([instagramButton isSelected]){
+        [instagramButton setSelected:NO];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"instagramSetting"];
+    } else {
+        [instagramButton setSelected:YES];
+        [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"instagramSetting"];
+    }
+}
+
+-(IBAction)onClickEmailButton{
+    if([emailButton isSelected]){
+        [emailButton setSelected:NO];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"emailSetting"];
+    } else {
+        [emailButton setSelected:YES];
+        [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"emailSetting"];
+    }
+}
+
+-(IBAction)onClickSMSButton{
+    if([smsButton isSelected]){
+        [smsButton setSelected:NO];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"smsSetting"];
+    } else {
+        [smsButton setSelected:YES];
+        [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"smsSetting"];
+    }
+}
+
+-(IBAction)onClickClipboardButton{
+    if([clipboardButton isSelected]){
+        [clipboardButton setSelected:NO];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"clipSetting"];
+    } else {
+        [clipboardButton setSelected:YES];
+        [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"clipSetting"];
+    }
+}
+
+-(void)showAlert:(NSString *)title message:(NSString *)message{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+                                                    message:message
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+    [alert release];
+}
+
+-(IBAction)onClickTumblrButton{
+    if([tumblrButton isSelected]){
+        [tumblrButton setSelected:NO];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"tumblrSetting"];
+    } else {
+        
+        [tumblrButton setSelected:YES];
+        [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"tumblrSetting"];
+
+        if([[TMAPIClient sharedInstance].OAuthToken length] > 0  && [[TMAPIClient sharedInstance].OAuthTokenSecret length] > 0){
+            
+        } else {
+            
+            [TMAPIClient sharedInstance].OAuthConsumerKey = TumblrAPIKey;
+            [TMAPIClient sharedInstance].OAuthConsumerSecret = TumblrSecretKey;
+            
+            if((![[[TMAPIClient sharedInstance] OAuthToken] length] > 0) ||
+               (![[[TMAPIClient sharedInstance] OAuthTokenSecret] length] > 0)){
+                
+                [[TMAPIClient sharedInstance] authenticate:@"Flyerly" callback:^(NSError *error) {
+                    if (error){
+                        NSLog(@"Authentication failed: %@ %@", error, [error description]);
+                    }else{
+                        NSLog(@"Authentication successful!");
+                        
+                    }
+                }];
+            }
+        }
+    }
+}
+
+-(IBAction)onClickFlickrButton{
+    if([flickrButton isSelected]){
+        [flickrButton setSelected:NO];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"flickrSetting"];
+    } else {
+        
+        [flickrButton setSelected:YES];
+        [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"flickrSetting"];
+        [flickrRequest setDelegate:self];
+        
+        //NSString *authToken = [[NSUserDefaults standardUserDefaults] objectForKey:kStoredAuthTokenKeyName];
+        //NSString *authTokenSecret = [[NSUserDefaults standardUserDefaults] objectForKey:kStoredAuthTokenSecretKeyName];
+        
+        //if((![authToken length] > 0) || (![authTokenSecret length] > 0)){
+        [self authorizeAction];
+        //}
+    }
+}
+
+- (void)authorizeAction {
+    
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    
+    // if there's already OAuthToken, we want to reauthorize
+    if ([appDelegate.flickrContext.OAuthToken length]) {
+        [appDelegate.flickrContext  setAuthToken:nil];
+    }
+    
+    self.flickrRequest.sessionInfo = kTryObtainAuthToken;
+    [self.flickrRequest  fetchOAuthRequestTokenWithCallbackURL:[NSURL URLWithString:kCallbackURLBaseString]];
+}
+
+- (OFFlickrAPIRequest *)flickrRequest
+{
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    
+    if (!flickrRequest) {
+        flickrRequest = [[OFFlickrAPIRequest alloc] initWithAPIContext:appDelegate.flickrContext];
+        flickrRequest.delegate = self;
+		flickrRequest.requestTimeoutInterval = 60.0;
+    }
+    
+    return flickrRequest;
+}
+
+- (void)flickrAPIRequest:(OFFlickrAPIRequest *)inRequest didObtainOAuthRequestToken:(NSString *)inRequestToken secret:(NSString *)inSecret;
+{
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    // these two lines are important
+    appDelegate.flickrContext.OAuthToken = inRequestToken;
+    appDelegate.flickrContext.OAuthTokenSecret = inSecret;
+    
+    NSURL *authURL = [appDelegate.flickrContext userAuthorizationURLWithRequestToken:inRequestToken requestedPermission:OFFlickrWritePermission];
+    [[UIApplication sharedApplication] openURL:authURL];
+}
+
+-(IBAction)loadHelpController{
+    HelpController *helpController = [[HelpController alloc]initWithNibName:@"HelpController" bundle:nil];
+    [self.navigationController pushViewController:helpController animated:NO];
+}
+
 /*
 @synthesize password,user,doneButton,scrollView,navBar,twitDialog;
 

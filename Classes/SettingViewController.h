@@ -7,14 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MyNavigationBar.h"
-
 #import "FBConnect/FBConnect.h"
-#import "TwitLogin.h"
-//#import "FBLoginButton.h"
+#import <Twitter/Twitter.h>
+#import <ObjectiveFlickr.h>
 
-@class FBSession;
-@interface SettingViewController : UIViewController <UITextFieldDelegate,FBDialogDelegate, FBSessionDelegate, FBRequestDelegate>{
+//#import "FBConnect/FBConnect.h"
+//#import "TwitLogin.h"
+//#import "FBLoginButton.h"
+//@class FBSession;
+
+@interface SettingViewController : UIViewController<FBRequestDelegate,FBSessionDelegate,OFFlickrAPIRequestDelegate> {
+//@interface SettingViewController : UIViewController <UITextFieldDelegate,FBDialogDelegate, FBSessionDelegate, FBRequestDelegate>{
+    /*
 	UITextField *password;
 	UITextField *user;
 	UIBarButtonItem *doneButton;
@@ -25,7 +29,34 @@
 	//IBOutlet FBLoginButton *faceBookButton;
 	FBSession* _session;
 	TwitLogin *twitDialog;
+     */
+    IBOutlet UIButton *facebookButton;
+	IBOutlet UIButton *twitterButton;
+	IBOutlet UIButton *emailButton;
+	IBOutlet UIButton *tumblrButton;
+	IBOutlet UIButton *flickrButton;
+	IBOutlet UIButton *instagramButton;
+	IBOutlet UIButton *smsButton;
+	IBOutlet UIButton *clipboardButton;
+
+    IBOutlet UIButton *helpTab;
+
+    OFFlickrAPIRequest *flickrRequest;
+
 }
+
+@property(nonatomic,retain) IBOutlet UIButton *facebookButton;
+@property(nonatomic,retain) IBOutlet UIButton *twitterButton;
+@property(nonatomic,retain) IBOutlet UIButton *emailButton;
+@property(nonatomic,retain) IBOutlet UIButton *tumblrButton;
+@property(nonatomic,retain) IBOutlet UIButton *flickrButton;
+@property(nonatomic,retain) IBOutlet UIButton *instagramButton;
+@property(nonatomic,retain) IBOutlet UIButton *smsButton;
+@property(nonatomic,retain) IBOutlet UIButton *clipboardButton;
+
+@property(nonatomic,retain) IBOutlet UIButton *helpTab;
+
+/*
 @property(nonatomic,retain) MyNavigationBar *navBar;
 @property (nonatomic,retain) IBOutlet UITextField *password;
 @property (nonatomic,retain) IBOutlet UITextField *user;
@@ -35,4 +66,16 @@
 @property (nonatomic,retain) TwitLogin *twitDialog;
 -(void)initSession;
 - (void)registerForKeyboardNotifications;
+ */
+
+-(IBAction)onClickFacebookButton;
+-(IBAction)onClickTwitterButton;
+-(IBAction)onClickInstagramButton;
+-(IBAction)onClickEmailButton;
+-(IBAction)onClickTumblrButton;
+-(IBAction)onClickFlickrButton;
+-(IBAction)onClickSMSButton;
+-(IBAction)onClickClipboardButton;
+-(IBAction)loadHelpController;
+
 @end
