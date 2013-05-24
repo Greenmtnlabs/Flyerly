@@ -457,6 +457,9 @@ int totalCount = 0;
             
             //[self.uiTableView reloadData];
         }else{
+
+            [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+            
             [self cursoredTwitterContacts:[NSString stringWithFormat:@"%@", nextCursor] arrayOfAccounts:arrayOfAccounts];
         }
 

@@ -15,6 +15,7 @@
 #import "FlyrAppDelegate.h"
 #import "DraftViewController.h"
 #import "Common.h"
+#import "HelpController.h"
 
 @implementation LauchViewController
 
@@ -109,13 +110,18 @@
     
     // Create left bar help button
     UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 13, 16)];
-    [helpButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+    [helpButton addTarget:self action:@selector(loadHelpController) forControlEvents:UIControlEventTouchUpInside];
     [helpButton setBackgroundImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
     UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:helpButton];
     
     NSMutableArray *leftItems = [NSMutableArray arrayWithObjects:spaceBarButton,leftBarButton,nil];
     
     return leftItems;
+}
+
+-(void)loadHelpController{
+    HelpController *helpController = [[HelpController alloc]initWithNibName:@"HelpController" bundle:nil];
+    [self.navigationController pushViewController:helpController animated:NO];
 }
 
 - (void)viewDidLoad {

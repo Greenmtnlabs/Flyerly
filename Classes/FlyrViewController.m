@@ -12,6 +12,8 @@
 #import "MyNavigationBar.h"
 #import "Common.h"
 #import "LauchViewController.h"
+#import "HelpController.h"
+
 @implementation FlyrViewController
 @synthesize photoArray,navBar,tView,iconArray,photoDetailArray,ptController;
 
@@ -159,11 +161,16 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
     
     // Create left bar help button
     UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 13, 16)];
-    [helpButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+    [helpButton addTarget:self action:@selector(loadHelpController) forControlEvents:UIControlEventTouchUpInside];
     [helpButton setBackgroundImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
     UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:helpButton];
 
     return [NSMutableArray arrayWithObjects:leftBarButton,nil];
+}
+
+-(void)loadHelpController{
+    HelpController *helpController = [[HelpController alloc]initWithNibName:@"HelpController" bundle:nil];
+    [self.navigationController pushViewController:helpController animated:NO];
 }
 
 -(NSArray *)rightBarItems{

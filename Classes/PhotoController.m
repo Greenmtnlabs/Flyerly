@@ -17,6 +17,7 @@
 #import "CameraOverlayView.h"
 #import "CustomPhotoController.h"
 #import "DraftViewController.h"
+#import "HelpController.h"
 
 @implementation PhotoController
 @synthesize imgView,imgPicker;
@@ -1385,7 +1386,7 @@
     UIBarButtonItem *leftBarMenuButton = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
     
     UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 13, 16)];
-    [helpButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+    [helpButton addTarget:self action:@selector(loadHelpController) forControlEvents:UIControlEventTouchUpInside];
     [helpButton setBackgroundImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
     UIBarButtonItem *leftBarHelpButton = [[UIBarButtonItem alloc] initWithCustomView:helpButton];
     
@@ -1414,6 +1415,11 @@
 	[msgTextView removeFromSuperview];
 	[UIView commitAnimations];
 
+}
+
+-(void)loadHelpController{
+    HelpController *helpController = [[HelpController alloc]initWithNibName:@"HelpController" bundle:nil];
+    [self.navigationController pushViewController:helpController animated:NO];
 }
 
 -(void)callKeyboard{

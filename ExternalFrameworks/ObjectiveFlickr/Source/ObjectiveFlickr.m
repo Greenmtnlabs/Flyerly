@@ -723,6 +723,9 @@ static NSData *NSDataFromOAuthPreferredWebForm(NSDictionary *formDictionary)
         NSDictionary *rsp = [responseDictionary objectForKey:@"rsp"];
         NSString *stat = [rsp objectForKey:@"stat"];
         
+        NSString *dataString = [[[NSString alloc] initWithData:[request receivedData] encoding:NSUTF8StringEncoding] autorelease];
+        NSLog(@"received response: %@", dataString);
+        
         // this also fails when (responseDictionary, rsp, stat) == nil, so it's a guranteed way of checking the result
         if (![stat isEqualToString:@"ok"]) {
             NSDictionary *err = [rsp objectForKey:@"err"];
