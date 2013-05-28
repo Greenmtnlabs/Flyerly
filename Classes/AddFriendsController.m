@@ -75,7 +75,7 @@ BOOL firstTableLoad = YES;
     //[saveFlyrLabel setBackgroundColor:[UIColor clearColor]];
     //[saveFlyrLabel setText:@"Invite Friends"];
     //UIBarButtonItem *barLabel = [[UIBarButtonItem alloc] initWithCustomView:saveFlyrLabel];
-    self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Invite Friends"];
+    self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Invite"];
 
     UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 31, 30)];
     [menuButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
@@ -452,6 +452,7 @@ int totalCount = 0;
     // Build a twitter request
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     [params setObject:cursor forKey:@"cursor"];
+    [params setObject:@"2" forKey:@"count"];
     [params setObject:[acct identifier] forKey:@"user_id"];
     //NSLog(@"Account: %@", [acct username]);
     //NSLog(@"Account Id: %@", [acct identifier]);

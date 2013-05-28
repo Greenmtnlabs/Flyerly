@@ -20,19 +20,29 @@
 #import "HelpController.h"
 
 @implementation PhotoController
+@synthesize newImgName;
 @synthesize imgView,imgPicker;
-@synthesize fontScrollView,colorScrollView,templateScrollView,sizeScrollView,borderScrollView,fontBorderScrollView;
+@synthesize fontScrollView,colorScrollView,templateScrollView,sizeScrollView,borderScrollView,fontBorderScrollView,symbolScrollView,iconScrollView;
 @synthesize msgTextView,finalFlyer;
 @synthesize selectedFont,selectedColor,navBar;
-@synthesize selectedTemplate;
-@synthesize fontTabButton,colorTabButton,sizeTabButton,selectedText,selectedSize,borderTabButton,fontBorderTabButton;
+@synthesize selectedTemplate,selectedSymbol,selectedIcon;
+@synthesize fontTabButton,colorTabButton,sizeTabButton,selectedText,selectedSize,borderTabButton,fontBorderTabButton,addMoreFontTabButton,addMoreIconTabButton,addMorePhotoTabButton,addMoreSymbolTabButton,arrangeLayerTabButton;
 @synthesize templateBckgrnd,textBackgrnd,aHUD;
 //@synthesize widthScrollView,heightScrollView
-@synthesize cameraTabButton,photoTabButton,widthTabButton,heightTabButton,photoImgView;
-@synthesize photoTouchFlag,lableTouchFlag,lableLocation,warningAlert;
-@synthesize moreLayersLabel, moreLayersButton, takePhotoButton, cameraRollButton, takePhotoLabel, cameraRollLabel, imgPickerFlag,finalImgWritePath,newImgName;
+@synthesize cameraTabButton,photoTabButton,widthTabButton,heightTabButton,photoImgView,symbolImgView,iconImgView;
+@synthesize photoTouchFlag,symbolTouchFlag,iconTouchFlag, lableTouchFlag,lableLocation,warningAlert;
+@synthesize moreLayersLabel, moreLayersButton, takePhotoButton, cameraRollButton, takePhotoLabel, cameraRollLabel, imgPickerFlag,finalImgWritePath;
 
-
+int selectedAddMoreLayerTab = -1;
+const int ADD_MORE_TEXT_TAB = 0;
+const int ADD_MORE_PHOTO_TAB = 1;
+const int ADD_MORE_SYMBOL_TAB = 2;
+const int ADD_MORE_ICON_TAB = 3;
+const int ARRANGE_LAYER_TAB = 4;
+int symbolLayerCount = 0;
+int iconLayerCount = 0;
+int textLayerCount = 0;
+int photoLayerCount = 0;
 
 #pragma mark  View Appear Methods
 -(void)viewWillAppear:(BOOL)animated{
@@ -42,6 +52,8 @@
 	imgPicker = [[UIImagePickerController alloc] init];
 	imgPicker.allowsImageEditing = NO;
 	photoTouchFlag=NO;
+	symbolTouchFlag=NO;
+    iconTouchFlag = NO;
 	lableTouchFlag=NO;
 	imgPicker.delegate =self;
 	imgPicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
@@ -85,7 +97,6 @@
 	selectedTemplate  = [UIImage imageNamed:@"main_area_bg"];
 	lableLocation = CGPointMake(160,100);
 	
-	
 	// Create Main Image View
     if(IS_IPHONE_5){
         imgView = [[UIImageView alloc]initWithFrame:CGRectMake(5, 48, 310, 309)];
@@ -112,9 +123,8 @@
 	[self.view addSubview:imgView];
 
     [moreLayersButton setBackgroundImage:[UIImage imageNamed:@"07_addmore"] forState:UIControlStateNormal];
-    //[moreLayersButton addTarget:self action:@selector(openCustomCamera) forControlEvents:UIControlEventTouchUpInside];
+    [moreLayersButton addTarget:self action:@selector(callAddMoreLayers) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:moreLayersButton];
-
     [takePhotoButton setBackgroundImage:[UIImage imageNamed:@"take_photo"] forState:UIControlStateNormal];
     [takePhotoButton addTarget:self action:@selector(openCustomCamera) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:takePhotoButton];
@@ -142,7 +152,16 @@
 
 	photoImgView = [[UIImageView alloc]initWithFrame:CGRectMake(50, 50, 220, 200)];
 	[photoImgView setUserInteractionEnabled:NO];
+    [[self photoLayersArray] addObject:photoImgView];
 
+	symbolImgView = [[UIImageView alloc]initWithFrame:CGRectMake(50, 50, 90, 70)];
+	[symbolImgView setUserInteractionEnabled:NO];
+    [[self symbolLayersArray] addObject:symbolImgView];
+    
+	iconImgView = [[UIImageView alloc]initWithFrame:CGRectMake(150, 50, 90, 70)];
+	[iconImgView setUserInteractionEnabled:NO];
+    [[self iconLayersArray] addObject:iconImgView];
+    
 	//templateBckgrnd.image = [UIImage imageNamed:@"scroll1.png"];
     templateBckgrnd.image = [UIImage imageNamed:@"ad_bg_bg"];
     [self.view addSubview:templateBckgrnd];
@@ -158,33 +177,33 @@
 	msgLabel.textColor = [UIColor blackColor];
 	msgLabel.textAlignment = UITextAlignmentCenter;
 	[self.imgView addSubview:msgLabel];
-	
+    [[self textLabelLayersArray] addObject:msgLabel];
+
 	msgTextView = [[UITextView alloc]initWithFrame:CGRectMake(20, 50, 280, 150)];
 	msgTextView.delegate = self;
 	msgTextView.font = [UIFont fontWithName:@"Arial" size:16];
 	msgTextView.textColor = [UIColor blackColor];
 	msgTextView.textAlignment = UITextAlignmentCenter;
+    //[[self textEditLayersArray] addObject:msgTextView];
 	
 	fontScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(-320, 385,320,44)];
 	colorScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(-320, 385,320,44)];
 	sizeScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(-320, 385, 320, 44)];
 	borderScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(-320, 385, 320, 44)];
 	fontBorderScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(-320, 385, 320, 44)];
+	symbolScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(-320, 385,320,44)];
+	iconScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(-320, 385,320,44)];
 	//widthScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(-320, 385,320,44)];
 	//heightScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(-320, 385, 320, 44)];
 	
 		
+    // Add Templates
 	NSInteger templateScrollWidth = 60;
 	NSInteger templateScrollHeight = 55;
-		
-	//FlyrAppDelegate *appDele = [[UIApplication sharedApplication]delegate];
-
 	templateArray = [[NSMutableArray alloc]init];
-	//appDele.iconArray = [[NSMutableArray alloc]init];
 	NSAutoreleasePool* pool1 = [[NSAutoreleasePool alloc] init];
 
-	for(int i=0;i<67;i++)
-	{
+	for(int i=0;i<67;i++) {
 
 		NSString* templateName = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"Template%d",i] ofType:@"jpg"];
 		UIImage *templateImg =  [UIImage imageWithContentsOfFile:templateName];
@@ -193,30 +212,64 @@
 		
 		NSString* iconName = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"icon%d",i] ofType:@"jpg"];
 		UIImage *iconImg =   [UIImage  imageWithContentsOfFile:iconName];
-		//UIImage *iconImg = [appDele.iconArray objectAtIndex:i];
-		//[appDele.iconArray addObject:iconImg];
-		//UIImage *templateImg = [appDele.templateArray objectAtIndex:i];		
 		
 		UIButton *templateButton = [UIButton  buttonWithType:UIButtonTypeCustom];
 		templateButton.frame =CGRectMake(0, 5,templateScrollWidth, templateScrollHeight);
         [templateButton setBackgroundColor:[UIColor whiteColor]];
-		//[templateButton setBackgroundImage:[UIImage imageNamed:@"white_bg_thumbnail"] forState:UIControlStateNormal];
-		//[templateButton setBackgroundImage:[UIImage imageNamed:@"button1.png"] forState:UIControlStateNormal];
-		
-		//UIImageView *img = [[[UIImageView alloc]initWithFrame:CGRectMake(templateButton.frame.origin.x+5, templateButton.frame.origin.y+2, templateButton.frame.size.width-10, templateButton.frame.size.height-14)]autorelease];
-		//[img setImage:iconImg];
+
 		UIImageView *img = [[UIImageView alloc]initWithImage:iconImg];
-		//[img initWithImage:iconImg];
 		img.frame  = CGRectMake(templateButton.frame.origin.x+5, templateButton.frame.origin.y-2, templateButton.frame.size.width-10, templateButton.frame.size.height-7);
 		[templateButton addSubview:img];
-		//templateButton.alpha = ALPHA1;
-		templateButton.tag = i;	
+		templateButton.tag = i;
 		[templateScrollView addSubview:templateButton];
-		//[templateButton release];
 	}
 	[pool1 release];
-
-    //NSLog(@"Famiy Names: %@", [UIFont familyNames]);
+    
+    // Add Symbols
+	NSInteger symbolScrollWidth = 60;
+	NSInteger symbolScrollHeight = 55;
+	symbolArray = [[NSMutableArray alloc]init];
+    
+	for(int i=1;i<=21;i++) {
+        
+		NSString* symbolName = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"symbol%d",i] ofType:@"png"];
+		UIImage *symbolImg =  [UIImage imageWithContentsOfFile:symbolName];
+        
+		[symbolArray addObject:symbolImg];
+		
+		UIButton *symbolButton = [UIButton  buttonWithType:UIButtonTypeCustom];
+		symbolButton.frame =CGRectMake(0, 5,symbolScrollWidth, symbolScrollHeight);
+        [symbolButton setBackgroundColor:[UIColor whiteColor]];
+        
+		UIImageView *img = [[UIImageView alloc]initWithImage:symbolImg];
+		img.frame  = CGRectMake(symbolButton.frame.origin.x+5, symbolButton.frame.origin.y-2, symbolButton.frame.size.width-10, symbolButton.frame.size.height-7);
+		[symbolButton addSubview:img];
+		symbolButton.tag = i;
+		[symbolScrollView addSubview:symbolButton];
+	}
+    
+    // Add Icons
+	NSInteger iconScrollWidth = 60;
+	NSInteger iconScrollHeight = 55;
+	iconArray = [[NSMutableArray alloc]init];
+    
+	for(int i=1;i<=21;i++) {
+        
+		NSString* iconName = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"ricon%d",i] ofType:@"png"];
+		UIImage *iconImg =  [UIImage imageWithContentsOfFile:iconName];
+        
+		[iconArray addObject:iconImg];
+		
+		UIButton *iconButton = [UIButton  buttonWithType:UIButtonTypeCustom];
+		iconButton.frame =CGRectMake(0, 5,iconScrollWidth, iconScrollHeight);
+        [iconButton setBackgroundColor:[UIColor whiteColor]];
+        
+		UIImageView *img = [[UIImageView alloc]initWithImage:iconImg];
+		img.frame  = CGRectMake(iconButton.frame.origin.x+5, iconButton.frame.origin.y-2, iconButton.frame.size.width-10, iconButton.frame.size.height-7);
+		[iconButton addSubview:img];
+		iconButton.tag = i;
+		[iconScrollView addSubview:iconButton];
+	}
     
 	fontArray =[[NSArray  alloc] initWithObjects:
 				[UIFont fontWithName:@"Arial" size:27],
@@ -511,6 +564,29 @@
 	[self.view addSubview:fontBorderScrollView];
 	[self layoutScrollImages:fontBorderScrollView scrollWidth:fontBorderScrollWidth scrollHeight:fontBorderScrollHeight];
     
+    [symbolScrollView setCanCancelContentTouches:NO];
+	symbolScrollView.indicatorStyle = UIScrollViewIndicatorStyleBlack;
+	symbolScrollView.clipsToBounds = YES;
+	symbolScrollView.scrollEnabled = YES;
+	symbolScrollView.pagingEnabled = NO;
+	symbolScrollView.showsHorizontalScrollIndicator = NO;
+	symbolScrollView.showsVerticalScrollIndicator = NO;
+	symbolScrollView.alpha = ALPHA0;
+	[self.view addSubview:symbolScrollView];
+	[self layoutScrollImages:symbolScrollView scrollWidth:symbolScrollWidth scrollHeight:symbolScrollHeight];
+
+    [iconScrollView setCanCancelContentTouches:NO];
+	iconScrollView.indicatorStyle = UIScrollViewIndicatorStyleBlack;
+	iconScrollView.clipsToBounds = YES;
+	iconScrollView.scrollEnabled = YES;
+	iconScrollView.pagingEnabled = NO;
+	iconScrollView.showsHorizontalScrollIndicator = NO;
+	iconScrollView.showsVerticalScrollIndicator = NO;
+	iconScrollView.alpha = ALPHA0;
+	[self.view addSubview:iconScrollView];
+	[self layoutScrollImages:iconScrollView scrollWidth:iconScrollWidth scrollHeight:iconScrollHeight];
+    
+   
 	/*[widthScrollView setCanCancelContentTouches:NO];
 	widthScrollView.indicatorStyle = UIScrollViewIndicatorStyleBlack;
 	widthScrollView.clipsToBounds = YES;	
@@ -542,6 +618,11 @@
 	cameraTabButton =[UIButton buttonWithType:UIButtonTypeCustom];
 	widthTabButton =[UIButton buttonWithType:UIButtonTypeCustom];
 	heightTabButton =[UIButton buttonWithType:UIButtonTypeCustom];
+    addMoreFontTabButton =[UIButton buttonWithType:UIButtonTypeCustom];
+    addMoreIconTabButton =[UIButton buttonWithType:UIButtonTypeCustom];
+    addMorePhotoTabButton =[UIButton buttonWithType:UIButtonTypeCustom];
+    addMoreSymbolTabButton =[UIButton buttonWithType:UIButtonTypeCustom];
+    arrangeLayerTabButton =[UIButton buttonWithType:UIButtonTypeCustom];
 
 	if(IS_IPHONE_5){
         fontTabButton.frame = CGRectMake(-1, 502, 65, 46);
@@ -553,6 +634,11 @@
         photoTabButton.frame = CGRectMake(79, 502, 80, 46);
         widthTabButton.frame = CGRectMake(159, 502, 80, 46);
         heightTabButton.frame = CGRectMake(239, 502, 80, 46);
+        addMoreFontTabButton.frame = CGRectMake(-1, 502, 65, 46);
+        addMorePhotoTabButton.frame = CGRectMake(64, 502, 65, 46);
+        addMoreIconTabButton.frame = CGRectMake(129, 502, 65, 46);
+        addMoreSymbolTabButton.frame = CGRectMake(194, 502, 65, 46);
+        arrangeLayerTabButton.frame = CGRectMake(259, 502, 65, 46);
     }else{
         fontTabButton.frame = CGRectMake(-1, 415, 65, 46);
         colorTabButton.frame = CGRectMake(64, 415, 65, 46);
@@ -563,6 +649,11 @@
         photoTabButton.frame = CGRectMake(79, 415, 80, 46);
         widthTabButton.frame = CGRectMake(159, 415, 80, 46);
         heightTabButton.frame = CGRectMake(239, 415, 81, 46);
+        addMoreFontTabButton.frame = CGRectMake(-1, 415, 65, 46);
+        addMorePhotoTabButton.frame = CGRectMake(64, 415, 65, 46);
+        addMoreIconTabButton.frame = CGRectMake(129, 415, 65, 46);
+        addMoreSymbolTabButton.frame = CGRectMake(194, 415, 65, 46);
+        arrangeLayerTabButton.frame = CGRectMake(259, 415, 65, 46);
     }
     
 	//fontTabButton.frame = CGRectMake(-1, 429, 107, 32);
@@ -652,8 +743,39 @@
 	heightTabButton.tag = 10004;
 	[self.view addSubview:heightTabButton];
 	 
-
+    // Add more layer tabs
+	[addMoreFontTabButton setBackgroundImage:[UIImage imageNamed:@"text_icon"] forState:UIControlStateNormal];
+	[addMoreFontTabButton addTarget:self action:@selector(setAddMoreLayerTabAction:) forControlEvents:UIControlEventTouchUpInside];
+	addMoreFontTabButton.alpha =  ALPHA0;
+	addMoreFontTabButton.tag = 10001;
+	[self.view addSubview:addMoreFontTabButton];
+	
+	[addMorePhotoTabButton setBackgroundImage:[UIImage imageNamed:@"image_icon"] forState:UIControlStateNormal];
+	[addMorePhotoTabButton addTarget:self action:@selector(setAddMoreLayerTabAction:) forControlEvents:UIControlEventTouchUpInside];
+	addMorePhotoTabButton.alpha =  ALPHA0;
+	addMorePhotoTabButton.tag = 10002;
+	[self.view addSubview:addMorePhotoTabButton];
+	
+	[addMoreSymbolTabButton setBackgroundImage:[UIImage imageNamed:@"symbolicon_button"] forState:UIControlStateNormal];
+	[addMoreSymbolTabButton addTarget:self action:@selector(setAddMoreLayerTabAction:) forControlEvents:UIControlEventTouchUpInside];
+	addMoreSymbolTabButton.alpha =  ALPHA0;
+	addMoreSymbolTabButton.tag = 10003;
+	[self.view addSubview:addMoreSymbolTabButton];
+    
+	[addMoreIconTabButton setBackgroundImage:[UIImage imageNamed:@"icon_button"] forState:UIControlStateNormal];
+	[addMoreIconTabButton addTarget:self action:@selector(setAddMoreLayerTabAction:) forControlEvents:UIControlEventTouchUpInside];
+	addMoreIconTabButton.alpha =  ALPHA0;
+	addMoreIconTabButton.tag = 10004;
+	[self.view addSubview:addMoreIconTabButton];
+    
+	[arrangeLayerTabButton setBackgroundImage:[UIImage imageNamed:@"arrangeicon_button"] forState:UIControlStateNormal];
+	[arrangeLayerTabButton addTarget:self action:@selector(setAddMoreLayerTabAction:) forControlEvents:UIControlEventTouchUpInside];
+	arrangeLayerTabButton.alpha =  ALPHA0;
+	arrangeLayerTabButton.tag = 10005;
+	[self.view addSubview:arrangeLayerTabButton];
+    
 	imgPickerFlag =1;
+    selectedAddMoreLayerTab = -1;
 	[self chooseTemplate];
 }
 
@@ -672,7 +794,8 @@
 			selectedFont = [fontArray objectAtIndex:i-1];
 			selectedFont = [selectedFont fontWithSize:selectedSize];
 			msgTextView.font = selectedFont;
-			msgLabel.font =selectedFont;
+            ((CustomLabel*)[[self textLabelLayersArray] lastObject]).font = selectedFont;
+			//msgLabel.font =selectedFont;
 		}
 		i++;
 	}
@@ -690,7 +813,8 @@
 		{
 			selectedColor = [colorArray objectAtIndex:i-1];
 			msgTextView.textColor = selectedColor;
-			msgLabel.textColor = selectedColor;
+            ((CustomLabel*)[[self textLabelLayersArray] lastObject]).textColor = selectedColor;
+			//msgLabel.textColor = selectedColor;
 		}
 		i++;
 	}
@@ -712,6 +836,48 @@
 }
 
 
+-(void)selectSymbol:(id)sender
+{
+    
+    symbolTouchFlag = YES;
+    iconTouchFlag = NO;
+    photoTouchFlag = NO;
+    
+	FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
+	appDele.changesFlag = YES;
+	UIButton *view = sender;
+	selectedSymbol  =  [symbolArray objectAtIndex:(view.tag - 1)];
+	CATransition *animation = [CATransition animation];
+	[animation setType:kCATransitionPush];
+	[animation setSubtype:kCATransitionMoveIn];
+	[animation setDuration:0.4f];
+	[animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+    
+    UIImageView *lastSymbolLayer = [[self symbolLayersArray] lastObject];
+	[[lastSymbolLayer  layer] addAnimation:animation forKey:@"SwitchToView1"];
+	[lastSymbolLayer setImage:selectedSymbol];
+}
+
+-(void)selectIcon:(id)sender
+{
+    symbolTouchFlag = NO;
+    iconTouchFlag = YES;
+    photoTouchFlag = NO;
+    
+	FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
+	appDele.changesFlag = YES;
+	UIButton *view = sender;
+	selectedIcon  =  [iconArray objectAtIndex:(view.tag - 1)];
+	CATransition *animation = [CATransition animation];
+	[animation setType:kCATransitionPush];
+	[animation setSubtype:kCATransitionMoveIn];
+	[animation setDuration:0.4f];
+	[animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+    
+    UIImageView *lastIconLayer = [[self iconLayersArray] lastObject];
+	[[lastIconLayer  layer] addAnimation:animation forKey:@"SwitchToView1"];
+	[lastIconLayer setImage:selectedIcon];
+}
 
 -(void)selectSize:(id)sender{
 	FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
@@ -726,7 +892,8 @@
 			selectedSize = [sizeStr intValue];
 			selectedFont = [selectedFont fontWithSize:selectedSize];
 			msgTextView.font = selectedFont;
-			msgLabel.font =selectedFont;
+			//msgLabel.font =selectedFont;
+            ((CustomLabel*)[[self textLabelLayersArray] lastObject]).font =selectedFont;
 			//msgLabel.frame = CGRectMake(lableLocation.x,lableLocation.y,msgTextView.frame.size.width, msgTextView.contentSize.height);
 			//msgLabel.frame = CGRectMake(0,44,320,msgTextView.contentSize.height);
 			//msgLabel.frame = CGRectMake(0, 10, 320,500 );
@@ -765,9 +932,10 @@
             
 			UIColor *borderColor = [borderArray objectAtIndex:i-1];
             
-            msgLabel.borderColor = borderColor;
-            msgLabel.lineWidth = 2;
-            [msgLabel drawRect:CGRectMake(msgLabel.frame.origin.x, msgLabel.frame.origin.y, msgLabel.frame.size.width, msgLabel.frame.size.height)];
+            CustomLabel *lastLabel = [[self textLabelLayersArray] lastObject];
+            lastLabel.borderColor = borderColor;
+            lastLabel.lineWidth = 2;
+            [lastLabel drawRect:CGRectMake(lastLabel.frame.origin.x, lastLabel.frame.origin.y, lastLabel.frame.size.width, lastLabel.frame.size.height)];
 		}
 		i++;
 	}
@@ -1070,6 +1238,87 @@
         } else {
             [fontBorderScrollView setContentSize:CGSizeMake((  [borderArray count]*(kScrollObjWidth+5)), [fontBorderScrollView bounds].size.height)];
         }
+        
+	}
+    else if (selectedScrollView == symbolScrollView)
+	{
+		UIButton *view = nil;
+		NSArray *subviews = [symbolScrollView subviews];
+		CGFloat curXLoc = 0;
+		CGFloat curYLoc = 5;
+        
+        if(IS_IPHONE_5)
+            curYLoc = 10;
+        
+		for (view in subviews)
+		{
+			if ([view isKindOfClass:[UIButton class]] )
+			{
+				CGRect frame = view.frame;
+				frame.origin = CGPointMake(curXLoc, curYLoc);
+				view.frame = frame;
+				curXLoc += (kScrollObjWidth)+5;
+				
+				imgPickerFlag =1;
+				//if(view.tag == 0)
+				//	[view addTarget:self action:@selector(loadPhotoLibrary) forControlEvents:UIControlEventTouchUpInside];
+				//else
+                [view addTarget:self action:@selector(selectSymbol:) forControlEvents:UIControlEventTouchUpInside];
+				
+                if(IS_IPHONE_5){
+                    if(curXLoc >= 320){
+                        curXLoc = 0;
+                        curYLoc = curYLoc + kScrollObjHeight + 7;
+                    }
+                }
+			}
+		}
+        
+        if(IS_IPHONE_5){
+            [symbolScrollView setContentSize:CGSizeMake(320, curYLoc + kScrollObjHeight)];
+        } else {
+            [symbolScrollView setContentSize:CGSizeMake(([symbolArray count]*(kScrollObjWidth+5)), [symbolScrollView bounds].size.height)];
+        }
+	}
+    else if (selectedScrollView == iconScrollView)
+	{
+		UIButton *view = nil;
+		NSArray *subviews = [iconScrollView subviews];
+		CGFloat curXLoc = 0;
+		CGFloat curYLoc = 5;
+        
+        if(IS_IPHONE_5)
+            curYLoc = 10;
+        
+		for (view in subviews)
+		{
+			if ([view isKindOfClass:[UIButton class]] )
+			{
+				CGRect frame = view.frame;
+				frame.origin = CGPointMake(curXLoc, curYLoc);
+				view.frame = frame;
+				curXLoc += (kScrollObjWidth)+5;
+				
+				imgPickerFlag =1;
+				//if(view.tag == 0)
+				//	[view addTarget:self action:@selector(loadPhotoLibrary) forControlEvents:UIControlEventTouchUpInside];
+				//else
+                [view addTarget:self action:@selector(selectIcon:) forControlEvents:UIControlEventTouchUpInside];
+				
+                if(IS_IPHONE_5){
+                    if(curXLoc >= 320){
+                        curXLoc = 0;
+                        curYLoc = curYLoc + kScrollObjHeight + 7;
+                    }
+                }
+			}
+		}
+        
+        if(IS_IPHONE_5){
+            [iconScrollView setContentSize:CGSizeMake(320, curYLoc + kScrollObjHeight)];
+        } else {
+            [iconScrollView setContentSize:CGSizeMake(([iconArray count]*(kScrollObjWidth+5)), [iconScrollView bounds].size.height)];
+        }
 	}
     
     /*else if (selectedScrollView == widthScrollView)
@@ -1141,9 +1390,15 @@
 	
 		[[picker parentViewController] dismissModalViewControllerAnimated:YES];
 		UIImage *testImage = [img retain];
-		[self.photoImgView setImage:testImage] ;
+		//[self.photoImgView setImage:testImage] ;
+        
+        UIImageView *lastPhotoLayer = [[self photoLayersArray] lastObject];
+        [lastPhotoLayer setImage:testImage];
+
 		photoTouchFlag = YES;
 		lableTouchFlag = NO;
+        symbolTouchFlag= NO;
+        iconTouchFlag = NO;
 	}
 }
 
@@ -1153,6 +1408,8 @@
 	if(imgPickerFlag == 2){
 		photoTouchFlag = YES;
 		lableTouchFlag = NO;
+        symbolTouchFlag= NO;
+        iconTouchFlag = NO;
 	}
 }
 
@@ -1165,6 +1422,8 @@
 
     photoTouchFlag = YES;
     lableTouchFlag = NO;
+    symbolTouchFlag= NO;
+    iconTouchFlag = NO;
 
     [self dismissModalViewControllerAnimated:YES];
 }
@@ -1207,6 +1466,8 @@
 	if(imgPickerFlag == 2){
 		photoTouchFlag = YES;
 		lableTouchFlag = NO;
+        symbolTouchFlag= NO;
+        iconTouchFlag = NO;
 	}
 }
 
@@ -1225,9 +1486,14 @@
         
 		//[[self.imgPicker parentViewController] dismissModalViewControllerAnimated:YES];
 		UIImage *testImage = [selectedImage retain];
-		[self.photoImgView setImage:testImage] ;
+		//[self.photoImgView setImage:testImage] ;
+        UIImageView *lastPhotoLayer = [[self photoLayersArray] lastObject];
+        [lastPhotoLayer setImage:testImage];
+
 		self.photoTouchFlag = YES;
 		self.lableTouchFlag = NO;
+        symbolTouchFlag= NO;
+        iconTouchFlag = NO;
 	}
 }
 
@@ -1246,6 +1512,8 @@
 	if(imgPickerFlag == 2){
 		photoTouchFlag = YES;
 		lableTouchFlag = NO;
+        symbolTouchFlag= NO;
+        iconTouchFlag = NO;
 	}
 }
 
@@ -1286,9 +1554,15 @@
         
 		[picker dismissModalViewControllerAnimated:YES];
 		UIImage *testImage = [info[UIImagePickerControllerOriginalImage] retain];
-		[self.photoImgView setImage:testImage] ;
+		//[self.photoImgView setImage:testImage] ;
+        
+        UIImageView *lastPhotoLayer = [[self photoLayersArray] lastObject];
+        [lastPhotoLayer setImage:testImage];
+
 		self.photoTouchFlag = YES;
 		self.lableTouchFlag = NO;
+        symbolTouchFlag= NO;
+        iconTouchFlag = NO;
         //[self dismissViewControllerAnimated:YES completion:nil];
 		//[self dismissModalViewControllerAnimated:YES];
 	}
@@ -1353,22 +1627,10 @@
 -(void)chooseTemplate{
 	photoTouchFlag=NO;
 	lableTouchFlag=NO;
+    symbolTouchFlag= NO;
+    iconTouchFlag = NO;
 	imgPickerFlag = 1;
 	
-	[navBar show:@"Select Template" left:@"Menu" right:@"Text"];
-	[self.view bringSubviewToFront:navBar];
-	[navBar.leftButton removeTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-	[navBar.rightButton removeTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-	
-	[navBar.leftButton addTarget:self action:@selector(callMenu) forControlEvents:UIControlEventTouchUpInside];
-	[navBar.rightButton addTarget:self action:@selector(callWrite) forControlEvents:UIControlEventTouchUpInside];
-	
-    //UILabel *addBackgroundLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 75, 50)];
-    //[addBackgroundLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:8.5]];
-    //[addBackgroundLabel setTextColor:[MyCustomCell colorWithHexString:@"008ec0"]];
-    //[addBackgroundLabel setBackgroundColor:[UIColor clearColor]];
-    //[addBackgroundLabel setText:@"Add Background"];
-    //UIBarButtonItem *barLabel = [[UIBarButtonItem alloc] initWithCustomView:addBackgroundLabel];
     self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Add Background"];
     
     UIButton *textButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 32, 29)];
@@ -1392,7 +1654,7 @@
     
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarMenuButton,leftBarHelpButton,nil]];
     
-    [self hideAddMoreTab];
+    [self hideAddMoreButton];
     [self showPictureTab];
 
 	[UIView beginAnimations:nil context:NULL];
@@ -1405,7 +1667,9 @@
     }else{
         templateScrollView.frame= CGRectMake(0, 395,320 ,60);
     }
-	msgLabel.alpha= 1;
+    
+	//msgLabel.alpha= 1;
+    ((CustomLabel *)[[self textLabelLayersArray] lastObject]).alpha = 1;
 	textBackgrnd.alpha  =ALPHA0;
 	fontTabButton.alpha = ALPHA0;
 	colorTabButton.alpha = ALPHA0;
@@ -1438,33 +1702,35 @@
     [self.takePhotoLabel setHidden:NO];
     [self.takePhotoButton setHidden:NO];
 }
--(void)hideAddMoreTab{
+-(void)hideAddMoreButton{
     [self.moreLayersButton setHidden:YES];
     [self.moreLayersLabel setHidden:YES];
 }
--(void)showAddMoreTab{
+-(void)showAddMoreButton{
     [self.moreLayersButton setHidden:NO];
     [self.moreLayersLabel setHidden:NO];
+}
+-(void)hideAddMoreTab{
+    [self.addMoreFontTabButton setHidden:YES];
+    [self.addMorePhotoTabButton setHidden:YES];
+    [self.addMoreSymbolTabButton setHidden:YES];
+    [self.addMoreIconTabButton setHidden:YES];
+    [self.arrangeLayerTabButton setHidden:YES];
+}
+-(void)showAddMoreTab{
+    [self.addMoreFontTabButton setHidden:NO];
+    [self.addMorePhotoTabButton setHidden:NO];
+    [self.addMoreSymbolTabButton setHidden:NO];
+    [self.addMoreIconTabButton setHidden:NO];
+    [self.arrangeLayerTabButton setHidden:NO];
 }
 
 -(void)callWrite{
 	photoTouchFlag=NO;
 	lableTouchFlag=NO;
-	[navBar show:@"Enter Text" left:@"Template" right:@"Style"];
-	[self.view bringSubviewToFront:navBar];
-	
-	[navBar.leftButton removeTarget:self action:@selector(callMenu) forControlEvents:UIControlEventTouchUpInside];
-	[navBar.rightButton removeTarget:self action:@selector(callWrite) forControlEvents:UIControlEventTouchUpInside];
-	
-	[navBar.leftButton addTarget:self action:@selector(chooseTemplate) forControlEvents:UIControlEventTouchUpInside];
-	[navBar.rightButton addTarget:self action:@selector(callStyle) forControlEvents:UIControlEventTouchUpInside];
-	
-    //UILabel *addBackgroundLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 55, 50)];
-    //[addBackgroundLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:8.5]];
-    //[addBackgroundLabel setTextColor:[MyCustomCell colorWithHexString:@"008ec0"]];
-    //[addBackgroundLabel setBackgroundColor:[UIColor clearColor]];
-    //[addBackgroundLabel setText:@"Add Text"];
-    //UIBarButtonItem *barLabel = [[UIBarButtonItem alloc] initWithCustomView:addBackgroundLabel];
+    symbolTouchFlag= NO;
+    iconTouchFlag = NO;
+
     self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Add Text"];
 
     UIButton *nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
@@ -1480,23 +1746,27 @@
     [self.navigationItem setLeftBarButtonItem:backBarButton];
 
     [self hidePictureTab];
+    [self hideAddMoreButton];
     [self hideAddMoreTab];
 
-	msgTextView.backgroundColor = [ UIColor colorWithWhite:1 alpha:0.3f];
-	msgLabel.alpha =ALPHA0;
- 	msgTextView.text = msgLabel.text ;
+    UITextView *lastTextView = msgTextView;
+    CustomLabel *lastLabelView = [[self textLabelLayersArray]lastObject];
+
+	lastTextView.backgroundColor = [ UIColor colorWithWhite:1 alpha:0.3f];
+	lastLabelView.alpha =ALPHA0;
+ 	lastTextView.text = lastLabelView.text ;
 	[NSTimer scheduledTimerWithTimeInterval:0.001f target:self selector:@selector(callKeyboard) userInfo:nil repeats:NO];
 	
-	CALayer * l = [msgTextView layer];
+	CALayer * l = [lastTextView layer];
 	[l setMasksToBounds:YES];
 	[l setCornerRadius:10];
 	[l setBorderWidth:1.0];
 	[l setBorderColor:[[UIColor grayColor] CGColor]];
-	[self.view addSubview:msgTextView];
+	[self.view addSubview:lastTextView];
 	
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationDuration:0.4f];
-	msgTextView.frame = CGRectMake(20, 50, 280, 150);
+	lastTextView.frame = CGRectMake(20, 50, 280, 150);
 	templateBckgrnd.alpha = ALPHA0;
 
     if(IS_IPHONE_5){
@@ -1506,6 +1776,8 @@
         sizeScrollView.frame = CGRectMake(-320, 385, 320, 130);
         borderScrollView.frame = CGRectMake(-320, 385, 320, 130);
         fontBorderScrollView.frame = CGRectMake(-320, 385, 320, 130);
+        symbolScrollView.frame= CGRectMake(-320, 413,320 ,130);
+        iconScrollView.frame= CGRectMake(-320, 413,320 ,130);
     }else{
         templateScrollView.frame= CGRectMake(-320, 395,320 ,60);
         fontScrollView.frame = CGRectMake(-320, 385, 320, 44);
@@ -1513,6 +1785,8 @@
         sizeScrollView.frame = CGRectMake(-320, 385, 320, 44);
         borderScrollView.frame = CGRectMake(-320, 385, 320, 44);
         fontBorderScrollView.frame = CGRectMake(-320, 385, 320, 44);
+        symbolScrollView.frame= CGRectMake(-320, 395,320 ,60);
+        iconScrollView.frame= CGRectMake(-320, 395,320 ,60);
     }
 	[UIView commitAnimations];
 
@@ -1520,29 +1794,24 @@
 
 -(void)callStyle
 {
-	[navBar show:@"Style Text" left:@"Text" right:@"Photo"];
-	[self.view bringSubviewToFront:navBar];
-	
-	[navBar.leftButton removeTarget:self action:@selector(chooseTemplate) forControlEvents:UIControlEventTouchUpInside];
-	[navBar.rightButton removeTarget:self action:@selector(callStyle) forControlEvents:UIControlEventTouchUpInside];
-	
-	[navBar.leftButton addTarget:self action:@selector(callWrite) forControlEvents:UIControlEventTouchUpInside];
-	[navBar.rightButton addTarget:self action:@selector(choosePhoto) forControlEvents:UIControlEventTouchUpInside];
-	
-    // Create right bar button
-    //UILabel *addBackgroundLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
-    //[addBackgroundLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:8.5]];
-    //[addBackgroundLabel setTextColor:[MyCustomCell colorWithHexString:@"008ec0"]];
-    //[addBackgroundLabel setBackgroundColor:[UIColor clearColor]];
-    //[addBackgroundLabel setText:@"Add Text"];
-    //UIBarButtonItem *barLabel = [[UIBarButtonItem alloc] initWithCustomView:addBackgroundLabel];
+
     self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Add Text"];
 
-    UIButton *photoButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
-	[photoButton addTarget:self action:@selector(choosePhoto) forControlEvents:UIControlEventTouchUpInside];
-    [photoButton setBackgroundImage:[UIImage imageNamed:@"photo_button"] forState:UIControlStateNormal];
-    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:photoButton];
-    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
+    if(selectedAddMoreLayerTab == -1){
+        UIButton *photoButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
+        [photoButton addTarget:self action:@selector(choosePhoto) forControlEvents:UIControlEventTouchUpInside];
+        [photoButton setBackgroundImage:[UIImage imageNamed:@"photo_button"] forState:UIControlStateNormal];
+        UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:photoButton];
+        [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
+    } else {
+        UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
+        doneButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
+        [doneButton setTitle:@"Done" forState:UIControlStateNormal];
+        [doneButton addTarget:self action:@selector(callAddMoreLayers) forControlEvents:UIControlEventTouchUpInside];
+        [doneButton setBackgroundImage:[UIImage imageNamed:@"crop_button"] forState:UIControlStateNormal];
+        UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
+        [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
+    }
     
     UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
     [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
@@ -1552,7 +1821,7 @@
     [self.navigationItem setLeftBarButtonItem:backBarButton];
 
     [self hidePictureTab];
-    [self hideAddMoreTab];
+    [self hideAddMoreButton];
 
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationDuration:0.4f];
@@ -1578,10 +1847,7 @@
     fontBorderScrollView.alpha = ALPHA0;
 
 	[fontTabButton setBackgroundImage:[UIImage imageNamed:@"font_button_selected"] forState:UIControlStateNormal];
-	//[fontTabButton setBackgroundImage:[UIImage imageNamed:@"selTab.png"] forState:UIControlStateNormal];
-	//[colorTabButton setBackgroundImage:[UIImage imageNamed:@"tabButton.png"] forState:UIControlStateNormal];
     [colorTabButton setBackgroundImage:[UIImage imageNamed:@"color_button"] forState:UIControlStateNormal];
-    //[sizeTabButton setBackgroundImage:[UIImage imageNamed:@"tabButton.png"] forState:UIControlStateNormal];
     [sizeTabButton setBackgroundImage:[UIImage imageNamed:@"size_button"] forState:UIControlStateNormal];
     [borderTabButton setBackgroundImage:[UIImage imageNamed:@"outline_button"] forState:UIControlStateNormal];
     [fontBorderTabButton setBackgroundImage:[UIImage imageNamed:@"background_button"] forState:UIControlStateNormal];
@@ -1590,7 +1856,10 @@
 	sizeTabButton.alpha = ALPHA1;
 	borderTabButton.alpha = ALPHA1;
 	fontBorderTabButton.alpha = ALPHA1;
-	msgLabel.alpha=1;
+    
+    UITextView *lastTextView = msgTextView;
+    CustomLabel *lastLabelView = [[self textLabelLayersArray]lastObject];
+	lastLabelView.alpha=1;
 	
 	
 	cameraTabButton.alpha = ALPHA0;
@@ -1605,44 +1874,33 @@
 	
 	[UIView commitAnimations];
 	
-	[msgTextView setTextColor:selectedColor];
-	[msgLabel setTextColor:selectedColor];
-	CALayer * l = [msgTextView layer];
+	[lastTextView setTextColor:selectedColor];
+	[lastLabelView setTextColor:selectedColor];
+	CALayer * l = [lastTextView layer];
 	[l setMasksToBounds:YES];
 	[l setCornerRadius:0];
 	[l setBorderWidth:0];
 	[l setBorderColor:[[UIColor clearColor] CGColor]];
-	selectedText = msgTextView.text;
+	selectedText = lastTextView.text;
 	
 	//msgLabel.frame = CGRectMake(lableLocation.x,lableLocation.y,msgLabel.frame.size.width, msgTextView.contentSize.height);
-	msgLabel.center = lableLocation;
-	msgLabel.numberOfLines = 40;
-	msgLabel.text = msgTextView.text;
-	[msgTextView resignFirstResponder];
-	[msgTextView removeFromSuperview];
+	lastLabelView.center = lableLocation;
+	lastLabelView.numberOfLines = 40;
+	lastLabelView.text = lastTextView.text;
+	[lastTextView resignFirstResponder];
+	[lastTextView removeFromSuperview];
+    
 	lableTouchFlag = YES;
 	photoTouchFlag = NO;
+    symbolTouchFlag= NO;
+    iconTouchFlag = NO;
 
 }
 
 -(void)choosePhoto
 {
 
-	[navBar show:@"Choose Photo" left:@"Style" right:@"Save/Share"];
-	[self.view bringSubviewToFront:navBar];
-	
-	[navBar.leftButton removeTarget:self action:@selector(chooseTemplate) forControlEvents:UIControlEventTouchUpInside];
-	[navBar.rightButton removeTarget:self action:@selector(callWrite) forControlEvents:UIControlEventTouchUpInside];
-	
-	[navBar.leftButton addTarget:self action:@selector(callStyle) forControlEvents:UIControlEventTouchUpInside];
-	[navBar.rightButton addTarget:self action:@selector(callSaveAndShare) forControlEvents:UIControlEventTouchUpInside];
-		
-    //UILabel *saveShareLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 55, 50)];
-    //[saveShareLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:8.5]];
-    //[saveShareLabel setTextColor:[MyCustomCell colorWithHexString:@"008ec0"]];
-    //[saveShareLabel setBackgroundColor:[UIColor clearColor]];
-    //[saveShareLabel setText:@"Add photo"];
-    //UIBarButtonItem *barLabel = [[UIBarButtonItem alloc] initWithCustomView:saveShareLabel];
+    selectedAddMoreLayerTab = -1;
     self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Add photo"];
 
     UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
@@ -1665,7 +1923,8 @@
     [self.navigationItem setLeftBarButtonItem:backBarButton];
 
     [self hidePictureTab];
-    [self showAddMoreTab];
+    [self showAddMoreButton];
+    [self hideAddMoreTab];
 
 	CALayer * l = [photoImgView layer];
 	[l setMasksToBounds:YES];
@@ -1689,15 +1948,20 @@
         sizeScrollView.frame = CGRectMake(-320, 385, 320, 130);
         borderScrollView.frame = CGRectMake(-320, 385, 320, 130);
         fontBorderScrollView.frame = CGRectMake(-320, 385, 320, 130);
+        symbolScrollView.frame = CGRectMake(-320, 385, 320, 130);
+        iconScrollView.frame = CGRectMake(-320, 385, 320, 130);
     }else{
         fontScrollView.frame = CGRectMake(-320, 385, 320, 44);
         colorScrollView.frame = CGRectMake(-320, 385, 320, 44);
         sizeScrollView.frame = CGRectMake(-320, 385, 320, 44);
         borderScrollView.frame = CGRectMake(-320, 385, 320, 44);
         fontBorderScrollView.frame = CGRectMake(-320, 385, 320, 44);
+        symbolScrollView.frame = CGRectMake(-320, 385, 320, 44);
+        iconScrollView.frame = CGRectMake(-320, 385, 320, 44);
     }
 
-	msgLabel.alpha=1;
+	//msgLabel.alpha=1;
+    ((CustomLabel *)[[self textLabelLayersArray] lastObject]).alpha = 1;
 	[cameraTabButton setBackgroundImage:[UIImage imageNamed:@"07_camera"] forState:UIControlStateNormal];
 	[photoTabButton setBackgroundImage:[UIImage imageNamed:@"07_roll"] forState:UIControlStateNormal];
 	[widthTabButton setBackgroundImage:[UIImage imageNamed:@"07_width_selected"] forState:UIControlStateNormal];
@@ -1722,8 +1986,108 @@
     
 	lableTouchFlag = NO;
 	photoTouchFlag = YES;
+    symbolTouchFlag= NO;
+    iconTouchFlag = NO;
 	[self.imgView sendSubviewToBack:photoImgView];
-	[self.imgView bringSubviewToFront:msgLabel];
+	[self.imgView bringSubviewToFront:[[self textLabelLayersArray] lastObject]];
+}
+
+-(void)callAddMoreLayers {
+    
+    //self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Add more layers"];
+    [self showAddMoreTab];
+    
+    UIButton *saveButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
+    saveButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
+    [saveButton setTitle:@"Save" forState:UIControlStateNormal];
+	[saveButton addTarget:self action:@selector(callSaveAndShare) forControlEvents:UIControlEventTouchUpInside];
+    [saveButton setBackgroundImage:[UIImage imageNamed:@"crop_button"] forState:UIControlStateNormal];
+    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:saveButton];
+
+    UIButton *plusButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 32, 30)];
+    [plusButton setBackgroundImage:[UIImage imageNamed:@"plus_button"] forState:UIControlStateNormal];
+	[plusButton addTarget:self action:@selector(plusButtonClick) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *rightPlusBarButton = [[UIBarButtonItem alloc] initWithCustomView:plusButton];
+
+    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,rightPlusBarButton,nil]];
+    
+    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
+    [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+	[backButton addTarget:self action:@selector(choosePhoto) forControlEvents:UIControlEventTouchUpInside];
+    [backButton setBackgroundImage:[UIImage imageNamed:@"back_blue"] forState:UIControlStateNormal];
+    UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    [self.navigationItem setLeftBarButtonItem:backBarButton];
+    
+    [self hidePictureTab];
+    [self hideAddMoreButton];
+    
+    /*
+	CALayer * l = [photoImgView layer];
+	[l setMasksToBounds:YES];
+	[l setCornerRadius:10];
+	[l setBorderWidth:1.0];
+	[l setBorderColor:[[UIColor grayColor] CGColor]];
+	[photoImgView setBackgroundColor:[ UIColor colorWithWhite:1 alpha:0.4f]];
+	[self.imgView addSubview:photoImgView];
+	
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationDuration:0.4f];
+    */
+    
+    if(IS_IPHONE_5){
+        fontScrollView.frame = CGRectMake(-320, 385, 320, 130);
+        colorScrollView.frame = CGRectMake(-320, 385, 320, 130);
+        sizeScrollView.frame = CGRectMake(-320, 385, 320, 130);
+        borderScrollView.frame = CGRectMake(-320, 385, 320, 130);
+        fontBorderScrollView.frame = CGRectMake(-320, 385, 320, 130);
+    }else{
+        fontScrollView.frame = CGRectMake(-320, 385, 320, 44);
+        colorScrollView.frame = CGRectMake(-320, 385, 320, 44);
+        sizeScrollView.frame = CGRectMake(-320, 385, 320, 44);
+        borderScrollView.frame = CGRectMake(-320, 385, 320, 44);
+        fontBorderScrollView.frame = CGRectMake(-320, 385, 320, 44);
+    }
+    
+    if(IS_IPHONE_5){
+        symbolScrollView.frame = CGRectMake(10, 354, 320, 130);
+        iconScrollView.frame = CGRectMake(10, 354, 320, 130);
+    }else{
+        symbolScrollView.frame = CGRectMake(0, 360, 320, 44);
+        iconScrollView.frame = CGRectMake(0, 360, 320, 44);
+    }
+
+	[addMoreFontTabButton setBackgroundImage:[UIImage imageNamed:@"text_icon"] forState:UIControlStateNormal];
+	[addMorePhotoTabButton setBackgroundImage:[UIImage imageNamed:@"image_icon"] forState:UIControlStateNormal];
+	[addMoreSymbolTabButton setBackgroundImage:[UIImage imageNamed:@"symbolicon_button"] forState:UIControlStateNormal];
+	[addMoreIconTabButton setBackgroundImage:[UIImage imageNamed:@"icon_button"] forState:UIControlStateNormal];
+	[arrangeLayerTabButton setBackgroundImage:[UIImage imageNamed:@"arrangeicon_button"] forState:UIControlStateNormal];
+    
+	//msgLabel.alpha=1;
+    ((CustomLabel *)[[self textLabelLayersArray] lastObject]).alpha = 1;
+    photoImgView.alpha=1;
+    symbolImgView.alpha = 1;
+    iconImgView.alpha = 1;
+	fontTabButton.alpha = ALPHA0;
+	colorTabButton.alpha = ALPHA0;
+	sizeTabButton.alpha = ALPHA0;
+	borderTabButton.alpha = ALPHA0;
+	fontBorderTabButton.alpha = ALPHA0;
+	cameraTabButton.alpha = ALPHA0;
+	photoTabButton.alpha = ALPHA0;
+	widthTabButton.alpha = ALPHA0;
+	heightTabButton.alpha = ALPHA0;
+	textBackgrnd.alpha = ALPHA0;
+
+    addMoreFontTabButton.alpha = ALPHA1;
+	addMorePhotoTabButton.alpha = ALPHA1;
+	addMoreSymbolTabButton.alpha = ALPHA1;
+	addMoreIconTabButton.alpha = ALPHA1;
+	arrangeLayerTabButton.alpha = ALPHA1;
+
+    selectedAddMoreLayerTab = ADD_MORE_TEXT_TAB;
+
+    [UIView commitAnimations];
+    
 }
 
 CGRect initialBounds;
@@ -1758,15 +2122,34 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 -(void)callSaveAndShare
 {
 
-	CALayer * l = [photoImgView layer];
-	[l setMasksToBounds:YES];
-	[l setCornerRadius:10];
-	[l setBorderWidth:1.0];
-	[l setBorderColor:[[UIColor clearColor] CGColor]];
-	[photoImgView setBackgroundColor:[ UIColor clearColor]];
+	//CALayer * l = [photoImgView layer];
+	//[l setMasksToBounds:YES];
+	//[l setCornerRadius:10];
+	//[l setBorderWidth:1.0];
+	//[l setBorderColor:[[UIColor clearColor] CGColor]];
+	//[photoImgView setBackgroundColor:[ UIColor clearColor]];
 	
+    CALayer * symbolLayer = [[[self symbolLayersArray] lastObject] layer];
+    [symbolLayer setMasksToBounds:YES];
+    [symbolLayer setCornerRadius:0];
+    [symbolLayer setBorderWidth:0];
+    [symbolLayer setBorderColor:[[UIColor clearColor] CGColor]];
+    CALayer * iconLayer = [[[self iconLayersArray] lastObject] layer];
+    [iconLayer setMasksToBounds:YES];
+    [iconLayer setCornerRadius:0];
+    [iconLayer setBorderWidth:0];
+    [iconLayer setBorderColor:[[UIColor clearColor] CGColor]];    
+    CALayer * photoLayer = [[[self photoLayersArray] lastObject] layer];
+    [photoLayer setMasksToBounds:YES];
+    [photoLayer setCornerRadius:0];
+    [photoLayer setBorderWidth:0];
+    [photoLayer setBorderColor:[[UIColor clearColor] CGColor]];
+    
+
 	lableTouchFlag = NO;
 	photoTouchFlag = NO;
+    symbolTouchFlag= NO;
+    iconTouchFlag = NO;
 	photoImgView.userInteractionEnabled = NO;
 	
     [navBar show:@"Save/Share" left:@"Style" right:@"Menu"];
@@ -1781,7 +2164,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStylePlain target:self action:@selector(callMenu)];
     [self.navigationItem setRightBarButtonItem:rightBarButton];
     [self hidePictureTab];
-    [self hideAddMoreTab];
+    [self hideAddMoreButton];
 
 	fontTabButton.alpha = ALPHA0;
 	colorTabButton.alpha = ALPHA0;
@@ -1803,7 +2186,8 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         borderScrollView.frame = CGRectMake(-320, 385, 320, 44);
         fontBorderScrollView.frame = CGRectMake(-320, 385, 320, 44);
     }
-	msgLabel.alpha=1;
+	//msgLabel.alpha=1;
+    ((CustomLabel *)[[self textLabelLayersArray] lastObject]).alpha = 1;
 
     FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
     NSData *data = [self getCurrentFrameAndSaveIt];
@@ -2003,6 +2387,147 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	}
 }
 
+-(void) setAddMoreLayerTabAction:(id) sender {
+    
+	UIButton *selectedButton = (UIButton*)sender;
+	if(selectedButton == addMoreFontTabButton)
+	{
+        selectedAddMoreLayerTab = ADD_MORE_TEXT_TAB;
+
+        symbolTouchFlag= NO;
+        photoTouchFlag = NO;
+        iconTouchFlag = NO;
+        lableTouchFlag = YES;
+		[UIView beginAnimations:nil context:NULL];
+		[UIView setAnimationDuration:0.4f];
+
+        [addMoreFontTabButton setBackgroundImage:[UIImage imageNamed:@"text_icon"] forState:UIControlStateNormal];
+        [addMorePhotoTabButton setBackgroundImage:[UIImage imageNamed:@"image_icon"] forState:UIControlStateNormal];
+        [addMoreSymbolTabButton setBackgroundImage:[UIImage imageNamed:@"symbolicon_button"] forState:UIControlStateNormal];
+        [addMoreIconTabButton setBackgroundImage:[UIImage imageNamed:@"icon_button"] forState:UIControlStateNormal];
+        [arrangeLayerTabButton setBackgroundImage:[UIImage imageNamed:@"arrangeicon_button"] forState:UIControlStateNormal];
+
+        [UIView commitAnimations];
+	}
+	else if(selectedButton == addMorePhotoTabButton)
+	{
+        selectedAddMoreLayerTab = ADD_MORE_PHOTO_TAB;
+
+        symbolTouchFlag= NO;
+        iconTouchFlag = NO;
+        photoTouchFlag = YES;
+        lableTouchFlag = NO;
+		imgPickerFlag =2;
+		[UIView beginAnimations:nil context:NULL];
+		[UIView setAnimationDuration:0.4f];
+        
+        CALayer * l = [[[self  photoLayersArray] lastObject] layer];
+        [l setMasksToBounds:YES];
+        [l setCornerRadius:10];
+        [l setBorderWidth:1.0];
+        [l setBorderColor:[[UIColor grayColor] CGColor]];
+        [[[self  photoLayersArray] lastObject] setBackgroundColor:[ UIColor colorWithWhite:1 alpha:0.4f]];
+        [self.imgView addSubview:[[self  photoLayersArray] lastObject]];
+                
+		textBackgrnd.alpha = ALPHA0;
+
+        [addMoreFontTabButton setBackgroundImage:[UIImage imageNamed:@"text_icon"] forState:UIControlStateNormal];
+        [addMorePhotoTabButton setBackgroundImage:[UIImage imageNamed:@"image_icon"] forState:UIControlStateNormal];
+        [addMoreSymbolTabButton setBackgroundImage:[UIImage imageNamed:@"symbolicon_button"] forState:UIControlStateNormal];
+        [addMoreIconTabButton setBackgroundImage:[UIImage imageNamed:@"icon_button"] forState:UIControlStateNormal];
+        [arrangeLayerTabButton setBackgroundImage:[UIImage imageNamed:@"arrangeicon_button"] forState:UIControlStateNormal];
+
+		[UIView commitAnimations];
+        
+		[self loadCustomPhotoLibrary];
+	}
+	else if(selectedButton == addMoreSymbolTabButton)
+	{
+        selectedAddMoreLayerTab = ADD_MORE_SYMBOL_TAB;
+
+        symbolTouchFlag= YES;
+        photoTouchFlag= NO;
+        lableTouchFlag = NO;
+        iconTouchFlag = NO;
+		[UIView beginAnimations:nil context:NULL];
+		[UIView setAnimationDuration:0.4f];
+        
+        CALayer * l = [[[self  symbolLayersArray] lastObject] layer];
+        [l setMasksToBounds:YES];
+        [l setCornerRadius:10];
+        [l setBorderWidth:1.0];
+        [l setBorderColor:[[UIColor grayColor] CGColor]];
+        [[[self  symbolLayersArray] lastObject] setBackgroundColor:[ UIColor colorWithWhite:1 alpha:0.4f]];
+        [self.imgView addSubview:[[self  symbolLayersArray] lastObject]];
+
+		[symbolScrollView setAlpha:ALPHA1];
+		[iconScrollView setAlpha:ALPHA0];
+
+        [addMoreFontTabButton setBackgroundImage:[UIImage imageNamed:@"text_icon"] forState:UIControlStateNormal];
+        [addMorePhotoTabButton setBackgroundImage:[UIImage imageNamed:@"image_icon"] forState:UIControlStateNormal];
+        [addMoreSymbolTabButton setBackgroundImage:[UIImage imageNamed:@"symbolicon_button"] forState:UIControlStateNormal];
+        [addMoreIconTabButton setBackgroundImage:[UIImage imageNamed:@"icon_button"] forState:UIControlStateNormal];
+        [arrangeLayerTabButton setBackgroundImage:[UIImage imageNamed:@"arrangeicon_button"] forState:UIControlStateNormal];
+
+		[UIView commitAnimations];
+	}
+	else if(selectedButton == addMoreIconTabButton)
+	{
+        selectedAddMoreLayerTab = ADD_MORE_ICON_TAB;
+
+        lableTouchFlag = NO;
+        symbolTouchFlag= NO;
+        iconTouchFlag = YES;
+		[UIView beginAnimations:nil context:NULL];
+		[UIView setAnimationDuration:0.4f];
+        
+        CALayer * l = [iconImgView layer];
+        [l setMasksToBounds:YES];
+        [l setCornerRadius:10];
+        [l setBorderWidth:1.0];
+        [l setBorderColor:[[UIColor grayColor] CGColor]];
+        [[[self  iconLayersArray] lastObject] setBackgroundColor:[ UIColor colorWithWhite:1 alpha:0.4f]];
+        [self.imgView addSubview:[[self  iconLayersArray] lastObject]];
+
+		[symbolScrollView setAlpha:ALPHA0];
+		[iconScrollView setAlpha:ALPHA1];
+        
+        [addMoreFontTabButton setBackgroundImage:[UIImage imageNamed:@"text_icon"] forState:UIControlStateNormal];
+        [addMorePhotoTabButton setBackgroundImage:[UIImage imageNamed:@"image_icon"] forState:UIControlStateNormal];
+        [addMoreSymbolTabButton setBackgroundImage:[UIImage imageNamed:@"symbolicon_button"] forState:UIControlStateNormal];
+        [addMoreIconTabButton setBackgroundImage:[UIImage imageNamed:@"icon_button"] forState:UIControlStateNormal];
+        [arrangeLayerTabButton setBackgroundImage:[UIImage imageNamed:@"arrangeicon_button"] forState:UIControlStateNormal];
+        
+		[UIView commitAnimations];
+	}
+	else if(selectedButton == arrangeLayerTabButton)
+	{
+        selectedAddMoreLayerTab = ARRANGE_LAYER_TAB;
+
+        lableTouchFlag = NO;
+        symbolTouchFlag= NO;
+        iconTouchFlag = NO;
+        photoTouchFlag = YES;
+
+        /*
+		[UIView beginAnimations:nil context:NULL];
+		[UIView setAnimationDuration:0.4f];
+		[fontScrollView setAlpha:ALPHA0];
+		[colorScrollView setAlpha:ALPHA0];
+		[sizeScrollView setAlpha:ALPHA0];
+		[borderScrollView setAlpha:ALPHA1];
+		[fontBorderScrollView setAlpha:ALPHA0];
+		[fontTabButton setBackgroundImage:[UIImage imageNamed:@"font_button"] forState:UIControlStateNormal];
+		//[fontTabButton setBackgroundImage:[UIImage imageNamed:@"tabButton.png"] forState:UIControlStateNormal];
+		[colorTabButton setBackgroundImage:[UIImage imageNamed:@"color_button"] forState:UIControlStateNormal];
+		//[sizeTabButton setBackgroundImage:[UIImage imageNamed:@"selTab.png"] forState:UIControlStateNormal];
+		[sizeTabButton setBackgroundImage:[UIImage imageNamed:@"size_button"] forState:UIControlStateNormal];
+		[borderTabButton setBackgroundImage:[UIImage imageNamed:@"outline_button"] forState:UIControlStateNormal];
+		[fontBorderTabButton setBackgroundImage:[UIImage imageNamed:@"background_button_selected"] forState:UIControlStateNormal];
+		[UIView commitAnimations];
+         */
+	}
+}
 
 -(void) setPhotoTabAction:(id) sender{
 	UIButton *selectedButton = (UIButton*)sender;
@@ -2075,6 +2600,148 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	}
 }
 
+-(NSMutableArray *)photoLayersArray{
+    
+    if(photoLayersArray){
+        return photoLayersArray;
+    } else {
+        
+        photoLayersArray = [[NSMutableArray alloc] init];
+        return photoLayersArray;
+    }
+}
+
+-(NSMutableArray *)symbolLayersArray{
+
+    if(symbolLayersArray){
+        return symbolLayersArray;
+    } else {
+    
+        symbolLayersArray = [[NSMutableArray alloc] init];
+        return symbolLayersArray;
+    }
+}
+
+-(NSMutableArray *)iconLayersArray{
+    
+    if(iconLayersArray){
+        return iconLayersArray;
+    } else {
+        
+        iconLayersArray = [[NSMutableArray alloc] init];
+        return iconLayersArray;
+    }
+}
+
+/*-(NSMutableArray *)textEditLayersArray{
+    
+    if(textEditLayersArray){
+        return textEditLayersArray;
+    } else {
+        
+        textEditLayersArray = [[NSMutableArray alloc] init];
+        return textEditLayersArray;
+    }
+}*/
+
+-(NSMutableArray *)textLabelLayersArray{
+    
+    if(textLabelLayersArray){
+        return textLabelLayersArray;
+    } else {
+        
+        textLabelLayersArray = [[NSMutableArray alloc] init];
+        return textLabelLayersArray;
+    }
+}
+
+-(void)plusButtonClick{
+    
+    if(selectedAddMoreLayerTab == ADD_MORE_TEXT_TAB){
+        
+        /*UITextView *newMsgTextView = [[UITextView alloc]initWithFrame:CGRectMake(20, 50, 280, 150)];
+        newMsgTextView.delegate = self;
+        newMsgTextView.font = [UIFont fontWithName:@"Arial" size:16];
+        newMsgTextView.textColor = [UIColor blackColor];
+        newMsgTextView.textAlignment = UITextAlignmentCenter;
+        [[self textEditLayersArray] addObject:newMsgTextView];*/
+
+        CustomLabel *newMsgLabel = [[CustomLabel alloc]initWithFrame:CGRectMake(0, 30, 320, 500)];
+        newMsgLabel.backgroundColor = [UIColor clearColor];
+        newMsgLabel.textColor = [UIColor blackColor];
+        newMsgLabel.textAlignment = UITextAlignmentCenter;
+        [self.imgView addSubview:newMsgLabel];
+        [[self textLabelLayersArray] addObject:newMsgLabel];
+
+        [self callWrite];
+    
+    } else if(selectedAddMoreLayerTab == ADD_MORE_SYMBOL_TAB){
+        
+        CALayer * lastLayer = [[[self symbolLayersArray] lastObject] layer];
+        [lastLayer setMasksToBounds:YES];
+        [lastLayer setCornerRadius:0];
+        [lastLayer setBorderWidth:0];
+        [lastLayer setBorderColor:[[UIColor clearColor] CGColor]];
+
+        UIImageView *newSymbolImgView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 90, 70)];
+        newSymbolImgView.tag = symbolLayerCount++;
+        
+        CALayer * l = [newSymbolImgView layer];
+        [l setMasksToBounds:YES];
+        [l setCornerRadius:10];
+        [l setBorderWidth:1.0];
+        [l setBorderColor:[[UIColor grayColor] CGColor]];
+        [newSymbolImgView setBackgroundColor:[ UIColor colorWithWhite:1 alpha:0.4f]];
+        [self.imgView addSubview:newSymbolImgView];
+        
+        [[self symbolLayersArray] addObject:newSymbolImgView];
+    
+    } else if(selectedAddMoreLayerTab == ADD_MORE_ICON_TAB){
+        
+        CALayer * lastLayer = [[[self iconLayersArray] lastObject] layer];
+        [lastLayer setMasksToBounds:YES];
+        [lastLayer setCornerRadius:0];
+        [lastLayer setBorderWidth:0];
+        [lastLayer setBorderColor:[[UIColor clearColor] CGColor]];
+        
+        UIImageView *newIconImgView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 90, 70)];
+        newIconImgView.tag = iconLayerCount++;
+        
+        CALayer * l = [newIconImgView layer];
+        [l setMasksToBounds:YES];
+        [l setCornerRadius:10];
+        [l setBorderWidth:1.0];
+        [l setBorderColor:[[UIColor grayColor] CGColor]];
+        [newIconImgView setBackgroundColor:[ UIColor colorWithWhite:1 alpha:0.4f]];
+        [self.imgView addSubview:newIconImgView];
+        
+        [[self iconLayersArray] addObject:newIconImgView];
+    
+    } else if(selectedAddMoreLayerTab == ADD_MORE_PHOTO_TAB){
+        
+        photoTouchFlag = YES;
+        
+        CALayer * lastLayer = [[[self photoLayersArray] lastObject] layer];
+        [lastLayer setMasksToBounds:YES];
+        [lastLayer setCornerRadius:0];
+        [lastLayer setBorderWidth:0];
+        [lastLayer setBorderColor:[[UIColor clearColor] CGColor]];
+        
+        UIImageView *newPhotoImgView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 220, 200)];
+        newPhotoImgView.tag = photoLayerCount++;
+        
+        CALayer * l = [newPhotoImgView layer];
+        [l setMasksToBounds:YES];
+        [l setCornerRadius:10];
+        [l setBorderWidth:1.0];
+        [l setBorderColor:[[UIColor grayColor] CGColor]];
+        [newPhotoImgView setBackgroundColor:[ UIColor colorWithWhite:1 alpha:0.4f]];
+        [self.imgView addSubview:newPhotoImgView];
+        
+        [[self photoLayersArray] addObject:newPhotoImgView];
+    }
+}
+
 /************************************************************************************************/
 #pragma mark  ALL TOUCH FUNCTIONS
 
@@ -2119,8 +2786,8 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	if (CGRectContainsPoint([photoImgView frame], position)&& photoTouchFlag) {
 		[self animateView:photoImgView toPosition: position];
 	} 
-	else if(CGRectContainsPoint([msgLabel frame], position)&& lableTouchFlag){
-		[self animateView:msgLabel toPosition: position];
+	else if(CGRectContainsPoint([[[self textLabelLayersArray] lastObject] frame], position)&& lableTouchFlag){
+		[self animateView:[[self textLabelLayersArray] lastObject] toPosition: position];
 	}
 }
 
@@ -2136,24 +2803,42 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 		//if (CGRectContainsPoint([self.imgView frame], [touch locationInView:self.imgView]) && lableTouchFlag )
         if (loc.y <= imgView.frame.size.height && lableTouchFlag )
 		{
-			[self.imgView sendSubviewToBack:photoImgView];
-			[self.imgView bringSubviewToFront:msgLabel];
+			[self.imgView sendSubviewToBack:[[self photoLayersArray] lastObject]];
+			[self.imgView bringSubviewToFront:[[self textLabelLayersArray] lastObject]];
 
 			for (UITouch *touch in touches) {
 				//[self dispatchFirstTouchAtPoint:msgLabel point:[touch locationInView:self.view] forEvent:nil];
-				[self dispatchFirstTouchAtPoint:msgLabel point:[touch locationInView:self.imgView] forEvent:nil];
+				[self dispatchFirstTouchAtPoint:[[self textLabelLayersArray] lastObject] point:[touch locationInView:self.imgView] forEvent:nil];
 			}
-		}	
+		}
 		//else if (CGRectContainsPoint([photoImgView frame], [touch locationInView:self.imgView]) && photoTouchFlag)
 		else if (loc.y <= (imgView.frame.size.height-(photoImgView.frame.size.height/2)) && photoTouchFlag)
 		{
-			[self.imgView sendSubviewToBack:photoImgView];
-			[self.imgView bringSubviewToFront:msgLabel];
+			[self.imgView sendSubviewToBack:[[self photoLayersArray] lastObject]];
+			[self.imgView bringSubviewToFront:[[self textLabelLayersArray] lastObject]];
 			for (UITouch *touch in touches) {
-				[self dispatchFirstTouchAtPoint:photoImgView point:[touch locationInView:self.imgView] forEvent:nil];
+				[self dispatchFirstTouchAtPoint:[[self photoLayersArray] lastObject] point:[touch locationInView:self.imgView] forEvent:nil];
 				//[self dispatchFirstTouchAtPoint:photoImgView point:[touch locationInView:self.view] forEvent:nil];
 			}
-		}	
+		}
+        else if (loc.y <= (imgView.frame.size.height-(symbolImgView.frame.size.height/2)) && symbolTouchFlag)
+		{
+			[self.imgView sendSubviewToBack:[[self symbolLayersArray] lastObject]];
+			[self.imgView bringSubviewToFront:[[self textLabelLayersArray] lastObject]];
+			for (UITouch *touch in touches) {
+				[self dispatchFirstTouchAtPoint:[[self symbolLayersArray] lastObject] point:[touch locationInView:self.imgView] forEvent:nil];
+				//[self dispatchFirstTouchAtPoint:photoImgView point:[touch locationInView:self.view] forEvent:nil];
+			}
+		}
+        else if (loc.y <= (imgView.frame.size.height-(iconImgView.frame.size.height/2)) && iconTouchFlag)
+		{
+			[self.imgView sendSubviewToBack:[[self iconLayersArray] lastObject]];
+			[self.imgView bringSubviewToFront:[[self textLabelLayersArray] lastObject]];
+			for (UITouch *touch in touches) {
+				[self dispatchFirstTouchAtPoint:[[self iconLayersArray] lastObject] point:[touch locationInView:self.imgView] forEvent:nil];
+				//[self dispatchFirstTouchAtPoint:photoImgView point:[touch locationInView:self.view] forEvent:nil];
+			}
+		}
 	}
 	else if(numTaps == 2)
 	{
@@ -2173,7 +2858,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 		
 		for (UITouch *touch in touches){
 			lableLocation = [touch locationInView:self.imgView];
-			[self dispatchTouchEvent:msgLabel toPosition:[touch locationInView:self.imgView]];
+			[self dispatchTouchEvent:[[self textLabelLayersArray] lastObject] toPosition:[touch locationInView:self.imgView]];
 			//[self dispatchTouchEvent:msgLabel toPosition:[touch locationInView:self.view]];
 		}
 		
@@ -2183,7 +2868,21 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	else if (loc.y <= (imgView.frame.size.height-(photoImgView.frame.size.height/2)) && photoTouchFlag)
 	{
 		for (UITouch *touch in touches){
-			[self dispatchTouchEvent:photoImgView toPosition:[touch locationInView:self.imgView]];
+			[self dispatchTouchEvent:[[self photoLayersArray] lastObject] toPosition:[touch locationInView:self.imgView]];
+			//[self dispatchTouchEvent:photoImgView toPosition:[touch locationInView:self.view]];
+		}
+	}
+    else if (loc.y <= (imgView.frame.size.height-(symbolImgView.frame.size.height/2)) && symbolTouchFlag)
+	{
+		for (UITouch *touch in touches){
+			[self dispatchTouchEvent:[[self symbolLayersArray] lastObject] toPosition:[touch locationInView:self.imgView]];
+			//[self dispatchTouchEvent:photoImgView toPosition:[touch locationInView:self.view]];
+		}
+	}
+    else if (loc.y <= (imgView.frame.size.height-(iconImgView.frame.size.height/2)) && iconTouchFlag)
+	{
+		for (UITouch *touch in touches){
+			[self dispatchTouchEvent:[[self iconLayersArray] lastObject] toPosition:[touch locationInView:self.imgView]];
 			//[self dispatchTouchEvent:photoImgView toPosition:[touch locationInView:self.view]];
 		}
 	}
@@ -2382,9 +3081,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	NSLog(@"Dealloc");
 	[aHUD release];
 	[templateScrollView release];
-	//FlyrAppDelegate *appDele = [[UIApplication sharedApplication]delegate];
 	[templateArray release];
-	//[navBar removeFromSuperview];
 	[navBar release];
 	[msgTextView release];
 	[msgLabel release];
@@ -2393,7 +3090,8 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	[borderScrollView release];
 	[fontBorderScrollView release];
 	[fontScrollView release];
-	//[newImgName release];
+	[symbolScrollView release];
+	[iconScrollView release];
     
     [super dealloc];
 }

@@ -597,11 +597,18 @@
      [[NSFileManager defaultManager] createFileAtPath:updatedImagePath contents:imgData attributes:nil];
      
      NSURL *igImageHookFile = [NSURL fileURLWithPath:updatedImagePath];
-     
+    
      self.dic=[UIDocumentInteractionController interactionControllerWithURL:igImageHookFile];
      self.dic.UTI = @"com.instagram.photo";
      //self.dic = [self setupControllerWithURL:igImageHookFile usingDelegate:self];
      self.dic.annotation = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%@ %@", selectedFlyerDescription, @"#flyerly"] forKey:@"InstagramCaption"];     [self.dic presentOpenInMenuFromRect:rect inView: self.view animated:YES];
+    
+    /*
+    NSURL *instagramURL = [NSURL URLWithString:@"instagram://app"];
+    if ([[UIApplication sharedApplication] canOpenURL:instagramURL]) {
+        [[UIApplication sharedApplication] openURL:instagramURL];
+    }
+    */
 }
 
 -(void)shareOnTumblr{

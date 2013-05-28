@@ -19,10 +19,12 @@
 	HudView *aHUD;
     CustomPhotoController *customPhotoController;
 
-	UIImageView *imgView;				
+	UIImageView *imgView;
 	UIImageView *templateBckgrnd;
 	UIImageView *textBackgrnd;
 	UIImageView *photoImgView;
+	UIImageView *symbolImgView;
+	UIImageView *iconImgView;
 
     UIButton *takePhotoButton;
 	UIButton *cameraRollButton;
@@ -39,7 +41,10 @@
 	UIScrollView *templateScrollView;
 	//UIScrollView *heightScrollView;
 	//UIScrollView *widthScrollView;
-	
+
+    UIScrollView *symbolScrollView;
+	UIScrollView *iconScrollView;
+
 	UITextView *msgTextView;
 	CustomLabel *msgLabel;
 	UIImagePickerController *imgPicker;
@@ -51,6 +56,8 @@
 	UIFont *selectedFont;
 	NSString *selectedText;
 	UIImage *selectedTemplate;
+	UIImage *selectedSymbol;
+	UIImage *selectedIcon;
 	NSInteger selectedSize;
 	id selectedColor;
 	NSInteger selectedWidth;
@@ -73,12 +80,27 @@
 	UIButton *heightTabButton;
 	NSInteger imgPickerFlag;
 	
+	UIButton *addMoreFontTabButton;
+	UIButton *addMorePhotoTabButton;
+	UIButton *addMoreIconTabButton;
+	UIButton *addMoreSymbolTabButton;
+	UIButton *arrangeLayerTabButton;
+
 	BOOL photoTouchFlag;
+	BOOL symbolTouchFlag;
+	BOOL iconTouchFlag;
 	BOOL lableTouchFlag;
 	CGPoint lableLocation;
 	
 	NSMutableArray *templateArray;
 	NSMutableArray *iconArray;
+	NSMutableArray *symbolArray;
+
+    NSMutableArray *symbolLayersArray;
+    NSMutableArray *iconLayersArray;
+    NSMutableArray *photoLayersArray;
+    NSMutableArray *textEditLayersArray;
+    NSMutableArray *textLabelLayersArray;
 
 	NSArray *colorArray;
 	NSArray *borderArray;
@@ -90,6 +112,8 @@
 
 @property(nonatomic, retain)  UIImageView *imgView;
 @property (nonatomic,retain)  UIImageView *photoImgView;
+@property(nonatomic, retain)  UIImageView *symbolImgView;
+@property(nonatomic, retain)  UIImageView *iconImgView;
 @property (nonatomic, retain)UIImageView *templateBckgrnd;
 @property (nonatomic, retain)UIImageView *textBackgrnd;
 @property (nonatomic, retain) UIImagePickerController *imgPicker;
@@ -111,6 +135,9 @@
 //@property (nonatomic,retain) UIScrollView *heightScrollView;
 //@property (nonatomic,retain) UIScrollView *widthScrollView;
 
+@property (nonatomic, retain) UIScrollView *iconScrollView;
+@property (nonatomic, retain) UIScrollView *symbolScrollView;
+
 @property (nonatomic, retain) NSString *finalImgWritePath;
 @property (nonatomic, retain) NSString *newImgName;
 @property (nonatomic, retain) UIFont *selectedFont;
@@ -118,6 +145,8 @@
 @property (nonatomic, retain) NSString *selectedText;
 @property (nonatomic, assign) NSInteger selectedSize;
 @property (nonatomic, retain) UIImage *selectedTemplate;
+@property (nonatomic, retain) UIImage *selectedSymbol;
+@property (nonatomic, retain) UIImage *selectedIcon;
 
 @property (nonatomic, retain) UIButton *fontTabButton;
 @property (nonatomic, retain) UIButton *colorTabButton;
@@ -131,8 +160,16 @@
 @property (nonatomic,retain) UIButton *widthTabButton;
 @property (nonatomic,retain) UIButton *heightTabButton;
 
+@property (nonatomic, retain) UIButton *addMoreFontTabButton;
+@property (nonatomic, retain) UIButton *addMorePhotoTabButton;
+@property (nonatomic, retain) UIButton *addMoreIconTabButton;
+@property (nonatomic, retain) UIButton *addMoreSymbolTabButton;
+@property (nonatomic, retain) UIButton *arrangeLayerTabButton;
+
 @property (nonatomic, assign)BOOL photoTouchFlag;
 @property (nonatomic, assign)BOOL lableTouchFlag;
+@property (nonatomic, assign)BOOL symbolTouchFlag;
+@property (nonatomic, assign)BOOL iconTouchFlag;
 @property (nonatomic, assign) CGPoint lableLocation;
 @property (nonatomic,retain) UIAlertView *warningAlert;
 
