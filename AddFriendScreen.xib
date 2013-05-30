@@ -691,6 +691,15 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">goBack</string>
+						<reference key="source" ref="298218581"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">339</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">invite</string>
 						<reference key="source" ref="3669256"/>
 						<reference key="destination" ref="372490531"/>
@@ -944,7 +953,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">338</int>
+			<int key="maxID">339</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -952,15 +961,21 @@
 					<string key="className">AddFriendsController</string>
 					<string key="superclassName">UIViewController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="goBack">id</string>
 						<string key="invite">id</string>
 						<string key="loadFacebookContacts:">UIButton</string>
 						<string key="loadLocalContacts:">UIButton</string>
 						<string key="loadTwitterContacts:">UIButton</string>
 						<string key="onSearchClick:">UIButton</string>
 						<string key="selectAllCheckBoxes:">UIButton</string>
+						<string key="tagFacebookUsersWithFeed:">NSArray</string>
 						<string key="unSelectAllCheckBoxes:">UIButton</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="goBack">
+							<string key="name">goBack</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="invite">
 							<string key="name">invite</string>
 							<string key="candidateClassName">id</string>
@@ -984,6 +999,10 @@
 						<object class="IBActionInfo" key="selectAllCheckBoxes:">
 							<string key="name">selectAllCheckBoxes:</string>
 							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBActionInfo" key="tagFacebookUsersWithFeed:">
+							<string key="name">tagFacebookUsersWithFeed:</string>
+							<string key="candidateClassName">NSArray</string>
 						</object>
 						<object class="IBActionInfo" key="unSelectAllCheckBoxes:">
 							<string key="name">unSelectAllCheckBoxes:</string>

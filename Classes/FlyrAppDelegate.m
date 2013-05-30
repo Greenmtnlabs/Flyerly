@@ -314,7 +314,6 @@ NSString *FlickrSharingFailureNotification = @"FlickrSharingFailureNotification"
 - (void)flickrAPIRequest:(OFFlickrAPIRequest *)inRequest didFailWithError:(NSError *)inError{
     NSLog(@"Fail request %@, error: %@", inRequest, inError);
 	[[NSNotificationCenter defaultCenter] postNotificationName:FlickrSharingFailureNotification object:self];
-
 }
 
 #pragma mark -

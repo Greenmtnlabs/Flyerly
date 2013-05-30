@@ -225,7 +225,7 @@
 									<object class="IBUIButton" id="485106689">
 										<reference key="NSNextResponder" ref="122004284"/>
 										<int key="NSvFlags">292</int>
-										<string key="NSFrame">{{241, 1}, {79, 49}}</string>
+										<string key="NSFrame">{{241, 0}, {79, 49}}</string>
 										<reference key="NSSuperview" ref="122004284"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="335378330"/>
@@ -250,7 +250,7 @@
 										</object>
 										<object class="NSCustomResource" key="IBUINormalBackgroundImage">
 											<string key="NSClassName">NSImage</string>
-											<string key="NSResourceName">twitter_follow_selected.png</string>
+											<string key="NSResourceName">twitter_follow.png</string>
 										</object>
 										<object class="IBUIFontDescription" key="IBUIFontDescription" id="689705409">
 											<int key="type">2</int>
@@ -265,7 +265,7 @@
 									<object class="IBUIButton" id="682415310">
 										<reference key="NSNextResponder" ref="122004284"/>
 										<int key="NSvFlags">292</int>
-										<string key="NSFrame">{{0, 1}, {79, 49}}</string>
+										<string key="NSFrameSize">{79, 49}</string>
 										<reference key="NSSuperview" ref="122004284"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="651712667"/>
@@ -287,7 +287,7 @@
 										</object>
 										<object class="NSCustomResource" key="IBUINormalBackgroundImage">
 											<string key="NSClassName">NSImage</string>
-											<string key="NSResourceName">facebook_like_selected.png</string>
+											<string key="NSResourceName">facebook_like.png</string>
 										</object>
 										<reference key="IBUIFontDescription" ref="689705409"/>
 										<reference key="IBUIFont" ref="280861376"/>
@@ -352,6 +352,7 @@
 								<string key="NSFrame">{{125, 480}, {71, 69}}</string>
 								<reference key="NSSuperview" ref="970294404"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -511,7 +512,7 @@
 							<object class="IBUILabel" id="180820924">
 								<reference key="NSNextResponder" ref="970294404"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{223, 73}, {86, 21}}</string>
+								<string key="NSFrame">{{221, 73}, {86, 21}}</string>
 								<reference key="NSSuperview" ref="970294404"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="848890059"/>
@@ -521,10 +522,11 @@
 								<int key="IBUIContentMode">7</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<string key="IBUIText">Invite Friends</string>
+								<string key="IBUIText">Invite</string>
 								<reference key="IBUITextColor" ref="964994246"/>
 								<nil key="IBUIHighlightedColor"/>
 								<int key="IBUIBaselineAdjustment">0</int>
+								<int key="IBUITextAlignment">1</int>
 								<reference key="IBUIFontDescription" ref="14270427"/>
 								<reference key="IBUIFont" ref="1029709983"/>
 								<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
@@ -1064,7 +1066,7 @@
 			<string key="blue_divider.png">{1, 60}</string>
 			<string key="create_flyer.png">{108, 60}</string>
 			<string key="create_flyer_selected.png">{108, 60}</string>
-			<string key="facebook_like_selected.png">{80, 49}</string>
+			<string key="facebook_like.png">{80, 49}</string>
 			<string key="facebook_selected_button.png">{80, 49}</string>
 			<string key="invite_friends.png">{108, 60}</string>
 			<string key="invite_friends_selected.png">{108, 60}</string>
@@ -1075,7 +1077,7 @@
 			<string key="settings.png">{71, 69}</string>
 			<string key="settings_bg.png">{156, 47}</string>
 			<string key="settings_selected.png">{71, 69}</string>
-			<string key="twitter_follow_selected.png">{79, 49}</string>
+			<string key="twitter_follow.png">{79, 49}</string>
 			<string key="twitter_selected_button.png">{79, 49}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">2083</string>

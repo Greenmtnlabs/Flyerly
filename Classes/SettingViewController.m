@@ -290,6 +290,10 @@ extern NSString* kGetSessionProxy;
     [[UIApplication sharedApplication] openURL:authURL];
 }
 
+- (void)flickrAPIRequest:(OFFlickrAPIRequest *)inRequest didFailWithError:(NSError *)inError{
+    NSLog(@"Fail request %@, error: %@", inRequest, inError);
+}
+
 -(IBAction)loadHelpController{
     HelpController *helpController = [[HelpController alloc]initWithNibName:@"HelpController" bundle:nil];
     [self.navigationController pushViewController:helpController animated:NO];

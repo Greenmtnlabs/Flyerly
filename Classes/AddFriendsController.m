@@ -88,7 +88,7 @@ BOOL firstTableLoad = YES;
     return [NSMutableArray arrayWithObjects:menuBarButton,nil];
 }
 
--(void)goBack{
+-(IBAction)goBack{
 
 	[self.navigationController popToRootViewControllerAnimated:YES];
 }
@@ -323,7 +323,6 @@ BOOL firstTableLoad = YES;
             
             [appDelegate.facebook authorize:[NSArray arrayWithObjects: @"read_stream",
                                              @"publish_stream", nil]];
-            
         }
     }
 }
@@ -360,7 +359,7 @@ int totalCount = 0;
     [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
     //[self.uiTableView reloadData];
     
-    if(count == 2){
+    if(count > 0){
         FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
         [appDelegate.facebook requestWithGraphPath:[NSString stringWithFormat:@"me/friends?fields=name,picture.height(35).width(35).type(small)&limit=2&offset=%d", totalCount] andDelegate:self];
 
@@ -589,12 +588,12 @@ int totalCount = 0;
         if(selectedTab == 0){
             
             // send tweets to contacts
-            [self sendSMS:@"I am using the flyerly app to create and share flyers on the go! - http://www.flyr.us" recipients:identifiers];
+            [self sendSMS:@"I am using the flyerly app to create and share flyers on the go! - http://www.flyer.ly" recipients:identifiers];
             
         }else if(selectedTab == 2){
             // Send tweets to twitter contacts
             for(NSString *follower in identifiers){
-                [self sendTwitterMessage:@"I am using the flyerly app to create and share flyers on the go! -                                    http://www.flyr.us" screenName:follower];
+                [self sendTwitterMessage:@"I am using the flyerly app to create and share flyers on the go! -                                    http://www.flyer.ly" screenName:follower];
             }
             
             [self showAlert:@"Invited !" message:@"You have successfully invited your friends to join flyerly."];
@@ -637,7 +636,7 @@ int totalCount = 0;
 
     [self performPublishAction:^{
         
-        [FBRequestConnection startForPostStatusUpdate:@"I am using the flyerly app to create and share flyers on the go! - http://www.flyr.us" place:@"144479625584966" tags:identifiers completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+        [FBRequestConnection startForPostStatusUpdate:@"I am using the flyerly app to create and share flyers on the go! - http://www.flyer.ly" place:@"144479625584966" tags:identifiers completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
             
             NSLog(@"New Result: %@", result);
             NSLog(@"Error: %@", error);

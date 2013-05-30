@@ -163,9 +163,10 @@
 - (IBAction)onSelectImage:(UIButton *)sender{
     
     if(IS_IPHONE_5){
-        image = [PhotoController imageWithImage:image scaledToSize:CGSizeMake(IMAGE_WIDTH - 135, IMAGE_HEIGHT+50)];
+        //image = [PhotoController imageWithImage:image scaledToSize:CGSizeMake(IMAGE_WIDTH - 135, IMAGE_HEIGHT+50)];
+        image = [PhotoController imageWithImage:image scaledToSize:CGSizeMake(240, 340)];
     }else{
-        image = [PhotoController imageWithImage:image scaledToSize:CGSizeMake(360, 500)];
+        image = [PhotoController imageWithImage:image scaledToSize:CGSizeMake(480, 480)];
     }
     
     // Get the content offset in scroll view.
@@ -249,6 +250,7 @@
                                    (contentSize.height - imageSize.height)/2,
                                    imageSize.width, imageSize.height)];   
     
+    //[self loadAllGalleryPhotos];
     [self imageCount];
 }
 
@@ -444,17 +446,17 @@ int counter = 0;
                     ALAssetRepresentation *representation = [alAsset defaultRepresentation];
                     
                     if(imageCounter == 0){
-                        
-                        [cell.image1 setImage:[self thumbnailForAsset:alAsset maxPixelSize:300]];
+                        [cell.image1 setImage:[UIImage imageWithCGImage:[alAsset aspectRatioThumbnail]]];
                         cell.imageName1 = [representation url];
+                        //[cell.image1 setImage:[self thumbnailForAsset:alAsset maxPixelSize:90]];
                     } else if(imageCounter == 1){
-                        [cell.image2 setImage:[self thumbnailForAsset:alAsset maxPixelSize:300]];
+                        [cell.image2 setImage:[UIImage imageWithCGImage:[alAsset aspectRatioThumbnail]]];
                         cell.imageName2 = [representation url];
                     } else if(imageCounter == 2){
-                        [cell.image3 setImage:[self thumbnailForAsset:alAsset maxPixelSize:300]];
+                        [cell.image3 setImage:[UIImage imageWithCGImage:[alAsset aspectRatioThumbnail]]];
                         cell.imageName3 = [representation url];
                     } else if(imageCounter == 3){
-                        [cell.image4 setImage:[self thumbnailForAsset:alAsset maxPixelSize:300]];
+                        [cell.image4 setImage:[UIImage imageWithCGImage:[alAsset aspectRatioThumbnail]]];
                         cell.imageName4 = [representation url];
                     }
                     
@@ -467,6 +469,24 @@ int counter = 0;
         // Typically you should handle an error more gracefully than this.
         NSLog(@"No groups");
     }];
+}
+
+NSMutableArray *photoArray;
+-(void)loadAllGalleryPhotos{
+
+    ALAssetsLibrary *al = [[ALAssetsLibrary alloc] init];
+    photoArray = [[NSMutableArray alloc] init];
+    
+    [al enumerateGroupsWithTypes:ALAssetsGroupAll usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+         [group enumerateAssetsUsingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
+             
+             if (asset) {
+                 [photoArray addObject:[UIImage imageWithCGImage:[asset aspectRatioThumbnail]]];
+                 NSLog(@"%d",photoArray.count);
+              }
+          }];
+     }failureBlock:^(NSError *error) {
+     }] ;
 }
 
 - (UIImage *)thumbnailForAsset:(ALAsset *)asset maxPixelSize:(NSUInteger)size {

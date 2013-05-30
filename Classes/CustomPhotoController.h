@@ -33,6 +33,8 @@
     // Report back the image.
     SEL callbackOnComplete;
     id  callbackObject;
+    
+    NSMutableArray *photoArray;
 }
 
 @property (nonatomic, retain) IBOutlet UITableView *galleryTable;
@@ -43,6 +45,8 @@
 @property (nonatomic, retain) id callbackObject;
 @property (nonatomic) SEL callbackOnComplete;
 //@property(nonatomic,retain) NSMutableArray *deviceContactItems;
+
+@property (nonatomic, retain) NSMutableArray *photoArray;
 
 - (IBAction)onSelectImage:(UIButton *)sender;
 

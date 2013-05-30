@@ -19,7 +19,7 @@
     if (IS_IPHONE_5) {
         self.view.frame = CGRectMake(0, 0, 320, HEIGHT_IPHONE_5);
         [borderImage  setImage:[UIImage imageNamed:@"camera_border-568h@2x"]];
-        [gridImageView setFrame:CGRectMake(gridImageView.frame.origin.x, gridImageView.frame.origin.y +  10, gridImageView.frame.size.width, gridImageView.frame.size.height)];
+        [gridImageView setFrame:CGRectMake(gridImageView.frame.origin.x, gridImageView.frame.origin.y +  9, gridImageView.frame.size.width, gridImageView.frame.size.height+1)];
     }
     
     customPhotoController = [[CustomPhotoController alloc] initWithNibName:@"CustomPhotoController" bundle:nil];

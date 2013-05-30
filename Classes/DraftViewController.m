@@ -278,8 +278,8 @@
         return true;
     if([smsButton isSelected])
         return true;
-    //if([clipboardButton isSelected])
-    //    return true;
+    if([clipboardButton isSelected])
+        return true;
     
     return false;
 }
@@ -558,8 +558,23 @@
     if([MFMailComposeViewController canSendMail]){
         
         picker.mailComposeDelegate = self;
-        [picker setSubject:@"You've received a NEW flyerly..."];
+        [picker setSubject:@"You just received a NEW flyer!"];
         
+        NSMutableString *emailBody = [[[NSMutableString alloc] initWithString:@"<html><body>"] retain];
+        [emailBody appendString:@"<p><font size='4'><a href = 'http://www.flyer.ly/email'>A flyerly creation...</a></font></p>"];
+        
+        // Fill out the email body text
+        NSData *imageData = UIImagePNGRepresentation(selectedFlyerImage);
+        NSString *base64String = [imageData base64EncodedString];
+        [emailBody appendString:[NSString stringWithFormat:@"<p><b><img src='data:image/png;base64,%@'></b></p>",base64String]];
+        [emailBody appendString:@"<p><font size='4'><a href = 'http://www.flyer.ly'>Download flyerly & share a flyer</a></font></p>"];
+        [emailBody appendString:@"</body></html>"];
+        //NSLog(@"%@",emailBody);
+        
+        //mail composer window
+        [picker setMessageBody:emailBody isHTML:YES];
+        
+        /*
         // Set up recipients
         NSArray *toRecipients = [[[NSArray alloc]init]autorelease];
         NSArray *ccRecipients =   [[[NSArray alloc]init]autorelease];
@@ -569,12 +584,13 @@
         [picker setBccRecipients:bccRecipients];
 
         //NSString *emailBody = [NSString stringWithFormat:@"%@ %@", selectedFlyerDescription, @"#flyerly"];
-        NSString *emailBody = [NSString stringWithFormat:@"<font size='4'><a href = '%@'>Share a flyer</a></font>", @"http://www.flyer.us"];
+        NSString *emailBody = [NSString stringWithFormat:@"<font size='4'><a href = '%@'>Share a flyer</a></font>", @"http://www.flyer.ly"];
         [picker setMessageBody:emailBody isHTML:YES];
 
         // Fill out the email body text
         NSData *imageData = UIImagePNGRepresentation(selectedFlyerImage);
         [picker addAttachmentData:imageData mimeType:@"image/png" fileName:@"flyr.png"];
+        */
         
         [self presentModalViewController:picker animated:YES];
         [picker release];
@@ -614,6 +630,7 @@
 -(void)shareOnTumblr{
 
     [tumblrPogressView.statusText setText:@"Sharing..."];
+    [tumblrPogressView.statusText setTextColor:[UIColor yellowColor]];
     [tumblrPogressView.statusIcon setBackgroundImage:nil forState:UIControlStateNormal];
 
     [[TMAPIClient sharedInstance] userInfo:^(id data, NSError *error) {
@@ -635,6 +652,7 @@
 -(void)shareOnFlickr{
     
     [flickrPogressView.statusText setText:@"Sharing..."];
+    [flickrPogressView.statusText setTextColor:[UIColor yellowColor]];
     [flickrPogressView.statusIcon setBackgroundImage:nil forState:UIControlStateNormal];
 
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
@@ -652,6 +670,7 @@
 -(void)shareOnFacebook{
 
     [facebookPogressView.statusText setText:@"Sharing..."];
+    [facebookPogressView.statusText setTextColor:[UIColor yellowColor]];
     [facebookPogressView.statusIcon setBackgroundImage:nil forState:UIControlStateNormal];
 
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
@@ -668,6 +687,7 @@
 - (void)shareOnTwitter {
     
     [twitterPogressView.statusText setText:@"Sharing..."];
+    [twitterPogressView.statusText setTextColor:[UIColor yellowColor]];
     [twitterPogressView.statusIcon setBackgroundImage:nil forState:UIControlStateNormal];
 
     ACAccountStore *account = [[ACAccountStore alloc] init];
@@ -788,7 +808,7 @@
 #pragma update state text and icons
 -(void)fillErrorStatus:(ShareProgressView *)view{
     [view.statusText setText:@"Sharing Failed!"];
-    [view.statusText setTextColor:[UIColor yellowColor]];
+    [view.statusText setTextColor:[UIColor redColor]];
     [view.statusIcon setBackgroundImage:[UIImage imageNamed:@"status_failed"] forState:UIControlStateNormal];
     [view.refreshIcon setHidden:NO];
     [view.cancelIcon setBackgroundImage:[UIImage imageNamed:@"share_status_close"] forState:UIControlStateNormal];

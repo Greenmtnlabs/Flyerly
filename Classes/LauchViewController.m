@@ -16,12 +16,20 @@
 #import "DraftViewController.h"
 #import "Common.h"
 #import "HelpController.h"
+#import "FacebookLikeView.h"
+
+@interface LauchViewController () <FacebookLikeViewDelegate, FBSessionDelegate>
+
+@end
 
 @implementation LauchViewController
 
 @synthesize ptController,spController,tpController,createFlyrLabel,savedFlyrLabel,inviteFriendLabel,addFriendsController;
 @synthesize firstFlyer, secondFlyer, thirdFlyer, fourthFlyer, fifthFlyer, sixthFlyer, photoArray, photoDetailArray, createFlyrButton, savedFlyrButton, inviteFriendButton;
 @synthesize loadingView;
+@synthesize facebookLikeView=_facebookLikeView;
+@synthesize likeButton,followButton;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
 		
@@ -43,7 +51,6 @@
 	//[NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(loadPhotoView) userInfo:nil repeats:NO];
 }
 //End
-
 
 // Load View Flyr Method With Thread
 -(void)loadFlyerView{
@@ -365,6 +372,155 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
         [self showFlyerDetail:sixthFlyer];
     }
     
+}
+
+#pragma Like code
+
+- (IBAction)followOnTwitter:(id)sender {
+    ACAccountStore *accountStore = [[ACAccountStore alloc] init];
+    
+    ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+    
+    [accountStore requestAccessToAccountsWithType:accountType withCompletionHandler:^(BOOL granted, NSError *error) {
+        if(granted) {
+            // Get the list of Twitter accounts.
+            NSArray *accountsArray = [accountStore accountsWithAccountType:accountType];
+            
+            // For the sake of brevity, we'll assume there is only one Twitter account present.
+            // You would ideally ask the user which account they want to tweet from, if there is more than one Twitter account present.
+            if ([accountsArray count] > 0) {
+                // Grab the initial Twitter account to tweet from.
+                ACAccount *twitterAccount = [accountsArray objectAtIndex:0];
+                
+                NSMutableDictionary *tempDict = [[NSMutableDictionary alloc] init];
+                [tempDict setValue:@"flyerlyapp" forKey:@"screen_name"];
+                [tempDict setValue:@"true" forKey:@"follow"];
+                
+                TWRequest *postRequest = [[TWRequest alloc] initWithURL:[NSURL URLWithString:@"https://api.twitter.com/1/friendships/create.json"]
+                                                             parameters:tempDict
+                                                          requestMethod:TWRequestMethodPOST];
+                
+                
+                [postRequest setAccount:twitterAccount];
+                
+                [postRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+                    NSString *output = [NSString stringWithFormat:@"HTTP response status: %i", [urlResponse statusCode]];
+                    NSLog(@"%@", output);
+                    
+                    if([[output lowercaseString] rangeOfString:[@"200" lowercaseString]].location == NSNotFound){
+                        [followButton setSelected:NO];
+                    } else {
+                        [followButton setSelected:YES];
+                    }
+                }];
+            }
+        }
+    }];
+}
+
+- (void)facebookLikeViewDidRender:(FacebookLikeView *)aFacebookLikeView {
+    [UIView beginAnimations:@"" context:nil];
+    [UIView setAnimationDelay:0.5];
+    self.facebookLikeView.alpha = 1;
+    [UIView commitAnimations];
+}
+
+- (void)facebookLikeViewDidUnlike:(FacebookLikeView *)aFacebookLikeView {
+    UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Unliked"
+                                                     message:@"You unliked Flyerly. Where's the love?"
+                                                    delegate:self
+                                           cancelButtonTitle:@"OK"
+                                           otherButtonTitles:nil] autorelease];
+    [alert show];
+}
+
+- (void)facebookLikeViewDidLike:(FacebookLikeView *)aFacebookLikeView {
+    UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Liked"
+                                                     message:@"You liked Flyerly. Thanks!"
+                                                    delegate:self
+                                           cancelButtonTitle:@"OK"
+                                           otherButtonTitles:nil] autorelease];
+    [alert show];
+}
+
+- (IBAction)showLikeButton {
+    
+    /*self.facebookLikeView.href = [NSURL URLWithString:@"http://www.facebook.com/flyerlyapp"];
+    self.facebookLikeView.layout = @"button_count";
+    self.facebookLikeView.showFaces = NO;
+    
+    self.facebookLikeView.alpha = 0;
+    [self.facebookLikeView load];*/
+    
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    appDelegate.facebook.sessionDelegate = self;
+    
+    if([appDelegate.facebook isSessionValid]) {
+
+        crossButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 64, 25, 25)];
+        [crossButton setBackgroundImage:[UIImage imageNamed:@"cross"] forState:UIControlStateNormal];
+        [crossButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+        
+        opaqueView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+        [opaqueView setBackgroundColor:[UIColor darkGrayColor]];
+        opaqueView.alpha = 0.5;
+        
+        webview = [[UIWebView alloc] initWithFrame:CGRectMake(10, 74, 300, 315)];
+        NSString *urlAddress = @"http://www.facebook.com/flyerlyapp";
+        NSURL *url = [NSURL URLWithString:urlAddress];
+        NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
+        [webview loadRequest:requestObj];
+        
+        [self.view addSubview:opaqueView];
+        [self.view  addSubview:webview];
+        [self.view  addSubview:crossButton];
+        
+    } else {
+        
+        [appDelegate.facebook authorize:[NSArray arrayWithObjects: @"read_stream",
+                                         @"publish_stream", nil]];
+    }
+}
+
+-(IBAction)goBack{
+    [opaqueView removeFromSuperview];
+    [webview removeFromSuperview];
+    [crossButton removeFromSuperview];
+    
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    [appDelegate.facebook requestWithGraphPath:@"me/likes" andDelegate:self];
+}
+
+-(void)request:(FBRequest *)request didLoad:(id)result{
+ 
+ 	NSLog(@"Request received %@", result);    
+    for (NSDictionary *likesData in [result objectForKey:@"data"]) {
+        
+        // Here we will get the facebook contacts
+        NSString *likeName = [likesData objectForKey:@"name"];
+        if([likeName isEqualToString:@"Flyerly"]){
+            [likeButton setSelected:YES];
+            return;
+        } else {
+            [likeButton setSelected:NO];
+        }
+    }
+}
+
+- (void)fbDidLogin {
+	NSLog(@"logged in");
+    
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    
+    //save to session
+    NSLog(@"%@",appDelegate.facebook.accessToken);
+    NSLog(@"%@",appDelegate.facebook.expirationDate);
+    
+    [[NSUserDefaults standardUserDefaults] setObject:appDelegate.facebook.accessToken forKey:@"FBAccessTokenKey"];
+    [[NSUserDefaults standardUserDefaults] setObject:appDelegate.facebook.expirationDate forKey:@"FBExpirationDateKey"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [self showLikeButton];
 }
 
 #pragma mark Dealloc

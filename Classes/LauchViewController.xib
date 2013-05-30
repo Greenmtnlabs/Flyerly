@@ -222,11 +222,11 @@
 										</object>
 										<object class="NSCustomResource" key="IBUISelectedBackgroundImage">
 											<string key="NSClassName">NSImage</string>
-											<string key="NSResourceName">twitter_selected_button.png</string>
+											<string key="NSResourceName">twitter_follow_selected.png</string>
 										</object>
 										<object class="NSCustomResource" key="IBUINormalBackgroundImage">
 											<string key="NSClassName">NSImage</string>
-											<string key="NSResourceName">twitter_follow_selected.png</string>
+											<string key="NSResourceName">twitter_follow.png</string>
 										</object>
 										<object class="IBUIFontDescription" key="IBUIFontDescription" id="311371421">
 											<int key="type">2</int>
@@ -259,11 +259,11 @@
 										<reference key="IBUINormalTitleShadowColor" ref="384320666"/>
 										<object class="NSCustomResource" key="IBUISelectedBackgroundImage">
 											<string key="NSClassName">NSImage</string>
-											<string key="NSResourceName">facebook_selected_button.png</string>
+											<string key="NSResourceName">facebook_like_selected.png</string>
 										</object>
 										<object class="NSCustomResource" key="IBUINormalBackgroundImage">
 											<string key="NSClassName">NSImage</string>
-											<string key="NSResourceName">facebook_like_selected.png</string>
+											<string key="NSResourceName">facebook_like.png</string>
 										</object>
 										<reference key="IBUIFontDescription" ref="311371421"/>
 										<reference key="IBUIFont" ref="1051223800"/>
@@ -461,7 +461,7 @@
 							<object class="IBUILabel" id="795872397">
 								<reference key="NSNextResponder" ref="87613878"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{223, 73}, {86, 21}}</string>
+								<string key="NSFrame">{{222, 73}, {86, 21}}</string>
 								<reference key="NSSuperview" ref="87613878"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="936185581"/>
@@ -471,10 +471,11 @@
 								<int key="IBUIContentMode">7</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<string key="IBUIText">Invite Friends</string>
+								<string key="IBUIText">Invite</string>
 								<reference key="IBUITextColor" ref="977645375"/>
 								<nil key="IBUIHighlightedColor"/>
 								<int key="IBUIBaselineAdjustment">0</int>
+								<int key="IBUITextAlignment">1</int>
 								<reference key="IBUIFontDescription" ref="224330337"/>
 								<reference key="IBUIFont" ref="633376738"/>
 								<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
@@ -599,6 +600,22 @@
 					<int key="connectionID">561</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">likeButton</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="132281448"/>
+					</object>
+					<int key="connectionID">567</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">followButton</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="123781452"/>
+					</object>
+					<int key="connectionID">568</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">doNew:</string>
 						<reference key="source" ref="1058355023"/>
@@ -624,6 +641,24 @@
 						<int key="IBEventType">7</int>
 					</object>
 					<int key="connectionID">554</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">followOnTwitter:</string>
+						<reference key="source" ref="123781452"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">570</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">showLikeButton</string>
+						<reference key="source" ref="132281448"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">563</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -818,9 +853,9 @@
 				<string key="15.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<real value="1" key="15.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 				<string key="178.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<real value="0.0" key="178.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
+				<real value="2" key="178.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 				<string key="194.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<real value="0.0" key="194.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
+				<real value="2" key="194.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 				<string key="24.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="25.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="26.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -846,10 +881,18 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">562</int>
+			<int key="maxID">570</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<object class="IBPartialClassDescription">
+					<string key="className">FacebookLikeView</string>
+					<string key="superclassName">UIView</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/FacebookLikeView.h</string>
+					</object>
+				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">LauchViewController</string>
 					<string key="superclassName">UIViewController</string>
@@ -859,7 +902,9 @@
 						<string key="doInvite:">id</string>
 						<string key="doNew:">id</string>
 						<string key="doOpen:">id</string>
+						<string key="followOnTwitter:">id</string>
 						<string key="showFlyerDetail:">UIImageView</string>
+						<string key="showLikeButton">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="createTwitLogin:">
@@ -882,19 +927,30 @@
 							<string key="name">doOpen:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="followOnTwitter:">
+							<string key="name">followOnTwitter:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="showFlyerDetail:">
 							<string key="name">showFlyerDetail:</string>
 							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBActionInfo" key="showLikeButton">
+							<string key="name">showLikeButton</string>
+							<string key="candidateClassName">id</string>
 						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="createFlyrButton">UIButton</string>
 						<string key="createFlyrLabel">UILabel</string>
+						<string key="facebookLikeView">FacebookLikeView</string>
 						<string key="fifthFlyer">UIImageView</string>
 						<string key="firstFlyer">UIImageView</string>
+						<string key="followButton">UIButton</string>
 						<string key="fourthFlyer">UIImageView</string>
 						<string key="inviteFriendButton">UIButton</string>
 						<string key="inviteFriendLabel">UILabel</string>
+						<string key="likeButton">UIButton</string>
 						<string key="savedFlyrButton">UIButton</string>
 						<string key="savedFlyrLabel">UILabel</string>
 						<string key="secondFlyer">UIImageView</string>
@@ -910,6 +966,10 @@
 							<string key="name">createFlyrLabel</string>
 							<string key="candidateClassName">UILabel</string>
 						</object>
+						<object class="IBToOneOutletInfo" key="facebookLikeView">
+							<string key="name">facebookLikeView</string>
+							<string key="candidateClassName">FacebookLikeView</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="fifthFlyer">
 							<string key="name">fifthFlyer</string>
 							<string key="candidateClassName">UIImageView</string>
@@ -917,6 +977,10 @@
 						<object class="IBToOneOutletInfo" key="firstFlyer">
 							<string key="name">firstFlyer</string>
 							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="followButton">
+							<string key="name">followButton</string>
+							<string key="candidateClassName">UIButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="fourthFlyer">
 							<string key="name">fourthFlyer</string>
@@ -929,6 +993,10 @@
 						<object class="IBToOneOutletInfo" key="inviteFriendLabel">
 							<string key="name">inviteFriendLabel</string>
 							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="likeButton">
+							<string key="name">likeButton</string>
+							<string key="candidateClassName">UIButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="savedFlyrButton">
 							<string key="name">savedFlyrButton</string>
@@ -970,8 +1038,8 @@
 			<string key="blue_divider.png">{1, 60}</string>
 			<string key="create_flyer.png">{108, 60}</string>
 			<string key="create_flyer_selected.png">{108, 60}</string>
+			<string key="facebook_like.png">{80, 49}</string>
 			<string key="facebook_like_selected.png">{80, 49}</string>
-			<string key="facebook_selected_button.png">{80, 49}</string>
 			<string key="invite_friends.png">{108, 60}</string>
 			<string key="invite_friends_selected.png">{108, 60}</string>
 			<string key="pinned_flyer.png">{141, 141}</string>
@@ -981,8 +1049,8 @@
 			<string key="settings.png">{71, 69}</string>
 			<string key="settings_bg.png">{156, 47}</string>
 			<string key="settings_selected.png">{71, 69}</string>
+			<string key="twitter_follow.png">{79, 49}</string>
 			<string key="twitter_follow_selected.png">{79, 49}</string>
-			<string key="twitter_selected_button.png">{79, 49}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">2083</string>
 	</data>

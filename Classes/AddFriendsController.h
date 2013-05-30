@@ -76,6 +76,7 @@
 - (IBAction)loadFacebookContacts:(UIButton *)sender;
 - (IBAction)loadTwitterContacts:(UIButton *)sender;
 - (IBAction)onSearchClick:(UIButton *)sender;
+-(IBAction)goBack;
 -(IBAction)invite;
 
 @end
