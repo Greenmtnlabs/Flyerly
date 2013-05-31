@@ -65,12 +65,14 @@
     ShareProgressView *twitterPogressView;
     ShareProgressView *tumblrPogressView;
     ShareProgressView *flickrPogressView;
+    ShareProgressView *instagramPogressView;
 }
 
 @property(nonatomic,retain) IBOutlet ShareProgressView *facebookPogressView;
 @property(nonatomic,retain) IBOutlet ShareProgressView *twitterPogressView;
 @property(nonatomic,retain) IBOutlet ShareProgressView *tumblrPogressView;
 @property(nonatomic,retain) IBOutlet ShareProgressView *flickrPogressView;
+@property(nonatomic,retain) IBOutlet ShareProgressView *instagramPogressView;
 
 @property(nonatomic,retain) IBOutlet UILabel *saveToCameraRollLabel;
 @property(nonatomic,retain) IBOutlet UISwitch *saveToRollSwitch;

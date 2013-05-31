@@ -18,6 +18,8 @@
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMessageComposeViewController.h>
 #import "FlyrAppDelegate.h"
+#import <SystemConfiguration/SystemConfiguration.h>
+#import "Reachability.h"
 
 @class LoadingView;
 
@@ -78,5 +80,6 @@
 - (IBAction)onSearchClick:(UIButton *)sender;
 -(IBAction)goBack;
 -(IBAction)invite;
++ (BOOL)connected;
 
 @end

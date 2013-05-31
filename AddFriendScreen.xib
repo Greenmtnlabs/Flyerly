@@ -39,25 +39,25 @@
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">274</int>
 				<array class="NSMutableArray" key="NSSubviews">
-					<object class="IBUIImageView" id="953266879">
+					<object class="IBUIImageView" id="741726458">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{108, 46}, {1, 60}}</string>
+						<string key="NSFrame">{{0, 43}, {320, 62}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="1014950534"/>
+						<reference key="NSNextKeyView" ref="500510736"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<object class="NSCustomResource" key="IBUIImage" id="282367645">
+						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">blue_divider.png</string>
+							<string key="NSResourceName">bg_invite_friends_bar.png</string>
 						</object>
 					</object>
 					<object class="IBUIButton" id="500510736">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{0, 46}, {108, 61}}</string>
+						<string key="NSFrame">{{6, 49}, {102, 47}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="291714416"/>
@@ -78,13 +78,9 @@
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MAA</bytes>
 						</object>
-						<object class="NSCustomResource" key="IBUISelectedBackgroundImage">
+						<object class="NSCustomResource" key="IBUISelectedBackgroundImage" id="724617760">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">contact_selected.png</string>
-						</object>
-						<object class="NSCustomResource" key="IBUINormalBackgroundImage">
-							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">contact.png</string>
+							<string key="NSResourceName">invite_option_selected.png</string>
 						</object>
 						<object class="IBUIFontDescription" key="IBUIFontDescription" id="140462096">
 							<string key="name">Arial-BoldMT</string>
@@ -101,7 +97,7 @@
 					<object class="IBUIButton" id="941120112">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{212, 46}, {108, 61}}</string>
+						<string key="NSFrame">{{212, 49}, {102, 47}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="1024677100"/>
@@ -116,33 +112,14 @@
 							<bytes key="NSRGB">MC4wMDM3NzUwODM5IDAuMDA2MDA5ODAzMiAwLjAxMDIwNDA3NwA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="605834437"/>
-						<object class="NSCustomResource" key="IBUISelectedBackgroundImage">
-							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">twitter_selected.png</string>
-						</object>
-						<object class="NSCustomResource" key="IBUINormalBackgroundImage">
-							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">twitter.png</string>
-						</object>
+						<reference key="IBUISelectedBackgroundImage" ref="724617760"/>
 						<reference key="IBUIFontDescription" ref="140462096"/>
 						<reference key="IBUIFont" ref="478841770"/>
-					</object>
-					<object class="IBUIImageView" id="636673112">
-						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{211, 46}, {1, 60}}</string>
-						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="941120112"/>
-						<string key="NSReuseIdentifierKey">_NS:9</string>
-						<bool key="IBUIUserInteractionEnabled">NO</bool>
-						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<reference key="IBUIImage" ref="282367645"/>
 					</object>
 					<object class="IBUIButton" id="1014950534">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{109, 46}, {102, 61}}</string>
+						<string key="NSFrame">{{109, 49}, {102, 47}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="687780361"/>
@@ -157,14 +134,7 @@
 							<bytes key="NSRGB">MC4wMDM3NzUwODM5IDAuMDA2MDA5ODAzMiAwLjAxMDIwNDA3NwA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="605834437"/>
-						<object class="NSCustomResource" key="IBUISelectedBackgroundImage">
-							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">facebook_selected.png</string>
-						</object>
-						<object class="NSCustomResource" key="IBUINormalBackgroundImage">
-							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">facebook_tab.png</string>
-						</object>
+						<reference key="IBUISelectedBackgroundImage" ref="724617760"/>
 						<reference key="IBUIFontDescription" ref="140462096"/>
 						<reference key="IBUIFont" ref="478841770"/>
 					</object>
@@ -174,7 +144,7 @@
 						<string key="NSFrame">{{31, 75}, {60, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="953266879"/>
+						<reference key="NSNextKeyView" ref="1014950534"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -206,7 +176,7 @@
 						<string key="NSFrame">{{130, 75}, {62, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="636673112"/>
+						<reference key="NSNextKeyView" ref="941120112"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -349,6 +319,7 @@
 						<string key="NSFrame">{{268, 508}, {33, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -529,7 +500,7 @@
 				<string key="NSFrame">{{0, 20}, {320, 548}}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="500510736"/>
+				<reference key="NSNextKeyView" ref="741726458"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
 					<bytes key="NSWhite">MQA</bytes>
@@ -771,10 +742,8 @@
 						<int key="objectID">1</int>
 						<reference key="object" ref="191373211"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="953266879"/>
 							<reference ref="500510736"/>
 							<reference ref="941120112"/>
-							<reference ref="636673112"/>
 							<reference ref="1014950534"/>
 							<reference ref="291714416"/>
 							<reference ref="687780361"/>
@@ -791,6 +760,7 @@
 							<reference ref="172970481"/>
 							<reference ref="631389776"/>
 							<reference ref="604196700"/>
+							<reference ref="741726458"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -806,18 +776,8 @@
 						<reference key="parent" ref="0"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">7</int>
-						<reference key="object" ref="953266879"/>
-						<reference key="parent" ref="191373211"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">9</int>
 						<reference key="object" ref="941120112"/>
-						<reference key="parent" ref="191373211"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">10</int>
-						<reference key="object" ref="636673112"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -913,6 +873,11 @@
 						<reference key="object" ref="604196700"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">340</int>
+						<reference key="object" ref="741726458"/>
+						<reference key="parent" ref="191373211"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -921,7 +886,6 @@
 				<string key="-2.CustomClassName">UIResponder</string>
 				<string key="-2.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="1.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="10.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="11.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<real value="2" key="11.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 				<string key="158.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -940,10 +904,10 @@
 				<string key="183.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="333.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="334.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="340.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="35.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="36.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="37.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="7.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="8.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<real value="2" key="8.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 				<string key="9.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -953,7 +917,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">339</int>
+			<int key="maxID">340</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -968,7 +932,6 @@
 						<string key="loadTwitterContacts:">UIButton</string>
 						<string key="onSearchClick:">UIButton</string>
 						<string key="selectAllCheckBoxes:">UIButton</string>
-						<string key="tagFacebookUsersWithFeed:">NSArray</string>
 						<string key="unSelectAllCheckBoxes:">UIButton</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
@@ -999,10 +962,6 @@
 						<object class="IBActionInfo" key="selectAllCheckBoxes:">
 							<string key="name">selectAllCheckBoxes:</string>
 							<string key="candidateClassName">UIButton</string>
-						</object>
-						<object class="IBActionInfo" key="tagFacebookUsersWithFeed:">
-							<string key="name">tagFacebookUsersWithFeed:</string>
-							<string key="candidateClassName">NSArray</string>
 						</object>
 						<object class="IBActionInfo" key="unSelectAllCheckBoxes:">
 							<string key="name">unSelectAllCheckBoxes:</string>
@@ -1089,17 +1048,12 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="blue_divider.png">{1, 60}</string>
+			<string key="bg_invite_friends_bar.png">{320, 62}</string>
 			<string key="bottom_buttons_bg.png">{314, 43}</string>
-			<string key="contact.png">{108, 60}</string>
-			<string key="contact_selected.png">{108, 61}</string>
 			<string key="crop_button.png">{50, 32}</string>
 			<string key="done.png">{55, 31}</string>
-			<string key="facebook_selected.png">{102, 61}</string>
-			<string key="facebook_tab.png">{102, 60}</string>
+			<string key="invite_option_selected.png">{104, 48}</string>
 			<string key="select_all.png">{80, 30}</string>
-			<string key="twitter.png">{108, 60}</string>
-			<string key="twitter_selected.png">{108, 61}</string>
 			<string key="unselect.png">{80, 30}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">2083</string>

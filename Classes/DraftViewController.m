@@ -16,10 +16,11 @@
 #import "TMAPIClient.h"
 #import "JSON.h"
 #import "ShareProgressView.h"
+#import "AddFriendsController.h"
 
 @implementation DraftViewController
 
-@synthesize selectedFlyerImage,imgView,navBar,fvController,svController,titleView,descriptionView,selectedFlyerDescription,selectedFlyerTitle, detailFileName, imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,loadingView,dic,fromPhotoController,progressView,scrollView,facebookPogressView,twitterPogressView, tumblrPogressView, flickrPogressView, saveToCameraRollLabel, saveToRollSwitch;
+@synthesize selectedFlyerImage,imgView,navBar,fvController,svController,titleView,descriptionView,selectedFlyerDescription,selectedFlyerTitle, detailFileName, imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,loadingView,dic,fromPhotoController,progressView,scrollView,facebookPogressView,twitterPogressView, tumblrPogressView, flickrPogressView, instagramPogressView, saveToCameraRollLabel, saveToRollSwitch;
 
 -(void)callFlyrView{
 	[self.navigationController popToViewController:fvController animated:YES];
@@ -205,60 +206,67 @@
 
 -(void)share{
     
-    [self remoAllSharingViews];
-    [self setDefaultProgressViewHeight];
-    countOfSharingNetworks = 0;
-    [progressView setHidden:NO];
+    if([AddFriendsController connected]){
+        
+        [self remoAllSharingViews];
+        [self setDefaultProgressViewHeight];
+        countOfSharingNetworks = 0;
+        [progressView setHidden:NO];
+        
+        if([self isAnyNetworkSelected]){
+            loadingView =[LoadingView loadingViewInView:self.view  text:@"Sharing..."];
+            
+            if([twitterButton isSelected]){
+                [self showTwitterProgressRow];
+                [self shareOnTwitter];
+                //[self fillSuccessStatus:twitterPogressView];
+            }
+            
+            if([facebookButton isSelected]){
+                [self showFacebookProgressRow];
+                [self shareOnFacebook];
+                //[self fillSuccessStatus:facebookPogressView];
+            }
+            
+            if([flickrButton isSelected]){
+                [self showFlickrProgressRow];
+                [self shareOnFlickr];
+                //[self fillSuccessStatus:flickrPogressView];
+            }
+            
+            if([tumblrButton isSelected]){
+                [self showTumblrProgressRow];
+                [self shareOnTumblr];
+                //[self fillSuccessStatus:tumblrPogressView];
+            }
+            
+            if([emailButton isSelected]){
+                [self shareOnEmail];
+            }
+            
+            if([smsButton isSelected] && ![emailButton isSelected]){
+                [self shareOnMMS];
+            }
+            
+            if([instagramButton isSelected] && ( ![tumblrButton isSelected] && ![flickrButton isSelected] && ![smsButton isSelected])  && ![emailButton isSelected]){
+                [self shareOnInstagram];
+            }
+            
+            if([saveToRollSwitch isOn]){
+                UIImageWriteToSavedPhotosAlbum(selectedFlyerImage, nil, nil, nil);
+            }
+            
+            [self showAlert];
+            
+        } else {
+            
+            [self showAlert:@"Warning!" message:@"Please select at least one sharing option."];
+            
+        }
     
-    if([self isAnyNetworkSelected]){
-        loadingView =[LoadingView loadingViewInView:self.view  text:@"Sharing..."];
-        
-        if([twitterButton isSelected]){
-            [self showTwitterProgressRow];
-            [self shareOnTwitter];
-            //[self fillSuccessStatus:twitterPogressView];
-        }
-        
-        if([facebookButton isSelected]){
-            [self showFacebookProgressRow];
-            [self shareOnFacebook];
-            //[self fillSuccessStatus:facebookPogressView];
-        }
-        
-        if([flickrButton isSelected]){
-            [self showFlickrProgressRow];
-            [self shareOnFlickr];
-            //[self fillSuccessStatus:flickrPogressView];
-        }
-        
-        if([tumblrButton isSelected]){
-            [self showTumblrProgressRow];
-            [self shareOnTumblr];
-            //[self fillSuccessStatus:tumblrPogressView];
-        }
-        
-        if([emailButton isSelected]){
-            [self shareOnEmail];
-        }
-        
-        if([smsButton isSelected] && ![emailButton isSelected]){
-            [self shareOnMMS];
-        }
-        
-        if([instagramButton isSelected] && ( ![tumblrButton isSelected] && ![flickrButton isSelected] && ![smsButton isSelected])  && ![emailButton isSelected]){
-            [self shareOnInstagram];
-        }
-        
-        if([saveToRollSwitch isOn]){
-            UIImageWriteToSavedPhotosAlbum(selectedFlyerImage, nil, nil, nil);
-        }
-        
-        [self showAlert];
-        
     } else {
-        
-        [self showAlert:@"Warning!" message:@"Please select at least one sharing option."];
-        
+
+        [self showAlert:@"Warning!" message:@"You must be connected to the Internet."];
     }
 }
 
@@ -448,53 +456,92 @@
      */
 }
 
--(void)updateSocialStates{
-    
-    // Save states of all supported social media
-	NSMutableArray *socialArray = [[[NSMutableArray alloc] init] autorelease];
-    
-    if([facebookButton isSelected]){
-        [socialArray addObject:@"1"]; //Facebook
-    } else  {
-        [socialArray addObject:@"0"]; //Facebook
-    }
-    
-    if([twitterButton isSelected]){
-        [socialArray addObject:@"1"]; //Twitter
-    } else  {
-        [socialArray addObject:@"0"]; //Twitter
-    }
-    
-    if([emailButton isSelected]){
-        [socialArray addObject:@"1"]; //Email
-    } else  {
-        [socialArray addObject:@"0"]; //Email
-    }
-
-    if([tumblrButton isSelected]){
-        [socialArray addObject:@"1"]; //Tumblr
-    } else  {
-        [socialArray addObject:@"0"]; //Tumblr
-    }
-
-    if([flickrButton isSelected]){
-        [socialArray addObject:@"1"]; //Flickr
-    } else  {
-        [socialArray addObject:@"0"]; //Flickr
-    }
-    
-    if([instagramButton isSelected]){
-        [socialArray addObject:@"1"]; //Instagram
-    } else  {
-        [socialArray addObject:@"0"]; //Instagram
-    }
-    
-    [socialArray addObject:@"0"]; //SMS
-    [socialArray addObject:@"0"]; //Clipboard
+-(void)updateSocialStates{    
     
     NSString *socialFlyerPath = [imageFileName stringByReplacingOccurrencesOfString:@"/Flyr/" withString:@"/Flyr/Social/"];
 	NSString *finalImgWritePath = [socialFlyerPath stringByReplacingOccurrencesOfString:@".jpg" withString:@".soc"];
     
+    NSMutableArray *socialArray = [[NSMutableArray alloc] initWithContentsOfFile:finalImgWritePath];
+    if(!socialArray){
+        socialArray = [[[NSMutableArray alloc] init] autorelease];
+    }
+    
+    if([socialArray count] > 0){
+    
+        // Save states of all supported social media
+        if([facebookButton isSelected]){
+            [socialArray removeObjectAtIndex:0]; //Facebook
+            [socialArray insertObject:@"1" atIndex:0]; //Facebook
+        }
+        
+        if([twitterButton isSelected]){
+            [socialArray removeObjectAtIndex:1]; //Twitter
+            [socialArray insertObject:@"1" atIndex:1]; //Twitter
+        }
+        
+        if([emailButton isSelected]){
+            [socialArray removeObjectAtIndex:2]; //Email
+            [socialArray insertObject:@"1" atIndex:2]; //Email
+        }
+        
+        if([tumblrButton isSelected]){
+            [socialArray removeObjectAtIndex:3]; //Tumblr
+            [socialArray insertObject:@"1" atIndex:3]; //Tumblr
+        }
+        
+        if([flickrButton isSelected]){
+            [socialArray removeObjectAtIndex:4]; //Flickr
+            [socialArray insertObject:@"1" atIndex:4]; //Flickr
+        }
+        
+        if([instagramButton isSelected]){
+            [socialArray removeObjectAtIndex:5]; //Instagram
+            [socialArray insertObject:@"1" atIndex:5]; //Instagram
+        }
+
+    } else {
+            
+        // Save states of all supported social media
+        if([facebookButton isSelected]){
+            [socialArray addObject:@"1"]; //Facebook
+        } else  {
+            [socialArray addObject:@"0"]; //Facebook
+        }
+        
+        if([twitterButton isSelected]){
+            [socialArray addObject:@"1"]; //Twitter
+        } else  {
+            [socialArray addObject:@"0"]; //Twitter
+        }
+        
+        if([emailButton isSelected]){
+            [socialArray addObject:@"1"]; //Email
+        } else  {
+            [socialArray addObject:@"0"]; //Email
+        }
+        
+        if([tumblrButton isSelected]){
+            [socialArray addObject:@"1"]; //Tumblr
+        } else  {
+            [socialArray addObject:@"0"]; //Tumblr
+        }
+        
+        if([flickrButton isSelected]){
+            [socialArray addObject:@"1"]; //Flickr
+        } else  {
+            [socialArray addObject:@"0"]; //Flickr
+        }
+        
+        if([instagramButton isSelected]){
+            [socialArray addObject:@"1"]; //Instagram
+        } else  {
+            [socialArray addObject:@"0"]; //Instagram
+        }
+    }
+    
+    [socialArray addObject:@"0"]; //SMS
+    [socialArray addObject:@"0"]; //Clipboard
+
     [[NSFileManager defaultManager] removeItemAtPath:finalImgWritePath error:nil];
     [socialArray writeToFile:finalImgWritePath atomically:YES];
 }

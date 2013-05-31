@@ -315,8 +315,8 @@ int photoLayerCount = 0;
 				nil];*/
 	
 	
-	NSInteger fontScrollWidth = 44;
-	NSInteger fontScrollHeight = 35;
+	fontScrollWidth = 44;
+	fontScrollHeight = 35;
 	NSInteger colorScrollWidth = 44;
 	NSInteger colorScrollHeight = 35;
 	NSInteger sizeScrollWidth = 44;
@@ -339,30 +339,7 @@ int photoLayerCount = 0;
         fontBorderScrollHeight = 35;
     }
 
-	for (int i = 1; i <=[fontArray count] ; i++)
-	{
-		UIButton *font = [UIButton buttonWithType:UIButtonTypeCustom];
-		font.frame = CGRectMake(0, 0, fontScrollWidth, fontScrollHeight);
-
-		
-		[font setTitle:@"A" forState:UIControlStateNormal];
-		UIFont *fontname =[fontArray objectAtIndex:(i-1)];
-		[font.titleLabel setFont: fontname];
-		[font setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-		font.tag = i;	
-		//font.alpha = ALPHA1;
-		[font setBackgroundImage:[UIImage imageNamed:@"a_bg"] forState:UIControlStateNormal];
-        
-        if(i>5){
-            UIImageView *lock = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lock"]];
-            lock.frame = CGRectMake(20, 20, 17, 19);
-            [font addSubview:lock];
-            font.userInteractionEnabled = NO;
-        }
-
-		[fontScrollView addSubview:font];
-		//[font release];
-	}
+    [self addFontsInSubView];
 	
 	colorArray = 	[[NSArray  alloc] initWithObjects: [UIColor redColor], [UIColor blueColor], [UIColor greenColor], [UIColor blackColor], [UIColor colorWithRed:253.0/255.0 green:191.0/255.0 blue:38.0/224.0 alpha:1], [UIColor whiteColor], [UIColor grayColor], [UIColor magentaColor], [UIColor yellowColor], [UIColor colorWithRed:163.0/255.0 green:25.0/255.0 blue:2.0/224.0 alpha:1], [UIColor colorWithRed:3.0/255.0 green:15.0/255.0 blue:41.0/224.0 alpha:1], [UIColor purpleColor], [UIColor colorWithRed:85.0/255.0 green:86.0/255.0 blue:12.0/224.0 alpha:1], [UIColor orangeColor], [UIColor colorWithRed:98.0/255.0 green:74.0/255.0 blue:9.0/224.0 alpha:1], [UIColor colorWithRed:80.0/255.0 green:7.0/255.0 blue:1.0/224.0 alpha:1], [UIColor colorWithRed:150.0/255.0 green:150.0/255.0 blue:97.0/224.0 alpha:1], [UIColor colorWithRed:111.0/255.0 green:168.0/255.0 blue:100.0/224.0 alpha:1], [UIColor cyanColor], [UIColor colorWithRed:17.0/255.0 green:69.0/255.0 blue:70.0/224.0 alpha:1], [UIColor colorWithRed:173.0/255.0 green:127.0/255.0 blue:251.0/224.0 alpha:1], nil];
 	
@@ -780,6 +757,35 @@ int photoLayerCount = 0;
 	[self chooseTemplate];
 }
 
+-(void)addFontsInSubView{
+    
+	for (int i = 1; i <=[fontArray count] ; i++)
+	{
+		UIButton *font = [UIButton buttonWithType:UIButtonTypeCustom];
+		font.frame = CGRectMake(0, 0, fontScrollWidth, fontScrollHeight);
+        
+		
+		[font setTitle:@"A" forState:UIControlStateNormal];
+		UIFont *fontname =[fontArray objectAtIndex:(i-1)];
+		[font.titleLabel setFont: fontname];
+		[font setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+		font.tag = i;
+		//font.alpha = ALPHA1;
+		[font setBackgroundImage:[UIImage imageNamed:@"a_bg"] forState:UIControlStateNormal];
+        
+        if(i>5){
+            if(![self isFontPurchased:i]){
+                UIImageView *lock = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lock"]];
+                lock.frame = CGRectMake(20, 20, 17, 19);
+                [font addSubview:lock];
+                font.userInteractionEnabled = NO;
+            }
+        }
+        
+		[fontScrollView addSubview:font];
+		//[font release];
+	}
+}
 
 #pragma mark  ScrollView Function & Selection Methods for ScrollView
 -(void)selectFont:(id)sender
@@ -912,7 +918,7 @@ int arrangeLayerIndex;
         [l setCornerRadius:10];
         [l setBorderWidth:1.0];
         [l setBorderColor:[[UIColor grayColor] CGColor]];
-        [tempLabel setBackgroundColor:[ UIColor colorWithWhite:1 alpha:0.4f]];
+        //[tempLabel setBackgroundColor:[ UIColor colorWithWhite:1 alpha:0.4f]];
         
         NSLog(@"Text Index: %@", str);
         
@@ -932,7 +938,7 @@ int arrangeLayerIndex;
         [l setCornerRadius:10];
         [l setBorderWidth:1.0];
         [l setBorderColor:[[UIColor grayColor] CGColor]];
-        [tempImgView setBackgroundColor:[ UIColor colorWithWhite:1 alpha:0.4f]];
+        //[tempImgView setBackgroundColor:[ UIColor colorWithWhite:1 alpha:0.4f]];
 
         NSLog(@"Photo Index: %@", str);
         
@@ -952,7 +958,7 @@ int arrangeLayerIndex;
         [l setCornerRadius:10];
         [l setBorderWidth:1.0];
         [l setBorderColor:[[UIColor grayColor] CGColor]];
-        [tempImgView setBackgroundColor:[ UIColor colorWithWhite:1 alpha:0.4f]];
+        //[tempImgView setBackgroundColor:[ UIColor colorWithWhite:1 alpha:0.4f]];
         
         NSLog(@"Symbol Index: %@", str);
         
@@ -972,7 +978,7 @@ int arrangeLayerIndex;
         [l setCornerRadius:10];
         [l setBorderWidth:1.0];
         [l setBorderColor:[[UIColor grayColor] CGColor]];
-        [tempImgView setBackgroundColor:[ UIColor colorWithWhite:1 alpha:0.4f]];
+        //[tempImgView setBackgroundColor:[ UIColor colorWithWhite:1 alpha:0.4f]];
         
         NSLog(@"Icon Index: %@", str);
         
@@ -1163,7 +1169,14 @@ int arrangeLayerIndex;
 				frame.origin = CGPointMake(curXLoc, curYLoc);
 				view.frame = frame;
 				curXLoc += (kScrollObjWidth)+increment;
-				[view addTarget:self action:@selector(selectFont:) forControlEvents:UIControlEventTouchUpInside];
+                
+                //[view addTarget:self action:@selector(selectFont:) forControlEvents:UIControlEventTouchUpInside];
+                if(view.userInteractionEnabled){
+                    [view addTarget:self action:@selector(selectFont:) forControlEvents:UIControlEventTouchUpInside];
+                }else{
+                    view.userInteractionEnabled = YES;
+                    [view addTarget:self action:@selector(requestFont:) forControlEvents:UIControlEventTouchUpInside];
+                }
 			
                 if(IS_IPHONE_5){
                     if(curXLoc >= 300){
@@ -2075,7 +2088,7 @@ int arrangeLayerIndex;
 	[l setCornerRadius:10];
 	[l setBorderWidth:1.0];
 	[l setBorderColor:[[UIColor grayColor] CGColor]];
-	[photoImgView setBackgroundColor:[ UIColor colorWithWhite:1 alpha:0.4f]];
+	//[photoImgView setBackgroundColor:[ UIColor colorWithWhite:1 alpha:0.4f]];
 	[self.imgView addSubview:photoImgView];
 	
 	[UIView beginAnimations:nil context:NULL];
@@ -2197,8 +2210,8 @@ int arrangeLayerIndex;
     }
     
     if(IS_IPHONE_5){
-        symbolScrollView.frame = CGRectMake(10, 344, 320, 130);
-        iconScrollView.frame = CGRectMake(10, 344, 320, 130);
+        symbolScrollView.frame = CGRectMake(10, 357, 320, 130);
+        iconScrollView.frame = CGRectMake(10, 357, 320, 130);
     }else{
         symbolScrollView.frame = CGRectMake(0, 350, 320, 60);
         iconScrollView.frame = CGRectMake(0, 350, 320, 60);
@@ -2574,7 +2587,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         [l setCornerRadius:10];
         [l setBorderWidth:1.0];
         [l setBorderColor:[[UIColor grayColor] CGColor]];
-        [[[self  photoLayersArray] lastObject] setBackgroundColor:[ UIColor colorWithWhite:1 alpha:0.4f]];
+        //[[[self  photoLayersArray] lastObject] setBackgroundColor:[ UIColor colorWithWhite:1 alpha:0.4f]];
         [self.imgView addSubview:[[self  photoLayersArray] lastObject]];
                 
 		textBackgrnd.alpha = ALPHA0;
@@ -2746,7 +2759,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         }
 
         if(IS_IPHONE_5){
-            layerScrollView.frame = CGRectMake(10, 344, 320, 130);
+            layerScrollView.frame = CGRectMake(10, 357, 320, 130);
         }else{
             layerScrollView.frame = CGRectMake(0, 350, 320, 60);
         }
@@ -2964,7 +2977,7 @@ UIScrollView *layerScrollView = nil;
             [l setCornerRadius:10];
             [l setBorderWidth:1.0];
             [l setBorderColor:[[UIColor grayColor] CGColor]];
-            [newSymbolImgView setBackgroundColor:[ UIColor colorWithWhite:1 alpha:0.4f]];
+            //[newSymbolImgView setBackgroundColor:[ UIColor colorWithWhite:1 alpha:0.4f]];
             [self.imgView addSubview:newSymbolImgView];
             
             [[self symbolLayersArray] addObject:newSymbolImgView];
@@ -2985,7 +2998,7 @@ UIScrollView *layerScrollView = nil;
             [l setCornerRadius:10];
             [l setBorderWidth:1.0];
             [l setBorderColor:[[UIColor grayColor] CGColor]];
-            [newIconImgView setBackgroundColor:[ UIColor colorWithWhite:1 alpha:0.4f]];
+            //[newIconImgView setBackgroundColor:[ UIColor colorWithWhite:1 alpha:0.4f]];
             [self.imgView addSubview:newIconImgView];
             
             [[self iconLayersArray] addObject:newIconImgView];
@@ -3008,7 +3021,7 @@ UIScrollView *layerScrollView = nil;
             [l setCornerRadius:10];
             [l setBorderWidth:1.0];
             [l setBorderColor:[[UIColor grayColor] CGColor]];
-            [newPhotoImgView setBackgroundColor:[ UIColor colorWithWhite:1 alpha:0.4f]];
+            //[newPhotoImgView setBackgroundColor:[ UIColor colorWithWhite:1 alpha:0.4f]];
             [self.imgView addSubview:newPhotoImgView];
             
             [[self photoLayersArray] addObject:newPhotoImgView];
@@ -3031,6 +3044,7 @@ UIScrollView *layerScrollView = nil;
         [lastLayer setCornerRadius:0];
         [lastLayer setBorderWidth:0];
         [lastLayer setBorderColor:[[UIColor clearColor] CGColor]];
+        [lastLayer setBackgroundColor:[[UIColor clearColor] CGColor]];
     }
     
     for(int photo=0; photo<[photoLayersArray count]; photo++){
@@ -3410,6 +3424,203 @@ UIScrollView *layerScrollView = nil;
 	}
     
     [stateArray writeToFile:finalImgWritePath atomically:YES];
+}
+
+#pragma mark - InappPurchase
+
+-(void)requestFont:(UIButton *)button{
+    // Create an instance of EBPurchase (Inapp purchase).
+    demoPurchase = [[EBPurchase alloc] init];
+    demoPurchase.delegate = self;
+    
+    if(button.tag == 6) {
+        [demoPurchase requestProduct:[NSArray arrayWithObjects:FONT6_PRODUCT_ID,nil]];
+    } else if(button.tag == 7){
+        [demoPurchase requestProduct:[NSArray arrayWithObjects:FONT7_PRODUCT_ID,nil]];
+    }
+}
+
+-(IBAction)purchaseProduct:(NSString *)productId{
+    
+    NSLog(@"ProductId: %@", productId);
+    // First, ensure that the SKProduct that was requested by
+    // the EBPurchase requestProduct method in the viewWillAppear
+    // event is valid before trying to purchase it.
+    
+    //if user want to buy 1 match
+    if (demoPurchase.products != nil)
+    {
+        //loadingView.hidden = NO;
+        
+        if (![demoPurchase purchaseProduct:[demoPurchase.products objectAtIndex:0]])
+        {
+            // Returned NO, so notify user that In-App Purchase is Disabled in their Settings.
+            UIAlertView *settingsAlert = [[UIAlertView alloc] initWithTitle:@"Allow Purchases" message:@"You must first enable In-App Purchase in your iOS Settings before making this purchase." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [settingsAlert show];
+        }
+    }
+}
+
+-(IBAction)restorePurchase
+{
+    // Restore a customer's previous non-consumable or subscription In-App Purchase.
+    // Required if a user reinstalled app on same device or another device.
+    
+    // Call restore method.
+    if (![demoPurchase restorePurchase]) {
+        // Returned NO, so notify user that In-App Purchase is Disabled in their Settings.
+        UIAlertView *settingsAlert = [[UIAlertView alloc] initWithTitle:@"Allow Purchases" message:@"You must first enable In-App Purchase in your iOS Settings before restoring a previous purchase." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [settingsAlert show];
+        
+    }
+}
+
+#pragma mark EBPurchaseDelegate Methods
+
+-(void) requestedProduct:(EBPurchase*)ebp identifier:(NSString*)productId name:(NSString*)productName price:(NSString*)productPrice description:(NSString*)productDescription
+{
+    NSLog(@"ViewController requestedProduct");
+    
+    [self purchaseProduct:productId];
+    /*if(loadingView.hidden == NO) {
+        self.navigationItem.rightBarButtonItem.enabled = YES;
+        [self exportHighlights:nil];
+        loadingView.hidden = YES;
+        return;
+    }*/
+    
+}
+
+-(void) successfulPurchase:(EBPurchase*)ebp restored:(bool)isRestore identifier:(NSString*)productId receipt:(NSData*)transactionReceipt
+{
+    NSLog(@"ViewController successfulPurchase");
+    
+    // Purchase or Restore request was successful, so...
+    // 1 - Unlock the purchased content for your new customer!
+    // 2 - Notify the user that the transaction was successful.
+    
+    if (!isPurchased)
+    {
+        // If paid status has not yet changed, then do so now. Checking
+        // isPurchased boolean ensures user is only shown Thank You message
+        // once even if multiple transaction receipts are successfully
+        // processed (such as past subscription renewals).
+        
+        isPurchased = YES;
+        NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+        NSString *alertMessage;
+        
+        if([productId isEqualToString:FONT6_PRODUCT_ID]) {
+            
+            [prefs setInteger:1 forKey:FONT6_PRODUCT_ID];
+            [prefs synchronize];
+            
+            [fontScrollView removeFromSuperview];
+            fontScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(-320, 385,320,44)];
+            if(IS_IPHONE_5){
+                fontScrollView.frame = CGRectMake(10, 354, 320, 130);
+            }else{
+                fontScrollView.frame = CGRectMake(0, 360, 320, 44);
+            }
+            // Update view with no lock
+            [self addFontsInSubView];
+            [self.view addSubview:fontScrollView];
+            [self layoutScrollImages:fontScrollView scrollWidth:35 scrollHeight:35];
+
+            alertMessage = [NSString stringWithFormat:@"Your purchase was successful. %@ is unlocked now.", productId];
+            
+        } else if([productId isEqualToString:FONT7_PRODUCT_ID]) {
+            
+            [prefs setInteger:1 forKey:FONT7_PRODUCT_ID];
+            [prefs synchronize];
+            
+            [fontScrollView removeFromSuperview];
+            fontScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(-320, 385,320,44)];
+            if(IS_IPHONE_5){
+                fontScrollView.frame = CGRectMake(10, 354, 320, 130);
+            }else{
+                fontScrollView.frame = CGRectMake(0, 360, 320, 44);
+            }
+            // Update view with no lock
+            [self addFontsInSubView];
+            [self.view addSubview:fontScrollView];
+            [self layoutScrollImages:fontScrollView scrollWidth:35 scrollHeight:35];
+            
+            alertMessage = [NSString stringWithFormat:@"Your purchase was successful. %@ is unlocked now.", productId];
+        }
+        
+        //-------------------------------------
+        
+        // 1 - Unlock the purchased content and update the app's stored settings.
+        
+        //-------------------------------------
+        
+        // 2 - Notify the user that the transaction was successful.
+        
+        UIAlertView *updatedAlert = [[UIAlertView alloc] initWithTitle:@"Thank You!" message:alertMessage delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [updatedAlert show];
+        
+    }
+    
+    //loadingView.hidden = YES;
+}
+
+-(void) failedPurchase:(EBPurchase*)ebp error:(NSInteger)errorCode message:(NSString*)errorMessage {
+    // Purchase or Restore request failed or was cancelled, so notify the user.
+    
+    UIAlertView *failedAlert = [[UIAlertView alloc] initWithTitle:@"Purchase Stopped" message:@"Either you cancelled the request or Apple reported a transaction error. Please try again later, or contact the app's customer support for assistance." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [failedAlert show];
+    
+    //loadingView.hidden = YES;
+    
+}
+
+-(void) incompleteRestore:(EBPurchase*)ebp
+{
+    NSLog(@"ViewController incompleteRestore");
+    
+    // Restore queue did not include any transactions, so either the user has not yet made a purchase
+    // or the user's prior purchase is unavailable, so notify user to make a purchase within the app.
+    // If the user previously purchased the item, they will NOT be re-charged again, but it should
+    // restore their purchase.
+    
+    UIAlertView *restoreAlert = [[UIAlertView alloc] initWithTitle:@"Restore Issue" message:@"A prior purchase transaction could not be found. To restore the purchased product, tap the Buy button. Paid customers will NOT be charged again, but the purchase will be restored." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [restoreAlert show];
+    
+    //loadingView.hidden = YES;
+    
+}
+
+-(void) failedRestore:(EBPurchase*)ebp error:(NSInteger)errorCode message:(NSString*)errorMessage
+{
+    NSLog(@"ViewController failedRestore");
+    
+    // Restore request failed or was cancelled, so notify the user.
+    
+    UIAlertView *failedAlert = [[UIAlertView alloc] initWithTitle:@"Restore Stopped" message:@"Either you cancelled the request or your prior purchase could not be restored. Please try again later, or contact the app's customer support for assistance." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [failedAlert show];
+    
+    //loadingView.hidden = YES;
+    
+}
+
+-(void) cancelPurchase {
+    //loadingView.hidden = YES;
+}
+
+-(BOOL)isFontPurchased:(int)index{
+
+    if(index == 6){
+        if([[NSUserDefaults standardUserDefaults] objectForKey:FONT6_PRODUCT_ID]){
+            return YES;
+        }
+    } else if(index == 7){
+        if([[NSUserDefaults standardUserDefaults] objectForKey:FONT7_PRODUCT_ID]){
+            return YES;
+        }
+    }
+    
+    return NO;
 }
 
 #pragma mark  View Disappear Methods

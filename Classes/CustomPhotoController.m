@@ -33,7 +33,7 @@
     [galleryTable release];
     [scrollView release];
     [imageView release];
-    [image release];
+    //[image release];
     [moveUpButton release];
     [callbackObject release];
     [super dealloc];
@@ -378,11 +378,11 @@ int counter = 0;
     
     cell.controller = self;
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        dispatch_async(dispatch_get_main_queue(), ^{
+    //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+    //    dispatch_async(dispatch_get_main_queue(), ^{
             [self load4ImagesAtaTime:indexPath.row cell:cell];
-        });
-    });
+    //    });
+    //});
 
     // return cell
     return cell;

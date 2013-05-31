@@ -251,6 +251,10 @@ return cell;\
 #define AddCaptionText @"Add caption here"
 #define FlyerDateFormat @"MM/dd/YYYY"
 
+
+#define FONT6_PRODUCT_ID @"com.flyerly.font6"
+#define FONT7_PRODUCT_ID @"com.flyerly.font7"
+
 /*#define FONT_ARRAY [NSArray arrayWithObjects:@"Courier",@"Courier-BoldOblique",@"Courier-Oblique",@"Courier-Bold",@"ArialMT",@"Arial-BoldMT",@"Arial-BoldItalicMT",@"Arial-ItalicMT",@"STHeitiTC-Light",@"STHeitiTC-Medium",@"AppleGothic",@"CourierNewPS-BoldMT",@"CourierNewPS-ItalicMT",@"CourierNewPS-BoldItalicMT",@"CourierNewPSMT",@"Zapfino",@"HiraKakuProN-W6",@"ArialUnicodeMS",@"STHeitiSC-Medium",@"STHeitiSC-Light",@"AmericanTypewriter",@"AmericanTypewriter-Bold",@"Helvetica-Oblique",@"Helvetica-BoldOblique",@"Helvetica",@"Helvetica-Bold",@"MarkerFelt-Thin",@"HelveticaNeue",@"HelveticaNeue-Bold",@"DBLCDTempBlack",@"Verdana-Bold",@"Verdana-BoldItalic",@"Verdana",@"Verdana-Italic",@"TimesNewRomanPSMT",@"TimesNewRomanPS-BoldMT",@"TimesNewRomanPS-BoldItalicMT",@"TimesNewRomanPS-ItalicMT",@"Georgia-Bold",@"Georgia",@"Georgia-BoldItalic",@"Georgia-Italic",@"STHeitiJ-Medium",@"STHeitiJ-Light",@"ArialRoundedMTBold",@"TrebuchetMS-Italic",@"TrebuchetMS",@"Trebuchet-BoldItalic",@"TrebuchetMS-Bold",@"STHeitiK-Medium",@"STHeitiK-Light",nil]
  */
 

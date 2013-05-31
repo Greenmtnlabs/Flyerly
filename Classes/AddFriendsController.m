@@ -238,92 +238,98 @@ BOOL firstTableLoad = YES;
  */
 - (IBAction)loadFacebookContacts:(UIButton *)sender{
 
-    //if(selectedTab == FACEBOOK_TAB){
-    ////    return;
-    //}
-
-    selectedTab = FACEBOOK_TAB;
-    
-    [self setUnselectTab:sender];
-    
-    // init facebook array
-    if(facebookArray){
+    if([AddFriendsController connected]){
+        //if(selectedTab == FACEBOOK_TAB){
+        ////    return;
+        //}
         
-        // Reload table data after all the contacts get loaded
-        backupArray = nil;
-        backupArray = facebookArray;
-        [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
-        //[self.uiTableView reloadData];
+        selectedTab = FACEBOOK_TAB;
         
-    } else{
+        [self setUnselectTab:sender];
         
-        /*
-        ACAccountStore *accountStore = [[ACAccountStore alloc]init];
-        ACAccountType *FBaccountType= [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
-        NSDictionary *options = @{ACFacebookAppIdKey : @"136691489852349",
-                                  ACFacebookPermissionsKey : @[@"email", @"publish_stream"],
-                                  ACFacebookAudienceKey:ACFacebookAudienceFriends};
-
-        [accountStore requestAccessToAccountsWithType:FBaccountType options:options completion:^(BOOL granted, NSError *error) {
+        // init facebook array
+        if(facebookArray){
             
-            if (granted) {
-
-                // Populate array with all available Twitter accounts
-                NSArray *arrayOfAccounts = [accountStore accountsWithAccountType:FBaccountType];
-                ACAccount *account = [arrayOfAccounts lastObject];
+            // Reload table data after all the contacts get loaded
+            backupArray = nil;
+            backupArray = facebookArray;
+            [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+            //[self.uiTableView reloadData];
+            
+        } else{
+            
+            /*
+             ACAccountStore *accountStore = [[ACAccountStore alloc]init];
+             ACAccountType *FBaccountType= [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
+             NSDictionary *options = @{ACFacebookAppIdKey : @"136691489852349",
+             ACFacebookPermissionsKey : @[@"email", @"publish_stream"],
+             ACFacebookAudienceKey:ACFacebookAudienceFriends};
+             
+             [accountStore requestAccessToAccountsWithType:FBaccountType options:options completion:^(BOOL granted, NSError *error) {
+             
+             if (granted) {
+             
+             // Populate array with all available Twitter accounts
+             NSArray *arrayOfAccounts = [accountStore accountsWithAccountType:FBaccountType];
+             ACAccount *account = [arrayOfAccounts lastObject];
+             
+             // Sanity check
+             if ([arrayOfAccounts count] > 0) {
+             
+             NSURL *requestURL = [NSURL URLWithString:@"https://graph.facebook.com/me/friends"];
+             SLRequest *request = [SLRequest requestForServiceType:SLServiceTypeFacebook
+             requestMethod:SLRequestMethodGET
+             URL:requestURL
+             parameters:@{@"fields":@"name,picture.height(35).width(35).type(small)", @"limit":@"2&offset=0"}];
+             request.account = account;
+             
+             [request performRequestWithHandler:^(NSData *data,
+             NSHTTPURLResponse *response,
+             NSError *error) {
+             
+             if(!error){
+             NSDictionary *list =[NSJSONSerialization JSONObjectWithData:data
+             options:kNilOptions error:&error];
+             NSLog(@"Dictionary contains: %@", list );
+             [self request:nil didLoad:list];
+             }
+             else{
+             //handle error gracefully
+             }
+             
+             }];
+             }
+             
+             } else {
+             //Fail gracefully...
+             NSLog(@"error getting permission %@",error);
+             }
+             }];
+             */
+            
+            
+            FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+            appDelegate.facebook.sessionDelegate = self;
+            
+            if([appDelegate.facebook isSessionValid]) {
                 
-                // Sanity check
-                if ([arrayOfAccounts count] > 0) {
-                    
-                    NSURL *requestURL = [NSURL URLWithString:@"https://graph.facebook.com/me/friends"];
-                    SLRequest *request = [SLRequest requestForServiceType:SLServiceTypeFacebook
-                                                            requestMethod:SLRequestMethodGET
-                                                                      URL:requestURL
-                                                               parameters:@{@"fields":@"name,picture.height(35).width(35).type(small)", @"limit":@"2&offset=0"}];
-                    request.account = account;
-
-                    [request performRequestWithHandler:^(NSData *data,
-                                                         NSHTTPURLResponse *response,
-                                                         NSError *error) {
-                        
-                        if(!error){
-                            NSDictionary *list =[NSJSONSerialization JSONObjectWithData:data
-                                                                                options:kNilOptions error:&error];
-                            NSLog(@"Dictionary contains: %@", list );
-                            [self request:nil didLoad:list];
-                        }
-                        else{
-                            //handle error gracefully
-                        }
-                        
-                    }];
-                }
-
+                //loadingView =[LoadingView loadingViewInView:self.view  text:@"Loading..."];
+                //loadingViewFlag = YES;
+                
+                self.facebookArray = [[NSMutableArray alloc] init];
+                
+                [appDelegate.facebook requestWithGraphPath:@"me/friends?fields=name,picture.height(35).width(35).type(small)&limit=2&offset=0" andDelegate:self];
+                
             } else {
-                //Fail gracefully...
-                NSLog(@"error getting permission %@",error);
+                
+                [appDelegate.facebook authorize:[NSArray arrayWithObjects: @"read_stream",
+                                                 @"publish_stream", nil]];
             }
-        }];
-        */
-        
-        
-        FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-        appDelegate.facebook.sessionDelegate = self;
-        
-        if([appDelegate.facebook isSessionValid]) {
-            
-            //loadingView =[LoadingView loadingViewInView:self.view  text:@"Loading..."];
-            //loadingViewFlag = YES;
-            
-            self.facebookArray = [[NSMutableArray alloc] init];
-            
-            [appDelegate.facebook requestWithGraphPath:@"me/friends?fields=name,picture.height(35).width(35).type(small)&limit=2&offset=0" andDelegate:self];
-            
-        } else {
-            
-            [appDelegate.facebook authorize:[NSArray arrayWithObjects: @"read_stream",
-                                             @"publish_stream", nil]];
         }
+    
+    } else {
+    
+        [self showAlert:@"Warning!" message:@"You must be connected to the Internet."];
     }
 }
 
@@ -381,65 +387,72 @@ int totalCount = 0;
  */
 - (IBAction)loadTwitterContacts:(UIButton *)sender{
     
-    if(selectedTab == TWITTER_TAB){
-        return;
-    }
+    if([AddFriendsController connected]){
     
-    selectedTab = TWITTER_TAB;
-    [self setUnselectTab:sender];
-    
-    // init twitter array
-    if(twitterArray){
+        if(selectedTab == TWITTER_TAB){
+            return;
+        }
         
-        // Reload table data after all the contacts get loaded
-        backupArray = nil;
-        backupArray = twitterArray;
-        [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
-        //[self.uiTableView reloadData];
+        selectedTab = TWITTER_TAB;
+        [self setUnselectTab:sender];
         
-    } else{
-
-        loadingView =[LoadingView loadingViewInView:self.view text:@"Loading..."];
-        loadingViewFlag = YES;
-
-        if([TWTweetComposeViewController canSendTweet]){
+        // init twitter array
+        if(twitterArray){
             
-            ACAccountStore *account = [[ACAccountStore alloc] init];
-            ACAccountType *accountType = [account accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+            // Reload table data after all the contacts get loaded
+            backupArray = nil;
+            backupArray = twitterArray;
+            [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+            //[self.uiTableView reloadData];
             
-            // Request access from the user to access their Twitter account
-            [account requestAccessToAccountsWithType:accountType withCompletionHandler:^(BOOL granted, NSError *error) {
-                // Did user allow us access?
-                if (granted == YES) {
-                    
-                    //grantedBool = YES;
-                    
-                    // Populate array with all available Twitter accounts
-                    NSArray *arrayOfAccounts = [account accountsWithAccountType:accountType];
-                    
-                    // Sanity check
-                    if ([arrayOfAccounts count] > 0) {
+        } else{
+            
+            loadingView =[LoadingView loadingViewInView:self.view text:@"Loading..."];
+            loadingViewFlag = YES;
+            
+            if([TWTweetComposeViewController canSendTweet]){
+                
+                ACAccountStore *account = [[ACAccountStore alloc] init];
+                ACAccountType *accountType = [account accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+                
+                // Request access from the user to access their Twitter account
+                [account requestAccessToAccountsWithType:accountType withCompletionHandler:^(BOOL granted, NSError *error) {
+                    // Did user allow us access?
+                    if (granted == YES) {
                         
-                        self.twitterArray = [[NSMutableArray alloc] init];
+                        //grantedBool = YES;
                         
-                        [self cursoredTwitterContacts:[NSString stringWithFormat:@"%d", -1] arrayOfAccounts:arrayOfAccounts];
+                        // Populate array with all available Twitter accounts
+                        NSArray *arrayOfAccounts = [account accountsWithAccountType:accountType];
+                        
+                        // Sanity check
+                        if ([arrayOfAccounts count] > 0) {
+                            
+                            self.twitterArray = [[NSMutableArray alloc] init];
+                            
+                            [self cursoredTwitterContacts:[NSString stringWithFormat:@"%d", -1] arrayOfAccounts:arrayOfAccounts];
+                        }
                     }
-                }
-            }];
-            
-        } else {
-            
-            [self showAlert:@"No Twitter connection" message:@"You must be connected to Twitter to get contact list."];
-            
-            if(loadingViewFlag){
-                for (UIView *subview in self.view.subviews) {
-                    if([subview isKindOfClass:[LoadingView class]]){
-                        [subview removeFromSuperview];
-                        loadingViewFlag = NO;
+                }];
+                
+            } else {
+                
+                [self showAlert:@"No Twitter connection" message:@"You must be connected to Twitter to get contact list."];
+                
+                if(loadingViewFlag){
+                    for (UIView *subview in self.view.subviews) {
+                        if([subview isKindOfClass:[LoadingView class]]){
+                            [subview removeFromSuperview];
+                            loadingViewFlag = NO;
+                        }
                     }
                 }
             }
         }
+
+    } else {
+        
+        [self showAlert:@"Warning!" message:@"You must be connected to the Internet."];
     }
 }
 
@@ -1033,6 +1046,12 @@ int totalCount = 0;
     //[self.uiTableView reloadData];
 
     return YES;
+}
+
++ (BOOL)connected {
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
+    return !(networkStatus == NotReachable);
 }
 
 - (void)didReceiveMemoryWarning {

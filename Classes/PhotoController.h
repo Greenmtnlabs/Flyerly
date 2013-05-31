@@ -12,8 +12,9 @@
 #import "HudView.h"
 #import "CustomLabel.h"
 #import "CustomPhotoController.h"
+#import "EBPurchase.h"
 
-@interface PhotoController : UIViewController<UIActionSheetDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface PhotoController : UIViewController<UIActionSheetDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, EBPurchaseDelegate>
 {
 	MyNavigationBar *navBar;
 	HudView *aHUD;
@@ -106,7 +107,14 @@
 	NSArray *borderArray;
 	NSArray *fontArray;
 	UIAlertView *warningAlert ;
+    
+    EBPurchase *demoPurchase;
+    BOOL isPurchased;
+    
+	NSInteger fontScrollWidth;
+	NSInteger fontScrollHeight;
 }
+
 @property (nonatomic, retain) MyNavigationBar *navBar;
 @property (nonatomic,retain) HudView *aHUD;
 

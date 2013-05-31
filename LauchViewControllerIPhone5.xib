@@ -352,7 +352,6 @@
 								<string key="NSFrame">{{125, 480}, {71, 69}}</string>
 								<reference key="NSSuperview" ref="970294404"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -684,6 +683,22 @@
 					<int key="connectionID">53</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">followButton</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="485106689"/>
+					</object>
+					<int key="connectionID">55</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">likeButton</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="682415310"/>
+					</object>
+					<int key="connectionID">57</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">doAbout:</string>
 						<reference key="source" ref="335378330"/>
@@ -718,6 +733,24 @@
 						<int key="IBEventType">7</int>
 					</object>
 					<int key="connectionID">46</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">followOnTwitter:</string>
+						<reference key="source" ref="485106689"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">56</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">showLikeButton</string>
+						<reference key="source" ref="682415310"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">58</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -951,7 +984,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">54</int>
+			<int key="maxID">58</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -963,7 +996,9 @@
 						<string key="doInvite:">id</string>
 						<string key="doNew:">id</string>
 						<string key="doOpen:">id</string>
+						<string key="followOnTwitter:">id</string>
 						<string key="showFlyerDetail:">UIImageView</string>
+						<string key="showLikeButton">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="doAbout:">
@@ -982,19 +1017,30 @@
 							<string key="name">doOpen:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="followOnTwitter:">
+							<string key="name">followOnTwitter:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="showFlyerDetail:">
 							<string key="name">showFlyerDetail:</string>
 							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBActionInfo" key="showLikeButton">
+							<string key="name">showLikeButton</string>
+							<string key="candidateClassName">id</string>
 						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="createFlyrButton">UIButton</string>
 						<string key="createFlyrLabel">UILabel</string>
+						<string key="facebookLikeView">FacebookLikeView</string>
 						<string key="fifthFlyer">UIImageView</string>
 						<string key="firstFlyer">UIImageView</string>
+						<string key="followButton">UIButton</string>
 						<string key="fourthFlyer">UIImageView</string>
 						<string key="inviteFriendButton">UIButton</string>
 						<string key="inviteFriendLabel">UILabel</string>
+						<string key="likeButton">UIButton</string>
 						<string key="savedFlyrButton">UIButton</string>
 						<string key="savedFlyrLabel">UILabel</string>
 						<string key="secondFlyer">UIImageView</string>
@@ -1010,6 +1056,10 @@
 							<string key="name">createFlyrLabel</string>
 							<string key="candidateClassName">UILabel</string>
 						</object>
+						<object class="IBToOneOutletInfo" key="facebookLikeView">
+							<string key="name">facebookLikeView</string>
+							<string key="candidateClassName">FacebookLikeView</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="fifthFlyer">
 							<string key="name">fifthFlyer</string>
 							<string key="candidateClassName">UIImageView</string>
@@ -1017,6 +1067,10 @@
 						<object class="IBToOneOutletInfo" key="firstFlyer">
 							<string key="name">firstFlyer</string>
 							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="followButton">
+							<string key="name">followButton</string>
+							<string key="candidateClassName">UIButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="fourthFlyer">
 							<string key="name">fourthFlyer</string>
@@ -1029,6 +1083,10 @@
 						<object class="IBToOneOutletInfo" key="inviteFriendLabel">
 							<string key="name">inviteFriendLabel</string>
 							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="likeButton">
+							<string key="name">likeButton</string>
+							<string key="candidateClassName">UIButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="savedFlyrButton">
 							<string key="name">savedFlyrButton</string>
