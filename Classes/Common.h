@@ -251,6 +251,11 @@ return cell;\
 #define AddCaptionText @"Add caption here"
 #define FlyerDateFormat @"MM/dd/YYYY"
 
+#define BACKGROUND_PRODUCT_PREFIX @"com.flyerly.background"
+#define FONT_PRODUCT_PREFIX @"com.flyerly.font"
+#define COLOR_PRODUCT_PREFIX @"com.flyerly.color"
+#define TEXT_BORDER_PRODUCT_PREFIX @"com.flyerly.textborder"
+#define FLYER_BORDER_PRODUCT_PREFIX @"com.flyerly.flyerborder"
 
 #define FONT6_PRODUCT_ID @"com.flyerly.font6"
 #define FONT7_PRODUCT_ID @"com.flyerly.font7"

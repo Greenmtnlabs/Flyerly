@@ -113,6 +113,10 @@
     
 	NSInteger fontScrollWidth;
 	NSInteger fontScrollHeight;
+	NSInteger colorScrollWidth;
+	NSInteger colorScrollHeight;
+    NSInteger borderScrollWidth;
+	NSInteger borderScrollHeight;
 }
 
 @property (nonatomic, retain) MyNavigationBar *navBar;

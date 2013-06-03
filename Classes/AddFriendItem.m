@@ -7,6 +7,7 @@
 //
 
 #import "AddFriendItem.h"
+#import "AsyncImageView.h"
 
 @implementation AddFriendItem
 @synthesize leftCheckBox, leftName, rightCheckBox, rightName, leftImage, rightImage, identifier1, identifier2, leftSelected, rightSelected;
@@ -34,6 +35,17 @@
 -(void)setImages:(UIImage *)image1 image2:(UIImage *)image2{
     [leftImage setImage:image1];
     [rightImage setImage:image2];
+}
+
+-(void)setImagesURL:(NSString *)name1 name2:(NSString *)name2{
+    [leftImage setImage:[UIImage imageNamed:@"default.png"]];
+    [rightImage setImage:[UIImage imageNamed:@"default.png"]];
+    
+    if(name1)
+        [leftImage setImageURL:name1];
+
+    if(name2)
+        [rightImage setImageURL:name2];
 }
 
 /**

@@ -8,14 +8,15 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "AsyncImageView.h"
 
 @interface AddFriendItem : UITableViewCell {
 	IBOutlet UIButton *leftCheckBox;
 	IBOutlet UILabel *leftName;
 	IBOutlet UIButton *rightCheckBox;
 	IBOutlet UILabel *rightName;
-	IBOutlet UIImageView *leftImage;
-	IBOutlet UIImageView *rightImage;
+	IBOutlet AsyncImageView *leftImage;
+	IBOutlet AsyncImageView *rightImage;
     
 	BOOL leftSelected;
     BOOL rightSelected;
@@ -38,5 +39,6 @@
 -(void)setImages:(UIImage *)image1 image2:(UIImage *)image2;
 - (IBAction)onLeftCheckBoxClick:(UIButton *)sender;
 - (IBAction)onRightCheckBoxClick:(UIButton *)sender;
+-(void)setImagesURL:(NSString *)name1 name2:(NSString *)name2;
 
 @end

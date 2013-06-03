@@ -72,6 +72,7 @@
 		0F734B541742737D0084A2F4 /* top_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F734B521742737D0084A2F4 /* top_bg.png */; };
 		0F734B551742737D0084A2F4 /* top_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F734B531742737D0084A2F4 /* top_bg@2x.png */; };
 		0F734B5617427B790084A2F4 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65B303FA171ED8C8006632E3 /* Accounts.framework */; };
+		0F7FC386175CE26B009DEB08 /* AsyncImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F7FC385175CE26B009DEB08 /* AsyncImageView.m */; };
 		0F80073E1753415D000FF7FA /* arrangeicon_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F8007321753415D000FF7FA /* arrangeicon_button.png */; };
 		0F80073F1753415D000FF7FA /* arrangeicon_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F8007331753415D000FF7FA /* arrangeicon_button@2x.png */; };
 		0F8007401753415D000FF7FA /* icon_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F8007341753415D000FF7FA /* icon_button.png */; };
@@ -956,6 +957,8 @@
 		0DFC532B1095781500B18478 /* backgrnd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backgrnd.png; sourceTree = "<group>"; };
 		0F734B521742737D0084A2F4 /* top_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = top_bg.png; sourceTree = "<group>"; };
 		0F734B531742737D0084A2F4 /* top_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "top_bg@2x.png"; sourceTree = "<group>"; };
+		0F7FC384175CE26B009DEB08 /* AsyncImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AsyncImageView.h; path = AsyncImageView/AsyncImageView.h; sourceTree = "<group>"; };
+		0F7FC385175CE26B009DEB08 /* AsyncImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AsyncImageView.m; path = AsyncImageView/AsyncImageView.m; sourceTree = "<group>"; };
 		0F8007321753415D000FF7FA /* arrangeicon_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrangeicon_button.png; sourceTree = "<group>"; };
 		0F8007331753415D000FF7FA /* arrangeicon_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrangeicon_button@2x.png"; sourceTree = "<group>"; };
 		0F8007341753415D000FF7FA /* icon_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_button.png; sourceTree = "<group>"; };
@@ -2144,6 +2147,7 @@
 		0DF3A2D7108DF27200D6C887 /* ExternalFrameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0F7FC383175CE261009DEB08 /* AsyncImageView */,
 				0FE0BDD11758BBB900C4D78D /* InAppPurchase */,
 				0FE0BDA81758808D00C4D78D /* Reachability.h */,
 				0FE0BDA91758808D00C4D78D /* Reachability.m */,
@@ -2600,6 +2604,15 @@
 				0DFA8B3510AD851300F779CA /* ImageCache.m */,
 			);
 			path = imageCache;
+			sourceTree = "<group>";
+		};
+		0F7FC383175CE261009DEB08 /* AsyncImageView */ = {
+			isa = PBXGroup;
+			children = (
+				0F7FC384175CE26B009DEB08 /* AsyncImageView.h */,
+				0F7FC385175CE26B009DEB08 /* AsyncImageView.m */,
+			);
+			name = AsyncImageView;
 			sourceTree = "<group>";
 		};
 		0F80074A1753784E000FF7FA /* symbols */ = {
@@ -4184,6 +4197,7 @@
 				0FEF2DA9174E66FC00FDD8C9 /* HelpController.m in Sources */,
 				0FE0BDAA1758808D00C4D78D /* Reachability.m in Sources */,
 				0FE0BDD41758BBCD00C4D78D /* EBPurchase.m in Sources */,
+				0F7FC386175CE26B009DEB08 /* AsyncImageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

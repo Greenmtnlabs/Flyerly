@@ -308,6 +308,7 @@ BOOL firstTableLoad = YES;
              */
             
             
+            [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
             FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
             appDelegate.facebook.sessionDelegate = self;
             
@@ -318,7 +319,8 @@ BOOL firstTableLoad = YES;
                 
                 self.facebookArray = [[NSMutableArray alloc] init];
                 
-                [appDelegate.facebook requestWithGraphPath:@"me/friends?fields=name,picture.height(35).width(35).type(small)&limit=2&offset=0" andDelegate:self];
+                //[appDelegate.facebook requestWithGraphPath:@"me/friends?fields=name,picture.height(35).width(35).type(small)&limit=16&offset=0" andDelegate:self];
+                [appDelegate.facebook requestWithGraphPath:@"me/friends?fields=name,picture.height(35).width(35).type(small)" andDelegate:self];
                 
             } else {
                 
@@ -337,23 +339,23 @@ int totalCount = 0;
 
 -(void)request:(FBRequest *)request didLoad:(id)result{
     
-    //NSArray* users = result;
     int count = 0;
 
     for (NSDictionary *friendData in [result objectForKey:@"data"]) {
         
-        //NSLog(@"Facebook picture: %@",[friendData objectForKey:@"picture"]);
         NSURL *imageURL = [NSURL URLWithString:[[[friendData objectForKey:@"picture"] objectForKey:@"data"] objectForKey:@"url"]];
-        UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
+        //UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
 
         // Here we will get the facebook contacts
         NSMutableDictionary *dOfPerson=[NSMutableDictionary dictionary];        
         [dOfPerson setObject:[friendData objectForKey:@"name"] forKey:@"name"];
         [dOfPerson setObject:[friendData objectForKey:@"id"] forKey:@"identifier"];
-        if(image){
-            [dOfPerson setObject:image forKey:@"image"];
+        if(imageURL){
+            [dOfPerson setObject:imageURL forKey:@"image"];
         }
-        //[dOfPerson setObject:[[[friendData objectForKey:@"picture"] objectForKey:@"data"] objectForKey:@"url"] forKey:@"image"];
+        //if(image){
+        //    [dOfPerson setObject:image forKey:@"image"];
+        //}
         [self.facebookArray addObject:dOfPerson];
         
         count++;
@@ -367,7 +369,8 @@ int totalCount = 0;
     
     if(count > 0){
         FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-        [appDelegate.facebook requestWithGraphPath:[NSString stringWithFormat:@"me/friends?fields=name,picture.height(35).width(35).type(small)&limit=2&offset=%d", totalCount] andDelegate:self];
+        //[appDelegate.facebook requestWithGraphPath:[NSString stringWithFormat:@"me/friends?fields=name,picture.height(35).width(35).type(small)&limit=16&offset=%d", totalCount] andDelegate:self];
+        [appDelegate.facebook requestWithGraphPath:@"me/friends?fields=name,picture.height(35).width(35).type(small)" andDelegate:self];
 
         //loadingView =[LoadingView loadingViewInView:self.view text:@"Loading..."];
         
@@ -797,15 +800,15 @@ int totalCount = 0;
     
     // Get cell
     static NSString *cellId = @"AddFriendItem";
-   // AddFriendItem *cell = (AddFriendItem *) [uiTableView dequeueReusableCellWithIdentifier:cellId];
+    AddFriendItem *cell = (AddFriendItem *) [uiTableView dequeueReusableCellWithIdentifier:cellId];
     //AddFriendItem *cell = [(AddFriendItem *)[self.uiTableView dequeueReusableCellWithIdentifier:cellId] autorelease];
     
-    AddFriendItem *cell = nil;
+    //AddFriendItem *cell = nil;
     
-    if([self.deviceContactItems count] > indexPath.row){
+    //if([self.deviceContactItems count] > indexPath.row){
         //NSLog(@"Reusing Row");
-        cell = [self.deviceContactItems objectAtIndex:indexPath.row];
-    }
+    //    cell = [self.deviceContactItems objectAtIndex:indexPath.row];
+    //}
     
     if (cell == nil) {
         NSArray *nib=[[NSBundle mainBundle] loadNibNamed:cellId owner:self options:nil];
@@ -847,9 +850,11 @@ int totalCount = 0;
     NSMutableDictionary *dict1 = [[self getArrayOfSelectedTab] objectAtIndex:index];
     NSString *name1 = [dict1 objectForKey:@"name"];
     __block UIImage *image1 = nil;
+    __block NSString *imageName1 = nil;
+    
     if(selectedTab == FACEBOOK_TAB){
         //[dict1 objectForKey:@"image"];
-        image1 =[dict1 objectForKey:@"image"];
+        imageName1 =[dict1 objectForKey:@"image"];
     } else {
         image1 =[dict1 objectForKey:@"image"];
     }
@@ -858,6 +863,7 @@ int totalCount = 0;
     NSMutableDictionary *dict2;
     NSString *name2;
     __block UIImage *image2 = nil;
+    __block NSString *imageName2 = nil;
 
     // Check index
     if([[self getArrayOfSelectedTab] count] > (index+ 1)){
@@ -865,8 +871,8 @@ int totalCount = 0;
         name2 = [dict2 objectForKey:@"name"];
         
         if(selectedTab == FACEBOOK_TAB){
+            imageName2 = [dict2 objectForKey:@"image"];
             //image2 = [dict2 objectForKey:@"image"];
-            image2 = [dict2 objectForKey:@"image"];
         } else {
             image2 = [dict2 objectForKey:@"image"];
         }
@@ -880,25 +886,20 @@ int totalCount = 0;
     // Set data on screen
     [cell setValues:name1 title2:name2];
     
-    //if(selectedTab == FACEBOOK_TAB){
-    //
-    //    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
-    //    dispatch_async(queue, ^(void) {
-    //
-    //        NSURL *imageURL1 = [NSURL URLWithString:[dict1 objectForKey:@"image"]];
-    //        image1 = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL1]];
-    //        NSURL *imageURL2 = [NSURL URLWithString:[dict2 objectForKey:@"image"]];
-    //        image2 = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL2]];
-    //
-    //        dispatch_async(dispatch_get_main_queue(), ^{
-    //            [cell setImages:image1 image2:image2];
-    //            [cell setNeedsLayout];
-    //        });
-    //    });
-    //
-    //}else{
+    if(selectedTab == FACEBOOK_TAB){
+        dispatch_queue_t dispatchQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
+        dispatch_async(dispatchQueue, ^(void)
+                       {
+                           [cell setImagesURL:imageName1 name2:imageName2];
+                           //dispatch_sync(dispatch_get_main_queue(), ^{
+                               //[yourTableView reloadData];
+                               //[activity stopAnimating];
+                               //[activty setHidden:YES];
+                           //});
+                       });
+    }else{
         [cell setImages:image1 image2:image2];
-    //}
+    }
     
     cell.identifier1 = [dict1 objectForKey:@"identifier"];
     
