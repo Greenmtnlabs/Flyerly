@@ -192,6 +192,7 @@
 								<reference key="NSNextKeyView" ref="74786743"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
+								<int key="IBUITag">1</int>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
@@ -228,6 +229,7 @@
 								<reference key="NSNextKeyView" ref="804817656"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
+								<int key="IBUITag">3</int>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
@@ -306,6 +308,7 @@
 								<reference key="NSNextKeyView" ref="1061079198"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
+								<int key="IBUITag">2</int>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
@@ -332,6 +335,7 @@
 								<reference key="NSNextKeyView" ref="273624147"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
+								<int key="IBUITag">2</int>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
@@ -407,7 +411,6 @@
 								<string key="NSFrame">{{234, 355}, {82, 40}}</string>
 								<reference key="NSSuperview" ref="82517146"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -633,7 +636,7 @@
 						<reference key="destination" ref="372490531"/>
 						<int key="IBEventType">7</int>
 					</object>
-					<int key="connectionID">36</int>
+					<int key="connectionID">53</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -923,7 +926,7 @@
 				<reference key="dict.values" ref="317526666"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">50</int>
+			<int key="maxID">53</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1015,9 +1018,9 @@
 							<string>facebookButton</string>
 							<string>facebookPogressView</string>
 							<string>flickrButton</string>
-							<string>flickrPogressView</string>
 							<string>imgView</string>
 							<string>instagramButton</string>
+							<string>instagramPogressView</string>
 							<string>progressView</string>
 							<string>saveToCameraRollLabel</string>
 							<string>saveToRollSwitch</string>
@@ -1037,9 +1040,9 @@
 							<string>UIButton</string>
 							<string>ShareProgressView</string>
 							<string>UIButton</string>
-							<string>ShareProgressView</string>
 							<string>UIImageView</string>
 							<string>UIButton</string>
+							<string>ShareProgressView</string>
 							<string>UIView</string>
 							<string>UILabel</string>
 							<string>UISwitch</string>
@@ -1062,9 +1065,9 @@
 							<string>facebookButton</string>
 							<string>facebookPogressView</string>
 							<string>flickrButton</string>
-							<string>flickrPogressView</string>
 							<string>imgView</string>
 							<string>instagramButton</string>
+							<string>instagramPogressView</string>
 							<string>progressView</string>
 							<string>saveToCameraRollLabel</string>
 							<string>saveToRollSwitch</string>
@@ -1103,16 +1106,16 @@
 								<string key="candidateClassName">UIButton</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">flickrPogressView</string>
-								<string key="candidateClassName">ShareProgressView</string>
-							</object>
-							<object class="IBToOneOutletInfo">
 								<string key="name">imgView</string>
 								<string key="candidateClassName">UIImageView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">instagramButton</string>
 								<string key="candidateClassName">UIButton</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">instagramPogressView</string>
+								<string key="candidateClassName">ShareProgressView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">progressView</string>

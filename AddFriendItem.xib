@@ -46,6 +46,7 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{26, 5}, {35, 35}}</string>
 								<reference key="NSSuperview" ref="547505395"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="472896825"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<object class="NSColor" key="IBUIBackgroundColor">
@@ -58,8 +59,9 @@
 							<object class="IBUIImageView" id="878998382">
 								<reference key="NSNextResponder" ref="547505395"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{190, 5}, {35, 35}}</string>
+								<string key="NSFrame">{{182, 5}, {35, 35}}</string>
 								<reference key="NSSuperview" ref="547505395"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="992104382"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<object class="NSColor" key="IBUIBackgroundColor">
@@ -72,8 +74,9 @@
 							<object class="IBUILabel" id="472896825">
 								<reference key="NSNextResponder" ref="547505395"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{68, 11}, {87, 21}}</string>
+								<string key="NSFrame">{{68, 11}, {92, 21}}</string>
 								<reference key="NSSuperview" ref="547505395"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="986059033"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
@@ -106,8 +109,9 @@
 							<object class="IBUILabel" id="992104382">
 								<reference key="NSNextResponder" ref="547505395"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{233, 11}, {87, 21}}</string>
+								<string key="NSFrame">{{225, 11}, {94, 21}}</string>
 								<reference key="NSSuperview" ref="547505395"/>
+								<reference key="NSWindow"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -127,6 +131,7 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{4, 12}, {20, 19}}</string>
 								<reference key="NSSuperview" ref="547505395"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="618899362"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
@@ -163,8 +168,9 @@
 							<object class="IBUIButton" id="986059033">
 								<reference key="NSNextResponder" ref="547505395"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{168, 12}, {20, 19}}</string>
+								<string key="NSFrame">{{160, 12}, {20, 19}}</string>
 								<reference key="NSSuperview" ref="547505395"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="878998382"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
@@ -185,6 +191,7 @@
 						</array>
 						<string key="NSFrameSize">{320, 43}</string>
 						<reference key="NSSuperview" ref="324660052"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="551197228"/>
 						<string key="NSReuseIdentifierKey">_NS:11</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
@@ -200,6 +207,7 @@
 				</array>
 				<string key="NSFrameSize">{320, 44}</string>
 				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="547505395"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
 				<string key="IBUIRestorationIdentifier"/>
@@ -363,7 +371,66 @@
 			<nil key="sourceID"/>
 			<int key="maxID">26</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes"/>
+		<object class="IBClassDescriber" key="IBDocument.Classes">
+			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<object class="IBPartialClassDescription">
+					<string key="className">AddFriendItem</string>
+					<string key="superclassName">UITableViewCell</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="onLeftCheckBoxClick:">UIButton</string>
+						<string key="onRightCheckBoxClick:">UIButton</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="onLeftCheckBoxClick:">
+							<string key="name">onLeftCheckBoxClick:</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBActionInfo" key="onRightCheckBoxClick:">
+							<string key="name">onRightCheckBoxClick:</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="leftCheckBox">UIButton</string>
+						<string key="leftImage">UIImageView</string>
+						<string key="leftName">UILabel</string>
+						<string key="rightCheckBox">UIButton</string>
+						<string key="rightImage">UIImageView</string>
+						<string key="rightName">UILabel</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="leftCheckBox">
+							<string key="name">leftCheckBox</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="leftImage">
+							<string key="name">leftImage</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="leftName">
+							<string key="name">leftName</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="rightCheckBox">
+							<string key="name">rightCheckBox</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="rightImage">
+							<string key="name">rightImage</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="rightName">
+							<string key="name">rightName</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/AddFriendItem.h</string>
+					</object>
+				</object>
+			</array>
+		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>

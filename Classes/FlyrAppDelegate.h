@@ -45,6 +45,7 @@ extern NSString *FlickrSharingFailureNotification;
 	BOOL changesFlag;
 	OFFlickrAPIContext *flickrContext;
 	OFFlickrAPIRequest *flickrRequest;
+	NSString *flickrUserName;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
@@ -65,6 +66,7 @@ extern NSString *FlickrSharingFailureNotification;
 @property (nonatomic,assign) BOOL changesFlag;
 
 @property (strong, nonatomic) FBSession *session;
+@property (nonatomic, retain) NSString *flickrUserName;
 
 //@property (nonatomic, retain) FBDialog* dialog;
 //@property (nonatomic,retain) FBPermissionDialog* perDialog;

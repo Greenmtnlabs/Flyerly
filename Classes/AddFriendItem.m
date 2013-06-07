@@ -37,16 +37,24 @@
     [rightImage setImage:image2];
 }
 
--(void)setImagesURL:(NSString *)name1 name2:(NSString *)name2{
-    [leftImage setImage:[UIImage imageNamed:@"default.png"]];
-    [rightImage setImage:[UIImage imageNamed:@"default.png"]];
+-(void)setImagesURL:(NSString *)name1 name2:(NSString *)name2 selectedTab:(BOOL)selectedTab{
+    [leftImage setImage:[UIImage imageNamed:@"help_icon.png"]];
+    [rightImage setImage:[UIImage imageNamed:@"help_icon.png"]];
     
-    if(name1)
-        [leftImage setImageURL:name1];
-
-    if(name2)
-        [rightImage setImageURL:name2];
-}
+    if(name1){
+        if(selectedTab == 1){
+            [leftImage setImageURL:name1];
+        }else{
+            [leftImage setImageURL:[NSURL URLWithString:name1]];
+        }
+    }
+    if(name2){
+        if(selectedTab == 1){
+            [rightImage setImageURL:name2];
+        }else{
+            [rightImage setImageURL:[NSURL URLWithString:name2]];
+        }
+    }}
 
 /**
  * This is called when left check box is pressed

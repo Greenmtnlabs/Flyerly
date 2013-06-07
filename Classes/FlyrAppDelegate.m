@@ -20,6 +20,7 @@
 //#import "ARRollerView.h"
 //#import "ARRollerProtocol.h"
 
+NSString *kCheckTokenStep = @"kCheckTokenStep";
 NSString *FlickrSharingSuccessNotification = @"FlickrSharingSuccessNotification";
 NSString *FlickrSharingFailureNotification = @"FlickrSharingFailureNotification";
 #define kAdWhirlApplicationKey @"b7dfccec5016102d840c2e1e0de86337"
@@ -36,6 +37,7 @@ NSString *FlickrSharingFailureNotification = @"FlickrSharingFailureNotification"
 @synthesize fontScrollView,colorScrollView,templateScrollView,sizeScrollView,svController,_tSession,lauchController,flickrContext,flickrRequest;
 @synthesize session = _session;
 //@synthesize adwhirl;
+@synthesize flickrUserName;
 
 #pragma mark Ad whirl delegate methods
 
@@ -280,12 +282,21 @@ NSString *FlickrSharingFailureNotification = @"FlickrSharingFailureNotification"
 
 - (void)flickrAPIRequest:(OFFlickrAPIRequest *)inRequest didCompleteWithResponse:(NSDictionary *)inResponseDictionary {    
     NSLog(@"Request Complete With Response: %@", inResponseDictionary);
+    
+    if (inRequest.sessionInfo == kCheckTokenStep) {
+		self.flickrUserName = [inResponseDictionary valueForKeyPath:@"user.username._text"];
+	}
+	
     [self flickrRequest].sessionInfo = nil;
-	[[NSNotificationCenter defaultCenter] postNotificationName:FlickrSharingSuccessNotification object:self];
+	[[NSNotificationCenter defaultCenter] postNotificationName:FlickrSharingSuccessNotification object:nil];
 }
 
 - (void)flickrAPIRequest:(OFFlickrAPIRequest *)inRequest didObtainOAuthAccessToken:(NSString *)inAccessToken secret:(NSString *)inSecret userFullName:(NSString *)inFullName userName:(NSString *)inUserName userNSID:(NSString *)inNSID {
     [self setAndStoreFlickrAuthToken:inAccessToken secret:inSecret];
+    
+    self.flickrUserName = inUserName;    
+	//[[NSNotificationCenter defaultCenter] postNotificationName:SnapAndRunShouldUpdateAuthInfoNotification object:self];
+    [self flickrRequest].sessionInfo = nil;
 }
 
 - (void)setAndStoreFlickrAuthToken:(NSString *)inAuthToken secret:(NSString *)inSecret {
@@ -324,6 +335,7 @@ NSString *FlickrSharingFailureNotification = @"FlickrSharingFailureNotification"
     [lauchController release];
 	[navigationController release];
 	[window release];
+	[flickrUserName release];
 	[super dealloc];
 }
 

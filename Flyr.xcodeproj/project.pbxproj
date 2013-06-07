@@ -217,6 +217,14 @@
 		0FBC37F7174F980600004F21 /* twt_setting_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FBC37D9174F980500004F21 /* twt_setting_selected@2x.png */; };
 		0FBC37F8174F980600004F21 /* twt_setting.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FBC37DA174F980500004F21 /* twt_setting.png */; };
 		0FBC37F9174F980600004F21 /* twt_setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FBC37DB174F980500004F21 /* twt_setting@2x.png */; };
+		0FDB5624175E3E410078EBEC /* facebook_unlike.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FDB5620175E3E410078EBEC /* facebook_unlike.png */; };
+		0FDB5625175E3E410078EBEC /* facebook_unlike@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FDB5621175E3E410078EBEC /* facebook_unlike@2x.png */; };
+		0FDB5626175E3E410078EBEC /* twitter_following.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FDB5622175E3E410078EBEC /* twitter_following.png */; };
+		0FDB5627175E3E410078EBEC /* twitter_following@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FDB5623175E3E410078EBEC /* twitter_following@2x.png */; };
+		0FDB562F175E45730078EBEC /* Facebook+ForceDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDB5629175E45730078EBEC /* Facebook+ForceDialog.m */; };
+		0FDB5630175E45730078EBEC /* FacebookLikeView.html in Resources */ = {isa = PBXBuildFile; fileRef = 0FDB562B175E45730078EBEC /* FacebookLikeView.html */; };
+		0FDB5631175E45730078EBEC /* FacebookLikeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDB562C175E45730078EBEC /* FacebookLikeView.m */; };
+		0FDB5632175E45730078EBEC /* NSData+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDB562E175E45730078EBEC /* NSData+Extras.m */; };
 		0FE0BDA21758798700C4D78D /* bg_invite_friends_bar.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FE0BDA01758798700C4D78D /* bg_invite_friends_bar.png */; };
 		0FE0BDA31758798700C4D78D /* bg_invite_friends_bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FE0BDA11758798700C4D78D /* bg_invite_friends_bar@2x.png */; };
 		0FE0BDA617587A7200C4D78D /* invite_option_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FE0BDA417587A7200C4D78D /* invite_option_selected.png */; };
@@ -1103,6 +1111,16 @@
 		0FBC37D9174F980500004F21 /* twt_setting_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twt_setting_selected@2x.png"; sourceTree = "<group>"; };
 		0FBC37DA174F980500004F21 /* twt_setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twt_setting.png; sourceTree = "<group>"; };
 		0FBC37DB174F980500004F21 /* twt_setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twt_setting@2x.png"; sourceTree = "<group>"; };
+		0FDB5620175E3E410078EBEC /* facebook_unlike.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook_unlike.png; sourceTree = "<group>"; };
+		0FDB5621175E3E410078EBEC /* facebook_unlike@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook_unlike@2x.png"; sourceTree = "<group>"; };
+		0FDB5622175E3E410078EBEC /* twitter_following.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twitter_following.png; sourceTree = "<group>"; };
+		0FDB5623175E3E410078EBEC /* twitter_following@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter_following@2x.png"; sourceTree = "<group>"; };
+		0FDB5629175E45730078EBEC /* Facebook+ForceDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Facebook+ForceDialog.m"; path = "FaceboolLikeView/Facebook+ForceDialog.m"; sourceTree = "<group>"; };
+		0FDB562A175E45730078EBEC /* FacebookLikeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FacebookLikeView.h; path = FaceboolLikeView/FacebookLikeView.h; sourceTree = "<group>"; };
+		0FDB562B175E45730078EBEC /* FacebookLikeView.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = FacebookLikeView.html; path = FaceboolLikeView/FacebookLikeView.html; sourceTree = "<group>"; };
+		0FDB562C175E45730078EBEC /* FacebookLikeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FacebookLikeView.m; path = FaceboolLikeView/FacebookLikeView.m; sourceTree = "<group>"; };
+		0FDB562D175E45730078EBEC /* NSData+Extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+Extras.h"; path = "FaceboolLikeView/NSData+Extras.h"; sourceTree = "<group>"; };
+		0FDB562E175E45730078EBEC /* NSData+Extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+Extras.m"; path = "FaceboolLikeView/NSData+Extras.m"; sourceTree = "<group>"; };
 		0FE0BDA01758798700C4D78D /* bg_invite_friends_bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_invite_friends_bar.png; sourceTree = "<group>"; };
 		0FE0BDA11758798700C4D78D /* bg_invite_friends_bar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_invite_friends_bar@2x.png"; sourceTree = "<group>"; };
 		0FE0BDA417587A7200C4D78D /* invite_option_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = invite_option_selected.png; sourceTree = "<group>"; };
@@ -2147,6 +2165,7 @@
 		0DF3A2D7108DF27200D6C887 /* ExternalFrameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0FDB5628175E45640078EBEC /* FacebookLikeView */,
 				0F7FC383175CE261009DEB08 /* AsyncImageView */,
 				0FE0BDD11758BBB900C4D78D /* InAppPurchase */,
 				0FE0BDA81758808D00C4D78D /* Reachability.h */,
@@ -2222,6 +2241,10 @@
 		0DF3A361108DF47400D6C887 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				0FDB5620175E3E410078EBEC /* facebook_unlike.png */,
+				0FDB5621175E3E410078EBEC /* facebook_unlike@2x.png */,
+				0FDB5622175E3E410078EBEC /* twitter_following.png */,
+				0FDB5623175E3E410078EBEC /* twitter_following@2x.png */,
 				0FE0BDA417587A7200C4D78D /* invite_option_selected.png */,
 				0FE0BDA517587A7200C4D78D /* invite_option_selected@2x.png */,
 				0FE0BDA01758798700C4D78D /* bg_invite_friends_bar.png */,
@@ -2711,6 +2734,19 @@
 				0F8007C9175378F0000FF7FA /* ricon21@2x.png */,
 			);
 			name = icons;
+			sourceTree = "<group>";
+		};
+		0FDB5628175E45640078EBEC /* FacebookLikeView */ = {
+			isa = PBXGroup;
+			children = (
+				0FDB5629175E45730078EBEC /* Facebook+ForceDialog.m */,
+				0FDB562A175E45730078EBEC /* FacebookLikeView.h */,
+				0FDB562B175E45730078EBEC /* FacebookLikeView.html */,
+				0FDB562C175E45730078EBEC /* FacebookLikeView.m */,
+				0FDB562D175E45730078EBEC /* NSData+Extras.h */,
+				0FDB562E175E45730078EBEC /* NSData+Extras.m */,
+			);
+			name = FacebookLikeView;
 			sourceTree = "<group>";
 		};
 		0FE0BDD11758BBB900C4D78D /* InAppPurchase */ = {
@@ -4059,6 +4095,11 @@
 				0FE0BDA31758798700C4D78D /* bg_invite_friends_bar@2x.png in Resources */,
 				0FE0BDA617587A7200C4D78D /* invite_option_selected.png in Resources */,
 				0FE0BDA717587A7200C4D78D /* invite_option_selected@2x.png in Resources */,
+				0FDB5624175E3E410078EBEC /* facebook_unlike.png in Resources */,
+				0FDB5625175E3E410078EBEC /* facebook_unlike@2x.png in Resources */,
+				0FDB5626175E3E410078EBEC /* twitter_following.png in Resources */,
+				0FDB5627175E3E410078EBEC /* twitter_following@2x.png in Resources */,
+				0FDB5630175E45730078EBEC /* FacebookLikeView.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4198,6 +4239,9 @@
 				0FE0BDAA1758808D00C4D78D /* Reachability.m in Sources */,
 				0FE0BDD41758BBCD00C4D78D /* EBPurchase.m in Sources */,
 				0F7FC386175CE26B009DEB08 /* AsyncImageView.m in Sources */,
+				0FDB562F175E45730078EBEC /* Facebook+ForceDialog.m in Sources */,
+				0FDB5631175E45730078EBEC /* FacebookLikeView.m in Sources */,
+				0FDB5632175E45730078EBEC /* NSData+Extras.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -93,7 +93,7 @@
 					<object class="IBUIButton" id="39144541">
 						<reference key="NSNextResponder" ref="167002430"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{286, 9}, {20, 20}}</string>
+						<string key="NSFrame">{{284, 4}, {28, 28}}</string>
 						<reference key="NSSuperview" ref="167002430"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="623776449"/>
@@ -108,7 +108,7 @@
 							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="780790288"/>
-						<object class="NSCustomResource" key="IBUINormalBackgroundImage">
+						<object class="NSCustomResource" key="IBUINormalImage">
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">share_status_close.png</string>
 						</object>
@@ -202,7 +202,6 @@
 						<string key="NSFrame">{{15, 35}, {291, 1}}</string>
 						<reference key="NSSuperview" ref="167002430"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>

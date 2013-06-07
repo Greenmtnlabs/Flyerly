@@ -47,8 +47,12 @@
 
 -(IBAction)doNew:(id)sender{
 	//loadingView =[LoadingView loadingViewInView:self.view];
-    [self loadPhotoView];
+    //[self loadPhotoView];
 	//[NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(loadPhotoView) userInfo:nil repeats:NO];
+
+	ptController = [[PhotoController alloc]initWithNibName:@"PhotoController" bundle:nil];
+	[self.navigationController pushViewController:ptController animated:YES];
+	[ptController release];
 }
 //End
 
@@ -101,9 +105,15 @@
     //[self.navigationItem setRightBarButtonItem:rightBarButton];
 
     // Set left bar items
-    //[self.navigationItem setLeftBarButtonItems: [self leftBarItems]];   
+    //[self.navigationItem setLeftBarButtonItems: [self leftBarItems]];       
     
-    
+    firstFlyer.image = [UIImage imageNamed:@"pinned_flyer.png"];
+    secondFlyer.image = [UIImage imageNamed:@"pinned_flyer.png"];
+    thirdFlyer.image = [UIImage imageNamed:@"pinned_flyer.png"];
+    fourthFlyer.image = [UIImage imageNamed:@"pinned_flyer.png"];
+    fifthFlyer.image = [UIImage imageNamed:@"pinned_flyer.png"];
+    sixthFlyer.image = [UIImage imageNamed:@"pinned_flyer.png"];
+
 	[self filesByModDate];
 }
 
@@ -132,7 +142,8 @@
 }
 
 - (void)viewDidLoad {
-         [super viewDidLoad];
+    
+    [super viewDidLoad];
 	//self.navigationItem.title = @"Menu";
 	//loadingViewFlag = NO;
 	//loadingView = nil;
@@ -171,6 +182,14 @@
     if ([defaults objectForKey:@"FBAccessTokenKey"] && [defaults objectForKey:@"FBExpirationDateKey"]) {
         appDelegate.facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
         appDelegate.facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
+    }
+    
+    if([[NSUserDefaults standardUserDefaults] objectForKey:@"FACEBOOK_LIKED"]){
+        [likeButton setSelected:YES];
+    }
+
+    if([[NSUserDefaults standardUserDefaults] objectForKey:@"TWITTER_FOLLOWING"]){
+        [followButton setSelected:YES];
     }
     
 }
@@ -376,6 +395,16 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
 
 #pragma Like code
 
+- (IBAction)onTwitter:(id)sender {
+    UIButton *button = (UIButton *) sender;
+    
+    if([button isSelected]){
+        [self unFollowOnTwitter:sender];
+    } else {
+        [self followOnTwitter:sender];
+    }
+}
+
 - (IBAction)followOnTwitter:(id)sender {
     ACAccountStore *accountStore = [[ACAccountStore alloc] init];
     
@@ -409,8 +438,54 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
                     
                     if([[output lowercaseString] rangeOfString:[@"200" lowercaseString]].location == NSNotFound){
                         [followButton setSelected:NO];
+                        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"TWITTER_FOLLOWING"];
                     } else {
                         [followButton setSelected:YES];
+                        [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"TWITTER_FOLLOWING"];
+                    }
+                }];
+            }
+        }
+    }];
+}
+
+- (IBAction)unFollowOnTwitter:(id)sender {
+    ACAccountStore *accountStore = [[ACAccountStore alloc] init];
+    
+    ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+    
+    [accountStore requestAccessToAccountsWithType:accountType withCompletionHandler:^(BOOL granted, NSError *error) {
+        if(granted) {
+            // Get the list of Twitter accounts.
+            NSArray *accountsArray = [accountStore accountsWithAccountType:accountType];
+            
+            // For the sake of brevity, we'll assume there is only one Twitter account present.
+            // You would ideally ask the user which account they want to tweet from, if there is more than one Twitter account present.
+            if ([accountsArray count] > 0) {
+                // Grab the initial Twitter account to tweet from.
+                ACAccount *twitterAccount = [accountsArray objectAtIndex:0];
+                
+                NSMutableDictionary *tempDict = [[NSMutableDictionary alloc] init];
+                [tempDict setValue:@"flyerlyapp" forKey:@"screen_name"];
+                [tempDict setValue:@"true" forKey:@"follow"];
+                
+                TWRequest *postRequest = [[TWRequest alloc] initWithURL:[NSURL URLWithString:@"https://api.twitter.com/1/friendships/destroy.json"]
+                                                             parameters:tempDict
+                                                          requestMethod:TWRequestMethodPOST];
+                
+                
+                [postRequest setAccount:twitterAccount];
+                
+                [postRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+                    NSString *output = [NSString stringWithFormat:@"HTTP response status: %i", [urlResponse statusCode]];
+                    NSLog(@"%@", output);
+                    
+                    if([[output lowercaseString] rangeOfString:[@"200" lowercaseString]].location == NSNotFound){
+                        [followButton setSelected:YES];
+                        [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"TWITTER_FOLLOWING"];
+                    } else {
+                        [followButton setSelected:NO];
+                        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"TWITTER_FOLLOWING"];
                     }
                 }];
             }
@@ -419,40 +494,78 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
 }
 
 - (void)facebookLikeViewDidRender:(FacebookLikeView *)aFacebookLikeView {
+    
+    [loadingView removeView];
+    self.likeView.hidden = NO;
+    
     [UIView beginAnimations:@"" context:nil];
     [UIView setAnimationDelay:0.5];
-    self.facebookLikeView.alpha = 1;
+    //self.facebookLikeView.alpha = 1;
     [UIView commitAnimations];
 }
 
 - (void)facebookLikeViewDidUnlike:(FacebookLikeView *)aFacebookLikeView {
-    UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Unliked"
-                                                     message:@"You unliked Flyerly. Where's the love?"
-                                                    delegate:self
-                                           cancelButtonTitle:@"OK"
-                                           otherButtonTitles:nil] autorelease];
-    [alert show];
+    
+    // Set like button un selected
+    [likeButton setSelected:NO];
+
+    // Remove views
+    [self goBack];
+    
+    // Remove liked status
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"FACEBOOK_LIKED"];
+
+    // show alert message
+    //UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Unliked"
+    //                                                 message:@"You unliked Flyerly. Where's the love?"
+    //                                                delegate:self
+    //                                       cancelButtonTitle:@"OK"
+    //                                       otherButtonTitles:nil] autorelease];
+    //[alert show];
 }
 
 - (void)facebookLikeViewDidLike:(FacebookLikeView *)aFacebookLikeView {
-    UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Liked"
-                                                     message:@"You liked Flyerly. Thanks!"
-                                                    delegate:self
-                                           cancelButtonTitle:@"OK"
-                                           otherButtonTitles:nil] autorelease];
-    [alert show];
+    
+    // Set like button selected
+    [likeButton setSelected:YES];
+
+    // Remove views
+    [self goBack];
+
+    // Set like status
+    [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"FACEBOOK_LIKED"];
+    
+    //UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Liked"
+    //                                                 message:@"You liked Flyerly. Thanks!"
+    //                                                delegate:self
+    //                                       cancelButtonTitle:@"OK"
+    //                                       otherButtonTitles:nil] autorelease];
+    //[alert show];
 }
 
 - (IBAction)showLikeButton {
     
-    /*self.facebookLikeView.href = [NSURL URLWithString:@"http://www.facebook.com/flyerlyapp"];
-    self.facebookLikeView.layout = @"button_count";
-    self.facebookLikeView.showFaces = NO;
-    
-    self.facebookLikeView.alpha = 0;
-    [self.facebookLikeView load];*/
-    
-    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+     appDelegate.facebook.sessionDelegate = self;
+     
+     if([appDelegate.facebook isSessionValid]) {
+
+         loadingView =[LoadingView loadingViewInView:self.view  text:@"Wait..."];
+         [self.view addSubview:opaqueView];
+         [self.view  addSubview:crossButton];
+         
+         self.facebookLikeView.delegate = self;
+         self.facebookLikeView.href = [NSURL URLWithString:@"http://www.facebook.com/flyerlyapp"];
+         self.facebookLikeView.layout = @"button_count";
+         self.facebookLikeView.showFaces = NO;
+         [self.facebookLikeView load];
+         
+     } else {
+     
+         [appDelegate.facebook authorize:[NSArray arrayWithObjects: @"read_stream", @"publish_stream", nil]];
+     }
+
+    /*FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     appDelegate.facebook.sessionDelegate = self;
     
     if([appDelegate.facebook isSessionValid]) {
@@ -479,7 +592,7 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
         
         [appDelegate.facebook authorize:[NSArray arrayWithObjects: @"read_stream",
                                          @"publish_stream", nil]];
-    }
+    }*/
 }
 
 -(IBAction)goBack{
@@ -487,11 +600,13 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
     [webview removeFromSuperview];
     [crossButton removeFromSuperview];
     
-    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-    [appDelegate.facebook requestWithGraphPath:@"me/likes" andDelegate:self];
+    [self.likeView setHidden:YES];
+    
+    //FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    //[appDelegate.facebook requestWithGraphPath:@"me/likes" andDelegate:self];
 }
 
--(void)request:(FBRequest *)request didLoad:(id)result{
+/*-(void)request:(FBRequest *)request didLoad:(id)result{
  
  	NSLog(@"Request received %@", result);    
     for (NSDictionary *likesData in [result objectForKey:@"data"]) {
@@ -505,7 +620,7 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
             [likeButton setSelected:NO];
         }
     }
-}
+}*/
 
 - (void)fbDidLogin {
 	NSLog(@"logged in");

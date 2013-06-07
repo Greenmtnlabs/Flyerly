@@ -260,18 +260,30 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
     
 	[tableView beginUpdates];
 	[tableView setEditing:YES animated:YES];
+    
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
+        [tableView deleteRowsAtIndexPaths:
+        [NSArray arrayWithObjects:[NSIndexPath indexPathForRow:indexPath.row  inSection:indexPath.section],nil]
+                         withRowAnimation:UITableViewRowAnimationLeft];
+        
+        // Remove flyer
+        NSString *imageName = [photoArray objectAtIndex:[indexPath row]];
+        [[NSFileManager defaultManager] removeItemAtPath:imageName error:nil];
+        
+        // Remove flyer detail file
+        NSString *flyerFilePath = [imageName stringByReplacingOccurrencesOfString:@".jpg" withString:@".txt"];
+        [[NSFileManager defaultManager] removeItemAtPath:flyerFilePath error:nil];
 
-           if (editingStyle == UITableViewCellEditingStyleDelete)
-	{
-			[tableView deleteRowsAtIndexPaths:
-			                    [NSArray arrayWithObjects:[NSIndexPath indexPathForRow:indexPath.row  inSection:indexPath.section],nil] 
-			                    withRowAnimation:UITableViewRowAnimationLeft];
+        // Remove flyer social detail file
+        NSString *socialFlyerFolderPath = [imageName stringByReplacingOccurrencesOfString:@"/Flyr/" withString:@"/Flyr/Social/"];
+        NSString *socialFilePath = [socialFlyerFolderPath stringByReplacingOccurrencesOfString:@".jpg" withString:@".soc"];
+        [[NSFileManager defaultManager] removeItemAtPath:socialFilePath error:nil];
 
-			NSString *imageName = [photoArray objectAtIndex:[indexPath row]];
-			[[NSFileManager defaultManager] removeItemAtPath:imageName error:nil];
-			[photoArray removeObjectAtIndex:[indexPath row]];
+        [photoArray removeObjectAtIndex:[indexPath row]];
 		[iconArray removeObjectAtIndex:[indexPath row]];
-	}   
+	}
+    
 	[tableView endUpdates];
 	[tableView reloadData];
 }

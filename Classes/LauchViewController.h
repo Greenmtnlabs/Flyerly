@@ -43,6 +43,7 @@
     IBOutlet UIImageView *fifthFlyer;
     IBOutlet UIImageView *sixthFlyer;
 
+    IBOutlet UIView *likeView;
     IBOutlet FacebookLikeView *facebookLikeView;
     
 	//IBOutlet FBLoginButton *faceBookButton;
@@ -53,7 +54,7 @@
     
     UIView *opaqueView;
     UIWebView *webview;
-    UIButton *crossButton;
+    IBOutlet UIButton *crossButton;
 }
 @property(nonatomic,retain) PhotoController *ptController;
 @property (nonatomic, retain) LoadingView *loadingView;
@@ -81,6 +82,8 @@
 @property (nonatomic, retain) IBOutlet UIImageView *sixthFlyer;
 @property(nonatomic,retain) NSMutableArray *photoArray;
 @property(nonatomic,retain) NSMutableArray *photoDetailArray;
+
+@property (nonatomic, retain) IBOutlet UIView *likeView;
 @property (nonatomic, retain) IBOutlet FacebookLikeView *facebookLikeView;
 
 -(IBAction)doNew:(id)sender;
@@ -89,6 +92,7 @@
 -(IBAction)doInvite:(id)sender;
 -(IBAction)showFlyerDetail:(UIImageView *)sender;
 - (IBAction)showLikeButton;
-- (IBAction)followOnTwitter:(id)sender;
+- (IBAction)onTwitter:(id)sender;
+-(IBAction)goBack;
 
 @end

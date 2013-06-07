@@ -2469,7 +2469,13 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     draftViewController.fromPhotoController = YES;
     draftViewController.selectedFlyerImage = [UIImage imageWithData:data];
     draftViewController.selectedFlyerTitle = @"Title";
-    draftViewController.selectedFlyerDescription = msgTextView.text;
+    
+    if([[self textLabelLayersArray] count] > 0){
+        draftViewController.selectedFlyerDescription = ((CustomLabel*)[[self textLabelLayersArray] objectAtIndex:0]).text;
+    }else{
+        draftViewController.selectedFlyerDescription = @"";
+    }
+
     draftViewController.imageFileName = finalImgWritePath;
     draftViewController.detailFileName = [finalImgWritePath stringByReplacingOccurrencesOfString:@".jpg" withString:@".txt"];
     [self.navigationController pushViewController:draftViewController animated:YES];
@@ -3487,7 +3493,12 @@ UIScrollView *layerScrollView = nil;
     
 	NSMutableArray *array = [[[NSMutableArray alloc] init] autorelease];
     [array addObject:@"Title"];
-    [array addObject:msgTextView.text];
+    if([[self textLabelLayersArray] count] > 0){
+        NSLog(@"%@", ((CustomLabel*)[[self textLabelLayersArray] objectAtIndex:0]).text);
+        [array addObject:((CustomLabel*)[[self textLabelLayersArray] objectAtIndex:0]).text];
+    }else{
+        [array addObject:@""];
+    }
     
     NSDate *date = [NSDate date];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc]init];

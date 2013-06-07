@@ -181,6 +181,12 @@ BOOL firstTableLoad = YES;
         CFStringRef firstName, lastName;
         firstName = ABRecordCopyValue(ref, kABPersonFirstNameProperty);
         lastName  = ABRecordCopyValue(ref, kABPersonLastNameProperty);
+        
+        if(!firstName)
+            firstName = (CFStringRef) @"";
+        if(!lastName)
+            lastName = (CFStringRef) @"";
+
         [dOfPerson setObject:[NSString stringWithFormat:@"%@ %@", firstName, lastName] forKey:@"name"];
         
         //For Email ids
@@ -211,14 +217,14 @@ BOOL firstTableLoad = YES;
             {
                 [dOfPerson setObject:(NSString*)ABMultiValueCopyValueAtIndex(phones, i) forKey:@"Phone"];
                 [dOfPerson setObject:(NSString*)ABMultiValueCopyValueAtIndex(phones, i) forKey:@"identifier"];
+                [contactsArray addObject:dOfPerson];
             }
             else if ([mobileLabel isEqualToString:(NSString*)kABPersonPhoneIPhoneLabel])
             {
                 [dOfPerson setObject:(NSString*)ABMultiValueCopyValueAtIndex(phones, i) forKey:@"Phone"];
+                [contactsArray addObject:dOfPerson];
                 break ;
             }
-            
-            [contactsArray addObject:dOfPerson];
         }
         
         //CFRelease(ref);
@@ -319,8 +325,8 @@ BOOL firstTableLoad = YES;
                 
                 self.facebookArray = [[NSMutableArray alloc] init];
                 
-                //[appDelegate.facebook requestWithGraphPath:@"me/friends?fields=name,picture.height(35).width(35).type(small)&limit=16&offset=0" andDelegate:self];
-                [appDelegate.facebook requestWithGraphPath:@"me/friends?fields=name,picture.height(35).width(35).type(small)" andDelegate:self];
+                [appDelegate.facebook requestWithGraphPath:@"me/friends?fields=name,picture.height(35).width(35).type(small)&limit=100&offset=0" andDelegate:self];
+                //[appDelegate.facebook requestWithGraphPath:@"me/friends?fields=name,picture.height(35).width(35).type(small)" andDelegate:self];
                 
             } else {
                 
@@ -369,8 +375,8 @@ int totalCount = 0;
     
     if(count > 0){
         FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-        //[appDelegate.facebook requestWithGraphPath:[NSString stringWithFormat:@"me/friends?fields=name,picture.height(35).width(35).type(small)&limit=16&offset=%d", totalCount] andDelegate:self];
-        [appDelegate.facebook requestWithGraphPath:@"me/friends?fields=name,picture.height(35).width(35).type(small)" andDelegate:self];
+        [appDelegate.facebook requestWithGraphPath:[NSString stringWithFormat:@"me/friends?fields=name,picture.height(35).width(35).type(small)&limit=100&offset=%d", totalCount] andDelegate:self];
+        //[appDelegate.facebook requestWithGraphPath:@"me/friends?fields=name,picture.height(35).width(35).type(small)" andDelegate:self];
 
         //loadingView =[LoadingView loadingViewInView:self.view text:@"Loading..."];
         
@@ -410,9 +416,12 @@ int totalCount = 0;
             
         } else{
             
-            loadingView =[LoadingView loadingViewInView:self.view text:@"Loading..."];
-            loadingViewFlag = YES;
+            //loadingView =[LoadingView loadingViewInView:self.view text:@"Loading..."];
+            //loadingViewFlag = YES;
             
+            // Empty table view
+            [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+
             if([TWTweetComposeViewController canSendTweet]){
                 
                 ACAccountStore *account = [[ACAccountStore alloc] init];
@@ -467,10 +476,8 @@ int totalCount = 0;
     // Build a twitter request
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     [params setObject:cursor forKey:@"cursor"];
-    [params setObject:@"2" forKey:@"count"];
+    [params setObject:@"20" forKey:@"count"];
     [params setObject:[acct identifier] forKey:@"user_id"];
-    //NSLog(@"Account: %@", [acct username]);
-    //NSLog(@"Account Id: %@", [acct identifier]);
     
     TWRequest *getRequest = [[TWRequest alloc] initWithURL:
                              [NSURL URLWithString:[NSString stringWithFormat:@"https://api.twitter.com/1.1/followers/list.json"]]
@@ -489,43 +496,39 @@ int totalCount = 0;
             NSDictionary *followers =  [NSJSONSerialization JSONObjectWithData:responseData
                                                                        options:NSJSONReadingMutableLeaves
                                                                          error:&jsonError];
-            NSDictionary *users = [followers objectForKey:@"users"];            
-            //NSLog(@"User Count: %d", [users count]);
-            //NSLog(@"Users: %@", users);
+            NSDictionary *users = [followers objectForKey:@"users"];
 
             for (id user in users) {
                 
-                //NSLog(@"Image URL: %@", [user objectForKey:@"profile_image_url"]);
                 NSMutableDictionary *dOfPerson=[NSMutableDictionary dictionary];
                 [dOfPerson setObject:[user objectForKey:@"name"] forKey:@"name"];
                 [dOfPerson setObject:[user objectForKey:@"screen_name"] forKey:@"identifier"];
                 
-                NSURL *imageURL = [NSURL URLWithString:[user objectForKey:@"profile_image_url"]];
-                NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
-                UIImage *image = [UIImage imageWithData:imageData];
+                NSString *imageURL = [user objectForKey:@"profile_image_url"];
+                //NSURL *imageURL = [NSURL URLWithString:[user objectForKey:@"profile_image_url"]];
+                //NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+                //UIImage *image = [UIImage imageWithData:imageData];
                 
-                if(image){
-                    [dOfPerson setObject:image forKey:@"image"];
+                if(imageURL){
+                    [dOfPerson setObject:imageURL forKey:@"image"];
                 }
                 
                 [self.twitterArray addObject:dOfPerson];
             }
 
+            [uiTableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
             nextCursor = [followers objectForKey:@"next_cursor"];
-            
         }
 
         backupArray = nil;
         backupArray = twitterArray;
         if([nextCursor compare:[NSDecimalNumber zero]] == NSOrderedSame){
             
-            [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
-            
+            //[[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
             //[self.uiTableView reloadData];
         }else{
 
-            [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
-            
+            //[[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
             [self cursoredTwitterContacts:[NSString stringWithFormat:@"%@", nextCursor] arrayOfAccounts:arrayOfAccounts];
         }
 
@@ -604,12 +607,12 @@ int totalCount = 0;
         if(selectedTab == 0){
             
             // send tweets to contacts
-            [self sendSMS:@"I am using the flyerly app to create and share flyers on the go! - http://www.flyer.ly" recipients:identifiers];
+            [self sendSMS:@"I'm using the flyerly app to create and share flyers on the go! flyer.ly" recipients:identifiers];
             
         }else if(selectedTab == 2){
             // Send tweets to twitter contacts
             for(NSString *follower in identifiers){
-                [self sendTwitterMessage:@"I am using the flyerly app to create and share flyers on the go! -                                    http://www.flyer.ly" screenName:follower];
+                [self sendTwitterMessage:@"I'm using the flyerly app to create and share flyers on the go! flyer.ly" screenName:follower];
             }
             
             [self showAlert:@"Invited !" message:@"You have successfully invited your friends to join flyerly."];
@@ -617,7 +620,9 @@ int totalCount = 0;
         }else if(selectedTab == 1){
             
             [self tagFacebookUsersWithFeed:identifiers];
-        }
+
+            [self showAlert:@"Invited !" message:@"You have successfully invited your friends to join flyerly."];
+}
         
     } else {
         [self showAlert:@"Nothing Selected !" message:@"Please select any contact to invite"];
@@ -652,12 +657,12 @@ int totalCount = 0;
 
     [self performPublishAction:^{
         
-        [FBRequestConnection startForPostStatusUpdate:@"I am using the flyerly app to create and share flyers on the go! - http://www.flyer.ly" place:@"144479625584966" tags:identifiers completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+        [FBRequestConnection startForPostStatusUpdate:@"I'm using the flyerly app to create and share flyers on the go! flyer.ly" place:@"144479625584966" tags:identifiers completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
             
             NSLog(@"New Result: %@", result);
             NSLog(@"Error: %@", error);
 
-            [self showAlert:@"Invited !" message:@"You have successfully invited your friends to join flyerly."];
+            //[self showAlert:@"Invited !" message:@"You have successfully invited your friends to join flyerly."];
         }];
     }];
 }
@@ -791,7 +796,6 @@ int totalCount = 0;
 
     // Get index like 0, 2, 4, 6 etc
     int index = (indexPath.row * 2);
-    //NSLog(@"index: %d", index);
     
     // init cell array if null
     if(!self.deviceContactItems){
@@ -800,15 +804,13 @@ int totalCount = 0;
     
     // Get cell
     static NSString *cellId = @"AddFriendItem";
-    AddFriendItem *cell = (AddFriendItem *) [uiTableView dequeueReusableCellWithIdentifier:cellId];
-    //AddFriendItem *cell = [(AddFriendItem *)[self.uiTableView dequeueReusableCellWithIdentifier:cellId] autorelease];
+    //AddFriendItem *cell = (AddFriendItem *) [uiTableView dequeueReusableCellWithIdentifier:cellId];
+    AddFriendItem *cell = nil;
     
-    //AddFriendItem *cell = nil;
-    
-    //if([self.deviceContactItems count] > indexPath.row){
+    if([self.deviceContactItems count] > indexPath.row){
         //NSLog(@"Reusing Row");
-    //    cell = [self.deviceContactItems objectAtIndex:indexPath.row];
-    //}
+        cell = [self.deviceContactItems objectAtIndex:indexPath.row];
+    }
     
     if (cell == nil) {
         NSArray *nib=[[NSBundle mainBundle] loadNibNamed:cellId owner:self options:nil];
@@ -829,30 +831,15 @@ int totalCount = 0;
         // Add cell in array for tracking
         [self.deviceContactItems addObject:cell];
         
-    } else {
-        //NSLog(@"Reusing Row");
-        /*
-        if(cell.leftSelected){
-            [cell.leftCheckBox setSelected:YES];
-        }else{
-            [cell.leftCheckBox setSelected:NO];
-        }
-
-        if(cell.rightSelected){
-            [cell.rightCheckBox setSelected:YES];
-        }else{
-            [cell.rightCheckBox setSelected:NO];
-        }
-         */
     }
-    
+
     // Get left contact data
     NSMutableDictionary *dict1 = [[self getArrayOfSelectedTab] objectAtIndex:index];
     NSString *name1 = [dict1 objectForKey:@"name"];
     __block UIImage *image1 = nil;
     __block NSString *imageName1 = nil;
     
-    if(selectedTab == FACEBOOK_TAB){
+    if(selectedTab == FACEBOOK_TAB || selectedTab == TWITTER_TAB){
         //[dict1 objectForKey:@"image"];
         imageName1 =[dict1 objectForKey:@"image"];
     } else {
@@ -870,9 +857,8 @@ int totalCount = 0;
         dict2 = [[self getArrayOfSelectedTab] objectAtIndex:(index + 1)];
         name2 = [dict2 objectForKey:@"name"];
         
-        if(selectedTab == FACEBOOK_TAB){
+        if(selectedTab == FACEBOOK_TAB || selectedTab == TWITTER_TAB){
             imageName2 = [dict2 objectForKey:@"image"];
-            //image2 = [dict2 objectForKey:@"image"];
         } else {
             image2 = [dict2 objectForKey:@"image"];
         }
@@ -885,17 +871,17 @@ int totalCount = 0;
 
     // Set data on screen
     [cell setValues:name1 title2:name2];
-    
-    if(selectedTab == FACEBOOK_TAB){
+
+    if(selectedTab == FACEBOOK_TAB || selectedTab == TWITTER_TAB){
         dispatch_queue_t dispatchQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
         dispatch_async(dispatchQueue, ^(void)
                        {
-                           [cell setImagesURL:imageName1 name2:imageName2];
-                           //dispatch_sync(dispatch_get_main_queue(), ^{
-                               //[yourTableView reloadData];
+                           dispatch_sync(dispatch_get_main_queue(), ^{
+                               [cell setImagesURL:imageName1 name2:imageName2 selectedTab:selectedTab];
+                               //[[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
                                //[activity stopAnimating];
                                //[activty setHidden:YES];
-                           //});
+                           });
                        });
     }else{
         [cell setImages:image1 image2:image2];

@@ -163,8 +163,8 @@
 - (IBAction)onSelectImage:(UIButton *)sender{
     
     if(IS_IPHONE_5){
-        //image = [PhotoController imageWithImage:image scaledToSize:CGSizeMake(IMAGE_WIDTH - 135, IMAGE_HEIGHT+50)];
-        image = [PhotoController imageWithImage:image scaledToSize:CGSizeMake(240, 340)];
+        image = [PhotoController imageWithImage:image scaledToSize:CGSizeMake(IMAGE_WIDTH - 135, IMAGE_HEIGHT+50)];
+        //image = [PhotoController imageWithImage:image scaledToSize:CGSizeMake(240, 340)];
     }else{
         image = [PhotoController imageWithImage:image scaledToSize:CGSizeMake(480, 480)];
     }

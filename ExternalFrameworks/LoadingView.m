@@ -78,7 +78,7 @@ CGPathRef NewPathWithRoundRect(CGRect rect, CGFloat cornerRadius)
 	CGRect labelFrame = CGRectMake(0, 0, DEFAULT_LABEL_WIDTH, DEFAULT_LABEL_HEIGHT);
 	UILabel *loadingLabel =[[[UILabel alloc]initWithFrame:labelFrame]autorelease];
 	
-	loadingLabel.text = NSLocalizedString(text, nil);
+	/*loadingLabel.text = NSLocalizedString(text, nil);
 	loadingLabel.textColor = [UIColor blackColor];
 	loadingLabel.backgroundColor = [UIColor lightGrayColor];
 	loadingLabel.textAlignment = UITextAlignmentCenter;
@@ -89,8 +89,8 @@ CGPathRef NewPathWithRoundRect(CGRect rect, CGFloat cornerRadius)
 		UIViewAutoresizingFlexibleTopMargin |
 		UIViewAutoresizingFlexibleBottomMargin;
 	
-	[loadingView addSubview:loadingLabel];
-    /*
+	[loadingView addSubview:loadingLabel];*/
+    
 	UIActivityIndicatorView *activityIndicatorView = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(5, 5, 30,30)];
 	[activityIndicatorView setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleGray];
 			//initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge]autorelease];
@@ -114,13 +114,15 @@ CGPathRef NewPathWithRoundRect(CGRect rect, CGFloat cornerRadius)
 	activityIndicatorRect.origin.y =
 		loadingLabel.frame.origin.y + loadingLabel.frame.size.height;
 	activityIndicatorView.frame = activityIndicatorRect;
-     */
+    
+    activityIndicatorView.frame = CGRectMake(60, 5, 30,30);
+
 
 	// Set up the fade-in animation
 	CATransition *animation = [CATransition animation];
 	[animation setType:kCATransitionFade];
 	[[aSuperview layer] addAnimation:animation forKey:@"layerAnimation"];
-	loadingView.alpha = 0.9f;
+	loadingView.alpha = 1.0;
 	return loadingView;
 }
 

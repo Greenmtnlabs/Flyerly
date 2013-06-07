@@ -240,6 +240,7 @@ return cell;\
 #define kStoredAuthTokenKeyName @"FlickrOAuthToken"
 #define kStoredAuthTokenSecretKeyName @"FlickrOAuthTokenSecret"
 #define kTryObtainAuthToken @"TryAuth"
+#define kFetchRequestTokenStep @"kFetchRequestTokenStep"
 #define kCallbackURLBaseString @"oatransdemo://www.google.com"
 #define kCallbackURLBaseStringPrefix @"oatransdemo"
 
