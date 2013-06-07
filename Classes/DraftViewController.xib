@@ -612,6 +612,14 @@
 					<int key="connectionID">50</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">delegate</string>
+						<reference key="source" ref="936694743"/>
+						<reference key="destination" ref="372490531"/>
+					</object>
+					<int key="connectionID">54</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">onClickFacebookButton</string>
 						<reference key="source" ref="148079549"/>
@@ -926,7 +934,7 @@
 				<reference key="dict.values" ref="317526666"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">53</int>
+			<int key="maxID">54</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1018,6 +1026,7 @@
 							<string>facebookButton</string>
 							<string>facebookPogressView</string>
 							<string>flickrButton</string>
+							<string>flickrPogressView</string>
 							<string>imgView</string>
 							<string>instagramButton</string>
 							<string>instagramPogressView</string>
@@ -1040,6 +1049,7 @@
 							<string>UIButton</string>
 							<string>ShareProgressView</string>
 							<string>UIButton</string>
+							<string>ShareProgressView</string>
 							<string>UIImageView</string>
 							<string>UIButton</string>
 							<string>ShareProgressView</string>
@@ -1065,6 +1075,7 @@
 							<string>facebookButton</string>
 							<string>facebookPogressView</string>
 							<string>flickrButton</string>
+							<string>flickrPogressView</string>
 							<string>imgView</string>
 							<string>instagramButton</string>
 							<string>instagramPogressView</string>
@@ -1104,6 +1115,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">flickrButton</string>
 								<string key="candidateClassName">UIButton</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">flickrPogressView</string>
+								<string key="candidateClassName">ShareProgressView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">imgView</string>

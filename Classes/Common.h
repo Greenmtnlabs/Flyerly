@@ -250,6 +250,7 @@ return cell;\
 #define TumblrSecretKey @"4uAmyM6YOL0UyGykUPaRpkCVVELLze9Nu1I2bNWXRWYOuDQA6u"
 
 #define AddCaptionText @"Add caption here"
+#define NameYourFlyerText @"Name your Flyer"
 #define FlyerDateFormat @"MM/dd/YYYY"
 
 #define BACKGROUND_PRODUCT_PREFIX @"com.flyerly.background"

@@ -19,7 +19,7 @@
 @class SaveFlyerController;
 @class LoadingView;
 
-@interface DraftViewController : UIViewController<FBRequestDelegate,UIWebViewDelegate,UIDocumentInteractionControllerDelegate,FBSessionDelegate,FBDialogDelegate,FBLoginDialogDelegate,TumblrUploadrDelegate,OFFlickrAPIRequestDelegate,MFMessageComposeViewControllerDelegate,MFMailComposeViewControllerDelegate,UITextViewDelegate> {
+@interface DraftViewController : UIViewController<FBRequestDelegate,UIWebViewDelegate,UIDocumentInteractionControllerDelegate,FBSessionDelegate,FBDialogDelegate,FBLoginDialogDelegate,TumblrUploadrDelegate,OFFlickrAPIRequestDelegate,MFMessageComposeViewControllerDelegate,MFMailComposeViewControllerDelegate,UITextViewDelegate,UITextFieldDelegate> {
 
 	IBOutlet UIScrollView *scrollView;
 	IBOutlet UIView *progressView;

@@ -16,7 +16,8 @@
 #import "PhotoController.h"
 
 @implementation AddFriendsController
-@synthesize uiTableView, contactsArray, deviceContactItems, contactsLabel, facebookLabel, twitterLabel, doneLabel, selectAllLabel, unSelectAllLabel, inviteLabel, contactsButton, facebookButton, twitterButton, loadingView, filteredArray, searchTextField, backupArray, facebookArray, twitterArray;
+@synthesize uiTableView, contactsArray, deviceContactItems, contactsLabel, facebookLabel, twitterLabel, doneLabel, selectAllLabel, unSelectAllLabel, inviteLabel, contactsButton, facebookButton, twitterButton, loadingView, searchTextField, facebookArray, twitterArray;
+@synthesize contactBackupArray, facebookBackupArray, twitterBackupArray;
 
 const int TWITTER_TAB = 2;
 const int FACEBOOK_TAB = 1;
@@ -109,11 +110,11 @@ BOOL firstTableLoad = YES;
     [self setUnselectTab:sender];
 
     // init contact array
-    if(contactsArray){
+    if(contactBackupArray){
         
         // Reload table data after all the contacts get loaded
-        backupArray = nil;
-        backupArray = contactsArray;
+        contactsArray = nil;
+        contactsArray = contactBackupArray;
         [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
         //[self.uiTableView reloadData];
 
@@ -233,8 +234,8 @@ BOOL firstTableLoad = YES;
     }
     
     // Reload table data after all the contacts get loaded
-    backupArray = nil;
-    backupArray = contactsArray;
+    contactBackupArray = nil;
+    contactBackupArray = contactsArray;
     [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
     //[self.uiTableView reloadData];
 }
@@ -254,11 +255,11 @@ BOOL firstTableLoad = YES;
         [self setUnselectTab:sender];
         
         // init facebook array
-        if(facebookArray){
+        if(facebookBackupArray){
             
             // Reload table data after all the contacts get loaded
-            backupArray = nil;
-            backupArray = facebookArray;
+            facebookArray = nil;
+            facebookArray = facebookBackupArray;
             [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
             //[self.uiTableView reloadData];
             
@@ -368,8 +369,8 @@ int totalCount = 0;
         totalCount++;
     }
     
-    backupArray = nil;
-    backupArray = facebookArray;
+    facebookBackupArray = nil;
+    facebookBackupArray = facebookArray;
     [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
     //[self.uiTableView reloadData];
     
@@ -406,11 +407,11 @@ int totalCount = 0;
         [self setUnselectTab:sender];
         
         // init twitter array
-        if(twitterArray){
+        if(twitterBackupArray){
             
             // Reload table data after all the contacts get loaded
-            backupArray = nil;
-            backupArray = twitterArray;
+            twitterArray = nil;
+            twitterArray = twitterBackupArray;
             [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
             //[self.uiTableView reloadData];
             
@@ -520,8 +521,8 @@ int totalCount = 0;
             nextCursor = [followers objectForKey:@"next_cursor"];
         }
 
-        backupArray = nil;
-        backupArray = twitterArray;
+        twitterBackupArray = nil;
+        twitterBackupArray = twitterArray;
         if([nextCursor compare:[NSDecimalNumber zero]] == NSOrderedSame){
             
             //[[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
@@ -574,8 +575,8 @@ int totalCount = 0;
                 [postRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {                    
                     NSLog(@"Twitter response, HTTP response: %i", [urlResponse statusCode]);
                     
-                    backupArray = nil;
-                    backupArray = twitterArray;
+                    twitterBackupArray = nil;
+                    twitterBackupArray = twitterArray;
                     [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
                     //[self.uiTableView reloadData];
                 }];
@@ -615,13 +616,13 @@ int totalCount = 0;
                 [self sendTwitterMessage:@"I'm using the flyerly app to create and share flyers on the go! flyer.ly" screenName:follower];
             }
             
-            [self showAlert:@"Invited !" message:@"You have successfully invited your friends to join flyerly."];
+            [self showAlert:@"Invitation Sent!" message:@"You have successfully invited your friends to join flyerly."];
 
         }else if(selectedTab == 1){
             
             [self tagFacebookUsersWithFeed:identifiers];
 
-            [self showAlert:@"Invited !" message:@"You have successfully invited your friends to join flyerly."];
+            [self showAlert:@"Invitation Sent!" message:@"You have successfully invited your friends to join flyerly."];
 }
         
     } else {
@@ -642,7 +643,7 @@ int totalCount = 0;
             NSLog(@"Failed");
             break;
         case MessageComposeResultSent:
-            [self showAlert:@"Invited !" message:@"You have successfully invited your friends to join flyerly."];
+            [self showAlert:@"Invitation Sent!" message:@"You have successfully invited your friends to join flyerly."];
             break;
         default:
             break;
@@ -757,6 +758,15 @@ int totalCount = 0;
         return facebookArray;
     else if(selectedTab == TWITTER_TAB)
         return twitterArray;
+}
+
+-(NSArray *) getBackupArrayOfSelectedTab{
+    if(selectedTab == CONTACTS_TAB)
+        return contactBackupArray;
+    else if(selectedTab == FACEBOOK_TAB)
+        return facebookBackupArray;
+    else if(selectedTab == TWITTER_TAB)
+        return twitterBackupArray;
 }
 
 // Customize the number of rows in the table view.
@@ -978,6 +988,7 @@ int totalCount = 0;
 
 - (IBAction)onSearchClick:(UIButton *)sender{
     [searchTextField resignFirstResponder];
+    [self textField:searchTextField shouldChangeCharactersInRange:NSMakeRange(0, 0) replacementString:@""];
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
@@ -992,23 +1003,22 @@ int totalCount = 0;
     if([newString isEqualToString:@""]){
         
         if(selectedTab == CONTACTS_TAB)
-            contactsArray = backupArray;
+            contactsArray = contactBackupArray;
         else if (selectedTab == FACEBOOK_TAB)
-            facebookArray = backupArray;
+            facebookArray = facebookBackupArray;
         else if(selectedTab == TWITTER_TAB)
-            twitterArray = backupArray;
+            twitterArray = twitterBackupArray;
         
         [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
         //[self.uiTableView reloadData];
         return YES;
     }
     
-    filteredArray = nil;
-    filteredArray = [[NSMutableArray alloc] init];
+    NSMutableArray *filteredArray = [[NSMutableArray alloc] init];
     
-    for(int contactIndex=0; contactIndex<[backupArray count]; contactIndex++){
+    for(int contactIndex=0; contactIndex<[[self getBackupArrayOfSelectedTab] count]; contactIndex++){
         // Get left contact data
-        NSMutableDictionary *dict1 = [self.backupArray objectAtIndex:contactIndex];
+        NSMutableDictionary *dict1 = [[self getBackupArrayOfSelectedTab] objectAtIndex:contactIndex];
         NSString *name1 = [dict1 objectForKey:@"name"];
         
         if([[name1 lowercaseString] rangeOfString:[newString lowercaseString]].location == NSNotFound){
@@ -1092,7 +1102,9 @@ int totalCount = 0;
     twitterArray = nil;
     deviceContactItems = nil;
     
-    [backupArray release];
+    [contactBackupArray release];
+    [facebookBackupArray release];
+    [twitterBackupArray release];
     
     [super dealloc];
 }

@@ -148,7 +148,13 @@
     [titleView setReturnKeyType:UIReturnKeyDone];
     [titleView addTarget:self action:@selector(textFieldFinished:) forControlEvents: UIControlEventEditingDidEndOnExit];
     [titleView setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
-	[titleView setText:selectedFlyerTitle];
+    if([selectedFlyerTitle isEqualToString:@""]){
+        [titleView setText:NameYourFlyerText];
+        UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(textFieldTapped:)];
+        [titleView addGestureRecognizer:gestureRecognizer];
+    }else{
+        [titleView setText:selectedFlyerTitle];
+    }
     
     [descriptionView setFont:[UIFont fontWithName:@"Signika-Regular" size:10]];
     [descriptionView setTextColor:[UIColor grayColor]];
@@ -228,6 +234,19 @@
 
 - (void)textFieldFinished:(id)sender {
     // [sender resignFirstResponder];
+}
+
+- (void)textFieldTapped:(id)sender {
+    if([titleView.text isEqualToString:NameYourFlyerText]){
+        [titleView setText:@""];
+        [titleView becomeFirstResponder];
+    }
+}
+
+-(void)textFieldDidEndEditing:(UITextField *)textField{
+    if([titleView.text isEqualToString:@""]){
+        [titleView setText:NameYourFlyerText];
+    }
 }
 
 #pragma on click buttons
@@ -598,7 +617,13 @@
     // Add file with same name
     [[NSFileManager defaultManager] removeItemAtPath:detailFileName error:nil];
 	NSMutableArray *array = [[[NSMutableArray alloc] init] autorelease];
-    [array addObject:titleView.text];
+
+    if([titleView.text isEqualToString:NameYourFlyerText]){
+        [array addObject:@""];
+    }else{
+        [array addObject:titleView.text];
+    }
+
     if([descriptionView.text isEqualToString:AddCaptionText]){
         [array addObject:@""];
     }else{
@@ -659,14 +684,14 @@
         // Fill out the email body text
         NSData *imageData = UIImagePNGRepresentation(selectedFlyerImage);
         NSString *base64String = [imageData base64EncodedString];        
-        //[emailBody appendString:[NSString stringWithFormat:@"<p><b><img src='data:image/png;base64,%@'></b></p>",base64String]];
+        [emailBody appendString:[NSString stringWithFormat:@"<p><b><img src='data:image/png;base64,%@'></b></p>",base64String]];
         [emailBody appendString:@"<p><font size='4'><a href = 'http://www.flyer.ly'>Download flyerly & share a flyer</a></font></p>"];
         [emailBody appendString:@"</body></html>"];
         //NSLog(@"%@",emailBody);
         
         //mail composer window
         [picker setMessageBody:emailBody isHTML:YES];
-        [picker addAttachmentData:imageData mimeType:@"image/png" fileName:@"flyr.png"];
+        //[picker addAttachmentData:imageData mimeType:@"image/png" fileName:@"flyr.png"];
 
         /*
         // Set up recipients

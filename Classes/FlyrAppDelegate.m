@@ -236,7 +236,8 @@ NSString *FlickrSharingFailureNotification = @"FlickrSharingFailureNotification"
     
     // Crittercism for crash reports.
     [Crittercism initWithAppID: @"519a14f897c8f27969000019"];
-    [Flurry startSession:@"68999MTHD7NDPTBZYKYG"];
+    [Flurry startSession:@"ZWXZFGSQZ4GMYZBVZYN3"];
+    //[Flurry startSession:@"68999MTHD7NDPTBZYKYG"];
 
     [self clearCache];
 	changesFlag = NO;

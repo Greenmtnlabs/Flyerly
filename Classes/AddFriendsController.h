@@ -42,8 +42,10 @@
 	NSMutableArray *contactsArray;
 	NSMutableArray *facebookArray;
 	NSMutableArray *twitterArray;
-    NSMutableArray *filteredArray;
-    NSMutableArray *backupArray;
+
+    NSMutableArray *contactBackupArray;
+    NSMutableArray *facebookBackupArray;
+    NSMutableArray *twitterBackupArray;
     
     NSMutableArray *deviceContactItems;
     int selectedTab;
@@ -68,8 +70,11 @@
 @property(nonatomic,retain) NSMutableArray *contactsArray;
 @property(nonatomic,retain) NSMutableArray *facebookArray;
 @property(nonatomic,retain) NSMutableArray *twitterArray;
-@property(nonatomic,retain) NSMutableArray *filteredArray;
-@property(nonatomic,retain) NSMutableArray *backupArray;
+
+@property(nonatomic,retain) NSMutableArray *contactBackupArray;
+@property(nonatomic,retain) NSMutableArray *facebookBackupArray;
+@property(nonatomic,retain) NSMutableArray *twitterBackupArray;
+
 @property(nonatomic,retain) NSMutableArray *deviceContactItems;
 
 - (IBAction)selectAllCheckBoxes:(UIButton *)sender;

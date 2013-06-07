@@ -438,33 +438,37 @@ int counter = 0;
         for(int i=(rowNumber * 4); i<(rowNumber * 4) + 4; i++){
 
             // Chooses the photo at the last index
-            [group enumerateAssetsAtIndexes:[NSIndexSet indexSetWithIndex:i] options:0 usingBlock:^(ALAsset *alAsset, NSUInteger index, BOOL *innerStop) {
-                
-                // The end of the enumeration is signaled by asset == nil.
-                if (alAsset) {
+            NSLog(@"group.numberOfAssets: %d", group.numberOfAssets);
+            
+            if(group.numberOfAssets != 0){
+                [group enumerateAssetsAtIndexes:[NSIndexSet indexSetWithIndex:((group.numberOfAssets - 1) - i)] options:0 usingBlock:^(ALAsset *alAsset, NSUInteger index, BOOL *innerStop) {
                     
-                    ALAssetRepresentation *representation = [alAsset defaultRepresentation];
-                    
-                    if(imageCounter == 0){
-                        [cell.image1 setImage:[UIImage imageWithCGImage:[alAsset aspectRatioThumbnail]]];
-                        cell.imageName1 = [representation url];
-                        //[cell.image1 setImage:[self thumbnailForAsset:alAsset maxPixelSize:90]];
-                    } else if(imageCounter == 1){
-                        [cell.image2 setImage:[UIImage imageWithCGImage:[alAsset aspectRatioThumbnail]]];
-                        cell.imageName2 = [representation url];
-                    } else if(imageCounter == 2){
-                        [cell.image3 setImage:[UIImage imageWithCGImage:[alAsset aspectRatioThumbnail]]];
-                        cell.imageName3 = [representation url];
-                    } else if(imageCounter == 3){
-                        [cell.image4 setImage:[UIImage imageWithCGImage:[alAsset aspectRatioThumbnail]]];
-                        cell.imageName4 = [representation url];
+                    // The end of the enumeration is signaled by asset == nil.
+                    if (alAsset) {
+                        
+                        ALAssetRepresentation *representation = [alAsset defaultRepresentation];
+                        
+                        if(imageCounter == 0){
+                            [cell.image1 setImage:[UIImage imageWithCGImage:[alAsset aspectRatioThumbnail]]];
+                            cell.imageName1 = [representation url];
+                            //[cell.image1 setImage:[self thumbnailForAsset:alAsset maxPixelSize:90]];
+                        } else if(imageCounter == 1){
+                            [cell.image2 setImage:[UIImage imageWithCGImage:[alAsset aspectRatioThumbnail]]];
+                            cell.imageName2 = [representation url];
+                        } else if(imageCounter == 2){
+                            [cell.image3 setImage:[UIImage imageWithCGImage:[alAsset aspectRatioThumbnail]]];
+                            cell.imageName3 = [representation url];
+                        } else if(imageCounter == 3){
+                            [cell.image4 setImage:[UIImage imageWithCGImage:[alAsset aspectRatioThumbnail]]];
+                            cell.imageName4 = [representation url];
+                        }
+                        
+                        imageCounter++;
                     }
-                    
-                    imageCounter++;
-                }
-            }];
-
+                }];
+            }
         }
+
     } failureBlock: ^(NSError *error) {
         // Typically you should handle an error more gracefully than this.
         NSLog(@"No groups");

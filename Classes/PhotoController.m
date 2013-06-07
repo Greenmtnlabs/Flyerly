@@ -2011,6 +2011,9 @@ int arrangeLayerIndex;
     [self hideAddMoreTab];
 
     UITextView *lastTextView = msgTextView;
+	lastTextView.font = [UIFont fontWithName:@"Arial" size:16];
+	lastTextView.textColor = [UIColor blackColor];
+
     CustomLabel *lastLabelView = [[self textLabelLayersArray]lastObject];
 
 	lastTextView.backgroundColor = [ UIColor colorWithWhite:1 alpha:0.3f];
@@ -2468,7 +2471,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     DraftViewController *draftViewController = [[DraftViewController alloc] initWithNibName:@"DraftViewController" bundle:nil];
     draftViewController.fromPhotoController = YES;
     draftViewController.selectedFlyerImage = [UIImage imageWithData:data];
-    draftViewController.selectedFlyerTitle = @"Title";
+    draftViewController.selectedFlyerTitle = @"";
     
     if([[self textLabelLayersArray] count] > 0){
         draftViewController.selectedFlyerDescription = ((CustomLabel*)[[self textLabelLayersArray] objectAtIndex:0]).text;
@@ -2669,6 +2672,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	UIButton *selectedButton = (UIButton*)sender;
 	if(selectedButton == addMoreFontTabButton)
 	{
+        self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Add layers"];
         selectedAddMoreLayerTab = ADD_MORE_TEXT_TAB;
 
         symbolTouchFlag= NO;
@@ -2690,6 +2694,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	}
 	else if(selectedButton == addMorePhotoTabButton)
 	{
+        self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Add layers"];
         selectedAddMoreLayerTab = ADD_MORE_PHOTO_TAB;
 
         symbolTouchFlag= NO;
@@ -2723,6 +2728,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	}
 	else if(selectedButton == addMoreSymbolTabButton)
 	{
+        self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Add layers"];
         selectedAddMoreLayerTab = ADD_MORE_SYMBOL_TAB;
 
         symbolTouchFlag= YES;
@@ -2754,6 +2760,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	}
 	else if(selectedButton == addMoreIconTabButton)
 	{
+        self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Add layers"];
         selectedAddMoreLayerTab = ADD_MORE_ICON_TAB;
 
         lableTouchFlag = NO;
@@ -2784,13 +2791,15 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	}
 	else if(selectedButton == arrangeLayerTabButton)
 	{
+
+        self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Arrange layers"];
         selectedAddMoreLayerTab = ARRANGE_LAYER_TAB;
         [self removeBordersFromAllLayers];
 
         lableTouchFlag = NO;
         symbolTouchFlag= NO;
         iconTouchFlag = NO;
-        photoTouchFlag = YES;
+        photoTouchFlag = NO;
         layerScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(-320, 385,320,44)];
 
         NSInteger layerScrollWidth = 60;
@@ -3276,7 +3285,11 @@ UIScrollView *layerScrollView = nil;
 			}
 		}
 		//else if (CGRectContainsPoint([photoImgView frame], [touch locationInView:self.imgView]) && photoTouchFlag)
-		else if (loc.y <= (imgView.frame.size.height-(photoImgView.frame.size.height/2)) && photoTouchFlag)
+		else if (
+                 loc.y <= (imgView.frame.size.height-(((UIImageView *)[[self photoLayersArray] lastObject]).frame.size.height/2))
+                 && photoTouchFlag
+                 && loc.x <= (imgView.frame.size.width-(((UIImageView *)[[self photoLayersArray] lastObject]).frame.size.width/2))
+                 && loc.x >= ((((UIImageView *)[[self photoLayersArray] lastObject]).frame.size.width/2)))
 		{
             if(selectedAddMoreLayerTab == ARRANGE_LAYER_TAB){
                 [self.imgView bringSubviewToFront:[[self photoLayersArray] objectAtIndex:arrangeLayerIndex]];
@@ -3344,7 +3357,7 @@ UIScrollView *layerScrollView = nil;
 {  
 	UITouch *touch = [touches anyObject];
     CGPoint loc = [touch locationInView:self.imgView];
-		
+
 	//if (CGRectContainsPoint([msgLabel frame], [touch locationInView:self.view]) && lableTouchFlag)
     //if (CGRectContainsPoint([self.imgView frame], [touch locationInView:self.imgView]) && lableTouchFlag)
     if (loc.y <= imgView.frame.size.height && lableTouchFlag)
@@ -3364,7 +3377,10 @@ UIScrollView *layerScrollView = nil;
 	}
 	//else if (CGRectContainsPoint([photoImgView frame], [touch locationInView:self.view]) && photoTouchFlag)
 	//else if (CGRectContainsPoint([photoImgView frame], [touch locationInView:self.imgView]) && photoTouchFlag)
-	else if (loc.y <= (imgView.frame.size.height-(photoImgView.frame.size.height/2)) && photoTouchFlag)
+	else if (loc.y <= (imgView.frame.size.height-(((UIImageView *)[[self photoLayersArray] lastObject]).frame.size.height/2))
+             && photoTouchFlag
+             && loc.x <= (imgView.frame.size.width-(((UIImageView *)[[self photoLayersArray] lastObject]).frame.size.width/2))
+             && loc.x >= ((((UIImageView *)[[self photoLayersArray] lastObject]).frame.size.width/2)))
 	{
 		for (UITouch *touch in touches){
             
@@ -3492,7 +3508,7 @@ UIScrollView *layerScrollView = nil;
 	}
     
 	NSMutableArray *array = [[[NSMutableArray alloc] init] autorelease];
-    [array addObject:@"Title"];
+    [array addObject:@""];
     if([[self textLabelLayersArray] count] > 0){
         NSLog(@"%@", ((CustomLabel*)[[self textLabelLayersArray] objectAtIndex:0]).text);
         [array addObject:((CustomLabel*)[[self textLabelLayersArray] objectAtIndex:0]).text];
