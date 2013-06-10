@@ -15,13 +15,14 @@
 
 @implementation Facebook(ForceDialog)
 
-/*- (void)authorize:(NSArray *)permissions {
+- (void)authorize:(NSArray *)permissions {
     // Hack to force Facebook SDK to always use in-app dialog for auth
-    [permissions release];
-    permissions = [permissions retain];
+    //[permissions release];
+    //permissions = [permissions retain];
         
-    objc_msgSend(self, @selector(authorizeWithFBAppAuth:safariAuth:), NO, NO);    
-}*/
+    //objc_msgSend(self, @selector(authorizeWithFBAppAuth:safariAuth:), NO, NO);
+    [self authorize:permissions];
+}
 
 @end
 

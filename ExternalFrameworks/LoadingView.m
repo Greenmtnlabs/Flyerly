@@ -62,7 +62,8 @@ CGPathRef NewPathWithRoundRect(CGRect rect, CGFloat cornerRadius)
 + (id)loadingViewInView:(UIView *)aSuperview text:(NSString *)text
 {
 	LoadingView *loadingView =
-		[[[LoadingView alloc] initWithFrame:CGRectMake(85, 250, 200,120 )] autorelease];
+		[[[LoadingView alloc] initWithFrame:CGRectMake(0, 0, 320,480)] autorelease];
+        //[[[LoadingView alloc] initWithFrame:CGRectMake(85, 250, 200,120 )] autorelease];
 	if (!loadingView)
 	{
 		return nil;
@@ -91,7 +92,7 @@ CGPathRef NewPathWithRoundRect(CGRect rect, CGFloat cornerRadius)
 	
 	[loadingView addSubview:loadingLabel];*/
     
-	UIActivityIndicatorView *activityIndicatorView = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(5, 5, 30,30)];
+	UIActivityIndicatorView *activityIndicatorView = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(85, 250, 30,30)];
 	[activityIndicatorView setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleGray];
 			//initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge]autorelease];
 	[loadingView addSubview:activityIndicatorView];
@@ -115,7 +116,7 @@ CGPathRef NewPathWithRoundRect(CGRect rect, CGFloat cornerRadius)
 		loadingLabel.frame.origin.y + loadingLabel.frame.size.height;
 	activityIndicatorView.frame = activityIndicatorRect;
     
-    activityIndicatorView.frame = CGRectMake(60, 5, 30,30);
+    activityIndicatorView.frame = CGRectMake(145, 250, 30,30);
 
 
 	// Set up the fade-in animation

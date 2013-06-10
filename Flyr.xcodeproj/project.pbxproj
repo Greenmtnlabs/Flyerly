@@ -72,6 +72,7 @@
 		0F734B541742737D0084A2F4 /* top_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F734B521742737D0084A2F4 /* top_bg.png */; };
 		0F734B551742737D0084A2F4 /* top_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F734B531742737D0084A2F4 /* top_bg@2x.png */; };
 		0F734B5617427B790084A2F4 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65B303FA171ED8C8006632E3 /* Accounts.framework */; };
+		0F7F02BC1765F7D300FC750F /* AlertViewBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F7F02BB1765F7D300FC750F /* AlertViewBackground.png */; };
 		0F7FC386175CE26B009DEB08 /* AsyncImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F7FC385175CE26B009DEB08 /* AsyncImageView.m */; };
 		0F80073E1753415D000FF7FA /* arrangeicon_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F8007321753415D000FF7FA /* arrangeicon_button.png */; };
 		0F80073F1753415D000FF7FA /* arrangeicon_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F8007331753415D000FF7FA /* arrangeicon_button@2x.png */; };
@@ -221,7 +222,6 @@
 		0FDB5625175E3E410078EBEC /* facebook_unlike@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FDB5621175E3E410078EBEC /* facebook_unlike@2x.png */; };
 		0FDB5626175E3E410078EBEC /* twitter_following.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FDB5622175E3E410078EBEC /* twitter_following.png */; };
 		0FDB5627175E3E410078EBEC /* twitter_following@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FDB5623175E3E410078EBEC /* twitter_following@2x.png */; };
-		0FDB562F175E45730078EBEC /* Facebook+ForceDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDB5629175E45730078EBEC /* Facebook+ForceDialog.m */; };
 		0FDB5630175E45730078EBEC /* FacebookLikeView.html in Resources */ = {isa = PBXBuildFile; fileRef = 0FDB562B175E45730078EBEC /* FacebookLikeView.html */; };
 		0FDB5631175E45730078EBEC /* FacebookLikeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDB562C175E45730078EBEC /* FacebookLikeView.m */; };
 		0FDB5632175E45730078EBEC /* NSData+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDB562E175E45730078EBEC /* NSData+Extras.m */; };
@@ -965,6 +965,7 @@
 		0DFC532B1095781500B18478 /* backgrnd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backgrnd.png; sourceTree = "<group>"; };
 		0F734B521742737D0084A2F4 /* top_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = top_bg.png; sourceTree = "<group>"; };
 		0F734B531742737D0084A2F4 /* top_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "top_bg@2x.png"; sourceTree = "<group>"; };
+		0F7F02BB1765F7D300FC750F /* AlertViewBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AlertViewBackground.png; sourceTree = "<group>"; };
 		0F7FC384175CE26B009DEB08 /* AsyncImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AsyncImageView.h; path = AsyncImageView/AsyncImageView.h; sourceTree = "<group>"; };
 		0F7FC385175CE26B009DEB08 /* AsyncImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AsyncImageView.m; path = AsyncImageView/AsyncImageView.m; sourceTree = "<group>"; };
 		0F8007321753415D000FF7FA /* arrangeicon_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrangeicon_button.png; sourceTree = "<group>"; };
@@ -1115,7 +1116,6 @@
 		0FDB5621175E3E410078EBEC /* facebook_unlike@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook_unlike@2x.png"; sourceTree = "<group>"; };
 		0FDB5622175E3E410078EBEC /* twitter_following.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twitter_following.png; sourceTree = "<group>"; };
 		0FDB5623175E3E410078EBEC /* twitter_following@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter_following@2x.png"; sourceTree = "<group>"; };
-		0FDB5629175E45730078EBEC /* Facebook+ForceDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Facebook+ForceDialog.m"; path = "FaceboolLikeView/Facebook+ForceDialog.m"; sourceTree = "<group>"; };
 		0FDB562A175E45730078EBEC /* FacebookLikeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FacebookLikeView.h; path = FaceboolLikeView/FacebookLikeView.h; sourceTree = "<group>"; };
 		0FDB562B175E45730078EBEC /* FacebookLikeView.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = FacebookLikeView.html; path = FaceboolLikeView/FacebookLikeView.html; sourceTree = "<group>"; };
 		0FDB562C175E45730078EBEC /* FacebookLikeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FacebookLikeView.m; path = FaceboolLikeView/FacebookLikeView.m; sourceTree = "<group>"; };
@@ -2241,6 +2241,7 @@
 		0DF3A361108DF47400D6C887 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				0F7F02BB1765F7D300FC750F /* AlertViewBackground.png */,
 				0FDB5620175E3E410078EBEC /* facebook_unlike.png */,
 				0FDB5621175E3E410078EBEC /* facebook_unlike@2x.png */,
 				0FDB5622175E3E410078EBEC /* twitter_following.png */,
@@ -2739,7 +2740,6 @@
 		0FDB5628175E45640078EBEC /* FacebookLikeView */ = {
 			isa = PBXGroup;
 			children = (
-				0FDB5629175E45730078EBEC /* Facebook+ForceDialog.m */,
 				0FDB562A175E45730078EBEC /* FacebookLikeView.h */,
 				0FDB562B175E45730078EBEC /* FacebookLikeView.html */,
 				0FDB562C175E45730078EBEC /* FacebookLikeView.m */,
@@ -4100,6 +4100,7 @@
 				0FDB5626175E3E410078EBEC /* twitter_following.png in Resources */,
 				0FDB5627175E3E410078EBEC /* twitter_following@2x.png in Resources */,
 				0FDB5630175E45730078EBEC /* FacebookLikeView.html in Resources */,
+				0F7F02BC1765F7D300FC750F /* AlertViewBackground.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4239,7 +4240,6 @@
 				0FE0BDAA1758808D00C4D78D /* Reachability.m in Sources */,
 				0FE0BDD41758BBCD00C4D78D /* EBPurchase.m in Sources */,
 				0F7FC386175CE26B009DEB08 /* AsyncImageView.m in Sources */,
-				0FDB562F175E45730078EBEC /* Facebook+ForceDialog.m in Sources */,
 				0FDB5631175E45730078EBEC /* FacebookLikeView.m in Sources */,
 				0FDB5632175E45730078EBEC /* NSData+Extras.m in Sources */,
 			);

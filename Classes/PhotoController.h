@@ -33,6 +33,7 @@
 	UILabel *cameraRollLabel;
     UIButton *moreLayersButton;
     UILabel *moreLayersLabel;
+    UILabel *addMoreLayerOrSaveFlyerLabel;
 
 	UIScrollView *fontScrollView;
 	UIScrollView *colorScrollView;
@@ -137,6 +138,7 @@
 @property (nonatomic,retain)  UILabel *cameraRollLabel;
 @property (nonatomic,retain)  UIButton *moreLayersButton;
 @property (nonatomic,retain)  UILabel *moreLayersLabel;
+@property (nonatomic,retain)  UILabel *addMoreLayerOrSaveFlyerLabel;
 
 @property (nonatomic, retain) UIScrollView *templateScrollView;
 @property (nonatomic, retain) UIScrollView *fontScrollView;

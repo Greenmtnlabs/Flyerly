@@ -18,7 +18,7 @@
 #import "ShareProgressView.h"
 #import "AddFriendsController.h"
 
-//static ShareProgressView *flickrPogressView;
+static ShareProgressView *flickrPogressView;
 //static ShareProgressView *facebookPogressView;
 //static ShareProgressView *twitterPogressView;
 //static ShareProgressView *tumblrPogressView;
@@ -26,7 +26,7 @@
 @implementation DraftViewController
 
 @synthesize selectedFlyerImage,imgView,navBar,fvController,svController,titleView,descriptionView,selectedFlyerDescription,selectedFlyerTitle, detailFileName, imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,loadingView,dic,fromPhotoController,progressView,scrollView,instagramPogressView, saveToCameraRollLabel, saveToRollSwitch;
-@synthesize twitterPogressView,facebookPogressView,flickrPogressView,tumblrPogressView;
+@synthesize twitterPogressView,facebookPogressView,tumblrPogressView;
 
 -(void)callFlyrView{
 	[self.navigationController popToViewController:fvController animated:YES];

@@ -162,17 +162,21 @@
 
 - (IBAction)onSelectImage:(UIButton *)sender{
     
-    if(IS_IPHONE_5){
-        image = [PhotoController imageWithImage:image scaledToSize:CGSizeMake(IMAGE_WIDTH - 135, IMAGE_HEIGHT+50)];
+    //NSLog(@"Width: %f",image.size.width);
+    //NSLog(@"Height: %f",image.size.height);
+    //NSLog(@"Scroll Height: %f",scrollView.frame.size.height);
+
+    /*if(IS_IPHONE_5){
+        //image = [PhotoController imageWithImage:image scaledToSize:CGSizeMake(IMAGE_WIDTH - 135, IMAGE_HEIGHT+50)];
         //image = [PhotoController imageWithImage:image scaledToSize:CGSizeMake(240, 340)];
     }else{
-        image = [PhotoController imageWithImage:image scaledToSize:CGSizeMake(480, 480)];
-    }
+        //image = [PhotoController imageWithImage:image scaledToSize:CGSizeMake(480, 480)];
+    }*/
     
     // Get the content offset in scroll view.
     CGPoint scrollOffset = CGPointMake(
-                                       scrollView.contentOffset.x,
-                                       scrollView.contentOffset.y);
+                                       scrollView.contentOffset.x + ((320 - IMAGE_WIDTH) / 2),
+                                       scrollView.contentOffset.y + ((scrollView.frame.size.height - IMAGE_HEIGHT) /2));
     
     // Get the offset of the image.
     CGPoint imageOffset = CGPointMake( imageView.frame.origin.x,
@@ -190,11 +194,11 @@
     deltaX = (deltaX < 0) ? 0 : deltaX;
     deltaY = (deltaY < 0) ? 0 : deltaY;
     
-    NSLog(@"%f",deltaX);
-    NSLog(@"%f",deltaY);
-    NSLog(@"%f",imageWidth);
-    NSLog(@"%f",imageHeight);
-    NSLog(@"%f",scrollView.zoomScale);
+    //NSLog(@"Delta X: %f",deltaX);
+    //NSLog(@"Delta Y: %f",deltaY);
+    //NSLog(@"Image Width 2: %f",imageWidth);
+    //NSLog(@"Image Height 2: %f",imageHeight);
+    //NSLog(@"Scroll Zoom: %f",scrollView.zoomScale);
 
     CGRect rect = CGRectMake(deltaX,
                              deltaY,
@@ -248,7 +252,7 @@
     [imageView setImage:self.image];
     [imageView setFrame:CGRectMake((contentSize.width - imageSize.width)/2,
                                    (contentSize.height - imageSize.height)/2,
-                                   imageSize.width, imageSize.height)];   
+                                   imageSize.width, imageSize.height)];
     
     //[self loadAllGalleryPhotos];
     [self imageCount];
@@ -438,7 +442,7 @@ int counter = 0;
         for(int i=(rowNumber * 4); i<(rowNumber * 4) + 4; i++){
 
             // Chooses the photo at the last index
-            NSLog(@"group.numberOfAssets: %d", group.numberOfAssets);
+            //NSLog(@"group.numberOfAssets: %d", group.numberOfAssets);
             
             if(group.numberOfAssets != 0){
                 [group enumerateAssetsAtIndexes:[NSIndexSet indexSetWithIndex:((group.numberOfAssets - 1) - i)] options:0 usingBlock:^(ALAsset *alAsset, NSUInteger index, BOOL *innerStop) {

@@ -198,7 +198,7 @@ NSString *FlickrSharingFailureNotification = @"FlickrSharingFailureNotification"
                 return NO;
             }
             
-            [self flickrRequest].sessionInfo = kTryObtainAuthToken;
+            [self flickrRequest].sessionInfo = kGetAccessTokenStep;
             [flickrRequest fetchOAuthAccessTokenWithRequestToken:token verifier:verifier];
         }
         
