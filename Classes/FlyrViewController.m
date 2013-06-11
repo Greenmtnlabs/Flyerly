@@ -13,6 +13,7 @@
 #import "Common.h"
 #import "LauchViewController.h"
 #import "HelpController.h"
+#import "FlyerOverlayController.h"
 
 @implementation FlyrViewController
 @synthesize photoArray,navBar,tView,iconArray,photoDetailArray,ptController;
@@ -90,7 +91,7 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
 	for(int i =0;i< [sortedFiles count];i++)
 	{
 			finalImagePath = [sortedFiles objectAtIndex:i];
-			UIImage *temp = [self scale:finalImagePath toSize:CGSizeMake(100,100)];
+			UIImage *temp = [self scale:finalImagePath toSize:CGSizeMake(640,640)];
 			[photoArray addObject:finalImagePath];
 			[iconArray addObject:temp];
 		//NSLog(@"photoArray:%@",[photoArray objectAtIndex:i]);
@@ -207,20 +208,63 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
     return 1;
 }
 
-
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return  [photoArray count];
 }
 
+-(void)showFlyerOverlay:(id)sender{
+    
+    // cadt to button
+    UIButton *cellImageButton = (UIButton *) sender;
+    // Get image on button
+    UIImage *flyerImage = [cellImageButton imageForState:UIControlStateNormal];
+    // Create Modal trnasparent view
+    UIView *modalView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    [modalView setBackgroundColor:[MyCustomCell colorWithHexString:@"161616"]];
+    modalView.alpha = 0.75;
+    self.navigationController.navigationBar.alpha = 0.35;
+
+    // Create overlay controller
+    FlyerOverlayController *overlayController = [[FlyerOverlayController alloc]initWithNibName:@"FlyerOverlayController" bundle:nil image:flyerImage modalView:modalView];
+    // set its parent
+    [overlayController setViews:self];
+    
+    // Add modal view and overlay view
+    [self.view addSubview:modalView];
+    [self.view addSubview:overlayController.view];
+}
+
+-(UITableViewCell *)setGlobalCustomCellProperties:(NSString *)title description:(NSString *)description created:(NSString *)created img:(UIImage *)img imagePath:(NSString *)imagePath indexPath:(NSIndexPath *)indexPath{
+
+    static NSString *cellId = @"Cell";
+    MyCustomCell *cell = (MyCustomCell *)[tView dequeueReusableCellWithIdentifier:cellId];
+    
+    if (cell == nil) {
+        cell = [[[MyCustomCell alloc] initWithFrame:CGRectZero reuseIdentifier:cellId] autorelease];
+        
+        [cell.cellImage addTarget:self action:@selector(showFlyerOverlay:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
+    [cell setAccessoryType:UITableViewCellAccessoryNone];
+    [cell addToCell: title :description :created :img :imagePath];
+    
+    return cell;
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
+    // Get image from array
 	UIImage *image = [iconArray objectAtIndex:indexPath.row];
+    // Get image name from array
 	NSString *imageName = [photoArray objectAtIndex:indexPath.row];
+    // get flyer detail from array
     NSArray *detailArray = [photoDetailArray objectAtIndex:indexPath.row];
 
-	SET_GLOBAL_CUSTOM_CELL_PROPERTIES([detailArray objectAtIndex:0], [detailArray objectAtIndex:1], [detailArray objectAtIndex:2],image, imageName)
+    // return cell
+    return [self setGlobalCustomCellProperties:[detailArray objectAtIndex:0] description:[detailArray objectAtIndex:1] created:[detailArray objectAtIndex:2] img:image imagePath:imageName indexPath:indexPath];
+    
+	//SET_GLOBAL_CUSTOM_CELL_PROPERTIES([detailArray objectAtIndex:0], [detailArray objectAtIndex:1], [detailArray objectAtIndex:2],image, imageName)
 	
 }
 

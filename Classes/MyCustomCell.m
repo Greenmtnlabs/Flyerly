@@ -31,9 +31,9 @@
     [self setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cell_bg_first"]]];
     
 	CGRect tRect0 = CGRectMake(13, 13, 72, 77);
-	cellImage = [[UIImageView alloc] initWithFrame:tRect0];	
-	cellImage.backgroundColor = [UIColor clearColor];
-	cellImage.opaque = NO;
+	cellImage = [[UIButton alloc] initWithFrame:tRect0];
+	//cellImage.backgroundColor = [UIColor clearColor];
+	//cellImage.opaque = NO;
 	[self.contentView addSubview:cellImage];
 	
 	CGRect tRect2 = CGRectMake(98, 13, 195,10);
@@ -87,7 +87,6 @@
 	return scaledImage;
 }
 
-
 - (void) addToCell: (NSString *)title:  (NSString *)description: (NSString *)created: (UIImage *)image: (NSString*)imagePath{
 	
 	[self.nameLabel setText: title];
@@ -101,7 +100,7 @@
     NSArray *arr = [[NSArray alloc] initWithContentsOfFile:finalImgWritePath];
     //NSLog(@"%@", arr);
 
-	[self.cellImage setImage:image];
+    [self.cellImage setImage:image forState:UIControlStateNormal];
     
     CGRect facebookRect = CGRectMake(95, 70, 22, 22);
 	UIButton *facebookButon = [[UIButton alloc] initWithFrame:facebookRect];
@@ -186,8 +185,6 @@
     
     tumblrButon.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
 	[self.contentView addSubview:tumblrButon];
-	
-
 }
 
 - (void)layoutSubviews
