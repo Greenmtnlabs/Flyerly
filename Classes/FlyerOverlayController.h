@@ -19,15 +19,18 @@
     UIImage *tempImage;
     UIView *tempModalView;
     FlyrViewController *parentViewController;
+    int flyerNumber;
 }
 
 @property(nonatomic,retain) IBOutlet UIImageView *flyerOverlayImage;
 @property(nonatomic,retain) IBOutlet UIButton *editButton;
 @property(nonatomic,retain) IBOutlet UIButton *crossButton;
 @property(nonatomic,retain) IBOutlet UIView *overlayRoundedView;
+@property int flyerNumber;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil image:(UIImage *)image modalView:(UIView *)modalView;
--(IBAction)goBack;
 -(void)setViews:(FlyrViewController *)controller;
+-(IBAction)goBack;
+-(IBAction)onEdit;
 
 @end

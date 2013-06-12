@@ -10,7 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 
 @implementation FlyerOverlayController
-@synthesize flyerOverlayImage,editButton,crossButton,overlayRoundedView;
+@synthesize flyerOverlayImage,editButton,crossButton,overlayRoundedView,flyerNumber;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil image:(UIImage *)image modalView:(UIView *)modalView{
     
@@ -47,6 +47,149 @@
     parentViewController.navigationController.navigationBar.alpha = 1;
 }
 
+-(IBAction)onEdit{
+    [self goBack];
+    
+    /****** LOAD FLYER INFO FILE *******/
+	NSString *flyerFolderPath = [NSHomeDirectory() stringByAppendingString:[NSString stringWithFormat:@"/Documents/Flyr"]];
+	NSString *flyerFilePath = [flyerFolderPath stringByAppendingString:[NSString stringWithFormat:@"/IMG_%d.pieces", flyerNumber]];
+    NSDictionary *dict = [[NSDictionary alloc] initWithContentsOfFile:flyerFilePath];
+    //NSLog(@"Dict: %@", dict);
+    
+    /****** LOAD TEMPLATE *******/
+	NSString *templateFolderPath = [NSHomeDirectory() stringByAppendingString:[NSString stringWithFormat:@"/Documents/Flyr/Template/%d", flyerNumber]];
+    NSData *imageData = [[NSData alloc ]initWithContentsOfMappedFile:[NSString stringWithFormat:@"%@/template.jpg",templateFolderPath]];
+    UIImage *flyerImage = [UIImage imageWithData:imageData];
+    
+    /****** LOAD TEXTS *******/
+    NSMutableArray *textArray = [[NSMutableArray alloc] init];
+    int index = 0;
+    for(NSString *key in dict){
+        if([key hasPrefix:@"Text-"]){
+            
+            NSDictionary *textDict = [dict objectForKey:key];
+            NSString *text = [textDict objectForKey:@"text"];
+            NSString *fontname = [textDict objectForKey:@"fontname"];
+            NSString *fontsize = [textDict objectForKey:@"fontsize"];
+            NSString *textcolor = [textDict objectForKey:@"textcolor"];
+            NSString *textbordercolor = [textDict objectForKey:@"textbordercolor"];
+            NSString *textX = [textDict objectForKey:@"x"];
+            NSString *textY = [textDict objectForKey:@"y"];
+            NSString *textWidth = [textDict objectForKey:@"width"];
+            NSString *textHeight = [textDict objectForKey:@"height"];
+            
+            CustomLabel *newMsgLabel = [[CustomLabel alloc]initWithFrame:CGRectMake([textX floatValue], [textY floatValue], [textWidth floatValue], [textHeight floatValue])];
+            newMsgLabel.text = text;
+            newMsgLabel.font = [UIFont fontWithName:fontname size:[fontsize floatValue]];
+            newMsgLabel.backgroundColor = [UIColor clearColor];
+            newMsgLabel.textAlignment = UITextAlignmentCenter;
+            
+            NSArray *rgb = [textcolor componentsSeparatedByString:@","];
+            newMsgLabel.textColor = [UIColor colorWithRed:[[rgb objectAtIndex:0] floatValue] green:[[rgb objectAtIndex:1] floatValue] blue:[[rgb objectAtIndex:2] floatValue] alpha:1];
+
+            NSArray *rgbBorder = [textbordercolor componentsSeparatedByString:@","];
+            newMsgLabel.borderColor = [UIColor colorWithRed:[[rgbBorder objectAtIndex:0] floatValue] green:[[rgbBorder objectAtIndex:1] floatValue] blue:[[rgbBorder objectAtIndex:2] floatValue] alpha:1];
+            newMsgLabel.lineWidth = 2;
+            [newMsgLabel drawRect:CGRectMake(newMsgLabel.frame.origin.x, newMsgLabel.frame.origin.y, newMsgLabel.frame.size.width, newMsgLabel.frame.size.height)];
+
+            [textArray addObject:newMsgLabel];
+        }
+    }
+
+    /****** LOAD PHOTOS *******/
+    NSMutableArray *photoArray = [[NSMutableArray alloc] init];
+    index = 0;
+    for(NSString *key in dict){
+        if([key hasPrefix:@"Photo-"]){
+            
+            NSDictionary *photoDict = [dict objectForKey:key];
+            NSString *photoPath = [photoDict objectForKey:@"image"];
+            NSString *photoX = [photoDict objectForKey:@"x"];
+            NSString *photoY = [photoDict objectForKey:@"y"];
+            NSString *photoWidth = [photoDict objectForKey:@"width"];
+            NSString *photoHeight = [photoDict objectForKey:@"height"];
+            
+            NSData *imageData = [[NSData alloc ]initWithContentsOfMappedFile:photoPath];
+            UIImage *currentFlyerImage = [UIImage imageWithData:imageData];
+            
+            UIImageView *newPhotoImgView = [[UIImageView alloc]initWithFrame:CGRectMake([photoX floatValue], [photoY floatValue], [photoWidth floatValue], [photoHeight floatValue])];
+            newPhotoImgView.tag = index++;
+            newPhotoImgView.image = currentFlyerImage;
+            
+            CALayer * l = [newPhotoImgView layer];
+            [l setMasksToBounds:YES];
+            [l setCornerRadius:10];
+            [l setBorderWidth:1.0];
+            [l setBorderColor:[[UIColor grayColor] CGColor]];
+            
+            [photoArray addObject:newPhotoImgView];
+        }
+    }
+
+    /****** LOAD SYMBOLS *******/
+    NSMutableArray *symbolArray = [[NSMutableArray alloc] init];
+    index = 0;
+    for(NSString *key in dict){
+        if([key hasPrefix:@"Symbol-"]){
+            
+            NSDictionary *symbolDict = [dict objectForKey:key];
+            NSString *symbolPath = [symbolDict objectForKey:@"image"];
+            NSString *symbolX = [symbolDict objectForKey:@"x"];
+            NSString *symbolY = [symbolDict objectForKey:@"y"];
+            NSString *symbolWidth = [symbolDict objectForKey:@"width"];
+            NSString *symbolHeight = [symbolDict objectForKey:@"height"];
+            
+            NSData *imageData = [[NSData alloc ]initWithContentsOfMappedFile:symbolPath];
+            UIImage *currentFlyerImage = [UIImage imageWithData:imageData];
+            
+            UIImageView *newSymbolImgView = [[UIImageView alloc]initWithFrame:CGRectMake([symbolX floatValue], [symbolY floatValue], [symbolWidth floatValue], [symbolHeight floatValue])];
+            newSymbolImgView.tag = index++;
+            newSymbolImgView.image = currentFlyerImage;
+            
+            CALayer * l = [newSymbolImgView layer];
+            [l setMasksToBounds:YES];
+            [l setCornerRadius:10];
+            [l setBorderWidth:1.0];
+            [l setBorderColor:[[UIColor grayColor] CGColor]];
+            
+            [symbolArray addObject:newSymbolImgView];
+        }
+    }
+    
+    /****** LOAD ICONS *******/
+    NSMutableArray *iconArray = [[NSMutableArray alloc] init];
+    index = 0;
+    for(NSString *key in dict){
+        if([key hasPrefix:@"Icon-"]){
+            
+            NSDictionary *iconDict = [dict objectForKey:key];
+            NSString *iconPath = [iconDict objectForKey:@"image"];
+            NSString *iconX = [iconDict objectForKey:@"x"];
+            NSString *iconY = [iconDict objectForKey:@"y"];
+            NSString *iconWidth = [iconDict objectForKey:@"width"];
+            NSString *iconHeight = [iconDict objectForKey:@"height"];
+            
+            NSData *imageData = [[NSData alloc ]initWithContentsOfMappedFile:iconPath];
+            UIImage *currentFlyerImage = [UIImage imageWithData:imageData];
+            
+            UIImageView *newIconImgView = [[UIImageView alloc]initWithFrame:CGRectMake([iconX floatValue], [iconY floatValue], [iconWidth floatValue], [iconHeight floatValue])];
+            newIconImgView.tag = index++;
+            newIconImgView.image = currentFlyerImage;
+            
+            CALayer * l = [newIconImgView layer];
+            [l setMasksToBounds:YES];
+            [l setCornerRadius:10];
+            [l setBorderWidth:1.0];
+            [l setBorderColor:[[UIColor grayColor] CGColor]];
+            
+            [iconArray addObject:newIconImgView];
+        }
+    }
+    
+    PhotoController *ptController = [[PhotoController alloc]initWithNibName:@"PhotoController" bundle:nil templateParam:flyerImage symbolArrayParam:symbolArray iconArrayParam:iconArray photoArrayParam:photoArray textArrayParam:textArray];
+	[parentViewController.navigationController pushViewController:ptController animated:YES];
+}
+
 -(void)setViews:(FlyrViewController *)controller{
     parentViewController = controller;
 }
@@ -64,4 +207,34 @@
     
     [super dealloc];
 }
+
+/*NSString *symbolFolderPath = [NSHomeDirectory() stringByAppendingString:[NSString stringWithFormat:@"/Documents/Flyr/Symbol/%d", flyerNumber]];
+ NSArray *symbols = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:symbolFolderPath error:nil];
+ NSString *finalImagePath;
+ 
+ NSMutableArray *symbolArray = [[NSMutableArray alloc] init];
+ int symbolCount = [symbols count];
+ 
+ for(int i = 0; i < symbolCount; i++) {
+ 
+ NSString *img = [symbols objectAtIndex:i];
+ img = [@"/" stringByAppendingString:img];
+ finalImagePath= [symbolFolderPath stringByAppendingString:img];
+ 
+ NSData *imageData = [[NSData alloc ]initWithContentsOfMappedFile:finalImagePath];
+ UIImage *currentFlyerImage = [UIImage imageWithData:imageData];
+ 
+ UIImageView *newSymbolImgView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 90, 70)];
+ newSymbolImgView.tag = i;
+ newSymbolImgView.image = currentFlyerImage;
+ 
+ CALayer * l = [newSymbolImgView layer];
+ [l setMasksToBounds:YES];
+ [l setCornerRadius:10];
+ [l setBorderWidth:1.0];
+ [l setBorderColor:[[UIColor grayColor] CGColor]];
+ 
+ [symbolArray addObject:newSymbolImgView];
+ }*/
+
 @end

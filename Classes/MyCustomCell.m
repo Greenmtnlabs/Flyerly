@@ -87,12 +87,13 @@
 	return scaledImage;
 }
 
-- (void) addToCell: (NSString *)title:  (NSString *)description: (NSString *)created: (UIImage *)image: (NSString*)imagePath{
+- (void) addToCell: (NSString *)title:  (NSString *)description: (NSString *)created: (UIImage *)image: (NSString*)imagePath:  (int)flyerNumberParam{
 	
 	[self.nameLabel setText: title];
     [self.descriptionLabel setText:description];
     [self.dateLabel setText:created];
     self.filePath = imagePath;
+    flyerNumber = flyerNumberParam;
 
     NSString *socialFlyerPath = [self.filePath stringByReplacingOccurrencesOfString:@"/Flyr/" withString:@"/Flyr/Social/"];
 	NSString *finalImgWritePath = [socialFlyerPath stringByReplacingOccurrencesOfString:@".jpg" withString:@".soc"];

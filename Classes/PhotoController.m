@@ -44,6 +44,20 @@ int iconLayerCount = 0;
 int textLayerCount = 0;
 int photoLayerCount = 0;
 
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil templateParam:(UIImage *)templateParam symbolArrayParam:(NSMutableArray *)symbolArrayParam iconArrayParam:(NSMutableArray *)iconArrayParam photoArrayParam:(NSMutableArray *)photoArrayParam textArrayParam:(NSMutableArray *)textArrayParam{
+    
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+        selectedTemplate = templateParam;
+        symbolLayersArray = symbolArrayParam;
+        iconLayersArray = iconArrayParam;
+        photoLayersArray = photoArrayParam;
+        textLabelLayersArray = textArrayParam;
+    }
+    return self;
+}
+
 #pragma mark  View Appear Methods
 -(void)viewWillAppear:(BOOL)animated{
 	
@@ -94,7 +108,9 @@ int photoLayerCount = 0;
 	selectedColor = [UIColor blackColor];	
 	selectedText = @"";
 	selectedSize = 16;
-	selectedTemplate  = [UIImage imageNamed:@"main_area_bg"];
+    if(!selectedTemplate){
+        selectedTemplate  = [UIImage imageNamed:@"main_area_bg"];
+    }
 	lableLocation = CGPointMake(160,100);
 	
 	// Create Main Image View
@@ -122,6 +138,28 @@ int photoLayerCount = 0;
         addMoreLayerOrSaveFlyerLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 354, 310, 43)];
     }
 	imgView.image = selectedTemplate;
+    
+    if(symbolLayersArray){
+        for(UIImageView *symbolImageView in symbolLayersArray){
+            [self.imgView addSubview:symbolImageView];
+        }
+    }
+    if(iconLayersArray){
+        for(UIImageView *iconImageView in iconLayersArray){
+            [self.imgView addSubview:iconImageView];
+        }
+    }
+    if(photoLayersArray){
+        for(UIImageView *photoImageView in photoLayersArray){
+            [self.imgView addSubview:photoImageView];
+        }
+    }
+    if(textLabelLayersArray){
+        for(CustomLabel *customLabel in textLabelLayersArray){
+            [self.imgView addSubview:customLabel];
+        }
+    }
+    
 	[self.view addSubview:imgView];
 
     [moreLayersButton setBackgroundImage:[UIImage imageNamed:@"07_addmore"] forState:UIControlStateNormal];
@@ -3537,8 +3575,8 @@ UIScrollView *layerScrollView = nil;
 		[[NSFileManager defaultManager] createDirectoryAtPath:folderPath attributes:nil];
 	}
     
-    // Save flyer in pieces to make in editable later
-    [self saveFlyerInPieces:finalImgDetailWritePath flyerFolder:folderPath];
+    // Save flyer in pieces to make it editable later
+    [self saveFlyerInPieces:finalImgDetailWritePath flyerFolder:folderPath flyerNumber:largestImgCount];
 	
     // Save flyer details
     [self saveFlyerDetails:finalImgDetailWritePath];
@@ -3558,17 +3596,60 @@ UIScrollView *layerScrollView = nil;
 	return imgData;
 }
 
-/* 
- *Save flyer in pieces to make in editable later
+-(void)createDirectoryAtPath:(NSString *)directory{
+	if (![[NSFileManager defaultManager] fileExistsAtPath:directory isDirectory:NULL]) {
+		[[NSFileManager defaultManager] createDirectoryAtPath:directory attributes:nil];
+	}
+}
+
+/*
+ *Save flyer in pieces to make it editable later
  */
--(void)saveFlyerInPieces:(NSString *)filePath flyerFolder:(NSString *)flyerFolder{
+-(void)saveFlyerInPieces:(NSString *)filePath flyerFolder:(NSString *)flyerFolder flyerNumber:(int)flyerNumber{
+    
+    if(flyerNumber == -1)
+        flyerNumber = 0;
     
     NSString *piecesFile = [filePath stringByReplacingOccurrencesOfString:@".txt" withString:@".pieces"];
     NSMutableDictionary *detailDictionary = [[NSMutableDictionary alloc] init];
 
-    int index = 0;
+    // Create Template direcrory if not created
+    NSString *templateFolderPath = [NSString stringWithFormat:@"%@/Template/", flyerFolder];
+    NSString *templateIndexFolderPath = [NSString stringWithFormat:@"%@/%d", templateFolderPath, flyerNumber];
+    [self createDirectoryAtPath:templateFolderPath];
+    [self createDirectoryAtPath:templateIndexFolderPath];
+        
+    // Create Photo direcrory if not created
+    NSString *photoFolderPath = [NSString stringWithFormat:@"%@/Photo/", flyerFolder];
+    NSString *photoIndexFolderPath = [NSString stringWithFormat:@"%@/%d", photoFolderPath, flyerNumber];
+    [self createDirectoryAtPath:photoFolderPath];
+    [self createDirectoryAtPath:photoIndexFolderPath];
+
+    // Create Symbol direcrory if not created
+    NSString *symbolFolderPath = [NSString stringWithFormat:@"%@/Symbol/", flyerFolder];
+    NSString *symbolIndexFolderPath = [NSString stringWithFormat:@"%@/%d", symbolFolderPath, flyerNumber];
+    [self createDirectoryAtPath:symbolFolderPath];
+    [self createDirectoryAtPath:symbolIndexFolderPath];
     
-    // Get label information
+    // Create Icon direcrory if not created
+    NSString *iconFolderPath = [NSString stringWithFormat:@"%@/Icon/", flyerFolder];
+    NSString *iconIndexFolderPath = [NSString stringWithFormat:@"%@/%d", iconFolderPath, flyerNumber];
+    [self createDirectoryAtPath:iconFolderPath];
+    [self createDirectoryAtPath:iconIndexFolderPath];
+    
+
+    // Store selected template
+    NSMutableDictionary *templateDetailDictionary = [[NSMutableDictionary alloc] init];
+    
+    NSString *finalTemplatePath = [templateIndexFolderPath stringByAppendingString:[NSString stringWithFormat:@"/template.jpg"]];
+    NSData *imgData = UIImagePNGRepresentation(selectedTemplate);
+    [[NSFileManager defaultManager] createFileAtPath:finalTemplatePath contents:imgData attributes:nil];
+    
+    [templateDetailDictionary setObject:finalTemplatePath forKey:@"image"];
+    [detailDictionary setObject:templateDetailDictionary forKey:[NSString stringWithFormat:@"Template"]];
+
+    int index = 0;
+    // Get and Save label information
     for(CustomLabel *labelToStore in [self textLabelLayersArray]){
         
         CGFloat red = 0.0, green = 0.0, blue = 0.0, alpha =0.0;
@@ -3593,10 +3674,16 @@ UIScrollView *layerScrollView = nil;
     }
 
     index = 0;
+    // Get and Save photo information
     for(UIImageView *photoToStore in [self photoLayersArray]){
         
         NSMutableDictionary *photoDetailDictionary = [[NSMutableDictionary alloc] init];
-        [photoDetailDictionary setObject:photoToStore.image forKey:@"image"];
+        
+		NSString *finalPhotoPath = [photoIndexFolderPath stringByAppendingString:[NSString stringWithFormat:@"/%d.jpg", index]];
+        NSData *imgData = UIImagePNGRepresentation(photoToStore.image);
+        [[NSFileManager defaultManager] createFileAtPath:finalPhotoPath contents:imgData attributes:nil];
+
+        [photoDetailDictionary setObject:finalPhotoPath forKey:@"image"];
         [photoDetailDictionary setObject:[NSString stringWithFormat:@"%f", photoToStore.frame.origin.x] forKey:@"x"];
         [photoDetailDictionary setObject:[NSString stringWithFormat:@"%f", photoToStore.frame.origin.y] forKey:@"y"];
         [photoDetailDictionary setObject:[NSString stringWithFormat:@"%f", photoToStore.frame.size.width] forKey:@"width"];
@@ -3606,10 +3693,16 @@ UIScrollView *layerScrollView = nil;
     }
     
     index = 0;
+    // Get and Save symbol information
     for(UIImageView *symbolToStore in [self symbolLayersArray]){
         
         NSMutableDictionary *symbolDetailDictionary = [[NSMutableDictionary alloc] init];
-        //[symbolDetailDictionary setObject:symbolToStore.image forKey:@"image"];
+        
+		NSString *finalSymbolPath = [symbolIndexFolderPath stringByAppendingString:[NSString stringWithFormat:@"/%d.jpg", index]];
+        NSData *imgData = UIImagePNGRepresentation(symbolToStore.image);
+        [[NSFileManager defaultManager] createFileAtPath:finalSymbolPath contents:imgData attributes:nil];
+        
+        [symbolDetailDictionary setObject:finalSymbolPath forKey:@"image"];
         [symbolDetailDictionary setObject:[NSString stringWithFormat:@"%f", symbolToStore.frame.origin.x] forKey:@"x"];
         [symbolDetailDictionary setObject:[NSString stringWithFormat:@"%f", symbolToStore.frame.origin.y] forKey:@"y"];
         [symbolDetailDictionary setObject:[NSString stringWithFormat:@"%f", symbolToStore.frame.size.width] forKey:@"width"];
@@ -3619,10 +3712,16 @@ UIScrollView *layerScrollView = nil;
     }
     
     index = 0;
+    // Get and Save icon information
     for(UIImageView *iconToStore in [self iconLayersArray]){
         
         NSMutableDictionary *iconDetailDictionary = [[NSMutableDictionary alloc] init];
-        //[iconDetailDictionary setObject:iconToStore.image forKey:@"image"];
+
+		NSString *finalIconPath = [iconIndexFolderPath stringByAppendingString:[NSString stringWithFormat:@"/%d.jpg", index]];
+        NSData *imgData = UIImagePNGRepresentation(iconToStore.image);
+        [[NSFileManager defaultManager] createFileAtPath:finalIconPath contents:imgData attributes:nil];
+        
+        [iconDetailDictionary setObject:finalIconPath forKey:@"image"];
         [iconDetailDictionary setObject:[NSString stringWithFormat:@"%f", iconToStore.frame.origin.x] forKey:@"x"];
         [iconDetailDictionary setObject:[NSString stringWithFormat:@"%f", iconToStore.frame.origin.y] forKey:@"y"];
         [iconDetailDictionary setObject:[NSString stringWithFormat:@"%f", iconToStore.frame.size.width] forKey:@"width"];
@@ -3631,8 +3730,8 @@ UIScrollView *layerScrollView = nil;
         [detailDictionary setObject:iconDetailDictionary forKey:[NSString stringWithFormat:@"Icon-%d", index++]];
     }
 
-    NSLog(@"DetailDictionary: %@", detailDictionary);
-    NSLog(@"Folder: %@", piecesFile);
+    //NSLog(@"DetailDictionary: %@", detailDictionary);
+    //NSLog(@"Folder: %@", piecesFile);
     [detailDictionary writeToFile:piecesFile atomically:YES];
 }
 

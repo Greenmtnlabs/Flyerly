@@ -215,7 +215,7 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
 
 -(void)showFlyerOverlay:(id)sender{
     
-    // cadt to button
+    // cast to button
     UIButton *cellImageButton = (UIButton *) sender;
     // Get image on button
     UIImage *flyerImage = [cellImageButton imageForState:UIControlStateNormal];
@@ -229,6 +229,8 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
     FlyerOverlayController *overlayController = [[FlyerOverlayController alloc]initWithNibName:@"FlyerOverlayController" bundle:nil image:flyerImage modalView:modalView];
     // set its parent
     [overlayController setViews:self];
+    //NSLog(@"showFlyerOverlay Tag: %d", cellImageButton.tag);
+    overlayController.flyerNumber = cellImageButton.tag;
     
     // Add modal view and overlay view
     [self.view addSubview:modalView];
@@ -240,14 +242,25 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
     static NSString *cellId = @"Cell";
     MyCustomCell *cell = (MyCustomCell *)[tView dequeueReusableCellWithIdentifier:cellId];
     
+	NSString *homeDirectoryPath = NSHomeDirectory();
+	NSString *flyerPath = [homeDirectoryPath stringByAppendingString:@"/Documents/Flyr/"];
+	NSString *folderPath = [NSString pathWithComponents:[NSArray arrayWithObjects:[NSString stringWithString:[flyerPath stringByStandardizingPath]],nil]];
+	
+    NSString *onlyImageName = [imagePath stringByReplacingOccurrencesOfString:folderPath withString:@""];
+    NSString *lastFileName = [onlyImageName stringByReplacingOccurrencesOfString:@".jpg" withString:@""];
+    NSString *index = [lastFileName stringByReplacingOccurrencesOfString:@"/IMG_" withString:@""];
+    
+    [cell setAccessoryType:UITableViewCellAccessoryNone];
+    //NSLog(@"Index: %@", index);
+
     if (cell == nil) {
         cell = [[[MyCustomCell alloc] initWithFrame:CGRectZero reuseIdentifier:cellId] autorelease];
-        
+        cell.flyerNumber = [index intValue];
+        cell.cellImage.tag = cell.flyerNumber;
         [cell.cellImage addTarget:self action:@selector(showFlyerOverlay:) forControlEvents:UIControlEventTouchUpInside];
     }
     
-    [cell setAccessoryType:UITableViewCellAccessoryNone];
-    [cell addToCell: title :description :created :img :imagePath];
+    [cell addToCell: title :description :created :img :imagePath :[index intValue]];
     
     return cell;
 }

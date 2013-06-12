@@ -684,10 +684,10 @@ static ShareProgressView *flickrPogressView;
         // Fill out the email body text
         NSData *imageData = UIImagePNGRepresentation(selectedFlyerImage);
         NSString *base64String = [imageData base64EncodedString];        
-        [emailBody appendString:[NSString stringWithFormat:@"<p><b><img src='data:image/png;base64,%@'></b></p>",base64String]];
+        [emailBody appendString:[NSString stringWithFormat:@"<p><img src='data:image/png;base64,%@'></p>",base64String]];
         [emailBody appendString:@"<p><font size='4'><a href = 'http://www.flyer.ly'>Download flyerly & share a flyer</a></font></p>"];
         [emailBody appendString:@"</body></html>"];
-        //NSLog(@"%@",emailBody);
+        NSLog(@"%@",emailBody);
         
         //mail composer window
         [picker setMessageBody:emailBody isHTML:YES];
