@@ -47,14 +47,16 @@
     parentViewController.navigationController.navigationBar.alpha = 1;
 }
 
--(IBAction)onEdit{
-    [self goBack];
+/*
+ * open flyer in editable mode
+ * this is required on sharing screen as well so defining it as class member +
+ */
++(void)openFlyerInEditableMode:(int)flyerNumber parentViewController:(UIViewController *)parentViewController{
     
-    /****** LOAD FLYER INFO FILE *******/
+    /****** LOAD FLYER INFORMATION FILE *******/
 	NSString *flyerFolderPath = [NSHomeDirectory() stringByAppendingString:[NSString stringWithFormat:@"/Documents/Flyr"]];
 	NSString *flyerFilePath = [flyerFolderPath stringByAppendingString:[NSString stringWithFormat:@"/IMG_%d.pieces", flyerNumber]];
     NSDictionary *dict = [[NSDictionary alloc] initWithContentsOfFile:flyerFilePath];
-    //NSLog(@"Dict: %@", dict);
     
     /****** LOAD TEMPLATE *******/
 	NSString *templateFolderPath = [NSHomeDirectory() stringByAppendingString:[NSString stringWithFormat:@"/Documents/Flyr/Template/%d", flyerNumber]];
@@ -86,16 +88,16 @@
             
             NSArray *rgb = [textcolor componentsSeparatedByString:@","];
             newMsgLabel.textColor = [UIColor colorWithRed:[[rgb objectAtIndex:0] floatValue] green:[[rgb objectAtIndex:1] floatValue] blue:[[rgb objectAtIndex:2] floatValue] alpha:1];
-
+            
             NSArray *rgbBorder = [textbordercolor componentsSeparatedByString:@","];
             newMsgLabel.borderColor = [UIColor colorWithRed:[[rgbBorder objectAtIndex:0] floatValue] green:[[rgbBorder objectAtIndex:1] floatValue] blue:[[rgbBorder objectAtIndex:2] floatValue] alpha:1];
             newMsgLabel.lineWidth = 2;
             [newMsgLabel drawRect:CGRectMake(newMsgLabel.frame.origin.x, newMsgLabel.frame.origin.y, newMsgLabel.frame.size.width, newMsgLabel.frame.size.height)];
-
+            
             [textArray addObject:newMsgLabel];
         }
     }
-
+    
     /****** LOAD PHOTOS *******/
     NSMutableArray *photoArray = [[NSMutableArray alloc] init];
     index = 0;
@@ -125,7 +127,7 @@
             [photoArray addObject:newPhotoImgView];
         }
     }
-
+    
     /****** LOAD SYMBOLS *******/
     NSMutableArray *symbolArray = [[NSMutableArray alloc] init];
     index = 0;
@@ -186,10 +188,22 @@
         }
     }
     
-    PhotoController *ptController = [[PhotoController alloc]initWithNibName:@"PhotoController" bundle:nil templateParam:flyerImage symbolArrayParam:symbolArray iconArrayParam:iconArray photoArrayParam:photoArray textArrayParam:textArray];
+    PhotoController *ptController = [[PhotoController alloc]initWithNibName:@"PhotoController" bundle:nil templateParam:flyerImage symbolArrayParam:symbolArray iconArrayParam:iconArray photoArrayParam:photoArray textArrayParam:textArray flyerNumberParam:flyerNumber];
 	[parentViewController.navigationController pushViewController:ptController animated:YES];
 }
 
+/*
+ * Called when edit button is pressed
+ */
+-(IBAction)onEdit{
+    [self goBack];
+    
+    [FlyerOverlayController openFlyerInEditableMode:flyerNumber parentViewController:parentViewController];
+}
+
+/*
+ * Set a parent view on which this view will be added
+ */
 -(void)setViews:(FlyrViewController *)controller{
     parentViewController = controller;
 }
@@ -207,34 +221,4 @@
     
     [super dealloc];
 }
-
-/*NSString *symbolFolderPath = [NSHomeDirectory() stringByAppendingString:[NSString stringWithFormat:@"/Documents/Flyr/Symbol/%d", flyerNumber]];
- NSArray *symbols = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:symbolFolderPath error:nil];
- NSString *finalImagePath;
- 
- NSMutableArray *symbolArray = [[NSMutableArray alloc] init];
- int symbolCount = [symbols count];
- 
- for(int i = 0; i < symbolCount; i++) {
- 
- NSString *img = [symbols objectAtIndex:i];
- img = [@"/" stringByAppendingString:img];
- finalImagePath= [symbolFolderPath stringByAppendingString:img];
- 
- NSData *imageData = [[NSData alloc ]initWithContentsOfMappedFile:finalImagePath];
- UIImage *currentFlyerImage = [UIImage imageWithData:imageData];
- 
- UIImageView *newSymbolImgView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 90, 70)];
- newSymbolImgView.tag = i;
- newSymbolImgView.image = currentFlyerImage;
- 
- CALayer * l = [newSymbolImgView layer];
- [l setMasksToBounds:YES];
- [l setCornerRadius:10];
- [l setBorderWidth:1.0];
- [l setBorderColor:[[UIColor grayColor] CGColor]];
- 
- [symbolArray addObject:newSymbolImgView];
- }*/
-
 @end

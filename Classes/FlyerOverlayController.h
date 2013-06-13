@@ -32,5 +32,6 @@
 -(void)setViews:(FlyrViewController *)controller;
 -(IBAction)goBack;
 -(IBAction)onEdit;
++(void)openFlyerInEditableMode:(int)flyerNumber parentViewController:(UIViewController *)parentViewController;
 
 @end

@@ -142,20 +142,6 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
     [self.navigationItem setRightBarButtonItems: [self rightBarItems]];
 
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg"] forBarMetrics:UIBarMetricsDefault];
-
-    /*
-	navBar= [[MyNavigationBar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
-	[self.view addSubview:navBar];
-	[navBar show:@"Saved Flyrs" left:@"Menu" right:@""];
-	[self.view bringSubviewToFront:navBar];
-	
-	[navBar.leftButton removeTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-	[navBar.rightButton removeTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-	
-	[navBar.leftButton addTarget:self action:@selector(callMenu) forControlEvents:UIControlEventTouchUpInside];
-	[navBar.rightButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-	navBar.alpha = ALPHA1;
-     */
 }
 
 -(NSArray *)leftBarItems{
@@ -198,7 +184,6 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-	
 }
 
 
@@ -242,17 +227,9 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
     static NSString *cellId = @"Cell";
     MyCustomCell *cell = (MyCustomCell *)[tView dequeueReusableCellWithIdentifier:cellId];
     
-	NSString *homeDirectoryPath = NSHomeDirectory();
-	NSString *flyerPath = [homeDirectoryPath stringByAppendingString:@"/Documents/Flyr/"];
-	NSString *folderPath = [NSString pathWithComponents:[NSArray arrayWithObjects:[NSString stringWithString:[flyerPath stringByStandardizingPath]],nil]];
-	
-    NSString *onlyImageName = [imagePath stringByReplacingOccurrencesOfString:folderPath withString:@""];
-    NSString *lastFileName = [onlyImageName stringByReplacingOccurrencesOfString:@".jpg" withString:@""];
-    NSString *index = [lastFileName stringByReplacingOccurrencesOfString:@"/IMG_" withString:@""];
-    
+    NSLog(@"imagePath: %@", imagePath);
+    NSString *index = [FlyrViewController getFlyerNumberFromPath:imagePath];
     [cell setAccessoryType:UITableViewCellAccessoryNone];
-    //NSLog(@"Index: %@", index);
-
     if (cell == nil) {
         cell = [[[MyCustomCell alloc] initWithFrame:CGRectZero reuseIdentifier:cellId] autorelease];
         cell.flyerNumber = [index intValue];
@@ -263,6 +240,18 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
     [cell addToCell: title :description :created :img :imagePath :[index intValue]];
     
     return cell;
+}
+
++(NSString *)getFlyerNumberFromPath:(NSString *)imagePath{
+	NSString *homeDirectoryPath = NSHomeDirectory();
+	NSString *flyerPath = [homeDirectoryPath stringByAppendingString:@"/Documents/Flyr/"];
+	NSString *folderPath = [NSString pathWithComponents:[NSArray arrayWithObjects:[NSString stringWithString:[flyerPath stringByStandardizingPath]],nil]];
+	
+    NSString *onlyImageName = [imagePath stringByReplacingOccurrencesOfString:folderPath withString:@""];
+    NSString *lastFileName = [onlyImageName stringByReplacingOccurrencesOfString:@".jpg" withString:@""];
+    NSString *index = [lastFileName stringByReplacingOccurrencesOfString:@"/IMG_" withString:@""];
+
+    return index;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

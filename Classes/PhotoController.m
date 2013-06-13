@@ -43,8 +43,9 @@ int symbolLayerCount = 0;
 int iconLayerCount = 0;
 int textLayerCount = 0;
 int photoLayerCount = 0;
+int flyerNumber = -1;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil templateParam:(UIImage *)templateParam symbolArrayParam:(NSMutableArray *)symbolArrayParam iconArrayParam:(NSMutableArray *)iconArrayParam photoArrayParam:(NSMutableArray *)photoArrayParam textArrayParam:(NSMutableArray *)textArrayParam{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil templateParam:(UIImage *)templateParam symbolArrayParam:(NSMutableArray *)symbolArrayParam iconArrayParam:(NSMutableArray *)iconArrayParam photoArrayParam:(NSMutableArray *)photoArrayParam textArrayParam:(NSMutableArray *)textArrayParam flyerNumberParam:(int)flyerNumberParam{
     
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
@@ -54,6 +55,7 @@ int photoLayerCount = 0;
         iconLayersArray = iconArrayParam;
         photoLayersArray = photoArrayParam;
         textLabelLayersArray = textArrayParam;
+        flyerNumber = flyerNumberParam;
     }
     return self;
 }
@@ -139,6 +141,7 @@ int photoLayerCount = 0;
     }
 	imgView.image = selectedTemplate;
     
+    // Setting arrays if in edit mode
     if(symbolLayersArray){
         for(UIImageView *symbolImageView in symbolLayersArray){
             [self.imgView addSubview:symbolImageView];
@@ -3540,34 +3543,47 @@ UIScrollView *layerScrollView = nil;
 	NSString *finalImgDetailWritePath;
 
 	/************************ CREATE UNIQUE NAME FOR IMAGE ***********************************/
-	if(files == nil)
-	{
-		finalImgWritePath = [folderPath stringByAppendingString:@"/IMG_0.jpg"];
-        finalImgDetailWritePath = [folderPath stringByAppendingString:@"/IMG_0.txt"];
+    
+    // Not -1 means it is in Edit mode and we already have flyer number
+    if(flyerNumber != -1){
+    
+        finalImgWritePath = [folderPath stringByAppendingString:[NSString stringWithFormat:@"/IMG_%d.jpg", flyerNumber]];
+        finalImgDetailWritePath = [folderPath stringByAppendingString:[NSString stringWithFormat:@"/IMG_%d.txt", flyerNumber]];
+        largestImgCount = flyerNumber;
+        
+        newImgName = [NSString stringWithFormat:@"/IMG_%d.jpg",largestImgCount];
 
-	}
-	else
-	{
-		NSAutoreleasePool* ap = [[NSAutoreleasePool alloc] init];
-		for(int i = 0 ; i < [files count];i++)
-		{
-			NSString *lastFileName = [files objectAtIndex:i];
-			//NSLog(lastFileName);
-			lastFileName = [lastFileName stringByReplacingOccurrencesOfString:@".jpg" withString:@""];
-			lastFileName = [lastFileName stringByReplacingOccurrencesOfString:@"IMG_" withString:@""];
-			imgCount = [lastFileName intValue];
-			if(imgCount > largestImgCount){
-				largestImgCount = imgCount;
-			}
-			
-		}
-		[ap release];
-		newImgName = [NSString stringWithFormat:@"/IMG_%d.jpg",++largestImgCount];
-		finalImgWritePath = [folderPath stringByAppendingString:newImgName];
-		NSString *newImgDetailName = [NSString stringWithFormat:@"/IMG_%d.txt",largestImgCount];
-		finalImgDetailWritePath = [folderPath stringByAppendingString:newImgDetailName];
-
-	}
+    } else {
+    
+        if(files == nil)
+        {
+            finalImgWritePath = [folderPath stringByAppendingString:@"/IMG_0.jpg"];
+            finalImgDetailWritePath = [folderPath stringByAppendingString:@"/IMG_0.txt"];
+            
+        }
+        else
+        {
+            NSAutoreleasePool* ap = [[NSAutoreleasePool alloc] init];
+            for(int i = 0 ; i < [files count];i++)
+            {
+                NSString *lastFileName = [files objectAtIndex:i];
+                //NSLog(lastFileName);
+                lastFileName = [lastFileName stringByReplacingOccurrencesOfString:@".jpg" withString:@""];
+                lastFileName = [lastFileName stringByReplacingOccurrencesOfString:@"IMG_" withString:@""];
+                imgCount = [lastFileName intValue];
+                if(imgCount > largestImgCount){
+                    largestImgCount = imgCount;
+                }
+                
+            }
+            [ap release];
+            newImgName = [NSString stringWithFormat:@"/IMG_%d.jpg",++largestImgCount];
+            finalImgWritePath = [folderPath stringByAppendingString:newImgName];
+            NSString *newImgDetailName = [NSString stringWithFormat:@"/IMG_%d.txt",largestImgCount];
+            finalImgDetailWritePath = [folderPath stringByAppendingString:newImgDetailName];
+            
+        }
+    }
 	/************************ END OF CREATE UNIQUE NAME FOR IMAGE ***********************************/
 
 	NSString *imgPath = [NSString pathWithComponents:[NSArray arrayWithObjects:[NSString stringWithString:[finalImgWritePath stringByExpandingTildeInPath]], nil]];
