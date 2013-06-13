@@ -85,6 +85,7 @@
             newMsgLabel.font = [UIFont fontWithName:fontname size:[fontsize floatValue]];
             newMsgLabel.backgroundColor = [UIColor clearColor];
             newMsgLabel.textAlignment = UITextAlignmentCenter;
+            newMsgLabel.numberOfLines = 10;
             
             NSArray *rgb = [textcolor componentsSeparatedByString:@","];
             newMsgLabel.textColor = [UIColor colorWithRed:[[rgb objectAtIndex:0] floatValue] green:[[rgb objectAtIndex:1] floatValue] blue:[[rgb objectAtIndex:2] floatValue] alpha:1];
@@ -204,7 +205,7 @@
 /*
  * Set a parent view on which this view will be added
  */
--(void)setViews:(FlyrViewController *)controller{
+-(void)setViews:(UIViewController *)controller{
     parentViewController = controller;
 }
 

@@ -24,7 +24,7 @@
 	IBOutlet UIScrollView *scrollView;
 	IBOutlet UIView *progressView;
 
-	IBOutlet UIImageView *imgView;
+	IBOutlet UIButton *imgView;
 	IBOutlet UITextField *titleView;
 	IBOutlet UITextView *descriptionView;
 
@@ -82,7 +82,7 @@
 
 @property(nonatomic,retain) IBOutlet UITextView *descriptionView;
 @property(nonatomic,retain) IBOutlet UITextField *titleView;
-@property(nonatomic,retain) IBOutlet UIImageView *imgView;
+@property(nonatomic,retain) IBOutlet UIButton *imgView;
 
 @property(nonatomic,retain) IBOutlet UIButton *facebookButton;
 @property(nonatomic,retain) IBOutlet UIButton *twitterButton;

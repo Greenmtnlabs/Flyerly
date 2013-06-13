@@ -18,7 +18,7 @@
     
     UIImage *tempImage;
     UIView *tempModalView;
-    FlyrViewController *parentViewController;
+    UIViewController *parentViewController;
     int flyerNumber;
 }
 
@@ -29,7 +29,7 @@
 @property int flyerNumber;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil image:(UIImage *)image modalView:(UIView *)modalView;
--(void)setViews:(FlyrViewController *)controller;
+-(void)setViews:(UIViewController *)controller;
 -(IBAction)goBack;
 -(IBAction)onEdit;
 +(void)openFlyerInEditableMode:(int)flyerNumber parentViewController:(UIViewController *)parentViewController;

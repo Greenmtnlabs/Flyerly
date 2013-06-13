@@ -1645,6 +1645,7 @@ int arrangeLayerIndex;
 		
 		[[picker parentViewController] dismissModalViewControllerAnimated:YES];
 		UIImage *testImage = [img retain];
+        selectedTemplate = testImage;
 		[self.imgView setImage:testImage] ;
 	}
 	else if(imgPickerFlag == 2){
@@ -1741,6 +1742,7 @@ int arrangeLayerIndex;
 		
 		//[[self.imgPicker parentViewController] dismissModalViewControllerAnimated:YES];
 		UIImage *testImage = [selectedImage retain];
+        selectedTemplate = testImage;
 		[self.imgView setImage:testImage] ;
 	}
 	else if(self.imgPickerFlag == 2){
@@ -1808,6 +1810,7 @@ int arrangeLayerIndex;
         UIImage *img = [UIImage imageWithCGImage:imageRef];
         CGImageRelease(imageRef);
         
+        selectedTemplate = img;
         [self.imgView setImage:img];
         [self dismissViewControllerAnimated:YES completion:nil];
 	}

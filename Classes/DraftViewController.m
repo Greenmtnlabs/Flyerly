@@ -162,8 +162,12 @@ static ShareProgressView *flickrPogressView;
     [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,rightEditBarButton,nil]];
 
 	[UIView commitAnimations];
-	[imgView setImage:selectedFlyerImage];
+    [imgView addTarget:self action:@selector(showFlyerOverlay:) forControlEvents:UIControlEventTouchUpInside];
+	[imgView setImage:selectedFlyerImage forState:UIControlStateNormal];
 
+    NSString *flyerNumber = [FlyrViewController getFlyerNumberFromPath:imageFileName];
+    imgView.tag = [flyerNumber intValue];
+    
     // Setup title text field
     [titleView setReturnKeyType:UIReturnKeyDone];
     [titleView addTarget:self action:@selector(textFieldFinished:) forControlEvents: UIControlEventEditingDidEndOnExit];
@@ -213,19 +217,43 @@ static ShareProgressView *flickrPogressView;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-	navBar= [[MyNavigationBar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
+	/*navBar= [[MyNavigationBar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
 	[self.view addSubview:navBar];
 	[navBar show:@"SocialFlyr" left:@"Browser" right:@"Share"];
 	[self.view bringSubviewToFront:navBar];
 	
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg"] forBarMetrics:UIBarMetricsDefault];
-
 	[navBar.leftButton removeTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
 	[navBar.rightButton removeTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
 	
 	[navBar.leftButton addTarget:self action:@selector(callFlyrView) forControlEvents:UIControlEventTouchUpInside];
 	[navBar.rightButton addTarget:self action:@selector(loadDistributeView) forControlEvents:UIControlEventTouchUpInside];
-	navBar.alpha = ALPHA1;	
+	navBar.alpha = ALPHA1;*/
+	
+     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg"] forBarMetrics:UIBarMetricsDefault];
+}
+
+-(void)showFlyerOverlay:(id)sender{
+    
+    // cast to button
+    UIButton *cellImageButton = (UIButton *) sender;
+    // Get image on button
+    UIImage *flyerImage = [cellImageButton imageForState:UIControlStateNormal];
+    // Create Modal trnasparent view
+    UIView *modalView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    [modalView setBackgroundColor:[MyCustomCell colorWithHexString:@"161616"]];
+    modalView.alpha = 0.75;
+    self.navigationController.navigationBar.alpha = 0.35;
+    
+    // Create overlay controller
+    FlyerOverlayController *overlayController = [[FlyerOverlayController alloc]initWithNibName:@"FlyerOverlayController" bundle:nil image:flyerImage modalView:modalView];
+    // set its parent
+    [overlayController setViews:self];
+    //NSLog(@"showFlyerOverlay Tag: %d", cellImageButton.tag);
+    overlayController.flyerNumber = cellImageButton.tag;
+    
+    // Add modal view and overlay view
+    [self.view addSubview:modalView];
+    [self.view addSubview:overlayController.view];
 }
 
 #pragma text field and text view delegates
