@@ -43,6 +43,22 @@ int symbolLayerCount = 0;
 int iconLayerCount = 0;
 int textLayerCount = 0;
 int photoLayerCount = 0;
+int flyerNumber = -1;
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil templateParam:(UIImage *)templateParam symbolArrayParam:(NSMutableArray *)symbolArrayParam iconArrayParam:(NSMutableArray *)iconArrayParam photoArrayParam:(NSMutableArray *)photoArrayParam textArrayParam:(NSMutableArray *)textArrayParam flyerNumberParam:(int)flyerNumberParam{
+    
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+        selectedTemplate = templateParam;
+        symbolLayersArray = symbolArrayParam;
+        iconLayersArray = iconArrayParam;
+        photoLayersArray = photoArrayParam;
+        textLabelLayersArray = textArrayParam;
+        flyerNumber = flyerNumberParam;
+    }
+    return self;
+}
 
 #pragma mark  View Appear Methods
 -(void)viewWillAppear:(BOOL)animated{
@@ -94,7 +110,9 @@ int photoLayerCount = 0;
 	selectedColor = [UIColor blackColor];	
 	selectedText = @"";
 	selectedSize = 16;
-	selectedTemplate  = [UIImage imageNamed:@"main_area_bg"];
+    if(!selectedTemplate){
+        selectedTemplate  = [UIImage imageNamed:@"main_area_bg"];
+    }
 	lableLocation = CGPointMake(160,100);
 	
 	// Create Main Image View
@@ -122,6 +140,29 @@ int photoLayerCount = 0;
         addMoreLayerOrSaveFlyerLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 354, 310, 43)];
     }
 	imgView.image = selectedTemplate;
+    
+    // Setting arrays if in edit mode
+    if(symbolLayersArray){
+        for(UIImageView *symbolImageView in symbolLayersArray){
+            [self.imgView addSubview:symbolImageView];
+        }
+    }
+    if(iconLayersArray){
+        for(UIImageView *iconImageView in iconLayersArray){
+            [self.imgView addSubview:iconImageView];
+        }
+    }
+    if(photoLayersArray){
+        for(UIImageView *photoImageView in photoLayersArray){
+            [self.imgView addSubview:photoImageView];
+        }
+    }
+    if(textLabelLayersArray){
+        for(CustomLabel *customLabel in textLabelLayersArray){
+            [self.imgView addSubview:customLabel];
+        }
+    }
+    
 	[self.view addSubview:imgView];
 
     [moreLayersButton setBackgroundImage:[UIImage imageNamed:@"07_addmore"] forState:UIControlStateNormal];
@@ -967,7 +1008,7 @@ int arrangeLayerIndex;
         //[tempLabel setBackgroundColor:[ UIColor colorWithWhite:1 alpha:0.4f]];
         [self.imgView bringSubviewToFront:[[self textLabelLayersArray] objectAtIndex:arrangeLayerIndex]];
 
-        NSLog(@"Text Index: %@", str);
+        //NSLog(@"Text Index: %@", str);
         
     }else if([tag hasPrefix:@"222"]){
         symbolTouchFlag = NO;
@@ -988,7 +1029,7 @@ int arrangeLayerIndex;
         //[tempImgView setBackgroundColor:[ UIColor colorWithWhite:1 alpha:0.4f]];
         [self.imgView bringSubviewToFront:[[self photoLayersArray] objectAtIndex:arrangeLayerIndex]];
 
-        NSLog(@"Photo Index: %@", str);
+        //NSLog(@"Photo Index: %@", str);
         
     } else if([tag hasPrefix:@"333"]){
         symbolTouchFlag = YES;
@@ -1009,7 +1050,7 @@ int arrangeLayerIndex;
         //[tempImgView setBackgroundColor:[ UIColor colorWithWhite:1 alpha:0.4f]];
         [self.imgView bringSubviewToFront:[[self symbolLayersArray] objectAtIndex:arrangeLayerIndex]];
 
-        NSLog(@"Symbol Index: %@", str);
+        //NSLog(@"Symbol Index: %@", str);
         
     } else if([tag hasPrefix:@"444"]){
         symbolTouchFlag = NO;
@@ -1030,7 +1071,7 @@ int arrangeLayerIndex;
         //[tempImgView setBackgroundColor:[ UIColor colorWithWhite:1 alpha:0.4f]];
         [self.imgView bringSubviewToFront:[[self iconLayersArray] objectAtIndex:arrangeLayerIndex]];
 
-        NSLog(@"Icon Index: %@", str);
+        //NSLog(@"Icon Index: %@", str);
         
     }
     
@@ -1604,6 +1645,7 @@ int arrangeLayerIndex;
 		
 		[[picker parentViewController] dismissModalViewControllerAnimated:YES];
 		UIImage *testImage = [img retain];
+        selectedTemplate = testImage;
 		[self.imgView setImage:testImage] ;
 	}
 	else if(imgPickerFlag == 2){
@@ -1700,6 +1742,7 @@ int arrangeLayerIndex;
 		
 		//[[self.imgPicker parentViewController] dismissModalViewControllerAnimated:YES];
 		UIImage *testImage = [selectedImage retain];
+        selectedTemplate = testImage;
 		[self.imgView setImage:testImage] ;
 	}
 	else if(self.imgPickerFlag == 2){
@@ -1767,6 +1810,7 @@ int arrangeLayerIndex;
         UIImage *img = [UIImage imageWithCGImage:imageRef];
         CGImageRelease(imageRef);
         
+        selectedTemplate = img;
         [self.imgView setImage:img];
         [self dismissViewControllerAnimated:YES completion:nil];
 	}
@@ -2841,7 +2885,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         //}
 
         if(textLabelLayersArray){
-            NSLog(@"Text Layers %d", [textLabelLayersArray count]);
+            //NSLog(@"Text Layers %d", [textLabelLayersArray count]);
 
             for(int text=0; text<[textLabelLayersArray count]; text++){
                 
@@ -2857,14 +2901,14 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
                 [layerButton addSubview:label];
                 layerButton.tag = [[NSString stringWithFormat:@"%@%d",@"111",text] integerValue];
                 
-                NSLog(@"%d", layerButton.tag);
+                //NSLog(@"%d", layerButton.tag);
                 
                 [layerScrollView addSubview:layerButton];
             }
         }
 
         if(photoLayersArray){
-            NSLog(@"Photo Layers %d", [photoLayersArray count]);
+            //NSLog(@"Photo Layers %d", [photoLayersArray count]);
             
             for(int photo=0; photo<[photoLayersArray count]; photo++){
                 
@@ -2882,7 +2926,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
             }
         }
         if(symbolLayersArray){
-            NSLog(@"Symbol Layers %d", [symbolLayersArray count]);
+            //NSLog(@"Symbol Layers %d", [symbolLayersArray count]);
             for(int symbol=0; symbol<[symbolLayersArray count]; symbol++){
                 
                 UIImageView *img1 = (UIImageView *) [symbolLayersArray objectAtIndex:symbol];
@@ -2899,7 +2943,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
             }
         }
         if(iconLayersArray){
-            NSLog(@"Icon Layers %d", [iconLayersArray count]);
+            //NSLog(@"Icon Layers %d", [iconLayersArray count]);
             for(int icon=0; icon<[iconLayersArray count]; icon++){
                 
                 UIImageView *img1 = (UIImageView *) [iconLayersArray objectAtIndex:icon];
@@ -3502,34 +3546,47 @@ UIScrollView *layerScrollView = nil;
 	NSString *finalImgDetailWritePath;
 
 	/************************ CREATE UNIQUE NAME FOR IMAGE ***********************************/
-	if(files == nil)
-	{
-		finalImgWritePath = [folderPath stringByAppendingString:@"/IMG_0.jpg"];
-        finalImgDetailWritePath = [folderPath stringByAppendingString:@"/IMG_0.txt"];
+    
+    // Not -1 means it is in Edit mode and we already have flyer number
+    if(flyerNumber != -1){
+    
+        finalImgWritePath = [folderPath stringByAppendingString:[NSString stringWithFormat:@"/IMG_%d.jpg", flyerNumber]];
+        finalImgDetailWritePath = [folderPath stringByAppendingString:[NSString stringWithFormat:@"/IMG_%d.txt", flyerNumber]];
+        largestImgCount = flyerNumber;
+        
+        newImgName = [NSString stringWithFormat:@"/IMG_%d.jpg",largestImgCount];
 
-	}
-	else
-	{
-		NSAutoreleasePool* ap = [[NSAutoreleasePool alloc] init];
-		for(int i = 0 ; i < [files count];i++)
-		{
-			NSString *lastFileName = [files objectAtIndex:i];
-			NSLog(lastFileName);
-			lastFileName = [lastFileName stringByReplacingOccurrencesOfString:@".jpg" withString:@""];
-			lastFileName = [lastFileName stringByReplacingOccurrencesOfString:@"IMG_" withString:@""];
-			imgCount = [lastFileName intValue];
-			if(imgCount > largestImgCount){
-				largestImgCount = imgCount;
-			}
-			
-		}
-		[ap release];
-		newImgName = [NSString stringWithFormat:@"/IMG_%d.jpg",++largestImgCount];
-		finalImgWritePath = [folderPath stringByAppendingString:newImgName];
-		NSString *newImgDetailName = [NSString stringWithFormat:@"/IMG_%d.txt",largestImgCount];
-		finalImgDetailWritePath = [folderPath stringByAppendingString:newImgDetailName];
-
-	}
+    } else {
+    
+        if(files == nil)
+        {
+            finalImgWritePath = [folderPath stringByAppendingString:@"/IMG_0.jpg"];
+            finalImgDetailWritePath = [folderPath stringByAppendingString:@"/IMG_0.txt"];
+            
+        }
+        else
+        {
+            NSAutoreleasePool* ap = [[NSAutoreleasePool alloc] init];
+            for(int i = 0 ; i < [files count];i++)
+            {
+                NSString *lastFileName = [files objectAtIndex:i];
+                //NSLog(lastFileName);
+                lastFileName = [lastFileName stringByReplacingOccurrencesOfString:@".jpg" withString:@""];
+                lastFileName = [lastFileName stringByReplacingOccurrencesOfString:@"IMG_" withString:@""];
+                imgCount = [lastFileName intValue];
+                if(imgCount > largestImgCount){
+                    largestImgCount = imgCount;
+                }
+                
+            }
+            [ap release];
+            newImgName = [NSString stringWithFormat:@"/IMG_%d.jpg",++largestImgCount];
+            finalImgWritePath = [folderPath stringByAppendingString:newImgName];
+            NSString *newImgDetailName = [NSString stringWithFormat:@"/IMG_%d.txt",largestImgCount];
+            finalImgDetailWritePath = [folderPath stringByAppendingString:newImgDetailName];
+            
+        }
+    }
 	/************************ END OF CREATE UNIQUE NAME FOR IMAGE ***********************************/
 
 	NSString *imgPath = [NSString pathWithComponents:[NSArray arrayWithObjects:[NSString stringWithString:[finalImgWritePath stringByExpandingTildeInPath]], nil]];
@@ -3537,10 +3594,175 @@ UIScrollView *layerScrollView = nil;
 		[[NSFileManager defaultManager] createDirectoryAtPath:folderPath attributes:nil];
 	}
     
+    // Save flyer in pieces to make it editable later
+    [self saveFlyerInPieces:finalImgDetailWritePath flyerFolder:folderPath flyerNumber:largestImgCount];
+	
+    // Save flyer details
+    [self saveFlyerDetails:finalImgDetailWritePath];
+	
+    // Save states of all supported social media
+    if(files){
+        [self saveSocialStates:folderPath imageName:newImgName];
+    }else{
+        [self saveSocialStates:folderPath imageName:@"/IMG_0.jpg"];
+    }
+    
+    [aHUD.loadingLabel setText:@"Saved"];
+	[NSTimer scheduledTimerWithTimeInterval:0.4f target:self selector:@selector(killHUD) userInfo:nil repeats:NO];
+
+	NSData *imgData = UIImagePNGRepresentation(screenImage);
+	[[NSFileManager defaultManager] createFileAtPath:imgPath contents:imgData attributes:nil];
+	return imgData;
+}
+
+-(void)createDirectoryAtPath:(NSString *)directory{
+	if (![[NSFileManager defaultManager] fileExistsAtPath:directory isDirectory:NULL]) {
+		[[NSFileManager defaultManager] createDirectoryAtPath:directory attributes:nil];
+	}
+}
+
+/*
+ *Save flyer in pieces to make it editable later
+ */
+-(void)saveFlyerInPieces:(NSString *)filePath flyerFolder:(NSString *)flyerFolder flyerNumber:(int)flyerNumber{
+    
+    if(flyerNumber == -1)
+        flyerNumber = 0;
+    
+    NSString *piecesFile = [filePath stringByReplacingOccurrencesOfString:@".txt" withString:@".pieces"];
+    NSMutableDictionary *detailDictionary = [[NSMutableDictionary alloc] init];
+
+    // Create Template direcrory if not created
+    NSString *templateFolderPath = [NSString stringWithFormat:@"%@/Template/", flyerFolder];
+    NSString *templateIndexFolderPath = [NSString stringWithFormat:@"%@/%d", templateFolderPath, flyerNumber];
+    [self createDirectoryAtPath:templateFolderPath];
+    [self createDirectoryAtPath:templateIndexFolderPath];
+        
+    // Create Photo direcrory if not created
+    NSString *photoFolderPath = [NSString stringWithFormat:@"%@/Photo/", flyerFolder];
+    NSString *photoIndexFolderPath = [NSString stringWithFormat:@"%@/%d", photoFolderPath, flyerNumber];
+    [self createDirectoryAtPath:photoFolderPath];
+    [self createDirectoryAtPath:photoIndexFolderPath];
+
+    // Create Symbol direcrory if not created
+    NSString *symbolFolderPath = [NSString stringWithFormat:@"%@/Symbol/", flyerFolder];
+    NSString *symbolIndexFolderPath = [NSString stringWithFormat:@"%@/%d", symbolFolderPath, flyerNumber];
+    [self createDirectoryAtPath:symbolFolderPath];
+    [self createDirectoryAtPath:symbolIndexFolderPath];
+    
+    // Create Icon direcrory if not created
+    NSString *iconFolderPath = [NSString stringWithFormat:@"%@/Icon/", flyerFolder];
+    NSString *iconIndexFolderPath = [NSString stringWithFormat:@"%@/%d", iconFolderPath, flyerNumber];
+    [self createDirectoryAtPath:iconFolderPath];
+    [self createDirectoryAtPath:iconIndexFolderPath];
+    
+
+    // Store selected template
+    NSMutableDictionary *templateDetailDictionary = [[NSMutableDictionary alloc] init];
+    
+    NSString *finalTemplatePath = [templateIndexFolderPath stringByAppendingString:[NSString stringWithFormat:@"/template.jpg"]];
+    NSData *imgData = UIImagePNGRepresentation(selectedTemplate);
+    [[NSFileManager defaultManager] createFileAtPath:finalTemplatePath contents:imgData attributes:nil];
+    
+    [templateDetailDictionary setObject:finalTemplatePath forKey:@"image"];
+    [detailDictionary setObject:templateDetailDictionary forKey:[NSString stringWithFormat:@"Template"]];
+
+    int index = 0;
+    // Get and Save label information
+    for(CustomLabel *labelToStore in [self textLabelLayersArray]){
+        
+        CGFloat red = 0.0, green = 0.0, blue = 0.0, alpha =0.0;
+        [labelToStore.textColor getRed:&red green:&green blue:&blue alpha:&alpha];
+        
+        CGFloat borderRed = 0.0, borderGreen = 0.0, borderBlue = 0.0, borderAlpha =0.0;
+        UIColor* borderColor = [UIColor colorWithCGColor:labelToStore.layer.borderColor];
+        [borderColor getRed:&borderRed green:&borderGreen blue:&borderBlue alpha:&borderAlpha];
+        
+        NSMutableDictionary *textDetailDictionary = [[NSMutableDictionary alloc] init];
+        [textDetailDictionary setObject:labelToStore.text forKey:@"text"];
+        [textDetailDictionary setObject:labelToStore.font.fontName forKey:@"fontname"];
+        [textDetailDictionary setObject:[NSString stringWithFormat:@"%f", labelToStore.font.pointSize] forKey:@"fontsize"];
+        [textDetailDictionary setObject:[NSString stringWithFormat:@"%f, %f, %f", red, green, blue] forKey:@"textcolor"];
+        [textDetailDictionary setObject:[NSString stringWithFormat:@"%f, %f, %f", borderRed, borderGreen, borderBlue] forKey:@"textbordercolor"];
+        [textDetailDictionary setObject:[NSString stringWithFormat:@"%f", labelToStore.frame.origin.x] forKey:@"x"];
+        [textDetailDictionary setObject:[NSString stringWithFormat:@"%f", labelToStore.frame.origin.y] forKey:@"y"];
+        [textDetailDictionary setObject:[NSString stringWithFormat:@"%f", labelToStore.frame.size.width] forKey:@"width"];
+        [textDetailDictionary setObject:[NSString stringWithFormat:@"%f", labelToStore.frame.size.height] forKey:@"height"];
+        
+        [detailDictionary setObject:textDetailDictionary forKey:[NSString stringWithFormat:@"Text-%d", index++]];
+    }
+
+    index = 0;
+    // Get and Save photo information
+    for(UIImageView *photoToStore in [self photoLayersArray]){
+        
+        NSMutableDictionary *photoDetailDictionary = [[NSMutableDictionary alloc] init];
+        
+		NSString *finalPhotoPath = [photoIndexFolderPath stringByAppendingString:[NSString stringWithFormat:@"/%d.jpg", index]];
+        NSData *imgData = UIImagePNGRepresentation(photoToStore.image);
+        [[NSFileManager defaultManager] createFileAtPath:finalPhotoPath contents:imgData attributes:nil];
+
+        [photoDetailDictionary setObject:finalPhotoPath forKey:@"image"];
+        [photoDetailDictionary setObject:[NSString stringWithFormat:@"%f", photoToStore.frame.origin.x] forKey:@"x"];
+        [photoDetailDictionary setObject:[NSString stringWithFormat:@"%f", photoToStore.frame.origin.y] forKey:@"y"];
+        [photoDetailDictionary setObject:[NSString stringWithFormat:@"%f", photoToStore.frame.size.width] forKey:@"width"];
+        [photoDetailDictionary setObject:[NSString stringWithFormat:@"%f", photoToStore.frame.size.height] forKey:@"height"];
+        
+        [detailDictionary setObject:photoDetailDictionary forKey:[NSString stringWithFormat:@"Photo-%d", index++]];
+    }
+    
+    index = 0;
+    // Get and Save symbol information
+    for(UIImageView *symbolToStore in [self symbolLayersArray]){
+        
+        NSMutableDictionary *symbolDetailDictionary = [[NSMutableDictionary alloc] init];
+        
+		NSString *finalSymbolPath = [symbolIndexFolderPath stringByAppendingString:[NSString stringWithFormat:@"/%d.jpg", index]];
+        NSData *imgData = UIImagePNGRepresentation(symbolToStore.image);
+        [[NSFileManager defaultManager] createFileAtPath:finalSymbolPath contents:imgData attributes:nil];
+        
+        [symbolDetailDictionary setObject:finalSymbolPath forKey:@"image"];
+        [symbolDetailDictionary setObject:[NSString stringWithFormat:@"%f", symbolToStore.frame.origin.x] forKey:@"x"];
+        [symbolDetailDictionary setObject:[NSString stringWithFormat:@"%f", symbolToStore.frame.origin.y] forKey:@"y"];
+        [symbolDetailDictionary setObject:[NSString stringWithFormat:@"%f", symbolToStore.frame.size.width] forKey:@"width"];
+        [symbolDetailDictionary setObject:[NSString stringWithFormat:@"%f", symbolToStore.frame.size.height] forKey:@"height"];
+        
+        [detailDictionary setObject:symbolDetailDictionary forKey:[NSString stringWithFormat:@"Symbol-%d", index++]];
+    }
+    
+    index = 0;
+    // Get and Save icon information
+    for(UIImageView *iconToStore in [self iconLayersArray]){
+        
+        NSMutableDictionary *iconDetailDictionary = [[NSMutableDictionary alloc] init];
+
+		NSString *finalIconPath = [iconIndexFolderPath stringByAppendingString:[NSString stringWithFormat:@"/%d.jpg", index]];
+        NSData *imgData = UIImagePNGRepresentation(iconToStore.image);
+        [[NSFileManager defaultManager] createFileAtPath:finalIconPath contents:imgData attributes:nil];
+        
+        [iconDetailDictionary setObject:finalIconPath forKey:@"image"];
+        [iconDetailDictionary setObject:[NSString stringWithFormat:@"%f", iconToStore.frame.origin.x] forKey:@"x"];
+        [iconDetailDictionary setObject:[NSString stringWithFormat:@"%f", iconToStore.frame.origin.y] forKey:@"y"];
+        [iconDetailDictionary setObject:[NSString stringWithFormat:@"%f", iconToStore.frame.size.width] forKey:@"width"];
+        [iconDetailDictionary setObject:[NSString stringWithFormat:@"%f", iconToStore.frame.size.height] forKey:@"height"];
+        
+        [detailDictionary setObject:iconDetailDictionary forKey:[NSString stringWithFormat:@"Icon-%d", index++]];
+    }
+
+    //NSLog(@"DetailDictionary: %@", detailDictionary);
+    //NSLog(@"Folder: %@", piecesFile);
+    [detailDictionary writeToFile:piecesFile atomically:YES];
+}
+
+/*
+ *Save flyer details
+ */
+-(void)saveFlyerDetails:(NSString *)finalImgDetailWritePath{
+    
 	NSMutableArray *array = [[[NSMutableArray alloc] init] autorelease];
     [array addObject:@""];
     if([[self textLabelLayersArray] count] > 0){
-        NSLog(@"%@", ((CustomLabel*)[[self textLabelLayersArray] objectAtIndex:0]).text);
+        //NSLog(@"%@", ((CustomLabel*)[[self textLabelLayersArray] objectAtIndex:0]).text);
         [array addObject:((CustomLabel*)[[self textLabelLayersArray] objectAtIndex:0]).text];
     }else{
         [array addObject:@""];
@@ -3553,8 +3775,13 @@ UIScrollView *layerScrollView = nil;
     [array addObject:dateString];
     
     [array writeToFile:finalImgDetailWritePath atomically:YES];
-	
-    // Save states of all supported social media
+}
+
+/*
+ *Save states of all supported social media
+ */
+-(void)saveSocialStates:(NSString *)directory imageName:(NSString *)imageName{
+
 	NSMutableArray *socialArray = [[[NSMutableArray alloc] init] autorelease];
     [socialArray addObject:@"0"]; //Facebook
     [socialArray addObject:@"0"]; //Twitter
@@ -3565,37 +3792,16 @@ UIScrollView *layerScrollView = nil;
     [socialArray addObject:@"0"]; //SMS
     [socialArray addObject:@"0"]; //Clipboard
     
-    if(files){
-        [self saveSocialStates:folderPath imageName:newImgName stateArray:socialArray];
-    }else{
-        [self saveSocialStates:folderPath imageName:@"/IMG_0.jpg" stateArray:socialArray];
-    }
-    
-    [aHUD.loadingLabel setText:@"Saved"];
-	[NSTimer scheduledTimerWithTimeInterval:0.4f target:self selector:@selector(killHUD) userInfo:nil repeats:NO];
-
-	NSData *imgData = UIImagePNGRepresentation(screenImage);
-	//[imgData writeToFile:imgPath atomically:YES];
-	//(BOOL)createFileAtPath:(NSString *)path contents:(NSData *)data attributes:(NSDictionary *)attr
-	[[NSFileManager defaultManager] createFileAtPath:imgPath contents:imgData attributes:nil];
-	//UIImage *tempImage = [[UIImage alloc]initWithData:imgData];
-	return imgData;
-}
-
--(void)saveSocialStates:(NSString *)directory imageName:(NSString *)imageName stateArray:(NSArray *)stateArray{
-
 	NSString *socialFlyerPath = [NSString stringWithFormat:@"%@/Social/", directory];
-	//NSString *folderPath = [NSString pathWithComponents:[NSArray arrayWithObjects:[NSString stringWithString:[socialFlyerPath stringByStandardizingPath]],nil]];
     
     NSString *str = [imageName stringByReplacingOccurrencesOfString:@".jpg" withString:@".soc"];
 	NSString *finalImgWritePath = [socialFlyerPath stringByAppendingString:str];
    
-	//NSString *imgPath = [NSString pathWithComponents:[NSArray arrayWithObjects:[NSString stringWithString:[finalImgWritePath stringByExpandingTildeInPath]], nil]];
 	if (![[NSFileManager defaultManager] fileExistsAtPath:socialFlyerPath isDirectory:NULL]) {
 		[[NSFileManager defaultManager] createDirectoryAtPath:socialFlyerPath attributes:nil];
 	}
     
-    [stateArray writeToFile:finalImgWritePath atomically:YES];
+    [socialArray writeToFile:finalImgWritePath atomically:YES];
 }
 
 #pragma mark - InappPurchase

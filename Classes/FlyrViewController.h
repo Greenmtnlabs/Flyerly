@@ -24,4 +24,7 @@
 @property(nonatomic,retain) NSMutableArray *iconArray;
 @property(nonatomic,retain) MyNavigationBar *navBar;
 @property(nonatomic,retain) IBOutlet UITableView *tView;
+
++(NSString *)getFlyerNumberFromPath:(NSString *)imagePath;
+
 @end

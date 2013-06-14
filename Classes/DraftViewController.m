@@ -17,6 +17,7 @@
 #import "JSON.h"
 #import "ShareProgressView.h"
 #import "AddFriendsController.h"
+#import "FlyerOverlayController.h"
 
 static ShareProgressView *flickrPogressView;
 //static ShareProgressView *facebookPogressView;
@@ -39,6 +40,9 @@ static ShareProgressView *flickrPogressView;
 	[self.navigationController pushViewController:svController animated:YES];
 }
 
+/*
+ * pop to root view / main screen
+ */
 -(void) callMenu {
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
@@ -48,57 +52,67 @@ static ShareProgressView *flickrPogressView;
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationDuration:0.2f];
     
+    // Init loading view
     loadingView = nil;
 	loadingView = [[LoadingView alloc]init];
 
+    // Set facebook as per settings
     if([[NSUserDefaults standardUserDefaults] stringForKey:@"facebookSetting"]){
         [facebookButton setSelected:YES];
     }else{
         [facebookButton setSelected:NO];
     }
     
+    // Set twitter as per settings
     if([[NSUserDefaults standardUserDefaults] stringForKey:@"twitterSetting"]){
         [twitterButton setSelected:YES];
     }else{
         [twitterButton setSelected:NO];
     }
     
+    // Set instagram as per settings
     if([[NSUserDefaults standardUserDefaults] stringForKey:@"instagramSetting"]){
         [instagramButton setSelected:YES];
     }else{
         [instagramButton setSelected:NO];
     }
 
+    // Set email as per settings
     if([[NSUserDefaults standardUserDefaults] stringForKey:@"emailSetting"]){
         [emailButton setSelected:YES];
     }else{
         [emailButton setSelected:NO];
     }
 
+    // Set sms as per settings
     if([[NSUserDefaults standardUserDefaults] stringForKey:@"smsSetting"]){
         [smsButton setSelected:YES];
     }else{
         [smsButton setSelected:NO];
     }
     
+    // Set clip as per settings
     if([[NSUserDefaults standardUserDefaults] stringForKey:@"clipSetting"]){
         [clipboardButton setSelected:YES];
     }else{
         [clipboardButton setSelected:NO];
     }
 
+    // Set tumblr as per settings
     if([[NSUserDefaults standardUserDefaults] stringForKey:@"tumblrSetting"]){
         [tumblrButton setSelected:YES];
     }else{
         [tumblrButton setSelected:NO];
     }
 
+    // Set flickr as per settings
     if([[NSUserDefaults standardUserDefaults] stringForKey:@"flickrSetting"]){
         [flickrButton setSelected:YES];
     }else{
         [flickrButton setSelected:NO];
     }
 
+    // Add observers for 1) Flickr sharing success. 2) Flickr sharing failure. 3) Closing shring view
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(flickrSharingSuccess) name:FlickrSharingSuccessNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(flickrSharingFailure) name:FlickrSharingFailureNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closeSharingProgressSuccess:) name:CloseShareProgressNotification object:nil];
@@ -112,6 +126,7 @@ static ShareProgressView *flickrPogressView;
 	//self.navigationItem.title = @"Social Flyer";
 	self.navigationController.navigationBarHidden = NO;
     
+    // If navigating from Create flyer then show menu button on left 
     if(fromPhotoController){
         self.navigationItem.hidesBackButton = YES;
         
@@ -122,29 +137,38 @@ static ShareProgressView *flickrPogressView;
         UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
         [self.navigationItem setLeftBarButtonItem:rightBarButton];
     }
-    
-    //UILabel *addBackgroundLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
-    //[addBackgroundLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:8.5]];
-    //[addBackgroundLabel setTextColor:[MyCustomCell colorWithHexString:@"008ec0"]];
-    //[addBackgroundLabel setBackgroundColor:[UIColor clearColor]];
-    //[addBackgroundLabel setText:@"Share flyer"];
-    //UIBarButtonItem *barLabel = [[UIBarButtonItem alloc] initWithCustomView:addBackgroundLabel];
+
+    // Set title on bar
     self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Share flyer"];
 
+    // Set font and size on camera roll text
     [saveToCameraRollLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
 
+    // Setup flyer edit button
+    UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 19, 19)];
+    [editButton addTarget:self action:@selector(onEdit:) forControlEvents:UIControlEventTouchUpInside];
+    [editButton setBackgroundImage:[UIImage imageNamed:@"pencil_blue"] forState:UIControlStateNormal];
+
+    // Get index from flyer image path
+    NSString *index = [FlyrViewController getFlyerNumberFromPath:imageFileName];
+    editButton.tag = [index intValue];
+    UIBarButtonItem *rightEditBarButton = [[UIBarButtonItem alloc] initWithCustomView:editButton];
+    
+    // Setup flyer share button
     UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 33)];
     [shareButton addTarget:self action:@selector(share) forControlEvents:UIControlEventTouchUpInside];
     [shareButton setBackgroundImage:[UIImage imageNamed:@"share"] forState:UIControlStateNormal];
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
-    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
+    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,rightEditBarButton,nil]];
 
-	//self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
 	[UIView commitAnimations];
-	//imgView = [[UIImageView alloc]initWithImage:selectedFlyerImage];
-	//[self.view addSubview:imgView];
-	[imgView setImage:selectedFlyerImage];
+    [imgView addTarget:self action:@selector(showFlyerOverlay:) forControlEvents:UIControlEventTouchUpInside];
+	[imgView setImage:selectedFlyerImage forState:UIControlStateNormal];
 
+    NSString *flyerNumber = [FlyrViewController getFlyerNumberFromPath:imageFileName];
+    imgView.tag = [flyerNumber intValue];
+    
+    // Setup title text field
     [titleView setReturnKeyType:UIReturnKeyDone];
     [titleView addTarget:self action:@selector(textFieldFinished:) forControlEvents: UIControlEventEditingDidEndOnExit];
     [titleView setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
@@ -156,6 +180,7 @@ static ShareProgressView *flickrPogressView;
         [titleView setText:selectedFlyerTitle];
     }
     
+    // Setup description text view
     [descriptionView setFont:[UIFont fontWithName:@"Signika-Regular" size:10]];
     [descriptionView setTextColor:[UIColor grayColor]];
     [descriptionView setReturnKeyType:UIReturnKeyDone];
@@ -192,20 +217,43 @@ static ShareProgressView *flickrPogressView;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-	navBar= [[MyNavigationBar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
+	/*navBar= [[MyNavigationBar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
 	[self.view addSubview:navBar];
 	[navBar show:@"SocialFlyr" left:@"Browser" right:@"Share"];
 	[self.view bringSubviewToFront:navBar];
 	
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg"] forBarMetrics:UIBarMetricsDefault];
-
 	[navBar.leftButton removeTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
 	[navBar.rightButton removeTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
 	
 	[navBar.leftButton addTarget:self action:@selector(callFlyrView) forControlEvents:UIControlEventTouchUpInside];
 	[navBar.rightButton addTarget:self action:@selector(loadDistributeView) forControlEvents:UIControlEventTouchUpInside];
-	navBar.alpha = ALPHA1;
+	navBar.alpha = ALPHA1;*/
 	
+     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg"] forBarMetrics:UIBarMetricsDefault];
+}
+
+-(void)showFlyerOverlay:(id)sender{
+    
+    // cast to button
+    UIButton *cellImageButton = (UIButton *) sender;
+    // Get image on button
+    UIImage *flyerImage = [cellImageButton imageForState:UIControlStateNormal];
+    // Create Modal trnasparent view
+    UIView *modalView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    [modalView setBackgroundColor:[MyCustomCell colorWithHexString:@"161616"]];
+    modalView.alpha = 0.75;
+    self.navigationController.navigationBar.alpha = 0.35;
+    
+    // Create overlay controller
+    FlyerOverlayController *overlayController = [[FlyerOverlayController alloc]initWithNibName:@"FlyerOverlayController" bundle:nil image:flyerImage modalView:modalView];
+    // set its parent
+    [overlayController setViews:self];
+    //NSLog(@"showFlyerOverlay Tag: %d", cellImageButton.tag);
+    overlayController.flyerNumber = cellImageButton.tag;
+    
+    // Add modal view and overlay view
+    [self.view addSubview:modalView];
+    [self.view addSubview:overlayController.view];
 }
 
 #pragma text field and text view delegates
@@ -219,6 +267,9 @@ static ShareProgressView *flickrPogressView;
     }
 }
 
+/*
+ * Called when clicked on description text view
+ */
 - (void)textViewTapped:(id)sender {
     if([descriptionView.text isEqualToString:AddCaptionText]){
         [descriptionView setText:@""];
@@ -226,6 +277,9 @@ static ShareProgressView *flickrPogressView;
     }
 }
 
+/*
+ * Called when end editing on text view
+ */
 -(void)textViewDidEndEditing:(UITextView *)textView{
     if([descriptionView.text isEqualToString:@""]){
         [descriptionView setText:AddCaptionText];
@@ -236,6 +290,9 @@ static ShareProgressView *flickrPogressView;
     // [sender resignFirstResponder];
 }
 
+/*
+ * Called when clicked on title text field
+ */
 - (void)textFieldTapped:(id)sender {
     if([titleView.text isEqualToString:NameYourFlyerText]){
         [titleView setText:@""];
@@ -243,6 +300,9 @@ static ShareProgressView *flickrPogressView;
     }
 }
 
+/*
+ * Called when end editing on text field
+ */
 -(void)textFieldDidEndEditing:(UITextField *)textField{
     if([titleView.text isEqualToString:@""]){
         [titleView setText:NameYourFlyerText];
@@ -251,15 +311,36 @@ static ShareProgressView *flickrPogressView;
 
 #pragma on click buttons
 
+/*
+ * Pass flyer number and controller to open flyer in editable mode
+ */
+-(void)onEdit:(UIButton *)button{
+
+    // Pass flyer number and controller to open flyer in editable mode
+    [FlyerOverlayController openFlyerInEditableMode:button.tag parentViewController:self];
+}
+
+/*
+ * Share flyer on selected networks
+ */
 -(void)share{
     
+    // Check internet connectivity
     if([AddFriendsController connected]){
         
+        // Remove sharing view if on the screen
         [self remoAllSharingViews];
+        
+        // Set default height for progress parent view
         [self setDefaultProgressViewHeight];
+        
+        // Set 0 sharing netwroks
         countOfSharingNetworks = 0;
+        
+        // Set progress view hidden
         [progressView setHidden:NO];
         
+        // Check if any network in selected
         if([self isAnyNetworkSelected]){
             //loadingView =[LoadingView loadingViewInView:self.view  text:@"Sharing..."];
             
@@ -317,6 +398,9 @@ static ShareProgressView *flickrPogressView;
     }
 }
 
+/*
+ * Check for network selection
+ */
 -(BOOL)isAnyNetworkSelected{
     
     if([facebookButton isSelected])
@@ -339,6 +423,9 @@ static ShareProgressView *flickrPogressView;
     return false;
 }
 
+/*
+ * Called when facebook button is pressed
+ */
 -(IBAction)onClickFacebookButton{
     
     if([facebookButton isSelected]){
@@ -357,6 +444,9 @@ static ShareProgressView *flickrPogressView;
     }
 }
 
+/*
+ * Called when twitter button is pressed
+ */
 -(IBAction)onClickTwitterButton{
     
     if([twitterButton isSelected]){
@@ -372,6 +462,9 @@ static ShareProgressView *flickrPogressView;
     }
 }
 
+/*
+ * Called when instagram button is pressed
+ */
 -(IBAction)onClickInstagramButton{
     if([instagramButton isSelected]){
         [instagramButton setSelected:NO];
@@ -380,6 +473,9 @@ static ShareProgressView *flickrPogressView;
     }
 }
 
+/*
+ * Called when email button is pressed
+ */
 -(IBAction)onClickEmailButton{
     if([emailButton isSelected]){
         [emailButton setSelected:NO];
@@ -388,6 +484,9 @@ static ShareProgressView *flickrPogressView;
     }
 }
 
+/*
+ * Called when tumblr button is pressed
+ */
 -(IBAction)onClickTumblrButton{
     if([tumblrButton isSelected]){
         [tumblrButton setSelected:NO];
@@ -428,6 +527,9 @@ static ShareProgressView *flickrPogressView;
     }
 }
 
+/*
+ * Called when flickr button is pressed
+ */
 -(IBAction)onClickFlickrButton{
     if([flickrButton isSelected]){
         [flickrButton setSelected:NO];
@@ -453,6 +555,9 @@ static ShareProgressView *flickrPogressView;
     }
 }
 
+/*
+ * Called when sms button is pressed
+ */
 -(IBAction)onClickSMSButton{
     if([smsButton isSelected]){
         [smsButton setSelected:NO];
@@ -463,6 +568,9 @@ static ShareProgressView *flickrPogressView;
     }
 }
 
+/*
+ * Called when clipboard button is pressed
+ */
 -(IBAction)onClickClipboardButton{
     if([clipboardButton isSelected]){
         [clipboardButton setSelected:NO];
@@ -481,23 +589,6 @@ static ShareProgressView *flickrPogressView;
                                           otherButtonTitles:nil];
     [alert show];
     [alert release];
-}
-
--(void)searchFlickrPhotos:(NSString *)text
-{
-    
-    // Build the string to call the Flickr API
-	NSString *urlString = [NSString stringWithFormat:@"http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=%@&tags=%@&per_page=15&format=json&nojsoncallback=1", FlickrAPIKey, text];
-    
-    // Create NSURL string from formatted string
-	NSURL *url = [NSURL URLWithString:urlString];
-    
-    // Setup and start async download
-    NSURLRequest *request = [[NSURLRequest alloc] initWithURL: url];
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-    [connection release];
-    [request release];
-    
 }
 
 -(void)showAlert{
@@ -649,6 +740,9 @@ static ShareProgressView *flickrPogressView;
 
 #pragma Sharing code
 
+/*
+ * Share on MMS
+ */
 -(void)shareOnMMS{
     
     /*
@@ -669,6 +763,9 @@ static ShareProgressView *flickrPogressView;
     }
 }
 
+/*
+ * Share on Email
+ */
 -(void)shareOnEmail{
 
     MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
@@ -684,10 +781,10 @@ static ShareProgressView *flickrPogressView;
         // Fill out the email body text
         NSData *imageData = UIImagePNGRepresentation(selectedFlyerImage);
         NSString *base64String = [imageData base64EncodedString];        
-        [emailBody appendString:[NSString stringWithFormat:@"<p><b><img src='data:image/png;base64,%@'></b></p>",base64String]];
+        [emailBody appendString:[NSString stringWithFormat:@"<p><img src='data:image/png;base64,%@'></p>",base64String]];
         [emailBody appendString:@"<p><font size='4'><a href = 'http://www.flyer.ly'>Download flyerly & share a flyer</a></font></p>"];
         [emailBody appendString:@"</body></html>"];
-        //NSLog(@"%@",emailBody);
+        NSLog(@"%@",emailBody);
         
         //mail composer window
         [picker setMessageBody:emailBody isHTML:YES];
@@ -716,6 +813,9 @@ static ShareProgressView *flickrPogressView;
     }
 }
 
+/*
+ * Share on Instagram
+ */
 -(void)shareOnInstagram{
 
      CGRect rect = CGRectMake(0 ,0 , 0, 0);
@@ -750,6 +850,9 @@ static ShareProgressView *flickrPogressView;
     */
 }
 
+/*
+ * Check whether instagram app is installed or not
+ */
 -(BOOL)canOpenDocumentWithURL:(NSURL*)url inView:(UIView*)view {
     BOOL canOpen = NO;
     UIDocumentInteractionController* docController = [UIDocumentInteractionController
@@ -764,6 +867,9 @@ static ShareProgressView *flickrPogressView;
     return canOpen;
 }
 
+/*
+ * Share on Tumblr
+ */
 -(void)shareOnTumblr{
 
     [tumblrPogressView.statusText setText:@"Sharing..."];
@@ -813,6 +919,9 @@ static ShareProgressView *flickrPogressView;
     }];
 }
 
+/*
+ * Share on Flickr
+ */
 -(void)shareOnFlickr{
     
     [flickrPogressView.statusText setText:@"Sharing..."];
@@ -831,6 +940,9 @@ static ShareProgressView *flickrPogressView;
     return interactionController;
 }
 
+/*
+ * Share on Facebook
+ */
 -(void)shareOnFacebook{
 
     [facebookPogressView.statusText setText:@"Sharing..."];
@@ -848,6 +960,9 @@ static ShareProgressView *flickrPogressView;
                                      andDelegate:self];
 }
 
+/*
+ * Share on Twitter
+ */
 - (void)shareOnTwitter {
     
     [twitterPogressView.statusText setText:@"Sharing..."];
@@ -1293,7 +1408,14 @@ static ShareProgressView *flickrPogressView;
 	[self dismissNavBar:YES];
     
     // If text changed then save it again
-    if(![selectedFlyerTitle isEqualToString:titleView.text] || ![selectedFlyerDescription isEqualToString:descriptionView.text]){
+
+    if(
+       (![selectedFlyerTitle isEqualToString:titleView.text] && ![titleView.text isEqualToString:NameYourFlyerText])
+       
+       ||
+       
+       (![selectedFlyerDescription isEqualToString:descriptionView.text]  && ![descriptionView.text isEqualToString:AddCaptionText])){
+        
         [self updateFlyerDetail];
     }
 }

@@ -13,20 +13,24 @@
 	UILabel * nameLabel;
 	UILabel * descriptionLabel;
 	UILabel * dateLabel;
-	UIImageView *cellImage;
+	UIButton *cellImage;
 	UIImageView *indicator;
     NSString *filePath;
     UILabel *createLabel;
+    
+    int flyerNumber;
 }
+
 @property(nonatomic, retain) UILabel *createLabel;
 @property(nonatomic, retain) UILabel * nameLabel;
 @property(nonatomic, retain) UILabel * descriptionLabel;
 @property(nonatomic, retain) UILabel * dateLabel;
-@property(nonatomic, retain) UIImageView *cellImage;
+@property(nonatomic, retain) UIButton *cellImage;
 @property(nonatomic, retain) UIImageView *indicator;
 @property(nonatomic, retain) NSString *filePath;
+@property int flyerNumber;
 
-- (void) addToCell: (NSString *)title:  (NSString *)description: (NSString *)created: (UIImage *)image: (NSString *)imagePath;
+- (void) addToCell: (NSString *)title:  (NSString *)description: (NSString *)created: (UIImage *)image: (NSString*)imagePath:  (int)flyerNumberParam;
 +(UIColor*)colorWithHexString:(NSString*)hex;
 
 @end
