@@ -103,8 +103,8 @@ BOOL firstTableLoad = YES;
         return;
     }
 
-    loadingView =[LoadingView loadingViewInView:self.view  text:@"Loading..."];
-    loadingViewFlag = YES;
+    //loadingView =[LoadingView loadingViewInView:self.view  text:@"Loading..."];
+    //loadingViewFlag = YES;
 
     selectedTab = CONTACTS_TAB;
     [self setUnselectTab:sender];
@@ -115,6 +115,10 @@ BOOL firstTableLoad = YES;
         // Reload table data after all the contacts get loaded
         contactsArray = nil;
         contactsArray = contactBackupArray;
+        
+        // Filter contacts on new tab selection
+        [self onSearchClick:nil];
+        
         [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
         //[self.uiTableView reloadData];
 
@@ -260,6 +264,10 @@ BOOL firstTableLoad = YES;
             // Reload table data after all the contacts get loaded
             facebookArray = nil;
             facebookArray = facebookBackupArray;
+            
+            // Filter contacts on new tab selection
+            [self onSearchClick:nil];
+            
             [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
             //[self.uiTableView reloadData];
             
@@ -326,8 +334,8 @@ BOOL firstTableLoad = YES;
                 
                 self.facebookArray = [[NSMutableArray alloc] init];
                 
-                [appDelegate.facebook requestWithGraphPath:@"me/friends?fields=name,picture.height(35).width(35).type(small)&limit=100&offset=0" andDelegate:self];
-                //[appDelegate.facebook requestWithGraphPath:@"me/friends?fields=name,picture.height(35).width(35).type(small)" andDelegate:self];
+                //[appDelegate.facebook requestWithGraphPath:@"me/friends?fields=name,picture.height(35).width(35).type(small)&limit=100&offset=0" andDelegate:self];
+                [appDelegate.facebook requestWithGraphPath:@"me/friends?fields=name,picture.height(35).width(35).type(small)" andDelegate:self];
                 
             } else {
                 
@@ -371,17 +379,21 @@ int totalCount = 0;
     
     facebookBackupArray = nil;
     facebookBackupArray = facebookArray;
+    
+    // Filter contacts on new tab selection
+    [self onSearchClick:nil];
+
     [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
     //[self.uiTableView reloadData];
     
-    if(count > 0){
+    /*if(count > 0){
         FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-        [appDelegate.facebook requestWithGraphPath:[NSString stringWithFormat:@"me/friends?fields=name,picture.height(35).width(35).type(small)&limit=100&offset=%d", totalCount] andDelegate:self];
-        //[appDelegate.facebook requestWithGraphPath:@"me/friends?fields=name,picture.height(35).width(35).type(small)" andDelegate:self];
+        //[appDelegate.facebook requestWithGraphPath:[NSString stringWithFormat:@"me/friends?fields=name,picture.height(35).width(35).type(small)&limit=100&offset=%d", totalCount] andDelegate:self];
+        [appDelegate.facebook requestWithGraphPath:@"me/friends?fields=name,picture.height(35).width(35).type(small)" andDelegate:self];
 
         //loadingView =[LoadingView loadingViewInView:self.view text:@"Loading..."];
         
-    } else {
+    } else */{
         totalCount = 0;
     
         for (UIView *subview in self.view.subviews) {
@@ -412,7 +424,12 @@ int totalCount = 0;
             // Reload table data after all the contacts get loaded
             twitterArray = nil;
             twitterArray = twitterBackupArray;
+
+            // Filter contacts on new tab selection
+            [self onSearchClick:nil];
+            
             [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+            
             //[self.uiTableView reloadData];
             
         } else{
@@ -477,7 +494,7 @@ int totalCount = 0;
     // Build a twitter request
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     [params setObject:cursor forKey:@"cursor"];
-    [params setObject:@"20" forKey:@"count"];
+    //[params setObject:@"20" forKey:@"count"];
     [params setObject:[acct identifier] forKey:@"user_id"];
     
     TWRequest *getRequest = [[TWRequest alloc] initWithURL:
@@ -517,11 +534,18 @@ int totalCount = 0;
                 [self.twitterArray addObject:dOfPerson];
             }
 
+            twitterBackupArray = nil;
+            twitterBackupArray = twitterArray;
+            
+            // Filter contacts
+            [self performSelectorOnMainThread:@selector(onSearchClick:) withObject:nil waitUntilDone:NO];
+            //[self onSearchClick:nil];
+
             [uiTableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
             nextCursor = [followers objectForKey:@"next_cursor"];
         }
 
-        twitterBackupArray = nil;
+        /*twitterBackupArray = nil;
         twitterBackupArray = twitterArray;
         if([nextCursor compare:[NSDecimalNumber zero]] == NSOrderedSame){
             
@@ -531,7 +555,7 @@ int totalCount = 0;
 
             //[[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
             [self cursoredTwitterContacts:[NSString stringWithFormat:@"%@", nextCursor] arrayOfAccounts:arrayOfAccounts];
-        }
+        }*/
 
         NSLog(@"Twitter response, HTTP response: %i", [urlResponse statusCode]);
     }];
@@ -608,12 +632,12 @@ int totalCount = 0;
         if(selectedTab == 0){
             
             // send tweets to contacts
-            [self sendSMS:@"I'm using the flyerly app to create and share flyers on the go! flyer.ly" recipients:identifiers];
+            [self sendSMS:@"I'm using the flyerly app to create and share flyers on the go! Flyer.ly/Invite" recipients:identifiers];
             
         }else if(selectedTab == 2){
             // Send tweets to twitter contacts
             for(NSString *follower in identifiers){
-                [self sendTwitterMessage:@"I'm using the flyerly app to create and share flyers on the go! flyer.ly" screenName:follower];
+                [self sendTwitterMessage:@"I'm using the @flyerlyapp to create and share flyers on the go! Flyer.ly/Twitter" screenName:follower];
             }
             
             [self showAlert:@"Invitation Sent!" message:@"You have successfully invited your friends to join flyerly."];
@@ -658,7 +682,7 @@ int totalCount = 0;
 
     [self performPublishAction:^{
         
-        [FBRequestConnection startForPostStatusUpdate:@"I'm using the flyerly app to create and share flyers on the go! flyer.ly" place:@"144479625584966" tags:identifiers completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+        [FBRequestConnection startForPostStatusUpdate:@"I'm using the flyerly app to create and share flyers on the go! Flyer.ly/Facebook" place:@"144479625584966" tags:identifiers completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
             
             NSLog(@"New Result: %@", result);
             NSLog(@"Error: %@", error);
@@ -987,14 +1011,22 @@ int totalCount = 0;
 }
 
 - (IBAction)onSearchClick:(UIButton *)sender{
-    [searchTextField resignFirstResponder];
+    
+    if([searchTextField canResignFirstResponder])
+    {
+        [searchTextField resignFirstResponder];
+    }
+    
     [self textField:searchTextField shouldChangeCharactersInRange:NSMakeRange(0, 0) replacementString:@""];
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
 
     if([string isEqualToString:@"\n"]){
-        [searchTextField resignFirstResponder];
+        if([searchTextField canResignFirstResponder])
+        {
+            [searchTextField resignFirstResponder];
+        }
         return NO;
     }
     

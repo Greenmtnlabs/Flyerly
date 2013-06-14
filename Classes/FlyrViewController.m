@@ -110,7 +110,7 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
     [super viewDidLoad];
 
     if(IS_IPHONE_5){
-        tView = [[UITableView alloc]initWithFrame:CGRectMake(0, 44, 320, HEIGHT_IPHONE_5) style:UITableViewStyleGrouped];
+        tView = [[UITableView alloc]initWithFrame:CGRectMake(0, 44, 320, 510) style:UITableViewStyleGrouped];
     }else{
         tView = [[UITableView alloc]initWithFrame:CGRectMake(0, 44, 320, 416) style:UITableViewStyleGrouped];
     }
