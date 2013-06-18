@@ -453,17 +453,17 @@ int counter = 0;
                         ALAssetRepresentation *representation = [alAsset defaultRepresentation];
                         
                         if(imageCounter == 0){
-                            [cell.image1 setImage:[UIImage imageWithCGImage:[alAsset aspectRatioThumbnail]]];
+                            [cell.image1 setImage:[UIImage imageWithCGImage:[alAsset thumbnail]]];
                             cell.imageName1 = [representation url];
                             //[cell.image1 setImage:[self thumbnailForAsset:alAsset maxPixelSize:90]];
                         } else if(imageCounter == 1){
-                            [cell.image2 setImage:[UIImage imageWithCGImage:[alAsset aspectRatioThumbnail]]];
+                            [cell.image2 setImage:[UIImage imageWithCGImage:[alAsset thumbnail]]];
                             cell.imageName2 = [representation url];
                         } else if(imageCounter == 2){
-                            [cell.image3 setImage:[UIImage imageWithCGImage:[alAsset aspectRatioThumbnail]]];
+                            [cell.image3 setImage:[UIImage imageWithCGImage:[alAsset thumbnail]]];
                             cell.imageName3 = [representation url];
                         } else if(imageCounter == 3){
-                            [cell.image4 setImage:[UIImage imageWithCGImage:[alAsset aspectRatioThumbnail]]];
+                            [cell.image4 setImage:[UIImage imageWithCGImage:[alAsset thumbnail]]];
                             cell.imageName4 = [representation url];
                         }
                         

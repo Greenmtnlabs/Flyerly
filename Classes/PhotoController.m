@@ -31,7 +31,7 @@
 //@synthesize widthScrollView,heightScrollView
 @synthesize cameraTabButton,photoTabButton,widthTabButton,heightTabButton,photoImgView,symbolImgView,iconImgView;
 @synthesize photoTouchFlag,symbolTouchFlag,iconTouchFlag, lableTouchFlag,lableLocation,warningAlert;
-@synthesize moreLayersLabel, moreLayersButton, takePhotoButton, cameraRollButton, takePhotoLabel, cameraRollLabel, imgPickerFlag,finalImgWritePath, addMoreLayerOrSaveFlyerLabel;
+@synthesize moreLayersLabel, moreLayersButton, takePhotoButton, cameraRollButton, takePhotoLabel, cameraRollLabel, imgPickerFlag,finalImgWritePath, addMoreLayerOrSaveFlyerLabel, takeOrAddPhotoLabel;
 
 int selectedAddMoreLayerTab = -1;
 const int ADD_MORE_TEXT_TAB = 0;
@@ -127,6 +127,7 @@ int flyerNumber = -1;
         cameraRollLabel = [[UILabel alloc] initWithFrame:CGRectMake(220, 370, 80, 30)];
         templateScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(-320, 413,320,130)];
         addMoreLayerOrSaveFlyerLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 405, 310, 43)];
+        takeOrAddPhotoLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 405, 310, 43)];
     }else{
         imgView = [[UIImageView alloc]initWithFrame:CGRectMake(5, 44, 310, 309)];
         templateBckgrnd = [[UIImageView alloc]initWithFrame:CGRectMake(0, 395, 320, 65)];
@@ -138,6 +139,7 @@ int flyerNumber = -1;
         cameraRollLabel = [[UILabel alloc] initWithFrame:CGRectMake(220, 359, 80, 30)];
         templateScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(-320, 395,320,60)];
         addMoreLayerOrSaveFlyerLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 354, 310, 43)];
+        takeOrAddPhotoLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 354, 310, 43)];
     }
 	imgView.image = selectedTemplate;
     
@@ -187,6 +189,13 @@ int flyerNumber = -1;
     [addMoreLayerOrSaveFlyerLabel setTextColor:[UIColor grayColor]];
     [addMoreLayerOrSaveFlyerLabel setTextAlignment:UITextAlignmentCenter];
     [self.view addSubview:addMoreLayerOrSaveFlyerLabel];
+    
+    [takeOrAddPhotoLabel setText:@"TAKE OR ADD PHOTO & RESIZE"];
+    [takeOrAddPhotoLabel setBackgroundColor:[UIColor clearColor]];
+    [takeOrAddPhotoLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:18]];
+    [takeOrAddPhotoLabel setTextColor:[UIColor grayColor]];
+    [takeOrAddPhotoLabel setTextAlignment:UITextAlignmentCenter];
+    [self.view addSubview:takeOrAddPhotoLabel];
     
     [takePhotoLabel setText:@"Take a Photo"];
     [takePhotoLabel setBackgroundColor:[UIColor clearColor]];
@@ -1877,7 +1886,8 @@ int arrangeLayerIndex;
 +(UILabel *)setTitleViewWithTitle:(NSString *)title{
     UILabel *label = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
     label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont boldSystemFontOfSize:18.0];
+    //label.font = [UIFont boldSystemFontOfSize:18.0];
+    [label setFont:[UIFont fontWithName:@"Symbol" size:18]];
     label.textAlignment = NSTextAlignmentCenter;
     //label.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
     //label.textColor = [MyCustomCell colorWithHexString:@"008ec0"];
@@ -1925,6 +1935,7 @@ int arrangeLayerIndex;
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarMenuButton,leftBarHelpButton,nil]];
     
     [self hideAddMoreAndSaveLabel];
+    [self hideTakeOrAddPhotoLabel];
     [self hideAddMoreButton];
     [self showPictureTab];
     [self hideAddMoreTab];
@@ -2013,6 +2024,13 @@ int arrangeLayerIndex;
     [self.addMoreLayerOrSaveFlyerLabel setHidden:NO];
 }
 
+-(void)hideTakeOrAddPhotoLabel{
+    [self.takeOrAddPhotoLabel setHidden:YES];
+}
+-(void)showTakeOrAddPhotoLabel{
+    [self.takeOrAddPhotoLabel setHidden:NO];
+}
+
 -(void)cancelLayer{
 
     if(selectedAddMoreLayerTab == ADD_MORE_TEXT_TAB){
@@ -2069,6 +2087,7 @@ int arrangeLayerIndex;
     [self hidePictureTab];
     [self hideAddMoreButton];
     [self hideAddMoreAndSaveLabel];
+    [self hideTakeOrAddPhotoLabel];
     [self hideAddMoreTab];
 
     UITextView *lastTextView = msgTextView;
@@ -2150,6 +2169,7 @@ int arrangeLayerIndex;
     [self hidePictureTab];
     [self hideAddMoreButton];
     [self hideAddMoreAndSaveLabel];
+    [self hideTakeOrAddPhotoLabel];
 
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationDuration:0.4f];
@@ -2263,6 +2283,7 @@ int arrangeLayerIndex;
     [self hideAddMoreButton];
     [self hideAddMoreAndSaveLabel];
     [self hideAddMoreTab];
+    [self showTakeOrAddPhotoLabel];
 
     CALayer * l = [[[self  photoLayersArray] lastObject] layer];
     [l setMasksToBounds:YES];
@@ -2370,6 +2391,7 @@ int arrangeLayerIndex;
     [self showAddMoreAndSaveLabel];
     [self hidePictureTab];
     [self hideAddMoreButton];
+    [self hideTakeOrAddPhotoLabel];
     
     /*
 	CALayer * l = [photoImgView layer];
@@ -2508,6 +2530,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     [self hidePictureTab];
     [self hideAddMoreButton];
     [self hideAddMoreAndSaveLabel];
+    [self hideTakeOrAddPhotoLabel];
 
 	fontTabButton.alpha = ALPHA0;
 	colorTabButton.alpha = ALPHA0;
@@ -2744,6 +2767,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Add layers"];
         selectedAddMoreLayerTab = ADD_MORE_TEXT_TAB;
         [self hideAddMoreAndSaveLabel];
+        [self hideTakeOrAddPhotoLabel];
 
         symbolTouchFlag= NO;
         photoTouchFlag = NO;
@@ -2767,6 +2791,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Add layers"];
         selectedAddMoreLayerTab = ADD_MORE_PHOTO_TAB;
         [self hideAddMoreAndSaveLabel];
+        [self showTakeOrAddPhotoLabel];
 
         symbolTouchFlag= NO;
         iconTouchFlag = NO;
@@ -2802,6 +2827,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Add layers"];
         selectedAddMoreLayerTab = ADD_MORE_SYMBOL_TAB;
         [self hideAddMoreAndSaveLabel];
+        [self hideTakeOrAddPhotoLabel];
 
         symbolTouchFlag= YES;
         photoTouchFlag= NO;
@@ -2835,6 +2861,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Add layers"];
         selectedAddMoreLayerTab = ADD_MORE_ICON_TAB;
         [self hideAddMoreAndSaveLabel];
+        [self hideTakeOrAddPhotoLabel];
 
         lableTouchFlag = NO;
         symbolTouchFlag= NO;
@@ -2869,6 +2896,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         selectedAddMoreLayerTab = ARRANGE_LAYER_TAB;
         [self removeBordersFromAllLayers];
         [self hideAddMoreAndSaveLabel];
+        [self hideTakeOrAddPhotoLabel];
 
         lableTouchFlag = NO;
         symbolTouchFlag= NO;
@@ -3154,7 +3182,9 @@ UIScrollView *layerScrollView = nil;
              newMsgTextView.textAlignment = UITextAlignmentCenter;
              [[self textEditLayersArray] addObject:newMsgTextView];*/
             
-            CustomLabel *newMsgLabel = [[CustomLabel alloc]initWithFrame:CGRectMake(0, 30, 320, 500)];
+            //CustomLabel *newMsgLabel = [[CustomLabel alloc]initWithFrame:CGRectMake(0, 30, 320, 200)];
+            CustomLabel *newMsgLabel = [[CustomLabel alloc]initWithFrame:CGRectMake(20, 50, 280, 150)];
+            
             newMsgLabel.backgroundColor = [UIColor clearColor];
             newMsgLabel.textColor = [UIColor blackColor];
             newMsgLabel.textAlignment = UITextAlignmentCenter;

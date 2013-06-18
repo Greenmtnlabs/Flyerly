@@ -365,6 +365,7 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
 - (void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
 	[self dismissNavBar:YES];
+    self.navigationController.navigationBar.alpha = 1.0;
 }
 
 - (void)dealloc {

@@ -25,7 +25,7 @@
 @implementation LauchViewController
 
 @synthesize ptController,spController,tpController,createFlyrLabel,savedFlyrLabel,inviteFriendLabel,addFriendsController;
-@synthesize firstFlyer, secondFlyer, thirdFlyer, fourthFlyer, fifthFlyer, sixthFlyer, photoArray, photoDetailArray, createFlyrButton, savedFlyrButton, inviteFriendButton;
+@synthesize firstFlyer, secondFlyer, thirdFlyer, fourthFlyer, photoArray, photoDetailArray, createFlyrButton, savedFlyrButton, inviteFriendButton;
 @synthesize loadingView;
 @synthesize facebookLikeView=_facebookLikeView;
 @synthesize likeButton,followButton;
@@ -93,7 +93,7 @@
     self.navigationController.navigationBarHidden = NO;
 
     // Set the background image on navigation bar
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_with_logo"] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_with_logo2"] forBarMetrics:UIBarMetricsDefault];
     
     [self.navigationItem setHidesBackButton:YES];
     // Create right bar button
@@ -107,12 +107,12 @@
     // Set left bar items
     //[self.navigationItem setLeftBarButtonItems: [self leftBarItems]];       
     
-    firstFlyer.image = [UIImage imageNamed:@"pinned_flyer.png"];
-    secondFlyer.image = [UIImage imageNamed:@"pinned_flyer.png"];
-    thirdFlyer.image = [UIImage imageNamed:@"pinned_flyer.png"];
-    fourthFlyer.image = [UIImage imageNamed:@"pinned_flyer.png"];
-    fifthFlyer.image = [UIImage imageNamed:@"pinned_flyer.png"];
-    sixthFlyer.image = [UIImage imageNamed:@"pinned_flyer.png"];
+    firstFlyer.image = [UIImage imageNamed:@"pinned_flyer2.png"];
+    secondFlyer.image = [UIImage imageNamed:@"pinned_flyer2.png"];
+    thirdFlyer.image = [UIImage imageNamed:@"pinned_flyer2.png"];
+    fourthFlyer.image = [UIImage imageNamed:@"pinned_flyer2.png"];
+    //fifthFlyer.image = [UIImage imageNamed:@"pinned_flyer2.png"];
+    //sixthFlyer.image = [UIImage imageNamed:@"pinned_flyer2.png"];
 
 	[self filesByModDate];
 }
@@ -267,14 +267,16 @@
                 break;
             }
             
-        } else if(i  == 4){
+        }
+        
+        /*else if(i  == 4){
             fifthFlyer.image = [LauchViewController imageWithImage:currentFlyerImage scaledToSize:size];
             fifthFlyer.tag = i;
         } else if(i  == 5){
             sixthFlyer.image = [LauchViewController imageWithImage:currentFlyerImage scaledToSize:size];
             sixthFlyer.tag = i;
             break;
-        }
+        }*/
 	}
 
 	for(int j =0;j< [detailSortedFiles count];j++)
@@ -385,11 +387,12 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
         [self showFlyerDetail:thirdFlyer];
     } else if ([touch view] == fourthFlyer) {
         [self showFlyerDetail:fourthFlyer];
-    } else if ([touch view] == fifthFlyer) {
+    }
+    /*else if ([touch view] == fifthFlyer) {
         [self showFlyerDetail:fifthFlyer];
     } else if ([touch view] == sixthFlyer) {
         [self showFlyerDetail:sixthFlyer];
-    }
+    }*/
     
 }
 

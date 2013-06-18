@@ -14,6 +14,7 @@
 #import "FBRequestConnection.h"
 #import "LoadingView.h"
 #import "PhotoController.h"
+#import "HelpController.h"
 
 @implementation AddFriendsController
 @synthesize uiTableView, contactsArray, deviceContactItems, contactsLabel, facebookLabel, twitterLabel, doneLabel, selectAllLabel, unSelectAllLabel, inviteLabel, contactsButton, facebookButton, twitterButton, loadingView, searchTextField, facebookArray, twitterArray;
@@ -36,6 +37,13 @@ BOOL firstTableLoad = YES;
     loadingView = nil;
 	loadingView = [[LoadingView alloc]init];
     [self.navigationItem setRightBarButtonItems: [self rightBarItems]];
+
+    // Create left bar help button
+    UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 13, 16)];
+    [helpButton addTarget:self action:@selector(loadHelpController) forControlEvents:UIControlEventTouchUpInside];
+    [helpButton setBackgroundImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
+    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:helpButton];
+    [self.navigationItem setLeftBarButtonItem:leftBarButton];
 
     // set borders on the table
     [[self.uiTableView layer] setBorderColor:[[UIColor grayColor] CGColor]];
@@ -87,6 +95,11 @@ BOOL firstTableLoad = YES;
     
     
     return [NSMutableArray arrayWithObjects:menuBarButton,nil];
+}
+
+-(void)loadHelpController{
+    HelpController *helpController = [[HelpController alloc]initWithNibName:@"HelpController" bundle:nil];
+    [self.navigationController pushViewController:helpController animated:NO];
 }
 
 -(IBAction)goBack{
@@ -358,7 +371,8 @@ int totalCount = 0;
 
     for (NSDictionary *friendData in [result objectForKey:@"data"]) {
         
-        NSURL *imageURL = [NSURL URLWithString:[[[friendData objectForKey:@"picture"] objectForKey:@"data"] objectForKey:@"url"]];
+        NSString *imageURL = [[[friendData objectForKey:@"picture"] objectForKey:@"data"] objectForKey:@"url"];
+        //NSURL *imageURL = [NSURL URLWithString:[[[friendData objectForKey:@"picture"] objectForKey:@"data"] objectForKey:@"url"]];
         //UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
 
         // Here we will get the facebook contacts
@@ -911,7 +925,7 @@ int totalCount = 0;
         dispatch_async(dispatchQueue, ^(void)
                        {
                            dispatch_sync(dispatch_get_main_queue(), ^{
-                               [cell setImagesURL:imageName1 name2:imageName2 selectedTab:selectedTab];
+                               [cell setImagesURL:imageName1 name2:imageName2];
                                //[[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
                                //[activity stopAnimating];
                                //[activty setHidden:YES];
@@ -1090,6 +1104,7 @@ int totalCount = 0;
 -(void)viewWillAppear:(BOOL)animated{
 
     //loadingViewFlag = NO;
+    self.navigationItem.leftItemsSupplementBackButton = YES;
     
     // Load device contacts
     [self loadLocalContacts:self.contactsButton];

@@ -39,6 +39,6 @@
 -(void)setImages:(UIImage *)image1 image2:(UIImage *)image2;
 - (IBAction)onLeftCheckBoxClick:(UIButton *)sender;
 - (IBAction)onRightCheckBoxClick:(UIButton *)sender;
--(void)setImagesURL:(NSString *)name1 name2:(NSString *)name2 selectedTab:(int)selectedTab;
+-(void)setImagesURL:(NSString *)name1 name2:(NSString *)name2;
 
 @end
