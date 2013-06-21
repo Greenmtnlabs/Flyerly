@@ -12,7 +12,8 @@
 #define ALPHA0 0
 #define ALPHA1 0.75
 
-#define GROW_ANIMATION_DURATION_SECONDS 0.15  
+#define RADIANS(degrees) ((degrees * M_PI) / 180.0)
+#define GROW_ANIMATION_DURATION_SECONDS 0.15
 #define SHRINK_ANIMATION_DURATION_SECONDS 0.15
 #define SOURCETYPE UIImagePickerControllerSourceTypePhotoLibrary
 #define DOCSFOLDER [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"]

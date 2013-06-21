@@ -112,6 +112,8 @@
     
     EBPurchase *demoPurchase;
     BOOL isPurchased;
+    BOOL deleteMode;
+    BOOL doStopWobble;
     
 	NSInteger fontScrollWidth;
 	NSInteger fontScrollHeight;
@@ -119,6 +121,8 @@
 	NSInteger colorScrollHeight;
     NSInteger borderScrollWidth;
 	NSInteger borderScrollHeight;
+    
+    UIScrollView *layerScrollView;
 }
 
 @property (nonatomic, retain) MyNavigationBar *navBar;
@@ -150,6 +154,7 @@
 @property (nonatomic, retain) UIScrollView *fontBorderScrollView;
 //@property (nonatomic,retain) UIScrollView *heightScrollView;
 //@property (nonatomic,retain) UIScrollView *widthScrollView;
+@property (nonatomic, retain) UIScrollView *layerScrollView;
 
 @property (nonatomic, retain) UIScrollView *iconScrollView;
 @property (nonatomic, retain) UIScrollView *symbolScrollView;
