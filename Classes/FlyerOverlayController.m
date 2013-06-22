@@ -47,6 +47,10 @@
     parentViewController.navigationController.navigationBar.alpha = 1;
 }
 
+-(void)viewWillDisappear:(BOOL)animated{
+    parentViewController.navigationController.navigationBar.alpha = 1;
+}
+
 /*
  * open flyer in editable mode
  * this is required on sharing screen as well so defining it as class member +

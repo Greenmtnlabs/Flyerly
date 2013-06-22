@@ -109,6 +109,21 @@
 									<int key="NSfFlags">16</int>
 								</object>
 							</object>
+							<object class="IBUIImageView" id="115093860">
+								<reference key="NSNextResponder" ref="82517146"/>
+								<int key="NSvFlags">268</int>
+								<string key="NSFrame">{{0, 152}, {310, 38}}</string>
+								<reference key="NSSuperview" ref="82517146"/>
+								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="748439247"/>
+								<string key="NSReuseIdentifierKey">_NS:9</string>
+								<bool key="IBUIUserInteractionEnabled">NO</bool>
+								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+								<object class="NSCustomResource" key="IBUIImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">save_bg.png</string>
+								</object>
+							</object>
 							<object class="IBUILabel" id="748439247">
 								<reference key="NSNextResponder" ref="82517146"/>
 								<int key="NSvFlags">268</int>
@@ -142,21 +157,6 @@
 								</object>
 								<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 								<double key="preferredMaxLayoutWidth">170</double>
-							</object>
-							<object class="IBUIImageView" id="115093860">
-								<reference key="NSNextResponder" ref="82517146"/>
-								<int key="NSvFlags">268</int>
-								<string key="NSFrame">{{0, 152}, {310, 38}}</string>
-								<reference key="NSSuperview" ref="82517146"/>
-								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="748439247"/>
-								<string key="NSReuseIdentifierKey">_NS:9</string>
-								<bool key="IBUIUserInteractionEnabled">NO</bool>
-								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<object class="NSCustomResource" key="IBUIImage">
-									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">save_bg.png</string>
-								</object>
 							</object>
 							<object class="IBUITextField" id="936694743">
 								<reference key="NSNextResponder" ref="82517146"/>
@@ -770,7 +770,6 @@
 							<reference ref="148079549"/>
 							<reference ref="1031333957"/>
 							<reference ref="936694743"/>
-							<reference ref="115093860"/>
 							<reference ref="814186568"/>
 							<reference ref="800476656"/>
 							<reference ref="1019700499"/>
@@ -780,6 +779,7 @@
 							<reference ref="804817656"/>
 							<reference ref="74786743"/>
 							<reference ref="748439247"/>
+							<reference ref="115093860"/>
 							<reference ref="221462498"/>
 						</object>
 						<reference key="parent" ref="191373211"/>
@@ -1044,11 +1044,9 @@
 							<string>descriptionView</string>
 							<string>emailButton</string>
 							<string>facebookButton</string>
-							<string>facebookPogressView</string>
 							<string>flickrButton</string>
 							<string>imgView</string>
 							<string>instagramButton</string>
-							<string>instagramPogressView</string>
 							<string>progressView</string>
 							<string>saveToCameraRollLabel</string>
 							<string>saveToRollSwitch</string>
@@ -1056,9 +1054,7 @@
 							<string>smsButton</string>
 							<string>titleView</string>
 							<string>tumblrButton</string>
-							<string>tumblrPogressView</string>
 							<string>twitterButton</string>
-							<string>twitterPogressView</string>
 						</object>
 						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1066,11 +1062,9 @@
 							<string>UITextView</string>
 							<string>UIButton</string>
 							<string>UIButton</string>
-							<string>ShareProgressView</string>
 							<string>UIButton</string>
 							<string>UIButton</string>
 							<string>UIButton</string>
-							<string>ShareProgressView</string>
 							<string>UIView</string>
 							<string>UILabel</string>
 							<string>UISwitch</string>
@@ -1078,9 +1072,7 @@
 							<string>UIButton</string>
 							<string>UITextField</string>
 							<string>UIButton</string>
-							<string>ShareProgressView</string>
 							<string>UIButton</string>
-							<string>ShareProgressView</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -1091,11 +1083,9 @@
 							<string>descriptionView</string>
 							<string>emailButton</string>
 							<string>facebookButton</string>
-							<string>facebookPogressView</string>
 							<string>flickrButton</string>
 							<string>imgView</string>
 							<string>instagramButton</string>
-							<string>instagramPogressView</string>
 							<string>progressView</string>
 							<string>saveToCameraRollLabel</string>
 							<string>saveToRollSwitch</string>
@@ -1103,9 +1093,7 @@
 							<string>smsButton</string>
 							<string>titleView</string>
 							<string>tumblrButton</string>
-							<string>tumblrPogressView</string>
 							<string>twitterButton</string>
-							<string>twitterPogressView</string>
 						</object>
 						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1126,10 +1114,6 @@
 								<string key="candidateClassName">UIButton</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">facebookPogressView</string>
-								<string key="candidateClassName">ShareProgressView</string>
-							</object>
-							<object class="IBToOneOutletInfo">
 								<string key="name">flickrButton</string>
 								<string key="candidateClassName">UIButton</string>
 							</object>
@@ -1140,10 +1124,6 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">instagramButton</string>
 								<string key="candidateClassName">UIButton</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">instagramPogressView</string>
-								<string key="candidateClassName">ShareProgressView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">progressView</string>
@@ -1174,94 +1154,14 @@
 								<string key="candidateClassName">UIButton</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">tumblrPogressView</string>
-								<string key="candidateClassName">ShareProgressView</string>
-							</object>
-							<object class="IBToOneOutletInfo">
 								<string key="name">twitterButton</string>
 								<string key="candidateClassName">UIButton</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">twitterPogressView</string>
-								<string key="candidateClassName">ShareProgressView</string>
 							</object>
 						</object>
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/DraftViewController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">ShareProgressView</string>
-					<string key="superclassName">UIView</string>
-					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">cancelPressed:</string>
-						<string key="NS.object.0">id</string>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<string key="NS.key.0">cancelPressed:</string>
-						<object class="IBActionInfo" key="NS.object.0">
-							<string key="name">cancelPressed:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</object>
-					<object class="NSMutableDictionary" key="outlets">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>cancelIcon</string>
-							<string>networkIcon</string>
-							<string>refreshIcon</string>
-							<string>statusIcon</string>
-							<string>statusText</string>
-						</object>
-						<object class="NSArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>UIButton</string>
-							<string>UIButton</string>
-							<string>UIButton</string>
-							<string>UIButton</string>
-							<string>UILabel</string>
-						</object>
-					</object>
-					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>cancelIcon</string>
-							<string>networkIcon</string>
-							<string>refreshIcon</string>
-							<string>statusIcon</string>
-							<string>statusText</string>
-						</object>
-						<object class="NSArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBToOneOutletInfo">
-								<string key="name">cancelIcon</string>
-								<string key="candidateClassName">UIButton</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">networkIcon</string>
-								<string key="candidateClassName">UIButton</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">refreshIcon</string>
-								<string key="candidateClassName">UIButton</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">statusIcon</string>
-								<string key="candidateClassName">UIButton</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">statusText</string>
-								<string key="candidateClassName">UILabel</string>
-							</object>
-						</object>
-					</object>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/ShareProgressView.h</string>
 					</object>
 				</object>
 			</object>

@@ -912,14 +912,21 @@ int flyerNumber = -1;
 	[imgView setImage:selectedTemplate];
 }
 
-
+/*
+ * Called when select a symbol
+ */
 -(void)selectSymbol:(id)sender
 {
     
+    // If not in delete mode then add a new frame for symbol
     if(!deleteMode){
         [self plusButtonClick];
+    }else{
+        deleteMode = NO;
+        doStopWobble = NO;
     }
     
+    // else update the selected index of symbol
     if([[self symbolLayersArray] count] > 0){
         
         // reset flags
@@ -944,13 +951,21 @@ int flyerNumber = -1;
     }
 }
 
+/*
+ * Called when select icon
+ */
 -(void)selectIcon:(id)sender
 {
     
+    // If not in delete mode then add a new frame for icon
     if(!deleteMode){
         [self plusButtonClick];
+    }else{
+        deleteMode = NO;
+        doStopWobble = NO;
     }
 
+    // else update the selected index of icon
     if([[self iconLayersArray] count] > 0){
         
         symbolTouchFlag = NO;
@@ -2076,6 +2091,11 @@ int arrangeLayerIndex;
     symbolTouchFlag= NO;
     iconTouchFlag = NO;
 
+    if(deleteMode){
+        deleteMode = NO;
+        doStopWobble = NO;
+    }
+
     self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Add Text"];
 
     UIButton *nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
@@ -2102,6 +2122,7 @@ int arrangeLayerIndex;
 	lastTextView.textColor = [UIColor blackColor];
 
     CustomLabel *lastLabelView = [[self textLabelLayersArray] objectAtIndex:arrangeLayerIndex];
+    selectedColor = lastLabelView.textColor;
 
 	lastTextView.backgroundColor = [ UIColor colorWithWhite:1 alpha:0.3f];
 	lastLabelView.alpha =ALPHA0;
@@ -2359,6 +2380,11 @@ int arrangeLayerIndex;
     [[[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(twoFingerPinch:)] autorelease];
     [[self view] addGestureRecognizer:twoFingerPinch];
     
+    if(deleteMode){
+        deleteMode = NO;
+        doStopWobble = NO;
+    }
+
 	lableTouchFlag = NO;
 	photoTouchFlag = YES;
     symbolTouchFlag= NO;
@@ -2955,13 +2981,22 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
                 UILongPressGestureRecognizer* longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onLongPress:)];
                 [layerButton addGestureRecognizer:longPressRecognizer];
                 
-                UIButton *crossButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 15, 15)];
-                [crossButton setBackgroundImage:[UIImage imageNamed:@"cross"] forState:UIControlStateNormal];
+                UIImage *image = [UIImage imageNamed:@"cross"];
+                image = [PhotoController imageWithImage:image scaledToSize:CGSizeMake(15, 15)];
+                UIImage *pencilImage = [UIImage imageNamed:@"pencil_icon"];
+                pencilImage = [PhotoController imageWithImage:pencilImage scaledToSize:CGSizeMake(15, 15)];
+
+                UIButton *crossButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 15, 40)];
+                [crossButton setImage:image forState:UIControlStateNormal];
                 [crossButton addTarget:self action:@selector(deleteLayer:) forControlEvents:UIControlEventTouchUpInside];
+                [crossButton setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
+                [crossButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
                 
-                UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(40, 0, 15, 15)];
-                [editButton setBackgroundImage:[UIImage imageNamed:@"pencil_icon"] forState:UIControlStateNormal];
+                UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(40, 0, 15, 40)];
+                [editButton setImage:pencilImage forState:UIControlStateNormal];
                 [editButton addTarget:self action:@selector(editLayer:) forControlEvents:UIControlEventTouchUpInside];
+                [editButton setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
+                [editButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
                 
                 // If delete mode is enabled then show cross button an wobble
                 if(deleteMode){
@@ -3002,13 +3037,22 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
                 UILongPressGestureRecognizer* longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onLongPress:)];
                 [layerButton addGestureRecognizer:longPressRecognizer];
                 
-                UIButton *crossButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 15, 15)];
-                [crossButton setBackgroundImage:[UIImage imageNamed:@"cross.png"] forState:UIControlStateNormal];
-                [crossButton addTarget:self action:@selector(deleteLayer:) forControlEvents:UIControlEventTouchUpInside];
+                UIImage *image = [UIImage imageNamed:@"cross"];
+                image = [PhotoController imageWithImage:image scaledToSize:CGSizeMake(15, 15)];
+                UIImage *pencilImage = [UIImage imageNamed:@"pencil_icon"];
+                pencilImage = [PhotoController imageWithImage:pencilImage scaledToSize:CGSizeMake(15, 15)];
 
-                UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(40, 0, 15, 15)];
-                [editButton setBackgroundImage:[UIImage imageNamed:@"pencil_icon"] forState:UIControlStateNormal];
+                UIButton *crossButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 15, 40)];
+                [crossButton setImage:image forState:UIControlStateNormal];
+                [crossButton addTarget:self action:@selector(deleteLayer:) forControlEvents:UIControlEventTouchUpInside];
+                [crossButton setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
+                [crossButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+
+                UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(40, 0, 15, 40)];
+                [editButton setImage:pencilImage forState:UIControlStateNormal];
                 [editButton addTarget:self action:@selector(editLayer:) forControlEvents:UIControlEventTouchUpInside];
+                [editButton setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
+                [editButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
                 
                 // If delete mode is enabled then show cross button an wobble
                 if(deleteMode){
@@ -3047,13 +3091,22 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
                 UILongPressGestureRecognizer* longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onLongPress:)];
                 [layerButton addGestureRecognizer:longPressRecognizer];
                 
-                UIButton *crossButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 15, 15)];
-                [crossButton setBackgroundImage:[UIImage imageNamed:@"cross.png"] forState:UIControlStateNormal];
+                UIImage *image = [UIImage imageNamed:@"cross"];
+                image = [PhotoController imageWithImage:image scaledToSize:CGSizeMake(15, 15)];
+                UIImage *pencilImage = [UIImage imageNamed:@"pencil_icon"];
+                pencilImage = [PhotoController imageWithImage:pencilImage scaledToSize:CGSizeMake(15, 15)];
+
+                UIButton *crossButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 15, 40)];
+                [crossButton setImage:image forState:UIControlStateNormal];
                 [crossButton addTarget:self action:@selector(deleteLayer:) forControlEvents:UIControlEventTouchUpInside];
+                [crossButton setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
+                [crossButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
                 
-                UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(40, 0, 15, 15)];
-                [editButton setBackgroundImage:[UIImage imageNamed:@"pencil_icon"] forState:UIControlStateNormal];
+                UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(40, 0, 15, 40)];
+                [editButton setImage:pencilImage forState:UIControlStateNormal];
                 [editButton addTarget:self action:@selector(editLayer:) forControlEvents:UIControlEventTouchUpInside];
+                [editButton setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
+                [editButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
                 
                 // If delete mode is enabled then show cross button an wobble
                 if(deleteMode){
@@ -3092,13 +3145,23 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
                 UILongPressGestureRecognizer* longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onLongPress:)];
                 [layerButton addGestureRecognizer:longPressRecognizer];
                 
-                UIButton *crossButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 15, 15)];
-                [crossButton setBackgroundImage:[UIImage imageNamed:@"cross.png"] forState:UIControlStateNormal];
-                [crossButton addTarget:self action:@selector(deleteLayer:) forControlEvents:UIControlEventTouchUpInside];
                 
-                UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(40, 0, 15, 15)];
-                [editButton setBackgroundImage:[UIImage imageNamed:@"pencil_icon"] forState:UIControlStateNormal];
+                UIImage *image = [UIImage imageNamed:@"cross"];
+                image = [PhotoController imageWithImage:image scaledToSize:CGSizeMake(15, 15)];
+                UIImage *pencilImage = [UIImage imageNamed:@"pencil_icon"];
+                pencilImage = [PhotoController imageWithImage:pencilImage scaledToSize:CGSizeMake(15, 15)];
+                
+                UIButton *crossButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 15, 40)];
+                [crossButton setImage:image forState:UIControlStateNormal];
+                [crossButton addTarget:self action:@selector(deleteLayer:) forControlEvents:UIControlEventTouchUpInside];
+                [crossButton setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
+                [crossButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+                
+                UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(40, 0, 15, 40)];
+                [editButton setImage:pencilImage forState:UIControlStateNormal];
                 [editButton addTarget:self action:@selector(editLayer:) forControlEvents:UIControlEventTouchUpInside];
+                [editButton setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
+                [editButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
                 
                 // If delete mode is enabled then show cross button an wobble
                 if(deleteMode){
@@ -3566,13 +3629,15 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
             
             //CustomLabel *newMsgLabel = [[CustomLabel alloc]initWithFrame:CGRectMake(0, 30, 320, 200)];
             CustomLabel *newMsgLabel = [[CustomLabel alloc]initWithFrame:CGRectMake(20, 50, 280, 150)];
-            
+
             newMsgLabel.backgroundColor = [UIColor clearColor];
             newMsgLabel.textColor = [UIColor blackColor];
             newMsgLabel.textAlignment = UITextAlignmentCenter;
             [self.imgView addSubview:newMsgLabel];
+
+            arrangeLayerIndex = [[self textLabelLayersArray] count];
             [[self textLabelLayersArray] addObject:newMsgLabel];
-            
+
             [self callWrite];
             
         } else if(selectedAddMoreLayerTab == ADD_MORE_SYMBOL_TAB){
@@ -3585,6 +3650,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
             
             UIImageView *newSymbolImgView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 90, 70)];
             newSymbolImgView.tag = symbolLayerCount++;
+            arrangeLayerIndex = [[self symbolLayersArray] count];
 
             CALayer * l = [newSymbolImgView layer];
             [l setMasksToBounds:YES];
@@ -3605,7 +3671,8 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
             
             UIImageView *newIconImgView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 90, 70)];
             newIconImgView.tag = iconLayerCount++;
-            
+            arrangeLayerIndex = [[self iconLayersArray] count];
+
             CALayer * l = [newIconImgView layer];
             [l setMasksToBounds:YES];
             [l setCornerRadius:10];
@@ -3627,7 +3694,8 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
             
             UIImageView *newPhotoImgView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 220, 200)];
             newPhotoImgView.tag = photoLayerCount++;
-            
+            arrangeLayerIndex = [[self photoLayersArray] count];
+
             CALayer * l = [newPhotoImgView layer];
             [l setMasksToBounds:YES];
             [l setCornerRadius:10];

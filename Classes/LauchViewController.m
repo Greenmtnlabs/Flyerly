@@ -91,6 +91,7 @@
 -(void)viewWillAppear:(BOOL)animated{
 	[super viewWillAppear:YES];
     self.navigationController.navigationBarHidden = NO;
+    self.navigationController.navigationBar.alpha = 1;
 
     // Set the background image on navigation bar
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_with_logo2"] forBarMetrics:UIBarMetricsDefault];

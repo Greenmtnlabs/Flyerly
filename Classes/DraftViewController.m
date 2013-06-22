@@ -1488,8 +1488,8 @@ static ShareProgressView *tumblrPogressView;*/
 }
 
 - (void)postDismissCleanup {
-	[navBar removeFromSuperview];
-	[navBar release];
+	//[navBar removeFromSuperview];
+	//[navBar release];
     
     
 }
@@ -1501,7 +1501,7 @@ static ShareProgressView *tumblrPogressView;*/
 		[UIView setAnimationDuration:1];
 		[UIView setAnimationDelegate:self];
 		[UIView setAnimationDidStopSelector:@selector(postDismissCleanup)];
-		navBar.alpha = 0;
+		//navBar.alpha = 0;
 		[UIView commitAnimations];
 	} else {
 		[self postDismissCleanup];
