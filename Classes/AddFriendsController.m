@@ -39,9 +39,9 @@ BOOL firstTableLoad = YES;
     [self.navigationItem setRightBarButtonItems: [self rightBarItems]];
 
     // Create left bar help button
-    UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 13, 16)];
+    UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 20, 25)];
     [helpButton addTarget:self action:@selector(loadHelpController) forControlEvents:UIControlEventTouchUpInside];
-    [helpButton setBackgroundImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
+    [helpButton setImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
     UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:helpButton];
     [self.navigationItem setLeftBarButtonItem:leftBarButton];
 
@@ -361,6 +361,16 @@ BOOL firstTableLoad = YES;
     
         [self showAlert:@"Warning!" message:@"You must be connected to the Internet."];
     }
+}
+
+-(void)showAlert:(NSString *)title message:(NSString *)message{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+                                                    message:message
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+    [alert release];
 }
 
 int totalCount = 0;
@@ -704,16 +714,6 @@ int totalCount = 0;
             //[self showAlert:@"Invited !" message:@"You have successfully invited your friends to join flyerly."];
         }];
     }];
-}
-
--(void)showAlert:(NSString *)title message:(NSString *)message{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
-                                                    message:message
-                                                   delegate:nil
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
-    [alert show];
-    [alert release];
 }
 
 // Convenience method to perform some action that requires the "publish_actions" permissions.

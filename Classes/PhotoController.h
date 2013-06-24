@@ -109,6 +109,9 @@
 	NSArray *borderArray;
 	NSArray *fontArray;
 	UIAlertView *warningAlert ;
+	UIAlertView *discardAlert ;
+	UIAlertView *deleteAlert ;
+	UIAlertView *editAlert ;
     
     EBPurchase *demoPurchase;
     BOOL isPurchased;
@@ -123,6 +126,8 @@
 	NSInteger borderScrollHeight;
     
     UIScrollView *layerScrollView;
+    UIButton *crossButtonGlobal;
+    UIButton *editButtonGlobal;
 }
 
 @property (nonatomic, retain) MyNavigationBar *navBar;
@@ -193,6 +198,9 @@
 @property (nonatomic, assign)BOOL iconTouchFlag;
 @property (nonatomic, assign) CGPoint lableLocation;
 @property (nonatomic,retain) UIAlertView *warningAlert;
+@property (nonatomic,retain) UIAlertView *discardAlert;
+@property (nonatomic,retain) UIAlertView *deleteAlert;
+@property (nonatomic,retain) UIAlertView *editAlert;
 
 @property (nonatomic, assign) NSInteger imgPickerFlag;
 

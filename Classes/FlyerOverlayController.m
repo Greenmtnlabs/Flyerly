@@ -51,6 +51,16 @@
     parentViewController.navigationController.navigationBar.alpha = 1;
 }
 
+-(void)showAlert:(NSString *)title message:(NSString *)message{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+                                                    message:message
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+    [alert release];
+}
+
 /*
  * open flyer in editable mode
  * this is required on sharing screen as well so defining it as class member +
@@ -201,9 +211,22 @@
  * Called when edit button is pressed
  */
 -(IBAction)onEdit{
-    [self goBack];
+
+    /****** LOAD FLYER INFORMATION FILE *******/
+	NSString *flyerFolderPath = [NSHomeDirectory() stringByAppendingString:[NSString stringWithFormat:@"/Documents/Flyr"]];
+	NSString *flyerFilePath = [flyerFolderPath stringByAppendingString:[NSString stringWithFormat:@"/IMG_%d.pieces", flyerNumber]];
+    NSDictionary *dict = [[NSDictionary alloc] initWithContentsOfFile:flyerFilePath];
     
-    [FlyerOverlayController openFlyerInEditableMode:flyerNumber parentViewController:parentViewController];
+    if(!dict){
+        
+        [self showAlert:@"Warning!" message:@"Flyers created with older versions of Flyerly cannot be edited."];
+
+    } else {
+        
+        [self goBack];
+        
+        [FlyerOverlayController openFlyerInEditableMode:flyerNumber parentViewController:parentViewController];
+    }
 }
 
 /*

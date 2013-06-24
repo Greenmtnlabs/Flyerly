@@ -28,7 +28,7 @@ static ShareProgressView *tumblrPogressView;*/
 @implementation DraftViewController
 
 @synthesize selectedFlyerImage,imgView,navBar,fvController,svController,titleView,descriptionView,selectedFlyerDescription,selectedFlyerTitle, detailFileName, imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,loadingView,dic,fromPhotoController,progressView,scrollView,instagramPogressView, saveToCameraRollLabel, saveToRollSwitch;
-@synthesize twitterPogressView,facebookPogressView,tumblrPogressView,flickrPogressView;
+@synthesize twitterPogressView,facebookPogressView,tumblrPogressView,flickrPogressView,twit;
 
 -(void)callFlyrView{
 	[self.navigationController popToViewController:fvController animated:YES];
@@ -138,9 +138,9 @@ static ShareProgressView *tumblrPogressView;*/
         UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
 
         // Create left bar help button
-        UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 13, 16)];
+        UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 20, 25)];
         [helpButton addTarget:self action:@selector(loadHelpController) forControlEvents:UIControlEventTouchUpInside];
-        [helpButton setBackgroundImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
+        [helpButton setImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
         UIBarButtonItem *leftHelpBarButton = [[UIBarButtonItem alloc] initWithCustomView:helpButton];
         [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarButton,leftHelpBarButton,nil]];
         
@@ -164,9 +164,9 @@ static ShareProgressView *tumblrPogressView;*/
     [saveToCameraRollLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
 
     // Setup flyer edit button
-    UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 19, 19)];
+    UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 25, 30)];
     [editButton addTarget:self action:@selector(onEdit:) forControlEvents:UIControlEventTouchUpInside];
-    [editButton setBackgroundImage:[UIImage imageNamed:@"pencil_blue"] forState:UIControlStateNormal];
+    [editButton setImage:[UIImage imageNamed:@"pencil_blue"] forState:UIControlStateNormal];
 
     // Get index from flyer image path
     NSString *index = [FlyrViewController getFlyerNumberFromPath:imageFileName];
@@ -747,13 +747,13 @@ static ShareProgressView *tumblrPogressView;*/
     [[NSFileManager defaultManager] removeItemAtPath:detailFileName error:nil];
 	NSMutableArray *array = [[[NSMutableArray alloc] init] autorelease];
 
-    if([titleView.text isEqualToString:NameYourFlyerText]){
+    if(!titleView.text || [titleView.text isEqualToString:NameYourFlyerText]){
         [array addObject:@""];
     }else{
         [array addObject:self.titleView.text];
     }
 
-    if([descriptionView.text isEqualToString:AddCaptionText]){
+    if(!descriptionView.text || [descriptionView.text isEqualToString:AddCaptionText]){
         [array addObject:@""];
     }else{
         [array addObject:self.descriptionView.text];
@@ -801,6 +801,10 @@ static ShareProgressView *tumblrPogressView;*/
     }
 }
 
+- (void)twitpicEngine:(OLBTwitpicEngine *)engine didUploadImageWithResponse:(NSString *)response{
+	NSLog(response);
+}
+
 /*
  * Share on Email
  */
@@ -810,6 +814,10 @@ static ShareProgressView *tumblrPogressView;*/
 
     if([MFMailComposeViewController canSendMail]){
         
+        //UIImage *img = [self getCurrentFrameAndSaveIt];
+        //twit = [[OLBTwitpicEngine alloc]initWithDelegate:self];
+        //[twit uploadImageToTwitpic:selectedFlyerImage withMessage:@"" username:@"riksofrehan" password:@"Riksof123"];
+
         picker.mailComposeDelegate = self;
         [picker setSubject:@"You just received a NEW flyer!"];
         

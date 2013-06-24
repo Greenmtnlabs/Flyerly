@@ -14,12 +14,13 @@
 #import <ObjectiveFlickr.h>
 #import <MessageUI/MessageUI.h>
 #import "ShareProgressView.h"
+#import "OLBTwitpicEngine.h"
 
 @class FlyrViewController;
 @class SaveFlyerController;
 @class LoadingView;
 
-@interface DraftViewController : UIViewController<FBRequestDelegate,UIWebViewDelegate,UIDocumentInteractionControllerDelegate,FBSessionDelegate,FBDialogDelegate,FBLoginDialogDelegate,TumblrUploadrDelegate,OFFlickrAPIRequestDelegate,MFMessageComposeViewControllerDelegate,MFMailComposeViewControllerDelegate,UITextViewDelegate,UITextFieldDelegate,UIGestureRecognizerDelegate> {
+@interface DraftViewController : UIViewController<FBRequestDelegate,UIWebViewDelegate,UIDocumentInteractionControllerDelegate,FBSessionDelegate,FBDialogDelegate,FBLoginDialogDelegate,TumblrUploadrDelegate,OFFlickrAPIRequestDelegate,MFMessageComposeViewControllerDelegate,MFMailComposeViewControllerDelegate,UITextViewDelegate,UITextFieldDelegate,UIGestureRecognizerDelegate,OLBTwitpicEngineDelegate> {
 
 	IBOutlet UIScrollView *scrollView;
 	IBOutlet UIView *progressView;
@@ -66,6 +67,8 @@
     ShareProgressView *tumblrPogressView;
     ShareProgressView *flickrPogressView;
     ShareProgressView *instagramPogressView;
+    
+    OLBTwitpicEngine *twit;
 }
 
 @property(nonatomic,retain) ShareProgressView *facebookPogressView;
@@ -105,6 +108,8 @@
 @property(nonatomic,retain)SaveFlyerController *svController;
 @property (nonatomic, retain) LoadingView *loadingView;
 @property BOOL fromPhotoController;
+
+@property (nonatomic, retain) OLBTwitpicEngine *twit;
 
 -(IBAction)onClickFacebookButton;
 -(IBAction)onClickTwitterButton;
