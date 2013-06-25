@@ -18,7 +18,7 @@
 @class FBSession;
 @class FacebookLikeView;
 
-@interface LauchViewController : UIViewController<FBDialogDelegate,FBSessionDelegate,FBRequestDelegate> {
+@interface LauchViewController : UIViewController<FBDialogDelegate,FBSessionDelegate,FBRequestDelegate,UIWebViewDelegate> {
 	PhotoController *ptController;
 	FlyrViewController *tpController;
 	SettingViewController *spController;
@@ -53,7 +53,7 @@
     int numberOfFlyers;
     
     UIView *opaqueView;
-    UIWebView *webview;
+    IBOutlet UIWebView *webview;
     IBOutlet UIButton *crossButton;
 }
 @property(nonatomic,retain) PhotoController *ptController;
@@ -85,6 +85,7 @@
 
 @property (nonatomic, retain) IBOutlet UIView *likeView;
 @property (nonatomic, retain) IBOutlet FacebookLikeView *facebookLikeView;
+@property (nonatomic, retain) IBOutlet UIWebView *webview;
 
 -(IBAction)doNew:(id)sender;
 -(IBAction)doOpen:(id)sender;

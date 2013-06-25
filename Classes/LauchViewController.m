@@ -28,7 +28,7 @@
 @synthesize firstFlyer, secondFlyer, thirdFlyer, fourthFlyer, photoArray, photoDetailArray, createFlyrButton, savedFlyrButton, inviteFriendButton;
 @synthesize loadingView;
 @synthesize facebookLikeView=_facebookLikeView;
-@synthesize likeButton,followButton;
+@synthesize likeButton,followButton,webview;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
@@ -508,6 +508,37 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
     [UIView commitAnimations];
 }
 
+/*-(void)webViewDidFinishLoad:(UIWebView *)webView{
+    [loadingView removeView];
+    self.likeView.hidden = NO;
+    
+    [UIView beginAnimations:@"" context:nil];
+    [UIView setAnimationDelay:0.5];
+    //self.facebookLikeView.alpha = 1;
+    [UIView commitAnimations];
+}
+
+-(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
+
+    NSLog(@"HOST: %@", request.URL.host);
+    
+    // Allow loading Like button XFBML from file
+    if ([request.URL.host isEqual:[[NSURL URLWithString:@"http://www.facebook.com/flyerlyapp"] absoluteString]])
+        return YES;
+    
+    // Allow loading about:blank, etc.
+    if ([request.URL.scheme isEqualToString:@"about"])
+        return YES;
+    
+    // Block loading of 'event:*', our scheme for forwarding Facebook JS SDK events to native code
+    else if ([request.URL.scheme isEqualToString:@"event"]) {
+        //[self didObserveFacebookEvent:request.URL.resourceSpecifier];
+        return NO;
+    }
+
+    return YES;
+}*/
+
 - (void)facebookLikeViewDidUnlike:(FacebookLikeView *)aFacebookLikeView {
     
     // Set like button un selected
@@ -547,6 +578,12 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
     //[alert show];
 }
 
+- (void)facebookLikeViewRequiresLogin:(FacebookLikeView *)aFacebookLikeView {
+
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    [appDelegate.facebook authorize:[NSArray arrayWithObjects: @"read_stream", @"publish_stream", nil]];
+}
+
 - (IBAction)showLikeButton {
     
      FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
@@ -564,6 +601,14 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
          self.facebookLikeView.showFaces = NO;
          [self.facebookLikeView load];
          
+         /*//webview = [[UIWebView alloc] initWithFrame:CGRectMake(10, 74, 300, 315)];
+         NSString *urlAddress = @"http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.facebook.com%2Fflyerlyapp&send=false&layout=button_count&width=450&show_faces=false&colorscheme=light&action=like&height=21&ret=optin&act=connect&hash=AQA1K7Ri1gYE8YHl";
+         NSURL *url = [NSURL URLWithString:urlAddress];
+         NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
+         [webview loadRequest:requestObj];
+         
+         [self.view addSubview:opaqueView];*/
+
      } else {
      
          [appDelegate.facebook authorize:[NSArray arrayWithObjects: @"read_stream", @"publish_stream", nil]];

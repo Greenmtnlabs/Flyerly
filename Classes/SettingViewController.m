@@ -26,11 +26,11 @@ extern NSString* kGetSessionProxy;
 
 
 @implementation SettingViewController
-@synthesize flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,helpTab;
+@synthesize flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,helpTab,loadingView;
 
 -(void)viewWillAppear:(BOOL)animated{
 
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg"] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
     self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Settings"];
     
     UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 31, 30)];
@@ -221,7 +221,17 @@ extern NSString* kGetSessionProxy;
             if((![[[TMAPIClient sharedInstance] OAuthToken] length] > 0) ||
                (![[[TMAPIClient sharedInstance] OAuthTokenSecret] length] > 0)){
                 
+                loadingView =[LoadingView loadingViewInView:self.view  text:@"Wait..."];
+
                 [[TMAPIClient sharedInstance] authenticate:@"Flyerly" callback:^(NSError *error) {
+                    
+                    // Remove loading view
+                    for (UIView *subview in self.view.subviews) {
+                        if([subview isKindOfClass:[LoadingView class]]){
+                            [subview removeFromSuperview];
+                        }
+                    }
+
                     if (error){
                         NSLog(@"Authentication failed: %@ %@", error, [error description]);
                     }else{

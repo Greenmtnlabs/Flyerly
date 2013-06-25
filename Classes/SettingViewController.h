@@ -10,6 +10,7 @@
 #import "FBConnect/FBConnect.h"
 #import <Twitter/Twitter.h>
 #import <ObjectiveFlickr.h>
+#import "LoadingView.h"
 
 //#import "FBConnect/FBConnect.h"
 //#import "TwitLogin.h"
@@ -42,6 +43,7 @@
     IBOutlet UIButton *helpTab;
 
     OFFlickrAPIRequest *flickrRequest;
+	LoadingView *loadingView;
 
 }
 
@@ -55,6 +57,7 @@
 @property(nonatomic,retain) IBOutlet UIButton *clipboardButton;
 
 @property(nonatomic,retain) IBOutlet UIButton *helpTab;
+@property (nonatomic, retain) LoadingView *loadingView;
 
 /*
 @property(nonatomic,retain) MyNavigationBar *navBar;

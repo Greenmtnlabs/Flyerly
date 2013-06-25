@@ -86,5 +86,6 @@
 -(IBAction)goBack;
 -(IBAction)invite;
 + (BOOL)connected;
++(NSMutableDictionary *)getSelectedIdentifiersDictionary;
 
 @end

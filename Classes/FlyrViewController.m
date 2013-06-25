@@ -141,7 +141,7 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
     // Set right bar items
     [self.navigationItem setRightBarButtonItems: [self rightBarItems]];
 
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg"] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
 }
 
 -(NSArray *)leftBarItems{

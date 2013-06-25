@@ -8,6 +8,7 @@
 
 #import "AddFriendItem.h"
 #import "AsyncImageView.h"
+#import "AddFriendsController.h"
 
 @implementation AddFriendItem
 @synthesize leftCheckBox, leftName, rightCheckBox, rightName, leftImage, rightImage, identifier1, identifier2, leftSelected, rightSelected;
@@ -58,6 +59,11 @@
     [leftCheckBox setSelected:!isSelected];
     leftSelected = !isSelected;
     
+    if(leftSelected){
+        [[AddFriendsController getSelectedIdentifiersDictionary] setObject:@"1" forKey:identifier1];
+    }else{
+        [[AddFriendsController getSelectedIdentifiersDictionary] removeObjectForKey:identifier1];
+    }
 }
 
 /**
@@ -69,6 +75,11 @@
     [rightCheckBox setSelected:!isSelected];
     rightSelected = !isSelected;
     
+    if(rightSelected){
+        [[AddFriendsController getSelectedIdentifiersDictionary] setObject:@"1" forKey:identifier2];
+    }else{
+        [[AddFriendsController getSelectedIdentifiersDictionary] removeObjectForKey:identifier2];
+    }
 }
 
 @end

@@ -70,7 +70,7 @@ int flyerNumber = -1;
 	imgPicker.delegate =self;
 	imgPicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
 	navBar.alpha =ALPHA1;
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg"] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
 }
 
 - (void) handleMemoryWarning:(NSNotification *)notification
@@ -1965,7 +1965,8 @@ int arrangeLayerIndex;
     label.textAlignment = NSTextAlignmentCenter;
     //label.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
     //label.textColor = [MyCustomCell colorWithHexString:@"008ec0"];
-    label.textColor = [UIColor darkGrayColor];
+    //label.textColor = [UIColor darkGrayColor];
+    label.textColor = [UIColor whiteColor];
     label.text = NSLocalizedString([title uppercaseString], @"");
     [label sizeToFit];
 

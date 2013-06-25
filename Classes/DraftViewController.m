@@ -237,20 +237,8 @@ static ShareProgressView *tumblrPogressView;*/
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-	/*navBar= [[MyNavigationBar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
-	[self.view addSubview:navBar];
-	[navBar show:@"SocialFlyr" left:@"Browser" right:@"Share"];
-	[self.view bringSubviewToFront:navBar];
-	
-	[navBar.leftButton removeTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-	[navBar.rightButton removeTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-	
-	[navBar.leftButton addTarget:self action:@selector(callFlyrView) forControlEvents:UIControlEventTouchUpInside];
-	[navBar.rightButton addTarget:self action:@selector(loadDistributeView) forControlEvents:UIControlEventTouchUpInside];
-	navBar.alpha = ALPHA1;*/
-	
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg"] forBarMetrics:UIBarMetricsDefault];
+    [super viewWillAppear:animated];	
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
 }
 
 -(void)loadHelpController{
@@ -363,77 +351,90 @@ static ShareProgressView *tumblrPogressView;*/
  */
 -(void)share{
     
-    // Check internet connectivity
-    if([AddFriendsController connected]){
-        
-        // Remove sharing view if on the screen
-        [self remoAllSharingViews];
-        
-        // Set default height for progress parent view
-        [self setDefaultProgressViewHeight];
-        
-        // Set 0 sharing netwroks
-        countOfSharingNetworks = 0;
-        
-        // Set progress view hidden
-        [progressView setHidden:NO];
-        
-        // Check if any network in selected
-        if([self isAnyNetworkSelected]){
-            //loadingView =[LoadingView loadingViewInView:self.view  text:@"Sharing..."];
+    // Check if any network in selected
+    if([self isAnyNetworkSelected]){
+    
+        // Check if only those buttons are selected that did'nt required connectivity
+        if([self onlyNotConnectivityNetworkSelected]){
             
-            if([twitterButton isSelected]){
-                [self showTwitterProgressRow];
-                [self shareOnTwitter];
-                //[self fillSuccessStatus:twitterPogressView];
-            }
-            
-            if([facebookButton isSelected]){
-                [self showFacebookProgressRow];
-                [self shareOnFacebook];
-                //[self fillSuccessStatus:facebookPogressView];
-            }
-            
-            if([flickrButton isSelected]){
-                [self showFlickrProgressRow];
-                [self shareOnFlickr];
-                //[self fillSuccessStatus:flickrPogressView];
-            }
-            
-            if([tumblrButton isSelected]){
-                [self showTumblrProgressRow];
-                [self shareOnTumblr];
-                //[self fillSuccessStatus:tumblrPogressView];
-            }
-            
-            if([emailButton isSelected]){
-                [self shareOnEmail];
-            }
-            
-            if([smsButton isSelected] && ![emailButton isSelected]){
+            if([smsButton isSelected]){
                 [self shareOnMMS];
             }
             
-            if([instagramButton isSelected] && ( ![tumblrButton isSelected] && ![flickrButton isSelected] && ![smsButton isSelected])  && ![emailButton isSelected]){
-                [self shareOnInstagram];
+        }else{
+            
+            // Check internet connectivity
+            if([AddFriendsController connected]){
+                
+                // Remove sharing view if on the screen
+                [self remoAllSharingViews];
+                
+                // Set default height for progress parent view
+                [self setDefaultProgressViewHeight];
+                
+                // Set 0 sharing netwroks
+                countOfSharingNetworks = 0;
+                
+                // Set progress view hidden
+                [progressView setHidden:NO];
+                
+                //loadingView =[LoadingView loadingViewInView:self.view  text:@"Sharing..."];
+                
+                if([twitterButton isSelected]){
+                    [self showTwitterProgressRow];
+                    [self shareOnTwitter];
+                    //[self fillSuccessStatus:twitterPogressView];
+                }
+                
+                if([facebookButton isSelected]){
+                    [self showFacebookProgressRow];
+                    [self shareOnFacebook];
+                    //[self fillSuccessStatus:facebookPogressView];
+                }
+                
+                if([flickrButton isSelected]){
+                    [self showFlickrProgressRow];
+                    [self shareOnFlickr];
+                    //[self fillSuccessStatus:flickrPogressView];
+                }
+                
+                if([tumblrButton isSelected]){
+                    [self showTumblrProgressRow];
+                    [self shareOnTumblr];
+                    //[self fillSuccessStatus:tumblrPogressView];
+                }
+                
+                if([emailButton isSelected]){
+                    [self shareOnEmail];
+                }
+                
+                if([smsButton isSelected] && ![emailButton isSelected]){
+                    [self shareOnMMS];
+                }
+                
+                if([instagramButton isSelected] && ( ![tumblrButton isSelected] && ![flickrButton isSelected] && ![smsButton isSelected])  && ![emailButton isSelected]){
+                    [self shareOnInstagram];
+                }
+                
+                if([saveToRollSwitch isOn]){
+                    UIImageWriteToSavedPhotosAlbum(selectedFlyerImage, nil, nil, nil);
+                }
+                
+                [self showAlert];
+                
+                
+            } else {
+                
+                [self showAlert:@"Warning!" message:@"You must be connected to the Internet."];
             }
-            
-            if([saveToRollSwitch isOn]){
-                UIImageWriteToSavedPhotosAlbum(selectedFlyerImage, nil, nil, nil);
-            }
-            
-            [self showAlert];
-            
-        } else {
-            
-            [self showAlert:@"Warning!" message:@"Please select at least one sharing option."];
-            
         }
-    
-    } else {
 
-        [self showAlert:@"Warning!" message:@"You must be connected to the Internet."];
+    } else {
+        
+        [self showAlert:@"Warning!" message:@"Please select at least one sharing option."];
+        
     }
+    
 }
 
 /*
@@ -459,6 +460,22 @@ static ShareProgressView *tumblrPogressView;*/
         return true;
     
     return false;
+}
+
+/*
+ * Check for network selection for only non connectivity types
+ */
+-(BOOL)onlyNotConnectivityNetworkSelected{
+    
+    if(([smsButton isSelected] || [clipboardButton isSelected])
+       &&
+       (![facebookButton isSelected] && ![twitterButton isSelected] && ![emailButton isSelected] && ![tumblrButton isSelected] && ![flickrButton isSelected] && ![instagramButton isSelected])){
+    
+        return true;
+    
+    } else{
+        return false;
+    }
 }
 
 /*
@@ -583,13 +600,6 @@ static ShareProgressView *tumblrPogressView;*/
             
             [self authorizeAction];
         }
-
-        //NSString *authToken = [[NSUserDefaults standardUserDefaults] objectForKey:kStoredAuthTokenKeyName];
-        //NSString *authTokenSecret = [[NSUserDefaults standardUserDefaults] objectForKey:kStoredAuthTokenSecretKeyName];
-
-        //if((![authToken length] > 0) || (![authTokenSecret length] > 0)){
-        //    [self authorizeAction];
-        //}
     }
 }
 
@@ -638,16 +648,6 @@ static ShareProgressView *tumblrPogressView;*/
             [subview removeFromSuperview];
         }
     }
-    
-    /*
-     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Shared"
-     message:@"Your Flyer is Shared."
-     delegate:nil
-     cancelButtonTitle:@"OK"
-     otherButtonTitles:nil];
-     [alert show];
-     [alert release];
-     */
 }
 
 -(void)updateSocialStates{    
@@ -1131,7 +1131,6 @@ static ShareProgressView *tumblrPogressView;*/
 
     [self.flickrPogressView.statusText setText:@""];
     [self.flickrPogressView.networkIcon setBackgroundImage:[UIImage imageNamed:@"status_icon_flickr"] forState:UIControlStateNormal];
-    //[self.flickrPogressView.cancelIcon setImage:nil forState:UIControlStateNormal];
     [self.flickrPogressView.cancelIcon setHidden:YES];
     [self.flickrPogressView.cancelIcon setImage:[UIImage imageNamed:@"share_status_close"] forState:UIControlStateNormal];
     [self.flickrPogressView.statusIcon setBackgroundImage:nil forState:UIControlStateNormal];
@@ -1159,70 +1158,6 @@ static ShareProgressView *tumblrPogressView;*/
     [shareView.refreshIcon setHidden:YES];
     [shareView.cancelIcon setHidden:NO];
 }
-
-/*-(void)fillFacebookSuccessStatus{
-    [self.facebookPogressView.statusText setTextColor:[UIColor greenColor]];
-    [self.facebookPogressView.statusText setText:@"Successfully Shared!"];
-    [self.facebookPogressView.statusIcon setBackgroundImage:[UIImage imageNamed:@"status_success"] forState:UIControlStateNormal];
-    [self.facebookPogressView.refreshIcon setHidden:YES];
-    [self.facebookPogressView.cancelIcon setHidden:NO];
-}
-
--(void)fillFacebookErrorStatus{
-    [self.facebookPogressView.statusText setText:@"Sharing Failed!"];
-    [self.facebookPogressView.statusText setTextColor:[UIColor redColor]];
-    [self.facebookPogressView.statusIcon setBackgroundImage:[UIImage imageNamed:@"status_failed"] forState:UIControlStateNormal];
-    [self.facebookPogressView.refreshIcon setHidden:NO];
-    [self.facebookPogressView.cancelIcon setHidden:NO];
-}
-
--(void)fillTumblrErrorStatus{
-    [self.tumblrPogressView.statusText setText:@"Sharing Failed!"];
-    [self.tumblrPogressView.statusText setTextColor:[UIColor redColor]];
-    [self.tumblrPogressView.statusIcon setBackgroundImage:[UIImage imageNamed:@"status_failed"] forState:UIControlStateNormal];
-    [self.tumblrPogressView.refreshIcon setHidden:NO];
-    [self.tumblrPogressView.cancelIcon setHidden:NO];
-}
-
--(void)fillTumblrSuccessStatus{
-    [self.tumblrPogressView.statusText setTextColor:[UIColor greenColor]];
-    [self.tumblrPogressView.statusText setText:@"Successfully Shared!"];
-    [self.tumblrPogressView.statusIcon setBackgroundImage:[UIImage imageNamed:@"status_success"] forState:UIControlStateNormal];
-    [self.tumblrPogressView.refreshIcon setHidden:YES];
-    [self.tumblrPogressView.cancelIcon setHidden:NO];
-}
-
--(void)fillFlickrErrorStatus{
-    [self.flickrPogressView.statusText setText:@"Sharing Failed!"];
-    [self.flickrPogressView.statusText setTextColor:[UIColor redColor]];
-    [self.flickrPogressView.statusIcon setBackgroundImage:[UIImage imageNamed:@"status_failed"] forState:UIControlStateNormal];
-    [self.flickrPogressView.refreshIcon setHidden:NO];
-    [self.flickrPogressView.cancelIcon setHidden:NO];
-}
-
--(void)fillFlickrSuccessStatus{
-    [self.flickrPogressView.statusText setTextColor:[UIColor greenColor]];
-    [self.flickrPogressView.statusText setText:@"Successfully Shared!"];
-    [self.flickrPogressView.statusIcon setBackgroundImage:[UIImage imageNamed:@"status_success"] forState:UIControlStateNormal];
-    [self.flickrPogressView.refreshIcon setHidden:YES];
-    [self.flickrPogressView.cancelIcon setHidden:NO];
-}
-
--(void)fillTwitterErrorStatus{
-    [self.twitterPogressView.statusText setText:@"Sharing Failed!"];
-    [self.twitterPogressView.statusText setTextColor:[UIColor redColor]];
-    [self.twitterPogressView.statusIcon setBackgroundImage:[UIImage imageNamed:@"status_failed"] forState:UIControlStateNormal];
-    [self.twitterPogressView.refreshIcon setHidden:NO];
-    [self.twitterPogressView.cancelIcon setHidden:NO];
-}
-
--(void)fillTwitterSuccessStatus{
-    [self.twitterPogressView.statusText setTextColor:[UIColor greenColor]];
-    [self.twitterPogressView.statusText setText:@"Successfully Shared!"];
-    [self.twitterPogressView.statusIcon setBackgroundImage:[UIImage imageNamed:@"status_success"] forState:UIControlStateNormal];
-    [self.twitterPogressView.refreshIcon setHidden:YES];
-    [self.twitterPogressView.cancelIcon setHidden:NO];
-}*/
 
 -(void)closeSharingProgressSuccess:(NSNotification *)notification{
     countOfSharingNetworks--;
