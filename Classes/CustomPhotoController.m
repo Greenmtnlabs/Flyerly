@@ -231,6 +231,9 @@
     //gesture.delegate = self;
     //[moveUpButton addGestureRecognizer:gesture];
     
+    // hide lines
+    self.galleryTable.separatorColor = [UIColor clearColor];
+    
     // Do any additional setup after loading the view from its nib.
     UIImage *tmpImage = [self scaleAndRotateImage:image];
     [image release];
@@ -272,9 +275,13 @@ BOOL galleryExpanded = NO;
             CGPoint prevLocation = [anyTouch previousLocationInView:self.view];
             
             if (prevLocation.y > location.y){
-                moveUpButton.frame = CGRectMake(moveUpButton.frame.origin.x, 133, moveUpButton.frame.size.width, moveUpButton.frame.size.height);
                 
+                [UIView beginAnimations:nil context:nil];
+                [UIView setAnimationDuration:0.5];
+                [UIView setAnimationCurve:UIViewAnimationCurveLinear];
+                moveUpButton.frame = CGRectMake(moveUpButton.frame.origin.x, 133, moveUpButton.frame.size.width, moveUpButton.frame.size.height);
                 galleryTable.frame = CGRectMake(galleryTable.frame.origin.x, 176, galleryTable.frame.size.width, 384);
+                [UIView commitAnimations];
                 
             }
             galleryExpanded = YES;
@@ -285,11 +292,16 @@ BOOL galleryExpanded = NO;
             CGPoint prevLocation = [anyTouch previousLocationInView:self.view];
             
             if (prevLocation.y < location.y){
+                
+                [UIView beginAnimations:nil context:nil];
+                [UIView setAnimationDuration:0.5];
+                [UIView setAnimationCurve:UIViewAnimationCurveLinear];
                 moveUpButton.frame = CGRectMake(moveUpButton.frame.origin.x, 333, moveUpButton.frame.size.width, moveUpButton.frame.size.height);
                 
                 galleryTable.frame = CGRectMake(galleryTable.frame.origin.x, 376, galleryTable.frame.size.width, 184);
-                
-            }            
+                [UIView commitAnimations];
+
+            }
             galleryExpanded = NO;    
         }
     }
@@ -393,7 +405,7 @@ int counter = 0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 93.0;
+    return 80.0;
 }
 
 -(void)imageCount{

@@ -23,7 +23,6 @@
 @interface DraftViewController : UIViewController<FBRequestDelegate,UIWebViewDelegate,UIDocumentInteractionControllerDelegate,FBSessionDelegate,FBDialogDelegate,FBLoginDialogDelegate,TumblrUploadrDelegate,OFFlickrAPIRequestDelegate,MFMessageComposeViewControllerDelegate,MFMailComposeViewControllerDelegate,UITextViewDelegate,UITextFieldDelegate,UIGestureRecognizerDelegate,OLBTwitpicEngineDelegate> {
 
 	IBOutlet UIScrollView *scrollView;
-	IBOutlet UIView *progressView;
 
 	IBOutlet UIButton *imgView;
 	IBOutlet UITextField *titleView;
@@ -62,26 +61,27 @@
     BOOL fromPhotoController;
     int countOfSharingNetworks;
     
+	/*IBOutlet UIView *progressView;
     ShareProgressView *facebookPogressView;
     ShareProgressView *twitterPogressView;
     ShareProgressView *tumblrPogressView;
-    ShareProgressView *flickrPogressView;
+    ShareProgressView *flickrPogressView;*/
     ShareProgressView *instagramPogressView;
     
     OLBTwitpicEngine *twit;
 }
 
+/*@property(nonatomic,retain) IBOutlet UIView *progressView;
 @property(nonatomic,retain) ShareProgressView *facebookPogressView;
 @property(nonatomic,retain) ShareProgressView *twitterPogressView;
 @property(nonatomic,retain) ShareProgressView *tumblrPogressView;
-@property(nonatomic,retain) ShareProgressView *flickrPogressView;
+@property(nonatomic,retain) ShareProgressView *flickrPogressView;*/
 @property(nonatomic,retain) ShareProgressView *instagramPogressView;
 
 @property(nonatomic,retain) IBOutlet UILabel *saveToCameraRollLabel;
 @property(nonatomic,retain) IBOutlet UISwitch *saveToRollSwitch;
 
 @property(nonatomic,retain) IBOutlet UIScrollView *scrollView;
-@property(nonatomic,retain) IBOutlet UIView *progressView;
 
 @property(nonatomic,retain) IBOutlet UITextView *descriptionView;
 @property(nonatomic,retain) IBOutlet UITextField *titleView;

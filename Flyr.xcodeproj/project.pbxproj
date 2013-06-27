@@ -222,6 +222,9 @@
 		0FBC37F9174F980600004F21 /* twt_setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FBC37DB174F980500004F21 /* twt_setting@2x.png */; };
 		0FCDA58C1769BED200625235 /* pencil_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FCDA58A1769BED200625235 /* pencil_blue.png */; };
 		0FCDA58D1769BED200625235 /* pencil_blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FCDA58B1769BED200625235 /* pencil_blue@2x.png */; };
+		0FD78050177B398800DF5060 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FD7804D177B398800DF5060 /* AudioToolbox.framework */; };
+		0FD78054177B3BEC00DF5060 /* libz.1.1.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FD78053177B3BEC00DF5060 /* libz.1.1.3.dylib */; };
+		0FD78058177B3F3800DF5060 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FD78057177B3F3800DF5060 /* Parse.framework */; };
 		0FDB5624175E3E410078EBEC /* facebook_unlike.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FDB5620175E3E410078EBEC /* facebook_unlike.png */; };
 		0FDB5625175E3E410078EBEC /* facebook_unlike@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FDB5621175E3E410078EBEC /* facebook_unlike@2x.png */; };
 		0FDB5626175E3E410078EBEC /* twitter_following.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FDB5622175E3E410078EBEC /* twitter_following.png */; };
@@ -1144,6 +1147,11 @@
 		0FBC37DB174F980500004F21 /* twt_setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twt_setting@2x.png"; sourceTree = "<group>"; };
 		0FCDA58A1769BED200625235 /* pencil_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pencil_blue.png; sourceTree = "<group>"; };
 		0FCDA58B1769BED200625235 /* pencil_blue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pencil_blue@2x.png"; sourceTree = "<group>"; };
+		0FD7804D177B398800DF5060 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		0FD7804E177B398800DF5060 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
+		0FD7804F177B398800DF5060 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		0FD78053177B3BEC00DF5060 /* libz.1.1.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.1.3.dylib; path = usr/lib/libz.1.1.3.dylib; sourceTree = SDKROOT; };
+		0FD78057177B3F3800DF5060 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		0FDB5620175E3E410078EBEC /* facebook_unlike.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook_unlike.png; sourceTree = "<group>"; };
 		0FDB5621175E3E410078EBEC /* facebook_unlike@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook_unlike@2x.png"; sourceTree = "<group>"; };
 		0FDB5622175E3E410078EBEC /* twitter_following.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twitter_following.png; sourceTree = "<group>"; };
@@ -2000,6 +2008,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0FD78054177B3BEC00DF5060 /* libz.1.1.3.dylib in Frameworks */,
+				0FD78050177B398800DF5060 /* AudioToolbox.framework in Frameworks */,
 				0FE0BDD61758C07D00C4D78D /* StoreKit.framework in Frameworks */,
 				0DF3A540108E0E5C00D6C887 /* SystemConfiguration.framework in Frameworks */,
 				0FEDD799174A9DF000DF71C0 /* libCrittercismCrashOnly_v3_3_4.a in Frameworks */,
@@ -2027,6 +2037,7 @@
 				0D335123109ABB6A0082810A /* libz.dylib in Frameworks */,
 				30D58E3510FB260200E0C7E8 /* MediaPlayer.framework in Frameworks */,
 				0FF135A9174FC8B800B39FCA /* libFlurry.a in Frameworks */,
+				0FD78058177B3F3800DF5060 /* Parse.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2897,6 +2908,10 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				0FD78053177B3BEC00DF5060 /* libz.1.1.3.dylib */,
+				0FD7804D177B398800DF5060 /* AudioToolbox.framework */,
+				0FD7804E177B398800DF5060 /* AudioUnit.framework */,
+				0FD7804F177B398800DF5060 /* CoreAudio.framework */,
 				0FE0BDD51758C07D00C4D78D /* StoreKit.framework */,
 				65F41C8A173BDC02000BA8CB /* libxml2.2.dylib */,
 				65F41C02173BCB2E000BA8CB /* SenTestingKit.framework */,
@@ -2960,6 +2975,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0FD78057177B3F3800DF5060 /* Parse.framework */,
 				30D58E3410FB260200E0C7E8 /* MediaPlayer.framework */,
 				0D33511A109ABB6A0082810A /* AddressBook.framework */,
 				0D33511C109ABB6A0082810A /* AddressBookUI.framework */,
@@ -4409,6 +4425,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+					"\"$(SRCROOT)/../../Downloads\"",
+					"\"$(SRCROOT)\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Flyr_Prefix.pch;
@@ -4421,11 +4439,14 @@
 					"\"$(SRCROOT)/ExternalFrameworks/FBConnect\"",
 					"\"$(SRCROOT)/ExternalFrameworks/Crittercism\"",
 					"\"$(SRCROOT)/ExternalFrameworks/Flurry\"",
+					"\"$(SRCROOT)/ExternalFrameworks/Parse.framework/Versions/1.2.10\"",
+					"\"$(SRCROOT)/ExternalFrameworks/Parse.framework/Versions/Current\"",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lxml2",
+					"-fobjc-arc",
 				);
 				PRODUCT_NAME = Flyr;
 				PROVISIONING_PROFILE = "";
@@ -4446,6 +4467,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+					"\"$(SRCROOT)/../../Downloads\"",
+					"\"$(SRCROOT)\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -4461,8 +4484,16 @@
 					"\"$(SRCROOT)/ExternalFrameworks/FBConnect\"",
 					"\"$(SRCROOT)/ExternalFrameworks/Crittercism\"",
 					"\"$(SRCROOT)/ExternalFrameworks/Flurry\"",
+					"\"$(SRCROOT)/ExternalFrameworks/Parse.framework/Versions/1.2.10\"",
+					"\"$(SRCROOT)/ExternalFrameworks/Parse.framework/Versions/Current\"",
 				);
 				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lxml2",
+					"-fobjc-arc",
+				);
+				"OTHER_LDFLAGS[arch=*]" = "";
 				PRODUCT_NAME = Flyr;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -4481,6 +4512,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+					"\"$(SRCROOT)/../../Downloads\"",
+					"\"$(SRCROOT)\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Flyr_Prefix.pch;
@@ -4494,11 +4527,19 @@
 					"\"$(SRCROOT)/ExternalFrameworks/FBConnect\"",
 					"\"$(SRCROOT)/ExternalFrameworks/Crittercism\"",
 					"\"$(SRCROOT)/ExternalFrameworks/Flurry\"",
+					"\"$(SRCROOT)/ExternalFrameworks/Parse.framework/Versions/1.2.10\"",
+					"\"$(SRCROOT)/ExternalFrameworks/Parse.framework/Versions/Current\"",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lxml2",
+					"-fobjc-arc",
+				);
+				"OTHER_LDFLAGS[arch=*]" = (
+					"-ObjC",
+					"-lxml2",
+					"-fobjc-arc",
 				);
 				PRODUCT_NAME = Flyr;
 				PROVISIONING_PROFILE = "";

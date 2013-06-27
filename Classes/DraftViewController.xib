@@ -513,14 +513,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">progressView</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="814186568"/>
-					</object>
-					<int key="connectionID">45</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">titleView</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="936694743"/>
@@ -1047,7 +1039,6 @@
 							<string>flickrButton</string>
 							<string>imgView</string>
 							<string>instagramButton</string>
-							<string>progressView</string>
 							<string>saveToCameraRollLabel</string>
 							<string>saveToRollSwitch</string>
 							<string>scrollView</string>
@@ -1065,7 +1056,6 @@
 							<string>UIButton</string>
 							<string>UIButton</string>
 							<string>UIButton</string>
-							<string>UIView</string>
 							<string>UILabel</string>
 							<string>UISwitch</string>
 							<string>UIScrollView</string>
@@ -1086,7 +1076,6 @@
 							<string>flickrButton</string>
 							<string>imgView</string>
 							<string>instagramButton</string>
-							<string>progressView</string>
 							<string>saveToCameraRollLabel</string>
 							<string>saveToRollSwitch</string>
 							<string>scrollView</string>
@@ -1124,10 +1113,6 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">instagramButton</string>
 								<string key="candidateClassName">UIButton</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">progressView</string>
-								<string key="candidateClassName">UIView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">saveToCameraRollLabel</string>

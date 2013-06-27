@@ -17,19 +17,16 @@
 #import "TMAPIClient.h"
 #import "DraftViewController.h"
 #import "Flurry.h"
-//#import "ARRollerView.h"
-//#import "ARRollerProtocol.h"
+#import <Parse/Parse.h>
 
 NSString *kCheckTokenStep = @"kCheckTokenStep";
 NSString *FlickrSharingSuccessNotification = @"FlickrSharingSuccessNotification";
 NSString *FlickrSharingFailureNotification = @"FlickrSharingFailureNotification";
-#define kAdWhirlApplicationKey @"b7dfccec5016102d840c2e1e0de86337"
-//#define kAdWhirlApplicationKey @"b9c3615f2c88102da8949a322e50052a "
-//#define facebookAppID @"136691489852349"
+NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 
+#define kAdWhirlApplicationKey @"b7dfccec5016102d840c2e1e0de86337"
 #define TIME 10
 
-//static int NetworkActivityIndicatorCounter = 0;
 @implementation FlyrAppDelegate
 
 @synthesize window;
@@ -37,7 +34,7 @@ NSString *FlickrSharingFailureNotification = @"FlickrSharingFailureNotification"
 @synthesize fontScrollView,colorScrollView,templateScrollView,sizeScrollView,svController,_tSession,lauchController,flickrContext,flickrRequest;
 @synthesize session = _session;
 //@synthesize adwhirl;
-@synthesize flickrUserName;
+@synthesize flickrUserName,sharingProgressParentView;
 
 #pragma mark Ad whirl delegate methods
 
@@ -204,6 +201,15 @@ NSString *FlickrSharingFailureNotification = @"FlickrSharingFailureNotification"
         
         return YES;
 
+    } else if([[url absoluteString] hasPrefix:@"fb"]){
+        
+        // Send facebook did login notification
+        //[[NSNotificationCenter defaultCenter] postNotificationName:FacebookDidLoginNotification object:self];
+        //return YES;
+        
+        return [[self facebook] handleOpenURL:url];
+
+        
     } else {
         
         return [[TMAPIClient sharedInstance] handleOpenURL:url];
@@ -231,14 +237,40 @@ NSString *FlickrSharingFailureNotification = @"FlickrSharingFailureNotification"
     [FBAppCall handleDidBecomeActiveWithSession:self.session];
 }
 
+-(void)createDummyUser{
+
+    PFUser *currentUser = [PFUser currentUser];
+    if (currentUser) {
+    } else {
+        // Dummy username and password
+        PFUser *user = [PFUser user];
+        user.username = @"rizwan.riksof";
+        user.password = @"log123in";
+        user.email = @"rizwan.ahmed@riksof.com";
+        
+        [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (!error) {
+            } else {
+                [PFUser logInWithUsername:@"rizwan.riksof" password:@"log123in"];
+            }
+        }];
+    }
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
     // Crittercism for crash reports.
     [Crittercism initWithAppID: @"519a14f897c8f27969000019"];
     [Flurry startSession:@"ZWXZFGSQZ4GMYZBVZYN3"];
-    //[Flurry startSession:@"68999MTHD7NDPTBZYKYG"];
 
+    // Setup parse
+    [Parse setApplicationId:@"1EmUwhUYIpSEOJyeSBIOqkzUvDHSMHXvWYNjPynq"
+                  clientKey:@"Gk4CuGVOHegOa8lzbISz4NL5qiI75Gh4bNJGRVKX"];
+    
+    // Creat edummy user on parse
+    [self createDummyUser];
+    
     [self clearCache];
 	changesFlag = NO;
 	[[UIApplication sharedApplication] setStatusBarStyle: UIStatusBarStyleBlackTranslucent];

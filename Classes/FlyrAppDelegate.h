@@ -16,13 +16,14 @@
 
 extern NSString *FlickrSharingSuccessNotification;
 extern NSString *FlickrSharingFailureNotification;
+extern NSString *FacebookDidLoginNotification;
+
 @class FBSession;
 @class SaveFlyerController;
 @class LauchViewController;
 @class AfterUpdateController;
 
 @interface FlyrAppDelegate : NSObject <UIApplicationDelegate,OFFlickrAPIRequestDelegate> {
-//@interface FlyrAppDelegate : NSObject <UIApplicationDelegate,ARRollerDelegate> {
 	UIScrollView *fontScrollView;
 	UIScrollView *colorScrollView;
 	UIScrollView *sizeScrollView;
@@ -32,20 +33,14 @@ extern NSString *FlickrSharingFailureNotification;
 	SaveFlyerController *svController;
     LauchViewController *lauchController;
 
-	//NSMutableArray *templateArray;
-	//NSMutableArray *iconArray;
-	//FBDialog* dialog;
-	//FBPermissionDialog* perDialog;
-	//FBStreamDialog* streamDialog;
-	//FBSession* _session;
-	//ARRollerView *adwhirl;
-
 	TwitLogin *_tSession;
 	BOOL faceBookPermissionFlag;
 	BOOL changesFlag;
 	OFFlickrAPIContext *flickrContext;
 	OFFlickrAPIRequest *flickrRequest;
 	NSString *flickrUserName;
+    
+    UIView *sharingProgressParentView;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
@@ -67,6 +62,7 @@ extern NSString *FlickrSharingFailureNotification;
 
 @property (strong, nonatomic) FBSession *session;
 @property (nonatomic, retain) NSString *flickrUserName;
+@property (nonatomic, retain) UIView *sharingProgressParentView;
 
 //@property (nonatomic, retain) FBDialog* dialog;
 //@property (nonatomic,retain) FBPermissionDialog* perDialog;

@@ -576,6 +576,7 @@ int flyerNumber = -1;
 	[widthTabButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [widthTabButton addTarget:self action:@selector(selectWidth:) forControlEvents:UIControlEventTouchUpInside];
 	//[widthTabButton addTarget:self action:@selector(setPhotoTabAction:) forControlEvents:UIControlEventTouchUpInside];
+    [widthTabButton setSelected:YES];
 	widthTabButton.alpha =  ALPHA0;
 	widthTabButton.tag = 10003;
 	[self.view addSubview:widthTabButton];
@@ -1913,8 +1914,10 @@ int arrangeLayerIndex;
             [lastLayer setBorderColor:[[UIColor clearColor] CGColor]];
             
             // Remove object from array if not in delete mode
-            if(!deleteMode)
+            if(!deleteMode){
+                [[photoLayersArray objectAtIndex:arrangeLayerIndex] removeFromSuperview];
                 [photoLayersArray removeLastObject];
+            }
             
         } else if(selectedAddMoreLayerTab == ADD_MORE_SYMBOL_TAB){
             [symbolLayersArray removeLastObject];
@@ -2044,6 +2047,17 @@ int arrangeLayerIndex;
 	sizeTabButton.alpha = ALPHA0;
 	borderTabButton.alpha = ALPHA0;
 	fontBorderTabButton.alpha = ALPHA0;
+    
+    cameraTabButton.alpha = ALPHA0;
+    photoTabButton.alpha = ALPHA0;
+    widthTabButton.alpha = ALPHA0;
+    heightTabButton.alpha = ALPHA0;
+    
+    addMoreFontTabButton.alpha = ALPHA0;
+    addMoreIconTabButton.alpha = ALPHA0;
+    addMorePhotoTabButton.alpha = ALPHA0;
+    addMoreSymbolTabButton.alpha = ALPHA0;
+    arrangeLayerTabButton.alpha = ALPHA0;
 	[msgTextView removeFromSuperview];
 	[UIView commitAnimations];
 
@@ -2108,7 +2122,7 @@ int arrangeLayerIndex;
 
 -(void)cancelLayer{
 
-    discardAlert = [[UIAlertView alloc]initWithTitle:@"Warning" message:@"This will discard the currently made text changes." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK" ,nil];
+    discardAlert = [[UIAlertView alloc]initWithTitle:@"Warning" message:@"Do you want to go back? You will lose unsaved changes" delegate:self cancelButtonTitle:@"NO" otherButtonTitles:@"YES" ,nil];
     [discardAlert show];
 
 }

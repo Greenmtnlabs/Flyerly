@@ -564,9 +564,11 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
     // Set like button selected
     [likeButton setSelected:YES];
 
+    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+    
     // Remove views
     [self goBack];
-
+    
     // Set like status
     [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"FACEBOOK_LIKED"];
     

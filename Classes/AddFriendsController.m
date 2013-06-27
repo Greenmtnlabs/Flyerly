@@ -31,6 +31,10 @@ BOOL firstTableLoad = YES;
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
 
+    // Register notification for facebook login
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:FacebookDidLoginNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fbDidLogin) name:FacebookDidLoginNotification object:nil];
+
     // By default first tab is selected 'Contacts'
     selectedTab = -1;
 	loadingViewFlag = NO;
@@ -267,9 +271,9 @@ BOOL firstTableLoad = YES;
 
     if([AddFriendsController connected]){
         
-        if(selectedTab == FACEBOOK_TAB){
-            return;
-        }
+        //if(selectedTab == FACEBOOK_TAB){
+        //    return;
+        //}
         
         [self.deviceContactItems release];
         self.deviceContactItems = nil;

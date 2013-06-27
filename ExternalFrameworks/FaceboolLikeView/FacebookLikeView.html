@@ -17,7 +17,9 @@
                 iframe.parentNode.removeChild(iframe);  
             };
             function beginForwardingEvent(name) {
-                FB.Event.subscribe(name, function(r) { forwardEvent(name); });
+                FB.Event.subscribe(name, function(r) { 
+                    forwardEvent(name); 
+                });
             };
             function beginForwardingEvents(names) {
                 for (var i = 0; i < names.length; i++) {
