@@ -41,6 +41,7 @@
  -(void)loadPhotoView{
 	//loadingViewFlag = YES;
 	ptController = [[PhotoController alloc]initWithNibName:@"PhotoController" bundle:nil];
+     ptController.flyerNumber = -1;
 	[self.navigationController pushViewController:ptController animated:YES];
 	[ptController release];
 }
@@ -51,6 +52,7 @@
 	//[NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(loadPhotoView) userInfo:nil repeats:NO];
 
 	ptController = [[PhotoController alloc]initWithNibName:@"PhotoController" bundle:nil];
+    ptController.flyerNumber = -1;
 	[self.navigationController pushViewController:ptController animated:YES];
 	[ptController release];
 }

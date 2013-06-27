@@ -128,6 +128,9 @@
     UIScrollView *layerScrollView;
     UIButton *crossButtonGlobal;
     UIButton *editButtonGlobal;
+    
+    int flyerNumber;
+
 }
 
 @property (nonatomic, retain) MyNavigationBar *navBar;
@@ -137,8 +140,8 @@
 @property (nonatomic,retain)  UIImageView *photoImgView;
 @property(nonatomic, retain)  UIImageView *symbolImgView;
 @property(nonatomic, retain)  UIImageView *iconImgView;
-@property (nonatomic, retain)UIImageView *templateBckgrnd;
-@property (nonatomic, retain)UIImageView *textBackgrnd;
+@property (nonatomic, retain) UIImageView *templateBckgrnd;
+@property (nonatomic, retain) UIImageView *textBackgrnd;
 @property (nonatomic, retain) UIImagePickerController *imgPicker;
 @property (nonatomic, retain) UITextView *msgTextView;
 
@@ -203,6 +206,7 @@
 @property (nonatomic,retain) UIAlertView *editAlert;
 
 @property (nonatomic, assign) NSInteger imgPickerFlag;
+@property (nonatomic, assign) int flyerNumber;
 
 - (void)showHUD;
 - (void)killHUD;

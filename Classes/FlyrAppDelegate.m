@@ -18,6 +18,7 @@
 #import "DraftViewController.h"
 #import "Flurry.h"
 #import <Parse/Parse.h>
+#import "BZFoursquare.h"
 
 NSString *kCheckTokenStep = @"kCheckTokenStep";
 NSString *FlickrSharingSuccessNotification = @"FlickrSharingSuccessNotification";
@@ -270,6 +271,8 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     
     // Creat edummy user on parse
     [self createDummyUser];
+    
+    //BZFoursquare *foursquare = [[BZFoursquare alloc] initWithClientID:@"N2UKFTKALD4UBCB0ADNF30O5KIRV03X4UVG0S5Q5V43EDLPN" callbackURL:@"https://www.google.com"];
     
     [self clearCache];
 	changesFlag = NO;

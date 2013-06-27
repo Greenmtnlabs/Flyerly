@@ -336,6 +336,7 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
 
 -(IBAction)doNew:(id)sender{
 	ptController = [[PhotoController alloc]initWithNibName:@"PhotoController" bundle:nil];
+    ptController.flyerNumber = -1;
 	[self.navigationController pushViewController:ptController animated:YES];
 	//[ptController release];
 }

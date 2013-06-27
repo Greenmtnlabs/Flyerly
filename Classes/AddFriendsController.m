@@ -24,6 +24,8 @@ const int TWITTER_TAB = 2;
 const int FACEBOOK_TAB = 1;
 const int CONTACTS_TAB = 0;
 BOOL firstTableLoad = YES;
+BOOL unSelectAll;
+BOOL selectAll;
 
 - (void)viewDidLoad {
     
@@ -120,6 +122,7 @@ BOOL firstTableLoad = YES;
         return;
     }
 
+    selectAll = YES;
     [self.deviceContactItems release];
     self.deviceContactItems = nil;
     self.deviceContactItems = [[NSMutableArray alloc] init];
@@ -275,6 +278,7 @@ BOOL firstTableLoad = YES;
         //    return;
         //}
         
+        selectAll = YES;
         [self.deviceContactItems release];
         self.deviceContactItems = nil;
         self.deviceContactItems = [[NSMutableArray alloc] init];
@@ -453,6 +457,7 @@ int totalCount = 0;
             return;
         }
         
+        selectAll = YES;
         [self.deviceContactItems release];
         self.deviceContactItems = nil;
         self.deviceContactItems = [[NSMutableArray alloc] init];
@@ -543,7 +548,7 @@ int totalCount = 0;
     [params setObject:[acct identifier] forKey:@"user_id"];
     
     TWRequest *getRequest = [[TWRequest alloc] initWithURL:
-                             [NSURL URLWithString:[NSString stringWithFormat:@"https://api.twitter.com/1.1/friends/list.json"]]
+                             [NSURL URLWithString:[NSString stringWithFormat:@"https://api.twitter.com/1.1/followers/list.json"]]
                                                 parameters:params requestMethod:TWRequestMethodGET];
     // Post the request
     [getRequest setAccount:acct];
@@ -854,7 +859,12 @@ NSMutableDictionary *selectedIdentifierDictionary;
     }
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {    
++(void)disableSelectUnSelectFlags{
+    unSelectAll = NO;
+    selectAll = NO;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if(loadingViewFlag){
         for (UIView *subview in self.view.subviews) {
@@ -937,7 +947,7 @@ NSMutableDictionary *selectedIdentifierDictionary;
             if(identifier2)
                 [[AddFriendsController getSelectedIdentifiersDictionary] removeObjectForKey:identifier2];
 
-        } else {
+        } else if(selectAll) {
             [cell.leftCheckBox setSelected:YES];
             [cell.rightCheckBox setSelected:YES];
             cell.leftSelected = YES;
@@ -953,6 +963,32 @@ NSMutableDictionary *selectedIdentifierDictionary;
         // Add cell in array for tracking
         [self.deviceContactItems addObject:cell];
         
+    } else {
+        
+        if(unSelectAll){
+            [cell.leftCheckBox setSelected:NO];
+            [cell.rightCheckBox setSelected:NO];
+            cell.leftSelected = NO;
+            cell.rightSelected = NO;
+            
+            if(identifier1)
+                [[AddFriendsController getSelectedIdentifiersDictionary] removeObjectForKey:identifier1];
+            
+            if(identifier2)
+                [[AddFriendsController getSelectedIdentifiersDictionary] removeObjectForKey:identifier2];
+            
+        } else if(selectAll){
+            [cell.leftCheckBox setSelected:YES];
+            [cell.rightCheckBox setSelected:YES];
+            cell.leftSelected = YES;
+            cell.rightSelected = YES;
+            
+            if(identifier1)
+                [[AddFriendsController getSelectedIdentifiersDictionary] setObject:@"1" forKey:identifier1];
+            
+            if(identifier2)
+                [[AddFriendsController getSelectedIdentifiersDictionary] setObject:@"1" forKey:identifier2];
+        }
     }
 
     // Check index
@@ -1029,6 +1065,7 @@ NSMutableDictionary *selectedIdentifierDictionary;
 - (IBAction)selectAllCheckBoxes:(UIButton *)sender{
     
     unSelectAll = NO;
+    selectAll = YES;
 
     for(AddFriendItem *cell in self.deviceContactItems){
         [cell.leftCheckBox setSelected:YES];
@@ -1047,6 +1084,7 @@ NSMutableDictionary *selectedIdentifierDictionary;
 - (IBAction)unSelectAllCheckBoxes:(UIButton *)sender{
     
     unSelectAll = YES;
+    selectAll = NO;
 
     for(AddFriendItem *cell in self.deviceContactItems){
         [cell.leftCheckBox setSelected:NO];

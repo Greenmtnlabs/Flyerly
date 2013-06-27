@@ -61,8 +61,10 @@
     
     if(leftSelected){
         [[AddFriendsController getSelectedIdentifiersDictionary] setObject:@"1" forKey:identifier1];
+        [AddFriendsController disableSelectUnSelectFlags];
     }else{
         [[AddFriendsController getSelectedIdentifiersDictionary] removeObjectForKey:identifier1];
+        [AddFriendsController disableSelectUnSelectFlags];
     }
 }
 
@@ -77,8 +79,10 @@
     
     if(rightSelected){
         [[AddFriendsController getSelectedIdentifiersDictionary] setObject:@"1" forKey:identifier2];
+        [AddFriendsController disableSelectUnSelectFlags];
     }else{
         [[AddFriendsController getSelectedIdentifiersDictionary] removeObjectForKey:identifier2];
+        [AddFriendsController disableSelectUnSelectFlags];
     }
 }
 

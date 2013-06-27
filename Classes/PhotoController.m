@@ -32,6 +32,7 @@
 @synthesize cameraTabButton,photoTabButton,widthTabButton,heightTabButton,photoImgView,symbolImgView,iconImgView;
 @synthesize photoTouchFlag,symbolTouchFlag,iconTouchFlag, lableTouchFlag,lableLocation,warningAlert,discardAlert,deleteAlert,editAlert;
 @synthesize moreLayersLabel, moreLayersButton, takePhotoButton, cameraRollButton, takePhotoLabel, cameraRollLabel, imgPickerFlag,finalImgWritePath, addMoreLayerOrSaveFlyerLabel, takeOrAddPhotoLabel,layerScrollView;
+@synthesize flyerNumber;
 
 int selectedAddMoreLayerTab = -1;
 const int ADD_MORE_TEXT_TAB = 0;
@@ -43,7 +44,6 @@ int symbolLayerCount = 0;
 int iconLayerCount = 0;
 int textLayerCount = 0;
 int photoLayerCount = 0;
-int flyerNumber = -1;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil templateParam:(UIImage *)templateParam symbolArrayParam:(NSMutableArray *)symbolArrayParam iconArrayParam:(NSMutableArray *)iconArrayParam photoArrayParam:(NSMutableArray *)photoArrayParam textArrayParam:(NSMutableArray *)textArrayParam flyerNumberParam:(int)flyerNumberParam{
     
@@ -91,7 +91,7 @@ int flyerNumber = -1;
     [moreLayersLabel setTextColor:[UIColor whiteColor]];
     [self.view addSubview:moreLayersLabel];
     
-    [addMoreLayerOrSaveFlyerLabel setText:@"ADD MORE LAYERS OR SAVE FLYER \n Tap to adjust layer or tap then hold to edit or delete layer."];
+    [addMoreLayerOrSaveFlyerLabel setText:@"ADD MORE LAYERS OR SAVE FLYER \n ADJUST LAYERS OR TAP THEN HOLD TO EDIT OR DELETE LAYER."];
     [addMoreLayerOrSaveFlyerLabel setNumberOfLines:3];
     [addMoreLayerOrSaveFlyerLabel setBackgroundColor:[UIColor clearColor]];
     [addMoreLayerOrSaveFlyerLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:14]];
@@ -630,7 +630,7 @@ int flyerNumber = -1;
 	symbolTouchFlag=NO;
     iconTouchFlag = NO;
 	lableTouchFlag=NO;
-
+    
 	FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
 	appDele.changesFlag = YES;
 
@@ -3018,18 +3018,18 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
                 UIImage *pencilImage = [UIImage imageNamed:@"pencil_icon"];
                 pencilImage = [PhotoController imageWithImage:pencilImage scaledToSize:CGSizeMake(15, 15)];
 
-                UIButton *crossButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 15, 40)];
+                UIButton *crossButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 50)];
                 [crossButton setImage:image forState:UIControlStateNormal];
                 [crossButton addTarget:self action:@selector(deleteLayer:) forControlEvents:UIControlEventTouchUpInside];
                 [crossButton setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
                 [crossButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
                 
-                UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(40, 0, 15, 40)];
+                UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(30, 0, 30, 50)];
                 [editButton setImage:pencilImage forState:UIControlStateNormal];
                 [editButton addTarget:self action:@selector(editLayer:) forControlEvents:UIControlEventTouchUpInside];
                 [editButton setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
-                [editButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
-                
+                [editButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
+
                 // If delete mode is enabled then show cross button an wobble
                 if(deleteMode){
                     [crossButton setHidden:NO];
@@ -3074,17 +3074,17 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
                 UIImage *pencilImage = [UIImage imageNamed:@"pencil_icon"];
                 pencilImage = [PhotoController imageWithImage:pencilImage scaledToSize:CGSizeMake(15, 15)];
 
-                UIButton *crossButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 15, 40)];
+                UIButton *crossButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 50)];
                 [crossButton setImage:image forState:UIControlStateNormal];
                 [crossButton addTarget:self action:@selector(deleteLayer:) forControlEvents:UIControlEventTouchUpInside];
                 [crossButton setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
                 [crossButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
 
-                UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(40, 0, 15, 40)];
+                UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(30, 0, 30, 50)];
                 [editButton setImage:pencilImage forState:UIControlStateNormal];
                 [editButton addTarget:self action:@selector(editLayer:) forControlEvents:UIControlEventTouchUpInside];
                 [editButton setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
-                [editButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+                [editButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
                 
                 // If delete mode is enabled then show cross button an wobble
                 if(deleteMode){
@@ -3128,17 +3128,17 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
                 UIImage *pencilImage = [UIImage imageNamed:@"pencil_icon"];
                 pencilImage = [PhotoController imageWithImage:pencilImage scaledToSize:CGSizeMake(15, 15)];
 
-                UIButton *crossButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 15, 40)];
+                UIButton *crossButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 50)];
                 [crossButton setImage:image forState:UIControlStateNormal];
                 [crossButton addTarget:self action:@selector(deleteLayer:) forControlEvents:UIControlEventTouchUpInside];
                 [crossButton setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
                 [crossButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
                 
-                UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(40, 0, 15, 40)];
+                UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(30, 0, 30, 50)];
                 [editButton setImage:pencilImage forState:UIControlStateNormal];
                 [editButton addTarget:self action:@selector(editLayer:) forControlEvents:UIControlEventTouchUpInside];
                 [editButton setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
-                [editButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+                [editButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
                 
                 // If delete mode is enabled then show cross button an wobble
                 if(deleteMode){
@@ -3183,17 +3183,17 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
                 UIImage *pencilImage = [UIImage imageNamed:@"pencil_icon"];
                 pencilImage = [PhotoController imageWithImage:pencilImage scaledToSize:CGSizeMake(15, 15)];
                 
-                UIButton *crossButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 15, 40)];
+                UIButton *crossButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 50)];
                 [crossButton setImage:image forState:UIControlStateNormal];
                 [crossButton addTarget:self action:@selector(deleteLayer:) forControlEvents:UIControlEventTouchUpInside];
                 [crossButton setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
                 [crossButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
                 
-                UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(40, 0, 15, 40)];
+                UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(30, 0, 30, 50)];
                 [editButton setImage:pencilImage forState:UIControlStateNormal];
                 [editButton addTarget:self action:@selector(editLayer:) forControlEvents:UIControlEventTouchUpInside];
                 [editButton setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
-                [editButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+                [editButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
                 
                 // If delete mode is enabled then show cross button an wobble
                 if(deleteMode){
@@ -4134,7 +4134,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	}
     
     // Save flyer in pieces to make it editable later
-    [self saveFlyerInPieces:finalImgDetailWritePath flyerFolder:folderPath flyerNumber:largestImgCount];
+    [self saveFlyerInPieces:finalImgDetailWritePath flyerFolder:folderPath flyerNumberParam:largestImgCount];
 	
     // Save flyer details
     [self saveFlyerDetails:finalImgDetailWritePath];
@@ -4163,35 +4163,35 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 /*
  *Save flyer in pieces to make it editable later
  */
--(void)saveFlyerInPieces:(NSString *)filePath flyerFolder:(NSString *)flyerFolder flyerNumber:(int)flyerNumber{
+-(void)saveFlyerInPieces:(NSString *)filePath flyerFolder:(NSString *)flyerFolder flyerNumberParam:(int)flyerNumberParam{
     
-    if(flyerNumber == -1)
-        flyerNumber = 0;
+    if(flyerNumberParam == -1)
+        flyerNumberParam = 0;
     
     NSString *piecesFile = [filePath stringByReplacingOccurrencesOfString:@".txt" withString:@".pieces"];
     NSMutableDictionary *detailDictionary = [[NSMutableDictionary alloc] init];
 
     // Create Template direcrory if not created
     NSString *templateFolderPath = [NSString stringWithFormat:@"%@/Template/", flyerFolder];
-    NSString *templateIndexFolderPath = [NSString stringWithFormat:@"%@/%d", templateFolderPath, flyerNumber];
+    NSString *templateIndexFolderPath = [NSString stringWithFormat:@"%@/%d", templateFolderPath, flyerNumberParam];
     [self createDirectoryAtPath:templateFolderPath];
     [self createDirectoryAtPath:templateIndexFolderPath];
         
     // Create Photo direcrory if not created
     NSString *photoFolderPath = [NSString stringWithFormat:@"%@/Photo/", flyerFolder];
-    NSString *photoIndexFolderPath = [NSString stringWithFormat:@"%@/%d", photoFolderPath, flyerNumber];
+    NSString *photoIndexFolderPath = [NSString stringWithFormat:@"%@/%d", photoFolderPath, flyerNumberParam];
     [self createDirectoryAtPath:photoFolderPath];
     [self createDirectoryAtPath:photoIndexFolderPath];
 
     // Create Symbol direcrory if not created
     NSString *symbolFolderPath = [NSString stringWithFormat:@"%@/Symbol/", flyerFolder];
-    NSString *symbolIndexFolderPath = [NSString stringWithFormat:@"%@/%d", symbolFolderPath, flyerNumber];
+    NSString *symbolIndexFolderPath = [NSString stringWithFormat:@"%@/%d", symbolFolderPath, flyerNumberParam];
     [self createDirectoryAtPath:symbolFolderPath];
     [self createDirectoryAtPath:symbolIndexFolderPath];
     
     // Create Icon direcrory if not created
     NSString *iconFolderPath = [NSString stringWithFormat:@"%@/Icon/", flyerFolder];
-    NSString *iconIndexFolderPath = [NSString stringWithFormat:@"%@/%d", iconFolderPath, flyerNumber];
+    NSString *iconIndexFolderPath = [NSString stringWithFormat:@"%@/%d", iconFolderPath, flyerNumberParam];
     [self createDirectoryAtPath:iconFolderPath];
     [self createDirectoryAtPath:iconIndexFolderPath];
     
@@ -4238,7 +4238,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         NSMutableDictionary *photoDetailDictionary = [[NSMutableDictionary alloc] init];
         
 		NSString *finalPhotoPath = [photoIndexFolderPath stringByAppendingString:[NSString stringWithFormat:@"/%d.jpg", index]];
-        NSData *imgData = UIImagePNGRepresentation(photoToStore.image);
+        NSData *imgData = UIImageJPEGRepresentation(photoToStore.image, 100);
         [[NSFileManager defaultManager] createFileAtPath:finalPhotoPath contents:imgData attributes:nil];
 
         [photoDetailDictionary setObject:finalPhotoPath forKey:@"image"];

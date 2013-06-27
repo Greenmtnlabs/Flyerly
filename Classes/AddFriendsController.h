@@ -50,7 +50,6 @@
     NSMutableArray *deviceContactItems;
     int selectedTab;
 	BOOL loadingViewFlag;
-    BOOL unSelectAll;
 }
 
 @property(nonatomic,retain) IBOutlet UILabel *contactsLabel;
@@ -87,5 +86,6 @@
 -(IBAction)invite;
 + (BOOL)connected;
 +(NSMutableDictionary *)getSelectedIdentifiersDictionary;
++(void)disableSelectUnSelectFlags;
 
 @end

@@ -72,6 +72,8 @@
 		0F734B541742737D0084A2F4 /* top_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F734B521742737D0084A2F4 /* top_bg.png */; };
 		0F734B551742737D0084A2F4 /* top_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F734B531742737D0084A2F4 /* top_bg@2x.png */; };
 		0F734B5617427B790084A2F4 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65B303FA171ED8C8006632E3 /* Accounts.framework */; };
+		0F7E5A5B177C9BD500CF139F /* BZFoursquare.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F7E5A58177C9BD500CF139F /* BZFoursquare.m */; };
+		0F7E5A5C177C9BD500CF139F /* BZFoursquareRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F7E5A5A177C9BD500CF139F /* BZFoursquareRequest.m */; };
 		0F7F02BC1765F7D300FC750F /* AlertViewBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F7F02BB1765F7D300FC750F /* AlertViewBackground.png */; };
 		0F7F02C0176612FD00FC750F /* FlyerOverlayController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F7F02BF176612FD00FC750F /* FlyerOverlayController.xib */; };
 		0F7F02C3176616B100FC750F /* FlyerOverlayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F7F02C2176616B100FC750F /* FlyerOverlayController.m */; };
@@ -995,6 +997,10 @@
 		0DFC532B1095781500B18478 /* backgrnd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backgrnd.png; sourceTree = "<group>"; };
 		0F734B521742737D0084A2F4 /* top_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = top_bg.png; sourceTree = "<group>"; };
 		0F734B531742737D0084A2F4 /* top_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "top_bg@2x.png"; sourceTree = "<group>"; };
+		0F7E5A57177C9BD500CF139F /* BZFoursquare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZFoursquare.h; path = Foursquare/BZFoursquare.h; sourceTree = "<group>"; };
+		0F7E5A58177C9BD500CF139F /* BZFoursquare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZFoursquare.m; path = Foursquare/BZFoursquare.m; sourceTree = "<group>"; };
+		0F7E5A59177C9BD500CF139F /* BZFoursquareRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZFoursquareRequest.h; path = Foursquare/BZFoursquareRequest.h; sourceTree = "<group>"; };
+		0F7E5A5A177C9BD500CF139F /* BZFoursquareRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZFoursquareRequest.m; path = Foursquare/BZFoursquareRequest.m; sourceTree = "<group>"; };
 		0F7F02BB1765F7D300FC750F /* AlertViewBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AlertViewBackground.png; sourceTree = "<group>"; };
 		0F7F02BF176612FD00FC750F /* FlyerOverlayController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FlyerOverlayController.xib; sourceTree = "<group>"; };
 		0F7F02C1176616B000FC750F /* FlyerOverlayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlyerOverlayController.h; sourceTree = "<group>"; };
@@ -2233,6 +2239,7 @@
 		0DF3A2D7108DF27200D6C887 /* ExternalFrameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0F7E5A56177C9B8D00CF139F /* Foursquare */,
 				0FDB5628175E45640078EBEC /* FacebookLikeView */,
 				0F7FC383175CE261009DEB08 /* AsyncImageView */,
 				0FE0BDD11758BBB900C4D78D /* InAppPurchase */,
@@ -2721,6 +2728,17 @@
 				0DFA8B3510AD851300F779CA /* ImageCache.m */,
 			);
 			path = imageCache;
+			sourceTree = "<group>";
+		};
+		0F7E5A56177C9B8D00CF139F /* Foursquare */ = {
+			isa = PBXGroup;
+			children = (
+				0F7E5A57177C9BD500CF139F /* BZFoursquare.h */,
+				0F7E5A58177C9BD500CF139F /* BZFoursquare.m */,
+				0F7E5A59177C9BD500CF139F /* BZFoursquareRequest.h */,
+				0F7E5A5A177C9BD500CF139F /* BZFoursquareRequest.m */,
+			);
+			name = Foursquare;
 			sourceTree = "<group>";
 		};
 		0F7FC383175CE261009DEB08 /* AsyncImageView */ = {
@@ -4368,6 +4386,8 @@
 				0FDB5631175E45730078EBEC /* FacebookLikeView.m in Sources */,
 				0FDB5632175E45730078EBEC /* NSData+Extras.m in Sources */,
 				0F7F02C3176616B100FC750F /* FlyerOverlayController.m in Sources */,
+				0F7E5A5B177C9BD500CF139F /* BZFoursquare.m in Sources */,
+				0F7E5A5C177C9BD500CF139F /* BZFoursquareRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
