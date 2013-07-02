@@ -50,7 +50,7 @@
      UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:closeButton];
      [self.navigationItem setLeftBarButtonItem:leftBarButton];
 
-    self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Help Center"];
+    self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Help Center" rect:CGRectMake(-60, -6, 50, 50)];
 
     if(IS_IPHONE_5){
         emailButton = [[UIButton alloc] initWithFrame:CGRectMake(14, 876, 120, 10)];

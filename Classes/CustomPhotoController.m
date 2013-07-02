@@ -334,7 +334,7 @@ BOOL galleryExpanded = NO;
     
     [self.navigationItem setRightBarButtonItem:rightBarButton];
 
-    self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"SCALE & CROP"];
+    self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"SCALE & CROP" rect:CGRectMake(-70, -6, 50, 50)];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

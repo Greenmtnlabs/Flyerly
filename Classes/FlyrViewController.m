@@ -169,7 +169,7 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
     //[saveFlyrLabel setBackgroundColor:[UIColor clearColor]];
     //[saveFlyrLabel setText:@"Saved flyer"];
     //UIBarButtonItem *barLabel = [[UIBarButtonItem alloc] initWithCustomView:saveFlyrLabel];
-    self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Saved flyers"];
+    self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Saved flyers" rect:CGRectMake(-60, -6, 50, 50)];
 
     // Create left bar help button
     UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 54, 35)];

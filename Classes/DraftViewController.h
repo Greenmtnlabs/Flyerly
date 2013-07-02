@@ -39,6 +39,10 @@
     
 	IBOutlet UILabel *saveToCameraRollLabel;
     IBOutlet UISwitch *saveToRollSwitch;
+	IBOutlet UIButton *locationBackground;
+	IBOutlet UIButton *locationButton;
+	IBOutlet UILabel *locationLabel;
+	IBOutlet UIView *networkParentView;
 
 	UIImage *selectedFlyerImage;
 	NSString *selectedFlyerTitle;
@@ -80,6 +84,10 @@
 
 @property(nonatomic,retain) IBOutlet UILabel *saveToCameraRollLabel;
 @property(nonatomic,retain) IBOutlet UISwitch *saveToRollSwitch;
+@property(nonatomic,retain) IBOutlet UILabel *locationLabel;
+@property(nonatomic,retain) IBOutlet UIButton *locationBackground;
+@property(nonatomic,retain) IBOutlet UIView *networkParentView;
+@property(nonatomic,retain) IBOutlet UIButton *locationButton;
 
 @property(nonatomic,retain) IBOutlet UIScrollView *scrollView;
 
@@ -119,5 +127,6 @@
 -(IBAction)onClickFlickrButton;
 -(IBAction)onClickSMSButton;
 -(IBAction)onClickClipboardButton;
+-(IBAction)searchNearByLocations;
 
 @end

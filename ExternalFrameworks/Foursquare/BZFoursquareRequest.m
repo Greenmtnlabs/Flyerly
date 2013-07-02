@@ -177,7 +177,7 @@ static NSString * _BZGetMIMEBoundary() {
             error = [NSError errorWithDomain:@"org.brautaset.SBJsonParser.ErrorDomain" code:0 userInfo:userInfo];
         }
 #else
-#error BZ_USE_* must be defined
+//#error BZ_USE_* must be defined
 #endif
     }
 #else

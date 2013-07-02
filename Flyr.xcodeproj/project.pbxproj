@@ -222,6 +222,12 @@
 		0FBC37F7174F980600004F21 /* twt_setting_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FBC37D9174F980500004F21 /* twt_setting_selected@2x.png */; };
 		0FBC37F8174F980600004F21 /* twt_setting.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FBC37DA174F980500004F21 /* twt_setting.png */; };
 		0FBC37F9174F980600004F21 /* twt_setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FBC37DB174F980500004F21 /* twt_setting@2x.png */; };
+		0FCC3A1C177D8C5C0046484C /* settings2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FCC3A1A177D8C5B0046484C /* settings2.png */; };
+		0FCC3A1D177D8C5C0046484C /* settings2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FCC3A1B177D8C5B0046484C /* settings2@2x.png */; };
+		0FCC3A23177DCFA40046484C /* LocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FCC3A22177DCFA40046484C /* LocationController.m */; };
+		0FCC3A28177DD3080046484C /* LocationItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FCC3A27177DD3080046484C /* LocationItem.xib */; };
+		0FCC3A2B177DD35D0046484C /* LocationItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FCC3A2A177DD35D0046484C /* LocationItem.m */; };
+		0FCC3A2D177DD8BF0046484C /* LocationController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FCC3A2C177DD8BF0046484C /* LocationController.xib */; };
 		0FCDA58C1769BED200625235 /* pencil_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FCDA58A1769BED200625235 /* pencil_blue.png */; };
 		0FCDA58D1769BED200625235 /* pencil_blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FCDA58B1769BED200625235 /* pencil_blue@2x.png */; };
 		0FD78050177B398800DF5060 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FD7804D177B398800DF5060 /* AudioToolbox.framework */; };
@@ -1151,6 +1157,14 @@
 		0FBC37D9174F980500004F21 /* twt_setting_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twt_setting_selected@2x.png"; sourceTree = "<group>"; };
 		0FBC37DA174F980500004F21 /* twt_setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twt_setting.png; sourceTree = "<group>"; };
 		0FBC37DB174F980500004F21 /* twt_setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twt_setting@2x.png"; sourceTree = "<group>"; };
+		0FCC3A1A177D8C5B0046484C /* settings2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings2.png; sourceTree = "<group>"; };
+		0FCC3A1B177D8C5B0046484C /* settings2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings2@2x.png"; sourceTree = "<group>"; };
+		0FCC3A21177DCFA40046484C /* LocationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationController.h; sourceTree = "<group>"; };
+		0FCC3A22177DCFA40046484C /* LocationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationController.m; sourceTree = "<group>"; };
+		0FCC3A27177DD3080046484C /* LocationItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocationItem.xib; sourceTree = "<group>"; };
+		0FCC3A29177DD35D0046484C /* LocationItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationItem.h; sourceTree = "<group>"; };
+		0FCC3A2A177DD35D0046484C /* LocationItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationItem.m; sourceTree = "<group>"; };
+		0FCC3A2C177DD8BF0046484C /* LocationController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocationController.xib; sourceTree = "<group>"; };
 		0FCDA58A1769BED200625235 /* pencil_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pencil_blue.png; sourceTree = "<group>"; };
 		0FCDA58B1769BED200625235 /* pencil_blue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pencil_blue@2x.png"; sourceTree = "<group>"; };
 		0FD7804D177B398800DF5060 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -2090,6 +2104,10 @@
 				0FEF2DA8174E66FC00FDD8C9 /* HelpController.m */,
 				0F7F02C1176616B000FC750F /* FlyerOverlayController.h */,
 				0F7F02C2176616B100FC750F /* FlyerOverlayController.m */,
+				0FCC3A21177DCFA40046484C /* LocationController.h */,
+				0FCC3A22177DCFA40046484C /* LocationController.m */,
+				0FCC3A29177DD35D0046484C /* LocationItem.h */,
+				0FCC3A2A177DD35D0046484C /* LocationItem.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -2316,6 +2334,8 @@
 		0DF3A361108DF47400D6C887 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				0FCC3A1A177D8C5B0046484C /* settings2.png */,
+				0FCC3A1B177D8C5B0046484C /* settings2@2x.png */,
 				0FE35C6C1779E1470015C215 /* top_bg_without_logo2.png */,
 				0FE35C6D1779E1470015C215 /* top_bg_without_logo2@2x.png */,
 				0FE6F9B31770763200C726F7 /* pinned_flyer2-568h@2x.png */,
@@ -2986,6 +3006,8 @@
 				0FF29F2F174629270007B309 /* ShareProgressView.xib */,
 				0FEF2D99174E65B100FDD8C9 /* HelpController.xib */,
 				0F7F02BF176612FD00FC750F /* FlyerOverlayController.xib */,
+				0FCC3A27177DD3080046484C /* LocationItem.xib */,
+				0FCC3A2C177DD8BF0046484C /* LocationController.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -4244,6 +4266,10 @@
 				0FE6F9B81770763200C726F7 /* pinned_flyer2@2x.png in Resources */,
 				0FE35C6E1779E1470015C215 /* top_bg_without_logo2.png in Resources */,
 				0FE35C6F1779E1470015C215 /* top_bg_without_logo2@2x.png in Resources */,
+				0FCC3A1C177D8C5C0046484C /* settings2.png in Resources */,
+				0FCC3A1D177D8C5C0046484C /* settings2@2x.png in Resources */,
+				0FCC3A28177DD3080046484C /* LocationItem.xib in Resources */,
+				0FCC3A2D177DD8BF0046484C /* LocationController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4388,6 +4414,8 @@
 				0F7F02C3176616B100FC750F /* FlyerOverlayController.m in Sources */,
 				0F7E5A5B177C9BD500CF139F /* BZFoursquare.m in Sources */,
 				0F7E5A5C177C9BD500CF139F /* BZFoursquareRequest.m in Sources */,
+				0FCC3A23177DCFA40046484C /* LocationController.m in Sources */,
+				0FCC3A2B177DD35D0046484C /* LocationItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

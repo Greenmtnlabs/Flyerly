@@ -22,6 +22,7 @@
 #import <Parse/PFFile.h>
 #import <Parse/PFObject.h>
 #import <Parse/PFUser.h>
+#import "LocationController.h"
 
 static UIView *progressView;
 static ShareProgressView *flickrPogressView;
@@ -31,7 +32,7 @@ static ShareProgressView *tumblrPogressView;
 
 @implementation DraftViewController
 
-@synthesize selectedFlyerImage,imgView,navBar,fvController,svController,titleView,descriptionView,selectedFlyerDescription,selectedFlyerTitle, detailFileName, imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,loadingView,dic,fromPhotoController,scrollView,instagramPogressView, saveToCameraRollLabel, saveToRollSwitch,twit;
+@synthesize selectedFlyerImage,imgView,navBar,fvController,svController,titleView,descriptionView,selectedFlyerDescription,selectedFlyerTitle, detailFileName, imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,loadingView,dic,fromPhotoController,scrollView,instagramPogressView, saveToCameraRollLabel, saveToRollSwitch,twit,locationBackground,locationLabel,networkParentView,locationButton;
 //@synthesize twitterPogressView,facebookPogressView,tumblrPogressView,flickrPogressView,progressView;
 
 -(void)callFlyrView{
@@ -66,14 +67,17 @@ static ShareProgressView *tumblrPogressView;
 
     // init progress view
     if(!progressView){
-        progressView = [[UIView alloc] initWithFrame:CGRectMake(0, 2, 310, 3)];
-        [self.scrollView addSubview:progressView];
+        progressView = [[UIView alloc] initWithFrame:CGRectMake(0, 46, 310, 3)];
+        [self.view addSubview:progressView];
     } else {
         // Remove all progress views
         [[progressView subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
-        [progressView setFrame:CGRectMake(0, 2, 310, 3)];
-        [self.scrollView addSubview:progressView];
+        [progressView setFrame:CGRectMake(0, 46, 310, 3)];
+        [self.view addSubview:progressView];
     }
+    
+    // Set click event on switch
+    [saveToRollSwitch addTarget:self action:@selector(setSwitchState:) forControlEvents:UIControlEventValueChanged];
     
     // Set facebook as per settings
     if([[NSUserDefaults standardUserDefaults] stringForKey:@"facebookSetting"]){
@@ -178,10 +182,12 @@ static ShareProgressView *tumblrPogressView;
 }
 
     // Set title on bar
-    self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Share flyer"];
+    self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Share flyer" rect:CGRectMake(-60, -6, 50, 50)];
 
     // Set font and size on camera roll text
     [saveToCameraRollLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
+    // Set font and size on camera roll text
+    [locationLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
 
     // Setup flyer edit button
     UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 25, 30)];
@@ -258,6 +264,38 @@ static ShareProgressView *tumblrPogressView;
         countOfSharingNetworks++;
         [self increaseProgressViewHeightBy:36];
     }
+}
+
+/*
+ * get switch on off event
+ */
+-(void)setSwitchState:(id)sender {
+    if([sender isOn]){
+        [locationLabel setHidden:NO];
+        [locationBackground setHidden:NO];
+        [locationButton setHidden:NO];
+
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationDuration:0.2];
+        [UIView setAnimationCurve:UIViewAnimationCurveLinear];
+        [scrollView setFrame:CGRectMake(scrollView.frame.origin.x, scrollView.frame.origin.y, scrollView.frame.size.width, scrollView.frame.size.height + 30)];
+        // move view down
+        [networkParentView setFrame:CGRectMake(networkParentView.frame.origin.x, networkParentView.frame.origin.y + 30, networkParentView.frame.size.width, networkParentView.frame.size.height)];
+        [UIView commitAnimations];
+
+    }else{
+        [locationLabel setHidden:YES];
+        [locationBackground setHidden:YES];
+        [locationButton setHidden:YES];
+
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationDuration:0.2];
+        [UIView setAnimationCurve:UIViewAnimationCurveLinear];
+        [scrollView setFrame:CGRectMake(scrollView.frame.origin.x, scrollView.frame.origin.y, scrollView.frame.size.width, scrollView.frame.size.height - 30)];        
+        // move view up
+        [networkParentView setFrame:CGRectMake(networkParentView.frame.origin.x, networkParentView.frame.origin.y - 30, networkParentView.frame.size.width, networkParentView.frame.size.height)];
+        [UIView commitAnimations];
+}
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -1267,14 +1305,20 @@ static ShareProgressView *tumblrPogressView;
 
 -(void)increaseProgressViewHeightBy:(int)height{
     [progressView setFrame:CGRectMake(progressView.frame.origin.x, progressView.frame.origin.y, progressView.frame.size.width, progressView.frame.size.height + height)];
-    [scrollView setFrame:CGRectMake(scrollView.frame.origin.x, scrollView.frame.origin.y, scrollView.frame.size.width, scrollView.frame.size.height + height)];
-    [scrollView setContentSize:CGSizeMake(scrollView.frame.size.width, scrollView.frame.size.height + height)];
+    [scrollView setFrame:CGRectMake(scrollView.frame.origin.x, scrollView.frame.origin.y + height, scrollView.frame.size.width, scrollView.frame.size.height)];
+    [scrollView setContentSize:CGSizeMake(scrollView.frame.size.width, scrollView.frame.size.height+ height)];
 }
 
 -(void)setDefaultProgressViewHeight{
-    [progressView setFrame:CGRectMake(0, 2, 310, 3)];
-    [scrollView setFrame:CGRectMake(5, 50, 310, 401)];
-    [scrollView setContentSize:CGSizeMake(310, 401)];
+    [progressView setFrame:CGRectMake(0, 46, 310, 3)];
+    
+    if(IS_IPHONE_5){
+        [scrollView setFrame:CGRectMake(5, 50, 310, 548)];
+        [scrollView setContentSize:CGSizeMake(310, 548)];
+    }else{
+        [scrollView setFrame:CGRectMake(5, 50, 310, 401)];
+        [scrollView setContentSize:CGSizeMake(310, 401)];
+    }
 }
 
 -(void)remoAllSharingViews{
@@ -1500,6 +1544,16 @@ static ShareProgressView *tumblrPogressView;
         [self shareOnInstagram];
     }
     
+}
+
+-(IBAction)searchNearByLocations{
+
+    NSLog(@"Search Near By Locations");
+    
+    LocationController *locationController = [[LocationController alloc]initWithNibName:@"LocationController" bundle:nil];
+    
+	[self.navigationController pushViewController:locationController animated:YES];
+
 }
 
 - (void)postDismissCleanup {

@@ -316,6 +316,7 @@
 								<string key="NSFrame">{{125, 392}, {71, 69}}</string>
 								<reference key="NSSuperview" ref="87613878"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -329,11 +330,7 @@
 								<reference key="IBUINormalTitleShadowColor" ref="384320666"/>
 								<object class="NSCustomResource" key="IBUINormalImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">settings.png</string>
-								</object>
-								<object class="NSCustomResource" key="IBUISelectedBackgroundImage">
-									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">settings_selected.png</string>
+									<string key="NSResourceName">settings2.png</string>
 								</object>
 								<reference key="IBUIFontDescription" ref="311371421"/>
 								<reference key="IBUIFont" ref="1051223800"/>
@@ -1006,7 +1003,7 @@
 				<string key="32.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="474.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="533.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<real value="0.0" key="533.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
+				<real value="2" key="533.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 				<string key="534.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="539.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="541.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -1058,23 +1055,16 @@
 					<string key="className">LauchViewController</string>
 					<string key="superclassName">UIViewController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="createTwitLogin:">id</string>
 						<string key="doAbout:">id</string>
 						<string key="doInvite:">id</string>
 						<string key="doNew:">id</string>
 						<string key="doOpen:">id</string>
-						<string key="followOnTwitter:">id</string>
 						<string key="goBack">id</string>
 						<string key="onTwitter:">id</string>
 						<string key="showFlyerDetail:">UIImageView</string>
 						<string key="showLikeButton">id</string>
-						<string key="unFollowOnTwitter:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="createTwitLogin:">
-							<string key="name">createTwitLogin:</string>
-							<string key="candidateClassName">id</string>
-						</object>
 						<object class="IBActionInfo" key="doAbout:">
 							<string key="name">doAbout:</string>
 							<string key="candidateClassName">id</string>
@@ -1091,10 +1081,6 @@
 							<string key="name">doOpen:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-						<object class="IBActionInfo" key="followOnTwitter:">
-							<string key="name">followOnTwitter:</string>
-							<string key="candidateClassName">id</string>
-						</object>
 						<object class="IBActionInfo" key="goBack">
 							<string key="name">goBack</string>
 							<string key="candidateClassName">id</string>
@@ -1109,10 +1095,6 @@
 						</object>
 						<object class="IBActionInfo" key="showLikeButton">
 							<string key="name">showLikeButton</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="unFollowOnTwitter:">
-							<string key="name">unFollowOnTwitter:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 					</dictionary>
@@ -1223,9 +1205,8 @@
 			<string key="mid_shadow.png">{105, 52}</string>
 			<string key="pinned_flyer2.png">{63, 83}</string>
 			<string key="pinned_flyer_bg2.png">{130, 130}</string>
-			<string key="settings.png">{71, 69}</string>
+			<string key="settings2.png">{71, 69}</string>
 			<string key="settings_bg.png">{156, 47}</string>
-			<string key="settings_selected.png">{71, 69}</string>
 			<string key="shadow.png">{104, 48}</string>
 			<string key="three_buttons.png">{320, 61}</string>
 			<string key="twitter_follow.png">{79, 49}</string>

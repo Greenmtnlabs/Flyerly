@@ -24,14 +24,13 @@ extern NSString* kGetSessionProxy;
 //static NSString* kApiSecret = @"e9861b57e32abb6821c6853854786302"; // @"<YOUR SECRET KEY>";
 //static NSString* kGetSessionProxy=nil; // @"<YOUR SESSION CALLBACK)>";
 
-
 @implementation SettingViewController
 @synthesize flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,helpTab,loadingView;
 
 -(void)viewWillAppear:(BOOL)animated{
 
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
-    self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Settings"];
+    self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Settings" rect:CGRectMake(-45, -6, 50, 50)];
     
     UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 31, 30)];
     [menuButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];

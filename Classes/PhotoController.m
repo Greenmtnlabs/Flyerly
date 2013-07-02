@@ -1933,7 +1933,7 @@ int arrangeLayerIndex;
         
 	} else if(alertView == editAlert && buttonIndex == 1) {
         
-        [self editLayer:editButtonGlobal overrided:nil];
+        //[self editLayer:editButtonGlobal overrided:nil];
         
     }
 }
@@ -1960,20 +1960,19 @@ int arrangeLayerIndex;
 	
 }
 
-+(UILabel *)setTitleViewWithTitle:(NSString *)title{
-    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
++(UIView *)setTitleViewWithTitle:(NSString *)title rect:(CGRect)rect{
+    UILabel *label = [[[UILabel alloc] initWithFrame:rect] autorelease];
     label.backgroundColor = [UIColor clearColor];
-    //label.font = [UIFont boldSystemFontOfSize:18.0];
     [label setFont:[UIFont fontWithName:@"Symbol" size:18]];
     label.textAlignment = NSTextAlignmentCenter;
-    //label.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
-    //label.textColor = [MyCustomCell colorWithHexString:@"008ec0"];
-    //label.textColor = [UIColor darkGrayColor];
     label.textColor = [UIColor whiteColor];
     label.text = NSLocalizedString([title uppercaseString], @"");
     [label sizeToFit];
 
-    return label;
+    UIView *titleView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
+    [titleView addSubview:label];    
+    
+    return titleView;
 }
 
 -(void)chooseTemplate{
@@ -1983,7 +1982,7 @@ int arrangeLayerIndex;
     iconTouchFlag = NO;
 	imgPickerFlag = 1;
 	
-    self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Add Background"];
+    self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Add Background" rect:CGRectMake(-80, -6, 50, 50)];
     
     /*UIButton *textButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 32, 29)];
     [textButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
@@ -2133,7 +2132,7 @@ int arrangeLayerIndex;
     symbolTouchFlag= NO;
     iconTouchFlag = NO;
 
-    self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Add Text"];
+    self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Add Text" rect:CGRectMake(-45, -6, 50, 50)];
 
     UIButton *nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
 	[nextButton addTarget:self action:@selector(callStyle) forControlEvents:UIControlEventTouchUpInside];
@@ -2206,7 +2205,7 @@ int arrangeLayerIndex;
 -(void)callStyle
 {
 
-    self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Add Text"];
+    self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Add Text" rect:CGRectMake(-45, -6, 50, 50)];
 
     if(selectedAddMoreLayerTab == -1){
         UIButton *photoButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
@@ -2315,7 +2314,7 @@ int arrangeLayerIndex;
 {
 
     //selectedAddMoreLayerTab = -1;
-    self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Add photo"];
+    self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Add photo" rect:CGRectMake(-45, -6, 50, 50)];
 
     if(selectedAddMoreLayerTab == -1){
         UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
@@ -2428,7 +2427,7 @@ int arrangeLayerIndex;
 
 -(void)callAddMoreLayers {
     
-    self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Add layers"];
+    self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Add layers" rect:CGRectMake(-50, -6, 50, 50)];
     
     UIButton *saveButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
     saveButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
@@ -2844,7 +2843,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     
 	if(selectedButton == addMoreFontTabButton)
 	{
-        self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Add layers"];
+        self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Add layers" rect:CGRectMake(-50, -6, 50, 50)];
         selectedAddMoreLayerTab = ADD_MORE_TEXT_TAB;
         [self hideAddMoreAndSaveLabel];
         [self hideTakeOrAddPhotoLabel];
@@ -2868,7 +2867,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	}
 	else if(selectedButton == addMorePhotoTabButton)
 	{
-        self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Add layers"];
+        self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Add layers" rect:CGRectMake(-50, -6, 50, 50)];
         selectedAddMoreLayerTab = ADD_MORE_PHOTO_TAB;
         [self hideAddMoreAndSaveLabel];
         [self showTakeOrAddPhotoLabel];
@@ -2904,7 +2903,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	}
 	else if(selectedButton == addMoreSymbolTabButton)
 	{
-        self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Add layers"];
+        self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Add layers" rect:CGRectMake(-50, -6, 50, 50)];
         selectedAddMoreLayerTab = ADD_MORE_SYMBOL_TAB;
         [self hideAddMoreAndSaveLabel];
         [self hideTakeOrAddPhotoLabel];
@@ -2938,7 +2937,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	}
 	else if(selectedButton == addMoreIconTabButton)
 	{
-        self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Add layers"];
+        self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Add layers" rect:CGRectMake(-50, -6, 50, 50)];
         selectedAddMoreLayerTab = ADD_MORE_ICON_TAB;
         [self hideAddMoreAndSaveLabel];
         [self hideTakeOrAddPhotoLabel];
@@ -2972,7 +2971,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	else if(selectedButton == arrangeLayerTabButton)
 	{
         
-        self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Arrange layers"];
+        self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Arrange layers" rect:CGRectMake(-80, -6, 50, 50)];
         selectedAddMoreLayerTab = ARRANGE_LAYER_TAB;
         [self removeBordersFromAllLayers];
         [self hideAddMoreAndSaveLabel];
@@ -3250,8 +3249,10 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     
     editButtonGlobal = editButton;
     
-    editAlert = [[UIAlertView alloc]initWithTitle:@"Warning" message:@"Edit this layer?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK" ,nil];
-    [editAlert show];
+    [self editLayer:editButtonGlobal overrided:nil];
+
+    //editAlert = [[UIAlertView alloc]initWithTitle:@"Warning" message:@"Edit this layer?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK" ,nil];
+    //[editAlert show];
 
 }
 
@@ -3305,7 +3306,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
     crossButtonGlobal = crossButton;
     
-    deleteAlert = [[UIAlertView alloc]initWithTitle:@"Warning" message:@"Delete this layer?." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK" ,nil];
+    deleteAlert = [[UIAlertView alloc]initWithTitle:@"Warning" message:@"Delete this layer?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK" ,nil];
     [deleteAlert show];
 }
 

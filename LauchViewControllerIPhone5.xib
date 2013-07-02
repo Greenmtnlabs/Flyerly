@@ -191,7 +191,7 @@
 								<string key="NSFrame">{{169, 304}, {136, 136}}</string>
 								<reference key="NSSuperview" ref="970294404"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="122004284"/>
+								<reference key="NSNextKeyView" ref="741214772"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -316,6 +316,7 @@
 								<string key="NSFrame">{{125, 480}, {71, 69}}</string>
 								<reference key="NSSuperview" ref="970294404"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -329,11 +330,7 @@
 								<reference key="IBUINormalTitleShadowColor" ref="350055627"/>
 								<object class="NSCustomResource" key="IBUINormalImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">settings.png</string>
-								</object>
-								<object class="NSCustomResource" key="IBUISelectedBackgroundImage">
-									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">settings_selected.png</string>
+									<string key="NSResourceName">settings2.png</string>
 								</object>
 								<reference key="IBUIFontDescription" ref="689705409"/>
 								<reference key="IBUIFont" ref="280861376"/>
@@ -373,7 +370,7 @@
 								<string key="NSFrame">{{169, 304}, {136, 136}}</string>
 								<reference key="NSSuperview" ref="970294404"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="541495139"/>
+								<reference key="NSNextKeyView" ref="122004284"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<int key="IBUIContentMode">4</int>
 								<int key="IBUITag">1000</int>
@@ -537,7 +534,7 @@
 										<string key="NSFrame">{{80, 53}, {55, 33}}</string>
 										<reference key="NSSuperview" ref="897579066"/>
 										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView" ref="741214772"/>
+										<reference key="NSNextKeyView" ref="541495139"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<bool key="IBUIOpaque">NO</bool>
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -999,7 +996,7 @@
 				<string key="13.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="14.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="16.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<real value="0.0" key="16.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
+				<real value="2" key="16.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 				<string key="19.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="20.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="21.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -1120,6 +1117,7 @@
 						<string key="savedFlyrLabel">UILabel</string>
 						<string key="secondFlyer">UIImageView</string>
 						<string key="thirdFlyer">UIImageView</string>
+						<string key="webview">UIWebView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<object class="IBToOneOutletInfo" key="createFlyrButton">
@@ -1182,6 +1180,10 @@
 							<string key="name">thirdFlyer</string>
 							<string key="candidateClassName">UIImageView</string>
 						</object>
+						<object class="IBToOneOutletInfo" key="webview">
+							<string key="name">webview</string>
+							<string key="candidateClassName">UIWebView</string>
+						</object>
 					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
@@ -1202,9 +1204,8 @@
 			<string key="mid_shadow.png">{105, 52}</string>
 			<string key="pinned_flyer2.png">{63, 83}</string>
 			<string key="pinned_flyer_bg2.png">{130, 130}</string>
-			<string key="settings.png">{71, 69}</string>
+			<string key="settings2.png">{71, 69}</string>
 			<string key="settings_bg.png">{156, 47}</string>
-			<string key="settings_selected.png">{71, 69}</string>
 			<string key="shadow.png">{104, 48}</string>
 			<string key="three_buttons.png">{320, 61}</string>
 			<string key="twitter_follow.png">{79, 49}</string>

@@ -218,7 +218,7 @@
 -(void)loadPhotoLibrary;
 -(void)setPhotoTabAction:(id) sender;
 + (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize;
-+(UILabel *)setTitleViewWithTitle:(NSString *)title;
++(UIView *)setTitleViewWithTitle:(NSString *)title rect:(CGRect)rect;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil templateParam:(UIImage *)templateParam symbolArrayParam:(NSMutableArray *)symbolArrayParam iconArrayParam:(NSMutableArray *)iconArrayParam photoArrayParam:(NSMutableArray *)photoArrayParam textArrayParam:(NSMutableArray *)textArrayParam flyerNumberParam:(int)flyerNumberParam;
 
 @end
