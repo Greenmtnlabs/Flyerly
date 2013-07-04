@@ -251,6 +251,9 @@ return cell;\
 #define TumblrAPIKey @"7g8ugn9opLIb2oKLQBlnbDjBoYKQHbVd9TgtVZRMz5NK1GXgXS"
 #define TumblrSecretKey @"4uAmyM6YOL0UyGykUPaRpkCVVELLze9Nu1I2bNWXRWYOuDQA6u"
 
+#define FOURSQUARE_CLIENT_ID @"N2UKFTKALD4UBCB0ADNF30O5KIRV03X4UVG0S5Q5V43EDLPN"
+#define FOURSQUARE_CALLBACK_URL @"fsqapi://foursquare"
+
 #define AddCaptionText @"Add caption here"
 #define NameYourFlyerText @"Name your Flyer"
 #define FlyerDateFormat @"MM/dd/YYYY"

@@ -209,8 +209,11 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
         //return YES;
         
         return [[self facebook] handleOpenURL:url];
-
         
+    } else if([[url absoluteString] hasPrefix:@"fsqapi"]){
+    
+        return [[self foursquare] handleOpenURL:url];
+
     } else {
         
         return [[TMAPIClient sharedInstance] handleOpenURL:url];

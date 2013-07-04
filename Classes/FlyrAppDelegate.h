@@ -13,6 +13,7 @@
 #import "TwitLogin.h"
 #import <ObjectiveFlickr.h>
 #import "Crittercism.h"
+#import "BZFoursquare.h"
 
 extern NSString *FlickrSharingSuccessNotification;
 extern NSString *FlickrSharingFailureNotification;
@@ -39,6 +40,7 @@ extern NSString *FacebookDidLoginNotification;
 	OFFlickrAPIContext *flickrContext;
 	OFFlickrAPIRequest *flickrRequest;
 	NSString *flickrUserName;
+    BZFoursquare *foursquare_;
     
     UIView *sharingProgressParentView;
 }
@@ -55,8 +57,8 @@ extern NSString *FacebookDidLoginNotification;
 @property (nonatomic, retain) OFFlickrAPIRequest *flickrRequest;
 
 @property (strong, nonatomic) Facebook *facebook;
-
 @property (nonatomic,retain) TwitLogin *_tSession;
+@property(nonatomic,strong) BZFoursquare *foursquare;
 @property (nonatomic,assign)	BOOL faceBookPermissionFlag;
 @property (nonatomic,assign) BOOL changesFlag;
 

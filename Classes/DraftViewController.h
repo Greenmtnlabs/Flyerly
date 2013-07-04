@@ -73,7 +73,10 @@
     ShareProgressView *instagramPogressView;
     
     OLBTwitpicEngine *twit;
+    NSMutableArray *listOfPlaces;
 }
+
+@property(nonatomic,retain) NSMutableArray *listOfPlaces;
 
 /*@property(nonatomic,retain) IBOutlet UIView *progressView;
 @property(nonatomic,retain) ShareProgressView *facebookPogressView;

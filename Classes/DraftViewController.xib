@@ -173,7 +173,7 @@
 							<object class="IBUIButton" id="721995232">
 								<reference key="NSNextResponder" ref="82517146"/>
 								<int key="NSvFlags">-2147483356</int>
-								<string key="NSFrame">{{17, 197}, {19, 23}}</string>
+								<string key="NSFrame">{{17, 197}, {18, 18}}</string>
 								<reference key="NSSuperview" ref="82517146"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="118002"/>
@@ -198,9 +198,10 @@
 							<object class="IBUILabel" id="118002">
 								<reference key="NSNextResponder" ref="82517146"/>
 								<int key="NSvFlags">-2147483356</int>
-								<string key="NSFrame">{{47, 197}, {170, 21}}</string>
+								<string key="NSFrame">{{47, 197}, {250, 21}}</string>
 								<reference key="NSSuperview" ref="82517146"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -215,7 +216,7 @@
 								<reference key="IBUIFontDescription" ref="310490582"/>
 								<reference key="IBUIFont" ref="510427664"/>
 								<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
-								<double key="preferredMaxLayoutWidth">170</double>
+								<double key="preferredMaxLayoutWidth">250</double>
 							</object>
 							<object class="IBUITextField" id="936694743">
 								<reference key="NSNextResponder" ref="82517146"/>
