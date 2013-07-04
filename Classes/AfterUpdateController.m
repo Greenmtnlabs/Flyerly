@@ -22,7 +22,7 @@
     
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     
-    [self.navigationController popToViewController:appDelegate.lauchController animated:YES];
+    [self.navigationController popToViewController:appDelegate.accountController animated:YES];
 }
 
 @end

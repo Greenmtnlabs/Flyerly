@@ -32,7 +32,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 
 @synthesize window;
 @synthesize navigationController,faceBookPermissionFlag,changesFlag;
-@synthesize fontScrollView,colorScrollView,templateScrollView,sizeScrollView,svController,_tSession,lauchController,flickrContext,flickrRequest;
+@synthesize fontScrollView,colorScrollView,templateScrollView,sizeScrollView,svController,_tSession,lauchController,flickrContext,flickrRequest,accountController;
 @synthesize session = _session;
 //@synthesize adwhirl;
 @synthesize flickrUserName,sharingProgressParentView;
@@ -82,6 +82,8 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
         }
 
         [navigationController pushViewController:lauchController animated:NO];
+        //accountController = [[AccountController alloc]initWithNibName:@"AccountController" bundle:nil];
+        //[navigationController pushViewController:accountController animated:NO];
         [window addSubview:[navigationController view]];
 
         AfterUpdateController *afterUpdateView = [[AfterUpdateController alloc]initWithNibName:@"AfterUpdateController" bundle:nil];
@@ -96,8 +98,10 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
         }else{
             lauchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
         }
-
         [navigationController pushViewController:lauchController animated:NO];
+        
+        accountController = [[AccountController alloc]initWithNibName:@"AccountController" bundle:nil];
+        [navigationController pushViewController:accountController animated:NO];
         [window addSubview:[navigationController view]];
     }
 
@@ -295,6 +299,8 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
         }
         
         [navigationController pushViewController:lauchController animated:NO];
+        //accountController = [[AccountController alloc]initWithNibName:@"AccountController" bundle:nil];
+        //[navigationController pushViewController:accountController animated:NO];
         [window addSubview:[navigationController view]];
         
         AfterUpdateController *afterUpdateView = [[AfterUpdateController alloc]initWithNibName:@"AfterUpdateController" bundle:nil];
@@ -308,9 +314,11 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
             lauchController = [[LauchViewController alloc]initWithNibName:@"LauchViewControllerIPhone5" bundle:nil];
         }else{
             lauchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
-        }
-        
+        }        
         [navigationController pushViewController:lauchController animated:NO];
+        
+        accountController = [[AccountController alloc]initWithNibName:@"AccountController" bundle:nil];
+        [navigationController pushViewController:accountController animated:NO];
         [window addSubview:[navigationController view]];
     }
     

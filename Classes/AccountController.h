@@ -7,11 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LauchViewController.h"
+#import "RegisterController.h"
+#import "SigninController.h"
 
 @interface AccountController : UIViewController{
     
     IBOutlet UIButton *registerButton;
     IBOutlet UIButton *signinButton;
+    
+    LauchViewController *launchController;
+    RegisterController *registerController;
+    SigninController *signinController;
 }
 
 @property(nonatomic, retain) IBOutlet UIButton *registerButton;

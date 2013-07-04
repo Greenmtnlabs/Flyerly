@@ -14,6 +14,7 @@
 #import <ObjectiveFlickr.h>
 #import "Crittercism.h"
 #import "BZFoursquare.h"
+#import "AccountController.h"
 
 extern NSString *FlickrSharingSuccessNotification;
 extern NSString *FlickrSharingFailureNotification;
@@ -33,6 +34,7 @@ extern NSString *FacebookDidLoginNotification;
          UINavigationController *navigationController;
 	SaveFlyerController *svController;
     LauchViewController *lauchController;
+    AccountController *accountController;
 
 	TwitLogin *_tSession;
 	BOOL faceBookPermissionFlag;
@@ -53,6 +55,7 @@ extern NSString *FacebookDidLoginNotification;
 @property (nonatomic, retain) UIScrollView *templateScrollView;
 @property (nonatomic, retain) SaveFlyerController *svController;
 @property (nonatomic, retain) LauchViewController *lauchController;
+@property (nonatomic, retain) AccountController *accountController;
 @property (nonatomic, retain) OFFlickrAPIContext *flickrContext;
 @property (nonatomic, retain) OFFlickrAPIRequest *flickrRequest;
 

@@ -7,6 +7,9 @@
 //
 
 #import "AccountController.h"
+#import "FlyrAppDelegate.h"
+#import "LauchViewController.h"
+#import "Common.h"
 
 @interface AccountController ()
 
@@ -30,12 +33,19 @@
 	// Do any additional setup after loading the view.
 }
 
--(IBAction)onRegister{
+-(void)viewWillAppear:(BOOL)animated{
 
+    [self.navigationItem setHidesBackButton:YES];
+}
+
+-(IBAction)onRegister{
+    registerController = [[RegisterController alloc]initWithNibName:@"RegisterController" bundle:nil];
+    [self.navigationController pushViewController:registerController animated:YES];
 }
 
 -(IBAction)onSignIn{
-    
+    signinController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
+    [self.navigationController pushViewController:signinController animated:YES];
 }
 
 @end
