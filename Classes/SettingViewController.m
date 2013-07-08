@@ -114,7 +114,7 @@ extern NSString* kGetSessionProxy;
             
         } else {
             [appDelegate.facebook authorize:[NSArray arrayWithObjects: @"read_stream",
-                                             @"publish_stream", nil]];
+                                             @"publish_stream", @"email", nil]];
         }
     }
 }

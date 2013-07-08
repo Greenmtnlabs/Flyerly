@@ -14,7 +14,6 @@
 #import <ObjectiveFlickr.h>
 #import "Crittercism.h"
 #import "BZFoursquare.h"
-#import "AccountController.h"
 
 extern NSString *FlickrSharingSuccessNotification;
 extern NSString *FlickrSharingFailureNotification;
@@ -24,6 +23,7 @@ extern NSString *FacebookDidLoginNotification;
 @class SaveFlyerController;
 @class LauchViewController;
 @class AfterUpdateController;
+@class AccountController;
 
 @interface FlyrAppDelegate : NSObject <UIApplicationDelegate,OFFlickrAPIRequestDelegate> {
 	UIScrollView *fontScrollView;
@@ -68,6 +68,8 @@ extern NSString *FacebookDidLoginNotification;
 @property (strong, nonatomic) FBSession *session;
 @property (nonatomic, retain) NSString *flickrUserName;
 @property (nonatomic, retain) UIView *sharingProgressParentView;
+
+@property (nonatomic, retain) NSString *loginId;
 
 //@property (nonatomic, retain) FBDialog* dialog;
 //@property (nonatomic,retain) FBPermissionDialog* perDialog;

@@ -15,10 +15,6 @@
     
     IBOutlet UIButton *registerButton;
     IBOutlet UIButton *signinButton;
-    
-    LauchViewController *launchController;
-    RegisterController *registerController;
-    SigninController *signinController;
 }
 
 @property(nonatomic, retain) IBOutlet UIButton *registerButton;
@@ -26,5 +22,6 @@
 
 -(IBAction)onRegister;
 -(IBAction)onSignIn;
++(NSString *)getPathFromEmail:(NSString *)email;
 
 @end

@@ -265,7 +265,7 @@ enum {
     if(searchMode){
     
         if(indexPath.row == 0){
-        
+            
             NSLog(@"Create Location");
             if([searchField text]){
                 [[LocationController getLocationDetails] setObject:[searchField text] forKey:@"name"];

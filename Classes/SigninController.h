@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "LauchViewController.h"
+#import "RegisterController.h"
+#import <Parse/PFLogInViewController.h>
 
-@interface SigninController : UIViewController{
+@interface SigninController : UIViewController<PFLogInViewControllerDelegate,FBRequestDelegate,FBSessionDelegate,FBDialogDelegate,FBLoginDialogDelegate>{
     
     IBOutlet UIImageView *emailImage;
     IBOutlet UIImageView *passwordImage;
@@ -23,6 +25,8 @@
     IBOutlet UIButton *signInTwitter;
     
     LauchViewController *launchController;
+    RegisterController *registerController;
+	LoadingView *loadingView;
 }
 
 @property(nonatomic, retain) IBOutlet UIImageView *emailImage;
@@ -35,6 +39,8 @@
 @property(nonatomic, retain) IBOutlet UIButton *signUp;
 @property(nonatomic, retain) IBOutlet UIButton *signInFacebook;
 @property(nonatomic, retain) IBOutlet UIButton *signInTwitter;
+
+@property (nonatomic, retain) LoadingView *loadingView;
 
 -(IBAction)onSignIn;
 -(IBAction)onSignUp;

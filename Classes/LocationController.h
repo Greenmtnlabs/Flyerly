@@ -10,6 +10,7 @@
 #import "BZFoursquare.h"
 #import <CoreLocation/CoreLocation.h>
 #import "LoadingView.h"
+#import "FlyrAppDelegate.h"
 
 @interface LocationController : UIViewController<BZFoursquareRequestDelegate, BZFoursquareSessionDelegate, CLLocationManagerDelegate, UITextFieldDelegate>{
 

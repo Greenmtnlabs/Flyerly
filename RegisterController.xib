@@ -73,6 +73,7 @@
 						<string key="NSFrame">{{34, 121}, {253, 30}}</string>
 						<reference key="NSSuperview" ref="396151688"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="987222039"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -84,6 +85,7 @@
 						<string key="NSFrame">{{34, 153}, {253, 30}}</string>
 						<reference key="NSSuperview" ref="396151688"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="535560001"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -95,7 +97,7 @@
 						<string key="NSFrame">{{39, 89}, {248, 30}}</string>
 						<reference key="NSSuperview" ref="396151688"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="987222039"/>
+						<reference key="NSNextKeyView" ref="200025981"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -103,7 +105,7 @@
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<string key="IBUIText"/>
 						<int key="IBUIBorderStyle">3</int>
-						<string key="IBUIPlaceholder">Username</string>
+						<string key="IBUIPlaceholder">Email</string>
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MAA</bytes>
@@ -132,7 +134,7 @@
 						<string key="NSFrame">{{39, 121}, {248, 30}}</string>
 						<reference key="NSSuperview" ref="396151688"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="535560001"/>
+						<reference key="NSNextKeyView" ref="993171623"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -149,6 +151,7 @@
 						<bool key="IBUIAdjustsFontSizeToFit">YES</bool>
 						<float key="IBUIMinimumFontSize">17</float>
 						<object class="IBUITextInputTraits" key="IBUITextInputTraits">
+							<bool key="IBUISecureTextEntry">YES</bool>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						</object>
 						<reference key="IBUIFontDescription" ref="116875725"/>
@@ -177,6 +180,7 @@
 						<bool key="IBUIAdjustsFontSizeToFit">YES</bool>
 						<float key="IBUIMinimumFontSize">17</float>
 						<object class="IBUITextInputTraits" key="IBUITextInputTraits">
+							<bool key="IBUISecureTextEntry">YES</bool>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						</object>
 						<reference key="IBUIFontDescription" ref="116875725"/>
@@ -256,7 +260,6 @@
 						<string key="NSFrame">{{61, 360}, {199, 35}}</string>
 						<reference key="NSSuperview" ref="396151688"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -320,14 +323,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">signUpFacebook</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="389611331"/>
-					</object>
-					<int key="connectionID">159</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">signUpTwitter</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="907464290"/>
@@ -341,6 +336,38 @@
 						<reference key="destination" ref="396151688"/>
 					</object>
 					<int key="connectionID">163</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">signUpFacebook</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="389611331"/>
+					</object>
+					<int key="connectionID">173</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">delegate</string>
+						<reference key="source" ref="590812157"/>
+						<reference key="destination" ref="372490531"/>
+					</object>
+					<int key="connectionID">169</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">delegate</string>
+						<reference key="source" ref="987222039"/>
+						<reference key="destination" ref="372490531"/>
+					</object>
+					<int key="connectionID">170</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">delegate</string>
+						<reference key="source" ref="535560001"/>
+						<reference key="destination" ref="372490531"/>
+					</object>
+					<int key="connectionID">171</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -358,7 +385,7 @@
 						<reference key="destination" ref="372490531"/>
 						<int key="IBEventType">7</int>
 					</object>
-					<int key="connectionID">160</int>
+					<int key="connectionID">172</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -479,7 +506,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">168</int>
+			<int key="maxID">173</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">

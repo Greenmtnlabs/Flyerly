@@ -173,7 +173,7 @@
 							<object class="IBUIButton" id="721995232">
 								<reference key="NSNextResponder" ref="82517146"/>
 								<int key="NSvFlags">-2147483356</int>
-								<string key="NSFrame">{{17, 197}, {18, 18}}</string>
+								<string key="NSFrame">{{17, 197}, {12, 18}}</string>
 								<reference key="NSSuperview" ref="82517146"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="118002"/>
@@ -188,9 +188,13 @@
 									<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 								</object>
 								<reference key="IBUINormalTitleShadowColor" ref="1009304496"/>
+								<object class="NSCustomResource" key="IBUISelectedImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">location_point_selected.png</string>
+								</object>
 								<object class="NSCustomResource" key="IBUINormalImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">cross.png</string>
+									<string key="NSResourceName">location_point.png</string>
 								</object>
 								<reference key="IBUIFontDescription" ref="125009016"/>
 								<reference key="IBUIFont" ref="78221736"/>
@@ -201,7 +205,6 @@
 								<string key="NSFrame">{{47, 197}, {250, 21}}</string>
 								<reference key="NSSuperview" ref="82517146"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -1058,6 +1061,7 @@
 					<string>59.IBPluginDependency</string>
 					<string>60.IBPluginDependency</string>
 					<string>65.IBPluginDependency</string>
+					<string>65.IBUIButtonInspectorSelectedStateConfigurationMetadataKey</string>
 					<string>7.IBPluginDependency</string>
 					<string>9.IBPluginDependency</string>
 				</object>
@@ -1095,6 +1099,7 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<real value="2"/>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				</object>
@@ -1373,7 +1378,6 @@
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>clipboard_share.png</string>
 				<string>clipboard_share_selected.png</string>
-				<string>cross.png</string>
 				<string>email_share.png</string>
 				<string>email_share_selected.png</string>
 				<string>facebook_share.png</string>
@@ -1382,6 +1386,8 @@
 				<string>flickr_share_selected.png</string>
 				<string>instagram_share.png</string>
 				<string>instagram_share_selected.png</string>
+				<string>location_point.png</string>
+				<string>location_point_selected.png</string>
 				<string>save_bg.png</string>
 				<string>share_flyer_details_bg.png</string>
 				<string>sms_share.png</string>
@@ -1395,7 +1401,6 @@
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>{128, 46}</string>
 				<string>{128, 46}</string>
-				<string>{25, 25}</string>
 				<string>{128, 46}</string>
 				<string>{128, 46}</string>
 				<string>{127, 45}</string>
@@ -1404,6 +1409,8 @@
 				<string>{128, 46}</string>
 				<string>{128, 47}</string>
 				<string>{128, 47}</string>
+				<string>{42, 68}</string>
+				<string>{42, 68}</string>
 				<string>{312, 38}</string>
 				<string>{314, 127}</string>
 				<string>{127, 46}</string>

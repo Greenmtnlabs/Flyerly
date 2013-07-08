@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "MyNavigationBar.h"
-#import "FlyrAppDelegate.h"
+//#import "FlyrAppDelegate.h"
 #import "HudView.h"
 #import "CustomLabel.h"
 #import "CustomPhotoController.h"

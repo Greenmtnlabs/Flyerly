@@ -304,6 +304,11 @@ static ShareProgressView *tumblrPogressView;
     
     if([LocationController getLocationDetails] && [[LocationController getLocationDetails] objectForKey:@"name"]){
         locationLabel.text = [[LocationController getLocationDetails] objectForKey:@"name"];
+        
+        [locationButton setSelected:YES];
+    
+    } else {
+        [locationButton setSelected:NO];
     }
 }
 
@@ -560,7 +565,7 @@ static ShareProgressView *tumblrPogressView;
             [facebookButton setSelected:YES];            
         } else {
             [appDelegate.facebook authorize:[NSArray arrayWithObjects: @"read_stream",
-                                             @"publish_stream", nil]];            
+                                             @"publish_stream", @"email", nil]];            
         }
     }
 }
@@ -869,7 +874,7 @@ static ShareProgressView *tumblrPogressView;
 
 - (void)uploadImage:(NSData *)imageData
 {
-    PFFile *imageFile = [PFFile fileWithName:[FlyrViewController getFlyerNumberFromPath:imageFileName] data:imageData];    
+    PFFile *imageFile = [PFFile fileWithName:[FlyrViewController getFlyerNumberFromPath:imageFileName] data:imageData];
     
     // Save PFFile
     [imageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {

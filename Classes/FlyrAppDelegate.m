@@ -14,6 +14,7 @@
 #import "ImageCache.h"
 #import "LauchViewController.h"
 #import "AfterUpdateController.h"
+#import "AccountController.h"
 #import "TMAPIClient.h"
 #import "DraftViewController.h"
 #import "Flurry.h"
@@ -277,7 +278,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
                   clientKey:@"Gk4CuGVOHegOa8lzbISz4NL5qiI75Gh4bNJGRVKX"];
     
     // Creat edummy user on parse
-    [self createDummyUser];
+    //[self createDummyUser];
     
     //BZFoursquare *foursquare = [[BZFoursquare alloc] initWithClientID:@"N2UKFTKALD4UBCB0ADNF30O5KIRV03X4UVG0S5Q5V43EDLPN" callbackURL:@"https://www.google.com"];
     

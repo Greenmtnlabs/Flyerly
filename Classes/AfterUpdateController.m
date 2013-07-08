@@ -10,6 +10,7 @@
 #import "LauchViewController.h"
 #import "Common.h"
 #import "FlyrAppDelegate.h"
+#import "AccountController.h"
 
 @implementation AfterUpdateController
 @synthesize launchController;
@@ -20,9 +21,10 @@
 
 -(IBAction)ok{
     
-    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-    
-    [self.navigationController popToViewController:appDelegate.accountController animated:YES];
+    //FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    //[self.navigationController popToViewController:appDelegate.accountController animated:YES];
+    AccountController *accountController = [[AccountController alloc]initWithNibName:@"AccountController" bundle:nil];
+    [self.navigationController pushViewController:accountController animated:NO];
 }
 
 @end

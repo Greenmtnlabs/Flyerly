@@ -8,7 +8,6 @@
 
 #import "AccountController.h"
 #import "FlyrAppDelegate.h"
-#import "LauchViewController.h"
 #import "Common.h"
 
 @interface AccountController ()
@@ -39,13 +38,17 @@
 }
 
 -(IBAction)onRegister{
-    registerController = [[RegisterController alloc]initWithNibName:@"RegisterController" bundle:nil];
+    RegisterController *registerController = [[RegisterController alloc]initWithNibName:@"RegisterController" bundle:nil];
     [self.navigationController pushViewController:registerController animated:YES];
 }
 
 -(IBAction)onSignIn{
-    signinController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
+    SigninController *signinController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
     [self.navigationController pushViewController:signinController animated:YES];
+}
+
++(NSString *)getPathFromEmail:(NSString *)email{
+    return [[email stringByReplacingOccurrencesOfString:@"@" withString:@"_"] stringByReplacingOccurrencesOfString:@"." withString:@"_"];
 }
 
 @end

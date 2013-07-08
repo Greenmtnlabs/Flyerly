@@ -585,7 +585,7 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
 - (void)facebookLikeViewRequiresLogin:(FacebookLikeView *)aFacebookLikeView {
 
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-    [appDelegate.facebook authorize:[NSArray arrayWithObjects: @"read_stream", @"publish_stream", nil]];
+    [appDelegate.facebook authorize:[NSArray arrayWithObjects: @"read_stream", @"publish_stream", @"email", nil]];
 }
 
 - (IBAction)showLikeButton {
@@ -615,7 +615,7 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
 
      } else {
      
-         [appDelegate.facebook authorize:[NSArray arrayWithObjects: @"read_stream", @"publish_stream", nil]];
+         [appDelegate.facebook authorize:[NSArray arrayWithObjects: @"read_stream", @"publish_stream", @"email", nil]];
      }
 
     /*FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
