@@ -4076,8 +4076,15 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	UIImage *screenImage = UIGraphicsGetImageFromCurrentImageContext();
 	UIGraphicsEndImageContext();
 
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+
 	NSString *homeDirectoryPath = NSHomeDirectory();
-	NSString *MyFlyerPath = [homeDirectoryPath stringByAppendingString:@"/Documents/Flyr/"];
+	NSString *usernamePath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/",appDelegate.loginId]];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:usernamePath isDirectory:NULL]) {
+		[[NSFileManager defaultManager] createDirectoryAtPath:usernamePath attributes:nil];
+	}
+
+	NSString *MyFlyerPath = [usernamePath stringByAppendingString:[NSString stringWithFormat:@"Flyr/"]];
 	NSString *folderPath = [NSString pathWithComponents:[NSArray arrayWithObjects:[NSString stringWithString:[MyFlyerPath stringByStandardizingPath]],nil]];
 	NSInteger imgCount;
 	NSInteger largestImgCount=-1;

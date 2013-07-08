@@ -19,7 +19,7 @@
 @end
 
 @implementation SigninController
-@synthesize email,password,signIn,signUp,signInFacebook,signInTwitter,emailImage,passwordImage,loadingView;
+@synthesize email,password,signIn,signUp,signInFacebook,signInTwitter,emailImage,passwordImage,loadingView,forgetPassword1;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -43,6 +43,26 @@
     // remove borders
     email.borderStyle = UITextBorderStyleNone;
     password.borderStyle = UITextBorderStyleNone;
+}
+
+-(IBAction)forgetPassword{
+
+    [self showLoadingView:@"Wait..."];
+    NSLog(@"Forget Password");
+    
+    [PFUser requestPasswordResetForEmailInBackground:email.text block:^(BOOL succeeded, NSError *error){
+        if (error) {
+            
+            NSString *errorValue = [error.userInfo objectForKey:@"error"];
+            [self removeLoadingView];
+            [self showAlert:@"Warning!" message:errorValue];
+            
+        } else {
+
+            [self removeLoadingView];
+            [self showAlert:@"Message!" message:@"Email has been sent to your inbox to change your password."];
+        }
+    }];
 }
 
 -(void)showLoadingView:(NSString *)message{

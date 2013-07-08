@@ -14,6 +14,7 @@
 #import "LauchViewController.h"
 #import "HelpController.h"
 #import "FlyerOverlayController.h"
+#import "FlyrAppDelegate.h"
 
 @implementation FlyrViewController
 @synthesize photoArray,navBar,tView,iconArray,photoDetailArray,ptController;
@@ -57,11 +58,14 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
 
 -(void)filesByModDate
 {
+    
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+
 	photoArray =[[NSMutableArray alloc]init];
 	photoDetailArray =[[NSMutableArray alloc]init];
 	iconArray = [[NSMutableArray alloc]init];
 	NSString *homeDirectoryPath = NSHomeDirectory();
-	NSString *unexpandedPath = [homeDirectoryPath stringByAppendingString:@"/Documents/Flyr/"];
+	NSString *unexpandedPath = [homeDirectoryPath stringByAppendingString: [NSString stringWithFormat:@"/Documents/%@/Flyr/",appDelegate.loginId]];
 	NSString *folderPath = [NSString pathWithComponents:[NSArray arrayWithObjects:[NSString stringWithString:[unexpandedPath stringByExpandingTildeInPath]], nil]];
 	
 	NSArray *files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:folderPath error:nil];
@@ -243,8 +247,11 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
 }
 
 +(NSString *)getFlyerNumberFromPath:(NSString *)imagePath{
+    
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+
 	NSString *homeDirectoryPath = NSHomeDirectory();
-	NSString *flyerPath = [homeDirectoryPath stringByAppendingString:@"/Documents/Flyr/"];
+	NSString *flyerPath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/Flyr/",appDelegate.loginId]];
 	NSString *folderPath = [NSString pathWithComponents:[NSArray arrayWithObjects:[NSString stringWithString:[flyerPath stringByStandardizingPath]],nil]];
 	
     NSString *onlyImageName = [imagePath stringByReplacingOccurrencesOfString:folderPath withString:@""];
@@ -321,8 +328,10 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
         NSString *flyerFilePath = [imageName stringByReplacingOccurrencesOfString:@".jpg" withString:@".txt"];
         [[NSFileManager defaultManager] removeItemAtPath:flyerFilePath error:nil];
 
+        FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+
         // Remove flyer social detail file
-        NSString *socialFlyerFolderPath = [imageName stringByReplacingOccurrencesOfString:@"/Flyr/" withString:@"/Flyr/Social/"];
+        NSString *socialFlyerFolderPath = [imageName stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@/Flyr/", appDelegate.loginId] withString:[NSString stringWithFormat:@"%@/Flyr/Social/", appDelegate.loginId]];
         NSString *socialFilePath = [socialFlyerFolderPath stringByReplacingOccurrencesOfString:@".jpg" withString:@".soc"];
         [[NSFileManager defaultManager] removeItemAtPath:socialFilePath error:nil];
 

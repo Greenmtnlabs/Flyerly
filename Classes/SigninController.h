@@ -23,7 +23,9 @@
     IBOutlet UIButton *signUp;
     IBOutlet UIButton *signInFacebook;
     IBOutlet UIButton *signInTwitter;
-    
+
+    IBOutlet UIButton *forgetPassword1;
+
     LauchViewController *launchController;
     RegisterController *registerController;
 	LoadingView *loadingView;
@@ -39,6 +41,7 @@
 @property(nonatomic, retain) IBOutlet UIButton *signUp;
 @property(nonatomic, retain) IBOutlet UIButton *signInFacebook;
 @property(nonatomic, retain) IBOutlet UIButton *signInTwitter;
+@property(nonatomic, retain) IBOutlet UIButton *forgetPassword1;
 
 @property (nonatomic, retain) LoadingView *loadingView;
 
@@ -46,5 +49,6 @@
 -(IBAction)onSignUp;
 -(IBAction)onSignInFacebook;
 -(IBAction)onSignInTwitter;
+-(IBAction)forgetPassword;
 
 @end

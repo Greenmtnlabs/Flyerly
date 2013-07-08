@@ -172,7 +172,6 @@
             [self showAlert:@"No Twitter connection" message:@"You must be connected to Twitter to continue."];
             [self removeLoadingView];
         }
-
     
     }else{
         [self showAlert:@"Warning!" message:@"You must be connected to the Internet."];
