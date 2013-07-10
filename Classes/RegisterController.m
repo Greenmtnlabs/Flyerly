@@ -45,6 +45,21 @@
     username.borderStyle = UITextBorderStyleNone;
     password.borderStyle = UITextBorderStyleNone;
     confirmPassword.borderStyle = UITextBorderStyleNone;
+    
+    // Setup welcome button
+    UIButton *welcomeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 76, 32)];
+    [welcomeButton setTitle:@" Welcome" forState:UIControlStateNormal];
+    welcomeButton.titleLabel.font = [UIFont systemFontOfSize:14.0];
+    [welcomeButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    [welcomeButton setBackgroundImage:[UIImage imageNamed:@"welcome_button"] forState:UIControlStateNormal];
+    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:welcomeButton];
+    [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarButton,nil]];
+
+}
+
+-(IBAction)goBack{
+    
+	[self.navigationController popViewControllerAnimated:NO];
 }
 
 -(void)showLoadingView:(NSString *)message{
@@ -161,7 +176,11 @@
                         // Keep it simple, use the first account available
                         ACAccount *acct = [arrayOfAccounts objectAtIndex:0];
                         
-                        [self signUp:YES username:[acct username] password:@"null"];
+                        //Convert twitter username to email
+                        NSString *twitterEmail = [AccountController getTwitterEmailByUsername:[acct username]];
+                        
+                        // sign up
+                        [self signUp:YES username:twitterEmail password:@"null"];
 
                     }
                 }

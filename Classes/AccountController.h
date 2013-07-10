@@ -23,5 +23,6 @@
 -(IBAction)onRegister;
 -(IBAction)onSignIn;
 +(NSString *)getPathFromEmail:(NSString *)email;
++(NSString *)getTwitterEmailByUsername:(NSString *)userName;
 
 @end

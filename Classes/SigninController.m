@@ -43,6 +43,18 @@
     // remove borders
     email.borderStyle = UITextBorderStyleNone;
     password.borderStyle = UITextBorderStyleNone;
+    
+    email.text= @"riz_ahmed_86@yahoo.com";
+    password.text = @"logs";
+    
+    // Setup welcome button
+    UIButton *welcomeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 76, 32)];
+    [welcomeButton setTitle:@" Welcome" forState:UIControlStateNormal];
+    welcomeButton.titleLabel.font = [UIFont systemFontOfSize:14.0];
+    [welcomeButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    [welcomeButton setBackgroundImage:[UIImage imageNamed:@"welcome_button"] forState:UIControlStateNormal];
+    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:welcomeButton];
+    [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarButton,nil]];
 }
 
 -(IBAction)forgetPassword{
@@ -92,11 +104,27 @@
 
 -(IBAction)onSignIn{
     
+    /*FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    appDelegate.loginId = [AccountController getPathFromEmail:@"riz_ahmed_86@yahoo.com"];
+    
+    if(IS_IPHONE_5){
+        launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewControllerIPhone5" bundle:nil];
+    }   else{
+        launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
+    }    
+    [self performSelectorOnMainThread:@selector(pushViewController:) withObject:launchController waitUntilDone:YES];*/
+    
+
     [self showLoadingView:@"Signing In..."];
     
     if([self validate]){
         [self signIn:YES username:email.text password:password.text];
     }
+}
+
+-(IBAction)goBack{
+    
+	[self.navigationController popViewControllerAnimated:NO];
 }
 
 -(void)signIn:(BOOL)validated username:(NSString *)userName password:(NSString *)pwd{
@@ -195,7 +223,11 @@
                         // Keep it simple, use the first account available
                         ACAccount *acct = [arrayOfAccounts objectAtIndex:0];
                         
-                        [self signIn:YES username:[acct username] password:@"null"];
+                        //Convert twitter username to email
+                        NSString *twitterEmail = [AccountController getTwitterEmailByUsername:[acct username]];
+                        
+                        // sign in
+                        [self signIn:YES username:twitterEmail password:@"null"];
                         
                     }
                 }

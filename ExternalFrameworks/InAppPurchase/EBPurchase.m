@@ -36,6 +36,7 @@
 @synthesize delegate;
 @synthesize products;
 @synthesize prodRequest;
+@synthesize customIndex;
 
 
 -(bool) requestProduct:(NSArray*)productId

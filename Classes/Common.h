@@ -258,14 +258,28 @@ return cell;\
 #define NameYourFlyerText @"Name your Flyer"
 #define FlyerDateFormat @"MM/dd/YYYY"
 
-#define BACKGROUND_PRODUCT_PREFIX @"com.flyerly.background"
-#define FONT_PRODUCT_PREFIX @"com.flyerly.font"
-#define COLOR_PRODUCT_PREFIX @"com.flyerly.color"
-#define TEXT_BORDER_PRODUCT_PREFIX @"com.flyerly.textborder"
-#define FLYER_BORDER_PRODUCT_PREFIX @"com.flyerly.flyerborder"
+#define COLUMN_REMINING_FONT_COUNT @"remainingFontCount"
+#define COLUMN_USER @"user"
+#define COLUMN_JSON @"json"
+#define TABLE_JSON @"InApp"
 
-#define FONT6_PRODUCT_ID @"com.flyerly.font6"
-#define FONT7_PRODUCT_ID @"com.flyerly.font7"
+#define IN_APP_DICTIONARY_KEY @"inAppDictionaryKey"
+
+#define PRODUCT_FONT @"com.flyerly.font"
+#define PRODUCT_FOUR_PACK_FONT @"com.flyerly.4FontsPack"
+#define PRODUCT_FONT_COLOR @"com.flyerly.Fontcolor"
+#define PRODUCT_FOUR_FONT_COLOR @"com.flyerly.4FontColors"
+#define PRODUCT_FONT_BORDER_COLOR @"com.flyerly.FontBorderColor"
+#define PRODUCT_FOUR_FONT_BORDER_COLOR @"com.flyerly.4FontBorderColors"
+
+#define FONT_PRODUCT_PREFIX @"com.flyerly.font"
+//#define BACKGROUND_PRODUCT_PREFIX @"com.flyerly.background"
+//#define COLOR_PRODUCT_PREFIX @"com.flyerly.color"
+//#define TEXT_BORDER_PRODUCT_PREFIX @"com.flyerly.textborder"
+//#define FLYER_BORDER_PRODUCT_PREFIX @"com.flyerly.flyerborder"
+//
+//#define FONT6_PRODUCT_ID @"com.flyerly.font6"
+//#define FONT7_PRODUCT_ID @"com.flyerly.font7"
 
 /*#define FONT_ARRAY [NSArray arrayWithObjects:@"Courier",@"Courier-BoldOblique",@"Courier-Oblique",@"Courier-Bold",@"ArialMT",@"Arial-BoldMT",@"Arial-BoldItalicMT",@"Arial-ItalicMT",@"STHeitiTC-Light",@"STHeitiTC-Medium",@"AppleGothic",@"CourierNewPS-BoldMT",@"CourierNewPS-ItalicMT",@"CourierNewPS-BoldItalicMT",@"CourierNewPSMT",@"Zapfino",@"HiraKakuProN-W6",@"ArialUnicodeMS",@"STHeitiSC-Medium",@"STHeitiSC-Light",@"AmericanTypewriter",@"AmericanTypewriter-Bold",@"Helvetica-Oblique",@"Helvetica-BoldOblique",@"Helvetica",@"Helvetica-Bold",@"MarkerFelt-Thin",@"HelveticaNeue",@"HelveticaNeue-Bold",@"DBLCDTempBlack",@"Verdana-Bold",@"Verdana-BoldItalic",@"Verdana",@"Verdana-Italic",@"TimesNewRomanPSMT",@"TimesNewRomanPS-BoldMT",@"TimesNewRomanPS-BoldItalicMT",@"TimesNewRomanPS-ItalicMT",@"Georgia-Bold",@"Georgia",@"Georgia-BoldItalic",@"Georgia-Italic",@"STHeitiJ-Medium",@"STHeitiJ-Light",@"ArialRoundedMTBold",@"TrebuchetMS-Italic",@"TrebuchetMS",@"Trebuchet-BoldItalic",@"TrebuchetMS-Bold",@"STHeitiK-Medium",@"STHeitiK-Light",nil]
  */

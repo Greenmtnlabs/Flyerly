@@ -110,6 +110,13 @@ enum {
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:cancelButton];
     [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
     
+    // Setup search button
+    UIButton *currentLocationButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
+    [currentLocationButton addTarget:self action:@selector(searchNearBy) forControlEvents:UIControlEventTouchUpInside];
+    [currentLocationButton setBackgroundImage:[UIImage imageNamed:@"current_location"] forState:UIControlStateNormal];
+    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:currentLocationButton];
+    [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarButton,nil]];
+    
     [searchField addTarget:self action:@selector(textFieldTapped:) forControlEvents:UIControlEventEditingDidBegin];
     searchField.clearButtonMode = UITextFieldViewModeWhileEditing;
     
@@ -155,6 +162,9 @@ enum {
 }
 
 - (void)searchNearBy {
+    
+    loadingView =[LoadingView loadingViewInView:self.view  text:@"Search nearby..."];
+
     [self prepareForRequest];
     [self updateView];
     
@@ -221,11 +231,13 @@ enum {
         
             cell.label1.text = [NSString stringWithFormat:@"Create %@", searchField.text];
             cell.label2.text = @"Create a custom location";
+            [cell.imageView setImage:[UIImage imageNamed:@"pencil_icon"]];
 
         } else if(indexPath.row == 1){
         
             cell.label1.text = [NSString stringWithFormat:@"Find %@", searchField.text];
             cell.label2.text = @"Search more places nearby";
+            [cell.imageView setImage:[UIImage imageNamed:@"location_point_selected"]];
         }
         
         // return cell
@@ -421,6 +433,14 @@ NSMutableDictionary *locationDetails;
 }
 
 - (void)request:(BZFoursquareRequest *)request didFailWithError:(NSError *)error {
+    
+    // Remove loading view
+    for (UIView *subview in self.view.subviews) {
+        if([subview isKindOfClass:[LoadingView class]]){
+            [subview removeFromSuperview];
+        }
+    }
+
     NSLog(@"%s: %@", __PRETTY_FUNCTION__, error);
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[[error userInfo] objectForKey:@"errorDetail"] delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles:nil];
     [alertView show];

@@ -40,11 +40,14 @@
     SKProductsRequest *prodRequest;
     NSArray      *products;
     
+    int customIndex;
+    
 }
 
 @property(strong , nonatomic) id<EBPurchaseDelegate> delegate;
 @property (nonatomic, strong) NSArray      *products;
 @property (strong, nonatomic) SKProductsRequest *prodRequest;
+@property int customIndex;
 
 -(bool) requestProduct:(NSString*)productId;
 -(bool) purchaseProduct:(SKProduct*)requestedProduct;

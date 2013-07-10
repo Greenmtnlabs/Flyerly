@@ -51,4 +51,20 @@
     return [[email stringByReplacingOccurrencesOfString:@"@" withString:@"_"] stringByReplacingOccurrencesOfString:@"." withString:@"_"];
 }
 
++(NSString *)getTwitterEmailByUsername:(NSString *)userName{
+    
+    if ([userName rangeOfString:@"@"].location == NSNotFound) {
+        
+        NSLog(@"Not an email address - convert it into email");
+        NSString *twitterEmail = [NSString stringWithFormat:@"%@@twitter.com", userName];
+        return twitterEmail;
+        
+    } else {
+        NSLog(@"Its a valid email - Return this");
+        return userName;
+    }
+    
+    return userName;
+}
+
 @end

@@ -18,6 +18,10 @@
 #import "CustomPhotoController.h"
 #import "DraftViewController.h"
 #import "HelpController.h"
+#import <Parse/PFUser.h>
+#import <Parse/PFFile.h>
+#import <Parse/PFObject.h>
+#import <Parse/PFQuery.h>
 
 @implementation PhotoController
 @synthesize newImgName;
@@ -268,6 +272,7 @@ int photoLayerCount = 0;
 	colorArray = 	[[NSArray  alloc] initWithObjects: [UIColor redColor], [UIColor blueColor], [UIColor greenColor], [UIColor blackColor], [UIColor colorWithRed:253.0/255.0 green:191.0/255.0 blue:38.0/224.0 alpha:1], [UIColor whiteColor], [UIColor grayColor], [UIColor magentaColor], [UIColor yellowColor], [UIColor colorWithRed:163.0/255.0 green:25.0/255.0 blue:2.0/224.0 alpha:1], [UIColor colorWithRed:3.0/255.0 green:15.0/255.0 blue:41.0/224.0 alpha:1], [UIColor purpleColor], [UIColor colorWithRed:85.0/255.0 green:86.0/255.0 blue:12.0/224.0 alpha:1], [UIColor orangeColor], [UIColor colorWithRed:98.0/255.0 green:74.0/255.0 blue:9.0/224.0 alpha:1], [UIColor colorWithRed:80.0/255.0 green:7.0/255.0 blue:1.0/224.0 alpha:1], [UIColor colorWithRed:150.0/255.0 green:150.0/255.0 blue:97.0/224.0 alpha:1], [UIColor colorWithRed:111.0/255.0 green:168.0/255.0 blue:100.0/224.0 alpha:1], [UIColor cyanColor], [UIColor colorWithRed:17.0/255.0 green:69.0/255.0 blue:70.0/224.0 alpha:1], [UIColor colorWithRed:173.0/255.0 green:127.0/255.0 blue:251.0/224.0 alpha:1], nil];
 	
     [self addColorsInSubView];
+    BOOL isAnyFontPurchased = [self anyFontPurchased];
     
 	for (int i = 1; i <=  [SIZE_ARRAY count] ; i++)
 	{
@@ -281,12 +286,14 @@ int photoLayerCount = 0;
 		size.tag = i+60;
 		size.alpha = ALPHA1;
         
-        if(i>5 && i<([SIZE_ARRAY count] - 1)){
-            UIImageView *lock = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lock"]];
-            lock.frame = CGRectMake(20, 20, 17, 19);
-            [size addSubview:lock];
-            size.userInteractionEnabled = NO;
-        }
+            if(i>5 && i<([SIZE_ARRAY count] - 1)){
+                if(!isAnyFontPurchased){
+                    UIImageView *lock = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lock"]];
+                    lock.frame = CGRectMake(20, 20, 17, 19);
+                    [size addSubview:lock];
+                    size.userInteractionEnabled = NO;
+                }
+            }
         
 		[sizeScrollView addSubview:size];
 		//[size release];
@@ -2643,7 +2650,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	//[self saveMyFlyer];
 }
 
-
 -(void)saveMyFlyer
 {
 	alert = [[UIActionSheet alloc] 
@@ -2671,9 +2677,18 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 }
 
 
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-	FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    NSLog(@"Purchase One Font Selected");
+    
+    if (![demoPurchase purchaseProduct:[demoPurchase.products objectAtIndex:buttonIndex]]){
+        
+        // Returned NO, so notify user that In-App Purchase is Disabled in their Settings.
+        UIAlertView *settingsAlert = [[UIAlertView alloc] initWithTitle:@"Allow Purchases" message:@"You must first enable In-App Purchase in your iOS Settings before making this purchase." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [settingsAlert show];        
+    }
+    
+	/*FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
 
 	cameraTabButton.alpha = ALPHA0;
 	photoTabButton.alpha = ALPHA0;
@@ -2712,7 +2727,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	else if(buttonIndex == 2)
 	{
 		[self choosePhoto];
-	}
+	}*/
 }
 
 #pragma mark  TEXTVIEW delegate
@@ -4353,41 +4368,122 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 #pragma mark - InappPurchase
 
--(void)requestFont:(UIButton *)button{
-    // Create an instance of EBPurchase (Inapp purchase).
-    demoPurchase = [[EBPurchase alloc] init];
-    demoPurchase.delegate = self;
+-(void)showFontPurchaseSheet:(int)tag productList:(NSArray *)productList{
     
-    [demoPurchase requestProduct:[NSArray arrayWithObjects:[NSString stringWithFormat:@"%@%d",FONT_PRODUCT_PREFIX,button.tag],nil]];
+	alert = [[UIActionSheet alloc]
+			 initWithTitle: @"Select Package "
+			 delegate:self
+			 cancelButtonTitle:nil
+			 destructiveButtonTitle:nil
+			 otherButtonTitles:nil];
+	
+    for( SKProduct *product in productList)  {
+        [alert addButtonWithTitle: [NSString stringWithFormat:@"%@ - $%@", product.localizedTitle, [product.price stringValue]]];
+    }
+    [alert addButtonWithTitle:@"Cancel"];
+    alert.cancelButtonIndex = [productList count];
+    
+    alert.tag = tag;
+	[alert showInView:self.view];
+	[alert release];
+}
+
+-(BOOL)fontPackAvailable{
+
+    PFQuery *query = [PFQuery queryWithClassName:TABLE_JSON];
+    [query whereKey:COLUMN_USER equalTo:[PFUser currentUser]];
+    
+    NSError **error;
+    NSArray *postArray = [query findObjects:error];
+    
+    if(!postArray){
+        return NO;
+    }
+    
+    if (!error) {
+        
+        PFObject *post = postArray.lastObject;
+        if(!post){
+            return NO;
+            
+        } else {
+            
+            NSString *remainingFontCount = [post objectForKey:COLUMN_REMINING_FONT_COUNT];
+            if(!remainingFontCount){
+                return NO;
+            }else{
+                
+                if(remainingFontCount > 0){
+                    return YES;
+                } else {
+                    return NO;
+                }
+            }
+        }
+    }
+    
+    
+    return NO;
+}
+
+-(BOOL)anyFontPurchased{
+    
+    PFQuery *query = [PFQuery queryWithClassName:TABLE_JSON];
+    [query whereKey:COLUMN_USER equalTo:[PFUser currentUser]];
+    
+    NSError **error;
+    NSArray *postArray = [query findObjects:error];
+    
+    if(!postArray){
+        return NO;
+    }
+    
+    if (!error) {
+        
+        PFObject *post = postArray.lastObject;
+        if(!post){
+            return NO;
+            
+        } else {
+            
+            NSMutableDictionary *json = [post objectForKey:COLUMN_JSON];
+            if(!json){
+                return NO;
+            }else{
+                if([json objectForKey:PRODUCT_FONT] || [json objectForKey:PRODUCT_FOUR_PACK_FONT]){
+                    return YES;
+                }else{
+                    return NO;
+                }                   
+            }
+        }
+    }    
+    
+    return NO;
+}
+
+-(void)requestFont:(UIButton *)button{
+
+    if([self fontPackAvailable]){
+
+        NSLog(@"Font Pack Available");
+        [self updatePurchaseRecord:button.tag identifier:PRODUCT_FONT];
+        
+    } else {
+        
+        // Create an instance of EBPurchase (Inapp purchase).
+        demoPurchase = [[EBPurchase alloc] init];
+        demoPurchase.delegate = self;
+        demoPurchase.customIndex = button.tag;
+        
+        [demoPurchase requestProduct:[NSArray arrayWithObjects:PRODUCT_FONT, PRODUCT_FOUR_PACK_FONT,nil]];
+    }
 }
 
 -(void)requestFontBorder:(UIButton *)button{
     // Create an instance of EBPurchase (Inapp purchase).
     demoPurchase = [[EBPurchase alloc] init];
     demoPurchase.delegate = self;
-    
-    [demoPurchase requestProduct:[NSArray arrayWithObjects:[NSString stringWithFormat:@"%@%d",TEXT_BORDER_PRODUCT_PREFIX,button.tag],nil]];
-}
-
--(IBAction)purchaseProduct:(NSString *)productId{
-    
-    NSLog(@"ProductId: %@", productId);
-    // First, ensure that the SKProduct that was requested by
-    // the EBPurchase requestProduct method in the viewWillAppear
-    // event is valid before trying to purchase it.
-    
-    //if user want to buy 1 match
-    if (demoPurchase.products != nil)
-    {
-        //loadingView.hidden = NO;
-        
-        if (![demoPurchase purchaseProduct:[demoPurchase.products objectAtIndex:0]])
-        {
-            // Returned NO, so notify user that In-App Purchase is Disabled in their Settings.
-            UIAlertView *settingsAlert = [[UIAlertView alloc] initWithTitle:@"Allow Purchases" message:@"You must first enable In-App Purchase in your iOS Settings before making this purchase." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [settingsAlert show];
-        }
-    }
 }
 
 -(IBAction)restorePurchase
@@ -4406,24 +4502,41 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 #pragma mark EBPurchaseDelegate Methods
 
--(void) requestedProduct:(EBPurchase*)ebp identifier:(NSString*)productId name:(NSString*)productName price:(NSString*)productPrice description:(NSString*)productDescription
-{
-    NSLog(@"ViewController requestedProduct");
+-(void) requestedProduct:(EBPurchase*)ebp identifier:(NSString*)productId name:(NSString*)productName price:(NSString*)productPrice description:(NSString*)productDescription {
     
-    [self purchaseProduct:productId];
-    /*if(loadingView.hidden == NO) {
-        self.navigationItem.rightBarButtonItem.enabled = YES;
-        [self exportHighlights:nil];
-        loadingView.hidden = YES;
-        return;
-    }*/
+    NSLog(@"ProductId: %@", productId);
+    // First, ensure that the SKProduct that was requested by
+    // the EBPurchase requestProduct method in the viewWillAppear
+    // event is valid before trying to purchase it.
     
+    //if user want to buy 1 match
+    if (demoPurchase.products != nil) {
+        //loadingView.hidden = NO;
+        [self showFontPurchaseSheet:ebp.customIndex productList:demoPurchase.products];
+    }
+}
+
+-(NSMutableDictionary *)getInAppDictionary{
+    NSMutableDictionary *inAppDictionary = [[[NSUserDefaults standardUserDefaults] dictionaryForKey:IN_APP_DICTIONARY_KEY] mutableCopy];
+    
+    if(!inAppDictionary){
+        NSMutableDictionary *newInAppDictionary = [[NSMutableDictionary alloc] init];
+        [self setInAppDictionary:newInAppDictionary];
+        return [self getInAppDictionary];
+    } else {
+        return inAppDictionary;
+    }
+}
+
+-(void)setInAppDictionary:(NSMutableDictionary *)inAppDict{
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    [prefs setObject:inAppDict forKey:IN_APP_DICTIONARY_KEY];
+    [prefs synchronize];
 }
 
 -(void) successfulPurchase:(EBPurchase*)ebp restored:(bool)isRestore identifier:(NSString*)productId receipt:(NSData*)transactionReceipt
 {
-    NSLog(@"ViewController successfulPurchase");
-    
+   
     // Purchase or Restore request was successful, so...
     // 1 - Unlock the purchased content for your new customer!
     // 2 - Notify the user that the transaction was successful.
@@ -4436,62 +4549,51 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         // processed (such as past subscription renewals).
         
         isPurchased = YES;
-        NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-        NSString *alertMessage;
         
-        if([productId isEqualToString:FONT6_PRODUCT_ID]) {
-            
-            [prefs setInteger:1 forKey:FONT6_PRODUCT_ID];
-            [prefs synchronize];
-            
-            [fontScrollView removeFromSuperview];
-            fontScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(-320, 385,320,44)];
-            if(IS_IPHONE_5){
-                fontScrollView.frame = CGRectMake(10, 354, 320, 130);
-            }else{
-                fontScrollView.frame = CGRectMake(0, 360, 320, 44);
-            }
-            // Update view with no lock
-            [self addFontsInSubView];
-            [self.view addSubview:fontScrollView];
-            [self layoutScrollImages:fontScrollView scrollWidth:35 scrollHeight:35];
-
-            alertMessage = [NSString stringWithFormat:@"Your purchase was successful. %@ is unlocked now.", productId];
-            
-        } else if([productId isEqualToString:FONT7_PRODUCT_ID]) {
-            
-            [prefs setInteger:1 forKey:FONT7_PRODUCT_ID];
-            [prefs synchronize];
-            
-            [fontScrollView removeFromSuperview];
-            fontScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(-320, 385,320,44)];
-            if(IS_IPHONE_5){
-                fontScrollView.frame = CGRectMake(10, 354, 320, 130);
-            }else{
-                fontScrollView.frame = CGRectMake(0, 360, 320, 44);
-            }
-            // Update view with no lock
-            [self addFontsInSubView];
-            [self.view addSubview:fontScrollView];
-            [self layoutScrollImages:fontScrollView scrollWidth:35 scrollHeight:35];
-            
-            alertMessage = [NSString stringWithFormat:@"Your purchase was successful. %@ is unlocked now.", productId];
-        }
-        
-        //-------------------------------------
-        
-        // 1 - Unlock the purchased content and update the app's stored settings.
-        
-        //-------------------------------------
-        
-        // 2 - Notify the user that the transaction was successful.
-        
-        UIAlertView *updatedAlert = [[UIAlertView alloc] initWithTitle:@"Thank You!" message:alertMessage delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [updatedAlert show];
-        
+        // handle post purchase functionality
+        [self updatePurchaseRecord:ebp.customIndex identifier:productId];
     }
+}
+
+/*
+ * handle post purchase functionality
+ */
+-(void)updatePurchaseRecord:(int)index identifier:(NSString*)productId{
+    NSString *alertMessage;
     
-    //loadingView.hidden = YES;
+    //-------------------------------------
+    // 1 - Unlock the purchased content and update the app's stored settings.
+    NSLog(@"ProductId to Store: %@", [[NSString stringWithFormat:@"%@%d", FONT_PRODUCT_PREFIX, index] stringByReplacingOccurrencesOfString:@"." withString:@""]);
+    
+    // UPDATE RECORD IN NSUserDefaults
+    NSMutableDictionary *inAppDictionary = [self getInAppDictionary];
+    [inAppDictionary setObject:@"1" forKey:[productId stringByReplacingOccurrencesOfString:@"." withString:@""]];
+    [inAppDictionary setObject:@"1" forKey:[[NSString stringWithFormat:@"%@%d", FONT_PRODUCT_PREFIX, index] stringByReplacingOccurrencesOfString:@"." withString:@""]];
+    [self setInAppDictionary:inAppDictionary];
+    
+    //-------------------------------------
+    // 2 - Notify the user that the transaction was successful.
+    // UPDATE RECORD to PARSE
+    [self updateParseDB:productId];
+    
+    
+    [fontScrollView removeFromSuperview];
+    fontScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(-320, 385,320,44)];
+    if(IS_IPHONE_5){
+        fontScrollView.frame = CGRectMake(10, 354, 320, 130);
+    }else{
+        fontScrollView.frame = CGRectMake(0, 360, 320, 44);
+    }
+    // Update view with no lock
+    [self addFontsInSubView];
+    [self.view addSubview:fontScrollView];
+    [self layoutScrollImages:fontScrollView scrollWidth:35 scrollHeight:35];
+    
+    // Show message
+    alertMessage = [NSString stringWithFormat:@"Your purchase was successful. %@ is unlocked now.", productId];
+    
+    UIAlertView *updatedAlert = [[UIAlertView alloc] initWithTitle:@"Thank You!" message:alertMessage delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [updatedAlert show];    
 }
 
 -(void) failedPurchase:(EBPurchase*)ebp error:(NSInteger)errorCode message:(NSString*)errorMessage {
@@ -4538,15 +4640,10 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 }
 
 -(BOOL)isFontPurchased:(int)index{
-
-    if(index == 6){
-        if([[NSUserDefaults standardUserDefaults] objectForKey:FONT6_PRODUCT_ID]){
-            return YES;
-        }
-    } else if(index == 7){
-        if([[NSUserDefaults standardUserDefaults] objectForKey:FONT7_PRODUCT_ID]){
-            return YES;
-        }
+    
+    NSMutableDictionary *inAppDictionary = [self getInAppDictionary];
+    if([inAppDictionary objectForKey:[[NSString stringWithFormat:@"%@%d",FONT_PRODUCT_PREFIX,index] stringByReplacingOccurrencesOfString:@"." withString:@""]]){
+        return YES;
     }
     
     return NO;
@@ -4554,6 +4651,101 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 -(BOOL)isColorPurchased:(int)index{
     return NO;
+}
+
+- (void)updateParseDB:(NSString *)productId{
+    NSMutableDictionary *dict = [self getInAppDictionary];
+    [self purchase:TABLE_JSON keyValuePair:dict productId:productId];
+}
+
+-(void)purchase:(NSString *)class keyValuePair:(NSMutableDictionary *)keyValuePair productId:(NSString *)productId{
+    
+    PFQuery *query = [PFQuery queryWithClassName:class];    
+    [query whereKey:COLUMN_USER equalTo:[PFUser currentUser]];
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            
+            NSLog(@"Product Purchased");
+
+            NSArray *postArray = objects;
+            PFObject *post = postArray.lastObject;
+            if(!post){
+                post = [PFObject objectWithClassName:class];
+                
+                PFUser *user = [PFUser currentUser];
+                [post setObject:user forKey:COLUMN_USER];
+            }
+            
+            // ######### START set remaining fonts counts
+            if([productId isEqualToString:PRODUCT_FOUR_PACK_FONT]){
+                
+                NSString *remainingFontCount = [post objectForKey:COLUMN_REMINING_FONT_COUNT];
+                if(!remainingFontCount){
+                    [post setObject:@"3" forKey:COLUMN_REMINING_FONT_COUNT];
+                }else{
+                    int remainingFontCount = [[post objectForKey:COLUMN_REMINING_FONT_COUNT] integerValue];
+                    remainingFontCount = remainingFontCount + 3;
+                    [post setObject:[NSString stringWithFormat:@"%d", remainingFontCount] forKey:COLUMN_REMINING_FONT_COUNT];
+                }
+                
+            } else {
+                
+                NSString *remainingFontCount = [post objectForKey:COLUMN_REMINING_FONT_COUNT];
+                if(!remainingFontCount){
+                    [post setObject:@"0" forKey:COLUMN_REMINING_FONT_COUNT];
+                }else{
+                    int remainingFontCount = [[post objectForKey:COLUMN_REMINING_FONT_COUNT] integerValue];
+                    if(remainingFontCount > 0){
+                        remainingFontCount = remainingFontCount - 1;
+                    } else {
+                        remainingFontCount = 0;
+                    }
+                    
+                    [post setObject:[NSString stringWithFormat:@"%d", remainingFontCount] forKey:COLUMN_REMINING_FONT_COUNT];
+                }
+            }
+            // ######### END set remaining fonts counts
+
+            [post setObject:keyValuePair forKey:COLUMN_JSON];
+            [post saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                if (!error) {
+                    NSLog(@"Product Purchased");
+                }else{
+                    // Log details of the failure
+                    NSLog(@"Error: %@ %@", error, [error userInfo]);
+                }
+            }];
+        }
+    }];
+    
+    /*// Create a PFObject around a PFFile and associate it with the current user
+    PFObject *oneFontObject = [PFObject objectWithClassName:class];
+    [oneFontObject setObject:keyValuePair forKey:@"json"];
+    
+    // Set the access control list to current user for security purposes
+    oneFontObject.ACL = [PFACL ACLWithUser:[PFUser currentUser]];
+    PFUser *user = [PFUser currentUser];
+    [oneFontObject setObject:user forKey:@"user"];
+    
+    [oneFontObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (!error) {
+            
+            // Remove loading view
+            //for (UIView *subview in self.view.subviews) {
+            // if([subview isKindOfClass:[LoadingView class]]){
+            // [subview removeFromSuperview];
+            // }
+            // }
+            
+            NSLog(@"Product Purchased");
+        
+        }else{
+        
+            // Log details of the failure
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];*/
 }
 
 #pragma mark  View Disappear Methods
@@ -4577,13 +4769,10 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	}
 }
 
-
 - (void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
 	[self dismissNavBar:YES];
 }
-
-
 
 - (void)didReceiveMemoryWarning {
 	NSLog(@"didReceiveMemoryWarning");
@@ -4591,6 +4780,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	[appDele clearCache];
 		[super didReceiveMemoryWarning];
 }
+
 - (void)viewDidUnload {
 	NSLog(@"ViewDidUnload");
 	FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
@@ -4613,8 +4803,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	[fontScrollView release];
 	[symbolScrollView release];
 	[iconScrollView release];
-    [layerScrollView release];
-    
+    [layerScrollView release];    
     
     [super dealloc];
 }

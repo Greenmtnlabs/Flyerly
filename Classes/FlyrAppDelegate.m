@@ -246,26 +246,6 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     [FBAppCall handleDidBecomeActiveWithSession:self.session];
 }
 
--(void)createDummyUser{
-
-    PFUser *currentUser = [PFUser currentUser];
-    if (currentUser) {
-    } else {
-        // Dummy username and password
-        PFUser *user = [PFUser user];
-        user.username = @"rizwan.riksof";
-        user.password = @"log123in";
-        user.email = @"rizwan.ahmed@riksof.com";
-        
-        [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-            if (!error) {
-            } else {
-                [PFUser logInWithUsername:@"rizwan.riksof" password:@"log123in"];
-            }
-        }];
-    }
-}
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
@@ -276,9 +256,6 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     // Setup parse
     [Parse setApplicationId:@"1EmUwhUYIpSEOJyeSBIOqkzUvDHSMHXvWYNjPynq"
                   clientKey:@"Gk4CuGVOHegOa8lzbISz4NL5qiI75Gh4bNJGRVKX"];
-    
-    // Creat edummy user on parse
-    //[self createDummyUser];
     
     //BZFoursquare *foursquare = [[BZFoursquare alloc] initWithClientID:@"N2UKFTKALD4UBCB0ADNF30O5KIRV03X4UVG0S5Q5V43EDLPN" callbackURL:@"https://www.google.com"];
     

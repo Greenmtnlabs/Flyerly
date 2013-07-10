@@ -108,6 +108,7 @@
 						<bool key="IBUIAdjustsFontSizeToFit">YES</bool>
 						<float key="IBUIMinimumFontSize">17</float>
 						<object class="IBUITextInputTraits" key="IBUITextInputTraits">
+							<int key="IBUIKeyboardType">7</int>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						</object>
 						<object class="IBUIFontDescription" key="IBUIFontDescription" id="260464244">
@@ -155,7 +156,6 @@
 						<string key="NSFrame">{{40, 223}, {240, 33}}</string>
 						<reference key="NSSuperview" ref="186061059"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -305,7 +305,7 @@
 					</object>
 					<object class="IBUIButton" id="911453800">
 						<reference key="NSNextResponder" ref="186061059"/>
-						<int key="NSvFlags">292</int>
+						<int key="NSvFlags">300</int>
 						<string key="NSFrame">{{109, 263}, {103, 21}}</string>
 						<reference key="NSSuperview" ref="186061059"/>
 						<reference key="NSWindow"/>

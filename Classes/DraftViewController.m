@@ -61,20 +61,6 @@ static ShareProgressView *tumblrPogressView;
     // Init loading view
     loadingView = nil;
 	loadingView = [[LoadingView alloc]init];
-
-    // Set sharing network to zero
-    countOfSharingNetworks = 0;
-
-    // init progress view
-    if(!progressView){
-        progressView = [[UIView alloc] initWithFrame:CGRectMake(0, 46, 310, 3)];
-        [self.view addSubview:progressView];
-    } else {
-        // Remove all progress views
-        [[progressView subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
-        [progressView setFrame:CGRectMake(0, 46, 310, 3)];
-        [self.view addSubview:progressView];
-    }
     
     // Set click event on switch
     [saveToRollSwitch addTarget:self action:@selector(setSwitchState:) forControlEvents:UIControlEventValueChanged];
@@ -134,13 +120,6 @@ static ShareProgressView *tumblrPogressView;
     }else{
         [flickrButton setSelected:NO];
     }
-
-    // Add observers for 1) Flickr sharing success. 2) Flickr sharing failure. 3) Closing shring view
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(flickrSharingSuccess) name:FlickrSharingSuccessNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(flickrSharingFailure) name:FlickrSharingFailureNotification object:nil];    
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:CloseShareProgressNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closeSharingProgressSuccess:) name:CloseShareProgressNotification object:nil];
 
 	svController = [[SaveFlyerController alloc]initWithNibName:@"SaveFlyerController" bundle:nil];
 	svController.flyrImg = selectedFlyerImage;
@@ -239,31 +218,6 @@ static ShareProgressView *tumblrPogressView;
         [descriptionView setText:selectedFlyerDescription];
     }
     
-    // Show progress views if they are not cancelled manually
-    if(twitterPogressView){
-        [progressView setHidden:NO];
-        [progressView addSubview:twitterPogressView];
-        countOfSharingNetworks++;
-        [self increaseProgressViewHeightBy:36];
-    }
-    if(facebookPogressView){
-        [progressView setHidden:NO];
-        [progressView addSubview:facebookPogressView];
-        countOfSharingNetworks++;
-        [self increaseProgressViewHeightBy:36];
-    }
-    if(flickrPogressView){
-        [progressView setHidden:NO];
-        [progressView addSubview:flickrPogressView];
-        countOfSharingNetworks++;
-        [self increaseProgressViewHeightBy:36];
-    }
-    if(tumblrPogressView){
-        [progressView setHidden:NO];
-        [progressView addSubview:tumblrPogressView];
-        countOfSharingNetworks++;
-        [self increaseProgressViewHeightBy:36];
-    }
 }
 
 /*
@@ -310,6 +264,55 @@ static ShareProgressView *tumblrPogressView;
     } else {
         [locationButton setSelected:NO];
     }
+    
+    
+    // Set sharing network to zero
+    countOfSharingNetworks = 0;
+    
+    // init progress view
+    if(!progressView){
+        progressView = [[UIView alloc] initWithFrame:CGRectMake(0, 46, 310, 3)];
+        [self.view addSubview:progressView];
+    } else {
+        // Remove all progress views
+        [[progressView subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
+        [progressView setFrame:CGRectMake(0, 46, 310, 3)];
+        [self.view addSubview:progressView];
+    }
+    
+    // Add observers for 1) Flickr sharing success. 2) Flickr sharing failure. 3) Closing shring view
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(flickrSharingSuccess) name:FlickrSharingSuccessNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(flickrSharingFailure) name:FlickrSharingFailureNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:CloseShareProgressNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closeSharingProgressSuccess:) name:CloseShareProgressNotification object:nil];
+
+    // Show progress views if they are not cancelled manually
+    if(twitterPogressView){
+        [progressView setHidden:NO];
+        [progressView addSubview:twitterPogressView];
+        countOfSharingNetworks++;
+        [self increaseProgressViewHeightBy:36];
+    }
+    if(facebookPogressView){
+        [progressView setHidden:NO];
+        [progressView addSubview:facebookPogressView];
+        countOfSharingNetworks++;
+        [self increaseProgressViewHeightBy:36];
+    }
+    if(flickrPogressView){
+        [progressView setHidden:NO];
+        [progressView addSubview:flickrPogressView];
+        countOfSharingNetworks++;
+        [self increaseProgressViewHeightBy:36];
+    }
+    if(tumblrPogressView){
+        [progressView setHidden:NO];
+        [progressView addSubview:tumblrPogressView];
+        countOfSharingNetworks++;
+        [self increaseProgressViewHeightBy:36];
+    }
+
 }
 
 -(void)loadHelpController{
