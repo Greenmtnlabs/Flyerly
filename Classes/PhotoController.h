@@ -112,7 +112,8 @@
 	UIAlertView *discardAlert ;
 	UIAlertView *deleteAlert ;
 	UIAlertView *editAlert ;
-    
+    UIAlertView *inAppAlert ;
+
     EBPurchase *demoPurchase;
     BOOL isPurchased;
     BOOL deleteMode;
@@ -124,7 +125,11 @@
 	NSInteger colorScrollHeight;
     NSInteger borderScrollWidth;
 	NSInteger borderScrollHeight;
-    
+    NSInteger fontBorderScrollWidth;
+	NSInteger fontBorderScrollHeight;
+	NSInteger sizeScrollWidth;
+	NSInteger sizeScrollHeight;
+
     UIScrollView *layerScrollView;
     UIButton *crossButtonGlobal;
     UIButton *editButtonGlobal;
@@ -204,6 +209,7 @@
 @property (nonatomic,retain) UIAlertView *discardAlert;
 @property (nonatomic,retain) UIAlertView *deleteAlert;
 @property (nonatomic,retain) UIAlertView *editAlert;
+@property (nonatomic,retain) UIAlertView *inAppAlert;
 
 @property (nonatomic, assign) NSInteger imgPickerFlag;
 @property (nonatomic, assign) int flyerNumber;

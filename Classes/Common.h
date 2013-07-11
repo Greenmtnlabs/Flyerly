@@ -267,16 +267,25 @@ return cell;\
 
 #define PRODUCT_FONT @"com.flyerly.font"
 #define PRODUCT_FOUR_PACK_FONT @"com.flyerly.4FontsPack"
+#define PRODUCT_FULL_FONT @"com.flyerly.FontBundle"
+
 #define PRODUCT_FONT_COLOR @"com.flyerly.Fontcolor"
 #define PRODUCT_FOUR_FONT_COLOR @"com.flyerly.4FontColors"
+#define PRODUCT_FULL_FONT_COLOR @"com.flyerly.AllFontsColors"
+
 #define PRODUCT_FONT_BORDER_COLOR @"com.flyerly.FontBorderColor"
 #define PRODUCT_FOUR_FONT_BORDER_COLOR @"com.flyerly.4FontBorderColors"
+#define PRODUCT_FULL_FONT_BORDER_COLOR @"com.flyerly.AllFontBordersColors"
 
-#define FONT_PRODUCT_PREFIX @"com.flyerly.font"
+#define PRODUCT_FLYER_BORDER_COLOR @"com.flyerly.FlyerBorderColor"
+#define PRODUCT_FULL_FLYER_BORDER_COLOR @"com.flyerly.AllFlyersBorders"
+
+#define PREFIX_FONT_PRODUCT @"com.flyerly.font"
+#define PREFIX_FONT_COLOR_PRODUCT @"com.flyerly.color"
+#define PREFIX_TEXT_BORDER_PRODUCT @"com.flyerly.textborder"
+#define PREFIX_FLYER_BORDER_PRODUCT @"com.flyerly.flyerborder"
+
 //#define BACKGROUND_PRODUCT_PREFIX @"com.flyerly.background"
-//#define COLOR_PRODUCT_PREFIX @"com.flyerly.color"
-//#define TEXT_BORDER_PRODUCT_PREFIX @"com.flyerly.textborder"
-//#define FLYER_BORDER_PRODUCT_PREFIX @"com.flyerly.flyerborder"
 //
 //#define FONT6_PRODUCT_ID @"com.flyerly.font6"
 //#define FONT7_PRODUCT_ID @"com.flyerly.font7"
