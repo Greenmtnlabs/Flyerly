@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "MyNavigationBar.h"
-//#import "FlyrAppDelegate.h"
 #import "HudView.h"
 #import "CustomLabel.h"
 #import "CustomPhotoController.h"
@@ -105,6 +104,11 @@
     NSMutableArray *textEditLayersArray;
     NSMutableArray *textLabelLayersArray;
 
+    NSMutableArray *cpySymbolLayersArray;
+    NSMutableArray *cpyIconLayersArray;
+    NSMutableArray *cpyPhotoLayersArray;
+    NSMutableArray *cpyTextLabelLayersArray;
+
 	NSArray *colorArray;
 	NSArray *borderArray;
 	NSArray *fontArray;
@@ -118,6 +122,8 @@
     BOOL isPurchased;
     BOOL deleteMode;
     BOOL doStopWobble;
+    BOOL discardedLayer;
+    int undoCount;
     
 	NSInteger fontScrollWidth;
 	NSInteger fontScrollHeight;
@@ -129,14 +135,21 @@
 	NSInteger fontBorderScrollHeight;
 	NSInteger sizeScrollWidth;
 	NSInteger sizeScrollHeight;
+	NSInteger templateScrollWidth;
+	NSInteger templateScrollHeight;
 
     UIScrollView *layerScrollView;
     UIButton *crossButtonGlobal;
     UIButton *editButtonGlobal;
     
     int flyerNumber;
-
+    UIBarButtonItem *rightUndoBarButton;
 }
+
+@property(nonatomic, retain) NSMutableArray *cpyTextLabelLayersArray;
+@property(nonatomic, retain) NSMutableArray *cpySymbolLayersArray;
+@property(nonatomic, retain) NSMutableArray *cpyIconLayersArray;
+@property(nonatomic, retain) NSMutableArray *cpyPhotoLayersArray;
 
 @property (nonatomic, retain) MyNavigationBar *navBar;
 @property (nonatomic,retain) HudView *aHUD;

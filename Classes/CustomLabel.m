@@ -39,4 +39,20 @@
     self.shadowOffset = shadowOffset;
 }
 
+-(void)encodeWithCoder:(NSCoder *)aCoder{
+    [super encodeWithCoder:aCoder];
+    [aCoder encodeObject: borderColor];
+    [aCoder encodeObject: [NSNumber numberWithInteger:lineWidth]];
+}
+
+-(id)initWithCoder:(NSCoder *)aDecoder{
+    
+    self = [super initWithCoder:aDecoder];
+    
+    self.borderColor = [[aDecoder decodeObject] retain];
+    self.lineWidth = [[[aDecoder decodeObject] retain] intValue];
+    
+    return self;
+}
+
 @end

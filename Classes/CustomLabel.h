@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@interface CustomLabel : UILabel{
+@interface CustomLabel : UILabel<NSCoding>{
 	int lineWidth;
 	UIColor *borderColor;
 }

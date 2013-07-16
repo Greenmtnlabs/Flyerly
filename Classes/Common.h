@@ -280,12 +280,15 @@ return cell;\
 #define PRODUCT_FLYER_BORDER_COLOR @"com.flyerly.FlyerBorderColor"
 #define PRODUCT_FULL_FLYER_BORDER_COLOR @"com.flyerly.AllFlyersBorders"
 
+#define PRODUCT_TEMPLATE @"com.flyerly.FlyerBackground"
+#define PRODUCT_FULL_TEMPLATE @"com.flyerly.AllFlyerBackground"
+
 #define PREFIX_FONT_PRODUCT @"com.flyerly.font"
 #define PREFIX_FONT_COLOR_PRODUCT @"com.flyerly.color"
 #define PREFIX_TEXT_BORDER_PRODUCT @"com.flyerly.textborder"
 #define PREFIX_FLYER_BORDER_PRODUCT @"com.flyerly.flyerborder"
+#define PREFIX_BACKGROUND_PRODUCT @"com.flyerly.background"
 
-//#define BACKGROUND_PRODUCT_PREFIX @"com.flyerly.background"
 //
 //#define FONT6_PRODUCT_ID @"com.flyerly.font6"
 //#define FONT7_PRODUCT_ID @"com.flyerly.font7"
