@@ -289,6 +289,12 @@ return cell;\
 #define PREFIX_FLYER_BORDER_PRODUCT @"com.flyerly.flyerborder"
 #define PREFIX_BACKGROUND_PRODUCT @"com.flyerly.background"
 
+#define ADD_MORE_TEXTTAB 0
+#define ADD_MORE_PHOTOTAB 1
+#define ADD_MORE_SYMBOLTAB 2
+#define ADD_MORE_ICONTAB 3
+#define ARRANGE_LAYERTAB 4
+
 //
 //#define FONT6_PRODUCT_ID @"com.flyerly.font6"
 //#define FONT7_PRODUCT_ID @"com.flyerly.font7"

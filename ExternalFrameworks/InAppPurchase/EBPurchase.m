@@ -184,6 +184,7 @@ SKPayment *paymentRequest;
 // The transaction status of the SKPaymentQueue is sent here.
 - (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions {
 	for(SKPaymentTransaction *transaction in transactions) {
+        
 		switch (transaction.transactionState) {
 				
 			case SKPaymentTransactionStatePurchasing:
@@ -245,6 +246,16 @@ SKPayment *paymentRequest;
     
     // Release the transaction observer since transaction is finished/removed.
     [[SKPaymentQueue defaultQueue] removeTransactionObserver:self];
+    
+    for(SKPaymentTransaction *transaction in transactions) {
+        
+        switch (transaction.transactionState) {
+        
+            case SKPaymentTransactionStateFailed:                
+
+                [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
+        }
+    }
 }
 
 // Called when SKPaymentQueue has finished sending restored transactions.

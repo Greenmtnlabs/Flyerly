@@ -32,7 +32,7 @@ static ShareProgressView *tumblrPogressView;
 
 @implementation DraftViewController
 
-@synthesize selectedFlyerImage,imgView,navBar,fvController,svController,titleView,descriptionView,selectedFlyerDescription,selectedFlyerTitle, detailFileName, imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,loadingView,dic,fromPhotoController,scrollView,instagramPogressView, saveToCameraRollLabel, saveToRollSwitch,twit,locationBackground,locationLabel,networkParentView,locationButton,listOfPlaces;
+@synthesize selectedFlyerImage,imgView,navBar,fvController,svController,titleView,descriptionView,selectedFlyerDescription,selectedFlyerTitle, detailFileName, imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,loadingView,dic,fromPhotoController,scrollView,instagramPogressView, saveToCameraRollLabel, saveToRollSwitch,twit,locationBackground,locationLabel,networkParentView,locationButton,listOfPlaces,bitly;
 //@synthesize twitterPogressView,facebookPogressView,tumblrPogressView,flickrPogressView,progressView;
 
 -(void)callFlyrView{
@@ -218,38 +218,6 @@ static ShareProgressView *tumblrPogressView;
         [descriptionView setText:selectedFlyerDescription];
     }
     
-}
-
-/*
- * get switch on off event
- */
--(void)setSwitchState:(id)sender {
-    if([sender isOn]){
-        [locationLabel setHidden:NO];
-        [locationBackground setHidden:NO];
-        [locationButton setHidden:NO];
-
-        [UIView beginAnimations:nil context:nil];
-        [UIView setAnimationDuration:0.2];
-        [UIView setAnimationCurve:UIViewAnimationCurveLinear];
-        [scrollView setFrame:CGRectMake(scrollView.frame.origin.x, scrollView.frame.origin.y, scrollView.frame.size.width, scrollView.frame.size.height + 30)];
-        // move view down
-        [networkParentView setFrame:CGRectMake(networkParentView.frame.origin.x, networkParentView.frame.origin.y + 30, networkParentView.frame.size.width, networkParentView.frame.size.height)];
-        [UIView commitAnimations];
-
-    }else{
-        [locationLabel setHidden:YES];
-        [locationBackground setHidden:YES];
-        [locationButton setHidden:YES];
-
-        [UIView beginAnimations:nil context:nil];
-        [UIView setAnimationDuration:0.2];
-        [UIView setAnimationCurve:UIViewAnimationCurveLinear];
-        [scrollView setFrame:CGRectMake(scrollView.frame.origin.x, scrollView.frame.origin.y, scrollView.frame.size.width, scrollView.frame.size.height - 30)];        
-        // move view up
-        [networkParentView setFrame:CGRectMake(networkParentView.frame.origin.x, networkParentView.frame.origin.y - 30, networkParentView.frame.size.width, networkParentView.frame.size.height)];
-        [UIView commitAnimations];
-}
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -852,32 +820,28 @@ static ShareProgressView *tumblrPogressView;
 
 }
 
+
 #pragma Sharing code
 
 /*
  * Share on MMS
  */
 -(void)shareOnMMS{
-    
-    /*
-    NSString *phoneToCall = @"sms:123-456-7890";
-    NSString *phoneToCallEncoded = [phoneToCall stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
-    NSURL *url = [[NSURL alloc] initWithString:phoneToCallEncoded];
-    
-    [[UIApplication sharedApplication] openURL:url];
-     */
+    NSData *imageData = UIImagePNGRepresentation(selectedFlyerImage);
+    [self uploadImage:imageData isEmail:NO];
+}
 
+-(void)shareOnMMS:(NSString *)link{    
     MFMessageComposeViewController *controller = [[[MFMessageComposeViewController alloc] init] autorelease];
     if([MFMessageComposeViewController canSendText])
     {
-        controller.body = [NSString stringWithFormat:@"%@ %@", selectedFlyerDescription, @"#flyerly"];
-        //controller.recipients = [NSArray arrayWithObjects:@"1(234)567-8910", nil];
+        controller.body = [NSString stringWithFormat:@"%@ - %@ %@", selectedFlyerDescription,link, @"#flyerly"];
         controller.messageComposeDelegate = self;
         [self presentModalViewController:controller animated:YES];
     }
 }
 
-- (void)uploadImage:(NSData *)imageData
+- (void)uploadImage:(NSData *)imageData isEmail:(BOOL)isEmail
 {
     PFFile *imageFile = [PFFile fileWithName:[FlyrViewController getFlyerNumberFromPath:imageFileName] data:imageData];
     
@@ -906,7 +870,12 @@ static ShareProgressView *tumblrPogressView;
                     }
 
                     PFFile *theImage = [flyerObject objectForKey:@"image"];
-                    [self shareOnEmail:[theImage url]];
+                    
+                    if(isEmail){
+                        [self shareOnEmail:[theImage url]];
+                    }else{
+                        [self shortenURL:[theImage url]];
+                    }
                 }
                 else{
                     // Log details of the failure
@@ -925,10 +894,9 @@ static ShareProgressView *tumblrPogressView;
 /*
  * Share on Email
  */
--(void)shareOnEmail{
-    
+-(void)shareOnEmail{    
     NSData *imageData = UIImagePNGRepresentation(selectedFlyerImage);
-    [self uploadImage:imageData];
+    [self uploadImage:imageData isEmail:YES];
 }
 
 -(void)shareOnEmail:(NSString *)link{
@@ -1081,49 +1049,6 @@ static ShareProgressView *tumblrPogressView;
     return interactionController;
 }
 
-/*-(void)fbCheckForPlace {
-    
-    if([LocationController getLocationDetails]){
-        
-        NSString *centerLocation = [[NSString alloc] initWithFormat:@"%@,%@",
-                                    [[LocationController getLocationDetails] objectForKey:@"lat"],
-                                    [[LocationController getLocationDetails] objectForKey:@"lng"]];
-        
-        NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                       @"place",  @"type",
-                                       centerLocation, @"center",
-                                       @"1000",  @"distance",
-                                       nil];
-        [centerLocation release];
-        FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-        [appDelegate.facebook requestWithGraphPath:@"search" andParams:params andDelegate:self];
-    
-    } else {
-    
-        [self shareOnFacebook];
-    }
-    
-}
-
--(void)request:(FBRequest *)request didLoad:(id)result{
-    
-    NSArray *resultData = [result objectForKey:@"data"];
-    NSLog(@"Facebook Did load called %@", resultData);
-
-    if(resultData){
-        for (NSUInteger i=0; i<[resultData count] && i < 5; i++) {
-            
-            if(!self.listOfPlaces){
-                listOfPlaces = [[NSMutableArray alloc] init];
-            }
-            
-            [self.listOfPlaces addObject:[resultData objectAtIndex:i]];
-        }
-        
-        [self shareOnFacebook];
-    }
-}*/
-
 /*
  * Share on Facebook
  */
@@ -1132,9 +1057,6 @@ static ShareProgressView *tumblrPogressView;
     [facebookPogressView.statusText setText:@"Sharing..."];
     [facebookPogressView.statusText setTextColor:[UIColor yellowColor]];
     [facebookPogressView.statusIcon setBackgroundImage:nil forState:UIControlStateNormal];
-    
-    //NSString *centerLocation = [[NSString alloc] initWithFormat:@"%f,%f", 24.810574, 67.019004];
-    //NSString *placeId = [[self.listOfPlaces objectAtIndex:0] objectForKey:@"id"];
     
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
@@ -1609,6 +1531,8 @@ static ShareProgressView *tumblrPogressView;
     
 }
 
+#pragma Location near by code
+
 -(IBAction)searchNearByLocations{
 
     NSLog(@"Search Near By Locations");
@@ -1619,11 +1543,67 @@ static ShareProgressView *tumblrPogressView;
 
 }
 
+/*
+ * get switch on off event
+ */
+-(void)setSwitchState:(id)sender {
+    if([sender isOn]){
+        [locationLabel setHidden:NO];
+        [locationBackground setHidden:NO];
+        [locationButton setHidden:NO];
+        
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationDuration:0.2];
+        [UIView setAnimationCurve:UIViewAnimationCurveLinear];
+        [scrollView setFrame:CGRectMake(scrollView.frame.origin.x, scrollView.frame.origin.y, scrollView.frame.size.width, scrollView.frame.size.height + 30)];
+        // move view down
+        [networkParentView setFrame:CGRectMake(networkParentView.frame.origin.x, networkParentView.frame.origin.y + 30, networkParentView.frame.size.width, networkParentView.frame.size.height)];
+        [UIView commitAnimations];
+        
+    }else{
+        [locationLabel setHidden:YES];
+        [locationBackground setHidden:YES];
+        [locationButton setHidden:YES];
+        
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationDuration:0.2];
+        [UIView setAnimationCurve:UIViewAnimationCurveLinear];
+        [scrollView setFrame:CGRectMake(scrollView.frame.origin.x, scrollView.frame.origin.y, scrollView.frame.size.width, scrollView.frame.size.height - 30)];
+        // move view up
+        [networkParentView setFrame:CGRectMake(networkParentView.frame.origin.x, networkParentView.frame.origin.y - 30, networkParentView.frame.size.width, networkParentView.frame.size.height)];
+        [UIView commitAnimations];
+    }
+}
+
+#pragma Bitly code for URL shortening
+
+-(void)shortenURL:(NSString *)url{
+    bitly = [[BitlyURLShortener alloc] init];
+    bitly.delegate = self;
+    [bitly shortenLinksInText:url];
+}
+
+- (void)bitlyURLShortenerDidShortenText:(BitlyURLShortener *)shortener oldText:(NSString *)oldText text:(NSString *)text linkDictionary:(NSDictionary *)dictionary {
+    
+    NSLog(@"Old Text: %@", oldText);
+    NSLog(@"New Text: %@", text);
+    
+    [self shareOnMMS:text];
+}
+
+- (void)bitlyURLShortener:(BitlyURLShortener *)shortener
+        didFailForLongURL:(NSURL *)longURL
+               statusCode:(NSInteger)statusCode
+               statusText:(NSString *)statusText {
+    NSLog(@"Shortening failed for link %@: status code: %d, status text: %@",
+          [longURL absoluteString], statusCode, statusText);
+}
+
+#pragma leaving code
+
 - (void)postDismissCleanup {
 	//[navBar removeFromSuperview];
 	//[navBar release];
-    
-    
 }
 
 - (void)dismissNavBar:(BOOL)animated {

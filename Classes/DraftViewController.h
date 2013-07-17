@@ -15,12 +15,13 @@
 #import <MessageUI/MessageUI.h>
 #import "ShareProgressView.h"
 #import "OLBTwitpicEngine.h"
+#import "BitlyURLShortener.h"
 
 @class FlyrViewController;
 @class SaveFlyerController;
 @class LoadingView;
 
-@interface DraftViewController : UIViewController<FBRequestDelegate,UIWebViewDelegate,UIDocumentInteractionControllerDelegate,FBSessionDelegate,FBDialogDelegate,FBLoginDialogDelegate,TumblrUploadrDelegate,OFFlickrAPIRequestDelegate,MFMessageComposeViewControllerDelegate,MFMailComposeViewControllerDelegate,UITextViewDelegate,UITextFieldDelegate,UIGestureRecognizerDelegate,OLBTwitpicEngineDelegate> {
+@interface DraftViewController : UIViewController<FBRequestDelegate,UIWebViewDelegate,UIDocumentInteractionControllerDelegate,FBSessionDelegate,FBDialogDelegate,FBLoginDialogDelegate,TumblrUploadrDelegate,OFFlickrAPIRequestDelegate,MFMessageComposeViewControllerDelegate,MFMailComposeViewControllerDelegate,UITextViewDelegate,UITextFieldDelegate,UIGestureRecognizerDelegate,OLBTwitpicEngineDelegate,BitlyURLShortenerDelegate> {
 
 	IBOutlet UIScrollView *scrollView;
 
@@ -121,6 +122,7 @@
 @property BOOL fromPhotoController;
 
 @property (nonatomic, retain) OLBTwitpicEngine *twit;
+@property(nonatomic, strong) BitlyURLShortener *bitly;
 
 -(IBAction)onClickFacebookButton;
 -(IBAction)onClickTwitterButton;

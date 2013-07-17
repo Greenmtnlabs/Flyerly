@@ -20,6 +20,7 @@
 #import "Flurry.h"
 #import <Parse/Parse.h>
 #import "BZFoursquare.h"
+#import "BitlyConfig.h"
 
 NSString *kCheckTokenStep = @"kCheckTokenStep";
 NSString *FlickrSharingSuccessNotification = @"FlickrSharingSuccessNotification";
@@ -257,7 +258,8 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     [Parse setApplicationId:@"1EmUwhUYIpSEOJyeSBIOqkzUvDHSMHXvWYNjPynq"
                   clientKey:@"Gk4CuGVOHegOa8lzbISz4NL5qiI75Gh4bNJGRVKX"];
     
-    //BZFoursquare *foursquare = [[BZFoursquare alloc] initWithClientID:@"N2UKFTKALD4UBCB0ADNF30O5KIRV03X4UVG0S5Q5V43EDLPN" callbackURL:@"https://www.google.com"];
+    // Setup Bit.ly
+    [[BitlyConfig sharedBitlyConfig] setBitlyLogin:@"rizwanahmed" bitlyAPIKey:@"R_1e747da4d2cb02bd31aab2261ca216e2"];
     
     [self clearCache];
 	changesFlag = NO;

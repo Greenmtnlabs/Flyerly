@@ -22,34 +22,30 @@
 #import <Parse/PFFile.h>
 #import <Parse/PFObject.h>
 #import <Parse/PFQuery.h>
+#import "LoadingView.h"
 
 @implementation PhotoController
-@synthesize newImgName;
-@synthesize imgView,imgPicker;
+@synthesize imgView,imgPicker,imageNameNew,msgTextView,finalFlyer;
 @synthesize fontScrollView,colorScrollView,templateScrollView,sizeScrollView,borderScrollView,fontBorderScrollView,symbolScrollView,iconScrollView;
-@synthesize msgTextView,finalFlyer;
 @synthesize selectedFont,selectedColor,navBar;
 @synthesize selectedTemplate,selectedSymbol,selectedIcon;
 @synthesize fontTabButton,colorTabButton,sizeTabButton,selectedText,selectedSize,borderTabButton,fontBorderTabButton,addMoreFontTabButton,addMoreIconTabButton,addMorePhotoTabButton,addMoreSymbolTabButton,arrangeLayerTabButton;
 @synthesize templateBckgrnd,textBackgrnd,aHUD;
-//@synthesize widthScrollView,heightScrollView
 @synthesize cameraTabButton,photoTabButton,widthTabButton,heightTabButton,photoImgView,symbolImgView,iconImgView;
 @synthesize photoTouchFlag,symbolTouchFlag,iconTouchFlag, lableTouchFlag,lableLocation,warningAlert,discardAlert,deleteAlert,editAlert, inAppAlert;
 @synthesize moreLayersLabel, moreLayersButton, takePhotoButton, cameraRollButton, takePhotoLabel, cameraRollLabel, imgPickerFlag,finalImgWritePath, addMoreLayerOrSaveFlyerLabel, takeOrAddPhotoLabel,layerScrollView;
-@synthesize flyerNumber;
 @synthesize cpyTextLabelLayersArray,cpyIconLayersArray,cpyPhotoLayersArray,cpySymbolLayersArray;
+@synthesize flyerNumber,loadingView;
 
-int selectedAddMoreLayerTab = -1;
-const int ADD_MORE_TEXT_TAB = 0;
-const int ADD_MORE_PHOTO_TAB = 1;
-const int ADD_MORE_SYMBOL_TAB = 2;
-const int ADD_MORE_ICON_TAB = 3;
-const int ARRANGE_LAYER_TAB = 4;
-int symbolLayerCount = 0;
-int iconLayerCount = 0;
-int textLayerCount = 0;
-int photoLayerCount = 0;
+int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track selected Tab on Add More Layer screen
+int symbolLayerCount = 0; // Symbol layer count to set tag value
+int iconLayerCount = 0; // Icon layer count to set tag value
+int textLayerCount = 0; // Text layer count to set tag value
+int photoLayerCount = 0; // Photo layer count to set tag value
 
+/*
+ * This init method is called when editing a flyer is pressed
+ */
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil templateParam:(UIImage *)templateParam symbolArrayParam:(NSMutableArray *)symbolArrayParam iconArrayParam:(NSMutableArray *)iconArrayParam photoArrayParam:(NSMutableArray *)photoArrayParam textArrayParam:(NSMutableArray *)textArrayParam flyerNumberParam:(int)flyerNumberParam{
     
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -1810,6 +1806,17 @@ int arrangeLayerIndex;
 	[aHUD loadingViewInView:self.view text:@"Saving..."];
 }
 
+-(void)showLoadingView:(NSString *)message{
+    loadingView =[LoadingView loadingViewInView:self.view  text:message];
+}
+
+-(void)removeLoadingView{
+    for (UIView *subview in self.view.subviews) {
+        if([subview isKindOfClass:[LoadingView class]]){
+            [subview removeFromSuperview];
+        }
+    }
+}
 
 #pragma mark  imagePicker
 
@@ -2026,7 +2033,7 @@ int arrangeLayerIndex;
 	
     } else if(alertView == discardAlert && buttonIndex == 1) {
         
-        if(selectedAddMoreLayerTab == ADD_MORE_TEXT_TAB){
+        if(selectedAddMoreLayerTab == ADD_MORE_TEXTTAB){
             
             textLayerCount--;
             
@@ -2037,7 +2044,7 @@ int arrangeLayerIndex;
             if(!deleteMode)
                 [textLabelLayersArray removeLastObject];
             
-        } else if(selectedAddMoreLayerTab == ADD_MORE_PHOTO_TAB){
+        } else if(selectedAddMoreLayerTab == ADD_MORE_PHOTOTAB){
             
             photoLayerCount--;
             
@@ -2053,9 +2060,9 @@ int arrangeLayerIndex;
                 [photoLayersArray removeLastObject];
             }
             
-        } else if(selectedAddMoreLayerTab == ADD_MORE_SYMBOL_TAB){
+        } else if(selectedAddMoreLayerTab == ADD_MORE_SYMBOLTAB){
             [symbolLayersArray removeLastObject];
-        } else if(selectedAddMoreLayerTab == ADD_MORE_ICON_TAB){
+        } else if(selectedAddMoreLayerTab == ADD_MORE_ICONTAB){
             [iconLayersArray removeLastObject];
         }
         
@@ -2796,7 +2803,7 @@ int arrangeLayerIndex;
 	addMoreIconTabButton.alpha = ALPHA1;
 	arrangeLayerTabButton.alpha = ALPHA1;
 
-    selectedAddMoreLayerTab = ADD_MORE_TEXT_TAB;
+    selectedAddMoreLayerTab = ADD_MORE_TEXTTAB;
     discardedLayer = NO;
 
     [UIView commitAnimations];
@@ -3120,7 +3127,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	if(selectedButton == addMoreFontTabButton)
 	{
         self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Add layers" rect:CGRectMake(-50, -6, 50, 50)];
-        selectedAddMoreLayerTab = ADD_MORE_TEXT_TAB;
+        selectedAddMoreLayerTab = ADD_MORE_TEXTTAB;
         [self hideAddMoreAndSaveLabel];
         [self hideTakeOrAddPhotoLabel];
 
@@ -3144,7 +3151,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	else if(selectedButton == addMorePhotoTabButton)
 	{
         self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Add layers" rect:CGRectMake(-50, -6, 50, 50)];
-        selectedAddMoreLayerTab = ADD_MORE_PHOTO_TAB;
+        selectedAddMoreLayerTab = ADD_MORE_PHOTOTAB;
         [self hideAddMoreAndSaveLabel];
         [self showTakeOrAddPhotoLabel];
 
@@ -3180,7 +3187,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	else if(selectedButton == addMoreSymbolTabButton)
 	{
         self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Add layers" rect:CGRectMake(-50, -6, 50, 50)];
-        selectedAddMoreLayerTab = ADD_MORE_SYMBOL_TAB;
+        selectedAddMoreLayerTab = ADD_MORE_SYMBOLTAB;
         [self hideAddMoreAndSaveLabel];
         [self hideTakeOrAddPhotoLabel];
 
@@ -3214,7 +3221,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	else if(selectedButton == addMoreIconTabButton)
 	{
         self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Add layers" rect:CGRectMake(-50, -6, 50, 50)];
-        selectedAddMoreLayerTab = ADD_MORE_ICON_TAB;
+        selectedAddMoreLayerTab = ADD_MORE_ICONTAB;
         [self hideAddMoreAndSaveLabel];
         [self hideTakeOrAddPhotoLabel];
 
@@ -3248,7 +3255,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	{
         
         self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Arrange layers" rect:CGRectMake(-80, -6, 50, 50)];
-        selectedAddMoreLayerTab = ARRANGE_LAYER_TAB;
+        selectedAddMoreLayerTab = ARRANGE_LAYERTAB;
         [self removeBordersFromAllLayers];
         [self hideAddMoreAndSaveLabel];
         [self hideTakeOrAddPhotoLabel];
@@ -3548,7 +3555,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         arrangeLayerIndex = index;
         
         //
-        selectedAddMoreLayerTab = ADD_MORE_TEXT_TAB;
+        selectedAddMoreLayerTab = ADD_MORE_TEXTTAB;
         
         // Call Write
         [self callWrite];
@@ -3956,7 +3963,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 -(void)plusButtonClick{
     
     if([self canAddMoreLayers]){
-        if(selectedAddMoreLayerTab == ADD_MORE_TEXT_TAB){
+        if(selectedAddMoreLayerTab == ADD_MORE_TEXTTAB){
             
             /*UITextView *newMsgTextView = [[UITextView alloc]initWithFrame:CGRectMake(20, 50, 280, 150)];
              newMsgTextView.delegate = self;
@@ -3981,7 +3988,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
             [self callWrite];
             
-        } else if(selectedAddMoreLayerTab == ADD_MORE_SYMBOL_TAB){
+        } else if(selectedAddMoreLayerTab == ADD_MORE_SYMBOLTAB){
 
             CALayer * lastLayer = [[[self symbolLayersArray] lastObject] layer];
             [lastLayer setMasksToBounds:YES];
@@ -4002,7 +4009,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
             
             [[self symbolLayersArray] addObject:newSymbolImgView];
             
-        } else if(selectedAddMoreLayerTab == ADD_MORE_ICON_TAB){
+        } else if(selectedAddMoreLayerTab == ADD_MORE_ICONTAB){
             
             CALayer * lastLayer = [[[self iconLayersArray] lastObject] layer];
             [lastLayer setMasksToBounds:YES];
@@ -4023,7 +4030,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
             
             [[self iconLayersArray] addObject:newIconImgView];
             
-        } else if(selectedAddMoreLayerTab == ADD_MORE_PHOTO_TAB){
+        } else if(selectedAddMoreLayerTab == ADD_MORE_PHOTOTAB){
             
             photoTouchFlag = YES;
             
@@ -4163,7 +4170,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 		//if (CGRectContainsPoint([self.imgView frame], [touch locationInView:self.imgView]) && lableTouchFlag )
         if (loc.y <= imgView.frame.size.height && lableTouchFlag )
 		{
-            if(selectedAddMoreLayerTab == ARRANGE_LAYER_TAB){
+            if(selectedAddMoreLayerTab == ARRANGE_LAYERTAB){
                 //[self.imgView sendSubviewToBack:[[self photoLayersArray] objectAtIndex:arrangeLayerIndex]];
                 [self.imgView bringSubviewToFront:[[self textLabelLayersArray] objectAtIndex:arrangeLayerIndex]];            
             } else{
@@ -4173,7 +4180,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 			for (UITouch *touch in touches) {
 				//[self dispatchFirstTouchAtPoint:msgLabel point:[touch locationInView:self.view] forEvent:nil];
-                if(selectedAddMoreLayerTab == ARRANGE_LAYER_TAB){
+                if(selectedAddMoreLayerTab == ARRANGE_LAYERTAB){
                     [self dispatchFirstTouchAtPoint:[[self textLabelLayersArray] lastObject] point:[touch locationInView:self.imgView] forEvent:nil];
                 }else{
                     [self dispatchFirstTouchAtPoint:[[self textLabelLayersArray] lastObject] point:[touch locationInView:self.imgView] forEvent:nil];
@@ -4185,7 +4192,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
                  && loc.x <= (imgView.frame.size.width-(((UIImageView *)[[self photoLayersArray] lastObject]).frame.size.width/2))
                  && loc.x >= ((((UIImageView *)[[self photoLayersArray] lastObject]).frame.size.width/2)))
 		{
-            if(selectedAddMoreLayerTab == ARRANGE_LAYER_TAB){
+            if(selectedAddMoreLayerTab == ARRANGE_LAYERTAB){
                 [self.imgView bringSubviewToFront:[[self photoLayersArray] objectAtIndex:arrangeLayerIndex]];
                 //[self.imgView bringSubviewToFront:[[self textLabelLayersArray] lastObject]];
             }else{
@@ -4194,7 +4201,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
             }
 
 			for (UITouch *touch in touches) {
-                if(selectedAddMoreLayerTab == ARRANGE_LAYER_TAB){
+                if(selectedAddMoreLayerTab == ARRANGE_LAYERTAB){
                     [self dispatchFirstTouchAtPoint:[[self photoLayersArray] objectAtIndex:arrangeLayerIndex] point:[touch locationInView:self.imgView] forEvent:nil];
                 }else{
                     [self dispatchFirstTouchAtPoint:[[self photoLayersArray] lastObject] point:[touch locationInView:self.imgView] forEvent:nil];
@@ -4204,7 +4211,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 		}
         else if (loc.y <= (imgView.frame.size.height-(symbolImgView.frame.size.height/2)) && symbolTouchFlag)
 		{
-            if(selectedAddMoreLayerTab == ARRANGE_LAYER_TAB){
+            if(selectedAddMoreLayerTab == ARRANGE_LAYERTAB){
                 [self.imgView bringSubviewToFront:[[self symbolLayersArray] objectAtIndex:arrangeLayerIndex]];
                 //[self.imgView bringSubviewToFront:[[self textLabelLayersArray] lastObject]];
             }else{
@@ -4213,7 +4220,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
             }
 
 			for (UITouch *touch in touches) {
-                if(selectedAddMoreLayerTab == ARRANGE_LAYER_TAB){
+                if(selectedAddMoreLayerTab == ARRANGE_LAYERTAB){
                     [self dispatchFirstTouchAtPoint:[[self symbolLayersArray] objectAtIndex:arrangeLayerIndex] point:[touch locationInView:self.imgView] forEvent:nil];
                 }else{
                     [self dispatchFirstTouchAtPoint:[[self symbolLayersArray] lastObject] point:[touch locationInView:self.imgView] forEvent:nil];
@@ -4223,7 +4230,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 		}
         else if (loc.y <= (imgView.frame.size.height-(iconImgView.frame.size.height/2)) && iconTouchFlag)
 		{
-            if(selectedAddMoreLayerTab == ARRANGE_LAYER_TAB){
+            if(selectedAddMoreLayerTab == ARRANGE_LAYERTAB){
                 [self.imgView bringSubviewToFront:[[self iconLayersArray] objectAtIndex:arrangeLayerIndex]];
                 //[self.imgView bringSubviewToFront:[[self textLabelLayersArray] lastObject]];
             }else{
@@ -4232,7 +4239,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
             }
 
 			for (UITouch *touch in touches) {
-                if(selectedAddMoreLayerTab == ARRANGE_LAYER_TAB){
+                if(selectedAddMoreLayerTab == ARRANGE_LAYERTAB){
                     [self dispatchFirstTouchAtPoint:[[self iconLayersArray] objectAtIndex:arrangeLayerIndex] point:[touch locationInView:self.imgView] forEvent:nil];
                 }else{
                     [self dispatchFirstTouchAtPoint:[[self iconLayersArray] lastObject] point:[touch locationInView:self.imgView] forEvent:nil];
@@ -4260,7 +4267,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 		for (UITouch *touch in touches){
 			lableLocation = [touch locationInView:self.imgView];
             
-            if(selectedAddMoreLayerTab == ARRANGE_LAYER_TAB){
+            if(selectedAddMoreLayerTab == ARRANGE_LAYERTAB){
                 [self dispatchTouchEvent:[[self textLabelLayersArray] objectAtIndex:arrangeLayerIndex] toPosition:[touch locationInView:self.imgView]];
             }else{
                 [self dispatchTouchEvent:[[self textLabelLayersArray] lastObject] toPosition:[touch locationInView:self.imgView]];
@@ -4278,7 +4285,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	{
 		for (UITouch *touch in touches){
             
-            if(selectedAddMoreLayerTab == ARRANGE_LAYER_TAB){
+            if(selectedAddMoreLayerTab == ARRANGE_LAYERTAB){
                 [self dispatchTouchEvent:[[self photoLayersArray] objectAtIndex:arrangeLayerIndex] toPosition:[touch locationInView:self.imgView]];
             }else{
                 [self dispatchTouchEvent:[[self photoLayersArray] lastObject] toPosition:[touch locationInView:self.imgView]];
@@ -4289,7 +4296,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     else if (loc.y <= (imgView.frame.size.height-(symbolImgView.frame.size.height/2)) && symbolTouchFlag)
 	{
 		for (UITouch *touch in touches){
-            if(selectedAddMoreLayerTab == ARRANGE_LAYER_TAB){
+            if(selectedAddMoreLayerTab == ARRANGE_LAYERTAB){
                 [self dispatchTouchEvent:[[self symbolLayersArray] objectAtIndex:arrangeLayerIndex] toPosition:[touch locationInView:self.imgView]];
             }else{
                 [self dispatchTouchEvent:[[self symbolLayersArray] lastObject] toPosition:[touch locationInView:self.imgView]];
@@ -4300,7 +4307,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     else if (loc.y <= (imgView.frame.size.height-(iconImgView.frame.size.height/2)) && iconTouchFlag)
 	{
 		for (UITouch *touch in touches){
-            if(selectedAddMoreLayerTab == ARRANGE_LAYER_TAB){
+            if(selectedAddMoreLayerTab == ARRANGE_LAYERTAB){
                 [self dispatchTouchEvent:[[self iconLayersArray] objectAtIndex:arrangeLayerIndex] toPosition:[touch locationInView:self.imgView]];
             }else{
                 [self dispatchTouchEvent:[[self iconLayersArray] lastObject] toPosition:[touch locationInView:self.imgView]];
@@ -4381,7 +4388,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         finalImgDetailWritePath = [folderPath stringByAppendingString:[NSString stringWithFormat:@"/IMG_%d.txt", flyerNumber]];
         largestImgCount = flyerNumber;
         
-        newImgName = [NSString stringWithFormat:@"/IMG_%d.jpg",largestImgCount];
+        imageNameNew = [NSString stringWithFormat:@"/IMG_%d.jpg",largestImgCount];
 
     } else {
     
@@ -4407,8 +4414,8 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
                 
             }
             [ap release];
-            newImgName = [NSString stringWithFormat:@"/IMG_%d.jpg",++largestImgCount];
-            finalImgWritePath = [folderPath stringByAppendingString:newImgName];
+            imageNameNew = [NSString stringWithFormat:@"/IMG_%d.jpg",++largestImgCount];
+            finalImgWritePath = [folderPath stringByAppendingString:imageNameNew];
             NSString *newImgDetailName = [NSString stringWithFormat:@"/IMG_%d.txt",largestImgCount];
             finalImgDetailWritePath = [folderPath stringByAppendingString:newImgDetailName];
             
@@ -4429,7 +4436,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	
     // Save states of all supported social media
     if(files){
-        [self saveSocialStates:folderPath imageName:newImgName];
+        [self saveSocialStates:folderPath imageName:imageNameNew];
     }else{
         [self saveSocialStates:folderPath imageName:@"/IMG_0.jpg"];
     }
@@ -4786,49 +4793,76 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 -(void)requestTemplate:(UIButton *)button{
     
+    [self showLoadingView:nil];
+
     // Create an instance of EBPurchase (Inapp purchase).
+    [demoPurchase release];
+    demoPurchase = nil;
     demoPurchase = [[EBPurchase alloc] init];
     demoPurchase.delegate = self;
     demoPurchase.customIndex = button.tag;
+    isPurchased = NO;
     
     [demoPurchase requestProduct:[NSArray arrayWithObjects:PRODUCT_TEMPLATE, PRODUCT_FULL_TEMPLATE,nil]];
 }
 
 -(void)requestFont:(UIButton *)button{
     
+    [self showLoadingView:nil];
+    
     // Create an instance of EBPurchase (Inapp purchase).
+    [demoPurchase release];
+    demoPurchase = nil;
     demoPurchase = [[EBPurchase alloc] init];
     demoPurchase.delegate = self;
     demoPurchase.customIndex = button.tag;
-    
+    isPurchased = NO;
+
     [demoPurchase requestProduct:[NSArray arrayWithObjects:PRODUCT_FONT, PRODUCT_FULL_FONT,nil]];
 }
 
 -(void)requestColor:(UIButton *)button{
     
+    [self showLoadingView:nil];
+
     // Create an instance of EBPurchase (Inapp purchase).
+    [demoPurchase release];
+    demoPurchase = nil;
     demoPurchase = [[EBPurchase alloc] init];
     demoPurchase.delegate = self;
     demoPurchase.customIndex = button.tag;
-    
+    isPurchased = NO;
+
     [demoPurchase requestProduct:[NSArray arrayWithObjects:PRODUCT_FONT_COLOR, PRODUCT_FULL_FONT_COLOR,nil]];
 }
 
 -(void)requestFontBorder:(UIButton *)button{
+
+    [self showLoadingView:nil];
+
     // Create an instance of EBPurchase (Inapp purchase).
+    [demoPurchase release];
+    demoPurchase = nil;
     demoPurchase = [[EBPurchase alloc] init];
     demoPurchase.delegate = self;
     demoPurchase.customIndex = button.tag;
-    
+    isPurchased = NO;
+
     [demoPurchase requestProduct:[NSArray arrayWithObjects:PRODUCT_FONT_BORDER_COLOR, PRODUCT_FULL_FONT_BORDER_COLOR,nil]];
 }
 
 -(void)requestFlyerBorder:(UIButton *)button{
+    
+    [self showLoadingView:nil];
+
     // Create an instance of EBPurchase (Inapp purchase).
+    [demoPurchase release];
+    demoPurchase = nil;
     demoPurchase = [[EBPurchase alloc] init];
     demoPurchase.delegate = self;
     demoPurchase.customIndex = button.tag;
-    
+    isPurchased = NO;
+
     [demoPurchase requestProduct:[NSArray arrayWithObjects:PRODUCT_FLYER_BORDER_COLOR, PRODUCT_FULL_FLYER_BORDER_COLOR,nil]];
 }
 
@@ -4858,6 +4892,9 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     //if user want to buy 1 match
     if (demoPurchase.products != nil) {
         //loadingView.hidden = NO;
+        
+        [self removeLoadingView];
+
         [self showFontPurchaseSheet:ebp.customIndex productList:demoPurchase.products];
     }
 }
@@ -4952,6 +4989,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
             [self addSizeInSubView];
             [self.view addSubview:sizeScrollView];
             [self layoutScrollImages:sizeScrollView scrollWidth:sizeScrollWidth scrollHeight:sizeScrollHeight];
+            [sizeScrollView setAlpha:ALPHA0];
 
             [fontScrollView removeFromSuperview];
             fontScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(-320, 385,320,44)];
@@ -5066,12 +5104,22 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     [updatedAlert show];    
 }
 
+-(void)productRequestFailed:(NSError *)error{
+    // Purchase or Restore request failed or was cancelled, so notify the user.
+    
+    UIAlertView *failedAlert = [[UIAlertView alloc] initWithTitle:@"Purchase Stopped" message:@"Either you cancelled the request or Apple reported a transaction error. Please try again later, or contact the app's customer support for assistance." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [failedAlert show];
+    
+    [self removeLoadingView];
+}
+
 -(void) failedPurchase:(EBPurchase*)ebp error:(NSInteger)errorCode message:(NSString*)errorMessage {
     // Purchase or Restore request failed or was cancelled, so notify the user.
     
     UIAlertView *failedAlert = [[UIAlertView alloc] initWithTitle:@"Purchase Stopped" message:@"Either you cancelled the request or Apple reported a transaction error. Please try again later, or contact the app's customer support for assistance." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [failedAlert show];
     
+    [self removeLoadingView];
     //loadingView.hidden = YES;
     
 }
@@ -5088,6 +5136,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     UIAlertView *restoreAlert = [[UIAlertView alloc] initWithTitle:@"Restore Issue" message:@"A prior purchase transaction could not be found. To restore the purchased product, tap the Buy button. Paid customers will NOT be charged again, but the purchase will be restored." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [restoreAlert show];
     
+    [self removeLoadingView];
     //loadingView.hidden = YES;
     
 }
@@ -5101,12 +5150,14 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     UIAlertView *failedAlert = [[UIAlertView alloc] initWithTitle:@"Restore Stopped" message:@"Either you cancelled the request or your prior purchase could not be restored. Please try again later, or contact the app's customer support for assistance." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [failedAlert show];
     
+    [self removeLoadingView];
     //loadingView.hidden = YES;
     
 }
 
 -(void) cancelPurchase {
     //loadingView.hidden = YES;
+    [self removeLoadingView];
 }
 
 /*
