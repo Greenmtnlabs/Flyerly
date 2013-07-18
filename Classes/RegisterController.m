@@ -304,4 +304,20 @@
     [appDelegate.facebook requestWithGraphPath:@"me" andDelegate:self];
 }
 
+- (void)dealloc {
+    
+	[username release];
+    [password release];    
+    [confirmPassword release];
+    
+    [signUp release];    
+    [signUpFacebook release];
+    [signUpTwitter release];
+    
+    [launchController release];
+    [loadingView release];
+    
+    [super dealloc];
+}
+
 @end

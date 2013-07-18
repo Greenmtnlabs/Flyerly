@@ -593,7 +593,7 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
 
 - (IBAction)showLikeButton {
     
-     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+     /*FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
      appDelegate.facebook.sessionDelegate = self;
      
      if([appDelegate.facebook isSessionValid]) {
@@ -607,21 +607,13 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
          self.facebookLikeView.layout = @"button_count";
          self.facebookLikeView.showFaces = NO;
          [self.facebookLikeView load];
-         
-         /*//webview = [[UIWebView alloc] initWithFrame:CGRectMake(10, 74, 300, 315)];
-         NSString *urlAddress = @"http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.facebook.com%2Fflyerlyapp&send=false&layout=button_count&width=450&show_faces=false&colorscheme=light&action=like&height=21&ret=optin&act=connect&hash=AQA1K7Ri1gYE8YHl";
-         NSURL *url = [NSURL URLWithString:urlAddress];
-         NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
-         [webview loadRequest:requestObj];
-         
-         [self.view addSubview:opaqueView];*/
 
      } else {
      
          [appDelegate.facebook authorize:[NSArray arrayWithObjects: @"read_stream", @"publish_stream", @"email", nil]];
-     }
+     }*/
 
-    /*FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     appDelegate.facebook.sessionDelegate = self;
     
     if([appDelegate.facebook isSessionValid]) {
@@ -647,8 +639,8 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
     } else {
         
         [appDelegate.facebook authorize:[NSArray arrayWithObjects: @"read_stream",
-                                         @"publish_stream", nil]];
-    }*/
+                                         @"publish_stream", @"user_likes", nil]];
+    }
 }
 
 -(IBAction)goBack{
@@ -658,11 +650,11 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
     
     [self.likeView setHidden:YES];
     
-    //FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-    //[appDelegate.facebook requestWithGraphPath:@"me/likes" andDelegate:self];
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    [appDelegate.facebook requestWithGraphPath:@"me/likes" andDelegate:self];
 }
 
-/*-(void)request:(FBRequest *)request didLoad:(id)result{
+-(void)request:(FBRequest *)request didLoad:(id)result{
  
  	NSLog(@"Request received %@", result);    
     for (NSDictionary *likesData in [result objectForKey:@"data"]) {
@@ -676,7 +668,7 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
             [likeButton setSelected:NO];
         }
     }
-}*/
+}
 
 - (void)fbDidLogin {
 	NSLog(@"logged in");

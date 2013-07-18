@@ -311,4 +311,25 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)dealloc {
+	[emailImage release];
+    [passwordImage release];
+    
+    [email release];
+    [password release];
+    
+    [signIn release];
+    [signUp release];
+    [signInFacebook release];
+    [signInTwitter release];
+    
+    [forgetPassword1 release];
+    
+    [launchController release];
+    [registerController release];
+    [loadingView release];
+
+    [super dealloc];
+}
+
 @end

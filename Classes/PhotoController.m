@@ -80,7 +80,6 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 	[appDele clearCache];
 }
 
-
 -(void)viewDidAppear:(BOOL)animated{
     
     [moreLayersButton setBackgroundImage:[UIImage imageNamed:@"07_addmore"] forState:UIControlStateNormal];
@@ -110,18 +109,14 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     
 	photoImgView = [[UIImageView alloc]initWithFrame:CGRectMake(50, 50, 220, 200)];
 	[photoImgView setUserInteractionEnabled:NO];
-    //[[self photoLayersArray] addObject:photoImgView];
     
 	symbolImgView = [[UIImageView alloc]initWithFrame:CGRectMake(50, 50, 90, 70)];
 	[symbolImgView setUserInteractionEnabled:NO];
-    //[[self symbolLayersArray] addObject:symbolImgView];
     
 	iconImgView = [[UIImageView alloc]initWithFrame:CGRectMake(150, 50, 90, 70)];
 	[iconImgView setUserInteractionEnabled:NO];
-    //[[self iconLayersArray] addObject:iconImgView];
 	
 	textBackgrnd = [[UIImageView alloc]initWithFrame:CGRectMake(0, 385, 320, 44)];
-	//textBackgrnd.image = [UIImage imageNamed:@"scroll2.png"];
 	[self.view addSubview:textBackgrnd];
 	textBackgrnd.alpha = ALPHA0;
     
@@ -130,14 +125,12 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 	msgLabel.textColor = [UIColor blackColor];
 	msgLabel.textAlignment = UITextAlignmentCenter;
 	[self.imgView addSubview:msgLabel];
-    //[[self textLabelLayersArray] addObject:msgLabel];
     
 	msgTextView = [[UITextView alloc]initWithFrame:CGRectMake(20, 50, 280, 150)];
 	msgTextView.delegate = self;
 	msgTextView.font = [UIFont fontWithName:@"Arial" size:16];
 	msgTextView.textColor = [UIColor blackColor];
 	msgTextView.textAlignment = UITextAlignmentCenter;
-    //[[self textEditLayersArray] addObject:msgTextView];
 	
 	fontScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(-320, 385,320,44)];
 	colorScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(-320, 385,320,44)];
@@ -147,10 +140,6 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 	symbolScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(-320, 385,320,44)];
 	iconScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(-320, 385,320,44)];
 	layerScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(-320, 385,320,44)];
-	//widthScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(-320, 385,320,44)];
-	//heightScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(-320, 385, 320, 44)];
-	
-    
 
     // Add Symbols
 	NSInteger symbolScrollWidth = 60;
