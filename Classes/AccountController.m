@@ -35,6 +35,7 @@
 -(void)viewWillAppear:(BOOL)animated{
 
     [self.navigationItem setHidesBackButton:YES];
+    self.navigationController.navigationBarHidden = YES;
 }
 
 -(IBAction)onRegister{

@@ -35,7 +35,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.41</string>
+	<string>1.42</string>
 	<key>FacebookAppID</key>
 	<string>136691489852349</string>
 	<key>LSRequiresIPhoneOS</key>
@@ -69,5 +69,7 @@
 		<string>Signika-Regular.otf</string>
 		<string>Signika-Semibold.otf</string>
 	</array>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleDefault</string>
 </dict>
 </plist>

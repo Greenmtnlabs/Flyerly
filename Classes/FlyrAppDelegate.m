@@ -68,8 +68,8 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 {
 	[self clearCache];
 	changesFlag = NO;
-	[[UIApplication sharedApplication] setStatusBarStyle: UIStatusBarStyleBlackTranslucent];
-	navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
+	[[UIApplication sharedApplication] setStatusBarStyle: UIStatusBarStyleBlackOpaque];
+	navigationController.navigationBar.barStyle = UIStatusBarStyleBlackOpaque;
 
     NSString *greeted = [[NSUserDefaults standardUserDefaults] stringForKey:@"greeted"];
     
@@ -263,8 +263,8 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     
     [self clearCache];
 	changesFlag = NO;
-	[[UIApplication sharedApplication] setStatusBarStyle: UIStatusBarStyleBlackTranslucent];
-	navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
+	[[UIApplication sharedApplication] setStatusBarStyle: UIStatusBarStyleBlackOpaque];
+	navigationController.navigationBar.barStyle = UIStatusBarStyleBlackOpaque;
     
     NSString *greeted = [[NSUserDefaults standardUserDefaults] stringForKey:@"greeted"];
     
