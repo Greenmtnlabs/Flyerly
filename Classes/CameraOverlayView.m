@@ -11,7 +11,7 @@
 #import "Common.h"
 
 @implementation CameraOverlayView
-@synthesize photoController, gridImageView, libraryLatestPhoto, borderImage;
+@synthesize photoController, gridImageView, libraryLatestPhoto, borderImage, flashButton;
 
 -(void)viewDidLoad{
     NSLog(@"Camera Overlay Loaded...");
@@ -42,11 +42,14 @@
         [device lockForConfiguration:nil];
         
         if(torchMode == AVCaptureTorchModeOn){
-            [device setTorchMode:AVCaptureTorchModeOff];
+            //[device setTorchMode:AVCaptureTorchModeOff];
             [device setFlashMode:AVCaptureTorchModeOff];
+            //flashButton.layer.backgroundColor = [UIColor clearColor].CGColor;
+            //flashButton.layer.opaque = NO;
         } else {
-            [device setTorchMode:AVCaptureTorchModeOn];
+            //[device setTorchMode:AVCaptureTorchModeOn];
             [device setFlashMode:AVCaptureTorchModeOn];
+            //flashButton.layer.backgroundColor = [UIColor whiteColor].CGColor;
         }
         [device unlockForConfiguration];
     }

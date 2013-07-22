@@ -37,15 +37,19 @@
     
     self.navigationController.navigationBarHidden = NO;
 
-    //set title
+    //set title	
     self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Sign In" rect:CGRectMake(-35, -6, 50, 50)];
 
     // remove borders
     email.borderStyle = UITextBorderStyleNone;
     password.borderStyle = UITextBorderStyleNone;
     
-    email.text= @"riz_ahmed_86@yahoo.com";
-    password.text = @"logs";
+    // set clear text overlay
+    email.clearButtonMode = UITextFieldViewModeWhileEditing;
+    password.clearButtonMode = UITextFieldViewModeWhileEditing;
+    
+    //email.text= @"riz_ahmed_86@yahoo.com";
+    //password.text = @"logs";
     
     // Setup welcome button
     UIButton *welcomeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 76, 32)];
@@ -55,6 +59,15 @@
     [welcomeButton setBackgroundImage:[UIImage imageNamed:@"welcome_button"] forState:UIControlStateNormal];
     UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:welcomeButton];
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarButton,nil]];
+    
+    // Navigation bar sign in button
+    UIBarButtonItem *signInTopRightButton = [[UIBarButtonItem alloc] initWithTitle:@"Sign In" style:UIBarButtonItemStylePlain target:self action:@selector(onSignIn)];
+    
+    //[signInTopRightButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: [UIFont fontWithName:@"Helvetica-Bold" size:11.0], UITextAttributeFont,nil] forState:UIControlStateNormal];
+    
+    [signInTopRightButton setTintColor:[UIColor colorWithRed:104.0/255.0 green:173.0/255.0 blue:57.0/255.0 alpha:1]];
+    self.navigationItem.rightBarButtonItem = signInTopRightButton;
+    [signInTopRightButton release];
 }
 
 -(IBAction)forgetPassword{

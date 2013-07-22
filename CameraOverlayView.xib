@@ -132,6 +132,7 @@
 						<reference key="NSNextKeyView" ref="1053637432"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
+						<string key="IBUIRestorationIdentifier">flashButton</string>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
@@ -154,7 +155,7 @@
 						<string key="NSFrame">{{262, 7}, {48, 26}}</string>
 						<reference key="NSSuperview" ref="937108305"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="1024542996"/>
+						<reference key="NSNextKeyView" ref="1024412536"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -179,7 +180,7 @@
 						<string key="NSFrame">{{6, 47}, {308, 305}}</string>
 						<reference key="NSSuperview" ref="937108305"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="739936933"/>
+						<reference key="NSNextKeyView" ref="1024542996"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -194,7 +195,7 @@
 						<string key="NSFrame">{{0, 356}, {320, 124}}</string>
 						<reference key="NSSuperview" ref="937108305"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="1024412536"/>
+						<reference key="NSNextKeyView" ref="739936933"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -324,6 +325,14 @@
 					<int key="connectionID">314</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">flashButton</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="513629542"/>
+					</object>
+					<int key="connectionID">316</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">onBack</string>
 						<reference key="source" ref="201264122"/>
@@ -406,11 +415,11 @@
 							<reference ref="739936933"/>
 							<reference ref="201264122"/>
 							<reference ref="529255574"/>
-							<reference ref="513629542"/>
 							<reference ref="1053637432"/>
 							<reference ref="563806757"/>
 							<reference ref="227918212"/>
 							<reference ref="357176127"/>
+							<reference ref="513629542"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -497,7 +506,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">315</int>
+			<int key="maxID">316</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -540,6 +549,7 @@
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="borderImage">UIImageView</string>
+						<string key="flashButton">UIButton</string>
 						<string key="gridImageView">UIImageView</string>
 						<string key="libraryLatestPhoto">UIButton</string>
 					</dictionary>
@@ -547,6 +557,10 @@
 						<object class="IBToOneOutletInfo" key="borderImage">
 							<string key="name">borderImage</string>
 							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="flashButton">
+							<string key="name">flashButton</string>
+							<string key="candidateClassName">UIButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="gridImageView">
 							<string key="name">gridImageView</string>

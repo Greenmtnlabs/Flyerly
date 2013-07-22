@@ -21,6 +21,7 @@
     CustomPhotoController *customPhotoController;
 }
 
+@property (nonatomic, retain) IBOutlet UIButton *flashButton;
 @property (nonatomic, retain) IBOutlet UIImageView *borderImage;
 @property (nonatomic, retain) IBOutlet UIImageView *gridImageView;
 @property (nonatomic, retain) IBOutlet UIButton *libraryLatestPhoto;

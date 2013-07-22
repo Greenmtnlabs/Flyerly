@@ -86,7 +86,7 @@
 					<object class="IBUITextField" id="297458046">
 						<reference key="NSNextResponder" ref="186061059"/>
 						<int key="NSvFlags">300</int>
-						<string key="NSFrame">{{45, 158}, {236, 30}}</string>
+						<string key="NSFrame">{{45, 158}, {202, 30}}</string>
 						<reference key="NSSuperview" ref="186061059"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="495147765"/>
@@ -124,7 +124,7 @@
 					<object class="IBUITextField" id="927374260">
 						<reference key="NSNextResponder" ref="186061059"/>
 						<int key="NSvFlags">300</int>
-						<string key="NSFrame">{{45, 190}, {235, 30}}</string>
+						<string key="NSFrame">{{45, 190}, {202, 30}}</string>
 						<reference key="NSSuperview" ref="186061059"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="316830851"/>
@@ -156,6 +156,7 @@
 						<string key="NSFrame">{{40, 223}, {240, 33}}</string>
 						<reference key="NSSuperview" ref="186061059"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="911453800"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -598,7 +599,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">58</int>
+			<int key="maxID">59</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">

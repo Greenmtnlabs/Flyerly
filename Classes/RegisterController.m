@@ -46,6 +46,11 @@
     password.borderStyle = UITextBorderStyleNone;
     confirmPassword.borderStyle = UITextBorderStyleNone;
     
+    // add clear text option
+    username.clearButtonMode = UITextFieldViewModeWhileEditing;
+    password.clearButtonMode = UITextFieldViewModeWhileEditing;
+    confirmPassword.clearButtonMode = UITextFieldViewModeWhileEditing;
+    
     // Setup welcome button
     UIButton *welcomeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 76, 32)];
     [welcomeButton setTitle:@" Welcome" forState:UIControlStateNormal];
@@ -54,6 +59,15 @@
     [welcomeButton setBackgroundImage:[UIImage imageNamed:@"welcome_button"] forState:UIControlStateNormal];
     UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:welcomeButton];
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarButton,nil]];
+
+    // Navigation bar sign in button
+    UIBarButtonItem *doneTopRightButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(onSignUp)];
+    
+    //[doneTopRightButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: [UIFont fontWithName:@"Helvetica-Bold" size:11.0], UITextAttributeFont,nil] forState:UIControlStateNormal];
+    
+    [doneTopRightButton setTintColor:[UIColor colorWithRed:104.0/255.0 green:173.0/255.0 blue:57.0/255.0 alpha:1]];
+    self.navigationItem.rightBarButtonItem = doneTopRightButton;
+    [doneTopRightButton release];
 
 }
 

@@ -79,12 +79,12 @@
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">email_signin.png</string>
 						</object>
-						<object class="IBUIFontDescription" key="IBUIFontDescription" id="4805704">
-							<int key="type">1</int>
+						<object class="IBUIFontDescription" key="IBUIFontDescription" id="417905861">
+							<int key="type">2</int>
 							<double key="pointSize">15</double>
 						</object>
-						<object class="NSFont" key="IBUIFont" id="332070357">
-							<string key="NSName">Helvetica</string>
+						<object class="NSFont" key="IBUIFont" id="401575060">
+							<string key="NSName">Helvetica-Bold</string>
 							<double key="NSSize">15</double>
 							<int key="NSfFlags">16</int>
 						</object>
@@ -95,6 +95,7 @@
 						<string key="NSFrame">{{33, 389}, {255, 37}}</string>
 						<reference key="NSSuperview" ref="866021495"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -107,8 +108,8 @@
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">password_signin.png</string>
 						</object>
-						<reference key="IBUIFontDescription" ref="4805704"/>
-						<reference key="IBUIFont" ref="332070357"/>
+						<reference key="IBUIFontDescription" ref="417905861"/>
+						<reference key="IBUIFont" ref="401575060"/>
 					</object>
 				</array>
 				<string key="NSFrameSize">{320, 480}</string>
