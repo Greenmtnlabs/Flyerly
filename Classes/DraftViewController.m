@@ -32,7 +32,7 @@ static ShareProgressView *tumblrPogressView;
 
 @implementation DraftViewController
 
-@synthesize selectedFlyerImage,imgView,navBar,fvController,svController,titleView,descriptionView,selectedFlyerDescription,selectedFlyerTitle, detailFileName, imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,loadingView,dic,fromPhotoController,scrollView,instagramPogressView, saveToCameraRollLabel, saveToRollSwitch,twit,locationBackground,locationLabel,networkParentView,locationButton;
+@synthesize selectedFlyerImage,imgView,navBar,fvController,svController,titleView,descriptionView,selectedFlyerDescription,selectedFlyerTitle, detailFileName, imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,loadingView,dic,fromPhotoController,scrollView,instagramPogressView, saveToCameraRollLabel, saveToRollSwitch,twit,locationBackground,locationLabel,networkParentView,locationButton,listOfPlaces,bitly;
 //@synthesize twitterPogressView,facebookPogressView,tumblrPogressView,flickrPogressView,progressView;
 
 -(void)callFlyrView{
@@ -61,20 +61,6 @@ static ShareProgressView *tumblrPogressView;
     // Init loading view
     loadingView = nil;
 	loadingView = [[LoadingView alloc]init];
-
-    // Set sharing network to zero
-    countOfSharingNetworks = 0;
-
-    // init progress view
-    if(!progressView){
-        progressView = [[UIView alloc] initWithFrame:CGRectMake(0, 46, 310, 3)];
-        [self.view addSubview:progressView];
-    } else {
-        // Remove all progress views
-        [[progressView subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
-        [progressView setFrame:CGRectMake(0, 46, 310, 3)];
-        [self.view addSubview:progressView];
-    }
     
     // Set click event on switch
     [saveToRollSwitch addTarget:self action:@selector(setSwitchState:) forControlEvents:UIControlEventValueChanged];
@@ -134,13 +120,6 @@ static ShareProgressView *tumblrPogressView;
     }else{
         [flickrButton setSelected:NO];
     }
-
-    // Add observers for 1) Flickr sharing success. 2) Flickr sharing failure. 3) Closing shring view
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(flickrSharingSuccess) name:FlickrSharingSuccessNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(flickrSharingFailure) name:FlickrSharingFailureNotification object:nil];    
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:CloseShareProgressNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closeSharingProgressSuccess:) name:CloseShareProgressNotification object:nil];
 
 	svController = [[SaveFlyerController alloc]initWithNibName:@"SaveFlyerController" bundle:nil];
 	svController.flyrImg = selectedFlyerImage;
@@ -239,6 +218,46 @@ static ShareProgressView *tumblrPogressView;
         [descriptionView setText:selectedFlyerDescription];
     }
     
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];	
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
+    
+    if([LocationController getLocationDetails] && [[LocationController getLocationDetails] objectForKey:@"name"]){
+        locationLabel.text = [[LocationController getLocationDetails] objectForKey:@"name"];
+        
+        [locationButton setSelected:YES];
+    
+    } else {
+        [locationButton setSelected:NO];
+    }
+    
+    
+    // Set sharing network to zero
+    countOfSharingNetworks = 0;
+    
+    // init progress view
+    if(!progressView){
+        progressView = [[UIView alloc] initWithFrame:CGRectMake(0, 46, 310, 3)];
+        [self.view addSubview:progressView];
+    } else {
+        // Remove all progress views
+        [[progressView subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
+        [progressView setFrame:CGRectMake(0, 46, 310, 3)];
+        [self.view addSubview:progressView];
+    }
+    
+    // Set default progress view
+    [self setDefaultProgressViewHeight];
+    
+    // Add observers for 1) Flickr sharing success. 2) Flickr sharing failure. 3) Closing shring view
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(flickrSharingSuccess) name:FlickrSharingSuccessNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(flickrSharingFailure) name:FlickrSharingFailureNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:CloseShareProgressNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closeSharingProgressSuccess:) name:CloseShareProgressNotification object:nil];
+
     // Show progress views if they are not cancelled manually
     if(twitterPogressView){
         [progressView setHidden:NO];
@@ -264,43 +283,7 @@ static ShareProgressView *tumblrPogressView;
         countOfSharingNetworks++;
         [self increaseProgressViewHeightBy:36];
     }
-}
 
-/*
- * get switch on off event
- */
--(void)setSwitchState:(id)sender {
-    if([sender isOn]){
-        [locationLabel setHidden:NO];
-        [locationBackground setHidden:NO];
-        [locationButton setHidden:NO];
-
-        [UIView beginAnimations:nil context:nil];
-        [UIView setAnimationDuration:0.2];
-        [UIView setAnimationCurve:UIViewAnimationCurveLinear];
-        [scrollView setFrame:CGRectMake(scrollView.frame.origin.x, scrollView.frame.origin.y, scrollView.frame.size.width, scrollView.frame.size.height + 30)];
-        // move view down
-        [networkParentView setFrame:CGRectMake(networkParentView.frame.origin.x, networkParentView.frame.origin.y + 30, networkParentView.frame.size.width, networkParentView.frame.size.height)];
-        [UIView commitAnimations];
-
-    }else{
-        [locationLabel setHidden:YES];
-        [locationBackground setHidden:YES];
-        [locationButton setHidden:YES];
-
-        [UIView beginAnimations:nil context:nil];
-        [UIView setAnimationDuration:0.2];
-        [UIView setAnimationCurve:UIViewAnimationCurveLinear];
-        [scrollView setFrame:CGRectMake(scrollView.frame.origin.x, scrollView.frame.origin.y, scrollView.frame.size.width, scrollView.frame.size.height - 30)];        
-        // move view up
-        [networkParentView setFrame:CGRectMake(networkParentView.frame.origin.x, networkParentView.frame.origin.y - 30, networkParentView.frame.size.width, networkParentView.frame.size.height)];
-        [UIView commitAnimations];
-}
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];	
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
 }
 
 -(void)loadHelpController{
@@ -557,7 +540,7 @@ static ShareProgressView *tumblrPogressView;
             [facebookButton setSelected:YES];            
         } else {
             [appDelegate.facebook authorize:[NSArray arrayWithObjects: @"read_stream",
-                                             @"publish_stream", nil]];            
+                                             @"publish_stream", @"email", nil]];            
         }
     }
 }
@@ -715,7 +698,9 @@ static ShareProgressView *tumblrPogressView;
 
 -(void)updateSocialStates{    
     
-    NSString *socialFlyerPath = [imageFileName stringByReplacingOccurrencesOfString:@"/Flyr/" withString:@"/Flyr/Social/"];
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+
+    NSString *socialFlyerPath = [imageFileName stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@/Flyr/", appDelegate.loginId] withString:[NSString stringWithFormat:@"%@/Flyr/Social/", appDelegate.loginId]];
 	NSString *finalImgWritePath = [socialFlyerPath stringByReplacingOccurrencesOfString:@".jpg" withString:@".soc"];
     
     NSMutableArray *socialArray = [[NSMutableArray alloc] initWithContentsOfFile:finalImgWritePath];
@@ -839,34 +824,30 @@ static ShareProgressView *tumblrPogressView;
 
 }
 
+
 #pragma Sharing code
 
 /*
  * Share on MMS
  */
 -(void)shareOnMMS{
-    
-    /*
-    NSString *phoneToCall = @"sms:123-456-7890";
-    NSString *phoneToCallEncoded = [phoneToCall stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
-    NSURL *url = [[NSURL alloc] initWithString:phoneToCallEncoded];
-    
-    [[UIApplication sharedApplication] openURL:url];
-     */
+    NSData *imageData = UIImagePNGRepresentation(selectedFlyerImage);
+    [self uploadImage:imageData isEmail:NO];
+}
 
+-(void)shareOnMMS:(NSString *)link{    
     MFMessageComposeViewController *controller = [[[MFMessageComposeViewController alloc] init] autorelease];
     if([MFMessageComposeViewController canSendText])
     {
-        controller.body = [NSString stringWithFormat:@"%@ %@", selectedFlyerDescription, @"#flyerly"];
-        //controller.recipients = [NSArray arrayWithObjects:@"1(234)567-8910", nil];
+        controller.body = [NSString stringWithFormat:@"%@ - %@ %@", selectedFlyerDescription,link, @"#flyerly"];
         controller.messageComposeDelegate = self;
         [self presentModalViewController:controller animated:YES];
     }
 }
 
-- (void)uploadImage:(NSData *)imageData
+- (void)uploadImage:(NSData *)imageData isEmail:(BOOL)isEmail
 {
-    PFFile *imageFile = [PFFile fileWithName:[FlyrViewController getFlyerNumberFromPath:imageFileName] data:imageData];    
+    PFFile *imageFile = [PFFile fileWithName:[FlyrViewController getFlyerNumberFromPath:imageFileName] data:imageData];
     
     // Save PFFile
     [imageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
@@ -893,7 +874,12 @@ static ShareProgressView *tumblrPogressView;
                     }
 
                     PFFile *theImage = [flyerObject objectForKey:@"image"];
-                    [self shareOnEmail:[theImage url]];
+                    
+                    if(isEmail){
+                        [self shareOnEmail:[theImage url]];
+                    }else{
+                        [self shortenURL:[theImage url]];
+                    }
                 }
                 else{
                     // Log details of the failure
@@ -912,10 +898,9 @@ static ShareProgressView *tumblrPogressView;
 /*
  * Share on Email
  */
--(void)shareOnEmail{
-    
+-(void)shareOnEmail{    
     NSData *imageData = UIImagePNGRepresentation(selectedFlyerImage);
-    [self uploadImage:imageData];
+    [self uploadImage:imageData isEmail:YES];
 }
 
 -(void)shareOnEmail:(NSString *)link{
@@ -1059,7 +1044,7 @@ static ShareProgressView *tumblrPogressView;
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     NSData *imageData = UIImageJPEGRepresentation(selectedFlyerImage, 0.9);
     
-    [appDelegate.flickrRequest uploadImageStream:[NSInputStream inputStreamWithData:imageData] suggestedFilename:selectedFlyerTitle MIMEType:@"image/jpeg" arguments:[NSDictionary dictionaryWithObjectsAndKeys:@"0", @"is_public",@"Title", @"title", [NSString stringWithFormat:@"%@ %@", selectedFlyerDescription, @"#flyerly"], @"description", nil]];
+    [appDelegate.flickrRequest uploadImageStream:[NSInputStream inputStreamWithData:imageData] suggestedFilename:selectedFlyerTitle MIMEType:@"image/jpeg" arguments:[NSDictionary dictionaryWithObjectsAndKeys:@"0", @"is_public",@"Title", @"title", [NSString stringWithFormat:@"%@ %@ - at %@", selectedFlyerDescription, @"#flyerly", [[LocationController getLocationDetails] objectForKey:@"name"]], @"description", nil]];
 }
 
 - (UIDocumentInteractionController *) setupControllerWithURL: (NSURL*) fileURL usingDelegate: (id <UIDocumentInteractionControllerDelegate>) interactionDelegate {
@@ -1072,16 +1057,18 @@ static ShareProgressView *tumblrPogressView;
  * Share on Facebook
  */
 -(void)shareOnFacebook{
-
+    
     [facebookPogressView.statusText setText:@"Sharing..."];
     [facebookPogressView.statusText setTextColor:[UIColor yellowColor]];
     [facebookPogressView.statusIcon setBackgroundImage:nil forState:UIControlStateNormal];
-
+    
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                   [NSString stringWithFormat:@"%@ %@", selectedFlyerDescription, @"#flyerly"], @"message",  //whatever message goes here
+                                   [NSString stringWithFormat:@"%@ %@ - at %@", selectedFlyerDescription, @"#flyerly", [[LocationController getLocationDetails] objectForKey:@"name"]], @"message",  //whatever message goes here
                                    selectedFlyerImage, @"picture",   //img is your UIImage
+                                   //placeId, @"place",
                                    nil];
+    
     [[appDelegate facebook] requestWithGraphPath:@"me/photos"
                                        andParams:params
                                    andHttpMethod:@"POST"
@@ -1107,8 +1094,9 @@ static ShareProgressView *tumblrPogressView;
             
             TWRequest *postRequest = [[TWRequest alloc] initWithURL:[NSURL URLWithString:@"https://upload.twitter.com/1/statuses/update_with_media.json"] parameters:nil requestMethod:TWRequestMethodPOST];
             
+            
             //add text
-            [postRequest addMultiPartData:[[NSString stringWithFormat:@"%@ %@", selectedFlyerDescription, @"#flyerly"] dataUsingEncoding:NSUTF8StringEncoding] withName:@"status" type:@"multipart/form-data"];
+            [postRequest addMultiPartData:[[NSString stringWithFormat:@"%@ %@ - at %@", selectedFlyerDescription, @"#flyerly", [[LocationController getLocationDetails] objectForKey:@"name"]] dataUsingEncoding:NSUTF8StringEncoding] withName:@"status" type:@"multipart/form-data"];
             //add image
             [postRequest addMultiPartData:UIImagePNGRepresentation(selectedFlyerImage) withName:@"media" type:@"multipart/form-data"];
             
@@ -1506,7 +1494,7 @@ static ShareProgressView *tumblrPogressView;
     
     NSArray *array = [NSArray arrayWithObjects:data1, nil];
     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        TumblrUploadr *tu = [[TumblrUploadr alloc] initWithNSDataForPhotos:array andBlogName:[NSString stringWithFormat:@"%@.tumblr.com", blogName] andDelegate:self andCaption:[NSString stringWithFormat:@"%@ %@", selectedFlyerDescription, @"#flyerly"]];
+        TumblrUploadr *tu = [[TumblrUploadr alloc] initWithNSDataForPhotos:array andBlogName:[NSString stringWithFormat:@"%@.tumblr.com", blogName] andDelegate:self andCaption:[NSString stringWithFormat:@"%@ %@ - at %@", selectedFlyerDescription, @"#flyerly", [[LocationController getLocationDetails] objectForKey:@"name"]]];
         dispatch_async( dispatch_get_main_queue(), ^{
             
             [tu signAndSendWithTokenKey:oauthToken andSecret:oauthSecretKey];
@@ -1547,6 +1535,8 @@ static ShareProgressView *tumblrPogressView;
     
 }
 
+#pragma Location near by code
+
 -(IBAction)searchNearByLocations{
 
     NSLog(@"Search Near By Locations");
@@ -1557,11 +1547,67 @@ static ShareProgressView *tumblrPogressView;
 
 }
 
+/*
+ * get switch on off event
+ */
+-(void)setSwitchState:(id)sender {
+    if([sender isOn]){
+        [locationLabel setHidden:NO];
+        [locationBackground setHidden:NO];
+        [locationButton setHidden:NO];
+        
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationDuration:0.2];
+        [UIView setAnimationCurve:UIViewAnimationCurveLinear];
+        [scrollView setFrame:CGRectMake(scrollView.frame.origin.x, scrollView.frame.origin.y, scrollView.frame.size.width, scrollView.frame.size.height + 30)];
+        // move view down
+        [networkParentView setFrame:CGRectMake(networkParentView.frame.origin.x, networkParentView.frame.origin.y + 30, networkParentView.frame.size.width, networkParentView.frame.size.height)];
+        [UIView commitAnimations];
+        
+    }else{
+        [locationLabel setHidden:YES];
+        [locationBackground setHidden:YES];
+        [locationButton setHidden:YES];
+        
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationDuration:0.2];
+        [UIView setAnimationCurve:UIViewAnimationCurveLinear];
+        [scrollView setFrame:CGRectMake(scrollView.frame.origin.x, scrollView.frame.origin.y, scrollView.frame.size.width, scrollView.frame.size.height - 30)];
+        // move view up
+        [networkParentView setFrame:CGRectMake(networkParentView.frame.origin.x, networkParentView.frame.origin.y - 30, networkParentView.frame.size.width, networkParentView.frame.size.height)];
+        [UIView commitAnimations];
+    }
+}
+
+#pragma Bitly code for URL shortening
+
+-(void)shortenURL:(NSString *)url{
+    bitly = [[BitlyURLShortener alloc] init];
+    bitly.delegate = self;
+    [bitly shortenLinksInText:url];
+}
+
+- (void)bitlyURLShortenerDidShortenText:(BitlyURLShortener *)shortener oldText:(NSString *)oldText text:(NSString *)text linkDictionary:(NSDictionary *)dictionary {
+    
+    NSLog(@"Old Text: %@", oldText);
+    NSLog(@"New Text: %@", text);
+    
+    [self shareOnMMS:text];
+}
+
+- (void)bitlyURLShortener:(BitlyURLShortener *)shortener
+        didFailForLongURL:(NSURL *)longURL
+               statusCode:(NSInteger)statusCode
+               statusText:(NSString *)statusText {
+    NSLog(@"Shortening failed for link %@: status code: %d, status text: %@",
+          [longURL absoluteString], statusCode, statusText);
+}
+
+#pragma leaving code
+
 - (void)postDismissCleanup {
 	//[navBar removeFromSuperview];
 	//[navBar release];
-    
-    
 }
 
 - (void)dismissNavBar:(BOOL)animated {

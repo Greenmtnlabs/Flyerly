@@ -8,6 +8,7 @@
 
 #import "MyCustomCell.h"
 #import "UIImageExtras.h"
+#import "FlyrAppDelegate.h"
 
 @implementation MyCustomCell
 
@@ -95,7 +96,9 @@
     self.filePath = imagePath;
     flyerNumber = flyerNumberParam;
 
-    NSString *socialFlyerPath = [self.filePath stringByReplacingOccurrencesOfString:@"/Flyr/" withString:@"/Flyr/Social/"];
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+
+    NSString *socialFlyerPath = [self.filePath stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@/Flyr/",appDelegate.loginId] withString:[NSString stringWithFormat:@"%@/Flyr/Social/",appDelegate.loginId]];
 	NSString *finalImgWritePath = [socialFlyerPath stringByReplacingOccurrencesOfString:@".jpg" withString:@".soc"];
 
     NSArray *arr = [[NSArray alloc] initWithContentsOfFile:finalImgWritePath];

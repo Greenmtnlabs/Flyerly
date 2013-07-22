@@ -14,11 +14,13 @@
 #import "ImageCache.h"
 #import "LauchViewController.h"
 #import "AfterUpdateController.h"
+#import "AccountController.h"
 #import "TMAPIClient.h"
 #import "DraftViewController.h"
 #import "Flurry.h"
 #import <Parse/Parse.h>
 #import "BZFoursquare.h"
+#import "BitlyConfig.h"
 
 NSString *kCheckTokenStep = @"kCheckTokenStep";
 NSString *FlickrSharingSuccessNotification = @"FlickrSharingSuccessNotification";
@@ -32,7 +34,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 
 @synthesize window;
 @synthesize navigationController,faceBookPermissionFlag,changesFlag;
-@synthesize fontScrollView,colorScrollView,templateScrollView,sizeScrollView,svController,_tSession,lauchController,flickrContext,flickrRequest;
+@synthesize fontScrollView,colorScrollView,templateScrollView,sizeScrollView,svController,_tSession,lauchController,flickrContext,flickrRequest,accountController;
 @synthesize session = _session;
 //@synthesize adwhirl;
 @synthesize flickrUserName,sharingProgressParentView;
@@ -66,8 +68,8 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 {
 	[self clearCache];
 	changesFlag = NO;
-	[[UIApplication sharedApplication] setStatusBarStyle: UIStatusBarStyleBlackTranslucent];
-	navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
+	[[UIApplication sharedApplication] setStatusBarStyle: UIStatusBarStyleBlackOpaque];
+	navigationController.navigationBar.barStyle = UIStatusBarStyleBlackOpaque;
 
     NSString *greeted = [[NSUserDefaults standardUserDefaults] stringForKey:@"greeted"];
     
@@ -82,6 +84,8 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
         }
 
         [navigationController pushViewController:lauchController animated:NO];
+        //accountController = [[AccountController alloc]initWithNibName:@"AccountController" bundle:nil];
+        //[navigationController pushViewController:accountController animated:NO];
         [window addSubview:[navigationController view]];
 
         AfterUpdateController *afterUpdateView = [[AfterUpdateController alloc]initWithNibName:@"AfterUpdateController" bundle:nil];
@@ -96,8 +100,10 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
         }else{
             lauchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
         }
-
         [navigationController pushViewController:lauchController animated:NO];
+        
+        accountController = [[AccountController alloc]initWithNibName:@"AccountController" bundle:nil];
+        [navigationController pushViewController:accountController animated:NO];
         [window addSubview:[navigationController view]];
     }
 
@@ -209,8 +215,11 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
         //return YES;
         
         return [[self facebook] handleOpenURL:url];
-
         
+    } else if([[url absoluteString] hasPrefix:@"fsqapi"]){
+    
+        return [[self foursquare] handleOpenURL:url];
+
     } else {
         
         return [[TMAPIClient sharedInstance] handleOpenURL:url];
@@ -238,26 +247,6 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     [FBAppCall handleDidBecomeActiveWithSession:self.session];
 }
 
--(void)createDummyUser{
-
-    PFUser *currentUser = [PFUser currentUser];
-    if (currentUser) {
-    } else {
-        // Dummy username and password
-        PFUser *user = [PFUser user];
-        user.username = @"rizwan.riksof";
-        user.password = @"log123in";
-        user.email = @"rizwan.ahmed@riksof.com";
-        
-        [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-            if (!error) {
-            } else {
-                [PFUser logInWithUsername:@"rizwan.riksof" password:@"log123in"];
-            }
-        }];
-    }
-}
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
@@ -269,15 +258,13 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     [Parse setApplicationId:@"1EmUwhUYIpSEOJyeSBIOqkzUvDHSMHXvWYNjPynq"
                   clientKey:@"Gk4CuGVOHegOa8lzbISz4NL5qiI75Gh4bNJGRVKX"];
     
-    // Creat edummy user on parse
-    [self createDummyUser];
-    
-    //BZFoursquare *foursquare = [[BZFoursquare alloc] initWithClientID:@"N2UKFTKALD4UBCB0ADNF30O5KIRV03X4UVG0S5Q5V43EDLPN" callbackURL:@"https://www.google.com"];
+    // Setup Bit.ly
+    [[BitlyConfig sharedBitlyConfig] setBitlyLogin:@"rizwanahmed" bitlyAPIKey:@"R_1e747da4d2cb02bd31aab2261ca216e2"];
     
     [self clearCache];
 	changesFlag = NO;
-	[[UIApplication sharedApplication] setStatusBarStyle: UIStatusBarStyleBlackTranslucent];
-	navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
+	[[UIApplication sharedApplication] setStatusBarStyle: UIStatusBarStyleBlackOpaque];
+	navigationController.navigationBar.barStyle = UIStatusBarStyleBlackOpaque;
     
     NSString *greeted = [[NSUserDefaults standardUserDefaults] stringForKey:@"greeted"];
     
@@ -292,6 +279,8 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
         }
         
         [navigationController pushViewController:lauchController animated:NO];
+        //accountController = [[AccountController alloc]initWithNibName:@"AccountController" bundle:nil];
+        //[navigationController pushViewController:accountController animated:NO];
         [window addSubview:[navigationController view]];
         
         AfterUpdateController *afterUpdateView = [[AfterUpdateController alloc]initWithNibName:@"AfterUpdateController" bundle:nil];
@@ -305,9 +294,11 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
             lauchController = [[LauchViewController alloc]initWithNibName:@"LauchViewControllerIPhone5" bundle:nil];
         }else{
             lauchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
-        }
-        
+        }        
         [navigationController pushViewController:lauchController animated:NO];
+        
+        accountController = [[AccountController alloc]initWithNibName:@"AccountController" bundle:nil];
+        [navigationController pushViewController:accountController animated:NO];
         [window addSubview:[navigationController view]];
     }
     

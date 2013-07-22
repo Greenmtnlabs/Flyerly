@@ -8,17 +8,18 @@
 
 #import <UIKit/UIKit.h>
 #import "MyNavigationBar.h"
-#import "FlyrAppDelegate.h"
 #import "HudView.h"
 #import "CustomLabel.h"
 #import "CustomPhotoController.h"
 #import "EBPurchase.h"
+#import "LoadingView.h"
 
 @interface PhotoController : UIViewController<UIActionSheetDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, EBPurchaseDelegate>
 {
 	MyNavigationBar *navBar;
 	HudView *aHUD;
     CustomPhotoController *customPhotoController;
+	LoadingView *loadingView;
 
 	UIImageView *imgView;
 	UIImageView *templateBckgrnd;
@@ -42,20 +43,16 @@
 	UIScrollView *borderScrollView;
 	UIScrollView *fontBorderScrollView;
 	UIScrollView *templateScrollView;
-	//UIScrollView *heightScrollView;
-	//UIScrollView *widthScrollView;
-
     UIScrollView *symbolScrollView;
 	UIScrollView *iconScrollView;
+    UIScrollView *layerScrollView;
 
 	UITextView *msgTextView;
 	CustomLabel *msgLabel;
 	UIImagePickerController *imgPicker;
 	
-	bool keyboardShown;
-	
 	NSString *finalImgWritePath;
-	NSString *newImgName;
+	NSString *imageNameNew;
 	UIFont *selectedFont;
 	NSString *selectedText;
 	UIImage *selectedTemplate;
@@ -68,9 +65,9 @@
 	
 	UIActionSheet *alert;
 	UIView *distributeView;
-
 	UIImage *finalFlyer;
-	
+    EBPurchase *demoPurchase;
+
 	UIButton *fontTabButton;
 	UIButton *colorTabButton;
 	UIButton *sizeTabButton;
@@ -89,6 +86,7 @@
 	UIButton *addMoreSymbolTabButton;
 	UIButton *arrangeLayerTabButton;
 
+	bool keyboardShown;
 	BOOL photoTouchFlag;
 	BOOL symbolTouchFlag;
 	BOOL iconTouchFlag;
@@ -98,6 +96,9 @@
 	NSMutableArray *templateArray;
 	NSMutableArray *iconArray;
 	NSMutableArray *symbolArray;
+	NSArray *colorArray;
+	NSArray *borderArray;
+	NSArray *fontArray;
 
     NSMutableArray *symbolLayersArray;
     NSMutableArray *iconLayersArray;
@@ -105,36 +106,50 @@
     NSMutableArray *textEditLayersArray;
     NSMutableArray *textLabelLayersArray;
 
-	NSArray *colorArray;
-	NSArray *borderArray;
-	NSArray *fontArray;
+    NSMutableArray *cpySymbolLayersArray;
+    NSMutableArray *cpyIconLayersArray;
+    NSMutableArray *cpyPhotoLayersArray;
+    NSMutableArray *cpyTextLabelLayersArray;
+
 	UIAlertView *warningAlert ;
 	UIAlertView *discardAlert ;
 	UIAlertView *deleteAlert ;
 	UIAlertView *editAlert ;
-    
-    EBPurchase *demoPurchase;
+    UIAlertView *inAppAlert ;
+
     BOOL isPurchased;
     BOOL deleteMode;
     BOOL doStopWobble;
-    
+    BOOL discardedLayer;
+    int undoCount;
+    int flyerNumber;
+
 	NSInteger fontScrollWidth;
 	NSInteger fontScrollHeight;
 	NSInteger colorScrollWidth;
 	NSInteger colorScrollHeight;
     NSInteger borderScrollWidth;
 	NSInteger borderScrollHeight;
-    
-    UIScrollView *layerScrollView;
-    UIButton *crossButtonGlobal;
-    UIButton *editButtonGlobal;
-    
-    int flyerNumber;
+    NSInteger fontBorderScrollWidth;
+	NSInteger fontBorderScrollHeight;
+	NSInteger sizeScrollWidth;
+	NSInteger sizeScrollHeight;
+	NSInteger templateScrollWidth;
+	NSInteger templateScrollHeight;
 
+    UIButton *crossButtonGlobal;
+    UIButton *editButtonGlobal;    
+    UIBarButtonItem *rightUndoBarButton;
 }
+
+@property(nonatomic, retain) NSMutableArray *cpyTextLabelLayersArray;
+@property(nonatomic, retain) NSMutableArray *cpySymbolLayersArray;
+@property(nonatomic, retain) NSMutableArray *cpyIconLayersArray;
+@property(nonatomic, retain) NSMutableArray *cpyPhotoLayersArray;
 
 @property (nonatomic, retain) MyNavigationBar *navBar;
 @property (nonatomic,retain) HudView *aHUD;
+@property (nonatomic, retain) LoadingView *loadingView;
 
 @property(nonatomic, retain)  UIImageView *imgView;
 @property (nonatomic,retain)  UIImageView *photoImgView;
@@ -160,15 +175,13 @@
 @property (nonatomic, retain) UIScrollView *sizeScrollView;
 @property (nonatomic, retain) UIScrollView *borderScrollView;
 @property (nonatomic, retain) UIScrollView *fontBorderScrollView;
-//@property (nonatomic,retain) UIScrollView *heightScrollView;
-//@property (nonatomic,retain) UIScrollView *widthScrollView;
 @property (nonatomic, retain) UIScrollView *layerScrollView;
 
 @property (nonatomic, retain) UIScrollView *iconScrollView;
 @property (nonatomic, retain) UIScrollView *symbolScrollView;
 
 @property (nonatomic, retain) NSString *finalImgWritePath;
-@property (nonatomic, retain) NSString *newImgName;
+@property (nonatomic, retain) NSString *imageNameNew;
 @property (nonatomic, retain) UIFont *selectedFont;
 @property (nonatomic, assign) id selectedColor;
 @property (nonatomic, retain) NSString *selectedText;
@@ -204,6 +217,7 @@
 @property (nonatomic,retain) UIAlertView *discardAlert;
 @property (nonatomic,retain) UIAlertView *deleteAlert;
 @property (nonatomic,retain) UIAlertView *editAlert;
+@property (nonatomic,retain) UIAlertView *inAppAlert;
 
 @property (nonatomic, assign) NSInteger imgPickerFlag;
 @property (nonatomic, assign) int flyerNumber;

@@ -23,16 +23,19 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>oatransdemo</string>
 				<string>Flyerly</string>
 				<string>fb136691489852349</string>
+				<string>fsqapi</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.36</string>
+	<string>1.42</string>
 	<key>FacebookAppID</key>
 	<string>136691489852349</string>
 	<key>LSRequiresIPhoneOS</key>
@@ -66,5 +69,7 @@
 		<string>Signika-Regular.otf</string>
 		<string>Signika-Semibold.otf</string>
 	</array>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleDefault</string>
 </dict>
 </plist>

@@ -53,7 +53,7 @@
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<object class="NSCustomResource" key="IBUIImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">main_bg.png</string>
+									<string key="NSResourceName">church_bg.png</string>
 								</object>
 							</object>
 							<object class="IBUIImageView" id="324533189">
@@ -1198,9 +1198,9 @@
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="AlertViewBackground.png">{284, 62}</string>
+			<string key="church_bg.png">{320, 367}</string>
 			<string key="facebook_like.png">{80, 49}</string>
 			<string key="facebook_unlike.png">{80, 49}</string>
-			<string key="main_bg.png">{320, 394}</string>
 			<string key="mid_shadow.png">{105, 52}</string>
 			<string key="pinned_flyer2.png">{63, 83}</string>
 			<string key="pinned_flyer_bg2.png">{130, 130}</string>
