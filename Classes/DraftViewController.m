@@ -475,7 +475,8 @@ static ShareProgressView *tumblrPogressView;
                     [self shareOnInstagram];
                 }
                 
-                if([saveToRollSwitch isOn]){
+                //if([saveToRollSwitch isOn]){
+                if([[NSUserDefaults standardUserDefaults] stringForKey:@"saveToCameraRollSetting"]){
                     UIImageWriteToSavedPhotosAlbum(selectedFlyerImage, nil, nil, nil);
                 }
                 

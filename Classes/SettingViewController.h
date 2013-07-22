@@ -39,6 +39,8 @@
 	IBOutlet UIButton *instagramButton;
 	IBOutlet UIButton *smsButton;
 	IBOutlet UIButton *clipboardButton;
+	IBOutlet UILabel *saveToCameraRollLabel;
+    IBOutlet UISwitch *saveToRollSwitch;
 
     IBOutlet UIButton *helpTab;
 
@@ -55,6 +57,8 @@
 @property(nonatomic,retain) IBOutlet UIButton *instagramButton;
 @property(nonatomic,retain) IBOutlet UIButton *smsButton;
 @property(nonatomic,retain) IBOutlet UIButton *clipboardButton;
+@property(nonatomic,retain) IBOutlet UILabel *saveToCameraRollLabel;
+@property(nonatomic,retain) IBOutlet UISwitch *saveToRollSwitch;
 
 @property(nonatomic,retain) IBOutlet UIButton *helpTab;
 @property (nonatomic, retain) LoadingView *loadingView;
@@ -80,5 +84,6 @@
 -(IBAction)onClickSMSButton;
 -(IBAction)onClickClipboardButton;
 -(IBAction)loadHelpController;
+-(IBAction)onClickSaveToCameraRollSwitchButton;
 
 @end

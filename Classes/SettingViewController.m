@@ -25,7 +25,7 @@ extern NSString* kGetSessionProxy;
 //static NSString* kGetSessionProxy=nil; // @"<YOUR SESSION CALLBACK)>";
 
 @implementation SettingViewController
-@synthesize flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,helpTab,loadingView;
+@synthesize flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,helpTab,loadingView,saveToCameraRollLabel,saveToRollSwitch;
 
 -(void)viewWillAppear:(BOOL)animated{
 
@@ -91,6 +91,14 @@ extern NSString* kGetSessionProxy;
         [flickrButton setSelected:NO];
     }
 
+    if([[NSUserDefaults standardUserDefaults] stringForKey:@"saveToCameraRollSetting"]){
+        [saveToRollSwitch setOn:YES];
+    }else{
+        [saveToRollSwitch setOn:NO];
+    }
+    
+    // Set font and size on camera roll text
+    [saveToCameraRollLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
 }
 
 -(void)goToMain{
@@ -116,6 +124,17 @@ extern NSString* kGetSessionProxy;
             [appDelegate.facebook authorize:[NSArray arrayWithObjects: @"read_stream",
                                              @"publish_stream", nil]];
         }
+    }
+}
+
+-(IBAction)onClickSaveToCameraRollSwitchButton{
+    if([saveToRollSwitch isOn]){
+        [saveToRollSwitch setOn:YES];
+        [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"saveToCameraRollSetting"];
+    }
+    else{
+        [saveToRollSwitch setOn:NO];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"saveToCameraRollSetting"];
     }
 }
 
