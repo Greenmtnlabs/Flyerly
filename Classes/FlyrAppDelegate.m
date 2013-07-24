@@ -266,6 +266,17 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 	[[UIApplication sharedApplication] setStatusBarStyle: UIStatusBarStyleBlackOpaque];
 	navigationController.navigationBar.barStyle = UIStatusBarStyleBlackOpaque;
     
+    //This flag represents the condition whether application setting has been altered first time
+    // after installing app
+    if(![[NSUserDefaults standardUserDefaults] stringForKey:@"saveToCameraRollSettingFlag"]){
+        [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"saveToCameraRollSettingFlag"];
+        [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"saveToCameraRollSetting"];
+    }
+
+    if(![[NSUserDefaults standardUserDefaults] stringForKey:@"cameraSetting"]){
+        [[NSUserDefaults standardUserDefaults] setInteger:2 forKey:@"cameraSetting"];
+    }
+
     NSString *greeted = [[NSUserDefaults standardUserDefaults] stringForKey:@"greeted"];
     
     if(!greeted){

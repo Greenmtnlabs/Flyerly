@@ -22,18 +22,18 @@
 		title.textAlignment = UITextAlignmentCenter;
 		title.textColor = [UIColor blackColor];
 		title.backgroundColor = [UIColor clearColor];
-		title.font =[UIFont fontWithName:@"Arial-BoldMT" size:16];
+		title.font =[UIFont fontWithName:@"Avenir-Heavy" size:16];
 		title.numberOfLines =2;
 		
 		leftButton = [[UIButton alloc]initWithFrame:CGRectMake(10, 7, 80, 30)];
-		[leftButton.titleLabel setFont:[UIFont fontWithName:@"Arial-BoldMT" size:12]];
+		[leftButton.titleLabel setFont:[UIFont fontWithName:@"Symbol" size:12]];
 		[leftButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 		[leftButton setBackgroundImage:[UIImage imageNamed:@"back.png"] forState:UIControlStateNormal];
 		[leftButton.titleLabel setTextAlignment:UITextAlignmentCenter];
 		[leftButton.titleLabel setNumberOfLines:2];
 		
 		rightButton = [[UIButton alloc]initWithFrame:CGRectMake(239, 7, 80, 30)];
-		[rightButton.titleLabel setFont:[UIFont fontWithName:@"Arial-BoldMT" size:12]];
+		[rightButton.titleLabel setFont:[UIFont fontWithName:@"Symbol" size:12]];
 		[rightButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 		[rightButton setBackgroundImage:[UIImage imageNamed:@"forword.png"] forState:UIControlStateNormal];
 		[rightButton.titleLabel setTextAlignment:UITextAlignmentCenter];		  

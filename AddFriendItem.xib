@@ -95,12 +95,14 @@
 									<bytes key="NSWhite">MQA</bytes>
 								</object>
 								<int key="IBUIBaselineAdjustment">0</int>
-								<object class="IBUIFontDescription" key="IBUIFontDescription" id="1059441898">
-									<int key="type">1</int>
+								<object class="IBUIFontDescription" key="IBUIFontDescription" id="630750911">
+									<string key="name">HelveticaNeue-Medium</string>
+									<string key="family">Helvetica Neue</string>
+									<int key="traits">0</int>
 									<double key="pointSize">12</double>
 								</object>
-								<object class="NSFont" key="IBUIFont" id="161484737">
-									<string key="NSName">Helvetica</string>
+								<object class="NSFont" key="IBUIFont" id="764826494">
+									<string key="NSName">HelveticaNeue-Medium</string>
 									<double key="NSSize">12</double>
 									<int key="NSfFlags">16</int>
 								</object>
@@ -122,8 +124,8 @@
 								<reference key="IBUITextColor" ref="778145441"/>
 								<reference key="IBUIHighlightedColor" ref="249155770"/>
 								<int key="IBUIBaselineAdjustment">0</int>
-								<reference key="IBUIFontDescription" ref="1059441898"/>
-								<reference key="IBUIFont" ref="161484737"/>
+								<reference key="IBUIFontDescription" ref="630750911"/>
+								<reference key="IBUIFont" ref="764826494"/>
 								<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 							</object>
 							<object class="IBUIButton" id="551197228">

@@ -204,6 +204,12 @@
 		0F8007F1175378F0000FF7FA /* ricon20@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F8007C7175378F0000FF7FA /* ricon20@2x.png */; };
 		0F8007F2175378F0000FF7FA /* ricon21.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F8007C8175378F0000FF7FA /* ricon21.png */; };
 		0F8007F3175378F0000FF7FA /* ricon21@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F8007C9175378F0000FF7FA /* ricon21@2x.png */; };
+		0F805AD3179E92AD002AEA24 /* flash_icon_auto.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F805ACD179E92AC002AEA24 /* flash_icon_auto.png */; };
+		0F805AD4179E92AD002AEA24 /* flash_icon_auto@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F805ACE179E92AC002AEA24 /* flash_icon_auto@2x.png */; };
+		0F805AD5179E92AD002AEA24 /* flash_icon_green.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F805ACF179E92AC002AEA24 /* flash_icon_green.png */; };
+		0F805AD6179E92AD002AEA24 /* flash_icon_green@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F805AD0179E92AC002AEA24 /* flash_icon_green@2x.png */; };
+		0F805AD7179E92AD002AEA24 /* flash_icon_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F805AD1179E92AC002AEA24 /* flash_icon_off.png */; };
+		0F805AD8179E92AD002AEA24 /* flash_icon_off@x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F805AD2179E92AD002AEA24 /* flash_icon_off@x.png */; };
 		0F80C386178561C200D36795 /* AccountController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F80C385178561C200D36795 /* AccountController.m */; };
 		0F80C388178561DA00D36795 /* AccountController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F80C387178561DA00D36795 /* AccountController.xib */; };
 		0F80C38B178578CB00D36795 /* RegisterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F80C38A178578CB00D36795 /* RegisterController.m */; };
@@ -1255,6 +1261,12 @@
 		0F8007C7175378F0000FF7FA /* ricon20@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ricon20@2x.png"; path = "icons/ricon20@2x.png"; sourceTree = "<group>"; };
 		0F8007C8175378F0000FF7FA /* ricon21.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ricon21.png; path = icons/ricon21.png; sourceTree = "<group>"; };
 		0F8007C9175378F0000FF7FA /* ricon21@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ricon21@2x.png"; path = "icons/ricon21@2x.png"; sourceTree = "<group>"; };
+		0F805ACD179E92AC002AEA24 /* flash_icon_auto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flash_icon_auto.png; sourceTree = "<group>"; };
+		0F805ACE179E92AC002AEA24 /* flash_icon_auto@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flash_icon_auto@2x.png"; sourceTree = "<group>"; };
+		0F805ACF179E92AC002AEA24 /* flash_icon_green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flash_icon_green.png; sourceTree = "<group>"; };
+		0F805AD0179E92AC002AEA24 /* flash_icon_green@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flash_icon_green@2x.png"; sourceTree = "<group>"; };
+		0F805AD1179E92AC002AEA24 /* flash_icon_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flash_icon_off.png; sourceTree = "<group>"; };
+		0F805AD2179E92AD002AEA24 /* flash_icon_off@x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flash_icon_off@x.png"; sourceTree = "<group>"; };
 		0F80C384178561C200D36795 /* AccountController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountController.h; sourceTree = "<group>"; };
 		0F80C385178561C200D36795 /* AccountController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountController.m; sourceTree = "<group>"; };
 		0F80C387178561DA00D36795 /* AccountController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountController.xib; sourceTree = "<group>"; };
@@ -2545,6 +2557,12 @@
 		0DF3A361108DF47400D6C887 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				0F805ACD179E92AC002AEA24 /* flash_icon_auto.png */,
+				0F805ACE179E92AC002AEA24 /* flash_icon_auto@2x.png */,
+				0F805ACF179E92AC002AEA24 /* flash_icon_green.png */,
+				0F805AD0179E92AC002AEA24 /* flash_icon_green@2x.png */,
+				0F805AD1179E92AC002AEA24 /* flash_icon_off.png */,
+				0F805AD2179E92AD002AEA24 /* flash_icon_off@x.png */,
 				0FD2C3FF178FFCDE00257E33 /* save.png */,
 				0FD2C400178FFCDE00257E33 /* save@2x.png */,
 				0FD2C401178FFCDE00257E33 /* undo.png */,
@@ -4664,6 +4682,12 @@
 				0FD2C404178FFCDE00257E33 /* save@2x.png in Resources */,
 				0FD2C405178FFCDE00257E33 /* undo.png in Resources */,
 				0FD2C406178FFCDE00257E33 /* undo@2x.png in Resources */,
+				0F805AD3179E92AD002AEA24 /* flash_icon_auto.png in Resources */,
+				0F805AD4179E92AD002AEA24 /* flash_icon_auto@2x.png in Resources */,
+				0F805AD5179E92AD002AEA24 /* flash_icon_green.png in Resources */,
+				0F805AD6179E92AD002AEA24 /* flash_icon_green@2x.png in Resources */,
+				0F805AD7179E92AD002AEA24 /* flash_icon_off.png in Resources */,
+				0F805AD8179E92AD002AEA24 /* flash_icon_off@x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -50,7 +50,15 @@
      UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:closeButton];
      [self.navigationItem setLeftBarButtonItem:leftBarButton];
 
-    self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Help Center" rect:CGRectMake(-60, -6, 50, 50)];
+    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-60, -6, 50, 50)] autorelease];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont fontWithName:TITLE_FONT size:18];
+    label.textAlignment = UITextAlignmentCenter;
+    label.textColor = [UIColor whiteColor];
+    label.text = @"HELP CENTER";
+    self.navigationItem.titleView = label;
+
+    //self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Help Center" rect:CGRectMake(-60, -6, 50, 50)];
 
     if(IS_IPHONE_5){
         emailButton = [[UIButton alloc] initWithFrame:CGRectMake(14, 876, 120, 10)];

@@ -90,7 +90,14 @@ BOOL selectAll;
     //[saveFlyrLabel setBackgroundColor:[UIColor clearColor]];
     //[saveFlyrLabel setText:@"Invite Friends"];
     //UIBarButtonItem *barLabel = [[UIBarButtonItem alloc] initWithCustomView:saveFlyrLabel];
-    self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Invite" rect:CGRectMake(-28, -6, 50, 50)];
+    
+    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-28, -6, 50, 50)] autorelease];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont fontWithName:BUTTON_FONT size:18];
+    label.textAlignment = UITextAlignmentCenter;
+    label.textColor = [UIColor whiteColor];
+    label.text = @"INVITE";
+    self.navigationItem.titleView = label;//[PhotoController setTitleViewWithTitle:@"Invite" rect:CGRectMake(-28, -6, 50, 50)];
 
     UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 31, 30)];
     [menuButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];

@@ -16,6 +16,29 @@
 -(void)viewDidLoad{
     NSLog(@"Camera Overlay Loaded...");
     
+    // Set default camera setting
+    AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    int cameraSettings = [[NSUserDefaults standardUserDefaults] integerForKey:@"cameraSetting"];
+    
+    [device lockForConfiguration:nil];
+    [device setFlashMode:cameraSettings];
+
+    int flashMode = [device flashMode];
+    
+    if([device isFlashModeSupported:flashMode]){
+        
+        if(flashMode == AVCaptureFlashModeAuto){
+            [flashButton setImage:[UIImage imageNamed:@"flash_icon_auto.png"] forState:UIControlStateNormal];
+        }
+        else if(flashMode == AVCaptureFlashModeOff){
+            [flashButton setImage:[UIImage imageNamed:@"flash_icon_off.png"] forState:UIControlStateNormal];
+        }
+        else {
+            [flashButton setImage:[UIImage imageNamed:@"flash_icon_green.png"] forState:UIControlStateNormal];
+        }
+    }
+    [device unlockForConfiguration];
+    
     if (IS_IPHONE_5) {
         self.view.frame = CGRectMake(0, 0, 320, HEIGHT_IPHONE_5);
         [borderImage  setImage:[UIImage imageNamed:@"camera_border-568h@2x"]];
@@ -23,6 +46,7 @@
     }
     
     customPhotoController = [[CustomPhotoController alloc] initWithNibName:@"CustomPhotoController" bundle:nil];
+    
     
     [self setLatestImage];
 }
@@ -36,20 +60,25 @@
     
     AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     
-    int torchMode = [device torchMode];
+    int flashMode = [device flashMode];
     
-    if([device isTorchModeSupported:torchMode]){
+    if([device isFlashModeSupported:flashMode]){
         [device lockForConfiguration:nil];
         
-        if(torchMode == AVCaptureTorchModeOn){
-            //[device setTorchMode:AVCaptureTorchModeOff];
-            [device setFlashMode:AVCaptureTorchModeOff];
-            //flashButton.layer.backgroundColor = [UIColor clearColor].CGColor;
-            //flashButton.layer.opaque = NO;
-        } else {
-            //[device setTorchMode:AVCaptureTorchModeOn];
-            [device setFlashMode:AVCaptureTorchModeOn];
-            //flashButton.layer.backgroundColor = [UIColor whiteColor].CGColor;
+        if(flashMode == AVCaptureFlashModeAuto){
+            [[NSUserDefaults standardUserDefaults] setInteger:AVCaptureFlashModeOff forKey:@"cameraSetting"];
+            [device setFlashMode:AVCaptureFlashModeOff];
+            [flashButton setImage:[UIImage imageNamed:@"flash_icon_off.png"] forState:UIControlStateNormal];
+        }
+        else if(flashMode == AVCaptureFlashModeOff){
+            [[NSUserDefaults standardUserDefaults] setInteger:AVCaptureFlashModeOn forKey:@"cameraSetting"];
+            [device setFlashMode:AVCaptureFlashModeOn];
+            [flashButton setImage:[UIImage imageNamed:@"flash_icon_green.png"] forState:UIControlStateNormal];
+        }
+        else {
+            [[NSUserDefaults standardUserDefaults] setInteger:AVCaptureFlashModeAuto forKey:@"cameraSetting"];
+            [device setFlashMode:AVCaptureFlashModeAuto];
+            [flashButton setImage:[UIImage imageNamed:@"flash_icon_auto.png"] forState:UIControlStateNormal];
         }
         [device unlockForConfiguration];
     }

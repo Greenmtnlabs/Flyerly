@@ -87,7 +87,6 @@
 								<string key="NSFrame">{{242, 6}, {72, 73}}</string>
 								<reference key="NSSuperview" ref="46408439"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<reference key="IBUIBackgroundColor" ref="63610896"/>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>

@@ -80,11 +80,13 @@
 							<string key="NSResourceName">ok_button_bg.png</string>
 						</object>
 						<object class="IBUIFontDescription" key="IBUIFontDescription">
-							<int key="type">2</int>
+							<string key="name">Symbol</string>
+							<string key="family">Symbol</string>
+							<int key="traits">0</int>
 							<double key="pointSize">15</double>
 						</object>
 						<object class="NSFont" key="IBUIFont">
-							<string key="NSName">Helvetica-Bold</string>
+							<string key="NSName">Symbol</string>
 							<double key="NSSize">15</double>
 							<int key="NSfFlags">16</int>
 						</object>

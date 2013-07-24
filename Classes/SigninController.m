@@ -37,8 +37,15 @@
     
     self.navigationController.navigationBarHidden = NO;
 
-    //set title	
-    self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Sign In" rect:CGRectMake(-35, -6, 50, 50)];
+    //set title
+    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-35, -6, 50, 50)] autorelease];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont fontWithName:TITLE_FONT size:18];
+    label.textAlignment = UITextAlignmentCenter;
+    label.textColor = [UIColor whiteColor];
+    label.text = @"SIGN IN";
+    
+    self.navigationItem.titleView = label;//[PhotoController setTitleViewWithTitle:@"Sign In" rect:CGRectMake(-35, -6, 50, 50)];
 
     // remove borders
     email.borderStyle = UITextBorderStyleNone;

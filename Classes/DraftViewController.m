@@ -161,7 +161,15 @@ static ShareProgressView *tumblrPogressView;
 }
 
     // Set title on bar
-    self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Share flyer" rect:CGRectMake(-60, -6, 50, 50)];
+    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-60, -6, 50, 50)] autorelease];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont fontWithName:TITLE_FONT size:18];
+    label.textAlignment = UITextAlignmentCenter;
+    label.textColor = [UIColor whiteColor];
+    label.text = @"SHARE FLYER";
+    self.navigationItem.titleView = label;
+    
+    //self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Share flyer" rect:CGRectMake(-60, -6, 50, 50)];
 
     // Set font and size on camera roll text
     [saveToCameraRollLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];

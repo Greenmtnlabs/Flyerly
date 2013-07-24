@@ -334,7 +334,16 @@ BOOL galleryExpanded = NO;
     
     [self.navigationItem setRightBarButtonItem:rightBarButton];
 
-    self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"SCALE & CROP" rect:CGRectMake(-70, -6, 50, 50)];
+    
+    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-70, -6, 50, 50)] autorelease];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont fontWithName:TITLE_FONT size:18];
+    label.textAlignment = UITextAlignmentCenter;
+    label.textColor = [UIColor whiteColor];
+    label.text = @"SCALE & CROP";
+    self.navigationItem.titleView = label;
+
+    //self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"SCALE & CROP" rect:CGRectMake(-70, -6, 50, 50)];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

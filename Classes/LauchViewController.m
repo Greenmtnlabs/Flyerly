@@ -158,13 +158,13 @@
         numberOfFlyers = 4;
     }
     
-    [createFlyrLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
+    [createFlyrLabel setFont:[UIFont fontWithName:BUTTON_FONT size:13]];
     [createFlyrLabel setText:NSLocalizedString(@"create_flyer", nil)];
     
-    [savedFlyrLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
+    [savedFlyrLabel setFont:[UIFont fontWithName:BUTTON_FONT size:13]];
     [savedFlyrLabel setText:NSLocalizedString(@"saved_flyers", nil)];
 
-    [inviteFriendLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
+    [inviteFriendLabel setFont:[UIFont fontWithName:BUTTON_FONT size:13]];
     [inviteFriendLabel setText:NSLocalizedString(@"invite_friends", nil)];
 
     spController = [[SettingViewController alloc]initWithNibName:@"SettingViewController" bundle:nil];

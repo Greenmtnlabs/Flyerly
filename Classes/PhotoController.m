@@ -1979,7 +1979,15 @@ int arrangeLayerIndex;
     iconTouchFlag = NO;
 	imgPickerFlag = 1;
 	
-    self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Background" rect:CGRectMake(-65, -6, 50, 50)];
+    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-65, -6, 50, 50)] autorelease];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont fontWithName:TITLE_FONT size:18];
+    label.textAlignment = UITextAlignmentCenter;
+    label.textColor = [UIColor whiteColor];
+    label.text = @"BACKGROUND";
+    self.navigationItem.titleView = label;
+
+    //self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Background" rect:CGRectMake(-65, -6, 50, 50)];
     
     UIButton *nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
 	[nextButton addTarget:self action:@selector(callAddMoreLayers) forControlEvents:UIControlEventTouchUpInside];
@@ -2116,7 +2124,14 @@ int arrangeLayerIndex;
     symbolTouchFlag= NO;
     iconTouchFlag = NO;
 
-    self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Add Text" rect:CGRectMake(-45, -6, 50, 50)];
+    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-45, -6, 50, 50)] autorelease];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont fontWithName:TITLE_FONT size:18];
+    label.textAlignment = UITextAlignmentCenter;
+    label.textColor = [UIColor whiteColor];
+    label.text = @"ADD TEXT";
+    self.navigationItem.titleView = label;
+    //self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Add Text" rect:CGRectMake(-45, -6, 50, 50)];
 
     UIButton *nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
 	[nextButton addTarget:self action:@selector(callStyle) forControlEvents:UIControlEventTouchUpInside];
@@ -2189,7 +2204,14 @@ int arrangeLayerIndex;
 
 -(void)callStyle
 {
-    self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Add Text" rect:CGRectMake(-45, -6, 50, 50)];
+    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-45, -6, 50, 50)] autorelease];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont fontWithName:TITLE_FONT size:18];
+    label.textAlignment = UITextAlignmentCenter;
+    label.textColor = [UIColor whiteColor];
+    label.text = @"ADD TEXT";
+    self.navigationItem.titleView = label;
+    //self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Add Text" rect:CGRectMake(-45, -6, 50, 50)];
 
     if(selectedAddMoreLayerTab == -1){
         UIButton *photoButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
@@ -2289,8 +2311,15 @@ int arrangeLayerIndex;
 
 -(void)choosePhoto
 {
-    self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Add photo" rect:CGRectMake(-45, -6, 50, 50)];
-
+    //self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Add photo" rect:CGRectMake(-45, -6, 50, 50)];
+    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-45, -6, 50, 50)] autorelease];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont fontWithName:TITLE_FONT size:18];
+    label.textAlignment = UITextAlignmentCenter;
+    label.textColor = [UIColor whiteColor];
+    label.text = @"ADD PHOTO";
+    self.navigationItem.titleView = label;
+    
     if(selectedAddMoreLayerTab == -1){
         UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 33, 32)];
         shareButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
@@ -2479,7 +2508,14 @@ int arrangeLayerIndex;
  */
 -(void)callAddMoreLayers {
     
-    self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"layers" rect:CGRectMake(-30, -6, 50, 50)];
+    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-30, -6, 50, 50)] autorelease];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont fontWithName:TITLE_FONT size:18];
+    label.textAlignment = UITextAlignmentCenter;
+    label.textColor = [UIColor whiteColor];
+    label.text = @"LAYERS";
+    self.navigationItem.titleView = label;
+    //self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"layers" rect:CGRectMake(-30, -6, 50, 50)];
     
     UIButton *saveButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 33, 32)];
     saveButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
@@ -2840,7 +2876,15 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 	if(selectedButton == addMoreFontTabButton)
 	{
-    self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"layers" rect:CGRectMake(-30, -6, 50, 50)];
+    
+        UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-30, -6, 50, 50)] autorelease];
+        label.backgroundColor = [UIColor clearColor];
+        label.font = [UIFont fontWithName:TITLE_FONT size:18];
+        label.textAlignment = UITextAlignmentCenter;
+        label.textColor = [UIColor whiteColor];
+        label.text = @"LAYERS";
+        self.navigationItem.titleView = label;
+        //self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"layers" rect:CGRectMake(-30, -6, 50, 50)];
         selectedAddMoreLayerTab = ADD_MORE_TEXTTAB;
         [self hideAddMoreAndSaveLabel];
         [self hideTakeOrAddPhotoLabel];
@@ -2864,7 +2908,16 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	}
 	else if(selectedButton == addMorePhotoTabButton)
 	{
-    self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"layers" rect:CGRectMake(-30, -6, 50, 50)];
+    
+        //self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"layers" rect:CGRectMake(-30, -6, 50, 50)];
+        UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-30, -6, 50, 50)] autorelease];
+        label.backgroundColor = [UIColor clearColor];
+        label.font = [UIFont fontWithName:TITLE_FONT size:18];
+        label.textAlignment = UITextAlignmentCenter;
+        label.textColor = [UIColor whiteColor];
+        label.text = @"LAYERS";
+        self.navigationItem.titleView = label;
+
         selectedAddMoreLayerTab = ADD_MORE_PHOTOTAB;
         [self hideAddMoreAndSaveLabel];
         [self showTakeOrAddPhotoLabel];
@@ -2900,7 +2953,16 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	}
 	else if(selectedButton == addMoreSymbolTabButton)
 	{
-    self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"layers" rect:CGRectMake(-30, -6, 50, 50)];
+    
+        //self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"layers" rect:CGRectMake(-30, -6, 50, 50)];
+        UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-30, -6, 50, 50)] autorelease];
+        label.backgroundColor = [UIColor clearColor];
+        label.font = [UIFont fontWithName:TITLE_FONT size:18];
+        label.textAlignment = UITextAlignmentCenter;
+        label.textColor = [UIColor whiteColor];
+        label.text = @"LAYERS";
+        self.navigationItem.titleView = label;
+
         selectedAddMoreLayerTab = ADD_MORE_SYMBOLTAB;
         [self hideAddMoreAndSaveLabel];
         [self hideTakeOrAddPhotoLabel];
@@ -2934,7 +2996,15 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	}
 	else if(selectedButton == addMoreIconTabButton)
 	{
-    self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"layers" rect:CGRectMake(-30, -6, 50, 50)];
+        //self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"layers" rect:CGRectMake(-30, -6, 50, 50)];
+        UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-30, -6, 50, 50)] autorelease];
+        label.backgroundColor = [UIColor clearColor];
+        label.font = [UIFont fontWithName:TITLE_FONT size:18];
+        label.textAlignment = UITextAlignmentCenter;
+        label.textColor = [UIColor whiteColor];
+        label.text = @"LAYERS";
+        self.navigationItem.titleView = label;
+
         selectedAddMoreLayerTab = ADD_MORE_ICONTAB;
         [self hideAddMoreAndSaveLabel];
         [self hideTakeOrAddPhotoLabel];
@@ -2968,7 +3038,15 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	else if(selectedButton == arrangeLayerTabButton)
 	{
         
-        self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"layers" rect:CGRectMake(-30, -6, 50, 50)];
+        //self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"layers" rect:CGRectMake(-30, -6, 50, 50)];
+        UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-30, -6, 50, 50)] autorelease];
+        label.backgroundColor = [UIColor clearColor];
+        label.font = [UIFont fontWithName:TITLE_FONT size:18];
+        label.textAlignment = UITextAlignmentCenter;
+        label.textColor = [UIColor whiteColor];
+        label.text = @"LAYERS";
+        self.navigationItem.titleView = label;
+
         selectedAddMoreLayerTab = ARRANGE_LAYERTAB;
         [self removeBordersFromAllLayers];
         [self hideAddMoreAndSaveLabel];

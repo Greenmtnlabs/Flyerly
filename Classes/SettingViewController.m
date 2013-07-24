@@ -30,8 +30,15 @@ extern NSString* kGetSessionProxy;
 -(void)viewWillAppear:(BOOL)animated{
 
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
-    self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Settings" rect:CGRectMake(-45, -6, 50, 50)];
-    
+    //self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Settings" rect:CGRectMake(-45, -6, 50, 50)];
+    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-45, -6, 50, 50)] autorelease];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont fontWithName:TITLE_FONT size:18];
+    label.textAlignment = UITextAlignmentCenter;
+    label.textColor = [UIColor whiteColor];
+    label.text = @"SETTINGS";
+    self.navigationItem.titleView = label;
+
     UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 31, 30)];
     [menuButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [menuButton setBackgroundImage:[UIImage imageNamed:@"menu_button"] forState:UIControlStateNormal];

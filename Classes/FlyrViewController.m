@@ -173,7 +173,16 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
     //[saveFlyrLabel setBackgroundColor:[UIColor clearColor]];
     //[saveFlyrLabel setText:@"Saved flyer"];
     //UIBarButtonItem *barLabel = [[UIBarButtonItem alloc] initWithCustomView:saveFlyrLabel];
-    self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Saved" rect:CGRectMake(-30, -6, 50, 50)];
+    
+    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-30, -6, 50, 50)] autorelease];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont fontWithName:TITLE_FONT size:18];
+    label.textAlignment = UITextAlignmentCenter;
+    label.textColor = [UIColor whiteColor];
+    label.text = @"SAVED";
+    self.navigationItem.titleView = label;
+
+    //self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Saved" rect:CGRectMake(-30, -6, 50, 50)];
 
     // Create left bar help button
     UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 54, 35)];

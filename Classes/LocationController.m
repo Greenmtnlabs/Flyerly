@@ -185,7 +185,15 @@ enum {
 
 -(void)viewWillAppear:(BOOL)animated{
     // set title
-    self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Locations" rect:CGRectMake(-50, -6, 50, 50)];
+    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-50, -6, 50, 50)] autorelease];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont fontWithName:TITLE_FONT size:18];
+    label.textAlignment = UITextAlignmentCenter;
+    label.textColor = [UIColor whiteColor];
+    label.text = @"LOCATIONS";
+    self.navigationItem.titleView = label;
+
+    // self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Locations" rect:CGRectMake(-50, -6, 50, 50)];
     
     locationDetails = nil;
 }

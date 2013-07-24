@@ -81,11 +81,13 @@
 							<string key="NSResourceName">camera_cancel.png</string>
 						</object>
 						<object class="IBUIFontDescription" key="IBUIFontDescription">
-							<int key="type">2</int>
-							<int key="size">2</int>
+							<string key="name">Symbol</string>
+							<string key="family">Symbol</string>
+							<int key="traits">0</int>
+							<double key="pointSize">18</double>
 						</object>
 						<object class="NSFont" key="IBUIFont">
-							<string key="NSName">Helvetica-Bold</string>
+							<string key="NSName">Symbol</string>
 							<double key="NSSize">18</double>
 							<int key="NSfFlags">16</int>
 						</object>
@@ -144,7 +146,7 @@
 						<reference key="IBUINormalTitleShadowColor" ref="493517251"/>
 						<object class="NSCustomResource" key="IBUINormalImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">camera_flash.png</string>
+							<string key="NSResourceName">flash_icon_auto.png</string>
 						</object>
 						<reference key="IBUIFontDescription" ref="1055701465"/>
 						<reference key="IBUIFont" ref="211169718"/>
@@ -592,9 +594,9 @@
 			<string key="camera_button.png">{80, 80}</string>
 			<string key="camera_cancel.png">{65, 30}</string>
 			<string key="camera_change.png">{48, 26}</string>
-			<string key="camera_flash.png">{20, 27}</string>
 			<string key="camera_grid.png">{26, 27}</string>
 			<string key="camera_lastpic.png">{54, 54}</string>
+			<string key="flash_icon_auto.png">{52, 76}</string>
 			<string key="new_grid_line.png">{305, 303}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">2083</string>
