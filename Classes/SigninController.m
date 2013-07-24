@@ -55,8 +55,8 @@
     email.clearButtonMode = UITextFieldViewModeWhileEditing;
     password.clearButtonMode = UITextFieldViewModeWhileEditing;
     
-    //email.text= @"riz_ahmed_86@yahoo.com";
-    //password.text = @"logs";
+    email.text= @"riz_ahmed_86@yahoo.com";
+    password.text = @"logs";
     
     // Setup welcome button
     UIButton *welcomeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 76, 32)];
@@ -70,7 +70,7 @@
     // Navigation bar sign in button
     UIBarButtonItem *signInTopRightButton = [[UIBarButtonItem alloc] initWithTitle:@"Sign In" style:UIBarButtonItemStylePlain target:self action:@selector(onSignIn)];
     
-    //[signInTopRightButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: [UIFont fontWithName:@"Helvetica-Bold" size:11.0], UITextAttributeFont,nil] forState:UIControlStateNormal];
+    [signInTopRightButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: [UIFont fontWithName:BUTTON_FONT size:13.0], UITextAttributeFont,nil] forState:UIControlStateNormal];
     
     [signInTopRightButton setTintColor:[UIColor colorWithRed:104.0/255.0 green:173.0/255.0 blue:57.0/255.0 alpha:1]];
     self.navigationItem.rightBarButtonItem = signInTopRightButton;

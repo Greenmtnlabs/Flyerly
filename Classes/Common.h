@@ -307,4 +307,4 @@ return cell;\
 // Title font
 #define TITLE_FONT @"AvenirNext-Bold"
 // Other font
-#define OTHER_FONT @"HelveticaNeue-UltraLight"
+#define OTHER_FONT @"HelveticaNeue"

@@ -105,7 +105,7 @@ extern NSString* kGetSessionProxy;
     }
     
     // Set font and size on camera roll text
-    [saveToCameraRollLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
+    //[saveToCameraRollLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
 }
 
 -(void)goToMain{

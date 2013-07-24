@@ -70,7 +70,7 @@
     // Navigation bar sign in button
     UIBarButtonItem *doneTopRightButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(onSignUp)];
     
-    //[doneTopRightButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: [UIFont fontWithName:@"Helvetica-Bold" size:11.0], UITextAttributeFont,nil] forState:UIControlStateNormal];
+    [doneTopRightButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: [UIFont fontWithName:BUTTON_FONT size:13.0], UITextAttributeFont,nil] forState:UIControlStateNormal];
     
     [doneTopRightButton setTintColor:[UIColor colorWithRed:104.0/255.0 green:173.0/255.0 blue:57.0/255.0 alpha:1]];
     self.navigationItem.rightBarButtonItem = doneTopRightButton;

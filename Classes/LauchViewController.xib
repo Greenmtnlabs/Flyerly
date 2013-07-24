@@ -161,7 +161,7 @@
 							<object class="IBUIImageView" id="773272100">
 								<reference key="NSNextResponder" ref="87613878"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{178, 108}, {130, 130}}</string>
+								<string key="NSFrame">{{179, 111}, {130, 130}}</string>
 								<reference key="NSSuperview" ref="87613878"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="797501389"/>
@@ -176,7 +176,7 @@
 							<object class="IBUIImageView" id="936185581">
 								<reference key="NSNextResponder" ref="87613878"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{12, 108}, {130, 130}}</string>
+								<string key="NSFrame">{{12, 111}, {130, 130}}</string>
 								<reference key="NSSuperview" ref="87613878"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="444325331"/>
@@ -188,7 +188,7 @@
 							<object class="IBUIImageView" id="384374429">
 								<reference key="NSNextResponder" ref="87613878"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{178, 252}, {130, 130}}</string>
+								<string key="NSFrame">{{179, 252}, {130, 130}}</string>
 								<reference key="NSSuperview" ref="87613878"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="953827773"/>
@@ -226,6 +226,11 @@
 										<int key="IBUIContentHorizontalAlignment">0</int>
 										<int key="IBUIContentVerticalAlignment">0</int>
 										<int key="IBUIButtonType">1</int>
+										<bool key="IBUIShowsTouchWhenHighlighted">YES</bool>
+										<object class="NSColor" key="IBUITintColor">
+											<int key="NSColorSpace">2</int>
+											<bytes key="NSRGB">MSAxIDEAA</bytes>
+										</object>
 										<reference key="IBUIHighlightedTitleColor" ref="949582591"/>
 										<object class="NSColor" key="IBUINormalTitleColor">
 											<int key="NSColorSpace">1</int>
@@ -266,6 +271,11 @@
 										<int key="IBUIContentHorizontalAlignment">0</int>
 										<int key="IBUIContentVerticalAlignment">0</int>
 										<int key="IBUIButtonType">1</int>
+										<bool key="IBUIShowsTouchWhenHighlighted">YES</bool>
+										<object class="NSColor" key="IBUITintColor">
+											<int key="NSColorSpace">3</int>
+											<bytes key="NSWhite">MC45NjgyMDgyNTczAA</bytes>
+										</object>
 										<reference key="IBUIHighlightedTitleColor" ref="949582591"/>
 										<object class="NSColor" key="IBUINormalTitleColor">
 											<int key="NSColorSpace">1</int>
@@ -316,6 +326,7 @@
 								<string key="NSFrame">{{125, 392}, {71, 69}}</string>
 								<reference key="NSSuperview" ref="87613878"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -337,7 +348,7 @@
 							<object class="IBUIImageView" id="444325331">
 								<reference key="NSNextResponder" ref="87613878"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{12, 108}, {130, 130}}</string>
+								<string key="NSFrame">{{12, 111}, {130, 130}}</string>
 								<reference key="NSSuperview" ref="87613878"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="773272100"/>
@@ -353,7 +364,7 @@
 							<object class="IBUIImageView" id="797501389">
 								<reference key="NSNextResponder" ref="87613878"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{179, 108}, {130, 130}}</string>
+								<string key="NSFrame">{{179, 111}, {130, 130}}</string>
 								<reference key="NSSuperview" ref="87613878"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="221807708"/>
@@ -1047,16 +1058,23 @@
 					<string key="className">LauchViewController</string>
 					<string key="superclassName">UIViewController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="createTwitLogin:">id</string>
 						<string key="doAbout:">id</string>
 						<string key="doInvite:">id</string>
 						<string key="doNew:">id</string>
 						<string key="doOpen:">id</string>
+						<string key="followOnTwitter:">id</string>
 						<string key="goBack">id</string>
 						<string key="onTwitter:">id</string>
 						<string key="showFlyerDetail:">UIImageView</string>
 						<string key="showLikeButton">id</string>
+						<string key="unFollowOnTwitter:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="createTwitLogin:">
+							<string key="name">createTwitLogin:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="doAbout:">
 							<string key="name">doAbout:</string>
 							<string key="candidateClassName">id</string>
@@ -1073,6 +1091,10 @@
 							<string key="name">doOpen:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="followOnTwitter:">
+							<string key="name">followOnTwitter:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="goBack">
 							<string key="name">goBack</string>
 							<string key="candidateClassName">id</string>
@@ -1087,6 +1109,10 @@
 						</object>
 						<object class="IBActionInfo" key="showLikeButton">
 							<string key="name">showLikeButton</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="unFollowOnTwitter:">
+							<string key="name">unFollowOnTwitter:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 					</dictionary>

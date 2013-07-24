@@ -4239,6 +4239,11 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 	NSData *imgData = UIImagePNGRepresentation(screenImage);
 	[[NSFileManager defaultManager] createFileAtPath:imgPath contents:imgData attributes:nil];
+    
+    if([[NSUserDefaults standardUserDefaults] stringForKey:@"saveToCameraRollSetting"]){
+        UIImageWriteToSavedPhotosAlbum(screenImage, nil, nil, nil);
+    }
+
 	return imgData;
 }
 

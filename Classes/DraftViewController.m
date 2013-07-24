@@ -172,7 +172,7 @@ static ShareProgressView *tumblrPogressView;
     //self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Share flyer" rect:CGRectMake(-60, -6, 50, 50)];
 
     // Set font and size on camera roll text
-    [saveToCameraRollLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
+    //[saveToCameraRollLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
     // Set font and size on camera roll text
     [locationLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
 
@@ -204,7 +204,7 @@ static ShareProgressView *tumblrPogressView;
     [titleView setReturnKeyType:UIReturnKeyDone];
     [titleView addTarget:self action:@selector(textFieldFinished:) forControlEvents: UIControlEventEditingDidEndOnExit];
     [titleView addTarget:self action:@selector(textFieldTapped:) forControlEvents:UIControlEventEditingDidBegin];
-    [titleView setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
+    //[titleView setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
     if([selectedFlyerTitle isEqualToString:@""]){
         [titleView setText:NameYourFlyerText];
     }else{
@@ -212,7 +212,7 @@ static ShareProgressView *tumblrPogressView;
     }
     
     // Setup description text view
-    [descriptionView setFont:[UIFont fontWithName:@"Signika-Regular" size:10]];
+    [descriptionView setFont:[UIFont fontWithName:OTHER_FONT size:10]];
     [descriptionView setTextColor:[UIColor grayColor]];
     [descriptionView setReturnKeyType:UIReturnKeyDone];
     
@@ -467,9 +467,9 @@ static ShareProgressView *tumblrPogressView;
                 }
                 
                 //if([saveToRollSwitch isOn]){
-                if([[NSUserDefaults standardUserDefaults] stringForKey:@"saveToCameraRollSetting"]){
-                    UIImageWriteToSavedPhotosAlbum(selectedFlyerImage, nil, nil, nil);
-                }
+                //if([[NSUserDefaults standardUserDefaults] stringForKey:@"saveToCameraRollSetting"]){
+                    //UIImageWriteToSavedPhotosAlbum(selectedFlyerImage, nil, nil, nil);
+                //}
                 
                 // Set progress view hidden
                 [progressView setHidden:NO];
