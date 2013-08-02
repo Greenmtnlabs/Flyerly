@@ -23,6 +23,7 @@
 #import <Parse/PFObject.h>
 #import <Parse/PFQuery.h>
 #import "LoadingView.h"
+#import "Flurry.h"
 
 @implementation PhotoController
 @synthesize imgView,imgPicker,imageNameNew,msgTextView,finalFlyer;
@@ -954,6 +955,8 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 	[animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
 	[[self.imgView  layer] addAnimation:animation forKey:@"SwitchToView1"];
 	[imgView setImage:selectedTemplate];
+    
+    [Flurry logEvent:@"Background Selected"];
 }
 
 /*
@@ -961,7 +964,9 @@ int photoLayerCount = 0; // Photo layer count to set tag value
  */
 -(void)selectSymbol:(id)sender
 {
-    
+    [Flurry logEvent:@"Layer Added"];
+    [Flurry logEvent:@"Symbol Added"];
+
     // If not in delete mode then add a new frame for symbol
     if(!deleteMode){
         [self plusButtonClick];
@@ -1008,6 +1013,9 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 -(void)selectIcon:(id)sender
 {
     
+    [Flurry logEvent:@"Layer Added"];
+    [Flurry logEvent:@"Clip Art Added"];
+
     // If not in delete mode then add a new frame for icon
     if(!deleteMode){
         [self plusButtonClick];
@@ -1722,6 +1730,8 @@ int arrangeLayerIndex;
     iconTouchFlag = NO;
 
     [self dismissModalViewControllerAnimated:YES];
+    
+    [Flurry logEvent:@"Custom Background"];
 }
 
 -(void)setLatestImageAndLoadPhotoLibrary{
@@ -1788,6 +1798,10 @@ int arrangeLayerIndex;
 		self.lableTouchFlag = NO;
         symbolTouchFlag= NO;
         iconTouchFlag = NO;
+        
+        if(selectedImage == nil)
+            [self setAddMoreLayerTabAction:addMorePhotoTabButton];
+
 	}
 }
 
@@ -1798,6 +1812,8 @@ int arrangeLayerIndex;
     self.imgPicker.cameraOverlayView = cameraOverlay.view;
     self.imgPicker.showsCameraControls = NO;
     [self presentModalViewController:self.imgPicker animated:YES];
+    
+    [Flurry logEvent:@"Custom Background"];
 }
 
 -(void)openCamera{
@@ -2224,6 +2240,8 @@ int arrangeLayerIndex;
         doneButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
         [doneButton setTitle:@"Done" forState:UIControlStateNormal];
         [doneButton addTarget:self action:@selector(callAddMoreLayers) forControlEvents:UIControlEventTouchUpInside];
+        [doneButton addTarget:self action:@selector(logLayerAddedEvent) forControlEvents:UIControlEventTouchUpInside];
+        [doneButton addTarget:self action:@selector(logTextAddedEvent) forControlEvents:UIControlEventTouchUpInside];
         [doneButton setBackgroundImage:[UIImage imageNamed:@"crop_button"] forState:UIControlStateNormal];
         UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
         [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
@@ -2332,6 +2350,8 @@ int arrangeLayerIndex;
         doneButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
         [doneButton setTitle:@"Done" forState:UIControlStateNormal];
         [doneButton addTarget:self action:@selector(callAddMoreLayers) forControlEvents:UIControlEventTouchUpInside];
+        [doneButton addTarget:self action:@selector(logLayerAddedEvent) forControlEvents:UIControlEventTouchUpInside];
+        [doneButton addTarget:self action:@selector(logPhotoAddedEvent) forControlEvents:UIControlEventTouchUpInside];
         [doneButton setBackgroundImage:[UIImage imageNamed:@"crop_button"] forState:UIControlStateNormal];
         UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
         [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
@@ -2649,6 +2669,8 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 -(void)callSaveAndShare
 {
+    [Flurry logEvent:@"Saved Flyer"];
+
     [self removeBordersFromAllLayers];
 
 	lableTouchFlag = NO;
@@ -5005,4 +5027,15 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     [super dealloc];
 }
 
+-(void) logLayerAddedEvent{
+    [Flurry logEvent:@"Layer Added"];
+}
+
+-(void) logPhotoAddedEvent{
+    [Flurry logEvent:@"Photo Added"];
+}
+
+-(void) logTextAddedEvent{
+    [Flurry logEvent:@"Text Added"];
+}
 @end

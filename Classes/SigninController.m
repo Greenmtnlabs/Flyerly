@@ -213,7 +213,7 @@
                                              @"publish_stream", @"email", nil]];
         }
     }else{
-        [self showAlert:@"Warning!" message:@"You must be connected to the Internet."];
+        [self showAlert:@"Warning!" message:@"You're not connected to the internet. Please connect and retry."];
         [self removeLoadingView];
     }
 }
@@ -261,7 +261,7 @@
         
         
     }else{
-        [self showAlert:@"Warning!" message:@"You must be connected to the Internet."];
+        [self showAlert:@"Warning!" message:@"You're not connected to the internet. Please connect and retry."];
         [self removeLoadingView];
     }
 }

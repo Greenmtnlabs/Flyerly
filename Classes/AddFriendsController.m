@@ -15,6 +15,7 @@
 #import "LoadingView.h"
 #import "PhotoController.h"
 #import "HelpController.h"
+#import "Flurry.h"
 
 @implementation AddFriendsController
 @synthesize uiTableView, contactsArray, deviceContactItems, contactsLabel, facebookLabel, twitterLabel, doneLabel, selectAllLabel, unSelectAllLabel, inviteLabel, contactsButton, facebookButton, twitterButton, loadingView, searchTextField, facebookArray, twitterArray;
@@ -384,7 +385,7 @@ BOOL selectAll;
     
     } else {
     
-        [self showAlert:@"Warning!" message:@"You must be connected to the Internet."];
+        [self showAlert:@"Warning!" message:@"You're not connected to the internet. Please connect and retry."];
     }
 }
 
@@ -539,7 +540,7 @@ int totalCount = 0;
 
     } else {
         
-        [self showAlert:@"Warning!" message:@"You must be connected to the Internet."];
+        [self showAlert:@"Warning!" message:@"You're not connected to the internet. Please connect and retry."];
     }
 }
 
@@ -704,11 +705,13 @@ int totalCount = 0;
             [self tagFacebookUsersWithFeed:identifiers];
 
             [self showAlert:@"Invitation Sent!" message:@"You have successfully invited your friends to join flyerly."];
-}
+        }
         
     } else {
         [self showAlert:@"Nothing Selected !" message:@"Please select any contact to invite"];
     }
+    
+    [Flurry logEvent:@"Friends Invited"];
 }
 
 - (void)messageComposeViewController:

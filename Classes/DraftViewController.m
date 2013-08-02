@@ -18,6 +18,7 @@
 #import "ShareProgressView.h"
 #import "AddFriendsController.h"
 #import "FlyerOverlayController.h"
+#import "Flurry.h"
 #import "HelpController.h"
 #import <Parse/PFFile.h>
 #import <Parse/PFObject.h>
@@ -411,6 +412,7 @@ static ShareProgressView *tumblrPogressView;
         if([self onlyNonConnectivityNetworkSelected]){
             
             if([smsButton isSelected]){
+                [Flurry logEvent:@"Shared SMS"];
                 [self shareOnMMS];
             }
             
@@ -433,36 +435,43 @@ static ShareProgressView *tumblrPogressView;
                 if([twitterButton isSelected]){
                     [self showTwitterProgressRow];
                     [self shareOnTwitter];
+                    [Flurry logEvent:@"Shared Twitter"];
                     //[self fillSuccessStatus:twitterPogressView];
                 }
                 
                 if([facebookButton isSelected]){
                     [self showFacebookProgressRow];
                     [self shareOnFacebook];
+                    [Flurry logEvent:@"Shared Facebook"];
                     //[self fillSuccessStatus:facebookPogressView];
                 }
                 
                 if([flickrButton isSelected]){
                     [self showFlickrProgressRow];
                     [self shareOnFlickr];
+                    [Flurry logEvent:@"Shared Flickr"];
                     //[self fillSuccessStatus:flickrPogressView];
                 }
                 
                 if([tumblrButton isSelected]){
                     [self showTumblrProgressRow];
                     [self shareOnTumblr];
+                    [Flurry logEvent:@"Shared Tumblr"];
                     //[self fillSuccessStatus:tumblrPogressView];
                 }
                 
                 if([emailButton isSelected]){
+                    [Flurry logEvent:@"Shared Email"];
                     [self shareOnEmail];
                 }
                 
                 if([smsButton isSelected] && ![emailButton isSelected]){
+                    [Flurry logEvent:@"Shared SMS"];
                     [self shareOnMMS];
                 }
                 
                 if([instagramButton isSelected] && ( ![tumblrButton isSelected] && ![flickrButton isSelected] && ![smsButton isSelected])  && ![emailButton isSelected]){
+                    [Flurry logEvent:@"Shared Instagram"];
                     [self shareOnInstagram];
                 }
                 
@@ -479,7 +488,7 @@ static ShareProgressView *tumblrPogressView;
                 
             } else {
                 
-                [self showAlert:@"Warning!" message:@"You must be connected to the Internet."];
+                [self showAlert:@"Warning!" message:@"You're not connected to the internet. Please connect and retry."];
             }
         }
 

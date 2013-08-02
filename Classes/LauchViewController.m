@@ -17,6 +17,7 @@
 #import "Common.h"
 #import "HelpController.h"
 #import "FacebookLikeView.h"
+#import "Flurry.h"
 
 @interface LauchViewController () <FacebookLikeViewDelegate, FBSessionDelegate>
 
@@ -50,6 +51,8 @@
 	//loadingView =[LoadingView loadingViewInView:self.view];
     //[self loadPhotoView];
 	//[NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(loadPhotoView) userInfo:nil repeats:NO];
+
+    [Flurry logEvent:@"Create Flyer"];
 
 	ptController = [[PhotoController alloc]initWithNibName:@"PhotoController" bundle:nil];
     ptController.flyerNumber = -1;
