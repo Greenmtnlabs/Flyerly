@@ -30,6 +30,11 @@
 @property(nonatomic, retain) IBOutlet UITextField *password;
 @property(nonatomic, retain) IBOutlet UITextField *confirmPassword;
 
+@property(nonatomic, strong) IBOutlet UITextField *email;
+@property(nonatomic, strong) IBOutlet UITextField *name;
+@property(nonatomic, strong) IBOutlet UITextField *phno;
+
+
 @property(nonatomic, retain) IBOutlet UIButton *signUp;
 @property(nonatomic, retain) IBOutlet UIButton *signUpFacebook;
 @property(nonatomic, retain) IBOutlet UIButton *signUpTwitter;
