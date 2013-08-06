@@ -55,8 +55,8 @@
     email.clearButtonMode = UITextFieldViewModeWhileEditing;
     password.clearButtonMode = UITextFieldViewModeWhileEditing;
     
-    //email.text= @"riz_ahmed_86@yahoo.com";
-    //password.text = @"logs";
+    email.text= @"riz_ahmed_86@yahoo.com";
+    password.text = @"logs";
     
     // Setup welcome button
     UIButton *welcomeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 76, 32)];
