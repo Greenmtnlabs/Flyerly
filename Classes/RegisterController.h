@@ -24,6 +24,8 @@
     
     LauchViewController *launchController;
 	LoadingView *loadingView;
+    CGFloat animatedDistance;
+    
 }
 
 @property(nonatomic, retain) IBOutlet UITextField *username;
@@ -40,6 +42,8 @@
 @property(nonatomic, retain) IBOutlet UIButton *signUpTwitter;
 @property (nonatomic, retain) LoadingView *loadingView;
 
+
+-(void)onSignUp;
 -(IBAction)onSignUp;
 -(IBAction)onSignUpFacebook;
 -(IBAction)onSignUpTwitter;
