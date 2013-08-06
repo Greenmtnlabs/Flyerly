@@ -20,7 +20,7 @@
 @end
 
 @implementation RegisterController
-@synthesize username,password,confirmPassword,signUp,signUpFacebook,signUpTwitter,loadingView;
+@synthesize username,password,confirmPassword,signUp,signUpFacebook,signUpTwitter,loadingView,email,name,phno;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -34,6 +34,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    email.text =@"Zohaib.Abbasi@gmail.com";
+    name.text =@"Zohaib Aziz Abbasi";
+    phno.text =@"03452139691";
+
 	// Do any additional setup after loading the view.
     
     self.navigationController.navigationBarHidden = NO;
@@ -257,7 +261,10 @@
     PFUser *user = [PFUser user];
     user.username = userName;
     user.password = pwd;
-    user.email = userName;
+    user.email = email.text;
+    [user setObject:name.text forKey:@"name"];
+    [user setObject:phno.text forKey:@"contact"];
+
     
     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (error) {
