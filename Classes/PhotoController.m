@@ -406,7 +406,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 	[cameraTabButton setBackgroundImage:[UIImage imageNamed:@"07_camera"] forState:UIControlStateNormal];
 	[cameraTabButton.titleLabel setFont:[UIFont fontWithName:@"Arial-BoldMT" size:15]];
 	[cameraTabButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-	[cameraTabButton addTarget:self action:@selector(setPhotoTabAction:) forControlEvents:UIControlEventTouchUpInside];
+	[cameraTabButton addTarget:self action:@selector(setCameraTabAction:) forControlEvents:UIControlEventTouchUpInside];
 	cameraTabButton.alpha =  ALPHA0;
 	cameraTabButton.tag = 10001;
 	[self.view addSubview:cameraTabButton];
@@ -1887,7 +1887,7 @@ int arrangeLayerIndex;
 
 #pragma mark UIAlertView delegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-	if(alertView == warningAlert && buttonIndex == 1) {
+	if(alertView == warningAlert && buttonIndex == 0) {
         
 		[self.navigationController popToRootViewControllerAnimated:YES];
 	
@@ -1957,7 +1957,7 @@ int arrangeLayerIndex;
 	FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
 	if(appDele.changesFlag)
 	{
-		warningAlert = [[UIAlertView alloc]initWithTitle:@"Warning" message:@"You have not saved your flyer.\nAll progress will be lost if you continue." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Continue",nil];
+		warningAlert = [[UIAlertView alloc]initWithTitle:@"Warning" message:@"You have not saved your flyer.\nAll progress will be lost if you continue." delegate:self cancelButtonTitle:@"Continue" otherButtonTitles:@"Cancel",nil];
 		[warningAlert show];
 	}
 	else
@@ -3618,6 +3618,34 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 }
 
+-(void) setCameraTabAction:(id) sender{
+    imgPickerFlag =2;
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.4f];
+    textBackgrnd.alpha = ALPHA0;
+    [cameraTabButton setBackgroundImage:[UIImage imageNamed:@"07_camera_selected"] forState:UIControlStateNormal];
+    [photoTabButton setBackgroundImage:[UIImage imageNamed:@"07_roll"] forState:UIControlStateNormal];
+    [widthTabButton setBackgroundImage:[UIImage imageNamed:@"07_width"] forState:UIControlStateNormal];
+    [heightTabButton setBackgroundImage:[UIImage imageNamed:@"07_height"] forState:UIControlStateNormal];
+    [UIView commitAnimations];
+    
+    [self openCustomCamera];
+}
+
+-(void) setPhotoTabAction:(id) sender{
+    imgPickerFlag =2;
+    [self loadCustomPhotoLibrary];
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.4f];
+    textBackgrnd.alpha = ALPHA0;
+    [cameraTabButton setBackgroundImage:[UIImage imageNamed:@"07_camera"] forState:UIControlStateNormal];
+    [photoTabButton setBackgroundImage:[UIImage imageNamed:@"07_roll_selected"] forState:UIControlStateNormal];
+    [widthTabButton setBackgroundImage:[UIImage imageNamed:@"07_width"] forState:UIControlStateNormal];
+    [heightTabButton setBackgroundImage:[UIImage imageNamed:@"07_height"] forState:UIControlStateNormal];
+    [UIView commitAnimations];
+}
+
+/*
 -(void) setPhotoTabAction:(id) sender{
 	UIButton *selectedButton = (UIButton*)sender;
 	if(selectedButton == cameraTabButton)
@@ -3688,7 +3716,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 		
 	}
 }
-
+*/
 -(NSMutableArray *)photoLayersArray{
     
     if(photoLayersArray){
