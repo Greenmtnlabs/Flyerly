@@ -16,12 +16,14 @@
 @class AddFriendsController;
 @class LoadingView;
 @class FBSession;
-@class FacebookLikeView;
+@class FacebookLikeView,MainSettingViewController;
+
 
 @interface LauchViewController : UIViewController<FBDialogDelegate,FBSessionDelegate,FBRequestDelegate,UIWebViewDelegate> {
 	PhotoController *ptController;
 	FlyrViewController *tpController;
 	SettingViewController *spController;
+    MainSettingViewController *settingviewcontroller;
 	AddFriendsController *addFriendsController;
 	LoadingView *loadingView;
     

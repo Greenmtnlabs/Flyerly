@@ -298,11 +298,13 @@ BOOL selectAll;
         [self setUnselectTab:sender];
         
         // init facebook array
+         NSLog(@"%@",facebookBackupArray);
         if(facebookBackupArray){
             
             // Reload table data after all the contacts get loaded
             facebookArray = nil;
             facebookArray = facebookBackupArray;
+           
             
             // Filter contacts on new tab selection
             [self onSearchClick:nil];

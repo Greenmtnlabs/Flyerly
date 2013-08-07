@@ -400,6 +400,8 @@
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		20F93DD317B2262200F6F88C /* MainSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F93DD117B2262200F6F88C /* MainSettingViewController.m */; };
+		20F93DD417B2262200F6F88C /* MainSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20F93DD217B2262200F6F88C /* MainSettingViewController.xib */; };
 		2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
 		30D58CFF10FB1BF800E0C7E8 /* icon0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 30D58C7810FB1BF800E0C7E8 /* icon0.jpg */; };
 		30D58D0010FB1BF800E0C7E8 /* icon1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 30D58C7910FB1BF800E0C7E8 /* icon1.jpg */; };
@@ -1502,6 +1504,9 @@
 		1D3623250D0F684500981E51 /* FlyrAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlyrAppDelegate.m; sourceTree = "<group>"; };
 		1D6058910D05DD3D006BFB54 /* Flyr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flyr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		20F93DD017B2262200F6F88C /* MainSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainSettingViewController.h; sourceTree = "<group>"; };
+		20F93DD117B2262200F6F88C /* MainSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainSettingViewController.m; sourceTree = "<group>"; };
+		20F93DD217B2262200F6F88C /* MainSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainSettingViewController.xib; path = Classes/MainSettingViewController.xib; sourceTree = "<group>"; };
 		2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		28A0AAE50D9B0CCF005BE974 /* Flyr_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flyr_Prefix.pch; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -2330,6 +2335,8 @@
 				0F80C38A178578CB00D36795 /* RegisterController.m */,
 				0F80C38E1785813E00D36795 /* SigninController.h */,
 				0F80C38F1785813E00D36795 /* SigninController.m */,
+				20F93DD017B2262200F6F88C /* MainSettingViewController.h */,
+				20F93DD117B2262200F6F88C /* MainSettingViewController.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -3353,6 +3360,7 @@
 				0DFC5319109576AB00B18478 /* MainWindow.xib */,
 				0DFC531A109576AB00B18478 /* PhotoController.xib */,
 				E8C7C36810976BFC0064935A /* SaveFlyerController.xib */,
+				20F93DD217B2262200F6F88C /* MainSettingViewController.xib */,
 				0DFC531D109576AB00B18478 /* SettingViewController.xib */,
 				0DF3A361108DF47400D6C887 /* Data */,
 				6513C1AB1716FE0F00355FC3 /* Fonts */,
@@ -4688,6 +4696,7 @@
 				0F805AD6179E92AD002AEA24 /* flash_icon_green@2x.png in Resources */,
 				0F805AD7179E92AD002AEA24 /* flash_icon_off.png in Resources */,
 				0F805AD8179E92AD002AEA24 /* flash_icon_off@x.png in Resources */,
+				20F93DD417B2262200F6F88C /* MainSettingViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4868,6 +4877,7 @@
 				0F7E433717953EF1007A9042 /* CJSONScanner.m in Sources */,
 				0F7E433817953EF1007A9042 /* CJSONSerializer.m in Sources */,
 				0F7E433B17953F3E007A9042 /* CDataScanner.m in Sources */,
+				20F93DD317B2262200F6F88C /* MainSettingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
