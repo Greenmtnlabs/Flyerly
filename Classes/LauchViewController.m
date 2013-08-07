@@ -78,7 +78,8 @@
 
 // Load Preferences Method 
 -(IBAction)doAbout:(id)sender{
-	[self.navigationController pushViewController:spController animated:YES];
+settingviewcontroller   = [[MainSettingViewController  alloc]initWithNibName:@"MainSettingViewController" bundle:nil];
+	[self.navigationController pushViewController:settingviewcontroller animated:YES];
 }
 //End
 
