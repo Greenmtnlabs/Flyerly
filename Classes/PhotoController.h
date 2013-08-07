@@ -13,6 +13,7 @@
 #import "CustomPhotoController.h"
 #import "EBPurchase.h"
 #import "LoadingView.h"
+#import "ShareProgressView.h"
 
 @interface PhotoController : UIViewController<UIActionSheetDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, EBPurchaseDelegate>
 {
@@ -140,6 +141,8 @@
     UIButton *crossButtonGlobal;
     UIButton *editButtonGlobal;    
     UIBarButtonItem *rightUndoBarButton;
+    
+    ShareProgressView *layerEditMessage;
 }
 
 @property(nonatomic, retain) NSMutableArray *cpyTextLabelLayersArray;

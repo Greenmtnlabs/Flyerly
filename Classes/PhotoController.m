@@ -94,8 +94,8 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     [moreLayersLabel setTextColor:[UIColor whiteColor]];
     [self.view addSubview:moreLayersLabel];
     
-    [addMoreLayerOrSaveFlyerLabel setText:@"ADD MORE LAYERS OR SAVE FLYER \n ADJUST LAYERS OR TAP THEN HOLD TO EDIT OR DELETE LAYER."];
-    [addMoreLayerOrSaveFlyerLabel setNumberOfLines:3];
+    [addMoreLayerOrSaveFlyerLabel setText:@"ADD MORE LAYERS OR SAVE FLYER"];// \n ADJUST LAYERS OR TAP THEN HOLD TO EDIT OR DELETE LAYER."];
+    [addMoreLayerOrSaveFlyerLabel setNumberOfLines:1];
     [addMoreLayerOrSaveFlyerLabel setBackgroundColor:[UIColor clearColor]];
     [addMoreLayerOrSaveFlyerLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:14]];
     [addMoreLayerOrSaveFlyerLabel setTextColor:[UIColor grayColor]];
@@ -1957,7 +1957,7 @@ int arrangeLayerIndex;
 	FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
 	if(appDele.changesFlag)
 	{
-		warningAlert = [[UIAlertView alloc]initWithTitle:@"Warning" message:@"You have not saved your flyer.\nAll progress will be lost if you continue." delegate:self cancelButtonTitle:@"Continue" otherButtonTitles:@"Cancel",nil];
+		warningAlert = [[UIAlertView alloc]initWithTitle:@"Unsaved Flyer" message:@"You have not saved your flyer.\nAll progress will be lost if you continue." delegate:self cancelButtonTitle:@"Continue" otherButtonTitles:@"Cancel",nil];
 		[warningAlert show];
 	}
 	else
@@ -1989,6 +1989,12 @@ int arrangeLayerIndex;
 }
 
 -(void)chooseTemplate{
+    
+    if(layerEditMessage!=nil){
+        [layerEditMessage removeFromSuperview];
+        layerEditMessage = nil;
+    }
+
 	photoTouchFlag=NO;
 	lableTouchFlag=NO;
     symbolTouchFlag= NO;
@@ -2130,11 +2136,23 @@ int arrangeLayerIndex;
 }
 
 -(void)cancelLayer{
+    
+    if(layerEditMessage!=nil){
+        [layerEditMessage removeFromSuperview];
+        layerEditMessage = nil;
+    }
+
     discardAlert = [[UIAlertView alloc]initWithTitle:@"Warning" message:@"Do you want to go back? You will lose unsaved changes" delegate:self cancelButtonTitle:@"NO" otherButtonTitles:@"YES" ,nil];
     [discardAlert show];
 }
 
 -(void)callWrite{
+    
+    if(layerEditMessage!=nil){
+        [layerEditMessage removeFromSuperview];
+        layerEditMessage = nil;
+    }
+
 	photoTouchFlag=NO;
 	lableTouchFlag=NO;
     symbolTouchFlag= NO;
@@ -2669,6 +2687,11 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 -(void)callSaveAndShare
 {
+    if(layerEditMessage!=nil){
+        [layerEditMessage removeFromSuperview];
+        layerEditMessage = nil;
+    }
+
     [Flurry logEvent:@"Saved Flyer"];
 
     [self removeBordersFromAllLayers];
@@ -2876,6 +2899,11 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 -(void) setAddMoreLayerTabAction:(id) sender {
     
+    if(layerEditMessage!=nil){
+        [layerEditMessage removeFromSuperview];
+        layerEditMessage = nil;
+    }
+
 	UIButton *selectedButton = (UIButton*)sender;
     
     // Set wobble and delete mode to NO when tab other then arrange layer is selected
@@ -3059,6 +3087,28 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	}
 	else if(selectedButton == arrangeLayerTabButton)
 	{
+        // Layer handling message
+        
+        if(layerEditMessage==nil){
+            layerEditMessage = [[[[NSBundle mainBundle] loadNibNamed:@"ShareProgressView" owner:self options:nil] objectAtIndex:0] retain];
+            [layerEditMessage setFrame:CGRectMake(layerEditMessage.frame.origin.x, 320, layerEditMessage.frame.size.width, layerEditMessage.frame.size.height+2)];
+        
+            // border radius
+            [layerEditMessage setAlpha:0.8];
+        
+            [layerEditMessage.statusText setBounds:CGRectMake(layerEditMessage.frame.origin.x, 321, layerEditMessage.frame.size.width-55, layerEditMessage.frame.size.height-1)];
+            [layerEditMessage.statusText setTextColor:[UIColor whiteColor]];
+            [layerEditMessage.statusText setTextAlignment:NSTextAlignmentCenter];
+            [layerEditMessage.statusText setLineBreakMode:NSLineBreakByWordWrapping];
+            [layerEditMessage.statusText setNumberOfLines:0];
+            [layerEditMessage.statusText setText:@"ADJUST LAYERS OR TAP THEN HOLD TO EDIT OR DELETE LAYER"];
+            
+            [layerEditMessage.networkIcon removeFromSuperview];
+            [layerEditMessage.statusIcon removeFromSuperview];
+            [layerEditMessage.refreshIcon removeFromSuperview];
+        
+            [self.view addSubview:layerEditMessage];
+        }
         
         //self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"layers" rect:CGRectMake(-30, -6, 50, 50)];
         UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-30, -6, 50, 50)] autorelease];
