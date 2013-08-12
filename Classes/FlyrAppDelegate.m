@@ -142,7 +142,8 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
  */
 
 -(void)clearCache{
-	/*NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+/*
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 	 NSString *cachePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"URLCache"];
 	 if (![[NSFileManager defaultManager] removeItemAtPath:cachePath error:nil]) {
 	 return;
@@ -153,17 +154,18 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 	 attributes:nil 
 	 error:nil]) {
 	 return;
-	 }*/
-	//NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES); 
-    //NSString *cacheDirectory = [paths objectAtIndex:0]; 
-	//NSString *dummyCacheDirectory = [cacheDirectory substringToIndex:65];
-	//NSArray *files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:cacheDirectory error:nil];
+	 }
+	NSArray *paths1 = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSString *cacheDirectory = [paths1 objectAtIndex:0]; 
+	NSString *dummyCacheDirectory = [cacheDirectory substringToIndex:65];
+	NSArray *files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:cacheDirectory error:nil];
 	
 	
-    //NSString *filename = [cacheDirectory stringByAppendingPathComponent:cacheDirectoryPath]; 
-    //filename = [filename stringByAppendingPathComponent:cacheFileName]; 
-	// NSLog(filename);
-	
+    NSString *filename = [cacheDirectory stringByAppendingPathComponent:cacheDirectory]; 
+    filename = [filename stringByAppendingPathComponent:filename]; 
+	 //NSLog(filename);
+	//
+ */
 	[[ImageCache sharedImageCache] removeAllImagesInMemory];
     [self.session close];
 	
@@ -300,16 +302,17 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     } else {
         
         NSLog(@"User already Greeted !");
-        
+        accountController = [[AccountController alloc]initWithNibName:@"AccountController" bundle:nil];
+        [navigationController pushViewController:accountController animated:NO];
+
+/*
         if(IS_IPHONE_5){
             lauchController = [[LauchViewController alloc]initWithNibName:@"LauchViewControllerIPhone5" bundle:nil];
         }else{
             lauchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
         }        
         [navigationController pushViewController:lauchController animated:NO];
-        
-        accountController = [[AccountController alloc]initWithNibName:@"AccountController" bundle:nil];
-        [navigationController pushViewController:accountController animated:NO];
+*/
         [window addSubview:[navigationController view]];
     }
     

@@ -54,10 +54,14 @@
     // set clear text overlay
     email.clearButtonMode = UITextFieldViewModeWhileEditing;
     password.clearButtonMode = UITextFieldViewModeWhileEditing;
-    
-    email.text= @"riz_ahmed_86@yahoo.com";
-    password.text = @"logs";
-    
+    usr = [[NSUserDefaults standardUserDefaults] stringForKey:@"User"];
+    if (usr != nil) {
+        email.text = usr;
+        password.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"Password"];
+
+//    email.text= @"riz_ahmed_86@yahoo.com";
+ //   password.text = @"logs";
+    }
     // Setup welcome button
     UIButton *welcomeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 76, 32)];
     [welcomeButton setTitle:@" Welcome" forState:UIControlStateNormal];
@@ -163,6 +167,11 @@
         NSLog(@"Path: %@", [AccountController getPathFromEmail:userName]);
         FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
         appDelegate.loginId = [AccountController getPathFromEmail:userName];
+        usr = [[NSUserDefaults standardUserDefaults] stringForKey:@"User"];
+         if (usr == nil) {
+            [[NSUserDefaults standardUserDefaults]  setObject:userName forKey:@"User"];
+            [[NSUserDefaults standardUserDefaults]  setObject:pwd forKey:@"Password"];
+         }
 
         if(IS_IPHONE_5){
             launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewControllerIPhone5" bundle:nil];
@@ -170,8 +179,8 @@
             launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
         }
         
-        //[self.navigationController pushViewController:launchController animated:YES];
-        [self performSelectorOnMainThread:@selector(pushViewController:) withObject:launchController waitUntilDone:YES];
+        [self.navigationController pushViewController:launchController animated:YES];
+       // [self performSelectorOnMainThread:@selector(pushViewController:) withObject:launchController waitUntilDone:YES];
     }
     
 }
@@ -197,6 +206,9 @@
             appDelegate.facebook = [[Facebook alloc] initWithAppId:[dict objectForKey: @"FacebookAppID"] andDelegate:self];
             
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            NSLog(@"%@",[defaults objectForKey:@"FBAccessTokenKey"]);
+            NSLog(@"%@",[defaults objectForKey:@"FBExpirationDateKey"]);
+
             if ([defaults objectForKey:@"FBAccessTokenKey"] && [defaults objectForKey:@"FBExpirationDateKey"]) {
                 appDelegate.facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
                 appDelegate.facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
@@ -254,7 +266,6 @@
             }];
             
         } else {
-            
             [self showAlert:@"No Twitter connection" message:@"You must be connected to Twitter to continue."];
             [self removeLoadingView];
         }

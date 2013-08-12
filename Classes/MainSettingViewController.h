@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "SettingViewController.h"
+#import "FlyrAppDelegate.h"
+#import "AccountController.h"
 	
 @interface MainSettingViewController : UIViewController{
 
@@ -16,12 +18,12 @@
     NSMutableArray *groupCtg;
     SettingViewController *oldsettingveiwcontroller;
     UISwitch *mySwitch;
-    
+    AccountController   *actController;
 
 }
 @property (strong, nonatomic)IBOutlet UITableView *tableView;
 - (void)changeSwitch:(id)sender;
-
+- (void)signOut;
 
 
 

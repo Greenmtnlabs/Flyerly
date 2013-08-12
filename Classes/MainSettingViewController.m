@@ -27,7 +27,7 @@
 {
     [super viewDidLoad];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
-     self.navigationItem.title = @"Setting";
+     self.navigationItem.title = @"Settings";
     groupCtg = [[NSMutableArray alloc] init];
     [groupCtg addObject:@"Preferences"];
     [groupCtg addObject:@"Account"];
@@ -121,7 +121,7 @@
     if([sender isOn]){
         // Execute any code when the switch is ON
         NSLog(@"Switch is ON");
-        [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"saveToCameraRollSetting"];
+        [[NSUserDefaults standardUserDefaults]  setObject:@"enabled" forKey:@"saveToCameraRollSetting"];
     } else{
         // Execute any code when the switch is OFF
         NSLog(@"Switch is OFF");
@@ -129,11 +129,40 @@
     }
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row == 0 & indexPath.section == 0) {
+    UITableViewCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
+    NSString *cellText = selectedCell.textLabel.text;
+//    indexPath.row == 0 & indexPath.section == 0
+    if ([cellText isEqualToString:@"Sharing Setting"]) {
         oldsettingveiwcontroller = [[SettingViewController alloc]initWithNibName:@"SettingViewController" bundle:nil];
         [self.navigationController pushViewController:oldsettingveiwcontroller animated:YES];
+    }else if([cellText isEqualToString:@"Sign Out"]){
+        [self signOut];
+        selectedCell.textLabel.text = @"Sign Out Successfully";
+        actController = [[AccountController alloc]initWithNibName:@"AccountController" bundle:nil];
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    
     }
- 
+    
+}
+
+- (void)signOut{
+    //For Facebook
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"facebookSetting"];
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"FBAccessTokenKey"];
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"FBExpirationDateKey"];
+    //For FlyerLee
+    [[NSUserDefaults standardUserDefaults]  setObject:nil forKey:@"User"];
+    [[NSUserDefaults standardUserDefaults]  setObject:nil forKey:@"Password"];
+    //Twiiter
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"twitterSetting"];
+    // for Instagram
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"instagramSetting"];
+    // Thumbler
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"tumblrSetting"];
+    // Flicker
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"flickrSetting"];
+
+
 }
 
 

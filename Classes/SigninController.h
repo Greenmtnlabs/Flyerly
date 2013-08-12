@@ -23,6 +23,7 @@
     IBOutlet UIButton *signUp;
     IBOutlet UIButton *signInFacebook;
     IBOutlet UIButton *signInTwitter;
+    NSString *usr;
 
     IBOutlet UIButton *forgetPassword1;
 
