@@ -322,6 +322,7 @@ static ShareProgressView *tumblrPogressView;
     // Add modal view and overlay view
     [self.view addSubview:modalView];
     [self.view addSubview:overlayController.view];
+    [Flurry logEvent:@"Previewcd Docu   "];
 }
 
 #pragma text field and text view delegates
@@ -689,6 +690,7 @@ static ShareProgressView *tumblrPogressView;
         [clipboardButton setSelected:YES];
 
         [UIPasteboard generalPasteboard].image = selectedFlyerImage;
+        [Flurry logEvent:@"Copy to Clipboard"];
     }
 }
 

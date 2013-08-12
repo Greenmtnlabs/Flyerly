@@ -1890,7 +1890,7 @@ int arrangeLayerIndex;
 	if(alertView == warningAlert && buttonIndex == 0) {
         
 		[self.navigationController popToRootViewControllerAnimated:YES];
-	
+        [Flurry logEvent:@"Flyer Cancelled"];	
     } else if(alertView == discardAlert && buttonIndex == 1) {
         
         if(selectedAddMoreLayerTab == ADD_MORE_TEXTTAB){
@@ -1936,7 +1936,7 @@ int arrangeLayerIndex;
 	} else if(alertView == deleteAlert && buttonIndex == 1) {
     
         [self deleteLayer:crossButtonGlobal overrided:nil];
-        
+        [Flurry logEvent:@"Layed Deleted"];
 	} else if(alertView == inAppAlert && (buttonIndex == 0 || buttonIndex == 1)) {
         
         NSLog(@"Purchase One Font Selected");
@@ -2537,6 +2537,8 @@ int arrangeLayerIndex;
 
     // RESET layers scroll view to show the undo layer again
     [self resetLayerScrollView];
+    
+    [Flurry logEvent:@"Undone"];
 }
 
 /*
