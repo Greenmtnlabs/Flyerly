@@ -400,6 +400,9 @@
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		20F4D8E017BA3D0A007B2DF5 /* AccountSelecter.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F4D8DE17BA3D09007B2DF5 /* AccountSelecter.m */; };
+		20F4D8E117BA3D0A007B2DF5 /* AccountSelecter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20F4D8DF17BA3D0A007B2DF5 /* AccountSelecter.xib */; };
+		20F4D8E517BA40EA007B2DF5 /* Singleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F4D8E417BA40EA007B2DF5 /* Singleton.m */; };
 		20F93DD317B2262200F6F88C /* MainSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F93DD117B2262200F6F88C /* MainSettingViewController.m */; };
 		20F93DD417B2262200F6F88C /* MainSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20F93DD217B2262200F6F88C /* MainSettingViewController.xib */; };
 		2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
@@ -1504,6 +1507,11 @@
 		1D3623250D0F684500981E51 /* FlyrAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlyrAppDelegate.m; sourceTree = "<group>"; };
 		1D6058910D05DD3D006BFB54 /* Flyr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flyr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		20F4D8DD17BA3D09007B2DF5 /* AccountSelecter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountSelecter.h; sourceTree = "<group>"; };
+		20F4D8DE17BA3D09007B2DF5 /* AccountSelecter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountSelecter.m; sourceTree = "<group>"; };
+		20F4D8DF17BA3D0A007B2DF5 /* AccountSelecter.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AccountSelecter.xib; path = Classes/AccountSelecter.xib; sourceTree = "<group>"; };
+		20F4D8E317BA40EA007B2DF5 /* Singleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Singleton.h; sourceTree = "<group>"; };
+		20F4D8E417BA40EA007B2DF5 /* Singleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Singleton.m; sourceTree = "<group>"; };
 		20F93DD017B2262200F6F88C /* MainSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainSettingViewController.h; sourceTree = "<group>"; };
 		20F93DD117B2262200F6F88C /* MainSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainSettingViewController.m; sourceTree = "<group>"; };
 		20F93DD217B2262200F6F88C /* MainSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainSettingViewController.xib; path = Classes/MainSettingViewController.xib; sourceTree = "<group>"; };
@@ -2286,6 +2294,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				20F4D8E217BA40A5007B2DF5 /* MyGlobleClass */,
 				0DF3A309108DF33D00D6C887 /* Common.h */,
 				E8F2E153109659E600DFA7E8 /* MyNavigationBar.h */,
 				E8F2E154109659E600DFA7E8 /* MyNavigationBar.m */,
@@ -2337,6 +2346,8 @@
 				0F80C38F1785813E00D36795 /* SigninController.m */,
 				20F93DD017B2262200F6F88C /* MainSettingViewController.h */,
 				20F93DD117B2262200F6F88C /* MainSettingViewController.m */,
+				20F4D8DD17BA3D09007B2DF5 /* AccountSelecter.h */,
+				20F4D8DE17BA3D09007B2DF5 /* AccountSelecter.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -3309,6 +3320,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		20F4D8E217BA40A5007B2DF5 /* MyGlobleClass */ = {
+			isa = PBXGroup;
+			children = (
+				20F4D8E317BA40EA007B2DF5 /* Singleton.h */,
+				20F4D8E417BA40EA007B2DF5 /* Singleton.m */,
+			);
+			name = MyGlobleClass;
+			sourceTree = "<group>";
+		};
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
@@ -3352,6 +3372,7 @@
 				65A2126217295F1900ED0B9A /* CustomGalleryItem.xib */,
 				65CC0AB5171802DF003D0BE7 /* Settings.bundle */,
 				8D1107310486CEB800E47090 /* Flyr-Info.plist */,
+				20F4D8DF17BA3D0A007B2DF5 /* AccountSelecter.xib */,
 				65E26156171C2EC400C485B5 /* AddFriendScreen.xib */,
 				E8A7347C1092CFF300661AAD /* DraftViewController.xib */,
 				0D4903BA1091893B00855C30 /* FlyrViewController.xib */,
@@ -4697,6 +4718,7 @@
 				0F805AD7179E92AD002AEA24 /* flash_icon_off.png in Resources */,
 				0F805AD8179E92AD002AEA24 /* flash_icon_off@x.png in Resources */,
 				20F93DD417B2262200F6F88C /* MainSettingViewController.xib in Resources */,
+				20F4D8E117BA3D0A007B2DF5 /* AccountSelecter.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4878,6 +4900,8 @@
 				0F7E433817953EF1007A9042 /* CJSONSerializer.m in Sources */,
 				0F7E433B17953F3E007A9042 /* CDataScanner.m in Sources */,
 				20F93DD317B2262200F6F88C /* MainSettingViewController.m in Sources */,
+				20F4D8E017BA3D0A007B2DF5 /* AccountSelecter.m in Sources */,
+				20F4D8E517BA40EA007B2DF5 /* Singleton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

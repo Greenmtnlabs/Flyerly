@@ -10,7 +10,9 @@
 #import "LauchViewController.h"
 #import "RegisterController.h"
 #import <Parse/PFLogInViewController.h>
-
+#import "Singleton.h"
+#import "AccountSelecter.h"
+@class AccountSelecter,Singleton;
 @interface SigninController : UIViewController<PFLogInViewControllerDelegate,FBRequestDelegate,FBSessionDelegate,FBDialogDelegate,FBLoginDialogDelegate>{
     
     IBOutlet UIImageView *emailImage;
@@ -29,7 +31,9 @@
 
     LauchViewController *launchController;
     RegisterController *registerController;
+    AccountSelecter *actSelecter;
 	LoadingView *loadingView;
+    Singleton *globle;
 }
 
 @property(nonatomic, retain) IBOutlet UIImageView *emailImage;
@@ -51,5 +55,7 @@
 -(IBAction)onSignInFacebook;
 -(IBAction)onSignInTwitter;
 -(IBAction)forgetPassword;
+-(void)signIn:(BOOL)validated username:(NSString *)userName password:(NSString *)pwd;
+
 
 @end

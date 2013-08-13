@@ -27,7 +27,7 @@
 {
     [super viewDidLoad];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
-     self.navigationItem.title = @"Settings";
+     self.navigationItem.title = @"SETTINGS";
     groupCtg = [[NSMutableArray alloc] init];
     [groupCtg addObject:@"Preferences"];
     [groupCtg addObject:@"Account"];

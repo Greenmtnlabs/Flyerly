@@ -232,7 +232,7 @@
 
 -(IBAction)onSignInTwitter{
 
-    [self showLoadingView:@"Signing In..."];
+  
 
     if([AddFriendsController connected]){
         
@@ -248,10 +248,16 @@
                     
                     // Populate array with all available Twitter accounts
                     NSArray *arrayOfAccounts = [account accountsWithAccountType:accountType];
-                    
                     // Sanity check
-                    if ([arrayOfAccounts count] > 0) {
-                        
+                    if ([arrayOfAccounts count] > 1) {
+                        globle = [Singleton RetrieveSingleton];
+                        globle.accounts  = [[NSMutableArray alloc] initWithArray:arrayOfAccounts];
+                        actSelecter = [[AccountSelecter alloc]initWithNibName:@"AccountSelecter" bundle:nil];
+                        //[self.navigationController pushViewController:actSelecter animated:YES];
+                        [self.navigationController presentViewController:actSelecter animated:YES completion:nil];
+
+                    }else if ([arrayOfAccounts count] > 0) {
+                        [self showLoadingView:@"Signing In..."];
                         // Keep it simple, use the first account available
                         ACAccount *acct = [arrayOfAccounts objectAtIndex:0];
                         
@@ -260,9 +266,11 @@
                         
                         // sign in
                         [self signIn:YES username:twitterEmail password:@"null"];
-                        
                     }
+                sd:;
+
                 }
+                
             }];
             
         } else {
@@ -275,6 +283,7 @@
         [self showAlert:@"Warning!" message:@"You're not connected to the internet. Please connect and retry."];
         [self removeLoadingView];
     }
+
 }
 
 -(void)request:(FBRequest *)request didLoad:(id)result{

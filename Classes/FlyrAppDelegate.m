@@ -123,6 +123,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
+    
 	[self clearCache];
 }
 

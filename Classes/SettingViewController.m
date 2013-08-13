@@ -36,7 +36,7 @@ extern NSString* kGetSessionProxy;
     label.font = [UIFont fontWithName:TITLE_FONT size:18];
     label.textAlignment = UITextAlignmentCenter;
     label.textColor = [UIColor whiteColor];
-    label.text = @"SETTINGS";
+    label.text = @"SHARING SETTINGS";
     self.navigationItem.titleView = label;
 
     UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 31, 30)];
