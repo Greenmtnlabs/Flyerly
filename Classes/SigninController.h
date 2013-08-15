@@ -12,8 +12,8 @@
 #import <Parse/PFLogInViewController.h>
 #import "Singleton.h"
 #import "AccountSelecter.h"
-@class AccountSelecter,Singleton;
-@interface SigninController : UIViewController<PFLogInViewControllerDelegate,FBRequestDelegate,FBSessionDelegate,FBDialogDelegate,FBLoginDialogDelegate>{
+@class AccountSelecter,Singleton,RegisterController;
+@interface SigninController : UIViewController<PFLogInViewControllerDelegate,FBRequestDelegate,FBSessionDelegate,FBDialogDelegate,FBLoginDialogDelegate ,UIActionSheetDelegate >{
     
     IBOutlet UIImageView *emailImage;
     IBOutlet UIImageView *passwordImage;
@@ -34,6 +34,8 @@
     AccountSelecter *actSelecter;
 	LoadingView *loadingView;
     Singleton *globle;
+    NSArray *twitterAccounts;
+    UIView *waiting;
 }
 
 @property(nonatomic, retain) IBOutlet UIImageView *emailImage;
@@ -47,6 +49,7 @@
 @property(nonatomic, retain) IBOutlet UIButton *signInFacebook;
 @property(nonatomic, retain) IBOutlet UIButton *signInTwitter;
 @property(nonatomic, retain) IBOutlet UIButton *forgetPassword1;
+@property(nonatomic, retain) IBOutlet UIActivityIndicatorView *act;
 
 @property (nonatomic, retain) LoadingView *loadingView;
 
@@ -56,6 +59,13 @@
 -(IBAction)onSignInTwitter;
 -(IBAction)forgetPassword;
 -(void)signIn:(BOOL)validated username:(NSString *)userName password:(NSString *)pwd;
+
+-(BOOL)twitterAccountExist:(NSString *)userId;
+
+-(void)getTwitterAccounts:(id)delegate;
+-(void)setAlertForSettingPage :(id)delegate;
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex ;
+-(void)displayUserList:(NSArray *)accounts ;
 
 
 @end

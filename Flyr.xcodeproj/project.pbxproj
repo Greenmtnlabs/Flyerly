@@ -400,6 +400,8 @@
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		202233A317BD2A1F0093DD4E /* back_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 202233A117BD2A1E0093DD4E /* back_button.png */; };
+		202233A417BD2A1F0093DD4E /* back_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 202233A217BD2A1E0093DD4E /* back_button@2x.png */; };
 		20F4D8E017BA3D0A007B2DF5 /* AccountSelecter.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F4D8DE17BA3D09007B2DF5 /* AccountSelecter.m */; };
 		20F4D8E117BA3D0A007B2DF5 /* AccountSelecter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20F4D8DF17BA3D0A007B2DF5 /* AccountSelecter.xib */; };
 		20F4D8E517BA40EA007B2DF5 /* Singleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F4D8E417BA40EA007B2DF5 /* Singleton.m */; };
@@ -1507,6 +1509,8 @@
 		1D3623250D0F684500981E51 /* FlyrAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlyrAppDelegate.m; sourceTree = "<group>"; };
 		1D6058910D05DD3D006BFB54 /* Flyr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flyr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		202233A117BD2A1E0093DD4E /* back_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back_button.png; sourceTree = "<group>"; };
+		202233A217BD2A1E0093DD4E /* back_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back_button@2x.png"; sourceTree = "<group>"; };
 		20F4D8DD17BA3D09007B2DF5 /* AccountSelecter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountSelecter.h; sourceTree = "<group>"; };
 		20F4D8DE17BA3D09007B2DF5 /* AccountSelecter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountSelecter.m; sourceTree = "<group>"; };
 		20F4D8DF17BA3D0A007B2DF5 /* AccountSelecter.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AccountSelecter.xib; path = Classes/AccountSelecter.xib; sourceTree = "<group>"; };
@@ -2937,6 +2941,8 @@
 				65E26182171C5B7600C485B5 /* checkbox_checked.png */,
 				65E26183171C5B7600C485B5 /* checkbox.png */,
 				65E2617A171C372C00C485B5 /* done_selected.png */,
+				202233A117BD2A1E0093DD4E /* back_button.png */,
+				202233A217BD2A1E0093DD4E /* back_button@2x.png */,
 				65E2617B171C372C00C485B5 /* done.png */,
 				65E26178171C366200C485B5 /* bottom_buttons_bg.png */,
 				65E2616E171C361400C485B5 /* done_selected@2x.png */,
@@ -4719,6 +4725,8 @@
 				0F805AD8179E92AD002AEA24 /* flash_icon_off@x.png in Resources */,
 				20F93DD417B2262200F6F88C /* MainSettingViewController.xib in Resources */,
 				20F4D8E117BA3D0A007B2DF5 /* AccountSelecter.xib in Resources */,
+				202233A317BD2A1F0093DD4E /* back_button.png in Resources */,
+				202233A417BD2A1F0093DD4E /* back_button@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

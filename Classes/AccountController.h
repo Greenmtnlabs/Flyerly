@@ -10,11 +10,13 @@
 #import "LauchViewController.h"
 #import "RegisterController.h"
 #import "SigninController.h"
-
+#import "Singleton.h"
+@class Singleton;
 @interface AccountController : UIViewController{
     
     IBOutlet UIButton *registerButton;
     IBOutlet UIButton *signinButton;
+    Singleton  *globle;
 }
 
 @property(nonatomic, retain) IBOutlet UIButton *registerButton;

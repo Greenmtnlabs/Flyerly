@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AccountSelecter.h"
 
 @interface Singleton : NSObject
 {
@@ -14,8 +15,8 @@
 }
 
 @property (nonatomic, strong) NSMutableArray *accounts;
+@property (nonatomic, strong) NSString *twitterUser;
 
 
 +(Singleton *)RetrieveSingleton;
-
 @end

@@ -20,7 +20,7 @@
 @end
 
 @implementation RegisterController
-@synthesize username,password,confirmPassword,signUp,signUpFacebook,signUpTwitter,loadingView,email,name,phno;
+@synthesize username,password,confirmPassword,signUp,signUpFacebook,signUpTwitter,loadingView,email,name,phno,act;
 static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
 static const CGFloat MINIMUM_SCROLL_FRACTION = 0.2;
 static const CGFloat MAXIMUM_SCROLL_FRACTION = 0.8;
@@ -110,6 +110,19 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    globle = [Singleton RetrieveSingleton];
+    NSLog(@"%@",globle.twitterUser);
+    if (globle.twitterUser == nil) {
+        username.text = @"";
+    }else{
+        username.text = globle.twitterUser;
+        username.enabled = NO;
+        password.text = @"null";
+        password.enabled = NO;
+        confirmPassword.text =@"null";
+        signUpFacebook.hidden = YES;
+        signUpTwitter.hidden = YES;
+    }
     //email.text =@"Zohaib.Abbasi@gmail.com";
     //name.text =@"Zohaib Aziz Abbasi";
     //phno.text =@"03452139691";
@@ -139,16 +152,16 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     confirmPassword.clearButtonMode = UITextFieldViewModeWhileEditing;
     
     // Setup welcome button
-    UIButton *welcomeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 76, 32)];
-    [welcomeButton setTitle:@" Welcome" forState:UIControlStateNormal];
+    UIButton *welcomeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)];
+   // [welcomeButton setTitle:@" Welcome" forState:UIControlStateNormal];
     welcomeButton.titleLabel.font = [UIFont systemFontOfSize:14.0];
     [welcomeButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
-    [welcomeButton setBackgroundImage:[UIImage imageNamed:@"welcome_button"] forState:UIControlStateNormal];
+    [welcomeButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
     UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:welcomeButton];
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarButton,nil]];
 
     // Navigation bar sign in button
-    UIBarButtonItem *doneTopRightButton = [[UIBarButtonItem alloc] initWithTitle:@"SignUp" style:UIBarButtonItemStylePlain target:self action:@selector(onSignUp)];
+    UIBarButtonItem *doneTopRightButton = [[UIBarButtonItem alloc] initWithTitle:@"Sign up" style:UIBarButtonItemStylePlain target:self action:@selector(onSignUp)];
     
     [doneTopRightButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: [UIFont fontWithName:BUTTON_FONT size:13.0], UITextAttributeFont,nil] forState:UIControlStateNormal];
     
@@ -254,10 +267,9 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 
 -(IBAction)onSignUpTwitter{
     
-    [self showLoadingView:@"Registering..."];
-    
     if([AddFriendsController connected]){
-
+        act.hidden = NO;
+        waiting.hidden = NO;
         if([TWTweetComposeViewController canSendTweet]){
             
             ACAccountStore *account = [[ACAccountStore alloc] init];
@@ -270,33 +282,48 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
                     
                     // Populate array with all available Twitter accounts
                     NSArray *arrayOfAccounts = [account accountsWithAccountType:accountType];
-                      NSLog(@"%@",arrayOfAccounts);
                     // Sanity check
-                    if ([arrayOfAccounts count] > 0) {
-                    
+                    if ([arrayOfAccounts count] > 1) {
+                        if([TWTweetComposeViewController canSendTweet]) {
+                            [self getTwitterAccounts:self];
+                        } else {
+                            
+                            [self setAlertForSettingPage:self];
+                            
+                            
+                        }
+                        
+                    }else if ([arrayOfAccounts count] > 0) {
                         // Keep it simple, use the first account available
                         ACAccount *acct = [arrayOfAccounts objectAtIndex:0];
                         
                         //Convert twitter username to email
-                        NSString *twitterEmail = [AccountController getTwitterEmailByUsername:[acct username]];
-                        
-                        // sign up
-                        [self signUp:YES username:twitterEmail password:@"null"];
+                        NSString *twitterUser = [AccountController getPathFromEmail:[acct username]];
+                        username.text = twitterUser;
+                        password.text = @"null";
+                        confirmPassword.text = @"null";
 
+                        // sign in
+                       // [self signIn:YES username:twitterEmail password:@"null"];
+                        act.hidden = YES;
+                        waiting.hidden = YES;
+                        
                     }
                 }
+                
             }];
             
         } else {
-            
             [self showAlert:@"No Twitter connection" message:@"You must be connected to Twitter to continue."];
             [self removeLoadingView];
         }
-    
+        
+        
     }else{
         [self showAlert:@"Warning!" message:@"You're not connected to the internet. Please connect and retry."];
         [self removeLoadingView];
     }
+
 }
 
 -(void)request:(FBRequest *)request didLoad:(id)result{
@@ -311,21 +338,31 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 -(BOOL)validate{
 
     // Check empty fields
-    if(!username || [username.text isEqualToString:@""] ||
-       !password || [password.text isEqualToString:@""] ||
-       !confirmPassword || [confirmPassword.text isEqualToString:@""]){
+    if(!username || [username.text isEqualToString:@""]){
         
         [self showAlert:@"Warning!" message:@"Please fill all Account fields"];
         [self removeLoadingView];
         return NO;
     }
+
+    if ([globle.twitterUser isEqualToString:nil]) {
+
+        if(!password || [password.text isEqualToString:@""] ||
+       !confirmPassword || [confirmPassword.text isEqualToString:@""]){
+        
+        [self showAlert:@"Warning!" message:@"Please fill all Account fields"];
+        [self removeLoadingView];
+        return NO;
+        }
+
     
     // Check password matched
-    if(![password.text isEqualToString:confirmPassword.text]){
+        if(![password.text isEqualToString:confirmPassword.text]){
         
         [self showAlert:@"Warning!" message:@"Password not matched"];
         [self removeLoadingView];
         return NO;
+        }
     }
     
     if([email.text length] == 0 ){
@@ -428,5 +465,204 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     
     [super dealloc];
 }
+
+#pragma Zohaib Changes
+-(IBAction)signInWithTwitter:(id)sender {
+    
+    if([TWTweetComposeViewController canSendTweet]) {
+        waiting.hidden = NO;
+        //[Twitter getTwitterAccounts:self];
+    } else {
+        
+       // [Twitter setAlertForSettingPage:self];
+        
+        
+    }
+    
+    
+}
+
+
+#pragma Twitter
+//this function will check that specified user account exist in settings/twitter accounts of iOS device
+-(BOOL)twitterAccountExist:(NSString *)userId {
+    
+    // Create an account store object.
+	ACAccountStore *accountStore = [[ACAccountStore alloc] init];
+	
+	// Create an account type that ensures Twitter accounts are retrieved.
+    ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+	
+    __block BOOL accountExist = NO;
+    
+    if([TWTweetComposeViewController canSendTweet]) {
+        
+        
+        // Request access from the user to use their Twitter accounts.
+        [accountStore requestAccessToAccountsWithType:accountType withCompletionHandler:^(BOOL granted, NSError *error) {
+            if(granted) {
+                // Get the list of Twitter accounts.
+                NSArray *accountsArray = [accountStore accountsWithAccountType:accountType];
+                
+                // For the sake of brevity, we'll assume there is only one Twitter account present.
+                // You would ideally ask the user which account they want to tweet from, if there is more than one Twitter account present.
+                if ([accountsArray count] > 0) {
+                    // Grab the initial Twitter account to tweet from.
+                    
+                    for(int i = 0; i < accountsArray.count; i++) {
+                        
+                        ACAccount *twitterAccount = [accountsArray objectAtIndex:i];
+                        NSString *userID = [[twitterAccount valueForKey:@"properties"] valueForKey:@"user_id"];
+                        
+                        if([userID isEqualToString:userId]) {
+                            accountExist = YES;
+                        }
+                    }
+                    
+                    
+                    
+                }
+            }
+        }];
+    }
+    
+    
+    
+    return accountExist;
+    
+    
+}
+
+
+//This function will return all twitter accounts avaliable on iOS Device
+-(void)getTwitterAccounts:(id)delegate {
+    
+    // Create an account store object.
+	ACAccountStore *accountStore = [[ACAccountStore alloc] init];
+	
+	// Create an account type that ensures Twitter accounts are retrieved.
+    ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+	
+    if([TWTweetComposeViewController canSendTweet]) {
+        
+        
+        // Request access from the user to use their Twitter accounts.
+        [accountStore requestAccessToAccountsWithType:accountType withCompletionHandler:^(BOOL granted, NSError *error) {
+            if(granted) {
+                // Get the list of Twitter accounts.
+                NSArray *accountsArray = [accountStore accountsWithAccountType:accountType];
+                
+                if(delegate != nil) {
+                    [delegate performSelector:@selector(displayUserList:) withObject:accountsArray];
+                }
+                
+                
+            }
+        }];
+    }
+    
+    
+    
+}
+
+
+
+-(void)setAlertForSettingPage :(id)delegate
+{
+    // Set up the built-in twitter composition view controller.
+    TWTweetComposeViewController *tweetViewController = [[TWTweetComposeViewController alloc] init];
+    
+    
+    // Create the completion handler block.
+    [tweetViewController setCompletionHandler:^(TWTweetComposeViewControllerResult result) {
+        [delegate dismissModalViewControllerAnimated:YES];
+    }];
+    
+    // Present the tweet composition view controller modally.
+    [delegate presentModalViewController:tweetViewController animated:YES];
+    //tweetViewController.view.hidden = YES;
+    for (UIView *view in tweetViewController.view.subviews){
+        [view removeFromSuperview];
+    }
+    
+}
+
+
+-(void)displayUserList:(NSArray *)accounts {
+    
+    //hide loading
+    waiting.hidden = YES;
+    act.hidden = YES;
+    
+    
+    
+    NSMutableArray *tAccounts = [[NSMutableArray alloc] init];
+    
+    //create username array
+    NSMutableArray *accountArray = [[NSMutableArray alloc] init];
+    for(int i = 0 ; i < accounts.count ; i++) {
+        ACAccount *account = [accounts objectAtIndex:i];
+        [accountArray addObject:account.username];
+        
+        [tAccounts addObject:account];
+        
+        for(id key in [account valueForKey:@"properties"] ) {
+            
+            NSLog(@"%@",key);
+            
+        }
+        
+        
+    }
+    
+    //set main variable
+    twitterAccounts = tAccounts;
+    
+    
+    //loop through each account and show them on UIAction sheet for selection
+    
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Select Account" delegate:self  cancelButtonTitle:nil
+                                               destructiveButtonTitle:nil otherButtonTitles:nil];
+    
+    for (int i = 0; i < accountArray.count; i++) {
+        [actionSheet addButtonWithTitle:[accountArray objectAtIndex:i]];
+    }
+    
+    [actionSheet addButtonWithTitle:@"Cancel"];
+    actionSheet.cancelButtonIndex = accountArray.count;
+    
+    
+    [actionSheet showInView:self.view];
+    
+}
+
+
+
+/**
+ * clickedButtonAtIndex (UIActionSheet)
+ *
+ * Handle the button clicks from mode of getting out selection.
+ */
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    //if not cancel button presses
+    if(buttonIndex != twitterAccounts.count) {
+        
+        //save to NSUserDefault
+        ACAccount *account = [twitterAccounts objectAtIndex:buttonIndex];
+        
+        //Convert twitter username to email
+        NSString *twitterUser = [AccountController getPathFromEmail:[account username]];
+        username.text = twitterUser;
+        password.text = @"null";
+        confirmPassword.text = @"null";
+       // [self signIn:YES username:twitterUser password:@"null"];
+    }
+    
+    NSLog(@"%u",buttonIndex);
+    
+    
+}
+
 
 @end

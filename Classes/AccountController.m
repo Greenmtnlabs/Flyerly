@@ -30,6 +30,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    globle = [Singleton RetrieveSingleton];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -39,6 +40,7 @@
 }
 
 -(IBAction)onRegister{
+    globle.twitterUser = nil;
     RegisterController *registerController = [[RegisterController alloc]initWithNibName:@"RegisterController" bundle:nil];
     [self.navigationController pushViewController:registerController animated:YES];
 }
