@@ -27,6 +27,15 @@
 {
     [super viewDidLoad];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
+    self.navigationItem.hidesBackButton = YES;
+    
+    UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 31, 30)];
+    [menuButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+    [menuButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
+    [menuButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *menuBarButton = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
+    [self.navigationItem setLeftBarButtonItem:menuBarButton];
+    
      self.navigationItem.title = @"SETTINGS";
     groupCtg = [[NSMutableArray alloc] init];
     [groupCtg addObject:@"Preferences"];
@@ -163,6 +172,9 @@
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"flickrSetting"];
 
 
+}
+-(void)goBack{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 

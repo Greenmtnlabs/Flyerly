@@ -11,6 +11,7 @@
 #import <Twitter/Twitter.h>
 #import <ObjectiveFlickr.h>
 #import "LoadingView.h"
+#import "LauchViewController.h"
 
 //#import "FBConnect/FBConnect.h"
 //#import "TwitLogin.h"
@@ -46,6 +47,7 @@
 
     OFFlickrAPIRequest *flickrRequest;
 	LoadingView *loadingView;
+    LauchViewController *launchController;
 
 }
 

@@ -36,6 +36,7 @@
 	// Do any additional setup after loading the view.
     
     self.navigationController.navigationBarHidden = NO;
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
 
     //set title
     UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-35, -6, 50, 50)] autorelease];
@@ -63,14 +64,22 @@
  //   password.text = @"logs";
     }
     // Setup welcome button
-    UIButton *welcomeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 76, 32)];
-    [welcomeButton setTitle:@" Welcome" forState:UIControlStateNormal];
+    UIButton *welcomeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)];
+    //[welcomeButton setTitle:@"" forState:UIControlStateNormal];
     welcomeButton.titleLabel.font = [UIFont systemFontOfSize:14.0];
     [welcomeButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
-    [welcomeButton setBackgroundImage:[UIImage imageNamed:@"welcome_button"] forState:UIControlStateNormal];
+    [welcomeButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
     UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:welcomeButton];
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarButton,nil]];
-    
+
+    UIButton *siginBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
+    [siginBtn setTitle:@"Sign In" forState:UIControlStateNormal];
+    siginBtn.titleLabel.font = [UIFont boldSystemFontOfSize:12.0];
+    [siginBtn addTarget:self action:@selector(onSignIn) forControlEvents:UIControlEventTouchUpInside];
+    [siginBtn setBackgroundImage:[UIImage imageNamed:@"signin_button"] forState:UIControlStateNormal];
+    UIBarButtonItem *righBarButton = [[UIBarButtonItem alloc] initWithCustomView:siginBtn];
+    [self.navigationItem setRightBarButtonItem:righBarButton];
+/*
     // Navigation bar sign in button
     UIBarButtonItem *signInTopRightButton = [[UIBarButtonItem alloc] initWithTitle:@"Sign In" style:UIBarButtonItemStylePlain target:self action:@selector(onSignIn)];
     
@@ -79,6 +88,7 @@
     [signInTopRightButton setTintColor:[UIColor colorWithRed:104.0/255.0 green:173.0/255.0 blue:57.0/255.0 alpha:1]];
     self.navigationItem.rightBarButtonItem = signInTopRightButton;
     [signInTopRightButton release];
+ */
 }
 
 -(IBAction)forgetPassword{

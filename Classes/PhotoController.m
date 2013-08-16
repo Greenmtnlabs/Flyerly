@@ -1889,7 +1889,7 @@ int arrangeLayerIndex;
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
 	if(alertView == warningAlert && buttonIndex == 0) {
         
-		[self.navigationController popToRootViewControllerAnimated:YES];
+		[self.navigationController popViewControllerAnimated:YES];
         [Flurry logEvent:@"Flyer Cancelled"];	
     } else if(alertView == discardAlert && buttonIndex == 1) {
         
@@ -1967,7 +1967,7 @@ int arrangeLayerIndex;
 		[navBar.leftButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
 		[navBar.rightButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
 		
-		[self.navigationController popToRootViewControllerAnimated:YES];	
+		[self.navigationController popViewControllerAnimated:YES];
 	}
 	
 	
@@ -2011,7 +2011,7 @@ int arrangeLayerIndex;
 
     //self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Background" rect:CGRectMake(-65, -6, 50, 50)];
     
-    UIButton *nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
+    UIButton *nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)];
 	[nextButton addTarget:self action:@selector(callAddMoreLayers) forControlEvents:UIControlEventTouchUpInside];
     [nextButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
@@ -2019,7 +2019,7 @@ int arrangeLayerIndex;
     
     UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 31, 30)];
     [menuButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-    [menuButton setBackgroundImage:[UIImage imageNamed:@"menu_button"] forState:UIControlStateNormal];
+    [menuButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
 	[menuButton addTarget:self action:@selector(callMenu) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *leftBarMenuButton = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
     
@@ -2167,15 +2167,15 @@ int arrangeLayerIndex;
     self.navigationItem.titleView = label;
     //self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Add Text" rect:CGRectMake(-45, -6, 50, 50)];
 
-    UIButton *nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
+    UIButton *nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)];
 	[nextButton addTarget:self action:@selector(callStyle) forControlEvents:UIControlEventTouchUpInside];
     [nextButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
     [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
     
-    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
+    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)];
 	[backButton addTarget:self action:@selector(cancelLayer) forControlEvents:UIControlEventTouchUpInside];
-    [backButton setBackgroundImage:[UIImage imageNamed:@"back_blue"] forState:UIControlStateNormal];
+    [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
     UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     [self.navigationItem setLeftBarButtonItem:backBarButton];
 
@@ -2254,21 +2254,21 @@ int arrangeLayerIndex;
         UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:photoButton];
         [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
     } else {
-        UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
-        doneButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
-        [doneButton setTitle:@"Done" forState:UIControlStateNormal];
+        UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 32, 33)];
+ //       doneButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
+//        [doneButton setTitle:@"Done" forState:UIControlStateNormal];
         [doneButton addTarget:self action:@selector(callAddMoreLayers) forControlEvents:UIControlEventTouchUpInside];
         [doneButton addTarget:self action:@selector(logLayerAddedEvent) forControlEvents:UIControlEventTouchUpInside];
         [doneButton addTarget:self action:@selector(logTextAddedEvent) forControlEvents:UIControlEventTouchUpInside];
-        [doneButton setBackgroundImage:[UIImage imageNamed:@"crop_button"] forState:UIControlStateNormal];
+        [doneButton setBackgroundImage:[UIImage imageNamed:@"check_icon"] forState:UIControlStateNormal];
         UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
         [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
     }
     
-    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
+    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)];
     [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
 	[backButton addTarget:self action:@selector(callWrite) forControlEvents:UIControlEventTouchUpInside];
-    [backButton setBackgroundImage:[UIImage imageNamed:@"back_blue"] forState:UIControlStateNormal];
+    [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
     UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     [self.navigationItem setLeftBarButtonItem:backBarButton];
 
@@ -2364,21 +2364,21 @@ int arrangeLayerIndex;
         UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
         [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
     } else {
-        UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
-        doneButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
-        [doneButton setTitle:@"Done" forState:UIControlStateNormal];
+        UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 32, 33)];
+        //doneButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
+        //[doneButton setTitle:@"Done" forState:UIControlStateNormal];
         [doneButton addTarget:self action:@selector(callAddMoreLayers) forControlEvents:UIControlEventTouchUpInside];
         [doneButton addTarget:self action:@selector(logLayerAddedEvent) forControlEvents:UIControlEventTouchUpInside];
         [doneButton addTarget:self action:@selector(logPhotoAddedEvent) forControlEvents:UIControlEventTouchUpInside];
-        [doneButton setBackgroundImage:[UIImage imageNamed:@"crop_button"] forState:UIControlStateNormal];
+        [doneButton setBackgroundImage:[UIImage imageNamed:@"check_icon"] forState:UIControlStateNormal];
         UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
         [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
     }
 
-    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
+    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)];
     [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
 	[backButton addTarget:self action:@selector(cancelLayer) forControlEvents:UIControlEventTouchUpInside];
-    [backButton setBackgroundImage:[UIImage imageNamed:@"back_blue"] forState:UIControlStateNormal];
+    [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
     UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     [self.navigationItem setLeftBarButtonItem:backBarButton];
 
@@ -2576,10 +2576,10 @@ int arrangeLayerIndex;
 
     [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,rightUndoBarButton,nil]];
     
-    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
+    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)];
     [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
 	[backButton addTarget:self action:@selector(chooseTemplate) forControlEvents:UIControlEventTouchUpInside];
-    [backButton setBackgroundImage:[UIImage imageNamed:@"back_blue"] forState:UIControlStateNormal];
+    [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
     UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     [self.navigationItem setLeftBarButtonItem:backBarButton];
     

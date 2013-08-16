@@ -45,6 +45,13 @@ extern NSString* kGetSessionProxy;
     [menuButton addTarget:self action:@selector(goToMain) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *menuBarButton = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
     [self.navigationItem setRightBarButtonItem:menuBarButton];
+    
+    UIButton *backBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 31, 30)];
+    [backBtn addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+    [backBtn setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
+    [backBtn addTarget:self action:@selector(goToMain) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
+    [self.navigationItem setLeftBarButtonItem:backBarButton];
 }
 
 -(void)viewDidLoad{
@@ -109,9 +116,14 @@ extern NSString* kGetSessionProxy;
 }
 
 -(void)goToMain{
+        if(IS_IPHONE_5){
+            launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewControllerIPhone5" bundle:nil];
+        }   else{
+            launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
+        }
     
-	[self.navigationController popToRootViewControllerAnimated:YES];
-}
+        [self.navigationController pushViewController:launchController animated:YES];
+    }
 
 -(IBAction)onClickFacebookButton{
     

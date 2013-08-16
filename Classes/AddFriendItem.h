@@ -35,6 +35,7 @@
 @property BOOL rightSelected;
 
 
+
 -(void)setValues:(NSString *)title1 title2:(NSString *)title2;
 -(void)setImages:(UIImage *)image1 image2:(UIImage *)image2;
 - (IBAction)onLeftCheckBoxClick:(UIButton *)sender;

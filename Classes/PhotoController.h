@@ -14,14 +14,12 @@
 #import "EBPurchase.h"
 #import "LoadingView.h"
 #import "ShareProgressView.h"
-
 @interface PhotoController : UIViewController<UIActionSheetDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, EBPurchaseDelegate>
 {
 	MyNavigationBar *navBar;
 	HudView *aHUD;
     CustomPhotoController *customPhotoController;
 	LoadingView *loadingView;
-
 	UIImageView *imgView;
 	UIImageView *templateBckgrnd;
 	UIImageView *textBackgrnd;

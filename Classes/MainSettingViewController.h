@@ -24,6 +24,7 @@
 @property (strong, nonatomic)IBOutlet UITableView *tableView;
 - (void)changeSwitch:(id)sender;
 - (void)signOut;
+-(void)goBack;
 
 
 

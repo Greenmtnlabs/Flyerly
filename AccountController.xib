@@ -41,33 +41,35 @@
 						<int key="NSvFlags">274</int>
 						<string key="NSFrameSize">{320, 480}</string>
 						<reference key="NSSuperview" ref="866021495"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="253507315"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">sign in_register_bg.png</string>
+							<string key="NSResourceName">Zwelcome_bg.png</string>
 						</object>
 					</object>
 					<object class="IBUIButton" id="253507315">
 						<reference key="NSNextResponder" ref="866021495"/>
 						<int key="NSvFlags">264</int>
-						<string key="NSFrame">{{33, 352}, {255, 37}}</string>
+						<string key="NSFrame">{{33, 299}, {255, 37}}</string>
 						<reference key="NSSuperview" ref="866021495"/>
-						<reference key="NSNextKeyView" ref="68259880"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<object class="NSColor" key="IBUIBackgroundColor">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MC45Nzk2NjEzMTQxIDAuOTk0OTg0OTk0OSAxAA</bytes>
+						</object>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<string key="IBUINormalTitle">         Register</string>
-						<object class="NSColor" key="IBUIHighlightedTitleColor" id="708239559">
-							<int key="NSColorSpace">3</int>
-							<bytes key="NSWhite">MQA</bytes>
-						</object>
-						<object class="NSColor" key="IBUINormalTitleColor" id="747591574">
-							<int key="NSColorSpace">3</int>
-							<bytes key="NSWhite">MAA</bytes>
+						<object class="NSColor" key="IBUINormalTitleColor">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MC44Nzg0MzEzNzI1IDAuOTIxNTY4NjI3NSAwLjkwOTgwMzkyMTYAA</bytes>
 						</object>
 						<object class="NSColor" key="IBUINormalTitleShadowColor" id="365747536">
 							<int key="NSColorSpace">3</int>
@@ -75,16 +77,16 @@
 						</object>
 						<object class="NSCustomResource" key="IBUINormalBackgroundImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">email_signin.png</string>
+							<string key="NSResourceName">Zqemail_box.png</string>
 						</object>
-						<object class="IBUIFontDescription" key="IBUIFontDescription" id="455142610">
-							<string key="name">HelveticaNeue-Bold</string>
+						<object class="IBUIFontDescription" key="IBUIFontDescription">
+							<string key="name">HelveticaNeue-Medium</string>
 							<string key="family">Helvetica Neue</string>
-							<int key="traits">2</int>
+							<int key="traits">0</int>
 							<double key="pointSize">15</double>
 						</object>
-						<object class="NSFont" key="IBUIFont" id="799726200">
-							<string key="NSName">HelveticaNeue-Bold</string>
+						<object class="NSFont" key="IBUIFont" id="327421081">
+							<string key="NSName">HelveticaNeue-Medium</string>
 							<double key="NSSize">15</double>
 							<int key="NSfFlags">16</int>
 						</object>
@@ -92,26 +94,39 @@
 					<object class="IBUIButton" id="68259880">
 						<reference key="NSNextResponder" ref="866021495"/>
 						<int key="NSvFlags">264</int>
-						<string key="NSFrame">{{33, 389}, {255, 37}}</string>
+						<string key="NSFrame">{{33, 336}, {255, 37}}</string>
 						<reference key="NSSuperview" ref="866021495"/>
+						<reference key="NSWindow"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<string key="IBUINormalTitle">         Sign In</string>
-						<reference key="IBUIHighlightedTitleColor" ref="708239559"/>
-						<reference key="IBUINormalTitleColor" ref="747591574"/>
+						<object class="NSColor" key="IBUIHighlightedTitleColor">
+							<int key="NSColorSpace">3</int>
+							<bytes key="NSWhite">MQA</bytes>
+						</object>
+						<object class="NSColor" key="IBUINormalTitleColor">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MC44Nzg0MzEzNzI1IDAuOTIxNTY4NjI3NSAwLjkwOTgwMzkyMTYAA</bytes>
+						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="365747536"/>
 						<object class="NSCustomResource" key="IBUINormalBackgroundImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">password_signin.png</string>
+							<string key="NSResourceName">Zpassword_box.png</string>
 						</object>
-						<reference key="IBUIFontDescription" ref="455142610"/>
-						<reference key="IBUIFont" ref="799726200"/>
+						<object class="IBUIFontDescription" key="IBUIFontDescription">
+							<string key="name">HelveticaNeue</string>
+							<string key="family">Helvetica Neue</string>
+							<int key="traits">0</int>
+							<double key="pointSize">15</double>
+						</object>
+						<reference key="IBUIFont" ref="327421081"/>
 					</object>
 				</array>
 				<string key="NSFrameSize">{320, 480}</string>
 				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="573980206"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
@@ -192,8 +207,8 @@
 						<reference key="object" ref="866021495"/>
 						<array class="NSMutableArray" key="children">
 							<reference ref="253507315"/>
-							<reference ref="573980206"/>
 							<reference ref="68259880"/>
+							<reference ref="573980206"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -229,17 +244,56 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">17</int>
+			<int key="maxID">18</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes"/>
+		<object class="IBClassDescriber" key="IBDocument.Classes">
+			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<object class="IBPartialClassDescription">
+					<string key="className">AccountController</string>
+					<string key="superclassName">UIViewController</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="onRegister">id</string>
+						<string key="onSignIn">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="onRegister">
+							<string key="name">onRegister</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="onSignIn">
+							<string key="name">onSignIn</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="registerButton">UIButton</string>
+						<string key="signinButton">UIButton</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="registerButton">
+							<string key="name">registerButton</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="signinButton">
+							<string key="name">signinButton</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/AccountController.h</string>
+					</object>
+				</object>
+			</array>
+		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="email_signin.png">{255, 37}</string>
-			<string key="password_signin.png">{258, 36}</string>
-			<string key="sign in_register_bg.png">{320, 460}</string>
+			<string key="Zpassword_box.png">{252, 36}</string>
+			<string key="Zqemail_box.png">{252, 35}</string>
+			<string key="Zwelcome_bg.png">{320, 460}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">2083</string>
 	</data>

@@ -19,7 +19,7 @@
 
 @implementation AddFriendsController
 @synthesize uiTableView, contactsArray, deviceContactItems, contactsLabel, facebookLabel, twitterLabel, doneLabel, selectAllLabel, unSelectAllLabel, inviteLabel, contactsButton, facebookButton, twitterButton, loadingView, searchTextField, facebookArray, twitterArray;
-@synthesize contactBackupArray, facebookBackupArray, twitterBackupArray;
+@synthesize contactBackupArray, facebookBackupArray, twitterBackupArray,navBar;
 
 const int TWITTER_TAB = 2;
 const int FACEBOOK_TAB = 1;
@@ -31,7 +31,7 @@ BOOL selectAll;
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    
+    self.navigationItem.hidesBackButton = YES;
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
 
     // Register notification for facebook login
@@ -43,14 +43,21 @@ BOOL selectAll;
 	loadingViewFlag = NO;
     loadingView = nil;
 	loadingView = [[LoadingView alloc]init];
+    self.navigationItem.leftBarButtonItem.title = @"";
     [self.navigationItem setRightBarButtonItems: [self rightBarItems]];
-
     // Create left bar help button
     UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 20, 25)];
     [helpButton addTarget:self action:@selector(loadHelpController) forControlEvents:UIControlEventTouchUpInside];
     [helpButton setImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
     UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:helpButton];
-    [self.navigationItem setLeftBarButtonItem:leftBarButton];
+  
+
+    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)];
+    [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+    [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
+    [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:backBarButton,leftBarButton,nil]];
 
     // set borders on the table
     [[self.uiTableView layer] setBorderColor:[[UIColor grayColor] CGColor]];
@@ -100,6 +107,7 @@ BOOL selectAll;
     label.text = @"INVITE";
     self.navigationItem.titleView = label;//[PhotoController setTitleViewWithTitle:@"Invite" rect:CGRectMake(-28, -6, 50, 50)];
 
+    
     UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 31, 30)];
     [menuButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [menuButton setBackgroundImage:[UIImage imageNamed:@"menu_button"] forState:UIControlStateNormal];
@@ -117,8 +125,13 @@ BOOL selectAll;
 }
 
 -(IBAction)goBack{
+    if(IS_IPHONE_5){
+        launchCotroller = [[LauchViewController alloc]initWithNibName:@"LauchViewControllerIPhone5" bundle:nil];
+    }   else{
+        launchCotroller = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
+    }
 
-	[self.navigationController popToRootViewControllerAnimated:YES];
+	[self.navigationController pushViewController:launchCotroller animated:YES];
 }
 
 /*

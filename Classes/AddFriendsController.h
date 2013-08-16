@@ -20,11 +20,13 @@
 #import "FlyrAppDelegate.h"
 #import <SystemConfiguration/SystemConfiguration.h>
 #import "Reachability.h"
+#import "LauchViewController.h"
+#import "MyNavigationBar.h"
 
 @class LoadingView;
 
 @interface AddFriendsController : UIViewController<UITableViewDelegate,UITableViewDataSource,FBRequestDelegate,FBSessionDelegate,MFMessageComposeViewControllerDelegate,FBDialogDelegate,FBLoginDialogDelegate,UITextFieldDelegate>{
-
+    LauchViewController *launchCotroller;
     IBOutlet UILabel *contactsLabel;
     IBOutlet UILabel *facebookLabel;
     IBOutlet UILabel *twitterLabel;
@@ -73,7 +75,7 @@
 @property(nonatomic,retain) NSMutableArray *contactBackupArray;
 @property(nonatomic,retain) NSMutableArray *facebookBackupArray;
 @property(nonatomic,retain) NSMutableArray *twitterBackupArray;
-
+@property (nonatomic, retain) MyNavigationBar *navBar;
 @property(nonatomic,retain) NSMutableArray *deviceContactItems;
 
 - (IBAction)selectAllCheckBoxes:(UIButton *)sender;

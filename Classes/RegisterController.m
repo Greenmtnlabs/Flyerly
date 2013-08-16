@@ -15,6 +15,7 @@
 #import "LoadingView.h"
 #import "AccountController.h"
 
+
 @interface RegisterController ()
 
 @end
@@ -130,6 +131,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 	// Do any additional setup after loading the view.
     
     self.navigationController.navigationBarHidden = NO;
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
 
     //set title
     //self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Register" rect:CGRectMake(-50, -6, 50, 50)];
@@ -160,6 +162,15 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:welcomeButton];
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarButton,nil]];
 
+    
+    UIButton *signUpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)];
+    // [welcomeButton setTitle:@" Welcome" forState:UIControlStateNormal];
+    [signUpButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    [signUpButton setBackgroundImage:[UIImage imageNamed:@"check_icon"] forState:UIControlStateNormal];
+    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:signUpButton];
+    [self.navigationItem setRightBarButtonItem:rightBarButton];
+
+/*
     // Navigation bar sign in button
     UIBarButtonItem *doneTopRightButton = [[UIBarButtonItem alloc] initWithTitle:@"Sign up" style:UIBarButtonItemStylePlain target:self action:@selector(onSignUp)];
     
@@ -168,7 +179,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     [doneTopRightButton setTintColor:[UIColor colorWithRed:104.0/255.0 green:173.0/255.0 blue:57.0/255.0 alpha:1]];
     self.navigationItem.rightBarButtonItem = doneTopRightButton;
     [doneTopRightButton release];
-
+*/
 }
 
 -(IBAction)goBack{
@@ -265,6 +276,38 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     }
 }
 
+-(BOOL)CheckUserExists :(NSString *)userName password:(NSString *)pwd{
+    NSError *loginError = nil;
+
+    [PFUser logInWithUsername:userName password:pwd error:&loginError];
+    if(loginError){
+        return NO;
+    }else{
+        return YES;
+    }
+}
+
+#pragma mark UIAlertView delegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+	if(alertView == warningAlert && buttonIndex == 0) {
+        globle.twitterUser = nil;
+        [[NSUserDefaults standardUserDefaults]  setObject:username.text forKey:@"User"];
+        [[NSUserDefaults standardUserDefaults]  setObject:password.text forKey:@"Password"];
+        
+        if(IS_IPHONE_5){
+            launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewControllerIPhone5" bundle:nil];
+        }   else{
+            launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
+        }
+        
+        [self.navigationController pushViewController:launchController animated:YES];
+        //[self performSelectorOnMainThread:@selector(pushViewController:) withObject:launchController waitUntilDone:YES];
+
+    }
+
+}
+
+
 -(IBAction)onSignUpTwitter{
     
     if([AddFriendsController connected]){
@@ -302,6 +345,25 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
                         username.text = twitterUser;
                         password.text = @"null";
                         confirmPassword.text = @"null";
+                        /*
+                        if([self CheckUserExists:twitterUser password:@"null"])
+                        {
+                            [acct release];
+                            act.hidden = YES;
+                            waiting.hidden = YES;
+                              [self removeLoadingView];
+                           warningAlert = [[UIAlertView  alloc]initWithTitle:@"Flyerly Account Already Exists" message:@"Please sign in using existing credentials" delegate:self cancelButtonTitle:@"Sign In" otherButtonTitles:@"Cancel",nil];
+                            [warningAlert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:NO];
+                            //[warningAlert show];
+                            [warningAlert autorelease];
+                            
+                        }else{
+                            username.text = twitterUser;
+                            password.text = @"null";
+                            confirmPassword.text = @"null";
+                        }
+
+                    */
 
                         // sign in
                        // [self signIn:YES username:twitterEmail password:@"null"];
@@ -656,9 +718,17 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
         username.text = twitterUser;
         password.text = @"null";
         confirmPassword.text = @"null";
+        /*
+        if([self CheckUserExists:twitterUser password:@"null"])
+        {
+            warningAlert = [[UIAlertView  alloc]initWithTitle:@"Flyerly Account Already Exists" message:@"Please sign in using existing credentials" delegate:self cancelButtonTitle:@"Sign In" otherButtonTitles:@"Cancel",nil];
+            [warningAlert show];
+            
+        }
+         */
+
        // [self signIn:YES username:twitterUser password:@"null"];
     }
-    
     NSLog(@"%u",buttonIndex);
     
     

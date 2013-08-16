@@ -11,11 +11,11 @@
 #import "FlyrAppDelegate.h"
 #import "FBConnect.h"
 #import "Singleton.h"
-
-
-
-@class FBSession,Singleton;
-@interface RegisterController : UIViewController<UITextFieldDelegate,UIActionSheetDelegate,FBRequestDelegate,FBSessionDelegate,FBDialogDelegate,FBLoginDialogDelegate>{
+#import "AccountSelecter.h"
+#import <Parse/PFLogInViewController.h>
+#import <Parse/PFQuery.h>
+@class FBSession,Singleton,LauchViewController;
+@interface RegisterController : UIViewController<UITextFieldDelegate,UIActionSheetDelegate,FBRequestDelegate,FBSessionDelegate,FBDialogDelegate,FBLoginDialogDelegate,UIAlertViewDelegate>{
     
     IBOutlet UITextField *username;
     IBOutlet UITextField *password;
@@ -31,7 +31,11 @@
     NSArray *twitterAccounts;
     UIView *waiting;
     Singleton *globle;
-    
+    UIAlertView *warningAlert ;
+	UIAlertView *discardAlert ;
+	UIAlertView *deleteAlert ;
+	UIAlertView *editAlert ;
+    UIAlertView *inAppAlert ;
 }
 
 @property(nonatomic, retain) IBOutlet UITextField *username;
@@ -57,7 +61,7 @@
 -(void)createUser:(NSString *)userName password:(NSString *)pwd;
 
 
--(void)signIn:(BOOL)validated username:(NSString *)userName password:(NSString *)pwd;
+-(BOOL)CheckUserExists :(NSString *)userName password:(NSString *)pwd;
 -(BOOL)twitterAccountExist:(NSString *)userId;
 -(void)getTwitterAccounts:(id)delegate;
 -(void)setAlertForSettingPage :(id)delegate;

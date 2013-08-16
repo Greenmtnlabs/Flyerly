@@ -320,7 +320,7 @@
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="cross_icon.png">{23, 23}</string>
-			<string key="pencil_icon.png">{30, 28}</string>
+			<string key="pencil_icon.png">{30, 29}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">2083</string>
 	</data>

@@ -113,7 +113,7 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    self.navigationItem.hidesBackButton = YES;
     if(IS_IPHONE_5){
         tView = [[UITableView alloc]initWithFrame:CGRectMake(0, 44, 320, 510) style:UITableViewStyleGrouped];
     }else{
@@ -155,8 +155,14 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
     [helpButton addTarget:self action:@selector(loadHelpController) forControlEvents:UIControlEventTouchUpInside];
     [helpButton setImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
     UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:helpButton];
+   
+    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)];
+    [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+    [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
+    [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
 
-    return [NSMutableArray arrayWithObjects:leftBarButton,nil];
+    return [NSMutableArray arrayWithObjects:backBarButton,leftBarButton,nil];
 }
 
 -(void)loadHelpController{
@@ -395,6 +401,14 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
     [super dealloc];
 }
 
-
+-(void)goBack{
+    if(IS_IPHONE_5){
+        launchCotroller = [[LauchViewController alloc]initWithNibName:@"LauchViewControllerIPhone5" bundle:nil];
+    }   else{
+        launchCotroller = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
+    }
+    
+	[self.navigationController pushViewController:launchCotroller animated:YES];
+}
 @end
 
