@@ -33,8 +33,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
 	// Do any additional setup after loading the view.
-    
+    globle = [Singleton RetrieveSingleton];
     self.navigationController.navigationBarHidden = NO;
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
 
@@ -148,7 +149,7 @@
     }    
     [self performSelectorOnMainThread:@selector(pushViewController:) withObject:launchController waitUntilDone:YES];*/
     
-
+    globle.twitterUser = nil;
     [self showLoadingView:@"Signing In..."];
     
     if([self validate]){
@@ -163,28 +164,37 @@
 
 -(void)signIn:(BOOL)validated username:(NSString *)userName password:(NSString *)pwd{
     NSError *loginError = nil;
+    NSString *s;
     NSLog(@"email.text %@",userName);
     NSLog(@"password %@",pwd);
 
-    
-    [PFUser logInWithUsername:userName password:pwd error:&loginError];
-    if(loginError){
-        int ercode =[ [loginError.userInfo objectForKey:@"code"] integerValue];
-        if (ercode == 101){
-            globle = [Singleton RetrieveSingleton];
-            globle.twitterUser = [NSString stringWithFormat:@"%@",userName];
-                NSLog(@"%@",globle.twitterUser);
+    PFQuery *query = [PFUser query];
+    [query whereKey:@"username" equalTo:userName];
+    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
+        
+        dbUsername = [object objectForKey:@"username"];
+        
+        if(!dbUsername){
+           [self removeLoadingView];
             registerController = [[RegisterController alloc]initWithNibName:@"RegisterController" bundle:nil];
             [self.navigationController pushViewController:registerController animated:YES];
-            
-        }else{
-            NSString *errorValue = [loginError.userInfo objectForKey:@"error"];
+
+        }}];
+    
+    [PFUser logInWithUsername:userName password:pwd error:&loginError];
+    NSString *errorValue = [loginError.userInfo objectForKey:@"error"];
+
+    if(loginError){
+        if(dbUsername){
             [self removeLoadingView];
-            [self showAlert:@"Warning!" message:errorValue];
+            [self showAlert:@"Flyerly Messege!" message:@"UserName or Password not correct"];
+        }else{
+            [self removeLoadingView];
+            [self showAlert:@"Flyerly Warning!" message:errorValue];
         }
         
     }else{
-        globle.twitterUser = nil;
+        
         NSLog(@"Email: %@", userName);
         NSLog(@"Path: %@", [AccountController getPathFromEmail:userName]);
         FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
@@ -253,7 +263,6 @@
 }
 
 -(IBAction)onSignInTwitter{
-
     if([AddFriendsController connected]){
         act.hidden = NO;
         waiting.hidden = NO;
@@ -287,7 +296,7 @@
                         
                         //Convert twitter username to email
                         NSString *twitterEmail = [AccountController getPathFromEmail:[acct username]];
-                        
+                        globle.twitterUser = twitterEmail;
                         // sign in
                         [self signIn:YES username:twitterEmail password:@"null"];
                         act.hidden = YES;

@@ -36,6 +36,7 @@
     Singleton *globle;
     NSArray *twitterAccounts;
     UIView *waiting;
+    NSString *dbUsername;
 }
 
 @property(nonatomic, retain) IBOutlet UIImageView *emailImage;

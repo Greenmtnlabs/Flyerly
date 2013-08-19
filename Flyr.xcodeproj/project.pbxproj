@@ -405,6 +405,12 @@
 		2034BFC517BE468A003C15B0 /* save.png in Resources */ = {isa = PBXBuildFile; fileRef = 2034BFC317BE4647003C15B0 /* save.png */; };
 		2034BFC817BE483E003C15B0 /* check_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2034BFC617BE47C7003C15B0 /* check_icon.png */; };
 		2034BFC917BE483E003C15B0 /* check_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2034BFC717BE47E0003C15B0 /* check_icon@2x.png */; };
+		208E35A217C1F5C500CE54BE /* SignInViewControllerIPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 208E35A117C1F5C500CE54BE /* SignInViewControllerIPhone5.xib */; };
+		208E35A417C20CC700CE54BE /* RegisterViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 208E35A317C20CC700CE54BE /* RegisterViewController_iPhone5.xib */; };
+		208E35A717C20E0100CE54BE /* tick.png in Resources */ = {isa = PBXBuildFile; fileRef = 208E35A517C20E0100CE54BE /* tick.png */; };
+		208E35A817C20E0100CE54BE /* tick@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 208E35A617C20E0100CE54BE /* tick@2x.png */; };
+		208E35AA17C2246C00CE54BE /* AcountViewControlleriPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 208E35A917C2246C00CE54BE /* AcountViewControlleriPhone5.xib */; };
+		208E35AC17C224B100CE54BE /* welcome_bg-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 208E35AB17C224B100CE54BE /* welcome_bg-568h@2x.png */; };
 		20D7473B17BE4D1100966BA6 /* pencil_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 20D7473917BE4D1100966BA6 /* pencil_icon.png */; };
 		20D7473C17BE4D1100966BA6 /* pencil_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20D7473A17BE4D1100966BA6 /* pencil_icon@2x.png */; };
 		20D7474017BE77E900966BA6 /* splash_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 20D7473E17BE77E900966BA6 /* splash_bg.png */; };
@@ -1535,6 +1541,12 @@
 		2034BFC317BE4647003C15B0 /* save.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = save.png; sourceTree = "<group>"; };
 		2034BFC617BE47C7003C15B0 /* check_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check_icon.png; sourceTree = "<group>"; };
 		2034BFC717BE47E0003C15B0 /* check_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "check_icon@2x.png"; sourceTree = "<group>"; };
+		208E35A117C1F5C500CE54BE /* SignInViewControllerIPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignInViewControllerIPhone5.xib; sourceTree = "<group>"; };
+		208E35A317C20CC700CE54BE /* RegisterViewController_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegisterViewController_iPhone5.xib; sourceTree = "<group>"; };
+		208E35A517C20E0100CE54BE /* tick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tick.png; sourceTree = "<group>"; };
+		208E35A617C20E0100CE54BE /* tick@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tick@2x.png"; sourceTree = "<group>"; };
+		208E35A917C2246C00CE54BE /* AcountViewControlleriPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AcountViewControlleriPhone5.xib; sourceTree = "<group>"; };
+		208E35AB17C224B100CE54BE /* welcome_bg-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "welcome_bg-568h@2x.png"; sourceTree = "<group>"; };
 		20D7473917BE4D1100966BA6 /* pencil_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pencil_icon.png; sourceTree = "<group>"; };
 		20D7473A17BE4D1100966BA6 /* pencil_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pencil_icon@2x.png"; sourceTree = "<group>"; };
 		20D7473E17BE77E900966BA6 /* splash_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash_bg.png; sourceTree = "<group>"; };
@@ -2621,7 +2633,7 @@
 		0DF3A361108DF47400D6C887 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				20D7473D17BE77C800966BA6 /* BackGround */,
+				20D7473D17BE77C800966BA6 /* NewLayOuts */,
 				2034BFC617BE47C7003C15B0 /* check_icon.png */,
 				2034BFC717BE47E0003C15B0 /* check_icon@2x.png */,
 				0F805ACD179E92AC002AEA24 /* flash_icon_auto.png */,
@@ -3371,9 +3383,12 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		20D7473D17BE77C800966BA6 /* BackGround */ = {
+		20D7473D17BE77C800966BA6 /* NewLayOuts */ = {
 			isa = PBXGroup;
 			children = (
+				208E35AB17C224B100CE54BE /* welcome_bg-568h@2x.png */,
+				208E35A517C20E0100CE54BE /* tick.png */,
+				208E35A617C20E0100CE54BE /* tick@2x.png */,
 				20D7476A17BE993700966BA6 /* Zpassword_box.png */,
 				20D7476B17BE993700966BA6 /* Zpassword_box@2x.png */,
 				20D7476217BE8EE100966BA6 /* Zqemail_box.png */,
@@ -3393,7 +3408,7 @@
 				20D7473E17BE77E900966BA6 /* splash_bg.png */,
 				20D7473F17BE77E900966BA6 /* splash_bg@2x.png */,
 			);
-			name = BackGround;
+			name = NewLayOuts;
 			sourceTree = "<group>";
 		};
 		20F4D8E217BA40A5007B2DF5 /* MyGlobleClass */ = {
@@ -3477,6 +3492,9 @@
 				0F80C38C178578E400D36795 /* RegisterController.xib */,
 				0F80C3911785815300D36795 /* SigninController.xib */,
 				2034BFC017BE3F11003C15B0 /* MainSettingViewController_iPhone5.xib */,
+				208E35A117C1F5C500CE54BE /* SignInViewControllerIPhone5.xib */,
+				208E35A317C20CC700CE54BE /* RegisterViewController_iPhone5.xib */,
+				208E35A917C2246C00CE54BE /* AcountViewControlleriPhone5.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -4819,6 +4837,12 @@
 				20D7476517BE8EE200966BA6 /* Zqemail_box@2x.png in Resources */,
 				20D7476C17BE993800966BA6 /* Zpassword_box.png in Resources */,
 				20D7476D17BE993800966BA6 /* Zpassword_box@2x.png in Resources */,
+				208E35A217C1F5C500CE54BE /* SignInViewControllerIPhone5.xib in Resources */,
+				208E35A417C20CC700CE54BE /* RegisterViewController_iPhone5.xib in Resources */,
+				208E35A717C20E0100CE54BE /* tick.png in Resources */,
+				208E35A817C20E0100CE54BE /* tick@2x.png in Resources */,
+				208E35AA17C2246C00CE54BE /* AcountViewControlleriPhone5.xib in Resources */,
+				208E35AC17C224B100CE54BE /* welcome_bg-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

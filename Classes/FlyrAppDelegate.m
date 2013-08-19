@@ -97,12 +97,13 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 
         if(IS_IPHONE_5){
             lauchController = [[LauchViewController alloc]initWithNibName:@"LauchViewControllerIPhone5" bundle:nil];
+            accountController = [[AccountController alloc]initWithNibName:@"AcountViewControlleriPhone5" bundle:nil];
+
         }else{
             lauchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
+            accountController = [[AccountController alloc]initWithNibName:@"AccountController" bundle:nil];
         }
         [navigationController pushViewController:lauchController animated:NO];
-        
-        accountController = [[AccountController alloc]initWithNibName:@"AccountController" bundle:nil];
         [navigationController pushViewController:accountController animated:NO];
         [window addSubview:[navigationController view]];
     }
@@ -303,7 +304,11 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     } else {
         
         NSLog(@"User already Greeted !");
-        accountController = [[AccountController alloc]initWithNibName:@"AccountController" bundle:nil];
+        if(IS_IPHONE_5){
+            accountController = [[AccountController alloc]initWithNibName:@"AcountViewControlleriPhone5" bundle:nil];
+        }else{
+            accountController = [[AccountController alloc]initWithNibName:@"AccountController" bundle:nil];
+        }
         [navigationController pushViewController:accountController animated:NO];
 
 /*

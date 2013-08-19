@@ -51,7 +51,7 @@ static ShareProgressView *tumblrPogressView;
  * pop to root view / main screen
  */
 -(void) callMenu {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)viewDidLoad {
