@@ -155,6 +155,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     if(IS_IPHONE_5){
         [signUpFacebook setFrame:CGRectMake(34, 360, 253, 40)];
         [signUpTwitter setFrame:CGRectMake(34, 395, 253, 40)];
+        [act setFrame:CGRectMake(227, 400, 20, 20)];
     }
 
     // Setup welcome button
@@ -314,6 +315,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
         //[self performSelectorOnMainThread:@selector(pushViewController:) withObject:launchController waitUntilDone:YES];
 
     }
+    [self.view release];
     act.hidden = YES;
     waiting.hidden = YES;
 }
@@ -698,6 +700,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     
     [actionSheet showInView:self.view];
     
+    
 }
 
 
@@ -720,14 +723,13 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
         username.text = twitterUser;
         password.text = @"null";
         confirmPassword.text = @"null";
-        /*
+        
         if([self CheckUserExists:twitterUser password:@"null"])
         {
             warningAlert = [[UIAlertView  alloc]initWithTitle:@"Flyerly Account Already Exists" message:@"Please sign in using existing credentials" delegate:self cancelButtonTitle:@"Sign In" otherButtonTitles:@"Cancel",nil];
             [warningAlert show];
             
         }
-         */
 
        // [self signIn:YES username:twitterUser password:@"null"];
     }

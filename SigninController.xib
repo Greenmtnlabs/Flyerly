@@ -226,13 +226,13 @@
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">facebook_login.png</string>
 						</object>
-						<object class="IBUIFontDescription" key="IBUIFontDescription" id="578123330">
+						<object class="IBUIFontDescription" key="IBUIFontDescription" id="929227972">
 							<string key="name">HelveticaNeue-Bold</string>
 							<string key="family">Helvetica Neue</string>
 							<int key="traits">2</int>
 							<double key="pointSize">12</double>
 						</object>
-						<object class="NSFont" key="IBUIFont" id="117670740">
+						<object class="NSFont" key="IBUIFont" id="861401459">
 							<string key="NSName">HelveticaNeue-Bold</string>
 							<double key="NSSize">12</double>
 							<int key="NSfFlags">16</int>
@@ -259,8 +259,8 @@
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">twitter_login.png</string>
 						</object>
-						<reference key="IBUIFontDescription" ref="578123330"/>
-						<reference key="IBUIFont" ref="117670740"/>
+						<reference key="IBUIFontDescription" ref="929227972"/>
+						<reference key="IBUIFont" ref="861401459"/>
 					</object>
 					<object class="IBUIButton" id="911453800">
 						<reference key="NSNextResponder" ref="186061059"/>
@@ -299,7 +299,6 @@
 						<string key="NSFrame">{{228, 416}, {20, 20}}</string>
 						<reference key="NSSuperview" ref="186061059"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -341,8 +340,8 @@
 						</object>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">0</int>
-						<reference key="IBUIFontDescription" ref="578123330"/>
-						<reference key="IBUIFont" ref="117670740"/>
+						<reference key="IBUIFontDescription" ref="929227972"/>
+						<reference key="IBUIFont" ref="861401459"/>
 						<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 					</object>
 					<object class="IBUILabel" id="231095133">
