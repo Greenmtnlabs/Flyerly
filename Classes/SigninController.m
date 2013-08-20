@@ -36,8 +36,18 @@
 
 	// Do any additional setup after loading the view.
     globle = [Singleton RetrieveSingleton];
+    
+    NSMutableAttributedString *titleString = [[NSMutableAttributedString alloc] initWithString:@"Forgot Password?"];
+    
+    // making text property to underline text-
+    [titleString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, [titleString length])];
+    
+    // using text on button
+    [forgetPassword1 setAttributedTitle: titleString forState:UIControlStateNormal];
+    forgetPassword1.titleLabel.textColor = [UIColor grayColor];
+    
     self.navigationController.navigationBarHidden = NO;
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage   imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
 
     //set title
     UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-35, -6, 50, 50)] autorelease];
@@ -182,16 +192,11 @@
         }}];
     
     [PFUser logInWithUsername:userName password:pwd error:&loginError];
-    NSString *errorValue = [loginError.userInfo objectForKey:@"error"];
+   // NSString *errorValue = [loginError.userInfo objectForKey:@"error"];
 
     if(loginError){
-        if(dbUsername){
             [self removeLoadingView];
-            [self showAlert:@"Flyerly Messege!" message:@"UserName or Password not correct"];
-        }else{
-            [self removeLoadingView];
-            [self showAlert:@"Flyerly Warning!" message:errorValue];
-        }
+            [self showAlert:@"Flyerly Warning!" message:@"Username or Password is incorrect"];
         
     }else{
         
@@ -252,8 +257,8 @@
             [appDelegate.facebook requestWithGraphPath:@"me" andDelegate:self];
             
         } else {
-            
-            [appDelegate.facebook authorize:[NSArray arrayWithObjects: @"read_stream",
+           // [appDelegate.facebook  requestWithGraphPath:@"me" andDelegate:self ];
+            [appDelegate.facebook  authorize:[NSArray arrayWithObjects: @"read_stream",
                                              @"publish_stream", @"email", nil]];
         }
     }else{

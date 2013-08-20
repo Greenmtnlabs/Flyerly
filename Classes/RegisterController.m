@@ -46,13 +46,13 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     * viewRect.size.height;
     CGFloat heightFraction = numerator / denominator;
     
-    if (heightFraction < 0.1)
+    if (heightFraction < 0.2)
     {
         heightFraction = 0.0;
     }
-    else if (heightFraction >= 0.2)
+    else if (heightFraction >= 0.5)
     {
-        heightFraction = 0.5;
+        heightFraction = 0.8;
     }
     
     UIInterfaceOrientation orientation =
@@ -137,7 +137,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     //self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Register" rect:CGRectMake(-50, -6, 50, 50)];
     UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-50, -6, 50, 50)] autorelease];
     label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont fontWithName:TITLE_FONT size:18];
+    label.font = [UIFont fontWithName:@"Helvetica-Bold" size:20.0 ];
     label.textAlignment = UITextAlignmentCenter;
     label.textColor = [UIColor whiteColor];
     label.text = @"REGISTER";
@@ -152,7 +152,11 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     username.clearButtonMode = UITextFieldViewModeWhileEditing;
     password.clearButtonMode = UITextFieldViewModeWhileEditing;
     confirmPassword.clearButtonMode = UITextFieldViewModeWhileEditing;
-    
+    if(IS_IPHONE_5){
+        [signUpFacebook setFrame:CGRectMake(34, 360, 253, 40)];
+        [signUpTwitter setFrame:CGRectMake(34, 395, 253, 40)];
+    }
+
     // Setup welcome button
     UIButton *welcomeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)];
    // [welcomeButton setTitle:@" Welcome" forState:UIControlStateNormal];
@@ -163,7 +167,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarButton,nil]];
 
     
-    UIButton *signUpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)];
+    UIButton *signUpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 29)];
     // [welcomeButton setTitle:@" Welcome" forState:UIControlStateNormal];
     [signUpButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
     [signUpButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];

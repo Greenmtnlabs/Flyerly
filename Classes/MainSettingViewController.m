@@ -146,9 +146,14 @@
         [self.navigationController pushViewController:oldsettingveiwcontroller animated:YES];
     }else if([cellText isEqualToString:@"Sign Out"]){
         [self signOut];
-        selectedCell.textLabel.text = @"Sign Out Successfully";
-        actController = [[AccountController alloc]initWithNibName:@"AccountController" bundle:nil];
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        //selectedCell.textLabel.text = @"Sign Out Successfully";
+        AccountController *actaController = [AccountController alloc];
+        if(IS_IPHONE_5){
+            [actaController initWithNibName:@"AcountViewControlleriPhone5" bundle:nil];
+        }else{
+            [actaController initWithNibName:@"AccountController" bundle:nil];
+        }
+        [self.navigationController pushViewController:actaController animated:YES];
     
     }
     

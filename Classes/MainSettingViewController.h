@@ -10,7 +10,8 @@
 #import "SettingViewController.h"
 #import "FlyrAppDelegate.h"
 #import "AccountController.h"
-	
+#import "Common.h"
+@class AccountController;
 @interface MainSettingViewController : UIViewController{
 
     UITableView *tableView;
@@ -18,7 +19,7 @@
     NSMutableArray *groupCtg;
     SettingViewController *oldsettingveiwcontroller;
     UISwitch *mySwitch;
-    AccountController   *actController;
+    AccountController   *actaController;
 
 }
 @property (strong, nonatomic)IBOutlet UITableView *tableView;

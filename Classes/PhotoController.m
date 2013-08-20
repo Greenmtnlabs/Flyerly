@@ -2023,7 +2023,7 @@ int arrangeLayerIndex;
 	[menuButton addTarget:self action:@selector(callMenu) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *leftBarMenuButton = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
     
-    UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 13, 16)];
+    UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 16, 21)];
     [helpButton addTarget:self action:@selector(loadHelpController) forControlEvents:UIControlEventTouchUpInside];
     [helpButton setBackgroundImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
     UIBarButtonItem *leftBarHelpButton = [[UIBarButtonItem alloc] initWithCustomView:helpButton];
@@ -3162,9 +3162,9 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
                 [layerButton addGestureRecognizer:longPressRecognizer];
                 
                 UIImage *image = [UIImage imageNamed:@"cross"];
-                image = [PhotoController imageWithImage:image scaledToSize:CGSizeMake(15, 15)];
+                image = [PhotoController imageWithImage:image scaledToSize:CGSizeMake(30, 29)];
                 UIImage *pencilImage = [UIImage imageNamed:@"pencil_icon"];
-                pencilImage = [PhotoController imageWithImage:pencilImage scaledToSize:CGSizeMake(15, 15)];
+                pencilImage = [PhotoController imageWithImage:pencilImage scaledToSize:CGSizeMake(30, 29)];
 
                 UIButton *crossButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 50)];
                 [crossButton setImage:image forState:UIControlStateNormal];
@@ -3218,9 +3218,9 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
                 [layerButton addGestureRecognizer:longPressRecognizer];
                 
                 UIImage *image = [UIImage imageNamed:@"cross"];
-                image = [PhotoController imageWithImage:image scaledToSize:CGSizeMake(15, 15)];
+                image = [PhotoController imageWithImage:image scaledToSize:CGSizeMake(30, 29)];
                 UIImage *pencilImage = [UIImage imageNamed:@"pencil_icon"];
-                pencilImage = [PhotoController imageWithImage:pencilImage scaledToSize:CGSizeMake(15, 15)];
+                pencilImage = [PhotoController imageWithImage:pencilImage scaledToSize:CGSizeMake(30, 29)];
 
                 UIButton *crossButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 50)];
                 [crossButton setImage:image forState:UIControlStateNormal];
@@ -3272,9 +3272,9 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
                 [layerButton addGestureRecognizer:longPressRecognizer];
                 
                 UIImage *image = [UIImage imageNamed:@"cross"];
-                image = [PhotoController imageWithImage:image scaledToSize:CGSizeMake(15, 15)];
+                image = [PhotoController imageWithImage:image scaledToSize:CGSizeMake(30, 29)];
                 UIImage *pencilImage = [UIImage imageNamed:@"pencil_icon"];
-                pencilImage = [PhotoController imageWithImage:pencilImage scaledToSize:CGSizeMake(15, 15)];
+                pencilImage = [PhotoController imageWithImage:pencilImage scaledToSize:CGSizeMake(30, 29)];
 
                 UIButton *crossButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 50)];
                 [crossButton setImage:image forState:UIControlStateNormal];
@@ -3327,9 +3327,9 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
                 
                 
                 UIImage *image = [UIImage imageNamed:@"cross"];
-                image = [PhotoController imageWithImage:image scaledToSize:CGSizeMake(15, 15)];
+                image = [PhotoController imageWithImage:image scaledToSize:CGSizeMake(30, 29)];
                 UIImage *pencilImage = [UIImage imageNamed:@"pencil_icon"];
-                pencilImage = [PhotoController imageWithImage:pencilImage scaledToSize:CGSizeMake(15, 15)];
+                pencilImage = [PhotoController imageWithImage:pencilImage scaledToSize:CGSizeMake(30, 29)];
                 
                 UIButton *crossButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 50)];
                 [crossButton setImage:image forState:UIControlStateNormal];
