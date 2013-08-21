@@ -51,7 +51,13 @@ static ShareProgressView *tumblrPogressView;
  * pop to root view / main screen
  */
 -(void) callMenu {
-    [self.navigationController popViewControllerAnimated:YES];
+    LauchViewController   *launchController = [[LauchViewController alloc] autorelease];
+    if (IS_IPHONE_5) {
+        [launchController initWithNibName:@"LauchViewControllerIPhone5" bundle:nil];
+    }else{
+        [launchController initWithNibName:@"LauchViewController" bundle:nil];
+    }
+    [self.navigationController pushViewController:launchController animated:YES];
 }
 
 - (void)viewDidLoad {

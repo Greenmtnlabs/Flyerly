@@ -135,14 +135,14 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 
     //set title
     //self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Register" rect:CGRectMake(-50, -6, 50, 50)];
-    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-50, -6, 50, 50)] autorelease];
+    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-50, -6, 150, 80)] autorelease];
     label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont fontWithName:@"Helvetica-Bold" size:20.0 ];
+    label.font = [UIFont fontWithName:@"Avenir Next Bold" size:12.0 ];
     label.textAlignment = UITextAlignmentCenter;
     label.textColor = [UIColor whiteColor];
+//    label.backgroundColor = [UIColor blueColor ];
     label.text = @"REGISTER";
     self.navigationItem.titleView = label;
-
     // remove borders
     username.borderStyle = UITextBorderStyleNone;
     password.borderStyle = UITextBorderStyleNone;
@@ -152,12 +152,13 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     username.clearButtonMode = UITextFieldViewModeWhileEditing;
     password.clearButtonMode = UITextFieldViewModeWhileEditing;
     confirmPassword.clearButtonMode = UITextFieldViewModeWhileEditing;
+    /*
     if(IS_IPHONE_5){
         [signUpFacebook setFrame:CGRectMake(34, 360, 253, 40)];
         [signUpTwitter setFrame:CGRectMake(34, 395, 253, 40)];
         [act setFrame:CGRectMake(227, 400, 20, 20)];
     }
-
+*/
     // Setup welcome button
     UIButton *welcomeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)];
    // [welcomeButton setTitle:@" Welcome" forState:UIControlStateNormal];
@@ -330,6 +331,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
             
             ACAccountStore *account = [[ACAccountStore alloc] init];
             ACAccountType *accountType = [account accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+            
             
             // Request access from the user to access their Twitter account
             [account requestAccessToAccountsWithType:accountType withCompletionHandler:^(BOOL granted, NSError *error) {
@@ -686,19 +688,24 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     
     
     //loop through each account and show them on UIAction sheet for selection
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:@"Choose Account" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles: nil];
+        
+        for (int i = 0; i < accountArray.count; i++) {
+            [actionSheet addButtonWithTitle:[accountArray objectAtIndex:i]];
+        }
+        
+        [actionSheet addButtonWithTitle:@"Cancel"];
+        actionSheet.cancelButtonIndex = accountArray.count;
+        
+        
+        [actionSheet showInView:self.view];
+    });
     
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Select Account" delegate:self  cancelButtonTitle:nil
-                                               destructiveButtonTitle:nil otherButtonTitles:nil];
-    
-    for (int i = 0; i < accountArray.count; i++) {
-        [actionSheet addButtonWithTitle:[accountArray objectAtIndex:i]];
-    }
-    
-    [actionSheet addButtonWithTitle:@"Cancel"];
-    actionSheet.cancelButtonIndex = accountArray.count;
-    
-    
-    [actionSheet showInView:self.view];
+//    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Select Account" delegate:self  cancelButtonTitle:nil
+//                                               destructiveButtonTitle:nil otherButtonTitles:nil];
+
+
     
     
 }

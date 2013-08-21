@@ -16,8 +16,9 @@
 #import "ShareProgressView.h"
 #import "OLBTwitpicEngine.h"
 #import "BitlyURLShortener.h"
+#import "LauchViewController.h"
 
-@class FlyrViewController;
+@class FlyrViewController,LauchViewController;
 @class SaveFlyerController;
 @class LoadingView;
 
@@ -55,6 +56,7 @@
 	FlyrViewController *fvController;
 	SaveFlyerController *svController;
 	LoadingView *loadingView;
+    LauchViewController  *launchController;
     UIDocumentInteractionController *dic;
     
     NSMutableArray  *photoTitles;         // Titles of images

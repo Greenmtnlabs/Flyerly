@@ -191,9 +191,9 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
     //self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Saved" rect:CGRectMake(-30, -6, 50, 50)];
 
     // Create left bar help button
-    UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 54, 35)];
+    UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 29)];
     [shareButton addTarget:self action:@selector(doNew:) forControlEvents:UIControlEventTouchUpInside];
-    [shareButton setBackgroundImage:[UIImage imageNamed:@"create_button"] forState:UIControlStateNormal];
+    [shareButton setBackgroundImage:[UIImage imageNamed:@"pencil_icon"] forState:UIControlStateNormal];
     UIBarButtonItem *shareBarButton = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
     //UIBarButtonItem *shareBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Share" style:UIControlStateNormal
     //                                                                  target:nil action:nil ];
