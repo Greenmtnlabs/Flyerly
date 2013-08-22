@@ -5,9 +5,9 @@
   Created by Rizwan Ahmad on 4/12/13.
 
 */
-"create_flyer" = "CREATE";
-"saved_flyers" = "SAVED";
-"invite_friends" = "INVITE";
+"create_flyer" = "Create";
+"saved_flyers" = "Saved";
+"invite_friends" = "Invite";
 "contacts" = "Contacts";
 "facebook" = "Facebook";
 "twitter" = "Twitter";

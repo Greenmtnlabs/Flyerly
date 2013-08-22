@@ -32,7 +32,7 @@
 	// Do any additional setup after loading the view.
     
     [scrollView setContentSize:CGSizeMake(320, 1600)];
-    [doneButton setFrame:CGRectMake(doneButton.frame.origin.x, 1330, doneButton.frame.size.width, doneButton.frame.size.height)];
+    [doneButton setFrame:CGRectMake(doneButton.frame.origin.x, 1371, doneButton.frame.size.width, doneButton.frame.size.height)];
     
     // Create right bar button
     /*UIButton *crossButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];

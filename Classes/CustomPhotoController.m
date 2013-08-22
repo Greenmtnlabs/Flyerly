@@ -324,17 +324,33 @@ BOOL galleryExpanded = NO;
     return YES;
 }
 */
-
+-(void)goBack{
+    
+	[self.navigationController popViewControllerAnimated:YES];
+}
 - (void)viewWillAppear:(BOOL)animated {
     // Remember the state so that we may revert once we leave this screen.
     //previosNavigationBarState = self.navigationController.navigationBarHidden;
     self.navigationController.navigationBarHidden = NO;
-    
-    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Crop" style:UIBarButtonItemStyleDone target:self action:@selector(onSelectImage:)];
-    
-    [self.navigationItem setRightBarButtonItem:rightBarButton];
+    self.navigationItem.hidesBackButton = YES;
+    UIButton *welcomeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)];
+    //[welcomeButton setTitle:@"" forState:UIControlStateNormal];
+    welcomeButton.titleLabel.font = [UIFont systemFontOfSize:14.0];
+    [welcomeButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    [welcomeButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
+    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:welcomeButton];
+    [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarButton,nil]];
 
     
+    UIButton *siginBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 46, 30)];
+    [siginBtn setTitle:@"Crop" forState:UIControlStateNormal];
+    siginBtn.titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size: 12.0];
+    [siginBtn addTarget:self action:@selector(onSelectImage) forControlEvents:UIControlEventTouchUpInside];
+    [siginBtn setBackgroundImage:[UIImage imageNamed:@"signin_button"] forState:UIControlStateNormal];
+    UIBarButtonItem *righBarButton = [[UIBarButtonItem alloc] initWithCustomView:siginBtn];
+    [self.navigationItem setRightBarButtonItem:righBarButton];
+    
+
     UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-70, -6, 50, 50)] autorelease];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:TITLE_FONT size:18];

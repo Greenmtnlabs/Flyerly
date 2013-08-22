@@ -447,6 +447,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 	[addMorePhotoTabButton addTarget:self action:@selector(setAddMoreLayerTabAction:) forControlEvents:UIControlEventTouchUpInside];
 	addMorePhotoTabButton.alpha =  ALPHA0;
 	addMorePhotoTabButton.tag = 10002;
+    addMorePhotoTabButton.titleLabel.text = @"Photo";
 	[self.view addSubview:addMorePhotoTabButton];
 	
 	[addMoreSymbolTabButton setBackgroundImage:[UIImage imageNamed:@"symbolicon_button"] forState:UIControlStateNormal];

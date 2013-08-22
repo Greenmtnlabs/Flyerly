@@ -142,29 +142,38 @@ static ShareProgressView *tumblrPogressView;
         self.navigationItem.hidesBackButton = YES;
         
         // Create right bar button
-        UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 31, 30)];
+        UIButton *menuButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 31, 30)] autorelease];
         [menuButton setBackgroundImage:[UIImage imageNamed:@"menu_button"] forState:UIControlStateNormal];
         [menuButton addTarget:self action:@selector(callMenu) forControlEvents:UIControlEventTouchUpInside];
-        UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
+        UIBarButtonItem *leftBarButton = [[[UIBarButtonItem alloc] initWithCustomView:menuButton] autorelease];
 
         // Create left bar help button
-        UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 16, 21)];
+        UIButton *helpButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 16, 21)] autorelease];
         [helpButton addTarget:self action:@selector(loadHelpController) forControlEvents:UIControlEventTouchUpInside];
         [helpButton setImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
-        UIBarButtonItem *leftHelpBarButton = [[UIBarButtonItem alloc] initWithCustomView:helpButton];
+
+
+
+        UIBarButtonItem *leftHelpBarButton = [[[UIBarButtonItem alloc] initWithCustomView:helpButton] autorelease];
         [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarButton,leftHelpBarButton,nil]];
         
         [self.navigationItem setLeftBarButtonItem:leftBarButton];
 
     } else {
-        self.navigationItem.leftItemsSupplementBackButton = YES;
+        //self.navigationItem.leftItemsSupplementBackButton = YES;
+        self.navigationItem.hidesBackButton = YES;
+
+        UIButton *backButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)] autorelease];
+        [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
+        [backButton addTarget:self action:@selector(callMenu) forControlEvents:UIControlEventTouchUpInside];
+        UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
 
         // Create left bar help button
-        UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 13, 16)];
+        UIButton *helpButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 13, 16)]autorelease];
         [helpButton addTarget:self action:@selector(loadHelpController) forControlEvents:UIControlEventTouchUpInside];
         [helpButton setBackgroundImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
-        UIBarButtonItem *leftHelpBarButton = [[UIBarButtonItem alloc] initWithCustomView:helpButton];
-        [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftHelpBarButton,nil]];
+        UIBarButtonItem *leftHelpBarButton = [[[UIBarButtonItem alloc] initWithCustomView:helpButton] autorelease];
+        [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarButton,leftHelpBarButton,nil]];
 }
 
     // Set title on bar
@@ -173,7 +182,7 @@ static ShareProgressView *tumblrPogressView;
     label.font = [UIFont fontWithName:TITLE_FONT size:18];
     label.textAlignment = UITextAlignmentCenter;
     label.textColor = [UIColor whiteColor];
-    label.text = @"SHARE FLYER";
+    label.text = @"SHARE";
     self.navigationItem.titleView = label;
     
     //self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Share flyer" rect:CGRectMake(-60, -6, 50, 50)];
@@ -182,9 +191,9 @@ static ShareProgressView *tumblrPogressView;
     //[saveToCameraRollLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
     // Set font and size on camera roll text
     [locationLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
-
+/*
     // Setup flyer edit button
-    UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 25, 30)];
+    UIButton *editButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 25, 30)] autorelease];
     [editButton addTarget:self action:@selector(onEdit:) forControlEvents:UIControlEventTouchUpInside];
     [editButton setImage:[UIImage imageNamed:@"pencil_blue"] forState:UIControlStateNormal];
 
@@ -192,13 +201,15 @@ static ShareProgressView *tumblrPogressView;
     NSString *index = [FlyrViewController getFlyerNumberFromPath:imageFileName];
     editButton.tag = [index intValue];
     UIBarButtonItem *rightEditBarButton = [[UIBarButtonItem alloc] initWithCustomView:editButton];
-    
+*/
     // Setup flyer share button
     UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 33)];
     [shareButton addTarget:self action:@selector(share) forControlEvents:UIControlEventTouchUpInside];
     [shareButton setBackgroundImage:[UIImage imageNamed:@"share"] forState:UIControlStateNormal];
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
-    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,rightEditBarButton,nil]];
+    //[self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,rightEditBarButton,nil]];
+    [self.navigationItem setRightBarButtonItem:rightBarButton];
+
 
 	[UIView commitAnimations];
     [imgView addTarget:self action:@selector(showFlyerOverlay:) forControlEvents:UIControlEventTouchUpInside];

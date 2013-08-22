@@ -403,7 +403,6 @@
 		2034BFB717BE0A04003C15B0 /* next_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2034BFB517BE0A03003C15B0 /* next_button@2x.png */; };
 		2034BFBA17BE0A81003C15B0 /* help_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2034BFB817BE0A7F003C15B0 /* help_icon.png */; };
 		2034BFBB17BE0A81003C15B0 /* help_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2034BFB917BE0A80003C15B0 /* help_icon@2x.png */; };
-		2034BFC117BE3F14003C15B0 /* MainSettingViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2034BFC017BE3F11003C15B0 /* MainSettingViewController_iPhone5.xib */; };
 		2034BFC417BE468A003C15B0 /* save@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2034BFC217BE462F003C15B0 /* save@2x.png */; };
 		2034BFC517BE468A003C15B0 /* save.png in Resources */ = {isa = PBXBuildFile; fileRef = 2034BFC317BE4647003C15B0 /* save.png */; };
 		2034BFC817BE483E003C15B0 /* check_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2034BFC617BE47C7003C15B0 /* check_icon.png */; };
@@ -1549,7 +1548,6 @@
 		2034BFB517BE0A03003C15B0 /* next_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "next_button@2x.png"; sourceTree = "<group>"; };
 		2034BFB817BE0A7F003C15B0 /* help_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = help_icon.png; sourceTree = "<group>"; };
 		2034BFB917BE0A80003C15B0 /* help_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "help_icon@2x.png"; sourceTree = "<group>"; };
-		2034BFC017BE3F11003C15B0 /* MainSettingViewController_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainSettingViewController_iPhone5.xib; sourceTree = "<group>"; };
 		2034BFC217BE462F003C15B0 /* save@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "save@2x.png"; sourceTree = "<group>"; };
 		2034BFC317BE4647003C15B0 /* save.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = save.png; sourceTree = "<group>"; };
 		2034BFC617BE47C7003C15B0 /* check_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check_icon.png; sourceTree = "<group>"; };
@@ -3521,7 +3519,6 @@
 				0F80C387178561DA00D36795 /* AccountController.xib */,
 				0F80C38C178578E400D36795 /* RegisterController.xib */,
 				0F80C3911785815300D36795 /* SigninController.xib */,
-				2034BFC017BE3F11003C15B0 /* MainSettingViewController_iPhone5.xib */,
 				208E35A117C1F5C500CE54BE /* SignInViewControllerIPhone5.xib */,
 				208E35A317C20CC700CE54BE /* RegisterViewController_iPhone5.xib */,
 				208E35A917C2246C00CE54BE /* AcountViewControlleriPhone5.xib */,
@@ -4838,7 +4835,6 @@
 				2034BFB717BE0A04003C15B0 /* next_button@2x.png in Resources */,
 				2034BFBA17BE0A81003C15B0 /* help_icon.png in Resources */,
 				2034BFBB17BE0A81003C15B0 /* help_icon@2x.png in Resources */,
-				2034BFC117BE3F14003C15B0 /* MainSettingViewController_iPhone5.xib in Resources */,
 				2034BFC417BE468A003C15B0 /* save@2x.png in Resources */,
 				2034BFC517BE468A003C15B0 /* save.png in Resources */,
 				2034BFC817BE483E003C15B0 /* check_icon.png in Resources */,

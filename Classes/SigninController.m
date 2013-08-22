@@ -340,8 +340,12 @@
 }
 
 -(IBAction)onSignUp{
-    registerController = [[RegisterController alloc]initWithNibName:@"RegisterController" bundle:nil];
-    [self.navigationController pushViewController:registerController animated:YES];
+    if (IS_IPHONE_5) {
+        registerController = [[[RegisterController alloc]initWithNibName:@"RegisterViewController_iPhone5" bundle:nil] autorelease];
+    }else{
+        registerController = [[[RegisterController alloc]initWithNibName:@"RegisterController" bundle:nil] autorelease];    
+    }
+        [self.navigationController pushViewController:registerController animated:YES];
 }
 
 -(void)showAlert:(NSString *)title message:(NSString *)message{
@@ -549,18 +553,20 @@
     
     //loop through each account and show them on UIAction sheet for selection
     
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Select Account" delegate:self  cancelButtonTitle:nil
-                                               destructiveButtonTitle:nil otherButtonTitles:nil];
-    
-    for (int i = 0; i < accountArray.count; i++) {
-        [actionSheet addButtonWithTitle:[accountArray objectAtIndex:i]];
-    }
-    
-    [actionSheet addButtonWithTitle:@"Cancel"];
-    actionSheet.cancelButtonIndex = accountArray.count;
-    
-    
-    [actionSheet showInView:self.view];
+    //loop through each account and show them on UIAction sheet for selection
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:@"Choose Account" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles: nil];
+        
+        for (int i = 0; i < accountArray.count; i++) {
+            [actionSheet addButtonWithTitle:[accountArray objectAtIndex:i]];
+        }
+        
+        [actionSheet addButtonWithTitle:@"Cancel"];
+        actionSheet.cancelButtonIndex = accountArray.count;
+        
+        
+        [actionSheet showInView:self.view];
+    });
     
 }
 

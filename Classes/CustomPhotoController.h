@@ -49,5 +49,5 @@
 @property (nonatomic, retain) NSMutableArray *photoArray;
 
 - (IBAction)onSelectImage:(UIButton *)sender;
-
+-(void)goBack;
 @end
