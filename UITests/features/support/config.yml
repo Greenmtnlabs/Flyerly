@@ -1,0 +1,13 @@
+app: MyApp.app
+
+devices:
+  iPhone Simulator:
+    default: true
+    simulator: iPhone (Retina 4-inch)
+    screen: retina_ios6
+    app: /Users/mkhurramali/Library/Developer/Xcode/DerivedData/Flyr-erhvswmmoqlwbrerqighmswpvhss/Build/Products/Debug-iphonesimulator/Flyr.app
+
+  iPhone 4S:
+    UDID: lolffb28d74a6fraj2156090784avasc50725dd0
+    screen: retina_ios6
+
