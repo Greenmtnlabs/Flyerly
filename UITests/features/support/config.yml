@@ -7,6 +7,11 @@ devices:
     screen: retina_ios6
     app: /Users/mkhurramali/Library/Developer/Xcode/DerivedData/Flyr-erhvswmmoqlwbrerqighmswpvhss/Build/Products/Debug-iphonesimulator/Flyr.app
 
+  iPhone Simulator 4:
+    simulator: iPhone (Retina 3.5-inch)
+    screen: retina_ios4
+    app: /Users/mkhurramali/Library/Developer/Xcode/DerivedData/Flyr-erhvswmmoqlwbrerqighmswpvhss/Build/Products/Debug-iphonesimulator/Flyr.app
+
   iPhone 4S:
     UDID: lolffb28d74a6fraj2156090784avasc50725dd0
     screen: retina_ios6
