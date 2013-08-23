@@ -15,7 +15,7 @@
 @end
 
 @implementation HelpController
-@synthesize scrollView, doneButton, linkButton, emailButton;
+@synthesize scrollView, doneButton, linkButton, emailButton,linkFaceBook,twitLink;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -30,7 +30,6 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    
     [scrollView setContentSize:CGSizeMake(320, 1600)];
     [doneButton setFrame:CGRectMake(doneButton.frame.origin.x, 1371, doneButton.frame.size.width, doneButton.frame.size.height)];
     
@@ -61,12 +60,20 @@
     //self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Help Center" rect:CGRectMake(-60, -6, 50, 50)];
 
     if(IS_IPHONE_5){
-        emailButton = [[UIButton alloc] initWithFrame:CGRectMake(14, 876, 120, 10)];
-        linkButton = [[UIButton alloc] initWithFrame:CGRectMake(14, 889, 150, 10)];
+        emailButton = [[UIButton alloc] initWithFrame:CGRectMake(14, 1335, 120, 10)];
+        linkButton = [[UIButton alloc] initWithFrame:CGRectMake(14, 1348, 150, 10)];
+        linkFaceBook = [[UIButton alloc] initWithFrame:CGRectMake(14, 1386, 157, 10)];
+        twitLink = [[UIButton alloc] initWithFrame:CGRectMake(14, 1300, 150, 10)];
+
     } else {
-        emailButton = [[UIButton alloc] initWithFrame:CGRectMake(14, 815, 120, 10)];
-        linkButton = [[UIButton alloc] initWithFrame:CGRectMake(14, 828, 150, 10)];
+        emailButton = [[UIButton alloc] initWithFrame:CGRectMake(14, 1246, 120, 10)];
+        linkButton = [[UIButton alloc] initWithFrame:CGRectMake(14, 1257, 150, 10)];
+        linkFaceBook = [[UIButton alloc] initWithFrame:CGRectMake(14, 1386, 120, 10)];
+        twitLink = [[UIButton alloc] initWithFrame:CGRectMake(14, 1300, 150, 10)];
+
     }
+    linkFaceBook.backgroundColor = [UIColor blackColor];
+//    twitLink.backgroundColor = [UIColor blueColor];
 
     [emailButton addTarget:self action:@selector(openEmail:) forControlEvents:UIControlEventTouchUpInside];
     //emailButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:10];
@@ -80,7 +87,24 @@
     //[linkButton setTitle:@"http://www.GreenMtnLabs.com" forState:UIControlStateNormal];
     [scrollView addSubview:linkButton];
     
+    [linkFaceBook addTarget:self action:@selector(openFbLink) forControlEvents:UIControlEventTouchUpInside];
+    [scrollView addSubview:linkFaceBook];
+
+//    [twitLink addTarget:self action:@selector(openTwLink) forControlEvents:UIControlEventTouchUpInside];
+  //  [twitLink addSubview:twitLink];
+
+    
+    
 }
+
+-(void) openFbLink{
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.facebook.com/flyerlyapp"]];
+}
+
+-(void)openTwLink{
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://twitter.com/GreenMtnLabs"]];
+}
+
 
 -(void) openLink:(UIButton *)sender {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.GreenMtnLabs.com"]];

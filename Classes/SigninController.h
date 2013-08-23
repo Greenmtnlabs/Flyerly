@@ -12,7 +12,8 @@
 #import <Parse/PFLogInViewController.h>
 #import "Singleton.h"
 #import "AccountSelecter.h"
-@class AccountSelecter,Singleton,RegisterController;
+#import "ResetPWViewController.h"
+@class AccountSelecter,Singleton,RegisterController,ResetPWViewController,MyCustomCell;
 @interface SigninController : UIViewController<PFLogInViewControllerDelegate,FBRequestDelegate,FBSessionDelegate,FBDialogDelegate,FBLoginDialogDelegate ,UIActionSheetDelegate >{
     
     IBOutlet UIImageView *emailImage;
@@ -34,6 +35,7 @@
     AccountSelecter *actSelecter;
 	LoadingView *loadingView;
     Singleton *globle;
+    ResetPWViewController *passWordContrller;
     NSArray *twitterAccounts;
     UIView *waiting;
     NSString *dbUsername;

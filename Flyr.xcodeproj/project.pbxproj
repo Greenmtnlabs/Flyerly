@@ -412,6 +412,12 @@
 		2086F90E17C4C2E300664123 /* Zmain_screenbg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2086F90B17C4C2E300664123 /* Zmain_screenbg@2x.png */; };
 		2086F91117C4C96F00664123 /* cp_share.png in Resources */ = {isa = PBXBuildFile; fileRef = 2086F90F17C4C96F00664123 /* cp_share.png */; };
 		2086F91217C4C96F00664123 /* cp_share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2086F91017C4C96F00664123 /* cp_share@2x.png */; };
+		2087B6C017C73B40007A6A90 /* ResetPWViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2087B6BE17C73B40007A6A90 /* ResetPWViewController.m */; };
+		2087B6C117C73B40007A6A90 /* ResetPWViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2087B6BF17C73B40007A6A90 /* ResetPWViewController.xib */; };
+		2087B6C317C73BD5007A6A90 /* ResetPassword_5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2087B6C217C73BD5007A6A90 /* ResetPassword_5.jpg */; };
+		2087B6C717C7B07D007A6A90 /* register-bg-iPhone4.png in Resources */ = {isa = PBXBuildFile; fileRef = 2087B6C417C7B07D007A6A90 /* register-bg-iPhone4.png */; };
+		2087B6C817C7B07D007A6A90 /* register-bg-iPhone4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2087B6C517C7B07D007A6A90 /* register-bg-iPhone4@2x.png */; };
+		2087B6C917C7B07D007A6A90 /* register-bg-iPhone5.png in Resources */ = {isa = PBXBuildFile; fileRef = 2087B6C617C7B07D007A6A90 /* register-bg-iPhone5.png */; };
 		208E35A217C1F5C500CE54BE /* SignInViewControllerIPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 208E35A117C1F5C500CE54BE /* SignInViewControllerIPhone5.xib */; };
 		208E35A417C20CC700CE54BE /* RegisterViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 208E35A317C20CC700CE54BE /* RegisterViewController_iPhone5.xib */; };
 		208E35A717C20E0100CE54BE /* tick.png in Resources */ = {isa = PBXBuildFile; fileRef = 208E35A517C20E0100CE54BE /* tick.png */; };
@@ -1557,6 +1563,13 @@
 		2086F90B17C4C2E300664123 /* Zmain_screenbg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Zmain_screenbg@2x.png"; sourceTree = "<group>"; };
 		2086F90F17C4C96F00664123 /* cp_share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cp_share.png; sourceTree = "<group>"; };
 		2086F91017C4C96F00664123 /* cp_share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cp_share@2x.png"; sourceTree = "<group>"; };
+		2087B6BD17C73B40007A6A90 /* ResetPWViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResetPWViewController.h; sourceTree = "<group>"; };
+		2087B6BE17C73B40007A6A90 /* ResetPWViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResetPWViewController.m; sourceTree = "<group>"; };
+		2087B6BF17C73B40007A6A90 /* ResetPWViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ResetPWViewController.xib; path = Classes/ResetPWViewController.xib; sourceTree = "<group>"; };
+		2087B6C217C73BD5007A6A90 /* ResetPassword_5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ResetPassword_5.jpg; sourceTree = "<group>"; };
+		2087B6C417C7B07D007A6A90 /* register-bg-iPhone4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "register-bg-iPhone4.png"; sourceTree = "<group>"; };
+		2087B6C517C7B07D007A6A90 /* register-bg-iPhone4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "register-bg-iPhone4@2x.png"; sourceTree = "<group>"; };
+		2087B6C617C7B07D007A6A90 /* register-bg-iPhone5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "register-bg-iPhone5.png"; sourceTree = "<group>"; };
 		208E35A117C1F5C500CE54BE /* SignInViewControllerIPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignInViewControllerIPhone5.xib; sourceTree = "<group>"; };
 		208E35A317C20CC700CE54BE /* RegisterViewController_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegisterViewController_iPhone5.xib; sourceTree = "<group>"; };
 		208E35A517C20E0100CE54BE /* tick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tick.png; sourceTree = "<group>"; };
@@ -2424,6 +2437,8 @@
 				20F93DD117B2262200F6F88C /* MainSettingViewController.m */,
 				20F4D8DD17BA3D09007B2DF5 /* AccountSelecter.h */,
 				20F4D8DE17BA3D09007B2DF5 /* AccountSelecter.m */,
+				2087B6BD17C73B40007A6A90 /* ResetPWViewController.h */,
+				2087B6BE17C73B40007A6A90 /* ResetPWViewController.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -3404,6 +3419,9 @@
 		20D7473D17BE77C800966BA6 /* NewLayOuts */ = {
 			isa = PBXGroup;
 			children = (
+				2087B6C417C7B07D007A6A90 /* register-bg-iPhone4.png */,
+				2087B6C517C7B07D007A6A90 /* register-bg-iPhone4@2x.png */,
+				2087B6C617C7B07D007A6A90 /* register-bg-iPhone5.png */,
 				208ED65F17C4CD660097EFCE /* cp_share_selected.png */,
 				208ED66017C4CD660097EFCE /* cp_share_selected@2x.png */,
 				2086F90F17C4C96F00664123 /* cp_share.png */,
@@ -3491,6 +3509,8 @@
 				65A2126217295F1900ED0B9A /* CustomGalleryItem.xib */,
 				65CC0AB5171802DF003D0BE7 /* Settings.bundle */,
 				8D1107310486CEB800E47090 /* Flyr-Info.plist */,
+				2087B6BF17C73B40007A6A90 /* ResetPWViewController.xib */,
+				2087B6C217C73BD5007A6A90 /* ResetPassword_5.jpg */,
 				20F4D8DF17BA3D0A007B2DF5 /* AccountSelecter.xib */,
 				65E26156171C2EC400C485B5 /* AddFriendScreen.xib */,
 				E8A7347C1092CFF300661AAD /* DraftViewController.xib */,
@@ -4879,6 +4899,11 @@
 				2086F91217C4C96F00664123 /* cp_share@2x.png in Resources */,
 				208ED66117C4CD660097EFCE /* cp_share_selected.png in Resources */,
 				208ED66217C4CD660097EFCE /* cp_share_selected@2x.png in Resources */,
+				2087B6C117C73B40007A6A90 /* ResetPWViewController.xib in Resources */,
+				2087B6C317C73BD5007A6A90 /* ResetPassword_5.jpg in Resources */,
+				2087B6C717C7B07D007A6A90 /* register-bg-iPhone4.png in Resources */,
+				2087B6C817C7B07D007A6A90 /* register-bg-iPhone4@2x.png in Resources */,
+				2087B6C917C7B07D007A6A90 /* register-bg-iPhone5.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5062,6 +5087,7 @@
 				20F93DD317B2262200F6F88C /* MainSettingViewController.m in Sources */,
 				20F4D8E017BA3D0A007B2DF5 /* AccountSelecter.m in Sources */,
 				20F4D8E517BA40EA007B2DF5 /* Singleton.m in Sources */,
+				2087B6C017C73B40007A6A90 /* ResetPWViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

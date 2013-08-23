@@ -19,4 +19,6 @@
 
 
 +(Singleton *)RetrieveSingleton;
++(UIColor*)colorWithHexString:(NSString*)hex;
+
 @end

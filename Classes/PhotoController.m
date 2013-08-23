@@ -467,6 +467,27 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 	arrangeLayerTabButton.alpha =  ALPHA0;
 	arrangeLayerTabButton.tag = 10005;
 	[self.view addSubview:arrangeLayerTabButton];
+    // Changes
+    [addMoreFontTabButton setTitle:@"Text" forState:UIControlStateNormal];
+    [addMoreFontTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+    addMoreFontTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
+    
+    [addMorePhotoTabButton setTitle:@"Photo" forState:UIControlStateNormal];
+    [addMorePhotoTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+    addMorePhotoTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
+    
+    [addMoreSymbolTabButton setTitle:@"Clipart" forState:UIControlStateNormal];
+    [addMoreSymbolTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+    addMoreSymbolTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
+    
+    [arrangeLayerTabButton setTitle:@"Layers" forState:UIControlStateNormal];
+    [arrangeLayerTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+    arrangeLayerTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
+    
+    [addMoreIconTabButton setTitle:@"Symbols" forState:UIControlStateNormal];
+    [addMoreIconTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+    addMoreIconTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
+
 }
 
 -(void)viewDidLoad{
@@ -2627,6 +2648,28 @@ int arrangeLayerIndex;
 	[addMoreIconTabButton setBackgroundImage:[UIImage imageNamed:@"icon_button"] forState:UIControlStateNormal];
 	[arrangeLayerTabButton setBackgroundImage:[UIImage imageNamed:@"arrangeicon_button"] forState:UIControlStateNormal];
     
+    // Changes
+    [addMoreFontTabButton setTitle:@"Text" forState:UIControlStateNormal];
+    [addMoreFontTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+    addMoreFontTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
+    
+    [addMorePhotoTabButton setTitle:@"Photo" forState:UIControlStateNormal];
+    [addMorePhotoTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+    addMorePhotoTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
+    
+    [addMoreSymbolTabButton setTitle:@"Clipart" forState:UIControlStateNormal];
+    [addMoreSymbolTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+    addMoreSymbolTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
+    
+    [arrangeLayerTabButton setTitle:@"Layers" forState:UIControlStateNormal];
+    [arrangeLayerTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+    arrangeLayerTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
+    
+    [addMoreIconTabButton setTitle:@"Symbols" forState:UIControlStateNormal];
+    [addMoreIconTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+    addMoreIconTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
+
+    
     ((CustomLabel *)[[self textLabelLayersArray] lastObject]).alpha = 1;
     photoImgView.alpha=0;
     symbolImgView.alpha = 0;
@@ -2950,10 +2993,33 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 		[UIView setAnimationDuration:0.4f];
 
         [addMoreFontTabButton setBackgroundImage:[UIImage imageNamed:@"text_icon"] forState:UIControlStateNormal];
+
         [addMorePhotoTabButton setBackgroundImage:[UIImage imageNamed:@"image_icon"] forState:UIControlStateNormal];
         [addMoreSymbolTabButton setBackgroundImage:[UIImage imageNamed:@"symbolicon_button"] forState:UIControlStateNormal];
         [addMoreIconTabButton setBackgroundImage:[UIImage imageNamed:@"icon_button"] forState:UIControlStateNormal];
         [arrangeLayerTabButton setBackgroundImage:[UIImage imageNamed:@"arrangeicon_button"] forState:UIControlStateNormal];
+        
+        // Changes
+        [addMoreFontTabButton setTitle:@"Text" forState:UIControlStateNormal];
+        [addMoreFontTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+        addMoreFontTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
+        
+        [addMorePhotoTabButton setTitle:@"Photo" forState:UIControlStateNormal];
+        [addMorePhotoTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+        addMorePhotoTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
+        
+        [addMoreSymbolTabButton setTitle:@"Clipart" forState:UIControlStateNormal];
+        [addMoreSymbolTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+        addMoreSymbolTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
+        
+        [arrangeLayerTabButton setTitle:@"Layers" forState:UIControlStateNormal];
+        [arrangeLayerTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+        arrangeLayerTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
+        
+        [addMoreIconTabButton setTitle:@"Symbols" forState:UIControlStateNormal];
+        [addMoreIconTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+        addMoreIconTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
+
 
         [UIView commitAnimations];
         
@@ -2993,10 +3059,32 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 		textBackgrnd.alpha = ALPHA0;
 
         [addMoreFontTabButton setBackgroundImage:[UIImage imageNamed:@"text_icon"] forState:UIControlStateNormal];
+        
         [addMorePhotoTabButton setBackgroundImage:[UIImage imageNamed:@"image_icon"] forState:UIControlStateNormal];
         [addMoreSymbolTabButton setBackgroundImage:[UIImage imageNamed:@"symbolicon_button"] forState:UIControlStateNormal];
         [addMoreIconTabButton setBackgroundImage:[UIImage imageNamed:@"icon_button"] forState:UIControlStateNormal];
         [arrangeLayerTabButton setBackgroundImage:[UIImage imageNamed:@"arrangeicon_button"] forState:UIControlStateNormal];
+        // Changes
+        [addMoreFontTabButton setTitle:@"Text" forState:UIControlStateNormal];
+        [addMoreFontTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+        addMoreFontTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
+        
+        [addMorePhotoTabButton setTitle:@"Photo" forState:UIControlStateNormal];
+        [addMorePhotoTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+        addMorePhotoTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
+        
+        [addMoreSymbolTabButton setTitle:@"Clipart" forState:UIControlStateNormal];
+        [addMoreSymbolTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+        addMoreSymbolTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
+        
+        [arrangeLayerTabButton setTitle:@"Layers" forState:UIControlStateNormal];
+        [arrangeLayerTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+        arrangeLayerTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
+        
+        [addMoreIconTabButton setTitle:@"Symbols" forState:UIControlStateNormal];
+        [addMoreIconTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+        addMoreIconTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
+
 
 		[UIView commitAnimations];
         
@@ -3040,10 +3128,34 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 		[layerScrollView setAlpha:ALPHA0];
 
         [addMoreFontTabButton setBackgroundImage:[UIImage imageNamed:@"text_icon"] forState:UIControlStateNormal];
+        [addMoreFontTabButton setTitle:@"TEXT" forState:UIControlStateNormal];
+
         [addMorePhotoTabButton setBackgroundImage:[UIImage imageNamed:@"image_icon"] forState:UIControlStateNormal];
         [addMoreSymbolTabButton setBackgroundImage:[UIImage imageNamed:@"symbolicon_button"] forState:UIControlStateNormal];
         [addMoreIconTabButton setBackgroundImage:[UIImage imageNamed:@"icon_button"] forState:UIControlStateNormal];
         [arrangeLayerTabButton setBackgroundImage:[UIImage imageNamed:@"arrangeicon_button"] forState:UIControlStateNormal];
+        
+        // Changes
+        [addMoreFontTabButton setTitle:@"Text" forState:UIControlStateNormal];
+        [addMoreFontTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+        addMoreFontTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
+        
+        [addMorePhotoTabButton setTitle:@"Photo" forState:UIControlStateNormal];
+        [addMorePhotoTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+        addMorePhotoTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
+        
+        [addMoreSymbolTabButton setTitle:@"Clipart" forState:UIControlStateNormal];
+        [addMoreSymbolTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+        addMoreSymbolTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
+        
+        [arrangeLayerTabButton setTitle:@"Layers" forState:UIControlStateNormal];
+        [arrangeLayerTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+        arrangeLayerTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
+        
+        [addMoreIconTabButton setTitle:@"Symbols" forState:UIControlStateNormal];
+        [addMoreIconTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+        addMoreIconTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
+
 
 		[UIView commitAnimations];
 	}
@@ -3081,10 +3193,33 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         [layerScrollView setAlpha:ALPHA0];
 
         [addMoreFontTabButton setBackgroundImage:[UIImage imageNamed:@"text_icon"] forState:UIControlStateNormal];
+        [addMoreFontTabButton setTitle:@"TEXT" forState:UIControlStateNormal];
         [addMorePhotoTabButton setBackgroundImage:[UIImage imageNamed:@"image_icon"] forState:UIControlStateNormal];
         [addMoreSymbolTabButton setBackgroundImage:[UIImage imageNamed:@"symbolicon_button"] forState:UIControlStateNormal];
         [addMoreIconTabButton setBackgroundImage:[UIImage imageNamed:@"icon_button"] forState:UIControlStateNormal];
         [arrangeLayerTabButton setBackgroundImage:[UIImage imageNamed:@"arrangeicon_button"] forState:UIControlStateNormal];
+        
+        // Changes
+        [addMoreFontTabButton setTitle:@"Text" forState:UIControlStateNormal];
+        [addMoreFontTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+        addMoreFontTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
+        
+        [addMorePhotoTabButton setTitle:@"Photo" forState:UIControlStateNormal];
+        [addMorePhotoTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+        addMorePhotoTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
+        
+        [addMoreSymbolTabButton setTitle:@"Clipart" forState:UIControlStateNormal];
+        [addMoreSymbolTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+        addMoreSymbolTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
+        
+        [arrangeLayerTabButton setTitle:@"Layers" forState:UIControlStateNormal];
+        [arrangeLayerTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+        arrangeLayerTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
+        
+        [addMoreIconTabButton setTitle:@"Symbols" forState:UIControlStateNormal];
+        [addMoreIconTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+        addMoreIconTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
+
         
 		[UIView commitAnimations];
 	}

@@ -38,7 +38,6 @@
     globle = [Singleton RetrieveSingleton];
     
     NSMutableAttributedString *titleString = [[NSMutableAttributedString alloc] initWithString:@"Forgot Password?"];
-    
     // making text property to underline text-
     [titleString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, [titleString length])];
     
@@ -103,7 +102,9 @@
 }
 
 -(IBAction)forgetPassword{
-
+    ResetPWViewController *passWordContrller = [[ResetPWViewController alloc]initWithNibName:@"ResetPWViewController" bundle:nil];
+    [self.navigationController pushViewController:passWordContrller animated:YES ];
+/*
     [self showLoadingView:@"Wait..."];
     NSLog(@"Forget Password");
     
@@ -120,6 +121,7 @@
             [self showAlert:@"Message!" message:@"Email has been sent to your inbox to change your password."];
         }
     }];
+ */
 }
 
 -(void)showLoadingView:(NSString *)message{
@@ -174,7 +176,6 @@
 
 -(void)signIn:(BOOL)validated username:(NSString *)userName password:(NSString *)pwd{
     NSError *loginError = nil;
-    NSString *s;
     NSLog(@"email.text %@",userName);
     NSLog(@"password %@",pwd);
 
@@ -204,11 +205,11 @@
         NSLog(@"Path: %@", [AccountController getPathFromEmail:userName]);
         FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
         appDelegate.loginId = [AccountController getPathFromEmail:userName];
-        usr = [[NSUserDefaults standardUserDefaults] stringForKey:@"User"];
-         if (usr == nil) {
+        //usr = [[NSUserDefaults standardUserDefaults] stringForKey:@"User"];
+         //if (usr == nil) {
             [[NSUserDefaults standardUserDefaults]  setObject:userName forKey:@"User"];
             [[NSUserDefaults standardUserDefaults]  setObject:pwd forKey:@"Password"];
-         }
+         //}
 
         if(IS_IPHONE_5){
             launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewControllerIPhone5" bundle:nil];

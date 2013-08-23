@@ -31,39 +31,39 @@
 	
     [self setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cell_bg_first"]]];
     
-	CGRect tRect0 = CGRectMake(13, 13, 72, 77);
+	CGRect tRect0 = CGRectMake(9, 12, 72, 77);
 	cellImage = [[UIButton alloc] initWithFrame:tRect0];
 	//cellImage.backgroundColor = [UIColor clearColor];
 	//cellImage.opaque = NO;
 	[self.contentView addSubview:cellImage];
 	
-	CGRect tRect2 = CGRectMake(98, 13, 195,10);
+	CGRect tRect2 = CGRectMake(98, 12, 195,10);
 	nameLabel = [[UILabel alloc] initWithFrame:tRect2];
-    [nameLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:9]];
+    [nameLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:11]];
     [nameLabel setTextColor:[MyCustomCell colorWithHexString:@"00628f"]];
     nameLabel.backgroundColor = [UIColor clearColor];
 	[self.contentView addSubview:nameLabel];
 	
-	CGRect descriptionRect = CGRectMake(98, 18, 195,38.0f);
+	CGRect descriptionRect = CGRectMake(99, 17, 195,38.0f);
 	descriptionLabel = [[UILabel alloc] initWithFrame:descriptionRect];
     descriptionLabel.numberOfLines = 2;
-    [descriptionLabel setFont:[UIFont fontWithName:@"Signika-Regular" size:9]];
-    [descriptionLabel setTextColor:[UIColor blackColor]];
+    [descriptionLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:9]];
+    [descriptionLabel setTextColor:[UIColor darkTextColor]];
     descriptionLabel.backgroundColor = [UIColor clearColor];
 	[self.contentView addSubview:descriptionLabel];
 	
-	CGRect createdRect = CGRectMake(98, 50, 35.0f,19);
+	CGRect createdRect = CGRectMake(100, 47, 35.0f,19);
 	createLabel = [[UILabel alloc] initWithFrame:createdRect];
-    [createLabel setFont:[UIFont fontWithName:@"Signika-Regular" size:8]];
-    [createLabel setTextColor:[MyCustomCell colorWithHexString:@"929292"]];
-    [createLabel setText:@"Saved:"];
+    [createLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:8]];
+    [createLabel setTextColor:[UIColor darkTextColor]];
+    [createLabel setText:@"Created :"];
     createLabel.backgroundColor = [UIColor clearColor];
 	[self.contentView addSubview:createLabel];
 	
-	CGRect dateRect = CGRectMake(130, 50, 195,19);
+	CGRect dateRect = CGRectMake(133, 47, 195,19);
 	dateLabel = [[UILabel alloc] initWithFrame:dateRect];
-    [dateLabel setFont:[UIFont fontWithName:@"Signika-Regular" size:8]];
-    [dateLabel setTextColor:[MyCustomCell colorWithHexString:@"929292"]];
+    [dateLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:8]];
+    [dateLabel setTextColor:[UIColor darkTextColor]];
     dateLabel.backgroundColor = [UIColor clearColor];
 	[self.contentView addSubview:dateLabel];	
 	
@@ -106,7 +106,7 @@
 
     [self.cellImage setImage:image forState:UIControlStateNormal];
     
-    CGRect facebookRect = CGRectMake(95, 70, 22, 22);
+    CGRect facebookRect = CGRectMake(95, 68, 22, 22);
 	UIButton *facebookButon = [[UIButton alloc] initWithFrame:facebookRect];
     facebookButon.backgroundColor = [UIColor clearColor];
     
@@ -120,7 +120,7 @@
     facebookButon.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
 	[self.contentView addSubview:facebookButon];
 	
-	CGRect twitterRect = CGRectMake(119, 70, 22, 22);
+	CGRect twitterRect = CGRectMake(119, 68, 22, 22);
 	UIButton *twitterButon = [[UIButton alloc] initWithFrame:twitterRect];
     twitterButon.backgroundColor = [UIColor clearColor];
     
@@ -134,7 +134,7 @@
     twitterButon.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
 	[self.contentView addSubview:twitterButon];
 	
-	CGRect inboxRect = CGRectMake(143, 70, 32, 22);
+	CGRect inboxRect = CGRectMake(143, 68, 32, 22);
 	UIButton *inboxButon = [[UIButton alloc] initWithFrame:inboxRect];
     inboxButon.backgroundColor = [UIColor clearColor];
     
@@ -148,7 +148,7 @@
     inboxButon.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
 	[self.contentView addSubview:inboxButon];
 	
-	CGRect cameraRect = CGRectMake(177, 70, 29, 22);
+	CGRect cameraRect = CGRectMake(177, 68, 29, 22);
 	UIButton *cameraButon = [[UIButton alloc] initWithFrame:cameraRect];
     cameraButon.backgroundColor = [UIColor clearColor];
     
@@ -162,7 +162,7 @@
     cameraButon.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
 	[self.contentView addSubview:cameraButon];
 	
-	CGRect flickrRect = CGRectMake(208, 70, 29, 22);
+	CGRect flickrRect = CGRectMake(208, 68, 29, 22);
 	UIButton *flickrButon = [[UIButton alloc] initWithFrame:flickrRect];
     flickrButon.backgroundColor = [UIColor clearColor];
     
@@ -176,7 +176,7 @@
     flickrButon.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
 	[self.contentView addSubview:flickrButon];
 	
-	CGRect tumblrRect = CGRectMake(239, 70, 32, 22);
+	CGRect tumblrRect = CGRectMake(239, 68, 32, 22);
 	UIButton *tumblrButon = [[UIButton alloc] initWithFrame:tumblrRect];
     tumblrButon.backgroundColor = [UIColor clearColor];
     

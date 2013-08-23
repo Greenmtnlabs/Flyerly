@@ -53,7 +53,7 @@
 @property (nonatomic, retain) LoadingView *loadingView;
 @property(nonatomic, retain) IBOutlet UIActivityIndicatorView *act;
 
-
+-(void)goBack;
 -(void)onSignUp;
 -(IBAction)onSignUp;
 -(IBAction)onSignUpFacebook;

@@ -21,6 +21,7 @@
 
 @property(nonatomic, retain) IBOutlet UIButton *registerButton;
 @property(nonatomic, retain) IBOutlet UIButton *signinButton;
+@property(nonatomic, retain) IBOutlet UIButton *test;
 
 -(IBAction)onRegister;
 -(IBAction)onSignIn;

@@ -160,12 +160,12 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     }
 */
     // Setup welcome button
-    UIButton *welcomeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)];
+    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)];
    // [welcomeButton setTitle:@" Welcome" forState:UIControlStateNormal];
-    welcomeButton.titleLabel.font = [UIFont systemFontOfSize:14.0];
-    [welcomeButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
-    [welcomeButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
-    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:welcomeButton];
+    backButton.titleLabel.font = [UIFont systemFontOfSize:14.0];
+    [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
+    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarButton,nil]];
 
     
@@ -188,7 +188,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 */
 }
 
--(IBAction)goBack{
+-(void)goBack{
     
 	[self.navigationController popViewControllerAnimated:NO];
 }

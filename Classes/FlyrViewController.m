@@ -114,18 +114,35 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.hidesBackButton = YES;
+    UIImageView *img = [[UIImageView    alloc]initWithImage:[UIImage imageNamed:@"text_box"]];
+    [img setFrame:CGRectMake(8,54,230,30)];
+    
+    UITextField *searchText = [[UITextField alloc]initWithFrame:CGRectMake(15,62,240,25)];
+    searchText.placeholder = @"Search Flyer";
+    searchText.font = [UIFont systemFontOfSize:12.0];
+    //Search Boutton
+    UIButton *seaBotton = [[UIButton alloc] initWithFrame:CGRectMake(252, 54, 58, 30)];
+    [seaBotton  setTitle:@"Search" forState:UIControlStateNormal] ;
+    seaBotton.titleLabel.font = [UIFont boldSystemFontOfSize:13.0];
+    //[seaBotton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    [seaBotton setBackgroundImage:[UIImage imageNamed:@"crop_button"] forState:UIControlStateNormal];
+    [self.view addSubview:img];
+    [self.view addSubview:seaBotton];
+    [self.view addSubview:searchText];
     if(IS_IPHONE_5){
-        tView = [[UITableView alloc]initWithFrame:CGRectMake(0, 44, 320, 510) style:UITableViewStyleGrouped];
+        tView = [[UITableView alloc]initWithFrame:CGRectMake(0, 86, 320, 510) style:UITableViewStyleGrouped];
     }else{
-        tView = [[UITableView alloc]initWithFrame:CGRectMake(0, 44, 320, 416) style:UITableViewStyleGrouped];
+        tView = [[UITableView alloc]initWithFrame:CGRectMake(0, 86, 320, 416) style:UITableViewStyleGrouped];
     }
-	[self.tView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Default.png"]]];
+//	[self.tView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Default.png"]]];
 	tView.dataSource = self;
 	tView.delegate = self;
 	//tView.alpha  = .6f;
-	[self.view addSubview:tView];
-	self.tView.rowHeight =100;
-
+	
+    [self.view addSubview:tView];
+	self.tView.rowHeight =102;
+    [self.tView setBackgroundView:nil];
+    [self.tView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 	//Create sorted array with modificate date as key 
 	[self filesByModDate];
 }

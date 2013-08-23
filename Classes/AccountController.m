@@ -15,7 +15,7 @@
 @end
 
 @implementation AccountController
-@synthesize registerButton, signinButton;
+@synthesize registerButton, signinButton,test;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -31,6 +31,9 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     globle = [Singleton RetrieveSingleton];
+//    test.titleLabel.textAlignment = UITextAlignment;
+    [test setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+    test.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
 }
 
 -(void)viewWillAppear:(BOOL)animated{
