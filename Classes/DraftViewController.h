@@ -135,5 +135,5 @@
 -(IBAction)onClickSMSButton;
 -(IBAction)onClickClipboardButton;
 -(IBAction)searchNearByLocations;
-
+-(void)goback;
 @end

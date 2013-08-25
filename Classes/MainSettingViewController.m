@@ -13,7 +13,7 @@
 @end
 
 @implementation MainSettingViewController
-
+@synthesize tableView;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -26,24 +26,49 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.tableView.rowHeight =40;
+    [self.tableView setBackgroundView:nil];
+    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+
+    
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
     self.navigationItem.hidesBackButton = YES;
     
-    UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 31, 30)];
+    UIButton *menuButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 32, 30)] autorelease];
     [menuButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-    [menuButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
+    [menuButton setBackgroundImage:[UIImage imageNamed:@"menu_button"] forState:UIControlStateNormal];
     [menuButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *menuBarButton = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
-    [self.navigationItem setLeftBarButtonItem:menuBarButton];
+
+    UIButton *editButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 29)] autorelease];
+    [editButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+    [editButton setBackgroundImage:[UIImage imageNamed:@"pencil_icon"] forState:UIControlStateNormal];
+    [editButton addTarget:self action:@selector(editClick) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *editBarButton = [[[UIBarButtonItem alloc] initWithCustomView:editButton] autorelease];
+    
+    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:menuBarButton,editBarButton,nil ]];
+
+    UIButton *backButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)] autorelease];
+    [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+    [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
+    [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *backBarButton = [[[UIBarButtonItem alloc] initWithCustomView:backButton] autorelease];
+
+    UIButton *helpButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 16, 21)]autorelease];
+    [helpButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+    [helpButton setBackgroundImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
+    [helpButton addTarget:self action:@selector(gohelp) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *helpBarButton = [[[UIBarButtonItem alloc] initWithCustomView:helpButton] autorelease];
+
+    [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:backBarButton,helpBarButton,nil ]];
     
      self.navigationItem.title = @"SETTINGS";
-    groupCtg = [[NSMutableArray alloc] init];
-    [groupCtg addObject:@"Preferences"];
-    [groupCtg addObject:@"Account"];
     category = [[NSMutableArray alloc] init];
-    [category addObject:@"Sharing Setting"];
-    [category addObject:@"Save to Camera Roll"];
-    [category addObject:@"Sign Out"];
+    [category addObject:@" Sharing Options"];
+    [category addObject:@"Save to Gallery"];
+    [category addObject:@"Account Setting"];
+    [category addObject:@" Sign Out"];
 
 }
 
@@ -56,45 +81,24 @@
 #pragma TableView Events
 
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [groupCtg count];
-}
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    NSString *s =[NSString stringWithFormat:@"%@",[groupCtg objectAtIndex:section]];
-    return s;
-    
-}
-
-/*
-- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
-{
-    NSString *s;
-    s = @"Enter Shares Quantity";
-    return s;
-}
-*/
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if (section == 0) {
-         return 2;
-    }else{
-        return 1;
-    }
+        return [category count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *CellIdentifier = @"Cell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    UITableViewCell *cell = [[tableView dequeueReusableCellWithIdentifier:CellIdentifier] autorelease];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-        [[cell textLabel] setFont:[UIFont systemFontOfSize:15.0]];
+        [[cell textLabel] setFont:[UIFont fontWithName:TITLE_FONT size:14]];
 		[[cell detailTextLabel] setTextColor:[UIColor lightGrayColor]];
 		[[cell detailTextLabel] setFont:[UIFont systemFontOfSize:12.0]];
-        [cell setBackgroundColor:[UIColor whiteColor]];
+       // [cell setBackgroundColor:[UIColor whiteColor]];
         
     }
-
+    [cell setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cell_bg_first"]]];
 /*
     UILabel *lpz = [[UILabel alloc]initWithFrame:CGRectMake(150, 5, 130, 20)];
 	[lpz setBackgroundColor:[UIColor whiteColor]];
@@ -106,23 +110,22 @@
 	lpz.text = ss;
 	[cell.contentView  addSubview:lpz];
 */
-    if (indexPath.section == 0) {
-        NSString *s =[NSString stringWithFormat:@"%@",[category objectAtIndex:indexPath.row]];
+            NSString *s =[[NSString stringWithFormat:@"   %@",[category objectAtIndex:indexPath.row]] autorelease];
         cell.textLabel.text =s;
     
-        if (indexPath.row == 0)cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    UIImageView *img = [[[UIImageView alloc ]initWithFrame:CGRectMake(0, 0, 21, 20)] autorelease];
+    if (indexPath.row == 0)img.image =[UIImage imageNamed:@"share_settings"];
+    if (indexPath.row == 1)img.image =[UIImage imageNamed:@"save_gallery"];
+    if (indexPath.row == 2)img.image =[UIImage imageNamed:@"account_settings"];
+    if (indexPath.row == 3)img.image =[UIImage imageNamed:@"signout"];
+    cell.imageView.image = img.image;
+        //if (indexPath.row == 0 || indexPath.row == 2)cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
         if (indexPath.row == 1){
-            UISwitch *mySwitch = [[UISwitch alloc] initWithFrame:CGRectMake(220, 10, 0, 0)];
+            UISwitch *mySwitch = [[[UISwitch alloc] initWithFrame:CGRectMake(220, 7, 0, 0)] autorelease];
             [cell.contentView  addSubview:mySwitch];
             [mySwitch addTarget:self action:@selector(changeSwitch:) forControlEvents:UIControlEventValueChanged];
         }
-        //    UISwitch *swc = (UISwitch *); }
-    
-    }else{
-        NSString *s =[NSString stringWithFormat:@"%@",[category objectAtIndex:2]];
-        cell.textLabel.text =s;
-    }
     return cell;
 }
 
@@ -141,17 +144,18 @@
     UITableViewCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
     NSString *cellText = selectedCell.textLabel.text;
 //    indexPath.row == 0 & indexPath.section == 0
-    if ([cellText isEqualToString:@"Sharing Setting"]) {
-        oldsettingveiwcontroller = [[SettingViewController alloc]initWithNibName:@"SettingViewController" bundle:nil];
+    if (indexPath.row == 0){
+    
+    oldsettingveiwcontroller = [[SettingViewController alloc]initWithNibName:@"SettingViewController" bundle:nil];
         [self.navigationController pushViewController:oldsettingveiwcontroller animated:YES];
-    }else if([cellText isEqualToString:@"Sign Out"]){
+    }else if(indexPath.row == 3){
         [self signOut];
         //selectedCell.textLabel.text = @"Sign Out Successfully";
         AccountController *actaController = [AccountController alloc];
         if(IS_IPHONE_5){
-            [actaController initWithNibName:@"AcountViewControlleriPhone5" bundle:nil];
+            [[actaController initWithNibName:@"AcountViewControlleriPhone5" bundle:nil] autorelease];
         }else{
-            [actaController initWithNibName:@"AccountController" bundle:nil];
+            [[actaController initWithNibName:@"AccountController" bundle:nil] autorelease];
         }
         [self.navigationController pushViewController:actaController animated:YES];
     
@@ -178,8 +182,58 @@
 
 
 }
+-(IBAction)gofacbook:(id)sender{
+   // SettingViewController *oldsettingveiwcontroller =[[SettingViewController alloc]init] ;
+   // [oldsettingveiwcontroller  ];
+}
+-(IBAction)gotwitter:(id)sender{}
+-(IBAction)goemail:(id)sender{
+    MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
+    
+    if([MFMailComposeViewController canSendMail]){
+        
+        picker.mailComposeDelegate = self;
+        [picker setSubject:@"email feedback..."];
+        
+        // Set up recipients
+        NSMutableArray *toRecipients = [[[NSMutableArray alloc]init]autorelease];
+        [toRecipients addObject:@"support@greenmtnlabs.com"];
+        [picker setToRecipients:toRecipients];
+        
+        //NSString *emailBody = [NSString stringWithFormat:@"<font size='4'><a href = '%@'>Share a flyer</a></font>", @"http://www.flyer.us"];
+        //[picker setMessageBody:emailBody isHTML:YES];
+        
+        [self presentModalViewController:picker animated:YES];
+        [picker release];
+    }
+
+}
+
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
+	switch (result) {
+		case MFMailComposeResultCancelled:
+			break;
+		case MFMailComposeResultSaved:
+			break;
+		case MFMailComposeResultSent:
+			break;
+		case MFMailComposeResultFailed:
+			break;
+	}
+    
+    [controller dismissModalViewControllerAnimated:YES];
+}
+
 -(void)goBack{
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+
+-(void)editClick{}
+-(void)gohelp{
+    HelpController *helpController = [[[HelpController alloc]initWithNibName:@"HelpController" bundle:nil] autorelease];
+    [self.navigationController pushViewController:helpController animated:YES];
+
 }
 
 

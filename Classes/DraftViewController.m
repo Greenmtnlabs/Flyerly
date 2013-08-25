@@ -50,6 +50,11 @@ static ShareProgressView *tumblrPogressView;
 /*
  * pop to root view / main screen
  */
+
+-(void)goback{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 -(void) callMenu {
     LauchViewController   *launchController = [[LauchViewController alloc] autorelease];
     if (IS_IPHONE_5) {
@@ -165,11 +170,11 @@ static ShareProgressView *tumblrPogressView;
 
         UIButton *backButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)] autorelease];
         [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
-        [backButton addTarget:self action:@selector(callMenu) forControlEvents:UIControlEventTouchUpInside];
+        [backButton addTarget:self action:@selector(goback) forControlEvents:UIControlEventTouchUpInside];
         UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
 
         // Create left bar help button
-        UIButton *helpButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 13, 16)]autorelease];
+        UIButton *helpButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 16, 21)]autorelease];
         [helpButton addTarget:self action:@selector(loadHelpController) forControlEvents:UIControlEventTouchUpInside];
         [helpButton setBackgroundImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
         UIBarButtonItem *leftHelpBarButton = [[[UIBarButtonItem alloc] initWithCustomView:helpButton] autorelease];
@@ -190,7 +195,7 @@ static ShareProgressView *tumblrPogressView;
     // Set font and size on camera roll text
     //[saveToCameraRollLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
     // Set font and size on camera roll text
-    [locationLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
+    [locationLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:13]];
 /*
     // Setup flyer edit button
     UIButton *editButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 25, 30)] autorelease];

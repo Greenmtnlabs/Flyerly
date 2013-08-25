@@ -88,7 +88,7 @@
 	imgView.image = flyrImg;
 	[self.view addSubview:imgView];
 	
-	twitterButton =[UIButton buttonWithType:UIButtonTypeRoundedRect];
+	twitterButton =[[UIButton buttonWithType:UIButtonTypeRoundedRect] autorelease ];
 	twitterButton.frame = CGRectMake(1, 400, 105, 59);
 	[twitterButton setBackgroundImage:[UIImage imageNamed:@"twit1.png"] forState:UIControlStateNormal];
 	[twitterButton setBackgroundImage:[UIImage imageNamed:@"twit.png"] forState:UIControlStateSelected];

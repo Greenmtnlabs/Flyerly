@@ -414,7 +414,6 @@
 		2086F91217C4C96F00664123 /* cp_share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2086F91017C4C96F00664123 /* cp_share@2x.png */; };
 		2087B6C017C73B40007A6A90 /* ResetPWViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2087B6BE17C73B40007A6A90 /* ResetPWViewController.m */; };
 		2087B6C117C73B40007A6A90 /* ResetPWViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2087B6BF17C73B40007A6A90 /* ResetPWViewController.xib */; };
-		2087B6C317C73BD5007A6A90 /* ResetPassword_5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2087B6C217C73BD5007A6A90 /* ResetPassword_5.jpg */; };
 		2087B6C717C7B07D007A6A90 /* register-bg-iPhone4.png in Resources */ = {isa = PBXBuildFile; fileRef = 2087B6C417C7B07D007A6A90 /* register-bg-iPhone4.png */; };
 		2087B6C817C7B07D007A6A90 /* register-bg-iPhone4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2087B6C517C7B07D007A6A90 /* register-bg-iPhone4@2x.png */; };
 		2087B6C917C7B07D007A6A90 /* register-bg-iPhone5.png in Resources */ = {isa = PBXBuildFile; fileRef = 2087B6C617C7B07D007A6A90 /* register-bg-iPhone5.png */; };
@@ -792,6 +791,7 @@
 		65B3F1B5172AB2F500BEE7A4 /* camera_grid@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65B3F1A3172AB2F500BEE7A4 /* camera_grid@2x.png */; };
 		65B3F1B6172AB2F500BEE7A4 /* camera_lastpic.png in Resources */ = {isa = PBXBuildFile; fileRef = 65B3F1A4172AB2F500BEE7A4 /* camera_lastpic.png */; };
 		65B3F1B7172AB2F500BEE7A4 /* camera_lastpic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65B3F1A5172AB2F500BEE7A4 /* camera_lastpic@2x.png */; };
+		65BB5B9317C8130400F99168 /* Preferences_Screen_5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 65BB5B9217C8130400F99168 /* Preferences_Screen_5.jpg */; };
 		65BC9C37171694DD00570E4D /* top_bg_with_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 65BC9C35171694DD00570E4D /* top_bg_with_logo.png */; };
 		65BC9C38171694DD00570E4D /* top_bg_with_logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65BC9C36171694DD00570E4D /* top_bg_with_logo@2x.png */; };
 		65BDB2C11733E8C80084E032 /* 07_addmore_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 65BDB2AD1733E8C80084E032 /* 07_addmore_selected.png */; };
@@ -916,6 +916,14 @@
 		65C7A5261721A06B003F1A84 /* white_bg_thumbnail@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65C7A51A1721A06B003F1A84 /* white_bg_thumbnail@2x.png */; };
 		65C7A5291721B78E003F1A84 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65C7A5271721B78D003F1A84 /* Default-568h@2x.png */; };
 		65C7A52A1721B78E003F1A84 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65C7A5281721B78D003F1A84 /* Default@2x.png */; };
+		65C9039E17C8AE6500E9B0C2 /* save_gallery.png in Resources */ = {isa = PBXBuildFile; fileRef = 65C9039617C8AE6500E9B0C2 /* save_gallery.png */; };
+		65C9039F17C8AE6500E9B0C2 /* share_settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 65C9039717C8AE6500E9B0C2 /* share_settings.png */; };
+		65C903A017C8AE6500E9B0C2 /* signout.png in Resources */ = {isa = PBXBuildFile; fileRef = 65C9039817C8AE6500E9B0C2 /* signout.png */; };
+		65C903A117C8AE6500E9B0C2 /* account_settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 65C9039917C8AE6500E9B0C2 /* account_settings.png */; };
+		65C903A217C8AE6500E9B0C2 /* signout@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65C9039A17C8AE6500E9B0C2 /* signout@2x.png */; };
+		65C903A317C8AE6500E9B0C2 /* account_settings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65C9039B17C8AE6500E9B0C2 /* account_settings@2x.png */; };
+		65C903A417C8AE6500E9B0C2 /* save_gallery@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65C9039C17C8AE6500E9B0C2 /* save_gallery@2x.png */; };
+		65C903A517C8AE6500E9B0C2 /* share_settings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65C9039D17C8AE6500E9B0C2 /* share_settings@2x.png */; };
 		65CC0AB6171802DF003D0BE7 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 65CC0AB5171802DF003D0BE7 /* Settings.bundle */; };
 		65CC0AB7171803FB003D0BE7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 65CC0AB9171803FB003D0BE7 /* Localizable.strings */; };
 		65DB5995172FAD6200F251B0 /* clipboard_share_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 65DB5973172FAD6200F251B0 /* clipboard_share_selected.png */; };
@@ -1566,7 +1574,6 @@
 		2087B6BD17C73B40007A6A90 /* ResetPWViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResetPWViewController.h; sourceTree = "<group>"; };
 		2087B6BE17C73B40007A6A90 /* ResetPWViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResetPWViewController.m; sourceTree = "<group>"; };
 		2087B6BF17C73B40007A6A90 /* ResetPWViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ResetPWViewController.xib; path = Classes/ResetPWViewController.xib; sourceTree = "<group>"; };
-		2087B6C217C73BD5007A6A90 /* ResetPassword_5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ResetPassword_5.jpg; sourceTree = "<group>"; };
 		2087B6C417C7B07D007A6A90 /* register-bg-iPhone4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "register-bg-iPhone4.png"; sourceTree = "<group>"; };
 		2087B6C517C7B07D007A6A90 /* register-bg-iPhone4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "register-bg-iPhone4@2x.png"; sourceTree = "<group>"; };
 		2087B6C617C7B07D007A6A90 /* register-bg-iPhone5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "register-bg-iPhone5.png"; sourceTree = "<group>"; };
@@ -2053,6 +2060,7 @@
 		65B3F1A3172AB2F500BEE7A4 /* camera_grid@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera_grid@2x.png"; sourceTree = "<group>"; };
 		65B3F1A4172AB2F500BEE7A4 /* camera_lastpic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera_lastpic.png; sourceTree = "<group>"; };
 		65B3F1A5172AB2F500BEE7A4 /* camera_lastpic@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera_lastpic@2x.png"; sourceTree = "<group>"; };
+		65BB5B9217C8130400F99168 /* Preferences_Screen_5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Preferences_Screen_5.jpg; sourceTree = "<group>"; };
 		65BC9C35171694DD00570E4D /* top_bg_with_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = top_bg_with_logo.png; sourceTree = "<group>"; };
 		65BC9C36171694DD00570E4D /* top_bg_with_logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "top_bg_with_logo@2x.png"; sourceTree = "<group>"; };
 		65BDB2AD1733E8C80084E032 /* 07_addmore_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 07_addmore_selected.png; sourceTree = "<group>"; };
@@ -2178,6 +2186,14 @@
 		65C7A51A1721A06B003F1A84 /* white_bg_thumbnail@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "white_bg_thumbnail@2x.png"; sourceTree = "<group>"; };
 		65C7A5271721B78D003F1A84 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		65C7A5281721B78D003F1A84 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		65C9039617C8AE6500E9B0C2 /* save_gallery.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = save_gallery.png; sourceTree = "<group>"; };
+		65C9039717C8AE6500E9B0C2 /* share_settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share_settings.png; sourceTree = "<group>"; };
+		65C9039817C8AE6500E9B0C2 /* signout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = signout.png; sourceTree = "<group>"; };
+		65C9039917C8AE6500E9B0C2 /* account_settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = account_settings.png; sourceTree = "<group>"; };
+		65C9039A17C8AE6500E9B0C2 /* signout@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "signout@2x.png"; sourceTree = "<group>"; };
+		65C9039B17C8AE6500E9B0C2 /* account_settings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "account_settings@2x.png"; sourceTree = "<group>"; };
+		65C9039C17C8AE6500E9B0C2 /* save_gallery@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "save_gallery@2x.png"; sourceTree = "<group>"; };
+		65C9039D17C8AE6500E9B0C2 /* share_settings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share_settings@2x.png"; sourceTree = "<group>"; };
 		65CC0AB5171802DF003D0BE7 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		65CC0AB8171803FB003D0BE7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		65CC0ABA17180411003D0BE7 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -3419,6 +3435,14 @@
 		20D7473D17BE77C800966BA6 /* NewLayOuts */ = {
 			isa = PBXGroup;
 			children = (
+				65C9039617C8AE6500E9B0C2 /* save_gallery.png */,
+				65C9039717C8AE6500E9B0C2 /* share_settings.png */,
+				65C9039817C8AE6500E9B0C2 /* signout.png */,
+				65C9039917C8AE6500E9B0C2 /* account_settings.png */,
+				65C9039A17C8AE6500E9B0C2 /* signout@2x.png */,
+				65C9039B17C8AE6500E9B0C2 /* account_settings@2x.png */,
+				65C9039C17C8AE6500E9B0C2 /* save_gallery@2x.png */,
+				65C9039D17C8AE6500E9B0C2 /* share_settings@2x.png */,
 				2087B6C417C7B07D007A6A90 /* register-bg-iPhone4.png */,
 				2087B6C517C7B07D007A6A90 /* register-bg-iPhone4@2x.png */,
 				2087B6C617C7B07D007A6A90 /* register-bg-iPhone5.png */,
@@ -3510,7 +3534,6 @@
 				65CC0AB5171802DF003D0BE7 /* Settings.bundle */,
 				8D1107310486CEB800E47090 /* Flyr-Info.plist */,
 				2087B6BF17C73B40007A6A90 /* ResetPWViewController.xib */,
-				2087B6C217C73BD5007A6A90 /* ResetPassword_5.jpg */,
 				20F4D8DF17BA3D0A007B2DF5 /* AccountSelecter.xib */,
 				65E26156171C2EC400C485B5 /* AddFriendScreen.xib */,
 				E8A7347C1092CFF300661AAD /* DraftViewController.xib */,
@@ -3520,6 +3543,7 @@
 				0DFC5319109576AB00B18478 /* MainWindow.xib */,
 				0DFC531A109576AB00B18478 /* PhotoController.xib */,
 				E8C7C36810976BFC0064935A /* SaveFlyerController.xib */,
+				65BB5B9217C8130400F99168 /* Preferences_Screen_5.jpg */,
 				20F93DD217B2262200F6F88C /* MainSettingViewController.xib */,
 				0DFC531D109576AB00B18478 /* SettingViewController.xib */,
 				0DF3A361108DF47400D6C887 /* Data */,
@@ -4900,10 +4924,18 @@
 				208ED66117C4CD660097EFCE /* cp_share_selected.png in Resources */,
 				208ED66217C4CD660097EFCE /* cp_share_selected@2x.png in Resources */,
 				2087B6C117C73B40007A6A90 /* ResetPWViewController.xib in Resources */,
-				2087B6C317C73BD5007A6A90 /* ResetPassword_5.jpg in Resources */,
 				2087B6C717C7B07D007A6A90 /* register-bg-iPhone4.png in Resources */,
 				2087B6C817C7B07D007A6A90 /* register-bg-iPhone4@2x.png in Resources */,
 				2087B6C917C7B07D007A6A90 /* register-bg-iPhone5.png in Resources */,
+				65BB5B9317C8130400F99168 /* Preferences_Screen_5.jpg in Resources */,
+				65C9039E17C8AE6500E9B0C2 /* save_gallery.png in Resources */,
+				65C9039F17C8AE6500E9B0C2 /* share_settings.png in Resources */,
+				65C903A017C8AE6500E9B0C2 /* signout.png in Resources */,
+				65C903A117C8AE6500E9B0C2 /* account_settings.png in Resources */,
+				65C903A217C8AE6500E9B0C2 /* signout@2x.png in Resources */,
+				65C903A317C8AE6500E9B0C2 /* account_settings@2x.png in Resources */,
+				65C903A417C8AE6500E9B0C2 /* save_gallery@2x.png in Resources */,
+				65C903A517C8AE6500E9B0C2 /* share_settings@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

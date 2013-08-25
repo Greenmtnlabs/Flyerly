@@ -11,7 +11,8 @@
 #import "FlyrAppDelegate.h"
 #import "AccountController.h"
 #import "Common.h"
-@class AccountController;
+#import "HelpController.h"
+@class AccountController,LauchViewController,HelpController;
 @interface MainSettingViewController : UIViewController{
 
     UITableView *tableView;
@@ -20,12 +21,17 @@
     SettingViewController *oldsettingveiwcontroller;
     UISwitch *mySwitch;
     AccountController   *actaController;
-
+    HelpController *helpController;
 }
 @property (strong, nonatomic)IBOutlet UITableView *tableView;
 - (void)changeSwitch:(id)sender;
 - (void)signOut;
 -(void)goBack;
+-(void)editClick;
+-(IBAction)gohelp;
+-(IBAction)gofacbook:(id)sender;
+-(IBAction)gotwitter:(id)sender;
+-(IBAction)goemail:(id)sender;
 
 
 

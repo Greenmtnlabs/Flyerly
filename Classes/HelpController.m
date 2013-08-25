@@ -72,7 +72,7 @@
         twitLink = [[UIButton alloc] initWithFrame:CGRectMake(14, 1300, 150, 10)];
 
     }
-    linkFaceBook.backgroundColor = [UIColor blackColor];
+  //  linkFaceBook.backgroundColor = [UIColor blackColor];
 //    twitLink.backgroundColor = [UIColor blueColor];
 
     [emailButton addTarget:self action:@selector(openEmail:) forControlEvents:UIControlEventTouchUpInside];

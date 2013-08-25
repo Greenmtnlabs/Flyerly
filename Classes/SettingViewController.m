@@ -36,21 +36,21 @@ extern NSString* kGetSessionProxy;
     label.font = [UIFont fontWithName:TITLE_FONT size:18];
     label.textAlignment = UITextAlignmentCenter;
     label.textColor = [UIColor whiteColor];
-    label.text = @"SHARING SETTINGS";
+    label.text = @"Sharing Options";
     self.navigationItem.titleView = label;
 
-    UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 31, 30)];
+    UIButton *menuButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 31, 30)] autorelease];
     [menuButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [menuButton setBackgroundImage:[UIImage imageNamed:@"menu_button"] forState:UIControlStateNormal];
     [menuButton addTarget:self action:@selector(goToMain) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *menuBarButton = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
+    UIBarButtonItem *menuBarButton = [[[UIBarButtonItem alloc] initWithCustomView:menuButton] autorelease];
     [self.navigationItem setRightBarButtonItem:menuBarButton];
     
-    UIButton *backBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 31, 30)];
+    UIButton *backBtn = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)] autorelease];
     [backBtn addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [backBtn setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
     [backBtn addTarget:self action:@selector(goToMain) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
+    UIBarButtonItem *backBarButton = [[[UIBarButtonItem alloc] initWithCustomView:backBtn] autorelease];
     [self.navigationItem setLeftBarButtonItem:backBarButton];
 }
 
@@ -115,14 +115,8 @@ extern NSString* kGetSessionProxy;
     //[saveToCameraRollLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
 }
 
--(void)goToMain{
-        if(IS_IPHONE_5){
-            launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewControllerIPhone5" bundle:nil];
-        }   else{
-            launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
-        }
-    
-        [self.navigationController pushViewController:launchController animated:YES];
+-(void)goToMain{   
+        [self.navigationController popViewControllerAnimated:YES];
     }
 
 -(IBAction)onClickFacebookButton{
@@ -346,6 +340,40 @@ extern NSString* kGetSessionProxy;
     [self.navigationController pushViewController:helpController animated:NO];
 }
 
+-(IBAction)makeEmail{
+    MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
+    
+    if([MFMailComposeViewController canSendMail]){
+        
+        picker.mailComposeDelegate = self;
+        [picker setSubject:@"email feedback..."];
+        
+        // Set up recipients
+        NSMutableArray *toRecipients = [[[NSMutableArray alloc]init]autorelease];
+        [toRecipients addObject:@"support@greenmtnlabs.com"];
+        [picker setToRecipients:toRecipients];
+        
+        //NSString *emailBody = [NSString stringWithFormat:@"<font size='4'><a href = '%@'>Share a flyer</a></font>", @"http://www.flyer.us"];
+        //[picker setMessageBody:emailBody isHTML:YES];
+        
+        [self presentModalViewController:picker animated:YES];
+        [picker release];
+    }
+}
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
+	switch (result) {
+		case MFMailComposeResultCancelled:
+			break;
+		case MFMailComposeResultSaved:
+			break;
+		case MFMailComposeResultSent:
+			break;
+		case MFMailComposeResultFailed:
+			break;
+	}
+    
+    [controller dismissModalViewControllerAnimated:YES];
+}
 /*
 @synthesize password,user,doneButton,scrollView,navBar,twitDialog;
 

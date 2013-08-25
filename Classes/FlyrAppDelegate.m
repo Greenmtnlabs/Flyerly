@@ -305,11 +305,21 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
         
         NSLog(@"User already Greeted !");
         if(IS_IPHONE_5){
-            accountController = [[AccountController alloc]initWithNibName:@"AcountViewControlleriPhone5" bundle:nil];
+                accountController = [[[AccountController alloc]initWithNibName:@"AcountViewControlleriPhone5" bundle:nil] autorelease];
+            lauchController = [[[LauchViewController alloc]initWithNibName:@"LauchViewControllerIPhone5" bundle:nil] autorelease];
+
         }else{
-            accountController = [[AccountController alloc]initWithNibName:@"AccountController" bundle:nil];
+            accountController = [[[AccountController alloc]initWithNibName:@"AccountController" bundle:nil] autorelease];
+            lauchController = [[[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil] autorelease];
+
         }
-        [navigationController pushViewController:accountController animated:NO];
+
+        NSString  *usr = [[NSUserDefaults standardUserDefaults] stringForKey:@"User"];
+        if (usr == nil) {
+            [navigationController pushViewController:accountController animated:YES];
+        }else{
+            [navigationController pushViewController:lauchController animated:YES];
+        }
 
 /*
         if(IS_IPHONE_5){

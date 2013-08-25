@@ -185,7 +185,7 @@
         
         dbUsername = [object objectForKey:@"username"];
         
-        if(!dbUsername){
+        if(!dbUsername && globle.twitterUser != nil){
            [self removeLoadingView];
             registerController = [[RegisterController alloc]initWithNibName:@"RegisterController" bundle:nil];
             [self.navigationController pushViewController:registerController animated:YES];
@@ -212,9 +212,9 @@
          //}
 
         if(IS_IPHONE_5){
-            launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewControllerIPhone5" bundle:nil];
+            launchController = [[[LauchViewController alloc]initWithNibName:@"LauchViewControllerIPhone5" bundle:nil] autorelease];
         }   else{
-            launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
+            launchController = [[[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil] autorelease];
         }
         
         //[self.navigationController pushViewController:launchController animated:YES];

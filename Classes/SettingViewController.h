@@ -86,6 +86,7 @@
 -(IBAction)onClickSMSButton;
 -(IBAction)onClickClipboardButton;
 -(IBAction)loadHelpController;
+-(IBAction)makeEmail;
 -(IBAction)onClickSaveToCameraRollSwitchButton;
 
 @end
