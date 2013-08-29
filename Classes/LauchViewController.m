@@ -78,8 +78,9 @@
 
 // Load Preferences Method 
 -(IBAction)doAbout:(id)sender{
-settingviewcontroller   = [[MainSettingViewController  alloc]initWithNibName:@"MainSettingViewController" bundle:nil];
-	[self.navigationController pushViewController:settingviewcontroller animated:YES];
+    MainSettingViewController *mainsettingviewcontroller = [[MainSettingViewController alloc]initWithNibName:@"MainSettingViewController" bundle:nil] ;
+    [self.navigationController pushViewController:mainsettingviewcontroller animated:YES];
+    [mainsettingviewcontroller release];
 }
 //End
 
@@ -155,6 +156,13 @@ settingviewcontroller   = [[MainSettingViewController  alloc]initWithNibName:@"M
 	//loadingViewFlag = NO;
 	//loadingView = nil;
 	//loadingView = [[LoadingView alloc]init];
+    createFlyrButton.showsTouchWhenHighlighted = YES;
+    savedFlyrButton.showsTouchWhenHighlighted = YES;
+    inviteFriendButton.showsTouchWhenHighlighted = YES;
+    likeButton.showsTouchWhenHighlighted = YES;
+    followButton.showsTouchWhenHighlighted = YES;
+    setBotton.showsTouchWhenHighlighted = YES;
+
     
     if(IS_IPHONE_5){
         numberOfFlyers = 6;
@@ -263,7 +271,7 @@ settingviewcontroller   = [[MainSettingViewController  alloc]initWithNibName:@"M
         [photoArray addObject:finalImagePath];
 
         if(i == 0){
-            firstFlyer.image = [LauchViewController imageWithImage:currentFlyerImage scaledToSize:size];
+            firstFlyer.image = [LauchViewController imageWithImage:currentFlyerImage scaledToSize:size ];
             firstFlyer.tag = i;
         } else if(i  == 1){
             secondFlyer.image = [LauchViewController imageWithImage:currentFlyerImage scaledToSize:size];
@@ -412,11 +420,14 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
 
 - (IBAction)onTwitter:(id)sender {
     UIButton *button = (UIButton *) sender;
-    
-    if([button isSelected]){
-        [self unFollowOnTwitter:sender];
+    if([AddFriendsController connected]){
+        if([button isSelected]){
+            [self unFollowOnTwitter:sender];
+        } else {
+            [self followOnTwitter:sender];
+        }
     } else {
-        [self followOnTwitter:sender];
+        [self showAlert:@"Warning!" message:@"You're not connected to the internet. Please connect and retry."];
     }
 }
 
@@ -620,12 +631,13 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
      }*/
 
     
+    if([AddFriendsController connected]){
+
     
+        FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+        appDelegate.facebook.sessionDelegate = self;
     
-    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-    appDelegate.facebook.sessionDelegate = self;
-    
-    if([appDelegate.facebook isSessionValid]) {
+        if([appDelegate.facebook isSessionValid]) {
         /// for User Farmaish
         /*
         crossButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 64, 25, 25)];
@@ -646,15 +658,27 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
         [self.view  addSubview:webview];
         [self.view  addSubview:crossButton];
      */
-    likeButton.enabled = NO;
+            likeButton.enabled = NO;
         
-    } else {
+        } else {
         
-        [appDelegate.facebook authorize:[NSArray arrayWithObjects: @"read_stream",
+            [appDelegate.facebook authorize:[NSArray arrayWithObjects: @"read_stream",
                                          @"publish_stream", @"user_likes", nil]];
+        }
+    }else{
+        [self showAlert:@"Warning!" message:@"You're not connected to the internet. Please connect and retry."];
     }
 }
 
+-(void)showAlert:(NSString *)title message:(NSString *)message{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+                                                    message:message
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+    [alert release];
+}
 -(IBAction)goBack{
     [opaqueView removeFromSuperview];
     [webview removeFromSuperview];

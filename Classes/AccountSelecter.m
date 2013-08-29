@@ -47,7 +47,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *CellIdentifier = @"Cell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier] ;
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         [[cell textLabel] setFont:[UIFont systemFontOfSize:15.0]];
@@ -58,8 +58,8 @@
     }
      
     //Convert twitter username to email
-    ACAccount *acct = [arrayOfAccounts objectAtIndex:indexPath.row];
-    NSString *twitterEmail = [AccountController  getTwitterEmailByUsername:[acct username]];
+    ACAccount *acct = [arrayOfAccounts objectAtIndex:indexPath.row] ;
+    NSString *twitterEmail = [AccountController  getTwitterEmailByUsername:[acct username]] ;
     cell.textLabel.text = twitterEmail;
         
      return cell;

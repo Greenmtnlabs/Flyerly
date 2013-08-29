@@ -17,8 +17,9 @@
 #import "OLBTwitpicEngine.h"
 #import "BitlyURLShortener.h"
 #import "LauchViewController.h"
+#import "Singleton.h"
 
-@class FlyrViewController,LauchViewController;
+@class FlyrViewController,LauchViewController,Singleton;
 @class SaveFlyerController;
 @class LoadingView;
 
@@ -51,7 +52,7 @@
 	NSString *selectedFlyerDescription;
 	NSString *detailFileName;
 	NSString *imageFileName;
-    
+    Singleton *globle;
 	MyNavigationBar *navBar;
 	FlyrViewController *fvController;
 	SaveFlyerController *svController;
@@ -109,6 +110,8 @@
 @property(nonatomic,retain) IBOutlet UIButton *instagramButton;
 @property(nonatomic,retain) IBOutlet UIButton *smsButton;
 @property(nonatomic,retain) IBOutlet UIButton *clipboardButton;
+@property(nonatomic,retain) IBOutlet UILabel *clipboardlabel;
+
 @property (nonatomic, retain) UIDocumentInteractionController *dic;
 
 @property(nonatomic,retain)UIImage *selectedFlyerImage;
@@ -136,4 +139,6 @@
 -(IBAction)onClickClipboardButton;
 -(IBAction)searchNearByLocations;
 -(void)goback;
+-(void)share;
+
 @end

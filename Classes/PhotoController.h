@@ -14,8 +14,11 @@
 #import "EBPurchase.h"
 #import "LoadingView.h"
 #import "ShareProgressView.h"
+#import "Singleton.h"
+@class Singleton;
 @interface PhotoController : UIViewController<UIActionSheetDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, EBPurchaseDelegate>
 {
+    Singleton *globle;
 	MyNavigationBar *navBar;
 	HudView *aHUD;
     CustomPhotoController *customPhotoController;

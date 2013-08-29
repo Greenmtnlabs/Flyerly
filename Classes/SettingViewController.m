@@ -43,12 +43,14 @@ extern NSString* kGetSessionProxy;
     [menuButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [menuButton setBackgroundImage:[UIImage imageNamed:@"menu_button"] forState:UIControlStateNormal];
     [menuButton addTarget:self action:@selector(goToMain) forControlEvents:UIControlEventTouchUpInside];
+    menuButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *menuBarButton = [[[UIBarButtonItem alloc] initWithCustomView:menuButton] autorelease];
     [self.navigationItem setRightBarButtonItem:menuBarButton];
     
     UIButton *backBtn = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)] autorelease];
     [backBtn addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [backBtn setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
+     backBtn.showsTouchWhenHighlighted = YES;
     [backBtn addTarget:self action:@selector(goToMain) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *backBarButton = [[[UIBarButtonItem alloc] initWithCustomView:backBtn] autorelease];
     [self.navigationItem setLeftBarButtonItem:backBarButton];

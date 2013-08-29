@@ -12,8 +12,9 @@
 #import "AccountController.h"
 #import "Common.h"
 #import "HelpController.h"
-@class AccountController,LauchViewController,HelpController;
-@interface MainSettingViewController : UIViewController{
+#import "SettingViewController.h"
+@class AccountController,LauchViewController,HelpController,SettingViewController;
+@interface MainSettingViewController : UIViewController <UITableViewDelegate>{
 
     UITableView *tableView;
     NSMutableArray *category;

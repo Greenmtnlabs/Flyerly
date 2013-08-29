@@ -41,7 +41,7 @@ static Singleton *sharedSingleton = nil;
 
 
 
-+(UIColor*)colorWithHexString:(NSString*)hex
+-(UIColor*)colorWithHexString:(NSString*)hex
 {
     NSString *cString = [[hex stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] uppercaseString];
     

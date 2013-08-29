@@ -18,7 +18,6 @@
 #import <Parse/PFQuery.h>
 
 @interface ResetPWViewController : UIViewController{
-
     LoadingView *loadingView;
 }
 

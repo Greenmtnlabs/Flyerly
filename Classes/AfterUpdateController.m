@@ -23,8 +23,13 @@
     
     //FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     //[self.navigationController popToViewController:appDelegate.accountController animated:YES];
-    AccountController *accountController = [[AccountController alloc]initWithNibName:@"AccountController" bundle:nil];
-    [self.navigationController pushViewController:accountController animated:NO];
+    AccountController *accountController = [AccountController alloc];
+    if(IS_IPHONE_5){
+        [accountController initWithNibName:@"AcountViewControlleriPhone5" bundle:nil];
+    }else{
+        [accountController initWithNibName:@"AccountController" bundle:nil];
+    }
+    [self.navigationController pushViewController:accountController animated:YES];
 }
 
 @end

@@ -30,10 +30,14 @@ static ShareProgressView *flickrPogressView;
 static ShareProgressView *facebookPogressView;
 static ShareProgressView *twitterPogressView;
 static ShareProgressView *tumblrPogressView;
+static ShareProgressView *instagramPogressView;
+static ShareProgressView *smsPogressView;
+static ShareProgressView *emailPogressView;
+static ShareProgressView *clipBdPogressView;
 
 @implementation DraftViewController
 
-@synthesize selectedFlyerImage,imgView,navBar,fvController,svController,titleView,descriptionView,selectedFlyerDescription,selectedFlyerTitle, detailFileName, imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,loadingView,dic,fromPhotoController,scrollView,instagramPogressView, saveToCameraRollLabel, saveToRollSwitch,twit,locationBackground,locationLabel,networkParentView,locationButton,listOfPlaces,bitly;
+@synthesize selectedFlyerImage,imgView,navBar,fvController,svController,titleView,descriptionView,selectedFlyerDescription,selectedFlyerTitle, detailFileName, imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,loadingView,dic,fromPhotoController,scrollView,instagramPogressView, saveToCameraRollLabel, saveToRollSwitch,twit,locationBackground,locationLabel,networkParentView,locationButton,listOfPlaces,bitly,clipboardlabel;
 //@synthesize twitterPogressView,facebookPogressView,tumblrPogressView,flickrPogressView,progressView;
 
 -(void)callFlyrView{
@@ -137,8 +141,8 @@ static ShareProgressView *tumblrPogressView;
 	svController.flyrImg = selectedFlyerImage;
 	svController.isDraftView = YES;
 	svController.dvController =self;
+
 	//svController.ptController = self;
-	
 	//self.navigationItem.title = @"Social Flyer";
 	self.navigationController.navigationBarHidden = NO;
     
@@ -170,6 +174,7 @@ static ShareProgressView *tumblrPogressView;
 
         UIButton *backButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)] autorelease];
         [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
+        backButton.showsTouchWhenHighlighted = YES;
         [backButton addTarget:self action:@selector(goback) forControlEvents:UIControlEventTouchUpInside];
         UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
 
@@ -314,6 +319,31 @@ static ShareProgressView *tumblrPogressView;
         countOfSharingNetworks++;
         [self increaseProgressViewHeightBy:36];
     }
+    if(instagramPogressView){
+        [progressView setHidden:NO];
+        [progressView addSubview:instagramPogressView];
+        countOfSharingNetworks++;
+        [self increaseProgressViewHeightBy:36];
+    }
+    if(emailPogressView){
+        [progressView setHidden:NO];
+        [progressView addSubview:emailPogressView];
+        countOfSharingNetworks++;
+        [self increaseProgressViewHeightBy:36];
+    }
+    if(smsPogressView){
+        [progressView setHidden:NO];
+        [progressView addSubview:smsPogressView];
+        countOfSharingNetworks++;
+        [self increaseProgressViewHeightBy:36];
+    }
+    if(clipBdPogressView){
+        [progressView setHidden:NO];
+        [progressView addSubview:clipBdPogressView];
+        countOfSharingNetworks++;
+        [self increaseProgressViewHeightBy:36];
+    }
+
 
 }
 
@@ -436,9 +466,15 @@ static ShareProgressView *tumblrPogressView;
             
             if([smsButton isSelected]){
                 [Flurry logEvent:@"Shared SMS"];
+                [self showsmsProgressRow];
                 [self shareOnMMS];
             }
             
+            if([clipboardButton isSelected]){
+                [Flurry logEvent:@"clipboard Click"];
+                [self showclipBdProgressRow];
+                [self onclipcordClick];
+            }
         }else{
             
             // Check internet connectivity
@@ -459,7 +495,7 @@ static ShareProgressView *tumblrPogressView;
                     [self showTwitterProgressRow];
                     [self shareOnTwitter];
                     [Flurry logEvent:@"Shared Twitter"];
-                    //[self fillSuccessStatus:twitterPogressView];
+                    [self fillSuccessStatus:twitterPogressView];
                 }
                 
                 if([facebookButton isSelected]){
@@ -485,18 +521,33 @@ static ShareProgressView *tumblrPogressView;
                 
                 if([emailButton isSelected]){
                     [Flurry logEvent:@"Shared Email"];
+                    [self showemailProgressRow ];
                     [self shareOnEmail];
                 }
                 
-                if([smsButton isSelected] && ![emailButton isSelected]){
+                if([smsButton isSelected]){
                     [Flurry logEvent:@"Shared SMS"];
+                    [self showsmsProgressRow];
                     [self shareOnMMS];
                 }
-                
-                if([instagramButton isSelected] && ( ![tumblrButton isSelected] && ![flickrButton isSelected] && ![smsButton isSelected])  && ![emailButton isSelected]){
+                if([instagramButton isSelected]){
                     [Flurry logEvent:@"Shared Instagram"];
+                    [self showInstagramProgressRow];
                     [self shareOnInstagram];
                 }
+                if([clipboardButton isSelected]){
+                    [Flurry logEvent:@"clipboard Click"];
+                    [self showclipBdProgressRow];
+                    [self onclipcordClick];
+                }
+
+                /*
+                if([instagramButton isSelected] && ( ![tumblrButton isSelected] && ![flickrButton isSelected] && ![smsButton isSelected])  && ![emailButton isSelected]){
+                    [Flurry logEvent:@"Shared Instagram"];
+                    [self showInstagramProgressRow];
+                    [self shareOnInstagram];
+                }
+                 */
                 
                 //if([saveToRollSwitch isOn]){
                 //if([[NSUserDefaults standardUserDefaults] stringForKey:@"saveToCameraRollSetting"]){
@@ -706,16 +757,21 @@ static ShareProgressView *tumblrPogressView;
  * Called when clipboard button is pressed
  */
 -(IBAction)onClickClipboardButton{
+    globle = [Singleton RetrieveSingleton];
     if([clipboardButton isSelected]){
         [clipboardButton setSelected:NO];
+        [clipboardlabel setTextColor:[UIColor whiteColor] ];
     } else {
         [clipboardButton setSelected:YES];
-
-        [UIPasteboard generalPasteboard].image = selectedFlyerImage;
-        [Flurry logEvent:@"Copy to Clipboard"];
+        [clipboardlabel setTextColor:[globle colorWithHexString:@"3caaff"]];
     }
-}
 
+}
+-(void) onclipcordClick{
+    [UIPasteboard generalPasteboard].image = selectedFlyerImage;
+    [Flurry logEvent:@"Copy to Clipboard"];
+    [self onclipBdSuccess];
+}
 -(void)showAlert:(NSString *)title message:(NSString *)message{
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
                                                     message:message
@@ -781,6 +837,19 @@ static ShareProgressView *tumblrPogressView;
             [socialArray removeObjectAtIndex:5]; //Instagram
             [socialArray insertObject:@"1" atIndex:5]; //Instagram
         }
+        if([emailButton isSelected]){
+            [socialArray removeObjectAtIndex:6]; //email
+            [socialArray insertObject:@"1" atIndex:6]; //email
+        }
+        if([smsButton isSelected]){
+            [socialArray removeObjectAtIndex:7]; //email
+            [socialArray insertObject:@"1" atIndex:7]; //email
+        }
+        if([clipboardButton isSelected]){
+            [socialArray removeObjectAtIndex:8]; //email
+            [socialArray insertObject:@"1" atIndex:8]; //email
+        }
+
 
     } else {
             
@@ -964,6 +1033,8 @@ static ShareProgressView *tumblrPogressView;
         [picker setMessageBody:emailBody isHTML:YES];
         [self presentModalViewController:picker animated:YES];
         [picker release];
+        [self onemailSuccess];
+
     }
 }
 
@@ -996,6 +1067,10 @@ static ShareProgressView *tumblrPogressView;
     
     if(!displayed){
         [self showAlert:@"Warning!" message:@"Please install Instagram app to share."];
+        [self openInstagramFailed];
+    }else{
+        [self openInstagramSuccess];
+       // [[NSUserDefaults standardUserDefaults]  setObject:@"YES" forKey:@"instagramSetting"];
     }
     /*
     NSURL *instagramURL = [NSURL URLWithString:@"instagram://app"];
@@ -1095,6 +1170,7 @@ static ShareProgressView *tumblrPogressView;
     return interactionController;
 }
 
+
 /*
  * Share on Facebook
  */
@@ -1170,6 +1246,195 @@ static ShareProgressView *tumblrPogressView;
 }
 
 #pragma show sharing progress row
+/*
+smsPogressView;
+static ShareProgressView *emailPogressView;
+static ShareProgressView *clipBdPogressView;
+ */
+
+-(void)showclipBdProgressRow{
+    
+    // Remove and Add if view already visible
+    if(clipBdPogressView){
+        NSDictionary *itemDetails = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%d", clipBdPogressView.tag], @"tag", nil];
+        [clipBdPogressView removeFromSuperview];
+        [[NSNotificationCenter defaultCenter] postNotificationName:CloseShareProgressNotification object:nil userInfo:itemDetails];
+    }
+    
+    clipBdPogressView = nil;
+    clipBdPogressView = [[[[NSBundle mainBundle] loadNibNamed:@"ShareProgressView" owner:self options:nil] objectAtIndex:0] retain];
+    [clipBdPogressView setFrame:CGRectMake(clipBdPogressView.frame.origin.x, 36 * countOfSharingNetworks++, clipBdPogressView.frame.size.width, clipBdPogressView.frame.size.height)];
+    clipBdPogressView.tag = 8;
+    
+    [clipBdPogressView.statusText setText:@"Copying to clipboard!"];
+    [clipBdPogressView.statusText setTextColor:[UIColor yellowColor]];
+    [clipBdPogressView.statusIcon setBackgroundImage:nil forState:UIControlStateNormal];
+    
+    [clipBdPogressView.networkIcon setBackgroundImage:[UIImage imageNamed:@"status_icon_clipboard"] forState:UIControlStateNormal];
+    [clipBdPogressView.cancelIcon setHidden:YES];
+    [clipBdPogressView.cancelIcon setImage:[UIImage imageNamed:@"share_status_close"] forState:UIControlStateNormal];
+    [clipBdPogressView.statusIcon setBackgroundImage:nil forState:UIControlStateNormal];
+    [clipBdPogressView.refreshIcon setBackgroundImage:[UIImage imageNamed:@"retry_share"] forState:UIControlStateNormal];
+    [clipBdPogressView.refreshIcon setHidden:YES];
+    [clipBdPogressView.refreshIcon addTarget:self action:@selector(onclipcordClick) forControlEvents:UIControlEventTouchUpInside];
+
+    
+    [progressView addSubview:clipBdPogressView];
+    [self increaseProgressViewHeightBy:36];
+    
+}
+
+-(void)showsmsProgressRow{
+    
+    // Remove and Add if view already visible
+    if(smsPogressView){
+        NSDictionary *itemDetails = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%d", smsPogressView.tag], @"tag", nil];
+        [smsPogressView removeFromSuperview];
+        [[NSNotificationCenter defaultCenter] postNotificationName:CloseShareProgressNotification object:nil userInfo:itemDetails];
+    }
+    
+    smsPogressView = nil;
+    smsPogressView = [[[[NSBundle mainBundle] loadNibNamed:@"ShareProgressView" owner:self options:nil] objectAtIndex:0] retain];
+    [smsPogressView setFrame:CGRectMake(smsPogressView.frame.origin.x, 36 * countOfSharingNetworks++, smsPogressView.frame.size.width, smsPogressView.frame.size.height)];
+    smsPogressView.tag = 7;
+    
+    [smsPogressView.statusText setText:@"Opening text message!"];
+    [smsPogressView.statusText setTextColor:[UIColor yellowColor]];
+    [smsPogressView.statusIcon setBackgroundImage:nil forState:UIControlStateNormal];
+    
+    [smsPogressView.networkIcon setBackgroundImage:[UIImage imageNamed:@"status_icon_sms"] forState:UIControlStateNormal];
+    [smsPogressView.cancelIcon setHidden:YES];
+    [smsPogressView.cancelIcon setImage:[UIImage imageNamed:@"share_status_close"] forState:UIControlStateNormal];
+    [smsPogressView.statusIcon setBackgroundImage:nil forState:UIControlStateNormal];
+    [smsPogressView.refreshIcon setBackgroundImage:[UIImage imageNamed:@"retry_share"] forState:UIControlStateNormal];
+    [smsPogressView.refreshIcon setHidden:YES];
+    [smsPogressView.refreshIcon addTarget:self action:@selector(shareOnMMS) forControlEvents:UIControlEventTouchUpInside];
+    [progressView addSubview:smsPogressView];
+    [self increaseProgressViewHeightBy:36];
+    
+}
+
+-(void)showemailProgressRow{
+    
+    // Remove and Add if view already visible
+    if(emailPogressView){
+        NSDictionary *itemDetails = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%d", emailPogressView.tag], @"tag", nil];
+        [instagramPogressView removeFromSuperview];
+        [[NSNotificationCenter defaultCenter] postNotificationName:CloseShareProgressNotification object:nil userInfo:itemDetails];
+    }
+    
+    emailPogressView = nil;
+    emailPogressView = [[[[NSBundle mainBundle] loadNibNamed:@"ShareProgressView" owner:self options:nil] objectAtIndex:0] retain];
+    [emailPogressView setFrame:CGRectMake(emailPogressView.frame.origin.x, 36 * countOfSharingNetworks++, emailPogressView.frame.size.width, emailPogressView.frame.size.height)];
+    emailPogressView.tag = 6;
+    
+    [emailPogressView.statusText setText:@"Opening new mail!"];
+    [emailPogressView.statusText setTextColor:[UIColor yellowColor]];
+    [emailPogressView.statusIcon setBackgroundImage:nil forState:UIControlStateNormal];
+    
+    [emailPogressView.networkIcon setBackgroundImage:[UIImage imageNamed:@"status_icon_email"] forState:UIControlStateNormal];
+    [emailPogressView.cancelIcon setHidden:YES];
+    [emailPogressView.cancelIcon setImage:[UIImage imageNamed:@"share_status_close"] forState:UIControlStateNormal];
+    [emailPogressView.statusIcon setBackgroundImage:nil forState:UIControlStateNormal];
+    [emailPogressView.refreshIcon setBackgroundImage:[UIImage imageNamed:@"retry_share"] forState:UIControlStateNormal];
+    [emailPogressView.refreshIcon setHidden:YES];
+    [emailPogressView.refreshIcon addTarget:self action:@selector(shareOnEmail) forControlEvents:UIControlEventTouchUpInside];
+
+    [progressView addSubview:emailPogressView];
+    [self increaseProgressViewHeightBy:36];
+    
+}
+
+-(void)showInstagramProgressRow{
+    
+    // Remove and Add if view already visible
+    if(instagramPogressView){
+        NSDictionary *itemDetails = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%d", instagramPogressView.tag], @"tag", nil];
+        [instagramPogressView removeFromSuperview];
+        [[NSNotificationCenter defaultCenter] postNotificationName:CloseShareProgressNotification object:nil userInfo:itemDetails];
+    }
+    
+    instagramPogressView = nil;
+    instagramPogressView = [[[[NSBundle mainBundle] loadNibNamed:@"ShareProgressView" owner:self options:nil] objectAtIndex:0] retain];
+    [instagramPogressView setFrame:CGRectMake(instagramPogressView.frame.origin.x, 36 * countOfSharingNetworks++, instagramPogressView.frame.size.width, instagramPogressView.frame.size.height)];
+    instagramPogressView.tag = 5;
+    
+    [instagramPogressView.statusText setText:@"Opening Instagram!"];
+   // instagramPogressView.statusText.font = [UIFont fontWithName:OTHER_FONT size:14];
+    [instagramPogressView.statusText setTextColor:[UIColor yellowColor]];
+    [instagramPogressView.statusIcon setBackgroundImage:nil forState:UIControlStateNormal];
+    
+    [instagramPogressView.networkIcon setBackgroundImage:[UIImage imageNamed:@"status_icon_instagram"] forState:UIControlStateNormal];
+    [instagramPogressView.cancelIcon setHidden:YES];
+    [instagramPogressView.cancelIcon setImage:[UIImage imageNamed:@"share_status_close"] forState:UIControlStateNormal];
+    [instagramPogressView.statusIcon setBackgroundImage:nil forState:UIControlStateNormal];    
+    [instagramPogressView.refreshIcon setBackgroundImage:[UIImage imageNamed:@"retry_share"] forState:UIControlStateNormal];
+    [instagramPogressView.refreshIcon setHidden:YES];
+    [instagramPogressView.refreshIcon addTarget:self action:@selector(shareOnInstagram) forControlEvents:UIControlEventTouchUpInside];
+    
+
+        [progressView addSubview:instagramPogressView];
+    [self increaseProgressViewHeightBy:36];
+    
+}
+
+-(void)onclipBdSuccess{
+    [clipBdPogressView.statusText setText:@"Copied successfully!"];
+    [clipBdPogressView.statusText setTextColor:[UIColor greenColor]];
+    [clipBdPogressView.statusIcon setBackgroundImage:[UIImage imageNamed:@"status_success"] forState:UIControlStateNormal];
+    [clipBdPogressView.refreshIcon setHidden:YES];
+    [clipBdPogressView.cancelIcon setHidden:NO];
+}
+
+
+-(void)onemailSuccess{
+    [emailPogressView.statusText setText:@"Mail send sucessfully!"];
+    [emailPogressView.statusText setTextColor:[UIColor greenColor]];
+    [emailPogressView.statusIcon setBackgroundImage:[UIImage imageNamed:@"status_success"] forState:UIControlStateNormal];
+    [emailPogressView.refreshIcon setHidden:YES];
+    [emailPogressView.cancelIcon setHidden:NO];
+}
+
+-(void)onemailFailed{
+    [emailPogressView.statusText setText:@"Mail failed!"];
+    [emailPogressView.statusText setTextColor:[UIColor redColor]];
+    [emailPogressView.statusIcon setBackgroundImage:[UIImage imageNamed:@"status_failed"] forState:UIControlStateNormal];
+    [emailPogressView.refreshIcon setHidden:NO];
+    [emailPogressView.cancelIcon setHidden:NO];
+}
+
+-(void)onsmsSuccess{
+    [smsPogressView.statusText setText:@"Opened successfully!"];
+    [smsPogressView.statusText setTextColor:[UIColor greenColor]];
+    [smsPogressView.statusIcon setBackgroundImage:[UIImage imageNamed:@"status_success"] forState:UIControlStateNormal];
+    [smsPogressView.refreshIcon setHidden:YES];
+    [smsPogressView.cancelIcon setHidden:NO];
+}
+
+-(void)onsmsFailed{
+    [smsPogressView.statusText setText:@"Opening failed!"];
+    [smsPogressView.statusText setTextColor:[UIColor redColor]];
+    [smsPogressView.statusIcon setBackgroundImage:[UIImage imageNamed:@"status_failed"] forState:UIControlStateNormal];
+    [smsPogressView.refreshIcon setHidden:NO];
+    [smsPogressView.cancelIcon setHidden:NO];
+}
+
+-(void)openInstagramSuccess{
+    [instagramPogressView.statusText setText:@"Opened Successfully!"];
+    [instagramPogressView.statusText setTextColor:[UIColor greenColor]];
+    [instagramPogressView.statusIcon setBackgroundImage:[UIImage imageNamed:@"status_success"] forState:UIControlStateNormal];
+    [instagramPogressView.refreshIcon setHidden:YES];
+    [instagramPogressView.cancelIcon setHidden:NO];
+}
+
+-(void)openInstagramFailed{
+    [instagramPogressView.statusText setText:@"Opening Failed!"];
+    [instagramPogressView.statusText setTextColor:[UIColor redColor]];
+    [instagramPogressView.statusIcon setBackgroundImage:[UIImage imageNamed:@"status_failed"] forState:UIControlStateNormal];
+    [instagramPogressView.refreshIcon setHidden:NO];
+    [instagramPogressView.cancelIcon setHidden:NO];
+}
+
 
 -(void)showFacebookProgressRow{
     
@@ -1326,8 +1591,15 @@ static ShareProgressView *tumblrPogressView;
         tumblrPogressView = nil;
     } else if([[notification.userInfo objectForKey:@"tag"] isEqualToString:@"4"]){
         flickrPogressView = nil;
+    }else if([[notification.userInfo objectForKey:@"tag"] isEqualToString:@"5"]){
+        instagramPogressView = nil;
+    }else if([[notification.userInfo objectForKey:@"tag"] isEqualToString:@"6"]){
+        emailPogressView = nil;
+    }else if([[notification.userInfo objectForKey:@"tag"] isEqualToString:@"7"]){
+        smsPogressView = nil;
+    }else if([[notification.userInfo objectForKey:@"tag"] isEqualToString:@"8"]){
+        clipBdPogressView = nil;
     }
-    
     if(countOfSharingNetworks <= 0){
         [self setDefaultProgressViewHeight];
         [progressView setHidden:YES];
@@ -1396,7 +1668,7 @@ static ShareProgressView *tumblrPogressView;
     [self fillSuccessStatus:flickrPogressView];
     
     if([instagramButton isSelected] && ![tumblrButton isSelected]){
-        [self shareOnInstagram];
+       // [self shareOnInstagram];
     }
 }
 
@@ -1404,7 +1676,7 @@ static ShareProgressView *tumblrPogressView;
     [self fillErrorStatus:flickrPogressView];
 
     if([instagramButton isSelected] && ![tumblrButton isSelected]){
-        [self shareOnInstagram];
+        //[self shareOnInstagram];
     }
 }
 
@@ -1482,12 +1754,16 @@ static ShareProgressView *tumblrPogressView;
 - (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
 	switch (result) {
 		case MFMailComposeResultCancelled:
+            [self onemailFailed];
 			break;
 		case MFMailComposeResultSaved:
+            [self onemailFailed];
 			break;
 		case MFMailComposeResultSent:
+            [self onemailSuccess];
 			break;
 		case MFMailComposeResultFailed:
+            [self onemailFailed];
 			break;
 	}
     
@@ -1501,7 +1777,7 @@ static ShareProgressView *tumblrPogressView;
                                            
                                            if([instagramButton isSelected] && (![tumblrButton isSelected] && ![flickrButton isSelected])){
 
-                                               [self shareOnInstagram];
+                                              // [self shareOnInstagram];
                                            }
                                        }
                                        
@@ -1512,10 +1788,13 @@ static ShareProgressView *tumblrPogressView;
 -(void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result{
 	switch (result) {
 		case MessageComposeResultCancelled:
+            [self onsmsFailed];
 			break;
 		case MessageComposeResultSent:
+            [self onsmsSuccess];
 			break;
 		case MessageComposeResultFailed:
+            [self onsmsFailed];
 			break;
 	}
     
@@ -1524,7 +1803,7 @@ static ShareProgressView *tumblrPogressView;
                                        
                                        if([instagramButton isSelected] && (![tumblrButton isSelected] && ![flickrButton isSelected] && ![emailButton isSelected])){
                                            
-                                           [self shareOnInstagram];
+                                          // [self shareOnInstagram];
                                        }
                                    }];
 }
@@ -1550,9 +1829,6 @@ static ShareProgressView *tumblrPogressView;
     
     [self fillErrorStatus:tumblrPogressView];
     
-    if([instagramButton isSelected]){
-        [self shareOnInstagram];
-    }
     
 }
 - (void) tumblrUploadrDidSucceed:(TumblrUploadr *)tu withResponse:(NSString *)response {
@@ -1572,7 +1848,7 @@ static ShareProgressView *tumblrPogressView;
     }
     
     if([instagramButton isSelected]){
-        [self shareOnInstagram];
+       // [self shareOnInstagram];
     }
     
 }
@@ -1643,6 +1919,7 @@ static ShareProgressView *tumblrPogressView;
                statusText:(NSString *)statusText {
     NSLog(@"Shortening failed for link %@: status code: %d, status text: %@",
           [longURL absoluteString], statusCode, statusText);
+    [self onsmsFailed];
 }
 
 #pragma leaving code
@@ -1698,6 +1975,10 @@ static ShareProgressView *tumblrPogressView;
     [facebookPogressView release], facebookPogressView = nil;
     [twitterPogressView release], twitterPogressView = nil;
     [tumblrPogressView release], tumblrPogressView = nil;
+    [emailPogressView release], emailPogressView = nil;
+    [smsPogressView release], smsPogressView = nil;
+    [clipBdPogressView release], clipBdPogressView = nil;
+    [instagramPogressView release], instagramPogressView = nil;
     [progressView release]; progressView = nil;
 	[svController release];
     [super dealloc];

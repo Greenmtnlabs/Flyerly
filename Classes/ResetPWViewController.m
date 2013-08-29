@@ -33,13 +33,14 @@
     label.textAlignment = UITextAlignmentCenter;
     label.textColor = [UIColor whiteColor];
     //    label.backgroundColor = [UIColor blueColor ];
-    label.text = @"REGISTER";
+    label.text = @"FORGOT PASSWORD?";
     self.navigationItem.titleView = label;
     UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)];
     // [welcomeButton setTitle:@" Welcome" forState:UIControlStateNormal];
     backButton.titleLabel.font = [UIFont systemFontOfSize:14.0];
     [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
     [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
+     backButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarButton,nil]];
 
@@ -61,15 +62,44 @@
     
     [PFUser requestPasswordResetForEmailInBackground:username.text block:^(BOOL succeeded, NSError *error){
         if (error) {
+            PFQuery *query = [PFUser query];
+            [query whereKey:@"username" equalTo:username.text];
+            [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
+                
+                  NSString *dbUsername = [object objectForKey:@"email"];
+                
+                if(dbUsername){
+                    [PFUser requestPasswordResetForEmailInBackground:dbUsername block:^(BOOL succeeded, NSError *error){
+                        if (error) {
+                            NSString *errorValue = [error.userInfo objectForKey:@"error"];
+                            [self removeLoadingView];
+                            // For Farmaishi program cancel this [self showAlert:@"Warning!" message:errorValue];
+                            [self showAlert:@"Messege!" message:@"No account exists with email address."];
+                            [dbUsername release];
+                        } else {
+                            
+                            [self removeLoadingView];
+                            [self showAlert:@"Message!" message:@"Reset password email has been sent."];
+                        }
+                    }];
+                    [dbUsername release];
+                    
+                }else{
+                    NSString *errorValue = [error.userInfo objectForKey:@"error"];
+                    [self removeLoadingView];
+                    //[self showAlert:@"Warning!" message:errorValue];
+                    [self showAlert:@"Messege!" message:@"No account exists with email address."];
+
+                    [dbUsername release];
+                }
             
-            NSString *errorValue = [error.userInfo objectForKey:@"error"];
-            [self removeLoadingView];
-            [self showAlert:@"Warning!" message:errorValue];
+            }];
+            
             
         } else {
             
             [self removeLoadingView];
-            [self showAlert:@"Message!" message:@"Email has been sent to your inbox to change your password."];
+            [self showAlert:@"Message!" message:@"Reset password email has been sent."];
         }
     }];
 

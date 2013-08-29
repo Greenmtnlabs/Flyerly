@@ -29,6 +29,7 @@
 		[leftButton.titleLabel setFont:[UIFont fontWithName:@"Symbol" size:12]];
 		[leftButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 		[leftButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
+        leftButton.showsTouchWhenHighlighted = YES;
 		[leftButton.titleLabel setTextAlignment:UITextAlignmentCenter];
 		[leftButton.titleLabel setNumberOfLines:2];
 		

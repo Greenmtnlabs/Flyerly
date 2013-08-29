@@ -27,10 +27,10 @@
 {
     [super viewDidLoad];
     
-    self.tableView.rowHeight =40;
+    self.tableView.rowHeight = 35;
     [self.tableView setBackgroundView:nil];
-    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-
+   // [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
+    [self.tableView setSeparatorColor:[UIColor blackColor]];
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
     self.navigationItem.hidesBackButton = YES;
@@ -39,12 +39,15 @@
     [menuButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [menuButton setBackgroundImage:[UIImage imageNamed:@"menu_button"] forState:UIControlStateNormal];
     [menuButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *menuBarButton = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
+    menuButton.showsTouchWhenHighlighted = YES;
+    UIBarButtonItem *menuBarButton = [[[UIBarButtonItem alloc] initWithCustomView:menuButton] autorelease];
 
     UIButton *editButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 29)] autorelease];
     [editButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [editButton setBackgroundImage:[UIImage imageNamed:@"pencil_icon"] forState:UIControlStateNormal];
     [editButton addTarget:self action:@selector(editClick) forControlEvents:UIControlEventTouchUpInside];
+    editButton.showsTouchWhenHighlighted = YES;
+
     UIBarButtonItem *editBarButton = [[[UIBarButtonItem alloc] initWithCustomView:editButton] autorelease];
     
     [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:menuBarButton,editBarButton,nil ]];
@@ -53,12 +56,15 @@
     [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
     [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    backButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *backBarButton = [[[UIBarButtonItem alloc] initWithCustomView:backButton] autorelease];
 
     UIButton *helpButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 16, 21)]autorelease];
     [helpButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [helpButton setBackgroundImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
     [helpButton addTarget:self action:@selector(gohelp) forControlEvents:UIControlEventTouchUpInside];
+    helpButton.showsTouchWhenHighlighted = YES;
+
     UIBarButtonItem *helpBarButton = [[[UIBarButtonItem alloc] initWithCustomView:helpButton] autorelease];
 
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:backBarButton,helpBarButton,nil ]];
@@ -87,18 +93,17 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"ZCell";
     
-    UITableViewCell *cell = [[tableView dequeueReusableCellWithIdentifier:CellIdentifier] autorelease];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier] ;
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         [[cell textLabel] setFont:[UIFont fontWithName:TITLE_FONT size:14]];
 		[[cell detailTextLabel] setTextColor:[UIColor lightGrayColor]];
 		[[cell detailTextLabel] setFont:[UIFont systemFontOfSize:12.0]];
-       // [cell setBackgroundColor:[UIColor whiteColor]];
-        
+        [cell setBackgroundColor:[UIColor clearColor]];
+        [cell setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"SettingcellBack"]]];
     }
-    [cell setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cell_bg_first"]]];
 /*
     UILabel *lpz = [[UILabel alloc]initWithFrame:CGRectMake(150, 5, 130, 20)];
 	[lpz setBackgroundColor:[UIColor whiteColor]];
@@ -110,19 +115,17 @@
 	lpz.text = ss;
 	[cell.contentView  addSubview:lpz];
 */
-            NSString *s =[[NSString stringWithFormat:@"   %@",[category objectAtIndex:indexPath.row]] autorelease];
+        NSString *s =[NSString stringWithFormat:@"   %@",[category objectAtIndex:indexPath.row]]  ;
         cell.textLabel.text =s;
-    
-    UIImageView *img = [[[UIImageView alloc ]initWithFrame:CGRectMake(0, 0, 21, 20)] autorelease];
-    if (indexPath.row == 0)img.image =[UIImage imageNamed:@"share_settings"];
-    if (indexPath.row == 1)img.image =[UIImage imageNamed:@"save_gallery"];
-    if (indexPath.row == 2)img.image =[UIImage imageNamed:@"account_settings"];
-    if (indexPath.row == 3)img.image =[UIImage imageNamed:@"signout"];
-    cell.imageView.image = img.image;
+   
+    if (indexPath.row == 0)cell.imageView.image =[UIImage imageNamed:@"share_settings"];
+    if (indexPath.row == 1)cell.imageView.image =[UIImage imageNamed:@"save_gallery"];
+    if (indexPath.row == 2)cell.imageView.image =[UIImage imageNamed:@"account_settings"];
+    if (indexPath.row == 3)cell.imageView.image =[UIImage imageNamed:@"signout"];
         //if (indexPath.row == 0 || indexPath.row == 2)cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
         if (indexPath.row == 1){
-            UISwitch *mySwitch = [[[UISwitch alloc] initWithFrame:CGRectMake(220, 7, 0, 0)] autorelease];
+            UISwitch *mySwitch = [[[UISwitch alloc] initWithFrame:CGRectMake(220, 4, 0, 0)] autorelease];
             [cell.contentView  addSubview:mySwitch];
             [mySwitch addTarget:self action:@selector(changeSwitch:) forControlEvents:UIControlEventValueChanged];
         }

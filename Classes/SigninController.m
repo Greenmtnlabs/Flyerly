@@ -74,12 +74,13 @@
  //   password.text = @"logs";
     }
     // Setup welcome button
-    UIButton *welcomeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)];
+    UIButton *backBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)];
     //[welcomeButton setTitle:@"" forState:UIControlStateNormal];
-    welcomeButton.titleLabel.font = [UIFont systemFontOfSize:14.0];
-    [welcomeButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
-    [welcomeButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
-    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:welcomeButton];
+    backBtn.titleLabel.font = [UIFont systemFontOfSize:14.0];
+    [backBtn addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    [backBtn setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
+     backBtn.showsTouchWhenHighlighted = YES;
+    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarButton,nil]];
 
     UIButton *siginBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 46, 30)];
@@ -124,9 +125,11 @@
  */
 }
 
+
 -(void)showLoadingView:(NSString *)message{
     loadingView =[LoadingView loadingViewInView:self.view  text:message];
 }
+
 
 -(void)removeLoadingView{
     for (UIView *subview in self.view.subviews) {
@@ -136,13 +139,14 @@
     }
 }
 
+
 -(BOOL)validate{
     
     // Check empty fields
     if(!email || [email.text isEqualToString:@""] ||
        !password || [password.text isEqualToString:@""]){
         
-        [self showAlert:@"Warning!" message:@"Please fill all the fields"];
+        [self showAlert:@"Warning!" message:@"Think you forgot something"];
         [self removeLoadingView];
         return NO;
     }
@@ -197,7 +201,7 @@
 
     if(loginError){
             [self removeLoadingView];
-            [self showAlert:@"Flyerly Warning!" message:@"Username or Password is incorrect"];
+            [self showAlert:@"Invalid Acccount!" message:@"Please register for a Flyerly account"];
         
     }else{
         

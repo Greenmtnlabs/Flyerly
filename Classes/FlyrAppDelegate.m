@@ -259,11 +259,11 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     [Flurry startSession:@"ZWXZFGSQZ4GMYZBVZYN3"];
 
     // Setup parse
-    [Parse setApplicationId:@"1EmUwhUYIpSEOJyeSBIOqkzUvDHSMHXvWYNjPynq"
-                  clientKey:@"Gk4CuGVOHegOa8lzbISz4NL5qiI75Gh4bNJGRVKX"];
+    [Parse setApplicationId:@"rrU7ilSR4TZNQD9xlDtH8wFoQNK4st5AaITq6Fan"
+                  clientKey:@"P0FxBvDvw0eDYYT01cx8nhaDQdl90BdHGc22jPLn"];
     
     // Setup Bit.ly
-    [[BitlyConfig sharedBitlyConfig] setBitlyLogin:@"rizwanahmed" bitlyAPIKey:@"R_1e747da4d2cb02bd31aab2261ca216e2"];
+    [[BitlyConfig sharedBitlyConfig] setBitlyAPIKey:@"R_3bdc6f8e82d260965325510421c980a0"];
     
     [self clearCache];
 	changesFlag = NO;

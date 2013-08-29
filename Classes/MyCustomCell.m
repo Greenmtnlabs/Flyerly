@@ -32,7 +32,7 @@
     [self setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cell_bg_first"]]];
     
 	CGRect tRect0 = CGRectMake(9, 12, 72, 77);
-	cellImage = [[UIButton alloc] initWithFrame:tRect0];
+	cellImage = [[[UIButton alloc] initWithFrame:tRect0] autorelease];
 	//cellImage.backgroundColor = [UIColor clearColor];
 	//cellImage.opaque = NO;
 	[self.contentView addSubview:cellImage];

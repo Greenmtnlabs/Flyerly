@@ -94,10 +94,9 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     [moreLayersLabel setTextColor:[UIColor whiteColor]];
     [self.view addSubview:moreLayersLabel];
     
-    [addMoreLayerOrSaveFlyerLabel setText:@"ADD MORE LAYERS OR SAVE FLYER"];// \n ADJUST LAYERS OR TAP THEN HOLD TO EDIT OR DELETE LAYER."];
-    [addMoreLayerOrSaveFlyerLabel setNumberOfLines:1];
+    [addMoreLayerOrSaveFlyerLabel setText:@"ADD MORE LAYERS OR ADJUST LAYERS BELOW"];    [addMoreLayerOrSaveFlyerLabel setNumberOfLines:1];
     [addMoreLayerOrSaveFlyerLabel setBackgroundColor:[UIColor clearColor]];
-    [addMoreLayerOrSaveFlyerLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:14]];
+    [addMoreLayerOrSaveFlyerLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:18]];
     [addMoreLayerOrSaveFlyerLabel setTextColor:[UIColor grayColor]];
     [addMoreLayerOrSaveFlyerLabel setTextAlignment:UITextAlignmentCenter];
     [self.view addSubview:addMoreLayerOrSaveFlyerLabel];
@@ -2039,11 +2038,12 @@ int arrangeLayerIndex;
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
     [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
     
-    UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)];
-    [menuButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-    [menuButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
-	[menuButton addTarget:self action:@selector(callMenu) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *leftBarMenuButton = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
+    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)];
+    [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+    [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
+	[backButton addTarget:self action:@selector(callMenu) forControlEvents:UIControlEventTouchUpInside];
+    backButton.showsTouchWhenHighlighted = YES;
+    UIBarButtonItem *leftBarMenuButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     
     UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 16, 21)];
     [helpButton addTarget:self action:@selector(loadHelpController) forControlEvents:UIControlEventTouchUpInside];
@@ -2198,6 +2198,7 @@ int arrangeLayerIndex;
     UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)];
 	[backButton addTarget:self action:@selector(cancelLayer) forControlEvents:UIControlEventTouchUpInside];
     [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
+     backButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     [self.navigationItem setLeftBarButtonItem:backBarButton];
 
@@ -2283,6 +2284,7 @@ int arrangeLayerIndex;
         [doneButton addTarget:self action:@selector(logLayerAddedEvent) forControlEvents:UIControlEventTouchUpInside];
         [doneButton addTarget:self action:@selector(logTextAddedEvent) forControlEvents:UIControlEventTouchUpInside];
         [doneButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
+         doneButton.showsTouchWhenHighlighted = YES;
         UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
         [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
     }
@@ -2291,6 +2293,7 @@ int arrangeLayerIndex;
     [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
 	[backButton addTarget:self action:@selector(callWrite) forControlEvents:UIControlEventTouchUpInside];
     [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
+     backButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     [self.navigationItem setLeftBarButtonItem:backBarButton];
 
@@ -2393,6 +2396,7 @@ int arrangeLayerIndex;
         [doneButton addTarget:self action:@selector(logLayerAddedEvent) forControlEvents:UIControlEventTouchUpInside];
         [doneButton addTarget:self action:@selector(logPhotoAddedEvent) forControlEvents:UIControlEventTouchUpInside];
         [doneButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
+        doneButton.showsTouchWhenHighlighted = YES;
         UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
         [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
     }
@@ -2401,6 +2405,7 @@ int arrangeLayerIndex;
     [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
 	[backButton addTarget:self action:@selector(cancelLayer) forControlEvents:UIControlEventTouchUpInside];
     [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
+     backButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     [self.navigationItem setLeftBarButtonItem:backBarButton];
 
@@ -2602,6 +2607,7 @@ int arrangeLayerIndex;
     [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
 	[backButton addTarget:self action:@selector(chooseTemplate) forControlEvents:UIControlEventTouchUpInside];
     [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
+     backButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     [self.navigationItem setLeftBarButtonItem:backBarButton];
     
@@ -3233,6 +3239,8 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         
             // border radius
             [layerEditMessage setAlpha:0.8];
+              globle = [Singleton RetrieveSingleton];
+            [layerEditMessage setBackgroundColor:[globle colorWithHexString:@"84c341 "]];
         
             [layerEditMessage.statusText setBounds:CGRectMake(layerEditMessage.frame.origin.x, 321, layerEditMessage.frame.size.width-55, layerEditMessage.frame.size.height-1)];
             [layerEditMessage.statusText setTextColor:[UIColor whiteColor]];
@@ -3299,8 +3307,8 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
                 
                 UIImage *image = [UIImage imageNamed:@"cross"];
                 image = [PhotoController imageWithImage:image scaledToSize:CGSizeMake(30, 29)];
-                UIImage *pencilImage = [UIImage imageNamed:@"pencil_icon"];
-                pencilImage = [PhotoController imageWithImage:pencilImage scaledToSize:CGSizeMake(30, 29)];
+                UIImage *pencilImage = [UIImage imageNamed:@"pencil_blue"];
+                pencilImage = [PhotoController imageWithImage:pencilImage scaledToSize:CGSizeMake(19, 19)];
 
                 UIButton *crossButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 50)];
                 [crossButton setImage:image forState:UIControlStateNormal];
@@ -3355,8 +3363,8 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
                 
                 UIImage *image = [UIImage imageNamed:@"cross"];
                 image = [PhotoController imageWithImage:image scaledToSize:CGSizeMake(30, 29)];
-                UIImage *pencilImage = [UIImage imageNamed:@"pencil_icon"];
-                pencilImage = [PhotoController imageWithImage:pencilImage scaledToSize:CGSizeMake(30, 29)];
+                UIImage *pencilImage = [UIImage imageNamed:@"pencil_blue"];
+                pencilImage = [PhotoController imageWithImage:pencilImage scaledToSize:CGSizeMake(19, 19)];
 
                 UIButton *crossButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 50)];
                 [crossButton setImage:image forState:UIControlStateNormal];
@@ -3409,8 +3417,8 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
                 
                 UIImage *image = [UIImage imageNamed:@"cross"];
                 image = [PhotoController imageWithImage:image scaledToSize:CGSizeMake(30, 29)];
-                UIImage *pencilImage = [UIImage imageNamed:@"pencil_icon"];
-                pencilImage = [PhotoController imageWithImage:pencilImage scaledToSize:CGSizeMake(30, 29)];
+                UIImage *pencilImage = [UIImage imageNamed:@"pencil_blue"];
+                pencilImage = [PhotoController imageWithImage:pencilImage scaledToSize:CGSizeMake(19, 19)];
 
                 UIButton *crossButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 50)];
                 [crossButton setImage:image forState:UIControlStateNormal];
@@ -3464,8 +3472,8 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
                 
                 UIImage *image = [UIImage imageNamed:@"cross"];
                 image = [PhotoController imageWithImage:image scaledToSize:CGSizeMake(30, 29)];
-                UIImage *pencilImage = [UIImage imageNamed:@"pencil_icon"];
-                pencilImage = [PhotoController imageWithImage:pencilImage scaledToSize:CGSizeMake(30, 29)];
+                UIImage *pencilImage = [UIImage imageNamed:@"pencil_blue"];
+                pencilImage = [PhotoController imageWithImage:pencilImage scaledToSize:CGSizeMake(19, 19)];
                 
                 UIButton *crossButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 50)];
                 [crossButton setImage:image forState:UIControlStateNormal];
@@ -4093,7 +4101,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     
     } else {
 
-        warningAlert = [[UIAlertView alloc]initWithTitle:@"Warning" message:@"Cannot add more than 10 layers." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil ,nil];
+        warningAlert = [[UIAlertView alloc]initWithTitle:@"" message:@"You can add a total of 10 layers." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil ,nil];
 		[warningAlert show];
 
     }
@@ -4145,6 +4153,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 - (void)animateFirstTouchAtPoint:(CGPoint)touchPoint forView:(UIView *)theView 
 {
+    //[rightUndoBarButton setEnabled:YES];
 	NSValue *touchPointValue = [NSValue valueWithCGPoint:touchPoint] ;
 	[UIView beginAnimations:nil context:touchPointValue];
 	[UIView setAnimationDuration:GROW_ANIMATION_DURATION_SECONDS];
@@ -4770,7 +4779,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 -(void)requestSize:(UIButton *)button{
     
-    UIAlertView *settingsAlert = [[UIAlertView alloc] initWithTitle:@"Message" message:@"Purchase any font and all the sizes will unlocked." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    UIAlertView *settingsAlert = [[UIAlertView alloc] initWithTitle:@"Reminder" message:@"Purchase any (1) font and all font sizes will be unlocked." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [settingsAlert show];
 }
 

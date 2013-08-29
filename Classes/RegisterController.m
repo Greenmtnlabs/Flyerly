@@ -152,6 +152,10 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     username.clearButtonMode = UITextFieldViewModeWhileEditing;
     password.clearButtonMode = UITextFieldViewModeWhileEditing;
     confirmPassword.clearButtonMode = UITextFieldViewModeWhileEditing;
+    email.clearButtonMode = UITextFieldViewModeWhileEditing;
+    name.clearButtonMode = UITextFieldViewModeWhileEditing;
+    phno.clearButtonMode = UITextFieldViewModeWhileEditing;
+
     /*
     if(IS_IPHONE_5){
         [signUpFacebook setFrame:CGRectMake(34, 360, 253, 40)];
@@ -165,15 +169,18 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     backButton.titleLabel.font = [UIFont systemFontOfSize:14.0];
     [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
     [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
+    backButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarButton,nil]];
 
     
     UIButton *signUpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 29)];
     // [welcomeButton setTitle:@" Welcome" forState:UIControlStateNormal];
-    [signUpButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    [signUpButton addTarget:self action:@selector(onSignUp) forControlEvents:UIControlEventTouchUpInside];
     [signUpButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
+    signUpButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:signUpButton];
+    
     [self.navigationItem setRightBarButtonItem:rightBarButton];
 
 /*
@@ -226,7 +233,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
             username.text = userName;
             password.text = pwd;
            // change by Preston [self showAlert:@"Warning!" message:@"User already exists"];
-            warningAlert = [[UIAlertView  alloc]initWithTitle:@"Flyerly Account Already Exists" message:@"Please sign in using existing credentials" delegate:self cancelButtonTitle:@"Sign In" otherButtonTitles:@"Cancel",nil];
+            warningAlert = [[UIAlertView  alloc]initWithTitle:@"Flyerly Account Already Exists" message:@"Account already exists using this account." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Sign In",nil];
             [warningAlert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:NO];
             //[warningAlert show];
             [warningAlert autorelease];
@@ -301,7 +308,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 
 #pragma mark UIAlertView delegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-	if(alertView == warningAlert && buttonIndex == 0) {
+	if(alertView == warningAlert && buttonIndex == 1) {
         globle.twitterUser = nil;
         [[NSUserDefaults standardUserDefaults]  setObject:username.text forKey:@"User"];
         [[NSUserDefaults standardUserDefaults]  setObject:password.text forKey:@"Password"];
@@ -364,7 +371,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
                         if([self CheckUserExists:twitterUser password:@"null"])
                         {
 
-                        warningAlert = [[UIAlertView  alloc]initWithTitle:@"Flyerly Account Already Exists" message:@"Please sign in using existing credentials" delegate:self cancelButtonTitle:@"Sign In" otherButtonTitles:@"Cancel",nil];
+                        warningAlert = [[UIAlertView  alloc]initWithTitle:@"Flyerly Account Already Exists" message:@"Account already exists using this account" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Sign In",nil];
                             [warningAlert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:NO];
                             //[warningAlert show];
                             [warningAlert autorelease];
@@ -408,7 +415,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     // Check empty fields
     if(!username || [username.text isEqualToString:@""]){
         
-        [self showAlert:@"Warning!" message:@"Please fill all Account fields"];
+        [self showAlert:@"Warning!" message:@"Please complete all required fields"];
         [self removeLoadingView];
         return NO;
     }
@@ -418,7 +425,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
         if(!password || [password.text isEqualToString:@""] ||
        !confirmPassword || [confirmPassword.text isEqualToString:@""]){
         
-        [self showAlert:@"Warning!" message:@"Please fill all Account fields"];
+        [self showAlert:@"Warning!" message:@"Please complete all required fields."];
         [self removeLoadingView];
         return NO;
         }
@@ -733,7 +740,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
         
         if([self CheckUserExists:twitterUser password:@"null"])
         {
-            warningAlert = [[UIAlertView  alloc]initWithTitle:@"Flyerly Account Already Exists" message:@"Please sign in using existing credentials" delegate:self cancelButtonTitle:@"Sign In" otherButtonTitles:@"Cancel",nil];
+            warningAlert = [[UIAlertView  alloc]initWithTitle:@"Flyerly Account Already Exists" message:@"Account already exists using this account" delegate:self cancelButtonTitle:@"Cancel"  otherButtonTitles:@"Sign In",nil];
             [warningAlert show];
             
         }

@@ -17,7 +17,7 @@
 //#import "TwitLogin.h"
 //#import "FBLoginButton.h"
 //@class FBSession;
-
+@class LauchViewController;
 @interface SettingViewController : UIViewController<FBRequestDelegate,FBSessionDelegate,OFFlickrAPIRequestDelegate> {
 //@interface SettingViewController : UIViewController <UITextFieldDelegate,FBDialogDelegate, FBSessionDelegate, FBRequestDelegate>{
     /*

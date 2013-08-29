@@ -31,7 +31,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     [scrollView setContentSize:CGSizeMake(320, 1600)];
-    [doneButton setFrame:CGRectMake(doneButton.frame.origin.x, 1371, doneButton.frame.size.width, doneButton.frame.size.height)];
+
     
     // Create right bar button
     /*UIButton *crossButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
@@ -60,20 +60,28 @@
     //self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Help Center" rect:CGRectMake(-60, -6, 50, 50)];
 
     if(IS_IPHONE_5){
+        [doneButton setFrame:CGRectMake(doneButton.frame.origin.x, 1340, doneButton.frame.size.width, doneButton.frame.size.height)];
         emailButton = [[UIButton alloc] initWithFrame:CGRectMake(14, 1335, 120, 10)];
         linkButton = [[UIButton alloc] initWithFrame:CGRectMake(14, 1348, 150, 10)];
         linkFaceBook = [[UIButton alloc] initWithFrame:CGRectMake(14, 1386, 157, 10)];
-        twitLink = [[UIButton alloc] initWithFrame:CGRectMake(14, 1300, 150, 10)];
+        twitLink = [[UIButton alloc] initWithFrame:CGRectMake(14, 1375, 185, 10)];
 
     } else {
+        [doneButton setFrame:CGRectMake(doneButton.frame.origin.x, 1390, doneButton.frame.size.width, doneButton.frame.size.height)];
+
         emailButton = [[UIButton alloc] initWithFrame:CGRectMake(14, 1246, 120, 10)];
         linkButton = [[UIButton alloc] initWithFrame:CGRectMake(14, 1257, 150, 10)];
         linkFaceBook = [[UIButton alloc] initWithFrame:CGRectMake(14, 1386, 120, 10)];
-        twitLink = [[UIButton alloc] initWithFrame:CGRectMake(14, 1300, 150, 10)];
+        twitLink = [[UIButton alloc] initWithFrame:CGRectMake(14, 1283, 185, 10)];
 
     }
+    emailButton.showsTouchWhenHighlighted = YES;
+    linkButton.showsTouchWhenHighlighted = YES;
+    linkFaceBook.showsTouchWhenHighlighted = YES;
+    twitLink.showsTouchWhenHighlighted = YES;
+
   //  linkFaceBook.backgroundColor = [UIColor blackColor];
-//    twitLink.backgroundColor = [UIColor blueColor];
+   // twitLink.backgroundColor = [UIColor blackColor];
 
     [emailButton addTarget:self action:@selector(openEmail:) forControlEvents:UIControlEventTouchUpInside];
     //emailButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:10];
@@ -90,8 +98,8 @@
     [linkFaceBook addTarget:self action:@selector(openFbLink) forControlEvents:UIControlEventTouchUpInside];
     [scrollView addSubview:linkFaceBook];
 
-//    [twitLink addTarget:self action:@selector(openTwLink) forControlEvents:UIControlEventTouchUpInside];
-  //  [twitLink addSubview:twitLink];
+    [twitLink addTarget:self action:@selector(openTwLink) forControlEvents:UIControlEventTouchUpInside];
+    [scrollView addSubview:twitLink];
 
     
     

@@ -118,7 +118,7 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
     [img setFrame:CGRectMake(8,54,230,30)];
     
     UITextField *searchText = [[UITextField alloc]initWithFrame:CGRectMake(15,62,240,25)];
-    searchText.placeholder = @"Search Flyer";
+    searchText.placeholder = @"Flyerly search";
     searchText.font = [UIFont systemFontOfSize:12.0];
     //Search Boutton
     UIButton *seaBotton = [[UIButton alloc] initWithFrame:CGRectMake(252, 54, 58, 30)];
@@ -177,6 +177,7 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
     [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
     [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    backButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
 
     return [NSMutableArray arrayWithObjects:backBarButton,leftBarButton,nil];

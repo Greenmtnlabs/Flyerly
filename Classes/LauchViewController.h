@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "FBConnect.h"
 #import "FBConnect/FBConnect.h"
+#import "MainSettingViewController.h"
 
 @class FlyrViewController;
 @class SettingViewController;
@@ -16,28 +17,28 @@
 @class AddFriendsController;
 @class LoadingView;
 @class FBSession;
-@class FacebookLikeView,MainSettingViewController;
+@class FacebookLikeView;
+@class MainSettingViewController;
 
 
 @interface LauchViewController : UIViewController<FBDialogDelegate,FBSessionDelegate,FBRequestDelegate,UIWebViewDelegate> {
 	PhotoController *ptController;
 	FlyrViewController *tpController;
 	SettingViewController *spController;
-    MainSettingViewController *settingviewcontroller;
+    MainSettingViewController *mainsettingviewcontroller;
 	AddFriendsController *addFriendsController;
 	LoadingView *loadingView;
     
     IBOutlet UILabel *createFlyrLabel;
     IBOutlet UILabel *savedFlyrLabel;
     IBOutlet UILabel *inviteFriendLabel;
-
     IBOutlet UIButton *createFlyrButton;
     IBOutlet UIButton *savedFlyrButton;
     IBOutlet UIButton *inviteFriendButton;
-
-    IBOutlet UIButton *likeButton;
+        IBOutlet UIButton *likeButton;
     IBOutlet UIButton *followButton;
-    
+    IBOutlet UIButton *setBotton;
+
     IBOutlet UIImageView *firstFlyer;
     IBOutlet UIImageView *secondFlyer;
     IBOutlet UIImageView *thirdFlyer;
@@ -97,5 +98,6 @@
 - (IBAction)showLikeButton;
 - (IBAction)onTwitter:(id)sender;
 -(IBAction)goBack;
+-(void)loadMasterSetting;
 
 @end
