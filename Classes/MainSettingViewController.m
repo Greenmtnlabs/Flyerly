@@ -35,12 +35,13 @@
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
     self.navigationItem.hidesBackButton = YES;
     
-    UIButton *menuButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 32, 30)] autorelease];
-    [menuButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-    [menuButton setBackgroundImage:[UIImage imageNamed:@"menu_button"] forState:UIControlStateNormal];
-    [menuButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
-    menuButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *menuBarButton = [[[UIBarButtonItem alloc] initWithCustomView:menuButton] autorelease];
+    UIButton *helpButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 16, 21)]autorelease];
+    [helpButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+    [helpButton setBackgroundImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
+    [helpButton addTarget:self action:@selector(gohelp) forControlEvents:UIControlEventTouchUpInside];
+    helpButton.showsTouchWhenHighlighted = YES;
+    
+    UIBarButtonItem *helpBarButton = [[[UIBarButtonItem alloc] initWithCustomView:helpButton] autorelease];
 
     UIButton *editButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 29)] autorelease];
     [editButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
@@ -50,7 +51,7 @@
 
     UIBarButtonItem *editBarButton = [[[UIBarButtonItem alloc] initWithCustomView:editButton] autorelease];
     
-    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:menuBarButton,editBarButton,nil ]];
+    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:helpBarButton,editBarButton,nil ]];
 
     UIButton *backButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)] autorelease];
     [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
@@ -59,15 +60,8 @@
     backButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *backBarButton = [[[UIBarButtonItem alloc] initWithCustomView:backButton] autorelease];
 
-    UIButton *helpButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 16, 21)]autorelease];
-    [helpButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-    [helpButton setBackgroundImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
-    [helpButton addTarget:self action:@selector(gohelp) forControlEvents:UIControlEventTouchUpInside];
-    helpButton.showsTouchWhenHighlighted = YES;
 
-    UIBarButtonItem *helpBarButton = [[[UIBarButtonItem alloc] initWithCustomView:helpButton] autorelease];
-
-    [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:backBarButton,helpBarButton,nil ]];
+    [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:backBarButton,nil ]];
     
      self.navigationItem.title = @"SETTINGS";
     category = [[NSMutableArray alloc] init];
@@ -152,6 +146,16 @@
     oldsettingveiwcontroller = [[SettingViewController alloc]initWithNibName:@"SettingViewController" bundle:nil];
         [self.navigationController pushViewController:oldsettingveiwcontroller animated:YES];
     }else if(indexPath.row == 3){
+        warningAlert = [[UIAlertView  alloc]initWithTitle:@"Are you sure?" message:@"" delegate:self cancelButtonTitle:@"Sign out" otherButtonTitles:@"Cancel",nil];
+        [warningAlert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:NO];
+        //[warningAlert show];
+        [warningAlert autorelease];
+    }
+    
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+	if(alertView == warningAlert && buttonIndex == 0) {
         [self signOut];
         //selectedCell.textLabel.text = @"Sign Out Successfully";
         AccountController *actaController = [AccountController alloc];
@@ -161,10 +165,11 @@
             [[actaController initWithNibName:@"AccountController" bundle:nil] autorelease];
         }
         [self.navigationController pushViewController:actaController animated:YES];
-    
     }
-    
+    [self.view release];
+
 }
+
 
 - (void)signOut{
     //For Facebook
@@ -233,6 +238,7 @@
 
 
 -(void)editClick{}
+
 -(void)gohelp{
     HelpController *helpController = [[[HelpController alloc]initWithNibName:@"HelpController" bundle:nil] autorelease];
     [self.navigationController pushViewController:helpController animated:YES];

@@ -59,51 +59,52 @@
     [self showLoadingView:@"Wait..."];
     NSLog(@"Forget Password");
     
-    
-    [PFUser requestPasswordResetForEmailInBackground:username.text block:^(BOOL succeeded, NSError *error){
-        if (error) {
-            PFQuery *query = [PFUser query];
-            [query whereKey:@"username" equalTo:username.text];
-            [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
-                
-                  NSString *dbUsername = [object objectForKey:@"email"];
-                
-                if(dbUsername){
-                    [PFUser requestPasswordResetForEmailInBackground:dbUsername block:^(BOOL succeeded, NSError *error){
-                        if (error) {
-                            NSString *errorValue = [error.userInfo objectForKey:@"error"];
-                            [self removeLoadingView];
-                            // For Farmaishi program cancel this [self showAlert:@"Warning!" message:errorValue];
-                            [self showAlert:@"Messege!" message:@"No account exists with email address."];
-                            [dbUsername release];
-                        } else {
-                            
-                            [self removeLoadingView];
-                            [self showAlert:@"Message!" message:@"Reset password email has been sent."];
-                        }
-                    }];
-                    [dbUsername release];
-                    
-                }else{
-                    NSString *errorValue = [error.userInfo objectForKey:@"error"];
-                    [self removeLoadingView];
-                    //[self showAlert:@"Warning!" message:errorValue];
-                    [self showAlert:@"Messege!" message:@"No account exists with email address."];
+    NSString *string = username.text;
+    if ([string rangeOfString:@"@"].location == NSNotFound) {
+        PFQuery *query = [PFUser query];
+        [query whereKey:@"username" equalTo:username.text];
+        [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
+            
+            dbUsername = [object objectForKey:@"email"];
+            NSLog(@"%@",dbUsername);
+            if(dbUsername){
+                [PFUser requestPasswordResetForEmailInBackground:dbUsername block:^(BOOL succeeded, NSError *error){
+                    if (error) {
+                        NSString *errorValue = [error.userInfo objectForKey:@"error"];
+                        [self removeLoadingView];
+                        [self showAlert:@"Warning!" message:errorValue];
+                    } else {
+                        
+                        [self removeLoadingView];
+                        [self showAlert:@"Message!" message:@"Reset password email has been sent."];
+                    }}];
 
-                    [dbUsername release];
-                }
-            
-            }];
-            
-            
-        } else {
-            
-            [self removeLoadingView];
-            [self showAlert:@"Message!" message:@"Reset password email has been sent."];
-        }
-    }];
+            }else{
+                //NSString *errorValue = [error.userInfo objectForKey:@"error"];
+                [self removeLoadingView];
+                //[self showAlert:@"Warning!" message:errorValue];
+                [self showAlert:@"Messege!" message:@"No account exists with email address."];
+                [dbUsername release];
+            }  }];
+
+        
+        
+    } else {
+        [PFUser requestPasswordResetForEmailInBackground:username.text block:^(BOOL succeeded, NSError *error){
+            if (error) {
+                 NSString *errorValue = [error.userInfo objectForKey:@"error"];
+                [self removeLoadingView];
+                [self showAlert:@"Warning!" message:errorValue];
+            } else {
+                
+                [self removeLoadingView];
+                [self showAlert:@"Message!" message:@"Reset password email has been sent."];
+            }}];
+    }
 
 }
+
+
 -(void)showAlert:(NSString *)title message:(NSString *)message{
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
                                                     message:message

@@ -57,7 +57,7 @@
 					<object class="IBUIImageView" id="904241897">
 						<reference key="NSNextResponder" ref="186061059"/>
 						<int key="NSvFlags">300</int>
-						<string key="NSFrame">{{40, 177}, {240, 30}}</string>
+						<string key="NSFrame">{{34, 126}, {253, 35}}</string>
 						<reference key="NSSuperview" ref="186061059"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="297458046"/>
@@ -72,7 +72,7 @@
 					<object class="IBUIImageView" id="495147765">
 						<reference key="NSNextResponder" ref="186061059"/>
 						<int key="NSvFlags">300</int>
-						<string key="NSFrame">{{40, 211}, {240, 30}}</string>
+						<string key="NSFrame">{{34, 162}, {253, 35}}</string>
 						<reference key="NSSuperview" ref="186061059"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="927374260"/>
@@ -87,7 +87,7 @@
 					<object class="IBUITextField" id="297458046">
 						<reference key="NSNextResponder" ref="186061059"/>
 						<int key="NSvFlags">300</int>
-						<string key="NSFrame">{{78, 177}, {202, 30}}</string>
+						<string key="NSFrame">{{85, 129}, {191, 30}}</string>
 						<reference key="NSSuperview" ref="186061059"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="495147765"/>
@@ -126,7 +126,7 @@
 					<object class="IBUITextField" id="927374260">
 						<reference key="NSNextResponder" ref="186061059"/>
 						<int key="NSvFlags">300</int>
-						<string key="NSFrame">{{78, 211}, {202, 30}}</string>
+						<string key="NSFrame">{{85, 165}, {202, 30}}</string>
 						<reference key="NSSuperview" ref="186061059"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="316830851"/>
@@ -154,7 +154,7 @@
 					<object class="IBUIButton" id="316830851">
 						<reference key="NSNextResponder" ref="186061059"/>
 						<int key="NSvFlags">300</int>
-						<string key="NSFrame">{{40, 246}, {240, 35}}</string>
+						<string key="NSFrame">{{34, 200}, {253, 35}}</string>
 						<reference key="NSSuperview" ref="186061059"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="911453800"/>
@@ -193,7 +193,7 @@
 					<object class="IBUIButton" id="717250530">
 						<reference key="NSNextResponder" ref="186061059"/>
 						<int key="NSvFlags">300</int>
-						<string key="NSFrame">{{153, 312}, {110, 30}}</string>
+						<string key="NSFrame">{{168, 279}, {101, 28}}</string>
 						<reference key="NSSuperview" ref="186061059"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="231095133"/>
@@ -222,8 +222,8 @@
 					</object>
 					<object class="IBUIButton" id="805387390">
 						<reference key="NSNextResponder" ref="186061059"/>
-						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{63, 367}, {195, 35}}</string>
+						<int key="NSvFlags">256</int>
+						<string key="NSFrame">{{61, 339}, {200, 35}}</string>
 						<reference key="NSSuperview" ref="186061059"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="939162648"/>
@@ -255,8 +255,8 @@
 					</object>
 					<object class="IBUIButton" id="939162648">
 						<reference key="NSNextResponder" ref="186061059"/>
-						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{63, 409}, {195, 35}}</string>
+						<int key="NSvFlags">256</int>
+						<string key="NSFrame">{{61, 382}, {200, 35}}</string>
 						<reference key="NSSuperview" ref="186061059"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="787787838"/>
@@ -280,7 +280,7 @@
 					<object class="IBUIButton" id="911453800">
 						<reference key="NSNextResponder" ref="186061059"/>
 						<int key="NSvFlags">300</int>
-						<string key="NSFrame">{{107, 286}, {103, 21}}</string>
+						<string key="NSFrame">{{109, 239}, {103, 21}}</string>
 						<reference key="NSSuperview" ref="186061059"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="987729300"/>
@@ -310,10 +310,11 @@
 					</object>
 					<object class="IBUIActivityIndicatorView" id="787787838">
 						<reference key="NSNextResponder" ref="186061059"/>
-						<int key="NSvFlags">-2147483356</int>
-						<string key="NSFrame">{{228, 416}, {20, 20}}</string>
+						<int key="NSvFlags">-2147483392</int>
+						<string key="NSFrame">{{226, 390}, {20, 20}}</string>
 						<reference key="NSSuperview" ref="186061059"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -323,7 +324,7 @@
 					<object class="IBUIImageView" id="722839967">
 						<reference key="NSNextResponder" ref="186061059"/>
 						<int key="NSvFlags">300</int>
-						<string key="NSFrame">{{125, 57}, {66, 83}}</string>
+						<string key="NSFrame">{{139, 56}, {42, 56}}</string>
 						<reference key="NSSuperview" ref="186061059"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="904241897"/>
@@ -337,8 +338,8 @@
 					</object>
 					<object class="IBUILabel" id="987729300">
 						<reference key="NSNextResponder" ref="186061059"/>
-						<int key="NSvFlags">300</int>
-						<string key="NSFrame">{{63, 314}, {79, 21}}</string>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{70, 285}, {79, 21}}</string>
 						<reference key="NSSuperview" ref="186061059"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="717250530"/>
@@ -359,15 +360,19 @@
 							<string key="name">HelveticaNeue-CondensedBold</string>
 							<string key="family">Helvetica Neue</string>
 							<int key="traits">2</int>
-							<double key="pointSize">12</double>
+							<double key="pointSize">13</double>
 						</object>
-						<reference key="IBUIFont" ref="861401459"/>
+						<object class="NSFont" key="IBUIFont">
+							<string key="NSName">HelveticaNeue-Bold</string>
+							<double key="NSSize">13</double>
+							<int key="NSfFlags">16</int>
+						</object>
 						<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 					</object>
 					<object class="IBUILabel" id="231095133">
 						<reference key="NSNextResponder" ref="186061059"/>
-						<int key="NSvFlags">300</int>
-						<string key="NSFrame">{{0, 356.5}, {320, 1}}</string>
+						<int key="NSvFlags">256</int>
+						<string key="NSFrame">{{0, 320.5}, {320, 1}}</string>
 						<reference key="NSSuperview" ref="186061059"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="805387390"/>
@@ -388,7 +393,9 @@
 							<string key="IBUIColorCocoaTouchKeyPath">darkTextColor</string>
 						</object>
 						<nil key="IBUIHighlightedColor"/>
+						<string key="IBUIShadowOffset">{0, 0}</string>
 						<int key="IBUIBaselineAdjustment">0</int>
+						<bool key="IBUIEnabled">NO</bool>
 						<object class="IBUIFontDescription" key="IBUIFontDescription">
 							<int key="type">1</int>
 							<double key="pointSize">17</double>
@@ -404,7 +411,7 @@
 				<string key="NSFrame">{{0, 20}, {320, 460}}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="336059047"/>
+				<reference key="NSNextKeyView"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">1</int>
 					<bytes key="NSRGB">MC45NTkyODQ0NzIgMC45NzMyMjE3MjM4IDAuOTg0Mjk1MjgwNgA</bytes>
@@ -713,7 +720,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">120</int>
+			<int key="maxID">121</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">

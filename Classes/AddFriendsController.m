@@ -132,7 +132,7 @@ BOOL selectAll;
         launchCotroller = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
     }
 
-	[self.navigationController pushViewController:launchCotroller animated:YES];
+	[self.navigationController pushViewController:launchCotroller animated:NO];
 }
 
 /*

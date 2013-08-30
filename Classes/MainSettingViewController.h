@@ -23,6 +23,7 @@
     UISwitch *mySwitch;
     AccountController   *actaController;
     HelpController *helpController;
+    UIAlertView *warningAlert;
 }
 @property (strong, nonatomic)IBOutlet UITableView *tableView;
 - (void)changeSwitch:(id)sender;

@@ -39,13 +39,13 @@ extern NSString* kGetSessionProxy;
     label.text = @"Sharing Options";
     self.navigationItem.titleView = label;
 
-    UIButton *menuButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 31, 30)] autorelease];
-    [menuButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-    [menuButton setBackgroundImage:[UIImage imageNamed:@"menu_button"] forState:UIControlStateNormal];
-    [menuButton addTarget:self action:@selector(goToMain) forControlEvents:UIControlEventTouchUpInside];
-    menuButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *menuBarButton = [[[UIBarButtonItem alloc] initWithCustomView:menuButton] autorelease];
-    [self.navigationItem setRightBarButtonItem:menuBarButton];
+    UIButton *helpButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 16, 21)] autorelease];
+    [helpButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+    [helpButton setBackgroundImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
+    [helpButton addTarget:self action:@selector(gohelp) forControlEvents:UIControlEventTouchUpInside];
+    helpButton.showsTouchWhenHighlighted = YES;
+    UIBarButtonItem *helpBarButton = [[UIBarButtonItem alloc] initWithCustomView:helpButton];
+    [self.navigationItem setRightBarButtonItem:helpBarButton];
     
     UIButton *backBtn = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)] autorelease];
     [backBtn addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
@@ -375,6 +375,12 @@ extern NSString* kGetSessionProxy;
 	}
     
     [controller dismissModalViewControllerAnimated:YES];
+}
+
+-(void)gohelp{
+    HelpController *helpController = [[[HelpController alloc]initWithNibName:@"HelpController" bundle:nil] autorelease];
+    [self.navigationController pushViewController:helpController animated:YES];
+    
 }
 /*
 @synthesize password,user,doneButton,scrollView,navBar,twitDialog;

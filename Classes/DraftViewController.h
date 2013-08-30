@@ -86,8 +86,8 @@
 @property(nonatomic,retain) ShareProgressView *facebookPogressView;
 @property(nonatomic,retain) ShareProgressView *twitterPogressView;
 @property(nonatomic,retain) ShareProgressView *tumblrPogressView;
-@property(nonatomic,retain) ShareProgressView *flickrPogressView;*/
-@property(nonatomic,retain) ShareProgressView *instagramPogressView;
+@property(nonatomic,retain) ShareProgressView *flickrPogressView;
+@property(nonatomic,retain) ShareProgressView *instagramPogressView;*/
 
 @property(nonatomic,retain) IBOutlet UILabel *saveToCameraRollLabel;
 @property(nonatomic,retain) IBOutlet UISwitch *saveToRollSwitch;
@@ -140,5 +140,25 @@
 -(IBAction)searchNearByLocations;
 -(void)goback;
 -(void)share;
+-(void)updateSocialStates;
+
+-(void)showFacebookProgressRow;
+-(void)showTwitterProgressRow;
+-(void)showTumblrProgressRow;
+-(void)showFlickrProgressRow;
+-(void)showInstagramProgressRow;
+-(void)showclipBdProgressRow;
+-(void)showsmsProgressRow;
+-(void)showemailProgressRow;
+-(void)onclipBdSuccess;
+-(void)onemailSuccess;
+-(void)onemailFailed;
+-(void)onsmsSuccess;
+-(void)onsmsFailed;
+-(void)openInstagramSuccess;
+-(void)openInstagramFailed;
+-(void)fillErrorStatus:(ShareProgressView *)shareView;
+-(void)fillSuccessStatus:(ShareProgressView *)shareView;
+-(void)closeSharingProgressSuccess:(NSNotification *)notification;
 
 @end

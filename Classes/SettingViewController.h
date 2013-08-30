@@ -88,5 +88,7 @@
 -(IBAction)loadHelpController;
 -(IBAction)makeEmail;
 -(IBAction)onClickSaveToCameraRollSwitchButton;
+-(void)gohelp;
+
 
 @end

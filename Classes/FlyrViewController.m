@@ -426,7 +426,7 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
         launchCotroller = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
     }
     
-	[self.navigationController pushViewController:launchCotroller animated:YES];
+  	[self.navigationController pushViewController:launchCotroller animated:NO];
 }
 @end
 

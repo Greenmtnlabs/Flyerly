@@ -37,8 +37,8 @@ static ShareProgressView *clipBdPogressView;
 
 @implementation DraftViewController
 
-@synthesize selectedFlyerImage,imgView,navBar,fvController,svController,titleView,descriptionView,selectedFlyerDescription,selectedFlyerTitle, detailFileName, imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,loadingView,dic,fromPhotoController,scrollView,instagramPogressView, saveToCameraRollLabel, saveToRollSwitch,twit,locationBackground,locationLabel,networkParentView,locationButton,listOfPlaces,bitly,clipboardlabel;
-//@synthesize twitterPogressView,facebookPogressView,tumblrPogressView,flickrPogressView,progressView;
+@synthesize selectedFlyerImage,imgView,navBar,fvController,svController,titleView,descriptionView,selectedFlyerDescription,selectedFlyerTitle, detailFileName, imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,loadingView,dic,fromPhotoController,scrollView, saveToCameraRollLabel, saveToRollSwitch,twit,locationBackground,locationLabel,networkParentView,locationButton,listOfPlaces,bitly,clipboardlabel;
+//@synthesize twitterPogressView,facebookPogressView,tumblrPogressView,flickrPogressView,progressView,instagramPogressView;
 
 -(void)callFlyrView{
 	[self.navigationController popToViewController:fvController animated:YES];
@@ -475,6 +475,9 @@ static ShareProgressView *clipBdPogressView;
                 [self showclipBdProgressRow];
                 [self onclipcordClick];
             }
+            [progressView setHidden:NO];
+            
+            [self showAlert];
         }else{
             
             // Check internet connectivity
@@ -836,18 +839,19 @@ static ShareProgressView *clipBdPogressView;
         if([instagramButton isSelected]){
             [socialArray removeObjectAtIndex:5]; //Instagram
             [socialArray insertObject:@"1" atIndex:5]; //Instagram
-        }
+        }/*
         if([emailButton isSelected]){
             [socialArray removeObjectAtIndex:6]; //email
             [socialArray insertObject:@"1" atIndex:6]; //email
         }
+          */
         if([smsButton isSelected]){
-            [socialArray removeObjectAtIndex:7]; //email
-            [socialArray insertObject:@"1" atIndex:7]; //email
+            [socialArray removeObjectAtIndex:6]; //SMS
+            [socialArray insertObject:@"1" atIndex:6]; //SMS
         }
         if([clipboardButton isSelected]){
-            [socialArray removeObjectAtIndex:8]; //email
-            [socialArray insertObject:@"1" atIndex:8]; //email
+            [socialArray removeObjectAtIndex:7]; //CLIPBOARD
+            [socialArray insertObject:@"1" atIndex:7]; //CLIPBOARD
         }
 
 
@@ -889,10 +893,23 @@ static ShareProgressView *clipBdPogressView;
         } else  {
             [socialArray addObject:@"0"]; //Instagram
         }
+        
+        if([smsButton isSelected]){
+            [socialArray addObject:@"1"]; //SMS
+        } else  {
+            [socialArray addObject:@"0"]; //SMS
+        }
+        
+        if([clipboardButton isSelected]){
+            [socialArray addObject:@"1"]; //CLIPBOARD
+        } else  {
+            [socialArray addObject:@"0"]; //CLIPBOARD
+        }
+        
     }
     
-    [socialArray addObject:@"0"]; //SMS
-    [socialArray addObject:@"0"]; //Clipboard
+   // [socialArray addObject:@"0"]; //SMS
+        //[socialArray addObject:@"0"]; //Clipboard
 
     [[NSFileManager defaultManager] removeItemAtPath:finalImgWritePath error:nil];
     [socialArray writeToFile:finalImgWritePath atomically:YES];
@@ -1258,6 +1275,7 @@ static ShareProgressView *clipBdPogressView;
     if(clipBdPogressView){
         NSDictionary *itemDetails = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%d", clipBdPogressView.tag], @"tag", nil];
         [clipBdPogressView removeFromSuperview];
+        NSLog(@"%@",itemDetails);
         [[NSNotificationCenter defaultCenter] postNotificationName:CloseShareProgressNotification object:nil userInfo:itemDetails];
     }
     
@@ -1319,7 +1337,7 @@ static ShareProgressView *clipBdPogressView;
     // Remove and Add if view already visible
     if(emailPogressView){
         NSDictionary *itemDetails = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%d", emailPogressView.tag], @"tag", nil];
-        [instagramPogressView removeFromSuperview];
+        [emailPogressView removeFromSuperview];
         [[NSNotificationCenter defaultCenter] postNotificationName:CloseShareProgressNotification object:nil userInfo:itemDetails];
     }
     
