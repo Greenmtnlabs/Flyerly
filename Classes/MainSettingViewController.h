@@ -13,6 +13,8 @@
 #import "Common.h"
 #import "HelpController.h"
 #import "SettingViewController.h"
+#import "PhotoController.h"
+@class PhotoController ;
 @class AccountController,LauchViewController,HelpController,SettingViewController;
 @interface MainSettingViewController : UIViewController <UITableViewDelegate>{
 
@@ -24,6 +26,8 @@
     AccountController   *actaController;
     HelpController *helpController;
     UIAlertView *warningAlert;
+    PhotoController *ptController;
+
 }
 @property (strong, nonatomic)IBOutlet UITableView *tableView;
 - (void)changeSwitch:(id)sender;

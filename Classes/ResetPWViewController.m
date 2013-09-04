@@ -72,18 +72,19 @@
                     if (error) {
                         NSString *errorValue = [error.userInfo objectForKey:@"error"];
                         [self removeLoadingView];
-                        [self showAlert:@"Warning!" message:errorValue];
+                         [self showAlert:@"No account exists with username" message:@""];
+                        //[self showAlert:@"Warning!" message:errorValue];
                     } else {
                         
                         [self removeLoadingView];
-                        [self showAlert:@"Message!" message:@"Reset password email has been sent."];
+                        [self showAlert:@"Reset password email has been sent." message:@""];
                     }}];
 
             }else{
                 //NSString *errorValue = [error.userInfo objectForKey:@"error"];
                 [self removeLoadingView];
                 //[self showAlert:@"Warning!" message:errorValue];
-                [self showAlert:@"Messege!" message:@"No account exists with email address."];
+                [self showAlert:@"No account exists with username" message:@""];
                 [dbUsername release];
             }  }];
 
@@ -94,11 +95,11 @@
             if (error) {
                  NSString *errorValue = [error.userInfo objectForKey:@"error"];
                 [self removeLoadingView];
-                [self showAlert:@"Warning!" message:errorValue];
+                [self showAlert:@"No account exists with email address." message:@""];
             } else {
                 
                 [self removeLoadingView];
-                [self showAlert:@"Message!" message:@"Reset password email has been sent."];
+                [self showAlert:@"Reset password email has been sent." message:@""];
             }}];
     }
 

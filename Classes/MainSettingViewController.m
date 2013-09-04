@@ -122,6 +122,14 @@
             UISwitch *mySwitch = [[[UISwitch alloc] initWithFrame:CGRectMake(220, 4, 0, 0)] autorelease];
             [cell.contentView  addSubview:mySwitch];
             [mySwitch addTarget:self action:@selector(changeSwitch:) forControlEvents:UIControlEventValueChanged];
+            
+            NSString  *savecamra = [[NSUserDefaults standardUserDefaults] stringForKey:@"saveToCameraRollSetting"];
+            NSLog(@"%@",savecamra);
+            if (savecamra == nil) {
+                [mySwitch setOn:NO];
+            }else{
+                [mySwitch setOn:YES];
+            }
         }
     return cell;
 }
@@ -237,7 +245,14 @@
 }
 
 
--(void)editClick{}
+-(void)editClick{
+    //[Flurry logEvent:@"Create Flyer"];    
+	ptController = [[PhotoController alloc]initWithNibName:@"PhotoController" bundle:nil];
+    ptController.flyerNumber = -1;
+	[self.navigationController pushViewController:ptController animated:YES];
+	[ptController release];
+
+}
 
 -(void)gohelp{
     HelpController *helpController = [[[HelpController alloc]initWithNibName:@"HelpController" bundle:nil] autorelease];

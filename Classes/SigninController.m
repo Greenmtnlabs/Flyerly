@@ -146,7 +146,7 @@
     if(!email || [email.text isEqualToString:@""] ||
        !password || [password.text isEqualToString:@""]){
         
-        [self showAlert:@"Warning!" message:@"Think you forgot something"];
+        [self showAlert:@"Think you forgot something..." message:@""];
         [self removeLoadingView];
         return NO;
     }

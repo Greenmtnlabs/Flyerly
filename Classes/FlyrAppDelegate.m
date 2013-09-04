@@ -263,7 +263,8 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
                   clientKey:@"P0FxBvDvw0eDYYT01cx8nhaDQdl90BdHGc22jPLn"];
     
     // Setup Bit.ly
-    [[BitlyConfig sharedBitlyConfig] setBitlyAPIKey:@"R_3bdc6f8e82d260965325510421c980a0"];
+    [[BitlyConfig sharedBitlyConfig] setBitlyLogin:@"flyerly" bitlyAPIKey:@"R_3bdc6f8e82d260965325510421c980a0"];
+  //  [[BitlyConfig sharedBitlyConfig] setBitlyAPIKey:@"R_3bdc6f8e82d260965325510421c980a0"];
     
     [self clearCache];
 	changesFlag = NO;
@@ -313,7 +314,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
             lauchController = [[[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil] autorelease];
 
         }
-
+        
         NSString  *usr = [[NSUserDefaults standardUserDefaults] stringForKey:@"User"];
         if (usr == nil) {
             [navigationController pushViewController:accountController animated:YES];

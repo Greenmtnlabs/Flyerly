@@ -420,13 +420,15 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
 }
 
 -(void)goBack{
+    /*
     if(IS_IPHONE_5){
         launchCotroller = [[LauchViewController alloc]initWithNibName:@"LauchViewControllerIPhone5" bundle:nil];
     }   else{
         launchCotroller = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
     }
-    
-  	[self.navigationController pushViewController:launchCotroller animated:NO];
+     [self.navigationController pushViewController:launchCotroller animated:NO];
+*/
+  	[self.navigationController popViewControllerAnimated:YES];
 }
 @end
 

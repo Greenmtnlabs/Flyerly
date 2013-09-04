@@ -174,7 +174,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarButton,nil]];
 
     
-    UIButton *signUpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 29)];
+    UIButton *signUpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)];
     // [welcomeButton setTitle:@" Welcome" forState:UIControlStateNormal];
     [signUpButton addTarget:self action:@selector(onSignUp) forControlEvents:UIControlEventTouchUpInside];
     [signUpButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
@@ -233,11 +233,14 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
             username.text = userName;
             password.text = pwd;
            // change by Preston [self showAlert:@"Warning!" message:@"User already exists"];
-            warningAlert = [[UIAlertView  alloc]initWithTitle:@"Flyerly Account Already Exists" message:@"Account already exists using this account." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Sign In",nil];
+            warningAlert = [[UIAlertView  alloc]initWithTitle:@"Account already exists using this account." message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Sign In",nil];
             [warningAlert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:NO];
             //[warningAlert show];
             [warningAlert autorelease];
-            
+            [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"saveToCameraRollSetting"];
+            [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"clipSetting"];
+            [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"emailSetting"];
+            [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"smsSetting"];
             [self removeLoadingView];
 
         } else {
@@ -257,7 +260,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 
         FlyrAppDelegate *appDelegate = (FlyrAppDelegate *) [[UIApplication sharedApplication]delegate];
         appDelegate.facebook.sessionDelegate = self;
-        
+
         if(!appDelegate.facebook) {
             
             //get facebook app id
@@ -275,9 +278,10 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
         if([appDelegate.facebook isSessionValid]) {
             
             [appDelegate.facebook requestWithGraphPath:@"me" andDelegate:self];
+            [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"facebookSetting"];
 
         } else {
-            
+            [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"facebookSetting"];
             [appDelegate.facebook authorize:[NSArray arrayWithObjects: @"read_stream",
                                              @"publish_stream", @"email", nil]];
         }
@@ -334,6 +338,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     if([AddFriendsController connected]){
         act.hidden = NO;
         waiting.hidden = NO;
+        [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"twitterSetting"];
         if([TWTweetComposeViewController canSendTweet]){
             
             ACAccountStore *account = [[ACAccountStore alloc] init];
@@ -370,8 +375,8 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
                     
                         if([self CheckUserExists:twitterUser password:@"null"])
                         {
-
-                        warningAlert = [[UIAlertView  alloc]initWithTitle:@"Flyerly Account Already Exists" message:@"Account already exists using this account" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Sign In",nil];
+                            
+                        warningAlert = [[UIAlertView  alloc]initWithTitle:@"Account already exists using this account" message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Sign In",nil];
                             [warningAlert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:NO];
                             //[warningAlert show];
                             [warningAlert autorelease];
@@ -479,7 +484,12 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
             }   else{
                 launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
             }
-            
+
+            [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"saveToCameraRollSetting"];
+            [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"clipSetting"];
+            [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"emailSetting"];
+            [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"smsSetting"];
+
             [self.navigationController pushViewController:launchController animated:YES];
         }
     }];
@@ -740,7 +750,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
         
         if([self CheckUserExists:twitterUser password:@"null"])
         {
-            warningAlert = [[UIAlertView  alloc]initWithTitle:@"Flyerly Account Already Exists" message:@"Account already exists using this account" delegate:self cancelButtonTitle:@"Cancel"  otherButtonTitles:@"Sign In",nil];
+            warningAlert = [[UIAlertView  alloc]initWithTitle:@"Account already exists using this account" message:@"" delegate:self cancelButtonTitle:@"Cancel"  otherButtonTitles:@"Sign In",nil];
             [warningAlert show];
             
         }

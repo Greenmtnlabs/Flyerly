@@ -231,6 +231,7 @@
 -(void) chooseTemplate;
 -(void) choosePhoto;
 -(void) saveMyFlyer;
+-(void)openCustomCamera;
 - (void)layoutScrollImages:(UIScrollView*)selectedScrollView scrollWidth:(NSInteger)kScrollObjWidth scrollHeight:(NSInteger)kScrollObjHeight;
 -(NSData*)getCurrentFrameAndSaveIt;
 -(void)loadPhotoLibrary;

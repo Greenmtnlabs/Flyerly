@@ -94,9 +94,9 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     [moreLayersLabel setTextColor:[UIColor whiteColor]];
     [self.view addSubview:moreLayersLabel];
     
-    [addMoreLayerOrSaveFlyerLabel setText:@"ADD MORE LAYERS OR ADJUST LAYERS BELOW"];    [addMoreLayerOrSaveFlyerLabel setNumberOfLines:1];
+    [addMoreLayerOrSaveFlyerLabel setText:@"ADD MORE LAYERS OR ADJUST LAYERS BELOW"];    [addMoreLayerOrSaveFlyerLabel setNumberOfLines:2];
     [addMoreLayerOrSaveFlyerLabel setBackgroundColor:[UIColor clearColor]];
-    [addMoreLayerOrSaveFlyerLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:18]];
+    [addMoreLayerOrSaveFlyerLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:16]];
     [addMoreLayerOrSaveFlyerLabel setTextColor:[UIColor grayColor]];
     [addMoreLayerOrSaveFlyerLabel setTextAlignment:UITextAlignmentCenter];
     [self.view addSubview:addMoreLayerOrSaveFlyerLabel];
