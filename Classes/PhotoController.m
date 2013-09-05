@@ -437,12 +437,16 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     
     // Add more layer tabs
 	[addMoreFontTabButton setBackgroundImage:[UIImage imageNamed:@"text_icon"] forState:UIControlStateNormal];
+    [addMoreFontTabButton setBackgroundImage:[UIImage imageNamed:@"text_icon_selected"] forState:UIControlStateSelected];
+
 	[addMoreFontTabButton addTarget:self action:@selector(setAddMoreLayerTabAction:) forControlEvents:UIControlEventTouchUpInside];
 	addMoreFontTabButton.alpha =  ALPHA0;
 	addMoreFontTabButton.tag = 10001;
 	[self.view addSubview:addMoreFontTabButton];
 	
 	[addMorePhotoTabButton setBackgroundImage:[UIImage imageNamed:@"image_icon"] forState:UIControlStateNormal];
+    [addMorePhotoTabButton setBackgroundImage:[UIImage imageNamed:@"image_icon_selected"] forState:UIControlStateSelected];
+    
 	[addMorePhotoTabButton addTarget:self action:@selector(setAddMoreLayerTabAction:) forControlEvents:UIControlEventTouchUpInside];
 	addMorePhotoTabButton.alpha =  ALPHA0;
 	addMorePhotoTabButton.tag = 10002;
@@ -450,19 +454,25 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 	[self.view addSubview:addMorePhotoTabButton];
 	
 	[addMoreSymbolTabButton setBackgroundImage:[UIImage imageNamed:@"symbolicon_button"] forState:UIControlStateNormal];
+    	[addMoreSymbolTabButton setBackgroundImage:[UIImage imageNamed:@"symbolicon_button_selected"] forState:UIControlStateSelected];
 	[addMoreSymbolTabButton addTarget:self action:@selector(setAddMoreLayerTabAction:) forControlEvents:UIControlEventTouchUpInside];
 	addMoreSymbolTabButton.alpha =  ALPHA0;
 	addMoreSymbolTabButton.tag = 10003;
 	[self.view addSubview:addMoreSymbolTabButton];
     
 	[addMoreIconTabButton setBackgroundImage:[UIImage imageNamed:@"icon_button"] forState:UIControlStateNormal];
+    
+    [addMoreIconTabButton setBackgroundImage:[UIImage imageNamed:@"icon_button_selected"] forState:UIControlStateSelected];
+
 	[addMoreIconTabButton addTarget:self action:@selector(setAddMoreLayerTabAction:) forControlEvents:UIControlEventTouchUpInside];
 	addMoreIconTabButton.alpha =  ALPHA0;
 	addMoreIconTabButton.tag = 10004;
 	[self.view addSubview:addMoreIconTabButton];
     
 	[arrangeLayerTabButton setBackgroundImage:[UIImage imageNamed:@"arrangeicon_button"] forState:UIControlStateNormal];
-	[arrangeLayerTabButton addTarget:self action:@selector(setAddMoreLayerTabAction:) forControlEvents:UIControlEventTouchUpInside];
+    [arrangeLayerTabButton setBackgroundImage:[UIImage imageNamed:@"arrangeicon_button_selected"] forState:UIControlStateSelected];
+	
+    [arrangeLayerTabButton addTarget:self action:@selector(setAddMoreLayerTabAction:) forControlEvents:UIControlEventTouchUpInside];
 	arrangeLayerTabButton.alpha =  ALPHA0;
 	arrangeLayerTabButton.tag = 10005;
 	[self.view addSubview:arrangeLayerTabButton];
@@ -2675,6 +2685,14 @@ int arrangeLayerIndex;
     [addMoreIconTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
     addMoreIconTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
 
+    [addMorePhotoTabButton setBackgroundImage:[UIImage imageNamed:@"image_icon_selected"] forState:UIControlStateSelected];
+    [addMoreFontTabButton setBackgroundImage:[UIImage imageNamed:@"text_icon_selected"] forState:UIControlStateSelected];
+    [addMoreSymbolTabButton setBackgroundImage:[UIImage imageNamed:@"symbolicon_button_selected"] forState:UIControlStateSelected];
+    
+    [addMoreIconTabButton setBackgroundImage:[UIImage imageNamed:@"icon_button_selected"] forState:UIControlStateSelected];
+    
+    [arrangeLayerTabButton setBackgroundImage:[UIImage imageNamed:@"arrangeicon_button_selected"] forState:UIControlStateSelected];
+
     
     ((CustomLabel *)[[self textLabelLayersArray] lastObject]).alpha = 1;
     photoImgView.alpha=0;
@@ -2997,6 +3015,15 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         lableTouchFlag = YES;
 		[UIView beginAnimations:nil context:NULL];
 		[UIView setAnimationDuration:0.4f];
+        
+        [addMorePhotoTabButton setBackgroundImage:[UIImage imageNamed:@"image_icon_selected"] forState:UIControlStateSelected];
+        [addMoreFontTabButton setBackgroundImage:[UIImage imageNamed:@"text_icon_selected"] forState:UIControlStateSelected];
+        [addMoreSymbolTabButton setBackgroundImage:[UIImage imageNamed:@"symbolicon_button_selected"] forState:UIControlStateSelected];
+        
+        [addMoreIconTabButton setBackgroundImage:[UIImage imageNamed:@"icon_button_selected"] forState:UIControlStateSelected];
+        
+        [arrangeLayerTabButton setBackgroundImage:[UIImage imageNamed:@"arrangeicon_button_selected"] forState:UIControlStateSelected];
+
 
         [addMoreFontTabButton setBackgroundImage:[UIImage imageNamed:@"text_icon"] forState:UIControlStateNormal];
 
@@ -3063,6 +3090,15 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         [self.imgView addSubview:[[self  photoLayersArray] lastObject]];*/
                 
 		textBackgrnd.alpha = ALPHA0;
+        
+        [addMorePhotoTabButton setBackgroundImage:[UIImage imageNamed:@"image_icon_selected"] forState:UIControlStateSelected];
+        [addMoreFontTabButton setBackgroundImage:[UIImage imageNamed:@"text_icon_selected"] forState:UIControlStateSelected];
+        [addMoreSymbolTabButton setBackgroundImage:[UIImage imageNamed:@"symbolicon_button_selected"] forState:UIControlStateSelected];
+        
+        [addMoreIconTabButton setBackgroundImage:[UIImage imageNamed:@"icon_button_selected"] forState:UIControlStateSelected];
+        
+        [arrangeLayerTabButton setBackgroundImage:[UIImage imageNamed:@"arrangeicon_button_selected"] forState:UIControlStateSelected];
+
 
         [addMoreFontTabButton setBackgroundImage:[UIImage imageNamed:@"text_icon"] forState:UIControlStateNormal];
         
@@ -3132,6 +3168,15 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 		[symbolScrollView setAlpha:ALPHA1];
 		[iconScrollView setAlpha:ALPHA0];
 		[layerScrollView setAlpha:ALPHA0];
+        
+        [addMorePhotoTabButton setBackgroundImage:[UIImage imageNamed:@"image_icon_selected"] forState:UIControlStateSelected];
+        [addMoreFontTabButton setBackgroundImage:[UIImage imageNamed:@"text_icon_selected"] forState:UIControlStateSelected];
+        [addMoreSymbolTabButton setBackgroundImage:[UIImage imageNamed:@"symbolicon_button_selected"] forState:UIControlStateSelected];
+        
+        [addMoreIconTabButton setBackgroundImage:[UIImage imageNamed:@"icon_button_selected"] forState:UIControlStateSelected];
+        
+        [arrangeLayerTabButton setBackgroundImage:[UIImage imageNamed:@"arrangeicon_button_selected"] forState:UIControlStateSelected];
+
 
         [addMoreFontTabButton setBackgroundImage:[UIImage imageNamed:@"text_icon"] forState:UIControlStateNormal];
         [addMoreFontTabButton setTitle:@"TEXT" forState:UIControlStateNormal];
@@ -3197,6 +3242,15 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 		[symbolScrollView setAlpha:ALPHA0];
 		[iconScrollView setAlpha:ALPHA1];
         [layerScrollView setAlpha:ALPHA0];
+        
+        [addMorePhotoTabButton setBackgroundImage:[UIImage imageNamed:@"image_icon_selected"] forState:UIControlStateSelected];
+        [addMoreFontTabButton setBackgroundImage:[UIImage imageNamed:@"text_icon_selected"] forState:UIControlStateSelected];
+        [addMoreSymbolTabButton setBackgroundImage:[UIImage imageNamed:@"symbolicon_button_selected"] forState:UIControlStateSelected];
+        
+        [addMoreIconTabButton setBackgroundImage:[UIImage imageNamed:@"icon_button_selected"] forState:UIControlStateSelected];
+        
+        [arrangeLayerTabButton setBackgroundImage:[UIImage imageNamed:@"arrangeicon_button_selected"] forState:UIControlStateSelected];
+
 
         [addMoreFontTabButton setBackgroundImage:[UIImage imageNamed:@"text_icon"] forState:UIControlStateNormal];
         [addMoreFontTabButton setTitle:@"TEXT" forState:UIControlStateNormal];

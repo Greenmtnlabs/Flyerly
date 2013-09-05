@@ -8,18 +8,23 @@
 
 #import <UIKit/UIKit.h>
 #import "Singleton.h"
-#import "AccountController.h"
-#import "SigninController.h"
-
+#import <Parse/PFLogInViewController.h>
+#import <Parse/PFQuery.h>
+#import "Common.h"
 
 @class SigninController,Singleton;
-@interface AccountSelecter : UIViewController <UITableViewDelegate>{
+@interface AccountSelecter : UIViewController <UITextFieldDelegate,UITableViewDelegate>{
 
     Singleton *globle;
-    SigninController  *sgnController;
-    NSMutableArray *arrayOfAccounts;
-
+    NSString *S;
 }
-@property (nonatomic,strong) IBOutlet UILabel *lableactType;
-@property (strong, nonatomic)IBOutlet UITableView *tableView;
+@property(nonatomic, retain) IBOutlet UITextField *username;
+@property(nonatomic, retain) IBOutlet UITextField *password;
+@property(nonatomic, retain) IBOutlet UITextField *confirmPassword;
+@property(nonatomic, strong) IBOutlet UITextField *email;
+@property(nonatomic, strong) IBOutlet UITextField *name;
+@property(nonatomic, strong) IBOutlet UITextField *phno;
+-(IBAction)save;
+-(IBAction)changePW;
+
 @end

@@ -153,6 +153,13 @@
     
     oldsettingveiwcontroller = [[SettingViewController alloc]initWithNibName:@"SettingViewController" bundle:nil];
         [self.navigationController pushViewController:oldsettingveiwcontroller animated:YES];
+  
+    }else if(indexPath.row == 2){
+        accountUpdater = [[AccountSelecter alloc]initWithNibName:@"AccountSelecter" bundle:nil];
+        [self.navigationController pushViewController:accountUpdater animated:YES];
+        
+        
+
     }else if(indexPath.row == 3){
         warningAlert = [[UIAlertView  alloc]initWithTitle:@"Are you sure?" message:@"" delegate:self cancelButtonTitle:@"Sign out" otherButtonTitles:@"Cancel",nil];
         [warningAlert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:NO];
@@ -199,8 +206,19 @@
 
 }
 -(IBAction)gofacbook:(id)sender{
-   // SettingViewController *oldsettingveiwcontroller =[[SettingViewController alloc]init] ;
-   // [oldsettingveiwcontroller  ];
+    /*
+    NSMutableDictionary *res = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"This is my comment", @"message", YOUR ACCESS TOKEN,@"access_token",nil];
+    [FBRequestConnection startWithGraphPath:[NSString stringWithFormat:@"%@/comments",PHOTO'S ID] parameters:res HTTPMethod:@"POST" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+                                             if (error)
+                                             {
+                                                 NSLog(@"error: %@", error.localizedDescription);
+                                             }
+                                             else
+                                             {
+                                                 NSLog(@"ok!! %@",result);
+                                             }
+                                             }];
+    */
 }
 -(IBAction)gotwitter:(id)sender{}
 -(IBAction)goemail:(id)sender{

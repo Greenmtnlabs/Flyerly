@@ -17,7 +17,7 @@
 #import "FlyrAppDelegate.h"
 
 @implementation FlyrViewController
-@synthesize photoArray,navBar,tView,iconArray,photoDetailArray,ptController;
+@synthesize photoArray,navBar,tView,iconArray,photoDetailArray,ptController,searchTextField;
 
 
 - (UIImage *)scale:(NSString *)imageName toSize:(CGSize)size
@@ -111,24 +111,69 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
         [photoDetailArray addObject:myArray];
 	}}
 
+
+- (void) searchClick{
+    searching = YES;
+	letUserSelectRow = NO;
+	self.tView.scrollEnabled = NO;
+    [searchTextField resignFirstResponder];
+    [self searchTableView];
+        [searchTextField addTarget:self action:@selector(updateLabelUsingContentsOfTextField:) forControlEvents:UIControlEventEditingChanged];
+}
+
+- (void)updateLabelUsingContentsOfTextField:(id)sender {
+    [self searchTableView];
+}
+
+- (void) searchTableView {
+	NSString *sTemp;
+	NSString *searchText = searchTextField.text;
+    if (searchTextField.text == nil || [searchTextField.text isEqualToString:@""]) {
+        searching = NO; goto sd;}
+    [photoArrayBackup removeAllObjects];
+    [photoDetailArrayBackup removeAllObjects];
+    [iconArrayBackup removeAllObjects];
+	NSMutableArray *searchArray = [[NSMutableArray alloc] initWithArray:photoDetailArray];
+	
+	for (int i =0 ; i < [searchArray count] ; i++)
+	{
+		
+ 		sTemp = [[searchArray objectAtIndex:i] objectAtIndex:0];
+        NSLog(@"%@", sTemp);
+        NSRange titleResultsRange = [sTemp rangeOfString:searchText options:NSCaseInsensitiveSearch];
+        if (titleResultsRange.length > 0){
+			[photoArrayBackup addObject:[photoArray objectAtIndex:i ]];
+            [photoDetailArrayBackup addObject:[photoDetailArray objectAtIndex:i ]];
+            [iconArrayBackup addObject:[iconArray objectAtIndex:i ]];
+        }
+
+	}
+sd:;
+	searchArray = nil;
+    [self.tView reloadData];
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    searching = NO;
+	letUserSelectRow = YES;
     self.navigationItem.hidesBackButton = YES;
     UIImageView *img = [[UIImageView    alloc]initWithImage:[UIImage imageNamed:@"text_box"]];
     [img setFrame:CGRectMake(8,54,230,30)];
     
-    UITextField *searchText = [[UITextField alloc]initWithFrame:CGRectMake(15,62,240,25)];
-    searchText.placeholder = @"Flyerly search";
-    searchText.font = [UIFont systemFontOfSize:12.0];
+    searchTextField = [[UITextField alloc]initWithFrame:CGRectMake(15,62,240,25)];
+    searchTextField.placeholder = @"Flyerly search";
+    searchTextField.font = [UIFont systemFontOfSize:12.0];
     //Search Boutton
     UIButton *seaBotton = [[UIButton alloc] initWithFrame:CGRectMake(252, 54, 58, 30)];
     [seaBotton  setTitle:@"Search" forState:UIControlStateNormal] ;
     seaBotton.titleLabel.font = [UIFont boldSystemFontOfSize:13.0];
-    //[seaBotton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    [seaBotton addTarget:self action:@selector(searchClick) forControlEvents:UIControlEventTouchUpInside];
     [seaBotton setBackgroundImage:[UIImage imageNamed:@"crop_button"] forState:UIControlStateNormal];
     [self.view addSubview:img];
     [self.view addSubview:seaBotton];
-    [self.view addSubview:searchText];
+    [self.view addSubview:searchTextField];
     if(IS_IPHONE_5){
         tView = [[UITableView alloc]initWithFrame:CGRectMake(0, 86, 320, 510) style:UITableViewStyleGrouped];
     }else{
@@ -143,8 +188,6 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
 	self.tView.rowHeight =102;
     [self.tView setBackgroundView:nil];
     [self.tView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-	//Create sorted array with modificate date as key 
-	[self filesByModDate];
 }
 
 -(void)callMenu
@@ -154,7 +197,9 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+    searching =NO;
+    searchTextField.text = @"";
+
     self.navigationController.navigationBarHidden=NO;
     self.navigationItem.leftItemsSupplementBackButton = YES;
     // Set left bar items
@@ -163,6 +208,13 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
     [self.navigationItem setRightBarButtonItems: [self rightBarItems]];
 
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
+    //Create sorted array with modificate date as key
+	[self filesByModDate];
+    [tView reloadData];
+    photoArrayBackup = [[NSMutableArray alloc] initWithArray:photoArray];
+    iconArrayBackup = [[NSMutableArray alloc] initWithArray:iconArray];
+    photoDetailArrayBackup  = [[NSMutableArray alloc] initWithArray:iconArray];
+//    NSLog(@"%@",photoArrayBackup);
 }
 
 -(NSArray *)leftBarItems{
@@ -232,7 +284,11 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return  [photoArray count];
+    if (searching){
+        return  [photoArrayBackup count];
+    }else{
+        return  [photoArray count];
+    }
 }
 
 -(void)showFlyerOverlay:(id)sender{
@@ -296,7 +352,19 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    // Get image from array
+    if(searching){
+        UIImage *image = [iconArrayBackup objectAtIndex:indexPath.row];
+        // Get image name from array
+        NSString *imageName = [photoArrayBackup objectAtIndex:indexPath.row];
+        // get flyer detail from array
+        NSArray *detailArray = [photoDetailArrayBackup objectAtIndex:indexPath.row];
+        
+        // return cell
+        return [self setGlobalCustomCellProperties:[detailArray objectAtIndex:0] description:[detailArray objectAtIndex:1] created:[detailArray objectAtIndex:2] img:image imagePath:imageName indexPath:indexPath];
+
+    }else{
+
+        // Get image from array
 	UIImage *image = [iconArray objectAtIndex:indexPath.row];
     // Get image name from array
 	NSString *imageName = [photoArray objectAtIndex:indexPath.row];
@@ -305,7 +373,7 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
 
     // return cell
     return [self setGlobalCustomCellProperties:[detailArray objectAtIndex:0] description:[detailArray objectAtIndex:1] created:[detailArray objectAtIndex:2] img:image imagePath:imageName indexPath:indexPath];
-    
+    }
 	//SET_GLOBAL_CUSTOM_CELL_PROPERTIES([detailArray objectAtIndex:0], [detailArray objectAtIndex:1], [detailArray objectAtIndex:2],image, imageName)
 	
 }
@@ -318,14 +386,22 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	 
 	 DraftViewController *draftViewController = [[DraftViewController alloc] initWithNibName:@"DraftViewController" bundle:nil];
-	NSString *imageName = [photoArray objectAtIndex:indexPath.row];
+    NSString *imageName;
+    NSArray *detailArray;
+    if (searching) {
+        detailArray = [photoDetailArrayBackup objectAtIndex:indexPath.row];
+        imageName = [photoArrayBackup objectAtIndex:indexPath.row];
+    }else{
+        detailArray = [photoDetailArray objectAtIndex:indexPath.row];
+       imageName = [photoArray objectAtIndex:indexPath.row];
+    }
+
 	 NSData *imageData = [[NSData alloc ]initWithContentsOfMappedFile:imageName];
 	UIImage *currentFlyerImage = [UIImage imageWithData:imageData];
 	draftViewController.fvController = self;
 	draftViewController.selectedFlyerImage = currentFlyerImage;
     
     if(photoDetailArray.count > indexPath.row){
-        NSArray *detailArray = [photoDetailArray objectAtIndex:indexPath.row];
         NSString *title = [detailArray objectAtIndex:0];
         NSString *description = [detailArray objectAtIndex:1];
         draftViewController.selectedFlyerTitle = title;

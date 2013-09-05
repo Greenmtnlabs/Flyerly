@@ -923,7 +923,7 @@ static ShareProgressView *clipBdPogressView;
 	NSMutableArray *array = [[[NSMutableArray alloc] init] autorelease];
 
     if(!titleView.text || [titleView.text isEqualToString:NameYourFlyerText]){
-        [array addObject:@""];
+        [array addObject:NameYourFlyerText];
     }else{
         [array addObject:self.titleView.text];
     }
@@ -1967,7 +1967,7 @@ static ShareProgressView *clipBdPogressView;
     [[NSNotificationCenter defaultCenter] removeObserver: self];
 
     // If text changed then save it again
-
+/*
     if(
        (![selectedFlyerTitle isEqualToString:titleView.text] && ![titleView.text isEqualToString:NameYourFlyerText])
        
@@ -1977,6 +1977,8 @@ static ShareProgressView *clipBdPogressView;
         
         [self updateFlyerDetail];
     }
+ */
+    [self updateFlyerDetail];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -56,7 +56,7 @@
 	createLabel = [[UILabel alloc] initWithFrame:createdRect];
     [createLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:8]];
     [createLabel setTextColor:[UIColor darkTextColor]];
-    [createLabel setText:@"Created :"];
+    [createLabel setText:@"Saved :"];
     createLabel.backgroundColor = [UIColor clearColor];
 	[self.contentView addSubview:createLabel];
 	

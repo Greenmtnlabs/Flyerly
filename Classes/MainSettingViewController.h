@@ -14,8 +14,12 @@
 #import "HelpController.h"
 #import "SettingViewController.h"
 #import "PhotoController.h"
+#import "FBConnect.h"
+#import "FBConnect/FBConnect.h"
+#import "AccountSelecter.h"
+
 @class PhotoController ;
-@class AccountController,LauchViewController,HelpController,SettingViewController;
+@class AccountController,LauchViewController,HelpController,SettingViewController,AccountSelecter;
 @interface MainSettingViewController : UIViewController <UITableViewDelegate>{
 
     UITableView *tableView;
@@ -27,6 +31,7 @@
     HelpController *helpController;
     UIAlertView *warningAlert;
     PhotoController *ptController;
+    AccountSelecter *accountUpdater;
 
 }
 @property (strong, nonatomic)IBOutlet UITableView *tableView;

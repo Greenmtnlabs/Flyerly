@@ -39,6 +39,7 @@
 
 
 - (void)viewWillAppear:(BOOL)animated {
+    
     [super viewWillAppear:animated];
 	navBar= [[MyNavigationBar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
 
@@ -78,12 +79,11 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
-	
-	navBar.alpha = 0.6;
+    navBar.alpha = 0.6;
 	[_session resume];
 	
 	aHUD = [[HudView alloc]init];
-
+    
 	UIImageView *imgView = [[UIImageView alloc]initWithFrame:CGRectMake(0,44 ,320, 416)];
 	imgView.image = flyrImg;
 	[self.view addSubview:imgView];
@@ -93,11 +93,11 @@
 	[twitterButton setBackgroundImage:[UIImage imageNamed:@"twit1.png"] forState:UIControlStateNormal];
 	[twitterButton setBackgroundImage:[UIImage imageNamed:@"twit.png"] forState:UIControlStateSelected];
 	[twitterButton setBackgroundImage:[UIImage imageNamed:@"twit.png"] forState:UIControlStateHighlighted];
-        CALayer * l = [twitterButton layer];
-	 [l setMasksToBounds:YES];
-	 [l setCornerRadius:5];
-	 [l setBorderWidth:1.0];
-	 [l setBorderColor:[[UIColor lightGrayColor] CGColor]];
+    CALayer * l = [twitterButton layer];
+    [l setMasksToBounds:YES];
+    [l setCornerRadius:5];
+    [l setBorderWidth:1.0];
+    [l setBorderColor:[[UIColor lightGrayColor] CGColor]];
 	[twitterButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 	[twitterButton addTarget:self action:@selector(uploadOption:) forControlEvents:UIControlEventTouchUpInside];
 	[self.view  addSubview:twitterButton];
@@ -112,10 +112,10 @@
 	faceBookButton.backgroundColor = [UIColor clearColor];
 	[faceBookButton addTarget:self action:@selector(uploadOption:) forControlEvents:UIControlEventTouchUpInside];
 	CALayer * l1 = [faceBookButton layer];
-	 [l1 setMasksToBounds:YES];
-	 [l1 setCornerRadius:5];
-	 [l1 setBorderWidth:1.0];
-	 [l1 setBorderColor:[[UIColor lightGrayColor] CGColor]];
+    [l1 setMasksToBounds:YES];
+    [l1 setCornerRadius:5];
+    [l1 setBorderWidth:1.0];
+    [l1 setBorderColor:[[UIColor lightGrayColor] CGColor]];
 	[self.view  bringSubviewToFront:faceBookButton];
 	[self.view addSubview:faceBookButton];
 	
@@ -136,6 +136,7 @@
 	
 	FlyrAppDelegate *appDele =(FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
 	appDele.svController = self;
+	
     
 }
 

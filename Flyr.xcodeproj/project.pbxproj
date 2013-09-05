@@ -455,6 +455,8 @@
 		20DF43EB17CF6E8300F58A8C /* status_icon_email@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20DF43E517CF6E8300F58A8C /* status_icon_email@2x.png */; };
 		20DF43EC17CF6E8300F58A8C /* status_icon_sms.png in Resources */ = {isa = PBXBuildFile; fileRef = 20DF43E617CF6E8300F58A8C /* status_icon_sms.png */; };
 		20DF43ED17CF6E8300F58A8C /* status_icon_sms@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20DF43E717CF6E8300F58A8C /* status_icon_sms@2x.png */; };
+		20E5F86917D867CB00C302B2 /* FlyrOverlayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20E5F86717D867CA00C302B2 /* FlyrOverlayController.m */; };
+		20E5F86A17D867CB00C302B2 /* FlyrOverlayController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20E5F86817D867CA00C302B2 /* FlyrOverlayController.xib */; };
 		20ED041817CCB41F00DA702E /* SettingcellBack.png in Resources */ = {isa = PBXBuildFile; fileRef = 20ED041617CCB41F00DA702E /* SettingcellBack.png */; };
 		20ED041917CCB41F00DA702E /* SettingcellBack@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20ED041717CCB41F00DA702E /* SettingcellBack@2x.png */; };
 		20ED041C17CCBCB000DA702E /* t_email_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 20ED041A17CCBCB000DA702E /* t_email_button.png */; };
@@ -1624,6 +1626,9 @@
 		20DF43E517CF6E8300F58A8C /* status_icon_email@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "status_icon_email@2x.png"; sourceTree = "<group>"; };
 		20DF43E617CF6E8300F58A8C /* status_icon_sms.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = status_icon_sms.png; sourceTree = "<group>"; };
 		20DF43E717CF6E8300F58A8C /* status_icon_sms@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "status_icon_sms@2x.png"; sourceTree = "<group>"; };
+		20E5F86617D867CA00C302B2 /* FlyrOverlayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlyrOverlayController.h; sourceTree = "<group>"; };
+		20E5F86717D867CA00C302B2 /* FlyrOverlayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlyrOverlayController.m; sourceTree = "<group>"; };
+		20E5F86817D867CA00C302B2 /* FlyrOverlayController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FlyrOverlayController.xib; sourceTree = "<group>"; };
 		20ED041617CCB41F00DA702E /* SettingcellBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SettingcellBack.png; sourceTree = "<group>"; };
 		20ED041717CCB41F00DA702E /* SettingcellBack@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SettingcellBack@2x.png"; sourceTree = "<group>"; };
 		20ED041A17CCBCB000DA702E /* t_email_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = t_email_button.png; sourceTree = "<group>"; };
@@ -2429,6 +2434,8 @@
 				0DF3A2C4108DF1D200D6C887 /* PhotoController.m */,
 				0D4903B81091893B00855C30 /* FlyrViewController.h */,
 				0D4903B91091893B00855C30 /* FlyrViewController.m */,
+				20E5F86617D867CA00C302B2 /* FlyrOverlayController.h */,
+				20E5F86717D867CA00C302B2 /* FlyrOverlayController.m */,
 				E8A7347A1092CFF300661AAD /* DraftViewController.h */,
 				E8A7347B1092CFF300661AAD /* DraftViewController.m */,
 				0DFC531B109576AB00B18478 /* SettingViewController.h */,
@@ -2473,6 +2480,7 @@
 				20F4D8DE17BA3D09007B2DF5 /* AccountSelecter.m */,
 				2087B6BD17C73B40007A6A90 /* ResetPWViewController.h */,
 				2087B6BE17C73B40007A6A90 /* ResetPWViewController.m */,
+				20E5F86817D867CA00C302B2 /* FlyrOverlayController.xib */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -4972,6 +4980,7 @@
 				20DF43EB17CF6E8300F58A8C /* status_icon_email@2x.png in Resources */,
 				20DF43EC17CF6E8300F58A8C /* status_icon_sms.png in Resources */,
 				20DF43ED17CF6E8300F58A8C /* status_icon_sms@2x.png in Resources */,
+				20E5F86A17D867CB00C302B2 /* FlyrOverlayController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5156,6 +5165,7 @@
 				20F4D8E017BA3D0A007B2DF5 /* AccountSelecter.m in Sources */,
 				20F4D8E517BA40EA007B2DF5 /* Singleton.m in Sources */,
 				2087B6C017C73B40007A6A90 /* ResetPWViewController.m in Sources */,
+				20E5F86917D867CB00C302B2 /* FlyrOverlayController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
