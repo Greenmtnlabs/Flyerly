@@ -630,7 +630,6 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     [cameraRollLabel setTextColor:[UIColor whiteColor]];
     [self.view addSubview:cameraRollLabel];    
     
-	//templateBckgrnd.image = [UIImage imageNamed:@"scroll1.png"];
     templateBckgrnd.image = [UIImage imageNamed:@"ad_bg_bg"];
     [self.view addSubview:templateBckgrnd];
 	templateBckgrnd.alpha = ALPHA0;
@@ -2983,9 +2982,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 		[borderScrollView setAlpha:ALPHA1];
 		[fontBorderScrollView setAlpha:ALPHA0];
 		[fontTabButton setBackgroundImage:[UIImage imageNamed:@"font_button"] forState:UIControlStateNormal];
-		//[fontTabButton setBackgroundImage:[UIImage imageNamed:@"tabButton.png"] forState:UIControlStateNormal];
 		[colorTabButton setBackgroundImage:[UIImage imageNamed:@"color_button"] forState:UIControlStateNormal];
-		//[sizeTabButton setBackgroundImage:[UIImage imageNamed:@"selTab.png"] forState:UIControlStateNormal];
 		[sizeTabButton setBackgroundImage:[UIImage imageNamed:@"size_button"] forState:UIControlStateNormal];
 		[borderTabButton setBackgroundImage:[UIImage imageNamed:@"outline_button"] forState:UIControlStateNormal];
 		[fontBorderTabButton setBackgroundImage:[UIImage imageNamed:@"background_button_selected"] forState:UIControlStateNormal];
