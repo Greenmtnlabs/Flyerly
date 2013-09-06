@@ -183,7 +183,8 @@
     // Flicker
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"flickrSetting"];
 
-
+    // Log out from parse.
+    [PFUser logOut];
 }
 -(IBAction)gofacbook:(id)sender{
     /*
