@@ -86,10 +86,10 @@
         return [category count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (UITableViewCell *)tableView:(UITableView *)tView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *CellIdentifier = @"ZCell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier] ;
+    UITableViewCell *cell = [tView dequeueReusableCellWithIdentifier:CellIdentifier] ;
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         [[cell textLabel] setFont:[UIFont fontWithName:TITLE_FONT size:14]];
@@ -98,37 +98,26 @@
         [cell setBackgroundColor:[UIColor clearColor]];
         [cell setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"SettingcellBack"]]];
     }
-/*
-    UILabel *lpz = [[UILabel alloc]initWithFrame:CGRectMake(150, 5, 130, 20)];
-	[lpz setBackgroundColor:[UIColor whiteColor]];
-    // [lpz setTextColor:[UIColor grayColor]];
-    
-	[lpz setFont:[UIFont systemFontOfSize:14.0]];
-	[lpz setTextAlignment:UITextAlignmentLeft];
-    NSString *ss =[NSString stringWithFormat:@"Last Price : %@",[[newsFeed objectAtIndex:indexPath.section] valueForKey:@"slspz"]];
-	lpz.text = ss;
-	[cell.contentView  addSubview:lpz];
-*/
-        NSString *s =[NSString stringWithFormat:@"   %@",[category objectAtIndex:indexPath.row]]  ;
-        cell.textLabel.text =s;
+
+    NSString *s =[NSString stringWithFormat:@"   %@",[category objectAtIndex:indexPath.row]]  ;
+    cell.textLabel.text =s;
    
     if (indexPath.row == 0)cell.imageView.image =[UIImage imageNamed:@"share_settings"];
     if (indexPath.row == 1)cell.imageView.image =[UIImage imageNamed:@"save_gallery"];
     if (indexPath.row == 2)cell.imageView.image =[UIImage imageNamed:@"account_settings"];
     if (indexPath.row == 3)cell.imageView.image =[UIImage imageNamed:@"signout"];
-        //if (indexPath.row == 0 || indexPath.row == 2)cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
         if (indexPath.row == 1){
-            UISwitch *mySwitch = [[[UISwitch alloc] initWithFrame:CGRectMake(220, 4, 0, 0)] autorelease];
-            [cell.contentView  addSubview:mySwitch];
-            [mySwitch addTarget:self action:@selector(changeSwitch:) forControlEvents:UIControlEventValueChanged];
+            UISwitch *mSwitch = [[[UISwitch alloc] initWithFrame:CGRectMake(220, 4, 0, 0)] autorelease];
+            [cell.contentView  addSubview:mSwitch];
+            [mSwitch addTarget:self action:@selector(changeSwitch:) forControlEvents:UIControlEventValueChanged];
             
             NSString  *savecamra = [[NSUserDefaults standardUserDefaults] stringForKey:@"saveToCameraRollSetting"];
             NSLog(@"%@",savecamra);
             if (savecamra == nil) {
-                [mySwitch setOn:NO];
+                [mSwitch setOn:NO];
             }else{
-                [mySwitch setOn:YES];
+                [mSwitch setOn:YES];
             }
         }
     return cell;
@@ -145,21 +134,15 @@
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"saveToCameraRollSetting"];
     }
 }
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
-    NSString *cellText = selectedCell.textLabel.text;
-//    indexPath.row == 0 & indexPath.section == 0
-    if (indexPath.row == 0){
-    
-    oldsettingveiwcontroller = [[SettingViewController alloc]initWithNibName:@"SettingViewController" bundle:nil];
+- (void)tableView:(UITableView *)tView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+   
+    if (indexPath.row == 0) {
+        oldsettingveiwcontroller = [[SettingViewController alloc]initWithNibName:@"SettingViewController" bundle:nil];
         [self.navigationController pushViewController:oldsettingveiwcontroller animated:YES];
   
-    }else if(indexPath.row == 2){
+    } else if(indexPath.row == 2) {
         accountUpdater = [[AccountSelecter alloc]initWithNibName:@"AccountSelecter" bundle:nil];
         [self.navigationController pushViewController:accountUpdater animated:YES];
-        
-        
-
     }else if(indexPath.row == 3){
         warningAlert = [[UIAlertView  alloc]initWithTitle:@"Are you sure?" message:@"" delegate:self cancelButtonTitle:@"Sign out" otherButtonTitles:@"Cancel",nil];
         [warningAlert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:NO];
@@ -172,7 +155,6 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
 	if(alertView == warningAlert && buttonIndex == 0) {
         [self signOut];
-        //selectedCell.textLabel.text = @"Sign Out Successfully";
         AccountController *actaController = [AccountController alloc];
         if(IS_IPHONE_5){
             [[actaController initWithNibName:@"AcountViewControlleriPhone5" bundle:nil] autorelease];
@@ -181,8 +163,6 @@
         }
         [self.navigationController pushViewController:actaController animated:YES];
     }
-    [self.view release];
-
 }
 
 
@@ -203,7 +183,8 @@
     // Flicker
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"flickrSetting"];
 
-
+    // Log out from parse.
+    [PFUser logOut];
 }
 -(IBAction)gofacbook:(id)sender{
     /*

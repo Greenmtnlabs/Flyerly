@@ -68,7 +68,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 	[super viewWillAppear:YES];	
 	self.navigationController.navigationBarHidden = NO;
 	imgPicker = [[UIImagePickerController alloc] init];
-	imgPicker.allowsImageEditing = NO;
+	imgPicker.allowsEditing = NO;
 	imgPicker.delegate =self;
 	imgPicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
 	navBar.alpha =ALPHA1;
@@ -496,23 +496,23 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 	[self.view addSubview:arrangeLayerTabButton];
     // Changes
     [addMoreFontTabButton setTitle:@"Text" forState:UIControlStateNormal];
-    [addMoreFontTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+    [addMoreFontTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
     addMoreFontTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
     
     [addMorePhotoTabButton setTitle:@"Photo" forState:UIControlStateNormal];
-    [addMorePhotoTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+    [addMorePhotoTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
     addMorePhotoTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
     
     [addMoreSymbolTabButton setTitle:@"Clipart" forState:UIControlStateNormal];
-    [addMoreSymbolTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+    [addMoreSymbolTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
     addMoreSymbolTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
     
     [arrangeLayerTabButton setTitle:@"Layers" forState:UIControlStateNormal];
-    [arrangeLayerTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+    [arrangeLayerTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
     arrangeLayerTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
     
     [addMoreIconTabButton setTitle:@"Symbols" forState:UIControlStateNormal];
-    [addMoreIconTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+    [addMoreIconTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
     addMoreIconTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
 
 }
@@ -1792,22 +1792,24 @@ int arrangeLayerIndex;
         // Within the group enumeration block, filter to enumerate just photos.
         [group setAssetsFilter:[ALAssetsFilter allPhotos]];
         
-        // Chooses the photo at the last index
-        [group enumerateAssetsAtIndexes:[NSIndexSet indexSetWithIndex:([group numberOfAssets] - 1)] options:0 usingBlock:^(ALAsset *alAsset, NSUInteger index, BOOL *innerStop) {
+        // Chooses the photo at the last index. Make sure number of assets is greater than zero.
+        if ( [group numberOfAssets] > 0 ) {
+            [group enumerateAssetsAtIndexes:[NSIndexSet indexSetWithIndex:([group numberOfAssets] - 1)] options:0 usingBlock:^(ALAsset *alAsset, NSUInteger index, BOOL *innerStop) {
             
-            // The end of the enumeration is signaled by asset == nil.
-            if (alAsset) {
-                ALAssetRepresentation *representation = [alAsset defaultRepresentation];
-                UIImage *latestPhoto = [UIImage imageWithCGImage:[representation fullScreenImage]];
+                // The end of the enumeration is signaled by asset == nil.
+                if (alAsset) {
+                    ALAssetRepresentation *representation = [alAsset defaultRepresentation];
+                    UIImage *latestPhoto = [UIImage imageWithCGImage:[representation fullScreenImage]];
                 
-                if([latestPhoto isKindOfClass:[UIImageView class]]){
+                    if([latestPhoto isKindOfClass:[UIImageView class]]){
+                    }
+                    // Do something interesting with the AV asset.
+                    customPhotoController.image = latestPhoto;
+                    [self.navigationController pushViewController:customPhotoController animated:YES];
+                    [customPhotoController release];
                 }
-                // Do something interesting with the AV asset.
-                customPhotoController.image = latestPhoto;
-                [self.navigationController pushViewController:customPhotoController animated:YES];
-                [customPhotoController release];
-            }
-        }];
+            }];
+        }
     } failureBlock: ^(NSError *error) {
         // Typically you should handle an error more gracefully than this.
         NSLog(@"No groups");
@@ -2690,23 +2692,23 @@ int arrangeLayerIndex;
     
     // Changes
     [addMoreFontTabButton setTitle:@"Text" forState:UIControlStateNormal];
-    [addMoreFontTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+    [addMoreFontTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
     addMoreFontTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
     
     [addMorePhotoTabButton setTitle:@"Photo" forState:UIControlStateNormal];
-    [addMorePhotoTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+    [addMorePhotoTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
     addMorePhotoTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
     
     [addMoreSymbolTabButton setTitle:@"Clipart" forState:UIControlStateNormal];
-    [addMoreSymbolTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+    [addMoreSymbolTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
     addMoreSymbolTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
     
     [arrangeLayerTabButton setTitle:@"Layers" forState:UIControlStateNormal];
-    [arrangeLayerTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+    [arrangeLayerTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
     arrangeLayerTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
     
     [addMoreIconTabButton setTitle:@"Symbols" forState:UIControlStateNormal];
-    [addMoreIconTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+    [addMoreIconTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
     addMoreIconTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
 
     [addMorePhotoTabButton setBackgroundImage:[UIImage imageNamed:@"image_icon_selected"] forState:UIControlStateSelected];
@@ -3058,23 +3060,23 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         
         // Changes
         [addMoreFontTabButton setTitle:@"Text" forState:UIControlStateNormal];
-        [addMoreFontTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+        [addMoreFontTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
         addMoreFontTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
         
         [addMorePhotoTabButton setTitle:@"Photo" forState:UIControlStateNormal];
-        [addMorePhotoTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+        [addMorePhotoTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
         addMorePhotoTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
         
         [addMoreSymbolTabButton setTitle:@"Clipart" forState:UIControlStateNormal];
-        [addMoreSymbolTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+        [addMoreSymbolTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
         addMoreSymbolTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
         
         [arrangeLayerTabButton setTitle:@"Layers" forState:UIControlStateNormal];
-        [arrangeLayerTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+        [arrangeLayerTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
         arrangeLayerTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
         
         [addMoreIconTabButton setTitle:@"Symbols" forState:UIControlStateNormal];
-        [addMoreIconTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+        [addMoreIconTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
         addMoreIconTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
 
 
@@ -3132,23 +3134,23 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         [arrangeLayerTabButton setBackgroundImage:[UIImage imageNamed:@"arrangeicon_button"] forState:UIControlStateNormal];
         // Changes
         [addMoreFontTabButton setTitle:@"Text" forState:UIControlStateNormal];
-        [addMoreFontTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+        [addMoreFontTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
         addMoreFontTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
         
         [addMorePhotoTabButton setTitle:@"Photo" forState:UIControlStateNormal];
-        [addMorePhotoTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+        [addMorePhotoTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
         addMorePhotoTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
         
         [addMoreSymbolTabButton setTitle:@"Clipart" forState:UIControlStateNormal];
-        [addMoreSymbolTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+        [addMoreSymbolTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
         addMoreSymbolTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
         
         [arrangeLayerTabButton setTitle:@"Layers" forState:UIControlStateNormal];
-        [arrangeLayerTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+        [arrangeLayerTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
         arrangeLayerTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
         
         [addMoreIconTabButton setTitle:@"Symbols" forState:UIControlStateNormal];
-        [addMoreIconTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+        [addMoreIconTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
         addMoreIconTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
 
 
@@ -3212,23 +3214,23 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         
         // Changes
         [addMoreFontTabButton setTitle:@"Text" forState:UIControlStateNormal];
-        [addMoreFontTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+        [addMoreFontTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
         addMoreFontTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
         
         [addMorePhotoTabButton setTitle:@"Photo" forState:UIControlStateNormal];
-        [addMorePhotoTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+        [addMorePhotoTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
         addMorePhotoTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
         
         [addMoreSymbolTabButton setTitle:@"Clipart" forState:UIControlStateNormal];
-        [addMoreSymbolTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+        [addMoreSymbolTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
         addMoreSymbolTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
         
         [arrangeLayerTabButton setTitle:@"Layers" forState:UIControlStateNormal];
-        [arrangeLayerTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+        [arrangeLayerTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
         arrangeLayerTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
         
         [addMoreIconTabButton setTitle:@"Symbols" forState:UIControlStateNormal];
-        [addMoreIconTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+        [addMoreIconTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
         addMoreIconTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
 
 
@@ -3285,23 +3287,23 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         
         // Changes
         [addMoreFontTabButton setTitle:@"Text" forState:UIControlStateNormal];
-        [addMoreFontTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+        [addMoreFontTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
         addMoreFontTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
         
         [addMorePhotoTabButton setTitle:@"Photo" forState:UIControlStateNormal];
-        [addMorePhotoTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+        [addMorePhotoTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
         addMorePhotoTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
         
         [addMoreSymbolTabButton setTitle:@"Clipart" forState:UIControlStateNormal];
-        [addMoreSymbolTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+        [addMoreSymbolTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
         addMoreSymbolTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
         
         [arrangeLayerTabButton setTitle:@"Layers" forState:UIControlStateNormal];
-        [arrangeLayerTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+        [arrangeLayerTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
         arrangeLayerTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
         
         [addMoreIconTabButton setTitle:@"Symbols" forState:UIControlStateNormal];
-        [addMoreIconTabButton setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+        [addMoreIconTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
         addMoreIconTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
 
         
@@ -4486,7 +4488,8 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	NSString *homeDirectoryPath = NSHomeDirectory();
 	NSString *usernamePath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/",appDelegate.loginId]];
     if (![[NSFileManager defaultManager] fileExistsAtPath:usernamePath isDirectory:NULL]) {
-		[[NSFileManager defaultManager] createDirectoryAtPath:usernamePath attributes:nil];
+        NSError *error;
+		[[NSFileManager defaultManager] createDirectoryAtPath:usernamePath withIntermediateDirectories:YES attributes:nil error:&error];
 	}
 
 	NSString *MyFlyerPath = [usernamePath stringByAppendingString:[NSString stringWithFormat:@"Flyr/"]];
@@ -4543,7 +4546,8 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 	NSString *imgPath = [NSString pathWithComponents:[NSArray arrayWithObjects:[NSString stringWithString:[finalImgWritePath stringByExpandingTildeInPath]], nil]];
 	if (![[NSFileManager defaultManager] fileExistsAtPath:folderPath isDirectory:NULL]) {
-		[[NSFileManager defaultManager] createDirectoryAtPath:folderPath attributes:nil];
+        NSError *error;
+        [[NSFileManager defaultManager] createDirectoryAtPath:folderPath withIntermediateDirectories:YES attributes:nil error:&error];
 	}
     
     // Save flyer in pieces to make it editable later
@@ -4574,7 +4578,8 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 -(void)createDirectoryAtPath:(NSString *)directory{
 	if (![[NSFileManager defaultManager] fileExistsAtPath:directory isDirectory:NULL]) {
-		[[NSFileManager defaultManager] createDirectoryAtPath:directory attributes:nil];
+        NSError *error;
+        [[NSFileManager defaultManager] createDirectoryAtPath:directory withIntermediateDirectories:YES attributes:nil error:&error];
 	}
 }
 
@@ -4752,13 +4757,14 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	NSString *socialFlyerPath = [NSString stringWithFormat:@"%@/Social/", directory];
     
     NSString *str = [imageName stringByReplacingOccurrencesOfString:@".jpg" withString:@".soc"];
-	NSString *finalImgWritePath = [socialFlyerPath stringByAppendingString:str];
+	NSString *finalImageWritePath = [socialFlyerPath stringByAppendingString:str];
    
 	if (![[NSFileManager defaultManager] fileExistsAtPath:socialFlyerPath isDirectory:NULL]) {
-		[[NSFileManager defaultManager] createDirectoryAtPath:socialFlyerPath attributes:nil];
+        NSError *error;
+        [[NSFileManager defaultManager] createDirectoryAtPath:socialFlyerPath withIntermediateDirectories:YES attributes:nil error:&error];
 	}
     
-    [socialArray writeToFile:finalImgWritePath atomically:YES];
+    [socialArray writeToFile:finalImageWritePath atomically:YES];
 }
 
 #pragma mark - InappPurchase
@@ -4975,6 +4981,10 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     if(!inAppDictionary){
         
         NSMutableDictionary *newInAppDictionary = nil;
+        
+        if ( [PFUser currentUser] == nil ) {
+            NSLog(@"User is null!");
+        }
         
         PFQuery *query = [PFQuery queryWithClassName:TABLE_JSON];
         [query whereKey:COLUMN_USER equalTo:[PFUser currentUser]];
