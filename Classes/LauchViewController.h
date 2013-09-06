@@ -25,7 +25,6 @@
 	PhotoController *ptController;
 	FlyrViewController *tpController;
 	SettingViewController *spController;
-    MainSettingViewController *mainsettingviewcontroller;
 	AddFriendsController *addFriendsController;
 	LoadingView *loadingView;
     
