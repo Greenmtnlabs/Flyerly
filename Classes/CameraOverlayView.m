@@ -18,14 +18,14 @@
     
     // Set default camera setting
     AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
-    int cameraSettings = [[NSUserDefaults standardUserDefaults] integerForKey:@"cameraSetting"];
     
-    [device lockForConfiguration:nil];
-    [device setFlashMode:cameraSettings];
-
     int flashMode = [device flashMode];
     
     if([device isFlashModeSupported:flashMode]){
+        int cameraSettings = [[NSUserDefaults standardUserDefaults] integerForKey:@"cameraSetting"];
+        
+        [device lockForConfiguration:nil];
+        [device setFlashMode:cameraSettings];
         
         if(flashMode == AVCaptureFlashModeAuto){
             [flashButton setImage:[UIImage imageNamed:@"flash_icon_auto.png"] forState:UIControlStateNormal];
@@ -36,8 +36,9 @@
         else {
             [flashButton setImage:[UIImage imageNamed:@"flash_icon_green.png"] forState:UIControlStateNormal];
         }
+        
+        [device unlockForConfiguration];
     }
-    [device unlockForConfiguration];
     
     if (IS_IPHONE_5) {
         self.view.frame = CGRectMake(0, 0, 320, HEIGHT_IPHONE_5);
