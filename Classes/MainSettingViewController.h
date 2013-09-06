@@ -20,15 +20,11 @@
 
 @class PhotoController ;
 @class AccountController,LauchViewController,HelpController,SettingViewController,AccountSelecter;
-@interface MainSettingViewController : UIViewController <UITableViewDelegate>{
+@interface MainSettingViewController : UIViewController <UITableViewDelegate, MFMailComposeViewControllerDelegate>{
 
-    UITableView *tableView;
     NSMutableArray *category;
     NSMutableArray *groupCtg;
     SettingViewController *oldsettingveiwcontroller;
-    UISwitch *mySwitch;
-    AccountController   *actaController;
-    HelpController *helpController;
     UIAlertView *warningAlert;
     PhotoController *ptController;
     AccountSelecter *accountUpdater;
