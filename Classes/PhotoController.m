@@ -330,6 +330,22 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     addMoreSymbolTabButton =[UIButton buttonWithType:UIButtonTypeCustom];
     arrangeLayerTabButton =[UIButton buttonWithType:UIButtonTypeCustom];
     
+    fontTabButton.showsTouchWhenHighlighted = YES;
+    colorTabButton.showsTouchWhenHighlighted = YES;
+    sizeTabButton.showsTouchWhenHighlighted = YES;
+    borderTabButton.showsTouchWhenHighlighted = YES;
+    fontBorderTabButton.showsTouchWhenHighlighted = YES;
+    cameraTabButton.showsTouchWhenHighlighted = YES;
+    photoTabButton.showsTouchWhenHighlighted = YES;
+    widthTabButton.showsTouchWhenHighlighted = YES;
+    heightTabButton.showsTouchWhenHighlighted = YES;
+    addMoreFontTabButton.showsTouchWhenHighlighted = YES;
+    addMorePhotoTabButton.showsTouchWhenHighlighted = YES;
+    addMoreIconTabButton.showsTouchWhenHighlighted = YES;
+    addMoreSymbolTabButton.showsTouchWhenHighlighted = YES;
+    arrangeLayerTabButton.showsTouchWhenHighlighted = YES;
+
+    
 	if(IS_IPHONE_5){
         fontTabButton.frame = CGRectMake(-1, 502, 65, 46);
         colorTabButton.frame = CGRectMake(64, 502, 65, 46);
@@ -344,7 +360,8 @@ int photoLayerCount = 0; // Photo layer count to set tag value
         addMorePhotoTabButton.frame = CGRectMake(64, 502, 65, 46);
         addMoreIconTabButton.frame = CGRectMake(129, 502, 65, 46);
         addMoreSymbolTabButton.frame = CGRectMake(194, 502, 65, 46);
-        arrangeLayerTabButton.frame = CGRectMake(259, 502, 65, 46);
+        arrangeLayerTabButton.frame = CGRectMake(259, 502, 65, 46);        
+
     }else{
         fontTabButton.frame = CGRectMake(-1, 415, 65, 46);
         colorTabButton.frame = CGRectMake(64, 415, 65, 46);
@@ -403,6 +420,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 	[self.view addSubview:fontBorderTabButton];
     
 	[cameraTabButton setBackgroundImage:[UIImage imageNamed:@"07_camera"] forState:UIControlStateNormal];
+    cameraTabButton.showsTouchWhenHighlighted = YES;
 	[cameraTabButton.titleLabel setFont:[UIFont fontWithName:@"Arial-BoldMT" size:15]];
 	[cameraTabButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 	[cameraTabButton addTarget:self action:@selector(setCameraTabAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -2047,6 +2065,7 @@ int arrangeLayerIndex;
     UIButton *nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)];
 	[nextButton addTarget:self action:@selector(callAddMoreLayers) forControlEvents:UIControlEventTouchUpInside];
     [nextButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
+    nextButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
     [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
     
@@ -2060,6 +2079,7 @@ int arrangeLayerIndex;
     UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 16, 21)];
     [helpButton addTarget:self action:@selector(loadHelpController) forControlEvents:UIControlEventTouchUpInside];
     [helpButton setBackgroundImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
+    helpButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *leftBarHelpButton = [[UIBarButtonItem alloc] initWithCustomView:helpButton];
     
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarMenuButton,leftBarHelpButton,nil]];
@@ -2204,6 +2224,7 @@ int arrangeLayerIndex;
     UIButton *nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)];
 	[nextButton addTarget:self action:@selector(callStyle) forControlEvents:UIControlEventTouchUpInside];
     [nextButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
+    nextButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
     [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
     
@@ -2286,10 +2307,12 @@ int arrangeLayerIndex;
         UIButton *photoButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
         [photoButton addTarget:self action:@selector(choosePhoto) forControlEvents:UIControlEventTouchUpInside];
         [photoButton setBackgroundImage:[UIImage imageNamed:@"photo_button"] forState:UIControlStateNormal];
+        photoButton.showsTouchWhenHighlighted = YES;
         UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:photoButton];
+        
         [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
     } else {
-        UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 29)];
+        UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)];
  //       doneButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
 //        [doneButton setTitle:@"Done" forState:UIControlStateNormal];
         [doneButton addTarget:self action:@selector(callAddMoreLayers) forControlEvents:UIControlEventTouchUpInside];
@@ -2398,6 +2421,7 @@ int arrangeLayerIndex;
         shareButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
         [shareButton addTarget:self action:@selector(callSaveAndShare) forControlEvents:UIControlEventTouchUpInside];
         [shareButton setBackgroundImage:[UIImage imageNamed:@"save"] forState:UIControlStateNormal];
+        shareButton.showsTouchWhenHighlighted = YES;
         UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
         [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
     } else {
@@ -2600,12 +2624,12 @@ int arrangeLayerIndex;
     saveButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
 	[saveButton addTarget:self action:@selector(callSaveAndShare) forControlEvents:UIControlEventTouchUpInside];
     [saveButton setBackgroundImage:[UIImage imageNamed:@"save"] forState:UIControlStateNormal];
-
+    saveButton.showsTouchWhenHighlighted = YES;
     UIButton *undoButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 33, 32)];
     undoButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
 	[undoButton addTarget:self action:@selector(undo:) forControlEvents:UIControlEventTouchUpInside];
     [undoButton setBackgroundImage:[UIImage imageNamed:@"undo"] forState:UIControlStateNormal];
-
+    undoButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:saveButton];
     rightUndoBarButton = [[UIBarButtonItem alloc] initWithCustomView:undoButton];
     if(undoCount <= 0){

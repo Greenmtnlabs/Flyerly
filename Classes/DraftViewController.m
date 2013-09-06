@@ -152,12 +152,14 @@ static ShareProgressView *clipBdPogressView;
         
         // Create right bar button
         UIButton *menuButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 31, 30)] autorelease];
+        menuButton.showsTouchWhenHighlighted = YES;
         [menuButton setBackgroundImage:[UIImage imageNamed:@"menu_button"] forState:UIControlStateNormal];
         [menuButton addTarget:self action:@selector(callMenu) forControlEvents:UIControlEventTouchUpInside];
         UIBarButtonItem *leftBarButton = [[[UIBarButtonItem alloc] initWithCustomView:menuButton] autorelease];
 
         // Create left bar help button
         UIButton *helpButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 16, 21)] autorelease];
+        helpButton.showsTouchWhenHighlighted = YES;
         [helpButton addTarget:self action:@selector(loadHelpController) forControlEvents:UIControlEventTouchUpInside];
         [helpButton setImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
 
@@ -180,6 +182,7 @@ static ShareProgressView *clipBdPogressView;
 
         // Create left bar help button
         UIButton *helpButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 16, 21)]autorelease];
+          helpButton.showsTouchWhenHighlighted = YES;
         [helpButton addTarget:self action:@selector(loadHelpController) forControlEvents:UIControlEventTouchUpInside];
         [helpButton setBackgroundImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
         UIBarButtonItem *leftHelpBarButton = [[[UIBarButtonItem alloc] initWithCustomView:helpButton] autorelease];
@@ -216,6 +219,7 @@ static ShareProgressView *clipBdPogressView;
     UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 33)];
     [shareButton addTarget:self action:@selector(share) forControlEvents:UIControlEventTouchUpInside];
     [shareButton setBackgroundImage:[UIImage imageNamed:@"share"] forState:UIControlStateNormal];
+    shareButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
     //[self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,rightEditBarButton,nil]];
     [self.navigationItem setRightBarButtonItem:rightBarButton];

@@ -39,6 +39,7 @@
     NSArray *twitterAccounts;
     UIView *waiting;
     NSString *dbUsername;
+    UIAlertView *warningAlert;
 }
 
 @property(nonatomic, retain) IBOutlet UIImageView *emailImage;

@@ -345,6 +345,7 @@ BOOL galleryExpanded = NO;
     
     UIButton *siginBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 46, 30)];
     [siginBtn setTitle:@"Crop" forState:UIControlStateNormal];
+    siginBtn.showsTouchWhenHighlighted = YES;
     siginBtn.titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size: 12.0];
     [siginBtn addTarget:self action:@selector(onSelectImage:) forControlEvents:UIControlEventTouchUpInside];
     [siginBtn setBackgroundImage:[UIImage imageNamed:@"signin_button"] forState:UIControlStateNormal];
