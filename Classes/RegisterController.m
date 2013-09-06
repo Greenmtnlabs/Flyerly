@@ -21,7 +21,7 @@
 @end
 
 @implementation RegisterController
-@synthesize username,password,confirmPassword,signUp,signUpFacebook,signUpTwitter,loadingView,email,name,phno,act;
+@synthesize username,password,confirmPassword,signUp,signUpFacebook,signUpTwitter,loadingView,email,name,phno,act,usrExist;
 static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
 static const CGFloat MINIMUM_SCROLL_FRACTION = 0.2;
 static const CGFloat MAXIMUM_SCROLL_FRACTION = 0.8;
@@ -415,22 +415,24 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     }
 }
 
+
+
 -(BOOL)validate{
 
     // Check empty fields
     if(!username || [username.text isEqualToString:@""]){
         
-        [self showAlert:@"Warning!" message:@"Please complete all required fields"];
+        [self showAlert:@"Please complete all required fields" message:@""];
         [self removeLoadingView];
         return NO;
     }
-
+    
     if ([globle.twitterUser isEqualToString:nil]) {
 
         if(!password || [password.text isEqualToString:@""] ||
        !confirmPassword || [confirmPassword.text isEqualToString:@""]){
         
-        [self showAlert:@"Warning!" message:@"Please complete all required fields."];
+        [self showAlert:@"Please complete all required fields." message:@""];
         [self removeLoadingView];
         return NO;
         }
@@ -439,10 +441,11 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     // Check password matched
         if(![password.text isEqualToString:confirmPassword.text]){
         
-        [self showAlert:@"Warning!" message:@"Password not matched"];
+        [self showAlert:@"Password not matched" message:@""];
         [self removeLoadingView];
         return NO;
         }
+        
     }
     
     if([email.text length] == 0 ){
@@ -450,6 +453,12 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
         [self removeLoadingView];
         return NO;
     }
+    if([usrExist.text isEqualToString:@"taken"] ){
+        [self showAlert:@"Username Aleardy Taken" message:@""];
+        [self removeLoadingView];
+        return NO;
+    }
+    
     return YES;
 }
 
@@ -763,5 +772,23 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     
 }
 
+
+-(IBAction)userExist{
+    if(username.text != nil){
+        PFQuery *query = [PFUser query];
+        [query whereKey:@"username" equalTo:username.text];
+        [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
+            if (error) {
+                [usrExist setHidden:NO];
+                [usrExist setText:@"available"];
+                [usrExist setTextColor:[UIColor greenColor]];
+            }else{
+                [usrExist setHidden:NO];
+                [usrExist setText:@"taken"];
+                [usrExist setTextColor:[UIColor redColor]];
+            }
+        }];
+    }
+}
 
 @end

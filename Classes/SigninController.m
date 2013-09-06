@@ -85,6 +85,7 @@
 
     UIButton *siginBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 46, 30)];
     [siginBtn setTitle:@"Sign In" forState:UIControlStateNormal];
+    siginBtn.showsTouchWhenHighlighted = YES;
     siginBtn.titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size: 12.0];
     [siginBtn addTarget:self action:@selector(onSignIn) forControlEvents:UIControlEventTouchUpInside];
     [siginBtn setBackgroundImage:[UIImage imageNamed:@"signin_button"] forState:UIControlStateNormal];
@@ -191,8 +192,12 @@
         
         if(!dbUsername && globle.twitterUser != nil){
            [self removeLoadingView];
-            registerController = [[RegisterController alloc]initWithNibName:@"RegisterController" bundle:nil];
-            [self.navigationController pushViewController:registerController animated:YES];
+            if (IS_IPHONE_5) {
+                registerController = [[RegisterController alloc]initWithNibName:@"RegisterViewController_iPhone5" bundle:nil];
+            }else{
+                registerController = [[RegisterController alloc]initWithNibName:@"RegisterController" bundle:nil];
+            }
+        [self.navigationController pushViewController:registerController animated:YES];
 
         }}];
     
@@ -201,7 +206,10 @@
 
     if(loginError){
             [self removeLoadingView];
-            [self showAlert:@"Invalid Acccount!" message:@"Please register for a Flyerly account"];
+        warningAlert = [[UIAlertView  alloc]initWithTitle:@"invalid username or password" message:@"" delegate:self cancelButtonTitle:@"Register" otherButtonTitles:@"Try Again",nil];
+        [warningAlert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:NO];
+        //[warningAlert show];
+        [warningAlert autorelease];
         
     }else{
         
@@ -595,10 +603,20 @@
         [self signIn:YES username:twitterUser password:@"null"];
     }
     
-    NSLog(@"%u",buttonIndex);
-    
-    
+    NSLog(@"%u",buttonIndex);    
 }
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+	if(alertView == warningAlert && buttonIndex == 0) {
+        if (IS_IPHONE_5) {
+            registerController = [[RegisterController alloc]initWithNibName:@"RegisterViewController_iPhone5" bundle:nil];
+        }else{
+            registerController = [[RegisterController alloc]initWithNibName:@"RegisterController" bundle:nil];
+        }
+        [self.navigationController pushViewController:registerController animated:YES];
+       
+        //[self performSelectorOnMainThread:@selector(pushViewController:) withObject:launchController waitUntilDone:YES];        
+    }
+}
 
 @end

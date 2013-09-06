@@ -49,6 +49,7 @@ BOOL selectAll;
     UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 16, 21)];
     [helpButton addTarget:self action:@selector(loadHelpController) forControlEvents:UIControlEventTouchUpInside];
     [helpButton setImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
+    helpButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:helpButton];
   
 
@@ -112,6 +113,7 @@ BOOL selectAll;
     UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 31, 30)];
     [menuButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [menuButton setBackgroundImage:[UIImage imageNamed:@"menu_button"] forState:UIControlStateNormal];
+     menuButton.showsTouchWhenHighlighted = YES;
     [menuButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *menuBarButton = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
     //[self.navigationItem setRightBarButtonItem:rightBarButton];
@@ -121,11 +123,12 @@ BOOL selectAll;
 }
 
 -(void)loadHelpController{
-    HelpController *helpController = [[HelpController alloc]initWithNibName:@"HelpController" bundle:nil];
+    HelpController *helpController = [[[HelpController alloc]initWithNibName:@"HelpController" bundle:nil] autorelease];
     [self.navigationController pushViewController:helpController animated:NO];
 }
 
 -(IBAction)goBack{
+    /*
     if(IS_IPHONE_5){
         launchCotroller = [[LauchViewController alloc]initWithNibName:@"LauchViewControllerIPhone5" bundle:nil];
     }   else{
@@ -133,6 +136,9 @@ BOOL selectAll;
     }
 
 	[self.navigationController pushViewController:launchCotroller animated:NO];
+     */
+    [self.navigationController popViewControllerAnimated:YES];
+
 }
 
 /*

@@ -51,8 +51,10 @@
 @property(nonatomic, retain) IBOutlet UIButton *signUpTwitter;
 @property (nonatomic, retain) LoadingView *loadingView;
 @property(nonatomic, retain) IBOutlet UIActivityIndicatorView *act;
+@property(nonatomic, retain) IBOutlet UILabel *usrExist;
 
 -(void)goBack;
+-(IBAction)userExist;
 -(void)onSignUp;
 -(IBAction)onSignUp;
 -(IBAction)onSignUpFacebook;

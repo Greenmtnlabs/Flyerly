@@ -43,6 +43,7 @@
     // Create left bar button
      UIButton *closeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
      closeButton.titleLabel.font = [UIFont fontWithName:BUTTON_FONT size:13];
+      closeButton.showsTouchWhenHighlighted = YES;
      [closeButton setBackgroundImage:[UIImage imageNamed:@"crop_button"] forState:UIControlStateNormal];
      [closeButton setTitle:@"Close" forState:UIControlStateNormal];
      [closeButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];

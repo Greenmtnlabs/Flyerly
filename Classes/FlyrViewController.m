@@ -169,6 +169,7 @@ sd:;
     UIButton *seaBotton = [[UIButton alloc] initWithFrame:CGRectMake(252, 54, 58, 30)];
     [seaBotton  setTitle:@"Search" forState:UIControlStateNormal] ;
     seaBotton.titleLabel.font = [UIFont boldSystemFontOfSize:13.0];
+    seaBotton.showsTouchWhenHighlighted = YES;
     [seaBotton addTarget:self action:@selector(searchClick) forControlEvents:UIControlEventTouchUpInside];
     [seaBotton setBackgroundImage:[UIImage imageNamed:@"crop_button"] forState:UIControlStateNormal];
     [self.view addSubview:img];
@@ -223,6 +224,7 @@ sd:;
     UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 16, 21)];
     [helpButton addTarget:self action:@selector(loadHelpController) forControlEvents:UIControlEventTouchUpInside];
     [helpButton setImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
+    helpButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:helpButton];
    
     UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)];
@@ -264,6 +266,7 @@ sd:;
     UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 29)];
     [shareButton addTarget:self action:@selector(doNew:) forControlEvents:UIControlEventTouchUpInside];
     [shareButton setBackgroundImage:[UIImage imageNamed:@"pencil_icon"] forState:UIControlStateNormal];
+    shareButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *shareBarButton = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
     //UIBarButtonItem *shareBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Share" style:UIControlStateNormal
     //                                                                  target:nil action:nil ];
