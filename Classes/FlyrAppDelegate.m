@@ -315,21 +315,13 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 
         }
         
-        NSString  *usr = [[NSUserDefaults standardUserDefaults] stringForKey:@"User"];
-        if (usr == nil) {
+        // Is the ser logged in?
+        if ( [PFUser currentUser] == nil ) {
             [navigationController pushViewController:accountController animated:YES];
         }else{
             [navigationController pushViewController:lauchController animated:YES];
         }
 
-/*
-        if(IS_IPHONE_5){
-            lauchController = [[LauchViewController alloc]initWithNibName:@"LauchViewControllerIPhone5" bundle:nil];
-        }else{
-            lauchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
-        }        
-        [navigationController pushViewController:lauchController animated:NO];
-*/
         [window addSubview:[navigationController view]];
     }
     
