@@ -1774,22 +1774,24 @@ int arrangeLayerIndex;
         // Within the group enumeration block, filter to enumerate just photos.
         [group setAssetsFilter:[ALAssetsFilter allPhotos]];
         
-        // Chooses the photo at the last index
-        [group enumerateAssetsAtIndexes:[NSIndexSet indexSetWithIndex:([group numberOfAssets] - 1)] options:0 usingBlock:^(ALAsset *alAsset, NSUInteger index, BOOL *innerStop) {
+        // Chooses the photo at the last index. Make sure number of assets is greater than zero.
+        if ( [group numberOfAssets] > 0 ) {
+            [group enumerateAssetsAtIndexes:[NSIndexSet indexSetWithIndex:([group numberOfAssets] - 1)] options:0 usingBlock:^(ALAsset *alAsset, NSUInteger index, BOOL *innerStop) {
             
-            // The end of the enumeration is signaled by asset == nil.
-            if (alAsset) {
-                ALAssetRepresentation *representation = [alAsset defaultRepresentation];
-                UIImage *latestPhoto = [UIImage imageWithCGImage:[representation fullScreenImage]];
+                // The end of the enumeration is signaled by asset == nil.
+                if (alAsset) {
+                    ALAssetRepresentation *representation = [alAsset defaultRepresentation];
+                    UIImage *latestPhoto = [UIImage imageWithCGImage:[representation fullScreenImage]];
                 
-                if([latestPhoto isKindOfClass:[UIImageView class]]){
+                    if([latestPhoto isKindOfClass:[UIImageView class]]){
+                    }
+                    // Do something interesting with the AV asset.
+                    customPhotoController.image = latestPhoto;
+                    [self.navigationController pushViewController:customPhotoController animated:YES];
+                    [customPhotoController release];
                 }
-                // Do something interesting with the AV asset.
-                customPhotoController.image = latestPhoto;
-                [self.navigationController pushViewController:customPhotoController animated:YES];
-                [customPhotoController release];
-            }
-        }];
+            }];
+        }
     } failureBlock: ^(NSError *error) {
         // Typically you should handle an error more gracefully than this.
         NSLog(@"No groups");
@@ -4955,6 +4957,10 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     if(!inAppDictionary){
         
         NSMutableDictionary *newInAppDictionary = nil;
+        
+        if ( [PFUser currentUser] == nil ) {
+            NSLog(@"User is null!");
+        }
         
         PFQuery *query = [PFQuery queryWithClassName:TABLE_JSON];
         [query whereKey:COLUMN_USER equalTo:[PFUser currentUser]];
