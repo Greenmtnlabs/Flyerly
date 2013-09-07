@@ -18,7 +18,7 @@
     IBOutlet UITextField *searchField;
     IBOutlet UIButton *searchButton;
     IBOutlet UIView *darkView;
-
+	NSString *imageFileName;
     BZFoursquareRequest *request_;
     NSDictionary        *meta_;
     NSArray             *notifications_;

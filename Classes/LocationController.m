@@ -307,33 +307,45 @@ enum {
         NSLog(@"indexPath.row: %d", indexPath.row);
         
         id venue = [venues objectAtIndex:indexPath.row];
-        //NSLog(@"venue: %@", venue);
-        
-        
         NSDictionary *location = [venue objectForKey:@"location"];
+        
+        FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+        
+        NSString *socialFlyerPath = [imageFileName stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@/Flyr/", appDelegate.loginId] withString:[NSString stringWithFormat:@"%@/Flyr/Social/", appDelegate.loginId]];
+        NSString *finalImgWritePath = [socialFlyerPath stringByReplacingOccurrencesOfString:@".jpg" withString:@".soc"];
+        
+        NSMutableArray *socialArray = [[NSMutableArray alloc] initWithContentsOfFile:finalImgWritePath];
+        
         if([venue objectForKey:@"name"]){
             [[LocationController getLocationDetails] setObject:[venue objectForKey:@"name"] forKey:@"name"];
+            [socialArray insertObject:[venue objectForKey:@"name"] atIndex:0];
+
         }else{
             [[LocationController getLocationDetails] setObject:@"" forKey:@"name"];
         }
         if([location objectForKey:@"address"]){
             [[LocationController getLocationDetails] setObject:[location objectForKey:@"address"] forKey:@"address"];
+            [socialArray insertObject:[location objectForKey:@"address"] atIndex:1]; 
         }else{
             [[LocationController getLocationDetails] setObject:@"" forKey:@"address"];
         }
         if([location objectForKey:@"lat"]){
             [[LocationController getLocationDetails] setObject:[location objectForKey:@"lat"] forKey:@"lat"];
+            [socialArray insertObject:[location objectForKey:@"lat"] atIndex:2];
         }else{
             [[LocationController getLocationDetails] setObject:@"" forKey:@"lat"];
         }
         if([location objectForKey:@"lng"]){
             [[LocationController getLocationDetails] setObject:[location objectForKey:@"lng"] forKey:@"lng"];
+            [socialArray insertObject:[location objectForKey:@"lng"] atIndex:3];
         }else{
             [[LocationController getLocationDetails] setObject:@"" forKey:@"lng"];
         }
         
         //NSLog(@"locationDetails after: %@", locationDetails);
-        
+        [[NSFileManager defaultManager] removeItemAtPath:finalImgWritePath error:nil];
+        [socialArray writeToFile:finalImgWritePath atomically:YES];
+
         NSLog(@"Before onBack");
         [self onBack];
     }

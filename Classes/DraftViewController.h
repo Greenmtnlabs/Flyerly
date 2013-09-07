@@ -68,7 +68,7 @@
     
     BOOL fromPhotoController;
     int countOfSharingNetworks;
-    
+    NSString *loc;
 	/*IBOutlet UIView *progressView;
     ShareProgressView *facebookPogressView;
     ShareProgressView *twitterPogressView;
@@ -138,6 +138,7 @@
 -(IBAction)onClickSMSButton;
 -(IBAction)onClickClipboardButton;
 -(IBAction)searchNearByLocations;
+- (BOOL)uploadImageStream:(NSInputStream *)inImageStream suggestedFilename:(NSString *)inFilename MIMEType:(NSString *)inType arguments:(NSDictionary *)inArguments;
 -(void)goback;
 -(void)share;
 -(void)updateSocialStates;

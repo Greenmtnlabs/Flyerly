@@ -73,14 +73,13 @@ static ShareProgressView *clipBdPogressView;
     [super viewDidLoad];
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationDuration:0.2f];
-    
     // Init loading view
     loadingView = nil;
 	loadingView = [[LoadingView alloc]init];
     
     // Set click event on switch
     [saveToRollSwitch addTarget:self action:@selector(setSwitchState:) forControlEvents:UIControlEventValueChanged];
-    
+      [[LocationController getLocationDetails] setObject:@"" forKey:@"name"];
     // Set facebook as per settings
     if([[NSUserDefaults standardUserDefaults] stringForKey:@"facebookSetting"]){
         [facebookButton setSelected:YES];
@@ -261,7 +260,10 @@ static ShareProgressView *clipBdPogressView;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];	
+    [super viewWillAppear:animated];
+    // Init loading view
+    loadingView = nil;
+	loadingView = [[LoadingView alloc]init];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
     
     if([LocationController getLocationDetails] && [[LocationController getLocationDetails] objectForKey:@"name"]){
@@ -297,7 +299,7 @@ static ShareProgressView *clipBdPogressView;
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:CloseShareProgressNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closeSharingProgressSuccess:) name:CloseShareProgressNotification object:nil];
-
+/*
     // Show progress views if they are not cancelled manually
     if(twitterPogressView){
         [progressView setHidden:NO];
@@ -347,7 +349,7 @@ static ShareProgressView *clipBdPogressView;
         countOfSharingNetworks++;
         [self increaseProgressViewHeightBy:36];
     }
-
+*/
 
 }
 
@@ -464,7 +466,7 @@ static ShareProgressView *clipBdPogressView;
     
     // Check if any network in selected
     if([self isAnyNetworkSelected]){
-    
+       
         // Check if only those buttons are selected that did'nt required connectivity
         if([self onlyNonConnectivityNetworkSelected]){
             
@@ -509,14 +511,12 @@ static ShareProgressView *clipBdPogressView;
                     [self showFacebookProgressRow];
                     [self shareOnFacebook];
                     [Flurry logEvent:@"Shared Facebook"];
-                    //[self fillSuccessStatus:facebookPogressView];
                 }
                 
                 if([flickrButton isSelected]){
                     [self showFlickrProgressRow];
                     [self shareOnFlickr];
                     [Flurry logEvent:@"Shared Flickr"];
-                    //[self fillSuccessStatus:flickrPogressView];
                 }
                 
                 if([tumblrButton isSelected]){
@@ -526,17 +526,24 @@ static ShareProgressView *clipBdPogressView;
                     //[self fillSuccessStatus:tumblrPogressView];
                 }
                 
-                if([emailButton isSelected]){
-                    [Flurry logEvent:@"Shared Email"];
+                if([emailButton isSelected] && [smsButton isSelected]){
+                    [Flurry logEvent:@"Shared Email & SMS"];
                     [self showemailProgressRow ];
-                    [self shareOnEmail];
-                }
-                
-                if([smsButton isSelected]){
-                    [Flurry logEvent:@"Shared SMS"];
                     [self showsmsProgressRow];
                     [self shareOnMMS];
+                }else{
+                    if ([emailButton isSelected]) {
+                        [Flurry logEvent:@"Shared Email"];
+                        [self showemailProgressRow ];
+                        [self shareOnEmail];
+                    }
+                    if ([smsButton isSelected]) {
+                        [Flurry logEvent:@"Shared SMS"];
+                        [self showsmsProgressRow];
+                        [self shareOnMMS];
+                    }
                 }
+                
                 if([instagramButton isSelected]){
                     [Flurry logEvent:@"Shared Instagram"];
                     [self showInstagramProgressRow];
@@ -811,7 +818,7 @@ static ShareProgressView *clipBdPogressView;
     if(!socialArray){
         socialArray = [[[NSMutableArray alloc] init] autorelease];
     }
-    
+
     if([socialArray count] > 0){
     
         // Save states of all supported social media
@@ -963,10 +970,21 @@ static ShareProgressView *clipBdPogressView;
  */
 -(void)shareOnMMS{
     NSData *imageData = UIImagePNGRepresentation(selectedFlyerImage);
-    [self uploadImage:imageData isEmail:NO];
+    
+    if([emailButton isSelected] && [smsButton isSelected]){
+        [self uploadImageByboth:imageData isEmail:NO];
+    }else{
+        if ([emailButton isSelected]) {
+            [self uploadImage:imageData isEmail:YES];
+        }
+        if ([smsButton isSelected]) {
+            [self uploadImage:imageData isEmail:YES];
+        }
+    }
+ 
 }
 
--(void)shareOnMMS:(NSString *)link{    
+-(void)shareOnMMS:(NSString *)link{
     MFMessageComposeViewController *controller = [[[MFMessageComposeViewController alloc] init] autorelease];
     if([MFMessageComposeViewController canSendText])
     {
@@ -1026,6 +1044,54 @@ static ShareProgressView *clipBdPogressView;
     } progressBlock:^(int percentDone) {
     }];
 }
+
+
+- (void)uploadImageByboth:(NSData *)imageData isEmail:(BOOL)isEmail
+{
+    PFFile *imageFile = [PFFile fileWithName:[FlyrViewController getFlyerNumberFromPath:imageFileName] data:imageData];
+    
+    // Save PFFile
+    [imageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (!error) {
+            
+            // Create a PFObject around a PFFile and associate it with the current user
+            PFObject *flyerObject = [PFObject objectWithClassName:@"Flyer"];
+            [flyerObject setObject:imageFile forKey:@"image"];
+            
+            // Set the access control list to current user for security purposes
+            flyerObject.ACL = [PFACL ACLWithUser:[PFUser currentUser]];
+            
+            PFUser *user = [PFUser currentUser];
+            [flyerObject setObject:user forKey:@"user"];
+            
+            [flyerObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                if (!error) {
+                    
+                    // Remove loading view
+                    for (UIView *subview in self.view.subviews) {
+                        if([subview isKindOfClass:[LoadingView class]]){
+                            [subview removeFromSuperview];
+                        }
+                    }
+                    
+                    PFFile *theImage = [flyerObject objectForKey:@"image"];
+                    [self shareOnEmail:[theImage url]];
+                    [self shortenURL:[theImage url]];
+                }
+                else{
+                    // Log details of the failure
+                    NSLog(@"Error: %@ %@", error, [error userInfo]);
+                }
+            }];
+        }
+        else{
+            // Log details of the failure
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    } progressBlock:^(int percentDone) {
+    }];
+}
+
 
 /*
  * Share on Email
@@ -1174,7 +1240,7 @@ static ShareProgressView *clipBdPogressView;
  * Share on Flickr
  */
 -(void)shareOnFlickr{
-    
+    loc = [NSString alloc];
     [flickrPogressView.statusText setText:@"Sharing..."];
     [flickrPogressView.statusText setTextColor:[UIColor yellowColor]];
     [flickrPogressView.statusIcon setBackgroundImage:nil forState:UIControlStateNormal];
@@ -1320,7 +1386,7 @@ static ShareProgressView *clipBdPogressView;
     [smsPogressView setFrame:CGRectMake(smsPogressView.frame.origin.x, 36 * countOfSharingNetworks++, smsPogressView.frame.size.width, smsPogressView.frame.size.height)];
     smsPogressView.tag = 7;
     
-    [smsPogressView.statusText setText:@"Opening text message!"];
+    [smsPogressView.statusText setText:@"Opening txt msg!"];
     [smsPogressView.statusText setTextColor:[UIColor yellowColor]];
     [smsPogressView.statusIcon setBackgroundImage:nil forState:UIControlStateNormal];
     
@@ -1350,7 +1416,7 @@ static ShareProgressView *clipBdPogressView;
     [emailPogressView setFrame:CGRectMake(emailPogressView.frame.origin.x, 36 * countOfSharingNetworks++, emailPogressView.frame.size.width, emailPogressView.frame.size.height)];
     emailPogressView.tag = 6;
     
-    [emailPogressView.statusText setText:@"Opening new mail!"];
+    [emailPogressView.statusText setText:@"Opening email!"];
     [emailPogressView.statusText setTextColor:[UIColor yellowColor]];
     [emailPogressView.statusIcon setBackgroundImage:nil forState:UIControlStateNormal];
     
@@ -1410,7 +1476,7 @@ static ShareProgressView *clipBdPogressView;
 
 
 -(void)onemailSuccess{
-    [emailPogressView.statusText setText:@"Mail send sucessfully!"];
+    [emailPogressView.statusText setText:@"Email sent!"];
     [emailPogressView.statusText setTextColor:[UIColor greenColor]];
     [emailPogressView.statusIcon setBackgroundImage:[UIImage imageNamed:@"status_success"] forState:UIControlStateNormal];
     [emailPogressView.refreshIcon setHidden:YES];
@@ -1418,7 +1484,7 @@ static ShareProgressView *clipBdPogressView;
 }
 
 -(void)onemailFailed{
-    [emailPogressView.statusText setText:@"Mail failed!"];
+    [emailPogressView.statusText setText:@"Email failed!"];
     [emailPogressView.statusText setTextColor:[UIColor redColor]];
     [emailPogressView.statusIcon setBackgroundImage:[UIImage imageNamed:@"status_failed"] forState:UIControlStateNormal];
     [emailPogressView.refreshIcon setHidden:NO];
@@ -1426,7 +1492,7 @@ static ShareProgressView *clipBdPogressView;
 }
 
 -(void)onsmsSuccess{
-    [smsPogressView.statusText setText:@"Opened successfully!"];
+    [smsPogressView.statusText setText:@"Text sent!"];
     [smsPogressView.statusText setTextColor:[UIColor greenColor]];
     [smsPogressView.statusIcon setBackgroundImage:[UIImage imageNamed:@"status_success"] forState:UIControlStateNormal];
     [smsPogressView.refreshIcon setHidden:YES];
@@ -1434,7 +1500,7 @@ static ShareProgressView *clipBdPogressView;
 }
 
 -(void)onsmsFailed{
-    [smsPogressView.statusText setText:@"Opening failed!"];
+    [smsPogressView.statusText setText:@"Text failed!"];
     [smsPogressView.statusText setTextColor:[UIColor redColor]];
     [smsPogressView.statusIcon setBackgroundImage:[UIImage imageNamed:@"status_failed"] forState:UIControlStateNormal];
     [smsPogressView.refreshIcon setHidden:NO];
@@ -1631,7 +1697,7 @@ static ShareProgressView *clipBdPogressView;
 -(void)increaseProgressViewHeightBy:(int)height{
     [progressView setFrame:CGRectMake(progressView.frame.origin.x, progressView.frame.origin.y, progressView.frame.size.width, progressView.frame.size.height + height)];
     [scrollView setFrame:CGRectMake(scrollView.frame.origin.x, scrollView.frame.origin.y + height, scrollView.frame.size.width, scrollView.frame.size.height)];
-    [scrollView setContentSize:CGSizeMake(scrollView.frame.size.width, scrollView.frame.size.height+ height)];
+    [scrollView setContentSize:CGSizeMake(scrollView.frame.size.width, scrollView.frame.size.height+ 100)];
 }
 
 -(void)setDefaultProgressViewHeight{
@@ -1895,7 +1961,7 @@ static ShareProgressView *clipBdPogressView;
         [locationLabel setHidden:NO];
         [locationBackground setHidden:NO];
         [locationButton setHidden:NO];
-        
+        locationLabel.text = @"Name This Location ";
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationDuration:0.2];
         [UIView setAnimationCurve:UIViewAnimationCurveLinear];
@@ -1908,7 +1974,7 @@ static ShareProgressView *clipBdPogressView;
         [locationLabel setHidden:YES];
         [locationBackground setHidden:YES];
         [locationButton setHidden:YES];
-        
+        [[LocationController getLocationDetails] setObject:@"" forKey:@"name"];
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationDuration:0.2];
         [UIView setAnimationCurve:UIViewAnimationCurveLinear];

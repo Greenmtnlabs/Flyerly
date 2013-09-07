@@ -169,8 +169,8 @@
 - (void)signOut{
     //For Facebook
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"facebookSetting"];
-    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"FBAccessTokenKey"];
-    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"FBExpirationDateKey"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"FBAccessTokenKey"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"FBExpirationDateKey"];
     //For FlyerLee
     [[NSUserDefaults standardUserDefaults]  setObject:nil forKey:@"User"];
     [[NSUserDefaults standardUserDefaults]  setObject:nil forKey:@"Password"];

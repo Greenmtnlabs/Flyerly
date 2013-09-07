@@ -206,7 +206,7 @@
 
     if(loginError){
             [self removeLoadingView];
-        warningAlert = [[UIAlertView  alloc]initWithTitle:@"invalid username or password" message:@"" delegate:self cancelButtonTitle:@"Register" otherButtonTitles:@"Try Again",nil];
+        warningAlert = [[UIAlertView  alloc]initWithTitle:@"Invalid username or password" message:@"" delegate:self cancelButtonTitle:@"Register" otherButtonTitles:@"Try Again",nil];
         [warningAlert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:NO];
         //[warningAlert show];
         [warningAlert autorelease];

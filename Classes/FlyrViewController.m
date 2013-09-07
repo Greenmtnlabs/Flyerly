@@ -211,7 +211,7 @@ sd:;
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
     //Create sorted array with modificate date as key
 	[self filesByModDate];
-    [tView reloadData];
+     [tView reloadData];
     photoArrayBackup = [[NSMutableArray alloc] initWithArray:photoArray];
     iconArrayBackup = [[NSMutableArray alloc] initWithArray:iconArray];
     photoDetailArrayBackup  = [[NSMutableArray alloc] initWithArray:iconArray];
@@ -405,12 +405,14 @@ sd:;
 	draftViewController.selectedFlyerImage = currentFlyerImage;
     
     if(photoDetailArray.count > indexPath.row){
+      
         NSString *title = [detailArray objectAtIndex:0];
         NSString *description = [detailArray objectAtIndex:1];
+        
         draftViewController.selectedFlyerTitle = title;
         draftViewController.selectedFlyerDescription = description;
         draftViewController.imageFileName = imageName;
-        
+       
         NSString *newText = [imageName stringByReplacingOccurrencesOfString:@".jpg" withString:@".txt"];
         draftViewController.detailFileName = newText;
     }
@@ -448,6 +450,7 @@ sd:;
         [[NSFileManager defaultManager] removeItemAtPath:socialFilePath error:nil];
 
         [photoArray removeObjectAtIndex:[indexPath row]];
+        [photoDetailArray removeObjectAtIndex:[indexPath row]];
 		[iconArray removeObjectAtIndex:[indexPath row]];
 	}
     
