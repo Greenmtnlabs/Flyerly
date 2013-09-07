@@ -62,8 +62,14 @@
 
 
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:backBarButton,nil ]];
+    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-35, -6, 50, 50)] autorelease];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont fontWithName:TITLE_FONT size:18];
+    label.textAlignment = UITextAlignmentCenter;
+    label.textColor = [UIColor whiteColor];
+    label.text = @"SETTINGS";
     
-     self.navigationItem.title = @"SETTINGS";
+    self.navigationItem.titleView = label;
     category = [[NSMutableArray alloc] init];
     [category addObject:@" Sharing Options"];
     [category addObject:@"Save to Gallery"];

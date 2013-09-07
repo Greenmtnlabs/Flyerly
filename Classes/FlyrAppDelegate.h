@@ -14,7 +14,7 @@
 #import <ObjectiveFlickr.h>
 #import "Crittercism.h"
 #import "BZFoursquare.h"
-
+#import "Singleton.h"
 extern NSString *FlickrSharingSuccessNotification;
 extern NSString *FlickrSharingFailureNotification;
 extern NSString *FacebookDidLoginNotification;
@@ -24,7 +24,7 @@ extern NSString *FacebookDidLoginNotification;
 @class LauchViewController;
 @class AfterUpdateController;
 @class AccountController;
-
+@class Singleton;
 @interface FlyrAppDelegate : NSObject <UIApplicationDelegate,OFFlickrAPIRequestDelegate> {
 	UIScrollView *fontScrollView;
 	UIScrollView *colorScrollView;
@@ -35,7 +35,7 @@ extern NSString *FacebookDidLoginNotification;
 	SaveFlyerController *svController;
     LauchViewController *lauchController;
     AccountController *accountController;
-
+    Singleton *globle;
 	TwitLogin *_tSession;
 	BOOL faceBookPermissionFlag;
 	BOOL changesFlag;

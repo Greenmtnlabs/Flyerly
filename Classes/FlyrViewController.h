@@ -10,6 +10,7 @@
 #import "MyNavigationBar.h"
 #import "PhotoController.h"
 #import "LauchViewController.h"
+
 @interface FlyrViewController : UIViewController <UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>{
 	NSMutableArray *photoArray;
 	NSMutableArray *photoDetailArray;
@@ -17,6 +18,7 @@
     NSMutableArray *photoArrayBackup;
 	NSMutableArray *photoDetailArrayBackup;
 	NSMutableArray *iconArrayBackup;
+
 	MyNavigationBar *navBar;
 	IBOutlet UITableView *tView;
     PhotoController *ptController;

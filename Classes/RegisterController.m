@@ -279,9 +279,17 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
             
             [appDelegate.facebook requestWithGraphPath:@"me" andDelegate:self];
             [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"facebookSetting"];
+            [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"saveToCameraRollSetting"];
+            [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"clipSetting"];
+            [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"emailSetting"];
+            [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"smsSetting"];
 
         } else {
             [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"facebookSetting"];
+            [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"saveToCameraRollSetting"];
+            [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"clipSetting"];
+            [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"emailSetting"];
+            [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"smsSetting"];
             [appDelegate.facebook authorize:[NSArray arrayWithObjects: @"read_stream",
                                              @"publish_stream", @"email", nil]];
         }
@@ -316,6 +324,11 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
         globle.twitterUser = nil;
         [[NSUserDefaults standardUserDefaults]  setObject:username.text forKey:@"User"];
         [[NSUserDefaults standardUserDefaults]  setObject:password.text forKey:@"Password"];
+        [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"twitterSetting"];
+        [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"saveToCameraRollSetting"];
+        [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"clipSetting"];
+        [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"emailSetting"];
+        [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"smsSetting"];
         
         if(IS_IPHONE_5){
             launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewControllerIPhone5" bundle:nil];
@@ -338,7 +351,6 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     if([AddFriendsController connected]){
         act.hidden = NO;
         waiting.hidden = NO;
-        [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"twitterSetting"];
         if([TWTweetComposeViewController canSendTweet]){
             
             ACAccountStore *account = [[ACAccountStore alloc] init];
@@ -372,6 +384,11 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
                         username.text = twitterUser;
                         password.text = @"null";
                         confirmPassword.text = @"null";
+                        [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"twitterSetting"];
+                        [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"saveToCameraRollSetting"];
+                        [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"clipSetting"];
+                        [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"emailSetting"];
+                        [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"smsSetting"];
                     
                         if([self CheckUserExists:twitterUser password:@"null"])
                         {
@@ -426,8 +443,9 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
         [self removeLoadingView];
         return NO;
     }
-    
-    if ([globle.twitterUser isEqualToString:nil]) {
+    globle = [Singleton RetrieveSingleton];
+
+    if (globle.twitterUser == nil) {
 
         if(!password || [password.text isEqualToString:@""] ||
        !confirmPassword || [confirmPassword.text isEqualToString:@""]){

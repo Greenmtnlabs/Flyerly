@@ -270,7 +270,8 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 	changesFlag = NO;
 	[[UIApplication sharedApplication] setStatusBarStyle: UIStatusBarStyleBlackOpaque];
 	navigationController.navigationBar.barStyle = UIStatusBarStyleBlackOpaque;
-    
+    globle = [Singleton RetrieveSingleton];
+    globle.twitterUser = nil;
     //This flag represents the condition whether application setting has been altered first time
     // after installing app
     if(![[NSUserDefaults standardUserDefaults] stringForKey:@"saveToCameraRollSettingFlag"]){
