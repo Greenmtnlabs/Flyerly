@@ -73,6 +73,8 @@ static ShareProgressView *clipBdPogressView;
     [super viewDidLoad];
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationDuration:0.2f];
+    globle = [Singleton RetrieveSingleton];
+    showbars = NO;
     // Init loading view
     loadingView = nil;
 	loadingView = [[LoadingView alloc]init];
@@ -114,12 +116,15 @@ static ShareProgressView *clipBdPogressView;
     }else{
         [smsButton setSelected:NO];
     }
-    
+
     // Set clip as per settings
+    
     if([[NSUserDefaults standardUserDefaults] stringForKey:@"clipSetting"]){
         [clipboardButton setSelected:YES];
+        [clipboardlabel setTextColor:[globle colorWithHexString:@"3caaff"]];
     }else{
         [clipboardButton setSelected:NO];
+        [clipboardlabel setTextColor:[UIColor whiteColor] ];
     }
 
     // Set tumblr as per settings
@@ -299,8 +304,9 @@ static ShareProgressView *clipBdPogressView;
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:CloseShareProgressNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closeSharingProgressSuccess:) name:CloseShareProgressNotification object:nil];
-/*
+
     // Show progress views if they are not cancelled manually
+if (showbars) {
     if(twitterPogressView){
         [progressView setHidden:NO];
         [progressView addSubview:twitterPogressView];
@@ -349,8 +355,8 @@ static ShareProgressView *clipBdPogressView;
         countOfSharingNetworks++;
         [self increaseProgressViewHeightBy:36];
     }
-*/
-
+}
+    showbars = YES;
 }
 
 -(void)loadHelpController{
@@ -525,12 +531,11 @@ static ShareProgressView *clipBdPogressView;
                     [Flurry logEvent:@"Shared Tumblr"];
                     //[self fillSuccessStatus:tumblrPogressView];
                 }
-                
-                if([emailButton isSelected] && [smsButton isSelected]){
-                    [Flurry logEvent:@"Shared Email & SMS"];
-                    [self showemailProgressRow ];
-                    [self showsmsProgressRow];
-                    [self shareOnMMS];
+                if ([emailButton isSelected] && [smsButton isSelected]) {
+                     [Flurry logEvent:@"Shared Email & SMS"];
+                     [self showemailProgressRow ];
+                        [self showsmsProgressRow];
+                     [self shareOnMMS];
                 }else{
                     if ([emailButton isSelected]) {
                         [Flurry logEvent:@"Shared Email"];
@@ -771,7 +776,6 @@ static ShareProgressView *clipBdPogressView;
  * Called when clipboard button is pressed
  */
 -(IBAction)onClickClipboardButton{
-    globle = [Singleton RetrieveSingleton];
     if([clipboardButton isSelected]){
         [clipboardButton setSelected:NO];
         [clipboardlabel setTextColor:[UIColor whiteColor] ];
@@ -970,19 +974,18 @@ static ShareProgressView *clipBdPogressView;
  */
 -(void)shareOnMMS{
     NSData *imageData = UIImagePNGRepresentation(selectedFlyerImage);
-    
     if([emailButton isSelected] && [smsButton isSelected]){
-        [self uploadImageByboth:imageData isEmail:NO];
-    }else{
+        sharelink = [[NSString alloc] init];
+        [self uploadImageByboth:imageData];
+     }else{
         if ([emailButton isSelected]) {
             [self uploadImage:imageData isEmail:YES];
         }
         if ([smsButton isSelected]) {
-            [self uploadImage:imageData isEmail:YES];
+            [self uploadImage:imageData isEmail:NO];
         }
     }
- 
-}
+ }
 
 -(void)shareOnMMS:(NSString *)link{
     MFMessageComposeViewController *controller = [[[MFMessageComposeViewController alloc] init] autorelease];
@@ -992,6 +995,8 @@ static ShareProgressView *clipBdPogressView;
         controller.body = [NSString stringWithFormat:@"%@ - %@ %@", self.titleView.text ,link, @"flyer.ly/SMS"];
         controller.messageComposeDelegate = self;
         [self presentModalViewController:controller animated:YES];
+    }else{
+        [self onsmsFailed];
     }
 }
 
@@ -1046,14 +1051,14 @@ static ShareProgressView *clipBdPogressView;
 }
 
 
-- (void)uploadImageByboth:(NSData *)imageData isEmail:(BOOL)isEmail
+- (void)uploadImageByboth:(NSData *)imageData
 {
+    sharelink =nil;
     PFFile *imageFile = [PFFile fileWithName:[FlyrViewController getFlyerNumberFromPath:imageFileName] data:imageData];
     
     // Save PFFile
     [imageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error) {
-            
             // Create a PFObject around a PFFile and associate it with the current user
             PFObject *flyerObject = [PFObject objectWithClassName:@"Flyer"];
             [flyerObject setObject:imageFile forKey:@"image"];
@@ -1240,7 +1245,6 @@ static ShareProgressView *clipBdPogressView;
  * Share on Flickr
  */
 -(void)shareOnFlickr{
-    loc = [NSString alloc];
     [flickrPogressView.statusText setText:@"Sharing..."];
     [flickrPogressView.statusText setTextColor:[UIColor yellowColor]];
     [flickrPogressView.statusIcon setBackgroundImage:nil forState:UIControlStateNormal];
@@ -1860,7 +1864,7 @@ static ShareProgressView *clipBdPogressView;
                                        
                                        // Open email composer if selected
                                        if([smsButton isSelected]){
-                                           [self shareOnMMS];
+                                           //[self shareOnMMS];
                                        } else {
                                            
                                            if([instagramButton isSelected] && (![tumblrButton isSelected] && ![flickrButton isSelected])){
@@ -2049,6 +2053,7 @@ static ShareProgressView *clipBdPogressView;
     }
  */
     [self updateFlyerDetail];
+    [self.view release];
 }
 
 - (void)didReceiveMemoryWarning {

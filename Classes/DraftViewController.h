@@ -59,7 +59,7 @@
 	LoadingView *loadingView;
     LauchViewController  *launchController;
     UIDocumentInteractionController *dic;
-    
+    BOOL showbars;
     NSMutableArray  *photoTitles;         // Titles of images
     NSMutableArray  *photoSmallImageData; // Image data (thumbnail)
     NSMutableArray  *photoURLsLargeImage; // URL to larger image
@@ -68,7 +68,7 @@
     
     BOOL fromPhotoController;
     int countOfSharingNetworks;
-    NSString *loc;
+    NSString *sharelink;
 	/*IBOutlet UIView *progressView;
     ShareProgressView *facebookPogressView;
     ShareProgressView *twitterPogressView;
