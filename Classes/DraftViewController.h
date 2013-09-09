@@ -139,7 +139,7 @@
 -(IBAction)onClickClipboardButton;
 -(IBAction)searchNearByLocations;
 - (BOOL)uploadImageStream:(NSInputStream *)inImageStream suggestedFilename:(NSString *)inFilename MIMEType:(NSString *)inType arguments:(NSDictionary *)inArguments;
--(void)goback;
+-(IBAction)goback;
 -(void)share;
 -(void)updateSocialStates;
 
@@ -155,11 +155,13 @@
 -(void)onemailSuccess;
 -(void)onemailFailed;
 -(void)onsmsSuccess;
+-(void)SingleshareOnMMS;
 -(void)onsmsFailed;
 -(void)openInstagramSuccess;
 -(void)openInstagramFailed;
 -(void)fillErrorStatus:(ShareProgressView *)shareView;
 -(void)fillSuccessStatus:(ShareProgressView *)shareView;
 -(void)closeSharingProgressSuccess:(NSNotification *)notification;
-
+- (void)uploadImage:(NSData *)imageData isEmail:(BOOL)isEmail;
+- (void)uploadImageByboth:(NSData *)imageData;
 @end

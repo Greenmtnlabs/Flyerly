@@ -55,7 +55,7 @@ static ShareProgressView *clipBdPogressView;
  * pop to root view / main screen
  */
 
--(void)goback{
+-(IBAction)goback{
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -286,12 +286,12 @@ static ShareProgressView *clipBdPogressView;
     
     // init progress view
     if(!progressView){
-        progressView = [[UIView alloc] initWithFrame:CGRectMake(0, 46, 310, 3)];
+        progressView = [[UIView alloc] initWithFrame:CGRectMake(0, 44, 310, 3)];
         [self.view addSubview:progressView];
     } else {
         // Remove all progress views
         [[progressView subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
-        [progressView setFrame:CGRectMake(0, 46, 310, 3)];
+        [progressView setFrame:CGRectMake(0, 44, 310, 3)];
         [self.view addSubview:progressView];
     }
     
@@ -304,9 +304,9 @@ static ShareProgressView *clipBdPogressView;
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:CloseShareProgressNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closeSharingProgressSuccess:) name:CloseShareProgressNotification object:nil];
-
+  
+    if (showbars) {
     // Show progress views if they are not cancelled manually
-if (showbars) {
     if(twitterPogressView){
         [progressView setHidden:NO];
         [progressView addSubview:twitterPogressView];
@@ -479,7 +479,7 @@ if (showbars) {
             if([smsButton isSelected]){
                 [Flurry logEvent:@"Shared SMS"];
                 [self showsmsProgressRow];
-                [self shareOnMMS];
+                [self SingleshareOnMMS];
             }
             
             if([clipboardButton isSelected]){
@@ -541,11 +541,10 @@ if (showbars) {
                         [Flurry logEvent:@"Shared Email"];
                         [self showemailProgressRow ];
                         [self shareOnEmail];
-                    }
-                    if ([smsButton isSelected]) {
+                    }else if ([smsButton isSelected]) {
                         [Flurry logEvent:@"Shared SMS"];
                         [self showsmsProgressRow];
-                        [self shareOnMMS];
+                        [self SingleshareOnMMS];
                     }
                 }
                 
@@ -972,19 +971,13 @@ if (showbars) {
 /*
  * Share on MMS
  */
+-(void)SingleshareOnMMS{
+    NSData *imageData = UIImagePNGRepresentation(selectedFlyerImage);
+    [self uploadImage:imageData isEmail:NO];
+}
 -(void)shareOnMMS{
     NSData *imageData = UIImagePNGRepresentation(selectedFlyerImage);
-    if([emailButton isSelected] && [smsButton isSelected]){
-        sharelink = [[NSString alloc] init];
-        [self uploadImageByboth:imageData];
-     }else{
-        if ([emailButton isSelected]) {
-            [self uploadImage:imageData isEmail:YES];
-        }
-        if ([smsButton isSelected]) {
-            [self uploadImage:imageData isEmail:NO];
-        }
-    }
+    [self uploadImageByboth:imageData];
  }
 
 -(void)shareOnMMS:(NSString *)link{
@@ -1053,7 +1046,6 @@ if (showbars) {
 
 - (void)uploadImageByboth:(NSData *)imageData
 {
-    sharelink =nil;
     PFFile *imageFile = [PFFile fileWithName:[FlyrViewController getFlyerNumberFromPath:imageFileName] data:imageData];
     
     // Save PFFile
@@ -1081,7 +1073,8 @@ if (showbars) {
                     
                     PFFile *theImage = [flyerObject objectForKey:@"image"];
                     [self shareOnEmail:[theImage url]];
-                    [self shortenURL:[theImage url]];
+                    sharelink = [[NSString alloc] init];
+                    sharelink = [theImage url];
                 }
                 else{
                     // Log details of the failure
@@ -1400,7 +1393,7 @@ static ShareProgressView *clipBdPogressView;
     [smsPogressView.statusIcon setBackgroundImage:nil forState:UIControlStateNormal];
     [smsPogressView.refreshIcon setBackgroundImage:[UIImage imageNamed:@"retry_share"] forState:UIControlStateNormal];
     [smsPogressView.refreshIcon setHidden:YES];
-    [smsPogressView.refreshIcon addTarget:self action:@selector(shareOnMMS) forControlEvents:UIControlEventTouchUpInside];
+    [smsPogressView.refreshIcon addTarget:self action:@selector(SingleshareOnMMS) forControlEvents:UIControlEventTouchUpInside];
     [progressView addSubview:smsPogressView];
     [self increaseProgressViewHeightBy:36];
     
@@ -1705,13 +1698,13 @@ static ShareProgressView *clipBdPogressView;
 }
 
 -(void)setDefaultProgressViewHeight{
-    [progressView setFrame:CGRectMake(0, 46, 310, 3)];
+    [progressView setFrame:CGRectMake(0, 44, 310, 3)];
     
     if(IS_IPHONE_5){
-        [scrollView setFrame:CGRectMake(5, 50, 310, 548)];
+        [scrollView setFrame:CGRectMake(5, 44, 310, 548)];
         [scrollView setContentSize:CGSizeMake(310, 548)];
     }else{
-        [scrollView setFrame:CGRectMake(5, 50, 310, 401)];
+        [scrollView setFrame:CGRectMake(5, 44, 310, 401)];
         [scrollView setContentSize:CGSizeMake(310, 401)];
     }
 }
@@ -1860,15 +1853,13 @@ static ShareProgressView *clipBdPogressView;
 	}
     
     [controller dismissViewControllerAnimated:YES
-                                   completion:^{
-                                       
+                                   completion:^{                                       
                                        // Open email composer if selected
                                        if([smsButton isSelected]){
-                                           //[self shareOnMMS];
+                                           [self shortenURL:sharelink];
                                        } else {
                                            
                                            if([instagramButton isSelected] && (![tumblrButton isSelected] && ![flickrButton isSelected])){
-
                                               // [self shareOnInstagram];
                                            }
                                        }
@@ -2053,7 +2044,6 @@ static ShareProgressView *clipBdPogressView;
     }
  */
     [self updateFlyerDetail];
-    [self.view release];
 }
 
 - (void)didReceiveMemoryWarning {

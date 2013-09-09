@@ -16,7 +16,7 @@
 
 @property (nonatomic, strong) NSMutableArray *accounts;
 @property (nonatomic, strong) NSString *twitterUser;
-
+@property (nonatomic, strong) NSString *inputValue;
 
 +(Singleton *)RetrieveSingleton;
 -(UIColor*)colorWithHexString:(NSString*)hex;

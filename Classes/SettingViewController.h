@@ -12,12 +12,13 @@
 #import <ObjectiveFlickr.h>
 #import "LoadingView.h"
 #import "LauchViewController.h"
+#import "InputViewController.h"
 
 //#import "FBConnect/FBConnect.h"
 //#import "TwitLogin.h"
 //#import "FBLoginButton.h"
 //@class FBSession;
-@class LauchViewController;
+@class LauchViewController,InputViewController;
 @interface SettingViewController : UIViewController<FBRequestDelegate,FBSessionDelegate,OFFlickrAPIRequestDelegate> {
 //@interface SettingViewController : UIViewController <UITextFieldDelegate,FBDialogDelegate, FBSessionDelegate, FBRequestDelegate>{
     /*
@@ -48,6 +49,7 @@
     OFFlickrAPIRequest *flickrRequest;
 	LoadingView *loadingView;
     LauchViewController *launchController;
+    InputViewController *input;
 
 }
 
@@ -87,6 +89,7 @@
 -(IBAction)onClickClipboardButton;
 -(IBAction)loadHelpController;
 -(IBAction)makeEmail;
+-(IBAction)OntwitterComments;
 -(IBAction)onClickSaveToCameraRollSwitchButton;
 -(void)gohelp;
 

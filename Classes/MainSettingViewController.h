@@ -17,8 +17,10 @@
 #import "FBConnect.h"
 #import "FBConnect/FBConnect.h"
 #import "AccountSelecter.h"
-
-@class PhotoController ;
+#import "LocationController.h"
+#import "InputViewController.h"
+#import "Singleton.h"
+@class PhotoController,InputViewController,Singleton ;
 @class AccountController,LauchViewController,HelpController,SettingViewController,AccountSelecter;
 @interface MainSettingViewController : UIViewController <UITableViewDelegate, MFMailComposeViewControllerDelegate>{
 
@@ -28,6 +30,8 @@
     UIAlertView *warningAlert;
     PhotoController *ptController;
     AccountSelecter *accountUpdater;
+    InputViewController *input;
+    Singleton *globle;
 
 }
 @property (strong, nonatomic)IBOutlet UITableView *tableView;

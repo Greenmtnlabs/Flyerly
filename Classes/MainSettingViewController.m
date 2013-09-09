@@ -26,7 +26,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    globle = [Singleton RetrieveSingleton];
     self.tableView.rowHeight = 35;
     [self.tableView setBackgroundView:nil];
    // [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
@@ -192,22 +192,33 @@
     // Log out from parse.
     [PFUser logOut];
 }
--(IBAction)gofacbook:(id)sender{
-    /*
-    NSMutableDictionary *res = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"This is my comment", @"message", YOUR ACCESS TOKEN,@"access_token",nil];
-    [FBRequestConnection startWithGraphPath:[NSString stringWithFormat:@"%@/comments",PHOTO'S ID] parameters:res HTTPMethod:@"POST" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-                                             if (error)
-                                             {
-                                                 NSLog(@"error: %@", error.localizedDescription);
-                                             }
-                                             else
-                                             {
-                                                 NSLog(@"ok!! %@",result);
-                                             }
-                                             }];
-    */
+
+- (NSDictionary*)parseURLParams:(NSString *)query {
+    NSArray *pairs = [query componentsSeparatedByString:@"&"];
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    for (NSString *pair in pairs) {
+        NSArray *kv = [pair componentsSeparatedByString:@"="];
+        NSString *val =
+        [kv[1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        params[kv[0]] = val;
+    }
+    return params;
 }
--(IBAction)gotwitter:(id)sender{}
+
+-(IBAction)gofacbook:(id)sender{
+    globle.inputValue = @"facebook";
+    InputViewController  *input = [[InputViewController alloc]initWithNibName:@"InputViewController" bundle:nil];
+    [self.navigationController presentModalViewController:input animated:YES];
+}
+
+-(IBAction)gotwitter:(id)sender{
+    globle.inputValue = @"twitter";
+    InputViewController  *input = [[InputViewController alloc]initWithNibName:@"InputViewController" bundle:nil];
+    [self.navigationController presentModalViewController:input animated:YES];
+}
+
+
+
 -(IBAction)goemail:(id)sender{
     MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
     
