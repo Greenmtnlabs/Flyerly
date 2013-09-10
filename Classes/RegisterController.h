@@ -14,8 +14,10 @@
 #import "AccountSelecter.h"
 #import <Parse/PFLogInViewController.h>
 #import <Parse/PFQuery.h>
+#import "ParentViewController.h"
+
 @class FBSession,Singleton,LauchViewController;
-@interface RegisterController : UIViewController<UITextFieldDelegate,UIActionSheetDelegate,FBRequestDelegate,FBSessionDelegate,FBDialogDelegate,FBLoginDialogDelegate,UIAlertViewDelegate>{
+@interface RegisterController : ParentViewController <UITextFieldDelegate,UIActionSheetDelegate,FBRequestDelegate,FBSessionDelegate,FBDialogDelegate,FBLoginDialogDelegate,UIAlertViewDelegate>{
     
     IBOutlet UITextField *username;
     IBOutlet UITextField *password;
@@ -26,7 +28,6 @@
     IBOutlet UIButton *signUpTwitter;
     
     LauchViewController *launchController;
-	LoadingView *loadingView;
     CGFloat animatedDistance;
     NSArray *twitterAccounts;
     UIView *waiting;
@@ -49,8 +50,6 @@
 @property(nonatomic, retain) IBOutlet UIButton *signUp;
 @property(nonatomic, retain) IBOutlet UIButton *signUpFacebook;
 @property(nonatomic, retain) IBOutlet UIButton *signUpTwitter;
-@property (nonatomic, retain) LoadingView *loadingView;
-@property(nonatomic, retain) IBOutlet UIActivityIndicatorView *act;
 @property(nonatomic, retain) IBOutlet UILabel *usrExist;
 
 -(void)goBack;

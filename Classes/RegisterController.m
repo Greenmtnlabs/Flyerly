@@ -12,7 +12,6 @@
 #import "Common.h"
 #import "AddFriendsController.h"
 #import "FlyrAppDelegate.h"
-#import "LoadingView.h"
 #import "AccountController.h"
 
 
@@ -21,7 +20,7 @@
 @end
 
 @implementation RegisterController
-@synthesize username,password,confirmPassword,signUp,signUpFacebook,signUpTwitter,loadingView,email,name,phno,act,usrExist;
+@synthesize username,password,confirmPassword,signUp,signUpFacebook,signUpTwitter,email,name,phno,usrExist;
 static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
 static const CGFloat MINIMUM_SCROLL_FRACTION = 0.2;
 static const CGFloat MAXIMUM_SCROLL_FRACTION = 0.8;
@@ -200,8 +199,8 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 	[self.navigationController popViewControllerAnimated:NO];
 }
 
--(void)showLoadingView:(NSString *)message{
-    loadingView =[LoadingView loadingViewInView:self.view  text:message];
+-(void)showLoadingView {
+    [self showLoadingIndicator];
 }
 
 -(void)removeLoadingView{
@@ -210,11 +209,13 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
             [subview removeFromSuperview];
         }
     }
+    
+    [self hideLoadingIndicator];
 }
 
 -(void)onSignUp{
     
-    [self showLoadingView:@"Registering..."];
+    [self showLoadingView];
     
     if([self validate]){
         [self signUp:YES username:username.text password:password.text];
@@ -252,7 +253,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 
 -(IBAction)onSignUpFacebook{
     
-    [self showLoadingView:@"Registering..."];
+    [self showLoadingView];
     
     if([AddFriendsController connected]){
 
@@ -331,15 +332,14 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
         [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"Password"];
     }
     [self.view release];
-    act.hidden = YES;
     waiting.hidden = YES;
 }
 
 
 -(IBAction)onSignUpTwitter{
+    [self showLoadingView];
     
     if([AddFriendsController connected]){
-        act.hidden = NO;
         waiting.hidden = NO;
         if([TWTweetComposeViewController canSendTweet]){
             [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"twitterSetting"];
@@ -384,8 +384,6 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
                         }
 
                         // sign in
-                       // [self signIn:YES username:twitterEmail password:@"null"];
-                        act.hidden = YES;
                         waiting.hidden = YES;
                         
                     }
@@ -557,9 +555,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     [signUpFacebook release];
     [signUpTwitter release];
     
-    [launchController release];
-    [loadingView release];
-    
+    [launchController release];    
     [super dealloc];
 }
 
@@ -689,9 +685,6 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     
     //hide loading
     waiting.hidden = YES;
-    act.hidden = YES;
-    
-    
     
     NSMutableArray *tAccounts = [[NSMutableArray alloc] init];
     
@@ -770,7 +763,6 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
        // [self signIn:YES username:twitterUser password:@"null"];
     }
     NSLog(@"%u",buttonIndex);
-    act.hidden = YES;
     waiting.hidden = YES;
     
 }
