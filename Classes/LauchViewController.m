@@ -11,7 +11,6 @@
 #import "FlyrViewController.h"
 #import "SettingViewController.h"
 #import "AddFriendsController.h"
-#import "LoadingView.h"
 #import "FlyrAppDelegate.h"
 #import "DraftViewController.h"
 #import "Common.h"
@@ -27,7 +26,6 @@
 
 @synthesize ptController,spController,tpController,createFlyrLabel,savedFlyrLabel,inviteFriendLabel,addFriendsController;
 @synthesize firstFlyer, secondFlyer, thirdFlyer, fourthFlyer, photoArray, photoDetailArray, createFlyrButton, savedFlyrButton, inviteFriendButton;
-@synthesize loadingView;
 @synthesize facebookLikeView=_facebookLikeView;
 @synthesize likeButton,followButton,webview;
 
@@ -40,7 +38,6 @@
 
 // Load Create Flyr Method With Thread
  -(void)loadPhotoView{
-	//loadingViewFlag = YES;
 	ptController = [[PhotoController alloc]initWithNibName:@"PhotoController" bundle:nil];
      ptController.flyerNumber = -1;
 	[self.navigationController pushViewController:ptController animated:YES];
@@ -48,10 +45,6 @@
 }
 
 -(IBAction)doNew:(id)sender{
-	//loadingView =[LoadingView loadingViewInView:self.view];
-    //[self loadPhotoView];
-	//[NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(loadPhotoView) userInfo:nil repeats:NO];
-
     [Flurry logEvent:@"Create Flyer"];
 
 	ptController = [[PhotoController alloc]initWithNibName:@"PhotoController" bundle:nil];
@@ -63,14 +56,12 @@
 
 // Load View Flyr Method With Thread
 -(void)loadFlyerView{
-	//loadingViewFlag = YES;
 	tpController = [[FlyrViewController alloc]initWithNibName:@"FlyrViewController" bundle:nil];
 	[self.navigationController pushViewController:tpController animated:YES];
 	[tpController release];
 }
 
 -(IBAction)doOpen:(id)sender{
-	//loadingView =[LoadingView loadingViewInView:self.view];
 	[NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(loadFlyerView) userInfo:nil repeats:NO];
 }
 //End
@@ -152,10 +143,7 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-	//self.navigationItem.title = @"Menu";
-	//loadingViewFlag = NO;
-	//loadingView = nil;
-	//loadingView = [[LoadingView alloc]init];
+	
     createFlyrButton.showsTouchWhenHighlighted = YES;
     savedFlyrButton.showsTouchWhenHighlighted = YES;
     inviteFriendButton.showsTouchWhenHighlighted = YES;
@@ -337,18 +325,6 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
     return newImage;
 }
 
-#pragma mark View Disappear
--(void)viewWillDisappear:(BOOL)animated{
-	[super viewWillDisappear:YES];
-	//self.navigationItem.title = @"Menu";
-	//self.navigationController.navigationBarHidden = YES;
-	//if(loadingViewFlag)
-	//{
-	//	[loadingView removeFromSuperview];
-	//	loadingViewFlag=NO;
-	//}
-}
-
 -(IBAction)createTwitLogin:(id)sender{
 	TwitLogin *twitDialog = [[TwitLogin alloc]init];
 	//twitDialog.flyerImage = flyrImg;
@@ -432,6 +408,8 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
 }
 
 - (IBAction)followOnTwitter:(id)sender {
+    [self showLoadingIndicator];
+    
     ACAccountStore *accountStore = [[ACAccountStore alloc] init];
     
     ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
@@ -462,6 +440,8 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
                     NSString *output = [NSString stringWithFormat:@"HTTP response status: %i", [urlResponse statusCode]];
                     NSLog(@"%@", output);
                     
+                    [self hideLoadingIndicator];
+                    
                     if([[output lowercaseString] rangeOfString:[@"200" lowercaseString]].location == NSNotFound){
                         [followButton setSelected:NO];
                         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"TWITTER_FOLLOWING"];
@@ -476,6 +456,8 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
 }
 
 - (IBAction)unFollowOnTwitter:(id)sender {
+    [self showLoadingIndicator];
+    
     ACAccountStore *accountStore = [[ACAccountStore alloc] init];
     
     ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
@@ -514,6 +496,8 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
                         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"TWITTER_FOLLOWING"];
                     }
                 }];
+                
+                [self hideLoadingIndicator];
             }
         }
     }];
@@ -521,45 +505,12 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
 
 - (void)facebookLikeViewDidRender:(FacebookLikeView *)aFacebookLikeView {
     
-    [loadingView removeView];
     self.likeView.hidden = NO;
     
     [UIView beginAnimations:@"" context:nil];
     [UIView setAnimationDelay:0.5];
-    //self.facebookLikeView.alpha = 1;
     [UIView commitAnimations];
 }
-
-/*-(void)webViewDidFinishLoad:(UIWebView *)webView{
-    [loadingView removeView];
-    self.likeView.hidden = NO;
-    
-    [UIView beginAnimations:@"" context:nil];
-    [UIView setAnimationDelay:0.5];
-    //self.facebookLikeView.alpha = 1;
-    [UIView commitAnimations];
-}
-
--(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
-
-    NSLog(@"HOST: %@", request.URL.host);
-    
-    // Allow loading Like button XFBML from file
-    if ([request.URL.host isEqual:[[NSURL URLWithString:@"http://www.facebook.com/flyerlyapp"] absoluteString]])
-        return YES;
-    
-    // Allow loading about:blank, etc.
-    if ([request.URL.scheme isEqualToString:@"about"])
-        return YES;
-    
-    // Block loading of 'event:*', our scheme for forwarding Facebook JS SDK events to native code
-    else if ([request.URL.scheme isEqualToString:@"event"]) {
-        //[self didObserveFacebookEvent:request.URL.resourceSpecifier];
-        return NO;
-    }
-
-    return YES;
-}*/
 
 - (void)facebookLikeViewDidUnlike:(FacebookLikeView *)aFacebookLikeView {
     
@@ -609,27 +560,6 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
 }
 
 - (IBAction)showLikeButton {
-    
-     /*FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-     appDelegate.facebook.sessionDelegate = self;
-     
-     if([appDelegate.facebook isSessionValid]) {
-
-         loadingView =[LoadingView loadingViewInView:self.view  text:@"Wait..."];
-         [self.view addSubview:opaqueView];
-         [self.view  addSubview:crossButton];
-         
-         self.facebookLikeView.delegate = self;
-         self.facebookLikeView.href = [NSURL URLWithString:@"http://www.facebook.com/flyerlyapp"];
-         self.facebookLikeView.layout = @"button_count";
-         self.facebookLikeView.showFaces = NO;
-         [self.facebookLikeView load];
-
-     } else {
-     
-         [appDelegate.facebook authorize:[NSArray arrayWithObjects: @"read_stream", @"publish_stream", @"email", nil]];
-     }*/
-
     
     if([AddFriendsController connected]){
 
