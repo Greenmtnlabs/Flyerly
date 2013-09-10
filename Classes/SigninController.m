@@ -11,7 +11,6 @@
 #import "PhotoController.h"
 #import <Parse/PFQuery.h>
 #import "AddFriendsController.h"
-#import "LoadingView.h"
 #import "AccountController.h"
 
 @interface SigninController ()
@@ -19,16 +18,7 @@
 @end
 
 @implementation SigninController
-@synthesize email,password,signIn,signUp,signInFacebook,signInTwitter,emailImage,passwordImage,loadingView,forgetPassword1,act;
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+@synthesize email,password,signIn,signUp,signInFacebook,signInTwitter,emailImage,passwordImage,forgetPassword1;
 
 - (void)viewDidLoad
 {
@@ -69,10 +59,8 @@
     if (usr != nil) {
         email.text = usr;
         password.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"Password"];
-
-//    email.text= @"riz_ahmed_86@yahoo.com";
- //   password.text = @"logs";
     }
+    
     // Setup welcome button
     UIButton *backBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)];
     //[welcomeButton setTitle:@"" forState:UIControlStateNormal];
@@ -91,53 +79,21 @@
     [siginBtn setBackgroundImage:[UIImage imageNamed:@"signin_button"] forState:UIControlStateNormal];
     UIBarButtonItem *righBarButton = [[UIBarButtonItem alloc] initWithCustomView:siginBtn];
     [self.navigationItem setRightBarButtonItem:righBarButton];
-/*
-    // Navigation bar sign in button
-    UIBarButtonItem *signInTopRightButton = [[UIBarButtonItem alloc] initWithTitle:@"Sign In" style:UIBarButtonItemStylePlain target:self action:@selector(onSignIn)];
-    
-    [signInTopRightButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: [UIFont fontWithName:BUTTON_FONT size:13.0], UITextAttributeFont,nil] forState:UIControlStateNormal];
-    
-    [signInTopRightButton setTintColor:[UIColor colorWithRed:104.0/255.0 green:173.0/255.0 blue:57.0/255.0 alpha:1]];
-    self.navigationItem.rightBarButtonItem = signInTopRightButton;
-    [signInTopRightButton release];
- */
 }
 
 -(IBAction)forgetPassword{
     ResetPWViewController *passWordContrller = [[ResetPWViewController alloc]initWithNibName:@"ResetPWViewController" bundle:nil];
     [self.navigationController pushViewController:passWordContrller animated:YES ];
-/*
-    [self showLoadingView:@"Wait..."];
-    NSLog(@"Forget Password");
-    
-    [PFUser requestPasswordResetForEmailInBackground:email.text block:^(BOOL succeeded, NSError *error){
-        if (error) {
-            
-            NSString *errorValue = [error.userInfo objectForKey:@"error"];
-            [self removeLoadingView];
-            [self showAlert:@"Warning!" message:errorValue];
-            
-        } else {
-
-            [self removeLoadingView];
-            [self showAlert:@"Message!" message:@"Email has been sent to your inbox to change your password."];
-        }
-    }];
- */
 }
 
 
--(void)showLoadingView:(NSString *)message{
-    loadingView =[LoadingView loadingViewInView:self.view  text:message];
+-(void)showLoadingView {
+    [self showLoadingIndicator];
 }
 
 
--(void)removeLoadingView{
-    for (UIView *subview in self.view.subviews) {
-        if([subview isKindOfClass:[LoadingView class]]){
-            [subview removeFromSuperview];
-        }
-    }
+-(void)removeLoadingView {
+    [self hideLoadingIndicator];
 }
 
 
@@ -156,18 +112,8 @@
 
 -(IBAction)onSignIn{
     
-    /*FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-    appDelegate.loginId = [AccountController getPathFromEmail:@"riz_ahmed_86@yahoo.com"];
-    
-    if(IS_IPHONE_5){
-        launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewControllerIPhone5" bundle:nil];
-    }   else{
-        launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
-    }    
-    [self performSelectorOnMainThread:@selector(pushViewController:) withObject:launchController waitUntilDone:YES];*/
-    
     globle.twitterUser = nil;
-    [self showLoadingView:@"Signing In..."];
+    [self showLoadingView];
     
     if([self validate]){
         [self signIn:YES username:email.text password:password.text];
@@ -202,8 +148,7 @@
         }}];
     
     [PFUser logInWithUsername:userName password:pwd error:&loginError];
-   // NSString *errorValue = [loginError.userInfo objectForKey:@"error"];
-
+   
     if(loginError){
             [self removeLoadingView];
         warningAlert = [[UIAlertView  alloc]initWithTitle:@"Invalid username or password" message:@"" delegate:self cancelButtonTitle:@"Register" otherButtonTitles:@"Try Again",nil];
@@ -241,7 +186,7 @@
 
 -(IBAction)onSignInFacebook{
 
-    [self showLoadingView:@"Signing In..."];
+    [self showLoadingView];
 
     if([AddFriendsController  connected]){
         
@@ -281,8 +226,9 @@
 }
 
 -(IBAction)onSignInTwitter{
+    [self showLoadingIndicator];
     if([AddFriendsController connected]){
-        act.hidden = NO;
+        
         waiting.hidden = NO;
         if([TWTweetComposeViewController canSendTweet]){
             
@@ -308,7 +254,7 @@
                         }
 
                     }else if ([arrayOfAccounts count] > 0) {
-                        [self showLoadingView:@"Signing In..."];
+                        [self showLoadingView];
                         // Keep it simple, use the first account available
                         ACAccount *acct = [arrayOfAccounts objectAtIndex:0];
                         
@@ -317,7 +263,6 @@
                         globle.twitterUser = twitterEmail;
                         // sign in
                         [self signIn:YES username:twitterEmail password:@"null"];
-                        act.hidden = YES;
                         waiting.hidden = YES;
                         
                     }
@@ -423,7 +368,6 @@
     
     [launchController release];
     [registerController release];
-    [loadingView release];
 
     [super dealloc];
 }
@@ -537,9 +481,6 @@
     
     //hide loading
     waiting.hidden = YES;
-    act.hidden = YES;
-
-    
     
     NSMutableArray *tAccounts = [[NSMutableArray alloc] init];
     

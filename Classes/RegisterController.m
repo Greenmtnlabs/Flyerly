@@ -204,12 +204,6 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 }
 
 -(void)removeLoadingView{
-    for (UIView *subview in self.view.subviews) {
-        if([subview isKindOfClass:[LoadingView class]]){
-            [subview removeFromSuperview];
-        }
-    }
-    
     [self hideLoadingIndicator];
 }
 

@@ -13,8 +13,11 @@
 #import "Singleton.h"
 #import "AccountSelecter.h"
 #import "ResetPWViewController.h"
+#import "ParentViewController.h"
+
 @class AccountSelecter,Singleton,RegisterController,ResetPWViewController,MyCustomCell;
-@interface SigninController : UIViewController<PFLogInViewControllerDelegate,FBRequestDelegate,FBSessionDelegate,FBDialogDelegate,FBLoginDialogDelegate ,UIActionSheetDelegate >{
+
+@interface SigninController : ParentViewController <PFLogInViewControllerDelegate,FBRequestDelegate,FBSessionDelegate,FBDialogDelegate,FBLoginDialogDelegate ,UIActionSheetDelegate >{
     
     IBOutlet UIImageView *emailImage;
     IBOutlet UIImageView *passwordImage;
@@ -33,7 +36,6 @@
     LauchViewController *launchController;
     RegisterController *registerController;
     AccountSelecter *actSelecter;
-	LoadingView *loadingView;
     Singleton *globle;
     ResetPWViewController *passWordContrller;
     NSArray *twitterAccounts;
@@ -53,9 +55,6 @@
 @property(nonatomic, retain) IBOutlet UIButton *signInFacebook;
 @property(nonatomic, retain) IBOutlet UIButton *signInTwitter;
 @property(nonatomic, retain) IBOutlet UIButton *forgetPassword1;
-@property(nonatomic, retain) IBOutlet UIActivityIndicatorView *act;
-
-@property (nonatomic, retain) LoadingView *loadingView;
 
 -(IBAction)onSignIn;
 -(IBAction)onSignUp;
