@@ -24,9 +24,6 @@
     // UIImageView
     UIImageView  *imageView;
     
-    // The image to be cropped.
-    UIImage      *image;
-    
     // Move up view.
     UIImageView      *moveUpButton;
     

@@ -50,10 +50,11 @@
 #pragma mark - Image Preparation
 
 // Code from: http://discussions.apple.com/thread.jspa?messageID=7949889
-- (UIImage *)scaleAndRotateImage:(UIImage *)image {
-    int kMaxResolution = 640; // Or whatever
+- (UIImage *)scaleAndRotateImage:(UIImage *)img size:(CGSize)size {
+    int kMaxWidth = size.width; // Or whatever
+    int kMaxHeight = size.height;
     
-    CGImageRef imgRef = image.CGImage;
+    CGImageRef imgRef = img.CGImage;
     
     CGFloat width = CGImageGetWidth(imgRef);
     CGFloat height = CGImageGetHeight(imgRef);
@@ -61,22 +62,22 @@
     
     CGAffineTransform transform = CGAffineTransformIdentity;
     CGRect bounds = CGRectMake(0, 0, width, height);
-    if (width > kMaxResolution || height > kMaxResolution) {
+    if ( width > kMaxWidth || height > kMaxHeight ) {
         CGFloat ratio = width/height;
         if (ratio > 1) {
-            bounds.size.width = kMaxResolution;
-            bounds.size.height = roundf(bounds.size.width / ratio);
+            bounds.size.width = kMaxWidth;
+            bounds.size.height = roundf( kMaxWidth / ratio);
         }
         else {
-            bounds.size.height = kMaxResolution;
-            bounds.size.width = roundf(bounds.size.height * ratio);
+            bounds.size.height = kMaxHeight;
+            bounds.size.width = roundf( kMaxHeight * ratio );
         }
     }
     
     CGFloat scaleRatio = bounds.size.width / width;
     CGSize imageSize = CGSizeMake(CGImageGetWidth(imgRef), CGImageGetHeight(imgRef));
     CGFloat boundHeight;
-    UIImageOrientation orient = image.imageOrientation;
+    UIImageOrientation orient = img.imageOrientation;
     switch(orient) {
             
         case UIImageOrientationUp: //EXIF = 1
@@ -160,18 +161,7 @@
 
 #pragma mark - Process Image Crop
 
-- (IBAction)onSelectImage:(UIButton *)sender{
-    
-    //NSLog(@"Width: %f",image.size.width);
-    //NSLog(@"Height: %f",image.size.height);
-    //NSLog(@"Scroll Height: %f",scrollView.frame.size.height);
-
-    /*if(IS_IPHONE_5){
-        //image = [PhotoController imageWithImage:image scaledToSize:CGSizeMake(IMAGE_WIDTH - 135, IMAGE_HEIGHT+50)];
-        //image = [PhotoController imageWithImage:image scaledToSize:CGSizeMake(240, 340)];
-    }else{
-        //image = [PhotoController imageWithImage:image scaledToSize:CGSizeMake(480, 480)];
-    }*/
+- (IBAction)onSelectImage:(UIButton *)sender {
     
     // Get the content offset in scroll view.
     CGPoint scrollOffset = CGPointMake(
@@ -194,12 +184,6 @@
     deltaX = (deltaX < 0) ? 0 : deltaX;
     deltaY = (deltaY < 0) ? 0 : deltaY;
     
-    //NSLog(@"Delta X: %f",deltaX);
-    //NSLog(@"Delta Y: %f",deltaY);
-    //NSLog(@"Image Width 2: %f",imageWidth);
-    //NSLog(@"Image Height 2: %f",imageHeight);
-    //NSLog(@"Scroll Zoom: %f",scrollView.zoomScale);
-
     CGRect rect = CGRectMake(deltaX,
                              deltaY,
                              imageWidth, imageHeight);
@@ -227,35 +211,52 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //UIGestureRecognizer *gesture = [[[UIGestureRecognizer alloc] initWithTarget:self action:@selector(increaseHeight:)] autorelease];
-    //gesture.delegate = self;
-    //[moveUpButton addGestureRecognizer:gesture];
-    
-    // hide lines
+    // Hide lines
     self.galleryTable.separatorColor = [UIColor clearColor];
     
     // Do any additional setup after loading the view from its nib.
-    UIImage *tmpImage = [self scaleAndRotateImage:image];
-    [image release];
-    image = [tmpImage retain];
+    if ( image.size.width > imageView.frame.size.width ||
+        image.size.height > imageView.frame.size.height ) {
+        
+        UIImage *tmpImage = [self scaleAndRotateImage:image size:imageView.frame.size];
+        [image release];
+        image = [tmpImage retain];
+    } else {
+        UIImage *tmpImage = [self scaleAndRotateImage:image size:image.size];
+        [image release];
+        image = [tmpImage retain];
+    }
     
     // Get the size of the image.
     CGSize imageSize = [image size];
     
-    // Content size for scrollview needs to be twice this size.
-    CGSize contentSize = CGSizeMake(imageSize.width, imageSize.height);
-    [scrollView setContentSize:contentSize];
+    // If the image is bigger than the image view, resize the image view.
+    if ( imageView.frame.size.width < imageSize.width ||
+        imageView.frame.size.height < imageSize.height ) {
+        CGFloat width = MAX( imageView.frame.size.width, imageSize.width );
+        CGFloat height = MAX( imageView.frame.size.height, imageSize.height );
+        
+        imageView.frame = CGRectMake( 0,
+                                      0,
+                                      width,
+                                      height );
+    }
+    
+    [scrollView setContentSize:imageSize];
+    scrollView.minimumZoomScale = 1.0;
     
     // Center on the scroll view.
-    [scrollView setContentOffset:CGPointMake((contentSize.width - self.view.frame.size.width) / 2,
-                                             (contentSize.height - self.view.frame.size.height) / 2)];
+    CGFloat offsetX = (imageSize.width - scrollView.frame.size.width) / 2;
+    offsetX = ( offsetX > 0 ) ? offsetX : 0;
+    
+    CGFloat offsetY = (imageSize.height - scrollView.frame.size.height) / 2;
+    offsetY = ( offsetY > 0 ) ? offsetY : 0;
+    
+    [scrollView setContentOffset:CGPointMake( offsetX, offsetY )];
     
     // Set the image and frame of image view so that the image is centered in
     // the scroll view.
     [imageView setImage:self.image];
-    [imageView setFrame:CGRectMake((contentSize.width - imageSize.width)/2,
-                                   (contentSize.height - imageSize.height)/2,
-                                   imageSize.width, imageSize.height)];
     
     //[self loadAllGalleryPhotos];
     [self imageCount];
@@ -307,23 +308,7 @@ BOOL galleryExpanded = NO;
     }
 }
 
-/*
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
-    
-    if ([touch locationInView:self.view].y - [touch previousLocationInView:self.view].y > 0){
-        moveUpButton.frame = CGRectMake(moveUpButton.frame.origin.x, 133, moveUpButton.frame.size.width, moveUpButton.frame.size.height);
-        
-        galleryTable.frame = CGRectMake(galleryTable.frame.origin.x, 176, galleryTable.frame.size.width, galleryTable.frame.size.height + 200);
-        return YES;
-    }
-    
-    // Disallow recognition of tap gestures in the segmented control.
-    //if ((touch.view == moveUpButton)) {//change it to your condition
-    //
-    //}
-    return YES;
-}
-*/
+
 -(void)goBack{
     
 	[self.navigationController popViewControllerAnimated:YES];
@@ -378,16 +363,17 @@ BOOL galleryExpanded = NO;
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
     return self.imageView;
 }
-
-- (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(float)scale {
+/*
+- (void)scrollViewDidEndZooming:(UIScrollView *)sView withView:(UIView *)view atScale:(float)scale {
     
     // Get the size of the image.
     CGSize imageSize = [image size];
     
     // Content size for scrollview needs to be twice this size.
-    CGSize contentSize = CGSizeMake(self.view.frame.size.width + (imageSize.width * scale), self.view.frame.size.height + ( imageSize.height * scale));
-    [self.scrollView setContentSize:contentSize];
-}
+    CGSize contentSize = CGSizeMake( sView.frame.size.width + (imageSize.width * scale),
+                                     sView.frame.size.height + ( imageSize.height * scale));
+    [sView setContentSize:contentSize];
+}*/
 
 #pragma mark Table view methods
 
