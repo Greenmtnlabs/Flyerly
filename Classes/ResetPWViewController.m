@@ -129,7 +129,7 @@
 
 -(void)goBack{
     
-	[self.navigationController popViewControllerAnimated:NO];
+	[self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

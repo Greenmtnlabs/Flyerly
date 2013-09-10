@@ -21,7 +21,7 @@
 @class MainSettingViewController;
 
 
-@interface LauchViewController : UIViewController<FBDialogDelegate,FBSessionDelegate,FBRequestDelegate,UIWebViewDelegate> {
+@interface LauchViewController : UIViewController<FBDialogDelegate,FBSessionDelegate,FBRequestDelegate,UIWebViewDelegate,FBWebDialogsDelegate,FBGraphUser> {
 	PhotoController *ptController;
 	FlyrViewController *tpController;
 	SettingViewController *spController;

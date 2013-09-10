@@ -37,7 +37,7 @@ static ShareProgressView *clipBdPogressView;
 
 @implementation DraftViewController
 
-@synthesize selectedFlyerImage,imgView,navBar,fvController,svController,titleView,descriptionView,selectedFlyerDescription,selectedFlyerTitle, detailFileName, imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,loadingView,dic,fromPhotoController,scrollView, saveToCameraRollLabel, saveToRollSwitch,twit,locationBackground,locationLabel,networkParentView,locationButton,listOfPlaces,bitly,clipboardlabel;
+@synthesize selectedFlyerImage,imgView,navBar,fvController,svController,titleView,descriptionView,selectedFlyerDescription,selectedFlyerTitle, detailFileName, imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,loadingView,dic,fromPhotoController,scrollView, saveToCameraRollLabel, saveToRollSwitch,twit,locationBackground,locationLabel,networkParentView,locationButton,listOfPlaces,bitly,clipboardlabel,sharelink;
 //@synthesize twitterPogressView,facebookPogressView,tumblrPogressView,flickrPogressView,progressView,instagramPogressView;
 
 -(void)callFlyrView{
@@ -1073,8 +1073,7 @@ static ShareProgressView *clipBdPogressView;
                     
                     PFFile *theImage = [flyerObject objectForKey:@"image"];
                     [self shareOnEmail:[theImage url]];
-                    sharelink = [[NSString alloc] init];
-                    sharelink = [theImage url];
+                    globle.sharelink = [theImage url];
                 }
                 else{
                     // Log details of the failure
@@ -1118,8 +1117,6 @@ static ShareProgressView *clipBdPogressView;
         [picker setMessageBody:emailBody isHTML:YES];
         [self presentModalViewController:picker animated:YES];
         [picker release];
-        [self onemailSuccess];
-
     }
 }
 
@@ -1851,12 +1848,12 @@ static ShareProgressView *clipBdPogressView;
             [self onemailFailed];
 			break;
 	}
-    
+
     [controller dismissViewControllerAnimated:YES
-                                   completion:^{                                       
+                                   completion:^{
                                        // Open email composer if selected
                                        if([smsButton isSelected]){
-                                           [self shortenURL:sharelink];
+                                           [self shortenURL:globle.sharelink];
                                        } else {
                                            
                                            if([instagramButton isSelected] && (![tumblrButton isSelected] && ![flickrButton isSelected])){
@@ -1866,6 +1863,7 @@ static ShareProgressView *clipBdPogressView;
                                        
                                    }];
 	//[controller dismissModalViewControllerAnimated:YES];
+
 }
 
 -(void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result{
@@ -1983,6 +1981,7 @@ static ShareProgressView *clipBdPogressView;
 #pragma Bitly code for URL shortening
 
 -(void)shortenURL:(NSString *)url{
+    
     bitly = [[BitlyURLShortener alloc] init];
     bitly.delegate = self;
     [bitly shortenLinksInText:url];
@@ -2066,6 +2065,7 @@ static ShareProgressView *clipBdPogressView;
     [instagramPogressView release], instagramPogressView = nil;
     [progressView release]; progressView = nil;
 	[svController release];
+    [sharelink release];
     [super dealloc];
 }
 

@@ -174,20 +174,18 @@
 
 - (void)signOut{
     //For Facebook
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"facebookSetting"];
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate *) [[UIApplication sharedApplication]delegate];
+    appDelegate.facebook = nil;
+    appDelegate.facebook.sessionDelegate = nil;
+    appDelegate.facebook.accessToken = nil;
+    appDelegate.facebook.expirationDate = nil;
+
+    
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"FBAccessTokenKey"];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"FBExpirationDateKey"];
     //For FlyerLee
     [[NSUserDefaults standardUserDefaults]  setObject:nil forKey:@"User"];
     [[NSUserDefaults standardUserDefaults]  setObject:nil forKey:@"Password"];
-    //Twiiter
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"twitterSetting"];
-    // for Instagram
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"instagramSetting"];
-    // Thumbler
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"tumblrSetting"];
-    // Flicker
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"flickrSetting"];
 
     // Log out from parse.
     [PFUser logOut];
@@ -207,14 +205,14 @@
 
 -(IBAction)gofacbook:(id)sender{
     globle.inputValue = @"facebook";
-    InputViewController  *input = [[InputViewController alloc]initWithNibName:@"InputViewController" bundle:nil];
-    [self.navigationController presentModalViewController:input animated:YES];
+    InputViewController  *inputcontroller = [[InputViewController alloc]initWithNibName:@"InputViewController" bundle:nil];
+    [self.navigationController presentModalViewController:inputcontroller animated:YES];
 }
 
 -(IBAction)gotwitter:(id)sender{
     globle.inputValue = @"twitter";
-    InputViewController  *input = [[InputViewController alloc]initWithNibName:@"InputViewController" bundle:nil];
-    [self.navigationController presentModalViewController:input animated:YES];
+    InputViewController  *inputcontroller = [[InputViewController alloc]initWithNibName:@"InputViewController" bundle:nil];
+    [self.navigationController presentModalViewController:inputcontroller animated:YES];
 }
 
 

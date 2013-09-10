@@ -18,7 +18,7 @@
 @class Singleton;
 @interface PhotoController : UIViewController<UIActionSheetDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, EBPurchaseDelegate>
 {
-    int lcount;
+    int layerallow;
     Singleton *globle;
 	MyNavigationBar *navBar;
 	HudView *aHUD;

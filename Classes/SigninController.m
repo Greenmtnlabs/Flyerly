@@ -176,7 +176,7 @@
 
 -(IBAction)goBack{
     
-	[self.navigationController popViewControllerAnimated:NO];
+	[self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)signIn:(BOOL)validated username:(NSString *)userName password:(NSString *)pwd{
@@ -243,7 +243,7 @@
 
     [self showLoadingView:@"Signing In..."];
 
-    if([AddFriendsController connected]){
+    if([AddFriendsController  connected]){
         
         FlyrAppDelegate *appDelegate = (FlyrAppDelegate *) [[UIApplication sharedApplication]delegate];
         appDelegate.facebook.sessionDelegate = self;

@@ -639,7 +639,7 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
     
         if([appDelegate.facebook isSessionValid]) {
         /// for User Farmaish
-        /*
+       
         crossButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 64, 25, 25)];
         [crossButton setBackgroundImage:[UIImage imageNamed:@"cross"] forState:UIControlStateNormal];
         [crossButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
@@ -657,8 +657,8 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
         [self.view addSubview:opaqueView];
         [self.view  addSubview:webview];
         [self.view  addSubview:crossButton];
-     */
-            likeButton.enabled = NO;
+
+          //  likeButton.enabled = NO;
         
         } else {
         
