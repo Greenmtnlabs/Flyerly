@@ -20,13 +20,12 @@
 @synthesize scrollView, imageView, image, callbackObject, callbackOnComplete, galleryTable, moveUpButton;
 
 - (void)dealloc {
-    //[deviceContactItems release];
     [galleryTable release];
     [scrollView release];
     [imageView release];
-    //[image release];
     [moveUpButton release];
     [callbackObject release];
+    [library release];
     [super dealloc];
 }
 
@@ -171,6 +170,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // Setup the library.
+    library = [[ALAssetsLibrary alloc] init];
+    
     // Hide lines
     self.galleryTable.separatorColor = [UIColor clearColor];
     
@@ -218,7 +220,6 @@
     // the scroll view.
     [imageView setImage:self.image];
     
-    //[self loadAllGalleryPhotos];
     [self imageCount];
 }
 
@@ -335,12 +336,13 @@ BOOL galleryExpanded = NO;
     
     // since we have four images in single row we have to divide it by 4
     int count = counter/4;
-    counter =  0;
-
+    
+    if (counter % 4 > 0 ) {
+        count++;
+    }
+    
     return count;
 }
-
-int counter = 0;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -355,13 +357,8 @@ int counter = 0;
     }
     
     cell.controller = self;
+    [self load4ImagesAtaTime:indexPath.row cell:cell];
     
-    //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-    //    dispatch_async(dispatch_get_main_queue(), ^{
-            [self load4ImagesAtaTime:indexPath.row cell:cell];
-    //    });
-    //});
-
     // return cell
     return cell;
 }
@@ -371,8 +368,6 @@ int counter = 0;
 }
 
 -(void)imageCount{
-    
-    ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];    
     
     // Enumerate just the photos and videos group by using ALAssetsGroupSavedPhotos.
     [library enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos                                                                   usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
@@ -404,7 +399,11 @@ int counter = 0;
 
 -(void)load4ImagesAtaTime:(int)rowNumber cell:(CustomGalleryItem *)cell {
     
-    ALAssetsLibrary *library = [[[ALAssetsLibrary alloc] init] autorelease];
+    // Clear the images first.
+    cell.image1.image = nil;
+    cell.image2.image = nil;
+    cell.image3.image = nil;
+    cell.image4.image = nil;
 
     // Enumerate just the photos and videos group by using ALAssetsGroupSavedPhotos.
     [library enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos                                                                   usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
@@ -412,36 +411,31 @@ int counter = 0;
         // Within the group enumeration block, filter to enumerate just photos.
         [group setAssetsFilter:[ALAssetsFilter allPhotos]];
         
-        __block int imageCounter = 0;
         for(int i=(rowNumber * 4); i<(rowNumber * 4) + 4; i++){
 
-            // Chooses the photo at the last index
-            //NSLog(@"group.numberOfAssets: %d", group.numberOfAssets);
-            
-            if(group.numberOfAssets != 0){
+            if ( group.numberOfAssets > i ) {
                 [group enumerateAssetsAtIndexes:[NSIndexSet indexSetWithIndex:((group.numberOfAssets - 1) - i)] options:0 usingBlock:^(ALAsset *alAsset, NSUInteger index, BOOL *innerStop) {
                     
                     // The end of the enumeration is signaled by asset == nil.
                     if (alAsset) {
                         
-                        ALAssetRepresentation *representation = [alAsset defaultRepresentation];
-                        
-                        if(imageCounter == 0){
-                            [cell.image1 setImage:[UIImage imageWithCGImage:[alAsset thumbnail]]];
-                            cell.imageName1 = [representation url];
-                            //[cell.image1 setImage:[self thumbnailForAsset:alAsset maxPixelSize:90]];
-                        } else if(imageCounter == 1){
-                            [cell.image2 setImage:[UIImage imageWithCGImage:[alAsset thumbnail]]];
-                            cell.imageName2 = [representation url];
-                        } else if(imageCounter == 2){
-                            [cell.image3 setImage:[UIImage imageWithCGImage:[alAsset thumbnail]]];
-                            cell.imageName3 = [representation url];
-                        } else if(imageCounter == 3){
-                            [cell.image4 setImage:[UIImage imageWithCGImage:[alAsset thumbnail]]];
-                            cell.imageName4 = [representation url];
-                        }
-                        
-                        imageCounter++;
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            ALAssetRepresentation *representation = [alAsset defaultRepresentation];
+                            
+                            if( index % 4 == 0){
+                                [cell.image1 setImage:[UIImage imageWithCGImage:[alAsset thumbnail]]];
+                                cell.imageName1 = [representation url];
+                            } else if( index % 4 == 1){
+                                [cell.image2 setImage:[UIImage imageWithCGImage:[alAsset thumbnail]]];
+                                cell.imageName2 = [representation url];
+                            } else if( index % 4 == 2){
+                                [cell.image3 setImage:[UIImage imageWithCGImage:[alAsset thumbnail]]];
+                                cell.imageName3 = [representation url];
+                            } else if( index % 4 == 3){
+                                [cell.image4 setImage:[UIImage imageWithCGImage:[alAsset thumbnail]]];
+                                cell.imageName4 = [representation url];
+                            }
+                        });
                     }
                 }];
             }
@@ -451,24 +445,6 @@ int counter = 0;
         // Typically you should handle an error more gracefully than this.
         NSLog(@"No groups");
     }];
-}
-
-NSMutableArray *photoArray;
--(void)loadAllGalleryPhotos{
-
-    ALAssetsLibrary *al = [[ALAssetsLibrary alloc] init];
-    photoArray = [[NSMutableArray alloc] init];
-    
-    [al enumerateGroupsWithTypes:ALAssetsGroupAll usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
-         [group enumerateAssetsUsingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
-             
-             if (asset) {
-                 [photoArray addObject:[UIImage imageWithCGImage:[asset aspectRatioThumbnail]]];
-                 NSLog(@"%d",photoArray.count);
-              }
-          }];
-     }failureBlock:^(NSError *error) {
-     }] ;
 }
 
 - (UIImage *)thumbnailForAsset:(ALAsset *)asset maxPixelSize:(NSUInteger)size {
