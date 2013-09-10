@@ -166,6 +166,10 @@ extern NSString* kGetSessionProxy;
     [facebookButton setSelected:YES];
     [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"facebookSetting"];    
 }
+-(IBAction)OntwitterComments{
+    InputViewController  *input = [[InputViewController alloc]initWithNibName:@"InputViewController" bundle:nil];
+    [self.navigationController presentModalViewController:input animated:YES];
+}
 
 -(IBAction)onClickTwitterButton{
     

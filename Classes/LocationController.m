@@ -347,6 +347,9 @@ enum {
         [socialArray writeToFile:finalImgWritePath atomically:YES];
 
         NSLog(@"Before onBack");
+        [socialArray release];
+        [imageFileName release];
+        [socialFlyerPath release];
         [self onBack];
     }
 }

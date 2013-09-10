@@ -723,7 +723,7 @@ int totalCount = 0;
             [self showAlert:@"Invitation Sent!" message:@"You have successfully invited your friends to join flyerly."];
 
         }else if(selectedTab == 1){
-            
+            NSLog(@"%@",identifiers);
             [self tagFacebookUsersWithFeed:identifiers];
 
             [self showAlert:@"Invitation Sent!" message:@"You have successfully invited your friends to join flyerly."];
