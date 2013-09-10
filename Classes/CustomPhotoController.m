@@ -10,23 +10,14 @@
 #import "CustomGalleryItem.h"
 #import "Common.h"
 #import "PhotoController.h"
+#import <QuartzCore/QuartzCore.h>
 
-//#define IMAGE_HEIGHT 204
-//#define IMAGE_WIDTH  204
 #define IMAGE_HEIGHT 309
 #define IMAGE_WIDTH  320
-@implementation CustomPhotoController
-@synthesize scrollView, imageView, image, callbackObject, callbackOnComplete, galleryTable, moveUpButton;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Set the size of the scrollview.
-        
-    }
-    return self;
-}
+@implementation CustomPhotoController
+
+@synthesize scrollView, imageView, image, callbackObject, callbackOnComplete, galleryTable, moveUpButton;
 
 - (void)dealloc {
     //[deviceContactItems release];
@@ -37,14 +28,6 @@
     [moveUpButton release];
     [callbackObject release];
     [super dealloc];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
 }
 
 #pragma mark - Image Preparation
@@ -163,41 +146,18 @@
 
 - (IBAction)onSelectImage:(UIButton *)sender {
     
-    // Get the content offset in scroll view.
-    CGPoint scrollOffset = CGPointMake(
-                                       scrollView.contentOffset.x + ((320 - IMAGE_WIDTH) / 2),
-                                       scrollView.contentOffset.y + ((scrollView.frame.size.height - IMAGE_HEIGHT) /2));
+    UIGraphicsBeginImageContextWithOptions( scrollView.bounds.size, NO, [UIScreen mainScreen].scale);
     
-    // Get the offset of the image.
-    CGPoint imageOffset = CGPointMake( imageView.frame.origin.x,
-                                      imageView.frame.origin.y);
+    //this is the key
+    CGPoint offset=scrollView.contentOffset;
+    CGContextTranslateCTM(UIGraphicsGetCurrentContext(), -offset.x, -offset.y);
     
-    // Create rectangle that represents a cropped image
-    // from the middle of the current view.
-    float deltaX = ( scrollOffset.x - imageOffset.x ) / scrollView.zoomScale;
-    float deltaY = ( scrollOffset.y - imageOffset.y ) / scrollView.zoomScale;
-    float imageWidth = ( IMAGE_WIDTH + (( deltaX < 0 ) ? deltaX : 0 ) ) / scrollView.zoomScale;
-    float imageHeight = ( IMAGE_HEIGHT + (( deltaY < 0 ) ? deltaY : 0) ) / scrollView.zoomScale;
-    
-    // If the delta is negative, then make it zero, we have already adjusted
-    // the width and height above.
-    deltaX = (deltaX < 0) ? 0 : deltaX;
-    deltaY = (deltaY < 0) ? 0 : deltaY;
-    
-    CGRect rect = CGRectMake(deltaX,
-                             deltaY,
-                             imageWidth, imageHeight);
-    
-    // Create bitmap image from original image data,
-    // using rectangle to specify desired crop area
-    CGImageRef imageRef = CGImageCreateWithImageInRect([image CGImage], rect);
-    UIImage *img = [UIImage imageWithCGImage:imageRef
-                                       scale:scrollView.zoomScale
-                                 orientation:image.imageOrientation];
-    CGImageRelease(imageRef);
+    [scrollView.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *visibleScrollViewImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
     
     // Pass the image to callback function.
-    [callbackObject performSelector:callbackOnComplete withObject:img];
+    [callbackObject performSelector:callbackOnComplete withObject:visibleScrollViewImage];
     
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -363,17 +323,6 @@ BOOL galleryExpanded = NO;
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
     return self.imageView;
 }
-/*
-- (void)scrollViewDidEndZooming:(UIScrollView *)sView withView:(UIView *)view atScale:(float)scale {
-    
-    // Get the size of the image.
-    CGSize imageSize = [image size];
-    
-    // Content size for scrollview needs to be twice this size.
-    CGSize contentSize = CGSizeMake( sView.frame.size.width + (imageSize.width * scale),
-                                     sView.frame.size.height + ( imageSize.height * scale));
-    [sView setContentSize:contentSize];
-}*/
 
 #pragma mark Table view methods
 
