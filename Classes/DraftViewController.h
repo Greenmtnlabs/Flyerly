@@ -68,7 +68,6 @@
     
     BOOL fromPhotoController;
     int countOfSharingNetworks;
-    NSString *sharelink;
 	/*IBOutlet UIView *progressView;
     ShareProgressView *facebookPogressView;
     ShareProgressView *twitterPogressView;
@@ -81,6 +80,7 @@
 }
 
 @property(nonatomic,retain) NSMutableArray *listOfPlaces;
+@property(nonatomic,strong)  NSString *sharelink;
 
 /*@property(nonatomic,retain) IBOutlet UIView *progressView;
 @property(nonatomic,retain) ShareProgressView *facebookPogressView;
@@ -164,4 +164,7 @@
 -(void)closeSharingProgressSuccess:(NSNotification *)notification;
 - (void)uploadImage:(NSData *)imageData isEmail:(BOOL)isEmail;
 - (void)uploadImageByboth:(NSData *)imageData;
+
+-(void)shareOnEmail:(NSString *)link;
+-(void)shortenURL:(NSString *)url;
 @end

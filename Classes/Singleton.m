@@ -10,7 +10,7 @@
 
 @implementation Singleton
 
-@synthesize accounts,inputValue;
+@synthesize accounts,inputValue,sharelink;
 
 static Singleton *sharedSingleton = nil;
 

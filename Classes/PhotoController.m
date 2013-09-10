@@ -82,7 +82,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 }
 
 -(void)viewDidAppear:(BOOL)animated{
-    
+    layerallow = 0;
     // Setup buttons and labels
     [moreLayersButton setBackgroundImage:[UIImage imageNamed:@"07_addmore"] forState:UIControlStateNormal];
     [moreLayersButton addTarget:self action:@selector(callAddMoreLayers) forControlEvents:UIControlEventTouchUpInside];
@@ -1938,6 +1938,7 @@ int arrangeLayerIndex;
 
 #pragma mark UIAlertView delegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (layerallow == 0) {
 	if(alertView == warningAlert && buttonIndex == 0) {
         
 		[self.navigationController popViewControllerAnimated:YES];
@@ -1999,6 +2000,7 @@ int arrangeLayerIndex;
             [settingsAlert show];
         }
         
+    }
     }
 }
 
@@ -2265,7 +2267,12 @@ int arrangeLayerIndex;
 	
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationDuration:0.4f];
+    
+    
+   
+   
 	lastTextView.frame = CGRectMake(20, 50, 280, 150);
+   // lastTextView.frame = CGRectMake(lastLabelView.frame.origin.x, lastLabelView.frame.origin.y,  lastLabelView.frame.size.width,  lastLabelView.frame.size.height);
 	templateBckgrnd.alpha = ALPHA0;
 
     if(IS_IPHONE_5){
@@ -3619,6 +3626,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 -(void)editLayer:(UIButton *)editButton{
     
     editButtonGlobal = editButton;
+
     
     [self editLayer:editButtonGlobal overrided:nil];
 
@@ -3632,7 +3640,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     // Since we are editting we should enable the deleteNode On
     deleteMode = YES;
     undoCount = undoCount + 1;
-    
     NSLog(@"Edit Layer Tag: %d", editButton.tag);
     NSString *tag = [NSString stringWithFormat:@"%d", editButton.tag];
     int index = [self getIndexFromTag:tag];
@@ -4178,10 +4185,10 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         }
     
     } else {
-
-        warningAlert = [[UIAlertView alloc]initWithTitle:@"" message:@"You can add a total of 10 layers." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil ,nil];
+        layerallow = 1;
+        warningAlert = [[UIAlertView alloc]initWithTitle:@"You can add a total of 10 layers." message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil ,nil];
 		[warningAlert show];
-
+      
     }
 }
 

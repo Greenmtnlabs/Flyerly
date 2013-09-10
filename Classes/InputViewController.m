@@ -77,9 +77,15 @@
     }else{
         NSLog(@"%@",globle.inputValue);
         if ([globle.inputValue isEqualToString:@"facebook"]) {
-            NSMutableArray *ASD = [[NSMutableArray alloc] init];
-            [ASD addObject:@"500819963306066"];
-            [self tagFacebookUsersWithFeed:ASD];
+            NSString *asd = [[NSString alloc] init];
+            asd = [NSString stringWithFormat:@"/me/likes/%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"FBAccessTokenKey"]];;
+            NSLog(@"%@",asd);
+            
+            if ([[NSUserDefaults standardUserDefaults] stringForKey:@"FACEBOOK_LIKED"]) {
+                NSMutableArray *ASD = [[NSMutableArray alloc] init];
+                [ASD addObject:@"500819963306066"];
+                [self tagFacebookUsersWithFeed:ASD];
+            }
 
         }else if([globle.inputValue isEqualToString:@"twitter"]) {
             if([TWTweetComposeViewController canSendTweet]){

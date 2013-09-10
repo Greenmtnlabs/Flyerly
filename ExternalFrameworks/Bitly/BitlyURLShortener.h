@@ -37,7 +37,8 @@
 }
 
 @property (nonatomic, assign) id<BitlyURLShortenerDelegate> delegate;
-
+@property (nonatomic, retain) NSString *longText;
+@property (nonatomic, retain) NSString *shortenedText;
 - (void)shortenLinksInText:(NSString *)text;
 - (void)shortenURL:(NSURL *)URL;
 
