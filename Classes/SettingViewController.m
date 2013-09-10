@@ -14,18 +14,10 @@
 #import "TMAPIClient.h"
 #import "HelpController.h"
 #import "PhotoController.h"
-//#import "FBConnectGlobal.h"
 
-/*extern NSString* kApiKey;
-extern NSString* kApiSecret; 
-extern NSString* kGetSessionProxy;  
-*/
-//static NSString* kApiKey = @"64a5dc77bd0a8fd3fbbabd3a5e943ed8";
-//static NSString* kApiSecret = @"e9861b57e32abb6821c6853854786302"; // @"<YOUR SECRET KEY>";
-//static NSString* kGetSessionProxy=nil; // @"<YOUR SESSION CALLBACK)>";
 
 @implementation SettingViewController
-@synthesize flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,helpTab,loadingView,saveToCameraRollLabel,saveToRollSwitch;
+@synthesize flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,helpTab,saveToCameraRollLabel,saveToRollSwitch;
 
 -(void)viewWillAppear:(BOOL)animated{
 
@@ -258,16 +250,12 @@ extern NSString* kGetSessionProxy;
             if((![[[TMAPIClient sharedInstance] OAuthToken] length] > 0) ||
                (![[[TMAPIClient sharedInstance] OAuthTokenSecret] length] > 0)){
                 
-                loadingView =[LoadingView loadingViewInView:self.view  text:@"Wait..."];
+                [self showLoadingIndicator];
 
                 [[TMAPIClient sharedInstance] authenticate:@"Flyerly" callback:^(NSError *error) {
                     
                     // Remove loading view
-                    for (UIView *subview in self.view.subviews) {
-                        if([subview isKindOfClass:[LoadingView class]]){
-                            [subview removeFromSuperview];
-                        }
-                    }
+                    [self hideLoadingIndicator];
 
                     if (error){
                         NSLog(@"Authentication failed: %@ %@", error, [error description]);

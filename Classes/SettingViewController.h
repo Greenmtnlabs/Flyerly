@@ -10,29 +10,12 @@
 #import "FBConnect/FBConnect.h"
 #import <Twitter/Twitter.h>
 #import <ObjectiveFlickr.h>
-#import "LoadingView.h"
 #import "LauchViewController.h"
 #import "InputViewController.h"
+#import "ParentViewController.h"
 
-//#import "FBConnect/FBConnect.h"
-//#import "TwitLogin.h"
-//#import "FBLoginButton.h"
-//@class FBSession;
 @class LauchViewController,InputViewController;
-@interface SettingViewController : UIViewController<FBRequestDelegate,FBSessionDelegate,OFFlickrAPIRequestDelegate> {
-//@interface SettingViewController : UIViewController <UITextFieldDelegate,FBDialogDelegate, FBSessionDelegate, FBRequestDelegate>{
-    /*
-	UITextField *password;
-	UITextField *user;
-	UIBarButtonItem *doneButton;
-	bool keyboardShown;
-	UIScrollView * scrollView;
-	UITextField * activeField;
-	MyNavigationBar *navBar;
-	//IBOutlet FBLoginButton *faceBookButton;
-	FBSession* _session;
-	TwitLogin *twitDialog;
-     */
+@interface SettingViewController : ParentViewController <FBRequestDelegate,FBSessionDelegate,OFFlickrAPIRequestDelegate> {
     IBOutlet UIButton *facebookButton;
 	IBOutlet UIButton *twitterButton;
 	IBOutlet UIButton *emailButton;
@@ -65,19 +48,6 @@
 @property(nonatomic,retain) IBOutlet UISwitch *saveToRollSwitch;
 
 @property(nonatomic,retain) IBOutlet UIButton *helpTab;
-@property (nonatomic, retain) LoadingView *loadingView;
-
-/*
-@property(nonatomic,retain) MyNavigationBar *navBar;
-@property (nonatomic,retain) IBOutlet UITextField *password;
-@property (nonatomic,retain) IBOutlet UITextField *user;
-@property(nonatomic,retain)  UIBarButtonItem *doneButton;
-@property (nonatomic, retain) IBOutlet UIScrollView * scrollView;
-//@property (nonatomic, retain) IBOutlet FBLoginButton *faceBookButton;
-@property (nonatomic,retain) TwitLogin *twitDialog;
--(void)initSession;
-- (void)registerForKeyboardNotifications;
- */
 
 -(IBAction)onClickFacebookButton;
 -(IBAction)onClickTwitterButton;
