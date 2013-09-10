@@ -24,17 +24,15 @@
     // UIImageView
     UIImageView  *imageView;
     
-    // The image to be cropped.
-    UIImage      *image;
-    
     // Move up view.
     UIImageView      *moveUpButton;
     
     // Report back the image.
     SEL callbackOnComplete;
     id  callbackObject;
+    int counter;
     
-    NSMutableArray *photoArray;
+    ALAssetsLibrary *library;
 }
 
 @property (nonatomic, retain) IBOutlet UITableView *galleryTable;
@@ -44,10 +42,8 @@
 @property (nonatomic, retain) UIImage *image;
 @property (nonatomic, retain) id callbackObject;
 @property (nonatomic) SEL callbackOnComplete;
-//@property(nonatomic,retain) NSMutableArray *deviceContactItems;
 
-@property (nonatomic, retain) NSMutableArray *photoArray;
 
-- (IBAction)onSelectImage:(UIButton *)sender;
+-(IBAction)onSelectImage:(UIButton *)sender;
 -(void)goBack;
 @end

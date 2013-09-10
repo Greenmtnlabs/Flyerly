@@ -2,10 +2,10 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1552</int>
-		<string key="IBDocument.SystemVersion">12E55</string>
+		<string key="IBDocument.SystemVersion">11G63b</string>
 		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
-		<string key="IBDocument.AppKitVersion">1187.39</string>
-		<string key="IBDocument.HIToolboxVersion">626.00</string>
+		<string key="IBDocument.AppKitVersion">1138.51</string>
+		<string key="IBDocument.HIToolboxVersion">569.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			<string key="NS.object.0">2083</string>
@@ -42,8 +42,9 @@
 							<object class="IBUIImageView" id="404142563">
 								<reference key="NSNextResponder" ref="46408439"/>
 								<int key="NSvFlags">264</int>
-								<string key="NSFrame">{{6, 6}, {73, 73}}</string>
+								<string key="NSFrame">{{6, 3}, {73, 73}}</string>
 								<reference key="NSSuperview" ref="46408439"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="1035622803"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<object class="NSColor" key="IBUIBackgroundColor" id="63610896">
@@ -51,46 +52,44 @@
 									<bytes key="NSWhite">MQA</bytes>
 								</object>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<object class="NSCustomResource" key="IBUIImage" id="913760674">
-									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">crop_box.png</string>
-								</object>
 							</object>
 							<object class="IBUIImageView" id="1035622803">
 								<reference key="NSNextResponder" ref="46408439"/>
 								<int key="NSvFlags">264</int>
-								<string key="NSFrame">{{85, 6}, {73, 73}}</string>
+								<string key="NSFrame">{{85, 3}, {73, 73}}</string>
 								<reference key="NSSuperview" ref="46408439"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="127343153"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<reference key="IBUIBackgroundColor" ref="63610896"/>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<reference key="IBUIImage" ref="913760674"/>
 							</object>
 							<object class="IBUIImageView" id="127343153">
 								<reference key="NSNextResponder" ref="46408439"/>
 								<int key="NSvFlags">264</int>
-								<string key="NSFrame">{{164, 6}, {72, 73}}</string>
+								<string key="NSFrame">{{164, 3}, {72, 73}}</string>
 								<reference key="NSSuperview" ref="46408439"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="158722930"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<reference key="IBUIBackgroundColor" ref="63610896"/>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<reference key="IBUIImage" ref="913760674"/>
 							</object>
 							<object class="IBUIImageView" id="158722930">
 								<reference key="NSNextResponder" ref="46408439"/>
 								<int key="NSvFlags">264</int>
-								<string key="NSFrame">{{242, 6}, {72, 73}}</string>
+								<string key="NSFrame">{{242, 3}, {72, 73}}</string>
 								<reference key="NSSuperview" ref="46408439"/>
+								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<reference key="IBUIBackgroundColor" ref="63610896"/>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<reference key="IBUIImage" ref="913760674"/>
 							</object>
 						</array>
 						<string key="NSFrameSize">{320, 79}</string>
 						<reference key="NSSuperview" ref="404596264"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="404142563"/>
 						<string key="NSReuseIdentifierKey">_NS:11</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
@@ -106,6 +105,7 @@
 				</array>
 				<string key="NSFrameSize">{320, 80}</string>
 				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="46408439"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
 				<string key="IBUIRestorationIdentifier"/>
@@ -220,7 +220,42 @@
 			<nil key="sourceID"/>
 			<int key="maxID">103</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes"/>
+		<object class="IBClassDescriber" key="IBDocument.Classes">
+			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<object class="IBPartialClassDescription">
+					<string key="className">CustomGalleryItem</string>
+					<string key="superclassName">UITableViewCell</string>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="image1">UIImageView</string>
+						<string key="image2">UIImageView</string>
+						<string key="image3">UIImageView</string>
+						<string key="image4">UIImageView</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="image1">
+							<string key="name">image1</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="image2">
+							<string key="name">image2</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="image3">
+							<string key="name">image3</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="image4">
+							<string key="name">image4</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/CustomGalleryItem.h</string>
+					</object>
+				</object>
+			</array>
+		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">
@@ -229,10 +264,6 @@
 		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
-		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="NS.key.0">crop_box.png</string>
-			<string key="NS.object.0">{74, 78}</string>
-		</object>
 		<string key="IBCocoaTouchPluginVersion">2083</string>
 	</data>
 </archive>

@@ -10,50 +10,33 @@
 #import "CustomGalleryItem.h"
 #import "Common.h"
 #import "PhotoController.h"
+#import <QuartzCore/QuartzCore.h>
 
-//#define IMAGE_HEIGHT 204
-//#define IMAGE_WIDTH  204
 #define IMAGE_HEIGHT 309
 #define IMAGE_WIDTH  320
+
 @implementation CustomPhotoController
+
 @synthesize scrollView, imageView, image, callbackObject, callbackOnComplete, galleryTable, moveUpButton;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Set the size of the scrollview.
-        
-    }
-    return self;
-}
-
 - (void)dealloc {
-    //[deviceContactItems release];
     [galleryTable release];
     [scrollView release];
     [imageView release];
-    //[image release];
     [moveUpButton release];
     [callbackObject release];
+    [library release];
     [super dealloc];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
 }
 
 #pragma mark - Image Preparation
 
 // Code from: http://discussions.apple.com/thread.jspa?messageID=7949889
-- (UIImage *)scaleAndRotateImage:(UIImage *)image {
-    int kMaxResolution = 640; // Or whatever
+- (UIImage *)scaleAndRotateImage:(UIImage *)img size:(CGSize)size {
+    int kMaxWidth = size.width; // Or whatever
+    int kMaxHeight = size.height;
     
-    CGImageRef imgRef = image.CGImage;
+    CGImageRef imgRef = img.CGImage;
     
     CGFloat width = CGImageGetWidth(imgRef);
     CGFloat height = CGImageGetHeight(imgRef);
@@ -61,22 +44,22 @@
     
     CGAffineTransform transform = CGAffineTransformIdentity;
     CGRect bounds = CGRectMake(0, 0, width, height);
-    if (width > kMaxResolution || height > kMaxResolution) {
+    if ( width > kMaxWidth || height > kMaxHeight ) {
         CGFloat ratio = width/height;
         if (ratio > 1) {
-            bounds.size.width = kMaxResolution;
-            bounds.size.height = roundf(bounds.size.width / ratio);
+            bounds.size.width = kMaxWidth;
+            bounds.size.height = roundf( kMaxWidth / ratio);
         }
         else {
-            bounds.size.height = kMaxResolution;
-            bounds.size.width = roundf(bounds.size.height * ratio);
+            bounds.size.height = kMaxHeight;
+            bounds.size.width = roundf( kMaxHeight * ratio );
         }
     }
     
     CGFloat scaleRatio = bounds.size.width / width;
     CGSize imageSize = CGSizeMake(CGImageGetWidth(imgRef), CGImageGetHeight(imgRef));
     CGFloat boundHeight;
-    UIImageOrientation orient = image.imageOrientation;
+    UIImageOrientation orient = img.imageOrientation;
     switch(orient) {
             
         case UIImageOrientationUp: //EXIF = 1
@@ -160,60 +143,20 @@
 
 #pragma mark - Process Image Crop
 
-- (IBAction)onSelectImage:(UIButton *)sender{
+- (IBAction)onSelectImage:(UIButton *)sender {
     
-    //NSLog(@"Width: %f",image.size.width);
-    //NSLog(@"Height: %f",image.size.height);
-    //NSLog(@"Scroll Height: %f",scrollView.frame.size.height);
-
-    /*if(IS_IPHONE_5){
-        //image = [PhotoController imageWithImage:image scaledToSize:CGSizeMake(IMAGE_WIDTH - 135, IMAGE_HEIGHT+50)];
-        //image = [PhotoController imageWithImage:image scaledToSize:CGSizeMake(240, 340)];
-    }else{
-        //image = [PhotoController imageWithImage:image scaledToSize:CGSizeMake(480, 480)];
-    }*/
+    UIGraphicsBeginImageContextWithOptions( scrollView.bounds.size, NO, [UIScreen mainScreen].scale);
     
-    // Get the content offset in scroll view.
-    CGPoint scrollOffset = CGPointMake(
-                                       scrollView.contentOffset.x + ((320 - IMAGE_WIDTH) / 2),
-                                       scrollView.contentOffset.y + ((scrollView.frame.size.height - IMAGE_HEIGHT) /2));
+    //this is the key
+    CGPoint offset=scrollView.contentOffset;
+    CGContextTranslateCTM(UIGraphicsGetCurrentContext(), -offset.x, -offset.y);
     
-    // Get the offset of the image.
-    CGPoint imageOffset = CGPointMake( imageView.frame.origin.x,
-                                      imageView.frame.origin.y);
-    
-    // Create rectangle that represents a cropped image
-    // from the middle of the current view.
-    float deltaX = ( scrollOffset.x - imageOffset.x ) / scrollView.zoomScale;
-    float deltaY = ( scrollOffset.y - imageOffset.y ) / scrollView.zoomScale;
-    float imageWidth = ( IMAGE_WIDTH + (( deltaX < 0 ) ? deltaX : 0 ) ) / scrollView.zoomScale;
-    float imageHeight = ( IMAGE_HEIGHT + (( deltaY < 0 ) ? deltaY : 0) ) / scrollView.zoomScale;
-    
-    // If the delta is negative, then make it zero, we have already adjusted
-    // the width and height above.
-    deltaX = (deltaX < 0) ? 0 : deltaX;
-    deltaY = (deltaY < 0) ? 0 : deltaY;
-    
-    //NSLog(@"Delta X: %f",deltaX);
-    //NSLog(@"Delta Y: %f",deltaY);
-    //NSLog(@"Image Width 2: %f",imageWidth);
-    //NSLog(@"Image Height 2: %f",imageHeight);
-    //NSLog(@"Scroll Zoom: %f",scrollView.zoomScale);
-
-    CGRect rect = CGRectMake(deltaX,
-                             deltaY,
-                             imageWidth, imageHeight);
-    
-    // Create bitmap image from original image data,
-    // using rectangle to specify desired crop area
-    CGImageRef imageRef = CGImageCreateWithImageInRect([image CGImage], rect);
-    UIImage *img = [UIImage imageWithCGImage:imageRef
-                                       scale:scrollView.zoomScale
-                                 orientation:image.imageOrientation];
-    CGImageRelease(imageRef);
+    [scrollView.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *visibleScrollViewImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
     
     // Pass the image to callback function.
-    [callbackObject performSelector:callbackOnComplete withObject:img];
+    [callbackObject performSelector:callbackOnComplete withObject:visibleScrollViewImage];
     
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -227,37 +170,56 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //UIGestureRecognizer *gesture = [[[UIGestureRecognizer alloc] initWithTarget:self action:@selector(increaseHeight:)] autorelease];
-    //gesture.delegate = self;
-    //[moveUpButton addGestureRecognizer:gesture];
+    // Setup the library.
+    library = [[ALAssetsLibrary alloc] init];
     
-    // hide lines
+    // Hide lines
     self.galleryTable.separatorColor = [UIColor clearColor];
     
     // Do any additional setup after loading the view from its nib.
-    UIImage *tmpImage = [self scaleAndRotateImage:image];
-    [image release];
-    image = [tmpImage retain];
+    if ( image.size.width > imageView.frame.size.width ||
+        image.size.height > imageView.frame.size.height ) {
+        
+        UIImage *tmpImage = [self scaleAndRotateImage:image size:imageView.frame.size];
+        [image release];
+        image = [tmpImage retain];
+    } else {
+        UIImage *tmpImage = [self scaleAndRotateImage:image size:image.size];
+        [image release];
+        image = [tmpImage retain];
+    }
     
     // Get the size of the image.
     CGSize imageSize = [image size];
     
-    // Content size for scrollview needs to be twice this size.
-    CGSize contentSize = CGSizeMake(imageSize.width, imageSize.height);
-    [scrollView setContentSize:contentSize];
+    // If the image is bigger than the image view, resize the image view.
+    if ( imageView.frame.size.width < imageSize.width ||
+        imageView.frame.size.height < imageSize.height ) {
+        CGFloat width = MAX( imageView.frame.size.width, imageSize.width );
+        CGFloat height = MAX( imageView.frame.size.height, imageSize.height );
+        
+        imageView.frame = CGRectMake( 0,
+                                      0,
+                                      width,
+                                      height );
+    }
+    
+    [scrollView setContentSize:imageSize];
+    scrollView.minimumZoomScale = 1.0;
     
     // Center on the scroll view.
-    [scrollView setContentOffset:CGPointMake((contentSize.width - self.view.frame.size.width) / 2,
-                                             (contentSize.height - self.view.frame.size.height) / 2)];
+    CGFloat offsetX = (imageSize.width - scrollView.frame.size.width) / 2;
+    offsetX = ( offsetX > 0 ) ? offsetX : 0;
+    
+    CGFloat offsetY = (imageSize.height - scrollView.frame.size.height) / 2;
+    offsetY = ( offsetY > 0 ) ? offsetY : 0;
+    
+    [scrollView setContentOffset:CGPointMake( offsetX, offsetY )];
     
     // Set the image and frame of image view so that the image is centered in
     // the scroll view.
     [imageView setImage:self.image];
-    [imageView setFrame:CGRectMake((contentSize.width - imageSize.width)/2,
-                                   (contentSize.height - imageSize.height)/2,
-                                   imageSize.width, imageSize.height)];
     
-    //[self loadAllGalleryPhotos];
     [self imageCount];
 }
 
@@ -307,23 +269,7 @@ BOOL galleryExpanded = NO;
     }
 }
 
-/*
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
-    
-    if ([touch locationInView:self.view].y - [touch previousLocationInView:self.view].y > 0){
-        moveUpButton.frame = CGRectMake(moveUpButton.frame.origin.x, 133, moveUpButton.frame.size.width, moveUpButton.frame.size.height);
-        
-        galleryTable.frame = CGRectMake(galleryTable.frame.origin.x, 176, galleryTable.frame.size.width, galleryTable.frame.size.height + 200);
-        return YES;
-    }
-    
-    // Disallow recognition of tap gestures in the segmented control.
-    //if ((touch.view == moveUpButton)) {//change it to your condition
-    //
-    //}
-    return YES;
-}
-*/
+
 -(void)goBack{
     
 	[self.navigationController popViewControllerAnimated:YES];
@@ -379,16 +325,6 @@ BOOL galleryExpanded = NO;
     return self.imageView;
 }
 
-- (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(float)scale {
-    
-    // Get the size of the image.
-    CGSize imageSize = [image size];
-    
-    // Content size for scrollview needs to be twice this size.
-    CGSize contentSize = CGSizeMake(self.view.frame.size.width + (imageSize.width * scale), self.view.frame.size.height + ( imageSize.height * scale));
-    [self.scrollView setContentSize:contentSize];
-}
-
 #pragma mark Table view methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -400,12 +336,13 @@ BOOL galleryExpanded = NO;
     
     // since we have four images in single row we have to divide it by 4
     int count = counter/4;
-    counter =  0;
-
+    
+    if (counter % 4 > 0 ) {
+        count++;
+    }
+    
     return count;
 }
-
-int counter = 0;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -420,13 +357,8 @@ int counter = 0;
     }
     
     cell.controller = self;
+    [self load4ImagesAtaTime:indexPath.row cell:cell];
     
-    //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-    //    dispatch_async(dispatch_get_main_queue(), ^{
-            [self load4ImagesAtaTime:indexPath.row cell:cell];
-    //    });
-    //});
-
     // return cell
     return cell;
 }
@@ -436,8 +368,6 @@ int counter = 0;
 }
 
 -(void)imageCount{
-    
-    ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];    
     
     // Enumerate just the photos and videos group by using ALAssetsGroupSavedPhotos.
     [library enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos                                                                   usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
@@ -469,7 +399,11 @@ int counter = 0;
 
 -(void)load4ImagesAtaTime:(int)rowNumber cell:(CustomGalleryItem *)cell {
     
-    ALAssetsLibrary *library = [[[ALAssetsLibrary alloc] init] autorelease];
+    // Clear the images first.
+    cell.image1.image = nil;
+    cell.image2.image = nil;
+    cell.image3.image = nil;
+    cell.image4.image = nil;
 
     // Enumerate just the photos and videos group by using ALAssetsGroupSavedPhotos.
     [library enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos                                                                   usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
@@ -477,36 +411,31 @@ int counter = 0;
         // Within the group enumeration block, filter to enumerate just photos.
         [group setAssetsFilter:[ALAssetsFilter allPhotos]];
         
-        __block int imageCounter = 0;
         for(int i=(rowNumber * 4); i<(rowNumber * 4) + 4; i++){
 
-            // Chooses the photo at the last index
-            //NSLog(@"group.numberOfAssets: %d", group.numberOfAssets);
-            
-            if(group.numberOfAssets != 0){
+            if ( group.numberOfAssets > i ) {
                 [group enumerateAssetsAtIndexes:[NSIndexSet indexSetWithIndex:((group.numberOfAssets - 1) - i)] options:0 usingBlock:^(ALAsset *alAsset, NSUInteger index, BOOL *innerStop) {
                     
                     // The end of the enumeration is signaled by asset == nil.
                     if (alAsset) {
                         
-                        ALAssetRepresentation *representation = [alAsset defaultRepresentation];
-                        
-                        if(imageCounter == 0){
-                            [cell.image1 setImage:[UIImage imageWithCGImage:[alAsset thumbnail]]];
-                            cell.imageName1 = [representation url];
-                            //[cell.image1 setImage:[self thumbnailForAsset:alAsset maxPixelSize:90]];
-                        } else if(imageCounter == 1){
-                            [cell.image2 setImage:[UIImage imageWithCGImage:[alAsset thumbnail]]];
-                            cell.imageName2 = [representation url];
-                        } else if(imageCounter == 2){
-                            [cell.image3 setImage:[UIImage imageWithCGImage:[alAsset thumbnail]]];
-                            cell.imageName3 = [representation url];
-                        } else if(imageCounter == 3){
-                            [cell.image4 setImage:[UIImage imageWithCGImage:[alAsset thumbnail]]];
-                            cell.imageName4 = [representation url];
-                        }
-                        
-                        imageCounter++;
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            ALAssetRepresentation *representation = [alAsset defaultRepresentation];
+                            
+                            if( index % 4 == 0){
+                                [cell.image1 setImage:[UIImage imageWithCGImage:[alAsset thumbnail]]];
+                                cell.imageName1 = [representation url];
+                            } else if( index % 4 == 1){
+                                [cell.image2 setImage:[UIImage imageWithCGImage:[alAsset thumbnail]]];
+                                cell.imageName2 = [representation url];
+                            } else if( index % 4 == 2){
+                                [cell.image3 setImage:[UIImage imageWithCGImage:[alAsset thumbnail]]];
+                                cell.imageName3 = [representation url];
+                            } else if( index % 4 == 3){
+                                [cell.image4 setImage:[UIImage imageWithCGImage:[alAsset thumbnail]]];
+                                cell.imageName4 = [representation url];
+                            }
+                        });
                     }
                 }];
             }
@@ -516,24 +445,6 @@ int counter = 0;
         // Typically you should handle an error more gracefully than this.
         NSLog(@"No groups");
     }];
-}
-
-NSMutableArray *photoArray;
--(void)loadAllGalleryPhotos{
-
-    ALAssetsLibrary *al = [[ALAssetsLibrary alloc] init];
-    photoArray = [[NSMutableArray alloc] init];
-    
-    [al enumerateGroupsWithTypes:ALAssetsGroupAll usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
-         [group enumerateAssetsUsingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
-             
-             if (asset) {
-                 [photoArray addObject:[UIImage imageWithCGImage:[asset aspectRatioThumbnail]]];
-                 NSLog(@"%d",photoArray.count);
-              }
-          }];
-     }failureBlock:^(NSError *error) {
-     }] ;
 }
 
 - (UIImage *)thumbnailForAsset:(ALAsset *)asset maxPixelSize:(NSUInteger)size {
