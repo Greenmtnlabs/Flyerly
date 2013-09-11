@@ -1274,6 +1274,43 @@ static ShareProgressView *clipBdPogressView;
                                      andDelegate:self];
 }
 
+- (void)makeTwitterPost:(ACAccount *)acct {
+    
+    TWRequest *postRequest = [[TWRequest alloc] initWithURL:[NSURL URLWithString:@"https://upload.twitter.com/1/statuses/update_with_media.json"] parameters:nil requestMethod:TWRequestMethodPOST];
+    
+    
+    //add text
+    [postRequest addMultiPartData:[[NSString stringWithFormat:@"%@ %@ - at %@", selectedFlyerDescription, @"#flyerly", [[LocationController getLocationDetails] objectForKey:@"name"]] dataUsingEncoding:NSUTF8StringEncoding] withName:@"status" type:@"multipart/form-data"];
+    //add image
+    [postRequest addMultiPartData:UIImagePNGRepresentation(selectedFlyerImage) withName:@"media" type:@"multipart/form-data"];
+    
+    // Set the account used to post the tweet.
+    [postRequest setAccount:acct];
+    
+    // Perform the request created above and create a handler block to handle the response.
+    [postRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+        
+        if(responseData){
+            NSMutableDictionary *responseDictionary  = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:nil];
+            NSLog(@"%@",responseDictionary);
+            NSString *errors = [responseDictionary objectForKey:@"errors"];
+            
+            if(errors){
+                [self fillErrorStatus:twitterPogressView];
+            }else{
+                [self fillSuccessStatus:twitterPogressView];
+            }
+        } else {
+            //[self shareOnTwitter];
+            [self fillErrorStatus:twitterPogressView];
+        }
+    }];
+    
+    // Release stuff.
+    [arrayOfAccounts release];
+    arrayOfAccounts = nil;
+}
+
 /*
  * Share on Twitter
  */
@@ -1290,41 +1327,57 @@ static ShareProgressView *clipBdPogressView;
     [account requestAccessToAccountsWithType:accountType withCompletionHandler:^(BOOL granted, NSError *error) {
         // Did user allow us access?
         if (granted == YES) {
+            // Get the list of Twitter accounts.
+            arrayOfAccounts = [account accountsWithAccountType:accountType];
             
-            TWRequest *postRequest = [[TWRequest alloc] initWithURL:[NSURL URLWithString:@"https://upload.twitter.com/1/statuses/update_with_media.json"] parameters:nil requestMethod:TWRequestMethodPOST];
-            
-            
-            //add text
-            [postRequest addMultiPartData:[[NSString stringWithFormat:@"%@ %@ - at %@", selectedFlyerDescription, @"#flyerly", [[LocationController getLocationDetails] objectForKey:@"name"]] dataUsingEncoding:NSUTF8StringEncoding] withName:@"status" type:@"multipart/form-data"];
-            //add image
-            [postRequest addMultiPartData:UIImagePNGRepresentation(selectedFlyerImage) withName:@"media" type:@"multipart/form-data"];
-            
-            // Set the account used to post the tweet.
-            NSArray *arrayOfAccounts = [account accountsWithAccountType:accountType];
-            [postRequest setAccount:[arrayOfAccounts objectAtIndex:0]];
-            
-            // Perform the request created above and create a handler block to handle the response.
-            [postRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
-                
-                if(responseData){
-                    NSMutableDictionary *responseDictionary  = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:nil];
-                    NSLog(@"%@",responseDictionary);
-                    NSString *errors = [responseDictionary objectForKey:@"errors"];
+            // If there are more than 1 account, ask user which they want to use.
+            if ( [arrayOfAccounts count] > 1 ) {
+                // Show list of acccounts from which to select
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:@"Choose Account" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles: nil];
                     
-                    if(errors){
-                        [self fillErrorStatus:twitterPogressView];
-                    }else{
-                        [self fillSuccessStatus:twitterPogressView];
+                    for (int i = 0; i < arrayOfAccounts.count; i++) {
+                        ACAccount *acct = [arrayOfAccounts objectAtIndex:i];
+                        [actionSheet addButtonWithTitle:acct.username];
                     }
-                } else {
-                    //[self shareOnTwitter];
-                    [self fillErrorStatus:twitterPogressView];
-                }
-            }];
-
+                    
+                    [actionSheet addButtonWithTitle:@"Cancel"];
+                    [actionSheet showInView:self.view];
+                });
+                
+            } else if ( [arrayOfAccounts count] > 0 ) {
+                // Grab the initial Twitter account to tweet from.
+                ACAccount *twitterAccount = [arrayOfAccounts objectAtIndex:0];
+                [self makeTwitterPost:twitterAccount];
+            } else {
+                [self fillErrorStatus:twitterPogressView];
+            }
+        } else {
+            [self fillErrorStatus:twitterPogressView];
         }
     }];
 }
+
+/**
+ * clickedButtonAtIndex (UIActionSheet)
+ *
+ * Handle the button clicks from mode of getting out selection.
+ */
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    //if not cancel button presses
+    if(buttonIndex != arrayOfAccounts.count) {
+        
+        //save to NSUserDefault
+        ACAccount *account = [arrayOfAccounts objectAtIndex:buttonIndex];
+        
+        //Convert twitter username to email
+        [self makeTwitterPost:account];
+    }
+    
+    [actionSheet release];
+}
+
 
 #pragma show sharing progress row
 /*

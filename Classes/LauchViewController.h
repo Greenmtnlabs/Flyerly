@@ -21,7 +21,7 @@
 @class MainSettingViewController;
 
 
-@interface LauchViewController : ParentViewController<FBDialogDelegate,FBSessionDelegate,FBRequestDelegate,UIWebViewDelegate,FBWebDialogsDelegate,FBGraphUser> {
+@interface LauchViewController : ParentViewController<FBDialogDelegate,FBSessionDelegate,FBRequestDelegate,UIWebViewDelegate,FBWebDialogsDelegate,FBGraphUser, UIActionSheetDelegate> {
 	PhotoController *ptController;
 	FlyrViewController *tpController;
 	SettingViewController *spController;
@@ -54,6 +54,8 @@
     UIView *opaqueView;
     IBOutlet UIWebView *webview;
     IBOutlet UIButton *crossButton;
+    
+    NSArray *arrayOfAccounts;
 }
 @property(nonatomic,retain) PhotoController *ptController;
 @property(nonatomic,retain) FlyrViewController *tpController;

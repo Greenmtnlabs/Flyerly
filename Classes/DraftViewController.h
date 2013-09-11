@@ -23,7 +23,7 @@
 @class SaveFlyerController;
 @class LoadingView;
 
-@interface DraftViewController : UIViewController<FBRequestDelegate,UIWebViewDelegate,UIDocumentInteractionControllerDelegate,FBSessionDelegate,FBDialogDelegate,FBLoginDialogDelegate,TumblrUploadrDelegate,OFFlickrAPIRequestDelegate,MFMessageComposeViewControllerDelegate,MFMailComposeViewControllerDelegate,UITextViewDelegate,UITextFieldDelegate,UIGestureRecognizerDelegate,OLBTwitpicEngineDelegate,BitlyURLShortenerDelegate> {
+@interface DraftViewController : UIViewController<FBRequestDelegate,UIWebViewDelegate,UIDocumentInteractionControllerDelegate,FBSessionDelegate,FBDialogDelegate,FBLoginDialogDelegate,TumblrUploadrDelegate,OFFlickrAPIRequestDelegate,MFMessageComposeViewControllerDelegate,MFMailComposeViewControllerDelegate,UITextViewDelegate,UITextFieldDelegate,UIGestureRecognizerDelegate,OLBTwitpicEngineDelegate,BitlyURLShortenerDelegate, UIActionSheetDelegate> {
 
 	IBOutlet UIScrollView *scrollView;
 
@@ -63,20 +63,16 @@
     NSMutableArray  *photoTitles;         // Titles of images
     NSMutableArray  *photoSmallImageData; // Image data (thumbnail)
     NSMutableArray  *photoURLsLargeImage; // URL to larger image
-	//OFFlickrAPIContext *flickrContext;
 	OFFlickrAPIRequest *flickrRequest;
     
     BOOL fromPhotoController;
     int countOfSharingNetworks;
-	/*IBOutlet UIView *progressView;
-    ShareProgressView *facebookPogressView;
-    ShareProgressView *twitterPogressView;
-    ShareProgressView *tumblrPogressView;
-    ShareProgressView *flickrPogressView;*/
     ShareProgressView *instagramPogressView;
     
     OLBTwitpicEngine *twit;
     NSMutableArray *listOfPlaces;
+    
+    NSArray *arrayOfAccounts;
 }
 
 @property(nonatomic,retain) NSMutableArray *listOfPlaces;

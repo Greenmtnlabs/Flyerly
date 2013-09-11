@@ -407,6 +407,58 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
     }
 }
 
+- (void)makeTwitterPost:(ACAccount *)acct follow:(int)follow {
+    
+    NSMutableDictionary *tempDict = [[NSMutableDictionary alloc] init];
+    [tempDict setValue:@"flyerlyapp" forKey:@"screen_name"];
+    [tempDict setValue:@"true" forKey:@"follow"];
+    
+    
+    TWRequest *postRequest;
+    if ( follow == 1 ) {
+        postRequest = [[TWRequest alloc] initWithURL:[NSURL URLWithString:@"https://api.twitter.com/1/friendships/create.json"]
+                                                 parameters:tempDict
+                                              requestMethod:TWRequestMethodPOST];
+    } else {
+        postRequest = [[TWRequest alloc] initWithURL:[NSURL URLWithString:@"https://api.twitter.com/1/friendships/destroy.json"]
+                                                     parameters:tempDict
+                                                  requestMethod:TWRequestMethodPOST];
+    }
+    
+    [postRequest setAccount:acct];
+    
+    [postRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+        NSString *output = [NSString stringWithFormat:@"HTTP response status: %i", [urlResponse statusCode]];
+        NSLog(@"%@", output);
+        
+        [self hideLoadingIndicator];
+        
+        if([[output lowercaseString] rangeOfString:[@"200" lowercaseString]].location == NSNotFound){
+            
+            if ( follow == 1 ) {
+                [followButton setSelected:NO];
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"TWITTER_FOLLOWING"];
+            } else {
+                [followButton setSelected:YES];
+                [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"TWITTER_FOLLOWING"];
+            }
+        } else {
+            
+            if ( follow == 1 ) {
+                [followButton setSelected:YES];
+                [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"TWITTER_FOLLOWING"];
+            } else {
+                [followButton setSelected:NO];
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"TWITTER_FOLLOWING"];
+            }
+        }
+    }];
+    
+    // Release stuff.
+    [arrayOfAccounts release];
+    arrayOfAccounts = nil;
+}
+
 - (IBAction)followOnTwitter:(id)sender {
     [self showLoadingIndicator];
     
@@ -417,40 +469,33 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
     [accountStore requestAccessToAccountsWithType:accountType withCompletionHandler:^(BOOL granted, NSError *error) {
         if(granted) {
             // Get the list of Twitter accounts.
-            NSArray *accountsArray = [accountStore accountsWithAccountType:accountType];
+            arrayOfAccounts = [accountStore accountsWithAccountType:accountType];
             
-            // For the sake of brevity, we'll assume there is only one Twitter account present.
-            // You would ideally ask the user which account they want to tweet from, if there is more than one Twitter account present.
-            if ([accountsArray count] > 0) {
-                // Grab the initial Twitter account to tweet from.
-                ACAccount *twitterAccount = [accountsArray objectAtIndex:0];
-                
-                NSMutableDictionary *tempDict = [[NSMutableDictionary alloc] init];
-                [tempDict setValue:@"flyerlyapp" forKey:@"screen_name"];
-                [tempDict setValue:@"true" forKey:@"follow"];
-                
-                TWRequest *postRequest = [[TWRequest alloc] initWithURL:[NSURL URLWithString:@"https://api.twitter.com/1/friendships/create.json"]
-                                                             parameters:tempDict
-                                                          requestMethod:TWRequestMethodPOST];
-                
-                
-                [postRequest setAccount:twitterAccount];
-                
-                [postRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
-                    NSString *output = [NSString stringWithFormat:@"HTTP response status: %i", [urlResponse statusCode]];
-                    NSLog(@"%@", output);
+            // If there are more than 1 account, ask user which they want to use.
+            if ( [arrayOfAccounts count] > 1 ) {
+                // Show list of acccounts from which to select
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:@"Choose Account" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles: nil];
+                    actionSheet.tag = 1;
                     
-                    [self hideLoadingIndicator];
-                    
-                    if([[output lowercaseString] rangeOfString:[@"200" lowercaseString]].location == NSNotFound){
-                        [followButton setSelected:NO];
-                        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"TWITTER_FOLLOWING"];
-                    } else {
-                        [followButton setSelected:YES];
-                        [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"TWITTER_FOLLOWING"];
+                    for (int i = 0; i < arrayOfAccounts.count; i++) {
+                        ACAccount *acct = [arrayOfAccounts objectAtIndex:i];
+                        [actionSheet addButtonWithTitle:acct.username];
                     }
-                }];
+                    
+                    [actionSheet addButtonWithTitle:@"Cancel"];
+                    [actionSheet showInView:self.view];
+                });
+                
+            } else if ( [arrayOfAccounts count] > 0 ) {
+                // Grab the initial Twitter account to tweet from.
+                ACAccount *twitterAccount = [arrayOfAccounts objectAtIndex:0];
+                [self makeTwitterPost:twitterAccount follow:1];
+            } else {
+                [self hideLoadingIndicator];
             }
+        } else {
+            [self hideLoadingIndicator];
         }
     }];
 }
@@ -464,44 +509,59 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
     
     [accountStore requestAccessToAccountsWithType:accountType withCompletionHandler:^(BOOL granted, NSError *error) {
         if(granted) {
-            // Get the list of Twitter accounts.
-            NSArray *accountsArray = [accountStore accountsWithAccountType:accountType];
             
-            // For the sake of brevity, we'll assume there is only one Twitter account present.
-            // You would ideally ask the user which account they want to tweet from, if there is more than one Twitter account present.
-            if ([accountsArray count] > 0) {
-                // Grab the initial Twitter account to tweet from.
-                ACAccount *twitterAccount = [accountsArray objectAtIndex:0];
-                
-                NSMutableDictionary *tempDict = [[NSMutableDictionary alloc] init];
-                [tempDict setValue:@"flyerlyapp" forKey:@"screen_name"];
-                [tempDict setValue:@"true" forKey:@"follow"];
-                
-                TWRequest *postRequest = [[TWRequest alloc] initWithURL:[NSURL URLWithString:@"https://api.twitter.com/1/friendships/destroy.json"]
-                                                             parameters:tempDict
-                                                          requestMethod:TWRequestMethodPOST];
-                
-                
-                [postRequest setAccount:twitterAccount];
-                
-                [postRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
-                    NSString *output = [NSString stringWithFormat:@"HTTP response status: %i", [urlResponse statusCode]];
-                    NSLog(@"%@", output);
+            // Get the list of Twitter accounts.
+            arrayOfAccounts = [accountStore accountsWithAccountType:accountType];
+            
+            // If there are more than 1 account, ask user which they want to use.
+            if ( [arrayOfAccounts count] > 1 ) {
+                // Show list of acccounts from which to select
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:@"Choose Account" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles: nil];
+                    actionSheet.tag = 0;
                     
-                    if([[output lowercaseString] rangeOfString:[@"200" lowercaseString]].location == NSNotFound){
-                        [followButton setSelected:YES];
-                        [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"TWITTER_FOLLOWING"];
-                    } else {
-                        [followButton setSelected:NO];
-                        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"TWITTER_FOLLOWING"];
+                    for (int i = 0; i < arrayOfAccounts.count; i++) {
+                        ACAccount *acct = [arrayOfAccounts objectAtIndex:i];
+                        [actionSheet addButtonWithTitle:acct.username];
                     }
-                }];
+                    
+                    [actionSheet addButtonWithTitle:@"Cancel"];
+                    [actionSheet showInView:self.view];
+                });
                 
+            } else if ( [arrayOfAccounts count] > 0 ) {
+                // Grab the initial Twitter account to tweet from.
+                ACAccount *twitterAccount = [arrayOfAccounts objectAtIndex:0];
+                [self makeTwitterPost:twitterAccount follow:0];
+            } else {
                 [self hideLoadingIndicator];
             }
+        } else {
+            [self hideLoadingIndicator];
         }
     }];
 }
+
+/**
+ * clickedButtonAtIndex (UIActionSheet)
+ *
+ * Handle the button clicks from mode of getting out selection.
+ */
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    //if not cancel button presses
+    if(buttonIndex != arrayOfAccounts.count) {
+        
+        //save to NSUserDefault
+        ACAccount *account = [arrayOfAccounts objectAtIndex:buttonIndex];
+        
+        //Convert twitter username to email
+        [self makeTwitterPost:account follow:actionSheet.tag];
+    }
+    
+    [actionSheet release];
+}
+
 
 - (void)facebookLikeViewDidRender:(FacebookLikeView *)aFacebookLikeView {
     
