@@ -5041,6 +5041,14 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     [prefs synchronize];
 }
 
+- (void)removeAllViewsFromScrollview:(UIScrollView *)scrollView {
+    NSArray *subviews = scrollView.subviews;
+    
+    for ( UIView *v in subviews ) {
+        [v removeFromSuperview];
+    }
+}
+
 -(void) successfulPurchase:(EBPurchase*)ebp restored:(bool)isRestore identifier:(NSString*)productId receipt:(NSData*)transactionReceipt
 {
    
@@ -5063,29 +5071,13 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
             [self updatePurchaseRecord:ebp.customIndex identifier:productId productPrefix:PREFIX_FONT_PRODUCT];
 
             // START Update view with no lock
-            [sizeScrollView removeFromSuperview];
-            sizeScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(-320, 385,320,44)];
-            if(IS_IPHONE_5){
-                sizeScrollView.frame = CGRectMake(10, 354, 320, 130);
-            }else{
-                sizeScrollView.frame = CGRectMake(0, 360, 320, 44);
-            }
-            
+            // Remove all subview from the scrollview first.
+            [self removeAllViewsFromScrollview:sizeScrollView];
             [self addSizeInSubView];
-            [self.view addSubview:sizeScrollView];
             [self layoutScrollImages:sizeScrollView scrollWidth:sizeScrollWidth scrollHeight:sizeScrollHeight];
-            [sizeScrollView setAlpha:ALPHA0];
-
-            [fontScrollView removeFromSuperview];
-            fontScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(-320, 385,320,44)];
-            if(IS_IPHONE_5){
-                fontScrollView.frame = CGRectMake(10, 354, 320, 130);
-            }else{
-                fontScrollView.frame = CGRectMake(0, 360, 320, 44);
-            }
             
+            [self removeAllViewsFromScrollview:fontScrollView];
             [self addFontsInSubView];
-            [self.view addSubview:fontScrollView];
             [self layoutScrollImages:fontScrollView scrollWidth:fontScrollWidth scrollHeight:fontScrollHeight];
 
             // END Update view with no lock
@@ -5095,16 +5087,8 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
             [self updatePurchaseRecord:ebp.customIndex identifier:productId productPrefix:PREFIX_FONT_COLOR_PRODUCT];
             
             // START Update view with no lock
-            [colorScrollView removeFromSuperview];
-            colorScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(-320, 385,320,44)];
-            if(IS_IPHONE_5){
-                colorScrollView.frame = CGRectMake(10, 354, 320, 130);
-            }else{
-                colorScrollView.frame = CGRectMake(0, 360, 320, 44);
-            }
-            
+            [self removeAllViewsFromScrollview:colorScrollView];
             [self addColorsInSubView];
-            [self.view addSubview:colorScrollView];
             [self layoutScrollImages:colorScrollView scrollWidth:colorScrollWidth scrollHeight:colorScrollHeight];
             // END Update view with no lock            
         
@@ -5113,16 +5097,8 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
             [self updatePurchaseRecord:ebp.customIndex identifier:productId productPrefix:PREFIX_TEXT_BORDER_PRODUCT];
             
             // START Update view with no lock
-            [fontBorderScrollView removeFromSuperview];
-            fontBorderScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(-320, 385,320,44)];
-            if(IS_IPHONE_5){
-                fontBorderScrollView.frame = CGRectMake(10, 354, 320, 130);
-            }else{
-                fontBorderScrollView.frame = CGRectMake(0, 360, 320, 44);
-            }
-            
+            [self removeAllViewsFromScrollview:fontBorderScrollView];
             [self addTextBorderInSubView];
-            [self.view addSubview:fontBorderScrollView];
             [self layoutScrollImages:fontBorderScrollView scrollWidth:fontBorderScrollWidth scrollHeight:fontBorderScrollHeight];
             // END Update view with no lock
             
@@ -5131,16 +5107,8 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
             [self updatePurchaseRecord:ebp.customIndex identifier:productId productPrefix:PREFIX_FLYER_BORDER_PRODUCT];
             
             // START Update view with no lock
-            [borderScrollView removeFromSuperview];
-            borderScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(-320, 385,320,44)];
-            if(IS_IPHONE_5){
-                borderScrollView.frame = CGRectMake(10, 354, 320, 130);
-            }else{
-                borderScrollView.frame = CGRectMake(0, 360, 320, 44);
-            }
-            
+            [self removeAllViewsFromScrollview:borderScrollView];
             [self addFlyerBorderInSubView];
-            [self.view addSubview:borderScrollView];
             [self layoutScrollImages:borderScrollView scrollWidth:borderScrollWidth scrollHeight:borderScrollHeight];
             // END Update view with no lock
             
@@ -5149,18 +5117,53 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
             [self updatePurchaseRecord:ebp.customIndex identifier:productId productPrefix:PREFIX_BACKGROUND_PRODUCT];
             
             // START Update view with no lock
-            [templateScrollView removeFromSuperview];
-            templateScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(-320, 413,320,130)];
-            if(IS_IPHONE_5){
-                templateScrollView.frame= CGRectMake(0, 413,320 ,130);
-            }else{
-                templateScrollView.frame= CGRectMake(0, 395,320 ,60);
-            }
-            
+            [self removeAllViewsFromScrollview:templateScrollView];
             [self addTemplatesInSubView];
-            [self.view addSubview:templateScrollView];
             [self layoutScrollImages:templateScrollView scrollWidth:templateScrollWidth scrollHeight:templateScrollHeight];
-            // END Update view with no lock            
+            // END Update view with no lock
+            
+        } else if ( [productId isEqualToString:PRODUCT_ALL_BUNDLE] ) {
+            
+            // This is as if we have bought all the products.
+            [self updatePurchaseRecord:ebp.customIndex identifier:PRODUCT_FULL_FONT
+                         productPrefix:PREFIX_FONT_PRODUCT];
+            [self updatePurchaseRecord:ebp.customIndex identifier:PRODUCT_FULL_FONT_COLOR
+                         productPrefix:PREFIX_FONT_COLOR_PRODUCT];
+            [self updatePurchaseRecord:ebp.customIndex identifier:PRODUCT_FULL_FONT_BORDER_COLOR
+                         productPrefix:PREFIX_TEXT_BORDER_PRODUCT];
+            [self updatePurchaseRecord:ebp.customIndex identifier:PRODUCT_FULL_FLYER_BORDER_COLOR
+                         productPrefix:PREFIX_FLYER_BORDER_PRODUCT];
+            [self updatePurchaseRecord:ebp.customIndex identifier:PRODUCT_FULL_TEMPLATE
+                         productPrefix:PREFIX_BACKGROUND_PRODUCT];
+            
+            // START Update view with no lock
+            // Remove all subview from the scrollview first.
+            [self removeAllViewsFromScrollview:sizeScrollView];
+            [self addSizeInSubView];
+            [self layoutScrollImages:sizeScrollView scrollWidth:sizeScrollWidth scrollHeight:sizeScrollHeight];
+            
+            [self removeAllViewsFromScrollview:fontScrollView];
+            [self addFontsInSubView];
+            [self layoutScrollImages:fontScrollView scrollWidth:fontScrollWidth scrollHeight:fontScrollHeight];
+            
+            [self removeAllViewsFromScrollview:colorScrollView];
+            [self addColorsInSubView];
+            [self layoutScrollImages:colorScrollView scrollWidth:colorScrollWidth scrollHeight:colorScrollHeight];
+            
+            [self removeAllViewsFromScrollview:fontBorderScrollView];
+            [self addTextBorderInSubView];
+            [self layoutScrollImages:fontBorderScrollView scrollWidth:fontBorderScrollWidth scrollHeight:fontBorderScrollHeight];
+
+            [self removeAllViewsFromScrollview:borderScrollView];
+            [self addFlyerBorderInSubView];
+            [self layoutScrollImages:borderScrollView scrollWidth:borderScrollWidth scrollHeight:borderScrollHeight];
+            
+            [self removeAllViewsFromScrollview:templateScrollView];
+            [self addTemplatesInSubView];
+            [self layoutScrollImages:templateScrollView scrollWidth:templateScrollWidth scrollHeight:templateScrollHeight];
+            
+            // END Update view with no lock
+            
         }
     }
 }
