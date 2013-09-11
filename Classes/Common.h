@@ -283,6 +283,8 @@ return cell;\
 #define PRODUCT_TEMPLATE @"com.flyerly.FlyerBackground"
 #define PRODUCT_FULL_TEMPLATE @"com.flyerly.AllFlyerBackground"
 
+#define PRODUCT_ALL_BUNDLE @"com.flyerly.AllDesignBundle"
+
 #define PREFIX_FONT_PRODUCT @"com.flyerly.font"
 #define PREFIX_FONT_COLOR_PRODUCT @"com.flyerly.color"
 #define PREFIX_TEXT_BORDER_PRODUCT @"com.flyerly.textborder"

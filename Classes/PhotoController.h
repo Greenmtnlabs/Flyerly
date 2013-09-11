@@ -12,18 +12,18 @@
 #import "CustomLabel.h"
 #import "CustomPhotoController.h"
 #import "EBPurchase.h"
-#import "LoadingView.h"
 #import "ShareProgressView.h"
 #import "Singleton.h"
+#import "ParentViewController.h"
+
 @class Singleton;
-@interface PhotoController : UIViewController<UIActionSheetDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, EBPurchaseDelegate>
+@interface PhotoController : ParentViewController<UIActionSheetDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, EBPurchaseDelegate>
 {
     int layerallow;
     Singleton *globle;
 	MyNavigationBar *navBar;
 	HudView *aHUD;
     CustomPhotoController *customPhotoController;
-	LoadingView *loadingView;
 	UIImageView *imgView;
 	UIImageView *templateBckgrnd;
 	UIImageView *textBackgrnd;
@@ -154,7 +154,6 @@
 
 @property (nonatomic, retain) MyNavigationBar *navBar;
 @property (nonatomic,retain) HudView *aHUD;
-@property (nonatomic, retain) LoadingView *loadingView;
 
 @property(nonatomic, retain)  UIImageView *imgView;
 @property (nonatomic,retain)  UIImageView *photoImgView;

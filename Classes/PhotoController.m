@@ -24,6 +24,7 @@
 #import <Parse/PFQuery.h>
 #import "LoadingView.h"
 #import "Flurry.h"
+#import "SKProduct+LocalPrice.h"
 
 @implementation PhotoController
 @synthesize imgView,imgPicker,imageNameNew,msgTextView,finalFlyer;
@@ -36,7 +37,7 @@
 @synthesize photoTouchFlag,symbolTouchFlag,iconTouchFlag, lableTouchFlag,lableLocation,warningAlert,discardAlert,deleteAlert,editAlert, inAppAlert;
 @synthesize moreLayersLabel, moreLayersButton, takePhotoButton, cameraRollButton, takePhotoLabel, cameraRollLabel, imgPickerFlag,finalImgWritePath, addMoreLayerOrSaveFlyerLabel, takeOrAddPhotoLabel,layerScrollView;
 @synthesize cpyTextLabelLayersArray,cpyIconLayersArray,cpyPhotoLayersArray,cpySymbolLayersArray;
-@synthesize flyerNumber,loadingView;
+@synthesize flyerNumber;
 
 int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track selected Tab on Add More Layer screen
 int symbolLayerCount = 0; // Symbol layer count to set tag value
@@ -1718,15 +1719,11 @@ int arrangeLayerIndex;
 }
 
 -(void)showLoadingView:(NSString *)message{
-    loadingView =[LoadingView loadingViewInView:self.view  text:message];
+    [self showLoadingIndicator];
 }
 
 -(void)removeLoadingView{
-    for (UIView *subview in self.view.subviews) {
-        if([subview isKindOfClass:[LoadingView class]]){
-            [subview removeFromSuperview];
-        }
-    }
+    [self hideLoadingIndicator];
 }
 
 #pragma mark  imagePicker
@@ -4783,7 +4780,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
                                           otherButtonTitles:nil ,nil];
     alert.tag = tag;
     for( SKProduct *product in productList)  {
-        [inAppAlert addButtonWithTitle: [NSString stringWithFormat:@"%@ - $%@", product.localizedTitle, [product.price stringValue]]];
+        [inAppAlert addButtonWithTitle: [NSString stringWithFormat:@"%@ - %@", product.localizedTitle, product.priceAsString]];
     }
     [inAppAlert addButtonWithTitle:@"Cancel"];
     inAppAlert.cancelButtonIndex = [productList count];
@@ -4884,7 +4881,8 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     demoPurchase.customIndex = button.tag;
     isPurchased = NO;
     
-    [demoPurchase requestProduct:[NSArray arrayWithObjects:PRODUCT_TEMPLATE, PRODUCT_FULL_TEMPLATE,nil]];
+    [demoPurchase requestProduct:[NSArray arrayWithObjects:PRODUCT_TEMPLATE, PRODUCT_FULL_TEMPLATE,
+                                  PRODUCT_ALL_BUNDLE, nil]];
 }
 
 -(void)requestFont:(UIButton *)button{
@@ -4899,7 +4897,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     demoPurchase.customIndex = button.tag;
     isPurchased = NO;
 
-    [demoPurchase requestProduct:[NSArray arrayWithObjects:PRODUCT_FONT, PRODUCT_FULL_FONT,nil]];
+    [demoPurchase requestProduct:[NSArray arrayWithObjects:PRODUCT_FONT, PRODUCT_FULL_FONT, PRODUCT_ALL_BUNDLE, nil]];
 }
 
 -(void)requestColor:(UIButton *)button{
@@ -4914,7 +4912,8 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     demoPurchase.customIndex = button.tag;
     isPurchased = NO;
 
-    [demoPurchase requestProduct:[NSArray arrayWithObjects:PRODUCT_FONT_COLOR, PRODUCT_FULL_FONT_COLOR,nil]];
+    [demoPurchase requestProduct:[NSArray arrayWithObjects:PRODUCT_FONT_COLOR, PRODUCT_FULL_FONT_COLOR,
+                                  PRODUCT_ALL_BUNDLE, nil]];
 }
 
 -(void)requestFontBorder:(UIButton *)button{
@@ -4929,7 +4928,8 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     demoPurchase.customIndex = button.tag;
     isPurchased = NO;
 
-    [demoPurchase requestProduct:[NSArray arrayWithObjects:PRODUCT_FONT_BORDER_COLOR, PRODUCT_FULL_FONT_BORDER_COLOR,nil]];
+    [demoPurchase requestProduct:[NSArray arrayWithObjects:PRODUCT_FONT_BORDER_COLOR, PRODUCT_FULL_FONT_BORDER_COLOR,
+                                  PRODUCT_ALL_BUNDLE, nil]];
 }
 
 -(void)requestFlyerBorder:(UIButton *)button{
@@ -4944,7 +4944,8 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     demoPurchase.customIndex = button.tag;
     isPurchased = NO;
 
-    [demoPurchase requestProduct:[NSArray arrayWithObjects:PRODUCT_FLYER_BORDER_COLOR, PRODUCT_FULL_FLYER_BORDER_COLOR,nil]];
+    [demoPurchase requestProduct:[NSArray arrayWithObjects:PRODUCT_FLYER_BORDER_COLOR,
+                                  PRODUCT_FULL_FLYER_BORDER_COLOR, PRODUCT_ALL_BUNDLE, nil]];
 }
 
 -(IBAction)restorePurchase
