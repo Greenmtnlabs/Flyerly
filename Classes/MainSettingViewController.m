@@ -187,6 +187,9 @@
     [[NSUserDefaults standardUserDefaults]  setObject:nil forKey:@"User"];
     [[NSUserDefaults standardUserDefaults]  setObject:nil forKey:@"Password"];
 
+    // Forget in app purchases.
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:IN_APP_DICTIONARY_KEY];
+    
     // Log out from parse.
     [PFUser logOut];
 }
