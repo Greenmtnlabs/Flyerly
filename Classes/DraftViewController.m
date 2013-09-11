@@ -1328,7 +1328,7 @@ static ShareProgressView *clipBdPogressView;
         // Did user allow us access?
         if (granted == YES) {
             // Get the list of Twitter accounts.
-            arrayOfAccounts = [account accountsWithAccountType:accountType];
+            arrayOfAccounts = [[account accountsWithAccountType:accountType] retain];
             
             // If there are more than 1 account, ask user which they want to use.
             if ( [arrayOfAccounts count] > 1 ) {

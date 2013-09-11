@@ -533,7 +533,7 @@ int totalCount = 0;
                         //grantedBool = YES;
                         
                         // Populate array with all available Twitter accounts
-                        arrayOfAccounts = [account accountsWithAccountType:accountType];
+                        arrayOfAccounts = [[account accountsWithAccountType:accountType] retain];
                         self.twitterArray = [[NSMutableArray alloc] init];
                         
                         // Sanity check
