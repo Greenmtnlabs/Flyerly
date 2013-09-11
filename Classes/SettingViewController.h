@@ -30,7 +30,6 @@
     IBOutlet UIButton *helpTab;
 
     OFFlickrAPIRequest *flickrRequest;
-	LoadingView *loadingView;
     LauchViewController *launchController;
     InputViewController *input;
 

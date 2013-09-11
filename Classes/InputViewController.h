@@ -11,8 +11,12 @@
 #import "Singleton.h"
 #import "AccountController.h"
 @class Singleton;
-@interface InputViewController : UIViewController{
+@interface InputViewController : UIViewController <UIActionSheetDelegate>{
     Singleton *globle ;
+    
+    NSString *sName;
+    NSString *sMessage;
+    NSArray *arrayOfAccounts;
 
 }
 @property(nonatomic, strong) IBOutlet UITextView *txtfield;

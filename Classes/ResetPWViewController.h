@@ -16,13 +16,12 @@
 #import "AccountSelecter.h"
 #import <Parse/PFLogInViewController.h>
 #import <Parse/PFQuery.h>
+#import "ParentViewController.h"
 
-@interface ResetPWViewController : UIViewController{
-    LoadingView *loadingView;
+@interface ResetPWViewController : ParentViewController {
     NSString *dbUsername;
 }
 
-@property (nonatomic, retain) LoadingView *loadingView;
 @property(nonatomic, retain) IBOutlet UITextField *username;
 -(void)goBack;
 

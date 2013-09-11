@@ -11,7 +11,7 @@
 
 @implementation ResetPWViewController
 
-@synthesize username,loadingView;
+@synthesize username;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -56,7 +56,7 @@
 
 
 -(IBAction)SearchBotton:(id)sender{
-    [self showLoadingView:@"Wait..."];
+    [self showLoadingView];
     NSLog(@"Forget Password");
     
     NSString *string = username.text;
@@ -115,16 +115,12 @@
     [alert show];
     [alert release];
 }
--(void)showLoadingView:(NSString *)message{
-    loadingView =[LoadingView loadingViewInView:self.view  text:message];
+-(void)showLoadingView {
+    [self showLoadingIndicator];
 }
 
 -(void)removeLoadingView{
-    for (UIView *subview in self.view.subviews) {
-        if([subview isKindOfClass:[LoadingView class]]){
-            [subview removeFromSuperview];
-        }
-    }
+    [self hideLoadingIndicator];
 }
 
 -(void)goBack{
