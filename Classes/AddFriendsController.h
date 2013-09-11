@@ -25,7 +25,7 @@
 
 @class LoadingView;
 
-@interface AddFriendsController : UIViewController<UITableViewDelegate,UITableViewDataSource,FBRequestDelegate,FBSessionDelegate,MFMessageComposeViewControllerDelegate,FBDialogDelegate,FBLoginDialogDelegate,UITextFieldDelegate>{
+@interface AddFriendsController : UIViewController<UITableViewDelegate,UITableViewDataSource,FBRequestDelegate,FBSessionDelegate,MFMessageComposeViewControllerDelegate,FBDialogDelegate,FBLoginDialogDelegate,UITextFieldDelegate, UIActionSheetDelegate>{
     LauchViewController *launchCotroller;
     IBOutlet UILabel *contactsLabel;
     IBOutlet UILabel *facebookLabel;
@@ -52,6 +52,10 @@
     NSMutableArray *deviceContactItems;
     int selectedTab;
 	BOOL loadingViewFlag;
+    
+    NSArray *arrayOfAccounts;
+    NSString *sName;
+    NSString *sMessage;
 }
 
 @property(nonatomic,retain) IBOutlet UILabel *contactsLabel;

@@ -533,14 +533,27 @@ int totalCount = 0;
                         //grantedBool = YES;
                         
                         // Populate array with all available Twitter accounts
-                        NSArray *arrayOfAccounts = [account accountsWithAccountType:accountType];
+                        arrayOfAccounts = [account accountsWithAccountType:accountType];
+                        self.twitterArray = [[NSMutableArray alloc] init];
                         
                         // Sanity check
-                        if ([arrayOfAccounts count] > 0) {
-                            
-                            self.twitterArray = [[NSMutableArray alloc] init];
-                            
-                            [self cursoredTwitterContacts:[NSString stringWithFormat:@"%d", -1] arrayOfAccounts:arrayOfAccounts];
+                        if ([arrayOfAccounts count] > 1) {
+                            // Show list of acccounts from which to select
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:@"Choose Account" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles: nil];
+                                actionSheet.tag = 2;
+                                
+                                for (int i = 0; i < arrayOfAccounts.count; i++) {
+                                    ACAccount *acct = [arrayOfAccounts objectAtIndex:i];
+                                    [actionSheet addButtonWithTitle:acct.username];
+                                }
+                                
+                                [actionSheet addButtonWithTitle:@"Cancel"];
+                                [actionSheet showInView:self.view];
+                            });
+                        } else if ([arrayOfAccounts count] > 0 ) {
+                            [self cursoredTwitterContacts:[NSString stringWithFormat:@"%d", -1]
+                                                  account:[arrayOfAccounts objectAtIndex:0 ]];
                         }
                     }
                 }];
@@ -566,11 +579,8 @@ int totalCount = 0;
     }
 }
 
--(void)cursoredTwitterContacts:(NSString *)cursor arrayOfAccounts:(NSArray *)arrayOfAccounts{
+-(void)cursoredTwitterContacts:(NSString *)cursor account:(ACAccount *)acct{
 
-    // Keep it simple, use the first account available
-    ACAccount *acct = [arrayOfAccounts objectAtIndex:0];
-    
     // Build a twitter request
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     [params setObject:cursor forKey:@"cursor"];
@@ -634,12 +644,45 @@ int totalCount = 0;
         }else{
 
             //[[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
-            [self cursoredTwitterContacts:[NSString stringWithFormat:@"%@", nextCursor] arrayOfAccounts:arrayOfAccounts];
+            [self cursoredTwitterContacts:[NSString stringWithFormat:@"%@", nextCursor] account:acct];
         }
 
         NSLog(@"Twitter response, HTTP response: %i", [urlResponse statusCode]);
     }];
+    
+    [arrayOfAccounts release];
+    arrayOfAccounts = nil;
 }
+
+- (void)makeTwitterPost:(ACAccount *)acct {
+    
+    NSMutableDictionary *params = [[[NSMutableDictionary alloc] init] autorelease];
+    [params setObject:[NSString stringWithFormat:@"@%@ %@", sName, sMessage] forKey:@"status"];
+    
+    // Build a twitter request
+    TWRequest *postRequest = [[[TWRequest alloc] initWithURL:[NSURL URLWithString:@"http://api.twitter.com/1/statuses/update.json"] parameters:params requestMethod:TWRequestMethodPOST] autorelease];
+    
+    // Post the request
+    [postRequest setAccount:acct];
+    
+    // Block handler to manage the response
+    [postRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+        NSLog(@"Twitter response, HTTP response: %i", [urlResponse statusCode]);
+        
+        twitterBackupArray = nil;
+        twitterBackupArray = twitterArray;
+        [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+    }];
+    
+    // Release stuff.
+    [sName release];
+    [sMessage release];
+    [arrayOfAccounts release];
+    sName = nil;
+    sMessage = nil;
+    arrayOfAccounts = nil;
+}
+
 /**
  *
  */
@@ -648,45 +691,61 @@ int totalCount = 0;
     ACAccountStore *account = [[ACAccountStore alloc] init];
     ACAccountType *accountType = [account accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
     
+    sName = [screenName retain];
+    sMessage = [message retain];
+    
     // Request access from the user to access their Twitter account
     [account requestAccessToAccountsWithType:accountType withCompletionHandler:^(BOOL granted, NSError *error) {
         // Did user allow us access?
         if (granted == YES) {
             
             // Populate array with all available Twitter accounts
-            NSArray *arrayOfAccounts = [account accountsWithAccountType:accountType];
+            arrayOfAccounts = [[account accountsWithAccountType:accountType] retain];
             
             // Sanity check
-            if ([arrayOfAccounts count] > 0) {
+            if ([arrayOfAccounts count] > 1 ) {
                 
-                // Keep it simple, use the first account available
-                ACAccount *acct = [arrayOfAccounts objectAtIndex:0];
-                
-                NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
-                [params setObject:[NSString stringWithFormat:@"@%@ %@", screenName, message] forKey:@"status"];
-
-                 // Build a twitter request
-                 TWRequest *postRequest = [[TWRequest alloc] initWithURL:[NSURL URLWithString:@"http://api.twitter.com/1/statuses/update.json"] parameters:params requestMethod:TWRequestMethodPOST];
-                
-                 // Build a twitter request
-                 //TWRequest *postRequest = [[TWRequest alloc] initWithURL: [NSURL URLWithString:@"http://api.twitter.com/1/direct_messages/new.json"] parameters:params requestMethod:TWRequestMethodPOST];
-                //[params setObject:screenName forKey:@"screen_name"];
-
-                // Post the request
-                [postRequest setAccount:acct];                                         
-                                         
-                // Block handler to manage the response
-                [postRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {                    
-                    NSLog(@"Twitter response, HTTP response: %i", [urlResponse statusCode]);
+                // Show list of acccounts from which to select
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:@"Choose Account" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles: nil];
+                    actionSheet.tag = 1;
                     
-                    twitterBackupArray = nil;
-                    twitterBackupArray = twitterArray;
-                    [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
-                    //[self.uiTableView reloadData];
-                }];
+                    for (int i = 0; i < arrayOfAccounts.count; i++) {
+                        ACAccount *acct = [arrayOfAccounts objectAtIndex:i];
+                        [actionSheet addButtonWithTitle:acct.username];
+                    }
+                    
+                    [actionSheet addButtonWithTitle:@"Cancel"];
+                    [actionSheet showInView:self.view];
+                });
+            } else if ( arrayOfAccounts.count > 0 ) {
+                ACAccount *acct = [arrayOfAccounts objectAtIndex:0];
+                [self makeTwitterPost:acct];
             }
         }
     }];
+}
+
+/**
+ * clickedButtonAtIndex (UIActionSheet)
+ *
+ * Handle the button clicks from mode of getting out selection.
+ */
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    //if not cancel button presses
+    if(buttonIndex != arrayOfAccounts.count) {
+        
+        //save to NSUserDefault
+        ACAccount *account = [arrayOfAccounts objectAtIndex:buttonIndex];
+        
+        //Convert twitter username to email
+        if ( actionSheet.tag == 1 ) {
+            [self makeTwitterPost:account];
+        } else {
+            [self cursoredTwitterContacts:[NSString stringWithFormat:@"%d", -1] account:account];
+        }
+    }
 }
 
 /**
