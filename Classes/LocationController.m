@@ -47,7 +47,6 @@ enum {
 @synthesize searchButton;
 @synthesize searchField;
 @synthesize darkView;
-@synthesize loadingView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -120,8 +119,7 @@ enum {
     [searchField addTarget:self action:@selector(textFieldTapped:) forControlEvents:UIControlEventEditingDidBegin];
     searchField.clearButtonMode = UITextFieldViewModeWhileEditing;
     
-    loadingView =[LoadingView loadingViewInView:self.view  text:@"Search nearby..."];
-
+    [self showLoadingIndicator];
 }
 
 - (void)cancelRequest {
@@ -151,6 +149,8 @@ enum {
 }
 
 - (void)searchVenues {
+    [self showLoadingIndicator];
+    
     [self prepareForRequest];
 
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
@@ -162,8 +162,7 @@ enum {
 }
 
 - (void)searchNearBy {
-    
-    loadingView =[LoadingView loadingViewInView:self.view  text:@"Search nearby..."];
+    [self showLoadingIndicator];
 
     [self prepareForRequest];
     [self updateView];
@@ -436,11 +435,7 @@ NSMutableDictionary *locationDetails;
 - (void)requestDidFinishLoading:(BZFoursquareRequest *)request {
     
     // Remove loading view
-    for (UIView *subview in self.view.subviews) {
-        if([subview isKindOfClass:[LoadingView class]]){
-            [subview removeFromSuperview];
-        }
-    }
+    [self hideLoadingIndicator];
 
     self.meta = request.meta;
     self.notifications = request.notifications;
@@ -458,11 +453,7 @@ NSMutableDictionary *locationDetails;
 - (void)request:(BZFoursquareRequest *)request didFailWithError:(NSError *)error {
     
     // Remove loading view
-    for (UIView *subview in self.view.subviews) {
-        if([subview isKindOfClass:[LoadingView class]]){
-            [subview removeFromSuperview];
-        }
-    }
+    [self hideLoadingIndicator];
 
     NSLog(@"%s: %@", __PRETTY_FUNCTION__, error);
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[[error userInfo] objectForKey:@"errorDetail"] delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles:nil];

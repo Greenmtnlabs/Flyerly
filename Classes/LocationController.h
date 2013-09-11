@@ -9,10 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "BZFoursquare.h"
 #import <CoreLocation/CoreLocation.h>
-#import "LoadingView.h"
 #import "FlyrAppDelegate.h"
+#import "ParentViewController.h"
 
-@interface LocationController : UIViewController<BZFoursquareRequestDelegate, BZFoursquareSessionDelegate, CLLocationManagerDelegate, UITextFieldDelegate>{
+@interface LocationController : ParentViewController <BZFoursquareRequestDelegate, BZFoursquareSessionDelegate, CLLocationManagerDelegate, UITextFieldDelegate>{
 
     IBOutlet UITableView *uiTableView;
     IBOutlet UITextField *searchField;
@@ -29,7 +29,6 @@
     NSString *longitude;
     
     BOOL searchMode;
-	LoadingView *loadingView;
 }
 
 @property(nonatomic,retain) IBOutlet UITableView *uiTableView;
@@ -40,7 +39,6 @@
 @property (nonatomic, retain) CLLocationManager *locationManager;
 @property (nonatomic, retain) NSString *latitude;
 @property (nonatomic, retain) NSString *longitude;
-@property (nonatomic, retain) LoadingView *loadingView;
 
 - (IBAction)onSearchClick:(UIButton *)sender;
 +(NSMutableDictionary *)getLocationDetails;
