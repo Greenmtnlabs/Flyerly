@@ -155,8 +155,10 @@
         //[warningAlert show];
         [warningAlert autorelease];
     }
+    [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
     
 }
+
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
 	if(alertView == warningAlert && buttonIndex == 0) {
@@ -179,8 +181,11 @@
     appDelegate.facebook.sessionDelegate = nil;
     appDelegate.facebook.accessToken = nil;
     appDelegate.facebook.expirationDate = nil;
+    appDelegate.flickrContext.OAuthToken = nil;
+    appDelegate.flickrRequest = nil;
+     appDelegate.flickrUserName = nil;
+    appDelegate._tSession = nil;
 
-    
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"FBAccessTokenKey"];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"FBExpirationDateKey"];
     //For FlyerLee

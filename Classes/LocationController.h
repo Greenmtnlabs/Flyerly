@@ -27,7 +27,7 @@
     CLLocationManager *locationManager;
     NSString *latitude;
     NSString *longitude;
-    
+    NSString *locname;
     BOOL searchMode;
 }
 

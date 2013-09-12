@@ -101,7 +101,6 @@ enum {
     
     // title background
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
-    
     // Setup cancel button
     UIButton *cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 65, 30)];
     [cancelButton addTarget:self action:@selector(onBack) forControlEvents:UIControlEventTouchUpInside];
@@ -287,7 +286,8 @@ enum {
             
             NSLog(@"Create Location");
             if([searchField text]){
-                [[LocationController getLocationDetails] setObject:[searchField text] forKey:@"name"];
+                locname = [NSString stringWithFormat:@"at %@",[searchField text] ];
+                [[LocationController getLocationDetails] setObject:locname forKey:@"name"];
                 [self onBack];
             }else{
             }
@@ -316,7 +316,10 @@ enum {
         NSMutableArray *socialArray = [[NSMutableArray alloc] initWithContentsOfFile:finalImgWritePath];
         
         if([venue objectForKey:@"name"]){
-            [[LocationController getLocationDetails] setObject:[venue objectForKey:@"name"] forKey:@"name"];
+            
+            locname = [NSString stringWithFormat:@"at %@",[venue objectForKey:@"name"] ];
+            NSLog(@"%@",locname);
+            [[LocationController getLocationDetails] setObject:locname forKey:@"name"];
             [socialArray insertObject:[venue objectForKey:@"name"] atIndex:0];
 
         }else{

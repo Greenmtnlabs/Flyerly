@@ -560,6 +560,7 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
     }
     
     [actionSheet release];
+    [self hideLoadingIndicator];
 }
 
 

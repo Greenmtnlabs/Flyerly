@@ -163,6 +163,8 @@
     [self.navigationController presentModalViewController:input animated:YES];
 }
 
+
+
 -(IBAction)onClickTwitterButton{
     
     if([twitterButton isSelected]){
@@ -374,6 +376,8 @@
     [self.navigationController pushViewController:helpController animated:YES];
     
 }
+
+
 /*
 @synthesize password,user,doneButton,scrollView,navBar,twitDialog;
 

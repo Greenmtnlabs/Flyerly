@@ -66,7 +66,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 #pragma mark  View Appear Methods
 -(void)viewWillAppear:(BOOL)animated{
 	
-	[super viewWillAppear:YES];	
+	[super viewWillAppear:YES];
 	self.navigationController.navigationBarHidden = NO;
 	imgPicker = [[UIImagePickerController alloc] init];
 	imgPicker.allowsEditing = NO;
@@ -2862,6 +2862,8 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     [draftViewController release];    
 }
 
+
+
 -(void)saveMyFlyer
 {
 	alert = [[UIActionSheet alloc] 
@@ -3307,6 +3309,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	}
 	else if(selectedButton == arrangeLayerTabButton)
 	{
+        layerallow = 0 ;
         [arrangeLayerTabButton setBackgroundImage:[UIImage imageNamed:@"arrangeicon_button_selected"] forState:UIControlStateNormal];
         [addMoreFontTabButton setBackgroundImage:[UIImage imageNamed:@"text_icon"] forState:UIControlStateNormal];
         [addMorePhotoTabButton setBackgroundImage:[UIImage imageNamed:@"image_icon"] forState:UIControlStateNormal];
@@ -4185,7 +4188,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         layerallow = 1;
         warningAlert = [[UIAlertView alloc]initWithTitle:@"You can add a total of 10 layers." message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil ,nil];
 		[warningAlert show];
-      
     }
 }
 

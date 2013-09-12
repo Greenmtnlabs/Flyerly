@@ -66,7 +66,7 @@ static ShareProgressView *clipBdPogressView;
     }else{
         [launchController initWithNibName:@"LauchViewController" bundle:nil];
     }
-    [self.navigationController pushViewController:launchController animated:YES];
+    [self.navigationController pushViewController:launchController animated:NO];
 }
 
 - (void)viewDidLoad {
@@ -157,7 +157,7 @@ static ShareProgressView *clipBdPogressView;
         // Create right bar button
         UIButton *menuButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 31, 30)] autorelease];
         menuButton.showsTouchWhenHighlighted = YES;
-        [menuButton setBackgroundImage:[UIImage imageNamed:@"menu_button"] forState:UIControlStateNormal];
+        [menuButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
         [menuButton addTarget:self action:@selector(callMenu) forControlEvents:UIControlEventTouchUpInside];
         UIBarButtonItem *leftBarButton = [[[UIBarButtonItem alloc] initWithCustomView:menuButton] autorelease];
 
@@ -270,7 +270,7 @@ static ShareProgressView *clipBdPogressView;
     loadingView = nil;
 	loadingView = [[LoadingView alloc]init];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
-    
+    NSLog(@"%@",[[LocationController getLocationDetails] objectForKey:@"name"]);
     if([LocationController getLocationDetails] && [[LocationController getLocationDetails] objectForKey:@"name"]){
         locationLabel.text = [[LocationController getLocationDetails] objectForKey:@"name"];
         
@@ -1242,7 +1242,7 @@ static ShareProgressView *clipBdPogressView;
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     NSData *imageData = UIImageJPEGRepresentation(selectedFlyerImage, 0.9);
     
-    [appDelegate.flickrRequest uploadImageStream:[NSInputStream inputStreamWithData:imageData] suggestedFilename:selectedFlyerTitle MIMEType:@"image/jpeg" arguments:[NSDictionary dictionaryWithObjectsAndKeys:@"0", @"is_public",@"Title", @"title", [NSString stringWithFormat:@"%@ %@ - at %@", selectedFlyerDescription, @"#flyerly", [[LocationController getLocationDetails] objectForKey:@"name"]], @"description", nil]];
+    [appDelegate.flickrRequest uploadImageStream:[NSInputStream inputStreamWithData:imageData] suggestedFilename:selectedFlyerTitle MIMEType:@"image/jpeg" arguments:[NSDictionary dictionaryWithObjectsAndKeys:@"0", @"is_public",@"Title", @"title", [NSString stringWithFormat:@"%@ %@ - %@", selectedFlyerDescription, @"#flyerly", [[LocationController getLocationDetails] objectForKey:@"name"]], @"description", nil]];
 }
 
 - (UIDocumentInteractionController *) setupControllerWithURL: (NSURL*) fileURL usingDelegate: (id <UIDocumentInteractionControllerDelegate>) interactionDelegate {
@@ -1263,7 +1263,7 @@ static ShareProgressView *clipBdPogressView;
     
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                   [NSString stringWithFormat:@"%@ %@ - at %@", selectedFlyerDescription, @"#flyerly", [[LocationController getLocationDetails] objectForKey:@"name"]], @"message",  //whatever message goes here
+                                   [NSString stringWithFormat:@"%@ %@ - %@", selectedFlyerDescription, @"#flyerly", [[LocationController getLocationDetails] objectForKey:@"name"]], @"message",  //whatever message goes here
                                    selectedFlyerImage, @"picture",   //img is your UIImage
                                    //placeId, @"place",
                                    nil];
@@ -1280,7 +1280,7 @@ static ShareProgressView *clipBdPogressView;
     
     
     //add text
-    [postRequest addMultiPartData:[[NSString stringWithFormat:@"%@ %@ - at %@", selectedFlyerDescription, @"#flyerly", [[LocationController getLocationDetails] objectForKey:@"name"]] dataUsingEncoding:NSUTF8StringEncoding] withName:@"status" type:@"multipart/form-data"];
+    [postRequest addMultiPartData:[[NSString stringWithFormat:@"%@ %@ - %@", selectedFlyerDescription, @"#flyerly", [[LocationController getLocationDetails] objectForKey:@"name"]] dataUsingEncoding:NSUTF8StringEncoding] withName:@"status" type:@"multipart/form-data"];
     //add image
     [postRequest addMultiPartData:UIImagePNGRepresentation(selectedFlyerImage) withName:@"media" type:@"multipart/form-data"];
     
@@ -1744,7 +1744,7 @@ static ShareProgressView *clipBdPogressView;
 -(void)increaseProgressViewHeightBy:(int)height{
     [progressView setFrame:CGRectMake(progressView.frame.origin.x, progressView.frame.origin.y, progressView.frame.size.width, progressView.frame.size.height + height)];
     [scrollView setFrame:CGRectMake(scrollView.frame.origin.x, scrollView.frame.origin.y + height, scrollView.frame.size.width, scrollView.frame.size.height)];
-    [scrollView setContentSize:CGSizeMake(scrollView.frame.size.width, scrollView.frame.size.height+ 100)];
+    [scrollView setContentSize:CGSizeMake(scrollView.frame.size.width, scrollView.frame.size.height+ 170)];
 }
 
 -(void)setDefaultProgressViewHeight{
@@ -1949,7 +1949,7 @@ static ShareProgressView *clipBdPogressView;
     
     NSArray *array = [NSArray arrayWithObjects:data1, nil];
     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        TumblrUploadr *tu = [[TumblrUploadr alloc] initWithNSDataForPhotos:array andBlogName:[NSString stringWithFormat:@"%@.tumblr.com", blogName] andDelegate:self andCaption:[NSString stringWithFormat:@"%@ %@ - at %@", selectedFlyerDescription, @"#flyerly", [[LocationController getLocationDetails] objectForKey:@"name"]]];
+        TumblrUploadr *tu = [[TumblrUploadr alloc] initWithNSDataForPhotos:array andBlogName:[NSString stringWithFormat:@"%@.tumblr.com", blogName] andDelegate:self andCaption:[NSString stringWithFormat:@"%@ %@ - %@", selectedFlyerDescription, @"#flyerly", [[LocationController getLocationDetails] objectForKey:@"name"]]];
         dispatch_async( dispatch_get_main_queue(), ^{
             
             [tu signAndSendWithTokenKey:oauthToken andSecret:oauthSecretKey];

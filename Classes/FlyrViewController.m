@@ -112,6 +112,36 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
 	}}
 
 
+- (void)textFieldTapped:(id)sender {
+    NSLog(@"%@",searchTextField.text);
+    
+    if (searchTextField.text == nil || [searchTextField.text isEqualToString:@""])
+    {
+        searching = NO;
+        [self.tView reloadData];
+        [searchTextField resignFirstResponder];
+    }else{
+        searching = YES;
+        [self searchTableView:[NSString stringWithFormat:@"%@", ((UITextField *)sender).text]];
+     
+        
+    }
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+
+    if(searching){
+        if([string isEqualToString:@"\n"]){
+            
+            if([searchTextField canResignFirstResponder])
+            {
+                [searchTextField resignFirstResponder];
+            }
+        }
+    }
+    return YES;
+}
+
 - (void) searchClick{
     searching = YES;
 	letUserSelectRow = NO;
@@ -125,11 +155,12 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
     [self searchTableView];
 }
 
-- (void) searchTableView {
+- (void) searchTableView:(NSString *)schTxt {
 	NSString *sTemp;
 	NSString *searchText = searchTextField.text;
-    if (searchTextField.text == nil || [searchTextField.text isEqualToString:@""]) {
-        searching = NO; goto sd;}
+     NSLog(@"%@", searchTextField.text);
+   
+
     [photoArrayBackup removeAllObjects];
     [photoDetailArrayBackup removeAllObjects];
     [iconArrayBackup removeAllObjects];
@@ -139,7 +170,6 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
 	{
 		
  		sTemp = [[searchArray objectAtIndex:i] objectAtIndex:0];
-        NSLog(@"%@", sTemp);
         NSRange titleResultsRange = [sTemp rangeOfString:searchText options:NSCaseInsensitiveSearch];
         if (titleResultsRange.length > 0){
 			[photoArrayBackup addObject:[photoArray objectAtIndex:i ]];
@@ -159,22 +189,12 @@ sd:;
     searching = NO;
 	letUserSelectRow = YES;
     self.navigationItem.hidesBackButton = YES;
-    UIImageView *img = [[UIImageView    alloc]initWithImage:[UIImage imageNamed:@"text_box"]];
-    [img setFrame:CGRectMake(8,54,230,30)];
-    
-    searchTextField = [[UITextField alloc]initWithFrame:CGRectMake(15,62,240,25)];
     searchTextField.placeholder = @"Flyerly search";
     searchTextField.font = [UIFont systemFontOfSize:12.0];
-    //Search Boutton
-    UIButton *seaBotton = [[UIButton alloc] initWithFrame:CGRectMake(252, 54, 58, 30)];
-    [seaBotton  setTitle:@"Search" forState:UIControlStateNormal] ;
-    seaBotton.titleLabel.font = [UIFont boldSystemFontOfSize:13.0];
-    seaBotton.showsTouchWhenHighlighted = YES;
-    [seaBotton addTarget:self action:@selector(searchClick) forControlEvents:UIControlEventTouchUpInside];
-    [seaBotton setBackgroundImage:[UIImage imageNamed:@"crop_button"] forState:UIControlStateNormal];
-    [self.view addSubview:img];
-    [self.view addSubview:seaBotton];
-    [self.view addSubview:searchTextField];
+    searchTextField.textAlignment = UITextAlignmentLeft;
+    searchTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    [searchTextField setBorderStyle:UITextBorderStyleRoundedRect];
+
     if(IS_IPHONE_5){
         tView = [[UITableView alloc]initWithFrame:CGRectMake(0, 86, 320, 510) style:UITableViewStyleGrouped];
     }else{
@@ -189,6 +209,8 @@ sd:;
 	self.tView.rowHeight =102;
     [self.tView setBackgroundView:nil];
     [self.tView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    [searchTextField addTarget:self action:@selector(textFieldTapped:) forControlEvents:UIControlEventEditingChanged];
+    searchTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
 }
 
 -(void)callMenu
