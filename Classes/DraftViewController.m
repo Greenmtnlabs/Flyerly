@@ -55,7 +55,16 @@ static ShareProgressView *clipBdPogressView;
  * pop to root view / main screen
  */
 
+
+
 -(IBAction)goback{
+    __block UIBackgroundTaskIdentifier backgroundTaskIdentifier = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+        
+        NSLog(@"Background Time:%f",[[UIApplication sharedApplication] backgroundTimeRemaining]);
+        
+        [self endBackgroundTask:backgroundTaskIdentifier];
+        backgroundTaskIdentifier = backgroundTaskIdentifier;
+    }];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -71,10 +80,10 @@ static ShareProgressView *clipBdPogressView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	[UIView beginAnimations:nil context:NULL];
-	[UIView setAnimationDuration:0.2f];
+	//[UIView beginAnimations:nil context:NULL];
+	//[UIView setAnimationDuration:0.2f];
     globle = [Singleton RetrieveSingleton];
-    showbars = NO;
+    showbars = YES;
     // Init loading view
     loadingView = nil;
 	loadingView = [[LoadingView alloc]init];
@@ -153,7 +162,6 @@ static ShareProgressView *clipBdPogressView;
     // If navigating from Create flyer then show menu button on left 
     if(fromPhotoController){
         self.navigationItem.hidesBackButton = YES;
-        
         // Create right bar button
         UIButton *menuButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 31, 30)] autorelease];
         menuButton.showsTouchWhenHighlighted = YES;
@@ -244,8 +252,7 @@ static ShareProgressView *clipBdPogressView;
     if([selectedFlyerTitle isEqualToString:@""]){
         [titleView setText:NameYourFlyerText];
     }else{
-        [titleView setText:selectedFlyerTitle];
-    }
+        [titleView setText:selectedFlyerTitle];}
     
     // Setup description text view
     [descriptionView setFont:[UIFont fontWithName:OTHER_FONT size:10]];
@@ -331,6 +338,7 @@ static ShareProgressView *clipBdPogressView;
         countOfSharingNetworks++;
         [self increaseProgressViewHeightBy:36];
     }
+        
     if(instagramPogressView){
         [progressView setHidden:NO];
         [progressView addSubview:instagramPogressView];
@@ -491,7 +499,8 @@ static ShareProgressView *clipBdPogressView;
             
             [self showAlert];
         }else{
-            
+
+
             // Check internet connectivity
             if([AddFriendsController connected]){
                 
@@ -505,12 +514,17 @@ static ShareProgressView *clipBdPogressView;
                 //countOfSharingNetworks = 0;
                 
                 //loadingView =[LoadingView loadingViewInView:self.view  text:@"Sharing..."];
+                if([instagramButton isSelected]){
+                    [Flurry logEvent:@"Shared Instagram"];
+                    [self showInstagramProgressRow];
+                    [self shareOnInstagram];
+                }
                 
                 if([twitterButton isSelected]){
                     [self showTwitterProgressRow];
                     [self shareOnTwitter];
                     [Flurry logEvent:@"Shared Twitter"];
-                    [self fillSuccessStatus:twitterPogressView];
+                    //[self fillSuccessStatus:twitterPogressView];
                 }
                 
                 if([facebookButton isSelected]){
@@ -547,25 +561,22 @@ static ShareProgressView *clipBdPogressView;
                         [self SingleshareOnMMS];
                     }
                 }
+
                 
-                if([instagramButton isSelected]){
-                    [Flurry logEvent:@"Shared Instagram"];
-                    [self showInstagramProgressRow];
-                    [self shareOnInstagram];
-                }
                 if([clipboardButton isSelected]){
                     [Flurry logEvent:@"clipboard Click"];
                     [self showclipBdProgressRow];
                     [self onclipcordClick];
                 }
+                
 
-                /*
+/*
                 if([instagramButton isSelected] && ( ![tumblrButton isSelected] && ![flickrButton isSelected] && ![smsButton isSelected])  && ![emailButton isSelected]){
                     [Flurry logEvent:@"Shared Instagram"];
                     [self showInstagramProgressRow];
                     [self shareOnInstagram];
                 }
-                 */
+*/
                 
                 //if([saveToRollSwitch isOn]){
                 //if([[NSUserDefaults standardUserDefaults] stringForKey:@"saveToCameraRollSetting"]){
@@ -644,6 +655,20 @@ static ShareProgressView *clipBdPogressView;
 
         FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
         appDelegate.facebook.sessionDelegate = self;
+        
+        if(!appDelegate.facebook) {
+            
+            //get facebook app id
+            NSString *path = [[NSBundle mainBundle] pathForResource: @"Flyr-Info" ofType: @"plist"];
+            NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile: path];
+            appDelegate.facebook = [[Facebook alloc] initWithAppId:[dict objectForKey: @"FacebookAppID"] andDelegate:self];
+        }
+        
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        if ([defaults objectForKey:@"FBAccessTokenKey"] && [defaults objectForKey:@"FBExpirationDateKey"]) {
+            appDelegate.facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
+            appDelegate.facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
+        }
         
         if([appDelegate.facebook isSessionValid]) {            
             [facebookButton setSelected:YES];            
@@ -746,10 +771,10 @@ static ShareProgressView *clipBdPogressView;
     } else {
         
         [flickrButton setSelected:YES];
-        [flickrRequest setDelegate:self];
+      //  [flickrRequest setDelegate:self];
         
         FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-        if (![appDelegate.flickrContext.OAuthToken length]) {
+        if (![appDelegate.flickrContext.OAuthToken length] || appDelegate.flickrContext.OAuthToken == nil) {
 
             loadingView =[LoadingView loadingViewInView:self.view  text:@"Wait..."];
             
@@ -1275,7 +1300,7 @@ static ShareProgressView *clipBdPogressView;
 }
 
 - (void)makeTwitterPost:(ACAccount *)acct {
-    
+    globle.PostRuning = @"YES";
     TWRequest *postRequest = [[TWRequest alloc] initWithURL:[NSURL URLWithString:@"https://upload.twitter.com/1/statuses/update_with_media.json"] parameters:nil requestMethod:TWRequestMethodPOST];
     
     
@@ -1286,29 +1311,43 @@ static ShareProgressView *clipBdPogressView;
     
     // Set the account used to post the tweet.
     [postRequest setAccount:acct];
-    
+
     // Perform the request created above and create a handler block to handle the response.
     [postRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
-        
+        globle.PostRuning = @"NO";
         if(responseData){
             NSMutableDictionary *responseDictionary  = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:nil];
             NSLog(@"%@",responseDictionary);
             NSString *errors = [responseDictionary objectForKey:@"errors"];
             
             if(errors){
-                [self fillErrorStatus:twitterPogressView];
+                [twitterPogressView.statusText setText:@"Sharing Failed!"];
+                [twitterPogressView.statusText setTextColor:[UIColor redColor]];
+                [twitterPogressView.statusIcon setBackgroundImage:[UIImage imageNamed:@"status_failed"] forState:UIControlStateNormal];
+                [twitterPogressView.refreshIcon setHidden:NO];
+                [twitterPogressView.cancelIcon setHidden:NO];
             }else{
-                [self fillSuccessStatus:twitterPogressView];
+                [twitterPogressView.statusText setTextColor:[UIColor greenColor]];
+                [twitterPogressView.statusText setText:@"Successfully Shared!"];
+                [twitterPogressView.statusIcon setBackgroundImage:[UIImage imageNamed:@"status_success"] forState:UIControlStateNormal];
+                [twitterPogressView.refreshIcon setHidden:YES];
+                [twitterPogressView.cancelIcon setHidden:NO];
             }
         } else {
             //[self shareOnTwitter];
-            [self fillErrorStatus:twitterPogressView];
+            [twitterPogressView.statusText setText:@"Sharing Failed!"];
+            [twitterPogressView.statusText setTextColor:[UIColor redColor]];
+            [twitterPogressView.statusIcon setBackgroundImage:[UIImage imageNamed:@"status_failed"] forState:UIControlStateNormal];
+            [twitterPogressView.refreshIcon setHidden:NO];
+            [twitterPogressView.cancelIcon setHidden:NO];
+
         }
     }];
     
     // Release stuff.
     [arrayOfAccounts release];
     arrayOfAccounts = nil;
+sd:;
 }
 
 /*
@@ -1349,11 +1388,21 @@ static ShareProgressView *clipBdPogressView;
                 // Grab the initial Twitter account to tweet from.
                 ACAccount *twitterAccount = [arrayOfAccounts objectAtIndex:0];
                 [self makeTwitterPost:twitterAccount];
-            } else {
-                [self fillErrorStatus:twitterPogressView];
+             } else {
+                [twitterPogressView.statusText setText:@"Sharing Failed!"];
+                 [twitterPogressView.statusText setTextColor:[UIColor redColor]];
+                 [twitterPogressView.statusIcon setBackgroundImage:[UIImage imageNamed:@"status_failed"] forState:UIControlStateNormal];
+                 [twitterPogressView.refreshIcon setHidden:NO];
+                 [twitterPogressView.cancelIcon setHidden:NO];
+
             }
         } else {
-            [self fillErrorStatus:twitterPogressView];
+            [twitterPogressView.statusText setText:@"Sharing Failed!"];
+            [twitterPogressView.statusText setTextColor:[UIColor redColor]];
+            [twitterPogressView.statusIcon setBackgroundImage:[UIImage imageNamed:@"status_failed"] forState:UIControlStateNormal];
+            [twitterPogressView.refreshIcon setHidden:NO];
+            [twitterPogressView.cancelIcon setHidden:NO];
+
         }
     }];
 }
@@ -1373,6 +1422,7 @@ static ShareProgressView *clipBdPogressView;
         
         //Convert twitter username to email
         [self makeTwitterPost:account];
+
     }
     
     [actionSheet release];
@@ -1751,8 +1801,8 @@ static ShareProgressView *clipBdPogressView;
     [progressView setFrame:CGRectMake(0, 44, 310, 3)];
     
     if(IS_IPHONE_5){
-        [scrollView setFrame:CGRectMake(5, 44, 310, 548)];
-        [scrollView setContentSize:CGSizeMake(310, 548)];
+        [scrollView setFrame:CGRectMake(5, 44, 310, 600)];
+        [scrollView setContentSize:CGSizeMake(310, 600)];
     }else{
         [scrollView setFrame:CGRectMake(5, 44, 310, 401)];
         [scrollView setContentSize:CGSizeMake(310, 401)];
@@ -1803,6 +1853,8 @@ static ShareProgressView *clipBdPogressView;
     [self fillSuccessStatus:flickrPogressView];
     
     if([instagramButton isSelected] && ![tumblrButton isSelected]){
+       // NSLog(@"Instagram call From FlickerSuccess");
+       // [self showInstagramProgressRow];
        // [self shareOnInstagram];
     }
 }
@@ -1811,7 +1863,9 @@ static ShareProgressView *clipBdPogressView;
     [self fillErrorStatus:flickrPogressView];
 
     if([instagramButton isSelected] && ![tumblrButton isSelected]){
-        //[self shareOnInstagram];
+      //  NSLog(@"Instagram call From FlickerFailure");
+       // [self showInstagramProgressRow];
+       // [self shareOnInstagram];
     }
 }
 
@@ -1910,7 +1964,9 @@ static ShareProgressView *clipBdPogressView;
                                        } else {
                                            
                                            if([instagramButton isSelected] && (![tumblrButton isSelected] && ![flickrButton isSelected])){
-                                              // [self shareOnInstagram];
+                                              // NSLog(@"Instagram call From Mailcompose");
+                                             //  [self showInstagramProgressRow];
+                                               //[self shareOnInstagram];
                                            }
                                        }
                                        
@@ -1936,7 +1992,8 @@ static ShareProgressView *clipBdPogressView;
                                    completion:^{
                                        
                                        if([instagramButton isSelected] && (![tumblrButton isSelected] && ![flickrButton isSelected] && ![emailButton isSelected])){
-                                           
+                                          // NSLog(@"Instagram call From MessegeDissmiss");
+                                         //  [self showInstagramProgressRow];
                                           // [self shareOnInstagram];
                                        }
                                    }];
@@ -1982,7 +2039,9 @@ static ShareProgressView *clipBdPogressView;
     }
     
     if([instagramButton isSelected]){
-       // [self shareOnInstagram];
+       // NSLog(@"Instagram call From tumbler");
+       // [self showInstagramProgressRow];
+        //[self shareOnInstagram];
     }
     
 }
@@ -2011,9 +2070,9 @@ static ShareProgressView *clipBdPogressView;
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationDuration:0.2];
         [UIView setAnimationCurve:UIViewAnimationCurveLinear];
-        [scrollView setFrame:CGRectMake(scrollView.frame.origin.x, scrollView.frame.origin.y, scrollView.frame.size.width, scrollView.frame.size.height + 30)];
+        [scrollView setFrame:CGRectMake(scrollView.frame.origin.x, scrollView.frame.origin.y, scrollView.frame.size.width, scrollView.frame.size.height + 36)];
         // move view down
-        [networkParentView setFrame:CGRectMake(networkParentView.frame.origin.x, networkParentView.frame.origin.y + 30, networkParentView.frame.size.width, networkParentView.frame.size.height)];
+        [networkParentView setFrame:CGRectMake(networkParentView.frame.origin.x, networkParentView.frame.origin.y + 36, networkParentView.frame.size.width, networkParentView.frame.size.height)];
         [UIView commitAnimations];
         
     }else{
@@ -2024,9 +2083,9 @@ static ShareProgressView *clipBdPogressView;
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationDuration:0.2];
         [UIView setAnimationCurve:UIViewAnimationCurveLinear];
-        [scrollView setFrame:CGRectMake(scrollView.frame.origin.x, scrollView.frame.origin.y, scrollView.frame.size.width, scrollView.frame.size.height - 30)];
+        [scrollView setFrame:CGRectMake(scrollView.frame.origin.x, scrollView.frame.origin.y, scrollView.frame.size.width, scrollView.frame.size.height - 36)];
         // move view up
-        [networkParentView setFrame:CGRectMake(networkParentView.frame.origin.x, networkParentView.frame.origin.y - 30, networkParentView.frame.size.width, networkParentView.frame.size.height)];
+        [networkParentView setFrame:CGRectMake(networkParentView.frame.origin.x, networkParentView.frame.origin.y - 36, networkParentView.frame.size.width, networkParentView.frame.size.height)];
         [UIView commitAnimations];
     }
 }
@@ -2097,6 +2156,8 @@ static ShareProgressView *clipBdPogressView;
  */
     [self updateFlyerDetail];
 }
+
+
 
 - (void)didReceiveMemoryWarning {
 	// Releases the view if it doesn't have a superview.

@@ -143,7 +143,6 @@
     UIButton *crossButtonGlobal;
     UIButton *editButtonGlobal;    
     UIBarButtonItem *rightUndoBarButton;
-    
     ShareProgressView *layerEditMessage;
 }
 

@@ -516,7 +516,7 @@
 			<string key="camera_change.png">{48, 26}</string>
 			<string key="camera_grid.png">{26, 27}</string>
 			<string key="camera_lastpic.png">{54, 54}</string>
-			<string key="flash_icon_auto.png">{47, 69}</string>
+			<string key="flash_icon_auto.png">{35, 50}</string>
 			<string key="new_grid_line.png">{305, 303}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">2083</string>

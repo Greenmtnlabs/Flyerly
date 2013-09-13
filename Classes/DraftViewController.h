@@ -20,7 +20,7 @@
 #import "Singleton.h"
 
 @class FlyrViewController,LauchViewController,Singleton;
-@class SaveFlyerController;
+@class SaveFlyerController,PhotoController;
 @class LoadingView;
 
 @interface DraftViewController : UIViewController<FBRequestDelegate,UIWebViewDelegate,UIDocumentInteractionControllerDelegate,FBSessionDelegate,FBDialogDelegate,FBLoginDialogDelegate,TumblrUploadrDelegate,OFFlickrAPIRequestDelegate,MFMessageComposeViewControllerDelegate,MFMailComposeViewControllerDelegate,UITextViewDelegate,UITextFieldDelegate,UIGestureRecognizerDelegate,OLBTwitpicEngineDelegate,BitlyURLShortenerDelegate, UIActionSheetDelegate> {
@@ -134,9 +134,17 @@
 -(IBAction)onClickSMSButton;
 -(IBAction)onClickClipboardButton;
 -(IBAction)searchNearByLocations;
+
+
 - (BOOL)uploadImageStream:(NSInputStream *)inImageStream suggestedFilename:(NSString *)inFilename MIMEType:(NSString *)inType arguments:(NSDictionary *)inArguments;
+
+
+
+
 -(IBAction)goback;
 -(void)share;
+-(void)shareOnInstagram;
+
 -(void)updateSocialStates;
 
 -(void)showFacebookProgressRow;

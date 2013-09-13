@@ -13,7 +13,7 @@
 @end
 
 @implementation AccountSelecter
-@synthesize username,password,confirmPassword,email,name,phno;
+@synthesize username,password,confirmPassword,email,name,phno,usrExist;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -105,6 +105,11 @@
         [self showAlert:@"Email Address Must Required" message:@""];
         return NO;
     }
+    
+    if([usrExist.text isEqualToString:@"taken"] ){
+        [self showAlert:@"Username already taken" message:@""];
+        return NO;
+    }
     return YES;
 }
 
@@ -120,8 +125,29 @@
     [alert release];
 }
 
+
+-(IBAction)userExist{
+    PFUser *user = [PFUser currentUser];
+    NSString *usr = user.username;
+    if(username.text != nil && ![usr isEqualToString:username.text]){
+        PFQuery *query = [PFUser query];
+        [query whereKey:@"username" equalTo:username.text];
+        [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
+            if (error) {
+                [usrExist setHidden:NO];
+                [usrExist setText:@"available"];
+                [usrExist setTextColor:[UIColor greenColor]];
+            }else{
+                [usrExist setHidden:NO];
+                [usrExist setText:@"taken"];
+                [usrExist setTextColor:[UIColor redColor]];
+            }
+        }];
+    }
+}
+
+
 /*
-#pragma Zohaib Method
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {

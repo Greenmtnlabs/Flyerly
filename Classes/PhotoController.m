@@ -2841,15 +2841,15 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     ((CustomLabel *)[[self textLabelLayersArray] lastObject]).alpha = 1;
 
     FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
+     
     NSData *data = [self getCurrentFrameAndSaveIt];
     [self showHUD];
     appDele.changesFlag = NO;
-    
+
     DraftViewController *draftViewController = [[DraftViewController alloc] initWithNibName:@"DraftViewController" bundle:nil];
     draftViewController.fromPhotoController = YES;
     draftViewController.selectedFlyerImage = [UIImage imageWithData:data];
     draftViewController.selectedFlyerTitle = @"";
-    
     if([[self textLabelLayersArray] count] > 0){
         draftViewController.selectedFlyerDescription = ((CustomLabel*)[[self textLabelLayersArray] objectAtIndex:0]).text;
     }else{

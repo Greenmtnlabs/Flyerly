@@ -24,6 +24,8 @@
 @property(nonatomic, strong) IBOutlet UITextField *email;
 @property(nonatomic, strong) IBOutlet UITextField *name;
 @property(nonatomic, strong) IBOutlet UITextField *phno;
+@property(nonatomic, retain) IBOutlet UILabel *usrExist;
+-(IBAction)userExist;
 -(IBAction)save;
 -(IBAction)changePW;
 

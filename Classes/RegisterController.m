@@ -448,7 +448,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
         return NO;
     }
     if([usrExist.text isEqualToString:@"taken"] ){
-        [self showAlert:@"Username Aleardy Taken" message:@""];
+        [self showAlert:@"Username already taken" message:@""];
         [self removeLoadingView];
         return NO;
     }

@@ -458,7 +458,6 @@
 		20DF43EB17CF6E8300F58A8C /* status_icon_email@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20DF43E517CF6E8300F58A8C /* status_icon_email@2x.png */; };
 		20DF43EC17CF6E8300F58A8C /* status_icon_sms.png in Resources */ = {isa = PBXBuildFile; fileRef = 20DF43E617CF6E8300F58A8C /* status_icon_sms.png */; };
 		20DF43ED17CF6E8300F58A8C /* status_icon_sms@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20DF43E717CF6E8300F58A8C /* status_icon_sms@2x.png */; };
-		20E5F86A17D867CB00C302B2 /* FlyrOverlayController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20E5F86817D867CA00C302B2 /* FlyrOverlayController.xib */; };
 		20ED041817CCB41F00DA702E /* SettingcellBack.png in Resources */ = {isa = PBXBuildFile; fileRef = 20ED041617CCB41F00DA702E /* SettingcellBack.png */; };
 		20ED041917CCB41F00DA702E /* SettingcellBack@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20ED041717CCB41F00DA702E /* SettingcellBack@2x.png */; };
 		20ED041C17CCBCB000DA702E /* t_email_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 20ED041A17CCBCB000DA702E /* t_email_button.png */; };
@@ -1607,7 +1606,6 @@
 		20DF43E517CF6E8300F58A8C /* status_icon_email@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "status_icon_email@2x.png"; sourceTree = "<group>"; };
 		20DF43E617CF6E8300F58A8C /* status_icon_sms.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = status_icon_sms.png; sourceTree = "<group>"; };
 		20DF43E717CF6E8300F58A8C /* status_icon_sms@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "status_icon_sms@2x.png"; sourceTree = "<group>"; };
-		20E5F86817D867CA00C302B2 /* FlyrOverlayController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FlyrOverlayController.xib; sourceTree = "<group>"; };
 		20ED041617CCB41F00DA702E /* SettingcellBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SettingcellBack.png; sourceTree = "<group>"; };
 		20ED041717CCB41F00DA702E /* SettingcellBack@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SettingcellBack@2x.png"; sourceTree = "<group>"; };
 		20ED041A17CCBCB000DA702E /* t_email_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = t_email_button.png; sourceTree = "<group>"; };
@@ -2435,7 +2433,6 @@
 				20F4D8DE17BA3D09007B2DF5 /* AccountSelecter.m */,
 				2087B6BD17C73B40007A6A90 /* ResetPWViewController.h */,
 				2087B6BE17C73B40007A6A90 /* ResetPWViewController.m */,
-				20E5F86817D867CA00C302B2 /* FlyrOverlayController.xib */,
 				203E0B7317DDDD720039C3A7 /* InputViewController.h */,
 				203E0B7417DDDD720039C3A7 /* InputViewController.m */,
 				203E0B7517DDDD720039C3A7 /* InputViewController.xib */,
@@ -4885,7 +4882,6 @@
 				20DF43EB17CF6E8300F58A8C /* status_icon_email@2x.png in Resources */,
 				20DF43EC17CF6E8300F58A8C /* status_icon_sms.png in Resources */,
 				20DF43ED17CF6E8300F58A8C /* status_icon_sms@2x.png in Resources */,
-				20E5F86A17D867CB00C302B2 /* FlyrOverlayController.xib in Resources */,
 				2091E49B17DA1323001428E5 /* arrangeicon_button_selected.png in Resources */,
 				2091E49C17DA1323001428E5 /* arrangeicon_button_selected@2x.png in Resources */,
 				2091E49D17DA1323001428E5 /* icon_button_selected.png in Resources */,
@@ -5179,8 +5175,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jennifer Junger (ZLDN4YF5WY)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jennifer Junger (ZLDN4YF5WY)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5213,8 +5209,8 @@
 				);
 				"OTHER_LDFLAGS[arch=*]" = "";
 				PRODUCT_NAME = Flyr;
-				PROVISIONING_PROFILE = "89EEFADE-B677-49D0-BB7B-48803AC8479D";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "89EEFADE-B677-49D0-BB7B-48803AC8479D";
+				PROVISIONING_PROFILE = "135E06E0-127E-48F5-A9EB-54F4C1346BCB";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "135E06E0-127E-48F5-A9EB-54F4C1346BCB";
 				SDKROOT = iphoneos6.0;
 			};
 			name = Debug;
