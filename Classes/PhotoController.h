@@ -17,7 +17,7 @@
 #import "ParentViewController.h"
 
 @class Singleton;
-@interface PhotoController : ParentViewController<UIActionSheetDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, EBPurchaseDelegate>
+@interface PhotoController :ParentViewController<UIActionSheetDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, EBPurchaseDelegate>
 {
     int layerallow;
     Singleton *globle;
@@ -241,4 +241,7 @@
 +(UIView *)setTitleViewWithTitle:(NSString *)title rect:(CGRect)rect;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil templateParam:(UIImage *)templateParam symbolArrayParam:(NSMutableArray *)symbolArrayParam iconArrayParam:(NSMutableArray *)iconArrayParam photoArrayParam:(NSMutableArray *)photoArrayParam textArrayParam:(NSMutableArray *)textArrayParam flyerNumberParam:(int)flyerNumberParam;
 
+
+-(NSMutableDictionary *)getInAppDictionary;
+-(void)setInAppDictionary:(NSMutableDictionary *)inAppDict;
 @end

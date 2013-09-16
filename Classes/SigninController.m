@@ -544,7 +544,8 @@
         [self signIn:YES username:twitterUser password:@"null"];
     }
     
-    NSLog(@"%u",buttonIndex);    
+    NSLog(@"%u",buttonIndex);
+       [self hideLoadingIndicator];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{

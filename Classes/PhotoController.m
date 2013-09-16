@@ -1986,7 +1986,7 @@ int arrangeLayerIndex;
     
         [self deleteLayer:crossButtonGlobal overrided:nil];
         [Flurry logEvent:@"Layed Deleted"];
-	} else if(alertView == inAppAlert && (buttonIndex == 0 || buttonIndex == 1)) {
+	} else if(alertView == inAppAlert && (buttonIndex == 0 || buttonIndex == 1 || buttonIndex == 2)) {
         
         NSLog(@"Purchase One Font Selected");
         
@@ -4873,7 +4873,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 -(void)requestTemplate:(UIButton *)button{
     
-    [self showLoadingView:nil];
+    //[self showLoadingView:nil];
 
     // Create an instance of EBPurchase (Inapp purchase).
     [demoPurchase release];
@@ -4882,14 +4882,15 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     demoPurchase.delegate = self;
     demoPurchase.customIndex = button.tag;
     isPurchased = NO;
-    
+  
     [demoPurchase requestProduct:[NSArray arrayWithObjects:PRODUCT_TEMPLATE, PRODUCT_FULL_TEMPLATE,
                                   PRODUCT_ALL_BUNDLE, nil]];
+  
 }
 
 -(void)requestFont:(UIButton *)button{
     
-    [self showLoadingView:nil];
+    //[self showLoadingView:nil];
     
     // Create an instance of EBPurchase (Inapp purchase).
     [demoPurchase release];
@@ -4900,11 +4901,12 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     isPurchased = NO;
 
     [demoPurchase requestProduct:[NSArray arrayWithObjects:PRODUCT_FONT, PRODUCT_FULL_FONT, PRODUCT_ALL_BUNDLE, nil]];
+ 
 }
 
 -(void)requestColor:(UIButton *)button{
     
-    [self showLoadingView:nil];
+   // [self showLoadingView:nil];
 
     // Create an instance of EBPurchase (Inapp purchase).
     [demoPurchase release];
@@ -4920,7 +4922,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 -(void)requestFontBorder:(UIButton *)button{
 
-    [self showLoadingView:nil];
+    //[self showLoadingView:nil];
 
     // Create an instance of EBPurchase (Inapp purchase).
     [demoPurchase release];
@@ -4929,14 +4931,13 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     demoPurchase.delegate = self;
     demoPurchase.customIndex = button.tag;
     isPurchased = NO;
-
     [demoPurchase requestProduct:[NSArray arrayWithObjects:PRODUCT_FONT_BORDER_COLOR, PRODUCT_FULL_FONT_BORDER_COLOR,
                                   PRODUCT_ALL_BUNDLE, nil]];
 }
 
 -(void)requestFlyerBorder:(UIButton *)button{
     
-    [self showLoadingView:nil];
+   // [self showLoadingView:nil];
 
     // Create an instance of EBPurchase (Inapp purchase).
     [demoPurchase release];
@@ -4976,7 +4977,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     //if user want to buy 1 match
     if (demoPurchase.products != nil) {
         
-        [self removeLoadingView];
+       // [self removeLoadingView];
 
         [self showFontPurchaseSheet:ebp.customIndex productList:demoPurchase.products];
     }
@@ -5191,7 +5192,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     alertMessage = [NSString stringWithFormat:@"Your purchase was successful. %@ is unlocked now.", productId];
     
     UIAlertView *updatedAlert = [[UIAlertView alloc] initWithTitle:@"Thank You!" message:alertMessage delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [updatedAlert show];    
+    [updatedAlert show];
 }
 
 -(void)productRequestFailed:(NSError *)error{
@@ -5200,7 +5201,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     UIAlertView *failedAlert = [[UIAlertView alloc] initWithTitle:@"Purchase Stopped" message:@"Either you cancelled the request or Apple reported a transaction error. Please try again later, or contact the app's customer support for assistance." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [failedAlert show];
     
-    [self removeLoadingView];
+   // [self removeLoadingView];
 }
 
 -(void) failedPurchase:(EBPurchase*)ebp error:(NSInteger)errorCode message:(NSString*)errorMessage {
@@ -5209,7 +5210,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     UIAlertView *failedAlert = [[UIAlertView alloc] initWithTitle:@"Purchase Stopped" message:@"Either you cancelled the request or Apple reported a transaction error. Please try again later, or contact the app's customer support for assistance." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [failedAlert show];
     
-    [self removeLoadingView];    
+  //  [self removeLoadingView];
 }
 
 -(void) incompleteRestore:(EBPurchase*)ebp
@@ -5224,7 +5225,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     UIAlertView *restoreAlert = [[UIAlertView alloc] initWithTitle:@"Restore Issue" message:@"A prior purchase transaction could not be found. To restore the purchased product, tap the Buy button. Paid customers will NOT be charged again, but the purchase will be restored." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [restoreAlert show];
     
-    [self removeLoadingView];    
+    //[self removeLoadingView];
 }
 
 -(void) failedRestore:(EBPurchase*)ebp error:(NSInteger)errorCode message:(NSString*)errorMessage
@@ -5236,11 +5237,11 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     UIAlertView *failedAlert = [[UIAlertView alloc] initWithTitle:@"Restore Stopped" message:@"Either you cancelled the request or your prior purchase could not be restored. Please try again later, or contact the app's customer support for assistance." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [failedAlert show];
     
-    [self removeLoadingView];    
+    //[self removeLoadingView];
 }
 
 -(void) cancelPurchase {
-    [self removeLoadingView];
+   // [self removeLoadingView];
 }
 
 /*

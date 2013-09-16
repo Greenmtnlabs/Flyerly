@@ -18,12 +18,13 @@
 #import "BitlyURLShortener.h"
 #import "LauchViewController.h"
 #import "Singleton.h"
+#import "ParentViewController.h"
 
 @class FlyrViewController,LauchViewController,Singleton;
 @class SaveFlyerController,PhotoController;
 @class LoadingView;
 
-@interface DraftViewController : UIViewController<FBRequestDelegate,UIWebViewDelegate,UIDocumentInteractionControllerDelegate,FBSessionDelegate,FBDialogDelegate,FBLoginDialogDelegate,TumblrUploadrDelegate,OFFlickrAPIRequestDelegate,MFMessageComposeViewControllerDelegate,MFMailComposeViewControllerDelegate,UITextViewDelegate,UITextFieldDelegate,UIGestureRecognizerDelegate,OLBTwitpicEngineDelegate,BitlyURLShortenerDelegate, UIActionSheetDelegate> {
+@interface DraftViewController : ParentViewController<FBRequestDelegate,UIWebViewDelegate,UIDocumentInteractionControllerDelegate,FBSessionDelegate,FBDialogDelegate,FBLoginDialogDelegate,TumblrUploadrDelegate,OFFlickrAPIRequestDelegate,MFMessageComposeViewControllerDelegate,MFMailComposeViewControllerDelegate,UITextViewDelegate,UITextFieldDelegate,UIGestureRecognizerDelegate,OLBTwitpicEngineDelegate,BitlyURLShortenerDelegate, UIActionSheetDelegate> {
 
 	IBOutlet UIScrollView *scrollView;
 

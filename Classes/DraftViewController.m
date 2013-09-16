@@ -80,7 +80,7 @@ static ShareProgressView *clipBdPogressView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+ 
     if([facebookPogressView.statusText.text isEqualToString: @"Sharing Failed!"] || [facebookPogressView.statusText.text isEqualToString:@"Successfully Shared!"]){
         NSDictionary *itemDetails = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%d", facebookPogressView.tag], @"tag", nil];
         [facebookPogressView removeFromSuperview];
@@ -112,7 +112,6 @@ static ShareProgressView *clipBdPogressView;
         NSDictionary *itemDetails = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%d", instagramPogressView.tag], @"tag", nil];
         [instagramPogressView removeFromSuperview];
         [[NSNotificationCenter defaultCenter] postNotificationName:CloseShareProgressNotification object:nil userInfo:itemDetails];
-        
        instagramPogressView = nil;
     }
     if([clipBdPogressView.statusText.text isEqualToString:@"Copied successfully!"]){
@@ -122,7 +121,7 @@ static ShareProgressView *clipBdPogressView;
         
     clipBdPogressView = nil;
 }
-    if([smsPogressView.statusText.text isEqualToString:@"Text failed!"] || [smsPogressView.statusText.text isEqualToString:@"Text sent!"])
+    if([smsPogressView.statusText.text isEqualToString:@"Opening txt msg!"] || [smsPogressView.statusText.text isEqualToString:@"Text failed!"] || [smsPogressView.statusText.text isEqualToString:@"Text sent!"])
     {
         NSDictionary *itemDetails = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%d", smsPogressView.tag], @"tag", nil];
         [smsPogressView removeFromSuperview];
@@ -130,22 +129,22 @@ static ShareProgressView *clipBdPogressView;
 
         smsPogressView = nil;
     }
-    if([emailPogressView.statusText.text isEqualToString:@"Email failed!"] || [emailPogressView.statusText.text isEqualToString:@"Email sent!"])
+    if([emailPogressView.statusText.text isEqualToString:@"Opening email!"] || [emailPogressView.statusText.text isEqualToString:@"Email failed!"] || [emailPogressView.statusText.text isEqualToString:@"Email sent!"])
     {
         NSDictionary *itemDetails = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%d", emailPogressView.tag], @"tag", nil];
         [emailPogressView removeFromSuperview];
         [[NSNotificationCenter defaultCenter] postNotificationName:CloseShareProgressNotification object:nil userInfo:itemDetails];
            emailPogressView = nil;
-    }    
-    [self setDefaultProgressViewHeight];
-    [progressView setHidden:YES];
-	//[UIView beginAnimations:nil context:NULL];
-	//[UIView setAnimationDuration:0.2f];
+    }
+    [self closeSharingProgressSuccess:nil];
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closeSharingProgressSuccess:) name:CloseShareProgressNotification object:nil];
+ //   [self setDefaultProgressViewHeight];
+  //  [progressView setHidden:YES];
+
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationDuration:0.2f];
     globle = [Singleton RetrieveSingleton];
     showbars = YES;
-    // Init loading view
-    loadingView = nil;
-	loadingView = [[LoadingView alloc]init];
     
     // Set click event on switch
     [saveToRollSwitch addTarget:self action:@selector(setSwitchState:) forControlEvents:UIControlEventValueChanged];
@@ -332,9 +331,6 @@ static ShareProgressView *clipBdPogressView;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    // Init loading view
-    loadingView = nil;
-	loadingView = [[LoadingView alloc]init];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
     NSLog(@"%@",[[LocationController getLocationDetails] objectForKey:@"name"]);
     if([LocationController getLocationDetails] && [[LocationController getLocationDetails] objectForKey:@"name"]){
@@ -371,35 +367,31 @@ static ShareProgressView *clipBdPogressView;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:CloseShareProgressNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closeSharingProgressSuccess:) name:CloseShareProgressNotification object:nil];
   
-    if (showbars) {
+
     // Show progress views if they are not cancelled manually
     if(twitterPogressView){
         [progressView setHidden:NO];
         [progressView addSubview:twitterPogressView];
         countOfSharingNetworks++;
         [self increaseProgressViewHeightBy:36];
-        [self showTwitterProgressRow];
     }
     if(facebookPogressView){
         [progressView setHidden:NO];
         [progressView addSubview:facebookPogressView];
         countOfSharingNetworks++;
         [self increaseProgressViewHeightBy:36];
-        [self showFacebookProgressRow];
     }
     if(flickrPogressView){
         [progressView setHidden:NO];
         [progressView addSubview:flickrPogressView];
         countOfSharingNetworks++;
         [self increaseProgressViewHeightBy:36];
-        [self showFlickrProgressRow];
     }
     if(tumblrPogressView){
         [progressView setHidden:NO];
         [progressView addSubview:tumblrPogressView];
         countOfSharingNetworks++;
         [self increaseProgressViewHeightBy:36];
-        [self showTumblrProgressRow];
     }
         
     if(instagramPogressView){
@@ -407,32 +399,27 @@ static ShareProgressView *clipBdPogressView;
         [progressView addSubview:instagramPogressView];
         countOfSharingNetworks++;
         [self increaseProgressViewHeightBy:36];
-        [self showInstagramProgressRow];
     }
     if(emailPogressView){
         [progressView setHidden:NO];
         [progressView addSubview:emailPogressView];
         countOfSharingNetworks++;
         [self increaseProgressViewHeightBy:36];
-        [self showemailProgressRow];
     }
     if(smsPogressView){
         [progressView setHidden:NO];
         [progressView addSubview:smsPogressView];
         countOfSharingNetworks++;
         [self increaseProgressViewHeightBy:36];
-        [self showsmsProgressRow ];
     }
     if(clipBdPogressView){
         [progressView setHidden:NO];
         [progressView addSubview:clipBdPogressView];
         countOfSharingNetworks++;
         [self increaseProgressViewHeightBy:36];
-        [self showclipBdProgressRow];
     }
 }
-    showbars = YES;
-}
+
 
 -(void)loadHelpController{
     HelpController *helpController = [[HelpController alloc]initWithNibName:@"HelpController" bundle:nil];
@@ -580,7 +567,22 @@ static ShareProgressView *clipBdPogressView;
                 // Set 0 sharing netwroks
                 //countOfSharingNetworks = 0;
                 
-                //loadingView =[LoadingView loadingViewInView:self.view  text:@"Sharing..."];
+                if ([emailButton isSelected] && [smsButton isSelected]) {
+                    [Flurry logEvent:@"Shared Email & SMS"];
+                    [self showemailProgressRow ];
+                    [self showsmsProgressRow];
+                    [self shareOnMMS];
+                }else{
+                    if ([emailButton isSelected]) {
+                        [Flurry logEvent:@"Shared Email"];
+                        [self showemailProgressRow ];
+                        [self shareOnEmail];
+                    }else if ([smsButton isSelected]) {
+                        [Flurry logEvent:@"Shared SMS"];
+                        [self showsmsProgressRow];
+                        [self SingleshareOnMMS];
+                    }
+                }
                 
                 if([twitterButton isSelected]){
                     [self showTwitterProgressRow];
@@ -613,24 +615,6 @@ static ShareProgressView *clipBdPogressView;
                     [self showInstagramProgressRow];
                     [self shareOnInstagram];
                 }
-                
-                if ([emailButton isSelected] && [smsButton isSelected]) {
-                     [Flurry logEvent:@"Shared Email & SMS"];
-                     [self showemailProgressRow ];
-                        [self showsmsProgressRow];
-                     [self shareOnMMS];
-                }else{
-                    if ([emailButton isSelected]) {
-                        [Flurry logEvent:@"Shared Email"];
-                        [self showemailProgressRow ];
-                        [self shareOnEmail];
-                    }else if ([smsButton isSelected]) {
-                        [Flurry logEvent:@"Shared SMS"];
-                        [self showsmsProgressRow];
-                        [self SingleshareOnMMS];
-                    }
-                }
-
                 
                 if([clipboardButton isSelected]){
                     [Flurry logEvent:@"clipboard Click"];
@@ -809,22 +793,15 @@ static ShareProgressView *clipBdPogressView;
             
             if((![[[TMAPIClient sharedInstance] OAuthToken] length] > 0) ||
                (![[[TMAPIClient sharedInstance] OAuthTokenSecret] length] > 0)){
-                
-                loadingView =[LoadingView loadingViewInView:self.view  text:@"Wait..."];
+                [self showLoadingIndicator];
 
                 [[TMAPIClient sharedInstance] authenticate:@"Flyerly" callback:^(NSError *error) {
-                    
-                    // Remove loading view
-                    for (UIView *subview in self.view.subviews) {
-                        if([subview isKindOfClass:[LoadingView class]]){
-                            [subview removeFromSuperview];
-                        }
-                    }
-                    
                     if (error){
                         NSLog(@"Authentication failed: %@ %@", error, [error description]);
+                        [self hideLoadingIndicator];
                     }else{
                         NSLog(@"Authentication successful!");
+                        [self hideLoadingIndicator];
                         
                     }
                 }];
@@ -847,7 +824,7 @@ static ShareProgressView *clipBdPogressView;
         FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
         if (![appDelegate.flickrContext.OAuthToken length]) {
 
-            loadingView =[LoadingView loadingViewInView:self.view  text:@"Wait..."];
+            [self showLoadingIndicator];
             
             [self authorizeAction];
         }
@@ -899,11 +876,6 @@ static ShareProgressView *clipBdPogressView;
     
     [self updateSocialStates];
     
-    for (UIView *subview in self.view.subviews) {
-        if([subview isKindOfClass:[LoadingView class]]){
-            [subview removeFromSuperview];
-        }
-    }
 }
 
 -(void)updateSocialStates{    
@@ -1109,13 +1081,6 @@ static ShareProgressView *clipBdPogressView;
             
             [flyerObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 if (!error) {
-                    
-                    // Remove loading view
-                    for (UIView *subview in self.view.subviews) {
-                        if([subview isKindOfClass:[LoadingView class]]){
-                            [subview removeFromSuperview];
-                        }
-                    }
 
                     PFFile *theImage = [flyerObject objectForKey:@"image"];
                     
@@ -1159,13 +1124,6 @@ static ShareProgressView *clipBdPogressView;
             
             [flyerObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 if (!error) {
-                    
-                    // Remove loading view
-                    for (UIView *subview in self.view.subviews) {
-                        if([subview isKindOfClass:[LoadingView class]]){
-                            [subview removeFromSuperview];
-                        }
-                    }
                     
                     PFFile *theImage = [flyerObject objectForKey:@"image"];
                     [self shareOnEmail:[theImage url]];
@@ -1331,6 +1289,7 @@ static ShareProgressView *clipBdPogressView;
     NSData *imageData = UIImageJPEGRepresentation(selectedFlyerImage, 0.9);
     
     [appDelegate.flickrRequest uploadImageStream:[NSInputStream inputStreamWithData:imageData] suggestedFilename:selectedFlyerTitle MIMEType:@"image/jpeg" arguments:[NSDictionary dictionaryWithObjectsAndKeys:@"0", @"is_public",@"Title", @"title", [NSString stringWithFormat:@"%@ %@ - %@", selectedFlyerDescription, @"#flyerly", [[LocationController getLocationDetails] objectForKey:@"name"]], @"description", nil]];
+    [self fillSuccessStatus:flickrPogressView];
 }
 
 - (UIDocumentInteractionController *) setupControllerWithURL: (NSURL*) fileURL usingDelegate: (id <UIDocumentInteractionControllerDelegate>) interactionDelegate {
@@ -1468,6 +1427,7 @@ sd:;
  */
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     
+    NSLog(@"%d",buttonIndex);
     //if not cancel button presses
     if(buttonIndex != arrayOfAccounts.count) {
         
@@ -1477,6 +1437,8 @@ sd:;
         //Convert twitter username to email
         [self makeTwitterPost:account];
 
+    }else{
+        [self fillErrorStatus:twitterPogressView];
     }
     
     [actionSheet release];
@@ -1959,12 +1921,7 @@ static ShareProgressView *clipBdPogressView;
     NSURL *authURL = [appDelegate.flickrContext userAuthorizationURLWithRequestToken:inRequestToken requestedPermission:OFFlickrWritePermission];
     [[UIApplication sharedApplication] openURL:authURL];
     
-    // Remove loading view
-    for (UIView *subview in self.view.subviews) {
-        if([subview isKindOfClass:[LoadingView class]]){
-            [subview removeFromSuperview];
-        }
-    }
+    [self hideLoadingIndicator];
 
 }
 

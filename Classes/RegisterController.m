@@ -758,7 +758,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     }
     NSLog(@"%u",buttonIndex);
     waiting.hidden = YES;
-    
+    [self hideLoadingIndicator];
 }
 
 
