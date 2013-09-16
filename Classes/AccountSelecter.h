@@ -11,7 +11,7 @@
 #import <Parse/PFLogInViewController.h>
 #import <Parse/PFQuery.h>
 #import "Common.h"
-
+#import "AddFriendsController.h"
 @class SigninController,Singleton;
 @interface AccountSelecter : UIViewController <UITextFieldDelegate,UITableViewDelegate>{
 

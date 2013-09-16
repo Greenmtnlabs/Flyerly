@@ -80,6 +80,65 @@ static ShareProgressView *clipBdPogressView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    if([facebookPogressView.statusText.text isEqualToString: @"Sharing Failed!"] || [facebookPogressView.statusText.text isEqualToString:@"Successfully Shared!"]){
+        NSDictionary *itemDetails = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%d", facebookPogressView.tag], @"tag", nil];
+        [facebookPogressView removeFromSuperview];
+        [[NSNotificationCenter defaultCenter] postNotificationName:CloseShareProgressNotification object:nil userInfo:itemDetails];
+        facebookPogressView = nil;
+    }
+    if([twitterPogressView.statusText.text isEqualToString: @"Sharing Failed!"] || [twitterPogressView.statusText.text isEqualToString:@"Successfully Shared!"]){
+        NSDictionary *itemDetails = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%d", twitterPogressView.tag], @"tag", nil];
+        [twitterPogressView removeFromSuperview];
+        [[NSNotificationCenter defaultCenter] postNotificationName:CloseShareProgressNotification object:nil userInfo:itemDetails];
+        twitterPogressView = nil;
+    
+    }
+    if([flickrPogressView.statusText.text isEqualToString: @"Sharing Failed!"] || [flickrPogressView.statusText.text isEqualToString:@"Successfully Shared!"]){
+        NSDictionary *itemDetails = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%d", flickrPogressView.tag], @"tag", nil];
+        [flickrPogressView removeFromSuperview];
+        [[NSNotificationCenter defaultCenter] postNotificationName:CloseShareProgressNotification object:nil userInfo:itemDetails];
+        flickrPogressView = nil;
+    }
+    if([tumblrPogressView.statusText.text isEqualToString: @"Sharing Failed!"] || [tumblrPogressView.statusText.text isEqualToString:@"Successfully Shared!"])
+    {
+        NSDictionary *itemDetails = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%d", tumblrPogressView.tag], @"tag", nil];
+        [tumblrPogressView removeFromSuperview];
+        [[NSNotificationCenter defaultCenter] postNotificationName:CloseShareProgressNotification object:nil userInfo:itemDetails];
+        tumblrPogressView = nil;
+    }
+    if([instagramPogressView.statusText.text isEqualToString:@"Opening Failed!"] || [instagramPogressView.statusText.text isEqualToString:@"Opened Successfully!"])
+    {
+        NSDictionary *itemDetails = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%d", instagramPogressView.tag], @"tag", nil];
+        [instagramPogressView removeFromSuperview];
+        [[NSNotificationCenter defaultCenter] postNotificationName:CloseShareProgressNotification object:nil userInfo:itemDetails];
+        
+       instagramPogressView = nil;
+    }
+    if([clipBdPogressView.statusText.text isEqualToString:@"Copied successfully!"]){
+        NSDictionary *itemDetails = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%d", clipBdPogressView.tag], @"tag", nil];
+        [clipBdPogressView removeFromSuperview];
+        [[NSNotificationCenter defaultCenter] postNotificationName:CloseShareProgressNotification object:nil userInfo:itemDetails];
+        
+    clipBdPogressView = nil;
+}
+    if([smsPogressView.statusText.text isEqualToString:@"Text failed!"] || [smsPogressView.statusText.text isEqualToString:@"Text sent!"])
+    {
+        NSDictionary *itemDetails = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%d", smsPogressView.tag], @"tag", nil];
+        [smsPogressView removeFromSuperview];
+        [[NSNotificationCenter defaultCenter] postNotificationName:CloseShareProgressNotification object:nil userInfo:itemDetails];
+
+        smsPogressView = nil;
+    }
+    if([emailPogressView.statusText.text isEqualToString:@"Email failed!"] || [emailPogressView.statusText.text isEqualToString:@"Email sent!"])
+    {
+        NSDictionary *itemDetails = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%d", emailPogressView.tag], @"tag", nil];
+        [emailPogressView removeFromSuperview];
+        [[NSNotificationCenter defaultCenter] postNotificationName:CloseShareProgressNotification object:nil userInfo:itemDetails];
+           emailPogressView = nil;
+    }    
+    [self setDefaultProgressViewHeight];
+    [progressView setHidden:YES];
 	//[UIView beginAnimations:nil context:NULL];
 	//[UIView setAnimationDuration:0.2f];
     globle = [Singleton RetrieveSingleton];
@@ -319,24 +378,28 @@ static ShareProgressView *clipBdPogressView;
         [progressView addSubview:twitterPogressView];
         countOfSharingNetworks++;
         [self increaseProgressViewHeightBy:36];
+        [self showTwitterProgressRow];
     }
     if(facebookPogressView){
         [progressView setHidden:NO];
         [progressView addSubview:facebookPogressView];
         countOfSharingNetworks++;
         [self increaseProgressViewHeightBy:36];
+        [self showFacebookProgressRow];
     }
     if(flickrPogressView){
         [progressView setHidden:NO];
         [progressView addSubview:flickrPogressView];
         countOfSharingNetworks++;
         [self increaseProgressViewHeightBy:36];
+        [self showFlickrProgressRow];
     }
     if(tumblrPogressView){
         [progressView setHidden:NO];
         [progressView addSubview:tumblrPogressView];
         countOfSharingNetworks++;
         [self increaseProgressViewHeightBy:36];
+        [self showTumblrProgressRow];
     }
         
     if(instagramPogressView){
@@ -344,24 +407,28 @@ static ShareProgressView *clipBdPogressView;
         [progressView addSubview:instagramPogressView];
         countOfSharingNetworks++;
         [self increaseProgressViewHeightBy:36];
+        [self showInstagramProgressRow];
     }
     if(emailPogressView){
         [progressView setHidden:NO];
         [progressView addSubview:emailPogressView];
         countOfSharingNetworks++;
         [self increaseProgressViewHeightBy:36];
+        [self showemailProgressRow];
     }
     if(smsPogressView){
         [progressView setHidden:NO];
         [progressView addSubview:smsPogressView];
         countOfSharingNetworks++;
         [self increaseProgressViewHeightBy:36];
+        [self showsmsProgressRow ];
     }
     if(clipBdPogressView){
         [progressView setHidden:NO];
         [progressView addSubview:clipBdPogressView];
         countOfSharingNetworks++;
         [self increaseProgressViewHeightBy:36];
+        [self showclipBdProgressRow];
     }
 }
     showbars = YES;
@@ -514,11 +581,6 @@ static ShareProgressView *clipBdPogressView;
                 //countOfSharingNetworks = 0;
                 
                 //loadingView =[LoadingView loadingViewInView:self.view  text:@"Sharing..."];
-                if([instagramButton isSelected]){
-                    [Flurry logEvent:@"Shared Instagram"];
-                    [self showInstagramProgressRow];
-                    [self shareOnInstagram];
-                }
                 
                 if([twitterButton isSelected]){
                     [self showTwitterProgressRow];
@@ -545,6 +607,13 @@ static ShareProgressView *clipBdPogressView;
                     [Flurry logEvent:@"Shared Tumblr"];
                     //[self fillSuccessStatus:tumblrPogressView];
                 }
+                
+                if([instagramButton isSelected]){
+                    [Flurry logEvent:@"Shared Instagram"];
+                    [self showInstagramProgressRow];
+                    [self shareOnInstagram];
+                }
+                
                 if ([emailButton isSelected] && [smsButton isSelected]) {
                      [Flurry logEvent:@"Shared Email & SMS"];
                      [self showemailProgressRow ];
@@ -623,6 +692,8 @@ static ShareProgressView *clipBdPogressView;
     if([smsButton isSelected])
         return true;
     if([clipboardButton isSelected])
+        return true;
+    if([instagramButton isSelected])
         return true;
     
     return false;
@@ -774,7 +845,7 @@ static ShareProgressView *clipBdPogressView;
       //  [flickrRequest setDelegate:self];
         
         FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-        if (![appDelegate.flickrContext.OAuthToken length] || appDelegate.flickrContext.OAuthToken == nil) {
+        if (![appDelegate.flickrContext.OAuthToken length]) {
 
             loadingView =[LoadingView loadingViewInView:self.view  text:@"Wait..."];
             
@@ -1209,10 +1280,6 @@ static ShareProgressView *clipBdPogressView;
  */
 -(void)shareOnTumblr{
 
-    [tumblrPogressView.statusText setText:@"Sharing..."];
-    [tumblrPogressView.statusText setTextColor:[UIColor yellowColor]];
-    [tumblrPogressView.statusIcon setBackgroundImage:nil forState:UIControlStateNormal];
-
     if([[TMAPIClient sharedInstance].OAuthToken length] > 0  && [[TMAPIClient sharedInstance].OAuthTokenSecret length] > 0){
 
         [self shareOnTumblr:YES];
@@ -1260,10 +1327,6 @@ static ShareProgressView *clipBdPogressView;
  * Share on Flickr
  */
 -(void)shareOnFlickr{
-    [flickrPogressView.statusText setText:@"Sharing..."];
-    [flickrPogressView.statusText setTextColor:[UIColor yellowColor]];
-    [flickrPogressView.statusIcon setBackgroundImage:nil forState:UIControlStateNormal];
-
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     NSData *imageData = UIImageJPEGRepresentation(selectedFlyerImage, 0.9);
     
@@ -1281,11 +1344,6 @@ static ShareProgressView *clipBdPogressView;
  * Share on Facebook
  */
 -(void)shareOnFacebook{
-    
-    [facebookPogressView.statusText setText:@"Sharing..."];
-    [facebookPogressView.statusText setTextColor:[UIColor yellowColor]];
-    [facebookPogressView.statusIcon setBackgroundImage:nil forState:UIControlStateNormal];
-    
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                    [NSString stringWithFormat:@"%@ %@ - %@", selectedFlyerDescription, @"#flyerly", [[LocationController getLocationDetails] objectForKey:@"name"]], @"message",  //whatever message goes here
@@ -1355,10 +1413,6 @@ sd:;
  */
 - (void)shareOnTwitter {
     
-    [twitterPogressView.statusText setText:@"Sharing..."];
-    [twitterPogressView.statusText setTextColor:[UIColor yellowColor]];
-    [twitterPogressView.statusIcon setBackgroundImage:nil forState:UIControlStateNormal];
-
     ACAccountStore *account = [[ACAccountStore alloc] init];
     ACAccountType *accountType = [account accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
     
@@ -1635,7 +1689,9 @@ static ShareProgressView *clipBdPogressView;
     [facebookPogressView setFrame:CGRectMake(facebookPogressView.frame.origin.x, 36 * countOfSharingNetworks++, facebookPogressView.frame.size.width, facebookPogressView.frame.size.height)];
     facebookPogressView.tag = 1;
     
-    [facebookPogressView.statusText setText:@""];
+    [facebookPogressView.statusText setText:@"Sharing..."];
+    [facebookPogressView.statusText setTextColor:[UIColor yellowColor]];
+    [facebookPogressView.statusIcon setBackgroundImage:nil forState:UIControlStateNormal];
     [facebookPogressView.networkIcon setBackgroundImage:[UIImage imageNamed:@"status_icon_fb"] forState:UIControlStateNormal];
     [facebookPogressView.cancelIcon setHidden:YES];
     [facebookPogressView.cancelIcon setImage:[UIImage imageNamed:@"share_status_close"] forState:UIControlStateNormal];
@@ -1665,7 +1721,9 @@ static ShareProgressView *clipBdPogressView;
     [twitterPogressView setFrame:CGRectMake(twitterPogressView.frame.origin.x, 36 * countOfSharingNetworks++, twitterPogressView.frame.size.width, twitterPogressView.frame.size.height)];
     twitterPogressView.tag = 2;
 
-    [twitterPogressView.statusText setText:@""];
+    [twitterPogressView.statusText setText:@"Sharing..."];
+    [twitterPogressView.statusText setTextColor:[UIColor yellowColor]];
+    [twitterPogressView.statusIcon setBackgroundImage:nil forState:UIControlStateNormal];
     [twitterPogressView.networkIcon setBackgroundImage:[UIImage imageNamed:@"status_icon_twitter"] forState:UIControlStateNormal];
     [twitterPogressView.cancelIcon setHidden:YES];
     [twitterPogressView.cancelIcon setImage:[UIImage imageNamed:@"share_status_close"] forState:UIControlStateNormal];
@@ -1692,7 +1750,9 @@ static ShareProgressView *clipBdPogressView;
     [tumblrPogressView setFrame:CGRectMake(tumblrPogressView.frame.origin.x, 36 * countOfSharingNetworks++, tumblrPogressView.frame.size.width, tumblrPogressView.frame.size.height)];
     tumblrPogressView.tag = 3;
 
-    [tumblrPogressView.statusText setText:@""];
+    [tumblrPogressView.statusText setText:@"Sharing..."];
+    [tumblrPogressView.statusText setTextColor:[UIColor yellowColor]];
+    [tumblrPogressView.statusIcon setBackgroundImage:nil forState:UIControlStateNormal];
     [tumblrPogressView.networkIcon setBackgroundImage:[UIImage imageNamed:@"status_icon_tumblr"] forState:UIControlStateNormal];
     [tumblrPogressView.cancelIcon setHidden:YES];
     [tumblrPogressView.cancelIcon setImage:[UIImage imageNamed:@"share_status_close"] forState:UIControlStateNormal];
@@ -1719,7 +1779,9 @@ static ShareProgressView *clipBdPogressView;
     [flickrPogressView setFrame:CGRectMake(flickrPogressView.frame.origin.x, 36 * countOfSharingNetworks++, flickrPogressView.frame.size.width, flickrPogressView.frame.size.height)];
     flickrPogressView.tag = 4;
 
-    [flickrPogressView.statusText setText:@""];
+    [flickrPogressView.statusText setText:@"Sharing..."];
+    [flickrPogressView.statusText setTextColor:[UIColor yellowColor]];
+    [flickrPogressView.statusIcon setBackgroundImage:nil forState:UIControlStateNormal];
     [flickrPogressView.networkIcon setBackgroundImage:[UIImage imageNamed:@"status_icon_flickr"] forState:UIControlStateNormal];
     [flickrPogressView.cancelIcon setHidden:YES];
     [flickrPogressView.cancelIcon setImage:[UIImage imageNamed:@"share_status_close"] forState:UIControlStateNormal];
@@ -2136,6 +2198,7 @@ static ShareProgressView *clipBdPogressView;
 		[self postDismissCleanup];
 	}
 }
+
 
 - (void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];

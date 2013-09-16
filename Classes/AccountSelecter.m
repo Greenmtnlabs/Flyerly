@@ -67,17 +67,40 @@
     // Dispose of any resources that can be recreated.
 }
 -(IBAction)save{
-    if([self Uservalidate]){
-        PFUser *user = [PFUser currentUser];
-        [user setObject:username.text forKey:@"username"];
-        [user setObject:phno.text forKey:@"contact"];
-        [user setObject:name.text forKey:@"name"];
-        [user setObject:email.text forKey:@"email"];
-        [user saveInBackground];
-        [self showAlert:@"Profile Updated Successfully" message:@""];
+    if([AddFriendsController connected]){
+        if([self Uservalidate]){
+            PFUser *user = [PFUser currentUser];
+            NSString *usr = user.username;
+            if(![usr isEqualToString:username.text]){
+                PFQuery *query = [PFUser query];
+                [query whereKey:@"username" equalTo:username.text];
+                [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
+                    if (error) {
+                        PFUser *user = [PFUser currentUser];
+                        [user setObject:username.text forKey:@"username"];
+                        [user setObject:phno.text forKey:@"contact"];
+                        [user setObject:name.text forKey:@"name"];
+                        [user setObject:email.text forKey:@"email"];
+                        [user saveInBackground];
+                        [self showAlert:@"Profile Updated Successfully" message:@""];
+                    }else{
+                        [self showAlert:@"Username already taken" message:@""];
+                    }
+                }];
+            }else{
+                PFUser *user = [PFUser currentUser];
+                [user setObject:username.text forKey:@"username"];
+                [user setObject:phno.text forKey:@"contact"];
+                [user setObject:name.text forKey:@"name"];
+                [user setObject:email.text forKey:@"email"];
+                [user saveInBackground];
+                [self showAlert:@"Profile Updated Successfully" message:@""];
+            }
+        }
+        [password resignFirstResponder];
+    }else{
+        [self showAlert:@"Warning!" message:@"You're not connected to the internet. Please connect and retry."];
     }
-      
-    [password resignFirstResponder];
    }
 -(IBAction)changePW{
     

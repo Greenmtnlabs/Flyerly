@@ -23,7 +23,7 @@
 #import "LauchViewController.h"
 #import "MyNavigationBar.h"
 
-@class LoadingView;
+@class LoadingView,LauchViewController;
 
 @interface AddFriendsController : UIViewController<UITableViewDelegate,UITableViewDataSource,FBRequestDelegate,FBSessionDelegate,MFMessageComposeViewControllerDelegate,FBDialogDelegate,FBLoginDialogDelegate,UITextFieldDelegate, UIActionSheetDelegate>{
     LauchViewController *launchCotroller;

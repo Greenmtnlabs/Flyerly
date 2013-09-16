@@ -181,10 +181,6 @@
     appDelegate.facebook.sessionDelegate = nil;
     appDelegate.facebook.accessToken = nil;
     appDelegate.facebook.expirationDate = nil;
-    appDelegate.flickrContext.OAuthToken = nil;
-    appDelegate.flickrRequest = nil;
-     appDelegate.flickrUserName = nil;
-    appDelegate._tSession = nil;
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"facebookSetting"];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"FBAccessTokenKey"];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"FBExpirationDateKey"];
