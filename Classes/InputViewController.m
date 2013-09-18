@@ -86,6 +86,8 @@
                 [ASD addObject:@"500819963306066"];
                 [self tagFacebookUsersWithFeed:ASD];
             }
+            
+            [self dismissModalViewControllerAnimated:YES];
 
         }else if([globle.inputValue isEqualToString:@"twitter"]) {
             if([TWTweetComposeViewController canSendTweet]){
@@ -94,7 +96,7 @@
                 [self showAlert:@"No Twitter connection" message:@"You must be connected to Twitter from device settings."];
             }
         }
-    [self dismissModalViewControllerAnimated:YES];
+
     }
 }
 
@@ -206,6 +208,7 @@
     sName = nil;
     sMessage = nil;
     arrayOfAccounts = nil;
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 - (void)sendTwitterMessage:(NSString *)message screenName:(NSString *)screenName{

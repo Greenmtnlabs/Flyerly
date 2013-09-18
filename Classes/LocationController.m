@@ -167,7 +167,7 @@ enum {
     [self updateView];
     
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys: [NSString stringWithFormat:@"%@,%@", self.latitude, self.longitude], @"ll",@"browse",@"intent",@"5000",@"radius",searchField.text,@"query", nil];
+    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys: [NSString stringWithFormat:@"%@,%@", self.latitude, self.longitude], @"ll",@"browse",@"intent",@"40000",@"radius",searchField.text,@"query", nil];
 
     //NSString *queryString = [NSString stringWithFormat:@"?ll=%@,%@&intent=browse&radius=1000&query=%@",latitude,longitude,@"kara"];
     self.request = [appDelegate.foursquare requestWithPath:[NSString stringWithFormat:@"venues/search"] HTTPMethod:@"GET" parameters:parameters delegate:self];

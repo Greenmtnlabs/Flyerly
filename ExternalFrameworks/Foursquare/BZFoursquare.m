@@ -145,6 +145,8 @@
     if (locale_) {
         [mDict setObject:locale_ forKey:@"locale"];
     }
+    //NSLog(@"%@",path);
+     //NSLog(@"%@",mDict);
     return [[[BZFoursquareRequest alloc] initWithPath:path HTTPMethod:HTTPMethod parameters:mDict delegate:delegate] autorelease];
 }
 

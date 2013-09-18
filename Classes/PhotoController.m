@@ -1989,7 +1989,7 @@ int arrangeLayerIndex;
 	} else if(alertView == inAppAlert && (buttonIndex == 0 || buttonIndex == 1 || buttonIndex == 2)) {
         
         NSLog(@"Purchase One Font Selected");
-        
+        NSLog(@"%@",[demoPurchase.products objectAtIndex:buttonIndex]);
         if (![demoPurchase purchaseProduct:[demoPurchase.products objectAtIndex:buttonIndex]]){
             
             // Returned NO, so notify user that In-App Purchase is Disabled in their Settings.
@@ -2849,7 +2849,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     DraftViewController *draftViewController = [[DraftViewController alloc] initWithNibName:@"DraftViewController" bundle:nil];
     draftViewController.fromPhotoController = YES;
     draftViewController.selectedFlyerImage = [UIImage imageWithData:data];
-    draftViewController.selectedFlyerTitle = @"";
+    draftViewController.selectedFlyerTitle = globle.FlyerName;
     if([[self textLabelLayersArray] count] > 0){
         draftViewController.selectedFlyerDescription = ((CustomLabel*)[[self textLabelLayersArray] objectAtIndex:0]).text;
     }else{
@@ -4529,7 +4529,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
             for(int i = 0 ; i < [files count];i++)
             {
                 NSString *lastFileName = [files objectAtIndex:i];
-                //NSLog(lastFileName);
+                NSLog(@"%@",lastFileName);
                 lastFileName = [lastFileName stringByReplacingOccurrencesOfString:@".jpg" withString:@""];
                 lastFileName = [lastFileName stringByReplacingOccurrencesOfString:@"IMG_" withString:@""];
                 imgCount = [lastFileName intValue];
@@ -4724,16 +4724,26 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
  *Save flyer details
  */
 -(void)saveFlyerDetails:(NSString *)finalImgDetailWritePath{
+
+    NSArray *OldDetail = [[NSArray alloc] initWithContentsOfFile:finalImgDetailWritePath];
+   // NSLog(@"%@",OldDetail);
+    NSMutableArray *array = [[[NSMutableArray alloc] init] autorelease];
+    if ([OldDetail count] > 0) {
+
+        [array addObject:[OldDetail objectAtIndex:0]];
+        globle.FlyerName = [OldDetail objectAtIndex:0];
+    }else{
+        [array addObject:@""];
+         globle.FlyerName =@"";
+    }
     
-	NSMutableArray *array = [[[NSMutableArray alloc] init] autorelease];
-    [array addObject:@""];
     if([[self textLabelLayersArray] count] > 0){
         //NSLog(@"%@", ((CustomLabel*)[[self textLabelLayersArray] objectAtIndex:0]).text);
         [array addObject:((CustomLabel*)[[self textLabelLayersArray] objectAtIndex:0]).text];
     }else{
         [array addObject:@""];
     }
-    
+   // NSLog(@"%@",array);
     NSDate *date = [NSDate date];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc]init];
     [dateFormat setDateFormat:FlyerDateFormat];
@@ -4898,6 +4908,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     demoPurchase = [[EBPurchase alloc] init];
     demoPurchase.delegate = self;
     demoPurchase.customIndex = button.tag;
+    NSLog(@"%d",button.tag);
     isPurchased = NO;
 
     [demoPurchase requestProduct:[NSArray arrayWithObjects:PRODUCT_FONT, PRODUCT_FULL_FONT, PRODUCT_ALL_BUNDLE, nil]];

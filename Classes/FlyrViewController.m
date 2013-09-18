@@ -86,7 +86,6 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
             [photoDetailArray addObject:finalImagePath];
         }
 	}
-    
     sortedFiles = [photoArray sortedArrayUsingFunction:dateModifiedSort context:nil];
     detailSortedFiles = [photoDetailArray sortedArrayUsingFunction:dateModifiedSort context:nil];
 
@@ -172,6 +171,22 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
  		sTemp = [[searchArray objectAtIndex:i] objectAtIndex:0];
         NSRange titleResultsRange = [sTemp rangeOfString:searchText options:NSCaseInsensitiveSearch];
         if (titleResultsRange.length > 0){
+			[photoArrayBackup addObject:[photoArray objectAtIndex:i ]];
+            [photoDetailArrayBackup addObject:[photoDetailArray objectAtIndex:i ]];
+            [iconArrayBackup addObject:[iconArray objectAtIndex:i ]];
+        }
+        
+        sTemp = [[searchArray objectAtIndex:i] objectAtIndex:1];
+        NSRange titleResultsRange1 = [sTemp rangeOfString:searchText options:NSCaseInsensitiveSearch];
+        if (titleResultsRange1.length > 0){
+			[photoArrayBackup addObject:[photoArray objectAtIndex:i ]];
+            [photoDetailArrayBackup addObject:[photoDetailArray objectAtIndex:i ]];
+            [iconArrayBackup addObject:[iconArray objectAtIndex:i ]];
+        }
+        
+        sTemp = [[searchArray objectAtIndex:i] objectAtIndex:2];
+        NSRange titleResultsRange2 = [sTemp rangeOfString:searchText options:NSCaseInsensitiveSearch];
+        if (titleResultsRange2.length > 0){
 			[photoArrayBackup addObject:[photoArray objectAtIndex:i ]];
             [photoDetailArrayBackup addObject:[photoDetailArray objectAtIndex:i ]];
             [iconArrayBackup addObject:[iconArray objectAtIndex:i ]];
@@ -317,9 +332,12 @@ sd:;
 }
 
 -(void)showFlyerOverlay:(id)sender{
-    
+
     // cast to button
     UIButton *cellImageButton = (UIButton *) sender;
+    //NSArray *detailArray = [photoDetailArray objectAtIndex:cellImageButton.tag];
+    //NSString *title = [detailArray objectAtIndex:0];
+
     // Get image on button
     UIImage *flyerImage = [cellImageButton imageForState:UIControlStateNormal];
     // Create Modal trnasparent view
@@ -327,14 +345,13 @@ sd:;
     [modalView setBackgroundColor:[MyCustomCell colorWithHexString:@"161616"]];
     modalView.alpha = 0.75;
     self.navigationController.navigationBar.alpha = 0.35;
-
     // Create overlay controller
     FlyerOverlayController *overlayController = [[FlyerOverlayController alloc]initWithNibName:@"FlyerOverlayController" bundle:nil image:flyerImage modalView:modalView];
     // set its parent
     [overlayController setViews:self];
     //NSLog(@"showFlyerOverlay Tag: %d", cellImageButton.tag);
     overlayController.flyerNumber = cellImageButton.tag;
-    
+
     // Add modal view and overlay view
     [self.view addSubview:modalView];
     [self.view addSubview:overlayController.view];
@@ -351,7 +368,7 @@ sd:;
     if (cell == nil) {
         cell = [[[MyCustomCell alloc] initWithFrame:CGRectZero reuseIdentifier:cellId] autorelease];
         cell.flyerNumber = [index intValue];
-        cell.cellImage.tag = cell.flyerNumber;
+        cell.cellImage.tag =   cell.flyerNumber;
         [cell.cellImage addTarget:self action:@selector(showFlyerOverlay:) forControlEvents:UIControlEventTouchUpInside];
     }
     
