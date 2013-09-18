@@ -629,8 +629,7 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
         appDelegate.facebook.sessionDelegate = self;
     
         if([appDelegate.facebook isSessionValid]) {
-        /// for User Farmaish
-       
+      
         crossButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 64, 25, 25)];
         [crossButton setBackgroundImage:[UIImage imageNamed:@"cross"] forState:UIControlStateNormal];
         [crossButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];

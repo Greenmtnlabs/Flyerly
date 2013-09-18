@@ -17,6 +17,7 @@
 
     Singleton *globle;
     NSString *S;
+    CGFloat animatedDistance;
 }
 @property(nonatomic, retain) IBOutlet UITextField *username;
 @property(nonatomic, retain) IBOutlet UITextField *password;

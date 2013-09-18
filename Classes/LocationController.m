@@ -118,6 +118,7 @@ enum {
     [searchField addTarget:self action:@selector(textFieldTapped:) forControlEvents:UIControlEventEditingDidBegin];
     searchField.clearButtonMode = UITextFieldViewModeWhileEditing;
     
+    CostumLocations = [[NSMutableArray alloc] init];
     [self showLoadingIndicator];
 }
 
@@ -200,8 +201,9 @@ enum {
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     if(searchMode){
-
-        return 2;
+        CostumLocations = [self ReadCustomLocation];
+        NSLog(@"%@",CostumLocations);
+        return [CostumLocations count] + 2;
         
     } else {
         if(self.response){
@@ -244,6 +246,20 @@ enum {
             cell.label1.text = [NSString stringWithFormat:@"Find %@", searchField.text];
             cell.label2.text = @"Search more places nearby";
             [cell.imageView setImage:[UIImage imageNamed:@"location_point_selected"]];
+        }else{
+            if (![searchField.text isEqualToString:@""]) {
+            NSRange titleResultsRange = [[CostumLocations objectAtIndex:indexPath.row - 2] rangeOfString:searchField.text options:NSCaseInsensitiveSearch];
+            if (titleResultsRange.length > 0){
+                cell.label1.text = [NSString stringWithFormat:@"%@", [CostumLocations objectAtIndex:indexPath.row - 2]];
+                cell.label2.text = @"Custom Location";
+                cell.imageView.image = nil;
+               // [cell.imageView setImage:[UIImage imageNamed:@"location_point_selected"]];
+            }
+            }else{
+                cell.label1.text = @"";
+                cell.label2.text = @"";
+                cell.imageView.image = nil;
+            }
         }
         
         // return cell
@@ -288,13 +304,17 @@ enum {
             if([searchField text]){
                 locname = [NSString stringWithFormat:@"at %@",[searchField text] ];
                 [[LocationController getLocationDetails] setObject:locname forKey:@"name"];
+                [self AddCustomLocation:[searchField text]];
                 [self onBack];
-            }else{
             }
             
         } else if(indexPath.row == 1){            
             searchMode = NO;
             [self searchNearBy];
+        }else{
+            locname = [NSString stringWithFormat:@"at %@",[CostumLocations objectAtIndex:indexPath.row -2]];
+            [[LocationController getLocationDetails] setObject:locname forKey:@"name"];
+             [self onBack];
         }
         
     }else{
@@ -308,50 +328,34 @@ enum {
         id venue = [venues objectAtIndex:indexPath.row];
         NSDictionary *location = [venue objectForKey:@"location"];
         
-        FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-        
-        NSString *socialFlyerPath = [imageFileName stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@/Flyr/", appDelegate.loginId] withString:[NSString stringWithFormat:@"%@/Flyr/Social/", appDelegate.loginId]];
-        NSString *finalImgWritePath = [socialFlyerPath stringByReplacingOccurrencesOfString:@".jpg" withString:@".soc"];
-        
-        NSMutableArray *socialArray = [[NSMutableArray alloc] initWithContentsOfFile:finalImgWritePath];
-        
         if([venue objectForKey:@"name"]){
             
             locname = [NSString stringWithFormat:@"at %@",[venue objectForKey:@"name"] ];
             NSLog(@"%@",locname);
             [[LocationController getLocationDetails] setObject:locname forKey:@"name"];
-            [socialArray insertObject:[venue objectForKey:@"name"] atIndex:0];
-
+ 
         }else{
             [[LocationController getLocationDetails] setObject:@"" forKey:@"name"];
         }
         if([location objectForKey:@"address"]){
             [[LocationController getLocationDetails] setObject:[location objectForKey:@"address"] forKey:@"address"];
-            [socialArray insertObject:[location objectForKey:@"address"] atIndex:1]; 
         }else{
             [[LocationController getLocationDetails] setObject:@"" forKey:@"address"];
         }
         if([location objectForKey:@"lat"]){
             [[LocationController getLocationDetails] setObject:[location objectForKey:@"lat"] forKey:@"lat"];
-            [socialArray insertObject:[location objectForKey:@"lat"] atIndex:2];
         }else{
             [[LocationController getLocationDetails] setObject:@"" forKey:@"lat"];
         }
         if([location objectForKey:@"lng"]){
             [[LocationController getLocationDetails] setObject:[location objectForKey:@"lng"] forKey:@"lng"];
-            [socialArray insertObject:[location objectForKey:@"lng"] atIndex:3];
         }else{
             [[LocationController getLocationDetails] setObject:@"" forKey:@"lng"];
         }
         
         //NSLog(@"locationDetails after: %@", locationDetails);
-        [[NSFileManager defaultManager] removeItemAtPath:finalImgWritePath error:nil];
-        [socialArray writeToFile:finalImgWritePath atomically:YES];
-
         NSLog(@"Before onBack");
-        [socialArray release];
         [imageFileName release];
-        [socialFlyerPath release];
         [self onBack];
     }
 }
@@ -489,6 +493,77 @@ NSMutableDictionary *locationDetails;
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma Custom Locations
+-(void)AddCustomLocation:(NSString *)loc{
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    
+    NSString *homeDirectoryPath = NSHomeDirectory();
+    NSString *usernamePath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/costumeLocation",appDelegate.loginId]];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:usernamePath isDirectory:NULL]) {
+        NSError *error;
+        [[NSFileManager defaultManager] createDirectoryAtPath:usernamePath withIntermediateDirectories:YES attributes:nil error:&error];
+    }
+    NSString *finalImgWritePath = [usernamePath stringByAppendingString:@"/locations.txt"];
+    NSLog(@"%@",usernamePath);
+    NSLog(@"%@",finalImgWritePath);
+    if (![[NSFileManager defaultManager] fileExistsAtPath:finalImgWritePath isDirectory:NULL]) {
+       // [[NSFileManager defaultManager] createFileAtPath:finalImgWritePath contents:nil attributes:nil];
+    }
+
+    Oldlocation = [[NSMutableArray alloc] initWithContentsOfFile:finalImgWritePath];
+    //NSLog(@"%@",Oldlocation);
+    if (Oldlocation == nil) {
+        NSMutableArray *Addnewlocation = [[NSMutableArray alloc]init];
+        [Addnewlocation addObject:loc];
+        [Addnewlocation writeToFile:finalImgWritePath atomically:YES];
+    }else{    
+        [Oldlocation addObject:loc];
+        //NSLog(@"%@",Oldlocation);
+        [Oldlocation writeToFile:finalImgWritePath atomically:YES];
+    }
+
+}
+
+-(NSMutableArray *)ReadCustomLocation{
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    
+    NSString *homeDirectoryPath = NSHomeDirectory();
+    NSString *usernamePath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/costumeLocation",appDelegate.loginId]];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:usernamePath isDirectory:NULL]) {
+        NSError *error;
+        [[NSFileManager defaultManager] createDirectoryAtPath:usernamePath withIntermediateDirectories:YES attributes:nil error:&error];
+    }
+    NSString *finalImgWritePath = [usernamePath stringByAppendingString:@"/locations.txt"];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:finalImgWritePath isDirectory:NULL]) {
+        [[NSFileManager defaultManager] createFileAtPath:finalImgWritePath contents:nil attributes:nil];
+    }
+    
+    Oldlocation = [[NSMutableArray alloc] initWithContentsOfFile:finalImgWritePath];
+    NSString *sTemp;
+	NSMutableArray *loctemp = [[NSMutableArray alloc]init];
+    NSString *searchText = searchField.text;
+    [loctemp  removeAllObjects];
+    NSLog(@"%@", searchField.text);
+    if (![searchField.text isEqualToString:@""]) {
+        for (int i =0 ; i < [Oldlocation count] ; i++)
+        {
+            sTemp = [Oldlocation objectAtIndex:i] ;
+            NSRange titleResultsRange = [sTemp rangeOfString:searchText options:NSCaseInsensitiveSearch];
+            if (titleResultsRange.length > 0){
+                [loctemp addObject:[Oldlocation objectAtIndex:i ]];
+            }
+        
+        }
+    }
+    
+    return loctemp;
+}
+
+- (void)dealloc {
+    [Oldlocation release];
+    [super dealloc];
 }
 
 @end

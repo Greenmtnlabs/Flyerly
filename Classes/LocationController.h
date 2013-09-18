@@ -29,6 +29,9 @@
     NSString *longitude;
     NSString *locname;
     BOOL searchMode;
+    NSMutableArray *CostumLocations;
+    NSMutableArray *Oldlocation;
+    
 }
 
 @property(nonatomic,retain) IBOutlet UITableView *uiTableView;
@@ -42,5 +45,7 @@
 
 - (IBAction)onSearchClick:(UIButton *)sender;
 +(NSMutableDictionary *)getLocationDetails;
+-(void)AddCustomLocation:(NSString *)loc;
+-(NSMutableArray *)ReadCustomLocation;
 
 @end

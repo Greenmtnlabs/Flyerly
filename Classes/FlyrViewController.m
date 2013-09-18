@@ -156,6 +156,9 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
 
 - (void) searchTableView:(NSString *)schTxt {
 	NSString *sTemp;
+    NSString *sTemp1;
+	NSString *sTemp2;
+
 	NSString *searchText = searchTextField.text;
      NSLog(@"%@", searchTextField.text);
    
@@ -169,28 +172,20 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
 	{
 		
  		sTemp = [[searchArray objectAtIndex:i] objectAtIndex:0];
+        sTemp1 = [[searchArray objectAtIndex:i] objectAtIndex:1];
+        sTemp2 = [[searchArray objectAtIndex:i] objectAtIndex:2];
+
+
         NSRange titleResultsRange = [sTemp rangeOfString:searchText options:NSCaseInsensitiveSearch];
-        if (titleResultsRange.length > 0){
+        NSRange titleResultsRange1 = [sTemp1 rangeOfString:searchText options:NSCaseInsensitiveSearch];
+        NSRange titleResultsRange2 = [sTemp2 rangeOfString:searchText options:NSCaseInsensitiveSearch];
+
+        if (titleResultsRange.length > 0 || titleResultsRange1.length > 0 || titleResultsRange2.length > 0){
 			[photoArrayBackup addObject:[photoArray objectAtIndex:i ]];
             [photoDetailArrayBackup addObject:[photoDetailArray objectAtIndex:i ]];
             [iconArrayBackup addObject:[iconArray objectAtIndex:i ]];
         }
         
-        sTemp = [[searchArray objectAtIndex:i] objectAtIndex:1];
-        NSRange titleResultsRange1 = [sTemp rangeOfString:searchText options:NSCaseInsensitiveSearch];
-        if (titleResultsRange1.length > 0){
-			[photoArrayBackup addObject:[photoArray objectAtIndex:i ]];
-            [photoDetailArrayBackup addObject:[photoDetailArray objectAtIndex:i ]];
-            [iconArrayBackup addObject:[iconArray objectAtIndex:i ]];
-        }
-        
-        sTemp = [[searchArray objectAtIndex:i] objectAtIndex:2];
-        NSRange titleResultsRange2 = [sTemp rangeOfString:searchText options:NSCaseInsensitiveSearch];
-        if (titleResultsRange2.length > 0){
-			[photoArrayBackup addObject:[photoArray objectAtIndex:i ]];
-            [photoDetailArrayBackup addObject:[photoDetailArray objectAtIndex:i ]];
-            [iconArrayBackup addObject:[iconArray objectAtIndex:i ]];
-        }
 
 	}
 sd:;
