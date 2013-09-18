@@ -149,7 +149,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 	NSInteger symbolScrollHeight = 50;
 	symbolArray = [[NSMutableArray alloc]init];
     
-	for(int i=1;i<=94;i++) {
+	for(int i=1;i<=113;i++) {
         
 		NSString* symbolName = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"symbol%d",i] ofType:@"png"];
 		UIImage *symbolImg =  [UIImage imageWithContentsOfFile:symbolName];
@@ -173,7 +173,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 
 	iconArray = [[NSMutableArray alloc]init];
     
-	for(int i=1;i<=113;i++) {
+	for(int i=1;i<=94;i++) {
         
 		NSString* iconName = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"ricon%d",i] ofType:@"png"];
 		UIImage *iconImg =  [UIImage imageWithContentsOfFile:iconName];
