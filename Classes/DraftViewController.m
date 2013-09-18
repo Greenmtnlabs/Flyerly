@@ -427,7 +427,7 @@ static ShareProgressView *clipBdPogressView;
 }
 
 -(void)showFlyerOverlay:(id)sender{
-    
+    globle.FlyerName = [NSString stringWithFormat:@"%@",titleView.text];
     // cast to button
     UIButton *cellImageButton = (UIButton *) sender;
     // Get image on button
@@ -1317,7 +1317,6 @@ static ShareProgressView *clipBdPogressView;
 }
 
 - (void)makeTwitterPost:(ACAccount *)acct {
-    globle.PostRuning = @"YES";
     TWRequest *postRequest = [[TWRequest alloc] initWithURL:[NSURL URLWithString:@"https://upload.twitter.com/1/statuses/update_with_media.json"] parameters:nil requestMethod:TWRequestMethodPOST];
     
     
@@ -1331,7 +1330,6 @@ static ShareProgressView *clipBdPogressView;
 
     // Perform the request created above and create a handler block to handle the response.
     [postRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
-        globle.PostRuning = @"NO";
         if(responseData){
             NSMutableDictionary *responseDictionary  = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:nil];
             NSLog(@"%@",responseDictionary);

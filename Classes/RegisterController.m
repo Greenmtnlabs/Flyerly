@@ -20,7 +20,7 @@
 @end
 
 @implementation RegisterController
-@synthesize username,password,confirmPassword,signUp,signUpFacebook,signUpTwitter,email,name,phno,usrExist;
+@synthesize username,password,confirmPassword,signUp,signUpFacebook,signUpTwitter,email,name,phno,usrExist,scrollView;
 static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
 static const CGFloat MINIMUM_SCROLL_FRACTION = 0.2;
 static const CGFloat MAXIMUM_SCROLL_FRACTION = 0.8;
@@ -123,10 +123,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
         signUpFacebook.hidden = YES;
         signUpTwitter.hidden = YES;
     }
-    //email.text =@"Zohaib.Abbasi@gmail.com";
-    //name.text =@"Zohaib Aziz Abbasi";
-    //phno.text =@"03452139691";
-
+ 
 	// Do any additional setup after loading the view.
     
     self.navigationController.navigationBarHidden = NO;
@@ -174,7 +171,6 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 
     
     UIButton *signUpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)];
-    // [welcomeButton setTitle:@" Welcome" forState:UIControlStateNormal];
     [signUpButton addTarget:self action:@selector(onSignUp) forControlEvents:UIControlEventTouchUpInside];
     [signUpButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
     signUpButton.showsTouchWhenHighlighted = YES;
@@ -182,16 +178,6 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     
     [self.navigationItem setRightBarButtonItem:rightBarButton];
 
-/*
-    // Navigation bar sign in button
-    UIBarButtonItem *doneTopRightButton = [[UIBarButtonItem alloc] initWithTitle:@"Sign up" style:UIBarButtonItemStylePlain target:self action:@selector(onSignUp)];
-    
-    [doneTopRightButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: [UIFont fontWithName:BUTTON_FONT size:13.0], UITextAttributeFont,nil] forState:UIControlStateNormal];
-    
-    [doneTopRightButton setTintColor:[UIColor colorWithRed:104.0/255.0 green:173.0/255.0 blue:57.0/255.0 alpha:1]];
-    self.navigationItem.rightBarButtonItem = doneTopRightButton;
-    [doneTopRightButton release];
-*/
 }
 
 -(void)goBack{

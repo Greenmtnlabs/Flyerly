@@ -102,7 +102,7 @@
 	NSString *finalImgWritePath = [socialFlyerPath stringByReplacingOccurrencesOfString:@".jpg" withString:@".soc"];
 
     NSArray *arr = [[NSArray alloc] initWithContentsOfFile:finalImgWritePath];
-    //NSLog(@"%@", arr);
+   // NSLog(@"%@", arr);
 
     [self.cellImage setImage:image forState:UIControlStateNormal];
     

@@ -322,6 +322,9 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
             [navigationController pushViewController:accountController animated:YES];
         }else{
             [navigationController pushViewController:lauchController animated:YES];
+            FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+            appDelegate.loginId = [AccountController getPathFromEmail:[[NSUserDefaults standardUserDefaults]  objectForKey:@"User"]];
+            
         }
 
         [window addSubview:[navigationController view]];

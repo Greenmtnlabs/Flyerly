@@ -39,6 +39,7 @@
     UIAlertView *inAppAlert ;
 }
 
+@property(nonatomic,retain) IBOutlet UIScrollView *scrollView;
 @property(nonatomic, retain) IBOutlet UITextField *username;
 @property(nonatomic, retain) IBOutlet UITextField *password;
 @property(nonatomic, retain) IBOutlet UITextField *confirmPassword;

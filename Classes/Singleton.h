@@ -18,7 +18,8 @@
 @property (nonatomic, strong) NSString *twitterUser;
 @property (nonatomic, strong) NSString *inputValue;
 @property (nonatomic, strong) NSString *sharelink;
-@property (nonatomic, strong) NSString *PostRuning;
+@property (nonatomic, strong) NSString *FlyerName;
+
 +(Singleton *)RetrieveSingleton;
 -(UIColor*)colorWithHexString:(NSString*)hex;
 
