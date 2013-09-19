@@ -11,7 +11,7 @@
 #import "FBConnect/FBConnect.h"
 #import "MainSettingViewController.h"
 #import "ParentViewController.h"
-
+#import "FacebookLikeView.h"
 @class FlyrViewController;
 @class SettingViewController;
 @class PhotoController ;
@@ -21,7 +21,7 @@
 @class MainSettingViewController;
 
 
-@interface LauchViewController : ParentViewController<FBDialogDelegate,FBSessionDelegate,FBRequestDelegate,UIWebViewDelegate,FBWebDialogsDelegate,FBGraphUser, UIActionSheetDelegate> {
+@interface LauchViewController : ParentViewController<FacebookLikeViewDelegate,FBDialogDelegate,FBSessionDelegate,FBRequestDelegate,UIWebViewDelegate,FBWebDialogsDelegate,FBGraphUser, UIActionSheetDelegate> {
 	PhotoController *ptController;
 	FlyrViewController *tpController;
 	SettingViewController *spController;

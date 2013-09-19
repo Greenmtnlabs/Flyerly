@@ -462,23 +462,23 @@
 									<object class="IBUIImageView" id="374754201">
 										<reference key="NSNextResponder" ref="660842419"/>
 										<int key="NSvFlags">292</int>
-										<string key="NSFrameSize">{215, 110}</string>
+										<string key="NSFrameSize">{236, 110}</string>
 										<reference key="NSSuperview" ref="660842419"/>
-										<reference key="NSNextKeyView" ref="805858290"/>
+										<reference key="NSNextKeyView" ref="47208329"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<bool key="IBUIUserInteractionEnabled">NO</bool>
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-										<object class="NSCustomResource" key="IBUIImage" id="1063742917">
+										<object class="NSCustomResource" key="IBUIImage">
 											<string key="NSClassName">NSImage</string>
-											<string key="NSResourceName">AlertViewBackground.png</string>
+											<string key="NSResourceName">likealertbg.png</string>
 										</object>
 									</object>
 									<object class="IBUILabel" id="805858290">
 										<reference key="NSNextResponder" ref="660842419"/>
 										<int key="NSvFlags">292</int>
-										<string key="NSFrame">{{9, 0}, {198, 68}}</string>
+										<string key="NSFrame">{{11, 3}, {198, 68}}</string>
 										<reference key="NSSuperview" ref="660842419"/>
-										<reference key="NSNextKeyView" ref="47208329"/>
+										<reference key="NSNextKeyView" ref="49492449"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<bool key="IBUIOpaque">NO</bool>
 										<bool key="IBUIClipsSubviews">YES</bool>
@@ -486,16 +486,22 @@
 										<bool key="IBUIUserInteractionEnabled">NO</bool>
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 										<string key="IBUIText">                 flyerly page on facebook to keep up with the latest on the app.</string>
-										<reference key="IBUITextColor" ref="949582591"/>
+										<object class="NSColor" key="IBUITextColor">
+											<int key="NSColorSpace">3</int>
+											<bytes key="NSWhite">MC4zMzMzMzMzMzMzAA</bytes>
+										</object>
 										<nil key="IBUIHighlightedColor"/>
 										<int key="IBUIBaselineAdjustment">0</int>
 										<int key="IBUINumberOfLines">4</int>
+										<int key="IBUILineBreakMode">0</int>
 										<object class="IBUIFontDescription" key="IBUIFontDescription">
-											<int key="type">2</int>
+											<string key="name">Arial-BoldMT</string>
+											<string key="family">Arial</string>
+											<int key="traits">2</int>
 											<double key="pointSize">11</double>
 										</object>
 										<object class="NSFont" key="IBUIFont">
-											<string key="NSName">Helvetica-Bold</string>
+											<string key="NSName">Arial-BoldMT</string>
 											<double key="NSSize">11</double>
 											<int key="NSfFlags">16</int>
 										</object>
@@ -505,9 +511,9 @@
 									<object class="IBUIView" id="47208329">
 										<reference key="NSNextResponder" ref="660842419"/>
 										<int key="NSvFlags">292</int>
-										<string key="NSFrame">{{10, 17}, {46, 17}}</string>
+										<string key="NSFrame">{{10, 18}, {46, 17}}</string>
 										<reference key="NSSuperview" ref="660842419"/>
-										<reference key="NSNextKeyView" ref="49492449"/>
+										<reference key="NSNextKeyView" ref="805858290"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<object class="NSColor" key="IBUIBackgroundColor" id="126444418">
 											<int key="NSColorSpace">3</int>
@@ -518,7 +524,7 @@
 									<object class="IBUIButton" id="49492449">
 										<reference key="NSNextResponder" ref="660842419"/>
 										<int key="NSvFlags">292</int>
-										<string key="NSFrame">{{80, 53}, {55, 33}}</string>
+										<string key="NSFrame">{{83, 68}, {70, 28}}</string>
 										<reference key="NSSuperview" ref="660842419"/>
 										<reference key="NSNextKeyView" ref="384374429"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -526,16 +532,18 @@
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 										<int key="IBUIContentHorizontalAlignment">0</int>
 										<int key="IBUIContentVerticalAlignment">0</int>
-										<string key="IBUINormalTitle">Close</string>
 										<reference key="IBUIHighlightedTitleColor" ref="949582591"/>
 										<reference key="IBUINormalTitleColor" ref="949582591"/>
 										<reference key="IBUINormalTitleShadowColor" ref="384320666"/>
-										<reference key="IBUINormalBackgroundImage" ref="1063742917"/>
+										<object class="NSCustomResource" key="IBUINormalBackgroundImage">
+											<string key="NSClassName">NSImage</string>
+											<string key="NSResourceName">likealertclose.png</string>
+										</object>
 										<reference key="IBUIFontDescription" ref="311371421"/>
 										<reference key="IBUIFont" ref="1051223800"/>
 									</object>
 								</array>
-								<string key="NSFrame">{{52, 175}, {215, 110}}</string>
+								<string key="NSFrame">{{44, 175}, {243, 110}}</string>
 								<reference key="NSSuperview" ref="87613878"/>
 								<reference key="NSNextKeyView" ref="374754201"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -1010,7 +1018,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">601</int>
+			<int key="maxID">602</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>
@@ -1022,10 +1030,11 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="AlertViewBackground.png">{284, 62}</string>
 			<string key="Zmain_screenbg.png">{230, 300}</string>
 			<string key="facebook_like.png">{80, 49}</string>
 			<string key="facebook_unlike.png">{80, 49}</string>
+			<string key="likealertbg.png">{213, 100}</string>
+			<string key="likealertclose.png">{58, 24}</string>
 			<string key="mid_shadow.png">{105, 52}</string>
 			<string key="pinned_flyer2.png">{63, 83}</string>
 			<string key="pinned_flyer_bg2.png">{130, 130}</string>
