@@ -147,6 +147,8 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     // Add Symbols
 	NSInteger symbolScrollWidth = 60;
 	NSInteger symbolScrollHeight = 50;
+    [self addSymbolsInSubView];
+    /*
 	symbolArray = [[NSMutableArray alloc]init];
     
 	for(int i=1;i<=113;i++) {
@@ -166,11 +168,13 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 		symbolButton.tag = i;
 		[symbolScrollView addSubview:symbolButton];
 	}
-    
+    */
     // Add Icons
+  
     NSInteger iconScrollWidth = 60;
 	NSInteger iconScrollHeight = 50;
-
+    [self addFlyerIconInSubView];
+  /*
 	iconArray = [[NSMutableArray alloc]init];
     
 	for(int i=1;i<=94;i++) {
@@ -190,6 +194,10 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 		iconButton.tag = i;
 		[iconScrollView addSubview:iconButton];
 	}
+     */
+    // Add icons in scroll view
+
+    
     
     // Create font array
 	fontArray =[[NSArray  alloc] initWithObjects:
@@ -943,6 +951,93 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 		[borderScrollView addSubview:color];
 	}   
 }
+/*
+ * Add flyer Symbols in scroll views
+ */
+-(void)addSymbolsInSubView{
+        BOOL isAllTemplatePurchased = [self isProductPurchased:[PRODUCT_SYMBOL_ALL stringByReplacingOccurrencesOfString:@"." withString:@""]];
+	NSInteger symbolScrollWidth = 60;
+	NSInteger symbolScrollHeight = 50;
+
+	symbolArray = [[NSMutableArray alloc]init];
+    
+	for(int i=1;i<=113;i++) {
+        
+		NSString* symbolName = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"symbol%d",i] ofType:@"png"];
+		UIImage *symbolImg =  [UIImage imageWithContentsOfFile:symbolName];
+        
+		[symbolArray addObject:symbolImg];
+		
+		UIButton *symbolButton = [UIButton  buttonWithType:UIButtonTypeCustom];
+		symbolButton.frame =CGRectMake(0, 5,symbolScrollWidth, symbolScrollHeight);
+        [symbolButton setBackgroundColor:[UIColor whiteColor]];
+        
+		UIImageView *img = [[UIImageView alloc]initWithImage:symbolImg];
+		img.frame  = CGRectMake(symbolButton.frame.origin.x+5, symbolButton.frame.origin.y-2, symbolButton.frame.size.width-10, symbolButton.frame.size.height-7);
+		[symbolButton addSubview:img];
+		symbolButton.tag = i;
+        if(i>5){
+            if(!isAllTemplatePurchased){
+                NSString *productToCheck = [[NSString stringWithFormat:@"%@%d",PREFIX_SYMBOL_PRODUCT,i] stringByReplacingOccurrencesOfString:@"." withString:@""];
+                
+                if(![self isProductPurchased:productToCheck]){
+                    UIImageView *lock = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lock"]];
+                    lock.frame = CGRectMake(21, 18, 17, 19);
+                    [symbolButton addSubview:lock];
+                    symbolButton.userInteractionEnabled = NO;
+                }
+            }
+        }
+        
+		[symbolScrollView addSubview:symbolButton];
+	}
+
+}
+
+/*
+ * Add flyer Icons in scroll views
+ */
+-(void)addFlyerIconInSubView{
+    BOOL isAllTemplatePurchased = [self isProductPurchased:[PRODUCT_ICON_ALL stringByReplacingOccurrencesOfString:@"." withString:@""]];
+    
+    NSInteger iconScrollWidth = 60;
+	NSInteger iconScrollHeight = 50;
+    
+	iconArray = [[NSMutableArray alloc]init];
+    
+	for(int i=1;i<=94;i++) {
+        
+		NSString* iconName = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"ricon%d",i] ofType:@"png"];
+		UIImage *iconImg =  [UIImage imageWithContentsOfFile:iconName];
+        
+		[iconArray addObject:iconImg];
+		
+		UIButton *iconButton = [UIButton  buttonWithType:UIButtonTypeCustom];
+		iconButton.frame =CGRectMake(0, 5,iconScrollWidth, iconScrollHeight);
+        [iconButton setBackgroundColor:[UIColor whiteColor]];
+        
+		UIImageView *img = [[UIImageView alloc]initWithImage:iconImg];
+		img.frame  = CGRectMake(iconButton.frame.origin.x+5, iconButton.frame.origin.y-2, iconButton.frame.size.width-10, iconButton.frame.size.height-7);
+		[iconButton addSubview:img];
+		iconButton.tag = i;
+        if(i>5){
+            if(!isAllTemplatePurchased){
+                
+                NSString *productToCheck = [[NSString stringWithFormat:@"%@%d",PREFIX_ICON_PRODUCT,i] stringByReplacingOccurrencesOfString:@"." withString:@""];
+                
+                if(![self isProductPurchased:productToCheck]){
+                    UIImageView *lock = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lock"]];
+                    lock.frame = CGRectMake(21, 18, 17, 19);
+                    [iconButton addSubview:lock];
+                    iconButton.userInteractionEnabled = NO;
+                }
+            }
+        }
+        
+		[iconScrollView addSubview:iconButton];
+    }
+}
+
 
 #pragma mark  ScrollView Function & Selection Methods for ScrollView
 
@@ -1615,7 +1710,12 @@ int arrangeLayerIndex;
 				curXLoc += (kScrollObjWidth)+5;
 				
 				imgPickerFlag =1;
-                [view addTarget:self action:@selector(selectSymbol:) forControlEvents:UIControlEventTouchUpInside];
+                if(view.userInteractionEnabled){
+                    [view addTarget:self action:@selector(selectSymbol:) forControlEvents:UIControlEventTouchUpInside];
+                }else{
+                    view.userInteractionEnabled = YES;
+                    [view addTarget:self action:@selector(requestSymbols:) forControlEvents:UIControlEventTouchUpInside];
+                }
 				
                 if(IS_IPHONE_5){
                     if(curXLoc >= 320){
@@ -1652,7 +1752,13 @@ int arrangeLayerIndex;
 				curXLoc += (kScrollObjWidth)+5;
 				
 				imgPickerFlag =1;
-                [view addTarget:self action:@selector(selectIcon:) forControlEvents:UIControlEventTouchUpInside];
+                if(view.userInteractionEnabled){
+                    [view addTarget:self action:@selector(selectIcon:) forControlEvents:UIControlEventTouchUpInside];
+                }else{
+                    view.userInteractionEnabled = YES;
+                    [view addTarget:self action:@selector(requestIcons:) forControlEvents:UIControlEventTouchUpInside];
+                }
+
 				
                 if(IS_IPHONE_5){
                     if(curXLoc >= 320){
@@ -2250,6 +2356,7 @@ int arrangeLayerIndex;
     [self makeCopyOfLayers];
     
     CustomLabel *lastLabelView = [[self textLabelLayersArray] objectAtIndex:arrangeLayerIndex];
+    
     selectedColor = lastLabelView.textColor;
 
 	lastTextView.backgroundColor = [ UIColor colorWithWhite:1 alpha:0.3f];
@@ -2397,9 +2504,9 @@ int arrangeLayerIndex;
 	[l setBorderWidth:0];
 	[l setBorderColor:[[UIColor clearColor] CGColor]];
 	selectedText = lastTextView.text;
-	
-	lableLocation = CGPointMake(160,100);
-	lastLabelView.center = lableLocation;
+	  
+//	lableLocation = CGPointMake(lastLabelView.frame.origin.x,lastLabelView.frame.origin.y);
+	lastLabelView.frame = CGRectMake(lastLabelView.frame.origin.x, lastLabelView.frame.origin.y, lastLabelView.frame.size.width, lastLabelView.frame.size.height);
 	lastLabelView.numberOfLines = 40;
 	lastLabelView.text = lastTextView.text;
 	[lastTextView resignFirstResponder];
@@ -4900,6 +5007,40 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
   
 }
 
+
+-(void)requestSymbols:(UIButton *)button{
+    
+    //[self showLoadingView:nil];
+    
+    // Create an instance of EBPurchase (Inapp purchase).
+    [demoPurchase release];
+    demoPurchase = nil;
+    demoPurchase = [[EBPurchase alloc] init];
+    demoPurchase.delegate = self;
+    demoPurchase.customIndex = button.tag;
+    isPurchased = NO;
+    
+    [demoPurchase requestProduct:[NSArray arrayWithObjects:PRODUCT_SYMBOL_SELETED,PRODUCT_SYMBOL_ALL,PRODUCT_ALL_BUNDLE, nil]];
+    
+}
+
+
+-(void)requestIcons:(UIButton *)button{
+    
+    //[self showLoadingView:nil];
+    
+    // Create an instance of EBPurchase (Inapp purchase).
+    [demoPurchase release];
+    demoPurchase = nil;
+    demoPurchase = [[EBPurchase alloc] init];
+    demoPurchase.delegate = self;
+    demoPurchase.customIndex = button.tag;
+    isPurchased = NO;
+    
+    [demoPurchase requestProduct:[NSArray arrayWithObjects:PRODUCT_ICON_SELETED,PRODUCT_ICON_ALL,PRODUCT_ALL_BUNDLE, nil]];
+    
+}
+
 -(void)requestFont:(UIButton *)button{
     
     //[self showLoadingView:nil];
@@ -5137,7 +5278,29 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
             [self addTemplatesInSubView];
             [self layoutScrollImages:templateScrollView scrollWidth:templateScrollWidth scrollHeight:templateScrollHeight];
             // END Update view with no lock
+        } else if([productId isEqualToString:PRODUCT_ICON_SELETED] || [productId isEqualToString:PRODUCT_ICON_ALL]){
             
+            [self updatePurchaseRecord:ebp.customIndex identifier:productId productPrefix:PREFIX_ICON_PRODUCT];
+            
+            // START Update view with no lock
+            [self removeAllViewsFromScrollview:iconScrollView];
+            [self addFlyerIconInSubView];
+            NSInteger iconScrollWidth = 60;
+            NSInteger iconScrollHeight = 50;
+            [self layoutScrollImages:iconScrollView scrollWidth:iconScrollWidth scrollHeight:iconScrollHeight];
+            // END Update view with no lock
+
+        } else if([productId isEqualToString:PRODUCT_SYMBOL_SELETED] || [productId isEqualToString:PRODUCT_SYMBOL_ALL]){
+            
+            [self updatePurchaseRecord:ebp.customIndex identifier:productId productPrefix:PREFIX_SYMBOL_PRODUCT];
+            
+            // START Update view with no lock
+            [self removeAllViewsFromScrollview:symbolScrollView];
+            [self addSymbolsInSubView];
+            NSInteger symbolScrollWidth = 60;
+            NSInteger symbolScrollHeight = 50;
+            [self layoutScrollImages:symbolScrollView scrollWidth:symbolScrollWidth scrollHeight:symbolScrollHeight];
+            // END Update view with no lock
         } else if ( [productId isEqualToString:PRODUCT_ALL_BUNDLE] ) {
             
             // This is as if we have bought all the products.
