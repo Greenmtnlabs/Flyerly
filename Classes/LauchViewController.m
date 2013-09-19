@@ -623,7 +623,6 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
 - (IBAction)showLikeButton {
     
     if([AddFriendsController connected]){
-
     
         FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
         appDelegate.facebook.sessionDelegate = self;
@@ -656,7 +655,7 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
         [self.view  addSubview:webview];
         [self.view  addSubview:crossButton];
   */
-            //likeButton.enabled = NO;
+           // likeButton.enabled = NO;
      
         
         } else {
