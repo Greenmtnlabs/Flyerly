@@ -265,11 +265,11 @@ return cell;\
 
 #define IN_APP_DICTIONARY_KEY @"inAppDictionaryKey"
 
-#define PRODUCT_ICON_SELETED @"com.flyerly.SelectedSymbol"
-#define PRODUCT_ICON_ALL @"com.flyerly.AllSymbolsBundle"
+#define PRODUCT_ICON_SELETED @"com.flyerly.SelectedIcon"
+#define PRODUCT_ICON_ALL @"com.flyerly.IconsBundle"
 
-#define PRODUCT_SYMBOL_SELETED @"com.flyerly.SelectedIcon"
-#define PRODUCT_SYMBOL_ALL @"com.flyerly.IconsBundle"
+#define PRODUCT_SYMBOL_SELETED @"com.flyerly.SelectedSymbol"
+#define PRODUCT_SYMBOL_ALL @"com.flyerly.AllSymbolsBundle"
 
 #define PRODUCT_FONT @"com.flyerly.font"
 #define PRODUCT_FOUR_PACK_FONT @"com.flyerly.4FontsPack"
@@ -296,8 +296,8 @@ return cell;\
 #define PREFIX_TEXT_BORDER_PRODUCT @"com.flyerly.textborder"
 #define PREFIX_FLYER_BORDER_PRODUCT @"com.flyerly.flyerborder"
 #define PREFIX_BACKGROUND_PRODUCT @"com.flyerly.background"
-#define PREFIX_ICON_PRODUCT @"com.flyerly.SelectedSymbol"
-#define PREFIX_SYMBOL_PRODUCT @"com.flyerly.SelectedIcon"
+#define PREFIX_ICON_PRODUCT @"com.flyerly.Symbol"
+#define PREFIX_SYMBOL_PRODUCT @"com.flyerly.Icon"
 
 
 #define ADD_MORE_TEXTTAB 0

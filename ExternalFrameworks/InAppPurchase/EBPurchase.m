@@ -242,10 +242,9 @@ SKPayment *paymentRequest;
     //call delegate to cancel transaction
     if ([delegate respondsToSelector:@selector(cancelPurchase)])
         [delegate cancelPurchase];
-    
+    [[SKPaymentQueue defaultQueue] removeTransactionObserver:self];
     
     // Release the transaction observer since transaction is finished/removed.
-    [[SKPaymentQueue defaultQueue] removeTransactionObserver:self];
     
     for(SKPaymentTransaction *transaction in transactions) {
         
@@ -256,6 +255,7 @@ SKPayment *paymentRequest;
                 [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
         }
     }
+      
 }
 
 // Called when SKPaymentQueue has finished sending restored transactions.

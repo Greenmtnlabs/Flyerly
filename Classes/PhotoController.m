@@ -955,7 +955,8 @@ int photoLayerCount = 0; // Photo layer count to set tag value
  * Add flyer Symbols in scroll views
  */
 -(void)addSymbolsInSubView{
-        BOOL isAllTemplatePurchased = [self isProductPurchased:[PRODUCT_SYMBOL_ALL stringByReplacingOccurrencesOfString:@"." withString:@""]];
+        BOOL isAllsymbolPurchased = [self isProductPurchased:[PRODUCT_SYMBOL_ALL stringByReplacingOccurrencesOfString:@"." withString:@""]];
+
 	NSInteger symbolScrollWidth = 60;
 	NSInteger symbolScrollHeight = 50;
 
@@ -977,8 +978,8 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 		[symbolButton addSubview:img];
 		symbolButton.tag = i;
         if(i>5){
-            if(!isAllTemplatePurchased){
-                NSString *productToCheck = [[NSString stringWithFormat:@"%@%d",PREFIX_SYMBOL_PRODUCT,i] stringByReplacingOccurrencesOfString:@"." withString:@""];
+            if(!isAllsymbolPurchased){
+                NSString *productToCheck = [[NSString stringWithFormat:@"%@%d",PREFIX_SYMBOL_PRODUCT,symbolButton.tag] stringByReplacingOccurrencesOfString:@"." withString:@""];
                 
                 if(![self isProductPurchased:productToCheck]){
                     UIImageView *lock = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lock"]];
@@ -986,6 +987,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
                     [symbolButton addSubview:lock];
                     symbolButton.userInteractionEnabled = NO;
                 }
+                
             }
         }
         
@@ -998,7 +1000,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
  * Add flyer Icons in scroll views
  */
 -(void)addFlyerIconInSubView{
-    BOOL isAllTemplatePurchased = [self isProductPurchased:[PRODUCT_ICON_ALL stringByReplacingOccurrencesOfString:@"." withString:@""]];
+    BOOL isAlliconPurchased = [self isProductPurchased:[PRODUCT_ICON_ALL stringByReplacingOccurrencesOfString:@"." withString:@""]];
     
     NSInteger iconScrollWidth = 60;
 	NSInteger iconScrollHeight = 50;
@@ -1021,9 +1023,9 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 		[iconButton addSubview:img];
 		iconButton.tag = i;
         if(i>5){
-            if(!isAllTemplatePurchased){
+            if(!isAlliconPurchased){
                 
-                NSString *productToCheck = [[NSString stringWithFormat:@"%@%d",PREFIX_ICON_PRODUCT,i] stringByReplacingOccurrencesOfString:@"." withString:@""];
+                NSString *productToCheck = [[NSString stringWithFormat:@"%@%d",PREFIX_ICON_PRODUCT,iconButton.tag] stringByReplacingOccurrencesOfString:@"." withString:@""];
                 
                 if(![self isProductPurchased:productToCheck]){
                     UIImageView *lock = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lock"]];
@@ -2096,7 +2098,7 @@ int arrangeLayerIndex;
         [Flurry logEvent:@"Layed Deleted"];
 	} else if(alertView == inAppAlert && (buttonIndex == 0 || buttonIndex == 1 || buttonIndex == 2)) {
         
-        NSLog(@"Purchase One Font Selected");
+       // NSLog(@"Purchase One Font Selected");
         NSLog(@"%@",[demoPurchase.products objectAtIndex:buttonIndex]);
         if (![demoPurchase purchaseProduct:[demoPurchase.products objectAtIndex:buttonIndex]]){
             
@@ -4169,6 +4171,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     if([self getLayerCounts] < 10){
         return YES;
     } else {
+        undoCount = 0;
         return NO;
     }
 }
@@ -4218,7 +4221,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
             // set delete mode to NO when clicked on text tab
             deleteMode = NO;
-
             [self callWrite];
             
         } else if(selectedAddMoreLayerTab == ADD_MORE_SYMBOLTAB){
@@ -4242,8 +4244,8 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
             
             [[self symbolLayersArray] addObject:newSymbolImgView];
             
-        } else if(selectedAddMoreLayerTab == ADD_MORE_ICONTAB){
             
+        } else if(selectedAddMoreLayerTab == ADD_MORE_ICONTAB){
             CALayer * lastLayer = [[[self iconLayersArray] lastObject] layer];
             [lastLayer setMasksToBounds:YES];
             [lastLayer setCornerRadius:0];
@@ -4264,7 +4266,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
             [[self iconLayersArray] addObject:newIconImgView];
             
         } else if(selectedAddMoreLayerTab == ADD_MORE_PHOTOTAB){
-            
             photoTouchFlag = YES;
             
             CALayer * lastLayer = [[[self photoLayersArray] lastObject] layer];
@@ -5018,6 +5019,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     demoPurchase = [[EBPurchase alloc] init];
     demoPurchase.delegate = self;
     demoPurchase.customIndex = button.tag;
+     NSLog(@"%d",button.tag);
     isPurchased = NO;
     
     [demoPurchase requestProduct:[NSArray arrayWithObjects:PRODUCT_SYMBOL_SELETED,PRODUCT_SYMBOL_ALL,PRODUCT_ALL_BUNDLE, nil]];
@@ -5035,6 +5037,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     demoPurchase = [[EBPurchase alloc] init];
     demoPurchase.delegate = self;
     demoPurchase.customIndex = button.tag;
+     NSLog(@"%d",button.tag);
     isPurchased = NO;
     
     [demoPurchase requestProduct:[NSArray arrayWithObjects:PRODUCT_ICON_SELETED,PRODUCT_ICON_ALL,PRODUCT_ALL_BUNDLE, nil]];
@@ -5238,7 +5241,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
             [self layoutScrollImages:fontScrollView scrollWidth:fontScrollWidth scrollHeight:fontScrollHeight];
 
             // END Update view with no lock
-            
+
         } else if([productId isEqualToString:PRODUCT_FONT_COLOR] || [productId isEqualToString:PRODUCT_FULL_FONT_COLOR]){
            
             [self updatePurchaseRecord:ebp.customIndex identifier:productId productPrefix:PREFIX_FONT_COLOR_PRODUCT];
@@ -5314,6 +5317,10 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
                          productPrefix:PREFIX_FLYER_BORDER_PRODUCT];
             [self updatePurchaseRecord:ebp.customIndex identifier:PRODUCT_FULL_TEMPLATE
                          productPrefix:PREFIX_BACKGROUND_PRODUCT];
+            [self updatePurchaseRecord:ebp.customIndex identifier:PRODUCT_SYMBOL_ALL
+                         productPrefix:PREFIX_SYMBOL_PRODUCT];
+            [self updatePurchaseRecord:ebp.customIndex identifier:PRODUCT_ICON_ALL
+                         productPrefix:PREFIX_ICON_PRODUCT];
             
             // START Update view with no lock
             // Remove all subview from the scrollview first.
@@ -5340,6 +5347,19 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
             [self removeAllViewsFromScrollview:templateScrollView];
             [self addTemplatesInSubView];
             [self layoutScrollImages:templateScrollView scrollWidth:templateScrollWidth scrollHeight:templateScrollHeight];
+            
+            [self removeAllViewsFromScrollview:symbolScrollView];
+            [self addSymbolsInSubView];
+            NSInteger symbolScrollWidth = 60;
+            NSInteger symbolScrollHeight = 50;
+            [self layoutScrollImages:symbolScrollView scrollWidth:symbolScrollWidth scrollHeight:symbolScrollHeight];
+            // START Update view with no lock
+            [self removeAllViewsFromScrollview:iconScrollView];
+            [self addFlyerIconInSubView];
+            NSInteger iconScrollWidth = 60;
+            NSInteger iconScrollHeight = 50;
+            [self layoutScrollImages:iconScrollView scrollWidth:iconScrollWidth scrollHeight:iconScrollHeight];
+            // END Update view with no lock
             
             // END Update view with no lock
             

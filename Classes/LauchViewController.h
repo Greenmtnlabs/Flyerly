@@ -93,5 +93,5 @@
 - (IBAction)onTwitter:(id)sender;
 -(IBAction)goBack;
 -(void)loadMasterSetting;
-
+- (void)fbDidLogin;
 @end

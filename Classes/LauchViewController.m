@@ -18,7 +18,7 @@
 #import "FacebookLikeView.h"
 #import "Flurry.h"
 
-@interface LauchViewController () <FacebookLikeViewDelegate, FBSessionDelegate>
+@interface LauchViewController () 
 
 @end
 
