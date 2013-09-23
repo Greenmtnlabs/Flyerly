@@ -1211,6 +1211,10 @@ int arrangeLayerIndex;
  */
 -(void)selectLayer:(id)sender {
     
+    deleteMode = YES;
+    undoCount = undoCount + 1;
+    [rightUndoBarButton setEnabled:YES];
+    [self makeCopyOfLayers];
 	UIButton *view = sender;
     UIView *superView = [view superview];
     
@@ -2714,9 +2718,10 @@ int arrangeLayerIndex;
     [self resetImageview];
 
     // RESET layers scroll view to show the undo layer again
-    [self resetLayerScrollView];
+//    [self resetLayerScrollView];
     
     [Flurry logEvent:@"Undone"];
+
 }
 
 /*
