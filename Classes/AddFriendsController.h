@@ -22,6 +22,7 @@
 #import "Reachability.h"
 #import "LauchViewController.h"
 #import "MyNavigationBar.h"
+#import "AsyncImageView.h"
 
 @class LoadingView,LauchViewController;
 
@@ -39,7 +40,7 @@
     IBOutlet UIButton *twitterButton;
     IBOutlet UITextField *searchTextField;
 	LoadingView *loadingView;
-
+    IBOutlet AsyncImageView *aview;
     IBOutlet UITableView *uiTableView;
 	NSMutableArray *contactsArray;
 	NSMutableArray *facebookArray;
@@ -90,6 +91,8 @@
 - (IBAction)onSearchClick:(UIButton *)sender;
 -(IBAction)goBack;
 -(IBAction)invite;
+-(IBAction)inviteFreind:(id)sender;
+
 + (BOOL)connected;
 +(NSMutableDictionary *)getSelectedIdentifiersDictionary;
 +(void)disableSelectUnSelectFlags;

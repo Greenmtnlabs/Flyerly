@@ -62,8 +62,8 @@ BOOL selectAll;
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:backBarButton,leftBarButton,nil]];
 
     // set borders on the table
-    [[self.uiTableView layer] setBorderColor:[[UIColor grayColor] CGColor]];
-    [[self.uiTableView layer] setBorderWidth:1];
+   // [[self.uiTableView layer] setBorderColor:[[UIColor grayColor] CGColor]];
+    //[[self.uiTableView layer] setBorderWidth:1];
     
     // Set fonts type and sizes
     [self.contactsLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
@@ -751,6 +751,15 @@ int totalCount = 0;
 /**
  * invite contacts
  */
+-(IBAction)inviteFreind:(id)sender{
+  UIButton *cellImageButton = (UIButton *) sender;
+    [cellImageButton setBackgroundImage:[UIImage imageNamed:@"check_icon"] forState:UIControlStateNormal];
+   // [addButton setBackgroundImage:[UIImage imageNamed:@"check_icon"] forState:UIControlStateSelected];
+    NSLog(@"%d",cellImageButton.tag);
+    
+
+}
+
 -(IBAction)invite{
     
     NSMutableArray *identifiers = [[NSMutableArray alloc] init];
@@ -957,6 +966,102 @@ NSMutableDictionary *selectedIdentifierDictionary;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    static NSString *CellIdentifier = @"InviteCell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        [[cell textLabel] setFont:[UIFont systemFontOfSize:15.0]];
+        [[cell detailTextLabel] setFont:[UIFont systemFontOfSize:12.0]];
+        [[cell textLabel] setTextColor:[UIColor darkTextColor]];
+		[[cell detailTextLabel] setTextColor:[UIColor lightGrayColor]];
+        [[cell textLabel] setBackgroundColor:[UIColor whiteColor]];
+        [[cell detailTextLabel] setBackgroundColor:[UIColor whiteColor]];
+        cell.imageView.frame = CGRectMake(0, 0,50, 50);
+    }
+    
+    for(UIView *v in cell.contentView.subviews){
+		[v removeFromSuperview];
+	}
+    
+
+    if(!self.deviceContactItems){
+        self.deviceContactItems = [[NSMutableArray alloc] init];
+    }
+    
+    NSMutableDictionary *dict2;
+    NSString *name2;
+    NSString *identifier2 = nil;
+    UIImage *imgfile =nil;
+    NSString *imgfile2 =nil;
+    // Check index
+    if([[self getArrayOfSelectedTab] count] >= 1){
+        dict2 = [[self getArrayOfSelectedTab] objectAtIndex:(indexPath.row)];
+        NSLog(@"%@",dict2);
+        name2 = [dict2 objectForKey:@"name"];
+        identifier2 = [dict2 objectForKey:@"identifier"];
+        
+        if(selectedTab == FACEBOOK_TAB || selectedTab == TWITTER_TAB){
+            imgfile2 = [dict2 objectForKey:@"image"];
+        } else {
+            imgfile = [dict2 objectForKey:@"image"];
+        }
+        
+    }
+    if (imgfile == nil) {
+        imgfile =[[UIImage alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"dfcontact" ofType:@"jpg"]];
+    }
+    if(selectedTab == FACEBOOK_TAB || selectedTab == TWITTER_TAB){
+        dispatch_queue_t dispatchQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
+        dispatch_async(dispatchQueue, ^(void)
+                       {
+                           dispatch_sync(dispatch_get_main_queue(), ^{
+                                aview = [[AsyncImageView alloc]initWithFrame:CGRectMake(0, 0,70, 70)];
+                               NSLog(@"%@",imgfile2);
+                                NSURL *imageurl = [NSURL URLWithString:imgfile2];
+                                NSLog(@"%@",imageurl);
+                                [aview setImageURL:imageurl];
+                               [cell.contentView addSubview:aview];
+                           });
+                       });
+    }
+    
+    UIButton *addButton = [[UIButton alloc] initWithFrame:CGRectMake(270,18 , 32, 33)];
+    [addButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+    [addButton addTarget:self action:@selector(inviteFreind:) forControlEvents:UIControlEventTouchUpInside];
+
+    [addButton setBackgroundImage:[UIImage imageNamed:@"add_icon"] forState:UIControlStateNormal];
+    [addButton setBackgroundImage:[UIImage imageNamed:@"check_icon"] forState:UIControlStateSelected];
+    addButton.tag = indexPath.row;
+    [cell.contentView addSubview:addButton];
+    cell.textLabel.text = name2;
+    cell.detailTextLabel.text = identifier2;
+
+    cell.imageView.image = imgfile;
+
+    
+
+    
+    /*
+    // Get left contact data
+    NSMutableDictionary *dict1 = [[self getArrayOfSelectedTab] objectAtIndex:index];
+    NSLog(@"%@",dict1);
+    //NSString *identifier1 = [dict1 objectForKey:@"identifier"];
+   // NSString *name1 = [dict1 objectForKey:@"name"];
+
+    
+    if(selectedTab == FACEBOOK_TAB || selectedTab == TWITTER_TAB){
+        //[dict1 objectForKey:@"image"];
+        imgfile =[dict1 objectForKey:@"image"];
+    } else {
+        imgfile =[dict1 objectForKey:@"image"];
+    }
+    */
+    // Get right contact data
+
+    
+    
+   /*
     if(loadingViewFlag){
         for (UIView *subview in self.view.subviews) {
             if([subview isKindOfClass:[LoadingView class]]){
@@ -1131,6 +1236,7 @@ NSMutableDictionary *selectedIdentifierDictionary;
     }
     
     // return cell
+    */
     return cell;
 }
 
