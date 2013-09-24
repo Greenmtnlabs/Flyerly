@@ -52,11 +52,15 @@
     
     NSMutableArray *deviceContactItems;
     int selectedTab;
+    int contactsCount;
+
 	BOOL loadingViewFlag;
-    
+    BOOL invited;
     NSArray *arrayOfAccounts;
     NSString *sName;
     NSString *sMessage;
+    ACAccount *account;
+    
 }
 
 @property(nonatomic,retain) IBOutlet UILabel *contactsLabel;
@@ -94,6 +98,7 @@
 -(IBAction)inviteFreind:(id)sender;
 
 + (BOOL)connected;
+- (BOOL)ckeckExistContact:(NSString *)identifier;
 +(NSMutableDictionary *)getSelectedIdentifiersDictionary;
 +(void)disableSelectUnSelectFlags;
 
