@@ -23,11 +23,13 @@
 #import "LauchViewController.h"
 #import "MyNavigationBar.h"
 #import "AsyncImageView.h"
+#import "Singleton.h"
 
-@class LoadingView,LauchViewController;
+@class LoadingView,LauchViewController,Singleton;
 
 @interface AddFriendsController : UIViewController<UITableViewDelegate,UITableViewDataSource,FBRequestDelegate,FBSessionDelegate,MFMessageComposeViewControllerDelegate,FBDialogDelegate,FBLoginDialogDelegate,UITextFieldDelegate, UIActionSheetDelegate>{
     LauchViewController *launchCotroller;
+    Singleton *globle;
     IBOutlet UILabel *contactsLabel;
     IBOutlet UILabel *facebookLabel;
     IBOutlet UILabel *twitterLabel;

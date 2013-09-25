@@ -32,6 +32,7 @@ BOOL selectAll;
     
     [super viewDidLoad];
     self.deviceContactItems = [[NSMutableArray alloc] init];
+      globle = [Singleton RetrieveSingleton];
     self.navigationItem.hidesBackButton = YES;
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
 
@@ -847,7 +848,7 @@ int totalCount = 0;
         contactsCount =0;
         // Send invitations
         if(selectedTab == 0){
-            
+            globle.accounts = [[NSMutableArray alloc] initWithArray:deviceContactItems];
             // send tweets to contacts
             [self sendSMS:@"I'm using the flyerly app to create and share flyers on the go! Flyer.ly/Invite" recipients:identifiers];
             
@@ -899,7 +900,9 @@ int totalCount = 0;
         case MessageComposeResultSent:
             
             [self showAlert:@"Invitation Sent!" message:@"You have successfully invited your friends to join flyerly."];
-             [iPhoneinvited  addObjectsFromArray:deviceContactItems];
+            NSLog(@"%@",iPhoneinvited);
+            NSLog(@"%@",globle.accounts);
+             [iPhoneinvited  addObjectsFromArray:globle.accounts];
             PFUser *user = [PFUser currentUser];
             [user setObject:iPhoneinvited forKey:@"tweetinvited"];
             [user saveInBackground];
