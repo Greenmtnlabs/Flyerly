@@ -18,7 +18,7 @@
 #import "Flurry.h"
 
 @implementation AddFriendsController
-@synthesize uiTableView, contactsArray, deviceContactItems, contactsLabel, facebookLabel, twitterLabel, doneLabel, selectAllLabel, unSelectAllLabel, inviteLabel, contactsButton, facebookButton, twitterButton, loadingView, searchTextField, facebookArray, twitterArray;
+@synthesize uiTableView, contactsArray, deviceContactItems, contactsLabel, facebookLabel, twitterLabel, doneLabel, selectAllLabel, unSelectAllLabel, inviteLabel, contactsButton, facebookButton, twitterButton, loadingView, searchTextField, facebookArray, twitterArray,fbinvited,Twitterinvited,iPhoneinvited;
 @synthesize contactBackupArray, facebookBackupArray, twitterBackupArray,navBar;
 
 const int TWITTER_TAB = 2;
@@ -31,6 +31,7 @@ BOOL selectAll;
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    self.deviceContactItems = [[NSMutableArray alloc] init];
     self.navigationItem.hidesBackButton = YES;
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
 
@@ -62,9 +63,9 @@ BOOL selectAll;
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:backBarButton,leftBarButton,nil]];
 
     // set borders on the table
+   ;
    // [[self.uiTableView layer] setBorderColor:[[UIColor grayColor] CGColor]];
    // [[self.uiTableView layer] setBorderWidth:5];
-    
     // Set fonts type and sizes
     /*
     [self.contactsLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
@@ -169,7 +170,6 @@ BOOL selectAll;
         // Reload table data after all the contacts get loaded
         contactsArray = nil;
         contactsArray = contactBackupArray;
-        
         // Filter contacts on new tab selection
         [self onSearchClick:nil];
         
@@ -177,6 +177,9 @@ BOOL selectAll;
         //[self.uiTableView reloadData];
 
     } else {
+        PFUser *user = [PFUser currentUser];
+        self.iPhoneinvited = [[NSMutableArray alloc] init];
+        self.iPhoneinvited  = [user objectForKey:@"iphoneinvited"];
         contactsArray = [[NSMutableArray alloc] init];
         ABAddressBookRef m_addressbook = ABAddressBookCreate();
         
@@ -306,11 +309,11 @@ BOOL selectAll;
     if([AddFriendsController connected]){
         contactsCount = 0;
         invited = NO;
-        [deviceContactItems removeAllObjects];
+        
         //if(selectedTab == FACEBOOK_TAB){
         //    return;
         //}
-        
+     
         selectAll = YES;
         [self.deviceContactItems release];
         self.deviceContactItems = nil;
@@ -320,7 +323,7 @@ BOOL selectAll;
 
         selectedTab = FACEBOOK_TAB;
         
-        [self setUnselectTab:sender];
+ 
         
         // init facebook array
          NSLog(@"%@",facebookBackupArray);
@@ -329,11 +332,11 @@ BOOL selectAll;
             // Reload table data after all the contacts get loaded
             facebookArray = nil;
             facebookArray = facebookBackupArray;
-           
-            
+            //[deviceContactItems setArray:fbinvited];
+
+
             // Filter contacts on new tab selection
             [self onSearchClick:nil];
-            
             [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
             //[self.uiTableView reloadData];
             
@@ -394,6 +397,11 @@ BOOL selectAll;
             appDelegate.facebook.sessionDelegate = self;
             
             if([appDelegate.facebook isSessionValid]) {
+                [self setUnselectTab:sender];
+                PFUser *user = [PFUser currentUser];
+                 self.fbinvited = [[NSMutableArray alloc] init];
+                self.fbinvited  = [user objectForKey:@"fbinvited"];
+                  //[deviceContactItems setArray:fbinvited];
                 
                 //loadingView =[LoadingView loadingViewInView:self.view  text:@"Loading..."];
                 //loadingViewFlag = YES;
@@ -401,7 +409,8 @@ BOOL selectAll;
                 self.facebookArray = [[NSMutableArray alloc] init];
                 
                 //[appDelegate.facebook requestWithGraphPath:@"me/friends?fields=name,picture.height(35).width(35).type(small)&limit=100&offset=0" andDelegate:self];
-                [appDelegate.facebook requestWithGraphPath:@"me/friends?fields=name,gender,location,picture.height(72).width(72).type(small)" andDelegate:self];
+                [appDelegate.facebook requestWithGraphPath:@"me/friends?fields=name,gender,picture.height(72).width(72).type(small)" andDelegate:self];
+                
                 
             } else {
                 
@@ -431,7 +440,6 @@ int totalCount = 0;
 -(void)request:(FBRequest *)request didLoad:(id)result{
     
     int count = 0;
-    NSLog(@"%@",[(NSDictionary *)result objectForKey:@"data"]);
     
     for (NSDictionary *friendData in [result objectForKey:@"data"]) {
         
@@ -440,11 +448,11 @@ int totalCount = 0;
         //UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
 
         // Here we will get the facebook contacts
-          NSLog(@"%@",friendData);
         NSMutableDictionary *dOfPerson=[NSMutableDictionary dictionary];
       
         [dOfPerson setObject:[friendData objectForKey:@"name"] forKey:@"name"];
         [dOfPerson setObject:[friendData objectForKey:@"id"] forKey:@"identifier"];
+        [dOfPerson setObject:[friendData objectForKey:@"gender"] forKey:@"gender"];
         if(imageURL){
             [dOfPerson setObject:imageURL forKey:@"image"];
         }
@@ -492,7 +500,6 @@ int totalCount = 0;
     if([AddFriendsController connected]){
         contactsCount = 0;
         invited = NO;
-        [deviceContactItems removeAllObjects];
         if(selectedTab == TWITTER_TAB){
             return;
         }
@@ -514,7 +521,6 @@ int totalCount = 0;
             // Reload table data after all the contacts get loaded
             twitterArray = nil;
             twitterArray = twitterBackupArray;
-
             // Filter contacts on new tab selection
             [self onSearchClick:nil];
             
@@ -523,7 +529,9 @@ int totalCount = 0;
             //[self.uiTableView reloadData];
             
         } else{
-            
+            PFUser *user = [PFUser currentUser];
+            self.Twitterinvited = [[NSMutableArray alloc] init];
+            self.Twitterinvited  = [user objectForKey:@"tweetinvited"];
             //loadingView =[LoadingView loadingViewInView:self.view text:@"Loading..."];
             //loadingViewFlag = YES;
             
@@ -615,14 +623,14 @@ int totalCount = 0;
                                                                        options:NSJSONReadingMutableLeaves
                                                                          error:&jsonError];
             NSDictionary *users = [followers objectForKey:@"users"];
-
             for (id user in users) {
-                
                 NSMutableDictionary *dOfPerson=[NSMutableDictionary dictionary];
                 [dOfPerson setObject:[user objectForKey:@"name"] forKey:@"name"];
                 [dOfPerson setObject:[user objectForKey:@"screen_name"] forKey:@"identifier"];
+                 [dOfPerson setObject:[user objectForKey:@"location"] forKey:@"location"];
                 
                 NSString *imageURL = [user objectForKey:@"profile_image_url"];
+                NSString *new = [imageURL stringByReplacingOccurrencesOfString: @"normal" withString:@"bigger"];
                 //NSURL *imageURL = [NSURL URLWithString:[user objectForKey:@"profile_image_url"]];
                 //NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
                 //UIImage *image = [UIImage imageWithData:imageData];
@@ -768,11 +776,6 @@ int totalCount = 0;
  */
 -(IBAction)inviteFreind:(id)sender {
   UIButton *cellImageButton = (UIButton *) sender;
-    if (invited) {
-        invited = NO;
-        [deviceContactItems removeAllObjects];
-        contactsCount = 0;
-    }
     
     
     if (contactsCount <15) {
@@ -783,7 +786,7 @@ int totalCount = 0;
             dict2 = [[self getArrayOfSelectedTab] objectAtIndex:(cellImageButton.tag)];
             if ([self ckeckExistContact:[dict2 objectForKey:@"identifier"]]) {
                 [deviceContactItems addObject:[dict2 objectForKey:@"identifier"]];
-               // NSLog(@"%@",deviceContactItems);
+              
                 [cellImageButton setBackgroundImage:[UIImage imageNamed:@"add_icon"] forState:UIControlStateNormal];
                 NSLog(@"%d",cellImageButton.tag);
             }
@@ -798,6 +801,24 @@ int totalCount = 0;
 - (BOOL)ckeckExistContact:(NSString *)identifier{
     for (int i = 0; i < deviceContactItems.count ; i++) {
         if ([identifier isEqualToString:[deviceContactItems objectAtIndex:i]]) {
+            return NO;
+        }
+    }
+    return YES;
+}
+
+- (BOOL)ckeckExistdb:(NSString *)identifier{
+    NSMutableArray *checkary = [[NSMutableArray alloc] init];
+    if (selectedTab == FACEBOOK_TAB){
+        checkary = fbinvited;
+    }else if(selectedTab == TWITTER_TAB){
+        checkary = Twitterinvited;
+    }else{
+        checkary = iPhoneinvited;
+    }
+        
+    for (int i = 0; i < checkary.count ; i++) {
+        if ([identifier isEqualToString:[checkary objectAtIndex:i]]) {
             return NO;
         }
     }
@@ -823,6 +844,7 @@ int totalCount = 0;
      */
     
     if([identifiers count] > 0){
+        contactsCount =0;
         // Send invitations
         if(selectedTab == 0){
             
@@ -834,17 +856,24 @@ int totalCount = 0;
             for(NSString *follower in identifiers){
                 [self sendTwitterMessage:@"I'm using the @flyerlyapp to create and share flyers on the go! Flyer.ly/Twitter" screenName:follower];
             }
+            [Twitterinvited  addObjectsFromArray:deviceContactItems];
+            PFUser *user = [PFUser currentUser];
+            [user setObject:Twitterinvited forKey:@"tweetinvited"];
+            [user saveInBackground];
+            [deviceContactItems   removeAllObjects];
             
             [self showAlert:@"Invitation Sent!" message:@"You have successfully invited your friends to join flyerly."];
-            invited =YES;
             [self.uiTableView reloadData ];
 
         }else if(selectedTab == 1){
             NSLog(@"%@",identifiers);
             [self tagFacebookUsersWithFeed:identifiers];
-
+            [fbinvited  addObjectsFromArray:deviceContactItems];
+            PFUser *user = [PFUser currentUser];
+            [user setObject:fbinvited forKey:@"fbinvited"];
+            [user saveInBackground];
+            [deviceContactItems removeAllObjects];
             [self showAlert:@"Invitation Sent!" message:@"You have successfully invited your friends to join flyerly."];
-            invited =YES;
             [self.uiTableView reloadData ];
         }
         
@@ -868,9 +897,14 @@ int totalCount = 0;
             NSLog(@"Failed");
             break;
         case MessageComposeResultSent:
+            
             [self showAlert:@"Invitation Sent!" message:@"You have successfully invited your friends to join flyerly."];
-            invited =YES;
-            [self.uiTableView reloadData ];
+             [iPhoneinvited  addObjectsFromArray:deviceContactItems];
+            PFUser *user = [PFUser currentUser];
+            [user setObject:iPhoneinvited forKey:@"tweetinvited"];
+            [user saveInBackground];
+            [deviceContactItems   removeAllObjects];
+            [self.uiTableView reloadData];
             break;
         default:
             break;
@@ -1024,12 +1058,9 @@ NSMutableDictionary *selectedIdentifierDictionary;
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-        [[cell textLabel] setFont:[UIFont fontWithName:TITLE_FONT size:14]];
-        [[cell detailTextLabel] setFont:[UIFont fontWithName:OTHER_FONT size:10]];
-        [[cell textLabel] setTextColor:[UIColor darkTextColor]];
-		[[cell detailTextLabel] setTextColor:[UIColor blackColor]];
-        [[cell textLabel] setBackgroundColor:[UIColor whiteColor]];
-        [[cell detailTextLabel] setBackgroundColor:[UIColor whiteColor]];
+        [[cell textLabel] setFont:[UIFont fontWithName:OTHER_FONT size:10]];
+        [[cell textLabel] setTextColor:[UIColor blackColor]];
+        [[cell textLabel] setBackgroundColor:[UIColor clearColor]];
     }
     
     for(UIView *v in cell.contentView.subviews){
@@ -1044,6 +1075,7 @@ NSMutableDictionary *selectedIdentifierDictionary;
     NSMutableDictionary *dict2;
     NSString *name2;
     NSString *identifier2 = nil;
+    NSString *detailfield = nil;
     UIImage *imgfile =nil;
     NSString *imgfile2 =nil;
     // Check index
@@ -1051,12 +1083,14 @@ NSMutableDictionary *selectedIdentifierDictionary;
         dict2 = [[self getArrayOfSelectedTab] objectAtIndex:(indexPath.row)];
         NSLog(@"%@",dict2);
         name2 = [dict2 objectForKey:@"name"];
-        identifier2 = [dict2 objectForKey:@"identifier"];
-        
+        if(selectedTab == FACEBOOK_TAB) detailfield = [dict2 objectForKey:@"gender"];
+        if(selectedTab == TWITTER_TAB) detailfield = [dict2 objectForKey:@"location"];
+
         if(selectedTab == FACEBOOK_TAB || selectedTab == TWITTER_TAB){
             imgfile2 = [dict2 objectForKey:@"image"];
         } else {
             imgfile = [dict2 objectForKey:@"image"];
+            detailfield = [dict2 objectForKey:@"identifier"];
         }
         
     }
@@ -1078,21 +1112,48 @@ NSMutableDictionary *selectedIdentifierDictionary;
                        });
     }
     
-    UIButton *addButton = [[UIButton alloc] initWithFrame:CGRectMake(270,18 , 32, 33)];
+    UIButton *addButton = [[UIButton alloc] initWithFrame:CGRectMake(270,22 , 32, 33)];
     [addButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [addButton addTarget:self action:@selector(inviteFreind:) forControlEvents:UIControlEventTouchUpInside];
+
     if ([self ckeckExistContact:[dict2 objectForKey:@"identifier"]]) {
-        [addButton setBackgroundImage:[UIImage imageNamed:@"add_icon-grey"] forState:UIControlStateNormal];
+        if ([self ckeckExistdb:[dict2 objectForKey:@"identifier"]]) {
+            [addButton setBackgroundImage:[UIImage imageNamed:@"add_icon-grey"] forState:UIControlStateNormal];
+        }else{
+            [addButton setBackgroundImage:[UIImage imageNamed:@"check_icon"] forState:UIControlStateNormal];
+        }
     }else{
-        [addButton setBackgroundImage:[UIImage imageNamed:@"add_icon"] forState:UIControlStateNormal];
-        if (invited)[addButton setBackgroundImage:[UIImage imageNamed:@"check_icon"] forState:UIControlStateNormal];
+            [addButton setBackgroundImage:[UIImage imageNamed:@"add_icon"] forState:UIControlStateNormal];
+       
     }
     addButton.tag = indexPath.row;
     [cell.contentView addSubview:addButton];
-    cell.textLabel.text = name2;
-    cell.detailTextLabel.text = identifier2;
+    
+    UILabel *title = [[UILabel alloc]initWithFrame:CGRectMake(80, 0, 190, 20)];
+	[title setBackgroundColor:[UIColor clearColor]];
+     [title setTextColor:[UIColor darkTextColor]];
+	[title setFont:[UIFont fontWithName:TITLE_FONT size:14]];
+	[title setTextAlignment:UITextAlignmentLeft];
+	title.text = name2;
+	[cell.contentView  addSubview:title];
+    
+    UILabel *stitle = [[UILabel alloc]initWithFrame:CGRectMake(80, 15, 190, 20)];
+	[stitle setBackgroundColor:[UIColor clearColor]];
+    [stitle setTextColor:[UIColor blackColor]];
+	[stitle setFont:[UIFont fontWithName:OTHER_FONT size:10]];
+	[stitle setTextAlignment:UITextAlignmentLeft];
+	stitle.text = detailfield;
+	[cell.contentView  addSubview:stitle];
+    UIImageView *imgView=[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 70, 70)];
+    imgView.backgroundColor=[UIColor clearColor];
+ //   [imgView.layer setCornerRadius:8.0f];
+    [imgView.layer setMasksToBounds:YES];
+    [imgView setImage:imgfile];
+    [cell.contentView addSubview:imgView];
+    //cell.textLabel.text = detailfield;
+    //cell.detailTextLabel.text = detailfield;
 
-    cell.imageView.image = imgfile;
+    //cell.imageView.image = imgfile;
 
     
 

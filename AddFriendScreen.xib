@@ -250,8 +250,9 @@
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<bool key="IBUIAlwaysBounceVertical">YES</bool>
+						<int key="IBUISeparatorStyle">2</int>
 						<int key="IBUISectionIndexMinimumDisplayRowCount">0</int>
-						<float key="IBUIRowHeight">70</float>
+						<float key="IBUIRowHeight">80</float>
 						<float key="IBUISectionHeaderHeight">22</float>
 						<float key="IBUISectionFooterHeight">22</float>
 					</object>
@@ -331,6 +332,7 @@
 						<string key="NSFrame">{{267, 518}, {34, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -976,7 +978,6 @@
 						<string key="loadTwitterContacts:">UIButton</string>
 						<string key="onSearchClick:">UIButton</string>
 						<string key="selectAllCheckBoxes:">UIButton</string>
-						<string key="tagFacebookUsersWithFeed:">NSArray</string>
 						<string key="unSelectAllCheckBoxes:">UIButton</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
@@ -1011,10 +1012,6 @@
 						<object class="IBActionInfo" key="selectAllCheckBoxes:">
 							<string key="name">selectAllCheckBoxes:</string>
 							<string key="candidateClassName">UIButton</string>
-						</object>
-						<object class="IBActionInfo" key="tagFacebookUsersWithFeed:">
-							<string key="name">tagFacebookUsersWithFeed:</string>
-							<string key="candidateClassName">NSArray</string>
 						</object>
 						<object class="IBActionInfo" key="unSelectAllCheckBoxes:">
 							<string key="name">unSelectAllCheckBoxes:</string>

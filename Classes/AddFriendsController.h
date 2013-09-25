@@ -45,6 +45,7 @@
 	NSMutableArray *contactsArray;
 	NSMutableArray *facebookArray;
 	NSMutableArray *twitterArray;
+    NSMutableArray *fbinvited;
 
     NSMutableArray *contactBackupArray;
     NSMutableArray *facebookBackupArray;
@@ -86,6 +87,9 @@
 @property(nonatomic,retain) NSMutableArray *twitterBackupArray;
 @property (nonatomic, retain) MyNavigationBar *navBar;
 @property(nonatomic,retain) NSMutableArray *deviceContactItems;
+@property(nonatomic,retain) NSMutableArray *fbinvited;
+@property(nonatomic,retain) NSMutableArray *Twitterinvited;
+@property(nonatomic,retain) NSMutableArray *iPhoneinvited;
 
 - (IBAction)selectAllCheckBoxes:(UIButton *)sender;
 - (IBAction)unSelectAllCheckBoxes:(UIButton *)sender;
