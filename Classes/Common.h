@@ -265,11 +265,11 @@ return cell;\
 
 #define IN_APP_DICTIONARY_KEY @"inAppDictionaryKey"
 
-#define PRODUCT_ICON_SELETED @"com.flyerly.SelectedIcon"
-#define PRODUCT_ICON_ALL @"com.flyerly.IconsBundle"
+#define PRODUCT_ICON_SELETED @"com.flyerly.SelectedSymbol"
+#define PRODUCT_ICON_ALL @"com.flyerly.AllSymbolsBundle"
 
-#define PRODUCT_SYMBOL_SELETED @"com.flyerly.SelectedSymbol"
-#define PRODUCT_SYMBOL_ALL @"com.flyerly.AllSymbolsBundle"
+#define PRODUCT_SYMBOL_SELETED @"com.flyerly.SelectedIcon"
+#define PRODUCT_SYMBOL_ALL @"com.flyerly.IconsBundle"
 
 #define PRODUCT_FONT @"com.flyerly.font"
 #define PRODUCT_FOUR_PACK_FONT @"com.flyerly.4FontsPack"

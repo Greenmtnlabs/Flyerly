@@ -403,7 +403,7 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
             [self followOnTwitter:sender];
         }
     } else {
-        [self showAlert:@"Warning!" message:@"You're not connected to the internet. Please connect and retry."];
+        [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
     }
 }
 
@@ -664,7 +664,7 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
                                          @"publish_stream", @"user_likes", nil]];
         }
     }else{
-        [self showAlert:@"Warning!" message:@"You're not connected to the internet. Please connect and retry."];
+        [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
     }
 }
 

@@ -119,7 +119,6 @@ enum {
     searchField.clearButtonMode = UITextFieldViewModeWhileEditing;
     
     CostumLocations = [[NSMutableArray alloc] init];
-    [self showLoadingIndicator];
 }
 
 - (void)cancelRequest {
@@ -427,7 +426,7 @@ NSMutableDictionary *locationDetails;
             return NO;
         }
     }
-    
+    [self.uiTableView reloadData];
     return YES;
 }
 

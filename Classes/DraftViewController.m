@@ -644,7 +644,7 @@ static ShareProgressView *clipBdPogressView;
                 
             } else {
                 
-                [self showAlert:@"Warning!" message:@"You're not connected to the internet. Please connect and retry."];
+                [self showAlert:@"You're not connected to the internet. Please connect and retry" message:@""];
             }
         }
 
@@ -1198,7 +1198,7 @@ static ShareProgressView *clipBdPogressView;
      self.dic=[UIDocumentInteractionController interactionControllerWithURL:igImageHookFile];
      self.dic.UTI = @"com.instagram.photo";
      //self.dic = [self setupControllerWithURL:igImageHookFile usingDelegate:self];
-     self.dic.annotation = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%@ %@", selectedFlyerDescription, @"#flyerly"] forKey:@"InstagramCaption"];
+     self.dic.annotation = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%@ %@", self.titleView.text,descriptionView.text] forKey:@"InstagramCaption"];
     BOOL displayed = [self.dic presentOpenInMenuFromRect:rect inView: self.view animated:YES];
     
     if(!displayed){
@@ -1288,7 +1288,7 @@ static ShareProgressView *clipBdPogressView;
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     NSData *imageData = UIImageJPEGRepresentation(selectedFlyerImage, 0.9);
     
-    [appDelegate.flickrRequest uploadImageStream:[NSInputStream inputStreamWithData:imageData] suggestedFilename:selectedFlyerTitle MIMEType:@"image/jpeg" arguments:[NSDictionary dictionaryWithObjectsAndKeys:@"0", @"is_public",@"Title", @"title", [NSString stringWithFormat:@"%@ %@ - %@", selectedFlyerDescription, @"#flyerly", [[LocationController getLocationDetails] objectForKey:@"name"]], @"description", nil]];
+    [appDelegate.flickrRequest uploadImageStream:[NSInputStream inputStreamWithData:imageData] suggestedFilename:selectedFlyerTitle MIMEType:@"image/jpeg" arguments:[NSDictionary dictionaryWithObjectsAndKeys:@"0", @"is_public",@"Title", @"title", [NSString stringWithFormat:@"%@ %@ - %@",titleView.text, descriptionView.text,  [[LocationController getLocationDetails] objectForKey:@"name"]], nil]];
     [self fillSuccessStatus:flickrPogressView];
 }
 
@@ -1305,7 +1305,7 @@ static ShareProgressView *clipBdPogressView;
 -(void)shareOnFacebook{
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                   [NSString stringWithFormat:@"%@ %@ - %@", selectedFlyerDescription, @"#flyerly", [[LocationController getLocationDetails] objectForKey:@"name"]], @"message",  //whatever message goes here
+                                   [NSString stringWithFormat:@"%@ %@ - %@",titleView.text, descriptionView.text, [[LocationController getLocationDetails] objectForKey:@"name"]], @"message",  //whatever message goes here
                                    selectedFlyerImage, @"picture",   //img is your UIImage
                                    //placeId, @"place",
                                    nil];
@@ -1321,7 +1321,7 @@ static ShareProgressView *clipBdPogressView;
     
     
     //add text
-    [postRequest addMultiPartData:[[NSString stringWithFormat:@"%@ %@ - %@", selectedFlyerDescription, @"#flyerly", [[LocationController getLocationDetails] objectForKey:@"name"]] dataUsingEncoding:NSUTF8StringEncoding] withName:@"status" type:@"multipart/form-data"];
+    [postRequest addMultiPartData:[[NSString stringWithFormat:@"%@ %@ - %@",titleView.text, descriptionView.text, [[LocationController getLocationDetails] objectForKey:@"name"]] dataUsingEncoding:NSUTF8StringEncoding] withName:@"status" type:@"multipart/form-data"];
     //add image
     [postRequest addMultiPartData:UIImagePNGRepresentation(selectedFlyerImage) withName:@"media" type:@"multipart/form-data"];
     
@@ -2023,7 +2023,7 @@ static ShareProgressView *clipBdPogressView;
     
     NSArray *array = [NSArray arrayWithObjects:data1, nil];
     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        TumblrUploadr *tu = [[TumblrUploadr alloc] initWithNSDataForPhotos:array andBlogName:[NSString stringWithFormat:@"%@.tumblr.com", blogName] andDelegate:self andCaption:[NSString stringWithFormat:@"%@ %@ - %@", selectedFlyerDescription, @"#flyerly", [[LocationController getLocationDetails] objectForKey:@"name"]]];
+        TumblrUploadr *tu = [[TumblrUploadr alloc] initWithNSDataForPhotos:array andBlogName:[NSString stringWithFormat:@"%@.tumblr.com", blogName] andDelegate:self andCaption:[NSString stringWithFormat:@"%@ %@ - %@",titleView.text, descriptionView.text, [[LocationController getLocationDetails] objectForKey:@"name"]]];
         dispatch_async( dispatch_get_main_queue(), ^{
             
             [tu signAndSendWithTokenKey:oauthToken andSecret:oauthSecretKey];

@@ -104,7 +104,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
         }
         [password resignFirstResponder];
     }else{
-        [self showAlert:@"Warning!" message:@"You're not connected to the internet. Please connect and retry."];
+        [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
     }
    }
 -(IBAction)changePW{

@@ -2130,6 +2130,7 @@ int arrangeLayerIndex;
 		[self.view bringSubviewToFront:navBar];
 		[navBar.leftButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
 		[navBar.rightButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+
 		
 		[self.navigationController popViewControllerAnimated:YES];
 	}
@@ -2154,6 +2155,10 @@ int arrangeLayerIndex;
 
 -(void)chooseTemplate{
     
+    deleteMode = NO;
+    undoCount = 0;
+    //[rightUndoBarButton setEnabled:NO];
+    //[self makeCopyOfLayers];
     if(layerEditMessage!=nil){
         [layerEditMessage removeFromSuperview];
         layerEditMessage = nil;
@@ -2710,15 +2715,16 @@ int arrangeLayerIndex;
         [photoLayersArray addObject:[NSKeyedUnarchiver unarchiveObjectWithData:[NSKeyedArchiver archivedDataWithRootObject:photoImage]]];
     }
     
-    if(undoCount < 2){
+    if(undoCount >= 1){
         [rightUndoBarButton setEnabled:NO];
+        undoCount = 0;
     }
     
     // RESET image view
     [self resetImageview];
 
     // RESET layers scroll view to show the undo layer again
-//    [self resetLayerScrollView];
+    [self resetLayerScrollView];
     
     [Flurry logEvent:@"Undone"];
 
@@ -3734,7 +3740,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 -(void)resetLayerScrollView{
 
-    doStopWobble = NO;
+    //doStopWobble = YES;
     
     [self setAddMoreLayerTabAction:arrangeLayerTabButton];
 }
@@ -4176,7 +4182,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     if([self getLayerCounts] < 10){
         return YES;
     } else {
-        undoCount = 0;
         return NO;
     }
 }
@@ -4559,6 +4564,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+
     /*
 	UITouch *touch = [touches anyObject];
 	[self dispatchTouchEndEvent:msgLabel toPosition:[touch locationInView:self.imgView]];
@@ -4996,121 +5002,152 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     [settingsAlert show];
 }
 
+-(void)showAlert:(NSString *)title message:(NSString *)message{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+                                                    message:message
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+    [alert release];
+}
+
+
 -(void)requestTemplate:(UIButton *)button{
     
     //[self showLoadingView:nil];
-
-    // Create an instance of EBPurchase (Inapp purchase).
-    [demoPurchase release];
-    demoPurchase = nil;
-    demoPurchase = [[EBPurchase alloc] init];
-    demoPurchase.delegate = self;
-    demoPurchase.customIndex = button.tag;
-    isPurchased = NO;
-  
-    [demoPurchase requestProduct:[NSArray arrayWithObjects:PRODUCT_TEMPLATE, PRODUCT_FULL_TEMPLATE,
+    if([AddFriendsController connected]){
+        // Create an instance of EBPurchase (Inapp purchase).
+        [demoPurchase release];
+        demoPurchase = nil;
+        demoPurchase = [[EBPurchase alloc] init];
+        demoPurchase.delegate = self;
+        demoPurchase.customIndex = button.tag;
+        isPurchased = NO;
+        [demoPurchase requestProduct:[NSArray arrayWithObjects:PRODUCT_TEMPLATE, PRODUCT_FULL_TEMPLATE,
                                   PRODUCT_ALL_BUNDLE, nil]];
-  
+    }else{
+        [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
+    }
+
 }
 
 
 -(void)requestSymbols:(UIButton *)button{
     
-    //[self showLoadingView:nil];
+      if([AddFriendsController connected]){
+          //[self showLoadingView:nil];
+          // Create an instance of EBPurchase (Inapp purchase).
+          [demoPurchase release];
+          demoPurchase = nil;
+          demoPurchase = [[EBPurchase alloc] init];
+          demoPurchase.delegate = self;
+          demoPurchase.customIndex = button.tag;
+          isPurchased = NO;
     
-    // Create an instance of EBPurchase (Inapp purchase).
-    [demoPurchase release];
-    demoPurchase = nil;
-    demoPurchase = [[EBPurchase alloc] init];
-    demoPurchase.delegate = self;
-    demoPurchase.customIndex = button.tag;
-     NSLog(@"%d",button.tag);
-    isPurchased = NO;
-    
-    [demoPurchase requestProduct:[NSArray arrayWithObjects:PRODUCT_SYMBOL_SELETED,PRODUCT_SYMBOL_ALL,PRODUCT_ALL_BUNDLE, nil]];
+          [demoPurchase requestProduct:[NSArray arrayWithObjects:PRODUCT_SYMBOL_SELETED,PRODUCT_SYMBOL_ALL,PRODUCT_ALL_BUNDLE, nil]];
+      }else{
+          [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
+      }
     
 }
 
 
 -(void)requestIcons:(UIButton *)button{
     
-    //[self showLoadingView:nil];
+    if([AddFriendsController connected]){
+        //[self showLoadingView:nil];
     
-    // Create an instance of EBPurchase (Inapp purchase).
-    [demoPurchase release];
-    demoPurchase = nil;
-    demoPurchase = [[EBPurchase alloc] init];
-    demoPurchase.delegate = self;
-    demoPurchase.customIndex = button.tag;
-     NSLog(@"%d",button.tag);
-    isPurchased = NO;
-    
-    [demoPurchase requestProduct:[NSArray arrayWithObjects:PRODUCT_ICON_SELETED,PRODUCT_ICON_ALL,PRODUCT_ALL_BUNDLE, nil]];
+        // Create an instance of EBPurchase (Inapp purchase).
+        [demoPurchase release];
+        demoPurchase = nil;
+        demoPurchase = [[EBPurchase alloc] init];
+        demoPurchase.delegate = self;
+        demoPurchase.customIndex = button.tag;
+        isPurchased = NO;
+        [demoPurchase requestProduct:[NSArray arrayWithObjects:PRODUCT_ICON_SELETED,PRODUCT_ICON_ALL,PRODUCT_ALL_BUNDLE, nil]];
+    }else{
+        [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
+    }
     
 }
 
 -(void)requestFont:(UIButton *)button{
     
-    //[self showLoadingView:nil];
-    
-    // Create an instance of EBPurchase (Inapp purchase).
-    [demoPurchase release];
-    demoPurchase = nil;
-    demoPurchase = [[EBPurchase alloc] init];
-    demoPurchase.delegate = self;
-    demoPurchase.customIndex = button.tag;
-    NSLog(@"%d",button.tag);
-    isPurchased = NO;
+    if([AddFriendsController connected]){
+        //[self showLoadingView:nil];
+        // Create an instance of EBPurchase (Inapp purchase).
+        [demoPurchase release];
+        demoPurchase = nil;
+        demoPurchase = [[EBPurchase alloc] init];
+        demoPurchase.delegate = self;
+        demoPurchase.customIndex = button.tag;
+        isPurchased = NO;
 
-    [demoPurchase requestProduct:[NSArray arrayWithObjects:PRODUCT_FONT, PRODUCT_FULL_FONT, PRODUCT_ALL_BUNDLE, nil]];
+        [demoPurchase requestProduct:[NSArray arrayWithObjects:PRODUCT_FONT, PRODUCT_FULL_FONT, PRODUCT_ALL_BUNDLE, nil]];
+    }else{
+        [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
+    }
  
 }
 
 -(void)requestColor:(UIButton *)button{
     
-   // [self showLoadingView:nil];
+    if([AddFriendsController connected]){
+        // [self showLoadingView:nil];
 
-    // Create an instance of EBPurchase (Inapp purchase).
-    [demoPurchase release];
-    demoPurchase = nil;
-    demoPurchase = [[EBPurchase alloc] init];
-    demoPurchase.delegate = self;
-    demoPurchase.customIndex = button.tag;
-    isPurchased = NO;
+        // Create an instance of EBPurchase (Inapp purchase).
+        [demoPurchase release];
+        demoPurchase = nil;
+        demoPurchase = [[EBPurchase alloc] init];
+        demoPurchase.delegate = self;
+        demoPurchase.customIndex = button.tag;
+        isPurchased = NO;
 
-    [demoPurchase requestProduct:[NSArray arrayWithObjects:PRODUCT_FONT_COLOR, PRODUCT_FULL_FONT_COLOR,
+        [demoPurchase requestProduct:[NSArray arrayWithObjects:PRODUCT_FONT_COLOR, PRODUCT_FULL_FONT_COLOR,
                                   PRODUCT_ALL_BUNDLE, nil]];
+    }else{
+        [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
+    }
 }
 
 -(void)requestFontBorder:(UIButton *)button{
 
-    //[self showLoadingView:nil];
+     if([AddFriendsController connected]){
+         //[self showLoadingView:nil];
 
-    // Create an instance of EBPurchase (Inapp purchase).
-    [demoPurchase release];
-    demoPurchase = nil;
-    demoPurchase = [[EBPurchase alloc] init];
-    demoPurchase.delegate = self;
-    demoPurchase.customIndex = button.tag;
-    isPurchased = NO;
-    [demoPurchase requestProduct:[NSArray arrayWithObjects:PRODUCT_FONT_BORDER_COLOR, PRODUCT_FULL_FONT_BORDER_COLOR,
+         // Create an instance of EBPurchase (Inapp purchase).
+         [demoPurchase release];
+         demoPurchase = nil;
+         demoPurchase = [[EBPurchase alloc] init];
+         demoPurchase.delegate = self;
+         demoPurchase.customIndex = button.tag;
+         isPurchased = NO;
+         [demoPurchase requestProduct:[NSArray arrayWithObjects:PRODUCT_FONT_BORDER_COLOR, PRODUCT_FULL_FONT_BORDER_COLOR,
                                   PRODUCT_ALL_BUNDLE, nil]];
+     }else{
+         [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
+     }
 }
 
 -(void)requestFlyerBorder:(UIButton *)button{
     
-   // [self showLoadingView:nil];
+     if([AddFriendsController connected]){
+         // [self showLoadingView:nil];
 
-    // Create an instance of EBPurchase (Inapp purchase).
-    [demoPurchase release];
-    demoPurchase = nil;
-    demoPurchase = [[EBPurchase alloc] init];
-    demoPurchase.delegate = self;
-    demoPurchase.customIndex = button.tag;
-    isPurchased = NO;
+         // Create an instance of EBPurchase (Inapp purchase).
+         [demoPurchase release];
+         demoPurchase = nil;
+         demoPurchase = [[EBPurchase alloc] init];
+         demoPurchase.delegate = self;
+         demoPurchase.customIndex = button.tag;
+         isPurchased = NO;
 
-    [demoPurchase requestProduct:[NSArray arrayWithObjects:PRODUCT_FLYER_BORDER_COLOR,
+         [demoPurchase requestProduct:[NSArray arrayWithObjects:PRODUCT_FLYER_BORDER_COLOR,
                                   PRODUCT_FULL_FLYER_BORDER_COLOR, PRODUCT_ALL_BUNDLE, nil]];
+     }else{
+         [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
+     }
 }
 
 -(IBAction)restorePurchase

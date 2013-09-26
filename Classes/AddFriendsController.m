@@ -19,7 +19,7 @@
 
 @implementation AddFriendsController
 @synthesize uiTableView, contactsArray, deviceContactItems, contactsLabel, facebookLabel, twitterLabel, doneLabel, selectAllLabel, unSelectAllLabel, inviteLabel, contactsButton, facebookButton, twitterButton, loadingView, searchTextField, facebookArray, twitterArray,fbinvited,Twitterinvited,iPhoneinvited;
-@synthesize contactBackupArray, facebookBackupArray, twitterBackupArray,navBar;
+@synthesize contactBackupArray, facebookBackupArray, twitterBackupArray,navBar,account;
 
 const int TWITTER_TAB = 2;
 const int FACEBOOK_TAB = 1;
@@ -32,14 +32,14 @@ BOOL selectAll;
     
     [super viewDidLoad];
     self.deviceContactItems = [[NSMutableArray alloc] init];
-      globle = [Singleton RetrieveSingleton];
+    globle = [Singleton RetrieveSingleton];
     self.navigationItem.hidesBackButton = YES;
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
-
+    
     // Register notification for facebook login
     [[NSNotificationCenter defaultCenter] removeObserver:self name:FacebookDidLoginNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fbDidLogin) name:FacebookDidLoginNotification object:nil];
-
+    
     // By default first tab is selected 'Contacts'
     selectedTab = -1;
 	loadingViewFlag = NO;
@@ -53,45 +53,45 @@ BOOL selectAll;
     [helpButton setImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
     helpButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:helpButton];
-  
-
+    
+    
     UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)];
     [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
     [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
-     backButton.showsTouchWhenHighlighted = YES;
+    backButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:backBarButton,leftBarButton,nil]];
-
+    
     // set borders on the table
-   ;
-   // [[self.uiTableView layer] setBorderColor:[[UIColor grayColor] CGColor]];
-   // [[self.uiTableView layer] setBorderWidth:5];
+    ;
+    // [[self.uiTableView layer] setBorderColor:[[UIColor grayColor] CGColor]];
+    // [[self.uiTableView layer] setBorderWidth:5];
     // Set fonts type and sizes
     /*
-    [self.contactsLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
-    [self.contactsLabel setText:NSLocalizedString(@"contacts", nil)];
-
-    [self.facebookLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
-    [self.facebookLabel setText:NSLocalizedString(@"facebook", nil)];
-
-    [self.twitterLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
-    [self.twitterLabel setText:NSLocalizedString(@"twitter", nil)];
-
-    [self.doneLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
-    [self.doneLabel setText:NSLocalizedString(@"done", nil)];
-
-    [self.selectAllLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
-    [self.selectAllLabel setText:NSLocalizedString(@"select_all", nil)];
-
-    [self.unSelectAllLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
-    [self.unSelectAllLabel setText:NSLocalizedString(@"unselect_all", nil)];
-
-    [self.inviteLabel setFont:[UIFont fontWithName:TITLE_FONT size:18]];
-    [self.inviteLabel setText:NSLocalizedString(@"invite", nil)];
-*/
+     [self.contactsLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
+     [self.contactsLabel setText:NSLocalizedString(@"contacts", nil)];
+     
+     [self.facebookLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
+     [self.facebookLabel setText:NSLocalizedString(@"facebook", nil)];
+     
+     [self.twitterLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
+     [self.twitterLabel setText:NSLocalizedString(@"twitter", nil)];
+     
+     [self.doneLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
+     [self.doneLabel setText:NSLocalizedString(@"done", nil)];
+     
+     [self.selectAllLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
+     [self.selectAllLabel setText:NSLocalizedString(@"select_all", nil)];
+     
+     [self.unSelectAllLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
+     [self.unSelectAllLabel setText:NSLocalizedString(@"unselect_all", nil)];
+     
+     [self.inviteLabel setFont:[UIFont fontWithName:TITLE_FONT size:18]];
+     [self.inviteLabel setText:NSLocalizedString(@"invite", nil)];
+     */
     [searchTextField setReturnKeyType:UIReturnKeyDone];
- 
+    
 }
 
 -(NSArray *)rightBarItems{
@@ -111,12 +111,12 @@ BOOL selectAll;
     label.textColor = [UIColor whiteColor];
     label.text = @"INVITE";
     self.navigationItem.titleView = label;//[PhotoController setTitleViewWithTitle:@"Invite" rect:CGRectMake(-28, -6, 50, 50)];
-
+    
     
     UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 31, 30)];
     [menuButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [menuButton setBackgroundImage:[UIImage imageNamed:@"menu_button"] forState:UIControlStateNormal];
-     menuButton.showsTouchWhenHighlighted = YES;
+    menuButton.showsTouchWhenHighlighted = YES;
     [menuButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *menuBarButton = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
     //[self.navigationItem setRightBarButtonItem:rightBarButton];
@@ -132,16 +132,16 @@ BOOL selectAll;
 
 -(IBAction)goBack{
     /*
-    if(IS_IPHONE_5){
-        launchCotroller = [[LauchViewController alloc]initWithNibName:@"LauchViewControllerIPhone5" bundle:nil];
-    }   else{
-        launchCotroller = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
-    }
-
-	[self.navigationController pushViewController:launchCotroller animated:NO];
+     if(IS_IPHONE_5){
+     launchCotroller = [[LauchViewController alloc]initWithNibName:@"LauchViewControllerIPhone5" bundle:nil];
+     }   else{
+     launchCotroller = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
+     }
+     
+     [self.navigationController pushViewController:launchCotroller animated:NO];
      */
     [self.navigationController popViewControllerAnimated:YES];
-
+    
 }
 
 /*
@@ -154,17 +154,22 @@ BOOL selectAll;
     if(selectedTab == CONTACTS_TAB){
         return;
     }
-
+    
     selectAll = YES;
     [self.deviceContactItems release];
     self.deviceContactItems = nil;
     self.deviceContactItems = [[NSMutableArray alloc] init];
     [selectedIdentifierDictionary release];
     selectedIdentifierDictionary = nil;
-
+    
     selectedTab = CONTACTS_TAB;
     [self setUnselectTab:sender];
-
+    PFUser *user = [PFUser currentUser];
+    self.iPhoneinvited = [[NSMutableArray alloc] init];
+    if ([user objectForKey:@"iphoneinvited"]) {
+        self.iPhoneinvited  = [user objectForKey:@"iphoneinvited"];
+    }
+    
     // init contact array
     if(contactBackupArray){
         
@@ -176,11 +181,9 @@ BOOL selectAll;
         
         [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
         //[self.uiTableView reloadData];
-
+        
     } else {
-        PFUser *user = [PFUser currentUser];
-        self.iPhoneinvited = [[NSMutableArray alloc] init];
-        self.iPhoneinvited  = [user objectForKey:@"iphoneinvited"];
+        
         contactsArray = [[NSMutableArray alloc] init];
         ABAddressBookRef m_addressbook = ABAddressBookCreate();
         
@@ -249,13 +252,13 @@ BOOL selectAll;
             firstName = (CFStringRef) @"";
         if(!lastName)
             lastName = (CFStringRef) @"";
-
+        
         [dOfPerson setObject:[NSString stringWithFormat:@"%@ %@", firstName, lastName] forKey:@"name"];
         
         //For Email ids
         ABMutableMultiValueRef eMail  = ABRecordCopyValue(ref, kABPersonEmailProperty);
         if(ABMultiValueGetCount(eMail) > 0) {
-            [dOfPerson setObject:(NSString *)ABMultiValueCopyValueAtIndex(eMail, 0) forKey:@"email"];            
+            [dOfPerson setObject:(NSString *)ABMultiValueCopyValueAtIndex(eMail, 0) forKey:@"email"];
         }
         
         // For contact picture
@@ -270,7 +273,7 @@ BOOL selectAll;
                 contactPicture = [UIImage imageWithData:(NSData *)ABPersonCopyImageData(ref)];
                 [dOfPerson setObject:contactPicture forKey:@"image"];
             }
-        }        
+        }
         
         //For Phone number
         NSString* mobileLabel;
@@ -306,7 +309,7 @@ BOOL selectAll;
  * Called when facebook  button is selected on screen
  */
 - (IBAction)loadFacebookContacts:(UIButton *)sender{
-
+    
     if([AddFriendsController connected]){
         contactsCount = 0;
         invited = NO;
@@ -314,28 +317,28 @@ BOOL selectAll;
         //if(selectedTab == FACEBOOK_TAB){
         //    return;
         //}
-     
+        
         selectAll = YES;
         [self.deviceContactItems release];
         self.deviceContactItems = nil;
         self.deviceContactItems = [[NSMutableArray alloc] init];
         [selectedIdentifierDictionary release];
         selectedIdentifierDictionary = nil;
-
-        selectedTab = FACEBOOK_TAB;
         
- 
+        selectedTab = FACEBOOK_TAB;
+        [self setUnselectTab:sender];
+        
         
         // init facebook array
-         NSLog(@"%@",facebookBackupArray);
+        NSLog(@"%@",facebookBackupArray);
         if(facebookBackupArray){
             
             // Reload table data after all the contacts get loaded
             facebookArray = nil;
             facebookArray = facebookBackupArray;
             //[deviceContactItems setArray:fbinvited];
-
-
+            
+            
             // Filter contacts on new tab selection
             [self onSearchClick:nil];
             [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
@@ -399,10 +402,12 @@ BOOL selectAll;
             
             if([appDelegate.facebook isSessionValid]) {
                 [self setUnselectTab:sender];
+                
                 PFUser *user = [PFUser currentUser];
-                 self.fbinvited = [[NSMutableArray alloc] init];
-                self.fbinvited  = [user objectForKey:@"fbinvited"];
-                  //[deviceContactItems setArray:fbinvited];
+                self.fbinvited = [[NSMutableArray alloc] init];
+                if ([user objectForKey:@"fbinvited"]) {
+                    self.fbinvited  = [user objectForKey:@"fbinvited"];
+                }
                 
                 //loadingView =[LoadingView loadingViewInView:self.view  text:@"Loading..."];
                 //loadingViewFlag = YES;
@@ -419,10 +424,10 @@ BOOL selectAll;
                                                  @"publish_stream", @"email", nil]];
             }
         }
-    
+        
     } else {
-    
-        [self showAlert:@"Warning!" message:@"You're not connected to the internet. Please connect and retry."];
+        
+        [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
     }
 }
 
@@ -447,13 +452,15 @@ int totalCount = 0;
         NSString *imageURL = [[[friendData objectForKey:@"picture"] objectForKey:@"data"] objectForKey:@"url"];
         //NSURL *imageURL = [NSURL URLWithString:[[[friendData objectForKey:@"picture"] objectForKey:@"data"] objectForKey:@"url"]];
         //UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
-
+        
         // Here we will get the facebook contacts
         NSMutableDictionary *dOfPerson=[NSMutableDictionary dictionary];
-      
+        
         [dOfPerson setObject:[friendData objectForKey:@"name"] forKey:@"name"];
         [dOfPerson setObject:[friendData objectForKey:@"id"] forKey:@"identifier"];
-        [dOfPerson setObject:[friendData objectForKey:@"gender"] forKey:@"gender"];
+        if ([friendData objectForKey:@"gender"]) {
+            [dOfPerson setObject:[friendData objectForKey:@"gender"] forKey:@"gender"];
+        }
         if(imageURL){
             [dOfPerson setObject:imageURL forKey:@"image"];
         }
@@ -471,26 +478,26 @@ int totalCount = 0;
     
     // Filter contacts on new tab selection
     [self onSearchClick:nil];
-
+    
     [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
     //[self.uiTableView reloadData];
     
     /*if(count > 0){
-        FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-        //[appDelegate.facebook requestWithGraphPath:[NSString stringWithFormat:@"me/friends?fields=name,picture.height(35).width(35).type(small)&limit=100&offset=%d", totalCount] andDelegate:self];
-        [appDelegate.facebook requestWithGraphPath:@"me/friends?fields=name,picture.height(35).width(35).type(small)" andDelegate:self];
-
-        //loadingView =[LoadingView loadingViewInView:self.view text:@"Loading..."];
-        
-    } else */{
-        totalCount = 0;
-    
-        for (UIView *subview in self.view.subviews) {
-            if([subview isKindOfClass:[LoadingView class]]){
-                [subview removeFromSuperview];
-            }
-        }
-    }
+     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+     //[appDelegate.facebook requestWithGraphPath:[NSString stringWithFormat:@"me/friends?fields=name,picture.height(35).width(35).type(small)&limit=100&offset=%d", totalCount] andDelegate:self];
+     [appDelegate.facebook requestWithGraphPath:@"me/friends?fields=name,picture.height(35).width(35).type(small)" andDelegate:self];
+     
+     //loadingView =[LoadingView loadingViewInView:self.view text:@"Loading..."];
+     
+     } else */{
+         totalCount = 0;
+         
+         for (UIView *subview in self.view.subviews) {
+             if([subview isKindOfClass:[LoadingView class]]){
+                 [subview removeFromSuperview];
+             }
+         }
+     }
 }
 
 /*
@@ -512,7 +519,7 @@ int totalCount = 0;
         [selectedIdentifierDictionary release];
         selectedIdentifierDictionary = nil;
         
-
+        
         selectedTab = TWITTER_TAB;
         [self setUnselectTab:sender];
         
@@ -523,7 +530,7 @@ int totalCount = 0;
             twitterArray = nil;
             twitterArray = twitterBackupArray;
             // Filter contacts on new tab selection
-            [self onSearchClick:nil];
+            //[self onSearchClick:nil];
             
             [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
             
@@ -532,13 +539,15 @@ int totalCount = 0;
         } else{
             PFUser *user = [PFUser currentUser];
             self.Twitterinvited = [[NSMutableArray alloc] init];
-            self.Twitterinvited  = [user objectForKey:@"tweetinvited"];
+            if ([user objectForKey:@"tweetinvited"]) {
+                self.Twitterinvited  = [user objectForKey:@"tweetinvited"];
+            }
             //loadingView =[LoadingView loadingViewInView:self.view text:@"Loading..."];
             //loadingViewFlag = YES;
             
             // Empty table view
             [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
-
+            
             if([TWTweetComposeViewController canSendTweet]){
                 
                 ACAccountStore *account = [[ACAccountStore alloc] init];
@@ -591,15 +600,16 @@ int totalCount = 0;
                 }
             }
         }
-
+        
     } else {
         
-        [self showAlert:@"Warning!" message:@"You're not connected to the internet. Please connect and retry."];
+        [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
     }
 }
 
 -(void)cursoredTwitterContacts:(NSString *)cursor account:(ACAccount *)acct{
-
+    
+    account = acct;
     // Build a twitter request
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     [params setObject:cursor forKey:@"cursor"];
@@ -617,7 +627,7 @@ int totalCount = 0;
         
         NSError *jsonError = nil;
         NSDecimalNumber *nextCursor;
-
+        
         if(responseData){
             
             NSDictionary *followers =  [NSJSONSerialization JSONObjectWithData:responseData
@@ -628,7 +638,7 @@ int totalCount = 0;
                 NSMutableDictionary *dOfPerson=[NSMutableDictionary dictionary];
                 [dOfPerson setObject:[user objectForKey:@"name"] forKey:@"name"];
                 [dOfPerson setObject:[user objectForKey:@"screen_name"] forKey:@"identifier"];
-                 [dOfPerson setObject:[user objectForKey:@"location"] forKey:@"location"];
+                [dOfPerson setObject:[user objectForKey:@"location"] forKey:@"location"];
                 
                 NSString *imageURL = [user objectForKey:@"profile_image_url"];
                 NSString *new = [imageURL stringByReplacingOccurrencesOfString: @"normal" withString:@"bigger"];
@@ -637,35 +647,35 @@ int totalCount = 0;
                 //UIImage *image = [UIImage imageWithData:imageData];
                 
                 if(imageURL){
-                    [dOfPerson setObject:imageURL forKey:@"image"];
+                    [dOfPerson setObject:new forKey:@"image"];
                 }
                 
                 [self.twitterArray addObject:dOfPerson];
             }
-
+            
             twitterBackupArray = nil;
             twitterBackupArray = twitterArray;
             
             // Filter contacts
-            [self performSelectorOnMainThread:@selector(onSearchClick:) withObject:nil waitUntilDone:NO];
+            //[self performSelectorOnMainThread:@selector(onSearchClick:) withObject:nil waitUntilDone:NO];
             //[self onSearchClick:nil];
-
+            
             [uiTableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
             nextCursor = [followers objectForKey:@"next_cursor"];
         }
-
+        
         /*twitterBackupArray = nil;
-        twitterBackupArray = twitterArray;*/
+         twitterBackupArray = twitterArray;*/
         if([nextCursor compare:[NSDecimalNumber zero]] == NSOrderedSame){
             
             [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
             //[self.uiTableView reloadData];
         }else{
-
+            
             //[[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
             [self cursoredTwitterContacts:[NSString stringWithFormat:@"%@", nextCursor] account:acct];
         }
-
+        
         NSLog(@"Twitter response, HTTP response: %i", [urlResponse statusCode]);
     }];
     
@@ -709,45 +719,47 @@ int totalCount = 0;
     
     sName = [screenName retain];
     sMessage = [message retain];
+    
     [self makeTwitterPost:account];
-
     /*
-    ACAccountStore *account = [[ACAccountStore alloc] init];
-    ACAccountType *accountType = [account accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
     
-
-    
-    // Request access from the user to access their Twitter account
-    [account requestAccessToAccountsWithType:accountType withCompletionHandler:^(BOOL granted, NSError *error) {
-        // Did user allow us access?
-        if (granted == YES) {
-            
-            // Populate array with all available Twitter accounts
-            arrayOfAccounts = [[account accountsWithAccountType:accountType] retain];
-            
-            // Sanity check
-            if ([arrayOfAccounts count] > 1 ) {
-                
-                // Show list of acccounts from which to select
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:@"Choose Account" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles: nil];
-                    actionSheet.tag = 1;
-                    
-                    for (int i = 0; i < arrayOfAccounts.count; i++) {
-                        ACAccount *acct = [arrayOfAccounts objectAtIndex:i];
-                        [actionSheet addButtonWithTitle:acct.username];
-                    }
-                    
-                    [actionSheet addButtonWithTitle:@"Cancel"];
-                    [actionSheet showInView:self.view];
-                });
-            } else if ( arrayOfAccounts.count > 0 ) {
-               account = [arrayOfAccounts objectAtIndex:0];
-                [self makeTwitterPost:account];
-            }
-        }
-    }];
-     */
+     ACAccountStore *account = [[ACAccountStore alloc] init];
+     ACAccountType *accountType = [account accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+     
+     
+     
+     // Request access from the user to access their Twitter account
+     [account requestAccessToAccountsWithType:accountType withCompletionHandler:^(BOOL granted, NSError *error) {
+     // Did user allow us access?
+     if (granted == YES) {
+     
+     // Populate array with all available Twitter accounts
+     arrayOfAccounts = [[account accountsWithAccountType:accountType] retain];
+     
+     // Sanity check
+     if ([arrayOfAccounts count] > 1 ) {
+     
+     // Show list of acccounts from which to select
+     dispatch_async(dispatch_get_main_queue(), ^{
+     UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:@"Choose Account" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles: nil];
+     actionSheet.tag = 1;
+     
+     for (int i = 0; i < arrayOfAccounts.count; i++) {
+     ACAccount *acct = [arrayOfAccounts objectAtIndex:i];
+     [actionSheet addButtonWithTitle:acct.username];
+     }
+     
+     [actionSheet addButtonWithTitle:@"Cancel"];
+     [actionSheet showInView:self.view];
+     });
+     } else if ( arrayOfAccounts.count > 0 ) {
+       ACAccount *account = [arrayOfAccounts objectAtIndex:0];
+     [self makeTwitterPost:account];
+     }
+     }
+     }];
+*/
+     
 }
 
 /**
@@ -761,7 +773,7 @@ int totalCount = 0;
     if(buttonIndex != arrayOfAccounts.count) {
         
         //save to NSUserDefault
-        account = [arrayOfAccounts objectAtIndex:buttonIndex];
+          account = [arrayOfAccounts objectAtIndex:buttonIndex];
         
         //Convert twitter username to email
         if ( actionSheet.tag == 1 ) {
@@ -776,7 +788,7 @@ int totalCount = 0;
  * invite contacts
  */
 -(IBAction)inviteFreind:(id)sender {
-  UIButton *cellImageButton = (UIButton *) sender;
+    UIButton *cellImageButton = (UIButton *) sender;
     
     
     if (contactsCount <15) {
@@ -787,7 +799,7 @@ int totalCount = 0;
             dict2 = [[self getArrayOfSelectedTab] objectAtIndex:(cellImageButton.tag)];
             if ([self ckeckExistContact:[dict2 objectForKey:@"identifier"]]) {
                 [deviceContactItems addObject:[dict2 objectForKey:@"identifier"]];
-              
+                
                 [cellImageButton setBackgroundImage:[UIImage imageNamed:@"add_icon"] forState:UIControlStateNormal];
                 NSLog(@"%d",cellImageButton.tag);
             }
@@ -795,9 +807,9 @@ int totalCount = 0;
     }else{
         [self showAlert:@"You can only invite 15 user at a time" message:@""];
     }
-
- 
-
+    
+    
+    
 }
 - (BOOL)ckeckExistContact:(NSString *)identifier{
     for (int i = 0; i < deviceContactItems.count ; i++) {
@@ -817,7 +829,7 @@ int totalCount = 0;
     }else{
         checkary = iPhoneinvited;
     }
-        
+    
     for (int i = 0; i < checkary.count ; i++) {
         if ([identifier isEqualToString:[checkary objectAtIndex:i]]) {
             return NO;
@@ -832,16 +844,16 @@ int totalCount = 0;
     identifiers = deviceContactItems;
     NSLog(@"%@",identifiers);
     /*
-    for(AddFriendItem *cell in deviceContactItems){
-        
-        if([cell.leftCheckBox isSelected]){
-            [identifiers addObject:cell.identifier1];
-        }
-        
-        if([cell.rightCheckBox isSelected]){
-            [identifiers addObject:cell.identifier2];
-        }
-    }
+     for(AddFriendItem *cell in deviceContactItems){
+     
+     if([cell.leftCheckBox isSelected]){
+     [identifiers addObject:cell.identifier1];
+     }
+     
+     if([cell.rightCheckBox isSelected]){
+     [identifiers addObject:cell.identifier2];
+     }
+     }
      */
     
     if([identifiers count] > 0){
@@ -865,11 +877,13 @@ int totalCount = 0;
             
             [self showAlert:@"Invitation Sent!" message:@"You have successfully invited your friends to join flyerly."];
             [self.uiTableView reloadData ];
-
+            
         }else if(selectedTab == 1){
             NSLog(@"%@",identifiers);
             [self tagFacebookUsersWithFeed:identifiers];
             [fbinvited  addObjectsFromArray:deviceContactItems];
+            NSLog(@"%@",fbinvited);
+            
             PFUser *user = [PFUser currentUser];
             [user setObject:fbinvited forKey:@"fbinvited"];
             [user saveInBackground];
@@ -902,9 +916,10 @@ int totalCount = 0;
             [self showAlert:@"Invitation Sent!" message:@"You have successfully invited your friends to join flyerly."];
             NSLog(@"%@",iPhoneinvited);
             NSLog(@"%@",globle.accounts);
-             [iPhoneinvited  addObjectsFromArray:globle.accounts];
+            [iPhoneinvited  addObjectsFromArray:globle.accounts];
+            NSLog(@"%@",iPhoneinvited);
             PFUser *user = [PFUser currentUser];
-            [user setObject:iPhoneinvited forKey:@"tweetinvited"];
+            [user setObject:iPhoneinvited forKey:@"iphoneinvited"];
             [user saveInBackground];
             [deviceContactItems   removeAllObjects];
             [self.uiTableView reloadData];
@@ -919,21 +934,21 @@ int totalCount = 0;
     
     // Post a status update to the user's feed via the Graph API, and display an alert view
     // with the results or an error.
-
+    
     [self performPublishAction:^{
         
         [FBRequestConnection startForPostStatusUpdate:@"I'm using the flyerly app to create and share flyers on the go! Flyer.ly/Facebook" place:@"144479625584966" tags:identifiers completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
             
             NSLog(@"New Result: %@", result);
             NSLog(@"Error: %@", error);
-
+            
             //[self showAlert:@"Invited !" message:@"You have successfully invited your friends to join flyerly."];
         }];
     }];
 }
 
 // Convenience method to perform some action that requires the "publish_actions" permissions.
-- (void) performPublishAction:(void (^)(void)) action {    
+- (void) performPublishAction:(void (^)(void)) action {
     
     if ([[FBSession activeSession]isOpen]) {
         /*
@@ -947,9 +962,9 @@ int totalCount = 0;
             }];
             
         }else{
-
+            
             [self publish_action:action];
-
+            
         }
     }else{
         /*
@@ -967,7 +982,7 @@ int totalCount = 0;
 }
 
 -(void)publish_action:(void (^)(void)) action{
-
+    
     // we defer request for permission to post to the moment of post, then we check for the permission
     if ([FBSession.activeSession.permissions indexOfObject:@"publish_actions"] == NSNotFound) {
         // if we don't already have the permission, then we request it now
@@ -990,7 +1005,7 @@ int totalCount = 0;
     MFMessageComposeViewController *messageInstance = [[MFMessageComposeViewController alloc] init];
     
     if([MFMessageComposeViewController canSendText]) {
-
+        
         [messageInstance setRecipients:recipients];
         messageInstance.body = message;
         messageInstance.messageComposeDelegate = self;
@@ -1025,24 +1040,15 @@ int totalCount = 0;
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-
-    // since we have two contacts in single row we have to divide it by 2
-    int count = ([[self getArrayOfSelectedTab] count]) / 2;
-    
-    // Add one if contact counts are odd
-    if(([[self getArrayOfSelectedTab] count] % 2) == 1){
-        count++;
-    }
-    
-    // return count
-    return count;
+    int count = ([[self getArrayOfSelectedTab] count]);
+    return  count;
 }
 
 NSMutableDictionary *selectedIdentifierDictionary;
 +(NSMutableDictionary *)getSelectedIdentifiersDictionary{
     
     if(selectedIdentifierDictionary){
-        return selectedIdentifierDictionary;    
+        return selectedIdentifierDictionary;
     }else{
         selectedIdentifierDictionary = [[NSMutableDictionary alloc] init];
         return selectedIdentifierDictionary;
@@ -1070,7 +1076,14 @@ NSMutableDictionary *selectedIdentifierDictionary;
 		[v removeFromSuperview];
 	}
     
-
+    if(loadingViewFlag){
+        for (UIView *subview in self.view.subviews) {
+            if([subview isKindOfClass:[LoadingView class]]){
+                [subview removeFromSuperview];
+                loadingViewFlag = NO;
+            }
+        }
+    }
     if(!self.deviceContactItems){
         self.deviceContactItems = [[NSMutableArray alloc] init];
     }
@@ -1084,11 +1097,10 @@ NSMutableDictionary *selectedIdentifierDictionary;
     // Check index
     if([[self getArrayOfSelectedTab] count] >= 1){
         dict2 = [[self getArrayOfSelectedTab] objectAtIndex:(indexPath.row)];
-        NSLog(@"%@",dict2);
         name2 = [dict2 objectForKey:@"name"];
         if(selectedTab == FACEBOOK_TAB) detailfield = [dict2 objectForKey:@"gender"];
         if(selectedTab == TWITTER_TAB) detailfield = [dict2 objectForKey:@"location"];
-
+        
         if(selectedTab == FACEBOOK_TAB || selectedTab == TWITTER_TAB){
             imgfile2 = [dict2 objectForKey:@"image"];
         } else {
@@ -1105,11 +1117,11 @@ NSMutableDictionary *selectedIdentifierDictionary;
         dispatch_async(dispatchQueue, ^(void)
                        {
                            dispatch_sync(dispatch_get_main_queue(), ^{
-                                aview = [[AsyncImageView alloc]initWithFrame:CGRectMake(0, 0,70, 70)];
+                               aview = [[AsyncImageView alloc]initWithFrame:CGRectMake(0, 0,70, 70)];
                                NSLog(@"%@",imgfile2);
-                                NSURL *imageurl = [NSURL URLWithString:imgfile2];
-                                NSLog(@"%@",imageurl);
-                                [aview setImageURL:imageurl];
+                               NSURL *imageurl = [NSURL URLWithString:imgfile2];
+                               NSLog(@"%@",imageurl);
+                               [aview setImageURL:imageurl];
                                [cell.contentView addSubview:aview];
                            });
                        });
@@ -1118,7 +1130,7 @@ NSMutableDictionary *selectedIdentifierDictionary;
     UIButton *addButton = [[UIButton alloc] initWithFrame:CGRectMake(270,22 , 32, 33)];
     [addButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [addButton addTarget:self action:@selector(inviteFreind:) forControlEvents:UIControlEventTouchUpInside];
-
+    
     if ([self ckeckExistContact:[dict2 objectForKey:@"identifier"]]) {
         if ([self ckeckExistdb:[dict2 objectForKey:@"identifier"]]) {
             [addButton setBackgroundImage:[UIImage imageNamed:@"add_icon-grey"] forState:UIControlStateNormal];
@@ -1126,15 +1138,15 @@ NSMutableDictionary *selectedIdentifierDictionary;
             [addButton setBackgroundImage:[UIImage imageNamed:@"check_icon"] forState:UIControlStateNormal];
         }
     }else{
-            [addButton setBackgroundImage:[UIImage imageNamed:@"add_icon"] forState:UIControlStateNormal];
-       
+        [addButton setBackgroundImage:[UIImage imageNamed:@"add_icon"] forState:UIControlStateNormal];
+        
     }
     addButton.tag = indexPath.row;
     [cell.contentView addSubview:addButton];
     
     UILabel *title = [[UILabel alloc]initWithFrame:CGRectMake(80, 0, 190, 20)];
 	[title setBackgroundColor:[UIColor clearColor]];
-     [title setTextColor:[UIColor darkTextColor]];
+    [title setTextColor:[UIColor darkTextColor]];
 	[title setFont:[UIFont fontWithName:TITLE_FONT size:14]];
 	[title setTextAlignment:UITextAlignmentLeft];
 	title.text = name2;
@@ -1149,231 +1161,231 @@ NSMutableDictionary *selectedIdentifierDictionary;
 	[cell.contentView  addSubview:stitle];
     UIImageView *imgView=[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 70, 70)];
     imgView.backgroundColor=[UIColor clearColor];
- //   [imgView.layer setCornerRadius:8.0f];
+    //   [imgView.layer setCornerRadius:8.0f];
     [imgView.layer setMasksToBounds:YES];
     [imgView setImage:imgfile];
     [cell.contentView addSubview:imgView];
     //cell.textLabel.text = detailfield;
     //cell.detailTextLabel.text = detailfield;
-
-    //cell.imageView.image = imgfile;
-
     
-
+    //cell.imageView.image = imgfile;
+    
+    
+    
     
     /*
-    // Get left contact data
-    NSMutableDictionary *dict1 = [[self getArrayOfSelectedTab] objectAtIndex:index];
-    NSLog(@"%@",dict1);
-    //NSString *identifier1 = [dict1 objectForKey:@"identifier"];
-   // NSString *name1 = [dict1 objectForKey:@"name"];
-
-    
-    if(selectedTab == FACEBOOK_TAB || selectedTab == TWITTER_TAB){
-        //[dict1 objectForKey:@"image"];
-        imgfile =[dict1 objectForKey:@"image"];
-    } else {
-        imgfile =[dict1 objectForKey:@"image"];
-    }
-    */
+     // Get left contact data
+     NSMutableDictionary *dict1 = [[self getArrayOfSelectedTab] objectAtIndex:index];
+     NSLog(@"%@",dict1);
+     //NSString *identifier1 = [dict1 objectForKey:@"identifier"];
+     // NSString *name1 = [dict1 objectForKey:@"name"];
+     
+     
+     if(selectedTab == FACEBOOK_TAB || selectedTab == TWITTER_TAB){
+     //[dict1 objectForKey:@"image"];
+     imgfile =[dict1 objectForKey:@"image"];
+     } else {
+     imgfile =[dict1 objectForKey:@"image"];
+     }
+     */
     // Get right contact data
-
-    
-    
-   /*
-    if(loadingViewFlag){
-        for (UIView *subview in self.view.subviews) {
-            if([subview isKindOfClass:[LoadingView class]]){
-                [subview removeFromSuperview];
-                loadingViewFlag = NO;
-            }
-        }
-    }
-    // init cell array if null
-    if(!self.deviceContactItems){
-        self.deviceContactItems = [[NSMutableArray alloc] init];
-    }
-    
-
-    // Get index like 0, 2, 4, 6 etc
-    int index = (indexPath.row * 2);
-    
-    // Get left contact data
-    NSMutableDictionary *dict1 = [[self getArrayOfSelectedTab] objectAtIndex:index];
-    NSString *identifier1 = [dict1 objectForKey:@"identifier"];
-    NSString *name1 = [dict1 objectForKey:@"name"];
-    __block UIImage *image1 = nil;
-    __block NSString *imageName1 = nil;
-    
-    if(selectedTab == FACEBOOK_TAB || selectedTab == TWITTER_TAB){
-        //[dict1 objectForKey:@"image"];
-        imageName1 =[dict1 objectForKey:@"image"];
-    } else {
-        image1 =[dict1 objectForKey:@"image"];
-    }
-    
-    // Get right contact data
-    NSMutableDictionary *dict2;
-    NSString *name2;
-    NSString *identifier2 = nil;
-    __block UIImage *image2 = nil;
-    __block NSString *imageName2 = nil;
-    
-    // Check index
-    if([[self getArrayOfSelectedTab] count] > (index+ 1)){
-        dict2 = [[self getArrayOfSelectedTab] objectAtIndex:(index + 1)];
-        name2 = [dict2 objectForKey:@"name"];
-        identifier2 = [dict2 objectForKey:@"identifier"];
-
-        if(selectedTab == FACEBOOK_TAB || selectedTab == TWITTER_TAB){
-            imageName2 = [dict2 objectForKey:@"image"];
-        } else {
-            image2 = [dict2 objectForKey:@"image"];
-        }
-        
-    } else {
-        name2 = @"";
-        image2 = nil;
-    }
-
-    // Get cell
-    static NSString *cellId = @"AddFriendItem";
-    //AddFriendItem *cell = (AddFriendItem *) [uiTableView dequeueReusableCellWithIdentifier:cellId];
-    AddFriendItem *cell = nil;
-    
-    if([self.deviceContactItems count] > indexPath.row){
-        //NSLog(@"Reusing Row");
-        cell = [self.deviceContactItems objectAtIndex:indexPath.row];
-    }
-    
-    if (cell == nil) {
-        NSArray *nib=[[NSBundle mainBundle] loadNibNamed:cellId owner:self options:nil];
-        cell=[nib objectAtIndex:0];
-        
-        if(unSelectAll){
-            [cell.leftCheckBox setSelected:NO];
-            [cell.rightCheckBox setSelected:NO];
-            cell.leftSelected = NO;
-            cell.rightSelected = NO;
-            
-            if(identifier1)
-                [[AddFriendsController getSelectedIdentifiersDictionary] removeObjectForKey:identifier1];
-            
-            if(identifier2)
-                [[AddFriendsController getSelectedIdentifiersDictionary] removeObjectForKey:identifier2];
-
-        } else if(selectAll) {
-            [cell.leftCheckBox setSelected:YES];
-            [cell.rightCheckBox setSelected:YES];
-            cell.leftSelected = YES;
-            cell.rightSelected = YES;
-
-            if(identifier1)
-                [[AddFriendsController getSelectedIdentifiersDictionary] setObject:@"1" forKey:identifier1];
-            
-            if(identifier2)
-                [[AddFriendsController getSelectedIdentifiersDictionary] setObject:@"1" forKey:identifier2];
-        }
-
-        // Add cell in array for tracking
-        [self.deviceContactItems addObject:cell];
-        
-    } else {
-        
-        if(unSelectAll){
-            [cell.leftCheckBox setSelected:NO];
-            [cell.rightCheckBox setSelected:NO];
-            cell.leftSelected = NO;
-            cell.rightSelected = NO;
-            
-            if(identifier1)
-                [[AddFriendsController getSelectedIdentifiersDictionary] removeObjectForKey:identifier1];
-            
-            if(identifier2)
-                [[AddFriendsController getSelectedIdentifiersDictionary] removeObjectForKey:identifier2];
-            
-        } else if(selectAll){
-            [cell.leftCheckBox setSelected:YES];
-            [cell.rightCheckBox setSelected:YES];
-            cell.leftSelected = YES;
-            cell.rightSelected = YES;
-            
-            if(identifier1)
-                [[AddFriendsController getSelectedIdentifiersDictionary] setObject:@"1" forKey:identifier1];
-            
-            if(identifier2)
-                [[AddFriendsController getSelectedIdentifiersDictionary] setObject:@"1" forKey:identifier2];
-        }
-    }
-
-    // Check index
-    if([[self getArrayOfSelectedTab] count] > (index+ 1)){
-        cell.identifier2 = [dict2 objectForKey:@"identifier"];
-    }
-    
-    // Set data on screen
-    [cell setValues:name1 title2:name2];
-    
-    if(selectedTab == FACEBOOK_TAB || selectedTab == TWITTER_TAB){
-        dispatch_queue_t dispatchQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
-        dispatch_async(dispatchQueue, ^(void)
-                       {
-                           dispatch_sync(dispatch_get_main_queue(), ^{
-                               [cell setImagesURL:imageName1 name2:imageName2];
-                               //[[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
-                               //[activity stopAnimating];
-                               //[activty setHidden:YES];
-                           });
-                       });
-    }else{
-        [cell setImages:image1 image2:image2];
-    }
-    
-    cell.identifier1 = [dict1 objectForKey:@"identifier"];
-    
-    if([[AddFriendsController getSelectedIdentifiersDictionary] objectForKey:cell.identifier1]){
-        [cell.leftCheckBox setSelected:YES];
-    } else {
-        [cell.leftCheckBox setSelected:NO];
-    }
-    
-    if([[AddFriendsController getSelectedIdentifiersDictionary] objectForKey:cell.identifier2]){
-        [cell.rightCheckBox setSelected:YES];
-    } else {
-        [cell.rightCheckBox setSelected:NO];
-    }
     
     
     
-
-    
-    // Set consecutive colors on rows
-    if (indexPath.row % 2) {
-        cell.contentView.backgroundColor = [UIColor whiteColor];
-    } else {
-        cell.contentView.backgroundColor = [[UIColor alloc]initWithRed:244.0/255.0 green:242.0/255.0 blue:243.0/255.0 alpha:1];
-    }
-    
-    // return cell
-    */
+    /*
+     if(loadingViewFlag){
+     for (UIView *subview in self.view.subviews) {
+     if([subview isKindOfClass:[LoadingView class]]){
+     [subview removeFromSuperview];
+     loadingViewFlag = NO;
+     }
+     }
+     }
+     // init cell array if null
+     if(!self.deviceContactItems){
+     self.deviceContactItems = [[NSMutableArray alloc] init];
+     }
+     
+     
+     // Get index like 0, 2, 4, 6 etc
+     int index = (indexPath.row * 2);
+     
+     // Get left contact data
+     NSMutableDictionary *dict1 = [[self getArrayOfSelectedTab] objectAtIndex:index];
+     NSString *identifier1 = [dict1 objectForKey:@"identifier"];
+     NSString *name1 = [dict1 objectForKey:@"name"];
+     __block UIImage *image1 = nil;
+     __block NSString *imageName1 = nil;
+     
+     if(selectedTab == FACEBOOK_TAB || selectedTab == TWITTER_TAB){
+     //[dict1 objectForKey:@"image"];
+     imageName1 =[dict1 objectForKey:@"image"];
+     } else {
+     image1 =[dict1 objectForKey:@"image"];
+     }
+     
+     // Get right contact data
+     NSMutableDictionary *dict2;
+     NSString *name2;
+     NSString *identifier2 = nil;
+     __block UIImage *image2 = nil;
+     __block NSString *imageName2 = nil;
+     
+     // Check index
+     if([[self getArrayOfSelectedTab] count] > (index+ 1)){
+     dict2 = [[self getArrayOfSelectedTab] objectAtIndex:(index + 1)];
+     name2 = [dict2 objectForKey:@"name"];
+     identifier2 = [dict2 objectForKey:@"identifier"];
+     
+     if(selectedTab == FACEBOOK_TAB || selectedTab == TWITTER_TAB){
+     imageName2 = [dict2 objectForKey:@"image"];
+     } else {
+     image2 = [dict2 objectForKey:@"image"];
+     }
+     
+     } else {
+     name2 = @"";
+     image2 = nil;
+     }
+     
+     // Get cell
+     static NSString *cellId = @"AddFriendItem";
+     //AddFriendItem *cell = (AddFriendItem *) [uiTableView dequeueReusableCellWithIdentifier:cellId];
+     AddFriendItem *cell = nil;
+     
+     if([self.deviceContactItems count] > indexPath.row){
+     //NSLog(@"Reusing Row");
+     cell = [self.deviceContactItems objectAtIndex:indexPath.row];
+     }
+     
+     if (cell == nil) {
+     NSArray *nib=[[NSBundle mainBundle] loadNibNamed:cellId owner:self options:nil];
+     cell=[nib objectAtIndex:0];
+     
+     if(unSelectAll){
+     [cell.leftCheckBox setSelected:NO];
+     [cell.rightCheckBox setSelected:NO];
+     cell.leftSelected = NO;
+     cell.rightSelected = NO;
+     
+     if(identifier1)
+     [[AddFriendsController getSelectedIdentifiersDictionary] removeObjectForKey:identifier1];
+     
+     if(identifier2)
+     [[AddFriendsController getSelectedIdentifiersDictionary] removeObjectForKey:identifier2];
+     
+     } else if(selectAll) {
+     [cell.leftCheckBox setSelected:YES];
+     [cell.rightCheckBox setSelected:YES];
+     cell.leftSelected = YES;
+     cell.rightSelected = YES;
+     
+     if(identifier1)
+     [[AddFriendsController getSelectedIdentifiersDictionary] setObject:@"1" forKey:identifier1];
+     
+     if(identifier2)
+     [[AddFriendsController getSelectedIdentifiersDictionary] setObject:@"1" forKey:identifier2];
+     }
+     
+     // Add cell in array for tracking
+     [self.deviceContactItems addObject:cell];
+     
+     } else {
+     
+     if(unSelectAll){
+     [cell.leftCheckBox setSelected:NO];
+     [cell.rightCheckBox setSelected:NO];
+     cell.leftSelected = NO;
+     cell.rightSelected = NO;
+     
+     if(identifier1)
+     [[AddFriendsController getSelectedIdentifiersDictionary] removeObjectForKey:identifier1];
+     
+     if(identifier2)
+     [[AddFriendsController getSelectedIdentifiersDictionary] removeObjectForKey:identifier2];
+     
+     } else if(selectAll){
+     [cell.leftCheckBox setSelected:YES];
+     [cell.rightCheckBox setSelected:YES];
+     cell.leftSelected = YES;
+     cell.rightSelected = YES;
+     
+     if(identifier1)
+     [[AddFriendsController getSelectedIdentifiersDictionary] setObject:@"1" forKey:identifier1];
+     
+     if(identifier2)
+     [[AddFriendsController getSelectedIdentifiersDictionary] setObject:@"1" forKey:identifier2];
+     }
+     }
+     
+     // Check index
+     if([[self getArrayOfSelectedTab] count] > (index+ 1)){
+     cell.identifier2 = [dict2 objectForKey:@"identifier"];
+     }
+     
+     // Set data on screen
+     [cell setValues:name1 title2:name2];
+     
+     if(selectedTab == FACEBOOK_TAB || selectedTab == TWITTER_TAB){
+     dispatch_queue_t dispatchQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
+     dispatch_async(dispatchQueue, ^(void)
+     {
+     dispatch_sync(dispatch_get_main_queue(), ^{
+     [cell setImagesURL:imageName1 name2:imageName2];
+     //[[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+     //[activity stopAnimating];
+     //[activty setHidden:YES];
+     });
+     });
+     }else{
+     [cell setImages:image1 image2:image2];
+     }
+     
+     cell.identifier1 = [dict1 objectForKey:@"identifier"];
+     
+     if([[AddFriendsController getSelectedIdentifiersDictionary] objectForKey:cell.identifier1]){
+     [cell.leftCheckBox setSelected:YES];
+     } else {
+     [cell.leftCheckBox setSelected:NO];
+     }
+     
+     if([[AddFriendsController getSelectedIdentifiersDictionary] objectForKey:cell.identifier2]){
+     [cell.rightCheckBox setSelected:YES];
+     } else {
+     [cell.rightCheckBox setSelected:NO];
+     }
+     
+     
+     
+     
+     
+     // Set consecutive colors on rows
+     if (indexPath.row % 2) {
+     cell.contentView.backgroundColor = [UIColor whiteColor];
+     } else {
+     cell.contentView.backgroundColor = [[UIColor alloc]initWithRed:244.0/255.0 green:242.0/255.0 blue:243.0/255.0 alpha:1];
+     }
+     
+     // return cell
+     */
     return cell;
 }
 
 
 /*-(void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-
-    NSLog(@"index path: %d", [indexPath row]);
-    NSLog(@"indexPathsForVisibleRows: %d", ((NSIndexPath*)[[tableView indexPathsForVisibleRows] lastObject]).row);
-
-    if([indexPath row] == ((NSIndexPath*)[[tableView indexPathsForVisibleRows] lastObject]).row){
-
-        if(firstTableLoad){
-            [self selectAllCheckBoxes:nil];
-            firstTableLoad = NO;
-        }
-        
-    }
-}*/
+ 
+ NSLog(@"index path: %d", [indexPath row]);
+ NSLog(@"indexPathsForVisibleRows: %d", ((NSIndexPath*)[[tableView indexPathsForVisibleRows] lastObject]).row);
+ 
+ if([indexPath row] == ((NSIndexPath*)[[tableView indexPathsForVisibleRows] lastObject]).row){
+ 
+ if(firstTableLoad){
+ [self selectAllCheckBoxes:nil];
+ firstTableLoad = NO;
+ }
+ 
+ }
+ }*/
 
 /*
  * Method use to select all checkboxes
@@ -1382,7 +1394,7 @@ NSMutableDictionary *selectedIdentifierDictionary;
     
     unSelectAll = NO;
     selectAll = YES;
-
+    
     for(AddFriendItem *cell in self.deviceContactItems){
         [cell.leftCheckBox setSelected:YES];
         cell.leftSelected = YES;
@@ -1401,7 +1413,7 @@ NSMutableDictionary *selectedIdentifierDictionary;
     
     unSelectAll = YES;
     selectAll = NO;
-
+    
     for(AddFriendItem *cell in self.deviceContactItems){
         [cell.leftCheckBox setSelected:NO];
         cell.leftSelected = NO;
@@ -1414,7 +1426,7 @@ NSMutableDictionary *selectedIdentifierDictionary;
 }
 
 -(void)setUnselectTab:(UIButton *)selectButton{
-
+    
     [self.contactsButton setSelected:NO];
     [self.facebookButton setSelected:NO];
     [self.twitterButton setSelected:NO];
@@ -1424,13 +1436,13 @@ NSMutableDictionary *selectedIdentifierDictionary;
 
 - (void)fbDidLogin {
 	NSLog(@"logged in");
-
+    
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-
+    
     //save to session
     NSLog(@"%@",appDelegate.facebook.accessToken);
     NSLog(@"%@",appDelegate.facebook.expirationDate);
-
+    
     [[NSUserDefaults standardUserDefaults] setObject:appDelegate.facebook.accessToken forKey:@"FBAccessTokenKey"];
     [[NSUserDefaults standardUserDefaults] setObject:appDelegate.facebook.expirationDate forKey:@"FBExpirationDateKey"];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -1449,7 +1461,7 @@ NSMutableDictionary *selectedIdentifierDictionary;
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-
+    
     if([string isEqualToString:@"\n"]){
         if([searchTextField canResignFirstResponder])
         {
@@ -1459,7 +1471,7 @@ NSMutableDictionary *selectedIdentifierDictionary;
     }
     
     NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
-
+    
     if([newString isEqualToString:@""]){
         
         if(selectedTab == CONTACTS_TAB)
@@ -1501,7 +1513,7 @@ NSMutableDictionary *selectedIdentifierDictionary;
     
     [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
     //[self.uiTableView reloadData];
-
+    
     return YES;
 }
 
@@ -1512,11 +1524,11 @@ NSMutableDictionary *selectedIdentifierDictionary;
 }
 
 - (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];	
+    [super didReceiveMemoryWarning];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-
+    
     //loadingViewFlag = NO;
     self.navigationItem.leftItemsSupplementBackButton = YES;
     

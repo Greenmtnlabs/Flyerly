@@ -265,7 +265,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
                                              @"publish_stream", @"email", nil]];
         }
     }else{
-        [self showAlert:@"Warning!" message:@"You're not connected to the internet. Please connect and retry."];
+        [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
         [self removeLoadingView];
     }
 }
@@ -379,7 +379,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
         
         
     }else{
-        [self showAlert:@"Warning!" message:@"You're not connected to the internet. Please connect and retry."];
+        [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
         [self removeLoadingView];
     }
 
@@ -421,7 +421,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     // Check password matched
         if(![password.text isEqualToString:confirmPassword.text]){
         
-        [self showAlert:@"Password not matched" message:@""];
+        [self showAlert:@"Passwords do not match." message:@""];
         [self removeLoadingView];
         return NO;
         }

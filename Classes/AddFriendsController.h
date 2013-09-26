@@ -83,6 +83,7 @@
 @property(nonatomic,retain) NSMutableArray *contactsArray;
 @property(nonatomic,retain) NSMutableArray *facebookArray;
 @property(nonatomic,retain) NSMutableArray *twitterArray;
+@property(nonatomic,retain)  ACAccount *account;
 
 @property(nonatomic,retain) NSMutableArray *contactBackupArray;
 @property(nonatomic,retain) NSMutableArray *facebookBackupArray;
