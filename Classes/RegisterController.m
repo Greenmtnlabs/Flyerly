@@ -312,7 +312,6 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
         [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"Password"];
     }
     [self.view release];
-    waiting.hidden = YES;
 }
 
 
@@ -320,7 +319,6 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     [self showLoadingView];
     
     if([AddFriendsController connected]){
-        waiting.hidden = NO;
         if([TWTweetComposeViewController canSendTweet]){
             [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"twitterSetting"];
             ACAccountStore *account = [[ACAccountStore alloc] init];
@@ -357,14 +355,13 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
                         {
                             
                         warningAlert = [[UIAlertView  alloc]initWithTitle:@"Account already exists using this account" message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Sign In",nil];
-                            [warningAlert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:NO];
-                            //[warningAlert show];
+                            //[warningAlert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:NO];
+                            [warningAlert show];
                             [warningAlert autorelease];
                             
                         }
 
                         // sign in
-                        waiting.hidden = YES;
                         
                     }
                 }
@@ -543,7 +540,6 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 -(IBAction)signInWithTwitter:(id)sender {
     
     if([TWTweetComposeViewController canSendTweet]) {
-        waiting.hidden = NO;
         //[Twitter getTwitterAccounts:self];
     } else {
         
@@ -664,7 +660,6 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 -(void)displayUserList:(NSArray *)accounts {
     
     //hide loading
-    waiting.hidden = YES;
     
     NSMutableArray *tAccounts = [[NSMutableArray alloc] init];
     
@@ -742,8 +737,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 
        // [self signIn:YES username:twitterUser password:@"null"];
     }
-    NSLog(@"%u",buttonIndex);
-    waiting.hidden = YES;
+   // NSLog(@"%u",buttonIndex);
     [self hideLoadingIndicator];
 }
 

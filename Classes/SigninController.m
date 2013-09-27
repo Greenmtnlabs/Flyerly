@@ -36,7 +36,7 @@
     forgetPassword1.titleLabel.textColor = [UIColor grayColor];
     
     self.navigationController.navigationBarHidden = NO;
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage   imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
 
     //set title
     UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-35, -6, 50, 50)] autorelease];
@@ -127,9 +127,9 @@
 
 -(void)signIn:(BOOL)validated username:(NSString *)userName password:(NSString *)pwd{
     NSError *loginError = nil;
-    //NSLog(@"email.text %@",userName);
-    //NSLog(@"password %@",pwd);
-
+    NSLog(@"User %@",userName);
+    NSLog(@"password %@",pwd);
+/*
     PFQuery *query = [PFUser query];
     [query whereKey:@"username" equalTo:userName];
     [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
@@ -137,23 +137,22 @@
         dbUsername = [object objectForKey:@"username"];
         
         if(!dbUsername && globle.twitterUser != nil){
-           [self removeLoadingView];
             if (IS_IPHONE_5) {
                 registerController = [[RegisterController alloc]initWithNibName:@"RegisterViewController_iPhone5" bundle:nil];
             }else{
                 registerController = [[RegisterController alloc]initWithNibName:@"RegisterController" bundle:nil];
             }
-        [self.navigationController pushViewController:registerController animated:YES];
+            [self.navigationController pushViewController:registerController animated:YES];
 
         }}];
+*/
     
     [PFUser logInWithUsername:userName password:pwd error:&loginError];
    
     if(loginError){
-            [self removeLoadingView];
         warningAlert = [[UIAlertView  alloc]initWithTitle:@"Invalid username or password" message:@"" delegate:self cancelButtonTitle:@"Register" otherButtonTitles:@"Try Again",nil];
-        [warningAlert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:NO];
-        //[warningAlert show];
+        //[warningAlert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:NO];
+        [warningAlert show];
         
     }else{
         
@@ -227,8 +226,6 @@
 -(IBAction)onSignInTwitter{
     [self showLoadingIndicator];
     if([AddFriendsController connected]){
-        
-        waiting.hidden = NO;
         if([TWTweetComposeViewController canSendTweet]){
             
             ACAccountStore *account = [[ACAccountStore alloc] init];
@@ -262,7 +259,6 @@
                         globle.twitterUser = twitterEmail;
                         // sign in
                         [self signIn:YES username:twitterEmail password:@"null"];
-                        waiting.hidden = YES;
                         
                     }
                 }
@@ -478,9 +474,6 @@
 
 -(void)displayUserList:(NSArray *)accounts {
     
-    //hide loading
-    waiting.hidden = YES;
-    
     NSMutableArray *tAccounts = [[NSMutableArray alloc] init];
     
     //create username array
@@ -489,17 +482,10 @@
         ACAccount *account = [accounts objectAtIndex:i];
         [accountArray addObject:account.username];
         
-        [tAccounts addObject:account];
-        
-        for(id key in [account valueForKey:@"properties"] ) {
-            
-            NSLog(@"%@",key);
-            
-        }
-        
+        [tAccounts addObject:account];        
         
     }
-    
+
     //set main variable
     twitterAccounts = tAccounts;
     
@@ -543,7 +529,7 @@
         [self signIn:YES username:twitterUser password:@"null"];
     }
     
-    NSLog(@"%u",buttonIndex);
+   // NSLog(@"%d",buttonIndex);
        [self hideLoadingIndicator];
 }
 
@@ -558,6 +544,7 @@
        
         //[self performSelectorOnMainThread:@selector(pushViewController:) withObject:launchController waitUntilDone:YES];        
     }
+    [warningAlert release];
 }
 
 @end

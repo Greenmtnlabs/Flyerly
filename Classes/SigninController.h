@@ -68,6 +68,7 @@
 -(void)getTwitterAccounts:(id)delegate;
 -(void)setAlertForSettingPage :(id)delegate;
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex ;
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex;
 -(void)displayUserList:(NSArray *)accounts ;
 
 
