@@ -60,6 +60,7 @@
 -(IBAction)makeEmail;
 -(IBAction)OntwitterComments;
 -(IBAction)onClickSaveToCameraRollSwitchButton;
+-(IBAction)RatefacbookApp:(id)sender;
 -(void)gohelp;
 
 

@@ -274,25 +274,24 @@ static ShareProgressView *clipBdPogressView;
     //[saveToCameraRollLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
     // Set font and size on camera roll text
     [locationLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:13]];
-/*
-    // Setup flyer edit button
-    UIButton *editButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 25, 30)] autorelease];
-    [editButton addTarget:self action:@selector(onEdit:) forControlEvents:UIControlEventTouchUpInside];
-    [editButton setImage:[UIImage imageNamed:@"pencil_blue"] forState:UIControlStateNormal];
 
+    // Setup flyer edit button
+    UIButton *editButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 33, 33)] autorelease];
+    [editButton addTarget:self action:@selector(onEdit:) forControlEvents:UIControlEventTouchUpInside];
+    [editButton setImage:[UIImage imageNamed:@"btn_edit"] forState:UIControlStateNormal];
+    editButton.showsTouchWhenHighlighted = YES;
     // Get index from flyer image path
     NSString *index = [FlyrViewController getFlyerNumberFromPath:imageFileName];
     editButton.tag = [index intValue];
     UIBarButtonItem *rightEditBarButton = [[UIBarButtonItem alloc] initWithCustomView:editButton];
-*/
+    
     // Setup flyer share button
     UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 33)];
     [shareButton addTarget:self action:@selector(share) forControlEvents:UIControlEventTouchUpInside];
     [shareButton setBackgroundImage:[UIImage imageNamed:@"share"] forState:UIControlStateNormal];
     shareButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
-    //[self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,rightEditBarButton,nil]];
-    [self.navigationItem setRightBarButtonItem:rightBarButton];
+    UIBarButtonItem *rightShareButton = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
+    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightShareButton,rightEditBarButton,nil]];
 
 
 	[UIView commitAnimations];
@@ -1287,9 +1286,10 @@ static ShareProgressView *clipBdPogressView;
 -(void)shareOnFlickr{
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     NSData *imageData = UIImageJPEGRepresentation(selectedFlyerImage, 0.9);
-    
-    [appDelegate.flickrRequest uploadImageStream:[NSInputStream inputStreamWithData:imageData] suggestedFilename:selectedFlyerTitle MIMEType:@"image/jpeg" arguments:[NSDictionary dictionaryWithObjectsAndKeys:@"0", @"is_public",@"Title", @"title", [NSString stringWithFormat:@"%@ %@ - %@",titleView.text, descriptionView.text,  [[LocationController getLocationDetails] objectForKey:@"name"]], nil]];
-    [self fillSuccessStatus:flickrPogressView];
+    if (appDelegate.flickrRequest) {
+        [appDelegate.flickrRequest uploadImageStream:[NSInputStream inputStreamWithData:imageData] suggestedFilename:selectedFlyerTitle MIMEType:@"image/jpeg" arguments:[NSDictionary dictionaryWithObjectsAndKeys:@"0", @"is_public",@"Title", @"title", [NSString stringWithFormat:@"%@ %@ - %@",titleView.text, descriptionView.text,  [[LocationController getLocationDetails] objectForKey:@"name"]], @"description",nil]];
+    }
+   // [self fillSuccessStatus:flickrPogressView];
 }
 
 - (UIDocumentInteractionController *) setupControllerWithURL: (NSURL*) fileURL usingDelegate: (id <UIDocumentInteractionControllerDelegate>) interactionDelegate {

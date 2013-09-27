@@ -230,14 +230,15 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     // Create color array
 	colorArray = 	[[NSArray  alloc] initWithObjects: [UIColor redColor], [UIColor blueColor], [UIColor greenColor], [UIColor blackColor], [UIColor colorWithRed:253.0/255.0 green:191.0/255.0 blue:38.0/224.0 alpha:1], [UIColor whiteColor], [UIColor grayColor], [UIColor magentaColor], [UIColor yellowColor], [UIColor colorWithRed:163.0/255.0 green:25.0/255.0 blue:2.0/224.0 alpha:1], [UIColor colorWithRed:3.0/255.0 green:15.0/255.0 blue:41.0/224.0 alpha:1], [UIColor purpleColor], [UIColor colorWithRed:85.0/255.0 green:86.0/255.0 blue:12.0/224.0 alpha:1], [UIColor orangeColor], [UIColor colorWithRed:98.0/255.0 green:74.0/255.0 blue:9.0/224.0 alpha:1], [UIColor colorWithRed:80.0/255.0 green:7.0/255.0 blue:1.0/224.0 alpha:1], [UIColor colorWithRed:150.0/255.0 green:150.0/255.0 blue:97.0/224.0 alpha:1], [UIColor colorWithRed:111.0/255.0 green:168.0/255.0 blue:100.0/224.0 alpha:1], [UIColor cyanColor], [UIColor colorWithRed:17.0/255.0 green:69.0/255.0 blue:70.0/224.0 alpha:1], [UIColor colorWithRed:173.0/255.0 green:127.0/255.0 blue:251.0/224.0 alpha:1], nil];
 	
-    // Add colors in scroll view
-    [self addColorsInSubView];
-
-    // Add size in scroll view
-	[self addSizeInSubView];
     
     // Create border colors array
     borderArray = 	[[NSArray  alloc] initWithObjects: [UIColor blackColor], [UIColor grayColor], [UIColor darkGrayColor], [UIColor blueColor], [UIColor purpleColor], [UIColor colorWithRed:115.0/255.0 green:134.0/255.0 blue:144.0/255.0 alpha:1], [UIColor orangeColor], [UIColor greenColor], [UIColor redColor], [UIColor colorWithRed:14.0/255.0 green:95.0/255.0 blue:111.0/255.0 alpha:1], [UIColor colorWithRed:180.0/255.0 green:180.0/255.0 blue:149.0/255.0 alpha:1], [UIColor colorWithRed:228.0/255.0 green:128.0/255.0 blue:144.0/255.0 alpha:1], [UIColor colorWithRed:213.0/255.0 green:110.0/255.0 blue:86.0/255.0 alpha:1],[UIColor colorWithRed:156.0/255.0 green:195.0/255.0 blue:233.0/255.0 alpha:1],[UIColor colorWithRed:27.0/255.0 green:70.0/255.0 blue:148.0/255.0 alpha:1],[UIColor colorWithRed:234.0/255.0 green:230.0/255.0 blue:51.0/255.0 alpha:1],[UIColor cyanColor], [UIColor colorWithRed:232.0/255.0 green:236.0/255.0 blue:51.0/224.0 alpha:1],[UIColor magentaColor],[UIColor colorWithRed:57.0/255.0 green:87.0/255.0 blue:13.0/224.0 alpha:1], [UIColor colorWithRed:93.0/255.0 green:97.0/255.0 blue:196.0/224.0 alpha:1],nil];
+    
+    // Add colors in scroll view
+    [self addColorsInSubView];
+    
+    // Add size in scroll view
+	[self addSizeInSubView];
 
     // Add flyer border in scroll view
     [self addFlyerBorderInSubView];
@@ -623,10 +624,12 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     [self resetImageview];
     
     [takePhotoButton setBackgroundImage:[UIImage imageNamed:@"take_photo"] forState:UIControlStateNormal];
+        takePhotoButton.showsTouchWhenHighlighted = YES;
     [takePhotoButton addTarget:self action:@selector(openCustomCamera) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:takePhotoButton];
     [cameraRollButton setBackgroundImage:[UIImage imageNamed:@"camera_roll"] forState:UIControlStateNormal];
     [cameraRollButton addTarget:self action:@selector(loadCustomPhotoLibrary) forControlEvents:UIControlEventTouchUpInside];
+      cameraRollButton.showsTouchWhenHighlighted = YES;
     [self.view addSubview:cameraRollButton];
 
     [takePhotoLabel setText:@"Take a Photo"];
@@ -1237,7 +1240,7 @@ int arrangeLayerIndex;
     CALayer * l = [view layer];
     [l setMasksToBounds:YES];
     [l setCornerRadius:10];
-    [l setBorderWidth:1.0];
+    [l setBorderWidth:3.0];
     [l setBorderColor:[[UIColor blueColor] CGColor]];
 
     NSString *tag = [NSString stringWithFormat:@"%d",view.tag];
@@ -1329,8 +1332,9 @@ int arrangeLayerIndex;
 			selectedFont = [selectedFont fontWithSize:selectedSize];
 			msgTextView.font = selectedFont;
             ((CustomLabel*)[[self textLabelLayersArray]  objectAtIndex:arrangeLayerIndex]).font =selectedFont;
-//            ((CustomLabel*)[[self textLabelLayersArray]  objectAtIndex:arrangeLayerIndex]).numberOfLines = 0 ;
+            ((CustomLabel*)[[self textLabelLayersArray]  objectAtIndex:arrangeLayerIndex]).numberOfLines = 0;
             ((CustomLabel*)[[self textLabelLayersArray]  objectAtIndex:arrangeLayerIndex]).lineBreakMode = UILineBreakModeCharacterWrap;
+           // [ ((CustomLabel*)[[self textLabelLayersArray]  objectAtIndex:arrangeLayerIndex]) sizeToFit];
 		}
 		i++;	
 	}
@@ -2050,11 +2054,10 @@ int arrangeLayerIndex;
 #pragma mark UIAlertView delegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (layerallow == 0) {
-	if(alertView == warningAlert && buttonIndex == 0) {
-        
-		[self.navigationController popViewControllerAnimated:YES];
-        [Flurry logEvent:@"Flyer Cancelled"];	
-    } else if(alertView == discardAlert && buttonIndex == 1) {
+        if(alertView == warningAlert && buttonIndex == 0) {
+            [self.navigationController popViewControllerAnimated:YES];
+            [Flurry logEvent:@"Flyer Cancelled"];	
+        } else if(alertView == discardAlert && buttonIndex == 1) {
         
         if(selectedAddMoreLayerTab == ADD_MORE_TEXTTAB){
             
@@ -2112,10 +2115,15 @@ int arrangeLayerIndex;
         }
         
     }
+    }else{
+        if(alertView == warningAlert && buttonIndex == 1){
+            [self setAddMoreLayerTabAction:arrangeLayerTabButton];
+            
+        }
     }
 }
 
-#pragma mark After ViewWillAppear Method Sequence 
+#pragma mark After ViewWillAppear Method Sequence
 -(void) callMenu
 {
 	FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
@@ -2157,6 +2165,7 @@ int arrangeLayerIndex;
     
     deleteMode = NO;
     undoCount = 0;
+    layerallow =0;
     //[rightUndoBarButton setEnabled:NO];
     //[self makeCopyOfLayers];
     if(layerEditMessage!=nil){
@@ -3120,7 +3129,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 }
 
 -(void) setAddMoreLayerTabAction:(id) sender {
-    
+    layerallow = 0;
     if(layerEditMessage!=nil){
         [layerEditMessage removeFromSuperview];
         layerEditMessage = nil;
@@ -3221,7 +3230,9 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
         selectedAddMoreLayerTab = ADD_MORE_PHOTOTAB;
         [self hideAddMoreAndSaveLabel];
-        [self showTakeOrAddPhotoLabel];
+        if ([self canAddMoreLayers]) {
+            [self showTakeOrAddPhotoLabel];
+        }
 
         symbolTouchFlag= NO;
         iconTouchFlag = NO;
@@ -3374,6 +3385,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
         lableTouchFlag = NO;
         symbolTouchFlag= NO;
+        photoTouchFlag= NO;
         iconTouchFlag = YES;
 		[UIView beginAnimations:nil context:NULL];
 		[UIView setAnimationDuration:0.4f];
@@ -4306,7 +4318,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     
     } else {
         layerallow = 1;
-        warningAlert = [[UIAlertView alloc]initWithTitle:@"You can add a total of 10 layers." message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil ,nil];
+        warningAlert = [[UIAlertView alloc]initWithTitle:@"You can add a total of 10 layers." message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Edit Layers" ,nil];
 		[warningAlert show];
     }
 }

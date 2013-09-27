@@ -207,10 +207,9 @@
     return params;
 }
 
--(IBAction)gofacbook:(id)sender{
-    globle.inputValue = @"facebook";
-    InputViewController  *inputcontroller = [[InputViewController alloc]initWithNibName:@"InputViewController" bundle:nil];
-    [self.navigationController presentModalViewController:inputcontroller animated:YES];
+-(IBAction)RatefacbookApp:(id)sender{
+    NSString* url = [NSString stringWithFormat: @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=%@", @"344130515"];
+    [[UIApplication sharedApplication] openURL: [NSURL URLWithString: url]];
 }
 
 -(IBAction)gotwitter:(id)sender{

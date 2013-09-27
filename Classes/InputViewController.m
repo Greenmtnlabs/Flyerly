@@ -75,21 +75,8 @@
     if ([txtfield.text isEqualToString:@""]) {
         [self showAlert:@"Please Enter Comments" message:@""];
     }else{
-        NSLog(@"%@",globle.inputValue);
-        if ([globle.inputValue isEqualToString:@"facebook"]) {
-            NSString *asd = [[NSString alloc] init];
-            asd = [NSString stringWithFormat:@"/me/likes/%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"FBAccessTokenKey"]];;
-            NSLog(@"%@",asd);
-            
-            if ([[NSUserDefaults standardUserDefaults] stringForKey:@"FACEBOOK_LIKED"]) {
-                NSMutableArray *ASD = [[NSMutableArray alloc] init];
-                [ASD addObject:@"500819963306066"];
-                [self tagFacebookUsersWithFeed:ASD];
-            }
-            
-            [self dismissModalViewControllerAnimated:YES];
-
-        }else if([globle.inputValue isEqualToString:@"twitter"]) {
+       // NSLog(@"%@",globle.inputValue);
+        if([globle.inputValue isEqualToString:@"twitter"]) {
             if([TWTweetComposeViewController canSendTweet]){
                 [self sendTwitterMessage:txtfield.text screenName:@"flyerlyapp"];
             }  else {
@@ -100,73 +87,6 @@
     }
 }
 
-- (IBAction)tagFacebookUsersWithFeed:(NSArray *)identifiers {
-    
-    // Post a status update to the user's feed via the Graph API, and display an alert view
-    // with the results or an error.
-    
-    [self performPublishAction:^{
-        
-        [FBRequestConnection startForPostStatusUpdate:txtfield.text place:@"144479625584966" tags:identifiers completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-            
-            NSLog(@"New Result: %@", result);
-            NSLog(@"Error: %@", error);
-            
-            //[self showAlert:@"Invited !" message:@"You have successfully invited your friends to join flyerly."];
-        }];
-    }];
-}
-
-- (void) performPublishAction:(void (^)(void)) action {
-    
-    if ([[FBSession activeSession]isOpen]) {
-        /*
-         * if the current session has no publish permission we need to reauthorize
-         */
-        if ([[[FBSession activeSession]permissions]indexOfObject:@"publish_actions"] == NSNotFound) {
-            
-            [[FBSession activeSession] reauthorizeWithPublishPermissions:[NSArray arrayWithObject:@"publish_actions"] defaultAudience:FBSessionDefaultAudienceOnlyMe completionHandler:^(FBSession *session, NSError *error) {
-                
-                [self publish_action:action];
-            }];
-            
-        }else{
-            
-            [self publish_action:action];
-            
-        }
-    }else{
-        /*
-         * open a new session with publish permission
-         */
-        [FBSession openActiveSessionWithPublishPermissions:[NSArray arrayWithObject:@"publish_actions"] defaultAudience:FBSessionDefaultAudienceOnlyMe allowLoginUI:YES completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
-            
-            if (!error && status == FBSessionStateOpen) {
-                [self publish_action:action];
-            }else{
-                NSLog(@"error");
-            }
-        }];
-    }
-}
-
--(void)publish_action:(void (^)(void)) action{
-    
-    // we defer request for permission to post to the moment of post, then we check for the permission
-    if ([FBSession.activeSession.permissions indexOfObject:@"publish_actions"] == NSNotFound) {
-        // if we don't already have the permission, then we request it now
-        [FBSession.activeSession requestNewPublishPermissions:@[@"publish_actions"]
-                                              defaultAudience:FBSessionDefaultAudienceFriends
-                                            completionHandler:^(FBSession *session, NSError *error) {
-                                                if (!error) {
-                                                    action();
-                                                }
-                                                //For this example, ignore errors (such as if user cancels).
-                                            }];
-    } else {
-        action();
-    }
-}
 
 - (void)didReceiveMemoryWarning
 {

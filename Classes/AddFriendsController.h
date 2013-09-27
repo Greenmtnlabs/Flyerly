@@ -103,6 +103,8 @@
 -(IBAction)goBack;
 -(IBAction)invite;
 -(IBAction)inviteFreind:(id)sender;
+-(void)inviteFreindUnselected:(NSString *)tag;
+
 
 + (BOOL)connected;
 - (BOOL)ckeckExistContact:(NSString *)identifier;

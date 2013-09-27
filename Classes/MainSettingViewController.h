@@ -40,7 +40,7 @@
 -(void)goBack;
 -(void)editClick;
 -(IBAction)gohelp;
--(IBAction)gofacbook:(id)sender;
+-(IBAction)RatefacbookApp:(id)sender;
 -(IBAction)gotwitter:(id)sender;
 -(IBAction)goemail:(id)sender;
 

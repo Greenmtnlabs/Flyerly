@@ -527,6 +527,7 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
+						<bool key="IBUIShowsTouchWhenHighlighted">YES</bool>
 						<string key="IBUINormalTitle">INVITE</string>
 						<reference key="IBUIHighlightedTitleColor" ref="805135851"/>
 						<reference key="IBUINormalTitleColor" ref="805135851"/>

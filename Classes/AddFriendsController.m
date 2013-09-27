@@ -787,26 +787,47 @@ int totalCount = 0;
 /**
  * invite contacts
  */
--(IBAction)inviteFreind:(id)sender {
+-(void)inviteFreindUnselected:(NSString *)tag{
+     NSMutableDictionary *dict2;
+    dict2 = [[self getArrayOfSelectedTab] objectAtIndex:[tag intValue]];
+    NSString *identifier = [[NSString alloc]initWithString:[dict2 objectForKey:@"identifier"]];
+
+    for (int i =0; i < deviceContactItems.count; i++) {
+        if ([identifier isEqualToString:[deviceContactItems objectAtIndex:i]]) {
+            [deviceContactItems removeObjectAtIndex:i];
+        }
+        
+    }
+    
+}
+
+-(IBAction)inviteFreind:(id)sender{
     UIButton *cellImageButton = (UIButton *) sender;
-    
-    
-    if (contactsCount <15) {
-        contactsCount = contactsCount +1;
-        NSMutableDictionary *dict2;
+    NSMutableDictionary *dict2;
         // Check index
         if([[self getArrayOfSelectedTab] count] >= 1){
             dict2 = [[self getArrayOfSelectedTab] objectAtIndex:(cellImageButton.tag)];
             if ([self ckeckExistContact:[dict2 objectForKey:@"identifier"]]) {
-                [deviceContactItems addObject:[dict2 objectForKey:@"identifier"]];
-                
-                [cellImageButton setBackgroundImage:[UIImage imageNamed:@"add_icon"] forState:UIControlStateNormal];
-                NSLog(@"%d",cellImageButton.tag);
+                  if (contactsCount <15) {
+                      contactsCount = contactsCount +1;
+                      [deviceContactItems addObject:[dict2 objectForKey:@"identifier"]];
+                      [cellImageButton setBackgroundImage:[UIImage imageNamed:@"add_icon"] forState:UIControlStateNormal];
+                  }else{
+                      [self showAlert:@"You can only invite 15 user at a time" message:@""];
+                  }
+               // NSLog(@"%d",cellImageButton.tag);
+            }else{
+
+                [self inviteFreindUnselected:[NSString stringWithFormat:@"%d",cellImageButton.tag]];
+                 contactsCount = contactsCount -1;
+                if ([self ckeckExistdb:[dict2 objectForKey:@"identifier"]]) {
+                    [cellImageButton setBackgroundImage:[UIImage imageNamed:@"add_icon-grey"] forState:UIControlStateNormal];
+                }else{
+                    [cellImageButton setBackgroundImage:[UIImage imageNamed:@"check_icon"] forState:UIControlStateNormal];
+                }
             }
         }
-    }else{
-        [self showAlert:@"You can only invite 15 user at a time" message:@""];
-    }
+ 
     
     
     
@@ -1067,9 +1088,7 @@ NSMutableDictionary *selectedIdentifierDictionary;
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-        [[cell textLabel] setFont:[UIFont fontWithName:OTHER_FONT size:10]];
-        [[cell textLabel] setTextColor:[UIColor blackColor]];
-        [[cell textLabel] setBackgroundColor:[UIColor clearColor]];
+
     }
     
     for(UIView *v in cell.contentView.subviews){
@@ -1090,7 +1109,6 @@ NSMutableDictionary *selectedIdentifierDictionary;
     
     NSMutableDictionary *dict2;
     NSString *name2;
-    NSString *identifier2 = nil;
     NSString *detailfield = nil;
     UIImage *imgfile =nil;
     NSString *imgfile2 =nil;
@@ -1127,8 +1145,32 @@ NSMutableDictionary *selectedIdentifierDictionary;
                        });
     }
     
+    UILabel *title = [[UILabel alloc]initWithFrame:CGRectMake(80, 0, 190, 20)];
+	[title setBackgroundColor:[UIColor clearColor]];
+    [title setTextColor:[UIColor darkTextColor]];
+	[title setFont:[UIFont fontWithName:TITLE_FONT size:16]];
+	[title setTextAlignment:UITextAlignmentLeft];
+	title.text = name2;
+    title.tag = indexPath.row;
+	[cell.contentView  addSubview:title];
+    
+    UILabel *stitle = [[UILabel alloc]initWithFrame:CGRectMake(80, 15, 190, 20)];
+	[stitle setBackgroundColor:[UIColor clearColor]];
+    [stitle setTextColor:[UIColor blackColor]];
+	[stitle setFont:[UIFont fontWithName:OTHER_FONT size:10]];
+	[stitle setTextAlignment:UITextAlignmentLeft];
+	stitle.text = detailfield;
+    stitle.tag = indexPath.row;
+	[cell.contentView  addSubview:stitle];
+    UIImageView *imgView=[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 70, 70)];
+    imgView.backgroundColor=[UIColor clearColor];
+    //   [imgView.layer setCornerRadius:8.0f];
+    [imgView.layer setMasksToBounds:YES];
+    [imgView setImage:imgfile];
+    [cell.contentView addSubview:imgView];
+    
     UIButton *addButton = [[UIButton alloc] initWithFrame:CGRectMake(270,22 , 32, 33)];
-    [addButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+    //[addButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [addButton addTarget:self action:@selector(inviteFreind:) forControlEvents:UIControlEventTouchUpInside];
     
     if ([self ckeckExistContact:[dict2 objectForKey:@"identifier"]]) {
@@ -1144,233 +1186,12 @@ NSMutableDictionary *selectedIdentifierDictionary;
     addButton.tag = indexPath.row;
     [cell.contentView addSubview:addButton];
     
-    UILabel *title = [[UILabel alloc]initWithFrame:CGRectMake(80, 0, 190, 20)];
-	[title setBackgroundColor:[UIColor clearColor]];
-    [title setTextColor:[UIColor darkTextColor]];
-	[title setFont:[UIFont fontWithName:TITLE_FONT size:14]];
-	[title setTextAlignment:UITextAlignmentLeft];
-	title.text = name2;
-	[cell.contentView  addSubview:title];
-    
-    UILabel *stitle = [[UILabel alloc]initWithFrame:CGRectMake(80, 15, 190, 20)];
-	[stitle setBackgroundColor:[UIColor clearColor]];
-    [stitle setTextColor:[UIColor blackColor]];
-	[stitle setFont:[UIFont fontWithName:OTHER_FONT size:10]];
-	[stitle setTextAlignment:UITextAlignmentLeft];
-	stitle.text = detailfield;
-	[cell.contentView  addSubview:stitle];
-    UIImageView *imgView=[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 70, 70)];
-    imgView.backgroundColor=[UIColor clearColor];
-    //   [imgView.layer setCornerRadius:8.0f];
-    [imgView.layer setMasksToBounds:YES];
-    [imgView setImage:imgfile];
-    [cell.contentView addSubview:imgView];
-    //cell.textLabel.text = detailfield;
-    //cell.detailTextLabel.text = detailfield;
-    
-    //cell.imageView.image = imgfile;
-    
-    
-    
-    
-    /*
-     // Get left contact data
-     NSMutableDictionary *dict1 = [[self getArrayOfSelectedTab] objectAtIndex:index];
-     NSLog(@"%@",dict1);
-     //NSString *identifier1 = [dict1 objectForKey:@"identifier"];
-     // NSString *name1 = [dict1 objectForKey:@"name"];
-     
-     
-     if(selectedTab == FACEBOOK_TAB || selectedTab == TWITTER_TAB){
-     //[dict1 objectForKey:@"image"];
-     imgfile =[dict1 objectForKey:@"image"];
-     } else {
-     imgfile =[dict1 objectForKey:@"image"];
-     }
-     */
-    // Get right contact data
-    
-    
-    
-    /*
-     if(loadingViewFlag){
-     for (UIView *subview in self.view.subviews) {
-     if([subview isKindOfClass:[LoadingView class]]){
-     [subview removeFromSuperview];
-     loadingViewFlag = NO;
-     }
-     }
-     }
-     // init cell array if null
-     if(!self.deviceContactItems){
-     self.deviceContactItems = [[NSMutableArray alloc] init];
-     }
-     
-     
-     // Get index like 0, 2, 4, 6 etc
-     int index = (indexPath.row * 2);
-     
-     // Get left contact data
-     NSMutableDictionary *dict1 = [[self getArrayOfSelectedTab] objectAtIndex:index];
-     NSString *identifier1 = [dict1 objectForKey:@"identifier"];
-     NSString *name1 = [dict1 objectForKey:@"name"];
-     __block UIImage *image1 = nil;
-     __block NSString *imageName1 = nil;
-     
-     if(selectedTab == FACEBOOK_TAB || selectedTab == TWITTER_TAB){
-     //[dict1 objectForKey:@"image"];
-     imageName1 =[dict1 objectForKey:@"image"];
-     } else {
-     image1 =[dict1 objectForKey:@"image"];
-     }
-     
-     // Get right contact data
-     NSMutableDictionary *dict2;
-     NSString *name2;
-     NSString *identifier2 = nil;
-     __block UIImage *image2 = nil;
-     __block NSString *imageName2 = nil;
-     
-     // Check index
-     if([[self getArrayOfSelectedTab] count] > (index+ 1)){
-     dict2 = [[self getArrayOfSelectedTab] objectAtIndex:(index + 1)];
-     name2 = [dict2 objectForKey:@"name"];
-     identifier2 = [dict2 objectForKey:@"identifier"];
-     
-     if(selectedTab == FACEBOOK_TAB || selectedTab == TWITTER_TAB){
-     imageName2 = [dict2 objectForKey:@"image"];
-     } else {
-     image2 = [dict2 objectForKey:@"image"];
-     }
-     
-     } else {
-     name2 = @"";
-     image2 = nil;
-     }
-     
-     // Get cell
-     static NSString *cellId = @"AddFriendItem";
-     //AddFriendItem *cell = (AddFriendItem *) [uiTableView dequeueReusableCellWithIdentifier:cellId];
-     AddFriendItem *cell = nil;
-     
-     if([self.deviceContactItems count] > indexPath.row){
-     //NSLog(@"Reusing Row");
-     cell = [self.deviceContactItems objectAtIndex:indexPath.row];
-     }
-     
-     if (cell == nil) {
-     NSArray *nib=[[NSBundle mainBundle] loadNibNamed:cellId owner:self options:nil];
-     cell=[nib objectAtIndex:0];
-     
-     if(unSelectAll){
-     [cell.leftCheckBox setSelected:NO];
-     [cell.rightCheckBox setSelected:NO];
-     cell.leftSelected = NO;
-     cell.rightSelected = NO;
-     
-     if(identifier1)
-     [[AddFriendsController getSelectedIdentifiersDictionary] removeObjectForKey:identifier1];
-     
-     if(identifier2)
-     [[AddFriendsController getSelectedIdentifiersDictionary] removeObjectForKey:identifier2];
-     
-     } else if(selectAll) {
-     [cell.leftCheckBox setSelected:YES];
-     [cell.rightCheckBox setSelected:YES];
-     cell.leftSelected = YES;
-     cell.rightSelected = YES;
-     
-     if(identifier1)
-     [[AddFriendsController getSelectedIdentifiersDictionary] setObject:@"1" forKey:identifier1];
-     
-     if(identifier2)
-     [[AddFriendsController getSelectedIdentifiersDictionary] setObject:@"1" forKey:identifier2];
-     }
-     
-     // Add cell in array for tracking
-     [self.deviceContactItems addObject:cell];
-     
-     } else {
-     
-     if(unSelectAll){
-     [cell.leftCheckBox setSelected:NO];
-     [cell.rightCheckBox setSelected:NO];
-     cell.leftSelected = NO;
-     cell.rightSelected = NO;
-     
-     if(identifier1)
-     [[AddFriendsController getSelectedIdentifiersDictionary] removeObjectForKey:identifier1];
-     
-     if(identifier2)
-     [[AddFriendsController getSelectedIdentifiersDictionary] removeObjectForKey:identifier2];
-     
-     } else if(selectAll){
-     [cell.leftCheckBox setSelected:YES];
-     [cell.rightCheckBox setSelected:YES];
-     cell.leftSelected = YES;
-     cell.rightSelected = YES;
-     
-     if(identifier1)
-     [[AddFriendsController getSelectedIdentifiersDictionary] setObject:@"1" forKey:identifier1];
-     
-     if(identifier2)
-     [[AddFriendsController getSelectedIdentifiersDictionary] setObject:@"1" forKey:identifier2];
-     }
-     }
-     
-     // Check index
-     if([[self getArrayOfSelectedTab] count] > (index+ 1)){
-     cell.identifier2 = [dict2 objectForKey:@"identifier"];
-     }
-     
-     // Set data on screen
-     [cell setValues:name1 title2:name2];
-     
-     if(selectedTab == FACEBOOK_TAB || selectedTab == TWITTER_TAB){
-     dispatch_queue_t dispatchQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
-     dispatch_async(dispatchQueue, ^(void)
-     {
-     dispatch_sync(dispatch_get_main_queue(), ^{
-     [cell setImagesURL:imageName1 name2:imageName2];
-     //[[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
-     //[activity stopAnimating];
-     //[activty setHidden:YES];
-     });
-     });
-     }else{
-     [cell setImages:image1 image2:image2];
-     }
-     
-     cell.identifier1 = [dict1 objectForKey:@"identifier"];
-     
-     if([[AddFriendsController getSelectedIdentifiersDictionary] objectForKey:cell.identifier1]){
-     [cell.leftCheckBox setSelected:YES];
-     } else {
-     [cell.leftCheckBox setSelected:NO];
-     }
-     
-     if([[AddFriendsController getSelectedIdentifiersDictionary] objectForKey:cell.identifier2]){
-     [cell.rightCheckBox setSelected:YES];
-     } else {
-     [cell.rightCheckBox setSelected:NO];
-     }
-     
-     
-     
-     
-     
-     // Set consecutive colors on rows
-     if (indexPath.row % 2) {
-     cell.contentView.backgroundColor = [UIColor whiteColor];
-     } else {
-     cell.contentView.backgroundColor = [[UIColor alloc]initWithRed:244.0/255.0 green:242.0/255.0 blue:243.0/255.0 alpha:1];
-     }
-     
-     // return cell
-     */
     return cell;
 }
 
+- (void)tableView:(UITableView *)tView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [self.uiTableView deselectRowAtIndexPath:[self.uiTableView indexPathForSelectedRow] animated:YES];
+}
 
 /*-(void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
  

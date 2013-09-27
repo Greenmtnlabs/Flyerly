@@ -127,8 +127,8 @@
 
 -(void)signIn:(BOOL)validated username:(NSString *)userName password:(NSString *)pwd{
     NSError *loginError = nil;
-    NSLog(@"email.text %@",userName);
-    NSLog(@"password %@",pwd);
+    //NSLog(@"email.text %@",userName);
+    //NSLog(@"password %@",pwd);
 
     PFQuery *query = [PFUser query];
     [query whereKey:@"username" equalTo:userName];
@@ -154,7 +154,6 @@
         warningAlert = [[UIAlertView  alloc]initWithTitle:@"Invalid username or password" message:@"" delegate:self cancelButtonTitle:@"Register" otherButtonTitles:@"Try Again",nil];
         [warningAlert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:NO];
         //[warningAlert show];
-        [warningAlert autorelease];
         
     }else{
         
