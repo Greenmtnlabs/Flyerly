@@ -207,7 +207,7 @@
     return params;
 }
 
--(IBAction)RatefacbookApp:(id)sender{
+-(IBAction)RateApp:(id)sender{
     NSString* url = [NSString stringWithFormat: @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=%@", @"344130515"];
     [[UIApplication sharedApplication] openURL: [NSURL URLWithString: url]];
 }

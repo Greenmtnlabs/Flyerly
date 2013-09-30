@@ -41,11 +41,13 @@
     [self.navigationItem setRightBarButtonItem:rightBarButton];*/
 
     // Create left bar button
-     UIButton *closeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
-     closeButton.titleLabel.font = [UIFont fontWithName:BUTTON_FONT size:13];
+     UIButton *closeButton = [[UIButton alloc] initWithFrame:CGRectMake(-60, -6, 50, 30)];
+     closeButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:13];
       closeButton.showsTouchWhenHighlighted = YES;
-     [closeButton setBackgroundImage:[UIImage imageNamed:@"crop_button"] forState:UIControlStateNormal];
+    
+     [closeButton setBackgroundImage:[UIImage imageNamed:@"signin_button"] forState:UIControlStateNormal];
      [closeButton setTitle:@"Close" forState:UIControlStateNormal];
+    [closeButton setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
      [closeButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
      UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:closeButton];
      [self.navigationItem setLeftBarButtonItem:leftBarButton];

@@ -1121,7 +1121,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     if(!deleteMode){
         [self plusButtonClick];
      }else{
-        deleteMode = NO;
+       // deleteMode = NO;
         doStopWobble = NO;
         
         if(rightUndoBarButton){
@@ -1170,7 +1170,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     if(!deleteMode){
         [self plusButtonClick];
     }else{
-        deleteMode = NO;
+        //deleteMode = NO;
         doStopWobble = NO;
         
         if(rightUndoBarButton){
@@ -2548,6 +2548,8 @@ int arrangeLayerIndex;
     label.textColor = [UIColor whiteColor];
     label.text = @"ADD PHOTO";
     self.navigationItem.titleView = label;
+    
+
     
     if(selectedAddMoreLayerTab == -1){
         UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 33, 32)];
@@ -4265,6 +4267,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
             [self.imgView addSubview:newSymbolImgView];
             
             [[self symbolLayersArray] addObject:newSymbolImgView];
+            
             
             
         } else if(selectedAddMoreLayerTab == ADD_MORE_ICONTAB){
