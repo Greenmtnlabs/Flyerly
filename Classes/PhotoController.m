@@ -517,7 +517,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     [addMoreSymbolTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
     addMoreSymbolTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
     
-    [arrangeLayerTabButton setTitle:@"Layers" forState:UIControlStateNormal];
+    [arrangeLayerTabButton setTitle:@"Edit" forState:UIControlStateNormal];
     [arrangeLayerTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
     arrangeLayerTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
     
@@ -2840,7 +2840,7 @@ int arrangeLayerIndex;
     [addMoreSymbolTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
     addMoreSymbolTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
     
-    [arrangeLayerTabButton setTitle:@"Layers" forState:UIControlStateNormal];
+    [arrangeLayerTabButton setTitle:@"Edit" forState:UIControlStateNormal];
     [arrangeLayerTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
     arrangeLayerTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
     
@@ -3205,7 +3205,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         [addMoreSymbolTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
         addMoreSymbolTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
         
-        [arrangeLayerTabButton setTitle:@"Layers" forState:UIControlStateNormal];
+        [arrangeLayerTabButton setTitle:@"Edit" forState:UIControlStateNormal];
         [arrangeLayerTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
         arrangeLayerTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
         
@@ -3279,7 +3279,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         [addMoreSymbolTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
         addMoreSymbolTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
         
-        [arrangeLayerTabButton setTitle:@"Layers" forState:UIControlStateNormal];
+        [arrangeLayerTabButton setTitle:@"Edit" forState:UIControlStateNormal];
         [arrangeLayerTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
         arrangeLayerTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
         
@@ -3359,7 +3359,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         [addMoreSymbolTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
         addMoreSymbolTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
         
-        [arrangeLayerTabButton setTitle:@"Layers" forState:UIControlStateNormal];
+        [arrangeLayerTabButton setTitle:@"Edit" forState:UIControlStateNormal];
         [arrangeLayerTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
         arrangeLayerTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
         
@@ -3432,7 +3432,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         [addMoreSymbolTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
         addMoreSymbolTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
         
-        [arrangeLayerTabButton setTitle:@"Layers" forState:UIControlStateNormal];
+        [arrangeLayerTabButton setTitle:@"Edit" forState:UIControlStateNormal];
         [arrangeLayerTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
         arrangeLayerTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
         
