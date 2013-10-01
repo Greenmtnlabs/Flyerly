@@ -385,13 +385,53 @@ NSMutableDictionary *locationDetails;
  * Called when clicked on title text field
  */
 - (void)textFieldTapped:(id)sender {
+    NSLog(@"%@",searchField.text);
     //enable dark view
     [darkView setHidden:NO];
     searchMode = YES;
 }
 
+-(IBAction)updateTextLabelsWithText
+{
+    if(searchMode){
+        
+        if([searchField.text isEqualToString:@"\n"]){
+            
+            if([searchField canResignFirstResponder])
+            {
+                [searchField resignFirstResponder];
+            }
+            
+            //disable dark view
+            [darkView setHidden:YES];
+            searchMode = NO;
+            [self searchVenues];
+            
+        } else {
+            
+            [darkView setHidden:YES];
+            [self switchTableMode];
+        }
+        
+    }else{
+        
+        if([searchField.text isEqualToString:@"\n"]){
+            
+            //disable dark view
+            [darkView setHidden:YES];
+            searchMode = NO;
+            
+            if([searchField canResignFirstResponder])
+            {
+                [searchField resignFirstResponder];
+            }
+        }
+    }
+    [self.uiTableView reloadData];
+}
+/*
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    
+    [searchField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     if(searchMode){
 
         if([string isEqualToString:@"\n"]){
@@ -429,7 +469,7 @@ NSMutableDictionary *locationDetails;
     }
     [self.uiTableView reloadData];
     return YES;
-}
+}*/
 
 -(void)switchTableMode{
     [self prepareForRequest];
