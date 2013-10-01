@@ -385,7 +385,7 @@ NSMutableDictionary *locationDetails;
  * Called when clicked on title text field
  */
 - (void)textFieldTapped:(id)sender {
-    NSLog(@"%@",searchField.text);
+   // NSLog(@"%@",searchField.text);
     //enable dark view
     [darkView setHidden:NO];
     searchMode = YES;
