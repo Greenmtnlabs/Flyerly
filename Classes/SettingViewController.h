@@ -13,8 +13,9 @@
 #import "LauchViewController.h"
 #import "InputViewController.h"
 #import "ParentViewController.h"
+#import "Singleton.h"
 
-@class LauchViewController,InputViewController;
+@class LauchViewController,InputViewController,Singleton;
 @interface SettingViewController : ParentViewController <FBRequestDelegate,FBSessionDelegate,OFFlickrAPIRequestDelegate> {
     IBOutlet UIButton *facebookButton;
 	IBOutlet UIButton *twitterButton;
@@ -28,7 +29,7 @@
     IBOutlet UISwitch *saveToRollSwitch;
 
     IBOutlet UIButton *helpTab;
-
+    Singleton *globle;
     OFFlickrAPIRequest *flickrRequest;
     LauchViewController *launchController;
     InputViewController *input;

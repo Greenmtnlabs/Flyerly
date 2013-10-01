@@ -272,6 +272,8 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 	navigationController.navigationBar.barStyle = UIStatusBarStyleBlackOpaque;
     globle = [Singleton RetrieveSingleton];
     globle.twitterUser = nil;
+    float ver =  [[[UIDevice currentDevice] systemVersion] floatValue];
+    globle.iosVersion =[NSString stringWithFormat:@"%f",ver];
 
     //This flag represents the condition whether application setting has been altered first time
     // after installing app
@@ -318,6 +320,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
         }
         
         // Is the ser logged in?
+        
         if ( [PFUser currentUser] == nil ) {
             [navigationController pushViewController:accountController animated:YES];
         }else{

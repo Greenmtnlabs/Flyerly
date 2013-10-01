@@ -233,18 +233,22 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     
     // Create border colors array
     borderArray = 	[[NSArray  alloc] initWithObjects: [UIColor blackColor], [UIColor grayColor], [UIColor darkGrayColor], [UIColor blueColor], [UIColor purpleColor], [UIColor colorWithRed:115.0/255.0 green:134.0/255.0 blue:144.0/255.0 alpha:1], [UIColor orangeColor], [UIColor greenColor], [UIColor redColor], [UIColor colorWithRed:14.0/255.0 green:95.0/255.0 blue:111.0/255.0 alpha:1], [UIColor colorWithRed:180.0/255.0 green:180.0/255.0 blue:149.0/255.0 alpha:1], [UIColor colorWithRed:228.0/255.0 green:128.0/255.0 blue:144.0/255.0 alpha:1], [UIColor colorWithRed:213.0/255.0 green:110.0/255.0 blue:86.0/255.0 alpha:1],[UIColor colorWithRed:156.0/255.0 green:195.0/255.0 blue:233.0/255.0 alpha:1],[UIColor colorWithRed:27.0/255.0 green:70.0/255.0 blue:148.0/255.0 alpha:1],[UIColor colorWithRed:234.0/255.0 green:230.0/255.0 blue:51.0/255.0 alpha:1],[UIColor cyanColor], [UIColor colorWithRed:232.0/255.0 green:236.0/255.0 blue:51.0/224.0 alpha:1],[UIColor magentaColor],[UIColor colorWithRed:57.0/255.0 green:87.0/255.0 blue:13.0/224.0 alpha:1], [UIColor colorWithRed:93.0/255.0 green:97.0/255.0 blue:196.0/224.0 alpha:1],nil];
+
+    
+    // Add text border in scroll view
+    [self addTextBorderInSubView];
     
     // Add colors in scroll view
     [self addColorsInSubView];
     
     // Add size in scroll view
 	[self addSizeInSubView];
-
+    
     // Add flyer border in scroll view
     [self addFlyerBorderInSubView];
+
     
-    // Add text border in scroll view
-    [self addTextBorderInSubView];
+
 	
     // Set frame and actions for scrollview data
 	[fontScrollView setCanCancelContentTouches:NO];
@@ -854,12 +858,13 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 	{
 		UIButton *color = [UIButton buttonWithType:UIButtonTypeCustom];
 		color.frame = CGRectMake(0, 5, colorScrollWidth, colorScrollHeight);
-        color.layer.borderColor = [UIColor grayColor].CGColor;
-        color.layer.borderWidth = 1.0;
+
         
 		id colorName =[colorArray objectAtIndex:(i-1)];
-		UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(color.frame.origin.x+5, color.frame.origin.y-1, color.frame.size.width-10, color.frame.size.height-8)];
+		UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(color.frame.origin.x+5, color.frame.origin.y, color.frame.size.width, color.frame.size.height)];
 		[label setBackgroundColor:colorName];
+        label.layer.borderColor = [UIColor grayColor].CGColor;
+        label.layer.borderWidth = 1.0;
 		[color addSubview:label];
 		color.tag = i+30;
         
@@ -870,7 +875,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 
                 if(![self isProductPurchased:productToCheck]){
                     UIImageView *lock = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lock"]];
-                    lock.frame = CGRectMake(20, 20, 17, 19);
+                    lock.frame = CGRectMake(25, 24, 17, 19);
                     [color addSubview:lock];
                     color.userInteractionEnabled = NO;
                 }
@@ -1334,9 +1339,10 @@ int arrangeLayerIndex;
             ((CustomLabel*)[[self textLabelLayersArray]  objectAtIndex:arrangeLayerIndex]).font =selectedFont;
             ((CustomLabel*)[[self textLabelLayersArray]  objectAtIndex:arrangeLayerIndex]).numberOfLines = 0;
             ((CustomLabel*)[[self textLabelLayersArray]  objectAtIndex:arrangeLayerIndex]).lineBreakMode = UILineBreakModeCharacterWrap;
-           // [ ((CustomLabel*)[[self textLabelLayersArray]  objectAtIndex:arrangeLayerIndex]) sizeToFit];
+            /*
+            [ ((CustomLabel*)[[self textLabelLayersArray]  objectAtIndex:arrangeLayerIndex]) setFrame:CGRectMake(((CustomLabel*)[[self textLabelLayersArray]  objectAtIndex:arrangeLayerIndex]).frame.origin.x, ((CustomLabel*)[[self textLabelLayersArray]  objectAtIndex:arrangeLayerIndex]).frame.origin.y, ((CustomLabel*)[[self textLabelLayersArray]  objectAtIndex:arrangeLayerIndex]).frame.size.width +selectedSize, ((CustomLabel*)[[self textLabelLayersArray]  objectAtIndex:arrangeLayerIndex]).frame.size.height)];*/
 		}
-		i++;	
+		i++;
 	}
 }
 
@@ -3073,10 +3079,11 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 		[sizeScrollView setAlpha:ALPHA0];
 		[borderScrollView setAlpha:ALPHA0];
 		[fontBorderScrollView setAlpha:ALPHA0];
+        [borderTabButton setBackgroundImage:[UIImage imageNamed:@"outline_button"] forState:UIControlStateNormal];
 		[fontTabButton setBackgroundImage:[UIImage imageNamed:@"font_button"] forState:UIControlStateNormal];
 		[colorTabButton setBackgroundImage:[UIImage imageNamed:@"color_button_selected"] forState:UIControlStateNormal];
 		[sizeTabButton setBackgroundImage:[UIImage imageNamed:@"size_button"] forState:UIControlStateNormal];
-		[borderTabButton setBackgroundImage:[UIImage imageNamed:@"outline_button"] forState:UIControlStateNormal];
+	
 		[fontBorderTabButton setBackgroundImage:[UIImage imageNamed:@"background_button"] forState:UIControlStateNormal];
 		[UIView commitAnimations];
 	}
@@ -4428,7 +4435,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	{
 		//if (CGRectContainsPoint([self.imgView frame], [touch locationInView:self.imgView]) && lableTouchFlag )
         if (loc.y <= imgView.frame.size.height && lableTouchFlag )
-		{
+		{/*
             if(selectedAddMoreLayerTab == ARRANGE_LAYERTAB){
                 //[self.imgView sendSubviewToBack:[[self photoLayersArray] objectAtIndex:arrangeLayerIndex]];
                 [self.imgView bringSubviewToFront:[[self textLabelLayersArray] objectAtIndex:arrangeLayerIndex]];            
@@ -4445,6 +4452,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
                     [self dispatchFirstTouchAtPoint:[[self textLabelLayersArray] lastObject] point:[touch locationInView:self.imgView] forEvent:nil];
                 }
 			}
+          */
 		}
 		//else if (CGRectContainsPoint([photoImgView frame], [touch locationInView:self.imgView]) && photoTouchFlag)
 		else if (loc.y <= (imgView.frame.size.height-(((UIImageView *)[[self photoLayersArray] lastObject]).frame.size.height/2)) && photoTouchFlag

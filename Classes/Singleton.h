@@ -19,6 +19,7 @@
 @property (nonatomic, strong) NSString *inputValue;
 @property (nonatomic, strong) NSString *sharelink;
 @property (nonatomic, strong) NSString *FlyerName;
+@property (nonatomic, strong) NSString *iosVersion;
 
 +(Singleton *)RetrieveSingleton;
 -(UIColor*)colorWithHexString:(NSString*)hex;

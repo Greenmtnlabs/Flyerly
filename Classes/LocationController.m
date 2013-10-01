@@ -378,6 +378,7 @@ NSMutableDictionary *locationDetails;
     
     // search near by
     [self searchNearBy];
+      [self.uiTableView reloadData];
 }
 
 /*

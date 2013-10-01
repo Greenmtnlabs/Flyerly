@@ -827,9 +827,7 @@ int totalCount = 0;
                 }
             }
         }
- 
-    
-    
+
     
 }
 - (BOOL)ckeckExistContact:(NSString *)identifier{
@@ -1088,6 +1086,7 @@ NSMutableDictionary *selectedIdentifierDictionary;
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
     }
     
@@ -1148,7 +1147,7 @@ NSMutableDictionary *selectedIdentifierDictionary;
     UILabel *title = [[UILabel alloc]initWithFrame:CGRectMake(80, 0, 190, 20)];
 	[title setBackgroundColor:[UIColor clearColor]];
     [title setTextColor:[UIColor darkTextColor]];
-	[title setFont:[UIFont fontWithName:TITLE_FONT size:16]];
+	[title setFont:[UIFont fontWithName:TITLE_FONT size:14]];
 	[title setTextAlignment:UITextAlignmentLeft];
 	title.text = name2;
     title.tag = indexPath.row;
@@ -1189,9 +1188,6 @@ NSMutableDictionary *selectedIdentifierDictionary;
     return cell;
 }
 
-- (void)tableView:(UITableView *)tView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [self.uiTableView deselectRowAtIndexPath:[self.uiTableView indexPathForSelectedRow] animated:YES];
-}
 
 /*-(void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
  

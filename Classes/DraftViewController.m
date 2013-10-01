@@ -276,9 +276,12 @@ static ShareProgressView *clipBdPogressView;
     [locationLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:13]];
 
     // Setup flyer edit button
-    UIButton *editButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 33, 33)] autorelease];
+    UIButton *editButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 4, 35, 33)] autorelease];
     [editButton addTarget:self action:@selector(onEdit:) forControlEvents:UIControlEventTouchUpInside];
-    [editButton setImage:[UIImage imageNamed:@"btn_edit"] forState:UIControlStateNormal];
+    [editButton setTitle:@"Edit" forState:UIControlStateNormal];
+    [editButton setBackgroundColor:[UIColor clearColor ]];
+    [editButton setFont:[UIFont fontWithName:TITLE_FONT size:16]];
+    [editButton setTitleColor:[globle colorWithHexString:@"84c441"]forState:UIControlStateNormal];
     editButton.showsTouchWhenHighlighted = YES;
     // Get index from flyer image path
     NSString *index = [FlyrViewController getFlyerNumberFromPath:imageFileName];
