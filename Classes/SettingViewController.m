@@ -159,11 +159,11 @@
     [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"facebookSetting"];    
 }
 -(IBAction)OntwitterComments{
-    InputViewController  *input = [[InputViewController alloc]initWithNibName:@"InputViewController" bundle:nil];
-    [self.navigationController presentModalViewController:input animated:YES];
+    InputViewController  *inputv = [[InputViewController alloc]initWithNibName:@"InputViewController" bundle:nil];
+    [self.navigationController presentModalViewController:inputv animated:YES];
 }
 
--(IBAction)RatefacbookApp:(id)sender{
+-(IBAction)RateApp:(id)sender{
     float ver = [ globle.iosVersion floatValue];
     NSString* url;
     if (ver >= 7) {

@@ -32,7 +32,7 @@
     Singleton *globle;
     OFFlickrAPIRequest *flickrRequest;
     LauchViewController *launchController;
-    InputViewController *input;
+    InputViewController *inputv;
 
 }
 
@@ -61,7 +61,7 @@
 -(IBAction)makeEmail;
 -(IBAction)OntwitterComments;
 -(IBAction)onClickSaveToCameraRollSwitchButton;
--(IBAction)RatefacbookApp:(id)sender;
+-(IBAction)RateApp:(id)sender;
 -(void)gohelp;
 
 

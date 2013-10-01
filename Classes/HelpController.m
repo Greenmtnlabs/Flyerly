@@ -64,18 +64,20 @@
 
     if(IS_IPHONE_5){
         [doneButton setFrame:CGRectMake(doneButton.frame.origin.x, 1340, doneButton.frame.size.width, doneButton.frame.size.height)];
-        emailButton = [[UIButton alloc] initWithFrame:CGRectMake(14, 1335, 120, 10)];
-        linkButton = [[UIButton alloc] initWithFrame:CGRectMake(14, 1348, 150, 10)];
-        linkFaceBook = [[UIButton alloc] initWithFrame:CGRectMake(14, 1386, 157, 10)];
-        twitLink = [[UIButton alloc] initWithFrame:CGRectMake(14, 1375, 185, 10)];
+        emailButton = [[UIButton alloc] initWithFrame:CGRectMake(55, 1357, 130, 10)];
+        linkButton = [[UIButton alloc] initWithFrame:CGRectMake(16, 1386, 172, 10)];
+        twitLink = [[UIButton alloc] initWithFrame:CGRectMake(16, 1417, 212, 10)];
+        linkFaceBook = [[UIButton alloc] initWithFrame:CGRectMake(16, 1431, 190, 10)];
+
 
     } else {
         [doneButton setFrame:CGRectMake(doneButton.frame.origin.x, 1390, doneButton.frame.size.width, doneButton.frame.size.height)];
 
-        emailButton = [[UIButton alloc] initWithFrame:CGRectMake(14, 1246, 120, 10)];
-        linkButton = [[UIButton alloc] initWithFrame:CGRectMake(14, 1257, 150, 10)];
-        linkFaceBook = [[UIButton alloc] initWithFrame:CGRectMake(14, 1386, 120, 10)];
-        twitLink = [[UIButton alloc] initWithFrame:CGRectMake(14, 1283, 185, 10)];
+        emailButton = [[UIButton alloc] initWithFrame:CGRectMake(55, 1266, 130, 10)];
+        linkButton = [[UIButton alloc] initWithFrame:CGRectMake(16, 1295, 172, 10)];
+        twitLink = [[UIButton alloc] initWithFrame:CGRectMake(16, 1323, 212, 10)];
+        linkFaceBook = [[UIButton alloc] initWithFrame:CGRectMake(16, 1336, 190, 10)];
+
 
     }
     emailButton.showsTouchWhenHighlighted = YES;
@@ -83,8 +85,10 @@
     linkFaceBook.showsTouchWhenHighlighted = YES;
     twitLink.showsTouchWhenHighlighted = YES;
 
-  //  linkFaceBook.backgroundColor = [UIColor blackColor];
-   // twitLink.backgroundColor = [UIColor blackColor];
+    //emailButton.backgroundColor = [UIColor blackColor];
+    //linkButton.backgroundColor = [UIColor blackColor];
+    //twitLink.backgroundColor = [UIColor blackColor];
+    //linkFaceBook.backgroundColor = [UIColor blackColor];
 
     [emailButton addTarget:self action:@selector(openEmail:) forControlEvents:UIControlEventTouchUpInside];
     //emailButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:10];

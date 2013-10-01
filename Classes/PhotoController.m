@@ -875,7 +875,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 
                 if(![self isProductPurchased:productToCheck]){
                     UIImageView *lock = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lock"]];
-                    lock.frame = CGRectMake(25, 24, 17, 19);
+                    lock.frame = CGRectMake(color.frame.origin.x-15, 24, 17, 19);
                     [color addSubview:lock];
                     color.userInteractionEnabled = NO;
                 }
@@ -1339,7 +1339,7 @@ int arrangeLayerIndex;
             ((CustomLabel*)[[self textLabelLayersArray]  objectAtIndex:arrangeLayerIndex]).font =selectedFont;
             ((CustomLabel*)[[self textLabelLayersArray]  objectAtIndex:arrangeLayerIndex]).numberOfLines = 0;
             ((CustomLabel*)[[self textLabelLayersArray]  objectAtIndex:arrangeLayerIndex]).lineBreakMode = UILineBreakModeCharacterWrap;
-            /*
+                /*
             [ ((CustomLabel*)[[self textLabelLayersArray]  objectAtIndex:arrangeLayerIndex]) setFrame:CGRectMake(((CustomLabel*)[[self textLabelLayersArray]  objectAtIndex:arrangeLayerIndex]).frame.origin.x, ((CustomLabel*)[[self textLabelLayersArray]  objectAtIndex:arrangeLayerIndex]).frame.origin.y, ((CustomLabel*)[[self textLabelLayersArray]  objectAtIndex:arrangeLayerIndex]).frame.size.width +selectedSize, ((CustomLabel*)[[self textLabelLayersArray]  objectAtIndex:arrangeLayerIndex]).frame.size.height)];*/
 		}
 		i++;
