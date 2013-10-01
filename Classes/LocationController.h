@@ -47,5 +47,6 @@
 +(NSMutableDictionary *)getLocationDetails;
 -(void)AddCustomLocation:(NSString *)loc;
 -(NSMutableArray *)ReadCustomLocation;
+-(IBAction)updateTextLabelsWithText;
 
 @end
