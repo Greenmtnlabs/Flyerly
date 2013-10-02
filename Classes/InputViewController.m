@@ -121,6 +121,7 @@
         NSLog(@"Twitter response, HTTP response: %i", [urlResponse statusCode]);
     }];
     
+    [self showAlert:@"Thank you. Your feedback has been sent to @flyerlyapp on Twitter." message:@""];
     // Release stuff.
     [sName release];
     [sMessage release];
@@ -130,6 +131,8 @@
     arrayOfAccounts = nil;
     [self dismissModalViewControllerAnimated:YES];
 }
+
+
 
 - (void)sendTwitterMessage:(NSString *)message screenName:(NSString *)screenName{
     

@@ -31,6 +31,7 @@ BOOL selectAll;
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    contactsCount =0;
     self.deviceContactItems = [[NSMutableArray alloc] init];
     globle = [Singleton RetrieveSingleton];
     self.navigationItem.hidesBackButton = YES;

@@ -230,19 +230,18 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     // Create color array
 	colorArray = 	[[NSArray  alloc] initWithObjects: [UIColor redColor], [UIColor blueColor], [UIColor greenColor], [UIColor blackColor], [UIColor colorWithRed:253.0/255.0 green:191.0/255.0 blue:38.0/224.0 alpha:1], [UIColor whiteColor], [UIColor grayColor], [UIColor magentaColor], [UIColor yellowColor], [UIColor colorWithRed:163.0/255.0 green:25.0/255.0 blue:2.0/224.0 alpha:1], [UIColor colorWithRed:3.0/255.0 green:15.0/255.0 blue:41.0/224.0 alpha:1], [UIColor purpleColor], [UIColor colorWithRed:85.0/255.0 green:86.0/255.0 blue:12.0/224.0 alpha:1], [UIColor orangeColor], [UIColor colorWithRed:98.0/255.0 green:74.0/255.0 blue:9.0/224.0 alpha:1], [UIColor colorWithRed:80.0/255.0 green:7.0/255.0 blue:1.0/224.0 alpha:1], [UIColor colorWithRed:150.0/255.0 green:150.0/255.0 blue:97.0/224.0 alpha:1], [UIColor colorWithRed:111.0/255.0 green:168.0/255.0 blue:100.0/224.0 alpha:1], [UIColor cyanColor], [UIColor colorWithRed:17.0/255.0 green:69.0/255.0 blue:70.0/224.0 alpha:1], [UIColor colorWithRed:173.0/255.0 green:127.0/255.0 blue:251.0/224.0 alpha:1], nil];
 	
+    // Add colors in scroll view
+    [self addColorsInSubView];
     
     // Create border colors array
     borderArray = 	[[NSArray  alloc] initWithObjects: [UIColor blackColor], [UIColor grayColor], [UIColor darkGrayColor], [UIColor blueColor], [UIColor purpleColor], [UIColor colorWithRed:115.0/255.0 green:134.0/255.0 blue:144.0/255.0 alpha:1], [UIColor orangeColor], [UIColor greenColor], [UIColor redColor], [UIColor colorWithRed:14.0/255.0 green:95.0/255.0 blue:111.0/255.0 alpha:1], [UIColor colorWithRed:180.0/255.0 green:180.0/255.0 blue:149.0/255.0 alpha:1], [UIColor colorWithRed:228.0/255.0 green:128.0/255.0 blue:144.0/255.0 alpha:1], [UIColor colorWithRed:213.0/255.0 green:110.0/255.0 blue:86.0/255.0 alpha:1],[UIColor colorWithRed:156.0/255.0 green:195.0/255.0 blue:233.0/255.0 alpha:1],[UIColor colorWithRed:27.0/255.0 green:70.0/255.0 blue:148.0/255.0 alpha:1],[UIColor colorWithRed:234.0/255.0 green:230.0/255.0 blue:51.0/255.0 alpha:1],[UIColor cyanColor], [UIColor colorWithRed:232.0/255.0 green:236.0/255.0 blue:51.0/224.0 alpha:1],[UIColor magentaColor],[UIColor colorWithRed:57.0/255.0 green:87.0/255.0 blue:13.0/224.0 alpha:1], [UIColor colorWithRed:93.0/255.0 green:97.0/255.0 blue:196.0/224.0 alpha:1],nil];
 
     
-    // Add text border in scroll view
-    [self addTextBorderInSubView];
-    
-    // Add colors in scroll view
-    [self addColorsInSubView];
-    
     // Add size in scroll view
 	[self addSizeInSubView];
+    
+    // Add text border in scroll view
+    [self addTextBorderInSubView];
     
     // Add flyer border in scroll view
     [self addFlyerBorderInSubView];
@@ -530,6 +529,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     addMoreIconTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
 
 }
+
 
 -(void)viewDidLoad{
 	[super viewDidLoad];
@@ -1335,7 +1335,7 @@ int arrangeLayerIndex;
 			NSString *sizeStr = [SIZE_ARRAY objectAtIndex:i-1];
 			selectedSize = [sizeStr intValue];
 			selectedFont = [selectedFont fontWithSize:selectedSize];
-			msgTextView.font = selectedFont;
+			//msgTextView.font = selectedFont;
             ((CustomLabel*)[[self textLabelLayersArray]  objectAtIndex:arrangeLayerIndex]).font =selectedFont;
             ((CustomLabel*)[[self textLabelLayersArray]  objectAtIndex:arrangeLayerIndex]).numberOfLines = 0;
             ((CustomLabel*)[[self textLabelLayersArray]  objectAtIndex:arrangeLayerIndex]).lineBreakMode = UILineBreakModeCharacterWrap;
@@ -2698,9 +2698,12 @@ int arrangeLayerIndex;
     [self.cpyPhotoLayersArray removeAllObjects];
     [self.cpySymbolLayersArray removeAllObjects];
     
+
+    
+    NSLog(@"%@",textLabelLayersArray);
     for(CustomLabel *label in textLabelLayersArray){
         [self.cpyTextLabelLayersArray addObject:[NSKeyedUnarchiver unarchiveObjectWithData:[NSKeyedArchiver archivedDataWithRootObject:label]]];
-    }
+     }
     for(UIImageView *symbolImage in symbolLayersArray){
         [self.cpySymbolLayersArray addObject:[NSKeyedUnarchiver unarchiveObjectWithData:[NSKeyedArchiver archivedDataWithRootObject:symbolImage]]];
     }
@@ -3139,13 +3142,14 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 -(void) setAddMoreLayerTabAction:(id) sender {
     layerallow = 0;
+    
     if(layerEditMessage!=nil){
         [layerEditMessage removeFromSuperview];
         layerEditMessage = nil;
     }
 
 	UIButton *selectedButton = (UIButton*)sender;
-    
+
     // Set wobble and delete mode to NO when tab other then arrange layer is selected
     //if(selectedButton != arrangeLayerTabButton){
     //    doStopWobble = NO;
@@ -3166,7 +3170,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 	if(selectedButton == addMoreFontTabButton)
 	{
-    
         UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-30, -6, 50, 50)] autorelease];
         label.backgroundColor = [UIColor clearColor];
         label.font = [UIFont fontWithName:TITLE_FONT size:18];
@@ -3227,7 +3230,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	}
 	else if(selectedButton == addMorePhotoTabButton)
 	{
-    
         //self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"layers" rect:CGRectMake(-30, -6, 50, 50)];
         UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-30, -6, 50, 50)] autorelease];
         label.backgroundColor = [UIColor clearColor];
@@ -3303,7 +3305,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	}
 	else if(selectedButton == addMoreSymbolTabButton)
 	{
-    
         //self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"layers" rect:CGRectMake(-30, -6, 50, 50)];
         UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-30, -6, 50, 50)] autorelease];
         label.backgroundColor = [UIColor clearColor];
@@ -3533,6 +3534,8 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
                 UILongPressGestureRecognizer* longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onLongPress:)];
                 [layerButton addGestureRecognizer:longPressRecognizer];
                 
+ 
+                
                 UIImage *image = [UIImage imageNamed:@"cross"];
                 image = [PhotoController imageWithImage:image scaledToSize:CGSizeMake(30, 29)];
                 UIImage *pencilImage = [UIImage imageNamed:@"pencil_blue"];
@@ -3755,13 +3758,21 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 		[iconScrollView setAlpha:ALPHA0];
 		[layerScrollView setAlpha:ALPHA1];
 	}
-    
+    deleteMode = NO;
     doStopWobble = YES;
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapGestureCaptured:)];
+    [layerScrollView addGestureRecognizer:singleTap];
+}
+
+- (void)singleTapGestureCaptured:(UITapGestureRecognizer *)gesture
+{
+    //CGPoint touchPoint=[gesture locationInView:layerScrollView];
+    [self unWobbleAll];
 }
 
 -(void)resetLayerScrollView{
 
-    //doStopWobble = YES;
+    doStopWobble = YES;
     
     [self setAddMoreLayerTabAction:arrangeLayerTabButton];
 }
@@ -3781,7 +3792,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 -(void)editLayer:(UIButton *)editButton overrided:(BOOL)overrided{
 
     // Since we are editting we should enable the deleteNode On
-    deleteMode = YES;
     undoCount = undoCount + 1;
     NSLog(@"Edit Layer Tag: %d", editButton.tag);
     NSString *tag = [NSString stringWithFormat:@"%d", editButton.tag];
@@ -3822,6 +3832,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         // Call Icon
         [self setAddMoreLayerTabAction:addMoreIconTabButton];
     }
+     deleteMode = YES;
 }
 
 -(void)deleteLayer:(UIButton *)crossButton{
@@ -4435,13 +4446,14 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	{
 		//if (CGRectContainsPoint([self.imgView frame], [touch locationInView:self.imgView]) && lableTouchFlag )
         if (loc.y <= imgView.frame.size.height && lableTouchFlag )
-		{/*
+		{
             if(selectedAddMoreLayerTab == ARRANGE_LAYERTAB){
                 //[self.imgView sendSubviewToBack:[[self photoLayersArray] objectAtIndex:arrangeLayerIndex]];
                 [self.imgView bringSubviewToFront:[[self textLabelLayersArray] objectAtIndex:arrangeLayerIndex]];            
             } else{
                 //[self.imgView sendSubviewToBack:[[self photoLayersArray] lastObject]];
-                [self.imgView bringSubviewToFront:[[self textLabelLayersArray] objectAtIndex:arrangeLayerIndex]];
+                //[self.imgView bringSubviewToFront:[[self textLabelLayersArray] objectAtIndex:arrangeLayerIndex]];
+                [self.imgView bringSubviewToFront:[[self textLabelLayersArray] lastObject]];
             }
 
 			for (UITouch *touch in touches) {
@@ -4452,7 +4464,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
                     [self dispatchFirstTouchAtPoint:[[self textLabelLayersArray] lastObject] point:[touch locationInView:self.imgView] forEvent:nil];
                 }
 			}
-          */
+          
 		}
 		//else if (CGRectContainsPoint([photoImgView frame], [touch locationInView:self.imgView]) && photoTouchFlag)
 		else if (loc.y <= (imgView.frame.size.height-(((UIImageView *)[[self photoLayersArray] lastObject]).frame.size.height/2)) && photoTouchFlag
@@ -4518,7 +4530,9 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	else if(numTaps == 2)
 	{
 		NSLog(@"nothing");
+      
 	}
+     [self unWobbleAll];
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event

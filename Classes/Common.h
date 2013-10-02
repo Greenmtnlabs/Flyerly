@@ -300,7 +300,7 @@ return cell;\
 #define PREFIX_SYMBOL_PRODUCT @"com.flyerly.Icon"
 
 
-#define ADD_MORE_TEXTTAB 0
+#define ADD_MORE_TEXTTAB 5
 #define ADD_MORE_PHOTOTAB 1
 #define ADD_MORE_SYMBOLTAB 2
 #define ADD_MORE_ICONTAB 3
