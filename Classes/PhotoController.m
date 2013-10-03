@@ -1219,10 +1219,6 @@ int arrangeLayerIndex;
  */
 -(void)selectLayer:(id)sender {
     
-    deleteMode = YES;
-    undoCount = undoCount + 1;
-    [rightUndoBarButton setEnabled:YES];
-    [self makeCopyOfLayers];
 	UIButton *view = sender;
     UIView *superView = [view superview];
     
@@ -1317,7 +1313,12 @@ int arrangeLayerIndex;
         [l setBorderWidth:1.0];
         [l setBorderColor:[[UIColor grayColor] CGColor]];
         [self.imgView bringSubviewToFront:[[self iconLayersArray] objectAtIndex:arrangeLayerIndex]];        
-    }    
+    }
+    
+    deleteMode = YES;
+    undoCount = undoCount + 1;
+    [rightUndoBarButton setEnabled:YES];
+    [self makeCopyOfLayers];
 }
 
 /*
@@ -1335,10 +1336,10 @@ int arrangeLayerIndex;
 			NSString *sizeStr = [SIZE_ARRAY objectAtIndex:i-1];
 			selectedSize = [sizeStr intValue];
 			selectedFont = [selectedFont fontWithSize:selectedSize];
-			//msgTextView.font = selectedFont;
+			msgTextView.font = selectedFont;
             ((CustomLabel*)[[self textLabelLayersArray]  objectAtIndex:arrangeLayerIndex]).font =selectedFont;
-            ((CustomLabel*)[[self textLabelLayersArray]  objectAtIndex:arrangeLayerIndex]).numberOfLines = 0;
-            ((CustomLabel*)[[self textLabelLayersArray]  objectAtIndex:arrangeLayerIndex]).lineBreakMode = UILineBreakModeCharacterWrap;
+           // ((CustomLabel*)[[self textLabelLayersArray]  objectAtIndex:arrangeLayerIndex]).numberOfLines = 0;
+           // ((CustomLabel*)[[self textLabelLayersArray]  objectAtIndex:arrangeLayerIndex]).lineBreakMode = UILineBreakModeCharacterWrap;
                 /*
             [ ((CustomLabel*)[[self textLabelLayersArray]  objectAtIndex:arrangeLayerIndex]) setFrame:CGRectMake(((CustomLabel*)[[self textLabelLayersArray]  objectAtIndex:arrangeLayerIndex]).frame.origin.x, ((CustomLabel*)[[self textLabelLayersArray]  objectAtIndex:arrangeLayerIndex]).frame.origin.y, ((CustomLabel*)[[self textLabelLayersArray]  objectAtIndex:arrangeLayerIndex]).frame.size.width +selectedSize, ((CustomLabel*)[[self textLabelLayersArray]  objectAtIndex:arrangeLayerIndex]).frame.size.height)];*/
 		}
@@ -2701,9 +2702,13 @@ int arrangeLayerIndex;
 
     
     NSLog(@"%@",textLabelLayersArray);
+    NSLog(@"%@",self.cpyTextLabelLayersArray);
+
+
     for(CustomLabel *label in textLabelLayersArray){
         [self.cpyTextLabelLayersArray addObject:[NSKeyedUnarchiver unarchiveObjectWithData:[NSKeyedArchiver archivedDataWithRootObject:label]]];
      }
+    NSLog(@"%@",self.cpyTextLabelLayersArray);
     for(UIImageView *symbolImage in symbolLayersArray){
         [self.cpySymbolLayersArray addObject:[NSKeyedUnarchiver unarchiveObjectWithData:[NSKeyedArchiver archivedDataWithRootObject:symbolImage]]];
     }
@@ -3325,13 +3330,13 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 		[UIView beginAnimations:nil context:NULL];
 		[UIView setAnimationDuration:0.4f];
         
-        /*CALayer * l = [[[self  symbolLayersArray] lastObject] layer];
+        CALayer * l = [[[self  symbolLayersArray] lastObject] layer];
         [l setMasksToBounds:YES];
         [l setCornerRadius:10];
         [l setBorderWidth:1.0];
         [l setBorderColor:[[UIColor grayColor] CGColor]];
         [[[self  symbolLayersArray] lastObject] setBackgroundColor:[ UIColor colorWithWhite:1 alpha:0.4f]];
-        [self.imgView addSubview:[[self  symbolLayersArray] lastObject]];*/
+        [self.imgView addSubview:[[self  symbolLayersArray] lastObject]];
 
 		[symbolScrollView setAlpha:ALPHA1];
 		[iconScrollView setAlpha:ALPHA0];
@@ -3395,18 +3400,18 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
         lableTouchFlag = NO;
         symbolTouchFlag= NO;
-        photoTouchFlag= NO;
+        //photoTouchFlag= NO;
         iconTouchFlag = YES;
 		[UIView beginAnimations:nil context:NULL];
 		[UIView setAnimationDuration:0.4f];
         
-        /*CALayer * l = [iconImgView layer];
+        CALayer * l = [iconImgView layer];
         [l setMasksToBounds:YES];
         [l setCornerRadius:10];
         [l setBorderWidth:1.0];
         [l setBorderColor:[[UIColor grayColor] CGColor]];
         [[[self  iconLayersArray] lastObject] setBackgroundColor:[ UIColor colorWithWhite:1 alpha:0.4f]];
-        [self.imgView addSubview:[[self  iconLayersArray] lastObject]];*/
+        [self.imgView addSubview:[[self  iconLayersArray] lastObject]];
 
 		[symbolScrollView setAlpha:ALPHA0];
 		[iconScrollView setAlpha:ALPHA1];
