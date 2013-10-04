@@ -2506,7 +2506,7 @@ int arrangeLayerIndex;
         
         [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
     } else {
-        UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)];
+        UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 47, 25)];
  //       doneButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
 //        [doneButton setTitle:@"Done" forState:UIControlStateNormal];
         [doneButton addTarget:self action:@selector(callAddMoreLayers) forControlEvents:UIControlEventTouchUpInside];
@@ -2516,7 +2516,7 @@ int arrangeLayerIndex;
          doneButton.showsTouchWhenHighlighted = YES;
         UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
         [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
-    }
+    } 
     
     UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)];
     [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
@@ -2621,7 +2621,7 @@ int arrangeLayerIndex;
         UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
         [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
     } else {
-        UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 29)];
+        UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 47, 29)];
         //doneButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
         //[doneButton setTitle:@"Done" forState:UIControlStateNormal];
         [doneButton addTarget:self action:@selector(callAddMoreLayers) forControlEvents:UIControlEventTouchUpInside];
@@ -3865,7 +3865,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 }
 
 -(void) MyEdit{
-    UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)];
+    UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 47, 25)];
     [doneButton addTarget:self action:@selector(callAddMoreLayers) forControlEvents:UIControlEventTouchUpInside];
     [doneButton addTarget:self action:@selector(logLayerAddedEvent) forControlEvents:UIControlEventTouchUpInside];
     [doneButton addTarget:self action:@selector(logTextAddedEvent) forControlEvents:UIControlEventTouchUpInside];
@@ -4719,7 +4719,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 		NSLog(@"nothing");
       
 	}
-    [self SetMenu];
+    //[self SetMenu];
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
