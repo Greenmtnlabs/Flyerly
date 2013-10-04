@@ -101,6 +101,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     [addMoreLayerOrSaveFlyerLabel setTextColor:[UIColor grayColor]];
     [addMoreLayerOrSaveFlyerLabel setTextAlignment:UITextAlignmentCenter];
     [self.view addSubview:addMoreLayerOrSaveFlyerLabel];
+     [self.addMoreLayerOrSaveFlyerLabel setHidden:YES];
     
     [takeOrAddPhotoLabel setText:@"TAKE OR ADD PHOTO & RESIZE"];
     [takeOrAddPhotoLabel setBackgroundColor:[UIColor clearColor]];
@@ -434,24 +435,24 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     
 	[cameraTabButton setBackgroundImage:[UIImage imageNamed:@"07_camera"] forState:UIControlStateNormal];
     cameraTabButton.showsTouchWhenHighlighted = YES;
-	[cameraTabButton.titleLabel setFont:[UIFont fontWithName:@"Arial-BoldMT" size:15]];
-	[cameraTabButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+	//[cameraTabButton.titleLabel setFont:[UIFont fontWithName:@"Arial-BoldMT" size:15]];
+	//[cameraTabButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 	[cameraTabButton addTarget:self action:@selector(setCameraTabAction:) forControlEvents:UIControlEventTouchUpInside];
 	cameraTabButton.alpha =  ALPHA0;
 	cameraTabButton.tag = 10001;
 	[self.view addSubview:cameraTabButton];
 	
 	[photoTabButton setBackgroundImage:[UIImage imageNamed:@"07_roll"] forState:UIControlStateNormal];
-	[photoTabButton.titleLabel setFont:[UIFont fontWithName:@"Arial-BoldMT" size:15]];
-	[photoTabButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+	//[photoTabButton.titleLabel setFont:[UIFont fontWithName:@"Arial-BoldMT" size:15]];
+	//[photoTabButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 	[photoTabButton addTarget:self action:@selector(setPhotoTabAction:) forControlEvents:UIControlEventTouchUpInside];
 	photoTabButton.alpha =  ALPHA0;
 	photoTabButton.tag = 10002;
 	[self.view addSubview:photoTabButton];
 	
 	[widthTabButton setBackgroundImage:[UIImage imageNamed:@"07_width"] forState:UIControlStateNormal];
-	[widthTabButton.titleLabel setFont:[UIFont fontWithName:@"Arial-BoldMT" size:15]];
-	[widthTabButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+	//[widthTabButton.titleLabel setFont:[UIFont fontWithName:@"Arial-BoldMT" size:15]];
+	//[widthTabButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [widthTabButton addTarget:self action:@selector(selectWidth:) forControlEvents:UIControlEventTouchUpInside];
     [widthTabButton setSelected:YES];
 	widthTabButton.alpha =  ALPHA0;
@@ -459,8 +460,8 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 	[self.view addSubview:widthTabButton];
 	
 	[heightTabButton setBackgroundImage:[UIImage imageNamed:@"07_height"] forState:UIControlStateNormal];
-	[heightTabButton.titleLabel setFont:[UIFont fontWithName:@"Arial-BoldMT" size:15]];
-	[heightTabButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+	//[heightTabButton.titleLabel setFont:[UIFont fontWithName:@"Arial-BoldMT" size:15]];
+	//[heightTabButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [heightTabButton addTarget:self action:@selector(selectHeight:) forControlEvents:UIControlEventTouchUpInside];
 	heightTabButton.alpha =  ALPHA0;
 	heightTabButton.tag = 10004;
@@ -533,6 +534,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 
 -(void)viewDidLoad{
 	[super viewDidLoad];
+ 
     globle = [Singleton RetrieveSingleton];
 	aHUD = [[HudView alloc]init];
     photoTouchFlag=NO;
@@ -581,6 +583,14 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 	
 	navBar= [[MyNavigationBar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
 	[self.view addSubview:navBar];
+    UILabel *menuButton1;
+    if (IS_IPHONE_5) {
+       menuButton1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 44, 320, 316)];
+    }else{
+        menuButton1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 44, 320, 310)];
+    }
+    [menuButton1 setBackgroundColor:[globle colorWithHexString:@"0197dd"]];
+    [self.view addSubview:menuButton1];
     
     // Create right bar button
     UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 31, 30)];
@@ -1221,7 +1231,7 @@ int arrangeLayerIndex;
     
 	UIButton *view = sender;
     UIView *superView = [view superview];
-    
+    [self SetMenu];
     // Remove border from layer thumbnail
     for(UIView *subView in [superView subviews]){
         if([subView isKindOfClass:[UIButton class]]){
@@ -2168,7 +2178,51 @@ int arrangeLayerIndex;
     return titleView;
 }
 
--(void)chooseTemplate{
+
+
+
+-(void) chooseEdit{
+    [self resetLayerScrollView];
+    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-65, -6, 50, 50)] autorelease];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont fontWithName:TITLE_FONT size:18];
+    label.textAlignment = UITextAlignmentCenter;
+    label.textColor = [UIColor whiteColor];
+    label.text = @"Edit Layer";
+    self.navigationItem.titleView = label;
+    
+    UIButton *cancelButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 4, 60, 33)] autorelease];
+    [cancelButton addTarget:self action:@selector(Mycancel) forControlEvents:UIControlEventTouchUpInside];
+    [cancelButton setTitle:@"Cancel" forState:UIControlStateNormal];
+    [cancelButton setBackgroundColor:[UIColor clearColor ]];
+    [cancelButton setFont:[UIFont fontWithName:TITLE_FONT size:16]];
+    [cancelButton setTitleColor:[globle colorWithHexString:@"84c441"]forState:UIControlStateNormal];
+    cancelButton.showsTouchWhenHighlighted = YES;
+    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:cancelButton];
+    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
+    
+    UIButton *editButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 4, 35, 33)] autorelease];
+    [editButton addTarget:self action:@selector(MyEdit) forControlEvents:UIControlEventTouchUpInside];
+    [editButton setTitle:@"Edit" forState:UIControlStateNormal];
+    [editButton setBackgroundColor:[UIColor clearColor ]];
+    [editButton setFont:[UIFont fontWithName:TITLE_FONT size:16]];
+    [editButton setTitleColor:[globle colorWithHexString:@"84c441"]forState:UIControlStateNormal];
+    editButton.showsTouchWhenHighlighted = YES;
+    UIBarButtonItem *leftBarMenuButton = [[UIBarButtonItem alloc] initWithCustomView:editButton];
+    
+    UIButton *delButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 4, 60, 33)] autorelease];
+    [delButton addTarget:self action:@selector(MyDelete) forControlEvents:UIControlEventTouchUpInside];
+    [delButton setTitle:@"Delete" forState:UIControlStateNormal];
+    [delButton setBackgroundColor:[UIColor clearColor ]];
+    [delButton setFont:[UIFont fontWithName:TITLE_FONT size:16]];
+    [delButton setTitleColor:[globle colorWithHexString:@"84c441"]forState:UIControlStateNormal];
+    delButton.showsTouchWhenHighlighted = YES;
+    UIBarButtonItem *leftBarHelpButton = [[UIBarButtonItem alloc] initWithCustomView:delButton];
+    
+    [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarMenuButton,leftBarHelpButton,nil]];
+
+    
+}-(void)chooseTemplate{
     
     deleteMode = NO;
     undoCount = 0;
@@ -2861,6 +2915,27 @@ int arrangeLayerIndex;
     [addMoreIconTabButton setTitle:@"Symbols" forState:UIControlStateNormal];
     [addMoreIconTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
     addMoreIconTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
+    
+    [cameraTabButton setTitle:@"Camera" forState:UIControlStateNormal];
+    [cameraTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+    cameraTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
+    [cameraTabButton.titleLabel setTextColor:[UIColor whiteColor]];
+    
+    [photoTabButton setTitle:@"Gallery" forState:UIControlStateNormal];
+    [photoTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+    photoTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
+    photoTabButton.titleLabel.textColor = [UIColor whiteColor];
+
+    [widthTabButton setTitle:@"Width" forState:UIControlStateNormal];
+    [widthTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+    widthTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
+    [widthTabButton.titleLabel setTextColor:[UIColor whiteColor]];
+    
+    [heightTabButton setTitle:@"Height" forState:UIControlStateNormal];
+    [heightTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
+    heightTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
+    [heightTabButton.titleLabel setTextColor:[UIColor whiteColor]];
+    
 
     [addMorePhotoTabButton setBackgroundImage:[UIImage imageNamed:@"image_icon_selected"] forState:UIControlStateHighlighted];
     [addMoreFontTabButton setBackgroundImage:[UIImage imageNamed:@"text_icon_selected"] forState:UIControlStateHighlighted];
@@ -3163,9 +3238,9 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
     // If layers are wobbling and arrange layer tab is selected then stop layer wobbling
     if(doStopWobble && deleteMode && selectedButton == arrangeLayerTabButton){
-        NSLog(@"Un Wobble All Layers !");
+        //NSLog(@"Un Wobble All Layers !");
         
-        [self unWobbleAll];
+        //[self unWobbleAll];
         //return;
     }
     
@@ -3182,6 +3257,8 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         label.textColor = [UIColor whiteColor];
         label.text = @"LAYERS";
         self.navigationItem.titleView = label;
+        [self SetMenu];
+
         //self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"layers" rect:CGRectMake(-30, -6, 50, 50)];
         selectedAddMoreLayerTab = ADD_MORE_TEXTTAB;
         [self hideAddMoreAndSaveLabel];
@@ -3243,7 +3320,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         label.textColor = [UIColor whiteColor];
         label.text = @"LAYERS";
         self.navigationItem.titleView = label;
-
+        [self SetMenu];
         selectedAddMoreLayerTab = ADD_MORE_PHOTOTAB;
         [self hideAddMoreAndSaveLabel];
         if ([self canAddMoreLayers]) {
@@ -3318,7 +3395,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         label.textColor = [UIColor whiteColor];
         label.text = @"LAYERS";
         self.navigationItem.titleView = label;
-
+        [self SetMenu];
         selectedAddMoreLayerTab = ADD_MORE_SYMBOLTAB;
         [self hideAddMoreAndSaveLabel];
         [self hideTakeOrAddPhotoLabel];
@@ -3330,13 +3407,13 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 		[UIView beginAnimations:nil context:NULL];
 		[UIView setAnimationDuration:0.4f];
         
-        CALayer * l = [[[self  symbolLayersArray] lastObject] layer];
+        /*CALayer * l = [[[self  symbolLayersArray] lastObject] layer];
         [l setMasksToBounds:YES];
         [l setCornerRadius:10];
         [l setBorderWidth:1.0];
         [l setBorderColor:[[UIColor grayColor] CGColor]];
         [[[self  symbolLayersArray] lastObject] setBackgroundColor:[ UIColor colorWithWhite:1 alpha:0.4f]];
-        [self.imgView addSubview:[[self  symbolLayersArray] lastObject]];
+        [self.imgView addSubview:[[self  symbolLayersArray] lastObject]];*/
 
 		[symbolScrollView setAlpha:ALPHA1];
 		[iconScrollView setAlpha:ALPHA0];
@@ -3393,6 +3470,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         label.textColor = [UIColor whiteColor];
         label.text = @"LAYERS";
         self.navigationItem.titleView = label;
+        [self SetMenu];
 
         selectedAddMoreLayerTab = ADD_MORE_ICONTAB;
         [self hideAddMoreAndSaveLabel];
@@ -3405,13 +3483,13 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 		[UIView beginAnimations:nil context:NULL];
 		[UIView setAnimationDuration:0.4f];
         
-        CALayer * l = [iconImgView layer];
+        /*CALayer * l = [iconImgView layer];
         [l setMasksToBounds:YES];
         [l setCornerRadius:10];
         [l setBorderWidth:1.0];
         [l setBorderColor:[[UIColor grayColor] CGColor]];
         [[[self  iconLayersArray] lastObject] setBackgroundColor:[ UIColor colorWithWhite:1 alpha:0.4f]];
-        [self.imgView addSubview:[[self  iconLayersArray] lastObject]];
+        [self.imgView addSubview:[[self  iconLayersArray] lastObject]];*/
 
 		[symbolScrollView setAlpha:ALPHA0];
 		[iconScrollView setAlpha:ALPHA1];
@@ -3458,6 +3536,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	}
 	else if(selectedButton == arrangeLayerTabButton)
 	{
+        [self SetMenu];
         layerallow = 0 ;
         [arrangeLayerTabButton setBackgroundImage:[UIImage imageNamed:@"arrangeicon_button_selected"] forState:UIControlStateNormal];
         [addMoreFontTabButton setBackgroundImage:[UIImage imageNamed:@"text_icon"] forState:UIControlStateNormal];
@@ -3481,7 +3560,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
             [layerEditMessage.statusText setTextAlignment:NSTextAlignmentCenter];
             [layerEditMessage.statusText setLineBreakMode:NSLineBreakByWordWrapping];
             [layerEditMessage.statusText setNumberOfLines:0];
-            [layerEditMessage.statusText setText:@"ADJUST LAYERS OR TAP THEN HOLD TO EDIT OR DELETE LAYER"];
+            [layerEditMessage.statusText setText:@"ADJUST, EDIT OR DELETE LAYERS HERE."];
             
             [layerEditMessage.networkIcon removeFromSuperview];
             [layerEditMessage.statusIcon removeFromSuperview];
@@ -3529,15 +3608,15 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
                 
                 UIButton *layerButton = [UIButton  buttonWithType:UIButtonTypeCustom];
                 layerButton.frame =CGRectMake(0, 5,layerScrollWidth, layerScrollHeight);
-                [layerButton setBackgroundColor:[UIColor whiteColor]];
+                [layerButton setBackgroundColor:[UIColor clearColor]];
                 
                 label.frame  = CGRectMake(layerButton.frame.origin.x+5, layerButton.frame.origin.y-2, layerButton.frame.size.width-10, layerButton.frame.size.height-7);
                 [layerButton addSubview:label];
                 layerButton.tag = [[NSString stringWithFormat:@"%@%d",@"111",text] integerValue];
                 
                 // Add long press gesture on thie layer
-                UILongPressGestureRecognizer* longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onLongPress:)];
-                [layerButton addGestureRecognizer:longPressRecognizer];
+               // UILongPressGestureRecognizer* longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onLongPress:)];
+                //[layerButton addGestureRecognizer:longPressRecognizer];
                 
  
                 
@@ -3560,16 +3639,16 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
                 // If delete mode is enabled then show cross button an wobble
                 if(deleteMode){
-                    [crossButton setHidden:NO];
+                   // [crossButton setHidden:NO];
                     [editButton setHidden:NO];
-                    [self wobble:layerButton];
+                   // [self wobble:layerButton];
                 }else{
                     [crossButton setHidden:YES];
-                    [editButton setHidden:YES];
+                    [editButton setHidden:NO];
                 }
                 
-                crossButton.tag = layerButton.tag;
-                [layerButton addSubview:crossButton];
+               // crossButton.tag = layerButton.tag;
+               // [layerButton addSubview:crossButton];
                 editButton.tag = layerButton.tag;
                 [layerButton addSubview:editButton];
 
@@ -3587,7 +3666,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
                 
                 UIButton *layerButton = [UIButton  buttonWithType:UIButtonTypeCustom];
                 layerButton.frame =CGRectMake(0, 5,layerScrollWidth, layerScrollHeight);
-                [layerButton setBackgroundColor:[UIColor whiteColor]];
+                [layerButton setBackgroundColor:[UIColor clearColor]];
                 
                 img.frame  = CGRectMake(layerButton.frame.origin.x+5, layerButton.frame.origin.y-2, layerButton.frame.size.width-10, layerButton.frame.size.height-7);
                 [layerButton addSubview:img];
@@ -3616,16 +3695,16 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
                 
                 // If delete mode is enabled then show cross button an wobble
                 if(deleteMode){
-                    [crossButton setHidden:NO];
+                    //[crossButton setHidden:NO];
                     [editButton setHidden:NO];
-                    [self wobble:layerButton];
+                   // [self wobble:layerButton];
                 }else{
                     [crossButton setHidden:YES];
-                    [editButton setHidden:YES];
+                    [editButton setHidden:NO];
                 }
 
-                crossButton.tag = layerButton.tag;
-                [layerButton addSubview:crossButton];
+               // crossButton.tag = layerButton.tag;
+                //[layerButton addSubview:crossButton];
                 editButton.tag = layerButton.tag;
                 [layerButton addSubview:editButton];
 
@@ -3641,7 +3720,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
                 
                 UIButton *layerButton = [UIButton  buttonWithType:UIButtonTypeCustom];
                 layerButton.frame =CGRectMake(0, 5,layerScrollWidth, layerScrollHeight);
-                [layerButton setBackgroundColor:[UIColor whiteColor]];
+                [layerButton setBackgroundColor:[UIColor clearColor]];
                 
                 img.frame  = CGRectMake(layerButton.frame.origin.x+5, layerButton.frame.origin.y-2, layerButton.frame.size.width-10, layerButton.frame.size.height-7);
                 [layerButton addSubview:img];
@@ -3670,16 +3749,16 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
                 
                 // If delete mode is enabled then show cross button an wobble
                 if(deleteMode){
-                    [crossButton setHidden:NO];
+                    //[crossButton setHidden:NO];
                     [editButton setHidden:NO];
-                    [self wobble:layerButton];
+                   // [self wobble:layerButton];
                 }else{
                     [crossButton setHidden:YES];
-                    [editButton setHidden:YES];
+                    [editButton setHidden:NO];
                 }
                 
-                crossButton.tag = layerButton.tag;
-                [layerButton addSubview:crossButton];
+                //crossButton.tag = layerButton.tag;
+                //[layerButton addSubview:crossButton];
                 editButton.tag = layerButton.tag;
                 [layerButton addSubview:editButton];
 
@@ -3695,7 +3774,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
                 
                 UIButton *layerButton = [UIButton  buttonWithType:UIButtonTypeCustom];
                 layerButton.frame =CGRectMake(0, 5,layerScrollWidth, layerScrollHeight);
-                [layerButton setBackgroundColor:[UIColor whiteColor]];
+                [layerButton setBackgroundColor:[UIColor clearColor]];
                 
                 img.frame  = CGRectMake(layerButton.frame.origin.x+5, layerButton.frame.origin.y-2, layerButton.frame.size.width-10, layerButton.frame.size.height-7);
                 [layerButton addSubview:img];
@@ -3722,21 +3801,23 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
                 [editButton addTarget:self action:@selector(editLayer:) forControlEvents:UIControlEventTouchUpInside];
                 [editButton setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
                 [editButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
+
                 
                 // If delete mode is enabled then show cross button an wobble
                 if(deleteMode){
-                    [crossButton setHidden:NO];
+                    //[crossButton setHidden:NO];
                     [editButton setHidden:NO];
-                    [self wobble:layerButton];
+                   // [self wobble:layerButton];
                 }else{
                     [crossButton setHidden:YES];
-                    [editButton setHidden:YES];
+                    [editButton setHidden:NO];
                 }
                 
-                crossButton.tag = layerButton.tag;
-                [layerButton addSubview:crossButton];
+                //crossButton.tag = layerButton.tag;
+                //[layerButton addSubview:crossButton];
                 editButton.tag = layerButton.tag;
                 [layerButton addSubview:editButton];
+                
 
                 [layerScrollView addSubview:layerButton];
             }
@@ -3767,12 +3848,14 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     doStopWobble = YES;
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapGestureCaptured:)];
     [layerScrollView addGestureRecognizer:singleTap];
+
 }
 
 - (void)singleTapGestureCaptured:(UITapGestureRecognizer *)gesture
 {
+    [self SetMenu];
     //CGPoint touchPoint=[gesture locationInView:layerScrollView];
-    [self unWobbleAll];
+    // [self unWobbleAll];
 }
 
 -(void)resetLayerScrollView{
@@ -3782,12 +3865,41 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     [self setAddMoreLayerTabAction:arrangeLayerTabButton];
 }
 
+-(void) MyEdit{
+    UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)];
+    [doneButton addTarget:self action:@selector(callAddMoreLayers) forControlEvents:UIControlEventTouchUpInside];
+    [doneButton addTarget:self action:@selector(logLayerAddedEvent) forControlEvents:UIControlEventTouchUpInside];
+    [doneButton addTarget:self action:@selector(logTextAddedEvent) forControlEvents:UIControlEventTouchUpInside];
+    [doneButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
+    doneButton.showsTouchWhenHighlighted = YES;
+    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
+    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
+    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)];
+    [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+    [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
+	[backButton addTarget:self action:@selector(cancelLayer) forControlEvents:UIControlEventTouchUpInside];
+    backButton.showsTouchWhenHighlighted = YES;
+    UIBarButtonItem *leftBarMenuButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    
+    UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 16, 21)];
+    [helpButton addTarget:self action:@selector(loadHelpController) forControlEvents:UIControlEventTouchUpInside];
+    [helpButton setBackgroundImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
+    helpButton.showsTouchWhenHighlighted = YES;
+    UIBarButtonItem *leftBarHelpButton = [[UIBarButtonItem alloc] initWithCustomView:helpButton];
+    
+    [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarMenuButton,leftBarHelpButton,nil]];
+ [self editLayer:editButtonGlobal overrided:nil];
+}
+
 -(void)editLayer:(UIButton *)editButton{
     
     editButtonGlobal = editButton;
+    crossButtonGlobal = editButton;
+    //[editButtonGlobal setImage:[UIImage imageNamed:@"pencil_icon"] forState:UIControlStateNormal];
+    [self chooseEdit];
+  
 
-    
-    [self editLayer:editButtonGlobal overrided:nil];
+    //[self editLayer:editButtonGlobal overrided:nil];
 
     //editAlert = [[UIAlertView alloc]initWithTitle:@"Warning" message:@"Edit this layer?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK" ,nil];
     //[editAlert show];
@@ -3838,6 +3950,73 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         [self setAddMoreLayerTabAction:addMoreIconTabButton];
     }
      deleteMode = YES;
+}
+-(void) Mycancel{
+    [self SetMenu];
+
+}
+
+-(void) SetMenu{
+    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-30, -6, 50, 50)] autorelease];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont fontWithName:TITLE_FONT size:18];
+    label.textAlignment = UITextAlignmentCenter;
+    label.textColor = [UIColor whiteColor];
+    label.text = @"LAYERS";
+    self.navigationItem.titleView = label;
+    
+    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)];
+    [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+    [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
+	[backButton addTarget:self action:@selector(chooseTemplate) forControlEvents:UIControlEventTouchUpInside];
+    backButton.showsTouchWhenHighlighted = YES;
+    UIBarButtonItem *leftBarMenuButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    
+    UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 16, 21)];
+    [helpButton addTarget:self action:@selector(loadHelpController) forControlEvents:UIControlEventTouchUpInside];
+    [helpButton setBackgroundImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
+    helpButton.showsTouchWhenHighlighted = YES;
+    UIBarButtonItem *leftBarHelpButton = [[UIBarButtonItem alloc] initWithCustomView:helpButton];
+    
+    [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarMenuButton,leftBarHelpButton,nil]];
+    UIButton *saveButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 33, 32)];
+    saveButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
+	[saveButton addTarget:self action:@selector(callSaveAndShare) forControlEvents:UIControlEventTouchUpInside];
+    [saveButton setBackgroundImage:[UIImage imageNamed:@"save"] forState:UIControlStateNormal];
+    saveButton.showsTouchWhenHighlighted = YES;
+    UIButton *undoButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 33, 32)];
+    undoButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
+	[undoButton addTarget:self action:@selector(undo:) forControlEvents:UIControlEventTouchUpInside];
+    [undoButton setBackgroundImage:[UIImage imageNamed:@"undo"] forState:UIControlStateNormal];
+    undoButton.showsTouchWhenHighlighted = YES;
+    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:saveButton];
+    rightUndoBarButton = [[UIBarButtonItem alloc] initWithCustomView:undoButton];
+    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,rightUndoBarButton,nil]];
+    if(undoCount == 0){
+        [rightUndoBarButton setEnabled:NO];
+    }
+}
+
+-(void)MyDelete{
+    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)];
+    [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+    [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
+	[backButton addTarget:self action:@selector(chooseTemplate) forControlEvents:UIControlEventTouchUpInside];
+    backButton.showsTouchWhenHighlighted = YES;
+    UIBarButtonItem *leftBarMenuButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    
+    UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 16, 21)];
+    [helpButton addTarget:self action:@selector(loadHelpController) forControlEvents:UIControlEventTouchUpInside];
+    [helpButton setBackgroundImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
+    helpButton.showsTouchWhenHighlighted = YES;
+    UIBarButtonItem *leftBarHelpButton = [[UIBarButtonItem alloc] initWithCustomView:helpButton];
+    
+    [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarMenuButton,leftBarHelpButton,nil]];
+    [self callAddMoreLayers];
+    deleteAlert = [[UIAlertView alloc]initWithTitle:@"Warning" message:@"Delete this layer?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK" ,nil];
+    [deleteAlert show];
+    
+
 }
 
 -(void)deleteLayer:(UIButton *)crossButton{
@@ -3965,6 +4144,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 -(void)onLongPress:(UILongPressGestureRecognizer*)pGesture
 {
+    /*
     // Get button
     UIButton *button = (UIButton *) pGesture.view;
     NSLog(@"Layer Tag: %d", button.tag);
@@ -3979,20 +4159,22 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
             if([layerThumbnail isKindOfClass:[UIButton class]]){
                 
                 // Get cross button from layer thumbnail
-                for(UIView *crossButton in [layerThumbnail subviews]){
-                    if([crossButton isKindOfClass:[UIButton class]]){
+                for(UIView *editButton in [layerThumbnail subviews]){
+                    if([editButton isKindOfClass:[UIButton class]]){
                         
                         // Enable cross button
-                        [crossButton setHidden:NO];
+                        //[crossButton setHidden:NO];
+                        //[editButton setHidden:NO];
                         //break;
                     }
                 }
                 
                 // Wobble layer thumbnail
-                [self wobble:layerThumbnail];
+                [self wobble:pGesture.view];
             }
         }
     }
+     */
 }
 
 -(void)wobble:(UIView *)view{
@@ -4261,6 +4443,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
             newMsgLabel.backgroundColor = [UIColor clearColor];
             newMsgLabel.textColor = [UIColor blackColor];
             newMsgLabel.textAlignment = UITextAlignmentCenter;
+            //newMsgLabel.tag = textLayerCount++;
             [self.imgView addSubview:newMsgLabel];
 
             arrangeLayerIndex = [[self textLabelLayersArray] count];
@@ -4537,7 +4720,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 		NSLog(@"nothing");
       
 	}
-     [self unWobbleAll];
+    [self SetMenu];
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event

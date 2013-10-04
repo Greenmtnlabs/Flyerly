@@ -228,6 +228,11 @@
 - (void)showHUD;
 - (void)killHUD;
 -(void) chooseTemplate;
+-(void) chooseEdit;
+-(void) MyEdit;
+-(void) SetMenu;
+-(void) MyDelete;
+-(void) Mycancel;
 -(void) choosePhoto;
 -(void) saveMyFlyer;
 -(void)callSaveAndShare;
