@@ -2726,7 +2726,7 @@ int arrangeLayerIndex;
         [self makeCopyOfLayers:YES];
     } else if(undoCount > 1){
         // Make copy of previous layers
-        [self makeCopyOfLayers:YES];
+        //[self makeCopyOfLayers:YES];
     }
 }
 
@@ -2757,7 +2757,6 @@ int arrangeLayerIndex;
     
     NSLog(@"%@",textLabelLayersArray);
     NSLog(@"%@",self.cpyTextLabelLayersArray);
-
 
     for(CustomLabel *label in textLabelLayersArray){
         [self.cpyTextLabelLayersArray addObject:[NSKeyedUnarchiver unarchiveObjectWithData:[NSKeyedArchiver archivedDataWithRootObject:label]]];
