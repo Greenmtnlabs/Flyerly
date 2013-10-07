@@ -1228,7 +1228,7 @@ int arrangeLayerIndex;
  * When any layer is selected while editing flyer
  */
 -(void)selectLayer:(id)sender {
-    
+    /*
 	UIButton *view = sender;
     UIView *superView = [view superview];
     [self SetMenu];
@@ -1252,7 +1252,8 @@ int arrangeLayerIndex;
     [l setMasksToBounds:YES];
     [l setCornerRadius:10];
     [l setBorderWidth:3.0];
-    [l setBorderColor:[[UIColor blueColor] CGColor]];
+    UIColor * c = [globle colorWithHexString:@"0197dd"];
+    [l setBorderColor:c.CGColor];
 
     NSString *tag = [NSString stringWithFormat:@"%d",view.tag];
     
@@ -1329,6 +1330,7 @@ int arrangeLayerIndex;
     undoCount = undoCount + 1;
     [rightUndoBarButton setEnabled:YES];
     [self makeCopyOfLayers];
+     */
 }
 
 /*
@@ -2182,7 +2184,113 @@ int arrangeLayerIndex;
 
 
 -(void) chooseEdit{
-    [self resetLayerScrollView];
+    //[self resetLayerScrollView];
+    // Remove border from layer thumbnail
+    for(UIView *subView in [layerScrollView subviews]){
+        if([subView isKindOfClass:[UIButton class]]){
+            CALayer * lastLayer = [subView layer];
+            [lastLayer setMasksToBounds:YES];
+            [lastLayer setCornerRadius:0];
+            [lastLayer setBorderWidth:0];
+            [lastLayer setBorderColor:[[UIColor clearColor] CGColor]];
+            [lastLayer setBackgroundColor:[[UIColor clearColor] CGColor]];
+        }
+    }
+
+    UIView *sView = editButtonGlobal.superview;
+    
+    FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
+	appDele.changesFlag = YES;
+    
+    // Add border to selected layer thumbnail
+    CALayer * l = [sView layer];
+    [l setMasksToBounds:YES];
+    [l setCornerRadius:10];
+    [l setBorderWidth:3.0];
+    UIColor * c = [globle colorWithHexString:@"0197dd"];
+    [l setBorderColor:c.CGColor];
+     NSString *tag = [NSString stringWithFormat:@"%d",sView.tag];
+    NSLog(@"%@",tag);
+    
+    
+    if([tag hasPrefix:@"111"]){
+        symbolTouchFlag = NO;
+        iconTouchFlag = NO;
+        photoTouchFlag = NO;
+        lableTouchFlag = YES;
+        
+        arrangeLayerIndex = [self getIndexFromTag:tag];
+        
+        [self removeBordersFromAllLayers];
+        UILabel *tempLabel = [textLabelLayersArray objectAtIndex:arrangeLayerIndex];
+        CALayer * l = [tempLabel layer];
+        [l setMasksToBounds:YES];
+        [l setCornerRadius:10];
+        [l setBorderWidth:1.0];
+        [l setBorderColor:[[UIColor grayColor] CGColor]];
+        [self.imgView bringSubviewToFront:[[self textLabelLayersArray] objectAtIndex:arrangeLayerIndex]];
+        
+    }else if([tag hasPrefix:@"222"]){
+        symbolTouchFlag = NO;
+        iconTouchFlag = NO;
+        photoTouchFlag = YES;
+        lableTouchFlag = NO;
+        
+        arrangeLayerIndex = [self getIndexFromTag:tag];
+        
+        [self removeBordersFromAllLayers];
+        UIImageView *tempImgView = [photoLayersArray objectAtIndex:arrangeLayerIndex];
+        CALayer * l = [tempImgView layer];
+        [l setMasksToBounds:YES];
+        [l setCornerRadius:10];
+        [l setBorderWidth:1.0];
+        [l setBorderColor:[[UIColor grayColor] CGColor]];
+        [self.imgView bringSubviewToFront:[[self photoLayersArray] objectAtIndex:arrangeLayerIndex]];
+        
+    } else if([tag hasPrefix:@"333"]){
+        symbolTouchFlag = YES;
+        iconTouchFlag = NO;
+        photoTouchFlag = NO;
+        lableTouchFlag = NO;
+        
+        arrangeLayerIndex = [self getIndexFromTag:tag];
+        
+        [self removeBordersFromAllLayers];
+        UIImageView *tempImgView = [symbolLayersArray objectAtIndex:arrangeLayerIndex];
+        CALayer * l = [tempImgView layer];
+        [l setMasksToBounds:YES];
+        [l setCornerRadius:10];
+        [l setBorderWidth:1.0];
+        [l setBorderColor:[[UIColor grayColor] CGColor]];
+        [self.imgView bringSubviewToFront:[[self symbolLayersArray] objectAtIndex:arrangeLayerIndex]];
+        
+    } else if([tag hasPrefix:@"444"]){
+        symbolTouchFlag = NO;
+        iconTouchFlag = YES;
+        photoTouchFlag = NO;
+        lableTouchFlag = NO;
+        
+        arrangeLayerIndex = [self getIndexFromTag:tag];
+        
+        [self removeBordersFromAllLayers];
+        UIImageView *tempImgView = [iconLayersArray objectAtIndex:arrangeLayerIndex];
+        CALayer * l = [tempImgView layer];
+        [l setMasksToBounds:YES];
+        [l setCornerRadius:10];
+        [l setBorderWidth:1.0];
+        [l setBorderColor:[[UIColor grayColor] CGColor]];
+        [self.imgView bringSubviewToFront:[[self iconLayersArray] objectAtIndex:arrangeLayerIndex]];
+    }
+    
+    deleteMode = YES;
+    undoCount = undoCount + 1;
+    [rightUndoBarButton setEnabled:YES];
+    [self makeCopyOfLayers];
+    
+    
+    
+    
+    
     UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-65, -6, 50, 50)] autorelease];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:TITLE_FONT size:18];
@@ -2506,14 +2614,18 @@ int arrangeLayerIndex;
         
         [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
     } else {
-        UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 47, 25)];
+        UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 33)];
  //       doneButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
 //        [doneButton setTitle:@"Done" forState:UIControlStateNormal];
         [doneButton addTarget:self action:@selector(callAddMoreLayers) forControlEvents:UIControlEventTouchUpInside];
         [doneButton addTarget:self action:@selector(logLayerAddedEvent) forControlEvents:UIControlEventTouchUpInside];
         [doneButton addTarget:self action:@selector(logTextAddedEvent) forControlEvents:UIControlEventTouchUpInside];
-        [doneButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
+        //[doneButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
          doneButton.showsTouchWhenHighlighted = YES;
+        [doneButton setTitle:@"Done" forState:UIControlStateNormal];
+        [doneButton setBackgroundColor:[UIColor clearColor ]];
+        [doneButton setFont:[UIFont fontWithName:TITLE_FONT size:16]];
+        [doneButton setTitleColor:[globle colorWithHexString:@"84c441"]forState:UIControlStateNormal];
         UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
         [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
     } 
@@ -2601,6 +2713,10 @@ int arrangeLayerIndex;
 
 -(void)choosePhoto
 {
+    if(layerEditMessage!=nil){
+        [layerEditMessage removeFromSuperview];
+        layerEditMessage = nil;
+    }
     //self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Add photo" rect:CGRectMake(-45, -6, 50, 50)];
     UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-45, -6, 50, 50)] autorelease];
     label.backgroundColor = [UIColor clearColor];
@@ -2621,13 +2737,17 @@ int arrangeLayerIndex;
         UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
         [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
     } else {
-        UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 47, 29)];
+        UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 33)];
         //doneButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
         //[doneButton setTitle:@"Done" forState:UIControlStateNormal];
         [doneButton addTarget:self action:@selector(callAddMoreLayers) forControlEvents:UIControlEventTouchUpInside];
         [doneButton addTarget:self action:@selector(logLayerAddedEvent) forControlEvents:UIControlEventTouchUpInside];
         [doneButton addTarget:self action:@selector(logPhotoAddedEvent) forControlEvents:UIControlEventTouchUpInside];
-        [doneButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
+        //[doneButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
+        [doneButton setTitle:@"Done" forState:UIControlStateNormal];
+        [doneButton setBackgroundColor:[UIColor clearColor ]];
+        [doneButton setFont:[UIFont fontWithName:TITLE_FONT size:16]];
+        [doneButton setTitleColor:[globle colorWithHexString:@"84c441"]forState:UIControlStateNormal];
         doneButton.showsTouchWhenHighlighted = YES;
         UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
         [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
@@ -3630,11 +3750,12 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
                 [crossButton setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
                 [crossButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
                 
-                UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(30, 0, 30, 50)];
+                UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(layerButton.frame.origin.x, 0, 30, 50)];
                 [editButton setImage:pencilImage forState:UIControlStateNormal];
                 [editButton addTarget:self action:@selector(editLayer:) forControlEvents:UIControlEventTouchUpInside];
                 [editButton setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
                 [editButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
+                 editButton.showsTouchWhenHighlighted = YES;
 
                 // If delete mode is enabled then show cross button an wobble
                 if(deleteMode){
@@ -3686,12 +3807,12 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
                 [crossButton setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
                 [crossButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
 
-                UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(30, 0, 30, 50)];
+                UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(layerButton.frame.origin.x, 0, layerButton.frame.size.width, 50)];
                 [editButton setImage:pencilImage forState:UIControlStateNormal];
                 [editButton addTarget:self action:@selector(editLayer:) forControlEvents:UIControlEventTouchUpInside];
                 [editButton setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
                 [editButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
-                
+                 editButton.showsTouchWhenHighlighted = YES;
                 // If delete mode is enabled then show cross button an wobble
                 if(deleteMode){
                     //[crossButton setHidden:NO];
@@ -3740,12 +3861,12 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
                 [crossButton setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
                 [crossButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
                 
-                UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(30, 0, 30, 50)];
+                UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(layerButton.frame.origin.x, 0, layerButton.frame.size.width, 50)];
                 [editButton setImage:pencilImage forState:UIControlStateNormal];
                 [editButton addTarget:self action:@selector(editLayer:) forControlEvents:UIControlEventTouchUpInside];
                 [editButton setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
                 [editButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
-                
+                 editButton.showsTouchWhenHighlighted = YES;
                 // If delete mode is enabled then show cross button an wobble
                 if(deleteMode){
                     //[crossButton setHidden:NO];
@@ -3795,12 +3916,12 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
                 [crossButton setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
                 [crossButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
                 
-                UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(30, 0, 30, 50)];
+                UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(layerButton.frame.origin.x, 0, layerButton.frame.size.width, 50)];
                 [editButton setImage:pencilImage forState:UIControlStateNormal];
                 [editButton addTarget:self action:@selector(editLayer:) forControlEvents:UIControlEventTouchUpInside];
                 [editButton setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
                 [editButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
-
+                 editButton.showsTouchWhenHighlighted = YES;
                 
                 // If delete mode is enabled then show cross button an wobble
                 if(deleteMode){
@@ -3865,14 +3986,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 }
 
 -(void) MyEdit{
-    UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 47, 25)];
-    [doneButton addTarget:self action:@selector(callAddMoreLayers) forControlEvents:UIControlEventTouchUpInside];
-    [doneButton addTarget:self action:@selector(logLayerAddedEvent) forControlEvents:UIControlEventTouchUpInside];
-    [doneButton addTarget:self action:@selector(logTextAddedEvent) forControlEvents:UIControlEventTouchUpInside];
-    [doneButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
-    doneButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
-    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
+    
     UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)];
     [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
@@ -3997,6 +4111,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 }
 
 -(void)MyDelete{
+    /*
     UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)];
     [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
@@ -4011,7 +4126,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     UIBarButtonItem *leftBarHelpButton = [[UIBarButtonItem alloc] initWithCustomView:helpButton];
     
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarMenuButton,leftBarHelpButton,nil]];
-    [self callAddMoreLayers];
+    [self callAddMoreLayers];*/
     deleteAlert = [[UIAlertView alloc]initWithTitle:@"Warning" message:@"Delete this layer?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK" ,nil];
     [deleteAlert show];
     
@@ -4138,6 +4253,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         
         // Update layer scroll view
         [self resetLayerScrollView];
+        [self SetMenu];
     }
 }
 
