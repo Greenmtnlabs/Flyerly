@@ -58,7 +58,6 @@
 		0DFA8B3710AD851300F779CA /* GTMSenTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DFA8B3310AD851300F779CA /* GTMSenTestCase.m */; };
 		0DFA8B3810AD851300F779CA /* ImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DFA8B3510AD851300F779CA /* ImageCache.m */; };
 		0DFC52C810956F3D00B18478 /* homeScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DFC52C610956F3D00B18478 /* homeScreen.png */; };
-		0DFC52C910956F3D00B18478 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DFC52C710956F3D00B18478 /* icon.png */; };
 		0DFC531E109576AB00B18478 /* LauchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DFC5317109576AB00B18478 /* LauchViewController.xib */; };
 		0DFC531F109576AB00B18478 /* LoginController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DFC5318109576AB00B18478 /* LoginController.xib */; };
 		0DFC5320109576AB00B18478 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DFC5319109576AB00B18478 /* MainWindow.xib */; };
@@ -1458,7 +1457,6 @@
 		0DFA8B3410AD851300F779CA /* ImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCache.h; sourceTree = "<group>"; };
 		0DFA8B3510AD851300F779CA /* ImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCache.m; sourceTree = "<group>"; };
 		0DFC52C610956F3D00B18478 /* homeScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = homeScreen.png; sourceTree = "<group>"; };
-		0DFC52C710956F3D00B18478 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		0DFC5317109576AB00B18478 /* LauchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = LauchViewController.xib; path = Classes/LauchViewController.xib; sourceTree = "<group>"; };
 		0DFC5318109576AB00B18478 /* LoginController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = LoginController.xib; path = Classes/LoginController.xib; sourceTree = "<group>"; };
 		0DFC5319109576AB00B18478 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MainWindow.xib; path = Classes/MainWindow.xib; sourceTree = "<group>"; };
@@ -3553,7 +3551,6 @@
 				2069527217FAF70200AF647C /* help_img.png */,
 				2069527317FAF70200AF647C /* help_img@2x.png */,
 				0DFC52C610956F3D00B18478 /* homeScreen.png */,
-				0DFC52C710956F3D00B18478 /* icon.png */,
 				6560C1C617280F6E005BE8DD /* icon_bg.png */,
 				6560C1C717280F6E005BE8DD /* icon_bg@2x.png */,
 				0F8007341753415D000FF7FA /* icon_button.png */,
@@ -5093,7 +5090,6 @@
 				0D4904F9109199F900855C30 /* cellindicator.png in Resources */,
 				E8A7347E1092CFF300661AAD /* DraftViewController.xib in Resources */,
 				0DFC52C810956F3D00B18478 /* homeScreen.png in Resources */,
-				0DFC52C910956F3D00B18478 /* icon.png in Resources */,
 				0DFC531E109576AB00B18478 /* LauchViewController.xib in Resources */,
 				0DFC531F109576AB00B18478 /* LoginController.xib in Resources */,
 				0DFC5320109576AB00B18478 /* MainWindow.xib in Resources */,
