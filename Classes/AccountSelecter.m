@@ -76,13 +76,13 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
         if([self Uservalidate]){
             PFUser *user = [PFUser currentUser];
             NSString *usr = user.username;
-            if(![usr isEqualToString:username.text]){
+            if(![usr isEqualToString:[username.text lowercaseString]]){
                 PFQuery *query = [PFUser query];
-                [query whereKey:@"username" equalTo:username.text];
+                [query whereKey:@"username" equalTo:[username.text lowercaseString]];
                 [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
                     if (error) {
                         PFUser *user = [PFUser currentUser];
-                        [user setObject:username.text forKey:@"username"];
+                        [user setObject:[username.text lowercaseString] forKey:@"username"];
                         [user setObject:phno.text forKey:@"contact"];
                         [user setObject:name.text forKey:@"name"];
                         [user setObject:email.text forKey:@"email"];
@@ -94,7 +94,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
                 }];
             }else{
                 PFUser *user = [PFUser currentUser];
-                [user setObject:username.text forKey:@"username"];
+                [user setObject:[username.text lowercaseString] forKey:@"username"];
                 [user setObject:phno.text forKey:@"contact"];
                 [user setObject:name.text forKey:@"name"];
                 [user setObject:email.text forKey:@"email"];
@@ -157,9 +157,9 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 -(IBAction)userExist{
     PFUser *user = [PFUser currentUser];
     NSString *usr = user.username;
-    if(username.text != nil && ![usr isEqualToString:username.text]){
+    if(username.text != nil && ![usr isEqualToString:[username.text lowercaseString]]){
         PFQuery *query = [PFUser query];
-        [query whereKey:@"username" equalTo:username.text];
+        [query whereKey:@"username" equalTo:[username.text lowercaseString]];
         [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
             if (error) {
                 [usrExist setHidden:NO];

@@ -229,7 +229,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     [self addFontsInSubView];
 	
     // Create color array
-	colorArray = 	[[NSArray  alloc] initWithObjects: [UIColor redColor], [UIColor blueColor], [UIColor greenColor], [UIColor blackColor], [UIColor colorWithRed:253.0/255.0 green:191.0/255.0 blue:38.0/224.0 alpha:1], [UIColor whiteColor], [UIColor grayColor], [UIColor magentaColor], [UIColor yellowColor], [UIColor colorWithRed:163.0/255.0 green:25.0/255.0 blue:2.0/224.0 alpha:1], [UIColor colorWithRed:3.0/255.0 green:15.0/255.0 blue:41.0/224.0 alpha:1], [UIColor purpleColor], [UIColor colorWithRed:85.0/255.0 green:86.0/255.0 blue:12.0/224.0 alpha:1], [UIColor orangeColor], [UIColor colorWithRed:98.0/255.0 green:74.0/255.0 blue:9.0/224.0 alpha:1], [UIColor colorWithRed:80.0/255.0 green:7.0/255.0 blue:1.0/224.0 alpha:1], [UIColor colorWithRed:150.0/255.0 green:150.0/255.0 blue:97.0/224.0 alpha:1], [UIColor colorWithRed:111.0/255.0 green:168.0/255.0 blue:100.0/224.0 alpha:1], [UIColor cyanColor], [UIColor colorWithRed:17.0/255.0 green:69.0/255.0 blue:70.0/224.0 alpha:1], [UIColor colorWithRed:173.0/255.0 green:127.0/255.0 blue:251.0/224.0 alpha:1], nil];
+	colorArray = 	[[NSArray  alloc] initWithObjects: [UIColor redColor], [UIColor blueColor], [UIColor greenColor], [UIColor blackColor], [UIColor colorWithRed:253.0/255.0 green:191.0/255.0 blue:38.0/224.0 alpha:1], [UIColor colorWithWhite:1.0f alpha:1.0f], [UIColor grayColor], [UIColor magentaColor], [UIColor yellowColor], [UIColor colorWithRed:163.0/255.0 green:25.0/255.0 blue:2.0/224.0 alpha:1], [UIColor colorWithRed:3.0/255.0 green:15.0/255.0 blue:41.0/224.0 alpha:1], [UIColor purpleColor], [UIColor colorWithRed:85.0/255.0 green:86.0/255.0 blue:12.0/224.0 alpha:1], [UIColor orangeColor], [UIColor colorWithRed:98.0/255.0 green:74.0/255.0 blue:9.0/224.0 alpha:1], [UIColor colorWithRed:80.0/255.0 green:7.0/255.0 blue:1.0/224.0 alpha:1], [UIColor colorWithRed:150.0/255.0 green:150.0/255.0 blue:97.0/224.0 alpha:1], [UIColor colorWithRed:111.0/255.0 green:168.0/255.0 blue:100.0/224.0 alpha:1], [UIColor cyanColor], [UIColor colorWithRed:17.0/255.0 green:69.0/255.0 blue:70.0/224.0 alpha:1], [UIColor colorWithRed:173.0/255.0 green:127.0/255.0 blue:251.0/224.0 alpha:1], nil];
 	
     // Add colors in scroll view
     [self addColorsInSubView];
@@ -1350,8 +1350,8 @@ int arrangeLayerIndex;
 			selectedFont = [selectedFont fontWithSize:selectedSize];
 			msgTextView.font = selectedFont;
             ((CustomLabel*)[[self textLabelLayersArray]  objectAtIndex:arrangeLayerIndex]).font =selectedFont;
-           // ((CustomLabel*)[[self textLabelLayersArray]  objectAtIndex:arrangeLayerIndex]).numberOfLines = 0;
-           // ((CustomLabel*)[[self textLabelLayersArray]  objectAtIndex:arrangeLayerIndex]).lineBreakMode = UILineBreakModeCharacterWrap;
+            ((CustomLabel*)[[self textLabelLayersArray]  objectAtIndex:arrangeLayerIndex]).numberOfLines = 0;
+            ((CustomLabel*)[[self textLabelLayersArray]  objectAtIndex:arrangeLayerIndex]).lineBreakMode = UILineBreakModeCharacterWrap;
                 /*
             [ ((CustomLabel*)[[self textLabelLayersArray]  objectAtIndex:arrangeLayerIndex]) setFrame:CGRectMake(((CustomLabel*)[[self textLabelLayersArray]  objectAtIndex:arrangeLayerIndex]).frame.origin.x, ((CustomLabel*)[[self textLabelLayersArray]  objectAtIndex:arrangeLayerIndex]).frame.origin.y, ((CustomLabel*)[[self textLabelLayersArray]  objectAtIndex:arrangeLayerIndex]).frame.size.width +selectedSize, ((CustomLabel*)[[self textLabelLayersArray]  objectAtIndex:arrangeLayerIndex]).frame.size.height)];*/
 		}
@@ -4557,6 +4557,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
             newMsgLabel.backgroundColor = [UIColor clearColor];
             newMsgLabel.textColor = [UIColor blackColor];
+            newMsgLabel.borderColor = [UIColor clearColor];
             newMsgLabel.textAlignment = UITextAlignmentCenter;
             //newMsgLabel.tag = textLayerCount++;
             [self.imgView addSubview:newMsgLabel];
@@ -5098,18 +5099,29 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     // Get and Save label information
     for(CustomLabel *labelToStore in [self textLabelLayersArray]){
         
-        CGFloat red = 0.0, green = 0.0, blue = 0.0, alpha =0.0;
+        CGFloat red = 0.0, green = 0.0, blue = 0.0, alpha = 0.0,wht = 0.0;
+
         [labelToStore.textColor getRed:&red green:&green blue:&blue alpha:&alpha];
-        
-        CGFloat borderRed = 0.0, borderGreen = 0.0, borderBlue = 0.0, borderAlpha =0.0;
-        UIColor* borderColor = [UIColor colorWithCGColor:labelToStore.layer.borderColor];
+        if (red == 0 && green == 0 && blue ==0) {
+            [labelToStore.textColor getWhite:&wht alpha:&alpha];
+        }
+
+        CGFloat borderRed = 0.0, borderGreen = 0.0, borderBlue = 0.0, borderAlpha = 0.0,bwht = 0.0;
+        UIColor* borderColor;
+        borderColor = labelToStore.borderColor;
         [borderColor getRed:&borderRed green:&borderGreen blue:&borderBlue alpha:&borderAlpha];
+        
+        if (borderRed == 0 && borderGreen == 0 && borderBlue ==0) {
+            [labelToStore.borderColor getWhite:&bwht alpha:&borderAlpha];
+        }
         
         NSMutableDictionary *textDetailDictionary = [[NSMutableDictionary alloc] init];
         [textDetailDictionary setObject:labelToStore.text forKey:@"text"];
         [textDetailDictionary setObject:labelToStore.font.fontName forKey:@"fontname"];
         [textDetailDictionary setObject:[NSString stringWithFormat:@"%f", labelToStore.font.pointSize] forKey:@"fontsize"];
         [textDetailDictionary setObject:[NSString stringWithFormat:@"%f, %f, %f", red, green, blue] forKey:@"textcolor"];
+        [textDetailDictionary setObject:[NSString stringWithFormat:@"%f, %f", wht, alpha] forKey:@"textWhitecolor"];
+        [textDetailDictionary setObject:[NSString stringWithFormat:@"%f, %f", bwht, borderAlpha] forKey:@"textborderWhite"];
         [textDetailDictionary setObject:[NSString stringWithFormat:@"%f, %f, %f", borderRed, borderGreen, borderBlue] forKey:@"textbordercolor"];
         [textDetailDictionary setObject:[NSString stringWithFormat:@"%f", labelToStore.frame.origin.x] forKey:@"x"];
         [textDetailDictionary setObject:[NSString stringWithFormat:@"%f", labelToStore.frame.origin.y] forKey:@"y"];

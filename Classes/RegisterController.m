@@ -170,10 +170,14 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarButton,nil]];
 
     
-    UIButton *signUpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)];
+    UIButton *signUpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 33)];
     [signUpButton addTarget:self action:@selector(onSignUp) forControlEvents:UIControlEventTouchUpInside];
-    [signUpButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
+    //[signUpButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
     signUpButton.showsTouchWhenHighlighted = YES;
+    [signUpButton setTitle:@"Done" forState:UIControlStateNormal];
+    [signUpButton setBackgroundColor:[UIColor clearColor ]];
+    [signUpButton setFont:[UIFont fontWithName:TITLE_FONT size:16]];
+    [signUpButton setTitleColor:[globle colorWithHexString:@"84c441"]forState:UIControlStateNormal];
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:signUpButton];
     
     [self.navigationItem setRightBarButtonItem:rightBarButton];
@@ -281,7 +285,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 -(BOOL)CheckUserExists :(NSString *)userName password:(NSString *)pwd{
     NSError *loginError = nil;
 
-    [PFUser logInWithUsername:userName password:pwd error:&loginError];
+    [PFUser logInWithUsername:[userName lowercaseString] password:pwd error:&loginError];
     if(loginError){
         return NO;
     }else{
@@ -443,7 +447,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     
     // username and password
     PFUser *user = [PFUser user];
-    user.username = userName;
+    user.username = [userName lowercaseString];
     user.password = pwd;
     user.email = email.text;
     [user setObject:name.text forKey:@"name"];
@@ -745,7 +749,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 -(IBAction)userExist{
     if(username.text != nil){
         PFQuery *query = [PFUser query];
-        [query whereKey:@"username" equalTo:username.text];
+        [query whereKey:@"username" equalTo:[username.text lowercaseString]];
         [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
             if (error) {
                 [usrExist setHidden:NO];

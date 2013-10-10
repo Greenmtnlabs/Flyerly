@@ -87,11 +87,14 @@
         if([key hasPrefix:@"Text-"]){
             
             NSDictionary *textDict = [dict objectForKey:key];
+            NSLog(@"%@",textDict);
             NSString *text = [textDict objectForKey:@"text"];
             NSString *fontname = [textDict objectForKey:@"fontname"];
             NSString *fontsize = [textDict objectForKey:@"fontsize"];
             NSString *textcolor = [textDict objectForKey:@"textcolor"];
+            NSString *textwhitecolor = [textDict objectForKey:@"textWhitecolor"];
             NSString *textbordercolor = [textDict objectForKey:@"textbordercolor"];
+            NSString *textborderwhite = [textDict objectForKey:@"textborderWhite"];
             NSString *textX = [textDict objectForKey:@"x"];
             NSString *textY = [textDict objectForKey:@"y"];
             NSString *textWidth = [textDict objectForKey:@"width"];
@@ -104,14 +107,31 @@
             newMsgLabel.textAlignment = UITextAlignmentCenter;
             newMsgLabel.numberOfLines = 10;
             
-            NSArray *rgb = [textcolor componentsSeparatedByString:@","];
-            newMsgLabel.textColor = [UIColor colorWithRed:[[rgb objectAtIndex:0] floatValue] green:[[rgb objectAtIndex:1] floatValue] blue:[[rgb objectAtIndex:2] floatValue] alpha:1];
-            
+            if ([textcolor isEqualToString:@"0.000000, 0.000000, 0.000000"]) {
+                if (textwhitecolor != nil) {
+                    NSArray *rgb = [textwhitecolor componentsSeparatedByString:@","];
+                    newMsgLabel.textColor = [UIColor colorWithWhite:[[rgb objectAtIndex:0] floatValue] alpha:[[rgb objectAtIndex:1] floatValue]];
+                }
+            }else{
+                NSArray *rgb = [textcolor componentsSeparatedByString:@","];
+                
+                newMsgLabel.textColor = [UIColor colorWithRed:[[rgb objectAtIndex:0] floatValue] green:[[rgb objectAtIndex:1] floatValue] blue:[[rgb objectAtIndex:2] floatValue] alpha:1];
+
+            }
+ 
+            if ([textbordercolor isEqualToString:@"0.000000, 0.000000, 0.000000"]) {
+                if (textborderwhite != nil) {
+                    NSArray *rgbBorder = [textborderwhite componentsSeparatedByString:@","];
+                    newMsgLabel.borderColor = [UIColor colorWithWhite:[[rgbBorder objectAtIndex:0] floatValue] alpha:[[rgbBorder objectAtIndex:1] floatValue]];
+
+                }
+            }else{
+                
             NSArray *rgbBorder = [textbordercolor componentsSeparatedByString:@","];
             newMsgLabel.borderColor = [UIColor colorWithRed:[[rgbBorder objectAtIndex:0] floatValue] green:[[rgbBorder objectAtIndex:1] floatValue] blue:[[rgbBorder objectAtIndex:2] floatValue] alpha:1];
+            }
             newMsgLabel.lineWidth = 2;
             [newMsgLabel drawRect:CGRectMake(newMsgLabel.frame.origin.x, newMsgLabel.frame.origin.y, newMsgLabel.frame.size.width, newMsgLabel.frame.size.height)];
-            
             [textArray addObject:newMsgLabel];
         }
     }

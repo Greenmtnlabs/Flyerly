@@ -126,9 +126,10 @@
 }
 
 -(void)signIn:(BOOL)validated username:(NSString *)userName password:(NSString *)pwd{
-    NSError *loginError = nil;
     NSLog(@"User %@",userName);
-    NSLog(@"password %@",pwd);
+    //NSLog(@"password %@",pwd);
+    NSError *loginError = nil;
+    userName = [userName lowercaseString];
 /*
     PFQuery *query = [PFUser query];
     [query whereKey:@"username" equalTo:userName];
@@ -147,7 +148,7 @@
         }}];
 */
     
-    [PFUser logInWithUsername:userName password:pwd error:&loginError];
+    [PFUser logInWithUsername:[userName lowercaseString] password:pwd error:&loginError];
    
     if(loginError){
         warningAlert = [[UIAlertView  alloc]initWithTitle:@"Invalid username or password" message:@"" delegate:self cancelButtonTitle:@"Register" otherButtonTitles:@"Try Again",nil];
@@ -156,8 +157,8 @@
         
     }else{
         
-        NSLog(@"Email: %@", userName);
-        NSLog(@"Path: %@", [AccountController getPathFromEmail:userName]);
+       // NSLog(@"Email: %@", userName);
+        //NSLog(@"Path: %@", [AccountController getPathFromEmail:userName]);
         FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
         appDelegate.loginId = [AccountController getPathFromEmail:userName];
         //usr = [[NSUserDefaults standardUserDefaults] stringForKey:@"User"];
@@ -544,6 +545,7 @@
        
         //[self performSelectorOnMainThread:@selector(pushViewController:) withObject:launchController waitUntilDone:YES];        
     }
+    [self hideLoadingIndicator];
     [warningAlert release];
 }
 

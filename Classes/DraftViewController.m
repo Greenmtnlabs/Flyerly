@@ -58,13 +58,6 @@ static ShareProgressView *clipBdPogressView;
 
 
 -(IBAction)goback{
-    __block UIBackgroundTaskIdentifier backgroundTaskIdentifier = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
-        
-        NSLog(@"Background Time:%f",[[UIApplication sharedApplication] backgroundTimeRemaining]);
-        
-        [self endBackgroundTask:backgroundTaskIdentifier];
-        backgroundTaskIdentifier = backgroundTaskIdentifier;
-    }];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -289,9 +282,12 @@ static ShareProgressView *clipBdPogressView;
     UIBarButtonItem *rightEditBarButton = [[UIBarButtonItem alloc] initWithCustomView:editButton];
     
     // Setup flyer share button
-    UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 33)];
+    UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 55, 33)];
     [shareButton addTarget:self action:@selector(share) forControlEvents:UIControlEventTouchUpInside];
-    [shareButton setBackgroundImage:[UIImage imageNamed:@"share"] forState:UIControlStateNormal];
+    [shareButton setBackgroundImage:[UIImage imageNamed:@"crop_button"] forState:UIControlStateNormal];
+    [shareButton setTitle:@"Share" forState:UIControlStateNormal];
+    [shareButton setFont:[UIFont fontWithName:TITLE_FONT size:14]];
+    [shareButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     shareButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *rightShareButton = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
     [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightShareButton,rightEditBarButton,nil]];
@@ -438,7 +434,7 @@ static ShareProgressView *clipBdPogressView;
     UIView *modalView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [modalView setBackgroundColor:[MyCustomCell colorWithHexString:@"161616"]];
     modalView.alpha = 0.75;
-    self.navigationController.navigationBar.alpha = 0.35;
+    self.navigationController.navigationBar.alpha = 0;
     
     // Create overlay controller
     FlyerOverlayController *overlayController = [[FlyerOverlayController alloc]initWithNibName:@"FlyerOverlayController" bundle:nil image:flyerImage modalView:modalView];
@@ -569,22 +565,6 @@ static ShareProgressView *clipBdPogressView;
                 // Set 0 sharing netwroks
                 //countOfSharingNetworks = 0;
                 
-                if ([emailButton isSelected] && [smsButton isSelected]) {
-                    [Flurry logEvent:@"Shared Email & SMS"];
-                    [self showemailProgressRow ];
-                    [self showsmsProgressRow];
-                    [self shareOnMMS];
-                }else{
-                    if ([emailButton isSelected]) {
-                        [Flurry logEvent:@"Shared Email"];
-                        [self showemailProgressRow ];
-                        [self shareOnEmail];
-                    }else if ([smsButton isSelected]) {
-                        [Flurry logEvent:@"Shared SMS"];
-                        [self showsmsProgressRow];
-                        [self SingleshareOnMMS];
-                    }
-                }
                 
                 if([twitterButton isSelected]){
                     [self showTwitterProgressRow];
@@ -624,6 +604,22 @@ static ShareProgressView *clipBdPogressView;
                     [self onclipcordClick];
                 }
                 
+                if ([emailButton isSelected] && [smsButton isSelected]) {
+                    [Flurry logEvent:@"Shared Email & SMS"];
+                    [self showemailProgressRow ];
+                    [self showsmsProgressRow];
+                    [self shareOnMMS];
+                }else{
+                    if ([emailButton isSelected]) {
+                        [Flurry logEvent:@"Shared Email"];
+                        [self showemailProgressRow ];
+                        [self shareOnEmail];
+                    }else if ([smsButton isSelected]) {
+                        [Flurry logEvent:@"Shared SMS"];
+                        [self showsmsProgressRow];
+                        [self SingleshareOnMMS];
+                    }
+                }
 
 /*
                 if([instagramButton isSelected] && ( ![tumblrButton isSelected] && ![flickrButton isSelected] && ![smsButton isSelected])  && ![emailButton isSelected]){
