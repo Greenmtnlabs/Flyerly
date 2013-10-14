@@ -136,11 +136,7 @@
 -(IBAction)onClickClipboardButton;
 -(IBAction)searchNearByLocations;
 
-
 - (BOOL)uploadImageStream:(NSInputStream *)inImageStream suggestedFilename:(NSString *)inFilename MIMEType:(NSString *)inType arguments:(NSDictionary *)inArguments;
-
-
-
 
 -(IBAction)goback;
 -(void)share;

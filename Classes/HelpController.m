@@ -32,14 +32,6 @@
 	// Do any additional setup after loading the view.
     [scrollView setContentSize:CGSizeMake(320, 1600)];
 
-    
-    // Create right bar button
-    /*UIButton *crossButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
-    [crossButton setBackgroundImage:[UIImage imageNamed:@"cross"] forState:UIControlStateNormal];
-    [crossButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:crossButton];
-    [self.navigationItem setRightBarButtonItem:rightBarButton];*/
-
     // Create left bar button
      UIButton *closeButton = [[UIButton alloc] initWithFrame:CGRectMake(-60, -6, 50, 30)];
      closeButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:13];

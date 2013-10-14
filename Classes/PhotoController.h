@@ -16,7 +16,8 @@
 #import "Singleton.h"
 #import "ParentViewController.h"
 
-@class Singleton;
+
+@class Singleton,LauchViewController;
 @interface PhotoController :ParentViewController<UIActionSheetDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, EBPurchaseDelegate>
 {
     int layerallow;
@@ -233,6 +234,7 @@
 -(void) SetMenu;
 -(void) MyDelete;
 -(void) Mycancel;
+-(void)delaytime;
 -(void) choosePhoto;
 -(void) saveMyFlyer;
 -(void)callSaveAndShare;

@@ -145,7 +145,7 @@
 
 - (IBAction)onSelectImage:(UIButton *)sender {
     
-    UIGraphicsBeginImageContextWithOptions( scrollView.bounds.size, NO, [UIScreen mainScreen].scale);
+    UIGraphicsBeginImageContextWithOptions( scrollView.bounds.size, NO, [UIScreen mainScreen].scale );
     
     //this is the key
     CGPoint offset=scrollView.contentOffset;
@@ -175,7 +175,9 @@
     
     // Hide lines
     self.galleryTable.separatorColor = [UIColor clearColor];
-    
+    //NSLog(@"%f",image.size.width);
+    //NSLog(@"%f",imageView.frame.size.width);
+
     // Do any additional setup after loading the view from its nib.
     if ( image.size.width > imageView.frame.size.width ||
         image.size.height > imageView.frame.size.height ) {

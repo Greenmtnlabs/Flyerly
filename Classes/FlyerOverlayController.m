@@ -87,7 +87,7 @@
         if([key hasPrefix:@"Text-"]){
             
             NSDictionary *textDict = [dict objectForKey:key];
-            NSLog(@"%@",textDict);
+           // NSLog(@"%@",textDict);
             NSString *text = [textDict objectForKey:@"text"];
             NSString *fontname = [textDict objectForKey:@"fontname"];
             NSString *fontsize = [textDict objectForKey:@"fontsize"];
@@ -105,7 +105,10 @@
             newMsgLabel.font = [UIFont fontWithName:fontname size:[fontsize floatValue]];
             newMsgLabel.backgroundColor = [UIColor clearColor];
             newMsgLabel.textAlignment = UITextAlignmentCenter;
-            newMsgLabel.numberOfLines = 10;
+            newMsgLabel.adjustsFontSizeToFitWidth = YES;
+            newMsgLabel.lineBreakMode = UILineBreakModeClip;
+
+           newMsgLabel.numberOfLines = 80;
             
             if ([textcolor isEqualToString:@"0.000000, 0.000000, 0.000000"]) {
                 if (textwhitecolor != nil) {

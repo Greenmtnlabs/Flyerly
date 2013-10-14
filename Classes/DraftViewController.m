@@ -114,7 +114,7 @@ static ShareProgressView *clipBdPogressView;
         
     clipBdPogressView = nil;
 }
-    if([smsPogressView.statusText.text isEqualToString:@"Opening txt msg!"] || [smsPogressView.statusText.text isEqualToString:@"Text failed!"] || [smsPogressView.statusText.text isEqualToString:@"Text sent!"])
+    if([smsPogressView.statusText.text isEqualToString:@"Uploading flyer"] || [smsPogressView.statusText.text isEqualToString:@"Text failed!"] || [smsPogressView.statusText.text isEqualToString:@"Text sent!"])
     {
         NSDictionary *itemDetails = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%d", smsPogressView.tag], @"tag", nil];
         [smsPogressView removeFromSuperview];
@@ -122,7 +122,7 @@ static ShareProgressView *clipBdPogressView;
 
         smsPogressView = nil;
     }
-    if([emailPogressView.statusText.text isEqualToString:@"Opening email!"] || [emailPogressView.statusText.text isEqualToString:@"Email failed!"] || [emailPogressView.statusText.text isEqualToString:@"Email sent!"])
+    if([emailPogressView.statusText.text isEqualToString:@"Uploading flyer"] || [emailPogressView.statusText.text isEqualToString:@"Email failed!"] || [emailPogressView.statusText.text isEqualToString:@"Email sent!"])
     {
         NSDictionary *itemDetails = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%d", emailPogressView.tag], @"tag", nil];
         [emailPogressView removeFromSuperview];
@@ -282,12 +282,13 @@ static ShareProgressView *clipBdPogressView;
     UIBarButtonItem *rightEditBarButton = [[UIBarButtonItem alloc] initWithCustomView:editButton];
     
     // Setup flyer share button
-    UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 55, 33)];
+    UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 33)];
     [shareButton addTarget:self action:@selector(share) forControlEvents:UIControlEventTouchUpInside];
-    [shareButton setBackgroundImage:[UIImage imageNamed:@"crop_button"] forState:UIControlStateNormal];
+    [shareButton setBackgroundImage:[UIImage imageNamed:@"signin_button"] forState:UIControlStateNormal];
     [shareButton setTitle:@"Share" forState:UIControlStateNormal];
-    [shareButton setFont:[UIFont fontWithName:TITLE_FONT size:14]];
+    [shareButton setFont:[UIFont fontWithName:TITLE_FONT size:13]];
     [shareButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    shareButton.titleLabel.textAlignment = UIControlContentHorizontalAlignmentCenter;
     shareButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *rightShareButton = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
     [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightShareButton,rightEditBarButton,nil]];
@@ -1038,6 +1039,15 @@ static ShareProgressView *clipBdPogressView;
  * Share on MMS
  */
 -(void)SingleshareOnMMS{
+    [smsPogressView.statusText setText:@"Uploading flyer"];
+    [smsPogressView.statusText setTextColor:[UIColor yellowColor]];
+    [smsPogressView.statusIcon setBackgroundImage:nil forState:UIControlStateNormal];
+    [smsPogressView.networkIcon setBackgroundImage:[UIImage imageNamed:@"status_icon_sms"] forState:UIControlStateNormal];
+    [smsPogressView.cancelIcon setHidden:YES];
+    [smsPogressView.cancelIcon setImage:[UIImage imageNamed:@"share_status_close"] forState:UIControlStateNormal];
+    [smsPogressView.statusIcon setBackgroundImage:nil forState:UIControlStateNormal];
+    [smsPogressView.refreshIcon setBackgroundImage:[UIImage imageNamed:@"retry_share"] forState:UIControlStateNormal];
+    [smsPogressView.refreshIcon setHidden:YES];
     NSData *imageData = UIImagePNGRepresentation(selectedFlyerImage);
     [self uploadImage:imageData isEmail:NO];
 }
@@ -1083,8 +1093,10 @@ static ShareProgressView *clipBdPogressView;
                     PFFile *theImage = [flyerObject objectForKey:@"image"];
                     
                     if(isEmail){
-                        [self shareOnEmail:[theImage url]];
+                        [emailPogressView.statusText setText:@"Opening email!"];
+                        [self shareOnEmail:[theImage url]];                                               
                     }else{
+                        [smsPogressView.statusText setText:@"Opening SMS!"];
                         [self shortenURL:[theImage url]];
                     }
                 }
@@ -1126,6 +1138,8 @@ static ShareProgressView *clipBdPogressView;
                     PFFile *theImage = [flyerObject objectForKey:@"image"];
                     [self shareOnEmail:[theImage url]];
                     globle.sharelink = [theImage url];
+                    [emailPogressView.statusText setText:@"Opening email!"];
+                    [smsPogressView.statusText setText:@"Opening SMS!"];
                 }
                 else{
                     // Log details of the failure
@@ -1145,7 +1159,17 @@ static ShareProgressView *clipBdPogressView;
 /*
  * Share on Email
  */
--(void)shareOnEmail{    
+-(void)shareOnEmail{
+    [emailPogressView.statusText setText:@"Uploading flyer"];
+    [emailPogressView.statusText setTextColor:[UIColor yellowColor]];
+    [emailPogressView.statusIcon setBackgroundImage:nil forState:UIControlStateNormal];
+    
+    [emailPogressView.networkIcon setBackgroundImage:[UIImage imageNamed:@"status_icon_email"] forState:UIControlStateNormal];
+    [emailPogressView.cancelIcon setHidden:YES];
+    [emailPogressView.cancelIcon setImage:[UIImage imageNamed:@"share_status_close"] forState:UIControlStateNormal];
+    [emailPogressView.statusIcon setBackgroundImage:nil forState:UIControlStateNormal];
+    [emailPogressView.refreshIcon setBackgroundImage:[UIImage imageNamed:@"retry_share"] forState:UIControlStateNormal];
+    [emailPogressView.refreshIcon setHidden:YES];
     NSData *imageData = UIImagePNGRepresentation(selectedFlyerImage);
     [self uploadImage:imageData isEmail:YES];
 }
@@ -1496,7 +1520,7 @@ static ShareProgressView *clipBdPogressView;
     [smsPogressView setFrame:CGRectMake(smsPogressView.frame.origin.x, 36 * countOfSharingNetworks++, smsPogressView.frame.size.width, smsPogressView.frame.size.height)];
     smsPogressView.tag = 7;
     
-    [smsPogressView.statusText setText:@"Opening txt msg!"];
+    [smsPogressView.statusText setText:@"Uploading flyer"];
     [smsPogressView.statusText setTextColor:[UIColor yellowColor]];
     [smsPogressView.statusIcon setBackgroundImage:nil forState:UIControlStateNormal];
     
@@ -1526,7 +1550,7 @@ static ShareProgressView *clipBdPogressView;
     [emailPogressView setFrame:CGRectMake(emailPogressView.frame.origin.x, 36 * countOfSharingNetworks++, emailPogressView.frame.size.width, emailPogressView.frame.size.height)];
     emailPogressView.tag = 6;
     
-    [emailPogressView.statusText setText:@"Opening email!"];
+    [emailPogressView.statusText setText:@"Uploading flyer"];
     [emailPogressView.statusText setTextColor:[UIColor yellowColor]];
     [emailPogressView.statusIcon setBackgroundImage:nil forState:UIControlStateNormal];
     

@@ -8,7 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
+#import "MyNavigationBar.h"
+#import "Singleton.h"
 
+
+@class Singleton;
 @interface HelpController : UIViewController<MFMailComposeViewControllerDelegate>{
 
     IBOutlet UIScrollView *scrollView;
@@ -18,6 +22,7 @@
     IBOutlet UIButton *emailButton;
     IBOutlet UIButton *linkFaceBook;
     IBOutlet UIButton *twitLink;
+    Singleton *globle;
 }
 
 @property(nonatomic,retain) IBOutlet UIScrollView *scrollView;

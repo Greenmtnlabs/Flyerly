@@ -65,15 +65,15 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 
 #pragma mark  View Appear Methods
 -(void)viewWillAppear:(BOOL)animated{
-	
-	[super viewWillAppear:YES];
-	self.navigationController.navigationBarHidden = NO;
-	imgPicker = [[UIImagePickerController alloc] init];
-	imgPicker.allowsEditing = NO;
-	imgPicker.delegate =self;
-	imgPicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-	navBar.alpha =ALPHA1;
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
+    [super viewWillAppear:YES];
+        self.navigationController.navigationBarHidden = NO;
+        imgPicker = [[UIImagePickerController alloc] init];
+        imgPicker.allowsEditing = NO;
+        imgPicker.delegate =self;
+        imgPicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        navBar.alpha =ALPHA1;
+        [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
+   
 }
 
 - (void) handleMemoryWarning:(NSNotification *)notification
@@ -83,6 +83,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 }
 
 -(void)viewDidAppear:(BOOL)animated{
+    //NSLog(@"%@",globle.CheckHelpOpen);
     layerallow = 0;
     // Setup buttons and labels
     [moreLayersButton setBackgroundImage:[UIImage imageNamed:@"07_addmore"] forState:UIControlStateNormal];
@@ -129,7 +130,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 	msgLabel.textAlignment = UITextAlignmentCenter;
 	[self.imgView addSubview:msgLabel];
     
-	msgTextView = [[UITextView alloc]initWithFrame:CGRectMake(20, 50, 280, 150)];
+	msgTextView = [[UITextView alloc]initWithFrame:CGRectMake(20, 50, 280, 250)];
 	msgTextView.delegate = self;
 	msgTextView.font = [UIFont fontWithName:@"Arial" size:16];
 	msgTextView.textColor = [UIColor blackColor];
@@ -528,7 +529,6 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     [addMoreIconTabButton setTitle:@"Symbols" forState:UIControlStateNormal];
     [addMoreIconTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
     addMoreIconTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
-
 }
 
 
@@ -685,6 +685,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     
     // Call choose template
 	[self chooseTemplate];
+
 }
 
 /*
@@ -1350,10 +1351,6 @@ int arrangeLayerIndex;
 			selectedFont = [selectedFont fontWithSize:selectedSize];
 			msgTextView.font = selectedFont;
             ((CustomLabel*)[[self textLabelLayersArray]  objectAtIndex:arrangeLayerIndex]).font =selectedFont;
-            ((CustomLabel*)[[self textLabelLayersArray]  objectAtIndex:arrangeLayerIndex]).numberOfLines = 0;
-            ((CustomLabel*)[[self textLabelLayersArray]  objectAtIndex:arrangeLayerIndex]).lineBreakMode = UILineBreakModeCharacterWrap;
-                /*
-            [ ((CustomLabel*)[[self textLabelLayersArray]  objectAtIndex:arrangeLayerIndex]) setFrame:CGRectMake(((CustomLabel*)[[self textLabelLayersArray]  objectAtIndex:arrangeLayerIndex]).frame.origin.x, ((CustomLabel*)[[self textLabelLayersArray]  objectAtIndex:arrangeLayerIndex]).frame.origin.y, ((CustomLabel*)[[self textLabelLayersArray]  objectAtIndex:arrangeLayerIndex]).frame.size.width +selectedSize, ((CustomLabel*)[[self textLabelLayersArray]  objectAtIndex:arrangeLayerIndex]).frame.size.height)];*/
 		}
 		i++;
 	}
@@ -1708,7 +1705,7 @@ int arrangeLayerIndex;
                         curXLoc = 0;
                         curYLoc = curYLoc + kScrollObjHeight + 7;
                     }
-                }                
+                }
 			}
 		}
         
@@ -2334,7 +2331,8 @@ int arrangeLayerIndex;
     
     deleteMode = NO;
     undoCount = 0;
-    layerallow =0;
+    layerallow = 0;
+
     //[rightUndoBarButton setEnabled:NO];
     //[self makeCopyOfLayers];
     if(layerEditMessage!=nil){
@@ -2342,11 +2340,7 @@ int arrangeLayerIndex;
         layerEditMessage = nil;
     }
 
-	photoTouchFlag=NO;
-	lableTouchFlag=NO;
-    symbolTouchFlag= NO;
-    iconTouchFlag = NO;
-	imgPickerFlag = 1;
+
 	
     UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-65, -6, 50, 50)] autorelease];
     label.backgroundColor = [UIColor clearColor];
@@ -2359,7 +2353,7 @@ int arrangeLayerIndex;
     //self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Background" rect:CGRectMake(-65, -6, 50, 50)];
     
     UIButton *nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)];
-	[nextButton addTarget:self action:@selector(callAddMoreLayers) forControlEvents:UIControlEventTouchUpInside];
+	[nextButton addTarget:self action:@selector(delaytime) forControlEvents:UIControlEventTouchUpInside];
     [nextButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
     nextButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
@@ -2380,30 +2374,25 @@ int arrangeLayerIndex;
     
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarMenuButton,leftBarHelpButton,nil]];
     
-    [self hideAddMoreAndSaveLabel];
-    [self hideTakeOrAddPhotoLabel];
-    [self hideAddMoreButton];
-    [self showPictureTab];
-    [self hideAddMoreTab];
 
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationDuration:0.4f];
-	templateScrollView.alpha = ALPHA1;
-	templateBckgrnd.alpha = ALPHA1;
-	[self.templateBckgrnd bringSubviewToFront:templateScrollView];
+	self.templateScrollView.alpha = ALPHA1;
+	self.templateBckgrnd.alpha = ALPHA1;
+    
     
     if(IS_IPHONE_5){
         symbolScrollView.frame= CGRectMake(-320, 413,320 ,130);
         iconScrollView.frame= CGRectMake(-320, 413,320 ,130);
         layerScrollView.frame= CGRectMake(-320, 413,320 ,130);
 
-        templateScrollView.frame= CGRectMake(0, 413,320 ,130);
+        self.templateScrollView.frame= CGRectMake(0, 413,320 ,130);
     }else{
         symbolScrollView.frame= CGRectMake(-320, 395,320 ,60);
         iconScrollView.frame= CGRectMake(-320, 395,320 ,60);
         layerScrollView.frame= CGRectMake(-320, 395,320 ,60);
 
-        templateScrollView.frame= CGRectMake(0, 395,320 ,60);
+        self.templateScrollView.frame= CGRectMake(0, 395,320 ,60);
     }
     
     ((CustomLabel *)[[self textLabelLayersArray] lastObject]).alpha = 1;
@@ -2419,18 +2408,34 @@ int arrangeLayerIndex;
     widthTabButton.alpha = ALPHA0;
     heightTabButton.alpha = ALPHA0;
     
-    addMoreFontTabButton.alpha = ALPHA0;
-    addMoreIconTabButton.alpha = ALPHA0;
-    addMorePhotoTabButton.alpha = ALPHA0;
-    addMoreSymbolTabButton.alpha = ALPHA0;
-    arrangeLayerTabButton.alpha = ALPHA0;
+    self.addMoreFontTabButton.alpha = ALPHA0;
+    self.addMoreIconTabButton.alpha = ALPHA0;
+    self.addMorePhotoTabButton.alpha = ALPHA0;
+    self.addMoreSymbolTabButton.alpha = ALPHA0;
+    self.arrangeLayerTabButton.alpha = ALPHA0;
+
+
+    photoTouchFlag = NO;
+	lableTouchFlag = NO;
+    symbolTouchFlag = NO;
+    iconTouchFlag = NO;
+	imgPickerFlag = 1;
+    
+    [self hideAddMoreAndSaveLabel];
+    [self hideTakeOrAddPhotoLabel];
+    [self hideAddMoreButton];
+    [self hideAddMoreTab];
+    [self showPictureTab];
+    
 	[msgTextView removeFromSuperview];
 	[UIView commitAnimations];
 }
 
 -(void)loadHelpController{
+    [self hideAddMoreTab];
     HelpController *helpController = [[HelpController alloc]initWithNibName:@"HelpController" bundle:nil];
     [self.navigationController pushViewController:helpController animated:NO];
+    [self chooseTemplate];
 }
 
 -(void)callKeyboard{
@@ -2463,6 +2468,7 @@ int arrangeLayerIndex;
     [self.addMoreSymbolTabButton setHidden:YES];
     [self.addMoreIconTabButton setHidden:YES];
     [self.arrangeLayerTabButton setHidden:YES];
+    addMoreFontTabButton.hidden = YES;
 }
 -(void)showAddMoreTab{
     [self.addMoreFontTabButton setHidden:NO];
@@ -2680,7 +2686,6 @@ int arrangeLayerIndex;
     UITextView *lastTextView = msgTextView;
     CustomLabel *lastLabelView = [[self textLabelLayersArray] objectAtIndex:arrangeLayerIndex];
 	lastLabelView.alpha=1;	
-	
 	cameraTabButton.alpha = ALPHA0;
 	photoTabButton.alpha = ALPHA0;
 	widthTabButton.alpha = ALPHA0;
@@ -2710,6 +2715,8 @@ int arrangeLayerIndex;
     symbolTouchFlag= NO;
     iconTouchFlag = NO;
 }
+
+
 
 -(void)choosePhoto
 {
@@ -2874,14 +2881,10 @@ int arrangeLayerIndex;
     [self.cpySymbolLayersArray removeAllObjects];
     
 
-    
-    NSLog(@"%@",textLabelLayersArray);
-    NSLog(@"%@",self.cpyTextLabelLayersArray);
-
     for(CustomLabel *label in textLabelLayersArray){
         [self.cpyTextLabelLayersArray addObject:[NSKeyedUnarchiver unarchiveObjectWithData:[NSKeyedArchiver archivedDataWithRootObject:label]]];
      }
-    NSLog(@"%@",self.cpyTextLabelLayersArray);
+
     for(UIImageView *symbolImage in symbolLayersArray){
         [self.cpySymbolLayersArray addObject:[NSKeyedUnarchiver unarchiveObjectWithData:[NSKeyedArchiver archivedDataWithRootObject:symbolImage]]];
     }
@@ -2933,6 +2936,14 @@ int arrangeLayerIndex;
  * 1) Next is pressed from select template screen
  * 2) When any layer is Edited or Discard Editing
  */
+-(void)delaytime{
+    [NSTimer scheduledTimerWithTimeInterval:0.6
+                                     target:self
+                                   selector:@selector(callAddMoreLayers)
+                                   userInfo:nil
+                                    repeats:NO];
+}
+
 -(void)callAddMoreLayers {
     
     UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-30, -6, 50, 50)] autorelease];
@@ -3152,8 +3163,8 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	[navBar.rightButton addTarget:self action:@selector(callMenu) forControlEvents:UIControlEventTouchUpInside];
 	
     // Create right bar button
-    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStylePlain target:self action:@selector(callMenu)];
-    [self.navigationItem setRightBarButtonItem:rightBarButton];
+   // UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStylePlain target:self action:@selector(callMenu)];
+    //[self.navigationItem setRightBarButtonItem:rightBarButton];
     [self hidePictureTab];
     [self hideAddMoreButton];
     [self hideAddMoreAndSaveLabel];
@@ -4552,13 +4563,19 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
              newMsgTextView.textAlignment = UITextAlignmentCenter;
              [[self textEditLayersArray] addObject:newMsgTextView];*/
             
-            //CustomLabel *newMsgLabel = [[CustomLabel alloc]initWithFrame:CGRectMake(0, 30, 320, 200)];
-            CustomLabel *newMsgLabel = [[CustomLabel alloc]initWithFrame:CGRectMake(20, 50, 280, 150)];
+            //CustomLabel *newMsgLabel = [[CustomLabel alloc]initWithFrame:CGRectMake(0, 30, 320, 150)];
+            CustomLabel *newMsgLabel = [[CustomLabel alloc]initWithFrame:CGRectMake(20, 50, 280, 280)];
 
             newMsgLabel.backgroundColor = [UIColor clearColor];
             newMsgLabel.textColor = [UIColor blackColor];
             newMsgLabel.borderColor = [UIColor clearColor];
             newMsgLabel.textAlignment = UITextAlignmentCenter;
+            newMsgLabel.adjustsFontSizeToFitWidth = YES;
+            //newMsgLabel.adjustsLetterSpacingToFitWidth = YES;
+            newMsgLabel.lineBreakMode = UILineBreakModeClip;
+            //[newMsgLabel.text]
+            //newMsgLabel.numberOfLines = 0;
+            //
             //newMsgLabel.tag = textLayerCount++;
             [self.imgView addSubview:newMsgLabel];
 
