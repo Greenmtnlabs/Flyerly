@@ -383,7 +383,7 @@
 
 -(void)gohelp{
     HelpController *helpController = [[[HelpController alloc]initWithNibName:@"HelpController" bundle:nil] autorelease];
-    [self.navigationController pushViewController:helpController animated:YES];
+    [self.navigationController pushViewController:helpController animated:NO];
     
 }
 

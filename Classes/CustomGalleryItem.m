@@ -23,20 +23,36 @@
         if (iref) {
             
             UIImage *galleryImage = [UIImage imageWithCGImage:iref scale:[rep scale] orientation:(UIImageOrientation)[rep orientation]];
-           // NSLog(@"%f", galleryImage.size.width);
-           // NSLog(@"%f", galleryImage.size.height);
+            NSLog(@"%f", galleryImage.size.width);
+            NSLog(@"%f", galleryImage.size.height);
             float wid = galleryImage.size.width /2;
-            float hgt = galleryImage.size.height /2;
-            //NSLog(@"%f", wid);
-           // NSLog(@"%f", hgt);
+            float hgt = galleryImage.size.height/2;
+            float rto = 0 ;
+            NSLog(@"%f", wid);
+            NSLog(@"%f", hgt);
+            
+            if (wid > 320 && hgt > 320 ) {
+                if (wid >= hgt){
+                    rto = hgt / 320;
+                    hgt = 320;
+                    wid = wid / rto;
+                }else{
+                    rto = wid / 320;
+                    wid = 320;
+                    hgt = hgt / rto;
+                }
+            }
+            
+            galleryImage = [PhotoController imageWithImage:galleryImage scaledToSize:CGSizeMake(wid, hgt)];
+            /*
             if (wid <= 320){
                 if (wid <= 320) wid = 320;
                 galleryImage = [PhotoController imageWithImage:galleryImage scaledToSize:CGSizeMake(wid, hgt)];
             
             }else{
-                hgt = 285;
+                if (hgt <= 460) hgt = 460;
                 galleryImage = [PhotoController imageWithImage:galleryImage scaledToSize:CGSizeMake(wid, hgt)];
-            }
+            }*/
             /*
             if(IS_IPHONE_5){
                 galleryImage = [PhotoController imageWithImage:galleryImage scaledToSize:CGSizeMake(wid, 280)];
@@ -45,7 +61,8 @@
             }
              */
             controller.imageView.image = galleryImage;
-            controller.image = controller.imageView.image;
+             controller.imageView.contentMode = UIViewContentModeCenter;
+            //controller.image = controller.imageView.image;
             CGSize imageSize = [galleryImage size];
             galleryImage = [self scaleAndRotateImage:galleryImage size:imageSize];
             
@@ -70,7 +87,7 @@
             // Get the size of the image.
             
              // Content size for scrollview needs to be twice this size.
-               CGSize contentSize = [galleryImage size];
+                CGSize contentSize = [galleryImage size];
              [controller.scrollView setContentSize:contentSize];
              
              // Center on the scroll view.
@@ -126,7 +143,7 @@
 }
 - (UIImage *)scaleAndRotateImage:(UIImage *)img size:(CGSize)size {
     int kMaxWidth = size.width ; // Or whatever
-    int kMaxHeight = size.height  ;
+    int kMaxHeight = size.height   ;
     
     CGImageRef imgRef = img.CGImage;
     
