@@ -188,14 +188,6 @@ BOOL selectAll;
         contactsArray = [[NSMutableArray alloc] init];
         ABAddressBookRef m_addressbook = ABAddressBookCreate();
         
-        // ABAddressBookCreateWithOptions is iOS 6 and up.
-        if (&ABAddressBookCreateWithOptions) {
-            NSError *error = nil;
-            m_addressbook = ABAddressBookCreateWithOptions(NULL, (CFErrorRef *)&error);
-#if DEBUG
-            if (error) { NSLog(@"%@", error); }
-#endif
-        }
         
         if (m_addressbook == NULL) {
             m_addressbook = ABAddressBookCreate();
@@ -210,7 +202,7 @@ BOOL selectAll;
                                                                  // constructInThread: will CFRelease ab.
                                                                  [NSThread detachNewThreadSelector:@selector(constructInThread:)
                                                                                           toTarget:self
-                                                                                        withObject:m_addressbook];
+                                                                                        withObject:(__bridge id)(m_addressbook)];
                                                              } else {
                                                                  CFRelease(m_addressbook);
                                                                  // Ignore the error
@@ -220,7 +212,7 @@ BOOL selectAll;
                 // constructInThread: will CFRelease ab.
                 [NSThread detachNewThreadSelector:@selector(constructInThread:)
                                          toTarget:self
-                                       withObject:m_addressbook];
+                                       withObject:(__bridge id)(m_addressbook)];
             }
         }
     }
@@ -244,7 +236,7 @@ BOOL selectAll;
         ABRecordRef ref = CFArrayGetValueAtIndex(allPeople,i);
         
         //For username and surname
-        ABMultiValueRef phones =(NSString*)ABRecordCopyValue(ref, kABPersonPhoneProperty);
+        ABMultiValueRef phones =(__bridge ABMultiValueRef)((NSString*)CFBridgingRelease(ABRecordCopyValue(ref, kABPersonPhoneProperty)));
         CFStringRef firstName, lastName;
         firstName = ABRecordCopyValue(ref, kABPersonFirstNameProperty);
         lastName  = ABRecordCopyValue(ref, kABPersonLastNameProperty);
@@ -259,7 +251,7 @@ BOOL selectAll;
         //For Email ids
         ABMutableMultiValueRef eMail  = ABRecordCopyValue(ref, kABPersonEmailProperty);
         if(ABMultiValueGetCount(eMail) > 0) {
-            dOfPerson[@"email"] = (NSString *)ABMultiValueCopyValueAtIndex(eMail, 0);
+            dOfPerson[@"email"] = (NSString *)CFBridgingRelease(ABMultiValueCopyValueAtIndex(eMail, 0));
         }
         
         // For contact picture
@@ -267,11 +259,11 @@ BOOL selectAll;
         if (ref != nil && ABPersonHasImageData(ref)) {
             if ( &ABPersonCopyImageDataWithFormat != nil ) {
                 // iOS >= 4.1
-                contactPicture = [UIImage imageWithData:(NSData *)ABPersonCopyImageDataWithFormat(ref, kABPersonImageFormatThumbnail)];
+                contactPicture = [UIImage imageWithData:(NSData *)CFBridgingRelease(ABPersonCopyImageDataWithFormat(ref, kABPersonImageFormatThumbnail))];
                 dOfPerson[@"image"] = contactPicture;
             } else {
                 // iOS < 4.1
-                contactPicture = [UIImage imageWithData:(NSData *)ABPersonCopyImageData(ref)];
+                contactPicture = [UIImage imageWithData:(NSData *)CFBridgingRelease(ABPersonCopyImageData(ref))];
                 dOfPerson[@"image"] = contactPicture;
             }
         }
@@ -279,16 +271,16 @@ BOOL selectAll;
         //For Phone number
         NSString* mobileLabel;
         for(CFIndex i = 0; i < ABMultiValueGetCount(phones); i++) {
-            mobileLabel = (NSString*)ABMultiValueCopyLabelAtIndex(phones, i);
+            mobileLabel = (NSString*)CFBridgingRelease(ABMultiValueCopyLabelAtIndex(phones, i));
             if([mobileLabel isEqualToString:(NSString *)kABPersonPhoneMobileLabel])
             {
-                dOfPerson[@"Phone"] = (NSString*)ABMultiValueCopyValueAtIndex(phones, i);
-                dOfPerson[@"identifier"] = (NSString*)ABMultiValueCopyValueAtIndex(phones, i);
+                dOfPerson[@"Phone"] = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
+                dOfPerson[@"identifier"] = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
                 [contactsArray addObject:dOfPerson];
             }
             else if ([mobileLabel isEqualToString:(NSString*)kABPersonPhoneIPhoneLabel])
             {
-                dOfPerson[@"Phone"] = (NSString*)ABMultiValueCopyValueAtIndex(phones, i);
+                dOfPerson[@"Phone"] = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
                 [contactsArray addObject:dOfPerson];
                 break ;
             }
@@ -562,7 +554,7 @@ int totalCount = 0;
                         //grantedBool = YES;
                         
                         // Populate array with all available Twitter accounts
-                        arrayOfAccounts = [[account accountsWithAccountType:accountType] retain];
+                        arrayOfAccounts = [account accountsWithAccountType:accountType];
                         self.twitterArray = [[NSMutableArray alloc] init];
                         
                         // Sanity check
@@ -718,8 +710,8 @@ int totalCount = 0;
  */
 - (void)sendTwitterMessage:(NSString *)message screenName:(NSString *)screenName{
     
-    sName = [screenName retain];
-    sMessage = [message retain];
+    sName = screenName;
+    sMessage = message;
     
     [self makeTwitterPost:account];
     /*
@@ -931,7 +923,7 @@ int totalCount = 0;
         case MessageComposeResultFailed:
             NSLog(@"Failed");
             break;
-        case MessageComposeResultSent:
+        case MessageComposeResultSent: {
             
             [self showAlert:@"Invitation Sent!" message:@"You have successfully invited your friends to join flyerly."];
             NSLog(@"%@",iPhoneinvited);
@@ -944,6 +936,7 @@ int totalCount = 0;
             [deviceContactItems   removeAllObjects];
             [self.uiTableView reloadData];
             break;
+        }
         default:
             break;
     }
@@ -1376,28 +1369,12 @@ NSMutableDictionary *selectedIdentifierDictionary;
 
 - (void)dealloc {
     
-    contactsLabel = nil;
-    facebookLabel = nil;
-    twitterLabel = nil;
-    doneLabel = nil;
-    selectAllLabel = nil;
-    unSelectAllLabel = nil;
-    inviteLabel = nil;
-    contactsButton = nil;
-    facebookButton = nil;
-    twitterButton = nil;
     
-    uiTableView = nil;
-    contactsArray = nil;
-    facebookArray = nil;
-    twitterArray = nil;
-    deviceContactItems = nil;
     
     [contactBackupArray release];
     [facebookBackupArray release];
     [twitterBackupArray release];
     
-    [super dealloc];
 }
 
 @end

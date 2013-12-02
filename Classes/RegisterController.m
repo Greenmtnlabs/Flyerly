@@ -335,7 +335,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
                 if (granted == YES) {
                     
                     // Populate array with all available Twitter accounts
-                    NSArray *arrayOfAccounts = [[account accountsWithAccountType:accountType] retain];
+                    NSArray *arrayOfAccounts = [account accountsWithAccountType:accountType];
                     // Sanity check
                     if ([arrayOfAccounts count] > 1) {
                         if([TWTweetComposeViewController canSendTweet]) {
@@ -537,7 +537,6 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     [signUpTwitter release];
     
     [launchController release];    
-    [super dealloc];
 }
 
 #pragma Zohaib Changes

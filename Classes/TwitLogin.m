@@ -433,7 +433,7 @@ static CGFloat kBorderWidth = 10;
 	        UIImage* closeImage = [UIImage imageNamed:@"close.png"];
 		
 		UIColor* color = [UIColor colorWithRed:167.0/255 green:184.0/255 blue:216.0/255 alpha:1];
-		_closeButton = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
+		_closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
 		[_closeButton setImage:closeImage forState:UIControlStateNormal];
 		[_closeButton setTitleColor:color forState:UIControlStateNormal];
 		[_closeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
@@ -493,10 +493,6 @@ static CGFloat kBorderWidth = 10;
 }
 
 
-
-- (void)dealloc {
-    [super dealloc];
-}
 
 
 @end

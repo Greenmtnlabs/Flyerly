@@ -17,8 +17,8 @@
 	
 }
 
-@property (nonatomic,retain) UIButton *leftButton;
-@property (nonatomic,retain) UILabel *title;
-@property (nonatomic,retain) UIButton *rightButton;
+@property (nonatomic,strong) UIButton *leftButton;
+@property (nonatomic,strong) UILabel *title;
+@property (nonatomic,strong) UIButton *rightButton;
 -(void)show:(NSString*)str left:(NSString*)lButton right:(NSString*)rButton;
 @end

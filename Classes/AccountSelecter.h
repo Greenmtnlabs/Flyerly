@@ -19,13 +19,13 @@
     NSString *S;
     CGFloat animatedDistance;
 }
-@property(nonatomic, retain) IBOutlet UITextField *username;
-@property(nonatomic, retain) IBOutlet UITextField *password;
-@property(nonatomic, retain) IBOutlet UITextField *confirmPassword;
+@property(nonatomic, strong) IBOutlet UITextField *username;
+@property(nonatomic, strong) IBOutlet UITextField *password;
+@property(nonatomic, strong) IBOutlet UITextField *confirmPassword;
 @property(nonatomic, strong) IBOutlet UITextField *email;
 @property(nonatomic, strong) IBOutlet UITextField *name;
 @property(nonatomic, strong) IBOutlet UITextField *phno;
-@property(nonatomic, retain) IBOutlet UILabel *usrExist;
+@property(nonatomic, strong) IBOutlet UILabel *usrExist;
 -(IBAction)userExist;
 -(IBAction)save;
 -(IBAction)changePW;

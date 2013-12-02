@@ -372,6 +372,5 @@
     [image3  release];
     [image4  release];
     [controller release];
-    [super dealloc];
 }
 @end

@@ -39,12 +39,12 @@
 	
 }
 
-@property(retain, nonatomic) UIAlertView *netStat;
-@property(retain, nonatomic) MyNetworkController *netObj;
-@property(retain, nonatomic) NSString *userName;
-@property(retain, nonatomic) NSString *passWord;
-@property(nonatomic, retain) OLBTwitpicEngine *twit;
-@property(nonatomic, retain) UIImage *flyerImg;
+@property(strong, nonatomic) UIAlertView *netStat;
+@property(strong, nonatomic) MyNetworkController *netObj;
+@property(strong, nonatomic) NSString *userName;
+@property(strong, nonatomic) NSString *passWord;
+@property(nonatomic, strong) OLBTwitpicEngine *twit;
+@property(nonatomic, strong) UIImage *flyerImg;
 
 -(id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)nibBundle modal:(BOOL)modal;
 

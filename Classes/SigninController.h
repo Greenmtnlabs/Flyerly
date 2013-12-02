@@ -44,17 +44,17 @@
     UIAlertView *warningAlert;
 }
 
-@property(nonatomic, retain) IBOutlet UIImageView *emailImage;
-@property(nonatomic, retain) IBOutlet UIImageView *passwordImage;
+@property(nonatomic, strong) IBOutlet UIImageView *emailImage;
+@property(nonatomic, strong) IBOutlet UIImageView *passwordImage;
 
-@property(nonatomic, retain) IBOutlet UITextField *email;
-@property(nonatomic, retain) IBOutlet UITextField *password;
+@property(nonatomic, strong) IBOutlet UITextField *email;
+@property(nonatomic, strong) IBOutlet UITextField *password;
 
-@property(nonatomic, retain) IBOutlet UIButton *signIn;
-@property(nonatomic, retain) IBOutlet UIButton *signUp;
-@property(nonatomic, retain) IBOutlet UIButton *signInFacebook;
-@property(nonatomic, retain) IBOutlet UIButton *signInTwitter;
-@property(nonatomic, retain) IBOutlet UIButton *forgetPassword1;
+@property(nonatomic, strong) IBOutlet UIButton *signIn;
+@property(nonatomic, strong) IBOutlet UIButton *signUp;
+@property(nonatomic, strong) IBOutlet UIButton *signInFacebook;
+@property(nonatomic, strong) IBOutlet UIButton *signInTwitter;
+@property(nonatomic, strong) IBOutlet UIButton *forgetPassword1;
 
 -(IBAction)onSignIn;
 -(IBAction)onSignUp;

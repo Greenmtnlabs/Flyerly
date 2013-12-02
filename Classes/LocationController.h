@@ -34,14 +34,14 @@
     
 }
 
-@property(nonatomic,retain) IBOutlet UITableView *uiTableView;
-@property(nonatomic,retain) IBOutlet UITextField *searchField;
-@property(nonatomic,retain) IBOutlet UIButton *searchButton;
-@property(nonatomic,retain) IBOutlet UIView *darkView;
+@property(nonatomic,strong) IBOutlet UITableView *uiTableView;
+@property(nonatomic,strong) IBOutlet UITextField *searchField;
+@property(nonatomic,strong) IBOutlet UIButton *searchButton;
+@property(nonatomic,strong) IBOutlet UIView *darkView;
 
-@property (nonatomic, retain) CLLocationManager *locationManager;
-@property (nonatomic, retain) NSString *latitude;
-@property (nonatomic, retain) NSString *longitude;
+@property (nonatomic, strong) CLLocationManager *locationManager;
+@property (nonatomic, strong) NSString *latitude;
+@property (nonatomic, strong) NSString *longitude;
 
 - (IBAction)onSearchClick:(UIButton *)sender;
 +(NSMutableDictionary *)getLocationDetails;

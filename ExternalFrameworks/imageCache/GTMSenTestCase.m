@@ -182,10 +182,7 @@ NSString * const SenTestFailureException = @"SenTestFailureException";
     e = [exception retain];
     [self printError:[exception reason]];
   }
-  if (e) {
-    [e autorelease];
-    [e raise];
-  }
+
 }
 
 - (void)tearDown {

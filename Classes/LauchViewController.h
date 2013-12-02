@@ -57,32 +57,32 @@
     
     NSArray *arrayOfAccounts;
 }
-@property(nonatomic,retain) PhotoController *ptController;
-@property(nonatomic,retain) FlyrViewController *tpController;
-@property(nonatomic,retain) SettingViewController *spController;
-@property(nonatomic,retain) AddFriendsController *addFriendsController;
+@property(nonatomic,strong) PhotoController *ptController;
+@property(nonatomic,strong) FlyrViewController *tpController;
+@property(nonatomic,strong) SettingViewController *spController;
+@property(nonatomic,strong) AddFriendsController *addFriendsController;
 
-@property (nonatomic, retain) IBOutlet UILabel *createFlyrLabel;
-@property (nonatomic, retain) IBOutlet UILabel *savedFlyrLabel;
-@property (nonatomic, retain) IBOutlet UILabel *inviteFriendLabel;
+@property (nonatomic, strong) IBOutlet UILabel *createFlyrLabel;
+@property (nonatomic, strong) IBOutlet UILabel *savedFlyrLabel;
+@property (nonatomic, strong) IBOutlet UILabel *inviteFriendLabel;
 
-@property (nonatomic, retain) IBOutlet UIButton *createFlyrButton;
-@property (nonatomic, retain) IBOutlet UIButton *savedFlyrButton;
-@property (nonatomic, retain) IBOutlet UIButton *inviteFriendButton;
+@property (nonatomic, strong) IBOutlet UIButton *createFlyrButton;
+@property (nonatomic, strong) IBOutlet UIButton *savedFlyrButton;
+@property (nonatomic, strong) IBOutlet UIButton *inviteFriendButton;
 
-@property (nonatomic, retain) IBOutlet UIButton *likeButton;
-@property (nonatomic, retain) IBOutlet UIButton *followButton;
+@property (nonatomic, strong) IBOutlet UIButton *likeButton;
+@property (nonatomic, strong) IBOutlet UIButton *followButton;
 
-@property (nonatomic, retain) IBOutlet UIImageView *firstFlyer;
-@property (nonatomic, retain) IBOutlet UIImageView *secondFlyer;
-@property (nonatomic, retain) IBOutlet UIImageView *thirdFlyer;
-@property (nonatomic, retain) IBOutlet UIImageView *fourthFlyer;
-@property(nonatomic,retain) NSMutableArray *photoArray;
-@property(nonatomic,retain) NSMutableArray *photoDetailArray;
+@property (nonatomic, strong) IBOutlet UIImageView *firstFlyer;
+@property (nonatomic, strong) IBOutlet UIImageView *secondFlyer;
+@property (nonatomic, strong) IBOutlet UIImageView *thirdFlyer;
+@property (nonatomic, strong) IBOutlet UIImageView *fourthFlyer;
+@property(nonatomic,strong) NSMutableArray *photoArray;
+@property(nonatomic,strong) NSMutableArray *photoDetailArray;
 
-@property (nonatomic, retain) IBOutlet UIView *likeView;
-@property (nonatomic, retain) IBOutlet FacebookLikeView *facebookLikeView;
-@property (nonatomic, retain) IBOutlet UIWebView *webview;
+@property (nonatomic, strong) IBOutlet UIView *likeView;
+@property (nonatomic, strong) IBOutlet FacebookLikeView *facebookLikeView;
+@property (nonatomic, strong) IBOutlet UIWebView *webview;
 
 -(IBAction)doNew:(id)sender;
 -(IBAction)doOpen:(id)sender;

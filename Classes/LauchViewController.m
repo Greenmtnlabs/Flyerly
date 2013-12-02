@@ -469,7 +469,7 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
     [accountStore requestAccessToAccountsWithType:accountType withCompletionHandler:^(BOOL granted, NSError *error) {
         if(granted) {
             // Get the list of Twitter accounts.
-            arrayOfAccounts = [[accountStore accountsWithAccountType:accountType] retain];
+            arrayOfAccounts = [accountStore accountsWithAccountType:accountType];
             
             // If there are more than 1 account, ask user which they want to use.
             if ( [arrayOfAccounts count] > 1 ) {
@@ -511,7 +511,7 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
         if(granted) {
             
             // Get the list of Twitter accounts.
-            arrayOfAccounts = [[accountStore accountsWithAccountType:accountType] retain];
+            arrayOfAccounts = [accountStore accountsWithAccountType:accountType];
             
             // If there are more than 1 account, ask user which they want to use.
             if ( [arrayOfAccounts count] > 1 ) {
@@ -730,7 +730,6 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
 	[spController release];
     [photoArray release];
 
-    [super dealloc];
 }
 
 

@@ -35,12 +35,12 @@
     ALAssetsLibrary *library;
 }
 
-@property (nonatomic, retain) IBOutlet UITableView *galleryTable;
-@property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
-@property (nonatomic, retain) IBOutlet UIImageView *imageView;
-@property (nonatomic, retain) IBOutlet UIImageView *moveUpButton;
-@property (nonatomic, retain) UIImage *image;
-@property (nonatomic, retain) id callbackObject;
+@property (nonatomic, strong) IBOutlet UITableView *galleryTable;
+@property (nonatomic, strong) IBOutlet UIScrollView *scrollView;
+@property (nonatomic, strong) IBOutlet UIImageView *imageView;
+@property (nonatomic, strong) IBOutlet UIImageView *moveUpButton;
+@property (nonatomic, strong) UIImage *image;
+@property (nonatomic, strong) id callbackObject;
 @property (nonatomic) SEL callbackOnComplete;
 
 

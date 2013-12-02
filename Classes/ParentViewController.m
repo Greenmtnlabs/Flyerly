@@ -19,13 +19,13 @@
  */
 - (void)showLoadingIndicator {
     // Remember the right bar button item.
-    rightBarButtonItem = [self.navigationItem.rightBarButtonItem retain];
+    rightBarButtonItem = self.navigationItem.rightBarButtonItem;
     
-    UIActivityIndicatorView *uiBusy = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite] autorelease];
+    UIActivityIndicatorView *uiBusy = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     uiBusy.hidesWhenStopped = YES;
     [uiBusy startAnimating];
     
-    UIBarButtonItem *btn = [[[UIBarButtonItem alloc] initWithCustomView:uiBusy] autorelease];
+    UIBarButtonItem *btn = [[UIBarButtonItem alloc] initWithCustomView:uiBusy];
     [self.navigationItem setRightBarButtonItem:btn animated:NO];
 }
 
@@ -34,7 +34,6 @@
  */
 - (void)hideLoadingIndicator {
     [self.navigationItem setRightBarButtonItem:rightBarButtonItem animated:NO];
-    [rightBarButtonItem release];
 }
 
 @end

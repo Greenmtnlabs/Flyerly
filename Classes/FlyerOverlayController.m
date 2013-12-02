@@ -275,6 +275,5 @@
     [editButton release];
     [overlayRoundedView release];
     
-    [super dealloc];
 }
 @end

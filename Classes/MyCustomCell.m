@@ -247,9 +247,6 @@
                            alpha:1.0f];
 }
 
-- (void)dealloc {
-    [super dealloc];
-}
 
 
 

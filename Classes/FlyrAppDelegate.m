@@ -394,7 +394,6 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 	[navigationController release];
 	[window release];
 	[flickrUserName release];
-	[super dealloc];
 }
 
 

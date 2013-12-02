@@ -22,7 +22,7 @@
     NSString *dbUsername;
 }
 
-@property(nonatomic, retain) IBOutlet UITextField *username;
+@property(nonatomic, strong) IBOutlet UITextField *username;
 -(void)goBack;
 
 -(IBAction)SearchBotton:(id)sender;

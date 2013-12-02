@@ -1181,7 +1181,7 @@ static ShareProgressView *clipBdPogressView;
         
         picker.mailComposeDelegate = self;
         [picker setSubject:@"You just received a NEW flyer!"];        
-        NSMutableString *emailBody = [[[NSMutableString alloc] initWithString:@"<html><body>"] retain];
+        NSMutableString *emailBody = [[NSMutableString alloc] initWithString:@"<html><body>"];
         [emailBody appendString:@"<p><font size='4'><a href = 'http://www.flyer.ly/email'>A flyerly creation...</a></font></p>"];
         
         [emailBody appendString:[NSString stringWithFormat:@"<p><img src='%@'></p>",link]];
@@ -1401,7 +1401,7 @@ sd:;
         // Did user allow us access?
         if (granted == YES) {
             // Get the list of Twitter accounts.
-            arrayOfAccounts = [[account accountsWithAccountType:accountType] retain];
+            arrayOfAccounts = [account accountsWithAccountType:accountType];
             
             // If there are more than 1 account, ask user which they want to use.
             if ( [arrayOfAccounts count] > 1 ) {
@@ -1484,7 +1484,7 @@ static ShareProgressView *clipBdPogressView;
     }
     
     clipBdPogressView = nil;
-    clipBdPogressView = [[[NSBundle mainBundle] loadNibNamed:@"ShareProgressView" owner:self options:nil][0] retain];
+    clipBdPogressView = [[NSBundle mainBundle] loadNibNamed:@"ShareProgressView" owner:self options:nil][0];
     [clipBdPogressView setFrame:CGRectMake(clipBdPogressView.frame.origin.x, 36 * countOfSharingNetworks++, clipBdPogressView.frame.size.width, clipBdPogressView.frame.size.height)];
     clipBdPogressView.tag = 8;
     
@@ -1516,7 +1516,7 @@ static ShareProgressView *clipBdPogressView;
     }
     
     smsPogressView = nil;
-    smsPogressView = [[[NSBundle mainBundle] loadNibNamed:@"ShareProgressView" owner:self options:nil][0] retain];
+    smsPogressView = [[NSBundle mainBundle] loadNibNamed:@"ShareProgressView" owner:self options:nil][0];
     [smsPogressView setFrame:CGRectMake(smsPogressView.frame.origin.x, 36 * countOfSharingNetworks++, smsPogressView.frame.size.width, smsPogressView.frame.size.height)];
     smsPogressView.tag = 7;
     
@@ -1546,7 +1546,7 @@ static ShareProgressView *clipBdPogressView;
     }
     
     emailPogressView = nil;
-    emailPogressView = [[[NSBundle mainBundle] loadNibNamed:@"ShareProgressView" owner:self options:nil][0] retain];
+    emailPogressView = [[NSBundle mainBundle] loadNibNamed:@"ShareProgressView" owner:self options:nil][0];
     [emailPogressView setFrame:CGRectMake(emailPogressView.frame.origin.x, 36 * countOfSharingNetworks++, emailPogressView.frame.size.width, emailPogressView.frame.size.height)];
     emailPogressView.tag = 6;
     
@@ -1577,7 +1577,7 @@ static ShareProgressView *clipBdPogressView;
     }
     
     instagramPogressView = nil;
-    instagramPogressView = [[[NSBundle mainBundle] loadNibNamed:@"ShareProgressView" owner:self options:nil][0] retain];
+    instagramPogressView = [[NSBundle mainBundle] loadNibNamed:@"ShareProgressView" owner:self options:nil][0];
     [instagramPogressView setFrame:CGRectMake(instagramPogressView.frame.origin.x, 36 * countOfSharingNetworks++, instagramPogressView.frame.size.width, instagramPogressView.frame.size.height)];
     instagramPogressView.tag = 5;
     
@@ -1668,7 +1668,7 @@ static ShareProgressView *clipBdPogressView;
     }
 
     facebookPogressView = nil;
-    facebookPogressView = [[[NSBundle mainBundle] loadNibNamed:@"ShareProgressView" owner:self options:nil][0] retain];
+    facebookPogressView = [[NSBundle mainBundle] loadNibNamed:@"ShareProgressView" owner:self options:nil][0];
     [facebookPogressView setFrame:CGRectMake(facebookPogressView.frame.origin.x, 36 * countOfSharingNetworks++, facebookPogressView.frame.size.width, facebookPogressView.frame.size.height)];
     facebookPogressView.tag = 1;
     
@@ -1729,7 +1729,7 @@ static ShareProgressView *clipBdPogressView;
     }
     
     tumblrPogressView = nil;
-    tumblrPogressView = [[[NSBundle mainBundle] loadNibNamed:@"ShareProgressView" owner:self options:nil][0] retain];
+    tumblrPogressView = [[NSBundle mainBundle] loadNibNamed:@"ShareProgressView" owner:self options:nil][0];
     [tumblrPogressView setFrame:CGRectMake(tumblrPogressView.frame.origin.x, 36 * countOfSharingNetworks++, tumblrPogressView.frame.size.width, tumblrPogressView.frame.size.height)];
     tumblrPogressView.tag = 3;
 
@@ -1758,7 +1758,7 @@ static ShareProgressView *clipBdPogressView;
     }
 
     flickrPogressView = nil;
-    flickrPogressView = [[[NSBundle mainBundle] loadNibNamed:@"ShareProgressView" owner:self options:nil][0] retain];
+    flickrPogressView = [[NSBundle mainBundle] loadNibNamed:@"ShareProgressView" owner:self options:nil][0];
     [flickrPogressView setFrame:CGRectMake(flickrPogressView.frame.origin.x, 36 * countOfSharingNetworks++, flickrPogressView.frame.size.width, flickrPogressView.frame.size.height)];
     flickrPogressView.tag = 4;
 
@@ -2221,7 +2221,6 @@ static ShareProgressView *clipBdPogressView;
     [progressView release]; progressView = nil;
 	[svController release];
     [sharelink release];
-    [super dealloc];
 }
 
 @end

@@ -47,29 +47,29 @@ extern NSString *FacebookDidLoginNotification;
     UIView *sharingProgressParentView;
 }
 
-@property (nonatomic, retain) IBOutlet UIWindow *window;
-@property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
-@property (nonatomic, retain) UIScrollView *fontScrollView;
-@property (nonatomic, retain) UIScrollView *colorScrollView;
-@property (nonatomic, retain) UIScrollView *sizeScrollView;
-@property (nonatomic, retain) UIScrollView *templateScrollView;
-@property (nonatomic, retain) SaveFlyerController *svController;
-@property (nonatomic, retain) LauchViewController *lauchController;
-@property (nonatomic, retain) AccountController *accountController;
-@property (nonatomic, retain) OFFlickrAPIContext *flickrContext;
-@property (nonatomic, retain) OFFlickrAPIRequest *flickrRequest;
+@property (nonatomic, strong) IBOutlet UIWindow *window;
+@property (nonatomic, strong) IBOutlet UINavigationController *navigationController;
+@property (nonatomic, strong) UIScrollView *fontScrollView;
+@property (nonatomic, strong) UIScrollView *colorScrollView;
+@property (nonatomic, strong) UIScrollView *sizeScrollView;
+@property (nonatomic, strong) UIScrollView *templateScrollView;
+@property (nonatomic, strong) SaveFlyerController *svController;
+@property (nonatomic, strong) LauchViewController *lauchController;
+@property (nonatomic, strong) AccountController *accountController;
+@property (nonatomic, strong) OFFlickrAPIContext *flickrContext;
+@property (nonatomic, strong) OFFlickrAPIRequest *flickrRequest;
 
 @property (strong, nonatomic) Facebook *facebook;
-@property (nonatomic,retain) TwitLogin *_tSession;
+@property (nonatomic,strong) TwitLogin *_tSession;
 @property(nonatomic,strong) BZFoursquare *foursquare;
 @property (nonatomic,assign)	BOOL faceBookPermissionFlag;
 @property (nonatomic,assign) BOOL changesFlag;
 
 @property (strong, nonatomic) FBSession *session;
-@property (nonatomic, retain) NSString *flickrUserName;
-@property (nonatomic, retain) UIView *sharingProgressParentView;
+@property (nonatomic, strong) NSString *flickrUserName;
+@property (nonatomic, strong) UIView *sharingProgressParentView;
 
-@property (nonatomic, retain) NSString *loginId;
+@property (nonatomic, strong) NSString *loginId;
 
 //@property (nonatomic, retain) FBDialog* dialog;
 //@property (nonatomic,retain) FBPermissionDialog* perDialog;

@@ -25,13 +25,13 @@
     Singleton *globle;
 }
 
-@property(nonatomic,retain) IBOutlet UIScrollView *scrollView;
-@property(nonatomic,retain) IBOutlet UIButton *doneButton;
+@property(nonatomic,strong) IBOutlet UIScrollView *scrollView;
+@property(nonatomic,strong) IBOutlet UIButton *doneButton;
 
-@property(nonatomic,retain) IBOutlet UIButton *linkButton;
-@property(nonatomic,retain) IBOutlet UIButton *emailButton;
-@property(nonatomic,retain) IBOutlet UIButton *linkFaceBook;
-@property(nonatomic,retain) IBOutlet UIButton *twitLink;
+@property(nonatomic,strong) IBOutlet UIButton *linkButton;
+@property(nonatomic,strong) IBOutlet UIButton *emailButton;
+@property(nonatomic,strong) IBOutlet UIButton *linkFaceBook;
+@property(nonatomic,strong) IBOutlet UIButton *twitLink;
 
 -(IBAction)goBack;
 /*

@@ -26,7 +26,6 @@
     [moveUpButton release];
     [callbackObject release];
     [library release];
-    [super dealloc];
 }
 
 #pragma mark - Image Preparation
@@ -184,11 +183,11 @@
         
         UIImage *tmpImage = [self scaleAndRotateImage:image size:imageView.frame.size];
         [image release];
-        image = [tmpImage retain];
+        image = tmpImage;
     } else {
         UIImage *tmpImage = [self scaleAndRotateImage:image size:image.size];
         [image release];
-        image = [tmpImage retain];
+        image = tmpImage;
     }
     
     // Get the size of the image.

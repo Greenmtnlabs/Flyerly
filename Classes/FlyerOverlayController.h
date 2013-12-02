@@ -22,10 +22,10 @@
     int flyerNumber;
 }
 
-@property(nonatomic,retain) IBOutlet UIImageView *flyerOverlayImage;
-@property(nonatomic,retain) IBOutlet UIButton *editButton;
-@property(nonatomic,retain) IBOutlet UIButton *crossButton;
-@property(nonatomic,retain) IBOutlet UIView *overlayRoundedView;
+@property(nonatomic,strong) IBOutlet UIImageView *flyerOverlayImage;
+@property(nonatomic,strong) IBOutlet UIButton *editButton;
+@property(nonatomic,strong) IBOutlet UIButton *crossButton;
+@property(nonatomic,strong) IBOutlet UIView *overlayRoundedView;
 @property int flyerNumber;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil image:(UIImage *)image modalView:(UIView *)modalView;

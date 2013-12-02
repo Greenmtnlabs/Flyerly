@@ -49,8 +49,8 @@
     
     self = [super initWithCoder:aDecoder];
     
-    self.borderColor = [[aDecoder decodeObject] retain];
-    self.lineWidth = [[[aDecoder decodeObject] retain] intValue];
+    self.borderColor = [aDecoder decodeObject];
+    self.lineWidth = [[aDecoder decodeObject] intValue];
     
     return self;
 }

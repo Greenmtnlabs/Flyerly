@@ -19,9 +19,9 @@
     Singleton  *globle;
 }
 
-@property(nonatomic, retain) IBOutlet UIButton *registerButton;
-@property(nonatomic, retain) IBOutlet UIButton *signinButton;
-@property(nonatomic, retain) IBOutlet UIButton *test;
+@property(nonatomic, strong) IBOutlet UIButton *registerButton;
+@property(nonatomic, strong) IBOutlet UIButton *signinButton;
+@property(nonatomic, strong) IBOutlet UIButton *test;
 
 -(IBAction)onRegister;
 -(IBAction)onSignIn;

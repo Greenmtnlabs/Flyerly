@@ -15,6 +15,6 @@
 }
 
 @property int lineWidth;
-@property(nonatomic, retain) UIColor *borderColor;
+@property(nonatomic, strong) UIColor *borderColor;
 
 @end

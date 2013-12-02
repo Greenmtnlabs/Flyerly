@@ -23,16 +23,16 @@
     CustomPhotoController *controller;
 }
 
-@property(nonatomic, retain) IBOutlet UIImageView *image1;
-@property(nonatomic, retain) IBOutlet UIImageView *image2;
-@property(nonatomic, retain) IBOutlet UIImageView *image3;
-@property(nonatomic, retain) IBOutlet UIImageView *image4;
-@property(nonatomic, retain) CustomPhotoController *controller;
+@property(nonatomic, strong) IBOutlet UIImageView *image1;
+@property(nonatomic, strong) IBOutlet UIImageView *image2;
+@property(nonatomic, strong) IBOutlet UIImageView *image3;
+@property(nonatomic, strong) IBOutlet UIImageView *image4;
+@property(nonatomic, strong) CustomPhotoController *controller;
 
-@property(nonatomic, retain) NSURL *imageName1;
-@property(nonatomic, retain) NSURL *imageName2;
-@property(nonatomic, retain) NSURL *imageName3;
-@property(nonatomic, retain) NSURL *imageName4;
+@property(nonatomic, strong) NSURL *imageName1;
+@property(nonatomic, strong) NSURL *imageName2;
+@property(nonatomic, strong) NSURL *imageName3;
+@property(nonatomic, strong) NSURL *imageName4;
 
 //-(IBAction)selectImage:(UIButton *)sender;
 

@@ -63,7 +63,7 @@
 	UIImage *selectedSymbol;
 	UIImage *selectedIcon;
 	NSInteger selectedSize;
-	id selectedColor;
+	id __weak selectedColor;
 	NSInteger selectedWidth;
 	NSInteger selectedHeight;
 	
@@ -147,81 +147,81 @@
     ShareProgressView *layerEditMessage;
 }
 
-@property(nonatomic, retain) NSMutableArray *cpyTextLabelLayersArray;
-@property(nonatomic, retain) NSMutableArray *cpySymbolLayersArray;
-@property(nonatomic, retain) NSMutableArray *cpyIconLayersArray;
-@property(nonatomic, retain) NSMutableArray *cpyPhotoLayersArray;
+@property(nonatomic, strong) NSMutableArray *cpyTextLabelLayersArray;
+@property(nonatomic, strong) NSMutableArray *cpySymbolLayersArray;
+@property(nonatomic, strong) NSMutableArray *cpyIconLayersArray;
+@property(nonatomic, strong) NSMutableArray *cpyPhotoLayersArray;
 
-@property (nonatomic, retain) MyNavigationBar *navBar;
-@property (nonatomic,retain) HudView *aHUD;
+@property (nonatomic, strong) MyNavigationBar *navBar;
+@property (nonatomic,strong) HudView *aHUD;
 
-@property(nonatomic, retain)  UIImageView *imgView;
-@property (nonatomic,retain)  UIImageView *photoImgView;
-@property(nonatomic, retain)  UIImageView *symbolImgView;
-@property(nonatomic, retain)  UIImageView *iconImgView;
-@property (nonatomic, retain) UIImageView *templateBckgrnd;
-@property (nonatomic, retain) UIImageView *textBackgrnd;
-@property (nonatomic, retain) UIImagePickerController *imgPicker;
-@property (nonatomic, retain) UITextView *msgTextView;
+@property(nonatomic, strong)  UIImageView *imgView;
+@property (nonatomic,strong)  UIImageView *photoImgView;
+@property(nonatomic, strong)  UIImageView *symbolImgView;
+@property(nonatomic, strong)  UIImageView *iconImgView;
+@property (nonatomic, strong) UIImageView *templateBckgrnd;
+@property (nonatomic, strong) UIImageView *textBackgrnd;
+@property (nonatomic, strong) UIImagePickerController *imgPicker;
+@property (nonatomic, strong) UITextView *msgTextView;
 
-@property (nonatomic,retain)  UIButton *takePhotoButton;
-@property (nonatomic,retain)  UIButton *cameraRollButton;
-@property (nonatomic,retain)  UILabel *takePhotoLabel;
-@property (nonatomic,retain)  UILabel *cameraRollLabel;
-@property (nonatomic,retain)  UIButton *moreLayersButton;
-@property (nonatomic,retain)  UILabel *moreLayersLabel;
-@property (nonatomic,retain)  UILabel *addMoreLayerOrSaveFlyerLabel;
-@property (nonatomic,retain)  UILabel *takeOrAddPhotoLabel;
+@property (nonatomic,strong)  UIButton *takePhotoButton;
+@property (nonatomic,strong)  UIButton *cameraRollButton;
+@property (nonatomic,strong)  UILabel *takePhotoLabel;
+@property (nonatomic,strong)  UILabel *cameraRollLabel;
+@property (nonatomic,strong)  UIButton *moreLayersButton;
+@property (nonatomic,strong)  UILabel *moreLayersLabel;
+@property (nonatomic,strong)  UILabel *addMoreLayerOrSaveFlyerLabel;
+@property (nonatomic,strong)  UILabel *takeOrAddPhotoLabel;
 
-@property (nonatomic, retain) UIScrollView *templateScrollView;
-@property (nonatomic, retain) UIScrollView *fontScrollView;
-@property (nonatomic, retain) UIScrollView *colorScrollView;
-@property (nonatomic, retain) UIScrollView *sizeScrollView;
-@property (nonatomic, retain) UIScrollView *borderScrollView;
-@property (nonatomic, retain) UIScrollView *fontBorderScrollView;
-@property (nonatomic, retain) UIScrollView *layerScrollView;
+@property (nonatomic, strong) UIScrollView *templateScrollView;
+@property (nonatomic, strong) UIScrollView *fontScrollView;
+@property (nonatomic, strong) UIScrollView *colorScrollView;
+@property (nonatomic, strong) UIScrollView *sizeScrollView;
+@property (nonatomic, strong) UIScrollView *borderScrollView;
+@property (nonatomic, strong) UIScrollView *fontBorderScrollView;
+@property (nonatomic, strong) UIScrollView *layerScrollView;
 
-@property (nonatomic, retain) UIScrollView *iconScrollView;
-@property (nonatomic, retain) UIScrollView *symbolScrollView;
+@property (nonatomic, strong) UIScrollView *iconScrollView;
+@property (nonatomic, strong) UIScrollView *symbolScrollView;
 
-@property (nonatomic, retain) NSString *finalImgWritePath;
-@property (nonatomic, retain) NSString *imageNameNew;
-@property (nonatomic, retain) UIFont *selectedFont;
-@property (nonatomic, assign) id selectedColor;
-@property (nonatomic, retain) NSString *selectedText;
+@property (nonatomic, strong) NSString *finalImgWritePath;
+@property (nonatomic, strong) NSString *imageNameNew;
+@property (nonatomic, strong) UIFont *selectedFont;
+@property (nonatomic, weak) id selectedColor;
+@property (nonatomic, strong) NSString *selectedText;
 @property (nonatomic, assign) NSInteger selectedSize;
-@property (nonatomic, retain) UIImage *selectedTemplate;
-@property (nonatomic, retain) UIImage *selectedSymbol;
-@property (nonatomic, retain) UIImage *selectedIcon;
+@property (nonatomic, strong) UIImage *selectedTemplate;
+@property (nonatomic, strong) UIImage *selectedSymbol;
+@property (nonatomic, strong) UIImage *selectedIcon;
 
-@property (nonatomic, retain) UIButton *fontTabButton;
-@property (nonatomic, retain) UIButton *colorTabButton;
-@property (nonatomic, retain) UIButton *sizeTabButton;
-@property (nonatomic, retain) UIButton *borderTabButton;
-@property (nonatomic, retain) UIButton *fontBorderTabButton;
-@property (nonatomic, retain) UIImage *finalFlyer;
+@property (nonatomic, strong) UIButton *fontTabButton;
+@property (nonatomic, strong) UIButton *colorTabButton;
+@property (nonatomic, strong) UIButton *sizeTabButton;
+@property (nonatomic, strong) UIButton *borderTabButton;
+@property (nonatomic, strong) UIButton *fontBorderTabButton;
+@property (nonatomic, strong) UIImage *finalFlyer;
 
-@property (nonatomic,retain) UIButton *cameraTabButton;
-@property (nonatomic,retain) UIButton *photoTabButton;
-@property (nonatomic,retain) UIButton *widthTabButton;
-@property (nonatomic,retain) UIButton *heightTabButton;
+@property (nonatomic,strong) UIButton *cameraTabButton;
+@property (nonatomic,strong) UIButton *photoTabButton;
+@property (nonatomic,strong) UIButton *widthTabButton;
+@property (nonatomic,strong) UIButton *heightTabButton;
 
-@property (nonatomic, retain) UIButton *addMoreFontTabButton;
-@property (nonatomic, retain) UIButton *addMorePhotoTabButton;
-@property (nonatomic, retain) UIButton *addMoreIconTabButton;
-@property (nonatomic, retain) UIButton *addMoreSymbolTabButton;
-@property (nonatomic, retain) UIButton *arrangeLayerTabButton;
+@property (nonatomic, strong) UIButton *addMoreFontTabButton;
+@property (nonatomic, strong) UIButton *addMorePhotoTabButton;
+@property (nonatomic, strong) UIButton *addMoreIconTabButton;
+@property (nonatomic, strong) UIButton *addMoreSymbolTabButton;
+@property (nonatomic, strong) UIButton *arrangeLayerTabButton;
 
 @property (nonatomic, assign)BOOL photoTouchFlag;
 @property (nonatomic, assign)BOOL lableTouchFlag;
 @property (nonatomic, assign)BOOL symbolTouchFlag;
 @property (nonatomic, assign)BOOL iconTouchFlag;
 @property (nonatomic, assign) CGPoint lableLocation;
-@property (nonatomic,retain) UIAlertView *warningAlert;
-@property (nonatomic,retain) UIAlertView *discardAlert;
-@property (nonatomic,retain) UIAlertView *deleteAlert;
-@property (nonatomic,retain) UIAlertView *editAlert;
-@property (nonatomic,retain) UIAlertView *inAppAlert;
+@property (nonatomic,strong) UIAlertView *warningAlert;
+@property (nonatomic,strong) UIAlertView *discardAlert;
+@property (nonatomic,strong) UIAlertView *deleteAlert;
+@property (nonatomic,strong) UIAlertView *editAlert;
+@property (nonatomic,strong) UIAlertView *inAppAlert;
 
 @property (nonatomic, assign) NSInteger imgPickerFlag;
 @property (nonatomic, assign) int flyerNumber;

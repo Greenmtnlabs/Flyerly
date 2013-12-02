@@ -8,11 +8,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FlyrAppDelegate.h"
 
 int main(int argc, char *argv[]) {
     
-    NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
-    int retVal = UIApplicationMain(argc, argv, nil, nil);
-    [pool release];
-    return retVal;
+    @autoreleasepool {
+        int retVal = UIApplicationMain(argc, argv, nil, NSStringFromClass([FlyrAppDelegate class]));
+        return retVal;
+    }
 }

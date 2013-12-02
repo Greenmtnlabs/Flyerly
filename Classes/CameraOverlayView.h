@@ -21,11 +21,11 @@
     CustomPhotoController *customPhotoController;
 }
 
-@property (nonatomic, retain) IBOutlet UIButton *flashButton;
-@property (nonatomic, retain) IBOutlet UIImageView *borderImage;
-@property (nonatomic, retain) IBOutlet UIImageView *gridImageView;
-@property (nonatomic, retain) IBOutlet UIButton *libraryLatestPhoto;
-@property (nonatomic, retain) PhotoController *photoController;
+@property (nonatomic, strong) IBOutlet UIButton *flashButton;
+@property (nonatomic, strong) IBOutlet UIImageView *borderImage;
+@property (nonatomic, strong) IBOutlet UIImageView *gridImageView;
+@property (nonatomic, strong) IBOutlet UIButton *libraryLatestPhoto;
+@property (nonatomic, strong) PhotoController *photoController;
 
 - (IBAction)onBack;
 - (IBAction)toggleGrid;

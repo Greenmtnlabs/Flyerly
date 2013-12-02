@@ -39,19 +39,19 @@
     UIAlertView *inAppAlert ;
 }
 
-@property(nonatomic,retain) IBOutlet UIScrollView *scrollView;
-@property(nonatomic, retain) IBOutlet UITextField *username;
-@property(nonatomic, retain) IBOutlet UITextField *password;
-@property(nonatomic, retain) IBOutlet UITextField *confirmPassword;
+@property(nonatomic,strong) IBOutlet UIScrollView *scrollView;
+@property(nonatomic, strong) IBOutlet UITextField *username;
+@property(nonatomic, strong) IBOutlet UITextField *password;
+@property(nonatomic, strong) IBOutlet UITextField *confirmPassword;
 
 @property(nonatomic, strong) IBOutlet UITextField *email;
 @property(nonatomic, strong) IBOutlet UITextField *name;
 @property(nonatomic, strong) IBOutlet UITextField *phno;
 
-@property(nonatomic, retain) IBOutlet UIButton *signUp;
-@property(nonatomic, retain) IBOutlet UIButton *signUpFacebook;
-@property(nonatomic, retain) IBOutlet UIButton *signUpTwitter;
-@property(nonatomic, retain) IBOutlet UILabel *usrExist;
+@property(nonatomic, strong) IBOutlet UIButton *signUp;
+@property(nonatomic, strong) IBOutlet UIButton *signUpFacebook;
+@property(nonatomic, strong) IBOutlet UIButton *signUpTwitter;
+@property(nonatomic, strong) IBOutlet UILabel *usrExist;
 
 -(void)goBack;
 -(IBAction)userExist;

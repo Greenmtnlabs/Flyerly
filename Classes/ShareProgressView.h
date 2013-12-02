@@ -18,11 +18,11 @@ extern NSString *CloseShareProgressNotification;
 	IBOutlet UIButton *cancelIcon;
 }
 
-@property(nonatomic,retain) IBOutlet UIButton *networkIcon;
-@property(nonatomic,retain) IBOutlet UIButton *statusIcon;
-@property(nonatomic,retain) IBOutlet UILabel *statusText;
-@property(nonatomic,retain) IBOutlet UIButton *refreshIcon;
-@property(nonatomic,retain) IBOutlet UIButton *cancelIcon;
+@property(nonatomic,strong) IBOutlet UIButton *networkIcon;
+@property(nonatomic,strong) IBOutlet UIButton *statusIcon;
+@property(nonatomic,strong) IBOutlet UILabel *statusText;
+@property(nonatomic,strong) IBOutlet UIButton *refreshIcon;
+@property(nonatomic,strong) IBOutlet UIButton *cancelIcon;
 
 -(IBAction)cancelPressed:(id)sender;
 @end

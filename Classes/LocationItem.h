@@ -15,7 +15,7 @@
 
 }
 
-@property(nonatomic, retain) IBOutlet UILabel *name;
-@property(nonatomic, retain) IBOutlet UILabel *address;
+@property(nonatomic, strong) IBOutlet UILabel *name;
+@property(nonatomic, strong) IBOutlet UILabel *address;
 
 @end

@@ -603,7 +603,6 @@ NSMutableDictionary *locationDetails;
 
 - (void)dealloc {
     [Oldlocation release];
-    [super dealloc];
 }
 
 @end

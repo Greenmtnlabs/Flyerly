@@ -26,13 +26,13 @@
     BOOL searching;
     BOOL letUserSelectRow;
 }
-@property(nonatomic,retain) PhotoController *ptController;
-@property(nonatomic,retain) NSMutableArray *photoArray;
-@property(nonatomic,retain) NSMutableArray *photoDetailArray;
-@property(nonatomic,retain) NSMutableArray *iconArray;
-@property(nonatomic,retain) MyNavigationBar *navBar;
-@property(nonatomic,retain) IBOutlet UITableView *tView;
-@property(nonatomic,retain) IBOutlet UITextField *searchTextField;
+@property(nonatomic,strong) PhotoController *ptController;
+@property(nonatomic,strong) NSMutableArray *photoArray;
+@property(nonatomic,strong) NSMutableArray *photoDetailArray;
+@property(nonatomic,strong) NSMutableArray *iconArray;
+@property(nonatomic,strong) MyNavigationBar *navBar;
+@property(nonatomic,strong) IBOutlet UITableView *tView;
+@property(nonatomic,strong) IBOutlet UITextField *searchTextField;
 
 +(NSString *)getFlyerNumberFromPath:(NSString *)imagePath;
 -(void)goBack;

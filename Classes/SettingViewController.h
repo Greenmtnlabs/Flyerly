@@ -36,18 +36,18 @@
 
 }
 
-@property(nonatomic,retain) IBOutlet UIButton *facebookButton;
-@property(nonatomic,retain) IBOutlet UIButton *twitterButton;
-@property(nonatomic,retain) IBOutlet UIButton *emailButton;
-@property(nonatomic,retain) IBOutlet UIButton *tumblrButton;
-@property(nonatomic,retain) IBOutlet UIButton *flickrButton;
-@property(nonatomic,retain) IBOutlet UIButton *instagramButton;
-@property(nonatomic,retain) IBOutlet UIButton *smsButton;
-@property(nonatomic,retain) IBOutlet UIButton *clipboardButton;
-@property(nonatomic,retain) IBOutlet UILabel *saveToCameraRollLabel;
-@property(nonatomic,retain) IBOutlet UISwitch *saveToRollSwitch;
+@property(nonatomic,strong) IBOutlet UIButton *facebookButton;
+@property(nonatomic,strong) IBOutlet UIButton *twitterButton;
+@property(nonatomic,strong) IBOutlet UIButton *emailButton;
+@property(nonatomic,strong) IBOutlet UIButton *tumblrButton;
+@property(nonatomic,strong) IBOutlet UIButton *flickrButton;
+@property(nonatomic,strong) IBOutlet UIButton *instagramButton;
+@property(nonatomic,strong) IBOutlet UIButton *smsButton;
+@property(nonatomic,strong) IBOutlet UIButton *clipboardButton;
+@property(nonatomic,strong) IBOutlet UILabel *saveToCameraRollLabel;
+@property(nonatomic,strong) IBOutlet UISwitch *saveToRollSwitch;
 
-@property(nonatomic,retain) IBOutlet UIButton *helpTab;
+@property(nonatomic,strong) IBOutlet UIButton *helpTab;
 
 -(IBAction)onClickFacebookButton;
 -(IBAction)onClickTwitterButton;

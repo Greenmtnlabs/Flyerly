@@ -76,7 +76,7 @@
     NSArray *arrayOfAccounts;
 }
 
-@property(nonatomic,retain) NSMutableArray *listOfPlaces;
+@property(nonatomic,strong) NSMutableArray *listOfPlaces;
 @property(nonatomic,strong)  NSString *sharelink;
 
 /*@property(nonatomic,retain) IBOutlet UIView *progressView;
@@ -86,44 +86,44 @@
 @property(nonatomic,retain) ShareProgressView *flickrPogressView;
 @property(nonatomic,retain) ShareProgressView *instagramPogressView;*/
 
-@property(nonatomic,retain) IBOutlet UILabel *saveToCameraRollLabel;
-@property(nonatomic,retain) IBOutlet UISwitch *saveToRollSwitch;
-@property(nonatomic,retain) IBOutlet UILabel *locationLabel;
-@property(nonatomic,retain) IBOutlet UIButton *locationBackground;
-@property(nonatomic,retain) IBOutlet UIView *networkParentView;
-@property(nonatomic,retain) IBOutlet UIButton *locationButton;
+@property(nonatomic,strong) IBOutlet UILabel *saveToCameraRollLabel;
+@property(nonatomic,strong) IBOutlet UISwitch *saveToRollSwitch;
+@property(nonatomic,strong) IBOutlet UILabel *locationLabel;
+@property(nonatomic,strong) IBOutlet UIButton *locationBackground;
+@property(nonatomic,strong) IBOutlet UIView *networkParentView;
+@property(nonatomic,strong) IBOutlet UIButton *locationButton;
 
-@property(nonatomic,retain) IBOutlet UIScrollView *scrollView;
+@property(nonatomic,strong) IBOutlet UIScrollView *scrollView;
 
-@property(nonatomic,retain) IBOutlet UITextView *descriptionView;
-@property(nonatomic,retain) IBOutlet UITextField *titleView;
-@property(nonatomic,retain) IBOutlet UIButton *imgView;
+@property(nonatomic,strong) IBOutlet UITextView *descriptionView;
+@property(nonatomic,strong) IBOutlet UITextField *titleView;
+@property(nonatomic,strong) IBOutlet UIButton *imgView;
 
-@property(nonatomic,retain) IBOutlet UIButton *facebookButton;
-@property(nonatomic,retain) IBOutlet UIButton *twitterButton;
-@property(nonatomic,retain) IBOutlet UIButton *emailButton;
-@property(nonatomic,retain) IBOutlet UIButton *tumblrButton;
-@property(nonatomic,retain) IBOutlet UIButton *flickrButton;
-@property(nonatomic,retain) IBOutlet UIButton *instagramButton;
-@property(nonatomic,retain) IBOutlet UIButton *smsButton;
-@property(nonatomic,retain) IBOutlet UIButton *clipboardButton;
-@property(nonatomic,retain) IBOutlet UILabel *clipboardlabel;
+@property(nonatomic,strong) IBOutlet UIButton *facebookButton;
+@property(nonatomic,strong) IBOutlet UIButton *twitterButton;
+@property(nonatomic,strong) IBOutlet UIButton *emailButton;
+@property(nonatomic,strong) IBOutlet UIButton *tumblrButton;
+@property(nonatomic,strong) IBOutlet UIButton *flickrButton;
+@property(nonatomic,strong) IBOutlet UIButton *instagramButton;
+@property(nonatomic,strong) IBOutlet UIButton *smsButton;
+@property(nonatomic,strong) IBOutlet UIButton *clipboardButton;
+@property(nonatomic,strong) IBOutlet UILabel *clipboardlabel;
 
-@property (nonatomic, retain) UIDocumentInteractionController *dic;
+@property (nonatomic, strong) UIDocumentInteractionController *dic;
 
-@property(nonatomic,retain)UIImage *selectedFlyerImage;
-@property(nonatomic,retain)NSString *selectedFlyerTitle;
-@property(nonatomic,retain)NSString *selectedFlyerDescription;
-@property(nonatomic,retain)NSString *detailFileName;
-@property(nonatomic,retain)NSString *imageFileName;
+@property(nonatomic,strong)UIImage *selectedFlyerImage;
+@property(nonatomic,strong)NSString *selectedFlyerTitle;
+@property(nonatomic,strong)NSString *selectedFlyerDescription;
+@property(nonatomic,strong)NSString *detailFileName;
+@property(nonatomic,strong)NSString *imageFileName;
 
-@property(nonatomic,retain) MyNavigationBar *navBar;
-@property(nonatomic,retain)FlyrViewController *fvController;
-@property(nonatomic,retain)SaveFlyerController *svController;
-@property (nonatomic, retain) LoadingView *loadingView;
+@property(nonatomic,strong) MyNavigationBar *navBar;
+@property(nonatomic,strong)FlyrViewController *fvController;
+@property(nonatomic,strong)SaveFlyerController *svController;
+@property (nonatomic, strong) LoadingView *loadingView;
 @property BOOL fromPhotoController;
 
-@property (nonatomic, retain) OLBTwitpicEngine *twit;
+@property (nonatomic, strong) OLBTwitpicEngine *twit;
 @property(nonatomic, strong) BitlyURLShortener *bitly;
 
 -(IBAction)onClickFacebookButton;

@@ -23,7 +23,7 @@
 #pragma mark -
 #pragma mark Singleton definition
 
-GTMOBJECT_SINGLETON_BOILERPLATE(ImageCache, sharedImageCache)
+//GTMOBJECT_SINGLETON_BOILERPLATE(ImageCache, sharedImageCache)
 
 #pragma mark -
 #pragma mark Constructor and destructor

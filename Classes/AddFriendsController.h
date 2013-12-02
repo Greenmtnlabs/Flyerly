@@ -66,33 +66,33 @@
     
 }
 
-@property(nonatomic,retain) IBOutlet UILabel *contactsLabel;
-@property(nonatomic,retain) IBOutlet UILabel *facebookLabel;
-@property(nonatomic,retain) IBOutlet UILabel *twitterLabel;
-@property(nonatomic,retain) IBOutlet UILabel *doneLabel;
-@property(nonatomic,retain) IBOutlet UILabel *selectAllLabel;
-@property(nonatomic,retain) IBOutlet UILabel *unSelectAllLabel;
-@property(nonatomic,retain) IBOutlet UILabel *inviteLabel;
-@property(nonatomic,retain) IBOutlet UIButton *contactsButton;
-@property(nonatomic,retain) IBOutlet UIButton *facebookButton;
-@property(nonatomic,retain) IBOutlet UIButton *twitterButton;
-@property(nonatomic,retain) IBOutlet UITextField *searchTextField;
-@property (nonatomic, retain) LoadingView *loadingView;
+@property(nonatomic,strong) IBOutlet UILabel *contactsLabel;
+@property(nonatomic,strong) IBOutlet UILabel *facebookLabel;
+@property(nonatomic,strong) IBOutlet UILabel *twitterLabel;
+@property(nonatomic,strong) IBOutlet UILabel *doneLabel;
+@property(nonatomic,strong) IBOutlet UILabel *selectAllLabel;
+@property(nonatomic,strong) IBOutlet UILabel *unSelectAllLabel;
+@property(nonatomic,strong) IBOutlet UILabel *inviteLabel;
+@property(nonatomic,strong) IBOutlet UIButton *contactsButton;
+@property(nonatomic,strong) IBOutlet UIButton *facebookButton;
+@property(nonatomic,strong) IBOutlet UIButton *twitterButton;
+@property(nonatomic,strong) IBOutlet UITextField *searchTextField;
+@property (nonatomic, strong) LoadingView *loadingView;
 
-@property(nonatomic,retain) IBOutlet UITableView *uiTableView;
-@property(nonatomic,retain) NSMutableArray *contactsArray;
-@property(nonatomic,retain) NSMutableArray *facebookArray;
-@property(nonatomic,retain) NSMutableArray *twitterArray;
-@property(nonatomic,retain)  ACAccount *account;
+@property(nonatomic,strong) IBOutlet UITableView *uiTableView;
+@property(nonatomic,strong) NSMutableArray *contactsArray;
+@property(nonatomic,strong) NSMutableArray *facebookArray;
+@property(nonatomic,strong) NSMutableArray *twitterArray;
+@property(nonatomic,strong)  ACAccount *account;
 
-@property(nonatomic,retain) NSMutableArray *contactBackupArray;
-@property(nonatomic,retain) NSMutableArray *facebookBackupArray;
-@property(nonatomic,retain) NSMutableArray *twitterBackupArray;
-@property (nonatomic, retain) MyNavigationBar *navBar;
-@property(nonatomic,retain) NSMutableArray *deviceContactItems;
-@property(nonatomic,retain) NSMutableArray *fbinvited;
-@property(nonatomic,retain) NSMutableArray *Twitterinvited;
-@property(nonatomic,retain) NSMutableArray *iPhoneinvited;
+@property(nonatomic,strong) NSMutableArray *contactBackupArray;
+@property(nonatomic,strong) NSMutableArray *facebookBackupArray;
+@property(nonatomic,strong) NSMutableArray *twitterBackupArray;
+@property (nonatomic, strong) MyNavigationBar *navBar;
+@property(nonatomic,strong) NSMutableArray *deviceContactItems;
+@property(nonatomic,strong) NSMutableArray *fbinvited;
+@property(nonatomic,strong) NSMutableArray *Twitterinvited;
+@property(nonatomic,strong) NSMutableArray *iPhoneinvited;
 
 - (IBAction)selectAllCheckBoxes:(UIButton *)sender;
 - (IBAction)unSelectAllCheckBoxes:(UIButton *)sender;

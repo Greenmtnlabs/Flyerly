@@ -80,7 +80,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     navBar.alpha = 0.6;
-	[_session resume];
+	_session = nil;
 	
 	aHUD = [[HudView alloc]init];
     
@@ -239,7 +239,7 @@
 	
 	NSDictionary *params = @{@"caption": @"Posted by SocialFlyr"}; 
 	//[[FBRequest requestWithDelegate:self] call:@"facebook.photos.upload" params:params dataParam:(NSData*)flyrImg];
-	[[FBRequest requestWithDelegate:self] call:@"photos.upload" params:params dataParam:(NSData*)flyrImg];
+    [FBRequest requestForUploadPhoto:flyrImg];
 
 }
 
@@ -441,7 +441,6 @@
 	[twit release];
 	//[_session release];
 	[ptController release];
-    [super dealloc];
 }
 
 

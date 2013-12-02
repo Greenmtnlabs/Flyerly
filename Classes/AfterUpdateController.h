@@ -15,7 +15,7 @@
     LauchViewController *launchController;
 }
 
-@property(nonatomic,retain) LauchViewController *launchController;
+@property(nonatomic,strong) LauchViewController *launchController;
 
 -(IBAction)ok;
 

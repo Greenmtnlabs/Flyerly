@@ -139,8 +139,8 @@
     ACAccountStore *account = [[ACAccountStore alloc] init];
     ACAccountType *accountType = [account accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
     
-    sName = [screenName retain];
-    sMessage = [message retain];
+    sName = screenName;
+    sMessage = message;
     
     // Request access from the user to access their Twitter account
     [account requestAccessToAccountsWithType:accountType withCompletionHandler:^(BOOL granted, NSError *error) {
@@ -148,7 +148,7 @@
         if (granted == YES) {
             
             // Populate array with all available Twitter accounts
-            arrayOfAccounts = [[account accountsWithAccountType:accountType] retain];
+            arrayOfAccounts = [account accountsWithAccountType:accountType];
             
             // Sanity check
             if ([arrayOfAccounts count] > 1 ) {

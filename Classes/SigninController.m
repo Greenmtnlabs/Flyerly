@@ -238,7 +238,7 @@
                 if (granted == YES) {
                     
                     // Populate array with all available Twitter accounts
-                    NSArray *arrayOfAccounts = [[account accountsWithAccountType:accountType] retain];
+                    NSArray *arrayOfAccounts = [account accountsWithAccountType:accountType];
                     // Sanity check
                     if ([arrayOfAccounts count] > 1) {
                         if([TWTweetComposeViewController canSendTweet]) {
@@ -365,7 +365,6 @@
     [launchController release];
     [registerController release];
 
-    [super dealloc];
 }
 
 #pragma Twitter

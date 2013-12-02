@@ -68,12 +68,6 @@
 	title.text = str;
 }
 
-- (void)dealloc {
-	[leftButton release];
-	[rightButton release];
-	[title release];
-    [super dealloc];
-}
 
 
 @end

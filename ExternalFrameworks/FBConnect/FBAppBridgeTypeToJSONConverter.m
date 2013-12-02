@@ -147,7 +147,7 @@ static const NSUInteger PasteboardThreshold = 5120;
     // If the data is short enough, put it in the URL directly. Otherwise use UIPasteboard
     if (data.length <= PasteboardThreshold) {
         jsonReadyValue = FBEncodeBase64(data);
-        json[FBAppBridgeTypesMetadata.isBase64] = @YES;
+        json[FBAppBridgeTypesMetadata.isBase64] = [NSNumber numberWithBool:YES];
     } else {
         UIPasteboard *board = [UIPasteboard pasteboardWithUniqueName];
         [board setPersistent:YES];
@@ -156,7 +156,7 @@ static const NSUInteger PasteboardThreshold = 5120;
         jsonReadyValue = board.name;
         [self.createdPasteboardNames addObject:board.name];
         
-        json[FBAppBridgeTypesMetadata.isPasteboard] = @YES;
+        json[FBAppBridgeTypesMetadata.isPasteboard] = [NSNumber numberWithBool:YES];
     }
     
     json[FBAppBridgeTypesMetadata.tag] = tag ?: @"";

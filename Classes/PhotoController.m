@@ -665,8 +665,8 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 	templateScrollWidth = 60;
 	templateScrollHeight = 55;
 	templateArray = [[NSMutableArray alloc]init];
-	NSAutoreleasePool* pool1 = [[NSAutoreleasePool alloc] init];
-	[pool1 release];
+	//NSAutoreleasePool* pool1 = [[NSAutoreleasePool alloc] init];
+	///[pool1 release];
 
     // Add templates in scroll view
     [self addTemplatesInSubView];
@@ -1867,14 +1867,14 @@ int arrangeLayerIndex;
 	if(imgPickerFlag == 1){
 		
 		[[picker parentViewController] dismissModalViewControllerAnimated:YES];
-		UIImage *testImage = [img retain];
+		UIImage *testImage = img;
         selectedTemplate = testImage;
 		[self.imgView setImage:testImage] ;
 	}
 	else if(imgPickerFlag == 2){
 	
 		[[picker parentViewController] dismissModalViewControllerAnimated:YES];
-		UIImage *testImage = [img retain];
+		UIImage *testImage = img;
         
         UIImageView *lastPhotoLayer = [[self photoLayersArray] lastObject];
         [lastPhotoLayer setImage:testImage];
@@ -1966,13 +1966,13 @@ int arrangeLayerIndex;
     
 	if(self.imgPickerFlag == 1){
 		
-		UIImage *testImage = [selectedImage retain];
+		UIImage *testImage = selectedImage;
         selectedTemplate = testImage;
 		[self.imgView setImage:testImage] ;
 	}
 	else if(self.imgPickerFlag == 2){
         
-		UIImage *testImage = [selectedImage retain];
+		UIImage *testImage = selectedImage;
         UIImageView *lastPhotoLayer = [[self photoLayersArray] lastObject];
         [lastPhotoLayer setImage:testImage];
 
@@ -2046,7 +2046,7 @@ int arrangeLayerIndex;
 	else if(self.imgPickerFlag == 2){
         
 		[picker dismissModalViewControllerAnimated:YES];
-		UIImage *testImage = [info[UIImagePickerControllerOriginalImage] retain];
+		UIImage *testImage = info[UIImagePickerControllerOriginalImage];
         
         UIImageView *lastPhotoLayer = [[self photoLayersArray] lastObject];
         [lastPhotoLayer setImage:testImage];
@@ -3677,7 +3677,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         // Layer handling message
         
         if(layerEditMessage==nil){
-            layerEditMessage = [[[NSBundle mainBundle] loadNibNamed:@"ShareProgressView" owner:self options:nil][0] retain];
+            layerEditMessage = [[NSBundle mainBundle] loadNibNamed:@"ShareProgressView" owner:self options:nil][0];
             [layerEditMessage setFrame:CGRectMake(layerEditMessage.frame.origin.x, 320, layerEditMessage.frame.size.width, layerEditMessage.frame.size.height+2)];
         
             // border radius
@@ -4310,7 +4310,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     
     view.transform = leftWobble;  // starting point
     
-    [UIView beginAnimations:@"wobble" context:view];
+    [UIView beginAnimations:@"wobble" context:(__bridge void *)(view)];
     [UIView setAnimationRepeatAutoreverses:YES];
     [UIView setAnimationRepeatCount:INFINITY]; // adjustable
     [UIView setAnimationDelegate:self];
@@ -4713,7 +4713,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 {
     //[rightUndoBarButton setEnabled:YES];
 	NSValue *touchPointValue = [NSValue valueWithCGPoint:touchPoint] ;
-	[UIView beginAnimations:nil context:touchPointValue];
+	[UIView beginAnimations:nil context:(__bridge void *)(touchPointValue)];
 	[UIView setAnimationDuration:GROW_ANIMATION_DURATION_SECONDS];
 	CGAffineTransform transform = CGAffineTransformMakeScale(1.07,1.07);
 	theView.transform = transform;
@@ -5004,7 +5004,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         }
         else
         {
-            NSAutoreleasePool* ap = [[NSAutoreleasePool alloc] init];
+           
             for(int i = 0 ; i < [files count];i++)
             {
                 NSString *lastFileName = files[i];
@@ -5017,7 +5017,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
                 }
                 
             }
-            [ap release];
             imageNameNew = [NSString stringWithFormat:@"/IMG_%d.jpg",++largestImgCount];
             finalImgWritePath = [folderPath stringByAppendingString:imageNameNew];
             NSString *newImgDetailName = [NSString stringWithFormat:@"/IMG_%d.txt",largestImgCount];
@@ -5295,8 +5294,8 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     PFQuery *query = [PFQuery queryWithClassName:TABLE_JSON];
     [query whereKey:COLUMN_USER equalTo:[PFUser currentUser]];
     
-    NSError **error;
-    NSArray *postArray = [query findObjects:error];
+    NSError *error;
+    NSArray *postArray = [query findObjects:&error];
     
     if(!postArray){
         return NO;
@@ -5332,8 +5331,8 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     PFQuery *query = [PFQuery queryWithClassName:TABLE_JSON];
     [query whereKey:COLUMN_USER equalTo:[PFUser currentUser]];
     
-    NSError **error;
-    NSArray *postArray = [query findObjects:error];
+    NSError *error;
+    NSArray *postArray = [query findObjects:&error];
     
     if(!postArray){
         return NO;
@@ -5566,8 +5565,8 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         PFQuery *query = [PFQuery queryWithClassName:TABLE_JSON];
         [query whereKey:COLUMN_USER equalTo:[PFUser currentUser]];
         
-        NSError **error;
-        NSArray *postArray = [query findObjects:error];
+        NSError *error;
+        NSArray *postArray = [query findObjects:&error];
         
         if(!postArray){
             
@@ -5956,7 +5955,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	[iconScrollView release];
     [layerScrollView release];    
     
-    [super dealloc];
 }
 
 -(void) logLayerAddedEvent{

@@ -156,11 +156,5 @@ BOOL frontCamera = NO;
     }];
 }
 
--(void)dealloc{
-    gridImageView = nil;
-    photoController = nil;
-    libraryLatestPhoto = nil;
-    [super dealloc];
-}
 
 @end

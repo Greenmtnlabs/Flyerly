@@ -23,14 +23,14 @@
     NSString *identifier1;
     NSString *identifier2;
 }
-@property(nonatomic, retain) IBOutlet UIButton *leftCheckBox;
-@property(nonatomic, retain) IBOutlet UILabel *leftName;
-@property(nonatomic, retain) IBOutlet UIButton *rightCheckBox;
-@property(nonatomic, retain) IBOutlet UILabel *rightName;
-@property(nonatomic, retain) IBOutlet UIImageView *leftImage;
-@property(nonatomic, retain) IBOutlet UIImageView *rightImage;
-@property(nonatomic, retain) NSString *identifier1;
-@property(nonatomic, retain) NSString *identifier2;
+@property(nonatomic, strong) IBOutlet UIButton *leftCheckBox;
+@property(nonatomic, strong) IBOutlet UILabel *leftName;
+@property(nonatomic, strong) IBOutlet UIButton *rightCheckBox;
+@property(nonatomic, strong) IBOutlet UILabel *rightName;
+@property(nonatomic, strong) IBOutlet UIImageView *leftImage;
+@property(nonatomic, strong) IBOutlet UIImageView *rightImage;
+@property(nonatomic, strong) NSString *identifier1;
+@property(nonatomic, strong) NSString *identifier2;
 @property BOOL leftSelected;
 @property BOOL rightSelected;
 

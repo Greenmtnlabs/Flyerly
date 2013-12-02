@@ -111,7 +111,11 @@ connectionIdentifier:(NSString *)theIdentifier requestType:(MGTwitterRequestType
         currentNode[elementName] = boolNumber;
     } else if ([elementName isEqualToString:@"created_at"]) {
         // Change date-string into an NSDate.
-        NSDate *creationDate = [NSDate dateWithNaturalLanguageString:currentNode[elementName]];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"dd-MM-YYYY HH:mm:ss"];
+        NSDate *creationDate = [dateFormatter dateFromString:currentNode[elementName]];
+        
+
         if (creationDate) {
             currentNode[elementName] = creationDate;
         }

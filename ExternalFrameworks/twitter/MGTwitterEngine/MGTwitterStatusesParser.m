@@ -52,7 +52,7 @@
 - (void)parser:(NSXMLParser *)theParser didEndElement:(NSString *)elementName 
   namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName
 {
-    [super parser:theParser didEndElement:elementName namespaceURI:namespaceURI qualifiedName:qName];
+    [self.superclass parser:theParser didEndElement:elementName namespaceURI:namespaceURI qualifiedName:qName];
     
     if ([elementName isEqualToString:@"user"]) {
         currentNode = [parsedObjects lastObject];

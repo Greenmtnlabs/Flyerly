@@ -532,7 +532,6 @@ sd:;
 	[tView release];
 	[photoArray release];
     [ptController release];
-    [super dealloc];
 }
 
 -(void)goBack{
