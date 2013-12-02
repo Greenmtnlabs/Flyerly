@@ -135,7 +135,7 @@ signatureProvider:(id<OASignatureProviding, NSObject>)aProvider
 		extraOAuthParameters = [NSMutableDictionary new];
 	}
 	
-	[extraOAuthParameters setObject:parameterValue forKey:parameterName];
+	extraOAuthParameters[parameterName] = parameterValue;
 }
 
 - (void)prepare 
@@ -162,7 +162,7 @@ signatureProvider:(id<OASignatureProviding, NSObject>)aProvider
 	{
 		[extraParameters appendFormat:@", %@=\"%@\"",
 		 [parameterName URLEncodedString],
-		 [[extraOAuthParameters objectForKey:parameterName] URLEncodedString]];
+		 [extraOAuthParameters[parameterName] URLEncodedString]];
 	}	
     
     NSString *oauthHeader = [NSString stringWithFormat:@"OAuth realm=\"%@\", oauth_consumer_key=\"%@\", %@oauth_signature_method=\"%@\", oauth_signature=\"%@\", oauth_timestamp=\"%@\", oauth_nonce=\"%@\", oauth_version=\"1.0\"%@",

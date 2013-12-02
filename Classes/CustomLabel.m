@@ -42,7 +42,7 @@
 -(void)encodeWithCoder:(NSCoder *)aCoder{
     [super encodeWithCoder:aCoder];
     [aCoder encodeObject: borderColor];
-    [aCoder encodeObject: [NSNumber numberWithInteger:lineWidth]];
+    [aCoder encodeObject: @(lineWidth)];
 }
 
 -(id)initWithCoder:(NSCoder *)aDecoder{

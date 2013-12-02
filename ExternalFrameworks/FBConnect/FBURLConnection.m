@@ -58,10 +58,8 @@ static NSArray* _cdnHosts;
 
 + (void)initialize {
     if (_cdnHosts == nil) {
-        _cdnHosts = [[NSArray arrayWithObjects:
-            @"akamaihd.net", 
-            @"fbcdn.net", 
-            nil] retain];
+        _cdnHosts = [@[@"akamaihd.net", 
+            @"fbcdn.net"] retain];
     }
 }
 

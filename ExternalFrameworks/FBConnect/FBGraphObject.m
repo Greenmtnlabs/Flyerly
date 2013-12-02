@@ -109,7 +109,7 @@ typedef enum _SelectorInferredImplType {
 
 - (void)setProvisionedForPost:(BOOL)provisionedForPost {
     if (provisionedForPost) {
-        _jsonObject[FBPostObject] = [NSNumber numberWithBool:YES];
+        _jsonObject[FBPostObject] = @YES;
     } else {
         [_jsonObject removeObjectForKey:FBPostObject];
     }
@@ -256,12 +256,12 @@ typedef enum _SelectorInferredImplType {
 }
 
 - (id)graphObjectifyAtKey:(id)key {
-    id object = [_jsonObject objectForKey:key];
+    id object = _jsonObject[key];
     // make certain it is FBObjectGraph-ified
     id possibleReplacement = [FBGraphObject graphObjectWrappingObject:object];
     if (object != possibleReplacement) {
         // and if not-yet, replace the original with the wrapped object
-        [_jsonObject setObject:possibleReplacement forKey:key];
+        _jsonObject[key] = possibleReplacement;
         object = possibleReplacement;
     }
     return object;
@@ -293,7 +293,7 @@ typedef enum _SelectorInferredImplType {
 }
 
 - (void)setObject:(id)object forKey:(id)key {
-    return [_jsonObject setObject:object forKey:key];    
+    return [_jsonObject setObject:object forKey:key];
 }
 
 - (void)removeObjectForKey:(id)key {
@@ -446,12 +446,12 @@ typedef enum _SelectorInferredImplType {
 }
 
 - (id)graphObjectifyAtIndex:(NSUInteger)index {
-    id object = [_jsonArray objectAtIndex:index];
+    id object = _jsonArray[index];
     // make certain it is FBObjectGraph-ified
     id possibleReplacement = [FBGraphObject graphObjectWrappingObject:object];
     if (object != possibleReplacement) {
         // and if not-yet, replace the original with the wrapped object
-        [_jsonArray replaceObjectAtIndex:index withObject:possibleReplacement];
+        _jsonArray[index] = possibleReplacement;
         object = possibleReplacement;
     }
     return object;
@@ -495,7 +495,7 @@ typedef enum _SelectorInferredImplType {
 }
 
 - (void)replaceObjectAtIndex:(NSUInteger)index withObject:(id)object {
-    [_jsonArray replaceObjectAtIndex:index withObject:object];
+    _jsonArray[index] = object;
 }
 
 @end

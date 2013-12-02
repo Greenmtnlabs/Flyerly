@@ -452,16 +452,16 @@ void LFHRReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType even
     // combine the header
     NSMutableDictionary *headerDictionary = [NSMutableDictionary dictionary];
     if (_userAgent) {
-        [headerDictionary setObject:_userAgent forKey:@"User-Agent"];
+        headerDictionary[@"User-Agent"] = _userAgent;
     }
 
     if (_contentType) {
-        [headerDictionary setObject:_contentType forKey:@"Content-Type"];
+        headerDictionary[@"Content-Type"] = _contentType;
     }
 
     if (inputStream) {
         if (byteStreamSize && byteStreamSize != NSUIntegerMax) {
-            [headerDictionary setObject:[NSString stringWithFormat:@"%ju", (uintmax_t)byteStreamSize] forKey:@"Content-Length"];
+            headerDictionary[@"Content-Length"] = [NSString stringWithFormat:@"%ju", (uintmax_t)byteStreamSize];
             _requestMessageBodySize = byteStreamSize;
         }
         else {
@@ -470,7 +470,7 @@ void LFHRReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType even
     }
     else {
         if ([data length]) {
-            [headerDictionary setObject:[NSString stringWithFormat:@"%ju", (uintmax_t)[data length]] forKey:@"Content-Length"];
+            headerDictionary[@"Content-Length"] = [NSString stringWithFormat:@"%ju", (uintmax_t)[data length]];
         }
         _requestMessageBodySize = [data length];
     }
@@ -482,7 +482,7 @@ void LFHRReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType even
     NSEnumerator *dictEnumerator = [headerDictionary keyEnumerator];
     id key;
     while ((key = [dictEnumerator nextObject])) {
-        CFHTTPMessageSetHeaderFieldValue(request, (CFStringRef)[key description], (CFStringRef)[headerDictionary objectForKey:key]);
+        CFHTTPMessageSetHeaderFieldValue(request, (CFStringRef)[key description], (CFStringRef)headerDictionary[key]);
     }
 
     if (!inputStream && data) {

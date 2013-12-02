@@ -167,8 +167,8 @@ BOOL selectAll;
     [self setUnselectTab:sender];
     PFUser *user = [PFUser currentUser];
     self.iPhoneinvited = [[NSMutableArray alloc] init];
-    if ([user objectForKey:@"iphoneinvited"]) {
-        self.iPhoneinvited  = [user objectForKey:@"iphoneinvited"];
+    if (user[@"iphoneinvited"]) {
+        self.iPhoneinvited  = user[@"iphoneinvited"];
     }
     
     // init contact array
@@ -254,12 +254,12 @@ BOOL selectAll;
         if(!lastName)
             lastName = (CFStringRef) @"";
         
-        [dOfPerson setObject:[NSString stringWithFormat:@"%@ %@", firstName, lastName] forKey:@"name"];
+        dOfPerson[@"name"] = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
         
         //For Email ids
         ABMutableMultiValueRef eMail  = ABRecordCopyValue(ref, kABPersonEmailProperty);
         if(ABMultiValueGetCount(eMail) > 0) {
-            [dOfPerson setObject:(NSString *)ABMultiValueCopyValueAtIndex(eMail, 0) forKey:@"email"];
+            dOfPerson[@"email"] = (NSString *)ABMultiValueCopyValueAtIndex(eMail, 0);
         }
         
         // For contact picture
@@ -268,11 +268,11 @@ BOOL selectAll;
             if ( &ABPersonCopyImageDataWithFormat != nil ) {
                 // iOS >= 4.1
                 contactPicture = [UIImage imageWithData:(NSData *)ABPersonCopyImageDataWithFormat(ref, kABPersonImageFormatThumbnail)];
-                [dOfPerson setObject:contactPicture forKey:@"image"];
+                dOfPerson[@"image"] = contactPicture;
             } else {
                 // iOS < 4.1
                 contactPicture = [UIImage imageWithData:(NSData *)ABPersonCopyImageData(ref)];
-                [dOfPerson setObject:contactPicture forKey:@"image"];
+                dOfPerson[@"image"] = contactPicture;
             }
         }
         
@@ -282,13 +282,13 @@ BOOL selectAll;
             mobileLabel = (NSString*)ABMultiValueCopyLabelAtIndex(phones, i);
             if([mobileLabel isEqualToString:(NSString *)kABPersonPhoneMobileLabel])
             {
-                [dOfPerson setObject:(NSString*)ABMultiValueCopyValueAtIndex(phones, i) forKey:@"Phone"];
-                [dOfPerson setObject:(NSString*)ABMultiValueCopyValueAtIndex(phones, i) forKey:@"identifier"];
+                dOfPerson[@"Phone"] = (NSString*)ABMultiValueCopyValueAtIndex(phones, i);
+                dOfPerson[@"identifier"] = (NSString*)ABMultiValueCopyValueAtIndex(phones, i);
                 [contactsArray addObject:dOfPerson];
             }
             else if ([mobileLabel isEqualToString:(NSString*)kABPersonPhoneIPhoneLabel])
             {
-                [dOfPerson setObject:(NSString*)ABMultiValueCopyValueAtIndex(phones, i) forKey:@"Phone"];
+                dOfPerson[@"Phone"] = (NSString*)ABMultiValueCopyValueAtIndex(phones, i);
                 [contactsArray addObject:dOfPerson];
                 break ;
             }
@@ -406,8 +406,8 @@ BOOL selectAll;
                 
                 PFUser *user = [PFUser currentUser];
                 self.fbinvited = [[NSMutableArray alloc] init];
-                if ([user objectForKey:@"fbinvited"]) {
-                    self.fbinvited  = [user objectForKey:@"fbinvited"];
+                if (user[@"fbinvited"]) {
+                    self.fbinvited  = user[@"fbinvited"];
                 }
                 
                 //loadingView =[LoadingView loadingViewInView:self.view  text:@"Loading..."];
@@ -421,8 +421,8 @@ BOOL selectAll;
                 
             } else {
                 
-                [appDelegate.facebook authorize:[NSArray arrayWithObjects: @"read_stream",
-                                                 @"publish_stream", @"email", nil]];
+                [appDelegate.facebook authorize:@[@"read_stream",
+                                                 @"publish_stream", @"email"]];
             }
         }
         
@@ -448,22 +448,22 @@ int totalCount = 0;
     
     int count = 0;
     
-    for (NSDictionary *friendData in [result objectForKey:@"data"]) {
+    for (NSDictionary *friendData in result[@"data"]) {
         
-        NSString *imageURL = [[[friendData objectForKey:@"picture"] objectForKey:@"data"] objectForKey:@"url"];
+        NSString *imageURL = friendData[@"picture"][@"data"][@"url"];
         //NSURL *imageURL = [NSURL URLWithString:[[[friendData objectForKey:@"picture"] objectForKey:@"data"] objectForKey:@"url"]];
         //UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
         
         // Here we will get the facebook contacts
         NSMutableDictionary *dOfPerson=[NSMutableDictionary dictionary];
         
-        [dOfPerson setObject:[friendData objectForKey:@"name"] forKey:@"name"];
-        [dOfPerson setObject:[friendData objectForKey:@"id"] forKey:@"identifier"];
-        if ([friendData objectForKey:@"gender"]) {
-            [dOfPerson setObject:[friendData objectForKey:@"gender"] forKey:@"gender"];
+        dOfPerson[@"name"] = friendData[@"name"];
+        dOfPerson[@"identifier"] = friendData[@"id"];
+        if (friendData[@"gender"]) {
+            dOfPerson[@"gender"] = friendData[@"gender"];
         }
         if(imageURL){
-            [dOfPerson setObject:imageURL forKey:@"image"];
+            dOfPerson[@"image"] = imageURL;
         }
         //if(image){
         //    [dOfPerson setObject:image forKey:@"image"];
@@ -540,8 +540,8 @@ int totalCount = 0;
         } else{
             PFUser *user = [PFUser currentUser];
             self.Twitterinvited = [[NSMutableArray alloc] init];
-            if ([user objectForKey:@"tweetinvited"]) {
-                self.Twitterinvited  = [user objectForKey:@"tweetinvited"];
+            if (user[@"tweetinvited"]) {
+                self.Twitterinvited  = user[@"tweetinvited"];
             }
             //loadingView =[LoadingView loadingViewInView:self.view text:@"Loading..."];
             //loadingViewFlag = YES;
@@ -573,7 +573,7 @@ int totalCount = 0;
                                 actionSheet.tag = 2;
                                 
                                 for (int i = 0; i < arrayOfAccounts.count; i++) {
-                                    ACAccount *acct = [arrayOfAccounts objectAtIndex:i];
+                                    ACAccount *acct = arrayOfAccounts[i];
                                     [actionSheet addButtonWithTitle:acct.username];
                                 }
                                 
@@ -582,7 +582,7 @@ int totalCount = 0;
                             });
                         } else if ([arrayOfAccounts count] > 0 ) {
                             [self cursoredTwitterContacts:[NSString stringWithFormat:@"%d", -1]
-                                                  account:[arrayOfAccounts objectAtIndex:0 ]];
+                                                  account:arrayOfAccounts[0]];
                         }
                     }
                 }];
@@ -613,9 +613,9 @@ int totalCount = 0;
     account = acct;
     // Build a twitter request
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
-    [params setObject:cursor forKey:@"cursor"];
+    params[@"cursor"] = cursor;
     //[params setObject:@"20" forKey:@"count"];
-    [params setObject:[acct identifier] forKey:@"user_id"];
+    params[@"user_id"] = [acct identifier];
     
     TWRequest *getRequest = [[TWRequest alloc] initWithURL:
                              [NSURL URLWithString:[NSString stringWithFormat:@"https://api.twitter.com/1.1/followers/list.json"]]
@@ -634,21 +634,21 @@ int totalCount = 0;
             NSDictionary *followers =  [NSJSONSerialization JSONObjectWithData:responseData
                                                                        options:NSJSONReadingMutableLeaves
                                                                          error:&jsonError];
-            NSDictionary *users = [followers objectForKey:@"users"];
+            NSDictionary *users = followers[@"users"];
             for (id user in users) {
                 NSMutableDictionary *dOfPerson=[NSMutableDictionary dictionary];
-                [dOfPerson setObject:[user objectForKey:@"name"] forKey:@"name"];
-                [dOfPerson setObject:[user objectForKey:@"screen_name"] forKey:@"identifier"];
-                [dOfPerson setObject:[user objectForKey:@"location"] forKey:@"location"];
+                dOfPerson[@"name"] = user[@"name"];
+                dOfPerson[@"identifier"] = user[@"screen_name"];
+                dOfPerson[@"location"] = user[@"location"];
                 
-                NSString *imageURL = [user objectForKey:@"profile_image_url"];
+                NSString *imageURL = user[@"profile_image_url"];
                 NSString *new = [imageURL stringByReplacingOccurrencesOfString: @"normal" withString:@"bigger"];
                 //NSURL *imageURL = [NSURL URLWithString:[user objectForKey:@"profile_image_url"]];
                 //NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
                 //UIImage *image = [UIImage imageWithData:imageData];
                 
                 if(imageURL){
-                    [dOfPerson setObject:new forKey:@"image"];
+                    dOfPerson[@"image"] = new;
                 }
                 
                 [self.twitterArray addObject:dOfPerson];
@@ -662,7 +662,7 @@ int totalCount = 0;
             //[self onSearchClick:nil];
             
             [uiTableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
-            nextCursor = [followers objectForKey:@"next_cursor"];
+            nextCursor = followers[@"next_cursor"];
         }
         
         /*twitterBackupArray = nil;
@@ -687,7 +687,7 @@ int totalCount = 0;
 - (void)makeTwitterPost:(ACAccount *)acct {
     
     NSMutableDictionary *params = [[[NSMutableDictionary alloc] init] autorelease];
-    [params setObject:[NSString stringWithFormat:@"@%@ %@", sName, sMessage] forKey:@"status"];
+    params[@"status"] = [NSString stringWithFormat:@"@%@ %@", sName, sMessage];
     
     // Build a twitter request
     TWRequest *postRequest = [[[TWRequest alloc] initWithURL:[NSURL URLWithString:@"http://api.twitter.com/1/statuses/update.json"] parameters:params requestMethod:TWRequestMethodPOST] autorelease];
@@ -774,7 +774,7 @@ int totalCount = 0;
     if(buttonIndex != arrayOfAccounts.count) {
         
         //save to NSUserDefault
-          account = [arrayOfAccounts objectAtIndex:buttonIndex];
+          account = arrayOfAccounts[buttonIndex];
         
         //Convert twitter username to email
         if ( actionSheet.tag == 1 ) {
@@ -790,11 +790,11 @@ int totalCount = 0;
  */
 -(void)inviteFreindUnselected:(NSString *)tag{
      NSMutableDictionary *dict2;
-    dict2 = [[self getArrayOfSelectedTab] objectAtIndex:[tag intValue]];
-    NSString *identifier = [[NSString alloc]initWithString:[dict2 objectForKey:@"identifier"]];
+    dict2 = [self getArrayOfSelectedTab][[tag intValue]];
+    NSString *identifier = [[NSString alloc]initWithString:dict2[@"identifier"]];
 
     for (int i =0; i < deviceContactItems.count; i++) {
-        if ([identifier isEqualToString:[deviceContactItems objectAtIndex:i]]) {
+        if ([identifier isEqualToString:deviceContactItems[i]]) {
             [deviceContactItems removeObjectAtIndex:i];
         }
         
@@ -807,11 +807,11 @@ int totalCount = 0;
     NSMutableDictionary *dict2;
         // Check index
         if([[self getArrayOfSelectedTab] count] >= 1){
-            dict2 = [[self getArrayOfSelectedTab] objectAtIndex:(cellImageButton.tag)];
-            if ([self ckeckExistContact:[dict2 objectForKey:@"identifier"]]) {
+            dict2 = [self getArrayOfSelectedTab][(cellImageButton.tag)];
+            if ([self ckeckExistContact:dict2[@"identifier"]]) {
                   if (contactsCount <15) {
                       contactsCount = contactsCount +1;
-                      [deviceContactItems addObject:[dict2 objectForKey:@"identifier"]];
+                      [deviceContactItems addObject:dict2[@"identifier"]];
                       [cellImageButton setBackgroundImage:[UIImage imageNamed:@"add_icon"] forState:UIControlStateNormal];
                   }else{
                       [self showAlert:@"You can only invite 15 user at a time" message:@""];
@@ -821,7 +821,7 @@ int totalCount = 0;
 
                 [self inviteFreindUnselected:[NSString stringWithFormat:@"%d",cellImageButton.tag]];
                  contactsCount = contactsCount -1;
-                if ([self ckeckExistdb:[dict2 objectForKey:@"identifier"]]) {
+                if ([self ckeckExistdb:dict2[@"identifier"]]) {
                     [cellImageButton setBackgroundImage:[UIImage imageNamed:@"add_icon-grey"] forState:UIControlStateNormal];
                 }else{
                     [cellImageButton setBackgroundImage:[UIImage imageNamed:@"check_icon"] forState:UIControlStateNormal];
@@ -833,7 +833,7 @@ int totalCount = 0;
 }
 - (BOOL)ckeckExistContact:(NSString *)identifier{
     for (int i = 0; i < deviceContactItems.count ; i++) {
-        if ([identifier isEqualToString:[deviceContactItems objectAtIndex:i]]) {
+        if ([identifier isEqualToString:deviceContactItems[i]]) {
             return NO;
         }
     }
@@ -851,7 +851,7 @@ int totalCount = 0;
     }
     
     for (int i = 0; i < checkary.count ; i++) {
-        if ([identifier isEqualToString:[checkary objectAtIndex:i]]) {
+        if ([identifier isEqualToString:checkary[i]]) {
             return NO;
         }
     }
@@ -891,7 +891,7 @@ int totalCount = 0;
             }
             [Twitterinvited  addObjectsFromArray:deviceContactItems];
             PFUser *user = [PFUser currentUser];
-            [user setObject:Twitterinvited forKey:@"tweetinvited"];
+            user[@"tweetinvited"] = Twitterinvited;
             [user saveInBackground];
             [deviceContactItems   removeAllObjects];
             
@@ -905,7 +905,7 @@ int totalCount = 0;
             NSLog(@"%@",fbinvited);
             
             PFUser *user = [PFUser currentUser];
-            [user setObject:fbinvited forKey:@"fbinvited"];
+            user[@"fbinvited"] = fbinvited;
             [user saveInBackground];
             [deviceContactItems removeAllObjects];
             [self showAlert:@"Invitation Sent!" message:@"You have successfully invited your friends to join flyerly."];
@@ -939,7 +939,7 @@ int totalCount = 0;
             [iPhoneinvited  addObjectsFromArray:globle.accounts];
             NSLog(@"%@",iPhoneinvited);
             PFUser *user = [PFUser currentUser];
-            [user setObject:iPhoneinvited forKey:@"iphoneinvited"];
+            user[@"iphoneinvited"] = iPhoneinvited;
             [user saveInBackground];
             [deviceContactItems   removeAllObjects];
             [self.uiTableView reloadData];
@@ -976,7 +976,7 @@ int totalCount = 0;
          */
         if ([[[FBSession activeSession]permissions]indexOfObject:@"publish_actions"] == NSNotFound) {
             
-            [[FBSession activeSession] reauthorizeWithPublishPermissions:[NSArray arrayWithObject:@"publish_actions"] defaultAudience:FBSessionDefaultAudienceOnlyMe completionHandler:^(FBSession *session, NSError *error) {
+            [[FBSession activeSession] reauthorizeWithPublishPermissions:@[@"publish_actions"] defaultAudience:FBSessionDefaultAudienceOnlyMe completionHandler:^(FBSession *session, NSError *error) {
                 
                 [self publish_action:action];
             }];
@@ -990,7 +990,7 @@ int totalCount = 0;
         /*
          * open a new session with publish permission
          */
-        [FBSession openActiveSessionWithPublishPermissions:[NSArray arrayWithObject:@"publish_actions"] defaultAudience:FBSessionDefaultAudienceOnlyMe allowLoginUI:YES completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
+        [FBSession openActiveSessionWithPublishPermissions:@[@"publish_actions"] defaultAudience:FBSessionDefaultAudienceOnlyMe allowLoginUI:YES completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
             
             if (!error && status == FBSessionStateOpen) {
                 [self publish_action:action];
@@ -1114,16 +1114,16 @@ NSMutableDictionary *selectedIdentifierDictionary;
     NSString *imgfile2 =nil;
     // Check index
     if([[self getArrayOfSelectedTab] count] >= 1){
-        dict2 = [[self getArrayOfSelectedTab] objectAtIndex:(indexPath.row)];
-        name2 = [dict2 objectForKey:@"name"];
-        if(selectedTab == FACEBOOK_TAB) detailfield = [dict2 objectForKey:@"gender"];
-        if(selectedTab == TWITTER_TAB) detailfield = [dict2 objectForKey:@"location"];
+        dict2 = [self getArrayOfSelectedTab][(indexPath.row)];
+        name2 = dict2[@"name"];
+        if(selectedTab == FACEBOOK_TAB) detailfield = dict2[@"gender"];
+        if(selectedTab == TWITTER_TAB) detailfield = dict2[@"location"];
         
         if(selectedTab == FACEBOOK_TAB || selectedTab == TWITTER_TAB){
-            imgfile2 = [dict2 objectForKey:@"image"];
+            imgfile2 = dict2[@"image"];
         } else {
-            imgfile = [dict2 objectForKey:@"image"];
-            detailfield = [dict2 objectForKey:@"identifier"];
+            imgfile = dict2[@"image"];
+            detailfield = dict2[@"identifier"];
         }
         
     }
@@ -1173,8 +1173,8 @@ NSMutableDictionary *selectedIdentifierDictionary;
     //[addButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [addButton addTarget:self action:@selector(inviteFreind:) forControlEvents:UIControlEventTouchUpInside];
     
-    if ([self ckeckExistContact:[dict2 objectForKey:@"identifier"]]) {
-        if ([self ckeckExistdb:[dict2 objectForKey:@"identifier"]]) {
+    if ([self ckeckExistContact:dict2[@"identifier"]]) {
+        if ([self ckeckExistdb:dict2[@"identifier"]]) {
             [addButton setBackgroundImage:[UIImage imageNamed:@"add_icon-grey"] forState:UIControlStateNormal];
         }else{
             [addButton setBackgroundImage:[UIImage imageNamed:@"check_icon"] forState:UIControlStateNormal];
@@ -1308,8 +1308,8 @@ NSMutableDictionary *selectedIdentifierDictionary;
     
     for(int contactIndex=0; contactIndex<[[self getBackupArrayOfSelectedTab] count]; contactIndex++){
         // Get left contact data
-        NSMutableDictionary *dict1 = [[self getBackupArrayOfSelectedTab] objectAtIndex:contactIndex];
-        NSString *name1 = [dict1 objectForKey:@"name"];
+        NSMutableDictionary *dict1 = [self getBackupArrayOfSelectedTab][contactIndex];
+        NSString *name1 = dict1[@"name"];
         
         if([[name1 lowercaseString] rangeOfString:[newString lowercaseString]].location == NSNotFound){
         } else {

@@ -164,7 +164,7 @@ SKPayment *paymentRequest;
 	}
 	if (self.products) {
         // Yes, product is available, so return values.
-        SKProduct *firstProduct = (SKProduct *)[self.products objectAtIndex:0];
+        SKProduct *firstProduct = (SKProduct *)(self.products)[0];
         
         if ([delegate respondsToSelector:@selector(requestedProduct:identifier:name:price:description:)])
             [delegate requestedProduct:self identifier:firstProduct.productIdentifier name:firstProduct.localizedTitle price:[firstProduct.price stringValue] description:firstProduct.localizedDescription];

@@ -115,7 +115,7 @@
      object:nil 
      queue:[NSOperationQueue mainQueue]
      usingBlock:^(NSNotification *notification) {
-         BitlyTwitterOAuthAccount *anAccount = [notification.userInfo objectForKey:BitlyTwitterOauthAccountUserInfoKey];
+         BitlyTwitterOAuthAccount *anAccount = (notification.userInfo)[BitlyTwitterOauthAccountUserInfoKey];
          if ([delegate respondsToSelector:@selector(oAuthViewController:didAuthorizeAccount:)]) {
              [delegate oAuthViewController:self didAuthorizeAccount:anAccount];
          }
@@ -127,7 +127,7 @@
      object:nil 
      queue:[NSOperationQueue mainQueue] 
      usingBlock:^(NSNotification *notification) {
-         NSError *error = [notification.userInfo objectForKey:BitlyTwitterOauthErrorUserInfoKey];
+         NSError *error = (notification.userInfo)[BitlyTwitterOauthErrorUserInfoKey];
          if ([delegate respondsToSelector:@selector(oAuthViewController:didFailWithError:)]) {
              [delegate oAuthViewController:self didFailWithError:error];
          }
@@ -174,7 +174,7 @@
     
     if (![twitterSuccessCallbackURL length]) {
         NSError *error = [NSError errorWithDomain:@"BitlyOAuthErrorDomain" code:-1 
-                                         userInfo:[NSDictionary dictionaryWithObject:@"Twitter callback URL not set. See setter on BitlyConfig." forKey:NSLocalizedDescriptionKey]];
+                                         userInfo:@{NSLocalizedDescriptionKey: @"Twitter callback URL not set. See setter on BitlyConfig."}];
         if ([delegate respondsToSelector:@selector(oAuthViewController:didFailWithError:)]) {
             [delegate oAuthViewController:self didFailWithError:error];
         }

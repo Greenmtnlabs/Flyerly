@@ -46,12 +46,12 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
                             error:nil];
 	
     if ((NSInteger *)reverse == 0) {
-        return [[attrs2 objectForKey:NSFileModificationDate]
-                compare:[attrs1 objectForKey:NSFileModificationDate]];
+        return [attrs2[NSFileModificationDate]
+                compare:attrs1[NSFileModificationDate]];
     }
 	
-    return [[attrs1 objectForKey:NSFileModificationDate]
-            compare:[attrs2 objectForKey:NSFileModificationDate]];
+    return [attrs1[NSFileModificationDate]
+            compare:attrs2[NSFileModificationDate]];
 }
 
 
@@ -66,7 +66,7 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
 	iconArray = [[NSMutableArray alloc]init];
 	NSString *homeDirectoryPath = NSHomeDirectory();
 	NSString *unexpandedPath = [homeDirectoryPath stringByAppendingString: [NSString stringWithFormat:@"/Documents/%@/Flyr/",appDelegate.loginId]];
-	NSString *folderPath = [NSString pathWithComponents:[NSArray arrayWithObjects:[NSString stringWithString:[unexpandedPath stringByExpandingTildeInPath]], nil]];
+	NSString *folderPath = [NSString pathWithComponents:@[[NSString stringWithString:[unexpandedPath stringByExpandingTildeInPath]]]];
 	
 	NSArray *files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:folderPath error:nil];
 	NSString *finalImagePath;
@@ -76,7 +76,7 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
 
 	for(int i =0;i< [files count];i++)
 	{
-		NSString *img = [files objectAtIndex:i];
+		NSString *img = files[i];
 		img = [@"/" stringByAppendingString:img];
 		finalImagePath= [folderPath stringByAppendingString:img];
         
@@ -93,7 +93,7 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
 	[photoDetailArray removeAllObjects];
 	for(int i =0;i< [sortedFiles count];i++)
 	{
-			finalImagePath = [sortedFiles objectAtIndex:i];
+			finalImagePath = sortedFiles[i];
 			UIImage *temp = [self scale:finalImagePath toSize:CGSizeMake(640,640)];
 			[photoArray addObject:finalImagePath];
 			[iconArray addObject:temp];
@@ -104,7 +104,7 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
     
 	for(int j =0;j< [detailSortedFiles count];j++)
 	{
-        detailFinalImagePath = [detailSortedFiles objectAtIndex:j];
+        detailFinalImagePath = detailSortedFiles[j];
         //NSLog(@"detailFinalImagePath: %@", detailFinalImagePath);
         NSArray *myArray = [NSArray arrayWithContentsOfFile:detailFinalImagePath];
         [photoDetailArray addObject:myArray];
@@ -171,9 +171,9 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
 	for (int i =0 ; i < [searchArray count] ; i++)
 	{
 		
- 		sTemp = [[searchArray objectAtIndex:i] objectAtIndex:0];
-        sTemp1 = [[searchArray objectAtIndex:i] objectAtIndex:1];
-        sTemp2 = [[searchArray objectAtIndex:i] objectAtIndex:2];
+ 		sTemp = searchArray[i][0];
+        sTemp1 = searchArray[i][1];
+        sTemp2 = searchArray[i][2];
 
 
         NSRange titleResultsRange = [sTemp rangeOfString:searchText options:NSCaseInsensitiveSearch];
@@ -181,9 +181,9 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
         NSRange titleResultsRange2 = [sTemp2 rangeOfString:searchText options:NSCaseInsensitiveSearch];
 
         if (titleResultsRange.length > 0 || titleResultsRange1.length > 0 || titleResultsRange2.length > 0){
-			[photoArrayBackup addObject:[photoArray objectAtIndex:i ]];
-            [photoDetailArrayBackup addObject:[photoDetailArray objectAtIndex:i ]];
-            [iconArrayBackup addObject:[iconArray objectAtIndex:i ]];
+			[photoArrayBackup addObject:photoArray[i]];
+            [photoDetailArrayBackup addObject:photoDetailArray[i]];
+            [iconArrayBackup addObject:iconArray[i]];
         }
         
 
@@ -378,7 +378,7 @@ sd:;
 
 	NSString *homeDirectoryPath = NSHomeDirectory();
 	NSString *flyerPath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/Flyr/",appDelegate.loginId]];
-	NSString *folderPath = [NSString pathWithComponents:[NSArray arrayWithObjects:[NSString stringWithString:[flyerPath stringByStandardizingPath]],nil]];
+	NSString *folderPath = [NSString pathWithComponents:@[[NSString stringWithString:[flyerPath stringByStandardizingPath]]]];
 	
     NSString *onlyImageName = [imagePath stringByReplacingOccurrencesOfString:folderPath withString:@""];
     NSString *lastFileName = [onlyImageName stringByReplacingOccurrencesOfString:@".jpg" withString:@""];
@@ -390,26 +390,26 @@ sd:;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
     if(searching){
-        UIImage *image = [iconArrayBackup objectAtIndex:indexPath.row];
+        UIImage *image = iconArrayBackup[indexPath.row];
         // Get image name from array
-        NSString *imageName = [photoArrayBackup objectAtIndex:indexPath.row];
+        NSString *imageName = photoArrayBackup[indexPath.row];
         // get flyer detail from array
-        NSArray *detailArray = [photoDetailArrayBackup objectAtIndex:indexPath.row];
+        NSArray *detailArray = photoDetailArrayBackup[indexPath.row];
         
         // return cell
-        return [self setGlobalCustomCellProperties:[detailArray objectAtIndex:0] description:[detailArray objectAtIndex:1] created:[detailArray objectAtIndex:2] img:image imagePath:imageName indexPath:indexPath];
+        return [self setGlobalCustomCellProperties:detailArray[0] description:detailArray[1] created:detailArray[2] img:image imagePath:imageName indexPath:indexPath];
 
     }else{
 
         // Get image from array
-	UIImage *image = [iconArray objectAtIndex:indexPath.row];
+	UIImage *image = iconArray[indexPath.row];
     // Get image name from array
-	NSString *imageName = [photoArray objectAtIndex:indexPath.row];
+	NSString *imageName = photoArray[indexPath.row];
     // get flyer detail from array
-    NSArray *detailArray = [photoDetailArray objectAtIndex:indexPath.row];
+    NSArray *detailArray = photoDetailArray[indexPath.row];
 
     // return cell
-    return [self setGlobalCustomCellProperties:[detailArray objectAtIndex:0] description:[detailArray objectAtIndex:1] created:[detailArray objectAtIndex:2] img:image imagePath:imageName indexPath:indexPath];
+    return [self setGlobalCustomCellProperties:detailArray[0] description:detailArray[1] created:detailArray[2] img:image imagePath:imageName indexPath:indexPath];
     }
 	//SET_GLOBAL_CUSTOM_CELL_PROPERTIES([detailArray objectAtIndex:0], [detailArray objectAtIndex:1], [detailArray objectAtIndex:2],image, imageName)
 	
@@ -426,11 +426,11 @@ sd:;
     NSString *imageName;
     NSArray *detailArray;
     if (searching) {
-        detailArray = [photoDetailArrayBackup objectAtIndex:indexPath.row];
-        imageName = [photoArrayBackup objectAtIndex:indexPath.row];
+        detailArray = photoDetailArrayBackup[indexPath.row];
+        imageName = photoArrayBackup[indexPath.row];
     }else{
-        detailArray = [photoDetailArray objectAtIndex:indexPath.row];
-       imageName = [photoArray objectAtIndex:indexPath.row];
+        detailArray = photoDetailArray[indexPath.row];
+       imageName = photoArray[indexPath.row];
     }
 
 	 NSData *imageData = [[NSData alloc ]initWithContentsOfMappedFile:imageName];
@@ -440,8 +440,8 @@ sd:;
     
     if(photoDetailArray.count > indexPath.row){
       
-        NSString *title = [detailArray objectAtIndex:0];
-        NSString *description = [detailArray objectAtIndex:1];
+        NSString *title = detailArray[0];
+        NSString *description = detailArray[1];
         
         draftViewController.selectedFlyerTitle = title;
         draftViewController.selectedFlyerDescription = description;
@@ -465,11 +465,11 @@ sd:;
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         
         [tableView deleteRowsAtIndexPaths:
-        [NSArray arrayWithObjects:[NSIndexPath indexPathForRow:indexPath.row  inSection:indexPath.section],nil]
+        @[[NSIndexPath indexPathForRow:indexPath.row  inSection:indexPath.section]]
                          withRowAnimation:UITableViewRowAnimationLeft];
         
         // Remove flyer
-        NSString *imageName = [photoArray objectAtIndex:[indexPath row]];
+        NSString *imageName = photoArray[[indexPath row]];
         [[NSFileManager defaultManager] removeItemAtPath:imageName error:nil];
         
         // Remove flyer detail file

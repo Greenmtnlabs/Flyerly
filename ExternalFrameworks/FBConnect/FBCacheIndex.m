@@ -504,12 +504,8 @@ static void releaseStatement(sqlite3_stmt* statement, sqlite3* database)
     NSUInteger fileSize = sqlite3_column_int(selectStatement, 3);
     
     FBCacheEntityInfo* entry = [[FBCacheEntityInfo alloc] 
-                                initWithKey:[NSString 
-                                             stringWithCString:(const char*)key 
-                                             encoding:NSUTF8StringEncoding] 
-                                uuid:[NSString 
-                                      stringWithCString:(const char*)uuidStr 
-                                      encoding:NSUTF8StringEncoding]
+                                initWithKey:@((const char*)key) 
+                                uuid:@((const char*)uuidStr)
                                 accessTime:accessTime 
                                 fileSize:fileSize];
     return [entry autorelease];
@@ -623,13 +619,9 @@ static void releaseStatement(sqlite3_stmt* statement, sqlite3* database)
         spaceCleaned += sqlite3_column_int(trimSelectStatement, 2);
     
         // Remove in-memory cache entry if present
-        NSString* key = [NSString 
-            stringWithCString:(const char*)keyStr 
-            encoding:NSUTF8StringEncoding];
+        NSString* key = @((const char*)keyStr);
 
-        NSString* uuid = [NSString
-            stringWithCString:(const char*)uuidStr
-            encoding:NSUTF8StringEncoding];
+        NSString* uuid = @((const char*)uuidStr);
         
         FBCacheEntityInfo* entry = [_cachedEntries objectForKey:key];
         entry.dirty = NO;

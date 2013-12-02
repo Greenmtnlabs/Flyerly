@@ -372,7 +372,7 @@ const int APP_SUPPORTS_ATTRIBUTION_ID_RECHECK_PERIOD = 60 * 60 * 24;
     [FBInsights logEvent:FBInsightsEventNameLogConversionPixel
               valueToSum:value
               parameters:@{ FBInsightsEventParameterConversionPixelID : pixelID,
-                            FBInsightsEventParameterConversionPixelValue : [NSNumber numberWithDouble:value] }
+                            FBInsightsEventParameterConversionPixelValue : @(value) }
                  session:session];
     
     if ([FBInsights flushBehavior] != FBInsightsFlushBehaviorExplicitOnly) {
@@ -545,16 +545,16 @@ const int APP_SUPPORTS_ATTRIBUTION_ID_RECHECK_PERIOD = 60 * 60 * 24;
     NSMutableDictionary *eventDictionary = [NSMutableDictionary dictionaryWithDictionary:parameters];
     
     long logTime = [FBInsights unixTimeNow];
-    [eventDictionary setObject:eventName forKey:@"_eventName"];
-    [eventDictionary setObject:[NSNumber numberWithLong:logTime] forKey:@"_logTime"];
+    eventDictionary[@"_eventName"] = eventName;
+    eventDictionary[@"_logTime"] = @(logTime);
     
     if (valueToSum != 1.0) {
-        [eventDictionary setObject:[NSNumber numberWithDouble:valueToSum] forKey:@"_valueToSum"];
+        eventDictionary[@"_valueToSum"] = @(valueToSum);
     }
     
     @synchronized (self) {
         if (self.appVersion) {
-            [eventDictionary setObject:self.appVersion forKey:@"_appVersion"];
+            eventDictionary[@"_appVersion"] = self.appVersion;
         }
         
         // If this is a different session than the most recent we logged to, set up that earlier session for flushing, and update
@@ -608,22 +608,22 @@ const int APP_SUPPORTS_ATTRIBUTION_ID_RECHECK_PERIOD = 60 * 60 * 24;
     
     NSDictionary *timedEventDictionary;
     if (parameters) {
-        timedEventDictionary = @{ @"startTime"  : [NSNumber numberWithLong:startTime],
+        timedEventDictionary = @{ @"startTime"  : @(startTime),
                                   @"parameters" : parameters };
     } else {
-        timedEventDictionary = @{ @"startTime"  : [NSNumber numberWithLong:startTime] };
+        timedEventDictionary = @{ @"startTime"  : @(startTime) };
     }
     
     NSString *key = [FBInsights constructTimerKey:eventName timerID:timerID];
     
     @synchronized (self.incompleteTimedEvents) {
-        if ([self.incompleteTimedEvents objectForKey:key]) {
+        if ((self.incompleteTimedEvents)[key]) {
             [FBInsights logAndNotify:[NSString stringWithFormat:@"Timed event for '%@' has already been started with timerID '%@' on this thread",
                                       eventName, timerID]];
             return;
         }
         
-        [self.incompleteTimedEvents setObject:timedEventDictionary forKey:key];
+        (self.incompleteTimedEvents)[key] = timedEventDictionary;
     }
 }
 
@@ -637,7 +637,7 @@ const int APP_SUPPORTS_ATTRIBUTION_ID_RECHECK_PERIOD = 60 * 60 * 24;
     NSDictionary *storedTimedEvent = nil;
     @synchronized (self.incompleteTimedEvents) {
         // Look up start time based on key, then fixup params, and log event.
-        if (!(storedTimedEvent = [[[self.incompleteTimedEvents objectForKey:key] retain] autorelease])) {
+        if (!(storedTimedEvent = [[(self.incompleteTimedEvents)[key] retain] autorelease])) {
             [FBInsights logAndNotify:[NSString stringWithFormat:@"Timed event for '%@' and timerID '%@' has not yet been started on this thread",
                                       eventName, timerID]];
             return;
@@ -648,7 +648,7 @@ const int APP_SUPPORTS_ATTRIBUTION_ID_RECHECK_PERIOD = 60 * 60 * 24;
     }
     
     // Update all the parameters in the storedTimedEvent with those coming in in parameters.
-    NSDictionary *storedParameters = [storedTimedEvent objectForKey:@"parameters"];
+    NSDictionary *storedParameters = storedTimedEvent[@"parameters"];
     NSMutableDictionary *resultParameters;
     if (storedParameters) {
         resultParameters = [NSMutableDictionary dictionaryWithDictionary:storedParameters];
@@ -664,7 +664,7 @@ const int APP_SUPPORTS_ATTRIBUTION_ID_RECHECK_PERIOD = 60 * 60 * 24;
     [resultParameters setValue:@"1" forKey:@"_isTimedEvent"];
     
     // And let the value become the elapsed time.
-    long startTime = [[storedTimedEvent objectForKey:@"startTime"] longValue];
+    long startTime = [storedTimedEvent[@"startTime"] longValue];
     long elapsedTime = [FBInsights unixTimeNow] - startTime;
     
     [self instanceLogEvent:eventName
@@ -829,7 +829,7 @@ const int APP_SUPPORTS_ATTRIBUTION_ID_RECHECK_PERIOD = 60 * 60 * 24;
     if (self.appSupportsAttributionStatus == AppSupportsAttributionTrue) {
         NSString *attributionID = [FBUtility attributionID];
         if (attributionID) {
-            [postParameters setObject:attributionID forKey:@"attribution"];
+            postParameters[@"attribution"] = attributionID;
         }
     }
     
@@ -838,7 +838,7 @@ const int APP_SUPPORTS_ATTRIBUTION_ID_RECHECK_PERIOD = 60 * 60 * 24;
     // result in advertising targeting that user.
     NSString *advertiserID = [FBUtility advertiserID];
     if (advertiserID) {
-        [postParameters setObject:advertiserID forKey:@"advertiser_id"];
+        postParameters[@"advertiser_id"] = advertiserID;
     }
     
     // Only send this query param if we have a definitive allowed/disallowed on advertising tracking.  Otherwise,
@@ -846,15 +846,14 @@ const int APP_SUPPORTS_ATTRIBUTION_ID_RECHECK_PERIOD = 60 * 60 * 24;
     FBAdvertisingTrackingStatus advertisingTrackingStatus = [FBUtility advertisingTrackingStatus];
     if (advertisingTrackingStatus != AdvertisingTrackingUnspecified) {
         BOOL allowed = (advertisingTrackingStatus == AdvertisingTrackingAllowed);
-        [postParameters setObject:[[NSNumber numberWithBool:allowed] stringValue]
-                           forKey:@"advertiser_tracking_enabled"];
+        postParameters[@"advertiser_tracking_enabled"] = [@(allowed) stringValue];
     }
 }
 
 - (BOOL)doesSessionHaveUserToken:(FBSession *)session {
     // Assume that if we're not using an appAuthSession (built from the Client Token) or the anonymous session,
     // then we have a logged in user token.
-    FBSession *appAuthSession = [self.appAuthSessions objectForKey:session.appID];
+    FBSession *appAuthSession = (self.appAuthSessions)[session.appID];
     return session != appAuthSession && session != self.anonymousSession;
 }
 
@@ -873,12 +872,12 @@ const int APP_SUPPORTS_ATTRIBUTION_ID_RECHECK_PERIOD = 60 * 60 * 24;
 
         if (clientToken) {
             
-            FBSession *appAuthSession = [self.appAuthSessions objectForKey:appID];
+            FBSession *appAuthSession = (self.appAuthSessions)[appID];
             if (!appAuthSession) {
                 
                 @synchronized(self) {
                     
-                    appAuthSession = [self.appAuthSessions objectForKey:appID];  // in case it snuck in
+                    appAuthSession = (self.appAuthSessions)[appID];  // in case it snuck in
                     if (!appAuthSession) {  
                 
                         FBSessionManualTokenCachingStrategy *tokenCaching = [[FBSessionManualTokenCachingStrategy alloc] init];
@@ -889,7 +888,7 @@ const int APP_SUPPORTS_ATTRIBUTION_ID_RECHECK_PERIOD = 60 * 60 * 24;
                         appAuthSession = [FBInsights unaffinitizedSessionFromToken:tokenCaching];
                         [tokenCaching release];
                         
-                        [self.appAuthSessions setObject:appAuthSession forKey:appID];
+                        (self.appAuthSessions)[appID] = appAuthSession;
                     }
                 }
             }
@@ -950,7 +949,7 @@ const int APP_SUPPORTS_ATTRIBUTION_ID_RECHECK_PERIOD = 60 * 60 * 24;
     FlushResult flushResult = FlushResultSuccess;
     if (error) {
         
-        int errorCode = [[[error userInfo] objectForKey:FBErrorHTTPStatusCodeKey] integerValue];
+        int errorCode = [[error userInfo][FBErrorHTTPStatusCodeKey] integerValue];
         
         // We interpret a 400 coming back from FBRequestConnection as a server error due to improper data being
         // sent down.  Otherwise we assume no connectivity, or another condition where we could treat it as no connectivity.
@@ -1030,9 +1029,9 @@ const int APP_SUPPORTS_ATTRIBUTION_ID_RECHECK_PERIOD = 60 * 60 * 24;
         
         FBSessionInsightsState *insightsState = session.insightsState;        
         @synchronized (insightsState) {
-            insightsState.numAbandonedDueToSessionChange += [[persistedData objectForKey:FBInsightsPersistKeyNumAbandoned] integerValue];
-            insightsState.numSkippedEventsDueToFullBuffer += [[persistedData objectForKey:FBInsightsPersistKeyNumSkipped] integerValue];
-            NSArray *retrievedObjects = [persistedData objectForKey:FBInsightsPersistKeyEvents];
+            insightsState.numAbandonedDueToSessionChange += [persistedData[FBInsightsPersistKeyNumAbandoned] integerValue];
+            insightsState.numSkippedEventsDueToFullBuffer += [persistedData[FBInsightsPersistKeyNumSkipped] integerValue];
+            NSArray *retrievedObjects = persistedData[FBInsightsPersistKeyEvents];
             if (retrievedObjects.count) {
                 [insightsState.inFlightEvents addObjectsFromArray:retrievedObjects];
                 eventsRetrieved = YES;
@@ -1071,7 +1070,7 @@ const int APP_SUPPORTS_ATTRIBUTION_ID_RECHECK_PERIOD = 60 * 60 * 24;
 + (void)logAndNotify:(NSString *)msg {
     
     // capture reason and nested code as user info
-    NSDictionary* userinfo = [NSDictionary dictionaryWithObject:msg forKey:FBErrorInsightsReasonKey];
+    NSDictionary* userinfo = @{FBErrorInsightsReasonKey: msg};
     
     // create error object
     NSError *err = [NSError errorWithDomain:FacebookSDKDomain
@@ -1107,8 +1106,8 @@ const int APP_SUPPORTS_ATTRIBUTION_ID_RECHECK_PERIOD = 60 * 60 * 24;
         }
         
         NSDictionary *insightsData = @{
-            FBInsightsPersistKeyNumAbandoned : [NSNumber numberWithInt:insightsState.numAbandonedDueToSessionChange],
-            FBInsightsPersistKeyNumSkipped   : [NSNumber numberWithInt:insightsState.numSkippedEventsDueToFullBuffer],
+            FBInsightsPersistKeyNumAbandoned : @(insightsState.numAbandonedDueToSessionChange),
+            FBInsightsPersistKeyNumSkipped   : @(insightsState.numSkippedEventsDueToFullBuffer),
             FBInsightsPersistKeyEvents       : insightsState.inFlightEvents,
         };
 
@@ -1134,7 +1133,7 @@ const int APP_SUPPORTS_ATTRIBUTION_ID_RECHECK_PERIOD = 60 * 60 * 24;
     [content release];
     
     [FBLogger singleShotLogEntry:FBLoggingBehaviorInsights
-                    formatString:@"FBInsights Persist: Read %d events", results ? [[results objectForKey:FBInsightsPersistKeyEvents] count] : 0];
+                    formatString:@"FBInsights Persist: Read %d events", results ? [results[FBInsightsPersistKeyEvents] count] : 0];
     return results;
 }
 
@@ -1147,7 +1146,7 @@ const int APP_SUPPORTS_ATTRIBUTION_ID_RECHECK_PERIOD = 60 * 60 * 24;
 
 + (NSString *)persistenceFilePath {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *docDirectory = [paths objectAtIndex:0];
+    NSString *docDirectory = paths[0];
     return [docDirectory stringByAppendingPathComponent:FBInsightsPersistedEventsFilename];
 }
 

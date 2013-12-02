@@ -355,7 +355,7 @@ BOOL galleryExpanded = NO;
 
     if (cell == nil) {
         NSArray *nib=[[NSBundle mainBundle] loadNibNamed:cellId owner:self options:nil];
-        cell=(CustomGalleryItem *)[nib objectAtIndex:0];
+        cell=(CustomGalleryItem *)nib[0];
     }
     
     cell.controller = self;

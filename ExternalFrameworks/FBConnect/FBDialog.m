@@ -219,7 +219,7 @@ params   = _params;
     if (params) {
         NSMutableArray* pairs = [NSMutableArray array];
         for (NSString* key in params.keyEnumerator) {
-            NSString* value = [params objectForKey:key];
+            NSString* value = params[key];
             NSString* escaped_value = [FBUtility stringByURLEncodingString:value];
             [pairs addObject:[NSString stringWithFormat:@"%@=%@", key, escaped_value]];
         }
@@ -404,7 +404,7 @@ params   = _params;
 - (void)showWebView {	
     UIWindow* window = [UIApplication sharedApplication].keyWindow;	
     if (!window) {	
-        window = [[UIApplication sharedApplication].windows objectAtIndex:0];	
+        window = ([UIApplication sharedApplication].windows)[0];	
     }	
     _modalBackgroundView.frame = window.frame;	
     [_modalBackgroundView addSubview:self];	
@@ -448,7 +448,7 @@ params   = _params;
             NSString * errorCode = [self getStringFromUrl:[url absoluteString] needle:@"error_code="];
             NSString * errorStr = [self getStringFromUrl:[url absoluteString] needle:@"error_msg="];
             if (errorCode) {
-                NSDictionary * errorData = [NSDictionary dictionaryWithObject:errorStr forKey:@"error_msg"];
+                NSDictionary * errorData = @{@"error_msg": errorStr};
                 NSError * error = [NSError errorWithDomain:@"facebookErrDomain"
                                                       code:[errorCode intValue]
                                                   userInfo:errorData];

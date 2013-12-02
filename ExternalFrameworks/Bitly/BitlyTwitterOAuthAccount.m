@@ -31,10 +31,10 @@ NSString * const UserDefaultsKey = @"BitlyTwitterOAuthAccount";
     BitlyTwitterOAuthAccount *account = [[BitlyTwitterOAuthAccount alloc] init];
     if (account) {
         NSDictionary *params = [BitlyLibUtil parseQueryString:twitterResponse];
-        account.oauthKey = [params objectForKey:@"oauth_token"];
-        account.oauthSecret = [params objectForKey:@"oauth_token_secret"];
-        account.username = [params objectForKey:@"screen_name"];
-        account.userID = [params objectForKey:@"user_id"];
+        account.oauthKey = params[@"oauth_token"];
+        account.oauthSecret = params[@"oauth_token_secret"];
+        account.username = params[@"screen_name"];
+        account.userID = params[@"user_id"];
     }
     
     return [account autorelease];
@@ -104,16 +104,16 @@ NSString * const UserDefaultsKey = @"BitlyTwitterOAuthAccount";
     if ((status != noErr) && (status != errSecItemNotFound)) {
         BitlyLog(@"ERROR in oauth info keychain lookup: %d", status);
     } else {
-        NSData *accountData = [result objectForKey:kSecValueData];
+        NSData *accountData = kSecValueData;
         accountDictionary = (NSDictionary *) [NSKeyedUnarchiver unarchiveObjectWithData:accountData];
     }
     
     if (accountDictionary) {
         account = [[BitlyTwitterOAuthAccount alloc] init];
-        account.oauthKey = [accountDictionary objectForKey:@"oauthKey"];
-        account.oauthSecret = [accountDictionary objectForKey:@"oauthSecret"];
-        account.username = [accountDictionary objectForKey:@"username"];
-        account.userID = [accountDictionary objectForKey:@"userID"];
+        account.oauthKey = accountDictionary[@"oauthKey"];
+        account.oauthSecret = accountDictionary[@"oauthSecret"];
+        account.username = accountDictionary[@"username"];
+        account.userID = accountDictionary[@"userID"];
     }
     return [account autorelease];
 }

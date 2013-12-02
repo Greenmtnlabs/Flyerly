@@ -100,8 +100,7 @@
     
     // this property supports unit testing
     if(self.usePageLimitOfOne) {
-        [request.parameters setObject:@"1"
-                               forKey:@"limit"];
+        (request.parameters)[@"limit"] = @"1";
     }
     
     self.loader.delegate = nil;

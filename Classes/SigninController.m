@@ -29,7 +29,7 @@
     
     NSMutableAttributedString *titleString = [[NSMutableAttributedString alloc] initWithString:@"Forgot Password?"];
     // making text property to underline text-
-    [titleString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, [titleString length])];
+    [titleString addAttribute:NSUnderlineStyleAttributeName value:@(NSUnderlineStyleSingle) range:NSMakeRange(0, [titleString length])];
     
     // using text on button
     [forgetPassword1 setAttributedTitle: titleString forState:UIControlStateNormal];
@@ -197,7 +197,7 @@
             //get facebook app id
             NSString *path = [[NSBundle mainBundle] pathForResource: @"Flyr-Info" ofType: @"plist"];
             NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile: path];
-            appDelegate.facebook = [[Facebook alloc] initWithAppId:[dict objectForKey: @"FacebookAppID"] andDelegate:self];
+            appDelegate.facebook = [[Facebook alloc] initWithAppId:dict[@"FacebookAppID"] andDelegate:self];
             
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
             NSLog(@"%@",[defaults objectForKey:@"FBAccessTokenKey"]);
@@ -215,8 +215,8 @@
             
         } else {
            // [appDelegate.facebook  requestWithGraphPath:@"me" andDelegate:self ];
-            [appDelegate.facebook  authorize:[NSArray arrayWithObjects: @"read_stream",
-                                             @"publish_stream", @"email", nil]];
+            [appDelegate.facebook  authorize:@[@"read_stream",
+                                             @"publish_stream", @"email"]];
         }
     }else{
         [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
@@ -253,7 +253,7 @@
                     }else if ([arrayOfAccounts count] > 0) {
                         [self showLoadingView];
                         // Keep it simple, use the first account available
-                        ACAccount *acct = [arrayOfAccounts objectAtIndex:0];
+                        ACAccount *acct = arrayOfAccounts[0];
                         
                         //Convert twitter username to email
                         NSString *twitterEmail = [AccountController getPathFromEmail:[acct username]];
@@ -287,7 +287,7 @@
         
         if ([result isKindOfClass:[NSDictionary class]])
         {
-            NSString *emailParam = [result objectForKey: @"email"];
+            NSString *emailParam = result[@"email"];
             [self signIn:YES username:emailParam password:@"null"];
         }
     }
@@ -396,7 +396,7 @@
                     
                     for(int i = 0; i < accountsArray.count; i++) {
                         
-                        ACAccount *twitterAccount = [accountsArray objectAtIndex:i];
+                        ACAccount *twitterAccount = accountsArray[i];
                         NSString *userID = [[twitterAccount valueForKey:@"properties"] valueForKey:@"user_id"];
                         
                         if([userID isEqualToString:userId]) {
@@ -480,7 +480,7 @@
     //create username array
     NSMutableArray *accountArray = [[NSMutableArray alloc] init];
     for(int i = 0 ; i < accounts.count ; i++) {
-        ACAccount *account = [accounts objectAtIndex:i];
+        ACAccount *account = accounts[i];
         [accountArray addObject:account.username];
         
         [tAccounts addObject:account];        
@@ -498,7 +498,7 @@
         UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:@"Choose Account" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles: nil];
         
         for (int i = 0; i < accountArray.count; i++) {
-            [actionSheet addButtonWithTitle:[accountArray objectAtIndex:i]];
+            [actionSheet addButtonWithTitle:accountArray[i]];
         }
         
         [actionSheet addButtonWithTitle:@"Cancel"];
@@ -523,7 +523,7 @@
     if(buttonIndex != twitterAccounts.count) {
         
         //save to NSUserDefault
-        ACAccount *account = [twitterAccounts objectAtIndex:buttonIndex];
+        ACAccount *account = twitterAccounts[buttonIndex];
         
         //Convert twitter username to email
         NSString *twitterUser = [AccountController getPathFromEmail:[account username]];

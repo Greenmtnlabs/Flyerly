@@ -43,7 +43,7 @@
 	}
 	
 	struct in_addr **list = (struct in_addr **)host->h_addr_list;
-	NSString *addressString = [NSString stringWithCString:inet_ntoa(*list[0])];
+	NSString *addressString = @(inet_ntoa(*list[0]));
 	return addressString;
 }
 

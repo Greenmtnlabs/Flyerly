@@ -5062,6 +5062,8 @@
 /* Begin PBXProject section */
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Flyr" */;
 			compatibilityVersion = "Xcode 3.1";
 			developmentRegion = English;
@@ -6519,7 +6521,7 @@
 				PRODUCT_NAME = Flyr;
 				PROVISIONING_PROFILE = "89EEFADE-B677-49D0-BB7B-48803AC8479D";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "89EEFADE-B677-49D0-BB7B-48803AC8479D";
-				SDKROOT = iphoneos6.0;
+				SDKROOT = iphoneos;
 			};
 			name = "Ad Hoc";
 		};
@@ -6565,7 +6567,7 @@
 				PRODUCT_NAME = Flyr;
 				PROVISIONING_PROFILE = "135E06E0-127E-48F5-A9EB-54F4C1346BCB";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "135E06E0-127E-48F5-A9EB-54F4C1346BCB";
-				SDKROOT = iphoneos6.0;
+				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
@@ -6612,7 +6614,7 @@
 				PRODUCT_NAME = Flyr;
 				PROVISIONING_PROFILE = "89EEFADE-B677-49D0-BB7B-48803AC8479D";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "89EEFADE-B677-49D0-BB7B-48803AC8479D";
-				SDKROOT = iphoneos6.0;
+				SDKROOT = iphoneos;
 			};
 			name = Release;
 		};

@@ -107,13 +107,13 @@ connectionIdentifier:(NSString *)theIdentifier requestType:(MGTwitterRequestType
         || [elementName isEqualToString:@"truncated"] 
         || [elementName isEqualToString:@"following"]) {
         // Change "true"/"false" into an NSNumber with a BOOL value.
-        NSNumber *boolNumber = [NSNumber numberWithBool:[[currentNode objectForKey:elementName] isEqualToString:@"true"]];
-        [currentNode setObject:boolNumber forKey:elementName];
+        NSNumber *boolNumber = @([currentNode[elementName] isEqualToString:@"true"]);
+        currentNode[elementName] = boolNumber;
     } else if ([elementName isEqualToString:@"created_at"]) {
         // Change date-string into an NSDate.
-        NSDate *creationDate = [NSDate dateWithNaturalLanguageString:[currentNode objectForKey:elementName]];
+        NSDate *creationDate = [NSDate dateWithNaturalLanguageString:currentNode[elementName]];
         if (creationDate) {
-            [currentNode setObject:creationDate forKey:elementName];
+            currentNode[elementName] = creationDate;
         }
     }
 }
@@ -161,9 +161,8 @@ connectionIdentifier:(NSString *)theIdentifier requestType:(MGTwitterRequestType
 
 - (void)addSource
 {
-    if (![currentNode objectForKey:TWITTER_SOURCE_REQUEST_TYPE]) {
-        [currentNode setObject:[NSNumber numberWithInt:requestType] 
-                        forKey:TWITTER_SOURCE_REQUEST_TYPE];
+    if (!currentNode[TWITTER_SOURCE_REQUEST_TYPE]) {
+        currentNode[TWITTER_SOURCE_REQUEST_TYPE] = [NSNumber numberWithInt:requestType];
     }
 }
 

@@ -445,7 +445,7 @@ static NSMutableDictionary *createBaseDictionary(NSString *server, NSString *acc
 
 - (void)closeConnection:(NSString *)identifier
 {
-    MGTwitterHTTPURLConnection *connection = [_connections objectForKey:identifier];
+    MGTwitterHTTPURLConnection *connection = _connections[identifier];
     if (connection) {
         [connection cancel];
         [_connections removeObjectForKey:identifier];
@@ -495,9 +495,9 @@ static NSMutableDictionary *createBaseDictionary(NSString *server, NSString *acc
             } else if (i > 0) {
                 [str appendString:@"&"];
             }
-            NSString *name = [names objectAtIndex:i];
+            NSString *name = names[i];
             [str appendString:[NSString stringWithFormat:@"%@=%@", 
-             name, [self _encodeString:[params objectForKey:name]]]];
+             name, [self _encodeString:params[name]]]];
         }
     }
     
@@ -557,7 +557,7 @@ static NSMutableDictionary *createBaseDictionary(NSString *server, NSString *acc
     if (!connection) {
         return nil;
     } else {
-        [_connections setObject:connection forKey:[connection identifier]];
+        _connections[[connection identifier]] = connection;
         [connection release];
     }
     
@@ -688,7 +688,7 @@ static NSMutableDictionary *createBaseDictionary(NSString *server, NSString *acc
     if (!connection) {
         return nil;
     } else {
-        [_connections setObject:connection forKey:[connection identifier]];
+        _connections[[connection identifier]] = connection;
         [connection release];
     }
     
@@ -931,7 +931,7 @@ static NSMutableDictionary *createBaseDictionary(NSString *server, NSString *acc
         if (statusCode == 304) {
             [self parsingSucceededForRequest:[connection identifier] 
                               ofResponseType:[connection responseType] 
-                           withParsedObjects:[NSArray array]];
+                           withParsedObjects:@[]];
    }
         
         // Destroy the connection.
@@ -1086,8 +1086,8 @@ static NSMutableDictionary *createBaseDictionary(NSString *server, NSString *acc
         return nil;
     }
 	NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:0];
-    [params setObject:username1 forKey:@"user_a"];
-	[params setObject:username2 forKey:@"user_b"];
+    params[@"user_a"] = username1;
+	params[@"user_b"] = username2;
 	
     NSString *path = [NSString stringWithFormat:@"friendships/exists.%@", API_FORMAT];
     
@@ -1143,7 +1143,7 @@ static NSMutableDictionary *createBaseDictionary(NSString *server, NSString *acc
     NSString *path = [NSString stringWithFormat:@"account/update_location.%@", API_FORMAT];
     
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:0];
-    [params setObject:location forKey:@"location"];
+    params[@"location"] = location;
     NSString *body = [self _queryStringWithBase:nil parameters:params prefixed:NO];
     
     return [self _sendRequestWithMethod:HTTP_POST_METHOD path:path 
@@ -1164,7 +1164,7 @@ static NSMutableDictionary *createBaseDictionary(NSString *server, NSString *acc
     
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:0];
     if (deliveryMethod) {
-        [params setObject:deliveryMethod forKey:@"device"];
+        params[@"device"] = deliveryMethod;
     }
     
     return [self _sendRequestWithMethod:HTTP_POST_METHOD path:path queryParameters:params body:nil 
@@ -1237,10 +1237,10 @@ static NSMutableDictionary *createBaseDictionary(NSString *server, NSString *acc
     
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:0];
     if (date) {
-        [params setObject:[self _dateToHTTP:date] forKey:@"since"];
+        params[@"since"] = [self _dateToHTTP:date];
     }
     if (pageNum > 0) {
-        [params setObject:[NSString stringWithFormat:@"%d", pageNum] forKey:@"page"];
+        params[@"page"] = [NSString stringWithFormat:@"%d", pageNum];
     }
     if (username) {
         path = [NSString stringWithFormat:@"statuses/friends_timeline/%@.%@", username, API_FORMAT];
@@ -1249,7 +1249,7 @@ static NSMutableDictionary *createBaseDictionary(NSString *server, NSString *acc
 	if (count > 0) {
 		tweetCount = count;
 	}
-	[params setObject:[NSString stringWithFormat:@"%d", tweetCount] forKey:@"count"];
+	params[@"count"] = [NSString stringWithFormat:@"%d", tweetCount];
     
     return [self _sendRequestWithMethod:nil path:path queryParameters:params body:nil 
                             requestType:MGTwitterStatusesRequest 
@@ -1263,10 +1263,10 @@ static NSMutableDictionary *createBaseDictionary(NSString *server, NSString *acc
     
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:0];
     if (updateID > 0) {
-        [params setObject:[NSString stringWithFormat:@"%d", updateID] forKey:@"since_id"];
+        params[@"since_id"] = [NSString stringWithFormat:@"%d", updateID];
     }
     if (pageNum > 0) {
-        [params setObject:[NSString stringWithFormat:@"%d", pageNum] forKey:@"page"];
+        params[@"page"] = [NSString stringWithFormat:@"%d", pageNum];
     }
     if (username) {
         path = [NSString stringWithFormat:@"statuses/friends_timeline/%@.%@", username, API_FORMAT];
@@ -1275,7 +1275,7 @@ static NSMutableDictionary *createBaseDictionary(NSString *server, NSString *acc
 	if (count > 0) {
 		tweetCount = count;
 	}
-	[params setObject:[NSString stringWithFormat:@"%d", tweetCount] forKey:@"count"];
+	params[@"count"] = [NSString stringWithFormat:@"%d", tweetCount];
     
     return [self _sendRequestWithMethod:nil path:path queryParameters:params body:nil 
                             requestType:MGTwitterStatusesRequest 
@@ -1296,13 +1296,13 @@ static NSMutableDictionary *createBaseDictionary(NSString *server, NSString *acc
     
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:0];
     if (date) {
-        [params setObject:[self _dateToHTTP:date] forKey:@"since"];
+        params[@"since"] = [self _dateToHTTP:date];
     }
 	if (pageNum > 0) {
-        [params setObject:[NSString stringWithFormat:@"%d", pageNum] forKey:@"page"];
+        params[@"page"] = [NSString stringWithFormat:@"%d", pageNum];
     }
     if (numUpdates > 0) {
-        [params setObject:[NSString stringWithFormat:@"%d", numUpdates] forKey:@"count"];
+        params[@"count"] = [NSString stringWithFormat:@"%d", numUpdates];
     }
     if (username) {
         path = [NSString stringWithFormat:@"statuses/user_timeline/%@.%@", username, API_FORMAT];
@@ -1320,13 +1320,13 @@ static NSMutableDictionary *createBaseDictionary(NSString *server, NSString *acc
     
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:0];
     if (updateID > 0) {
-        [params setObject:[NSString stringWithFormat:@"%d", updateID] forKey:@"since_id"];
+        params[@"since_id"] = [NSString stringWithFormat:@"%d", updateID];
     }
 	if (pageNum > 0) {
-        [params setObject:[NSString stringWithFormat:@"%d", pageNum] forKey:@"page"];
+        params[@"page"] = [NSString stringWithFormat:@"%d", pageNum];
     }
     if (numUpdates > 0) {
-        [params setObject:[NSString stringWithFormat:@"%d", numUpdates] forKey:@"count"];
+        params[@"count"] = [NSString stringWithFormat:@"%d", numUpdates];
     }
     if (username) {
         path = [NSString stringWithFormat:@"statuses/user_timeline/%@.%@", username, API_FORMAT];
@@ -1361,7 +1361,7 @@ static NSMutableDictionary *createBaseDictionary(NSString *server, NSString *acc
     
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:0];
     if (updateID > 0) {
-        [params setObject:[NSString stringWithFormat:@"%d", updateID] forKey:@"since_id"];
+        params[@"since_id"] = [NSString stringWithFormat:@"%d", updateID];
     }
     
     return [self _sendRequestWithMethod:nil path:path queryParameters:params body:nil 
@@ -1381,16 +1381,16 @@ static NSMutableDictionary *createBaseDictionary(NSString *server, NSString *acc
     
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:0];
     if (date) {
-        [params setObject:[self _dateToHTTP:date] forKey:@"since"];
+        params[@"since"] = [self _dateToHTTP:date];
     }
     if (pageNum > 0) {
-        [params setObject:[NSString stringWithFormat:@"%d", pageNum] forKey:@"page"];
+        params[@"page"] = [NSString stringWithFormat:@"%d", pageNum];
     }
 	int tweetCount = DEFAULT_TWEET_COUNT;
 	if (count > 0) {
 		tweetCount = count;
 	}
-	[params setObject:[NSString stringWithFormat:@"%d", tweetCount] forKey:@"count"];
+	params[@"count"] = [NSString stringWithFormat:@"%d", tweetCount];
     
     return [self _sendRequestWithMethod:nil path:path queryParameters:params body:nil 
                             requestType:MGTwitterStatusesRequest 
@@ -1404,16 +1404,16 @@ static NSMutableDictionary *createBaseDictionary(NSString *server, NSString *acc
     
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:0];
     if (updateID > 0) {
-        [params setObject:[NSString stringWithFormat:@"%d", updateID] forKey:@"since_id"];
+        params[@"since_id"] = [NSString stringWithFormat:@"%d", updateID];
     }
     if (pageNum > 0) {
-        [params setObject:[NSString stringWithFormat:@"%d", pageNum] forKey:@"page"];
+        params[@"page"] = [NSString stringWithFormat:@"%d", pageNum];
     }
 	int tweetCount = DEFAULT_TWEET_COUNT;
 	if (count > 0) {
 		tweetCount = count;
 	}
-	[params setObject:[NSString stringWithFormat:@"%d", tweetCount] forKey:@"count"];
+	params[@"count"] = [NSString stringWithFormat:@"%d", tweetCount];
     
     return [self _sendRequestWithMethod:nil path:path queryParameters:params body:nil 
                             requestType:MGTwitterStatusesRequest 
@@ -1429,7 +1429,7 @@ static NSMutableDictionary *createBaseDictionary(NSString *server, NSString *acc
     
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:0];
     if (pageNum > 0) {
-        [params setObject:[NSString stringWithFormat:@"%d", pageNum] forKey:@"page"];
+        params[@"page"] = [NSString stringWithFormat:@"%d", pageNum];
     }
     if (username) {
         path = [NSString stringWithFormat:@"favorites/%@.%@", username, API_FORMAT];
@@ -1460,10 +1460,10 @@ static NSMutableDictionary *createBaseDictionary(NSString *server, NSString *acc
     
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:0];
     if (date) {
-        [params setObject:[self _dateToHTTP:date] forKey:@"since"];
+        params[@"since"] = [self _dateToHTTP:date];
     }
     if (pageNum > 0) {
-        [params setObject:[NSString stringWithFormat:@"%d", pageNum] forKey:@"page"];
+        params[@"page"] = [NSString stringWithFormat:@"%d", pageNum];
     }
     
     return [self _sendRequestWithMethod:nil path:path queryParameters:params body:nil 
@@ -1478,10 +1478,10 @@ static NSMutableDictionary *createBaseDictionary(NSString *server, NSString *acc
     
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:0];
     if (updateID > 0) {
-        [params setObject:[NSString stringWithFormat:@"%d", updateID] forKey:@"since_id"];
+        params[@"since_id"] = [NSString stringWithFormat:@"%d", updateID];
     }
     if (pageNum > 0) {
-        [params setObject:[NSString stringWithFormat:@"%d", pageNum] forKey:@"page"];
+        params[@"page"] = [NSString stringWithFormat:@"%d", pageNum];
     }
     
     return [self _sendRequestWithMethod:nil path:path queryParameters:params body:nil 
@@ -1496,10 +1496,10 @@ static NSMutableDictionary *createBaseDictionary(NSString *server, NSString *acc
     
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:0];
     if (date) {
-        [params setObject:[self _dateToHTTP:date] forKey:@"since"];
+        params[@"since"] = [self _dateToHTTP:date];
     }
     if (pageNum > 0) {
-        [params setObject:[NSString stringWithFormat:@"%d", pageNum] forKey:@"page"];
+        params[@"page"] = [NSString stringWithFormat:@"%d", pageNum];
     }
     
     return [self _sendRequestWithMethod:nil path:path queryParameters:params body:nil 
@@ -1514,10 +1514,10 @@ static NSMutableDictionary *createBaseDictionary(NSString *server, NSString *acc
     
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:0];
     if (updateID > 0) {
-        [params setObject:[NSString stringWithFormat:@"%d", updateID] forKey:@"since_id"];
+        params[@"since_id"] = [NSString stringWithFormat:@"%d", updateID];
     }
     if (pageNum > 0) {
-        [params setObject:[NSString stringWithFormat:@"%d", pageNum] forKey:@"page"];
+        params[@"page"] = [NSString stringWithFormat:@"%d", pageNum];
     }
     
     return [self _sendRequestWithMethod:nil path:path queryParameters:params body:nil 
@@ -1547,7 +1547,7 @@ static NSMutableDictionary *createBaseDictionary(NSString *server, NSString *acc
     NSString *path = [NSString stringWithFormat:@"users/show.%@", API_FORMAT];
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:0];
     if (email) {
-        [params setObject:email forKey:@"email"];
+        params[@"email"] = email;
     } else {
         return nil;
     }
@@ -1567,7 +1567,7 @@ static NSMutableDictionary *createBaseDictionary(NSString *server, NSString *acc
         path = [NSString stringWithFormat:@"statuses/friends/%@.%@", username, API_FORMAT];
     }
     if (pageNum > 0) {
-        [params setObject:[NSString stringWithFormat:@"%d", pageNum] forKey:@"page"];
+        params[@"page"] = [NSString stringWithFormat:@"%d", pageNum];
     }
     
     return [self _sendRequestWithMethod:nil path:path queryParameters:params body:nil 
@@ -1582,7 +1582,7 @@ static NSMutableDictionary *createBaseDictionary(NSString *server, NSString *acc
     
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:0];
     if (!flag) {
-        [params setObject:@"true" forKey:@"lite"]; // slightly bizarre, but correct.
+        params[@"lite"] = @"true"; // slightly bizarre, but correct.
     }
     
     return [self _sendRequestWithMethod:nil path:path queryParameters:params body:nil 
@@ -1624,9 +1624,9 @@ static NSMutableDictionary *createBaseDictionary(NSString *server, NSString *acc
     }
     
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:0];
-    [params setObject:trimmedText forKey:@"status"];
+    params[@"status"] = trimmedText;
     if (updateID > 0) {
-        [params setObject:[NSString stringWithFormat:@"%d", updateID] forKey:@"in_reply_to_status_id"];
+        params[@"in_reply_to_status_id"] = [NSString stringWithFormat:@"%d", updateID];
     }
     NSString *body = [self _queryStringWithBase:nil parameters:params prefixed:NO];
     
@@ -1676,8 +1676,8 @@ static NSMutableDictionary *createBaseDictionary(NSString *server, NSString *acc
     }
     
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:0];
-    [params setObject:trimmedText forKey:@"text"];
-    [params setObject:username forKey:@"user"];
+    params[@"text"] = trimmedText;
+    params[@"user"] = username;
     NSString *body = [self _queryStringWithBase:nil parameters:params prefixed:NO];
     
     return [self _sendRequestWithMethod:HTTP_POST_METHOD path:path 

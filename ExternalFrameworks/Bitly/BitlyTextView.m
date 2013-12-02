@@ -121,7 +121,7 @@
                          linkDictionary:(NSDictionary *)dictionary {
     //Need to replace the links now in case the text changed since being passed to the shortener
     for (NSString *oldLink in [dictionary allKeys]) {
-        self.textView.text = [self.textView.text stringByReplacingOccurrencesOfString:oldLink withString:[dictionary objectForKey:oldLink]];
+        self.textView.text = [self.textView.text stringByReplacingOccurrencesOfString:oldLink withString:dictionary[oldLink]];
     }
     if ([self.delegate respondsToSelector:@selector(bitlyTextView:didShortenLinks:oldText:text:)]) {
         [self.delegate bitlyTextView:self didShortenLinks:dictionary oldText:oldText text:currentText];

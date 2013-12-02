@@ -256,13 +256,13 @@ static NSUInteger g_betaFeatures = 0;
                         // set up the HTTP POST to publish the attribution ID.
                         NSString *publishPath = [NSString stringWithFormat:FBPublishActivityPath, appID, nil];
                         NSMutableDictionary<FBGraphObject> *installActivity = [FBGraphObject graphObject];
-                        [installActivity setObject:FBMobileInstallEvent forKey:@"event"];
+                        installActivity[@"event"] = FBMobileInstallEvent;
               
                         if (attributionID) {
-                            [installActivity setObject:attributionID forKey:@"attribution"];
+                            installActivity[@"attribution"] = attributionID;
                         }
                         if (advertiserID) {
-                            [installActivity setObject:advertiserID forKey:@"advertiser_id"];
+                            installActivity[@"advertiser_id"] = advertiserID;
                         }
 
                         FBRequest *publishRequest = [[[FBRequest alloc] initForPostWithSession:nil graphPath:publishPath graphObject:installActivity] autorelease];

@@ -188,7 +188,7 @@ static FBSession *g_activeSession = nil;
             appID = [FBSettings defaultAppID];
         }
         if (!permissions) {
-            permissions = [NSArray array];
+            permissions = @[];
         }
         if (!urlSchemeSuffix) {
             urlSchemeSuffix = [FBSettings defaultUrlSchemeSuffix];
@@ -478,7 +478,7 @@ static FBSession *g_activeSession = nil;
     FBSessionLoginType loginType = _loginTypeOfPendingOpenUrlCallback;
     _loginTypeOfPendingOpenUrlCallback = FBSessionLoginTypeNone;
     
-    NSString *accessToken = [params objectForKey:@"access_token"];
+    NSString *accessToken = params[@"access_token"];
     
     // #2015922 should refactor these methods to take the FBAccessTokenData instance at which time
     // we should also use +FBAccessTokenData createTokenFromFacebookURL.
@@ -1195,9 +1195,9 @@ static FBSession *g_activeSession = nil;
 
 - (void)addWebLoginStartTimeToParams:(NSMutableDictionary *)params
 {
-    NSNumber *timeValue = [NSNumber numberWithDouble:round(1000 * [[NSDate date] timeIntervalSince1970])];
+    NSNumber *timeValue = @(round(1000 * [[NSDate date] timeIntervalSince1970]));
     NSString *e2eTimestampString = [FBUtility simpleJSONEncode:@{@"init":timeValue}];
-    [params setObject:e2eTimestampString forKey:@"e2e"];
+    params[@"e2e"] = e2eTimestampString;
 }
 
 - (BOOL)isURLSchemeRegistered {
@@ -1266,7 +1266,7 @@ static FBSession *g_activeSession = nil;
                    loginType:(FBSessionLoginType)loginType {
     // if the URL doesn't contain the access token, an error has occurred.
     if (!accessToken) {
-        NSString *errorReason = [parameters objectForKey:@"error"];
+        NSString *errorReason = parameters[@"error"];
         
         // if the error response indicates that we should try again using Safari, open
         // the authorization dialog in Safari.
@@ -1296,7 +1296,7 @@ static FBSession *g_activeSession = nil;
         
         // the facebook app may return an error_code parameter in case it
         // encounters a UIWebViewDelegate error
-        NSString *errorCode = [parameters objectForKey:@"error_code"];
+        NSString *errorCode = parameters[@"error_code"];
         
         // create an error object with additional info regarding failed login
         // making sure the top level error reason is defined there.
@@ -1360,9 +1360,7 @@ static FBSession *g_activeSession = nil;
     [requestSessionMe setSession:self];
     FBRequest *requestNewTokenMe = [[[FBRequest alloc] initWithSession:nil
                                                              graphPath:@"me"
-                                                            parameters:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                                        accessToken, @"access_token",
-                                                                        nil]
+                                                            parameters:@{@"access_token": accessToken}
                                                             HTTPMethod:nil]
                                     autorelease];
     
@@ -1394,7 +1392,7 @@ static FBSession *g_activeSession = nil;
         // if this was our last call, then complete the operation
         if (!--callsPending) {
             if ([fbid isEqual:fbid2]) {
-                id newPermissions = [[permissionsRefreshed objectAtIndex:0] allKeys];
+                id newPermissions = [permissionsRefreshed[0] allKeys];
                 if (![newPermissions isKindOfClass:[NSArray class]]) {
                     newPermissions = nil;
                 }
@@ -1429,7 +1427,7 @@ static FBSession *g_activeSession = nil;
     
     [connection addRequest:requestPermissions
          completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-             handleBatch(nil, [result objectForKey:@"data"]);
+             handleBatch(nil, result[@"data"]);
          }];
     
     [connection start];
@@ -1574,7 +1572,7 @@ static FBSession *g_activeSession = nil;
     self.loginDialog = nil;
 
     NSTimeInterval expirationTimeInterval = [expirationDate timeIntervalSinceNow];
-    NSDictionary* params = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[[NSNumber numberWithDouble:expirationTimeInterval] stringValue], @"expires_in", nil];
+    NSDictionary* params = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[@(expirationTimeInterval) stringValue], @"expires_in", nil];
     
     [self handleAuthorizationCallbacks:accessToken params:params loginType:FBSessionLoginTypeWebView];
     [params release];
@@ -1691,11 +1689,9 @@ static FBSession *g_activeSession = nil;
 }
 
 - (NSDictionary *)clientState {
-    NSDictionary *clientState = [NSDictionary dictionaryWithObjectsAndKeys:
-                                 [NSNumber numberWithBool:YES], FBLoginUXClientStateIsClientState,
-                                 [NSNumber numberWithBool:YES], FBLoginUXClientStateIsOpenSession,
-                                 [NSNumber numberWithBool:(self == g_activeSession)], FBLoginUXClientStateIsActiveSession,
-                                 nil];
+    NSDictionary *clientState = @{FBLoginUXClientStateIsClientState: @YES,
+                                 FBLoginUXClientStateIsOpenSession: @YES,
+                                 FBLoginUXClientStateIsActiveSession: [NSNumber numberWithBool:(self == g_activeSession)]};
     return clientState;
 }
 
@@ -1738,7 +1734,7 @@ static FBSession *g_activeSession = nil;
 }
 
 + (NSDate *)expirationDateFromResponseParams:(NSDictionary *)parameters {
-    NSString *expTime = [parameters objectForKey:@"expires_in"];
+    NSString *expTime = parameters[@"expires_in"];
     NSDate *expirationDate = nil;
     if (expTime) {
         // If we have an interval, it is assumed to be since now. (e.g. 60 days)

@@ -36,11 +36,11 @@
 
     id key = [enumerator nextObject];
     if (key) {
-        id value = [formDictionary objectForKey:key];
+        id value = formDictionary[key];
         [combinedDataString appendString:[NSString stringWithFormat:@"%@=%@", [(NSString*)key stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], [value stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
 
 		while ((key = [enumerator nextObject])) {
-			value = [formDictionary objectForKey:key];
+			value = formDictionary[key];
 			[combinedDataString appendString:[NSString stringWithFormat:@"&%@=%@", [(NSString*)key stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], [value stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
 		}
 	}

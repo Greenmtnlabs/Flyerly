@@ -209,7 +209,7 @@ static const NSInteger kMinimumCountToCollate = 6;
         }
         
         NSString *key = [self indexKeyOfItem:item];
-        NSMutableArray *existingSection = [indexMap objectForKey:key];
+        NSMutableArray *existingSection = indexMap[key];
         NSMutableArray *section = existingSection;
         
         if (!section) {
@@ -226,7 +226,7 @@ static const NSInteger kMinimumCountToCollate = 6;
     
     if (self.sortDescriptors) {
         for (NSString *key in indexKeys) {
-            [[indexMap objectForKey:key] sortUsingDescriptors:self.sortDescriptors];
+            [indexMap[key] sortUsingDescriptors:self.sortDescriptors];
         }
     }
     if (!self.useCollation) {
@@ -264,7 +264,7 @@ static const NSInteger kMinimumCountToCollate = 6;
 }
 
 - (void)setSortingBySingleField:(NSString*)fieldName ascending:(BOOL)ascending {
-    [self setSortingByFields:[NSArray arrayWithObject:fieldName] ascending:ascending];
+    [self setSortingByFields:@[fieldName] ascending:ascending];
 }
 
 - (FBGraphObjectTableCell *)cellWithTableView:(UITableView *)tableView
@@ -295,7 +295,7 @@ static const NSInteger kMinimumCountToCollate = 6;
     
     if (self.useCollation) {
         NSInteger collationSection = [self.collation sectionForObject:item collationStringSelector:NSSelectorFromString(self.groupByField)];
-        text = [[self.collation sectionTitles] objectAtIndex:collationSection];
+        text = [self.collation sectionTitles][collationSection];
     } else {
         
         if ([text length] > 1) {
@@ -311,14 +311,14 @@ static const NSInteger kMinimumCountToCollate = 6;
 {
     id key = nil;
     if (self.useCollation) {
-        NSString *sectionTitle = [self.collation.sectionTitles objectAtIndex:indexPath.section];
+        NSString *sectionTitle = (self.collation.sectionTitles)[indexPath.section];
         key = sectionTitle;
     } else if (indexPath.section >= 0 && indexPath.section < self.indexKeys.count) {
-        key = [self.indexKeys objectAtIndex:indexPath.section];
+        key = (self.indexKeys)[indexPath.section];
     }
-    NSArray *sectionItems = [self.indexMap objectForKey:key];
+    NSArray *sectionItems = (self.indexMap)[key];
     if (indexPath.row >= 0 && indexPath.row < sectionItems.count) {
-        return [sectionItems objectAtIndex:indexPath.row];
+        return sectionItems[indexPath.row];
     }
     return nil;
 }
@@ -326,7 +326,7 @@ static const NSInteger kMinimumCountToCollate = 6;
 - (NSIndexPath *)indexPathForItem:(FBGraphObject *)item
 {
     NSString *key = [self indexKeyOfItem:item];
-    NSMutableArray *sectionItems = [self.indexMap objectForKey:key];
+    NSMutableArray *sectionItems = (self.indexMap)[key];
     if (!sectionItems) {
         return nil;
     }
@@ -379,10 +379,10 @@ static const NSInteger kMinimumCountToCollate = 6;
 {
     id key;
     if (self.useCollation) {
-        NSString *sectionTitle = [self.collation.sectionTitles objectAtIndex:sectionIndex];
+        NSString *sectionTitle = (self.collation.sectionTitles)[sectionIndex];
         key = sectionTitle;
     } else {
-        key = [self.indexKeys objectAtIndex:sectionIndex];
+        key = (self.indexKeys)[sectionIndex];
     }
     return key;
 }
@@ -390,7 +390,7 @@ static const NSInteger kMinimumCountToCollate = 6;
 - (NSArray *)sectionItemsForSection:(NSInteger)sectionIndex
 {
     id key = [self titleForSection:sectionIndex];
-    NSArray *sectionItems = [self.indexMap objectForKey:key];
+    NSArray *sectionItems = (self.indexMap)[key];
     return sectionItems;
 }
 - (UIImage *)tableView:(UITableView *)tableView imageForItem:(FBGraphObject *)item

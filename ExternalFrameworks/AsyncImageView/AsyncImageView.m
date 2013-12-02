@@ -124,10 +124,8 @@ NSString *const AsyncImageErrorKey = @"error";
 	_cancelled = NO;
     [[NSNotificationCenter defaultCenter] postNotificationName:AsyncImageLoadDidFail
                                                         object:_target
-                                                      userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                                _URL, AsyncImageURLKey,
-                                                                error, AsyncImageErrorKey,
-                                                                nil]];
+                                                      userInfo:@{AsyncImageURLKey: _URL,
+                                                                AsyncImageErrorKey: error}];
 }
 
 - (void)cacheImage:(UIImage *)image
@@ -157,7 +155,7 @@ NSString *const AsyncImageErrorKey = @"error";
 										 nil];
 		if (_cache)
 		{
-			[userInfo setObject:_cache forKey:AsyncImageCacheKey];
+			userInfo[AsyncImageCacheKey] = _cache;
 		}
 		
 		_loading = NO;
@@ -191,7 +189,7 @@ NSString *const AsyncImageErrorKey = @"error";
 			{
                 @autoreleasepool
                 {
-                    NSError *error = [NSError errorWithDomain:@"AsyncImageLoader" code:0 userInfo:[NSDictionary dictionaryWithObject:@"Invalid image data" forKey:NSLocalizedDescriptionKey]];
+                    NSError *error = [NSError errorWithDomain:@"AsyncImageLoader" code:0 userInfo:@{NSLocalizedDescriptionKey: @"Invalid image data"}];
                     [self performSelectorOnMainThread:@selector(loadFailedWithError:) withObject:error waitUntilDone:YES];
 				}
 			}
@@ -372,16 +370,16 @@ NSString *const AsyncImageErrorKey = @"error";
 - (void)imageLoaded:(NSNotification *)notification
 {  
     //complete connections for URL
-    NSURL *URL = [notification.userInfo objectForKey:AsyncImageURLKey];
+    NSURL *URL = (notification.userInfo)[AsyncImageURLKey];
     for (int i = (int)[_connections count] - 1; i >= 0; i--)
     {
-        AsyncImageConnection *connection = [_connections objectAtIndex:(NSUInteger)i];
+        AsyncImageConnection *connection = _connections[(NSUInteger)i];
         if (connection.URL == URL || [connection.URL isEqual:URL])
         {
             //cancel earlier connections for same target/action
             for (int j = i - 1; j >= 0; j--)
             {
-                AsyncImageConnection *earlier = [_connections objectAtIndex:(NSUInteger)j];
+                AsyncImageConnection *earlier = _connections[(NSUInteger)j];
                 if (earlier.target == connection.target &&
                     earlier.success == connection.success)
                 {
@@ -395,7 +393,7 @@ NSString *const AsyncImageErrorKey = @"error";
             [connection cancel];
             
             //perform action
-			UIImage *image = [notification.userInfo objectForKey:AsyncImageImageKey];
+			UIImage *image = (notification.userInfo)[AsyncImageImageKey];
             objc_msgSend(connection.target, connection.success, image, connection.URL);
 
             //remove from queue
@@ -410,10 +408,10 @@ NSString *const AsyncImageErrorKey = @"error";
 - (void)imageFailed:(NSNotification *)notification
 {
     //remove connections for URL
-    NSURL *URL = [notification.userInfo objectForKey:AsyncImageURLKey];
+    NSURL *URL = (notification.userInfo)[AsyncImageURLKey];
     for (int i = (int)[_connections count] - 1; i >= 0; i--)
     {
-        AsyncImageConnection *connection = [_connections objectAtIndex:(NSUInteger)i];
+        AsyncImageConnection *connection = _connections[(NSUInteger)i];
         if ([connection.URL isEqual:URL])
         {
             //cancel connection (in case it's a duplicate)
@@ -422,7 +420,7 @@ NSString *const AsyncImageErrorKey = @"error";
             //perform failure action
             if (connection.failure)
             {
-                NSError *error = [notification.userInfo objectForKey:AsyncImageErrorKey];
+                NSError *error = (notification.userInfo)[AsyncImageErrorKey];
                 objc_msgSend(connection.target, connection.failure, error, URL);
             }
             
@@ -441,7 +439,7 @@ NSString *const AsyncImageErrorKey = @"error";
     id target = [notification object];
     for (int i = (int)[_connections count] - 1; i >= 0; i--)
     {
-        AsyncImageConnection *connection = [_connections objectAtIndex:(NSUInteger)i];
+        AsyncImageConnection *connection = _connections[(NSUInteger)i];
         if (connection.target == target)
         {
             //cancel connection
@@ -474,7 +472,7 @@ NSString *const AsyncImageErrorKey = @"error";
     BOOL added = NO;
     for (NSUInteger i = 0; i < [_connections count]; i++)
     {
-        AsyncImageConnection *existingConnection = [_connections objectAtIndex:i];
+        AsyncImageConnection *existingConnection = _connections[i];
         if (!existingConnection.loading)
         {
             [_connections insertObject:connection atIndex:i];
@@ -505,7 +503,7 @@ NSString *const AsyncImageErrorKey = @"error";
 {
     for (int i = (int)[_connections count] - 1; i >= 0; i--)
     {
-        AsyncImageConnection *connection = [_connections objectAtIndex:(NSUInteger)i];
+        AsyncImageConnection *connection = _connections[(NSUInteger)i];
         if ([connection.URL isEqual:URL] && connection.target == target && connection.success == action)
         {
             [connection cancel];
@@ -518,7 +516,7 @@ NSString *const AsyncImageErrorKey = @"error";
 {
     for (int i = (int)[_connections count] - 1; i >= 0; i--)
     {
-        AsyncImageConnection *connection = [_connections objectAtIndex:(NSUInteger)i];
+        AsyncImageConnection *connection = _connections[(NSUInteger)i];
         if ([connection.URL isEqual:URL] && connection.target == target)
         {
             [connection cancel];
@@ -531,7 +529,7 @@ NSString *const AsyncImageErrorKey = @"error";
 {
     for (int i = (int)[_connections count] - 1; i >= 0; i--)
     {
-        AsyncImageConnection *connection = [_connections objectAtIndex:(NSUInteger)i];
+        AsyncImageConnection *connection = _connections[(NSUInteger)i];
         if ([connection.URL isEqual:URL])
         {
             [connection cancel];
@@ -544,7 +542,7 @@ NSString *const AsyncImageErrorKey = @"error";
 {
     for (int i = (int)[_connections count] - 1; i >= 0; i--)
     {
-        AsyncImageConnection *connection = [_connections objectAtIndex:(NSUInteger)i];
+        AsyncImageConnection *connection = _connections[(NSUInteger)i];
         if (connection.target == target && connection.success == action)
         {
             [connection cancel];
@@ -556,7 +554,7 @@ NSString *const AsyncImageErrorKey = @"error";
 {
     for (int i = (int)[_connections count] - 1; i >= 0; i--)
     {
-        AsyncImageConnection *connection = [_connections objectAtIndex:(NSUInteger)i];
+        AsyncImageConnection *connection = _connections[(NSUInteger)i];
         if (connection.target == target)
         {
             [connection cancel];
@@ -570,7 +568,7 @@ NSString *const AsyncImageErrorKey = @"error";
     //this is not neccesarily the next image that will be assigned
     for (int i = (int)[_connections count] - 1; i >= 0; i--)
     {
-        AsyncImageConnection *connection = [_connections objectAtIndex:(NSUInteger)i];
+        AsyncImageConnection *connection = _connections[(NSUInteger)i];
         if (connection.target == target && connection.success == action)
         {
             return [[connection.URL ah_retain] autorelease];
@@ -585,7 +583,7 @@ NSString *const AsyncImageErrorKey = @"error";
     //this is not neccesarily the next image that will be assigned
     for (int i = (int)[_connections count] - 1; i >= 0; i--)
     {
-        AsyncImageConnection *connection = [_connections objectAtIndex:(NSUInteger)i];
+        AsyncImageConnection *connection = _connections[(NSUInteger)i];
         if (connection.target == target)
         {
             return [[connection.URL ah_retain] autorelease];

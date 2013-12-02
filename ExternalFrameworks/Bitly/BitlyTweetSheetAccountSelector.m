@@ -102,7 +102,7 @@
     }
     
 
-    ACAccount *account = [self.accounts objectAtIndex:indexPath.row];
+    ACAccount *account = (self.accounts)[indexPath.row];
     cell.textLabel.text = account.accountDescription; 
     cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:14];
     
@@ -123,7 +123,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self.delegate accountSelector:self didSelectAccount:[self.accounts objectAtIndex: indexPath.row]];
+    [self.delegate accountSelector:self didSelectAccount:(self.accounts)[indexPath.row]];
 }
 
 @end

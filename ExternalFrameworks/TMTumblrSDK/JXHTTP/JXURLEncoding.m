@@ -38,7 +38,7 @@
     NSArray *sortedKeys = [[dictionary allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
 
     for (NSString *key in sortedKeys) {
-        [self encodeObject:[dictionary objectForKey:key] withKey:key andSubKey:nil intoArray:arguments];
+        [self encodeObject:dictionary[key] withKey:key andSubKey:nil intoArray:arguments];
     }
     
     return [arguments componentsJoinedByString:@"&"];
@@ -70,7 +70,7 @@
     if ([object isKindOfClass:[NSDictionary class]]) {
         NSArray *sortedKeys = [[object allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
         for (NSString *insideKey in sortedKeys) {
-            [self encodeObject:[object objectForKey:insideKey] withKey:objectKey andSubKey:insideKey intoArray:array];
+            [self encodeObject:object[insideKey] withKey:objectKey andSubKey:insideKey intoArray:array];
         }
     } else if ([object isKindOfClass:[NSArray class]]) {
         for (NSString *arrayObject in (NSArray *)object) {

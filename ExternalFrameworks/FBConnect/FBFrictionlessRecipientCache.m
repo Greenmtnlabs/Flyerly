@@ -111,7 +111,7 @@
         self.frictionlessShouldMakeViewInvisible = NO;
         
         // set invisible if all recipients are enabled for frictionless requests
-        id fbid = [parameters objectForKey:@"to"];
+        id fbid = parameters[@"to"];
         if (fbid != nil) {
             // if value parses as a json array expression get the list that way
             id fbids = [FBUtility simpleJSONDecode:fbid];

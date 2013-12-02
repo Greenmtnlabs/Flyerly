@@ -59,8 +59,8 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     PFUser *user = [PFUser currentUser];
     username.text = user.username;
     email.text = user.email;
-    name.text = [user objectForKey:@"name"];
-    phno.text = [user objectForKey:@"contact"];
+    name.text = user[@"name"];
+    phno.text = user[@"contact"];
 }
 
 -(void)goBack{
@@ -82,10 +82,10 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
                 [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
                     if (error) {
                         PFUser *user = [PFUser currentUser];
-                        [user setObject:[username.text lowercaseString] forKey:@"username"];
-                        [user setObject:phno.text forKey:@"contact"];
-                        [user setObject:name.text forKey:@"name"];
-                        [user setObject:email.text forKey:@"email"];
+                        user[@"username"] = [username.text lowercaseString];
+                        user[@"contact"] = phno.text;
+                        user[@"name"] = name.text;
+                        user[@"email"] = email.text;
                         [user saveInBackground];
                         [self showAlert:@"Profile Updated Successfully" message:@""];
                     }else{
@@ -94,10 +94,10 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
                 }];
             }else{
                 PFUser *user = [PFUser currentUser];
-                [user setObject:[username.text lowercaseString] forKey:@"username"];
-                [user setObject:phno.text forKey:@"contact"];
-                [user setObject:name.text forKey:@"name"];
-                [user setObject:email.text forKey:@"email"];
+                user[@"username"] = [username.text lowercaseString];
+                user[@"contact"] = phno.text;
+                user[@"name"] = name.text;
+                user[@"email"] = email.text;
                 [user saveInBackground];
                 [self showAlert:@"Profile Updated Successfully" message:@""];
             }
@@ -111,7 +111,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     
     [PFUser requestPasswordResetForEmailInBackground:email.text block:^(BOOL succeeded, NSError *error){
         if (error) {
-            NSString *errorValue = [error.userInfo objectForKey:@"error"];
+            NSString *errorValue = (error.userInfo)[@"error"];
               [self showAlert:@"No account exists with email" message:@""];
         } else {
             [self showAlert:@"Reset password email has been sent." message:@""];

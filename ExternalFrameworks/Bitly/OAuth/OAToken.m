@@ -64,10 +64,10 @@
 		
 		for (NSString *pair in pairs) {
 			NSArray *elements = [pair componentsSeparatedByString:@"="];
-			if ([[elements objectAtIndex:0] isEqualToString:@"oauth_token"]) {
-				self.key = [[elements objectAtIndex:1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-			} else if ([[elements objectAtIndex:0] isEqualToString:@"oauth_token_secret"]) {
-				self.secret = [[elements objectAtIndex:1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+			if ([elements[0] isEqualToString:@"oauth_token"]) {
+				self.key = [elements[1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+			} else if ([elements[0] isEqualToString:@"oauth_token_secret"]) {
+				self.secret = [elements[1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 			}
 		}
 	}    

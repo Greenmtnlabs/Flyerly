@@ -58,7 +58,7 @@ const int MAX_ACCUMULATED_LOG_EVENTS                 = 1000;
             self.numSkippedEventsDueToFullBuffer++;
         } else {
             [self.accumulatedEvents addObject:@{@"event" : eventDictionary,
-                                                @"isImplicit" : [NSNumber numberWithBool:isImplicit],
+                                                @"isImplicit" : @(isImplicit),
                                                }];
         }
     }
@@ -93,10 +93,10 @@ const int MAX_ACCUMULATED_LOG_EVENTS                 = 1000;
     NSMutableArray *eventArray = [[NSMutableArray alloc] initWithCapacity:self.inFlightEvents.count];
     
     for (NSDictionary *eventAndImplicitFlag in self.inFlightEvents) {
-        if (!includeImplicitEvents && [[eventAndImplicitFlag objectForKey:@"isImplicit"] boolValue]) {
+        if (!includeImplicitEvents && [eventAndImplicitFlag[@"isImplicit"] boolValue]) {
             continue;
         }
-        [eventArray addObject:[eventAndImplicitFlag objectForKey:@"event"]];
+        [eventArray addObject:eventAndImplicitFlag[@"event"]];
     }
     
     NSString *jsonEncodedEvents = nil;

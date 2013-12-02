@@ -100,7 +100,7 @@ static NSMutableDictionary *g_startTimesWithTags = nil;
         
         for (NSString *key in [g_stringsToReplace keyEnumerator]) {
             [_internalContents replaceOccurrencesOfString:key 
-                                               withString:[g_stringsToReplace objectForKey:key]
+                                               withString:g_stringsToReplace[key]
                                                   options:NSLiteralSearch 
                                                     range:NSMakeRange(0, _internalContents.length)];
         }
@@ -160,8 +160,8 @@ static NSMutableDictionary *g_startTimesWithTags = nil;
         // Start time of this "timestampTag" is stashed in the dictionary.
         // Treat the incoming object tag simply as an address, since it's only used to identify during lifetime.  If
         // we send in as an object, the dictionary will try to copy it.
-        NSNumber *tagAsNumber = [NSNumber numberWithUnsignedLong:(unsigned long)(void *)timestampTag];
-        NSNumber *startTimeNumber = [g_startTimesWithTags objectForKey:tagAsNumber];
+        NSNumber *tagAsNumber = @((unsigned long)(void *)timestampTag);
+        NSNumber *startTimeNumber = g_startTimesWithTags[tagAsNumber];
         
         // Only log if there's been an associated start time.
         if (startTimeNumber) {
@@ -195,8 +195,7 @@ static NSMutableDictionary *g_startTimesWithTags = nil;
         // Treat the incoming object tag simply as an address, since it's only used to identify during lifetime.  If
         // we send in as an object, the dictionary will try to copy it.
         unsigned long tagAsNumber = (unsigned long)(void *)timestampTag;
-        [g_startTimesWithTags setObject:[NSNumber numberWithUnsignedLong:currTime]
-                                 forKey:[NSNumber numberWithUnsignedLong:tagAsNumber]];
+        g_startTimesWithTags[@(tagAsNumber)] = @(currTime);
     }
 }
 

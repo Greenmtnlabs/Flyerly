@@ -265,7 +265,7 @@ static CGFloat kBorderWidth = 10;
 	[MGTwitterEngine setUsername:userName password:passWord remember:[rememberSwitch isOn]];
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"AccountChanged" object:nil 
-													  userInfo:[NSDictionary dictionaryWithObjectsAndKeys:userName, @"login", passWord, @"password", nil]];
+													  userInfo:@{@"login": userName, @"password": passWord}];
 	
 
 	mte.twitLoginView =self;
@@ -325,7 +325,7 @@ static CGFloat kBorderWidth = 10;
 	
 	UIWindow* window = [UIApplication sharedApplication].keyWindow;
 	if (!window) {
-		window = [[UIApplication sharedApplication].windows objectAtIndex:0];
+		window = ([UIApplication sharedApplication].windows)[0];
 	}
 	self.frame = CGRectMake(0,44, 321, 417);
 	[window addSubview:self];

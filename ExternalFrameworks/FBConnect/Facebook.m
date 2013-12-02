@@ -190,7 +190,7 @@ static NSString *const FBexpirationDatePropertyName = @"expirationDate";
 - (void)observeTokenContextValueForKeyPath:(NSString *)keyPath
                                     change:(NSDictionary *)change {
     // here we are forwarding KVO notifications from an inner object
-    if ([change objectForKey:NSKeyValueChangeNotificationIsPriorKey]) {
+    if (change[NSKeyValueChangeNotificationIsPriorKey]) {
         [self willChangeValueForKey:keyPath];        
     } else {        
         [self didChangeValueForKey:keyPath];        
@@ -232,10 +232,10 @@ static NSString *const FBexpirationDatePropertyName = @"expirationDate";
 	for (NSString *pair in pairs) {
 		NSArray *kv = [pair componentsSeparatedByString:@"="];
 		NSString *val =
-        [[kv objectAtIndex:1]
+        [kv[1]
          stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         
-		[params setObject:val forKey:[kv objectAtIndex:0]];
+		params[kv[0]] = val;
 	}
     return params;
 }
@@ -313,8 +313,8 @@ static NSString *const FBexpirationDatePropertyName = @"expirationDate";
                 { // prefer to keep decls near to their use
                     
                     // unpack the error code and reason in order to compute cancel bool
-                    NSString *errorCode = [[error userInfo] objectForKey:FBErrorLoginFailedOriginalErrorCode];
-                    NSString *errorReason = [[error userInfo] objectForKey:FBErrorLoginFailedReason];
+                    NSString *errorCode = [error userInfo][FBErrorLoginFailedOriginalErrorCode];
+                    NSString *errorReason = [error userInfo][FBErrorLoginFailedReason];
                     BOOL userDidCancel = !errorCode && (!errorReason ||
                                                         [errorReason isEqualToString:FBErrorLoginFailedReasonInlineCancelledValue]);
                     
@@ -469,12 +469,12 @@ static NSString *const FBexpirationDatePropertyName = @"expirationDate";
  */
 - (FBRequest*)requestWithParams:(NSMutableDictionary *)params
                     andDelegate:(id <FBRequestDelegate>)delegate {
-    if ([params objectForKey:@"method"] == nil) {
+    if (params[@"method"] == nil) {
         NSLog(@"API Method must be specified");
         return nil;
     }
     
-    NSString * methodName = [params objectForKey:@"method"];
+    NSString * methodName = params[@"method"];
     [params removeObjectForKey:@"method"];
     
     return [self requestWithMethodName:methodName
@@ -659,15 +659,15 @@ static NSString *const FBexpirationDatePropertyName = @"expirationDate";
     [_fbDialog release];
     
     NSString *dialogURL = [kDialogBaseURL stringByAppendingString:action];
-    [params setObject:@"touch" forKey:@"display"];
-    [params setObject:kSDKVersion forKey:@"sdk"];
-    [params setObject:kRedirectURL forKey:@"redirect_uri"];
+    params[@"display"] = @"touch";
+    params[@"sdk"] = kSDKVersion;
+    params[@"redirect_uri"] = kRedirectURL;
     
     if ([action isEqualToString:kLogin]) {
-        [params setObject:@"user_agent" forKey:@"type"];
+        params[@"type"] = @"user_agent";
         _fbDialog = [[FBLoginDialog alloc] initWithURL:dialogURL loginParams:params delegate:self];
     } else {
-        [params setObject:_appId forKey:@"app_id"];
+        params[@"app_id"] = _appId;
         if ([self isSessionValid]) {
             [params setValue:[self.accessToken stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
                       forKey:@"access_token"];
@@ -689,7 +689,7 @@ static NSString *const FBexpirationDatePropertyName = @"expirationDate";
             }
             
             // set invisible if all recipients are enabled for frictionless requests
-            id fbid = [params objectForKey:@"to"];
+            id fbid = params[@"to"];
             if (fbid != nil) {
                 // if value parses as a json array expression get the list that way
                 id fbids = [FBUtility simpleJSONDecode:fbid];
@@ -775,8 +775,8 @@ static NSString *const FBexpirationDatePropertyName = @"expirationDate";
 - (void)request:(FBRequest *)request didLoad:(id)result {
     _isExtendingAccessToken = NO;
     _requestExtendingAccessToken = nil;
-    NSString* accessToken = [result objectForKey:@"access_token"];
-    NSString* expTime = [result objectForKey:@"expires_at"];
+    NSString* accessToken = result[@"access_token"];
+    NSString* expTime = result[@"expires_at"];
     
     if (accessToken == nil || expTime == nil) {
         return;

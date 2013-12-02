@@ -115,7 +115,7 @@ static NSInteger OAuthCredentialsErrorCode = -215;
     
     if (![twitterOAuthConsumerKey length] || ![twitterOAuthConsumerSecret length]) {
         NSError *error = [NSError errorWithDomain:ErrorDomain code:OAuthCredentialsErrorCode 
-                                         userInfo:[NSDictionary dictionaryWithObject:@"Twitter OAuth API keys not set. See setter on BitlyConfig." forKey:NSLocalizedDescriptionKey]];
+                                         userInfo:@{NSLocalizedDescriptionKey: @"Twitter OAuth API keys not set. See setter on BitlyConfig."}];
          requestTokenCompletionHandler(NO, error);
       
     } else {
@@ -164,7 +164,7 @@ static NSInteger OAuthCredentialsErrorCode = -215;
         } else {
             reason = @"No token data returned";
         }
-        NSDictionary *userInfo = [NSDictionary dictionaryWithObject:reason forKey:NSLocalizedDescriptionKey];
+        NSDictionary *userInfo = @{NSLocalizedDescriptionKey: reason};
         NSError *error = [NSError errorWithDomain:ErrorDomain code:RequestTokenErrorCode userInfo:userInfo];
         requestTokenCompletionHandler(NO, error);
     }
@@ -177,7 +177,7 @@ static NSInteger OAuthCredentialsErrorCode = -215;
 
 - (void)authorizationCompletedWithCallbackURL:(NSURL *)callbackURL {
     NSDictionary *params = [BitlyLibUtil parseQueryString:[callbackURL query]];
-    NSString *oauthVerifier = [params objectForKey:@"oauth_verifier"];
+    NSString *oauthVerifier = params[@"oauth_verifier"];
     dispatch_async(dispatch_get_main_queue(), ^{
         [self getAccessTokenWithRequestToken:self.requestToken verifier:oauthVerifier];
     });
@@ -190,9 +190,9 @@ static NSInteger OAuthCredentialsErrorCode = -215;
     
     if (![twitterOAuthConsumerKey length] || ![twitterOAuthConsumerSecret length]) {
         NSError *error = [NSError errorWithDomain:ErrorDomain code:OAuthCredentialsErrorCode 
-                                         userInfo:[NSDictionary dictionaryWithObject:@"Twitter OAuth API keys not set. See setter on BitlyConfig." forKey:NSLocalizedDescriptionKey]];
+                                         userInfo:@{NSLocalizedDescriptionKey: @"Twitter OAuth API keys not set. See setter on BitlyConfig."}];
         
-        NSDictionary *userInfo = [NSDictionary dictionaryWithObject:error forKey:BitlyTwitterOauthErrorUserInfoKey];
+        NSDictionary *userInfo = @{BitlyTwitterOauthErrorUserInfoKey: error};
         
         [[NSNotificationCenter defaultCenter] postNotificationName:BitlyTwitterOAuthFailedNotification object:self userInfo:userInfo];
 
@@ -235,7 +235,7 @@ static NSInteger OAuthCredentialsErrorCode = -215;
         
         if (oauthAccount.isValid) {
             [oauthAccount saveToKeychain];
-            NSDictionary *userInfo = [NSDictionary dictionaryWithObject:oauthAccount forKey:BitlyTwitterOauthAccountUserInfoKey];
+            NSDictionary *userInfo = @{BitlyTwitterOauthAccountUserInfoKey: oauthAccount};
             [[NSNotificationCenter defaultCenter] postNotificationName:BitlyTwitterOAuthAccountAuthorizedNotification
                                                                 object:self 
                                                               userInfo:userInfo];
@@ -243,10 +243,9 @@ static NSInteger OAuthCredentialsErrorCode = -215;
             NSError *error = [NSError 
                               errorWithDomain:ErrorDomain 
                               code:AccessTokenErrorCode 
-                              userInfo: [NSDictionary dictionaryWithObject:@"Invalid oauth access token response" 
-                                                                    forKey:NSLocalizedDescriptionKey]];
+                              userInfo: @{NSLocalizedDescriptionKey: @"Invalid oauth access token response"}];
             
-            NSDictionary *userInfo = [NSDictionary dictionaryWithObject:error forKey:BitlyTwitterOauthErrorUserInfoKey];
+            NSDictionary *userInfo = @{BitlyTwitterOauthErrorUserInfoKey: error};
             
             [[NSNotificationCenter defaultCenter] postNotificationName:BitlyTwitterOAuthFailedNotification object:self userInfo:userInfo];
         }
@@ -261,10 +260,9 @@ static NSInteger OAuthCredentialsErrorCode = -215;
         NSError *error = [NSError 
                             errorWithDomain:ErrorDomain 
                             code:AccessTokenErrorCode 
-                            userInfo: [NSDictionary dictionaryWithObject:reason 
-                                                                  forKey:NSLocalizedDescriptionKey]];
+                            userInfo: @{NSLocalizedDescriptionKey: reason}];
                             
-        NSDictionary *userInfo = [NSDictionary dictionaryWithObject:error forKey:BitlyTwitterOauthErrorUserInfoKey];
+        NSDictionary *userInfo = @{BitlyTwitterOauthErrorUserInfoKey: error};
 
         [[NSNotificationCenter defaultCenter] postNotificationName:BitlyTwitterOAuthFailedNotification object:self userInfo:userInfo];
     }
@@ -273,7 +271,7 @@ static NSInteger OAuthCredentialsErrorCode = -215;
 
 - (void)accessTokenTicket:(OAServiceTicket *)ticket didFailWithError:(NSError *)error {
     BitlyLog(@"Access token ticket failed: %@", [error localizedDescription]);
-    NSDictionary *userInfo = [NSDictionary dictionaryWithObject:error forKey:BitlyTwitterOauthErrorUserInfoKey];
+    NSDictionary *userInfo = @{BitlyTwitterOauthErrorUserInfoKey: error};
     [[NSNotificationCenter defaultCenter] postNotificationName:BitlyTwitterOAuthFailedNotification object:self userInfo:userInfo];
 }
 
@@ -291,7 +289,7 @@ completionHandler:(BitlyTweetCompletionHandler)completionHandler {
     
     if (![twitterOAuthConsumerKey length] || ![twitterOAuthConsumerSecret length]) {
         NSError *error = [NSError errorWithDomain:ErrorDomain code:OAuthCredentialsErrorCode 
-                                         userInfo:[NSDictionary dictionaryWithObject:@"Twitter OAuth API keys not set. See setter on BitlyConfig." forKey:NSLocalizedDescriptionKey]];
+                                         userInfo:@{NSLocalizedDescriptionKey: @"Twitter OAuth API keys not set. See setter on BitlyConfig."}];
         
 
         BitlyLog(@"Status api req failed: %@", [error localizedDescription]);
@@ -314,7 +312,7 @@ completionHandler:(BitlyTweetCompletionHandler)completionHandler {
         OARequestParameter *statusParam = [[OARequestParameter alloc] initWithName:@"status"
                                                                              value:tweet];
            
-        NSArray *params = [NSArray arrayWithObject:statusParam];
+        NSArray *params = @[statusParam];
         [request setParameters:params];
         [statusParam release];
         
@@ -342,7 +340,7 @@ completionHandler:(BitlyTweetCompletionHandler)completionHandler {
         } else {
             reason = @"No token data returned";
         }
-        NSDictionary *userInfo = [NSDictionary dictionaryWithObject:reason forKey:NSLocalizedDescriptionKey];
+        NSDictionary *userInfo = @{NSLocalizedDescriptionKey: reason};
         NSError *error = [NSError errorWithDomain:ErrorDomain code:TweetErrorCode userInfo:userInfo];
         tweetCompletionHandler(NO, error);
     }

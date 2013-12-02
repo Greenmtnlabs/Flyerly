@@ -440,13 +440,11 @@ forFailedAppCall:(FBAppCall *)appCall
     }
     
     // Build up the data needed to check the cipher's signature
-    NSArray *additionalDataComponents = [NSArray arrayWithObjects:
-                                         self.bundleID,
+    NSArray *additionalDataComponents = @[self.bundleID,
                                          self.appID,
                                          FBAppBridgeURLHost,
                                          method,
-                                         version,
-                                         nil];
+                                         version];
     NSString *additionalData = [additionalDataComponents componentsJoinedByString:@":"];
     
     // Now that we have all required info, decrypt!
@@ -612,7 +610,7 @@ withCompletionHandler:(FBDialogAppCallCompletionHandler)handler {
     UIImage *appIcon = nil;
     if (bundleIconFiles && bundleIconFiles.count > 0) {
         // This should auto-select the right image file (w.r.t. resolution)
-        appIcon = [UIImage imageNamed:[bundleIconFiles objectAtIndex:0]];
+        appIcon = [UIImage imageNamed:bundleIconFiles[0]];
     }
     return appIcon;
 }

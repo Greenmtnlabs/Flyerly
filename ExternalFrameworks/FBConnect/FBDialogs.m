@@ -49,8 +49,8 @@ static NSString *const kFBNativeLoginMinVersion = @"20130214";
                                             image:(UIImage*)image
                                               url:(NSURL*)url
                                           handler:(FBOSIntegratedShareDialogHandler)handler {
-    NSArray *images = image ? [NSArray arrayWithObject:image] : nil;
-    NSArray *urls = url ? [NSArray arrayWithObject:url] : nil;
+    NSArray *images = image ? @[image] : nil;
+    NSArray *urls = url ? @[url] : nil;
     
     return [self presentOSIntegratedShareDialogModallyFrom:viewController
                                                    session:nil
@@ -163,7 +163,7 @@ FBInsightsEventParameterDialogOutcome : (cancelled
         [FBInsights logImplicitEvent:FBInsightsEventNameFBDialogsNativeLoginDialogStart
                           valueToSum:1.0
                           parameters:@{
-                            FBInsightsNativeLoginDialogStartTime : [NSNumber numberWithDouble:round(1000 * [[NSDate date] timeIntervalSince1970])],
+                            FBInsightsNativeLoginDialogStartTime : @(round(1000 * [[NSDate date] timeIntervalSince1970])),
                             @"action_id" : [call ID],
                             @"app_id" : [FBSettings defaultAppID]
                           }

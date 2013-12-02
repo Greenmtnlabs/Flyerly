@@ -105,9 +105,7 @@
             // unexpected type found in the array of fbids
             @throw [NSException exceptionWithName:NSInvalidArgumentException
                                            reason:@"items in fbids must be NSString or NSNumber"
-                                         userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                   [fbid class], @"invalid class", 
-                                                   nil]];
+                                         userInfo:@{@"invalid class": [fbid class]}];
         }
         
         // if we miss our cache once, we fail the set
@@ -122,13 +120,11 @@
     // a little request bookkeeping
     self.activeRequest = nil;
 
-    int items = [[result objectForKey: @"data"] count];
+    int items = [result[@"data"] count];
     NSMutableArray* recipients = [[[NSMutableArray alloc] initWithCapacity: items] autorelease];
         
     for (int i = 0; i < items; i++) {
-        [recipients addObject: [[[result objectForKey: @"data"] 
-                                 objectAtIndex: i] 
-                                objectForKey: @"recipient_id"]] ;
+        [recipients addObject: result[@"data"][i][@"recipient_id"]] ;
     }
         
     self.allowedRecipients = recipients;        

@@ -189,9 +189,9 @@ static NSString* dialogBaseURL = @"https://m." FB_BASE_URL "/dialog/";
     NSMutableDictionary *parametersImpl = [NSMutableDictionary dictionary];
 
     // start with built-in parameters
-    [parametersImpl setObject:@"touch" forKey:@"display"];
-    [parametersImpl setObject:FB_IOS_SDK_VERSION_STRING forKey:@"sdk"];
-    [parametersImpl setObject:@"fbconnect://success" forKey:@"redirect_uri"];
+    parametersImpl[@"display"] = @"touch";
+    parametersImpl[@"sdk"] = FB_IOS_SDK_VERSION_STRING;
+    parametersImpl[@"redirect_uri"] = @"fbconnect://success";
     
     // then roll in developer provided parameters
     if (parameters) {
@@ -209,8 +209,7 @@ static NSString* dialogBaseURL = @"https://m." FB_BASE_URL "/dialog/";
         // set access_token and app_id
         [parametersImpl setValue:session.accessTokenData.accessToken ? : @""
                           forKey:@"access_token"];
-        [parametersImpl setObject:session.appID ? : @""
-                           forKey:@"app_id"];
+        parametersImpl[@"app_id"] = session.appID ? : @"";
     }
     
     BOOL isViewInvisible = NO;
@@ -280,11 +279,11 @@ static NSString* dialogBaseURL = @"https://m." FB_BASE_URL "/dialog/";
     
     // then roll in argument parameters
     if (message) {
-        [parametersImpl setObject:message forKey:@"message"];
+        parametersImpl[@"message"] = message;
     }
     
     if (title) {
-        [parametersImpl setObject:title forKey:@"title"];
+        parametersImpl[@"title"] = title;
     }
         
     [FBWebDialogs presentDialogModallyWithSession:session

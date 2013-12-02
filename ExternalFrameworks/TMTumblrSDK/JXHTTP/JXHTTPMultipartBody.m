@@ -77,7 +77,7 @@ typedef enum {
         NSDictionary *attributes = [[NSFileManager defaultManager] attributesOfItemAtPath:[self filePath] error:&error];
         JXError(error);
         
-        NSNumber *fileSize = [attributes objectForKey:NSFileSize];
+        NSNumber *fileSize = attributes[NSFileSize];
         if (fileSize)
             length += [fileSize longLongValue];
     }
@@ -172,7 +172,7 @@ typedef enum {
 {
     if (self = [self init]) {
         for (NSString *key in [stringParameters allKeys]) {
-            [self addString:[stringParameters objectForKey:key] forKey:key];
+            [self addString:stringParameters[key] forKey:key];
         }
     }
     return self;

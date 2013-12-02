@@ -40,7 +40,7 @@
     NSDictionary *attributes = [[NSFileManager defaultManager] attributesOfItemAtPath:self.filePath error:&error];
     JXError(error);
 
-    NSNumber *fileSize = [attributes objectForKey:NSFileSize];
+    NSNumber *fileSize = attributes[NSFileSize];
     if (fileSize)
         return [fileSize longLongValue];
 

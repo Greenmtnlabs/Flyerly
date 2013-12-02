@@ -188,10 +188,10 @@
                                  [NSNumber numberWithInt:self.loginType], FBTokenInformationLoginTypeLoginKey,
                                  nil];
     if (self.refreshDate) {
-        [dict setObject:self.refreshDate forKey:FBTokenInformationRefreshDateKey];
+        dict[FBTokenInformationRefreshDateKey] = self.refreshDate;
     }
     if (self.permissions) {
-        [dict setObject:self.permissions forKey:FBTokenInformationPermissionsKey];
+        dict[FBTokenInformationPermissionsKey] = self.permissions;
     }
     return [dict autorelease];
 }

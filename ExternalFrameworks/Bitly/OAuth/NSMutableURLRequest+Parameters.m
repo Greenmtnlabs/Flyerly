@@ -56,8 +56,8 @@
     for (NSString *encodedPair in encodedParameterPairs) 
 	{
         NSArray *encodedPairElements = [encodedPair componentsSeparatedByString:@"="];
-        OARequestParameter *parameter = [OARequestParameter requestParameterWithName:[[encodedPairElements objectAtIndex:0] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
-																			   value:[[encodedPairElements objectAtIndex:1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        OARequestParameter *parameter = [OARequestParameter requestParameterWithName:[encodedPairElements[0] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
+																			   value:[encodedPairElements[1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         [requestParameters addObject:parameter];
     }
     

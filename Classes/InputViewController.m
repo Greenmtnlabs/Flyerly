@@ -108,7 +108,7 @@
 - (void)makeTwitterPost:(ACAccount *)acct {
     
     NSMutableDictionary *params = [[[NSMutableDictionary alloc] init] autorelease];
-    [params setObject:[NSString stringWithFormat:@"@%@ %@", sName, sMessage] forKey:@"status"];
+    params[@"status"] = [NSString stringWithFormat:@"@%@ %@", sName, sMessage];
     
     // Build a twitter request
     TWRequest *postRequest = [[[TWRequest alloc] initWithURL:[NSURL URLWithString:@"http://api.twitter.com/1/statuses/update.json"] parameters:params requestMethod:TWRequestMethodPOST] autorelease];
@@ -158,7 +158,7 @@
                     UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:@"Choose Account" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles: nil];
                     
                     for (int i = 0; i < arrayOfAccounts.count; i++) {
-                        ACAccount *acct = [arrayOfAccounts objectAtIndex:i];
+                        ACAccount *acct = arrayOfAccounts[i];
                         [actionSheet addButtonWithTitle:acct.username];
                     }
                     
@@ -166,7 +166,7 @@
                     [actionSheet showInView:self.view];
                 });
             } else if ( arrayOfAccounts.count > 0 ) {
-                ACAccount *acct = [arrayOfAccounts objectAtIndex:0];
+                ACAccount *acct = arrayOfAccounts[0];
                 [self makeTwitterPost:acct];
             }
         }
@@ -184,7 +184,7 @@
     if(buttonIndex != arrayOfAccounts.count) {
         
         //save to NSUserDefault
-        ACAccount *account = [arrayOfAccounts objectAtIndex:buttonIndex];
+        ACAccount *account = arrayOfAccounts[buttonIndex];
         
         //Convert twitter username to email
         [self makeTwitterPost:account];

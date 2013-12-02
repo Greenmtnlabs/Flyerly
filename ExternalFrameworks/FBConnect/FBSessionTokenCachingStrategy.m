@@ -39,7 +39,7 @@ NSString *const FBTokenInformationPermissionsKey = @"com.facebook.sdk:TokenInfor
 }
 
 - (NSDictionary*)fetchTokenInformation {
-    return [NSDictionary dictionary];
+    return @{};
 }
 
 - (void)clearToken {
@@ -115,8 +115,8 @@ NSString *const FBTokenInformationPermissionsKey = @"com.facebook.sdk:TokenInfor
 }
 
 + (BOOL)isValidTokenInformation:(NSDictionary*)tokenInformation {
-    id token = [tokenInformation objectForKey:FBTokenInformationTokenKey];
-    id expirationDate = [tokenInformation objectForKey:FBTokenInformationExpirationDateKey];
+    id token = tokenInformation[FBTokenInformationTokenKey];
+    id expirationDate = tokenInformation[FBTokenInformationExpirationDateKey];
     return  [token isKindOfClass:[NSString class]] &&
             ([token length] > 0) &&
             [expirationDate isKindOfClass:[NSDate class]];

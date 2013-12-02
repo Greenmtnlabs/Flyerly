@@ -77,7 +77,7 @@ NSString * const BitlyTwitterAuthorizeURLFormat = @"https://api.twitter.com/oaut
     if (!__bitlyLogin) {
         NSDictionary *plistConfig = [self plistConfig];
         if (plistConfig) {
-            self.bitlyLogin = [plistConfig objectForKey:@"BLYBitlyLogin"];
+            self.bitlyLogin = plistConfig[@"BLYBitlyLogin"];
         } 
     }
     return __bitlyLogin;
@@ -87,7 +87,7 @@ NSString * const BitlyTwitterAuthorizeURLFormat = @"https://api.twitter.com/oaut
     if (!__bitlyAPIKey) {
         NSDictionary *plistConfig = [self plistConfig];
         if (plistConfig) {
-            self.bitlyAPIKey = [plistConfig objectForKey:@"BLYBitlyAPIKey"];
+            self.bitlyAPIKey = plistConfig[@"BLYBitlyAPIKey"];
         }
     }
     return __bitlyAPIKey;
@@ -97,7 +97,7 @@ NSString * const BitlyTwitterAuthorizeURLFormat = @"https://api.twitter.com/oaut
     if (!__twitterOAuthConsumerKey) {
         NSDictionary *plistConfig = [self plistConfig];
         if (plistConfig) {
-            self.twitterOAuthConsumerKey = [plistConfig objectForKey:@"BLYTwitterOAuthConsumerKey"];
+            self.twitterOAuthConsumerKey = plistConfig[@"BLYTwitterOAuthConsumerKey"];
         }
     }
     return __twitterOAuthConsumerKey;
@@ -107,7 +107,7 @@ NSString * const BitlyTwitterAuthorizeURLFormat = @"https://api.twitter.com/oaut
     if (!__twitterOAuthConsumerSecret) {
         NSDictionary *plistConfig = [self plistConfig];
         if (plistConfig) {
-            self.twitterOAuthConsumerSecret = [plistConfig objectForKey:@"BLYTwitterOAuthConsumerSecret"];
+            self.twitterOAuthConsumerSecret = plistConfig[@"BLYTwitterOAuthConsumerSecret"];
         }
     }
     return __twitterOAuthConsumerSecret;
@@ -117,7 +117,7 @@ NSString * const BitlyTwitterAuthorizeURLFormat = @"https://api.twitter.com/oaut
     if (!__twitterOAuthSuccessCallbackURL) {
         NSDictionary *plistConfig = [self plistConfig];
         if (plistConfig) {
-            self.twitterOAuthSuccessCallbackURL = [plistConfig objectForKey:@"BLYTwitterOAuthSuccessCallbackURL"];
+            self.twitterOAuthSuccessCallbackURL = plistConfig[@"BLYTwitterOAuthSuccessCallbackURL"];
         }
     }
     return __twitterOAuthSuccessCallbackURL;

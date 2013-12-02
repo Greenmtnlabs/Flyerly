@@ -180,7 +180,7 @@
         //get facebook app id
         NSString *path = [[NSBundle mainBundle] pathForResource: @"Flyr-Info" ofType: @"plist"];
         NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile: path];
-        appDelegate.facebook = [[Facebook alloc] initWithAppId:[dict objectForKey: @"FacebookAppID"] andDelegate:self];
+        appDelegate.facebook = [[Facebook alloc] initWithAppId:dict[@"FacebookAppID"] andDelegate:self];
     }
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -208,7 +208,7 @@
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
 
 	NSString *unexpandedPath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/Flyr/",appDelegate.loginId]];
-	NSString *folderPath = [NSString pathWithComponents:[NSArray arrayWithObjects:[NSString stringWithString:[unexpandedPath stringByExpandingTildeInPath]], nil]];
+	NSString *folderPath = [NSString pathWithComponents:@[[NSString stringWithString:[unexpandedPath stringByExpandingTildeInPath]]]];
 	//NSString *unexpandedDetailPath = [homeDirectoryPath stringByAppendingString:@"/Documents/Detail/"];
 	//NSString *detailFolderPath = [NSString pathWithComponents:[NSArray arrayWithObjects:[NSString stringWithString:[unexpandedDetailPath stringByExpandingTildeInPath]], nil]];
 	
@@ -224,7 +224,7 @@
     
 	for(int i = 0; i < fileCount; i++)
 	{
-		NSString *img = [files objectAtIndex:i];
+		NSString *img = files[i];
 		img = [@"/" stringByAppendingString:img];
 		finalImagePath= [folderPath stringByAppendingString:img];
         
@@ -252,7 +252,7 @@
 	{
         CGSize size = CGSizeMake(firstFlyer.frame.size.width, firstFlyer.frame.size.height);
         
-        finalImagePath = [sortedFiles objectAtIndex:i];
+        finalImagePath = sortedFiles[i];
         NSData *imageData = [[NSData alloc ]initWithContentsOfMappedFile:finalImagePath];
         UIImage *currentFlyerImage = [UIImage imageWithData:imageData];
 
@@ -289,7 +289,7 @@
 
 	for(int j =0;j< [detailSortedFiles count];j++)
 	{
-        detailFinalImagePath = [detailSortedFiles objectAtIndex:j];
+        detailFinalImagePath = detailSortedFiles[j];
         //NSLog(@"detailFinalImagePath: %@", detailFinalImagePath);
         NSArray *myArray = [NSArray arrayWithContentsOfFile:detailFinalImagePath];
 
@@ -308,12 +308,12 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
                             error:nil];
 	
     if ((NSInteger *)reverse == 0) {
-        return [[attrs2 objectForKey:NSFileModificationDate]
-                compare:[attrs1 objectForKey:NSFileModificationDate]];
+        return [attrs2[NSFileModificationDate]
+                compare:attrs1[NSFileModificationDate]];
     }
 	
-    return [[attrs1 objectForKey:NSFileModificationDate]
-            compare:[attrs2 objectForKey:NSFileModificationDate]];
+    return [attrs1[NSFileModificationDate]
+            compare:attrs2[NSFileModificationDate]];
 }
 
 + (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
@@ -341,16 +341,16 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
 
         DraftViewController *draftViewController = [[DraftViewController alloc] initWithNibName:@"DraftViewController" bundle:nil];
         
-        NSString *imageName = [photoArray objectAtIndex:sender.tag];
+        NSString *imageName = photoArray[sender.tag];
         NSData *imageData = [[NSData alloc ]initWithContentsOfMappedFile:imageName];
         UIImage *currentFlyerImage = [UIImage imageWithData:imageData];
         //draftViewController.fvController = self;
         draftViewController.selectedFlyerImage = currentFlyerImage;
         
         if(photoDetailArray.count > sender.tag){
-            NSArray *detailArray = [photoDetailArray objectAtIndex:sender.tag];
-            NSString *title = [detailArray objectAtIndex:0];
-            NSString *description = [detailArray objectAtIndex:1];
+            NSArray *detailArray = photoDetailArray[sender.tag];
+            NSString *title = detailArray[0];
+            NSString *description = detailArray[1];
             draftViewController.selectedFlyerTitle = title;
             draftViewController.selectedFlyerDescription = description;
             draftViewController.imageFileName = imageName;
@@ -479,7 +479,7 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
                     actionSheet.tag = 1;
                     
                     for (int i = 0; i < arrayOfAccounts.count; i++) {
-                        ACAccount *acct = [arrayOfAccounts objectAtIndex:i];
+                        ACAccount *acct = arrayOfAccounts[i];
                         [actionSheet addButtonWithTitle:acct.username];
                     }
                     
@@ -489,7 +489,7 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
                 
             } else if ( [arrayOfAccounts count] > 0 ) {
                 // Grab the initial Twitter account to tweet from.
-                ACAccount *twitterAccount = [arrayOfAccounts objectAtIndex:0];
+                ACAccount *twitterAccount = arrayOfAccounts[0];
                 [self makeTwitterPost:twitterAccount follow:1];
             } else {
                 [self hideLoadingIndicator];
@@ -521,7 +521,7 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
                     actionSheet.tag = 0;
                     
                     for (int i = 0; i < arrayOfAccounts.count; i++) {
-                        ACAccount *acct = [arrayOfAccounts objectAtIndex:i];
+                        ACAccount *acct = arrayOfAccounts[i];
                         [actionSheet addButtonWithTitle:acct.username];
                     }
                     
@@ -531,7 +531,7 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
                 
             } else if ( [arrayOfAccounts count] > 0 ) {
                 // Grab the initial Twitter account to tweet from.
-                ACAccount *twitterAccount = [arrayOfAccounts objectAtIndex:0];
+                ACAccount *twitterAccount = arrayOfAccounts[0];
                 [self makeTwitterPost:twitterAccount follow:0];
             } else {
                 [self hideLoadingIndicator];
@@ -553,7 +553,7 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
     if(buttonIndex != arrayOfAccounts.count) {
         
         //save to NSUserDefault
-        ACAccount *account = [arrayOfAccounts objectAtIndex:buttonIndex];
+        ACAccount *account = arrayOfAccounts[buttonIndex];
         
         //Convert twitter username to email
         [self makeTwitterPost:account follow:actionSheet.tag];
@@ -618,7 +618,7 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
     
 
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-        [appDelegate.facebook authorize:[NSArray arrayWithObjects: @"read_stream", @"publish_stream", @"email", nil]];}
+        [appDelegate.facebook authorize:@[@"read_stream", @"publish_stream", @"email"]];}
 
 - (IBAction)showLikeButton {
     
@@ -660,8 +660,8 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
         
         } else {
         
-            [appDelegate.facebook authorize:[NSArray arrayWithObjects: @"read_stream",
-                                         @"publish_stream", @"user_likes", nil]];
+            [appDelegate.facebook authorize:@[@"read_stream",
+                                         @"publish_stream", @"user_likes"]];
         }
     }else{
         [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
@@ -691,10 +691,10 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
 -(void)request:(FBRequest *)request didLoad:(id)result{
  
  	NSLog(@"Request received %@", result);    
-    for (NSDictionary *likesData in [result objectForKey:@"data"]) {
+    for (NSDictionary *likesData in result[@"data"]) {
         
         // Here we will get the facebook contacts
-        NSString *likeName = [likesData objectForKey:@"name"];
+        NSString *likeName = likesData[@"name"];
         if([likeName isEqualToString:@"Flyerly"]){
             [likeButton setSelected:YES];
             return;

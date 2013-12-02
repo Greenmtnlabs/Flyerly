@@ -56,34 +56,34 @@ static NSString *const kFBShareDialogProdVersion = @"20130410";
 {
     NSMutableDictionary *args = [NSMutableDictionary dictionary];
     if (self.link) {
-        [args setObject:[self.link absoluteString] forKey:@"link"];
+        args[@"link"] = [self.link absoluteString];
     }
     if (self.name) {
-        [args setObject:self.name forKey:@"name"];
+        args[@"name"] = self.name;
     }
     if (self.caption) {
-        [args setObject:self.caption forKey:@"caption"];
+        args[@"caption"] = self.caption;
     }
     if (self.description) {
-        [args setObject:self.description forKey:@"description"];
+        args[@"description"] = self.description;
     }
     if (self.picture) {
-        [args setObject:[self.picture absoluteString] forKey:@"picture"];
+        args[@"picture"] = [self.picture absoluteString];
     }
     if (self.friends) {
         NSMutableArray *tags = [NSMutableArray arrayWithCapacity:self.friends.count];
         for (id tag in self.friends) {
             [tags addObject:[FBUtility stringFBIDFromObject:tag]];
         }
-        [args setObject:tags forKey:@"tags"];
+        args[@"tags"] = tags;
     }
     if (self.place) {
-        [args setObject:[FBUtility stringFBIDFromObject:self.place] forKey:@"place"];
+        args[@"place"] = [FBUtility stringFBIDFromObject:self.place];
     }
     if (self.ref) {
-        [args setObject:self.ref forKey:@"ref"];
+        args[@"ref"] = self.ref;
     }
-    [args setObject:[NSNumber numberWithBool:self.dataFailuresFatal] forKey:@"dataFailuresFatal"];
+    args[@"dataFailuresFatal"] = @(self.dataFailuresFatal);
 
     return args;
 }

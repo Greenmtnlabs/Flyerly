@@ -70,12 +70,12 @@ static id kNSNO = NULL;
 
     if (kNSYES == NULL)
         {
-        kNSYES = [NSNumber numberWithBool:YES];
+        kNSYES = @YES;
         }
         
     if (kNSNO == NULL)
         {
-        kNSNO = [NSNumber numberWithBool:NO];
+        kNSNO = @NO;
         }
 
     [thePool release];

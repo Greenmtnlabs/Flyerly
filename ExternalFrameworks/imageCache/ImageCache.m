@@ -65,7 +65,7 @@ GTMOBJECT_SINGLETON_BOILERPLATE(ImageCache, sharedImageCache)
 
 - (UIImage *)imageForKey:(NSString *)key
 {
-    UIImage *image = [memoryCache objectForKey:key];
+    UIImage *image = memoryCache[key];
     if (image == nil && [self imageExistsInDisk:key])
     {
         NSString *fileName = [self getFileNameForKey:key];
@@ -153,7 +153,7 @@ GTMOBJECT_SINGLETON_BOILERPLATE(ImageCache, sharedImageCache)
 
 - (BOOL)imageExistsInMemory:(NSString *)key
 {
-    return ([memoryCache objectForKey:key] != nil);
+    return (memoryCache[key] != nil);
 }
 
 - (BOOL)imageExistsInDisk:(NSString *)key
@@ -180,7 +180,7 @@ GTMOBJECT_SINGLETON_BOILERPLATE(ImageCache, sharedImageCache)
 - (void)addImageToMemoryCache:(UIImage *)image withKey:(NSString *)key
 {
     // Add the object to the memory cache for faster retrieval next time
-    [memoryCache setObject:image forKey:key];
+    memoryCache[key] = image;
     
     // Add the key at the beginning of the keyArray
     [keyArray insertObject:key atIndex:0];
@@ -202,7 +202,7 @@ GTMOBJECT_SINGLETON_BOILERPLATE(ImageCache, sharedImageCache)
 - (NSString *)getCacheDirectoryName
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *documentsDirectory = paths[0];
     NSString *cacheDirectoryName = [documentsDirectory stringByAppendingPathComponent:CACHE_FOLDER_NAME];
     return cacheDirectoryName;
 }

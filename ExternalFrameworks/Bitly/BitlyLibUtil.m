@@ -48,9 +48,9 @@ static BitlyLibUtil *theInstance;
     for (NSString *pair in pairs) {
         NSArray *keyVal = [pair componentsSeparatedByString:@"="];
         if ([keyVal count] == 2) {
-            [dict setObject:[keyVal objectAtIndex:1] forKey:[keyVal objectAtIndex:0]];
+            dict[keyVal[0]] = keyVal[1];
         } else if ([keyVal count] == 1) {
-            [dict setObject:@"" forKey:[keyVal objectAtIndex:0]];
+            dict[keyVal[0]] = @"";
         }
     }
     return [dict autorelease];

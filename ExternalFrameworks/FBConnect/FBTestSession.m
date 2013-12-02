@@ -172,7 +172,7 @@ tokenCachingStrategy:(FBSessionTokenCachingStrategy*)tokenCachingStrategy
         // Rename the user with a hashed representation of our permissions, so we can find it
         // again later.
         newName = [NSString stringWithFormat:@"Shared %@ Testuser", self.sharedTestUserIdentifier];
-        [parameters setObject:newName forKey:@"name"];
+        parameters[@"name"] = newName;
     }
     
     // fetch a test user and token
@@ -191,24 +191,22 @@ tokenCachingStrategy:(FBSessionTokenCachingStrategy*)tokenCachingStrategy
          id userID;
          if (!error &&
              [result isKindOfClass:[NSDictionary class]] &&
-             (userToken = [result objectForKey:FBLoginTestUserAccessToken]) &&
+             (userToken = result[FBLoginTestUserAccessToken]) &&
              [userToken isKindOfClass:[NSString class]] &&
-             (userID = [result objectForKey:FBLoginTestUserID]) &&
+             (userID = result[FBLoginTestUserID]) &&
              [userID isKindOfClass:[NSString class]]) {
              // capture the id for future use
              self.testUserID = userID;
 
              // Remember this user if it is going to be shared.
              if (self.mode == FBTestSessionModeShared) {
-                 NSDictionary *user = [NSDictionary dictionaryWithObjectsAndKeys:
-                                       userID, FBLoginTestUserID,
-                                       userToken, FBLoginTestUserAccessToken,
-                                       newName, FBLoginTestUserName, 
-                                       nil];
+                 NSDictionary *user = @{FBLoginTestUserID: userID,
+                                       FBLoginTestUserAccessToken: userToken,
+                                       FBLoginTestUserName: newName};
 
                  pthread_mutex_lock(&mutex);
                  
-                 [testUsers setObject:user forKey:userID];
+                 testUsers[userID] = user;
                  
                  pthread_mutex_unlock(&mutex);
              }                 
@@ -250,9 +248,7 @@ tokenCachingStrategy:(FBSessionTokenCachingStrategy*)tokenCachingStrategy
 {
     NSDictionary *userInfo = nil;
     if (innerError) {
-        userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
-                        innerError, FBErrorInnerErrorKey,
-                        nil];
+        userInfo = @{FBErrorInnerErrorKey: innerError};
     }
     
     [[NSException exceptionWithName:FBInvalidOperationException
@@ -268,16 +264,15 @@ tokenCachingStrategy:(FBSessionTokenCachingStrategy*)tokenCachingStrategy
     
     // Map user IDs to test_accounts
     for (NSDictionary *testAccount in testAccounts) {
-        id uid = [[testAccount objectForKey:FBLoginTestUserID] stringValue];
-        [testUsers setObject:[NSMutableDictionary dictionaryWithDictionary:testAccount]
-                      forKey:uid];
+        id uid = [testAccount[FBLoginTestUserID] stringValue];
+        testUsers[uid] = [NSMutableDictionary dictionaryWithDictionary:testAccount];
     }
     
     // Add the user name to the test_account data.
     for (NSDictionary *user in users) {
-        id uid = [[user objectForKey:@"uid"] stringValue];
-        NSMutableDictionary *testUser = [testUsers objectForKey:uid];
-        [testUser setObject:[user objectForKey:FBLoginTestUserName] forKey:FBLoginTestUserName];
+        id uid = [user[@"uid"] stringValue];
+        NSMutableDictionary *testUser = testUsers[uid];
+        testUser[FBLoginTestUserName] = user[FBLoginTestUserName];
     }
     
     pthread_mutex_unlock(&mutex);
@@ -293,17 +288,13 @@ tokenCachingStrategy:(FBSessionTokenCachingStrategy*)tokenCachingStrategy
         @"SELECT id,access_token FROM test_account WHERE app_id = %@",
         self.testAppID];
     NSString *userQuery = @"SELECT uid,name FROM user WHERE uid IN (SELECT id FROM #test_accounts)";
-    NSDictionary *multiquery = [NSDictionary dictionaryWithObjectsAndKeys:
-                                testAccountQuery, @"test_accounts",
-                                userQuery, @"users",
-                                nil];
+    NSDictionary *multiquery = @{@"test_accounts": testAccountQuery,
+                                @"users": userQuery};
     
     NSString *jsonMultiquery = [FBUtility simpleJSONEncode:multiquery];
     
-    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
-                                jsonMultiquery, @"q",
-                                self.appAccessToken, @"access_token",
-                                nil];
+    NSDictionary *parameters = @{@"q": jsonMultiquery,
+                                @"access_token": self.appAccessToken};
     FBRequest *request = [[[FBRequest alloc] initWithSession:nil
                                                   graphPath:@"fql"
                                                  parameters:parameters
@@ -315,7 +306,7 @@ tokenCachingStrategy:(FBSessionTokenCachingStrategy*)tokenCachingStrategy
              !result) {
              [self raiseException:error];
          }
-         id data = [result objectForKey:@"data"];
+         id data = result[@"data"];
          if (![data isKindOfClass:[NSArray class]] ||
              [data count] != 2) {
              [self raiseException:nil];
@@ -323,8 +314,8 @@ tokenCachingStrategy:(FBSessionTokenCachingStrategy*)tokenCachingStrategy
          
          // We get back two sets of results. The first is from the test_accounts
          // query, the second from the users query.
-         id testAccounts = [[data objectAtIndex:0] objectForKey:@"fql_result_set"];
-         id users = [[data objectAtIndex:1] objectForKey:@"fql_result_set"];
+         id testAccounts = data[0][@"fql_result_set"];
+         id users = data[1][@"fql_result_set"];
          if (![testAccounts isKindOfClass:[NSArray class]] ||
              ![users isKindOfClass:[NSArray class]]) {
              [self raiseException:nil];
@@ -375,7 +366,7 @@ tokenCachingStrategy:(FBSessionTokenCachingStrategy*)tokenCachingStrategy
 
     id matchingTestUser = nil;
     for (id testUser in [testUsers allValues]) {
-        NSString *userName = [testUser objectForKey:FBLoginTestUserName];
+        NSString *userName = testUser[FBLoginTestUserName];
         // Does this user have the right permissions and is it not in use?
         if ([userName rangeOfString:userIdentifier].length > 0) {
             matchingTestUser = testUser;
@@ -387,9 +378,9 @@ tokenCachingStrategy:(FBSessionTokenCachingStrategy*)tokenCachingStrategy
     
     if (matchingTestUser) {
         // We can use this user. IDs come back as numbers, make sure we return as a string.
-        self.testUserID = [[matchingTestUser objectForKey:FBLoginTestUserID] description];
+        self.testUserID = [matchingTestUser[FBLoginTestUserID] description];
 
-        [self transitionToOpenWithToken:[matchingTestUser objectForKey:FBLoginTestUserAccessToken]];
+        [self transitionToOpenWithToken:matchingTestUser[FBLoginTestUserAccessToken]];
     } else {
         // Need to create a user. Do so, and rename it using our hashed permissions string.
         [self createNewTestUser];
@@ -505,8 +496,8 @@ tokenCachingStrategy:(FBSessionTokenCachingStrategy*)tokenCachingStrategy
                       sessionUniqueUserTag:(NSString*)sessionUniqueUserTag
 {
     NSDictionary *environment = [[NSProcessInfo processInfo] environment];
-    NSString *appID = [environment objectForKey:FBPLISTTestAppIDKey];
-    NSString *appSecret = [environment objectForKey:FBPLISTTestAppSecretKey];
+    NSString *appID = environment[FBPLISTTestAppIDKey];
+    NSString *appSecret = environment[FBPLISTTestAppSecretKey];
     if (!appID || !appSecret || appID.length == 0 || appSecret.length == 0) {
         [[NSException exceptionWithName:FBInvalidOperationException
                                  reason:
@@ -521,13 +512,13 @@ tokenCachingStrategy:(FBSessionTokenCachingStrategy*)tokenCachingStrategy
     }
 
     // This is non-fatal if it's missing.
-    NSString *machineUniqueUserTag = [environment objectForKey:FBPLISTUniqueUserTagKey];
+    NSString *machineUniqueUserTag = environment[FBPLISTUniqueUserTagKey];
     
     FBSessionManualTokenCachingStrategy *tokenCachingStrategy = 
     [[FBSessionManualTokenCachingStrategy alloc] init];
 
     if (!permissions.count) {
-        permissions = [NSArray arrayWithObjects:@"email", @"publish_actions", nil];
+        permissions = @[@"email", @"publish_actions"];
     }
 
     // call our internal designated initializer to create a unit-testing instance
@@ -553,10 +544,8 @@ tokenCachingStrategy:(FBSessionTokenCachingStrategy*)tokenCachingStrategy
         // use FBRequest/FBRequestConnection to create an NSURLRequest
         FBRequest *temp = [[FBRequest alloc ] initWithSession:nil
                                                     graphPath:userID
-                                                   parameters:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                               @"delete", @"method",
-                                                               accessToken, @"access_token",
-                                                               nil]
+                                                   parameters:@{@"method": @"delete",
+                                                               @"access_token": accessToken}
                                                    HTTPMethod:nil];
         FBRequestConnection *connection = [[FBRequestConnection alloc] init];
         [connection addRequest:temp completionHandler:nil];

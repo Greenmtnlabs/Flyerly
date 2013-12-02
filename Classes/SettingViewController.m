@@ -128,8 +128,8 @@
             [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"facebookSetting"];
             
         } else {
-            [appDelegate.facebook authorize:[NSArray arrayWithObjects: @"read_stream",
-                                             @"publish_stream", @"email", nil]];
+            [appDelegate.facebook authorize:@[@"read_stream",
+                                             @"publish_stream", @"email"]];
         }
     }
 }

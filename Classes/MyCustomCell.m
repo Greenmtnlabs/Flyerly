@@ -110,7 +110,7 @@
 	UIButton *facebookButon = [[UIButton alloc] initWithFrame:facebookRect];
     facebookButon.backgroundColor = [UIColor clearColor];
     
-    if([[arr objectAtIndex:0] isEqualToString:@"1"]){
+    if([arr[0] isEqualToString:@"1"]){
         [facebookButon setImage:[UIImage imageNamed:@"facebook_share_saved"] forState:UIControlStateNormal];
         [createLabel setText:@"Shared:"];
     } else {
@@ -124,7 +124,7 @@
 	UIButton *twitterButon = [[UIButton alloc] initWithFrame:twitterRect];
     twitterButon.backgroundColor = [UIColor clearColor];
     
-    if([[arr objectAtIndex:1] isEqualToString:@"1"]){
+    if([arr[1] isEqualToString:@"1"]){
         [twitterButon setImage:[UIImage imageNamed:@"twitter_share_saved"] forState:UIControlStateNormal];
         [createLabel setText:@"Shared:"];
     } else {
@@ -138,7 +138,7 @@
 	UIButton *inboxButon = [[UIButton alloc] initWithFrame:inboxRect];
     inboxButon.backgroundColor = [UIColor clearColor];
     
-    if([[arr objectAtIndex:2] isEqualToString:@"1"]){
+    if([arr[2] isEqualToString:@"1"]){
         [inboxButon setImage:[UIImage imageNamed:@"email_share_saved"] forState:UIControlStateNormal];
         [createLabel setText:@"Shared:"];
     } else {
@@ -152,7 +152,7 @@
 	UIButton *cameraButon = [[UIButton alloc] initWithFrame:cameraRect];
     cameraButon.backgroundColor = [UIColor clearColor];
     
-    if([[arr objectAtIndex:5] isEqualToString:@"1"]){
+    if([arr[5] isEqualToString:@"1"]){
         [cameraButon setImage:[UIImage imageNamed:@"instagram_share_saved"] forState:UIControlStateNormal];
         [createLabel setText:@"Shared:"];
     } else {
@@ -166,7 +166,7 @@
 	UIButton *flickrButon = [[UIButton alloc] initWithFrame:flickrRect];
     flickrButon.backgroundColor = [UIColor clearColor];
     
-    if([[arr objectAtIndex:4] isEqualToString:@"1"]){
+    if([arr[4] isEqualToString:@"1"]){
         [flickrButon setImage:[UIImage imageNamed:@"flickr_share_saved"] forState:UIControlStateNormal];
         [createLabel setText:@"Shared:"];
     } else {
@@ -180,7 +180,7 @@
 	UIButton *tumblrButon = [[UIButton alloc] initWithFrame:tumblrRect];
     tumblrButon.backgroundColor = [UIColor clearColor];
     
-    if([[arr objectAtIndex:3] isEqualToString:@"1"]){
+    if([arr[3] isEqualToString:@"1"]){
         [tumblrButon setImage:[UIImage imageNamed:@"tumblr_share_saved"] forState:UIControlStateNormal];
         [createLabel setText:@"Shared:"];
     } else {

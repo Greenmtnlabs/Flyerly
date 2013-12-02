@@ -237,7 +237,7 @@
 	[aHUD.loadingLabel setText:@"Uploaded..."];
 	[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(killHUD) userInfo:nil repeats:NO];
 	
-	NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys: @"Posted by SocialFlyr",@"caption",nil]; 
+	NSDictionary *params = @{@"caption": @"Posted by SocialFlyr"}; 
 	//[[FBRequest requestWithDelegate:self] call:@"facebook.photos.upload" params:params dataParam:(NSData*)flyrImg];
 	[[FBRequest requestWithDelegate:self] call:@"photos.upload" params:params dataParam:(NSData*)flyrImg];
 

@@ -95,7 +95,7 @@
 
     NSString *statusText = [NSString stringWithFormat: @"Connection failed! Error - %@ %@",
                             [error localizedDescription],
-                            [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]];
+                            [error userInfo][NSURLErrorFailingURLStringErrorKey]];
     
     [self.delegate bitlyRequest:self failedForLongURL:longURL statusCode:-1 statusText:statusText];
 
@@ -111,9 +111,9 @@
     if (error) {
         [delegate bitlyRequest:self failedForLongURL:self.longURL statusCode:0 statusText:@"Response could not be converted to a JSON value"];
     } else {
-        NSDecimalNumber *statusCode = [responseDict objectForKey:@"status_code"];
-        NSString *statusText = [responseDict objectForKey:@"status_txt"];
-        NSDictionary *data = [responseDict objectForKey:@"data"];
+        NSDecimalNumber *statusCode = responseDict[@"status_code"];
+        NSString *statusText = responseDict[@"status_txt"];
+        NSDictionary *data = responseDict[@"data"];
         
         if (statusCode.intValue != 200) {
             [delegate bitlyRequest:self failedForLongURL:self.longURL statusCode:statusCode.intValue statusText:statusText];
@@ -121,7 +121,7 @@
             if (!data) { 
                 [delegate bitlyRequest:self failedForLongURL:self.longURL statusCode:statusCode.intValue statusText:@"Response data was empty"];
             } else {
-                NSString *url = [data objectForKey:@"url"];
+                NSString *url = data[@"url"];
                 if (!url) {
                     [delegate bitlyRequest:self failedForLongURL:self.longURL statusCode:statusCode.intValue statusText:@"Returned url was nil"];
                 } else {

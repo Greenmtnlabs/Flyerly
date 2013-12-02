@@ -105,7 +105,7 @@
         [cell setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"SettingcellBack"]]];
     }
 
-    NSString *s =[NSString stringWithFormat:@"   %@",[category objectAtIndex:indexPath.row]]  ;
+    NSString *s =[NSString stringWithFormat:@"   %@",category[indexPath.row]]  ;
     cell.textLabel.text =s;
    
     if (indexPath.row == 0)cell.imageView.image =[UIImage imageNamed:@"share_settings"];

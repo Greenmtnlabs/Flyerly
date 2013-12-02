@@ -47,16 +47,16 @@ NSString *const kFBAppBridgeImageSupportVersion = @"20130410";
 }
 
 + (NSString *)getPostedObjectTypeFromObject:(id<FBGraphObject>)obj {
-    if ([(id)obj objectForKey:FBPostObject] &&
-        [(id)obj objectForKey:@"type"]) {
-        return [(id)obj objectForKey:@"type"];
+    if (((id)obj)[FBPostObject] &&
+        ((id)obj)[@"type"]) {
+        return ((id)obj)[@"type"];
     }
     return nil;
 }
 + (NSString *)getIdOrUrlFromObject:(id<FBGraphObject>)obj {
     id result;
-    if ((result = [(id)obj objectForKey:@"id"]) ||
-        (result = [(id)obj objectForKey:@"url"])) {
+    if ((result = ((id)obj)[@"id"]) ||
+        (result = ((id)obj)[@"url"])) {
       return result;
     }
     return nil;
@@ -69,7 +69,7 @@ NSString *const kFBAppBridgeImageSupportVersion = @"20130410";
         errorReason = FBErrorDialogInvalidOpenGraphActionParameters;
     } else {
         for (NSString *key in (id)self.action) {
-            id obj = [(id)self.action objectForKey:key];
+            id obj = ((id)self.action)[key];
             if ([obj conformsToProtocol:@protocol(FBGraphObject)]) {
                 if (![FBOpenGraphActionShareDialogParams getPostedObjectTypeFromObject:obj] &&
                     ![FBOpenGraphActionShareDialogParams getIdOrUrlFromObject:obj]) {
@@ -98,7 +98,7 @@ NSString *const kFBAppBridgeImageSupportVersion = @"20130410";
             if (![FBAppBridge installedFBNativeAppVersionForMethod:@"ogshare"
                                                         minVersion:@"20130410"]) {
                 // We only need to do this for pre-20130410 versions.
-                [obj setObject:postedObjectType forKey:FBPostObjectOfType];
+                obj[FBPostObjectOfType] = postedObjectType;
                 [obj removeObjectForKey:FBPostObject];
                 [obj removeObjectForKey:@"type"];
             }
@@ -118,8 +118,8 @@ NSString *const kFBAppBridgeImageSupportVersion = @"20130410";
 - (id)flattenGraphObjects:(id)dict {
     NSMutableDictionary *flattened = [[[NSMutableDictionary alloc] initWithDictionary:dict] autorelease];
     for (NSString *key in dict) {
-        id value = [dict objectForKey:key];
-        [flattened setObject:[self flattenObject:value] forKey:key];
+        id value = dict[key];
+        flattened[key] = [self flattenObject:value];
     }
     return flattened;
 }
@@ -128,13 +128,13 @@ NSString *const kFBAppBridgeImageSupportVersion = @"20130410";
 {
     NSMutableDictionary *args = [NSMutableDictionary dictionary];
     if (self.action) {
-        [args setObject:[self flattenGraphObjects:self.action] forKey:@"action"];
+        args[@"action"] = [self flattenGraphObjects:self.action];
     }
     if (self.actionType) {
-        [args setObject:self.actionType forKey:@"actionType"];
+        args[@"actionType"] = self.actionType;
     }
     if (self.previewPropertyName) {
-        [args setObject:self.previewPropertyName forKey:@"previewPropertyName"];
+        args[@"previewPropertyName"] = self.previewPropertyName;
     }
 
     return args;

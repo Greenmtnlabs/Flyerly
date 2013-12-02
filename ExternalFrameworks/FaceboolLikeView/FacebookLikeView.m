@@ -128,10 +128,8 @@
     
     // Block redirects to non-Facebook URLs (e.g., by public wifi access points)
     else if (![request.URL.host hasSuffix:@"facebook.com"] && ![request.URL.host hasSuffix:@"fbcdn.net"]) {
-        NSDictionary *errorInfo = [NSDictionary dictionaryWithObjectsAndKeys:
-                                   @"FacebookLikeView was redirected to a non-Facebook URL.", NSLocalizedDescriptionKey,
-                                   request.URL, NSURLErrorKey,
-                                   nil];
+        NSDictionary *errorInfo = @{NSLocalizedDescriptionKey: @"FacebookLikeView was redirected to a non-Facebook URL.",
+                                   NSURLErrorKey: request.URL};
         NSError *error = [NSError errorWithDomain:@"FacebookLikeViewErrorDomain" 
                                              code:0 
                                          userInfo:errorInfo];

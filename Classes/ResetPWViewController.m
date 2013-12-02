@@ -65,12 +65,12 @@
         [query whereKey:@"username" equalTo:username.text];
         [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
             
-            dbUsername = [object objectForKey:@"email"];
+            dbUsername = object[@"email"];
             NSLog(@"%@",dbUsername);
             if(dbUsername){
                 [PFUser requestPasswordResetForEmailInBackground:dbUsername block:^(BOOL succeeded, NSError *error){
                     if (error) {
-                        NSString *errorValue = [error.userInfo objectForKey:@"error"];
+                        NSString *errorValue = (error.userInfo)[@"error"];
                         [self removeLoadingView];
                          [self showAlert:@"No account exists with username" message:@""];
                         //[self showAlert:@"Warning!" message:errorValue];
@@ -93,7 +93,7 @@
     } else {
         [PFUser requestPasswordResetForEmailInBackground:username.text block:^(BOOL succeeded, NSError *error){
             if (error) {
-                 NSString *errorValue = [error.userInfo objectForKey:@"error"];
+                 NSString *errorValue = (error.userInfo)[@"error"];
                 [self removeLoadingView];
                 [self showAlert:@"No account exists with email address." message:@""];
             } else {

@@ -245,27 +245,27 @@ static const int FBSDKSystemPasswordErrorSubcode = 65001;
                             subcode:(int *)psubcode {
     
     // does this error have a response? that is an array?
-    id response = [error.userInfo objectForKey:FBErrorParsedJSONResponseKey];
+    id response = (error.userInfo)[FBErrorParsedJSONResponseKey];
     if (response) {
         id item = nil;
         if ([response isKindOfClass:[NSArray class]]) {
-            item = [((NSArray*) response) objectAtIndex:index];
+            item = ((NSArray*) response)[index];
         } else {
             item = response;
         }
         // spelunking a JSON array & nested objects (eg. response[index].body.error.code)
         id  body, error, code;
-        if ((body = [item objectForKey:@"body"]) &&         // response[index].body
+        if ((body = item[@"body"]) &&         // response[index].body
             [body isKindOfClass:[NSDictionary class]] &&
-            (error = [body objectForKey:@"error"]) &&       // response[index].body.error
+            (error = body[@"error"]) &&       // response[index].body.error
             [error isKindOfClass:[NSDictionary class]]) {
             if (pcode &&
-                (code = [error objectForKey:@"code"]) &&        // response[index].body.error.code
+                (code = error[@"code"]) &&        // response[index].body.error.code
                 [code isKindOfClass:[NSNumber class]]) {
                 *pcode = [code intValue];
             }
             if (psubcode &&
-                (code = [error objectForKey:@"error_subcode"]) &&        // response[index].body.error.error_subcode
+                (code = error[@"error_subcode"]) &&        // response[index].body.error.error_subcode
                 [code isKindOfClass:[NSNumber class]]) {
                 *psubcode = [code intValue];
             }
@@ -279,14 +279,14 @@ static const int FBSDKSystemPasswordErrorSubcode = 65001;
                                                    FBErrorParsedJSONResponseKey : @{
                                                        @"body" : @{
                                                            @"error" : @{
-                                                               @"code": [NSNumber numberWithInt:FBOAuthError],
-                                                               @"error_subcode" : [NSNumber numberWithInt:FBSDKRetryErrorSubcode]
+                                                               @"code": @(FBOAuthError),
+                                                               @"error_subcode" : @(FBSDKRetryErrorSubcode)
                                                            }
                                                        }
                                                    }
                                                }];
     if (innerError) {
-        [userInfoDictionary setObject:innerError forKey:FBErrorInnerErrorKey];
+        userInfoDictionary[FBErrorInnerErrorKey] = innerError;
     }
     return [NSError errorWithDomain:FacebookSDKDomain
                                code:FBErrorHTTPError
@@ -299,14 +299,14 @@ static const int FBSDKSystemPasswordErrorSubcode = 65001;
                                                    FBErrorParsedJSONResponseKey : @{
                                                         @"body" : @{
                                                             @"error" : @{
-                                                               @"code": [NSNumber numberWithInt:FBOAuthError],
-                                                               @"error_subcode" : [NSNumber numberWithInt:FBSDKSystemPasswordErrorSubcode]
+                                                               @"code": @(FBOAuthError),
+                                                               @"error_subcode" : @(FBSDKSystemPasswordErrorSubcode)
                                                             }
                                                         }
                                                    }
                                                }];
     if (innerError) {
-        [userInfoDictionary setObject:innerError forKey:FBErrorInnerErrorKey];
+        userInfoDictionary[FBErrorInnerErrorKey] = innerError;
     }
     return [NSError errorWithDomain:FacebookSDKDomain
                                code:FBErrorHTTPError

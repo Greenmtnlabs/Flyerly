@@ -153,7 +153,7 @@ enum {
     [self prepareForRequest];
 
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys: [NSString stringWithFormat:@"%@,%@", self.latitude, self.longitude], @"ll", nil];
+    NSDictionary *parameters = @{@"ll": [NSString stringWithFormat:@"%@,%@", self.latitude, self.longitude]};
     self.request = [appDelegate.foursquare requestWithPath:@"venues/search" HTTPMethod:@"GET" parameters:parameters delegate:self];
     [request_ start];
     [self updateView];
@@ -167,7 +167,7 @@ enum {
     [self updateView];
     
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys: [NSString stringWithFormat:@"%@,%@", self.latitude, self.longitude], @"ll",@"browse",@"intent",@"40000",@"radius",searchField.text,@"query", nil];
+    NSDictionary *parameters = @{@"ll": [NSString stringWithFormat:@"%@,%@", self.latitude, self.longitude],@"intent": @"browse",@"radius": @"40000",@"query": searchField.text};
 
     //NSString *queryString = [NSString stringWithFormat:@"?ll=%@,%@&intent=browse&radius=1000&query=%@",latitude,longitude,@"kara"];
     self.request = [appDelegate.foursquare requestWithPath:[NSString stringWithFormat:@"venues/search"] HTTPMethod:@"GET" parameters:parameters delegate:self];
@@ -206,7 +206,7 @@ enum {
         
     } else {
         if(self.response){
-            NSDictionary *venues = [self.response objectForKey:@"venues"];
+            NSDictionary *venues = (self.response)[@"venues"];
             
             if(venues){
                 return [venues count];
@@ -231,7 +231,7 @@ enum {
         
         if (cell == nil) {
             NSArray *nib=[[NSBundle mainBundle] loadNibNamed:cellId owner:self options:nil];
-            cell=[nib objectAtIndex:0];
+            cell=nib[0];
         }
         
         if(indexPath.row == 0){
@@ -247,9 +247,9 @@ enum {
             [cell.imageView setImage:[UIImage imageNamed:@"location_point_selected"]];
         }else{
             if (![searchField.text isEqualToString:@""]) {
-            NSRange titleResultsRange = [[CostumLocations objectAtIndex:indexPath.row - 2] rangeOfString:searchField.text options:NSCaseInsensitiveSearch];
+            NSRange titleResultsRange = [CostumLocations[indexPath.row - 2] rangeOfString:searchField.text options:NSCaseInsensitiveSearch];
             if (titleResultsRange.length > 0){
-                cell.label1.text = [NSString stringWithFormat:@"%@", [CostumLocations objectAtIndex:indexPath.row - 2]];
+                cell.label1.text = [NSString stringWithFormat:@"%@", CostumLocations[indexPath.row - 2]];
                 cell.label2.text = @"Custom Location";
                 cell.imageView.image = nil;
                // [cell.imageView setImage:[UIImage imageNamed:@"location_point_selected"]];
@@ -272,19 +272,19 @@ enum {
         
         if (cell == nil) {
             NSArray *nib=[[NSBundle mainBundle] loadNibNamed:cellId owner:self options:nil];
-            cell=[nib objectAtIndex:0];
+            cell=nib[0];
         }
         
         // Set data on screen
-        NSArray *venues = [self.response objectForKey:@"venues"];
-        id venue = [venues objectAtIndex:indexPath.row];
+        NSArray *venues = (self.response)[@"venues"];
+        id venue = venues[indexPath.row];
         // NSLog(@"venues %@", venues);
         
-        NSString *name = [venue objectForKey:@"name"];
+        NSString *name = venue[@"name"];
         cell.name.text = name;
         
-        NSDictionary *location = [venue objectForKey:@"location"];
-        NSString *address = [location objectForKey:@"address"];
+        NSDictionary *location = venue[@"location"];
+        NSString *address = location[@"address"];
         cell.address.text = address;
         
         // return cell
@@ -302,7 +302,7 @@ enum {
             NSLog(@"Create Location");
             if([searchField text]){
                 locname = [NSString stringWithFormat:@"at %@",[searchField text] ];
-                [[LocationController getLocationDetails] setObject:locname forKey:@"name"];
+                [LocationController getLocationDetails][@"name"] = locname;
                 [self AddCustomLocation:[searchField text]];
                 [self onBack];
             }
@@ -311,45 +311,45 @@ enum {
             searchMode = NO;
             [self searchNearBy];
         }else{
-            locname = [NSString stringWithFormat:@"at %@",[CostumLocations objectAtIndex:indexPath.row -2]];
-            [[LocationController getLocationDetails] setObject:locname forKey:@"name"];
+            locname = [NSString stringWithFormat:@"at %@",CostumLocations[indexPath.row -2]];
+            [LocationController getLocationDetails][@"name"] = locname;
              [self onBack];
         }
         
     }else{
     
         // Set data on screen
-        NSArray *venues = [self.response objectForKey:@"venues"];
+        NSArray *venues = (self.response)[@"venues"];
         //NSLog(@"venues: %@", venues);
         NSLog(@"venues count: %d", [venues count]);
         NSLog(@"indexPath.row: %d", indexPath.row);
         
-        id venue = [venues objectAtIndex:indexPath.row];
-        NSDictionary *location = [venue objectForKey:@"location"];
+        id venue = venues[indexPath.row];
+        NSDictionary *location = venue[@"location"];
         
-        if([venue objectForKey:@"name"]){
+        if(venue[@"name"]){
             
-            locname = [NSString stringWithFormat:@"at %@",[venue objectForKey:@"name"] ];
+            locname = [NSString stringWithFormat:@"at %@",venue[@"name"] ];
             NSLog(@"%@",locname);
-            [[LocationController getLocationDetails] setObject:locname forKey:@"name"];
+            [LocationController getLocationDetails][@"name"] = locname;
  
         }else{
-            [[LocationController getLocationDetails] setObject:@"" forKey:@"name"];
+            [LocationController getLocationDetails][@"name"] = @"";
         }
-        if([location objectForKey:@"address"]){
-            [[LocationController getLocationDetails] setObject:[location objectForKey:@"address"] forKey:@"address"];
+        if(location[@"address"]){
+            [LocationController getLocationDetails][@"address"] = location[@"address"];
         }else{
-            [[LocationController getLocationDetails] setObject:@"" forKey:@"address"];
+            [LocationController getLocationDetails][@"address"] = @"";
         }
-        if([location objectForKey:@"lat"]){
-            [[LocationController getLocationDetails] setObject:[location objectForKey:@"lat"] forKey:@"lat"];
+        if(location[@"lat"]){
+            [LocationController getLocationDetails][@"lat"] = location[@"lat"];
         }else{
-            [[LocationController getLocationDetails] setObject:@"" forKey:@"lat"];
+            [LocationController getLocationDetails][@"lat"] = @"";
         }
-        if([location objectForKey:@"lng"]){
-            [[LocationController getLocationDetails] setObject:[location objectForKey:@"lng"] forKey:@"lng"];
+        if(location[@"lng"]){
+            [LocationController getLocationDetails][@"lng"] = location[@"lng"];
         }else{
-            [[LocationController getLocationDetails] setObject:@"" forKey:@"lng"];
+            [LocationController getLocationDetails][@"lng"] = @"";
         }
         
         //NSLog(@"locationDetails after: %@", locationDetails);
@@ -503,7 +503,7 @@ NSMutableDictionary *locationDetails;
     [self hideLoadingIndicator];
 
     NSLog(@"%s: %@", __PRETTY_FUNCTION__, error);
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[[error userInfo] objectForKey:@"errorDetail"] delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles:nil];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[error userInfo][@"errorDetail"] delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles:nil];
     [alertView show];
     self.meta = request.meta;
     self.notifications = request.notifications;
@@ -518,7 +518,7 @@ NSMutableDictionary *locationDetails;
 
 - (void)foursquareDidAuthorize:(BZFoursquare *)foursquare {
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:kAccessTokenRow inSection:kAuthenticationSection];
-    NSArray *indexPaths = [NSArray arrayWithObject:indexPath];
+    NSArray *indexPaths = @[indexPath];
     
     [self searchVenues];
 
@@ -589,10 +589,10 @@ NSMutableDictionary *locationDetails;
     if (![searchField.text isEqualToString:@""]) {
         for (int i =0 ; i < [Oldlocation count] ; i++)
         {
-            sTemp = [Oldlocation objectAtIndex:i] ;
+            sTemp = Oldlocation[i] ;
             NSRange titleResultsRange = [sTemp rangeOfString:searchText options:NSCaseInsensitiveSearch];
             if (titleResultsRange.length > 0){
-                [loctemp addObject:[Oldlocation objectAtIndex:i ]];
+                [loctemp addObject:Oldlocation[i]];
             }
         
         }

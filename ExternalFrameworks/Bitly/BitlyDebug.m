@@ -28,7 +28,7 @@ void BitlyDebug(const char *fileName, int lineNumber, NSString *fmt, ...) {
     NSString *timestamp = [debugFormatter stringFromDate:[NSDate date]];
     
     NSDictionary *info = [[NSBundle mainBundle] infoDictionary];
-    NSString *appName = [info objectForKey:(NSString *)kCFBundleNameKey];
+    NSString *appName = info[(NSString *)kCFBundleNameKey];
     fprintf(stdout, "%s %s[%s:%d] %s\n", 
             [timestamp UTF8String], 
             [appName UTF8String],

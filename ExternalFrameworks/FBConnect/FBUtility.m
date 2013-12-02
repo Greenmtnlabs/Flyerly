@@ -63,8 +63,7 @@ static NSError *g_fetchedAppSettingsError = nil;
         }
         
         if (key && value) {
-            [result setObject:[FBUtility stringByURLDecodingString:value]
-                       forKey:[FBUtility stringByURLDecodingString:key]];
+            result[[FBUtility stringByURLDecodingString:key]] = [FBUtility stringByURLDecodingString:value];
         }
     }
     return result;
@@ -142,7 +141,7 @@ static NSError *g_fetchedAppSettingsError = nil;
 
 + (NSString *)stringFBIDFromObject:(id)object {
     if ([object isKindOfClass:[NSDictionary class]]) {
-        id val = [object objectForKey:@"id"];
+        id val = object[@"id"];
         if ([val isKindOfClass:[NSString class]]) {
             return val;
         }
@@ -265,10 +264,10 @@ static NSError *g_fetchedAppSettingsError = nil;
                 
                 g_fetchedAppSettings = [[[FBFetchedAppSettings alloc] init] retain];
                 if ([result respondsToSelector:@selector(objectForKey:)]) {
-                    g_fetchedAppSettings.serverAppName = [result objectForKey:@"name"];
-                    g_fetchedAppSettings.supportsAttribution = [[result objectForKey:@"supports_attribution"] boolValue];
-                    g_fetchedAppSettings.supportsImplicitSdkLogging = [[result objectForKey:@"supports_implicit_sdk_logging"] boolValue];
-                    g_fetchedAppSettings.suppressNativeGdp = [[result objectForKey:@"suppress_native_ios_gdp"] boolValue];
+                    g_fetchedAppSettings.serverAppName = result[@"name"];
+                    g_fetchedAppSettings.supportsAttribution = [result[@"supports_attribution"] boolValue];
+                    g_fetchedAppSettings.supportsImplicitSdkLogging = [result[@"supports_implicit_sdk_logging"] boolValue];
+                    g_fetchedAppSettings.suppressNativeGdp = [result[@"suppress_native_ios_gdp"] boolValue];
                 }
             }
             [FBUtility callTheFetchAppSettingsCallback:callback];
@@ -378,7 +377,7 @@ static NSError *g_fetchedAppSettingsError = nil;
     static NSArray *urlSchemes = nil;
     
     dispatch_once(&fetchBundleOnce, ^{
-        urlSchemes = [[[[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleURLTypes"] objectAtIndex:0] valueForKey:@"CFBundleURLSchemes"];
+        urlSchemes = [[[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleURLTypes"][0] valueForKey:@"CFBundleURLSchemes"];
     });
     return [urlSchemes containsObject:urlScheme];
 }

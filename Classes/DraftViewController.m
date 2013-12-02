@@ -141,7 +141,7 @@ static ShareProgressView *clipBdPogressView;
     
     // Set click event on switch
     [saveToRollSwitch addTarget:self action:@selector(setSwitchState:) forControlEvents:UIControlEventValueChanged];
-      [[LocationController getLocationDetails] setObject:@"" forKey:@"name"];
+      [LocationController getLocationDetails][@"name"] = @"";
     // Set facebook as per settings
     if([[NSUserDefaults standardUserDefaults] stringForKey:@"facebookSetting"]){
         [facebookButton setSelected:YES];
@@ -331,9 +331,9 @@ static ShareProgressView *clipBdPogressView;
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
-    NSLog(@"%@",[[LocationController getLocationDetails] objectForKey:@"name"]);
-    if([LocationController getLocationDetails] && [[LocationController getLocationDetails] objectForKey:@"name"]){
-        locationLabel.text = [[LocationController getLocationDetails] objectForKey:@"name"];
+    NSLog(@"%@",[LocationController getLocationDetails][@"name"]);
+    if([LocationController getLocationDetails] && [LocationController getLocationDetails][@"name"]){
+        locationLabel.text = [LocationController getLocationDetails][@"name"];
         
         [locationButton setSelected:YES];
     
@@ -715,7 +715,7 @@ static ShareProgressView *clipBdPogressView;
             //get facebook app id
             NSString *path = [[NSBundle mainBundle] pathForResource: @"Flyr-Info" ofType: @"plist"];
             NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile: path];
-            appDelegate.facebook = [[Facebook alloc] initWithAppId:[dict objectForKey: @"FacebookAppID"] andDelegate:self];
+            appDelegate.facebook = [[Facebook alloc] initWithAppId:dict[@"FacebookAppID"] andDelegate:self];
         }
         
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -727,8 +727,8 @@ static ShareProgressView *clipBdPogressView;
         if([appDelegate.facebook isSessionValid]) {            
             [facebookButton setSelected:YES];            
         } else {
-            [appDelegate.facebook authorize:[NSArray arrayWithObjects: @"read_stream",
-                                             @"publish_stream", @"email", nil]];            
+            [appDelegate.facebook authorize:@[@"read_stream",
+                                             @"publish_stream", @"email"]];            
         }
     }
 }
@@ -1079,18 +1079,18 @@ static ShareProgressView *clipBdPogressView;
             
             // Create a PFObject around a PFFile and associate it with the current user
             PFObject *flyerObject = [PFObject objectWithClassName:@"Flyer"];
-            [flyerObject setObject:imageFile forKey:@"image"];
+            flyerObject[@"image"] = imageFile;
             
             // Set the access control list to current user for security purposes
             flyerObject.ACL = [PFACL ACLWithUser:[PFUser currentUser]];
             
             PFUser *user = [PFUser currentUser];
-            [flyerObject setObject:user forKey:@"user"];
+            flyerObject[@"user"] = user;
             
             [flyerObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 if (!error) {
 
-                    PFFile *theImage = [flyerObject objectForKey:@"image"];
+                    PFFile *theImage = flyerObject[@"image"];
                     
                     if(isEmail){
                         [emailPogressView.statusText setText:@"Opening email!"];
@@ -1124,18 +1124,18 @@ static ShareProgressView *clipBdPogressView;
         if (!error) {
             // Create a PFObject around a PFFile and associate it with the current user
             PFObject *flyerObject = [PFObject objectWithClassName:@"Flyer"];
-            [flyerObject setObject:imageFile forKey:@"image"];
+            flyerObject[@"image"] = imageFile;
             
             // Set the access control list to current user for security purposes
             flyerObject.ACL = [PFACL ACLWithUser:[PFUser currentUser]];
             
             PFUser *user = [PFUser currentUser];
-            [flyerObject setObject:user forKey:@"user"];
+            flyerObject[@"user"] = user;
             
             [flyerObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 if (!error) {
                     
-                    PFFile *theImage = [flyerObject objectForKey:@"image"];
+                    PFFile *theImage = flyerObject[@"image"];
                     [self shareOnEmail:[theImage url]];
                     globle.sharelink = [theImage url];
                     [emailPogressView.statusText setText:@"Opening email!"];
@@ -1220,7 +1220,7 @@ static ShareProgressView *clipBdPogressView;
      self.dic=[UIDocumentInteractionController interactionControllerWithURL:igImageHookFile];
      self.dic.UTI = @"com.instagram.photo";
      //self.dic = [self setupControllerWithURL:igImageHookFile usingDelegate:self];
-     self.dic.annotation = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%@ %@", self.titleView.text,descriptionView.text] forKey:@"InstagramCaption"];
+     self.dic.annotation = @{@"InstagramCaption": [NSString stringWithFormat:@"%@ %@", self.titleView.text,descriptionView.text]};
     BOOL displayed = [self.dic presentOpenInMenuFromRect:rect inView: self.view animated:YES];
     
     if(!displayed){
@@ -1294,8 +1294,8 @@ static ShareProgressView *clipBdPogressView;
         }else{
             NSLog(@"User data fetched successful! %@", data);
             
-            NSDictionary *userData = [data objectForKey:@"user"];
-            NSString *name = [userData objectForKey:@"name"];
+            NSDictionary *userData = data[@"user"];
+            NSString *name = userData[@"name"];
             NSLog(@"%@", name);
             
             [self uploadFiles:[TMAPIClient sharedInstance].OAuthToken oauthSecretKey:[TMAPIClient sharedInstance].OAuthTokenSecret blogName:name];
@@ -1310,7 +1310,7 @@ static ShareProgressView *clipBdPogressView;
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     NSData *imageData = UIImageJPEGRepresentation(selectedFlyerImage, 0.9);
     if (appDelegate.flickrRequest) {
-        [appDelegate.flickrRequest uploadImageStream:[NSInputStream inputStreamWithData:imageData] suggestedFilename:selectedFlyerTitle MIMEType:@"image/jpeg" arguments:[NSDictionary dictionaryWithObjectsAndKeys:@"0", @"is_public",@"Title", @"title", [NSString stringWithFormat:@"%@ %@ - %@",titleView.text, descriptionView.text,  [[LocationController getLocationDetails] objectForKey:@"name"]], @"description",nil]];
+        [appDelegate.flickrRequest uploadImageStream:[NSInputStream inputStreamWithData:imageData] suggestedFilename:selectedFlyerTitle MIMEType:@"image/jpeg" arguments:@{@"is_public": @"0",@"title": @"Title", @"description": [NSString stringWithFormat:@"%@ %@ - %@",titleView.text, descriptionView.text,  [LocationController getLocationDetails][@"name"]]}];
     }
    // [self fillSuccessStatus:flickrPogressView];
 }
@@ -1328,7 +1328,7 @@ static ShareProgressView *clipBdPogressView;
 -(void)shareOnFacebook{
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                   [NSString stringWithFormat:@"%@ %@ - %@",titleView.text, descriptionView.text, [[LocationController getLocationDetails] objectForKey:@"name"]], @"message",  //whatever message goes here
+                                   [NSString stringWithFormat:@"%@ %@ - %@",titleView.text, descriptionView.text, [LocationController getLocationDetails][@"name"]], @"message",  //whatever message goes here
                                    selectedFlyerImage, @"picture",   //img is your UIImage
                                    //placeId, @"place",
                                    nil];
@@ -1344,7 +1344,7 @@ static ShareProgressView *clipBdPogressView;
     
     
     //add text
-    [postRequest addMultiPartData:[[NSString stringWithFormat:@"%@ %@ - %@",titleView.text, descriptionView.text, [[LocationController getLocationDetails] objectForKey:@"name"]] dataUsingEncoding:NSUTF8StringEncoding] withName:@"status" type:@"multipart/form-data"];
+    [postRequest addMultiPartData:[[NSString stringWithFormat:@"%@ %@ - %@",titleView.text, descriptionView.text, [LocationController getLocationDetails][@"name"]] dataUsingEncoding:NSUTF8StringEncoding] withName:@"status" type:@"multipart/form-data"];
     //add image
     [postRequest addMultiPartData:UIImagePNGRepresentation(selectedFlyerImage) withName:@"media" type:@"multipart/form-data"];
     
@@ -1356,7 +1356,7 @@ static ShareProgressView *clipBdPogressView;
         if(responseData){
             NSMutableDictionary *responseDictionary  = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:nil];
             NSLog(@"%@",responseDictionary);
-            NSString *errors = [responseDictionary objectForKey:@"errors"];
+            NSString *errors = responseDictionary[@"errors"];
             
             if(errors){
                 [twitterPogressView.statusText setText:@"Sharing Failed!"];
@@ -1410,7 +1410,7 @@ sd:;
                     UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:@"Choose Account" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles: nil];
                     
                     for (int i = 0; i < arrayOfAccounts.count; i++) {
-                        ACAccount *acct = [arrayOfAccounts objectAtIndex:i];
+                        ACAccount *acct = arrayOfAccounts[i];
                         [actionSheet addButtonWithTitle:acct.username];
                     }
                     
@@ -1420,7 +1420,7 @@ sd:;
                 
             } else if ( [arrayOfAccounts count] > 0 ) {
                 // Grab the initial Twitter account to tweet from.
-                ACAccount *twitterAccount = [arrayOfAccounts objectAtIndex:0];
+                ACAccount *twitterAccount = arrayOfAccounts[0];
                 [self makeTwitterPost:twitterAccount];
              } else {
                 [twitterPogressView.statusText setText:@"Sharing Failed!"];
@@ -1453,7 +1453,7 @@ sd:;
     if(buttonIndex != arrayOfAccounts.count) {
         
         //save to NSUserDefault
-        ACAccount *account = [arrayOfAccounts objectAtIndex:buttonIndex];
+        ACAccount *account = arrayOfAccounts[buttonIndex];
         
         //Convert twitter username to email
         [self makeTwitterPost:account];
@@ -1484,7 +1484,7 @@ static ShareProgressView *clipBdPogressView;
     }
     
     clipBdPogressView = nil;
-    clipBdPogressView = [[[[NSBundle mainBundle] loadNibNamed:@"ShareProgressView" owner:self options:nil] objectAtIndex:0] retain];
+    clipBdPogressView = [[[NSBundle mainBundle] loadNibNamed:@"ShareProgressView" owner:self options:nil][0] retain];
     [clipBdPogressView setFrame:CGRectMake(clipBdPogressView.frame.origin.x, 36 * countOfSharingNetworks++, clipBdPogressView.frame.size.width, clipBdPogressView.frame.size.height)];
     clipBdPogressView.tag = 8;
     
@@ -1516,7 +1516,7 @@ static ShareProgressView *clipBdPogressView;
     }
     
     smsPogressView = nil;
-    smsPogressView = [[[[NSBundle mainBundle] loadNibNamed:@"ShareProgressView" owner:self options:nil] objectAtIndex:0] retain];
+    smsPogressView = [[[NSBundle mainBundle] loadNibNamed:@"ShareProgressView" owner:self options:nil][0] retain];
     [smsPogressView setFrame:CGRectMake(smsPogressView.frame.origin.x, 36 * countOfSharingNetworks++, smsPogressView.frame.size.width, smsPogressView.frame.size.height)];
     smsPogressView.tag = 7;
     
@@ -1546,7 +1546,7 @@ static ShareProgressView *clipBdPogressView;
     }
     
     emailPogressView = nil;
-    emailPogressView = [[[[NSBundle mainBundle] loadNibNamed:@"ShareProgressView" owner:self options:nil] objectAtIndex:0] retain];
+    emailPogressView = [[[NSBundle mainBundle] loadNibNamed:@"ShareProgressView" owner:self options:nil][0] retain];
     [emailPogressView setFrame:CGRectMake(emailPogressView.frame.origin.x, 36 * countOfSharingNetworks++, emailPogressView.frame.size.width, emailPogressView.frame.size.height)];
     emailPogressView.tag = 6;
     
@@ -1577,7 +1577,7 @@ static ShareProgressView *clipBdPogressView;
     }
     
     instagramPogressView = nil;
-    instagramPogressView = [[[[NSBundle mainBundle] loadNibNamed:@"ShareProgressView" owner:self options:nil] objectAtIndex:0] retain];
+    instagramPogressView = [[[NSBundle mainBundle] loadNibNamed:@"ShareProgressView" owner:self options:nil][0] retain];
     [instagramPogressView setFrame:CGRectMake(instagramPogressView.frame.origin.x, 36 * countOfSharingNetworks++, instagramPogressView.frame.size.width, instagramPogressView.frame.size.height)];
     instagramPogressView.tag = 5;
     
@@ -1668,7 +1668,7 @@ static ShareProgressView *clipBdPogressView;
     }
 
     facebookPogressView = nil;
-    facebookPogressView = [[[[NSBundle mainBundle] loadNibNamed:@"ShareProgressView" owner:self options:nil] objectAtIndex:0] retain];
+    facebookPogressView = [[[NSBundle mainBundle] loadNibNamed:@"ShareProgressView" owner:self options:nil][0] retain];
     [facebookPogressView setFrame:CGRectMake(facebookPogressView.frame.origin.x, 36 * countOfSharingNetworks++, facebookPogressView.frame.size.width, facebookPogressView.frame.size.height)];
     facebookPogressView.tag = 1;
     
@@ -1700,7 +1700,7 @@ static ShareProgressView *clipBdPogressView;
     }
     
     twitterPogressView = nil;
-    twitterPogressView = [[[NSBundle mainBundle] loadNibNamed:@"ShareProgressView" owner:[[ShareProgressView alloc] init] options:nil] objectAtIndex:0];
+    twitterPogressView = [[NSBundle mainBundle] loadNibNamed:@"ShareProgressView" owner:[[ShareProgressView alloc] init] options:nil][0];
     [twitterPogressView setFrame:CGRectMake(twitterPogressView.frame.origin.x, 36 * countOfSharingNetworks++, twitterPogressView.frame.size.width, twitterPogressView.frame.size.height)];
     twitterPogressView.tag = 2;
 
@@ -1729,7 +1729,7 @@ static ShareProgressView *clipBdPogressView;
     }
     
     tumblrPogressView = nil;
-    tumblrPogressView = [[[[NSBundle mainBundle] loadNibNamed:@"ShareProgressView" owner:self options:nil] objectAtIndex:0] retain];
+    tumblrPogressView = [[[NSBundle mainBundle] loadNibNamed:@"ShareProgressView" owner:self options:nil][0] retain];
     [tumblrPogressView setFrame:CGRectMake(tumblrPogressView.frame.origin.x, 36 * countOfSharingNetworks++, tumblrPogressView.frame.size.width, tumblrPogressView.frame.size.height)];
     tumblrPogressView.tag = 3;
 
@@ -1758,7 +1758,7 @@ static ShareProgressView *clipBdPogressView;
     }
 
     flickrPogressView = nil;
-    flickrPogressView = [[[[NSBundle mainBundle] loadNibNamed:@"ShareProgressView" owner:self options:nil] objectAtIndex:0] retain];
+    flickrPogressView = [[[NSBundle mainBundle] loadNibNamed:@"ShareProgressView" owner:self options:nil][0] retain];
     [flickrPogressView setFrame:CGRectMake(flickrPogressView.frame.origin.x, 36 * countOfSharingNetworks++, flickrPogressView.frame.size.width, flickrPogressView.frame.size.height)];
     flickrPogressView.tag = 4;
 
@@ -1811,23 +1811,23 @@ static ShareProgressView *clipBdPogressView;
         yAxis = yAxis + 36;
     }
     
-    NSLog(@"TAG: %@", [notification.userInfo objectForKey:@"tag"]);
+    NSLog(@"TAG: %@", (notification.userInfo)[@"tag"]);
     // Set variables to null so that they will not come again
-    if([[notification.userInfo objectForKey:@"tag"] isEqualToString:@"1"]){
+    if([(notification.userInfo)[@"tag"] isEqualToString:@"1"]){
         facebookPogressView = nil;
-    } else if([[notification.userInfo objectForKey:@"tag"] isEqualToString:@"2"]){
+    } else if([(notification.userInfo)[@"tag"] isEqualToString:@"2"]){
         twitterPogressView = nil;
-    } else if([[notification.userInfo objectForKey:@"tag"] isEqualToString:@"3"]){
+    } else if([(notification.userInfo)[@"tag"] isEqualToString:@"3"]){
         tumblrPogressView = nil;
-    } else if([[notification.userInfo objectForKey:@"tag"] isEqualToString:@"4"]){
+    } else if([(notification.userInfo)[@"tag"] isEqualToString:@"4"]){
         flickrPogressView = nil;
-    }else if([[notification.userInfo objectForKey:@"tag"] isEqualToString:@"5"]){
+    }else if([(notification.userInfo)[@"tag"] isEqualToString:@"5"]){
         instagramPogressView = nil;
-    }else if([[notification.userInfo objectForKey:@"tag"] isEqualToString:@"6"]){
+    }else if([(notification.userInfo)[@"tag"] isEqualToString:@"6"]){
         emailPogressView = nil;
-    }else if([[notification.userInfo objectForKey:@"tag"] isEqualToString:@"7"]){
+    }else if([(notification.userInfo)[@"tag"] isEqualToString:@"7"]){
         smsPogressView = nil;
-    }else if([[notification.userInfo objectForKey:@"tag"] isEqualToString:@"8"]){
+    }else if([(notification.userInfo)[@"tag"] isEqualToString:@"8"]){
         clipBdPogressView = nil;
     }
     if(countOfSharingNetworks <= 0){
@@ -2044,9 +2044,9 @@ static ShareProgressView *clipBdPogressView;
     UIImage *originalImage = [UIImage imageWithContentsOfFile:imageFileName];
     NSData *data1 = [NSData dataWithData:UIImagePNGRepresentation(originalImage)];
     
-    NSArray *array = [NSArray arrayWithObjects:data1, nil];
+    NSArray *array = @[data1];
     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        TumblrUploadr *tu = [[TumblrUploadr alloc] initWithNSDataForPhotos:array andBlogName:[NSString stringWithFormat:@"%@.tumblr.com", blogName] andDelegate:self andCaption:[NSString stringWithFormat:@"%@ %@ - %@",titleView.text, descriptionView.text, [[LocationController getLocationDetails] objectForKey:@"name"]]];
+        TumblrUploadr *tu = [[TumblrUploadr alloc] initWithNSDataForPhotos:array andBlogName:[NSString stringWithFormat:@"%@.tumblr.com", blogName] andDelegate:self andCaption:[NSString stringWithFormat:@"%@ %@ - %@",titleView.text, descriptionView.text, [LocationController getLocationDetails][@"name"]]];
         dispatch_async( dispatch_get_main_queue(), ^{
             
             [tu signAndSendWithTokenKey:oauthToken andSecret:oauthSecretKey];
@@ -2069,8 +2069,8 @@ static ShareProgressView *clipBdPogressView;
     NSDictionary *dict = [NSJSONSerialization JSONObjectWithData: [response dataUsingEncoding:NSUTF8StringEncoding]
                                                          options: NSJSONReadingMutableContainers
                                                            error: nil];
-    NSDictionary *meta = [dict objectForKey:@"meta"];
-    NSString *status = [[meta objectForKey:@"status"] stringValue];
+    NSDictionary *meta = dict[@"meta"];
+    NSString *status = [meta[@"status"] stringValue];
     
     if([status isEqualToString:@"201"]){
         [self fillSuccessStatus:tumblrPogressView];
@@ -2119,7 +2119,7 @@ static ShareProgressView *clipBdPogressView;
         [locationLabel setHidden:YES];
         [locationBackground setHidden:YES];
         [locationButton setHidden:YES];
-        [[LocationController getLocationDetails] setObject:@"" forKey:@"name"];
+        [LocationController getLocationDetails][@"name"] = @"";
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationDuration:0.2];
         [UIView setAnimationCurve:UIViewAnimationCurveLinear];

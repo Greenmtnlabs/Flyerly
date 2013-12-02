@@ -86,19 +86,19 @@
     for(NSString *key in dict){
         if([key hasPrefix:@"Text-"]){
             
-            NSDictionary *textDict = [dict objectForKey:key];
+            NSDictionary *textDict = dict[key];
            // NSLog(@"%@",textDict);
-            NSString *text = [textDict objectForKey:@"text"];
-            NSString *fontname = [textDict objectForKey:@"fontname"];
-            NSString *fontsize = [textDict objectForKey:@"fontsize"];
-            NSString *textcolor = [textDict objectForKey:@"textcolor"];
-            NSString *textwhitecolor = [textDict objectForKey:@"textWhitecolor"];
-            NSString *textbordercolor = [textDict objectForKey:@"textbordercolor"];
-            NSString *textborderwhite = [textDict objectForKey:@"textborderWhite"];
-            NSString *textX = [textDict objectForKey:@"x"];
-            NSString *textY = [textDict objectForKey:@"y"];
-            NSString *textWidth = [textDict objectForKey:@"width"];
-            NSString *textHeight = [textDict objectForKey:@"height"];
+            NSString *text = textDict[@"text"];
+            NSString *fontname = textDict[@"fontname"];
+            NSString *fontsize = textDict[@"fontsize"];
+            NSString *textcolor = textDict[@"textcolor"];
+            NSString *textwhitecolor = textDict[@"textWhitecolor"];
+            NSString *textbordercolor = textDict[@"textbordercolor"];
+            NSString *textborderwhite = textDict[@"textborderWhite"];
+            NSString *textX = textDict[@"x"];
+            NSString *textY = textDict[@"y"];
+            NSString *textWidth = textDict[@"width"];
+            NSString *textHeight = textDict[@"height"];
             
             CustomLabel *newMsgLabel = [[CustomLabel alloc]initWithFrame:CGRectMake([textX floatValue], [textY floatValue], [textWidth floatValue], [textHeight floatValue])];
             newMsgLabel.text = text;
@@ -113,25 +113,25 @@
             if ([textcolor isEqualToString:@"0.000000, 0.000000, 0.000000"]) {
                 if (textwhitecolor != nil) {
                     NSArray *rgb = [textwhitecolor componentsSeparatedByString:@","];
-                    newMsgLabel.textColor = [UIColor colorWithWhite:[[rgb objectAtIndex:0] floatValue] alpha:[[rgb objectAtIndex:1] floatValue]];
+                    newMsgLabel.textColor = [UIColor colorWithWhite:[rgb[0] floatValue] alpha:[rgb[1] floatValue]];
                 }
             }else{
                 NSArray *rgb = [textcolor componentsSeparatedByString:@","];
                 
-                newMsgLabel.textColor = [UIColor colorWithRed:[[rgb objectAtIndex:0] floatValue] green:[[rgb objectAtIndex:1] floatValue] blue:[[rgb objectAtIndex:2] floatValue] alpha:1];
+                newMsgLabel.textColor = [UIColor colorWithRed:[rgb[0] floatValue] green:[rgb[1] floatValue] blue:[rgb[2] floatValue] alpha:1];
 
             }
  
             if ([textbordercolor isEqualToString:@"0.000000, 0.000000, 0.000000"]) {
                 if (textborderwhite != nil) {
                     NSArray *rgbBorder = [textborderwhite componentsSeparatedByString:@","];
-                    newMsgLabel.borderColor = [UIColor colorWithWhite:[[rgbBorder objectAtIndex:0] floatValue] alpha:[[rgbBorder objectAtIndex:1] floatValue]];
+                    newMsgLabel.borderColor = [UIColor colorWithWhite:[rgbBorder[0] floatValue] alpha:[rgbBorder[1] floatValue]];
 
                 }
             }else{
                 
             NSArray *rgbBorder = [textbordercolor componentsSeparatedByString:@","];
-            newMsgLabel.borderColor = [UIColor colorWithRed:[[rgbBorder objectAtIndex:0] floatValue] green:[[rgbBorder objectAtIndex:1] floatValue] blue:[[rgbBorder objectAtIndex:2] floatValue] alpha:1];
+            newMsgLabel.borderColor = [UIColor colorWithRed:[rgbBorder[0] floatValue] green:[rgbBorder[1] floatValue] blue:[rgbBorder[2] floatValue] alpha:1];
             }
             newMsgLabel.lineWidth = 2;
             [newMsgLabel drawRect:CGRectMake(newMsgLabel.frame.origin.x, newMsgLabel.frame.origin.y, newMsgLabel.frame.size.width, newMsgLabel.frame.size.height)];
@@ -145,12 +145,12 @@
     for(NSString *key in dict){
         if([key hasPrefix:@"Photo-"]){
             
-            NSDictionary *photoDict = [dict objectForKey:key];
-            NSString *photoPath = [photoDict objectForKey:@"image"];
-            NSString *photoX = [photoDict objectForKey:@"x"];
-            NSString *photoY = [photoDict objectForKey:@"y"];
-            NSString *photoWidth = [photoDict objectForKey:@"width"];
-            NSString *photoHeight = [photoDict objectForKey:@"height"];
+            NSDictionary *photoDict = dict[key];
+            NSString *photoPath = photoDict[@"image"];
+            NSString *photoX = photoDict[@"x"];
+            NSString *photoY = photoDict[@"y"];
+            NSString *photoWidth = photoDict[@"width"];
+            NSString *photoHeight = photoDict[@"height"];
             
             NSData *imageData = [[NSData alloc ]initWithContentsOfMappedFile:photoPath];
             UIImage *currentFlyerImage = [UIImage imageWithData:imageData];
@@ -175,12 +175,12 @@
     for(NSString *key in dict){
         if([key hasPrefix:@"Symbol-"]){
             
-            NSDictionary *symbolDict = [dict objectForKey:key];
-            NSString *symbolPath = [symbolDict objectForKey:@"image"];
-            NSString *symbolX = [symbolDict objectForKey:@"x"];
-            NSString *symbolY = [symbolDict objectForKey:@"y"];
-            NSString *symbolWidth = [symbolDict objectForKey:@"width"];
-            NSString *symbolHeight = [symbolDict objectForKey:@"height"];
+            NSDictionary *symbolDict = dict[key];
+            NSString *symbolPath = symbolDict[@"image"];
+            NSString *symbolX = symbolDict[@"x"];
+            NSString *symbolY = symbolDict[@"y"];
+            NSString *symbolWidth = symbolDict[@"width"];
+            NSString *symbolHeight = symbolDict[@"height"];
             
             NSData *imageData = [[NSData alloc ]initWithContentsOfMappedFile:symbolPath];
             UIImage *currentFlyerImage = [UIImage imageWithData:imageData];
@@ -205,12 +205,12 @@
     for(NSString *key in dict){
         if([key hasPrefix:@"Icon-"]){
             
-            NSDictionary *iconDict = [dict objectForKey:key];
-            NSString *iconPath = [iconDict objectForKey:@"image"];
-            NSString *iconX = [iconDict objectForKey:@"x"];
-            NSString *iconY = [iconDict objectForKey:@"y"];
-            NSString *iconWidth = [iconDict objectForKey:@"width"];
-            NSString *iconHeight = [iconDict objectForKey:@"height"];
+            NSDictionary *iconDict = dict[key];
+            NSString *iconPath = iconDict[@"image"];
+            NSString *iconX = iconDict[@"x"];
+            NSString *iconY = iconDict[@"y"];
+            NSString *iconWidth = iconDict[@"width"];
+            NSString *iconHeight = iconDict[@"height"];
             
             NSData *imageData = [[NSData alloc ]initWithContentsOfMappedFile:iconPath];
             UIImage *currentFlyerImage = [UIImage imageWithData:imageData];

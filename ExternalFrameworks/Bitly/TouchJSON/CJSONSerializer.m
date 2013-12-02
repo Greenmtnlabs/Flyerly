@@ -134,9 +134,7 @@ static NSData *kTrue = NULL;
         {
         if (outError)
             {
-            NSDictionary *theUserInfo = [NSDictionary dictionaryWithObjectsAndKeys:
-                [NSString stringWithFormat:@"Cannot serialize data of type '%@'", NSStringFromClass([inObject class])], NSLocalizedDescriptionKey,
-                NULL];
+            NSDictionary *theUserInfo = @{NSLocalizedDescriptionKey: [NSString stringWithFormat:@"Cannot serialize data of type '%@'", NSStringFromClass([inObject class])]};
             *outError = [NSError errorWithDomain:@"TODO_DOMAIN" code:CJSONSerializerErrorCouldNotSerializeDataType userInfo:theUserInfo];
             }
         return(NULL);
@@ -145,9 +143,7 @@ static NSData *kTrue = NULL;
         {
         if (outError)
             {
-            NSDictionary *theUserInfo = [NSDictionary dictionaryWithObjectsAndKeys:
-                [NSString stringWithFormat:@"Could not serialize object '%@'", inObject], NSLocalizedDescriptionKey,
-                NULL];
+            NSDictionary *theUserInfo = @{NSLocalizedDescriptionKey: [NSString stringWithFormat:@"Could not serialize object '%@'", inObject]};
             *outError = [NSError errorWithDomain:@"TODO_DOMAIN" code:CJSONSerializerErrorCouldNotSerializeObject userInfo:theUserInfo];
             }
         return(NULL);
@@ -321,7 +317,7 @@ static NSData *kTrue = NULL;
     NSString *theKey = NULL;
     while ((theKey = [theEnumerator nextObject]) != NULL)
         {
-        id theValue = [inDictionary objectForKey:theKey];
+        id theValue = inDictionary[theKey];
         
         NSData *theKeyData = [self serializeString:theKey error:outError];
         if (theKeyData == NULL)

@@ -798,7 +798,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 		font.frame = CGRectMake(0, 0, fontScrollWidth, fontScrollHeight);        
 		
 		[font setTitle:@"A" forState:UIControlStateNormal];
-		UIFont *fontname =[fontArray objectAtIndex:(i-1)];
+		UIFont *fontname =fontArray[(i-1)];
 		[font.titleLabel setFont: fontname];
 		[font setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 		font.tag = i;
@@ -837,7 +837,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 	{
 		UIButton *size = [UIButton buttonWithType:UIButtonTypeCustom];
 		size.frame = CGRectMake(0, 5, sizeScrollWidth, sizeScrollHeight);
-		NSString *sizeValue =[SIZE_ARRAY objectAtIndex:(i-1)];
+		NSString *sizeValue =SIZE_ARRAY[(i-1)];
 		[size setBackgroundImage:[UIImage imageNamed:@"a_bg"] forState:UIControlStateNormal];
 		[size setTitle:sizeValue forState:UIControlStateNormal];
 		[size.titleLabel setFont:[UIFont fontWithName:@"Arial-BoldMT" size:15]];
@@ -871,7 +871,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 		color.frame = CGRectMake(0, 5, colorScrollWidth, colorScrollHeight);
 
         
-		id colorName =[colorArray objectAtIndex:(i-1)];
+		id colorName =colorArray[(i-1)];
 		UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(color.frame.origin.x+5, color.frame.origin.y, color.frame.size.width, color.frame.size.height)];
 		[label setBackgroundColor:colorName];
         label.layer.borderColor = [UIColor grayColor].CGColor;
@@ -908,7 +908,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 	{
 		UIButton *color = [UIButton buttonWithType:UIButtonTypeCustom];
 		color.frame = CGRectMake(0, 5, borderScrollWidth, borderScrollHeight);
-		UIColor *colorName =[borderArray objectAtIndex:(i-1)];
+		UIColor *colorName =borderArray[(i-1)];
 		UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(color.frame.origin.x, color.frame.origin.y-3, color.frame.size.width, color.frame.size.height)];
         label.layer.borderColor = colorName.CGColor;
         label.layer.borderWidth = 3.0;
@@ -945,7 +945,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 	{
 		UIButton *color = [UIButton buttonWithType:UIButtonTypeCustom];
 		color.frame = CGRectMake(0, 5, borderScrollWidth, borderScrollHeight);
-		UIColor *colorName =[borderArray objectAtIndex:(i-1)];
+		UIColor *colorName =borderArray[(i-1)];
 		UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(color.frame.origin.x, color.frame.origin.y-3, color.frame.size.width, color.frame.size.height)];
         label.layer.borderColor = colorName.CGColor;
         label.layer.borderWidth = 3.0;
@@ -1075,10 +1075,10 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 	{
 		if(tempView == view)
 		{
-			selectedFont = [fontArray objectAtIndex:i-1];
+			selectedFont = fontArray[i-1];
 			selectedFont = [selectedFont fontWithSize:selectedSize];
 			msgTextView.font = selectedFont;
-            ((CustomLabel*)[[self textLabelLayersArray] objectAtIndex:arrangeLayerIndex]).font = selectedFont;
+            ((CustomLabel*)[self textLabelLayersArray][arrangeLayerIndex]).font = selectedFont;
 		}
 		i++;
 	}
@@ -1097,9 +1097,9 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 	{
 		if(tempView == view)
 		{
-			selectedColor = [colorArray objectAtIndex:i-1];
+			selectedColor = colorArray[i-1];
 			msgTextView.textColor = selectedColor;
-            ((CustomLabel*)[[self textLabelLayersArray]  objectAtIndex:arrangeLayerIndex]).textColor = selectedColor;
+            ((CustomLabel*)[self textLabelLayersArray][arrangeLayerIndex]).textColor = selectedColor;
 		}
 		i++;
 	}
@@ -1113,7 +1113,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 	FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
 	appDele.changesFlag = YES;
 	UIButton *view = sender;
-	selectedTemplate  =  [templateArray objectAtIndex:view.tag];
+	selectedTemplate  =  templateArray[view.tag];
 	CATransition *animation = [CATransition animation];
 	[animation setType:kCATransitionPush];
 	[animation setSubtype:kCATransitionMoveIn];
@@ -1157,7 +1157,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
         FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
         appDele.changesFlag = YES;
         UIButton *view = sender;
-        selectedSymbol  =  [symbolArray objectAtIndex:(view.tag - 1)];
+        selectedSymbol  =  symbolArray[(view.tag - 1)];
         CATransition *animation = [CATransition animation];
         [animation setType:kCATransitionPush];
         [animation setSubtype:kCATransitionMoveIn];
@@ -1167,7 +1167,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
         // Make copy of layers to undo it later
         [self makeCopyOfLayers];
         
-        UIImageView *lastSymbolLayer = [[self symbolLayersArray] objectAtIndex:arrangeLayerIndex];
+        UIImageView *lastSymbolLayer = [self symbolLayersArray][arrangeLayerIndex];
         [[lastSymbolLayer  layer] addAnimation:animation forKey:@"SwitchToView1"];
         [lastSymbolLayer setImage:selectedSymbol];
     }
@@ -1204,7 +1204,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
         FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
         appDele.changesFlag = YES;
         UIButton *view = sender;
-        selectedIcon  =  [iconArray objectAtIndex:(view.tag - 1)];
+        selectedIcon  =  iconArray[(view.tag - 1)];
         CATransition *animation = [CATransition animation];
         [animation setType:kCATransitionPush];
         [animation setSubtype:kCATransitionMoveIn];
@@ -1217,7 +1217,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
             [self makeCopyOfLayers];
         }
 
-        UIImageView *lastIconLayer = [[self iconLayersArray] objectAtIndex:arrangeLayerIndex];
+        UIImageView *lastIconLayer = [self iconLayersArray][arrangeLayerIndex];
         [[lastIconLayer  layer] addAnimation:animation forKey:@"SwitchToView1"];
         [lastIconLayer setImage:selectedIcon];
     }
@@ -1346,11 +1346,11 @@ int arrangeLayerIndex;
 	{
 		if(tempView == view)
 		{
-			NSString *sizeStr = [SIZE_ARRAY objectAtIndex:i-1];
+			NSString *sizeStr = SIZE_ARRAY[i-1];
 			selectedSize = [sizeStr intValue];
 			selectedFont = [selectedFont fontWithSize:selectedSize];
 			msgTextView.font = selectedFont;
-            ((CustomLabel*)[[self textLabelLayersArray]  objectAtIndex:arrangeLayerIndex]).font =selectedFont;
+            ((CustomLabel*)[self textLabelLayersArray][arrangeLayerIndex]).font =selectedFont;
 		}
 		i++;
 	}
@@ -1369,7 +1369,7 @@ int arrangeLayerIndex;
 	{
 		if(tempView == view)
 		{
-			UIColor *borderColor = [borderArray objectAtIndex:i-1];
+			UIColor *borderColor = borderArray[i-1];
             
             imgView.layer.borderColor = borderColor.CGColor;
             imgView.layer.borderWidth = 3.0;
@@ -1390,9 +1390,9 @@ int arrangeLayerIndex;
 	for(UIView *tempView  in [fontBorderScrollView subviews]) {
 		if(tempView == view) {
             
-			UIColor *borderColor = [borderArray objectAtIndex:i-1];
+			UIColor *borderColor = borderArray[i-1];
             
-            CustomLabel *lastLabel = [[self textLabelLayersArray]  objectAtIndex:arrangeLayerIndex];
+            CustomLabel *lastLabel = [self textLabelLayersArray][arrangeLayerIndex];
             lastLabel.borderColor = borderColor;
             lastLabel.lineWidth = 2;
             [lastLabel drawRect:CGRectMake(lastLabel.frame.origin.x, lastLabel.frame.origin.y, lastLabel.frame.size.width, lastLabel.frame.size.height)];
@@ -2098,7 +2098,7 @@ int arrangeLayerIndex;
             
             // Remove object from array if not in delete mode
             if(!deleteMode){
-                [[photoLayersArray objectAtIndex:arrangeLayerIndex] removeFromSuperview];
+                [photoLayersArray[arrangeLayerIndex] removeFromSuperview];
                 [photoLayersArray removeLastObject];
             }
             
@@ -2122,8 +2122,8 @@ int arrangeLayerIndex;
 	} else if(alertView == inAppAlert && (buttonIndex == 0 || buttonIndex == 1 || buttonIndex == 2)) {
         
        // NSLog(@"Purchase One Font Selected");
-        NSLog(@"%@",[demoPurchase.products objectAtIndex:buttonIndex]);
-        if (![demoPurchase purchaseProduct:[demoPurchase.products objectAtIndex:buttonIndex]]){
+        NSLog(@"%@",(demoPurchase.products)[buttonIndex]);
+        if (![demoPurchase purchaseProduct:(demoPurchase.products)[buttonIndex]]){
             
             // Returned NO, so notify user that In-App Purchase is Disabled in their Settings.
             UIAlertView *settingsAlert = [[UIAlertView alloc] initWithTitle:@"Allow Purchases" message:@"You must first enable In-App Purchase in your iOS Settings before making this purchase." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -2219,13 +2219,13 @@ int arrangeLayerIndex;
         arrangeLayerIndex = [self getIndexFromTag:tag];
         
         [self removeBordersFromAllLayers];
-        UILabel *tempLabel = [textLabelLayersArray objectAtIndex:arrangeLayerIndex];
+        UILabel *tempLabel = textLabelLayersArray[arrangeLayerIndex];
         CALayer * l = [tempLabel layer];
         [l setMasksToBounds:YES];
         [l setCornerRadius:10];
         [l setBorderWidth:1.0];
         [l setBorderColor:[[UIColor grayColor] CGColor]];
-        [self.imgView bringSubviewToFront:[[self textLabelLayersArray] objectAtIndex:arrangeLayerIndex]];
+        [self.imgView bringSubviewToFront:[self textLabelLayersArray][arrangeLayerIndex]];
         
     }else if([tag hasPrefix:@"222"]){
         symbolTouchFlag = NO;
@@ -2236,13 +2236,13 @@ int arrangeLayerIndex;
         arrangeLayerIndex = [self getIndexFromTag:tag];
         
         [self removeBordersFromAllLayers];
-        UIImageView *tempImgView = [photoLayersArray objectAtIndex:arrangeLayerIndex];
+        UIImageView *tempImgView = photoLayersArray[arrangeLayerIndex];
         CALayer * l = [tempImgView layer];
         [l setMasksToBounds:YES];
         [l setCornerRadius:10];
         [l setBorderWidth:1.0];
         [l setBorderColor:[[UIColor grayColor] CGColor]];
-        [self.imgView bringSubviewToFront:[[self photoLayersArray] objectAtIndex:arrangeLayerIndex]];
+        [self.imgView bringSubviewToFront:[self photoLayersArray][arrangeLayerIndex]];
         
     } else if([tag hasPrefix:@"333"]){
         symbolTouchFlag = YES;
@@ -2253,13 +2253,13 @@ int arrangeLayerIndex;
         arrangeLayerIndex = [self getIndexFromTag:tag];
         
         [self removeBordersFromAllLayers];
-        UIImageView *tempImgView = [symbolLayersArray objectAtIndex:arrangeLayerIndex];
+        UIImageView *tempImgView = symbolLayersArray[arrangeLayerIndex];
         CALayer * l = [tempImgView layer];
         [l setMasksToBounds:YES];
         [l setCornerRadius:10];
         [l setBorderWidth:1.0];
         [l setBorderColor:[[UIColor grayColor] CGColor]];
-        [self.imgView bringSubviewToFront:[[self symbolLayersArray] objectAtIndex:arrangeLayerIndex]];
+        [self.imgView bringSubviewToFront:[self symbolLayersArray][arrangeLayerIndex]];
         
     } else if([tag hasPrefix:@"444"]){
         symbolTouchFlag = NO;
@@ -2270,13 +2270,13 @@ int arrangeLayerIndex;
         arrangeLayerIndex = [self getIndexFromTag:tag];
         
         [self removeBordersFromAllLayers];
-        UIImageView *tempImgView = [iconLayersArray objectAtIndex:arrangeLayerIndex];
+        UIImageView *tempImgView = iconLayersArray[arrangeLayerIndex];
         CALayer * l = [tempImgView layer];
         [l setMasksToBounds:YES];
         [l setCornerRadius:10];
         [l setBorderWidth:1.0];
         [l setBorderColor:[[UIColor grayColor] CGColor]];
-        [self.imgView bringSubviewToFront:[[self iconLayersArray] objectAtIndex:arrangeLayerIndex]];
+        [self.imgView bringSubviewToFront:[self iconLayersArray][arrangeLayerIndex]];
     }
     
     deleteMode = YES;
@@ -2550,7 +2550,7 @@ int arrangeLayerIndex;
     // Make copy of layers to undo it later
     [self makeCopyOfLayers];
     
-    CustomLabel *lastLabelView = [[self textLabelLayersArray] objectAtIndex:arrangeLayerIndex];
+    CustomLabel *lastLabelView = [self textLabelLayersArray][arrangeLayerIndex];
     
     selectedColor = lastLabelView.textColor;
 
@@ -2684,7 +2684,7 @@ int arrangeLayerIndex;
 	fontBorderTabButton.alpha = ALPHA1;
     
     UITextView *lastTextView = msgTextView;
-    CustomLabel *lastLabelView = [[self textLabelLayersArray] objectAtIndex:arrangeLayerIndex];
+    CustomLabel *lastLabelView = [self textLabelLayersArray][arrangeLayerIndex];
 	lastLabelView.alpha=1;	
 	cameraTabButton.alpha = ALPHA0;
 	photoTabButton.alpha = ALPHA0;
@@ -2780,12 +2780,12 @@ int arrangeLayerIndex;
     [self hideAddMoreTab];
     [self showTakeOrAddPhotoLabel];
 
-    CALayer * l = [[[self  photoLayersArray] objectAtIndex:arrangeLayerIndex] layer];
+    CALayer * l = [[self  photoLayersArray][arrangeLayerIndex] layer];
     [l setMasksToBounds:YES];
     [l setCornerRadius:10];
     [l setBorderWidth:1.0];
     [l setBorderColor:[[UIColor grayColor] CGColor]];
-    [self.imgView addSubview:[[self  photoLayersArray] objectAtIndex:arrangeLayerIndex]];
+    [self.imgView addSubview:[self  photoLayersArray][arrangeLayerIndex]];
 	
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationDuration:0.4f];
@@ -2838,7 +2838,7 @@ int arrangeLayerIndex;
 	photoTouchFlag = YES;
     symbolTouchFlag= NO;
     iconTouchFlag = NO;
-    [self.imgView sendSubviewToBack:[[self  photoLayersArray] objectAtIndex:arrangeLayerIndex]];
+    [self.imgView sendSubviewToBack:[self  photoLayersArray][arrangeLayerIndex]];
 	[self.imgView bringSubviewToFront:[[self textLabelLayersArray] lastObject]];
 }
 
@@ -3112,7 +3112,7 @@ CGRect initialBounds;
 - (void)twoFingerPinch:(UIPinchGestureRecognizer *)gestureRecognizer
 {
     
-    UIImageView *lastImgView = [[self photoLayersArray] objectAtIndex:arrangeLayerIndex];
+    UIImageView *lastImgView = [self photoLayersArray][arrangeLayerIndex];
     
     if (gestureRecognizer.state == UIGestureRecognizerStateBegan)
     {
@@ -3203,7 +3203,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     draftViewController.selectedFlyerImage = [UIImage imageWithData:data];
     draftViewController.selectedFlyerTitle = globle.FlyerName;
     if([[self textLabelLayersArray] count] > 0){
-        draftViewController.selectedFlyerDescription = ((CustomLabel*)[[self textLabelLayersArray] objectAtIndex:0]).text;
+        draftViewController.selectedFlyerDescription = ((CustomLabel*)[self textLabelLayersArray][0]).text;
     }else{
         draftViewController.selectedFlyerDescription = @"";
     }
@@ -3245,7 +3245,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     
     NSLog(@"Purchase One Font Selected");
     
-    if (![demoPurchase purchaseProduct:[demoPurchase.products objectAtIndex:buttonIndex]]){
+    if (![demoPurchase purchaseProduct:(demoPurchase.products)[buttonIndex]]){
         
         // Returned NO, so notify user that In-App Purchase is Disabled in their Settings.
         UIAlertView *settingsAlert = [[UIAlertView alloc] initWithTitle:@"Allow Purchases" message:@"You must first enable In-App Purchase in your iOS Settings before making this purchase." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -3677,7 +3677,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         // Layer handling message
         
         if(layerEditMessage==nil){
-            layerEditMessage = [[[[NSBundle mainBundle] loadNibNamed:@"ShareProgressView" owner:self options:nil] objectAtIndex:0] retain];
+            layerEditMessage = [[[NSBundle mainBundle] loadNibNamed:@"ShareProgressView" owner:self options:nil][0] retain];
             [layerEditMessage setFrame:CGRectMake(layerEditMessage.frame.origin.x, 320, layerEditMessage.frame.size.width, layerEditMessage.frame.size.height+2)];
         
             // border radius
@@ -3732,7 +3732,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
             for(int text=0; text<[textLabelLayersArray count]; text++){
                 
-                UILabel *label1 = (UILabel *) [textLabelLayersArray objectAtIndex:text];
+                UILabel *label1 = (UILabel *) textLabelLayersArray[text];
                 UILabel *label = [[UILabel alloc] initWithFrame:label1.frame];
                 label.text = label1.text;
                 
@@ -3792,7 +3792,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
             
             for(int photo=0; photo<[photoLayersArray count]; photo++){
                 
-                UIImageView *img1 = (UIImageView *) [photoLayersArray objectAtIndex:photo];
+                UIImageView *img1 = (UIImageView *) photoLayersArray[photo];
                 UIImageView *img = [[UIImageView alloc] initWithImage:img1.image];
                 
                 UIButton *layerButton = [UIButton  buttonWithType:UIButtonTypeCustom];
@@ -3846,7 +3846,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
             //NSLog(@"Symbol Layers %d", [symbolLayersArray count]);
             for(int symbol=0; symbol<[symbolLayersArray count]; symbol++){
                 
-                UIImageView *img1 = (UIImageView *) [symbolLayersArray objectAtIndex:symbol];
+                UIImageView *img1 = (UIImageView *) symbolLayersArray[symbol];
                 UIImageView *img = [[UIImageView alloc] initWithImage:img1.image];
                 
                 UIButton *layerButton = [UIButton  buttonWithType:UIButtonTypeCustom];
@@ -3900,7 +3900,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
             //NSLog(@"Icon Layers %d", [iconLayersArray count]);
             for(int icon=0; icon<[iconLayersArray count]; icon++){
                 
-                UIImageView *img1 = (UIImageView *) [iconLayersArray objectAtIndex:icon];
+                UIImageView *img1 = (UIImageView *) iconLayersArray[icon];
                 UIImageView *img = [[UIImageView alloc] initWithImage:img1.image];
                 
                 UIButton *layerButton = [UIButton  buttonWithType:UIButtonTypeCustom];
@@ -4167,7 +4167,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     if([tag hasPrefix:@"111"])
     {
         // Remove layer
-        CustomLabel *label = [textLabelLayersArray objectAtIndex:index];
+        CustomLabel *label = textLabelLayersArray[index];
         [label removeFromSuperview];
         
         // Remove from Array
@@ -4175,7 +4175,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         
         // Update remaining indexes
         for(int updateIndex=0; updateIndex<[textLabelLayersArray count]; updateIndex++){
-            UIButton *layerButton = [textLabelLayersArray objectAtIndex:updateIndex];
+            UIButton *layerButton = textLabelLayersArray[updateIndex];
             layerButton.tag = [[NSString stringWithFormat:@"%@%d",@"111",updateIndex] integerValue];
             
             [textLabelLayersArray removeObjectAtIndex:updateIndex];
@@ -4193,7 +4193,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     else if([tag hasPrefix:@"222"])
     {
         // Remove layer
-        UIImageView *photo = [photoLayersArray objectAtIndex:index];
+        UIImageView *photo = photoLayersArray[index];
         [photo removeFromSuperview];
         
         // Remove from Array
@@ -4201,7 +4201,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         
         // Update remaining indexes
         for(int updateIndex=0; updateIndex<[photoLayersArray count]; updateIndex++){
-            UIButton *layerButton = [photoLayersArray objectAtIndex:updateIndex];
+            UIButton *layerButton = photoLayersArray[updateIndex];
             layerButton.tag = [[NSString stringWithFormat:@"%@%d",@"222",updateIndex] integerValue];
             
             [photoLayersArray removeObjectAtIndex:updateIndex];
@@ -4218,7 +4218,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     else if([tag hasPrefix:@"333"])
     {
         // Remove layer
-        UIImageView *symbol = [symbolLayersArray objectAtIndex:index];
+        UIImageView *symbol = symbolLayersArray[index];
         [symbol removeFromSuperview];
         
         // Remove from Array
@@ -4226,7 +4226,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         
         // Update remaining indexes
         for(int updateIndex=0; updateIndex<[symbolLayersArray count]; updateIndex++){
-            UIButton *layerButton = [symbolLayersArray objectAtIndex:updateIndex];
+            UIButton *layerButton = symbolLayersArray[updateIndex];
             layerButton.tag = [[NSString stringWithFormat:@"%@%d",@"333",updateIndex] integerValue];
             
             [symbolLayersArray removeObjectAtIndex:updateIndex];
@@ -4243,7 +4243,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     else if([tag hasPrefix:@"444"])
     {
         // Remove layer
-        UIImageView *icon = [iconLayersArray objectAtIndex:index];
+        UIImageView *icon = iconLayersArray[index];
         [icon removeFromSuperview];
         
         // Remove from Array
@@ -4251,7 +4251,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         
         // Update remaining indexes
         for(int updateIndex=0; updateIndex<[iconLayersArray count]; updateIndex++){
-            UIButton *layerButton = [iconLayersArray objectAtIndex:updateIndex];
+            UIButton *layerButton = iconLayersArray[updateIndex];
             layerButton.tag = [[NSString stringWithFormat:@"%@%d",@"444",updateIndex] integerValue];
             
             [iconLayersArray removeObjectAtIndex:updateIndex];
@@ -4669,7 +4669,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
     for(int text=0; text<[textLabelLayersArray count]; text++){
         
-        CALayer * lastLayer = [[textLabelLayersArray objectAtIndex:text] layer];
+        CALayer * lastLayer = [textLabelLayersArray[text] layer];
         [lastLayer setMasksToBounds:YES];
         [lastLayer setCornerRadius:0];
         [lastLayer setBorderWidth:0];
@@ -4679,7 +4679,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     
     for(int photo=0; photo<[photoLayersArray count]; photo++){
         
-        CALayer * lastLayer = [[photoLayersArray objectAtIndex:photo] layer];
+        CALayer * lastLayer = [photoLayersArray[photo] layer];
         [lastLayer setMasksToBounds:YES];
         [lastLayer setCornerRadius:0];
         [lastLayer setBorderWidth:0];
@@ -4688,7 +4688,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
     for(int symbol=0; symbol<[symbolLayersArray count]; symbol++){
         
-        CALayer * lastLayer = [[symbolLayersArray objectAtIndex:symbol] layer];
+        CALayer * lastLayer = [symbolLayersArray[symbol] layer];
         [lastLayer setMasksToBounds:YES];
         [lastLayer setCornerRadius:0];
         [lastLayer setBorderWidth:0];
@@ -4697,7 +4697,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     
     for(int icon=0; icon<[iconLayersArray count]; icon++){
         
-        CALayer * lastLayer = [[iconLayersArray objectAtIndex:icon] layer];
+        CALayer * lastLayer = [iconLayersArray[icon] layer];
         [lastLayer setMasksToBounds:YES];
         [lastLayer setCornerRadius:0];
         [lastLayer setBorderWidth:0];
@@ -4770,7 +4770,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 		{
             if(selectedAddMoreLayerTab == ARRANGE_LAYERTAB){
                 //[self.imgView sendSubviewToBack:[[self photoLayersArray] objectAtIndex:arrangeLayerIndex]];
-                [self.imgView bringSubviewToFront:[[self textLabelLayersArray] objectAtIndex:arrangeLayerIndex]];            
+                [self.imgView bringSubviewToFront:[self textLabelLayersArray][arrangeLayerIndex]];            
             } else{
                 //[self.imgView sendSubviewToBack:[[self photoLayersArray] lastObject]];
                 //[self.imgView bringSubviewToFront:[[self textLabelLayersArray] objectAtIndex:arrangeLayerIndex]];
@@ -4793,7 +4793,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
                  && loc.x >= ((((UIImageView *)[[self photoLayersArray] lastObject]).frame.size.width/2)))
 		{
             if(selectedAddMoreLayerTab == ARRANGE_LAYERTAB){
-                [self.imgView bringSubviewToFront:[[self photoLayersArray] objectAtIndex:arrangeLayerIndex]];
+                [self.imgView bringSubviewToFront:[self photoLayersArray][arrangeLayerIndex]];
                 //[self.imgView bringSubviewToFront:[[self textLabelLayersArray] lastObject]];
             }else{
                 [self.imgView bringSubviewToFront:[[self photoLayersArray] lastObject]];
@@ -4802,7 +4802,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 			for (UITouch *touch in touches) {
                 if(selectedAddMoreLayerTab == ARRANGE_LAYERTAB){
-                    [self dispatchFirstTouchAtPoint:[[self photoLayersArray] objectAtIndex:arrangeLayerIndex] point:[touch locationInView:self.imgView] forEvent:nil];
+                    [self dispatchFirstTouchAtPoint:[self photoLayersArray][arrangeLayerIndex] point:[touch locationInView:self.imgView] forEvent:nil];
                 }else{
                     [self dispatchFirstTouchAtPoint:[[self photoLayersArray] lastObject] point:[touch locationInView:self.imgView] forEvent:nil];
                 }
@@ -4812,7 +4812,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         else if (loc.y <= (imgView.frame.size.height-(symbolImgView.frame.size.height/2)) && symbolTouchFlag)
 		{
             if(selectedAddMoreLayerTab == ARRANGE_LAYERTAB){
-                [self.imgView bringSubviewToFront:[[self symbolLayersArray] objectAtIndex:arrangeLayerIndex]];
+                [self.imgView bringSubviewToFront:[self symbolLayersArray][arrangeLayerIndex]];
                 //[self.imgView bringSubviewToFront:[[self textLabelLayersArray] lastObject]];
             }else{
                 [self.imgView bringSubviewToFront:[[self symbolLayersArray] lastObject]];
@@ -4821,7 +4821,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 			for (UITouch *touch in touches) {
                 if(selectedAddMoreLayerTab == ARRANGE_LAYERTAB){
-                    [self dispatchFirstTouchAtPoint:[[self symbolLayersArray] objectAtIndex:arrangeLayerIndex] point:[touch locationInView:self.imgView] forEvent:nil];
+                    [self dispatchFirstTouchAtPoint:[self symbolLayersArray][arrangeLayerIndex] point:[touch locationInView:self.imgView] forEvent:nil];
                 }else{
                     [self dispatchFirstTouchAtPoint:[[self symbolLayersArray] lastObject] point:[touch locationInView:self.imgView] forEvent:nil];
                 }
@@ -4831,7 +4831,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         else if (loc.y <= (imgView.frame.size.height-(iconImgView.frame.size.height/2)) && iconTouchFlag)
 		{
             if(selectedAddMoreLayerTab == ARRANGE_LAYERTAB){
-                [self.imgView bringSubviewToFront:[[self iconLayersArray] objectAtIndex:arrangeLayerIndex]];
+                [self.imgView bringSubviewToFront:[self iconLayersArray][arrangeLayerIndex]];
                 //[self.imgView bringSubviewToFront:[[self textLabelLayersArray] lastObject]];
             }else{
                 [self.imgView bringSubviewToFront:[[self iconLayersArray] lastObject]];
@@ -4840,7 +4840,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 			for (UITouch *touch in touches) {
                 if(selectedAddMoreLayerTab == ARRANGE_LAYERTAB){
-                    [self dispatchFirstTouchAtPoint:[[self iconLayersArray] objectAtIndex:arrangeLayerIndex] point:[touch locationInView:self.imgView] forEvent:nil];
+                    [self dispatchFirstTouchAtPoint:[self iconLayersArray][arrangeLayerIndex] point:[touch locationInView:self.imgView] forEvent:nil];
                 }else{
                     [self dispatchFirstTouchAtPoint:[[self iconLayersArray] lastObject] point:[touch locationInView:self.imgView] forEvent:nil];
                 }
@@ -4870,7 +4870,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 			lableLocation = [touch locationInView:self.imgView];
             
             if(selectedAddMoreLayerTab == ARRANGE_LAYERTAB){
-                [self dispatchTouchEvent:[[self textLabelLayersArray] objectAtIndex:arrangeLayerIndex] toPosition:[touch locationInView:self.imgView]];
+                [self dispatchTouchEvent:[self textLabelLayersArray][arrangeLayerIndex] toPosition:[touch locationInView:self.imgView]];
             }else{
                 [self dispatchTouchEvent:[[self textLabelLayersArray] lastObject] toPosition:[touch locationInView:self.imgView]];
             }
@@ -4888,7 +4888,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 		for (UITouch *touch in touches){
             
             if(selectedAddMoreLayerTab == ARRANGE_LAYERTAB){
-                [self dispatchTouchEvent:[[self photoLayersArray] objectAtIndex:arrangeLayerIndex] toPosition:[touch locationInView:self.imgView]];
+                [self dispatchTouchEvent:[self photoLayersArray][arrangeLayerIndex] toPosition:[touch locationInView:self.imgView]];
             }else{
                 [self dispatchTouchEvent:[[self photoLayersArray] lastObject] toPosition:[touch locationInView:self.imgView]];
             }
@@ -4899,7 +4899,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	{
 		for (UITouch *touch in touches){
             if(selectedAddMoreLayerTab == ARRANGE_LAYERTAB){
-                [self dispatchTouchEvent:[[self symbolLayersArray] objectAtIndex:arrangeLayerIndex] toPosition:[touch locationInView:self.imgView]];
+                [self dispatchTouchEvent:[self symbolLayersArray][arrangeLayerIndex] toPosition:[touch locationInView:self.imgView]];
             }else{
                 [self dispatchTouchEvent:[[self symbolLayersArray] lastObject] toPosition:[touch locationInView:self.imgView]];
             }
@@ -4910,7 +4910,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	{
 		for (UITouch *touch in touches){
             if(selectedAddMoreLayerTab == ARRANGE_LAYERTAB){
-                [self dispatchTouchEvent:[[self iconLayersArray] objectAtIndex:arrangeLayerIndex] toPosition:[touch locationInView:self.imgView]];
+                [self dispatchTouchEvent:[self iconLayersArray][arrangeLayerIndex] toPosition:[touch locationInView:self.imgView]];
             }else{
                 [self dispatchTouchEvent:[[self iconLayersArray] lastObject] toPosition:[touch locationInView:self.imgView]];
             }
@@ -4976,7 +4976,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	}
 
 	NSString *MyFlyerPath = [usernamePath stringByAppendingString:[NSString stringWithFormat:@"Flyr/"]];
-	NSString *folderPath = [NSString pathWithComponents:[NSArray arrayWithObjects:[NSString stringWithString:[MyFlyerPath stringByStandardizingPath]],nil]];
+	NSString *folderPath = [NSString pathWithComponents:@[[NSString stringWithString:[MyFlyerPath stringByStandardizingPath]]]];
 	NSInteger imgCount;
 	NSInteger largestImgCount=-1;
 	NSArray *files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:folderPath error:nil];
@@ -5007,7 +5007,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
             NSAutoreleasePool* ap = [[NSAutoreleasePool alloc] init];
             for(int i = 0 ; i < [files count];i++)
             {
-                NSString *lastFileName = [files objectAtIndex:i];
+                NSString *lastFileName = files[i];
                 NSLog(@"%@",lastFileName);
                 lastFileName = [lastFileName stringByReplacingOccurrencesOfString:@".jpg" withString:@""];
                 lastFileName = [lastFileName stringByReplacingOccurrencesOfString:@"IMG_" withString:@""];
@@ -5027,7 +5027,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     }
 	/************************ END OF CREATE UNIQUE NAME FOR IMAGE ***********************************/
 
-	NSString *imgPath = [NSString pathWithComponents:[NSArray arrayWithObjects:[NSString stringWithString:[finalImgWritePath stringByExpandingTildeInPath]], nil]];
+	NSString *imgPath = [NSString pathWithComponents:@[[NSString stringWithString:[finalImgWritePath stringByExpandingTildeInPath]]]];
 	if (![[NSFileManager defaultManager] fileExistsAtPath:folderPath isDirectory:NULL]) {
         NSError *error;
         [[NSFileManager defaultManager] createDirectoryAtPath:folderPath withIntermediateDirectories:YES attributes:nil error:&error];
@@ -5109,8 +5109,8 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     NSData *imgData = UIImagePNGRepresentation(selectedTemplate);
     [[NSFileManager defaultManager] createFileAtPath:finalTemplatePath contents:imgData attributes:nil];
     
-    [templateDetailDictionary setObject:finalTemplatePath forKey:@"image"];
-    [detailDictionary setObject:templateDetailDictionary forKey:[NSString stringWithFormat:@"Template"]];
+    templateDetailDictionary[@"image"] = finalTemplatePath;
+    detailDictionary[[NSString stringWithFormat:@"Template"]] = templateDetailDictionary;
 
     int index = 0;
     // Get and Save label information
@@ -5133,19 +5133,19 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         }
         
         NSMutableDictionary *textDetailDictionary = [[NSMutableDictionary alloc] init];
-        [textDetailDictionary setObject:labelToStore.text forKey:@"text"];
-        [textDetailDictionary setObject:labelToStore.font.fontName forKey:@"fontname"];
-        [textDetailDictionary setObject:[NSString stringWithFormat:@"%f", labelToStore.font.pointSize] forKey:@"fontsize"];
-        [textDetailDictionary setObject:[NSString stringWithFormat:@"%f, %f, %f", red, green, blue] forKey:@"textcolor"];
-        [textDetailDictionary setObject:[NSString stringWithFormat:@"%f, %f", wht, alpha] forKey:@"textWhitecolor"];
-        [textDetailDictionary setObject:[NSString stringWithFormat:@"%f, %f", bwht, borderAlpha] forKey:@"textborderWhite"];
-        [textDetailDictionary setObject:[NSString stringWithFormat:@"%f, %f, %f", borderRed, borderGreen, borderBlue] forKey:@"textbordercolor"];
-        [textDetailDictionary setObject:[NSString stringWithFormat:@"%f", labelToStore.frame.origin.x] forKey:@"x"];
-        [textDetailDictionary setObject:[NSString stringWithFormat:@"%f", labelToStore.frame.origin.y] forKey:@"y"];
-        [textDetailDictionary setObject:[NSString stringWithFormat:@"%f", labelToStore.frame.size.width] forKey:@"width"];
-        [textDetailDictionary setObject:[NSString stringWithFormat:@"%f", labelToStore.frame.size.height] forKey:@"height"];
+        textDetailDictionary[@"text"] = labelToStore.text;
+        textDetailDictionary[@"fontname"] = labelToStore.font.fontName;
+        textDetailDictionary[@"fontsize"] = [NSString stringWithFormat:@"%f", labelToStore.font.pointSize];
+        textDetailDictionary[@"textcolor"] = [NSString stringWithFormat:@"%f, %f, %f", red, green, blue];
+        textDetailDictionary[@"textWhitecolor"] = [NSString stringWithFormat:@"%f, %f", wht, alpha];
+        textDetailDictionary[@"textborderWhite"] = [NSString stringWithFormat:@"%f, %f", bwht, borderAlpha];
+        textDetailDictionary[@"textbordercolor"] = [NSString stringWithFormat:@"%f, %f, %f", borderRed, borderGreen, borderBlue];
+        textDetailDictionary[@"x"] = [NSString stringWithFormat:@"%f", labelToStore.frame.origin.x];
+        textDetailDictionary[@"y"] = [NSString stringWithFormat:@"%f", labelToStore.frame.origin.y];
+        textDetailDictionary[@"width"] = [NSString stringWithFormat:@"%f", labelToStore.frame.size.width];
+        textDetailDictionary[@"height"] = [NSString stringWithFormat:@"%f", labelToStore.frame.size.height];
         
-        [detailDictionary setObject:textDetailDictionary forKey:[NSString stringWithFormat:@"Text-%d", index++]];
+        detailDictionary[[NSString stringWithFormat:@"Text-%d", index++]] = textDetailDictionary;
     }
 
     index = 0;
@@ -5158,13 +5158,13 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         NSData *imgData = UIImageJPEGRepresentation(photoToStore.image, 100);
         [[NSFileManager defaultManager] createFileAtPath:finalPhotoPath contents:imgData attributes:nil];
 
-        [photoDetailDictionary setObject:finalPhotoPath forKey:@"image"];
-        [photoDetailDictionary setObject:[NSString stringWithFormat:@"%f", photoToStore.frame.origin.x] forKey:@"x"];
-        [photoDetailDictionary setObject:[NSString stringWithFormat:@"%f", photoToStore.frame.origin.y] forKey:@"y"];
-        [photoDetailDictionary setObject:[NSString stringWithFormat:@"%f", photoToStore.frame.size.width] forKey:@"width"];
-        [photoDetailDictionary setObject:[NSString stringWithFormat:@"%f", photoToStore.frame.size.height] forKey:@"height"];
+        photoDetailDictionary[@"image"] = finalPhotoPath;
+        photoDetailDictionary[@"x"] = [NSString stringWithFormat:@"%f", photoToStore.frame.origin.x];
+        photoDetailDictionary[@"y"] = [NSString stringWithFormat:@"%f", photoToStore.frame.origin.y];
+        photoDetailDictionary[@"width"] = [NSString stringWithFormat:@"%f", photoToStore.frame.size.width];
+        photoDetailDictionary[@"height"] = [NSString stringWithFormat:@"%f", photoToStore.frame.size.height];
         
-        [detailDictionary setObject:photoDetailDictionary forKey:[NSString stringWithFormat:@"Photo-%d", index++]];
+        detailDictionary[[NSString stringWithFormat:@"Photo-%d", index++]] = photoDetailDictionary;
     }
     
     index = 0;
@@ -5177,13 +5177,13 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         NSData *imgData = UIImagePNGRepresentation(symbolToStore.image);
         [[NSFileManager defaultManager] createFileAtPath:finalSymbolPath contents:imgData attributes:nil];
         
-        [symbolDetailDictionary setObject:finalSymbolPath forKey:@"image"];
-        [symbolDetailDictionary setObject:[NSString stringWithFormat:@"%f", symbolToStore.frame.origin.x] forKey:@"x"];
-        [symbolDetailDictionary setObject:[NSString stringWithFormat:@"%f", symbolToStore.frame.origin.y] forKey:@"y"];
-        [symbolDetailDictionary setObject:[NSString stringWithFormat:@"%f", symbolToStore.frame.size.width] forKey:@"width"];
-        [symbolDetailDictionary setObject:[NSString stringWithFormat:@"%f", symbolToStore.frame.size.height] forKey:@"height"];
+        symbolDetailDictionary[@"image"] = finalSymbolPath;
+        symbolDetailDictionary[@"x"] = [NSString stringWithFormat:@"%f", symbolToStore.frame.origin.x];
+        symbolDetailDictionary[@"y"] = [NSString stringWithFormat:@"%f", symbolToStore.frame.origin.y];
+        symbolDetailDictionary[@"width"] = [NSString stringWithFormat:@"%f", symbolToStore.frame.size.width];
+        symbolDetailDictionary[@"height"] = [NSString stringWithFormat:@"%f", symbolToStore.frame.size.height];
         
-        [detailDictionary setObject:symbolDetailDictionary forKey:[NSString stringWithFormat:@"Symbol-%d", index++]];
+        detailDictionary[[NSString stringWithFormat:@"Symbol-%d", index++]] = symbolDetailDictionary;
     }
     
     index = 0;
@@ -5196,13 +5196,13 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         NSData *imgData = UIImagePNGRepresentation(iconToStore.image);
         [[NSFileManager defaultManager] createFileAtPath:finalIconPath contents:imgData attributes:nil];
         
-        [iconDetailDictionary setObject:finalIconPath forKey:@"image"];
-        [iconDetailDictionary setObject:[NSString stringWithFormat:@"%f", iconToStore.frame.origin.x] forKey:@"x"];
-        [iconDetailDictionary setObject:[NSString stringWithFormat:@"%f", iconToStore.frame.origin.y] forKey:@"y"];
-        [iconDetailDictionary setObject:[NSString stringWithFormat:@"%f", iconToStore.frame.size.width] forKey:@"width"];
-        [iconDetailDictionary setObject:[NSString stringWithFormat:@"%f", iconToStore.frame.size.height] forKey:@"height"];
+        iconDetailDictionary[@"image"] = finalIconPath;
+        iconDetailDictionary[@"x"] = [NSString stringWithFormat:@"%f", iconToStore.frame.origin.x];
+        iconDetailDictionary[@"y"] = [NSString stringWithFormat:@"%f", iconToStore.frame.origin.y];
+        iconDetailDictionary[@"width"] = [NSString stringWithFormat:@"%f", iconToStore.frame.size.width];
+        iconDetailDictionary[@"height"] = [NSString stringWithFormat:@"%f", iconToStore.frame.size.height];
         
-        [detailDictionary setObject:iconDetailDictionary forKey:[NSString stringWithFormat:@"Icon-%d", index++]];
+        detailDictionary[[NSString stringWithFormat:@"Icon-%d", index++]] = iconDetailDictionary;
     }
 
     //NSLog(@"DetailDictionary: %@", detailDictionary);
@@ -5220,8 +5220,8 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     NSMutableArray *array = [[[NSMutableArray alloc] init] autorelease];
     if ([OldDetail count] > 0) {
 
-        [array addObject:[OldDetail objectAtIndex:0]];
-        globle.FlyerName = [OldDetail objectAtIndex:0];
+        [array addObject:OldDetail[0]];
+        globle.FlyerName = OldDetail[0];
     }else{
         [array addObject:@""];
          globle.FlyerName =@"";
@@ -5229,7 +5229,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     
     if([[self textLabelLayersArray] count] > 0){
         //NSLog(@"%@", ((CustomLabel*)[[self textLabelLayersArray] objectAtIndex:0]).text);
-        [array addObject:((CustomLabel*)[[self textLabelLayersArray] objectAtIndex:0]).text];
+        [array addObject:((CustomLabel*)[self textLabelLayersArray][0]).text];
     }else{
         [array addObject:@""];
     }
@@ -5310,7 +5310,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
             
         } else {
             
-            NSString *remainingFontCount = [post objectForKey:COLUMN_REMINING_FONT_COUNT];
+            NSString *remainingFontCount = post[COLUMN_REMINING_FONT_COUNT];
             if(!remainingFontCount){
                 return NO;
             }else{
@@ -5345,7 +5345,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         
     } else {
         
-        NSDictionary *json = [post objectForKey:COLUMN_JSON];
+        NSDictionary *json = post[COLUMN_JSON];
         if(!json){
             return NO;
         } else {
@@ -5354,7 +5354,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
             NSString *key2 = [PRODUCT_FOUR_PACK_FONT stringByReplacingOccurrencesOfString:@"." withString:@""];
             NSString *key3 = [PRODUCT_FULL_FONT stringByReplacingOccurrencesOfString:@"." withString:@""];
             
-            if([json objectForKey:key1] || [json objectForKey:key2] || [json objectForKey:key3]){
+            if(json[key1] || json[key2] || json[key3]){
                 return YES;
             }else{
                 return NO;
@@ -5393,8 +5393,8 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         demoPurchase.delegate = self;
         demoPurchase.customIndex = button.tag;
         isPurchased = NO;
-        [demoPurchase requestProduct:[NSArray arrayWithObjects:PRODUCT_TEMPLATE, PRODUCT_FULL_TEMPLATE,
-                                  PRODUCT_ALL_BUNDLE, nil]];
+        [demoPurchase requestProduct:@[PRODUCT_TEMPLATE, PRODUCT_FULL_TEMPLATE,
+                                  PRODUCT_ALL_BUNDLE]];
     }else{
         [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
     }
@@ -5414,7 +5414,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
           demoPurchase.customIndex = button.tag;
           isPurchased = NO;
     
-          [demoPurchase requestProduct:[NSArray arrayWithObjects:PRODUCT_SYMBOL_SELETED,PRODUCT_SYMBOL_ALL,PRODUCT_ALL_BUNDLE, nil]];
+          [demoPurchase requestProduct:@[PRODUCT_SYMBOL_SELETED,PRODUCT_SYMBOL_ALL,PRODUCT_ALL_BUNDLE]];
       }else{
           [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
       }
@@ -5434,7 +5434,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         demoPurchase.delegate = self;
         demoPurchase.customIndex = button.tag;
         isPurchased = NO;
-        [demoPurchase requestProduct:[NSArray arrayWithObjects:PRODUCT_ICON_SELETED,PRODUCT_ICON_ALL,PRODUCT_ALL_BUNDLE, nil]];
+        [demoPurchase requestProduct:@[PRODUCT_ICON_SELETED,PRODUCT_ICON_ALL,PRODUCT_ALL_BUNDLE]];
     }else{
         [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
     }
@@ -5453,7 +5453,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         demoPurchase.customIndex = button.tag;
         isPurchased = NO;
 
-        [demoPurchase requestProduct:[NSArray arrayWithObjects:PRODUCT_FONT, PRODUCT_FULL_FONT, PRODUCT_ALL_BUNDLE, nil]];
+        [demoPurchase requestProduct:@[PRODUCT_FONT, PRODUCT_FULL_FONT, PRODUCT_ALL_BUNDLE]];
     }else{
         [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
     }
@@ -5473,8 +5473,8 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         demoPurchase.customIndex = button.tag;
         isPurchased = NO;
 
-        [demoPurchase requestProduct:[NSArray arrayWithObjects:PRODUCT_FONT_COLOR, PRODUCT_FULL_FONT_COLOR,
-                                  PRODUCT_ALL_BUNDLE, nil]];
+        [demoPurchase requestProduct:@[PRODUCT_FONT_COLOR, PRODUCT_FULL_FONT_COLOR,
+                                  PRODUCT_ALL_BUNDLE]];
     }else{
         [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
     }
@@ -5492,8 +5492,8 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
          demoPurchase.delegate = self;
          demoPurchase.customIndex = button.tag;
          isPurchased = NO;
-         [demoPurchase requestProduct:[NSArray arrayWithObjects:PRODUCT_FONT_BORDER_COLOR, PRODUCT_FULL_FONT_BORDER_COLOR,
-                                  PRODUCT_ALL_BUNDLE, nil]];
+         [demoPurchase requestProduct:@[PRODUCT_FONT_BORDER_COLOR, PRODUCT_FULL_FONT_BORDER_COLOR,
+                                  PRODUCT_ALL_BUNDLE]];
      }else{
          [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
      }
@@ -5512,8 +5512,8 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
          demoPurchase.customIndex = button.tag;
          isPurchased = NO;
 
-         [demoPurchase requestProduct:[NSArray arrayWithObjects:PRODUCT_FLYER_BORDER_COLOR,
-                                  PRODUCT_FULL_FLYER_BORDER_COLOR, PRODUCT_ALL_BUNDLE, nil]];
+         [demoPurchase requestProduct:@[PRODUCT_FLYER_BORDER_COLOR,
+                                  PRODUCT_FULL_FLYER_BORDER_COLOR, PRODUCT_ALL_BUNDLE]];
      }else{
          [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
      }
@@ -5585,7 +5585,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
         } else {
             
-            newInAppDictionary = [post objectForKey:COLUMN_JSON];
+            newInAppDictionary = post[COLUMN_JSON];
         }
         
         if(!newInAppDictionary){
@@ -5788,8 +5788,8 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     
     // UPDATE RECORD IN NSUserDefaults
     NSMutableDictionary *inAppDictionary = [self getInAppDictionary];
-    [inAppDictionary setObject:@"1" forKey:[productId stringByReplacingOccurrencesOfString:@"." withString:@""]];
-    [inAppDictionary setObject:@"1" forKey:[[NSString stringWithFormat:@"%@%d", productPrefix, index] stringByReplacingOccurrencesOfString:@"." withString:@""]];
+    inAppDictionary[[productId stringByReplacingOccurrencesOfString:@"." withString:@""]] = @"1";
+    inAppDictionary[[[NSString stringWithFormat:@"%@%d", productPrefix, index] stringByReplacingOccurrencesOfString:@"." withString:@""]] = @"1";
     [self setInAppDictionary:inAppDictionary];
     
     // UPDATE RECORD to PARSE
@@ -5856,7 +5856,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
  */
 -(BOOL)isProductPurchased:(NSString *)productToCheck{
     NSMutableDictionary *inAppDictionary = [self getInAppDictionary];
-    if([inAppDictionary objectForKey:productToCheck]){
+    if(inAppDictionary[productToCheck]){
         return YES;
     }
     
@@ -5884,10 +5884,10 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
                 post = [PFObject objectWithClassName:class];
                 
                 PFUser *user = [PFUser currentUser];
-                [post setObject:user forKey:COLUMN_USER];
+                post[COLUMN_USER] = user;
             }
 
-            [post setObject:keyValuePair forKey:COLUMN_JSON];
+            post[COLUMN_JSON] = keyValuePair;
             [post saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 if (!error) {
                     NSLog(@"Product Purchased");

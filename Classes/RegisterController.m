@@ -212,7 +212,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     [query whereKey:@"username" equalTo:userName];
     [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
         
-        NSString *dbUsername = [object objectForKey:@"username"];
+        NSString *dbUsername = object[@"username"];
         
         if(dbUsername){
             username.text = userName;
@@ -250,7 +250,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
             //get facebook app id
             NSString *path = [[NSBundle mainBundle] pathForResource: @"Flyr-Info" ofType: @"plist"];
             NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile: path];
-            appDelegate.facebook = [[Facebook alloc] initWithAppId:[dict objectForKey: @"FacebookAppID"] andDelegate:self];
+            appDelegate.facebook = [[Facebook alloc] initWithAppId:dict[@"FacebookAppID"] andDelegate:self];
         }
         
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -265,8 +265,8 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 
 
         } else {
-            [appDelegate.facebook authorize:[NSArray arrayWithObjects: @"read_stream",
-                                             @"publish_stream", @"email", nil]];
+            [appDelegate.facebook authorize:@[@"read_stream",
+                                             @"publish_stream", @"email"]];
         }
     }else{
         [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
@@ -277,7 +277,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 -(void)onSignUpFacebook:(BOOL)overloaded result:(id)result{
     if ([result isKindOfClass:[NSDictionary class]])
     {
-        NSString *email = [result objectForKey: @"email"];
+        NSString *email = result[@"email"];
         [self signUp:YES username:email password:@"null"];
     }
 }
@@ -347,7 +347,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
                         
                     }else if ([arrayOfAccounts count] > 0) {
                         // Keep it simple, use the first account available
-                        ACAccount *acct = [arrayOfAccounts objectAtIndex:0];
+                        ACAccount *acct = arrayOfAccounts[0];
                         
                         //Convert twitter username to email
                         NSString *twitterUser = [AccountController getPathFromEmail:[acct username]];
@@ -450,8 +450,8 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     user.username = [userName lowercaseString];
     user.password = pwd;
     user.email = email.text;
-    [user setObject:name.text forKey:@"name"];
-    [user setObject:phno.text forKey:@"contact"];
+    user[@"name"] = name.text;
+    user[@"contact"] = phno.text;
     
     [[NSUserDefaults standardUserDefaults]  setObject:userName forKey:@"User"];
     [[NSUserDefaults standardUserDefaults]  setObject:pwd forKey:@"Password"];
@@ -463,7 +463,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (error) {
             
-            NSString *errorValue = [error.userInfo objectForKey:@"error"];
+            NSString *errorValue = (error.userInfo)[@"error"];
             [self showAlert:@"Warning!" message:errorValue];
             [self removeLoadingView];
 
@@ -584,7 +584,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
                     
                     for(int i = 0; i < accountsArray.count; i++) {
                         
-                        ACAccount *twitterAccount = [accountsArray objectAtIndex:i];
+                        ACAccount *twitterAccount = accountsArray[i];
                         NSString *userID = [[twitterAccount valueForKey:@"properties"] valueForKey:@"user_id"];
                         
                         if([userID isEqualToString:userId]) {
@@ -670,7 +670,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     //create username array
     NSMutableArray *accountArray = [[NSMutableArray alloc] init];
     for(int i = 0 ; i < accounts.count ; i++) {
-        ACAccount *account = [accounts objectAtIndex:i];
+        ACAccount *account = accounts[i];
         [accountArray addObject:account.username];
         
         [tAccounts addObject:account];
@@ -693,7 +693,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
         UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:@"Choose Account" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles: nil];
         
         for (int i = 0; i < accountArray.count; i++) {
-            [actionSheet addButtonWithTitle:[accountArray objectAtIndex:i]];
+            [actionSheet addButtonWithTitle:accountArray[i]];
         }
         
         [actionSheet addButtonWithTitle:@"Cancel"];
@@ -724,7 +724,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     if(buttonIndex != twitterAccounts.count) {
         
         //save to NSUserDefault
-        ACAccount *account = [twitterAccounts objectAtIndex:buttonIndex];
+        ACAccount *account = twitterAccounts[buttonIndex];
         
         //Convert twitter username to email
         NSString *twitterUser = [AccountController getPathFromEmail:[account username]];

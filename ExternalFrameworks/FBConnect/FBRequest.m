@@ -163,9 +163,7 @@ static NSString *const kPostHTTPMethod = @"POST";
 + (FBRequest*)requestForMyFriends {
     return [[[FBRequest alloc] initWithSession:[FBSession activeSessionIfOpen]
                                      graphPath:@"me/friends"
-                                    parameters:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                @"id,name,username,first_name,last_name", @"fields",
-                                                nil]
+                                    parameters:@{@"fields": @"id,name,username,first_name,last_name"}
                                     HTTPMethod:nil]
             autorelease];
 }
@@ -174,7 +172,7 @@ static NSString *const kPostHTTPMethod = @"POST";
 {
     NSString *graphPath = @"me/photos";
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
-    [parameters setObject:photo forKey:@"picture"];
+    parameters[@"picture"] = photo;
     
     FBRequest *request = [[[FBRequest alloc] initWithSession:[FBSession activeSessionIfOpen]
                                                    graphPath:graphPath
@@ -229,8 +227,7 @@ static NSString *const kPostHTTPMethod = @"POST";
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObject:message forKey:@"message"];
     // if we have a place object, use it
     if (place) {
-        [params setObject:[FBUtility stringFBIDFromObject:place]
-                   forKey:@"place"];
+        params[@"place"] = [FBUtility stringFBIDFromObject:place];
     }
     // ditto tags
     if (tags) {
@@ -241,8 +238,7 @@ static NSString *const kPostHTTPMethod = @"POST";
             format = @",%@";
         }
         if ([tagsValue length]) {
-            [params setObject:tagsValue
-                       forKey:@"tags"];
+            params[@"tags"] = tagsValue;
         }
     }
     
@@ -267,13 +263,12 @@ static NSString *const kPostHTTPMethod = @"POST";
                                       searchText:(NSString*)searchText
 {
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
-    [parameters setObject:@"place" forKey:@"type"];
-    [parameters setObject:[NSString stringWithFormat:@"%d", limit] forKey:@"limit"];
-    [parameters setObject:[NSString stringWithFormat:@"%lf,%lf", coordinate.latitude, coordinate.longitude]
-                   forKey:@"center"];
-    [parameters setObject:[NSString stringWithFormat:@"%d", radius] forKey:@"distance"];
+    parameters[@"type"] = @"place";
+    parameters[@"limit"] = [NSString stringWithFormat:@"%d", limit];
+    parameters[@"center"] = [NSString stringWithFormat:@"%lf,%lf", coordinate.latitude, coordinate.longitude];
+    parameters[@"distance"] = [NSString stringWithFormat:@"%d", radius];
     if ([searchText length]) {
-        [parameters setObject:searchText forKey:@"q"];
+        parameters[@"q"] = searchText;
     }
     
     FBRequest *request = [[[FBRequest alloc] initWithSession:[FBSession activeSessionIfOpen]
@@ -295,7 +290,7 @@ static NSString *const kPostHTTPMethod = @"POST";
         graphObject.provisionedForPost = YES;
         NSMutableDictionary<FBGraphObject> *parameters = [FBGraphObject graphObject];
         NSString *graphPath = [NSString stringWithFormat:@"me/objects/%@", graphObject.type];
-        [parameters setObject:graphObject forKey:@"object"];
+        parameters[@"object"] = graphObject;
         FBRequest *request = [[[FBRequest alloc] initForPostWithSession:[FBSession activeSessionIfOpen]
                                                               graphPath:graphPath
                                                             graphObject:parameters]
@@ -357,7 +352,7 @@ static NSString *const kPostHTTPMethod = @"POST";
         graphObject.provisionedForPost = YES;
         NSMutableDictionary<FBGraphObject> *parameters = [FBGraphObject graphObject];
         NSString *graphPath = objectId;
-        [parameters setObject:graphObject forKey:@"object"];
+        parameters[@"object"] = graphObject;
         FBRequest *request = [[[FBRequest alloc] initForPostWithSession:[FBSession activeSessionIfOpen]
                                                               graphPath:graphPath
                                                             graphObject:parameters]
@@ -499,7 +494,7 @@ static NSString *const kPostHTTPMethod = @"POST";
     
     NSMutableArray* pairs = [NSMutableArray array];
     for (NSString* key in [params keyEnumerator]) {
-        id value = [params objectForKey:key];
+        id value = params[key];
         if ([value isKindOfClass:[UIImage class]]
             || [value isKindOfClass:[NSData class]]) {
             if ([httpMethod isEqualToString:kGetHTTPMethod]) {

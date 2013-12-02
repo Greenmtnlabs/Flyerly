@@ -107,7 +107,7 @@
 
 // Adds new results to the table and attempts to preserve visual context in the table
 - (void)addResultsAndUpdateView:(NSDictionary*)results {
-    NSArray *data = (NSArray *)[results objectForKey:@"data"];
+    NSArray *data = (NSArray *)results[@"data"];
     if (data.count == 0) {
         // If we got no data, stop following paging links.
         self.nextLink = nil;
@@ -121,8 +121,8 @@
         }
         return;
     } else {
-        NSDictionary *paging = (NSDictionary *)[results objectForKey:@"paging"];
-        NSString *next = (NSString *)[paging objectForKey:@"next"];
+        NSDictionary *paging = (NSDictionary *)results[@"paging"];
+        NSString *next = (NSString *)paging[@"next"];
         self.nextLink = next;
     }
     
@@ -147,7 +147,7 @@
         NSArray *visibleRowIndexPaths = [self.tableView indexPathsForVisibleRows];
         if (visibleRowIndexPaths.count > 0) {
             int anchorRowIndex = (visibleRowIndexPaths.count > 1) ? 1 : 0;
-            NSIndexPath *anchorIndexPath = [visibleRowIndexPaths objectAtIndex:anchorRowIndex];
+            NSIndexPath *anchorIndexPath = visibleRowIndexPaths[anchorRowIndex];
             id anchorObject = [self.dataSource itemAtIndexPath:anchorIndexPath];
 
             // What is its rect, and what is the overall contentOffset of the table?
@@ -269,7 +269,7 @@
     
     NSArray *data = nil;    
     if (!error && [result isKindOfClass:[NSDictionary class]]) {
-        id rawData = [resultDictionary objectForKey:@"data"];
+        id rawData = resultDictionary[@"data"];
         if ([rawData isKindOfClass:[NSArray class]]) {
             data = (NSArray *)rawData;
         }

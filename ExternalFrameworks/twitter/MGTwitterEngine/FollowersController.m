@@ -201,7 +201,7 @@
     
 	if(indexPath.row < [_users count])
 	{
-		NSDictionary *userData = [_users objectAtIndex:indexPath.row];
+		NSDictionary *userData = _users[indexPath.row];
 		
 		
 		//Set userpic
@@ -212,11 +212,11 @@
 		UILabel *label;
 		//Set user name
 		label = (UILabel *)[cell viewWithTag:NAME_TAG];
-		label.text = [userData objectForKey:@"screen_name"];
+		label.text = userData[@"screen_name"];
 		
 		//Set real user name
 		label = (UILabel *)[cell viewWithTag:REAL_NAME_TAG];
-		label.text = [userData objectForKey:@"name"];
+		label.text = userData[@"name"];
 	} 
 	else
 	{

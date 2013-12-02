@@ -82,7 +82,7 @@
 	[MGTwitterEngine setUsername:userName password:passWord remember:[rememberSwitch isOn]];
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"AccountChanged" object:nil 
-													  userInfo:[NSDictionary dictionaryWithObjectsAndKeys:userName, @"login", passWord, @"password", nil]];
+													  userInfo:@{@"login": userName, @"password": passWord}];
 	
 	MGTwitterEngine *mte = [[MGTwitterEngine alloc]initWithDelegate:self];
 	mte.loginController =self;

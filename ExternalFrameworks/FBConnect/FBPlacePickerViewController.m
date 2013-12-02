@@ -183,7 +183,7 @@ static NSString *defaultImageName = @"FacebookSDKResources.bundle/FBPlacePickerV
 {
     NSArray *selection = self.selectionManager.selection;
     if ([selection count]) {
-        return [selection objectAtIndex:0];
+        return selection[0];
     } else {
         return nil;
     }
@@ -223,7 +223,7 @@ static NSString *defaultImageName = @"FacebookSDKResources.bundle/FBPlacePickerV
     // in 2 seconds, we reset so the next change will cause an immediate re-query.)
     if (!self.searchTextChangedTimer) {
         self.searchTextChangedTimer = [self createSearchTextChangedTimer];
-        [self loadDataPostThrottleSkippingRoundTripIfCached:[NSNumber numberWithBool:YES]];
+        [self loadDataPostThrottleSkippingRoundTripIfCached:@YES];
     } else {
         _hasSearchTextChangedSinceLastQuery = YES;
     }
@@ -336,7 +336,7 @@ static NSString *defaultImageName = @"FacebookSDKResources.bundle/FBPlacePickerV
                         @"were_here_count",
                         nil];
     
-    [request.parameters setObject:fields forKey:@"fields"];
+    (request.parameters)[@"fields"] = fields;
     
     return request;
 }
@@ -376,7 +376,7 @@ static NSString *defaultImageName = @"FacebookSDKResources.bundle/FBPlacePickerV
 - (void)searchTextChangedTimerFired:(NSTimer *)timer
 {
     if (_hasSearchTextChangedSinceLastQuery) {
-        [self loadDataPostThrottleSkippingRoundTripIfCached:[NSNumber numberWithBool:YES]];
+        [self loadDataPostThrottleSkippingRoundTripIfCached:@YES];
     } else {
         // Nothing has changed in 2 seconds. Invalidate and forget about this timer.
         // Next time the user types, we will fire a query immediately again.
@@ -426,7 +426,7 @@ static NSString *defaultImageName = @"FacebookSDKResources.bundle/FBPlacePickerV
                       parameters:@{ FBInsightsEventParameterDialogOutcome : (cancelled
                                             ? FBInsightsDialogOutcomeValue_Cancelled
                                             : FBInsightsDialogOutcomeValue_Completed),
-                                    @"num_places_picked" : [NSNumber numberWithUnsignedInteger:self.selection.count]
+                                    @"num_places_picked" : @(self.selection.count)
                                   }
                          session:self.session];
 }
@@ -496,8 +496,8 @@ static NSString *defaultImageName = @"FacebookSDKResources.bundle/FBPlacePickerV
     if ([picture isKindOfClass:[NSString class]]) {
         return picture;
     }
-    id data = [picture objectForKey:@"data"];
-    return [data objectForKey:@"url"];
+    id data = picture[@"data"];
+    return data[@"url"];
 }
 
 #pragma mark FBGraphObjectPagingLoaderDelegate members
@@ -537,7 +537,7 @@ static NSString *defaultImageName = @"FacebookSDKResources.bundle/FBPlacePickerV
 
     // if our current display is from cache, then kick-off a near-term refresh
     if (pagingLoader.isResultFromCache) {
-        [self loadDataPostThrottleSkippingRoundTripIfCached:[NSNumber numberWithBool:NO]];
+        [self loadDataPostThrottleSkippingRoundTripIfCached:@NO];
     }    
 }
 

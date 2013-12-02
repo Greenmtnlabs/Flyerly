@@ -493,7 +493,7 @@ typedef enum FBRequestConnectionState {
          skipRoundtripIfCached:(BOOL)skipRoundtripIfCached
 {
     if ([self.requests count] == 1) {
-        FBRequestMetadata *firstMetadata = [self.requests objectAtIndex:0];
+        FBRequestMetadata *firstMetadata = (self.requests)[0];
         if ([firstMetadata.request delegate]) {
             self.deprecatedRequest = firstMetadata.request;
 #pragma GCC diagnostic push
@@ -633,7 +633,7 @@ typedef enum FBRequestConnectionState {
     }
 
     if ([requests count] == 1) {
-        FBRequestMetadata *metadata = [requests objectAtIndex:0];
+        FBRequestMetadata *metadata = requests[0];
         NSURL *url = [NSURL URLWithString:[self urlStringForSingleRequest:metadata.request forBatch:NO]];
         request = [NSMutableURLRequest requestWithURL:url
                                           cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
@@ -831,23 +831,23 @@ typedef enum FBRequestConnectionState {
     NSMutableDictionary *requestElement = [[[NSMutableDictionary alloc] init] autorelease];
 
     if (metadata.batchEntryName) {
-        [requestElement setObject:metadata.batchEntryName forKey:@"name"];
+        requestElement[@"name"] = metadata.batchEntryName;
     }
 
     NSString *token = metadata.request.session.accessTokenData.accessToken;
     if (token) {
-        [metadata.request.parameters setObject:token forKey:kAccessTokenKey];
+        (metadata.request.parameters)[kAccessTokenKey] = token;
         [self registerTokenToOmitFromLog:token];
     }
 
     NSString *urlString = [self urlStringForSingleRequest:metadata.request forBatch:YES];
-    [requestElement setObject:urlString forKey:kBatchRelativeURLKey];
-    [requestElement setObject:metadata.request.HTTPMethod forKey:kBatchMethodKey];
+    requestElement[kBatchRelativeURLKey] = urlString;
+    requestElement[kBatchMethodKey] = metadata.request.HTTPMethod;
 
     NSMutableString *attachmentNames = [NSMutableString string];
 
     for (id key in [metadata.request.parameters keyEnumerator]) {
-        NSObject *value = [metadata.request.parameters objectForKey:key];
+        NSObject *value = (metadata.request.parameters)[key];
         if ([self isAttachment:value]) {
             NSString *name = [NSString stringWithFormat:@"%@%d",
                               kBatchFileNamePrefix,
@@ -876,11 +876,11 @@ typedef enum FBRequestConnectionState {
               value];
              delimiter = @"&";
          }];
-        [requestElement setObject:bodyValue forKey:@"body"];
+        requestElement[@"body"] = bodyValue;
     }
 
     if ([attachmentNames length]) {
-        [requestElement setObject:attachmentNames forKey:kBatchAttachmentKey];
+        requestElement[kBatchAttachmentKey] = attachmentNames;
     }
 
     [batch addObject:requestElement];
@@ -901,7 +901,7 @@ typedef enum FBRequestConnectionState {
     // key is name for both, first case is string which we can print, second pass grabs object
     if (addFormData) {
         for (NSString *key in [attachments keyEnumerator]) {
-            NSObject *value = [attachments objectForKey:key];
+            NSObject *value = attachments[key];
             if ([value isKindOfClass:[NSString class]]) {
                 [body appendWithKey:key formValue:(NSString *)value logger:logger];
             }
@@ -909,7 +909,7 @@ typedef enum FBRequestConnectionState {
     }
 
     for (NSString *key in [attachments keyEnumerator]) {
-        NSObject *value = [attachments objectForKey:key];
+        NSObject *value = attachments[key];
         if ([value isKindOfClass:[UIImage class]]) {
             [body appendWithKey:key imageValue:(UIImage *)value logger:logger];
         } else if ([value isKindOfClass:[NSData class]]) {
@@ -934,19 +934,19 @@ typedef enum FBRequestConnectionState {
             // We need to pass all properties of this object in key[propertyName] format.
             for (NSString *propertyName in refObject) {
                 NSString *subKey = [NSString stringWithFormat:@"%@[%@]", key, propertyName];
-                id subValue = [refObject objectForKey:propertyName];
+                id subValue = refObject[propertyName];
                 // Note that passByValue is not inherited by subkeys.
                 [self processGraphObjectPropertyKey:subKey value:subValue action:action passByValue:NO];
             }
         } else {
             // Normal case is passing objects by reference, so just pass the ID or URL, if any.
             NSString *subValue;
-            if ((subValue = [refObject objectForKey:@"id"])) {          // fbid
+            if ((subValue = refObject[@"id"])) {          // fbid
                 if ([subValue isKindOfClass:[NSDecimalNumber class]]) {
                     subValue = [(NSDecimalNumber*)subValue stringValue];
                 }
                 action(key, subValue);
-            } else if ((subValue = [refObject objectForKey:@"url"])) {  // canonical url (external)
+            } else if ((subValue = refObject[@"url"])) {  // canonical url (external)
                 action(key, subValue);
             }
         }
@@ -961,7 +961,7 @@ typedef enum FBRequestConnectionState {
         int count = array.count;
         for (int i = 0; i < count; ++i) {
             NSString *subKey = [NSString stringWithFormat:@"%@[%d]", key, i];
-            id subValue = [array objectAtIndex:i];
+            id subValue = array[i];
             [self processGraphObjectPropertyKey:subKey value:subValue action:action passByValue:passByValue];
         }
     }
@@ -1107,8 +1107,8 @@ typedef enum FBRequestConnectionState {
         // response is the entry, so put it in a dictionary under "body" and add
         // that to array of responses.
         NSMutableDictionary *result = [[[NSMutableDictionary alloc] init] autorelease];
-        [result setObject:[NSNumber numberWithInt:statusCode] forKey:@"code"];
-        [result setObject:response forKey:@"body"];
+        result[@"code"] = @(statusCode);
+        result[@"body"] = response;
 
         NSMutableArray *mutableResults = [[[NSMutableArray alloc] init] autorelease];
         [mutableResults addObject:result];
@@ -1126,12 +1126,12 @@ typedef enum FBRequestConnectionState {
                 NSDictionary *itemDictionary = (NSDictionary *)item;
                 NSMutableDictionary *result = [[[NSMutableDictionary alloc] init] autorelease];
                 for (NSString *key in [itemDictionary keyEnumerator]) {
-                    id value = [itemDictionary objectForKey:key];
+                    id value = itemDictionary[key];
                     if ([key isEqualToString:@"body"]) {
                         id body = [self parseJSONOrOtherwise:value error:&batchResultError];
-                        [result setObject:body forKey:key];
+                        result[key] = body;
                     } else {
-                        [result setObject:value forKey:key];
+                        result[key] = value;
                     }
                 }
                 [mutableResults addObject:result];
@@ -1165,9 +1165,7 @@ typedef enum FBRequestConnectionState {
             // we round-trip our hand-wired response through the parser in order to remain
             // consistent with the rest of the output of this function (note, if perf turns out
             // to be a problem -- unlikely -- we can return the following dictionary outright)
-            NSDictionary *original = [NSDictionary dictionaryWithObjectsAndKeys:
-                                      utf8, FBNonJSONResponseProperty,
-                                      nil];
+            NSDictionary *original = @{FBNonJSONResponseProperty: utf8};
             NSString *jsonrep = [FBUtility simpleJSONEncode:original];
             NSError *reparseError = nil;
             parsed = [FBUtility simpleJSONDecode:jsonrep error:&reparseError];
@@ -1183,10 +1181,10 @@ typedef enum FBRequestConnectionState {
                            results:(NSArray *)results
                            orError:(NSError *)error
 {
-    id result = [results objectAtIndex:0];
+    id result = results[0];
     if ([result isKindOfClass:[NSDictionary class]]) {
         NSDictionary *resultDictionary = (NSDictionary *)result;
-        result = [resultDictionary objectForKey:@"body"];
+        result = resultDictionary[@"body"];
     }
 
     id<FBRequestDelegate> delegate = [self.deprecatedRequest delegate];
@@ -1232,19 +1230,19 @@ typedef enum FBRequestConnectionState {
     // Unpack FBErrorParsedJSONResponseKey array if present
     id parsedResponse;
     if ((parsedResponse = itemError.userInfo) && // do we have an error with userInfo
-        (parsedResponse = [parsedResponse objectForKey:FBErrorParsedJSONResponseKey]) && // response present?
+        (parsedResponse = parsedResponse[FBErrorParsedJSONResponseKey]) && // response present?
         ([parsedResponse isKindOfClass:[NSArray class]])) { // array?
         id newValue = nil;
         // if we successfully spelunk this far, then we don't want to return FBErrorParsedJSONResponseKey as is
         // but if there is an empty array here, then we are better off nil-ing the key
         if ([parsedResponse count]) {
-            newValue = [parsedResponse objectAtIndex:0];
+            newValue = parsedResponse[0];
         }
         itemError = [self errorWithCode:itemError.code
-                             statusCode:[[itemError.userInfo objectForKey:FBErrorHTTPStatusCodeKey] intValue]
+                             statusCode:[(itemError.userInfo)[FBErrorHTTPStatusCodeKey] intValue]
                      parsedJSONResponse:newValue
-                             innerError:[itemError.userInfo objectForKey:FBErrorInnerErrorKey]
-                                message:[itemError.userInfo objectForKey:NSLocalizedDescriptionKey]];
+                             innerError:(itemError.userInfo)[FBErrorInnerErrorKey]
+                                message:(itemError.userInfo)[NSLocalizedDescriptionKey]];
     }
     return itemError;
 
@@ -1254,8 +1252,8 @@ typedef enum FBRequestConnectionState {
 {
     int count = [self.requests count];
     for (int i = 0; i < count; i++) {
-        FBRequestMetadata *metadata = [self.requests objectAtIndex:i];
-        id result = error ? nil : [results objectAtIndex:i];
+        FBRequestMetadata *metadata = (self.requests)[i];
+        id result = error ? nil : results[i];
         NSError *itemError = error ? error : [self errorFromResult:result];
         
         // Describes the cleaned up NSError to return back to callbacks.
@@ -1264,7 +1262,7 @@ typedef enum FBRequestConnectionState {
         id body = nil;
         if (!itemError && [result isKindOfClass:[NSDictionary class]]) {
             NSDictionary *resultDictionary = (NSDictionary *)result;
-            body = [FBGraphObject graphObjectWrappingDictionary:[resultDictionary objectForKey:@"body"]];
+            body = [FBGraphObject graphObjectWrappingDictionary:resultDictionary[@"body"]];
         }
         
         int resultIndex = error == itemError ? i : 0;
@@ -1358,10 +1356,10 @@ typedef enum FBRequestConnectionState {
     if ([idResult isKindOfClass:[NSDictionary class]]) {
         NSDictionary *dictionary = (NSDictionary *)idResult;
 
-        if ([dictionary objectForKey:@"error"] ||
-            [dictionary objectForKey:@"error_code"] ||
-            [dictionary objectForKey:@"error_msg"] ||
-            [dictionary objectForKey:@"error_reason"]) {
+        if (dictionary[@"error"] ||
+            dictionary[@"error_code"] ||
+            dictionary[@"error_msg"] ||
+            dictionary[@"error_reason"]) {
 
             NSMutableDictionary *userInfo = [[[NSMutableDictionary alloc] init] autorelease];
             [userInfo addEntriesFromDictionary:dictionary];
@@ -1389,7 +1387,7 @@ typedef enum FBRequestConnectionState {
                 innerError:(NSError*)innerError
                    message:(NSString*)message {
     NSMutableDictionary *userInfo = [[[NSMutableDictionary alloc] init] autorelease];
-    [userInfo setObject:[NSNumber numberWithInt:statusCode] forKey:FBErrorHTTPStatusCodeKey];
+    userInfo[FBErrorHTTPStatusCodeKey] = @(statusCode);
 
     if (response) {
         userInfo[FBErrorParsedJSONResponseKey] = response;
@@ -1558,8 +1556,8 @@ typedef enum FBRequestConnectionState {
     [connection addRequest:request
          completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
              // extract what we care about
-             id token = [result objectForKey:@"access_token"];
-             id expireTime = [result objectForKey:@"expires_at"];
+             id token = result[@"access_token"];
+             id expireTime = result[@"expires_at"];
              
              // if we have a token and it is not a string (?) punt
              if (token && ![token isKindOfClass:[NSString class]]) {

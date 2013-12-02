@@ -78,9 +78,9 @@
 
 - (BOOL)startAuthorization {
     NSMutableArray *pairs = [NSMutableArray array];
-    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:clientID_, @"client_id", @"token", @"response_type", callbackURL_, @"redirect_uri", nil];
+    NSDictionary *parameters = @{@"client_id": clientID_, @"response_type": @"token", @"redirect_uri": callbackURL_};
     for (NSString *key in parameters) {
-        NSString *value = [parameters objectForKey:key];
+        NSString *value = parameters[key];
         CFStringRef escapedValue = CFURLCreateStringByAddingPercentEscapes(NULL, (CFStringRef)value, NULL, CFSTR("%:/?#[]@!$&'()*+,;="), kCFStringEncodingUTF8);
         NSMutableString *pair = [[key mutableCopy] autorelease];
         [pair appendString:@"="];
@@ -109,11 +109,11 @@
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     for (NSString *pair in pairs) {
         NSArray *kv = [pair componentsSeparatedByString:@"="];
-        NSString *key = [kv objectAtIndex:0];
-        NSString *val = [[kv objectAtIndex:1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        [parameters setObject:val forKey:key];
+        NSString *key = kv[0];
+        NSString *val = [kv[1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        parameters[key] = val;
     }
-    self.accessToken = [parameters objectForKey:@"access_token"];
+    self.accessToken = parameters[@"access_token"];
     if (accessToken_) {
         if ([sessionDelegate_ respondsToSelector:@selector(foursquareDidAuthorize:)]) {
             [sessionDelegate_ foursquareDidAuthorize:self];
@@ -137,13 +137,13 @@
 - (BZFoursquareRequest *)requestWithPath:(NSString *)path HTTPMethod:(NSString *)HTTPMethod parameters:(NSDictionary *)parameters delegate:(id<BZFoursquareRequestDelegate>)delegate {
     NSMutableDictionary *mDict = [NSMutableDictionary dictionaryWithDictionary:parameters];
     if ([self isSessionValid]) {
-        [mDict setObject:accessToken_ forKey:@"oauth_token"];
+        mDict[@"oauth_token"] = accessToken_;
     }
     if (version_) {
-        [mDict setObject:version_ forKey:@"v"];
+        mDict[@"v"] = version_;
     }
     if (locale_) {
-        [mDict setObject:locale_ forKey:@"locale"];
+        mDict[@"locale"] = locale_;
     }
     //NSLog(@"%@",path);
      //NSLog(@"%@",mDict);
@@ -152,15 +152,15 @@
 
 - (BZFoursquareRequest *)userlessRequestWithPath:(NSString *)path HTTPMethod:(NSString *)HTTPMethod parameters:(NSDictionary *)parameters delegate:(id<BZFoursquareRequestDelegate>)delegate {
     NSMutableDictionary *mDict = [NSMutableDictionary dictionaryWithDictionary:parameters];
-    [mDict setObject:clientID_ forKey:@"client_id"];
+    mDict[@"client_id"] = clientID_;
     if (clientSecret_) {
-        [mDict setObject:clientSecret_ forKey:@"client_secret"];
+        mDict[@"client_secret"] = clientSecret_;
     }
     if (version_) {
-        [mDict setObject:version_ forKey:@"v"];
+        mDict[@"v"] = version_;
     }
     if (locale_) {
-        [mDict setObject:locale_ forKey:@"locale"];
+        mDict[@"locale"] = locale_;
     }
     return [[[BZFoursquareRequest alloc] initWithPath:path HTTPMethod:HTTPMethod parameters:mDict delegate:delegate] autorelease];
 }

@@ -154,13 +154,13 @@ static NSInteger JXHTTPOperationQueueDefaultMaxOps = 4;
     }
 
     if (object == self && [keyPath isEqualToString:@"operations"]) {
-        if (![[change objectForKey:NSKeyValueChangeKindKey] intValue] == NSKeyValueChangeSetting)
+        if (![change[NSKeyValueChangeKindKey] intValue] == NSKeyValueChangeSetting)
             return;
         
         NSDate *now = [[NSDate alloc] init];
 
-        NSArray *newOperationsArray = [change objectForKey:NSKeyValueChangeNewKey];
-        NSArray *oldOperationsArray = [change objectForKey:NSKeyValueChangeOldKey];
+        NSArray *newOperationsArray = change[NSKeyValueChangeNewKey];
+        NSArray *oldOperationsArray = change[NSKeyValueChangeOldKey];
         
         NSMutableArray *insertedArray = [[NSMutableArray alloc] initWithArray:newOperationsArray];
         NSMutableArray *removedArray = [[NSMutableArray alloc] initWithArray:oldOperationsArray];
@@ -216,7 +216,7 @@ static NSInteger JXHTTPOperationQueueDefaultMaxOps = 4;
             
             dispatch_barrier_async(self.progressQueue, ^{
                 JXHTTPOperationQueue *strongSelf = weakSelf;
-                [strongSelf.expectedUploadBytesPerOperation setObject:expectedUp forKey:uniqueString];
+                (strongSelf.expectedUploadBytesPerOperation)[uniqueString] = expectedUp;
             });
             
             dispatch_sync(self.observationQueue, ^{
@@ -293,7 +293,7 @@ static NSInteger JXHTTPOperationQueueDefaultMaxOps = 4;
 
             dispatch_barrier_async(self.progressQueue, ^{
                 JXHTTPOperationQueue *strongSelf = weakSelf;
-                [strongSelf.expectedDownloadBytesPerOperation setObject:@(expectedDown) forKey:uniqueString];
+                (strongSelf.expectedDownloadBytesPerOperation)[uniqueString] = @(expectedDown);
             });
         }
 
@@ -312,17 +312,17 @@ static NSInteger JXHTTPOperationQueueDefaultMaxOps = 4;
             if (!strongSelf)
                 return;
             
-            [strongSelf.bytesDownloadedPerOperation setObject:@(downloaded) forKey:uniqueString];
+            (strongSelf.bytesDownloadedPerOperation)[uniqueString] = @(downloaded);
             
             long long bytesDownloaded = 0LL;
             long long expectedDownloadBytes = 0LL;
             
             for (NSString *opString in [strongSelf.bytesDownloadedPerOperation allKeys]) {
-                bytesDownloaded += [[strongSelf.bytesDownloadedPerOperation objectForKey:opString] longLongValue];
+                bytesDownloaded += [(strongSelf.bytesDownloadedPerOperation)[opString] longLongValue];
             }
             
             for (NSString *opString in [strongSelf.expectedDownloadBytesPerOperation allKeys]) {
-                expectedDownloadBytes += [[strongSelf.expectedDownloadBytesPerOperation objectForKey:opString] longLongValue];
+                expectedDownloadBytes += [(strongSelf.expectedDownloadBytesPerOperation)[opString] longLongValue];
             }
             
             strongSelf.bytesDownloaded = @(bytesDownloaded);
@@ -348,17 +348,17 @@ static NSInteger JXHTTPOperationQueueDefaultMaxOps = 4;
             if (!strongSelf)
                 return;
             
-            [strongSelf.bytesUploadedPerOperation setObject:@(uploaded) forKey:uniqueString];
+            (strongSelf.bytesUploadedPerOperation)[uniqueString] = @(uploaded);
             
             long long bytesUploaded = 0LL;
             long long expectedUploadBytes = 0LL;
 
             for (NSString *opString in [strongSelf.bytesUploadedPerOperation allKeys]) {
-                bytesUploaded += [[strongSelf.bytesUploadedPerOperation objectForKey:opString] longLongValue];
+                bytesUploaded += [(strongSelf.bytesUploadedPerOperation)[opString] longLongValue];
             }
 
             for (NSString *opString in [strongSelf.expectedUploadBytesPerOperation allKeys]) {
-                expectedUploadBytes += [[strongSelf.expectedUploadBytesPerOperation objectForKey:opString] longLongValue];
+                expectedUploadBytes += [(strongSelf.expectedUploadBytesPerOperation)[opString] longLongValue];
             }
 
             strongSelf.bytesUploaded = @(bytesUploaded);

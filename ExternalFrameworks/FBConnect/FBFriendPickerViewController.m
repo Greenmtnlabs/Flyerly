@@ -264,7 +264,7 @@ int const FBRefreshCacheDelaySeconds = 2;
         self.session = [FBSession activeSessionIfOpen];
         self.trackActiveSession = YES;
     }
-    [self loadDataSkippingRoundTripIfCached:[NSNumber numberWithBool:YES]];
+    [self loadDataSkippingRoundTripIfCached:@YES];
 }
 
 - (void)updateView {
@@ -382,7 +382,7 @@ int const FBRefreshCacheDelaySeconds = 2;
                            @"last_name", 
                            pictureField,
                            nil];
-    [request.parameters setObject:allFields forKey:@"fields"];
+    (request.parameters)[@"fields"] = allFields;
     
     return request;
 }
@@ -398,7 +398,7 @@ int const FBRefreshCacheDelaySeconds = 2;
                       parameters:@{ FBInsightsEventParameterDialogOutcome : (cancelled
                                                                              ? FBInsightsDialogOutcomeValue_Cancelled
                                                                              : FBInsightsDialogOutcomeValue_Completed),
-                                    @"num_friends_picked" : [NSNumber numberWithUnsignedInteger:self.selection.count]
+                                    @"num_friends_picked" : @(self.selection.count)
                                   }
                          session:self.session];
 }
@@ -464,8 +464,8 @@ int const FBRefreshCacheDelaySeconds = 2;
     if ([picture isKindOfClass:[NSString class]]) {
         return picture;
     }
-    id data = [picture objectForKey:@"data"];
-    return [data objectForKey:@"url"];
+    id data = picture[@"data"];
+    return data[@"url"];
 }
 
 - (void)graphObjectTableDataSource:(FBGraphObjectTableDataSource*)dataSource
@@ -510,7 +510,7 @@ int const FBRefreshCacheDelaySeconds = 2;
     // if our current display is from cache, then kick-off a near-term refresh
     if (pagingLoader.isResultFromCache) {
         [self performSelector:@selector(loadDataSkippingRoundTripIfCached:) 
-                   withObject:[NSNumber numberWithBool:NO]
+                   withObject:@NO
                    afterDelay:FBRefreshCacheDelaySeconds];
     }    
 }

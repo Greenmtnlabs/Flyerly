@@ -45,7 +45,7 @@ static NSString *const kAccessTokenKey = @"access_token";
             NSUserDomainMask, 
             YES);
         
-        NSString* cachePath = [cacheList objectAtIndex:0];
+        NSString* cachePath = cacheList[0];
         _dataCachePath = 
             [[cachePath stringByAppendingPathComponent:kDataDiskCachePath] 
                 copy];

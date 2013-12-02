@@ -252,7 +252,7 @@
             
             NSURL *url = [NSURL URLWithString:@"http://api.twitter.com/1/statuses/update.json"];
             TWRequest *request = [[TWRequest alloc] initWithURL:url 
-                                                     parameters:[NSDictionary dictionaryWithObject:textView.text forKey:@"status"] 
+                                                     parameters:@{@"status": textView.text} 
                                                   requestMethod:TWRequestMethodPOST];
             self.twitterRequest = request;
             [request release];
@@ -370,9 +370,9 @@
             }];
         }
         if (lastAccountIdx != NSNotFound) {
-            self.account = [twitterAccounts objectAtIndex:lastAccountIdx];
+            self.account = twitterAccounts[lastAccountIdx];
         } else {
-            self.account = [twitterAccounts objectAtIndex:0];
+            self.account = twitterAccounts[0];
             [BitlyLibUtil sharedBitlyUtil].lastAccountUsed = self.account.username;
         }
         [self.activeAccountButton setTitle:self.account.accountDescription forState:UIControlStateNormal];    
@@ -449,7 +449,7 @@
     if ([self.delegate respondsToSelector:@selector(bitlyTweetSheet:didFailWithError:)]) {
         NSError *error = [NSError errorWithDomain:@"BitlyTwitterError"
                                              code: -213 
-                                         userInfo:[NSDictionary dictionaryWithObject:@"User cancelled authorization" forKey:NSLocalizedDescriptionKey]];
+                                         userInfo:@{NSLocalizedDescriptionKey: @"User cancelled authorization"}];
                           [self.delegate bitlyTweetSheet:self didFailWithError:error];
     }
 }

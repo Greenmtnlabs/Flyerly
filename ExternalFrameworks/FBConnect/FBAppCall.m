@@ -218,13 +218,13 @@
     
     // If this is a web login, log the dialog load performance stats
     NSDictionary *params = [FBUtility queryParamsDictionaryFromFBURL:url];
-    NSString *e2eMetrics = [params objectForKey:@"e2e"];
+    NSString *e2eMetrics = params[@"e2e"];
     if (e2eMetrics != nil)  {
         [FBInsights logImplicitEvent:FBInsightsEventNameFBDialogsWebLoginCompleted
                           valueToSum:1.0
                           parameters:@{
                             FBInsightsWebLoginE2E : e2eMetrics,
-                            FBInsightsWebLoginSwitchbackTime : [NSNumber numberWithDouble:round(1000 * [[NSDate date] timeIntervalSince1970])],
+                            FBInsightsWebLoginSwitchbackTime : @(round(1000 * [[NSDate date] timeIntervalSince1970])),
                             @"app_id" : [FBSettings defaultAppID]
                           }
                           session:nil];

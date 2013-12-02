@@ -45,10 +45,9 @@ NSDictionary *TMQueryStringToDictionary(NSString *query) {
                 if ([existingValueForKey isKindOfClass:[NSMutableArray class]])
                     [(NSMutableArray *)existingValueForKey addObject:value];
                 else
-                    [mutableParameterDictionary setObject:[NSMutableArray arrayWithObjects:existingValueForKey, value, nil]
-                                                   forKey:key];
+                    mutableParameterDictionary[key] = [NSMutableArray arrayWithObjects:existingValueForKey, value, nil];
             } else
-                [mutableParameterDictionary setObject:value forKey:key];
+                mutableParameterDictionary[key] = value;
         }
     }
     

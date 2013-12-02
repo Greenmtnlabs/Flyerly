@@ -92,7 +92,7 @@ static FBSystemAccountStoreAdapter* _singletonInstance = nil;
     if (self.accountTypeFB && self.accountTypeFB.accessGranted) {
         NSArray *fbAccounts = [self.accountStore accountsWithAccountType:self.accountTypeFB];
         if (fbAccounts.count > 0) {
-            id account = [fbAccounts objectAtIndex:0];
+            id account = fbAccounts[0];
             id credential = [account credential];
         
             return [credential oauthToken].length > 0;
@@ -126,7 +126,7 @@ static FBSystemAccountStoreAdapter* _singletonInstance = nil;
     }
 
     // app may be asking for nothing, but we will always have an array here
-    NSArray *permissionsToUse = permissions ? permissions : [NSArray array];
+    NSArray *permissionsToUse = permissions ? permissions : @[];
     if ([FBUtility areAllPermissionsReadPermissions:permissions]) {
         // If we have only read permissions being requested, ensure that basic info
         //  is among the permissions requested.
@@ -163,11 +163,9 @@ static FBSystemAccountStoreAdapter* _singletonInstance = nil;
     }
     
     // construct access options
-    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
-                             appID, ACFacebookAppIdKey,
-                             permissionsToUse, ACFacebookPermissionsKey,
-                             audience, ACFacebookAudienceKey, // must end on this key/value due to audience possibly being nil
-                             nil];
+    NSDictionary *options = @{ACFacebookAppIdKey: appID,
+                             ACFacebookPermissionsKey: permissionsToUse,
+                             ACFacebookAudienceKey: audience};
     
     //wrap the request call into a separate block to help with possibly block chaining below.
     void(^requestAccessBlock)(void) = ^{
@@ -194,7 +192,7 @@ static FBSystemAccountStoreAdapter* _singletonInstance = nil;
                  NSString *oauthToken = nil;
                  if (granted) {
                      NSArray *fbAccounts = [self.accountStore accountsWithAccountType:self.accountTypeFB];
-                     id account = [fbAccounts objectAtIndex:0];
+                     id account = fbAccounts[0];
                      id credential = [account credential];
                      
                      oauthToken = [credential oauthToken];
@@ -241,7 +239,7 @@ static FBSystemAccountStoreAdapter* _singletonInstance = nil;
         NSArray *fbAccounts = [self.accountStore accountsWithAccountType:self.accountTypeFB];
         id account;
         if (fbAccounts && [fbAccounts count] > 0 &&
-            (account = [fbAccounts objectAtIndex:0])){
+            (account = fbAccounts[0])){
             
             [self.accountStore renewCredentialsForAccount:account completion:^(ACAccountCredentialRenewResult renewResult, NSError *error) {
                 if (error){

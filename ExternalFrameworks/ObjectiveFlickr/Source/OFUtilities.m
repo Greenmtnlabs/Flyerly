@@ -159,7 +159,7 @@ NSDictionary *OFExtractURLQueryParameter(NSString *inQuery)
             return nil;
         }
         
-        [dict setObject:[kv objectAtIndex:1] forKey:[kv objectAtIndex:0]];
+        dict[kv[0]] = kv[1];
     }
     return dict;
 }
@@ -186,8 +186,8 @@ BOOL OFExtractOAuthCallback(NSURL *inReceivedURL, NSURL *inBaseURL, NSString **o
         return NO;
     }
     
-    NSString *t = [dict objectForKey:@"oauth_token"];
-    NSString *v = [dict objectForKey:@"oauth_verifier"];
+    NSString *t = dict[@"oauth_token"];
+    NSString *v = dict[@"oauth_verifier"];
     
     if (!t || !v) {
         return NO;
