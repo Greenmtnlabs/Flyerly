@@ -13,7 +13,6 @@
 int main(int argc, char *argv[]) {
     
     @autoreleasepool {
-        int retVal = UIApplicationMain(argc, argv, nil, NSStringFromClass([FlyrAppDelegate class]));
-        return retVal;
+        return UIApplicationMain(argc, argv, nil, NSStringFromClass([FlyrAppDelegate class]));
     }
 }

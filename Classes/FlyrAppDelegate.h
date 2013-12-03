@@ -25,7 +25,8 @@ extern NSString *FacebookDidLoginNotification;
 @class AfterUpdateController;
 @class AccountController;
 @class Singleton;
-@interface FlyrAppDelegate : NSObject <UIApplicationDelegate,OFFlickrAPIRequestDelegate> {
+
+@interface FlyrAppDelegate : UIResponder <UIApplicationDelegate,OFFlickrAPIRequestDelegate> {
 	UIScrollView *fontScrollView;
 	UIScrollView *colorScrollView;
 	UIScrollView *sizeScrollView;

@@ -266,7 +266,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     [[BitlyConfig sharedBitlyConfig] setBitlyLogin:@"flyerly" bitlyAPIKey:@"R_3bdc6f8e82d260965325510421c980a0"];
   //  [[BitlyConfig sharedBitlyConfig] setBitlyAPIKey:@"R_3bdc6f8e82d260965325510421c980a0"];
     
-    [self clearCache];
+    //[self clearCache];
 	changesFlag = NO;
 	[[UIApplication sharedApplication] setStatusBarStyle: UIStatusBarStyleBlackOpaque];
 	navigationController.navigationBar.barStyle = UIStatusBarStyleBlackOpaque;
