@@ -757,6 +757,8 @@
 		2091E4A217DA1323001428E5 /* symbolicon_button_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2091E49817DA1323001428E5 /* symbolicon_button_selected@2x.png */; };
 		2091E4A317DA1323001428E5 /* text_icon_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 2091E49917DA1323001428E5 /* text_icon_selected.png */; };
 		2091E4A417DA1323001428E5 /* text_icon_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2091E49A17DA1323001428E5 /* text_icon_selected@2x.png */; };
+		2092FFCB184E00BF0034C4F6 /* flyerlylogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 2092FFC9184E00BF0034C4F6 /* flyerlylogo.png */; };
+		2092FFCC184E00BF0034C4F6 /* flyerlylogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2092FFCA184E00BF0034C4F6 /* flyerlylogo@2x.png */; };
 		20CC6922180DA416002F2E6F /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2061ED8B17FF212100E9BECA /* icon.png */; };
 		20CC6925180DA44C002F2E6F /* icon-60.png in Resources */ = {isa = PBXBuildFile; fileRef = 20CC6923180DA44C002F2E6F /* icon-60.png */; };
 		20CC6926180DA44C002F2E6F /* icon-120.png in Resources */ = {isa = PBXBuildFile; fileRef = 20CC6924180DA44C002F2E6F /* icon-120.png */; };
@@ -2244,6 +2246,8 @@
 		2091E49817DA1323001428E5 /* symbolicon_button_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "symbolicon_button_selected@2x.png"; sourceTree = "<group>"; };
 		2091E49917DA1323001428E5 /* text_icon_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = text_icon_selected.png; sourceTree = "<group>"; };
 		2091E49A17DA1323001428E5 /* text_icon_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "text_icon_selected@2x.png"; sourceTree = "<group>"; };
+		2092FFC9184E00BF0034C4F6 /* flyerlylogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flyerlylogo.png; sourceTree = "<group>"; };
+		2092FFCA184E00BF0034C4F6 /* flyerlylogo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flyerlylogo@2x.png"; sourceTree = "<group>"; };
 		20B996D2180450CC007B616D /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
 		20CC6923180DA44C002F2E6F /* icon-60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-60.png"; sourceTree = "<group>"; };
 		20CC6924180DA44C002F2E6F /* icon-120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-120.png"; sourceTree = "<group>"; };
@@ -3342,6 +3346,8 @@
 		0DF3A361108DF47400D6C887 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				2092FFC9184E00BF0034C4F6 /* flyerlylogo.png */,
+				2092FFCA184E00BF0034C4F6 /* flyerlylogo@2x.png */,
 				206F238B17F5C83400AFAC57 /* btn_edit.png */,
 				206F238C17F5C83400AFAC57 /* btn_edit@2x.png */,
 				20E3010C17F1AA9A006A1DE0 /* searinvite.png */,
@@ -5834,6 +5840,7 @@
 				20D7474717BE7A9900966BA6 /* login_email_icon@2x.png in Resources */,
 				20D7474817BE7A9900966BA6 /* password_email_icon.png in Resources */,
 				20D7474917BE7A9900966BA6 /* password_email_icon@2x.png in Resources */,
+				2092FFCB184E00BF0034C4F6 /* flyerlylogo.png in Resources */,
 				20D7474C17BE7CA800966BA6 /* Zsignup_button.png in Resources */,
 				20D7474D17BE7CA800966BA6 /* Zsignup_button@2x.png in Resources */,
 				20D7475017BE803100966BA6 /* Zregister_flyer.png in Resources */,
@@ -5903,6 +5910,7 @@
 				203E0B7717DDDD720039C3A7 /* InputViewController.xib in Resources */,
 				202C638417EA06E800CB9A75 /* ricon22.png in Resources */,
 				202C638517EA06E800CB9A75 /* ricon22@2x.png in Resources */,
+				2092FFCC184E00BF0034C4F6 /* flyerlylogo@2x.png in Resources */,
 				202C638617EA06E800CB9A75 /* ricon23.png in Resources */,
 				202C638717EA06E800CB9A75 /* ricon23@2x.png in Resources */,
 				202C638817EA06E800CB9A75 /* ricon24.png in Resources */,
@@ -6473,7 +6481,7 @@
 					../,
 					./,
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PREBINDING = NO;
@@ -6635,7 +6643,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "./ExternalFrameworks/**";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				PREBINDING = NO;
@@ -6658,7 +6666,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PREBINDING = NO;

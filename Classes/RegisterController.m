@@ -127,7 +127,11 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 	// Do any additional setup after loading the view.
     
     self.navigationController.navigationBarHidden = NO;
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+    
+    // for Navigation Bar Background
+    //[self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo"] forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.alpha = 1;
 
     //set title
     //self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Register" rect:CGRectMake(-50, -6, 50, 50)];

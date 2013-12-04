@@ -89,10 +89,15 @@
 -(void)viewWillAppear:(BOOL)animated{
 	[super viewWillAppear:YES];
     self.navigationController.navigationBarHidden = NO;
-    self.navigationController.navigationBar.alpha = 1;
 
+    
     // Set the background image on navigation bar
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_with_logo2"] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
+    
+    // for Navigation Bar logo
+    UIImageView *logo = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 87, 38)];
+    [logo setImage:[UIImage imageNamed:@"flyerlylogo"]];
+    self.navigationItem.titleView = logo;
     
     [self.navigationItem setHidesBackButton:YES];
     // Create right bar button
