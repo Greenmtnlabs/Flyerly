@@ -757,6 +757,8 @@
 		2091E4A217DA1323001428E5 /* symbolicon_button_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2091E49817DA1323001428E5 /* symbolicon_button_selected@2x.png */; };
 		2091E4A317DA1323001428E5 /* text_icon_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 2091E49917DA1323001428E5 /* text_icon_selected.png */; };
 		2091E4A417DA1323001428E5 /* text_icon_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2091E49A17DA1323001428E5 /* text_icon_selected@2x.png */; };
+		20920015184F40330034C4F6 /* AddFriendsDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 20920013184F40330034C4F6 /* AddFriendsDetail.m */; };
+		20920016184F40330034C4F6 /* AddFriendsDetail.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20920014184F40330034C4F6 /* AddFriendsDetail.xib */; };
 		2092FFCB184E00BF0034C4F6 /* flyerlylogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 2092FFC9184E00BF0034C4F6 /* flyerlylogo.png */; };
 		2092FFCC184E00BF0034C4F6 /* flyerlylogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2092FFCA184E00BF0034C4F6 /* flyerlylogo@2x.png */; };
 		20CC6922180DA416002F2E6F /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2061ED8B17FF212100E9BECA /* icon.png */; };
@@ -2246,6 +2248,9 @@
 		2091E49817DA1323001428E5 /* symbolicon_button_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "symbolicon_button_selected@2x.png"; sourceTree = "<group>"; };
 		2091E49917DA1323001428E5 /* text_icon_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = text_icon_selected.png; sourceTree = "<group>"; };
 		2091E49A17DA1323001428E5 /* text_icon_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "text_icon_selected@2x.png"; sourceTree = "<group>"; };
+		20920012184F40330034C4F6 /* AddFriendsDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFriendsDetail.h; sourceTree = "<group>"; };
+		20920013184F40330034C4F6 /* AddFriendsDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFriendsDetail.m; sourceTree = "<group>"; };
+		20920014184F40330034C4F6 /* AddFriendsDetail.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddFriendsDetail.xib; sourceTree = "<group>"; };
 		2092FFC9184E00BF0034C4F6 /* flyerlylogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flyerlylogo.png; sourceTree = "<group>"; };
 		2092FFCA184E00BF0034C4F6 /* flyerlylogo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flyerlylogo@2x.png"; sourceTree = "<group>"; };
 		20B996D2180450CC007B616D /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
@@ -2899,7 +2904,7 @@
 		65DB59B8173018DC00F251B0 /* facebook_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook_selected.png; sourceTree = "<group>"; };
 		65DB59B9173018DC00F251B0 /* facebook_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook_selected@2x.png"; sourceTree = "<group>"; };
 		65DB59BA173018DC00F251B0 /* twitter_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter_selected@2x.png"; sourceTree = "<group>"; };
-		65E26156171C2EC400C485B5 /* AddFriendScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddFriendScreen.xib; sourceTree = "<group>"; };
+		65E26156171C2EC400C485B5 /* AddFriendScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AddFriendScreen.xib; path = ../AddFriendScreen.xib; sourceTree = "<group>"; };
 		65E2615B171C2FA800C485B5 /* AddFriendsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFriendsController.h; sourceTree = "<group>"; };
 		65E2615C171C2FA800C485B5 /* AddFriendsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFriendsController.m; sourceTree = "<group>"; };
 		65E2615E171C345C00C485B5 /* facebook_tab_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook_tab_selected.png; sourceTree = "<group>"; };
@@ -3076,8 +3081,6 @@
 				0DFC531C109576AB00B18478 /* SettingViewController.m */,
 				E8C7C36610976BFC0064935A /* SaveFlyerController.h */,
 				E8C7C36710976BFC0064935A /* SaveFlyerController.m */,
-				65E2615B171C2FA800C485B5 /* AddFriendsController.h */,
-				65E2615C171C2FA800C485B5 /* AddFriendsController.m */,
 				65E26186171C5C9800C485B5 /* AddFriendItem.h */,
 				65E26187171C5C9800C485B5 /* AddFriendItem.m */,
 				654B255117202B360047C8F6 /* AfterUpdateController.h */,
@@ -3119,6 +3122,12 @@
 				203E0B7517DDDD720039C3A7 /* InputViewController.xib */,
 				49997FF517DF786400CF1038 /* ParentViewController.h */,
 				49997FF617DF786400CF1038 /* ParentViewController.m */,
+				65E2615B171C2FA800C485B5 /* AddFriendsController.h */,
+				65E2615C171C2FA800C485B5 /* AddFriendsController.m */,
+				65E26156171C2EC400C485B5 /* AddFriendScreen.xib */,
+				20920012184F40330034C4F6 /* AddFriendsDetail.h */,
+				20920013184F40330034C4F6 /* AddFriendsDetail.m */,
+				20920014184F40330034C4F6 /* AddFriendsDetail.xib */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -4524,7 +4533,6 @@
 				8D1107310486CEB800E47090 /* Flyr-Info.plist */,
 				2087B6BF17C73B40007A6A90 /* ResetPWViewController.xib */,
 				20F4D8DF17BA3D0A007B2DF5 /* AccountSelecter.xib */,
-				65E26156171C2EC400C485B5 /* AddFriendScreen.xib */,
 				E8A7347C1092CFF300661AAD /* DraftViewController.xib */,
 				0D4903BA1091893B00855C30 /* FlyrViewController.xib */,
 				0DFC5317109576AB00B18478 /* LauchViewController.xib */,
@@ -5424,6 +5432,7 @@
 				65DB59AA172FAD6200F251B0 /* save_bg@2x.png in Resources */,
 				65DB59AB172FAD6200F251B0 /* sms_share_selected.png in Resources */,
 				65DB59AC172FAD6200F251B0 /* sms_share_selected@2x.png in Resources */,
+				20920016184F40330034C4F6 /* AddFriendsDetail.xib in Resources */,
 				65DB59AD172FAD6200F251B0 /* sms_share.png in Resources */,
 				65DB59AE172FAD6200F251B0 /* sms_share@2x.png in Resources */,
 				65DB59AF172FAD6200F251B0 /* tumblr_share_selected.png in Resources */,
@@ -6347,6 +6356,7 @@
 				65A2CFAC172573AA005C03B7 /* FBSessionTokenCachingStrategy.m in Sources */,
 				65A2CFAD172573AA005C03B7 /* FBSettings.m in Sources */,
 				65A2CFAE172573AA005C03B7 /* FBShareDialogParams.m in Sources */,
+				20920015184F40330034C4F6 /* AddFriendsDetail.m in Sources */,
 				65A2CFAF172573AA005C03B7 /* FBSystemAccountStoreAdapter.m in Sources */,
 				65A2CFB0172573AA005C03B7 /* FBTestSession.m in Sources */,
 				65A2CFB1172573AA005C03B7 /* FBURLConnection.m in Sources */,

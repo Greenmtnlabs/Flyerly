@@ -164,7 +164,7 @@ BOOL selectAll;
     selectedIdentifierDictionary = nil;
     
     selectedTab = CONTACTS_TAB;
-    [self setUnselectTab:sender];
+   // [self setUnselectTab:sender];
     PFUser *user = [PFUser currentUser];
     self.iPhoneinvited = [[NSMutableArray alloc] init];
     if (user[@"iphoneinvited"]) {
@@ -319,7 +319,7 @@ BOOL selectAll;
         selectedIdentifierDictionary = nil;
         
         selectedTab = FACEBOOK_TAB;
-        [self setUnselectTab:sender];
+       // [self setUnselectTab:sender];
         
         
         // init facebook array
@@ -394,7 +394,7 @@ BOOL selectAll;
             appDelegate.facebook.sessionDelegate = self;
             
             if([appDelegate.facebook isSessionValid]) {
-                [self setUnselectTab:sender];
+              //  [self setUnselectTab:sender];
                 
                 PFUser *user = [PFUser currentUser];
                 self.fbinvited = [[NSMutableArray alloc] init];
@@ -514,7 +514,7 @@ int totalCount = 0;
         
         
         selectedTab = TWITTER_TAB;
-        [self setUnselectTab:sender];
+       // [self setUnselectTab:sender];
         
         // init twitter array
         if(twitterBackupArray){
@@ -1077,17 +1077,16 @@ NSMutableDictionary *selectedIdentifierDictionary;
     
     static NSString *CellIdentifier = @"InviteCell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
+    // Create My custom cell view
+    AddFriendsDetail *cell = (AddFriendsDetail *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    [cell setAccessoryType:UITableViewCellAccessoryNone];
+    
+    if ( cell == nil ) {
+        cell = [[AddFriendsDetail alloc] initWithFrame:CGRectZero] ;
+        
     }
-    
-    for(UIView *v in cell.contentView.subviews){
-		[v removeFromSuperview];
-	}
-    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     if(loadingViewFlag){
         for (UIView *subview in self.view.subviews) {
             if([subview isKindOfClass:[LoadingView class]]){
@@ -1107,6 +1106,7 @@ NSMutableDictionary *selectedIdentifierDictionary;
     NSString *imgfile2 =nil;
     // Check index
     if([[self getArrayOfSelectedTab] count] >= 1){
+        
         dict2 = [self getArrayOfSelectedTab][(indexPath.row)];
         name2 = dict2[@"name"];
         if(selectedTab == FACEBOOK_TAB) detailfield = dict2[@"gender"];
@@ -1128,7 +1128,7 @@ NSMutableDictionary *selectedIdentifierDictionary;
         dispatch_async(dispatchQueue, ^(void)
                        {
                            dispatch_sync(dispatch_get_main_queue(), ^{
-                               aview = [[AsyncImageView alloc]initWithFrame:CGRectMake(0, 0,70, 70)];
+                               aview = [[AsyncImageView alloc]initWithFrame:CGRectMake(9, 7,72, 72)];
                                NSLog(@"%@",imgfile2);
                                NSURL *imageurl = [NSURL URLWithString:imgfile2];
                                NSLog(@"%@",imageurl);
@@ -1138,47 +1138,33 @@ NSMutableDictionary *selectedIdentifierDictionary;
                        });
     }
     
-    UILabel *title = [[UILabel alloc]initWithFrame:CGRectMake(80, 0, 190, 20)];
-	[title setBackgroundColor:[UIColor clearColor]];
-    [title setTextColor:[UIColor darkTextColor]];
-	[title setFont:[UIFont fontWithName:TITLE_FONT size:14]];
-	[title setTextAlignment:UITextAlignmentLeft];
-	title.text = name2;
-    title.tag = indexPath.row;
-	[cell.contentView  addSubview:title];
+    NSString *chkName = @"";
+    if ([self ckeckExistContact:dict2[@"identifier"]]) {
+        if ([self ckeckExistdb:dict2[@"identifier"]]) {
+            chkName =@"add_icon-grey";
+        }else{
+             chkName =@"check_icon";
+        }
+    }else{
+        chkName =@"add_icon";
+        
+    }
+    // Set cell Values
+    [cell setCellObjects:name2 Description:detailfield :imgfile CheckImage:chkName];
+    [cell.checkBtn addTarget:self action:@selector(inviteFreind:) forControlEvents:UIControlEventTouchUpInside];
+    cell.checkBtn.tag = indexPath.row;
     
-    UILabel *stitle = [[UILabel alloc]initWithFrame:CGRectMake(80, 15, 190, 20)];
-	[stitle setBackgroundColor:[UIColor clearColor]];
-    [stitle setTextColor:[UIColor blackColor]];
-	[stitle setFont:[UIFont fontWithName:OTHER_FONT size:10]];
-	[stitle setTextAlignment:UITextAlignmentLeft];
-	stitle.text = detailfield;
-    stitle.tag = indexPath.row;
-	[cell.contentView  addSubview:stitle];
-    UIImageView *imgView=[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 70, 70)];
-    imgView.backgroundColor=[UIColor clearColor];
-    //   [imgView.layer setCornerRadius:8.0f];
-    [imgView.layer setMasksToBounds:YES];
-    [imgView setImage:imgfile];
-    [cell.contentView addSubview:imgView];
-    
+
+    /*
+
     UIButton *addButton = [[UIButton alloc] initWithFrame:CGRectMake(270,22 , 32, 33)];
     //[addButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [addButton addTarget:self action:@selector(inviteFreind:) forControlEvents:UIControlEventTouchUpInside];
     
-    if ([self ckeckExistContact:dict2[@"identifier"]]) {
-        if ([self ckeckExistdb:dict2[@"identifier"]]) {
-            [addButton setBackgroundImage:[UIImage imageNamed:@"add_icon-grey"] forState:UIControlStateNormal];
-        }else{
-            [addButton setBackgroundImage:[UIImage imageNamed:@"check_icon"] forState:UIControlStateNormal];
-        }
-    }else{
-        [addButton setBackgroundImage:[UIImage imageNamed:@"add_icon"] forState:UIControlStateNormal];
-        
-    }
+
     addButton.tag = indexPath.row;
     [cell.contentView addSubview:addButton];
-    
+     */
     return cell;
 }
 
@@ -1200,7 +1186,7 @@ NSMutableDictionary *selectedIdentifierDictionary;
 
 /*
  * Method use to select all checkboxes
- */
+
 - (IBAction)selectAllCheckBoxes:(UIButton *)sender{
     
     unSelectAll = NO;
@@ -1216,10 +1202,10 @@ NSMutableDictionary *selectedIdentifierDictionary;
         }
     }
 }
-
+ */
 /*
  * Method use to unselect al checkboxes
- */
+
 - (IBAction)unSelectAllCheckBoxes:(UIButton *)sender{
     
     unSelectAll = YES;
@@ -1244,7 +1230,7 @@ NSMutableDictionary *selectedIdentifierDictionary;
     
     [selectButton setSelected:YES];
 }
-
+ */
 - (void)fbDidLogin {
 	NSLog(@"logged in");
     

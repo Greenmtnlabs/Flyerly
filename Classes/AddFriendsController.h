@@ -24,6 +24,7 @@
 #import "MyNavigationBar.h"
 #import "AsyncImageView.h"
 #import "Singleton.h"
+#import "AddFriendsDetail.h"
 
 @class LoadingView,LauchViewController,Singleton;
 
