@@ -27,9 +27,8 @@
 {
     [super viewDidLoad];
     globle = [Singleton RetrieveSingleton];
-    self.tableView.rowHeight = 35;
+    self.tableView.rowHeight = 40;
     [self.tableView setBackgroundView:nil];
-   // [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
     [self.tableView setSeparatorColor:[UIColor blackColor]];
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
@@ -71,10 +70,10 @@
     
     self.navigationItem.titleView = label;
     category = [[NSMutableArray alloc] init];
-    [category addObject:@" Sharing Options"];
+    [category addObject:@"Sharing Options"];
     [category addObject:@"Save to Gallery"];
     [category addObject:@"Account Setting"];
-    [category addObject:@" Sign Out"];
+    [category addObject:@"Sign Out"];
 
 }
 
@@ -93,39 +92,39 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *CellIdentifier = @"ZCell";
+    static NSString *CellIdentifier = @"SettingCell";
     
-    UITableViewCell *cell = [tView dequeueReusableCellWithIdentifier:CellIdentifier] ;
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-        [[cell textLabel] setFont:[UIFont fontWithName:TITLE_FONT size:14]];
-		[[cell detailTextLabel] setTextColor:[UIColor lightGrayColor]];
-		[[cell detailTextLabel] setFont:[UIFont systemFontOfSize:12.0]];
-        [cell setBackgroundColor:[UIColor clearColor]];
-        [cell setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"SettingcellBack"]]];
+    // Create My custom cell view
+    MainSettingCell *cell = (MainSettingCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+
+    if ( cell == nil ) {
+        cell = [[MainSettingCell alloc] initWithFrame:CGRectZero] ;
+         [cell setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"SettingcellBack"]]];
     }
 
-    NSString *s =[NSString stringWithFormat:@"   %@",category[indexPath.row]]  ;
-    cell.textLabel.text =s;
+    NSString *title =[NSString stringWithFormat:@"%@",category[indexPath.row]];
+    NSString *imgname =@"";
    
-    if (indexPath.row == 0)cell.imageView.image =[UIImage imageNamed:@"share_settings"];
-    if (indexPath.row == 1)cell.imageView.image =[UIImage imageNamed:@"save_gallery"];
-    if (indexPath.row == 2)cell.imageView.image =[UIImage imageNamed:@"account_settings"];
-    if (indexPath.row == 3)cell.imageView.image =[UIImage imageNamed:@"signout"];
+    if (indexPath.row == 0) imgname = @"share_settings";
+    if (indexPath.row == 1) imgname = @"save_gallery";
+    if (indexPath.row == 2)imgname = @"account_settings";
+    if (indexPath.row == 3)imgname = @"signout";
 
         if (indexPath.row == 1){
-            UISwitch *mSwitch = [[[UISwitch alloc] initWithFrame:CGRectMake(220, 4, 0, 0)] autorelease];
+            UISwitch *mSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(223, 4, 0, 0)] ;
             [cell.contentView  addSubview:mSwitch];
             [mSwitch addTarget:self action:@selector(changeSwitch:) forControlEvents:UIControlEventValueChanged];
             
             NSString  *savecamra = [[NSUserDefaults standardUserDefaults] stringForKey:@"saveToCameraRollSetting"];
-            NSLog(@"%@",savecamra);
             if (savecamra == nil) {
                 [mSwitch setOn:NO];
             }else{
                 [mSwitch setOn:YES];
             }
         }
+    
+    // Set cell Values
+    [cell setCellObjects:title leftimage:imgname];
     return cell;
 }
 
@@ -152,8 +151,6 @@
     }else if(indexPath.row == 3){
         warningAlert = [[UIAlertView  alloc]initWithTitle:@"Are you sure?" message:@"" delegate:self cancelButtonTitle:@"Sign out" otherButtonTitles:@"Cancel",nil];
         [warningAlert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:NO];
-        //[warningAlert show];
-        [warningAlert autorelease];
     }
     [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
     

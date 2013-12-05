@@ -724,6 +724,8 @@
 		2039F7C617F0837300DE2AA4 /* dfcontact@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2039F7C417F0837300DE2AA4 /* dfcontact@2x.jpg */; };
 		203E0B7617DDDD720039C3A7 /* InputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 203E0B7417DDDD720039C3A7 /* InputViewController.m */; };
 		203E0B7717DDDD720039C3A7 /* InputViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 203E0B7517DDDD720039C3A7 /* InputViewController.xib */; };
+		2044FF96185088ED00A26B42 /* MainSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2044FF94185088ED00A26B42 /* MainSettingCell.m */; };
+		2044FF97185088ED00A26B42 /* MainSettingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2044FF95185088ED00A26B42 /* MainSettingCell.xib */; };
 		2061ED8A17FF210300E9BECA /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2061ED8917FF210300E9BECA /* icon@2x.png */; };
 		2069527417FAF70200AF647C /* help_img.png in Resources */ = {isa = PBXBuildFile; fileRef = 2069527217FAF70200AF647C /* help_img.png */; };
 		2069527517FAF70200AF647C /* help_img@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2069527317FAF70200AF647C /* help_img@2x.png */; };
@@ -2213,6 +2215,9 @@
 		203E0B7317DDDD720039C3A7 /* InputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputViewController.h; sourceTree = "<group>"; };
 		203E0B7417DDDD720039C3A7 /* InputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputViewController.m; sourceTree = "<group>"; };
 		203E0B7517DDDD720039C3A7 /* InputViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InputViewController.xib; sourceTree = "<group>"; };
+		2044FF93185088ED00A26B42 /* MainSettingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainSettingCell.h; sourceTree = "<group>"; };
+		2044FF94185088ED00A26B42 /* MainSettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainSettingCell.m; sourceTree = "<group>"; };
+		2044FF95185088ED00A26B42 /* MainSettingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainSettingCell.xib; sourceTree = "<group>"; };
 		2061ED8917FF210300E9BECA /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		2061ED8B17FF212100E9BECA /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		2069527217FAF70200AF647C /* help_img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = help_img.png; sourceTree = "<group>"; };
@@ -2250,7 +2255,7 @@
 		2091E49A17DA1323001428E5 /* text_icon_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "text_icon_selected@2x.png"; sourceTree = "<group>"; };
 		20920012184F40330034C4F6 /* AddFriendsDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFriendsDetail.h; sourceTree = "<group>"; };
 		20920013184F40330034C4F6 /* AddFriendsDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFriendsDetail.m; sourceTree = "<group>"; };
-		20920014184F40330034C4F6 /* AddFriendsDetail.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddFriendsDetail.xib; sourceTree = "<group>"; };
+		20920014184F40330034C4F6 /* AddFriendsDetail.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AddFriendsDetail.xib; path = Classes/AddFriendsDetail.xib; sourceTree = "<group>"; };
 		2092FFC9184E00BF0034C4F6 /* flyerlylogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flyerlylogo.png; sourceTree = "<group>"; };
 		2092FFCA184E00BF0034C4F6 /* flyerlylogo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flyerlylogo@2x.png"; sourceTree = "<group>"; };
 		20B996D2180450CC007B616D /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
@@ -2301,7 +2306,7 @@
 		20F4D8E417BA40EA007B2DF5 /* Singleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Singleton.m; sourceTree = "<group>"; };
 		20F93DD017B2262200F6F88C /* MainSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainSettingViewController.h; sourceTree = "<group>"; };
 		20F93DD117B2262200F6F88C /* MainSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainSettingViewController.m; sourceTree = "<group>"; };
-		20F93DD217B2262200F6F88C /* MainSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainSettingViewController.xib; path = Classes/MainSettingViewController.xib; sourceTree = "<group>"; };
+		20F93DD217B2262200F6F88C /* MainSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainSettingViewController.xib; sourceTree = "<group>"; };
 		20FAFC7317EAE1B900A7B1E6 /* likealertbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = likealertbg.png; sourceTree = "<group>"; };
 		20FAFC7417EAE1B900A7B1E6 /* likealertclose.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = likealertclose.png; sourceTree = "<group>"; };
 		2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -2904,7 +2909,7 @@
 		65DB59B8173018DC00F251B0 /* facebook_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook_selected.png; sourceTree = "<group>"; };
 		65DB59B9173018DC00F251B0 /* facebook_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook_selected@2x.png"; sourceTree = "<group>"; };
 		65DB59BA173018DC00F251B0 /* twitter_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter_selected@2x.png"; sourceTree = "<group>"; };
-		65E26156171C2EC400C485B5 /* AddFriendScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AddFriendScreen.xib; path = ../AddFriendScreen.xib; sourceTree = "<group>"; };
+		65E26156171C2EC400C485B5 /* AddFriendScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddFriendScreen.xib; sourceTree = "<group>"; };
 		65E2615B171C2FA800C485B5 /* AddFriendsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFriendsController.h; sourceTree = "<group>"; };
 		65E2615C171C2FA800C485B5 /* AddFriendsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFriendsController.m; sourceTree = "<group>"; };
 		65E2615E171C345C00C485B5 /* facebook_tab_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook_tab_selected.png; sourceTree = "<group>"; };
@@ -3111,8 +3116,6 @@
 				0F80C38A178578CB00D36795 /* RegisterController.m */,
 				0F80C38E1785813E00D36795 /* SigninController.h */,
 				0F80C38F1785813E00D36795 /* SigninController.m */,
-				20F93DD017B2262200F6F88C /* MainSettingViewController.h */,
-				20F93DD117B2262200F6F88C /* MainSettingViewController.m */,
 				20F4D8DD17BA3D09007B2DF5 /* AccountSelecter.h */,
 				20F4D8DE17BA3D09007B2DF5 /* AccountSelecter.m */,
 				2087B6BD17C73B40007A6A90 /* ResetPWViewController.h */,
@@ -3124,10 +3127,14 @@
 				49997FF617DF786400CF1038 /* ParentViewController.m */,
 				65E2615B171C2FA800C485B5 /* AddFriendsController.h */,
 				65E2615C171C2FA800C485B5 /* AddFriendsController.m */,
-				65E26156171C2EC400C485B5 /* AddFriendScreen.xib */,
 				20920012184F40330034C4F6 /* AddFriendsDetail.h */,
 				20920013184F40330034C4F6 /* AddFriendsDetail.m */,
-				20920014184F40330034C4F6 /* AddFriendsDetail.xib */,
+				20F93DD017B2262200F6F88C /* MainSettingViewController.h */,
+				20F93DD117B2262200F6F88C /* MainSettingViewController.m */,
+				20F93DD217B2262200F6F88C /* MainSettingViewController.xib */,
+				2044FF93185088ED00A26B42 /* MainSettingCell.h */,
+				2044FF94185088ED00A26B42 /* MainSettingCell.m */,
+				2044FF95185088ED00A26B42 /* MainSettingCell.xib */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -4536,11 +4543,12 @@
 				E8A7347C1092CFF300661AAD /* DraftViewController.xib */,
 				0D4903BA1091893B00855C30 /* FlyrViewController.xib */,
 				0DFC5317109576AB00B18478 /* LauchViewController.xib */,
+				65E26156171C2EC400C485B5 /* AddFriendScreen.xib */,
+				20920014184F40330034C4F6 /* AddFriendsDetail.xib */,
 				0DFC5318109576AB00B18478 /* LoginController.xib */,
 				0DFC5319109576AB00B18478 /* MainWindow.xib */,
 				0DFC531A109576AB00B18478 /* PhotoController.xib */,
 				E8C7C36810976BFC0064935A /* SaveFlyerController.xib */,
-				20F93DD217B2262200F6F88C /* MainSettingViewController.xib */,
 				0DFC531D109576AB00B18478 /* SettingViewController.xib */,
 				0DF3A361108DF47400D6C887 /* Data */,
 				6513C1AB1716FE0F00355FC3 /* Fonts */,
@@ -5285,6 +5293,7 @@
 				6513C1961716C3DB00355FC3 /* cell_bg_first@2x.png in Resources */,
 				6513C1981716DD7000355FC3 /* settings_bg@2x.png in Resources */,
 				6513C19A1716DDA100355FC3 /* settings_bg.png in Resources */,
+				2044FF97185088ED00A26B42 /* MainSettingCell.xib in Resources */,
 				6513C1A11716E04B00355FC3 /* blue_flyer_dot.png in Resources */,
 				6513C1A21716E04B00355FC3 /* blue_flyer_dot@2x.png in Resources */,
 				65CC0AB7171803FB003D0BE7 /* Localizable.strings in Resources */,
@@ -6454,6 +6463,7 @@
 				20F4D8E517BA40EA007B2DF5 /* Singleton.m in Sources */,
 				2087B6C017C73B40007A6A90 /* ResetPWViewController.m in Sources */,
 				203E0B7617DDDD720039C3A7 /* InputViewController.m in Sources */,
+				2044FF96185088ED00A26B42 /* MainSettingCell.m in Sources */,
 				49997FF717DF786400CF1038 /* ParentViewController.m in Sources */,
 				49997FFB17E07FA100CF1038 /* SKProduct+LocalPrice.m in Sources */,
 			);

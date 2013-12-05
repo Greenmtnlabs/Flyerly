@@ -205,12 +205,9 @@ sd:;
     searchTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     [searchTextField setBorderStyle:UITextBorderStyleRoundedRect];
 
-    if(IS_IPHONE_5){
-        tView = [[UITableView alloc]initWithFrame:CGRectMake(0, 86, 320, 510) style:UITableViewStyleGrouped];
-    }else{
-        tView = [[UITableView alloc]initWithFrame:CGRectMake(0, 86, 320, 416) style:UITableViewStyleGrouped];
-    }
-//	[self.tView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Default.png"]]];
+
+    
+	[self.tView setBackgroundColor:[UIColor whiteColor]];
 	tView.dataSource = self;
 	tView.delegate = self;
 	//tView.alpha  = .6f;
@@ -527,22 +524,8 @@ sd:;
     self.navigationController.navigationBar.alpha = 1.0;
 }
 
-- (void)dealloc {
-	[iconArray release];
-	[tView release];
-	[photoArray release];
-    [ptController release];
-}
 
 -(void)goBack{
-    /*
-    if(IS_IPHONE_5){
-        launchCotroller = [[LauchViewController alloc]initWithNibName:@"LauchViewControllerIPhone5" bundle:nil];
-    }   else{
-        launchCotroller = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
-    }
-     [self.navigationController pushViewController:launchCotroller animated:NO];
-*/
   	[self.navigationController popViewControllerAnimated:YES];
 }
 @end

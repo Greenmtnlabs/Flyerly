@@ -20,6 +20,9 @@
 #import "LocationController.h"
 #import "InputViewController.h"
 #import "Singleton.h"
+#import "MainSettingCell.h"
+
+
 @class PhotoController,InputViewController,Singleton ;
 @class AccountController,LauchViewController,HelpController,SettingViewController,AccountSelecter;
 @interface MainSettingViewController : UIViewController <UITableViewDelegate, MFMailComposeViewControllerDelegate>{

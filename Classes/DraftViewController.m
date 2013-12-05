@@ -2200,27 +2200,6 @@ static ShareProgressView *clipBdPogressView;
 
 
 
-- (void)didReceiveMemoryWarning {
-	// Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-	
-	// Release any cached data, images, etc that aren't in use.
-}
 
-
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver: self];
-    [flickrPogressView release], flickrPogressView = nil;
-    [facebookPogressView release], facebookPogressView = nil;
-    [twitterPogressView release], twitterPogressView = nil;
-    [tumblrPogressView release], tumblrPogressView = nil;
-    [emailPogressView release], emailPogressView = nil;
-    [smsPogressView release], smsPogressView = nil;
-    [clipBdPogressView release], clipBdPogressView = nil;
-    [instagramPogressView release], instagramPogressView = nil;
-    [progressView release]; progressView = nil;
-	[svController release];
-    [sharelink release];
-}
 
 @end
