@@ -35,7 +35,7 @@
     //    label.backgroundColor = [UIColor blueColor ];
     label.text = @"FORGOT PASSWORD?";
     self.navigationItem.titleView = label;
-    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)];
+    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     // [welcomeButton setTitle:@" Welcome" forState:UIControlStateNormal];
     backButton.titleLabel.font = [UIFont systemFontOfSize:14.0];
     [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];

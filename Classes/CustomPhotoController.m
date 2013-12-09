@@ -280,7 +280,7 @@ BOOL galleryExpanded = NO;
     //previosNavigationBarState = self.navigationController.navigationBarHidden;
     self.navigationController.navigationBarHidden = NO;
     self.navigationItem.hidesBackButton = YES;
-    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)];
+    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     //[welcomeButton setTitle:@"" forState:UIControlStateNormal];
     backButton.titleLabel.font = [UIFont systemFontOfSize:14.0];
     [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];

@@ -62,7 +62,7 @@
     }
     
     // Setup welcome button
-    UIButton *backBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)];
+    UIButton *backBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     //[welcomeButton setTitle:@"" forState:UIControlStateNormal];
     backBtn.titleLabel.font = [UIFont systemFontOfSize:14.0];
     [backBtn addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];

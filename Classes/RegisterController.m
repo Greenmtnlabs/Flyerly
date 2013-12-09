@@ -164,7 +164,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     }
 */
     // Setup welcome button
-    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)];
+    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
    // [welcomeButton setTitle:@" Welcome" forState:UIControlStateNormal];
     backButton.titleLabel.font = [UIFont systemFontOfSize:14.0];
     [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];

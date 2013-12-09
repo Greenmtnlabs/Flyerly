@@ -34,7 +34,7 @@
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
     self.navigationItem.hidesBackButton = YES;
     
-    UIButton *helpButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 16, 21)]autorelease];
+    UIButton *helpButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)]autorelease];
     [helpButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [helpButton setBackgroundImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
     [helpButton addTarget:self action:@selector(gohelp) forControlEvents:UIControlEventTouchUpInside];
@@ -52,7 +52,7 @@
     
     [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:helpBarButton,editBarButton,nil ]];
 
-    UIButton *backButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)] autorelease];
+    UIButton *backButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)] autorelease];
     [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
     [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];

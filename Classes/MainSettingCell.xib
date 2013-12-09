@@ -7,7 +7,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainSettingCell">
             <connections>
-                <outlet property="ONOffswitch" destination="l9J-X6-RJX" id="Onz-bb-IC3"/>
                 <outlet property="description" destination="QRc-q6-18w" id="7LV-pS-8Lo"/>
                 <outlet property="imgview" destination="rnc-sP-xxU" id="3Jv-yc-H4b"/>
             </connections>
@@ -28,10 +27,6 @@
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="l9J-X6-RJX">
-                    <rect key="frame" x="266" y="5" width="51" height="31"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </switch>
             </subviews>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>

@@ -35,6 +35,7 @@ BOOL selectAll;
     self.deviceContactItems = [[NSMutableArray alloc] init];
     globle = [Singleton RetrieveSingleton];
     self.navigationItem.hidesBackButton = YES;
+    [self.view setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
     
     // Register notification for facebook login
@@ -49,14 +50,14 @@ BOOL selectAll;
     self.navigationItem.leftBarButtonItem.title = @"";
     [self.navigationItem setRightBarButtonItems: [self rightBarItems]];
     // Create left bar help button
-    UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 16, 21)];
+    UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [helpButton addTarget:self action:@selector(loadHelpController) forControlEvents:UIControlEventTouchUpInside];
     [helpButton setImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
     helpButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:helpButton];
     
     
-    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)];
+    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
     [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
@@ -64,9 +65,8 @@ BOOL selectAll;
     UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:backBarButton,leftBarButton,nil]];
     
-    // set borders on the table
-    ;
-    // [[self.uiTableView layer] setBorderColor:[[UIColor grayColor] CGColor]];
+    // set background on the table
+     [self.uiTableView  setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
     // [[self.uiTableView layer] setBorderWidth:5];
     // Set fonts type and sizes
     /*
@@ -1086,6 +1086,8 @@ NSMutableDictionary *selectedIdentifierDictionary;
         cell = [[AddFriendsDetail alloc] initWithFrame:CGRectZero] ;
         
     }
+    [cell setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
+    
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     if(loadingViewFlag){
         for (UIView *subview in self.view.subviews) {
@@ -1141,12 +1143,12 @@ NSMutableDictionary *selectedIdentifierDictionary;
     NSString *chkName = @"";
     if ([self ckeckExistContact:dict2[@"identifier"]]) {
         if ([self ckeckExistdb:dict2[@"identifier"]]) {
-            chkName =@"add_icon-grey";
+            chkName =@"checkwhite";
         }else{
-             chkName =@"check_icon";
+             chkName =@"checkgray";
         }
     }else{
-        chkName =@"add_icon";
+        chkName =@"checkgreen";
         
     }
     // Set cell Values

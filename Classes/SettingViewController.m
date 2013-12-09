@@ -31,7 +31,7 @@
     label.text = @"Sharing Options";
     self.navigationItem.titleView = label;
 
-    UIButton *helpButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 16, 21)] autorelease];
+    UIButton *helpButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)] autorelease];
     [helpButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [helpButton setBackgroundImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
     [helpButton addTarget:self action:@selector(gohelp) forControlEvents:UIControlEventTouchUpInside];
@@ -39,7 +39,7 @@
     UIBarButtonItem *helpBarButton = [[UIBarButtonItem alloc] initWithCustomView:helpButton];
     [self.navigationItem setRightBarButtonItem:helpBarButton];
     
-    UIButton *backBtn = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)] autorelease];
+    UIButton *backBtn = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)] autorelease];
     [backBtn addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [backBtn setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
      backBtn.showsTouchWhenHighlighted = YES;

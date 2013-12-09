@@ -115,7 +115,7 @@
                             </connections>
                         </textField>
                         <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="10">
-                            <rect key="frame" x="225" y="149" width="51" height="31"/>
+                            <rect key="frame" x="225" y="147" width="51" height="31"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </switch>
                         <view contentMode="scaleToFill" id="59">

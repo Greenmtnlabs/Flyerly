@@ -46,7 +46,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     label.text = @"PROFILE";
     self.navigationItem.titleView = label;
 
-    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)];
+    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     backButton.titleLabel.font = [UIFont systemFontOfSize:14.0];
     [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
     [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];

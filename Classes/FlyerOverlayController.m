@@ -59,7 +59,6 @@
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];
     [alert show];
-    [alert release];
 }
 
 /*
@@ -236,7 +235,8 @@
 /*
  * Called when edit button is pressed
  */
--(IBAction)onEdit{
+-(IBAction)onEdit:(id)sender{
+
 
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
 
@@ -269,11 +269,5 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)dealloc {
-    [flyerOverlayImage release];
-    [crossButton release];
-    [editButton release];
-    [overlayRoundedView release];
-    
-}
+
 @end

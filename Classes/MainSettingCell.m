@@ -14,7 +14,7 @@
 
 @implementation MainSettingCell
 
-@synthesize imgview,description,ONOffswitch;
+@synthesize imgview,description;
 
 - (id)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame ]) {

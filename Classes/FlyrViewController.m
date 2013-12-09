@@ -250,13 +250,13 @@ sd:;
 -(NSArray *)leftBarItems{
     
     // Create left bar help button
-    UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 16, 21)];
+    UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [helpButton addTarget:self action:@selector(loadHelpController) forControlEvents:UIControlEventTouchUpInside];
     [helpButton setImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
     helpButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:helpButton];
    
-    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)];
+    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
     [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];

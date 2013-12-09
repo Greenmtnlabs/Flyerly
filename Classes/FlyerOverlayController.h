@@ -31,7 +31,7 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil image:(UIImage *)image modalView:(UIView *)modalView;
 -(void)setViews:(UIViewController *)controller;
 -(IBAction)goBack;
--(IBAction)onEdit;
+-(IBAction)onEdit:(id)sender;
 +(void)openFlyerInEditableMode:(int)flyerNumber parentViewController:(UIViewController *)parentViewController;
 
 @end

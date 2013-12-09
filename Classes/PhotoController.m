@@ -2359,14 +2359,14 @@ int arrangeLayerIndex;
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
     [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
     
-    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)];
+    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
 	[backButton addTarget:self action:@selector(callMenu) forControlEvents:UIControlEventTouchUpInside];
     backButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *leftBarMenuButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     
-    UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 16, 21)];
+    UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [helpButton addTarget:self action:@selector(loadHelpController) forControlEvents:UIControlEventTouchUpInside];
     [helpButton setBackgroundImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
     helpButton.showsTouchWhenHighlighted = YES;
@@ -2530,7 +2530,7 @@ int arrangeLayerIndex;
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
     [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
     
-    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)];
+    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
 	[backButton addTarget:self action:@selector(cancelLayer) forControlEvents:UIControlEventTouchUpInside];
     [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
      backButton.showsTouchWhenHighlighted = YES;
@@ -2636,7 +2636,7 @@ int arrangeLayerIndex;
         [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
     } 
     
-    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)];
+    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
 	[backButton addTarget:self action:@selector(callWrite) forControlEvents:UIControlEventTouchUpInside];
     [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
@@ -2760,7 +2760,7 @@ int arrangeLayerIndex;
         [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
     }
 
-    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)];
+    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
 	[backButton addTarget:self action:@selector(cancelLayer) forControlEvents:UIControlEventTouchUpInside];
     [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
@@ -2974,7 +2974,7 @@ int arrangeLayerIndex;
 
     [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,rightUndoBarButton,nil]];
     
-    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)];
+    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
 	[backButton addTarget:self action:@selector(chooseTemplate) forControlEvents:UIControlEventTouchUpInside];
     [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
@@ -3998,14 +3998,14 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 -(void) MyEdit{
     
-    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)];
+    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
 	[backButton addTarget:self action:@selector(cancelLayer) forControlEvents:UIControlEventTouchUpInside];
     backButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *leftBarMenuButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     
-    UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 16, 21)];
+    UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [helpButton addTarget:self action:@selector(loadHelpController) forControlEvents:UIControlEventTouchUpInside];
     [helpButton setBackgroundImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
     helpButton.showsTouchWhenHighlighted = YES;
@@ -4089,14 +4089,14 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     label.text = @"LAYERS";
     self.navigationItem.titleView = label;
     
-    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)];
+    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
 	[backButton addTarget:self action:@selector(chooseTemplate) forControlEvents:UIControlEventTouchUpInside];
     backButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *leftBarMenuButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     
-    UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 16, 21)];
+    UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [helpButton addTarget:self action:@selector(loadHelpController) forControlEvents:UIControlEventTouchUpInside];
     [helpButton setBackgroundImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
     helpButton.showsTouchWhenHighlighted = YES;

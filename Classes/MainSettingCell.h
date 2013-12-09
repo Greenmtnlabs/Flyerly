@@ -13,7 +13,8 @@
 
 @property (nonatomic,strong)IBOutlet UIImageView *imgview;
 @property (nonatomic,strong)IBOutlet UILabel *description;
-@property (nonatomic,strong)IBOutlet UISwitch *ONOffswitch;
+
+
 -(void)setCellObjects :(NSString *)desp leftimage :(NSString *)leftimage;
 
 @end

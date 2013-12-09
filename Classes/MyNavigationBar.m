@@ -25,7 +25,7 @@
 		title.font =[UIFont fontWithName:@"Avenir-Heavy" size:16];
 		title.numberOfLines =2;
 		
-		leftButton = [[UIButton alloc]initWithFrame:CGRectMake(10, 7, 29, 25)];
+		leftButton = [[UIButton alloc]initWithFrame:CGRectMake(10, 7, 45, 42)];
 		[leftButton.titleLabel setFont:[UIFont fontWithName:@"Symbol" size:12]];
 		[leftButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 		[leftButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];

@@ -235,7 +235,7 @@
         </view>
     </objects>
     <resources>
-        <image name="Zmain_screenbg-568h.png" width="640" height="945"/>
+        <image name="Zmain_screenbg-568h.png" width="23" height="23"/>
         <image name="facebook_like.png" width="80" height="49"/>
         <image name="facebook_unlike.png" width="80" height="49"/>
         <image name="likealertbg.png" width="213" height="100"/>

@@ -214,14 +214,14 @@ static ShareProgressView *clipBdPogressView;
     if(fromPhotoController){
         self.navigationItem.hidesBackButton = YES;
         // Create right bar button
-        UIButton *menuButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 31, 30)] autorelease];
+        UIButton *menuButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)] autorelease];
         menuButton.showsTouchWhenHighlighted = YES;
         [menuButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
         [menuButton addTarget:self action:@selector(callMenu) forControlEvents:UIControlEventTouchUpInside];
         UIBarButtonItem *leftBarButton = [[[UIBarButtonItem alloc] initWithCustomView:menuButton] autorelease];
 
         // Create left bar help button
-        UIButton *helpButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 16, 21)] autorelease];
+        UIButton *helpButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)] autorelease];
         helpButton.showsTouchWhenHighlighted = YES;
         [helpButton addTarget:self action:@selector(loadHelpController) forControlEvents:UIControlEventTouchUpInside];
         [helpButton setImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
@@ -244,7 +244,7 @@ static ShareProgressView *clipBdPogressView;
         UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
 
         // Create left bar help button
-        UIButton *helpButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 16, 21)]autorelease];
+        UIButton *helpButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)]autorelease];
           helpButton.showsTouchWhenHighlighted = YES;
         [helpButton addTarget:self action:@selector(loadHelpController) forControlEvents:UIControlEventTouchUpInside];
         [helpButton setBackgroundImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
