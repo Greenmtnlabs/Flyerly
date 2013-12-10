@@ -172,12 +172,13 @@
 
 
 - (void)signOut{
+    /*
     //For Facebook
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate *) [[UIApplication sharedApplication]delegate];
     appDelegate.facebook = nil;
     appDelegate.facebook.sessionDelegate = nil;
     appDelegate.facebook.accessToken = nil;
-    appDelegate.facebook.expirationDate = nil;
+    appDelegate.facebook.expirationDate = nil;*/
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"facebookSetting"];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"FBAccessTokenKey"];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"FBExpirationDateKey"];

@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "LauchViewController.h"
 #import "RegisterController.h"
-#import <Parse/PFLogInViewController.h>
+//#import <Parse/PFLogInViewController.h>
+#import <Parse/Parse.h>
 #import "Singleton.h"
 #import "AccountSelecter.h"
 #import "ResetPWViewController.h"
@@ -17,7 +18,7 @@
 
 @class AccountSelecter,Singleton,RegisterController,ResetPWViewController,MyCustomCell;
 
-@interface SigninController : ParentViewController <PFLogInViewControllerDelegate,FBRequestDelegate,FBSessionDelegate,FBDialogDelegate,FBLoginDialogDelegate ,UIActionSheetDelegate >{
+@interface SigninController : ParentViewController <PFLogInViewControllerDelegate,UIActionSheetDelegate >{
     
     IBOutlet UIImageView *emailImage;
     IBOutlet UIImageView *passwordImage;

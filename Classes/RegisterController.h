@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "LauchViewController.h"
 #import "FlyrAppDelegate.h"
-#import "FBConnect.h"
 #import "Singleton.h"
 #import "AccountSelecter.h"
 #import <Parse/PFLogInViewController.h>
@@ -17,7 +16,7 @@
 #import "ParentViewController.h"
 
 @class FBSession,Singleton,LauchViewController;
-@interface RegisterController : ParentViewController <UITextFieldDelegate,UIActionSheetDelegate,FBRequestDelegate,FBSessionDelegate,FBDialogDelegate,FBLoginDialogDelegate,UIAlertViewDelegate>{
+@interface RegisterController : ParentViewController <UITextFieldDelegate,UIActionSheetDelegate,UIAlertViewDelegate>{
     
     IBOutlet UITextField *username;
     IBOutlet UITextField *password;

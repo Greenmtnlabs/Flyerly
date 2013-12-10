@@ -184,9 +184,35 @@
 }
 
 -(IBAction)onSignInFacebook{
+    
+    // The permissions requested from the user
+//    NSArray *permissionsArray = @[ @"user_about_me", @"user_relationships", @"user_birthday", @"user_location"];
+
+
+
+    // Login PFUser using Facebook
+    [PFFacebookUtils logInWithPermissions:nil block:^(PFUser *user, NSError *error) {
+          [self hideLoadingIndicator]; // Hide loading indicator
+        
+        if (!user) {
+            if (!error) {
+                NSLog(@"Uh oh. The user cancelled the Facebook login.");
+            } else {
+                NSLog(@"Uh oh. An error occurred: %@", error);
+            }
+        } else if (user.isNew) {
+            NSLog(@"User with facebook signed up and logged in!");
+           // [self.navigationController pushViewController:[[UserDetailsViewController alloc] initWithStyle:UITableViewStyleGrouped] animated:YES];
+        } else {
+            NSLog(@"User with facebook logged in!");
+            //[self.navigationController pushViewController:[[UserDetailsViewController alloc] initWithStyle:UITableViewStyleGrouped] animated:YES];
+        }
+    }];
 
     [self showLoadingView];
-
+    
+    
+/*
     if([AddFriendsController  connected]){
         
         FlyrAppDelegate *appDelegate = (FlyrAppDelegate *) [[UIApplication sharedApplication]delegate];
@@ -221,12 +247,54 @@
     }else{
         [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
         [self removeLoadingView];
-    }
+    }*/
 }
 
 -(IBAction)onSignInTwitter{
     [self showLoadingIndicator];
+    
     if([AddFriendsController connected]){
+        
+        [PFTwitterUtils logInWithBlock:^(PFUser *user, NSError *error) {
+            [self hideLoadingIndicator];
+            if (!user) {
+                NSLog(@"Uh oh. The user cancelled the Twitter login.");
+                return;
+            } else if (user.isNew) {
+                NSLog(@"User signed up and logged in with Twitter!");
+                
+                // Login success Move to Flyerly
+                if(IS_IPHONE_5){
+                    launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewControllerIPhone5" bundle:nil];
+                }   else{
+                    launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil] ;
+                }
+                
+                //[self.navigationController pushViewController:launchController animated:YES];
+                [self performSelectorOnMainThread:@selector(pushViewController:) withObject:launchController waitUntilDone:YES];
+
+            } else {
+                
+                NSLog(@"User logged in with Twitter!");
+
+                // Login success Move to Flyerly
+                if(IS_IPHONE_5){
+                    launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewControllerIPhone5" bundle:nil];
+                }   else{
+                    launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil] ;
+                }
+                
+                //[self.navigationController pushViewController:launchController animated:YES];
+                [self performSelectorOnMainThread:@selector(pushViewController:) withObject:launchController waitUntilDone:YES];
+                
+            }     
+        }];
+        
+        
+        
+        
+        
+        /*
         if([TWTweetComposeViewController canSendTweet]){
             
             ACAccountStore *account = [[ACAccountStore alloc] init];
@@ -270,7 +338,7 @@
             [self showAlert:@"No Twitter connection" message:@"You must be connected to Twitter to continue."];
             [self removeLoadingView];
         }
-        
+        */
         
     }else{
         [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
@@ -327,7 +395,7 @@
 
 - (void)fbDidLogin {
 	NSLog(@"logged in");
-    
+    /*
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     
     //save to session
@@ -339,7 +407,7 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     //[self onSignUpFacebook];
-    [appDelegate.facebook requestWithGraphPath:@"me" andDelegate:self];
+    [appDelegate.facebook requestWithGraphPath:@"me" andDelegate:self];*/
 }
 
 - (void)didReceiveMemoryWarning

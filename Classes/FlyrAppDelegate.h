@@ -9,7 +9,7 @@
 //#import "ARRollerView.h"
 //#import "ARRollerProtocol.h"
 //#import "FBPermissionDialog.h"
-#import "FBConnect/FBConnect.h"
+#import <FacebookSDK/FacebookSDK.h>
 #import "TwitLogin.h"
 #import <ObjectiveFlickr.h>
 #import "Crittercism.h"
@@ -59,8 +59,6 @@ extern NSString *FacebookDidLoginNotification;
 @property (nonatomic, strong) AccountController *accountController;
 @property (nonatomic, strong) OFFlickrAPIContext *flickrContext;
 @property (nonatomic, strong) OFFlickrAPIRequest *flickrRequest;
-
-@property (strong, nonatomic) Facebook *facebook;
 @property (nonatomic,strong) TwitLogin *_tSession;
 @property(nonatomic,strong) BZFoursquare *foursquare;
 @property (nonatomic,assign)	BOOL faceBookPermissionFlag;

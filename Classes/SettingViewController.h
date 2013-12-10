@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "FBConnect/FBConnect.h"
 #import <Twitter/Twitter.h>
 #import <ObjectiveFlickr.h>
 #import "LauchViewController.h"
@@ -16,7 +15,7 @@
 #import "Singleton.h"
 
 @class LauchViewController,InputViewController,Singleton;
-@interface SettingViewController : ParentViewController <FBRequestDelegate,FBSessionDelegate,OFFlickrAPIRequestDelegate> {
+@interface SettingViewController : ParentViewController <OFFlickrAPIRequestDelegate> {
     IBOutlet UIButton *facebookButton;
 	IBOutlet UIButton *twitterButton;
 	IBOutlet UIButton *emailButton;

@@ -14,8 +14,6 @@
 #import "HelpController.h"
 #import "SettingViewController.h"
 #import "PhotoController.h"
-#import "FBConnect.h"
-#import "FBConnect/FBConnect.h"
 #import "AccountSelecter.h"
 #import "LocationController.h"
 #import "InputViewController.h"

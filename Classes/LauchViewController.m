@@ -15,7 +15,6 @@
 #import "DraftViewController.h"
 #import "Common.h"
 #import "HelpController.h"
-#import "FacebookLikeView.h"
 #import "Flurry.h"
 
 @interface LauchViewController () 
@@ -176,7 +175,7 @@
 
     //initialize facebook
 
-
+/*
 	FlyrAppDelegate *appDelegate = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
 
     
@@ -193,7 +192,7 @@
         appDelegate.facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
         appDelegate.facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
     }
-    
+    */
     if([[NSUserDefaults standardUserDefaults] objectForKey:@"FACEBOOK_LIKED"]){
         [likeButton setSelected:YES];
     }
@@ -568,7 +567,7 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
     [self hideLoadingIndicator];
 }
 
-
+/*
 - (void)facebookLikeViewDidRender:(FacebookLikeView *)aFacebookLikeView {
     
     self.likeView.hidden = NO;
@@ -659,7 +658,7 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
         [self.view addSubview:opaqueView];
         [self.view  addSubview:webview];
         [self.view  addSubview:crossButton];
-  */
+
            // likeButton.enabled = NO;
      
         
@@ -672,7 +671,7 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
         [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
     }
 }
-
+*/
 -(void)showAlert:(NSString *)title message:(NSString *)message{
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
                                                     message:message
@@ -688,11 +687,11 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
     [crossButton removeFromSuperview];
     
     [self.likeView setHidden:YES];
-    
+    /*
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-    [appDelegate.facebook requestWithGraphPath:@"me/likes" andDelegate:self];
+    [appDelegate.facebook requestWithGraphPath:@"me/likes" andDelegate:self];*/
 }
-
+/*
 -(void)request:(FBRequest *)request didLoad:(id)result{
  
  	NSLog(@"Request received %@", result);    
@@ -724,7 +723,7 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
     
     [self showLikeButton];
 }
-
+*/
 #pragma mark Dealloc
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

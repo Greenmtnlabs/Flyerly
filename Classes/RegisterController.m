@@ -244,7 +244,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     [self showLoadingView];
     
     if([AddFriendsController connected]){
-
+/*
         FlyrAppDelegate *appDelegate = (FlyrAppDelegate *) [[UIApplication sharedApplication]delegate];
         appDelegate.facebook.sessionDelegate = self;
         [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"facebookSetting"];
@@ -274,7 +274,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
         }
     }else{
         [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
-        [self removeLoadingView];
+        [self removeLoadingView];*/
     }
 }
 
@@ -517,7 +517,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 	NSLog(@"logged in");
     
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-    
+    /*
     //save to session
     NSLog(@"%@",appDelegate.facebook.accessToken);
     NSLog(@"%@",appDelegate.facebook.expirationDate);
@@ -527,23 +527,12 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     //[self onSignUpFacebook];
-    [appDelegate.facebook requestWithGraphPath:@"me" andDelegate:self];
+    [appDelegate.facebook requestWithGraphPath:@"me" andDelegate:self];*/
 }
 
-- (void)dealloc {
-    
-	[username release];
-    [password release];    
-    [confirmPassword release];
-    
-    [signUp release];    
-    [signUpFacebook release];
-    [signUpTwitter release];
-    
-    [launchController release];    
-}
 
-#pragma Zohaib Changes
+
+#pragma Twitter Changes
 -(IBAction)signInWithTwitter:(id)sender {
     
     if([TWTweetComposeViewController canSendTweet]) {

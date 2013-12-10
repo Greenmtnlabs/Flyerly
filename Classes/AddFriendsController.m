@@ -11,7 +11,7 @@
 #import "AddFriendItem.h"
 #import <QuartzCore/QuartzCore.h>
 #import "FlyrAppDelegate.h"
-#import "FBRequestConnection.h"
+#import <FacebookSDK/FacebookSDK.h>
 #import "LoadingView.h"
 #import "PhotoController.h"
 #import "HelpController.h"
@@ -390,6 +390,7 @@ BOOL selectAll;
             
             
             [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+            /*
             FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
             appDelegate.facebook.sessionDelegate = self;
             
@@ -415,7 +416,7 @@ BOOL selectAll;
                 
                 [appDelegate.facebook authorize:@[@"read_stream",
                                                  @"publish_stream", @"email"]];
-            }
+            }*/
         }
         
     } else {
@@ -1232,7 +1233,7 @@ NSMutableDictionary *selectedIdentifierDictionary;
     
     [selectButton setSelected:YES];
 }
- */
+
 - (void)fbDidLogin {
 	NSLog(@"logged in");
     
@@ -1248,7 +1249,7 @@ NSMutableDictionary *selectedIdentifierDictionary;
     
     [self loadFacebookContacts:self.facebookButton];
 }
-
+ */
 - (IBAction)onSearchClick:(UIButton *)sender{
     
     if([searchTextField canResignFirstResponder])

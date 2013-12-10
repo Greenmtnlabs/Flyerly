@@ -119,7 +119,7 @@
         [facebookButton setSelected:NO];
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"facebookSetting"];
     } else {
-        
+        /*
         FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
         appDelegate.facebook.sessionDelegate = self;
         
@@ -130,7 +130,7 @@
         } else {
             [appDelegate.facebook authorize:@[@"read_stream",
                                              @"publish_stream", @"email"]];
-        }
+        }*/
     }
 }
 
@@ -146,6 +146,7 @@
 }
 
 #pragma Request receive code
+/*
 - (void)fbDidLogin {
 	NSLog(@"logged in");
     
@@ -158,6 +159,8 @@
     [facebookButton setSelected:YES];
     [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"facebookSetting"];    
 }
+ */
+
 -(IBAction)OntwitterComments{
     InputViewController  *inputv = [[InputViewController alloc]initWithNibName:@"InputViewController" bundle:nil];
     [self.navigationController presentModalViewController:inputv animated:YES];

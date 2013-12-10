@@ -7,7 +7,7 @@
 //
 
 #import "SaveFlyerController.h"
-#import "FBConnect/FBConnect.h"
+#import <FacebookSDK/FacebookSDK.h>
 #import "OLBTwitpicEngine.h"
 #import "PhotoController.h"
 #import "FlyrAppDelegate.h"
@@ -315,16 +315,19 @@
 	[self  killHUD];
 }
 
+
 #pragma mark  Facebook permission delegate
+/*
 - (void)dialogDidSucceed:(FBDialog*)dialog {
-	FlyrAppDelegate *appDele =(FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+	
+    FlyrAppDelegate *appDele =(FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
 	appDele.faceBookPermissionFlag = YES;
          [self callFacebookAlert];
 }
 
 - (void)dialogDidCancel:(FBDialog*)dialog {
     [self callFacebookAlert];
-}
+}*/
 
 #pragma mark  UPLOAD TAB Functions
 

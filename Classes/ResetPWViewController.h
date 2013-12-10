@@ -11,7 +11,6 @@
 #import <Parse/PFQuery.h>
 #import "LauchViewController.h"
 #import "FlyrAppDelegate.h"
-#import "FBConnect.h"
 #import "Singleton.h"
 #import "AccountSelecter.h"
 #import <Parse/PFLogInViewController.h>

@@ -124,7 +124,12 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    
+    /*
+     Called when the application is about to terminate.
+     Save data if appropriate.
+     See also applicationDidEnterBackground:.
+     */
+    [FBSession.activeSession close];
 	[self clearCache];
 }
 
@@ -174,8 +179,8 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 }
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
-
-    return [[self facebook] handleOpenURL:url];
+    return [PFFacebookUtils handleOpenURL:url];
+    
 }
 
 - (OFFlickrAPIRequest *)flickrRequest {
@@ -217,8 +222,8 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
         // Send facebook did login notification
         //[[NSNotificationCenter defaultCenter] postNotificationName:FacebookDidLoginNotification object:self];
         //return YES;
-        
-        return [[self facebook] handleOpenURL:url];
+        return [PFFacebookUtils handleOpenURL:url];
+       // return [[self facebook] handleOpenURL:url];
         
     } else if([[url absoluteString] hasPrefix:@"fsqapi"]){
     
@@ -261,6 +266,12 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     // Setup parse
     [Parse setApplicationId:@"rrU7ilSR4TZNQD9xlDtH8wFoQNK4st5AaITq6Fan"
                   clientKey:@"P0FxBvDvw0eDYYT01cx8nhaDQdl90BdHGc22jPLn"];
+
+    // Your Facebook application id is configured in Info.plist.
+    [PFFacebookUtils initializeFacebook];
+    
+    //Twitter Initialize
+    [PFTwitterUtils initializeWithConsumerKey:@"SAXU48fGEpSMQl56cgRDQ" consumerSecret:@"tNMJrWNA3eqSQn87Gv2WH1KCb3EGpdHHi7YRd1YG6xw"];
     
     // Setup Bit.ly
     [[BitlyConfig sharedBitlyConfig] setBitlyLogin:@"flyerly" bitlyAPIKey:@"R_3bdc6f8e82d260965325510421c980a0"];
@@ -322,7 +333,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
         // Is the ser logged in?
         
         if ( [PFUser currentUser] == nil ) {
-            [navigationController pushViewController:accountController animated:YES];
+            [navigationController   pushViewController:accountController animated:YES];
         }else{
             [navigationController pushViewController:lauchController animated:YES];
             FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];

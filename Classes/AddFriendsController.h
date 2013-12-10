@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <AddressBookUI/AddressBookUI.h>
 #import <AddressBook/AddressBook.h>
-#import "FBConnect/FBConnect.h"
+#import <FacebookSDK/FacebookSDK.h>
 #import <Twitter/Twitter.h>
 #import <Accounts/Accounts.h>
 #import <Accounts/ACAccountStore.h>
@@ -28,7 +28,7 @@
 
 @class LoadingView,LauchViewController,Singleton;
 
-@interface AddFriendsController : UIViewController<UITableViewDelegate,UITableViewDataSource,FBRequestDelegate,FBSessionDelegate,MFMessageComposeViewControllerDelegate,FBDialogDelegate,FBLoginDialogDelegate,UITextFieldDelegate, UIActionSheetDelegate>{
+@interface AddFriendsController : UIViewController<UITableViewDelegate,UITableViewDataSource,MFMessageComposeViewControllerDelegate,UITextFieldDelegate, UIActionSheetDelegate>{
     LauchViewController *launchCotroller;
     Singleton *globle;
     IBOutlet UILabel *contactsLabel;

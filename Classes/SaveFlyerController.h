@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
-#import "FBConnect/FBConnect.h"
+#import <FacebookSDK/FacebookSDK.h>
 #import "MyNavigationBar.h"
 #import "OLBTwitpicEngine.h"
 #import "PhotoController.h"
@@ -19,7 +19,7 @@
 @class DraftViewController;
 @class FBSession;
 
-@interface SaveFlyerController : UIViewController<MFMailComposeViewControllerDelegate,FBDialogDelegate, FBSessionDelegate, FBRequestDelegate,UIAlertViewDelegate,UIAlertViewDelegate,UITextFieldDelegate> {
+@interface SaveFlyerController : UIViewController<MFMailComposeViewControllerDelegate,UIAlertViewDelegate,UIAlertViewDelegate,UITextFieldDelegate> {
 
 
 	UIImage *flyrImg;

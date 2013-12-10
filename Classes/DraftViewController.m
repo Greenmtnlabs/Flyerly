@@ -706,7 +706,7 @@ static ShareProgressView *clipBdPogressView;
     if([facebookButton isSelected]){
         [facebookButton setSelected:NO];        
     } else {
-
+/*
         FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
         appDelegate.facebook.sessionDelegate = self;
         
@@ -730,6 +730,7 @@ static ShareProgressView *clipBdPogressView;
             [appDelegate.facebook authorize:@[@"read_stream",
                                              @"publish_stream", @"email"]];            
         }
+ */
     }
 }
 
@@ -1332,11 +1333,11 @@ static ShareProgressView *clipBdPogressView;
                                    selectedFlyerImage, @"picture",   //img is your UIImage
                                    //placeId, @"place",
                                    nil];
-    
+    /*
     [[appDelegate facebook] requestWithGraphPath:@"me/photos"
                                        andParams:params
                                    andHttpMethod:@"POST"
-                                     andDelegate:self];
+                                     andDelegate:self];*/
 }
 
 - (void)makeTwitterPost:(ACAccount *)acct {
@@ -1861,7 +1862,7 @@ static ShareProgressView *clipBdPogressView;
 }
 
 #pragma Request receive code
-
+/*
 - (void)fbDidLogin {
 	NSLog(@"logged in");
     
@@ -1872,7 +1873,7 @@ static ShareProgressView *clipBdPogressView;
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     [facebookButton setSelected:YES];
-}
+}*/
 
 - (void)request:(FBRequest *)request didReceiveResponse:(NSURLResponse *)response{
     NSLog(@"Response: %@", response);

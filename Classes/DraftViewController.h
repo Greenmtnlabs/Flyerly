@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "MyNavigationBar.h"
-#import "FBConnect/FBConnect.h"
+#import <FacebookSDK/FacebookSDK.h>
 #import <Twitter/Twitter.h>
 #import "TumblrUploadr.h"
 #import <ObjectiveFlickr.h>
@@ -24,7 +24,7 @@
 @class SaveFlyerController,PhotoController;
 @class LoadingView;
 
-@interface DraftViewController : ParentViewController<FBRequestDelegate,UIWebViewDelegate,UIDocumentInteractionControllerDelegate,FBSessionDelegate,FBDialogDelegate,FBLoginDialogDelegate,TumblrUploadrDelegate,OFFlickrAPIRequestDelegate,MFMessageComposeViewControllerDelegate,MFMailComposeViewControllerDelegate,UITextViewDelegate,UITextFieldDelegate,UIGestureRecognizerDelegate,OLBTwitpicEngineDelegate,BitlyURLShortenerDelegate, UIActionSheetDelegate> {
+@interface DraftViewController : ParentViewController<UIWebViewDelegate,UIDocumentInteractionControllerDelegate,TumblrUploadrDelegate,OFFlickrAPIRequestDelegate,MFMessageComposeViewControllerDelegate,MFMailComposeViewControllerDelegate,UITextViewDelegate,UITextFieldDelegate,UIGestureRecognizerDelegate,OLBTwitpicEngineDelegate,BitlyURLShortenerDelegate, UIActionSheetDelegate> {
 
 	IBOutlet UIScrollView *scrollView;
 
