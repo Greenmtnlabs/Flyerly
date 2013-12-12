@@ -15,6 +15,7 @@
 #import "Crittercism.h"
 #import "BZFoursquare.h"
 #import "Singleton.h"
+#import <Parse/Parse.h>
 extern NSString *FlickrSharingSuccessNotification;
 extern NSString *FlickrSharingFailureNotification;
 extern NSString *FacebookDidLoginNotification;
@@ -44,7 +45,7 @@ extern NSString *FacebookDidLoginNotification;
 	OFFlickrAPIRequest *flickrRequest;
 	NSString *flickrUserName;
     BZFoursquare *foursquare_;
-    
+    id loggedInUserID;
     UIView *sharingProgressParentView;
 }
 
@@ -82,6 +83,8 @@ extern NSString *FacebookDidLoginNotification;
 
 -(void)next;
 -(void)clearCache;
+-(void)FbChangeforNewVersion;
+-(void)MergeAccount:(PFObject *)oldUserobj;
 - (void)setAndStoreFlickrAuthToken:(NSString *)inAuthToken secret:(NSString *)inSecret;
 @end
 

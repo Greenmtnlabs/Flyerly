@@ -396,6 +396,83 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 	[[NSNotificationCenter defaultCenter] postNotificationName:FlickrSharingFailureNotification object:self];
 }
 
+
+-(void)FbChangeforNewVersion{
+
+    // Create request for user's Facebook data
+    FBRequest *request = [FBRequest requestForMe];
+    
+    // Send request to Facebook
+    [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+        if (!error) {
+            
+            // result is a dictionary with the user's Facebook data
+            NSDictionary *userData = (NSDictionary *)result;
+            NSString *email = userData[@"email"];
+
+            //Checking Email Exist in Parse
+            PFQuery *query = [PFUser  query];
+            [query whereKey:@"email" equalTo:email];
+            [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
+                if (error) {
+                    
+                    NSLog(@"Email NotExits");
+
+                }else{
+                    [self MergeAccount:object ];
+
+                    NSLog(@"Email Exist");
+
+                }
+            }];
+
+
+        }
+    }];
+}
+
+-(void)MergeAccount:(PFObject *)oldUserobj{
+  
+    
+    //Update fields of newly created user from old user
+    PFUser *user = [PFUser currentUser];
+    user[@"contact"] = [oldUserobj objectForKey:@"contact"];
+    user[@"name"] = [oldUserobj objectForKey:@"name"];
+    //user[@"email"] = [oldUserobj objectForKey:@"email"];
+    user[@"fbinvited"] = [oldUserobj objectForKey:@"fbinvited"];
+    user[@"tweetinvited"] = [oldUserobj objectForKey:@"tweetinvited"];
+    
+    //[user saveInBackground];
+
+    
+    // Transfer Purchases to New User from Old User
+    NSString  *OldUID = [oldUserobj objectId];
+    NSString  *NewUID = user.objectId;
+    //Getting Old Purchase Detail
+
+    PFQuery *query = [PFUser   query];
+    [query setParseClassName:@"Flyer"] ;
+
+    [query whereKey:@"user" equalTo:[oldUserobj objectId]];
+    
+    NSArray *flyers = [query findObjects];
+    
+    //[query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error) {
+        // comments now contains the comments for myPost
+        NSLog(@"");
+    //}];
+        // Change
+        // PFObject *obj = [PFObject objectWithClassName:@"InApp"];
+        // [obj setObject:NewUID forKey:@"user"];
+        // [obj save];
+
+
+    
+
+
+}
+
+
 #pragma mark -
 #pragma mark Memory management
 

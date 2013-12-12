@@ -740,7 +740,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 
 -(IBAction)userExist{
     if(username.text != nil){
-        PFQuery *query = [PFUser query];
+        PFQuery *query = [PFUser  query];
         [query whereKey:@"username" equalTo:[username.text lowercaseString]];
         [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
             if (error) {

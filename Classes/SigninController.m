@@ -23,6 +23,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
 
 	// Do any additional setup after loading the view.
     globle = [Singleton RetrieveSingleton];
@@ -183,15 +184,30 @@
     [self.navigationController pushViewController:theViewController animated:YES];
 }
 
+- (void)loginViewFetchedUserInfo:(FBLoginView *)loginView
+                            user:(id<FBGraphUser>)user {
+    
+    NSLog(@"%@",user);
+    // here we use helper properties of FBGraphUser to dot-through to first_name and
+    // id properties of the json response from the server; alternatively we could use
+    // NSDictionary methods such as objectForKey to get values from the my json object
+   // self.labelFirstName.text = [NSString stringWithFormat:@"Hello %@!", user.first_name];
+    
+    // setting the profileID property of the FBProfilePictureView instance
+    // causes the control to fetch and display the profile picture for the user
+   // self.profilePic.profileID = user.id;
+   // self.loggedInUser = user;
+}
+
 -(IBAction)onSignInFacebook{
     
-    // The permissions requested from the user
-//    NSArray *permissionsArray = @[ @"user_about_me", @"user_relationships", @"user_birthday", @"user_location"];
 
+    // The permissions requested from the user
+    NSArray *permissionsArray = @[ @"user_about_me", @"user_relationships", @"user_birthday", @"user_location"];
 
 
     // Login PFUser using Facebook
-    [PFFacebookUtils logInWithPermissions:nil block:^(PFUser *user, NSError *error) {
+    [PFFacebookUtils logInWithPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
           [self hideLoadingIndicator]; // Hide loading indicator
         
         if (!user) {
@@ -201,14 +217,37 @@
                 NSLog(@"Uh oh. An error occurred: %@", error);
             }
         } else if (user.isNew) {
+            
             NSLog(@"User with facebook signed up and logged in!");
-           // [self.navigationController pushViewController:[[UserDetailsViewController alloc] initWithStyle:UITableViewStyleGrouped] animated:YES];
+            
+            // For Parse New User Merge to old Facebook User
+            FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+            [appDelegate FbChangeforNewVersion];
+            
+            
+            // Login success Move to Flyerly
+            if(IS_IPHONE_5){
+                launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewControllerIPhone5" bundle:nil];
+            }   else{
+                launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil] ;
+            }
+            
+            [self performSelectorOnMainThread:@selector(pushViewController:) withObject:launchController waitUntilDone:YES];
         } else {
             NSLog(@"User with facebook logged in!");
-            //[self.navigationController pushViewController:[[UserDetailsViewController alloc] initWithStyle:UITableViewStyleGrouped] animated:YES];
+            FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+            [appDelegate FbChangeforNewVersion];
+            // Login success Move to Flyerly
+            if(IS_IPHONE_5){
+                launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewControllerIPhone5" bundle:nil];
+            }   else{
+                launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil] ;
+            }
+            
+            [self performSelectorOnMainThread:@selector(pushViewController:) withObject:launchController waitUntilDone:YES];
+
         }
     }];
-
     [self showLoadingView];
     
     
