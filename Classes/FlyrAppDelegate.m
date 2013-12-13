@@ -441,25 +441,51 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     //user[@"email"] = [oldUserobj objectForKey:@"email"];
     user[@"fbinvited"] = [oldUserobj objectForKey:@"fbinvited"];
     user[@"tweetinvited"] = [oldUserobj objectForKey:@"tweetinvited"];
+    NSString  *NewUID = user.objectId;
     
     //[user saveInBackground];
-
     
-    // Transfer Purchases to New User from Old User
-    NSString  *OldUID = [oldUserobj objectId];
-    NSString  *NewUID = user.objectId;
-    //Getting Old Purchase Detail
+    // Transfer Old Flyers to New User from Old User
 
-    PFQuery *query = [PFUser   query];
-    [query setParseClassName:@"Flyer"] ;
-
-    [query whereKey:@"user" equalTo:[oldUserobj objectId]];
+    // Getting Old Flyers Detail
+    // Assume PFObject *myPost was previously created.
+    PFQuery *query = [PFQuery queryWithClassName:@"Flyer"];
+    [query whereKey:@"user" equalTo:oldUserobj];
     
-    NSArray *flyers = [query findObjects];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objsAry, NSError *error) {
+        
+        if (!error) {
+            
+            // The find succeeded.
+            for (PFObject *obj in objsAry) {
+                
+                NSLog(@"%@",obj.ACL);
+                obj[@"user"] = NewUID;
+            }
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                //Save All Objects
+                int success = [PFObject saveAll:objsAry];
+                NSLog(@"Status %@", success? @"updated successfully": @"update failed");
+            });
+           
+            
+        } else {
+            
+            // Log details of the failure
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+        
+    }]; //Find Objects
+    
+    
+
+
     
     //[query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error) {
         // comments now contains the comments for myPost
-        NSLog(@"");
+    
     //}];
         // Change
         // PFObject *obj = [PFObject objectWithClassName:@"InApp"];
