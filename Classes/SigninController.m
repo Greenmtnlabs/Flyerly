@@ -300,6 +300,7 @@
                 NSLog(@"Uh oh. The user cancelled the Twitter login.");
                 return;
             } else if (user.isNew) {
+                NSString *twitterUsername = [PFTwitterUtils twitter].userId;
                 NSLog(@"User signed up and logged in with Twitter!");
                 
                 // Login success Move to Flyerly
@@ -315,6 +316,7 @@
             } else {
                 
                 NSLog(@"User logged in with Twitter!");
+                NSString *twitterUsername = [PFTwitterUtils twitter].screenName;
 
                 // Login success Move to Flyerly
                 if(IS_IPHONE_5){
