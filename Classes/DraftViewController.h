@@ -7,6 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ShareKit.h"
+#import "SHK.h"
+#import "SHKMail.h"
+#import "SHKFacebook.h"
+#import "SHKTwitter.h"
+#import "SHKInstagram.h"
+#import "SHKFlickr.h"
+#import "SHKTumblr.h"
+
 #import "MyNavigationBar.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import <Twitter/Twitter.h>
@@ -19,6 +28,8 @@
 #import "LauchViewController.h"
 #import "Singleton.h"
 #import "ParentViewController.h"
+
+
 
 @class FlyrViewController,LauchViewController,Singleton;
 @class SaveFlyerController,PhotoController;

@@ -189,6 +189,12 @@
     // Forget in app purchases.
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:IN_APP_DICTIONARY_KEY];
     
+    // ShareKit Remove credentials for all services
+    //[SHK logoutOfAll];
+    
+    
+
+    
     // Log out from parse.
     [PFUser logOut];
 }

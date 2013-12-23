@@ -219,7 +219,7 @@
         } else if (user.isNew) {
             
             NSLog(@"User with facebook signed up and logged in!");
-            
+
             // For Parse New User Merge to old Facebook User
             FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
             [appDelegate FbChangeforNewVersion];
@@ -235,8 +235,11 @@
             [self performSelectorOnMainThread:@selector(pushViewController:) withObject:launchController waitUntilDone:YES];
         } else {
             NSLog(@"User with facebook logged in!");
+            
+            // Temp on for Testing here
             FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
             [appDelegate FbChangeforNewVersion];
+            
             // Login success Move to Flyerly
             if(IS_IPHONE_5){
                 launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewControllerIPhone5" bundle:nil];
@@ -300,8 +303,13 @@
                 NSLog(@"Uh oh. The user cancelled the Twitter login.");
                 return;
             } else if (user.isNew) {
-                NSString *twitterUsername = [PFTwitterUtils twitter].userId;
                 NSLog(@"User signed up and logged in with Twitter!");
+
+                NSString *twitterUsername = [PFTwitterUtils twitter].userId;
+                
+                // For Parse New User Merge to old Twitter User
+                FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+                [appDelegate TwitterChangeforNewVersion:twitterUsername];
                 
                 // Login success Move to Flyerly
                 if(IS_IPHONE_5){
@@ -317,7 +325,13 @@
                 
                 NSLog(@"User logged in with Twitter!");
                 NSString *twitterUsername = [PFTwitterUtils twitter].screenName;
+                
+                // Temp on for Testing here
+                // For Parse New User Merge to old Twitter User
+                FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+                [appDelegate TwitterChangeforNewVersion:twitterUsername];
 
+                
                 // Login success Move to Flyerly
                 if(IS_IPHONE_5){
                     launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewControllerIPhone5" bundle:nil];

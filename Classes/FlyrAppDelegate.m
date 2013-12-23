@@ -22,6 +22,9 @@
 #import "BZFoursquare.h"
 #import "BitlyConfig.h"
 
+
+
+
 NSString *kCheckTokenStep = @"kCheckTokenStep";
 NSString *FlickrSharingSuccessNotification = @"FlickrSharingSuccessNotification";
 NSString *FlickrSharingFailureNotification = @"FlickrSharingFailureNotification";
@@ -277,6 +280,11 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     [[BitlyConfig sharedBitlyConfig] setBitlyLogin:@"flyerly" bitlyAPIKey:@"R_3bdc6f8e82d260965325510421c980a0"];
   //  [[BitlyConfig sharedBitlyConfig] setBitlyAPIKey:@"R_3bdc6f8e82d260965325510421c980a0"];
     
+    //Here you load ShareKit submodule with app specific configuration
+    DefaultSHKConfigurator *configurator = [[DefaultSHKConfigurator alloc] init];
+    [SHKConfiguration sharedInstanceWithConfigurator:configurator];
+
+    
     //[self clearCache];
 	changesFlag = NO;
 	[[UIApplication sharedApplication] setStatusBarStyle: UIStatusBarStyleBlackOpaque];
@@ -397,6 +405,39 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 }
 
 
+/*
+ For Checking Twitter old Detail is available in parse or not
+ if it exist then we call Merging Process
+*/
+-(void)TwitterChangeforNewVersion:(NSString *)olduser{
+
+    //Checking user Exist in Parse
+    PFQuery *query = [PFUser  query];
+    [query whereKey:@"username" equalTo:[olduser lowercaseString]];
+    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
+        
+        if (error) {
+            NSLog(@"Twitter User Not Exits");
+            
+        }else{
+            NSLog(@"Old Twitter User found");
+            
+            // Merging Account Process
+            [self MergeAccount:object];
+            
+        }
+    }];
+
+
+
+}
+
+
+/*
+Here we Getting user Email ID from Currently login facebook ID
+For Checking old Detail is available in parse or not
+if it exist then we call Merging Process
+*/
 -(void)FbChangeforNewVersion{
 
     // Create request for user's Facebook data
@@ -419,9 +460,10 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
                     NSLog(@"Email NotExits");
 
                 }else{
-                    [self MergeAccount:object ];
-
                     NSLog(@"Email Exist");
+                    
+                    // Merging Account Info
+                    [self MergeAccount:object];
 
                 }
             }];
@@ -441,10 +483,24 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     //user[@"email"] = [oldUserobj objectForKey:@"email"];
     user[@"fbinvited"] = [oldUserobj objectForKey:@"fbinvited"];
     user[@"tweetinvited"] = [oldUserobj objectForKey:@"tweetinvited"];
+    [user saveInBackground];
+
     NSString  *NewUID = user.objectId;
+    NSString  *OldUID = oldUserobj.objectId;
     
-    //[user saveInBackground];
+    // For Merging User info Parse not allow here
+    // So Now we run Server side script from here and passing user names
+    // For transfer Purchases and Old Flyers Info
+    [PFCloud callFunctionInBackground:@"mergeUser"
+                       withParameters:@{@"oldUser":OldUID,@"newUser":NewUID}
+                                block:^(NSString *result, NSError *error) {
+                                    if (!error) {
+                                        NSLog(@"Cloud Success");
+                                        // result is @"Hello world!"
+                                    }
+     }];
     
+ /*
     // Transfer Old Flyers to New User from Old User
 
     // Getting Old Flyers Detail
@@ -479,22 +535,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
         
     }]; //Find Objects
     
-    
-
-
-    
-    //[query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error) {
-        // comments now contains the comments for myPost
-    
-    //}];
-        // Change
-        // PFObject *obj = [PFObject objectWithClassName:@"InApp"];
-        // [obj setObject:NewUID forKey:@"user"];
-        // [obj save];
-
-
-    
-
+*/
 
 }
 

@@ -19,6 +19,8 @@
 #import "InputViewController.h"
 #import "Singleton.h"
 #import "MainSettingCell.h"
+#import "ShareKit.h"
+#import "SHK.h"
 
 
 @class PhotoController,InputViewController,Singleton ;

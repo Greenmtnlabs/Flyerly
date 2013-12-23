@@ -16,6 +16,13 @@
 #import "BZFoursquare.h"
 #import "Singleton.h"
 #import <Parse/Parse.h>
+
+#import "SHKFacebook.h"
+#import "SHKConfiguration.h"
+#import "DefaultSHKConfigurator.h"
+#import "SHK.h"
+
+
 extern NSString *FlickrSharingSuccessNotification;
 extern NSString *FlickrSharingFailureNotification;
 extern NSString *FacebookDidLoginNotification;
@@ -84,6 +91,7 @@ extern NSString *FacebookDidLoginNotification;
 -(void)next;
 -(void)clearCache;
 -(void)FbChangeforNewVersion;
+-(void)TwitterChangeforNewVersion:(NSString *)olduser;
 -(void)MergeAccount:(PFObject *)oldUserobj;
 - (void)setAndStoreFlickrAuthToken:(NSString *)inAuthToken secret:(NSString *)inSecret;
 @end

@@ -35,7 +35,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="46">
-                    <rect key="frame" x="5" y="51" width="310" height="387"/>
+                    <rect key="frame" x="5" y="65" width="310" height="387"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="share_flyer_details_bg.png" id="4">

@@ -73,6 +73,8 @@ static ShareProgressView *clipBdPogressView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+   
  
     if([facebookPogressView.statusText.text isEqualToString: @"Sharing Failed!"] || [facebookPogressView.statusText.text isEqualToString:@"Successfully Shared!"]){
         NSDictionary *itemDetails = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%d", facebookPogressView.tag], @"tag", nil];
@@ -347,12 +349,12 @@ static ShareProgressView *clipBdPogressView;
     
     // init progress view
     if(!progressView){
-        progressView = [[UIView alloc] initWithFrame:CGRectMake(0, 44, 310, 3)];
+        progressView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, 310, 3)];
         [self.view addSubview:progressView];
     } else {
         // Remove all progress views
         [[progressView subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
-        [progressView setFrame:CGRectMake(0, 44, 310, 3)];
+        [progressView setFrame:CGRectMake(0, 64, 310, 3)];
         [self.view addSubview:progressView];
     }
     
@@ -531,9 +533,12 @@ static ShareProgressView *clipBdPogressView;
  */
 -(void)share{
     
+    
+
+
     // Check if any network in selected
     if([self isAnyNetworkSelected]){
-       
+        
         // Check if only those buttons are selected that did'nt required connectivity
         if([self onlyNonConnectivityNetworkSelected]){
             
@@ -553,6 +558,7 @@ static ShareProgressView *clipBdPogressView;
             [self showAlert];
         }else{
 
+            
 
             // Check internet connectivity
             if([AddFriendsController connected]){
@@ -564,39 +570,54 @@ static ShareProgressView *clipBdPogressView;
                 //[self setDefaultProgressViewHeight];
                 
                 // Set 0 sharing netwroks
-                //countOfSharingNetworks = 0;
                 
+                
+                SHKItem *item = [SHKItem image:[UIImage imageNamed:@"flyerlylogo"] title:@"San Francisco"];
+
+                //countOfSharingNetworks = 0;
+               
+
+                //ShareKit Calling
+               /*
+                SHKActionSheet *actionSheet = [SHKActionSheet actionSheetForItem:item];
+                [SHK setRootViewController:self];
+                [actionSheet showFromToolbar:self.navigationController.toolbar];*/
                 
                 if([twitterButton isSelected]){
                     [self showTwitterProgressRow];
-                    [self shareOnTwitter];
+                     [SHKTwitter shareItem:item];
+                    //[self shareOnTwitter];
                     [Flurry logEvent:@"Shared Twitter"];
                     //[self fillSuccessStatus:twitterPogressView];
                 }
                 
                 if([facebookButton isSelected]){
                     [self showFacebookProgressRow];
-                    [self shareOnFacebook];
+                     [SHKFacebook shareItem:item];
+                    //[self shareOnFacebook];
                     [Flurry logEvent:@"Shared Facebook"];
                 }
                 
                 if([flickrButton isSelected]){
                     [self showFlickrProgressRow];
-                    [self shareOnFlickr];
+                     [SHKFlickr shareItem:item];
+                    //[self shareOnFlickr];
                     [Flurry logEvent:@"Shared Flickr"];
                 }
                 
                 if([tumblrButton isSelected]){
                     [self showTumblrProgressRow];
-                    [self shareOnTumblr];
+                     [SHKTumblr shareItem:item];
+                    //[self shareOnTumblr];
                     [Flurry logEvent:@"Shared Tumblr"];
                     //[self fillSuccessStatus:tumblrPogressView];
                 }
                 
                 if([instagramButton isSelected]){
                     [Flurry logEvent:@"Shared Instagram"];
-                    [self showInstagramProgressRow];
+                    //[self showInstagramProgressRow];
                     [self shareOnInstagram];
+                     [SHKInstagram shareItem:item];
                 }
                 
                 if([clipboardButton isSelected]){
@@ -614,7 +635,8 @@ static ShareProgressView *clipBdPogressView;
                     if ([emailButton isSelected]) {
                         [Flurry logEvent:@"Shared Email"];
                         [self showemailProgressRow ];
-                        [self shareOnEmail];
+                         [SHKMail shareItem:item];
+                        //[self shareOnEmail];
                     }else if ([smsButton isSelected]) {
                         [Flurry logEvent:@"Shared SMS"];
                         [self showsmsProgressRow];
@@ -706,6 +728,7 @@ static ShareProgressView *clipBdPogressView;
     if([facebookButton isSelected]){
         [facebookButton setSelected:NO];        
     } else {
+        [facebookButton setSelected:YES];
 /*
         FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
         appDelegate.facebook.sessionDelegate = self;
@@ -783,7 +806,7 @@ static ShareProgressView *clipBdPogressView;
     } else {
         
         [tumblrButton setSelected:YES];
-        
+
         if([[TMAPIClient sharedInstance].OAuthToken length] > 0  && [[TMAPIClient sharedInstance].OAuthTokenSecret length] > 0){
 
         } else {
@@ -1261,12 +1284,13 @@ static ShareProgressView *clipBdPogressView;
  */
 -(void)shareOnTumblr{
 
+
     if([[TMAPIClient sharedInstance].OAuthToken length] > 0  && [[TMAPIClient sharedInstance].OAuthTokenSecret length] > 0){
 
         [self shareOnTumblr:YES];
         
     } else {
-        
+      
         [TMAPIClient sharedInstance].OAuthConsumerKey = TumblrAPIKey;
         [TMAPIClient sharedInstance].OAuthConsumerSecret = TumblrSecretKey;
         
@@ -1283,7 +1307,10 @@ static ShareProgressView *clipBdPogressView;
                 }
             }];
         }
+       
+        
     }
+       
 }
 
 -(void)shareOnTumblr:(BOOL)overloaded{
@@ -1844,13 +1871,13 @@ static ShareProgressView *clipBdPogressView;
 }
 
 -(void)setDefaultProgressViewHeight{
-    [progressView setFrame:CGRectMake(0, 44, 310, 3)];
+    [progressView setFrame:CGRectMake(0, 64, 310, 3)];
     
     if(IS_IPHONE_5){
-        [scrollView setFrame:CGRectMake(5, 44, 310, 600)];
+        [scrollView setFrame:CGRectMake(5, 0, 310, 600)];
         [scrollView setContentSize:CGSizeMake(310, 600)];
     }else{
-        [scrollView setFrame:CGRectMake(5, 44, 310, 401)];
+        [scrollView setFrame:CGRectMake(5, 0, 310, 401)];
         [scrollView setContentSize:CGSizeMake(310, 401)];
     }
 }
@@ -2200,7 +2227,24 @@ static ShareProgressView *clipBdPogressView;
 }
 
 
+#pragma ShareKit
 
+- (void)myButtonHandlerAction
+{
+    // Create the item to share (in this example, a url)
+    NSURL *url = [NSURL URLWithString:@"http://getsharekit.com"];
+    SHKItem *item = [SHKItem URL:url title:@"ShareKit is Awesome!" contentType:SHKURLContentTypeWebpage];
+    
+    // Get the ShareKit action sheet
+    SHKActionSheet *actionSheet = [SHKActionSheet actionSheetForItem:item];
+    
+    // ShareKit detects top view controller (the one intended to present ShareKit UI) automatically,
+    // but sometimes it may not find one. To be safe, set it explicitly
+    [SHK setRootViewController:self];
+    
+    // Display the action sheet
+    [actionSheet showFromToolbar:self.navigationController.toolbar];
+}
 
 
 @end
