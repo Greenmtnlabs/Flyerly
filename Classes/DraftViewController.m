@@ -558,8 +558,6 @@ static ShareProgressView *clipBdPogressView;
             [self showAlert];
         }else{
 
-            
-
             // Check internet connectivity
             if([AddFriendsController connected]){
                 
@@ -616,8 +614,8 @@ static ShareProgressView *clipBdPogressView;
                 if([instagramButton isSelected]){
                     [Flurry logEvent:@"Shared Instagram"];
                     //[self showInstagramProgressRow];
-                    [self shareOnInstagram];
-                     [SHKInstagram shareItem:item];
+                   // [self shareOnInstagram];
+                     [SHKInstagram  shareItem:item];
                 }
                 
                 if([clipboardButton isSelected]){
