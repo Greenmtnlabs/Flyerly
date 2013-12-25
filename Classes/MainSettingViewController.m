@@ -27,9 +27,11 @@
 {
     [super viewDidLoad];
     globle = [Singleton RetrieveSingleton];
+    [self.view setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
     self.tableView.rowHeight = 40;
-    [self.tableView setBackgroundView:nil];
-    [self.tableView setSeparatorColor:[UIColor blackColor]];
+    //[self.tableView setBackgroundView:nil];
+    [self.tableView setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
+    [self.tableView setSeparatorColor:[UIColor lightGrayColor]];
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
     self.navigationItem.hidesBackButton = YES;

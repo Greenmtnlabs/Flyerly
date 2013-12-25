@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <Twitter/Twitter.h>
-#import <ObjectiveFlickr.h>
+#import "ObjectiveFlickr.h"
 #import "LauchViewController.h"
 #import "InputViewController.h"
 #import "ParentViewController.h"

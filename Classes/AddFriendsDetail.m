@@ -44,7 +44,7 @@
     [self.contentView addSubview:self.description];
     
     
-    self.checkBtn = [[UIButton alloc] initWithFrame:CGRectMake(284,48 , 28, 28)];
+    self.checkBtn = [[UIButton alloc] initWithFrame:CGRectMake(284,48 , 22, 29)];
     [self.contentView addSubview:self.checkBtn];
     
     return self;

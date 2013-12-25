@@ -805,7 +805,7 @@ int totalCount = 0;
                   if (contactsCount <15) {
                       contactsCount = contactsCount +1;
                       [deviceContactItems addObject:dict2[@"identifier"]];
-                      [cellImageButton setBackgroundImage:[UIImage imageNamed:@"add_icon"] forState:UIControlStateNormal];
+                      [cellImageButton setBackgroundImage:[UIImage imageNamed:@"checkgreen"] forState:UIControlStateNormal];
                   }else{
                       [self showAlert:@"You can only invite 15 user at a time" message:@""];
                   }
@@ -815,9 +815,9 @@ int totalCount = 0;
                 [self inviteFreindUnselected:[NSString stringWithFormat:@"%d",cellImageButton.tag]];
                  contactsCount = contactsCount -1;
                 if ([self ckeckExistdb:dict2[@"identifier"]]) {
-                    [cellImageButton setBackgroundImage:[UIImage imageNamed:@"add_icon-grey"] forState:UIControlStateNormal];
+                    [cellImageButton setBackgroundImage:[UIImage imageNamed:@"checkwhite"] forState:UIControlStateNormal];
                 }else{
-                    [cellImageButton setBackgroundImage:[UIImage imageNamed:@"check_icon"] forState:UIControlStateNormal];
+                    [cellImageButton setBackgroundImage:[UIImage imageNamed:@"checkgray"] forState:UIControlStateNormal];
                 }
             }
         }

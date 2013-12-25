@@ -72,8 +72,7 @@
     UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarButton,nil]];
 
-    UIButton *siginBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 46, 30)];
-    [siginBtn setTitle:@"Sign In" forState:UIControlStateNormal];
+    UIButton *siginBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     siginBtn.showsTouchWhenHighlighted = YES;
     siginBtn.titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size: 12.0];
     [siginBtn addTarget:self action:@selector(onSignIn) forControlEvents:UIControlEventTouchUpInside];
@@ -237,8 +236,9 @@
             NSLog(@"User with facebook logged in!");
             
             // Temp on for Testing here
+            /*
             FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-            [appDelegate FbChangeforNewVersion];
+            [appDelegate FbChangeforNewVersion];*/
             
             // Login success Move to Flyerly
             if(IS_IPHONE_5){
@@ -328,8 +328,9 @@
                 
                 // Temp on for Testing here
                 // For Parse New User Merge to old Twitter User
+                /*
                 FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-                [appDelegate TwitterChangeforNewVersion:twitterUsername];
+                [appDelegate TwitterChangeforNewVersion:twitterUsername];*/
 
                 
                 // Login success Move to Flyerly

@@ -17,6 +17,7 @@
 #import "ParentViewController.h"
 
 
+
 @class Singleton,LauchViewController;
 @interface PhotoController :ParentViewController<UIActionSheetDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, EBPurchaseDelegate>
 {
@@ -226,6 +227,8 @@
 @property (nonatomic, assign) NSInteger imgPickerFlag;
 @property (nonatomic, assign) int flyerNumber;
 
+
+-(void)loadCustomPhotoLibrary;
 - (void)showHUD;
 - (void)killHUD;
 -(void) chooseTemplate;

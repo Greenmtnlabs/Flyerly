@@ -10,6 +10,7 @@
 #import "MyNavigationBar.h"
 #import "PhotoController.h"
 #import "LauchViewController.h"
+#import "Singleton.h"
 
 @interface FlyrViewController : UIViewController <UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>{
 	NSMutableArray *photoArray;
@@ -25,6 +26,7 @@
     LauchViewController *launchCotroller;
     BOOL searching;
     BOOL letUserSelectRow;
+    Singleton *globle;
 }
 @property(nonatomic,strong) PhotoController *ptController;
 @property(nonatomic,strong) NSMutableArray *photoArray;

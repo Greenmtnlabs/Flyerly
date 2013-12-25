@@ -51,6 +51,8 @@
 -(void)viewDidLoad{
 
     globle = [Singleton RetrieveSingleton];
+    [self.view setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
+
     if([[NSUserDefaults standardUserDefaults] stringForKey:@"facebookSetting"]){
         [facebookButton setSelected:YES];
     }else{

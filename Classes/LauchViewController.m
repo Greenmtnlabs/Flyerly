@@ -396,6 +396,10 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
     
 }
 
+- (IBAction)showLikeButton{
+
+}
+
 #pragma Like code
 
 - (IBAction)onTwitter:(id)sender {

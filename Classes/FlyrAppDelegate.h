@@ -11,12 +11,11 @@
 //#import "FBPermissionDialog.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "TwitLogin.h"
-#import <ObjectiveFlickr.h>
+#import "ObjectiveFlickr.h"
 #import "Crittercism.h"
 #import "BZFoursquare.h"
 #import "Singleton.h"
 #import <Parse/Parse.h>
-
 #import "SHKFacebook.h"
 #import "SHKConfiguration.h"
 #import "DefaultSHKConfigurator.h"

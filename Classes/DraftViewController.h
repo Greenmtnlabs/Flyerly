@@ -20,7 +20,7 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import <Twitter/Twitter.h>
 #import "TumblrUploadr.h"
-#import <ObjectiveFlickr.h>
+#import "ObjectiveFlickr.h"
 #import <MessageUI/MessageUI.h>
 #import "ShareProgressView.h"
 #import "OLBTwitpicEngine.h"

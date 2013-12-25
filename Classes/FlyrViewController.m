@@ -197,6 +197,8 @@ sd:;
 - (void)viewDidLoad {
     [super viewDidLoad];
     searching = NO;
+    globle = [Singleton RetrieveSingleton];
+    [self.view setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
 	letUserSelectRow = YES;
     self.navigationItem.hidesBackButton = YES;
     searchTextField.placeholder = @"Flyerly search";
@@ -207,7 +209,7 @@ sd:;
 
 
     
-	[self.tView setBackgroundColor:[UIColor whiteColor]];
+	[self.tView setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
 	tView.dataSource = self;
 	tView.delegate = self;
 	//tView.alpha  = .6f;
@@ -217,7 +219,8 @@ sd:;
     [self.tView setBackgroundView:nil];
     [self.tView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [searchTextField addTarget:self action:@selector(textFieldTapped:) forControlEvents:UIControlEventEditingChanged];
-    searchTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    searchTextField.borderStyle = nil;
+  //  searchTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
 }
 
 -(void)callMenu
@@ -281,7 +284,7 @@ sd:;
     //[saveFlyrLabel setText:@"Saved flyer"];
     //UIBarButtonItem *barLabel = [[UIBarButtonItem alloc] initWithCustomView:saveFlyrLabel];
     
-    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-30, -6, 50, 50)] autorelease];
+    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)] autorelease];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:TITLE_FONT size:18];
     label.textAlignment = UITextAlignmentCenter;

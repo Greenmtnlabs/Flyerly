@@ -130,7 +130,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
     
     // for Navigation Bar Background
-    //[self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo"] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.alpha = 1;
 
     //set title
@@ -174,11 +174,11 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarButton,nil]];
 
     
-    UIButton *signUpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 33)];
+    UIButton *signUpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [signUpButton addTarget:self action:@selector(onSignUp) forControlEvents:UIControlEventTouchUpInside];
-    //[signUpButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
+    [signUpButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
     signUpButton.showsTouchWhenHighlighted = YES;
-    [signUpButton setTitle:@"Done" forState:UIControlStateNormal];
+    //[signUpButton setTitle:@"Done" forState:UIControlStateNormal];
     [signUpButton setBackgroundColor:[UIColor clearColor ]];
     [signUpButton setFont:[UIFont fontWithName:TITLE_FONT size:16]];
     [signUpButton setTitleColor:[globle colorWithHexString:@"84c441"]forState:UIControlStateNormal];

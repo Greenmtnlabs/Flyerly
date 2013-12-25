@@ -10,6 +10,7 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <ImageIO/ImageIO.h>
 
+
 @interface CustomPhotoController : UIViewController<UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource> {
     
     IBOutlet UITableView *galleryTable;
@@ -33,6 +34,7 @@
     int counter;
     
     ALAssetsLibrary *library;
+    //NBUAsset *library;
 }
 
 @property (nonatomic, strong) IBOutlet UITableView *galleryTable;

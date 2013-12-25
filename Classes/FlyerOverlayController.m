@@ -235,7 +235,7 @@
 /*
  * Called when edit button is pressed
  */
--(IBAction)onEdit:(id)sender{
+-(IBAction)onEdit{
 
 
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];

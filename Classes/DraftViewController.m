@@ -239,7 +239,7 @@ static ShareProgressView *clipBdPogressView;
         //self.navigationItem.leftItemsSupplementBackButton = YES;
         self.navigationItem.hidesBackButton = YES;
 
-        UIButton *backButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)] autorelease];
+        UIButton *backButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)] autorelease];
         [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
         backButton.showsTouchWhenHighlighted = YES;
         [backButton addTarget:self action:@selector(goback) forControlEvents:UIControlEventTouchUpInside];
@@ -293,7 +293,7 @@ static ShareProgressView *clipBdPogressView;
     shareButton.titleLabel.textAlignment = UIControlContentHorizontalAlignmentCenter;
     shareButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *rightShareButton = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
-    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightShareButton,rightEditBarButton,nil]];
+    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightEditBarButton,nil]];
 
 
 	[UIView commitAnimations];
@@ -532,10 +532,7 @@ static ShareProgressView *clipBdPogressView;
  * Share flyer on selected networks
  */
 -(void)share{
-    
-    
-
-
+    /*
     // Check if any network in selected
     if([self isAnyNetworkSelected]){
         
@@ -579,8 +576,8 @@ static ShareProgressView *clipBdPogressView;
                /*
                 SHKActionSheet *actionSheet = [SHKActionSheet actionSheetForItem:item];
                 [SHK setRootViewController:self];
-                [actionSheet showFromToolbar:self.navigationController.toolbar];*/
-                
+                [actionSheet showFromToolbar:self.navigationController.toolbar];
+ ////////////
                 if([twitterButton isSelected]){
                     [self showTwitterProgressRow];
                      [SHKTwitter shareItem:item];
@@ -648,7 +645,7 @@ static ShareProgressView *clipBdPogressView;
                     [self showInstagramProgressRow];
                     [self shareOnInstagram];
                 }
-*/
+/////////////
                 
                 //if([saveToRollSwitch isOn]){
                 //if([[NSUserDefaults standardUserDefaults] stringForKey:@"saveToCameraRollSetting"]){
@@ -672,7 +669,7 @@ static ShareProgressView *clipBdPogressView;
         [self showAlert:@"Warning!" message:@"Please select at least one sharing option."];
         
     }
-    
+    */
 }
 
 /*
@@ -726,7 +723,30 @@ static ShareProgressView *clipBdPogressView;
     if([facebookButton isSelected]){
         [facebookButton setSelected:NO];        
     } else {
-        [facebookButton setSelected:YES];
+        
+        // Check internet connectivity
+        if([AddFriendsController connected]){
+            [facebookButton setSelected:YES];
+            ;
+            
+            // Current Item For Sharing
+            SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ %@ ",titleView.text, descriptionView.text]];
+            
+            //Calling ShareKit for Sharing
+            [SHKFacebook shareItem:item];
+            
+        } else {
+            
+            [self showAlert:@"You're not connected to the internet. Please connect and retry" message:@""];
+            
+        }
+
+        
+        
+        
+        
+        
+        
 /*
         FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
         appDelegate.facebook.sessionDelegate = self;
@@ -765,11 +785,29 @@ static ShareProgressView *clipBdPogressView;
     
     } else {
 
+        // Check internet connectivity
+        if([AddFriendsController connected]){
+             [twitterButton setSelected:YES];
+            ;
+            
+            // Current Item For Sharing
+            SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ %@ ",titleView.text, descriptionView.text]];
+            
+            //Calling ShareKit for Sharing
+            [SHKTwitter shareItem:item];
+            
+        } else {
+            
+            [self showAlert:@"You're not connected to the internet. Please connect and retry" message:@""];
+            
+        }
+
+        /*
         if([TWTweetComposeViewController canSendTweet]){
             [twitterButton setSelected:YES];
         }  else {
             [self showAlert:@"No Twitter connection" message:@"You must be connected to Twitter from device settings."];
-        }
+        }*/
     }
 }
 
@@ -781,6 +819,7 @@ static ShareProgressView *clipBdPogressView;
         [instagramButton setSelected:NO];
     } else {
         [instagramButton setSelected:YES];
+        [self shareOnInstagram];
     }
 }
 
@@ -791,7 +830,25 @@ static ShareProgressView *clipBdPogressView;
     if([emailButton isSelected]){
         [emailButton setSelected:NO];
     } else {
-        [emailButton setSelected:YES];
+        
+        // Check internet connectivity
+        if([AddFriendsController connected]){
+            [emailButton setSelected:YES];
+            ;
+            
+            // Current Item For Sharing
+            SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ %@ ",titleView.text, descriptionView.text]];
+            
+            //Calling ShareKit for Sharing
+            [SHKMail shareItem:item];
+            
+        } else {
+            
+            [self showAlert:@"You're not connected to the internet. Please connect and retry" message:@""];
+            
+        }
+        
+        
     }
 }
 
@@ -803,8 +860,27 @@ static ShareProgressView *clipBdPogressView;
         [tumblrButton setSelected:NO];
     } else {
         
-        [tumblrButton setSelected:YES];
-
+        
+        
+        // Check internet connectivity
+        if([AddFriendsController connected]){
+           [tumblrButton setSelected:YES];
+            ;
+            
+            // Current Item For Sharing
+            SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ %@ ",titleView.text, descriptionView.text]];
+            
+            //Calling ShareKit for Sharing
+            [SHKTumblr shareItem:item];
+            
+        } else {
+            
+            [self showAlert:@"You're not connected to the internet. Please connect and retry" message:@""];
+            
+        }
+        
+        
+/*
         if([[TMAPIClient sharedInstance].OAuthToken length] > 0  && [[TMAPIClient sharedInstance].OAuthTokenSecret length] > 0){
 
         } else {
@@ -827,7 +903,7 @@ static ShareProgressView *clipBdPogressView;
                     }
                 }];
             }
-        }
+        }*/
     }
 }
 
@@ -839,16 +915,34 @@ static ShareProgressView *clipBdPogressView;
         [flickrButton setSelected:NO];
     } else {
         
-        [flickrButton setSelected:YES];
-      //  [flickrRequest setDelegate:self];
+       
+        // Check internet connectivity
+        if([AddFriendsController connected]){
+            [flickrButton setSelected:YES];
+            ;
+            
+            // Current Item For Sharing
+            SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ %@ ",titleView.text, descriptionView.text]];
+            
+            //Calling ShareKit for Sharing
+            [SHKFlickr shareItem:item];
+            
+        } else {
+            
+            [self showAlert:@"You're not connected to the internet. Please connect and retry" message:@""];
+            
+        }
         
+        
+      //  [flickrRequest setDelegate:self];
+        /*
         FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
         if (![appDelegate.flickrContext.OAuthToken length]) {
 
             [self showLoadingIndicator];
             
             [self authorizeAction];
-        }
+        }*/
     }
 }
 
@@ -862,6 +956,9 @@ static ShareProgressView *clipBdPogressView;
         [smsButton setSelected:YES];
         
         [UIPasteboard generalPasteboard].image = selectedFlyerImage;
+         [self SingleshareOnMMS];
+                
+
     }
 }
 
@@ -875,6 +972,7 @@ static ShareProgressView *clipBdPogressView;
     } else {
         [clipboardButton setSelected:YES];
         [clipboardlabel setTextColor:[globle colorWithHexString:@"3caaff"]];
+        [self onclipcordClick];
     }
 
 }

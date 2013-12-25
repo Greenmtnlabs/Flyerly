@@ -171,7 +171,7 @@
     
     // Setup the library.
     library = [[ALAssetsLibrary alloc] init];
-    
+
     // Hide lines
     self.galleryTable.separatorColor = [UIColor clearColor];
     //NSLog(@"%f",image.size.width);
