@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "LauchViewController.h"
 #import "RegisterController.h"
-#import <FacebookSDK/FacebookSDK.h>
 #import <Parse/Parse.h>
 #import "Singleton.h"
 #import "AccountSelecter.h"

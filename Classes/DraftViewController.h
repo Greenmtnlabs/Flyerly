@@ -28,8 +28,7 @@
 #import "LauchViewController.h"
 #import "Singleton.h"
 #import "ParentViewController.h"
-
-
+#import "FlyerOverlayController.h"
 
 @class FlyrViewController,LauchViewController,Singleton;
 @class SaveFlyerController,PhotoController;
@@ -67,6 +66,7 @@
     Singleton *globle;
 	MyNavigationBar *navBar;
 	FlyrViewController *fvController;
+    FlyerOverlayController *overlayController;
 	SaveFlyerController *svController;
 	LoadingView *loadingView;
     LauchViewController  *launchController;

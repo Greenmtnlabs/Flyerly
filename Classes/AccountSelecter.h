@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "Singleton.h"
-#import <Parse/PFLogInViewController.h>
-#import <Parse/PFQuery.h>
 #import "Common.h"
 #import "AddFriendsController.h"
+//#import <NBUKit/NBUKit.h>
+
 @class SigninController,Singleton;
 @interface AccountSelecter : UIViewController <UITextFieldDelegate,UITableViewDelegate>{
 

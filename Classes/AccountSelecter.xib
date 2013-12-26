@@ -117,7 +117,7 @@
     </objects>
     <resources>
         <image name="Zregister_flyer.png" width="42" height="56"/>
-        <image name="Zsignup_button.png" width="256" height="36"/>
+        <image name="Zsignup_button.png" width="253" height="35"/>
         <image name="register-bg-iPhone4.png" width="320" height="480"/>
         <image name="text_box.png" width="253" height="35"/>
     </resources>

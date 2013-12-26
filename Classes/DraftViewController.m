@@ -17,7 +17,6 @@
 #import "JSON.h"
 #import "ShareProgressView.h"
 #import "AddFriendsController.h"
-#import "FlyerOverlayController.h"
 #import "Flurry.h"
 #import "HelpController.h"
 #import <Parse/PFFile.h>
@@ -440,7 +439,7 @@ static ShareProgressView *clipBdPogressView;
     self.navigationController.navigationBar.alpha = 0;
     
     // Create overlay controller
-    FlyerOverlayController *overlayController = [[FlyerOverlayController alloc]initWithNibName:@"FlyerOverlayController" bundle:nil image:flyerImage modalView:modalView];
+    overlayController = [[FlyerOverlayController alloc]initWithNibName:@"FlyerOverlayController" bundle:nil image:flyerImage modalView:modalView];
     // set its parent
     [overlayController setViews:self];
     //NSLog(@"showFlyerOverlay Tag: %d", cellImageButton.tag);

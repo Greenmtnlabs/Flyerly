@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import <AddressBookUI/AddressBookUI.h>
 #import <AddressBook/AddressBook.h>
-#import <FacebookSDK/FacebookSDK.h>
 #import <Twitter/Twitter.h>
 #import <Accounts/Accounts.h>
 #import <Accounts/ACAccountStore.h>

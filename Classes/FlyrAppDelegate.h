@@ -9,7 +9,6 @@
 //#import "ARRollerView.h"
 //#import "ARRollerProtocol.h"
 //#import "FBPermissionDialog.h"
-#import <FacebookSDK/FacebookSDK.h>
 #import "TwitLogin.h"
 #import "ObjectiveFlickr.h"
 #import "Crittercism.h"

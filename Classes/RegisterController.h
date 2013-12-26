@@ -11,8 +11,6 @@
 #import "FlyrAppDelegate.h"
 #import "Singleton.h"
 #import "AccountSelecter.h"
-#import <Parse/PFLogInViewController.h>
-#import <Parse/PFQuery.h>
 #import "ParentViewController.h"
 
 @class FBSession,Singleton,LauchViewController;
