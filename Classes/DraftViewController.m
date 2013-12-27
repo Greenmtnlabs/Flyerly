@@ -1216,7 +1216,7 @@ static ShareProgressView *clipBdPogressView;
                         [self shareOnEmail:[theImage url]];                                               
                     }else{
                         [smsPogressView.statusText setText:@"Opening SMS!"];
-                        [self shortenURL:[theImage url]];
+                       // [self shortenURL:[theImage url]];
                     }
                 }
                 else{
@@ -2078,7 +2078,7 @@ static ShareProgressView *clipBdPogressView;
                                    completion:^{
                                        // Open email composer if selected
                                        if([smsButton isSelected]){
-                                           [self shortenURL:globle.sharelink];
+                                          // [self shortenURL:globle.sharelink];
                                        } else {
                                            
                                            if([instagramButton isSelected] && (![tumblrButton isSelected] && ![flickrButton isSelected])){

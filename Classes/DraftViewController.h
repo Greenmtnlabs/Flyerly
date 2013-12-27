@@ -15,7 +15,6 @@
 #import "SHKInstagram.h"
 #import "SHKFlickr.h"
 #import "SHKTumblr.h"
-
 #import "MyNavigationBar.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import <Twitter/Twitter.h>
@@ -171,5 +170,5 @@
 - (void)uploadImageByboth:(NSData *)imageData;
 
 -(void)shareOnEmail:(NSString *)link;
--(void)shortenURL:(NSString *)url;
+//-(void)shortenURL:(NSString *)url;
 @end

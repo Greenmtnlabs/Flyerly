@@ -133,15 +133,15 @@
  */
 
 - (NSString*)twitterConsumerKey {
-	return @"";
+	return @"SAXU48fGEpSMQl56cgRDQ";
 }
 
 - (NSString*)twitterSecret {
-	return @"";
+	return @"tNMJrWNA3eqSQn87Gv2WH1KCb3EGpdHHi7YRd1YG6xw";
 }
 // You need to set this if using OAuth, see note above (xAuth users can skip it)
 - (NSString*)twitterCallbackUrl {
-	return @"";
+	return @"http://www.riksof.com";
 }
 // To use xAuth, set to 1
 - (NSNumber*)twitterUseXAuth {
@@ -182,15 +182,15 @@
  3 - make sure you define and create the same URL scheme in your app description on Flickr. It can be as simple as yourapp://flickr
  4 - do not override this, unless you subclass the sharer and need more privileges for custom added functionality.*/
 - (NSString*)flickrConsumerKey {
-    return @"";
+    return @"b2ea05c41f53e1dc4d6e6edee9e6ee06";
 }
 
 - (NSString*)flickrSecretKey {
-    return @"";
+    return @"d4af50fe93325de3";
 }
 // The user defined callback url
 - (NSString*)flickrCallbackUrl{
-    return @"app://flickr";
+    return @"app://www.google.com";
 }
 
 - (NSString *)flickrPermissions {
@@ -199,11 +199,11 @@
 
 // Bit.ly for shortening URLs, used by some sharers (e.g. Buffer). http://bit.ly/account/register - after signup: http://bit.ly/a/your_api_key If you do not enter bit.ly credentials, URL will be shared unshortened.
 - (NSString*)bitLyLogin {
-	return @"";
+	return @"flyerly";
 }
 
 - (NSString*)bitLyKey {
-	return @"";
+	return @"R_3bdc6f8e82d260965325510421c980a0";
 }
 
 // LinkedIn - https://www.linkedin.com/secure/developer
@@ -243,16 +243,16 @@
 
 // Tumblr - http://www.tumblr.com/docs/en/api/v2
 - (NSString*)tumblrConsumerKey {
-	return @"";
+	return @"7g8ugn9opLIb2oKLQBlnbDjBoYKQHbVd9TgtVZRMz5NK1GXgXS";
 }
 
 - (NSString*)tumblrSecret {
-	return @"";
+	return @"4uAmyM6YOL0UyGykUPaRpkCVVELLze9Nu1I2bNWXRWYOuDQA6u";
 }
 
 //you can put whatever here. It must be the same you entered in tumblr app registration, eg tumblr.sharekit.com
 - (NSString*)tumblrCallbackUrl {
-	return @"";
+	return @" https://google.com";
 }
 
 // Hatena - https://www.hatena.com/yours12345/config/auth/develop
