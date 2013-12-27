@@ -1,2 +1,2 @@
-platform :ios, '5.0'
-pod 'NBUKit'
+platform :ios, '7.0'
+pod "ShareKit"

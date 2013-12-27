@@ -8,7 +8,6 @@
 
 #import "SaveFlyerController.h"
 #import <FacebookSDK/FacebookSDK.h>
-#import "OLBTwitpicEngine.h"
 #import "PhotoController.h"
 #import "FlyrAppDelegate.h"
 #import <QuartzCore/QuartzCore.h>
@@ -21,9 +20,9 @@
 @implementation SaveFlyerController
 
 @synthesize twitterButton,mailButton,faceBookButton,uploadButton,ptController,dvController;
-@synthesize navBar,flyrImg,twit,twitUser,twitPass,twitAlert,facebookAlert,aHUD,isDraftView;
+@synthesize flyrImg,twitUser,twitPass,twitAlert,facebookAlert,aHUD,isDraftView;
 @synthesize twitMsg,twitDialog,flyrImgData,_session,alertTextField,imgName;
-
+//@synthesize navBar,twit;
 
 
 -(void)callPhotoController{
@@ -54,9 +53,9 @@
 		
 		[navBar.leftButton addTarget:self action:@selector(callPhotoController) forControlEvents:UIControlEventTouchUpInside];
 		[navBar.rightButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-		[self.navBar.leftButton setEnabled:YES];
+		//[self.navBar.leftButton setEnabled:YES];
 		
-		[self.navBar setUserInteractionEnabled:YES];
+		//[self.navBar setUserInteractionEnabled:YES];
 	}
 	else
 	{
@@ -69,9 +68,9 @@
 		
 		[navBar.leftButton addTarget:self action:@selector(callDraftController) forControlEvents:UIControlEventTouchUpInside];
 		[navBar.rightButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-		[self.navBar.leftButton setEnabled:YES];
+		//[self.navBar.leftButton setEnabled:YES];
 		
-		[self.navBar setUserInteractionEnabled:YES];
+		//[self.navBar setUserInteractionEnabled:YES];
 		
 	}
 }
@@ -157,6 +156,7 @@
 
  -(void)doTweet
  {
+     /*
 	 twit = [[OLBTwitpicEngine alloc]initWithDelegate:self];
 	 NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	 NSString  *passStr = [defaults objectForKey:@"tpass_pref"];
@@ -164,17 +164,18 @@
 	 
 	 [twit uploadImageToTwitpic:flyrImg withMessage:twitMsg username:userStr password:passStr];
 	 [aHUD.loadingLabel setText:@"Uploaded..."];
-	 [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(killHUD) userInfo:nil repeats:NO];
+	 [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(killHUD) userInfo:nil repeats:NO];*/
  }
- 
+ /*
  - (void)twitpicEngine:(OLBTwitpicEngine *)engine didUploadImageWithResponse:(NSString *)response{
-	 NSLog(response);
+	 
+     NSLog(response);
 
 	 uploadButton.alpha = 0;
- }
+ }*/
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-	[self.navBar.leftButton setEnabled:YES];
+	//[self.navBar.leftButton setEnabled:YES];
 	if(alertView == twitAlert && buttonIndex == 1)
 	{
 		NSString *tempTwit = [NSString stringWithFormat:@"%@",alertTextField.text];
@@ -295,7 +296,7 @@
 }
 
 -(void) showInlineMailClient {
-	[self.navBar setUserInteractionEnabled:YES];
+	//[self.navBar setUserInteractionEnabled:YES];
 	Class mailClass = (NSClassFromString(@"MFMailComposeViewController"));
 	if (mailClass != nil)
 	{
@@ -349,7 +350,7 @@
 		NSString *userStr = [defaults objectForKey:@"tuser_pref"];
 		
 		if(passStr != nil && userStr != nil ){
-			[appDele._tSession callLoginFromLoginController];
+			//[appDele._tSession callLoginFromLoginController];
 			[self callTwitAlert];
 		}
 		else{
@@ -438,10 +439,7 @@
 - (void)dealloc 
 {
 	//[_session.delegates removeObject: self];
-         [aHUD release];
 	//[twitDialog release];
-	[twitMsg release];
-	[twit release];
 	//[_session release];
 	[ptController release];
 }

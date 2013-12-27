@@ -8,9 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
-#import <FacebookSDK/FacebookSDK.h>
 #import "MyNavigationBar.h"
-#import "OLBTwitpicEngine.h"
 #import "PhotoController.h"
 #import "TwitLogin.h"
 #import <MessageUI/MessageUI.h>
@@ -30,7 +28,6 @@
 	
 	UIButton *uploadButton;
 	MyNavigationBar *navBar;
-	OLBTwitpicEngine *twit;
 	NSString *twitMsg;
 	PhotoController *ptController;
 
@@ -52,8 +49,9 @@
 @property (nonatomic, strong) UIButton  *mailButton;
 @property (nonatomic, strong) UIButton *faceBookButton;
 @property (nonatomic, strong) UIButton *uploadButton;
-@property (nonatomic, strong) MyNavigationBar *navBar;
-@property(nonatomic, strong) OLBTwitpicEngine *twit;
+
+//@property (nonatomic, strong) MyNavigationBar *navBar;
+//@property(nonatomic, strong) OLBTwitpicEngine *twit;
 @property(nonatomic, strong) NSString *twitMsg;
 @property(nonatomic, strong) PhotoController *ptController;
 @property(nonatomic, strong) NSString *twitUser;

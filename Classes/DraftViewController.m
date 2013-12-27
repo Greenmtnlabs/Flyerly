@@ -13,7 +13,6 @@
 #import "Common.h"
 #import "LoadingView.h"
 #import <QuartzCore/QuartzCore.h>
-#import "TMAPIClient.h"
 #import "JSON.h"
 #import "ShareProgressView.h"
 #import "AddFriendsController.h"
@@ -36,7 +35,8 @@ static ShareProgressView *clipBdPogressView;
 
 @implementation DraftViewController
 
-@synthesize selectedFlyerImage,imgView,navBar,fvController,svController,titleView,descriptionView,selectedFlyerDescription,selectedFlyerTitle, detailFileName, imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,loadingView,dic,fromPhotoController,scrollView, saveToCameraRollLabel, saveToRollSwitch,twit,locationBackground,locationLabel,networkParentView,locationButton,listOfPlaces,bitly,clipboardlabel,sharelink;
+
+@synthesize selectedFlyerImage,imgView,navBar,fvController,svController,titleView,descriptionView,selectedFlyerDescription,selectedFlyerTitle, detailFileName, imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,loadingView,dic,fromPhotoController,scrollView, saveToCameraRollLabel, saveToRollSwitch,locationBackground,locationLabel,networkParentView,locationButton,listOfPlaces,clipboardlabel,sharelink;
 //@synthesize twitterPogressView,facebookPogressView,tumblrPogressView,flickrPogressView,progressView,instagramPogressView;
 
 -(void)callFlyrView{
@@ -1374,61 +1374,11 @@ static ShareProgressView *clipBdPogressView;
     return canOpen;
 }
 
-/*
- * Share on Tumblr
- */
--(void)shareOnTumblr{
 
-
-    if([[TMAPIClient sharedInstance].OAuthToken length] > 0  && [[TMAPIClient sharedInstance].OAuthTokenSecret length] > 0){
-
-        [self shareOnTumblr:YES];
-        
-    } else {
-      
-        [TMAPIClient sharedInstance].OAuthConsumerKey = TumblrAPIKey;
-        [TMAPIClient sharedInstance].OAuthConsumerSecret = TumblrSecretKey;
-        
-        if((![[[TMAPIClient sharedInstance] OAuthToken] length] > 0) ||
-           (![[[TMAPIClient sharedInstance] OAuthTokenSecret] length] > 0)){
-            
-            [[TMAPIClient sharedInstance] authenticate:@"Flyerly" callback:^(NSError *error) {
-                if (error){
-                    NSLog(@"Authentication failed: %@ %@", error, [error description]);
-                }else{
-
-                    NSLog(@"Authentication successful!");
-                    [self shareOnTumblr:YES];
-                }
-            }];
-        }
-       
-        
-    }
-       
-}
-
--(void)shareOnTumblr:(BOOL)overloaded{
-
-    [[TMAPIClient sharedInstance] userInfo:^(id data, NSError *error) {
-        if (error){
-            NSLog(@"User Data failed: %@ %@", error, [error description]);
-            [self fillErrorStatus:tumblrPogressView];
-        }else{
-            NSLog(@"User data fetched successful! %@", data);
-            
-            NSDictionary *userData = data[@"user"];
-            NSString *name = userData[@"name"];
-            NSLog(@"%@", name);
-            
-            [self uploadFiles:[TMAPIClient sharedInstance].OAuthToken oauthSecretKey:[TMAPIClient sharedInstance].OAuthTokenSecret blogName:name];
-        }
-    }];
-}
 
 /*
  * Share on Flickr
- */
+
 -(void)shareOnFlickr{
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     NSData *imageData = UIImageJPEGRepresentation(selectedFlyerImage, 0.9);
@@ -1437,6 +1387,7 @@ static ShareProgressView *clipBdPogressView;
     }
    // [self fillSuccessStatus:flickrPogressView];
 }
+ */
 
 - (UIDocumentInteractionController *) setupControllerWithURL: (NSURL*) fileURL usingDelegate: (id <UIDocumentInteractionControllerDelegate>) interactionDelegate {
     UIDocumentInteractionController *interactionController = [UIDocumentInteractionController interactionControllerWithURL: fileURL];
@@ -2036,9 +1987,9 @@ static ShareProgressView *clipBdPogressView;
        // [self shareOnInstagram];
     }
 }
-
+   /*
 - (void)authorizeAction {
-    
+ 
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     
     // if there's already OAuthToken, we want to reauthorize
@@ -2053,10 +2004,12 @@ static ShareProgressView *clipBdPogressView;
     
     self.flickrRequest.sessionInfo = kFetchRequestTokenStep;
     [self.flickrRequest  fetchOAuthRequestTokenWithCallbackURL:[NSURL URLWithString:kCallbackURLBaseString]];
+ 
 }
 
 - (void)flickrAPIRequest:(OFFlickrAPIRequest *)inRequest didObtainOAuthRequestToken:(NSString *)inRequestToken secret:(NSString *)inSecret;
 {
+  
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     // these two lines are important
     appDelegate.flickrContext.OAuthToken = inRequestToken;
@@ -2071,6 +2024,7 @@ static ShareProgressView *clipBdPogressView;
 
 - (OFFlickrAPIRequest *)flickrRequest
 {
+ 
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     
     if (!flickrRequest) {
@@ -2080,6 +2034,7 @@ static ShareProgressView *clipBdPogressView;
     }
     
     return flickrRequest;
+   
 }
 
 - (void)flickrAPIRequest:(OFFlickrAPIRequest *)inRequest imageUploadSentBytes:(NSUInteger)inSentBytes totalBytes:(NSUInteger)inTotalBytes {
@@ -2092,7 +2047,7 @@ static ShareProgressView *clipBdPogressView;
      NSLog(@"%s %@ %@", __PRETTY_FUNCTION__, inRequest.sessionInfo, inError);
      UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[inError description] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
      [alert show];
-     */
+    
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     [appDelegate setAndStoreFlickrAuthToken:nil secret:nil];
     [self authorizeAction];
@@ -2102,7 +2057,7 @@ static ShareProgressView *clipBdPogressView;
 - (void)flickrAPIRequest:(OFFlickrAPIRequest *)inRequest didCompleteWithResponse:(NSDictionary *)inResponseDictionary
 {
 }
-
+ */
 - (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
 	switch (result) {
 		case MFMailComposeResultCancelled:
@@ -2162,52 +2117,6 @@ static ShareProgressView *clipBdPogressView;
                                    }];
 }
 
-- (void) uploadFiles:(NSString *)oauthToken oauthSecretKey:(NSString *)oauthSecretKey blogName:(NSString *)blogName{
-    
-    UIImage *originalImage = [UIImage imageWithContentsOfFile:imageFileName];
-    NSData *data1 = [NSData dataWithData:UIImagePNGRepresentation(originalImage)];
-    
-    NSArray *array = @[data1];
-    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        TumblrUploadr *tu = [[TumblrUploadr alloc] initWithNSDataForPhotos:array andBlogName:[NSString stringWithFormat:@"%@.tumblr.com", blogName] andDelegate:self andCaption:[NSString stringWithFormat:@"%@ %@ - %@",titleView.text, descriptionView.text, [LocationController getLocationDetails][@"name"]]];
-        dispatch_async( dispatch_get_main_queue(), ^{
-            
-            [tu signAndSendWithTokenKey:oauthToken andSecret:oauthSecretKey];
-        });
-    });
-}
-
-- (void) tumblrUploadr:(TumblrUploadr *)tu didFailWithError:(NSError *)error {
-    NSLog(@"connection failed with error %@",[error localizedDescription]);
-    [tu release];
-    
-    [self fillErrorStatus:tumblrPogressView];
-    
-    
-}
-- (void) tumblrUploadrDidSucceed:(TumblrUploadr *)tu withResponse:(NSString *)response {
-    NSLog(@"connection succeeded with response: %@", response);
-    [tu release];
-    
-    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData: [response dataUsingEncoding:NSUTF8StringEncoding]
-                                                         options: NSJSONReadingMutableContainers
-                                                           error: nil];
-    NSDictionary *meta = dict[@"meta"];
-    NSString *status = [meta[@"status"] stringValue];
-    
-    if([status isEqualToString:@"201"]){
-        [self fillSuccessStatus:tumblrPogressView];
-    }else{
-        [self fillErrorStatus:tumblrPogressView];
-    }
-    
-    if([instagramButton isSelected]){
-       // NSLog(@"Instagram call From tumbler");
-       // [self showInstagramProgressRow];
-        //[self shareOnInstagram];
-    }
-    
-}
 
 #pragma Location near by code
 
@@ -2254,9 +2163,9 @@ static ShareProgressView *clipBdPogressView;
 }
 
 #pragma Bitly code for URL shortening
-
+/*
 -(void)shortenURL:(NSString *)url{
-    
+  
     bitly = [[BitlyURLShortener alloc] init];
     bitly.delegate = self;
     [bitly shortenLinksInText:url];
@@ -2278,7 +2187,7 @@ static ShareProgressView *clipBdPogressView;
           [longURL absoluteString], statusCode, statusText);
     [self onsmsFailed];
 }
-
+*/
 #pragma leaving code
 
 - (void)postDismissCleanup {

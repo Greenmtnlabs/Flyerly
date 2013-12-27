@@ -330,13 +330,14 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
 }
 
 -(IBAction)createTwitLogin:(id)sender{
+    /*
 	TwitLogin *twitDialog = [[TwitLogin alloc]init];
 	//twitDialog.flyerImage = flyrImg;
 	FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
 	twitDialog.svController = appDele.svController;
 	appDele._tSession = twitDialog;
 	[twitDialog show];
-	[self.view addSubview:twitDialog];
+	[self.view addSubview:twitDialog];*/
 }
 
 -(IBAction)showFlyerDetail:(UIImageView *)sender{

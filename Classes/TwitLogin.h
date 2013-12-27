@@ -7,8 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "OLBTwitpicEngine.h"
-#import "MGTwitterEngineGlobalHeader.h"
 #import "MyNetworkController.h"
 
 @class MGTwitterEngine;
@@ -17,7 +15,7 @@
 @class PhotoController;
 @class SaveFlyerController;
 
-@interface TwitLogin: UIView <UITextFieldDelegate,OLBTwitpicEngineDelegate>{
+@interface TwitLogin: UIView <UITextFieldDelegate>{
 	UIView* _loginView;
 	UIActivityIndicatorView* _spinner;
 	UILabel* _titleLabel;
@@ -37,7 +35,6 @@
 	BOOL  _notificationFlag;
 	UIAlertView *netStat; 
 	MyNetworkController *netObj;
-	OLBTwitpicEngine *twit;
 	UIImage *flyerImage;
 	SaveFlyerController *svController;
 }
@@ -45,7 +42,6 @@
 @property(nonatomic,retain) LoginController *lController;
 @property(retain, nonatomic) UIAlertView *netStat;
 @property(retain, nonatomic) MyNetworkController *netObj;
-@property(nonatomic, retain) OLBTwitpicEngine *twit;
 @property(nonatomic, retain) UIImage *flyerImage;
 @property(nonatomic, retain)SaveFlyerController *svController;
 - (void)postDismissCleanup;

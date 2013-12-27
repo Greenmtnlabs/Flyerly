@@ -9,16 +9,13 @@
 //#import "ARRollerView.h"
 //#import "ARRollerProtocol.h"
 //#import "FBPermissionDialog.h"
-#import "TwitLogin.h"
-#import "ObjectiveFlickr.h"
 #import "Crittercism.h"
 #import "BZFoursquare.h"
 #import "Singleton.h"
 #import <Parse/Parse.h>
 #import "SHKFacebook.h"
 #import "SHKConfiguration.h"
-#import "DefaultSHKConfigurator.h"
-#import "SHK.h"
+#import "MySHKConfigurator.h"
 
 
 extern NSString *FlickrSharingSuccessNotification;
@@ -32,7 +29,7 @@ extern NSString *FacebookDidLoginNotification;
 @class AccountController;
 @class Singleton;
 
-@interface FlyrAppDelegate : UIResponder <UIApplicationDelegate,OFFlickrAPIRequestDelegate> {
+@interface FlyrAppDelegate : UIResponder <UIApplicationDelegate> {
 	UIScrollView *fontScrollView;
 	UIScrollView *colorScrollView;
 	UIScrollView *sizeScrollView;
@@ -43,12 +40,8 @@ extern NSString *FacebookDidLoginNotification;
     LauchViewController *lauchController;
     AccountController *accountController;
     Singleton *globle;
-	TwitLogin *_tSession;
 	BOOL faceBookPermissionFlag;
 	BOOL changesFlag;
-	OFFlickrAPIContext *flickrContext;
-	OFFlickrAPIRequest *flickrRequest;
-	NSString *flickrUserName;
     BZFoursquare *foursquare_;
     id loggedInUserID;
     UIView *sharingProgressParentView;
@@ -63,28 +56,12 @@ extern NSString *FacebookDidLoginNotification;
 @property (nonatomic, strong) SaveFlyerController *svController;
 @property (nonatomic, strong) LauchViewController *lauchController;
 @property (nonatomic, strong) AccountController *accountController;
-@property (nonatomic, strong) OFFlickrAPIContext *flickrContext;
-@property (nonatomic, strong) OFFlickrAPIRequest *flickrRequest;
-@property (nonatomic,strong) TwitLogin *_tSession;
 @property(nonatomic,strong) BZFoursquare *foursquare;
 @property (nonatomic,assign)	BOOL faceBookPermissionFlag;
 @property (nonatomic,assign) BOOL changesFlag;
-
 @property (strong, nonatomic) FBSession *session;
-@property (nonatomic, strong) NSString *flickrUserName;
 @property (nonatomic, strong) UIView *sharingProgressParentView;
-
 @property (nonatomic, strong) NSString *loginId;
-
-//@property (nonatomic, retain) FBDialog* dialog;
-//@property (nonatomic,retain) FBPermissionDialog* perDialog;
-//@property (nonatomic,retain) FBStreamDialog* streamDialog;
-//@property (nonatomic,retain)  FBSession* _session;
-//@property(nonatomic,retain) ARRollerView *adwhirl;
-//@property (nonatomic, retain) NSMutableArray *templateArray;
-//@property (nonatomic, retain) NSMutableArray *iconArray;
-//+ (void) increaseNetworkActivityIndicator;
-//+ (void) decreaseNetworkActivityIndicator;
 
 -(void)next;
 -(void)clearCache;

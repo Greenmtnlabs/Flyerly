@@ -11,7 +11,6 @@
 #import <CoreGraphics/CoreGraphics.h>
 #import "Common.h"
 #import "FlyrAppDelegate.h"
-#import "TMAPIClient.h"
 #import "HelpController.h"
 #import "PhotoController.h"
 
@@ -256,7 +255,7 @@
         
         [tumblrButton setSelected:YES];
         [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"tumblrSetting"];
-
+/*
         if([[TMAPIClient sharedInstance].OAuthToken length] > 0  && [[TMAPIClient sharedInstance].OAuthTokenSecret length] > 0){
             
         } else {
@@ -270,7 +269,7 @@
                 [self showLoadingIndicator];
 
                 [[TMAPIClient sharedInstance] authenticate:@"Flyerly" callback:^(NSError *error) {
-                    
+ 
                     // Remove loading view
                     [self hideLoadingIndicator];
 
@@ -282,7 +281,7 @@
                     }
                 }];
             }
-        }
+        } */
     }
 }
 
@@ -300,11 +299,11 @@
         //NSString *authTokenSecret = [[NSUserDefaults standardUserDefaults] objectForKey:kStoredAuthTokenSecretKeyName];
         
         //if((![authToken length] > 0) || (![authTokenSecret length] > 0)){
-        [self authorizeAction];
+        //[self authorizeAction];
         //}
     }
 }
-
+/*
 - (void)authorizeAction {
     
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
@@ -345,7 +344,7 @@
 - (void)flickrAPIRequest:(OFFlickrAPIRequest *)inRequest didFailWithError:(NSError *)inError{
     NSLog(@"Fail request %@, error: %@", inRequest, inError);
 }
-
+*/
 -(IBAction)loadHelpController{
     HelpController *helpController = [[HelpController alloc]initWithNibName:@"HelpController" bundle:nil];
     [self.navigationController pushViewController:helpController animated:NO];

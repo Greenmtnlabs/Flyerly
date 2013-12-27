@@ -19,12 +19,8 @@
 #import "MyNavigationBar.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import <Twitter/Twitter.h>
-#import "TumblrUploadr.h"
-#import "ObjectiveFlickr.h"
 #import <MessageUI/MessageUI.h>
 #import "ShareProgressView.h"
-#import "OLBTwitpicEngine.h"
-#import "BitlyURLShortener.h"
 #import "LauchViewController.h"
 #import "Singleton.h"
 #import "ParentViewController.h"
@@ -34,7 +30,7 @@
 @class SaveFlyerController,PhotoController;
 @class LoadingView;
 
-@interface DraftViewController : ParentViewController<UIWebViewDelegate,UIDocumentInteractionControllerDelegate,TumblrUploadrDelegate,OFFlickrAPIRequestDelegate,MFMessageComposeViewControllerDelegate,MFMailComposeViewControllerDelegate,UITextViewDelegate,UITextFieldDelegate,UIGestureRecognizerDelegate,OLBTwitpicEngineDelegate,BitlyURLShortenerDelegate, UIActionSheetDelegate> {
+@interface DraftViewController : ParentViewController<UIWebViewDelegate,UIDocumentInteractionControllerDelegate,MFMessageComposeViewControllerDelegate,MFMailComposeViewControllerDelegate,UITextViewDelegate,UITextFieldDelegate,UIGestureRecognizerDelegate, UIActionSheetDelegate> {
 
 	IBOutlet UIScrollView *scrollView;
 
@@ -81,7 +77,6 @@
     int countOfSharingNetworks;
     ShareProgressView *instagramPogressView;
     
-    OLBTwitpicEngine *twit;
     NSMutableArray *listOfPlaces;
     
     NSArray *arrayOfAccounts;
@@ -134,8 +129,6 @@
 @property (nonatomic, strong) LoadingView *loadingView;
 @property BOOL fromPhotoController;
 
-@property (nonatomic, strong) OLBTwitpicEngine *twit;
-@property(nonatomic, strong) BitlyURLShortener *bitly;
 
 -(IBAction)onClickFacebookButton;
 -(IBAction)onClickTwitterButton;

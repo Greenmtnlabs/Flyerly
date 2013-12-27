@@ -8,14 +8,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MGTwitterEngineGlobalHeader.h"
 #import "MyNetworkController.h"
-#import "OLBTwitpicEngine.h"
 
-@class MGTwitterEngine;
-@class MGTwitterEngineGlobalHeader;
 
-@interface LoginController : UIViewController <UITextFieldDelegate,OLBTwitpicEngineDelegate>
+@interface LoginController : UIViewController <UITextFieldDelegate>
 
 {
 	/*IBOutlet UILabel* _label;
@@ -34,7 +30,6 @@
 	IBOutlet id iconView;
 	BOOL _modal;
 	BOOL _remember;
-	OLBTwitpicEngine *twit;
 	UIImage *flyerImg;
 	
 }
@@ -43,7 +38,6 @@
 @property(strong, nonatomic) MyNetworkController *netObj;
 @property(strong, nonatomic) NSString *userName;
 @property(strong, nonatomic) NSString *passWord;
-@property(nonatomic, strong) OLBTwitpicEngine *twit;
 @property(nonatomic, strong) UIImage *flyerImg;
 
 -(id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)nibBundle modal:(BOOL)modal;

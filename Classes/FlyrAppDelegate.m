@@ -15,17 +15,16 @@
 #import "LauchViewController.h"
 #import "AfterUpdateController.h"
 #import "AccountController.h"
-#import "TMAPIClient.h"
 #import "DraftViewController.h"
 #import "Flurry.h"
 #import <Parse/Parse.h>
 #import "BZFoursquare.h"
-#import "BitlyConfig.h"
 
 
 
 
-NSString *kCheckTokenStep = @"kCheckTokenStep";
+
+NSString *kCheckTokenStep1 = @"kCheckTokenStep";
 NSString *FlickrSharingSuccessNotification = @"FlickrSharingSuccessNotification";
 NSString *FlickrSharingFailureNotification = @"FlickrSharingFailureNotification";
 NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
@@ -37,10 +36,10 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 
 @synthesize window;
 @synthesize navigationController,faceBookPermissionFlag,changesFlag;
-@synthesize fontScrollView,colorScrollView,templateScrollView,sizeScrollView,svController,_tSession,lauchController,flickrContext,flickrRequest,accountController;
+@synthesize fontScrollView,colorScrollView,templateScrollView,sizeScrollView,svController,lauchController,accountController;
 @synthesize session = _session;
 //@synthesize adwhirl;
-@synthesize flickrUserName,sharingProgressParentView;
+@synthesize sharingProgressParentView;
 
 #pragma mark Ad whirl delegate methods
 
@@ -187,12 +186,13 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 }
 
 - (OFFlickrAPIRequest *)flickrRequest {
+    /*
 	if (!flickrRequest) {
 		flickrRequest = [[OFFlickrAPIRequest alloc] initWithAPIContext:flickrContext];
 		flickrRequest.delegate = self;
 	}
-	
-	return flickrRequest;
+	*/
+	return nil; //flickrRequest;
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication
@@ -215,7 +215,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
             }
             
             [self flickrRequest].sessionInfo = kGetAccessTokenStep;
-            [flickrRequest fetchOAuthAccessTokenWithRequestToken:token verifier:verifier];
+           // [flickrRequest fetchOAuthAccessTokenWithRequestToken:token verifier:verifier];
         }
         
         return YES;
@@ -233,11 +233,11 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
         return [[self foursquare] handleOpenURL:url];
 
     } else {
-        
-        return [[TMAPIClient sharedInstance] handleOpenURL:url];
+        //Tumbler Return
+        return nil;//[[SHKTumblr  sharedInstance] handleOpenURL:url];
     }
 }
-
+/*
 - (OFFlickrAPIContext *)flickrContext
 {
     if (!flickrContext) {
@@ -254,7 +254,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     
     return flickrContext;
 }
-
+*/
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     [FBAppCall handleDidBecomeActiveWithSession:self.session];
 }
@@ -277,13 +277,15 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     [PFTwitterUtils initializeWithConsumerKey:@"SAXU48fGEpSMQl56cgRDQ" consumerSecret:@"tNMJrWNA3eqSQn87Gv2WH1KCb3EGpdHHi7YRd1YG6xw"];
     
     // Setup Bit.ly
-    [[BitlyConfig sharedBitlyConfig] setBitlyLogin:@"flyerly" bitlyAPIKey:@"R_3bdc6f8e82d260965325510421c980a0"];
+    /*
+    [[BitlyConfig sharedBitlyConfig] setBitlyLogin:@"flyerly" bitlyAPIKey:@"R_3bdc6f8e82d260965325510421c980a0"];*/
   //  [[BitlyConfig sharedBitlyConfig] setBitlyAPIKey:@"R_3bdc6f8e82d260965325510421c980a0"];
     
     //Here you load ShareKit submodule with app specific configuration
-    DefaultSHKConfigurator *configurator = [[DefaultSHKConfigurator alloc] init];
+    
+    DefaultSHKConfigurator *configurator = [[MySHKConfigurator alloc] init];
     [SHKConfiguration sharedInstanceWithConfigurator:configurator];
-
+    
     
     //[self clearCache];
 	changesFlag = NO;
@@ -356,11 +358,11 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 
     return YES;
 }
-
+/*
 - (void)flickrAPIRequest:(OFFlickrAPIRequest *)inRequest didCompleteWithResponse:(NSDictionary *)inResponseDictionary {    
     NSLog(@"Request Complete With Response: %@", inResponseDictionary);
     
-    if (inRequest.sessionInfo == kCheckTokenStep) {
+    if (inRequest.sessionInfo == kCheckTokenStep1) {
 		self.flickrUserName = [inResponseDictionary valueForKeyPath:@"user.username._text"];
 	}
 	
@@ -403,7 +405,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     NSLog(@"Fail request %@, error: %@", inRequest, inError);
 	[[NSNotificationCenter defaultCenter] postNotificationName:FlickrSharingFailureNotification object:self];
 }
-
+*/
 
 /*
  For Checking Twitter old Detail is available in parse or not
@@ -548,7 +550,6 @@ if it exist then we call Merging Process
     [lauchController release];
 	[navigationController release];
 	[window release];
-	[flickrUserName release];
 }
 
 
