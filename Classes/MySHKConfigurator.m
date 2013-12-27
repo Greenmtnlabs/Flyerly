@@ -252,7 +252,7 @@
 
 //you can put whatever here. It must be the same you entered in tumblr app registration, eg tumblr.sharekit.com
 - (NSString*)tumblrCallbackUrl {
-	return @" https://google.com";
+	return @"http://www.google.com";
 }
 
 // Hatena - https://www.hatena.com/yours12345/config/auth/develop
