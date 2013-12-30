@@ -1,0 +1,14 @@
+{
+    "applications": {
+        "Flyerly": {
+            "applicationId": "rrU7ilSR4TZNQD9xlDtH8wFoQNK4st5AaITq6Fan", 
+            "masterKey": "xKx13OCFY1mSUOALjoPTMsIfGbRSAD12JlrdOFpY"
+        }, 
+        "_default": {
+            "link": "Flyerly"
+        }
+    }, 
+    "global": {
+        "parseVersion": "1.2.14"
+    }
+}
