@@ -111,13 +111,19 @@
 }
 
 -(IBAction)onSignIn{
+    gl = [[GalleryViewController alloc]initWithNibName:@"GalleryViewController" bundle:nil];
+
+   lb = [[LibraryViewController alloc]initWithNibName:@"LibraryViewController" bundle:nil];
     
+
+    [self.navigationController pushViewController:gl animated:NO];
+    /*
     globle.twitterUser = nil;
     [self showLoadingView];
     
     if([self validate]){
         [self signIn:YES username:email.text password:password.text];
-    }
+    }*/
 }
 
 -(IBAction)goBack{

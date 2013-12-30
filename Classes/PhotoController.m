@@ -1893,6 +1893,10 @@ int arrangeLayerIndex;
 
 -(void)loadCustomPhotoLibrary{
     
+    nbuGallary = [[GalleryViewController alloc] initWithNibName:@"GalleryViewController" bundle:nil];
+    [self.navigationController pushViewController:nbuGallary animated:YES];
+    
+    /*
     customPhotoController = [[CustomPhotoController alloc] initWithNibName:@"CustomPhotoController" bundle:nil];
     customPhotoController.callbackObject = self;    
     customPhotoController.callbackOnComplete = @selector(onCompleteSelectingImage:);
@@ -1904,6 +1908,7 @@ int arrangeLayerIndex;
     iconTouchFlag = NO;
 
     [self dismissModalViewControllerAnimated:YES];
+     */
     
     [Flurry logEvent:@"Custom Background"];
 }

@@ -15,7 +15,7 @@
 #import "ShareProgressView.h"
 #import "Singleton.h"
 #import "ParentViewController.h"
-
+#import "GalleryViewController.h"
 
 
 @class Singleton,LauchViewController;
@@ -146,6 +146,7 @@
     UIButton *editButtonGlobal;    
     UIBarButtonItem *rightUndoBarButton;
     ShareProgressView *layerEditMessage;
+    GalleryViewController *nbuGallary;
 }
 
 @property(nonatomic, strong) NSMutableArray *cpyTextLabelLayersArray;

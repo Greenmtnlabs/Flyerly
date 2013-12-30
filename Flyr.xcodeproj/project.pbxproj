@@ -668,6 +668,15 @@
 		2032DC9618717B3F007036B2 /* FacebookLikeView.html in Resources */ = {isa = PBXBuildFile; fileRef = 2032DC9218717B3F007036B2 /* FacebookLikeView.html */; };
 		2032DC9718717B3F007036B2 /* FacebookLikeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2032DC9318717B3F007036B2 /* FacebookLikeView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		2032DC9818717B3F007036B2 /* NSData+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 2032DC9518717B3F007036B2 /* NSData+Extras.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		2032DCBE1871A4C3007036B2 /* LibraryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2032DCBD1871A4C3007036B2 /* LibraryViewController.m */; };
+		2032DCC11871A4E4007036B2 /* AssetsGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2032DCC01871A4E4007036B2 /* AssetsGroupViewController.m */; };
+		2032DCC41871A920007036B2 /* CustomAssetsGroupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2032DCC21871A920007036B2 /* CustomAssetsGroupView.xib */; };
+		2032DCC51871A920007036B2 /* CustomAssetThumbnailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2032DCC31871A920007036B2 /* CustomAssetThumbnailView.xib */; };
+		2032DCC91871B5DC007036B2 /* GalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2032DCC71871B5DC007036B2 /* GalleryViewController.m */; };
+		2032DCCA1871B5DC007036B2 /* GalleryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2032DCC81871B5DC007036B2 /* GalleryViewController.xib */; };
+		2032DCD01871BDFF007036B2 /* CropViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2032DCCE1871BDFF007036B2 /* CropViewController.m */; };
+		2032DCD11871BDFF007036B2 /* CropViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2032DCCF1871BDFF007036B2 /* CropViewController.xib */; };
+		2032DCD31871C00B007036B2 /* photo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2032DCD21871C00B007036B2 /* photo.jpg */; };
 		2034BFB217BE06BE003C15B0 /* menu_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 2034BFB017BE06BD003C15B0 /* menu_button.png */; };
 		2034BFB317BE06BE003C15B0 /* menu_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2034BFB117BE06BD003C15B0 /* menu_button@2x.png */; };
 		2034BFB617BE0A04003C15B0 /* next_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 2034BFB417BE0A03003C15B0 /* next_button.png */; };
@@ -1978,6 +1987,19 @@
 		2032DC9318717B3F007036B2 /* FacebookLikeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookLikeView.m; sourceTree = "<group>"; };
 		2032DC9418717B3F007036B2 /* NSData+Extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Extras.h"; sourceTree = "<group>"; };
 		2032DC9518717B3F007036B2 /* NSData+Extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Extras.m"; sourceTree = "<group>"; };
+		2032DCBC1871A4C3007036B2 /* LibraryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibraryViewController.h; sourceTree = "<group>"; };
+		2032DCBD1871A4C3007036B2 /* LibraryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibraryViewController.m; sourceTree = "<group>"; };
+		2032DCBF1871A4E4007036B2 /* AssetsGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssetsGroupViewController.h; sourceTree = "<group>"; };
+		2032DCC01871A4E4007036B2 /* AssetsGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssetsGroupViewController.m; sourceTree = "<group>"; };
+		2032DCC21871A920007036B2 /* CustomAssetsGroupView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomAssetsGroupView.xib; sourceTree = "<group>"; };
+		2032DCC31871A920007036B2 /* CustomAssetThumbnailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomAssetThumbnailView.xib; sourceTree = "<group>"; };
+		2032DCC61871B5DC007036B2 /* GalleryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GalleryViewController.h; sourceTree = "<group>"; };
+		2032DCC71871B5DC007036B2 /* GalleryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GalleryViewController.m; sourceTree = "<group>"; };
+		2032DCC81871B5DC007036B2 /* GalleryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GalleryViewController.xib; sourceTree = "<group>"; };
+		2032DCCD1871BDFF007036B2 /* CropViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CropViewController.h; sourceTree = "<group>"; };
+		2032DCCE1871BDFF007036B2 /* CropViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CropViewController.m; sourceTree = "<group>"; };
+		2032DCCF1871BDFF007036B2 /* CropViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CropViewController.xib; sourceTree = "<group>"; };
+		2032DCD21871C00B007036B2 /* photo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = photo.jpg; sourceTree = "<group>"; };
 		2034BFB017BE06BD003C15B0 /* menu_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_button.png; sourceTree = "<group>"; };
 		2034BFB117BE06BD003C15B0 /* menu_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu_button@2x.png"; sourceTree = "<group>"; };
 		2034BFB417BE0A03003C15B0 /* next_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = next_button.png; sourceTree = "<group>"; };
@@ -2654,6 +2676,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				2032DCA718719D7F007036B2 /* NBU */,
 				208C6850186DAB38004A74F2 /* ShareKitConfig */,
 				49997FF817E07F7300CF1038 /* Categories */,
 				20F4D8E217BA40A5007B2DF5 /* MyGlobleClass */,
@@ -3747,6 +3770,42 @@
 			name = FacebookLikeView;
 			sourceTree = "<group>";
 		};
+		2032DCA718719D7F007036B2 /* NBU */ = {
+			isa = PBXGroup;
+			children = (
+				2032DCCC1871BDE1007036B2 /* CropImage */,
+				2032DCCB1871BDCE007036B2 /* Gallery */,
+				2032DCBC1871A4C3007036B2 /* LibraryViewController.h */,
+				2032DCBD1871A4C3007036B2 /* LibraryViewController.m */,
+				2032DCBF1871A4E4007036B2 /* AssetsGroupViewController.h */,
+				2032DCC01871A4E4007036B2 /* AssetsGroupViewController.m */,
+				2032DCC21871A920007036B2 /* CustomAssetsGroupView.xib */,
+				2032DCC31871A920007036B2 /* CustomAssetThumbnailView.xib */,
+			);
+			name = NBU;
+			sourceTree = "<group>";
+		};
+		2032DCCB1871BDCE007036B2 /* Gallery */ = {
+			isa = PBXGroup;
+			children = (
+				2032DCD21871C00B007036B2 /* photo.jpg */,
+				2032DCC61871B5DC007036B2 /* GalleryViewController.h */,
+				2032DCC71871B5DC007036B2 /* GalleryViewController.m */,
+				2032DCC81871B5DC007036B2 /* GalleryViewController.xib */,
+			);
+			name = Gallery;
+			sourceTree = "<group>";
+		};
+		2032DCCC1871BDE1007036B2 /* CropImage */ = {
+			isa = PBXGroup;
+			children = (
+				2032DCCD1871BDFF007036B2 /* CropViewController.h */,
+				2032DCCE1871BDFF007036B2 /* CropViewController.m */,
+				2032DCCF1871BDFF007036B2 /* CropViewController.xib */,
+			);
+			name = CropImage;
+			sourceTree = "<group>";
+		};
 		208C6850186DAB38004A74F2 /* ShareKitConfig */ = {
 			isa = PBXGroup;
 			children = (
@@ -4596,6 +4655,7 @@
 				65DB59A3172FAD6200F251B0 /* flickr_share.png in Resources */,
 				65DB59A4172FAD6200F251B0 /* flickr_share@2x.png in Resources */,
 				65DB59A5172FAD6200F251B0 /* instagram_share_selected.png in Resources */,
+				2032DCC41871A920007036B2 /* CustomAssetsGroupView.xib in Resources */,
 				65DB59A6172FAD6200F251B0 /* instagram_share_selected@2x.png in Resources */,
 				65DB59A7172FAD6200F251B0 /* instagram_share.png in Resources */,
 				65DB59A8172FAD6200F251B0 /* instagram_share@2x.png in Resources */,
@@ -5094,6 +5154,7 @@
 				202C638D17EA06E800CB9A75 /* ricon26@2x.png in Resources */,
 				202C638E17EA06E800CB9A75 /* ricon27.png in Resources */,
 				202C638F17EA06E800CB9A75 /* ricon27@2x.png in Resources */,
+				2032DCCA1871B5DC007036B2 /* GalleryViewController.xib in Resources */,
 				202C639017EA06E800CB9A75 /* ricon28.png in Resources */,
 				202C639117EA06E800CB9A75 /* ricon28@2x.png in Resources */,
 				202C639217EA06E800CB9A75 /* ricon29.png in Resources */,
@@ -5127,6 +5188,7 @@
 				202C63AD17EA06E800CB9A75 /* ricon42@2x.png in Resources */,
 				202C63AE17EA06E800CB9A75 /* ricon43.png in Resources */,
 				202C63AF17EA06E800CB9A75 /* ricon43@2x.png in Resources */,
+				2032DCD11871BDFF007036B2 /* CropViewController.xib in Resources */,
 				202C63B017EA06E800CB9A75 /* ricon44.png in Resources */,
 				202C63B117EA06E800CB9A75 /* ricon44@2x.png in Resources */,
 				202C63B217EA06E800CB9A75 /* ricon45.png in Resources */,
@@ -5194,6 +5256,7 @@
 				202C63EF17EA06E800CB9A75 /* ricon75@2x.png in Resources */,
 				202C63F017EA06E800CB9A75 /* ricon76.png in Resources */,
 				202C63F117EA06E800CB9A75 /* ricon76@2x.png in Resources */,
+				2032DCD31871C00B007036B2 /* photo.jpg in Resources */,
 				202C63F217EA06E800CB9A75 /* ricon77.png in Resources */,
 				202C63F317EA06E800CB9A75 /* ricon77@2x.png in Resources */,
 				202C63F417EA06E800CB9A75 /* ricon78.png in Resources */,
@@ -5387,6 +5450,7 @@
 				202C656A17EA07DC00CB9A75 /* symbol100.png in Resources */,
 				202C656B17EA07DC00CB9A75 /* symbol100@2x.png in Resources */,
 				202C656C17EA07DC00CB9A75 /* symbol101.png in Resources */,
+				2032DCC51871A920007036B2 /* CustomAssetThumbnailView.xib in Resources */,
 				202C656D17EA07DC00CB9A75 /* symbol101@2x.png in Resources */,
 				202C656E17EA07DC00CB9A75 /* symbol102.png in Resources */,
 				202C656F17EA07DC00CB9A75 /* symbol102@2x.png in Resources */,
@@ -5488,8 +5552,10 @@
 				0D4903BB1091893B00855C30 /* FlyrViewController.m in Sources */,
 				E8A7347D1092CFF300661AAD /* DraftViewController.m in Sources */,
 				208C684F186DAA59004A74F2 /* MySHKConfigurator.m in Sources */,
+				2032DCD01871BDFF007036B2 /* CropViewController.m in Sources */,
 				0DFC5322109576AB00B18478 /* SettingViewController.m in Sources */,
 				0DE024F81095A0C9005F699B /* UIImageExtras.m in Sources */,
+				2032DCBE1871A4C3007036B2 /* LibraryViewController.m in Sources */,
 				E8F2E155109659E600DFA7E8 /* MyNavigationBar.m in Sources */,
 				E8C7C36910976BFC0064935A /* SaveFlyerController.m in Sources */,
 				0DE1F274109881B20012819A /* LoadingView.m in Sources */,
@@ -5501,6 +5567,7 @@
 				65E26188171C5C9900C485B5 /* AddFriendItem.m in Sources */,
 				654B255317202B360047C8F6 /* AfterUpdateController.m in Sources */,
 				65A2CEFD172558A0005C03B7 /* CameraOverlayView.m in Sources */,
+				2032DCC91871B5DC007036B2 /* GalleryViewController.m in Sources */,
 				20920015184F40330034C4F6 /* AddFriendsDetail.m in Sources */,
 				6560C1BF1727F5C7005BE8DD /* CustomPhotoController.m in Sources */,
 				65A21266172960AB00ED0B9A /* CustomGalleryItem.m in Sources */,
@@ -5510,6 +5577,7 @@
 				0FE0BDAA1758808D00C4D78D /* Reachability.m in Sources */,
 				0FE0BDD41758BBCD00C4D78D /* EBPurchase.m in Sources */,
 				0F7FC386175CE26B009DEB08 /* AsyncImageView.m in Sources */,
+				2032DCC11871A4E4007036B2 /* AssetsGroupViewController.m in Sources */,
 				0F7F02C3176616B100FC750F /* FlyerOverlayController.m in Sources */,
 				0F7E5A5B177C9BD500CF139F /* BZFoursquare.m in Sources */,
 				0F7E5A5C177C9BD500CF139F /* BZFoursquareRequest.m in Sources */,

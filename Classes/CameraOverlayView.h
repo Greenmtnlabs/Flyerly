@@ -11,9 +11,9 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "PhotoController.h"
 #import "CustomPhotoController.h"
+#import <NBUKit/NBUKit.h>
 
-
-@interface CameraOverlayView : UIViewController{
+@interface CameraOverlayView : NBUGalleryViewController{
 
     IBOutlet UIImageView *borderImage;
     IBOutlet UIImageView *gridImageView;
