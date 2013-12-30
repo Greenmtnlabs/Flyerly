@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "MainSettingViewController.h"
 #import "ParentViewController.h"
+#import <FacebookSDK/FacebookSDK.h>
+#import "FacebookLikeView.h"
+
 @class FlyrViewController;
 @class SettingViewController;
 @class PhotoController ;

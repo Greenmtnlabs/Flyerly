@@ -8,8 +8,10 @@
 
 //#import "ARRollerView.h"
 //#import "ARRollerProtocol.h"
-//#import "FBPermissionDialog.h"
+//#import "FBPermissionDialog.h"\
 #import "Crittercism.h"
+#import <FacebookSDK/FacebookSDK.h>
+#import "Facebook.h"
 #import "BZFoursquare.h"
 #import "Singleton.h"
 #import <Parse/Parse.h>
@@ -18,8 +20,7 @@
 #import "MySHKConfigurator.h"
 
 
-extern NSString *FlickrSharingSuccessNotification;
-extern NSString *FlickrSharingFailureNotification;
+
 extern NSString *FacebookDidLoginNotification;
 
 @class FBSession;
@@ -58,6 +59,7 @@ extern NSString *FacebookDidLoginNotification;
 @property (nonatomic, strong) AccountController *accountController;
 @property(nonatomic,strong) BZFoursquare *foursquare;
 @property (nonatomic,assign)	BOOL faceBookPermissionFlag;
+@property (strong, nonatomic) Facebook *facebook;
 @property (nonatomic,assign) BOOL changesFlag;
 @property (strong, nonatomic) FBSession *session;
 @property (nonatomic, strong) UIView *sharingProgressParentView;

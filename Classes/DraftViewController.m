@@ -361,8 +361,8 @@ static ShareProgressView *clipBdPogressView;
     [self setDefaultProgressViewHeight];
     
     // Add observers for 1) Flickr sharing success. 2) Flickr sharing failure. 3) Closing shring view
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(flickrSharingSuccess) name:FlickrSharingSuccessNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(flickrSharingFailure) name:FlickrSharingFailureNotification object:nil];
+    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(flickrSharingSuccess) name:FlickrSharingSuccessNotification object:nil];
+    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(flickrSharingFailure) name:FlickrSharingFailureNotification object:nil];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:CloseShareProgressNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closeSharingProgressSuccess:) name:CloseShareProgressNotification object:nil];

@@ -665,6 +665,9 @@
 		202FF12B17C3ABDE003C6245 /* bkg_register-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 202FF12817C3ABDE003C6245 /* bkg_register-568h@2x.png */; };
 		202FF12C17C3ABDE003C6245 /* bkg_register.png in Resources */ = {isa = PBXBuildFile; fileRef = 202FF12917C3ABDE003C6245 /* bkg_register.png */; };
 		202FF12D17C3ABDE003C6245 /* bkg_register@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 202FF12A17C3ABDE003C6245 /* bkg_register@2x.png */; };
+		2032DC9618717B3F007036B2 /* FacebookLikeView.html in Resources */ = {isa = PBXBuildFile; fileRef = 2032DC9218717B3F007036B2 /* FacebookLikeView.html */; };
+		2032DC9718717B3F007036B2 /* FacebookLikeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2032DC9318717B3F007036B2 /* FacebookLikeView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		2032DC9818717B3F007036B2 /* NSData+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 2032DC9518717B3F007036B2 /* NSData+Extras.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		2034BFB217BE06BE003C15B0 /* menu_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 2034BFB017BE06BD003C15B0 /* menu_button.png */; };
 		2034BFB317BE06BE003C15B0 /* menu_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2034BFB117BE06BD003C15B0 /* menu_button@2x.png */; };
 		2034BFB617BE0A04003C15B0 /* next_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 2034BFB417BE0A03003C15B0 /* next_button.png */; };
@@ -1970,6 +1973,11 @@
 		202FF12817C3ABDE003C6245 /* bkg_register-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bkg_register-568h@2x.png"; sourceTree = "<group>"; };
 		202FF12917C3ABDE003C6245 /* bkg_register.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bkg_register.png; sourceTree = "<group>"; };
 		202FF12A17C3ABDE003C6245 /* bkg_register@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bkg_register@2x.png"; sourceTree = "<group>"; };
+		2032DC9118717B3F007036B2 /* FacebookLikeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookLikeView.h; sourceTree = "<group>"; };
+		2032DC9218717B3F007036B2 /* FacebookLikeView.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = FacebookLikeView.html; sourceTree = "<group>"; };
+		2032DC9318717B3F007036B2 /* FacebookLikeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookLikeView.m; sourceTree = "<group>"; };
+		2032DC9418717B3F007036B2 /* NSData+Extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Extras.h"; sourceTree = "<group>"; };
+		2032DC9518717B3F007036B2 /* NSData+Extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Extras.m"; sourceTree = "<group>"; };
 		2034BFB017BE06BD003C15B0 /* menu_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_button.png; sourceTree = "<group>"; };
 		2034BFB117BE06BD003C15B0 /* menu_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu_button@2x.png"; sourceTree = "<group>"; };
 		2034BFB417BE0A03003C15B0 /* next_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = next_button.png; sourceTree = "<group>"; };
@@ -2719,6 +2727,7 @@
 		0DF3A2D7108DF27200D6C887 /* ExternalFrameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2032DC9018717B28007036B2 /* FacebookLikeView */,
 				0F7E5A56177C9B8D00CF139F /* Foursquare */,
 				0F7FC383175CE261009DEB08 /* AsyncImageView */,
 				0FE0BDD11758BBB900C4D78D /* InAppPurchase */,
@@ -3724,6 +3733,18 @@
 			);
 			name = "Resources - ShareKit Library";
 			path = Submodules/ShareKit;
+			sourceTree = "<group>";
+		};
+		2032DC9018717B28007036B2 /* FacebookLikeView */ = {
+			isa = PBXGroup;
+			children = (
+				2032DC9118717B3F007036B2 /* FacebookLikeView.h */,
+				2032DC9218717B3F007036B2 /* FacebookLikeView.html */,
+				2032DC9318717B3F007036B2 /* FacebookLikeView.m */,
+				2032DC9418717B3F007036B2 /* NSData+Extras.h */,
+				2032DC9518717B3F007036B2 /* NSData+Extras.m */,
+			);
+			name = FacebookLikeView;
 			sourceTree = "<group>";
 		};
 		208C6850186DAB38004A74F2 /* ShareKitConfig */ = {
@@ -4984,6 +5005,7 @@
 				2034BFBA17BE0A81003C15B0 /* help_icon.png in Resources */,
 				2034BFBB17BE0A81003C15B0 /* help_icon@2x.png in Resources */,
 				20D7473B17BE4D1100966BA6 /* pencil_icon.png in Resources */,
+				2032DC9618717B3F007036B2 /* FacebookLikeView.html in Resources */,
 				20D7473C17BE4D1100966BA6 /* pencil_icon@2x.png in Resources */,
 				20D7474017BE77E900966BA6 /* splash_bg.png in Resources */,
 				20D7474117BE77E900966BA6 /* splash_bg@2x.png in Resources */,
@@ -5462,6 +5484,7 @@
 				0DF3A2C6108DF1D200D6C887 /* PhotoController.m in Sources */,
 				0DEE03EE108F41D600967DA5 /* MyNetworkController.m in Sources */,
 				0D8571ED1090542B00622AB1 /* MyCustomCell.m in Sources */,
+				2032DC9718717B3F007036B2 /* FacebookLikeView.m in Sources */,
 				0D4903BB1091893B00855C30 /* FlyrViewController.m in Sources */,
 				E8A7347D1092CFF300661AAD /* DraftViewController.m in Sources */,
 				208C684F186DAA59004A74F2 /* MySHKConfigurator.m in Sources */,
@@ -5492,6 +5515,7 @@
 				0F7E5A5C177C9BD500CF139F /* BZFoursquareRequest.m in Sources */,
 				0FCC3A23177DCFA40046484C /* LocationController.m in Sources */,
 				0FCC3A2B177DD35D0046484C /* LocationItem.m in Sources */,
+				2032DC9818717B3F007036B2 /* NSData+Extras.m in Sources */,
 				0FD247DA1784547E003CA6DD /* SearchLocationItem.m in Sources */,
 				0F80C386178561C200D36795 /* AccountController.m in Sources */,
 				0F80C38B178578CB00D36795 /* RegisterController.m in Sources */,

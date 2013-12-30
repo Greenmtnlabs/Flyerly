@@ -339,15 +339,19 @@ BOOL selectAll;
             
         } else{
             
-            /*
+          
              ACAccountStore *accountStore = [[ACAccountStore alloc]init];
              ACAccountType *FBaccountType= [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
              NSDictionary *options = @{ACFacebookAppIdKey : @"136691489852349",
              ACFacebookPermissionsKey : @[@"email", @"publish_stream"],
              ACFacebookAudienceKey:ACFacebookAudienceFriends};
+            
+            
+            [accountStore requestAccessToAccountsWithType:FBaccountType options:options completion:^(BOOL granted, NSError *error) {
+                 
+           
              
-             [accountStore requestAccessToAccountsWithType:FBaccountType options:options completion:^(BOOL granted, NSError *error) {
-             
+             // if User Login in device
              if (granted) {
              
              // Populate array with all available Twitter accounts
@@ -361,7 +365,7 @@ BOOL selectAll;
              SLRequest *request = [SLRequest requestForServiceType:SLServiceTypeFacebook
              requestMethod:SLRequestMethodGET
              URL:requestURL
-             parameters:@{@"fields":@"name,picture.height(35).width(35).type(small)", @"limit":@"2&offset=0"}];
+             parameters:@{@"fields":@"name,gender,picture.height(72).width(72).type(small)"}];
              request.account = account;
              
              [request performRequestWithHandler:^(NSData *data,
@@ -369,10 +373,22 @@ BOOL selectAll;
              NSError *error) {
              
              if(!error){
-             NSDictionary *list =[NSJSONSerialization JSONObjectWithData:data
-             options:kNilOptions error:&error];
-             NSLog(@"Dictionary contains: %@", list );
-             [self request:nil didLoad:list];
+                 NSDictionary *list =[NSJSONSerialization JSONObjectWithData:data
+                                                                     options:kNilOptions error:&error];
+                 NSLog(@"Dictionary contains: %@", list );
+                 
+                 self.facebookArray = [[NSMutableArray alloc] init];
+                 
+                 //Making Array for Loading
+                 [self request:nil didLoad:list];
+                 
+                 //Getting already Invited Freinds
+                 PFUser *user = [PFUser currentUser];
+                 self.fbinvited = [[NSMutableArray alloc] init];
+                 if (user[@"fbinvited"]) {
+                     self.fbinvited  = user[@"fbinvited"];
+                 }
+                            [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
              }
              else{
              //handle error gracefully
@@ -383,14 +399,15 @@ BOOL selectAll;
              
              } else {
              //Fail gracefully...
-             NSLog(@"error getting permission %@",error);
+                 NSLog(@"error getting permission %@",error);
+                 [self showAlert:@"There is no Facebook account configured. You can add or create a Facebook account in Settings" message:@""];
              }
              }];
-             */
-            
-            
+       
+           
+           /*
             [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
-            /*
+           
             FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
             appDelegate.facebook.sessionDelegate = self;
             
@@ -408,7 +425,7 @@ BOOL selectAll;
                 
                 self.facebookArray = [[NSMutableArray alloc] init];
                 
-                //[appDelegate.facebook requestWithGraphPath:@"me/friends?fields=name,picture.height(35).width(35).type(small)&limit=100&offset=0" andDelegate:self];
+                [appDelegate.facebook requestWithGraphPath:@"me/friends?fields=name,picture.height(35).width(35).type(small)&limit=100&offset=0" andDelegate:self];
                 [appDelegate.facebook requestWithGraphPath:@"me/friends?fields=name,gender,picture.height(72).width(72).type(small)" andDelegate:self];
                 
                 
@@ -417,8 +434,8 @@ BOOL selectAll;
                 [appDelegate.facebook authorize:@[@"read_stream",
                                                  @"publish_stream", @"email"]];
             }*/
-        }
-        
+         }
+    
     } else {
         
         [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
@@ -1157,7 +1174,6 @@ NSMutableDictionary *selectedIdentifierDictionary;
     [cell.checkBtn addTarget:self action:@selector(inviteFreind:) forControlEvents:UIControlEventTouchUpInside];
     cell.checkBtn.tag = indexPath.row;
     
-
     /*
 
     UIButton *addButton = [[UIButton alloc] initWithFrame:CGRectMake(270,22 , 32, 33)];
@@ -1365,5 +1381,6 @@ NSMutableDictionary *selectedIdentifierDictionary;
     [twitterBackupArray release];
     
 }
+
 
 @end

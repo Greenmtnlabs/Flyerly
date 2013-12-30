@@ -180,8 +180,12 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 	
 }
 
+
+
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
-    return [PFFacebookUtils handleOpenURL:url];
+    //return [PFFacebookUtils handleOpenURL:url];
+    
+        return [[self facebook] handleOpenURL:url];
     
 }
 
