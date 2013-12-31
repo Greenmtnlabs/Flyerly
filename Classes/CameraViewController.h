@@ -1,9 +1,9 @@
 //
-//  GalleryViewController.h
+//  CameraViewController.h
 //  NBUKitDemo
 //
-//  Created by Ernesto Rivera on 2013/04/15.
-//  Copyright (c) 2013 CyberAgent Inc.
+//  Created by Ernesto Rivera on 2012/10/15.
+//  Copyright (c) 2012 CyberAgent Inc.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -17,21 +17,25 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 //
-#import "NBUImageLoader.h"
-#import "NBUGalleryViewController.h"
-#import "NBUAssetsLibrary.h"
-#import <Foundation/Foundation.h>
-#import <NBUKit/NBUKit.h>
-#import "NBUImagePicker.h"
+#import "NBUCameraViewController.h"
+#import "ObjectSlideView.h"
+#import <NBUKit/NBUViewController.h>
+#import "NBUCameraView.h"
+#import "UIImage+NBUAdditions.h"
+#import "NBUKitPrivate.h"
+#import "Singleton.h"
 
-#import "CropViewController.h"
-@interface GalleryViewController : NBUGalleryViewController <NBUImageLoader>{
+@interface CameraViewController : NBUCameraViewController{
 
-    CropViewController *nbuCrop;
+   Singleton *globle;
 }
 
--(void)CallNBUcropImage;
-- (void)setCurrentIndex:(NSInteger)index
-               animated:(BOOL)animated;
+// Outlets
+@property (assign, nonatomic) IBOutlet UIButton * shootButton;
+@property (assign, nonatomic) IBOutlet ObjectSlideView * slideView;
+
+// Actions
+- (IBAction)customToggleFlash:(id)sender;
+
 @end
 

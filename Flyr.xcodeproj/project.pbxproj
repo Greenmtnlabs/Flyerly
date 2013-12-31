@@ -781,6 +781,12 @@
 		20F4D8E517BA40EA007B2DF5 /* Singleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F4D8E417BA40EA007B2DF5 /* Singleton.m */; };
 		20F93DD317B2262200F6F88C /* MainSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F93DD117B2262200F6F88C /* MainSettingViewController.m */; };
 		20F93DD417B2262200F6F88C /* MainSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20F93DD217B2262200F6F88C /* MainSettingViewController.xib */; };
+		20FA7E721872AAF50057C3F3 /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20FA7E701872AAF50057C3F3 /* CameraViewController.m */; };
+		20FA7E731872AAF50057C3F3 /* CameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20FA7E711872AAF50057C3F3 /* CameraViewController.xib */; };
+		20FA7E761872B4A50057C3F3 /* camera_switch.png in Resources */ = {isa = PBXBuildFile; fileRef = 20FA7E741872B4A50057C3F3 /* camera_switch.png */; };
+		20FA7E771872B4A50057C3F3 /* camera_switch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20FA7E751872B4A50057C3F3 /* camera_switch@2x.png */; };
+		20FA7E7C1872CD360057C3F3 /* PickerTestsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20FA7E7A1872CD360057C3F3 /* PickerTestsViewController.m */; };
+		20FA7E7D1872CD360057C3F3 /* PickerTestsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20FA7E7B1872CD360057C3F3 /* PickerTestsViewController.xib */; };
 		20FAFC7517EAE1B900A7B1E6 /* likealertbg.png in Resources */ = {isa = PBXBuildFile; fileRef = 20FAFC7317EAE1B900A7B1E6 /* likealertbg.png */; };
 		20FAFC7617EAE1B900A7B1E6 /* likealertclose.png in Resources */ = {isa = PBXBuildFile; fileRef = 20FAFC7417EAE1B900A7B1E6 /* likealertclose.png */; };
 		2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
@@ -2125,6 +2131,14 @@
 		20F93DD017B2262200F6F88C /* MainSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainSettingViewController.h; sourceTree = "<group>"; };
 		20F93DD117B2262200F6F88C /* MainSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainSettingViewController.m; sourceTree = "<group>"; };
 		20F93DD217B2262200F6F88C /* MainSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainSettingViewController.xib; path = Classes/MainSettingViewController.xib; sourceTree = "<group>"; };
+		20FA7E6F1872AAF50057C3F3 /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
+		20FA7E701872AAF50057C3F3 /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraViewController.m; sourceTree = "<group>"; };
+		20FA7E711872AAF50057C3F3 /* CameraViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraViewController.xib; sourceTree = "<group>"; };
+		20FA7E741872B4A50057C3F3 /* camera_switch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera_switch.png; sourceTree = "<group>"; };
+		20FA7E751872B4A50057C3F3 /* camera_switch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera_switch@2x.png"; sourceTree = "<group>"; };
+		20FA7E791872CD360057C3F3 /* PickerTestsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickerTestsViewController.h; sourceTree = "<group>"; };
+		20FA7E7A1872CD360057C3F3 /* PickerTestsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickerTestsViewController.m; sourceTree = "<group>"; };
+		20FA7E7B1872CD360057C3F3 /* PickerTestsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PickerTestsViewController.xib; sourceTree = "<group>"; };
 		20FAFC7317EAE1B900A7B1E6 /* likealertbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = likealertbg.png; sourceTree = "<group>"; };
 		20FAFC7417EAE1B900A7B1E6 /* likealertclose.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = likealertclose.png; sourceTree = "<group>"; };
 		26D73E02307543D994C6C8BE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -3773,6 +3787,8 @@
 		2032DCA718719D7F007036B2 /* NBU */ = {
 			isa = PBXGroup;
 			children = (
+				20FA7E781872CD210057C3F3 /* Picker */,
+				20FA7E6E1872AAE10057C3F3 /* Camera */,
 				2032DCCC1871BDE1007036B2 /* CropImage */,
 				2032DCCB1871BDCE007036B2 /* Gallery */,
 				2032DCBC1871A4C3007036B2 /* LibraryViewController.h */,
@@ -3881,6 +3897,28 @@
 				20F4D8E417BA40EA007B2DF5 /* Singleton.m */,
 			);
 			name = MyGlobleClass;
+			sourceTree = "<group>";
+		};
+		20FA7E6E1872AAE10057C3F3 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				20FA7E741872B4A50057C3F3 /* camera_switch.png */,
+				20FA7E751872B4A50057C3F3 /* camera_switch@2x.png */,
+				20FA7E6F1872AAF50057C3F3 /* CameraViewController.h */,
+				20FA7E701872AAF50057C3F3 /* CameraViewController.m */,
+				20FA7E711872AAF50057C3F3 /* CameraViewController.xib */,
+			);
+			name = Camera;
+			sourceTree = "<group>";
+		};
+		20FA7E781872CD210057C3F3 /* Picker */ = {
+			isa = PBXGroup;
+			children = (
+				20FA7E791872CD360057C3F3 /* PickerTestsViewController.h */,
+				20FA7E7A1872CD360057C3F3 /* PickerTestsViewController.m */,
+				20FA7E7B1872CD360057C3F3 /* PickerTestsViewController.xib */,
+			);
+			name = Picker;
 			sourceTree = "<group>";
 		};
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
@@ -4707,6 +4745,7 @@
 				65F7FFF1173817E600FBB061 /* photo_button.png in Resources */,
 				65F7FFF2173817E600FBB061 /* photo_button@2x.png in Resources */,
 				65F1BE8E173AA13400EE6F9F /* email_disabled_saved.png in Resources */,
+				20FA7E7D1872CD360057C3F3 /* PickerTestsViewController.xib in Resources */,
 				65F1BE8F173AA13400EE6F9F /* email_disabled_saved@2x.png in Resources */,
 				65F1BE90173AA13400EE6F9F /* email_share_saved.png in Resources */,
 				65F1BE91173AA13400EE6F9F /* email_share_saved@2x.png in Resources */,
@@ -4821,6 +4860,7 @@
 				0FF29F4C174629780007B309 /* status_cell_bg@2x.png in Resources */,
 				0FF29F4D174629780007B309 /* status_cell_divider.png in Resources */,
 				0FF29F4E174629780007B309 /* status_cell_divider@2x.png in Resources */,
+				20FA7E761872B4A50057C3F3 /* camera_switch.png in Resources */,
 				0FF29F4F174629780007B309 /* status_failed.png in Resources */,
 				0FF29F50174629780007B309 /* status_failed@2x.png in Resources */,
 				0FF29F51174629780007B309 /* status_icon_fb.png in Resources */,
@@ -4845,6 +4885,7 @@
 				0FEF2D9D174E665100FDD8C9 /* help_done.png in Resources */,
 				0FEF2D9E174E665100FDD8C9 /* help_done@2x.png in Resources */,
 				0FEF2DA3174E666C00FDD8C9 /* cross.png in Resources */,
+				20FA7E731872AAF50057C3F3 /* CameraViewController.xib in Resources */,
 				0FEF2DA4174E666C00FDD8C9 /* cross@2x.png in Resources */,
 				0FBC37A4174F954600004F21 /* settingsscreenbg.png in Resources */,
 				0FBC37A5174F954600004F21 /* settingsscreenbg@2x.png in Resources */,
@@ -5223,6 +5264,7 @@
 				202C63CF17EA06E800CB9A75 /* ricon59@2x.png in Resources */,
 				202C63D017EA06E800CB9A75 /* ricon60.png in Resources */,
 				202C63D117EA06E800CB9A75 /* ricon60@2x.png in Resources */,
+				20FA7E771872B4A50057C3F3 /* camera_switch@2x.png in Resources */,
 				202C63D217EA06E800CB9A75 /* ricon61.png in Resources */,
 				202C63D317EA06E800CB9A75 /* ricon61@2x.png in Resources */,
 				20B865FD1851EF6C00484D7D /* checkgray.png in Resources */,
@@ -5592,9 +5634,11 @@
 				20F4D8E017BA3D0A007B2DF5 /* AccountSelecter.m in Sources */,
 				20F4D8E517BA40EA007B2DF5 /* Singleton.m in Sources */,
 				2087B6C017C73B40007A6A90 /* ResetPWViewController.m in Sources */,
+				20FA7E721872AAF50057C3F3 /* CameraViewController.m in Sources */,
 				203E0B7617DDDD720039C3A7 /* InputViewController.m in Sources */,
 				2044FF96185088ED00A26B42 /* MainSettingCell.m in Sources */,
 				49997FF717DF786400CF1038 /* ParentViewController.m in Sources */,
+				20FA7E7C1872CD360057C3F3 /* PickerTestsViewController.m in Sources */,
 				49997FFB17E07FA100CF1038 /* SKProduct+LocalPrice.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

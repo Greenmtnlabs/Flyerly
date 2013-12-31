@@ -14,8 +14,7 @@
 #import "AccountSelecter.h"
 #import "ResetPWViewController.h"
 #import "ParentViewController.h"
-#import "GalleryViewController.h"
-#import "LibraryViewController.h"
+
 
 @class AccountSelecter,Singleton,RegisterController,ResetPWViewController,MyCustomCell;
 
@@ -44,8 +43,6 @@
     UIView *waiting;
     NSString *dbUsername;
     UIAlertView *warningAlert;
-    LibraryViewController *lb;
-    GalleryViewController *gl;
 }
 
 @property(nonatomic, strong) IBOutlet UIImageView *emailImage;

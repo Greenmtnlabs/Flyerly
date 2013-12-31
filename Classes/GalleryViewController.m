@@ -31,10 +31,14 @@
 
 - (void)loadView
 {
-    [NSBundle loadNibNamed:@"GalleryViewController"
+    [NSBundle  loadNibNamed:@"GalleryViewController"
                      owner:self
                    options:nil];
+    
 }
+
+
+
 
 - (void)viewDidLoad
 {
@@ -46,7 +50,7 @@
     
     [menuButton setBackgroundImage:[UIImage imageNamed:@"menu_button"] forState:UIControlStateNormal];
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
-    [self.navigationItem setRightBarButtonItem:rightBarButton];
+       [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
     
     
     [[NBUAssetsLibrary sharedLibrary] allImageAssetsWithResultBlock:^(NSArray * assets,
@@ -59,14 +63,14 @@
     }];
 }
 
-- (void)imageForObject:(id)object
-                  size:(NBUImageSize)size
+- (void)imageForObject:(id)object size:(NBUImageSize)size
            resultBlock:(NBUImageLoaderResultBlock)resultBlock
 {
     // Just let the default loader to do it
     [[NBUImageLoader sharedLoader] imageForObject:object
                                              size:size
                                       resultBlock:resultBlock];
+    
 }
 
 - (NSString *)captionForObject:(id)object
@@ -74,6 +78,7 @@
     // An asset?
     if ([object isKindOfClass:[NBUAsset class]])
     {
+        NSString *fpath = ((NBUAsset *)object).URL.absoluteString;
         return ((NBUAsset *)object).URL.absoluteString;
     }
     
@@ -91,10 +96,7 @@
 -(void)CallNBUcropImage{
     nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController" bundle:nil];
     [nbuCrop awakeFromNib];
-    [nbuCrop setCropView:self];
     [self.navigationController pushViewController:nbuCrop animated:YES];
 }
-
-
 @end
 

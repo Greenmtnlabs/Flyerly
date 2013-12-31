@@ -21,7 +21,7 @@
 @property (nonatomic, strong) NSString *FlyerName;
 @property (nonatomic, strong) NSString *iosVersion;
 @property (nonatomic, strong) NSString *CheckHelpOpen;
-
+@property (nonatomic, strong) UIImage *NBUimage;
 +(Singleton *)RetrieveSingleton;
 -(UIColor*)colorWithHexString:(NSString*)hex;
 

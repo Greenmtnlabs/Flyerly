@@ -81,6 +81,13 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 }
 
 -(void)viewDidAppear:(BOOL)animated{
+    
+    
+    // Set template image
+	if (globle.NBUimage != nil) {
+        imgView.image = globle.NBUimage;
+    }
+    
     //NSLog(@"%@",globle.CheckHelpOpen);
     layerallow = 0;
     // Setup buttons and labels
@@ -1894,7 +1901,9 @@ int arrangeLayerIndex;
 -(void)loadCustomPhotoLibrary{
     
     nbuGallary = [[GalleryViewController alloc] initWithNibName:@"GalleryViewController" bundle:nil];
+    globle.NBUimage = nil;
     [self.navigationController pushViewController:nbuGallary animated:YES];
+
     
     /*
     customPhotoController = [[CustomPhotoController alloc] initWithNibName:@"CustomPhotoController" bundle:nil];
@@ -1987,13 +1996,19 @@ int arrangeLayerIndex;
 }
 
 -(void)openCustomCamera{
+
+    nbuCamera = [[CameraViewController alloc]initWithNibName:@"CameraViewController" bundle:nil];
+    globle.NBUimage = nil;
+    [self.navigationController pushViewController:nbuCamera animated:YES];
+
+    /*
     CameraOverlayView *cameraOverlay =[[CameraOverlayView alloc] initWithNibName:@"CameraOverlayView" bundle:nil];
     cameraOverlay.photoController = self;
     self.imgPicker.sourceType = UIImagePickerControllerSourceTypeCamera;
     self.imgPicker.cameraOverlayView = cameraOverlay.view;
     self.imgPicker.showsCameraControls = NO;
     [self presentModalViewController:self.imgPicker animated:YES];
-    
+    */
     [Flurry logEvent:@"Custom Background"];
 }
 

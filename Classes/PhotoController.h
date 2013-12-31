@@ -16,9 +16,11 @@
 #import "Singleton.h"
 #import "ParentViewController.h"
 #import "GalleryViewController.h"
+#import "CameraViewController.h"
+#import "PickerTestsViewController.h"
 
 
-@class Singleton,LauchViewController;
+@class Singleton,LauchViewController,CameraViewController;
 @interface PhotoController :ParentViewController<UIActionSheetDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, EBPurchaseDelegate>
 {
     int layerallow;
@@ -147,6 +149,8 @@
     UIBarButtonItem *rightUndoBarButton;
     ShareProgressView *layerEditMessage;
     GalleryViewController *nbuGallary;
+    CameraViewController *nbuCamera;
+    PickerTestsViewController *nbuPicker;
 }
 
 @property(nonatomic, strong) NSMutableArray *cpyTextLabelLayersArray;
