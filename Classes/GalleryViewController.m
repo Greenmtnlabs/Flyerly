@@ -43,7 +43,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setShowThumbnailsView:NO];
+  
      globle = [Singleton RetrieveSingleton];
     // Create right bar button
     UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 31, 30)];
@@ -60,6 +60,7 @@
         if (!error)
         {
             self.objectArray = assets;
+            [self setShowThumbnailsView:YES];
         }
     }];
 }
@@ -109,8 +110,6 @@
                                    NSError * error)
      {
        globle.NBUimage = image;
-         //[self.navigationController popViewControllerAnimated:YES];
-         
      }];
 }
 
@@ -119,7 +118,7 @@
 - (void)setShowThumbnailsView:(BOOL)yesOrNo
 {
     [self setShowThumbnailsView:yesOrNo
-                       animated:NO];
+                       animated:YES];
 }
 
 
