@@ -20,7 +20,7 @@
 #import "PickerTestsViewController.h"
 
 
-@class Singleton,LauchViewController,CameraViewController;
+@class Singleton,LauchViewController,CameraViewController,GalleryViewController;
 @interface PhotoController :ParentViewController<UIActionSheetDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, EBPurchaseDelegate>
 {
     int layerallow;

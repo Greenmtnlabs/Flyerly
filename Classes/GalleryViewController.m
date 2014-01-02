@@ -43,14 +43,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    [self setShowThumbnailsView:NO];
+     globle = [Singleton RetrieveSingleton];
     // Create right bar button
     UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 31, 30)];
     [menuButton addTarget:self action:@selector(CallNBUcropImage) forControlEvents:UIControlEventTouchUpInside];
     
     [menuButton setBackgroundImage:[UIImage imageNamed:@"menu_button"] forState:UIControlStateNormal];
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
-       [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
+      // [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
     
     
     [[NBUAssetsLibrary sharedLibrary] allImageAssetsWithResultBlock:^(NSArray * assets,
@@ -98,5 +99,34 @@
     [nbuCrop awakeFromNib];
     [self.navigationController pushViewController:nbuCrop animated:YES];
 }
+
+- (void)setCurrentIndex:(NSInteger)index
+               animated:(BOOL)animated
+{
+    [self.imageLoader imageForObject:self.objectArray[index]
+                            size:NBUImageSizeFullResolution
+                     resultBlock:^(UIImage * image,
+                                   NSError * error)
+     {
+       globle.NBUimage = image;
+         //[self.navigationController popViewControllerAnimated:YES];
+         
+     }];
+}
+
+
+
+- (void)setShowThumbnailsView:(BOOL)yesOrNo
+{
+    [self setShowThumbnailsView:yesOrNo
+                       animated:NO];
+}
+
+
+
+
+
 @end
+
+
 

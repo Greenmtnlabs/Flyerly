@@ -23,15 +23,17 @@
 #import <Foundation/Foundation.h>
 #import <NBUKit/NBUKit.h>
 #import "NBUImagePicker.h"
+#import "NBUGalleryView.h"
+#import "Singleton.h"
 
 #import "CropViewController.h"
 @interface GalleryViewController : NBUGalleryViewController <NBUImageLoader>{
 
     CropViewController *nbuCrop;
+    Singleton *globle;
+    
 }
 
 -(void)CallNBUcropImage;
-- (void)setCurrentIndex:(NSInteger)index
-               animated:(BOOL)animated;
 @end
 
