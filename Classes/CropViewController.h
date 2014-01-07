@@ -19,8 +19,15 @@
 //
 #import "NBUEditImageViewController.h"
 #import "NBUCropView.h"
+#import "Singleton.h"
+#import "PresetFilterViewController.h"
+@class PresetFilterViewController;
+@interface CropViewController : NBUEditImageViewController{
+    Singleton *globle;
+    PresetFilterViewController *nbuFilter;
 
-@interface CropViewController : NBUEditImageViewController
-
+}
+-(void)backtoMainView;
+-(void)gotoFilterImage;
 @end
 

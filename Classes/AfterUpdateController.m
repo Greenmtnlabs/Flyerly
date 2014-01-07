@@ -17,6 +17,7 @@
 
 -(void)viewDidLoad{
     self.navigationController.navigationBarHidden = YES;
+    
 }
 
 -(IBAction)ok{

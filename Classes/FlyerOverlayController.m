@@ -229,6 +229,7 @@
     }
     
     PhotoController *ptController = [[PhotoController alloc]initWithNibName:@"PhotoController" bundle:nil templateParam:flyerImage symbolArrayParam:symbolArray iconArrayParam:iconArray photoArrayParam:photoArray textArrayParam:textArray flyerNumberParam:flyerNumber];
+    
 	[parentViewController.navigationController pushViewController:ptController animated:YES];
 }
 

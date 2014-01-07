@@ -10,7 +10,7 @@
 
 @implementation Singleton
 
-@synthesize accounts,inputValue,sharelink,iosVersion,CheckHelpOpen,NBUimage;
+@synthesize accounts,inputValue,sharelink,iosVersion,CheckHelpOpen,NBUimage,appOpenFirstTime;
 
 static Singleton *sharedSingleton = nil;
 

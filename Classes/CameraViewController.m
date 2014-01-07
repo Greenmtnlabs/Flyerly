@@ -54,8 +54,8 @@
             //Pass Image
             globle.NBUimage = [[UIImage alloc] init];
             globle.NBUimage = [image thumbnailWithSize:CGSizeMake(310.0, 309.0)];
-
-            [self.navigationController popViewControllerAnimated:YES];
+            [self CallNBUcropImage];
+            //[self.navigationController popViewControllerAnimated:YES];
         }
     };
     self.cameraView.flashButtonConfigurationBlock = [self.cameraView buttonConfigurationBlockWithTitleFrom:
@@ -124,6 +124,13 @@
     {
         self.cameraView.currentFlashMode = AVCaptureFlashModeOff;
     }
+}
+
+//Crop Image
+-(void)CallNBUcropImage{
+    nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController" bundle:nil];
+    [nbuCrop awakeFromNib];
+    [self.navigationController pushViewController:nbuCrop animated:YES];
 }
 
 @end

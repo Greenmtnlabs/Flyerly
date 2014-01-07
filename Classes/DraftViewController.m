@@ -138,6 +138,7 @@ static ShareProgressView *clipBdPogressView;
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationDuration:0.2f];
     globle = [Singleton RetrieveSingleton];
+    globle.NBUimage = nil;
     showbars = YES;
     
     // Set click event on switch
@@ -733,6 +734,7 @@ static ShareProgressView *clipBdPogressView;
             
             //Calling ShareKit for Sharing
             [SHKFacebook shareItem:item];
+            [self updateSocialStates];
             
         } else {
             
@@ -794,6 +796,7 @@ static ShareProgressView *clipBdPogressView;
             
             //Calling ShareKit for Sharing
             [SHKTwitter shareItem:item];
+             [self updateSocialStates];
             
         } else {
             
@@ -840,6 +843,7 @@ static ShareProgressView *clipBdPogressView;
             
             //Calling ShareKit for Sharing
             [SHKMail shareItem:item];
+             [self updateSocialStates];
             
         } else {
             
@@ -871,6 +875,7 @@ static ShareProgressView *clipBdPogressView;
             
             //Calling ShareKit for Sharing
             [SHKTumblr shareItem:item];
+            [self updateSocialStates ];
             
         } else {
             
@@ -925,6 +930,7 @@ static ShareProgressView *clipBdPogressView;
             
             //Calling ShareKit for Sharing
             [SHKFlickr shareItem:item];
+            [self updateSocialStates ];
             
         } else {
             
@@ -955,7 +961,16 @@ static ShareProgressView *clipBdPogressView;
         [smsButton setSelected:YES];
         
         [UIPasteboard generalPasteboard].image = selectedFlyerImage;
-         [self SingleshareOnMMS];
+        
+        // Current Item For Sharing
+        SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ %@ ",titleView.text, descriptionView.text]];
+        
+        //Calling ShareKit for Sharing
+        [SHKTextMessage shareItem:item];
+        [self updateSocialStates ];
+
+        
+        //[self SingleshareOnMMS];
                 
 
     }
@@ -2163,14 +2178,14 @@ static ShareProgressView *clipBdPogressView;
 }
 
 #pragma Bitly code for URL shortening
-/*
+
 -(void)shortenURL:(NSString *)url{
   
-    bitly = [[BitlyURLShortener alloc] init];
-    bitly.delegate = self;
-    [bitly shortenLinksInText:url];
+    //bitly = [[BitlyURLShortener alloc] init];
+    //bitly.delegate = self;
+    //[bitly shortenLinksInText:url];
 }
-
+/*
 - (void)bitlyURLShortenerDidShortenText:(BitlyURLShortener *)shortener oldText:(NSString *)oldText text:(NSString *)text linkDictionary:(NSDictionary *)dictionary {
     
     NSLog(@"Old Text: %@", oldText);

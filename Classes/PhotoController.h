@@ -17,7 +17,6 @@
 #import "ParentViewController.h"
 #import "GalleryViewController.h"
 #import "CameraViewController.h"
-#import "PickerTestsViewController.h"
 
 
 @class Singleton,LauchViewController,CameraViewController,GalleryViewController;
@@ -150,7 +149,6 @@
     ShareProgressView *layerEditMessage;
     GalleryViewController *nbuGallary;
     CameraViewController *nbuCamera;
-    PickerTestsViewController *nbuPicker;
 }
 
 @property(nonatomic, strong) NSMutableArray *cpyTextLabelLayersArray;
@@ -254,6 +252,7 @@
 -(void)setPhotoTabAction:(id) sender;
 + (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize;
 +(UIView *)setTitleViewWithTitle:(NSString *)title rect:(CGRect)rect;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil templateParam:(UIImage *)templateParam symbolArrayParam:(NSMutableArray *)symbolArrayParam iconArrayParam:(NSMutableArray *)iconArrayParam photoArrayParam:(NSMutableArray *)photoArrayParam textArrayParam:(NSMutableArray *)textArrayParam flyerNumberParam:(int)flyerNumberParam;
 
 

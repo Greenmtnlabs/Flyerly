@@ -66,6 +66,12 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 #pragma mark  View Appear Methods
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
+    
+    // Set template image
+	if (globle.NBUimage != nil) {
+        imgView.image = globle.NBUimage;
+        selectedTemplate = globle.NBUimage;
+    }
         self.navigationController.navigationBarHidden = NO;
         imgPicker = [[UIImagePickerController alloc] init];
         imgPicker.allowsEditing = NO;
@@ -83,10 +89,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 -(void)viewDidAppear:(BOOL)animated{
     
     
-    // Set template image
-	if (globle.NBUimage != nil) {
-        imgView.image = globle.NBUimage;
-    }
+
     
     //NSLog(@"%@",globle.CheckHelpOpen);
     layerallow = 0;
@@ -2297,8 +2300,6 @@ int arrangeLayerIndex;
     undoCount = undoCount + 1;
     [rightUndoBarButton setEnabled:YES];
     [self makeCopyOfLayers];
-    
-    
     
     
     

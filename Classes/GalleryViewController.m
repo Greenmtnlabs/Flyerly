@@ -45,15 +45,6 @@
     [super viewDidLoad];
   
      globle = [Singleton RetrieveSingleton];
-    // Create right bar button
-    UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 31, 30)];
-    [menuButton addTarget:self action:@selector(CallNBUcropImage) forControlEvents:UIControlEventTouchUpInside];
-    
-    [menuButton setBackgroundImage:[UIImage imageNamed:@"menu_button"] forState:UIControlStateNormal];
-    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
-      // [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
-    
-    
     [[NBUAssetsLibrary sharedLibrary] allImageAssetsWithResultBlock:^(NSArray * assets,
                                                                       NSError * error)
     {
@@ -119,11 +110,18 @@
 {
     [self setShowThumbnailsView:yesOrNo
                        animated:YES];
+    
 }
 
 
-
-
+- (IBAction)thumbnailWasTapped:(UIView *)sender
+{
+	[self setCurrentIndex:sender.tag
+                 animated:NO];
+    [self CallNBUcropImage];
+   // [self.navigationController popViewControllerAnimated:NO];
+  
+ }
 
 @end
 

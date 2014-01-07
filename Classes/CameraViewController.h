@@ -23,11 +23,13 @@
 #import "NBUCameraView.h"
 #import "UIImage+NBUAdditions.h"
 #import "NBUKitPrivate.h"
+#import "CropViewController.h"
 #import "Singleton.h"
 
 @interface CameraViewController : NBUCameraViewController{
 
    Singleton *globle;
+     CropViewController *nbuCrop;
 }
 
 // Outlets

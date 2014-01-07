@@ -223,6 +223,9 @@
             FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
             [appDelegate FbChangeforNewVersion];
             
+             // Set Current UserName for Device configuration
+             appDelegate.loginId = user.username;
+            [[NSUserDefaults standardUserDefaults]  setObject:user.username forKey:@"User"];
             
             // Login success Move to Flyerly
             if(IS_IPHONE_5){
@@ -235,10 +238,15 @@
         } else {
             NSLog(@"User with facebook logged in!");
             
-            // Temp on for Testing here
-            /*
+            // Set Current UserName for Device configuration
             FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-            [appDelegate FbChangeforNewVersion];*/
+            appDelegate.loginId = user.username;
+            [[NSUserDefaults standardUserDefaults]  setObject:user.username forKey:@"User"];
+
+            // Temp on for Testing here
+            
+          //  FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+            //[appDelegate FbChangeforNewVersion];
             
             // Login success Move to Flyerly
             if(IS_IPHONE_5){
@@ -311,6 +319,10 @@
                 FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
                 [appDelegate TwitterChangeforNewVersion:twitterUsername];
                 
+                // Set Current UserName for Device configuration
+                 appDelegate.loginId = [PFTwitterUtils twitter].screenName;
+                [[NSUserDefaults standardUserDefaults]  setObject:[PFTwitterUtils twitter].screenName forKey:@"User"];
+                
                 // Login success Move to Flyerly
                 if(IS_IPHONE_5){
                     launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewControllerIPhone5" bundle:nil];
@@ -324,8 +336,12 @@
             } else {
                 
                 NSLog(@"User logged in with Twitter!");
-                NSString *twitterUsername = [PFTwitterUtils twitter].screenName;
                 
+                // Set Current UserName for Device configuration
+                FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+                appDelegate.loginId = [PFTwitterUtils twitter].screenName;
+                [[NSUserDefaults standardUserDefaults]  setObject:[PFTwitterUtils twitter].screenName forKey:@"User"];
+
                 // Temp on for Testing here
                 // For Parse New User Merge to old Twitter User
                 /*

@@ -182,15 +182,15 @@
  3 - make sure you define and create the same URL scheme in your app description on Flickr. It can be as simple as yourapp://flickr
  4 - do not override this, unless you subclass the sharer and need more privileges for custom added functionality.*/
 - (NSString*)flickrConsumerKey {
-    return @"b2ea05c41f53e1dc4d6e6edee9e6ee06";
+    return @"e5ddcf40695fd20da9286b2ad059a315";
 }
 
 - (NSString*)flickrSecretKey {
-    return @"d4af50fe93325de3";
+    return @"7143d033fedaff2f";
 }
 // The user defined callback url
 - (NSString*)flickrCallbackUrl{
-    return @"app://www.google.com";
+    return @"https://www.google.com.pk/";
 }
 
 - (NSString *)flickrPermissions {

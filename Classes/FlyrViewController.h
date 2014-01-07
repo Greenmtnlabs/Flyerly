@@ -11,7 +11,9 @@
 #import "PhotoController.h"
 #import "LauchViewController.h"
 #import "Singleton.h"
+#import "FlyerOverlayController.h"
 
+@class FlyerOverlayController;
 @interface FlyrViewController : UIViewController <UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>{
 	NSMutableArray *photoArray;
 	NSMutableArray *photoDetailArray;
@@ -27,6 +29,7 @@
     BOOL searching;
     BOOL letUserSelectRow;
     Singleton *globle;
+    FlyerOverlayController *overlayController;
 }
 @property(nonatomic,strong) PhotoController *ptController;
 @property(nonatomic,strong) NSMutableArray *photoArray;

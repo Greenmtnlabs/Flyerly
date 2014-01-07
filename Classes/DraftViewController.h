@@ -12,6 +12,7 @@
 #import "SHKMail.h"
 #import "SHKFacebook.h"
 #import "SHKTwitter.h"
+#import "SHKTextMessage.h"
 #import "SHKInstagram.h"
 #import "SHKFlickr.h"
 #import "SHKTumblr.h"
@@ -170,5 +171,5 @@
 - (void)uploadImageByboth:(NSData *)imageData;
 
 -(void)shareOnEmail:(NSString *)link;
-//-(void)shortenURL:(NSString *)url;
+-(void)shortenURL:(NSString *)url;
 @end

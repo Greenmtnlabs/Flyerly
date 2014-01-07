@@ -1,9 +1,9 @@
 //
-//  GalleryViewController.h
+//  PresetFilterViewController.h
 //  NBUKitDemo
 //
-//  Created by Ernesto Rivera on 2013/04/15.
-//  Copyright (c) 2013 CyberAgent Inc.
+//  Created by Ernesto Rivera on 2012/08/13.
+//  Copyright (c) 2012 CyberAgent Inc.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -17,25 +17,20 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 //
-#import "NBUImageLoader.h"
-#import "NBUGalleryViewController.h"
-#import "NBUAssetsLibrary.h"
-#import <Foundation/Foundation.h>
-#import <NBUKit/NBUKit.h>
-#import "NBUImagePicker.h"
-#import "NBUGalleryView.h"
+#import "NBUEditImageViewController.h"
+#import "NBUFilterProvider.h"
+#import "NBUImagePickerPrivate.h"
+#import "NBUFilterGroup.h"
+#import "NBUImagePickerController.h"
 #import "Singleton.h"
-#import "CropViewController.h"
 
+@interface PresetFilterViewController : NBUEditImageViewController{
 
-@class CropViewController;
-@interface GalleryViewController : NBUGalleryViewController <NBUImageLoader>{
-
-    CropViewController *nbuCrop;
     Singleton *globle;
-    
 }
 
--(void)CallNBUcropImage;
+// Actions
+- (IBAction)changeImage:(id)sender;
+
 @end
 

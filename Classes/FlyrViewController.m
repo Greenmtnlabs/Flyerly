@@ -340,8 +340,10 @@ sd:;
     [modalView setBackgroundColor:[MyCustomCell colorWithHexString:@"161616"]];
     modalView.alpha = 0.75;
     self.navigationController.navigationBar.alpha = 0.35;
+    
     // Create overlay controller
-    FlyerOverlayController *overlayController = [[FlyerOverlayController alloc]initWithNibName:@"FlyerOverlayController" bundle:nil image:flyerImage modalView:modalView];
+    overlayController = [[FlyerOverlayController alloc]initWithNibName:@"FlyerOverlayController" bundle:nil image:flyerImage modalView:modalView];
+    
     // set its parent
     [overlayController setViews:self];
     //NSLog(@"showFlyerOverlay Tag: %d", cellImageButton.tag);

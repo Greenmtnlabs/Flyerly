@@ -119,6 +119,26 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 	[NSTimer scheduledTimerWithTimeInterval:TIME target:self selector:@selector(next) userInfo:nil repeats:YES];
 }
 
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    [currentInstallation setDeviceTokenFromData:deviceToken];
+    currentInstallation.channels = @[@"global"];
+    [currentInstallation saveInBackground];
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    if (error.code == 3010) {
+        NSLog(@"Push notifications are not supported in the iOS Simulator.");
+    } else {
+        // show some alert or otherwise handle the failure to register.
+        NSLog(@"application:didFailToRegisterForRemoteNotificationsWithError: %@", error);
+    }
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    [PFPush handlePush:userInfo];
+}
+
 - (void)applicationDidReceiveMemoryWarning:(UIApplication *)application
 {
 	NSLog(@"applicationDidReceiveMemoryWarning");
@@ -351,13 +371,16 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
         }else{
             [navigationController pushViewController:lauchController animated:YES];
             FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-            appDelegate.loginId = [AccountController getPathFromEmail:[[NSUserDefaults standardUserDefaults]  objectForKey:@"User"]];
+            appDelegate.loginId = [[NSUserDefaults standardUserDefaults]  objectForKey:@"User"];
             
         }
 
         [window addSubview:[navigationController view]];
     }
     
+    // Override point for customization after application launch.
+    [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound];
+
 	[window makeKeyAndVisible];
 
     return YES;
@@ -493,6 +516,33 @@ if it exist then we call Merging Process
 
     NSString  *NewUID = user.objectId;
     NSString  *OldUID = oldUserobj.objectId;
+    
+    
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    
+	NSString *homeDirectoryPath = NSHomeDirectory();
+    NSString *NewUIDFolderName = [user objectForKey:@"username"];
+	NSString *OldUIDPath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/",[oldUserobj objectForKey:@"username"]]];
+    
+    
+    if (![[NSFileManager defaultManager] fileExistsAtPath:OldUIDPath isDirectory:NULL]) {
+        //NSError *error;
+		//[[NSFileManager defaultManager] createDirectoryAtPath:usernamePath withIntermediateDirectories:YES attributes:nil error:&error];
+	}else{
+        
+        // Crate New folder
+        //[[NSFileManager defaultManager] createDirectoryAtPath:NewUIDPath withIntermediateDirectories:YES attributes:nil error:&error];
+        
+        NSString *newDirectoryName = NewUIDFolderName;
+        NSString *oldPath = OldUIDPath;
+        NSString *newPath = [[oldPath stringByDeletingLastPathComponent] stringByAppendingPathComponent:newDirectoryName];
+        NSError *error = nil;
+        [[NSFileManager defaultManager] moveItemAtPath:oldPath toPath:newPath error:&error];
+        if (error) {
+            NSLog(@"%@",error.localizedDescription);
+            // handle error
+        }
+    }
     
     // For Merging User info Parse not allow here
     // So Now we run Server side script from here and passing user names

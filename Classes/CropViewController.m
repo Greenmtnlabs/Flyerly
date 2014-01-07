@@ -25,13 +25,44 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
+     globle = [Singleton RetrieveSingleton];
+    
+    //Done Button
+    UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 32)];
+    [doneButton addTarget:self action:@selector(backtoMainView) forControlEvents:UIControlEventTouchUpInside];
+    [doneButton setTitle:@"Done" forState:UIControlStateNormal];
+    [doneButton setBackgroundImage:[UIImage imageNamed:@"crop_button"] forState:UIControlStateNormal];
+    UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
+    
+    //Crop Button
+    UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 32)];
+    [menuButton addTarget:self action:@selector(apply:) forControlEvents:UIControlEventTouchUpInside];
+    [menuButton setTitle:@"Crop" forState:UIControlStateNormal];
+    [menuButton setBackgroundImage:[UIImage imageNamed:@"crop_button"] forState:UIControlStateNormal];
+    UIBarButtonItem *cropBarButton = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
+    
+    //Reset Button
+    UIButton *resetButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 32)];
+    [resetButton addTarget:self action:@selector(reset:) forControlEvents:UIControlEventTouchUpInside];
+    [resetButton setTitle:@"Reset" forState:UIControlStateNormal];
+    [resetButton setBackgroundImage:[UIImage imageNamed:@"crop_button"] forState:UIControlStateNormal];
+    UIBarButtonItem *resetBarButton = [[UIBarButtonItem alloc] initWithCustomView:resetButton];
+
+    //Next Button
+    UIButton *nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 32)];
+    [nextButton addTarget:self action:@selector(gotoFilterImage) forControlEvents:UIControlEventTouchUpInside];
+    [nextButton setTitle:@"Next" forState:UIControlStateNormal];
+    [nextButton setBackgroundImage:[UIImage imageNamed:@"crop_button"] forState:UIControlStateNormal];
+    UIBarButtonItem *nextBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
+    
+    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:nextBarButton,doneBarButton,cropBarButton,resetBarButton,nil]];
     
     // Configure the controller
     self.cropGuideSize = CGSizeMake(247.0, 227.0); // Matches our cropGuideView's image
     self.maximumScaleFactor = 10.0;                // We may get big pixels with this factor!
     
     // Our test image
-    self.image = [UIImage imageNamed:@"photo.jpg"];
+    self.image = globle.NBUimage;//[UIImage imageNamed:@"photo.jpg"];
     
     // Our resultBlock
     __unsafe_unretained CropViewController * weakSelf = self;
@@ -41,6 +72,7 @@
         
         // Preview the changes
         weakSelf.cropView.image = image;
+        globle.NBUimage = image;
     };
 }
 
@@ -49,6 +81,23 @@
     super.cropView = cropView;
     
     cropView.allowAspectFit = YES; // The image can be downsized until it fits inside the cropGuideView
+}
+
+-(void)backtoMainView{
+    
+    NSInteger noOfViewControllers = [self.navigationController.viewControllers count];
+    [self.navigationController
+     popToViewController:[self.navigationController.viewControllers
+                          objectAtIndex:(noOfViewControllers-3)] animated:YES];
+
+}
+
+-(void)gotoFilterImage{
+
+    nbuFilter = [[PresetFilterViewController alloc]initWithNibName:@"PresetFilterViewController" bundle:nil];
+    [nbuFilter awakeFromNib];
+    [self.navigationController pushViewController:nbuFilter animated:YES];
+    
 }
 
 @end
