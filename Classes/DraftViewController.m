@@ -729,8 +729,9 @@ static ShareProgressView *clipBdPogressView;
             [facebookButton setSelected:YES];
             ;
             
+            
             // Current Item For Sharing
-            SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ %@ ",titleView.text, descriptionView.text]];
+            SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"#flyerly - %@  %@",titleView.text, selectedFlyerDescription ]];
             
             //Calling ShareKit for Sharing
             [SHKFacebook shareItem:item];
@@ -792,7 +793,7 @@ static ShareProgressView *clipBdPogressView;
             ;
             
             // Current Item For Sharing
-            SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ %@ ",titleView.text, descriptionView.text]];
+            SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"#flyerly - %@ %@  %@",[[LocationController getLocationDetails] objectForKey:@"name"],titleView.text, selectedFlyerDescription ]];
             
             //Calling ShareKit for Sharing
             [SHKTwitter shareItem:item];
@@ -839,7 +840,7 @@ static ShareProgressView *clipBdPogressView;
             ;
             
             // Current Item For Sharing
-            SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ %@ ",titleView.text, descriptionView.text]];
+            SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"#flyerly - %@  %@",titleView.text, selectedFlyerDescription ]];
             
             //Calling ShareKit for Sharing
             [SHKMail shareItem:item];
@@ -871,7 +872,7 @@ static ShareProgressView *clipBdPogressView;
             ;
             
             // Current Item For Sharing
-            SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ %@ ",titleView.text, descriptionView.text]];
+            SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"#flyerly - %@  %@",titleView.text, selectedFlyerDescription ]];
             
             //Calling ShareKit for Sharing
             [SHKTumblr shareItem:item];
@@ -926,7 +927,7 @@ static ShareProgressView *clipBdPogressView;
             ;
             
             // Current Item For Sharing
-            SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ %@ ",titleView.text, descriptionView.text]];
+            SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"#flyerly - %@  %@",titleView.text, selectedFlyerDescription ]];
             
             //Calling ShareKit for Sharing
             [SHKFlickr shareItem:item];
@@ -963,7 +964,7 @@ static ShareProgressView *clipBdPogressView;
         [UIPasteboard generalPasteboard].image = selectedFlyerImage;
         
         // Current Item For Sharing
-        SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ %@ ",titleView.text, descriptionView.text]];
+        SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"#flyerly - %@  %@",titleView.text, selectedFlyerDescription ]];
         
         //Calling ShareKit for Sharing
         [SHKTextMessage shareItem:item];

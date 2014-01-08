@@ -339,6 +339,8 @@
 		2025FAB51860742700CC9188 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2025FAB41860742700CC9188 /* CoreMedia.framework */; };
 		2025FAB7186074D100CC9188 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2025FAB6186074D100CC9188 /* CoreText.framework */; };
 		2025FAB9186074F300CC9188 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2025FAB8186074F300CC9188 /* CoreMotion.framework */; };
+		202C47B5187D49FF00FE0975 /* cancel_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 202C47B3187D49FF00FE0975 /* cancel_button.png */; };
+		202C47B6187D49FF00FE0975 /* cancel_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 202C47B4187D49FF00FE0975 /* cancel_button@2x.png */; };
 		202C638417EA06E800CB9A75 /* ricon22.png in Resources */ = {isa = PBXBuildFile; fileRef = 202C62F217EA06E800CB9A75 /* ricon22.png */; };
 		202C638517EA06E800CB9A75 /* ricon22@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 202C62F317EA06E800CB9A75 /* ricon22@2x.png */; };
 		202C638617EA06E800CB9A75 /* ricon23.png in Resources */ = {isa = PBXBuildFile; fileRef = 202C62F417EA06E800CB9A75 /* ricon23.png */; };
@@ -1660,6 +1662,8 @@
 		2025FAB41860742700CC9188 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		2025FAB6186074D100CC9188 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		2025FAB8186074F300CC9188 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		202C47B3187D49FF00FE0975 /* cancel_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel_button.png; sourceTree = "<group>"; };
+		202C47B4187D49FF00FE0975 /* cancel_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancel_button@2x.png"; sourceTree = "<group>"; };
 		202C62F217EA06E800CB9A75 /* ricon22.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ricon22.png; path = icons/ricon22.png; sourceTree = "<group>"; };
 		202C62F317EA06E800CB9A75 /* ricon22@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ricon22@2x.png"; path = "icons/ricon22@2x.png"; sourceTree = "<group>"; };
 		202C62F417EA06E800CB9A75 /* ricon23.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ricon23.png; path = icons/ricon23.png; sourceTree = "<group>"; };
@@ -2007,18 +2011,6 @@
 		2034BFB517BE0A03003C15B0 /* next_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "next_button@2x.png"; sourceTree = "<group>"; };
 		2034BFB817BE0A7F003C15B0 /* help_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = help_icon.png; sourceTree = "<group>"; };
 		2034BFB917BE0A80003C15B0 /* help_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "help_icon@2x.png"; sourceTree = "<group>"; };
-		20351B6E18632DAA00F8B597 /* NSString+URLEncoding.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "NSString+URLEncoding.m"; path = "../Submodules/ShareKit/Classes/ShareKit/Core/Helpers/OAuth/Categories/NSString+URLEncoding.m"; sourceTree = "<group>"; };
-		20351B7018632DBB00F8B597 /* NSMutableURLRequest+Parameters.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "NSMutableURLRequest+Parameters.m"; path = "../Submodules/ShareKit/Classes/ShareKit/Core/Helpers/OAuth/Categories/NSMutableURLRequest+Parameters.m"; sourceTree = "<group>"; };
-		20351B7218632DC500F8B597 /* NSURL+Base.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "NSURL+Base.m"; path = "../Submodules/ShareKit/Classes/ShareKit/Core/Helpers/OAuth/Categories/NSURL+Base.m"; sourceTree = "<group>"; };
-		20351B74186332A100F8B597 /* GTMNSString+HTML.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "GTMNSString+HTML.m"; path = "../Submodules/ShareKit/Classes/ShareKit/Core/Categories/GTMNSString+HTML.m"; sourceTree = "<group>"; };
-		20351B76186332A700F8B597 /* NSData+md5.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "NSData+md5.m"; path = "../Submodules/ShareKit/Classes/ShareKit/Core/Categories/NSData+md5.m"; sourceTree = "<group>"; };
-		20351B78186332AE00F8B597 /* NSHTTPCookieStorage+DeleteForURL.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "NSHTTPCookieStorage+DeleteForURL.m"; path = "../Submodules/ShareKit/Classes/ShareKit/Core/Categories/NSHTTPCookieStorage+DeleteForURL.m"; sourceTree = "<group>"; };
-		20351B7A186332B700F8B597 /* NSMutableDictionary+NSNullsToEmptyStrings.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "NSMutableDictionary+NSNullsToEmptyStrings.m"; path = "../Submodules/ShareKit/Classes/ShareKit/Core/Categories/NSMutableDictionary+NSNullsToEmptyStrings.m"; sourceTree = "<group>"; };
-		20351B7C186332BF00F8B597 /* NSDictionary+Recursive.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+Recursive.m"; path = "../Submodules/ShareKit/Classes/ShareKit/Core/Categories/NSDictionary+Recursive.m"; sourceTree = "<group>"; };
-		20351B7E186332CB00F8B597 /* NSData+SaveItemAttachment.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "NSData+SaveItemAttachment.m"; path = "../Submodules/ShareKit/Classes/ShareKit/Core/Categories/NSData+SaveItemAttachment.m"; sourceTree = "<group>"; };
-		20351B80186332DB00F8B597 /* NSArray+JoinValues.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "NSArray+JoinValues.m"; path = "../Submodules/ShareKit/Classes/ShareKit/Core/Categories/NSArray+JoinValues.m"; sourceTree = "<group>"; };
-		20351B82186332E500F8B597 /* UIImage+OurBundle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "UIImage+OurBundle.m"; path = "../Submodules/ShareKit/Classes/ShareKit/Core/Categories/UIImage+OurBundle.m"; sourceTree = "<group>"; };
-		20351B84186332EA00F8B597 /* UIApplication+iOSVersion.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "UIApplication+iOSVersion.m"; path = "../Submodules/ShareKit/Classes/ShareKit/Core/Categories/UIApplication+iOSVersion.m"; sourceTree = "<group>"; };
 		2039F7B917F076CF00DE2AA4 /* search_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search_bg.png; sourceTree = "<group>"; };
 		2039F7BA17F076D000DE2AA4 /* search_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "search_bg@2x.png"; sourceTree = "<group>"; };
 		2039F7C317F0837300DE2AA4 /* dfcontact.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = dfcontact.jpg; sourceTree = "<group>"; };
@@ -2783,6 +2775,8 @@
 		0DF3A361108DF47400D6C887 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				202C47B3187D49FF00FE0975 /* cancel_button.png */,
+				202C47B4187D49FF00FE0975 /* cancel_button@2x.png */,
 				201686EC186AF95A00A238AE /* searchicon.png */,
 				201686ED186AF95A00A238AE /* searchicon@2x.png */,
 				2092FFC9184E00BF0034C4F6 /* flyerlylogo.png */,
@@ -4253,18 +4247,6 @@
 		49997FF817E07F7300CF1038 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				20351B84186332EA00F8B597 /* UIApplication+iOSVersion.m */,
-				20351B82186332E500F8B597 /* UIImage+OurBundle.m */,
-				20351B80186332DB00F8B597 /* NSArray+JoinValues.m */,
-				20351B7E186332CB00F8B597 /* NSData+SaveItemAttachment.m */,
-				20351B7C186332BF00F8B597 /* NSDictionary+Recursive.m */,
-				20351B7A186332B700F8B597 /* NSMutableDictionary+NSNullsToEmptyStrings.m */,
-				20351B78186332AE00F8B597 /* NSHTTPCookieStorage+DeleteForURL.m */,
-				20351B76186332A700F8B597 /* NSData+md5.m */,
-				20351B74186332A100F8B597 /* GTMNSString+HTML.m */,
-				20351B7218632DC500F8B597 /* NSURL+Base.m */,
-				20351B7018632DBB00F8B597 /* NSMutableURLRequest+Parameters.m */,
-				20351B6E18632DAA00F8B597 /* NSString+URLEncoding.m */,
 				49997FF917E07FA100CF1038 /* SKProduct+LocalPrice.h */,
 				49997FFA17E07FA100CF1038 /* SKProduct+LocalPrice.m */,
 			);
@@ -4983,6 +4965,7 @@
 				0F8007D4175378F0000FF7FA /* ricon6.png in Resources */,
 				0F8007D5175378F0000FF7FA /* ricon6@2x.png in Resources */,
 				0F8007D6175378F0000FF7FA /* ricon7.png in Resources */,
+				202C47B6187D49FF00FE0975 /* cancel_button@2x.png in Resources */,
 				0F8007D7175378F0000FF7FA /* ricon7@2x.png in Resources */,
 				0F8007D8175378F0000FF7FA /* ricon8.png in Resources */,
 				0F8007D9175378F0000FF7FA /* ricon8@2x.png in Resources */,
@@ -5351,6 +5334,7 @@
 				202C64E717EA07DC00CB9A75 /* symbol34@2x.png in Resources */,
 				202C64E817EA07DC00CB9A75 /* symbol35.png in Resources */,
 				202C64E917EA07DC00CB9A75 /* symbol35@2x.png in Resources */,
+				202C47B5187D49FF00FE0975 /* cancel_button.png in Resources */,
 				202C64EA17EA07DC00CB9A75 /* symbol36.png in Resources */,
 				202C64EB17EA07DC00CB9A75 /* symbol36@2x.png in Resources */,
 				202C64EC17EA07DC00CB9A75 /* symbol37.png in Resources */,

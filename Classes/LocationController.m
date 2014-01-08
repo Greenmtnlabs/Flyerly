@@ -102,9 +102,9 @@ enum {
     // title background
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
     // Setup cancel button
-    UIButton *cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 65, 30)];
+    UIButton *cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [cancelButton addTarget:self action:@selector(onBack) forControlEvents:UIControlEventTouchUpInside];
-    [cancelButton setBackgroundImage:[UIImage imageNamed:@"camera_cancel"] forState:UIControlStateNormal];
+    [cancelButton setBackgroundImage:[UIImage imageNamed:@"cancel_button"] forState:UIControlStateNormal];
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:cancelButton];
     [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
     
