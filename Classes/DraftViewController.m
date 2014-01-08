@@ -22,6 +22,7 @@
 #import <Parse/PFObject.h>
 #import <Parse/PFUser.h>
 #import "LocationController.h"
+//#import <
 
 static UIView *progressView;
 static ShareProgressView *flickrPogressView;
@@ -36,7 +37,7 @@ static ShareProgressView *clipBdPogressView;
 @implementation DraftViewController
 
 
-@synthesize selectedFlyerImage,imgView,navBar,fvController,svController,titleView,descriptionView,selectedFlyerDescription,selectedFlyerTitle, detailFileName, imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,loadingView,dic,fromPhotoController,scrollView, saveToCameraRollLabel, saveToRollSwitch,locationBackground,locationLabel,networkParentView,locationButton,listOfPlaces,clipboardlabel,sharelink;
+@synthesize selectedFlyerImage,imgView,navBar,fvController,svController,titleView,descriptionView,selectedFlyerDescription,selectedFlyerTitle, detailFileName, imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,loadingView,dic,fromPhotoController,scrollView, saveToCameraRollLabel, saveToRollSwitch,locationBackground,locationLabel,networkParentView,locationButton,listOfPlaces,clipboardlabel,sharelink,bitly;
 //@synthesize twitterPogressView,facebookPogressView,tumblrPogressView,flickrPogressView,progressView,instagramPogressView;
 
 -(void)callFlyrView{
@@ -837,14 +838,8 @@ static ShareProgressView *clipBdPogressView;
         // Check internet connectivity
         if([AddFriendsController connected]){
             [emailButton setSelected:YES];
-            ;
-            
-            // Current Item For Sharing
-            SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"#flyerly - %@  %@",titleView.text, selectedFlyerDescription ]];
-            
-            //Calling ShareKit for Sharing
-            [SHKMail shareItem:item];
-             [self updateSocialStates];
+            [self shareOnEmail];
+            [self showAlert:@"Uploading flyer for sharing. Please wait..." message:@""];
             
         } else {
             
@@ -959,22 +954,23 @@ static ShareProgressView *clipBdPogressView;
     if([smsButton isSelected]){
         [smsButton setSelected:NO];
     } else {
-        [smsButton setSelected:YES];
         
-        [UIPasteboard generalPasteboard].image = selectedFlyerImage;
-        
-        // Current Item For Sharing
-        SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"#flyerly - %@  %@",titleView.text, selectedFlyerDescription ]];
-        
-        //Calling ShareKit for Sharing
-        [SHKTextMessage shareItem:item];
-        [self updateSocialStates ];
-
-        
-        //[self SingleshareOnMMS];
-                
+        // Check internet connectivity
+        if([AddFriendsController connected]){
+            [smsButton setSelected:YES];
+            [UIPasteboard generalPasteboard].image = selectedFlyerImage;
+            [self SingleshareOnMMS];
+            [self updateSocialStates ];
+            [self showAlert:@"Uploading flyer for sharing. Please wait..." message:@""];
+            
+        } else {
+            
+            [self showAlert:@"You're not connected to the internet. Please connect and retry" message:@""];
+            
+        }
 
     }
+    
 }
 
 /*
@@ -1174,6 +1170,7 @@ static ShareProgressView *clipBdPogressView;
  * Share on MMS
  */
 -(void)SingleshareOnMMS{
+    /*
     [smsPogressView.statusText setText:@"Uploading flyer"];
     [smsPogressView.statusText setTextColor:[UIColor yellowColor]];
     [smsPogressView.statusIcon setBackgroundImage:nil forState:UIControlStateNormal];
@@ -1182,7 +1179,7 @@ static ShareProgressView *clipBdPogressView;
     [smsPogressView.cancelIcon setImage:[UIImage imageNamed:@"share_status_close"] forState:UIControlStateNormal];
     [smsPogressView.statusIcon setBackgroundImage:nil forState:UIControlStateNormal];
     [smsPogressView.refreshIcon setBackgroundImage:[UIImage imageNamed:@"retry_share"] forState:UIControlStateNormal];
-    [smsPogressView.refreshIcon setHidden:YES];
+    [smsPogressView.refreshIcon setHidden:YES];*/
     NSData *imageData = UIImagePNGRepresentation(selectedFlyerImage);
     [self uploadImage:imageData isEmail:NO];
 }
@@ -1232,7 +1229,7 @@ static ShareProgressView *clipBdPogressView;
                         [self shareOnEmail:[theImage url]];                                               
                     }else{
                         [smsPogressView.statusText setText:@"Opening SMS!"];
-                       // [self shortenURL:[theImage url]];
+                        [self shortenURL:[theImage url]];
                     }
                 }
                 else{
@@ -1295,16 +1292,6 @@ static ShareProgressView *clipBdPogressView;
  * Share on Email
  */
 -(void)shareOnEmail{
-    [emailPogressView.statusText setText:@"Uploading flyer"];
-    [emailPogressView.statusText setTextColor:[UIColor yellowColor]];
-    [emailPogressView.statusIcon setBackgroundImage:nil forState:UIControlStateNormal];
-    
-    [emailPogressView.networkIcon setBackgroundImage:[UIImage imageNamed:@"status_icon_email"] forState:UIControlStateNormal];
-    [emailPogressView.cancelIcon setHidden:YES];
-    [emailPogressView.cancelIcon setImage:[UIImage imageNamed:@"share_status_close"] forState:UIControlStateNormal];
-    [emailPogressView.statusIcon setBackgroundImage:nil forState:UIControlStateNormal];
-    [emailPogressView.refreshIcon setBackgroundImage:[UIImage imageNamed:@"retry_share"] forState:UIControlStateNormal];
-    [emailPogressView.refreshIcon setHidden:YES];
     NSData *imageData = UIImagePNGRepresentation(selectedFlyerImage);
     [self uploadImage:imageData isEmail:YES];
 }
@@ -2182,11 +2169,11 @@ static ShareProgressView *clipBdPogressView;
 
 -(void)shortenURL:(NSString *)url{
   
-    //bitly = [[BitlyURLShortener alloc] init];
-    //bitly.delegate = self;
-    //[bitly shortenLinksInText:url];
+    bitly = [[BitlyURLShortener alloc] init];
+    bitly.delegate = self;
+    [bitly shortenLinksInText:url];
 }
-/*
+
 - (void)bitlyURLShortenerDidShortenText:(BitlyURLShortener *)shortener oldText:(NSString *)oldText text:(NSString *)text linkDictionary:(NSDictionary *)dictionary {
     
     NSLog(@"Old Text: %@", oldText);
@@ -2203,7 +2190,7 @@ static ShareProgressView *clipBdPogressView;
           [longURL absoluteString], statusCode, statusText);
     [self onsmsFailed];
 }
-*/
+
 #pragma leaving code
 
 - (void)postDismissCleanup {

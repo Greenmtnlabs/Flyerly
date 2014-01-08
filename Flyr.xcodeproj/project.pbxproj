@@ -341,6 +341,24 @@
 		2025FAB9186074F300CC9188 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2025FAB8186074F300CC9188 /* CoreMotion.framework */; };
 		202C47B5187D49FF00FE0975 /* cancel_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 202C47B3187D49FF00FE0975 /* cancel_button.png */; };
 		202C47B6187D49FF00FE0975 /* cancel_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 202C47B4187D49FF00FE0975 /* cancel_button@2x.png */; };
+		202C47F9187D6E4B00FE0975 /* BitlyConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 202C47B9187D6E4B00FE0975 /* BitlyConfig.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		202C47FA187D6E4B00FE0975 /* BitlyDebug.m in Sources */ = {isa = PBXBuildFile; fileRef = 202C47BB187D6E4B00FE0975 /* BitlyDebug.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		202C47FB187D6E4B00FE0975 /* BitlyLibUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 202C47BD187D6E4B00FE0975 /* BitlyLibUtil.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		202C47FC187D6E4B00FE0975 /* BitlyRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 202C47BF187D6E4B00FE0975 /* BitlyRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		202C47FD187D6E4B00FE0975 /* BitlyTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 202C47C1187D6E4B00FE0975 /* BitlyTextView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		202C47FE187D6E4B00FE0975 /* BitlyTweetSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 202C47C3187D6E4B00FE0975 /* BitlyTweetSheet.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		202C47FF187D6E4B00FE0975 /* BitlyTweetSheetAccountSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = 202C47C5187D6E4B00FE0975 /* BitlyTweetSheetAccountSelector.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		202C4800187D6E4B00FE0975 /* BitlyTwitterOAuthAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 202C47C7187D6E4B00FE0975 /* BitlyTwitterOAuthAccount.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		202C4801187D6E4B00FE0975 /* BitlyTwitterOAuthManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 202C47C9187D6E4B00FE0975 /* BitlyTwitterOAuthManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		202C4802187D6E4B00FE0975 /* BitlyTwitterOAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 202C47CB187D6E4B00FE0975 /* BitlyTwitterOAuthViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		202C4803187D6E4B00FE0975 /* BitlyURLShortener.m in Sources */ = {isa = PBXBuildFile; fileRef = 202C47CD187D6E4B00FE0975 /* BitlyURLShortener.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		202C4825187D7A6B00FE0975 /* CDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 202C4819187D7A6B00FE0975 /* CDataScanner.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		202C4826187D7A6B00FE0975 /* CDataScanner_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 202C481B187D7A6B00FE0975 /* CDataScanner_Extensions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		202C4827187D7A6B00FE0975 /* CJSONDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 202C481D187D7A6B00FE0975 /* CJSONDeserializer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		202C4828187D7A6B00FE0975 /* CJSONScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 202C481F187D7A6B00FE0975 /* CJSONScanner.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		202C4829187D7A6B00FE0975 /* CJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 202C4821187D7A6B00FE0975 /* CJSONSerializer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		202C482A187D7A6B00FE0975 /* NSDictionary_JSONExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 202C4824187D7A6B00FE0975 /* NSDictionary_JSONExtensions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		202C482D187D9DAB00FE0975 /* UIImage+NBUAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 202C482C187D9DAB00FE0975 /* UIImage+NBUAdditions.m */; };
 		202C638417EA06E800CB9A75 /* ricon22.png in Resources */ = {isa = PBXBuildFile; fileRef = 202C62F217EA06E800CB9A75 /* ricon22.png */; };
 		202C638517EA06E800CB9A75 /* ricon22@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 202C62F317EA06E800CB9A75 /* ricon22@2x.png */; };
 		202C638617EA06E800CB9A75 /* ricon23.png in Resources */ = {isa = PBXBuildFile; fileRef = 202C62F417EA06E800CB9A75 /* ricon23.png */; };
@@ -1664,6 +1682,43 @@
 		2025FAB8186074F300CC9188 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		202C47B3187D49FF00FE0975 /* cancel_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel_button.png; sourceTree = "<group>"; };
 		202C47B4187D49FF00FE0975 /* cancel_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancel_button@2x.png"; sourceTree = "<group>"; };
+		202C47B8187D6E4B00FE0975 /* BitlyConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitlyConfig.h; sourceTree = "<group>"; };
+		202C47B9187D6E4B00FE0975 /* BitlyConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BitlyConfig.m; sourceTree = "<group>"; };
+		202C47BA187D6E4B00FE0975 /* BitlyDebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitlyDebug.h; sourceTree = "<group>"; };
+		202C47BB187D6E4B00FE0975 /* BitlyDebug.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BitlyDebug.m; sourceTree = "<group>"; };
+		202C47BC187D6E4B00FE0975 /* BitlyLibUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitlyLibUtil.h; sourceTree = "<group>"; };
+		202C47BD187D6E4B00FE0975 /* BitlyLibUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BitlyLibUtil.m; sourceTree = "<group>"; };
+		202C47BE187D6E4B00FE0975 /* BitlyRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitlyRequest.h; sourceTree = "<group>"; };
+		202C47BF187D6E4B00FE0975 /* BitlyRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BitlyRequest.m; sourceTree = "<group>"; };
+		202C47C0187D6E4B00FE0975 /* BitlyTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitlyTextView.h; sourceTree = "<group>"; };
+		202C47C1187D6E4B00FE0975 /* BitlyTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BitlyTextView.m; sourceTree = "<group>"; };
+		202C47C2187D6E4B00FE0975 /* BitlyTweetSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitlyTweetSheet.h; sourceTree = "<group>"; };
+		202C47C3187D6E4B00FE0975 /* BitlyTweetSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BitlyTweetSheet.m; sourceTree = "<group>"; };
+		202C47C4187D6E4B00FE0975 /* BitlyTweetSheetAccountSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitlyTweetSheetAccountSelector.h; sourceTree = "<group>"; };
+		202C47C5187D6E4B00FE0975 /* BitlyTweetSheetAccountSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BitlyTweetSheetAccountSelector.m; sourceTree = "<group>"; };
+		202C47C6187D6E4B00FE0975 /* BitlyTwitterOAuthAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitlyTwitterOAuthAccount.h; sourceTree = "<group>"; };
+		202C47C7187D6E4B00FE0975 /* BitlyTwitterOAuthAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BitlyTwitterOAuthAccount.m; sourceTree = "<group>"; };
+		202C47C8187D6E4B00FE0975 /* BitlyTwitterOAuthManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitlyTwitterOAuthManager.h; sourceTree = "<group>"; };
+		202C47C9187D6E4B00FE0975 /* BitlyTwitterOAuthManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BitlyTwitterOAuthManager.m; sourceTree = "<group>"; };
+		202C47CA187D6E4B00FE0975 /* BitlyTwitterOAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitlyTwitterOAuthViewController.h; sourceTree = "<group>"; };
+		202C47CB187D6E4B00FE0975 /* BitlyTwitterOAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BitlyTwitterOAuthViewController.m; sourceTree = "<group>"; };
+		202C47CC187D6E4B00FE0975 /* BitlyURLShortener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitlyURLShortener.h; sourceTree = "<group>"; };
+		202C47CD187D6E4B00FE0975 /* BitlyURLShortener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BitlyURLShortener.m; sourceTree = "<group>"; };
+		202C4818187D7A6B00FE0975 /* CDataScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDataScanner.h; sourceTree = "<group>"; };
+		202C4819187D7A6B00FE0975 /* CDataScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDataScanner.m; sourceTree = "<group>"; };
+		202C481A187D7A6B00FE0975 /* CDataScanner_Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDataScanner_Extensions.h; sourceTree = "<group>"; };
+		202C481B187D7A6B00FE0975 /* CDataScanner_Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDataScanner_Extensions.m; sourceTree = "<group>"; };
+		202C481C187D7A6B00FE0975 /* CJSONDeserializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONDeserializer.h; sourceTree = "<group>"; };
+		202C481D187D7A6B00FE0975 /* CJSONDeserializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJSONDeserializer.m; sourceTree = "<group>"; };
+		202C481E187D7A6B00FE0975 /* CJSONScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONScanner.h; sourceTree = "<group>"; };
+		202C481F187D7A6B00FE0975 /* CJSONScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJSONScanner.m; sourceTree = "<group>"; };
+		202C4820187D7A6B00FE0975 /* CJSONSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONSerializer.h; sourceTree = "<group>"; };
+		202C4821187D7A6B00FE0975 /* CJSONSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJSONSerializer.m; sourceTree = "<group>"; };
+		202C4822187D7A6B00FE0975 /* JSONRepresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONRepresentation.h; sourceTree = "<group>"; };
+		202C4823187D7A6B00FE0975 /* NSDictionary_JSONExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDictionary_JSONExtensions.h; sourceTree = "<group>"; };
+		202C4824187D7A6B00FE0975 /* NSDictionary_JSONExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDictionary_JSONExtensions.m; sourceTree = "<group>"; };
+		202C482B187D9DAB00FE0975 /* UIImage+NBUAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+NBUAdditions.h"; sourceTree = "<group>"; };
+		202C482C187D9DAB00FE0975 /* UIImage+NBUAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+NBUAdditions.m"; sourceTree = "<group>"; };
 		202C62F217EA06E800CB9A75 /* ricon22.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ricon22.png; path = icons/ricon22.png; sourceTree = "<group>"; };
 		202C62F317EA06E800CB9A75 /* ricon22@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ricon22@2x.png"; path = "icons/ricon22@2x.png"; sourceTree = "<group>"; };
 		202C62F417EA06E800CB9A75 /* ricon23.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ricon23.png; path = icons/ricon23.png; sourceTree = "<group>"; };
@@ -2322,7 +2377,7 @@
 		6560C1D1172812DC005BE8DD /* crop_box@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "crop_box@2x.png"; sourceTree = "<group>"; };
 		659B5EB9172EA5290082B8EB /* lock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lock.png; sourceTree = "<group>"; };
 		659B5EBA172EA5290082B8EB /* lock@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lock@2x.png"; sourceTree = "<group>"; };
-		65A212431729196500ED0B9A /* CameraOverlayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraOverlayView.xib; sourceTree = "<group>"; };
+		65A212431729196500ED0B9A /* CameraOverlayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CameraOverlayView.xib; path = ../CameraOverlayView.xib; sourceTree = "<group>"; };
 		65A212451729496F00ED0B9A /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		65A2126217295F1900ED0B9A /* CustomGalleryItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CustomGalleryItem.xib; path = Classes/CustomGalleryItem.xib; sourceTree = "<group>"; };
 		65A21264172960AA00ED0B9A /* CustomGalleryItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomGalleryItem.h; sourceTree = "<group>"; };
@@ -2748,6 +2803,7 @@
 		0DF3A2D7108DF27200D6C887 /* ExternalFrameworks */ = {
 			isa = PBXGroup;
 			children = (
+				202C47B7187D6E4B00FE0975 /* Bitly */,
 				2032DC9018717B28007036B2 /* FacebookLikeView */,
 				0F7E5A56177C9B8D00CF139F /* Foursquare */,
 				0F7FC383175CE261009DEB08 /* AsyncImageView */,
@@ -3768,6 +3824,56 @@
 			path = Submodules/ShareKit;
 			sourceTree = "<group>";
 		};
+		202C47B7187D6E4B00FE0975 /* Bitly */ = {
+			isa = PBXGroup;
+			children = (
+				202C47B8187D6E4B00FE0975 /* BitlyConfig.h */,
+				202C47B9187D6E4B00FE0975 /* BitlyConfig.m */,
+				202C47BA187D6E4B00FE0975 /* BitlyDebug.h */,
+				202C47BB187D6E4B00FE0975 /* BitlyDebug.m */,
+				202C47BC187D6E4B00FE0975 /* BitlyLibUtil.h */,
+				202C47BD187D6E4B00FE0975 /* BitlyLibUtil.m */,
+				202C47BE187D6E4B00FE0975 /* BitlyRequest.h */,
+				202C47BF187D6E4B00FE0975 /* BitlyRequest.m */,
+				202C47C0187D6E4B00FE0975 /* BitlyTextView.h */,
+				202C47C1187D6E4B00FE0975 /* BitlyTextView.m */,
+				202C47C2187D6E4B00FE0975 /* BitlyTweetSheet.h */,
+				202C47C3187D6E4B00FE0975 /* BitlyTweetSheet.m */,
+				202C47C4187D6E4B00FE0975 /* BitlyTweetSheetAccountSelector.h */,
+				202C47C5187D6E4B00FE0975 /* BitlyTweetSheetAccountSelector.m */,
+				202C47C6187D6E4B00FE0975 /* BitlyTwitterOAuthAccount.h */,
+				202C47C7187D6E4B00FE0975 /* BitlyTwitterOAuthAccount.m */,
+				202C47C8187D6E4B00FE0975 /* BitlyTwitterOAuthManager.h */,
+				202C47C9187D6E4B00FE0975 /* BitlyTwitterOAuthManager.m */,
+				202C47CA187D6E4B00FE0975 /* BitlyTwitterOAuthViewController.h */,
+				202C47CB187D6E4B00FE0975 /* BitlyTwitterOAuthViewController.m */,
+				202C47CC187D6E4B00FE0975 /* BitlyURLShortener.h */,
+				202C47CD187D6E4B00FE0975 /* BitlyURLShortener.m */,
+				202C4817187D7A6B00FE0975 /* TouchJSON */,
+			);
+			path = Bitly;
+			sourceTree = "<group>";
+		};
+		202C4817187D7A6B00FE0975 /* TouchJSON */ = {
+			isa = PBXGroup;
+			children = (
+				202C4818187D7A6B00FE0975 /* CDataScanner.h */,
+				202C4819187D7A6B00FE0975 /* CDataScanner.m */,
+				202C481A187D7A6B00FE0975 /* CDataScanner_Extensions.h */,
+				202C481B187D7A6B00FE0975 /* CDataScanner_Extensions.m */,
+				202C481C187D7A6B00FE0975 /* CJSONDeserializer.h */,
+				202C481D187D7A6B00FE0975 /* CJSONDeserializer.m */,
+				202C481E187D7A6B00FE0975 /* CJSONScanner.h */,
+				202C481F187D7A6B00FE0975 /* CJSONScanner.m */,
+				202C4820187D7A6B00FE0975 /* CJSONSerializer.h */,
+				202C4821187D7A6B00FE0975 /* CJSONSerializer.m */,
+				202C4822187D7A6B00FE0975 /* JSONRepresentation.h */,
+				202C4823187D7A6B00FE0975 /* NSDictionary_JSONExtensions.h */,
+				202C4824187D7A6B00FE0975 /* NSDictionary_JSONExtensions.m */,
+			);
+			path = TouchJSON;
+			sourceTree = "<group>";
+		};
 		2032DC9018717B28007036B2 /* FacebookLikeView */ = {
 			isa = PBXGroup;
 			children = (
@@ -3898,6 +4004,7 @@
 				20FA7E6F1872AAF50057C3F3 /* CameraViewController.h */,
 				20FA7E701872AAF50057C3F3 /* CameraViewController.m */,
 				20FA7E711872AAF50057C3F3 /* CameraViewController.xib */,
+				65A212431729196500ED0B9A /* CameraOverlayView.xib */,
 			);
 			name = Camera;
 			sourceTree = "<group>";
@@ -3959,7 +4066,6 @@
 				65E26180171C59D100C485B5 /* AddFriendItem.xib */,
 				654B254F17202B1C0047C8F6 /* AfterUpdateController.xib */,
 				6560C1C01727F836005BE8DD /* CustomPhotoController.xib */,
-				65A212431729196500ED0B9A /* CameraOverlayView.xib */,
 				6501CAF1173249C900A89E59 /* LauchViewControllerIPhone5.xib */,
 				0FF29F2F174629270007B309 /* ShareProgressView.xib */,
 				0FEF2D99174E65B100FDD8C9 /* HelpController.xib */,
@@ -4247,6 +4353,8 @@
 		49997FF817E07F7300CF1038 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				202C482B187D9DAB00FE0975 /* UIImage+NBUAdditions.h */,
+				202C482C187D9DAB00FE0975 /* UIImage+NBUAdditions.m */,
 				49997FF917E07FA100CF1038 /* SKProduct+LocalPrice.h */,
 				49997FFA17E07FA100CF1038 /* SKProduct+LocalPrice.m */,
 			);
@@ -5554,33 +5662,42 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				202C47F9187D6E4B00FE0975 /* BitlyConfig.m in Sources */,
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
+				202C47FA187D6E4B00FE0975 /* BitlyDebug.m in Sources */,
 				1D3623260D0F684500981E51 /* FlyrAppDelegate.m in Sources */,
 				0DF3A2C5108DF1D200D6C887 /* LauchViewController.m in Sources */,
 				0DF3A2C6108DF1D200D6C887 /* PhotoController.m in Sources */,
+				202C47FE187D6E4B00FE0975 /* BitlyTweetSheet.m in Sources */,
 				0DEE03EE108F41D600967DA5 /* MyNetworkController.m in Sources */,
 				0D8571ED1090542B00622AB1 /* MyCustomCell.m in Sources */,
 				2032DC9718717B3F007036B2 /* FacebookLikeView.m in Sources */,
 				0D4903BB1091893B00855C30 /* FlyrViewController.m in Sources */,
+				202C47FC187D6E4B00FE0975 /* BitlyRequest.m in Sources */,
 				E8A7347D1092CFF300661AAD /* DraftViewController.m in Sources */,
 				208C684F186DAA59004A74F2 /* MySHKConfigurator.m in Sources */,
 				2032DCD01871BDFF007036B2 /* CropViewController.m in Sources */,
+				202C4803187D6E4B00FE0975 /* BitlyURLShortener.m in Sources */,
 				0DFC5322109576AB00B18478 /* SettingViewController.m in Sources */,
+				202C482D187D9DAB00FE0975 /* UIImage+NBUAdditions.m in Sources */,
 				0DE024F81095A0C9005F699B /* UIImageExtras.m in Sources */,
 				E8F2E155109659E600DFA7E8 /* MyNavigationBar.m in Sources */,
 				E8C7C36910976BFC0064935A /* SaveFlyerController.m in Sources */,
 				200384741875A357008909F9 /* PresetFilterViewController.m in Sources */,
 				0DE1F274109881B20012819A /* LoadingView.m in Sources */,
+				202C4801187D6E4B00FE0975 /* BitlyTwitterOAuthManager.m in Sources */,
 				0DFA8B3610AD851300F779CA /* GTMIPhoneUnitTestDelegate.m in Sources */,
 				0DFA8B3710AD851300F779CA /* GTMSenTestCase.m in Sources */,
 				0DFA8B3810AD851300F779CA /* ImageCache.m in Sources */,
 				30D8562410CF7FDB0016D5AB /* HudView.m in Sources */,
+				202C47FF187D6E4B00FE0975 /* BitlyTweetSheetAccountSelector.m in Sources */,
 				65E2615D171C2FA800C485B5 /* AddFriendsController.m in Sources */,
 				65E26188171C5C9900C485B5 /* AddFriendItem.m in Sources */,
 				654B255317202B360047C8F6 /* AfterUpdateController.m in Sources */,
 				65A2CEFD172558A0005C03B7 /* CameraOverlayView.m in Sources */,
 				2032DCC91871B5DC007036B2 /* GalleryViewController.m in Sources */,
 				20920015184F40330034C4F6 /* AddFriendsDetail.m in Sources */,
+				202C4827187D7A6B00FE0975 /* CJSONDeserializer.m in Sources */,
 				6560C1BF1727F5C7005BE8DD /* CustomPhotoController.m in Sources */,
 				65A21266172960AB00ED0B9A /* CustomGalleryItem.m in Sources */,
 				65BDB2DF17341D290084E032 /* CustomLabel.m in Sources */,
@@ -5592,7 +5709,11 @@
 				0F7F02C3176616B100FC750F /* FlyerOverlayController.m in Sources */,
 				0F7E5A5B177C9BD500CF139F /* BZFoursquare.m in Sources */,
 				0F7E5A5C177C9BD500CF139F /* BZFoursquareRequest.m in Sources */,
+				202C482A187D7A6B00FE0975 /* NSDictionary_JSONExtensions.m in Sources */,
 				0FCC3A23177DCFA40046484C /* LocationController.m in Sources */,
+				202C4829187D7A6B00FE0975 /* CJSONSerializer.m in Sources */,
+				202C4800187D6E4B00FE0975 /* BitlyTwitterOAuthAccount.m in Sources */,
+				202C4826187D7A6B00FE0975 /* CDataScanner_Extensions.m in Sources */,
 				0FCC3A2B177DD35D0046484C /* LocationItem.m in Sources */,
 				2032DC9818717B3F007036B2 /* NSData+Extras.m in Sources */,
 				0FD247DA1784547E003CA6DD /* SearchLocationItem.m in Sources */,
@@ -5602,12 +5723,17 @@
 				20F93DD317B2262200F6F88C /* MainSettingViewController.m in Sources */,
 				20F4D8E017BA3D0A007B2DF5 /* AccountSelecter.m in Sources */,
 				20F4D8E517BA40EA007B2DF5 /* Singleton.m in Sources */,
+				202C4828187D7A6B00FE0975 /* CJSONScanner.m in Sources */,
+				202C47FD187D6E4B00FE0975 /* BitlyTextView.m in Sources */,
 				2087B6C017C73B40007A6A90 /* ResetPWViewController.m in Sources */,
+				202C4802187D6E4B00FE0975 /* BitlyTwitterOAuthViewController.m in Sources */,
 				20FA7E721872AAF50057C3F3 /* CameraViewController.m in Sources */,
 				203E0B7617DDDD720039C3A7 /* InputViewController.m in Sources */,
 				2044FF96185088ED00A26B42 /* MainSettingCell.m in Sources */,
+				202C4825187D7A6B00FE0975 /* CDataScanner.m in Sources */,
 				49997FF717DF786400CF1038 /* ParentViewController.m in Sources */,
 				49997FFB17E07FA100CF1038 /* SKProduct+LocalPrice.m in Sources */,
+				202C47FB187D6E4B00FE0975 /* BitlyLibUtil.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -24,13 +24,14 @@
 #import "LauchViewController.h"
 #import "Singleton.h"
 #import "ParentViewController.h"
+#import "BitlyURLShortener.h"
 #import "FlyerOverlayController.h"
 
 @class FlyrViewController,LauchViewController,Singleton;
 @class SaveFlyerController,PhotoController;
 @class LoadingView;
 
-@interface DraftViewController : ParentViewController<UIWebViewDelegate,UIDocumentInteractionControllerDelegate,MFMessageComposeViewControllerDelegate,MFMailComposeViewControllerDelegate,UITextViewDelegate,UITextFieldDelegate,UIGestureRecognizerDelegate, UIActionSheetDelegate> {
+@interface DraftViewController : ParentViewController<UIWebViewDelegate,UIDocumentInteractionControllerDelegate,MFMessageComposeViewControllerDelegate,MFMailComposeViewControllerDelegate,UITextViewDelegate,UITextFieldDelegate,UIGestureRecognizerDelegate, BitlyURLShortenerDelegate,UIActionSheetDelegate> {
 
 	IBOutlet UIScrollView *scrollView;
 
@@ -92,6 +93,7 @@
 @property(nonatomic,retain) ShareProgressView *flickrPogressView;
 @property(nonatomic,retain) ShareProgressView *instagramPogressView;*/
 
+@property(nonatomic, strong) BitlyURLShortener *bitly;
 @property(nonatomic,strong) IBOutlet UILabel *saveToCameraRollLabel;
 @property(nonatomic,strong) IBOutlet UISwitch *saveToRollSwitch;
 @property(nonatomic,strong) IBOutlet UILabel *locationLabel;

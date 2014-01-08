@@ -37,6 +37,9 @@
     // Configure the camera view
     //self.cameraView.shouldAutoRotateView = YES;
     //self.cameraView.savePicturesToLibrary = YES;
+  
+    
+    
     self.cameraView.targetResolution = CGSizeMake(640.0, 640.0); // The minimum resolution we want
     self.cameraView.keepFrontCameraPicturesMirrored = YES;
     self.cameraView.captureResultBlock = ^(UIImage * image,
@@ -58,14 +61,15 @@
             //[self.navigationController popViewControllerAnimated:YES];
         }
     };
+    
     self.cameraView.flashButtonConfigurationBlock = [self.cameraView buttonConfigurationBlockWithTitleFrom:
-                                                    @[@"Flash Off", @"Flash On", @"Flash Auto"]];
+                                                    @[@"Flash", @"On", @"Auto"]];
     self.cameraView.focusButtonConfigurationBlock = [self.cameraView buttonConfigurationBlockWithTitleFrom:
-                                                    @[@"Fcs Lckd", @"Fcs Auto", @"Fcs Cont"]];
+                                                    @[@"Fcs", @"Auto", @"Cont"]];
     self.cameraView.exposureButtonConfigurationBlock = [self.cameraView buttonConfigurationBlockWithTitleFrom:
-                                                        @[@"Exp Lckd", @"Exp Auto", @"Exp Cont"]];
+                                                        @[@"Exp", @"Auto", @"Cont"]];
     self.cameraView.whiteBalanceButtonConfigurationBlock = [self.cameraView buttonConfigurationBlockWithTitleFrom:
-                                                            @[@"WB Lckd", @"WB Auto", @"WB Cont"]];
+                                                            @[@"Lckd", @"Auto", @"Cont"]];
     
     // Configure for video
 //    self.cameraView.targetMovieFolder = [UIApplication sharedApplication].temporaryDirectory;

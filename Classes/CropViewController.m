@@ -58,7 +58,10 @@
     [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:nextBarButton,doneBarButton,cropBarButton,resetBarButton,nil]];
     
     // Configure the controller
+   // self.cropGuideSize = CGSizeMake(247.0, 227.0); // Matches our cropGuideView's image
     self.cropGuideSize = CGSizeMake(247.0, 227.0); // Matches our cropGuideView's image
+  
+   
     self.maximumScaleFactor = 10.0;                // We may get big pixels with this factor!
     
     // Our test image
@@ -79,12 +82,10 @@
 - (void)setCropView:(NBUCropView *)cropView
 {
     super.cropView = cropView;
-    
     cropView.allowAspectFit = YES; // The image can be downsized until it fits inside the cropGuideView
 }
 
 -(void)backtoMainView{
-    
     NSInteger noOfViewControllers = [self.navigationController.viewControllers count];
     [self.navigationController
      popToViewController:[self.navigationController.viewControllers
@@ -93,11 +94,17 @@
 }
 
 -(void)gotoFilterImage{
-
     nbuFilter = [[PresetFilterViewController alloc]initWithNibName:@"PresetFilterViewController" bundle:nil];
     [nbuFilter awakeFromNib];
     [self.navigationController pushViewController:nbuFilter animated:YES];
     
+}
+
+
+- (void)reset:(id)sender
+{
+    [self objectUpdated:nil];
+    globle.NBUimage = self.image;
 }
 
 @end

@@ -18,6 +18,7 @@
 #import "SHKFacebook.h"
 #import "SHKConfiguration.h"
 #import "MySHKConfigurator.h"
+#import "BitlyConfig.h"
 
 
 

@@ -75,7 +75,7 @@
                     </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="new_grid_line.png" id="16">
-                    <rect key="frame" x="6" y="47" width="308" height="305"/>
+                    <rect key="frame" x="6" y="48" width="308" height="305"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="camera_bottombg.png" id="227">

@@ -301,8 +301,8 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     [PFTwitterUtils initializeWithConsumerKey:@"SAXU48fGEpSMQl56cgRDQ" consumerSecret:@"tNMJrWNA3eqSQn87Gv2WH1KCb3EGpdHHi7YRd1YG6xw"];
     
     // Setup Bit.ly
-    /*
-    [[BitlyConfig sharedBitlyConfig] setBitlyLogin:@"flyerly" bitlyAPIKey:@"R_3bdc6f8e82d260965325510421c980a0"];*/
+
+    [[BitlyConfig sharedBitlyConfig] setBitlyLogin:@"flyerly" bitlyAPIKey:@"R_3bdc6f8e82d260965325510421c980a0"];
   //  [[BitlyConfig sharedBitlyConfig] setBitlyAPIKey:@"R_3bdc6f8e82d260965325510421c980a0"];
     
     //Here you load ShareKit submodule with app specific configuration
