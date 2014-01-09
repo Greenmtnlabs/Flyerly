@@ -100,9 +100,15 @@
     NSString *imgname =@"";
    
     if (indexPath.row == 0) imgname = @"share_settings";
-    if (indexPath.row == 1) imgname = @"save_gallery";
+    if (indexPath.row == 1){
+        imgname = @"save_gallery";
+        [cell setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"settingsrow"]]];
+    }
     if (indexPath.row == 2)imgname = @"account_settings";
-    if (indexPath.row == 3)imgname = @"signout";
+    if (indexPath.row == 3){
+        imgname = @"signout";
+        [cell setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"settingsrow"]]];
+    }
 
         if (indexPath.row == 1){
             UISwitch *mSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(223, 4, 0, 0)] ;

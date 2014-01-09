@@ -722,6 +722,7 @@
 		20714DF3187F1B9D000D6838 /* cameraline.png in Resources */ = {isa = PBXBuildFile; fileRef = 20714DF2187F1B9D000D6838 /* cameraline.png */; };
 		20714DF6187F2105000D6838 /* cancelcamera.png in Resources */ = {isa = PBXBuildFile; fileRef = 20714DF4187F2105000D6838 /* cancelcamera.png */; };
 		20714DF7187F2105000D6838 /* cancelcamera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20714DF5187F2105000D6838 /* cancelcamera@2x.png */; };
+		20714DF9187F25E1000D6838 /* settingsrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 20714DF8187F25E1000D6838 /* settingsrow.png */; };
 		2086F90C17C4C2E300664123 /* Zmain_screenbg-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2086F90917C4C2E300664123 /* Zmain_screenbg-568h@2x.png */; };
 		2086F90D17C4C2E300664123 /* Zmain_screenbg.png in Resources */ = {isa = PBXBuildFile; fileRef = 2086F90A17C4C2E300664123 /* Zmain_screenbg.png */; };
 		2086F90E17C4C2E300664123 /* Zmain_screenbg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2086F90B17C4C2E300664123 /* Zmain_screenbg@2x.png */; };
@@ -2094,6 +2095,7 @@
 		20714DF2187F1B9D000D6838 /* cameraline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cameraline.png; sourceTree = "<group>"; };
 		20714DF4187F2105000D6838 /* cancelcamera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancelcamera.png; sourceTree = "<group>"; };
 		20714DF5187F2105000D6838 /* cancelcamera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancelcamera@2x.png"; sourceTree = "<group>"; };
+		20714DF8187F25E1000D6838 /* settingsrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settingsrow.png; sourceTree = "<group>"; };
 		2086F90917C4C2E300664123 /* Zmain_screenbg-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Zmain_screenbg-568h@2x.png"; sourceTree = "<group>"; };
 		2086F90A17C4C2E300664123 /* Zmain_screenbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Zmain_screenbg.png; sourceTree = "<group>"; };
 		2086F90B17C4C2E300664123 /* Zmain_screenbg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Zmain_screenbg@2x.png"; sourceTree = "<group>"; };
@@ -2796,6 +2798,7 @@
 				65E2615C171C2FA800C485B5 /* AddFriendsController.m */,
 				20920012184F40330034C4F6 /* AddFriendsDetail.h */,
 				20920013184F40330034C4F6 /* AddFriendsDetail.m */,
+				20714DF8187F25E1000D6838 /* settingsrow.png */,
 				20F93DD017B2262200F6F88C /* MainSettingViewController.h */,
 				20F93DD117B2262200F6F88C /* MainSettingViewController.m */,
 				2044FF93185088ED00A26B42 /* MainSettingCell.h */,
@@ -5403,6 +5406,7 @@
 				202C63F717EA06E800CB9A75 /* ricon79@2x.png in Resources */,
 				202C63F817EA06E800CB9A75 /* ricon80.png in Resources */,
 				202C63F917EA06E800CB9A75 /* ricon80@2x.png in Resources */,
+				20714DF9187F25E1000D6838 /* settingsrow.png in Resources */,
 				202C63FA17EA06E800CB9A75 /* ricon81.png in Resources */,
 				202C63FB17EA06E800CB9A75 /* ricon81@2x.png in Resources */,
 				202C63FC17EA06E800CB9A75 /* ricon82.png in Resources */,
