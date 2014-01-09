@@ -22,7 +22,7 @@
 
 @implementation CameraViewController
 
-@synthesize shootButton = _shootButton;
+@synthesize shootButton = _shootButton,cameraLines;
 @synthesize slideView = _slideView;
 
 - (void)viewDidLoad
@@ -57,6 +57,7 @@
             //Pass Image
             globle.NBUimage = [[UIImage alloc] init];
             globle.NBUimage = [image thumbnailWithSize:CGSizeMake(310.0, 309.0)];
+             self.navigationController.navigationBarHidden = NO;
             [self CallNBUcropImage];
             //[self.navigationController popViewControllerAnimated:YES];
         }
@@ -104,6 +105,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = YES;
     
     // Enable shootButton
     _shootButton.userInteractionEnabled = YES;
@@ -136,6 +138,20 @@
     [nbuCrop awakeFromNib];
     [self.navigationController pushViewController:nbuCrop animated:YES];
 }
+
+- (IBAction)setCameraline:(id)sender{
+    if (cameraLines.hidden == YES) {
+        cameraLines.hidden = NO;
+    }else{
+        cameraLines.hidden = YES;
+    }
+}
+
+- (IBAction)CameraCancel:(id)sender{
+    globle.NBUimage = nil;
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 
 @end
 

@@ -36,8 +36,12 @@
 @property (assign, nonatomic) IBOutlet UIButton * shootButton;
 @property (assign, nonatomic) IBOutlet ObjectSlideView * slideView;
 
+@property (assign, nonatomic) IBOutlet UIImageView *cameraLines;
+
 // Actions
 - (IBAction)customToggleFlash:(id)sender;
+- (IBAction)setCameraline:(id)sender;
+- (IBAction)CameraCancel:(id)sender;
 
 @end
 

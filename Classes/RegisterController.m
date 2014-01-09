@@ -127,7 +127,6 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 	// Do any additional setup after loading the view.
     
     self.navigationController.navigationBarHidden = NO;
-    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
     
     // for Navigation Bar Background
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
@@ -135,7 +134,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 
     //set title
     //self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Register" rect:CGRectMake(-50, -6, 50, 50)];
-    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-50, -6, 150, 80)] autorelease];
+    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(0, 0, 150, 80)] autorelease];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:TITLE_FONT size:18];
     label.textAlignment = UITextAlignmentCenter;
@@ -171,8 +170,10 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
     backButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-    [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarButton,nil]];
+    leftBarButton.width = -16;
+    [self.navigationItem addLeftBarButtonItem:leftBarButton];
 
+    
     
     UIButton *signUpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [signUpButton addTarget:self action:@selector(onSignUp) forControlEvents:UIControlEventTouchUpInside];
@@ -183,10 +184,17 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     [signUpButton setFont:[UIFont fontWithName:TITLE_FONT size:16]];
     [signUpButton setTitleColor:[globle colorWithHexString:@"84c441"]forState:UIControlStateNormal];
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:signUpButton];
-    
+
     [self.navigationItem setRightBarButtonItem:rightBarButton];
+    
+    
+ 
 
 }
+
+
+
+
 
 -(void)goBack{
     

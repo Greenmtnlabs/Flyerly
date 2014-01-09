@@ -47,8 +47,17 @@ BOOL selectAll;
 	loadingViewFlag = NO;
     loadingView = nil;
 	loadingView = [[LoadingView alloc]init];
-    self.navigationItem.leftBarButtonItem.title = @"";
-    [self.navigationItem setRightBarButtonItems: [self rightBarItems]];
+
+    
+    
+    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-28, -6, 50, 50)] autorelease];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont fontWithName:TITLE_FONT size:18];
+    label.textAlignment = UITextAlignmentCenter;
+    label.textColor = [UIColor whiteColor];
+    label.text = @"INVITE";
+    self.navigationItem.titleView = label;
+    
     // Create left bar help button
     UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [helpButton addTarget:self action:@selector(loadHelpController) forControlEvents:UIControlEventTouchUpInside];
@@ -65,66 +74,12 @@ BOOL selectAll;
     UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:backBarButton,leftBarButton,nil]];
     
-    // set background on the table
-     [self.uiTableView  setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
-    // [[self.uiTableView layer] setBorderWidth:5];
-    // Set fonts type and sizes
-    /*
-     [self.contactsLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
-     [self.contactsLabel setText:NSLocalizedString(@"contacts", nil)];
-     
-     [self.facebookLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
-     [self.facebookLabel setText:NSLocalizedString(@"facebook", nil)];
-     
-     [self.twitterLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
-     [self.twitterLabel setText:NSLocalizedString(@"twitter", nil)];
-     
-     [self.doneLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
-     [self.doneLabel setText:NSLocalizedString(@"done", nil)];
-     
-     [self.selectAllLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
-     [self.selectAllLabel setText:NSLocalizedString(@"select_all", nil)];
-     
-     [self.unSelectAllLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
-     [self.unSelectAllLabel setText:NSLocalizedString(@"unselect_all", nil)];
-     
-     [self.inviteLabel setFont:[UIFont fontWithName:TITLE_FONT size:18]];
-     [self.inviteLabel setText:NSLocalizedString(@"invite", nil)];
-     */
+    [self.uiTableView  setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
     [searchTextField setReturnKeyType:UIReturnKeyDone];
     
 }
 
--(NSArray *)rightBarItems{
-    
-    // Create right bar help button
-    //UILabel *saveFlyrLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 75, 50)];
-    //[saveFlyrLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:8.5]];
-    //[saveFlyrLabel setTextColor:[MyCustomCell colorWithHexString:@"008ec0"]];
-    //[saveFlyrLabel setBackgroundColor:[UIColor clearColor]];
-    //[saveFlyrLabel setText:@"Invite Friends"];
-    //UIBarButtonItem *barLabel = [[UIBarButtonItem alloc] initWithCustomView:saveFlyrLabel];
-    
-    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-28, -6, 50, 50)] autorelease];
-    label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont fontWithName:TITLE_FONT size:18];
-    label.textAlignment = UITextAlignmentCenter;
-    label.textColor = [UIColor whiteColor];
-    label.text = @"INVITE";
-    self.navigationItem.titleView = label;//[PhotoController setTitleViewWithTitle:@"Invite" rect:CGRectMake(-28, -6, 50, 50)];
-    
-    
-    UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 31, 30)];
-    [menuButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-    [menuButton setBackgroundImage:[UIImage imageNamed:@"menu_button"] forState:UIControlStateNormal];
-    menuButton.showsTouchWhenHighlighted = YES;
-    [menuButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *menuBarButton = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
-    //[self.navigationItem setRightBarButtonItem:rightBarButton];
-    
-    
-    return [NSMutableArray arrayWithObjects:menuBarButton,nil];
-}
+
 
 -(void)loadHelpController{
     HelpController *helpController = [[[HelpController alloc]initWithNibName:@"HelpController" bundle:nil] autorelease];
@@ -256,6 +211,7 @@ BOOL selectAll;
         
         // For contact picture
         UIImage *contactPicture;
+        
         if (ref != nil && ABPersonHasImageData(ref)) {
             if ( &ABPersonCopyImageDataWithFormat != nil ) {
                 // iOS >= 4.1
@@ -270,6 +226,7 @@ BOOL selectAll;
         
         //For Phone number
         NSString* mobileLabel;
+        
         for(CFIndex i = 0; i < ABMultiValueGetCount(phones); i++) {
             mobileLabel = (NSString*)CFBridgingRelease(ABMultiValueCopyLabelAtIndex(phones, i));
             if([mobileLabel isEqualToString:(NSString *)kABPersonPhoneMobileLabel])
@@ -286,6 +243,7 @@ BOOL selectAll;
             }
         }
         
+        //[contactsArray addObject:dOfPerson];
         //CFRelease(ref);
         //CFRelease(firstName);
         //CFRelease(lastName);

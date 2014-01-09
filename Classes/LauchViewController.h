@@ -11,6 +11,7 @@
 #import "ParentViewController.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "FacebookLikeView.h"
+#import "Singleton.h"
 
 @class FlyrViewController;
 @class SettingViewController;
@@ -21,12 +22,12 @@
 @class MainSettingViewController;
 
 
-@interface LauchViewController : ParentViewController<UIWebViewDelegate,UIActionSheetDelegate> {
+@interface LauchViewController : ParentViewController<UIWebViewDelegate,UIActionSheetDelegate,FacebookLikeViewDelegate> {
 	PhotoController *ptController;
 	FlyrViewController *tpController;
 	SettingViewController *spController;
 	AddFriendsController *addFriendsController;
-    
+    Singleton *globle;
     IBOutlet UILabel *createFlyrLabel;
     IBOutlet UILabel *savedFlyrLabel;
     IBOutlet UILabel *inviteFriendLabel;
@@ -55,7 +56,7 @@
     IBOutlet UIWebView *webview;
     IBOutlet UIButton *crossButton;
     
-    NSArray *arrayOfAccounts;
+
 }
 @property(nonatomic,strong) PhotoController *ptController;
 @property(nonatomic,strong) FlyrViewController *tpController;
@@ -94,4 +95,6 @@
 -(IBAction)goBack;
 -(void)loadMasterSetting;
 - (void)fbDidLogin;
+
+- (void)setFacebookLikeStatus;
 @end

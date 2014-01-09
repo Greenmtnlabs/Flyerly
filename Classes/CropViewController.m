@@ -27,6 +27,7 @@
     [super awakeFromNib];
      globle = [Singleton RetrieveSingleton];
     
+    
     //Done Button
     UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 32)];
     [doneButton addTarget:self action:@selector(backtoMainView) forControlEvents:UIControlEventTouchUpInside];
@@ -92,6 +93,8 @@
                           objectAtIndex:(noOfViewControllers-3)] animated:YES];
 
 }
+
+
 
 -(void)gotoFilterImage{
     nbuFilter = [[PresetFilterViewController alloc]initWithNibName:@"PresetFilterViewController" bundle:nil];

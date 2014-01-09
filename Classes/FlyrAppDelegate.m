@@ -21,9 +21,6 @@
 #import "BZFoursquare.h"
 
 
-
-
-
 NSString *kCheckTokenStep1 = @"kCheckTokenStep";
 NSString *FlickrSharingSuccessNotification = @"FlickrSharingSuccessNotification";
 NSString *FlickrSharingFailureNotification = @"FlickrSharingFailureNotification";
@@ -70,9 +67,9 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 {
 	[self clearCache];
 	changesFlag = NO;
-	[[UIApplication sharedApplication] setStatusBarStyle: UIStatusBarStyleBlackOpaque];
+	/*[[UIApplication sharedApplication] setStatusBarStyle: UIStatusBarStyleBlackOpaque];
 	navigationController.navigationBar.barStyle = UIStatusBarStyleBlackOpaque;
-
+*/
     NSString *greeted = [[NSUserDefaults standardUserDefaults] stringForKey:@"greeted"];
     
     if(!greeted){
@@ -204,7 +201,6 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
     //return [PFFacebookUtils handleOpenURL:url];
-    
         return [[self facebook] handleOpenURL:url];
     
 }
@@ -261,24 +257,9 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
         return nil;//[[SHKTumblr  sharedInstance] handleOpenURL:url];
     }
 }
-/*
-- (OFFlickrAPIContext *)flickrContext
-{
-    if (!flickrContext) {
-        flickrContext = [[OFFlickrAPIContext alloc] initWithAPIKey:FlickrAPIKey sharedSecret:FlickrSecretKey];
-        
-        NSString *authToken = [[NSUserDefaults standardUserDefaults] objectForKey:kStoredAuthTokenKeyName];
-        NSString *authTokenSecret = [[NSUserDefaults standardUserDefaults] objectForKey:kStoredAuthTokenSecretKeyName];
-        
-        if (([authToken length] > 0) && ([authTokenSecret length] > 0)) {
-            flickrContext.OAuthToken = authToken;
-            flickrContext.OAuthTokenSecret = authTokenSecret;
-        }
-    }
-    
-    return flickrContext;
-}
-*/
+
+
+
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     [FBAppCall handleDidBecomeActiveWithSession:self.session];
 }
@@ -313,8 +294,8 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     
     //[self clearCache];
 	changesFlag = NO;
-	[[UIApplication sharedApplication] setStatusBarStyle: UIStatusBarStyleBlackOpaque];
-	navigationController.navigationBar.barStyle = UIStatusBarStyleBlackOpaque;
+	//[[UIApplication sharedApplication] setStatusBarStyle: UIStatusBarStyleBlackOpaque];
+	//navigationController.navigationBar.barStyle = UIStatusBarStyleBlackOpaque;
     globle = [Singleton RetrieveSingleton];
     globle.twitterUser = nil;
     float ver =  [[[UIDevice currentDevice] systemVersion] floatValue];
@@ -385,54 +366,6 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 
     return YES;
 }
-/*
-- (void)flickrAPIRequest:(OFFlickrAPIRequest *)inRequest didCompleteWithResponse:(NSDictionary *)inResponseDictionary {    
-    NSLog(@"Request Complete With Response: %@", inResponseDictionary);
-    
-    if (inRequest.sessionInfo == kCheckTokenStep1) {
-		self.flickrUserName = [inResponseDictionary valueForKeyPath:@"user.username._text"];
-	}
-	
-    [self flickrRequest].sessionInfo = nil;
-	[[NSNotificationCenter defaultCenter] postNotificationName:FlickrSharingSuccessNotification object:nil];
-}
-
-- (void)flickrAPIRequest:(OFFlickrAPIRequest *)inRequest didObtainOAuthAccessToken:(NSString *)inAccessToken secret:(NSString *)inSecret userFullName:(NSString *)inFullName userName:(NSString *)inUserName userNSID:(NSString *)inNSID {
-    [self setAndStoreFlickrAuthToken:inAccessToken secret:inSecret];
-    
-    self.flickrUserName = inUserName;    
-	//[[NSNotificationCenter defaultCenter] postNotificationName:SnapAndRunShouldUpdateAuthInfoNotification object:self];
-    [self flickrRequest].sessionInfo = nil;
-}
-
-- (void)setAndStoreFlickrAuthToken:(NSString *)inAuthToken secret:(NSString *)inSecret {
-	if (![inAuthToken length] || ![inSecret length]) {
-		self.flickrContext.OAuthToken = nil;
-        self.flickrContext.OAuthTokenSecret = nil;
-		[[NSUserDefaults standardUserDefaults] removeObjectForKey:kStoredAuthTokenKeyName];
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:kStoredAuthTokenSecretKeyName];
-        
-	}
-	else {
-		self.flickrContext.OAuthToken = inAuthToken;
-        self.flickrContext.OAuthTokenSecret = inSecret;
-		[[NSUserDefaults standardUserDefaults] setObject:inAuthToken forKey:kStoredAuthTokenKeyName];
-		[[NSUserDefaults standardUserDefaults] setObject:inSecret forKey:kStoredAuthTokenSecretKeyName];
-	}
-}
-
-- (void)flickrAPIRequest:(OFFlickrAPIRequest *)inRequest didObtainOAuthRequestToken:(NSString *)inRequestToken secret:(NSString *)inSecret; {
-    flickrContext.OAuthToken = inRequestToken;
-    flickrContext.OAuthTokenSecret = inSecret;
-    
-}
-
-
-- (void)flickrAPIRequest:(OFFlickrAPIRequest *)inRequest didFailWithError:(NSError *)inError{
-    NSLog(@"Fail request %@, error: %@", inRequest, inError);
-	[[NSNotificationCenter defaultCenter] postNotificationName:FlickrSharingFailureNotification object:self];
-}
-*/
 
 /*
  For Checking Twitter old Detail is available in parse or not
@@ -526,12 +459,8 @@ if it exist then we call Merging Process
     
     
     if (![[NSFileManager defaultManager] fileExistsAtPath:OldUIDPath isDirectory:NULL]) {
-        //NSError *error;
-		//[[NSFileManager defaultManager] createDirectoryAtPath:usernamePath withIntermediateDirectories:YES attributes:nil error:&error];
+        NSLog(@"");
 	}else{
-        
-        // Crate New folder
-        //[[NSFileManager defaultManager] createDirectoryAtPath:NewUIDPath withIntermediateDirectories:YES attributes:nil error:&error];
         
         NSString *newDirectoryName = NewUIDFolderName;
         NSString *oldPath = OldUIDPath;
@@ -556,43 +485,6 @@ if it exist then we call Merging Process
                                     }
      }];
     
- /*
-    // Transfer Old Flyers to New User from Old User
-
-    // Getting Old Flyers Detail
-    // Assume PFObject *myPost was previously created.
-    PFQuery *query = [PFQuery queryWithClassName:@"Flyer"];
-    [query whereKey:@"user" equalTo:oldUserobj];
-    
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objsAry, NSError *error) {
-        
-        if (!error) {
-            
-            // The find succeeded.
-            for (PFObject *obj in objsAry) {
-                
-                NSLog(@"%@",obj.ACL);
-                obj[@"user"] = NewUID;
-            }
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                
-                //Save All Objects
-                int success = [PFObject saveAll:objsAry];
-                NSLog(@"Status %@", success? @"updated successfully": @"update failed");
-            });
-           
-            
-        } else {
-            
-            // Log details of the failure
-            NSLog(@"Error: %@ %@", error, [error userInfo]);
-        }
-        
-    }]; //Find Objects
-    
-*/
-
 }
 
 

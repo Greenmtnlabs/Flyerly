@@ -43,16 +43,8 @@
     helpButton.showsTouchWhenHighlighted = YES;
     
     UIBarButtonItem *helpBarButton = [[[UIBarButtonItem alloc] initWithCustomView:helpButton] autorelease];
-
-    UIButton *editButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 29)] autorelease];
-    [editButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-    [editButton setBackgroundImage:[UIImage imageNamed:@"pencil_icon"] forState:UIControlStateNormal];
-    [editButton addTarget:self action:@selector(editClick) forControlEvents:UIControlEventTouchUpInside];
-    editButton.showsTouchWhenHighlighted = YES;
-
-    UIBarButtonItem *editBarButton = [[[UIBarButtonItem alloc] initWithCustomView:editButton] autorelease];
     
-    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:helpBarButton,editBarButton,nil ]];
+    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:helpBarButton,nil ]];
 
     UIButton *backButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)] autorelease];
     [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];

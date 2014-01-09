@@ -71,6 +71,6 @@ extern NSString *FacebookDidLoginNotification;
 -(void)FbChangeforNewVersion;
 -(void)TwitterChangeforNewVersion:(NSString *)olduser;
 -(void)MergeAccount:(PFObject *)oldUserobj;
-- (void)setAndStoreFlickrAuthToken:(NSString *)inAuthToken secret:(NSString *)inSecret;
+
 @end
 
