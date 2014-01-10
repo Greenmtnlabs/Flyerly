@@ -29,7 +29,6 @@
 }
 
 -(void)gotoFilterImage;
--(void)backtoMainView;
 -(void)goback;
 @end
 

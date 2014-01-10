@@ -658,15 +658,15 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
         [accountStore requestAccessToAccountsWithType:FBaccountType options:options completion:^(BOOL granted, NSError *error) {
             
             // if User Login in device
-            if (granted) {
+            if ( granted ) {
                 
                 // Populate array with all available Twitter accounts
                 NSArray *arrayOfAccounts = [accountStore accountsWithAccountType:FBaccountType];
-               // ACAccount *account = [arrayOfAccounts lastObject];
                 
                 // Sanity check
                 if ([arrayOfAccounts count] > 0) {
                     
+                    // Calling The Facebook Like Button
                     self.facebookLikeView.delegate = self;
                     self.facebookLikeView.href = [NSURL URLWithString:@"http://www.facebook.com/flyerlyapp"];
                     self.facebookLikeView.layout = @"button_count";
@@ -676,6 +676,7 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
                  }
                 
             } else {
+                
                 //Fail gracefully...
                 NSLog(@"error getting permission %@",error);
                 [self showAlert:@"There is no Facebook account configured. You can add or create a Facebook account in Settings" message:@""];
@@ -695,7 +696,9 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
 }
 
 
-
+/*
+ * Getting
+ */
 - (void)setFacebookLikeStatus{
 
     if([AddFriendsController connected]){
@@ -717,7 +720,7 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
         [accountStore requestAccessToAccountsWithType:FBaccountType options:options completion:^(BOOL granted, NSError *error) {
             
             // if User Login in device
-            if (granted) {
+            if ( granted ) {
                 
                 // Populate array with all available Twitter accounts
                 NSArray *arrayOfAccounts = [accountStore accountsWithAccountType:FBaccountType];

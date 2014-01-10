@@ -62,12 +62,14 @@ static ShareProgressView *clipBdPogressView;
 }
 
 -(void) callMenu {
-    LauchViewController   *launchController = [[LauchViewController alloc] autorelease];
+
+    
     if (IS_IPHONE_5) {
-        [launchController initWithNibName:@"LauchViewControllerIPhone5" bundle:nil];
+        launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewControllerIPhone5" bundle:nil];
     }else{
-        [launchController initWithNibName:@"LauchViewController" bundle:nil];
+        launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
     }
+    
     [self.navigationController pushViewController:launchController animated:NO];
 }
 
@@ -132,9 +134,6 @@ static ShareProgressView *clipBdPogressView;
            emailPogressView = nil;
     }
     [self closeSharingProgressSuccess:nil];
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closeSharingProgressSuccess:) name:CloseShareProgressNotification object:nil];
- //   [self setDefaultProgressViewHeight];
-  //  [progressView setHidden:YES];
 
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationDuration:0.2f];

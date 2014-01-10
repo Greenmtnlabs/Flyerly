@@ -84,6 +84,7 @@
 
 -(void)goback{
     globle.NBUimage = nil;
+      [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"Camerabottom"] forBarMetrics:UIBarMetricsDefault];
     [self.navigationController popViewControllerAnimated:YES];
     
 }
@@ -99,13 +100,6 @@
 }
 
 
--(void)backtoMainView{
-    NSInteger noOfViewControllers = [self.navigationController.viewControllers count];
-    [self.navigationController
-     popToViewController:[self.navigationController.viewControllers
-                          objectAtIndex:(noOfViewControllers-3)] animated:YES];
-    
-}
 
 
 
