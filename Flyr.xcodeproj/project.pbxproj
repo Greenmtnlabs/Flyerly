@@ -712,7 +712,6 @@
 		2044FF96185088ED00A26B42 /* MainSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2044FF94185088ED00A26B42 /* MainSettingCell.m */; };
 		2044FF97185088ED00A26B42 /* MainSettingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2044FF95185088ED00A26B42 /* MainSettingCell.xib */; };
 		20619831187EA22700360DBF /* UINavigationItem+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 20619830187EA22700360DBF /* UINavigationItem+Additions.m */; };
-		20619832187EDBED00360DBF /* Flyr-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D1107310486CEB800E47090 /* Flyr-Info.plist */; };
 		2061ED8A17FF210300E9BECA /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2061ED8917FF210300E9BECA /* icon@2x.png */; };
 		2064B1FD18804B3C00DE7147 /* greenButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 2064B1FB18804B3B00DE7147 /* greenButton.png */; };
 		2064B1FE18804B3C00DE7147 /* greenButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2064B1FC18804B3B00DE7147 /* greenButton@2x.png */; };
@@ -4488,7 +4487,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				20619832187EDBED00360DBF /* Flyr-Info.plist in Resources */,
 				0DF3A367108DF47400D6C887 /* logo.png in Resources */,
 				0DF3A369108DF47400D6C887 /* signin.png in Resources */,
 				0DF3A36A108DF47400D6C887 /* twitBack.png in Resources */,
@@ -5834,7 +5832,7 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jennifer Junger (ZLDN4YF5WY)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5894,7 +5892,6 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = Flyr;
 				PROVISIONING_PROFILE = "0A86B5B8-398E-4FCE-8EF2-7C3F449D9C9B";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0A86B5B8-398E-4FCE-8EF2-7C3F449D9C9B";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
@@ -5907,7 +5904,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jennifer Junger (ZLDN4YF5WY)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5928,7 +5925,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = Flyr;
-				PROVISIONING_PROFILE = "D03928B6-CFBB-4746-910F-6E0003F6827C";
+				PROVISIONING_PROFILE = "A30E790C-FA83-4256-A6F2-F6C2C70C8D96";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "A30E790C-FA83-4256-A6F2-F6C2C70C8D96";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
@@ -5952,8 +5949,8 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				PREBINDING = NO;
-				PROVISIONING_PROFILE = "E324DAD4-EB7A-4671-8749-7EF690F24FD5";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E324DAD4-EB7A-4671-8749-7EF690F24FD5";
+				PROVISIONING_PROFILE = "0A86B5B8-398E-4FCE-8EF2-7C3F449D9C9B";
+				"PROVISIONING_PROFILE[sdk=iphoneos7.0]" = "0A86B5B8-398E-4FCE-8EF2-7C3F449D9C9B";
 				SDKROOT = iphoneos7.0;
 			};
 			name = Debug;
