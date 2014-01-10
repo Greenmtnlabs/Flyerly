@@ -492,6 +492,7 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
     ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
     
     [accountStore requestAccessToAccountsWithType:accountType withCompletionHandler:^(BOOL granted, NSError *error) {
+        
         if(granted) {
             // Get the list of Twitter accounts.
           NSArray   *arrayOfAccounts = [accountStore accountsWithAccountType:accountType];

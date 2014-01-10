@@ -67,6 +67,8 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
     
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
+    
     // Set template image
 	if (globle.NBUimage != nil) {
         imgView.image = globle.NBUimage;
@@ -546,7 +548,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     globle = [Singleton RetrieveSingleton];
     [self.view setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
     navBar.alpha =ALPHA1;
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
+
 
 	aHUD = [[HudView alloc]init];
     photoTouchFlag=NO;

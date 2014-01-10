@@ -27,7 +27,9 @@
     PresetFilterViewController *nbuFilter;
 
 }
--(void)backtoMainView;
+
 -(void)gotoFilterImage;
+-(void)backtoMainView;
+-(void)goback;
 @end
 

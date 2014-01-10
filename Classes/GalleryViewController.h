@@ -37,5 +37,6 @@
 }
 
 -(void)CallNBUcropImage;
+-(void)goback;
 @end
 

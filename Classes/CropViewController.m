@@ -26,37 +26,31 @@
 {
     [super awakeFromNib];
      globle = [Singleton RetrieveSingleton];
-    
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
     
     //Done Button
-    UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 32)];
-    [doneButton addTarget:self action:@selector(backtoMainView) forControlEvents:UIControlEventTouchUpInside];
-    [doneButton setTitle:@"Done" forState:UIControlStateNormal];
-    [doneButton setBackgroundImage:[UIImage imageNamed:@"crop_button"] forState:UIControlStateNormal];
+    UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+    [doneButton addTarget:self action:@selector(apply:) forControlEvents:UIControlEventTouchUpInside];
+    [doneButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
     UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
     
-    //Crop Button
-    UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 32)];
-    [menuButton addTarget:self action:@selector(apply:) forControlEvents:UIControlEventTouchUpInside];
-    [menuButton setTitle:@"Crop" forState:UIControlStateNormal];
-    [menuButton setBackgroundImage:[UIImage imageNamed:@"crop_button"] forState:UIControlStateNormal];
-    UIBarButtonItem *cropBarButton = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
-    
-    //Reset Button
-    UIButton *resetButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 32)];
-    [resetButton addTarget:self action:@selector(reset:) forControlEvents:UIControlEventTouchUpInside];
-    [resetButton setTitle:@"Reset" forState:UIControlStateNormal];
-    [resetButton setBackgroundImage:[UIImage imageNamed:@"crop_button"] forState:UIControlStateNormal];
-    UIBarButtonItem *resetBarButton = [[UIBarButtonItem alloc] initWithCustomView:resetButton];
-
     //Next Button
-    UIButton *nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 32)];
+    UIButton *nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [nextButton addTarget:self action:@selector(gotoFilterImage) forControlEvents:UIControlEventTouchUpInside];
-    [nextButton setTitle:@"Next" forState:UIControlStateNormal];
-    [nextButton setBackgroundImage:[UIImage imageNamed:@"crop_button"] forState:UIControlStateNormal];
+    [nextButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
     UIBarButtonItem *nextBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
     
-    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:nextBarButton,doneBarButton,cropBarButton,resetBarButton,nil]];
+    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:nextBarButton,doneBarButton,nil]];
+    
+    
+    //BackButton
+    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+    backButton.titleLabel.font = [UIFont systemFontOfSize:14.0];
+    [backButton addTarget:self action:@selector(goback) forControlEvents:UIControlEventTouchUpInside];
+    [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
+    backButton.showsTouchWhenHighlighted = YES;
+    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    [self.navigationItem setLeftBarButtonItem:leftBarButton];
     
     // Configure the controller
    // self.cropGuideSize = CGSizeMake(247.0, 227.0); // Matches our cropGuideView's image
@@ -86,12 +80,10 @@
     cropView.allowAspectFit = YES; // The image can be downsized until it fits inside the cropGuideView
 }
 
--(void)backtoMainView{
-    NSInteger noOfViewControllers = [self.navigationController.viewControllers count];
-    [self.navigationController
-     popToViewController:[self.navigationController.viewControllers
-                          objectAtIndex:(noOfViewControllers-3)] animated:YES];
-
+-(void)goback{
+    globle.NBUimage = nil;
+    [self.navigationController popViewControllerAnimated:YES];
+    
 }
 
 
@@ -104,11 +96,12 @@
 }
 
 
-- (void)reset:(id)sender
-{
-    [self objectUpdated:nil];
-    globle.NBUimage = self.image;
+-(void)backtoMainView{
+    NSInteger noOfViewControllers = [self.navigationController.viewControllers count];
+    [self.navigationController
+     popToViewController:[self.navigationController.viewControllers
+                          objectAtIndex:(noOfViewControllers-3)] animated:YES];
+    
 }
-
 @end
 

@@ -125,10 +125,10 @@
         <image name="camera_bottombg.png" width="320" height="146"/>
         <image name="camera_button.png" width="80" height="80"/>
         <image name="camera_cancel.png" width="65" height="30"/>
-        <image name="camera_change.png" width="48" height="26"/>
-        <image name="camera_grid.png" width="26" height="27"/>
+        <image name="camera_change.png" width="45" height="23"/>
+        <image name="camera_grid.png" width="23" height="23"/>
         <image name="camera_lastpic.png" width="54" height="54"/>
         <image name="flash_icon_auto.png" width="35" height="50"/>
-        <image name="new_grid_line.png" width="305" height="303"/>
+        <image name="new_grid_line.png" width="320" height="422"/>
     </resources>
 </document>

@@ -43,8 +43,24 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-  
      globle = [Singleton RetrieveSingleton];
+    
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
+
+    
+    //BackButton
+    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+    backButton.titleLabel.font = [UIFont systemFontOfSize:14.0];
+    [backButton addTarget:self action:@selector(goback) forControlEvents:UIControlEventTouchUpInside];
+    [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
+    backButton.showsTouchWhenHighlighted = YES;
+    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    [self.navigationItem setLeftBarButtonItem:leftBarButton];
+    
+    UIButton *rigButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:rigButton];
+    [self.navigationItem setRightBarButtonItem:rightBarButton];
+    
     [[NBUAssetsLibrary sharedLibrary] allImageAssetsWithResultBlock:^(NSArray * assets,
                                                                       NSError * error)
     {
@@ -54,6 +70,12 @@
             [self setShowThumbnailsView:YES];
         }
     }];
+}
+
+#pragma mark  View Appear Methods
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:YES];
+
 }
 
 - (void)imageForObject:(id)object size:(NBUImageSize)size
@@ -87,6 +109,7 @@
 
 //Crop Image
 -(void)CallNBUcropImage{
+     self.navigationController.navigationBar.hidden  = NO;
     nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController" bundle:nil];
     [nbuCrop awakeFromNib];
     [self.navigationController pushViewController:nbuCrop animated:YES];
@@ -122,6 +145,13 @@
    // [self.navigationController popViewControllerAnimated:NO];
   
  }
+
+
+-(void)goback{
+    globle.NBUimage = nil;
+    [self.navigationController popViewControllerAnimated:YES];
+
+}
 
 @end
 

@@ -25,11 +25,15 @@
 #import "NBUKitPrivate.h"
 #import "CropViewController.h"
 #import "Singleton.h"
+#import "GalleryViewController.h"
 
+
+@class GalleryViewController;
 @interface CameraViewController : NBUCameraViewController{
 
    Singleton *globle;
-     CropViewController *nbuCrop;
+    CropViewController *nbuCrop;
+    GalleryViewController *nbugallery;
 }
 
 // Outlets
@@ -42,6 +46,7 @@
 - (IBAction)customToggleFlash:(id)sender;
 - (IBAction)setCameraline:(id)sender;
 - (IBAction)CameraCancel:(id)sender;
+- (IBAction)MovetoGallery:(id)sender;
 
 @end
 

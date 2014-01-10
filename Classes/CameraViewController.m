@@ -30,15 +30,28 @@
     [super viewDidLoad];
     
     globle = [Singleton RetrieveSingleton];
+    
     // Configure the slide view
     _slideView.targetObjectViewSize = CGSizeMake(46.0, 46.0);
     _slideView.margin = CGSizeMake(2.0, 2.0);
     
     // Configure the camera view
     //self.cameraView.shouldAutoRotateView = YES;
-    //self.cameraView.savePicturesToLibrary = YES;
+    self.cameraView.savePicturesToLibrary = YES;
   
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"Camerabottom"] forBarMetrics:UIBarMetricsDefault];
     
+    //BackButton
+    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 30)];
+    backButton.titleLabel.font = [UIFont systemFontOfSize:14.0];
+    [backButton addTarget:self action:@selector(CameraCancel:) forControlEvents:UIControlEventTouchUpInside];
+    [backButton setBackgroundImage:[UIImage imageNamed:@"cancelcamera"] forState:UIControlStateNormal];
+    backButton.showsTouchWhenHighlighted = YES;
+    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    [self.navigationItem setLeftBarButtonItem:leftBarButton];
+    
+    
+
     
     self.cameraView.targetResolution = CGSizeMake(640.0, 640.0); // The minimum resolution we want
     self.cameraView.keepFrontCameraPicturesMirrored = YES;
@@ -105,7 +118,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.navigationController.navigationBarHidden = YES;
     
     // Enable shootButton
     _shootButton.userInteractionEnabled = YES;
@@ -152,6 +164,11 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (IBAction)MovetoGallery:(id)sender{
+    globle.NBUimage = nil;
+    nbugallery = [[GalleryViewController alloc]initWithNibName:@"GalleryViewController" bundle:nil];
+    [self.navigationController pushViewController:nbugallery animated:YES];
+}
 
 @end
 
