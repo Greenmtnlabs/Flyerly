@@ -38,7 +38,7 @@
                     <rect key="frame" x="190" y="93" width="58" height="26"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="12"/>
-                    <state key="normal" title="Cancel" backgroundImage="crop_button.png">
+                    <state key="normal" title="Cancel" backgroundImage="greenButton.png">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -50,7 +50,7 @@
                     <rect key="frame" x="255" y="93" width="58" height="26"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="12"/>
-                    <state key="normal" title="Post" backgroundImage="crop_button.png">
+                    <state key="normal" title="Post" backgroundImage="greenButton.png">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -70,7 +70,7 @@
     </objects>
     <resources>
         <image name="Zregister_flyer.png" width="42" height="56"/>
-        <image name="crop_button.png" width="50" height="32"/>
+        <image name="greenButton.png" width="63" height="28"/>
         <image name="register-bg-iPhone5.png" width="640" height="1096"/>
     </resources>
 </document>

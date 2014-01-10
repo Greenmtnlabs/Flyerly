@@ -31,6 +31,6 @@
 
 // Actions
 - (IBAction)changeImage:(id)sender;
-
+-(void)goback;
 @end
 

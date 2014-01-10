@@ -495,8 +495,8 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
         
         if(granted) {
             // Get the list of Twitter accounts.
-          NSArray   *arrayOfAccounts = [accountStore accountsWithAccountType:accountType];
-            
+          NSArray  *arrayOfAccounts = [accountStore accountsWithAccountType:accountType];
+            twtAcconts = [[NSArray alloc] initWithArray:arrayOfAccounts];
             // If there are more than 1 account, ask user which they want to use.
             if ( [arrayOfAccounts count] > 1 ) {
                 // Show list of acccounts from which to select
@@ -538,7 +538,7 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
             
             // Get the list of Twitter accounts.
            NSArray *arrayOfAccounts = [accountStore accountsWithAccountType:accountType];
-            
+            twtAcconts = [[NSArray alloc] initWithArray:arrayOfAccounts];
             // If there are more than 1 account, ask user which they want to use.
             if ( [arrayOfAccounts count] > 1 ) {
                 // Show list of acccounts from which to select
@@ -576,16 +576,15 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     
     //if not cancel button presses
-    /*
-    if(buttonIndex != arrayOfAccounts.count) {
+ 
+    if(buttonIndex != twtAcconts.count) {
         
         //save to NSUserDefault
-        ACAccount *account = arrayOfAccounts[buttonIndex];
+        ACAccount *account = twtAcconts[buttonIndex];
         
         //Convert twitter username to email
         [self makeTwitterPost:account follow:actionSheet.tag];
     }
-    */
     [actionSheet release];
     [self hideLoadingIndicator];
 }

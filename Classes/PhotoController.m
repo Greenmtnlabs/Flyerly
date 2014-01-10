@@ -618,12 +618,12 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 	// Create Main Image View
     if(IS_IPHONE_5){
         templateBckgrnd = [[UIImageView alloc]initWithFrame:CGRectMake(0, 413, 320, 135)];
-        cameraRollButton = [[UIButton alloc] initWithFrame:CGRectMake(160, 365, 135, 40)];
         moreLayersButton = [[UIButton alloc] initWithFrame:CGRectMake(82, 445, 156, 43)];
         moreLayersLabel = [[UILabel alloc] initWithFrame:CGRectMake(125, 445, 156, 43)];
-        takePhotoButton = [[UIButton alloc] initWithFrame:CGRectMake(25, 365, 135, 40)];
-        takePhotoLabel = [[UILabel alloc] initWithFrame:CGRectMake(80, 370, 80, 30)];
-        cameraRollLabel = [[UILabel alloc] initWithFrame:CGRectMake(220, 370, 80, 30)];
+        takePhotoButton = [[UIButton alloc] initWithFrame:CGRectMake(25, 373, 135, 40)];
+        takePhotoLabel = [[UILabel alloc] initWithFrame:CGRectMake(80, 378, 80, 30)];
+        cameraRollButton = [[UIButton alloc] initWithFrame:CGRectMake(160, 373, 135, 40)];
+        cameraRollLabel = [[UILabel alloc] initWithFrame:CGRectMake(220, 378, 80, 30)];
         templateScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(-320, 413,320,130)];
         addMoreLayerOrSaveFlyerLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 405, 310, 63)];
         takeOrAddPhotoLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 405, 310, 43)];

@@ -146,6 +146,7 @@
 
 //Crop Image
 -(void)CallNBUcropImage{
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
     nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController" bundle:nil];
     [nbuCrop awakeFromNib];
     [self.navigationController pushViewController:nbuCrop animated:YES];
@@ -166,6 +167,7 @@
 
 - (IBAction)MovetoGallery:(id)sender{
     globle.NBUimage = nil;
+    globle.gallerComesFromCamera = @"yes";
     nbugallery = [[GalleryViewController alloc]initWithNibName:@"GalleryViewController" bundle:nil];
     [self.navigationController pushViewController:nbugallery animated:YES];
 }

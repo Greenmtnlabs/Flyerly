@@ -55,6 +55,7 @@
     UIView *opaqueView;
     IBOutlet UIWebView *webview;
     IBOutlet UIButton *crossButton;
+    NSArray *twtAcconts;
     
 
 }

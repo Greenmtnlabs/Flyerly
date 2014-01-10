@@ -212,7 +212,9 @@ sd:;
 	[self.tView setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
 	tView.dataSource = self;
 	tView.delegate = self;
-	//tView.alpha  = .6f;
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
+        self.tView.contentInset = UIEdgeInsetsMake(-30, 0, 0, 0);
+    }
 	
     [self.view addSubview:tView];
 	self.tView.rowHeight =102;

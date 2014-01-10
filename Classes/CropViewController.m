@@ -30,8 +30,10 @@
     
     //Done Button
     UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+    
     [doneButton addTarget:self action:@selector(apply:) forControlEvents:UIControlEventTouchUpInside];
-    [doneButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
+    
+    [doneButton setBackgroundImage:[UIImage imageNamed:@"crop_button"] forState:UIControlStateNormal];
     UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
     
     //Next Button
@@ -88,6 +90,7 @@
 
 
 
+
 -(void)gotoFilterImage{
     nbuFilter = [[PresetFilterViewController alloc]initWithNibName:@"PresetFilterViewController" bundle:nil];
     [nbuFilter awakeFromNib];
@@ -103,5 +106,8 @@
                           objectAtIndex:(noOfViewControllers-3)] animated:YES];
     
 }
+
+
+
 @end
 

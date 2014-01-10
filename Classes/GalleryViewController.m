@@ -46,8 +46,6 @@
      globle = [Singleton RetrieveSingleton];
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
-
-    
     //BackButton
     UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     backButton.titleLabel.font = [UIFont systemFontOfSize:14.0];

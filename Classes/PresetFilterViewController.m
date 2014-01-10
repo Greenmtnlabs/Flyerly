@@ -32,28 +32,30 @@
      globle = [Singleton RetrieveSingleton];
     
     //Apply Button
-    UIButton *applyButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 32)];
+    UIButton *applyButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [applyButton addTarget:self action:@selector(apply:) forControlEvents:UIControlEventTouchUpInside];
-    [applyButton setTitle:@"Apply" forState:UIControlStateNormal];
-    [applyButton setBackgroundImage:[UIImage imageNamed:@"crop_button"] forState:UIControlStateNormal];
+    [applyButton setBackgroundImage:[UIImage imageNamed:@"apply_button"] forState:UIControlStateNormal];
     UIBarButtonItem *applyBarButton = [[UIBarButtonItem alloc] initWithCustomView:applyButton];
     
-    
     //Done Button
-    UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 32)];
+    UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [doneButton addTarget:self action:@selector(backtoMainView) forControlEvents:UIControlEventTouchUpInside];
-    [doneButton setTitle:@"Done" forState:UIControlStateNormal];
-    [doneButton setBackgroundImage:[UIImage imageNamed:@"crop_button"] forState:UIControlStateNormal];
+    [doneButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
     UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
     
-    //Reset Button
-    UIButton *resetButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 32)];
-    [resetButton addTarget:self action:@selector(reset:) forControlEvents:UIControlEventTouchUpInside];
-    [resetButton setTitle:@"Reset" forState:UIControlStateNormal];
-    [resetButton setBackgroundImage:[UIImage imageNamed:@"crop_button"] forState:UIControlStateNormal];
-    UIBarButtonItem *resetBarButton = [[UIBarButtonItem alloc] initWithCustomView:resetButton];
+    
+    //BackButton
+    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+    backButton.titleLabel.font = [UIFont systemFontOfSize:14.0];
+    [backButton addTarget:self action:@selector(goback) forControlEvents:UIControlEventTouchUpInside];
+    [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
+    backButton.showsTouchWhenHighlighted = YES;
+    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    [self.navigationItem setLeftBarButtonItem:leftBarButton];
 
-    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:doneBarButton,applyBarButton,resetBarButton,nil]];
+    
+
+    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:doneBarButton,applyBarButton,nil]];
     
     // Configure and set all available filters
     _providerFilters = [NBUFilterProvider availableFilters];
@@ -162,10 +164,23 @@
 -(void)backtoMainView{
     
     NSInteger noOfViewControllers = [self.navigationController.viewControllers count];
-    [self.navigationController
-     popToViewController:[self.navigationController.viewControllers
-                          objectAtIndex:(noOfViewControllers-4)] animated:YES];
+    if (globle.gallerComesFromCamera == nil) {
+        
+        [self.navigationController
+         popToViewController:[self.navigationController.viewControllers
+                              objectAtIndex:(noOfViewControllers-4)] animated:YES];
+    }else{
+        
+        globle.gallerComesFromCamera = nil;
+        [self.navigationController
+         popToViewController:[self.navigationController.viewControllers
+                              objectAtIndex:(noOfViewControllers-5)] animated:YES];
+    }
     
+}
+
+-(void)goback{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

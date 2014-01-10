@@ -20,9 +20,11 @@
 @property (nonatomic, strong) NSString *sharelink;
 @property (nonatomic, strong) NSString *FlyerName;
 @property (nonatomic, strong) NSString *iosVersion;
+
 @property (nonatomic, strong) NSString *CheckHelpOpen;
 @property (nonatomic, strong) NSString *appOpenFirstTime;
 @property (nonatomic, strong) UIImage *NBUimage;
+@property (nonatomic, strong) NSString *gallerComesFromCamera;
 +(Singleton *)RetrieveSingleton;
 -(UIColor*)colorWithHexString:(NSString*)hex;
 
