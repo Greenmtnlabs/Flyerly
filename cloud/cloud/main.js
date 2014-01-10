@@ -5,23 +5,52 @@ Parse.Cloud.define("mergeUser", function(request, response) {
 
   Parse.Cloud.useMasterKey();
 
-  var query = new Parse.Query("Flyer");
+  var oUser = new Parse.User();
+  var status = -1;
 
-  query.equalTo("user", request.params.oldUser);
+  // Set your id to desired user object id
+  oUser.id = request.params.oldUser;
 
-  query.find({
+  var flyers = new Parse.Query("Flyer");
+
+  flyers.equalTo("user", oUser);
+
+  flyers.find({
     success: function(results) {
-      
-      //response.success(request.params.oldUser);
-      var status = "Found " + results.length + " flyers for userId " + request.params.oldUser;
-      response.success(status);
+  
+      status = "Found " + results.length + " flyers for userId " + request.params.oldUser;
 
     },
 
     error: function() {
-      // response.error("No flyers exist for user.");
-      status = "No flyers exist for userId " + request.params.oldUser; 
+   
+      status = "Error in query finding flyers for user " + request.params.oldUser; 
+      response.error(status);
+    }
+  }).then(;
+
+  var inapps = new Parse.Query("InApp");
+
+  inapps.equalTo("user", oUser);
+
+  inapps.find({
+    success: function(results) {
+      
+      if (status != -1) {
+         status = status + ' AND ';
+      }
+ 
+      status = status + "Found " + results.length + " in apps for userId " + request.params.oldUser;
+      
+    },
+
+    error: function() {
+      
+      status = "Error in query finding in apps for user " + request.params.oldUser; 
       response.error(status);
     }
   });
+
+  response.success(status);
+
 });
