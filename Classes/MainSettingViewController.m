@@ -45,20 +45,29 @@
     [helpButton setBackgroundImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
     [helpButton addTarget:self action:@selector(gohelp) forControlEvents:UIControlEventTouchUpInside];
     helpButton.showsTouchWhenHighlighted = YES;
-    
     UIBarButtonItem *helpBarButton = [[[UIBarButtonItem alloc] initWithCustomView:helpButton] autorelease];
     
-    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:helpBarButton,nil ]];
-
+   
     UIButton *backButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)] autorelease];
     [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
     [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
     backButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *backBarButton = [[[UIBarButtonItem alloc] initWithCustomView:backButton] autorelease];
-
-
-    [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:backBarButton,nil ]];
+    
+    [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:backBarButton,helpBarButton,nil ]];
+    
+    
+    UIButton *createButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)] autorelease];
+    [createButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+    [createButton setBackgroundImage:[UIImage imageNamed:@"createButton"] forState:UIControlStateNormal];
+    [createButton addTarget:self action:@selector(CreateNewFlyer) forControlEvents:UIControlEventTouchUpInside];
+    createButton.showsTouchWhenHighlighted = YES;
+    UIBarButtonItem *createBarButton = [[[UIBarButtonItem alloc] initWithCustomView:createButton] autorelease];
+    
+    [self.navigationItem setRightBarButtonItem:createBarButton];
+        
+    
     UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-35, -6, 50, 50)] autorelease];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:TITLE_FONT size:18];
@@ -115,7 +124,13 @@
     }
 
         if (indexPath.row == 1){
-            UISwitch *mSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(223, 4, 0, 0)] ;
+            UISwitch *mSwitch;
+             if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
+                 mSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(263, 4, 0, 0)] ;
+             }else{
+                 mSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(223, 4, 0, 0)] ;
+             }
+            
             [cell.contentView  addSubview:mSwitch];
             [mSwitch addTarget:self action:@selector(changeSwitch:) forControlEvents:UIControlEventValueChanged];
             
@@ -276,19 +291,18 @@
 }
 
 
--(void)editClick{
-    //[Flurry logEvent:@"Create Flyer"];    
-	ptController = [[PhotoController alloc]initWithNibName:@"PhotoController" bundle:nil];
-    ptController.flyerNumber = -1;
-	[self.navigationController pushViewController:ptController animated:YES];
-	[ptController release];
-
-}
 
 -(void)gohelp{
     HelpController *helpController = [[[HelpController alloc]initWithNibName:@"HelpController" bundle:nil] autorelease];
     [self.navigationController pushViewController:helpController animated:NO];
 
+}
+
+
+-(void)CreateNewFlyer{
+	ptController = [[PhotoController alloc]initWithNibName:@"PhotoController" bundle:nil];
+    ptController.flyerNumber = -1;
+	[self.navigationController pushViewController:ptController animated:YES];
 }
 
 

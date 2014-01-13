@@ -596,7 +596,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 											   object:nil];
 	
 	navBar= [[MyNavigationBar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
-	[self.view addSubview:navBar];
+	//[self.view addSubview:navBar];
     
     // Create right bar button
     UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 31, 30)];

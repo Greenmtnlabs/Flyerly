@@ -12,6 +12,7 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import "FacebookLikeView.h"
 #import "Singleton.h"
+#import "Reachability.h"
 
 @class FlyrViewController;
 @class SettingViewController;

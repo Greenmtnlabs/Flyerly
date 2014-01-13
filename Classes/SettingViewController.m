@@ -27,7 +27,7 @@
     label.font = [UIFont fontWithName:TITLE_FONT size:18];
     label.textAlignment = UITextAlignmentCenter;
     label.textColor = [UIColor whiteColor];
-    label.text = @"Sharing Options";
+    label.text = @"SHARE SETTINGS";
     self.navigationItem.titleView = label;
 
     UIButton *helpButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)] autorelease];
@@ -120,18 +120,9 @@
         [facebookButton setSelected:NO];
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"facebookSetting"];
     } else {
-        /*
-        FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-        appDelegate.facebook.sessionDelegate = self;
         
-        if([appDelegate.facebook isSessionValid]) {
-            [facebookButton setSelected:YES];
-            [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"facebookSetting"];
-            
-        } else {
-            [appDelegate.facebook authorize:@[@"read_stream",
-                                             @"publish_stream", @"email"]];
-        }*/
+        [facebookButton setSelected:YES];
+        [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"facebookSetting"];
     }
 }
 

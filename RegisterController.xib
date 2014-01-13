@@ -174,8 +174,8 @@
         </view>
     </objects>
     <resources>
-        <image name="Zsignup_button.png" width="256" height="36"/>
-        <image name="facebook_login.png" width="199" height="35"/>
+        <image name="Zsignup_button.png" width="253" height="35"/>
+        <image name="facebook_login.png" width="199" height="34"/>
         <image name="register-bg-iPhone4.png" width="320" height="480"/>
         <image name="text_box.png" width="253" height="35"/>
         <image name="twitter_login.png" width="199" height="35"/>

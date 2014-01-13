@@ -116,9 +116,7 @@
 @property(nonatomic,strong) IBOutlet UIButton *smsButton;
 @property(nonatomic,strong) IBOutlet UIButton *clipboardButton;
 @property(nonatomic,strong) IBOutlet UILabel *clipboardlabel;
-
 @property (nonatomic, strong) UIDocumentInteractionController *dic;
-
 @property(nonatomic,strong)UIImage *selectedFlyerImage;
 @property(nonatomic,strong)NSString *selectedFlyerTitle;
 @property(nonatomic,strong)NSString *selectedFlyerDescription;

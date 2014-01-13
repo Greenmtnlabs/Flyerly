@@ -40,12 +40,11 @@
 - (void)changeSwitch:(id)sender;
 - (void)signOut;
 -(void)goBack;
--(void)editClick;
 -(IBAction)gohelp;
 -(IBAction)RateApp:(id)sender;
 -(IBAction)gotwitter:(id)sender;
 -(IBAction)goemail:(id)sender;
 
-
+-(void)CreateNewFlyer;
 
 @end

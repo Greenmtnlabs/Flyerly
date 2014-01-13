@@ -336,6 +336,9 @@
 		201686EB186AF56D00A238AE /* share_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 201686E9186AF56D00A238AE /* share_button@2x.png */; };
 		201686EE186AF95A00A238AE /* searchicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 201686EC186AF95A00A238AE /* searchicon.png */; };
 		201686EF186AF95A00A238AE /* searchicon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 201686ED186AF95A00A238AE /* searchicon@2x.png */; };
+		201CB9701883ECAC00C0B5B3 /* Flyr-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D1107310486CEB800E47090 /* Flyr-Info.plist */; };
+		201CB977188428C700C0B5B3 /* createButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 201CB975188428C700C0B5B3 /* createButton.png */; };
+		201CB978188428C700C0B5B3 /* createButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 201CB976188428C700C0B5B3 /* createButton@2x.png */; };
 		202233A317BD2A1F0093DD4E /* back_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 202233A117BD2A1E0093DD4E /* back_button.png */; };
 		202233A417BD2A1F0093DD4E /* back_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 202233A217BD2A1E0093DD4E /* back_button@2x.png */; };
 		2025FAB51860742700CC9188 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2025FAB41860742700CC9188 /* CoreMedia.framework */; };
@@ -1688,6 +1691,8 @@
 		201686E9186AF56D00A238AE /* share_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share_button@2x.png"; sourceTree = "<group>"; };
 		201686EC186AF95A00A238AE /* searchicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = searchicon.png; sourceTree = "<group>"; };
 		201686ED186AF95A00A238AE /* searchicon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "searchicon@2x.png"; sourceTree = "<group>"; };
+		201CB975188428C700C0B5B3 /* createButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = createButton.png; sourceTree = "<group>"; };
+		201CB976188428C700C0B5B3 /* createButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "createButton@2x.png"; sourceTree = "<group>"; };
 		202233A117BD2A1E0093DD4E /* back_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back_button.png; sourceTree = "<group>"; };
 		202233A217BD2A1E0093DD4E /* back_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back_button@2x.png"; sourceTree = "<group>"; };
 		2025FAB018606E4A00CC9188 /* GTMOAuth2ViewTouch.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = GTMOAuth2ViewTouch.xib; path = "Submodules/google-api-objectivec/Source/OAuth2/Touch/GTMOAuth2ViewTouch.xib"; sourceTree = "<group>"; };
@@ -2856,6 +2861,8 @@
 		0DF3A361108DF47400D6C887 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				201CB975188428C700C0B5B3 /* createButton.png */,
+				201CB976188428C700C0B5B3 /* createButton@2x.png */,
 				2064B203188058E300DE7147 /* apply_button.png */,
 				2064B204188058E300DE7147 /* apply_button@2x.png */,
 				2064B1FF1880588D00DE7147 /* close_button.png */,
@@ -4487,6 +4494,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				201CB9701883ECAC00C0B5B3 /* Flyr-Info.plist in Resources */,
 				0DF3A367108DF47400D6C887 /* logo.png in Resources */,
 				0DF3A369108DF47400D6C887 /* signin.png in Resources */,
 				0DF3A36A108DF47400D6C887 /* twitBack.png in Resources */,
@@ -5042,6 +5050,7 @@
 				0FBC37EB174F980500004F21 /* inst_setting@2x.png in Resources */,
 				0FBC37EC174F980500004F21 /* right_arrow.png in Resources */,
 				0FBC37ED174F980500004F21 /* right_arrow@2x.png in Resources */,
+				201CB977188428C700C0B5B3 /* createButton.png in Resources */,
 				0FBC37EE174F980500004F21 /* sms_setting_selected.png in Resources */,
 				0FBC37EF174F980600004F21 /* sms_setting_selected@2x.png in Resources */,
 				0FBC37F0174F980600004F21 /* sms_setting.png in Resources */,
@@ -5541,6 +5550,7 @@
 				202C651C17EA07DC00CB9A75 /* symbol61.png in Resources */,
 				202C651D17EA07DC00CB9A75 /* symbol61@2x.png in Resources */,
 				202C651E17EA07DC00CB9A75 /* symbol62.png in Resources */,
+				201CB978188428C700C0B5B3 /* createButton@2x.png in Resources */,
 				202C651F17EA07DC00CB9A75 /* symbol62@2x.png in Resources */,
 				202C652017EA07DC00CB9A75 /* symbol63.png in Resources */,
 				202C652117EA07DC00CB9A75 /* symbol63@2x.png in Resources */,

@@ -76,7 +76,6 @@ static ShareProgressView *clipBdPogressView;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-   
  
     if([facebookPogressView.statusText.text isEqualToString: @"Sharing Failed!"] || [facebookPogressView.statusText.text isEqualToString:@"Successfully Shared!"]){
         NSDictionary *itemDetails = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%d", facebookPogressView.tag], @"tag", nil];

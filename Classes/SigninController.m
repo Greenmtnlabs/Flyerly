@@ -254,8 +254,8 @@
             }   else{
                 launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil] ;
             }
-            
-            [self performSelectorOnMainThread:@selector(pushViewController:) withObject:launchController waitUntilDone:YES];
+            [self.navigationController pushViewController:launchController animated:YES];
+           // [self performSelectorOnMainThread:@selector(pushViewController:) withObject:launchController waitUntilDone:YES];
 
         }
     }];

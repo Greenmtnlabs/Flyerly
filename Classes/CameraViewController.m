@@ -36,10 +36,8 @@
     _slideView.margin = CGSizeMake(2.0, 2.0);
     
     // Configure the camera view
-    //self.cameraView.shouldAutoRotateView = YES;
+    self.cameraView.shouldAutoRotateView = YES;
     self.cameraView.savePicturesToLibrary = YES;
-  
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"Camerabottom"] forBarMetrics:UIBarMetricsDefault];
     
     //BackButton
     UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 30)];
@@ -118,8 +116,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    // Enable shootButton
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"Camerabottom"] forBarMetrics:UIBarMetricsDefault];    // Enable shootButton
     _shootButton.userInteractionEnabled = YES;
 }
 
