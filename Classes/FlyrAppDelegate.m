@@ -330,7 +330,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
         [window addSubview:[navigationController view]];
         
         AfterUpdateController *afterUpdateView = [[AfterUpdateController alloc]initWithNibName:@"AfterUpdateController" bundle:nil];
-        [navigationController pushViewController:afterUpdateView animated:NO];
+        [navigationController setRootViewController:afterUpdateView];
         
     } else {
         
@@ -348,7 +348,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
         // Is the ser logged in?
         
         if ( [PFUser currentUser] == nil ) {
-            [navigationController   pushViewController:accountController animated:YES];
+            [navigationController setRootViewController:accountController];
         }else{
             [navigationController pushViewController:lauchController animated:YES];
             FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
