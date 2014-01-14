@@ -21,14 +21,17 @@
 #import "NBUCropView.h"
 #import "Singleton.h"
 #import "PresetFilterViewController.h"
-@class PresetFilterViewController;
-@interface CropViewController : NBUEditImageViewController{
-    Singleton *globle;
-    PresetFilterViewController *nbuFilter;
 
+@class PresetFilterViewController;
+
+@interface CropViewController : NBUEditImageViewController{
+    PresetFilterViewController *nbuFilter;
 }
+
+@property (strong, nonatomic) Singleton *globle;
 
 -(void)gotoFilterImage;
 -(void)goback;
+
 @end
 

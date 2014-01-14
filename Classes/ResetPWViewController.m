@@ -70,10 +70,8 @@
             if(dbUsername){
                 [PFUser requestPasswordResetForEmailInBackground:dbUsername block:^(BOOL succeeded, NSError *error){
                     if (error) {
-                        NSString *errorValue = (error.userInfo)[@"error"];
                         [self removeLoadingView];
                          [self showAlert:@"No account exists with username" message:@""];
-                        //[self showAlert:@"Warning!" message:errorValue];
                     } else {
                         
                         [self removeLoadingView];
@@ -92,7 +90,6 @@
     } else {
         [PFUser requestPasswordResetForEmailInBackground:username.text block:^(BOOL succeeded, NSError *error){
             if (error) {
-                 NSString *errorValue = (error.userInfo)[@"error"];
                 [self removeLoadingView];
                 [self showAlert:@"No account exists with email address." message:@""];
             } else {

@@ -171,12 +171,14 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
 	if(alertView == warningAlert && buttonIndex == 0) {
         [self signOut];
-        AccountController *actaController = [AccountController alloc];
-        if(IS_IPHONE_5){
-            [actaController initWithNibName:@"AcountViewControlleriPhone5" bundle:nil];
+        AccountController *actaController = nil;
+        
+        if( IS_IPHONE_5 ) {
+            actaController = [[AccountController alloc] initWithNibName:@"AcountViewControlleriPhone5" bundle:nil];
         }else{
-            [actaController initWithNibName:@"AccountController" bundle:nil];
+            actaController = [[AccountController alloc] initWithNibName:@"AccountController" bundle:nil];
         }
+        
         [self.navigationController pushViewController:actaController animated:YES];
     }
 }

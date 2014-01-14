@@ -15,7 +15,7 @@
 #import "Singleton.h"
 
 @class LauchViewController,InputViewController,Singleton;
-@interface SettingViewController : ParentViewController <OFFlickrAPIRequestDelegate> {
+@interface SettingViewController : ParentViewController <OFFlickrAPIRequestDelegate, MFMailComposeViewControllerDelegate> {
     IBOutlet UIButton *facebookButton;
 	IBOutlet UIButton *twitterButton;
 	IBOutlet UIButton *emailButton;
@@ -31,8 +31,6 @@
     Singleton *globle;
     OFFlickrAPIRequest *flickrRequest;
     LauchViewController *launchController;
-    InputViewController *inputv;
-
 }
 
 @property(nonatomic,strong) IBOutlet UIButton *facebookButton;

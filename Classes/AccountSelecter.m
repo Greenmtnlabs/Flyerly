@@ -111,7 +111,6 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     
     [PFUser requestPasswordResetForEmailInBackground:email.text block:^(BOOL succeeded, NSError *error){
         if (error) {
-            NSString *errorValue = (error.userInfo)[@"error"];
               [self showAlert:@"No account exists with email" message:@""];
         } else {
             [self showAlert:@"Reset password email has been sent." message:@""];

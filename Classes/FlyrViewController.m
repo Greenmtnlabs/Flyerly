@@ -59,13 +59,13 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
 -(void)filesByModDate
 {
     
-    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    PFUser *user = [PFUser currentUser];
 
 	photoArray =[[NSMutableArray alloc]init];
 	photoDetailArray =[[NSMutableArray alloc]init];
 	iconArray = [[NSMutableArray alloc]init];
 	NSString *homeDirectoryPath = NSHomeDirectory();
-	NSString *unexpandedPath = [homeDirectoryPath stringByAppendingString: [NSString stringWithFormat:@"/Documents/%@/Flyr/",appDelegate.loginId]];
+	NSString *unexpandedPath = [homeDirectoryPath stringByAppendingString: [NSString stringWithFormat:@"/Documents/%@/Flyr/",user.username]];
 	NSString *folderPath = [NSString pathWithComponents:@[[NSString stringWithString:[unexpandedPath stringByExpandingTildeInPath]]]];
 	
 	NSArray *files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:folderPath error:nil];
@@ -139,19 +139,6 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
         }
     }
     return YES;
-}
-
-- (void) searchClick{
-    searching = YES;
-	letUserSelectRow = NO;
-	self.tView.scrollEnabled = NO;
-    [searchTextField resignFirstResponder];
-    [self searchTableView];
-        [searchTextField addTarget:self action:@selector(updateLabelUsingContentsOfTextField:) forControlEvents:UIControlEventEditingChanged];
-}
-
-- (void)updateLabelUsingContentsOfTextField:(id)sender {
-    [self searchTableView];
 }
 
 - (void) searchTableView:(NSString *)schTxt {
@@ -378,10 +365,10 @@ sd:;
 
 +(NSString *)getFlyerNumberFromPath:(NSString *)imagePath{
     
-    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    PFUser *user = [PFUser currentUser];
 
 	NSString *homeDirectoryPath = NSHomeDirectory();
-	NSString *flyerPath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/Flyr/",appDelegate.loginId]];
+	NSString *flyerPath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/Flyr/",user.username]];
 	NSString *folderPath = [NSString pathWithComponents:@[[NSString stringWithString:[flyerPath stringByStandardizingPath]]]];
 	
     NSString *onlyImageName = [imagePath stringByReplacingOccurrencesOfString:folderPath withString:@""];
@@ -478,10 +465,10 @@ sd:;
         NSString *flyerFilePath = [imageName stringByReplacingOccurrencesOfString:@".jpg" withString:@".txt"];
         [[NSFileManager defaultManager] removeItemAtPath:flyerFilePath error:nil];
 
-        FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+        PFUser *user = [PFUser currentUser];
 
         // Remove flyer social detail file
-        NSString *socialFlyerFolderPath = [imageName stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@/Flyr/", appDelegate.loginId] withString:[NSString stringWithFormat:@"%@/Flyr/Social/", appDelegate.loginId]];
+        NSString *socialFlyerFolderPath = [imageName stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@/Flyr/", user.username] withString:[NSString stringWithFormat:@"%@/Flyr/Social/", user.username]];
         NSString *socialFilePath = [socialFlyerFolderPath stringByReplacingOccurrencesOfString:@".jpg" withString:@".soc"];
         [[NSFileManager defaultManager] removeItemAtPath:socialFilePath error:nil];
 

@@ -59,10 +59,9 @@
 	BOOL loadingViewFlag;
     BOOL invited;
     NSArray *arrayOfAccounts;
+    ACAccount *account;
     NSString *sName;
     NSString *sMessage;
-    ACAccount *account;
-    
 }
 
 @property(nonatomic,strong) IBOutlet UILabel *contactsLabel;
@@ -82,7 +81,6 @@
 @property(nonatomic,strong) NSMutableArray *contactsArray;
 @property(nonatomic,strong) NSMutableArray *facebookArray;
 @property(nonatomic,strong) NSMutableArray *twitterArray;
-@property(nonatomic,strong)  ACAccount *account;
 
 @property(nonatomic,strong) NSMutableArray *contactBackupArray;
 @property(nonatomic,strong) NSMutableArray *facebookBackupArray;
@@ -92,8 +90,6 @@
 @property(nonatomic,strong) NSMutableArray *Twitterinvited;
 @property(nonatomic,strong) NSMutableArray *iPhoneinvited;
 
-- (IBAction)selectAllCheckBoxes:(UIButton *)sender;
-- (IBAction)unSelectAllCheckBoxes:(UIButton *)sender;
 - (IBAction)loadLocalContacts:(UIButton *)sender;
 - (IBAction)loadFacebookContacts:(UIButton *)sender;
 - (IBAction)loadTwitterContacts:(UIButton *)sender;

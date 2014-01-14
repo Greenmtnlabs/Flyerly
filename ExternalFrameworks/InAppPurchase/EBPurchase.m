@@ -302,13 +302,4 @@ SKPayment *paymentRequest;
         [delegate failedRestore:self error:error.code message:error.localizedDescription];
 }
 
-
-#pragma mark - Internal Methods & Events
-
-- (void)dealloc
-{
-    //[validProduct release];
-    //[super dealloc];
-}
-
 @end

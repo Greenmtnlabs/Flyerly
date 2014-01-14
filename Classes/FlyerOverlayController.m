@@ -67,15 +67,15 @@
  */
 +(void)openFlyerInEditableMode:(int)flyerNumber parentViewController:(UIViewController *)parentViewController{
     
-    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    PFUser *user = [PFUser currentUser];
 
     /****** LOAD FLYER INFORMATION FILE *******/
-	NSString *flyerFolderPath = [NSHomeDirectory() stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/Flyr",appDelegate.loginId]];
+	NSString *flyerFolderPath = [NSHomeDirectory() stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/Flyr",user.username]];
 	NSString *flyerFilePath = [flyerFolderPath stringByAppendingString:[NSString stringWithFormat:@"/IMG_%d.pieces", flyerNumber]];
     NSDictionary *dict = [[NSDictionary alloc] initWithContentsOfFile:flyerFilePath];
     
     /****** LOAD TEMPLATE *******/
-	NSString *templateFolderPath = [NSHomeDirectory() stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/Flyr/Template/%d",appDelegate.loginId, flyerNumber]];
+	NSString *templateFolderPath = [NSHomeDirectory() stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/Flyr/Template/%d", user.username, flyerNumber]];
     NSData *imageData = [[NSData alloc ]initWithContentsOfMappedFile:[NSString stringWithFormat:@"%@/template.jpg",templateFolderPath]];
     UIImage *flyerImage = [UIImage imageWithData:imageData];
     
@@ -239,10 +239,10 @@
 -(IBAction)onEdit{
 
 
-    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    PFUser *user = [PFUser currentUser];
 
     /****** LOAD FLYER INFORMATION FILE *******/
-	NSString *flyerFolderPath = [NSHomeDirectory() stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/Flyr",appDelegate.loginId]];
+	NSString *flyerFolderPath = [NSHomeDirectory() stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/Flyr",user.username]];
 	NSString *flyerFilePath = [flyerFolderPath stringByAppendingString:[NSString stringWithFormat:@"/IMG_%d.pieces", flyerNumber]];
     NSDictionary *dict = [[NSDictionary alloc] initWithContentsOfFile:flyerFilePath];
     

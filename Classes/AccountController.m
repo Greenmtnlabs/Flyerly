@@ -44,11 +44,11 @@
 
 -(IBAction)onRegister{
     globle.twitterUser = nil;
-    RegisterController *registerController = [RegisterController alloc];
+    RegisterController *registerController = nil;
     if(IS_IPHONE_5){
-       [registerController initWithNibName:@"RegisterViewController_iPhone5" bundle:nil];
+       registerController = [[RegisterController alloc] initWithNibName:@"RegisterViewController_iPhone5" bundle:nil];
     }else{
-        [registerController initWithNibName:@"RegisterController" bundle:nil];
+       registerController = [[RegisterController alloc] initWithNibName:@"RegisterController" bundle:nil];
 
     }
 
@@ -56,14 +56,15 @@
 }
 
 -(IBAction)onSignIn{
-    SigninController *signinController = [SigninController alloc];
+    SigninController *signinController = nil;
     
     if(IS_IPHONE_5){
-        [signinController initWithNibName:@"SignInViewControllerIPhone5" bundle:nil];
+        signinController = [[SigninController alloc] initWithNibName:@"SignInViewControllerIPhone5" bundle:nil];
 
     }else{
-        [signinController initWithNibName:@"SigninController" bundle:nil];
+        signinController = [[SigninController alloc] initWithNibName:@"SigninController" bundle:nil];
     }
+    
     [self.navigationController pushViewController:signinController animated:YES];
 }
 
