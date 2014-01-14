@@ -742,7 +742,6 @@
 		2087B6C717C7B07D007A6A90 /* register-bg-iPhone4.png in Resources */ = {isa = PBXBuildFile; fileRef = 2087B6C417C7B07D007A6A90 /* register-bg-iPhone4.png */; };
 		2087B6C817C7B07D007A6A90 /* register-bg-iPhone4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2087B6C517C7B07D007A6A90 /* register-bg-iPhone4@2x.png */; };
 		2087B6C917C7B07D007A6A90 /* register-bg-iPhone5.png in Resources */ = {isa = PBXBuildFile; fileRef = 2087B6C617C7B07D007A6A90 /* register-bg-iPhone5.png */; };
-		208C6846186D9C49004A74F2 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 208C6845186D9C49004A74F2 /* Parse.framework */; };
 		208C684F186DAA59004A74F2 /* MySHKConfigurator.m in Sources */ = {isa = PBXBuildFile; fileRef = 208C684E186DAA59004A74F2 /* MySHKConfigurator.m */; };
 		208E35A217C1F5C500CE54BE /* SignInViewControllerIPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 208E35A117C1F5C500CE54BE /* SignInViewControllerIPhone5.xib */; };
 		208E35A417C20CC700CE54BE /* RegisterViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 208E35A317C20CC700CE54BE /* RegisterViewController_iPhone5.xib */; };
@@ -958,6 +957,7 @@
 		30D58D8410FB1BF800E0C7E8 /* Template9.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 30D58CFE10FB1BF800E0C7E8 /* Template9.jpg */; };
 		30D58E3510FB260200E0C7E8 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30D58E3410FB260200E0C7E8 /* MediaPlayer.framework */; };
 		30D8562410CF7FDB0016D5AB /* HudView.m in Sources */ = {isa = PBXBuildFile; fileRef = 30D8562310CF7FDB0016D5AB /* HudView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		498BAB6C1885B21800221DFB /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 498BAB6B1885B21800221DFB /* Parse.framework */; };
 		49997FF717DF786400CF1038 /* ParentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49997FF617DF786400CF1038 /* ParentViewController.m */; };
 		49997FFB17E07FA100CF1038 /* SKProduct+LocalPrice.m in Sources */ = {isa = PBXBuildFile; fileRef = 49997FFA17E07FA100CF1038 /* SKProduct+LocalPrice.m */; };
 		6501CAF0173242FC00A89E59 /* Swiss_721_Black_Extended_BT.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6501CAEF173242FC00A89E59 /* Swiss_721_Black_Extended_BT.ttf */; };
@@ -2125,7 +2125,6 @@
 		2087B6C417C7B07D007A6A90 /* register-bg-iPhone4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "register-bg-iPhone4.png"; sourceTree = "<group>"; };
 		2087B6C517C7B07D007A6A90 /* register-bg-iPhone4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "register-bg-iPhone4@2x.png"; sourceTree = "<group>"; };
 		2087B6C617C7B07D007A6A90 /* register-bg-iPhone5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "register-bg-iPhone5.png"; sourceTree = "<group>"; };
-		208C6845186D9C49004A74F2 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		208C684D186DAA59004A74F2 /* MySHKConfigurator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySHKConfigurator.h; sourceTree = "<group>"; };
 		208C684E186DAA59004A74F2 /* MySHKConfigurator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySHKConfigurator.m; sourceTree = "<group>"; };
 		208E35A117C1F5C500CE54BE /* SignInViewControllerIPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignInViewControllerIPhone5.xib; sourceTree = "<group>"; };
@@ -2355,6 +2354,7 @@
 		30D58EAB10FB28F500E0C7E8 /* libAdWhirlSimulator_1.2.7_OS3.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAdWhirlSimulator_1.2.7_OS3.0.a; sourceTree = "<group>"; };
 		30D8562210CF7FDB0016D5AB /* HudView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HudView.h; sourceTree = "<group>"; };
 		30D8562310CF7FDB0016D5AB /* HudView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HudView.m; sourceTree = "<group>"; };
+		498BAB6B1885B21800221DFB /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = ExternalFrameworks/Parse/Parse.framework; sourceTree = "<group>"; };
 		49997FF517DF786400CF1038 /* ParentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParentViewController.h; sourceTree = "<group>"; };
 		49997FF617DF786400CF1038 /* ParentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParentViewController.m; sourceTree = "<group>"; };
 		49997FF917E07FA100CF1038 /* SKProduct+LocalPrice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKProduct+LocalPrice.h"; sourceTree = "<group>"; };
@@ -2739,13 +2739,13 @@
 				0D33511D109ABB6A0082810A /* AddressBookUI.framework in Frameworks */,
 				0D33511B109ABB6A0082810A /* AddressBook.framework in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
-				208C6846186D9C49004A74F2 /* Parse.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */,
 				0DF3A542108E0E5C00D6C887 /* libsqlite3.0.dylib in Frameworks */,
 				0DEE01A0108ED97400967DA5 /* QuartzCore.framework in Frameworks */,
 				0DE0243110959098005F699B /* MessageUI.framework in Frameworks */,
 				0D33511F109ABB6A0082810A /* CFNetwork.framework in Frameworks */,
+				498BAB6C1885B21800221DFB /* Parse.framework in Frameworks */,
 				0D335123109ABB6A0082810A /* libz.dylib in Frameworks */,
 				30D58E3510FB260200E0C7E8 /* MediaPlayer.framework in Frameworks */,
 				0FF135A9174FC8B800B39FCA /* libFlurry.a in Frameworks */,
@@ -4128,7 +4128,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				208C6845186D9C49004A74F2 /* Parse.framework */,
+				498BAB6B1885B21800221DFB /* Parse.framework */,
 				2025FAB8186074F300CC9188 /* CoreMotion.framework */,
 				2025FAB6186074D100CC9188 /* CoreText.framework */,
 				2025FAB41860742700CC9188 /* CoreMedia.framework */,
@@ -5838,7 +5838,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 96127DDA85BB40748EA10004 /* Pods.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
@@ -5847,7 +5847,8 @@
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/khurram/Documents/flyerly,
+					"$(SRCROOT)/ExternalFrameworks/Parse/",
+					/Users/mkhurramali/Documents/engineering/flyer.ly/ExternalFrameworks/Parse,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Flyr_Prefix.pch;
@@ -5874,7 +5875,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 96127DDA85BB40748EA10004 /* Pods.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
@@ -5883,7 +5884,8 @@
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/khurram/Documents/flyerly,
+					"$(SRCROOT)/ExternalFrameworks/Parse/",
+					/Users/mkhurramali/Documents/engineering/flyer.ly/ExternalFrameworks/Parse,
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -5898,7 +5900,7 @@
 					"\"$(SRCROOT)/ExternalFrameworks/AdWhirl\"",
 					"\"$(SRCROOT)/ExternalFrameworks/Flurry\"",
 				);
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = Flyr;
 				PROVISIONING_PROFILE = "0A86B5B8-398E-4FCE-8EF2-7C3F449D9C9B";
@@ -5911,7 +5913,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 96127DDA85BB40748EA10004 /* Pods.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Jennifer Junger (ZLDN4YF5WY)";
@@ -5919,7 +5921,8 @@
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/khurram/Documents/flyerly,
+					"$(SRCROOT)/ExternalFrameworks/Parse/",
+					/Users/mkhurramali/Documents/engineering/flyer.ly/ExternalFrameworks/Parse,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Flyr_Prefix.pch;
