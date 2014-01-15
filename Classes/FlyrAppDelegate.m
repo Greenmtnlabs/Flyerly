@@ -18,8 +18,6 @@
 #import "DraftViewController.h"
 #import "Flurry.h"
 #import <Parse/Parse.h>
-#import "BZFoursquare.h"
-
 
 NSString *kCheckTokenStep1 = @"kCheckTokenStep";
 NSString *FlickrSharingSuccessNotification = @"FlickrSharingSuccessNotification";
@@ -148,8 +146,6 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
         return YES;
     } else if([[url absoluteString] hasPrefix:@"fb"]){
         return [PFFacebookUtils handleOpenURL:url];
-    } else if([[url absoluteString] hasPrefix:@"fsqapi"]){
-        return [[self foursquare] handleOpenURL:url];
     } else {
         //Tumbler Return
         return nil;//[[SHKTumblr  sharedInstance] handleOpenURL:url];

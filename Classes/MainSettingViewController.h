@@ -15,7 +15,6 @@
 #import "SettingViewController.h"
 #import "PhotoController.h"
 #import "AccountSelecter.h"
-#import "LocationController.h"
 #import "InputViewController.h"
 #import "Singleton.h"
 #import "MainSettingCell.h"

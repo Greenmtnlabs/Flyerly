@@ -53,8 +53,6 @@
 		0F734B541742737D0084A2F4 /* top_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F734B521742737D0084A2F4 /* top_bg.png */; };
 		0F734B551742737D0084A2F4 /* top_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F734B531742737D0084A2F4 /* top_bg@2x.png */; };
 		0F734B5617427B790084A2F4 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65B303FA171ED8C8006632E3 /* Accounts.framework */; };
-		0F7E5A5B177C9BD500CF139F /* BZFoursquare.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F7E5A58177C9BD500CF139F /* BZFoursquare.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		0F7E5A5C177C9BD500CF139F /* BZFoursquareRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F7E5A5A177C9BD500CF139F /* BZFoursquareRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0F7F02BC1765F7D300FC750F /* AlertViewBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F7F02BB1765F7D300FC750F /* AlertViewBackground.png */; };
 		0F7F02C3176616B100FC750F /* FlyerOverlayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F7F02C2176616B100FC750F /* FlyerOverlayController.m */; };
 		0F7FC386175CE26B009DEB08 /* AsyncImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F7FC385175CE26B009DEB08 /* AsyncImageView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -235,7 +233,6 @@
 		0FBC37F9174F980600004F21 /* twt_setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FBC37DB174F980500004F21 /* twt_setting@2x.png */; };
 		0FCC3A1C177D8C5C0046484C /* settings2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FCC3A1A177D8C5B0046484C /* settings2.png */; };
 		0FCC3A1D177D8C5C0046484C /* settings2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FCC3A1B177D8C5B0046484C /* settings2@2x.png */; };
-		0FCC3A23177DCFA40046484C /* LocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FCC3A22177DCFA40046484C /* LocationController.m */; };
 		0FCC3A28177DD3080046484C /* LocationItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FCC3A27177DD3080046484C /* LocationItem.xib */; };
 		0FCC3A2B177DD35D0046484C /* LocationItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FCC3A2A177DD35D0046484C /* LocationItem.m */; };
 		0FCC3A2D177DD8BF0046484C /* LocationController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FCC3A2C177DD8BF0046484C /* LocationController.xib */; };
@@ -1352,10 +1349,6 @@
 		0DFC531D109576AB00B18478 /* SettingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SettingViewController.xib; path = Classes/SettingViewController.xib; sourceTree = "<group>"; };
 		0F734B521742737D0084A2F4 /* top_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = top_bg.png; sourceTree = "<group>"; };
 		0F734B531742737D0084A2F4 /* top_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "top_bg@2x.png"; sourceTree = "<group>"; };
-		0F7E5A57177C9BD500CF139F /* BZFoursquare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZFoursquare.h; path = Foursquare/BZFoursquare.h; sourceTree = "<group>"; };
-		0F7E5A58177C9BD500CF139F /* BZFoursquare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZFoursquare.m; path = Foursquare/BZFoursquare.m; sourceTree = "<group>"; };
-		0F7E5A59177C9BD500CF139F /* BZFoursquareRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZFoursquareRequest.h; path = Foursquare/BZFoursquareRequest.h; sourceTree = "<group>"; };
-		0F7E5A5A177C9BD500CF139F /* BZFoursquareRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZFoursquareRequest.m; path = Foursquare/BZFoursquareRequest.m; sourceTree = "<group>"; };
 		0F7F02BB1765F7D300FC750F /* AlertViewBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AlertViewBackground.png; sourceTree = "<group>"; };
 		0F7F02C1176616B000FC750F /* FlyerOverlayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlyerOverlayController.h; sourceTree = "<group>"; };
 		0F7F02C2176616B100FC750F /* FlyerOverlayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlyerOverlayController.m; sourceTree = "<group>"; };
@@ -1541,8 +1534,6 @@
 		0FBC37DB174F980500004F21 /* twt_setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twt_setting@2x.png"; sourceTree = "<group>"; };
 		0FCC3A1A177D8C5B0046484C /* settings2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings2.png; sourceTree = "<group>"; };
 		0FCC3A1B177D8C5B0046484C /* settings2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings2@2x.png"; sourceTree = "<group>"; };
-		0FCC3A21177DCFA40046484C /* LocationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationController.h; sourceTree = "<group>"; };
-		0FCC3A22177DCFA40046484C /* LocationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationController.m; sourceTree = "<group>"; };
 		0FCC3A27177DD3080046484C /* LocationItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocationItem.xib; sourceTree = "<group>"; };
 		0FCC3A29177DD35D0046484C /* LocationItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationItem.h; sourceTree = "<group>"; };
 		0FCC3A2A177DD35D0046484C /* LocationItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationItem.m; sourceTree = "<group>"; };
@@ -2769,8 +2760,6 @@
 				0FEF2DA8174E66FC00FDD8C9 /* HelpController.m */,
 				0F7F02C1176616B000FC750F /* FlyerOverlayController.h */,
 				0F7F02C2176616B100FC750F /* FlyerOverlayController.m */,
-				0FCC3A21177DCFA40046484C /* LocationController.h */,
-				0FCC3A22177DCFA40046484C /* LocationController.m */,
 				0FCC3A29177DD35D0046484C /* LocationItem.h */,
 				0FCC3A2A177DD35D0046484C /* LocationItem.m */,
 				0FD247D81784547E003CA6DD /* SearchLocationItem.h */,
@@ -2810,7 +2799,6 @@
 				49B8897E18865273003766AD /* Reachability */,
 				49B8897A1886524D003766AD /* LoadingView */,
 				202C47B7187D6E4B00FE0975 /* Bitly */,
-				0F7E5A56177C9B8D00CF139F /* Foursquare */,
 				0F7FC383175CE261009DEB08 /* AsyncImageView */,
 				0FE0BDD11758BBB900C4D78D /* InAppPurchase */,
 				0FF135A6174FC85600B39FCA /* Flurry */,
@@ -3299,17 +3287,6 @@
 				0DFA8B3510AD851300F779CA /* ImageCache.m */,
 			);
 			path = imageCache;
-			sourceTree = "<group>";
-		};
-		0F7E5A56177C9B8D00CF139F /* Foursquare */ = {
-			isa = PBXGroup;
-			children = (
-				0F7E5A57177C9BD500CF139F /* BZFoursquare.h */,
-				0F7E5A58177C9BD500CF139F /* BZFoursquare.m */,
-				0F7E5A59177C9BD500CF139F /* BZFoursquareRequest.h */,
-				0F7E5A5A177C9BD500CF139F /* BZFoursquareRequest.m */,
-			);
-			name = Foursquare;
 			sourceTree = "<group>";
 		};
 		0F7FC383175CE261009DEB08 /* AsyncImageView */ = {
@@ -5733,10 +5710,7 @@
 				0FE0BDD41758BBCD00C4D78D /* EBPurchase.m in Sources */,
 				0F7FC386175CE26B009DEB08 /* AsyncImageView.m in Sources */,
 				0F7F02C3176616B100FC750F /* FlyerOverlayController.m in Sources */,
-				0F7E5A5B177C9BD500CF139F /* BZFoursquare.m in Sources */,
-				0F7E5A5C177C9BD500CF139F /* BZFoursquareRequest.m in Sources */,
 				202C482A187D7A6B00FE0975 /* NSDictionary_JSONExtensions.m in Sources */,
-				0FCC3A23177DCFA40046484C /* LocationController.m in Sources */,
 				202C4829187D7A6B00FE0975 /* CJSONSerializer.m in Sources */,
 				202C4800187D6E4B00FE0975 /* BitlyTwitterOAuthAccount.m in Sources */,
 				202C4826187D7A6B00FE0975 /* CDataScanner_Extensions.m in Sources */,

@@ -21,7 +21,6 @@
 #import <Parse/PFFile.h>
 #import <Parse/PFObject.h>
 #import <Parse/PFUser.h>
-#import "LocationController.h"
 //#import <
 
 static UIView *progressView;
@@ -140,7 +139,7 @@ static ShareProgressView *clipBdPogressView;
     
     // Set click event on switch
     [saveToRollSwitch addTarget:self action:@selector(setSwitchState:) forControlEvents:UIControlEventValueChanged];
-      [LocationController getLocationDetails][@"name"] = @"";
+    
     // Set facebook as per settings
     if([[NSUserDefaults standardUserDefaults] stringForKey:@"facebookSetting"]){
         [facebookButton setSelected:YES];
@@ -330,16 +329,6 @@ static ShareProgressView *clipBdPogressView;
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
-    NSLog(@"%@",[LocationController getLocationDetails][@"name"]);
-    if([LocationController getLocationDetails] && [LocationController getLocationDetails][@"name"]){
-        locationLabel.text = [LocationController getLocationDetails][@"name"];
-        
-        [locationButton setSelected:YES];
-    
-    } else {
-        [locationButton setSelected:NO];
-    }
-    
     
     // Set sharing network to zero
     countOfSharingNetworks = 0;
@@ -790,7 +779,8 @@ static ShareProgressView *clipBdPogressView;
             ;
             
             // Current Item For Sharing
-            SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"#flyerly - %@ %@  %@",[[LocationController getLocationDetails] objectForKey:@"name"],titleView.text, selectedFlyerDescription ]];
+            SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"#flyerly - %@ %@",
+                                                                     titleView.text, selectedFlyerDescription ]];
             
             //Calling ShareKit for Sharing
             [SHKTwitter shareItem:item];
@@ -1399,15 +1389,9 @@ static ShareProgressView *clipBdPogressView;
 -(void)shareOnFacebook{
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                   [NSString stringWithFormat:@"%@ %@ - %@",titleView.text, descriptionView.text, [LocationController getLocationDetails][@"name"]], @"message",  //whatever message goes here
+                                   [NSString stringWithFormat:@"%@ %@",titleView.text, descriptionView.text], @"message",  //whatever message goes here
                                    selectedFlyerImage, @"picture",   //img is your UIImage
-                                   //placeId, @"place",
                                    nil];
-    /*
-    [[appDelegate facebook] requestWithGraphPath:@"me/photos"
-                                       andParams:params
-                                   andHttpMethod:@"POST"
-                                     andDelegate:self];*/
 }
 
 - (void)makeTwitterPost:(ACAccount *)acct {
@@ -1415,7 +1399,7 @@ static ShareProgressView *clipBdPogressView;
     
     
     //add text
-    [postRequest addMultiPartData:[[NSString stringWithFormat:@"%@ %@ - %@",titleView.text, descriptionView.text, [LocationController getLocationDetails][@"name"]] dataUsingEncoding:NSUTF8StringEncoding] withName:@"status" type:@"multipart/form-data"];
+    [postRequest addMultiPartData:[[NSString stringWithFormat:@"%@ %@",titleView.text, descriptionView.text] dataUsingEncoding:NSUTF8StringEncoding] withName:@"status" type:@"multipart/form-data"];
     //add image
     [postRequest addMultiPartData:UIImagePNGRepresentation(selectedFlyerImage) withName:@"media" type:@"multipart/form-data"];
     
@@ -2114,16 +2098,6 @@ static ShareProgressView *clipBdPogressView;
 
 #pragma Location near by code
 
--(IBAction)searchNearByLocations{
-
-    NSLog(@"Search Near By Locations");
-    
-    LocationController *locationController = [[LocationController alloc]initWithNibName:@"LocationController" bundle:nil];
-    
-	[self.navigationController pushViewController:locationController animated:YES];
-
-}
-
 /*
  * get switch on off event
  */
@@ -2145,7 +2119,6 @@ static ShareProgressView *clipBdPogressView;
         [locationLabel setHidden:YES];
         [locationBackground setHidden:YES];
         [locationButton setHidden:YES];
-        [LocationController getLocationDetails][@"name"] = @"";
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationDuration:0.2];
         [UIView setAnimationCurve:UIViewAnimationCurveLinear];
