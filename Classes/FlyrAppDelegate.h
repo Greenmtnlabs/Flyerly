@@ -6,10 +6,6 @@
 //  Copyright __MyCompanyName__ 2009. All rights reserved.
 //
 
-//#import "ARRollerView.h"
-//#import "ARRollerProtocol.h"
-//#import "FBPermissionDialog.h"\
-#import "Crittercism.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "Facebook.h"
 #import "BZFoursquare.h"
@@ -19,8 +15,6 @@
 #import "SHKConfiguration.h"
 #import "MySHKConfigurator.h"
 #import "BitlyConfig.h"
-
-
 
 extern NSString *FacebookDidLoginNotification;
 
@@ -66,7 +60,6 @@ extern NSString *FacebookDidLoginNotification;
 @property (nonatomic, strong) UIView *sharingProgressParentView;
 @property (nonatomic, strong) NSString *loginId;
 
--(void)next;
 -(void)clearCache;
 -(void)FbChangeforNewVersion;
 -(void)TwitterChangeforNewVersion:(NSString *)olduser;

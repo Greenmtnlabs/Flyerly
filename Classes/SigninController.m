@@ -40,7 +40,7 @@
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
 
     //set title
-    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-35, -6, 50, 50)] autorelease];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-35, -6, 50, 50)];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:TITLE_FONT size:18];
     label.textAlignment = UITextAlignmentCenter;
@@ -168,9 +168,9 @@
          //}
 
         if(IS_IPHONE_5){
-            launchController = [[[LauchViewController alloc]initWithNibName:@"LauchViewControllerIPhone5" bundle:nil] autorelease];
+            launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewControllerIPhone5" bundle:nil];
         }   else{
-            launchController = [[[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil] autorelease];
+            launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
         }
         
         //[self.navigationController pushViewController:launchController animated:YES];
@@ -435,9 +435,9 @@
 
 -(IBAction)onSignUp{
     if (IS_IPHONE_5) {
-        registerController = [[[RegisterController alloc]initWithNibName:@"RegisterViewController_iPhone5" bundle:nil] autorelease];
+        registerController = [[RegisterController alloc]initWithNibName:@"RegisterViewController_iPhone5" bundle:nil];
     }else{
-        registerController = [[[RegisterController alloc]initWithNibName:@"RegisterController" bundle:nil] autorelease];    
+        registerController = [[RegisterController alloc]initWithNibName:@"RegisterController" bundle:nil];
     }
         [self.navigationController pushViewController:registerController animated:YES];
 }
@@ -449,7 +449,6 @@
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];
     [alert show];
-    [alert release];
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
@@ -486,25 +485,6 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)dealloc {
-	[emailImage release];
-    [passwordImage release];
-    
-    [email release];
-    [password release];
-    
-    [signIn release];
-    [signUp release];
-    [signInFacebook release];
-    [signInTwitter release];
-    
-    [forgetPassword1 release];
-    
-    [launchController release];
-    [registerController release];
-
 }
 
 #pragma Twitter
@@ -685,7 +665,6 @@
         //[self performSelectorOnMainThread:@selector(pushViewController:) withObject:launchController waitUntilDone:YES];        
     }
     [self hideLoadingIndicator];
-    [warningAlert release];
 }
 
 @end

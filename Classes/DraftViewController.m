@@ -42,11 +42,9 @@ static ShareProgressView *clipBdPogressView;
 
 -(void)callFlyrView{
 	[self.navigationController popToViewController:fvController animated:YES];
-	[fvController release];
 }
 
--(void)loadDistributeView
-{
+-(void)loadDistributeView {
 	svController.isDraftView = YES;
 	[self.navigationController pushViewController:svController animated:YES];
 }
@@ -215,21 +213,21 @@ static ShareProgressView *clipBdPogressView;
     if(fromPhotoController){
         self.navigationItem.hidesBackButton = YES;
         // Create right bar button
-        UIButton *menuButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)] autorelease];
+        UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
         menuButton.showsTouchWhenHighlighted = YES;
         [menuButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
         [menuButton addTarget:self action:@selector(callMenu) forControlEvents:UIControlEventTouchUpInside];
-        UIBarButtonItem *leftBarButton = [[[UIBarButtonItem alloc] initWithCustomView:menuButton] autorelease];
+        UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
 
         // Create left bar help button
-        UIButton *helpButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)] autorelease];
+        UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
         helpButton.showsTouchWhenHighlighted = YES;
         [helpButton addTarget:self action:@selector(loadHelpController) forControlEvents:UIControlEventTouchUpInside];
         [helpButton setImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
 
 
 
-        UIBarButtonItem *leftHelpBarButton = [[[UIBarButtonItem alloc] initWithCustomView:helpButton] autorelease];
+        UIBarButtonItem *leftHelpBarButton = [[UIBarButtonItem alloc] initWithCustomView:helpButton];
         [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarButton,leftHelpBarButton,nil]];
         
         [self.navigationItem setLeftBarButtonItem:leftBarButton];
@@ -238,23 +236,23 @@ static ShareProgressView *clipBdPogressView;
         //self.navigationItem.leftItemsSupplementBackButton = YES;
         self.navigationItem.hidesBackButton = YES;
 
-        UIButton *backButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)] autorelease];
+        UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
         [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
         backButton.showsTouchWhenHighlighted = YES;
         [backButton addTarget:self action:@selector(goback) forControlEvents:UIControlEventTouchUpInside];
         UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
 
         // Create left bar help button
-        UIButton *helpButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)]autorelease];
+        UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
           helpButton.showsTouchWhenHighlighted = YES;
         [helpButton addTarget:self action:@selector(loadHelpController) forControlEvents:UIControlEventTouchUpInside];
         [helpButton setBackgroundImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
-        UIBarButtonItem *leftHelpBarButton = [[[UIBarButtonItem alloc] initWithCustomView:helpButton] autorelease];
+        UIBarButtonItem *leftHelpBarButton = [[UIBarButtonItem alloc] initWithCustomView:helpButton];
         [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarButton,leftHelpBarButton,nil]];
 }
 
     // Set title on bar
-    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-60, -6, 50, 50)] autorelease];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-60, -6, 50, 50)];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:TITLE_FONT size:18];
     label.textAlignment = UITextAlignmentCenter;
@@ -270,7 +268,7 @@ static ShareProgressView *clipBdPogressView;
     [locationLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:13]];
 
     // Setup flyer edit button
-    UIButton *editButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 4, 35, 33)] autorelease];
+    UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 4, 35, 33)];
     [editButton addTarget:self action:@selector(onEdit:) forControlEvents:UIControlEventTouchUpInside];
     [editButton setTitle:@"Edit" forState:UIControlStateNormal];
     [editButton setBackgroundColor:[UIColor clearColor ]];
@@ -997,7 +995,6 @@ static ShareProgressView *clipBdPogressView;
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];
     [alert show];
-    [alert release];
 }
 
 -(void)showAlert{
@@ -1015,7 +1012,7 @@ static ShareProgressView *clipBdPogressView;
     
     NSMutableArray *socialArray = [[NSMutableArray alloc] initWithContentsOfFile:finalImgWritePath];
     if(!socialArray){
-        socialArray = [[[NSMutableArray alloc] init] autorelease];
+        socialArray = [[NSMutableArray alloc] init];
     }
 
     if([socialArray count] > 0){
@@ -1130,7 +1127,7 @@ static ShareProgressView *clipBdPogressView;
     // delete already existing file and
     // Add file with same name
     [[NSFileManager defaultManager] removeItemAtPath:detailFileName error:nil];
-	NSMutableArray *array = [[[NSMutableArray alloc] init] autorelease];
+	NSMutableArray *array = [[NSMutableArray alloc] init];
 
     if(!titleView.text || [titleView.text isEqualToString:NameYourFlyerText]){
         [array addObject:NameYourFlyerText];
@@ -1187,7 +1184,7 @@ static ShareProgressView *clipBdPogressView;
  }
 
 -(void)shareOnMMS:(NSString *)link{
-    MFMessageComposeViewController *controller = [[[MFMessageComposeViewController alloc] init] autorelease];
+    MFMessageComposeViewController *controller = [[MFMessageComposeViewController alloc] init];
     if([MFMessageComposeViewController canSendText])
     {
         //controller.body = [NSString stringWithFormat:@"%@ - %@ %@", selectedFlyerDescription,link, @"#flyerly"];
@@ -1312,7 +1309,6 @@ static ShareProgressView *clipBdPogressView;
         //mail composer window
         [picker setMessageBody:emailBody isHTML:YES];
         [self presentModalViewController:picker animated:YES];
-        [picker release];
     }
 }
 
@@ -1458,7 +1454,6 @@ static ShareProgressView *clipBdPogressView;
     }];
     
     // Release stuff.
-    [arrayOfAccounts release];
     arrayOfAccounts = nil;
 sd:;
 }
@@ -1536,8 +1531,6 @@ sd:;
     }else{
         [self fillErrorStatus:twitterPogressView];
     }
-    
-    [actionSheet release];
 }
 
 
@@ -2191,11 +2184,6 @@ static ShareProgressView *clipBdPogressView;
 
 #pragma leaving code
 
-- (void)postDismissCleanup {
-	//[navBar removeFromSuperview];
-	//[navBar release];
-}
-
 - (void)dismissNavBar:(BOOL)animated {
 	
 	if (animated) {
@@ -2205,8 +2193,6 @@ static ShareProgressView *clipBdPogressView;
 		[UIView setAnimationDidStopSelector:@selector(postDismissCleanup)];
 		//navBar.alpha = 0;
 		[UIView commitAnimations];
-	} else {
-		[self postDismissCleanup];
 	}
 }
 

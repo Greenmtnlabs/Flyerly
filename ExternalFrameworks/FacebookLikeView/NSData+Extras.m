@@ -11,7 +11,7 @@
 @implementation NSData (Extras)
 
 - (NSString*)UTF8String {
-    return [[[NSString alloc] initWithData:self encoding:NSUTF8StringEncoding] autorelease];
+    return [[NSString alloc] initWithData:self encoding:NSUTF8StringEncoding];
 }
 
 @end

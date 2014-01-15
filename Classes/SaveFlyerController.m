@@ -14,13 +14,12 @@
 #import "MyNavigationBar.h"
 #import "DraftViewController.h"
 #import "Common.h"
-#import "HudView.h"
 //#import "FBConnectGlobal.h"
 
 @implementation SaveFlyerController
 
 @synthesize twitterButton,mailButton,faceBookButton,uploadButton,ptController,dvController;
-@synthesize flyrImg,twitUser,twitPass,twitAlert,facebookAlert,aHUD,isDraftView;
+@synthesize flyrImg,twitUser,twitPass,twitAlert,facebookAlert,isDraftView;
 @synthesize twitMsg,twitDialog,flyrImgData,_session,alertTextField,imgName;
 //@synthesize navBar,twit;
 
@@ -80,14 +79,12 @@
     [super viewDidLoad];
     navBar.alpha = 0.6;
 	_session = nil;
-	
-	aHUD = [[HudView alloc]init];
     
 	UIImageView *imgView = [[UIImageView alloc]initWithFrame:CGRectMake(0,44 ,320, 416)];
 	imgView.image = flyrImg;
 	[self.view addSubview:imgView];
 	
-	twitterButton =[[UIButton buttonWithType:UIButtonTypeRoundedRect] autorelease ];
+	twitterButton =[UIButton buttonWithType:UIButtonTypeRoundedRect];
 	twitterButton.frame = CGRectMake(1, 400, 105, 59);
 	[twitterButton setBackgroundImage:[UIImage imageNamed:@"twit1.png"] forState:UIControlStateNormal];
 	[twitterButton setBackgroundImage:[UIImage imageNamed:@"twit.png"] forState:UIControlStateSelected];
@@ -137,17 +134,6 @@
 	appDele.svController = self;
 	
     
-}
-
-- (void) killHUD
-{
-	[aHUD removeHud:self.view];
-	[aHUD.loadingView removeFromSuperview];
-}
-
-- (void) showHUD
-{
-	[aHUD loadingViewInView:self.view text:@"Uploading..."];
 }
 
 #pragma mark  Twitter PHOTO UPLOAD 
@@ -223,7 +209,6 @@
 	CGAffineTransform myTransform = CGAffineTransformMakeTranslation(0.0, 75.0);
 	[twitAlert setTransform:myTransform];
 	[twitAlert show];
-	[twitAlert release];
 }
 
 -(void)callFacebookAlert{
@@ -235,7 +220,6 @@
 -(void)uploadPhoto
 {
 	NSLog(@"facebook-uploaded");
-	[aHUD.loadingLabel setText:@"Uploaded..."];
 	[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(killHUD) userInfo:nil repeats:NO];
 	
 	NSDictionary *params = @{@"caption": @"Posted by SocialFlyr"}; 
@@ -261,9 +245,9 @@
 	picker.mailComposeDelegate = self;
 	[picker setSubject:@"Check out my SocialFlyr..."];
 	// Set up recipients
-	NSArray *toRecipients = [[[NSArray alloc]init]autorelease];
-	NSArray *ccRecipients =   [[[NSArray alloc]init]autorelease];
-	NSArray *bccRecipients =   [[[NSArray alloc]init]autorelease];
+	NSArray *toRecipients = [[NSArray alloc]init];
+	NSArray *ccRecipients =   [[NSArray alloc]init];
+	NSArray *bccRecipients =   [[NSArray alloc]init];
 	[picker setToRecipients:toRecipients];
 	[picker setCcRecipients:ccRecipients];	
 	[picker setBccRecipients:bccRecipients];
@@ -273,7 +257,6 @@
 	NSString *emailBody = @"";
 	[picker setMessageBody:emailBody isHTML:NO];
 	[self presentModalViewController:picker animated:YES];
-	[picker release];
 }
 
 -(void)dismiss
@@ -358,33 +341,10 @@
 			[fail show];
 		}
 	}
-	else if(sender == faceBookButton)
-	{
-        /*
-		FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
-		if(appDele._session)
-		{
-			
-			if(appDele.faceBookPermissionFlag == NO){
-				FBPermissionDialog *dialog = [[[FBPermissionDialog alloc] init] autorelease];
-				dialog.delegate = self;
-				dialog.permission = @"status_update";
-				[dialog show];
-			}
-			else{
-				[self callFacebookAlert];
-			}
-		}
-		else{
-			UIAlertView *fail = [[UIAlertView alloc]initWithTitle:@"Facebook" message:@"Authentication failed: \n Set username and password in Preferences" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-			[fail show];
-		}
-         */
+	else if(sender == faceBookButton) {
 	}
 	else if(sender == mailButton)
-	{	
-		[self showHUD];
-		[aHUD.loadingLabel setText:@"Please Wait..."];
+	{
 		[NSTimer scheduledTimerWithTimeInterval:0.4f target:self selector:@selector(showInlineMailClient) userInfo:nil repeats:NO];
 	}
 }
@@ -410,7 +370,6 @@
 	//FlyrAppDelegate *appDele =(FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
 	//[appDele.perDialog dismiss:YES];
 	[twitDialog dismiss:YES];
-	[navBar release];
 }
 
 - (void)dismissNavBar:(BOOL)animated {
@@ -434,14 +393,6 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-}
-
-- (void)dealloc 
-{
-	//[_session.delegates removeObject: self];
-	//[twitDialog release];
-	//[_session release];
-	[ptController release];
 }
 
 

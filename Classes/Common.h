@@ -225,7 +225,7 @@ nil]
 static NSString *cellId = @"Cell";\
 MyCustomCell *cell = (MyCustomCell *)[tableView dequeueReusableCellWithIdentifier:cellId];\
 if (cell == nil) {\
-cell = [[[MyCustomCell alloc] initWithFrame:CGRectZero reuseIdentifier:cellId] autorelease];\
+cell = [[MyCustomCell alloc] initWithFrame:CGRectZero reuseIdentifier:cellId];\
 }\
 [cell setAccessoryType:UITableViewCellAccessoryNone]; \
 [cell addToCell: title :description :created :img :imagePath];\

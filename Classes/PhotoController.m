@@ -8,14 +8,13 @@
 
 #import "PhotoController.h"
 #import <QuartzCore/QuartzCore.h>
+#import <AssetsLibrary/AssetsLibrary.h>
 #import "Common.h"
 #import "LoginController.h"
 #import "FlyrAppDelegate.h"
 #import "MyNavigationBar.h"
 #import "SaveFlyerController.h"
 #import "ImageCache.h"
-#import "CameraOverlayView.h"
-#import "CustomPhotoController.h"
 #import "DraftViewController.h"
 #import "HelpController.h"
 #import <Parse/PFUser.h>
@@ -32,7 +31,7 @@
 @synthesize selectedFont,selectedColor,navBar;
 @synthesize selectedTemplate,selectedSymbol,selectedIcon;
 @synthesize fontTabButton,colorTabButton,sizeTabButton,selectedText,selectedSize,borderTabButton,fontBorderTabButton,addMoreFontTabButton,addMoreIconTabButton,addMorePhotoTabButton,addMoreSymbolTabButton,arrangeLayerTabButton;
-@synthesize templateBckgrnd,textBackgrnd,aHUD;
+@synthesize templateBckgrnd,textBackgrnd;
 @synthesize cameraTabButton,photoTabButton,widthTabButton,heightTabButton,photoImgView,symbolImgView,iconImgView;
 @synthesize photoTouchFlag,symbolTouchFlag,iconTouchFlag, lableTouchFlag,lableLocation,warningAlert,discardAlert,deleteAlert,editAlert, inAppAlert;
 @synthesize moreLayersLabel, moreLayersButton, takePhotoButton, cameraRollButton, takePhotoLabel, cameraRollLabel, imgPickerFlag,finalImgWritePath, addMoreLayerOrSaveFlyerLabel, takeOrAddPhotoLabel,layerScrollView;
@@ -549,8 +548,6 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     [self.view setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
     navBar.alpha =ALPHA1;
 
-
-	aHUD = [[HudView alloc]init];
     photoTouchFlag=NO;
 	symbolTouchFlag=NO;
     iconTouchFlag = NO;
@@ -671,8 +668,6 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 	templateScrollWidth = 60;
 	templateScrollHeight = 55;
 	templateArray = [[NSMutableArray alloc]init];
-	//NSAutoreleasePool* pool1 = [[NSAutoreleasePool alloc] init];
-	///[pool1 release];
 
     // Add templates in scroll view
     [self addTemplatesInSubView];
@@ -1847,16 +1842,6 @@ int arrangeLayerIndex;
 }
 
 #pragma mark  HUD Method
-- (void) killHUD
-{
-	[aHUD removeHud:self.view];
-	[aHUD.loadingView removeFromSuperview];
-}
-
-- (void) showHUD
-{
-	[aHUD loadingViewInView:self.view text:@"Saving..."];
-}
 
 -(void)showLoadingView:(NSString *)message{
     [self showLoadingIndicator];
@@ -1925,39 +1910,6 @@ int arrangeLayerIndex;
      */
     
     [Flurry logEvent:@"Custom Background"];
-}
-
--(void)setLatestImageAndLoadPhotoLibrary{
-    ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
-    
-    // Enumerate just the photos and videos group by using ALAssetsGroupSavedPhotos.
-    [library enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
-        
-        // Within the group enumeration block, filter to enumerate just photos.
-        [group setAssetsFilter:[ALAssetsFilter allPhotos]];
-        
-        // Chooses the photo at the last index. Make sure number of assets is greater than zero.
-        if ( [group numberOfAssets] > 0 ) {
-            [group enumerateAssetsAtIndexes:[NSIndexSet indexSetWithIndex:([group numberOfAssets] - 1)] options:0 usingBlock:^(ALAsset *alAsset, NSUInteger index, BOOL *innerStop) {
-            
-                // The end of the enumeration is signaled by asset == nil.
-                if (alAsset) {
-                    ALAssetRepresentation *representation = [alAsset defaultRepresentation];
-                    UIImage *latestPhoto = [UIImage imageWithCGImage:[representation fullScreenImage]];
-                
-                    if([latestPhoto isKindOfClass:[UIImageView class]]){
-                    }
-                    // Do something interesting with the AV asset.
-                    customPhotoController.image = latestPhoto;
-                    [self.navigationController pushViewController:customPhotoController animated:YES];
-                    [customPhotoController release];
-                }
-            }];
-        }
-    } failureBlock: ^(NSError *error) {
-        // Typically you should handle an error more gracefully than this.
-        NSLog(@"No groups");
-    }];
 }
 
 -(void)loadPhotoLibrary{
@@ -2182,7 +2134,7 @@ int arrangeLayerIndex;
 }
 
 +(UIView *)setTitleViewWithTitle:(NSString *)title rect:(CGRect)rect{
-    UILabel *label = [[[UILabel alloc] initWithFrame:rect] autorelease];
+    UILabel *label = [[UILabel alloc] initWithFrame:rect];
     label.backgroundColor = [UIColor clearColor];
     [label setFont:[UIFont fontWithName:@"Symbol" size:18]];
     label.textAlignment = NSTextAlignmentCenter;
@@ -2190,7 +2142,7 @@ int arrangeLayerIndex;
     label.text = NSLocalizedString([title uppercaseString], @"");
     [label sizeToFit];
 
-    UIView *titleView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
+    UIView *titleView = [[UIView alloc] initWithFrame:CGRectZero];
     [titleView addSubview:label];    
     
     return titleView;
@@ -2305,7 +2257,7 @@ int arrangeLayerIndex;
     
     
     
-    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-65, -6, 50, 50)] autorelease];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-65, -6, 50, 50)];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:TITLE_FONT size:18];
     label.textAlignment = UITextAlignmentCenter;
@@ -2313,7 +2265,7 @@ int arrangeLayerIndex;
     label.text = @"Edit Layer";
     self.navigationItem.titleView = label;
     
-    UIButton *cancelButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 4, 60, 33)] autorelease];
+    UIButton *cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 4, 60, 33)];
     [cancelButton addTarget:self action:@selector(Mycancel) forControlEvents:UIControlEventTouchUpInside];
     [cancelButton setTitle:@"Cancel" forState:UIControlStateNormal];
     [cancelButton setBackgroundColor:[UIColor clearColor ]];
@@ -2323,7 +2275,7 @@ int arrangeLayerIndex;
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:cancelButton];
     [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
     
-    UIButton *editButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 4, 35, 33)] autorelease];
+    UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 4, 35, 33)];
     [editButton addTarget:self action:@selector(MyEdit) forControlEvents:UIControlEventTouchUpInside];
     [editButton setTitle:@"Edit" forState:UIControlStateNormal];
     [editButton setBackgroundColor:[UIColor clearColor ]];
@@ -2332,7 +2284,7 @@ int arrangeLayerIndex;
     editButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *leftBarMenuButton = [[UIBarButtonItem alloc] initWithCustomView:editButton];
     
-    UIButton *delButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 4, 60, 33)] autorelease];
+    UIButton *delButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 4, 60, 33)];
     [delButton addTarget:self action:@selector(MyDelete) forControlEvents:UIControlEventTouchUpInside];
     [delButton setTitle:@"Delete" forState:UIControlStateNormal];
     [delButton setBackgroundColor:[UIColor clearColor ]];
@@ -2359,7 +2311,7 @@ int arrangeLayerIndex;
 
 
 	
-    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-65, -6, 50, 50)] autorelease];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-65, -6, 50, 50)];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:TITLE_FONT size:18];
     label.textAlignment = UITextAlignmentCenter;
@@ -2531,7 +2483,7 @@ int arrangeLayerIndex;
     symbolTouchFlag= NO;
     iconTouchFlag = NO;
 
-    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-45, -6, 50, 50)] autorelease];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-45, -6, 50, 50)];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:TITLE_FONT size:18];
     label.textAlignment = UITextAlignmentCenter;
@@ -2619,7 +2571,7 @@ int arrangeLayerIndex;
 
 -(void)callStyle
 {
-    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-45, -6, 50, 50)] autorelease];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-45, -6, 50, 50)];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:TITLE_FONT size:18];
     label.textAlignment = UITextAlignmentCenter;
@@ -2741,7 +2693,7 @@ int arrangeLayerIndex;
         layerEditMessage = nil;
     }
     //self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Add photo" rect:CGRectMake(-45, -6, 50, 50)];
-    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-45, -6, 50, 50)] autorelease];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-45, -6, 50, 50)];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:TITLE_FONT size:18];
     label.textAlignment = UITextAlignmentCenter;
@@ -2846,7 +2798,7 @@ int arrangeLayerIndex;
 	[UIView commitAnimations];
 	
     UIPinchGestureRecognizer *twoFingerPinch =
-    [[[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(twoFingerPinch:)] autorelease];
+    [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(twoFingerPinch:)];
     [[self view] addGestureRecognizer:twoFingerPinch];
     
 	lableTouchFlag = NO;
@@ -2961,7 +2913,7 @@ int arrangeLayerIndex;
 
 -(void)callAddMoreLayers {
     
-    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-30, -6, 50, 50)] autorelease];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-30, -6, 50, 50)];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:TITLE_FONT size:18];
     label.textAlignment = UITextAlignmentCenter;
@@ -3226,7 +3178,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     draftViewController.imageFileName = finalImgWritePath;
     draftViewController.detailFileName = [finalImgWritePath stringByReplacingOccurrencesOfString:@".jpg" withString:@".txt"];
     [self.navigationController pushViewController:draftViewController animated:YES];
-    [draftViewController release];    
 }
 
 
@@ -3241,7 +3192,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 			 otherButtonTitles:@"Save",@"Save & Distribute",nil];
 	
 	[alert showInView:self.view];
-	[alert release];
 }
 
 
@@ -3252,7 +3202,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	svController.flyrImg = finalFlyer;
 	svController.ptController = self;
 	[self.navigationController pushViewController:svController animated:YES];
-	[svController release];
 }
 
 
@@ -3395,7 +3344,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 	if(selectedButton == addMoreFontTabButton)
 	{
-        UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-30, -6, 50, 50)] autorelease];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-30, -6, 50, 50)];
         label.backgroundColor = [UIColor clearColor];
         label.font = [UIFont fontWithName:TITLE_FONT size:18];
         label.textAlignment = UITextAlignmentCenter;
@@ -3458,7 +3407,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	else if(selectedButton == addMorePhotoTabButton)
 	{
         //self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"layers" rect:CGRectMake(-30, -6, 50, 50)];
-        UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-30, -6, 50, 50)] autorelease];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-30, -6, 50, 50)];
         label.backgroundColor = [UIColor clearColor];
         label.font = [UIFont fontWithName:TITLE_FONT size:18];
         label.textAlignment = UITextAlignmentCenter;
@@ -3533,7 +3482,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	else if(selectedButton == addMoreSymbolTabButton)
 	{
         //self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"layers" rect:CGRectMake(-30, -6, 50, 50)];
-        UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-30, -6, 50, 50)] autorelease];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-30, -6, 50, 50)];
         label.backgroundColor = [UIColor clearColor];
         label.font = [UIFont fontWithName:TITLE_FONT size:18];
         label.textAlignment = UITextAlignmentCenter;
@@ -3608,7 +3557,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	else if(selectedButton == addMoreIconTabButton)
 	{
         //self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"layers" rect:CGRectMake(-30, -6, 50, 50)];
-        UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-30, -6, 50, 50)] autorelease];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-30, -6, 50, 50)];
         label.backgroundColor = [UIColor clearColor];
         label.font = [UIFont fontWithName:TITLE_FONT size:18];
         label.textAlignment = UITextAlignmentCenter;
@@ -3715,7 +3664,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         }
         
         //self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"layers" rect:CGRectMake(-30, -6, 50, 50)];
-        UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-30, -6, 50, 50)] autorelease];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-30, -6, 50, 50)];
         label.backgroundColor = [UIColor clearColor];
         label.font = [UIFont fontWithName:TITLE_FONT size:18];
         label.textAlignment = UITextAlignmentCenter;
@@ -4096,7 +4045,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 }
 
 -(void) SetMenu{
-    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-30, -6, 50, 50)] autorelease];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-30, -6, 50, 50)];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:TITLE_FONT size:18];
     label.textAlignment = UITextAlignmentCenter;
@@ -5059,8 +5008,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     }else{
         [self saveSocialStates:folderPath imageName:@"/IMG_0.jpg"];
     }
-    
-    [aHUD.loadingLabel setText:@"Saved"];
+
 	[NSTimer scheduledTimerWithTimeInterval:0.4f target:self selector:@selector(killHUD) userInfo:nil repeats:NO];
 
 	NSData *imgData = UIImagePNGRepresentation(screenImage);
@@ -5231,7 +5179,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
     NSArray *OldDetail = [[NSArray alloc] initWithContentsOfFile:finalImgDetailWritePath];
    // NSLog(@"%@",OldDetail);
-    NSMutableArray *array = [[[NSMutableArray alloc] init] autorelease];
+    NSMutableArray *array = [[NSMutableArray alloc] init];
     if ([OldDetail count] > 0) {
 
         [array addObject:OldDetail[0]];
@@ -5262,7 +5210,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
  */
 -(void)saveSocialStates:(NSString *)directory imageName:(NSString *)imageName{
 
-	NSMutableArray *socialArray = [[[NSMutableArray alloc] init] autorelease];
+	NSMutableArray *socialArray = [[NSMutableArray alloc] init];
     [socialArray addObject:@"0"]; //Facebook
     [socialArray addObject:@"0"]; //Twitter
     [socialArray addObject:@"0"]; //Email
@@ -5392,7 +5340,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];
     [alert show];
-    [alert release];
 }
 
 
@@ -5401,7 +5348,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     //[self showLoadingView:nil];
     if([AddFriendsController connected]){
         // Create an instance of EBPurchase (Inapp purchase).
-        [demoPurchase release];
         demoPurchase = nil;
         demoPurchase = [[EBPurchase alloc] init];
         demoPurchase.delegate = self;
@@ -5421,7 +5367,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
       if([AddFriendsController connected]){
           //[self showLoadingView:nil];
           // Create an instance of EBPurchase (Inapp purchase).
-          [demoPurchase release];
           demoPurchase = nil;
           demoPurchase = [[EBPurchase alloc] init];
           demoPurchase.delegate = self;
@@ -5442,7 +5387,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         //[self showLoadingView:nil];
     
         // Create an instance of EBPurchase (Inapp purchase).
-        [demoPurchase release];
         demoPurchase = nil;
         demoPurchase = [[EBPurchase alloc] init];
         demoPurchase.delegate = self;
@@ -5460,7 +5404,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     if([AddFriendsController connected]){
         //[self showLoadingView:nil];
         // Create an instance of EBPurchase (Inapp purchase).
-        [demoPurchase release];
         demoPurchase = nil;
         demoPurchase = [[EBPurchase alloc] init];
         demoPurchase.delegate = self;
@@ -5480,7 +5423,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         // [self showLoadingView:nil];
 
         // Create an instance of EBPurchase (Inapp purchase).
-        [demoPurchase release];
+ 
         demoPurchase = nil;
         demoPurchase = [[EBPurchase alloc] init];
         demoPurchase.delegate = self;
@@ -5500,7 +5443,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
          //[self showLoadingView:nil];
 
          // Create an instance of EBPurchase (Inapp purchase).
-         [demoPurchase release];
          demoPurchase = nil;
          demoPurchase = [[EBPurchase alloc] init];
          demoPurchase.delegate = self;
@@ -5519,7 +5461,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
          // [self showLoadingView:nil];
 
          // Create an instance of EBPurchase (Inapp purchase).
-         [demoPurchase release];
          demoPurchase = nil;
          demoPurchase = [[EBPurchase alloc] init];
          demoPurchase.delegate = self;
@@ -5915,9 +5856,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 }
 
 #pragma mark  View Disappear Methods
-- (void)postDismissCleanup {
-		[imgPicker release];
-}
 
 - (void)dismissNavBar:(BOOL)animated {
 	
@@ -5929,8 +5867,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 		[UIView setAnimationDidStopSelector:@selector(postDismissCleanup)];
 		navBar.alpha = ALPHA0;
 		[UIView commitAnimations];
-	} else {
-		[self postDismissCleanup];
 	}
 }
 
@@ -5950,26 +5886,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	NSLog(@"ViewDidUnload");
 	FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
 	[appDele clearCache];
-}
-
-- (void)dealloc 
-{
-	NSLog(@"Dealloc");
-	[aHUD release];
-	[templateScrollView release];
-	[templateArray release];
-	[navBar release];
-	[msgTextView release];
-	[msgLabel release];
-	[colorScrollView release];
-	[sizeScrollView release];
-	[borderScrollView release];
-	[fontBorderScrollView release];
-	[fontScrollView release];
-	[symbolScrollView release];
-	[iconScrollView release];
-    [layerScrollView release];    
-    
 }
 
 -(void) logLayerAddedEvent{

@@ -1,105 +1,86 @@
 //
-//  HudView.m
-//  HudView
+//  LoadingView.m
+//  LoadingView
 //
 
 
-#import "HudView.h"
+#import "LoadingView.h"
 #import <QuartzCore/QuartzCore.h>
 
 
-
-
-
-CGPathRef HudViewNewPathWithRoundRect(CGRect rect, CGFloat cornerRadius)
+CGPathRef NewPathWithRoundRect(CGRect rect, CGFloat cornerRadius)
 {
 	//
 	// Create the boundary path
 	//
 	CGMutablePathRef path = CGPathCreateMutable();
 	CGPathMoveToPoint(path, NULL,
-					  rect.origin.x,
-					  rect.origin.y + rect.size.height - cornerRadius);
-	
+		rect.origin.x,
+		rect.origin.y + rect.size.height - cornerRadius);
+
 	// Top left corner
 	CGPathAddArcToPoint(path, NULL,
-						rect.origin.x,
-						rect.origin.y,
-						rect.origin.x + rect.size.width,
-						rect.origin.y,
-						cornerRadius);
-	
+		rect.origin.x,
+		rect.origin.y,
+		rect.origin.x + rect.size.width,
+		rect.origin.y,
+		cornerRadius);
+
 	// Top right corner
 	CGPathAddArcToPoint(path, NULL,
-						rect.origin.x + rect.size.width,
-						rect.origin.y,
-						rect.origin.x + rect.size.width,
-						rect.origin.y + rect.size.height,
-						cornerRadius);
-	
+		rect.origin.x + rect.size.width,
+		rect.origin.y,
+		rect.origin.x + rect.size.width,
+		rect.origin.y + rect.size.height,
+		cornerRadius);
+
 	// Bottom right corner
 	CGPathAddArcToPoint(path, NULL,
-						rect.origin.x + rect.size.width,
-						rect.origin.y + rect.size.height,
-						rect.origin.x,
-						rect.origin.y + rect.size.height,
-						cornerRadius);
-	
+		rect.origin.x + rect.size.width,
+		rect.origin.y + rect.size.height,
+		rect.origin.x,
+		rect.origin.y + rect.size.height,
+		cornerRadius);
+
 	// Bottom left corner
 	CGPathAddArcToPoint(path, NULL,
-						rect.origin.x,
-						rect.origin.y + rect.size.height,
-						rect.origin.x,
-						rect.origin.y,
-						cornerRadius);
-	
+		rect.origin.x,
+		rect.origin.y + rect.size.height,
+		rect.origin.x,
+		rect.origin.y,
+		cornerRadius);
+
 	// Close the path at the rounded rect
 	CGPathCloseSubpath(path);
 	
 	return path;
 }
 
-@implementation HudView
-@synthesize loadingLabel,loadingView;
+@implementation LoadingView
 
-- (id)loadingViewInView:(UIView *)aSuperview text:(NSString*)hudText
+
++ (id)loadingViewInView:(UIView *)aSuperview text:(NSString *)text
 {
-	
-	
-	loadingView = [[HudView alloc] initWithFrame:CGRectMake(75, 150, 180,120 )] ;
+	LoadingView *loadingView =
+		[[LoadingView alloc] initWithFrame:CGRectMake(0, 0, 320,480)];
+        //[[[LoadingView alloc] initWithFrame:CGRectMake(85, 250, 200,120 )] autorelease];
 	if (!loadingView)
 	{
 		return nil;
 	}
 	
-	
 	loadingView.opaque = NO;
 	loadingView.autoresizingMask =
 		UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-	[aSuperview setUserInteractionEnabled:NO];
 	[aSuperview addSubview:loadingView];
-	
-
 
 	const CGFloat DEFAULT_LABEL_WIDTH = 160.0;
 	const CGFloat DEFAULT_LABEL_HEIGHT = 50.0;
 	CGRect labelFrame = CGRectMake(0, 0, DEFAULT_LABEL_WIDTH, DEFAULT_LABEL_HEIGHT);
-	loadingLabel =[[UILabel alloc]initWithFrame:labelFrame];
+	UILabel *loadingLabel =[[UILabel alloc]initWithFrame:labelFrame];
 	
-	loadingLabel.text = hudText;
-	loadingLabel.textColor = [UIColor whiteColor];
-	loadingLabel.backgroundColor = [UIColor clearColor];
-	loadingLabel.textAlignment = UITextAlignmentCenter;
-	loadingLabel.font = [UIFont boldSystemFontOfSize:[UIFont labelFontSize]];
-	loadingLabel.autoresizingMask =
-		UIViewAutoresizingFlexibleLeftMargin |
-		UIViewAutoresizingFlexibleRightMargin |
-		UIViewAutoresizingFlexibleTopMargin |
-		UIViewAutoresizingFlexibleBottomMargin;
-	
-	[loadingView addSubview:loadingLabel];
-	UIActivityIndicatorView *activityIndicatorView = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(5, 5, 30,30)];
-	[activityIndicatorView setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleWhiteLarge];
+	UIActivityIndicatorView *activityIndicatorView = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(85, 250, 30,30)];
+	[activityIndicatorView setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleGray];
 			//initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge]autorelease];
 	[loadingView addSubview:activityIndicatorView];
 	activityIndicatorView.autoresizingMask =
@@ -108,50 +89,41 @@ CGPathRef HudViewNewPathWithRoundRect(CGRect rect, CGFloat cornerRadius)
 		UIViewAutoresizingFlexibleTopMargin |
 		UIViewAutoresizingFlexibleBottomMargin;
 	[activityIndicatorView startAnimating];
-	
 	CGFloat totalHeight =
 		loadingLabel.frame.size.height +
 		activityIndicatorView.frame.size.height;
 	labelFrame.origin.x = floor(0.5 * (loadingView.frame.size.width - DEFAULT_LABEL_WIDTH));
 	labelFrame.origin.y = floor(0.5 * (loadingView.frame.size.height - totalHeight));
 	loadingLabel.frame = labelFrame;
-	
+
 	CGRect activityIndicatorRect = activityIndicatorView.frame;
 	activityIndicatorRect.origin.x =
 		0.5 * (loadingView.frame.size.width - activityIndicatorRect.size.width);
 	activityIndicatorRect.origin.y =
 		loadingLabel.frame.origin.y + loadingLabel.frame.size.height;
 	activityIndicatorView.frame = activityIndicatorRect;
-	
+    
+    activityIndicatorView.frame = CGRectMake(145, 250, 30,30);
+
+
 	// Set up the fade-in animation
 	CATransition *animation = [CATransition animation];
 	[animation setType:kCATransitionFade];
 	[[aSuperview layer] addAnimation:animation forKey:@"layerAnimation"];
-	loadingView.alpha = 1;
+	loadingView.alpha = 1.0;
 	return loadingView;
 }
 
 
 - (void)removeView
 {
-	
 	UIView *aSuperview = [self superview];
 	[super removeFromSuperview];
-	[aSuperview setUserInteractionEnabled:YES];
-	
+
 	CATransition *animation = [CATransition animation];
 	[animation setType:kCATransitionFade];
 	
 	[[aSuperview layer] addAnimation:animation forKey:@"layerAnimation"];
-}
-
--(void)removeHud:(UIView *)aSuperview
-{
-	loadingLabel.alpha = 0;
-	[aSuperview setUserInteractionEnabled:YES];
-	[self setUserInteractionEnabled:YES];
-	[self removeFromSuperview];
-	
 }
 
 - (void)drawRect:(CGRect)rect
@@ -163,11 +135,11 @@ CGPathRef HudViewNewPathWithRoundRect(CGRect rect, CGFloat cornerRadius)
 	rect = CGRectInset(rect, RECT_PADDING, RECT_PADDING);
 	
 	const CGFloat ROUND_RECT_CORNER_RADIUS = 8.0;
-	CGPathRef roundRectPath = HudViewNewPathWithRoundRect(rect, ROUND_RECT_CORNER_RADIUS);
+	CGPathRef roundRectPath = NewPathWithRoundRect(rect, ROUND_RECT_CORNER_RADIUS);
 	
 	CGContextRef context = UIGraphicsGetCurrentContext();
 
-	const CGFloat BACKGROUND_OPACITY = 0.6f;
+	const CGFloat BACKGROUND_OPACITY = 0;
 	CGContextSetRGBFillColor(context, 0, 0, 0, BACKGROUND_OPACITY);
 	CGContextAddPath(context, roundRectPath);
 	CGContextFillPath(context);
@@ -178,14 +150,6 @@ CGPathRef HudViewNewPathWithRoundRect(CGRect rect, CGFloat cornerRadius)
 	CGContextStrokePath(context);
 	
 	CGPathRelease(roundRectPath);
-}
-
-
-- (void)dealloc
-{
-	[loadingView release];
-    [loadingLabel release];
-    [super dealloc];
 }
 
 @end

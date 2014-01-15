@@ -134,7 +134,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 
     //set title
     //self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Register" rect:CGRectMake(-50, -6, 50, 50)];
-    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(0, 0, 150, 80)] autorelease];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 150, 80)];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:TITLE_FONT size:18];
     label.textAlignment = UITextAlignmentCenter;
@@ -233,8 +233,6 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
            // change by Preston [self showAlert:@"Warning!" message:@"User already exists"];
             warningAlert = [[UIAlertView  alloc]initWithTitle:@"Account already exists using this account." message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Sign In",nil];
             [warningAlert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:NO];
-            //[warningAlert show];
-            [warningAlert autorelease];
             [self removeLoadingView];
 
         } else {
@@ -326,7 +324,6 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
         [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"User"];
         [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"Password"];
     }
-    [self.view release];
 }
 
 
@@ -372,7 +369,6 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
                         warningAlert = [[UIAlertView  alloc]initWithTitle:@"Account already exists using this account" message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Sign In",nil];
                             //[warningAlert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:NO];
                             [warningAlert show];
-                            [warningAlert autorelease];
                             
                         }
 
@@ -504,7 +500,6 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];
     [alert show];
-    [alert release];
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {

@@ -8,9 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "MyNavigationBar.h"
-#import "HudView.h"
 #import "CustomLabel.h"
-#import "CustomPhotoController.h"
 #import "EBPurchase.h"
 #import "ShareProgressView.h"
 #import "Singleton.h"
@@ -25,8 +23,6 @@
     int layerallow;
     Singleton *globle;
 	MyNavigationBar *navBar;
-	HudView *aHUD;
-    CustomPhotoController *customPhotoController;
 	UIImageView *imgView;
 	UIImageView *templateBckgrnd;
 	UIImageView *textBackgrnd;
@@ -157,7 +153,6 @@
 @property(nonatomic, strong) NSMutableArray *cpyPhotoLayersArray;
 
 @property (nonatomic, strong) MyNavigationBar *navBar;
-@property (nonatomic,strong) HudView *aHUD;
 
 @property(nonatomic, strong)  UIImageView *imgView;
 @property (nonatomic,strong)  UIImageView *photoImgView;

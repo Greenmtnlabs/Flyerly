@@ -286,7 +286,7 @@ sd:;
     //[saveFlyrLabel setText:@"Saved flyer"];
     //UIBarButtonItem *barLabel = [[UIBarButtonItem alloc] initWithCustomView:saveFlyrLabel];
     
-    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)] autorelease];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:TITLE_FONT size:18];
     label.textAlignment = UITextAlignmentCenter;
@@ -365,7 +365,7 @@ sd:;
     NSString *index = [FlyrViewController getFlyerNumberFromPath:imagePath];
     [cell setAccessoryType:UITableViewCellAccessoryNone];
     if (cell == nil) {
-        cell = [[[MyCustomCell alloc] initWithFrame:CGRectZero reuseIdentifier:cellId] autorelease];
+        cell = [[MyCustomCell alloc] initWithFrame:CGRectZero reuseIdentifier:cellId];
         cell.flyerNumber = [index intValue];
         cell.cellImage.tag =   cell.flyerNumber;
         [cell.cellImage addTarget:self action:@selector(showFlyerOverlay:) forControlEvents:UIControlEventTouchUpInside];
@@ -456,9 +456,7 @@ sd:;
     }
 
 	[self.navigationController pushViewController:draftViewController animated:YES];
-	 [draftViewController release];
 	[self performSelector:@selector(deselect) withObject:nil afterDelay:0.2f];
-
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -500,13 +498,10 @@ sd:;
 	ptController = [[PhotoController alloc]initWithNibName:@"PhotoController" bundle:nil];
     ptController.flyerNumber = -1;
 	[self.navigationController pushViewController:ptController animated:YES];
-	//[ptController release];
 }
 
 - (void)postDismissCleanup {
 	[navBar removeFromSuperview];	
-	[navBar release];
-
 }
 
 - (void)dismissNavBar:(BOOL)animated {

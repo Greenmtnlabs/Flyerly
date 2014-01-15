@@ -26,7 +26,6 @@ NSString *FlickrSharingSuccessNotification = @"FlickrSharingSuccessNotification"
 NSString *FlickrSharingFailureNotification = @"FlickrSharingFailureNotification";
 NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 
-#define kAdWhirlApplicationKey @"b7dfccec5016102d840c2e1e0de86337"
 #define TIME 10
 
 @implementation FlyrAppDelegate
@@ -35,30 +34,8 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 @synthesize navigationController,faceBookPermissionFlag,changesFlag;
 @synthesize fontScrollView,colorScrollView,templateScrollView,sizeScrollView,svController,lauchController,accountController;
 @synthesize session = _session;
-//@synthesize adwhirl;
 @synthesize sharingProgressParentView;
 
-#pragma mark Ad whirl delegate methods
-
--(void)next{
-	//[adwhirl getNextAd];
-}
-
-- (NSString*)adWhirlApplicationKey
-{
-	return kAdWhirlApplicationKey;  //Return your AdWhirl application key here
-}
-
-//- (void)rollerDidReceiveAd:(ARRollerView*)rollerView
-//{
-//	NSString* mostRecentNetworkName = [rollerView mostRecentNetworkName];
-//	NSLog(@"Received ad from %@!", mostRecentNetworkName);
-//
-//}
-//- (void)rollerDidFailToReceiveAd:(ARRollerView*)rollerView usingBackup:(BOOL)YesOrNo
-//{
-//	NSLog(@"Failed to receive ad from %@.  Using Backup: %@", [rollerView mostRecentNetworkName], YesOrNo ? @"YES" : @"NO");
-//}
 
 #pragma mark -
 #pragma mark Application lifecycle
@@ -67,9 +44,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 {
 	[self clearCache];
 	changesFlag = NO;
-	/*[[UIApplication sharedApplication] setStatusBarStyle: UIStatusBarStyleBlackOpaque];
-	navigationController.navigationBar.barStyle = UIStatusBarStyleBlackOpaque;
-*/
+	
     NSString *greeted = [[NSUserDefaults standardUserDefaults] stringForKey:@"greeted"];
     
     if(!greeted){
@@ -83,8 +58,6 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
         }
 
         [navigationController pushViewController:lauchController animated:NO];
-        //accountController = [[AccountController alloc]initWithNibName:@"AccountController" bundle:nil];
-        //[navigationController pushViewController:accountController animated:NO];
         [window addSubview:[navigationController view]];
 
         AfterUpdateController *afterUpdateView = [[AfterUpdateController alloc]initWithNibName:@"AfterUpdateController" bundle:nil];
@@ -109,10 +82,6 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 
 	[window makeKeyAndVisible];
 	
-	//adwhirl = [ARRollerView requestRollerViewWithDelegate:self];
-	//adwhirl.
-	//[adwhirl setFrame:CGRectMake(0, 318, 320, 50)];
-	//[self.view addSubview:adwhirl];
 	[NSTimer scheduledTimerWithTimeInterval:TIME target:self selector:@selector(next) userInfo:nil repeats:YES];
 }
 
@@ -153,78 +122,21 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 }
 
 
-/*
-+ (void) increaseNetworkActivityIndicator
-{
-	NetworkActivityIndicatorCounter++;
-	[UIApplication sharedApplication].networkActivityIndicatorVisible = NetworkActivityIndicatorCounter > 0;
-}
-
-+ (void) decreaseNetworkActivityIndicator
-{
-	NetworkActivityIndicatorCounter--;
-	[UIApplication sharedApplication].networkActivityIndicatorVisible = NetworkActivityIndicatorCounter > 0;
-}
- */
-
--(void)clearCache{
-/*
-	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-	 NSString *cachePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"URLCache"];
-	 if (![[NSFileManager defaultManager] removeItemAtPath:cachePath error:nil]) {
-	 return;
-	 }
-	 
-	 if (![[NSFileManager defaultManager] createDirectoryAtPath:cachePath 
-	 withIntermediateDirectories:NO
-	 attributes:nil 
-	 error:nil]) {
-	 return;
-	 }
-	NSArray *paths1 = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-    NSString *cacheDirectory = [paths1 objectAtIndex:0]; 
-	NSString *dummyCacheDirectory = [cacheDirectory substringToIndex:65];
-	NSArray *files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:cacheDirectory error:nil];
-	
-	
-    NSString *filename = [cacheDirectory stringByAppendingPathComponent:cacheDirectory]; 
-    filename = [filename stringByAppendingPathComponent:filename]; 
-	 //NSLog(filename);
-	//
- */
+-(void)clearCache {
 	[[ImageCache sharedImageCache] removeAllImagesInMemory];
     [self.session close];
-	
 }
-
 
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
-    //return [PFFacebookUtils handleOpenURL:url];
-        return [[self facebook] handleOpenURL:url];
-    
+    return [[self facebook] handleOpenURL:url];
 }
 
-- (OFFlickrAPIRequest *)flickrRequest {
-    /*
-	if (!flickrRequest) {
-		flickrRequest = [[OFFlickrAPIRequest alloc] initWithAPIContext:flickrContext];
-		flickrRequest.delegate = self;
-	}
-	*/
-	return nil; //flickrRequest;
-}
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation {
     
     if([[url absoluteString] hasPrefix:kCallbackURLBaseStringPrefix]){
-        
-        if ([self flickrRequest].sessionInfo) {
-            // already running some other request
-            NSLog(@"Already running some other request");
-        }
-        else {
             NSString *token = nil;
             NSString *verifier = nil;
             BOOL result = OFExtractOAuthCallback(url, [NSURL URLWithString:kCallbackURLBaseString], &token, &verifier);
@@ -233,25 +145,11 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
                 NSLog(@"Cannot obtain token/secret from URL: %@", [url absoluteString]);
                 return NO;
             }
-            
-            [self flickrRequest].sessionInfo = kGetAccessTokenStep;
-           // [flickrRequest fetchOAuthAccessTokenWithRequestToken:token verifier:verifier];
-        }
-        
         return YES;
-
     } else if([[url absoluteString] hasPrefix:@"fb"]){
-        
-        // Send facebook did login notification
-        //[[NSNotificationCenter defaultCenter] postNotificationName:FacebookDidLoginNotification object:self];
-        //return YES;
         return [PFFacebookUtils handleOpenURL:url];
-       // return [[self facebook] handleOpenURL:url];
-        
     } else if([[url absoluteString] hasPrefix:@"fsqapi"]){
-    
         return [[self foursquare] handleOpenURL:url];
-
     } else {
         //Tumbler Return
         return nil;//[[SHKTumblr  sharedInstance] handleOpenURL:url];
@@ -336,12 +234,12 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
         
         NSLog(@"User already Greeted !");
         if(IS_IPHONE_5){
-                accountController = [[[AccountController alloc]initWithNibName:@"AcountViewControlleriPhone5" bundle:nil] autorelease];
-            lauchController = [[[LauchViewController alloc]initWithNibName:@"LauchViewControllerIPhone5" bundle:nil] autorelease];
+                accountController = [[AccountController alloc]initWithNibName:@"AcountViewControlleriPhone5" bundle:nil];
+            lauchController = [[LauchViewController alloc]initWithNibName:@"LauchViewControllerIPhone5" bundle:nil];
 
         }else{
-            accountController = [[[AccountController alloc]initWithNibName:@"AccountController" bundle:nil] autorelease];
-            lauchController = [[[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil] autorelease];
+            accountController = [[AccountController alloc]initWithNibName:@"AccountController" bundle:nil];
+            lauchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
 
         }
         
@@ -489,15 +387,6 @@ if it exist then we call Merging Process
 
 
 #pragma mark -
-#pragma mark Memory management
-
-- (void)dealloc {
-//	[adwhirl release];
-    [lauchController release];
-	[navigationController release];
-	[window release];
-}
-
 
 @end
 

@@ -41,7 +41,7 @@
      UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:closeButton];
      [self.navigationItem setLeftBarButtonItem:leftBarButton];
 
-    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-60, -6, 50, 50)] autorelease];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-60, -6, 50, 50)];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:TITLE_FONT size:18];
     label.textAlignment = UITextAlignmentCenter;
@@ -123,7 +123,7 @@
         [picker setSubject:@"Inquiry..."];
         
         // Set up recipients
-        NSMutableArray *toRecipients = [[[NSMutableArray alloc]init]autorelease];
+        NSMutableArray *toRecipients = [[NSMutableArray alloc]init];
         [toRecipients addObject:@"info@greenmtnlabs.com"];
         [picker setToRecipients:toRecipients];
         
@@ -131,7 +131,6 @@
         //[picker setMessageBody:emailBody isHTML:YES];
         
         [self presentModalViewController:picker animated:YES];
-        [picker release];
     }
 }
 

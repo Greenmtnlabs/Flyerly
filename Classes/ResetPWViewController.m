@@ -27,7 +27,7 @@
     self.navigationController.navigationBarHidden = NO;
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
     
-    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-50, -6, 150, 80)] autorelease];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-50, -6, 150, 80)];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:TITLE_FONT size:18];
     label.textAlignment = UITextAlignmentCenter;
@@ -85,7 +85,6 @@
                 [self removeLoadingView];
                 //[self showAlert:@"Warning!" message:errorValue];
                 [self showAlert:@"No account exists with username" message:@""];
-                [dbUsername release];
             }  }];
 
         
@@ -113,7 +112,6 @@
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];
     [alert show];
-    [alert release];
 }
 
 -(void)showLoadingView {
