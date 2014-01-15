@@ -11,7 +11,6 @@
 #import "Common.h"
 #import "PhotoController.h"
 #import <QuartzCore/QuartzCore.h>
-#import "ImageCache.h"
 #import "LauchViewController.h"
 #import "AfterUpdateController.h"
 #import "AccountController.h"
@@ -121,7 +120,6 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 
 
 -(void)clearCache {
-	[[ImageCache sharedImageCache] removeAllImagesInMemory];
     [self.session close];
 }
 

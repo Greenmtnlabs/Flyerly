@@ -14,7 +14,6 @@
 #import "FlyrAppDelegate.h"
 #import "MyNavigationBar.h"
 #import "SaveFlyerController.h"
-#import "ImageCache.h"
 #import "DraftViewController.h"
 #import "HelpController.h"
 #import <Parse/PFUser.h>
