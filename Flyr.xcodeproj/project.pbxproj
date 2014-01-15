@@ -2347,10 +2347,6 @@
 		30D58CFD10FB1BF800E0C7E8 /* Template8.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Template8.jpg; sourceTree = "<group>"; };
 		30D58CFE10FB1BF800E0C7E8 /* Template9.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Template9.jpg; sourceTree = "<group>"; };
 		30D58E3410FB260200E0C7E8 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
-		30D58EA810FB28F500E0C7E8 /* ARRollerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARRollerProtocol.h; sourceTree = "<group>"; };
-		30D58EA910FB28F500E0C7E8 /* ARRollerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARRollerView.h; sourceTree = "<group>"; };
-		30D58EAA10FB28F500E0C7E8 /* libAdWhirlDevice_1.2.7_OS3.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAdWhirlDevice_1.2.7_OS3.0.a; sourceTree = "<group>"; };
-		30D58EAB10FB28F500E0C7E8 /* libAdWhirlSimulator_1.2.7_OS3.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAdWhirlSimulator_1.2.7_OS3.0.a; sourceTree = "<group>"; };
 		30D8562210CF7FDB0016D5AB /* HudView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HudView.h; sourceTree = "<group>"; };
 		30D8562310CF7FDB0016D5AB /* HudView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HudView.m; sourceTree = "<group>"; };
 		498BAB6B1885B21800221DFB /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = ExternalFrameworks/Parse/Parse.framework; sourceTree = "<group>"; };
@@ -2841,7 +2837,6 @@
 				0FE0BDA91758808D00C4D78D /* Reachability.m */,
 				0FF135A6174FC85600B39FCA /* Flurry */,
 				0FEDD769174A918C00DF71C0 /* Crittercism */,
-				30D58EA710FB28F500E0C7E8 /* AdWhirl */,
 				30D8562210CF7FDB0016D5AB /* HudView.h */,
 				30D8562310CF7FDB0016D5AB /* HudView.m */,
 				0DFA8B2D10AD851300F779CA /* imageCache */,
@@ -4378,17 +4373,6 @@
 				30D58CFE10FB1BF800E0C7E8 /* Template9.jpg */,
 			);
 			path = Templates;
-			sourceTree = "<group>";
-		};
-		30D58EA710FB28F500E0C7E8 /* AdWhirl */ = {
-			isa = PBXGroup;
-			children = (
-				30D58EA810FB28F500E0C7E8 /* ARRollerProtocol.h */,
-				30D58EA910FB28F500E0C7E8 /* ARRollerView.h */,
-				30D58EAA10FB28F500E0C7E8 /* libAdWhirlDevice_1.2.7_OS3.0.a */,
-				30D58EAB10FB28F500E0C7E8 /* libAdWhirlSimulator_1.2.7_OS3.0.a */,
-			);
-			path = AdWhirl;
 			sourceTree = "<group>";
 		};
 		49997FF817E07F7300CF1038 /* Categories */ = {
