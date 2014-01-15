@@ -32,7 +32,7 @@
 @synthesize selectedFont,selectedColor,navBar;
 @synthesize selectedTemplate,selectedSymbol,selectedIcon;
 @synthesize fontTabButton,colorTabButton,sizeTabButton,selectedText,selectedSize,borderTabButton,fontBorderTabButton,addMoreFontTabButton,addMoreIconTabButton,addMorePhotoTabButton,addMoreSymbolTabButton,arrangeLayerTabButton;
-@synthesize templateBckgrnd,textBackgrnd,aHUD;
+@synthesize templateBckgrnd,textBackgrnd;
 @synthesize cameraTabButton,photoTabButton,widthTabButton,heightTabButton,photoImgView,symbolImgView,iconImgView;
 @synthesize photoTouchFlag,symbolTouchFlag,iconTouchFlag, lableTouchFlag,lableLocation,warningAlert,discardAlert,deleteAlert,editAlert, inAppAlert;
 @synthesize moreLayersLabel, moreLayersButton, takePhotoButton, cameraRollButton, takePhotoLabel, cameraRollLabel, imgPickerFlag,finalImgWritePath, addMoreLayerOrSaveFlyerLabel, takeOrAddPhotoLabel,layerScrollView;
@@ -549,8 +549,6 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     [self.view setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
     navBar.alpha =ALPHA1;
 
-
-	aHUD = [[HudView alloc]init];
     photoTouchFlag=NO;
 	symbolTouchFlag=NO;
     iconTouchFlag = NO;
@@ -1847,16 +1845,6 @@ int arrangeLayerIndex;
 }
 
 #pragma mark  HUD Method
-- (void) killHUD
-{
-	[aHUD removeHud:self.view];
-	[aHUD.loadingView removeFromSuperview];
-}
-
-- (void) showHUD
-{
-	[aHUD loadingViewInView:self.view text:@"Saving..."];
-}
 
 -(void)showLoadingView:(NSString *)message{
     [self showLoadingIndicator];
@@ -5059,8 +5047,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     }else{
         [self saveSocialStates:folderPath imageName:@"/IMG_0.jpg"];
     }
-    
-    [aHUD.loadingLabel setText:@"Saved"];
+
 	[NSTimer scheduledTimerWithTimeInterval:0.4f target:self selector:@selector(killHUD) userInfo:nil repeats:NO];
 
 	NSData *imgData = UIImagePNGRepresentation(screenImage);
@@ -5950,26 +5937,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	NSLog(@"ViewDidUnload");
 	FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
 	[appDele clearCache];
-}
-
-- (void)dealloc 
-{
-	NSLog(@"Dealloc");
-	[aHUD release];
-	[templateScrollView release];
-	[templateArray release];
-	[navBar release];
-	[msgTextView release];
-	[msgLabel release];
-	[colorScrollView release];
-	[sizeScrollView release];
-	[borderScrollView release];
-	[fontBorderScrollView release];
-	[fontScrollView release];
-	[symbolScrollView release];
-	[iconScrollView release];
-    [layerScrollView release];    
-    
 }
 
 -(void) logLayerAddedEvent{

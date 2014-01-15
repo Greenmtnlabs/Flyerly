@@ -12,7 +12,6 @@
 #import "PhotoController.h"
 #import "TwitLogin.h"
 #import <MessageUI/MessageUI.h>
-#import "HudView.h"
 
 @class DraftViewController;
 @class FBSession;
@@ -35,7 +34,6 @@
 	NSString *twitPass;
 	UIAlertView *twitAlert;
 	UIAlertView *facebookAlert;
-	HudView *aHUD;
 	BOOL isDraftView;
 	DraftViewController *dvController;
 	TwitLogin *twitDialog;
@@ -58,7 +56,6 @@
 @property(nonatomic, strong) NSString *twitPass;
 @property(nonatomic, strong)  UIAlertView *twitAlert;
 @property(nonatomic, strong)  UIAlertView *facebookAlert;
-@property (nonatomic,strong) HudView *aHUD;
 @property (nonatomic,assign) BOOL isDraftView;
 @property (nonatomic,strong) DraftViewController *dvController;
 @property (nonatomic,strong) TwitLogin *twitDialog;

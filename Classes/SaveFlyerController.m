@@ -14,13 +14,12 @@
 #import "MyNavigationBar.h"
 #import "DraftViewController.h"
 #import "Common.h"
-#import "HudView.h"
 //#import "FBConnectGlobal.h"
 
 @implementation SaveFlyerController
 
 @synthesize twitterButton,mailButton,faceBookButton,uploadButton,ptController,dvController;
-@synthesize flyrImg,twitUser,twitPass,twitAlert,facebookAlert,aHUD,isDraftView;
+@synthesize flyrImg,twitUser,twitPass,twitAlert,facebookAlert,isDraftView;
 @synthesize twitMsg,twitDialog,flyrImgData,_session,alertTextField,imgName;
 //@synthesize navBar,twit;
 
@@ -80,8 +79,6 @@
     [super viewDidLoad];
     navBar.alpha = 0.6;
 	_session = nil;
-	
-	aHUD = [[HudView alloc]init];
     
 	UIImageView *imgView = [[UIImageView alloc]initWithFrame:CGRectMake(0,44 ,320, 416)];
 	imgView.image = flyrImg;
@@ -137,17 +134,6 @@
 	appDele.svController = self;
 	
     
-}
-
-- (void) killHUD
-{
-	[aHUD removeHud:self.view];
-	[aHUD.loadingView removeFromSuperview];
-}
-
-- (void) showHUD
-{
-	[aHUD loadingViewInView:self.view text:@"Uploading..."];
 }
 
 #pragma mark  Twitter PHOTO UPLOAD 
@@ -235,7 +221,6 @@
 -(void)uploadPhoto
 {
 	NSLog(@"facebook-uploaded");
-	[aHUD.loadingLabel setText:@"Uploaded..."];
 	[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(killHUD) userInfo:nil repeats:NO];
 	
 	NSDictionary *params = @{@"caption": @"Posted by SocialFlyr"}; 
@@ -382,9 +367,7 @@
          */
 	}
 	else if(sender == mailButton)
-	{	
-		[self showHUD];
-		[aHUD.loadingLabel setText:@"Please Wait..."];
+	{
 		[NSTimer scheduledTimerWithTimeInterval:0.4f target:self selector:@selector(showInlineMailClient) userInfo:nil repeats:NO];
 	}
 }
