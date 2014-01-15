@@ -40,35 +40,35 @@
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
     self.navigationItem.hidesBackButton = YES;
     
-    UIButton *helpButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)]autorelease];
+    UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [helpButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [helpButton setBackgroundImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
     [helpButton addTarget:self action:@selector(gohelp) forControlEvents:UIControlEventTouchUpInside];
     helpButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *helpBarButton = [[[UIBarButtonItem alloc] initWithCustomView:helpButton] autorelease];
+    UIBarButtonItem *helpBarButton = [[UIBarButtonItem alloc] initWithCustomView:helpButton];
     
    
-    UIButton *backButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)] autorelease];
+    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
     [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
     backButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *backBarButton = [[[UIBarButtonItem alloc] initWithCustomView:backButton] autorelease];
+    UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:backBarButton,helpBarButton,nil ]];
     
     
-    UIButton *createButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)] autorelease];
+    UIButton *createButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [createButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [createButton setBackgroundImage:[UIImage imageNamed:@"createButton"] forState:UIControlStateNormal];
     [createButton addTarget:self action:@selector(CreateNewFlyer) forControlEvents:UIControlEventTouchUpInside];
     createButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *createBarButton = [[[UIBarButtonItem alloc] initWithCustomView:createButton] autorelease];
+    UIBarButtonItem *createBarButton = [[UIBarButtonItem alloc] initWithCustomView:createButton];
     
     [self.navigationItem setRightBarButtonItem:createBarButton];
         
     
-    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-35, -6, 50, 50)] autorelease];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-35, -6, 50, 50)];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:TITLE_FONT size:18];
     label.textAlignment = UITextAlignmentCenter;
@@ -84,15 +84,7 @@
 
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 #pragma TableView Events
-
-
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
         return [category count];
@@ -181,9 +173,9 @@
         [self signOut];
         AccountController *actaController = [AccountController alloc];
         if(IS_IPHONE_5){
-            [[actaController initWithNibName:@"AcountViewControlleriPhone5" bundle:nil] autorelease];
+            [actaController initWithNibName:@"AcountViewControlleriPhone5" bundle:nil];
         }else{
-            [[actaController initWithNibName:@"AccountController" bundle:nil] autorelease];
+            [actaController initWithNibName:@"AccountController" bundle:nil];
         }
         [self.navigationController pushViewController:actaController animated:YES];
     }
@@ -258,7 +250,7 @@
         [picker setSubject:@"email feedback..."];
         
         // Set up recipients
-        NSMutableArray *toRecipients = [[[NSMutableArray alloc]init]autorelease];
+        NSMutableArray *toRecipients = [[NSMutableArray alloc]init];
         [toRecipients addObject:@"support@greenmtnlabs.com"];
         [picker setToRecipients:toRecipients];
         
@@ -266,7 +258,6 @@
         //[picker setMessageBody:emailBody isHTML:YES];
         
         [self presentModalViewController:picker animated:YES];
-        [picker release];
     }
 
 }
@@ -293,7 +284,7 @@
 
 
 -(void)gohelp{
-    HelpController *helpController = [[[HelpController alloc]initWithNibName:@"HelpController" bundle:nil] autorelease];
+    HelpController *helpController = [[HelpController alloc]initWithNibName:@"HelpController" bundle:nil];
     [self.navigationController pushViewController:helpController animated:NO];
 
 }

@@ -234,12 +234,12 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
         
         NSLog(@"User already Greeted !");
         if(IS_IPHONE_5){
-                accountController = [[[AccountController alloc]initWithNibName:@"AcountViewControlleriPhone5" bundle:nil] autorelease];
-            lauchController = [[[LauchViewController alloc]initWithNibName:@"LauchViewControllerIPhone5" bundle:nil] autorelease];
+                accountController = [[AccountController alloc]initWithNibName:@"AcountViewControlleriPhone5" bundle:nil];
+            lauchController = [[LauchViewController alloc]initWithNibName:@"LauchViewControllerIPhone5" bundle:nil];
 
         }else{
-            accountController = [[[AccountController alloc]initWithNibName:@"AccountController" bundle:nil] autorelease];
-            lauchController = [[[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil] autorelease];
+            accountController = [[AccountController alloc]initWithNibName:@"AccountController" bundle:nil];
+            lauchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
 
         }
         
@@ -387,14 +387,6 @@ if it exist then we call Merging Process
 
 
 #pragma mark -
-#pragma mark Memory management
-
-- (void)dealloc {
-    [lauchController release];
-	[navigationController release];
-	[window release];
-}
-
 
 @end
 

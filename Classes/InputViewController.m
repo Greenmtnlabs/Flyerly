@@ -33,30 +33,30 @@
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
     self.navigationItem.hidesBackButton = YES;
     
-    UIButton *backButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 25)] autorelease];
+    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 25)];
     [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [backButton setBackgroundImage:[UIImage imageNamed:@"crop"] forState:UIControlStateNormal];
     [backButton addTarget:self action:@selector(cancel) forControlEvents:UIControlEventTouchUpInside];
     backButton.showsTouchWhenHighlighted = YES;
     backButton.titleLabel.text = @"Cancel";
-    UIBarButtonItem *backBarButton = [[[UIBarButtonItem alloc] initWithCustomView:backButton] autorelease];
+    UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     
     [self.navigationItem setLeftBarButtonItem:backBarButton];
    
-    UIButton *editButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 25)] autorelease];
+    UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 25)];
     [editButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [editButton setBackgroundImage:[UIImage imageNamed:@"crop"] forState:UIControlStateNormal];
     [editButton addTarget:self action:@selector(post) forControlEvents:UIControlEventTouchUpInside];
     editButton.showsTouchWhenHighlighted = YES;
      editButton.titleLabel.text = @"Post";
-    UIBarButtonItem *editBarButton = [[[UIBarButtonItem alloc] initWithCustomView:editButton] autorelease];
+    UIBarButtonItem *editBarButton = [[UIBarButtonItem alloc] initWithCustomView:editButton];
     
     [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:editBarButton,nil ]];
     
        
     
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:backBarButton,nil ]];
-    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-35, -6, 50, 50)] autorelease];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-35, -6, 50, 50)];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:TITLE_FONT size:18];
     label.textAlignment = UITextAlignmentCenter;
@@ -102,16 +102,15 @@
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];
     [alert show];
-    [alert release];
 }
 
 - (void)makeTwitterPost:(ACAccount *)acct {
     
-    NSMutableDictionary *params = [[[NSMutableDictionary alloc] init] autorelease];
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     params[@"status"] = [NSString stringWithFormat:@"@%@ %@", sName, sMessage];
     
     // Build a twitter request
-    TWRequest *postRequest = [[[TWRequest alloc] initWithURL:[NSURL URLWithString:@"http://api.twitter.com/1/statuses/update.json"] parameters:params requestMethod:TWRequestMethodPOST] autorelease];
+    TWRequest *postRequest = [[TWRequest alloc] initWithURL:[NSURL URLWithString:@"http://api.twitter.com/1/statuses/update.json"] parameters:params requestMethod:TWRequestMethodPOST];
     
     // Post the request
     [postRequest setAccount:acct];
@@ -123,9 +122,6 @@
     
     [self showAlert:@"Thank you. Your feedback has been sent to @flyerlyapp on Twitter." message:@""];
     // Release stuff.
-    [sName release];
-    [sMessage release];
-    [arrayOfAccounts release];
     sName = nil;
     sMessage = nil;
     arrayOfAccounts = nil;

@@ -183,7 +183,7 @@ enum {
 
 -(void)viewWillAppear:(BOOL)animated{
     // set title
-    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-50, -6, 50, 50)] autorelease];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-50, -6, 50, 50)];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:TITLE_FONT size:18];
     label.textAlignment = UITextAlignmentCenter;
@@ -354,7 +354,6 @@ enum {
         
         //NSLog(@"locationDetails after: %@", locationDetails);
         NSLog(@"Before onBack");
-        [imageFileName release];
         [self onBack];
     }
 }
@@ -599,10 +598,6 @@ NSMutableDictionary *locationDetails;
     }
     
     return loctemp;
-}
-
-- (void)dealloc {
-    [Oldlocation release];
 }
 
 @end

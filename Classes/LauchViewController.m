@@ -40,7 +40,6 @@
 	ptController = [[PhotoController alloc]initWithNibName:@"PhotoController" bundle:nil];
      ptController.flyerNumber = -1;
 	[self.navigationController pushViewController:ptController animated:YES];
-	[ptController release];
 }
 
 -(IBAction)doNew:(id)sender{
@@ -49,7 +48,6 @@
 	ptController = [[PhotoController alloc]initWithNibName:@"PhotoController" bundle:nil];
     ptController.flyerNumber = -1;
 	[self.navigationController pushViewController:ptController animated:YES];
-	[ptController release];
 }
 //End
 
@@ -57,7 +55,6 @@
 -(void)loadFlyerView{
 	tpController = [[FlyrViewController alloc]initWithNibName:@"FlyrViewController" bundle:nil];
 	[self.navigationController pushViewController:tpController animated:YES];
-	[tpController release];
 }
 
 -(IBAction)doOpen:(id)sender{
@@ -70,7 +67,6 @@
 -(IBAction)doAbout:(id)sender{
     MainSettingViewController *mainsettingviewcontroller = [[MainSettingViewController alloc]initWithNibName:@"MainSettingViewController" bundle:nil] ;
     [self.navigationController pushViewController:mainsettingviewcontroller animated:YES];
-    [mainsettingviewcontroller release];
 }
 //End
 
@@ -376,7 +372,6 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
         }
         
         [self.navigationController pushViewController:draftViewController animated:YES];
-        [draftViewController release];
         //[self performSelector:@selector(deselect) withObject:nil afterDelay:0.2f];
     
     } else {
@@ -432,7 +427,6 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];
     [alert show];
-    [alert release];
 }
 
 - (void)makeTwitterPost:(ACAccount *)acct follow:(int)follow {
@@ -585,7 +579,6 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
         //Convert twitter username to email
         [self makeTwitterPost:account follow:actionSheet.tag];
     }
-    [actionSheet release];
     [self hideLoadingIndicator];
 }
 
@@ -609,14 +602,6 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
     
     // Remove liked status
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"FACEBOOK_LIKED"];
-
-    // show alert message
-    //UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Unliked"
-    //                                                 message:@"You unliked Flyerly. Where's the love?"
-    //                                                delegate:self
-    //                                       cancelButtonTitle:@"OK"
-    //                                       otherButtonTitles:nil] autorelease];
-    //[alert show];
 }
 
 - (void)facebookLikeViewDidLike:(FacebookLikeView *)aFacebookLikeView {
@@ -631,13 +616,6 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
     
     // Set like status
     [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"FACEBOOK_LIKED"];
-    
-    //UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Liked"
-    //                                                 message:@"You liked Flyerly. Thanks!"
-    //                                                delegate:self
-    //                                       cancelButtonTitle:@"OK"
-    //                                       otherButtonTitles:nil] autorelease];
-    //[alert show];
 }
 
 - (IBAction)showLikeButton {
@@ -774,121 +752,12 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
 
 }
 
-
-
-//////
-        /*
-        
-        FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-        [appDelegate.facebook requestWithGraphPath:@"me/likes" andDelegate:self];
-        
-        appDelegate.facebook.sessionDelegate = self;
-        
-        if([appDelegate.facebook isSessionValid]) {
-            [self.view addSubview:opaqueView];
-            [self.view  addSubview:crossButton];
-            
-            self.facebookLikeView.delegate = self;
-            self.facebookLikeView.href = [NSURL URLWithString:@"http://www.facebook.com/flyerlyapp"];
-            self.facebookLikeView.layout = @"button_count";
-            self.facebookLikeView.showFaces = NO;
-            [self.facebookLikeView load];
-         
-         
-            ////////*
-             crossButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 64, 25, 25)];
-             [crossButton setBackgroundImage:[UIImage imageNamed:@"cross"] forState:UIControlStateNormal];
-             [crossButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
-             
-             opaqueView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
-             [opaqueView setBackgroundColor:[UIColor darkGrayColor]];
-             opaqueView.alpha = 0.5;
-             
-             webview = [[UIWebView alloc] initWithFrame:CGRectMake(10, 74, 300, 315)];
-             NSString *urlAddress = @"http://www.facebook.com/flyerlyapp";
-             NSURL *url = [NSURL URLWithString:urlAddress];
-             NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
-             [webview loadRequest:requestObj];
-             
-             [self.view addSubview:opaqueView];
-             [self.view  addSubview:webview];
-             [self.view  addSubview:crossButton];
-                // likeButton.enabled = NO;
-
-           ////////*
-         
-            
-        } else {
-            
-            // [appDelegate.facebook authorize:@[@"read_stream",
-              //                                @"publish_stream", @"user_likes"]];
-        }
-    }else{
-        [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
-    }
-         
-         }
-
-
-
-
-
--(void)showAlert:(NSString *)title message:(NSString *)message{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
-                                                    message:message
-                                                   delegate:nil
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
-    [alert show];
-    [alert release];
-}
-
-         
-         -(void)request:(FBRequest *)request didLoad:(id)result{
-         
-         NSLog(@"Request received %@", result);
-         for (NSDictionary *likesData in result[@"data"]) {
-         
-         // Here we will get the facebook contacts
-         NSString *likeName = likesData[@"name"];
-         if([likeName isEqualToString:@"Flyerly"]){
-         [likeButton setSelected:YES];
-         return;
-         } else {
-         [likeButton setSelected:NO];
-         }
-         }
-         }
-       
-         
-*/
-
 -(IBAction)goBack{
     [opaqueView removeFromSuperview];
     [webview removeFromSuperview];
     [crossButton removeFromSuperview];
     
     [self.likeView setHidden:YES];
-    
-   // FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-   // [appDelegate.facebook requestWithGraphPath:@"me/likes" andDelegate:self];
 }
-
-
-
-
-
-#pragma mark Dealloc
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
-
-- (void)dealloc {
-	[spController release];
-    [photoArray release];
-
-}
-
 
 @end

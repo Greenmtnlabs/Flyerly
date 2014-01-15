@@ -121,7 +121,6 @@ BOOL frontCamera = NO;
     customPhotoController.callbackObject = photoController;
     customPhotoController.callbackOnComplete = @selector(onCompleteSelectingImage:);
     [photoController.navigationController pushViewController:customPhotoController animated:YES];
-    [customPhotoController release];
     [photoController dismissModalViewControllerAnimated:YES];
 }
 

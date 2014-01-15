@@ -112,7 +112,7 @@
         NSLog(@"Cant get image - %@",[myerror localizedDescription]);
     };
     
-    ALAssetsLibrary* assetslibrary = [[[ALAssetsLibrary alloc] init] autorelease];
+    ALAssetsLibrary* assetslibrary = [[ALAssetsLibrary alloc] init];
     [assetslibrary assetForURL:fileName
                    resultBlock:resultblock
                   failureBlock:failureblock];
@@ -363,14 +363,4 @@
 }
  */
 
-
-
-- (void)dealloc
-{
-    [image1  release];
-    [image2  release];
-    [image3  release];
-    [image4  release];
-    [controller release];
-}
 @end

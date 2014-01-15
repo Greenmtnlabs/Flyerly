@@ -84,7 +84,7 @@
 	imgView.image = flyrImg;
 	[self.view addSubview:imgView];
 	
-	twitterButton =[[UIButton buttonWithType:UIButtonTypeRoundedRect] autorelease ];
+	twitterButton =[UIButton buttonWithType:UIButtonTypeRoundedRect];
 	twitterButton.frame = CGRectMake(1, 400, 105, 59);
 	[twitterButton setBackgroundImage:[UIImage imageNamed:@"twit1.png"] forState:UIControlStateNormal];
 	[twitterButton setBackgroundImage:[UIImage imageNamed:@"twit.png"] forState:UIControlStateSelected];
@@ -209,7 +209,6 @@
 	CGAffineTransform myTransform = CGAffineTransformMakeTranslation(0.0, 75.0);
 	[twitAlert setTransform:myTransform];
 	[twitAlert show];
-	[twitAlert release];
 }
 
 -(void)callFacebookAlert{
@@ -246,9 +245,9 @@
 	picker.mailComposeDelegate = self;
 	[picker setSubject:@"Check out my SocialFlyr..."];
 	// Set up recipients
-	NSArray *toRecipients = [[[NSArray alloc]init]autorelease];
-	NSArray *ccRecipients =   [[[NSArray alloc]init]autorelease];
-	NSArray *bccRecipients =   [[[NSArray alloc]init]autorelease];
+	NSArray *toRecipients = [[NSArray alloc]init];
+	NSArray *ccRecipients =   [[NSArray alloc]init];
+	NSArray *bccRecipients =   [[NSArray alloc]init];
 	[picker setToRecipients:toRecipients];
 	[picker setCcRecipients:ccRecipients];	
 	[picker setBccRecipients:bccRecipients];
@@ -258,7 +257,6 @@
 	NSString *emailBody = @"";
 	[picker setMessageBody:emailBody isHTML:NO];
 	[self presentModalViewController:picker animated:YES];
-	[picker release];
 }
 
 -(void)dismiss
@@ -343,28 +341,7 @@
 			[fail show];
 		}
 	}
-	else if(sender == faceBookButton)
-	{
-        /*
-		FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
-		if(appDele._session)
-		{
-			
-			if(appDele.faceBookPermissionFlag == NO){
-				FBPermissionDialog *dialog = [[[FBPermissionDialog alloc] init] autorelease];
-				dialog.delegate = self;
-				dialog.permission = @"status_update";
-				[dialog show];
-			}
-			else{
-				[self callFacebookAlert];
-			}
-		}
-		else{
-			UIAlertView *fail = [[UIAlertView alloc]initWithTitle:@"Facebook" message:@"Authentication failed: \n Set username and password in Preferences" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-			[fail show];
-		}
-         */
+	else if(sender == faceBookButton) {
 	}
 	else if(sender == mailButton)
 	{
@@ -393,7 +370,6 @@
 	//FlyrAppDelegate *appDele =(FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
 	//[appDele.perDialog dismiss:YES];
 	[twitDialog dismiss:YES];
-	[navBar release];
 }
 
 - (void)dismissNavBar:(BOOL)animated {
@@ -417,14 +393,6 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-}
-
-- (void)dealloc 
-{
-	//[_session.delegates removeObject: self];
-	//[twitDialog release];
-	//[_session release];
-	[ptController release];
 }
 
 

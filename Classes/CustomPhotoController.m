@@ -19,14 +19,6 @@
 
 @synthesize scrollView, imageView, image, callbackObject, callbackOnComplete, galleryTable, moveUpButton;
 
-- (void)dealloc {
-    [galleryTable release];
-    [scrollView release];
-    [imageView release];
-    [moveUpButton release];
-    [callbackObject release];
-    [library release];
-}
 
 #pragma mark - Image Preparation
 
@@ -182,11 +174,9 @@
         image.size.height > imageView.frame.size.height ) {
         
         UIImage *tmpImage = [self scaleAndRotateImage:image size:imageView.frame.size];
-        [image release];
         image = tmpImage;
     } else {
         UIImage *tmpImage = [self scaleAndRotateImage:image size:image.size];
-        [image release];
         image = tmpImage;
     }
     
@@ -300,7 +290,7 @@ BOOL galleryExpanded = NO;
     [self.navigationItem setRightBarButtonItem:righBarButton];
     
 
-    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-70, -6, 50, 50)] autorelease];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-70, -6, 50, 50)];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:TITLE_FONT size:18];
     label.textAlignment = UITextAlignmentCenter;

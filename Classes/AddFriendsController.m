@@ -50,7 +50,7 @@ BOOL selectAll;
 
     
     
-    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(-28, -6, 50, 50)] autorelease];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-28, -6, 50, 50)];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:TITLE_FONT size:18];
     label.textAlignment = UITextAlignmentCenter;
@@ -82,7 +82,7 @@ BOOL selectAll;
 
 
 -(void)loadHelpController{
-    HelpController *helpController = [[[HelpController alloc]initWithNibName:@"HelpController" bundle:nil] autorelease];
+    HelpController *helpController = [[HelpController alloc]initWithNibName:@"HelpController" bundle:nil];
     [self.navigationController pushViewController:helpController animated:NO];
 }
 
@@ -112,10 +112,8 @@ BOOL selectAll;
     }
     
     selectAll = YES;
-    [self.deviceContactItems release];
     self.deviceContactItems = nil;
     self.deviceContactItems = [[NSMutableArray alloc] init];
-    [selectedIdentifierDictionary release];
     selectedIdentifierDictionary = nil;
     
     selectedTab = CONTACTS_TAB;
@@ -243,17 +241,12 @@ BOOL selectAll;
             }
         }
         
-        //[contactsArray addObject:dOfPerson];
-        //CFRelease(ref);
-        //CFRelease(firstName);
-        //CFRelease(lastName);
     }
     
     // Reload table data after all the contacts get loaded
     contactBackupArray = nil;
     contactBackupArray = contactsArray;
     [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
-    //[self.uiTableView reloadData];
 }
 
 /**
@@ -270,10 +263,8 @@ BOOL selectAll;
         //}
         
         selectAll = YES;
-        [self.deviceContactItems release];
         self.deviceContactItems = nil;
         self.deviceContactItems = [[NSMutableArray alloc] init];
-        [selectedIdentifierDictionary release];
         selectedIdentifierDictionary = nil;
         
         selectedTab = FACEBOOK_TAB;
@@ -407,7 +398,6 @@ BOOL selectAll;
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];
     [alert show];
-    [alert release];
 }
 
 int totalCount = 0;
@@ -482,10 +472,8 @@ int totalCount = 0;
         }
         
         selectAll = YES;
-        [self.deviceContactItems release];
         self.deviceContactItems = nil;
         self.deviceContactItems = [[NSMutableArray alloc] init];
-        [selectedIdentifierDictionary release];
         selectedIdentifierDictionary = nil;
         
         
@@ -648,17 +636,16 @@ int totalCount = 0;
         NSLog(@"Twitter response, HTTP response: %i", [urlResponse statusCode]);
     }];
     
-    [arrayOfAccounts release];
     arrayOfAccounts = nil;
 }
 
 - (void)makeTwitterPost:(ACAccount *)acct {
     
-    NSMutableDictionary *params = [[[NSMutableDictionary alloc] init] autorelease];
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     params[@"status"] = [NSString stringWithFormat:@"@%@ %@", sName, sMessage];
     
     // Build a twitter request
-    TWRequest *postRequest = [[[TWRequest alloc] initWithURL:[NSURL URLWithString:@"http://api.twitter.com/1/statuses/update.json"] parameters:params requestMethod:TWRequestMethodPOST] autorelease];
+    TWRequest *postRequest = [[TWRequest alloc] initWithURL:[NSURL URLWithString:@"http://api.twitter.com/1/statuses/update.json"] parameters:params requestMethod:TWRequestMethodPOST];
     
     // Post the request
     [postRequest setAccount:acct];
@@ -673,9 +660,6 @@ int totalCount = 0;
     }];
     
     // Release stuff.
-    [sName release];
-    [sMessage release];
-    [arrayOfAccounts release];
     sName = nil;
     sMessage = nil;
     arrayOfAccounts = nil;
@@ -1274,10 +1258,6 @@ NSMutableDictionary *selectedIdentifierDictionary;
         }
     }
     
-    //NSSortDescriptor *sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES] autorelease];
-    //NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
-    //sortedArray = [contactsArray sortedArrayUsingDescriptors:sortDescriptors];
-    
     if(selectedTab == CONTACTS_TAB)
         contactsArray = filteredArray;
     else if (selectedTab == FACEBOOK_TAB)
@@ -1329,16 +1309,5 @@ NSMutableDictionary *selectedIdentifierDictionary;
         }
     }
 }
-
-- (void)dealloc {
-    
-    
-    
-    [contactBackupArray release];
-    [facebookBackupArray release];
-    [twitterBackupArray release];
-    
-}
-
 
 @end
