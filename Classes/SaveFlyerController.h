@@ -10,7 +10,6 @@
 #import <MessageUI/MessageUI.h>
 #import "MyNavigationBar.h"
 #import "PhotoController.h"
-#import "TwitLogin.h"
 #import <MessageUI/MessageUI.h>
 
 @class DraftViewController;
@@ -36,7 +35,6 @@
 	UIAlertView *facebookAlert;
 	BOOL isDraftView;
 	DraftViewController *dvController;
-	TwitLogin *twitDialog;
 	NSData *flyrImgData;
 	UITextField *alertTextField ;
 	FBRequest *uploadPhotoRequest;
@@ -58,7 +56,6 @@
 @property(nonatomic, strong)  UIAlertView *facebookAlert;
 @property (nonatomic,assign) BOOL isDraftView;
 @property (nonatomic,strong) DraftViewController *dvController;
-@property (nonatomic,strong) TwitLogin *twitDialog;
 @property (nonatomic,strong)  NSData *flyrImgData;
 @property (nonatomic,strong)  FBSession* _session;
 @property (nonatomic,strong)  UITextField *alertTextField;
@@ -72,6 +69,5 @@
 - (void)dismissNavBar:(BOOL)animated;
 -(IBAction)disableBack;
 -(void)enableBack;
-//-(IBAction)createTwitLogin:(id)sender;
 @end
 

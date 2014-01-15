@@ -20,7 +20,7 @@
 
 @synthesize twitterButton,mailButton,faceBookButton,uploadButton,ptController,dvController;
 @synthesize flyrImg,twitUser,twitPass,twitAlert,facebookAlert,isDraftView;
-@synthesize twitMsg,twitDialog,flyrImgData,_session,alertTextField,imgName;
+@synthesize twitMsg,flyrImgData,_session,alertTextField,imgName;
 //@synthesize navBar,twit;
 
 
@@ -349,29 +349,6 @@
 	}
 }
 
--(IBAction)disableBack{
-	//[self.navBar setUserInteractionEnabled:NO];
-}
-
--(void)enableBack{
-	//[self.navBar setUserInteractionEnabled:YES];
-}
-
-
-//- (void)session:(FBSession*)session didLogin:(FBUID)uid{
-//	NSLog(@"45");
-	
-	//FlyrAppDelegate *appDele = [[UIApplication sharedApplication]delegate];
-	//appDele._session = _session;
-//}
-
-
-- (void)postDismissCleanup {
-	//FlyrAppDelegate *appDele =(FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
-	//[appDele.perDialog dismiss:YES];
-	[twitDialog dismiss:YES];
-}
-
 - (void)dismissNavBar:(BOOL)animated {
 	if (animated) {
 		[UIView beginAnimations:nil context:nil];
@@ -380,20 +357,7 @@
 		[UIView setAnimationDidStopSelector:@selector(postDismissCleanup)];
 		navBar.alpha = 0;
 		[UIView commitAnimations];
-	} else {
-		[self postDismissCleanup];
 	}
 }
-
--(void)viewWillDisappear:(BOOL)animated{
-	[super viewWillDisappear:YES];
-	//[self dismissNavBar:YES];
-	//[self.navigationController popToRootViewControllerAnimated:YES];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
 
 @end
