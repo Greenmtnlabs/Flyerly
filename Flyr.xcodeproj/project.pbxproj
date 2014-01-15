@@ -38,9 +38,6 @@
 		0DF3A53C108E0E5C00D6C887 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DF3A53B108E0E5C00D6C887 /* CoreLocation.framework */; };
 		0DF3A540108E0E5C00D6C887 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DF3A53F108E0E5C00D6C887 /* SystemConfiguration.framework */; };
 		0DF3A542108E0E5C00D6C887 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DF3A541108E0E5C00D6C887 /* libsqlite3.0.dylib */; settings = {ATTRIBUTES = (Weak, ); }; };
-		0DFA8B3610AD851300F779CA /* GTMIPhoneUnitTestDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DFA8B3010AD851300F779CA /* GTMIPhoneUnitTestDelegate.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		0DFA8B3710AD851300F779CA /* GTMSenTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DFA8B3310AD851300F779CA /* GTMSenTestCase.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		0DFA8B3810AD851300F779CA /* ImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DFA8B3510AD851300F779CA /* ImageCache.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0DFC52C810956F3D00B18478 /* homeScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DFC52C610956F3D00B18478 /* homeScreen.png */; };
 		0DFC531E109576AB00B18478 /* LauchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DFC5317109576AB00B18478 /* LauchViewController.xib */; };
 		0DFC531F109576AB00B18478 /* LoginController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DFC5318109576AB00B18478 /* LoginController.xib */; };
@@ -1325,14 +1322,6 @@
 		0DF3A53B108E0E5C00D6C887 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		0DF3A53F108E0E5C00D6C887 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		0DF3A541108E0E5C00D6C887 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
-		0DFA8B2E10AD851300F779CA /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
-		0DFA8B2F10AD851300F779CA /* GTMIPhoneUnitTestDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMIPhoneUnitTestDelegate.h; sourceTree = "<group>"; };
-		0DFA8B3010AD851300F779CA /* GTMIPhoneUnitTestDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMIPhoneUnitTestDelegate.m; sourceTree = "<group>"; };
-		0DFA8B3110AD851300F779CA /* GTMObjectSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMObjectSingleton.h; sourceTree = "<group>"; };
-		0DFA8B3210AD851300F779CA /* GTMSenTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMSenTestCase.h; sourceTree = "<group>"; };
-		0DFA8B3310AD851300F779CA /* GTMSenTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMSenTestCase.m; sourceTree = "<group>"; };
-		0DFA8B3410AD851300F779CA /* ImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCache.h; sourceTree = "<group>"; };
-		0DFA8B3510AD851300F779CA /* ImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCache.m; sourceTree = "<group>"; };
 		0DFC52C610956F3D00B18478 /* homeScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = homeScreen.png; sourceTree = "<group>"; };
 		0DFC5317109576AB00B18478 /* LauchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = LauchViewController.xib; path = Classes/LauchViewController.xib; sourceTree = "<group>"; };
 		0DFC5318109576AB00B18478 /* LoginController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = LoginController.xib; path = Classes/LoginController.xib; sourceTree = "<group>"; };
@@ -2797,7 +2786,6 @@
 				0FE0BDD11758BBB900C4D78D /* InAppPurchase */,
 				0FF135A6174FC85600B39FCA /* Flurry */,
 				0FEDD769174A918C00DF71C0 /* Crittercism */,
-				0DFA8B2D10AD851300F779CA /* imageCache */,
 				0D8571EB1090542B00622AB1 /* MyCustomCell.h */,
 				0D8571EC1090542B00622AB1 /* MyCustomCell.m */,
 			);
@@ -3262,21 +3250,6 @@
 				65C7A51A1721A06B003F1A84 /* white_bg_thumbnail@2x.png */,
 			);
 			path = Data;
-			sourceTree = "<group>";
-		};
-		0DFA8B2D10AD851300F779CA /* imageCache */ = {
-			isa = PBXGroup;
-			children = (
-				0DFA8B2E10AD851300F779CA /* GTMDefines.h */,
-				0DFA8B2F10AD851300F779CA /* GTMIPhoneUnitTestDelegate.h */,
-				0DFA8B3010AD851300F779CA /* GTMIPhoneUnitTestDelegate.m */,
-				0DFA8B3110AD851300F779CA /* GTMObjectSingleton.h */,
-				0DFA8B3210AD851300F779CA /* GTMSenTestCase.h */,
-				0DFA8B3310AD851300F779CA /* GTMSenTestCase.m */,
-				0DFA8B3410AD851300F779CA /* ImageCache.h */,
-				0DFA8B3510AD851300F779CA /* ImageCache.m */,
-			);
-			path = imageCache;
 			sourceTree = "<group>";
 		};
 		0F7FC383175CE261009DEB08 /* AsyncImageView */ = {
@@ -5680,10 +5653,7 @@
 				E8C7C36910976BFC0064935A /* SaveFlyerController.m in Sources */,
 				200384741875A357008909F9 /* PresetFilterViewController.m in Sources */,
 				202C4801187D6E4B00FE0975 /* BitlyTwitterOAuthManager.m in Sources */,
-				0DFA8B3610AD851300F779CA /* GTMIPhoneUnitTestDelegate.m in Sources */,
-				0DFA8B3710AD851300F779CA /* GTMSenTestCase.m in Sources */,
 				49B8897D1886524D003766AD /* LoadingView.m in Sources */,
-				0DFA8B3810AD851300F779CA /* ImageCache.m in Sources */,
 				202C47FF187D6E4B00FE0975 /* BitlyTweetSheetAccountSelector.m in Sources */,
 				65E2615D171C2FA800C485B5 /* AddFriendsController.m in Sources */,
 				65E26188171C5C9900C485B5 /* AddFriendItem.m in Sources */,
