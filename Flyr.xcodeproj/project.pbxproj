@@ -21,7 +21,6 @@
 		0D74CA081095EE5F00179C4F /* facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D74CA071095EE5F00179C4F /* facebook.png */; };
 		0D8571ED1090542B00622AB1 /* MyCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8571EC1090542B00622AB1 /* MyCustomCell.m */; };
 		0DE0243110959098005F699B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DE0243010959098005F699B /* MessageUI.framework */; };
-		0DE024F81095A0C9005F699B /* UIImageExtras.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DE024F71095A0C9005F699B /* UIImageExtras.m */; };
 		0DE1F27F109883A20012819A /* facebook1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DE1F27A109883A20012819A /* facebook1.png */; };
 		0DE1F280109883A20012819A /* mail.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DE1F27B109883A20012819A /* mail.png */; };
 		0DE1F281109883A20012819A /* mail1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DE1F27C109883A20012819A /* mail1.png */; };
@@ -29,7 +28,6 @@
 		0DE1F283109883A20012819A /* twit1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DE1F27E109883A20012819A /* twit1.png */; };
 		0DEE01A0108ED97400967DA5 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DEE019F108ED97400967DA5 /* QuartzCore.framework */; };
 		0DEE01A2108ED97400967DA5 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DEE01A1108ED97400967DA5 /* Security.framework */; };
-		0DEE03EE108F41D600967DA5 /* MyNetworkController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DEE03ED108F41D600967DA5 /* MyNetworkController.m */; };
 		0DEE05D0108F538000967DA5 /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DEE05CF108F538000967DA5 /* close.png */; };
 		0DF258FA10B194A000397105 /* lauchViewbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DF258F910B194A000397105 /* lauchViewbutton.png */; };
 		0DF3A2C5108DF1D200D6C887 /* LauchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DF3A2C2108DF1D200D6C887 /* LauchViewController.m */; };
@@ -1307,8 +1305,6 @@
 		0D8571EB1090542B00622AB1 /* MyCustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyCustomCell.h; path = ../Classes/MyCustomCell.h; sourceTree = "<group>"; };
 		0D8571EC1090542B00622AB1 /* MyCustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyCustomCell.m; path = ../Classes/MyCustomCell.m; sourceTree = "<group>"; };
 		0DE0243010959098005F699B /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		0DE024F61095A0C9005F699B /* UIImageExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIImageExtras.h; path = ../Classes/UIImageExtras.h; sourceTree = "<group>"; };
-		0DE024F71095A0C9005F699B /* UIImageExtras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIImageExtras.m; path = ../Classes/UIImageExtras.m; sourceTree = "<group>"; };
 		0DE1F27A109883A20012819A /* facebook1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook1.png; sourceTree = "<group>"; };
 		0DE1F27B109883A20012819A /* mail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mail.png; sourceTree = "<group>"; };
 		0DE1F27C109883A20012819A /* mail1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mail1.png; sourceTree = "<group>"; };
@@ -1316,8 +1312,6 @@
 		0DE1F27E109883A20012819A /* twit1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twit1.png; sourceTree = "<group>"; };
 		0DEE019F108ED97400967DA5 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		0DEE01A1108ED97400967DA5 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		0DEE03EC108F41D600967DA5 /* MyNetworkController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyNetworkController.h; path = ../Classes/MyNetworkController.h; sourceTree = "<group>"; };
-		0DEE03ED108F41D600967DA5 /* MyNetworkController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyNetworkController.m; path = ../Classes/MyNetworkController.m; sourceTree = "<group>"; };
 		0DEE05CF108F538000967DA5 /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close.png; sourceTree = "<group>"; };
 		0DF258F910B194A000397105 /* lauchViewbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lauchViewbutton.png; sourceTree = "<group>"; };
 		0DF3A2C1108DF1D200D6C887 /* LauchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LauchViewController.h; sourceTree = "<group>"; };
@@ -2804,12 +2798,8 @@
 				0FF135A6174FC85600B39FCA /* Flurry */,
 				0FEDD769174A918C00DF71C0 /* Crittercism */,
 				0DFA8B2D10AD851300F779CA /* imageCache */,
-				0DE024F61095A0C9005F699B /* UIImageExtras.h */,
-				0DE024F71095A0C9005F699B /* UIImageExtras.m */,
 				0D8571EB1090542B00622AB1 /* MyCustomCell.h */,
 				0D8571EC1090542B00622AB1 /* MyCustomCell.m */,
-				0DEE03EC108F41D600967DA5 /* MyNetworkController.h */,
-				0DEE03ED108F41D600967DA5 /* MyNetworkController.m */,
 			);
 			path = ExternalFrameworks;
 			sourceTree = "<group>";
@@ -5676,7 +5666,6 @@
 				0DF3A2C6108DF1D200D6C887 /* PhotoController.m in Sources */,
 				49B88989188652A2003766AD /* FacebookLikeView.m in Sources */,
 				202C47FE187D6E4B00FE0975 /* BitlyTweetSheet.m in Sources */,
-				0DEE03EE108F41D600967DA5 /* MyNetworkController.m in Sources */,
 				0D8571ED1090542B00622AB1 /* MyCustomCell.m in Sources */,
 				0D4903BB1091893B00855C30 /* FlyrViewController.m in Sources */,
 				202C47FC187D6E4B00FE0975 /* BitlyRequest.m in Sources */,
@@ -5687,7 +5676,6 @@
 				202C4803187D6E4B00FE0975 /* BitlyURLShortener.m in Sources */,
 				0DFC5322109576AB00B18478 /* SettingViewController.m in Sources */,
 				202C482D187D9DAB00FE0975 /* UIImage+NBUAdditions.m in Sources */,
-				0DE024F81095A0C9005F699B /* UIImageExtras.m in Sources */,
 				E8F2E155109659E600DFA7E8 /* MyNavigationBar.m in Sources */,
 				E8C7C36910976BFC0064935A /* SaveFlyerController.m in Sources */,
 				200384741875A357008909F9 /* PresetFilterViewController.m in Sources */,
