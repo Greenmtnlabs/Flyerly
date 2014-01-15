@@ -70,60 +70,6 @@
 [UIImage imageNamed:@"T48.jpg"],\
 nil]
 
-/*
-#define ICON_ARRAY [NSArray arrayWithObjects:\
-[UIImage imageNamed:@"l0.jpg"],\
-[UIImage imageNamed:@"I1.jpg"],\
-[UIImage imageNamed:@"I2.jpg"],\
-[UIImage imageNamed:@"I3.jpg"],\
-[UIImage imageNamed:@"I4.jpg"],\
-[UIImage imageNamed:@"I5.jpg"],\
-[UIImage imageNamed:@"I6.jpg"],\
-[UIImage imageNamed:@"I7.jpg"],\
-[UIImage imageNamed:@"I8.jpg"],\
-[UIImage imageNamed:@"I9.jpg"],\
-[UIImage imageNamed:@"I10.jpg"],\
-[UIImage imageNamed:@"I11.jpg"],\
-[UIImage imageNamed:@"I12.jpg"],\
-[UIImage imageNamed:@"I13.jpg"],\
-[UIImage imageNamed:@"I14.jpg"],\
-[UIImage imageNamed:@"I15.jpg"],\
-[UIImage imageNamed:@"I16.jpg"],\
-[UIImage imageNamed:@"I17.jpg"],\
-[UIImage imageNamed:@"I18.jpg"],\
-[UIImage imageNamed:@"I19.jpg"],\
-[UIImage imageNamed:@"I20.jpg"],\
-[UIImage imageNamed:@"I21.jpg"],\
-[UIImage imageNamed:@"I22.jpg"],\
-[UIImage imageNamed:@"I23.jpg"],\
-[UIImage imageNamed:@"I24.jpg"],\
-[UIImage imageNamed:@"I25.jpg"],\
-[UIImage imageNamed:@"I26.jpg"],\
-[UIImage imageNamed:@"I27.jpg"],\
-[UIImage imageNamed:@"I28.jpg"],\
-[UIImage imageNamed:@"I29.jpg"],\
-[UIImage imageNamed:@"I30.jpg"],\
-[UIImage imageNamed:@"I31.jpg"],\
-[UIImage imageNamed:@"I32.jpg"],\
-[UIImage imageNamed:@"I33.jpg"],\
-[UIImage imageNamed:@"I34.jpg"],\
-[UIImage imageNamed:@"I35.jpg"],\
-[UIImage imageNamed:@"I36.jpg"],\
-[UIImage imageNamed:@"I37.jpg"],\
-[UIImage imageNamed:@"I38.jpg"],\
-[UIImage imageNamed:@"I39.jpg"],\
-[UIImage imageNamed:@"I40.jpg"],\
-[UIImage imageNamed:@"I41.jpg"],\
-[UIImage imageNamed:@"I42.jpg"],\
-[UIImage imageNamed:@"I43.jpg"],\
-[UIImage imageNamed:@"I44.jpg"],\
-[UIImage imageNamed:@"I45.jpg"],\
-[UIImage imageNamed:@"I46.jpg"],\
-[UIImage imageNamed:@"I47.jpg"],\
-[UIImage imageNamed:@"I48.jpg"],\
-nil]
-*/
-
 #define ICON_ARRAY [NSArray arrayWithObjects:\
 [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"icon0"] ofType:@"jpg"],\
 [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"icon1"] ofType:@"jpg"],\
@@ -286,13 +232,6 @@ nil]
 #define ADD_MORE_SYMBOLTAB 2
 #define ADD_MORE_ICONTAB 3
 #define ARRANGE_LAYERTAB 4
-
-//
-//#define FONT6_PRODUCT_ID @"com.flyerly.font6"
-//#define FONT7_PRODUCT_ID @"com.flyerly.font7"
-
-/*#define FONT_ARRAY [NSArray arrayWithObjects:@"Courier",@"Courier-BoldOblique",@"Courier-Oblique",@"Courier-Bold",@"ArialMT",@"Arial-BoldMT",@"Arial-BoldItalicMT",@"Arial-ItalicMT",@"STHeitiTC-Light",@"STHeitiTC-Medium",@"AppleGothic",@"CourierNewPS-BoldMT",@"CourierNewPS-ItalicMT",@"CourierNewPS-BoldItalicMT",@"CourierNewPSMT",@"Zapfino",@"HiraKakuProN-W6",@"ArialUnicodeMS",@"STHeitiSC-Medium",@"STHeitiSC-Light",@"AmericanTypewriter",@"AmericanTypewriter-Bold",@"Helvetica-Oblique",@"Helvetica-BoldOblique",@"Helvetica",@"Helvetica-Bold",@"MarkerFelt-Thin",@"HelveticaNeue",@"HelveticaNeue-Bold",@"DBLCDTempBlack",@"Verdana-Bold",@"Verdana-BoldItalic",@"Verdana",@"Verdana-Italic",@"TimesNewRomanPSMT",@"TimesNewRomanPS-BoldMT",@"TimesNewRomanPS-BoldItalicMT",@"TimesNewRomanPS-ItalicMT",@"Georgia-Bold",@"Georgia",@"Georgia-BoldItalic",@"Georgia-Italic",@"STHeitiJ-Medium",@"STHeitiJ-Light",@"ArialRoundedMTBold",@"TrebuchetMS-Italic",@"TrebuchetMS",@"Trebuchet-BoldItalic",@"TrebuchetMS-Bold",@"STHeitiK-Medium",@"STHeitiK-Light",nil]
- */
 
 // Button font
 #define BUTTON_FONT @"Symbol"

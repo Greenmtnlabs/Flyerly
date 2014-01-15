@@ -229,12 +229,10 @@
 		0FCC3A1C177D8C5C0046484C /* settings2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FCC3A1A177D8C5B0046484C /* settings2.png */; };
 		0FCC3A1D177D8C5C0046484C /* settings2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FCC3A1B177D8C5B0046484C /* settings2@2x.png */; };
 		0FCC3A28177DD3080046484C /* LocationItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FCC3A27177DD3080046484C /* LocationItem.xib */; };
-		0FCC3A2B177DD35D0046484C /* LocationItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FCC3A2A177DD35D0046484C /* LocationItem.m */; };
 		0FCC3A2D177DD8BF0046484C /* LocationController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FCC3A2C177DD8BF0046484C /* LocationController.xib */; };
 		0FCDA58C1769BED200625235 /* pencil_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FCDA58A1769BED200625235 /* pencil_blue.png */; };
 		0FCDA58D1769BED200625235 /* pencil_blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FCDA58B1769BED200625235 /* pencil_blue@2x.png */; };
 		0FD247D7178453C2003CA6DD /* SearchLocationItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FD247D6178453C2003CA6DD /* SearchLocationItem.xib */; };
-		0FD247DA1784547E003CA6DD /* SearchLocationItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FD247D91784547E003CA6DD /* SearchLocationItem.m */; };
 		0FD2C405178FFCDE00257E33 /* undo.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FD2C401178FFCDE00257E33 /* undo.png */; };
 		0FD2C406178FFCDE00257E33 /* undo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FD2C402178FFCDE00257E33 /* undo@2x.png */; };
 		0FD78050177B398800DF5060 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FD7804D177B398800DF5060 /* AudioToolbox.framework */; };
@@ -1517,14 +1515,10 @@
 		0FCC3A1A177D8C5B0046484C /* settings2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings2.png; sourceTree = "<group>"; };
 		0FCC3A1B177D8C5B0046484C /* settings2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings2@2x.png"; sourceTree = "<group>"; };
 		0FCC3A27177DD3080046484C /* LocationItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocationItem.xib; sourceTree = "<group>"; };
-		0FCC3A29177DD35D0046484C /* LocationItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationItem.h; sourceTree = "<group>"; };
-		0FCC3A2A177DD35D0046484C /* LocationItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationItem.m; sourceTree = "<group>"; };
 		0FCC3A2C177DD8BF0046484C /* LocationController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocationController.xib; sourceTree = "<group>"; };
 		0FCDA58A1769BED200625235 /* pencil_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pencil_blue.png; sourceTree = "<group>"; };
 		0FCDA58B1769BED200625235 /* pencil_blue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pencil_blue@2x.png"; sourceTree = "<group>"; };
 		0FD247D6178453C2003CA6DD /* SearchLocationItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchLocationItem.xib; sourceTree = "<group>"; };
-		0FD247D81784547E003CA6DD /* SearchLocationItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchLocationItem.h; sourceTree = "<group>"; };
-		0FD247D91784547E003CA6DD /* SearchLocationItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchLocationItem.m; sourceTree = "<group>"; };
 		0FD2C401178FFCDE00257E33 /* undo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = undo.png; sourceTree = "<group>"; };
 		0FD2C402178FFCDE00257E33 /* undo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "undo@2x.png"; sourceTree = "<group>"; };
 		0FD7804D177B398800DF5060 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -2738,10 +2732,6 @@
 				0FEF2DA8174E66FC00FDD8C9 /* HelpController.m */,
 				0F7F02C1176616B000FC750F /* FlyerOverlayController.h */,
 				0F7F02C2176616B100FC750F /* FlyerOverlayController.m */,
-				0FCC3A29177DD35D0046484C /* LocationItem.h */,
-				0FCC3A2A177DD35D0046484C /* LocationItem.m */,
-				0FD247D81784547E003CA6DD /* SearchLocationItem.h */,
-				0FD247D91784547E003CA6DD /* SearchLocationItem.m */,
 				0F80C384178561C200D36795 /* AccountController.h */,
 				0F80C385178561C200D36795 /* AccountController.m */,
 				0F80C389178578CB00D36795 /* RegisterController.h */,
@@ -5666,9 +5656,7 @@
 				202C4829187D7A6B00FE0975 /* CJSONSerializer.m in Sources */,
 				202C4800187D6E4B00FE0975 /* BitlyTwitterOAuthAccount.m in Sources */,
 				202C4826187D7A6B00FE0975 /* CDataScanner_Extensions.m in Sources */,
-				0FCC3A2B177DD35D0046484C /* LocationItem.m in Sources */,
 				20619831187EA22700360DBF /* UINavigationItem+Additions.m in Sources */,
-				0FD247DA1784547E003CA6DD /* SearchLocationItem.m in Sources */,
 				0F80C386178561C200D36795 /* AccountController.m in Sources */,
 				0F80C38B178578CB00D36795 /* RegisterController.m in Sources */,
 				0F80C3901785813E00D36795 /* SigninController.m in Sources */,
