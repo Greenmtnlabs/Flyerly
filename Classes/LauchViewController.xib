@@ -32,11 +32,12 @@
             <subviews>
                 <view contentMode="scaleToFill" id="474">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinY="YES" heightSizable="YES"/>
+                    <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Zmain_screenbg.png" id="592">
                             <rect key="frame" x="0.0" y="19" width="321" height="412"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <inset key="insetFor6xAndEarlier" minX="0.0" minY="0.0" maxX="0.0" maxY="2"/>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="three_buttons.png" id="595">
                             <rect key="frame" x="0.0" y="62" width="320" height="61"/>
@@ -238,6 +239,7 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
         </view>
     </objects>
     <resources>

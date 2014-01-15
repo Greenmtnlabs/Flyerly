@@ -153,8 +153,6 @@
 @property(nonatomic, strong) NSMutableArray *cpyPhotoLayersArray;
 
 @property (nonatomic, strong) MyNavigationBar *navBar;
-
-@property(nonatomic, strong)  UIImageView *imgView;
 @property (nonatomic,strong)  UIImageView *photoImgView;
 @property(nonatomic, strong)  UIImageView *symbolImgView;
 @property(nonatomic, strong)  UIImageView *iconImgView;
@@ -226,9 +224,11 @@
 @property (nonatomic, assign) int flyerNumber;
 
 
+@property(nonatomic, strong) IBOutlet UIImageView *imgView;
+@property(nonatomic, strong) IBOutlet UIView *contextView;
+
+
 -(void)loadCustomPhotoLibrary;
-- (void)showHUD;
-- (void)killHUD;
 -(void) chooseTemplate;
 -(void) chooseEdit;
 -(void) MyEdit;

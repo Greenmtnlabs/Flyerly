@@ -38,6 +38,8 @@
 @synthesize cpyTextLabelLayersArray,cpyIconLayersArray,cpyPhotoLayersArray,cpySymbolLayersArray;
 @synthesize flyerNumber;
 
+@synthesize contextView;
+
 int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track selected Tab on Add More Layer screen
 int symbolLayerCount = 0; // Symbol layer count to set tag value
 int iconLayerCount = 0; // Icon layer count to set tag value
@@ -543,7 +545,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 
 -(void)viewDidLoad{
 	[super viewDidLoad];
- 
+    
     globle = [Singleton RetrieveSingleton];
     [self.view setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
     navBar.alpha =ALPHA1;
@@ -591,9 +593,6 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 											 selector:@selector(handleMemoryWarning:)
 												 name:@"UIApplicationMemoryWarningNotification"
 											   object:nil];
-	
-	navBar= [[MyNavigationBar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
-	//[self.view addSubview:navBar];
     
     // Create right bar button
     UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 31, 30)];
@@ -607,9 +606,14 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 	selectedColor = [UIColor blackColor];	
 	selectedText = @"";
 	selectedSize = 16;
+    
+    
+    //Set Initial Background Image For Flyer New or Edit
     if(!selectedTemplate){
         selectedTemplate  = [UIImage imageNamed:@"main_area_bg"];
     }
+    imgView.image = selectedTemplate;
+    
 	lableLocation = CGPointMake(160,100);
 	    
 	// Create Main Image View
@@ -621,7 +625,9 @@ int photoLayerCount = 0; // Photo layer count to set tag value
         takePhotoLabel = [[UILabel alloc] initWithFrame:CGRectMake(80, 378, 80, 30)];
         cameraRollButton = [[UIButton alloc] initWithFrame:CGRectMake(160, 373, 135, 40)];
         cameraRollLabel = [[UILabel alloc] initWithFrame:CGRectMake(220, 378, 80, 30)];
-        templateScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(-320, 413,320,130)];
+        
+        templateScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,320,130)];
+        
         addMoreLayerOrSaveFlyerLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 405, 310, 63)];
         takeOrAddPhotoLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 405, 310, 43)];
     }else{
@@ -678,7 +684,8 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 	templateScrollView.showsHorizontalScrollIndicator = NO;
 	templateScrollView.showsVerticalScrollIndicator = NO;
 	templateScrollView.alpha = ALPHA1;
-	[self.view addSubview:templateScrollView];
+    
+	[self.contextView addSubview:templateScrollView];
 	[self layoutScrollImages:templateScrollView scrollWidth:templateScrollWidth scrollHeight:templateScrollHeight];
 	   
 	imgPickerFlag =1;
@@ -694,6 +701,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
  */
 -(void)resetImageview{
     
+    /*
     // Remo all views inside image view
     NSArray *viewsToRemove = [self.imgView subviews];
     for (UIView *v in viewsToRemove) {
@@ -710,8 +718,9 @@ int photoLayerCount = 0; // Photo layer count to set tag value
         imgView = [[UIImageView alloc]initWithFrame:CGRectMake(5, 44, 310, 309)];
     }
     
-    // Set template image
-	imgView.image = selectedTemplate;
+     // Set template image
+     imgView.image = selectedTemplate;
+
     
     // Setting arrays if in edit mode
     if(symbolLayersArray){
@@ -737,7 +746,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     
     // Add image view to superview
 	[self.view addSubview:imgView];
-
+*/
 }
 
 /*
@@ -2355,7 +2364,7 @@ int arrangeLayerIndex;
         iconScrollView.frame= CGRectMake(-320, 413,320 ,130);
         layerScrollView.frame= CGRectMake(-320, 413,320 ,130);
 
-        self.templateScrollView.frame= CGRectMake(0, 413,320 ,130);
+        self.templateScrollView.frame= CGRectMake(0, 0,320 ,130);
     }else{
         symbolScrollView.frame= CGRectMake(-320, 395,320 ,60);
         iconScrollView.frame= CGRectMake(-320, 395,320 ,60);
@@ -2546,7 +2555,7 @@ int arrangeLayerIndex;
 	templateBckgrnd.alpha = ALPHA0;
 
     if(IS_IPHONE_5){
-        templateScrollView.frame= CGRectMake(-320, 413,320 ,130);
+        templateScrollView.frame= CGRectMake(0, 0,320 ,130);
         fontScrollView.frame = CGRectMake(-320, 385, 320, 130);
         colorScrollView.frame = CGRectMake(-320, 385, 320, 130);
         sizeScrollView.frame = CGRectMake(-320, 385, 320, 130);
@@ -2956,7 +2965,7 @@ int arrangeLayerIndex;
     [self hideTakeOrAddPhotoLabel];
 
     if(IS_IPHONE_5){
-        templateScrollView.frame= CGRectMake(-320, 413,320 ,130);
+        templateScrollView.frame= CGRectMake(0, 0,320 ,130);
         fontScrollView.frame = CGRectMake(-320, 385, 320, 130);
         colorScrollView.frame = CGRectMake(-320, 385, 320, 130);
         sizeScrollView.frame = CGRectMake(-320, 385, 320, 130);
@@ -3162,7 +3171,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
      
     NSData *data = [self getCurrentFrameAndSaveIt];
-    [self showHUD];
     appDele.changesFlag = NO;
 
     DraftViewController *draftViewController = [[DraftViewController alloc] initWithNibName:@"DraftViewController" bundle:nil];
@@ -5008,8 +5016,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     }else{
         [self saveSocialStates:folderPath imageName:@"/IMG_0.jpg"];
     }
-
-	[NSTimer scheduledTimerWithTimeInterval:0.4f target:self selector:@selector(killHUD) userInfo:nil repeats:NO];
 
 	NSData *imgData = UIImagePNGRepresentation(screenImage);
 	[[NSFileManager defaultManager] createFileAtPath:imgPath contents:imgData attributes:nil];

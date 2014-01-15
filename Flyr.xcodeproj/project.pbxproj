@@ -1347,7 +1347,7 @@
 		0DFC5317109576AB00B18478 /* LauchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = LauchViewController.xib; path = Classes/LauchViewController.xib; sourceTree = "<group>"; };
 		0DFC5318109576AB00B18478 /* LoginController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = LoginController.xib; path = Classes/LoginController.xib; sourceTree = "<group>"; };
 		0DFC5319109576AB00B18478 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MainWindow.xib; path = Classes/MainWindow.xib; sourceTree = "<group>"; };
-		0DFC531A109576AB00B18478 /* PhotoController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = PhotoController.xib; path = Classes/PhotoController.xib; sourceTree = "<group>"; };
+		0DFC531A109576AB00B18478 /* PhotoController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoController.xib; sourceTree = "<group>"; };
 		0DFC531B109576AB00B18478 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		0DFC531C109576AB00B18478 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		0DFC531D109576AB00B18478 /* SettingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SettingViewController.xib; path = Classes/SettingViewController.xib; sourceTree = "<group>"; };
@@ -2751,8 +2751,6 @@
 				1D3623250D0F684500981E51 /* FlyrAppDelegate.m */,
 				0F80C38E1785813E00D36795 /* SigninController.h */,
 				0F80C38F1785813E00D36795 /* SigninController.m */,
-				0DF3A2C3108DF1D200D6C887 /* PhotoController.h */,
-				0DF3A2C4108DF1D200D6C887 /* PhotoController.m */,
 				0D4903B81091893B00855C30 /* FlyrViewController.h */,
 				0D4903B91091893B00855C30 /* FlyrViewController.m */,
 				E8A7347A1092CFF300661AAD /* DraftViewController.h */,
@@ -2801,6 +2799,9 @@
 				20F4D8DE17BA3D09007B2DF5 /* AccountSelecter.m */,
 				0DF3A2C1108DF1D200D6C887 /* LauchViewController.h */,
 				0DF3A2C2108DF1D200D6C887 /* LauchViewController.m */,
+				0DF3A2C3108DF1D200D6C887 /* PhotoController.h */,
+				0DF3A2C4108DF1D200D6C887 /* PhotoController.m */,
+				0DFC531A109576AB00B18478 /* PhotoController.xib */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -4055,7 +4056,6 @@
 				20920014184F40330034C4F6 /* AddFriendsDetail.xib */,
 				0DFC5318109576AB00B18478 /* LoginController.xib */,
 				0DFC5319109576AB00B18478 /* MainWindow.xib */,
-				0DFC531A109576AB00B18478 /* PhotoController.xib */,
 				E8C7C36810976BFC0064935A /* SaveFlyerController.xib */,
 				20F93DD217B2262200F6F88C /* MainSettingViewController.xib */,
 				2044FF95185088ED00A26B42 /* MainSettingCell.xib */,
