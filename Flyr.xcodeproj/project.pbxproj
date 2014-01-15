@@ -734,8 +734,6 @@
 		208E35AC17C224B100CE54BE /* welcome_bg-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 208E35AB17C224B100CE54BE /* welcome_bg-568h@2x.png */; };
 		208ED66117C4CD660097EFCE /* cp_share_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 208ED65F17C4CD660097EFCE /* cp_share_selected.png */; };
 		208ED66217C4CD660097EFCE /* cp_share_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 208ED66017C4CD660097EFCE /* cp_share_selected@2x.png */; };
-		2091E49B17DA1323001428E5 /* arrangeicon_button_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 2091E49117DA1323001428E5 /* arrangeicon_button_selected.png */; };
-		2091E49C17DA1323001428E5 /* arrangeicon_button_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2091E49217DA1323001428E5 /* arrangeicon_button_selected@2x.png */; };
 		2091E49D17DA1323001428E5 /* icon_button_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 2091E49317DA1323001428E5 /* icon_button_selected.png */; };
 		2091E49E17DA1323001428E5 /* icon_button_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2091E49417DA1323001428E5 /* icon_button_selected@2x.png */; };
 		2091E49F17DA1323001428E5 /* image_icon_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 2091E49517DA1323001428E5 /* image_icon_selected.png */; };
@@ -1321,7 +1319,7 @@
 		0DFC5317109576AB00B18478 /* LauchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = LauchViewController.xib; path = Classes/LauchViewController.xib; sourceTree = "<group>"; };
 		0DFC5318109576AB00B18478 /* LoginController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = LoginController.xib; path = Classes/LoginController.xib; sourceTree = "<group>"; };
 		0DFC5319109576AB00B18478 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MainWindow.xib; path = Classes/MainWindow.xib; sourceTree = "<group>"; };
-		0DFC531A109576AB00B18478 /* PhotoController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = PhotoController.xib; path = Classes/PhotoController.xib; sourceTree = "<group>"; };
+		0DFC531A109576AB00B18478 /* PhotoController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoController.xib; sourceTree = "<group>"; };
 		0DFC531B109576AB00B18478 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		0DFC531C109576AB00B18478 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		0DFC531D109576AB00B18478 /* SettingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SettingViewController.xib; path = Classes/SettingViewController.xib; sourceTree = "<group>"; };
@@ -2080,8 +2078,6 @@
 		208E35AB17C224B100CE54BE /* welcome_bg-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "welcome_bg-568h@2x.png"; sourceTree = "<group>"; };
 		208ED65F17C4CD660097EFCE /* cp_share_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cp_share_selected.png; sourceTree = "<group>"; };
 		208ED66017C4CD660097EFCE /* cp_share_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cp_share_selected@2x.png"; sourceTree = "<group>"; };
-		2091E49117DA1323001428E5 /* arrangeicon_button_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrangeicon_button_selected.png; sourceTree = "<group>"; };
-		2091E49217DA1323001428E5 /* arrangeicon_button_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrangeicon_button_selected@2x.png"; sourceTree = "<group>"; };
 		2091E49317DA1323001428E5 /* icon_button_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_button_selected.png; sourceTree = "<group>"; };
 		2091E49417DA1323001428E5 /* icon_button_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_button_selected@2x.png"; sourceTree = "<group>"; };
 		2091E49517DA1323001428E5 /* image_icon_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image_icon_selected.png; sourceTree = "<group>"; };
@@ -2706,8 +2702,6 @@
 				1D3623250D0F684500981E51 /* FlyrAppDelegate.m */,
 				0F80C38E1785813E00D36795 /* SigninController.h */,
 				0F80C38F1785813E00D36795 /* SigninController.m */,
-				0DF3A2C3108DF1D200D6C887 /* PhotoController.h */,
-				0DF3A2C4108DF1D200D6C887 /* PhotoController.m */,
 				0D4903B81091893B00855C30 /* FlyrViewController.h */,
 				0D4903B91091893B00855C30 /* FlyrViewController.m */,
 				E8A7347A1092CFF300661AAD /* DraftViewController.h */,
@@ -2750,6 +2744,9 @@
 				20F4D8DE17BA3D09007B2DF5 /* AccountSelecter.m */,
 				0DF3A2C1108DF1D200D6C887 /* LauchViewController.h */,
 				0DF3A2C2108DF1D200D6C887 /* LauchViewController.m */,
+				0DF3A2C3108DF1D200D6C887 /* PhotoController.h */,
+				0DF3A2C4108DF1D200D6C887 /* PhotoController.m */,
+				0DFC531A109576AB00B18478 /* PhotoController.xib */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -2841,8 +2838,6 @@
 				0F7F02BB1765F7D300FC750F /* AlertViewBackground.png */,
 				0F8007321753415D000FF7FA /* arrangeicon_button.png */,
 				0F8007331753415D000FF7FA /* arrangeicon_button@2x.png */,
-				2091E49117DA1323001428E5 /* arrangeicon_button_selected.png */,
-				2091E49217DA1323001428E5 /* arrangeicon_button_selected@2x.png */,
 				202233A117BD2A1E0093DD4E /* back_button.png */,
 				202233A217BD2A1E0093DD4E /* back_button@2x.png */,
 				65BDB2D7173404B60084E032 /* background_button.png */,
@@ -3971,7 +3966,6 @@
 				20920014184F40330034C4F6 /* AddFriendsDetail.xib */,
 				0DFC5318109576AB00B18478 /* LoginController.xib */,
 				0DFC5319109576AB00B18478 /* MainWindow.xib */,
-				0DFC531A109576AB00B18478 /* PhotoController.xib */,
 				E8C7C36810976BFC0064935A /* SaveFlyerController.xib */,
 				20F93DD217B2262200F6F88C /* MainSettingViewController.xib */,
 				2044FF95185088ED00A26B42 /* MainSettingCell.xib */,
@@ -5188,8 +5182,6 @@
 				20DF43EB17CF6E8300F58A8C /* status_icon_email@2x.png in Resources */,
 				20DF43EC17CF6E8300F58A8C /* status_icon_sms.png in Resources */,
 				20DF43ED17CF6E8300F58A8C /* status_icon_sms@2x.png in Resources */,
-				2091E49B17DA1323001428E5 /* arrangeicon_button_selected.png in Resources */,
-				2091E49C17DA1323001428E5 /* arrangeicon_button_selected@2x.png in Resources */,
 				2091E49D17DA1323001428E5 /* icon_button_selected.png in Resources */,
 				2091E49E17DA1323001428E5 /* icon_button_selected@2x.png in Resources */,
 				2091E49F17DA1323001428E5 /* image_icon_selected.png in Resources */,

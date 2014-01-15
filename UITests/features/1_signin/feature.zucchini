@@ -17,12 +17,13 @@ Then on the "Home" screen:
 Then on the "Home" screen:
   Tap "Create"
   Wait for "1" seconds
-  Take a screenshot named "take_photo_screen"
+  Take a screenshot named "createflyer_screen"
   Tap "Take a Photo"
-  Wait for "1" seconds
+  Wait for "2" seconds
+  Take a screenshot named "camera_screen"
   Tap "Next"
   Tap "Text"
-  Fill the form with "RIKSOF SQA"
+  Fill the form with "RIKSOF"
   Tap Next
   Wait for "1" seconds
   Take a screenshot named "create-text-formating-screen"
