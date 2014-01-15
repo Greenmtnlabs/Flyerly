@@ -1958,14 +1958,6 @@ int arrangeLayerIndex;
     globle.NBUimage = nil;
     [self.navigationController pushViewController:nbuCamera animated:YES];
 
-    /*
-    CameraOverlayView *cameraOverlay =[[CameraOverlayView alloc] initWithNibName:@"CameraOverlayView" bundle:nil];
-    cameraOverlay.photoController = self;
-    self.imgPicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-    self.imgPicker.cameraOverlayView = cameraOverlay.view;
-    self.imgPicker.showsCameraControls = NO;
-    [self presentModalViewController:self.imgPicker animated:YES];
-    */
     [Flurry logEvent:@"Custom Background"];
 }
 

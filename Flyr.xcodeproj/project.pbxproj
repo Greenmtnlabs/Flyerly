@@ -1004,7 +1004,6 @@
 		6560C1D5172812DC005BE8DD /* crop_box@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6560C1D1172812DC005BE8DD /* crop_box@2x.png */; };
 		659B5EBB172EA5290082B8EB /* lock.png in Resources */ = {isa = PBXBuildFile; fileRef = 659B5EB9172EA5290082B8EB /* lock.png */; };
 		659B5EBC172EA5290082B8EB /* lock@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 659B5EBA172EA5290082B8EB /* lock@2x.png */; };
-		65A212441729196500ED0B9A /* CameraOverlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65A212431729196500ED0B9A /* CameraOverlayView.xib */; };
 		65A212461729496F00ED0B9A /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65A212451729496F00ED0B9A /* AssetsLibrary.framework */; };
 		65A21268172981A000ED0B9A /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65A212671729819F00ED0B9A /* ImageIO.framework */; };
 		65A2CEFA1725494F005C03B7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65A2CEF8172548D6005C03B7 /* AVFoundation.framework */; };
@@ -2393,7 +2392,6 @@
 		6560C1D1172812DC005BE8DD /* crop_box@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "crop_box@2x.png"; sourceTree = "<group>"; };
 		659B5EB9172EA5290082B8EB /* lock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lock.png; sourceTree = "<group>"; };
 		659B5EBA172EA5290082B8EB /* lock@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lock@2x.png"; sourceTree = "<group>"; };
-		65A212431729196500ED0B9A /* CameraOverlayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CameraOverlayView.xib; path = ../CameraOverlayView.xib; sourceTree = "<group>"; };
 		65A212451729496F00ED0B9A /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		65A212671729819F00ED0B9A /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		65A2CEF8172548D6005C03B7 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -4005,7 +4003,6 @@
 				20FA7E6F1872AAF50057C3F3 /* CameraViewController.h */,
 				20FA7E701872AAF50057C3F3 /* CameraViewController.m */,
 				20FA7E711872AAF50057C3F3 /* CameraViewController.xib */,
-				65A212431729196500ED0B9A /* CameraOverlayView.xib */,
 			);
 			name = Camera;
 			sourceTree = "<group>";
@@ -4752,7 +4749,6 @@
 				6560C1D3172812DC005BE8DD /* box_seperator@2x.png in Resources */,
 				6560C1D4172812DC005BE8DD /* crop_box.png in Resources */,
 				6560C1D5172812DC005BE8DD /* crop_box@2x.png in Resources */,
-				65A212441729196500ED0B9A /* CameraOverlayView.xib in Resources */,
 				65B3F18C172A836400BEE7A4 /* color_button_selected.png in Resources */,
 				65B3F18D172A836400BEE7A4 /* color_button_selected@2x.png in Resources */,
 				65B3F18E172A836400BEE7A4 /* font_button_selected.png in Resources */,
