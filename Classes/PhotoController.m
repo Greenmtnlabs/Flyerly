@@ -8,14 +8,13 @@
 
 #import "PhotoController.h"
 #import <QuartzCore/QuartzCore.h>
+#import <AssetsLibrary/AssetsLibrary.h>
 #import "Common.h"
 #import "LoginController.h"
 #import "FlyrAppDelegate.h"
 #import "MyNavigationBar.h"
 #import "SaveFlyerController.h"
 #import "ImageCache.h"
-#import "CameraOverlayView.h"
-#import "CustomPhotoController.h"
 #import "DraftViewController.h"
 #import "HelpController.h"
 #import <Parse/PFUser.h>
@@ -1911,38 +1910,6 @@ int arrangeLayerIndex;
      */
     
     [Flurry logEvent:@"Custom Background"];
-}
-
--(void)setLatestImageAndLoadPhotoLibrary{
-    ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
-    
-    // Enumerate just the photos and videos group by using ALAssetsGroupSavedPhotos.
-    [library enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
-        
-        // Within the group enumeration block, filter to enumerate just photos.
-        [group setAssetsFilter:[ALAssetsFilter allPhotos]];
-        
-        // Chooses the photo at the last index. Make sure number of assets is greater than zero.
-        if ( [group numberOfAssets] > 0 ) {
-            [group enumerateAssetsAtIndexes:[NSIndexSet indexSetWithIndex:([group numberOfAssets] - 1)] options:0 usingBlock:^(ALAsset *alAsset, NSUInteger index, BOOL *innerStop) {
-            
-                // The end of the enumeration is signaled by asset == nil.
-                if (alAsset) {
-                    ALAssetRepresentation *representation = [alAsset defaultRepresentation];
-                    UIImage *latestPhoto = [UIImage imageWithCGImage:[representation fullScreenImage]];
-                
-                    if([latestPhoto isKindOfClass:[UIImageView class]]){
-                    }
-                    // Do something interesting with the AV asset.
-                    customPhotoController.image = latestPhoto;
-                    [self.navigationController pushViewController:customPhotoController animated:YES];
-                }
-            }];
-        }
-    } failureBlock: ^(NSError *error) {
-        // Typically you should handle an error more gracefully than this.
-        NSLog(@"No groups");
-    }];
 }
 
 -(void)loadPhotoLibrary{
