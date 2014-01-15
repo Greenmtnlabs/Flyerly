@@ -698,7 +698,6 @@
 		203E0B7717DDDD720039C3A7 /* InputViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 203E0B7517DDDD720039C3A7 /* InputViewController.xib */; };
 		2044FF96185088ED00A26B42 /* MainSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2044FF94185088ED00A26B42 /* MainSettingCell.m */; };
 		2044FF97185088ED00A26B42 /* MainSettingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2044FF95185088ED00A26B42 /* MainSettingCell.xib */; };
-		20619831187EA22700360DBF /* UINavigationItem+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 20619830187EA22700360DBF /* UINavigationItem+Additions.m */; };
 		2061ED8A17FF210300E9BECA /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2061ED8917FF210300E9BECA /* icon@2x.png */; };
 		2064B1FD18804B3C00DE7147 /* greenButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 2064B1FB18804B3B00DE7147 /* greenButton.png */; };
 		2064B1FE18804B3C00DE7147 /* greenButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2064B1FC18804B3B00DE7147 /* greenButton@2x.png */; };
@@ -2042,8 +2041,6 @@
 		2044FF93185088ED00A26B42 /* MainSettingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainSettingCell.h; sourceTree = "<group>"; };
 		2044FF94185088ED00A26B42 /* MainSettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainSettingCell.m; sourceTree = "<group>"; };
 		2044FF95185088ED00A26B42 /* MainSettingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainSettingCell.xib; path = Classes/MainSettingCell.xib; sourceTree = "<group>"; };
-		2061982F187EA22700360DBF /* UINavigationItem+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationItem+Additions.h"; sourceTree = "<group>"; };
-		20619830187EA22700360DBF /* UINavigationItem+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationItem+Additions.m"; sourceTree = "<group>"; };
 		2061ED8917FF210300E9BECA /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		2061ED8B17FF212100E9BECA /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		2064B1FB18804B3B00DE7147 /* greenButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greenButton.png; sourceTree = "<group>"; };
@@ -4262,8 +4259,6 @@
 			children = (
 				49997FF917E07FA100CF1038 /* SKProduct+LocalPrice.h */,
 				49997FFA17E07FA100CF1038 /* SKProduct+LocalPrice.m */,
-				2061982F187EA22700360DBF /* UINavigationItem+Additions.h */,
-				20619830187EA22700360DBF /* UINavigationItem+Additions.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -5650,7 +5645,6 @@
 				202C4829187D7A6B00FE0975 /* CJSONSerializer.m in Sources */,
 				202C4800187D6E4B00FE0975 /* BitlyTwitterOAuthAccount.m in Sources */,
 				202C4826187D7A6B00FE0975 /* CDataScanner_Extensions.m in Sources */,
-				20619831187EA22700360DBF /* UINavigationItem+Additions.m in Sources */,
 				0F80C386178561C200D36795 /* AccountController.m in Sources */,
 				0F80C38B178578CB00D36795 /* RegisterController.m in Sources */,
 				0F80C3901785813E00D36795 /* SigninController.m in Sources */,

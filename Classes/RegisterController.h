@@ -12,7 +12,6 @@
 #import "Singleton.h"
 #import "AccountSelecter.h"
 #import "ParentViewController.h"
-#import "UINavigationItem+Additions.h"
 
 @class FBSession,Singleton,LauchViewController;
 @interface RegisterController : ParentViewController <UITextFieldDelegate,UIActionSheetDelegate,UIAlertViewDelegate>{
