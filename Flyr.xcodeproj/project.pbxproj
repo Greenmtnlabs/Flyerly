@@ -351,7 +351,6 @@
 		202C4828187D7A6B00FE0975 /* CJSONScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 202C481F187D7A6B00FE0975 /* CJSONScanner.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		202C4829187D7A6B00FE0975 /* CJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 202C4821187D7A6B00FE0975 /* CJSONSerializer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		202C482A187D7A6B00FE0975 /* NSDictionary_JSONExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 202C4824187D7A6B00FE0975 /* NSDictionary_JSONExtensions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		202C482D187D9DAB00FE0975 /* UIImage+NBUAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 202C482C187D9DAB00FE0975 /* UIImage+NBUAdditions.m */; };
 		202C638417EA06E800CB9A75 /* ricon22.png in Resources */ = {isa = PBXBuildFile; fileRef = 202C62F217EA06E800CB9A75 /* ricon22.png */; };
 		202C638517EA06E800CB9A75 /* ricon22@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 202C62F317EA06E800CB9A75 /* ricon22@2x.png */; };
 		202C638617EA06E800CB9A75 /* ricon23.png in Resources */ = {isa = PBXBuildFile; fileRef = 202C62F417EA06E800CB9A75 /* ricon23.png */; };
@@ -1692,8 +1691,6 @@
 		202C4822187D7A6B00FE0975 /* JSONRepresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONRepresentation.h; sourceTree = "<group>"; };
 		202C4823187D7A6B00FE0975 /* NSDictionary_JSONExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDictionary_JSONExtensions.h; sourceTree = "<group>"; };
 		202C4824187D7A6B00FE0975 /* NSDictionary_JSONExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDictionary_JSONExtensions.m; sourceTree = "<group>"; };
-		202C482B187D9DAB00FE0975 /* UIImage+NBUAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+NBUAdditions.h"; sourceTree = "<group>"; };
-		202C482C187D9DAB00FE0975 /* UIImage+NBUAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+NBUAdditions.m"; sourceTree = "<group>"; };
 		202C62F217EA06E800CB9A75 /* ricon22.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ricon22.png; path = icons/ricon22.png; sourceTree = "<group>"; };
 		202C62F317EA06E800CB9A75 /* ricon22@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ricon22@2x.png"; path = "icons/ricon22@2x.png"; sourceTree = "<group>"; };
 		202C62F417EA06E800CB9A75 /* ricon23.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ricon23.png; path = icons/ricon23.png; sourceTree = "<group>"; };
@@ -4263,8 +4260,6 @@
 		49997FF817E07F7300CF1038 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				202C482B187D9DAB00FE0975 /* UIImage+NBUAdditions.h */,
-				202C482C187D9DAB00FE0975 /* UIImage+NBUAdditions.m */,
 				49997FF917E07FA100CF1038 /* SKProduct+LocalPrice.h */,
 				49997FFA17E07FA100CF1038 /* SKProduct+LocalPrice.m */,
 				2061982F187EA22700360DBF /* UINavigationItem+Additions.h */,
@@ -5633,7 +5628,6 @@
 				49B8898A188652A2003766AD /* NSData+Extras.m in Sources */,
 				202C4803187D6E4B00FE0975 /* BitlyURLShortener.m in Sources */,
 				0DFC5322109576AB00B18478 /* SettingViewController.m in Sources */,
-				202C482D187D9DAB00FE0975 /* UIImage+NBUAdditions.m in Sources */,
 				E8C7C36910976BFC0064935A /* SaveFlyerController.m in Sources */,
 				200384741875A357008909F9 /* PresetFilterViewController.m in Sources */,
 				202C4801187D6E4B00FE0975 /* BitlyTwitterOAuthManager.m in Sources */,
