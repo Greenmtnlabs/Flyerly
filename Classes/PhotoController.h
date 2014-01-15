@@ -227,8 +227,6 @@
 
 
 -(void)loadCustomPhotoLibrary;
-- (void)showHUD;
-- (void)killHUD;
 -(void) chooseTemplate;
 -(void) chooseEdit;
 -(void) MyEdit;

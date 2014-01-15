@@ -7,8 +7,6 @@
  *
  */
 
-#import "MyCustomCell.h"
-
 #define ALPHA0 0
 #define ALPHA1 1
 
@@ -19,10 +17,6 @@
 #define DOCSFOLDER [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"]
 
 #define COLOR_ARRAY [NSArray arrayWithObjects: [UIColor whiteColor], [UIColor darkGrayColor], [UIColor grayColor], [UIColor orangeColor], [UIColor blackColor], [UIColor blueColor], [UIColor redColor], [UIColor greenColor], [UIColor purpleColor], [UIColor yellowColor], [UIColor brownColor], [UIColor cyanColor], [UIColor magentaColor],nil]
-
-/*
-#define TEMPLATE_ARRAY [NSArray arrayWithObjects: @"T1.jpg",@"T2.jpg",@"T3.jpg",@"T4.jpg",@"T5.jpg",@"T6.jpg",@"T7.jpg",@"T8.jpg",@"T9.jpg",@"T10.jpg",@"T11.jpg",@"T12.jpg",@"T13.jpg",@"T14.jpg",@"T15.jpg",@"T16.jpg",@"T17.jpg",@"T18.jpg",@"T19.jpg",@"T20.jpg",@"T21.jpg",@"T22.jpg",@"T23.jpg",@"T24.jpg",@"T25.jpg",@"T26.jpg",@"T27.jpg",@"T28.jpg",@"T29.jpg",@"T30.jpg",@"T31.jpg",@"T32.jpg",@"T33.jpg",nil]
-*/
 
 #define TEMPLATE_ARRAY [NSArray arrayWithObjects:\
 [UIImage imageNamed:@"T0.jpg"],\
@@ -218,19 +212,6 @@ nil]
 #define WIDTH_ARRAY [NSArray arrayWithObjects: @"50", @"75" ,@"100",@"120",@"140",@"160",@"175",@"200",@"220",@"240",@"260",nil]
 
 #define HEIGHT_ARRAY [NSArray arrayWithObjects: @"50", @"75" ,@"100",@"120",@"140",@"160",@"175",@"200",@"220",@"240",@"260",@"300",@"320",nil]
-
-
-
-#define SET_GLOBAL_CUSTOM_CELL_PROPERTIES(title,description,created,img,imagePath){\
-static NSString *cellId = @"Cell";\
-MyCustomCell *cell = (MyCustomCell *)[tableView dequeueReusableCellWithIdentifier:cellId];\
-if (cell == nil) {\
-cell = [[MyCustomCell alloc] initWithFrame:CGRectZero reuseIdentifier:cellId];\
-}\
-[cell setAccessoryType:UITableViewCellAccessoryNone]; \
-[cell addToCell: title :description :created :img :imagePath];\
-return cell;\
-}
 
 #define HEIGHT_IPHONE_5 568
 #define IS_IPHONE   ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)

@@ -139,26 +139,6 @@
 #pragma mark  Twitter PHOTO UPLOAD 
 
 
-
- -(void)doTweet
- {
-     /*
-	 twit = [[OLBTwitpicEngine alloc]initWithDelegate:self];
-	 NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	 NSString  *passStr = [defaults objectForKey:@"tpass_pref"];
-	 NSString *userStr = [defaults objectForKey:@"tuser_pref"];
-	 
-	 [twit uploadImageToTwitpic:flyrImg withMessage:twitMsg username:userStr password:passStr];
-	 [aHUD.loadingLabel setText:@"Uploaded..."];
-	 [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(killHUD) userInfo:nil repeats:NO];*/
- }
- /*
- - (void)twitpicEngine:(OLBTwitpicEngine *)engine didUploadImageWithResponse:(NSString *)response{
-	 
-     NSLog(response);
-
-	 uploadButton.alpha = 0;
- }*/
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
 	//[self.navBar.leftButton setEnabled:YES];
@@ -176,13 +156,11 @@
 			
 		
 		[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(doTweet) userInfo:nil repeats:NO];
-		[alertTextField resignFirstResponder]; 
-		[self showHUD];
+		[alertTextField resignFirstResponder];
 	}
 	else if(alertView == twitAlert && buttonIndex == 0)
 		[alertTextField resignFirstResponder]; 
 	else if(alertView == facebookAlert && buttonIndex == 1){
-		[self showHUD];
 		[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(uploadPhoto) userInfo:nil repeats:NO];
 	}
 }
@@ -220,7 +198,6 @@
 -(void)uploadPhoto
 {
 	NSLog(@"facebook-uploaded");
-	[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(killHUD) userInfo:nil repeats:NO];
 	
 	NSDictionary *params = @{@"caption": @"Posted by SocialFlyr"}; 
 	//[[FBRequest requestWithDelegate:self] call:@"facebook.photos.upload" params:params dataParam:(NSData*)flyrImg];
@@ -295,8 +272,7 @@
 	else
 	{
 		[self launchMailAppOnDevice];
-	}	
-	[self  killHUD];
+	}
 }
 
 

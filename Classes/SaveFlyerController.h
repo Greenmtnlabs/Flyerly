@@ -60,8 +60,6 @@
 @property (nonatomic,strong)  FBSession* _session;
 @property (nonatomic,strong)  UITextField *alertTextField;
 @property (nonatomic,strong) NSString *imgName;
-- (void)showHUD;
-- (void)killHUD;
 
 -(void)callTwitAlert;
 -(void)callFacebookAlert;

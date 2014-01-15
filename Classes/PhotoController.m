@@ -3153,7 +3153,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
      
     NSData *data = [self getCurrentFrameAndSaveIt];
-    [self showHUD];
     appDele.changesFlag = NO;
 
     DraftViewController *draftViewController = [[DraftViewController alloc] initWithNibName:@"DraftViewController" bundle:nil];
@@ -4999,8 +4998,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     }else{
         [self saveSocialStates:folderPath imageName:@"/IMG_0.jpg"];
     }
-
-	[NSTimer scheduledTimerWithTimeInterval:0.4f target:self selector:@selector(killHUD) userInfo:nil repeats:NO];
 
 	NSData *imgData = UIImagePNGRepresentation(screenImage);
 	[[NSFileManager defaultManager] createFileAtPath:imgPath contents:imgData attributes:nil];

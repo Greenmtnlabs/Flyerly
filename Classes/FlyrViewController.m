@@ -15,6 +15,7 @@
 #import "HelpController.h"
 #import "FlyerOverlayController.h"
 #import "FlyrAppDelegate.h"
+#import "MyCustomCell.h"
 
 @implementation FlyrViewController
 @synthesize photoArray,navBar,tView,iconArray,photoDetailArray,ptController,searchTextField;

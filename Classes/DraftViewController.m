@@ -421,7 +421,7 @@ static ShareProgressView *clipBdPogressView;
     UIImage *flyerImage = [cellImageButton imageForState:UIControlStateNormal];
     // Create Modal trnasparent view
     UIView *modalView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    [modalView setBackgroundColor:[MyCustomCell colorWithHexString:@"161616"]];
+    //[modalView setBackgroundColor:[MyCustomCell colorWithHexString:@"161616"]];
     modalView.alpha = 0.75;
     self.navigationController.navigationBar.alpha = 0;
     
