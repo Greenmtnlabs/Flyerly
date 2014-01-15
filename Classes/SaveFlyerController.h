@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
-#import "MyNavigationBar.h"
 #import "PhotoController.h"
 #import <MessageUI/MessageUI.h>
 
@@ -25,7 +24,6 @@
 	FBSession* _session;
 	
 	UIButton *uploadButton;
-	MyNavigationBar *navBar;
 	NSString *twitMsg;
 	PhotoController *ptController;
 
@@ -46,8 +44,6 @@
 @property (nonatomic, strong) UIButton *faceBookButton;
 @property (nonatomic, strong) UIButton *uploadButton;
 
-//@property (nonatomic, strong) MyNavigationBar *navBar;
-//@property(nonatomic, strong) OLBTwitpicEngine *twit;
 @property(nonatomic, strong) NSString *twitMsg;
 @property(nonatomic, strong) PhotoController *ptController;
 @property(nonatomic, strong) NSString *twitUser;
@@ -64,7 +60,6 @@
 -(void)callTwitAlert;
 -(void)callFacebookAlert;
 -(void)uploadPhoto;
-- (void)dismissNavBar:(BOOL)animated;
 -(IBAction)disableBack;
 -(void)enableBack;
 @end

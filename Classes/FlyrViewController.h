@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MyNavigationBar.h"
 #import "PhotoController.h"
 #import "LauchViewController.h"
 #import "Singleton.h"
@@ -22,7 +21,6 @@
 	NSMutableArray *photoDetailArrayBackup;
 	NSMutableArray *iconArrayBackup;
 
-	MyNavigationBar *navBar;
 	IBOutlet UITableView *tView;
     PhotoController *ptController;
     LauchViewController *launchCotroller;
@@ -35,7 +33,6 @@
 @property(nonatomic,strong) NSMutableArray *photoArray;
 @property(nonatomic,strong) NSMutableArray *photoDetailArray;
 @property(nonatomic,strong) NSMutableArray *iconArray;
-@property(nonatomic,strong) MyNavigationBar *navBar;
 @property(nonatomic,strong) IBOutlet UITableView *tView;
 @property(nonatomic,strong) IBOutlet UITextField *searchTextField;
 

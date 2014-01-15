@@ -7,7 +7,6 @@
 //
 
 #import "DraftViewController.h"
-#import "MyNavigationBar.h"
 #import "FlyrViewController.h"
 #import "SaveFlyerController.h"
 #import "Common.h"
@@ -36,7 +35,7 @@ static ShareProgressView *clipBdPogressView;
 @implementation DraftViewController
 
 
-@synthesize selectedFlyerImage,imgView,navBar,fvController,svController,titleView,descriptionView,selectedFlyerDescription,selectedFlyerTitle, detailFileName, imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,loadingView,dic,fromPhotoController,scrollView, saveToCameraRollLabel, saveToRollSwitch,locationBackground,locationLabel,networkParentView,locationButton,listOfPlaces,clipboardlabel,sharelink,bitly;
+@synthesize selectedFlyerImage,imgView,fvController,svController,titleView,descriptionView,selectedFlyerDescription,selectedFlyerTitle, detailFileName, imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,loadingView,dic,fromPhotoController,scrollView, saveToCameraRollLabel, saveToRollSwitch,locationBackground,locationLabel,networkParentView,locationButton,listOfPlaces,clipboardlabel,sharelink,bitly;
 //@synthesize twitterPogressView,facebookPogressView,tumblrPogressView,flickrPogressView,progressView,instagramPogressView;
 
 -(void)callFlyrView{
@@ -2157,36 +2156,10 @@ static ShareProgressView *clipBdPogressView;
 
 #pragma leaving code
 
-- (void)dismissNavBar:(BOOL)animated {
-	
-	if (animated) {
-		[UIView beginAnimations:nil context:nil];
-		[UIView setAnimationDuration:1];
-		[UIView setAnimationDelegate:self];
-		[UIView setAnimationDidStopSelector:@selector(postDismissCleanup)];
-		//navBar.alpha = 0;
-		[UIView commitAnimations];
-	}
-}
-
-
 - (void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
-	[self dismissNavBar:YES];
+	
     [[NSNotificationCenter defaultCenter] removeObserver: self];
-
-    // If text changed then save it again
-/*
-    if(
-       (![selectedFlyerTitle isEqualToString:titleView.text] && ![titleView.text isEqualToString:NameYourFlyerText])
-       
-       ||
-       
-       (![selectedFlyerDescription isEqualToString:descriptionView.text]  && ![descriptionView.text isEqualToString:AddCaptionText])){
-        
-        [self updateFlyerDetail];
-    }
- */
     [self updateFlyerDetail];
 }
 

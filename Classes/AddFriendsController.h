@@ -20,7 +20,6 @@
 #import <SystemConfiguration/SystemConfiguration.h>
 #import "Reachability.h"
 #import "LauchViewController.h"
-#import "MyNavigationBar.h"
 #import "AsyncImageView.h"
 #import "Singleton.h"
 #import "AddFriendsDetail.h"
@@ -88,7 +87,6 @@
 @property(nonatomic,strong) NSMutableArray *contactBackupArray;
 @property(nonatomic,strong) NSMutableArray *facebookBackupArray;
 @property(nonatomic,strong) NSMutableArray *twitterBackupArray;
-@property (nonatomic, strong) MyNavigationBar *navBar;
 @property(nonatomic,strong) NSMutableArray *deviceContactItems;
 @property(nonatomic,strong) NSMutableArray *fbinvited;
 @property(nonatomic,strong) NSMutableArray *Twitterinvited;

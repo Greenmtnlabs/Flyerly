@@ -7,7 +7,6 @@
 //
 
 #import "SettingViewController.h"
-#import "MyNavigationBar.h"
 #import <CoreGraphics/CoreGraphics.h>
 #import "Common.h"
 #import "FlyrAppDelegate.h"

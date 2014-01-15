@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MyNavigationBar.h"
 #import "CustomLabel.h"
 #import "EBPurchase.h"
 #import "ShareProgressView.h"
@@ -22,7 +21,6 @@
 {
     int layerallow;
     Singleton *globle;
-	MyNavigationBar *navBar;
 	UIImageView *imgView;
 	UIImageView *templateBckgrnd;
 	UIImageView *textBackgrnd;
@@ -151,8 +149,6 @@
 @property(nonatomic, strong) NSMutableArray *cpySymbolLayersArray;
 @property(nonatomic, strong) NSMutableArray *cpyIconLayersArray;
 @property(nonatomic, strong) NSMutableArray *cpyPhotoLayersArray;
-
-@property (nonatomic, strong) MyNavigationBar *navBar;
 
 @property(nonatomic, strong)  UIImageView *imgView;
 @property (nonatomic,strong)  UIImageView *photoImgView;

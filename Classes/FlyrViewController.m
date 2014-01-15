@@ -9,7 +9,6 @@
 #import "FlyrViewController.h"
 #import "Common.h"
 #import "DraftViewController.h"
-#import "MyNavigationBar.h"
 #import "Common.h"
 #import "LauchViewController.h"
 #import "HelpController.h"
@@ -18,7 +17,7 @@
 #import "MyCustomCell.h"
 
 @implementation FlyrViewController
-@synthesize photoArray,navBar,tView,iconArray,photoDetailArray,ptController,searchTextField;
+@synthesize photoArray,tView,iconArray,photoDetailArray,ptController,searchTextField;
 
 
 - (UIImage *)scale:(NSString *)imageName toSize:(CGSize)size
@@ -501,29 +500,8 @@ sd:;
 	[self.navigationController pushViewController:ptController animated:YES];
 }
 
-- (void)postDismissCleanup {
-	[navBar removeFromSuperview];	
-}
-
-- (void)dismissNavBar:(BOOL)animated {
-	
-	
-	if (animated) {
-		[UIView beginAnimations:nil context:nil];
-		[UIView setAnimationDuration:1];
-		[UIView setAnimationDelegate:self];
-		[UIView setAnimationDidStopSelector:@selector(postDismissCleanup)];
-		navBar.alpha = 0;
-		[UIView commitAnimations];
-	} else {
-		[self postDismissCleanup];
-	}
-}
-
-
 - (void)viewWillDisappear:(BOOL)animated {
-	[super viewWillDisappear:animated];
-	[self dismissNavBar:YES];
+    [super viewWillDisappear:animated];
     self.navigationController.navigationBar.alpha = 1.0;
 }
 

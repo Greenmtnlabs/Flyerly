@@ -11,7 +11,6 @@
 #import "PhotoController.h"
 #import "FlyrAppDelegate.h"
 #import <QuartzCore/QuartzCore.h>
-#import "MyNavigationBar.h"
 #import "DraftViewController.h"
 #import "Common.h"
 //#import "FBConnectGlobal.h"
@@ -25,60 +24,18 @@
 
 
 -(void)callPhotoController{
-	[self dismissNavBar:YES];
 	[self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 -(void)callDraftController{
-	[self dismissNavBar:YES];
 	[self.navigationController popToViewController:dvController animated:YES];
 	isDraftView = NO;
-}
-
-
-- (void)viewWillAppear:(BOOL)animated {
-    
-    [super viewWillAppear:animated];
-	navBar= [[MyNavigationBar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
-
-	if(isDraftView == NO)
-	{
-		[self.view addSubview:navBar];
-		[navBar show:@"Distribute" left:@"Menu" right:@""];
-		[self.view bringSubviewToFront:navBar];
-		
-		[navBar.leftButton removeTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-		[navBar.rightButton removeTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-		
-		[navBar.leftButton addTarget:self action:@selector(callPhotoController) forControlEvents:UIControlEventTouchUpInside];
-		[navBar.rightButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-		//[self.navBar.leftButton setEnabled:YES];
-		
-		//[self.navBar setUserInteractionEnabled:YES];
-	}
-	else
-	{
-		[self.view addSubview:navBar];
-		[navBar show:@"Distribute" left:@"SocialFlyr" right:@""];
-		[self.view bringSubviewToFront:navBar];
-		
-		[navBar.leftButton removeTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-		[navBar.rightButton removeTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-		
-		[navBar.leftButton addTarget:self action:@selector(callDraftController) forControlEvents:UIControlEventTouchUpInside];
-		[navBar.rightButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-		//[self.navBar.leftButton setEnabled:YES];
-		
-		//[self.navBar setUserInteractionEnabled:YES];
-		
-	}
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
-    navBar.alpha = 0.6;
-	_session = nil;
+ 	_session = nil;
     
 	UIImageView *imgView = [[UIImageView alloc]initWithFrame:CGRectMake(0,44 ,320, 416)];
 	imgView.image = flyrImg;
@@ -322,17 +279,6 @@
 	else if(sender == mailButton)
 	{
 		[NSTimer scheduledTimerWithTimeInterval:0.4f target:self selector:@selector(showInlineMailClient) userInfo:nil repeats:NO];
-	}
-}
-
-- (void)dismissNavBar:(BOOL)animated {
-	if (animated) {
-		[UIView beginAnimations:nil context:nil];
-		[UIView setAnimationDuration:1];
-		[UIView setAnimationDelegate:self];
-		[UIView setAnimationDidStopSelector:@selector(postDismissCleanup)];
-		navBar.alpha = 0;
-		[UIView commitAnimations];
 	}
 }
 
