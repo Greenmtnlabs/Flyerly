@@ -1,19 +1,14 @@
 Start on the "Welcome" screen:
-  Take a screenshot named "welcome_screen"
-  Tap "SIGN IN"
-
-Then on the "SIGN IN" screen:
   Take a screenshot
-  Fill the form with "TeamLeadSQA, null"
-  Tap "SIGN IN" named "signin_screen"
+  Tap "Register"
+
+Then on the "Register" screen:
+  Take a screenshot
+  Fill the form with "tester, riksof123, riksof123, rehan.ali@riksof.com, Rehan,03453498941"
+  Tap "SIGN UP"
   Wait for "2" seconds
   Take a screenshot named "home_screen"
-
-Then on the "Home" screen:
-  Tap "Saved"
-  Wait for "1" seconds
-  Take a screenshot named "savedflyer_screen"
-  Tap "Back"
+  
 Then on the "Home" screen:
   Tap "Create"
   Wait for "1" seconds
@@ -52,8 +47,7 @@ Then on the "Home" screen:
   Tap "Back"
   Tap "Sign Out"
   Take screenshot named "signout_screen"
+
+
+
   
-  
-
-
-
