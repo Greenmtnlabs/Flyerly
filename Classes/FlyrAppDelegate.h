@@ -8,7 +8,6 @@
 
 #import <FacebookSDK/FacebookSDK.h>
 #import "Facebook.h"
-#import "BZFoursquare.h"
 #import "Singleton.h"
 #import <Parse/Parse.h>
 #import "SHKFacebook.h"
@@ -38,7 +37,6 @@ extern NSString *FacebookDidLoginNotification;
     Singleton *globle;
 	BOOL faceBookPermissionFlag;
 	BOOL changesFlag;
-    BZFoursquare *foursquare_;
     id loggedInUserID;
     UIView *sharingProgressParentView;
 }
@@ -52,7 +50,6 @@ extern NSString *FacebookDidLoginNotification;
 @property (nonatomic, strong) SaveFlyerController *svController;
 @property (nonatomic, strong) LauchViewController *lauchController;
 @property (nonatomic, strong) AccountController *accountController;
-@property(nonatomic,strong) BZFoursquare *foursquare;
 @property (nonatomic,assign)	BOOL faceBookPermissionFlag;
 @property (strong, nonatomic) Facebook *facebook;
 @property (nonatomic,assign) BOOL changesFlag;

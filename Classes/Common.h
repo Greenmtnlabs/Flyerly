@@ -7,8 +7,6 @@
  *
  */
 
-#import "MyCustomCell.h"
-
 #define ALPHA0 0
 #define ALPHA1 1
 
@@ -19,10 +17,6 @@
 #define DOCSFOLDER [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"]
 
 #define COLOR_ARRAY [NSArray arrayWithObjects: [UIColor whiteColor], [UIColor darkGrayColor], [UIColor grayColor], [UIColor orangeColor], [UIColor blackColor], [UIColor blueColor], [UIColor redColor], [UIColor greenColor], [UIColor purpleColor], [UIColor yellowColor], [UIColor brownColor], [UIColor cyanColor], [UIColor magentaColor],nil]
-
-/*
-#define TEMPLATE_ARRAY [NSArray arrayWithObjects: @"T1.jpg",@"T2.jpg",@"T3.jpg",@"T4.jpg",@"T5.jpg",@"T6.jpg",@"T7.jpg",@"T8.jpg",@"T9.jpg",@"T10.jpg",@"T11.jpg",@"T12.jpg",@"T13.jpg",@"T14.jpg",@"T15.jpg",@"T16.jpg",@"T17.jpg",@"T18.jpg",@"T19.jpg",@"T20.jpg",@"T21.jpg",@"T22.jpg",@"T23.jpg",@"T24.jpg",@"T25.jpg",@"T26.jpg",@"T27.jpg",@"T28.jpg",@"T29.jpg",@"T30.jpg",@"T31.jpg",@"T32.jpg",@"T33.jpg",nil]
-*/
 
 #define TEMPLATE_ARRAY [NSArray arrayWithObjects:\
 [UIImage imageNamed:@"T0.jpg"],\
@@ -75,60 +69,6 @@
 [UIImage imageNamed:@"T47.jpg"],\
 [UIImage imageNamed:@"T48.jpg"],\
 nil]
-
-/*
-#define ICON_ARRAY [NSArray arrayWithObjects:\
-[UIImage imageNamed:@"l0.jpg"],\
-[UIImage imageNamed:@"I1.jpg"],\
-[UIImage imageNamed:@"I2.jpg"],\
-[UIImage imageNamed:@"I3.jpg"],\
-[UIImage imageNamed:@"I4.jpg"],\
-[UIImage imageNamed:@"I5.jpg"],\
-[UIImage imageNamed:@"I6.jpg"],\
-[UIImage imageNamed:@"I7.jpg"],\
-[UIImage imageNamed:@"I8.jpg"],\
-[UIImage imageNamed:@"I9.jpg"],\
-[UIImage imageNamed:@"I10.jpg"],\
-[UIImage imageNamed:@"I11.jpg"],\
-[UIImage imageNamed:@"I12.jpg"],\
-[UIImage imageNamed:@"I13.jpg"],\
-[UIImage imageNamed:@"I14.jpg"],\
-[UIImage imageNamed:@"I15.jpg"],\
-[UIImage imageNamed:@"I16.jpg"],\
-[UIImage imageNamed:@"I17.jpg"],\
-[UIImage imageNamed:@"I18.jpg"],\
-[UIImage imageNamed:@"I19.jpg"],\
-[UIImage imageNamed:@"I20.jpg"],\
-[UIImage imageNamed:@"I21.jpg"],\
-[UIImage imageNamed:@"I22.jpg"],\
-[UIImage imageNamed:@"I23.jpg"],\
-[UIImage imageNamed:@"I24.jpg"],\
-[UIImage imageNamed:@"I25.jpg"],\
-[UIImage imageNamed:@"I26.jpg"],\
-[UIImage imageNamed:@"I27.jpg"],\
-[UIImage imageNamed:@"I28.jpg"],\
-[UIImage imageNamed:@"I29.jpg"],\
-[UIImage imageNamed:@"I30.jpg"],\
-[UIImage imageNamed:@"I31.jpg"],\
-[UIImage imageNamed:@"I32.jpg"],\
-[UIImage imageNamed:@"I33.jpg"],\
-[UIImage imageNamed:@"I34.jpg"],\
-[UIImage imageNamed:@"I35.jpg"],\
-[UIImage imageNamed:@"I36.jpg"],\
-[UIImage imageNamed:@"I37.jpg"],\
-[UIImage imageNamed:@"I38.jpg"],\
-[UIImage imageNamed:@"I39.jpg"],\
-[UIImage imageNamed:@"I40.jpg"],\
-[UIImage imageNamed:@"I41.jpg"],\
-[UIImage imageNamed:@"I42.jpg"],\
-[UIImage imageNamed:@"I43.jpg"],\
-[UIImage imageNamed:@"I44.jpg"],\
-[UIImage imageNamed:@"I45.jpg"],\
-[UIImage imageNamed:@"I46.jpg"],\
-[UIImage imageNamed:@"I47.jpg"],\
-[UIImage imageNamed:@"I48.jpg"],\
-nil]
-*/
 
 #define ICON_ARRAY [NSArray arrayWithObjects:\
 [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"icon0"] ofType:@"jpg"],\
@@ -219,19 +159,6 @@ nil]
 
 #define HEIGHT_ARRAY [NSArray arrayWithObjects: @"50", @"75" ,@"100",@"120",@"140",@"160",@"175",@"200",@"220",@"240",@"260",@"300",@"320",nil]
 
-
-
-#define SET_GLOBAL_CUSTOM_CELL_PROPERTIES(title,description,created,img,imagePath){\
-static NSString *cellId = @"Cell";\
-MyCustomCell *cell = (MyCustomCell *)[tableView dequeueReusableCellWithIdentifier:cellId];\
-if (cell == nil) {\
-cell = [[MyCustomCell alloc] initWithFrame:CGRectZero reuseIdentifier:cellId];\
-}\
-[cell setAccessoryType:UITableViewCellAccessoryNone]; \
-[cell addToCell: title :description :created :img :imagePath];\
-return cell;\
-}
-
 #define HEIGHT_IPHONE_5 568
 #define IS_IPHONE   ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
 #define IS_IPHONE_5 ([[UIScreen mainScreen] bounds ].size.height == HEIGHT_IPHONE_5 )
@@ -305,13 +232,6 @@ return cell;\
 #define ADD_MORE_SYMBOLTAB 2
 #define ADD_MORE_ICONTAB 3
 #define ARRANGE_LAYERTAB 4
-
-//
-//#define FONT6_PRODUCT_ID @"com.flyerly.font6"
-//#define FONT7_PRODUCT_ID @"com.flyerly.font7"
-
-/*#define FONT_ARRAY [NSArray arrayWithObjects:@"Courier",@"Courier-BoldOblique",@"Courier-Oblique",@"Courier-Bold",@"ArialMT",@"Arial-BoldMT",@"Arial-BoldItalicMT",@"Arial-ItalicMT",@"STHeitiTC-Light",@"STHeitiTC-Medium",@"AppleGothic",@"CourierNewPS-BoldMT",@"CourierNewPS-ItalicMT",@"CourierNewPS-BoldItalicMT",@"CourierNewPSMT",@"Zapfino",@"HiraKakuProN-W6",@"ArialUnicodeMS",@"STHeitiSC-Medium",@"STHeitiSC-Light",@"AmericanTypewriter",@"AmericanTypewriter-Bold",@"Helvetica-Oblique",@"Helvetica-BoldOblique",@"Helvetica",@"Helvetica-Bold",@"MarkerFelt-Thin",@"HelveticaNeue",@"HelveticaNeue-Bold",@"DBLCDTempBlack",@"Verdana-Bold",@"Verdana-BoldItalic",@"Verdana",@"Verdana-Italic",@"TimesNewRomanPSMT",@"TimesNewRomanPS-BoldMT",@"TimesNewRomanPS-BoldItalicMT",@"TimesNewRomanPS-ItalicMT",@"Georgia-Bold",@"Georgia",@"Georgia-BoldItalic",@"Georgia-Italic",@"STHeitiJ-Medium",@"STHeitiJ-Light",@"ArialRoundedMTBold",@"TrebuchetMS-Italic",@"TrebuchetMS",@"Trebuchet-BoldItalic",@"TrebuchetMS-Bold",@"STHeitiK-Medium",@"STHeitiK-Light",nil]
- */
 
 // Button font
 #define BUTTON_FONT @"Symbol"

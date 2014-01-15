@@ -21,7 +21,7 @@
 }
 
 - (NSString*)appURL {
-	return @"http://example.com";
+	return @"http://www.flyer.ly";
 }
 
 /*

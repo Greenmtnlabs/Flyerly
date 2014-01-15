@@ -8,7 +8,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MyNetworkController.h"
 
 
 @interface LoginController : UIViewController <UITextFieldDelegate>
@@ -21,8 +20,7 @@
 	FBSession* _session;*/
 	
 
-	UIAlertView *netStat; 
-	MyNetworkController *netObj;
+	UIAlertView *netStat;
 	NSString *userName;
 	NSString *passWord;
 	
@@ -35,7 +33,6 @@
 }
 
 @property(strong, nonatomic) UIAlertView *netStat;
-@property(strong, nonatomic) MyNetworkController *netObj;
 @property(strong, nonatomic) NSString *userName;
 @property(strong, nonatomic) NSString *passWord;
 @property(nonatomic, strong) UIImage *flyerImg;

@@ -19,7 +19,7 @@
 
 @implementation AddFriendsController
 @synthesize uiTableView, contactsArray, deviceContactItems, contactsLabel, facebookLabel, twitterLabel, doneLabel, selectAllLabel, unSelectAllLabel, inviteLabel, contactsButton, facebookButton, twitterButton, loadingView, searchTextField, facebookArray, twitterArray,fbinvited,Twitterinvited,iPhoneinvited;
-@synthesize contactBackupArray, facebookBackupArray, twitterBackupArray,navBar,account;
+@synthesize contactBackupArray, facebookBackupArray, twitterBackupArray,account;
 
 const int TWITTER_TAB = 2;
 const int FACEBOOK_TAB = 1;

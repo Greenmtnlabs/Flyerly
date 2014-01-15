@@ -11,7 +11,6 @@
 #import "PhotoController.h"
 #import "FlyrAppDelegate.h"
 #import <QuartzCore/QuartzCore.h>
-#import "MyNavigationBar.h"
 #import "DraftViewController.h"
 #import "Common.h"
 //#import "FBConnectGlobal.h"
@@ -20,65 +19,23 @@
 
 @synthesize twitterButton,mailButton,faceBookButton,uploadButton,ptController,dvController;
 @synthesize flyrImg,twitUser,twitPass,twitAlert,facebookAlert,isDraftView;
-@synthesize twitMsg,twitDialog,flyrImgData,_session,alertTextField,imgName;
+@synthesize twitMsg,flyrImgData,_session,alertTextField,imgName;
 //@synthesize navBar,twit;
 
 
 -(void)callPhotoController{
-	[self dismissNavBar:YES];
 	[self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 -(void)callDraftController{
-	[self dismissNavBar:YES];
 	[self.navigationController popToViewController:dvController animated:YES];
 	isDraftView = NO;
-}
-
-
-- (void)viewWillAppear:(BOOL)animated {
-    
-    [super viewWillAppear:animated];
-	navBar= [[MyNavigationBar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
-
-	if(isDraftView == NO)
-	{
-		[self.view addSubview:navBar];
-		[navBar show:@"Distribute" left:@"Menu" right:@""];
-		[self.view bringSubviewToFront:navBar];
-		
-		[navBar.leftButton removeTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-		[navBar.rightButton removeTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-		
-		[navBar.leftButton addTarget:self action:@selector(callPhotoController) forControlEvents:UIControlEventTouchUpInside];
-		[navBar.rightButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-		//[self.navBar.leftButton setEnabled:YES];
-		
-		//[self.navBar setUserInteractionEnabled:YES];
-	}
-	else
-	{
-		[self.view addSubview:navBar];
-		[navBar show:@"Distribute" left:@"SocialFlyr" right:@""];
-		[self.view bringSubviewToFront:navBar];
-		
-		[navBar.leftButton removeTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-		[navBar.rightButton removeTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-		
-		[navBar.leftButton addTarget:self action:@selector(callDraftController) forControlEvents:UIControlEventTouchUpInside];
-		[navBar.rightButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-		//[self.navBar.leftButton setEnabled:YES];
-		
-		//[self.navBar setUserInteractionEnabled:YES];
-		
-	}
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
-    navBar.alpha = 0.6;
-	_session = nil;
+ 	_session = nil;
     
 	UIImageView *imgView = [[UIImageView alloc]initWithFrame:CGRectMake(0,44 ,320, 416)];
 	imgView.image = flyrImg;
@@ -139,26 +96,6 @@
 #pragma mark  Twitter PHOTO UPLOAD 
 
 
-
- -(void)doTweet
- {
-     /*
-	 twit = [[OLBTwitpicEngine alloc]initWithDelegate:self];
-	 NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	 NSString  *passStr = [defaults objectForKey:@"tpass_pref"];
-	 NSString *userStr = [defaults objectForKey:@"tuser_pref"];
-	 
-	 [twit uploadImageToTwitpic:flyrImg withMessage:twitMsg username:userStr password:passStr];
-	 [aHUD.loadingLabel setText:@"Uploaded..."];
-	 [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(killHUD) userInfo:nil repeats:NO];*/
- }
- /*
- - (void)twitpicEngine:(OLBTwitpicEngine *)engine didUploadImageWithResponse:(NSString *)response{
-	 
-     NSLog(response);
-
-	 uploadButton.alpha = 0;
- }*/
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
 	//[self.navBar.leftButton setEnabled:YES];
@@ -176,13 +113,11 @@
 			
 		
 		[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(doTweet) userInfo:nil repeats:NO];
-		[alertTextField resignFirstResponder]; 
-		[self showHUD];
+		[alertTextField resignFirstResponder];
 	}
 	else if(alertView == twitAlert && buttonIndex == 0)
 		[alertTextField resignFirstResponder]; 
 	else if(alertView == facebookAlert && buttonIndex == 1){
-		[self showHUD];
 		[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(uploadPhoto) userInfo:nil repeats:NO];
 	}
 }
@@ -220,7 +155,6 @@
 -(void)uploadPhoto
 {
 	NSLog(@"facebook-uploaded");
-	[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(killHUD) userInfo:nil repeats:NO];
 	
 	NSDictionary *params = @{@"caption": @"Posted by SocialFlyr"}; 
 	//[[FBRequest requestWithDelegate:self] call:@"facebook.photos.upload" params:params dataParam:(NSData*)flyrImg];
@@ -295,8 +229,7 @@
 	else
 	{
 		[self launchMailAppOnDevice];
-	}	
-	[self  killHUD];
+	}
 }
 
 
@@ -348,52 +281,5 @@
 		[NSTimer scheduledTimerWithTimeInterval:0.4f target:self selector:@selector(showInlineMailClient) userInfo:nil repeats:NO];
 	}
 }
-
--(IBAction)disableBack{
-	//[self.navBar setUserInteractionEnabled:NO];
-}
-
--(void)enableBack{
-	//[self.navBar setUserInteractionEnabled:YES];
-}
-
-
-//- (void)session:(FBSession*)session didLogin:(FBUID)uid{
-//	NSLog(@"45");
-	
-	//FlyrAppDelegate *appDele = [[UIApplication sharedApplication]delegate];
-	//appDele._session = _session;
-//}
-
-
-- (void)postDismissCleanup {
-	//FlyrAppDelegate *appDele =(FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
-	//[appDele.perDialog dismiss:YES];
-	[twitDialog dismiss:YES];
-}
-
-- (void)dismissNavBar:(BOOL)animated {
-	if (animated) {
-		[UIView beginAnimations:nil context:nil];
-		[UIView setAnimationDuration:1];
-		[UIView setAnimationDelegate:self];
-		[UIView setAnimationDidStopSelector:@selector(postDismissCleanup)];
-		navBar.alpha = 0;
-		[UIView commitAnimations];
-	} else {
-		[self postDismissCleanup];
-	}
-}
-
--(void)viewWillDisappear:(BOOL)animated{
-	[super viewWillDisappear:YES];
-	//[self dismissNavBar:YES];
-	//[self.navigationController popToRootViewControllerAnimated:YES];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
 
 @end

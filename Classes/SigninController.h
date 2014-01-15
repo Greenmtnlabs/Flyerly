@@ -16,7 +16,7 @@
 #import "ParentViewController.h"
 
 
-@class AccountSelecter,Singleton,RegisterController,ResetPWViewController,MyCustomCell;
+@class AccountSelecter,Singleton,RegisterController,ResetPWViewController;
 
 @interface SigninController : ParentViewController <PFLogInViewControllerDelegate,FBLoginViewDelegate,UIActionSheetDelegate >{
     

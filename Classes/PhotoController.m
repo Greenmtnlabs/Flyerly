@@ -12,9 +12,7 @@
 #import "Common.h"
 #import "LoginController.h"
 #import "FlyrAppDelegate.h"
-#import "MyNavigationBar.h"
 #import "SaveFlyerController.h"
-#import "ImageCache.h"
 #import "DraftViewController.h"
 #import "HelpController.h"
 #import <Parse/PFUser.h>
@@ -28,7 +26,7 @@
 @implementation PhotoController
 @synthesize imgView,imgPicker,imageNameNew,msgTextView,finalFlyer;
 @synthesize fontScrollView,colorScrollView,templateScrollView,sizeScrollView,borderScrollView,fontBorderScrollView,symbolScrollView,iconScrollView;
-@synthesize selectedFont,selectedColor,navBar;
+@synthesize selectedFont,selectedColor;
 @synthesize selectedTemplate,selectedSymbol,selectedIcon;
 @synthesize fontTabButton,colorTabButton,sizeTabButton,selectedText,selectedSize,borderTabButton,fontBorderTabButton,addMoreFontTabButton,addMoreIconTabButton,addMorePhotoTabButton,addMoreSymbolTabButton,arrangeLayerTabButton;
 @synthesize templateBckgrnd,textBackgrnd;
@@ -1922,14 +1920,6 @@ int arrangeLayerIndex;
     globle.NBUimage = nil;
     [self.navigationController pushViewController:nbuCamera animated:YES];
 
-    /*
-    CameraOverlayView *cameraOverlay =[[CameraOverlayView alloc] initWithNibName:@"CameraOverlayView" bundle:nil];
-    cameraOverlay.photoController = self;
-    self.imgPicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-    self.imgPicker.cameraOverlayView = cameraOverlay.view;
-    self.imgPicker.showsCameraControls = NO;
-    [self presentModalViewController:self.imgPicker animated:YES];
-    */
     [Flurry logEvent:@"Custom Background"];
 }
 
@@ -2085,12 +2075,6 @@ int arrangeLayerIndex;
 	}
 	else
 	{
-		[navBar show:@"" left:@"" right:@""];
-		[self.view bringSubviewToFront:navBar];
-		[navBar.leftButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-		[navBar.rightButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-
-		
 		[self.navigationController popViewControllerAnimated:YES];
 	}
 	
@@ -2968,14 +2952,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     symbolTouchFlag= NO;
     iconTouchFlag = NO;
 	photoImgView.userInteractionEnabled = NO;
-	
-    [navBar show:@"Save/Share" left:@"Style" right:@"Menu"];
-	[self.view bringSubviewToFront:navBar];
-	[navBar.leftButton removeTarget:self action:@selector(callStyle) forControlEvents:UIControlEventTouchUpInside];
-	[navBar.rightButton removeTarget:self action:@selector(callSaveAndShare) forControlEvents:UIControlEventTouchUpInside];
-	
-	[navBar.leftButton addTarget:self action:@selector(callStyle) forControlEvents:UIControlEventTouchUpInside];
-	[navBar.rightButton addTarget:self action:@selector(callMenu) forControlEvents:UIControlEventTouchUpInside];
 	
     // Create right bar button
    // UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStylePlain target:self action:@selector(callMenu)];
@@ -5649,24 +5625,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 }
 
 #pragma mark  View Disappear Methods
-
-- (void)dismissNavBar:(BOOL)animated {
-	
-	
-	if (animated) {
-		[UIView beginAnimations:nil context:nil];
-		[UIView setAnimationDuration:1];
-		[UIView setAnimationDelegate:self];
-		[UIView setAnimationDidStopSelector:@selector(postDismissCleanup)];
-		navBar.alpha = ALPHA0;
-		[UIView commitAnimations];
-	}
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-	[super viewWillDisappear:animated];
-	[self dismissNavBar:YES];
-}
 
 - (void)didReceiveMemoryWarning {
 	NSLog(@"didReceiveMemoryWarning");
