@@ -80,7 +80,6 @@
 	UIButton *heightTabButton;
 	NSInteger imgPickerFlag;
 	
-	UIButton *addMoreFontTabButton;
 	UIButton *addMorePhotoTabButton;
 	UIButton *addMoreIconTabButton;
 	UIButton *addMoreSymbolTabButton;
@@ -149,8 +148,6 @@
 @property(nonatomic, strong) NSMutableArray *cpySymbolLayersArray;
 @property(nonatomic, strong) NSMutableArray *cpyIconLayersArray;
 @property(nonatomic, strong) NSMutableArray *cpyPhotoLayersArray;
-
-@property(nonatomic, strong)IBOutlet  UIImageView *imgView;
 @property (nonatomic,strong)  UIImageView *photoImgView;
 @property(nonatomic, strong)  UIImageView *symbolImgView;
 @property(nonatomic, strong)  UIImageView *iconImgView;
@@ -201,10 +198,7 @@
 @property (nonatomic,strong) UIButton *widthTabButton;
 @property (nonatomic,strong) UIButton *heightTabButton;
 
-@property (nonatomic, strong) UIButton *addMoreFontTabButton;
-@property (nonatomic, strong) UIButton *addMorePhotoTabButton;
-@property (nonatomic, strong) UIButton *addMoreIconTabButton;
-@property (nonatomic, strong) UIButton *addMoreSymbolTabButton;
+//Pending
 @property (nonatomic, strong) UIButton *arrangeLayerTabButton;
 
 @property (nonatomic, assign)BOOL photoTouchFlag;
@@ -225,6 +219,13 @@
 @property(nonatomic, strong) IBOutlet UIImageView *imgView;
 @property(nonatomic, strong) IBOutlet UIView *contextView;
 @property(nonatomic, strong) IBOutlet UIView *libraryContextView;
+@property(nonatomic, strong) IBOutlet UIView *libFlyer;
+
+// These are LibFlyer
+@property (nonatomic, strong) IBOutlet UIButton *addMoreFontTabButton;
+@property (nonatomic, strong)IBOutlet UIButton *addMorePhotoTabButton;
+@property (nonatomic, strong)IBOutlet UIButton *addMoreIconTabButton;
+@property (nonatomic, strong)IBOutlet UIButton *addMoreSymbolTabButton;
 
 
 -(void)loadCustomPhotoLibrary;
@@ -254,5 +255,7 @@
 -(void)setInAppDictionary:(NSMutableDictionary *)inAppDict;
 
 -(void)AddScrollView:(id)obj;
+-(void)AddBottomTabs:(id)obj;
+-(IBAction)setAddMoreLayerTabAction:(id)sender;
 
 @end

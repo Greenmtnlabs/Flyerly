@@ -7,8 +7,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhotoController">
             <connections>
+                <outlet property="addMoreFontTabButton" destination="rb6-j8-Siq" id="Gf9-7b-4Nr"/>
+                <outlet property="addMoreIconTabButton" destination="fpi-NX-k5V" id="Dmn-8a-OqK"/>
+                <outlet property="addMorePhotoTabButton" destination="fcG-xw-IqZ" id="Mj3-Ub-wYi"/>
+                <outlet property="addMoreSymbolTabButton" destination="a4z-OF-QiI" id="fVq-xN-FAx"/>
                 <outlet property="contextView" destination="rbq-e2-wbO" id="BDJ-TX-Ld1"/>
                 <outlet property="imgView" destination="Xaq-YE-kc7" id="te3-JW-Ibt"/>
+                <outlet property="libFlyer" destination="P8i-Fw-Gci" id="DAb-aV-gaf"/>
                 <outlet property="libraryContextView" destination="hm4-bV-Hep" id="yQz-pZ-s3b"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
@@ -41,10 +46,64 @@
         <view contentMode="scaleToFill" id="P8i-Fw-Gci">
             <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="rb6-j8-Siq">
+                    <rect key="frame" x="0.0" y="0.0" width="66" height="45"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="text_icon.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="setAddMoreLayerTabAction:" destination="-1" eventType="touchUpInside" id="EX5-f9-DFo"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="fcG-xw-IqZ">
+                    <rect key="frame" x="64" y="0.0" width="66" height="45"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="image_icon.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="setAddMoreLayerTabAction:" destination="-1" eventType="touchUpInside" id="0t5-f8-cbw"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="fpi-NX-k5V">
+                    <rect key="frame" x="127" y="0.0" width="66" height="45"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="symbolicon_button.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="setAddMoreLayerTabAction:" destination="-1" eventType="touchUpInside" id="CED-OA-X9Z"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="a4z-OF-QiI">
+                    <rect key="frame" x="191" y="0.0" width="66" height="45"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="icon_button.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="setAddMoreLayerTabAction:" destination="-1" eventType="touchUpInside" id="a7u-gC-Jvt"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="zoh-mW-4K3">
+                    <rect key="frame" x="255" y="0.0" width="66" height="45"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="arrangeicon_button.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+            </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
         </view>
     </objects>
     <resources>
         <image name="Template15.jpg" width="612" height="612"/>
+        <image name="arrangeicon_button.png" width="64" height="45"/>
+        <image name="icon_button.png" width="64" height="45"/>
+        <image name="image_icon.png" width="64" height="45"/>
+        <image name="symbolicon_button.png" width="64" height="45"/>
+        <image name="text_icon.png" width="66" height="45"/>
     </resources>
 </document>

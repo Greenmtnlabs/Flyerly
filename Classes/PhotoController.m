@@ -28,7 +28,7 @@
 @synthesize fontScrollView,colorScrollView,templateScrollView,sizeScrollView,borderScrollView,fontBorderScrollView,symbolScrollView,iconScrollView;
 @synthesize selectedFont,selectedColor;
 @synthesize selectedTemplate,selectedSymbol,selectedIcon;
-@synthesize fontTabButton,colorTabButton,sizeTabButton,selectedText,selectedSize,borderTabButton,fontBorderTabButton,addMoreFontTabButton,addMoreIconTabButton,addMorePhotoTabButton,addMoreSymbolTabButton,arrangeLayerTabButton;
+@synthesize fontTabButton,colorTabButton,sizeTabButton,selectedText,selectedSize,borderTabButton,fontBorderTabButton,addMoreIconTabButton,addMorePhotoTabButton,addMoreSymbolTabButton,arrangeLayerTabButton;
 @synthesize templateBckgrnd,textBackgrnd;
 @synthesize cameraTabButton,photoTabButton,widthTabButton,heightTabButton,photoImgView,symbolImgView,iconImgView;
 @synthesize photoTouchFlag,symbolTouchFlag,iconTouchFlag, lableTouchFlag,lableLocation,warningAlert,discardAlert,deleteAlert,editAlert, inAppAlert;
@@ -36,7 +36,7 @@
 @synthesize cpyTextLabelLayersArray,cpyIconLayersArray,cpyPhotoLayersArray,cpySymbolLayersArray;
 @synthesize flyerNumber;
 
-@synthesize contextView,libraryContextView;
+@synthesize contextView,libraryContextView,libFlyer,addMoreFontTabButton;
 
 int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track selected Tab on Add More Layer screen
 int symbolLayerCount = 0; // Symbol layer count to set tag value
@@ -286,10 +286,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 	cameraTabButton =[UIButton buttonWithType:UIButtonTypeCustom];
 	widthTabButton =[UIButton buttonWithType:UIButtonTypeCustom];
 	heightTabButton =[UIButton buttonWithType:UIButtonTypeCustom];
-    addMoreFontTabButton =[UIButton buttonWithType:UIButtonTypeCustom];
-    addMoreIconTabButton =[UIButton buttonWithType:UIButtonTypeCustom];
-    addMorePhotoTabButton =[UIButton buttonWithType:UIButtonTypeCustom];
-    addMoreSymbolTabButton =[UIButton buttonWithType:UIButtonTypeCustom];
+    
     arrangeLayerTabButton =[UIButton buttonWithType:UIButtonTypeCustom];
     
     fontTabButton.showsTouchWhenHighlighted = YES;
@@ -301,10 +298,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     photoTabButton.showsTouchWhenHighlighted = YES;
     widthTabButton.showsTouchWhenHighlighted = YES;
     heightTabButton.showsTouchWhenHighlighted = YES;
-    addMoreFontTabButton.showsTouchWhenHighlighted = YES;
-    addMorePhotoTabButton.showsTouchWhenHighlighted = YES;
-    addMoreIconTabButton.showsTouchWhenHighlighted = YES;
-    addMoreSymbolTabButton.showsTouchWhenHighlighted = YES;
+    
     arrangeLayerTabButton.showsTouchWhenHighlighted = YES;
 
     
@@ -318,11 +312,8 @@ int photoLayerCount = 0; // Photo layer count to set tag value
         photoTabButton.frame = CGRectMake(79, 502, 80, 46);
         widthTabButton.frame = CGRectMake(159, 502, 80, 46);
         heightTabButton.frame = CGRectMake(239, 502, 80, 46);
-        addMoreFontTabButton.frame = CGRectMake(-1, 502, 65, 46);
-        addMorePhotoTabButton.frame = CGRectMake(64, 502, 65, 46);
-        addMoreIconTabButton.frame = CGRectMake(129, 502, 65, 46);
-        addMoreSymbolTabButton.frame = CGRectMake(194, 502, 65, 46);
-        arrangeLayerTabButton.frame = CGRectMake(259, 502, 65, 46);        
+        
+        arrangeLayerTabButton.frame = CGRectMake(259, 502, 65, 46);
 
     }else{
         fontTabButton.frame = CGRectMake(-1, 415, 65, 46);
@@ -334,10 +325,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
         photoTabButton.frame = CGRectMake(79, 415, 80, 46);
         widthTabButton.frame = CGRectMake(159, 415, 80, 46);
         heightTabButton.frame = CGRectMake(239, 415, 81, 46);
-        addMoreFontTabButton.frame = CGRectMake(-1, 415, 65, 46);
-        addMorePhotoTabButton.frame = CGRectMake(64, 415, 65, 46);
-        addMoreIconTabButton.frame = CGRectMake(129, 415, 65, 46);
-        addMoreSymbolTabButton.frame = CGRectMake(194, 415, 65, 46);
+
         arrangeLayerTabButton.frame = CGRectMake(259, 415, 65, 46);
     }
 	[fontTabButton setBackgroundImage:[UIImage imageNamed:@"font_button"] forState:UIControlStateNormal];
@@ -413,39 +401,18 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 	[self.view addSubview:heightTabButton];
     
     // Add more layer tabs
-	[addMoreFontTabButton setBackgroundImage:[UIImage imageNamed:@"text_icon"] forState:UIControlStateNormal];
     [addMoreFontTabButton setBackgroundImage:[UIImage imageNamed:@"text_icon_selected"] forState:UIControlStateHighlighted];
-
-	[addMoreFontTabButton addTarget:self action:@selector(setAddMoreLayerTabAction:) forControlEvents:UIControlEventTouchUpInside];
-	addMoreFontTabButton.alpha =  ALPHA0;
 	addMoreFontTabButton.tag = 10001;
-	[self.view addSubview:addMoreFontTabButton];
 	
-	[addMorePhotoTabButton setBackgroundImage:[UIImage imageNamed:@"image_icon"] forState:UIControlStateNormal];
     [addMorePhotoTabButton setBackgroundImage:[UIImage imageNamed:@"image_icon_selected"] forState:UIControlStateHighlighted];
-    
-	[addMorePhotoTabButton addTarget:self action:@selector(setAddMoreLayerTabAction:) forControlEvents:UIControlEventTouchUpInside];
-	addMorePhotoTabButton.alpha =  ALPHA0;
 	addMorePhotoTabButton.tag = 10002;
-    addMorePhotoTabButton.titleLabel.text = @"Photo";
-	[self.view addSubview:addMorePhotoTabButton];
 	
-	[addMoreSymbolTabButton setBackgroundImage:[UIImage imageNamed:@"symbolicon_button"] forState:UIControlStateNormal];
-    	[addMoreSymbolTabButton setBackgroundImage:[UIImage imageNamed:@"symbolicon_button_selected"] forState:UIControlStateHighlighted];
-	[addMoreSymbolTabButton addTarget:self action:@selector(setAddMoreLayerTabAction:) forControlEvents:UIControlEventTouchUpInside];
-	addMoreSymbolTabButton.alpha =  ALPHA0;
+    [addMoreSymbolTabButton setBackgroundImage:[UIImage imageNamed:@"symbolicon_button_selected"] forState:UIControlStateHighlighted];
 	addMoreSymbolTabButton.tag = 10003;
-	[self.view addSubview:addMoreSymbolTabButton];
-    
-	[addMoreIconTabButton setBackgroundImage:[UIImage imageNamed:@"icon_button"] forState:UIControlStateNormal];
     
     [addMoreIconTabButton setBackgroundImage:[UIImage imageNamed:@"icon_button_selected"] forState:UIControlStateHighlighted];
-
-	[addMoreIconTabButton addTarget:self action:@selector(setAddMoreLayerTabAction:) forControlEvents:UIControlEventTouchUpInside];
-	addMoreIconTabButton.alpha =  ALPHA0;
-	addMoreIconTabButton.tag = 10004;
-	[self.view addSubview:addMoreIconTabButton];
-    
+    addMoreIconTabButton.tag = 10004;
+	   
 	[arrangeLayerTabButton setBackgroundImage:[UIImage imageNamed:@"arrangeicon_button"] forState:UIControlStateNormal];
     [arrangeLayerTabButton setBackgroundImage:[UIImage imageNamed:@"arrangeicon_button_selected"] forState:UIControlStateHighlighted];
 	
@@ -453,26 +420,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 	arrangeLayerTabButton.alpha =  ALPHA0;
 	arrangeLayerTabButton.tag = 10005;
 	[self.view addSubview:arrangeLayerTabButton];
-    // Changes
-    [addMoreFontTabButton setTitle:@"Text" forState:UIControlStateNormal];
-    [addMoreFontTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
-    addMoreFontTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
     
-    [addMorePhotoTabButton setTitle:@"Photo" forState:UIControlStateNormal];
-    [addMorePhotoTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
-    addMorePhotoTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
-    
-    [addMoreSymbolTabButton setTitle:@"Clipart" forState:UIControlStateNormal];
-    [addMoreSymbolTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
-    addMoreSymbolTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
-    
-    [arrangeLayerTabButton setTitle:@"Edit" forState:UIControlStateNormal];
-    [arrangeLayerTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
-    arrangeLayerTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
-    
-    [addMoreIconTabButton setTitle:@"Symbols" forState:UIControlStateNormal];
-    [addMoreIconTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
-    addMoreIconTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
 }
 
 
@@ -482,6 +430,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     globle = [Singleton RetrieveSingleton];
     [self.view setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
     [self.contextView setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
+    [self AddBottomTabs:libFlyer];
 
     photoTouchFlag=NO;
 	symbolTouchFlag=NO;
@@ -570,7 +519,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
         //all Text Sub Scroll Views Initialize
         //for Using in ContextView
         fontScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(13, 0,320,130)];
-        colorScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(13, 0,320,130)];
+        colorScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(8, 0,320,130)];
         sizeScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(13, 0,320,130)];
         borderScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(13, 0,320,130)];
         fontBorderScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(13, 0,320,130)];
@@ -2312,10 +2261,6 @@ int arrangeLayerIndex;
     widthTabButton.alpha = ALPHA0;
     heightTabButton.alpha = ALPHA0;
     
-    self.addMoreFontTabButton.alpha = ALPHA0;
-    self.addMoreIconTabButton.alpha = ALPHA0;
-    self.addMorePhotoTabButton.alpha = ALPHA0;
-    self.addMoreSymbolTabButton.alpha = ALPHA0;
     self.arrangeLayerTabButton.alpha = ALPHA0;
 
 
@@ -2365,18 +2310,9 @@ int arrangeLayerIndex;
     [self.moreLayersLabel setHidden:NO];
 }
 -(void)hideAddMoreTab{
-    [self.addMoreFontTabButton setHidden:YES];
-    [self.addMorePhotoTabButton setHidden:YES];
-    [self.addMoreSymbolTabButton setHidden:YES];
-    [self.addMoreIconTabButton setHidden:YES];
     [self.arrangeLayerTabButton setHidden:YES];
-    addMoreFontTabButton.hidden = YES;
 }
 -(void)showAddMoreTab{
-    [self.addMoreFontTabButton setHidden:NO];
-    [self.addMorePhotoTabButton setHidden:NO];
-    [self.addMoreSymbolTabButton setHidden:NO];
-    [self.addMoreIconTabButton setHidden:NO];
     [self.arrangeLayerTabButton setHidden:NO];
 }
 
@@ -2818,36 +2754,9 @@ int arrangeLayerIndex;
     [self hideAddMoreButton];
 
     templateBckgrnd.alpha = ALPHA0;
+    [arrangeLayerTabButton setBackgroundImage:[UIImage imageNamed:@"arrangeicon_button"] forState:UIControlStateNormal];
     
-
-
-	[addMoreFontTabButton setBackgroundImage:[UIImage imageNamed:@"text_icon"] forState:UIControlStateNormal];
-	[addMorePhotoTabButton setBackgroundImage:[UIImage imageNamed:@"image_icon"] forState:UIControlStateNormal];
-	[addMoreSymbolTabButton setBackgroundImage:[UIImage imageNamed:@"symbolicon_button"] forState:UIControlStateNormal];
-	[addMoreIconTabButton setBackgroundImage:[UIImage imageNamed:@"icon_button"] forState:UIControlStateNormal];
-	[arrangeLayerTabButton setBackgroundImage:[UIImage imageNamed:@"arrangeicon_button"] forState:UIControlStateNormal];
-    
-    // Changes
-    [addMoreFontTabButton setTitle:@"Text" forState:UIControlStateNormal];
-    [addMoreFontTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
-    addMoreFontTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
-    
-    [addMorePhotoTabButton setTitle:@"Photo" forState:UIControlStateNormal];
-    [addMorePhotoTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
-    addMorePhotoTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
-    
-    [addMoreSymbolTabButton setTitle:@"Clipart" forState:UIControlStateNormal];
-    [addMoreSymbolTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
-    addMoreSymbolTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
-    
-    [arrangeLayerTabButton setTitle:@"Edit" forState:UIControlStateNormal];
-    [arrangeLayerTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
-    arrangeLayerTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
-    
-    [addMoreIconTabButton setTitle:@"Symbols" forState:UIControlStateNormal];
-    [addMoreIconTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
-    addMoreIconTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
-    
+//Changes
     [cameraTabButton setTitle:@"Camera" forState:UIControlStateNormal];
     [cameraTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
     cameraTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
@@ -2868,15 +2777,6 @@ int arrangeLayerIndex;
     heightTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
     [heightTabButton.titleLabel setTextColor:[UIColor whiteColor]];
     
-
-    [addMorePhotoTabButton setBackgroundImage:[UIImage imageNamed:@"image_icon_selected"] forState:UIControlStateHighlighted];
-    [addMoreFontTabButton setBackgroundImage:[UIImage imageNamed:@"text_icon_selected"] forState:UIControlStateHighlighted];
-    [addMoreSymbolTabButton setBackgroundImage:[UIImage imageNamed:@"symbolicon_button_selected"] forState:UIControlStateHighlighted];
-    
-    [addMoreIconTabButton setBackgroundImage:[UIImage imageNamed:@"icon_button_selected"] forState:UIControlStateHighlighted];
-    
-    [arrangeLayerTabButton setBackgroundImage:[UIImage imageNamed:@"arrangeicon_button_selected"] forState:UIControlStateHighlighted];
-
     
     ((CustomLabel *)[[self textLabelLayersArray] lastObject]).alpha = 1;
     photoImgView.alpha=0;
@@ -2894,10 +2794,6 @@ int arrangeLayerIndex;
 	textBackgrnd.alpha = ALPHA0;
 
 
-    addMoreFontTabButton.alpha = ALPHA1;
-	addMorePhotoTabButton.alpha = ALPHA1;
-	addMoreSymbolTabButton.alpha = ALPHA1;
-	addMoreIconTabButton.alpha = ALPHA1;
 	arrangeLayerTabButton.alpha = ALPHA1;
 
     selectedAddMoreLayerTab = ADD_MORE_TEXTTAB;
@@ -3118,7 +3014,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	}
 }
 
--(void) setAddMoreLayerTabAction:(id) sender {
+-(IBAction) setAddMoreLayerTabAction:(id) sender {
     layerallow = 0;
     
     if(layerEditMessage!=nil){
@@ -3167,12 +3063,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 		[UIView beginAnimations:nil context:NULL];
 		[UIView setAnimationDuration:0.4f];
         
-        [addMorePhotoTabButton setBackgroundImage:[UIImage imageNamed:@"image_icon_selected"] forState:UIControlStateHighlighted];
-        [addMoreFontTabButton setBackgroundImage:[UIImage imageNamed:@"text_icon_selected"] forState:UIControlStateNormal];
-        [addMoreSymbolTabButton setBackgroundImage:[UIImage imageNamed:@"symbolicon_button_selected"] forState:UIControlStateHighlighted];
-        
-        [addMoreIconTabButton setBackgroundImage:[UIImage imageNamed:@"icon_button_selected"] forState:UIControlStateHighlighted];
-        
         [arrangeLayerTabButton setBackgroundImage:[UIImage imageNamed:@"arrangeicon_button_selected"] forState:UIControlStateHighlighted];
 
         [addMorePhotoTabButton setBackgroundImage:[UIImage imageNamed:@"image_icon"] forState:UIControlStateNormal];
@@ -3181,9 +3071,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         [arrangeLayerTabButton setBackgroundImage:[UIImage imageNamed:@"arrangeicon_button"] forState:UIControlStateNormal];
         
         // Changes
-        [addMoreFontTabButton setTitle:@"Text" forState:UIControlStateNormal];
-        [addMoreFontTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
-        addMoreFontTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
         
         [addMorePhotoTabButton setTitle:@"Photo" forState:UIControlStateNormal];
         [addMorePhotoTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
@@ -3246,16 +3133,11 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         
         [arrangeLayerTabButton setBackgroundImage:[UIImage imageNamed:@"arrangeicon_button_selected"] forState:UIControlStateHighlighted];
 
-
-        [addMoreFontTabButton setBackgroundImage:[UIImage imageNamed:@"text_icon"] forState:UIControlStateNormal];
         
         [addMoreSymbolTabButton setBackgroundImage:[UIImage imageNamed:@"symbolicon_button"] forState:UIControlStateNormal];
         [addMoreIconTabButton setBackgroundImage:[UIImage imageNamed:@"icon_button"] forState:UIControlStateNormal];
         [arrangeLayerTabButton setBackgroundImage:[UIImage imageNamed:@"arrangeicon_button"] forState:UIControlStateNormal];
-        // Changes
-        [addMoreFontTabButton setTitle:@"Text" forState:UIControlStateNormal];
-        [addMoreFontTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
-        addMoreFontTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
+        
         
         [addMorePhotoTabButton setTitle:@"Photo" forState:UIControlStateNormal];
         [addMorePhotoTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
@@ -3315,34 +3197,8 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         [arrangeLayerTabButton setBackgroundImage:[UIImage imageNamed:@"arrangeicon_button_selected"] forState:UIControlStateHighlighted];
 
 
-        [addMoreFontTabButton setBackgroundImage:[UIImage imageNamed:@"text_icon"] forState:UIControlStateNormal];
-        [addMoreFontTabButton setTitle:@"TEXT" forState:UIControlStateNormal];
-
-        [addMorePhotoTabButton setBackgroundImage:[UIImage imageNamed:@"image_icon"] forState:UIControlStateNormal];
-        [addMoreIconTabButton setBackgroundImage:[UIImage imageNamed:@"icon_button"] forState:UIControlStateNormal];
-        [arrangeLayerTabButton setBackgroundImage:[UIImage imageNamed:@"arrangeicon_button"] forState:UIControlStateNormal];
+       [arrangeLayerTabButton setBackgroundImage:[UIImage imageNamed:@"arrangeicon_button"] forState:UIControlStateNormal];
         
-        // Changes
-        [addMoreFontTabButton setTitle:@"Text" forState:UIControlStateNormal];
-        [addMoreFontTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
-        addMoreFontTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
-        
-        [addMorePhotoTabButton setTitle:@"Photo" forState:UIControlStateNormal];
-        [addMorePhotoTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
-        addMorePhotoTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
-        
-        [addMoreSymbolTabButton setTitle:@"Clipart" forState:UIControlStateNormal];
-        [addMoreSymbolTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
-        addMoreSymbolTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
-        
-        [arrangeLayerTabButton setTitle:@"Edit" forState:UIControlStateNormal];
-        [arrangeLayerTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
-        arrangeLayerTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
-        
-        [addMoreIconTabButton setTitle:@"Symbols" forState:UIControlStateNormal];
-        [addMoreIconTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
-        addMoreIconTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
-
 
 		[UIView commitAnimations];
 	}
@@ -3378,33 +3234,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         [arrangeLayerTabButton setBackgroundImage:[UIImage imageNamed:@"arrangeicon_button_selected"] forState:UIControlStateHighlighted];
 
 
-        [addMoreFontTabButton setBackgroundImage:[UIImage imageNamed:@"text_icon"] forState:UIControlStateNormal];
-        [addMoreFontTabButton setTitle:@"TEXT" forState:UIControlStateNormal];
-        [addMorePhotoTabButton setBackgroundImage:[UIImage imageNamed:@"image_icon"] forState:UIControlStateNormal];
-        [addMoreSymbolTabButton setBackgroundImage:[UIImage imageNamed:@"symbolicon_button"] forState:UIControlStateNormal];
         [arrangeLayerTabButton setBackgroundImage:[UIImage imageNamed:@"arrangeicon_button"] forState:UIControlStateNormal];
-        
-        // Changes
-        [addMoreFontTabButton setTitle:@"Text" forState:UIControlStateNormal];
-        [addMoreFontTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
-        addMoreFontTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
-        
-        [addMorePhotoTabButton setTitle:@"Photo" forState:UIControlStateNormal];
-        [addMorePhotoTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
-        addMorePhotoTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
-        
-        [addMoreSymbolTabButton setTitle:@"Clipart" forState:UIControlStateNormal];
-        [addMoreSymbolTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
-        addMoreSymbolTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
-        
-        [arrangeLayerTabButton setTitle:@"Edit" forState:UIControlStateNormal];
-        [arrangeLayerTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
-        arrangeLayerTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
-        
-        [addMoreIconTabButton setTitle:@"Symbols" forState:UIControlStateNormal];
-        [addMoreIconTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
-        addMoreIconTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
-
         
 		[UIView commitAnimations];
 	}
@@ -3413,7 +3243,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         [self SetMenu];
         layerallow = 0 ;
         [arrangeLayerTabButton setBackgroundImage:[UIImage imageNamed:@"arrangeicon_button_selected"] forState:UIControlStateNormal];
-        [addMoreFontTabButton setBackgroundImage:[UIImage imageNamed:@"text_icon"] forState:UIControlStateNormal];
+        
         [addMorePhotoTabButton setBackgroundImage:[UIImage imageNamed:@"image_icon"] forState:UIControlStateNormal];
         [addMoreSymbolTabButton setBackgroundImage:[UIImage imageNamed:@"symbolicon_button"] forState:UIControlStateNormal];
         [addMoreIconTabButton setBackgroundImage:[UIImage imageNamed:@"icon_button"] forState:UIControlStateNormal];
@@ -5665,6 +5495,21 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     //Add ScrollViews
     [self.contextView addSubview:obj];
 
+}
+
+/*
+ * For Adding Bottom Button On runtime
+ */
+-(void)AddBottomTabs:(id)obj{
+
+    // Remove ScrollViews
+    NSArray *viewsToRemove = [self.libraryContextView subviews];
+    for (UIView *v in viewsToRemove) {
+        [v removeFromSuperview];
+    }
+    
+    //Add ScrollViews
+    [self.libraryContextView addSubview:obj];
 }
 
 @end
