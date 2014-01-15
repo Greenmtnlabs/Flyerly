@@ -226,6 +226,7 @@
 
 @property(nonatomic, strong) IBOutlet UIImageView *imgView;
 @property(nonatomic, strong) IBOutlet UIView *contextView;
+@property(nonatomic, strong) IBOutlet UIView *libraryContextView;
 
 
 -(void)loadCustomPhotoLibrary;
@@ -253,4 +254,7 @@
 
 -(NSMutableDictionary *)getInAppDictionary;
 -(void)setInAppDictionary:(NSMutableDictionary *)inAppDict;
+
+-(void)AddScrollView:(id)obj;
+
 @end
