@@ -11,15 +11,12 @@
 #import "Common.h"
 #import "PhotoController.h"
 #import <QuartzCore/QuartzCore.h>
-#import "ImageCache.h"
 #import "LauchViewController.h"
 #import "AfterUpdateController.h"
 #import "AccountController.h"
 #import "DraftViewController.h"
 #import "Flurry.h"
 #import <Parse/Parse.h>
-#import "BZFoursquare.h"
-
 
 NSString *kCheckTokenStep1 = @"kCheckTokenStep";
 NSString *FlickrSharingSuccessNotification = @"FlickrSharingSuccessNotification";
@@ -123,7 +120,6 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 
 
 -(void)clearCache {
-	[[ImageCache sharedImageCache] removeAllImagesInMemory];
     [self.session close];
 }
 
@@ -148,8 +144,6 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
         return YES;
     } else if([[url absoluteString] hasPrefix:@"fb"]){
         return [PFFacebookUtils handleOpenURL:url];
-    } else if([[url absoluteString] hasPrefix:@"fsqapi"]){
-        return [[self foursquare] handleOpenURL:url];
     } else {
         //Tumbler Return
         return nil;//[[SHKTumblr  sharedInstance] handleOpenURL:url];

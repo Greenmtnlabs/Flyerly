@@ -7,7 +7,6 @@
 //
 
 #import "MyCustomCell.h"
-#import "UIImageExtras.h"
 #import "FlyrAppDelegate.h"
 
 @implementation MyCustomCell

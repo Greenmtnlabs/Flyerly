@@ -16,7 +16,6 @@
 #import "SHKInstagram.h"
 #import "SHKFlickr.h"
 #import "SHKTumblr.h"
-#import "MyNavigationBar.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import <Twitter/Twitter.h>
 #import <MessageUI/MessageUI.h>
@@ -61,7 +60,6 @@
 	NSString *detailFileName;
 	NSString *imageFileName;
     Singleton *globle;
-	MyNavigationBar *navBar;
 	FlyrViewController *fvController;
     FlyerOverlayController *overlayController;
 	SaveFlyerController *svController;
@@ -123,7 +121,6 @@
 @property(nonatomic,strong)NSString *detailFileName;
 @property(nonatomic,strong)NSString *imageFileName;
 
-@property(nonatomic,strong) MyNavigationBar *navBar;
 @property(nonatomic,strong)FlyrViewController *fvController;
 @property(nonatomic,strong)SaveFlyerController *svController;
 @property (nonatomic, strong) LoadingView *loadingView;
