@@ -141,19 +141,6 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
     return YES;
 }
 
-- (void) searchClick{
-    searching = YES;
-	letUserSelectRow = NO;
-	self.tView.scrollEnabled = NO;
-    [searchTextField resignFirstResponder];
-    [self searchTableView];
-        [searchTextField addTarget:self action:@selector(updateLabelUsingContentsOfTextField:) forControlEvents:UIControlEventEditingChanged];
-}
-
-- (void)updateLabelUsingContentsOfTextField:(id)sender {
-    [self searchTableView];
-}
-
 - (void) searchTableView:(NSString *)schTxt {
 	NSString *sTemp;
     NSString *sTemp1;

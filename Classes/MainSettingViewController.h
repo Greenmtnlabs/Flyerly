@@ -31,7 +31,6 @@
     UIAlertView *warningAlert;
     PhotoController *ptController;
     AccountSelecter *accountUpdater;
-    InputViewController *inputcontroller;
     Singleton *globle;
 
 }

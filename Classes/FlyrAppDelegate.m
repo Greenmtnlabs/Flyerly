@@ -342,9 +342,6 @@ if it exist then we call Merging Process
     NSString  *NewUID = user.objectId;
     NSString  *OldUID = oldUserobj.objectId;
     
-    
-    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-    
 	NSString *homeDirectoryPath = NSHomeDirectory();
     NSString *NewUIDFolderName = [user objectForKey:@"username"];
 	NSString *OldUIDPath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/",[oldUserobj objectForKey:@"username"]]];

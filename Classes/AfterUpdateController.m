@@ -15,21 +15,19 @@
 @implementation AfterUpdateController
 @synthesize launchController;
 
--(void)viewDidLoad{
+-(void)viewDidLoad {
     self.navigationController.navigationBarHidden = YES;
-    
 }
 
--(IBAction)ok{
+-(IBAction)ok {
     
-    //FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-    //[self.navigationController popToViewController:appDelegate.accountController animated:YES];
-    AccountController *accountController = [AccountController alloc];
+    AccountController *accountController = nil; ;
     if(IS_IPHONE_5){
-        [accountController initWithNibName:@"AcountViewControlleriPhone5" bundle:nil];
+        accountController = [[AccountController alloc] initWithNibName:@"AcountViewControlleriPhone5" bundle:nil];
     }else{
-        [accountController initWithNibName:@"AccountController" bundle:nil];
+        accountController = [[AccountController alloc] initWithNibName:@"AccountController" bundle:nil];
     }
+    
     [self.navigationController pushViewController:accountController animated:YES];
 }
 

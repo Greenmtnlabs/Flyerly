@@ -19,7 +19,7 @@
 
 @implementation AddFriendsController
 @synthesize uiTableView, contactsArray, deviceContactItems, contactsLabel, facebookLabel, twitterLabel, doneLabel, selectAllLabel, unSelectAllLabel, inviteLabel, contactsButton, facebookButton, twitterButton, loadingView, searchTextField, facebookArray, twitterArray,fbinvited,Twitterinvited,iPhoneinvited;
-@synthesize contactBackupArray, facebookBackupArray, twitterBackupArray,account;
+@synthesize contactBackupArray, facebookBackupArray, twitterBackupArray;
 
 const int TWITTER_TAB = 2;
 const int FACEBOOK_TAB = 1;
@@ -304,8 +304,8 @@ BOOL selectAll;
              if (granted) {
              
              // Populate array with all available Twitter accounts
-             NSArray *arrayOfAccounts = [accountStore accountsWithAccountType:FBaccountType];
-             ACAccount *account = [arrayOfAccounts lastObject];
+             arrayOfAccounts = [accountStore accountsWithAccountType:FBaccountType];
+             account = [arrayOfAccounts lastObject];
              
              // Sanity check
              if ([arrayOfAccounts count] > 0) {
@@ -507,18 +507,18 @@ int totalCount = 0;
             
             if([TWTweetComposeViewController canSendTweet]){
                 
-                ACAccountStore *account = [[ACAccountStore alloc] init];
-                ACAccountType *accountType = [account accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+                ACAccountStore *accountStore = [[ACAccountStore alloc] init];
+                ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
                 
                 // Request access from the user to access their Twitter account
-                [account requestAccessToAccountsWithType:accountType withCompletionHandler:^(BOOL granted, NSError *error) {
+                [accountStore requestAccessToAccountsWithType:accountType withCompletionHandler:^(BOOL granted, NSError *error) {
                     // Did user allow us access?
                     if (granted == YES) {
                         
                         //grantedBool = YES;
                         
                         // Populate array with all available Twitter accounts
-                        arrayOfAccounts = [account accountsWithAccountType:accountType];
+                        arrayOfAccounts = [accountStore accountsWithAccountType:accountType];
                         self.twitterArray = [[NSMutableArray alloc] init];
                         
                         // Sanity check
@@ -998,7 +998,7 @@ int totalCount = 0;
         return contactsArray;
     else if(selectedTab == FACEBOOK_TAB)
         return facebookArray;
-    else if(selectedTab == TWITTER_TAB)
+    else
         return twitterArray;
 }
 
@@ -1007,7 +1007,7 @@ int totalCount = 0;
         return contactBackupArray;
     else if(selectedTab == FACEBOOK_TAB)
         return facebookBackupArray;
-    else if(selectedTab == TWITTER_TAB)
+    else
         return twitterBackupArray;
 }
 

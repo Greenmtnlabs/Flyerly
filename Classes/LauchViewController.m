@@ -25,7 +25,7 @@
 
 @synthesize ptController,spController,tpController,createFlyrLabel,savedFlyrLabel,inviteFriendLabel,addFriendsController;
 @synthesize firstFlyer, secondFlyer, thirdFlyer, fourthFlyer, photoArray, photoDetailArray, createFlyrButton, savedFlyrButton, inviteFriendButton;
-@synthesize facebookLikeView=_facebookLikeView;
+@synthesize facebookLikeView;
 @synthesize likeButton,followButton,webview;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {

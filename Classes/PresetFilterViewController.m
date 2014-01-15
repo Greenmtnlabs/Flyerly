@@ -26,10 +26,13 @@
     NSArray * _providerFilters;
 }
 
+@synthesize globle;
+
+
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-     globle = [Singleton RetrieveSingleton];
+    globle = [Singleton RetrieveSingleton];
     
     //Apply Button
     UIButton *applyButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
@@ -60,39 +63,16 @@
     // Configure and set all available filters
     _providerFilters = [NBUFilterProvider availableFilters];
     self.filters = _providerFilters;
-
-    /*
-     Another possibility:
-     
-    _filters = @[
-                 [NBUFilterProvider filterWithName:@"Reset"
-                                              type:NBUFilterTypeNone
-                                            values:nil],
-                 [NBUFilterProvider filterWithName:nil
-                                              type:NBUFilterTypeGamma
-                                            values:nil],
-                 [NBUFilterProvider filterWithName:nil
-                                              type:NBUFilterTypeSaturation
-                                            values:nil],
-                 [NBUFilterProvider filterWithName:nil
-                                              type:NBUFilterTypeSharpen
-                                            values:nil]
-                 ];
-     */
     
     // Our test image
-    self.image = globle.NBUimage; //[UIImage imageNamed:@"photo_hires.jpg"];
+    self.image = globle.NBUimage;
+    
+    __unsafe_unretained PresetFilterViewController *weakSelf = self;
     
     // Our resultBlock
-    self.resultBlock = ^(UIImage * image)
-    {
+    self.resultBlock = ^(UIImage * image) {
         // *** Do whatever you want with the resulting image here ***
-         globle.NBUimage = image;
-        // Push the resulting image in a new controller
-        //NBUGalleryViewController * controller = [NBUGalleryViewController new];
-        //controller.objectArray = @[image];
-        //[weakSelf.navigationController pushViewController:controller
-          //                                       animated:YES];
+        weakSelf.globle.NBUimage = image;
     };
 }
 

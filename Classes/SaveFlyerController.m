@@ -152,14 +152,9 @@
 }
 
 #pragma mark  faceBook PHOTO UPLOAD 
--(void)uploadPhoto
-{
-	NSLog(@"facebook-uploaded");
-	
-	NSDictionary *params = @{@"caption": @"Posted by SocialFlyr"}; 
-	//[[FBRequest requestWithDelegate:self] call:@"facebook.photos.upload" params:params dataParam:(NSData*)flyrImg];
-    [FBRequest requestForUploadPhoto:flyrImg];
 
+-(void)uploadPhoto {
+    [FBRequest requestForUploadPhoto:flyrImg];
 }
 
 #pragma mark  In APP MAIL  PHOTO UPLOAD 
@@ -250,7 +245,6 @@
 
 -(void) uploadOption:(id) sender 
 {
-	[self disableBack];
 	[uploadButton setAlpha:0];
 	if(sender == twitterButton)
 	{
@@ -260,7 +254,6 @@
 		[twitDialog show];
 		[self.view addSubview:twitDialog];*/
 		
-		FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
 		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 		NSString  *passStr = [defaults objectForKey:@"tpass_pref"];
 		NSString *userStr = [defaults objectForKey:@"tuser_pref"];

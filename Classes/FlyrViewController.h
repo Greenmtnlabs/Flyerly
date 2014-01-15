@@ -39,8 +39,4 @@
 +(NSString *)getFlyerNumberFromPath:(NSString *)imagePath;
 -(void)goBack;
 
-- (void) searchTableView;
-- (void) searchClick;
-- (void)doneSearching_Clicked:(id)sender;
-
 @end

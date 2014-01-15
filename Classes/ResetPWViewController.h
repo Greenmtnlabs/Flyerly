@@ -26,7 +26,6 @@
 
 -(IBAction)SearchBotton:(id)sender;
 
--(void)showLoadingView:(NSString *)message;
 -(void)removeLoadingView;
 -(void)showAlert:(NSString *)title message:(NSString *)message;
 @end

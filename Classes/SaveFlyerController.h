@@ -60,7 +60,6 @@
 -(void)callTwitAlert;
 -(void)callFacebookAlert;
 -(void)uploadPhoto;
--(IBAction)disableBack;
--(void)enableBack;
+
 @end
 

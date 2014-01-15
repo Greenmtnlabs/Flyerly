@@ -91,7 +91,6 @@
     // An asset?
     if ([object isKindOfClass:[NBUAsset class]])
     {
-        NSString *fpath = ((NBUAsset *)object).URL.absoluteString;
         return ((NBUAsset *)object).URL.absoluteString;
     }
     

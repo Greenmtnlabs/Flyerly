@@ -24,10 +24,10 @@
 #import "NBUImagePickerController.h"
 #import "Singleton.h"
 
-@interface PresetFilterViewController : NBUEditImageViewController{
-
-    Singleton *globle;
+@interface PresetFilterViewController : NBUEditImageViewController {
 }
+
+@property (nonatomic, strong) Singleton *globle;
 
 // Actions
 - (IBAction)changeImage:(id)sender;

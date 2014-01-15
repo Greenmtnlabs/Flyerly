@@ -21,11 +21,12 @@
 #import "CropViewController.h"
 
 @implementation CropViewController
+@synthesize globle;
 
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-     globle = [Singleton RetrieveSingleton];
+    self.globle = [Singleton RetrieveSingleton];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
     
     //Done Button
@@ -62,7 +63,7 @@
     self.maximumScaleFactor = 10.0;                // We may get big pixels with this factor!
     
     // Our test image
-    self.image = globle.NBUimage;//[UIImage imageNamed:@"photo.jpg"];
+    self.image = self.globle.NBUimage;
     
     // Our resultBlock
     __unsafe_unretained CropViewController * weakSelf = self;
@@ -72,7 +73,7 @@
         
         // Preview the changes
         weakSelf.cropView.image = image;
-        globle.NBUimage = image;
+        weakSelf.globle.NBUimage = image;
     };
 }
 
@@ -83,7 +84,7 @@
 }
 
 -(void)goback{
-    globle.NBUimage = nil;
+    self.globle.NBUimage = nil;
       [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"Camerabottom"] forBarMetrics:UIBarMetricsDefault];
     [self.navigationController popViewControllerAnimated:YES];
     

@@ -107,11 +107,11 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
+    
     [super viewDidLoad];
     globle = [Singleton RetrieveSingleton];
-    NSLog(@"%@",globle.twitterUser);
+
     if (globle.twitterUser == nil) {
         username.text = @"";
     }else{
@@ -133,15 +133,14 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     self.navigationController.navigationBar.alpha = 1;
 
     //set title
-    //self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Register" rect:CGRectMake(-50, -6, 50, 50)];
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 150, 80)];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:TITLE_FONT size:18];
     label.textAlignment = UITextAlignmentCenter;
     label.textColor = [UIColor whiteColor];
-//    label.backgroundColor = [UIColor blueColor ];
     label.text = @"REGISTER";
     self.navigationItem.titleView = label;
+    
     // remove borders
     username.borderStyle = UITextBorderStyleNone;
     password.borderStyle = UITextBorderStyleNone;
@@ -155,38 +154,21 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     name.clearButtonMode = UITextFieldViewModeWhileEditing;
     phno.clearButtonMode = UITextFieldViewModeWhileEditing;
 
-    /*
-    if(IS_IPHONE_5){
-        [signUpFacebook setFrame:CGRectMake(34, 360, 253, 40)];
-        [signUpTwitter setFrame:CGRectMake(34, 395, 253, 40)];
-        [act setFrame:CGRectMake(227, 400, 20, 20)];
-    }
-*/
     // Setup welcome button
     UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    backButton.titleLabel.font = [UIFont systemFontOfSize:14.0];
     [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
     [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
     backButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-    leftBarButton.width = -16;
     [self.navigationItem setLeftBarButtonItem:leftBarButton];
 
-    
-    
     UIButton *signUpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [signUpButton addTarget:self action:@selector(onSignUp) forControlEvents:UIControlEventTouchUpInside];
     [signUpButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
     signUpButton.showsTouchWhenHighlighted = YES;
-    //[signUpButton setTitle:@"Done" forState:UIControlStateNormal];
-    [signUpButton setBackgroundColor:[UIColor clearColor ]];
-    [signUpButton setFont:[UIFont fontWithName:TITLE_FONT size:16]];
-    [signUpButton setTitleColor:[globle colorWithHexString:@"84c441"]forState:UIControlStateNormal];
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:signUpButton];
 
     [self.navigationItem setRightBarButtonItem:rightBarButton];
-    
-    
  
 
 }
@@ -286,8 +268,8 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 -(void)onSignUpFacebook:(BOOL)overloaded result:(id)result{
     if ([result isKindOfClass:[NSDictionary class]])
     {
-        NSString *email = result[@"email"];
-        [self signUp:YES username:email password:@"null"];
+        NSString *emailStr = result[@"email"];
+        [self signUp:YES username:emailStr password:@"null"];
     }
 }
 
@@ -515,26 +497,9 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     return YES;
 }
 
-- (void)fbDidLogin {
-	NSLog(@"logged in");
-    
-    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-    /*
-    //save to session
-    NSLog(@"%@",appDelegate.facebook.accessToken);
-    NSLog(@"%@",appDelegate.facebook.expirationDate);
-    
-    [[NSUserDefaults standardUserDefaults] setObject:appDelegate.facebook.accessToken forKey:@"FBAccessTokenKey"];
-    [[NSUserDefaults standardUserDefaults] setObject:appDelegate.facebook.expirationDate forKey:@"FBExpirationDateKey"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
-    //[self onSignUpFacebook];
-    [appDelegate.facebook requestWithGraphPath:@"me" andDelegate:self];*/
-}
-
-
 
 #pragma Twitter Changes
+
 -(IBAction)signInWithTwitter:(id)sender {
     
     if([TWTweetComposeViewController canSendTweet]) {

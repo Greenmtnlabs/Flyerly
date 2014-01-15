@@ -44,9 +44,6 @@
     IBOutlet UIImageView *thirdFlyer;
     IBOutlet UIImageView *fourthFlyer;
     
-    IBOutlet UIView *likeView;
-    IBOutlet FacebookLikeView *facebookLikeView;
-    
 	//IBOutlet FBLoginButton *faceBookButton;
 	BOOL loadingViewFlag;
 	NSMutableArray *photoArray;
@@ -95,8 +92,6 @@
 - (IBAction)showLikeButton;
 - (IBAction)onTwitter:(id)sender;
 -(IBAction)goBack;
--(void)loadMasterSetting;
-- (void)fbDidLogin;
 
 - (void)setFacebookLikeStatus;
 @end

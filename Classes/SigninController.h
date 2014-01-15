@@ -38,7 +38,6 @@
     RegisterController *registerController;
     AccountSelecter *actSelecter;
     Singleton *globle;
-    ResetPWViewController *passWordContrller;
     NSArray *twitterAccounts;
     UIView *waiting;
     NSString *dbUsername;
