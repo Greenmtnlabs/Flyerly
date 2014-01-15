@@ -62,7 +62,7 @@ CGPathRef NewPathWithRoundRect(CGRect rect, CGFloat cornerRadius)
 + (id)loadingViewInView:(UIView *)aSuperview text:(NSString *)text
 {
 	LoadingView *loadingView =
-		[[[LoadingView alloc] initWithFrame:CGRectMake(0, 0, 320,480)] autorelease];
+		[[LoadingView alloc] initWithFrame:CGRectMake(0, 0, 320,480)];
         //[[[LoadingView alloc] initWithFrame:CGRectMake(85, 250, 200,120 )] autorelease];
 	if (!loadingView)
 	{
@@ -77,21 +77,8 @@ CGPathRef NewPathWithRoundRect(CGRect rect, CGFloat cornerRadius)
 	const CGFloat DEFAULT_LABEL_WIDTH = 160.0;
 	const CGFloat DEFAULT_LABEL_HEIGHT = 50.0;
 	CGRect labelFrame = CGRectMake(0, 0, DEFAULT_LABEL_WIDTH, DEFAULT_LABEL_HEIGHT);
-	UILabel *loadingLabel =[[[UILabel alloc]initWithFrame:labelFrame]autorelease];
+	UILabel *loadingLabel =[[UILabel alloc]initWithFrame:labelFrame];
 	
-	/*loadingLabel.text = NSLocalizedString(text, nil);
-	loadingLabel.textColor = [UIColor blackColor];
-	loadingLabel.backgroundColor = [UIColor lightGrayColor];
-	loadingLabel.textAlignment = UITextAlignmentCenter;
-	loadingLabel.font = [UIFont boldSystemFontOfSize:[UIFont labelFontSize]];
-	loadingLabel.autoresizingMask =
-		UIViewAutoresizingFlexibleLeftMargin |
-		UIViewAutoresizingFlexibleRightMargin |
-		UIViewAutoresizingFlexibleTopMargin |
-		UIViewAutoresizingFlexibleBottomMargin;
-	
-	[loadingView addSubview:loadingLabel];*/
-    
 	UIActivityIndicatorView *activityIndicatorView = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(85, 250, 30,30)];
 	[activityIndicatorView setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleGray];
 			//initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge]autorelease];
@@ -163,12 +150,6 @@ CGPathRef NewPathWithRoundRect(CGRect rect, CGFloat cornerRadius)
 	CGContextStrokePath(context);
 	
 	CGPathRelease(roundRectPath);
-}
-
-
-- (void)dealloc
-{
-    [super dealloc];
 }
 
 @end

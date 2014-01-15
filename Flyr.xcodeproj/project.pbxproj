@@ -22,7 +22,6 @@
 		0D8571ED1090542B00622AB1 /* MyCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8571EC1090542B00622AB1 /* MyCustomCell.m */; };
 		0DE0243110959098005F699B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DE0243010959098005F699B /* MessageUI.framework */; };
 		0DE024F81095A0C9005F699B /* UIImageExtras.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DE024F71095A0C9005F699B /* UIImageExtras.m */; };
-		0DE1F274109881B20012819A /* LoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DE1F273109881B20012819A /* LoadingView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0DE1F27F109883A20012819A /* facebook1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DE1F27A109883A20012819A /* facebook1.png */; };
 		0DE1F280109883A20012819A /* mail.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DE1F27B109883A20012819A /* mail.png */; };
 		0DE1F281109883A20012819A /* mail1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DE1F27C109883A20012819A /* mail1.png */; };
@@ -262,7 +261,6 @@
 		0FE0BDA31758798700C4D78D /* bg_invite_friends_bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FE0BDA11758798700C4D78D /* bg_invite_friends_bar@2x.png */; };
 		0FE0BDA617587A7200C4D78D /* invite_option_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FE0BDA417587A7200C4D78D /* invite_option_selected.png */; };
 		0FE0BDA717587A7200C4D78D /* invite_option_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FE0BDA517587A7200C4D78D /* invite_option_selected@2x.png */; };
-		0FE0BDAA1758808D00C4D78D /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FE0BDA91758808D00C4D78D /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0FE0BDD41758BBCD00C4D78D /* EBPurchase.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FE0BDD31758BBCD00C4D78D /* EBPurchase.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0FE0BDD61758C07D00C4D78D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FE0BDD51758C07D00C4D78D /* StoreKit.framework */; };
 		0FE35C6E1779E1470015C215 /* top_bg_without_logo2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FE35C6C1779E1470015C215 /* top_bg_without_logo2.png */; };
@@ -693,9 +691,6 @@
 		202FF12B17C3ABDE003C6245 /* bkg_register-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 202FF12817C3ABDE003C6245 /* bkg_register-568h@2x.png */; };
 		202FF12C17C3ABDE003C6245 /* bkg_register.png in Resources */ = {isa = PBXBuildFile; fileRef = 202FF12917C3ABDE003C6245 /* bkg_register.png */; };
 		202FF12D17C3ABDE003C6245 /* bkg_register@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 202FF12A17C3ABDE003C6245 /* bkg_register@2x.png */; };
-		2032DC9618717B3F007036B2 /* FacebookLikeView.html in Resources */ = {isa = PBXBuildFile; fileRef = 2032DC9218717B3F007036B2 /* FacebookLikeView.html */; };
-		2032DC9718717B3F007036B2 /* FacebookLikeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2032DC9318717B3F007036B2 /* FacebookLikeView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		2032DC9818717B3F007036B2 /* NSData+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 2032DC9518717B3F007036B2 /* NSData+Extras.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		2032DCC91871B5DC007036B2 /* GalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2032DCC71871B5DC007036B2 /* GalleryViewController.m */; };
 		2032DCCA1871B5DC007036B2 /* GalleryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2032DCC81871B5DC007036B2 /* GalleryViewController.xib */; };
 		2032DCD01871BDFF007036B2 /* CropViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2032DCCE1871BDFF007036B2 /* CropViewController.m */; };
@@ -959,6 +954,11 @@
 		498BAB6C1885B21800221DFB /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 498BAB6B1885B21800221DFB /* Parse.framework */; };
 		49997FF717DF786400CF1038 /* ParentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49997FF617DF786400CF1038 /* ParentViewController.m */; };
 		49997FFB17E07FA100CF1038 /* SKProduct+LocalPrice.m in Sources */ = {isa = PBXBuildFile; fileRef = 49997FFA17E07FA100CF1038 /* SKProduct+LocalPrice.m */; };
+		49B8897D1886524D003766AD /* LoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B8897C1886524D003766AD /* LoadingView.m */; };
+		49B8898118865273003766AD /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B8898018865273003766AD /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		49B88988188652A2003766AD /* FacebookLikeView.html in Resources */ = {isa = PBXBuildFile; fileRef = 49B88984188652A2003766AD /* FacebookLikeView.html */; };
+		49B88989188652A2003766AD /* FacebookLikeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B88985188652A2003766AD /* FacebookLikeView.m */; };
+		49B8898A188652A2003766AD /* NSData+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B88987188652A2003766AD /* NSData+Extras.m */; };
 		6501CAF0173242FC00A89E59 /* Swiss_721_Black_Extended_BT.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6501CAEF173242FC00A89E59 /* Swiss_721_Black_Extended_BT.ttf */; };
 		6501CAF2173249C900A89E59 /* LauchViewControllerIPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6501CAF1173249C900A89E59 /* LauchViewControllerIPhone5.xib */; };
 		6501CAF51732654B00A89E59 /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = 6501CAF31732654B00A89E59 /* share.png */; };
@@ -1317,8 +1317,6 @@
 		0DE0243010959098005F699B /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		0DE024F61095A0C9005F699B /* UIImageExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIImageExtras.h; path = ../Classes/UIImageExtras.h; sourceTree = "<group>"; };
 		0DE024F71095A0C9005F699B /* UIImageExtras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIImageExtras.m; path = ../Classes/UIImageExtras.m; sourceTree = "<group>"; };
-		0DE1F272109881B20012819A /* LoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingView.h; sourceTree = "<group>"; };
-		0DE1F273109881B20012819A /* LoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingView.m; sourceTree = "<group>"; };
 		0DE1F27A109883A20012819A /* facebook1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook1.png; sourceTree = "<group>"; };
 		0DE1F27B109883A20012819A /* mail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mail.png; sourceTree = "<group>"; };
 		0DE1F27C109883A20012819A /* mail1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mail1.png; sourceTree = "<group>"; };
@@ -1579,8 +1577,6 @@
 		0FE0BDA11758798700C4D78D /* bg_invite_friends_bar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_invite_friends_bar@2x.png"; sourceTree = "<group>"; };
 		0FE0BDA417587A7200C4D78D /* invite_option_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = invite_option_selected.png; sourceTree = "<group>"; };
 		0FE0BDA517587A7200C4D78D /* invite_option_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "invite_option_selected@2x.png"; sourceTree = "<group>"; };
-		0FE0BDA81758808D00C4D78D /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
-		0FE0BDA91758808D00C4D78D /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		0FE0BDD21758BBCD00C4D78D /* EBPurchase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EBPurchase.h; path = InAppPurchase/EBPurchase.h; sourceTree = "<group>"; };
 		0FE0BDD31758BBCD00C4D78D /* EBPurchase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EBPurchase.m; path = InAppPurchase/EBPurchase.m; sourceTree = "<group>"; };
 		0FE0BDD51758C07D00C4D78D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
@@ -2065,11 +2061,6 @@
 		202FF12817C3ABDE003C6245 /* bkg_register-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bkg_register-568h@2x.png"; sourceTree = "<group>"; };
 		202FF12917C3ABDE003C6245 /* bkg_register.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bkg_register.png; sourceTree = "<group>"; };
 		202FF12A17C3ABDE003C6245 /* bkg_register@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bkg_register@2x.png"; sourceTree = "<group>"; };
-		2032DC9118717B3F007036B2 /* FacebookLikeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookLikeView.h; sourceTree = "<group>"; };
-		2032DC9218717B3F007036B2 /* FacebookLikeView.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = FacebookLikeView.html; sourceTree = "<group>"; };
-		2032DC9318717B3F007036B2 /* FacebookLikeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookLikeView.m; sourceTree = "<group>"; };
-		2032DC9418717B3F007036B2 /* NSData+Extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Extras.h"; sourceTree = "<group>"; };
-		2032DC9518717B3F007036B2 /* NSData+Extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Extras.m"; sourceTree = "<group>"; };
 		2032DCC61871B5DC007036B2 /* GalleryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GalleryViewController.h; sourceTree = "<group>"; };
 		2032DCC71871B5DC007036B2 /* GalleryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GalleryViewController.m; sourceTree = "<group>"; };
 		2032DCC81871B5DC007036B2 /* GalleryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GalleryViewController.xib; sourceTree = "<group>"; };
@@ -2351,6 +2342,15 @@
 		49997FF617DF786400CF1038 /* ParentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParentViewController.m; sourceTree = "<group>"; };
 		49997FF917E07FA100CF1038 /* SKProduct+LocalPrice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKProduct+LocalPrice.h"; sourceTree = "<group>"; };
 		49997FFA17E07FA100CF1038 /* SKProduct+LocalPrice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKProduct+LocalPrice.m"; sourceTree = "<group>"; };
+		49B8897B1886524D003766AD /* LoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingView.h; sourceTree = "<group>"; };
+		49B8897C1886524D003766AD /* LoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingView.m; sourceTree = "<group>"; };
+		49B8897F18865273003766AD /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		49B8898018865273003766AD /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		49B88983188652A2003766AD /* FacebookLikeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookLikeView.h; sourceTree = "<group>"; };
+		49B88984188652A2003766AD /* FacebookLikeView.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = FacebookLikeView.html; sourceTree = "<group>"; };
+		49B88985188652A2003766AD /* FacebookLikeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookLikeView.m; sourceTree = "<group>"; };
+		49B88986188652A2003766AD /* NSData+Extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Extras.h"; sourceTree = "<group>"; };
+		49B88987188652A2003766AD /* NSData+Extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Extras.m"; sourceTree = "<group>"; };
 		6501CAEF173242FC00A89E59 /* Swiss_721_Black_Extended_BT.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Swiss_721_Black_Extended_BT.ttf; path = Data/fonts/Swiss_721_Black_Extended_BT.ttf; sourceTree = "<group>"; };
 		6501CAF1173249C900A89E59 /* LauchViewControllerIPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LauchViewControllerIPhone5.xib; sourceTree = "<group>"; };
 		6501CAF31732654B00A89E59 /* share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share.png; sourceTree = "<group>"; };
@@ -2825,18 +2825,16 @@
 		0DF3A2D7108DF27200D6C887 /* ExternalFrameworks */ = {
 			isa = PBXGroup;
 			children = (
+				49B88982188652A2003766AD /* FacebookLikeView */,
+				49B8897E18865273003766AD /* Reachability */,
+				49B8897A1886524D003766AD /* LoadingView */,
 				202C47B7187D6E4B00FE0975 /* Bitly */,
-				2032DC9018717B28007036B2 /* FacebookLikeView */,
 				0F7E5A56177C9B8D00CF139F /* Foursquare */,
 				0F7FC383175CE261009DEB08 /* AsyncImageView */,
 				0FE0BDD11758BBB900C4D78D /* InAppPurchase */,
-				0FE0BDA81758808D00C4D78D /* Reachability.h */,
-				0FE0BDA91758808D00C4D78D /* Reachability.m */,
 				0FF135A6174FC85600B39FCA /* Flurry */,
 				0FEDD769174A918C00DF71C0 /* Crittercism */,
 				0DFA8B2D10AD851300F779CA /* imageCache */,
-				0DE1F272109881B20012819A /* LoadingView.h */,
-				0DE1F273109881B20012819A /* LoadingView.m */,
 				0DE024F61095A0C9005F699B /* UIImageExtras.h */,
 				0DE024F71095A0C9005F699B /* UIImageExtras.m */,
 				0D8571EB1090542B00622AB1 /* MyCustomCell.h */,
@@ -3910,18 +3908,6 @@
 			path = TouchJSON;
 			sourceTree = "<group>";
 		};
-		2032DC9018717B28007036B2 /* FacebookLikeView */ = {
-			isa = PBXGroup;
-			children = (
-				2032DC9118717B3F007036B2 /* FacebookLikeView.h */,
-				2032DC9218717B3F007036B2 /* FacebookLikeView.html */,
-				2032DC9318717B3F007036B2 /* FacebookLikeView.m */,
-				2032DC9418717B3F007036B2 /* NSData+Extras.h */,
-				2032DC9518717B3F007036B2 /* NSData+Extras.m */,
-			);
-			name = FacebookLikeView;
-			sourceTree = "<group>";
-		};
 		2032DCA718719D7F007036B2 /* NBU */ = {
 			isa = PBXGroup;
 			children = (
@@ -4381,6 +4367,36 @@
 				20619830187EA22700360DBF /* UINavigationItem+Additions.m */,
 			);
 			name = Categories;
+			sourceTree = "<group>";
+		};
+		49B8897A1886524D003766AD /* LoadingView */ = {
+			isa = PBXGroup;
+			children = (
+				49B8897B1886524D003766AD /* LoadingView.h */,
+				49B8897C1886524D003766AD /* LoadingView.m */,
+			);
+			path = LoadingView;
+			sourceTree = "<group>";
+		};
+		49B8897E18865273003766AD /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				49B8897F18865273003766AD /* Reachability.h */,
+				49B8898018865273003766AD /* Reachability.m */,
+			);
+			path = Reachability;
+			sourceTree = "<group>";
+		};
+		49B88982188652A2003766AD /* FacebookLikeView */ = {
+			isa = PBXGroup;
+			children = (
+				49B88983188652A2003766AD /* FacebookLikeView.h */,
+				49B88984188652A2003766AD /* FacebookLikeView.html */,
+				49B88985188652A2003766AD /* FacebookLikeView.m */,
+				49B88986188652A2003766AD /* NSData+Extras.h */,
+				49B88987188652A2003766AD /* NSData+Extras.m */,
+			);
+			path = FacebookLikeView;
 			sourceTree = "<group>";
 		};
 		6513C1AB1716FE0F00355FC3 /* Fonts */ = {
@@ -5218,7 +5234,6 @@
 				2034BFBA17BE0A81003C15B0 /* help_icon.png in Resources */,
 				2034BFBB17BE0A81003C15B0 /* help_icon@2x.png in Resources */,
 				20D7473B17BE4D1100966BA6 /* pencil_icon.png in Resources */,
-				2032DC9618717B3F007036B2 /* FacebookLikeView.html in Resources */,
 				20D7473C17BE4D1100966BA6 /* pencil_icon@2x.png in Resources */,
 				20D7474017BE77E900966BA6 /* splash_bg.png in Resources */,
 				20D7474117BE77E900966BA6 /* splash_bg@2x.png in Resources */,
@@ -5642,6 +5657,7 @@
 				20E3010A17F1749E006A1DE0 /* checkwhite.png in Resources */,
 				20E3010B17F1749E006A1DE0 /* checkwhite@2x.png in Resources */,
 				20E3010E17F1AA9A006A1DE0 /* searinvite.png in Resources */,
+				49B88988188652A2003766AD /* FacebookLikeView.html in Resources */,
 				20E3010F17F1AA9A006A1DE0 /* searinvite@2x.png in Resources */,
 				206F238D17F5C83400AFAC57 /* btn_edit.png in Resources */,
 				206F238E17F5C83400AFAC57 /* btn_edit@2x.png in Resources */,
@@ -5704,15 +5720,16 @@
 				1D3623260D0F684500981E51 /* FlyrAppDelegate.m in Sources */,
 				0DF3A2C5108DF1D200D6C887 /* LauchViewController.m in Sources */,
 				0DF3A2C6108DF1D200D6C887 /* PhotoController.m in Sources */,
+				49B88989188652A2003766AD /* FacebookLikeView.m in Sources */,
 				202C47FE187D6E4B00FE0975 /* BitlyTweetSheet.m in Sources */,
 				0DEE03EE108F41D600967DA5 /* MyNetworkController.m in Sources */,
 				0D8571ED1090542B00622AB1 /* MyCustomCell.m in Sources */,
-				2032DC9718717B3F007036B2 /* FacebookLikeView.m in Sources */,
 				0D4903BB1091893B00855C30 /* FlyrViewController.m in Sources */,
 				202C47FC187D6E4B00FE0975 /* BitlyRequest.m in Sources */,
 				E8A7347D1092CFF300661AAD /* DraftViewController.m in Sources */,
 				208C684F186DAA59004A74F2 /* MySHKConfigurator.m in Sources */,
 				2032DCD01871BDFF007036B2 /* CropViewController.m in Sources */,
+				49B8898A188652A2003766AD /* NSData+Extras.m in Sources */,
 				202C4803187D6E4B00FE0975 /* BitlyURLShortener.m in Sources */,
 				0DFC5322109576AB00B18478 /* SettingViewController.m in Sources */,
 				202C482D187D9DAB00FE0975 /* UIImage+NBUAdditions.m in Sources */,
@@ -5720,10 +5737,10 @@
 				E8F2E155109659E600DFA7E8 /* MyNavigationBar.m in Sources */,
 				E8C7C36910976BFC0064935A /* SaveFlyerController.m in Sources */,
 				200384741875A357008909F9 /* PresetFilterViewController.m in Sources */,
-				0DE1F274109881B20012819A /* LoadingView.m in Sources */,
 				202C4801187D6E4B00FE0975 /* BitlyTwitterOAuthManager.m in Sources */,
 				0DFA8B3610AD851300F779CA /* GTMIPhoneUnitTestDelegate.m in Sources */,
 				0DFA8B3710AD851300F779CA /* GTMSenTestCase.m in Sources */,
+				49B8897D1886524D003766AD /* LoadingView.m in Sources */,
 				0DFA8B3810AD851300F779CA /* ImageCache.m in Sources */,
 				202C47FF187D6E4B00FE0975 /* BitlyTweetSheetAccountSelector.m in Sources */,
 				65E2615D171C2FA800C485B5 /* AddFriendsController.m in Sources */,
@@ -5732,13 +5749,13 @@
 				65A2CEFD172558A0005C03B7 /* CameraOverlayView.m in Sources */,
 				2032DCC91871B5DC007036B2 /* GalleryViewController.m in Sources */,
 				20920015184F40330034C4F6 /* AddFriendsDetail.m in Sources */,
+				49B8898118865273003766AD /* Reachability.m in Sources */,
 				202C4827187D7A6B00FE0975 /* CJSONDeserializer.m in Sources */,
 				6560C1BF1727F5C7005BE8DD /* CustomPhotoController.m in Sources */,
 				65A21266172960AB00ED0B9A /* CustomGalleryItem.m in Sources */,
 				65BDB2DF17341D290084E032 /* CustomLabel.m in Sources */,
 				0FF29F5F17462BB30007B309 /* ShareProgressView.m in Sources */,
 				0FEF2DA9174E66FC00FDD8C9 /* HelpController.m in Sources */,
-				0FE0BDAA1758808D00C4D78D /* Reachability.m in Sources */,
 				0FE0BDD41758BBCD00C4D78D /* EBPurchase.m in Sources */,
 				0F7FC386175CE26B009DEB08 /* AsyncImageView.m in Sources */,
 				0F7F02C3176616B100FC750F /* FlyerOverlayController.m in Sources */,
@@ -5751,7 +5768,6 @@
 				202C4826187D7A6B00FE0975 /* CDataScanner_Extensions.m in Sources */,
 				0FCC3A2B177DD35D0046484C /* LocationItem.m in Sources */,
 				20619831187EA22700360DBF /* UINavigationItem+Additions.m in Sources */,
-				2032DC9818717B3F007036B2 /* NSData+Extras.m in Sources */,
 				0FD247DA1784547E003CA6DD /* SearchLocationItem.m in Sources */,
 				0F80C386178561C200D36795 /* AccountController.m in Sources */,
 				0F80C38B178578CB00D36795 /* RegisterController.m in Sources */,
