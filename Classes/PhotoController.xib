@@ -15,19 +15,24 @@
                 <outlet property="backgroundTabButton" destination="zoh-mW-4K3" id="jKZ-37-kHq"/>
                 <outlet property="backtemplates" destination="WvZ-dV-5Fn" id="5XB-pz-W0O"/>
                 <outlet property="cameraRoll" destination="t0N-7F-yOw" id="jXi-au-Q5l"/>
+                <outlet property="cameraTabButton" destination="iEv-dA-2If" id="MFy-NX-MwQ"/>
                 <outlet property="cameraTakePhoto" destination="TUU-ew-jcU" id="4sp-iH-P0R"/>
                 <outlet property="colorTabButton" destination="RCh-PH-bvk" id="kzT-0A-OKE"/>
                 <outlet property="contextView" destination="rbq-e2-wbO" id="BDJ-TX-Ld1"/>
                 <outlet property="flyerBorder" destination="rR0-dC-sak" id="y4N-N4-MId"/>
                 <outlet property="fontBorderTabButton" destination="E2L-Wc-n71" id="qIM-iL-HJk"/>
                 <outlet property="fontTabButton" destination="zu1-aU-CE3" id="4N8-mM-vZ8"/>
+                <outlet property="heightTabButton" destination="5Ya-yN-kTr" id="RhP-af-MbU"/>
                 <outlet property="imgView" destination="Xaq-YE-kc7" id="te3-JW-Ibt"/>
                 <outlet property="libBackground" destination="wtn-Zi-MKo" id="Lbb-GH-gzo"/>
                 <outlet property="libFlyer" destination="P8i-Fw-Gci" id="DAb-aV-gaf"/>
+                <outlet property="libPhoto" destination="qGs-4G-Rgw" id="0fl-Oq-GpK"/>
                 <outlet property="libText" destination="8Ew-aX-Xah" id="Haw-gJ-FkB"/>
                 <outlet property="libraryContextView" destination="hm4-bV-Hep" id="yQz-pZ-s3b"/>
+                <outlet property="photoTabButton" destination="O6L-IG-J9j" id="ntS-Xx-t5P"/>
                 <outlet property="sizeTabButton" destination="Ybf-LY-Z1e" id="8QX-O7-r0o"/>
                 <outlet property="view" destination="1" id="3"/>
+                <outlet property="widthTabButton" destination="IOq-dI-vvl" id="TYH-DW-B0O"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -218,8 +223,47 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
         </view>
+        <view contentMode="scaleToFill" id="qGs-4G-Rgw">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="iEv-dA-2If">
+                    <rect key="frame" x="0.0" y="0.0" width="80" height="45"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="07_camera.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="O6L-IG-J9j">
+                    <rect key="frame" x="80" y="0.0" width="80" height="45"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="07_roll.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="IOq-dI-vvl">
+                    <rect key="frame" x="160" y="0.0" width="80" height="45"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="07_width.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="5Ya-yN-kTr">
+                    <rect key="frame" x="240" y="0.0" width="80" height="45"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="07_height.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+        </view>
     </objects>
     <resources>
+        <image name="07_camera.png" width="80" height="45"/>
+        <image name="07_height.png" width="80" height="45"/>
+        <image name="07_roll.png" width="80" height="45"/>
+        <image name="07_width.png" width="80" height="45"/>
         <image name="Template15.jpg" width="612" height="612"/>
         <image name="addbg_border.png" width="80" height="45"/>
         <image name="addbg_cameraroll.png" width="80" height="45"/>

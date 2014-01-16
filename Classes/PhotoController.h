@@ -67,7 +67,6 @@
 	UIButton *fontTabButton;
 	UIButton *colorTabButton;
 	UIButton *sizeTabButton;
-	UIButton *borderTabButton;
 	UIButton *fontBorderTabButton;
 
 	UIButton *cameraTabButton;
@@ -181,12 +180,6 @@
 
 @property (nonatomic, strong) UIImage *finalFlyer;
 
-@property (nonatomic,strong) UIButton *cameraTabButton;
-@property (nonatomic,strong) UIButton *photoTabButton;
-@property (nonatomic,strong) UIButton *widthTabButton;
-@property (nonatomic,strong) UIButton *heightTabButton;
-
-
 @property (nonatomic, assign)BOOL photoTouchFlag;
 @property (nonatomic, assign)BOOL lableTouchFlag;
 @property (nonatomic, assign)BOOL symbolTouchFlag;
@@ -204,10 +197,13 @@
 
 @property(nonatomic, strong) IBOutlet UIImageView *imgView;
 @property(nonatomic, strong) IBOutlet UIView *contextView;
+
+// These are ContextViews Library
 @property(nonatomic, strong) IBOutlet UIView *libraryContextView;
 @property(nonatomic, strong) IBOutlet UIView *libFlyer;
 @property(nonatomic, strong) IBOutlet UIView *libBackground;
 @property(nonatomic, strong) IBOutlet UIView *libText;
+@property(nonatomic, strong) IBOutlet UIView *libPhoto;
 
 
 // These are LibFlyer
@@ -230,8 +226,13 @@
 @property (nonatomic, strong)IBOutlet UIButton *fontBorderTabButton;
 @property (nonatomic, strong)IBOutlet UIButton *arrangeLayerTabButton;
 
-//Pending
-@property (nonatomic, strong)IBOutlet UIButton *borderTabButton;
+//These are LibPhoto
+@property (nonatomic,strong)IBOutlet UIButton *cameraTabButton;
+@property (nonatomic,strong)IBOutlet UIButton *photoTabButton;
+@property (nonatomic,strong)IBOutlet UIButton *widthTabButton;
+@property (nonatomic,strong)IBOutlet UIButton *heightTabButton;
+
+
 
 -(void)loadCustomPhotoLibrary;
 -(void) chooseTemplate;
@@ -264,5 +265,5 @@
 -(IBAction)setAddMoreLayerTabAction:(id)sender;
 -(IBAction)setlibBackgroundTabAction:(id)sender;
 -(IBAction)setStyleTabAction:(id) sender;
-
+-(IBAction)setlibPhotoTabAction:(id) sender;
 @end

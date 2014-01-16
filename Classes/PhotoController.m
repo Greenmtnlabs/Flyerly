@@ -28,7 +28,7 @@
 @synthesize fontScrollView,colorScrollView,templateScrollView,sizeScrollView,borderScrollView,fontBorderScrollView,symbolScrollView,iconScrollView;
 @synthesize selectedFont,selectedColor;
 @synthesize selectedTemplate,selectedSymbol,selectedIcon;
-@synthesize fontTabButton,colorTabButton,sizeTabButton,selectedText,selectedSize,borderTabButton,fontBorderTabButton,addMoreIconTabButton,addMorePhotoTabButton,addMoreSymbolTabButton,arrangeLayerTabButton;
+@synthesize fontTabButton,colorTabButton,sizeTabButton,selectedText,selectedSize,fontBorderTabButton,addMoreIconTabButton,addMorePhotoTabButton,addMoreSymbolTabButton,arrangeLayerTabButton;
 @synthesize templateBckgrnd,textBackgrnd;
 @synthesize cameraTabButton,photoTabButton,widthTabButton,heightTabButton,photoImgView,symbolImgView,iconImgView;
 @synthesize photoTouchFlag,symbolTouchFlag,iconTouchFlag, lableTouchFlag,lableLocation,warningAlert,discardAlert,deleteAlert,editAlert, inAppAlert;
@@ -38,7 +38,7 @@
 
 //Version 3 Change
 @synthesize contextView,libraryContextView,libFlyer,backgroundTabButton,addMoreFontTabButton;
-@synthesize libText,libBackground,backtemplates,cameraTakePhoto,cameraRoll,flyerBorder;
+@synthesize libText,libBackground,libPhoto,backtemplates,cameraTakePhoto,cameraRoll,flyerBorder;
 
 int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track selected Tab on Add More Layer screen
 int symbolLayerCount = 0; // Symbol layer count to set tag value
@@ -279,72 +279,20 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 	iconScrollView.showsVerticalScrollIndicator = NO;
 	[self layoutScrollImages:iconScrollView scrollWidth:iconScrollWidth scrollHeight:iconScrollHeight];
     
-    // Setup tab button
-	photoTabButton =[UIButton buttonWithType:UIButtonTypeCustom];
-	cameraTabButton =[UIButton buttonWithType:UIButtonTypeCustom];
-	widthTabButton =[UIButton buttonWithType:UIButtonTypeCustom];
-	heightTabButton =[UIButton buttonWithType:UIButtonTypeCustom];
-    
-    cameraTabButton.showsTouchWhenHighlighted = YES;
-    photoTabButton.showsTouchWhenHighlighted = YES;
-    widthTabButton.showsTouchWhenHighlighted = YES;
-    heightTabButton.showsTouchWhenHighlighted = YES;
-    
-	if(IS_IPHONE_5){
-        cameraTabButton.frame = CGRectMake(-1, 502, 80, 46);
-        photoTabButton.frame = CGRectMake(79, 502, 80, 46);
-        widthTabButton.frame = CGRectMake(159, 502, 80, 46);
-        heightTabButton.frame = CGRectMake(239, 502, 80, 46);
-    }else{
-        cameraTabButton.frame = CGRectMake(-1, 415, 80, 46);
-        photoTabButton.frame = CGRectMake(79, 415, 80, 46);
-        widthTabButton.frame = CGRectMake(159, 415, 80, 46);
-        heightTabButton.frame = CGRectMake(239, 415, 81, 46);
-    }
 
     //Setting Tags
 	fontTabButton.tag = 10001;
 	colorTabButton.tag = 10002;
     sizeTabButton.tag = 10003;
-	fontBorderTabButton.tag = 10004; //tag Change 5 to 4
+	fontBorderTabButton.tag = 10004; //tag Change 5 to 4    //borderTabButton.tag = 10004;
     arrangeLayerTabButton.tag = 10005;
-
-    //Pending
-    //borderTabButton.tag = 10004;
-
-    
-	[cameraTabButton setBackgroundImage:[UIImage imageNamed:@"07_camera"] forState:UIControlStateNormal];
-    cameraTabButton.showsTouchWhenHighlighted = YES;
-	[cameraTabButton addTarget:self action:@selector(setCameraTabAction:) forControlEvents:UIControlEventTouchUpInside];
-	cameraTabButton.alpha =  ALPHA0;
+   
+    //Setting LibPhoto tabs tag
 	cameraTabButton.tag = 10001;
-	[self.view addSubview:cameraTabButton];
-	
-	[photoTabButton setBackgroundImage:[UIImage imageNamed:@"07_roll"] forState:UIControlStateNormal];
-	//[photoTabButton.titleLabel setFont:[UIFont fontWithName:@"Arial-BoldMT" size:15]];
-	//[photoTabButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-	[photoTabButton addTarget:self action:@selector(setPhotoTabAction:) forControlEvents:UIControlEventTouchUpInside];
-	photoTabButton.alpha =  ALPHA0;
 	photoTabButton.tag = 10002;
-	[self.view addSubview:photoTabButton];
-	
-	[widthTabButton setBackgroundImage:[UIImage imageNamed:@"07_width"] forState:UIControlStateNormal];
-	//[widthTabButton.titleLabel setFont:[UIFont fontWithName:@"Arial-BoldMT" size:15]];
-	//[widthTabButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [widthTabButton addTarget:self action:@selector(selectWidth:) forControlEvents:UIControlEventTouchUpInside];
-    [widthTabButton setSelected:YES];
-	widthTabButton.alpha =  ALPHA0;
 	widthTabButton.tag = 10003;
-	[self.view addSubview:widthTabButton];
-	
-	[heightTabButton setBackgroundImage:[UIImage imageNamed:@"07_height"] forState:UIControlStateNormal];
-	//[heightTabButton.titleLabel setFont:[UIFont fontWithName:@"Arial-BoldMT" size:15]];
-	//[heightTabButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [heightTabButton addTarget:self action:@selector(selectHeight:) forControlEvents:UIControlEventTouchUpInside];
-	heightTabButton.alpha =  ALPHA0;
 	heightTabButton.tag = 10004;
-	[self.view addSubview:heightTabButton];
-    
+	
     // Add more layer tabs
     [addMoreFontTabButton setBackgroundImage:[UIImage imageNamed:@"text_icon_selected"] forState:UIControlStateHighlighted];
 	addMoreFontTabButton.tag = 10001;
@@ -1215,38 +1163,6 @@ int arrangeLayerIndex;
 		}
 		i++;
 	}
-}
-
-/*
- * When width is selected
- */
--(void)selectWidth:(id)sender{
-    
-    [cameraTabButton setBackgroundImage:[UIImage imageNamed:@"07_camera"] forState:UIControlStateNormal];
-    [photoTabButton setBackgroundImage:[UIImage imageNamed:@"07_roll"] forState:UIControlStateNormal];
-    [widthTabButton setBackgroundImage:[UIImage imageNamed:@"07_width_selected"] forState:UIControlStateNormal];
-    [heightTabButton setBackgroundImage:[UIImage imageNamed:@"07_height"] forState:UIControlStateNormal];
-    [widthTabButton  setSelected:YES];
-    [heightTabButton  setSelected:NO];
-    
-    UIImageView *lastImgView = [[self photoLayersArray] lastObject];
-    lastImgView.frame = CGRectMake(lastImgView.frame.origin.x, lastImgView.frame.origin.y,lastImgView.frame.size.width-10,lastImgView.frame.size.height);
-}
-
-/*
- * When height is selected
- */
--(void)selectHeight:(id)sender{
-    
-    [cameraTabButton setBackgroundImage:[UIImage imageNamed:@"07_camera"] forState:UIControlStateNormal];
-    [photoTabButton setBackgroundImage:[UIImage imageNamed:@"07_roll"] forState:UIControlStateNormal];
-    [widthTabButton setBackgroundImage:[UIImage imageNamed:@"07_width"] forState:UIControlStateNormal];
-    [heightTabButton setBackgroundImage:[UIImage imageNamed:@"07_height_selected"] forState:UIControlStateNormal];
-    [widthTabButton  setSelected:NO];
-    [heightTabButton  setSelected:YES];
-
-    UIImageView *lastImgView = [[self photoLayersArray] lastObject];
-    lastImgView.frame = CGRectMake(lastImgView.frame.origin.x, lastImgView.frame.origin.y,lastImgView.frame.size.width,lastImgView.frame.size.height-10);
 }
 
 /*
@@ -2154,13 +2070,6 @@ int arrangeLayerIndex;
     
     ((CustomLabel *)[[self textLabelLayersArray] lastObject]).alpha = 1;
 	textBackgrnd.alpha  =ALPHA0;
-    
-    cameraTabButton.alpha = ALPHA0;
-    photoTabButton.alpha = ALPHA0;
-    widthTabButton.alpha = ALPHA0;
-    heightTabButton.alpha = ALPHA0;
-    
-
 
     photoTouchFlag = NO;
 	lableTouchFlag = NO;
@@ -2305,8 +2214,6 @@ int arrangeLayerIndex;
         [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
     } else {
         UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
- //       doneButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
-//        [doneButton setTitle:@"Done" forState:UIControlStateNormal];
         [doneButton addTarget:self action:@selector(callAddMoreLayers) forControlEvents:UIControlEventTouchUpInside];
         [doneButton addTarget:self action:@selector(logLayerAddedEvent) forControlEvents:UIControlEventTouchUpInside];
         [doneButton addTarget:self action:@selector(logTextAddedEvent) forControlEvents:UIControlEventTouchUpInside];
@@ -2340,10 +2247,6 @@ int arrangeLayerIndex;
     UITextView *lastTextView = msgTextView;
     CustomLabel *lastLabelView = [self textLabelLayersArray][arrangeLayerIndex];
 	lastLabelView.alpha=1;	
-	cameraTabButton.alpha = ALPHA0;
-	photoTabButton.alpha = ALPHA0;
-	widthTabButton.alpha = ALPHA0;
-	heightTabButton.alpha = ALPHA0;
 	textBackgrnd.alpha = ALPHA1;
 	
 	[UIView commitAnimations];
@@ -2441,18 +2344,6 @@ int arrangeLayerIndex;
 	[UIView setAnimationDuration:0.4f];
 
     ((CustomLabel *)[[self textLabelLayersArray] lastObject]).alpha = 1;
-	[cameraTabButton setBackgroundImage:[UIImage imageNamed:@"07_camera"] forState:UIControlStateNormal];
-	[photoTabButton setBackgroundImage:[UIImage imageNamed:@"07_roll"] forState:UIControlStateNormal];
-	[widthTabButton setBackgroundImage:[UIImage imageNamed:@"07_width_selected"] forState:UIControlStateNormal];
-	[heightTabButton setBackgroundImage:[UIImage imageNamed:@"07_height"] forState:UIControlStateNormal];
-    [widthTabButton setSelected:YES];
-    [heightTabButton setSelected:NO];
-    
-	cameraTabButton.alpha = ALPHA1;
-	photoTabButton.alpha = ALPHA1;
-	widthTabButton.alpha = ALPHA1;
-	heightTabButton.alpha = ALPHA1;
-	textBackgrnd.alpha = ALPHA1;
 	[UIView commitAnimations];
 	
     UIPinchGestureRecognizer *twoFingerPinch =
@@ -2578,7 +2469,6 @@ int arrangeLayerIndex;
     label.textColor = [UIColor whiteColor];
     label.text = @"LAYERS";
     self.navigationItem.titleView = label;
-    //self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"layers" rect:CGRectMake(-30, -6, 50, 50)];
     
     UIButton *saveButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     saveButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
@@ -2608,31 +2498,11 @@ int arrangeLayerIndex;
     [self.navigationItem setLeftBarButtonItem:backBarButton];
     
     [self AddScrollView:addMoreLayerOrSaveFlyerLabel];
+    [self AddBottomTabs:libFlyer];
    
     [self hideAddMoreButton];
 
     templateBckgrnd.alpha = ALPHA0;
-    
-//Changes
-    [cameraTabButton setTitle:@"Camera" forState:UIControlStateNormal];
-    [cameraTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
-    cameraTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
-    [cameraTabButton.titleLabel setTextColor:[UIColor whiteColor]];
-    
-    [photoTabButton setTitle:@"Gallery" forState:UIControlStateNormal];
-    [photoTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
-    photoTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
-    photoTabButton.titleLabel.textColor = [UIColor whiteColor];
-
-    [widthTabButton setTitle:@"Width" forState:UIControlStateNormal];
-    [widthTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
-    widthTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
-    [widthTabButton.titleLabel setTextColor:[UIColor whiteColor]];
-    
-    [heightTabButton setTitle:@"Height" forState:UIControlStateNormal];
-    [heightTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
-    heightTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
-    [heightTabButton.titleLabel setTextColor:[UIColor whiteColor]];
     
     
     ((CustomLabel *)[[self textLabelLayersArray] lastObject]).alpha = 1;
@@ -2640,10 +2510,6 @@ int arrangeLayerIndex;
     symbolImgView.alpha = 0;
     iconImgView.alpha = 0;
     
-	cameraTabButton.alpha = ALPHA0;
-	photoTabButton.alpha = ALPHA0;
-	widthTabButton.alpha = ALPHA0;
-	heightTabButton.alpha = ALPHA0;
 	textBackgrnd.alpha = ALPHA0;
 
     selectedAddMoreLayerTab = ADD_MORE_TEXTTAB;
@@ -2790,7 +2656,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 		[fontTabButton setBackgroundImage:[UIImage imageNamed:@"font_button_selected"] forState:UIControlStateNormal];
 		[colorTabButton setBackgroundImage:[UIImage imageNamed:@"color_button"] forState:UIControlStateNormal];
 		[sizeTabButton setBackgroundImage:[UIImage imageNamed:@"size_button"] forState:UIControlStateNormal];
-		[borderTabButton setBackgroundImage:[UIImage imageNamed:@"outline_button"] forState:UIControlStateNormal];
 		[fontBorderTabButton setBackgroundImage:[UIImage imageNamed:@"background_button"] forState:UIControlStateNormal];
 		[UIView commitAnimations];
 	}
@@ -2802,7 +2667,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         //Add ContextView
         [self AddScrollView:colorScrollView];
         
-        [borderTabButton setBackgroundImage:[UIImage imageNamed:@"outline_button"] forState:UIControlStateNormal];
 		[fontTabButton setBackgroundImage:[UIImage imageNamed:@"font_button"] forState:UIControlStateNormal];
 		[colorTabButton setBackgroundImage:[UIImage imageNamed:@"color_button_selected"] forState:UIControlStateNormal];
 		[sizeTabButton setBackgroundImage:[UIImage imageNamed:@"size_button"] forState:UIControlStateNormal];
@@ -2821,22 +2685,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 		[fontTabButton setBackgroundImage:[UIImage imageNamed:@"font_button"] forState:UIControlStateNormal];
 		[colorTabButton setBackgroundImage:[UIImage imageNamed:@"color_button"] forState:UIControlStateNormal];
 		[sizeTabButton setBackgroundImage:[UIImage imageNamed:@"size_button_selected"] forState:UIControlStateNormal];
-		[borderTabButton setBackgroundImage:[UIImage imageNamed:@"outline_button"] forState:UIControlStateNormal];
-		[fontBorderTabButton setBackgroundImage:[UIImage imageNamed:@"background_button"] forState:UIControlStateNormal];
-		[UIView commitAnimations];
-	}
-	else if(selectedButton == borderTabButton)
-	{
-		[UIView beginAnimations:nil context:NULL];
-		[UIView setAnimationDuration:0.4f];
-        
-        //Add ContextView
-         [self AddScrollView:borderScrollView];
-
-		[fontTabButton setBackgroundImage:[UIImage imageNamed:@"font_button"] forState:UIControlStateNormal];
-		[colorTabButton setBackgroundImage:[UIImage imageNamed:@"color_button"] forState:UIControlStateNormal];
-		[sizeTabButton setBackgroundImage:[UIImage imageNamed:@"size_button"] forState:UIControlStateNormal];
-		[borderTabButton setBackgroundImage:[UIImage imageNamed:@"outline_button_selected"] forState:UIControlStateNormal];
 		[fontBorderTabButton setBackgroundImage:[UIImage imageNamed:@"background_button"] forState:UIControlStateNormal];
 		[UIView commitAnimations];
 	}
@@ -2851,7 +2699,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 		[fontTabButton setBackgroundImage:[UIImage imageNamed:@"font_button"] forState:UIControlStateNormal];
 		[colorTabButton setBackgroundImage:[UIImage imageNamed:@"color_button"] forState:UIControlStateNormal];
 		[sizeTabButton setBackgroundImage:[UIImage imageNamed:@"size_button"] forState:UIControlStateNormal];
-		[borderTabButton setBackgroundImage:[UIImage imageNamed:@"outline_button"] forState:UIControlStateNormal];
 		[fontBorderTabButton setBackgroundImage:[UIImage imageNamed:@"background_button_selected"] forState:UIControlStateNormal];
 		[UIView commitAnimations];
 	}
@@ -3195,8 +3042,73 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     else if(selectedButton == flyerBorder)
     {
         [flyerBorder setBackgroundImage:[UIImage imageNamed:@"addbg_border_selected"] forState:UIControlStateNormal];
+        
+        [UIView beginAnimations:nil context:NULL];
+		[UIView setAnimationDuration:0.4f];
+        
+        //Add ContextView
+        [self AddScrollView:borderScrollView];
+    
+		[UIView commitAnimations];
     }
 
+}
+
+-(IBAction)setlibPhotoTabAction:(id) sender{
+    
+    UIButton *selectedButton = (UIButton*)sender;
+    
+    //Set here Un-Selected State of All Buttons
+    [cameraTabButton setBackgroundImage:[UIImage imageNamed:@"07_camera"] forState:UIControlStateNormal];
+    [photoTabButton setBackgroundImage:[UIImage imageNamed:@"07_roll"] forState:UIControlStateNormal];
+    [widthTabButton setBackgroundImage:[UIImage imageNamed:@"07_width"] forState:UIControlStateNormal];
+    [heightTabButton setBackgroundImage:[UIImage imageNamed:@"07_height"] forState:UIControlStateNormal];
+    
+    
+    if(undoCount >= 1){
+        [rightUndoBarButton setEnabled:YES];
+    }
+    
+    if( selectedButton == cameraTabButton )
+	{
+        imgPickerFlag =2;
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:0.4f];
+        textBackgrnd.alpha = ALPHA0;
+        [UIView commitAnimations];
+        
+        [self openCustomCamera];
+
+    }
+    else if( selectedButton == photoTabButton )
+	{
+        imgPickerFlag =2;
+        [self loadCustomPhotoLibrary];
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:0.4f];
+        textBackgrnd.alpha = ALPHA0;
+        [photoTabButton setBackgroundImage:[UIImage imageNamed:@"07_roll_selected"] forState:UIControlStateNormal];
+        [UIView commitAnimations];
+    }
+    else if( selectedButton == widthTabButton )
+	{
+        [widthTabButton setBackgroundImage:[UIImage imageNamed:@"07_width_selected"] forState:UIControlStateNormal];
+        [widthTabButton  setSelected:YES];
+        [heightTabButton  setSelected:NO];
+        
+        UIImageView *lastImgView = [[self photoLayersArray] lastObject];
+        lastImgView.frame = CGRectMake(lastImgView.frame.origin.x, lastImgView.frame.origin.y,lastImgView.frame.size.width-10,lastImgView.frame.size.height);
+        
+    }
+    else if( selectedButton == heightTabButton )
+	{
+        [heightTabButton setBackgroundImage:[UIImage imageNamed:@"07_height_selected"] forState:UIControlStateNormal];
+        [widthTabButton  setSelected:NO];
+        [heightTabButton  setSelected:YES];
+        
+        UIImageView *lastImgView = [[self photoLayersArray] lastObject];
+        lastImgView.frame = CGRectMake(lastImgView.frame.origin.x, lastImgView.frame.origin.y,lastImgView.frame.size.width,lastImgView.frame.size.height-10);
+    }
 }
 
 
@@ -3689,105 +3601,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 }
 
--(void) setCameraTabAction:(id) sender{
-    imgPickerFlag =2;
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.4f];
-    textBackgrnd.alpha = ALPHA0;
-    [cameraTabButton setBackgroundImage:[UIImage imageNamed:@"07_camera_selected"] forState:UIControlStateNormal];
-    [photoTabButton setBackgroundImage:[UIImage imageNamed:@"07_roll"] forState:UIControlStateNormal];
-    [widthTabButton setBackgroundImage:[UIImage imageNamed:@"07_width"] forState:UIControlStateNormal];
-    [heightTabButton setBackgroundImage:[UIImage imageNamed:@"07_height"] forState:UIControlStateNormal];
-    [UIView commitAnimations];
-    
-    [self openCustomCamera];
-}
 
--(void) setPhotoTabAction:(id) sender{
-    imgPickerFlag =2;
-    [self loadCustomPhotoLibrary];
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.4f];
-    textBackgrnd.alpha = ALPHA0;
-    [cameraTabButton setBackgroundImage:[UIImage imageNamed:@"07_camera"] forState:UIControlStateNormal];
-    [photoTabButton setBackgroundImage:[UIImage imageNamed:@"07_roll_selected"] forState:UIControlStateNormal];
-    [widthTabButton setBackgroundImage:[UIImage imageNamed:@"07_width"] forState:UIControlStateNormal];
-    [heightTabButton setBackgroundImage:[UIImage imageNamed:@"07_height"] forState:UIControlStateNormal];
-    [UIView commitAnimations];
-}
-
-/*
--(void) setPhotoTabAction:(id) sender{
-	UIButton *selectedButton = (UIButton*)sender;
-	if(selectedButton == cameraTabButton)
-	{
-		imgPickerFlag =2;
-		[UIView beginAnimations:nil context:NULL];
-		[UIView setAnimationDuration:0.4f];
-		textBackgrnd.alpha = ALPHA0;
-		[cameraTabButton setBackgroundImage:[UIImage imageNamed:@"07_camera_selected"] forState:UIControlStateNormal];
-		[photoTabButton setBackgroundImage:[UIImage imageNamed:@"07_roll"] forState:UIControlStateNormal];
-		[widthTabButton setBackgroundImage:[UIImage imageNamed:@"07_width"] forState:UIControlStateNormal];
-		[heightTabButton setBackgroundImage:[UIImage imageNamed:@"07_height"] forState:UIControlStateNormal];
-		[UIView commitAnimations];
-
-		[self openCustomCamera];
-	}
-    else if(selectedButton == photoTabButton)
-	{
-		imgPickerFlag =2;
-		[self loadCustomPhotoLibrary];
-		[UIView beginAnimations:nil context:NULL];
-		[UIView setAnimationDuration:0.4f];
-		textBackgrnd.alpha = ALPHA0;
-		//widthScrollView.frame = CGRectMake(-320, 385, 320, 44);
-		//heightScrollView.frame = CGRectMake(-320, 385, 320, 44);
-		[cameraTabButton setBackgroundImage:[UIImage imageNamed:@"07_camera"] forState:UIControlStateNormal];
-		[photoTabButton setBackgroundImage:[UIImage imageNamed:@"07_roll_selected"] forState:UIControlStateNormal];
-		[widthTabButton setBackgroundImage:[UIImage imageNamed:@"07_width"] forState:UIControlStateNormal];
-		[heightTabButton setBackgroundImage:[UIImage imageNamed:@"07_height"] forState:UIControlStateNormal];
-		[UIView commitAnimations];
-	}
-	else if(selectedButton ==widthTabButton)
-	{
-		//[widthScrollView setAlpha:ALPHA1];
-		//[heightScrollView setAlpha:ALPHA0];
-		
-		[UIView beginAnimations:nil context:NULL];
-		[UIView setAnimationDuration:0.4f];
-		textBackgrnd.alpha = ALPHA1;
-		//widthScrollView.frame = CGRectMake(0, 385, 320, 44);
-		//heightScrollView.frame = CGRectMake(-320, 385, 320, 44);
-		[cameraTabButton setBackgroundImage:[UIImage imageNamed:@"07_camera"] forState:UIControlStateNormal];
-		[photoTabButton setBackgroundImage:[UIImage imageNamed:@"07_roll"] forState:UIControlStateNormal];
-		[widthTabButton setBackgroundImage:[UIImage imageNamed:@"07_width_selected"] forState:UIControlStateNormal];
-		[heightTabButton setBackgroundImage:[UIImage imageNamed:@"07_height"] forState:UIControlStateNormal];
-
-        [widthTabButton setSelected:YES];
-        [heightTabButton setSelected:NO];
-		[UIView commitAnimations];
-	}
-	else if(selectedButton == heightTabButton)
-	{
-		//[widthScrollView setAlpha:ALPHA0];
-		//[heightScrollView setAlpha:ALPHA1];
-		[UIView beginAnimations:nil context:NULL];
-		[UIView setAnimationDuration:0.4f];
-		textBackgrnd.alpha = ALPHA1;
-		//widthScrollView.frame = CGRectMake(-320, 385, 320, 44);
-		//heightScrollView.frame = CGRectMake(0, 385, 320, 44);
-		[cameraTabButton setBackgroundImage:[UIImage imageNamed:@"07_camera"] forState:UIControlStateNormal];
-		[photoTabButton setBackgroundImage:[UIImage imageNamed:@"07_roll"] forState:UIControlStateNormal];
-		[widthTabButton setBackgroundImage:[UIImage imageNamed:@"07_width"] forState:UIControlStateNormal];
-		[heightTabButton setBackgroundImage:[UIImage imageNamed:@"07_height_selected"] forState:UIControlStateNormal];
-        
-        [widthTabButton setSelected:NO];
-        [heightTabButton setSelected:YES];
-		[UIView commitAnimations];
-		
-	}
-}
-*/
 -(NSMutableArray *)photoLayersArray{
     
     if(photoLayersArray){
