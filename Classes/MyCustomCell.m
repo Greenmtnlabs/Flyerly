@@ -95,9 +95,9 @@
     self.filePath = imagePath;
     flyerNumber = flyerNumberParam;
 
-    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-
-    NSString *socialFlyerPath = [self.filePath stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@/Flyr/",appDelegate.loginId] withString:[NSString stringWithFormat:@"%@/Flyr/Social/",appDelegate.loginId]];
+    PFUser *user = [PFUser currentUser];
+    
+    NSString *socialFlyerPath = [self.filePath stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@/Flyr/",user.username] withString:[NSString stringWithFormat:@"%@/Flyr/Social/", user.username]];
 	NSString *finalImgWritePath = [socialFlyerPath stringByReplacingOccurrencesOfString:@".jpg" withString:@".soc"];
 
     NSArray *arr = [[NSArray alloc] initWithContentsOfFile:finalImgWritePath];

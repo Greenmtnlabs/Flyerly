@@ -1,9 +1,9 @@
 //
-//  FlyrAppDelegate.m
+//  FlyrAppDelegate.h
 //  Flyr
 //
-//  Created by Nilesh on 20/10/09.
-//  Copyright __MyCompanyName__ 2009. All rights reserved.
+//  Developed by RIKSOF (Private) Limited
+//  Copyright Flyerly. All rights reserved.
 //
 
 #import "Crittercism.h"
@@ -17,6 +17,9 @@
 #import "DraftViewController.h"
 #import "Flurry.h"
 #import <Parse/Parse.h>
+#import "SHKConfiguration.h"
+#import "MySHKConfigurator.h"
+#import "BitlyConfig.h"
 
 NSString *kCheckTokenStep1 = @"kCheckTokenStep";
 NSString *FlickrSharingSuccessNotification = @"FlickrSharingSuccessNotification";
@@ -28,18 +31,17 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 @implementation FlyrAppDelegate
 
 @synthesize window;
-@synthesize navigationController,faceBookPermissionFlag,changesFlag;
-@synthesize fontScrollView,colorScrollView,templateScrollView,sizeScrollView,svController,lauchController,accountController;
-@synthesize session = _session;
+@synthesize navigationController;
+@synthesize faceBookPermissionFlag,changesFlag;
+@synthesize fontScrollView,colorScrollView, sizeScrollView,svController,lauchController,accountController;
 @synthesize sharingProgressParentView;
 
 
 #pragma mark -
 #pragma mark Application lifecycle
 
-- (void)applicationDidFinishLaunching:(UIApplication *)application
-{
-	[self clearCache];
+- (void)applicationDidFinishLaunching:(UIApplication *)application {
+
 	changesFlag = NO;
 	
     NSString *greeted = [[NSUserDefaults standardUserDefaults] stringForKey:@"greeted"];
@@ -102,33 +104,6 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     [PFPush handlePush:userInfo];
 }
 
-- (void)applicationDidReceiveMemoryWarning:(UIApplication *)application
-{
-	NSLog(@"applicationDidReceiveMemoryWarning");
-	[self clearCache];
-}
-
-- (void)applicationWillTerminate:(UIApplication *)application {
-    /*
-     Called when the application is about to terminate.
-     Save data if appropriate.
-     See also applicationDidEnterBackground:.
-     */
-    [FBSession.activeSession close];
-	[self clearCache];
-}
-
-
--(void)clearCache {
-    [self.session close];
-}
-
-
-- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
-    return [[self facebook] handleOpenURL:url];
-}
-
-
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation {
     
@@ -148,12 +123,6 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
         //Tumbler Return
         return nil;//[[SHKTumblr  sharedInstance] handleOpenURL:url];
     }
-}
-
-
-
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-    [FBAppCall handleDidBecomeActiveWithSession:self.session];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -183,15 +152,8 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     DefaultSHKConfigurator *configurator = [[MySHKConfigurator alloc] init];
     [SHKConfiguration sharedInstanceWithConfigurator:configurator];
     
-    
     //[self clearCache];
 	changesFlag = NO;
-	//[[UIApplication sharedApplication] setStatusBarStyle: UIStatusBarStyleBlackOpaque];
-	//navigationController.navigationBar.barStyle = UIStatusBarStyleBlackOpaque;
-    globle = [Singleton RetrieveSingleton];
-    globle.twitterUser = nil;
-    float ver =  [[[UIDevice currentDevice] systemVersion] floatValue];
-    globle.iosVersion =[NSString stringWithFormat:@"%f",ver];
 
     //This flag represents the condition whether application setting has been altered first time
     // after installing app
@@ -241,11 +203,8 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
         
         if ( [PFUser currentUser] == nil ) {
             [navigationController setRootViewController:accountController];
-        }else{
+        } else {
             [navigationController pushViewController:lauchController animated:YES];
-            FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-            appDelegate.loginId = [[NSUserDefaults standardUserDefaults]  objectForKey:@"User"];
-            
         }
 
         [window addSubview:[navigationController view]];

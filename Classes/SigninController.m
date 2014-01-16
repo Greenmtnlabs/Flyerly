@@ -159,8 +159,7 @@
         
        // NSLog(@"Email: %@", userName);
         //NSLog(@"Path: %@", [AccountController getPathFromEmail:userName]);
-        FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-        appDelegate.loginId = [AccountController getPathFromEmail:userName];
+
         //usr = [[NSUserDefaults standardUserDefaults] stringForKey:@"User"];
          //if (usr == nil) {
             [[NSUserDefaults standardUserDefaults]  setObject:userName forKey:@"User"];
@@ -224,7 +223,6 @@
             [appDelegate FbChangeforNewVersion];
             
              // Set Current UserName for Device configuration
-             appDelegate.loginId = user.username;
             [[NSUserDefaults standardUserDefaults]  setObject:user.username forKey:@"User"];
             
             // Login success Move to Flyerly
@@ -239,8 +237,6 @@
             NSLog(@"User with facebook logged in!");
             
             // Set Current UserName for Device configuration
-            FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-            appDelegate.loginId = user.username;
             [[NSUserDefaults standardUserDefaults]  setObject:user.username forKey:@"User"];
 
             // Temp on for Testing here
@@ -320,7 +316,6 @@
                 [appDelegate TwitterChangeforNewVersion:twitterUsername];
                 
                 // Set Current UserName for Device configuration
-                 appDelegate.loginId = [PFTwitterUtils twitter].screenName;
                 [[NSUserDefaults standardUserDefaults]  setObject:[PFTwitterUtils twitter].screenName forKey:@"User"];
                 
                 // Login success Move to Flyerly
@@ -338,8 +333,6 @@
                 NSLog(@"User logged in with Twitter!");
                 
                 // Set Current UserName for Device configuration
-                FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-                appDelegate.loginId = [PFTwitterUtils twitter].screenName;
                 [[NSUserDefaults standardUserDefaults]  setObject:[PFTwitterUtils twitter].screenName forKey:@"User"];
 
                 // Temp on for Testing here

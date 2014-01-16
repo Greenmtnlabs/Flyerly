@@ -850,9 +850,9 @@ static ShareProgressView *clipBdPogressView;
 
 -(void)updateSocialStates{    
     
-    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    PFUser *user = [PFUser currentUser];
 
-    NSString *socialFlyerPath = [imageFileName stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@/Flyr/", appDelegate.loginId] withString:[NSString stringWithFormat:@"%@/Flyr/Social/", appDelegate.loginId]];
+    NSString *socialFlyerPath = [imageFileName stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@/Flyr/", user.username] withString:[NSString stringWithFormat:@"%@/Flyr/Social/", user.username]];
 	NSString *finalImgWritePath = [socialFlyerPath stringByReplacingOccurrencesOfString:@".jpg" withString:@".soc"];
     
     NSMutableArray *socialArray = [[NSMutableArray alloc] initWithContentsOfFile:finalImgWritePath];

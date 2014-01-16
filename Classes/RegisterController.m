@@ -461,8 +461,6 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
             
             NSLog(@"Email: %@", userName);
             NSLog(@"Path: %@", [AccountController getPathFromEmail:userName]);
-            FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-            appDelegate.loginId = [AccountController  getPathFromEmail:userName];
 
             if(IS_IPHONE_5){
                 launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewControllerIPhone5" bundle:nil];

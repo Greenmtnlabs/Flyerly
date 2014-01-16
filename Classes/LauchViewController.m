@@ -216,9 +216,10 @@
 	photoDetailArray =[[NSMutableArray alloc]initWithCapacity:numberOfFlyers];
 	NSString *homeDirectoryPath = NSHomeDirectory();
     
-    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    PFUser *user = [PFUser currentUser];
 
-	NSString *unexpandedPath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/Flyr/",appDelegate.loginId]];
+	NSString *unexpandedPath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/Flyr/",user.username]];
+    
 	NSString *folderPath = [NSString pathWithComponents:@[[NSString stringWithString:[unexpandedPath stringByExpandingTildeInPath]]]];
 	//NSString *unexpandedDetailPath = [homeDirectoryPath stringByAppendingString:@"/Documents/Detail/"];
 	//NSString *detailFolderPath = [NSString pathWithComponents:[NSArray arrayWithObjects:[NSString stringWithString:[unexpandedDetailPath stringByExpandingTildeInPath]], nil]];
@@ -657,10 +658,7 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
 
 
 - (void)facebookLikeViewRequiresLogin:(FacebookLikeView *)aFacebookLikeView {
-    
-    
-    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-    [appDelegate.facebook authorize:@[@"read_stream", @"publish_stream", @"email"]];
+
 }
 
 

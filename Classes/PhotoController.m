@@ -81,11 +81,6 @@ int photoLayerCount = 0; // Photo layer count to set tag value
    
 }
 
-- (void) handleMemoryWarning:(NSNotification *)notification
-{
-	FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
-	[appDele clearCache];
-}
 
 -(void)viewDidAppear:(BOOL)animated{
     
@@ -4531,10 +4526,12 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	UIImage *screenImage = UIGraphicsGetImageFromCurrentImageContext();
 	UIGraphicsEndImageContext();
 
-    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
 
+    PFUser *user = [PFUser currentUser];
+    
 	NSString *homeDirectoryPath = NSHomeDirectory();
-	NSString *usernamePath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/",appDelegate.loginId]];
+	NSString *usernamePath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/",
+                                                                         user.username]];
     if (![[NSFileManager defaultManager] fileExistsAtPath:usernamePath isDirectory:NULL]) {
         NSError *error;
 		[[NSFileManager defaultManager] createDirectoryAtPath:usernamePath withIntermediateDirectories:YES attributes:nil error:&error];
@@ -5455,19 +5452,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 }
 
 #pragma mark  View Disappear Methods
-
-- (void)didReceiveMemoryWarning {
-	NSLog(@"didReceiveMemoryWarning");
-	FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
-	[appDele clearCache];
-		[super didReceiveMemoryWarning];
-}
-
-- (void)viewDidUnload {
-	NSLog(@"ViewDidUnload");
-	FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
-	[appDele clearCache];
-}
 
 -(void) logLayerAddedEvent{
     [Flurry logEvent:@"Layer Added"];
