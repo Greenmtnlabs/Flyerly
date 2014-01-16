@@ -235,7 +235,7 @@
 
 
 -(void)loadCustomPhotoLibrary;
--(void) chooseTemplate;
+
 -(void) chooseEdit;
 -(void) MyEdit;
 -(void) SetMenu;
@@ -262,6 +262,8 @@
 
 -(void)AddScrollView:(id)obj;
 -(void)AddBottomTabs:(id)obj;
+-(void)AddAllLayersIntoFront;
+
 -(IBAction)setAddMoreLayerTabAction:(id)sender;
 -(IBAction)setlibBackgroundTabAction:(id)sender;
 -(IBAction)setStyleTabAction:(id) sender;

@@ -140,7 +140,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 	msgLabel.textAlignment = UITextAlignmentCenter;
 	[self.imgView addSubview:msgLabel];
     
-	msgTextView = [[UITextView alloc]initWithFrame:CGRectMake(20, 50, 280, 250)];
+	msgTextView = [[UITextView alloc]initWithFrame:CGRectMake(20, 100, 280, 250)];
 	msgTextView.delegate = self;
 	msgTextView.font = [UIFont fontWithName:@"Arial" size:16];
 	msgTextView.textColor = [UIColor blackColor];
@@ -294,7 +294,6 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 	heightTabButton.tag = 10004;
 	
     // Add more layer tabs
-    [addMoreFontTabButton setBackgroundImage:[UIImage imageNamed:@"text_icon_selected"] forState:UIControlStateHighlighted];
 	addMoreFontTabButton.tag = 10001;
 	
     [addMorePhotoTabButton setBackgroundImage:[UIImage imageNamed:@"image_icon_selected"] forState:UIControlStateHighlighted];
@@ -389,9 +388,6 @@ int photoLayerCount = 0; // Photo layer count to set tag value
         moreLayersButton = [[UIButton alloc] initWithFrame:CGRectMake(82, 445, 156, 43)];
         moreLayersLabel = [[UILabel alloc] initWithFrame:CGRectMake(125, 445, 156, 43)];
         
-
-        
-        
         //all Main Scroll Views Initialize
         //for Using in ContextView
         templateScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,320,130)];
@@ -445,8 +441,31 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 	imgPickerFlag =1;
     selectedAddMoreLayerTab = -1;
     
-    // Call choose template
-	[self chooseTemplate];
+    
+    //On Removing Background Screen so some
+    //Code paste here
+    deleteMode = NO;
+    undoCount = 0;
+    layerallow = 0;
+    
+    if(layerEditMessage!=nil){
+        [layerEditMessage removeFromSuperview];
+        layerEditMessage = nil;
+    }
+    
+    ((CustomLabel *)[[self textLabelLayersArray] lastObject]).alpha = 1;
+	textBackgrnd.alpha  =ALPHA0;
+    
+    photoTouchFlag = NO;
+	lableTouchFlag = NO;
+    symbolTouchFlag = NO;
+    iconTouchFlag = NO;
+	imgPickerFlag = 1;
+    [self hideAddMoreButton];
+	[msgTextView removeFromSuperview];
+    
+    // Call Main View
+	[self callAddMoreLayers];
 
 }
 
@@ -2013,83 +2032,13 @@ int arrangeLayerIndex;
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarMenuButton,leftBarHelpButton,nil]];
 
     
-}-(void)chooseTemplate{
-    
-    deleteMode = NO;
-    undoCount = 0;
-    layerallow = 0;
-
-    //[rightUndoBarButton setEnabled:NO];
-    //[self makeCopyOfLayers];
-    if(layerEditMessage!=nil){
-        [layerEditMessage removeFromSuperview];
-        layerEditMessage = nil;
-    }
-
-
-	
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-65, -6, 50, 50)];
-    label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont fontWithName:TITLE_FONT size:18];
-    label.textAlignment = UITextAlignmentCenter;
-    label.textColor = [UIColor whiteColor];
-    label.text = @"BACKGROUND";
-    self.navigationItem.titleView = label;
-
-    //self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Background" rect:CGRectMake(-65, -6, 50, 50)];
-    
-    UIButton *nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-	[nextButton addTarget:self action:@selector(delaytime) forControlEvents:UIControlEventTouchUpInside];
-    [nextButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
-    nextButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
-    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
-    
-    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-    [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
-	[backButton addTarget:self action:@selector(callMenu) forControlEvents:UIControlEventTouchUpInside];
-    backButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *leftBarMenuButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-    
-    UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    [helpButton addTarget:self action:@selector(loadHelpController) forControlEvents:UIControlEventTouchUpInside];
-    [helpButton setBackgroundImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
-    helpButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *leftBarHelpButton = [[UIBarButtonItem alloc] initWithCustomView:helpButton];
-    
-    [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarMenuButton,leftBarHelpButton,nil]];
-    
-
-	[UIView beginAnimations:nil context:NULL];
-	[UIView setAnimationDuration:0.4f];
-	self.templateScrollView.alpha = ALPHA1;
-	self.templateBckgrnd.alpha = ALPHA1;
-    
-
-    
-    ((CustomLabel *)[[self textLabelLayersArray] lastObject]).alpha = 1;
-	textBackgrnd.alpha  =ALPHA0;
-
-    photoTouchFlag = NO;
-	lableTouchFlag = NO;
-    symbolTouchFlag = NO;
-    iconTouchFlag = NO;
-	imgPickerFlag = 1;
-    
-    [self hideAddMoreButton];
-
-
-    
-	[msgTextView removeFromSuperview];
-	[UIView commitAnimations];
 }
 
 -(void)loadHelpController{
 
     HelpController *helpController = [[HelpController alloc]initWithNibName:@"HelpController" bundle:nil];
     [self.navigationController pushViewController:helpController animated:NO];
-    [self chooseTemplate];
+    [self callAddMoreLayers];
 }
 
 -(void)callKeyboard{
@@ -2130,14 +2079,14 @@ int arrangeLayerIndex;
     symbolTouchFlag= NO;
     iconTouchFlag = NO;
 
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-45, -6, 50, 50)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:TITLE_FONT size:18];
     label.textAlignment = UITextAlignmentCenter;
     label.textColor = [UIColor whiteColor];
     label.text = @"ADD TEXT";
     self.navigationItem.titleView = label;
-    //self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Add Text" rect:CGRectMake(-45, -6, 50, 50)];
+
 
     UIButton *nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
 	[nextButton addTarget:self action:@selector(callStyle) forControlEvents:UIControlEventTouchUpInside];
@@ -2182,11 +2131,6 @@ int arrangeLayerIndex;
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationDuration:0.4f];
     
-    
-   
-   
-	lastTextView.frame = CGRectMake(20, 50, 280, 150);
-   // lastTextView.frame = CGRectMake(lastLabelView.frame.origin.x, lastLabelView.frame.origin.y,  lastLabelView.frame.size.width,  lastLabelView.frame.size.height);
 	templateBckgrnd.alpha = ALPHA0;
 
 
@@ -2290,7 +2234,6 @@ int arrangeLayerIndex;
     label.text = @"ADD PHOTO";
     self.navigationItem.titleView = label;
     
-
     
     if(selectedAddMoreLayerTab == -1){
         UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
@@ -2491,14 +2434,14 @@ int arrangeLayerIndex;
     
     UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-	[backButton addTarget:self action:@selector(chooseTemplate) forControlEvents:UIControlEventTouchUpInside];
+	[backButton addTarget:self action:@selector(callMenu) forControlEvents:UIControlEventTouchUpInside];
     [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
      backButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     [self.navigationItem setLeftBarButtonItem:backBarButton];
     
-    [self AddScrollView:addMoreLayerOrSaveFlyerLabel];
     [self AddBottomTabs:libFlyer];
+    [self AddAllLayersIntoFront ];
    
     [self hideAddMoreButton];
 
@@ -2702,306 +2645,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 		[fontBorderTabButton setBackgroundImage:[UIImage imageNamed:@"background_button_selected"] forState:UIControlStateNormal];
 		[UIView commitAnimations];
 	}
-    else if(selectedButton == arrangeLayerTabButton)
-	{
-        [self SetMenu];
-        layerallow = 0 ;
-        // Layer handling message
-        
-        if(layerEditMessage==nil){
-            layerEditMessage = [[NSBundle mainBundle] loadNibNamed:@"ShareProgressView" owner:self options:nil][0];
-            [layerEditMessage setFrame:CGRectMake(layerEditMessage.frame.origin.x, 320, layerEditMessage.frame.size.width, layerEditMessage.frame.size.height+2)];
-            
-            // border radius
-            [layerEditMessage setAlpha:0.8];
-            globle = [Singleton RetrieveSingleton];
-            [layerEditMessage setBackgroundColor:[globle colorWithHexString:@"84c341 "]];
-            
-            [layerEditMessage.statusText setBounds:CGRectMake(layerEditMessage.frame.origin.x, 321, layerEditMessage.frame.size.width-55, layerEditMessage.frame.size.height-1)];
-            [layerEditMessage.statusText setTextColor:[UIColor whiteColor]];
-            [layerEditMessage.statusText setTextAlignment:NSTextAlignmentCenter];
-            [layerEditMessage.statusText setLineBreakMode:NSLineBreakByWordWrapping];
-            [layerEditMessage.statusText setNumberOfLines:0];
-            [layerEditMessage.statusText setText:@"ADJUST, EDIT OR DELETE LAYERS HERE."];
-            
-            [layerEditMessage.networkIcon removeFromSuperview];
-            [layerEditMessage.statusIcon removeFromSuperview];
-            [layerEditMessage.refreshIcon removeFromSuperview];
-            
-            [self.view addSubview:layerEditMessage];
-        }
-        
-        //self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"layers" rect:CGRectMake(-30, -6, 50, 50)];
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-30, -6, 50, 50)];
-        label.backgroundColor = [UIColor clearColor];
-        label.font = [UIFont fontWithName:TITLE_FONT size:18];
-        label.textAlignment = UITextAlignmentCenter;
-        label.textColor = [UIColor whiteColor];
-        label.text = @"LAYERS";
-        self.navigationItem.titleView = label;
-        
-        selectedAddMoreLayerTab = ARRANGE_LAYERTAB;
-        [self removeBordersFromAllLayers];
-        
-        lableTouchFlag = NO;
-        symbolTouchFlag= NO;
-        iconTouchFlag = NO;
-        photoTouchFlag = NO;
-        
-        if(layerScrollView){
-            [layerScrollView removeFromSuperview];
-        }
-        layerScrollView = nil;
-        layerScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,320,130)];
-        
-        NSInteger layerScrollWidth = 60;
-        NSInteger layerScrollHeight = 55;
-        
-        if(textLabelLayersArray){
-            //NSLog(@"Text Layers %d", [textLabelLayersArray count]);
-            
-            for(int text=0; text<[textLabelLayersArray count]; text++){
-                
-                UILabel *label1 = (UILabel *) textLabelLayersArray[text];
-                UILabel *label = [[UILabel alloc] initWithFrame:label1.frame];
-                label.text = label1.text;
-                
-                UIButton *layerButton = [UIButton  buttonWithType:UIButtonTypeCustom];
-                layerButton.frame =CGRectMake(0, 5,layerScrollWidth, layerScrollHeight);
-                [layerButton setBackgroundColor:[UIColor clearColor]];
-                
-                label.frame  = CGRectMake(layerButton.frame.origin.x+5, layerButton.frame.origin.y-2, layerButton.frame.size.width-10, layerButton.frame.size.height-7);
-                [layerButton addSubview:label];
-                layerButton.tag = [[NSString stringWithFormat:@"%@%d",@"111",text] integerValue];
-                
-                // Add long press gesture on thie layer
-                // UILongPressGestureRecognizer* longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onLongPress:)];
-                //[layerButton addGestureRecognizer:longPressRecognizer];
-                
-                
-                
-                UIImage *image = [UIImage imageNamed:@"cross"];
-                image = [PhotoController imageWithImage:image scaledToSize:CGSizeMake(30, 29)];
-                UIImage *pencilImage = [UIImage imageNamed:@"pencil_blue"];
-                pencilImage = [PhotoController imageWithImage:pencilImage scaledToSize:CGSizeMake(19, 19)];
-                
-                UIButton *crossButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 50)];
-                [crossButton setImage:image forState:UIControlStateNormal];
-                [crossButton addTarget:self action:@selector(deleteLayer:) forControlEvents:UIControlEventTouchUpInside];
-                [crossButton setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
-                [crossButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
-                
-                UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(layerButton.frame.origin.x, 0, 30, 50)];
-                [editButton setImage:pencilImage forState:UIControlStateNormal];
-                [editButton addTarget:self action:@selector(editLayer:) forControlEvents:UIControlEventTouchUpInside];
-                [editButton setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
-                [editButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
-                editButton.showsTouchWhenHighlighted = YES;
-                
-                // If delete mode is enabled then show cross button an wobble
-                if(deleteMode){
-                    // [crossButton setHidden:NO];
-                    [editButton setHidden:NO];
-                    // [self wobble:layerButton];
-                }else{
-                    [crossButton setHidden:YES];
-                    [editButton setHidden:NO];
-                }
-                
-                // crossButton.tag = layerButton.tag;
-                // [layerButton addSubview:crossButton];
-                editButton.tag = layerButton.tag;
-                [layerButton addSubview:editButton];
-                
-                [layerScrollView addSubview:layerButton];
-            }
-        }
-        
-        if(photoLayersArray){
-            //NSLog(@"Photo Layers %d", [photoLayersArray count]);
-            
-            for(int photo=0; photo<[photoLayersArray count]; photo++){
-                
-                UIImageView *img1 = (UIImageView *) photoLayersArray[photo];
-                UIImageView *img = [[UIImageView alloc] initWithImage:img1.image];
-                
-                UIButton *layerButton = [UIButton  buttonWithType:UIButtonTypeCustom];
-                layerButton.frame =CGRectMake(0, 5,layerScrollWidth, layerScrollHeight);
-                [layerButton setBackgroundColor:[UIColor clearColor]];
-                
-                img.frame  = CGRectMake(layerButton.frame.origin.x+5, layerButton.frame.origin.y-2, layerButton.frame.size.width-10, layerButton.frame.size.height-7);
-                [layerButton addSubview:img];
-                layerButton.tag = [[NSString stringWithFormat:@"%@%d",@"222",photo] integerValue];
-                
-                // Add long press gesture on thie layer
-                UILongPressGestureRecognizer* longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onLongPress:)];
-                [layerButton addGestureRecognizer:longPressRecognizer];
-                
-                UIImage *image = [UIImage imageNamed:@"cross"];
-                image = [PhotoController imageWithImage:image scaledToSize:CGSizeMake(30, 29)];
-                UIImage *pencilImage = [UIImage imageNamed:@"pencil_blue"];
-                pencilImage = [PhotoController imageWithImage:pencilImage scaledToSize:CGSizeMake(19, 19)];
-                
-                UIButton *crossButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 50)];
-                [crossButton setImage:image forState:UIControlStateNormal];
-                [crossButton addTarget:self action:@selector(deleteLayer:) forControlEvents:UIControlEventTouchUpInside];
-                [crossButton setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
-                [crossButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
-                
-                UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(layerButton.frame.origin.x, 0, layerButton.frame.size.width, 50)];
-                [editButton setImage:pencilImage forState:UIControlStateNormal];
-                [editButton addTarget:self action:@selector(editLayer:) forControlEvents:UIControlEventTouchUpInside];
-                [editButton setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
-                [editButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
-                editButton.showsTouchWhenHighlighted = YES;
-                // If delete mode is enabled then show cross button an wobble
-                if(deleteMode){
-                    //[crossButton setHidden:NO];
-                    [editButton setHidden:NO];
-                    // [self wobble:layerButton];
-                }else{
-                    [crossButton setHidden:YES];
-                    [editButton setHidden:NO];
-                }
-                
-                // crossButton.tag = layerButton.tag;
-                //[layerButton addSubview:crossButton];
-                editButton.tag = layerButton.tag;
-                [layerButton addSubview:editButton];
-                
-                [layerScrollView addSubview:layerButton];
-            }
-        }
-        if(symbolLayersArray){
-            //NSLog(@"Symbol Layers %d", [symbolLayersArray count]);
-            for(int symbol=0; symbol<[symbolLayersArray count]; symbol++){
-                
-                UIImageView *img1 = (UIImageView *) symbolLayersArray[symbol];
-                UIImageView *img = [[UIImageView alloc] initWithImage:img1.image];
-                
-                UIButton *layerButton = [UIButton  buttonWithType:UIButtonTypeCustom];
-                layerButton.frame =CGRectMake(0, 5,layerScrollWidth, layerScrollHeight);
-                [layerButton setBackgroundColor:[UIColor clearColor]];
-                
-                img.frame  = CGRectMake(layerButton.frame.origin.x+5, layerButton.frame.origin.y-2, layerButton.frame.size.width-10, layerButton.frame.size.height-7);
-                [layerButton addSubview:img];
-                layerButton.tag = [[NSString stringWithFormat:@"%@%d",@"333",symbol] integerValue];
-                
-                // Add long press gesture on thie layer
-                UILongPressGestureRecognizer* longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onLongPress:)];
-                [layerButton addGestureRecognizer:longPressRecognizer];
-                
-                UIImage *image = [UIImage imageNamed:@"cross"];
-                image = [PhotoController imageWithImage:image scaledToSize:CGSizeMake(30, 29)];
-                UIImage *pencilImage = [UIImage imageNamed:@"pencil_blue"];
-                pencilImage = [PhotoController imageWithImage:pencilImage scaledToSize:CGSizeMake(19, 19)];
-                
-                UIButton *crossButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 50)];
-                [crossButton setImage:image forState:UIControlStateNormal];
-                [crossButton addTarget:self action:@selector(deleteLayer:) forControlEvents:UIControlEventTouchUpInside];
-                [crossButton setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
-                [crossButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
-                
-                UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(layerButton.frame.origin.x, 0, layerButton.frame.size.width, 50)];
-                [editButton setImage:pencilImage forState:UIControlStateNormal];
-                [editButton addTarget:self action:@selector(editLayer:) forControlEvents:UIControlEventTouchUpInside];
-                [editButton setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
-                [editButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
-                editButton.showsTouchWhenHighlighted = YES;
-                // If delete mode is enabled then show cross button an wobble
-                if(deleteMode){
-                    //[crossButton setHidden:NO];
-                    [editButton setHidden:NO];
-                    // [self wobble:layerButton];
-                }else{
-                    [crossButton setHidden:YES];
-                    [editButton setHidden:NO];
-                }
-                
-                //crossButton.tag = layerButton.tag;
-                //[layerButton addSubview:crossButton];
-                editButton.tag = layerButton.tag;
-                [layerButton addSubview:editButton];
-                
-                [layerScrollView addSubview:layerButton];
-            }
-        }
-        if(iconLayersArray){
-            //NSLog(@"Icon Layers %d", [iconLayersArray count]);
-            for(int icon=0; icon<[iconLayersArray count]; icon++){
-                
-                UIImageView *img1 = (UIImageView *) iconLayersArray[icon];
-                UIImageView *img = [[UIImageView alloc] initWithImage:img1.image];
-                
-                UIButton *layerButton = [UIButton  buttonWithType:UIButtonTypeCustom];
-                layerButton.frame =CGRectMake(0, 5,layerScrollWidth, layerScrollHeight);
-                [layerButton setBackgroundColor:[UIColor clearColor]];
-                
-                img.frame  = CGRectMake(layerButton.frame.origin.x+5, layerButton.frame.origin.y-2, layerButton.frame.size.width-10, layerButton.frame.size.height-7);
-                [layerButton addSubview:img];
-                layerButton.tag = [[NSString stringWithFormat:@"%@%d",@"444",icon] integerValue];
-                
-                // Add long press gesture on thie layer
-                UILongPressGestureRecognizer* longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onLongPress:)];
-                [layerButton addGestureRecognizer:longPressRecognizer];
-                
-                
-                UIImage *image = [UIImage imageNamed:@"cross"];
-                image = [PhotoController imageWithImage:image scaledToSize:CGSizeMake(30, 29)];
-                UIImage *pencilImage = [UIImage imageNamed:@"pencil_blue"];
-                pencilImage = [PhotoController imageWithImage:pencilImage scaledToSize:CGSizeMake(19, 19)];
-                
-                UIButton *crossButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 50)];
-                [crossButton setImage:image forState:UIControlStateNormal];
-                [crossButton addTarget:self action:@selector(deleteLayer:) forControlEvents:UIControlEventTouchUpInside];
-                [crossButton setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
-                [crossButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
-                
-                UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(layerButton.frame.origin.x, 0, layerButton.frame.size.width, 50)];
-                [editButton setImage:pencilImage forState:UIControlStateNormal];
-                [editButton addTarget:self action:@selector(editLayer:) forControlEvents:UIControlEventTouchUpInside];
-                [editButton setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
-                [editButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
-                editButton.showsTouchWhenHighlighted = YES;
-                
-                // If delete mode is enabled then show cross button an wobble
-                if(deleteMode){
-                    //[crossButton setHidden:NO];
-                    [editButton setHidden:NO];
-                    // [self wobble:layerButton];
-                }else{
-                    [crossButton setHidden:YES];
-                    [editButton setHidden:NO];
-                }
-                
-                //crossButton.tag = layerButton.tag;
-                //[layerButton addSubview:crossButton];
-                editButton.tag = layerButton.tag;
-                [layerButton addSubview:editButton];
-                
-                
-                [layerScrollView addSubview:layerButton];
-            }
-        }
-        
-        
-        
-        [layerScrollView setCanCancelContentTouches:NO];
-        layerScrollView.indicatorStyle = UIScrollViewIndicatorStyleBlack;
-        layerScrollView.clipsToBounds = YES;
-        layerScrollView.scrollEnabled = YES;
-        layerScrollView.pagingEnabled = NO;
-        layerScrollView.showsHorizontalScrollIndicator = NO;
-        layerScrollView.showsVerticalScrollIndicator = NO;
-        [self layoutScrollImages:layerScrollView scrollWidth:layerScrollWidth scrollHeight:layerScrollHeight];
-        [self AddScrollView:layerScrollView];
-        
-	}
-    deleteMode = NO;
-    doStopWobble = YES;
-    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapGestureCaptured:)];
-    [layerScrollView addGestureRecognizer:singleTap];
-
+    
 }
 
 -(IBAction)setlibBackgroundTabAction:(id)sender{
@@ -3094,7 +2738,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	{
         [widthTabButton setBackgroundImage:[UIImage imageNamed:@"07_width_selected"] forState:UIControlStateNormal];
         [widthTabButton  setSelected:YES];
-        [heightTabButton  setSelected:NO];
         
         UIImageView *lastImgView = [[self photoLayersArray] lastObject];
         lastImgView.frame = CGRectMake(lastImgView.frame.origin.x, lastImgView.frame.origin.y,lastImgView.frame.size.width-10,lastImgView.frame.size.height);
@@ -3157,6 +2800,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         selectedAddMoreLayerTab = ADD_MORE_PHOTOTAB;
         if ([self canAddMoreLayers]) {
             [self AddScrollView:takeOrAddPhotoLabel];
+            
         }
 
         symbolTouchFlag= NO;
@@ -3168,12 +2812,11 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 		[UIView setAnimationDuration:0.4f];
         
 		textBackgrnd.alpha = ALPHA0;
-
+        [self AddBottomTabs:libPhoto];
 		[UIView commitAnimations];
         
         [self plusButtonClick];
 
-		//[self loadCustomPhotoLibrary];
 	}
 	else if(selectedButton == addMoreSymbolTabButton)
 	{
@@ -3327,7 +2970,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
-	[backButton addTarget:self action:@selector(chooseTemplate) forControlEvents:UIControlEventTouchUpInside];
+	[backButton addTarget:self action:@selector(callMenu) forControlEvents:UIControlEventTouchUpInside];
     backButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *leftBarMenuButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     
@@ -3357,22 +3000,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 }
 
 -(void)MyDelete{
-    /*
-    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 29, 25)];
-    [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-    [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
-	[backButton addTarget:self action:@selector(chooseTemplate) forControlEvents:UIControlEventTouchUpInside];
-    backButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *leftBarMenuButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     
-    UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 16, 21)];
-    [helpButton addTarget:self action:@selector(loadHelpController) forControlEvents:UIControlEventTouchUpInside];
-    [helpButton setBackgroundImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
-    helpButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *leftBarHelpButton = [[UIBarButtonItem alloc] initWithCustomView:helpButton];
-    
-    [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarMenuButton,leftBarHelpButton,nil]];
-    [self callAddMoreLayers];*/
     deleteAlert = [[UIAlertView alloc]initWithTitle:@"Warning" message:@"Delete this layer?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK" ,nil];
     [deleteAlert show];
     
@@ -3693,14 +3321,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     if([self canAddMoreLayers]){
         if(selectedAddMoreLayerTab == ADD_MORE_TEXTTAB){
             
-            /*UITextView *newMsgTextView = [[UITextView alloc]initWithFrame:CGRectMake(20, 50, 280, 150)];
-             newMsgTextView.delegate = self;
-             newMsgTextView.font = [UIFont fontWithName:@"Arial" size:16];
-             newMsgTextView.textColor = [UIColor blackColor];
-             newMsgTextView.textAlignment = UITextAlignmentCenter;
-             [[self textEditLayersArray] addObject:newMsgTextView];*/
-            
-            //CustomLabel *newMsgLabel = [[CustomLabel alloc]initWithFrame:CGRectMake(0, 30, 320, 150)];
             CustomLabel *newMsgLabel = [[CustomLabel alloc]initWithFrame:CGRectMake(20, 50, 280, 280)];
 
             newMsgLabel.backgroundColor = [UIColor clearColor];
@@ -3708,6 +3328,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
             newMsgLabel.borderColor = [UIColor clearColor];
             newMsgLabel.textAlignment = UITextAlignmentCenter;
             newMsgLabel.adjustsFontSizeToFitWidth = YES;
+            
             //newMsgLabel.adjustsLetterSpacingToFitWidth = YES;
             newMsgLabel.lineBreakMode = UILineBreakModeClip;
             //[newMsgLabel.text]
@@ -5082,6 +4703,285 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     
     //Add ScrollViews
     [self.libraryContextView addSubview:obj];
+}
+
+/*
+ * When we Back To Main View its Set
+ * All Layers to Front for Edit and Delete
+ */
+-(void)AddAllLayersIntoFront{
+    
+    layerallow = 0 ;
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-30, -6, 50, 50)];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont fontWithName:TITLE_FONT size:18];
+    label.textAlignment = UITextAlignmentCenter;
+    label.textColor = [UIColor whiteColor];
+    label.text = @"LAYERS";
+    self.navigationItem.titleView = label;
+    
+    selectedAddMoreLayerTab = ARRANGE_LAYERTAB;
+    [self removeBordersFromAllLayers];
+    
+    lableTouchFlag = NO;
+    symbolTouchFlag= NO;
+    iconTouchFlag = NO;
+    photoTouchFlag = NO;
+    
+    if(layerScrollView){
+        [layerScrollView removeFromSuperview];
+    }
+    layerScrollView = nil;
+    layerScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,320,130)];
+    
+    NSInteger layerScrollWidth = 60;
+    NSInteger layerScrollHeight = 55;
+    
+    if(textLabelLayersArray){
+        //NSLog(@"Text Layers %d", [textLabelLayersArray count]);
+        
+        for(int text=0; text<[textLabelLayersArray count]; text++){
+            
+            UILabel *label1 = (UILabel *) textLabelLayersArray[text];
+            UILabel *label = [[UILabel alloc] initWithFrame:label1.frame];
+            label.text = label1.text;
+            
+            UIButton *layerButton = [UIButton  buttonWithType:UIButtonTypeCustom];
+            layerButton.frame =CGRectMake(0, 5,layerScrollWidth, layerScrollHeight);
+            [layerButton setBackgroundColor:[UIColor clearColor]];
+            
+            label.frame  = CGRectMake(layerButton.frame.origin.x+5, layerButton.frame.origin.y-2, layerButton.frame.size.width-10, layerButton.frame.size.height-7);
+            [layerButton addSubview:label];
+            layerButton.tag = [[NSString stringWithFormat:@"%@%d",@"111",text] integerValue];
+            
+            // Add long press gesture on thie layer
+            // UILongPressGestureRecognizer* longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onLongPress:)];
+            //[layerButton addGestureRecognizer:longPressRecognizer];
+            
+            
+            
+            UIImage *image = [UIImage imageNamed:@"cross"];
+            image = [PhotoController imageWithImage:image scaledToSize:CGSizeMake(30, 29)];
+            UIImage *pencilImage = [UIImage imageNamed:@"pencil_blue"];
+            pencilImage = [PhotoController imageWithImage:pencilImage scaledToSize:CGSizeMake(19, 19)];
+            
+            UIButton *crossButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 50)];
+            [crossButton setImage:image forState:UIControlStateNormal];
+            [crossButton addTarget:self action:@selector(deleteLayer:) forControlEvents:UIControlEventTouchUpInside];
+            [crossButton setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
+            [crossButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+            
+            UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(layerButton.frame.origin.x, 0, 30, 50)];
+            [editButton setImage:pencilImage forState:UIControlStateNormal];
+            [editButton addTarget:self action:@selector(editLayer:) forControlEvents:UIControlEventTouchUpInside];
+            [editButton setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
+            [editButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
+            editButton.showsTouchWhenHighlighted = YES;
+            
+            // If delete mode is enabled then show cross button an wobble
+            if(deleteMode){
+                // [crossButton setHidden:NO];
+                [editButton setHidden:NO];
+                // [self wobble:layerButton];
+            }else{
+                [crossButton setHidden:YES];
+                [editButton setHidden:NO];
+            }
+            
+            // crossButton.tag = layerButton.tag;
+            // [layerButton addSubview:crossButton];
+            editButton.tag = layerButton.tag;
+            [layerButton addSubview:editButton];
+            
+            [layerScrollView addSubview:layerButton];
+        }
+    }
+    
+    if(photoLayersArray){
+        //NSLog(@"Photo Layers %d", [photoLayersArray count]);
+        
+        for(int photo=0; photo<[photoLayersArray count]; photo++){
+            
+            UIImageView *img1 = (UIImageView *) photoLayersArray[photo];
+            UIImageView *img = [[UIImageView alloc] initWithImage:img1.image];
+            
+            UIButton *layerButton = [UIButton  buttonWithType:UIButtonTypeCustom];
+            layerButton.frame =CGRectMake(0, 5,layerScrollWidth, layerScrollHeight);
+            [layerButton setBackgroundColor:[UIColor clearColor]];
+            
+            img.frame  = CGRectMake(layerButton.frame.origin.x+5, layerButton.frame.origin.y-2, layerButton.frame.size.width-10, layerButton.frame.size.height-7);
+            [layerButton addSubview:img];
+            layerButton.tag = [[NSString stringWithFormat:@"%@%d",@"222",photo] integerValue];
+            
+            // Add long press gesture on thie layer
+            UILongPressGestureRecognizer* longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onLongPress:)];
+            [layerButton addGestureRecognizer:longPressRecognizer];
+            
+            UIImage *image = [UIImage imageNamed:@"cross"];
+            image = [PhotoController imageWithImage:image scaledToSize:CGSizeMake(30, 29)];
+            UIImage *pencilImage = [UIImage imageNamed:@"pencil_blue"];
+            pencilImage = [PhotoController imageWithImage:pencilImage scaledToSize:CGSizeMake(19, 19)];
+            
+            UIButton *crossButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 50)];
+            [crossButton setImage:image forState:UIControlStateNormal];
+            [crossButton addTarget:self action:@selector(deleteLayer:) forControlEvents:UIControlEventTouchUpInside];
+            [crossButton setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
+            [crossButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+            
+            UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(layerButton.frame.origin.x, 0, layerButton.frame.size.width, 50)];
+            [editButton setImage:pencilImage forState:UIControlStateNormal];
+            [editButton addTarget:self action:@selector(editLayer:) forControlEvents:UIControlEventTouchUpInside];
+            [editButton setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
+            [editButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
+            editButton.showsTouchWhenHighlighted = YES;
+            // If delete mode is enabled then show cross button an wobble
+            if(deleteMode){
+                //[crossButton setHidden:NO];
+                [editButton setHidden:NO];
+                // [self wobble:layerButton];
+            }else{
+                [crossButton setHidden:YES];
+                [editButton setHidden:NO];
+            }
+            
+            // crossButton.tag = layerButton.tag;
+            //[layerButton addSubview:crossButton];
+            editButton.tag = layerButton.tag;
+            [layerButton addSubview:editButton];
+            
+            [layerScrollView addSubview:layerButton];
+        }
+    }
+    if(symbolLayersArray){
+        //NSLog(@"Symbol Layers %d", [symbolLayersArray count]);
+        for(int symbol=0; symbol<[symbolLayersArray count]; symbol++){
+            
+            UIImageView *img1 = (UIImageView *) symbolLayersArray[symbol];
+            UIImageView *img = [[UIImageView alloc] initWithImage:img1.image];
+            
+            UIButton *layerButton = [UIButton  buttonWithType:UIButtonTypeCustom];
+            layerButton.frame =CGRectMake(0, 5,layerScrollWidth, layerScrollHeight);
+            [layerButton setBackgroundColor:[UIColor clearColor]];
+            
+            img.frame  = CGRectMake(layerButton.frame.origin.x+5, layerButton.frame.origin.y-2, layerButton.frame.size.width-10, layerButton.frame.size.height-7);
+            [layerButton addSubview:img];
+            layerButton.tag = [[NSString stringWithFormat:@"%@%d",@"333",symbol] integerValue];
+            
+            // Add long press gesture on thie layer
+            UILongPressGestureRecognizer* longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onLongPress:)];
+            [layerButton addGestureRecognizer:longPressRecognizer];
+            
+            UIImage *image = [UIImage imageNamed:@"cross"];
+            image = [PhotoController imageWithImage:image scaledToSize:CGSizeMake(30, 29)];
+            UIImage *pencilImage = [UIImage imageNamed:@"pencil_blue"];
+            pencilImage = [PhotoController imageWithImage:pencilImage scaledToSize:CGSizeMake(19, 19)];
+            
+            UIButton *crossButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 50)];
+            [crossButton setImage:image forState:UIControlStateNormal];
+            [crossButton addTarget:self action:@selector(deleteLayer:) forControlEvents:UIControlEventTouchUpInside];
+            [crossButton setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
+            [crossButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+            
+            UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(layerButton.frame.origin.x, 0, layerButton.frame.size.width, 50)];
+            [editButton setImage:pencilImage forState:UIControlStateNormal];
+            [editButton addTarget:self action:@selector(editLayer:) forControlEvents:UIControlEventTouchUpInside];
+            [editButton setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
+            [editButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
+            editButton.showsTouchWhenHighlighted = YES;
+            // If delete mode is enabled then show cross button an wobble
+            if(deleteMode){
+                //[crossButton setHidden:NO];
+                [editButton setHidden:NO];
+                // [self wobble:layerButton];
+            }else{
+                [crossButton setHidden:YES];
+                [editButton setHidden:NO];
+            }
+            
+            //crossButton.tag = layerButton.tag;
+            //[layerButton addSubview:crossButton];
+            editButton.tag = layerButton.tag;
+            [layerButton addSubview:editButton];
+            
+            [layerScrollView addSubview:layerButton];
+        }
+    }
+    if(iconLayersArray){
+        //NSLog(@"Icon Layers %d", [iconLayersArray count]);
+        for(int icon=0; icon<[iconLayersArray count]; icon++){
+            
+            UIImageView *img1 = (UIImageView *) iconLayersArray[icon];
+            UIImageView *img = [[UIImageView alloc] initWithImage:img1.image];
+            
+            UIButton *layerButton = [UIButton  buttonWithType:UIButtonTypeCustom];
+            layerButton.frame =CGRectMake(0, 5,layerScrollWidth, layerScrollHeight);
+            [layerButton setBackgroundColor:[UIColor clearColor]];
+            
+            img.frame  = CGRectMake(layerButton.frame.origin.x+5, layerButton.frame.origin.y-2, layerButton.frame.size.width-10, layerButton.frame.size.height-7);
+            [layerButton addSubview:img];
+            layerButton.tag = [[NSString stringWithFormat:@"%@%d",@"444",icon] integerValue];
+            
+            // Add long press gesture on thie layer
+            UILongPressGestureRecognizer* longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onLongPress:)];
+            [layerButton addGestureRecognizer:longPressRecognizer];
+            
+            
+            UIImage *image = [UIImage imageNamed:@"cross"];
+            image = [PhotoController imageWithImage:image scaledToSize:CGSizeMake(30, 29)];
+            UIImage *pencilImage = [UIImage imageNamed:@"pencil_blue"];
+            pencilImage = [PhotoController imageWithImage:pencilImage scaledToSize:CGSizeMake(19, 19)];
+            
+            UIButton *crossButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 50)];
+            [crossButton setImage:image forState:UIControlStateNormal];
+            [crossButton addTarget:self action:@selector(deleteLayer:) forControlEvents:UIControlEventTouchUpInside];
+            [crossButton setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
+            [crossButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+            
+            UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(layerButton.frame.origin.x, 0, layerButton.frame.size.width, 50)];
+            [editButton setImage:pencilImage forState:UIControlStateNormal];
+            [editButton addTarget:self action:@selector(editLayer:) forControlEvents:UIControlEventTouchUpInside];
+            [editButton setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
+            [editButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
+            editButton.showsTouchWhenHighlighted = YES;
+            
+            // If delete mode is enabled then show cross button an wobble
+            if(deleteMode){
+                //[crossButton setHidden:NO];
+                [editButton setHidden:NO];
+                // [self wobble:layerButton];
+            }else{
+                [crossButton setHidden:YES];
+                [editButton setHidden:NO];
+            }
+            
+            //crossButton.tag = layerButton.tag;
+            //[layerButton addSubview:crossButton];
+            editButton.tag = layerButton.tag;
+            [layerButton addSubview:editButton];
+            
+            
+            [layerScrollView addSubview:layerButton];
+        }
+    }
+    
+    
+    
+    [layerScrollView setCanCancelContentTouches:NO];
+    layerScrollView.indicatorStyle = UIScrollViewIndicatorStyleBlack;
+    layerScrollView.clipsToBounds = YES;
+    layerScrollView.scrollEnabled = YES;
+    layerScrollView.pagingEnabled = NO;
+    layerScrollView.showsHorizontalScrollIndicator = NO;
+    layerScrollView.showsVerticalScrollIndicator = NO;
+    [self layoutScrollImages:layerScrollView scrollWidth:layerScrollWidth scrollHeight:layerScrollHeight];
+    [self AddScrollView:layerScrollView];
+
+    deleteMode = NO;
+    doStopWobble = YES;
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapGestureCaptured:)];
+    [layerScrollView addGestureRecognizer:singleTap];
+
 }
 
 @end
