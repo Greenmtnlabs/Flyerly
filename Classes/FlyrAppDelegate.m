@@ -125,51 +125,52 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     }
 }
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
+/**
+ * Application bring up.
+ */
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     // Crittercism for crash reports.
     [Crittercism initWithAppID: @"519a14f897c8f27969000019"];
+    
+    // Flurry stats
     [Flurry startSession:@"ZWXZFGSQZ4GMYZBVZYN3"];
 
     // Setup parse
     [Parse setApplicationId:@"rrU7ilSR4TZNQD9xlDtH8wFoQNK4st5AaITq6Fan"
                   clientKey:@"P0FxBvDvw0eDYYT01cx8nhaDQdl90BdHGc22jPLn"];
 
-    // Your Facebook application id is configured in Info.plist.
+    // Facebook initialization
     [PFFacebookUtils initializeFacebook];
     
-    //Twitter Initialize
+    // Twitter Initialization
     [PFTwitterUtils initializeWithConsumerKey:@"SAXU48fGEpSMQl56cgRDQ" consumerSecret:@"tNMJrWNA3eqSQn87Gv2WH1KCb3EGpdHHi7YRd1YG6xw"];
     
-    // Setup Bit.ly
-
+    // Bitly configuration
     [[BitlyConfig sharedBitlyConfig] setBitlyLogin:@"flyerly" bitlyAPIKey:@"R_3bdc6f8e82d260965325510421c980a0"];
-  //  [[BitlyConfig sharedBitlyConfig] setBitlyAPIKey:@"R_3bdc6f8e82d260965325510421c980a0"];
     
-    //Here you load ShareKit submodule with app specific configuration
-    
+    // Sharekit initialization
     DefaultSHKConfigurator *configurator = [[MySHKConfigurator alloc] init];
     [SHKConfiguration sharedInstanceWithConfigurator:configurator];
     
-    //[self clearCache];
 	changesFlag = NO;
 
-    //This flag represents the condition whether application setting has been altered first time
+    // This flag represents the condition whether application setting has been altered first time
     // after installing app
-    if(![[NSUserDefaults standardUserDefaults] stringForKey:@"saveToCameraRollSettingFlag"]){
+    if( ![[NSUserDefaults standardUserDefaults] stringForKey:@"saveToCameraRollSettingFlag"] ){
         [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"saveToCameraRollSettingFlag"];
         [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"saveToCameraRollSetting"];
     }
 
-    if(![[NSUserDefaults standardUserDefaults] stringForKey:@"cameraSetting"]){
+    if( ![[NSUserDefaults standardUserDefaults] stringForKey:@"cameraSetting"] ){
         [[NSUserDefaults standardUserDefaults] setInteger:2 forKey:@"cameraSetting"];
     }
 
+    // Determin if the user has been greeted?
     NSString *greeted = [[NSUserDefaults standardUserDefaults] stringForKey:@"greeted"];
     
-    if(!greeted){
-        NSLog(@"Welcome to the world of Flyerly");
+    if( !greeted ) {
+        // Show the greeting before going to the main app.
         [[NSUserDefaults standardUserDefaults] setObject:@"greeted" forKey:@"greeted"];
         
         if(IS_IPHONE_5){
@@ -179,36 +180,29 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
         }
         
         [navigationController pushViewController:lauchController animated:NO];
-        //accountController = [[AccountController alloc]initWithNibName:@"AccountController" bundle:nil];
-        //[navigationController pushViewController:accountController animated:NO];
-        [window addSubview:[navigationController view]];
         
         AfterUpdateController *afterUpdateView = [[AfterUpdateController alloc]initWithNibName:@"AfterUpdateController" bundle:nil];
         [navigationController setRootViewController:afterUpdateView];
         
     } else {
-        
-        NSLog(@"User already Greeted !");
-        if(IS_IPHONE_5){
-                accountController = [[AccountController alloc]initWithNibName:@"AcountViewControlleriPhone5" bundle:nil];
+        // User has already been greeted.
+        if( IS_IPHONE_5 ) {
+            accountController = [[AccountController alloc]initWithNibName:@"AcountViewControlleriPhone5" bundle:nil];
             lauchController = [[LauchViewController alloc]initWithNibName:@"LauchViewControllerIPhone5" bundle:nil];
-
-        }else{
+        } else {
             accountController = [[AccountController alloc]initWithNibName:@"AccountController" bundle:nil];
             lauchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
-
         }
         
-        // Is the ser logged in?
-        
+        // Is the user logged in?
         if ( [PFUser currentUser] == nil ) {
             [navigationController setRootViewController:accountController];
         } else {
             [navigationController pushViewController:lauchController animated:YES];
         }
-
-        [window addSubview:[navigationController view]];
     }
+    
+    [window setRootViewController:navigationController];
     
     // Override point for customization after application launch.
     [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound];

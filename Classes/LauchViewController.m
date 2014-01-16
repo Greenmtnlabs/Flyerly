@@ -16,6 +16,8 @@
 #import "Common.h"
 #import "HelpController.h"
 #import "Flurry.h"
+#import "SHKConfiguration.h"
+#import "MySHKConfigurator.h"
 
 @interface LauchViewController () 
 
@@ -674,11 +676,10 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
         ACAccountStore *accountStore = [[ACAccountStore alloc]init];
         ACAccountType *FBaccountType= [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
         
-        //get facebook app id
-        NSString *path = [[NSBundle mainBundle] pathForResource: @"Flyr-Info" ofType: @"plist"];
-        NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile: path];
+        // Get facebook account
+        DefaultSHKConfigurator *configurator = [[MySHKConfigurator alloc] init];
         
-        NSDictionary *options = @{ACFacebookAppIdKey : dict[@"FacebookAppID"],
+        NSDictionary *options = @{ACFacebookAppIdKey : [configurator facebookAppId],
                                   ACFacebookPermissionsKey : @[@"email", @"publish_stream"],
                                   ACFacebookAudienceKey:ACFacebookAudienceFriends};
         
