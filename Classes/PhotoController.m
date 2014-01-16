@@ -32,11 +32,13 @@
 @synthesize templateBckgrnd,textBackgrnd;
 @synthesize cameraTabButton,photoTabButton,widthTabButton,heightTabButton,photoImgView,symbolImgView,iconImgView;
 @synthesize photoTouchFlag,symbolTouchFlag,iconTouchFlag, lableTouchFlag,lableLocation,warningAlert,discardAlert,deleteAlert,editAlert, inAppAlert;
-@synthesize moreLayersLabel, moreLayersButton, takePhotoButton, cameraRollButton, takePhotoLabel, cameraRollLabel, imgPickerFlag,finalImgWritePath, addMoreLayerOrSaveFlyerLabel, takeOrAddPhotoLabel,layerScrollView;
+@synthesize moreLayersLabel, moreLayersButton,imgPickerFlag,finalImgWritePath, addMoreLayerOrSaveFlyerLabel, takeOrAddPhotoLabel,layerScrollView;
 @synthesize cpyTextLabelLayersArray,cpyIconLayersArray,cpyPhotoLayersArray,cpySymbolLayersArray;
 @synthesize flyerNumber;
 
-@synthesize contextView,libraryContextView,libFlyer,addMoreFontTabButton;
+//Version 3 Change
+@synthesize contextView,libraryContextView,libFlyer,backgroundTabButton,addMoreFontTabButton;
+@synthesize libText,libBackground,backtemplates,cameraTakePhoto,cameraRoll,flyerBorder;
 
 int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track selected Tab on Add More Layer screen
 int symbolLayerCount = 0; // Symbol layer count to set tag value
@@ -67,6 +69,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     [super viewWillAppear:YES];
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
+    [self AddBottomTabs:libFlyer];
     
     // Set template image
 	if (globle.NBUimage != nil) {
@@ -277,96 +280,38 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 	[self layoutScrollImages:iconScrollView scrollWidth:iconScrollWidth scrollHeight:iconScrollHeight];
     
     // Setup tab button
-    fontTabButton =[UIButton buttonWithType:UIButtonTypeCustom];
-    colorTabButton =[UIButton buttonWithType:UIButtonTypeCustom];
-    sizeTabButton =[UIButton buttonWithType:UIButtonTypeCustom];
-    fontBorderTabButton =[UIButton buttonWithType:UIButtonTypeCustom];
-    borderTabButton =[UIButton buttonWithType:UIButtonTypeCustom];
 	photoTabButton =[UIButton buttonWithType:UIButtonTypeCustom];
 	cameraTabButton =[UIButton buttonWithType:UIButtonTypeCustom];
 	widthTabButton =[UIButton buttonWithType:UIButtonTypeCustom];
 	heightTabButton =[UIButton buttonWithType:UIButtonTypeCustom];
     
-    arrangeLayerTabButton =[UIButton buttonWithType:UIButtonTypeCustom];
-    
-    fontTabButton.showsTouchWhenHighlighted = YES;
-    colorTabButton.showsTouchWhenHighlighted = YES;
-    sizeTabButton.showsTouchWhenHighlighted = YES;
-    borderTabButton.showsTouchWhenHighlighted = YES;
-    fontBorderTabButton.showsTouchWhenHighlighted = YES;
     cameraTabButton.showsTouchWhenHighlighted = YES;
     photoTabButton.showsTouchWhenHighlighted = YES;
     widthTabButton.showsTouchWhenHighlighted = YES;
     heightTabButton.showsTouchWhenHighlighted = YES;
     
-    arrangeLayerTabButton.showsTouchWhenHighlighted = YES;
-
-    
 	if(IS_IPHONE_5){
-        fontTabButton.frame = CGRectMake(-1, 502, 65, 46);
-        colorTabButton.frame = CGRectMake(64, 502, 65, 46);
-        sizeTabButton.frame = CGRectMake(129, 502, 65, 46);
-        borderTabButton.frame = CGRectMake(194, 502, 65, 46);
-        fontBorderTabButton.frame = CGRectMake(259, 502, 65, 46);
         cameraTabButton.frame = CGRectMake(-1, 502, 80, 46);
         photoTabButton.frame = CGRectMake(79, 502, 80, 46);
         widthTabButton.frame = CGRectMake(159, 502, 80, 46);
         heightTabButton.frame = CGRectMake(239, 502, 80, 46);
-        
-        arrangeLayerTabButton.frame = CGRectMake(259, 502, 65, 46);
-
     }else{
-        fontTabButton.frame = CGRectMake(-1, 415, 65, 46);
-        colorTabButton.frame = CGRectMake(64, 415, 65, 46);
-        sizeTabButton.frame = CGRectMake(129, 415, 65, 46);
-        borderTabButton.frame = CGRectMake(194, 415, 65, 46);
-        fontBorderTabButton.frame = CGRectMake(259, 415, 65, 46);
         cameraTabButton.frame = CGRectMake(-1, 415, 80, 46);
         photoTabButton.frame = CGRectMake(79, 415, 80, 46);
         widthTabButton.frame = CGRectMake(159, 415, 80, 46);
         heightTabButton.frame = CGRectMake(239, 415, 81, 46);
-
-        arrangeLayerTabButton.frame = CGRectMake(259, 415, 65, 46);
     }
-	[fontTabButton setBackgroundImage:[UIImage imageNamed:@"font_button"] forState:UIControlStateNormal];
-	[fontTabButton.titleLabel setFont:[UIFont fontWithName:@"Arial-BoldMT" size:15]];
-	[fontTabButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-	[fontTabButton addTarget:self action:@selector(setStyleTabAction:) forControlEvents:UIControlEventTouchUpInside];
-	fontTabButton.alpha =  ALPHA0;
+
+    //Setting Tags
 	fontTabButton.tag = 10001;
-	[self.view addSubview:fontTabButton];
-	
-	[colorTabButton setBackgroundImage:[UIImage imageNamed:@"color_button"] forState:UIControlStateNormal];
-	[colorTabButton.titleLabel setFont:[UIFont fontWithName:@"Arial-BoldMT" size:15]];
-	[colorTabButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-	[colorTabButton addTarget:self action:@selector(setStyleTabAction:) forControlEvents:UIControlEventTouchUpInside];
-	colorTabButton.alpha =  ALPHA0;
 	colorTabButton.tag = 10002;
-	[self.view addSubview:colorTabButton];
-	
-	[sizeTabButton setBackgroundImage:[UIImage imageNamed:@"size_button"] forState:UIControlStateNormal];
-	[sizeTabButton.titleLabel setFont:[UIFont fontWithName:@"Arial-BoldMT" size:15]];
-	[sizeTabButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-	[sizeTabButton addTarget:self action:@selector(setStyleTabAction:) forControlEvents:UIControlEventTouchUpInside];
-	sizeTabButton.alpha =  ALPHA0;
-	sizeTabButton.tag = 10003;
-	[self.view addSubview:sizeTabButton];
-    
-	[borderTabButton setBackgroundImage:[UIImage imageNamed:@"outline_button"] forState:UIControlStateNormal];
-	[borderTabButton.titleLabel setFont:[UIFont fontWithName:@"Arial-BoldMT" size:15]];
-	[borderTabButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-	[borderTabButton addTarget:self action:@selector(setStyleTabAction:) forControlEvents:UIControlEventTouchUpInside];
-	borderTabButton.alpha =  ALPHA0;
-	borderTabButton.tag = 10004;
-	[self.view addSubview:borderTabButton];
-    
-	[fontBorderTabButton setBackgroundImage:[UIImage imageNamed:@"background_button"] forState:UIControlStateNormal];
-	[fontBorderTabButton.titleLabel setFont:[UIFont fontWithName:@"Arial-BoldMT" size:15]];
-	[fontBorderTabButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-	[fontBorderTabButton addTarget:self action:@selector(setStyleTabAction:) forControlEvents:UIControlEventTouchUpInside];
-	fontBorderTabButton.alpha =  ALPHA0;
-	fontBorderTabButton.tag = 10005;
-	[self.view addSubview:fontBorderTabButton];
+    sizeTabButton.tag = 10003;
+	fontBorderTabButton.tag = 10004; //tag Change 5 to 4
+    arrangeLayerTabButton.tag = 10005;
+
+    //Pending
+    //borderTabButton.tag = 10004;
+
     
 	[cameraTabButton setBackgroundImage:[UIImage imageNamed:@"07_camera"] forState:UIControlStateNormal];
     cameraTabButton.showsTouchWhenHighlighted = YES;
@@ -412,14 +357,6 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     
     [addMoreIconTabButton setBackgroundImage:[UIImage imageNamed:@"icon_button_selected"] forState:UIControlStateHighlighted];
     addMoreIconTabButton.tag = 10004;
-	   
-	[arrangeLayerTabButton setBackgroundImage:[UIImage imageNamed:@"arrangeicon_button"] forState:UIControlStateNormal];
-    [arrangeLayerTabButton setBackgroundImage:[UIImage imageNamed:@"arrangeicon_button_selected"] forState:UIControlStateHighlighted];
-	
-    [arrangeLayerTabButton addTarget:self action:@selector(setAddMoreLayerTabAction:) forControlEvents:UIControlEventTouchUpInside];
-	arrangeLayerTabButton.alpha =  ALPHA0;
-	arrangeLayerTabButton.tag = 10005;
-	[self.view addSubview:arrangeLayerTabButton];
     
 }
 
@@ -430,7 +367,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     globle = [Singleton RetrieveSingleton];
     [self.view setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
     [self.contextView setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
-    [self AddBottomTabs:libFlyer];
+
 
     photoTouchFlag=NO;
 	symbolTouchFlag=NO;
@@ -503,10 +440,8 @@ int photoLayerCount = 0; // Photo layer count to set tag value
         templateBckgrnd = [[UIImageView alloc]initWithFrame:CGRectMake(0, 413, 320, 135)];
         moreLayersButton = [[UIButton alloc] initWithFrame:CGRectMake(82, 445, 156, 43)];
         moreLayersLabel = [[UILabel alloc] initWithFrame:CGRectMake(125, 445, 156, 43)];
-        takePhotoButton = [[UIButton alloc] initWithFrame:CGRectMake(25, 373, 135, 40)];
-        takePhotoLabel = [[UILabel alloc] initWithFrame:CGRectMake(80, 378, 80, 30)];
-        cameraRollButton = [[UIButton alloc] initWithFrame:CGRectMake(160, 373, 135, 40)];
-        cameraRollLabel = [[UILabel alloc] initWithFrame:CGRectMake(220, 378, 80, 30)];
+        
+
         
         
         //all Main Scroll Views Initialize
@@ -531,12 +466,8 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     
     }else{
         templateBckgrnd = [[UIImageView alloc]initWithFrame:CGRectMake(0, 395, 320, 65)];
-        cameraRollButton = [[UIButton alloc] initWithFrame:CGRectMake(160, 354, 135, 40)];
         moreLayersButton = [[UIButton alloc] initWithFrame:CGRectMake(82, 354, 156, 43)];
         moreLayersLabel = [[UILabel alloc] initWithFrame:CGRectMake(125, 354, 156, 43)];
-        takePhotoButton = [[UIButton alloc] initWithFrame:CGRectMake(25, 354, 135, 40)];
-        takePhotoLabel = [[UILabel alloc] initWithFrame:CGRectMake(80, 359, 80, 30)];
-        cameraRollLabel = [[UILabel alloc] initWithFrame:CGRectMake(220, 359, 80, 30)];
         templateScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(-320, 395,320,60)];
         addMoreLayerOrSaveFlyerLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 35, 310, 63)];
         takeOrAddPhotoLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 310, 43)];
@@ -547,30 +478,6 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     
     // RESET image view
     [self resetImageview];
-    
-    [takePhotoButton setBackgroundImage:[UIImage imageNamed:@"take_photo"] forState:UIControlStateNormal];
-        takePhotoButton.showsTouchWhenHighlighted = YES;
-    [takePhotoButton addTarget:self action:@selector(openCustomCamera) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:takePhotoButton];
-    [cameraRollButton setBackgroundImage:[UIImage imageNamed:@"camera_roll"] forState:UIControlStateNormal];
-    [cameraRollButton addTarget:self action:@selector(loadCustomPhotoLibrary) forControlEvents:UIControlEventTouchUpInside];
-      cameraRollButton.showsTouchWhenHighlighted = YES;
-    [self.view addSubview:cameraRollButton];
-
-    [takePhotoLabel setText:@"Take a Photo"];
-    [takePhotoLabel setBackgroundColor:[UIColor clearColor]];
-    [takePhotoLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
-    [takePhotoLabel setTextColor:[UIColor whiteColor]];
-    [self.view addSubview:takePhotoLabel];
-    [cameraRollLabel setText:@"Camera Roll"];
-    [cameraRollLabel setBackgroundColor:[UIColor clearColor]];
-    [cameraRollLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
-    [cameraRollLabel setTextColor:[UIColor whiteColor]];
-    [self.view addSubview:cameraRollLabel];    
-    
-    //templateBckgrnd.image = [UIImage imageNamed:@"ad_bg_bg"];
-   // [self.view addSubview:templateBckgrnd];
-	//templateBckgrnd.alpha = ALPHA0;
     
     // Add Templates
 	templateScrollWidth = 60;
@@ -585,9 +492,6 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 	templateScrollView.pagingEnabled = NO;
 	templateScrollView.showsHorizontalScrollIndicator = NO;
 	templateScrollView.showsVerticalScrollIndicator = NO;
-	templateScrollView.alpha = ALPHA1;
-    
-    [self AddScrollView:templateScrollView ];
 	[self layoutScrollImages:templateScrollView scrollWidth:templateScrollWidth scrollHeight:templateScrollHeight];
 	   
 	imgPickerFlag =1;
@@ -2250,18 +2154,12 @@ int arrangeLayerIndex;
     
     ((CustomLabel *)[[self textLabelLayersArray] lastObject]).alpha = 1;
 	textBackgrnd.alpha  =ALPHA0;
-	fontTabButton.alpha = ALPHA0;
-	colorTabButton.alpha = ALPHA0;
-	sizeTabButton.alpha = ALPHA0;
-	borderTabButton.alpha = ALPHA0;
-	fontBorderTabButton.alpha = ALPHA0;
     
     cameraTabButton.alpha = ALPHA0;
     photoTabButton.alpha = ALPHA0;
     widthTabButton.alpha = ALPHA0;
     heightTabButton.alpha = ALPHA0;
     
-    self.arrangeLayerTabButton.alpha = ALPHA0;
 
 
     photoTouchFlag = NO;
@@ -2271,15 +2169,15 @@ int arrangeLayerIndex;
 	imgPickerFlag = 1;
     
     [self hideAddMoreButton];
-    [self hideAddMoreTab];
-    [self showPictureTab];
+
+
     
 	[msgTextView removeFromSuperview];
 	[UIView commitAnimations];
 }
 
 -(void)loadHelpController{
-    [self hideAddMoreTab];
+
     HelpController *helpController = [[HelpController alloc]initWithNibName:@"HelpController" bundle:nil];
     [self.navigationController pushViewController:helpController animated:NO];
     [self chooseTemplate];
@@ -2289,18 +2187,7 @@ int arrangeLayerIndex;
 		[msgTextView becomeFirstResponder];
 }
 
--(void)hidePictureTab{
-    [self.cameraRollButton setHidden:YES];
-    [self.cameraRollLabel setHidden:YES];
-    [self.takePhotoLabel setHidden:YES];
-    [self.takePhotoButton setHidden:YES];
-}
--(void)showPictureTab{
-    [self.cameraRollButton setHidden:NO];
-    [self.cameraRollLabel setHidden:NO];
-    [self.takePhotoLabel setHidden:NO];
-    [self.takePhotoButton setHidden:NO];
-}
+
 -(void)hideAddMoreButton{
     [self.moreLayersButton setHidden:YES];
     [self.moreLayersLabel setHidden:YES];
@@ -2308,12 +2195,6 @@ int arrangeLayerIndex;
 -(void)showAddMoreButton{
     [self.moreLayersButton setHidden:NO];
     [self.moreLayersLabel setHidden:NO];
-}
--(void)hideAddMoreTab{
-    [self.arrangeLayerTabButton setHidden:YES];
-}
--(void)showAddMoreTab{
-    [self.arrangeLayerTabButton setHidden:NO];
 }
 
 
@@ -2363,9 +2244,8 @@ int arrangeLayerIndex;
     UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     [self.navigationItem setLeftBarButtonItem:backBarButton];
 
-    [self hidePictureTab];
+
     [self hideAddMoreButton];
-    [self hideAddMoreTab];
 
     UITextView *lastTextView = msgTextView;
 	lastTextView.font = [UIFont fontWithName:@"Arial" size:16];
@@ -2447,7 +2327,7 @@ int arrangeLayerIndex;
     UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     [self.navigationItem setLeftBarButtonItem:backBarButton];
 
-    [self hidePictureTab];
+   
     [self hideAddMoreButton];
 
 	[UIView beginAnimations:nil context:NULL];
@@ -2457,17 +2337,6 @@ int arrangeLayerIndex;
 	textBackgrnd.alpha = ALPHA1;
     [self AddScrollView:fontScrollView];
 
-	[fontTabButton setBackgroundImage:[UIImage imageNamed:@"font_button_selected"] forState:UIControlStateNormal];
-    [colorTabButton setBackgroundImage:[UIImage imageNamed:@"color_button"] forState:UIControlStateNormal];
-    [sizeTabButton setBackgroundImage:[UIImage imageNamed:@"size_button"] forState:UIControlStateNormal];
-    [borderTabButton setBackgroundImage:[UIImage imageNamed:@"outline_button"] forState:UIControlStateNormal];
-    [fontBorderTabButton setBackgroundImage:[UIImage imageNamed:@"background_button"] forState:UIControlStateNormal];
-	fontTabButton.alpha = ALPHA1;
-	colorTabButton.alpha = ALPHA1;
-	sizeTabButton.alpha = ALPHA1;
-	borderTabButton.alpha = ALPHA1;
-	fontBorderTabButton.alpha = ALPHA1;
-    
     UITextView *lastTextView = msgTextView;
     CustomLabel *lastLabelView = [self textLabelLayersArray][arrangeLayerIndex];
 	lastLabelView.alpha=1;	
@@ -2558,9 +2427,8 @@ int arrangeLayerIndex;
         [self makeCopyOfLayers];
     }
 
-    [self hidePictureTab];
+
     [self hideAddMoreButton];
-    [self hideAddMoreTab];
 
     CALayer * l = [[self  photoLayersArray][arrangeLayerIndex] layer];
     [l setMasksToBounds:YES];
@@ -2571,13 +2439,6 @@ int arrangeLayerIndex;
 	
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationDuration:0.4f];
-	fontTabButton.alpha = ALPHA0;
-	colorTabButton.alpha = ALPHA0;
-	sizeTabButton.alpha = ALPHA0;
-	borderTabButton.alpha = ALPHA0;
-	fontBorderTabButton.alpha = ALPHA0;
-
-
 
     ((CustomLabel *)[[self textLabelLayersArray] lastObject]).alpha = 1;
 	[cameraTabButton setBackgroundImage:[UIImage imageNamed:@"07_camera"] forState:UIControlStateNormal];
@@ -2747,14 +2608,10 @@ int arrangeLayerIndex;
     [self.navigationItem setLeftBarButtonItem:backBarButton];
     
     [self AddScrollView:addMoreLayerOrSaveFlyerLabel];
-    
-    [self showAddMoreTab];
    
-    [self hidePictureTab];
     [self hideAddMoreButton];
 
     templateBckgrnd.alpha = ALPHA0;
-    [arrangeLayerTabButton setBackgroundImage:[UIImage imageNamed:@"arrangeicon_button"] forState:UIControlStateNormal];
     
 //Changes
     [cameraTabButton setTitle:@"Camera" forState:UIControlStateNormal];
@@ -2782,19 +2639,12 @@ int arrangeLayerIndex;
     photoImgView.alpha=0;
     symbolImgView.alpha = 0;
     iconImgView.alpha = 0;
-	fontTabButton.alpha = ALPHA0;
-	colorTabButton.alpha = ALPHA0;
-	sizeTabButton.alpha = ALPHA0;
-	borderTabButton.alpha = ALPHA0;
-	fontBorderTabButton.alpha = ALPHA0;
+    
 	cameraTabButton.alpha = ALPHA0;
 	photoTabButton.alpha = ALPHA0;
 	widthTabButton.alpha = ALPHA0;
 	heightTabButton.alpha = ALPHA0;
 	textBackgrnd.alpha = ALPHA0;
-
-
-	arrangeLayerTabButton.alpha = ALPHA1;
 
     selectedAddMoreLayerTab = ADD_MORE_TEXTTAB;
     discardedLayer = NO;
@@ -2852,14 +2702,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     // Create right bar button
    // UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStylePlain target:self action:@selector(callMenu)];
     //[self.navigationItem setRightBarButtonItem:rightBarButton];
-    [self hidePictureTab];
     [self hideAddMoreButton];
-
-	fontTabButton.alpha = ALPHA0;
-	colorTabButton.alpha = ALPHA0;
-	sizeTabButton.alpha = ALPHA0;
-	borderTabButton.alpha = ALPHA0;
-	fontBorderTabButton.alpha = ALPHA0;
 	textBackgrnd.alpha = ALPHA0;
     
 
@@ -2933,7 +2776,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 }
 
--(void) setStyleTabAction:(id) sender
+-(IBAction)setStyleTabAction:(id) sender
 {
 	UIButton *selectedButton = (UIButton*)sender;
 	if(selectedButton == fontTabButton)
@@ -2988,7 +2831,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 		[UIView setAnimationDuration:0.4f];
         
         //Add ContextView
-        [self AddScrollView:fontBorderScrollView];
+         [self AddScrollView:borderScrollView];
 
 		[fontTabButton setBackgroundImage:[UIImage imageNamed:@"font_button"] forState:UIControlStateNormal];
 		[colorTabButton setBackgroundImage:[UIImage imageNamed:@"color_button"] forState:UIControlStateNormal];
@@ -3003,7 +2846,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 		[UIView setAnimationDuration:0.4f];
         
         //Add ContextView
-        [self AddScrollView:borderScrollView];
+        [self AddScrollView:fontBorderScrollView];
         
 		[fontTabButton setBackgroundImage:[UIImage imageNamed:@"font_button"] forState:UIControlStateNormal];
 		[colorTabButton setBackgroundImage:[UIImage imageNamed:@"color_button"] forState:UIControlStateNormal];
@@ -3012,254 +2855,21 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 		[fontBorderTabButton setBackgroundImage:[UIImage imageNamed:@"background_button_selected"] forState:UIControlStateNormal];
 		[UIView commitAnimations];
 	}
-}
-
--(IBAction) setAddMoreLayerTabAction:(id) sender {
-    layerallow = 0;
-    
-    if(layerEditMessage!=nil){
-        [layerEditMessage removeFromSuperview];
-        layerEditMessage = nil;
-    }
-
-	UIButton *selectedButton = (UIButton*)sender;
-
-    // Set wobble and delete mode to NO when tab other then arrange layer is selected
-    //if(selectedButton != arrangeLayerTabButton){
-    //    doStopWobble = NO;
-    //    deleteMode = NO;
-    //}
-
-    // If layers are wobbling and arrange layer tab is selected then stop layer wobbling
-    if(doStopWobble && deleteMode && selectedButton == arrangeLayerTabButton){
-        //NSLog(@"Un Wobble All Layers !");
-        
-        //[self unWobbleAll];
-        //return;
-    }
-    
-    if(undoCount >= 1){
-        [rightUndoBarButton setEnabled:YES];
-    }
-
-	if(selectedButton == addMoreFontTabButton)
-	{
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-30, -6, 50, 50)];
-        label.backgroundColor = [UIColor clearColor];
-        label.font = [UIFont fontWithName:TITLE_FONT size:18];
-        label.textAlignment = UITextAlignmentCenter;
-        label.textColor = [UIColor whiteColor];
-        label.text = @"LAYERS";
-        self.navigationItem.titleView = label;
-        [self SetMenu];
-
-        //self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"layers" rect:CGRectMake(-30, -6, 50, 50)];
-        selectedAddMoreLayerTab = ADD_MORE_TEXTTAB;
-
-        symbolTouchFlag= NO;
-        photoTouchFlag = NO;
-        iconTouchFlag = NO;
-        lableTouchFlag = YES;
-		[UIView beginAnimations:nil context:NULL];
-		[UIView setAnimationDuration:0.4f];
-        
-        [arrangeLayerTabButton setBackgroundImage:[UIImage imageNamed:@"arrangeicon_button_selected"] forState:UIControlStateHighlighted];
-
-        [addMorePhotoTabButton setBackgroundImage:[UIImage imageNamed:@"image_icon"] forState:UIControlStateNormal];
-        [addMoreSymbolTabButton setBackgroundImage:[UIImage imageNamed:@"symbolicon_button"] forState:UIControlStateNormal];
-        [addMoreIconTabButton setBackgroundImage:[UIImage imageNamed:@"icon_button"] forState:UIControlStateNormal];
-        [arrangeLayerTabButton setBackgroundImage:[UIImage imageNamed:@"arrangeicon_button"] forState:UIControlStateNormal];
-        
-        // Changes
-        
-        [addMorePhotoTabButton setTitle:@"Photo" forState:UIControlStateNormal];
-        [addMorePhotoTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
-        addMorePhotoTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
-        
-        [addMoreSymbolTabButton setTitle:@"Clipart" forState:UIControlStateNormal];
-        [addMoreSymbolTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
-        addMoreSymbolTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
-        
-        [arrangeLayerTabButton setTitle:@"Edit" forState:UIControlStateNormal];
-        [arrangeLayerTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
-        arrangeLayerTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
-        
-        [addMoreIconTabButton setTitle:@"Symbols" forState:UIControlStateNormal];
-        [addMoreIconTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
-        addMoreIconTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
-
-
-        [UIView commitAnimations];
-        
-        [self plusButtonClick];
-	}
-	else if(selectedButton == addMorePhotoTabButton)
-	{
-        //self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"layers" rect:CGRectMake(-30, -6, 50, 50)];
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-30, -6, 50, 50)];
-        label.backgroundColor = [UIColor clearColor];
-        label.font = [UIFont fontWithName:TITLE_FONT size:18];
-        label.textAlignment = UITextAlignmentCenter;
-        label.textColor = [UIColor whiteColor];
-        label.text = @"LAYERS";
-        self.navigationItem.titleView = label;
-        [self SetMenu];
-        selectedAddMoreLayerTab = ADD_MORE_PHOTOTAB;
-        if ([self canAddMoreLayers]) {
-            [self AddScrollView:takeOrAddPhotoLabel];
-        }
-
-        symbolTouchFlag= NO;
-        iconTouchFlag = NO;
-        photoTouchFlag = YES;
-        lableTouchFlag = NO;
-		imgPickerFlag =2;
-		[UIView beginAnimations:nil context:NULL];
-		[UIView setAnimationDuration:0.4f];
-        
-        /*CALayer * l = [[[self  photoLayersArray] lastObject] layer];
-        [l setMasksToBounds:YES];
-        [l setCornerRadius:10];
-        [l setBorderWidth:1.0];
-        [l setBorderColor:[[UIColor grayColor] CGColor]];
-        [self.imgView addSubview:[[self  photoLayersArray] lastObject]];*/
-                
-		textBackgrnd.alpha = ALPHA0;
-        [addMorePhotoTabButton setBackgroundImage:[UIImage imageNamed:@"image_icon_selected"] forState:UIControlStateNormal];
-        [addMoreFontTabButton setBackgroundImage:[UIImage imageNamed:@"text_icon_selected"] forState:UIControlStateHighlighted];
-        [addMoreSymbolTabButton setBackgroundImage:[UIImage imageNamed:@"symbolicon_button_selected"] forState:UIControlStateHighlighted];
-        
-        [addMoreIconTabButton setBackgroundImage:[UIImage imageNamed:@"icon_button_selected"] forState:UIControlStateHighlighted];
-        
-        [arrangeLayerTabButton setBackgroundImage:[UIImage imageNamed:@"arrangeicon_button_selected"] forState:UIControlStateHighlighted];
-
-        
-        [addMoreSymbolTabButton setBackgroundImage:[UIImage imageNamed:@"symbolicon_button"] forState:UIControlStateNormal];
-        [addMoreIconTabButton setBackgroundImage:[UIImage imageNamed:@"icon_button"] forState:UIControlStateNormal];
-        [arrangeLayerTabButton setBackgroundImage:[UIImage imageNamed:@"arrangeicon_button"] forState:UIControlStateNormal];
-        
-        
-        [addMorePhotoTabButton setTitle:@"Photo" forState:UIControlStateNormal];
-        [addMorePhotoTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
-        addMorePhotoTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
-        
-        [addMoreSymbolTabButton setTitle:@"Clipart" forState:UIControlStateNormal];
-        [addMoreSymbolTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
-        addMoreSymbolTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
-        
-        [arrangeLayerTabButton setTitle:@"Edit" forState:UIControlStateNormal];
-        [arrangeLayerTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
-        arrangeLayerTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
-        
-        [addMoreIconTabButton setTitle:@"Symbols" forState:UIControlStateNormal];
-        [addMoreIconTabButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
-        addMoreIconTabButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
-
-
-		[UIView commitAnimations];
-        
-        [self plusButtonClick];
-
-		//[self loadCustomPhotoLibrary];
-	}
-	else if(selectedButton == addMoreSymbolTabButton)
-	{
-        //self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"layers" rect:CGRectMake(-30, -6, 50, 50)];
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-30, -6, 50, 50)];
-        label.backgroundColor = [UIColor clearColor];
-        label.font = [UIFont fontWithName:TITLE_FONT size:18];
-        label.textAlignment = UITextAlignmentCenter;
-        label.textColor = [UIColor whiteColor];
-        label.text = @"LAYERS";
-        self.navigationItem.titleView = label;
-        [self SetMenu];
-        selectedAddMoreLayerTab = ADD_MORE_SYMBOLTAB;
-
-        symbolTouchFlag= YES;
-        photoTouchFlag= NO;
-        lableTouchFlag = NO;
-        iconTouchFlag = NO;
-       
-        [self AddScrollView:symbolScrollView];
-		[UIView beginAnimations:nil context:NULL];
-		[UIView setAnimationDuration:0.4f];
-        
-      
-        
-        
-        [addMorePhotoTabButton setBackgroundImage:[UIImage imageNamed:@"image_icon_selected"] forState:UIControlStateNormal];
-        [addMoreFontTabButton setBackgroundImage:[UIImage imageNamed:@"text_icon_selected"] forState:UIControlStateHighlighted];
-        
-        [addMoreSymbolTabButton setBackgroundImage:[UIImage imageNamed:@"symbolicon_button_selected"] forState:UIControlStateNormal];
-        
-        [addMoreIconTabButton setBackgroundImage:[UIImage imageNamed:@"icon_button_selected"] forState:UIControlStateHighlighted];
-        
-        [arrangeLayerTabButton setBackgroundImage:[UIImage imageNamed:@"arrangeicon_button_selected"] forState:UIControlStateHighlighted];
-
-
-       [arrangeLayerTabButton setBackgroundImage:[UIImage imageNamed:@"arrangeicon_button"] forState:UIControlStateNormal];
-        
-
-		[UIView commitAnimations];
-	}
-	else if(selectedButton == addMoreIconTabButton)
-	{
-        //self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"layers" rect:CGRectMake(-30, -6, 50, 50)];
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-30, -6, 50, 50)];
-        label.backgroundColor = [UIColor clearColor];
-        label.font = [UIFont fontWithName:TITLE_FONT size:18];
-        label.textAlignment = UITextAlignmentCenter;
-        label.textColor = [UIColor whiteColor];
-        label.text = @"LAYERS";
-        self.navigationItem.titleView = label;
-        [self SetMenu];
-
-        selectedAddMoreLayerTab = ADD_MORE_ICONTAB;
-
-        lableTouchFlag = NO;
-        symbolTouchFlag= NO;
-        //photoTouchFlag= NO;
-        iconTouchFlag = YES;
-		[UIView beginAnimations:nil context:NULL];
-		[UIView setAnimationDuration:0.4f];
-        [self AddScrollView:iconScrollView];
-
-        
-        [addMorePhotoTabButton setBackgroundImage:[UIImage imageNamed:@"image_icon_selected"] forState:UIControlStateHighlighted];
-        [addMoreFontTabButton setBackgroundImage:[UIImage imageNamed:@"text_icon_selected"] forState:UIControlStateHighlighted];
-        [addMoreSymbolTabButton setBackgroundImage:[UIImage imageNamed:@"symbolicon_button_selected"] forState:UIControlStateHighlighted];
-        
-        [addMoreIconTabButton setBackgroundImage:[UIImage imageNamed:@"icon_button_selected"] forState:UIControlStateNormal];
-        
-        [arrangeLayerTabButton setBackgroundImage:[UIImage imageNamed:@"arrangeicon_button_selected"] forState:UIControlStateHighlighted];
-
-
-        [arrangeLayerTabButton setBackgroundImage:[UIImage imageNamed:@"arrangeicon_button"] forState:UIControlStateNormal];
-        
-		[UIView commitAnimations];
-	}
-	else if(selectedButton == arrangeLayerTabButton)
+    else if(selectedButton == arrangeLayerTabButton)
 	{
         [self SetMenu];
         layerallow = 0 ;
-        [arrangeLayerTabButton setBackgroundImage:[UIImage imageNamed:@"arrangeicon_button_selected"] forState:UIControlStateNormal];
-        
-        [addMorePhotoTabButton setBackgroundImage:[UIImage imageNamed:@"image_icon"] forState:UIControlStateNormal];
-        [addMoreSymbolTabButton setBackgroundImage:[UIImage imageNamed:@"symbolicon_button"] forState:UIControlStateNormal];
-        [addMoreIconTabButton setBackgroundImage:[UIImage imageNamed:@"icon_button"] forState:UIControlStateNormal];
-
-        
         // Layer handling message
         
         if(layerEditMessage==nil){
             layerEditMessage = [[NSBundle mainBundle] loadNibNamed:@"ShareProgressView" owner:self options:nil][0];
             [layerEditMessage setFrame:CGRectMake(layerEditMessage.frame.origin.x, 320, layerEditMessage.frame.size.width, layerEditMessage.frame.size.height+2)];
-        
+            
             // border radius
             [layerEditMessage setAlpha:0.8];
-              globle = [Singleton RetrieveSingleton];
+            globle = [Singleton RetrieveSingleton];
             [layerEditMessage setBackgroundColor:[globle colorWithHexString:@"84c341 "]];
-        
+            
             [layerEditMessage.statusText setBounds:CGRectMake(layerEditMessage.frame.origin.x, 321, layerEditMessage.frame.size.width-55, layerEditMessage.frame.size.height-1)];
             [layerEditMessage.statusText setTextColor:[UIColor whiteColor]];
             [layerEditMessage.statusText setTextAlignment:NSTextAlignmentCenter];
@@ -3270,7 +2880,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
             [layerEditMessage.networkIcon removeFromSuperview];
             [layerEditMessage.statusIcon removeFromSuperview];
             [layerEditMessage.refreshIcon removeFromSuperview];
-        
+            
             [self.view addSubview:layerEditMessage];
         }
         
@@ -3282,10 +2892,10 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         label.textColor = [UIColor whiteColor];
         label.text = @"LAYERS";
         self.navigationItem.titleView = label;
-
+        
         selectedAddMoreLayerTab = ARRANGE_LAYERTAB;
         [self removeBordersFromAllLayers];
-
+        
         lableTouchFlag = NO;
         symbolTouchFlag= NO;
         iconTouchFlag = NO;
@@ -3296,13 +2906,13 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         }
         layerScrollView = nil;
         layerScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,320,130)];
-
+        
         NSInteger layerScrollWidth = 60;
         NSInteger layerScrollHeight = 55;
         
         if(textLabelLayersArray){
             //NSLog(@"Text Layers %d", [textLabelLayersArray count]);
-
+            
             for(int text=0; text<[textLabelLayersArray count]; text++){
                 
                 UILabel *label1 = (UILabel *) textLabelLayersArray[text];
@@ -3318,16 +2928,16 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
                 layerButton.tag = [[NSString stringWithFormat:@"%@%d",@"111",text] integerValue];
                 
                 // Add long press gesture on thie layer
-               // UILongPressGestureRecognizer* longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onLongPress:)];
+                // UILongPressGestureRecognizer* longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onLongPress:)];
                 //[layerButton addGestureRecognizer:longPressRecognizer];
                 
- 
+                
                 
                 UIImage *image = [UIImage imageNamed:@"cross"];
                 image = [PhotoController imageWithImage:image scaledToSize:CGSizeMake(30, 29)];
                 UIImage *pencilImage = [UIImage imageNamed:@"pencil_blue"];
                 pencilImage = [PhotoController imageWithImage:pencilImage scaledToSize:CGSizeMake(19, 19)];
-
+                
                 UIButton *crossButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 50)];
                 [crossButton setImage:image forState:UIControlStateNormal];
                 [crossButton addTarget:self action:@selector(deleteLayer:) forControlEvents:UIControlEventTouchUpInside];
@@ -3339,27 +2949,27 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
                 [editButton addTarget:self action:@selector(editLayer:) forControlEvents:UIControlEventTouchUpInside];
                 [editButton setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
                 [editButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
-                 editButton.showsTouchWhenHighlighted = YES;
-
+                editButton.showsTouchWhenHighlighted = YES;
+                
                 // If delete mode is enabled then show cross button an wobble
                 if(deleteMode){
-                   // [crossButton setHidden:NO];
+                    // [crossButton setHidden:NO];
                     [editButton setHidden:NO];
-                   // [self wobble:layerButton];
+                    // [self wobble:layerButton];
                 }else{
                     [crossButton setHidden:YES];
                     [editButton setHidden:NO];
                 }
                 
-               // crossButton.tag = layerButton.tag;
-               // [layerButton addSubview:crossButton];
+                // crossButton.tag = layerButton.tag;
+                // [layerButton addSubview:crossButton];
                 editButton.tag = layerButton.tag;
                 [layerButton addSubview:editButton];
-
+                
                 [layerScrollView addSubview:layerButton];
             }
         }
-
+        
         if(photoLayersArray){
             //NSLog(@"Photo Layers %d", [photoLayersArray count]);
             
@@ -3384,34 +2994,34 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
                 image = [PhotoController imageWithImage:image scaledToSize:CGSizeMake(30, 29)];
                 UIImage *pencilImage = [UIImage imageNamed:@"pencil_blue"];
                 pencilImage = [PhotoController imageWithImage:pencilImage scaledToSize:CGSizeMake(19, 19)];
-
+                
                 UIButton *crossButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 50)];
                 [crossButton setImage:image forState:UIControlStateNormal];
                 [crossButton addTarget:self action:@selector(deleteLayer:) forControlEvents:UIControlEventTouchUpInside];
                 [crossButton setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
                 [crossButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
-
+                
                 UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(layerButton.frame.origin.x, 0, layerButton.frame.size.width, 50)];
                 [editButton setImage:pencilImage forState:UIControlStateNormal];
                 [editButton addTarget:self action:@selector(editLayer:) forControlEvents:UIControlEventTouchUpInside];
                 [editButton setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
                 [editButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
-                 editButton.showsTouchWhenHighlighted = YES;
+                editButton.showsTouchWhenHighlighted = YES;
                 // If delete mode is enabled then show cross button an wobble
                 if(deleteMode){
                     //[crossButton setHidden:NO];
                     [editButton setHidden:NO];
-                   // [self wobble:layerButton];
+                    // [self wobble:layerButton];
                 }else{
                     [crossButton setHidden:YES];
                     [editButton setHidden:NO];
                 }
-
-               // crossButton.tag = layerButton.tag;
+                
+                // crossButton.tag = layerButton.tag;
                 //[layerButton addSubview:crossButton];
                 editButton.tag = layerButton.tag;
                 [layerButton addSubview:editButton];
-
+                
                 [layerScrollView addSubview:layerButton];
             }
         }
@@ -3438,7 +3048,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
                 image = [PhotoController imageWithImage:image scaledToSize:CGSizeMake(30, 29)];
                 UIImage *pencilImage = [UIImage imageNamed:@"pencil_blue"];
                 pencilImage = [PhotoController imageWithImage:pencilImage scaledToSize:CGSizeMake(19, 19)];
-
+                
                 UIButton *crossButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 50)];
                 [crossButton setImage:image forState:UIControlStateNormal];
                 [crossButton addTarget:self action:@selector(deleteLayer:) forControlEvents:UIControlEventTouchUpInside];
@@ -3450,12 +3060,12 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
                 [editButton addTarget:self action:@selector(editLayer:) forControlEvents:UIControlEventTouchUpInside];
                 [editButton setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
                 [editButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
-                 editButton.showsTouchWhenHighlighted = YES;
+                editButton.showsTouchWhenHighlighted = YES;
                 // If delete mode is enabled then show cross button an wobble
                 if(deleteMode){
                     //[crossButton setHidden:NO];
                     [editButton setHidden:NO];
-                   // [self wobble:layerButton];
+                    // [self wobble:layerButton];
                 }else{
                     [crossButton setHidden:YES];
                     [editButton setHidden:NO];
@@ -3465,7 +3075,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
                 //[layerButton addSubview:crossButton];
                 editButton.tag = layerButton.tag;
                 [layerButton addSubview:editButton];
-
+                
                 [layerScrollView addSubview:layerButton];
             }
         }
@@ -3505,13 +3115,13 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
                 [editButton addTarget:self action:@selector(editLayer:) forControlEvents:UIControlEventTouchUpInside];
                 [editButton setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
                 [editButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
-                 editButton.showsTouchWhenHighlighted = YES;
+                editButton.showsTouchWhenHighlighted = YES;
                 
                 // If delete mode is enabled then show cross button an wobble
                 if(deleteMode){
                     //[crossButton setHidden:NO];
                     [editButton setHidden:NO];
-                   // [self wobble:layerButton];
+                    // [self wobble:layerButton];
                 }else{
                     [crossButton setHidden:YES];
                     [editButton setHidden:NO];
@@ -3522,12 +3132,12 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
                 editButton.tag = layerButton.tag;
                 [layerButton addSubview:editButton];
                 
-
+                
                 [layerScrollView addSubview:layerButton];
             }
         }
-
-
+        
+        
         
         [layerScrollView setCanCancelContentTouches:NO];
         layerScrollView.indicatorStyle = UIScrollViewIndicatorStyleBlack;
@@ -3538,13 +3148,161 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         layerScrollView.showsVerticalScrollIndicator = NO;
         [self layoutScrollImages:layerScrollView scrollWidth:layerScrollWidth scrollHeight:layerScrollHeight];
         [self AddScrollView:layerScrollView];
-
+        
 	}
     deleteMode = NO;
     doStopWobble = YES;
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapGestureCaptured:)];
     [layerScrollView addGestureRecognizer:singleTap];
 
+}
+
+-(IBAction)setlibBackgroundTabAction:(id)sender{
+    UIButton *selectedButton = (UIButton*)sender;
+    
+    //Uns Selected State of All Buttons
+    [backtemplates setBackgroundImage:[UIImage imageNamed:@"addbg_library"] forState:UIControlStateNormal];
+    [cameraTakePhoto setBackgroundImage:[UIImage imageNamed:@"addbg_takephoto"] forState:UIControlStateNormal];
+    [cameraRoll setBackgroundImage:[UIImage imageNamed:@"addbg_cameraroll"] forState:UIControlStateNormal];
+    [flyerBorder setBackgroundImage:[UIImage imageNamed:@"addbg_border"] forState:UIControlStateNormal];
+    
+
+    if(undoCount >= 1){
+        [rightUndoBarButton setEnabled:YES];
+    }
+    
+    if( selectedButton == backtemplates )
+	{
+        [backtemplates setBackgroundImage:[UIImage imageNamed:@"addbg_library_selected"] forState:UIControlStateNormal];
+        [UIView beginAnimations:nil context:NULL];
+		[UIView setAnimationDuration:0.4f];
+
+        
+        //Add ContextView
+        [self AddScrollView:templateScrollView];
+        [UIView commitAnimations];
+    }
+    else if(selectedButton == cameraTakePhoto)
+    {
+        [cameraTakePhoto setBackgroundImage:[UIImage imageNamed:@"addbg_takephoto_selected"] forState:UIControlStateNormal];
+        [self openCustomCamera];
+    }
+    else if(selectedButton == cameraRoll)
+    {
+        [cameraRoll setBackgroundImage:[UIImage imageNamed:@"addbg_cameraroll_selected"] forState:UIControlStateNormal];
+        [self loadCustomPhotoLibrary];
+    }
+    else if(selectedButton == flyerBorder)
+    {
+        [flyerBorder setBackgroundImage:[UIImage imageNamed:@"addbg_border_selected"] forState:UIControlStateNormal];
+    }
+
+}
+
+
+-(IBAction) setAddMoreLayerTabAction:(id) sender {
+    layerallow = 0;
+    
+    if(layerEditMessage!=nil){
+        [layerEditMessage removeFromSuperview];
+        layerEditMessage = nil;
+    }
+
+	UIButton *selectedButton = (UIButton*)sender;
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-30, -6, 50, 50)];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont fontWithName:TITLE_FONT size:18];
+    label.textAlignment = UITextAlignmentCenter;
+    label.textColor = [UIColor whiteColor];
+    label.text = @"LAYERS";
+    self.navigationItem.titleView = label;
+    [self SetMenu];
+    
+    if(undoCount >= 1){
+        [rightUndoBarButton setEnabled:YES];
+    }
+
+	if(selectedButton == addMoreFontTabButton)
+	{
+
+        selectedAddMoreLayerTab = ADD_MORE_TEXTTAB;
+
+        symbolTouchFlag= NO;
+        photoTouchFlag = NO;
+        iconTouchFlag = NO;
+        lableTouchFlag = YES;
+		[UIView beginAnimations:nil context:NULL];
+		[UIView setAnimationDuration:0.4f];
+        
+        [self AddBottomTabs:libText];
+        [UIView commitAnimations];
+        
+        [self plusButtonClick];
+	}
+	else if(selectedButton == addMorePhotoTabButton)
+	{
+        selectedAddMoreLayerTab = ADD_MORE_PHOTOTAB;
+        if ([self canAddMoreLayers]) {
+            [self AddScrollView:takeOrAddPhotoLabel];
+        }
+
+        symbolTouchFlag= NO;
+        iconTouchFlag = NO;
+        photoTouchFlag = YES;
+        lableTouchFlag = NO;
+		imgPickerFlag =2;
+		[UIView beginAnimations:nil context:NULL];
+		[UIView setAnimationDuration:0.4f];
+        
+		textBackgrnd.alpha = ALPHA0;
+
+		[UIView commitAnimations];
+        
+        [self plusButtonClick];
+
+		//[self loadCustomPhotoLibrary];
+	}
+	else if(selectedButton == addMoreSymbolTabButton)
+	{
+        selectedAddMoreLayerTab = ADD_MORE_SYMBOLTAB;
+
+        symbolTouchFlag= YES;
+        photoTouchFlag= NO;
+        lableTouchFlag = NO;
+        iconTouchFlag = NO;
+       	[UIView beginAnimations:nil context:NULL];
+        
+        //Add Context
+        [self AddScrollView:symbolScrollView];
+		[UIView setAnimationDuration:0.4f];
+		[UIView commitAnimations];
+	}
+	else if(selectedButton == addMoreIconTabButton)
+	{
+        selectedAddMoreLayerTab = ADD_MORE_ICONTAB;
+        lableTouchFlag = NO;
+        symbolTouchFlag= NO;
+        //photoTouchFlag= NO;
+        iconTouchFlag = YES;
+		[UIView beginAnimations:nil context:NULL];
+		[UIView setAnimationDuration:0.4f];
+        
+        //Add ContextView
+        [self AddScrollView:iconScrollView];
+
+		[UIView commitAnimations];
+	}
+    else if(selectedButton == backgroundTabButton)
+	{
+        [UIView beginAnimations:nil context:NULL];
+		[UIView setAnimationDuration:0.4f];
+        
+        //Add ContextView
+        [self AddBottomTabs:libBackground];
+        [self setlibBackgroundTabAction:backtemplates];
+		[UIView commitAnimations];
+    }
 }
 
 - (void)singleTapGestureCaptured:(UITapGestureRecognizer *)gesture

@@ -11,10 +11,22 @@
                 <outlet property="addMoreIconTabButton" destination="fpi-NX-k5V" id="Dmn-8a-OqK"/>
                 <outlet property="addMorePhotoTabButton" destination="fcG-xw-IqZ" id="Mj3-Ub-wYi"/>
                 <outlet property="addMoreSymbolTabButton" destination="a4z-OF-QiI" id="fVq-xN-FAx"/>
+                <outlet property="arrangeLayerTabButton" destination="Rgs-rs-7a8" id="Zpu-O9-vYo"/>
+                <outlet property="backgroundTabButton" destination="zoh-mW-4K3" id="jKZ-37-kHq"/>
+                <outlet property="backtemplates" destination="WvZ-dV-5Fn" id="5XB-pz-W0O"/>
+                <outlet property="cameraRoll" destination="t0N-7F-yOw" id="jXi-au-Q5l"/>
+                <outlet property="cameraTakePhoto" destination="TUU-ew-jcU" id="4sp-iH-P0R"/>
+                <outlet property="colorTabButton" destination="RCh-PH-bvk" id="kzT-0A-OKE"/>
                 <outlet property="contextView" destination="rbq-e2-wbO" id="BDJ-TX-Ld1"/>
+                <outlet property="flyerBorder" destination="rR0-dC-sak" id="y4N-N4-MId"/>
+                <outlet property="fontBorderTabButton" destination="E2L-Wc-n71" id="qIM-iL-HJk"/>
+                <outlet property="fontTabButton" destination="zu1-aU-CE3" id="4N8-mM-vZ8"/>
                 <outlet property="imgView" destination="Xaq-YE-kc7" id="te3-JW-Ibt"/>
+                <outlet property="libBackground" destination="wtn-Zi-MKo" id="Lbb-GH-gzo"/>
                 <outlet property="libFlyer" destination="P8i-Fw-Gci" id="DAb-aV-gaf"/>
+                <outlet property="libText" destination="8Ew-aX-Xah" id="Haw-gJ-FkB"/>
                 <outlet property="libraryContextView" destination="hm4-bV-Hep" id="yQz-pZ-s3b"/>
+                <outlet property="sizeTabButton" destination="Ybf-LY-Z1e" id="8QX-O7-r0o"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>
@@ -93,6 +105,115 @@
                     <state key="normal" image="arrangeicon_button.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="setAddMoreLayerTabAction:" destination="-1" eventType="touchUpInside" id="AgZ-fy-AkO"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+        </view>
+        <view contentMode="scaleToFill" id="wtn-Zi-MKo">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="WvZ-dV-5Fn">
+                    <rect key="frame" x="0.0" y="0.0" width="80" height="45"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="addbg_library.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="disabled" image="addbg_library_selected.png"/>
+                    <state key="selected" image="addbg_library_selected.png"/>
+                    <connections>
+                        <action selector="setlibBackgroundTabAction:" destination="-1" eventType="touchUpInside" id="9Ej-0F-waq"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="TUU-ew-jcU">
+                    <rect key="frame" x="79" y="0.0" width="80" height="45"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="addbg_takephoto.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="setlibBackgroundTabAction:" destination="-1" eventType="touchUpInside" id="C5c-5U-w3S"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="t0N-7F-yOw">
+                    <rect key="frame" x="159" y="0.0" width="80" height="45"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="addbg_cameraroll.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="setlibBackgroundTabAction:" destination="-1" eventType="touchUpInside" id="523-Qy-Wyn"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="rR0-dC-sak">
+                    <rect key="frame" x="239" y="0.0" width="80" height="45"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="addbg_border.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="setlibBackgroundTabAction:" destination="-1" eventType="touchUpInside" id="fcs-Ef-1pq"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+        </view>
+        <view contentMode="scaleToFill" id="8Ew-aX-Xah">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="zu1-aU-CE3">
+                    <rect key="frame" x="0.0" y="0.0" width="64" height="45"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="font_button.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="setStyleTabAction:" destination="-1" eventType="touchUpInside" id="noa-Nb-ksd"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="RCh-PH-bvk">
+                    <rect key="frame" x="64" y="0.0" width="64" height="45"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="color_button.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="setStyleTabAction:" destination="-1" eventType="touchUpInside" id="hQh-kx-2nZ"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="Ybf-LY-Z1e">
+                    <rect key="frame" x="128" y="0.0" width="64" height="45"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="size_button.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="setStyleTabAction:" destination="-1" eventType="touchUpInside" id="ns9-VQ-jo0"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="E2L-Wc-n71">
+                    <rect key="frame" x="192" y="0.0" width="64" height="45"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="outline_button.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="setStyleTabAction:" destination="-1" eventType="touchUpInside" id="CcZ-Vh-DvB"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="Rgs-rs-7a8">
+                    <rect key="frame" x="256" y="0.0" width="64" height="45"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="text_edit.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="setStyleTabAction:" destination="-1" eventType="touchUpInside" id="hTX-s8-YST"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -100,10 +221,20 @@
     </objects>
     <resources>
         <image name="Template15.jpg" width="612" height="612"/>
+        <image name="addbg_border.png" width="80" height="45"/>
+        <image name="addbg_cameraroll.png" width="80" height="45"/>
+        <image name="addbg_library.png" width="80" height="45"/>
+        <image name="addbg_library_selected.png" width="80" height="45"/>
+        <image name="addbg_takephoto.png" width="80" height="45"/>
         <image name="arrangeicon_button.png" width="64" height="45"/>
+        <image name="color_button.png" width="64" height="45"/>
+        <image name="font_button.png" width="64" height="45"/>
         <image name="icon_button.png" width="64" height="45"/>
         <image name="image_icon.png" width="64" height="45"/>
+        <image name="outline_button.png" width="64" height="45"/>
+        <image name="size_button.png" width="64" height="45"/>
         <image name="symbolicon_button.png" width="64" height="45"/>
+        <image name="text_edit.png" width="64" height="45"/>
         <image name="text_icon.png" width="66" height="45"/>
     </resources>
 </document>
