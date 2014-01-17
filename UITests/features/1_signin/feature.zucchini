@@ -15,6 +15,9 @@ Then on the "Settings" screen:
   Tap "Sign Out"
   Confirm "Sign out"
 
+Then on the "Welcome" screen:
+  Tap "SignIn"
+
 Then on the "SignIn" screen:
   Tap "Forgot"
 
@@ -24,34 +27,33 @@ Then on the "Forgot" screen:
 Then on the "SignIn" screen:
   Tap "SignUp"
 
-Then on the "SignUp" screen:
+Then on the "Register" screen:
   Tap "Back"
-
-Then on the "Welcome" screen:
-  Tap "SignIn"
 
 Then on the "SignIn" screen:
   Tap "Facebook"
+  Wait for "10" seconds
 
 Then on the "Home" screen:
   Tap "Settings"
   
 Then on the "Settings" screen:
-  Tap "SignOut"
-  Confirm "SignOut"
+  Tap "Sign Out"
+  Confirm "Sign out"
 
 Then on the "Welcome" screen:
   Tap "SignIn"
 
 Then on the "SignIn" screen:
   Tap "Twitter"
+  Wait for "15" seconds
 
 Then on the "Home" screen:
   Tap "Settings"
   
 Then on the "Settings" screen:
-  Tap "SignOut"
-  Confirm "SignOut"
+  Tap "Sign Out"
+  Confirm "Sign out"
  
   
   

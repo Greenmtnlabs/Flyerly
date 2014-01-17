@@ -53,7 +53,7 @@
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" id="9">
                     <rect key="frame" x="83" y="221" width="198" height="30"/>
                     <autoresizingMask key="autoresizingMask"/>
-                    <accessibility key="accessibilityConfiguration" label="Password"/>
+                    <accessibility key="accessibilityConfiguration" label="PasswordField"/>
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
