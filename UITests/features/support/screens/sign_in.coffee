@@ -8,4 +8,8 @@ class SignInScreen extends Screen
     'Back' : -> view.navigationBars()[0].buttons()[0],
 	'Next' : -> view.navigationBars()[0].buttons()[1],
 	'Username' : -> $('#Username'),
-	'Password' : -> $('#Password')
+	'Password' : -> $('#Password'),
+	'SignUp' : -> $('#SignUp'),
+	'Facebook': -> $('#SignInFacebook'),
+	'Twitter' : -> $('#SignInTwitter'),
+	'Forgot' :-> $('#ForgotPassword')
