@@ -1,14 +1,14 @@
 class SettingsScreen extends Screen
-  anchor: -> $('#SettingsScreen')
+  anchor: -> $('navigationBar[name=MainSettingView]')
 
   constructor: ->
     super 'settings'
 
     extend @elements,
     'Back' : -> view.navigationBars()[0].buttons()[0],
-	'Next' : -> view.navigationBars()[0].buttons()[1],
-	'Facebook Button' : -> $('#Facebook'),
-	'Twitter Button' : -> $('#Twitter'),
-	'Instagram Button' : -> $('#Instagram'),
-	'Tumblr Button': -> $('#Tumblr'),
-	'Twitter Button' : -> $('#Twitter')
+    'Help' : -> view.navigationBars()[0].buttons()[1],
+    'Email' : -> $('#SettingsEmail'),
+    'App Review' : -> $('#AppReview'),
+    'Twitter' : -> $('#Twitter'),
+    'Help' : -> $('#Help'),
+    'Sign Out' : -> $('#Sign Out')

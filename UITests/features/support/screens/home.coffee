@@ -1,5 +1,5 @@
 class HomeScreen extends Screen
-  anchor: -> $('#CreateFlyer')
+  anchor: -> $('navigationBar[name=LauchView]')
 
   constructor: ->
     super 'home'
