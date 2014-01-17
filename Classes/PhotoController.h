@@ -28,10 +28,6 @@
 	UIImageView *symbolImgView;
 	UIImageView *iconImgView;
 
-    UIButton *takePhotoButton;
-	UIButton *cameraRollButton;
-    UILabel *takePhotoLabel;
-	UILabel *cameraRollLabel;
     UIButton *moreLayersButton;
     UILabel *moreLayersLabel;
     UILabel *addMoreLayerOrSaveFlyerLabel;
@@ -71,7 +67,6 @@
 	UIButton *fontTabButton;
 	UIButton *colorTabButton;
 	UIButton *sizeTabButton;
-	UIButton *borderTabButton;
 	UIButton *fontBorderTabButton;
 
 	UIButton *cameraTabButton;
@@ -156,10 +151,6 @@
 @property (nonatomic, strong) UIImagePickerController *imgPicker;
 @property (nonatomic, strong) UITextView *msgTextView;
 
-@property (nonatomic,strong)  UIButton *takePhotoButton;
-@property (nonatomic,strong)  UIButton *cameraRollButton;
-@property (nonatomic,strong)  UILabel *takePhotoLabel;
-@property (nonatomic,strong)  UILabel *cameraRollLabel;
 @property (nonatomic,strong)  UIButton *moreLayersButton;
 @property (nonatomic,strong)  UILabel *moreLayersLabel;
 @property (nonatomic,strong)  UILabel *addMoreLayerOrSaveFlyerLabel;
@@ -186,20 +177,8 @@
 @property (nonatomic, strong) UIImage *selectedSymbol;
 @property (nonatomic, strong) UIImage *selectedIcon;
 
-@property (nonatomic, strong) UIButton *fontTabButton;
-@property (nonatomic, strong) UIButton *colorTabButton;
-@property (nonatomic, strong) UIButton *sizeTabButton;
-@property (nonatomic, strong) UIButton *borderTabButton;
-@property (nonatomic, strong) UIButton *fontBorderTabButton;
+
 @property (nonatomic, strong) UIImage *finalFlyer;
-
-@property (nonatomic,strong) UIButton *cameraTabButton;
-@property (nonatomic,strong) UIButton *photoTabButton;
-@property (nonatomic,strong) UIButton *widthTabButton;
-@property (nonatomic,strong) UIButton *heightTabButton;
-
-//Pending
-@property (nonatomic, strong) UIButton *arrangeLayerTabButton;
 
 @property (nonatomic, assign)BOOL photoTouchFlag;
 @property (nonatomic, assign)BOOL lableTouchFlag;
@@ -218,18 +197,45 @@
 
 @property(nonatomic, strong) IBOutlet UIImageView *imgView;
 @property(nonatomic, strong) IBOutlet UIView *contextView;
+
+// These are ContextViews Library
 @property(nonatomic, strong) IBOutlet UIView *libraryContextView;
 @property(nonatomic, strong) IBOutlet UIView *libFlyer;
+@property(nonatomic, strong) IBOutlet UIView *libBackground;
+@property(nonatomic, strong) IBOutlet UIView *libText;
+@property(nonatomic, strong) IBOutlet UIView *libPhoto;
+
 
 // These are LibFlyer
 @property (nonatomic, strong) IBOutlet UIButton *addMoreFontTabButton;
 @property (nonatomic, strong)IBOutlet UIButton *addMorePhotoTabButton;
 @property (nonatomic, strong)IBOutlet UIButton *addMoreIconTabButton;
 @property (nonatomic, strong)IBOutlet UIButton *addMoreSymbolTabButton;
+@property (nonatomic, strong)IBOutlet UIButton *backgroundTabButton;
+
+//These are LibBackground
+@property (nonatomic, strong)IBOutlet UIButton *backtemplates;
+@property (nonatomic, strong)IBOutlet UIButton *cameraTakePhoto;
+@property (nonatomic, strong)IBOutlet UIButton *cameraRoll;
+@property (nonatomic, strong)IBOutlet UIButton *flyerBorder;
+
+//These are LibText
+@property (nonatomic, strong)IBOutlet UIButton *fontTabButton;
+@property (nonatomic, strong)IBOutlet UIButton *colorTabButton;
+@property (nonatomic, strong)IBOutlet UIButton *sizeTabButton;
+@property (nonatomic, strong)IBOutlet UIButton *fontBorderTabButton;
+@property (nonatomic, strong)IBOutlet UIButton *arrangeLayerTabButton;
+
+//These are LibPhoto
+@property (nonatomic,strong)IBOutlet UIButton *cameraTabButton;
+@property (nonatomic,strong)IBOutlet UIButton *photoTabButton;
+@property (nonatomic,strong)IBOutlet UIButton *widthTabButton;
+@property (nonatomic,strong)IBOutlet UIButton *heightTabButton;
+
 
 
 -(void)loadCustomPhotoLibrary;
--(void) chooseTemplate;
+
 -(void) chooseEdit;
 -(void) MyEdit;
 -(void) SetMenu;
@@ -256,6 +262,10 @@
 
 -(void)AddScrollView:(id)obj;
 -(void)AddBottomTabs:(id)obj;
--(IBAction)setAddMoreLayerTabAction:(id)sender;
+-(void)AddAllLayersIntoFront;
 
+-(IBAction)setAddMoreLayerTabAction:(id)sender;
+-(IBAction)setlibBackgroundTabAction:(id)sender;
+-(IBAction)setStyleTabAction:(id) sender;
+-(IBAction)setlibPhotoTabAction:(id) sender;
 @end
