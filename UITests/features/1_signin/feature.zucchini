@@ -8,9 +8,37 @@ Then on the "SIGN IN" screen:
   
 Then on the "Home" screen:
   Tap "Settings"
+
+Then on the "Settings" screen:
   Tap "Sign Out"
   Confirm "Sign out"
+
+Then on the "Welcome" screen:
+  Tap "SIGN IN"
+
+Then on the "SIGN IN" screen:
+  Tap "Sign in with Facebook"
+
+Then on the "Home" screen:
+  Tap "Settings"
   
+Then on the "Settings" screen:
+  Tap "Sign Out"
+  Confirm "Sign out"
+
+Then on the "Welcome" screen:
+  Tap "SIGN IN"
+
+Then on the "SIGN IN" screen:
+  Tap "Sign in with Twitter"
+
+Then on the "Home" screen:
+  Tap "Settings"
+  
+Then on the "Settings" screen:
+  Tap "Sign Out"
+  Confirm "Sign out"
+ 
   
   
 
