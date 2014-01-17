@@ -12,4 +12,4 @@ class SignInScreen extends Screen
 	'Twitter' : -> $('#Twitter'),
 	'Facebook' :-> $('#Facebook'),
 	'FacebookLike' :-> $('#FacebookLikeInPopup'),
-	'FacebookClose' :-> $('#FacebookClose'),
+	'FacebookClose' :-> $('#FacebookClose')
