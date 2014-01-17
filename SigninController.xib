@@ -27,6 +27,9 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="register-bg-iPhone4.png" id="120">
                     <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <accessibility key="accessibilityConfiguration" label="">
+                        <bool key="isElement" value="NO"/>
+                    </accessibility>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="1"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="email_box.png" id="46">

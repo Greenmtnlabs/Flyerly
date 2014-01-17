@@ -12,4 +12,8 @@ class HomeScreen extends Screen
 	'Twitter' : -> $('#Twitter'),
 	'Facebook' :-> $('#Facebook'),
 	'FacebookLike' :-> $('#FacebookLikeInPopup'),
-	'FacebookClose' :-> $('#FacebookClose')
+	'FacebookClose' :-> $('#FacebookClose'),
+	'First Flyer' :-> $('#First Flyer'),
+	'Second Flyer' :-> $('#Second Flyer'),
+	'Third Flyer' :-> $('#Third Flyer'),
+	'Fourth Flyer' :-> $('#Fourth Flyer')

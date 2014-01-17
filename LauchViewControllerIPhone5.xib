@@ -160,18 +160,30 @@
                         <imageView tag="1000" contentMode="center" image="pinned_flyer2.png" id="14">
                             <rect key="frame" x="15" y="143" width="136" height="136"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <accessibility key="accessibilityConfiguration" label="First Flyer">
+                                <bool key="isElement" value="YES"/>
+                            </accessibility>
                         </imageView>
                         <imageView tag="1000" contentMode="center" image="pinned_flyer2.png" id="13">
                             <rect key="frame" x="168" y="143" width="136" height="136"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        </imageView>
-                        <imageView tag="1000" contentMode="center" image="pinned_flyer2.png" id="12">
-                            <rect key="frame" x="169" y="324" width="136" height="136"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <accessibility key="accessibilityConfiguration" label="Second Flyer">
+                                <bool key="isElement" value="YES"/>
+                            </accessibility>
                         </imageView>
                         <imageView tag="1000" contentMode="center" image="pinned_flyer2.png" id="11">
                             <rect key="frame" x="15" y="324" width="136" height="136"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <accessibility key="accessibilityConfiguration" label="Third Flyer">
+                                <bool key="isElement" value="YES"/>
+                            </accessibility>
+                        </imageView>
+                        <imageView tag="1000" contentMode="center" image="pinned_flyer2.png" id="12">
+                            <rect key="frame" x="169" y="324" width="136" height="136"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <accessibility key="accessibilityConfiguration" label="Fourth Flyer">
+                                <bool key="isElement" value="YES"/>
+                            </accessibility>
                         </imageView>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Create" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="10">
                             <rect key="frame" x="138" y="100" width="59" height="21"/>
@@ -249,7 +261,7 @@
         </view>
     </objects>
     <resources>
-        <image name="Zmain_screenbg-568h.png" width="230" height="300"/>
+        <image name="Zmain_screenbg-568h.png" width="321" height="373"/>
         <image name="facebook_like.png" width="80" height="49"/>
         <image name="facebook_unlike.png" width="80" height="49"/>
         <image name="likealertbg.png" width="213" height="100"/>

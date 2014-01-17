@@ -3,8 +3,10 @@ Start on the "Welcome" screen:
 
 Then on the "SignIn" screen:
   Take a screenshot
-  Fill the form with "TeamLeadSQA, null"
-  Tap "SignIn"
+  Clear the "Username" field
+  Type "TeamLeadSQA" in the "Username" field
+  Type "null" in the "Password" field
+  Tap "Sign In"
   
 Then on the "Home" screen:
   Tap "Settings"
