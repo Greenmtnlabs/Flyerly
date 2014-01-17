@@ -1,10 +1,10 @@
 Start on the "Welcome" screen:
-  Tap "SIGN IN"
+  Tap "SignIn"
 
-Then on the "SIGN IN" screen:
+Then on the "SignIn" screen:
   Take a screenshot
   Fill the form with "TeamLeadSQA, null"
-  Tap "SIGN IN" named "signin_screen"
+  Tap "SignIn"
   
 Then on the "Home" screen:
   Tap "Settings"
@@ -12,32 +12,44 @@ Then on the "Home" screen:
 Then on the "Settings" screen:
   Tap "Sign Out"
   Confirm "Sign out"
+
+Then on the "SignIn" screen:
+  Tap "Forgot"
+
+Then on the "Forgot" screen:
+  Tap "Back"
+
+Then on the "SignIn" screen:
+  Tap "SignUp"
+
+Then on the "SignUp" screen:
+  Tap "Back"
 
 Then on the "Welcome" screen:
-  Tap "SIGN IN"
+  Tap "SignIn"
 
-Then on the "SIGN IN" screen:
-  Tap "Sign in with Facebook"
+Then on the "SignIn" screen:
+  Tap "Facebook"
 
 Then on the "Home" screen:
   Tap "Settings"
   
 Then on the "Settings" screen:
-  Tap "Sign Out"
-  Confirm "Sign out"
+  Tap "SignOut"
+  Confirm "SignOut"
 
 Then on the "Welcome" screen:
-  Tap "SIGN IN"
+  Tap "SignIn"
 
-Then on the "SIGN IN" screen:
-  Tap "Sign in with Twitter"
+Then on the "SignIn" screen:
+  Tap "Twitter"
 
 Then on the "Home" screen:
   Tap "Settings"
   
 Then on the "Settings" screen:
-  Tap "Sign Out"
-  Confirm "Sign out"
+  Tap "SignOut"
+  Confirm "SignOut"
  
   
   
