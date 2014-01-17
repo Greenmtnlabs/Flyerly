@@ -101,30 +101,18 @@
     
     // Set the background image on navigation bar
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
-  
+    
     // for Navigation Bar logo
     UIImageView *logo = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 87, 38)];
     [logo setImage:[UIImage imageNamed:@"flyerlylogo"]];
     self.navigationItem.titleView = logo;
     
     [self.navigationItem setHidesBackButton:YES];
-    // Create right bar button
-    //UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 31, 30)];
-    //[menuButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-    //[menuButton setBackgroundImage:[UIImage imageNamed:@"menu_button"] forState:UIControlStateNormal];
-    //UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
-    
-    //[self.navigationItem setRightBarButtonItem:rightBarButton];
-
-    // Set left bar items
-    //[self.navigationItem setLeftBarButtonItems: [self leftBarItems]];       
     
     firstFlyer.image = [UIImage imageNamed:@"pinned_flyer2.png"];
     secondFlyer.image = [UIImage imageNamed:@"pinned_flyer2.png"];
     thirdFlyer.image = [UIImage imageNamed:@"pinned_flyer2.png"];
     fourthFlyer.image = [UIImage imageNamed:@"pinned_flyer2.png"];
-    //fifthFlyer.image = [UIImage imageNamed:@"pinned_flyer2.png"];
-    //sixthFlyer.image = [UIImage imageNamed:@"pinned_flyer2.png"];
 
 	[self filesByModDate];
 }

@@ -1,8 +1,15 @@
 class SignInScreen extends Screen
-  anchor: -> $("navigationBar[name=SIGN IN]")
+  anchor: -> $('#Login')
 
   constructor: ->
     super 'sign-in'
 
     extend @elements,
-    'Back' : -> view.navigationBars()[0].buttons()[0]
+    'Back' : -> view.navigationBars()[0].buttons()[0],
+	'Next' : -> view.navigationBars()[0].buttons()[1],
+	'Username' : -> $('#Username'),
+	'Password' : -> $('#Password'),
+	'SignUp' : -> $('#SignUp'),
+	'Facebook': -> $('#SignInFacebook'),
+	'Twitter' : -> $('#SignInTwitter'),
+	'Forgot' :-> $('#ForgotPassword')

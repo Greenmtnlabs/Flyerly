@@ -1,5 +1,5 @@
 class RegisterScreen extends Screen
-  anchor: -> $("navigationBar[name=REGISTER]")
+  anchor: -> $('#SignUp')
 
   constructor: ->
     super 'register'

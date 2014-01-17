@@ -1,58 +1,56 @@
 Start on the "Welcome" screen:
-  Take a screenshot named "welcome_screen"
-  Tap "SIGN IN"
+  Tap "SignIn"
 
-Then on the "SIGN IN" screen:
+Then on the "SignIn" screen:
   Take a screenshot
   Fill the form with "TeamLeadSQA, null"
-  Tap "SIGN IN" named "signin_screen"
-  Wait for "2" seconds
-  Take a screenshot named "home_screen"
-
-Then on the "Home" screen:
-  Tap "Saved"
-  Wait for "1" seconds
-  Take a screenshot named "savedflyer_screen"
-  Tap "Back"
-Then on the "Home" screen:
-  Tap "Create"
-  Wait for "1" seconds
-  Take a screenshot named "createflyer_screen"
-  Tap "Take a Photo"
-  Wait for "2" seconds
-  Take a screenshot named "camera_screen"
-  Tap "Next"
-  Tap "Text"
-  Fill the form with "RIKSOF"
-  Tap Next
-  Wait for "1" seconds
-  Take a screenshot named "create-text-formating-screen"
-  Tap "Done"
+  Tap "SignIn"
   
-Then on the "Layers" screen:
-  Take a screenshot named "create-layers-screen"
-  Tap on "Share"
-  Take a screenshot named "share-screen"
+Then on the "Home" screen:
+  Tap "Settings"
+
+Then on the "Settings" screen:
+  Tap "Sign Out"
+  Confirm "Sign out"
+
+Then on the "SignIn" screen:
+  Tap "Forgot"
+
+Then on the "Forgot" screen:
   Tap "Back"
 
-Then on the "Home" screen:
-  Tap "Invite"
-  Wait for "1" seconds
-  Take a screenshot named "invitefriend_screen"
+Then on the "SignIn" screen:
+  Tap "SignUp"
+
+Then on the "SignUp" screen:
   Tap "Back"
+
+Then on the "Welcome" screen:
+  Tap "SignIn"
+
+Then on the "SignIn" screen:
+  Tap "Facebook"
 
 Then on the "Home" screen:
   Tap "Settings"
-  Wait for "1" seconds
-  Take a screenshot named "settings_screen"
-  Tap "Sharing Options"
-  Take screenshot named "sharing-setting_screen"
-  Tap "Back"
-  Tap "Account Setting"
-  Take screenshot named "account-setting_screen"
-  Tap "Back"
-  Tap "Sign Out"
-  Take screenshot named "signout_screen"
+  
+Then on the "Settings" screen:
+  Tap "SignOut"
+  Confirm "SignOut"
+
+Then on the "Welcome" screen:
+  Tap "SignIn"
+
+Then on the "SignIn" screen:
+  Tap "Twitter"
+
+Then on the "Home" screen:
+  Tap "Settings"
+  
+Then on the "Settings" screen:
+  Tap "SignOut"
+  Confirm "SignOut"
+ 
   
   
 

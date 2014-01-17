@@ -1,9 +1,9 @@
 class WelcomeScreen extends Screen
-  anchor: -> view.buttons()[0]
+  anchor: -> $('#Register');
 
   constructor: ->
     super 'welcome'
 
     extend @elements,
-    'Register' : -> view.buttons()[0],
-    'SignIn' : -> view.buttons()[1]
+    'Register' : -> $('#Register'),
+    'SignIn' : -> $('#SignIn')
