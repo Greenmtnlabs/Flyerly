@@ -7,14 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SettingViewController.h"
+#import "ShareSettingViewController.h"
 #import "FlyrAppDelegate.h"
 #import "AccountController.h"
 #import "Common.h"
 #import "HelpController.h"
-#import "SettingViewController.h"
+#import "ShareSettingViewController.h"
 #import "PhotoController.h"
-#import "AccountSelecter.h"
+#import "ProfileViewController.h"
 #import "InputViewController.h"
 #import "Singleton.h"
 #import "MainSettingCell.h"
@@ -22,15 +22,15 @@
 
 
 @class PhotoController,InputViewController,Singleton ;
-@class AccountController,LauchViewController,HelpController,SettingViewController,AccountSelecter;
+@class AccountController,LauchViewController,HelpController,ShareSettingViewController,ProfileViewController;
 @interface MainSettingViewController : UIViewController <UITableViewDelegate, MFMailComposeViewControllerDelegate>{
 
     NSMutableArray *category;
     NSMutableArray *groupCtg;
-    SettingViewController *oldsettingveiwcontroller;
+    ShareSettingViewController *oldsettingveiwcontroller;
     UIAlertView *warningAlert;
     PhotoController *ptController;
-    AccountSelecter *accountUpdater;
+    ProfileViewController *accountUpdater;
     Singleton *globle;
 
 }

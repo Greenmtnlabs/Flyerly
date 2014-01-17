@@ -41,8 +41,8 @@
 		0DFC531F109576AB00B18478 /* LoginController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DFC5318109576AB00B18478 /* LoginController.xib */; };
 		0DFC5320109576AB00B18478 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DFC5319109576AB00B18478 /* MainWindow.xib */; };
 		0DFC5321109576AB00B18478 /* PhotoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DFC531A109576AB00B18478 /* PhotoController.xib */; };
-		0DFC5322109576AB00B18478 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DFC531C109576AB00B18478 /* SettingViewController.m */; };
-		0DFC5323109576AB00B18478 /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DFC531D109576AB00B18478 /* SettingViewController.xib */; };
+		0DFC5322109576AB00B18478 /* ShareSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DFC531C109576AB00B18478 /* ShareSettingViewController.m */; };
+		0DFC5323109576AB00B18478 /* ShareSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DFC531D109576AB00B18478 /* ShareSettingViewController.xib */; };
 		0F734B541742737D0084A2F4 /* top_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F734B521742737D0084A2F4 /* top_bg.png */; };
 		0F734B551742737D0084A2F4 /* top_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F734B531742737D0084A2F4 /* top_bg@2x.png */; };
 		0F734B5617427B790084A2F4 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65B303FA171ED8C8006632E3 /* Accounts.framework */; };
@@ -741,7 +741,7 @@
 		2087B6C717C7B07D007A6A90 /* register-bg-iPhone4.png in Resources */ = {isa = PBXBuildFile; fileRef = 2087B6C417C7B07D007A6A90 /* register-bg-iPhone4.png */; };
 		2087B6C817C7B07D007A6A90 /* register-bg-iPhone4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2087B6C517C7B07D007A6A90 /* register-bg-iPhone4@2x.png */; };
 		2087B6C917C7B07D007A6A90 /* register-bg-iPhone5.png in Resources */ = {isa = PBXBuildFile; fileRef = 2087B6C617C7B07D007A6A90 /* register-bg-iPhone5.png */; };
-		208C684F186DAA59004A74F2 /* MySHKConfigurator.m in Sources */ = {isa = PBXBuildFile; fileRef = 208C684E186DAA59004A74F2 /* MySHKConfigurator.m */; };
+		208C684F186DAA59004A74F2 /* FlyerlyConfigurator.m in Sources */ = {isa = PBXBuildFile; fileRef = 208C684E186DAA59004A74F2 /* FlyerlyConfigurator.m */; };
 		208E35A217C1F5C500CE54BE /* SignInViewControllerIPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 208E35A117C1F5C500CE54BE /* SignInViewControllerIPhone5.xib */; };
 		208E35A417C20CC700CE54BE /* RegisterViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 208E35A317C20CC700CE54BE /* RegisterViewController_iPhone5.xib */; };
 		208E35A717C20E0100CE54BE /* tick.png in Resources */ = {isa = PBXBuildFile; fileRef = 208E35A517C20E0100CE54BE /* tick.png */; };
@@ -758,8 +758,8 @@
 		2091E4A217DA1323001428E5 /* symbolicon_button_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2091E49817DA1323001428E5 /* symbolicon_button_selected@2x.png */; };
 		2091E4A317DA1323001428E5 /* text_icon_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 2091E49917DA1323001428E5 /* text_icon_selected.png */; };
 		2091E4A417DA1323001428E5 /* text_icon_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2091E49A17DA1323001428E5 /* text_icon_selected@2x.png */; };
-		20920015184F40330034C4F6 /* AddFriendsDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 20920013184F40330034C4F6 /* AddFriendsDetail.m */; };
-		20920016184F40330034C4F6 /* AddFriendsDetail.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20920014184F40330034C4F6 /* AddFriendsDetail.xib */; };
+		20920015184F40330034C4F6 /* InviteFriendsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 20920013184F40330034C4F6 /* InviteFriendsCell.m */; };
+		20920016184F40330034C4F6 /* InviteFriendsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20920014184F40330034C4F6 /* InviteFriendsCell.xib */; };
 		2092FFCB184E00BF0034C4F6 /* flyerlylogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 2092FFC9184E00BF0034C4F6 /* flyerlylogo.png */; };
 		2092FFCC184E00BF0034C4F6 /* flyerlylogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2092FFCA184E00BF0034C4F6 /* flyerlylogo@2x.png */; };
 		20B865F91851EF0400484D7D /* checkgreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 20B865F71851EF0400484D7D /* checkgreen.png */; };
@@ -807,8 +807,8 @@
 		20ED041917CCB41F00DA702E /* SettingcellBack@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20ED041717CCB41F00DA702E /* SettingcellBack@2x.png */; };
 		20ED041C17CCBCB000DA702E /* t_email_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 20ED041A17CCBCB000DA702E /* t_email_button.png */; };
 		20ED041D17CCBCB000DA702E /* t_email_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20ED041B17CCBCB000DA702E /* t_email_button@2x.png */; };
-		20F4D8E017BA3D0A007B2DF5 /* AccountSelecter.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F4D8DE17BA3D09007B2DF5 /* AccountSelecter.m */; };
-		20F4D8E117BA3D0A007B2DF5 /* AccountSelecter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20F4D8DF17BA3D0A007B2DF5 /* AccountSelecter.xib */; };
+		20F4D8E017BA3D0A007B2DF5 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F4D8DE17BA3D09007B2DF5 /* ProfileViewController.m */; };
+		20F4D8E117BA3D0A007B2DF5 /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20F4D8DF17BA3D0A007B2DF5 /* ProfileViewController.xib */; };
 		20F4D8E517BA40EA007B2DF5 /* Singleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F4D8E417BA40EA007B2DF5 /* Singleton.m */; };
 		20F93DD317B2262200F6F88C /* MainSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F93DD117B2262200F6F88C /* MainSettingViewController.m */; };
 		20F93DD417B2262200F6F88C /* MainSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20F93DD217B2262200F6F88C /* MainSettingViewController.xib */; };
@@ -1233,8 +1233,8 @@
 		65DB59BC173018DC00F251B0 /* facebook_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 65DB59B8173018DC00F251B0 /* facebook_selected.png */; };
 		65DB59BD173018DC00F251B0 /* facebook_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65DB59B9173018DC00F251B0 /* facebook_selected@2x.png */; };
 		65DB59BE173018DC00F251B0 /* twitter_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65DB59BA173018DC00F251B0 /* twitter_selected@2x.png */; };
-		65E26157171C2EC400C485B5 /* AddFriendScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65E26156171C2EC400C485B5 /* AddFriendScreen.xib */; };
-		65E2615D171C2FA800C485B5 /* AddFriendsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E2615C171C2FA800C485B5 /* AddFriendsController.m */; };
+		65E26157171C2EC400C485B5 /* InviteFriendsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65E26156171C2EC400C485B5 /* InviteFriendsController.xib */; };
+		65E2615D171C2FA800C485B5 /* InviteFriendsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E2615C171C2FA800C485B5 /* InviteFriendsController.m */; };
 		65E26164171C345D00C485B5 /* facebook_tab_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E2615E171C345C00C485B5 /* facebook_tab_selected.png */; };
 		65E26165171C345D00C485B5 /* facebook_tab.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E2615F171C345C00C485B5 /* facebook_tab.png */; };
 		65E26166171C345D00C485B5 /* invite_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E26160171C345C00C485B5 /* invite_selected@2x.png */; };
@@ -1323,13 +1323,13 @@
 		0DF3A53B108E0E5C00D6C887 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		0DF3A53F108E0E5C00D6C887 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		0DF3A541108E0E5C00D6C887 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
-		0DFC5317109576AB00B18478 /* LauchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = LauchViewController.xib; path = Classes/LauchViewController.xib; sourceTree = "<group>"; };
+		0DFC5317109576AB00B18478 /* LauchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LauchViewController.xib; sourceTree = "<group>"; };
 		0DFC5318109576AB00B18478 /* LoginController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = LoginController.xib; path = Classes/LoginController.xib; sourceTree = "<group>"; };
 		0DFC5319109576AB00B18478 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MainWindow.xib; path = Classes/MainWindow.xib; sourceTree = "<group>"; };
 		0DFC531A109576AB00B18478 /* PhotoController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoController.xib; sourceTree = "<group>"; };
-		0DFC531B109576AB00B18478 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
-		0DFC531C109576AB00B18478 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
-		0DFC531D109576AB00B18478 /* SettingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SettingViewController.xib; path = Classes/SettingViewController.xib; sourceTree = "<group>"; };
+		0DFC531B109576AB00B18478 /* ShareSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareSettingViewController.h; sourceTree = "<group>"; };
+		0DFC531C109576AB00B18478 /* ShareSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareSettingViewController.m; sourceTree = "<group>"; };
+		0DFC531D109576AB00B18478 /* ShareSettingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShareSettingViewController.xib; sourceTree = "<group>"; };
 		0F734B521742737D0084A2F4 /* top_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = top_bg.png; sourceTree = "<group>"; };
 		0F734B531742737D0084A2F4 /* top_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "top_bg@2x.png"; sourceTree = "<group>"; };
 		0F7F02BB1765F7D300FC750F /* AlertViewBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AlertViewBackground.png; sourceTree = "<group>"; };
@@ -1442,10 +1442,10 @@
 		0F80C387178561DA00D36795 /* AccountController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountController.xib; sourceTree = "<group>"; };
 		0F80C389178578CB00D36795 /* RegisterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterController.h; sourceTree = "<group>"; };
 		0F80C38A178578CB00D36795 /* RegisterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterController.m; sourceTree = "<group>"; };
-		0F80C38C178578E400D36795 /* RegisterController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegisterController.xib; sourceTree = "<group>"; };
+		0F80C38C178578E400D36795 /* RegisterController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RegisterController.xib; path = ../RegisterController.xib; sourceTree = "<group>"; };
 		0F80C38E1785813E00D36795 /* SigninController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SigninController.h; sourceTree = "<group>"; };
 		0F80C38F1785813E00D36795 /* SigninController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SigninController.m; sourceTree = "<group>"; };
-		0F80C3911785815300D36795 /* SigninController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SigninController.xib; sourceTree = "<group>"; };
+		0F80C3911785815300D36795 /* SigninController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SigninController.xib; path = ../SigninController.xib; sourceTree = "<group>"; };
 		0F80C3951785B41300D36795 /* facebook_login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook_login.png; sourceTree = "<group>"; };
 		0F80C3961785B41300D36795 /* facebook_login@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook_login@2x.png"; sourceTree = "<group>"; };
 		0F80C39C1785B41300D36795 /* signin_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = signin_button.png; sourceTree = "<group>"; };
@@ -1589,7 +1589,7 @@
 		0FEDD787174A91A800DF71C0 /* PLCrashSysctl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLCrashSysctl.h; path = Crittercism/PLCrashSysctl.h; sourceTree = "<group>"; };
 		0FEF2D95174E5C5300FDD8C9 /* Camera_Gallery_view_Horizontal_separator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Camera_Gallery_view_Horizontal_separator.png; sourceTree = "<group>"; };
 		0FEF2D96174E5C5300FDD8C9 /* Camera_Gallery_view_Horizontal_separator@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Camera_Gallery_view_Horizontal_separator@2x.png"; sourceTree = "<group>"; };
-		0FEF2D99174E65B100FDD8C9 /* HelpController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HelpController.xib; sourceTree = "<group>"; };
+		0FEF2D99174E65B100FDD8C9 /* HelpController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HelpController.xib; path = ../HelpController.xib; sourceTree = "<group>"; };
 		0FEF2D9B174E665100FDD8C9 /* help_done.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = help_done.png; sourceTree = "<group>"; };
 		0FEF2D9C174E665100FDD8C9 /* help_done@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "help_done@2x.png"; sourceTree = "<group>"; };
 		0FEF2D9F174E666C00FDD8C9 /* cross.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cross.png; sourceTree = "<group>"; };
@@ -2063,7 +2063,7 @@
 		203E0B7517DDDD720039C3A7 /* InputViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = InputViewController.xib; path = Classes/InputViewController.xib; sourceTree = "<group>"; };
 		2044FF93185088ED00A26B42 /* MainSettingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainSettingCell.h; sourceTree = "<group>"; };
 		2044FF94185088ED00A26B42 /* MainSettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainSettingCell.m; sourceTree = "<group>"; };
-		2044FF95185088ED00A26B42 /* MainSettingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainSettingCell.xib; path = Classes/MainSettingCell.xib; sourceTree = "<group>"; };
+		2044FF95185088ED00A26B42 /* MainSettingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainSettingCell.xib; sourceTree = "<group>"; };
 		2061ED8917FF210300E9BECA /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		2061ED8B17FF212100E9BECA /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		2064B1FB18804B3B00DE7147 /* greenButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greenButton.png; sourceTree = "<group>"; };
@@ -2089,14 +2089,14 @@
 		2086F91017C4C96F00664123 /* cp_share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cp_share@2x.png"; sourceTree = "<group>"; };
 		2087B6BD17C73B40007A6A90 /* ResetPWViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResetPWViewController.h; sourceTree = "<group>"; };
 		2087B6BE17C73B40007A6A90 /* ResetPWViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResetPWViewController.m; sourceTree = "<group>"; };
-		2087B6BF17C73B40007A6A90 /* ResetPWViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ResetPWViewController.xib; path = Classes/ResetPWViewController.xib; sourceTree = "<group>"; };
+		2087B6BF17C73B40007A6A90 /* ResetPWViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResetPWViewController.xib; sourceTree = "<group>"; };
 		2087B6C417C7B07D007A6A90 /* register-bg-iPhone4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "register-bg-iPhone4.png"; sourceTree = "<group>"; };
 		2087B6C517C7B07D007A6A90 /* register-bg-iPhone4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "register-bg-iPhone4@2x.png"; sourceTree = "<group>"; };
 		2087B6C617C7B07D007A6A90 /* register-bg-iPhone5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "register-bg-iPhone5.png"; sourceTree = "<group>"; };
-		208C684D186DAA59004A74F2 /* MySHKConfigurator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySHKConfigurator.h; sourceTree = "<group>"; };
-		208C684E186DAA59004A74F2 /* MySHKConfigurator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySHKConfigurator.m; sourceTree = "<group>"; };
-		208E35A117C1F5C500CE54BE /* SignInViewControllerIPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignInViewControllerIPhone5.xib; sourceTree = "<group>"; };
-		208E35A317C20CC700CE54BE /* RegisterViewController_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegisterViewController_iPhone5.xib; sourceTree = "<group>"; };
+		208C684D186DAA59004A74F2 /* FlyerlyConfigurator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlyerlyConfigurator.h; sourceTree = "<group>"; };
+		208C684E186DAA59004A74F2 /* FlyerlyConfigurator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlyerlyConfigurator.m; sourceTree = "<group>"; };
+		208E35A117C1F5C500CE54BE /* SignInViewControllerIPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SignInViewControllerIPhone5.xib; path = ../SignInViewControllerIPhone5.xib; sourceTree = "<group>"; };
+		208E35A317C20CC700CE54BE /* RegisterViewController_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RegisterViewController_iPhone5.xib; path = ../RegisterViewController_iPhone5.xib; sourceTree = "<group>"; };
 		208E35A517C20E0100CE54BE /* tick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tick.png; sourceTree = "<group>"; };
 		208E35A617C20E0100CE54BE /* tick@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tick@2x.png"; sourceTree = "<group>"; };
 		208E35A917C2246C00CE54BE /* AcountViewControlleriPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AcountViewControlleriPhone5.xib; sourceTree = "<group>"; };
@@ -2111,9 +2111,9 @@
 		2091E49817DA1323001428E5 /* symbolicon_button_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "symbolicon_button_selected@2x.png"; sourceTree = "<group>"; };
 		2091E49917DA1323001428E5 /* text_icon_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = text_icon_selected.png; sourceTree = "<group>"; };
 		2091E49A17DA1323001428E5 /* text_icon_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "text_icon_selected@2x.png"; sourceTree = "<group>"; };
-		20920012184F40330034C4F6 /* AddFriendsDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFriendsDetail.h; sourceTree = "<group>"; };
-		20920013184F40330034C4F6 /* AddFriendsDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFriendsDetail.m; sourceTree = "<group>"; };
-		20920014184F40330034C4F6 /* AddFriendsDetail.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AddFriendsDetail.xib; path = Classes/AddFriendsDetail.xib; sourceTree = "<group>"; };
+		20920012184F40330034C4F6 /* InviteFriendsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteFriendsCell.h; sourceTree = "<group>"; };
+		20920013184F40330034C4F6 /* InviteFriendsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteFriendsCell.m; sourceTree = "<group>"; };
+		20920014184F40330034C4F6 /* InviteFriendsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteFriendsCell.xib; sourceTree = "<group>"; };
 		2092FFC9184E00BF0034C4F6 /* flyerlylogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flyerlylogo.png; sourceTree = "<group>"; };
 		2092FFCA184E00BF0034C4F6 /* flyerlylogo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flyerlylogo@2x.png"; sourceTree = "<group>"; };
 		20B865F71851EF0400484D7D /* checkgreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkgreen.png; sourceTree = "<group>"; };
@@ -2161,14 +2161,14 @@
 		20ED041717CCB41F00DA702E /* SettingcellBack@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SettingcellBack@2x.png"; sourceTree = "<group>"; };
 		20ED041A17CCBCB000DA702E /* t_email_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = t_email_button.png; sourceTree = "<group>"; };
 		20ED041B17CCBCB000DA702E /* t_email_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "t_email_button@2x.png"; sourceTree = "<group>"; };
-		20F4D8DD17BA3D09007B2DF5 /* AccountSelecter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountSelecter.h; sourceTree = "<group>"; };
-		20F4D8DE17BA3D09007B2DF5 /* AccountSelecter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountSelecter.m; sourceTree = "<group>"; };
-		20F4D8DF17BA3D0A007B2DF5 /* AccountSelecter.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AccountSelecter.xib; path = Classes/AccountSelecter.xib; sourceTree = "<group>"; };
+		20F4D8DD17BA3D09007B2DF5 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		20F4D8DE17BA3D09007B2DF5 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		20F4D8DF17BA3D0A007B2DF5 /* ProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
 		20F4D8E317BA40EA007B2DF5 /* Singleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Singleton.h; sourceTree = "<group>"; };
 		20F4D8E417BA40EA007B2DF5 /* Singleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Singleton.m; sourceTree = "<group>"; };
 		20F93DD017B2262200F6F88C /* MainSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainSettingViewController.h; sourceTree = "<group>"; };
 		20F93DD117B2262200F6F88C /* MainSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainSettingViewController.m; sourceTree = "<group>"; };
-		20F93DD217B2262200F6F88C /* MainSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainSettingViewController.xib; path = Classes/MainSettingViewController.xib; sourceTree = "<group>"; };
+		20F93DD217B2262200F6F88C /* MainSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainSettingViewController.xib; sourceTree = "<group>"; };
 		20FA7E6F1872AAF50057C3F3 /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
 		20FA7E701872AAF50057C3F3 /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraViewController.m; sourceTree = "<group>"; };
 		20FA7E711872AAF50057C3F3 /* CameraViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraViewController.xib; sourceTree = "<group>"; };
@@ -2328,7 +2328,7 @@
 		49B88986188652A2003766AD /* NSData+Extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Extras.h"; sourceTree = "<group>"; };
 		49B88987188652A2003766AD /* NSData+Extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Extras.m"; sourceTree = "<group>"; };
 		6501CAEF173242FC00A89E59 /* Swiss_721_Black_Extended_BT.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Swiss_721_Black_Extended_BT.ttf; path = Data/fonts/Swiss_721_Black_Extended_BT.ttf; sourceTree = "<group>"; };
-		6501CAF1173249C900A89E59 /* LauchViewControllerIPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LauchViewControllerIPhone5.xib; sourceTree = "<group>"; };
+		6501CAF1173249C900A89E59 /* LauchViewControllerIPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LauchViewControllerIPhone5.xib; path = ../LauchViewControllerIPhone5.xib; sourceTree = "<group>"; };
 		6501CAF31732654B00A89E59 /* share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share.png; sourceTree = "<group>"; };
 		6501CAF41732654B00A89E59 /* share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share@2x.png"; sourceTree = "<group>"; };
 		6513C1931716C3DB00355FC3 /* cell_bg_first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cell_bg_first.png; sourceTree = "<group>"; };
@@ -2604,9 +2604,9 @@
 		65DB59B8173018DC00F251B0 /* facebook_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook_selected.png; sourceTree = "<group>"; };
 		65DB59B9173018DC00F251B0 /* facebook_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook_selected@2x.png"; sourceTree = "<group>"; };
 		65DB59BA173018DC00F251B0 /* twitter_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter_selected@2x.png"; sourceTree = "<group>"; };
-		65E26156171C2EC400C485B5 /* AddFriendScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddFriendScreen.xib; sourceTree = "<group>"; };
-		65E2615B171C2FA800C485B5 /* AddFriendsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFriendsController.h; sourceTree = "<group>"; };
-		65E2615C171C2FA800C485B5 /* AddFriendsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFriendsController.m; sourceTree = "<group>"; };
+		65E26156171C2EC400C485B5 /* InviteFriendsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = InviteFriendsController.xib; path = ../InviteFriendsController.xib; sourceTree = "<group>"; };
+		65E2615B171C2FA800C485B5 /* InviteFriendsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteFriendsController.h; sourceTree = "<group>"; };
+		65E2615C171C2FA800C485B5 /* InviteFriendsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteFriendsController.m; sourceTree = "<group>"; };
 		65E2615E171C345C00C485B5 /* facebook_tab_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook_tab_selected.png; sourceTree = "<group>"; };
 		65E2615F171C345C00C485B5 /* facebook_tab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook_tab.png; sourceTree = "<group>"; };
 		65E26160171C345C00C485B5 /* invite_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "invite_selected@2x.png"; sourceTree = "<group>"; };
@@ -2708,56 +2708,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		080E96DDFE201D6D7F000001 /* Classes */ = {
+		080E96DDFE201D6D7F000001 /* FlyerlyClasses */ = {
 			isa = PBXGroup;
 			children = (
-				2002C8981888CF3F005B18C9 /* ShareScreen */,
-				2002C89218888A98005B18C9 /* SavedFlyers */,
-				2032DCA718719D7F007036B2 /* NBU */,
-				208C6850186DAB38004A74F2 /* ShareKitConfig */,
-				49997FF817E07F7300CF1038 /* Categories */,
-				20F4D8E217BA40A5007B2DF5 /* MyGlobleClass */,
-				0DF3A309108DF33D00D6C887 /* Common.h */,
 				1D3623240D0F684500981E51 /* FlyrAppDelegate.h */,
 				1D3623250D0F684500981E51 /* FlyrAppDelegate.m */,
-				0F80C38E1785813E00D36795 /* SigninController.h */,
-				0F80C38F1785813E00D36795 /* SigninController.m */,
+				0DF3A309108DF33D00D6C887 /* Common.h */,
+				20F3597B1888DBEE001376B6 /* FlyerMainScreen */,
+				20F3597C1888DC8A001376B6 /* CreateFlyer */,
+				20F4D8E217BA40A5007B2DF5 /* MyGlobleClass */,
+				208C6850186DAB38004A74F2 /* Config */,
+				49997FF817E07F7300CF1038 /* Categories */,
+				20F359741888D5B9001376B6 /* LoginControllers */,
+				2002C8981888CF3F005B18C9 /* ShareScreen */,
+				20F359781888D92E001376B6 /* InviteScreen */,
+				2002C89218888A98005B18C9 /* SavedFlyers */,
+				2032DCA718719D7F007036B2 /* NBU */,
+				20F359761888D69B001376B6 /* HelpScreen */,
+				20F359791888DA9C001376B6 /* Settings */,
+				20F3597D1888DCE1001376B6 /* UserProfile */,
 				E8C7C36610976BFC0064935A /* SaveFlyerController.h */,
 				E8C7C36710976BFC0064935A /* SaveFlyerController.m */,
 				654B255117202B360047C8F6 /* AfterUpdateController.h */,
 				654B255217202B360047C8F6 /* AfterUpdateController.m */,
 				65BDB2DD17341D290084E032 /* CustomLabel.h */,
 				65BDB2DE17341D290084E032 /* CustomLabel.m */,
-				0FEF2DA7174E66FC00FDD8C9 /* HelpController.h */,
-				0FEF2DA8174E66FC00FDD8C9 /* HelpController.m */,
 				0F80C384178561C200D36795 /* AccountController.h */,
 				0F80C385178561C200D36795 /* AccountController.m */,
-				0F80C389178578CB00D36795 /* RegisterController.h */,
-				0F80C38A178578CB00D36795 /* RegisterController.m */,
-				2087B6BD17C73B40007A6A90 /* ResetPWViewController.h */,
-				2087B6BE17C73B40007A6A90 /* ResetPWViewController.m */,
 				203E0B7317DDDD720039C3A7 /* InputViewController.h */,
 				203E0B7417DDDD720039C3A7 /* InputViewController.m */,
 				49997FF517DF786400CF1038 /* ParentViewController.h */,
 				49997FF617DF786400CF1038 /* ParentViewController.m */,
-				65E2615B171C2FA800C485B5 /* AddFriendsController.h */,
-				65E2615C171C2FA800C485B5 /* AddFriendsController.m */,
-				20920012184F40330034C4F6 /* AddFriendsDetail.h */,
-				20920013184F40330034C4F6 /* AddFriendsDetail.m */,
-				20F93DD017B2262200F6F88C /* MainSettingViewController.h */,
-				20F93DD117B2262200F6F88C /* MainSettingViewController.m */,
-				2044FF93185088ED00A26B42 /* MainSettingCell.h */,
-				2044FF94185088ED00A26B42 /* MainSettingCell.m */,
-				0DFC531B109576AB00B18478 /* SettingViewController.h */,
-				0DFC531C109576AB00B18478 /* SettingViewController.m */,
-				20F4D8DD17BA3D09007B2DF5 /* AccountSelecter.h */,
-				20F4D8DE17BA3D09007B2DF5 /* AccountSelecter.m */,
-				0DF3A2C1108DF1D200D6C887 /* LauchViewController.h */,
-				0DF3A2C2108DF1D200D6C887 /* LauchViewController.m */,
-				0DF3A2C3108DF1D200D6C887 /* PhotoController.h */,
-				0DF3A2C4108DF1D200D6C887 /* PhotoController.m */,
-				0DFC531A109576AB00B18478 /* PhotoController.xib */,
 			);
+			name = FlyerlyClasses;
 			path = Classes;
 			sourceTree = "<group>";
 		};
@@ -3880,13 +3863,13 @@
 			name = CropImage;
 			sourceTree = "<group>";
 		};
-		208C6850186DAB38004A74F2 /* ShareKitConfig */ = {
+		208C6850186DAB38004A74F2 /* Config */ = {
 			isa = PBXGroup;
 			children = (
-				208C684D186DAA59004A74F2 /* MySHKConfigurator.h */,
-				208C684E186DAA59004A74F2 /* MySHKConfigurator.m */,
+				208C684D186DAA59004A74F2 /* FlyerlyConfigurator.h */,
+				208C684E186DAA59004A74F2 /* FlyerlyConfigurator.m */,
 			);
-			name = ShareKitConfig;
+			name = Config;
 			sourceTree = "<group>";
 		};
 		20D7473D17BE77C800966BA6 /* NewLayOuts */ = {
@@ -3948,6 +3931,118 @@
 			name = NewLayOuts;
 			sourceTree = "<group>";
 		};
+		20F359741888D5B9001376B6 /* LoginControllers */ = {
+			isa = PBXGroup;
+			children = (
+				0F80C38E1785813E00D36795 /* SigninController.h */,
+				0F80C38F1785813E00D36795 /* SigninController.m */,
+				0F80C3911785815300D36795 /* SigninController.xib */,
+				208E35A117C1F5C500CE54BE /* SignInViewControllerIPhone5.xib */,
+				20F359751888D617001376B6 /* RegisterScreen */,
+				20F359771888D81F001376B6 /* ResetPassword */,
+			);
+			name = LoginControllers;
+			sourceTree = "<group>";
+		};
+		20F359751888D617001376B6 /* RegisterScreen */ = {
+			isa = PBXGroup;
+			children = (
+				0F80C389178578CB00D36795 /* RegisterController.h */,
+				0F80C38A178578CB00D36795 /* RegisterController.m */,
+				0F80C38C178578E400D36795 /* RegisterController.xib */,
+				208E35A317C20CC700CE54BE /* RegisterViewController_iPhone5.xib */,
+			);
+			name = RegisterScreen;
+			sourceTree = "<group>";
+		};
+		20F359761888D69B001376B6 /* HelpScreen */ = {
+			isa = PBXGroup;
+			children = (
+				0FEF2DA7174E66FC00FDD8C9 /* HelpController.h */,
+				0FEF2DA8174E66FC00FDD8C9 /* HelpController.m */,
+				0FEF2D99174E65B100FDD8C9 /* HelpController.xib */,
+			);
+			name = HelpScreen;
+			sourceTree = "<group>";
+		};
+		20F359771888D81F001376B6 /* ResetPassword */ = {
+			isa = PBXGroup;
+			children = (
+				2087B6BD17C73B40007A6A90 /* ResetPWViewController.h */,
+				2087B6BE17C73B40007A6A90 /* ResetPWViewController.m */,
+				2087B6BF17C73B40007A6A90 /* ResetPWViewController.xib */,
+			);
+			name = ResetPassword;
+			sourceTree = "<group>";
+		};
+		20F359781888D92E001376B6 /* InviteScreen */ = {
+			isa = PBXGroup;
+			children = (
+				65E2615B171C2FA800C485B5 /* InviteFriendsController.h */,
+				65E2615C171C2FA800C485B5 /* InviteFriendsController.m */,
+				65E26156171C2EC400C485B5 /* InviteFriendsController.xib */,
+				20920012184F40330034C4F6 /* InviteFriendsCell.h */,
+				20920013184F40330034C4F6 /* InviteFriendsCell.m */,
+				20920014184F40330034C4F6 /* InviteFriendsCell.xib */,
+			);
+			name = InviteScreen;
+			sourceTree = "<group>";
+		};
+		20F359791888DA9C001376B6 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				20F93DD017B2262200F6F88C /* MainSettingViewController.h */,
+				20F93DD117B2262200F6F88C /* MainSettingViewController.m */,
+				20F93DD217B2262200F6F88C /* MainSettingViewController.xib */,
+				2044FF93185088ED00A26B42 /* MainSettingCell.h */,
+				2044FF94185088ED00A26B42 /* MainSettingCell.m */,
+				2044FF95185088ED00A26B42 /* MainSettingCell.xib */,
+				20F3597A1888DB06001376B6 /* ShareSetting */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
+		20F3597A1888DB06001376B6 /* ShareSetting */ = {
+			isa = PBXGroup;
+			children = (
+				0DFC531B109576AB00B18478 /* ShareSettingViewController.h */,
+				0DFC531C109576AB00B18478 /* ShareSettingViewController.m */,
+				0DFC531D109576AB00B18478 /* ShareSettingViewController.xib */,
+			);
+			name = ShareSetting;
+			sourceTree = "<group>";
+		};
+		20F3597B1888DBEE001376B6 /* FlyerMainScreen */ = {
+			isa = PBXGroup;
+			children = (
+				0DF3A2C1108DF1D200D6C887 /* LauchViewController.h */,
+				0DF3A2C2108DF1D200D6C887 /* LauchViewController.m */,
+				0DFC5317109576AB00B18478 /* LauchViewController.xib */,
+				6501CAF1173249C900A89E59 /* LauchViewControllerIPhone5.xib */,
+			);
+			name = FlyerMainScreen;
+			sourceTree = "<group>";
+		};
+		20F3597C1888DC8A001376B6 /* CreateFlyer */ = {
+			isa = PBXGroup;
+			children = (
+				0DF3A2C3108DF1D200D6C887 /* PhotoController.h */,
+				0DF3A2C4108DF1D200D6C887 /* PhotoController.m */,
+				0DFC531A109576AB00B18478 /* PhotoController.xib */,
+			);
+			name = CreateFlyer;
+			sourceTree = "<group>";
+		};
+		20F3597D1888DCE1001376B6 /* UserProfile */ = {
+			isa = PBXGroup;
+			children = (
+				20F4D8DD17BA3D09007B2DF5 /* ProfileViewController.h */,
+				20F4D8DE17BA3D09007B2DF5 /* ProfileViewController.m */,
+				20F4D8DF17BA3D0A007B2DF5 /* ProfileViewController.xib */,
+			);
+			name = UserProfile;
+			sourceTree = "<group>";
+		};
 		20F4D8E217BA40A5007B2DF5 /* MyGlobleClass */ = {
 			isa = PBXGroup;
 			children = (
@@ -3975,7 +4070,7 @@
 				2061ED8917FF210300E9BECA /* icon@2x.png */,
 				20CC6923180DA44C002F2E6F /* icon-60.png */,
 				20CC6924180DA44C002F2E6F /* icon-120.png */,
-				080E96DDFE201D6D7F000001 /* Classes */,
+				080E96DDFE201D6D7F000001 /* FlyerlyClasses */,
 				0DF3A2D7108DF27200D6C887 /* ExternalFrameworks */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -4002,33 +4097,19 @@
 				65CC0AB5171802DF003D0BE7 /* Settings.bundle */,
 				8D1107310486CEB800E47090 /* Flyr-Info.plist */,
 				203E0B7517DDDD720039C3A7 /* InputViewController.xib */,
-				2087B6BF17C73B40007A6A90 /* ResetPWViewController.xib */,
-				20F4D8DF17BA3D0A007B2DF5 /* AccountSelecter.xib */,
-				0DFC5317109576AB00B18478 /* LauchViewController.xib */,
-				65E26156171C2EC400C485B5 /* AddFriendScreen.xib */,
-				20920014184F40330034C4F6 /* AddFriendsDetail.xib */,
 				0DFC5318109576AB00B18478 /* LoginController.xib */,
 				0DFC5319109576AB00B18478 /* MainWindow.xib */,
 				E8C7C36810976BFC0064935A /* SaveFlyerController.xib */,
-				20F93DD217B2262200F6F88C /* MainSettingViewController.xib */,
-				2044FF95185088ED00A26B42 /* MainSettingCell.xib */,
-				0DFC531D109576AB00B18478 /* SettingViewController.xib */,
 				0DF3A361108DF47400D6C887 /* Data */,
 				6513C1AB1716FE0F00355FC3 /* Fonts */,
 				65CC0AB9171803FB003D0BE7 /* Localizable.strings */,
 				65E26180171C59D100C485B5 /* AddFriendItem.xib */,
 				654B254F17202B1C0047C8F6 /* AfterUpdateController.xib */,
 				6560C1C01727F836005BE8DD /* CustomPhotoController.xib */,
-				0FEF2D99174E65B100FDD8C9 /* HelpController.xib */,
 				0FCC3A27177DD3080046484C /* LocationItem.xib */,
 				0FCC3A2C177DD8BF0046484C /* LocationController.xib */,
 				0FD247D6178453C2003CA6DD /* SearchLocationItem.xib */,
 				0F80C387178561DA00D36795 /* AccountController.xib */,
-				0F80C38C178578E400D36795 /* RegisterController.xib */,
-				0F80C3911785815300D36795 /* SigninController.xib */,
-				6501CAF1173249C900A89E59 /* LauchViewControllerIPhone5.xib */,
-				208E35A117C1F5C500CE54BE /* SignInViewControllerIPhone5.xib */,
-				208E35A317C20CC700CE54BE /* RegisterViewController_iPhone5.xib */,
 				208E35A917C2246C00CE54BE /* AcountViewControlleriPhone5.xib */,
 			);
 			name = Resources;
@@ -4431,7 +4512,7 @@
 				0DFC531F109576AB00B18478 /* LoginController.xib in Resources */,
 				0DFC5320109576AB00B18478 /* MainWindow.xib in Resources */,
 				0DFC5321109576AB00B18478 /* PhotoController.xib in Resources */,
-				0DFC5323109576AB00B18478 /* SettingViewController.xib in Resources */,
+				0DFC5323109576AB00B18478 /* ShareSettingViewController.xib in Resources */,
 				0D74CA081095EE5F00179C4F /* facebook.png in Resources */,
 				0D3BA0EC1096F55300A8064E /* cell.png in Resources */,
 				0D3BA19810970EB700A8064E /* navBar.png in Resources */,
@@ -4614,7 +4695,7 @@
 				6513C1A21716E04B00355FC3 /* blue_flyer_dot@2x.png in Resources */,
 				65CC0AB7171803FB003D0BE7 /* Localizable.strings in Resources */,
 				65CC0AB6171802DF003D0BE7 /* Settings.bundle in Resources */,
-				65E26157171C2EC400C485B5 /* AddFriendScreen.xib in Resources */,
+				65E26157171C2EC400C485B5 /* InviteFriendsController.xib in Resources */,
 				65E26164171C345D00C485B5 /* facebook_tab_selected.png in Resources */,
 				65E26165171C345D00C485B5 /* facebook_tab.png in Resources */,
 				20714DF3187F1B9D000D6838 /* cameraline.png in Resources */,
@@ -4762,7 +4843,7 @@
 				65DB59AA172FAD6200F251B0 /* save_bg@2x.png in Resources */,
 				65DB59AB172FAD6200F251B0 /* sms_share_selected.png in Resources */,
 				65DB59AC172FAD6200F251B0 /* sms_share_selected@2x.png in Resources */,
-				20920016184F40330034C4F6 /* AddFriendsDetail.xib in Resources */,
+				20920016184F40330034C4F6 /* InviteFriendsCell.xib in Resources */,
 				65DB59AD172FAD6200F251B0 /* sms_share.png in Resources */,
 				65DB59AE172FAD6200F251B0 /* sms_share@2x.png in Resources */,
 				65DB59AF172FAD6200F251B0 /* tumblr_share_selected.png in Resources */,
@@ -5158,7 +5239,7 @@
 				0F805AD7179E92AD002AEA24 /* flash_icon_off.png in Resources */,
 				0F805AD8179E92AD002AEA24 /* flash_icon_off@x.png in Resources */,
 				20F93DD417B2262200F6F88C /* MainSettingViewController.xib in Resources */,
-				20F4D8E117BA3D0A007B2DF5 /* AccountSelecter.xib in Resources */,
+				20F4D8E117BA3D0A007B2DF5 /* ProfileViewController.xib in Resources */,
 				202233A317BD2A1F0093DD4E /* back_button.png in Resources */,
 				202233A417BD2A1F0093DD4E /* back_button@2x.png in Resources */,
 				2034BFB217BE06BE003C15B0 /* menu_button.png in Resources */,
@@ -5665,21 +5746,21 @@
 				0D4903BB1091893B00855C30 /* FlyrViewController.m in Sources */,
 				202C47FC187D6E4B00FE0975 /* BitlyRequest.m in Sources */,
 				E8A7347D1092CFF300661AAD /* ShareViewController.m in Sources */,
-				208C684F186DAA59004A74F2 /* MySHKConfigurator.m in Sources */,
+				208C684F186DAA59004A74F2 /* FlyerlyConfigurator.m in Sources */,
 				2032DCD01871BDFF007036B2 /* CropViewController.m in Sources */,
 				49B8898A188652A2003766AD /* NSData+Extras.m in Sources */,
 				202C4803187D6E4B00FE0975 /* BitlyURLShortener.m in Sources */,
-				0DFC5322109576AB00B18478 /* SettingViewController.m in Sources */,
+				0DFC5322109576AB00B18478 /* ShareSettingViewController.m in Sources */,
 				2002C89618888CD4005B18C9 /* SaveFlyerCell.m in Sources */,
 				E8C7C36910976BFC0064935A /* SaveFlyerController.m in Sources */,
 				200384741875A357008909F9 /* PresetFilterViewController.m in Sources */,
 				202C4801187D6E4B00FE0975 /* BitlyTwitterOAuthManager.m in Sources */,
 				49B8897D1886524D003766AD /* LoadingView.m in Sources */,
 				202C47FF187D6E4B00FE0975 /* BitlyTweetSheetAccountSelector.m in Sources */,
-				65E2615D171C2FA800C485B5 /* AddFriendsController.m in Sources */,
+				65E2615D171C2FA800C485B5 /* InviteFriendsController.m in Sources */,
 				654B255317202B360047C8F6 /* AfterUpdateController.m in Sources */,
 				2032DCC91871B5DC007036B2 /* GalleryViewController.m in Sources */,
-				20920015184F40330034C4F6 /* AddFriendsDetail.m in Sources */,
+				20920015184F40330034C4F6 /* InviteFriendsCell.m in Sources */,
 				49B8898118865273003766AD /* Reachability.m in Sources */,
 				202C4827187D7A6B00FE0975 /* CJSONDeserializer.m in Sources */,
 				65BDB2DF17341D290084E032 /* CustomLabel.m in Sources */,
@@ -5694,7 +5775,7 @@
 				0F80C38B178578CB00D36795 /* RegisterController.m in Sources */,
 				0F80C3901785813E00D36795 /* SigninController.m in Sources */,
 				20F93DD317B2262200F6F88C /* MainSettingViewController.m in Sources */,
-				20F4D8E017BA3D0A007B2DF5 /* AccountSelecter.m in Sources */,
+				20F4D8E017BA3D0A007B2DF5 /* ProfileViewController.m in Sources */,
 				20F4D8E517BA40EA007B2DF5 /* Singleton.m in Sources */,
 				202C4828187D7A6B00FE0975 /* CJSONScanner.m in Sources */,
 				202C47FD187D6E4B00FE0975 /* BitlyTextView.m in Sources */,

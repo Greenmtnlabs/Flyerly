@@ -6,7 +6,7 @@
 //
 //
 
-#import "AddFriendsController.h"
+#import "InviteFriendsController.h"
 #import "Common.h"
 #import <QuartzCore/QuartzCore.h>
 #import "FlyrAppDelegate.h"
@@ -16,7 +16,7 @@
 #import "HelpController.h"
 #import "Flurry.h"
 
-@implementation AddFriendsController
+@implementation InviteFriendsController
 @synthesize uiTableView, contactsArray, deviceContactItems, contactsLabel, facebookLabel, twitterLabel, doneLabel, selectAllLabel, unSelectAllLabel, inviteLabel, contactsButton, facebookButton, twitterButton, loadingView, searchTextField, facebookArray, twitterArray,fbinvited,Twitterinvited,iPhoneinvited;
 @synthesize contactBackupArray, facebookBackupArray, twitterBackupArray;
 
@@ -248,7 +248,7 @@ BOOL selectAll;
  */
 - (IBAction)loadFacebookContacts:(UIButton *)sender{
     
-    if([AddFriendsController connected]){
+    if([InviteFriendsController connected]){
         contactsCount = 0;
         invited = NO;
 
@@ -405,7 +405,7 @@ int totalCount = 0;
  */
 - (IBAction)loadTwitterContacts:(UIButton *)sender{
     
-    if([AddFriendsController connected]){
+    if([InviteFriendsController connected]){
         contactsCount = 0;
         invited = NO;
         if(selectedTab == TWITTER_TAB){
@@ -919,12 +919,12 @@ NSMutableDictionary *selectedIdentifierDictionary;
     static NSString *CellIdentifier = @"InviteCell";
     
     // Create My custom cell view
-    AddFriendsDetail *cell = (AddFriendsDetail *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    InviteFriendsCell *cell = (InviteFriendsCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     [cell setAccessoryType:UITableViewCellAccessoryNone];
     
     if ( cell == nil ) {
-        cell = [[AddFriendsDetail alloc] initWithFrame:CGRectZero] ;
+        cell = [[InviteFriendsCell alloc] initWithFrame:CGRectZero] ;
         
     }
     [cell setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];

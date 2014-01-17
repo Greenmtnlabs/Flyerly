@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AddFriendsDetail : UITableViewCell
+@interface InviteFriendsCell : UITableViewCell
 
 
 @property (nonatomic,strong)IBOutlet UIImageView *imgview;

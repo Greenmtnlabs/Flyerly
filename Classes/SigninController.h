@@ -11,12 +11,12 @@
 #import "RegisterController.h"
 #import <Parse/Parse.h>
 #import "Singleton.h"
-#import "AccountSelecter.h"
+#import "ProfileViewController.h"
 #import "ResetPWViewController.h"
 #import "ParentViewController.h"
 
 
-@class AccountSelecter,Singleton,RegisterController,ResetPWViewController;
+@class ProfileViewController,Singleton,RegisterController,ResetPWViewController;
 
 @interface SigninController : ParentViewController <PFLogInViewControllerDelegate,FBLoginViewDelegate,UIActionSheetDelegate >{
     
@@ -36,7 +36,7 @@
 
     LauchViewController *launchController;
     RegisterController *registerController;
-    AccountSelecter *actSelecter;
+    ProfileViewController *actSelecter;
     Singleton *globle;
     NSArray *twitterAccounts;
     UIView *waiting;

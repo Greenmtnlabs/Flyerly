@@ -21,11 +21,11 @@
 #import "Reachability.h"
 #import "AsyncImageView.h"
 #import "Singleton.h"
-#import "AddFriendsDetail.h"
+#import "InviteFriendsCell.h"
 
 @class LoadingView,Singleton;
 
-@interface AddFriendsController : UIViewController<UITableViewDelegate,UITableViewDataSource,MFMessageComposeViewControllerDelegate,UITextFieldDelegate, UIActionSheetDelegate>{
+@interface InviteFriendsController : UIViewController<UITableViewDelegate,UITableViewDataSource,MFMessageComposeViewControllerDelegate,UITextFieldDelegate, UIActionSheetDelegate>{
     Singleton *globle;
     IBOutlet UILabel *contactsLabel;
     IBOutlet UILabel *facebookLabel;

@@ -9,15 +9,15 @@
 #import "LauchViewController.h"
 #import "PhotoController.h"
 #import "FlyrViewController.h"
-#import "SettingViewController.h"
-#import "AddFriendsController.h"
+#import "ShareSettingViewController.h"
+#import "InviteFriendsController.h"
 #import "FlyrAppDelegate.h"
 #import "ShareViewController.h"
 #import "Common.h"
 #import "HelpController.h"
 #import "Flurry.h"
 #import "SHKConfiguration.h"
-#import "MySHKConfigurator.h"
+#import "FlyerlyConfigurator.h"
 
 @interface LauchViewController () 
 
@@ -75,7 +75,7 @@
 // Load invite friends
 -(IBAction)doInvite:(id)sender{
     
-	addFriendsController = [[AddFriendsController alloc]initWithNibName:@"AddFriendScreen" bundle:nil];
+	addFriendsController = [[InviteFriendsController alloc]initWithNibName:@"InviteFriendsController" bundle:nil];
 
 	[self.navigationController pushViewController:addFriendsController animated:YES];
 }
@@ -167,7 +167,7 @@
 
     //[inviteFriendLabel setFont:[UIFont fontWithName:BUTTON_FONT size:13]];
     [inviteFriendLabel setText:NSLocalizedString(@"invite_friends", nil)];
-    spController = [[SettingViewController alloc]initWithNibName:@"SettingViewController" bundle:nil];
+    spController = [[ShareSettingViewController alloc]initWithNibName:@"SettingViewController" bundle:nil];
     
     //GET FACEBOOK APP LIKE STATUS
     [self setFacebookLikeStatus];
@@ -390,7 +390,7 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
 
 - (IBAction)onTwitter:(id)sender {
     UIButton *button = (UIButton *) sender;
-    if([AddFriendsController connected]){
+    if([InviteFriendsController connected]){
         if([button isSelected]){
             [self unFollowOnTwitter:sender];
         } else {
@@ -601,7 +601,7 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
 
 - (IBAction)showLikeButton {
     
-    if([AddFriendsController connected]){
+    if([InviteFriendsController connected]){
         
         ACAccountStore *accountStore = [[ACAccountStore alloc]init];
         ACAccountType *FBaccountType= [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
@@ -657,7 +657,7 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
  */
 - (void)setFacebookLikeStatus{
 
-    if([AddFriendsController connected]){
+    if([InviteFriendsController connected]){
         
         
         // getting Facebook account Info From Device
@@ -665,7 +665,7 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
         ACAccountType *FBaccountType= [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
         
         // Get facebook account
-        DefaultSHKConfigurator *configurator = [[MySHKConfigurator alloc] init];
+        DefaultSHKConfigurator *configurator = [[FlyerlyConfigurator alloc] init];
         
         NSDictionary *options = @{ACFacebookAppIdKey : [configurator facebookAppId],
                                   ACFacebookPermissionsKey : @[@"email", @"publish_stream"],

@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AccountSelecter.h"
+#import "ProfileViewController.h"
 
 @interface Singleton : NSObject
 {

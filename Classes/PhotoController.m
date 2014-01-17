@@ -4105,7 +4105,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 -(void)requestTemplate:(UIButton *)button{
     
     //[self showLoadingView:nil];
-    if([AddFriendsController connected]){
+    if([InviteFriendsController connected]){
         // Create an instance of EBPurchase (Inapp purchase).
         demoPurchase = nil;
         demoPurchase = [[EBPurchase alloc] init];
@@ -4123,7 +4123,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 -(void)requestSymbols:(UIButton *)button{
     
-      if([AddFriendsController connected]){
+      if([InviteFriendsController connected]){
           //[self showLoadingView:nil];
           // Create an instance of EBPurchase (Inapp purchase).
           demoPurchase = nil;
@@ -4142,7 +4142,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 -(void)requestIcons:(UIButton *)button{
     
-    if([AddFriendsController connected]){
+    if([InviteFriendsController connected]){
         //[self showLoadingView:nil];
     
         // Create an instance of EBPurchase (Inapp purchase).
@@ -4160,7 +4160,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 -(void)requestFont:(UIButton *)button{
     
-    if([AddFriendsController connected]){
+    if([InviteFriendsController connected]){
         //[self showLoadingView:nil];
         // Create an instance of EBPurchase (Inapp purchase).
         demoPurchase = nil;
@@ -4178,7 +4178,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 -(void)requestColor:(UIButton *)button{
     
-    if([AddFriendsController connected]){
+    if([InviteFriendsController connected]){
         // [self showLoadingView:nil];
 
         // Create an instance of EBPurchase (Inapp purchase).
@@ -4198,7 +4198,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 -(void)requestFontBorder:(UIButton *)button{
 
-     if([AddFriendsController connected]){
+     if([InviteFriendsController connected]){
          //[self showLoadingView:nil];
 
          // Create an instance of EBPurchase (Inapp purchase).
@@ -4216,7 +4216,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 -(void)requestFlyerBorder:(UIButton *)button{
     
-     if([AddFriendsController connected]){
+     if([InviteFriendsController connected]){
          // [self showLoadingView:nil];
 
          // Create an instance of EBPurchase (Inapp purchase).

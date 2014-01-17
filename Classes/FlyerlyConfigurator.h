@@ -8,7 +8,7 @@
 
 #import "DefaultSHKConfigurator.h"
 
-@interface MySHKConfigurator : DefaultSHKConfigurator
+@interface FlyerlyConfigurator : DefaultSHKConfigurator
 
 
 - (NSString*)appName;

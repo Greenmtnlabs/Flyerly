@@ -13,7 +13,7 @@
 #import "LoadingView.h"
 #import <QuartzCore/QuartzCore.h>
 #import "JSON.h"
-#import "AddFriendsController.h"
+#import "InviteFriendsController.h"
 #import "Flurry.h"
 #import "HelpController.h"
 #import <Parse/PFFile.h>
@@ -379,7 +379,7 @@
     } else {
         
         // Check internet connectivity
-        if([AddFriendsController connected]){
+        if([InviteFriendsController connected]){
             [facebookButton setSelected:YES];
             ;
             
@@ -411,7 +411,7 @@
     } else {
 
         // Check internet connectivity
-        if([AddFriendsController connected]){
+        if([InviteFriendsController connected]){
              [twitterButton setSelected:YES];
             ;
             
@@ -452,7 +452,7 @@
     } else {
         
         // Check internet connectivity
-        if([AddFriendsController connected]){
+        if([InviteFriendsController connected]){
             [emailButton setSelected:YES];
             [self shareOnEmail];
             [self showAlert:@"Uploading flyer for sharing. Please wait..." message:@""];
@@ -476,7 +476,7 @@
     } else {
         
         // Check internet connectivity
-        if([AddFriendsController connected]){
+        if([InviteFriendsController connected]){
            [tumblrButton setSelected:YES];
             ;
             
@@ -506,7 +506,7 @@
         
        
         // Check internet connectivity
-        if([AddFriendsController connected]){
+        if([InviteFriendsController connected]){
             [flickrButton setSelected:YES];
             ;
             
@@ -535,7 +535,7 @@
     } else {
         
         // Check internet connectivity
-        if([AddFriendsController connected]){
+        if([InviteFriendsController connected]){
             [smsButton setSelected:YES];
             [UIPasteboard generalPasteboard].image = selectedFlyerImage;
             [self SingleshareOnMMS];

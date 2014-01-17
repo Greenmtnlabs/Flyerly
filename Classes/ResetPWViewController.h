@@ -12,7 +12,7 @@
 #import "LauchViewController.h"
 #import "FlyrAppDelegate.h"
 #import "Singleton.h"
-#import "AccountSelecter.h"
+#import "ProfileViewController.h"
 #import <Parse/PFLogInViewController.h>
 #import <Parse/PFQuery.h>
 #import "ParentViewController.h"
