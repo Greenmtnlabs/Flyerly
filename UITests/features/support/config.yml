@@ -1,16 +1,14 @@
-app: MyApp.app
+app: /Users/mkhurramali/Library/Application Support/iPhone Simulator/7.0.3/Applications/245F53E2-A7C2-448E-9E3F-C28EF2B8F04F/Flyr.app
 
 devices:
   iPhone Simulator:
     default: true
     simulator: iPhone (Retina 4-inch)
     screen: retina_ios6
-    app: /Users/khurram/Library/Developer/Xcode/DerivedData/Flyr-asqmfvvosvdyajcemayhegscaoln/Build/Products/Debug-iphonesimulator/Flyr.app
 
   iPhone Simulator 4:
     simulator: iPhone (Retina 3.5-inch)
     screen: retina_ios4
-    app: /Users/khurram/Library/Developer/Xcode/DerivedData/Flyr-asqmfvvosvdyajcemayhegscaoln/Build/Products/Debug-iphonesimulator/Flyr.app
 
   iPhone 4S:
     UDID: lolffb28d74a6fraj2156090784avasc50725dd0

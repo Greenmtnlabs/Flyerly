@@ -1,5 +1,5 @@
 class SignInScreen extends Screen
-  anchor: -> $("navigationBar[name=SIGN IN]")
+  anchor: -> $('#Login')
 
   constructor: ->
     super 'sign-in'
