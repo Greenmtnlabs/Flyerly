@@ -14,7 +14,7 @@
 #import "LauchViewController.h"
 #import "AfterUpdateController.h"
 #import "AccountController.h"
-#import "DraftViewController.h"
+#import "ShareViewController.h"
 #import "Flurry.h"
 #import <Parse/Parse.h>
 #import "SHKConfiguration.h"

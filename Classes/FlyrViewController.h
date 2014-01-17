@@ -10,9 +10,15 @@
 #import "PhotoController.h"
 #import "LauchViewController.h"
 #import "Singleton.h"
-#import "FlyerOverlayController.h"
+#import "SaveFlyerCell.h"
+#import "Common.h"
+#import "ShareViewController.h"
+#import "Common.h"
+#import "LauchViewController.h"
+#import "HelpController.h"
+#import "FlyrAppDelegate.h"
 
-@class FlyerOverlayController;
+@class SaveFlyerCell;
 @interface FlyrViewController : UIViewController <UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>{
 	NSMutableArray *photoArray;
 	NSMutableArray *photoDetailArray;
@@ -27,7 +33,7 @@
     BOOL searching;
     BOOL letUserSelectRow;
     Singleton *globle;
-    FlyerOverlayController *overlayController;
+
 }
 @property(nonatomic,strong) PhotoController *ptController;
 @property(nonatomic,strong) NSMutableArray *photoArray;

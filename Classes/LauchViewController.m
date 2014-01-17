@@ -12,7 +12,7 @@
 #import "SettingViewController.h"
 #import "AddFriendsController.h"
 #import "FlyrAppDelegate.h"
-#import "DraftViewController.h"
+#import "ShareViewController.h"
 #import "Common.h"
 #import "HelpController.h"
 #import "Flurry.h"
@@ -344,7 +344,7 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
 
     if(photoArray.count > sender.tag){
 
-        DraftViewController *draftViewController = [[DraftViewController alloc] initWithNibName:@"DraftViewController" bundle:nil];
+        ShareViewController *draftViewController = [[ShareViewController alloc] initWithNibName:@"DraftViewController" bundle:nil];
         
         NSString *imageName = photoArray[sender.tag];
         NSData *imageData = [[NSData alloc ]initWithContentsOfMappedFile:imageName];

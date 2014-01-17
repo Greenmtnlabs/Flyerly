@@ -19,18 +19,16 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import <Twitter/Twitter.h>
 #import <MessageUI/MessageUI.h>
-#import "ShareProgressView.h"
 #import "LauchViewController.h"
 #import "Singleton.h"
 #import "ParentViewController.h"
 #import "BitlyURLShortener.h"
-#import "FlyerOverlayController.h"
 
 @class FlyrViewController,LauchViewController,Singleton;
 @class SaveFlyerController,PhotoController;
 @class LoadingView;
 
-@interface DraftViewController : ParentViewController<UIWebViewDelegate,UIDocumentInteractionControllerDelegate,MFMessageComposeViewControllerDelegate,MFMailComposeViewControllerDelegate,UITextViewDelegate,UITextFieldDelegate,UIGestureRecognizerDelegate, BitlyURLShortenerDelegate,UIActionSheetDelegate> {
+@interface ShareViewController : ParentViewController<UIWebViewDelegate,UIDocumentInteractionControllerDelegate,MFMessageComposeViewControllerDelegate,MFMailComposeViewControllerDelegate,UITextViewDelegate,UITextFieldDelegate,UIGestureRecognizerDelegate, BitlyURLShortenerDelegate,UIActionSheetDelegate> {
 
 	IBOutlet UIScrollView *scrollView;
 
@@ -61,7 +59,6 @@
 	NSString *imageFileName;
     Singleton *globle;
 	FlyrViewController *fvController;
-    FlyerOverlayController *overlayController;
 	SaveFlyerController *svController;
 	LoadingView *loadingView;
     LauchViewController  *launchController;
@@ -74,7 +71,6 @@
     
     BOOL fromPhotoController;
     int countOfSharingNetworks;
-    ShareProgressView *instagramPogressView;
     
     NSMutableArray *listOfPlaces;
     
@@ -84,12 +80,6 @@
 @property(nonatomic,strong) NSMutableArray *listOfPlaces;
 @property(nonatomic,strong)  NSString *sharelink;
 
-/*@property(nonatomic,retain) IBOutlet UIView *progressView;
-@property(nonatomic,retain) ShareProgressView *facebookPogressView;
-@property(nonatomic,retain) ShareProgressView *twitterPogressView;
-@property(nonatomic,retain) ShareProgressView *tumblrPogressView;
-@property(nonatomic,retain) ShareProgressView *flickrPogressView;
-@property(nonatomic,retain) ShareProgressView *instagramPogressView;*/
 
 @property(nonatomic, strong) BitlyURLShortener *bitly;
 @property(nonatomic,strong) IBOutlet UILabel *saveToCameraRollLabel;
@@ -135,34 +125,14 @@
 -(IBAction)onClickFlickrButton;
 -(IBAction)onClickSMSButton;
 -(IBAction)onClickClipboardButton;
--(IBAction)searchNearByLocations;
 
 
 -(IBAction)goback;
--(void)share;
 -(void)shareOnInstagram;
 
 -(void)updateSocialStates;
 
--(void)showFacebookProgressRow;
--(void)showTwitterProgressRow;
--(void)showTumblrProgressRow;
--(void)showFlickrProgressRow;
--(void)showInstagramProgressRow;
--(void)showclipBdProgressRow;
--(void)showsmsProgressRow;
--(void)showemailProgressRow;
--(void)onclipBdSuccess;
--(void)onemailSuccess;
--(void)onemailFailed;
--(void)onsmsSuccess;
 -(void)SingleshareOnMMS;
--(void)onsmsFailed;
--(void)openInstagramSuccess;
--(void)openInstagramFailed;
--(void)fillErrorStatus:(ShareProgressView *)shareView;
--(void)fillSuccessStatus:(ShareProgressView *)shareView;
--(void)closeSharingProgressSuccess:(NSNotification *)notification;
 - (void)uploadImage:(NSData *)imageData isEmail:(BOOL)isEmail;
 - (void)uploadImageByboth:(NSData *)imageData;
 

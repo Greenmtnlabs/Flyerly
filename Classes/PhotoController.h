@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "CustomLabel.h"
 #import "EBPurchase.h"
-#import "ShareProgressView.h"
 #import "Singleton.h"
 #import "ParentViewController.h"
 #import "GalleryViewController.h"
@@ -134,7 +133,7 @@
     UIButton *crossButtonGlobal;
     UIButton *editButtonGlobal;    
     UIBarButtonItem *rightUndoBarButton;
-    ShareProgressView *layerEditMessage;
+
     GalleryViewController *nbuGallary;
     CameraViewController *nbuCamera;
 }
@@ -263,6 +262,8 @@
 -(void)AddScrollView:(id)obj;
 -(void)AddBottomTabs:(id)obj;
 -(void)AddAllLayersIntoFront;
+
+-(void)AddDonetoRightBarBotton;
 
 -(IBAction)setAddMoreLayerTabAction:(id)sender;
 -(IBAction)setlibBackgroundTabAction:(id)sender;

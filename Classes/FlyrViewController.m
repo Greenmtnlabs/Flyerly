@@ -7,14 +7,7 @@
 //
 
 #import "FlyrViewController.h"
-#import "Common.h"
-#import "DraftViewController.h"
-#import "Common.h"
-#import "LauchViewController.h"
-#import "HelpController.h"
-#import "FlyerOverlayController.h"
-#import "FlyrAppDelegate.h"
-#import "MyCustomCell.h"
+
 
 @implementation FlyrViewController
 @synthesize photoArray,tView,iconArray,photoDetailArray,ptController,searchTextField;
@@ -22,8 +15,6 @@
 
 - (UIImage *)scale:(NSString *)imageName toSize:(CGSize)size
 {
-	//NSData *imageData = [[NSData alloc ]initWithContentsOfMappedFile:imageName];
-	//UIImage *image = [UIImage imageWithData:imageData];
 	UIImage *image = [UIImage imageWithContentsOfFile:imageName ];
 	
 	UIGraphicsBeginImageContext(size);
@@ -36,7 +27,6 @@
 }
 
 // Modified Date sort function
-
 NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
     NSDictionary *attrs1 = [[NSFileManager defaultManager]
                             attributesOfItemAtPath:file1
@@ -91,13 +81,13 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
 
 	[photoArray removeAllObjects];
 	[photoDetailArray removeAllObjects];
+    
 	for(int i =0;i< [sortedFiles count];i++)
 	{
 			finalImagePath = sortedFiles[i];
 			UIImage *temp = [self scale:finalImagePath toSize:CGSizeMake(640,640)];
 			[photoArray addObject:finalImagePath];
 			[iconArray addObject:temp];
-		//NSLog(@"photoArray:%@",[photoArray objectAtIndex:i]);
 	}
     
     
@@ -209,7 +199,6 @@ sd:;
     [self.tView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [searchTextField addTarget:self action:@selector(textFieldTapped:) forControlEvents:UIControlEventEditingChanged];
     searchTextField.borderStyle = nil;
-  //  searchTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
 }
 
 -(void)callMenu
@@ -219,24 +208,27 @@ sd:;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    searching =NO;
+    searching = NO;
     searchTextField.text = @"";
 
     self.navigationController.navigationBarHidden=NO;
     self.navigationItem.leftItemsSupplementBackButton = YES;
+    
     // Set left bar items
     [self.navigationItem setLeftBarButtonItems: [self leftBarItems]];
+    
     // Set right bar items
     [self.navigationItem setRightBarButtonItems: [self rightBarItems]];
 
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
+    
     //Create sorted array with modificate date as key
 	[self filesByModDate];
      [tView reloadData];
     photoArrayBackup = [[NSMutableArray alloc] initWithArray:photoArray];
     iconArrayBackup = [[NSMutableArray alloc] initWithArray:iconArray];
     photoDetailArrayBackup  = [[NSMutableArray alloc] initWithArray:iconArray];
-//    NSLog(@"%@",photoArrayBackup);
+
 }
 
 -(NSArray *)leftBarItems{
@@ -265,14 +257,6 @@ sd:;
 
 -(NSArray *)rightBarItems{
     
-    // Create right bar help button
-    //UILabel *saveFlyrLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
-    //[saveFlyrLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:8.5]];
-    //[saveFlyrLabel setTextColor:[MyCustomCell colorWithHexString:@"008ec0"]];
-    //[saveFlyrLabel setBackgroundColor:[UIColor clearColor]];
-    //[saveFlyrLabel setText:@"Saved flyer"];
-    //UIBarButtonItem *barLabel = [[UIBarButtonItem alloc] initWithCustomView:saveFlyrLabel];
-    
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:TITLE_FONT size:18];
@@ -281,16 +265,12 @@ sd:;
     label.text = @"SAVED";
     self.navigationItem.titleView = label;
 
-    //self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Saved" rect:CGRectMake(-30, -6, 50, 50)];
-
     // Create left bar help button
     UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 29)];
     [shareButton addTarget:self action:@selector(doNew:) forControlEvents:UIControlEventTouchUpInside];
     [shareButton setBackgroundImage:[UIImage imageNamed:@"pencil_icon"] forState:UIControlStateNormal];
     shareButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *shareBarButton = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
-    //UIBarButtonItem *shareBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Share" style:UIControlStateNormal
-    //                                                                  target:nil action:nil ];
     
     return [NSMutableArray arrayWithObjects:shareBarButton,nil];
 }
@@ -315,53 +295,9 @@ sd:;
     }
 }
 
--(void)showFlyerOverlay:(id)sender{
 
-    // cast to button
-    UIButton *cellImageButton = (UIButton *) sender;
-    //NSArray *detailArray = [photoDetailArray objectAtIndex:cellImageButton.tag];
-    //NSString *title = [detailArray objectAtIndex:0];
 
-    // Get image on button
-    UIImage *flyerImage = [cellImageButton imageForState:UIControlStateNormal];
-    // Create Modal trnasparent view
-    UIView *modalView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    [modalView setBackgroundColor:[MyCustomCell colorWithHexString:@"161616"]];
-    modalView.alpha = 0.75;
-    self.navigationController.navigationBar.alpha = 0.35;
-    
-    // Create overlay controller
-    overlayController = [[FlyerOverlayController alloc]initWithNibName:@"FlyerOverlayController" bundle:nil image:flyerImage modalView:modalView];
-    
-    // set its parent
-    [overlayController setViews:self];
-    //NSLog(@"showFlyerOverlay Tag: %d", cellImageButton.tag);
-    overlayController.flyerNumber = cellImageButton.tag;
 
-    // Add modal view and overlay view
-    [self.view addSubview:modalView];
-    [self.view addSubview:overlayController.view];
-}
-
--(UITableViewCell *)setGlobalCustomCellProperties:(NSString *)title description:(NSString *)description created:(NSString *)created img:(UIImage *)img imagePath:(NSString *)imagePath indexPath:(NSIndexPath *)indexPath{
-
-    static NSString *cellId = @"Cell";
-    MyCustomCell *cell = (MyCustomCell *)[tView dequeueReusableCellWithIdentifier:cellId];
-    
-    NSLog(@"imagePath: %@", imagePath);
-    NSString *index = [FlyrViewController getFlyerNumberFromPath:imagePath];
-    [cell setAccessoryType:UITableViewCellAccessoryNone];
-    if (cell == nil) {
-        cell = [[MyCustomCell alloc] initWithFrame:CGRectZero reuseIdentifier:cellId];
-        cell.flyerNumber = [index intValue];
-        cell.cellImage.tag =   cell.flyerNumber;
-        [cell.cellImage addTarget:self action:@selector(showFlyerOverlay:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    
-    [cell addToCell: title :description :created :img :imagePath :[index intValue]];
-    
-    return cell;
-}
 
 +(NSString *)getFlyerNumberFromPath:(NSString *)imagePath{
     
@@ -379,31 +315,48 @@ sd:;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-
-    if(searching){
+    static NSString *cellId = @"Cell";
+    SaveFlyerCell *cell = (SaveFlyerCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
+    
+  
+    [cell setAccessoryType:UITableViewCellAccessoryNone];
+    if (cell == nil) {
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SaveFlyerCell" owner:self options:nil];
+        cell = (SaveFlyerCell *)[nib objectAtIndex:0];
+    }
+    
+    
+    if( searching ){
+        
         UIImage *image = iconArrayBackup[indexPath.row];
+        
         // Get image name from array
         NSString *imageName = photoArrayBackup[indexPath.row];
+        
         // get flyer detail from array
         NSArray *detailArray = photoDetailArrayBackup[indexPath.row];
         
-        // return cell
-        return [self setGlobalCustomCellProperties:detailArray[0] description:detailArray[1] created:detailArray[2] img:image imagePath:imageName indexPath:indexPath];
+        [cell addToCell:detailArray[0] :detailArray[1] :detailArray[2] :image :imageName :indexPath];
+
+        return cell;
+        
 
     }else{
 
         // Get image from array
-	UIImage *image = iconArray[indexPath.row];
-    // Get image name from array
-	NSString *imageName = photoArray[indexPath.row];
-    // get flyer detail from array
-    NSArray *detailArray = photoDetailArray[indexPath.row];
+        UIImage *image = iconArray[indexPath.row];
+        
+        // Get image name from array
+        NSString *imageName = photoArray[indexPath.row];
+        
+        // get flyer detail from array
+        NSArray *detailArray = photoDetailArray[indexPath.row];
+        [cell addToCell:detailArray[0] :detailArray[1] :detailArray[2] :image :imageName :indexPath];
 
-    // return cell
-    return [self setGlobalCustomCellProperties:detailArray[0] description:detailArray[1] created:detailArray[2] img:image imagePath:imageName indexPath:indexPath];
+         return cell;
+        
     }
-	//SET_GLOBAL_CUSTOM_CELL_PROPERTIES([detailArray objectAtIndex:0], [detailArray objectAtIndex:1], [detailArray objectAtIndex:2],image, imageName)
-	
+    
 }
 
 - (void) deselect
@@ -413,7 +366,7 @@ sd:;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	 
-	 DraftViewController *draftViewController = [[DraftViewController alloc] initWithNibName:@"DraftViewController" bundle:nil];
+	 ShareViewController *draftViewController = [[ShareViewController alloc] initWithNibName:@"DraftViewController" bundle:nil];
     NSString *imageName;
     NSArray *detailArray;
     if (searching) {
