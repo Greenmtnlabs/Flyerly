@@ -1,8 +1,8 @@
-class SignInScreen extends Screen
+class HomeScreen extends Screen
   anchor: -> $('#CreateFlyer')
 
   constructor: ->
-    super 'sign-in'
+    super 'home'
 
     extend @elements,
 	'Saved' : -> $('#SavedFlyers'),
