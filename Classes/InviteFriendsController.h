@@ -19,15 +19,13 @@
 #import "FlyrAppDelegate.h"
 #import <SystemConfiguration/SystemConfiguration.h>
 #import "Reachability.h"
-#import "LauchViewController.h"
 #import "AsyncImageView.h"
 #import "Singleton.h"
-#import "AddFriendsDetail.h"
+#import "InviteFriendsCell.h"
 
-@class LoadingView,LauchViewController,Singleton;
+@class LoadingView,Singleton;
 
-@interface AddFriendsController : UIViewController<UITableViewDelegate,UITableViewDataSource,MFMessageComposeViewControllerDelegate,UITextFieldDelegate, UIActionSheetDelegate>{
-    LauchViewController *launchCotroller;
+@interface InviteFriendsController : UIViewController<UITableViewDelegate,UITableViewDataSource,MFMessageComposeViewControllerDelegate,UITextFieldDelegate, UIActionSheetDelegate>{
     Singleton *globle;
     IBOutlet UILabel *contactsLabel;
     IBOutlet UILabel *facebookLabel;

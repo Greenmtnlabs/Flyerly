@@ -11,7 +11,7 @@
 #import "PhotoController.h"
 #import "FlyrAppDelegate.h"
 #import <QuartzCore/QuartzCore.h>
-#import "DraftViewController.h"
+#import "ShareViewController.h"
 #import "Common.h"
 //#import "FBConnectGlobal.h"
 

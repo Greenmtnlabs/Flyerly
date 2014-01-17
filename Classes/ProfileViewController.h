@@ -9,11 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "Singleton.h"
 #import "Common.h"
-#import "AddFriendsController.h"
+#import "InviteFriendsController.h"
 //#import <NBUKit/NBUKit.h>
 
 @class SigninController,Singleton;
-@interface AccountSelecter : UIViewController <UITextFieldDelegate,UITableViewDelegate>{
+@interface ProfileViewController : UIViewController <UITextFieldDelegate,UITableViewDelegate>{
 
     Singleton *globle;
     NSString *S;

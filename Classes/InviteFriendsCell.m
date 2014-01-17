@@ -6,13 +6,13 @@
 //
 //
 
-#import "AddFriendsDetail.h"
+#import "InviteFriendsCell.h"
 
-@interface AddFriendsDetail ()
+@interface InviteFriendsCell ()
 
 @end
 
-@implementation AddFriendsDetail
+@implementation InviteFriendsCell
 
 @synthesize imgview,description,dName,checkBtn;
 

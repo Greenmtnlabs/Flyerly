@@ -11,7 +11,7 @@
 #import "PhotoController.h"
 #import <MessageUI/MessageUI.h>
 
-@class DraftViewController;
+@class ShareViewController;
 @class FBSession;
 
 @interface SaveFlyerController : UIViewController<MFMailComposeViewControllerDelegate,UIAlertViewDelegate,UIAlertViewDelegate,UITextFieldDelegate> {
@@ -32,7 +32,7 @@
 	UIAlertView *twitAlert;
 	UIAlertView *facebookAlert;
 	BOOL isDraftView;
-	DraftViewController *dvController;
+	ShareViewController *dvController;
 	NSData *flyrImgData;
 	UITextField *alertTextField ;
 	FBRequest *uploadPhotoRequest;
@@ -51,7 +51,7 @@
 @property(nonatomic, strong)  UIAlertView *twitAlert;
 @property(nonatomic, strong)  UIAlertView *facebookAlert;
 @property (nonatomic,assign) BOOL isDraftView;
-@property (nonatomic,strong) DraftViewController *dvController;
+@property (nonatomic,strong) ShareViewController *dvController;
 @property (nonatomic,strong)  NSData *flyrImgData;
 @property (nonatomic,strong)  FBSession* _session;
 @property (nonatomic,strong)  UITextField *alertTextField;

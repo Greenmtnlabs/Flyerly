@@ -6,10 +6,10 @@
 //
 //
 
-#import "MySHKConfigurator.h"
+#import "FlyerlyConfigurator.h"
 #import "SHKFile.h"
 
-@implementation MySHKConfigurator
+@implementation FlyerlyConfigurator
 
 /*
  App Description

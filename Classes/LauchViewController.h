@@ -15,9 +15,9 @@
 #import "Reachability.h"
 
 @class FlyrViewController;
-@class SettingViewController;
+@class ShareSettingViewController;
 @class PhotoController ;
-@class AddFriendsController;
+@class InviteFriendsController;
 @class FBSession;
 @class FacebookLikeView;
 @class MainSettingViewController;
@@ -26,8 +26,8 @@
 @interface LauchViewController : ParentViewController<UIWebViewDelegate,UIActionSheetDelegate,FacebookLikeViewDelegate> {
 	PhotoController *ptController;
 	FlyrViewController *tpController;
-	SettingViewController *spController;
-	AddFriendsController *addFriendsController;
+	ShareSettingViewController *spController;
+	InviteFriendsController *addFriendsController;
     Singleton *globle;
     IBOutlet UILabel *createFlyrLabel;
     IBOutlet UILabel *savedFlyrLabel;
@@ -59,8 +59,8 @@
 }
 @property(nonatomic,strong) PhotoController *ptController;
 @property(nonatomic,strong) FlyrViewController *tpController;
-@property(nonatomic,strong) SettingViewController *spController;
-@property(nonatomic,strong) AddFriendsController *addFriendsController;
+@property(nonatomic,strong) ShareSettingViewController *spController;
+@property(nonatomic,strong) InviteFriendsController *addFriendsController;
 
 @property (nonatomic, strong) IBOutlet UILabel *createFlyrLabel;
 @property (nonatomic, strong) IBOutlet UILabel *savedFlyrLabel;

@@ -10,7 +10,7 @@
 #import "LauchViewController.h"
 #import "FlyrAppDelegate.h"
 #import "Singleton.h"
-#import "AccountSelecter.h"
+#import "ProfileViewController.h"
 #import "ParentViewController.h"
 
 @class FBSession,Singleton,LauchViewController;

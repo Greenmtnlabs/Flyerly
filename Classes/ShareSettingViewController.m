@@ -6,7 +6,7 @@
 //  Copyright 2009 iauro. All rights reserved.
 //
 
-#import "SettingViewController.h"
+#import "ShareSettingViewController.h"
 #import <CoreGraphics/CoreGraphics.h>
 #import "Common.h"
 #import "FlyrAppDelegate.h"
@@ -14,7 +14,7 @@
 #import "PhotoController.h"
 
 
-@implementation SettingViewController
+@implementation ShareSettingViewController
 @synthesize flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,helpTab,saveToCameraRollLabel,saveToRollSwitch;
 
 -(void)viewWillAppear:(BOOL)animated{

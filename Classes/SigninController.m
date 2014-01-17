@@ -10,7 +10,7 @@
 #import "Common.h"
 #import "PhotoController.h"
 #import <Parse/PFQuery.h>
-#import "AddFriendsController.h"
+#import "InviteFriendsController.h"
 #import "AccountController.h"
 
 @interface SigninController ()
@@ -299,7 +299,7 @@
 -(IBAction)onSignInTwitter{
     [self showLoadingIndicator];
     
-    if([AddFriendsController connected]){
+    if([InviteFriendsController connected]){
         
         [PFTwitterUtils logInWithBlock:^(PFUser *user, NSError *error) {
             [self hideLoadingIndicator];

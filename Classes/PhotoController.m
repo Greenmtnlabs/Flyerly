@@ -13,7 +13,7 @@
 #import "LoginController.h"
 #import "FlyrAppDelegate.h"
 #import "SaveFlyerController.h"
-#import "DraftViewController.h"
+#import "ShareViewController.h"
 #import "HelpController.h"
 #import <Parse/PFUser.h>
 #import <Parse/PFFile.h>
@@ -442,11 +442,6 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     deleteMode = NO;
     undoCount = 0;
     layerallow = 0;
-    
-    if(layerEditMessage!=nil){
-        [layerEditMessage removeFromSuperview];
-        layerEditMessage = nil;
-    }
     
     ((CustomLabel *)[[self textLabelLayersArray] lastObject]).alpha = 1;
 	textBackgrnd.alpha  =ALPHA0;
@@ -2053,21 +2048,11 @@ int arrangeLayerIndex;
 
 -(void)cancelLayer{
     
-    if(layerEditMessage!=nil){
-        [layerEditMessage removeFromSuperview];
-        layerEditMessage = nil;
-    }
-
     discardAlert = [[UIAlertView alloc]initWithTitle:@"Warning" message:@"Do you want to go back? You will lose unsaved changes" delegate:self cancelButtonTitle:@"NO" otherButtonTitles:@"YES" ,nil];
     [discardAlert show];
 }
 
 -(void)callWrite{
-    
-    if(layerEditMessage!=nil){
-        [layerEditMessage removeFromSuperview];
-        layerEditMessage = nil;
-    }
 
 	photoTouchFlag=NO;
 	lableTouchFlag=NO;
@@ -2216,11 +2201,6 @@ int arrangeLayerIndex;
 
 -(void)choosePhoto
 {
-    if(layerEditMessage!=nil){
-        [layerEditMessage removeFromSuperview];
-        layerEditMessage = nil;
-    }
-    //self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Add photo" rect:CGRectMake(-45, -6, 50, 50)];
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-45, -6, 50, 50)];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:TITLE_FONT size:18];
@@ -2488,10 +2468,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 -(void)callSaveAndShare
 {
-    if(layerEditMessage!=nil){
-        [layerEditMessage removeFromSuperview];
-        layerEditMessage = nil;
-    }
 
     [Flurry logEvent:@"Saved Flyer"];
 
@@ -2517,7 +2493,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     NSData *data = [self getCurrentFrameAndSaveIt];
     appDele.changesFlag = NO;
 
-    DraftViewController *draftViewController = [[DraftViewController alloc] initWithNibName:@"DraftViewController" bundle:nil];
+    ShareViewController *draftViewController = [[ShareViewController alloc] initWithNibName:@"DraftViewController" bundle:nil];
     draftViewController.fromPhotoController = YES;
     draftViewController.selectedFlyerImage = [UIImage imageWithData:data];
     draftViewController.selectedFlyerTitle = globle.FlyerName;
@@ -2753,10 +2729,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 -(IBAction) setAddMoreLayerTabAction:(id) sender {
     layerallow = 0;
     
-    if(layerEditMessage!=nil){
-        [layerEditMessage removeFromSuperview];
-        layerEditMessage = nil;
-    }
 
 	UIButton *selectedButton = (UIButton*)sender;
     
@@ -2782,11 +2754,9 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         photoTouchFlag = NO;
         iconTouchFlag = NO;
         lableTouchFlag = YES;
-		[UIView beginAnimations:nil context:NULL];
-		[UIView setAnimationDuration:0.4f];
         
+        //Add Context Library
         [self AddBottomTabs:libText];
-        [UIView commitAnimations];
         
         [self plusButtonClick];
 	}
@@ -2803,13 +2773,8 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         photoTouchFlag = YES;
         lableTouchFlag = NO;
 		imgPickerFlag =2;
-		[UIView beginAnimations:nil context:NULL];
-		[UIView setAnimationDuration:0.4f];
-        
-		textBackgrnd.alpha = ALPHA0;
+        textBackgrnd.alpha = ALPHA0;
         [self AddBottomTabs:libPhoto];
-		[UIView commitAnimations];
-        
         [self plusButtonClick];
 
 	}
@@ -2821,6 +2786,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         photoTouchFlag= NO;
         lableTouchFlag = NO;
         iconTouchFlag = NO;
+        [self AddDonetoRightBarBotton];
        	[UIView beginAnimations:nil context:NULL];
         
         //Add Context
@@ -2835,9 +2801,10 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         symbolTouchFlag= NO;
         //photoTouchFlag= NO;
         iconTouchFlag = YES;
+       
 		[UIView beginAnimations:nil context:NULL];
 		[UIView setAnimationDuration:0.4f];
-        
+        [self AddDonetoRightBarBotton];
         //Add ContextView
         [self AddScrollView:iconScrollView];
 
@@ -2847,11 +2814,14 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	{
         [UIView beginAnimations:nil context:NULL];
 		[UIView setAnimationDuration:0.4f];
-        
+            [self AddDonetoRightBarBotton];
+            [self setlibBackgroundTabAction:backtemplates];
+        [UIView commitAnimations];
+
         //Add ContextView
         [self AddBottomTabs:libBackground];
-        [self setlibBackgroundTabAction:backtemplates];
-		[UIView commitAnimations];
+       
+
     }
 }
 
@@ -4135,7 +4105,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 -(void)requestTemplate:(UIButton *)button{
     
     //[self showLoadingView:nil];
-    if([AddFriendsController connected]){
+    if([InviteFriendsController connected]){
         // Create an instance of EBPurchase (Inapp purchase).
         demoPurchase = nil;
         demoPurchase = [[EBPurchase alloc] init];
@@ -4153,7 +4123,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 -(void)requestSymbols:(UIButton *)button{
     
-      if([AddFriendsController connected]){
+      if([InviteFriendsController connected]){
           //[self showLoadingView:nil];
           // Create an instance of EBPurchase (Inapp purchase).
           demoPurchase = nil;
@@ -4172,7 +4142,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 -(void)requestIcons:(UIButton *)button{
     
-    if([AddFriendsController connected]){
+    if([InviteFriendsController connected]){
         //[self showLoadingView:nil];
     
         // Create an instance of EBPurchase (Inapp purchase).
@@ -4190,7 +4160,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 -(void)requestFont:(UIButton *)button{
     
-    if([AddFriendsController connected]){
+    if([InviteFriendsController connected]){
         //[self showLoadingView:nil];
         // Create an instance of EBPurchase (Inapp purchase).
         demoPurchase = nil;
@@ -4208,7 +4178,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 -(void)requestColor:(UIButton *)button{
     
-    if([AddFriendsController connected]){
+    if([InviteFriendsController connected]){
         // [self showLoadingView:nil];
 
         // Create an instance of EBPurchase (Inapp purchase).
@@ -4228,7 +4198,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 -(void)requestFontBorder:(UIButton *)button{
 
-     if([AddFriendsController connected]){
+     if([InviteFriendsController connected]){
          //[self showLoadingView:nil];
 
          // Create an instance of EBPurchase (Inapp purchase).
@@ -4246,7 +4216,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 -(void)requestFlyerBorder:(UIButton *)button{
     
-     if([AddFriendsController connected]){
+     if([InviteFriendsController connected]){
          // [self showLoadingView:nil];
 
          // Create an instance of EBPurchase (Inapp purchase).
@@ -4685,8 +4655,12 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         [v removeFromSuperview];
     }
     
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.4f];
     //Add ScrollViews
     [self.libraryContextView addSubview:obj];
+    
+    [UIView commitAnimations];
 }
 
 /*
@@ -4966,6 +4940,16 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapGestureCaptured:)];
     [layerScrollView addGestureRecognizer:singleTap];
 
+}
+
+-(void)AddDonetoRightBarBotton{
+    UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+    [doneButton addTarget:self action:@selector(callAddMoreLayers) forControlEvents:UIControlEventTouchUpInside];
+    [doneButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
+    doneButton.showsTouchWhenHighlighted = YES;
+    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
+    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
+    
 }
 
 @end

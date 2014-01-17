@@ -10,7 +10,7 @@
 #import <Parse/PFQuery.h>
 #import "PhotoController.h"
 #import "Common.h"
-#import "AddFriendsController.h"
+#import "InviteFriendsController.h"
 #import "FlyrAppDelegate.h"
 #import "AccountController.h"
 
@@ -230,7 +230,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     
     [self showLoadingView];
     
-    if([AddFriendsController connected]){
+    if([InviteFriendsController connected]){
 /*
         FlyrAppDelegate *appDelegate = (FlyrAppDelegate *) [[UIApplication sharedApplication]delegate];
         appDelegate.facebook.sessionDelegate = self;
@@ -312,7 +312,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 -(IBAction)onSignUpTwitter{
     [self showLoadingView];
     
-    if([AddFriendsController connected]){
+    if([InviteFriendsController connected]){
         if([TWTweetComposeViewController canSendTweet]){
             [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"twitterSetting"];
             ACAccountStore *account = [[ACAccountStore alloc] init];

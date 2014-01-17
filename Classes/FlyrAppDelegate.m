@@ -14,11 +14,11 @@
 #import "LauchViewController.h"
 #import "AfterUpdateController.h"
 #import "AccountController.h"
-#import "DraftViewController.h"
+#import "ShareViewController.h"
 #import "Flurry.h"
 #import <Parse/Parse.h>
 #import "SHKConfiguration.h"
-#import "MySHKConfigurator.h"
+#import "FlyerlyConfigurator.h"
 #import "BitlyConfig.h"
 
 NSString *kCheckTokenStep1 = @"kCheckTokenStep";
@@ -150,7 +150,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     [[BitlyConfig sharedBitlyConfig] setBitlyLogin:@"flyerly" bitlyAPIKey:@"R_3bdc6f8e82d260965325510421c980a0"];
     
     // Sharekit initialization
-    DefaultSHKConfigurator *configurator = [[MySHKConfigurator alloc] init];
+    DefaultSHKConfigurator *configurator = [[FlyerlyConfigurator alloc] init];
     [SHKConfiguration sharedInstanceWithConfigurator:configurator];
     
 	changesFlag = NO;

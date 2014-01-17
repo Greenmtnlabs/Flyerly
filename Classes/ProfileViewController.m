@@ -6,13 +6,13 @@
 //
 //
 
-#import "AccountSelecter.h"
+#import "ProfileViewController.h"
 
-@interface AccountSelecter ()
+@interface ProfileViewController ()
 
 @end
 
-@implementation AccountSelecter
+@implementation ProfileViewController
 @synthesize username,password,confirmPassword,email,name,phno,usrExist;
 static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
 static const CGFloat MINIMUM_SCROLL_FRACTION = 0.2;
@@ -72,7 +72,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     // Dispose of any resources that can be recreated.
 }
 -(IBAction)save{
-    if([AddFriendsController connected]){
+    if([InviteFriendsController connected]){
         if([self Uservalidate]){
             PFUser *user = [PFUser currentUser];
             NSString *usr = user.username;
