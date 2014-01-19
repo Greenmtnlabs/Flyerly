@@ -1670,7 +1670,6 @@
 		201CB976188428C700C0B5B3 /* createButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "createButton@2x.png"; sourceTree = "<group>"; };
 		202233A117BD2A1E0093DD4E /* back_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back_button.png; sourceTree = "<group>"; };
 		202233A217BD2A1E0093DD4E /* back_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back_button@2x.png"; sourceTree = "<group>"; };
-		2025FAB018606E4A00CC9188 /* GTMOAuth2ViewTouch.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = GTMOAuth2ViewTouch.xib; path = "Submodules/google-api-objectivec/Source/OAuth2/Touch/GTMOAuth2ViewTouch.xib"; sourceTree = "<group>"; };
 		2025FAB41860742700CC9188 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		2025FAB6186074D100CC9188 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		2025FAB8186074F300CC9188 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
@@ -3763,23 +3762,6 @@
 			name = Filter;
 			sourceTree = "<group>";
 		};
-		2025FAB118606E4A00CC9188 /* Google OAuth */ = {
-			isa = PBXGroup;
-			children = (
-				2025FAB018606E4A00CC9188 /* GTMOAuth2ViewTouch.xib */,
-			);
-			name = "Google OAuth";
-			sourceTree = "<group>";
-		};
-		2025FAB218606E4A00CC9188 /* Resources - ShareKit Library */ = {
-			isa = PBXGroup;
-			children = (
-				2025FAB118606E4A00CC9188 /* Google OAuth */,
-			);
-			name = "Resources - ShareKit Library";
-			path = Submodules/ShareKit;
-			sourceTree = "<group>";
-		};
 		202C47B7187D6E4B00FE0975 /* Bitly */ = {
 			isa = PBXGroup;
 			children = (
@@ -4091,7 +4073,6 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				2025FAB218606E4A00CC9188 /* Resources - ShareKit Library */,
 				65CC0AB5171802DF003D0BE7 /* Settings.bundle */,
 				8D1107310486CEB800E47090 /* Flyr-Info.plist */,
 				203E0B7517DDDD720039C3A7 /* InputViewController.xib */,
