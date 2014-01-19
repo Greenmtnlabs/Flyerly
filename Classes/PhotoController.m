@@ -10,7 +10,6 @@
 #import <QuartzCore/QuartzCore.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "Common.h"
-#import "LoginController.h"
 #import "FlyrAppDelegate.h"
 #import "SaveFlyerController.h"
 #import "ShareViewController.h"
