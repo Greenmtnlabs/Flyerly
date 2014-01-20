@@ -10,7 +10,6 @@
 #import <QuartzCore/QuartzCore.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "Common.h"
-#import "LoginController.h"
 #import "FlyrAppDelegate.h"
 #import "SaveFlyerController.h"
 #import "ShareViewController.h"
@@ -28,7 +27,7 @@
 @synthesize fontScrollView,colorScrollView,templateScrollView,sizeScrollView,borderScrollView,fontBorderScrollView,symbolScrollView,iconScrollView;
 @synthesize selectedFont,selectedColor;
 @synthesize selectedTemplate,selectedSymbol,selectedIcon;
-@synthesize fontTabButton,colorTabButton,sizeTabButton,selectedText,selectedSize,fontBorderTabButton,addMoreIconTabButton,addMorePhotoTabButton,addMoreSymbolTabButton,arrangeLayerTabButton;
+@synthesize fontTabButton,colorTabButton,sizeTabButton,fontEditButton,selectedText,selectedSize,fontBorderTabButton,addMoreIconTabButton,addMorePhotoTabButton,addMoreSymbolTabButton;
 @synthesize templateBckgrnd,textBackgrnd;
 @synthesize cameraTabButton,photoTabButton,widthTabButton,heightTabButton,photoImgView,symbolImgView,iconImgView;
 @synthesize photoTouchFlag,symbolTouchFlag,iconTouchFlag, lableTouchFlag,lableLocation,warningAlert,discardAlert,deleteAlert,editAlert, inAppAlert;
@@ -69,13 +68,20 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     [super viewWillAppear:YES];
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
-    [self AddBottomTabs:libFlyer];
     
     // Set template image
 	if (globle.NBUimage != nil) {
+        
+        if (imgPickerFlag == 2) {
+            newPhotoImgView.image = globle.NBUimage;
+            imgPickerFlag = 1;
+            return;
+        }else{
         imgView.image = globle.NBUimage;
         selectedTemplate = globle.NBUimage;
+        }
     }
+        [self AddBottomTabs:libFlyer];
         self.navigationController.navigationBarHidden = NO;
         imgPicker = [[UIImagePickerController alloc] init];
         imgPicker.allowsEditing = NO;
@@ -87,11 +93,8 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 
 -(void)viewDidAppear:(BOOL)animated{
     
-    
-
-    
-    //NSLog(@"%@",globle.CheckHelpOpen);
     layerallow = 0;
+    
     // Setup buttons and labels
     [moreLayersButton setBackgroundImage:[UIImage imageNamed:@"07_addmore"] forState:UIControlStateNormal];
     [moreLayersButton addTarget:self action:@selector(callAddMoreLayers) forControlEvents:UIControlEventTouchUpInside];
@@ -280,7 +283,6 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 	colorTabButton.tag = 10002;
     sizeTabButton.tag = 10003;
 	fontBorderTabButton.tag = 10004; //tag Change 5 to 4    //borderTabButton.tag = 10004;
-    arrangeLayerTabButton.tag = 10005;
    
     //Setting LibPhoto tabs tag
 	cameraTabButton.tag = 10001;
@@ -355,13 +357,6 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 												 name:@"UIApplicationMemoryWarningNotification"
 											   object:nil];
     
-    // Create right bar button
-    UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 31, 30)];
-    [menuButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-    [menuButton setBackgroundImage:[UIImage imageNamed:@"menu_button"] forState:UIControlStateNormal];
-    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
-    [self.navigationItem setRightBarButtonItem:rightBarButton];
-
 	//Default Selection for start
 	selectedFont = [UIFont fontWithName:@"Arial" size:16];
 	selectedColor = [UIColor blackColor];	
@@ -450,7 +445,6 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 	lableTouchFlag = NO;
     symbolTouchFlag = NO;
     iconTouchFlag = NO;
-	imgPickerFlag = 1;
     [self hideAddMoreButton];
 	[msgTextView removeFromSuperview];
     
@@ -1773,10 +1767,7 @@ int arrangeLayerIndex;
 #pragma mark UIAlertView delegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (layerallow == 0) {
-        if(alertView == warningAlert && buttonIndex == 0) {
-            [self.navigationController popViewControllerAnimated:YES];
-            [Flurry logEvent:@"Flyer Cancelled"];	
-        } else if(alertView == discardAlert && buttonIndex == 1) {
+      if(alertView == discardAlert && buttonIndex == 1) {
         
         if(selectedAddMoreLayerTab == ADD_MORE_TEXTTAB){
             
@@ -1834,29 +1825,13 @@ int arrangeLayerIndex;
         }
         
     }
-    }else{
-        if(alertView == warningAlert && buttonIndex == 1){
-            [self setAddMoreLayerTabAction:arrangeLayerTabButton];
-            
-        }
     }
 }
 
 #pragma mark After ViewWillAppear Method Sequence
 -(void) callMenu
 {
-	FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
-	if(appDele.changesFlag)
-	{
-		warningAlert = [[UIAlertView alloc]initWithTitle:@"Unsaved Flyer" message:@"You have not saved your flyer.\nAll progress will be lost if you continue." delegate:self cancelButtonTitle:@"Continue" otherButtonTitles:@"Cancel",nil];
-		[warningAlert show];
-	}
-	else
-	{
-		[self.navigationController popViewControllerAnimated:YES];
-	}
-	
-	
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 +(UIView *)setTitleViewWithTitle:(NSString *)title rect:(CGRect)rect{
@@ -1879,6 +1854,7 @@ int arrangeLayerIndex;
 
 -(void) chooseEdit{
     //[self resetLayerScrollView];
+    
     // Remove border from layer thumbnail
     for(UIView *subView in [layerScrollView subviews]){
         if([subView isKindOfClass:[UIButton class]]){
@@ -1981,40 +1957,32 @@ int arrangeLayerIndex;
     [rightUndoBarButton setEnabled:YES];
     [self makeCopyOfLayers];
     
-    
-    
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-65, -6, 50, 50)];
-    label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont fontWithName:TITLE_FONT size:18];
-    label.textAlignment = UITextAlignmentCenter;
-    label.textColor = [UIColor whiteColor];
-    label.text = @"Edit Layer";
-    self.navigationItem.titleView = label;
-    
-    UIButton *cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 4, 60, 33)];
+
+    //Cancel Button
+    UIButton *cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [cancelButton addTarget:self action:@selector(Mycancel) forControlEvents:UIControlEventTouchUpInside];
-    [cancelButton setTitle:@"Cancel" forState:UIControlStateNormal];
-    [cancelButton setBackgroundColor:[UIColor clearColor ]];
-    [cancelButton setFont:[UIFont fontWithName:TITLE_FONT size:16]];
-    [cancelButton setTitleColor:[globle colorWithHexString:@"84c441"]forState:UIControlStateNormal];
+    [cancelButton setBackgroundImage:[UIImage imageNamed:@"cancel_button"] forState:UIControlStateNormal];
     cancelButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:cancelButton];
     [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
     
+    //Edit Button
     UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 4, 35, 33)];
     [editButton addTarget:self action:@selector(MyEdit) forControlEvents:UIControlEventTouchUpInside];
     [editButton setTitle:@"Edit" forState:UIControlStateNormal];
     [editButton setBackgroundColor:[UIColor clearColor ]];
-    [editButton setFont:[UIFont fontWithName:TITLE_FONT size:16]];
+    editButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:16];
     [editButton setTitleColor:[globle colorWithHexString:@"84c441"]forState:UIControlStateNormal];
     editButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *leftBarMenuButton = [[UIBarButtonItem alloc] initWithCustomView:editButton];
     
+
+    //Delete Button
     UIButton *delButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 4, 60, 33)];
     [delButton addTarget:self action:@selector(MyDelete) forControlEvents:UIControlEventTouchUpInside];
     [delButton setTitle:@"Delete" forState:UIControlStateNormal];
     [delButton setBackgroundColor:[UIColor clearColor ]];
-    [delButton setFont:[UIFont fontWithName:TITLE_FONT size:16]];
+    delButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:16];
     [delButton setTitleColor:[globle colorWithHexString:@"84c441"]forState:UIControlStateNormal];
     delButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *leftBarHelpButton = [[UIBarButtonItem alloc] initWithCustomView:delButton];
@@ -2064,7 +2032,7 @@ int arrangeLayerIndex;
     label.font = [UIFont fontWithName:TITLE_FONT size:18];
     label.textAlignment = UITextAlignmentCenter;
     label.textColor = [UIColor whiteColor];
-    label.text = @"ADD TEXT";
+    label.text = @"TEXT";
     self.navigationItem.titleView = label;
 
 
@@ -2076,12 +2044,15 @@ int arrangeLayerIndex;
     [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
     
     UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-	[backButton addTarget:self action:@selector(cancelLayer) forControlEvents:UIControlEventTouchUpInside];
+	[backButton addTarget:self action:@selector(callMenu) forControlEvents:UIControlEventTouchUpInside];
     [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
      backButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     [self.navigationItem setLeftBarButtonItem:backBarButton];
 
+    
+    //Add Context Library
+    [self AddBottomTabs:libText];
 
     [self hideAddMoreButton];
 
@@ -2119,14 +2090,6 @@ int arrangeLayerIndex;
 
 -(void)callStyle
 {
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-45, -6, 50, 50)];
-    label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont fontWithName:TITLE_FONT size:18];
-    label.textAlignment = UITextAlignmentCenter;
-    label.textColor = [UIColor whiteColor];
-    label.text = @"ADD TEXT";
-    self.navigationItem.titleView = label;
-    //self.navigationItem.titleView = [PhotoController setTitleViewWithTitle:@"Add Text" rect:CGRectMake(-45, -6, 50, 50)];
 
     if(selectedAddMoreLayerTab == -1){
         UIButton *photoButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
@@ -2143,32 +2106,33 @@ int arrangeLayerIndex;
         [doneButton addTarget:self action:@selector(logTextAddedEvent) forControlEvents:UIControlEventTouchUpInside];
         [doneButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
          doneButton.showsTouchWhenHighlighted = YES;
-        [doneButton setBackgroundColor:[UIColor clearColor ]];
-        [doneButton setFont:[UIFont fontWithName:TITLE_FONT size:16]];
-        [doneButton setTitleColor:[globle colorWithHexString:@"84c441"]forState:UIControlStateNormal];
         UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
         [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
-    } 
-    
-    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-	[backButton addTarget:self action:@selector(callWrite) forControlEvents:UIControlEventTouchUpInside];
-    [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
-     backButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-    [self.navigationItem setLeftBarButtonItem:backBarButton];
-
+    }
    
     [self hideAddMoreButton];
 
-	[UIView beginAnimations:nil context:NULL];
+    UITextView *lastTextView = msgTextView;
+    
+    //Checking Empty String
+    if ([lastTextView.text isEqualToString:@""] ) {
+        textLayerCount--;
+        
+        [msgTextView resignFirstResponder];
+        [msgTextView removeFromSuperview];
+        
+        // Remove object from array if not in delete mode
+        if(!deleteMode)
+            [textLabelLayersArray removeLastObject];
+        [self callAddMoreLayers];
+        return;
+    }
+    
+    [UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationDuration:0.4f];
     
-
 	textBackgrnd.alpha = ALPHA1;
     [self AddScrollView:fontScrollView];
-
-    UITextView *lastTextView = msgTextView;
     CustomLabel *lastLabelView = [self textLabelLayersArray][arrangeLayerIndex];
 	lastLabelView.alpha=1;	
 	textBackgrnd.alpha = ALPHA1;
@@ -2197,6 +2161,30 @@ int arrangeLayerIndex;
     iconTouchFlag = NO;
 }
 
+-(void)DonePhoto{
+    
+    if (newPhotoImgView.image == nil) {
+        photoLayerCount--;
+        
+        CALayer * lastLayer = [[[self photoLayersArray] lastObject] layer];
+        [lastLayer setMasksToBounds:YES];
+        [lastLayer setCornerRadius:0];
+        [lastLayer setBorderWidth:0];
+        [lastLayer setBorderColor:[[UIColor clearColor] CGColor]];
+        
+        // Remove object from array if not in delete mode
+        if(!deleteMode){
+            [photoLayersArray[arrangeLayerIndex] removeFromSuperview];
+            [photoLayersArray removeLastObject];
+        }
+
+    }
+    
+    [self callAddMoreLayers];
+    [self logLayerAddedEvent];
+    [self logPhotoAddedEvent];
+    
+}
 
 
 -(void)choosePhoto
@@ -2206,7 +2194,7 @@ int arrangeLayerIndex;
     label.font = [UIFont fontWithName:TITLE_FONT size:18];
     label.textAlignment = UITextAlignmentCenter;
     label.textColor = [UIColor whiteColor];
-    label.text = @"ADD PHOTO";
+    label.text = @"PHOTO";
     self.navigationItem.titleView = label;
     
     
@@ -2220,27 +2208,12 @@ int arrangeLayerIndex;
         [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
     } else {
         UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-        //doneButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
-        //[doneButton setTitle:@"Done" forState:UIControlStateNormal];
-        [doneButton addTarget:self action:@selector(callAddMoreLayers) forControlEvents:UIControlEventTouchUpInside];
-        [doneButton addTarget:self action:@selector(logLayerAddedEvent) forControlEvents:UIControlEventTouchUpInside];
-        [doneButton addTarget:self action:@selector(logPhotoAddedEvent) forControlEvents:UIControlEventTouchUpInside];
+        [doneButton addTarget:self action:@selector(DonePhoto) forControlEvents:UIControlEventTouchUpInside];
         [doneButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
-        [doneButton setBackgroundColor:[UIColor clearColor ]];
-        [doneButton setFont:[UIFont fontWithName:TITLE_FONT size:16]];
-        [doneButton setTitleColor:[globle colorWithHexString:@"84c441"]forState:UIControlStateNormal];
         doneButton.showsTouchWhenHighlighted = YES;
         UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
         [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
     }
-
-    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-	[backButton addTarget:self action:@selector(cancelLayer) forControlEvents:UIControlEventTouchUpInside];
-    [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
-     backButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-    [self.navigationItem setLeftBarButtonItem:backBarButton];
 
     // Make Copy of layers
     if(undoCount > 1){
@@ -2248,6 +2221,8 @@ int arrangeLayerIndex;
         [self makeCopyOfLayers];
     }
 
+    //Add Context Library
+    [self AddBottomTabs:libPhoto];
 
     [self hideAddMoreButton];
 
@@ -2380,26 +2355,31 @@ int arrangeLayerIndex;
 
 -(void)callAddMoreLayers {
     
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-30, -6, 50, 50)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
     label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont fontWithName:TITLE_FONT size:18];
+    label.font = [UIFont fontWithName:TITLE_FONT size:12];
     label.textAlignment = UITextAlignmentCenter;
     label.textColor = [UIColor whiteColor];
-    label.text = @"LAYERS";
+    label.text = @"UNTITLED";
     self.navigationItem.titleView = label;
     
-    UIButton *saveButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    saveButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
-	[saveButton addTarget:self action:@selector(callSaveAndShare) forControlEvents:UIControlEventTouchUpInside];
-    [saveButton setBackgroundImage:[UIImage imageNamed:@"share_button"] forState:UIControlStateNormal];
-    saveButton.showsTouchWhenHighlighted = YES;
+     //ShareButton
+    UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+    shareButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
+	[shareButton addTarget:self action:@selector(callSaveAndShare) forControlEvents:UIControlEventTouchUpInside];
+    [shareButton setBackgroundImage:[UIImage imageNamed:@"share_button"] forState:UIControlStateNormal];
+    shareButton.showsTouchWhenHighlighted = YES;
+    
+    //UndoButton
     UIButton *undoButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     undoButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
 	[undoButton addTarget:self action:@selector(undo:) forControlEvents:UIControlEventTouchUpInside];
     [undoButton setBackgroundImage:[UIImage imageNamed:@"undo"] forState:UIControlStateNormal];
     undoButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:saveButton];
+    
+    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
     rightUndoBarButton = [[UIBarButtonItem alloc] initWithCustomView:undoButton];
+    
     if(undoCount <= 0){
         [rightUndoBarButton setEnabled:NO];
         undoCount = 0;
@@ -2407,13 +2387,24 @@ int arrangeLayerIndex;
 
     [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,rightUndoBarButton,nil]];
     
+    //BackButton
     UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
 	[backButton addTarget:self action:@selector(callMenu) forControlEvents:UIControlEventTouchUpInside];
     [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
      backButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-    [self.navigationItem setLeftBarButtonItem:backBarButton];
+    
+    //HelpButton
+    UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+    [helpButton addTarget:self action:@selector(loadHelpController) forControlEvents:UIControlEventTouchUpInside];
+    [helpButton setBackgroundImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
+    helpButton.showsTouchWhenHighlighted = YES;
+    UIBarButtonItem *leftBarHelpButton = [[UIBarButtonItem alloc] initWithCustomView:helpButton];
+    
+    [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:backBarButton,leftBarHelpButton,nil]];
+    
+    
     
     [self AddBottomTabs:libFlyer];
     [self AddAllLayersIntoFront ];
@@ -2558,6 +2549,14 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 -(IBAction)setStyleTabAction:(id) sender
 {
+    
+    [fontTabButton setBackgroundImage:[UIImage imageNamed:@"font_button"] forState:UIControlStateHighlighted];
+    [colorTabButton setBackgroundImage:[UIImage imageNamed:@"color_button"] forState:UIControlStateHighlighted];
+    [colorTabButton setBackgroundImage:[UIImage imageNamed:@"color_button"] forState:UIControlStateNormal];
+    [sizeTabButton setBackgroundImage:[UIImage imageNamed:@"size_button"] forState:UIControlStateNormal];
+    [fontBorderTabButton setBackgroundImage:[UIImage imageNamed:@"background_button"] forState:UIControlStateNormal];
+
+    
 	UIButton *selectedButton = (UIButton*)sender;
 	if(selectedButton == fontTabButton)
 	{
@@ -2568,25 +2567,18 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         [self AddScrollView:fontScrollView];
 
 		[fontTabButton setBackgroundImage:[UIImage imageNamed:@"font_button_selected"] forState:UIControlStateNormal];
-		[colorTabButton setBackgroundImage:[UIImage imageNamed:@"color_button"] forState:UIControlStateNormal];
-		[sizeTabButton setBackgroundImage:[UIImage imageNamed:@"size_button"] forState:UIControlStateNormal];
-		[fontBorderTabButton setBackgroundImage:[UIImage imageNamed:@"background_button"] forState:UIControlStateNormal];
-		[UIView commitAnimations];
 	}
 	else if(selectedButton == colorTabButton)
 	{
 		[UIView beginAnimations:nil context:NULL];
 		[UIView setAnimationDuration:0.4f];
-
+        
         //Add ContextView
         [self AddScrollView:colorScrollView];
-        
-		[fontTabButton setBackgroundImage:[UIImage imageNamed:@"font_button"] forState:UIControlStateNormal];
-		[colorTabButton setBackgroundImage:[UIImage imageNamed:@"color_button_selected"] forState:UIControlStateNormal];
-		[sizeTabButton setBackgroundImage:[UIImage imageNamed:@"size_button"] forState:UIControlStateNormal];
-	
-		[fontBorderTabButton setBackgroundImage:[UIImage imageNamed:@"background_button"] forState:UIControlStateNormal];
 		[UIView commitAnimations];
+        
+        [colorTabButton setBackgroundImage:[UIImage imageNamed:@"color_button_selected"] forState:UIControlStateNormal];
+
 	}
 	else if(selectedButton == sizeTabButton)
 	{
@@ -2596,10 +2588,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         //Add ContextView
         [self AddScrollView:sizeScrollView];
         
-		[fontTabButton setBackgroundImage:[UIImage imageNamed:@"font_button"] forState:UIControlStateNormal];
-		[colorTabButton setBackgroundImage:[UIImage imageNamed:@"color_button"] forState:UIControlStateNormal];
 		[sizeTabButton setBackgroundImage:[UIImage imageNamed:@"size_button_selected"] forState:UIControlStateNormal];
-		[fontBorderTabButton setBackgroundImage:[UIImage imageNamed:@"background_button"] forState:UIControlStateNormal];
 		[UIView commitAnimations];
 	}
 	else if(selectedButton == fontBorderTabButton)
@@ -2610,11 +2599,12 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         //Add ContextView
         [self AddScrollView:fontBorderScrollView];
         
-		[fontTabButton setBackgroundImage:[UIImage imageNamed:@"font_button"] forState:UIControlStateNormal];
-		[colorTabButton setBackgroundImage:[UIImage imageNamed:@"color_button"] forState:UIControlStateNormal];
-		[sizeTabButton setBackgroundImage:[UIImage imageNamed:@"size_button"] forState:UIControlStateNormal];
 		[fontBorderTabButton setBackgroundImage:[UIImage imageNamed:@"background_button_selected"] forState:UIControlStateNormal];
 		[UIView commitAnimations];
+	}
+    else if(selectedButton == fontEditButton)
+	{
+        [self callWrite];
 	}
     
 }
@@ -2729,16 +2719,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 -(IBAction) setAddMoreLayerTabAction:(id) sender {
     layerallow = 0;
     
-
 	UIButton *selectedButton = (UIButton*)sender;
-    
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-30, -6, 50, 50)];
-    label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont fontWithName:TITLE_FONT size:18];
-    label.textAlignment = UITextAlignmentCenter;
-    label.textColor = [UIColor whiteColor];
-    label.text = @"LAYERS";
-    self.navigationItem.titleView = label;
     [self SetMenu];
     
     if(undoCount >= 1){
@@ -2754,9 +2735,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         photoTouchFlag = NO;
         iconTouchFlag = NO;
         lableTouchFlag = YES;
-        
-        //Add Context Library
-        [self AddBottomTabs:libText];
         
         [self plusButtonClick];
 	}
@@ -2774,7 +2752,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         lableTouchFlag = NO;
 		imgPickerFlag =2;
         textBackgrnd.alpha = ALPHA0;
-        [self AddBottomTabs:libPhoto];
+       
         [self plusButtonClick];
 
 	}
@@ -2799,12 +2777,14 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         selectedAddMoreLayerTab = ADD_MORE_ICONTAB;
         lableTouchFlag = NO;
         symbolTouchFlag= NO;
-        //photoTouchFlag= NO;
         iconTouchFlag = YES;
-       
+        
+        //Add right Bar button
+        [self AddDonetoRightBarBotton];
+        
 		[UIView beginAnimations:nil context:NULL];
 		[UIView setAnimationDuration:0.4f];
-        [self AddDonetoRightBarBotton];
+        
         //Add ContextView
         [self AddScrollView:iconScrollView];
 
@@ -2812,9 +2792,11 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	}
     else if(selectedButton == backgroundTabButton)
 	{
+        //Add right Bar button
+        [self AddDonetoRightBarBotton];
+        
         [UIView beginAnimations:nil context:NULL];
 		[UIView setAnimationDuration:0.4f];
-            [self AddDonetoRightBarBotton];
             [self setlibBackgroundTabAction:backtemplates];
         [UIView commitAnimations];
 
@@ -2835,8 +2817,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 -(void)resetLayerScrollView{
 
     doStopWobble = YES;
-    
-    [self setAddMoreLayerTabAction:arrangeLayerTabButton];
 }
 
 -(void) MyEdit{
@@ -2844,7 +2824,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
-	[backButton addTarget:self action:@selector(cancelLayer) forControlEvents:UIControlEventTouchUpInside];
+	[backButton addTarget:self action:@selector(callMenu) forControlEvents:UIControlEventTouchUpInside];
     backButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *leftBarMenuButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     
@@ -2855,7 +2835,8 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     UIBarButtonItem *leftBarHelpButton = [[UIBarButtonItem alloc] initWithCustomView:helpButton];
     
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarMenuButton,leftBarHelpButton,nil]];
- [self editLayer:editButtonGlobal overrided:nil];
+    
+    [self editLayer:editButtonGlobal overrided:nil];
 }
 
 -(void)editLayer:(UIButton *)editButton{
@@ -2919,19 +2900,27 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
      deleteMode = YES;
 }
 -(void) Mycancel{
+    
+    // Remove border from layer thumbnail
+    for(UIView *subView in [layerScrollView subviews]){
+        if([subView isKindOfClass:[UIButton class]]){
+            CALayer * lastLayer = [subView layer];
+            [lastLayer setMasksToBounds:YES];
+            [lastLayer setCornerRadius:0];
+            [lastLayer setBorderWidth:0];
+            [lastLayer setBorderColor:[[UIColor clearColor] CGColor]];
+            [lastLayer setBackgroundColor:[[UIColor clearColor] CGColor]];
+        }
+    }
+    
+    [self removeBordersFromAllLayers];
     [self SetMenu];
 
 }
 
 -(void) SetMenu{
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-30, -6, 50, 50)];
-    label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont fontWithName:TITLE_FONT size:18];
-    label.textAlignment = UITextAlignmentCenter;
-    label.textColor = [UIColor whiteColor];
-    label.text = @"LAYERS";
-    self.navigationItem.titleView = label;
     
+    //Back Button
     UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
@@ -2939,6 +2928,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     backButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *leftBarMenuButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     
+    //Help Button
     UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [helpButton addTarget:self action:@selector(loadHelpController) forControlEvents:UIControlEventTouchUpInside];
     [helpButton setBackgroundImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
@@ -2946,17 +2936,21 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     UIBarButtonItem *leftBarHelpButton = [[UIBarButtonItem alloc] initWithCustomView:helpButton];
     
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarMenuButton,leftBarHelpButton,nil]];
-    UIButton *saveButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    saveButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
-	[saveButton addTarget:self action:@selector(callSaveAndShare) forControlEvents:UIControlEventTouchUpInside];
-    [saveButton setBackgroundImage:[UIImage imageNamed:@"share_button"] forState:UIControlStateNormal];
-    saveButton.showsTouchWhenHighlighted = YES;
+    
+    //Share Button
+    UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+    shareButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
+	[shareButton addTarget:self action:@selector(callSaveAndShare) forControlEvents:UIControlEventTouchUpInside];
+    [shareButton setBackgroundImage:[UIImage imageNamed:@"share_button"] forState:UIControlStateNormal];
+    shareButton.showsTouchWhenHighlighted = YES;
+    
+    //Undo Button
     UIButton *undoButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     undoButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
 	[undoButton addTarget:self action:@selector(undo:) forControlEvents:UIControlEventTouchUpInside];
     [undoButton setBackgroundImage:[UIImage imageNamed:@"undo"] forState:UIControlStateNormal];
     undoButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:saveButton];
+    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
     rightUndoBarButton = [[UIBarButtonItem alloc] initWithCustomView:undoButton];
     [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,rightUndoBarButton,nil]];
     if(undoCount == 0){
@@ -3361,7 +3355,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
             [lastLayer setBorderWidth:0];
             [lastLayer setBorderColor:[[UIColor clearColor] CGColor]];
             
-            UIImageView *newPhotoImgView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 220, 200)];
+            newPhotoImgView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 220, 200)];
             newPhotoImgView.tag = photoLayerCount++;
             arrangeLayerIndex = [[self photoLayersArray] count];
 
@@ -3370,7 +3364,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
             [l setCornerRadius:10];
             [l setBorderWidth:1.0];
             [l setBorderColor:[[UIColor grayColor] CGColor]];
-            //[newPhotoImgView setBackgroundColor:[ UIColor colorWithWhite:1 alpha:0.4f]];
             [self.imgView addSubview:newPhotoImgView];
             
             [[self photoLayersArray] addObject:newPhotoImgView];
@@ -4670,15 +4663,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 -(void)AddAllLayersIntoFront{
     
     layerallow = 0 ;
-    
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-30, -6, 50, 50)];
-    label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont fontWithName:TITLE_FONT size:18];
-    label.textAlignment = UITextAlignmentCenter;
-    label.textColor = [UIColor whiteColor];
-    label.text = @"LAYERS";
-    self.navigationItem.titleView = label;
-    
     selectedAddMoreLayerTab = ARRANGE_LAYERTAB;
     [self removeBordersFromAllLayers];
     
@@ -4696,8 +4680,12 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     NSInteger layerScrollWidth = 60;
     NSInteger layerScrollHeight = 55;
     
+    if(textLabelLayersArray.count == 0 && photoLayersArray.count  == 0 && symbolLayersArray.count == 0 && iconLayersArray == 0){
+        [self AddScrollView:addMoreLayerOrSaveFlyerLabel];
+        return;
+    }
+    
     if(textLabelLayersArray){
-        //NSLog(@"Text Layers %d", [textLabelLayersArray count]);
         
         for(int text=0; text<[textLabelLayersArray count]; text++){
             

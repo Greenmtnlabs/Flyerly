@@ -287,14 +287,11 @@ if it exist then we call Merging Process
     PFUser *user = [PFUser currentUser];
     user[@"contact"] = [oldUserobj objectForKey:@"contact"];
     user[@"name"] = [oldUserobj objectForKey:@"name"];
-    //user[@"email"] = [oldUserobj objectForKey:@"email"];
     user[@"fbinvited"] = [oldUserobj objectForKey:@"fbinvited"];
     user[@"tweetinvited"] = [oldUserobj objectForKey:@"tweetinvited"];
     [user saveInBackground];
 
-    NSString  *NewUID = user.objectId;
-    NSString  *OldUID = oldUserobj.objectId;
-    
+    //Rename Old directory Name from New Username on device
 	NSString *homeDirectoryPath = NSHomeDirectory();
     NSString *NewUIDFolderName = [user objectForKey:@"username"];
 	NSString *OldUIDPath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/",[oldUserobj objectForKey:@"username"]]];
@@ -309,21 +306,23 @@ if it exist then we call Merging Process
         NSString *newPath = [[oldPath stringByDeletingLastPathComponent] stringByAppendingPathComponent:newDirectoryName];
         NSError *error = nil;
         [[NSFileManager defaultManager] moveItemAtPath:oldPath toPath:newPath error:&error];
+
         if (error) {
             NSLog(@"%@",error.localizedDescription);
-            // handle error
         }
     }
     
     // For Merging User info Parse not allow here
     // So Now we run Server side script from here and passing user names
     // For transfer Purchases and Old Flyers Info
+    NSString  *NewUID = user.objectId;
+    NSString  *OldUID = oldUserobj.objectId;
+
     [PFCloud callFunctionInBackground:@"mergeUser"
                        withParameters:@{@"oldUser":OldUID,@"newUser":NewUID}
                                 block:^(NSString *result, NSError *error) {
                                     if (!error) {
                                         NSLog(@"Cloud Success");
-                                        // result is @"Hello world!"
                                     }
      }];
     

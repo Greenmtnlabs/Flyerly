@@ -38,7 +38,6 @@
 		0DF3A540108E0E5C00D6C887 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DF3A53F108E0E5C00D6C887 /* SystemConfiguration.framework */; };
 		0DF3A542108E0E5C00D6C887 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DF3A541108E0E5C00D6C887 /* libsqlite3.0.dylib */; settings = {ATTRIBUTES = (Weak, ); }; };
 		0DFC531E109576AB00B18478 /* LauchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DFC5317109576AB00B18478 /* LauchViewController.xib */; };
-		0DFC531F109576AB00B18478 /* LoginController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DFC5318109576AB00B18478 /* LoginController.xib */; };
 		0DFC5320109576AB00B18478 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DFC5319109576AB00B18478 /* MainWindow.xib */; };
 		0DFC5321109576AB00B18478 /* PhotoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DFC531A109576AB00B18478 /* PhotoController.xib */; };
 		0DFC5322109576AB00B18478 /* ShareSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DFC531C109576AB00B18478 /* ShareSettingViewController.m */; };
@@ -1250,7 +1249,6 @@
 		65E26179171C366200C485B5 /* bottom_buttons_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E26178171C366200C485B5 /* bottom_buttons_bg.png */; };
 		65E2617C171C372D00C485B5 /* done_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E2617A171C372C00C485B5 /* done_selected.png */; };
 		65E2617D171C372D00C485B5 /* done.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E2617B171C372C00C485B5 /* done.png */; };
-		65E26181171C59D100C485B5 /* AddFriendItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65E26180171C59D100C485B5 /* AddFriendItem.xib */; };
 		65E26184171C5B7600C485B5 /* checkbox_checked.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E26182171C5B7600C485B5 /* checkbox_checked.png */; };
 		65E26185171C5B7600C485B5 /* checkbox.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E26183171C5B7600C485B5 /* checkbox.png */; };
 		65F1BE8E173AA13400EE6F9F /* email_disabled_saved.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F1BE6B173AA11E00EE6F9F /* email_disabled_saved.png */; };
@@ -1324,7 +1322,6 @@
 		0DF3A53F108E0E5C00D6C887 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		0DF3A541108E0E5C00D6C887 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		0DFC5317109576AB00B18478 /* LauchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LauchViewController.xib; sourceTree = "<group>"; };
-		0DFC5318109576AB00B18478 /* LoginController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = LoginController.xib; path = Classes/LoginController.xib; sourceTree = "<group>"; };
 		0DFC5319109576AB00B18478 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MainWindow.xib; path = Classes/MainWindow.xib; sourceTree = "<group>"; };
 		0DFC531A109576AB00B18478 /* PhotoController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoController.xib; sourceTree = "<group>"; };
 		0DFC531B109576AB00B18478 /* ShareSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareSettingViewController.h; sourceTree = "<group>"; };
@@ -1439,7 +1436,7 @@
 		0F805AD2179E92AD002AEA24 /* flash_icon_off@x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flash_icon_off@x.png"; sourceTree = "<group>"; };
 		0F80C384178561C200D36795 /* AccountController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountController.h; sourceTree = "<group>"; };
 		0F80C385178561C200D36795 /* AccountController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountController.m; sourceTree = "<group>"; };
-		0F80C387178561DA00D36795 /* AccountController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountController.xib; sourceTree = "<group>"; };
+		0F80C387178561DA00D36795 /* AccountController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AccountController.xib; path = ../AccountController.xib; sourceTree = "<group>"; };
 		0F80C389178578CB00D36795 /* RegisterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterController.h; sourceTree = "<group>"; };
 		0F80C38A178578CB00D36795 /* RegisterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterController.m; sourceTree = "<group>"; };
 		0F80C38C178578E400D36795 /* RegisterController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RegisterController.xib; path = ../RegisterController.xib; sourceTree = "<group>"; };
@@ -1672,7 +1669,6 @@
 		201CB976188428C700C0B5B3 /* createButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "createButton@2x.png"; sourceTree = "<group>"; };
 		202233A117BD2A1E0093DD4E /* back_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back_button.png; sourceTree = "<group>"; };
 		202233A217BD2A1E0093DD4E /* back_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back_button@2x.png"; sourceTree = "<group>"; };
-		2025FAB018606E4A00CC9188 /* GTMOAuth2ViewTouch.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = GTMOAuth2ViewTouch.xib; path = "Submodules/google-api-objectivec/Source/OAuth2/Touch/GTMOAuth2ViewTouch.xib"; sourceTree = "<group>"; };
 		2025FAB41860742700CC9188 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		2025FAB6186074D100CC9188 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		2025FAB8186074F300CC9188 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
@@ -2060,7 +2056,7 @@
 		2039F7C417F0837300DE2AA4 /* dfcontact@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "dfcontact@2x.jpg"; sourceTree = "<group>"; };
 		203E0B7317DDDD720039C3A7 /* InputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputViewController.h; sourceTree = "<group>"; };
 		203E0B7417DDDD720039C3A7 /* InputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputViewController.m; sourceTree = "<group>"; };
-		203E0B7517DDDD720039C3A7 /* InputViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = InputViewController.xib; path = Classes/InputViewController.xib; sourceTree = "<group>"; };
+		203E0B7517DDDD720039C3A7 /* InputViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InputViewController.xib; sourceTree = "<group>"; };
 		2044FF93185088ED00A26B42 /* MainSettingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainSettingCell.h; sourceTree = "<group>"; };
 		2044FF94185088ED00A26B42 /* MainSettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainSettingCell.m; sourceTree = "<group>"; };
 		2044FF95185088ED00A26B42 /* MainSettingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainSettingCell.xib; sourceTree = "<group>"; };
@@ -2099,7 +2095,7 @@
 		208E35A317C20CC700CE54BE /* RegisterViewController_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RegisterViewController_iPhone5.xib; path = ../RegisterViewController_iPhone5.xib; sourceTree = "<group>"; };
 		208E35A517C20E0100CE54BE /* tick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tick.png; sourceTree = "<group>"; };
 		208E35A617C20E0100CE54BE /* tick@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tick@2x.png"; sourceTree = "<group>"; };
-		208E35A917C2246C00CE54BE /* AcountViewControlleriPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AcountViewControlleriPhone5.xib; sourceTree = "<group>"; };
+		208E35A917C2246C00CE54BE /* AcountViewControlleriPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AcountViewControlleriPhone5.xib; path = ../AcountViewControlleriPhone5.xib; sourceTree = "<group>"; };
 		208E35AB17C224B100CE54BE /* welcome_bg-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "welcome_bg-568h@2x.png"; sourceTree = "<group>"; };
 		208ED65F17C4CD660097EFCE /* cp_share_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cp_share_selected.png; sourceTree = "<group>"; };
 		208ED66017C4CD660097EFCE /* cp_share_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cp_share_selected@2x.png"; sourceTree = "<group>"; };
@@ -2357,7 +2353,7 @@
 		654B254717202A4C0047C8F6 /* afterupdatescreen_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "afterupdatescreen_bg@2x.png"; sourceTree = "<group>"; };
 		654B254817202A4C0047C8F6 /* ok_button_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ok_button_bg.png; sourceTree = "<group>"; };
 		654B254917202A4C0047C8F6 /* ok_button_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ok_button_bg@2x.png"; sourceTree = "<group>"; };
-		654B254F17202B1C0047C8F6 /* AfterUpdateController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AfterUpdateController.xib; sourceTree = "<group>"; };
+		654B254F17202B1C0047C8F6 /* AfterUpdateController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AfterUpdateController.xib; path = ../AfterUpdateController.xib; sourceTree = "<group>"; };
 		654B255117202B360047C8F6 /* AfterUpdateController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AfterUpdateController.h; sourceTree = "<group>"; };
 		654B255217202B360047C8F6 /* AfterUpdateController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AfterUpdateController.m; sourceTree = "<group>"; };
 		6560C1C01727F836005BE8DD /* CustomPhotoController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomPhotoController.xib; sourceTree = "<group>"; };
@@ -2622,7 +2618,6 @@
 		65E26178171C366200C485B5 /* bottom_buttons_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bottom_buttons_bg.png; sourceTree = "<group>"; };
 		65E2617A171C372C00C485B5 /* done_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = done_selected.png; sourceTree = "<group>"; };
 		65E2617B171C372C00C485B5 /* done.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = done.png; sourceTree = "<group>"; };
-		65E26180171C59D100C485B5 /* AddFriendItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddFriendItem.xib; sourceTree = "<group>"; };
 		65E26182171C5B7600C485B5 /* checkbox_checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkbox_checked.png; sourceTree = "<group>"; };
 		65E26183171C5B7600C485B5 /* checkbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkbox.png; sourceTree = "<group>"; };
 		65F1BE6B173AA11E00EE6F9F /* email_disabled_saved.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = email_disabled_saved.png; sourceTree = "<group>"; };
@@ -2714,12 +2709,14 @@
 				1D3623240D0F684500981E51 /* FlyrAppDelegate.h */,
 				1D3623250D0F684500981E51 /* FlyrAppDelegate.m */,
 				0DF3A309108DF33D00D6C887 /* Common.h */,
-				20F3597B1888DBEE001376B6 /* FlyerMainScreen */,
-				20F3597C1888DC8A001376B6 /* CreateFlyer */,
 				20F4D8E217BA40A5007B2DF5 /* MyGlobleClass */,
 				208C6850186DAB38004A74F2 /* Config */,
 				49997FF817E07F7300CF1038 /* Categories */,
+				2013528C188C608400822073 /* FlyerlyUpdate */,
+				2013528B188C5FC900822073 /* LaunchScreen */,
 				20F359741888D5B9001376B6 /* LoginControllers */,
+				20F3597B1888DBEE001376B6 /* FlyerMainScreen */,
+				20F3597C1888DC8A001376B6 /* CreateFlyer */,
 				2002C8981888CF3F005B18C9 /* ShareScreen */,
 				20F359781888D92E001376B6 /* InviteScreen */,
 				2002C89218888A98005B18C9 /* SavedFlyers */,
@@ -2729,14 +2726,8 @@
 				20F3597D1888DCE1001376B6 /* UserProfile */,
 				E8C7C36610976BFC0064935A /* SaveFlyerController.h */,
 				E8C7C36710976BFC0064935A /* SaveFlyerController.m */,
-				654B255117202B360047C8F6 /* AfterUpdateController.h */,
-				654B255217202B360047C8F6 /* AfterUpdateController.m */,
 				65BDB2DD17341D290084E032 /* CustomLabel.h */,
 				65BDB2DE17341D290084E032 /* CustomLabel.m */,
-				0F80C384178561C200D36795 /* AccountController.h */,
-				0F80C385178561C200D36795 /* AccountController.m */,
-				203E0B7317DDDD720039C3A7 /* InputViewController.h */,
-				203E0B7417DDDD720039C3A7 /* InputViewController.m */,
 				49997FF517DF786400CF1038 /* ParentViewController.h */,
 				49997FF617DF786400CF1038 /* ParentViewController.m */,
 			);
@@ -2759,7 +2750,7 @@
 			path = ExternalFrameworks;
 			sourceTree = "<group>";
 		};
-		0DF3A361108DF47400D6C887 /* Data */ = {
+		0DF3A361108DF47400D6C887 /* ImageLibrary */ = {
 			isa = PBXGroup;
 			children = (
 				200773B21887E39E00448346 /* text_edit_selected.png */,
@@ -3229,6 +3220,7 @@
 				65C7A5191721A06B003F1A84 /* white_bg_thumbnail.png */,
 				65C7A51A1721A06B003F1A84 /* white_bg_thumbnail@2x.png */,
 			);
+			name = ImageLibrary;
 			path = Data;
 			sourceTree = "<group>";
 		};
@@ -3765,21 +3757,35 @@
 			name = Filter;
 			sourceTree = "<group>";
 		};
-		2025FAB118606E4A00CC9188 /* Google OAuth */ = {
+		2013528A188C588100822073 /* Comments */ = {
 			isa = PBXGroup;
 			children = (
-				2025FAB018606E4A00CC9188 /* GTMOAuth2ViewTouch.xib */,
+				203E0B7317DDDD720039C3A7 /* InputViewController.h */,
+				203E0B7417DDDD720039C3A7 /* InputViewController.m */,
+				203E0B7517DDDD720039C3A7 /* InputViewController.xib */,
 			);
-			name = "Google OAuth";
+			name = Comments;
 			sourceTree = "<group>";
 		};
-		2025FAB218606E4A00CC9188 /* Resources - ShareKit Library */ = {
+		2013528B188C5FC900822073 /* LaunchScreen */ = {
 			isa = PBXGroup;
 			children = (
-				2025FAB118606E4A00CC9188 /* Google OAuth */,
+				0F80C384178561C200D36795 /* AccountController.h */,
+				0F80C385178561C200D36795 /* AccountController.m */,
+				0F80C387178561DA00D36795 /* AccountController.xib */,
+				208E35A917C2246C00CE54BE /* AcountViewControlleriPhone5.xib */,
 			);
-			name = "Resources - ShareKit Library";
-			path = Submodules/ShareKit;
+			name = LaunchScreen;
+			sourceTree = "<group>";
+		};
+		2013528C188C608400822073 /* FlyerlyUpdate */ = {
+			isa = PBXGroup;
+			children = (
+				654B255117202B360047C8F6 /* AfterUpdateController.h */,
+				654B255217202B360047C8F6 /* AfterUpdateController.m */,
+				654B254F17202B1C0047C8F6 /* AfterUpdateController.xib */,
+			);
+			name = FlyerlyUpdate;
 			sourceTree = "<group>";
 		};
 		202C47B7187D6E4B00FE0975 /* Bitly */ = {
@@ -3998,6 +4004,7 @@
 				2044FF94185088ED00A26B42 /* MainSettingCell.m */,
 				2044FF95185088ED00A26B42 /* MainSettingCell.xib */,
 				20F3597A1888DB06001376B6 /* ShareSetting */,
+				2013528A188C588100822073 /* Comments */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -4093,24 +4100,17 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				2025FAB218606E4A00CC9188 /* Resources - ShareKit Library */,
 				65CC0AB5171802DF003D0BE7 /* Settings.bundle */,
 				8D1107310486CEB800E47090 /* Flyr-Info.plist */,
-				203E0B7517DDDD720039C3A7 /* InputViewController.xib */,
-				0DFC5318109576AB00B18478 /* LoginController.xib */,
 				0DFC5319109576AB00B18478 /* MainWindow.xib */,
 				E8C7C36810976BFC0064935A /* SaveFlyerController.xib */,
-				0DF3A361108DF47400D6C887 /* Data */,
+				0DF3A361108DF47400D6C887 /* ImageLibrary */,
 				6513C1AB1716FE0F00355FC3 /* Fonts */,
 				65CC0AB9171803FB003D0BE7 /* Localizable.strings */,
-				65E26180171C59D100C485B5 /* AddFriendItem.xib */,
-				654B254F17202B1C0047C8F6 /* AfterUpdateController.xib */,
 				6560C1C01727F836005BE8DD /* CustomPhotoController.xib */,
 				0FCC3A27177DD3080046484C /* LocationItem.xib */,
 				0FCC3A2C177DD8BF0046484C /* LocationController.xib */,
 				0FD247D6178453C2003CA6DD /* SearchLocationItem.xib */,
-				0F80C387178561DA00D36795 /* AccountController.xib */,
-				208E35A917C2246C00CE54BE /* AcountViewControlleriPhone5.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -4509,7 +4509,6 @@
 				0D4904F9109199F900855C30 /* cellindicator.png in Resources */,
 				E8A7347E1092CFF300661AAD /* ShareViewController.xib in Resources */,
 				0DFC531E109576AB00B18478 /* LauchViewController.xib in Resources */,
-				0DFC531F109576AB00B18478 /* LoginController.xib in Resources */,
 				0DFC5320109576AB00B18478 /* MainWindow.xib in Resources */,
 				0DFC5321109576AB00B18478 /* PhotoController.xib in Resources */,
 				0DFC5323109576AB00B18478 /* ShareSettingViewController.xib in Resources */,
@@ -4715,7 +4714,6 @@
 				65E2617C171C372D00C485B5 /* done_selected.png in Resources */,
 				200773B81887E39E00448346 /* text_edit.png in Resources */,
 				65E2617D171C372D00C485B5 /* done.png in Resources */,
-				65E26181171C59D100C485B5 /* AddFriendItem.xib in Resources */,
 				65E26184171C5B7600C485B5 /* checkbox_checked.png in Resources */,
 				65E26185171C5B7600C485B5 /* checkbox.png in Resources */,
 				65BE6718171D3F7A0019C1FE /* contact@2x.png in Resources */,

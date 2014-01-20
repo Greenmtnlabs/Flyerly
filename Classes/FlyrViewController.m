@@ -194,7 +194,6 @@ sd:;
     }
 	
     [self.view addSubview:tView];
-	self.tView.rowHeight =102;
     [self.tView setBackgroundView:nil];
     [self.tView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [searchTextField addTarget:self action:@selector(textFieldTapped:) forControlEvents:UIControlEventEditingChanged];
@@ -265,14 +264,14 @@ sd:;
     label.text = @"SAVED";
     self.navigationItem.titleView = label;
 
-    // Create left bar help button
-    UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 29)];
-    [shareButton addTarget:self action:@selector(doNew:) forControlEvents:UIControlEventTouchUpInside];
-    [shareButton setBackgroundImage:[UIImage imageNamed:@"pencil_icon"] forState:UIControlStateNormal];
-    shareButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *shareBarButton = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
+    // Create Button
+    UIButton *createButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+    [createButton addTarget:self action:@selector(doNew:) forControlEvents:UIControlEventTouchUpInside];
+    [createButton setBackgroundImage:[UIImage imageNamed:@"createButton"] forState:UIControlStateNormal];
+    createButton.showsTouchWhenHighlighted = YES;
+    UIBarButtonItem *createBarButton = [[UIBarButtonItem alloc] initWithCustomView:createButton];
     
-    return [NSMutableArray arrayWithObjects:shareBarButton,nil];
+    return [NSMutableArray arrayWithObjects:createBarButton,nil];
 }
 
 - (void)didReceiveMemoryWarning {
