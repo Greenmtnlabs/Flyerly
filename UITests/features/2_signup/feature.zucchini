@@ -1,53 +1,94 @@
 Start on the "Welcome" screen:
-  Take a screenshot
   Tap "Register"
-
+  
 Then on the "Register" screen:
   Take a screenshot
-  Fill the form with "tester, riksof123, riksof123, rehan.ali@riksof.com, Rehan,03453498941"
-  Tap "SIGN UP"
-  Wait for "2" seconds
-  Take a screenshot named "home_screen"
-  
-Then on the "Home" screen:
-  Tap "Create"
-  Wait for "1" seconds
-  Take a screenshot named "take_photo_screen"
-  Tap "Take a Photo"
-  Wait for "1" seconds
-  Tap "Next"
-  Tap "Text"
-  Fill the form with "RIKSOF SQA"
-  Tap Next
-  Wait for "1" seconds
-  Take a screenshot named "create-text-formating-screen"
-  Tap "Done"
-  
-Then on the "Layers" screen:
-  Take a screenshot named "create-layers-screen"
-  Tap on "Share"
-  Take a screenshot named "share-screen"
-  Tap "Back"
-
-Then on the "Home" screen:
-  Tap "Invite"
-  Wait for "1" seconds
-  Take a screenshot named "invitefriend_screen"
-  Tap "Back"
+  Type "tester" in the "Username" field
+  Type "riksof123" in the "Password" field
+  Type "riksof123" in the "Confirm Password" field
+  Type "rehan.ali@riksof.com" in the "Email" field
+  Type "Rehan Ali" in the "Name" field
+  Type "03453498941" in the "Phone Number" field
+  Take a screenshot
+  Tap "Sign Up"
 
 Then on the "Home" screen:
   Tap "Settings"
-  Wait for "1" seconds
-  Take a screenshot named "settings_screen"
-  Tap "Sharing Options"
-  Take screenshot named "sharing-setting_screen"
-  Tap "Back"
-  Tap "Account Setting"
-  Take screenshot named "account-setting_screen"
-  Tap "Back"
+
+Then on the "Settings" screen:
   Tap "Sign Out"
-  Take screenshot named "signout_screen"
+  Confirm "Sign out"
 
+Then on the "Welcome" screen:
+  Tap "Register"
 
-
+Then on the "Register" screen:
+  Tap "Facebook"
   
+Then on the "Home" screen:
+  Tap "Settings"
+
+Then on the "Settings" screen:
+  Tap "Sign Out"
+  Confirm "Sign out"
+
+Then on the "Welcome" screen:
+  Tap "Register"
+
+Then on the "Register" screen:
+  Tap "Twitter"
+  Wait for "15" seconds
+
+Then on the "Home" screen:
+  Tap "Settings"
+  
+Then on the "Settings" screen:
+  Tap "Sign Out"
+  Confirm "Sign out"
+
+Then on the "Welcome" screen:
+  Tap "Register"
+  
+Then on the "Register" screen:
+  Tap "Next"
+  Confirm "OK"
+  Type "tester" in the "Username" field
+  Type "riksof123" in the "Password" field
+  Type "riksof123" in the "Confirm Password" field
+  Type "rehan@riksof.com" in the "Email" field
+  Type "Rehan Ali" in the "Name" field
+  Type "03453498941" in the "Phone Number" field
+  Tap "SignUp"
+  Take a screenshot
+  Confirm "OK"
+  Clear the "Username" field
+  Type "tester1" in the "Username" field
+  Clear the "Password" field
+  Type "riksof123" in the "Password" field
+  Clear the "Confirm Password" field
+  Type "riksof" in the "Confirm Password" field
+  Clear the "Email" field
+  Type "rehan@riksof.com" in the "Email" field
+  Clear the "Name" field
+  Type "Rehan Ali" in the "Name" field
+  Clear the "Phone Number" field
+  Type "03453498941" in the "Phone Number" field
+  Tap "Next"
+  Take a screenshot
+  Confirm "OK"
+  Clear the "Username" field
+  Type "tester" in the "Username" field
+  Clear the "Password" field
+  Type "riksof123" in the "Password" field
+  Clear the "Confirm Password" field
+  Type "riksof123" in the "Confirm Password" field
+  Clear the "Email" field
+  Type "rehan.ali@riksof.com" in the "Email" field
+  Clear the "Name" field
+  Type "Rehan Ali" in the "Name" field
+  Clear the "Phone Number" field
+  Type "03453498941" in the "Phone Number" field
+  Tap "SignUp"
+  Take a screenshot
+  Confirm "OK"
+  Tap "Back"

@@ -58,6 +58,6 @@
     <resources>
         <image name="Zpassword_box.png" width="252" height="36"/>
         <image name="Zqemail_box.png" width="252" height="35"/>
-        <image name="welcome_bg-568h.png" width="320" height="460"/>
+        <image name="welcome_bg-568h.png" width="640" height="1096"/>
     </resources>
 </document>
