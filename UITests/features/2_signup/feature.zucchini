@@ -1,6 +1,6 @@
 Start on the "Welcome" screen:
   Tap "Register"
-
+  
 Then on the "Register" screen:
   Take a screenshot
   Type "tester" in the "Username" field
@@ -8,9 +8,9 @@ Then on the "Register" screen:
   Type "riksof123" in the "Confirm Password" field
   Type "rehan.ali@riksof.com" in the "Email" field
   Type "Rehan Ali" in the "Name" field
-  Type "03453498941" in the "Phone Numner" field
+  Type "03453498941" in the "Phone Number" field
   Take a screenshot
-  Tap "SignUp"
+  Tap "Sign Up"
 
 Then on the "Home" screen:
   Tap "Settings"
@@ -36,54 +36,59 @@ Then on the "Welcome" screen:
   Tap "Register"
 
 Then on the "Register" screen:
-    Tap "Twitter"
-    Wait for "15" seconds
+  Tap "Twitter"
+  Wait for "15" seconds
 
 Then on the "Home" screen:
-    Tap "Settings"
+  Tap "Settings"
   
 Then on the "Settings" screen:
-    Tap "Sign Out"
-    Confirm "Sign out"
+  Tap "Sign Out"
+  Confirm "Sign out"
 
 Then on the "Welcome" screen:
-    Tap "Register"
-	Tap "SignUp"
-	Confirm "OK"
-    Type "tester" in the "Username" field
-    Type "riksof123" in the "Password" field
-    Type "riksof123" in the "Confirm Password" field
-    Type "rehan@riksof.com" in the "Email" field
-    Type "Rehan Ali" in the "Name" field
-    Type "03453498941" in the "Phone Numner" field
-    Tap "SignUp"
-	Take a screenshot
-	Confirm "OK"
-    Type "tester1" in the "Username" field
-    Type "riksof123" in the "Password" field
-    Type "riksof" in the "Confirm Password" field
-    Type "rehan@riksof.com" in the "Email" field
-    Type "Rehan Ali" in the "Name" field
-    Type "03453498941" in the "Phone Numner" field
-    Tap "SignUp"
-	Take a screenshot
-	Confirm "OK"
-    Type "tester" in the "Username" field
-    Type "riksof123" in the "Password" field
-    Type "riksof123" in the "Confirm Password" field
-    Type "rehan.ali@riksof.com" in the "Email" field
-    Type "Rehan Ali" in the "Name" field
-    Type "03453498941" in the "Phone Numner" field
-    Tap "SignUp"
-	Take a screenshot
-	Confirm "OK"
-	Tap "Back"
-	
+  Tap "Register"
   
-  
-  
-  
-
-
-
-  
+Then on the "Register" screen:
+  Tap "Next"
+  Confirm "OK"
+  Type "tester" in the "Username" field
+  Type "riksof123" in the "Password" field
+  Type "riksof123" in the "Confirm Password" field
+  Type "rehan@riksof.com" in the "Email" field
+  Type "Rehan Ali" in the "Name" field
+  Type "03453498941" in the "Phone Number" field
+  Tap "SignUp"
+  Take a screenshot
+  Confirm "OK"
+  Clear the "Username" field
+  Type "tester1" in the "Username" field
+  Clear the "Password" field
+  Type "riksof123" in the "Password" field
+  Clear the "Confirm Password" field
+  Type "riksof" in the "Confirm Password" field
+  Clear the "Email" field
+  Type "rehan@riksof.com" in the "Email" field
+  Clear the "Name" field
+  Type "Rehan Ali" in the "Name" field
+  Clear the "Phone Number" field
+  Type "03453498941" in the "Phone Number" field
+  Tap "Next"
+  Take a screenshot
+  Confirm "OK"
+  Clear the "Username" field
+  Type "tester" in the "Username" field
+  Clear the "Password" field
+  Type "riksof123" in the "Password" field
+  Clear the "Confirm Password" field
+  Type "riksof123" in the "Confirm Password" field
+  Clear the "Email" field
+  Type "rehan.ali@riksof.com" in the "Email" field
+  Clear the "Name" field
+  Type "Rehan Ali" in the "Name" field
+  Clear the "Phone Number" field
+  Type "03453498941" in the "Phone Number" field
+  Tap "SignUp"
+  Take a screenshot
+  Confirm "OK"
+  Tap "Back"
