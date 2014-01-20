@@ -54,16 +54,20 @@ Then on the "Home" screen:
 Then on the "Settings" screen:
   Tap "Sign Out"
   Confirm "Sign out"
-  
+
+Then on the "Welcome" screen:
+  Tap "SignIn"
+
 Then on the "SignIn" screen:
   Clear the "Username" field
   Type "RehanAli" in the "Username" field
   Type "riksof" in the "Password" field
   Tap "Sign In"
   Take a screenshot
-  Tap "Register"
+  Confirm "Register"
+  Wait for "5" seconds
   
-Then in the "Register" screen:
+Then on the "Register" screen:
   Tap "Back"
 
 Then on the "SignIn" screen:
@@ -71,13 +75,5 @@ Then on the "SignIn" screen:
   Type "RehanAli" in the "Username" field
   Type "riksof" in the "Password" field
   Tap "Sign In"
-  Tap "Try Again"
-  Take a screenshot
-  
-
- 
-  
-  
-
-
-
+  Confirm "Try Again"
+  Tap "Back"
