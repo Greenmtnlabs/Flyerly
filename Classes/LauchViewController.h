@@ -11,7 +11,7 @@
 #import "ParentViewController.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "FacebookLikeView.h"
-#import "Singleton.h"
+#import "FlyerlySingleton.h"
 #import "Reachability.h"
 
 @class FlyrViewController;
@@ -28,7 +28,7 @@
 	FlyrViewController *tpController;
 	ShareSettingViewController *spController;
 	InviteFriendsController *addFriendsController;
-    Singleton *globle;
+    FlyerlySingleton *globle;
     IBOutlet UILabel *createFlyrLabel;
     IBOutlet UILabel *savedFlyrLabel;
     IBOutlet UILabel *inviteFriendLabel;

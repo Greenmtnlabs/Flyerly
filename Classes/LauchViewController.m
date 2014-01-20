@@ -144,7 +144,7 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-	globle = [Singleton RetrieveSingleton];
+	globle = [FlyerlySingleton RetrieveSingleton];
     createFlyrButton.showsTouchWhenHighlighted = YES;
     savedFlyrButton.showsTouchWhenHighlighted = YES;
     inviteFriendButton.showsTouchWhenHighlighted = YES;

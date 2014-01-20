@@ -19,7 +19,7 @@
 //
 #import "NBUEditImageViewController.h"
 #import "NBUCropView.h"
-#import "Singleton.h"
+#import "FlyerlySingleton.h"
 #import "PresetFilterViewController.h"
 
 @class PresetFilterViewController;
@@ -28,7 +28,7 @@
     PresetFilterViewController *nbuFilter;
 }
 
-@property (strong, nonatomic) Singleton *globle;
+@property (strong, nonatomic) FlyerlySingleton *globle;
 
 -(void)gotoFilterImage;
 -(void)goback;

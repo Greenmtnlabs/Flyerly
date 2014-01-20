@@ -6,21 +6,21 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "Singleton.h"
+#import "FlyerlySingleton.h"
 
-@implementation Singleton
+@implementation FlyerlySingleton
 
 @synthesize accounts,inputValue,sharelink,iosVersion,CheckHelpOpen,NBUimage,appOpenFirstTime,gallerComesFromCamera;
 
-static Singleton *sharedSingleton = nil;
+static FlyerlySingleton *sharedSingleton = nil;
 
-+(Singleton *)RetrieveSingleton
++(FlyerlySingleton *)RetrieveSingleton
 {
     @synchronized(self)
 	{
 		if(sharedSingleton ==nil)
 		{
-			sharedSingleton =[[Singleton alloc]init];
+			sharedSingleton =[[FlyerlySingleton alloc]init];
 		}
 	}
     return sharedSingleton;

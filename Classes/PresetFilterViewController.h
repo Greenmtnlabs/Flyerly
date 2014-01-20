@@ -22,12 +22,12 @@
 #import "NBUImagePickerPrivate.h"
 #import "NBUFilterGroup.h"
 #import "NBUImagePickerController.h"
-#import "Singleton.h"
+#import "FlyerlySingleton.h"
 
 @interface PresetFilterViewController : NBUEditImageViewController {
 }
 
-@property (nonatomic, strong) Singleton *globle;
+@property (nonatomic, strong) FlyerlySingleton *globle;
 
 // Actions
 - (IBAction)changeImage:(id)sender;

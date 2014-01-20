@@ -9,17 +9,17 @@
 #import <UIKit/UIKit.h>
 #import "CustomLabel.h"
 #import "EBPurchase.h"
-#import "Singleton.h"
+#import "FlyerlySingleton.h"
 #import "ParentViewController.h"
 #import "GalleryViewController.h"
 #import "CameraViewController.h"
 
 
-@class Singleton,LauchViewController,CameraViewController,GalleryViewController;
+@class FlyerlySingleton,LauchViewController,CameraViewController,GalleryViewController;
 @interface PhotoController :ParentViewController<UIActionSheetDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, EBPurchaseDelegate>
 {
     int layerallow;
-    Singleton *globle;
+    FlyerlySingleton *globle;
 	UIImageView *imgView;
 	UIImageView *templateBckgrnd;
 	UIImageView *textBackgrnd;

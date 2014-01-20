@@ -62,7 +62,7 @@
     
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationDuration:0.2f];
-    globle = [Singleton RetrieveSingleton];
+    globle = [FlyerlySingleton RetrieveSingleton];
     globle.NBUimage = nil;
     showbars = YES;
     

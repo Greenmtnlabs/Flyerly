@@ -130,6 +130,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
  */
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    [FlyerUser migrateUserto3dot0:nil];
     // Crittercism for crash reports.
     [Crittercism initWithAppID: @"519a14f897c8f27969000019"];
     
@@ -187,7 +188,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     } else {
         // User has already been greeted.
         if( IS_IPHONE_5 ) {
-            accountController = [[AccountController alloc]initWithNibName:@"AcountViewControlleriPhone5" bundle:nil];
+            accountController = [[AccountController alloc]initWithNibName:@"AccountController" bundle:nil];
             lauchController = [[LauchViewController alloc]initWithNibName:@"LauchViewControllerIPhone5" bundle:nil];
         } else {
             accountController = [[AccountController alloc]initWithNibName:@"AccountController" bundle:nil];
@@ -229,8 +230,8 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
         }else{
             NSLog(@"Old Twitter User found");
             
-            // Merging Account Process
-            [self MergeAccount:object];
+            // Migrate Account For 3.0 Version
+            [FlyerUser migrateUserto3dot0:object];
             
         }
     }];
@@ -269,8 +270,8 @@ if it exist then we call Merging Process
                 }else{
                     NSLog(@"Email Exist");
                     
-                    // Merging Account Info
-                    [self MergeAccount:object];
+                    // Migrate Account For 3.0 Version
+                    [FlyerUser migrateUserto3dot0:object];
 
                 }
             }];
@@ -280,56 +281,6 @@ if it exist then we call Merging Process
     }];
 }
 
--(void)MergeAccount:(PFObject *)oldUserobj{
-  
-    
-    //Update fields of newly created user from old user
-    PFUser *user = [PFUser currentUser];
-    user[@"contact"] = [oldUserobj objectForKey:@"contact"];
-    user[@"name"] = [oldUserobj objectForKey:@"name"];
-    user[@"fbinvited"] = [oldUserobj objectForKey:@"fbinvited"];
-    user[@"tweetinvited"] = [oldUserobj objectForKey:@"tweetinvited"];
-    [user saveInBackground];
-
-    //Rename Old directory Name from New Username on device
-	NSString *homeDirectoryPath = NSHomeDirectory();
-    NSString *NewUIDFolderName = [user objectForKey:@"username"];
-	NSString *OldUIDPath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/",[oldUserobj objectForKey:@"username"]]];
-    
-    
-    if (![[NSFileManager defaultManager] fileExistsAtPath:OldUIDPath isDirectory:NULL]) {
-        NSLog(@"");
-	}else{
-        
-        NSString *newDirectoryName = NewUIDFolderName;
-        NSString *oldPath = OldUIDPath;
-        NSString *newPath = [[oldPath stringByDeletingLastPathComponent] stringByAppendingPathComponent:newDirectoryName];
-        NSError *error = nil;
-        [[NSFileManager defaultManager] moveItemAtPath:oldPath toPath:newPath error:&error];
-
-        if (error) {
-            NSLog(@"%@",error.localizedDescription);
-        }
-    }
-    
-    // For Merging User info Parse not allow here
-    // So Now we run Server side script from here and passing user names
-    // For transfer Purchases and Old Flyers Info
-    NSString  *NewUID = user.objectId;
-    NSString  *OldUID = oldUserobj.objectId;
-
-    [PFCloud callFunctionInBackground:@"mergeUser"
-                       withParameters:@{@"oldUser":OldUID,@"newUser":NewUID}
-                                block:^(NSString *result, NSError *error) {
-                                    if (!error) {
-                                        NSLog(@"Cloud Success");
-                                    }
-     }];
-    
-}
-
-
-#pragma mark -
 
 @end
 

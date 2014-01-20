@@ -32,7 +32,7 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    globle = [Singleton RetrieveSingleton];
+    globle = [FlyerlySingleton RetrieveSingleton];
     
     //Apply Button
     UIButton *applyButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];

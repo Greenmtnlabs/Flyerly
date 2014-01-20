@@ -12,9 +12,9 @@
 #import "LauchViewController.h"
 #import "InputViewController.h"
 #import "ParentViewController.h"
-#import "Singleton.h"
+#import "FlyerlySingleton.h"
 
-@class LauchViewController,InputViewController,Singleton;
+@class LauchViewController,InputViewController,FlyerlySingleton;
 @interface ShareSettingViewController : ParentViewController <OFFlickrAPIRequestDelegate, MFMailComposeViewControllerDelegate> {
     IBOutlet UIButton *facebookButton;
 	IBOutlet UIButton *twitterButton;
@@ -28,7 +28,7 @@
     IBOutlet UISwitch *saveToRollSwitch;
 
     IBOutlet UIButton *helpTab;
-    Singleton *globle;
+    FlyerlySingleton *globle;
     OFFlickrAPIRequest *flickrRequest;
     LauchViewController *launchController;
 }

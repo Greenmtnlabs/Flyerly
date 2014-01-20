@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "ProfileViewController.h"
 
-@interface Singleton : NSObject
+@interface FlyerlySingleton : NSObject
 {
     
 }
@@ -25,7 +25,7 @@
 @property (nonatomic, strong) NSString *appOpenFirstTime;
 @property (nonatomic, strong) UIImage *NBUimage;
 @property (nonatomic, strong) NSString *gallerComesFromCamera;
-+(Singleton *)RetrieveSingleton;
++(FlyerlySingleton *)RetrieveSingleton;
 -(UIColor*)colorWithHexString:(NSString*)hex;
 
 @end

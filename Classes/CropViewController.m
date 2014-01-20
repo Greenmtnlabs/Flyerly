@@ -26,7 +26,7 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    self.globle = [Singleton RetrieveSingleton];
+    self.globle = [FlyerlySingleton RetrieveSingleton];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
     
     //Done Button
