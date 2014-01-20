@@ -49,6 +49,8 @@ Then on the "Settings" screen:
 Then on the "Welcome" screen:
     Tap "Register"
 	Tap "SignUp"
+	Wait for "5" seconds
+	Take a screenshit
 	Confirm "OK"
     Type "tester" in the "Username" field
     Type "riksof123" in the "Password" field
@@ -57,6 +59,7 @@ Then on the "Welcome" screen:
     Type "Rehan Ali" in the "Name" field
     Type "03453498941" in the "Phone Numner" field
     Tap "SignUp"
+	Wait for "5" seconds
 	Take a screenshot
 	Confirm "OK"
     Type "tester1" in the "Username" field
@@ -66,6 +69,7 @@ Then on the "Welcome" screen:
     Type "Rehan Ali" in the "Name" field
     Type "03453498941" in the "Phone Numner" field
     Tap "SignUp"
+	Wait for "5" seconds
 	Take a screenshot
 	Confirm "OK"
     Type "tester" in the "Username" field
@@ -75,6 +79,7 @@ Then on the "Welcome" screen:
     Type "Rehan Ali" in the "Name" field
     Type "03453498941" in the "Phone Numner" field
     Tap "SignUp"
+	Wait for "5" seconds
 	Take a screenshot
 	Confirm "OK"
 	Tap "Back"
