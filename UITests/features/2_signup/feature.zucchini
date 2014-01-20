@@ -48,6 +48,8 @@ Then on the "Settings" screen:
 
 Then on the "Welcome" screen:
     Tap "Register"
+	
+Then on the "Register" screen:
 	Tap "SignUp"
 	Wait for "5" seconds
 	Take a screenshit
@@ -62,6 +64,12 @@ Then on the "Welcome" screen:
 	Wait for "5" seconds
 	Take a screenshot
 	Confirm "OK"
+	Tap "Back"
+	
+Then on the "Welcome" screen:
+    Tap "Register"
+
+Then on the "Register" screen:	 
     Type "tester1" in the "Username" field
     Type "riksof123" in the "Password" field
     Type "riksof" in the "Confirm Password" field
@@ -72,6 +80,12 @@ Then on the "Welcome" screen:
 	Wait for "5" seconds
 	Take a screenshot
 	Confirm "OK"
+	Tap "Back"
+	
+Then on the "Welcome" screen:
+	Tap "Register"
+
+Then on the "Register" screen:
     Type "tester" in the "Username" field
     Type "riksof123" in the "Password" field
     Type "riksof123" in the "Confirm Password" field
