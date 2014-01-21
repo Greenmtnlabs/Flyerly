@@ -31,6 +31,7 @@ Then on the "Home" screen:
 Then on the "Settings" screen:
   Tap "Sign Out"
   Confirm "Sign out"
+	
 Then on the "Welcome" screen:
   Tap "Register"
 

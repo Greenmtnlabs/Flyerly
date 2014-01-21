@@ -10,7 +10,7 @@ devices:
     simulator: iPhone (Retina 3.5-inch)
     screen: retina_ios4
 
-  iPhone 4S:
-    UDID: lolffb28d74a6fraj2156090784avasc50725dd0
+  iOS Device:
+    UDID: 3fd87224e1e01f29c3c0c84fe727865db0f66bfd
     screen: retina_ios6
 
