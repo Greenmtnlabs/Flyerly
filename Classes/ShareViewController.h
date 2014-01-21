@@ -19,12 +19,11 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import <Twitter/Twitter.h>
 #import <MessageUI/MessageUI.h>
-#import "LauchViewController.h"
 #import "FlyerlySingleton.h"
 #import "ParentViewController.h"
 #import "BitlyURLShortener.h"
 
-@class FlyrViewController,LauchViewController,FlyerlySingleton;
+@class FlyrViewController,FlyerlySingleton;
 @class SaveFlyerController,PhotoController;
 @class LoadingView;
 
@@ -61,7 +60,6 @@
 	FlyrViewController *fvController;
 	SaveFlyerController *svController;
 	LoadingView *loadingView;
-    LauchViewController  *launchController;
     UIDocumentInteractionController *dic;
     BOOL showbars;
     NSMutableArray  *photoTitles;         // Titles of images
@@ -69,7 +67,6 @@
     NSMutableArray  *photoURLsLargeImage; // URL to larger image
 	OFFlickrAPIRequest *flickrRequest;
     
-    BOOL fromPhotoController;
     int countOfSharingNetworks;
     
     NSMutableArray *listOfPlaces;
@@ -114,7 +111,6 @@
 @property(nonatomic,strong)FlyrViewController *fvController;
 @property(nonatomic,strong)SaveFlyerController *svController;
 @property (nonatomic, strong) LoadingView *loadingView;
-@property BOOL fromPhotoController;
 
 
 -(IBAction)onClickFacebookButton;

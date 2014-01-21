@@ -147,7 +147,7 @@
     [super viewDidLoad];
     
     //Testing
-    [FlyerUser UpdateFolderStructure:@"zohaib"];
+    //[FlyerUser UpdateFolderStructure:@"zohaib"];
     //
     
     

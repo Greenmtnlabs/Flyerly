@@ -24,7 +24,7 @@
 @implementation ShareViewController
 
 
-@synthesize selectedFlyerImage,imgView,fvController,svController,titleView,descriptionView,selectedFlyerDescription,selectedFlyerTitle, detailFileName, imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,loadingView,dic,fromPhotoController,scrollView, saveToCameraRollLabel, saveToRollSwitch,locationBackground,locationLabel,networkParentView,locationButton,listOfPlaces,clipboardlabel,sharelink,bitly;
+@synthesize selectedFlyerImage,imgView,fvController,svController,titleView,descriptionView,selectedFlyerDescription,selectedFlyerTitle, detailFileName, imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,loadingView,dic,scrollView, saveToCameraRollLabel, saveToRollSwitch,locationBackground,locationLabel,networkParentView,locationButton,listOfPlaces,clipboardlabel,sharelink,bitly;
 
 -(void)callFlyrView{
 	[self.navigationController popToViewController:fvController animated:YES];
@@ -36,26 +36,12 @@
 }
 
 /*
- * pop to root view / main screen
+ * pop to root view
  */
-
-
-
 -(IBAction)goback{
     [self.navigationController popViewControllerAnimated:YES];
 }
 
--(void) callMenu {
-
-    
-    if (IS_IPHONE_5) {
-        launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewControllerIPhone5" bundle:nil];
-    }else{
-        launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
-    }
-    
-    [self.navigationController pushViewController:launchController animated:NO];
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -133,51 +119,24 @@
 	svController.isDraftView = YES;
 	svController.dvController =self;
 	self.navigationController.navigationBarHidden = NO;
-    
-    // If navigating from Create flyer then show menu button on left 
-    if(fromPhotoController){
-        self.navigationItem.hidesBackButton = YES;
-        // Create right bar button
-        UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-        menuButton.showsTouchWhenHighlighted = YES;
-        [menuButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
-        [menuButton addTarget:self action:@selector(callMenu) forControlEvents:UIControlEventTouchUpInside];
-        UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
 
-        // Create left bar help button
-        UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-        helpButton.showsTouchWhenHighlighted = YES;
-        [helpButton addTarget:self action:@selector(loadHelpController) forControlEvents:UIControlEventTouchUpInside];
-        [helpButton setImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
+    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+    [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
+    backButton.showsTouchWhenHighlighted = YES;
+    [backButton addTarget:self action:@selector(goback) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
 
+    // Create left bar help button
+    UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+    helpButton.showsTouchWhenHighlighted = YES;
+    [helpButton addTarget:self action:@selector(loadHelpController) forControlEvents:UIControlEventTouchUpInside];
+    [helpButton setBackgroundImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
+    UIBarButtonItem *leftHelpBarButton = [[UIBarButtonItem alloc] initWithCustomView:helpButton];
+    [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarButton,leftHelpBarButton,nil]];
 
-
-        UIBarButtonItem *leftHelpBarButton = [[UIBarButtonItem alloc] initWithCustomView:helpButton];
-        [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarButton,leftHelpBarButton,nil]];
-        
-        [self.navigationItem setLeftBarButtonItem:leftBarButton];
-
-    } else {
-
-        self.navigationItem.hidesBackButton = YES;
-
-        UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-        [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
-        backButton.showsTouchWhenHighlighted = YES;
-        [backButton addTarget:self action:@selector(goback) forControlEvents:UIControlEventTouchUpInside];
-        UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-
-        // Create left bar help button
-        UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-          helpButton.showsTouchWhenHighlighted = YES;
-        [helpButton addTarget:self action:@selector(loadHelpController) forControlEvents:UIControlEventTouchUpInside];
-        [helpButton setBackgroundImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
-        UIBarButtonItem *leftHelpBarButton = [[UIBarButtonItem alloc] initWithCustomView:helpButton];
-        [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarButton,leftHelpBarButton,nil]];
-}
 
     // Set title on bar
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-60, -6, 50, 50)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:TITLE_FONT size:18];
     label.textAlignment = UITextAlignmentCenter;
@@ -187,20 +146,6 @@
     
     // Set font and size on camera roll text
     [locationLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:13]];
-
-    // Setup flyer edit button
-    /*
-    UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 4, 35, 33)];
-    [editButton setTitle:@"Edit" forState:UIControlStateNormal];
-    [editButton setBackgroundColor:[UIColor clearColor ]];
-    [editButton setTitleColor:[globle colorWithHexString:@"84c441"]forState:UIControlStateNormal];
-    editButton.showsTouchWhenHighlighted = YES;
-    
-    // Get index from flyer image path
-    NSString *index = [FlyrViewController getFlyerNumberFromPath:imageFileName];
-    editButton.tag = [index intValue];
-    UIBarButtonItem *rightEditBarButton = [[UIBarButtonItem alloc] initWithCustomView:editButton];
-    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightEditBarButton,nil]];*/
 
 
 	[UIView commitAnimations];

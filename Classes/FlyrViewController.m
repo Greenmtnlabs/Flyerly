@@ -66,7 +66,8 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
 
 	for(int i =0;i< [files count];i++)
 	{
-		NSString *img = files[i];
+        
+        NSString *img = files[i];
 		img = [@"/" stringByAppendingString:img];
 		finalImagePath= [folderPath stringByAppendingString:img];
         
@@ -365,36 +366,9 @@ sd:;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	 
-	 ShareViewController *draftViewController = [[ShareViewController alloc] initWithNibName:@"DraftViewController" bundle:nil];
-    NSString *imageName;
-    NSArray *detailArray;
-    if (searching) {
-        detailArray = photoDetailArrayBackup[indexPath.row];
-        imageName = photoArrayBackup[indexPath.row];
-    }else{
-        detailArray = photoDetailArray[indexPath.row];
-       imageName = photoArray[indexPath.row];
-    }
+    ptController = [[PhotoController alloc]initWithNibName:@"PhotoController" bundle:nil];
 
-	 NSData *imageData = [[NSData alloc ]initWithContentsOfMappedFile:imageName];
-	UIImage *currentFlyerImage = [UIImage imageWithData:imageData];
-	draftViewController.fvController = self;
-	draftViewController.selectedFlyerImage = currentFlyerImage;
-    
-    if(photoDetailArray.count > indexPath.row){
-      
-        NSString *title = detailArray[0];
-        NSString *description = detailArray[1];
-        
-        draftViewController.selectedFlyerTitle = title;
-        draftViewController.selectedFlyerDescription = description;
-        draftViewController.imageFileName = imageName;
-       
-        NSString *newText = [imageName stringByReplacingOccurrencesOfString:@".jpg" withString:@".txt"];
-        draftViewController.detailFileName = newText;
-    }
-
-	[self.navigationController pushViewController:draftViewController animated:YES];
+	[self.navigationController pushViewController:ptController animated:YES];
 	[self performSelector:@selector(deselect) withObject:nil afterDelay:0.2f];
 }
 

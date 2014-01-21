@@ -233,16 +233,18 @@
 -(void) SetMenu;
 -(void) MyDelete;
 -(void) Mycancel;
--(void)delaytime;
 -(void) choosePhoto;
--(void)DonePhoto;
+-(void) DonePhoto;
 -(void) saveMyFlyer;
 -(void)callSaveAndShare;
 -(void)openCustomCamera;
 -(BOOL)canAddMoreLayers;
+
 - (void)layoutScrollImages:(UIScrollView*)selectedScrollView scrollWidth:(NSInteger)kScrollObjWidth scrollHeight:(NSInteger)kScrollObjHeight;
+
 -(NSData*)getCurrentFrameAndSaveIt;
 -(void)loadPhotoLibrary;
+
 + (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize;
 +(UIView *)setTitleViewWithTitle:(NSString *)title rect:(CGRect)rect;
 

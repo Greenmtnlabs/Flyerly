@@ -637,22 +637,22 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 		color.frame = CGRectMake(0, 5, colorScrollWidth, colorScrollHeight);
 
         
-		id colorName =colorArray[(i-1)];
-		UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(color.frame.origin.x+5, color.frame.origin.y, color.frame.size.width, color.frame.size.height)];
+		id colorName = colorArray[(i-1)];
+		UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(color.frame.origin.x, color.frame.origin.y-3, color.frame.size.width, color.frame.size.height)];
 		[label setBackgroundColor:colorName];
         label.layer.borderColor = [UIColor grayColor].CGColor;
         label.layer.borderWidth = 1.0;
 		[color addSubview:label];
-		color.tag = i+30;
+		color.tag = i + 30;
         
-        if(i>5){
+        if(i > 5){
             if(!isAllColorPurchased){
                 
                 NSString *productToCheck = [[NSString stringWithFormat:@"%@%d",PREFIX_FONT_COLOR_PRODUCT,color.tag] stringByReplacingOccurrencesOfString:@"." withString:@""];
 
                 if(![self isProductPurchased:productToCheck]){
                     UIImageView *lock = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lock"]];
-                    lock.frame = CGRectMake(color.frame.origin.x-15, 24, 17, 19);
+                    lock.frame = CGRectMake(20, 20, 17, 19);
                     [color addSubview:lock];
                     color.userInteractionEnabled = NO;
                 }
@@ -2162,7 +2162,7 @@ int arrangeLayerIndex;
     iconTouchFlag = NO;
 }
 
--(void)DonePhoto{
+-(void) DonePhoto{
     
     if (newPhotoImgView.image == nil) {
         photoLayerCount--;
@@ -2341,18 +2341,7 @@ int arrangeLayerIndex;
 
 }
 
-/*
- * This method is called when:
- * 1) Next is pressed from select template screen
- * 2) When any layer is Edited or Discard Editing
- */
--(void)delaytime{
-    [NSTimer scheduledTimerWithTimeInterval:0.6
-                                     target:self
-                                   selector:@selector(callAddMoreLayers)
-                                   userInfo:nil
-                                    repeats:NO];
-}
+
 
 -(void)callAddMoreLayers {
     
@@ -2483,7 +2472,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     appDele.changesFlag = NO;
 
     ShareViewController *draftViewController = [[ShareViewController alloc] initWithNibName:@"DraftViewController" bundle:nil];
-    draftViewController.fromPhotoController = YES;
     draftViewController.selectedFlyerImage = [UIImage imageWithData:data];
     draftViewController.selectedFlyerTitle = globle.FlyerName;
     if([[self textLabelLayersArray] count] > 0){
