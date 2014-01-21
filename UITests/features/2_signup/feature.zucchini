@@ -51,11 +51,24 @@ Then on the "Welcome" screen:
 	
 Then on the "Register" screen:
     Tap "Next"
+	Take a screenshot
     Confirm "OK"
+	Tap "Back"
+	
+Then on the "Welcome" screen:
+    Tap "Register"
+
+Then on the "Register" screen:
 	Tap "SignUp"
 	Wait for "5" seconds
 	Take a screenshit
 	Confirm "OK"
+	Tap "Back"
+
+Then on the "Welcome" screen:
+	Tap "Register"
+
+Then on the "Register" screen:
     Type "tester" in the "Username" field
     Type "riksof123" in the "Password" field
     Type "riksof123" in the "Confirm Password" field
