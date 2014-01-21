@@ -2471,9 +2471,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     iconTouchFlag = NO;
 	photoImgView.userInteractionEnabled = NO;
 	
-    // Create right bar button
-   // UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStylePlain target:self action:@selector(callMenu)];
-    //[self.navigationItem setRightBarButtonItem:rightBarButton];
     [self hideAddMoreButton];
 	textBackgrnd.alpha = ALPHA0;
     
@@ -3697,8 +3694,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     PFUser *user = [PFUser currentUser];
     
 	NSString *homeDirectoryPath = NSHomeDirectory();
-	NSString *usernamePath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/",
-                                                                         user.username]];
+	NSString *usernamePath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/",user.username]];
     if (![[NSFileManager defaultManager] fileExistsAtPath:usernamePath isDirectory:NULL]) {
         NSError *error;
 		[[NSFileManager defaultManager] createDirectoryAtPath:usernamePath withIntermediateDirectories:YES attributes:nil error:&error];

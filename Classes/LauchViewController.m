@@ -18,6 +18,7 @@
 #import "Flurry.h"
 #import "SHKConfiguration.h"
 #import "FlyerlyConfigurator.h"
+#import "FlyerUser.h"
 
 @interface LauchViewController () 
 
@@ -144,6 +145,12 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    
+    //Testing
+    [FlyerUser UpdateFolderStructure:@"zohaib"];
+    //
+    
+    
 	globle = [FlyerlySingleton RetrieveSingleton];
     createFlyrButton.showsTouchWhenHighlighted = YES;
     savedFlyrButton.showsTouchWhenHighlighted = YES;

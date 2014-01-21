@@ -130,7 +130,6 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
  */
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    [FlyerUser migrateUserto3dot0:nil];
     // Crittercism for crash reports.
     [Crittercism initWithAppID: @"519a14f897c8f27969000019"];
     

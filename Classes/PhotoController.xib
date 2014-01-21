@@ -48,6 +48,7 @@
                     <rect key="frame" x="0.0" y="378" width="320" height="130"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.97879464289999996" green="0.51339056800000005" blue="0.1106798447" alpha="1" colorSpace="calibratedRGB"/>
+                    <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="-64"/>
                 </view>
                 <view contentMode="scaleToFill" id="hm4-bV-Hep">
                     <rect key="frame" x="0.0" y="523" width="320" height="45"/>

@@ -22,6 +22,196 @@
  */
 +(void)UpdateFolderStructure:(NSString *)usr{
 
+ 
+    //Getting Home Directory
+	NSString *homeDirectoryPath = NSHomeDirectory();
+	NSString *usernamePath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/Flyr",usr]];
+    
+
+    if ([[NSFileManager defaultManager] fileExistsAtPath:usernamePath isDirectory:NULL]) {
+        
+        NSLog(@"Path Found");
+
+        //Getting All Files list
+        NSArray *files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:usernamePath error:nil];
+        NSString *lastFileName = nil;
+        
+        for(int i = 0 ; i < [files count];i++)
+        {
+            lastFileName = files[i];
+            
+            //Checking Any flyer contain
+            if ([lastFileName rangeOfString:@".jpg"].location == NSNotFound) {
+                
+                  NSLog(@"Flyer does not contain in this Index");
+                
+            } else {
+                
+                //Getting Image Number
+                lastFileName = [lastFileName stringByReplacingOccurrencesOfString:@".jpg" withString:@""];
+                lastFileName = [lastFileName stringByReplacingOccurrencesOfString:@"IMG_" withString:@""];
+                int imgnumber = [lastFileName intValue];
+                
+                NSString *flyerPath;
+                
+                //Creating New Path
+                flyerPath = [NSString stringWithFormat:@"%@/%d",usernamePath,imgnumber];
+                NSError *error = nil;
+                
+                if (![[NSFileManager defaultManager] fileExistsAtPath:flyerPath isDirectory:NULL]) {
+                    
+                    //This Is Unique Flyer Folder
+                    [[NSFileManager defaultManager] createDirectoryAtPath:flyerPath withIntermediateDirectories:YES attributes:nil error:&error];
+
+                    //This Is Sub Flyer Folder of Icons
+                    [[NSFileManager defaultManager] createDirectoryAtPath:[NSString stringWithFormat:@"%@/Icon",flyerPath] withIntermediateDirectories:YES attributes:nil error:&error];
+
+                    //This Is Sub Flyer Folder of Photo
+                    [[NSFileManager defaultManager] createDirectoryAtPath:[NSString stringWithFormat:@"%@/Photo",flyerPath] withIntermediateDirectories:YES attributes:nil error:&error];
+
+                    //This Is Sub Flyer Folder of Social
+                    [[NSFileManager defaultManager] createDirectoryAtPath:[NSString stringWithFormat:@"%@/Social",flyerPath] withIntermediateDirectories:YES attributes:nil error:&error];
+
+                    //This Is Sub Flyer Folder of Symbol
+                    [[NSFileManager defaultManager] createDirectoryAtPath:[NSString stringWithFormat:@"%@/Symbol",flyerPath] withIntermediateDirectories:YES attributes:nil error:&error];
+
+                    //This Is Sub Flyer Folder of Template
+                    [[NSFileManager defaultManager] createDirectoryAtPath:[NSString stringWithFormat:@"%@/Template",flyerPath] withIntermediateDirectories:YES attributes:nil error:&error];
+                    
+                //Here we start Coping SOURCE Files into New structure
+                    NSString *source = nil;
+                    NSString *destination = nil;
+                    
+                    //Copy ImageFile
+                    source = [NSString stringWithFormat:@"%@/IMG_%d.jpg",usernamePath,imgnumber];
+                    destination = [NSString stringWithFormat:@"%@/IMG_%d.jpg",flyerPath,imgnumber];
+
+                    if ( [[NSFileManager defaultManager] isReadableFileAtPath:source] )
+                        [[NSFileManager defaultManager] copyItemAtPath:source toPath:destination error:&error];
+                    
+                    //Copy pieces
+                    source = [NSString stringWithFormat:@"%@/IMG_%d.pieces",usernamePath,imgnumber];
+                    destination = [NSString stringWithFormat:@"%@/IMG_%d.pieces",flyerPath,imgnumber];
+
+                    
+                    if ( [[NSFileManager defaultManager] isReadableFileAtPath:source] )
+                        [[NSFileManager defaultManager] copyItemAtPath:source toPath:destination error:&error];
+                    
+                    //Copy txt
+                    source = [NSString stringWithFormat:@"%@/IMG_%d.txt",usernamePath,imgnumber];
+                    destination = [NSString stringWithFormat:@"%@/IMG_%d.txt",flyerPath,imgnumber];
+                    
+                    
+                    if ( [[NSFileManager defaultManager] isReadableFileAtPath:source] )
+                        [[NSFileManager defaultManager] copyItemAtPath:source toPath:destination error:&error];
+                    
+                    
+                    //Here Coping Icon related Flyer
+                    source = [NSString stringWithFormat:@"%@/Icon/%d",usernamePath,imgnumber];
+                    
+                    if ([[NSFileManager defaultManager] fileExistsAtPath:source isDirectory:NULL]) {
+                        NSLog(@"Exist");
+                        
+                        NSArray *Iconfiles = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:source error:nil];
+                        
+                        for(int i = 0 ; i < [Iconfiles count];i++)
+                        {
+                            lastFileName = Iconfiles[i];
+                            
+                            source = [NSString stringWithFormat:@"%@/Icon/%d/%@",usernamePath,imgnumber,lastFileName];
+                            destination = [NSString stringWithFormat:@"%@/Icon/%@",flyerPath,lastFileName];
+                            
+                            if ( [[NSFileManager defaultManager] isReadableFileAtPath:source] )
+                                [[NSFileManager defaultManager] copyItemAtPath:source toPath:destination error:&error];
+
+                        }//Loop
+
+                    }// End Icon Exist
+
+                    
+                    //Here Coping Photos related Flyer
+                    source = [NSString stringWithFormat:@"%@/Photo/%d",usernamePath,imgnumber];
+                    
+                    if ([[NSFileManager defaultManager] fileExistsAtPath:source isDirectory:NULL]) {
+                        NSLog(@"Exist");
+                        
+                        NSArray *Photofiles = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:source error:nil];
+                        
+                        for(int i = 0 ; i < [Photofiles count];i++)
+                        {
+                            lastFileName = Photofiles[i];
+                            
+                            source = [NSString stringWithFormat:@"%@/Photo/%d/%@",usernamePath,imgnumber,lastFileName];
+                            destination = [NSString stringWithFormat:@"%@/Photo/%@",flyerPath,lastFileName];
+                            
+                            if ( [[NSFileManager defaultManager] isReadableFileAtPath:source] )
+                                [[NSFileManager defaultManager] copyItemAtPath:source toPath:destination error:&error];
+                            
+                        }//Loop
+                        
+                    }// End Photo Exist
+                    
+                    
+                    //Here Coping Social related Flyer
+                    source = [NSString stringWithFormat:@"%@/Social/IMG_%d.soc",usernamePath,imgnumber];
+                    destination = [NSString stringWithFormat:@"%@/Social/IMG_%d.soc",flyerPath,imgnumber];
+                    if ( [[NSFileManager defaultManager] isReadableFileAtPath:source] )
+                        [[NSFileManager defaultManager] copyItemAtPath:source toPath:destination error:&error];
+                    
+                    //END Social
+                    
+                    //Here Coping Symbol related Flyer
+                    source = [NSString stringWithFormat:@"%@/Symbol/%d",usernamePath,imgnumber];
+                    
+                    if ([[NSFileManager defaultManager] fileExistsAtPath:source isDirectory:NULL]) {
+                        NSLog(@"Exist");
+                        
+                        NSArray *Symbolfiles = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:source error:nil];
+                        
+                        for(int i = 0 ; i < [Symbolfiles count];i++)
+                        {
+                            lastFileName = Symbolfiles[i];
+                            
+                            source = [NSString stringWithFormat:@"%@/Symbol/%d/%@",usernamePath,imgnumber,lastFileName];
+                            destination = [NSString stringWithFormat:@"%@/Symbol/%@",flyerPath,lastFileName];
+                            
+                            if ( [[NSFileManager defaultManager] isReadableFileAtPath:source] )
+                                [[NSFileManager defaultManager] copyItemAtPath:source toPath:destination error:&error];
+                            
+                        }//Loop
+                        
+                    }// End Symbol Exist
+                    
+                    //Here Coping Template related Flyer
+                    source = [NSString stringWithFormat:@"%@/Template/%d",usernamePath,imgnumber];
+                    
+                    if ([[NSFileManager defaultManager] fileExistsAtPath:source isDirectory:NULL]) {
+                        NSLog(@"Exist");
+                        
+                        NSArray *Symbolfiles = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:source error:nil];
+                        
+                        for(int i = 0 ; i < [Symbolfiles count];i++)
+                        {
+                            lastFileName = Symbolfiles[i];
+                            
+                            source = [NSString stringWithFormat:@"%@/Template/%d/%@",usernamePath,imgnumber,lastFileName];
+                            destination = [NSString stringWithFormat:@"%@/Template/%@",flyerPath,lastFileName];
+                            
+                            if ( [[NSFileManager defaultManager] isReadableFileAtPath:source] )
+                                [[NSFileManager defaultManager] copyItemAtPath:source toPath:destination error:&error];
+                            
+                        }//Loop
+                        
+                    }// End Template Exist
+                    
+                    
+                }
+            
+            }
+            
+        }
+	}
+
 
 }
 
@@ -77,6 +267,8 @@
                                     }
                                 }];
 
+    //Also Check for New folder Structure
+    [self UpdateFolderStructure:[user objectForKey:@"username"]];
 
 }
 
