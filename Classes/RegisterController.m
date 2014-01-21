@@ -8,7 +8,7 @@
 
 #import "RegisterController.h"
 #import <Parse/PFQuery.h>
-#import "PhotoController.h"
+#import "CreateFlyerController.h"
 #import "Common.h"
 #import "InviteFriendsController.h"
 #import "FlyrAppDelegate.h"
@@ -292,15 +292,9 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
         [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"clipSetting"];
         [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"emailSetting"];
         [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"smsSetting"];
-
-        if(IS_IPHONE_5){
-            launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewControllerIPhone5" bundle:nil];
-        }   else{
-            launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
-        }
+        launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
         
         [self.navigationController pushViewController:launchController animated:YES];
-        //[self performSelectorOnMainThread:@selector(pushViewController:) withObject:launchController waitUntilDone:YES];
 
     }else{
         [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"User"];
@@ -461,13 +455,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
             
             NSLog(@"Email: %@", userName);
             NSLog(@"Path: %@", [AccountController getPathFromEmail:userName]);
-
-            if(IS_IPHONE_5){
-                launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewControllerIPhone5" bundle:nil];
-            }   else{
-                launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
-            }
-
+            launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
             [self.navigationController pushViewController:launchController animated:YES];
         }
     }];

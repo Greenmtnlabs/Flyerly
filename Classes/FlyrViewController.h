@@ -2,19 +2,16 @@
 //  FlyrViewController.h
 //  Flyr
 //
-//  Created by Nilesh on 23/10/09.
-//  Copyright 2009 __MyCompanyName__. All rights reserved.
+//  Created by Riksof Pvt. Ltd. on 22/Jan/2014.
 //
 
 #import <UIKit/UIKit.h>
-#import "PhotoController.h"
-#import "LauchViewController.h"
+#import "CreateFlyerController.h"
 #import "FlyerlySingleton.h"
 #import "SaveFlyerCell.h"
 #import "Common.h"
 #import "ShareViewController.h"
 #import "Common.h"
-#import "LauchViewController.h"
 #import "HelpController.h"
 #import "FlyrAppDelegate.h"
 
@@ -28,14 +25,13 @@
 	NSMutableArray *iconArrayBackup;
 
 	IBOutlet UITableView *tView;
-    PhotoController *ptController;
-    LauchViewController *launchCotroller;
+    CreateFlyerController *ptController;
     BOOL searching;
     BOOL letUserSelectRow;
     FlyerlySingleton *globle;
 
 }
-@property(nonatomic,strong) PhotoController *ptController;
+@property(nonatomic,strong) CreateFlyerController *ptController;
 @property(nonatomic,strong) NSMutableArray *photoArray;
 @property(nonatomic,strong) NSMutableArray *photoDetailArray;
 @property(nonatomic,strong) NSMutableArray *iconArray;

@@ -9,6 +9,18 @@
 #import "FlyerlySingleton.h"
 #import <Parse/Parse.h>
 #import "FlyerUser.h"
+#import "Crittercism.h"
+#import "Common.h"
+#import "CreateFlyerController.h"
+#import <QuartzCore/QuartzCore.h>
+#import "LauchViewController.h"
+#import "AfterUpdateController.h"
+#import "AccountController.h"
+#import "ShareViewController.h"
+#import "Flurry.h"
+#import "SHKConfiguration.h"
+#import "FlyerlyConfigurator.h"
+#import "BitlyConfig.h"
 
 extern NSString *FacebookDidLoginNotification;
 

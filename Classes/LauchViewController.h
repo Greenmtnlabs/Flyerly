@@ -1,9 +1,6 @@
+
 //
-//  LauchViewController.h
-//  Flyer
-//
-//  Created by Krunal on 13/10/09.
-//  Copyright 2009 iauro. All rights reserved.
+//  Created by Riksof Pvt. Ltd. on 22/Jan/2014.
 //
 
 #import <UIKit/UIKit.h>
@@ -16,7 +13,7 @@
 
 @class FlyrViewController;
 @class ShareSettingViewController;
-@class PhotoController ;
+@class CreateFlyerController ;
 @class InviteFriendsController;
 @class FBSession;
 @class FacebookLikeView;
@@ -24,7 +21,7 @@
 
 
 @interface LauchViewController : ParentViewController<UIWebViewDelegate,UIActionSheetDelegate,FacebookLikeViewDelegate> {
-	PhotoController *ptController;
+	CreateFlyerController *ptController;
 	FlyrViewController *tpController;
 	ShareSettingViewController *spController;
 	InviteFriendsController *addFriendsController;
@@ -57,7 +54,7 @@
     
 
 }
-@property(nonatomic,strong) PhotoController *ptController;
+@property(nonatomic,strong) CreateFlyerController *ptController;
 @property(nonatomic,strong) FlyrViewController *tpController;
 @property(nonatomic,strong) ShareSettingViewController *spController;
 @property(nonatomic,strong) InviteFriendsController *addFriendsController;

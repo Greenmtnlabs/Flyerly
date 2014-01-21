@@ -2,7 +2,7 @@
 //  MySHKConfigurator.m
 //  Flyr
 //
-//  Created by Khurram on 27/12/2013.
+//  Created by Riksof on 27/12/2013.
 //
 //
 

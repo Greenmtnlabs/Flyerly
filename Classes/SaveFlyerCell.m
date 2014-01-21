@@ -2,7 +2,7 @@
 //  SaveFlyerCellViewController.m
 //  Flyr
 //
-//  Created by Khurram on 17/01/2014.
+//  Created by Riksof Pvt. Ltd on 17/01/2014.
 //
 //
 

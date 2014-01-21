@@ -2,7 +2,7 @@
 //  FlyrViewController.m
 //  Flyr
 //
-//  Created by Nilesh on 23/10/09.
+//  Created by Riksof Pvt. Ltd. on 22/Jan/2014.
 //  Copyright 2009 __MyCompanyName__. All rights reserved.
 //
 
@@ -366,7 +366,7 @@ sd:;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	 
-    ptController = [[PhotoController alloc]initWithNibName:@"PhotoController" bundle:nil];
+    ptController = [[CreateFlyerController alloc]initWithNibName:@"PhotoController" bundle:nil];
 
 	[self.navigationController pushViewController:ptController animated:YES];
 	[self performSelector:@selector(deselect) withObject:nil afterDelay:0.2f];
@@ -408,7 +408,7 @@ sd:;
 }
 
 -(IBAction)doNew:(id)sender{
-	ptController = [[PhotoController alloc]initWithNibName:@"PhotoController" bundle:nil];
+	ptController = [[CreateFlyerController alloc]initWithNibName:@"PhotoController" bundle:nil];
     ptController.flyerNumber = -1;
 	[self.navigationController pushViewController:ptController animated:YES];
 }

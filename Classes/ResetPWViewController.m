@@ -2,7 +2,7 @@
 //  ResetPWViewController.m
 //  Flyr
 //
-//  Created by Khurram on 23/08/2013.
+//  Created by Riksof Pvt. Ltd on 23/08/2013.
 //
 //
 

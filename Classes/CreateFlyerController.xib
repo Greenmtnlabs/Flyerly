@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhotoController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CreateFlyerController">
             <connections>
                 <outlet property="addMoreFontTabButton" destination="rb6-j8-Siq" id="Gf9-7b-4Nr"/>
                 <outlet property="addMoreIconTabButton" destination="fpi-NX-k5V" id="Dmn-8a-OqK"/>

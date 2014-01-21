@@ -2,7 +2,7 @@
 //  GalleryViewController.h
 //  NBUKitDemo
 //
-//  Created by Ernesto Rivera on 2013/04/15.
+//  Created by Riksof Pvt. Ltd. on 22/Jan/2014.
 //  Copyright (c) 2013 CyberAgent Inc.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");

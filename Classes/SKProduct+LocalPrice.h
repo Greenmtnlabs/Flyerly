@@ -2,7 +2,7 @@
 //  SKProduct+LocalPrice.h
 //  Flyr
 //
-//  Created by Khurram Ali on 9/11/13.
+//  Created by Riksof Pvt. Ltd Ali on 9/11/13.
 //
 //
 

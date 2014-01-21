@@ -2,7 +2,7 @@
 //  InputViewController.m
 //  Flyr
 //
-//  Created by Khurram on 09/09/2013.
+//  Created by Riksof on 09/09/2013.
 //
 //
 

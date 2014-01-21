@@ -2,7 +2,7 @@
 //  AddFriendsController.m
 //  Flyr
 //
-//  Created by Rizwan Ahmad on 4/15/13.
+//  Created by Riksof on 4/15/13.
 //
 //
 
@@ -12,7 +12,7 @@
 #import "FlyrAppDelegate.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "LoadingView.h"
-#import "PhotoController.h"
+#import "CreateFlyerController.h"
 #import "HelpController.h"
 #import "Flurry.h"
 

@@ -2,7 +2,7 @@
 //  MainSettingViewController.h
 //  Flyr
 //
-//  Created by Khurram on 07/08/2013.
+//  Created by Riksof Pvt. Ltd on 07/08/2013.
 //
 //
 
@@ -13,7 +13,7 @@
 #import "Common.h"
 #import "HelpController.h"
 #import "ShareSettingViewController.h"
-#import "PhotoController.h"
+#import "CreateFlyerController.h"
 #import "ProfileViewController.h"
 #import "InputViewController.h"
 #import "FlyerlySingleton.h"
@@ -21,15 +21,15 @@
 #import <ShareKit.h>
 
 
-@class PhotoController,InputViewController,FlyerlySingleton ;
-@class AccountController,LauchViewController,HelpController,ShareSettingViewController,ProfileViewController;
+@class CreateFlyerController,InputViewController,FlyerlySingleton ;
+@class AccountController,HelpController,ShareSettingViewController,ProfileViewController;
 @interface MainSettingViewController : UIViewController <UITableViewDelegate, MFMailComposeViewControllerDelegate>{
 
     NSMutableArray *category;
     NSMutableArray *groupCtg;
     ShareSettingViewController *oldsettingveiwcontroller;
     UIAlertView *warningAlert;
-    PhotoController *ptController;
+    CreateFlyerController *ptController;
     ProfileViewController *accountUpdater;
     FlyerlySingleton *globle;
 

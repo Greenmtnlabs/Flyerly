@@ -2,7 +2,7 @@
 //  PhotoController.h
 //  Flyer
 //
-//  Created by Krunal on 12/10/09.
+//  Created by Riksof Pvt. Ltd on 12/10/09.
 //  Copyright 2009 iauro. All rights reserved.
 //
 
@@ -15,8 +15,8 @@
 #import "CameraViewController.h"
 
 
-@class FlyerlySingleton,LauchViewController,CameraViewController,GalleryViewController;
-@interface PhotoController :ParentViewController<UIActionSheetDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, EBPurchaseDelegate>
+@class FlyerlySingleton,CameraViewController,GalleryViewController;
+@interface CreateFlyerController :ParentViewController<UIActionSheetDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, EBPurchaseDelegate>
 {
     int layerallow;
     FlyerlySingleton *globle;

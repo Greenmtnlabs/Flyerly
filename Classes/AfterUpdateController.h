@@ -2,20 +2,20 @@
 //  AfterUpdateController.h
 //  Flyr
 //
-//  Created by Rizwan Ahmad on 4/18/13.
+//  Created by Riksof Pvt. Ltd. on 22/Jan/2014.
 //
 //
 
 #import <Foundation/Foundation.h>
+#import "AccountController.h"
 
-@class LauchViewController;
+@class AccountController;
 
 @interface AfterUpdateController : UIViewController{
 
-    LauchViewController *launchController;
-}
+    AccountController *accountController;
 
-@property(nonatomic,strong) LauchViewController *launchController;
+}
 
 -(IBAction)ok;
 

@@ -2,11 +2,11 @@
 //  PhotoController.m
 //  Flyer
 //
-//  Created by Krunal on 12/10/09.
+//  Created by Riksof Pvt. Ltd on 12/10/09.
 //  Copyright 2009 iauro. All rights reserved.
 //
 
-#import "PhotoController.h"
+#import "CreateFlyerController.h"
 #import <QuartzCore/QuartzCore.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "Common.h"
@@ -22,7 +22,7 @@
 #import "Flurry.h"
 #import "SKProduct+LocalPrice.h"
 
-@implementation PhotoController
+@implementation CreateFlyerController
 @synthesize imgView,imgPicker,imageNameNew,msgTextView,finalFlyer;
 @synthesize fontScrollView,colorScrollView,templateScrollView,sizeScrollView,borderScrollView,fontBorderScrollView,symbolScrollView,iconScrollView;
 @synthesize selectedFont,selectedColor;
@@ -1713,9 +1713,9 @@ int arrangeLayerIndex;
         UIImage *image = info[UIImagePickerControllerOriginalImage];
 
         if(IS_IPHONE_5){
-            image = [PhotoController imageWithImage:image scaledToSize:CGSizeMake(320, 568)];
+            image = [CreateFlyerController imageWithImage:image scaledToSize:CGSizeMake(320, 568)];
         }else{
-            image = [PhotoController imageWithImage:image scaledToSize:CGSizeMake(320, 480)];
+            image = [CreateFlyerController imageWithImage:image scaledToSize:CGSizeMake(320, 480)];
         }
         
         CGRect rect;
@@ -3500,23 +3500,23 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
           
 		}
 		//else if (CGRectContainsPoint([photoImgView frame], [touch locationInView:self.imgView]) && photoTouchFlag)
-		else if (loc.y <= (imgView.frame.size.height-(((UIImageView *)[[self photoLayersArray] lastObject]).frame.size.height/2)) && photoTouchFlag
-                 && loc.x <= (imgView.frame.size.width-(((UIImageView *)[[self photoLayersArray] lastObject]).frame.size.width/2))
-                 && loc.x >= ((((UIImageView *)[[self photoLayersArray] lastObject]).frame.size.width/2)))
+		else if (loc.y <= (imgView.frame.size.height- newPhotoImgView.frame.size.height/2) && photoTouchFlag
+                 && loc.x <= (imgView.frame.size.width - newPhotoImgView.frame.size.width/2)
+                 && loc.x >= newPhotoImgView.frame.size.width/2)
 		{
             if(selectedAddMoreLayerTab == ARRANGE_LAYERTAB){
                 [self.imgView bringSubviewToFront:[self photoLayersArray][arrangeLayerIndex]];
-                //[self.imgView bringSubviewToFront:[[self textLabelLayersArray] lastObject]];
             }else{
-                [self.imgView bringSubviewToFront:[[self photoLayersArray] lastObject]];
-                //[self.imgView bringSubviewToFront:[[self textLabelLayersArray] lastObject]];
+                //[self.imgView bringSubviewToFront:[[self photoLayersArray] lastObject]];
+
+                [self.imgView bringSubviewToFront:newPhotoImgView];
             }
 
 			for (UITouch *touch in touches) {
                 if(selectedAddMoreLayerTab == ARRANGE_LAYERTAB){
                     [self dispatchFirstTouchAtPoint:[self photoLayersArray][arrangeLayerIndex] point:[touch locationInView:self.imgView] forEvent:nil];
                 }else{
-                    [self dispatchFirstTouchAtPoint:[[self photoLayersArray] lastObject] point:[touch locationInView:self.imgView] forEvent:nil];
+                    [self dispatchFirstTouchAtPoint:newPhotoImgView point:[touch locationInView:self.imgView] forEvent:nil];
                 }
 				//[self dispatchFirstTouchAtPoint:photoImgView point:[touch locationInView:self.view] forEvent:nil];
 			}
@@ -3592,17 +3592,17 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	}
 	//else if (CGRectContainsPoint([photoImgView frame], [touch locationInView:self.view]) && photoTouchFlag)
 	//else if (CGRectContainsPoint([photoImgView frame], [touch locationInView:self.imgView]) && photoTouchFlag)
-	else if (loc.y <= (imgView.frame.size.height-(((UIImageView *)[[self photoLayersArray] lastObject]).frame.size.height/2))
+	else if (loc.y <= (imgView.frame.size.height-newPhotoImgView.frame.size.height/2)
              && photoTouchFlag
-             && loc.x <= (imgView.frame.size.width-(((UIImageView *)[[self photoLayersArray] lastObject]).frame.size.width/2))
-             && loc.x >= ((((UIImageView *)[[self photoLayersArray] lastObject]).frame.size.width/2)))
+             && loc.x <= (imgView.frame.size.width - newPhotoImgView.frame.size.width/2)
+             && loc.x >= newPhotoImgView.frame.size.width/2)
 	{
 		for (UITouch *touch in touches){
             
             if(selectedAddMoreLayerTab == ARRANGE_LAYERTAB){
                 [self dispatchTouchEvent:[self photoLayersArray][arrangeLayerIndex] toPosition:[touch locationInView:self.imgView]];
             }else{
-                [self dispatchTouchEvent:[[self photoLayersArray] lastObject] toPosition:[touch locationInView:self.imgView]];
+                [self dispatchTouchEvent:newPhotoImgView toPosition:[touch locationInView:self.imgView]];
             }
 			//[self dispatchTouchEvent:photoImgView toPosition:[touch locationInView:self.view]];
 		}
@@ -4703,9 +4703,9 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
             
             
             UIImage *image = [UIImage imageNamed:@"cross"];
-            image = [PhotoController imageWithImage:image scaledToSize:CGSizeMake(30, 29)];
+            image = [CreateFlyerController imageWithImage:image scaledToSize:CGSizeMake(30, 29)];
             UIImage *pencilImage = [UIImage imageNamed:@"pencil_blue"];
-            pencilImage = [PhotoController imageWithImage:pencilImage scaledToSize:CGSizeMake(19, 19)];
+            pencilImage = [CreateFlyerController imageWithImage:pencilImage scaledToSize:CGSizeMake(19, 19)];
             
             UIButton *crossButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 50)];
             [crossButton setImage:image forState:UIControlStateNormal];
@@ -4760,9 +4760,9 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
             [layerButton addGestureRecognizer:longPressRecognizer];
             
             UIImage *image = [UIImage imageNamed:@"cross"];
-            image = [PhotoController imageWithImage:image scaledToSize:CGSizeMake(30, 29)];
+            image = [CreateFlyerController imageWithImage:image scaledToSize:CGSizeMake(30, 29)];
             UIImage *pencilImage = [UIImage imageNamed:@"pencil_blue"];
-            pencilImage = [PhotoController imageWithImage:pencilImage scaledToSize:CGSizeMake(19, 19)];
+            pencilImage = [CreateFlyerController imageWithImage:pencilImage scaledToSize:CGSizeMake(19, 19)];
             
             UIButton *crossButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 50)];
             [crossButton setImage:image forState:UIControlStateNormal];
@@ -4814,9 +4814,9 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
             [layerButton addGestureRecognizer:longPressRecognizer];
             
             UIImage *image = [UIImage imageNamed:@"cross"];
-            image = [PhotoController imageWithImage:image scaledToSize:CGSizeMake(30, 29)];
+            image = [CreateFlyerController imageWithImage:image scaledToSize:CGSizeMake(30, 29)];
             UIImage *pencilImage = [UIImage imageNamed:@"pencil_blue"];
-            pencilImage = [PhotoController imageWithImage:pencilImage scaledToSize:CGSizeMake(19, 19)];
+            pencilImage = [CreateFlyerController imageWithImage:pencilImage scaledToSize:CGSizeMake(19, 19)];
             
             UIButton *crossButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 50)];
             [crossButton setImage:image forState:UIControlStateNormal];
@@ -4869,9 +4869,9 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
             
             
             UIImage *image = [UIImage imageNamed:@"cross"];
-            image = [PhotoController imageWithImage:image scaledToSize:CGSizeMake(30, 29)];
+            image = [CreateFlyerController imageWithImage:image scaledToSize:CGSizeMake(30, 29)];
             UIImage *pencilImage = [UIImage imageNamed:@"pencil_blue"];
-            pencilImage = [PhotoController imageWithImage:pencilImage scaledToSize:CGSizeMake(19, 19)];
+            pencilImage = [CreateFlyerController imageWithImage:pencilImage scaledToSize:CGSizeMake(19, 19)];
             
             UIButton *crossButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 50)];
             [crossButton setImage:image forState:UIControlStateNormal];

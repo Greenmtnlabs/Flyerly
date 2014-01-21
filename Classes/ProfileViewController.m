@@ -2,7 +2,7 @@
 //  AccountSelecter.m
 //  Flyr
 //
-//  Created by Khurram on 13/08/2013.
+//  Created by Riksof Pvt. Ltd on 13/08/2013.
 //
 //
 

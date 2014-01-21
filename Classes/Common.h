@@ -2,8 +2,7 @@
  *  Common.h
  *  Flyer
  *
- *  Created by Krunal on 10/17/09.
- *  Copyright 2009 iauro. All rights reserved.
+ *  Created by Riksof Pvt. Ltd. on 22/Jan/2014.
  *
  */
 

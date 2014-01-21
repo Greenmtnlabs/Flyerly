@@ -2,7 +2,7 @@
 //  DraftViewController.m
 //  Flyr
 //
-//  Created by Krunal on 10/24/09.
+//  Created by Riksof Pvt. Ltd on 10/24/09.
 //  Copyright 2009 iauro. All rights reserved.
 //
 

@@ -2,19 +2,23 @@
 //  SettingViewController.h
 //  Exchange
 //
-//  Created by krunal on 18/08/09.
+//  Created by Riksof Pvt. Ltd on 18/08/09.
 //  Copyright 2009 iauro. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 #import <Twitter/Twitter.h>
 #import "ObjectiveFlickr.h"
-#import "LauchViewController.h"
 #import "InputViewController.h"
 #import "ParentViewController.h"
 #import "FlyerlySingleton.h"
+#import <CoreGraphics/CoreGraphics.h>
+#import "Common.h"
+#import "FlyrAppDelegate.h"
+#import "HelpController.h"
+#import "CreateFlyerController.h"
 
-@class LauchViewController,InputViewController,FlyerlySingleton;
+@class InputViewController,FlyerlySingleton;
 @interface ShareSettingViewController : ParentViewController <OFFlickrAPIRequestDelegate, MFMailComposeViewControllerDelegate> {
     IBOutlet UIButton *facebookButton;
 	IBOutlet UIButton *twitterButton;
@@ -30,7 +34,6 @@
     IBOutlet UIButton *helpTab;
     FlyerlySingleton *globle;
     OFFlickrAPIRequest *flickrRequest;
-    LauchViewController *launchController;
 }
 
 @property(nonatomic,strong) IBOutlet UIButton *facebookButton;

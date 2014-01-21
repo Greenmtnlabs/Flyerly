@@ -8,7 +8,7 @@
 
 #import "HelpController.h"
 #import "Common.h"
-#import "PhotoController.h"
+#import "CreateFlyerController.h"
 
 @interface HelpController ()
 

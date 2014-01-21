@@ -6,20 +6,8 @@
 //  Copyright Flyerly. All rights reserved.
 //
 
-#import "Crittercism.h"
 #import "FlyrAppDelegate.h"
-#import "Common.h"
-#import "PhotoController.h"
-#import <QuartzCore/QuartzCore.h>
-#import "LauchViewController.h"
-#import "AfterUpdateController.h"
-#import "AccountController.h"
-#import "ShareViewController.h"
-#import "Flurry.h"
-#import <Parse/Parse.h>
-#import "SHKConfiguration.h"
-#import "FlyerlyConfigurator.h"
-#import "BitlyConfig.h"
+
 
 NSString *kCheckTokenStep1 = @"kCheckTokenStep";
 NSString *FlickrSharingSuccessNotification = @"FlickrSharingSuccessNotification";
@@ -173,11 +161,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
         // Show the greeting before going to the main app.
         [[NSUserDefaults standardUserDefaults] setObject:@"greeted" forKey:@"greeted"];
         
-        if(IS_IPHONE_5){
-            lauchController = [[LauchViewController alloc]initWithNibName:@"LauchViewControllerIPhone5" bundle:nil];
-        }else{
-            lauchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
-        }
+        lauchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
         
         [navigationController pushViewController:lauchController animated:NO];
         
@@ -186,18 +170,13 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
         
     } else {
         // User has already been greeted.
-        if( IS_IPHONE_5 ) {
-            accountController = [[AccountController alloc]initWithNibName:@"AccountController" bundle:nil];
-            lauchController = [[LauchViewController alloc]initWithNibName:@"LauchViewControllerIPhone5" bundle:nil];
-        } else {
-            accountController = [[AccountController alloc]initWithNibName:@"AccountController" bundle:nil];
-            lauchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
-        }
         
         // Is the user logged in?
         if ( [PFUser currentUser] == nil ) {
+            accountController = [[AccountController alloc]initWithNibName:@"AccountController" bundle:nil];
             [navigationController setRootViewController:accountController];
         } else {
+            lauchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
             [navigationController pushViewController:lauchController animated:YES];
         }
     }

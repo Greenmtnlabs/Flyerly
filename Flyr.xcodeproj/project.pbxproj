@@ -30,16 +30,15 @@
 		0DEE05D0108F538000967DA5 /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DEE05CF108F538000967DA5 /* close.png */; };
 		0DF258FA10B194A000397105 /* lauchViewbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DF258F910B194A000397105 /* lauchViewbutton.png */; };
 		0DF3A2C5108DF1D200D6C887 /* LauchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DF3A2C2108DF1D200D6C887 /* LauchViewController.m */; };
-		0DF3A2C6108DF1D200D6C887 /* PhotoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DF3A2C4108DF1D200D6C887 /* PhotoController.m */; };
+		0DF3A2C6108DF1D200D6C887 /* CreateFlyerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DF3A2C4108DF1D200D6C887 /* CreateFlyerController.m */; };
 		0DF3A367108DF47400D6C887 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DF3A362108DF47400D6C887 /* logo.png */; };
 		0DF3A369108DF47400D6C887 /* signin.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DF3A364108DF47400D6C887 /* signin.png */; };
 		0DF3A36A108DF47400D6C887 /* twitBack.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DF3A366108DF47400D6C887 /* twitBack.png */; };
 		0DF3A53C108E0E5C00D6C887 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DF3A53B108E0E5C00D6C887 /* CoreLocation.framework */; };
 		0DF3A540108E0E5C00D6C887 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DF3A53F108E0E5C00D6C887 /* SystemConfiguration.framework */; };
 		0DF3A542108E0E5C00D6C887 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DF3A541108E0E5C00D6C887 /* libsqlite3.0.dylib */; settings = {ATTRIBUTES = (Weak, ); }; };
-		0DFC531E109576AB00B18478 /* LauchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DFC5317109576AB00B18478 /* LauchViewController.xib */; };
 		0DFC5320109576AB00B18478 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DFC5319109576AB00B18478 /* MainWindow.xib */; };
-		0DFC5321109576AB00B18478 /* PhotoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DFC531A109576AB00B18478 /* PhotoController.xib */; };
+		0DFC5321109576AB00B18478 /* CreateFlyerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DFC531A109576AB00B18478 /* CreateFlyerController.xib */; };
 		0DFC5322109576AB00B18478 /* ShareSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DFC531C109576AB00B18478 /* ShareSettingViewController.m */; };
 		0DFC5323109576AB00B18478 /* ShareSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DFC531D109576AB00B18478 /* ShareSettingViewController.xib */; };
 		0F734B541742737D0084A2F4 /* top_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F734B521742737D0084A2F4 /* top_bg.png */; };
@@ -956,7 +955,7 @@
 		49B88989188652A2003766AD /* FacebookLikeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B88985188652A2003766AD /* FacebookLikeView.m */; };
 		49B8898A188652A2003766AD /* NSData+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B88987188652A2003766AD /* NSData+Extras.m */; };
 		6501CAF0173242FC00A89E59 /* Swiss_721_Black_Extended_BT.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6501CAEF173242FC00A89E59 /* Swiss_721_Black_Extended_BT.ttf */; };
-		6501CAF2173249C900A89E59 /* LauchViewControllerIPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6501CAF1173249C900A89E59 /* LauchViewControllerIPhone5.xib */; };
+		6501CAF2173249C900A89E59 /* LauchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6501CAF1173249C900A89E59 /* LauchViewController.xib */; };
 		6501CAF51732654B00A89E59 /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = 6501CAF31732654B00A89E59 /* share.png */; };
 		6501CAF61732654B00A89E59 /* share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6501CAF41732654B00A89E59 /* share@2x.png */; };
 		6513C1951716C3DB00355FC3 /* cell_bg_first.png in Resources */ = {isa = PBXBuildFile; fileRef = 6513C1931716C3DB00355FC3 /* cell_bg_first.png */; };
@@ -1307,8 +1306,8 @@
 		0DF258F910B194A000397105 /* lauchViewbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lauchViewbutton.png; sourceTree = "<group>"; };
 		0DF3A2C1108DF1D200D6C887 /* LauchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LauchViewController.h; sourceTree = "<group>"; };
 		0DF3A2C2108DF1D200D6C887 /* LauchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LauchViewController.m; sourceTree = "<group>"; };
-		0DF3A2C3108DF1D200D6C887 /* PhotoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoController.h; sourceTree = "<group>"; };
-		0DF3A2C4108DF1D200D6C887 /* PhotoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoController.m; sourceTree = "<group>"; };
+		0DF3A2C3108DF1D200D6C887 /* CreateFlyerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateFlyerController.h; sourceTree = "<group>"; };
+		0DF3A2C4108DF1D200D6C887 /* CreateFlyerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateFlyerController.m; sourceTree = "<group>"; };
 		0DF3A309108DF33D00D6C887 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		0DF3A362108DF47400D6C887 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		0DF3A364108DF47400D6C887 /* signin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = signin.png; sourceTree = "<group>"; };
@@ -1316,9 +1315,8 @@
 		0DF3A53B108E0E5C00D6C887 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		0DF3A53F108E0E5C00D6C887 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		0DF3A541108E0E5C00D6C887 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
-		0DFC5317109576AB00B18478 /* LauchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LauchViewController.xib; sourceTree = "<group>"; };
 		0DFC5319109576AB00B18478 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MainWindow.xib; path = Classes/MainWindow.xib; sourceTree = "<group>"; };
-		0DFC531A109576AB00B18478 /* PhotoController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoController.xib; sourceTree = "<group>"; };
+		0DFC531A109576AB00B18478 /* CreateFlyerController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateFlyerController.xib; sourceTree = "<group>"; };
 		0DFC531B109576AB00B18478 /* ShareSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareSettingViewController.h; sourceTree = "<group>"; };
 		0DFC531C109576AB00B18478 /* ShareSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareSettingViewController.m; sourceTree = "<group>"; };
 		0DFC531D109576AB00B18478 /* ShareSettingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShareSettingViewController.xib; sourceTree = "<group>"; };
@@ -2316,7 +2314,7 @@
 		49B88986188652A2003766AD /* NSData+Extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Extras.h"; sourceTree = "<group>"; };
 		49B88987188652A2003766AD /* NSData+Extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Extras.m"; sourceTree = "<group>"; };
 		6501CAEF173242FC00A89E59 /* Swiss_721_Black_Extended_BT.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Swiss_721_Black_Extended_BT.ttf; path = Data/fonts/Swiss_721_Black_Extended_BT.ttf; sourceTree = "<group>"; };
-		6501CAF1173249C900A89E59 /* LauchViewControllerIPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LauchViewControllerIPhone5.xib; path = ../LauchViewControllerIPhone5.xib; sourceTree = "<group>"; };
+		6501CAF1173249C900A89E59 /* LauchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LauchViewController.xib; path = ../LauchViewController.xib; sourceTree = "<group>"; };
 		6501CAF31732654B00A89E59 /* share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share.png; sourceTree = "<group>"; };
 		6501CAF41732654B00A89E59 /* share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share@2x.png"; sourceTree = "<group>"; };
 		6513C1931716C3DB00355FC3 /* cell_bg_first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cell_bg_first.png; sourceTree = "<group>"; };
@@ -4024,8 +4022,7 @@
 			children = (
 				0DF3A2C1108DF1D200D6C887 /* LauchViewController.h */,
 				0DF3A2C2108DF1D200D6C887 /* LauchViewController.m */,
-				0DFC5317109576AB00B18478 /* LauchViewController.xib */,
-				6501CAF1173249C900A89E59 /* LauchViewControllerIPhone5.xib */,
+				6501CAF1173249C900A89E59 /* LauchViewController.xib */,
 			);
 			name = FlyerMainScreen;
 			sourceTree = "<group>";
@@ -4033,9 +4030,9 @@
 		20F3597C1888DC8A001376B6 /* CreateFlyer */ = {
 			isa = PBXGroup;
 			children = (
-				0DF3A2C3108DF1D200D6C887 /* PhotoController.h */,
-				0DF3A2C4108DF1D200D6C887 /* PhotoController.m */,
-				0DFC531A109576AB00B18478 /* PhotoController.xib */,
+				0DF3A2C3108DF1D200D6C887 /* CreateFlyerController.h */,
+				0DF3A2C4108DF1D200D6C887 /* CreateFlyerController.m */,
+				0DFC531A109576AB00B18478 /* CreateFlyerController.xib */,
 			);
 			name = CreateFlyer;
 			sourceTree = "<group>";
@@ -4503,9 +4500,8 @@
 				0D4903BC1091893B00855C30 /* FlyrViewController.xib in Resources */,
 				0D4904F9109199F900855C30 /* cellindicator.png in Resources */,
 				E8A7347E1092CFF300661AAD /* ShareViewController.xib in Resources */,
-				0DFC531E109576AB00B18478 /* LauchViewController.xib in Resources */,
 				0DFC5320109576AB00B18478 /* MainWindow.xib in Resources */,
-				0DFC5321109576AB00B18478 /* PhotoController.xib in Resources */,
+				0DFC5321109576AB00B18478 /* CreateFlyerController.xib in Resources */,
 				0DFC5323109576AB00B18478 /* ShareSettingViewController.xib in Resources */,
 				0D74CA081095EE5F00179C4F /* facebook.png in Resources */,
 				0D3BA0EC1096F55300A8064E /* cell.png in Resources */,
@@ -4851,7 +4847,7 @@
 				65DB59BD173018DC00F251B0 /* facebook_selected@2x.png in Resources */,
 				65DB59BE173018DC00F251B0 /* twitter_selected@2x.png in Resources */,
 				6501CAF0173242FC00A89E59 /* Swiss_721_Black_Extended_BT.ttf in Resources */,
-				6501CAF2173249C900A89E59 /* LauchViewControllerIPhone5.xib in Resources */,
+				6501CAF2173249C900A89E59 /* LauchViewController.xib in Resources */,
 				6501CAF51732654B00A89E59 /* share.png in Resources */,
 				6501CAF61732654B00A89E59 /* share@2x.png in Resources */,
 				65BDB2C51733E8C80084E032 /* 07_camera_selected.png in Resources */,
@@ -5727,7 +5723,7 @@
 				202C47FA187D6E4B00FE0975 /* BitlyDebug.m in Sources */,
 				1D3623260D0F684500981E51 /* FlyrAppDelegate.m in Sources */,
 				0DF3A2C5108DF1D200D6C887 /* LauchViewController.m in Sources */,
-				0DF3A2C6108DF1D200D6C887 /* PhotoController.m in Sources */,
+				0DF3A2C6108DF1D200D6C887 /* CreateFlyerController.m in Sources */,
 				49B88989188652A2003766AD /* FacebookLikeView.m in Sources */,
 				202C47FE187D6E4B00FE0975 /* BitlyTweetSheet.m in Sources */,
 				0D4903BB1091893B00855C30 /* FlyrViewController.m in Sources */,

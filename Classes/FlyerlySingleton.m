@@ -1,9 +1,5 @@
 //
-//  Singleton.m
-//  SecondProject
-//
-//  Created by Basit on 7/28/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Created by Riksof Pvt. Ltd. on 22/Jan/2014.
 //
 
 #import "FlyerlySingleton.h"

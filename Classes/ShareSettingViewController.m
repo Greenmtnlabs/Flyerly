@@ -2,16 +2,12 @@
 //  SettingViewController.m
 //  Exchange
 //
-//  Created by krunal on 18/08/09.
+//  Created by Riksof Pvt. Ltd on 18/08/09.
 //  Copyright 2009 iauro. All rights reserved.
 //
 
 #import "ShareSettingViewController.h"
-#import <CoreGraphics/CoreGraphics.h>
-#import "Common.h"
-#import "FlyrAppDelegate.h"
-#import "HelpController.h"
-#import "PhotoController.h"
+
 
 
 @implementation ShareSettingViewController

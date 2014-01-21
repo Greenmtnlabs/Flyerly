@@ -2,7 +2,7 @@
 //  MainSettingViewController.m
 //  Flyr
 //
-//  Created by Khurram on 07/08/2013.
+//  Created by Riksof Pvt. Ltd on 07/08/2013.
 //
 //
 
@@ -293,7 +293,7 @@
 
 
 -(void)CreateNewFlyer{
-	ptController = [[PhotoController alloc]initWithNibName:@"PhotoController" bundle:nil];
+	ptController = [[CreateFlyerController alloc]initWithNibName:@"PhotoController" bundle:nil];
     ptController.flyerNumber = -1;
 	[self.navigationController pushViewController:ptController animated:YES];
 }

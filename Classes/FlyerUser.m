@@ -2,7 +2,7 @@
 //  FlyerUser.m
 //  Flyr
 //
-//  Created by Khurram on 21/01/2014.
+//  Created by Riksof on 21/01/2014.
 //
 //
 

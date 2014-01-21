@@ -2,7 +2,7 @@
 //  CropViewController.m
 //  NBUKitDemo
 //
-//  Created by Ernesto Rivera on 2012/07/31.
+//  Created by Riksof Pvt. Ltd. on 22/Jan/2014.
 //  Copyright (c) 2012 CyberAgent Inc.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");

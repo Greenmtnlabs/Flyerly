@@ -2,7 +2,7 @@
 //  DraftViewController.h
 //  Flyr
 //
-//  Created by Krunal on 10/24/09.
+//  Created by Riksof Pvt. Ltd on 10/24/09.
 //  Copyright 2009 iauro. All rights reserved.
 //
 
@@ -24,7 +24,7 @@
 #import "BitlyURLShortener.h"
 
 @class FlyrViewController,FlyerlySingleton;
-@class SaveFlyerController,PhotoController;
+@class SaveFlyerController,CreateFlyerController;
 @class LoadingView;
 
 @interface ShareViewController : ParentViewController<UIWebViewDelegate,UIDocumentInteractionControllerDelegate,MFMessageComposeViewControllerDelegate,MFMailComposeViewControllerDelegate,UITextViewDelegate,UITextFieldDelegate,UIGestureRecognizerDelegate, BitlyURLShortenerDelegate,UIActionSheetDelegate> {

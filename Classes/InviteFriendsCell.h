@@ -2,7 +2,7 @@
 //  AddFriendsDetail.h
 //  Flyr
 //
-//  Created by Khurram on 04/12/2013.
+//  Created by Riksof on 04/12/2013.
 //
 //
 

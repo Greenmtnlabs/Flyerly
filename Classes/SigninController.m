@@ -8,7 +8,7 @@
 
 #import "SigninController.h"
 #import "Common.h"
-#import "PhotoController.h"
+#import "CreateFlyerController.h"
 #import <Parse/PFQuery.h>
 #import "InviteFriendsController.h"
 #import "AccountController.h"
@@ -165,14 +165,9 @@
             [[NSUserDefaults standardUserDefaults]  setObject:pwd forKey:@"Password"];
          //}
 
-        if(IS_IPHONE_5){
-            launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewControllerIPhone5" bundle:nil];
-        }   else{
-            launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
-        }
-        
-        //[self.navigationController pushViewController:launchController animated:YES];
-        [self performSelectorOnMainThread:@selector(pushViewController:) withObject:launchController waitUntilDone:YES];
+
+        launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
+        [self.navigationController pushViewController:launchController animated:YES];
     }
     
 }
@@ -225,11 +220,8 @@
             [[NSUserDefaults standardUserDefaults]  setObject:user.username forKey:@"User"];
             
             // Login success Move to Flyerly
-            if(IS_IPHONE_5){
-                launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewControllerIPhone5" bundle:nil];
-            }   else{
-                launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil] ;
-            }
+
+            launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil] ;
             
             [self performSelectorOnMainThread:@selector(pushViewController:) withObject:launchController waitUntilDone:YES];
         } else {
@@ -244,13 +236,8 @@
             //[appDelegate FbChangeforNewVersion];
             
             // Login success Move to Flyerly
-            if(IS_IPHONE_5){
-                launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewControllerIPhone5" bundle:nil];
-            }   else{
-                launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil] ;
-            }
+            launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil] ;
             [self.navigationController pushViewController:launchController animated:YES];
-           // [self performSelectorOnMainThread:@selector(pushViewController:) withObject:launchController waitUntilDone:YES];
 
         }
     }];
@@ -318,14 +305,9 @@
                 [[NSUserDefaults standardUserDefaults]  setObject:[PFTwitterUtils twitter].screenName forKey:@"User"];
                 
                 // Login success Move to Flyerly
-                if(IS_IPHONE_5){
-                    launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewControllerIPhone5" bundle:nil];
-                }   else{
-                    launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil] ;
-                }
+                launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil] ;
+                [self.navigationController pushViewController:launchController animated:YES];
                 
-                //[self.navigationController pushViewController:launchController animated:YES];
-                [self performSelectorOnMainThread:@selector(pushViewController:) withObject:launchController waitUntilDone:YES];
 
             } else {
                 
@@ -342,14 +324,9 @@
 
                 
                 // Login success Move to Flyerly
-                if(IS_IPHONE_5){
-                    launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewControllerIPhone5" bundle:nil];
-                }   else{
-                    launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil] ;
-                }
-                
-                //[self.navigationController pushViewController:launchController animated:YES];
-                [self performSelectorOnMainThread:@selector(pushViewController:) withObject:launchController waitUntilDone:YES];
+                launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil] ;
+                [self.navigationController pushViewController:launchController animated:YES];
+
                 
             }     
         }];
@@ -653,8 +630,7 @@
             registerController = [[RegisterController alloc]initWithNibName:@"RegisterController" bundle:nil];
         }
         [self.navigationController pushViewController:registerController animated:YES];
-       
-        //[self performSelectorOnMainThread:@selector(pushViewController:) withObject:launchController waitUntilDone:YES];        
+        
     }
     [self hideLoadingIndicator];
 }

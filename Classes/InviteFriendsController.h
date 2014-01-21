@@ -2,7 +2,7 @@
 //  AddFriendsController.h
 //  Flyr
 //
-//  Created by Rizwan Ahmad on 4/15/13.
+//  Created by Riksof on 4/15/13.
 //
 //
 

@@ -1,13 +1,10 @@
+
 //
-//  LauchViewController.m
-//  Flyer
-//
-//  Created by Krunal on 13/10/09.
-//  Copyright 2009 iauro. All rights reserved.
+//  Created by Riksof Pvt. Ltd. on 22/Jan/2014.
 //
 
 #import "LauchViewController.h"
-#import "PhotoController.h"
+#import "CreateFlyerController.h"
 #import "FlyrViewController.h"
 #import "ShareSettingViewController.h"
 #import "InviteFriendsController.h"
@@ -40,7 +37,7 @@
 
 // Load Create Flyr Method With Thread
  -(void)loadPhotoView{
-	ptController = [[PhotoController alloc]initWithNibName:@"PhotoController" bundle:nil];
+	ptController = [[CreateFlyerController alloc]initWithNibName:@"PhotoController" bundle:nil];
      ptController.flyerNumber = -1;
 	[self.navigationController pushViewController:ptController animated:YES];
 }
@@ -48,7 +45,7 @@
 -(IBAction)doNew:(id)sender{
     [Flurry logEvent:@"Create Flyer"];
 
-	ptController = [[PhotoController alloc]initWithNibName:@"PhotoController" bundle:nil];
+	ptController = [[CreateFlyerController alloc]initWithNibName:@"PhotoController" bundle:nil];
     ptController.flyerNumber = -1;
 	[self.navigationController pushViewController:ptController animated:YES];
 }

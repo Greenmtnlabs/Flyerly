@@ -2,7 +2,7 @@
 //  SettingCell.h
 //  Flyr
 //
-//  Created by Khurram on 05/12/2013.
+//  Created by Riksof Pvt. Ltd on 05/12/2013.
 //
 //
 

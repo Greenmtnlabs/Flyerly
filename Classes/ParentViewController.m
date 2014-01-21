@@ -2,7 +2,7 @@
 //  ParentViewController.m
 //  Flyr
 //
-//  Created by Khurram Ali on 9/10/13.
+//  Created by Riksof Pvt. Ltd Ali on 9/10/13.
 //
 //
 

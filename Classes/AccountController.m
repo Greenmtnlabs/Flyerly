@@ -2,7 +2,7 @@
 //  AccountController.m
 //  Flyr
 //
-//  Created by Riksof Pvt. Ltd. on 7/4/13.
+//  Created by Riksof Pvt. Ltd. on 22/Jan/2014.
 //
 //
 
@@ -31,9 +31,6 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     globle = [FlyerlySingleton RetrieveSingleton];
-//    test.titleLabel.textAlignment = UITextAlignment;
-   // [test setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
-   // test.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
 }
 
 -(void)viewWillAppear:(BOOL)animated{

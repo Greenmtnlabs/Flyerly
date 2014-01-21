@@ -2,14 +2,13 @@
 //  ResetPWViewController.h
 //  Flyr
 //
-//  Created by Khurram on 23/08/2013.
+//  Created by Riksof Pvt. Ltd on 23/08/2013.
 //
 //
 
 #import <UIKit/UIKit.h>
 #import "Common.h"
 #import <Parse/PFQuery.h>
-#import "LauchViewController.h"
 #import "FlyrAppDelegate.h"
 #import "FlyerlySingleton.h"
 #import "ProfileViewController.h"

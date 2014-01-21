@@ -2,13 +2,13 @@
 //  SaveFlyerController.h
 //  Flyr
 //
-//  Created by Krunal on 10/27/09.
+//  Created by Riksof Pvt. Ltd on 10/27/09.
 //  Copyright 2009 iauro. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
-#import "PhotoController.h"
+#import "CreateFlyerController.h"
 #import <MessageUI/MessageUI.h>
 
 @class ShareViewController;
@@ -25,7 +25,7 @@
 	
 	UIButton *uploadButton;
 	NSString *twitMsg;
-	PhotoController *ptController;
+	CreateFlyerController *ptController;
 
 	NSString *twitUser;
 	NSString *twitPass;
@@ -45,7 +45,7 @@
 @property (nonatomic, strong) UIButton *uploadButton;
 
 @property(nonatomic, strong) NSString *twitMsg;
-@property(nonatomic, strong) PhotoController *ptController;
+@property(nonatomic, strong) CreateFlyerController *ptController;
 @property(nonatomic, strong) NSString *twitUser;
 @property(nonatomic, strong) NSString *twitPass;
 @property(nonatomic, strong)  UIAlertView *twitAlert;

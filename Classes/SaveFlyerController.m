@@ -2,13 +2,13 @@
 //  SaveFlyerController.m
 //  Flyr
 //
-//  Created by Krunal on 10/27/09.
+//  Created by Riksof Pvt. Ltd on 10/27/09.
 //  Copyright 2009 iauro. All rights reserved.
 //
 
 #import "SaveFlyerController.h"
 #import <FacebookSDK/FacebookSDK.h>
-#import "PhotoController.h"
+#import "CreateFlyerController.h"
 #import "FlyrAppDelegate.h"
 #import <QuartzCore/QuartzCore.h>
 #import "ShareViewController.h"

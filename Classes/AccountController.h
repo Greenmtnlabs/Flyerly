@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "LauchViewController.h"
 #import "RegisterController.h"
 #import "SigninController.h"
 #import "FlyerlySingleton.h"
