@@ -47,8 +47,8 @@
     label.textColor = [UIColor whiteColor];
     label.text = @"SIGN IN";
     
-    self.navigationItem.titleView = label;//[PhotoController setTitleViewWithTitle:@"Sign In" rect:CGRectMake(-35, -6, 50, 50)];
-
+    self.navigationItem.titleView = label;
+    
     // remove borders
     email.borderStyle = UITextBorderStyleNone;
     password.borderStyle = UITextBorderStyleNone;
@@ -57,27 +57,26 @@
     email.clearButtonMode = UITextFieldViewModeWhileEditing;
     password.clearButtonMode = UITextFieldViewModeWhileEditing;
     usr = [[NSUserDefaults standardUserDefaults] stringForKey:@"User"];
+    
     if (usr != nil) {
         email.text = usr;
         password.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"Password"];
     }
     
-    // Setup welcome button
+    // back button
     UIButton *backBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    //[welcomeButton setTitle:@"" forState:UIControlStateNormal];
-    backBtn.titleLabel.font = [UIFont systemFontOfSize:14.0];
     [backBtn addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
     [backBtn setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
      backBtn.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarButton,nil]];
 
-    UIButton *siginBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    siginBtn.showsTouchWhenHighlighted = YES;
-    siginBtn.titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size: 12.0];
-    [siginBtn addTarget:self action:@selector(onSignIn) forControlEvents:UIControlEventTouchUpInside];
-    [siginBtn setBackgroundImage:[UIImage imageNamed:@"signin_button"] forState:UIControlStateNormal];
-    UIBarButtonItem *righBarButton = [[UIBarButtonItem alloc] initWithCustomView:siginBtn];
+    // Done button
+    UIButton *DoneBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+    DoneBtn.showsTouchWhenHighlighted = YES;
+    [DoneBtn addTarget:self action:@selector(onSignIn) forControlEvents:UIControlEventTouchUpInside];
+    [DoneBtn setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
+    UIBarButtonItem *righBarButton = [[UIBarButtonItem alloc] initWithCustomView:DoneBtn];
     [self.navigationItem setRightBarButtonItem:righBarButton];
 }
 

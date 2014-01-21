@@ -20,6 +20,7 @@
                 <outlet property="contextView" destination="rbq-e2-wbO" id="BDJ-TX-Ld1"/>
                 <outlet property="flyerBorder" destination="rR0-dC-sak" id="y4N-N4-MId"/>
                 <outlet property="fontBorderTabButton" destination="E2L-Wc-n71" id="qIM-iL-HJk"/>
+                <outlet property="fontEditButton" destination="Rgs-rs-7a8" id="E8j-if-9v8"/>
                 <outlet property="fontTabButton" destination="zu1-aU-CE3" id="4N8-mM-vZ8"/>
                 <outlet property="heightTabButton" destination="5Ya-yN-kTr" id="RhP-af-MbU"/>
                 <outlet property="imgView" destination="Xaq-YE-kc7" id="te3-JW-Ibt"/>
@@ -179,12 +180,14 @@
                         <action selector="setStyleTabAction:" destination="-1" eventType="touchUpInside" id="noa-Nb-ksd"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="RCh-PH-bvk">
+                <button opaque="NO" contentMode="scaleToFill" highlighted="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="RCh-PH-bvk">
                     <rect key="frame" x="64" y="0.0" width="64" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" image="color_button.png">
+                    <state key="normal" image="color_button_selected.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <state key="selected" image="color_button_selected.png"/>
+                    <state key="highlighted" image="color_button.png"/>
                     <connections>
                         <action selector="setStyleTabAction:" destination="-1" eventType="touchUpInside" id="hQh-kx-2nZ"/>
                     </connections>
@@ -215,6 +218,9 @@
                     <state key="normal" image="text_edit.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="setStyleTabAction:" destination="-1" eventType="touchUpInside" id="u7X-nm-VDF"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -280,6 +286,7 @@
         <image name="addbg_takephoto.png" width="80" height="45"/>
         <image name="arrangeicon_button.png" width="64" height="45"/>
         <image name="color_button.png" width="64" height="45"/>
+        <image name="color_button_selected.png" width="64" height="45"/>
         <image name="font_button.png" width="64" height="45"/>
         <image name="icon_button.png" width="64" height="45"/>
         <image name="image_icon.png" width="64" height="45"/>

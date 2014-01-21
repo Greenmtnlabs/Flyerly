@@ -43,6 +43,7 @@
     UIScrollView *layerScrollView;
 
 	UITextView *msgTextView;
+    UIImageView *newPhotoImgView;
 	CustomLabel *msgLabel;
 	UIImagePickerController *imgPicker;
 	
@@ -63,15 +64,7 @@
 	UIImage *finalFlyer;
     EBPurchase *demoPurchase;
 
-	UIButton *fontTabButton;
-	UIButton *colorTabButton;
-	UIButton *sizeTabButton;
-	UIButton *fontBorderTabButton;
 
-	UIButton *cameraTabButton;
-	UIButton *photoTabButton;
-	UIButton *widthTabButton;
-	UIButton *heightTabButton;
 	NSInteger imgPickerFlag;
 	
 	UIButton *addMorePhotoTabButton;
@@ -223,7 +216,7 @@
 @property (nonatomic, strong)IBOutlet UIButton *colorTabButton;
 @property (nonatomic, strong)IBOutlet UIButton *sizeTabButton;
 @property (nonatomic, strong)IBOutlet UIButton *fontBorderTabButton;
-@property (nonatomic, strong)IBOutlet UIButton *arrangeLayerTabButton;
+@property (nonatomic, strong)IBOutlet UIButton *fontEditButton;
 
 //These are LibPhoto
 @property (nonatomic,strong)IBOutlet UIButton *cameraTabButton;
@@ -242,6 +235,7 @@
 -(void) Mycancel;
 -(void)delaytime;
 -(void) choosePhoto;
+-(void)DonePhoto;
 -(void) saveMyFlyer;
 -(void)callSaveAndShare;
 -(void)openCustomCamera;
@@ -249,7 +243,6 @@
 - (void)layoutScrollImages:(UIScrollView*)selectedScrollView scrollWidth:(NSInteger)kScrollObjWidth scrollHeight:(NSInteger)kScrollObjHeight;
 -(NSData*)getCurrentFrameAndSaveIt;
 -(void)loadPhotoLibrary;
--(void)setPhotoTabAction:(id) sender;
 + (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize;
 +(UIView *)setTitleViewWithTitle:(NSString *)title rect:(CGRect)rect;
 

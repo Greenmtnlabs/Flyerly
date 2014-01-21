@@ -37,11 +37,12 @@
                         <outlet property="delegate" destination="-1" id="18"/>
                     </connections>
                 </textField>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="kGq-MQ-Rhl">
-                    <rect key="frame" x="9" y="107" width="302" height="337"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="104" sectionHeaderHeight="10" sectionFooterHeight="10" id="kGq-MQ-Rhl">
+                    <rect key="frame" x="10" y="107" width="300" height="337"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="0.0"/>
+                    <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                 </tableView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="searchicon.png" id="xFd-Fl-XxU">
                     <rect key="frame" x="9" y="79" width="13" height="14"/>
