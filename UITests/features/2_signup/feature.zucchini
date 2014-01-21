@@ -1,6 +1,6 @@
 Start on the "Welcome" screen:
   Tap "Register"
-
+  
 Then on the "Register" screen:
   Take a screenshot
   Type "tester" in the "Username" field
@@ -8,9 +8,9 @@ Then on the "Register" screen:
   Type "riksof123" in the "Confirm Password" field
   Type "rehan.ali@riksof.com" in the "Email" field
   Type "Rehan Ali" in the "Name" field
-  Type "03453498941" in the "Phone Numner" field
+  Type "03453498941" in the "Phone Number" field
   Take a screenshot
-  Tap "SignUp"
+  Tap "Sign Up"
 
 Then on the "Home" screen:
   Tap "Settings"
@@ -36,20 +36,22 @@ Then on the "Welcome" screen:
   Tap "Register"
 
 Then on the "Register" screen:
-    Tap "Twitter"
-    Wait for "15" seconds
+  Tap "Twitter"
+  Wait for "15" seconds
 
 Then on the "Home" screen:
-    Tap "Settings"
+  Tap "Settings"
   
 Then on the "Settings" screen:
-    Tap "Sign Out"
-    Confirm "Sign out"
+  Tap "Sign Out"
+  Confirm "Sign out"
 
 Then on the "Welcome" screen:
     Tap "Register"
 	
 Then on the "Register" screen:
+    Tap "Next"
+    Confirm "OK"
 	Tap "SignUp"
 	Wait for "5" seconds
 	Take a screenshit
@@ -98,11 +100,3 @@ Then on the "Register" screen:
 	Confirm "OK"
 	Tap "Back"
 	
-  
-  
-  
-  
-
-
-
-  
