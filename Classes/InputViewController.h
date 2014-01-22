@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "Common.h"
-#import "Singleton.h"
+#import "FlyerlySingleton.h"
 #import "AccountController.h"
-@class Singleton;
+@class FlyerlySingleton;
 @interface InputViewController : UIViewController <UIActionSheetDelegate>{
-    Singleton *globle ;
+    FlyerlySingleton *globle ;
     
     NSString *sName;
     NSString *sMessage;

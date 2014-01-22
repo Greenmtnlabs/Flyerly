@@ -6,8 +6,9 @@
 //  Copyright Flyerly. All rights reserved.
 //
 
-#import "Singleton.h"
+#import "FlyerlySingleton.h"
 #import <Parse/Parse.h>
+#import "FlyerUser.h"
 
 extern NSString *FacebookDidLoginNotification;
 
@@ -42,7 +43,5 @@ extern NSString *FacebookDidLoginNotification;
 
 -(void)FbChangeforNewVersion;
 -(void)TwitterChangeforNewVersion:(NSString *)olduser;
--(void)MergeAccount:(PFObject *)oldUserobj;
-
 @end
 

@@ -26,7 +26,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    globle = [Singleton RetrieveSingleton];
+    globle = [FlyerlySingleton RetrieveSingleton];
     [self.view setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
     self.tableView.rowHeight = 40;
 

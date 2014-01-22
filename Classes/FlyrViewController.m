@@ -174,7 +174,7 @@ sd:;
 - (void)viewDidLoad {
     [super viewDidLoad];
     searching = NO;
-    globle = [Singleton RetrieveSingleton];
+    globle = [FlyerlySingleton RetrieveSingleton];
     [self.view setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
 	letUserSelectRow = YES;
     self.navigationItem.hidesBackButton = YES;

@@ -9,11 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "LauchViewController.h"
 #import "FlyrAppDelegate.h"
-#import "Singleton.h"
+#import "FlyerlySingleton.h"
 #import "ProfileViewController.h"
 #import "ParentViewController.h"
 
-@class FBSession,Singleton,LauchViewController;
+@class FBSession,FlyerlySingleton,LauchViewController;
 @interface RegisterController : ParentViewController <UITextFieldDelegate,UIActionSheetDelegate,UIAlertViewDelegate>{
     
     IBOutlet UITextField *username;
@@ -28,7 +28,7 @@
     CGFloat animatedDistance;
     NSArray *twitterAccounts;
     UIView *waiting;
-    Singleton *globle;
+    FlyerlySingleton *globle;
     UIAlertView *warningAlert ;
 	UIAlertView *discardAlert ;
 	UIAlertView *deleteAlert ;

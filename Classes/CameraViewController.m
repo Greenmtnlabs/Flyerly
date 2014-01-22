@@ -29,7 +29,7 @@
 {
     [super viewDidLoad];
     
-    globle = [Singleton RetrieveSingleton];
+    globle = [FlyerlySingleton RetrieveSingleton];
     
     // Configure the slide view
     _slideView.targetObjectViewSize = CGSizeMake(46.0, 46.0);

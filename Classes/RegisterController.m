@@ -110,7 +110,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    globle = [Singleton RetrieveSingleton];
+    globle = [FlyerlySingleton RetrieveSingleton];
 
     if (globle.twitterUser == nil) {
         username.text = @"";
@@ -395,7 +395,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
         [self removeLoadingView];
         return NO;
     }
-    globle = [Singleton RetrieveSingleton];
+    globle = [FlyerlySingleton RetrieveSingleton];
 
     if (globle.twitterUser == nil) {
 

@@ -26,7 +26,7 @@
     
 
 	// Do any additional setup after loading the view.
-    globle = [Singleton RetrieveSingleton];
+    globle = [FlyerlySingleton RetrieveSingleton];
     
     NSMutableAttributedString *titleString = [[NSMutableAttributedString alloc] initWithString:@"Forgot Password?"];
     // making text property to underline text-

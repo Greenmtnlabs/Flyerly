@@ -48,6 +48,7 @@
                     <rect key="frame" x="0.0" y="378" width="320" height="130"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.97879464289999996" green="0.51339056800000005" blue="0.1106798447" alpha="1" colorSpace="calibratedRGB"/>
+                    <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="-64"/>
                 </view>
                 <view contentMode="scaleToFill" id="hm4-bV-Hep">
                     <rect key="frame" x="0.0" y="523" width="320" height="45"/>
@@ -139,6 +140,7 @@
                     <state key="normal" image="addbg_takephoto.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <state key="selected" image="addbg_takephoto_selected.png"/>
                     <connections>
                         <action selector="setlibBackgroundTabAction:" destination="-1" eventType="touchUpInside" id="C5c-5U-w3S"/>
                     </connections>
@@ -149,6 +151,7 @@
                     <state key="normal" image="addbg_cameraroll.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <state key="selected" image="addbg_cameraroll_selected.png"/>
                     <connections>
                         <action selector="setlibBackgroundTabAction:" destination="-1" eventType="touchUpInside" id="523-Qy-Wyn"/>
                     </connections>
@@ -159,6 +162,7 @@
                     <state key="normal" image="addbg_border.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <state key="selected" image="addbg_border_selected.png"/>
                     <connections>
                         <action selector="setlibBackgroundTabAction:" destination="-1" eventType="touchUpInside" id="fcs-Ef-1pq"/>
                     </connections>
@@ -176,18 +180,18 @@
                     <state key="normal" image="font_button.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <state key="selected" image="font_button_selected.png"/>
                     <connections>
                         <action selector="setStyleTabAction:" destination="-1" eventType="touchUpInside" id="noa-Nb-ksd"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" highlighted="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="RCh-PH-bvk">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="RCh-PH-bvk">
                     <rect key="frame" x="64" y="0.0" width="64" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" image="color_button_selected.png">
+                    <state key="normal" image="color_button.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <state key="selected" image="color_button_selected.png"/>
-                    <state key="highlighted" image="color_button.png"/>
                     <connections>
                         <action selector="setStyleTabAction:" destination="-1" eventType="touchUpInside" id="hQh-kx-2nZ"/>
                     </connections>
@@ -198,6 +202,7 @@
                     <state key="normal" image="size_button.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <state key="selected" image="size_button_selected.png"/>
                     <connections>
                         <action selector="setStyleTabAction:" destination="-1" eventType="touchUpInside" id="ns9-VQ-jo0"/>
                     </connections>
@@ -208,6 +213,7 @@
                     <state key="normal" image="outline_button.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <state key="selected" image="outline_button_selected.png"/>
                     <connections>
                         <action selector="setStyleTabAction:" destination="-1" eventType="touchUpInside" id="CcZ-Vh-DvB"/>
                     </connections>
@@ -218,6 +224,7 @@
                     <state key="normal" image="text_edit.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <state key="selected" image="text_edit_selected.png"/>
                     <connections>
                         <action selector="setStyleTabAction:" destination="-1" eventType="touchUpInside" id="u7X-nm-VDF"/>
                     </connections>
@@ -235,6 +242,7 @@
                     <state key="normal" image="07_camera.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <state key="selected" image="07_camera_selected.png"/>
                     <connections>
                         <action selector="setlibPhotoTabAction:" destination="-1" eventType="touchUpInside" id="HPR-Jd-rgw"/>
                     </connections>
@@ -245,6 +253,7 @@
                     <state key="normal" image="07_roll.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <state key="selected" image="07_roll_selected.png"/>
                     <connections>
                         <action selector="setlibPhotoTabAction:" destination="-1" eventType="touchUpInside" id="UDA-7G-dAh"/>
                     </connections>
@@ -255,6 +264,7 @@
                     <state key="normal" image="07_width.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <state key="selected" image="07_width_selected.png"/>
                     <connections>
                         <action selector="setlibPhotoTabAction:" destination="-1" eventType="touchUpInside" id="nWu-Zc-LaM"/>
                     </connections>
@@ -265,6 +275,7 @@
                     <state key="normal" image="07_height.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <state key="selected" image="07_height_selected.png"/>
                     <connections>
                         <action selector="setlibPhotoTabAction:" destination="-1" eventType="touchUpInside" id="yDo-rU-RqL"/>
                     </connections>
@@ -275,25 +286,36 @@
     </objects>
     <resources>
         <image name="07_camera.png" width="80" height="45"/>
+        <image name="07_camera_selected.png" width="80" height="45"/>
         <image name="07_height.png" width="80" height="45"/>
+        <image name="07_height_selected.png" width="80" height="45"/>
         <image name="07_roll.png" width="80" height="45"/>
+        <image name="07_roll_selected.png" width="80" height="45"/>
         <image name="07_width.png" width="80" height="45"/>
+        <image name="07_width_selected.png" width="80" height="45"/>
         <image name="Template15.jpg" width="612" height="612"/>
         <image name="addbg_border.png" width="80" height="45"/>
+        <image name="addbg_border_selected.png" width="80" height="45"/>
         <image name="addbg_cameraroll.png" width="80" height="45"/>
+        <image name="addbg_cameraroll_selected.png" width="80" height="45"/>
         <image name="addbg_library.png" width="80" height="45"/>
         <image name="addbg_library_selected.png" width="80" height="45"/>
         <image name="addbg_takephoto.png" width="80" height="45"/>
+        <image name="addbg_takephoto_selected.png" width="80" height="45"/>
         <image name="arrangeicon_button.png" width="64" height="45"/>
         <image name="color_button.png" width="64" height="45"/>
         <image name="color_button_selected.png" width="64" height="45"/>
         <image name="font_button.png" width="64" height="45"/>
+        <image name="font_button_selected.png" width="64" height="45"/>
         <image name="icon_button.png" width="64" height="45"/>
         <image name="image_icon.png" width="64" height="45"/>
         <image name="outline_button.png" width="64" height="45"/>
+        <image name="outline_button_selected.png" width="64" height="45"/>
         <image name="size_button.png" width="64" height="45"/>
+        <image name="size_button_selected.png" width="64" height="45"/>
         <image name="symbolicon_button.png" width="64" height="45"/>
         <image name="text_edit.png" width="64" height="45"/>
+        <image name="text_edit_selected.png" width="64" height="45"/>
         <image name="text_icon.png" width="66" height="45"/>
     </resources>
 </document>

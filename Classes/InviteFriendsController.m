@@ -32,7 +32,7 @@ BOOL selectAll;
     [super viewDidLoad];
     contactsCount =0;
     self.deviceContactItems = [[NSMutableArray alloc] init];
-    globle = [Singleton RetrieveSingleton];
+    globle = [FlyerlySingleton RetrieveSingleton];
     self.navigationItem.hidesBackButton = YES;
     [self.view setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];

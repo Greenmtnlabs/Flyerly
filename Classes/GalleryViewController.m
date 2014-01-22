@@ -43,7 +43,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-     globle = [Singleton RetrieveSingleton];
+     globle = [FlyerlySingleton RetrieveSingleton];
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
     //BackButton

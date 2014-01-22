@@ -16,12 +16,12 @@
 #import "PhotoController.h"
 #import "ProfileViewController.h"
 #import "InputViewController.h"
-#import "Singleton.h"
+#import "FlyerlySingleton.h"
 #import "MainSettingCell.h"
 #import <ShareKit.h>
 
 
-@class PhotoController,InputViewController,Singleton ;
+@class PhotoController,InputViewController,FlyerlySingleton ;
 @class AccountController,LauchViewController,HelpController,ShareSettingViewController,ProfileViewController;
 @interface MainSettingViewController : UIViewController <UITableViewDelegate, MFMailComposeViewControllerDelegate>{
 
@@ -31,7 +31,7 @@
     UIAlertView *warningAlert;
     PhotoController *ptController;
     ProfileViewController *accountUpdater;
-    Singleton *globle;
+    FlyerlySingleton *globle;
 
 }
 @property (strong, nonatomic)IBOutlet UITableView *tableView;

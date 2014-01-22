@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "PhotoController.h"
 #import "LauchViewController.h"
-#import "Singleton.h"
+#import "FlyerlySingleton.h"
 #import "SaveFlyerCell.h"
 #import "Common.h"
 #import "ShareViewController.h"
@@ -32,7 +32,7 @@
     LauchViewController *launchCotroller;
     BOOL searching;
     BOOL letUserSelectRow;
-    Singleton *globle;
+    FlyerlySingleton *globle;
 
 }
 @property(nonatomic,strong) PhotoController *ptController;

@@ -7,15 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Singleton.h"
+#import "FlyerlySingleton.h"
 #import "Common.h"
 #import "InviteFriendsController.h"
-//#import <NBUKit/NBUKit.h>
 
-@class SigninController,Singleton;
+
+@class FlyerlySingleton;
 @interface ProfileViewController : UIViewController <UITextFieldDelegate,UITableViewDelegate>{
 
-    Singleton *globle;
+    FlyerlySingleton *globle;
     NSString *S;
     CGFloat animatedDistance;
 }

@@ -24,7 +24,7 @@
 #import <NBUKit/NBUKit.h>
 #import "NBUImagePicker.h"
 #import "NBUGalleryView.h"
-#import "Singleton.h"
+#import "FlyerlySingleton.h"
 #import "CropViewController.h"
 
 
@@ -32,7 +32,7 @@
 @interface GalleryViewController : NBUGalleryViewController <NBUImageLoader>{
 
     CropViewController *nbuCrop;
-    Singleton *globle;
+    FlyerlySingleton *globle;
     
 }
 

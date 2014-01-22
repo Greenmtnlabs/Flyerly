@@ -154,7 +154,6 @@
 		0F80C38B178578CB00D36795 /* RegisterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F80C38A178578CB00D36795 /* RegisterController.m */; };
 		0F80C38D178578E400D36795 /* RegisterController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F80C38C178578E400D36795 /* RegisterController.xib */; };
 		0F80C3901785813E00D36795 /* SigninController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F80C38F1785813E00D36795 /* SigninController.m */; };
-		0F80C3921785815300D36795 /* SigninController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F80C3911785815300D36795 /* SigninController.xib */; };
 		0F80C3A81785B41300D36795 /* facebook_login.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F80C3951785B41300D36795 /* facebook_login.png */; };
 		0F80C3A91785B41300D36795 /* facebook_login@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F80C3961785B41300D36795 /* facebook_login@2x.png */; };
 		0F80C3AF1785B41300D36795 /* signin_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F80C39C1785B41300D36795 /* signin_button.png */; };
@@ -224,11 +223,8 @@
 		0FBC37F9174F980600004F21 /* twt_setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FBC37DB174F980500004F21 /* twt_setting@2x.png */; };
 		0FCC3A1C177D8C5C0046484C /* settings2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FCC3A1A177D8C5B0046484C /* settings2.png */; };
 		0FCC3A1D177D8C5C0046484C /* settings2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FCC3A1B177D8C5B0046484C /* settings2@2x.png */; };
-		0FCC3A28177DD3080046484C /* LocationItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FCC3A27177DD3080046484C /* LocationItem.xib */; };
-		0FCC3A2D177DD8BF0046484C /* LocationController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FCC3A2C177DD8BF0046484C /* LocationController.xib */; };
 		0FCDA58C1769BED200625235 /* pencil_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FCDA58A1769BED200625235 /* pencil_blue.png */; };
 		0FCDA58D1769BED200625235 /* pencil_blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FCDA58B1769BED200625235 /* pencil_blue@2x.png */; };
-		0FD247D7178453C2003CA6DD /* SearchLocationItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FD247D6178453C2003CA6DD /* SearchLocationItem.xib */; };
 		0FD2C405178FFCDE00257E33 /* undo.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FD2C401178FFCDE00257E33 /* undo.png */; };
 		0FD2C406178FFCDE00257E33 /* undo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FD2C402178FFCDE00257E33 /* undo@2x.png */; };
 		0FD78050177B398800DF5060 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FD7804D177B398800DF5060 /* AudioToolbox.framework */; };
@@ -705,6 +701,7 @@
 		2034BFB717BE0A04003C15B0 /* next_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2034BFB517BE0A03003C15B0 /* next_button@2x.png */; };
 		2034BFBA17BE0A81003C15B0 /* help_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2034BFB817BE0A7F003C15B0 /* help_icon.png */; };
 		2034BFBB17BE0A81003C15B0 /* help_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2034BFB917BE0A80003C15B0 /* help_icon@2x.png */; };
+		2036661C188DB67300C71EAA /* FlyerUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2036661B188DB67300C71EAA /* FlyerUser.m */; };
 		2039F7BB17F076D000DE2AA4 /* search_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 2039F7B917F076CF00DE2AA4 /* search_bg.png */; };
 		2039F7BC17F076D000DE2AA4 /* search_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2039F7BA17F076D000DE2AA4 /* search_bg@2x.png */; };
 		2039F7C517F0837300DE2AA4 /* dfcontact.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2039F7C317F0837300DE2AA4 /* dfcontact.jpg */; };
@@ -741,11 +738,10 @@
 		2087B6C817C7B07D007A6A90 /* register-bg-iPhone4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2087B6C517C7B07D007A6A90 /* register-bg-iPhone4@2x.png */; };
 		2087B6C917C7B07D007A6A90 /* register-bg-iPhone5.png in Resources */ = {isa = PBXBuildFile; fileRef = 2087B6C617C7B07D007A6A90 /* register-bg-iPhone5.png */; };
 		208C684F186DAA59004A74F2 /* FlyerlyConfigurator.m in Sources */ = {isa = PBXBuildFile; fileRef = 208C684E186DAA59004A74F2 /* FlyerlyConfigurator.m */; };
-		208E35A217C1F5C500CE54BE /* SignInViewControllerIPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 208E35A117C1F5C500CE54BE /* SignInViewControllerIPhone5.xib */; };
+		208E35A217C1F5C500CE54BE /* SigninController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 208E35A117C1F5C500CE54BE /* SigninController.xib */; };
 		208E35A417C20CC700CE54BE /* RegisterViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 208E35A317C20CC700CE54BE /* RegisterViewController_iPhone5.xib */; };
 		208E35A717C20E0100CE54BE /* tick.png in Resources */ = {isa = PBXBuildFile; fileRef = 208E35A517C20E0100CE54BE /* tick.png */; };
 		208E35A817C20E0100CE54BE /* tick@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 208E35A617C20E0100CE54BE /* tick@2x.png */; };
-		208E35AA17C2246C00CE54BE /* AcountViewControlleriPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 208E35A917C2246C00CE54BE /* AcountViewControlleriPhone5.xib */; };
 		208E35AC17C224B100CE54BE /* welcome_bg-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 208E35AB17C224B100CE54BE /* welcome_bg-568h@2x.png */; };
 		208ED66117C4CD660097EFCE /* cp_share_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 208ED65F17C4CD660097EFCE /* cp_share_selected.png */; };
 		208ED66217C4CD660097EFCE /* cp_share_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 208ED66017C4CD660097EFCE /* cp_share_selected@2x.png */; };
@@ -808,7 +804,7 @@
 		20ED041D17CCBCB000DA702E /* t_email_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20ED041B17CCBCB000DA702E /* t_email_button@2x.png */; };
 		20F4D8E017BA3D0A007B2DF5 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F4D8DE17BA3D09007B2DF5 /* ProfileViewController.m */; };
 		20F4D8E117BA3D0A007B2DF5 /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20F4D8DF17BA3D0A007B2DF5 /* ProfileViewController.xib */; };
-		20F4D8E517BA40EA007B2DF5 /* Singleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F4D8E417BA40EA007B2DF5 /* Singleton.m */; };
+		20F4D8E517BA40EA007B2DF5 /* FlyerlySingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F4D8E417BA40EA007B2DF5 /* FlyerlySingleton.m */; };
 		20F93DD317B2262200F6F88C /* MainSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F93DD117B2262200F6F88C /* MainSettingViewController.m */; };
 		20F93DD417B2262200F6F88C /* MainSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20F93DD217B2262200F6F88C /* MainSettingViewController.xib */; };
 		20FA7E721872AAF50057C3F3 /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20FA7E701872AAF50057C3F3 /* CameraViewController.m */; };
@@ -991,7 +987,6 @@
 		654B254D17202A4C0047C8F6 /* ok_button_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 654B254917202A4C0047C8F6 /* ok_button_bg@2x.png */; };
 		654B255017202B1C0047C8F6 /* AfterUpdateController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 654B254F17202B1C0047C8F6 /* AfterUpdateController.xib */; };
 		654B255317202B360047C8F6 /* AfterUpdateController.m in Sources */ = {isa = PBXBuildFile; fileRef = 654B255217202B360047C8F6 /* AfterUpdateController.m */; };
-		6560C1C11727F836005BE8DD /* CustomPhotoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6560C1C01727F836005BE8DD /* CustomPhotoController.xib */; };
 		6560C1C41727FAF9005BE8DD /* grids.png in Resources */ = {isa = PBXBuildFile; fileRef = 6560C1C21727FAF9005BE8DD /* grids.png */; };
 		6560C1C51727FAF9005BE8DD /* grids@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6560C1C31727FAF9005BE8DD /* grids@2x.png */; };
 		6560C1CA17280F6F005BE8DD /* icon_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 6560C1C617280F6E005BE8DD /* icon_bg.png */; };
@@ -1442,7 +1437,6 @@
 		0F80C38C178578E400D36795 /* RegisterController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RegisterController.xib; path = ../RegisterController.xib; sourceTree = "<group>"; };
 		0F80C38E1785813E00D36795 /* SigninController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SigninController.h; sourceTree = "<group>"; };
 		0F80C38F1785813E00D36795 /* SigninController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SigninController.m; sourceTree = "<group>"; };
-		0F80C3911785815300D36795 /* SigninController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SigninController.xib; path = ../SigninController.xib; sourceTree = "<group>"; };
 		0F80C3951785B41300D36795 /* facebook_login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook_login.png; sourceTree = "<group>"; };
 		0F80C3961785B41300D36795 /* facebook_login@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook_login@2x.png"; sourceTree = "<group>"; };
 		0F80C39C1785B41300D36795 /* signin_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = signin_button.png; sourceTree = "<group>"; };
@@ -1512,11 +1506,8 @@
 		0FBC37DB174F980500004F21 /* twt_setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twt_setting@2x.png"; sourceTree = "<group>"; };
 		0FCC3A1A177D8C5B0046484C /* settings2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings2.png; sourceTree = "<group>"; };
 		0FCC3A1B177D8C5B0046484C /* settings2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings2@2x.png"; sourceTree = "<group>"; };
-		0FCC3A27177DD3080046484C /* LocationItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocationItem.xib; sourceTree = "<group>"; };
-		0FCC3A2C177DD8BF0046484C /* LocationController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocationController.xib; sourceTree = "<group>"; };
 		0FCDA58A1769BED200625235 /* pencil_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pencil_blue.png; sourceTree = "<group>"; };
 		0FCDA58B1769BED200625235 /* pencil_blue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pencil_blue@2x.png"; sourceTree = "<group>"; };
-		0FD247D6178453C2003CA6DD /* SearchLocationItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchLocationItem.xib; sourceTree = "<group>"; };
 		0FD2C401178FFCDE00257E33 /* undo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = undo.png; sourceTree = "<group>"; };
 		0FD2C402178FFCDE00257E33 /* undo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "undo@2x.png"; sourceTree = "<group>"; };
 		0FD7804D177B398800DF5060 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -2050,6 +2041,8 @@
 		2034BFB517BE0A03003C15B0 /* next_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "next_button@2x.png"; sourceTree = "<group>"; };
 		2034BFB817BE0A7F003C15B0 /* help_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = help_icon.png; sourceTree = "<group>"; };
 		2034BFB917BE0A80003C15B0 /* help_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "help_icon@2x.png"; sourceTree = "<group>"; };
+		2036661A188DB67300C71EAA /* FlyerUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlyerUser.h; sourceTree = "<group>"; };
+		2036661B188DB67300C71EAA /* FlyerUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlyerUser.m; sourceTree = "<group>"; };
 		2039F7B917F076CF00DE2AA4 /* search_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search_bg.png; sourceTree = "<group>"; };
 		2039F7BA17F076D000DE2AA4 /* search_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "search_bg@2x.png"; sourceTree = "<group>"; };
 		2039F7C317F0837300DE2AA4 /* dfcontact.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = dfcontact.jpg; sourceTree = "<group>"; };
@@ -2091,11 +2084,10 @@
 		2087B6C617C7B07D007A6A90 /* register-bg-iPhone5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "register-bg-iPhone5.png"; sourceTree = "<group>"; };
 		208C684D186DAA59004A74F2 /* FlyerlyConfigurator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlyerlyConfigurator.h; sourceTree = "<group>"; };
 		208C684E186DAA59004A74F2 /* FlyerlyConfigurator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlyerlyConfigurator.m; sourceTree = "<group>"; };
-		208E35A117C1F5C500CE54BE /* SignInViewControllerIPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SignInViewControllerIPhone5.xib; path = ../SignInViewControllerIPhone5.xib; sourceTree = "<group>"; };
+		208E35A117C1F5C500CE54BE /* SigninController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SigninController.xib; path = ../SigninController.xib; sourceTree = "<group>"; };
 		208E35A317C20CC700CE54BE /* RegisterViewController_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RegisterViewController_iPhone5.xib; path = ../RegisterViewController_iPhone5.xib; sourceTree = "<group>"; };
 		208E35A517C20E0100CE54BE /* tick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tick.png; sourceTree = "<group>"; };
 		208E35A617C20E0100CE54BE /* tick@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tick@2x.png"; sourceTree = "<group>"; };
-		208E35A917C2246C00CE54BE /* AcountViewControlleriPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AcountViewControlleriPhone5.xib; path = ../AcountViewControlleriPhone5.xib; sourceTree = "<group>"; };
 		208E35AB17C224B100CE54BE /* welcome_bg-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "welcome_bg-568h@2x.png"; sourceTree = "<group>"; };
 		208ED65F17C4CD660097EFCE /* cp_share_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cp_share_selected.png; sourceTree = "<group>"; };
 		208ED66017C4CD660097EFCE /* cp_share_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cp_share_selected@2x.png"; sourceTree = "<group>"; };
@@ -2160,8 +2152,8 @@
 		20F4D8DD17BA3D09007B2DF5 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		20F4D8DE17BA3D09007B2DF5 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		20F4D8DF17BA3D0A007B2DF5 /* ProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
-		20F4D8E317BA40EA007B2DF5 /* Singleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Singleton.h; sourceTree = "<group>"; };
-		20F4D8E417BA40EA007B2DF5 /* Singleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Singleton.m; sourceTree = "<group>"; };
+		20F4D8E317BA40EA007B2DF5 /* FlyerlySingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlyerlySingleton.h; sourceTree = "<group>"; };
+		20F4D8E417BA40EA007B2DF5 /* FlyerlySingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlyerlySingleton.m; sourceTree = "<group>"; };
 		20F93DD017B2262200F6F88C /* MainSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainSettingViewController.h; sourceTree = "<group>"; };
 		20F93DD117B2262200F6F88C /* MainSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainSettingViewController.m; sourceTree = "<group>"; };
 		20F93DD217B2262200F6F88C /* MainSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainSettingViewController.xib; sourceTree = "<group>"; };
@@ -2356,7 +2348,6 @@
 		654B254F17202B1C0047C8F6 /* AfterUpdateController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AfterUpdateController.xib; path = ../AfterUpdateController.xib; sourceTree = "<group>"; };
 		654B255117202B360047C8F6 /* AfterUpdateController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AfterUpdateController.h; sourceTree = "<group>"; };
 		654B255217202B360047C8F6 /* AfterUpdateController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AfterUpdateController.m; sourceTree = "<group>"; };
-		6560C1C01727F836005BE8DD /* CustomPhotoController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomPhotoController.xib; sourceTree = "<group>"; };
 		6560C1C21727FAF9005BE8DD /* grids.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grids.png; sourceTree = "<group>"; };
 		6560C1C31727FAF9005BE8DD /* grids@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grids@2x.png"; sourceTree = "<group>"; };
 		6560C1C617280F6E005BE8DD /* icon_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_bg.png; sourceTree = "<group>"; };
@@ -2656,7 +2647,7 @@
 		E8A7347C1092CFF300661AAD /* ShareViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShareViewController.xib; sourceTree = "<group>"; };
 		E8C7C36610976BFC0064935A /* SaveFlyerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveFlyerController.h; sourceTree = "<group>"; };
 		E8C7C36710976BFC0064935A /* SaveFlyerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveFlyerController.m; sourceTree = "<group>"; };
-		E8C7C36810976BFC0064935A /* SaveFlyerController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SaveFlyerController.xib; path = Classes/SaveFlyerController.xib; sourceTree = "<group>"; };
+		E8C7C36810976BFC0064935A /* SaveFlyerController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SaveFlyerController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2708,8 +2699,8 @@
 			children = (
 				1D3623240D0F684500981E51 /* FlyrAppDelegate.h */,
 				1D3623250D0F684500981E51 /* FlyrAppDelegate.m */,
-				0DF3A309108DF33D00D6C887 /* Common.h */,
-				20F4D8E217BA40A5007B2DF5 /* MyGlobleClass */,
+				20366619188DB5BA00C71EAA /* Model */,
+				20F4D8E217BA40A5007B2DF5 /* GlobalClass */,
 				208C6850186DAB38004A74F2 /* Config */,
 				49997FF817E07F7300CF1038 /* Categories */,
 				2013528C188C608400822073 /* FlyerlyUpdate */,
@@ -2726,10 +2717,9 @@
 				20F3597D1888DCE1001376B6 /* UserProfile */,
 				E8C7C36610976BFC0064935A /* SaveFlyerController.h */,
 				E8C7C36710976BFC0064935A /* SaveFlyerController.m */,
+				E8C7C36810976BFC0064935A /* SaveFlyerController.xib */,
 				65BDB2DD17341D290084E032 /* CustomLabel.h */,
 				65BDB2DE17341D290084E032 /* CustomLabel.m */,
-				49997FF517DF786400CF1038 /* ParentViewController.h */,
-				49997FF617DF786400CF1038 /* ParentViewController.m */,
 			);
 			name = FlyerlyClasses;
 			path = Classes;
@@ -3773,7 +3763,6 @@
 				0F80C384178561C200D36795 /* AccountController.h */,
 				0F80C385178561C200D36795 /* AccountController.m */,
 				0F80C387178561DA00D36795 /* AccountController.xib */,
-				208E35A917C2246C00CE54BE /* AcountViewControlleriPhone5.xib */,
 			);
 			name = LaunchScreen;
 			sourceTree = "<group>";
@@ -3869,9 +3858,21 @@
 			name = CropImage;
 			sourceTree = "<group>";
 		};
+		20366619188DB5BA00C71EAA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				49997FF517DF786400CF1038 /* ParentViewController.h */,
+				49997FF617DF786400CF1038 /* ParentViewController.m */,
+				2036661A188DB67300C71EAA /* FlyerUser.h */,
+				2036661B188DB67300C71EAA /* FlyerUser.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		208C6850186DAB38004A74F2 /* Config */ = {
 			isa = PBXGroup;
 			children = (
+				0DF3A309108DF33D00D6C887 /* Common.h */,
 				208C684D186DAA59004A74F2 /* FlyerlyConfigurator.h */,
 				208C684E186DAA59004A74F2 /* FlyerlyConfigurator.m */,
 			);
@@ -3942,8 +3943,7 @@
 			children = (
 				0F80C38E1785813E00D36795 /* SigninController.h */,
 				0F80C38F1785813E00D36795 /* SigninController.m */,
-				0F80C3911785815300D36795 /* SigninController.xib */,
-				208E35A117C1F5C500CE54BE /* SignInViewControllerIPhone5.xib */,
+				208E35A117C1F5C500CE54BE /* SigninController.xib */,
 				20F359751888D617001376B6 /* RegisterScreen */,
 				20F359771888D81F001376B6 /* ResetPassword */,
 			);
@@ -4050,13 +4050,13 @@
 			name = UserProfile;
 			sourceTree = "<group>";
 		};
-		20F4D8E217BA40A5007B2DF5 /* MyGlobleClass */ = {
+		20F4D8E217BA40A5007B2DF5 /* GlobalClass */ = {
 			isa = PBXGroup;
 			children = (
-				20F4D8E317BA40EA007B2DF5 /* Singleton.h */,
-				20F4D8E417BA40EA007B2DF5 /* Singleton.m */,
+				20F4D8E317BA40EA007B2DF5 /* FlyerlySingleton.h */,
+				20F4D8E417BA40EA007B2DF5 /* FlyerlySingleton.m */,
 			);
-			name = MyGlobleClass;
+			name = GlobalClass;
 			sourceTree = "<group>";
 		};
 		20FA7E6E1872AAE10057C3F3 /* Camera */ = {
@@ -4103,14 +4103,9 @@
 				65CC0AB5171802DF003D0BE7 /* Settings.bundle */,
 				8D1107310486CEB800E47090 /* Flyr-Info.plist */,
 				0DFC5319109576AB00B18478 /* MainWindow.xib */,
-				E8C7C36810976BFC0064935A /* SaveFlyerController.xib */,
 				0DF3A361108DF47400D6C887 /* ImageLibrary */,
 				6513C1AB1716FE0F00355FC3 /* Fonts */,
 				65CC0AB9171803FB003D0BE7 /* Localizable.strings */,
-				6560C1C01727F836005BE8DD /* CustomPhotoController.xib */,
-				0FCC3A27177DD3080046484C /* LocationItem.xib */,
-				0FCC3A2C177DD8BF0046484C /* LocationController.xib */,
-				0FD247D6178453C2003CA6DD /* SearchLocationItem.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -4775,7 +4770,6 @@
 				65A465111726F24A002C32FB /* font_button.png in Resources */,
 				65A465121726F24A002C32FB /* outline_button.png in Resources */,
 				65A465131726F24A002C32FB /* size_button.png in Resources */,
-				6560C1C11727F836005BE8DD /* CustomPhotoController.xib in Resources */,
 				6560C1C41727FAF9005BE8DD /* grids.png in Resources */,
 				6560C1C51727FAF9005BE8DD /* grids@2x.png in Resources */,
 				6560C1CA17280F6F005BE8DD /* icon_bg.png in Resources */,
@@ -5194,12 +5188,8 @@
 				0FE35C6F1779E1470015C215 /* top_bg_without_logo2@2x.png in Resources */,
 				0FCC3A1C177D8C5C0046484C /* settings2.png in Resources */,
 				0FCC3A1D177D8C5C0046484C /* settings2@2x.png in Resources */,
-				0FCC3A28177DD3080046484C /* LocationItem.xib in Resources */,
-				0FCC3A2D177DD8BF0046484C /* LocationController.xib in Resources */,
-				0FD247D7178453C2003CA6DD /* SearchLocationItem.xib in Resources */,
 				0F80C388178561DA00D36795 /* AccountController.xib in Resources */,
 				0F80C38D178578E400D36795 /* RegisterController.xib in Resources */,
-				0F80C3921785815300D36795 /* SigninController.xib in Resources */,
 				0F80C3A81785B41300D36795 /* facebook_login.png in Resources */,
 				200773A61887BB8C00448346 /* addbg_cameraroll_selected.png in Resources */,
 				0F80C3A91785B41300D36795 /* facebook_login@2x.png in Resources */,
@@ -5271,11 +5261,10 @@
 				20D7476517BE8EE200966BA6 /* Zqemail_box@2x.png in Resources */,
 				20D7476C17BE993800966BA6 /* Zpassword_box.png in Resources */,
 				20D7476D17BE993800966BA6 /* Zpassword_box@2x.png in Resources */,
-				208E35A217C1F5C500CE54BE /* SignInViewControllerIPhone5.xib in Resources */,
+				208E35A217C1F5C500CE54BE /* SigninController.xib in Resources */,
 				208E35A417C20CC700CE54BE /* RegisterViewController_iPhone5.xib in Resources */,
 				208E35A717C20E0100CE54BE /* tick.png in Resources */,
 				208E35A817C20E0100CE54BE /* tick@2x.png in Resources */,
-				208E35AA17C2246C00CE54BE /* AcountViewControlleriPhone5.xib in Resources */,
 				208E35AC17C224B100CE54BE /* welcome_bg-568h@2x.png in Resources */,
 				202FF12B17C3ABDE003C6245 /* bkg_register-568h@2x.png in Resources */,
 				202FF12C17C3ABDE003C6245 /* bkg_register.png in Resources */,
@@ -5752,6 +5741,7 @@
 				2002C89618888CD4005B18C9 /* SaveFlyerCell.m in Sources */,
 				E8C7C36910976BFC0064935A /* SaveFlyerController.m in Sources */,
 				200384741875A357008909F9 /* PresetFilterViewController.m in Sources */,
+				2036661C188DB67300C71EAA /* FlyerUser.m in Sources */,
 				202C4801187D6E4B00FE0975 /* BitlyTwitterOAuthManager.m in Sources */,
 				49B8897D1886524D003766AD /* LoadingView.m in Sources */,
 				202C47FF187D6E4B00FE0975 /* BitlyTweetSheetAccountSelector.m in Sources */,
@@ -5774,7 +5764,7 @@
 				0F80C3901785813E00D36795 /* SigninController.m in Sources */,
 				20F93DD317B2262200F6F88C /* MainSettingViewController.m in Sources */,
 				20F4D8E017BA3D0A007B2DF5 /* ProfileViewController.m in Sources */,
-				20F4D8E517BA40EA007B2DF5 /* Singleton.m in Sources */,
+				20F4D8E517BA40EA007B2DF5 /* FlyerlySingleton.m in Sources */,
 				202C4828187D7A6B00FE0975 /* CJSONScanner.m in Sources */,
 				202C47FD187D6E4B00FE0975 /* BitlyTextView.m in Sources */,
 				2087B6C017C73B40007A6A90 /* ResetPWViewController.m in Sources */,

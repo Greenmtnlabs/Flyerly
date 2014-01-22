@@ -10,13 +10,13 @@
 #import "LauchViewController.h"
 #import "RegisterController.h"
 #import <Parse/Parse.h>
-#import "Singleton.h"
+#import "FlyerlySingleton.h"
 #import "ProfileViewController.h"
 #import "ResetPWViewController.h"
 #import "ParentViewController.h"
 
 
-@class ProfileViewController,Singleton,RegisterController,ResetPWViewController;
+@class ProfileViewController,FlyerlySingleton,RegisterController,ResetPWViewController;
 
 @interface SigninController : ParentViewController <PFLogInViewControllerDelegate,FBLoginViewDelegate,UIActionSheetDelegate >{
     
@@ -37,7 +37,7 @@
     LauchViewController *launchController;
     RegisterController *registerController;
     ProfileViewController *actSelecter;
-    Singleton *globle;
+    FlyerlySingleton *globle;
     NSArray *twitterAccounts;
     UIView *waiting;
     NSString *dbUsername;

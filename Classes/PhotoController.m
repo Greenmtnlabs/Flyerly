@@ -75,19 +75,18 @@ int photoLayerCount = 0; // Photo layer count to set tag value
         if (imgPickerFlag == 2) {
             newPhotoImgView.image = globle.NBUimage;
             imgPickerFlag = 1;
-            return;
         }else{
-        imgView.image = globle.NBUimage;
-        selectedTemplate = globle.NBUimage;
+            imgView.image = globle.NBUimage;
+            selectedTemplate = globle.NBUimage;
         }
     }
-        [self AddBottomTabs:libFlyer];
+        /*
         self.navigationController.navigationBarHidden = NO;
         imgPicker = [[UIImagePickerController alloc] init];
         imgPicker.allowsEditing = NO;
         imgPicker.delegate =self;
         imgPicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-   
+   */
 }
 
 
@@ -308,7 +307,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 -(void)viewDidLoad{
 	[super viewDidLoad];
     
-    globle = [Singleton RetrieveSingleton];
+    globle = [FlyerlySingleton RetrieveSingleton];
     [self.view setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
     [self.contextView setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
 
@@ -2132,7 +2131,9 @@ int arrangeLayerIndex;
 	[UIView setAnimationDuration:0.4f];
     
 	textBackgrnd.alpha = ALPHA1;
-    [self AddScrollView:fontScrollView];
+
+    // SET BOTTOM BAR
+    [self setStyleTabAction:fontTabButton];
     CustomLabel *lastLabelView = [self textLabelLayersArray][arrangeLayerIndex];
 	lastLabelView.alpha=1;	
 	textBackgrnd.alpha = ALPHA1;
@@ -2470,9 +2471,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     iconTouchFlag = NO;
 	photoImgView.userInteractionEnabled = NO;
 	
-    // Create right bar button
-   // UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStylePlain target:self action:@selector(callMenu)];
-    //[self.navigationItem setRightBarButtonItem:rightBarButton];
     [self hideAddMoreButton];
 	textBackgrnd.alpha = ALPHA0;
     
@@ -2550,12 +2548,11 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 -(IBAction)setStyleTabAction:(id) sender
 {
     
-    [fontTabButton setBackgroundImage:[UIImage imageNamed:@"font_button"] forState:UIControlStateHighlighted];
-    [colorTabButton setBackgroundImage:[UIImage imageNamed:@"color_button"] forState:UIControlStateHighlighted];
-    [colorTabButton setBackgroundImage:[UIImage imageNamed:@"color_button"] forState:UIControlStateNormal];
-    [sizeTabButton setBackgroundImage:[UIImage imageNamed:@"size_button"] forState:UIControlStateNormal];
-    [fontBorderTabButton setBackgroundImage:[UIImage imageNamed:@"background_button"] forState:UIControlStateNormal];
-
+    [fontTabButton setSelected:NO];
+    [colorTabButton setSelected:NO];
+    [sizeTabButton setSelected:NO];
+    [fontBorderTabButton setSelected:NO];
+    [fontEditButton setSelected:NO];
     
 	UIButton *selectedButton = (UIButton*)sender;
 	if(selectedButton == fontTabButton)
@@ -2565,8 +2562,8 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         
          //Add ContextView
         [self AddScrollView:fontScrollView];
-
-		[fontTabButton setBackgroundImage:[UIImage imageNamed:@"font_button_selected"] forState:UIControlStateNormal];
+        
+		[fontTabButton setSelected:YES];
 	}
 	else if(selectedButton == colorTabButton)
 	{
@@ -2576,9 +2573,8 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         //Add ContextView
         [self AddScrollView:colorScrollView];
 		[UIView commitAnimations];
+        [colorTabButton setSelected:YES];
         
-        [colorTabButton setBackgroundImage:[UIImage imageNamed:@"color_button_selected"] forState:UIControlStateNormal];
-
 	}
 	else if(selectedButton == sizeTabButton)
 	{
@@ -2587,8 +2583,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         
         //Add ContextView
         [self AddScrollView:sizeScrollView];
-        
-		[sizeTabButton setBackgroundImage:[UIImage imageNamed:@"size_button_selected"] forState:UIControlStateNormal];
+		[sizeTabButton setSelected:YES];
 		[UIView commitAnimations];
 	}
 	else if(selectedButton == fontBorderTabButton)
@@ -2599,11 +2594,12 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         //Add ContextView
         [self AddScrollView:fontBorderScrollView];
         
-		[fontBorderTabButton setBackgroundImage:[UIImage imageNamed:@"background_button_selected"] forState:UIControlStateNormal];
+		[fontBorderTabButton setSelected:YES];
 		[UIView commitAnimations];
 	}
     else if(selectedButton == fontEditButton)
 	{
+        [fontEditButton setSelected:YES];
         [self callWrite];
 	}
     
@@ -2613,10 +2609,10 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     UIButton *selectedButton = (UIButton*)sender;
     
     //Uns Selected State of All Buttons
-    [backtemplates setBackgroundImage:[UIImage imageNamed:@"addbg_library"] forState:UIControlStateNormal];
-    [cameraTakePhoto setBackgroundImage:[UIImage imageNamed:@"addbg_takephoto"] forState:UIControlStateNormal];
-    [cameraRoll setBackgroundImage:[UIImage imageNamed:@"addbg_cameraroll"] forState:UIControlStateNormal];
-    [flyerBorder setBackgroundImage:[UIImage imageNamed:@"addbg_border"] forState:UIControlStateNormal];
+    [backtemplates setSelected:NO];
+    [cameraTakePhoto setSelected:NO];
+    [cameraRoll setSelected:NO];
+    [flyerBorder setSelected:NO];
     
 
     if(undoCount >= 1){
@@ -2633,20 +2629,21 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         //Add ContextView
         [self AddScrollView:templateScrollView];
         [UIView commitAnimations];
+        [backtemplates setSelected:YES];
     }
     else if(selectedButton == cameraTakePhoto)
     {
-        [cameraTakePhoto setBackgroundImage:[UIImage imageNamed:@"addbg_takephoto_selected"] forState:UIControlStateNormal];
+        [cameraTakePhoto setSelected:YES];
         [self openCustomCamera];
     }
     else if(selectedButton == cameraRoll)
     {
-        [cameraRoll setBackgroundImage:[UIImage imageNamed:@"addbg_cameraroll_selected"] forState:UIControlStateNormal];
+        [cameraRoll setSelected:YES];
         [self loadCustomPhotoLibrary];
     }
     else if(selectedButton == flyerBorder)
     {
-        [flyerBorder setBackgroundImage:[UIImage imageNamed:@"addbg_border_selected"] forState:UIControlStateNormal];
+        [flyerBorder setSelected:YES];
         
         [UIView beginAnimations:nil context:NULL];
 		[UIView setAnimationDuration:0.4f];
@@ -2664,10 +2661,10 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     UIButton *selectedButton = (UIButton*)sender;
     
     //Set here Un-Selected State of All Buttons
-    [cameraTabButton setBackgroundImage:[UIImage imageNamed:@"07_camera"] forState:UIControlStateNormal];
-    [photoTabButton setBackgroundImage:[UIImage imageNamed:@"07_roll"] forState:UIControlStateNormal];
-    [widthTabButton setBackgroundImage:[UIImage imageNamed:@"07_width"] forState:UIControlStateNormal];
-    [heightTabButton setBackgroundImage:[UIImage imageNamed:@"07_height"] forState:UIControlStateNormal];
+    [cameraTabButton setSelected:NO];
+    [photoTabButton setSelected:NO];
+    [widthTabButton setSelected:NO];
+    [heightTabButton setSelected:NO];
     
     
     if(undoCount >= 1){
@@ -2681,7 +2678,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         [UIView setAnimationDuration:0.4f];
         textBackgrnd.alpha = ALPHA0;
         [UIView commitAnimations];
-        
+        [cameraTabButton setSelected:YES];
         [self openCustomCamera];
 
     }
@@ -2692,12 +2689,12 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0.4f];
         textBackgrnd.alpha = ALPHA0;
-        [photoTabButton setBackgroundImage:[UIImage imageNamed:@"07_roll_selected"] forState:UIControlStateNormal];
+        [photoTabButton setSelected:YES];
         [UIView commitAnimations];
     }
     else if( selectedButton == widthTabButton )
 	{
-        [widthTabButton setBackgroundImage:[UIImage imageNamed:@"07_width_selected"] forState:UIControlStateNormal];
+
         [widthTabButton  setSelected:YES];
         
         UIImageView *lastImgView = [[self photoLayersArray] lastObject];
@@ -2706,8 +2703,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     }
     else if( selectedButton == heightTabButton )
 	{
-        [heightTabButton setBackgroundImage:[UIImage imageNamed:@"07_height_selected"] forState:UIControlStateNormal];
-        [widthTabButton  setSelected:NO];
+
         [heightTabButton  setSelected:YES];
         
         UIImageView *lastImgView = [[self photoLayersArray] lastObject];
@@ -2725,6 +2721,14 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     if(undoCount >= 1){
         [rightUndoBarButton setEnabled:YES];
     }
+    
+    //Set Unselected All
+    [addMoreFontTabButton setSelected:NO];
+    [addMorePhotoTabButton setSelected:NO];
+    [addMoreSymbolTabButton setSelected:NO];
+    [addMoreIconTabButton setSelected:NO];
+    [backgroundTabButton setSelected:NO];
+
 
 	if(selectedButton == addMoreFontTabButton)
 	{
@@ -2735,7 +2739,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         photoTouchFlag = NO;
         iconTouchFlag = NO;
         lableTouchFlag = YES;
-        
+        [addMoreFontTabButton setSelected:YES];
         [self plusButtonClick];
 	}
 	else if(selectedButton == addMorePhotoTabButton)
@@ -2752,7 +2756,8 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         lableTouchFlag = NO;
 		imgPickerFlag =2;
         textBackgrnd.alpha = ALPHA0;
-       
+        [addMorePhotoTabButton setSelected:YES];
+
         [self plusButtonClick];
 
 	}
@@ -2764,6 +2769,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         photoTouchFlag= NO;
         lableTouchFlag = NO;
         iconTouchFlag = NO;
+        [addMoreSymbolTabButton setSelected:YES];
         [self AddDonetoRightBarBotton];
        	[UIView beginAnimations:nil context:NULL];
         
@@ -2778,7 +2784,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         lableTouchFlag = NO;
         symbolTouchFlag= NO;
         iconTouchFlag = YES;
-        
+        [addMoreIconTabButton setSelected:YES];
         //Add right Bar button
         [self AddDonetoRightBarBotton];
         
@@ -2792,6 +2798,8 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	}
     else if(selectedButton == backgroundTabButton)
 	{
+        
+        [backgroundTabButton setSelected:YES];
         //Add right Bar button
         [self AddDonetoRightBarBotton];
         
@@ -3686,8 +3694,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     PFUser *user = [PFUser currentUser];
     
 	NSString *homeDirectoryPath = NSHomeDirectory();
-	NSString *usernamePath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/",
-                                                                         user.username]];
+	NSString *usernamePath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/",user.username]];
     if (![[NSFileManager defaultManager] fileExistsAtPath:usernamePath isDirectory:NULL]) {
         NSError *error;
 		[[NSFileManager defaultManager] createDirectoryAtPath:usernamePath withIntermediateDirectories:YES attributes:nil error:&error];

@@ -20,11 +20,11 @@
 #import <Twitter/Twitter.h>
 #import <MessageUI/MessageUI.h>
 #import "LauchViewController.h"
-#import "Singleton.h"
+#import "FlyerlySingleton.h"
 #import "ParentViewController.h"
 #import "BitlyURLShortener.h"
 
-@class FlyrViewController,LauchViewController,Singleton;
+@class FlyrViewController,LauchViewController,FlyerlySingleton;
 @class SaveFlyerController,PhotoController;
 @class LoadingView;
 
@@ -57,7 +57,7 @@
 	NSString *selectedFlyerDescription;
 	NSString *detailFileName;
 	NSString *imageFileName;
-    Singleton *globle;
+    FlyerlySingleton *globle;
 	FlyrViewController *fvController;
 	SaveFlyerController *svController;
 	LoadingView *loadingView;

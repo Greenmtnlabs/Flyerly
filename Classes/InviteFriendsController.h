@@ -20,13 +20,13 @@
 #import <SystemConfiguration/SystemConfiguration.h>
 #import "Reachability.h"
 #import "AsyncImageView.h"
-#import "Singleton.h"
+#import "FlyerlySingleton.h"
 #import "InviteFriendsCell.h"
 
-@class LoadingView,Singleton;
+@class LoadingView,FlyerlySingleton;
 
 @interface InviteFriendsController : UIViewController<UITableViewDelegate,UITableViewDataSource,MFMessageComposeViewControllerDelegate,UITextFieldDelegate, UIActionSheetDelegate>{
-    Singleton *globle;
+    FlyerlySingleton *globle;
     IBOutlet UILabel *contactsLabel;
     IBOutlet UILabel *facebookLabel;
     IBOutlet UILabel *twitterLabel;

@@ -24,14 +24,14 @@
 #import "UIImage+NBUAdditions.h"
 #import "NBUKitPrivate.h"
 #import "CropViewController.h"
-#import "Singleton.h"
+#import "FlyerlySingleton.h"
 #import "GalleryViewController.h"
 
 
 @class GalleryViewController;
 @interface CameraViewController : NBUCameraViewController{
 
-   Singleton *globle;
+   FlyerlySingleton *globle;
     CropViewController *nbuCrop;
     GalleryViewController *nbugallery;
 }

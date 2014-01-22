@@ -30,7 +30,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    globle = [Singleton RetrieveSingleton];
+    globle = [FlyerlySingleton RetrieveSingleton];
 //    test.titleLabel.textAlignment = UITextAlignment;
    // [test setFont:[UIFont fontWithName:@"Helvetica-Bold" size: 12.0]];
    // test.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
@@ -44,7 +44,8 @@
 
 -(IBAction)onRegister{
     globle.twitterUser = nil;
-    RegisterController *registerController = nil;
+  
+    
     if(IS_IPHONE_5){
        registerController = [[RegisterController alloc] initWithNibName:@"RegisterViewController_iPhone5" bundle:nil];
     }else{
@@ -56,17 +57,12 @@
 }
 
 -(IBAction)onSignIn{
-    SigninController *signinController = nil;
     
-    if(IS_IPHONE_5){
-        signinController = [[SigninController alloc] initWithNibName:@"SignInViewControllerIPhone5" bundle:nil];
-
-    }else{
-        signinController = [[SigninController alloc] initWithNibName:@"SigninController" bundle:nil];
-    }
+   signinController = [[SigninController alloc] initWithNibName:@"SigninController" bundle:nil];
     
     [self.navigationController pushViewController:signinController animated:YES];
 }
+
 
 +(NSString *)getPathFromEmail:(NSString *)email{
     return [[email stringByReplacingOccurrencesOfString:@"@" withString:@"_"] stringByReplacingOccurrencesOfString:@"." withString:@"_"];
