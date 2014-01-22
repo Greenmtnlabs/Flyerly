@@ -1,9 +1,8 @@
-//
-//  PhotoController.h
+
 //  Flyer
 //
 //  Created by Riksof Pvt. Ltd on 12/10/09.
-//  Copyright 2009 iauro. All rights reserved.
+//
 //
 
 #import <UIKit/UIKit.h>

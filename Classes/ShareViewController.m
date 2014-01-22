@@ -3,7 +3,7 @@
 //  Flyr
 //
 //  Created by Riksof Pvt. Ltd on 10/24/09.
-//  Copyright 2009 iauro. All rights reserved.
+//
 //
 
 #import "ShareViewController.h"

@@ -37,7 +37,7 @@
 
 // Load Create Flyr Method With Thread
  -(void)loadPhotoView{
-	ptController = [[CreateFlyerController alloc]initWithNibName:@"PhotoController" bundle:nil];
+	ptController = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
      ptController.flyerNumber = -1;
 	[self.navigationController pushViewController:ptController animated:YES];
 }
@@ -45,7 +45,7 @@
 -(IBAction)doNew:(id)sender{
     [Flurry logEvent:@"Create Flyer"];
 
-	ptController = [[CreateFlyerController alloc]initWithNibName:@"PhotoController" bundle:nil];
+	ptController = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
     ptController.flyerNumber = -1;
 	[self.navigationController pushViewController:ptController animated:YES];
 }
@@ -336,7 +336,7 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
 
     if(photoArray.count > sender.tag){
 
-        ShareViewController *draftViewController = [[ShareViewController alloc] initWithNibName:@"DraftViewController" bundle:nil];
+        ShareViewController *draftViewController = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
         
         NSString *imageName = photoArray[sender.tag];
         NSData *imageData = [[NSData alloc ]initWithContentsOfMappedFile:imageName];

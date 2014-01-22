@@ -22,7 +22,7 @@
 #import "FlyerlySingleton.h"
 #import "PresetFilterViewController.h"
 
-@class PresetFilterViewController;
+@class PresetFilterViewController,FlyerlySingleton;
 
 @interface CropViewController : NBUEditImageViewController{
     PresetFilterViewController *nbuFilter;

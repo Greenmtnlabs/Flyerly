@@ -342,6 +342,10 @@
 		2025FAB51860742700CC9188 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2025FAB41860742700CC9188 /* CoreMedia.framework */; };
 		2025FAB7186074D100CC9188 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2025FAB6186074D100CC9188 /* CoreText.framework */; };
 		2025FAB9186074F300CC9188 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2025FAB8186074F300CC9188 /* CoreMotion.framework */; };
+		20269632188F3E0600CF2F78 /* delete_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 2026962E188F3E0600CF2F78 /* delete_button.png */; };
+		20269633188F3E0600CF2F78 /* delete_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2026962F188F3E0600CF2F78 /* delete_button@2x.png */; };
+		20269634188F3E0600CF2F78 /* edit_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 20269630188F3E0600CF2F78 /* edit_button.png */; };
+		20269635188F3E0600CF2F78 /* edit_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20269631188F3E0600CF2F78 /* edit_button@2x.png */; };
 		202C47B5187D49FF00FE0975 /* cancel_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 202C47B3187D49FF00FE0975 /* cancel_button.png */; };
 		202C47B6187D49FF00FE0975 /* cancel_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 202C47B4187D49FF00FE0975 /* cancel_button@2x.png */; };
 		202C47F9187D6E4B00FE0975 /* BitlyConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 202C47B9187D6E4B00FE0975 /* BitlyConfig.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -1661,6 +1665,10 @@
 		2025FAB41860742700CC9188 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		2025FAB6186074D100CC9188 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		2025FAB8186074F300CC9188 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		2026962E188F3E0600CF2F78 /* delete_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete_button.png; sourceTree = "<group>"; };
+		2026962F188F3E0600CF2F78 /* delete_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete_button@2x.png"; sourceTree = "<group>"; };
+		20269630188F3E0600CF2F78 /* edit_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = edit_button.png; sourceTree = "<group>"; };
+		20269631188F3E0600CF2F78 /* edit_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "edit_button@2x.png"; sourceTree = "<group>"; };
 		202C47B3187D49FF00FE0975 /* cancel_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel_button.png; sourceTree = "<group>"; };
 		202C47B4187D49FF00FE0975 /* cancel_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancel_button@2x.png"; sourceTree = "<group>"; };
 		202C47B8187D6E4B00FE0975 /* BitlyConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitlyConfig.h; sourceTree = "<group>"; };
@@ -2741,6 +2749,10 @@
 		0DF3A361108DF47400D6C887 /* ImageLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				2026962E188F3E0600CF2F78 /* delete_button.png */,
+				2026962F188F3E0600CF2F78 /* delete_button@2x.png */,
+				20269630188F3E0600CF2F78 /* edit_button.png */,
+				20269631188F3E0600CF2F78 /* edit_button@2x.png */,
 				200773B21887E39E00448346 /* text_edit_selected.png */,
 				200773B31887E39E00448346 /* text_edit_selected@2x.png */,
 				200773B41887E39E00448346 /* text_edit.png */,
@@ -4759,6 +4771,7 @@
 				65A465081726F219002C32FB /* color_button@2x.png in Resources */,
 				65A465091726F219002C32FB /* font_button@2x.png in Resources */,
 				65A4650A1726F219002C32FB /* outline_button@2x.png in Resources */,
+				20269635188F3E0600CF2F78 /* edit_button@2x.png in Resources */,
 				65A4650B1726F219002C32FB /* size_button@2x.png in Resources */,
 				2064B2021880588E00DE7147 /* close_button@2x.png in Resources */,
 				200773A91887BB8C00448346 /* addbg_cameraroll@2x.png in Resources */,
@@ -4940,6 +4953,7 @@
 				65C1A4421742516D00947D5E /* Template42@2x.jpg in Resources */,
 				65C1A4431742516D00947D5E /* Template43@2x.jpg in Resources */,
 				65C1A4441742516D00947D5E /* Template44@2x.jpg in Resources */,
+				20269634188F3E0600CF2F78 /* edit_button.png in Resources */,
 				65C1A4451742516D00947D5E /* Template45@2x.jpg in Resources */,
 				65C1A4461742516D00947D5E /* Template46@2x.jpg in Resources */,
 				65C1A4471742516D00947D5E /* Template47@2x.jpg in Resources */,
@@ -5250,6 +5264,7 @@
 				20D7475817BE853700966BA6 /* email_box.png in Resources */,
 				20D7475917BE853700966BA6 /* email_box@2x.png in Resources */,
 				20D7475C17BE870B00966BA6 /* Zwelcome_bg.png in Resources */,
+				20269633188F3E0600CF2F78 /* delete_button@2x.png in Resources */,
 				20D7475D17BE870B00966BA6 /* Zwelcome_bg@2x.png in Resources */,
 				20D7476017BE886F00966BA6 /* Zlogin-bg.png in Resources */,
 				20D7476117BE886F00966BA6 /* Zlogin-bg@2x.png in Resources */,
@@ -5583,6 +5598,7 @@
 				202C654017EA07DC00CB9A75 /* symbol79.png in Resources */,
 				202C654117EA07DC00CB9A75 /* symbol79@2x.png in Resources */,
 				202C654217EA07DC00CB9A75 /* symbol80.png in Resources */,
+				20269632188F3E0600CF2F78 /* delete_button.png in Resources */,
 				202C654317EA07DC00CB9A75 /* symbol80@2x.png in Resources */,
 				202C654417EA07DC00CB9A75 /* symbol81.png in Resources */,
 				202C654517EA07DC00CB9A75 /* symbol81@2x.png in Resources */,

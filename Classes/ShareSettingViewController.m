@@ -3,7 +3,7 @@
 //  Exchange
 //
 //  Created by Riksof Pvt. Ltd on 18/08/09.
-//  Copyright 2009 iauro. All rights reserved.
+//
 //
 
 #import "ShareSettingViewController.h"

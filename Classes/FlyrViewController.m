@@ -366,7 +366,8 @@ sd:;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	 
-    ptController = [[CreateFlyerController alloc]initWithNibName:@"PhotoController" bundle:nil];
+    ptController = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
+    
 
 	[self.navigationController pushViewController:ptController animated:YES];
 	[self performSelector:@selector(deselect) withObject:nil afterDelay:0.2f];
@@ -408,7 +409,7 @@ sd:;
 }
 
 -(IBAction)doNew:(id)sender{
-	ptController = [[CreateFlyerController alloc]initWithNibName:@"PhotoController" bundle:nil];
+	ptController = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
     ptController.flyerNumber = -1;
 	[self.navigationController pushViewController:ptController animated:YES];
 }

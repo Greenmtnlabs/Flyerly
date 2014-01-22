@@ -293,7 +293,7 @@
 
 
 -(void)CreateNewFlyer{
-	ptController = [[CreateFlyerController alloc]initWithNibName:@"PhotoController" bundle:nil];
+	ptController = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
     ptController.flyerNumber = -1;
 	[self.navigationController pushViewController:ptController animated:YES];
 }

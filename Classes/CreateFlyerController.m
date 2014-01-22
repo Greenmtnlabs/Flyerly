@@ -1,9 +1,8 @@
-//
-//  PhotoController.m
+
 //  Flyer
 //
 //  Created by Riksof Pvt. Ltd on 12/10/09.
-//  Copyright 2009 iauro. All rights reserved.
+//
 //
 
 #import "CreateFlyerController.h"
@@ -340,7 +339,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
         borderScrollHeight = 35;
         fontBorderScrollWidth = 35;
         fontBorderScrollHeight = 35;
-    }    
+    }
 
     undoCount = 0; // This is to track undo functionality. Set it to 0.
     discardedLayer = NO; // This flag is used to check whether the layer is discarded or editted
@@ -367,23 +366,26 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     if(!selectedTemplate){
         selectedTemplate  = [UIImage imageNamed:@"main_area_bg"];
     }
+    
+    
     imgView.image = selectedTemplate;
     
 	lableLocation = CGPointMake(160,100);
-	    
-	// Create Main Image View
+    
+    
     if(IS_IPHONE_5){
+        // Create Main Image View
         templateBckgrnd = [[UIImageView alloc]initWithFrame:CGRectMake(0, 413, 320, 135)];
         moreLayersButton = [[UIButton alloc] initWithFrame:CGRectMake(82, 445, 156, 43)];
         moreLayersLabel = [[UILabel alloc] initWithFrame:CGRectMake(125, 445, 156, 43)];
-        
+   
         //all Main Scroll Views Initialize
         //for Using in ContextView
         templateScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,320,130)];
         symbolScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,320,130)];
         iconScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,320,130)];
         layerScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,320,130)];
-        
+    
         //all Text Sub Scroll Views Initialize
         //for Using in ContextView
         fontScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(13, 0,320,130)];
@@ -391,26 +393,39 @@ int photoLayerCount = 0; // Photo layer count to set tag value
         sizeScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(13, 0,320,130)];
         borderScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(13, 0,320,130)];
         fontBorderScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(13, 0,320,130)];
-        
+    
         //all Labels Intialize
         //for Using in ContextView
         takeOrAddPhotoLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 35, 310, 43)];
         addMoreLayerOrSaveFlyerLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 35, 310, 63)];
-    
-    }else{
-        templateBckgrnd = [[UIImageView alloc]initWithFrame:CGRectMake(0, 395, 320, 65)];
-        moreLayersButton = [[UIButton alloc] initWithFrame:CGRectMake(82, 354, 156, 43)];
-        moreLayersLabel = [[UILabel alloc] initWithFrame:CGRectMake(125, 354, 156, 43)];
-        templateScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(-320, 395,320,60)];
-        addMoreLayerOrSaveFlyerLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 35, 310, 63)];
-        takeOrAddPhotoLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 310, 43)];
+        
+    } else {
+        // Create Main Image View
+        templateBckgrnd = [[UIImageView alloc]initWithFrame:CGRectMake(0, 413, 320, 135)];
+        moreLayersButton = [[UIButton alloc] initWithFrame:CGRectMake(82, 445, 156, 43)];
+        moreLayersLabel = [[UILabel alloc] initWithFrame:CGRectMake(125, 445, 156, 43)];
+        
+        //all Main Scroll Views Initialize
+        //for Using in ContextView
+        templateScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,320,58)];
+        symbolScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,320,58)];
+        iconScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,320,58)];
+        layerScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,320,58)];
+        
+        //all Text Sub Scroll Views Initialize
+        //for Using in ContextView
+        fontScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(13, 0,320,58)];
+        colorScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(8, 0,320,58)];
+        sizeScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(13, 0,320,58)];
+        borderScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(13, 0,320,58)];
+        fontBorderScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(13, 0,320,58)];
+        
+        //all Labels Intialize
+        //for Using in ContextView
+        takeOrAddPhotoLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 2, 310, 43)];
+        addMoreLayerOrSaveFlyerLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 2, 310, 63)];
+        
     }
-    
-    
-    
-    
-    // RESET image view
-    [self resetImageview];
     
     // Add Templates
 	templateScrollWidth = 60;
@@ -1966,23 +1981,17 @@ int arrangeLayerIndex;
     [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
     
     //Edit Button
-    UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 4, 35, 33)];
+    UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 4, 45, 42)];
     [editButton addTarget:self action:@selector(MyEdit) forControlEvents:UIControlEventTouchUpInside];
-    [editButton setTitle:@"Edit" forState:UIControlStateNormal];
-    [editButton setBackgroundColor:[UIColor clearColor ]];
-    editButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:16];
-    [editButton setTitleColor:[globle colorWithHexString:@"84c441"]forState:UIControlStateNormal];
+    [editButton setBackgroundImage:[UIImage imageNamed:@"edit_button"] forState:UIControlStateNormal];
     editButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *leftBarMenuButton = [[UIBarButtonItem alloc] initWithCustomView:editButton];
     
 
     //Delete Button
-    UIButton *delButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 4, 60, 33)];
+    UIButton *delButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 4, 45, 42)];
     [delButton addTarget:self action:@selector(MyDelete) forControlEvents:UIControlEventTouchUpInside];
-    [delButton setTitle:@"Delete" forState:UIControlStateNormal];
-    [delButton setBackgroundColor:[UIColor clearColor ]];
-    delButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:16];
-    [delButton setTitleColor:[globle colorWithHexString:@"84c441"]forState:UIControlStateNormal];
+    [delButton setBackgroundImage:[UIImage imageNamed:@"delete_button"] forState:UIControlStateNormal];
     delButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *leftBarHelpButton = [[UIBarButtonItem alloc] initWithCustomView:delButton];
     
@@ -2471,7 +2480,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     NSData *data = [self getCurrentFrameAndSaveIt];
     appDele.changesFlag = NO;
 
-    ShareViewController *draftViewController = [[ShareViewController alloc] initWithNibName:@"DraftViewController" bundle:nil];
+    ShareViewController *draftViewController = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
     draftViewController.selectedFlyerImage = [UIImage imageWithData:data];
     draftViewController.selectedFlyerTitle = globle.FlyerName;
     if([[self textLabelLayersArray] count] > 0){

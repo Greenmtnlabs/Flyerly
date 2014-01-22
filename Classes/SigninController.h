@@ -16,7 +16,7 @@
 #import "ParentViewController.h"
 
 
-@class ProfileViewController,FlyerlySingleton,RegisterController,ResetPWViewController;
+@class ProfileViewController,FlyerlySingleton,RegisterController,ResetPWViewController,LauchViewController;
 
 @interface SigninController : ParentViewController <PFLogInViewControllerDelegate,FBLoginViewDelegate,UIActionSheetDelegate >{
     

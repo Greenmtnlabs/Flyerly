@@ -24,6 +24,8 @@
 #import "NBUImagePickerController.h"
 #import "FlyerlySingleton.h"
 
+@class FlyerlySingleton;
+
 @interface PresetFilterViewController : NBUEditImageViewController {
 }
 

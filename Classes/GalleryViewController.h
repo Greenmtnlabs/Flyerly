@@ -28,7 +28,7 @@
 #import "CropViewController.h"
 
 
-@class CropViewController;
+@class CropViewController,FlyerlySingleton;
 @interface GalleryViewController : NBUGalleryViewController <NBUImageLoader>{
 
     CropViewController *nbuCrop;
