@@ -228,9 +228,8 @@
 -(void)loadCustomPhotoLibrary;
 
 -(void) chooseEdit;
--(void) MyEdit;
 -(void) SetMenu;
--(void) MyDelete;
+-(void) callDeleteLayer;
 -(void) Mycancel;
 -(void) choosePhoto;
 -(void) DonePhoto;

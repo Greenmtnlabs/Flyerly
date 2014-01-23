@@ -37,9 +37,14 @@
 
 // Load Create Flyr Method With Thread
  -(void)loadPhotoView{
-	ptController = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
+     
+     ptController = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
+     
+     // Set for Empty CreateFlyer Screen
      ptController.flyerNumber = -1;
+     
 	[self.navigationController pushViewController:ptController animated:YES];
+     
 }
 
 -(IBAction)doNew:(id)sender{
@@ -334,37 +339,7 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
 
 -(IBAction)showFlyerDetail:(UIImageView *)sender{
 
-    if(photoArray.count > sender.tag){
-
-        ShareViewController *draftViewController = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
-        
-        NSString *imageName = photoArray[sender.tag];
-        NSData *imageData = [[NSData alloc ]initWithContentsOfMappedFile:imageName];
-        UIImage *currentFlyerImage = [UIImage imageWithData:imageData];
-        //draftViewController.fvController = self;
-        draftViewController.selectedFlyerImage = currentFlyerImage;
-        
-        if(photoDetailArray.count > sender.tag){
-            NSArray *detailArray = photoDetailArray[sender.tag];
-            NSString *title = detailArray[0];
-            NSString *description = detailArray[1];
-            draftViewController.selectedFlyerTitle = title;
-            draftViewController.selectedFlyerDescription = description;
-            draftViewController.imageFileName = imageName;
-
-            NSString *newText = [imageName stringByReplacingOccurrencesOfString:@".jpg" withString:@".txt"];
-            draftViewController.detailFileName = newText;
-        }
-        
-        [self.navigationController pushViewController:draftViewController animated:YES];
-        //[self performSelector:@selector(deselect) withObject:nil afterDelay:0.2f];
-    
-    } else {
-    
-        // Open create flyer screen
-        //[NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(loadPhotoView) userInfo:nil repeats:NO];
-        [self loadPhotoView];
-    }
+    [self loadPhotoView];
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {

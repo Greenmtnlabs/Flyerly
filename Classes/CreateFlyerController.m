@@ -317,18 +317,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 	lableTouchFlag=NO;
     
     // Set height and width of each element of scroll view
-    fontScrollWidth = 44;
-	fontScrollHeight = 35;
-	colorScrollWidth = 44;
-	colorScrollHeight = 35;
-	sizeScrollWidth = 44;
-	sizeScrollHeight = 35;
-    borderScrollWidth = 44;
-	borderScrollHeight = 35;
-    fontBorderScrollWidth = 44;
-	fontBorderScrollHeight = 35;
     
-    if(IS_IPHONE_5){
         fontScrollWidth = 35;
         fontScrollHeight = 35;
         colorScrollWidth = 35;
@@ -339,7 +328,6 @@ int photoLayerCount = 0; // Photo layer count to set tag value
         borderScrollHeight = 35;
         fontBorderScrollWidth = 35;
         fontBorderScrollHeight = 35;
-    }
 
     undoCount = 0; // This is to track undo functionality. Set it to 0.
     discardedLayer = NO; // This flag is used to check whether the layer is discarded or editted
@@ -373,59 +361,32 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 	lableLocation = CGPointMake(160,100);
     
     
-    if(IS_IPHONE_5){
-        // Create Main Image View
-        templateBckgrnd = [[UIImageView alloc]initWithFrame:CGRectMake(0, 413, 320, 135)];
-        moreLayersButton = [[UIButton alloc] initWithFrame:CGRectMake(82, 445, 156, 43)];
-        moreLayersLabel = [[UILabel alloc] initWithFrame:CGRectMake(125, 445, 156, 43)];
-   
-        //all Main Scroll Views Initialize
-        //for Using in ContextView
-        templateScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,320,130)];
-        symbolScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,320,130)];
-        iconScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,320,130)];
-        layerScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,320,130)];
+    // Create Main Image View
+    templateBckgrnd = [[UIImageView alloc]initWithFrame:CGRectMake(0, 413, 320, 135)];
+    moreLayersButton = [[UIButton alloc] initWithFrame:CGRectMake(82, 445, 156, 43)];
+    moreLayersLabel = [[UILabel alloc] initWithFrame:CGRectMake(125, 445, 156, 43)];
     
-        //all Text Sub Scroll Views Initialize
-        //for Using in ContextView
-        fontScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(13, 0,320,130)];
-        colorScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(8, 0,320,130)];
-        sizeScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(13, 0,320,130)];
-        borderScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(13, 0,320,130)];
-        fontBorderScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(13, 0,320,130)];
+    //all Main Scroll Views Initialize
+    //for Using in ContextView
+    templateScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,320,130)];
+    symbolScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,320,130)];
+    iconScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,320,130)];
+    layerScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,320,130)];
     
-        //all Labels Intialize
-        //for Using in ContextView
-        takeOrAddPhotoLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 35, 310, 43)];
-        addMoreLayerOrSaveFlyerLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 35, 310, 63)];
-        
-    } else {
-        // Create Main Image View
-        templateBckgrnd = [[UIImageView alloc]initWithFrame:CGRectMake(0, 413, 320, 135)];
-        moreLayersButton = [[UIButton alloc] initWithFrame:CGRectMake(82, 445, 156, 43)];
-        moreLayersLabel = [[UILabel alloc] initWithFrame:CGRectMake(125, 445, 156, 43)];
-        
-        //all Main Scroll Views Initialize
-        //for Using in ContextView
-        templateScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,320,58)];
-        symbolScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,320,58)];
-        iconScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,320,58)];
-        layerScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,320,58)];
-        
-        //all Text Sub Scroll Views Initialize
-        //for Using in ContextView
-        fontScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(13, 0,320,58)];
-        colorScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(8, 0,320,58)];
-        sizeScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(13, 0,320,58)];
-        borderScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(13, 0,320,58)];
-        fontBorderScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(13, 0,320,58)];
-        
-        //all Labels Intialize
-        //for Using in ContextView
-        takeOrAddPhotoLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 2, 310, 43)];
-        addMoreLayerOrSaveFlyerLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 2, 310, 63)];
-        
-    }
+    //all Text Sub Scroll Views Initialize
+    //for Using in ContextView
+    fontScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(13, 0,320,130)];
+    colorScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(13, 0,320,130)];
+    sizeScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(13, 0,320,130)];
+    borderScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(13, 0,320,130)];
+    fontBorderScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(13, 0,320,130)];
+    
+    //all Labels Intialize
+    //for Using in ContextView
+    takeOrAddPhotoLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 5, 310, 43)];
+    addMoreLayerOrSaveFlyerLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 5, 310, 63)];
+    
+    
     
     // Add Templates
 	templateScrollWidth = 60;
@@ -472,7 +433,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
  */
 -(void)resetImageview{
     
-    /*
+
     // Remo all views inside image view
     NSArray *viewsToRemove = [self.imgView subviews];
     for (UIView *v in viewsToRemove) {
@@ -483,11 +444,12 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     [imgView removeFromSuperview];
     
 	// Create Main Image View
+    /*
     if(IS_IPHONE_5){
-        imgView = [[UIImageView alloc]initWithFrame:CGRectMake(5, 65, 310, 309)];
+        imgView = [[UIImageView alloc]initWithFrame:CGRectMake(5, 65, 310, 310)];
     }else{
-        imgView = [[UIImageView alloc]initWithFrame:CGRectMake(5, 44, 310, 309)];
-    }
+        imgView = [[UIImageView alloc]initWithFrame:CGRectMake(5, 44, 310, 310)];
+    }*/
     
      // Set template image
      imgView.image = selectedTemplate;
@@ -517,7 +479,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     
     // Add image view to superview
 	[self.view addSubview:imgView];
-*/
+    [self callAddMoreLayers];
 }
 
 /*
@@ -653,7 +615,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 
         
 		id colorName = colorArray[(i-1)];
-		UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(color.frame.origin.x, color.frame.origin.y-3, color.frame.size.width, color.frame.size.height)];
+		UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(color.frame.origin.x, color.frame.origin.y-5, color.frame.size.width, color.frame.size.height)];
 		[label setBackgroundColor:colorName];
         label.layer.borderColor = [UIColor grayColor].CGColor;
         label.layer.borderWidth = 1.0;
@@ -690,7 +652,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 		UIButton *color = [UIButton buttonWithType:UIButtonTypeCustom];
 		color.frame = CGRectMake(0, 5, borderScrollWidth, borderScrollHeight);
 		UIColor *colorName =borderArray[(i-1)];
-		UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(color.frame.origin.x, color.frame.origin.y-3, color.frame.size.width, color.frame.size.height)];
+		UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(color.frame.origin.x, color.frame.origin.y-5, color.frame.size.width, color.frame.size.height)];
         label.layer.borderColor = colorName.CGColor;
         label.layer.borderWidth = 3.0;
 		[color addSubview:label];
@@ -727,7 +689,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 		UIButton *color = [UIButton buttonWithType:UIButtonTypeCustom];
 		color.frame = CGRectMake(0, 5, borderScrollWidth, borderScrollHeight);
 		UIColor *colorName =borderArray[(i-1)];
-		UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(color.frame.origin.x, color.frame.origin.y-3, color.frame.size.width, color.frame.size.height)];
+		UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(color.frame.origin.x, color.frame.origin.y-5, color.frame.size.width, color.frame.size.height)];
         label.layer.borderColor = colorName.CGColor;
         label.layer.borderWidth = 3.0;
 		[color addSubview:label];
@@ -854,12 +816,24 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 	UIButton *view = sender;
 	for(UIView *tempView  in [fontScrollView subviews]) 
 	{
+        // Add border to Un-select layer thumbnail
+        CALayer * l = [tempView layer];
+        [l setBorderWidth:1];
+        UIColor * c = [UIColor clearColor];
+        [l setBorderColor:c.CGColor];
+
 		if(tempView == view)
 		{
 			selectedFont = fontArray[i-1];
 			selectedFont = [selectedFont fontWithSize:selectedSize];
 			msgTextView.font = selectedFont;
             ((CustomLabel*)[self textLabelLayersArray][arrangeLayerIndex]).font = selectedFont;
+            
+            // Add border to selected layer thumbnail
+            CALayer * l = [tempView layer];
+            [l setBorderWidth:3.0];
+            UIColor * c = [globle colorWithHexString:@"0197dd"];
+            [l setBorderColor:c.CGColor];
 		}
 		i++;
 	}
@@ -874,17 +848,99 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 	appDele.changesFlag = YES;
 	int  i=1;
 	UIButton *view = sender;
-	for(UIView *tempView  in [colorScrollView subviews]) 
+	for(UIView *tempView  in [colorScrollView subviews])
 	{
+        // Add border to Un-select layer thumbnail
+        CALayer * l = [tempView layer];
+        [l setBorderWidth:1];
+        UIColor * c = [UIColor clearColor];
+        [l setBorderColor:c.CGColor];
+        
 		if(tempView == view)
 		{
 			selectedColor = colorArray[i-1];
 			msgTextView.textColor = selectedColor;
             ((CustomLabel*)[self textLabelLayersArray][arrangeLayerIndex]).textColor = selectedColor;
+            
+            // Add border to selected layer thumbnail
+            CALayer * l = [tempView layer];
+            [l setBorderWidth:3.0];
+            UIColor * c = [globle colorWithHexString:@"0197dd"];
+            [l setBorderColor:c.CGColor];
 		}
 		i++;
 	}
 }
+
+/*
+ * When any size is selected
+ */
+-(void)selectSize:(id)sender{
+	FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
+	appDele.changesFlag = YES;
+	int  i=1;
+	UIButton *view = sender;
+	for(UIView *tempView  in [sizeScrollView subviews])
+	{
+        // Add border to Un-select layer thumbnail
+        CALayer * l = [tempView layer];
+        [l setBorderWidth:1];
+        UIColor * c = [UIColor clearColor];
+        [l setBorderColor:c.CGColor];
+        
+		if(tempView == view)
+		{
+			NSString *sizeStr = SIZE_ARRAY[i-1];
+			selectedSize = [sizeStr intValue];
+			selectedFont = [selectedFont fontWithSize:selectedSize];
+			msgTextView.font = selectedFont;
+            ((CustomLabel*)[self textLabelLayersArray][arrangeLayerIndex]).font =selectedFont;
+            
+            // Add border to selected layer thumbnail
+            CALayer * l = [tempView layer];
+            [l setBorderWidth:3.0];
+            UIColor * c = [globle colorWithHexString:@"0197dd"];
+            [l setBorderColor:c.CGColor];
+		}
+		i++;
+	}
+}
+
+
+/*
+ * When any font border is selected
+ */
+-(void)selectFontBorder:(id)sender
+{
+	FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
+	appDele.changesFlag = YES;
+	int  i=1;
+	UIButton *view = sender;
+	for(UIView *tempView  in [fontBorderScrollView subviews]) {
+        
+        // Add border to Un-select layer thumbnail
+
+        tempView.backgroundColor = [UIColor clearColor];
+
+        
+		if(tempView == view) {
+            
+			UIColor *borderColor = borderArray[i-1];
+            
+            CustomLabel *lastLabel = [self textLabelLayersArray][arrangeLayerIndex];
+            lastLabel.borderColor = borderColor;
+            lastLabel.lineWidth = 2;
+            [lastLabel drawRect:CGRectMake(lastLabel.frame.origin.x, lastLabel.frame.origin.y, lastLabel.frame.size.width, lastLabel.frame.size.height)];
+            
+            // Add border to selected layer thumbnail
+            tempView.backgroundColor = [globle colorWithHexString:@"0197dd"];
+
+		}
+		i++;
+	}
+}
+
+
 
 /*
  * When any template is selected
@@ -894,6 +950,28 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 	FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
 	appDele.changesFlag = YES;
 	UIButton *view = sender;
+    
+    //Handling Select Unselect
+    for(UIView *tempView  in [templateScrollView subviews])
+    {
+        // Add border to Un-select layer thumbnail
+        CALayer * l = [tempView layer];
+        [l setBorderWidth:1];
+        UIColor * c = [UIColor clearColor];
+        [l setBorderColor:c.CGColor];
+        
+        if(tempView == view)
+        {
+            // Add border to selected layer thumbnail
+            CALayer * l = [tempView layer];
+            [l setBorderWidth:3.0];
+            UIColor * c = [globle colorWithHexString:@"0197dd"];
+            [l setBorderColor:c.CGColor];
+        }
+        
+    }
+    
+    
 	selectedTemplate  =  templateArray[view.tag];
 	CATransition *animation = [CATransition animation];
 	[animation setType:kCATransitionPush];
@@ -951,6 +1029,26 @@ int photoLayerCount = 0; // Photo layer count to set tag value
         UIImageView *lastSymbolLayer = [self symbolLayersArray][arrangeLayerIndex];
         [[lastSymbolLayer  layer] addAnimation:animation forKey:@"SwitchToView1"];
         [lastSymbolLayer setImage:selectedSymbol];
+        
+        //Handling Select Unselect
+        for(UIView *tempView  in [symbolScrollView subviews])
+        {
+            // Add border to Un-select layer thumbnail
+            CALayer * l = [tempView layer];
+            [l setBorderWidth:1];
+            UIColor * c = [UIColor clearColor];
+            [l setBorderColor:c.CGColor];
+            
+            if(tempView == view)
+            {
+                // Add border to selected layer thumbnail
+                CALayer * l = [tempView layer];
+                [l setBorderWidth:3.0];
+                UIColor * c = [globle colorWithHexString:@"0197dd"];
+                [l setBorderColor:c.CGColor];
+            }
+            
+        }
     }
 }
 
@@ -1001,6 +1099,29 @@ int photoLayerCount = 0; // Photo layer count to set tag value
         UIImageView *lastIconLayer = [self iconLayersArray][arrangeLayerIndex];
         [[lastIconLayer  layer] addAnimation:animation forKey:@"SwitchToView1"];
         [lastIconLayer setImage:selectedIcon];
+        
+
+        //Handling Select Unselect
+        for(UIView *tempView  in [iconScrollView subviews])
+        {
+            // Add border to Un-select layer thumbnail
+            CALayer * l = [tempView layer];
+            [l setBorderWidth:1];
+            UIColor * c = [UIColor clearColor];
+            [l setBorderColor:c.CGColor];
+            
+            if(tempView == view)
+            {
+                // Add border to selected layer thumbnail
+                [l setBorderWidth:3.0];
+                UIColor * c = [globle colorWithHexString:@"0197dd"];
+                [l setBorderColor:c.CGColor];
+            }
+
+        }
+
+        
+
     }
 }
 
@@ -1010,132 +1131,16 @@ int arrangeLayerIndex;
  * When any layer is selected while editing flyer
  */
 -(void)selectLayer:(id)sender {
-    /*
-	UIButton *view = sender;
-    UIView *superView = [view superview];
-    [self SetMenu];
-    // Remove border from layer thumbnail
-    for(UIView *subView in [superView subviews]){
-        if([subView isKindOfClass:[UIButton class]]){
-            CALayer * lastLayer = [subView layer];
-            [lastLayer setMasksToBounds:YES];
-            [lastLayer setCornerRadius:0];
-            [lastLayer setBorderWidth:0];
-            [lastLayer setBorderColor:[[UIColor clearColor] CGColor]];
-            [lastLayer setBackgroundColor:[[UIColor clearColor] CGColor]];
-        }
-    }
-	
-    FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
-	appDele.changesFlag = YES;
     
-    // Add border to selected layer thumbnail
-    CALayer * l = [view layer];
-    [l setMasksToBounds:YES];
-    [l setCornerRadius:10];
-    [l setBorderWidth:3.0];
-    UIColor * c = [globle colorWithHexString:@"0197dd"];
-    [l setBorderColor:c.CGColor];
-
-    NSString *tag = [NSString stringWithFormat:@"%d",view.tag];
+    UIView *sView = editButtonGlobal;
     
-    if([tag hasPrefix:@"111"]){
-        symbolTouchFlag = NO;
-        iconTouchFlag = NO;
-        photoTouchFlag = NO;
-        lableTouchFlag = YES;
-        
-        arrangeLayerIndex = [self getIndexFromTag:tag];
-        
-        [self removeBordersFromAllLayers];
-        UILabel *tempLabel = [textLabelLayersArray objectAtIndex:arrangeLayerIndex];
-        CALayer * l = [tempLabel layer];
-        [l setMasksToBounds:YES];
-        [l setCornerRadius:10];
-        [l setBorderWidth:1.0];
-        [l setBorderColor:[[UIColor grayColor] CGColor]];
-        [self.imgView bringSubviewToFront:[[self textLabelLayersArray] objectAtIndex:arrangeLayerIndex]];
-        
-    }else if([tag hasPrefix:@"222"]){
-        symbolTouchFlag = NO;
-        iconTouchFlag = NO;
-        photoTouchFlag = YES;
-        lableTouchFlag = NO;
-        
-        arrangeLayerIndex = [self getIndexFromTag:tag];
-        
-        [self removeBordersFromAllLayers];
-        UIImageView *tempImgView = [photoLayersArray objectAtIndex:arrangeLayerIndex];
-        CALayer * l = [tempImgView layer];
-        [l setMasksToBounds:YES];
-        [l setCornerRadius:10];
-        [l setBorderWidth:1.0];
-        [l setBorderColor:[[UIColor grayColor] CGColor]];
-        [self.imgView bringSubviewToFront:[[self photoLayersArray] objectAtIndex:arrangeLayerIndex]];
-        
-    } else if([tag hasPrefix:@"333"]){
-        symbolTouchFlag = YES;
-        iconTouchFlag = NO;
-        photoTouchFlag = NO;
-        lableTouchFlag = NO;
-
-        arrangeLayerIndex = [self getIndexFromTag:tag];
-
-        [self removeBordersFromAllLayers];
-        UIImageView *tempImgView = [symbolLayersArray objectAtIndex:arrangeLayerIndex];
-        CALayer * l = [tempImgView layer];
-        [l setMasksToBounds:YES];
-        [l setCornerRadius:10];
-        [l setBorderWidth:1.0];
-        [l setBorderColor:[[UIColor grayColor] CGColor]];
-        [self.imgView bringSubviewToFront:[[self symbolLayersArray] objectAtIndex:arrangeLayerIndex]];
-        
-    } else if([tag hasPrefix:@"444"]){
-        symbolTouchFlag = NO;
-        iconTouchFlag = YES;
-        photoTouchFlag = NO;
-        lableTouchFlag = NO;
-
-        arrangeLayerIndex = [self getIndexFromTag:tag];
-        
-        [self removeBordersFromAllLayers];
-        UIImageView *tempImgView = [iconLayersArray objectAtIndex:arrangeLayerIndex];
-        CALayer * l = [tempImgView layer];
-        [l setMasksToBounds:YES];
-        [l setCornerRadius:10];
-        [l setBorderWidth:1.0];
-        [l setBorderColor:[[UIColor grayColor] CGColor]];
-        [self.imgView bringSubviewToFront:[[self iconLayersArray] objectAtIndex:arrangeLayerIndex]];        
-    }
+    NSString *tag = [NSString stringWithFormat:@"%d",sView.tag];
+    NSLog(@"%@",tag);
     
-    deleteMode = YES;
-    undoCount = undoCount + 1;
-    [rightUndoBarButton setEnabled:YES];
-    [self makeCopyOfLayers];
-     */
+    //its Also Call editLayer Method
 }
 
-/*
- * When any size is selected
- */
--(void)selectSize:(id)sender{
-	FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
-	appDele.changesFlag = YES;
-	int  i=1;
-	UIButton *view = sender;
-	for(UIView *tempView  in [sizeScrollView subviews])
-	{
-		if(tempView == view)
-		{
-			NSString *sizeStr = SIZE_ARRAY[i-1];
-			selectedSize = [sizeStr intValue];
-			selectedFont = [selectedFont fontWithSize:selectedSize];
-			msgTextView.font = selectedFont;
-            ((CustomLabel*)[self textLabelLayersArray][arrangeLayerIndex]).font =selectedFont;
-		}
-		i++;
-	}
-}
+
 
 /*
  * When any border is selected
@@ -1159,28 +1164,6 @@ int arrangeLayerIndex;
 	}
 }
 
-/*
- * When any font border is selected
- */
--(void)selectFontBorder:(id)sender
-{
-	FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
-	appDele.changesFlag = YES;
-	int  i=1;
-	UIButton *view = sender;
-	for(UIView *tempView  in [fontBorderScrollView subviews]) {
-		if(tempView == view) {
-            
-			UIColor *borderColor = borderArray[i-1];
-            
-            CustomLabel *lastLabel = [self textLabelLayersArray][arrangeLayerIndex];
-            lastLabel.borderColor = borderColor;
-            lastLabel.lineWidth = 2;
-            [lastLabel drawRect:CGRectMake(lastLabel.frame.origin.x, lastLabel.frame.origin.y, lastLabel.frame.size.width, lastLabel.frame.size.height)];
-		}
-		i++;
-	}
-}
 
 /*
  * Get index from a view tag
@@ -1825,7 +1808,7 @@ int arrangeLayerIndex;
         
 	} else if(alertView == deleteAlert && buttonIndex == 1) {
     
-        [self deleteLayer:crossButtonGlobal overrided:nil];
+        [self deleteLayer:editButtonGlobal overrided:nil];
         [Flurry logEvent:@"Layed Deleted"];
 	} else if(alertView == inAppAlert && (buttonIndex == 0 || buttonIndex == 1 || buttonIndex == 2)) {
         
@@ -1863,6 +1846,128 @@ int arrangeLayerIndex;
     return titleView;
 }
 
+-(void)editLayer:(UIButton *)editButton overrided:(BOOL)overrided{
+    
+    // Since we are editting we should enable the deleteNode On
+    undoCount = undoCount + 1;
+    NSLog(@"Edit Layer Tag: %d", editButton.tag);
+    NSString *tag = [NSString stringWithFormat:@"%d", editButton.tag];
+    int index = [self getIndexFromTag:tag];
+    
+    if([tag hasPrefix:@"111"])
+    {
+        // Set index
+        arrangeLayerIndex = [self getIndexFromTag:tag];
+
+        
+        selectedAddMoreLayerTab = ADD_MORE_TEXTTAB;
+        
+        // Call Write
+        [self callWrite];
+        
+        //Call Style
+        [self callStyle];
+        
+        //Replace RightBar Button With
+        //Delete Button
+        UIButton *delButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 4, 45, 42)];
+        [delButton addTarget:self action:@selector(callDeleteLayer) forControlEvents:UIControlEventTouchUpInside];
+        [delButton setBackgroundImage:[UIImage imageNamed:@"delete_button"] forState:UIControlStateNormal];
+        delButton.showsTouchWhenHighlighted = YES;
+        UIBarButtonItem *delBarButton = [[UIBarButtonItem alloc] initWithCustomView:delButton];
+        
+        //Done Bar Button
+        UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+        [doneButton addTarget:self action:@selector(callAddMoreLayers) forControlEvents:UIControlEventTouchUpInside];
+        [doneButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
+        doneButton.showsTouchWhenHighlighted = YES;
+        UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
+        
+        [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:doneBarButton,delBarButton,nil]];
+    }
+    else if([tag hasPrefix:@"222"])
+    {
+        // Set index
+        arrangeLayerIndex = [self getIndexFromTag:tag];
+        
+        // Call Photo
+        [self choosePhoto];
+        
+        //Replace RightBar Button With
+        //Delete Bar Button
+        UIButton *delButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 4, 45, 42)];
+        [delButton addTarget:self action:@selector(callDeleteLayer) forControlEvents:UIControlEventTouchUpInside];
+        [delButton setBackgroundImage:[UIImage imageNamed:@"delete_button"] forState:UIControlStateNormal];
+        delButton.showsTouchWhenHighlighted = YES;
+        UIBarButtonItem *delBarButton = [[UIBarButtonItem alloc] initWithCustomView:delButton];
+        
+        //Done Bar Button
+        UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+        [doneButton addTarget:self action:@selector(DonePhoto) forControlEvents:UIControlEventTouchUpInside];
+        [doneButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
+        doneButton.showsTouchWhenHighlighted = YES;
+        UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
+        
+        [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:doneBarButton,delBarButton,nil]];
+        
+    }
+    else if([tag hasPrefix:@"333"])
+    {
+        // Set index
+        arrangeLayerIndex = [self getIndexFromTag:tag];
+        
+        // Call Symbol
+        [self setAddMoreLayerTabAction:addMoreSymbolTabButton];
+        
+        //Replace RightBar Button With
+        //Delete Bar Button
+        UIButton *delButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 4, 45, 42)];
+        [delButton addTarget:self action:@selector(callDeleteLayer) forControlEvents:UIControlEventTouchUpInside];
+        [delButton setBackgroundImage:[UIImage imageNamed:@"delete_button"] forState:UIControlStateNormal];
+        delButton.showsTouchWhenHighlighted = YES;
+        UIBarButtonItem *delBarButton = [[UIBarButtonItem alloc] initWithCustomView:delButton];
+        
+        //Done Bar Button
+        UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+        [doneButton addTarget:self action:@selector(callAddMoreLayers) forControlEvents:UIControlEventTouchUpInside];
+        [doneButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
+        doneButton.showsTouchWhenHighlighted = YES;
+        UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
+        
+        [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:doneBarButton,delBarButton,nil]];
+        
+    }
+    else if([tag hasPrefix:@"444"])
+    {
+        // Set index
+        arrangeLayerIndex = [self getIndexFromTag:tag];
+        
+        // Call Icon
+        [self setAddMoreLayerTabAction:addMoreIconTabButton];
+        
+        //Replace RightBar Button With
+        //Delete Bar Button
+        UIButton *delButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 4, 45, 42)];
+        [delButton addTarget:self action:@selector(callDeleteLayer) forControlEvents:UIControlEventTouchUpInside];
+        [delButton setBackgroundImage:[UIImage imageNamed:@"delete_button"] forState:UIControlStateNormal];
+        delButton.showsTouchWhenHighlighted = YES;
+        UIBarButtonItem *delBarButton = [[UIBarButtonItem alloc] initWithCustomView:delButton];
+        
+        //Done Bar Button
+        UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+        [doneButton addTarget:self action:@selector(callAddMoreLayers) forControlEvents:UIControlEventTouchUpInside];
+        [doneButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
+        doneButton.showsTouchWhenHighlighted = YES;
+        UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
+        
+        [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:doneBarButton,delBarButton,nil]];
+        
+    }
+    deleteMode = YES;
+    undoCount = undoCount + 1;
+    [rightUndoBarButton setEnabled:YES];
+    [self makeCopyOfLayers];
+}
 
 
 
@@ -1913,6 +2018,8 @@ int arrangeLayerIndex;
         [l setBorderWidth:1.0];
         [l setBorderColor:[[UIColor grayColor] CGColor]];
         [self.imgView bringSubviewToFront:[self textLabelLayersArray][arrangeLayerIndex]];
+        
+        
         
     }else if([tag hasPrefix:@"222"]){
         symbolTouchFlag = NO;
@@ -1970,33 +2077,6 @@ int arrangeLayerIndex;
     undoCount = undoCount + 1;
     [rightUndoBarButton setEnabled:YES];
     [self makeCopyOfLayers];
-    
-
-    //Cancel Button
-    UIButton *cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    [cancelButton addTarget:self action:@selector(Mycancel) forControlEvents:UIControlEventTouchUpInside];
-    [cancelButton setBackgroundImage:[UIImage imageNamed:@"cancel_button"] forState:UIControlStateNormal];
-    cancelButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:cancelButton];
-    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
-    
-    //Edit Button
-    UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 4, 45, 42)];
-    [editButton addTarget:self action:@selector(MyEdit) forControlEvents:UIControlEventTouchUpInside];
-    [editButton setBackgroundImage:[UIImage imageNamed:@"edit_button"] forState:UIControlStateNormal];
-    editButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *leftBarMenuButton = [[UIBarButtonItem alloc] initWithCustomView:editButton];
-    
-
-    //Delete Button
-    UIButton *delButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 4, 45, 42)];
-    [delButton addTarget:self action:@selector(MyDelete) forControlEvents:UIControlEventTouchUpInside];
-    [delButton setBackgroundImage:[UIImage imageNamed:@"delete_button"] forState:UIControlStateNormal];
-    delButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *leftBarHelpButton = [[UIBarButtonItem alloc] initWithCustomView:delButton];
-    
-    [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarMenuButton,leftBarHelpButton,nil]];
-
     
 }
 
@@ -2782,6 +2862,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         symbolTouchFlag= NO;
         iconTouchFlag = YES;
         [addMoreIconTabButton setSelected:YES];
+        
         //Add right Bar button
         [self AddDonetoRightBarBotton];
         
@@ -2812,98 +2893,23 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     }
 }
 
-- (void)singleTapGestureCaptured:(UITapGestureRecognizer *)gesture
-{
-    [self SetMenu];
-    //CGPoint touchPoint=[gesture locationInView:layerScrollView];
-    // [self unWobbleAll];
-}
+
 
 -(void)resetLayerScrollView{
 
     doStopWobble = YES;
 }
 
--(void) MyEdit{
-    
-    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-    [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
-	[backButton addTarget:self action:@selector(callMenu) forControlEvents:UIControlEventTouchUpInside];
-    backButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *leftBarMenuButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-    
-    UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    [helpButton addTarget:self action:@selector(loadHelpController) forControlEvents:UIControlEventTouchUpInside];
-    [helpButton setBackgroundImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
-    helpButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *leftBarHelpButton = [[UIBarButtonItem alloc] initWithCustomView:helpButton];
-    
-    [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarMenuButton,leftBarHelpButton,nil]];
-    
-    [self editLayer:editButtonGlobal overrided:nil];
-}
+
 
 -(void)editLayer:(UIButton *)editButton{
     
     editButtonGlobal = editButton;
-    crossButtonGlobal = editButton;
-    //[editButtonGlobal setImage:[UIImage imageNamed:@"pencil_icon"] forState:UIControlStateNormal];
-    [self chooseEdit];
-  
-
-    //[self editLayer:editButtonGlobal overrided:nil];
-
-    //editAlert = [[UIAlertView alloc]initWithTitle:@"Warning" message:@"Edit this layer?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK" ,nil];
-    //[editAlert show];
+   // [self chooseEdit];
+    [self editLayer:editButtonGlobal overrided:YES];
 
 }
 
--(void)editLayer:(UIButton *)editButton overrided:(BOOL)overrided{
-
-    // Since we are editting we should enable the deleteNode On
-    undoCount = undoCount + 1;
-    NSLog(@"Edit Layer Tag: %d", editButton.tag);
-    NSString *tag = [NSString stringWithFormat:@"%d", editButton.tag];
-    int index = [self getIndexFromTag:tag];
-    
-    if([tag hasPrefix:@"111"])
-    {
-        // Set index
-        arrangeLayerIndex = index;
-        
-        //
-        selectedAddMoreLayerTab = ADD_MORE_TEXTTAB;
-        
-        // Call Write
-        [self callWrite];
-    }
-    else if([tag hasPrefix:@"222"])
-    {
-        // Set index
-        arrangeLayerIndex = index;
-        
-        // Call Photo
-        [self choosePhoto];
-    }
-    else if([tag hasPrefix:@"333"])
-    {
-        // Set index
-        arrangeLayerIndex = index;
-        
-        // Call Symbol
-        [self setAddMoreLayerTabAction:addMoreSymbolTabButton];
-    }
-    else if([tag hasPrefix:@"444"])
-    {
-        // Set index
-        arrangeLayerIndex = index;
-        
-        // Call Icon
-        [self setAddMoreLayerTabAction:addMoreIconTabButton];
-    }
-     deleteMode = YES;
-}
 -(void) Mycancel{
     
     // Remove border from layer thumbnail
@@ -2963,7 +2969,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     }
 }
 
--(void)MyDelete{
+-(void) callDeleteLayer{
     
     deleteAlert = [[UIAlertView alloc]initWithTitle:@"Warning" message:@"Delete this layer?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK" ,nil];
     [deleteAlert show];
@@ -3091,8 +3097,10 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         
         // Update layer scroll view
         [self resetLayerScrollView];
-        [self SetMenu];
     }
+    
+    //Set Main View On Screen
+    [self callAddMoreLayers];
 }
 
 -(void)onLongPress:(UILongPressGestureRecognizer*)pGesture
@@ -4679,7 +4687,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         [layerScrollView removeFromSuperview];
     }
     layerScrollView = nil;
-    layerScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,320,130)];
+    layerScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(8, 0,320,130)];
     
     NSInteger layerScrollWidth = 60;
     NSInteger layerScrollHeight = 55;
@@ -4689,6 +4697,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         return;
     }
     
+    //Adding Text of Flyer In ScrollView
     if(textLabelLayersArray){
         
         for(int text=0; text<[textLabelLayersArray count]; text++){
@@ -4699,57 +4708,25 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
             
             UIButton *layerButton = [UIButton  buttonWithType:UIButtonTypeCustom];
             layerButton.frame =CGRectMake(0, 5,layerScrollWidth, layerScrollHeight);
+            
+            [layerButton addTarget:self action:@selector(editLayer:) forControlEvents:UIControlEventTouchUpInside];
+            
             [layerButton setBackgroundColor:[UIColor clearColor]];
+            [layerButton.layer setBorderWidth:1];
+            UIColor * c = [UIColor grayColor];
+            [layerButton.layer setBorderColor:c.CGColor];
             
             label.frame  = CGRectMake(layerButton.frame.origin.x+5, layerButton.frame.origin.y-2, layerButton.frame.size.width-10, layerButton.frame.size.height-7);
             [layerButton addSubview:label];
             layerButton.tag = [[NSString stringWithFormat:@"%@%d",@"111",text] integerValue];
             
-            // Add long press gesture on thie layer
-            // UILongPressGestureRecognizer* longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onLongPress:)];
-            //[layerButton addGestureRecognizer:longPressRecognizer];
-            
-            
-            
-            UIImage *image = [UIImage imageNamed:@"cross"];
-            image = [CreateFlyerController imageWithImage:image scaledToSize:CGSizeMake(30, 29)];
-            UIImage *pencilImage = [UIImage imageNamed:@"pencil_blue"];
-            pencilImage = [CreateFlyerController imageWithImage:pencilImage scaledToSize:CGSizeMake(19, 19)];
-            
-            UIButton *crossButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 50)];
-            [crossButton setImage:image forState:UIControlStateNormal];
-            [crossButton addTarget:self action:@selector(deleteLayer:) forControlEvents:UIControlEventTouchUpInside];
-            [crossButton setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
-            [crossButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
-            
-            UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(layerButton.frame.origin.x, 0, 30, 50)];
-            [editButton setImage:pencilImage forState:UIControlStateNormal];
-            [editButton addTarget:self action:@selector(editLayer:) forControlEvents:UIControlEventTouchUpInside];
-            [editButton setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
-            [editButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
-            editButton.showsTouchWhenHighlighted = YES;
-            
-            // If delete mode is enabled then show cross button an wobble
-            if(deleteMode){
-                // [crossButton setHidden:NO];
-                [editButton setHidden:NO];
-                // [self wobble:layerButton];
-            }else{
-                [crossButton setHidden:YES];
-                [editButton setHidden:NO];
-            }
-            
-            // crossButton.tag = layerButton.tag;
-            // [layerButton addSubview:crossButton];
-            editButton.tag = layerButton.tag;
-            [layerButton addSubview:editButton];
             
             [layerScrollView addSubview:layerButton];
         }
     }
     
+    //Adding Photos of Flyer In ScrollView
     if(photoLayersArray){
-        //NSLog(@"Photo Layers %d", [photoLayersArray count]);
         
         for(int photo=0; photo<[photoLayersArray count]; photo++){
             
@@ -4758,53 +4735,26 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
             
             UIButton *layerButton = [UIButton  buttonWithType:UIButtonTypeCustom];
             layerButton.frame =CGRectMake(0, 5,layerScrollWidth, layerScrollHeight);
+            [layerButton addTarget:self action:@selector(editLayer:) forControlEvents:UIControlEventTouchUpInside];
+            [layerButton setBackgroundColor:[UIColor clearColor]];
+            [layerButton.layer setBorderWidth:1];
+            UIColor * c = [UIColor grayColor];
+            [layerButton.layer setBorderColor:c.CGColor];
+
+
             [layerButton setBackgroundColor:[UIColor clearColor]];
             
             img.frame  = CGRectMake(layerButton.frame.origin.x+5, layerButton.frame.origin.y-2, layerButton.frame.size.width-10, layerButton.frame.size.height-7);
             [layerButton addSubview:img];
             layerButton.tag = [[NSString stringWithFormat:@"%@%d",@"222",photo] integerValue];
             
-            // Add long press gesture on thie layer
-            UILongPressGestureRecognizer* longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onLongPress:)];
-            [layerButton addGestureRecognizer:longPressRecognizer];
-            
-            UIImage *image = [UIImage imageNamed:@"cross"];
-            image = [CreateFlyerController imageWithImage:image scaledToSize:CGSizeMake(30, 29)];
-            UIImage *pencilImage = [UIImage imageNamed:@"pencil_blue"];
-            pencilImage = [CreateFlyerController imageWithImage:pencilImage scaledToSize:CGSizeMake(19, 19)];
-            
-            UIButton *crossButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 50)];
-            [crossButton setImage:image forState:UIControlStateNormal];
-            [crossButton addTarget:self action:@selector(deleteLayer:) forControlEvents:UIControlEventTouchUpInside];
-            [crossButton setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
-            [crossButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
-            
-            UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(layerButton.frame.origin.x, 0, layerButton.frame.size.width, 50)];
-            [editButton setImage:pencilImage forState:UIControlStateNormal];
-            [editButton addTarget:self action:@selector(editLayer:) forControlEvents:UIControlEventTouchUpInside];
-            [editButton setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
-            [editButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
-            editButton.showsTouchWhenHighlighted = YES;
-            // If delete mode is enabled then show cross button an wobble
-            if(deleteMode){
-                //[crossButton setHidden:NO];
-                [editButton setHidden:NO];
-                // [self wobble:layerButton];
-            }else{
-                [crossButton setHidden:YES];
-                [editButton setHidden:NO];
-            }
-            
-            // crossButton.tag = layerButton.tag;
-            //[layerButton addSubview:crossButton];
-            editButton.tag = layerButton.tag;
-            [layerButton addSubview:editButton];
-            
             [layerScrollView addSubview:layerButton];
         }
     }
+    
+    //Adding Symbols of Flyer In ScrollView
     if(symbolLayersArray){
-        //NSLog(@"Symbol Layers %d", [symbolLayersArray count]);
+
         for(int symbol=0; symbol<[symbolLayersArray count]; symbol++){
             
             UIImageView *img1 = (UIImageView *) symbolLayersArray[symbol];
@@ -4812,53 +4762,25 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
             
             UIButton *layerButton = [UIButton  buttonWithType:UIButtonTypeCustom];
             layerButton.frame =CGRectMake(0, 5,layerScrollWidth, layerScrollHeight);
+            [layerButton addTarget:self action:@selector(editLayer:) forControlEvents:UIControlEventTouchUpInside];
+            [layerButton setBackgroundColor:[UIColor clearColor]];
+            [layerButton.layer setBorderWidth:1];
+            UIColor * c = [UIColor grayColor];
+            [layerButton.layer setBorderColor:c.CGColor];
+
             [layerButton setBackgroundColor:[UIColor clearColor]];
             
             img.frame  = CGRectMake(layerButton.frame.origin.x+5, layerButton.frame.origin.y-2, layerButton.frame.size.width-10, layerButton.frame.size.height-7);
             [layerButton addSubview:img];
             layerButton.tag = [[NSString stringWithFormat:@"%@%d",@"333",symbol] integerValue];
             
-            // Add long press gesture on thie layer
-            UILongPressGestureRecognizer* longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onLongPress:)];
-            [layerButton addGestureRecognizer:longPressRecognizer];
-            
-            UIImage *image = [UIImage imageNamed:@"cross"];
-            image = [CreateFlyerController imageWithImage:image scaledToSize:CGSizeMake(30, 29)];
-            UIImage *pencilImage = [UIImage imageNamed:@"pencil_blue"];
-            pencilImage = [CreateFlyerController imageWithImage:pencilImage scaledToSize:CGSizeMake(19, 19)];
-            
-            UIButton *crossButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 50)];
-            [crossButton setImage:image forState:UIControlStateNormal];
-            [crossButton addTarget:self action:@selector(deleteLayer:) forControlEvents:UIControlEventTouchUpInside];
-            [crossButton setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
-            [crossButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
-            
-            UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(layerButton.frame.origin.x, 0, layerButton.frame.size.width, 50)];
-            [editButton setImage:pencilImage forState:UIControlStateNormal];
-            [editButton addTarget:self action:@selector(editLayer:) forControlEvents:UIControlEventTouchUpInside];
-            [editButton setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
-            [editButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
-            editButton.showsTouchWhenHighlighted = YES;
-            // If delete mode is enabled then show cross button an wobble
-            if(deleteMode){
-                //[crossButton setHidden:NO];
-                [editButton setHidden:NO];
-                // [self wobble:layerButton];
-            }else{
-                [crossButton setHidden:YES];
-                [editButton setHidden:NO];
-            }
-            
-            //crossButton.tag = layerButton.tag;
-            //[layerButton addSubview:crossButton];
-            editButton.tag = layerButton.tag;
-            [layerButton addSubview:editButton];
-            
             [layerScrollView addSubview:layerButton];
         }
     }
+    
+    //Adding Icons of Flyer In ScrollView
     if(iconLayersArray){
-        //NSLog(@"Icon Layers %d", [iconLayersArray count]);
+
         for(int icon=0; icon<[iconLayersArray count]; icon++){
             
             UIImageView *img1 = (UIImageView *) iconLayersArray[icon];
@@ -4866,57 +4788,24 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
             
             UIButton *layerButton = [UIButton  buttonWithType:UIButtonTypeCustom];
             layerButton.frame =CGRectMake(0, 5,layerScrollWidth, layerScrollHeight);
+            [layerButton addTarget:self action:@selector(editLayer:) forControlEvents:UIControlEventTouchUpInside];
+            [layerButton setBackgroundColor:[UIColor clearColor]];
+            [layerButton.layer setBorderWidth:1];
+            UIColor * c = [UIColor grayColor];
+            [layerButton.layer setBorderColor:c.CGColor];
+
             [layerButton setBackgroundColor:[UIColor clearColor]];
             
             img.frame  = CGRectMake(layerButton.frame.origin.x+5, layerButton.frame.origin.y-2, layerButton.frame.size.width-10, layerButton.frame.size.height-7);
             [layerButton addSubview:img];
             layerButton.tag = [[NSString stringWithFormat:@"%@%d",@"444",icon] integerValue];
             
-            // Add long press gesture on thie layer
-            UILongPressGestureRecognizer* longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onLongPress:)];
-            [layerButton addGestureRecognizer:longPressRecognizer];
-            
-            
-            UIImage *image = [UIImage imageNamed:@"cross"];
-            image = [CreateFlyerController imageWithImage:image scaledToSize:CGSizeMake(30, 29)];
-            UIImage *pencilImage = [UIImage imageNamed:@"pencil_blue"];
-            pencilImage = [CreateFlyerController imageWithImage:pencilImage scaledToSize:CGSizeMake(19, 19)];
-            
-            UIButton *crossButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 50)];
-            [crossButton setImage:image forState:UIControlStateNormal];
-            [crossButton addTarget:self action:@selector(deleteLayer:) forControlEvents:UIControlEventTouchUpInside];
-            [crossButton setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
-            [crossButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
-            
-            UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(layerButton.frame.origin.x, 0, layerButton.frame.size.width, 50)];
-            [editButton setImage:pencilImage forState:UIControlStateNormal];
-            [editButton addTarget:self action:@selector(editLayer:) forControlEvents:UIControlEventTouchUpInside];
-            [editButton setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
-            [editButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
-            editButton.showsTouchWhenHighlighted = YES;
-            
-            // If delete mode is enabled then show cross button an wobble
-            if(deleteMode){
-                //[crossButton setHidden:NO];
-                [editButton setHidden:NO];
-                // [self wobble:layerButton];
-            }else{
-                [crossButton setHidden:YES];
-                [editButton setHidden:NO];
-            }
-            
-            //crossButton.tag = layerButton.tag;
-            //[layerButton addSubview:crossButton];
-            editButton.tag = layerButton.tag;
-            [layerButton addSubview:editButton];
-            
-            
             [layerScrollView addSubview:layerButton];
         }
     }
     
     
-    
+    //Setting ScrollView
     [layerScrollView setCanCancelContentTouches:NO];
     layerScrollView.indicatorStyle = UIScrollViewIndicatorStyleBlack;
     layerScrollView.clipsToBounds = YES;
@@ -4929,8 +4818,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
     deleteMode = NO;
     doStopWobble = YES;
-    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapGestureCaptured:)];
-    [layerScrollView addGestureRecognizer:singleTap];
+
 
 }
 
