@@ -15,7 +15,7 @@ Then on the "Saved" screen:
 	Tap "Back"
 	
 Then on the "Home" screen:
-  Tap "Flyer"
+  Tap "Create"
 	
 Then on the "Flyer" screen:
   Tap "Back"
@@ -23,8 +23,8 @@ Then on the "Flyer" screen:
 Then on the "Home" screen:
   Tap "Invite"
 	
-Then on the "Inivte" screen:
-	Tap "Back"
+Then on the "Invite" screen:
+  Tap "Back"
 
 Then on the "Home" screen:
   Tap "First Flyer"

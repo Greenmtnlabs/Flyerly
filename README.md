@@ -55,3 +55,5 @@ Running Tests
 3. Run on Device:
 
    ```ZUCCHINI_DEVICE="iOS Device" zucchini run --reports-dir <directory for reports> UITests/features/<test to run>/``` 
+
+Reports need to be emailed to the QA team
