@@ -27,16 +27,17 @@
     self.navigationController.navigationBarHidden = NO;
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
     
+    //Bar Title
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-50, -6, 150, 80)];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:TITLE_FONT size:18];
     label.textAlignment = UITextAlignmentCenter;
     label.textColor = [UIColor whiteColor];
-    //    label.backgroundColor = [UIColor blueColor ];
     label.text = @"FORGOT PASSWORD?";
     self.navigationItem.titleView = label;
+    
+    //Back Bar Button
     UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    // [welcomeButton setTitle:@" Welcome" forState:UIControlStateNormal];
     backButton.titleLabel.font = [UIFont systemFontOfSize:14.0];
     [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
     [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
@@ -54,20 +55,37 @@
 
 
 
-
+/*
+ * Here we Check User Exist on Parse or not
+ * for send Password Info to user by Parse
+ */
 -(IBAction)SearchBotton:(id)sender{
     [self showLoadingView];
     NSLog(@"Forget Password");
     
+    if (username.text == nil || [username.text isEqualToString:@""]) {
+        [self removeLoadingView];
+        [self showAlert:@"Think you forgot something..." message:@""];
+        return;
+    }
+    
     NSString *string = username.text;
-    if ([string rangeOfString:@"@"].location == NSNotFound) {
+    
+    //Checking For User Enter Username or Email Address
+    if ( [string rangeOfString:@"@"].location == NSNotFound ) {
+        
+        
+        //Getting Account Info with Username
         PFQuery *query = [PFUser query];
-        [query whereKey:@"username" equalTo:username.text];
+        [query whereKey:@"username" equalTo:[username.text lowercaseString]];
         [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
             
             dbUsername = object[@"email"];
             NSLog(@"%@",dbUsername);
-            if(dbUsername){
+            
+            if( dbUsername ){
+                
+                //Requesting for Send Email to User
                 [PFUser requestPasswordResetForEmailInBackground:dbUsername block:^(BOOL succeeded, NSError *error){
                     if (error) {
                         [self removeLoadingView];
@@ -78,16 +96,15 @@
                         [self showAlert:@"Reset password email has been sent." message:@""];
                     }}];
 
-            }else{
-                //NSString *errorValue = [error.userInfo objectForKey:@"error"];
+            } else {
+
                 [self removeLoadingView];
-                //[self showAlert:@"Warning!" message:errorValue];
                 [self showAlert:@"No account exists with username" message:@""];
             }  }];
-
-        
         
     } else {
+        
+        //Requesting for Send Email to User by email Address
         [PFUser requestPasswordResetForEmailInBackground:username.text block:^(BOOL succeeded, NSError *error){
             if (error) {
                 [self removeLoadingView];
@@ -120,7 +137,6 @@
 }
 
 -(void)goBack{
-    
 	[self.navigationController popViewControllerAnimated:YES];
 }
 

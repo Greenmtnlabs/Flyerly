@@ -11,45 +11,28 @@
 #import "RegisterController.h"
 #import <Parse/Parse.h>
 #import "FlyerlySingleton.h"
-#import "ProfileViewController.h"
 #import "ResetPWViewController.h"
 #import "ParentViewController.h"
 
 
-@class ProfileViewController,FlyerlySingleton,RegisterController,ResetPWViewController,LauchViewController;
 
-@interface SigninController : ParentViewController <PFLogInViewControllerDelegate,FBLoginViewDelegate,UIActionSheetDelegate >{
-    
-    IBOutlet UIImageView *emailImage;
-    IBOutlet UIImageView *passwordImage;
+@class FlyerlySingleton,RegisterController,ResetPWViewController,LauchViewController;
 
-    IBOutlet UITextField *email;
-    IBOutlet UITextField *password;
+@interface SigninController : ParentViewController <PFLogInViewControllerDelegate,FBLoginViewDelegate >{
     
-    IBOutlet UIButton *signIn;
-    IBOutlet UIButton *signUp;
-    IBOutlet UIButton *signInFacebook;
-    IBOutlet UIButton *signInTwitter;
     NSString *usr;
-    
-    IBOutlet UIButton *forgetPassword1;
-
     LauchViewController *launchController;
     RegisterController *registerController;
-    ProfileViewController *actSelecter;
     FlyerlySingleton *globle;
-    NSArray *twitterAccounts;
-    UIView *waiting;
+
     NSString *dbUsername;
     UIAlertView *warningAlert;
 }
 
 @property(nonatomic, strong) IBOutlet UIImageView *emailImage;
 @property(nonatomic, strong) IBOutlet UIImageView *passwordImage;
-
 @property(nonatomic, strong) IBOutlet UITextField *email;
 @property(nonatomic, strong) IBOutlet UITextField *password;
-
 @property(nonatomic, strong) IBOutlet UIButton *signIn;
 @property(nonatomic, strong) IBOutlet UIButton *signUp;
 @property(nonatomic, strong) IBOutlet UIButton *signInFacebook;
@@ -62,14 +45,5 @@
 -(IBAction)onSignInTwitter;
 -(IBAction)forgetPassword;
 -(void)signIn:(BOOL)validated username:(NSString *)userName password:(NSString *)pwd;
-
--(BOOL)twitterAccountExist:(NSString *)userId;
-
--(void)getTwitterAccounts:(id)delegate;
--(void)setAlertForSettingPage :(id)delegate;
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex ;
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex;
--(void)displayUserList:(NSArray *)accounts ;
-
 
 @end

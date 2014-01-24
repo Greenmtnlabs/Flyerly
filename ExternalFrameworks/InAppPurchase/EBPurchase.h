@@ -49,7 +49,7 @@
 @property (strong, nonatomic) SKProductsRequest *prodRequest;
 @property int customIndex;
 
--(bool) requestProduct:(NSString*)productId;
+-(bool) requestProduct:(NSArray *)productId;
 -(bool) purchaseProduct:(SKProduct*)requestedProduct;
 -(bool) restorePurchase;
 

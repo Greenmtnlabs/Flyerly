@@ -7,40 +7,12 @@
 //
 
 #import "ShareViewController.h"
-#import "FlyrViewController.h"
-#import "SaveFlyerController.h"
-#import "Common.h"
-#import "LoadingView.h"
-#import <QuartzCore/QuartzCore.h>
-#import "JSON.h"
-#import "InviteFriendsController.h"
-#import "Flurry.h"
-#import "HelpController.h"
-#import <Parse/PFFile.h>
-#import <Parse/PFObject.h>
-#import <Parse/PFUser.h>
-
 
 @implementation ShareViewController
 
 
-@synthesize selectedFlyerImage,imgView,fvController,svController,titleView,descriptionView,selectedFlyerDescription,selectedFlyerTitle, detailFileName, imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,loadingView,dic,scrollView, saveToCameraRollLabel, saveToRollSwitch,locationBackground,locationLabel,networkParentView,locationButton,listOfPlaces,clipboardlabel,sharelink,bitly;
+@synthesize selectedFlyerImage,imgView,fvController,titleView,descriptionView,selectedFlyerDescription,selectedFlyerTitle, detailFileName, imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,loadingView,dic,scrollView,  networkParentView,listOfPlaces,clipboardlabel,sharelink,bitly;
 
--(void)callFlyrView{
-	[self.navigationController popToViewController:fvController animated:YES];
-}
-
--(void)loadDistributeView {
-	svController.isDraftView = YES;
-	[self.navigationController pushViewController:svController animated:YES];
-}
-
-/*
- * pop to root view
- */
--(IBAction)goback{
-    [self.navigationController popViewControllerAnimated:YES];
-}
 
 
 - (void)viewDidLoad {
@@ -48,12 +20,10 @@
     
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationDuration:0.2f];
+    
     globle = [FlyerlySingleton RetrieveSingleton];
     globle.NBUimage = nil;
     showbars = YES;
-    
-    // Set click event on switch
-    [saveToRollSwitch addTarget:self action:@selector(setSwitchState:) forControlEvents:UIControlEventValueChanged];
     
     // Set facebook as per settings
     if([[NSUserDefaults standardUserDefaults] stringForKey:@"facebookSetting"]){
@@ -113,27 +83,9 @@
     }else{
         [flickrButton setSelected:NO];
     }
-
-	svController = [[SaveFlyerController alloc]initWithNibName:@"SaveFlyerController" bundle:nil];
-	svController.flyrImg = selectedFlyerImage;
-	svController.isDraftView = YES;
-	svController.dvController =self;
+        
+    
 	self.navigationController.navigationBarHidden = NO;
-
-    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
-    backButton.showsTouchWhenHighlighted = YES;
-    [backButton addTarget:self action:@selector(goback) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-
-    // Create left bar help button
-    UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    helpButton.showsTouchWhenHighlighted = YES;
-    [helpButton addTarget:self action:@selector(loadHelpController) forControlEvents:UIControlEventTouchUpInside];
-    [helpButton setBackgroundImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
-    UIBarButtonItem *leftHelpBarButton = [[UIBarButtonItem alloc] initWithCustomView:helpButton];
-    [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarButton,leftHelpBarButton,nil]];
-
 
     // Set title on bar
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
@@ -143,12 +95,26 @@
     label.textColor = [UIColor whiteColor];
     label.text = @"SHARE";
     self.navigationItem.titleView = label;
-    
-    // Set font and size on camera roll text
-    [locationLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:13]];
 
+    //Back Bar Button
+    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+    [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
+    backButton.showsTouchWhenHighlighted = YES;
+    [backButton addTarget:self action:@selector(goback) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+
+    //help Bar button
+    UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+    helpButton.showsTouchWhenHighlighted = YES;
+    [helpButton addTarget:self action:@selector(loadHelpController) forControlEvents:UIControlEventTouchUpInside];
+    [helpButton setBackgroundImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
+    UIBarButtonItem *leftHelpBarButton = [[UIBarButtonItem alloc] initWithCustomView:helpButton];
+    
+    [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarButton,leftHelpBarButton,nil]];
 
 	[UIView commitAnimations];
+    
+    
 	[imgView setImage:selectedFlyerImage forState:UIControlStateNormal];
 
     NSString *flyerNumber = [FlyrViewController getFlyerNumberFromPath:imageFileName];
@@ -158,7 +124,8 @@
     [titleView setReturnKeyType:UIReturnKeyDone];
     [titleView addTarget:self action:@selector(textFieldFinished:) forControlEvents: UIControlEventEditingDidEndOnExit];
     [titleView addTarget:self action:@selector(textFieldTapped:) forControlEvents:UIControlEventEditingDidBegin];
-    //[titleView setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
+    
+
     if([selectedFlyerTitle isEqualToString:@""]){
         [titleView setText:NameYourFlyerText];
     }else{
@@ -168,10 +135,6 @@
     [descriptionView setFont:[UIFont fontWithName:OTHER_FONT size:10]];
     [descriptionView setTextColor:[UIColor grayColor]];
     [descriptionView setReturnKeyType:UIReturnKeyDone];
-    
-    UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:nil];
-    [descriptionView addGestureRecognizer:gestureRecognizer];
-    gestureRecognizer.delegate = self;
     
     if([selectedFlyerDescription isEqualToString:@""]){
         [descriptionView setText:AddCaptionText];
@@ -194,7 +157,16 @@
 }
 
 
+- (void)viewWillDisappear:(BOOL)animated {
+	[super viewWillDisappear:animated];
+	
+    [[NSNotificationCenter defaultCenter] removeObserver: self];
+    [self updateFlyerDetail];
+}
+
+
 -(void)loadHelpController{
+    
     HelpController *helpController = [[HelpController alloc]initWithNibName:@"HelpController" bundle:nil];
     [self.navigationController pushViewController:helpController animated:NO];
 }
@@ -266,74 +238,30 @@
     }
 }
 
-#pragma on click buttons
-
-/*
- * Check for network selection
- */
--(BOOL)isAnyNetworkSelected{
-    
-    if([facebookButton isSelected])
-        return true;
-    if([twitterButton isSelected])
-        return true;
-    if([emailButton isSelected])
-        return true;
-    if([tumblrButton isSelected])
-        return true;
-    if([flickrButton isSelected])
-        return true;
-    if([instagramButton isSelected])
-        return true;
-    if([smsButton isSelected])
-        return true;
-    if([clipboardButton isSelected])
-        return true;
-    if([instagramButton isSelected])
-        return true;
-    
-    return false;
-}
-
-
-
-/*
- * Check for network selection for only non connectivity types
- */
--(BOOL)onlyNonConnectivityNetworkSelected{
-    
-    if(([smsButton isSelected] || [clipboardButton isSelected])
-       &&
-       (![facebookButton isSelected] && ![twitterButton isSelected] && ![emailButton isSelected] && ![tumblrButton isSelected] && ![flickrButton isSelected] && ![instagramButton isSelected])){
-    
-        return true;
-    
-    } else{
-        return false;
-    }
-}
-
 
 /*
  * Called when facebook button is pressed
  */
 -(IBAction)onClickFacebookButton{
     
-    if([facebookButton isSelected]){
-        [facebookButton setSelected:NO];        
+    if( [facebookButton isSelected] ){
+        
+        [facebookButton setSelected:NO];
+        
     } else {
         
         // Check internet connectivity
-        if([InviteFriendsController connected]){
-            [facebookButton setSelected:YES];
-            ;
+        if( [InviteFriendsController connected] ){
             
+            [facebookButton setSelected:YES];
             
             // Current Item For Sharing
             SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"#flyerly - %@  %@",titleView.text, selectedFlyerDescription ]];
             
             //Calling ShareKit for Sharing
             [SHKFacebook shareItem:item];
+            
+            // Update Flyer Info on Device
             [self updateSocialStates];
             
         } else {
@@ -345,28 +273,30 @@
     }
 }
 
+
 /*
  * Called when twitter button is pressed
  */
 -(IBAction)onClickTwitterButton{
     
-    if([twitterButton isSelected]){
+    if( [twitterButton isSelected] ){
+        
         [twitterButton setSelected:NO];
     
     } else {
 
         // Check internet connectivity
-        if([InviteFriendsController connected]){
+        if( [InviteFriendsController connected] ){
              [twitterButton setSelected:YES];
-            ;
-            
+
             // Current Item For Sharing
-            SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"#flyerly - %@ %@",
-                                                                     titleView.text, selectedFlyerDescription ]];
+            SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"#flyerly - %@ %@",titleView.text, selectedFlyerDescription ]];
             
             //Calling ShareKit for Sharing
             [SHKTwitter shareItem:item];
-             [self updateSocialStates];
+            
+            // Update Flyer Info on Device
+            [self updateSocialStates];
             
         } else {
             
@@ -376,28 +306,38 @@
     }
 }
 
+
 /*
  * Called when instagram button is pressed
  */
 -(IBAction)onClickInstagramButton{
-    if([instagramButton isSelected]){
+    
+    if( [instagramButton isSelected] ){
+        
         [instagramButton setSelected:NO];
+        
     } else {
+        
         [instagramButton setSelected:YES];
         [self shareOnInstagram];
     }
 }
 
+
 /*
  * Called when email button is pressed
  */
 -(IBAction)onClickEmailButton{
-    if([emailButton isSelected]){
+    
+    if( [emailButton isSelected] ){
+        
         [emailButton setSelected:NO];
+        
     } else {
         
         // Check internet connectivity
-        if([InviteFriendsController connected]){
+        if( [InviteFriendsController connected] ){
+            
             [emailButton setSelected:YES];
             [self shareOnEmail];
             [self showAlert:@"Uploading flyer for sharing. Please wait..." message:@""];
@@ -407,29 +347,34 @@
             [self showAlert:@"You're not connected to the internet. Please connect and retry" message:@""];
             
         }
-        
-        
     }
+    
 }
+
 
 /*
  * Called when tumblr button is pressed
  */
 -(IBAction)onClickTumblrButton{
-    if([tumblrButton isSelected]){
+    
+    if( [tumblrButton isSelected] ){
+        
         [tumblrButton setSelected:NO];
+        
     } else {
         
         // Check internet connectivity
-        if([InviteFriendsController connected]){
-           [tumblrButton setSelected:YES];
-            ;
+        if( [InviteFriendsController connected] ){
             
+           [tumblrButton setSelected:YES];
+
             // Current Item For Sharing
             SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"#flyerly - %@  %@",titleView.text, selectedFlyerDescription ]];
             
             //Calling ShareKit for Sharing
             [SHKTumblr shareItem:item];
+            
+            // Update Flyer Info on Device
             [self updateSocialStates ];
             
         } else {
@@ -439,27 +384,32 @@
         }
         
     }
+    
 }
+
 
 /*
  * Called when flickr button is pressed
  */
 -(IBAction)onClickFlickrButton{
-    if([flickrButton isSelected]){
-        [flickrButton setSelected:NO];
-    } else {
+    
+    if( [flickrButton isSelected] ){
         
-       
+        [flickrButton setSelected:NO];
+        
+    } else {
+
         // Check internet connectivity
-        if([InviteFriendsController connected]){
+        if( [InviteFriendsController connected] ){
             [flickrButton setSelected:YES];
-            ;
-            
+
             // Current Item For Sharing
             SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"#flyerly - %@  %@",titleView.text, selectedFlyerDescription ]];
             
             //Calling ShareKit for Sharing
             [SHKFlickr shareItem:item];
+            
+            // Update Flyer Info on Device
             [self updateSocialStates ];
             
         } else {
@@ -471,12 +421,16 @@
     }
 }
 
+
 /*
  * Called when sms button is pressed
  */
 -(IBAction)onClickSMSButton{
-    if([smsButton isSelected]){
+    
+    if( [smsButton isSelected] ){
+        
         [smsButton setSelected:NO];
+        
     } else {
         
         // Check internet connectivity
@@ -494,27 +448,35 @@
         }
 
     }
-    
 }
+
 
 /*
  * Called when clipboard button is pressed
  */
 -(IBAction)onClickClipboardButton{
-    if([clipboardButton isSelected]){
+    
+    if( [clipboardButton isSelected] ){
+        
         [clipboardButton setSelected:NO];
         [clipboardlabel setTextColor:[UIColor whiteColor] ];
+        
     } else {
+        
         [clipboardButton setSelected:YES];
         [clipboardlabel setTextColor:[globle colorWithHexString:@"3caaff"]];
         [self onclipcordClick];
     }
 
 }
+
+
 -(void) onclipcordClick{
     [UIPasteboard generalPasteboard].image = selectedFlyerImage;
     [Flurry logEvent:@"Copy to Clipboard"];
 }
+
+
 -(void)showAlert:(NSString *)title message:(NSString *)message{
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
                                                     message:message
@@ -524,11 +486,6 @@
     [alert show];
 }
 
--(void)showAlert{
-    
-    [self updateSocialStates];
-    
-}
 
 -(void)updateSocialStates{    
     
@@ -542,7 +499,7 @@
         socialArray = [[NSMutableArray alloc] init];
     }
 
-    if([socialArray count] > 0){
+    if( [socialArray count] > 0 ){
     
         // Save states of all supported social media
         if([facebookButton isSelected]){
@@ -642,6 +599,8 @@
     [socialArray writeToFile:finalImgWritePath atomically:YES];
 }
 
+
+
 -(void)updateFlyerDetail {
 	
     // delete already existing file and
@@ -688,13 +647,6 @@
     
 }
 
-
--(void)shareOnMMS{
-
-    NSData *imageData = UIImagePNGRepresentation(selectedFlyerImage);
-    [self uploadImageByboth:imageData];
-    
- }
 
 
 -(void)shareOnMMS:(NSString *)link{
@@ -752,51 +704,14 @@
 }
 
 
-- (void)uploadImageByboth:(NSData *)imageData
-{
-    PFFile *imageFile = [PFFile fileWithName:[FlyrViewController getFlyerNumberFromPath:imageFileName] data:imageData];
-    
-    // Save PFFile
-    [imageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if (!error) {
-            // Create a PFObject around a PFFile and associate it with the current user
-            PFObject *flyerObject = [PFObject objectWithClassName:@"Flyer"];
-            flyerObject[@"image"] = imageFile;
-            
-            // Set the access control list to current user for security purposes
-            flyerObject.ACL = [PFACL ACLWithUser:[PFUser currentUser]];
-            
-            PFUser *user = [PFUser currentUser];
-            flyerObject[@"user"] = user;
-            
-            [flyerObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                if (!error) {
-                    
-                    PFFile *theImage = flyerObject[@"image"];
-                    [self shareOnEmail:[theImage url]];
-                    globle.sharelink = [theImage url];
-                }
-                else{
-                    // Log details of the failure
-                    NSLog(@"Error: %@ %@", error, [error userInfo]);
-                }
-            }];
-        }
-        else{
-            // Log details of the failure
-            NSLog(@"Error: %@ %@", error, [error userInfo]);
-        }
-    } progressBlock:^(int percentDone) {
-    }];
-}
-
-
 /*
  * Share on Email
  */
 -(void)shareOnEmail{
+    
     NSData *imageData = UIImagePNGRepresentation(selectedFlyerImage);
     [self uploadImage:imageData isEmail:YES];
+    
 }
 
 -(void)shareOnEmail:(NSString *)link{
@@ -841,14 +756,15 @@
     
      self.dic=[UIDocumentInteractionController interactionControllerWithURL:igImageHookFile];
      self.dic.UTI = @"com.instagram.photo";
-     //self.dic = [self setupControllerWithURL:igImageHookFile usingDelegate:self];
      self.dic.annotation = @{@"InstagramCaption": [NSString stringWithFormat:@"%@ %@", self.titleView.text,descriptionView.text]};
+
     BOOL displayed = [self.dic presentOpenInMenuFromRect:rect inView: self.view animated:YES];
     
     if(!displayed){
         [self showAlert:@"Warning!" message:@"Please install Instagram app to share."];
     }
 }
+
 
 /*
  * Check whether instagram app is installed or not
@@ -931,39 +847,6 @@
     }
 
 
-#pragma Location near by code
-
-/*
- * get switch on off event
- */
--(void)setSwitchState:(id)sender {
-    if([sender isOn]){
-        [locationLabel setHidden:NO];
-        [locationBackground setHidden:NO];
-        [locationButton setHidden:NO];
-        locationLabel.text = @"Name This Location ";
-        [UIView beginAnimations:nil context:nil];
-        [UIView setAnimationDuration:0.2];
-        [UIView setAnimationCurve:UIViewAnimationCurveLinear];
-        [scrollView setFrame:CGRectMake(scrollView.frame.origin.x, scrollView.frame.origin.y, scrollView.frame.size.width, scrollView.frame.size.height + 36)];
-        // move view down
-        [networkParentView setFrame:CGRectMake(networkParentView.frame.origin.x, networkParentView.frame.origin.y + 36, networkParentView.frame.size.width, networkParentView.frame.size.height)];
-        [UIView commitAnimations];
-        
-    }else{
-        [locationLabel setHidden:YES];
-        [locationBackground setHidden:YES];
-        [locationButton setHidden:YES];
-        [UIView beginAnimations:nil context:nil];
-        [UIView setAnimationDuration:0.2];
-        [UIView setAnimationCurve:UIViewAnimationCurveLinear];
-        [scrollView setFrame:CGRectMake(scrollView.frame.origin.x, scrollView.frame.origin.y, scrollView.frame.size.width, scrollView.frame.size.height - 36)];
-        // move view up
-        [networkParentView setFrame:CGRectMake(networkParentView.frame.origin.x, networkParentView.frame.origin.y - 36, networkParentView.frame.size.width, networkParentView.frame.size.height)];
-        [UIView commitAnimations];
-    }
-}
-
 #pragma Bitly code for URL shortening
 
 -(void)shortenURL:(NSString *)url{
@@ -989,34 +872,17 @@
           [longURL absoluteString], statusCode, statusText);
 }
 
-#pragma leaving code
 
-- (void)viewWillDisappear:(BOOL)animated {
-	[super viewWillDisappear:animated];
-	
-    [[NSNotificationCenter defaultCenter] removeObserver: self];
-    [self updateFlyerDetail];
+-(void)callFlyrView{
+	[self.navigationController popToViewController:fvController animated:YES];
 }
 
 
-#pragma ShareKit
-
-- (void)myButtonHandlerAction
-{
-    // Create the item to share (in this example, a url)
-    NSURL *url = [NSURL URLWithString:@"http://getsharekit.com"];
-    SHKItem *item = [SHKItem URL:url title:@"ShareKit is Awesome!" contentType:SHKURLContentTypeWebpage];
-    
-    // Get the ShareKit action sheet
-    SHKActionSheet *actionSheet = [SHKActionSheet actionSheetForItem:item];
-    
-    // ShareKit detects top view controller (the one intended to present ShareKit UI) automatically,
-    // but sometimes it may not find one. To be safe, set it explicitly
-    [SHK setRootViewController:self];
-    
-    // Display the action sheet
-    [actionSheet showFromToolbar:self.navigationController.toolbar];
+/*
+ * pop to root view
+ */
+-(IBAction)goback{
+    [self.navigationController popViewControllerAnimated:YES];
 }
-
 
 @end

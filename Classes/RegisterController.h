@@ -10,19 +10,16 @@
 #import "LauchViewController.h"
 #import "FlyrAppDelegate.h"
 #import "FlyerlySingleton.h"
-#import "ProfileViewController.h"
 #import "ParentViewController.h"
+#import "FlyerUser.h"
+#import <Parse/Parse.h>
+#import "Common.h"
+#import "FlyrAppDelegate.h"
 
-@class FBSession,FlyerlySingleton,LauchViewController;
-@interface RegisterController : ParentViewController <UITextFieldDelegate,UIActionSheetDelegate,UIAlertViewDelegate>{
+@class FlyerlySingleton,LauchViewController;
+@interface RegisterController : ParentViewController <UITextFieldDelegate>{
     
-    IBOutlet UITextField *username;
-    IBOutlet UITextField *password;
-    IBOutlet UITextField *confirmPassword;
-    
-    IBOutlet UIButton *signUp;
-    IBOutlet UIButton *signUpFacebook;
-    IBOutlet UIButton *signUpTwitter;
+
     
     LauchViewController *launchController;
     CGFloat animatedDistance;
@@ -40,30 +37,25 @@
 @property(nonatomic, strong) IBOutlet UITextField *username;
 @property(nonatomic, strong) IBOutlet UITextField *password;
 @property(nonatomic, strong) IBOutlet UITextField *confirmPassword;
-
 @property(nonatomic, strong) IBOutlet UITextField *email;
 @property(nonatomic, strong) IBOutlet UITextField *name;
 @property(nonatomic, strong) IBOutlet UITextField *phno;
-
 @property(nonatomic, strong) IBOutlet UIButton *signUp;
 @property(nonatomic, strong) IBOutlet UIButton *signUpFacebook;
 @property(nonatomic, strong) IBOutlet UIButton *signUpTwitter;
 @property(nonatomic, strong) IBOutlet UILabel *usrExist;
 
 -(void)goBack;
--(IBAction)userExist;
 -(void)onSignUp;
+-(void)createUser:(NSString *)userName password:(NSString *)pwd;
+-(BOOL)CheckUserExists :(NSString *)userName password:(NSString *)pwd;
+
+-(IBAction)userExist;
 -(IBAction)onSignUp;
 -(IBAction)onSignUpFacebook;
 -(IBAction)onSignUpTwitter;
--(void)createUser:(NSString *)userName password:(NSString *)pwd;
 
 
--(BOOL)CheckUserExists :(NSString *)userName password:(NSString *)pwd;
--(BOOL)twitterAccountExist:(NSString *)userId;
--(void)getTwitterAccounts:(id)delegate;
--(void)setAlertForSettingPage :(id)delegate;
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex ;
--(void)displayUserList:(NSArray *)accounts ;
+
 
 @end

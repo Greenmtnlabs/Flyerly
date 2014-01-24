@@ -15,7 +15,7 @@
 @end
 
 @implementation AccountController
-@synthesize registerButton, signinButton,test;
+@synthesize registerButton, signinButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -40,12 +40,15 @@
 }
 
 -(IBAction)onRegister{
-    globle.twitterUser = nil;
-  
     
-    if(IS_IPHONE_5){
+    globle.twitterUser = nil;
+    
+      if( IS_IPHONE_5 ){
+          
        registerController = [[RegisterController alloc] initWithNibName:@"RegisterViewController_iPhone5" bundle:nil];
-    }else{
+          
+    } else {
+        
        registerController = [[RegisterController alloc] initWithNibName:@"RegisterController" bundle:nil];
 
     }
@@ -60,25 +63,5 @@
     [self.navigationController pushViewController:signinController animated:YES];
 }
 
-
-+(NSString *)getPathFromEmail:(NSString *)email{
-    return [[email stringByReplacingOccurrencesOfString:@"@" withString:@"_"] stringByReplacingOccurrencesOfString:@"." withString:@"_"];
-}
-
-+(NSString *)getTwitterEmailByUsername:(NSString *)userName{
-    
-    if ([userName rangeOfString:@"@"].location == NSNotFound) {
-        
-        NSLog(@"Not an email address - convert it into email");
-        NSString *twitterEmail = [NSString stringWithFormat:@"%@@twitter.com", userName];
-        return twitterEmail;
-        
-    } else {
-        NSLog(@"Its a valid email - Return this");
-        return userName;
-    }
-    
-    return userName;
-}
 
 @end

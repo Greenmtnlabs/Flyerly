@@ -17,6 +17,7 @@
 @synthesize imgview,description;
 
 - (id)initWithFrame:(CGRect)frame{
+    
     if (self = [super initWithFrame:frame ]) {
         // Initialization code
     }
@@ -33,7 +34,6 @@
 	[self.description setFont:[UIFont fontWithName:@"AvenirNext-Bold" size:14]];
 	[self.description setTextAlignment:UITextAlignmentLeft];
     [self.contentView addSubview:self.description];
-    
     
     return self;
 }

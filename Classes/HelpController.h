@@ -9,33 +9,23 @@
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
 #import "FlyerlySingleton.h"
+#import "Common.h"
+
 
 
 @class FlyerlySingleton;
 @interface HelpController : UIViewController<MFMailComposeViewControllerDelegate>{
 
-    IBOutlet UIScrollView *scrollView;
-    IBOutlet UIButton *doneButton;
-
-    IBOutlet UIButton *linkButton;
-    IBOutlet UIButton *emailButton;
-    IBOutlet UIButton *linkFaceBook;
-    IBOutlet UIButton *twitLink;
     FlyerlySingleton *globle;
 }
 
 @property(nonatomic,strong) IBOutlet UIScrollView *scrollView;
 @property(nonatomic,strong) IBOutlet UIButton *doneButton;
-
 @property(nonatomic,strong) IBOutlet UIButton *linkButton;
 @property(nonatomic,strong) IBOutlet UIButton *emailButton;
 @property(nonatomic,strong) IBOutlet UIButton *linkFaceBook;
 @property(nonatomic,strong) IBOutlet UIButton *twitLink;
 
 -(IBAction)goBack;
-/*
--(void) openLink:(UIButton *)sender;
--(void) openFbLink:(UIButton *)sender;
--(void) openTwLink:(UIButton *)sender;
-*/
+
 @end

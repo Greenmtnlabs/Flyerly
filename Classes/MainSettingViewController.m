@@ -14,6 +14,8 @@
 
 @implementation MainSettingViewController
 @synthesize tableView;
+
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -23,9 +25,11 @@
     return self;
 }
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     globle = [FlyerlySingleton RetrieveSingleton];
     [self.view setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
     self.tableView.rowHeight = 40;
@@ -33,6 +37,7 @@
     self.tableView.backgroundView = nil;
     [self.tableView setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
     [self.tableView setSeparatorColor:[UIColor lightGrayColor]];
+    
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
         self.tableView.contentInset = UIEdgeInsetsMake(-92, 0, 0, 0);
     }
@@ -47,7 +52,6 @@
     helpButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *helpBarButton = [[UIBarButtonItem alloc] initWithCustomView:helpButton];
     
-   
     UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
@@ -105,14 +109,21 @@
     NSString *imgname =@"";
    
     if (indexPath.row == 0) imgname = @"share_settings";
+    
     if (indexPath.row == 1){
+        
         imgname = @"save_gallery";
         [cell setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"settingsrow"]]];
+        
     }
+    
     if (indexPath.row == 2)imgname = @"account_settings";
+    
     if (indexPath.row == 3){
+        
         imgname = @"signout";
         [cell setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"settingsrow"]]];
+        
     }
 
         if (indexPath.row == 1){
@@ -140,16 +151,24 @@
 }
 
 - (void)changeSwitch:(id)sender{
+    
     if([sender isOn]){
+        
         // Execute any code when the switch is ON
         NSLog(@"Switch is ON");
         [[NSUserDefaults standardUserDefaults]  setObject:@"enabled" forKey:@"saveToCameraRollSetting"];
+        
     } else{
+        
         // Execute any code when the switch is OFF
         NSLog(@"Switch is OFF");
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"saveToCameraRollSetting"];
+        
     }
+    
 }
+
+
 - (void)tableView:(UITableView *)tView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
    
     if (indexPath.row == 0) {
@@ -169,48 +188,32 @@
 
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
 	if(alertView == warningAlert && buttonIndex == 0) {
         [self signOut];
         AccountController *actaController = nil;
         
-        if( IS_IPHONE_5 ) {
-            actaController = [[AccountController alloc] initWithNibName:@"AcountViewControlleriPhone5" bundle:nil];
-        }else{
-            actaController = [[AccountController alloc] initWithNibName:@"AccountController" bundle:nil];
-        }
+        actaController = [[AccountController alloc] initWithNibName:@"AccountController" bundle:nil];
         
-        [self.navigationController pushViewController:actaController animated:YES];
+        [self.navigationController setRootViewController:actaController];
     }
+    
 }
 
 
 - (void)signOut{
-    /*
-    //For Facebook
-    FlyrAppDelegate *appDelegate = (FlyrAppDelegate *) [[UIApplication sharedApplication]delegate];
-    appDelegate.facebook = nil;
-    appDelegate.facebook.sessionDelegate = nil;
-    appDelegate.facebook.accessToken = nil;
-    appDelegate.facebook.expirationDate = nil;*/
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"facebookSetting"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"FBAccessTokenKey"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"FBExpirationDateKey"];
-    //For FlyerLee
+
+    //For FlyerLy
     [[NSUserDefaults standardUserDefaults]  setObject:nil forKey:@"User"];
     [[NSUserDefaults standardUserDefaults]  setObject:nil forKey:@"Password"];
 
     // Forget in app purchases.
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:IN_APP_DICTIONARY_KEY];
     
-    // ShareKit Remove credentials for all services
-    //[SHK logoutOfAll];
-    
-    
-
-    
     // Log out from parse.
     [PFUser logOut];
 }
+
 
 - (NSDictionary*)parseURLParams:(NSString *)query {
     NSArray *pairs = [query componentsSeparatedByString:@"&"];
@@ -224,7 +227,9 @@
     return params;
 }
 
+
 -(IBAction)RateApp:(id)sender{
+    
     float ver = [ globle.iosVersion floatValue];
     NSString* url;
     if (ver >= 7) {
@@ -233,12 +238,16 @@
        url = [NSString stringWithFormat: @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=%@", @"344130515"];
     }
     [[UIApplication sharedApplication] openURL: [NSURL URLWithString: url]];
+    
 }
 
+
 -(IBAction)gotwitter:(id)sender{
+    
     globle.inputValue = @"twitter";
     InputViewController  *inputcontroller = [[InputViewController alloc]initWithNibName:@"InputViewController" bundle:nil];
     [self.navigationController presentModalViewController:inputcontroller animated:YES];
+    
 }
 
 
@@ -255,10 +264,7 @@
         NSMutableArray *toRecipients = [[NSMutableArray alloc]init];
         [toRecipients addObject:@"support@greenmtnlabs.com"];
         [picker setToRecipients:toRecipients];
-        
-        //NSString *emailBody = [NSString stringWithFormat:@"<font size='4'><a href = '%@'>Share a flyer</a></font>", @"http://www.flyer.us"];
-        //[picker setMessageBody:emailBody isHTML:YES];
-        
+
         [self presentModalViewController:picker animated:YES];
     }
 
@@ -280,12 +286,14 @@
 }
 
 -(void)goBack{
+    
     [self.navigationController popViewControllerAnimated:YES];
+    
 }
 
 
-
 -(void)gohelp{
+    
     HelpController *helpController = [[HelpController alloc]initWithNibName:@"HelpController" bundle:nil];
     [self.navigationController pushViewController:helpController animated:NO];
 
@@ -293,9 +301,11 @@
 
 
 -(void)CreateNewFlyer{
+    
 	ptController = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
     ptController.flyerNumber = -1;
 	[self.navigationController pushViewController:ptController animated:YES];
+    
 }
 
 

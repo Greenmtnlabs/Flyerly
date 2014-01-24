@@ -1,12 +1,10 @@
+
 //
-//  DraftViewController.h
-//  Flyr
-//
-//  Created by Riksof Pvt. Ltd on 10/24/09.
-//
+// Created by Riksof Pvt. Ltd on 10/24/09.
 //
 
 #import <UIKit/UIKit.h>
+#import <Parse/Parse.h>
 #import "ShareKit.h"
 #import "SHK.h"
 #import "SHKMail.h"
@@ -19,37 +17,23 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import <Twitter/Twitter.h>
 #import <MessageUI/MessageUI.h>
+#import <QuartzCore/QuartzCore.h>
 #import "FlyerlySingleton.h"
 #import "ParentViewController.h"
 #import "BitlyURLShortener.h"
+#import "FlyrViewController.h"
+#import "Common.h"
+#import "LoadingView.h"
+#import "JSON.h"
+#import "Flurry.h"
+#import "HelpController.h"
+
 
 @class FlyrViewController,FlyerlySingleton;
-@class SaveFlyerController,CreateFlyerController;
+@class CreateFlyerController;
 @class LoadingView;
 
-@interface ShareViewController : ParentViewController<UIWebViewDelegate,UIDocumentInteractionControllerDelegate,MFMessageComposeViewControllerDelegate,MFMailComposeViewControllerDelegate,UITextViewDelegate,UITextFieldDelegate,UIGestureRecognizerDelegate, BitlyURLShortenerDelegate,UIActionSheetDelegate> {
-
-	IBOutlet UIScrollView *scrollView;
-
-	IBOutlet UIButton *imgView;
-	IBOutlet UITextField *titleView;
-	IBOutlet UITextView *descriptionView;
-
-    IBOutlet UIButton *facebookButton;
-	IBOutlet UIButton *twitterButton;
-	IBOutlet UIButton *emailButton;
-	IBOutlet UIButton *tumblrButton;
-	IBOutlet UIButton *flickrButton;
-	IBOutlet UIButton *instagramButton;
-	IBOutlet UIButton *smsButton;
-	IBOutlet UIButton *clipboardButton;
-    
-	IBOutlet UILabel *saveToCameraRollLabel;
-    IBOutlet UISwitch *saveToRollSwitch;
-	IBOutlet UIButton *locationBackground;
-	IBOutlet UIButton *locationButton;
-	IBOutlet UILabel *locationLabel;
-	IBOutlet UIView *networkParentView;
+@interface ShareViewController : ParentViewController<UIWebViewDelegate,UIDocumentInteractionControllerDelegate,MFMessageComposeViewControllerDelegate,MFMailComposeViewControllerDelegate,UITextViewDelegate,UITextFieldDelegate, BitlyURLShortenerDelegate> {
 
 	UIImage *selectedFlyerImage;
 	NSString *selectedFlyerTitle;
@@ -79,19 +63,11 @@
 
 
 @property(nonatomic, strong) BitlyURLShortener *bitly;
-@property(nonatomic,strong) IBOutlet UILabel *saveToCameraRollLabel;
-@property(nonatomic,strong) IBOutlet UISwitch *saveToRollSwitch;
-@property(nonatomic,strong) IBOutlet UILabel *locationLabel;
-@property(nonatomic,strong) IBOutlet UIButton *locationBackground;
 @property(nonatomic,strong) IBOutlet UIView *networkParentView;
-@property(nonatomic,strong) IBOutlet UIButton *locationButton;
-
 @property(nonatomic,strong) IBOutlet UIScrollView *scrollView;
-
 @property(nonatomic,strong) IBOutlet UITextView *descriptionView;
 @property(nonatomic,strong) IBOutlet UITextField *titleView;
 @property(nonatomic,strong) IBOutlet UIButton *imgView;
-
 @property(nonatomic,strong) IBOutlet UIButton *facebookButton;
 @property(nonatomic,strong) IBOutlet UIButton *twitterButton;
 @property(nonatomic,strong) IBOutlet UIButton *emailButton;
@@ -107,9 +83,7 @@
 @property(nonatomic,strong)NSString *selectedFlyerDescription;
 @property(nonatomic,strong)NSString *detailFileName;
 @property(nonatomic,strong)NSString *imageFileName;
-
 @property(nonatomic,strong)FlyrViewController *fvController;
-@property(nonatomic,strong)SaveFlyerController *svController;
 @property (nonatomic, strong) LoadingView *loadingView;
 
 
@@ -121,17 +95,13 @@
 -(IBAction)onClickFlickrButton;
 -(IBAction)onClickSMSButton;
 -(IBAction)onClickClipboardButton;
-
-
 -(IBAction)goback;
+
 -(void)shareOnInstagram;
-
 -(void)updateSocialStates;
-
 -(void)SingleshareOnMMS;
 - (void)uploadImage:(NSData *)imageData isEmail:(BOOL)isEmail;
-- (void)uploadImageByboth:(NSData *)imageData;
-
 -(void)shareOnEmail:(NSString *)link;
 -(void)shortenURL:(NSString *)url;
+
 @end

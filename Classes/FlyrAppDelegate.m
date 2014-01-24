@@ -118,28 +118,42 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
  */
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    
+    // Configurator initialization
+    FlyerlyConfigurator *flyerConfigurator = [[FlyerlyConfigurator alloc] init];
+    DefaultSHKConfigurator  *configurator = flyerConfigurator;
+    
+    [SHKConfiguration sharedInstanceWithConfigurator:configurator];
+
     // Crittercism for crash reports.
-    [Crittercism initWithAppID: @"519a14f897c8f27969000019"];
+    [Crittercism initWithAppID:[flyerConfigurator CrittercismAppId]];
+    
+#ifdef DEBUG
+    
+    // Setup parse Offline
+    [Parse setApplicationId:[flyerConfigurator ParseOfflineAppId]
+                  clientKey:[flyerConfigurator ParseOfflineClientKey]];
+#else
+    
+    // Setup parse Online
+    [Parse setApplicationId:[flyerConfigurator ParseOnlineAppId]
+                  clientKey:[flyerConfigurator ParseOnlineClientKey]];
+    
+#endif
     
     // Flurry stats
-    [Flurry startSession:@"ZWXZFGSQZ4GMYZBVZYN3"];
-
-    // Setup parse
-    [Parse setApplicationId:@"rrU7ilSR4TZNQD9xlDtH8wFoQNK4st5AaITq6Fan"
-                  clientKey:@"P0FxBvDvw0eDYYT01cx8nhaDQdl90BdHGc22jPLn"];
+    [Flurry startSession:[flyerConfigurator FlurrySessionId]];
 
     // Facebook initialization
     [PFFacebookUtils initializeFacebook];
     
     // Twitter Initialization
-    [PFTwitterUtils initializeWithConsumerKey:@"SAXU48fGEpSMQl56cgRDQ" consumerSecret:@"tNMJrWNA3eqSQn87Gv2WH1KCb3EGpdHHi7YRd1YG6xw"];
+    [PFTwitterUtils initializeWithConsumerKey:[flyerConfigurator twitterConsumerKey] consumerSecret:[flyerConfigurator twitterSecret]];
     
     // Bitly configuration
-    [[BitlyConfig sharedBitlyConfig] setBitlyLogin:@"flyerly" bitlyAPIKey:@"R_3bdc6f8e82d260965325510421c980a0"];
+    [[BitlyConfig sharedBitlyConfig] setBitlyLogin:[flyerConfigurator bitLyLogin] bitlyAPIKey:[flyerConfigurator bitLyKey]];
     
-    // Sharekit initialization
-    DefaultSHKConfigurator *configurator = [[FlyerlyConfigurator alloc] init];
-    [SHKConfiguration sharedInstanceWithConfigurator:configurator];
+
     
 	changesFlag = NO;
 

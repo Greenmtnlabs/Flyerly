@@ -6,6 +6,7 @@
  *
  */
 
+#define ParseOnlineID 0
 #define ALPHA0 0
 #define ALPHA1 1
 

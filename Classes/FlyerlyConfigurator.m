@@ -41,6 +41,35 @@
  leaving that decision up to the user.
  */
 
+
+//Crittercism ApiKey
+- (NSString*)CrittercismAppId {
+	return @"519a14f897c8f27969000019";
+}
+
+//Parse Online Keys
+- (NSString*)ParseOnlineAppId{
+    return @"rrU7ilSR4TZNQD9xlDtH8wFoQNK4st5AaITq6Fan";
+}
+- (NSString*)ParseOnlineClientKey{
+    return @"P0FxBvDvw0eDYYT01cx8nhaDQdl90BdHGc22jPLn";
+}
+
+//Parse Offline Keys
+- (NSString*)ParseOfflineAppId{
+    return @"1zE9CnuScHj4l7dGFbT8NG15uTNb8VazMpsdoCis";
+}
+
+- (NSString*)ParseOfflineClientKey{
+    return @"rFdNdJfzWt8YIf66G7twr0D5zp9uVsWuAkMEnkpc";
+}
+
+//Flurry SessionKey
+- (NSString*)FlurrySessionId{
+    return @"ZWXZFGSQZ4GMYZBVZYN3";
+}
+
+
 // Vkontakte
 // SHKVkontakteAppID is the Application ID provided by Vkontakte
 - (NSString*)vkontakteAppId {
@@ -133,7 +162,7 @@
  */
 
 - (NSString*)twitterConsumerKey {
-	return @"SAXU48fGEpSMQl56cgRDQ";
+    return @"SAXU48fGEpSMQl56cgRDQ";
 }
 
 - (NSString*)twitterSecret {

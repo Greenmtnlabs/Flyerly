@@ -1852,7 +1852,7 @@ int arrangeLayerIndex;
     undoCount = undoCount + 1;
     NSLog(@"Edit Layer Tag: %d", editButton.tag);
     NSString *tag = [NSString stringWithFormat:@"%d", editButton.tag];
-    int index = [self getIndexFromTag:tag];
+
     
     if([tag hasPrefix:@"111"])
     {
@@ -4098,12 +4098,12 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 }
 
 -(void)showAlert:(NSString *)title message:(NSString *)message{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+    UIAlertView *salert = [[UIAlertView alloc] initWithTitle:title
                                                     message:message
                                                    delegate:nil
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];
-    [alert show];
+    [salert show];
 }
 
 
@@ -4111,15 +4111,17 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     
     //[self showLoadingView:nil];
     if([InviteFriendsController connected]){
+        
         // Create an instance of EBPurchase (Inapp purchase).
         demoPurchase = nil;
         demoPurchase = [[EBPurchase alloc] init];
         demoPurchase.delegate = self;
         demoPurchase.customIndex = button.tag;
         isPurchased = NO;
-        [demoPurchase requestProduct:@[PRODUCT_TEMPLATE, PRODUCT_FULL_TEMPLATE,
-                                  PRODUCT_ALL_BUNDLE]];
-    }else{
+        [demoPurchase requestProduct:@[PRODUCT_TEMPLATE, PRODUCT_FULL_TEMPLATE,PRODUCT_ALL_BUNDLE]];
+    
+    } else {
+        
         [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
     }
 

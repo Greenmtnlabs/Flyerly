@@ -19,6 +19,14 @@
 - (NSArray*)defaultFavoriteFileSharers __attribute__((deprecated("use defaultFavoriteSharersForFile: instead")));
 - (NSArray*)defaultFavoriteSharersForMimeType:(NSString *)mimeType __attribute__((deprecated("use defaultFavoriteSharersForFile: instead")));
 - (NSArray*)defaultFavoriteSharersForFile:(SHKFile *)file;
+
+- (NSString*)CrittercismAppId;
+- (NSString*)ParseOnlineAppId;
+- (NSString*)ParseOnlineClientKey;
+- (NSString*)ParseOfflineAppId;
+- (NSString*)ParseOfflineClientKey;
+- (NSString*)FlurrySessionId;
+
 - (NSString*)vkontakteAppId;
 - (NSString*)facebookAppId;
 - (NSString*)facebookLocalAppId;

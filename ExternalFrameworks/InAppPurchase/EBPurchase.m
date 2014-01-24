@@ -39,7 +39,7 @@
 @synthesize customIndex;
 
 
--(bool) requestProduct:(NSArray*)productId
+-(bool) requestProduct:(NSArray *)productId
 {
     if (productId != nil) {
 

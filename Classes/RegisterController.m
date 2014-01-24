@@ -7,13 +7,6 @@
 //
 
 #import "RegisterController.h"
-#import <Parse/PFQuery.h>
-#import "CreateFlyerController.h"
-#import "Common.h"
-#import "InviteFriendsController.h"
-#import "FlyrAppDelegate.h"
-#import "AccountController.h"
-
 
 @interface RegisterController ()
 
@@ -27,7 +20,424 @@ static const CGFloat MAXIMUM_SCROLL_FRACTION = 0.8;
 static const CGFloat PORTRAIT_KEYBOARD_HEIGHT = 216;
 static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 
-#pragma Zohaib Method
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
+}
+
+- (void)viewDidLoad {
+    
+    [super viewDidLoad];
+	// Do any additional setup after loading the view.
+    
+    globle = [FlyerlySingleton RetrieveSingleton];
+    
+    self.navigationController.navigationBarHidden = NO;
+    
+    // for Navigation Bar Background
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.alpha = 1;
+
+    //set title
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 150, 80)];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont fontWithName:TITLE_FONT size:18];
+    label.textAlignment = UITextAlignmentCenter;
+    label.textColor = [UIColor whiteColor];
+    label.text = @"REGISTER";
+    self.navigationItem.titleView = label;
+    
+    // remove borders
+    username.borderStyle = UITextBorderStyleNone;
+    password.borderStyle = UITextBorderStyleNone;
+    confirmPassword.borderStyle = UITextBorderStyleNone;
+    
+    // add clear text option
+    username.clearButtonMode = UITextFieldViewModeWhileEditing;
+    password.clearButtonMode = UITextFieldViewModeWhileEditing;
+    confirmPassword.clearButtonMode = UITextFieldViewModeWhileEditing;
+    email.clearButtonMode = UITextFieldViewModeWhileEditing;
+    name.clearButtonMode = UITextFieldViewModeWhileEditing;
+    phno.clearButtonMode = UITextFieldViewModeWhileEditing;
+
+    //Back Bar button
+    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+    [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
+    backButton.showsTouchWhenHighlighted = YES;
+    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    [self.navigationItem setLeftBarButtonItem:leftBarButton];
+
+    //Done Bar button
+    UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+    [doneButton addTarget:self action:@selector(onSignUp) forControlEvents:UIControlEventTouchUpInside];
+    [doneButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
+    doneButton.showsTouchWhenHighlighted = YES;
+    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
+
+    [self.navigationItem setRightBarButtonItem:rightBarButton];
+ 
+
+}
+
+-(void)goBack{
+    
+	[self.navigationController popViewControllerAnimated:YES];
+    
+}
+
+
+-(void)showLoadingView {
+    [self showLoadingIndicator];
+}
+
+
+-(void)removeLoadingView{
+    [self hideLoadingIndicator];
+}
+
+
+-(void)onSignUp{
+    
+    [self showLoadingView];
+    
+    //Validations
+    if( [self validate] ){
+        
+        [self signUp:YES username:username.text password:password.text];
+        
+    }
+    
+}
+
+
+-(void)signUp:(BOOL)validationDone username:(NSString *)userName password:(NSString *)pwd{
+    
+    // Check username already exists
+    PFQuery *query = [PFUser query];
+    [query whereKey:@"username" equalTo:userName];
+    
+    //query on parse
+    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
+        
+        NSString *dbUsername = object[@"username"];
+        
+        if( dbUsername ){
+            
+            username.text = userName;
+            password.text = pwd;
+            
+            //Saving User Info for again Login
+            [[NSUserDefaults standardUserDefaults]  setObject:userName forKey:@"User"];
+            [[NSUserDefaults standardUserDefaults]  setObject:pwd forKey:@"Password"];
+            
+            warningAlert = [[UIAlertView  alloc]initWithTitle:@"Account already exists using this account." message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Sign In",nil];
+            
+            [warningAlert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:NO];
+            [self removeLoadingView];
+
+        } else {
+            
+            [self createUser:userName password:pwd];
+            
+        }
+    }];
+    
+}
+
+
+/*
+ * Here we Using Parse Utility for Loign by Facebook
+ */
+-(IBAction)onSignUpFacebook{
+    
+    [self showLoadingView];
+    
+    //Internet Connectivity Check
+    if([InviteFriendsController connected]){
+        
+        // The permissions requested from the user
+        NSArray *permissionsArray = @[ @"user_about_me", @"user_relationships", @"user_birthday", @"user_location"];
+        
+        // Login PFUser using Facebook
+        [PFFacebookUtils logInWithPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
+            [self hideLoadingIndicator]; // Hide loading indicator
+            
+            if ( !user ) {
+                
+                if (!error) {
+                    NSLog(@"Uh oh. The user cancelled the Facebook login.");
+                } else {
+                    NSLog(@"Uh oh. An error occurred: %@", error);
+                }
+                
+            } else if (user.isNew) {
+                
+                NSLog(@"User with facebook signed up and logged in!");
+                
+                FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+                
+                 // here we Checking  User Merge required or not
+                [appDelegate FbChangeforNewVersion];
+                
+                // Remove Current UserName for Device configuration
+                [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"User"];
+                
+                // Login success Move to Flyerly
+                launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil] ;
+                
+                [self.navigationController pushViewController:launchController animated:nil];
+                
+            } else {
+                
+                NSLog(@"User with facebook logged in!");
+                
+                // Remove Current UserName for Device configuration
+                [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"User"];
+                
+                // Temp on for Testing here
+                // FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+                // [appDelegate FbChangeforNewVersion];
+                
+                // Login success Move to Flyerly
+                launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil] ;
+                
+                [self.navigationController pushViewController:launchController animated:YES];
+                
+            }
+        }];
+
+    }
+}
+
+
+-(BOOL)CheckUserExists :(NSString *)userName password:(NSString *)pwd{
+    NSError *loginError = nil;
+
+    [PFUser logInWithUsername:[userName lowercaseString] password:pwd error:&loginError];
+    if(loginError){
+        return NO;
+    }else{
+        return YES;
+    }
+}
+
+#pragma mark UIAlertView delegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+
+	if( alertView == warningAlert && buttonIndex == 1 ) {
+
+        launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
+        
+        [self.navigationController pushViewController:launchController animated:YES];
+
+    } else {
+        
+        [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"User"];
+        [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"Password"];
+        
+    }
+    
+}
+
+
+-(IBAction)onSignUpTwitter{
+
+    [self showLoadingIndicator];
+    
+    //Connectivity Check
+    if([InviteFriendsController connected]){
+        
+        [PFTwitterUtils logInWithBlock:^(PFUser *user, NSError *error) {
+            
+            [self hideLoadingIndicator];
+            
+            if (!user) {
+                
+                NSLog(@"Uh oh. The user cancelled the Twitter login.");
+                return;
+                
+            } else if (user.isNew) {
+                
+                NSLog(@"User signed up and logged in with Twitter!");
+                
+                NSString *twitterUsername = [PFTwitterUtils twitter].userId;
+                
+                FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+                
+                // here we Checking  User Merge required or not
+                [appDelegate TwitterChangeforNewVersion:twitterUsername];
+                
+                // Remove Current UserName for Device configuration
+                [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"User"];
+                
+                // Login success Move to Flyerly
+                launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil] ;
+                [self.navigationController pushViewController:launchController animated:YES];
+                
+            } else {
+                
+                NSLog(@"User logged in with Twitter!");
+                
+                // Remove Current UserName for Device configuration
+                [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"User"];
+                
+                // Temp on for Testing here
+                // For Parse New User Merge to old Twitter User
+                /*
+                 FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+                 [appDelegate TwitterChangeforNewVersion:twitterUsername];*/
+                
+                
+                // Login success Move to Flyerly
+                launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil] ;
+                [self.navigationController pushViewController:launchController animated:YES];
+                
+                
+            }
+        }];
+        
+        
+    } else {
+        
+        [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
+        [self removeLoadingView];
+        
+    }
+
+}
+
+
+-(BOOL)validate{
+
+    // Check empty fields
+    if(!username || [username.text isEqualToString:@""]){
+        
+        [self showAlert:@"Please complete all required fields" message:@""];
+        [self removeLoadingView];
+        return NO;
+    }
+    
+    if(!password || [password.text isEqualToString:@""] ||
+       !confirmPassword || [confirmPassword.text isEqualToString:@""]){
+        
+        [self showAlert:@"Please complete all required fields." message:@""];
+        [self removeLoadingView];
+        return NO;
+    }
+    
+    
+    // Check password matched
+    if(![password.text isEqualToString:confirmPassword.text]){
+        
+        [self showAlert:@"Passwords do not match." message:@""];
+        [self removeLoadingView];
+        return NO;
+    }
+
+    
+    if([email.text length] == 0 ){
+        [self showAlert:@"Warning!" message:@"Email Address Must Required"];
+        [self removeLoadingView];
+        return NO;
+    }
+    if([usrExist.text isEqualToString:@"taken"] ){
+        [self showAlert:@"Username already taken" message:@""];
+        [self removeLoadingView];
+        return NO;
+    }
+    
+    return YES;
+}
+
+-(void)createUser:(NSString *)userName password:(NSString *)pwd{
+    
+    // username and password
+    PFUser *user = [PFUser user];
+    user.username = [userName lowercaseString];
+    user.password = pwd;
+    user.email = email.text;
+    user[@"name"] = name.text;
+    user[@"contact"] = phno.text;
+    
+    //Saving User Info for again login
+    [[NSUserDefaults standardUserDefaults]  setObject:userName forKey:@"User"];
+    [[NSUserDefaults standardUserDefaults]  setObject:pwd forKey:@"Password"];
+
+    [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        
+        if (error) {
+            
+            NSString *errorValue = (error.userInfo)[@"error"];
+            [self showAlert:@"Warning!" message:errorValue];
+            [self removeLoadingView];
+
+        } else {
+            
+            [PFUser logInWithUsername:userName password:pwd];
+            launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
+            [self.navigationController pushViewController:launchController animated:YES];
+        }
+    }];
+}
+
+
+-(void)showAlert:(NSString *)title message:(NSString *)message{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+                                                    message:message
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+}
+
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    
+    if([string isEqualToString:@"\n"]){
+        if([textField canResignFirstResponder])
+        {
+            [textField resignFirstResponder];
+        }
+        return NO;
+    }
+    
+    return YES;
+}
+
+
+/*
+ * For Checking Duplicate User
+ */
+-(IBAction)userExist{
+    
+    if( username.text != nil ){
+        
+        PFQuery *query = [PFUser  query];
+        [query whereKey:@"username" equalTo:[username.text lowercaseString]];
+        
+        [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
+            if (error) {
+                [usrExist setHidden:NO];
+                [usrExist setText:@"available"];
+                [usrExist setTextColor:[UIColor greenColor]];
+            }else{
+                [usrExist setHidden:NO];
+                [usrExist setText:@"taken"];
+                [usrExist setTextColor:[UIColor redColor]];
+            }
+        }];
+    }
+    
+}
+
+
+#pragma TextFields Method
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
@@ -96,617 +506,6 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 {
     [textField resignFirstResponder];
     return YES;
-}
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
-- (void)viewDidLoad {
-    
-    [super viewDidLoad];
-    globle = [FlyerlySingleton RetrieveSingleton];
-
-    if (globle.twitterUser == nil) {
-        username.text = @"";
-    }else{
-        username.text = globle.twitterUser;
-        username.enabled = NO;
-        password.text = @"null";
-        password.enabled = NO;
-        confirmPassword.text =@"null";
-        signUpFacebook.hidden = YES;
-        signUpTwitter.hidden = YES;
-    }
- 
-	// Do any additional setup after loading the view.
-    
-    self.navigationController.navigationBarHidden = NO;
-    
-    // for Navigation Bar Background
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBar.alpha = 1;
-
-    //set title
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 150, 80)];
-    label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont fontWithName:TITLE_FONT size:18];
-    label.textAlignment = UITextAlignmentCenter;
-    label.textColor = [UIColor whiteColor];
-    label.text = @"REGISTER";
-    self.navigationItem.titleView = label;
-    
-    // remove borders
-    username.borderStyle = UITextBorderStyleNone;
-    password.borderStyle = UITextBorderStyleNone;
-    confirmPassword.borderStyle = UITextBorderStyleNone;
-    
-    // add clear text option
-    username.clearButtonMode = UITextFieldViewModeWhileEditing;
-    password.clearButtonMode = UITextFieldViewModeWhileEditing;
-    confirmPassword.clearButtonMode = UITextFieldViewModeWhileEditing;
-    email.clearButtonMode = UITextFieldViewModeWhileEditing;
-    name.clearButtonMode = UITextFieldViewModeWhileEditing;
-    phno.clearButtonMode = UITextFieldViewModeWhileEditing;
-
-    // Setup welcome button
-    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
-    [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
-    backButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-    [self.navigationItem setLeftBarButtonItem:leftBarButton];
-
-    UIButton *signUpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    [signUpButton addTarget:self action:@selector(onSignUp) forControlEvents:UIControlEventTouchUpInside];
-    [signUpButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
-    signUpButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:signUpButton];
-
-    [self.navigationItem setRightBarButtonItem:rightBarButton];
- 
-
-}
-
-
-
-
-
--(void)goBack{
-    
-	[self.navigationController popViewControllerAnimated:YES];
-}
-
--(void)showLoadingView {
-    [self showLoadingIndicator];
-}
-
--(void)removeLoadingView{
-    [self hideLoadingIndicator];
-}
-
--(void)onSignUp{
-    
-    [self showLoadingView];
-    
-    if([self validate]){
-        [self signUp:YES username:username.text password:password.text];
-    }
-}
-
--(void)signUp:(BOOL)validationDone username:(NSString *)userName password:(NSString *)pwd{
-    // Check username already exists
-    PFQuery *query = [PFUser query];
-    [query whereKey:@"username" equalTo:userName];
-    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
-        
-        NSString *dbUsername = object[@"username"];
-        
-        if(dbUsername){
-            username.text = userName;
-            password.text = pwd;
-            [[NSUserDefaults standardUserDefaults]  setObject:userName forKey:@"User"];
-            [[NSUserDefaults standardUserDefaults]  setObject:pwd forKey:@"Password"];
-           // change by Preston [self showAlert:@"Warning!" message:@"User already exists"];
-            warningAlert = [[UIAlertView  alloc]initWithTitle:@"Account already exists using this account." message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Sign In",nil];
-            [warningAlert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:NO];
-            [self removeLoadingView];
-
-        } else {
-            
-            //[self showAlert:@"Warning!" message:@"Create this user"];
-            [self createUser:userName password:pwd];
-        }
-        
-    }];
-}
-
--(IBAction)onSignUpFacebook{
-    
-    [self showLoadingView];
-    
-    if([InviteFriendsController connected]){
-/*
-        FlyrAppDelegate *appDelegate = (FlyrAppDelegate *) [[UIApplication sharedApplication]delegate];
-        appDelegate.facebook.sessionDelegate = self;
-        [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"facebookSetting"];
-
-        if(!appDelegate.facebook) {
-            
-            //get facebook app id
-            NSString *path = [[NSBundle mainBundle] pathForResource: @"Flyr-Info" ofType: @"plist"];
-            NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile: path];
-            appDelegate.facebook = [[Facebook alloc] initWithAppId:dict[@"FacebookAppID"] andDelegate:self];
-        }
-        
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        if ([defaults objectForKey:@"FBAccessTokenKey"] && [defaults objectForKey:@"FBExpirationDateKey"]) {
-            appDelegate.facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
-            appDelegate.facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
-         }
-
-        if([appDelegate.facebook isSessionValid]) {
-            
-            [appDelegate.facebook requestWithGraphPath:@"me" andDelegate:self];
-
-
-        } else {
-            [appDelegate.facebook authorize:@[@"read_stream",
-                                             @"publish_stream", @"email"]];
-        }
-    }else{
-        [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
-        [self removeLoadingView];*/
-    }
-}
-
--(void)onSignUpFacebook:(BOOL)overloaded result:(id)result{
-    if ([result isKindOfClass:[NSDictionary class]])
-    {
-        NSString *emailStr = result[@"email"];
-        [self signUp:YES username:emailStr password:@"null"];
-    }
-}
-
--(BOOL)CheckUserExists :(NSString *)userName password:(NSString *)pwd{
-    NSError *loginError = nil;
-
-    [PFUser logInWithUsername:[userName lowercaseString] password:pwd error:&loginError];
-    if(loginError){
-        return NO;
-    }else{
-        return YES;
-    }
-}
-
-#pragma mark UIAlertView delegate
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-	if(alertView == warningAlert && buttonIndex == 1) {
-        globle.twitterUser = nil;
-        [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"saveToCameraRollSetting"];
-        [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"clipSetting"];
-        [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"emailSetting"];
-        [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"smsSetting"];
-        launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
-        
-        [self.navigationController pushViewController:launchController animated:YES];
-
-    }else{
-        [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"User"];
-        [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"Password"];
-    }
-}
-
-
--(IBAction)onSignUpTwitter{
-    [self showLoadingView];
-    
-    if([InviteFriendsController connected]){
-        if([TWTweetComposeViewController canSendTweet]){
-            [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"twitterSetting"];
-            ACAccountStore *account = [[ACAccountStore alloc] init];
-            ACAccountType *accountType = [account accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
-            
-            
-            // Request access from the user to access their Twitter account
-            [account requestAccessToAccountsWithType:accountType withCompletionHandler:^(BOOL granted, NSError *error) {
-                // Did user allow us access?
-                if (granted == YES) {
-                    
-                    // Populate array with all available Twitter accounts
-                    NSArray *arrayOfAccounts = [account accountsWithAccountType:accountType];
-                    // Sanity check
-                    if ([arrayOfAccounts count] > 1) {
-                        if([TWTweetComposeViewController canSendTweet]) {
-                            [self getTwitterAccounts:self];
-                        } else {
-                            
-                            [self setAlertForSettingPage:self];                            
-                        }
-                        
-                    }else if ([arrayOfAccounts count] > 0) {
-                        // Keep it simple, use the first account available
-                        ACAccount *acct = arrayOfAccounts[0];
-                        
-                        //Convert twitter username to email
-                        NSString *twitterUser = [AccountController getPathFromEmail:[acct username]];
-                        username.text = twitterUser;
-                        password.text = @"null";
-                        confirmPassword.text = @"null";
-                    
-                        if([self CheckUserExists:twitterUser password:@"null"])
-                        {
-                            
-                        warningAlert = [[UIAlertView  alloc]initWithTitle:@"Account already exists using this account" message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Sign In",nil];
-                            //[warningAlert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:NO];
-                            [warningAlert show];
-                            
-                        }
-
-                        // sign in
-                        
-                    }
-                }
-                
-            }];
-            
-        } else {
-            [self showAlert:@"No Twitter connection" message:@"You must be connected to Twitter to continue."];
-            [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"twitterSetting"];
-            [self removeLoadingView];
-        }
-        
-        
-    }else{
-        [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
-        [self removeLoadingView];
-    }
-
-}
-
--(void)request:(FBRequest *)request didLoad:(id)result{
-    
-    NSLog(@"Data: %@", result);
-    
-    if(result){
-        [self onSignUpFacebook:YES result:result];
-    }
-}
-
-
-
--(BOOL)validate{
-
-    // Check empty fields
-    if(!username || [username.text isEqualToString:@""]){
-        
-        [self showAlert:@"Please complete all required fields" message:@""];
-        [self removeLoadingView];
-        return NO;
-    }
-    globle = [FlyerlySingleton RetrieveSingleton];
-
-    if (globle.twitterUser == nil) {
-
-        if(!password || [password.text isEqualToString:@""] ||
-       !confirmPassword || [confirmPassword.text isEqualToString:@""]){
-        
-        [self showAlert:@"Please complete all required fields." message:@""];
-        [self removeLoadingView];
-        return NO;
-        }
-
-    
-    // Check password matched
-        if(![password.text isEqualToString:confirmPassword.text]){
-        
-        [self showAlert:@"Passwords do not match." message:@""];
-        [self removeLoadingView];
-        return NO;
-        }
-        
-    }
-    
-    if([email.text length] == 0 ){
-        [self showAlert:@"Warning!" message:@"Email Address Must Required"];
-        [self removeLoadingView];
-        return NO;
-    }
-    if([usrExist.text isEqualToString:@"taken"] ){
-        [self showAlert:@"Username already taken" message:@""];
-        [self removeLoadingView];
-        return NO;
-    }
-    
-    return YES;
-}
-
--(void)createUser:(NSString *)userName password:(NSString *)pwd{
-    
-    // username and password
-    PFUser *user = [PFUser user];
-    user.username = [userName lowercaseString];
-    user.password = pwd;
-    user.email = email.text;
-    user[@"name"] = name.text;
-    user[@"contact"] = phno.text;
-    
-    [[NSUserDefaults standardUserDefaults]  setObject:userName forKey:@"User"];
-    [[NSUserDefaults standardUserDefaults]  setObject:pwd forKey:@"Password"];
-    [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"saveToCameraRollSetting"];
-    [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"clipSetting"];
-    [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"emailSetting"];
-    [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"smsSetting"];
-
-    [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if (error) {
-            
-            NSString *errorValue = (error.userInfo)[@"error"];
-            [self showAlert:@"Warning!" message:errorValue];
-            [self removeLoadingView];
-
-        } else {
-            [PFUser logInWithUsername:userName password:pwd];
-            
-            NSLog(@"Email: %@", userName);
-            NSLog(@"Path: %@", [AccountController getPathFromEmail:userName]);
-            launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
-            [self.navigationController pushViewController:launchController animated:YES];
-        }
-    }];
-}
-
--(void)showAlert:(NSString *)title message:(NSString *)message{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
-                                                    message:message
-                                                   delegate:nil
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
-    [alert show];
-}
-
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    
-    if([string isEqualToString:@"\n"]){
-        if([textField canResignFirstResponder])
-        {
-            [textField resignFirstResponder];
-        }
-        return NO;
-    }
-    
-    return YES;
-}
-
-
-#pragma Twitter Changes
-
--(IBAction)signInWithTwitter:(id)sender {
-    
-    if([TWTweetComposeViewController canSendTweet]) {
-        //[Twitter getTwitterAccounts:self];
-    } else {
-        
-       // [Twitter setAlertForSettingPage:self];
-        
-        
-    }
-    
-    
-}
-
-
-#pragma Twitter
-//this function will check that specified user account exist in settings/twitter accounts of iOS device
--(BOOL)twitterAccountExist:(NSString *)userId {
-    
-    // Create an account store object.
-	ACAccountStore *accountStore = [[ACAccountStore alloc] init];
-	
-	// Create an account type that ensures Twitter accounts are retrieved.
-    ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
-	
-    __block BOOL accountExist = NO;
-    
-    if([TWTweetComposeViewController canSendTweet]) {
-        
-        
-        // Request access from the user to use their Twitter accounts.
-        [accountStore requestAccessToAccountsWithType:accountType withCompletionHandler:^(BOOL granted, NSError *error) {
-            if(granted) {
-                // Get the list of Twitter accounts.
-                NSArray *accountsArray = [accountStore accountsWithAccountType:accountType];
-                
-                // For the sake of brevity, we'll assume there is only one Twitter account present.
-                // You would ideally ask the user which account they want to tweet from, if there is more than one Twitter account present.
-                if ([accountsArray count] > 0) {
-                    // Grab the initial Twitter account to tweet from.
-                    
-                    for(int i = 0; i < accountsArray.count; i++) {
-                        
-                        ACAccount *twitterAccount = accountsArray[i];
-                        NSString *userID = [[twitterAccount valueForKey:@"properties"] valueForKey:@"user_id"];
-                        
-                        if([userID isEqualToString:userId]) {
-                            accountExist = YES;
-                        }
-                    }
-                    
-                    
-                    
-                }
-            }
-        }];
-    }
-    
-    
-    
-    return accountExist;
-    
-    
-}
-
-
-//This function will return all twitter accounts avaliable on iOS Device
--(void)getTwitterAccounts:(id)delegate {
-    
-    // Create an account store object.
-	ACAccountStore *accountStore = [[ACAccountStore alloc] init];
-	
-	// Create an account type that ensures Twitter accounts are retrieved.
-    ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
-	
-    if([TWTweetComposeViewController canSendTweet]) {
-        
-        
-        // Request access from the user to use their Twitter accounts.
-        [accountStore requestAccessToAccountsWithType:accountType withCompletionHandler:^(BOOL granted, NSError *error) {
-            if(granted) {
-                // Get the list of Twitter accounts.
-                NSArray *accountsArray = [accountStore accountsWithAccountType:accountType];
-                
-                if(delegate != nil) {
-                    [delegate performSelector:@selector(displayUserList:) withObject:accountsArray];
-                }
-                
-                
-            }
-        }];
-    }
-    
-    
-    
-}
-
-
-
--(void)setAlertForSettingPage :(id)delegate
-{
-    // Set up the built-in twitter composition view controller.
-    TWTweetComposeViewController *tweetViewController = [[TWTweetComposeViewController alloc] init];
-    
-    
-    // Create the completion handler block.
-    [tweetViewController setCompletionHandler:^(TWTweetComposeViewControllerResult result) {
-        [delegate dismissModalViewControllerAnimated:YES];
-    }];
-    
-    // Present the tweet composition view controller modally.
-    [delegate presentModalViewController:tweetViewController animated:YES];
-    //tweetViewController.view.hidden = YES;
-    for (UIView *view in tweetViewController.view.subviews){
-        [view removeFromSuperview];
-    }
-    
-}
-
-
--(void)displayUserList:(NSArray *)accounts {
-    
-    //hide loading
-    
-    NSMutableArray *tAccounts = [[NSMutableArray alloc] init];
-    
-    //create username array
-    NSMutableArray *accountArray = [[NSMutableArray alloc] init];
-    for(int i = 0 ; i < accounts.count ; i++) {
-        ACAccount *account = accounts[i];
-        [accountArray addObject:account.username];
-        
-        [tAccounts addObject:account];
-        
-        for(id key in [account valueForKey:@"properties"] ) {
-            
-            NSLog(@"%@",key);
-            
-        }
-        
-        
-    }
-    
-    //set main variable
-    twitterAccounts = tAccounts;
-    
-    
-    //loop through each account and show them on UIAction sheet for selection
-    dispatch_async(dispatch_get_main_queue(), ^{
-        UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:@"Choose Account" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles: nil];
-        
-        for (int i = 0; i < accountArray.count; i++) {
-            [actionSheet addButtonWithTitle:accountArray[i]];
-        }
-        
-        [actionSheet addButtonWithTitle:@"Cancel"];
-        actionSheet.cancelButtonIndex = accountArray.count;
-        
-        
-        [actionSheet showInView:self.view];
-    });
-    
-//    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Select Account" delegate:self  cancelButtonTitle:nil
-//                                               destructiveButtonTitle:nil otherButtonTitles:nil];
-
-
-    
-    
-}
-
-
-
-/**
- * clickedButtonAtIndex (UIActionSheet)
- *
- * Handle the button clicks from mode of getting out selection.
- */
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    
-    //if not cancel button presses
-    if(buttonIndex != twitterAccounts.count) {
-        
-        //save to NSUserDefault
-        ACAccount *account = twitterAccounts[buttonIndex];
-        
-        //Convert twitter username to email
-        NSString *twitterUser = [AccountController getPathFromEmail:[account username]];
-        username.text = twitterUser;
-        password.text = @"null";
-        confirmPassword.text = @"null";
-        
-        if([self CheckUserExists:twitterUser password:@"null"])
-        {
-            warningAlert = [[UIAlertView  alloc]initWithTitle:@"Account already exists using this account" message:@"" delegate:self cancelButtonTitle:@"Cancel"  otherButtonTitles:@"Sign In",nil];
-            [warningAlert show];
-            
-        }
-
-       // [self signIn:YES username:twitterUser password:@"null"];
-    }
-   // NSLog(@"%u",buttonIndex);
-    [self hideLoadingIndicator];
-}
-
-
--(IBAction)userExist{
-    if(username.text != nil){
-        PFQuery *query = [PFUser  query];
-        [query whereKey:@"username" equalTo:[username.text lowercaseString]];
-        [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
-            if (error) {
-                [usrExist setHidden:NO];
-                [usrExist setText:@"available"];
-                [usrExist setTextColor:[UIColor greenColor]];
-            }else{
-                [usrExist setHidden:NO];
-                [usrExist setText:@"taken"];
-                [usrExist setTextColor:[UIColor redColor]];
-            }
-        }];
-    }
 }
 
 @end
