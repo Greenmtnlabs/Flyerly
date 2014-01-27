@@ -4,14 +4,15 @@ devices:
   iPhone Simulator:
     default: true
     simulator: iPhone (Retina 4-inch)
-    screen: retina_ios6
+    screen: retina_ios5
 
-  iPhone Simulator 4:
-    simulator: iPhone (Retina 3.5-inch)
-    screen: retina_ios4
-
-  iOS Device:
+  iPhone 5:
     UDID: 3fd87224e1e01f29c3c0c84fe727865db0f66bfd
     app: Flyr.app
-    screen: retina_ios6
+    screen: retina_ios5
+	
+  iPhone 5c:
+    UDID: 41650836ef3786cd45c383862e5f8d4f72c04461
+    app: Flyr.app
+    screen: retina_ios5
 
