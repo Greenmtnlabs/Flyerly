@@ -186,6 +186,7 @@
 
 @property (nonatomic, assign) NSInteger imgPickerFlag;
 @property (nonatomic, assign) int flyerNumber;
+@property (nonatomic, strong) NSString *flyerPath;
 
 
 @property(nonatomic, strong) IBOutlet UIImageView *imgView;

@@ -14,20 +14,35 @@
 
 /*
  * This method will be used to initiate the Flyer class
- *, it will create a directory structure for 3.0 Version
+ * set Flyer Path to Open In create Screen
+ * it will create a directory structure for 3.0 Version if not Exist
  */
--(id)initWithPath{
+-(id)initWithPath:(NSString *)flyPath{
 
     MasterLayers = [[NSDictionary alloc] init];
-    int flyernumber = [self GetMaxFlyerNumber];
+    
+    if ( ![[NSFileManager defaultManager] fileExistsAtPath:flyPath isDirectory:NULL] ) {
+        
+        //Create New Directory
+        [self CreateFlyerPath:flyPath];
+        [self loadFlyer:flyPath];
+        
+    } else {
+        
+        //Open Editable Mode
+        [self loadFlyer:flyPath];
+    }
+    
     return nil;
 }
+
 
 
 /*
  *load the dictionary from .peices file
  */
--(void)loadFlyer :(NSString *)uid{
+-(void)loadFlyer :(NSString *)flyPath{
+
 
 
 }
@@ -89,10 +104,38 @@
     return @"";
 }
 
+
+/*
+ * Create New directory for Flyer
+ */
+-(void)CreateFlyerPath:(NSString *)path{
+    NSError *error = nil;
+    
+    //This Is Unique Flyer Folder
+    [[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:&error];
+    
+    //This Is Sub Flyer Folder of Icons
+    [[NSFileManager defaultManager] createDirectoryAtPath:[NSString stringWithFormat:@"%@/Icon",path] withIntermediateDirectories:YES attributes:nil error:&error];
+    
+    //This Is Sub Flyer Folder of Photo
+    [[NSFileManager defaultManager] createDirectoryAtPath:[NSString stringWithFormat:@"%@/Photo",path] withIntermediateDirectories:YES attributes:nil error:&error];
+    
+    //This Is Sub Flyer Folder of Social
+    [[NSFileManager defaultManager] createDirectoryAtPath:[NSString stringWithFormat:@"%@/Social",path] withIntermediateDirectories:YES attributes:nil error:&error];
+    
+    //This Is Sub Flyer Folder of Symbol
+    [[NSFileManager defaultManager] createDirectoryAtPath:[NSString stringWithFormat:@"%@/Symbol",path] withIntermediateDirectories:YES attributes:nil error:&error];
+    
+    //This Is Sub Flyer Folder of Template
+    [[NSFileManager defaultManager] createDirectoryAtPath:[NSString stringWithFormat:@"%@/Template",path] withIntermediateDirectories:YES attributes:nil error:&error];
+}
+
+
+
 /*
  *Here we Getting Flyer Number for New Flyer
  */
--(int)GetMaxFlyerNumber{
++(NSString *)newFlyerPath{
     
     PFUser *user = [PFUser currentUser];
     
@@ -107,25 +150,27 @@
         
         //Getting All Files list
         NSArray *files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:usernamePath error:nil];
-        NSString *lastFileName = nil;
         
-        for(int i = 0 ; i < [files count];i++)
-        {
-            lastFileName = files[i];
+        int num = 0;
+        int maxnum = 0;
+
+        for (int i = 0 ; i < files.count; i++) {
             
-            NSString *path = [usernamePath stringByAppendingPathComponent:lastFileName];
-            BOOL isDir = NO;
-            [[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:(&isDir)];
-            
-            if( isDir ) {
-                
-                NSLog(@"%@",lastFileName);
+            num = [files[i] integerValue];
+
+            if(maxnum < num){
+                maxnum = num;
             }
         }
+        
+        
+        NSString *flyerPath = [usernamePath stringByAppendingString:[NSString stringWithFormat:@"/%d",maxnum +1]];
+        
+        return flyerPath;
     }
     
 
-    return 0;
+    return @"";
 }
 
 @end
