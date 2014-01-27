@@ -241,7 +241,7 @@
 - (void)layoutScrollImages:(UIScrollView*)selectedScrollView scrollWidth:(NSInteger)kScrollObjWidth scrollHeight:(NSInteger)kScrollObjHeight;
 
 -(NSData*)getCurrentFrameAndSaveIt;
--(void)loadPhotoLibrary;
+-(void)loadPhotoLibrary;            	
 
 + (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize;
 +(UIView *)setTitleViewWithTitle:(NSString *)title rect:(CGRect)rect;

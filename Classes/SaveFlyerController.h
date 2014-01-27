@@ -55,7 +55,7 @@
 @property (nonatomic,strong)  NSData *flyrImgData;
 @property (nonatomic,strong)  FBSession* _session;
 @property (nonatomic,strong)  UITextField *alertTextField;
-@property (nonatomic,strong) NSString *imgName;
+@property (nonatomic,strong) NSString *imgName;	
 
 -(void)callTwitAlert;
 -(void)callFacebookAlert;

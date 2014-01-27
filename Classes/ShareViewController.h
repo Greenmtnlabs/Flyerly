@@ -42,7 +42,7 @@
 	NSString *imageFileName;
     FlyerlySingleton *globle;
 	FlyrViewController *fvController;
-	SaveFlyerController *svController;
+	//SaveFlyerController *svController;
 	LoadingView *loadingView;
     UIDocumentInteractionController *dic;
     BOOL showbars;

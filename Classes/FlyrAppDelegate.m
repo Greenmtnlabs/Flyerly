@@ -37,12 +37,8 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     if(!greeted){
         NSLog(@"Welcome to the world of Flyerly");
         [[NSUserDefaults standardUserDefaults] setObject:@"greeted" forKey:@"greeted"];
-        
-        if(IS_IPHONE_5){
-            lauchController = [[LauchViewController alloc]initWithNibName:@"LauchViewControllerIPhone5" bundle:nil];
-        }else{
-            lauchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
-        }
+
+        lauchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
 
         [navigationController pushViewController:lauchController animated:NO];
         [window addSubview:[navigationController view]];
@@ -54,14 +50,9 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
         
         NSLog(@"User already Greeted !");
 
-        if(IS_IPHONE_5){
-            lauchController = [[LauchViewController alloc]initWithNibName:@"LauchViewControllerIPhone5" bundle:nil];
-            accountController = [[AccountController alloc]initWithNibName:@"AcountViewControlleriPhone5" bundle:nil];
-
-        }else{
-            lauchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
-            accountController = [[AccountController alloc]initWithNibName:@"AccountController" bundle:nil];
-        }
+        lauchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
+        accountController = [[AccountController alloc]initWithNibName:@"AccountController" bundle:nil];
+        
         [navigationController pushViewController:lauchController animated:NO];
         [navigationController pushViewController:accountController animated:NO];
         [window addSubview:[navigationController view]];
@@ -108,8 +99,9 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     } else if([[url absoluteString] hasPrefix:@"fb"]){
         return [PFFacebookUtils handleOpenURL:url];
     } else {
-        //Tumbler Return
-        return nil;//[[SHKTumblr  sharedInstance] handleOpenURL:url];
+  
+        return nil;
+        
     }
 }
 

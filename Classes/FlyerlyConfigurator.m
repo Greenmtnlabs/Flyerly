@@ -162,15 +162,16 @@
  */
 
 - (NSString*)twitterConsumerKey {
-    return @"SAXU48fGEpSMQl56cgRDQ";
+    return @"xYlRtbesxU0Qrxulx5kjdA";
+    
 }
 
 - (NSString*)twitterSecret {
-	return @"tNMJrWNA3eqSQn87Gv2WH1KCb3EGpdHHi7YRd1YG6xw";
+	return @"v8j6WWLoRDBCIkUQtapbhuOoYOZ4sWjMJovJLIPgO0";
 }
 // You need to set this if using OAuth, see note above (xAuth users can skip it)
 - (NSString*)twitterCallbackUrl {
-	return @"http://www.riksof.com";
+	return @"https://www.google.com.pk";
 }
 // To use xAuth, set to 1
 - (NSNumber*)twitterUseXAuth {
