@@ -11,8 +11,20 @@
 @interface Flyer : NSObject
 
 
+-(void)initWithPath;
+-(void)loadFlyer :(NSString *)uid;
 
-@property(strong,readonly)NSDictionary *flyerContents;
+-(void)saveFlyer :(NSString *)uid;
 
+
+-(NSString *)addText;
+-(NSString *)addPhoto;
+-(NSString *)addSymbols;
+-(NSString *)addClipArt;
+
+
+@property(strong,readonly)NSDictionary *MasterLayers;
+
+@property(strong,nonatomic)NSString *CurrentLayer;
 
 @end

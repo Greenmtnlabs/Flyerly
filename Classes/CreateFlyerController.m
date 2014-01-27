@@ -818,7 +818,9 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 	{
         // Add border to Un-select layer thumbnail
         CALayer * l = [tempView layer];
+
         [l setBorderWidth:1];
+        [l setCornerRadius:8];
         UIColor * c = [UIColor clearColor];
         [l setBorderColor:c.CGColor];
 
@@ -832,6 +834,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
             // Add border to selected layer thumbnail
             CALayer * l = [tempView layer];
             [l setBorderWidth:3.0];
+            
             UIColor * c = [globle colorWithHexString:@"0197dd"];
             [l setBorderColor:c.CGColor];
 		}
@@ -853,6 +856,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
         // Add border to Un-select layer thumbnail
         CALayer * l = [tempView layer];
         [l setBorderWidth:1];
+        [l setCornerRadius:8];
         UIColor * c = [UIColor clearColor];
         [l setBorderColor:c.CGColor];
         
@@ -885,6 +889,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
         // Add border to Un-select layer thumbnail
         CALayer * l = [tempView layer];
         [l setBorderWidth:1];
+        [l setCornerRadius:8];
         UIColor * c = [UIColor clearColor];
         [l setBorderColor:c.CGColor];
         
@@ -1036,6 +1041,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
             // Add border to Un-select layer thumbnail
             CALayer * l = [tempView layer];
             [l setBorderWidth:1];
+            [l setCornerRadius:8];
             UIColor * c = [UIColor clearColor];
             [l setBorderColor:c.CGColor];
             
@@ -1107,6 +1113,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
             // Add border to Un-select layer thumbnail
             CALayer * l = [tempView layer];
             [l setBorderWidth:1];
+            [l setCornerRadius:8];
             UIColor * c = [UIColor clearColor];
             [l setBorderColor:c.CGColor];
             
@@ -4689,10 +4696,10 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         [layerScrollView removeFromSuperview];
     }
     layerScrollView = nil;
-    layerScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(8, 0,320,130)];
+    layerScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(13, 0,300,130)];
     
-    NSInteger layerScrollWidth = 60;
-    NSInteger layerScrollHeight = 55;
+    NSInteger layerScrollWidth = 55;
+    NSInteger layerScrollHeight = 40;
     
     if(textLabelLayersArray.count == 0 && photoLayersArray.count  == 0 && symbolLayersArray.count == 0 && iconLayersArray == 0){
         [self AddScrollView:addMoreLayerOrSaveFlyerLabel];
@@ -4714,8 +4721,9 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
             [layerButton addTarget:self action:@selector(editLayer:) forControlEvents:UIControlEventTouchUpInside];
             
             [layerButton setBackgroundColor:[UIColor clearColor]];
-            [layerButton.layer setBorderWidth:1];
-            UIColor * c = [UIColor grayColor];
+            [layerButton.layer setBorderWidth:2];
+            UIColor * c = [UIColor lightGrayColor];
+            [layerButton.layer setCornerRadius:8];
             [layerButton.layer setBorderColor:c.CGColor];
             
             label.frame  = CGRectMake(layerButton.frame.origin.x+5, layerButton.frame.origin.y-2, layerButton.frame.size.width-10, layerButton.frame.size.height-7);
@@ -4739,8 +4747,9 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
             layerButton.frame =CGRectMake(0, 5,layerScrollWidth, layerScrollHeight);
             [layerButton addTarget:self action:@selector(editLayer:) forControlEvents:UIControlEventTouchUpInside];
             [layerButton setBackgroundColor:[UIColor clearColor]];
-            [layerButton.layer setBorderWidth:1];
-            UIColor * c = [UIColor grayColor];
+            [layerButton.layer setBorderWidth:2];
+            [layerButton.layer setCornerRadius:8];
+            UIColor * c = [UIColor lightGrayColor];
             [layerButton.layer setBorderColor:c.CGColor];
 
 
@@ -4766,8 +4775,9 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
             layerButton.frame =CGRectMake(0, 5,layerScrollWidth, layerScrollHeight);
             [layerButton addTarget:self action:@selector(editLayer:) forControlEvents:UIControlEventTouchUpInside];
             [layerButton setBackgroundColor:[UIColor clearColor]];
-            [layerButton.layer setBorderWidth:1];
-            UIColor * c = [UIColor grayColor];
+            [layerButton.layer setBorderWidth:2];
+            [layerButton.layer setCornerRadius:8];
+            UIColor * c = [UIColor lightGrayColor];
             [layerButton.layer setBorderColor:c.CGColor];
 
             [layerButton setBackgroundColor:[UIColor clearColor]];
@@ -4792,8 +4802,9 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
             layerButton.frame =CGRectMake(0, 5,layerScrollWidth, layerScrollHeight);
             [layerButton addTarget:self action:@selector(editLayer:) forControlEvents:UIControlEventTouchUpInside];
             [layerButton setBackgroundColor:[UIColor clearColor]];
-            [layerButton.layer setBorderWidth:1];
-            UIColor * c = [UIColor grayColor];
+            [layerButton.layer setBorderWidth:2];
+            [layerButton.layer setCornerRadius:8];
+            UIColor * c = [UIColor lightGrayColor];
             [layerButton.layer setBorderColor:c.CGColor];
 
             [layerButton setBackgroundColor:[UIColor clearColor]];
