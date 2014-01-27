@@ -16,9 +16,11 @@
  * This method will be used to initiate the Flyer class
  *, it will create a directory structure for 3.0 Version
  */
--(void)initWithPath{
+-(id)initWithPath{
 
-
+    MasterLayers = [[NSDictionary alloc] init];
+    int flyernumber = [self GetMaxFlyerNumber];
+    return nil;
 }
 
 
@@ -85,6 +87,45 @@
 -(NSString *)addClipArt{
 
     return @"";
+}
+
+/*
+ *Here we Getting Flyer Number for New Flyer
+ */
+-(int)GetMaxFlyerNumber{
+    
+    PFUser *user = [PFUser currentUser];
+    
+    //Getting Home Directory
+	NSString *homeDirectoryPath = NSHomeDirectory();
+	NSString *usernamePath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/Flyr",[user objectForKey:@"username"]]];
+    
+    
+    if ([[NSFileManager defaultManager] fileExistsAtPath:usernamePath isDirectory:NULL]) {
+        
+        NSLog(@"Path Found");
+        
+        //Getting All Files list
+        NSArray *files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:usernamePath error:nil];
+        NSString *lastFileName = nil;
+        
+        for(int i = 0 ; i < [files count];i++)
+        {
+            lastFileName = files[i];
+            
+            NSString *path = [usernamePath stringByAppendingPathComponent:lastFileName];
+            BOOL isDir = NO;
+            [[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:(&isDir)];
+            
+            if( isDir ) {
+                
+                NSLog(@"%@",lastFileName);
+            }
+        }
+    }
+    
+
+    return 0;
 }
 
 @end

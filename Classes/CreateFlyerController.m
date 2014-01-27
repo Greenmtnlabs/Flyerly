@@ -306,6 +306,9 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 -(void)viewDidLoad{
 	[super viewDidLoad];
     
+    //Here We create a Folder for Flyer
+    flyer = [[Flyer alloc] initWithPath];
+    
     globle = [FlyerlySingleton RetrieveSingleton];
     [self.view setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
     [self.contextView setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];

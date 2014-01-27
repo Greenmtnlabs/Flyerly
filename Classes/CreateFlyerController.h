@@ -12,6 +12,7 @@
 #import "ParentViewController.h"
 #import "GalleryViewController.h"
 #import "CameraViewController.h"
+#import "Flyer.h"
 
 
 @class FlyerlySingleton,CameraViewController,GalleryViewController;
@@ -125,7 +126,8 @@
     UIButton *crossButtonGlobal;
     UIButton *editButtonGlobal;    
     UIBarButtonItem *rightUndoBarButton;
-
+    
+    Flyer *flyer;
     GalleryViewController *nbuGallary;
     CameraViewController *nbuCamera;
 }

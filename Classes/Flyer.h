@@ -7,11 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Parse/Parse.h>
 
 @interface Flyer : NSObject
 
 
--(void)initWithPath;
+-(id)initWithPath;
 -(void)loadFlyer :(NSString *)uid;
 
 -(void)saveFlyer :(NSString *)uid;

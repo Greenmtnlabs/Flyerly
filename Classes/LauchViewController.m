@@ -148,10 +148,9 @@
     
     [super viewDidLoad];
     
-    //Testing
-    //[FlyerUser UpdateFolderStructure:@"zohaib"];
-    //
-    
+    //Update Folder Structure For 3.0 Version
+    PFUser *user = [PFUser currentUser];
+    [FlyerUser UpdateFolderStructure:[user objectForKey:@"username"]];
     
 	globle = [FlyerlySingleton RetrieveSingleton];
     createFlyrButton.showsTouchWhenHighlighted = YES;
