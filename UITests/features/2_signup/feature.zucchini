@@ -3,10 +3,10 @@ Start on the "Welcome" screen:
 
 Then on the "Register" screen:
   Take a screenshot
-  Type "tester.riksof" in the "Username" field
+  Type "riksof.hotmail" in the "Username" field
   Type "riksof123" in the "Password" field
   Type "riksof123" in the "Confirm Password" field
-  Type "tester.riksof@gmail.com" in the "Email" field
+  Type "rehan.riksof@hotmail.com" in the "Email" field
   Type "Tester RIKSOF" in the "Name" field
   Type "03453498941" in the "Phone Number" field
   Tap "Sign Up"
@@ -126,10 +126,10 @@ Then on the "Welcome" screen:
   Tap "Register"
 
 Then on the "Register" screen:
-  Type "TeamLeadSQA1" in the "Username" field
+  Type "rehan.riksof" in the "Username" field
   Type "test" in the "Password" field
   Type "test" in the "Confirm Password" field
-  Type "tester.riksof@gmail.com" in the "Email" field
+  Type "rehan.riksof@hotmail.com" in the "Email" field
   Tap "SignUp"
   Take a screenshot
   Confirm "OK"
