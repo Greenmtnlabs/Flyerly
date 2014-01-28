@@ -10,6 +10,7 @@
 #import "FacebookLikeView.h"
 #import "FlyerlySingleton.h"
 #import "Reachability.h"
+#import "Flyer.h"
 
 @class FlyrViewController;
 @class ShareSettingViewController;
@@ -21,7 +22,7 @@
 
 
 @interface LauchViewController : ParentViewController<UIWebViewDelegate,UIActionSheetDelegate,FacebookLikeViewDelegate> {
-	CreateFlyerController *ptController;
+	CreateFlyerController *createFlyer;
 	FlyrViewController *tpController;
 	ShareSettingViewController *spController;
 	InviteFriendsController *addFriendsController;
@@ -54,7 +55,7 @@
     
 
 }
-@property(nonatomic,strong) CreateFlyerController *ptController;
+
 @property(nonatomic,strong) FlyrViewController *tpController;
 @property(nonatomic,strong) ShareSettingViewController *spController;
 @property(nonatomic,strong) InviteFriendsController *addFriendsController;

@@ -23,7 +23,7 @@
 
 @implementation LauchViewController
 
-@synthesize ptController,spController,tpController,createFlyrLabel,savedFlyrLabel,inviteFriendLabel,addFriendsController;
+@synthesize spController,tpController,createFlyrLabel,savedFlyrLabel,inviteFriendLabel,addFriendsController;
 @synthesize firstFlyer, secondFlyer, thirdFlyer, fourthFlyer, photoArray, photoDetailArray, createFlyrButton, savedFlyrButton, inviteFriendButton;
 @synthesize facebookLikeView;
 @synthesize likeButton,followButton,webview;
@@ -38,21 +38,22 @@
 // Load Create Flyr Method With Thread
  -(void)loadPhotoView{
      
-     ptController = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
+     createFlyer = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
      
      // Set for Empty CreateFlyer Screen
-     ptController.flyerNumber = -1;
-     
-	[self.navigationController pushViewController:ptController animated:YES];
+     createFlyer.flyerNumber = -1;
+	[self.navigationController pushViewController:createFlyer animated:YES];
      
 }
 
 -(IBAction)doNew:(id)sender{
     [Flurry logEvent:@"Create Flyer"];
 
-	ptController = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
-    ptController.flyerNumber = -1;
-	[self.navigationController pushViewController:ptController animated:YES];
+	createFlyer = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
+    createFlyer.flyerNumber = -1;
+    createFlyer.flyerPath = [Flyer newFlyerPath];
+    
+	[self.navigationController pushViewController:createFlyer animated:YES];
 }
 //End
 
@@ -148,10 +149,9 @@
     
     [super viewDidLoad];
     
-    //Testing
-    //[FlyerUser UpdateFolderStructure:@"zohaib"];
-    //
-    
+    //Update Folder Structure For 3.0 Version
+    PFUser *user = [PFUser currentUser];
+    [FlyerUser UpdateFolderStructure:[user objectForKey:@"username"]];
     
 	globle = [FlyerlySingleton RetrieveSingleton];
     createFlyrButton.showsTouchWhenHighlighted = YES;

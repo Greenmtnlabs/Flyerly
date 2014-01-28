@@ -7,12 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Parse/Parse.h>
 
 @interface Flyer : NSObject
 
 
--(void)initWithPath;
--(void)loadFlyer :(NSString *)uid;
+-(id)initWithPath:(NSString *)flyPath;
+-(void)loadFlyer :(NSString *)flyPath;
 
 -(void)saveFlyer :(NSString *)uid;
 
@@ -22,6 +23,7 @@
 -(NSString *)addSymbols;
 -(NSString *)addClipArt;
 
++(NSString *)newFlyerPath;
 
 @property(strong,readonly)NSDictionary *MasterLayers;
 

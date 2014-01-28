@@ -84,14 +84,14 @@
                     
                     //Copy ImageFile
                     source = [NSString stringWithFormat:@"%@/IMG_%d.jpg",usernamePath,imgnumber];
-                    destination = [NSString stringWithFormat:@"%@/IMG_%d.jpg",flyerPath,imgnumber];
+                    destination = [NSString stringWithFormat:@"%@/flyer.jpg",flyerPath];
 
                     if ( [[NSFileManager defaultManager] isReadableFileAtPath:source] )
                         [[NSFileManager defaultManager] copyItemAtPath:source toPath:destination error:&error];
                     
                     //Copy pieces
                     source = [NSString stringWithFormat:@"%@/IMG_%d.pieces",usernamePath,imgnumber];
-                    destination = [NSString stringWithFormat:@"%@/IMG_%d.pieces",flyerPath,imgnumber];
+                    destination = [NSString stringWithFormat:@"%@/flyer.pieces",flyerPath];
 
                     
                     if ( [[NSFileManager defaultManager] isReadableFileAtPath:source] )
@@ -99,7 +99,7 @@
                     
                     //Copy txt
                     source = [NSString stringWithFormat:@"%@/IMG_%d.txt",usernamePath,imgnumber];
-                    destination = [NSString stringWithFormat:@"%@/IMG_%d.txt",flyerPath,imgnumber];
+                    destination = [NSString stringWithFormat:@"%@/flyer.txt",flyerPath];
                     
                     
                     if ( [[NSFileManager defaultManager] isReadableFileAtPath:source] )
@@ -154,7 +154,7 @@
                     
                     //Here Coping Social related Flyer
                     source = [NSString stringWithFormat:@"%@/Social/IMG_%d.soc",usernamePath,imgnumber];
-                    destination = [NSString stringWithFormat:@"%@/Social/IMG_%d.soc",flyerPath,imgnumber];
+                    destination = [NSString stringWithFormat:@"%@/Social/flyer.soc",flyerPath];
                     if ( [[NSFileManager defaultManager] isReadableFileAtPath:source] )
                         [[NSFileManager defaultManager] copyItemAtPath:source toPath:destination error:&error];
                     

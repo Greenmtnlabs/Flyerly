@@ -32,7 +32,7 @@
 @synthesize photoTouchFlag,symbolTouchFlag,iconTouchFlag, lableTouchFlag,lableLocation,warningAlert,discardAlert,deleteAlert,editAlert, inAppAlert;
 @synthesize moreLayersLabel, moreLayersButton,imgPickerFlag,finalImgWritePath, addMoreLayerOrSaveFlyerLabel, takeOrAddPhotoLabel,layerScrollView;
 @synthesize cpyTextLabelLayersArray,cpyIconLayersArray,cpyPhotoLayersArray,cpySymbolLayersArray;
-@synthesize flyerNumber;
+@synthesize flyerNumber,flyerPath;
 
 //Version 3 Change
 @synthesize contextView,libraryContextView,libFlyer,backgroundTabButton,addMoreFontTabButton;
@@ -305,6 +305,9 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 
 -(void)viewDidLoad{
 	[super viewDidLoad];
+    
+    //Here We create a Folder for Flyer
+    flyer = [[Flyer alloc] initWithPath:flyerPath];
     
     globle = [FlyerlySingleton RetrieveSingleton];
     [self.view setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
