@@ -27,12 +27,12 @@
 #import "SKProduct+LocalPrice.h"
 
 
-@class FlyerlySingleton,CameraViewController,GalleryViewController,Flyer;
+@class FlyerlySingleton,CameraViewController,GalleryViewController,Flyer,FlyerImageView;
 @interface CreateFlyerController :ParentViewController<UIActionSheetDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, EBPurchaseDelegate>
 {
     int layerallow;
     FlyerlySingleton *globle;
-	UIImageView *imgView;
+
 	UIImageView *templateBckgrnd;
 	UIImageView *textBackgrnd;
 	UIImageView *photoImgView;
@@ -200,6 +200,9 @@
 
 
 @property(nonatomic, strong) IBOutlet UIImageView *imgView;
+
+@property(nonatomic, strong) IBOutlet FlyerImageView *flyimgView;
+
 @property(nonatomic, strong) IBOutlet UIView *contextView;
 
 // These are ContextViews Library

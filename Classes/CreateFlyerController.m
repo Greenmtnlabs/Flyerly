@@ -8,7 +8,7 @@
 #import "CreateFlyerController.h"
 
 @implementation CreateFlyerController
-@synthesize imgView,imgPicker,imageNameNew,msgTextView,finalFlyer;
+@synthesize flyimgView,imgView,imgPicker,imageNameNew,msgTextView,finalFlyer;
 @synthesize fontScrollView,colorScrollView,templateScrollView,sizeScrollView,borderScrollView,fontBorderScrollView,symbolScrollView,iconScrollView;
 @synthesize selectedFont,selectedColor;
 @synthesize selectedTemplate,selectedSymbol,selectedIcon;
@@ -292,9 +292,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     globle = [FlyerlySingleton RetrieveSingleton];
     [self.view setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
     [self.contextView setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
-    
-    flyerImageView = [[FlyerImageView alloc]init];
-    
+        
     photoTouchFlag=NO;
 	symbolTouchFlag=NO;
     iconTouchFlag = NO;
@@ -2213,7 +2211,7 @@ int arrangeLayerIndex;
     //Set Text of Layer
     [flyer setFlyerText:msgTextView.text Uid:currentLayer];
     
-    [flyerImageView renderLayer:currentLayer LayerDictionary:[flyer getLayerFromMaster:currentLayer]];
+    [self.flyimgView renderLayer:currentLayer LayerDictionary:[flyer getLayerFromMaster:currentLayer]];
     
     
     

@@ -21,14 +21,18 @@
 }
 
 /*
- * Here we update actual position of layer
+ * Here we create or update actual layer
  */
 -(void)renderLayer :(NSString *)uid LayerDictionary:(NSMutableDictionary *)layDic{
 
     //For Testing
     lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
     [lbl setText:@"Zohaib"];
-    [super addSubview:lbl];
+    lbl.textAlignment =  UITextAlignmentCenter;
+    lbl.textColor = [UIColor whiteColor];
+    lbl.backgroundColor = [UIColor blackColor];
+    lbl.font = [UIFont fontWithName:@"Arial Rounded MT Bold" size:(36.0)];
+    [self addSubview:lbl];
     
     //Check Layer Exist in Master Layers
     if ([layers objectForKey:uid] == nil) {
