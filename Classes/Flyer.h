@@ -19,18 +19,20 @@
 
 -(void)saveFlyer :(NSString *)uid;
 
--(void)setFlyerText :(NSString *)txt Uid:(NSString *)uid;
+
 
 -(NSMutableDictionary *)getLayerFromMaster :(NSString *)uid;
 
 -(NSString *)addText;
+-(void)setFlyerText :(NSString *)txt Uid:(NSString *)uid;
+
 -(NSString *)addPhoto;
 -(NSString *)addSymbols;
 -(NSString *)addClipArt;
 
 +(NSString *)newFlyerPath;
 
-@property(strong,nonatomic)NSMutableDictionary *MasterLayers;
+@property(strong,readonly)NSMutableDictionary *MasterLayers;
 
 
 

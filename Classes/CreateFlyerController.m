@@ -125,9 +125,6 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 	msgTextView.textColor = [UIColor blackColor];
 	msgTextView.textAlignment = UITextAlignmentCenter;
     
-    //Reset Image View
-    [self resetImageview];
-
     // Add Hight Width
 	NSInteger symbolScrollWidth = 60;
 	NSInteger symbolScrollHeight = 50;
@@ -295,8 +292,9 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     globle = [FlyerlySingleton RetrieveSingleton];
     [self.view setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
     [self.contextView setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
-
-
+    
+    flyerImageView = [[FlyerImageView alloc]init];
+    
     photoTouchFlag=NO;
 	symbolTouchFlag=NO;
     iconTouchFlag = NO;
@@ -410,7 +408,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 	[msgTextView removeFromSuperview];
     
     // Call Main View
-	//[self callAddMoreLayers];
+	[self callAddMoreLayers];
 
 }
 
