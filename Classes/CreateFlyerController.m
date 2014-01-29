@@ -6,20 +6,6 @@
 //
 
 #import "CreateFlyerController.h"
-#import <QuartzCore/QuartzCore.h>
-#import <AssetsLibrary/AssetsLibrary.h>
-#import "Common.h"
-#import "FlyrAppDelegate.h"
-#import "SaveFlyerController.h"
-#import "ShareViewController.h"
-#import "HelpController.h"
-#import <Parse/PFUser.h>
-#import <Parse/PFFile.h>
-#import <Parse/PFObject.h>
-#import <Parse/PFQuery.h>
-#import "LoadingView.h"
-#import "Flurry.h"
-#import "SKProduct+LocalPrice.h"
 
 @implementation CreateFlyerController
 @synthesize imgView,imgPicker,imageNameNew,msgTextView,finalFlyer;
@@ -32,11 +18,12 @@
 @synthesize photoTouchFlag,symbolTouchFlag,iconTouchFlag, lableTouchFlag,lableLocation,warningAlert,discardAlert,deleteAlert,editAlert, inAppAlert;
 @synthesize moreLayersLabel, moreLayersButton,imgPickerFlag,finalImgWritePath, addMoreLayerOrSaveFlyerLabel, takeOrAddPhotoLabel,layerScrollView;
 @synthesize cpyTextLabelLayersArray,cpyIconLayersArray,cpyPhotoLayersArray,cpySymbolLayersArray;
-@synthesize flyerNumber,flyerPath;
+@synthesize flyerNumber,flyerPath,flyer;
 
 //Version 3 Change
 @synthesize contextView,libraryContextView,libFlyer,backgroundTabButton,addMoreFontTabButton;
 @synthesize libText,libBackground,libPhoto,backtemplates,cameraTakePhoto,cameraRoll,flyerBorder;
+@synthesize textLabelLayersArray,symbolLayersArray,iconLayersArray,photoLayersArray,currentLayer;
 
 int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track selected Tab on Add More Layer screen
 int symbolLayerCount = 0; // Symbol layer count to set tag value
@@ -47,17 +34,19 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 /*
  * This init method is called when editing a flyer is pressed
  */
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil templateParam:(UIImage *)templateParam symbolArrayParam:(NSMutableArray *)symbolArrayParam iconArrayParam:(NSMutableArray *)iconArrayParam photoArrayParam:(NSMutableArray *)photoArrayParam textArrayParam:(NSMutableArray *)textArrayParam flyerNumberParam:(int)flyerNumberParam{
     
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        /*
         // Custom initialization
         selectedTemplate = templateParam;
         symbolLayersArray = symbolArrayParam;
         iconLayersArray = iconArrayParam;
         photoLayersArray = photoArrayParam;
         textLabelLayersArray = textArrayParam;
-        flyerNumber = flyerNumberParam;
+        flyerNumber = flyerNumberParam;*/
     }
     return self;
 }
@@ -79,13 +68,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
             selectedTemplate = globle.NBUimage;
         }
     }
-        /*
-        self.navigationController.navigationBarHidden = NO;
-        imgPicker = [[UIImagePickerController alloc] init];
-        imgPicker.allowsEditing = NO;
-        imgPicker.delegate =self;
-        imgPicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-   */
+    
 }
 
 
@@ -142,6 +125,8 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 	msgTextView.textColor = [UIColor blackColor];
 	msgTextView.textAlignment = UITextAlignmentCenter;
     
+    //Reset Image View
+    [self resetImageview];
 
     // Add Hight Width
 	NSInteger symbolScrollWidth = 60;
@@ -300,15 +285,13 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     [addMoreIconTabButton setBackgroundImage:[UIImage imageNamed:@"icon_button_selected"] forState:UIControlStateHighlighted];
     addMoreIconTabButton.tag = 10004;
     
+
 }
 
 
 -(void)viewDidLoad{
 	[super viewDidLoad];
-    
-    //Here We create a Folder for Flyer
-    flyer = [[Flyer alloc] initWithPath:flyerPath];
-    
+ 
     globle = [FlyerlySingleton RetrieveSingleton];
     [self.view setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
     [self.contextView setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
@@ -427,7 +410,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 	[msgTextView removeFromSuperview];
     
     // Call Main View
-	[self callAddMoreLayers];
+	//[self callAddMoreLayers];
 
 }
 
@@ -438,13 +421,13 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     
 
     // Remo all views inside image view
+    
     NSArray *viewsToRemove = [self.imgView subviews];
     for (UIView *v in viewsToRemove) {
         [v removeFromSuperview];
     }
     
     // Remove image view from super view
-    [imgView removeFromSuperview];
     
 	// Create Main Image View
     /*
@@ -481,7 +464,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     }
     
     // Add image view to superview
-	[self.view addSubview:imgView];
+	//[self.view addSubview:imgView];
     [self callAddMoreLayers];
 }
 
@@ -2226,6 +2209,16 @@ int arrangeLayerIndex;
         return;
     }
     
+    //Here we write in Master Dictionary
+    currentLayer = [flyer addText];
+    
+    //Set Text of Layer
+    [flyer setFlyerText:msgTextView.text Uid:currentLayer];
+    
+    [flyerImageView renderLayer:currentLayer LayerDictionary:[flyer getLayerFromMaster:currentLayer]];
+    
+    
+    
     [UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationDuration:0.4f];
     
@@ -2493,8 +2486,6 @@ int arrangeLayerIndex;
     
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:backBarButton,leftBarHelpButton,nil]];
     
-    
-    
     [self AddBottomTabs:libFlyer];
     [self AddAllLayersIntoFront ];
    
@@ -2505,7 +2496,7 @@ int arrangeLayerIndex;
     
     ((CustomLabel *)[[self textLabelLayersArray] lastObject]).alpha = 1;
     photoImgView.alpha=0;
-    symbolImgView.alpha = 0;
+   symbolImgView.alpha = 0;
     iconImgView.alpha = 0;
     
 	textBackgrnd.alpha = ALPHA0;

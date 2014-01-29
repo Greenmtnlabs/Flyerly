@@ -52,6 +52,7 @@
     IBOutlet UIWebView *webview;
     IBOutlet UIButton *crossButton;
     NSArray *twtAcconts;
+    Flyer *flyer;
     
 
 }

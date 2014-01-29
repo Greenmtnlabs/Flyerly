@@ -10,13 +10,15 @@
 
 @implementation FlyerImageView
 
-
+@synthesize layers;
 
 /*
  * Here we update actual position of layer
  */
--(void)setLayerPosition :(NSString *)uid LayerFrame:(CGRect *)layframe{
+-(void)renderLayer :(NSString *)uid LayerDictionary:(NSMutableDictionary *)layDic{
 
+    UILabel *lbl = [[UILabel alloc] initWithFrame:];
 }
+
 
 @end

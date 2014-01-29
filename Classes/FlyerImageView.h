@@ -11,6 +11,7 @@
 @interface FlyerImageView : UIImageView
 
 
--(void)setLayerPosition :(NSString *)uid LayerFrame:(CGRect *)layframe;
+-(void)renderLayer :(NSString *)uid LayerDictionary:(NSMutableDictionary *)layDic;
 
+@property(strong,nonatomic) NSMutableDictionary *layers;
 @end

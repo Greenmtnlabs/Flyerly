@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import <Parse/Parse.h>
+#import "CustomLabel.h"
+
 
 @interface Flyer : NSObject
 
@@ -17,6 +19,9 @@
 
 -(void)saveFlyer :(NSString *)uid;
 
+-(void)setFlyerText :(NSString *)txt Uid:(NSString *)uid;
+
+-(NSMutableDictionary *)getLayerFromMaster :(NSString *)uid;
 
 -(NSString *)addText;
 -(NSString *)addPhoto;
@@ -25,8 +30,8 @@
 
 +(NSString *)newFlyerPath;
 
-@property(strong,readonly)NSDictionary *MasterLayers;
+@property(strong,nonatomic)NSMutableDictionary *MasterLayers;
 
-@property(strong,nonatomic)NSString *CurrentLayer;
+
 
 @end
