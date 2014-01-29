@@ -10,7 +10,7 @@
 
 @implementation FlyerImageView
 
-@synthesize layers,lbl,img;
+@synthesize layers,lble,img;
 
 
 -(id)init{
@@ -28,19 +28,6 @@
     
     //Set Template Here
     
-
-    //Dummy Label
-    lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 280, 280)];
-    lbl.backgroundColor = [UIColor clearColor];
-    lbl.textAlignment = UITextAlignmentCenter;
-    lbl.adjustsFontSizeToFitWidth = YES;
-    lbl.lineBreakMode = UILineBreakModeClip;
-    lbl.numberOfLines = 80;
-
-    img = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 50, 50)];
-    
-    
-
 }
 
 /*
@@ -48,32 +35,48 @@
  */
 -(void)renderLayer :(NSString *)uid LayerDictionary:(NSMutableDictionary *)layDic{
 
-    //For Testing
 
-    
-    //Check Layer Exist in Master Layers
-    if ([layers objectForKey:uid] == nil) {
-    
-        [layers setValue:layDic forKey:uid];
-        [self addLabel:layDic ];
-    
+    // Checking for Label or ImageView
+    if ([layDic objectForKey:@"image"] == nil) {
+        
+        //Check Layer Exist in Master Layers
+        if ([layers objectForKey:uid] == nil) {
+            
+            lble = [[UILabel alloc] init];
+            lble.backgroundColor = [UIColor clearColor];
+            lble.textAlignment = UITextAlignmentCenter;
+            lble.adjustsFontSizeToFitWidth = YES;
+            lble.lineBreakMode = UILineBreakModeClip;
+            lble.numberOfLines = 80;
+            [self configureLabel:lble LabelDictionary:layDic ];
+            [self addSubview:lble];
+            [layers setValue:lble forKey:uid];
+            
+            
+        } else {
+            
+            lble = [layers objectForKey:uid];
+            [self configureLabel:lble LabelDictionary:layDic ];
+            [layers setValue:lble forKey:uid];
+
+            
+        }
+
+
     } else {
-        
-        [self addLabel:layDic ];// 4 Test
-        
-        //[self updateLabel:layDic ];
     
+      img = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 50, 50)];
     }
-
+    
     
 }
 
 
 
 /*
- *Here we Add New Label and set Properties
+ *Here we set Properties of uiLabel
  */
--(void)addLabel:(NSMutableDictionary *)detail{
+-(void)configureLabel :(UILabel *)lbl LabelDictionary:(NSMutableDictionary *)detail{
     
     
     //SetFrame
@@ -115,22 +118,6 @@
         lbl.layer.borderColor = clr.CGColor;
     }
     lbl.layer.borderWidth = 2;
-    [self addSubview:lbl];
-
-
 }
-
-
-/*
- *Here we Update Properties of Label
- */
--(void)updateLabel:(NSMutableDictionary *)detail{
-
-    lbl = [[UILabel alloc] init];
-    [lbl setText:[detail valueForKey:@"text"]];
-    
-}
-
-
 
 @end

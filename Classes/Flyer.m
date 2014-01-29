@@ -109,6 +109,7 @@
     
     // Set to Master Dictionary
     [MasterLayers setValue:textDetailDictionary forKey:uid];
+    
 }
 
 -(NSMutableDictionary *)getLayerFromMaster :(NSString *)uid{

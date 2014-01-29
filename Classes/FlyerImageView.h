@@ -15,7 +15,7 @@
 
 @property(strong,nonatomic) NSMutableDictionary *layers;
 
-@property(strong,nonatomic) UILabel *lbl;
+@property(strong,nonatomic) UILabel *lble;
 @property(strong,nonatomic) UIImageView *img;
 
 @end
