@@ -16,8 +16,31 @@
 -(id)init{
    
     self = [super init];
+     return self;
+}
+
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    
+    //Set Master Layers
     layers = [[NSMutableDictionary alloc] init];
-    return self;
+    
+    //Set Template Here
+    
+
+    //Dummy Label
+    lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 280, 280)];
+    lbl.backgroundColor = [UIColor clearColor];
+    lbl.textAlignment = UITextAlignmentCenter;
+    lbl.adjustsFontSizeToFitWidth = YES;
+    lbl.lineBreakMode = UILineBreakModeClip;
+    lbl.numberOfLines = 80;
+
+    img = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 50, 50)];
+    
+    
+
 }
 
 /*
@@ -26,13 +49,7 @@
 -(void)renderLayer :(NSString *)uid LayerDictionary:(NSMutableDictionary *)layDic{
 
     //For Testing
-    lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
-    [lbl setText:@"Zohaib"];
-    lbl.textAlignment =  UITextAlignmentCenter;
-    lbl.textColor = [UIColor whiteColor];
-    lbl.backgroundColor = [UIColor blackColor];
-    lbl.font = [UIFont fontWithName:@"Arial Rounded MT Bold" size:(36.0)];
-    [self addSubview:lbl];
+
     
     //Check Layer Exist in Master Layers
     if ([layers objectForKey:uid] == nil) {
@@ -42,7 +59,9 @@
     
     } else {
         
-        [self updateLabel:layDic ];
+        [self addLabel:layDic ];// 4 Test
+        
+        //[self updateLabel:layDic ];
     
     }
 
@@ -55,16 +74,17 @@
  *Here we Add New Label and set Properties
  */
 -(void)addLabel:(NSMutableDictionary *)detail{
-    lbl = [[UILabel alloc] init];
+    
+    
+    //SetFrame
+    [lbl setFrame:CGRectMake([[detail valueForKey:@"x"] floatValue], [[detail valueForKey:@"y"] floatValue], [[detail valueForKey:@"width"] floatValue], [[detail valueForKey:@"height"] floatValue])];
+
+
+    //set Label Text
     [lbl setText:[detail valueForKey:@"text"]];
-    
+
+    //set Label Font
     lbl.font = [UIFont fontWithName:[detail valueForKey:@"fontname"] size:[[detail valueForKey:@"fontsize"] floatValue]];
-    lbl.backgroundColor = [UIColor clearColor];
-    lbl.textAlignment = UITextAlignmentCenter;
-    lbl.adjustsFontSizeToFitWidth = YES;
-    lbl.lineBreakMode = UILineBreakModeClip;
-    
-    lbl.numberOfLines = 80;
     
     if ([[detail valueForKey:@"textcolor"] isEqualToString:@"0.000000, 0.000000, 0.000000"]) {
         if ([detail valueForKey:@"textWhitecolor"]  != nil) {
@@ -79,6 +99,22 @@
     }
     
     
+    if ([[detail valueForKey:@"textbordercolor"] isEqualToString:@"0.000000, 0.000000, 0.000000"]) {
+        if ([detail valueForKey:@"textborderWhite"] != nil) {
+            NSArray *rgbBorder = [[detail valueForKey:@"textborderWhite"] componentsSeparatedByString:@","];
+            UIColor *clr = [UIColor colorWithWhite:[rgbBorder[0] floatValue] alpha:[rgbBorder[1] floatValue]];
+            
+            lbl.layer.borderColor = clr.CGColor;
+            
+        }
+    }else{
+        
+        NSArray *rgbBorder = [[detail valueForKey:@"textbordercolor"] componentsSeparatedByString:@","];
+        
+        UIColor *clr = [UIColor colorWithRed:[rgbBorder[0] floatValue] green:[rgbBorder[1] floatValue] blue:[rgbBorder[2] floatValue] alpha:1];
+        lbl.layer.borderColor = clr.CGColor;
+    }
+    lbl.layer.borderWidth = 2;
     [self addSubview:lbl];
 
 

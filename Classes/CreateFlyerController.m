@@ -293,6 +293,9 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     [self.view setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
     [self.contextView setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
         
+    //Pass Flyer Master Dictionary to FlyerImageView
+    self.flyimgView.layers = flyer.MasterLayers;
+        
     photoTouchFlag=NO;
 	symbolTouchFlag=NO;
     iconTouchFlag = NO;
