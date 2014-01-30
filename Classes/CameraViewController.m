@@ -56,7 +56,7 @@
             globle.NBUimage = [[UIImage alloc] init];
             globle.NBUimage = [image thumbnailWithSize:CGSizeMake(310.0, 309.0)];
              self.navigationController.navigationBarHidden = NO;
-            [self CallNBUcropImage];
+            [self cropImage];
             //[self.navigationController popViewControllerAnimated:YES];
         }
     };
@@ -128,12 +128,18 @@
     }
 }
 
-//Crop Image
--(void)CallNBUcropImage{
+/**
+ * Crop image using NBUKit
+ */
+-(void) cropImage {
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
     nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController" bundle:nil];
-    [nbuCrop awakeFromNib];
-    [self.navigationController pushViewController:nbuCrop animated:YES];
+
+    // Pop the current view, and push the crop view.
+    NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[[self navigationController] viewControllers]];
+    [viewControllers removeLastObject];
+    [viewControllers addObject:nbuCrop];
+    [[self navigationController] setViewControllers:viewControllers animated:YES];
 }
 
 - (IBAction)setCameraline:(id)sender{

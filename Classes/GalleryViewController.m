@@ -104,12 +104,18 @@
     return nil;
 }
 
-//Crop Image
--(void)CallNBUcropImage{
-     self.navigationController.navigationBar.hidden  = NO;
+/**
+ * Crop image using NBUKit
+ */
+-(void) cropImage {
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
     nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController" bundle:nil];
-    [nbuCrop awakeFromNib];
-    [self.navigationController pushViewController:nbuCrop animated:YES];
+    
+    // Pop the current view, and push the crop view.
+    NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[[self navigationController] viewControllers]];
+    [viewControllers removeLastObject];
+    [viewControllers addObject:nbuCrop];
+    [[self navigationController] setViewControllers:viewControllers animated:YES];
 }
 
 - (void)setCurrentIndex:(NSInteger)index
@@ -134,14 +140,11 @@
 }
 
 
-- (IBAction)thumbnailWasTapped:(UIView *)sender
-{
+- (IBAction)thumbnailWasTapped:(UIView *)sender {
 	[self setCurrentIndex:sender.tag
                  animated:NO];
-    [self CallNBUcropImage];
-   // [self.navigationController popViewControllerAnimated:NO];
-  
- }
+    [self cropImage];
+}
 
 
 -(void)goback{

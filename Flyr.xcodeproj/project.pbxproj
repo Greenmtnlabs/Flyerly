@@ -300,7 +300,6 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		2002C89618888CD4005B18C9 /* SaveFlyerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2002C89418888CD4005B18C9 /* SaveFlyerCell.m */; };
 		2002C89718888CD4005B18C9 /* SaveFlyerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2002C89518888CD4005B18C9 /* SaveFlyerCell.xib */; };
-		2003846F1875860D008909F9 /* frame.png in Resources */ = {isa = PBXBuildFile; fileRef = 2003846E1875860C008909F9 /* frame.png */; };
 		200384741875A357008909F9 /* PresetFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 200384721875A357008909F9 /* PresetFilterViewController.m */; };
 		200384751875A357008909F9 /* PresetFilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 200384731875A357008909F9 /* PresetFilterViewController.xib */; };
 		200694DD17DB471900D59A1B /* poweredbyfoursquare_gray.png in Resources */ = {isa = PBXBuildFile; fileRef = 200694DB17DB471900D59A1B /* poweredbyfoursquare_gray.png */; };
@@ -1624,7 +1623,6 @@
 		2002C89318888CD4005B18C9 /* SaveFlyerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveFlyerCell.h; sourceTree = "<group>"; };
 		2002C89418888CD4005B18C9 /* SaveFlyerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveFlyerCell.m; sourceTree = "<group>"; };
 		2002C89518888CD4005B18C9 /* SaveFlyerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SaveFlyerCell.xib; sourceTree = "<group>"; };
-		2003846E1875860C008909F9 /* frame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = frame.png; path = ../Classes/frame.png; sourceTree = "<group>"; };
 		200384711875A357008909F9 /* PresetFilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresetFilterViewController.h; sourceTree = "<group>"; };
 		200384721875A357008909F9 /* PresetFilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PresetFilterViewController.m; sourceTree = "<group>"; };
 		200384731875A357008909F9 /* PresetFilterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PresetFilterViewController.xib; sourceTree = "<group>"; };
@@ -2795,7 +2793,6 @@
 				20714DF4187F2105000D6838 /* cancelcamera.png */,
 				20714DF5187F2105000D6838 /* cancelcamera@2x.png */,
 				20714DF2187F1B9D000D6838 /* cameraline.png */,
-				2003846E1875860C008909F9 /* frame.png */,
 				202C47B3187D49FF00FE0975 /* cancel_button.png */,
 				202C47B4187D49FF00FE0975 /* cancel_button@2x.png */,
 				201686EC186AF95A00A238AE /* searchicon.png */,
@@ -4834,7 +4831,6 @@
 				65B3F1AE172AB2F500BEE7A4 /* camera_cancel.png in Resources */,
 				65B3F1AF172AB2F500BEE7A4 /* camera_cancel@2x.png in Resources */,
 				65B3F1B0172AB2F500BEE7A4 /* camera_change.png in Resources */,
-				2003846F1875860D008909F9 /* frame.png in Resources */,
 				65B3F1B1172AB2F500BEE7A4 /* camera_change@2x.png in Resources */,
 				65B3F1B2172AB2F500BEE7A4 /* camera_flash.png in Resources */,
 				65B3F1B3172AB2F500BEE7A4 /* camera_flash@2x.png in Resources */,
