@@ -10,8 +10,6 @@
 
 @implementation FlyerImageView
 
-@synthesize layers;
-
 
 -(id)init{
    

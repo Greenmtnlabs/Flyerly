@@ -43,29 +43,29 @@
 
 
 //Crittercism ApiKey
-- (NSString*)CrittercismAppId {
+- (NSString*)crittercismAppId {
 	return @"519a14f897c8f27969000019";
 }
 
 //Parse Online Keys
-- (NSString*)ParseOnlineAppId{
+- (NSString*)parseOnlineAppId{
     return @"rrU7ilSR4TZNQD9xlDtH8wFoQNK4st5AaITq6Fan";
 }
-- (NSString*)ParseOnlineClientKey{
+- (NSString*)parseOnlineClientKey{
     return @"P0FxBvDvw0eDYYT01cx8nhaDQdl90BdHGc22jPLn";
 }
 
 //Parse Offline Keys
-- (NSString*)ParseOfflineAppId{
+- (NSString*)parseOfflineAppId{
     return @"1zE9CnuScHj4l7dGFbT8NG15uTNb8VazMpsdoCis";
 }
 
-- (NSString*)ParseOfflineClientKey{
+- (NSString*)parseOfflineClientKey{
     return @"rFdNdJfzWt8YIf66G7twr0D5zp9uVsWuAkMEnkpc";
 }
 
 //Flurry SessionKey
-- (NSString*)FlurrySessionId{
+- (NSString*)flurrySessionId{
     return @"ZWXZFGSQZ4GMYZBVZYN3";
 }
 

@@ -47,7 +47,4 @@
 
 @property (strong, readonly) NSMutableDictionary *masterLayers;
 
-
-@property (retain, nonatomic) FlyerImageView *flyImageView;
-
 @end

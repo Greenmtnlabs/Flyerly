@@ -251,9 +251,8 @@
 -(void) chooseEdit;
 -(void) SetMenu;
 -(void) callDeleteLayer;
--(void) Mycancel;
 -(void) choosePhoto;
--(void) DonePhoto;
+-(void) donePhoto;
 -(void) saveMyFlyer;
 -(void)callSaveAndShare;
 -(void)openCustomCamera;
@@ -273,12 +272,12 @@
 -(NSMutableDictionary *)getInAppDictionary;
 -(void)setInAppDictionary:(NSMutableDictionary *)inAppDict;
 
--(void)AddScrollView:(id)obj;
--(void)AddBottomTabs:(id)obj;
--(void)AddAllLayersIntoFront;
--(void)AddAllLayersIntoFront2;
+-(void)addScrollView:(id)obj;
+-(void)addBottomTabs:(id)obj;
+-(void)addAllLayersIntoFront;
+-(void)addAllLayersIntoFront2;
 
--(void)AddDonetoRightBarBotton;
+-(void)addDonetoRightBarBotton;
 
 -(IBAction)setAddMoreLayerTabAction:(id)sender;
 -(IBAction)setlibBackgroundTabAction:(id)sender;

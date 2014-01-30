@@ -10,7 +10,7 @@
 
 @implementation Flyer
 
-@synthesize masterLayers,flyImageView;
+@synthesize masterLayers;
 
 /*
  * This method will be used to initiate the Flyer class
@@ -20,13 +20,11 @@
 -(id)initWithPath:(NSString *)flyPath{
     
       self = [super init];
-
-    masterLayers = [[NSMutableDictionary alloc] init];
     
     if ( ![[NSFileManager defaultManager] fileExistsAtPath:flyPath isDirectory:NULL] ) {
         
         //Create New Directory
-        [self CreateFlyerPath:flyPath];
+        [self createFlyerPath:flyPath];
         
     }
     
@@ -39,17 +37,12 @@
 
 /*
  *load the dictionary from .peices file
- ****** LOAD FLYER INFORMATION FILE ******
  */
--(void)loadFlyer :(NSString *)flyPath{
-
+-(void)loadFlyer :(NSString *)flyPath {
 
     //Getting Dictionary
     NSString *flyerFilePath = [flyPath stringByAppendingString:[NSString stringWithFormat:@"/flyer.pieces"]];
-    NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithContentsOfFile:flyerFilePath];
-    
-    masterLayers = dict;
-    
+    masterLayers = [[NSMutableDictionary alloc] initWithContentsOfFile:flyerFilePath];
 }
 
 
@@ -70,9 +63,6 @@
     
     //Delete From Dictionary
     [masterLayers removeObjectForKey:uid];
-    
-    //Delete From View
-    [self.flyImageView deleteLayer:uid];
 
 }
 
@@ -107,8 +97,7 @@
     
     
     [masterLayers setValue:textDetailDictionary forKey:uniqueId];
-    [self.flyImageView renderLayer:uniqueId layerDictionary:textDetailDictionary];
-    
+
     return uniqueId;
 }
 
@@ -118,15 +107,11 @@
  */
 -(void)setFlyerText :(NSString *)uid text:(NSString *)txt {
     
-   NSMutableDictionary *textDetailDictionary = [[NSMutableDictionary alloc] init];
-    textDetailDictionary = [self getLayerFromMaster:uid];
+   NSMutableDictionary *textDetailDictionary = [self getLayerFromMaster:uid];
     [textDetailDictionary setValue:txt forKey:@"text"];
     
     // Set to Master Dictionary
     [masterLayers setValue:textDetailDictionary forKey:uid];
-    
-    [self.flyImageView renderLayer:uid layerDictionary:textDetailDictionary];
-
     
 }
 
@@ -142,7 +127,6 @@
     // Set to Master Dictionary
     [masterLayers setValue:textDetailDictionary forKey:uid];
     
-    [self.flyImageView renderLayer:uid layerDictionary:textDetailDictionary];
 }
 
 
@@ -151,8 +135,7 @@
  */
 -(void)setFlyerTextColor :(NSString *)uid RGBColor:(id)rgb{
 
-    NSMutableDictionary *textDetailDictionary = [[NSMutableDictionary alloc] init];
-    textDetailDictionary = [self getLayerFromMaster:uid];
+    NSMutableDictionary *textDetailDictionary = [self getLayerFromMaster:uid];
     
     CGFloat red = 0.0, green = 0.0, blue = 0.0, alpha = 0.0,wht = 0.0;
     
@@ -171,9 +154,6 @@
     
     // Set to Master Dictionary
     [masterLayers setValue:textDetailDictionary forKey:uid];
-    
-    [self.flyImageView renderLayer:uid layerDictionary:textDetailDictionary];
-
 
 }
 
@@ -182,8 +162,8 @@
  */
 -(void)setFlyerTextSize :(NSString *)uid Size:(UIFont *)sz{
     
-    NSMutableDictionary *textDetailDictionary = [[NSMutableDictionary alloc] init];
-    textDetailDictionary = [self getLayerFromMaster:uid];
+    NSMutableDictionary *textDetailDictionary = [self getLayerFromMaster:uid];
+
     
     UILabel *labelToStore = [[UILabel alloc]init];
     labelToStore.font = sz;
@@ -192,8 +172,6 @@
 
     // Set to Master Dictionary
     [masterLayers setValue:textDetailDictionary forKey:uid];
-    
-    [self.flyImageView renderLayer:uid layerDictionary:textDetailDictionary];
 
 }
 
@@ -203,8 +181,7 @@
  */
 -(void)setFlyerTextBorderColor :(NSString *)uid Color:(id)rgb{
 
-    NSMutableDictionary *textDetailDictionary = [[NSMutableDictionary alloc] init];
-    textDetailDictionary = [self getLayerFromMaster:uid];
+    NSMutableDictionary *textDetailDictionary = [self getLayerFromMaster:uid];
     
     CGFloat red = 0.0, green = 0.0, blue = 0.0, alpha = 0.0,wht = 0.0;
     
@@ -224,8 +201,6 @@
     // Set to Master Dictionary
     [masterLayers setValue:textDetailDictionary forKey:uid];
     
-    [self.flyImageView renderLayer:uid layerDictionary:textDetailDictionary];
-    
 }
 
 
@@ -234,14 +209,7 @@
  * Here we get Selected Dictionary From MasterLayers
  */
 -(NSMutableDictionary *)getLayerFromMaster :(NSString *)uid {
-
-    if ([masterLayers objectForKey:uid] != nil) {
-        
-        return [masterLayers objectForKey:uid];
-        
-    }
-
-    return nil;
+    return [masterLayers objectForKey:uid];
 }
 
 
@@ -284,7 +252,7 @@
 /*
  * Create New directory for Flyer
  */
--(void)CreateFlyerPath:(NSString *)path{
+-(void)createFlyerPath:(NSString *)path{
     NSError *error = nil;
     
     //This Is Unique Flyer Folder

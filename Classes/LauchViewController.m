@@ -154,7 +154,7 @@
     
     //Update Folder Structure For 3.0 Version
     PFUser *user = [PFUser currentUser];
-    [FlyerUser UpdateFolderStructure:[user objectForKey:@"username"]];
+    [FlyerUser updateFolderStructure:[user objectForKey:@"username"]];
     
 	globle = [FlyerlySingleton RetrieveSingleton];
     createFlyrButton.showsTouchWhenHighlighted = YES;
@@ -701,9 +701,6 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
 }
 
 -(IBAction)goBack{
-    [opaqueView removeFromSuperview];
-    [webview removeFromSuperview];
-    [crossButton removeFromSuperview];
     
     [self.likeView setHidden:YES];
 }

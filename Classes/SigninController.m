@@ -177,7 +177,7 @@
             FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
             
             // For Parse New User Merge to old Facebook User
-            [appDelegate FbChangeforNewVersion];
+            [appDelegate fbChangeforNewVersion];
             
              // Remove Current UserName for Device configuration
             [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"User"];
@@ -195,7 +195,7 @@
 
             // Temp on for Testing here
             // FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-            // [appDelegate FbChangeforNewVersion];
+            // [appDelegate fbChangeforNewVersion];
             
             // Login success Move to Flyerly
             launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil] ;
@@ -230,7 +230,7 @@
                 
                 // For Parse New User Merge to old Twitter User
                 FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-                [appDelegate TwitterChangeforNewVersion:twitterUsername];
+                [appDelegate twitterChangeforNewVersion:twitterUsername];
                 
                 // Remove Current UserName for Device configuration
                 [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"User"];
@@ -251,7 +251,7 @@
                 // For Parse New User Merge to old Twitter User
                 /*
                 FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-                [appDelegate TwitterChangeforNewVersion:twitterUsername];*/
+                [appDelegate twitterChangeforNewVersion:twitterUsername];*/
 
                 
                 // Login success Move to Flyerly
