@@ -345,6 +345,9 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     
 	lableLocation = CGPointMake(160,100);
     
+    //layerTile Button
+    editButtonGlobal = [[LayerTileButton alloc]init];
+    editButtonGlobal.uid = @"";
     
     // Create Main Image View
     templateBckgrnd = [[UIImageView alloc]initWithFrame:CGRectMake(0, 413, 320, 135)];
@@ -2232,10 +2235,11 @@ int arrangeLayerIndex;
         return;
     }
     
-    if (editButtonGlobal == nil || [editButtonGlobal.uid isEqualToString:@""]) {
+    if ([currentLayer isEqualToString:@""]) {
         
         //Here we write in Master Dictionary
         currentLayer = [flyer addText];
+        editButtonGlobal.uid = currentLayer;
         
     } else {
         
@@ -2515,7 +2519,7 @@ int arrangeLayerIndex;
     
     [self AddBottomTabs:libFlyer];
     [self AddAllLayersIntoFront2 ];
-   
+    currentLayer = @"";
     [self hideAddMoreButton];
 
     templateBckgrnd.alpha = ALPHA0;
@@ -2921,7 +2925,28 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     }
 }
 
+/*
+ * Here we Delete Button From Scrollview
+ */
+-(void)resetLayerScrollView :(NSString *)udid{
 
+   doStopWobble = YES;
+    
+    NSArray *ChildViews = [self.layerScrollView subviews];
+    
+    for (LayerTileButton *child in ChildViews) {
+        
+        if (child.uid == udid) {
+            
+            //Remove From ScrollView
+            [child removeFromSuperview];
+
+        }
+    }
+    
+
+
+}
 
 -(void)resetLayerScrollView{
 
@@ -2932,6 +2957,8 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 -(void)editLayer:(LayerTileButton *)editButton{
     
+    currentLayer =  editButton.uid;
+    editButtonGlobal.uid = currentLayer;
     editButtonGlobal = editButton;
    // [self chooseEdit];
     [self editLayer:editButtonGlobal overrided:YES];
@@ -3013,13 +3040,24 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     [deleteAlert show];
 }
 
--(void)deleteLayer:(UIButton *)crossButton overrided:(BOOL)overrided{
+-(void)deleteLayer:(LayerTileButton *)layerButton overrided:(BOOL)overrided{
+    
+    
+    
+    
+    // New Code
+    [flyer deleteLayer:layerButton.uid];
+    
+    // End New Code
+
+    
+    
     
     deleteMode = YES;
     undoCount = undoCount + 1;
     
-    NSLog(@"Delete Layer Tag: %d", crossButton.tag);
-    NSString *tag = [NSString stringWithFormat:@"%d", crossButton.tag];
+    NSLog(@"Delete Layer Tag: %d", layerButton.tag);
+    NSString *tag = [NSString stringWithFormat:@"%d", layerButton.tag];
     int index = [self getIndexFromTag:tag];
     
     // Make copy of layers to undo it later
@@ -3044,11 +3082,11 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         }
         
         // Remove layer thumbnail
-        UIButton *layerThumbnail = (UIButton *) [crossButton superview];
-        [layerThumbnail removeFromSuperview];
+        //LayerTileButton *layerThumbnail = (LayerTileButton *) [layerButton superview];
+        //[layerThumbnail removeFromSuperview];
         
         // Update layer scroll view
-        [self resetLayerScrollView];
+        [self resetLayerScrollView:layerButton.uid];
         
     }
     else if([tag hasPrefix:@"222"])
@@ -3070,7 +3108,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         }
         
         // Remove layer thumbnail
-        UIButton *layerThumbnail = (UIButton *) [crossButton superview];
+        UIButton *layerThumbnail = (UIButton *) [layerButton superview];
         [layerThumbnail removeFromSuperview];
         
         // Update layer scroll view
@@ -3095,7 +3133,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         }
         
         // Remove layer thumbnail
-        UIButton *layerThumbnail = (UIButton *) [crossButton superview];
+        UIButton *layerThumbnail = (UIButton *) [layerButton superview];
         [layerThumbnail removeFromSuperview];
         
         // Update layer scroll view
@@ -3120,7 +3158,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         }
         
         // Remove layer thumbnail
-        UIButton *layerThumbnail = (UIButton *) [crossButton superview];
+        UIButton *layerThumbnail = (UIButton *) [layerButton superview];
         [layerThumbnail removeFromSuperview];
         
         // Update layer scroll view
