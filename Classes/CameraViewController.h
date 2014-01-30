@@ -7,11 +7,7 @@
 //
 
 #import "NBUCameraViewController.h"
-#import "ObjectSlideView.h"
-#import <NBUKit/NBUViewController.h>
-#import "NBUCameraView.h"
 #import "UIImage+NBUAdditions.h"
-#import "NBUKitPrivate.h"
 #import "FlyerlySingleton.h"
 
 @class FlyerlySingleton;
@@ -20,16 +16,11 @@
 }
 
 // Outlets
-@property (assign, nonatomic) IBOutlet UIButton * shootButton;
-@property (assign, nonatomic) IBOutlet ObjectSlideView * slideView;
-
 @property (assign, nonatomic) IBOutlet UIImageView *cameraLines;
 
 // Actions
-- (IBAction)customToggleFlash:(id)sender;
-- (IBAction)setCameraline:(id)sender;
-- (IBAction)CameraCancel:(id)sender;
-- (IBAction)MovetoGallery:(id)sender;
+- (IBAction)setCameraLine:(id)sender;
+- (IBAction)moveToGallery:(id)sender;
 
 @end
 

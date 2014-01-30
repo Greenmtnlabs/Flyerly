@@ -39,7 +39,7 @@
     // BackButton
     UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     backButton.titleLabel.font = [UIFont systemFontOfSize:14.0];
-    [backButton addTarget:self action:@selector(goback) forControlEvents:UIControlEventTouchUpInside];
+    [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
     [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
     backButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
@@ -49,6 +49,16 @@
     UIButton *rigButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:rigButton];
     [self.navigationItem setRightBarButtonItem:rightBarButton];
+    
+    // Set the title view.
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-35, -6, 50, 50)];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont fontWithName:TITLE_FONT size:18];
+    label.textAlignment = UITextAlignmentCenter;
+    label.textColor = [UIColor whiteColor];
+    label.text = @"SELECT PHOTO";
+    
+    self.navigationItem.titleView = label;
 }
 
 
