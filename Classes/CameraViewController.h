@@ -15,6 +15,8 @@
    FlyerlySingleton *globle;
 }
 
+@property CGSize desiredImageSize;
+
 // Outlets
 @property (assign, nonatomic) IBOutlet UIImageView *cameraLines;
 

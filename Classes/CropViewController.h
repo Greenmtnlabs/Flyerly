@@ -13,6 +13,7 @@
 
 @interface CropViewController : NBUEditImageViewController
 
+@property CGSize desiredImageSize;
 @property (strong, nonatomic) FlyerlySingleton *globle;
 
 @end

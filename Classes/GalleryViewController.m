@@ -10,6 +10,7 @@
 #import "CropViewController.h"
 
 @implementation GalleryViewController
+@synthesize desiredImageSize;
 
 /**
  * Initialize the gallery.
@@ -73,6 +74,7 @@
     [self viewWillDisappear:NO];
     
     CropViewController *nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController" bundle:nil];
+    nbuCrop.desiredImageSize = desiredImageSize;
     
     // Pop the current view, and push the crop view.
     NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[[self navigationController] viewControllers]];

@@ -9,8 +9,8 @@
 #import "CropViewController.h"
 
 @implementation CameraViewController
-
 @synthesize cameraLines;
+@synthesize desiredImageSize;
 
 /**
  * Setup the controller.
@@ -63,6 +63,7 @@
 -(void) cropImage {
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
     CropViewController *nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController" bundle:nil];
+    nbuCrop.desiredImageSize = desiredImageSize;
 
     // Pop the current view, and push the crop view.
     NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[[self navigationController] viewControllers]];

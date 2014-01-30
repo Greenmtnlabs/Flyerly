@@ -20,5 +20,7 @@
     FlyerlySingleton *globle;
 }
 
+@property CGSize desiredImageSize;
+
 @end
 
