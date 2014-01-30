@@ -184,6 +184,41 @@
 }
 
 
+/*
+ * Here we Set Text Border Color
+ */
+-(void)setFlyerTextBorderColor :(NSString *)uid Color:(id)rgb{
+
+    NSMutableDictionary *textDetailDictionary = [[NSMutableDictionary alloc] init];
+    textDetailDictionary = [self getLayerFromMaster:uid];
+    
+    CGFloat red = 0.0, green = 0.0, blue = 0.0, alpha = 0.0,wht = 0.0;
+    
+    UILabel *labelToStore = [[UILabel alloc]init];
+    labelToStore.textColor = rgb;
+    
+    //Getting RGB Color Code
+    [labelToStore.textColor getRed:&red green:&green blue:&blue alpha:&alpha];
+    
+    if (red == 0 && green == 0 && blue ==0) {
+        [labelToStore.textColor getWhite:&wht alpha:&alpha];
+    }
+
+    [textDetailDictionary setValue:[NSString stringWithFormat:@"%f, %f, %f", red, green, blue] forKey:@"textbordercolor"];
+    [textDetailDictionary setValue:[NSString stringWithFormat:@"%f, %f", wht, alpha] forKey:@"textborderWhite"];
+    
+    // Set to Master Dictionary
+    [masterLayers setValue:textDetailDictionary forKey:uid];
+    
+    [self.flyImageView renderLayer:uid layerDictionary:textDetailDictionary];
+    
+}
+
+
+
+/*
+ * Here we get Selected Dictionary From MasterLayers
+ */
 -(NSMutableDictionary *)getLayerFromMaster :(NSString *)uid {
 
     if ([masterLayers objectForKey:uid] != nil) {

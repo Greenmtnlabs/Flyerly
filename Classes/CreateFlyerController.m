@@ -937,10 +937,12 @@ int photoLayerCount = 0; // Photo layer count to set tag value
             
 			UIColor *borderColor = borderArray[i-1];
             
-            CustomLabel *lastLabel = [self textLabelLayersArray][arrangeLayerIndex];
-            lastLabel.borderColor = borderColor;
-            lastLabel.lineWidth = 2;
-            [lastLabel drawRect:CGRectMake(lastLabel.frame.origin.x, lastLabel.frame.origin.y, lastLabel.frame.size.width, lastLabel.frame.size.height)];
+            [flyer setFlyerTextBorderColor:currentLayer Color:borderColor ];
+            
+           // CustomLabel *lastLabel = [self textLabelLayersArray][arrangeLayerIndex];
+            //lastLabel.borderColor = borderColor;
+            //lastLabel.lineWidth = 2;
+           // [lastLabel drawRect:CGRectMake(lastLabel.frame.origin.x, lastLabel.frame.origin.y, lastLabel.frame.size.width, lastLabel.frame.size.height)];
             
             // Add border to selected layer thumbnail
             tempView.backgroundColor = [globle colorWithHexString:@"0197dd"];

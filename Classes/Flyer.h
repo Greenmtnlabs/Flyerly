@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import <Parse/Parse.h>
-#import "CustomLabel.h"
 #import "FlyerImageView.h"
 
 
@@ -33,6 +32,9 @@
 -(void)setFlyerTextColor :(NSString *)uid RGBColor:(id)rgb;
 
 -(void)setFlyerTextSize :(NSString *)uid Size:(UIFont *)sz;
+
+-(void)setFlyerTextBorderColor :(NSString *)uid Color:(id)rgb;
+
 
 
 -(NSString *)addPhoto;

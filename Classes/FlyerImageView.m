@@ -10,7 +10,7 @@
 
 @implementation FlyerImageView
 
-@synthesize layers;//,lble,img;
+@synthesize layers;
 
 
 -(id)init{
@@ -43,7 +43,7 @@
         //Check Layer Exist in Master Layers
         if ([layers objectForKey:uid] == nil) {
             
-            UILabel *lble = [[UILabel alloc] init];
+            CustomLabel *lble = [[CustomLabel alloc] init];
             lble.backgroundColor = [UIColor clearColor];
             lble.textAlignment = UITextAlignmentCenter;
             lble.adjustsFontSizeToFitWidth = YES;
@@ -56,7 +56,7 @@
             
         } else {
             
-            UILabel *lble = [layers objectForKey:uid];
+            CustomLabel *lble = [layers objectForKey:uid];
             [self configureLabel:lble labelDictionary:layDic ];
             [layers setValue:lble forKey:uid];
 
@@ -78,7 +78,7 @@
 /*
  *Here we set Properties of uiLabel
  */
--(void)configureLabel :(UILabel *)lbl labelDictionary:(NSMutableDictionary *)detail {
+-(void)configureLabel :(CustomLabel *)lbl labelDictionary:(NSMutableDictionary *)detail {
     
     
     //SetFrame
@@ -105,21 +105,20 @@
     
     
     if ([[detail valueForKey:@"textbordercolor"] isEqualToString:@"0.000000, 0.000000, 0.000000"]) {
+
         if ([detail valueForKey:@"textborderWhite"] != nil) {
             NSArray *rgbBorder = [[detail valueForKey:@"textborderWhite"] componentsSeparatedByString:@","];
-            UIColor *clr = [UIColor colorWithWhite:[rgbBorder[0] floatValue] alpha:[rgbBorder[1] floatValue]];
-            
-            lbl.layer.borderColor = clr.CGColor;
+
+            lbl.borderColor = [UIColor colorWithWhite:[rgbBorder[0] floatValue] alpha:[rgbBorder[1] floatValue]];
             
         }
     }else{
         
         NSArray *rgbBorder = [[detail valueForKey:@"textbordercolor"] componentsSeparatedByString:@","];
         
-        UIColor *clr = [UIColor colorWithRed:[rgbBorder[0] floatValue] green:[rgbBorder[1] floatValue] blue:[rgbBorder[2] floatValue] alpha:1];
-        lbl.layer.borderColor = clr.CGColor;
+        lbl.borderColor = [UIColor colorWithRed:[rgbBorder[0] floatValue] green:[rgbBorder[1] floatValue] blue:[rgbBorder[2] floatValue] alpha:1];
     }
-    lbl.layer.borderWidth = 2;
+    lbl.lineWidth = 2;
 }
 
 @end
