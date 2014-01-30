@@ -329,6 +329,7 @@
 		2009F6E21806E68F00FE4665 /* symbol41.png in Resources */ = {isa = PBXBuildFile; fileRef = 2009F6E01806E68C00FE4665 /* symbol41.png */; };
 		2009F6E51806E92B00FE4665 /* symbol86.png in Resources */ = {isa = PBXBuildFile; fileRef = 2009F6E31806E92700FE4665 /* symbol86.png */; };
 		2009F6E61806E92B00FE4665 /* symbol86@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2009F6E41806E92800FE4665 /* symbol86@2x.png */; };
+		200D196818998BEB00EAD645 /* LayerTileButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 200D196718998BEA00EAD645 /* LayerTileButton.m */; };
 		200FA573187FEB01003576DA /* galleryicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 200FA571187FEB01003576DA /* galleryicon.png */; };
 		200FA574187FEB01003576DA /* galleryicon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 200FA572187FEB01003576DA /* galleryicon@2x.png */; };
 		201686EA186AF56D00A238AE /* share_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 201686E8186AF56D00A238AE /* share_button.png */; };
@@ -1655,6 +1656,8 @@
 		2009F6E01806E68C00FE4665 /* symbol41.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = symbol41.png; sourceTree = "<group>"; };
 		2009F6E31806E92700FE4665 /* symbol86.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = symbol86.png; sourceTree = "<group>"; };
 		2009F6E41806E92800FE4665 /* symbol86@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "symbol86@2x.png"; sourceTree = "<group>"; };
+		200D196618998BEA00EAD645 /* LayerTileButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LayerTileButton.h; sourceTree = "<group>"; };
+		200D196718998BEA00EAD645 /* LayerTileButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LayerTileButton.m; sourceTree = "<group>"; };
 		200FA571187FEB01003576DA /* galleryicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = galleryicon.png; path = ../Classes/galleryicon.png; sourceTree = "<group>"; };
 		200FA572187FEB01003576DA /* galleryicon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "galleryicon@2x.png"; path = "../Classes/galleryicon@2x.png"; sourceTree = "<group>"; };
 		201686E8186AF56D00A238AE /* share_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share_button.png; sourceTree = "<group>"; };
@@ -4073,6 +4076,8 @@
 				0DF3A2C3108DF1D200D6C887 /* CreateFlyerController.h */,
 				0DF3A2C4108DF1D200D6C887 /* CreateFlyerController.m */,
 				0DFC531A109576AB00B18478 /* CreateFlyerController.xib */,
+				200D196618998BEA00EAD645 /* LayerTileButton.h */,
+				200D196718998BEA00EAD645 /* LayerTileButton.m */,
 			);
 			name = CreateFlyer;
 			sourceTree = "<group>";
@@ -5767,6 +5772,7 @@
 				202C47F9187D6E4B00FE0975 /* BitlyConfig.m in Sources */,
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				202C47FA187D6E4B00FE0975 /* BitlyDebug.m in Sources */,
+				200D196818998BEB00EAD645 /* LayerTileButton.m in Sources */,
 				204635651895F90000A94C42 /* FlyerImageView.m in Sources */,
 				1D3623260D0F684500981E51 /* FlyrAppDelegate.m in Sources */,
 				0DF3A2C5108DF1D200D6C887 /* LauchViewController.m in Sources */,

@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <Parse/Parse.h>
 #import "CustomLabel.h"
+#import "FlyerImageView.h"
 
 
 @interface Flyer : NSObject
@@ -24,7 +25,13 @@
 -(NSMutableDictionary *)getLayerFromMaster :(NSString *)uid;
 
 -(NSString *)addText;
--(void)setFlyerText :(NSString *)txt Uid:(NSString *)uid;
+
+-(void)setFlyerText :(NSString *)uid text:(NSString *)txt;
+
+-(void)setFlyerTextFont :(NSString *)uid FontName:(NSString *)ftn;
+
+-(void)setFlyerTextColor :(NSString *)uid RGBColor:(id)rgb;
+
 
 -(NSString *)addPhoto;
 -(NSString *)addSymbols;
@@ -32,8 +39,9 @@
 
 +(NSString *)newFlyerPath;
 
-@property(strong,readonly)NSMutableDictionary *MasterLayers;
+@property (strong, readonly) NSMutableDictionary *masterLayers;
 
 
+@property (retain, nonatomic) FlyerImageView *flyImageView;
 
 @end

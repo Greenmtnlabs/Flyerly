@@ -10,7 +10,7 @@
 
 @implementation FlyerImageView
 
-@synthesize layers,lble,img;
+@synthesize layers;//,lble,img;
 
 
 -(id)init{
@@ -33,30 +33,31 @@
 /*
  * Here we create or update actual layer
  */
--(void)renderLayer :(NSString *)uid LayerDictionary:(NSMutableDictionary *)layDic{
+-(void)renderLayer :(NSString *)uid layerDictionary:(NSMutableDictionary *)layDic {
 
 
     // Checking for Label or ImageView
     if ([layDic objectForKey:@"image"] == nil) {
         
+        
         //Check Layer Exist in Master Layers
         if ([layers objectForKey:uid] == nil) {
             
-            lble = [[UILabel alloc] init];
+            UILabel *lble = [[UILabel alloc] init];
             lble.backgroundColor = [UIColor clearColor];
             lble.textAlignment = UITextAlignmentCenter;
             lble.adjustsFontSizeToFitWidth = YES;
             lble.lineBreakMode = UILineBreakModeClip;
             lble.numberOfLines = 80;
-            [self configureLabel:lble LabelDictionary:layDic ];
+            [self configureLabel:lble labelDictionary:layDic ];
             [self addSubview:lble];
             [layers setValue:lble forKey:uid];
             
             
         } else {
             
-            lble = [layers objectForKey:uid];
-            [self configureLabel:lble LabelDictionary:layDic ];
+            UILabel *lble = [layers objectForKey:uid];
+            [self configureLabel:lble labelDictionary:layDic ];
             [layers setValue:lble forKey:uid];
 
             
@@ -65,7 +66,8 @@
 
     } else {
     
-      img = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 50, 50)];
+        UIImageView *img = nil;
+        img = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 50, 50)];
     }
     
     
@@ -76,7 +78,7 @@
 /*
  *Here we set Properties of uiLabel
  */
--(void)configureLabel :(UILabel *)lbl LabelDictionary:(NSMutableDictionary *)detail{
+-(void)configureLabel :(UILabel *)lbl labelDictionary:(NSMutableDictionary *)detail {
     
     
     //SetFrame

@@ -10,7 +10,7 @@
 
 @implementation Flyer
 
-@synthesize MasterLayers;
+@synthesize masterLayers,flyImageView;
 
 /*
  * This method will be used to initiate the Flyer class
@@ -21,7 +21,7 @@
     
       self = [super init];
 
-    MasterLayers = [[NSMutableDictionary alloc] init];
+    masterLayers = [[NSMutableDictionary alloc] init];
     
     if ( ![[NSFileManager defaultManager] fileExistsAtPath:flyPath isDirectory:NULL] ) {
         
@@ -48,7 +48,7 @@
     NSString *flyerFilePath = [flyPath stringByAppendingString:[NSString stringWithFormat:@"/flyer.pieces"]];
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithContentsOfFile:flyerFilePath];
     
-    MasterLayers = dict;
+    masterLayers = dict;
     
 }
 
@@ -80,7 +80,7 @@
     //Add Defaualt dictionary
     NSMutableDictionary *textDetailDictionary = [[NSMutableDictionary alloc] init];
     textDetailDictionary[@"text"] = @"Defualt";
-    textDetailDictionary[@"fontname"] = @".HelveticaNeueInterface-M3";
+    textDetailDictionary[@"fontname"] = @"HelveticaNeueInterface-M3";
     textDetailDictionary[@"fontsize"] = @"17.000000";
     textDetailDictionary[@"textcolor"] = @"0.000000, 0.000000, 0.000000";
     textDetailDictionary[@"textWhitecolor"] = @"0.000000, 1.000000";
@@ -92,7 +92,7 @@
     textDetailDictionary[@"height"] = @"280.000000";
     
     
-    [MasterLayers setValue:textDetailDictionary forKey:uniqueId];
+    [masterLayers setValue:textDetailDictionary forKey:uniqueId];
     
     return uniqueId;
 }
@@ -101,22 +101,73 @@
 /*
  * Here Set text of Layer
  */
--(void)setFlyerText :(NSString *)txt Uid:(NSString *)uid{
+-(void)setFlyerText :(NSString *)uid text:(NSString *)txt {
     
    NSMutableDictionary *textDetailDictionary = [[NSMutableDictionary alloc] init];
     textDetailDictionary = [self getLayerFromMaster:uid];
     [textDetailDictionary setValue:txt forKey:@"text"];
     
     // Set to Master Dictionary
-    [MasterLayers setValue:textDetailDictionary forKey:uid];
+    [masterLayers setValue:textDetailDictionary forKey:uid];
+    
+    [self.flyImageView renderLayer:uid layerDictionary:textDetailDictionary];
+
     
 }
 
--(NSMutableDictionary *)getLayerFromMaster :(NSString *)uid{
+/*
+ * Here we Set Text font
+ */
+-(void)setFlyerTextFont :(NSString *)uid FontName:(NSString *)ftn{
 
-    if ([MasterLayers objectForKey:uid] != nil) {
+    NSMutableDictionary *textDetailDictionary = [[NSMutableDictionary alloc] init];
+    textDetailDictionary = [self getLayerFromMaster:uid];
+    [textDetailDictionary setValue:ftn forKey:@"fontname"];
+    
+    // Set to Master Dictionary
+    [masterLayers setValue:textDetailDictionary forKey:uid];
+    
+    [self.flyImageView renderLayer:uid layerDictionary:textDetailDictionary];
+}
+
+
+/*
+ * Here we Set Text Color
+ */
+-(void)setFlyerTextColor :(NSString *)uid RGBColor:(id)rgb{
+
+    NSMutableDictionary *textDetailDictionary = [[NSMutableDictionary alloc] init];
+    textDetailDictionary = [self getLayerFromMaster:uid];
+    
+    CGFloat red = 0.0, green = 0.0, blue = 0.0, alpha = 0.0,wht = 0.0;
+    
+    UILabel *labelToStore = [[UILabel alloc]init];
+    labelToStore.textColor = rgb;
+    
+    //Getting RGB Color Code
+    [labelToStore.textColor getRed:&red green:&green blue:&blue alpha:&alpha];
+    
+    if (red == 0 && green == 0 && blue ==0) {
+        [labelToStore.textColor getWhite:&wht alpha:&alpha];
+    }
+    
+    [textDetailDictionary setValue:[NSString stringWithFormat:@"%f, %f, %f", red, green, blue] forKey:@"textcolor"];
+    [textDetailDictionary setValue:[NSString stringWithFormat:@"%f, %f", wht, alpha] forKey:@"textWhitecolor"];
+    
+    // Set to Master Dictionary
+    [masterLayers setValue:textDetailDictionary forKey:uid];
+    
+    [self.flyImageView renderLayer:uid layerDictionary:textDetailDictionary];
+
+
+}
+
+
+-(NSMutableDictionary *)getLayerFromMaster :(NSString *)uid {
+
+    if ([masterLayers objectForKey:uid] != nil) {
         
-        return [MasterLayers objectForKey:uid];
+        return [masterLayers objectForKey:uid];
         
     }
 
