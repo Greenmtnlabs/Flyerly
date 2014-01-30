@@ -68,7 +68,10 @@
  * Crop image using NBUKit
  */
 -(void) cropImage {
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
+    
+    // Get out of full screen mode.
+    [self viewWillDisappear:NO];
+    
     CropViewController *nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController" bundle:nil];
     
     // Pop the current view, and push the crop view.
