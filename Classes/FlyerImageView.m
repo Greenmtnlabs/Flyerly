@@ -10,61 +10,86 @@
 
 @implementation FlyerImageView
 
-@synthesize layers,lbl,img;
+@synthesize layers;
 
 
 -(id)init{
    
     self = [super init];
+     return self;
+}
+
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    
+    //Set Master Layers
     layers = [[NSMutableDictionary alloc] init];
-    return self;
+    
+    //Set Template Here
+    
 }
 
 /*
  * Here we create or update actual layer
  */
--(void)renderLayer :(NSString *)uid LayerDictionary:(NSMutableDictionary *)layDic{
+-(void)renderLayer :(NSString *)uid layerDictionary:(NSMutableDictionary *)layDic {
 
-    //For Testing
-    lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
-    [lbl setText:@"Zohaib"];
-    lbl.textAlignment =  UITextAlignmentCenter;
-    lbl.textColor = [UIColor whiteColor];
-    lbl.backgroundColor = [UIColor blackColor];
-    lbl.font = [UIFont fontWithName:@"Arial Rounded MT Bold" size:(36.0)];
-    [self addSubview:lbl];
-    
-    //Check Layer Exist in Master Layers
-    if ([layers objectForKey:uid] == nil) {
-    
-        [layers setValue:layDic forKey:uid];
-        [self addLabel:layDic ];
-    
-    } else {
+
+    // Checking for Label or ImageView
+    if ([layDic objectForKey:@"image"] == nil) {
         
-        [self updateLabel:layDic ];
-    
-    }
+        
+        //Check Layer Exist in Master Layers
+        if ([layers objectForKey:uid] == nil) {
+            
+            CustomLabel *lble = [[CustomLabel alloc] init];
+            lble.backgroundColor = [UIColor clearColor];
+            lble.textAlignment = UITextAlignmentCenter;
+            lble.adjustsFontSizeToFitWidth = YES;
+            lble.lineBreakMode = UILineBreakModeClip;
+            lble.numberOfLines = 80;
+            [self configureLabel:lble labelDictionary:layDic ];
+            [self addSubview:lble];
+            [layers setValue:lble forKey:uid];
+            
+            
+        } else {
+            
+            CustomLabel *lble = [layers objectForKey:uid];
+            [self configureLabel:lble labelDictionary:layDic ];
+            [layers setValue:lble forKey:uid];
 
+            
+        }
+
+
+    } else {
+    
+        UIImageView *img = nil;
+        img = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 50, 50)];
+    }
+    
     
 }
 
 
 
 /*
- *Here we Add New Label and set Properties
+ *Here we set Properties of uiLabel
  */
--(void)addLabel:(NSMutableDictionary *)detail{
-    lbl = [[UILabel alloc] init];
+-(void)configureLabel :(CustomLabel *)lbl labelDictionary:(NSMutableDictionary *)detail {
+    
+    
+    //SetFrame
+    [lbl setFrame:CGRectMake([[detail valueForKey:@"x"] floatValue], [[detail valueForKey:@"y"] floatValue], [[detail valueForKey:@"width"] floatValue], [[detail valueForKey:@"height"] floatValue])];
+
+
+    //set Label Text
     [lbl setText:[detail valueForKey:@"text"]];
-    
+
+    //set Label Font
     lbl.font = [UIFont fontWithName:[detail valueForKey:@"fontname"] size:[[detail valueForKey:@"fontsize"] floatValue]];
-    lbl.backgroundColor = [UIColor clearColor];
-    lbl.textAlignment = UITextAlignmentCenter;
-    lbl.adjustsFontSizeToFitWidth = YES;
-    lbl.lineBreakMode = UILineBreakModeClip;
-    
-    lbl.numberOfLines = 80;
     
     if ([[detail valueForKey:@"textcolor"] isEqualToString:@"0.000000, 0.000000, 0.000000"]) {
         if ([detail valueForKey:@"textWhitecolor"]  != nil) {
@@ -79,22 +104,21 @@
     }
     
     
-    [self addSubview:lbl];
+    if ([[detail valueForKey:@"textbordercolor"] isEqualToString:@"0.000000, 0.000000, 0.000000"]) {
 
+        if ([detail valueForKey:@"textborderWhite"] != nil) {
+            NSArray *rgbBorder = [[detail valueForKey:@"textborderWhite"] componentsSeparatedByString:@","];
 
+            lbl.borderColor = [UIColor colorWithWhite:[rgbBorder[0] floatValue] alpha:[rgbBorder[1] floatValue]];
+            
+        }
+    }else{
+        
+        NSArray *rgbBorder = [[detail valueForKey:@"textbordercolor"] componentsSeparatedByString:@","];
+        
+        lbl.borderColor = [UIColor colorWithRed:[rgbBorder[0] floatValue] green:[rgbBorder[1] floatValue] blue:[rgbBorder[2] floatValue] alpha:1];
+    }
+    lbl.lineWidth = 2;
 }
-
-
-/*
- *Here we Update Properties of Label
- */
--(void)updateLabel:(NSMutableDictionary *)detail{
-
-    lbl = [[UILabel alloc] init];
-    [lbl setText:[detail valueForKey:@"text"]];
-    
-}
-
-
 
 @end

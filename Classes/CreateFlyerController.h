@@ -25,6 +25,7 @@
 #import "LoadingView.h"
 #import "Flurry.h"
 #import "SKProduct+LocalPrice.h"
+#import "LayerTileButton.h"
 
 
 @class FlyerlySingleton,CameraViewController,GalleryViewController,Flyer,FlyerImageView;
@@ -113,6 +114,7 @@
     BOOL discardedLayer;
     int undoCount;
     int flyerNumber;
+    int layerXposition;
 
 	NSInteger fontScrollWidth;
 	NSInteger fontScrollHeight;
@@ -128,7 +130,7 @@
 	NSInteger templateScrollHeight;
 
     UIButton *crossButtonGlobal;
-    UIButton *editButtonGlobal;    
+    LayerTileButton *editButtonGlobal;
     UIBarButtonItem *rightUndoBarButton;
     GalleryViewController *nbuGallary;
     CameraViewController *nbuCamera;
@@ -241,6 +243,7 @@
 
 @property (nonatomic,strong) Flyer *flyer;
 @property(strong,nonatomic) NSString *currentLayer;
+@property(strong,nonatomic) NSMutableDictionary *layersDic;
 
 
 -(void)loadCustomPhotoLibrary;
@@ -273,6 +276,7 @@
 -(void)AddScrollView:(id)obj;
 -(void)AddBottomTabs:(id)obj;
 -(void)AddAllLayersIntoFront;
+-(void)AddAllLayersIntoFront2;
 
 -(void)AddDonetoRightBarBotton;
 

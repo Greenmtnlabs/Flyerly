@@ -2,7 +2,7 @@
 //  CustomLabel.m
 //  Flyr
 //
-//  Created by Rizwan Ahmad on 5/3/13.
+//  Created by Riksof on 5/3/13.
 //
 //
 

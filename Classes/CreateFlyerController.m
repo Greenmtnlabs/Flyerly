@@ -23,7 +23,7 @@
 //Version 3 Change
 @synthesize contextView,libraryContextView,libFlyer,backgroundTabButton,addMoreFontTabButton;
 @synthesize libText,libBackground,libPhoto,backtemplates,cameraTakePhoto,cameraRoll,flyerBorder;
-@synthesize textLabelLayersArray,symbolLayersArray,iconLayersArray,photoLayersArray,currentLayer;
+@synthesize textLabelLayersArray,symbolLayersArray,iconLayersArray,photoLayersArray,currentLayer,layersDic;
 
 int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track selected Tab on Add More Layer screen
 int symbolLayerCount = 0; // Symbol layer count to set tag value
@@ -292,14 +292,17 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     globle = [FlyerlySingleton RetrieveSingleton];
     [self.view setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
     [self.contextView setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
-        
+
+    //Pass FlyerImageView to Flyer for Render
+    flyer.flyImageView = self.flyimgView ;
+
     photoTouchFlag=NO;
 	symbolTouchFlag=NO;
     iconTouchFlag = NO;
 	lableTouchFlag=NO;
     
     // Set height and width of each element of scroll view
-    
+    layerXposition =0;
         fontScrollWidth = 35;
         fontScrollHeight = 35;
         colorScrollWidth = 35;
@@ -353,7 +356,19 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     templateScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,320,130)];
     symbolScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,320,130)];
     iconScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,320,130)];
-    layerScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,320,130)];
+    layerScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(13, 0,300,130)];
+    layersDic = [[NSMutableDictionary alloc] init];
+    
+    //Setting ScrollView
+    [layerScrollView setCanCancelContentTouches:NO];
+    layerScrollView.indicatorStyle = UIScrollViewIndicatorStyleBlack;
+    layerScrollView.clipsToBounds = YES;
+    layerScrollView.scrollEnabled = YES;
+    layerScrollView.pagingEnabled = NO;
+    layerScrollView.showsHorizontalScrollIndicator = NO;
+    layerScrollView.showsVerticalScrollIndicator = NO;
+    [self layoutScrollImages:layerScrollView scrollWidth:55 scrollHeight:40];
+
     
     //all Text Sub Scroll Views Initialize
     //for Using in ContextView
@@ -811,7 +826,11 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 			selectedFont = fontArray[i-1];
 			selectedFont = [selectedFont fontWithSize:selectedSize];
 			msgTextView.font = selectedFont;
-            ((CustomLabel*)[self textLabelLayersArray][arrangeLayerIndex]).font = selectedFont;
+            
+            //Here we set Font
+            [flyer setFlyerTextFont:currentLayer FontName:[NSString stringWithFormat:@"%@",[selectedFont familyName]]];
+            
+            //((CustomLabel*)[self textLabelLayersArray][arrangeLayerIndex]).font = selectedFont;
             
             // Add border to selected layer thumbnail
             CALayer * l = [tempView layer];
@@ -846,7 +865,10 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 		{
 			selectedColor = colorArray[i-1];
 			msgTextView.textColor = selectedColor;
-            ((CustomLabel*)[self textLabelLayersArray][arrangeLayerIndex]).textColor = selectedColor;
+            
+            [flyer setFlyerTextColor:currentLayer RGBColor:selectedColor];
+            
+            //((CustomLabel*)[self textLabelLayersArray][arrangeLayerIndex]).textColor = selectedColor;
             
             // Add border to selected layer thumbnail
             CALayer * l = [tempView layer];
@@ -881,7 +903,8 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 			selectedSize = [sizeStr intValue];
 			selectedFont = [selectedFont fontWithSize:selectedSize];
 			msgTextView.font = selectedFont;
-            ((CustomLabel*)[self textLabelLayersArray][arrangeLayerIndex]).font =selectedFont;
+            [flyer setFlyerTextSize:currentLayer Size:selectedFont];
+           // ((CustomLabel*)[self textLabelLayersArray][arrangeLayerIndex]).font =selectedFont;
             
             // Add border to selected layer thumbnail
             CALayer * l = [tempView layer];
@@ -914,10 +937,12 @@ int photoLayerCount = 0; // Photo layer count to set tag value
             
 			UIColor *borderColor = borderArray[i-1];
             
-            CustomLabel *lastLabel = [self textLabelLayersArray][arrangeLayerIndex];
-            lastLabel.borderColor = borderColor;
-            lastLabel.lineWidth = 2;
-            [lastLabel drawRect:CGRectMake(lastLabel.frame.origin.x, lastLabel.frame.origin.y, lastLabel.frame.size.width, lastLabel.frame.size.height)];
+            [flyer setFlyerTextBorderColor:currentLayer Color:borderColor ];
+            
+           // CustomLabel *lastLabel = [self textLabelLayersArray][arrangeLayerIndex];
+            //lastLabel.borderColor = borderColor;
+            //lastLabel.lineWidth = 2;
+           // [lastLabel drawRect:CGRectMake(lastLabel.frame.origin.x, lastLabel.frame.origin.y, lastLabel.frame.size.width, lastLabel.frame.size.height)];
             
             // Add border to selected layer thumbnail
             tempView.backgroundColor = [globle colorWithHexString:@"0197dd"];
@@ -2142,6 +2167,7 @@ int arrangeLayerIndex;
     // Make copy of layers to undo it later
     [self makeCopyOfLayers];
     
+    
     CustomLabel *lastLabelView = [self textLabelLayersArray][arrangeLayerIndex];
     
     selectedColor = lastLabelView.textColor;
@@ -2201,21 +2227,24 @@ int arrangeLayerIndex;
         [msgTextView removeFromSuperview];
         
         // Remove object from array if not in delete mode
-        if(!deleteMode)
-            [textLabelLayersArray removeLastObject];
+        if(!deleteMode)[textLabelLayersArray removeLastObject];
         [self callAddMoreLayers];
         return;
     }
     
-    //Here we write in Master Dictionary
-    currentLayer = [flyer addText];
+    if (editButtonGlobal == nil || [editButtonGlobal.uid isEqualToString:@""]) {
+        
+        //Here we write in Master Dictionary
+        currentLayer = [flyer addText];
+        
+    } else {
+        
+        currentLayer = editButtonGlobal.uid;
+        
+    }
     
     //Set Text of Layer
-    [flyer setFlyerText:msgTextView.text Uid:currentLayer];
-    
-    [self.flyimgView renderLayer:currentLayer LayerDictionary:[flyer getLayerFromMaster:currentLayer]];
-    
-    
+    [flyer setFlyerText:currentLayer text:msgTextView.text ];
     
     [UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationDuration:0.4f];
@@ -2485,7 +2514,7 @@ int arrangeLayerIndex;
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:backBarButton,leftBarHelpButton,nil]];
     
     [self AddBottomTabs:libFlyer];
-    [self AddAllLayersIntoFront ];
+    [self AddAllLayersIntoFront2 ];
    
     [self hideAddMoreButton];
 
@@ -2901,7 +2930,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 
 
--(void)editLayer:(UIButton *)editButton{
+-(void)editLayer:(LayerTileButton *)editButton{
     
     editButtonGlobal = editButton;
    // [self chooseEdit];
@@ -4673,6 +4702,61 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
  * When we Back To Main View its Set
  * All Layers to Front for Edit and Delete
  */
+-(void)AddAllLayersIntoFront2 {
+    layerallow = 0 ;
+    selectedAddMoreLayerTab = ARRANGE_LAYERTAB;
+    [self removeBordersFromAllLayers];
+    
+    lableTouchFlag = NO;
+    symbolTouchFlag= NO;
+    iconTouchFlag = NO;
+    photoTouchFlag = NO;
+    
+    NSInteger layerScrollWidth = 55;
+    NSInteger layerScrollHeight = 40;
+    
+    if(textLabelLayersArray.count == 0 && photoLayersArray.count  == 0 && symbolLayersArray.count == 0 && iconLayersArray == 0){
+        [self AddScrollView:addMoreLayerOrSaveFlyerLabel];
+        return;
+    }
+    
+    //Adding Text of Flyer In ScrollView
+    if(textLabelLayersArray){
+        
+        if ([layersDic objectForKey:currentLayer]== nil) {
+            UILabel *label1 = (UILabel *) textLabelLayersArray.lastObject;
+            UILabel *label = [[UILabel alloc] initWithFrame:label1.frame];
+            label.text = label1.text;
+        
+            LayerTileButton *layerButton = [LayerTileButton  buttonWithType:UIButtonTypeCustom];
+            layerButton.uid = currentLayer;
+            layerButton.frame =CGRectMake(0, 5,layerScrollWidth, layerScrollHeight);
+        
+            [layerButton addTarget:self action:@selector(editLayer:) forControlEvents:UIControlEventTouchUpInside];
+        
+            [layerButton setBackgroundColor:[UIColor clearColor]];
+            [layerButton.layer setBorderWidth:2];
+            UIColor * c = [UIColor lightGrayColor];
+            [layerButton.layer setCornerRadius:8];
+            [layerButton.layer setBorderColor:c.CGColor];
+        
+            label.frame  = CGRectMake(layerButton.frame.origin.x+5, layerButton.frame.origin.y-2, layerButton.frame.size.width-10, layerButton.frame.size.height-7);
+            [layerButton addSubview:label];
+            layerButton.tag = [[NSString stringWithFormat:@"%@%d",@"111",textLabelLayersArray.count -1] integerValue];
+            
+            [layerScrollView addSubview:layerButton];
+            [layersDic setValue:layerButton forKey:currentLayer];
+
+        }
+    }
+    [self layoutScrollImages:layerScrollView scrollWidth:layerScrollWidth scrollHeight:layerScrollHeight];
+    [self AddScrollView:layerScrollView];
+    
+    deleteMode = NO;
+    doStopWobble = YES;
+
+}
+
 -(void)AddAllLayersIntoFront{
     
     layerallow = 0 ;
@@ -4684,11 +4768,11 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     iconTouchFlag = NO;
     photoTouchFlag = NO;
     
-    if(layerScrollView){
-        [layerScrollView removeFromSuperview];
-    }
-    layerScrollView = nil;
-    layerScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(13, 0,300,130)];
+    //if(layerScrollView){
+        //[layerScrollView removeFromSuperview];
+    //}
+    //layerScrollView = nil;
+ 
     
     NSInteger layerScrollWidth = 55;
     NSInteger layerScrollHeight = 40;
@@ -4703,11 +4787,12 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         
         for(int text=0; text<[textLabelLayersArray count]; text++){
             
-            UILabel *label1 = (UILabel *) textLabelLayersArray[text];
+            UILabel *label1 = (UILabel *) textLabelLayersArray.lastObject;
             UILabel *label = [[UILabel alloc] initWithFrame:label1.frame];
             label.text = label1.text;
             
-            UIButton *layerButton = [UIButton  buttonWithType:UIButtonTypeCustom];
+            LayerTileButton *layerButton = [LayerTileButton  buttonWithType:UIButtonTypeCustom];
+            layerButton.uid = currentLayer;
             layerButton.frame =CGRectMake(0, 5,layerScrollWidth, layerScrollHeight);
             
             [layerButton addTarget:self action:@selector(editLayer:) forControlEvents:UIControlEventTouchUpInside];
@@ -4720,7 +4805,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
             
             label.frame  = CGRectMake(layerButton.frame.origin.x+5, layerButton.frame.origin.y-2, layerButton.frame.size.width-10, layerButton.frame.size.height-7);
             [layerButton addSubview:label];
-            layerButton.tag = [[NSString stringWithFormat:@"%@%d",@"111",text] integerValue];
+            layerButton.tag = [[NSString stringWithFormat:@"%@",@"111"] integerValue];
             
             
             [layerScrollView addSubview:layerButton];
