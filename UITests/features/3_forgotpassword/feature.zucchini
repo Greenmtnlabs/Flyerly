@@ -7,18 +7,15 @@ Then on the "SignIn" screen:
 Then on the "Forgot" screen:
   Take a screenshot
   Tap "Reset Password"
-  Wait for "5" seconds
   Take a screenshot
   Confirm "OK"
-  Type "TeamLeadSQA" in the "Username" field
+  Type "riksof.yahoo" in the "Username" field
   Tap "Reset Password"
-  Wait for "5" seconds
   Take a screenshot
   Confirm "OK"
   Clear the "Username" field
-  Type "RehanAli" in the "Username" field
+  Type "teamleadsqa1" in the "Username" field
   Tap "Reset Password"
-  Wait for "5" seconds
   Take a screenshot
   Confirm "OK"
   Tap "Back"
