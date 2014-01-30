@@ -32,6 +32,8 @@
 
 -(void)setFlyerTextColor :(NSString *)uid RGBColor:(id)rgb;
 
+-(void)setFlyerTextSize :(NSString *)uid Size:(UIFont *)sz;
+
 
 -(NSString *)addPhoto;
 -(NSString *)addSymbols;

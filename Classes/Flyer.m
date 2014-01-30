@@ -80,7 +80,7 @@
     //Add Defaualt dictionary
     NSMutableDictionary *textDetailDictionary = [[NSMutableDictionary alloc] init];
     textDetailDictionary[@"text"] = @"Defualt";
-    textDetailDictionary[@"fontname"] = @"HelveticaNeueInterface-M3";
+    textDetailDictionary[@"fontname"] = @".HelveticaNeueInterface-M3";
     textDetailDictionary[@"fontsize"] = @"17.000000";
     textDetailDictionary[@"textcolor"] = @"0.000000, 0.000000, 0.000000";
     textDetailDictionary[@"textWhitecolor"] = @"0.000000, 1.000000";
@@ -93,6 +93,7 @@
     
     
     [masterLayers setValue:textDetailDictionary forKey:uniqueId];
+    [self.flyImageView renderLayer:uniqueId layerDictionary:textDetailDictionary];
     
     return uniqueId;
 }
@@ -159,6 +160,26 @@
     
     [self.flyImageView renderLayer:uid layerDictionary:textDetailDictionary];
 
+
+}
+
+/*
+ * Here we Set Text Size
+ */
+-(void)setFlyerTextSize :(NSString *)uid Size:(UIFont *)sz{
+    
+    NSMutableDictionary *textDetailDictionary = [[NSMutableDictionary alloc] init];
+    textDetailDictionary = [self getLayerFromMaster:uid];
+    
+    UILabel *labelToStore = [[UILabel alloc]init];
+    labelToStore.font = sz;
+    
+    [textDetailDictionary setValue:[NSString stringWithFormat:@"%f", labelToStore.font.pointSize] forKey:@"fontsize"];
+
+    // Set to Master Dictionary
+    [masterLayers setValue:textDetailDictionary forKey:uid];
+    
+    [self.flyImageView renderLayer:uid layerDictionary:textDetailDictionary];
 
 }
 
@@ -266,13 +287,15 @@
 +(NSString *)newFlyerPath{
     
     PFUser *user = [PFUser currentUser];
+    NSError *error;
     
     //Getting Home Directory
 	NSString *homeDirectoryPath = NSHomeDirectory();
 	NSString *usernamePath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/Flyr",[user objectForKey:@"username"]]];
     
     
-    if ([[NSFileManager defaultManager] fileExistsAtPath:usernamePath isDirectory:NULL]) {
+    if ([[NSFileManager defaultManager] fileExistsAtPath:usernamePath isDirectory:NULL])
+            [[NSFileManager defaultManager] createDirectoryAtPath:usernamePath withIntermediateDirectories:YES attributes:nil error:&error];
         
         NSLog(@"Path Found");
         
@@ -294,11 +317,8 @@
         
         NSString *flyerPath = [usernamePath stringByAppendingString:[NSString stringWithFormat:@"/%d",maxnum +1]];
         
-        return flyerPath;
-    }
-    
+    return flyerPath;
 
-    return @"";
 }
 
 @end

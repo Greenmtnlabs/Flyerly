@@ -903,7 +903,8 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 			selectedSize = [sizeStr intValue];
 			selectedFont = [selectedFont fontWithSize:selectedSize];
 			msgTextView.font = selectedFont;
-            ((CustomLabel*)[self textLabelLayersArray][arrangeLayerIndex]).font =selectedFont;
+            [flyer setFlyerTextSize:currentLayer Size:selectedFont];
+           // ((CustomLabel*)[self textLabelLayersArray][arrangeLayerIndex]).font =selectedFont;
             
             // Add border to selected layer thumbnail
             CALayer * l = [tempView layer];

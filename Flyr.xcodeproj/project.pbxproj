@@ -3750,6 +3750,15 @@
 			name = ShareScreen;
 			sourceTree = "<group>";
 		};
+		200D19691899D73000EAD645 /* LayerTileButton */ = {
+			isa = PBXGroup;
+			children = (
+				200D196618998BEA00EAD645 /* LayerTileButton.h */,
+				200D196718998BEA00EAD645 /* LayerTileButton.m */,
+			);
+			name = LayerTileButton;
+			sourceTree = "<group>";
+		};
 		2013528A188C588100822073 /* Comments */ = {
 			isa = PBXGroup;
 			children = (
@@ -4052,13 +4061,12 @@
 		20F3597C1888DC8A001376B6 /* CreateFlyer */ = {
 			isa = PBXGroup;
 			children = (
+				200D19691899D73000EAD645 /* LayerTileButton */,
 				2046355F1895E47100A94C42 /* Models */,
 				204635661895F90900A94C42 /* ImageView */,
 				0DF3A2C3108DF1D200D6C887 /* CreateFlyerController.h */,
 				0DF3A2C4108DF1D200D6C887 /* CreateFlyerController.m */,
 				0DFC531A109576AB00B18478 /* CreateFlyerController.xib */,
-				200D196618998BEA00EAD645 /* LayerTileButton.h */,
-				200D196718998BEA00EAD645 /* LayerTileButton.m */,
 			);
 			name = CreateFlyer;
 			sourceTree = "<group>";
