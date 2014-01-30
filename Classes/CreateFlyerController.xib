@@ -19,11 +19,11 @@
                 <outlet property="colorTabButton" destination="RCh-PH-bvk" id="kzT-0A-OKE"/>
                 <outlet property="contextView" destination="rbq-e2-wbO" id="BDJ-TX-Ld1"/>
                 <outlet property="flyerBorder" destination="rR0-dC-sak" id="y4N-N4-MId"/>
+                <outlet property="flyimgView" destination="Xaq-YE-kc7" id="USc-nV-Q14"/>
                 <outlet property="fontBorderTabButton" destination="E2L-Wc-n71" id="qIM-iL-HJk"/>
                 <outlet property="fontEditButton" destination="Rgs-rs-7a8" id="E8j-if-9v8"/>
                 <outlet property="fontTabButton" destination="zu1-aU-CE3" id="4N8-mM-vZ8"/>
                 <outlet property="heightTabButton" destination="5Ya-yN-kTr" id="RhP-af-MbU"/>
-                <outlet property="imgView" destination="Xaq-YE-kc7" id="te3-JW-Ibt"/>
                 <outlet property="libBackground" destination="wtn-Zi-MKo" id="Lbb-GH-gzo"/>
                 <outlet property="libFlyer" destination="P8i-Fw-Gci" id="DAb-aV-gaf"/>
                 <outlet property="libPhoto" destination="qGs-4G-Rgw" id="0fl-Oq-GpK"/>

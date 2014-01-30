@@ -6,6 +6,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Parse/Parse.h>
 #import "CustomLabel.h"
 #import "EBPurchase.h"
 #import "FlyerlySingleton.h"
@@ -13,14 +14,25 @@
 #import "GalleryViewController.h"
 #import "CameraViewController.h"
 #import "Flyer.h"
+#import "FlyerImageView.h"
+#import <QuartzCore/QuartzCore.h>
+#import <AssetsLibrary/AssetsLibrary.h>
+#import "Common.h"
+#import "FlyrAppDelegate.h"
+#import "SaveFlyerController.h"
+#import "ShareViewController.h"
+#import "HelpController.h"
+#import "LoadingView.h"
+#import "Flurry.h"
+#import "SKProduct+LocalPrice.h"
 
 
-@class FlyerlySingleton,CameraViewController,GalleryViewController;
+@class FlyerlySingleton,CameraViewController,GalleryViewController,Flyer,FlyerImageView;
 @interface CreateFlyerController :ParentViewController<UIActionSheetDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, EBPurchaseDelegate>
 {
     int layerallow;
     FlyerlySingleton *globle;
-	UIImageView *imgView;
+
 	UIImageView *templateBckgrnd;
 	UIImageView *textBackgrnd;
 	UIImageView *photoImgView;
@@ -51,7 +63,6 @@
 	NSString *imageNameNew;
 	UIFont *selectedFont;
 	NSString *selectedText;
-	UIImage *selectedTemplate;
 	UIImage *selectedSymbol;
 	UIImage *selectedIcon;
 	NSInteger selectedSize;
@@ -86,17 +97,10 @@
 	NSArray *borderArray;
 	NSArray *fontArray;
 
-    NSMutableArray *symbolLayersArray;
-    NSMutableArray *iconLayersArray;
-    NSMutableArray *photoLayersArray;
+   
+
     NSMutableArray *textEditLayersArray;
-    NSMutableArray *textLabelLayersArray;
-
-    NSMutableArray *cpySymbolLayersArray;
-    NSMutableArray *cpyIconLayersArray;
-    NSMutableArray *cpyPhotoLayersArray;
-    NSMutableArray *cpyTextLabelLayersArray;
-
+ 
 	UIAlertView *warningAlert ;
 	UIAlertView *discardAlert ;
 	UIAlertView *deleteAlert ;
@@ -126,16 +130,22 @@
     UIButton *crossButtonGlobal;
     UIButton *editButtonGlobal;    
     UIBarButtonItem *rightUndoBarButton;
-    
-    Flyer *flyer;
     GalleryViewController *nbuGallary;
     CameraViewController *nbuCamera;
+    FlyerImageView *flyerImageView;
 }
 
+@property(nonatomic, strong) NSMutableArray *textLabelLayersArray;
 @property(nonatomic, strong) NSMutableArray *cpyTextLabelLayersArray;
+@property(nonatomic, strong) NSMutableArray *symbolLayersArray;
 @property(nonatomic, strong) NSMutableArray *cpySymbolLayersArray;
+@property(nonatomic, strong) NSMutableArray *iconLayersArray;
 @property(nonatomic, strong) NSMutableArray *cpyIconLayersArray;
+@property(nonatomic, strong) NSMutableArray *photoLayersArray;
 @property(nonatomic, strong) NSMutableArray *cpyPhotoLayersArray;
+
+
+
 @property (nonatomic,strong)  UIImageView *photoImgView;
 @property(nonatomic, strong)  UIImageView *symbolImgView;
 @property(nonatomic, strong)  UIImageView *iconImgView;
@@ -190,6 +200,9 @@
 
 
 @property(nonatomic, strong) IBOutlet UIImageView *imgView;
+
+@property(nonatomic, strong) IBOutlet FlyerImageView *flyimgView;
+
 @property(nonatomic, strong) IBOutlet UIView *contextView;
 
 // These are ContextViews Library
@@ -226,6 +239,8 @@
 @property (nonatomic,strong)IBOutlet UIButton *widthTabButton;
 @property (nonatomic,strong)IBOutlet UIButton *heightTabButton;
 
+@property (nonatomic,strong) Flyer *flyer;
+@property(strong,nonatomic) NSString *currentLayer;
 
 
 -(void)loadCustomPhotoLibrary;

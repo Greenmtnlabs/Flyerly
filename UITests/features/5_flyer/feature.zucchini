@@ -1,0 +1,50 @@
+tart on the "Welcome" screen:
+  Tap "SignIn"
+
+Then on the "SignIn" screen:
+  Clear the "Username" field
+  Type "riksof.yahoo" in the "Username" field
+  Type "riksof123" in the "Password" field
+  Tap "Sign In"
+  
+Then on the "Home" screen:
+  Tap "flyer"
+	
+Then on the "flyer" screen""
+  Take a screenshot
+	Tap "Text"
+	
+Then on the "text" screen:
+  Take a screenshot
+	Type "RIKSOF" in the "text" field
+	Tap "Next"
+	Tap "font5"
+	Tap "Color"
+	Tap "color3"
+	Tap "Size"
+	Tap "size20"
+	Tap "Border"
+	Tap "border5"
+	Take a screenshot
+	Tap "Edit"
+	Type "
+	SQA" in the "text" field
+	Tap
+	Tap "Next"
+	Tap "font4"
+	Take a screenshot
+	Tap "Done"
+	
+Then on the "layer" screen:
+  Take a screenshot
+  Tap "Back"
+	
+TThen on the "Home" screen:
+  Tap "Settings"
+
+Then on the "Settings" screen:
+  Tap "Sign Out"
+  Confirm "Sign out"
+	
+	
+	

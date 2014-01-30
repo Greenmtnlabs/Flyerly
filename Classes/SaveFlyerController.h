@@ -11,7 +11,7 @@
 #import "CreateFlyerController.h"
 #import <MessageUI/MessageUI.h>
 
-@class ShareViewController;
+@class ShareViewController,CreateFlyerController;
 @class FBSession;
 
 @interface SaveFlyerController : UIViewController<MFMailComposeViewControllerDelegate,UIAlertViewDelegate,UIAlertViewDelegate,UITextFieldDelegate> {

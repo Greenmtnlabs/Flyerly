@@ -42,6 +42,7 @@
      
      // Set for Empty CreateFlyer Screen
      createFlyer.flyerNumber = -1;
+     createFlyer.flyerPath = @"/Users/khurram/Library/Application Support/iPhone Simulator/7.0.3/Applications/6DD6340B-FF6F-449B-BC50-EFF3D770A4B6/Documents/ssprny0hs1qb6abn02f0v26ol/Flyr/0";
 	[self.navigationController pushViewController:createFlyer animated:YES];
      
 }
@@ -49,22 +50,24 @@
 -(IBAction)doNew:(id)sender{
     [Flurry logEvent:@"Create Flyer"];
 
+    NSString *flyPath = [Flyer newFlyerPath];
+
+    //Here We set Source for Flyer screen
+    flyer = [[Flyer alloc]initWithPath:flyPath];
+    
 	createFlyer = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
     createFlyer.flyerNumber = -1;
-    createFlyer.flyerPath = [Flyer newFlyerPath];
-    
+    createFlyer.flyerPath = flyPath;
+    createFlyer.flyer = flyer;
 	[self.navigationController pushViewController:createFlyer animated:YES];
 }
 //End
 
-// Load View Flyr Method With Thread
--(void)loadFlyerView{
-	tpController = [[FlyrViewController alloc]initWithNibName:@"FlyrViewController" bundle:nil];
-	[self.navigationController pushViewController:tpController animated:YES];
-}
+
 
 -(IBAction)doOpen:(id)sender{
-	[NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(loadFlyerView) userInfo:nil repeats:NO];
+    tpController = [[FlyrViewController alloc]initWithNibName:@"FlyrViewController" bundle:nil];
+	[self.navigationController pushViewController:tpController animated:YES];
 }
 //End
 
@@ -168,13 +171,10 @@
         numberOfFlyers = 4;
     }
     
-   // [createFlyrLabel setFont:[UIFont fontWithName:BUTTON_FONT size:13]];
     [createFlyrLabel setText:NSLocalizedString(@"create_flyer", nil)];
     
-    //[savedFlyrLabel setFont:[UIFont fontWithName:BUTTON_FONT size:13]];
     [savedFlyrLabel setText:NSLocalizedString(@"saved_flyers", nil)];
 
-    //[inviteFriendLabel setFont:[UIFont fontWithName:BUTTON_FONT size:13]];
     [inviteFriendLabel setText:NSLocalizedString(@"invite_friends", nil)];
     spController = [[ShareSettingViewController alloc]initWithNibName:@"SettingViewController" bundle:nil];
     
@@ -287,15 +287,7 @@
             }
             
         }
-        
-        /*else if(i  == 4){
-            fifthFlyer.image = [LauchViewController imageWithImage:currentFlyerImage scaledToSize:size];
-            fifthFlyer.tag = i;
-        } else if(i  == 5){
-            sixthFlyer.image = [LauchViewController imageWithImage:currentFlyerImage scaledToSize:size];
-            sixthFlyer.tag = i;
-            break;
-        }*/
+
 	}
 
 	for(int j =0;j< [detailSortedFiles count];j++)

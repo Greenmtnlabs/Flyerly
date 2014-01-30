@@ -11,6 +11,7 @@
 #import "FlyerlySingleton.h"
 #import "Reachability.h"
 #import "Flyer.h"
+#import "FlyerImageView.h"
 
 @class FlyrViewController;
 @class ShareSettingViewController;
@@ -52,6 +53,7 @@
     IBOutlet UIWebView *webview;
     IBOutlet UIButton *crossButton;
     NSArray *twtAcconts;
+    Flyer *flyer;
     
 
 }
