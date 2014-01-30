@@ -6,6 +6,7 @@
 //
 
 #import "CameraViewController.h"
+#import "CropViewController.h"
 
 @implementation CameraViewController
 
@@ -133,7 +134,7 @@
  */
 -(void) cropImage {
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
-    nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController" bundle:nil];
+    CropViewController *nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController" bundle:nil];
 
     // Pop the current view, and push the crop view.
     NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[[self navigationController] viewControllers]];
@@ -158,7 +159,7 @@
 - (IBAction)MovetoGallery:(id)sender{
     globle.NBUimage = nil;
     globle.gallerComesFromCamera = @"yes";
-    nbugallery = [[GalleryViewController alloc]initWithNibName:@"GalleryViewController" bundle:nil];
+    GalleryViewController *nbugallery = [[GalleryViewController alloc]initWithNibName:@"GalleryViewController" bundle:nil];
     [self.navigationController pushViewController:nbugallery animated:YES];
 }
 

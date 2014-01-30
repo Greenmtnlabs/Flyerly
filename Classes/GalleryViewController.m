@@ -1,52 +1,42 @@
 //
-//  GalleryViewController.m
-//  NBUKitDemo
+//  GalleryViewController.h
+//  Flyr
 //
-//  Created by Riksof Pvt. Ltd. on 22/Jan/2014.
-//  Copyright (c) 2013 CyberAgent Inc.
-//
-//  Licensed under the Apache License, Version 2.0 (the "License");
-//  you may not use this file except in compliance with the License.
-//  You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-//  Unless required by applicable law or agreed to in writing, software
-//  distributed under the License is distributed on an "AS IS" BASIS,
-//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//  See the License for the specific language governing permissions and
-//  limitations under the License.
+//  Developed by RIKSOF (Private) Limited
+//  Copyright Flyerly. All rights reserved.
 //
 
 #import "GalleryViewController.h"
+#import "CropViewController.h"
 
 @implementation GalleryViewController
 
-- (void)commonInit
-{
+/**
+ * Initialize the gallery.
+ */
+- (void)commonInit {
     [super commonInit];
     
-    self.imageLoader = self;
+    // Load all the assets from photo library.
+    [[NBUAssetsLibrary sharedLibrary] allImageAssetsWithResultBlock:^(NSArray * assets,NSError * error) {
+        if (!error) {
+            self.objectArray = assets;
+            [self setShowThumbnailsView:YES];
+        }
+     }];
 }
 
-- (void)loadView
-{
-    [NSBundle  loadNibNamed:@"GalleryViewController"
-                     owner:self
-                   options:nil];
-    
-}
-
-
-
-
-- (void)viewDidLoad
-{
+/**
+ * Load the view.
+ */
+- (void)viewDidLoad {
     [super viewDidLoad];
      globle = [FlyerlySingleton RetrieveSingleton];
     
+    // Setup the navigation bar.
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
-    //BackButton
+    
+    // BackButton
     UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     backButton.titleLabel.font = [UIFont systemFontOfSize:14.0];
     [backButton addTarget:self action:@selector(goback) forControlEvents:UIControlEventTouchUpInside];
@@ -55,61 +45,21 @@
     UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     [self.navigationItem setLeftBarButtonItem:leftBarButton];
     
+    // Right button
     UIButton *rigButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:rigButton];
     [self.navigationItem setRightBarButtonItem:rightBarButton];
-    
-    [[NBUAssetsLibrary sharedLibrary] allImageAssetsWithResultBlock:^(NSArray * assets,
-                                                                      NSError * error)
-    {
-        if (!error)
-        {
-            self.objectArray = assets;
-            [self setShowThumbnailsView:YES];
-        }
-    }];
 }
 
-#pragma mark  View Appear Methods
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:YES];
 
-}
-
-- (void)imageForObject:(id)object size:(NBUImageSize)size
-           resultBlock:(NBUImageLoaderResultBlock)resultBlock
-{
-    // Just let the default loader to do it
-    [[NBUImageLoader sharedLoader] imageForObject:object
-                                             size:size
-                                      resultBlock:resultBlock];
-    
-}
-
-- (NSString *)captionForObject:(id)object
-{
-    // An asset?
-    if ([object isKindOfClass:[NBUAsset class]])
-    {
-        return ((NBUAsset *)object).URL.absoluteString;
-    }
-    
-    // Or just the object description
-    if ([object isKindOfClass:[NSObject class]])
-    {
-        return ((NSObject *)object).description;
-    }
-    
-    // No caption
-    return nil;
-}
+#pragma mark - Gallery methods
 
 /**
  * Crop image using NBUKit
  */
 -(void) cropImage {
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
-    nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController" bundle:nil];
+    CropViewController *nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController" bundle:nil];
     
     // Pop the current view, and push the crop view.
     NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[[self navigationController] viewControllers]];
@@ -118,39 +68,29 @@
     [[self navigationController] setViewControllers:viewControllers animated:YES];
 }
 
-- (void)setCurrentIndex:(NSInteger)index
-               animated:(BOOL)animated
-{
-    [self.imageLoader imageForObject:self.objectArray[index]
-                            size:NBUImageSizeFullResolution
-                     resultBlock:^(UIImage * image,
-                                   NSError * error)
+
+#pragma mark - Button event handlers
+
+/**
+ * Select this image and go to the crop and filter screen.
+ */
+- (void)thumbnailWasTapped:(UIView *)sender {
+	[self.imageLoader imageForObject:self.objectArray[sender.tag]
+                                size:NBUImageSizeFullResolution
+                         resultBlock:^(UIImage * image,
+                                       NSError * error)
      {
-       globle.NBUimage = image;
+         globle.NBUimage = image;
      }];
-}
-
-
-
-- (void)setShowThumbnailsView:(BOOL)yesOrNo
-{
-    [self setShowThumbnailsView:yesOrNo
-                       animated:YES];
-    
-}
-
-
-- (IBAction)thumbnailWasTapped:(UIView *)sender {
-	[self setCurrentIndex:sender.tag
-                 animated:NO];
     [self cropImage];
 }
 
-
--(void)goback{
+/**
+ * Cancel and go back.
+ */
+- (void)goBack {
     globle.NBUimage = nil;
     [self.navigationController popViewControllerAnimated:YES];
-
 }
 
 @end
