@@ -300,8 +300,6 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		2002C89618888CD4005B18C9 /* SaveFlyerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2002C89418888CD4005B18C9 /* SaveFlyerCell.m */; };
 		2002C89718888CD4005B18C9 /* SaveFlyerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2002C89518888CD4005B18C9 /* SaveFlyerCell.xib */; };
-		200384741875A357008909F9 /* PresetFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 200384721875A357008909F9 /* PresetFilterViewController.m */; };
-		200384751875A357008909F9 /* PresetFilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 200384731875A357008909F9 /* PresetFilterViewController.xib */; };
 		200694DD17DB471900D59A1B /* poweredbyfoursquare_gray.png in Resources */ = {isa = PBXBuildFile; fileRef = 200694DB17DB471900D59A1B /* poweredbyfoursquare_gray.png */; };
 		200694DE17DB471900D59A1B /* poweredbyfoursquare_gray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 200694DC17DB471900D59A1B /* poweredbyfoursquare_gray@2x.png */; };
 		200773A21887BB8B00448346 /* addbg_border_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 200773921887BB8B00448346 /* addbg_border_selected.png */; };
@@ -1624,9 +1622,6 @@
 		2002C89318888CD4005B18C9 /* SaveFlyerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveFlyerCell.h; sourceTree = "<group>"; };
 		2002C89418888CD4005B18C9 /* SaveFlyerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveFlyerCell.m; sourceTree = "<group>"; };
 		2002C89518888CD4005B18C9 /* SaveFlyerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SaveFlyerCell.xib; sourceTree = "<group>"; };
-		200384711875A357008909F9 /* PresetFilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresetFilterViewController.h; sourceTree = "<group>"; };
-		200384721875A357008909F9 /* PresetFilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PresetFilterViewController.m; sourceTree = "<group>"; };
-		200384731875A357008909F9 /* PresetFilterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PresetFilterViewController.xib; sourceTree = "<group>"; };
 		200694DB17DB471900D59A1B /* poweredbyfoursquare_gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = poweredbyfoursquare_gray.png; sourceTree = "<group>"; };
 		200694DC17DB471900D59A1B /* poweredbyfoursquare_gray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "poweredbyfoursquare_gray@2x.png"; sourceTree = "<group>"; };
 		200773921887BB8B00448346 /* addbg_border_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addbg_border_selected.png; sourceTree = "<group>"; };
@@ -3752,16 +3747,6 @@
 			name = ShareScreen;
 			sourceTree = "<group>";
 		};
-		200384701875A29D008909F9 /* Filter */ = {
-			isa = PBXGroup;
-			children = (
-				200384711875A357008909F9 /* PresetFilterViewController.h */,
-				200384721875A357008909F9 /* PresetFilterViewController.m */,
-				200384731875A357008909F9 /* PresetFilterViewController.xib */,
-			);
-			name = Filter;
-			sourceTree = "<group>";
-		};
 		2013528A188C588100822073 /* Comments */ = {
 			isa = PBXGroup;
 			children = (
@@ -3845,7 +3830,6 @@
 		2032DCA718719D7F007036B2 /* NBU */ = {
 			isa = PBXGroup;
 			children = (
-				200384701875A29D008909F9 /* Filter */,
 				20FA7E6E1872AAE10057C3F3 /* Camera */,
 				2032DCCC1871BDE1007036B2 /* CropImage */,
 				2032DCCB1871BDCE007036B2 /* Gallery */,
@@ -4702,7 +4686,6 @@
 				652CFEBE171698A300F52836 /* twitter_selected_button.png in Resources */,
 				652CFEBF171698A300F52836 /* twitter_selected_button@2x.png in Resources */,
 				652CFED417169BF200F52836 /* create_flyer_selected.png in Resources */,
-				200384751875A357008909F9 /* PresetFilterViewController.xib in Resources */,
 				652CFED517169BF200F52836 /* create_flyer_selected@2x.png in Resources */,
 				652CFED617169BF200F52836 /* create_flyer.png in Resources */,
 				652CFED717169BF200F52836 /* create_flyer@2x.png in Resources */,
@@ -5779,7 +5762,6 @@
 				0DFC5322109576AB00B18478 /* ShareSettingViewController.m in Sources */,
 				2002C89618888CD4005B18C9 /* SaveFlyerCell.m in Sources */,
 				E8C7C36910976BFC0064935A /* SaveFlyerController.m in Sources */,
-				200384741875A357008909F9 /* PresetFilterViewController.m in Sources */,
 				2036661C188DB67300C71EAA /* FlyerUser.m in Sources */,
 				202C4801187D6E4B00FE0975 /* BitlyTwitterOAuthManager.m in Sources */,
 				49B8897D1886524D003766AD /* LoadingView.m in Sources */,
