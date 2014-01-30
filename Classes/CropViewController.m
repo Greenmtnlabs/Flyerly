@@ -9,6 +9,7 @@
 #import "CropViewController.h"
 
 @implementation CropViewController
+@synthesize desiredImageSize;
 @synthesize globle;
 
 #pragma mark - Initialization
@@ -59,10 +60,10 @@
 
 - (void)viewDidLoad {
     // Set working size for filters.
-    self.workingSize = CGSizeMake(200, 200);
+    self.workingSize = desiredImageSize;
     
     // Set the grid size.
-    self.cropGuideSize = CGSizeMake(200, 200);
+    self.cropGuideSize = desiredImageSize;
     
     // Configure and set all available filters
     self.filters = [NBUFilterProvider availableFilters];

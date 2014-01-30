@@ -1611,6 +1611,7 @@ int arrangeLayerIndex;
 -(void)loadCustomPhotoLibrary{
     
     nbuGallary = [[GalleryViewController alloc] initWithNibName:@"GalleryViewController" bundle:nil];
+    nbuGallary.desiredImageSize = CGSizeMake(300, 300);
     globle.NBUimage = nil;
     [self.navigationController pushViewController:nbuGallary animated:YES];
 
@@ -1675,6 +1676,7 @@ int arrangeLayerIndex;
 -(void)openCustomCamera{
 
     nbuCamera = [[CameraViewController alloc]initWithNibName:@"CameraViewController" bundle:nil];
+    nbuCamera.desiredImageSize = CGSizeMake(300, 300);
     globle.NBUimage = nil;
     [self.navigationController pushViewController:nbuCamera animated:YES];
 
