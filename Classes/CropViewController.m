@@ -1,108 +1,106 @@
 //
 //  CropViewController.m
-//  NBUKitDemo
+//  Flyr
 //
-//  Created by Riksof Pvt. Ltd. on 22/Jan/2014.
-//  Copyright (c) 2012 CyberAgent Inc.
-//
-//  Licensed under the Apache License, Version 2.0 (the "License");
-//  you may not use this file except in compliance with the License.
-//  You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-//  Unless required by applicable law or agreed to in writing, software
-//  distributed under the License is distributed on an "AS IS" BASIS,
-//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//  See the License for the specific language governing permissions and
-//  limitations under the License.
+//  Developed by RIKSOF (Private) Limited
+//  Copyright Flyerly. All rights reserved.
 //
 
 #import "CropViewController.h"
 
 @implementation CropViewController
+@synthesize desiredImageSize;
 @synthesize globle;
 
-- (void)awakeFromNib
-{
-    [super awakeFromNib];
-    self.globle = [FlyerlySingleton RetrieveSingleton];
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
+#pragma mark - Initialization
+
+/**
+ * This view is initialized through the NIB.
+ */
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     
-    //Done Button
-    UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    
-    [doneButton addTarget:self action:@selector(apply:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [doneButton setBackgroundImage:[UIImage imageNamed:@"crop_button"] forState:UIControlStateNormal];
-    UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
-    
-    //Next Button
-    UIButton *nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    [nextButton addTarget:self action:@selector(gotoFilterImage) forControlEvents:UIControlEventTouchUpInside];
-    [nextButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
-    UIBarButtonItem *nextBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
-    
-    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:nextBarButton,doneBarButton,nil]];
-    
-    
-    //BackButton
-    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    backButton.titleLabel.font = [UIFont systemFontOfSize:14.0];
-    [backButton addTarget:self action:@selector(goback) forControlEvents:UIControlEventTouchUpInside];
-    [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
-    backButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-    [self.navigationItem setLeftBarButtonItem:leftBarButton];
-    
-    // Configure the controller
-   // self.cropGuideSize = CGSizeMake(247.0, 227.0); // Matches our cropGuideView's image
-    self.cropGuideSize = CGSizeMake(247.0, 227.0); // Matches our cropGuideView's image
-  
-   
-    self.maximumScaleFactor = 10.0;                // We may get big pixels with this factor!
-    
-    // Our test image
-    self.image = self.globle.NBUimage;
-    
-    // Our resultBlock
-    __unsafe_unretained CropViewController * weakSelf = self;
-    self.resultBlock = ^(UIImage * image)
-    {
-        // *** Do whatever you want with the resulting image here ***
+    if (( self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil] )) {
+        self.globle = [FlyerlySingleton RetrieveSingleton];
         
-        // Preview the changes
-        weakSelf.cropView.image = image;
-        weakSelf.globle.NBUimage = image;
-    };
+        [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
+
+    
+        // Done Button
+        UIButton *nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+        [nextButton addTarget:self action:@selector(onDone) forControlEvents:UIControlEventTouchUpInside];
+        [nextButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
+        UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
+    
+        [self.navigationItem setRightBarButtonItem:doneBarButton];
+    
+        // BackButton
+        UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+        backButton.titleLabel.font = [UIFont systemFontOfSize:14.0];
+        [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+        [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
+        backButton.showsTouchWhenHighlighted = YES;
+        UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+        [self.navigationItem setLeftBarButtonItem:leftBarButton];
+        
+        // Set the title view.
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-35, -6, 50, 50)];
+        label.backgroundColor = [UIColor clearColor];
+        label.font = [UIFont fontWithName:TITLE_FONT size:18];
+        label.textAlignment = UITextAlignmentCenter;
+        label.textColor = [UIColor whiteColor];
+        label.text = @"CROP & FILTER";
+        
+        self.navigationItem.titleView = label;
+    }
+    
+    return self;
 }
 
-- (void)setCropView:(NBUCropView *)cropView
-{
-    super.cropView = cropView;
-    cropView.allowAspectFit = YES; // The image can be downsized until it fits inside the cropGuideView
+#pragma mark - View Events
+
+- (void)viewDidLoad {
+    // Set working size for filters.
+    self.workingSize = desiredImageSize;
+    
+    // Set the grid size.
+    self.cropGuideSize = desiredImageSize;
+    
+    // Configure and set all available filters
+    self.filters = [NBUFilterProvider availableFilters];
+    
+    // Configure crop view. We may get big pixels with this factor!
+    self.maximumScaleFactor = 10.0;
+    self.cropView.allowAspectFit = YES;
+    
+    // Use the image from filters for cropping.
+    self.filterView.image = self.globle.NBUimage;
+    self.image = self.filterView.image;
+    
+    [super viewDidLoad];
 }
 
--(void)goback{
-    self.globle.NBUimage = nil;
-      [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"Camerabottom"] forBarMetrics:UIBarMetricsDefault];
+#pragma - Button Event Handlers
+
+/**
+ * Go back to the last screen.
+ */
+-(void) goBack {
+    
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"Camerabottom"] forBarMetrics:UIBarMetricsDefault];
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+/**
+ * We are done, use the cropped and filtered image.
+ */
+-(void)onDone {
+    // Go back to the last screen.
     [self.navigationController popViewControllerAnimated:YES];
     
+    self.image = self.filterView.image;
+    self.globle.NBUimage = self.editedImage;
 }
-
-
-
-
--(void)gotoFilterImage{
-    nbuFilter = [[PresetFilterViewController alloc]initWithNibName:@"PresetFilterViewController" bundle:nil];
-    [nbuFilter awakeFromNib];
-    [self.navigationController pushViewController:nbuFilter animated:YES];
-    
-}
-
-
-
-
 
 @end
 

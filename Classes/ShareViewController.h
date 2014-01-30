@@ -42,15 +42,13 @@
 	NSString *imageFileName;
     FlyerlySingleton *globle;
 	FlyrViewController *fvController;
-	//SaveFlyerController *svController;
 	LoadingView *loadingView;
     UIDocumentInteractionController *dic;
     BOOL showbars;
     NSMutableArray  *photoTitles;         // Titles of images
     NSMutableArray  *photoSmallImageData; // Image data (thumbnail)
     NSMutableArray  *photoURLsLargeImage; // URL to larger image
-	OFFlickrAPIRequest *flickrRequest;
-    
+	
     int countOfSharingNetworks;
     
     NSMutableArray *listOfPlaces;

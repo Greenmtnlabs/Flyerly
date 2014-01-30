@@ -9,7 +9,6 @@
             <connections>
                 <outlet property="cameraLines" destination="R24-LX-G4Q" id="Hod-UC-CpV"/>
                 <outlet property="cameraView" destination="4" id="gI7-IU-C9E"/>
-                <outlet property="shootButton" destination="l4Y-bJ-bF3" id="baa-fB-3qh"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>
@@ -18,40 +17,6 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="468"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" id="17">
-                    <rect key="frame" x="0.0" y="419" width="320" height="44"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                    <items>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="22"/>
-                        <barButtonItem title="flash" width="69" style="done" id="18">
-                            <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <action selector="toggleFlashMode:" destination="4" id="1Ni-5x-rK1"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem title="focus" width="70" id="19">
-                            <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <action selector="toggleFocusMode:" destination="4" id="37"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem title="exp" width="70" id="20">
-                            <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <action selector="toggleExposureMode:" destination="4" id="38"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem title="wb" width="70" id="21">
-                            <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <action selector="toggleWhiteBalanceMode:" destination="4" id="39"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="23"/>
-                    </items>
-                    <color key="tintColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
-                    <color key="barTintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                </toolbar>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="camera_bottombg.png" id="EkM-Q2-85r">
                     <rect key="frame" x="0.0" y="345" width="320" height="123"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinY="YES" heightSizable="YES"/>
@@ -62,6 +27,9 @@
                     <state key="normal" image="camera_button.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="takePicture:" destination="4" eventType="touchUpInside" id="nZD-gx-4cn"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="r5v-4E-eSi">
                     <rect key="frame" x="33" y="386" width="47" height="45"/>
@@ -70,7 +38,7 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="MovetoGallery:" destination="-1" eventType="touchUpInside" id="jmA-WO-NAz"/>
+                        <action selector="moveToGallery:" destination="-1" eventType="touchUpInside" id="cvx-l5-6Fa"/>
                     </connections>
                 </button>
                 <view clipsSubviews="YES" contentMode="scaleToFill" id="4" customClass="NBUCameraView">
@@ -138,17 +106,15 @@
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
-                                <action selector="setCameraline:" destination="-1" eventType="touchUpInside" id="suV-Md-rky"/>
+                                <action selector="setCameraLine:" destination="-1" eventType="touchUpInside" id="D3z-CA-r5X"/>
                             </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <connections>
-                        <outlet property="exposureButton" destination="20" id="28"/>
                         <outlet property="flashButton" destination="KHn-mP-8i7" id="Abh-Ap-Ru3"/>
-                        <outlet property="focusButton" destination="19" id="30"/>
+                        <outlet property="shootButton" destination="l4Y-bJ-bF3" id="OQ0-lM-UlH"/>
                         <outlet property="toggleCameraButton" destination="41" id="42"/>
-                        <outlet property="whiteBalanceButton" destination="21" id="31"/>
                     </connections>
                 </view>
             </subviews>
