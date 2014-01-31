@@ -1,5 +1,5 @@
 class WelcomeScreen extends Screen
-  anchor: -> $('#Register');
+  anchor: -> $('#Register')
 
   constructor: ->
     super 'welcome'
