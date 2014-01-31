@@ -14,6 +14,7 @@
     NSMutableDictionary *layers;
 }
 
+-(void)renderFlyer:(NSMutableDictionary *)flyPieces;
 
 -(void)renderLayer :(NSString *)uid layerDictionary:(NSMutableDictionary *)layDic;
 

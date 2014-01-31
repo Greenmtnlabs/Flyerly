@@ -38,11 +38,17 @@
 // Load Create Flyr Method With Thread
  -(void)loadPhotoView{
      
+    NSString *flyPath = @"/Users/khurram/Library/Application Support/iPhone Simulator/7.0.3/Applications/7632F2F4-92E4-4427-BF0F-559C9E0E544F/Documents/nljaul89r1cfgvzrjp9z8udw1/Flyr/4";
+     
+    flyer = [[Flyer alloc]initWithPath:flyPath];
+     
+     
      createFlyer = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
      
      // Set for Empty CreateFlyer Screen
      createFlyer.flyerNumber = -1;
-     createFlyer.flyerPath = @"/Users/khurram/Library/Application Support/iPhone Simulator/7.0.3/Applications/6DD6340B-FF6F-449B-BC50-EFF3D770A4B6/Documents/ssprny0hs1qb6abn02f0v26ol/Flyr/0";
+     createFlyer.flyerPath = flyPath;
+     createFlyer.flyer = flyer;
 	[self.navigationController pushViewController:createFlyer animated:YES];
      
 }

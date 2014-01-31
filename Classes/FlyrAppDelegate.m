@@ -145,8 +145,6 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     // Bitly configuration
     [[BitlyConfig sharedBitlyConfig] setBitlyLogin:[flyerConfigurator bitLyLogin] bitlyAPIKey:[flyerConfigurator bitLyKey]];
     
-
-    
 	changesFlag = NO;
 
     // This flag represents the condition whether application setting has been altered first time
@@ -183,7 +181,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
             [navigationController setRootViewController:accountController];
         } else {
             lauchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
-            [navigationController pushViewController:lauchController animated:YES];
+            [navigationController setRootViewController:lauchController];
         }
     }
     

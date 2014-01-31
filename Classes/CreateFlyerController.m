@@ -288,6 +288,10 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 
 -(void)viewDidLoad{
 	[super viewDidLoad];
+    
+    NSMutableDictionary *flyerPieces = [flyer allKeys];
+    [self.flyimgView renderFlyer:flyerPieces];
+
  
     globle = [FlyerlySingleton RetrieveSingleton];
     [self.view setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
@@ -2533,6 +2537,7 @@ int arrangeLayerIndex;
     
     [self addBottomTabs:libFlyer];
     [self addAllLayersIntoFront2 ];
+    [flyer saveFlyer:currentLayer];
     currentLayer = @"";
     [self hideAddMoreButton];
 
