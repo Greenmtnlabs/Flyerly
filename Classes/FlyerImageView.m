@@ -30,6 +30,35 @@
     
 }
 
+
+
+/*
+ * Here we Delete One Layer from View
+ */
+-(void)deleteLayer :(NSString *)uid{
+    
+    CustomLabel *lble = [layers objectForKey:uid];
+    
+    int idx = lble.tag;
+
+    NSArray *ChildViews = [self subviews];
+    
+    for (UIView *child in ChildViews) {
+        
+        if (child.tag == idx) {
+            
+            //Remove From View
+            [child removeFromSuperview];
+            
+            //Remove From Views Dictionary
+            [layers removeObjectForKey:uid];
+        }
+    }
+    
+
+
+}
+
 /*
  * Here we create or update actual layer
  */
@@ -44,6 +73,7 @@
         if ([layers objectForKey:uid] == nil) {
             
             CustomLabel *lble = [[CustomLabel alloc] init];
+            lble.tag = layers.count;
             lble.backgroundColor = [UIColor clearColor];
             lble.textAlignment = UITextAlignmentCenter;
             lble.adjustsFontSizeToFitWidth = YES;
@@ -65,7 +95,8 @@
 
 
     } else {
-    
+
+        // Here We Write Code for Image
         UIImageView *img = nil;
         img = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 50, 50)];
     }
