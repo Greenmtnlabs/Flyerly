@@ -19,6 +19,8 @@
 
 -(void)saveFlyer :(NSString *)uid;
 
+-(void)deleteLayer :(NSString *)uid;
+
 
 
 -(NSMutableDictionary *)getLayerFromMaster :(NSString *)uid;

@@ -12,7 +12,7 @@ Then on the "Home" screen:
   Tap "Saved"
 
 Then on the "Saved" screen:
-	Tap "Back"
+  Tap "Back"
 	
 Then on the "Home" screen:
   Tap "Create"
@@ -54,7 +54,7 @@ Then on the "Home" screen:
   Tap "Settings"
 
 Then on the "Settings" screen:
-	Tap "Back"
+  Tap "Back"
 	
 Then on the "Home" screen:
   Tap "Settings"
@@ -74,7 +74,7 @@ Then on the "Home" screen:
   Tap "Saved"
 
 Then on the "Saved" screen:
-	Tap "Back"
+  Tap "Back"
 	
 Then on the "Home" screen:
   Tap "Flyer"
@@ -86,7 +86,7 @@ Then on the "Home" screen:
   Tap "Invite"
 	
 Then on the "Inivte" screen:
-	Tap "Back"
+  Tap "Back"
 
 Then on the "Home" screen:
   Tap "First Flyer"
@@ -116,7 +116,7 @@ Then on the "Home" screen:
   Tap "Settings"
 
 Then on the "Settings" screen:
-	Tap "Back"
+  Tap "Back"
 	
 Then on the "Home" screen:
   Tap "Settings"
@@ -124,20 +124,20 @@ Then on the "Home" screen:
 Then on the "Settings" screen:
   Tap "Sign Out"
   Confirm "Sign out"
-	
+
 Then on the "Welcome" screen:
   Tap "SignIn"
 
 Then on the "SignIn" screen:
   Tap "Twitter"
-	Wait for "15" Seconds
+  Wait for "15" Seconds
   
 Then on the "Home" screen:
   Take a screenshot
   Tap "Saved"
 
 Then on the "Saved" screen:
-	Tap "Back"
+  Tap "Back"
 	
 Then on the "Home" screen:
   Tap "Flyer"
@@ -149,7 +149,7 @@ Then on the "Home" screen:
   Tap "Invite"
 	
 Then on the "Inivte" screen:
-	Tap "Back"
+  Tap "Back"
 
 Then on the "Home" screen:
   Tap "First Flyer"
@@ -179,7 +179,7 @@ Then on the "Home" screen:
   Tap "Settings"
 
 Then on the "Settings" screen:
-	Tap "Back"
+  Tap "Back"
 	
 Then on the "Home" screen:
   Tap "Settings"
@@ -187,15 +187,3 @@ Then on the "Home" screen:
 Then on the "Settings" screen:
   Tap "Sign Out"
   Confirm "Sign out"
-	
-
-
-
-  
-
- 
-  
-  
-
-
-

@@ -14,6 +14,8 @@
 
 -(void)renderLayer :(NSString *)uid layerDictionary:(NSMutableDictionary *)layDic;
 
+-(void)deleteLayer :(NSString *)uid;
+
 @property(strong,nonatomic) NSMutableDictionary *layers;
 
 

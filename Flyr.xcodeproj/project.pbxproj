@@ -3748,15 +3748,6 @@
 			name = ShareScreen;
 			sourceTree = "<group>";
 		};
-		200D19691899D73000EAD645 /* LayerTileButton */ = {
-			isa = PBXGroup;
-			children = (
-				200D196618998BEA00EAD645 /* LayerTileButton.h */,
-				200D196718998BEA00EAD645 /* LayerTileButton.m */,
-			);
-			name = LayerTileButton;
-			sourceTree = "<group>";
-		};
 		2013528A188C588100822073 /* Comments */ = {
 			isa = PBXGroup;
 			children = (
@@ -3896,13 +3887,15 @@
 			name = ImageView;
 			sourceTree = "<group>";
 		};
-		2075A9921899EAB600F410FB /* LabelClass */ = {
+		2075A9921899EAB600F410FB /* FlyerlyCustomClasses */ = {
 			isa = PBXGroup;
 			children = (
 				65BDB2DD17341D290084E032 /* CustomLabel.h */,
 				65BDB2DE17341D290084E032 /* CustomLabel.m */,
+				200D196618998BEA00EAD645 /* LayerTileButton.h */,
+				200D196718998BEA00EAD645 /* LayerTileButton.m */,
 			);
-			name = LabelClass;
+			name = FlyerlyCustomClasses;
 			sourceTree = "<group>";
 		};
 		208C6850186DAB38004A74F2 /* Config */ = {
@@ -4068,8 +4061,7 @@
 		20F3597C1888DC8A001376B6 /* CreateFlyer */ = {
 			isa = PBXGroup;
 			children = (
-				2075A9921899EAB600F410FB /* LabelClass */,
-				200D19691899D73000EAD645 /* LayerTileButton */,
+				2075A9921899EAB600F410FB /* FlyerlyCustomClasses */,
 				2046355F1895E47100A94C42 /* Models */,
 				204635661895F90900A94C42 /* ImageView */,
 				0DF3A2C3108DF1D200D6C887 /* CreateFlyerController.h */,

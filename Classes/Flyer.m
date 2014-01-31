@@ -63,6 +63,20 @@
 
 
 /*
+ * Here we Delete One Layer from dictionary of Flyer
+ * and Front View also..
+ */
+-(void)deleteLayer :(NSString *)uid{
+    
+    //Delete From Dictionary
+    [masterLayers removeObjectForKey:uid];
+    
+    //Delete From View
+    [self.flyImageView deleteLayer:uid];
+
+}
+
+/*
  * When New text layer Add on Flyer
  * its will call and Add one Content in MasterLayers Dictionary
  * return

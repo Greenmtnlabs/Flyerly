@@ -23,13 +23,33 @@ Then on the "Flyer" screen:
   Tap "Tile20"
   Tap "Text border"
   Tap "Tile5"
+  Tap "Done"
   Take a screenshot
-  Tap "Edit"
+  Tap "Text"
   Type "SQA" in the "Text input" field
   Tap "Next"
   Tap "Tile4"
+  Tap "Color"
+  Tap "Tile2"
+  Tap "Size"
+  Tap "Tile21"
+  Tap "Text border"
+  Tap "Tile1"
+  Tap "Done"
   Take a screenshot
+  Tap "Tile1"
+  Tap "Text"
+  Tap "Edit"
+  Type " (Private) Limited" in the "Text input" field
   Tap "Next"
+  Tap "Tile4"
+  Tap "Color"
+  Tap "Tile5"
+  Tap "Size"
+  Tap "Tile21"
+  Tap "Text border"
+  Tap "Tile4"
+  Tap "Done"	
   Take a screenshot
   Tap "Back"
   
