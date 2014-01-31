@@ -16,7 +16,6 @@
 @interface ProfileViewController : UIViewController <UITextFieldDelegate,UITableViewDelegate>{
 
     FlyerlySingleton *globle;
-    NSString *S;
     CGFloat animatedDistance;
 }
 @property(nonatomic, strong) IBOutlet UITextField *username;

@@ -187,7 +187,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
         }
     }
     
-    [window setRootViewController:navigationController];
+    [window  setRootViewController:navigationController];
     
     // Override point for customization after application launch.
     [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound];

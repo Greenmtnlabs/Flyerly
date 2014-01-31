@@ -59,9 +59,9 @@
 -(IBAction)onClickClipboardButton;
 -(IBAction)loadHelpController;
 -(IBAction)makeEmail;
--(IBAction)OntwitterComments;
+-(IBAction)ontwitterComments;
 -(IBAction)onClickSaveToCameraRollSwitchButton;
--(IBAction)RateApp:(id)sender;
+-(IBAction)rateApp:(id)sender;
 -(void)gohelp;
 
 

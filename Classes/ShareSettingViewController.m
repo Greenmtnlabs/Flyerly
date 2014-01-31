@@ -148,12 +148,12 @@
 }
  */
 
--(IBAction)OntwitterComments{
+-(IBAction)ontwitterComments{
     InputViewController  *inputv = [[InputViewController alloc]initWithNibName:@"InputViewController" bundle:nil];
     [self.navigationController presentModalViewController:inputv animated:YES];
 }
 
--(IBAction)RateApp:(id)sender{
+-(IBAction)rateApp:(id)sender{
     float ver = [ globle.iosVersion floatValue];
     NSString* url;
     if (ver >= 7) {

@@ -30,10 +30,15 @@
 	InviteFriendsController *addFriendsController;
     FlyerlySingleton *globle;
     
+    IBOutlet UIButton *likeButton;
+    IBOutlet UIButton *followButton;
+    IBOutlet UIButton *setBotton;
+    
 	BOOL loadingViewFlag;
 	NSMutableArray *photoArray;
 	NSMutableArray *photoDetailArray;
     int numberOfFlyers;
+    
     
     UIView *opaqueView;
     NSArray *twtAcconts;

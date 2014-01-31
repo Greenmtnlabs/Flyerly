@@ -162,7 +162,6 @@
     inviteFriendButton.showsTouchWhenHighlighted = YES;
     likeButton.showsTouchWhenHighlighted = YES;
     followButton.showsTouchWhenHighlighted = YES;
-    setBotton.showsTouchWhenHighlighted = YES;
 
     
     if(IS_IPHONE_5){
@@ -701,6 +700,7 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
 }
 
 -(IBAction)goBack{
+
     
     [self.likeView setHidden:YES];
 }
