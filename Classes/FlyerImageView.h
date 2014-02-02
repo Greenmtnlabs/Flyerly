@@ -11,14 +11,15 @@
 
 @interface FlyerImageView : UIImageView{
 
-    NSMutableDictionary *layers;
+   
 }
 
--(void)renderFlyer:(NSMutableDictionary *)flyPieces;
 
 -(void)renderLayer :(NSString *)uid layerDictionary:(NSMutableDictionary *)layDic;
 
 -(void)deleteLayer :(NSString *)uid;
 
+-(void)setTemplate :(NSString *)imgPath;
 
+@property (strong, readonly) NSMutableDictionary *layers;
 @end

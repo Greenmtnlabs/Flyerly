@@ -289,8 +289,17 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 -(void)viewDidLoad{
 	[super viewDidLoad];
     
-    NSMutableDictionary *flyerPieces = [flyer allKeys];
-    [self.flyimgView renderFlyer:flyerPieces];
+    NSArray *flyerPiecesKeys = [flyer allKeys];
+    
+    for (int i = 0 ; i < flyerPiecesKeys.count; i++) {
+
+        //Getting Layers Detail from Master Dictionary
+        NSMutableDictionary *dic = [flyer getLayerFromMaster:[flyerPiecesKeys objectAtIndex:i]];
+        
+        //Create Subview from dictionary
+        [self.flyimgView renderLayer:[flyerPiecesKeys objectAtIndex:i] layerDictionary:dic];
+
+    }
 
  
     globle = [FlyerlySingleton RetrieveSingleton];

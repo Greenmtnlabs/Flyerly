@@ -25,7 +25,7 @@
 
 -(void)deleteLayer :(NSString *)uid;
 
--(NSMutableDictionary *)allKeys;
+-(NSArray *)allKeys;
 
 -(NSMutableDictionary *)getLayerFromMaster :(NSString *)uid;
 

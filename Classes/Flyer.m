@@ -41,6 +41,9 @@ NSString * const TEXTHEIGHT = @"280.000000";
         
     }
     
+    //set Current Path of File Manager
+    [[NSFileManager defaultManager] changeCurrentDirectoryPath:flyPath];
+    
     //Load flyer
     [self loadFlyer:flyPath];
     return self;
@@ -85,8 +88,8 @@ NSString * const TEXTHEIGHT = @"280.000000";
 }
 
 
--(NSMutableDictionary *)allKeys{
-    return masterLayers;
+-(NSArray *)allKeys{
+    return [masterLayers allKeys];
 }
 
 

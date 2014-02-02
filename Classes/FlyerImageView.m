@@ -11,6 +11,8 @@
 @implementation FlyerImageView
 
 
+@synthesize layers;
+
 -(id)init{
    
     self = [super init];
@@ -63,6 +65,15 @@
 -(void)renderLayer :(NSString *)uid layerDictionary:(NSMutableDictionary *)layDic {
 
 
+    //check for Flyer Background
+    if ( [uid isEqualToString:@"Template"] ) {
+        
+        [self setTemplate:[layDic valueForKey:@"image"]];
+        return;
+        
+    }
+    
+    
     // Checking for Label or ImageView
     if ([layDic objectForKey:@"image"] == nil) {
         
@@ -101,25 +112,6 @@
     
     
 }
-
-
-/*
- *Here we Render All Flyer Pieces
- */
--(void)renderFlyer:(NSMutableDictionary *)flyPieces {
-    
-    
-    for (NSString* key in flyPieces) {
-        
-        NSMutableDictionary *piece = [flyPieces objectForKey:key];
-        
-        //Temperory Check for Flyer Background Image
-        if (![key isEqualToString:@"Template"])
-            [self renderLayer:key layerDictionary:piece];
-    }
-    
-}
-
 
 
 /*
@@ -166,6 +158,30 @@
         lbl.borderColor = [UIColor colorWithRed:[rgbBorder[0] floatValue] green:[rgbBorder[1] floatValue] blue:[rgbBorder[2] floatValue] alpha:1];
     }
     lbl.lineWidth = 2;
+}
+
+
+
+/*
+ * Here We Set Flyer Backgound Image
+ */
+-(void)setTemplate :(NSString *)imgPath{
+    
+   
+    NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
+    
+    currentpath = [currentpath stringByAppendingString:[NSString stringWithFormat:@"/%@",imgPath]];
+    
+    if ([[NSFileManager defaultManager] fileExistsAtPath:currentpath isDirectory:NULL] ) {
+        
+
+        UIImage *img = [[UIImage alloc] initWithContentsOfFile:currentpath];
+        self.image = img;
+        
+    }
+    
+    
+
 }
 
 @end
