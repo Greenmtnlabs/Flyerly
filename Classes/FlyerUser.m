@@ -20,7 +20,7 @@
  * This will Update folder structure On Device
  * for 3.0 version
  */
-+(void)UpdateFolderStructure:(NSString *)usr{
++(void)updateFolderStructure:(NSString *)usr{
 
  
     //Getting Home Directory
@@ -268,7 +268,7 @@
                                 }];
 
     //Also Check for New folder Structure
-    [self UpdateFolderStructure:[user objectForKey:@"username"]];
+    [self updateFolderStructure:[user objectForKey:@"username"]];
 
 }
 

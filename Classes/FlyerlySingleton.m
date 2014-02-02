@@ -6,7 +6,7 @@
 
 @implementation FlyerlySingleton
 
-@synthesize accounts,inputValue,sharelink,iosVersion,CheckHelpOpen,NBUimage,appOpenFirstTime,gallerComesFromCamera;
+@synthesize accounts,inputValue,sharelink,iosVersion,NBUimage,appOpenFirstTime,gallerComesFromCamera;
 
 static FlyerlySingleton *sharedSingleton = nil;
 

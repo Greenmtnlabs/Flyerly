@@ -54,7 +54,7 @@ extern NSString *FacebookDidLoginNotification;
 @property (nonatomic,assign) BOOL changesFlag;
 @property (nonatomic, strong) UIView *sharingProgressParentView;
 
--(void)FbChangeforNewVersion;
--(void)TwitterChangeforNewVersion:(NSString *)olduser;
+-(void)fbChangeforNewVersion;
+-(void)twitterChangeforNewVersion:(NSString *)olduser;
 @end
 

@@ -13,6 +13,6 @@
 
 +(void)migrateUserto3dot0:(PFObject *)oldUserobj;
 
-+(void)UpdateFolderStructure:(NSString *)usr;
++(void)updateFolderStructure:(NSString *)usr;
 
 @end

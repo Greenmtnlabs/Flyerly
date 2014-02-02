@@ -288,13 +288,14 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 
 -(void)viewDidLoad{
 	[super viewDidLoad];
+    
+    NSMutableDictionary *flyerPieces = [flyer allKeys];
+    [self.flyimgView renderFlyer:flyerPieces];
+
  
     globle = [FlyerlySingleton RetrieveSingleton];
     [self.view setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
     [self.contextView setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
-
-    //Pass FlyerImageView to Flyer for Render
-    flyer.flyImageView = self.flyimgView ;
 
     photoTouchFlag=NO;
 	symbolTouchFlag=NO;
@@ -833,6 +834,9 @@ int photoLayerCount = 0; // Photo layer count to set tag value
             //Here we set Font
             [flyer setFlyerTextFont:currentLayer FontName:[NSString stringWithFormat:@"%@",[selectedFont familyName]]];
             
+            //Here we call Render Layer on View
+            [flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
+            
             //((CustomLabel*)[self textLabelLayersArray][arrangeLayerIndex]).font = selectedFont;
             
             // Add border to selected layer thumbnail
@@ -871,6 +875,9 @@ int photoLayerCount = 0; // Photo layer count to set tag value
             
             [flyer setFlyerTextColor:currentLayer RGBColor:selectedColor];
             
+            //Here we call Render Layer on View
+            [flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
+            
             //((CustomLabel*)[self textLabelLayersArray][arrangeLayerIndex]).textColor = selectedColor;
             
             // Add border to selected layer thumbnail
@@ -906,7 +913,12 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 			selectedSize = [sizeStr intValue];
 			selectedFont = [selectedFont fontWithSize:selectedSize];
 			msgTextView.font = selectedFont;
+            
             [flyer setFlyerTextSize:currentLayer Size:selectedFont];
+            
+            //Here we call Render Layer on View
+            [flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
+            
            // ((CustomLabel*)[self textLabelLayersArray][arrangeLayerIndex]).font =selectedFont;
             
             // Add border to selected layer thumbnail
@@ -941,6 +953,9 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 			UIColor *borderColor = borderArray[i-1];
             
             [flyer setFlyerTextBorderColor:currentLayer Color:borderColor ];
+            
+            //Here we call Render Layer on View
+            [flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
             
            // CustomLabel *lastLabel = [self textLabelLayersArray][arrangeLayerIndex];
             //lastLabel.borderColor = borderColor;
@@ -1922,7 +1937,7 @@ int arrangeLayerIndex;
         
         //Done Bar Button
         UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-        [doneButton addTarget:self action:@selector(DonePhoto) forControlEvents:UIControlEventTouchUpInside];
+        [doneButton addTarget:self action:@selector(donePhoto) forControlEvents:UIControlEventTouchUpInside];
         [doneButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
         doneButton.showsTouchWhenHighlighted = YES;
         UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
@@ -2159,7 +2174,7 @@ int arrangeLayerIndex;
 
     
     //Add Context Library
-    [self AddBottomTabs:libText];
+    [self addBottomTabs:libText];
 
     [self hideAddMoreButton];
 
@@ -2250,6 +2265,9 @@ int arrangeLayerIndex;
     //Set Text of Layer
     [flyer setFlyerText:currentLayer text:msgTextView.text ];
     
+    //Here we call Render Layer on View
+    [flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
+    
     [UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationDuration:0.4f];
     
@@ -2285,7 +2303,7 @@ int arrangeLayerIndex;
     iconTouchFlag = NO;
 }
 
--(void) DonePhoto{
+-(void) donePhoto{
     
     if (newPhotoImgView.image == nil) {
         photoLayerCount--;
@@ -2332,7 +2350,7 @@ int arrangeLayerIndex;
         [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
     } else {
         UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-        [doneButton addTarget:self action:@selector(DonePhoto) forControlEvents:UIControlEventTouchUpInside];
+        [doneButton addTarget:self action:@selector(donePhoto) forControlEvents:UIControlEventTouchUpInside];
         [doneButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
         doneButton.showsTouchWhenHighlighted = YES;
         UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
@@ -2346,7 +2364,7 @@ int arrangeLayerIndex;
     }
 
     //Add Context Library
-    [self AddBottomTabs:libPhoto];
+    [self addBottomTabs:libPhoto];
 
     [self hideAddMoreButton];
 
@@ -2517,8 +2535,9 @@ int arrangeLayerIndex;
     
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:backBarButton,leftBarHelpButton,nil]];
     
-    [self AddBottomTabs:libFlyer];
-    [self AddAllLayersIntoFront2 ];
+    [self addBottomTabs:libFlyer];
+    [self addAllLayersIntoFront2 ];
+    [flyer saveFlyer:currentLayer];
     currentLayer = @"";
     [self hideAddMoreButton];
 
@@ -2594,7 +2613,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
     ShareViewController *draftViewController = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
     draftViewController.selectedFlyerImage = [UIImage imageWithData:data];
-    draftViewController.selectedFlyerTitle = globle.FlyerName;
+    draftViewController.selectedFlyerTitle = globle.flyerName;
     if([[self textLabelLayersArray] count] > 0){
         draftViewController.selectedFlyerDescription = ((CustomLabel*)[self textLabelLayersArray][0]).text;
     }else{
@@ -2670,7 +2689,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 		[UIView setAnimationDuration:0.4f];
         
          //Add ContextView
-        [self AddScrollView:fontScrollView];
+        [self addScrollView:fontScrollView];
         
 		[fontTabButton setSelected:YES];
 	}
@@ -2680,7 +2699,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 		[UIView setAnimationDuration:0.4f];
         
         //Add ContextView
-        [self AddScrollView:colorScrollView];
+        [self addScrollView:colorScrollView];
 		[UIView commitAnimations];
         [colorTabButton setSelected:YES];
         
@@ -2691,7 +2710,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 		[UIView setAnimationDuration:0.4f];
         
         //Add ContextView
-        [self AddScrollView:sizeScrollView];
+        [self addScrollView:sizeScrollView];
 		[sizeTabButton setSelected:YES];
 		[UIView commitAnimations];
 	}
@@ -2701,7 +2720,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 		[UIView setAnimationDuration:0.4f];
         
         //Add ContextView
-        [self AddScrollView:fontBorderScrollView];
+        [self addScrollView:fontBorderScrollView];
         
 		[fontBorderTabButton setSelected:YES];
 		[UIView commitAnimations];
@@ -2736,7 +2755,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
         
         //Add ContextView
-        [self AddScrollView:templateScrollView];
+        [self addScrollView:templateScrollView];
         [UIView commitAnimations];
         [backtemplates setSelected:YES];
     }
@@ -2758,7 +2777,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 		[UIView setAnimationDuration:0.4f];
         
         //Add ContextView
-        [self AddScrollView:borderScrollView];
+        [self addScrollView:borderScrollView];
     
 		[UIView commitAnimations];
     }
@@ -2855,7 +2874,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	{
         selectedAddMoreLayerTab = ADD_MORE_PHOTOTAB;
         if ([self canAddMoreLayers]) {
-            [self AddScrollView:takeOrAddPhotoLabel];
+            [self addScrollView:takeOrAddPhotoLabel];
             
         }
 
@@ -2879,11 +2898,11 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         lableTouchFlag = NO;
         iconTouchFlag = NO;
         [addMoreSymbolTabButton setSelected:YES];
-        [self AddDonetoRightBarBotton];
+        [self addDonetoRightBarBotton];
        	[UIView beginAnimations:nil context:NULL];
         
         //Add Context
-        [self AddScrollView:symbolScrollView];
+        [self addScrollView:symbolScrollView];
 		[UIView setAnimationDuration:0.4f];
 		[UIView commitAnimations];
 	}
@@ -2896,13 +2915,13 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         [addMoreIconTabButton setSelected:YES];
         
         //Add right Bar button
-        [self AddDonetoRightBarBotton];
+        [self addDonetoRightBarBotton];
         
 		[UIView beginAnimations:nil context:NULL];
 		[UIView setAnimationDuration:0.4f];
         
         //Add ContextView
-        [self AddScrollView:iconScrollView];
+        [self addScrollView:iconScrollView];
 
 		[UIView commitAnimations];
 	}
@@ -2911,7 +2930,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         
         [backgroundTabButton setSelected:YES];
         //Add right Bar button
-        [self AddDonetoRightBarBotton];
+        [self addDonetoRightBarBotton];
         
         [UIView beginAnimations:nil context:NULL];
 		[UIView setAnimationDuration:0.4f];
@@ -2919,7 +2938,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         [UIView commitAnimations];
 
         //Add ContextView
-        [self AddBottomTabs:libBackground];
+        [self addBottomTabs:libBackground];
        
 
     }
@@ -2965,24 +2984,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 }
 
--(void) Mycancel{
-    
-    // Remove border from layer thumbnail
-    for(UIView *subView in [layerScrollView subviews]){
-        if([subView isKindOfClass:[UIButton class]]){
-            CALayer * lastLayer = [subView layer];
-            [lastLayer setMasksToBounds:YES];
-            [lastLayer setCornerRadius:0];
-            [lastLayer setBorderWidth:0];
-            [lastLayer setBorderColor:[[UIColor clearColor] CGColor]];
-            [lastLayer setBackgroundColor:[[UIColor clearColor] CGColor]];
-        }
-    }
-    
-    [self removeBordersFromAllLayers];
-    [self SetMenu];
 
-}
 
 -(void) SetMenu{
     
@@ -3044,11 +3046,15 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     
     
     
+// New Code
     
-    // New Code
+     //Delete From Master Dictionary
     [flyer deleteLayer:layerButton.uid];
     
-    // End New Code
+    //Delete From View
+    [flyimgView deleteLayer:layerButton.uid];
+    
+// End New Code
 
     
     
@@ -4013,10 +4019,10 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     if ([OldDetail count] > 0) {
 
         [array addObject:OldDetail[0]];
-        globle.FlyerName = OldDetail[0];
+        globle.flyerName = OldDetail[0];
     }else{
         [array addObject:@""];
-         globle.FlyerName =@"";
+         globle.flyerName =@"";
     }
     
     if([[self textLabelLayersArray] count] > 0){
@@ -4704,7 +4710,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 /*
  * For ScrollView Adding On runtime
  */
--(void)AddScrollView:(id)obj{
+-(void)addScrollView:(id)obj{
 
     // Remove ScrollViews
     NSArray *viewsToRemove = [self.contextView subviews];
@@ -4720,7 +4726,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 /*
  * For Adding Bottom Button On runtime
  */
--(void)AddBottomTabs:(id)obj{
+-(void)addBottomTabs:(id)obj{
 
     // Remove ScrollViews
     NSArray *viewsToRemove = [self.libraryContextView subviews];
@@ -4740,7 +4746,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
  * When we Back To Main View its Set
  * All Layers to Front for Edit and Delete
  */
--(void)AddAllLayersIntoFront2 {
+-(void)addAllLayersIntoFront2 {
     layerallow = 0 ;
     selectedAddMoreLayerTab = ARRANGE_LAYERTAB;
     [self removeBordersFromAllLayers];
@@ -4754,7 +4760,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     NSInteger layerScrollHeight = 40;
     
     if(textLabelLayersArray.count == 0 && photoLayersArray.count  == 0 && symbolLayersArray.count == 0 && iconLayersArray == 0){
-        [self AddScrollView:addMoreLayerOrSaveFlyerLabel];
+        [self addScrollView:addMoreLayerOrSaveFlyerLabel];
         return;
     }
     
@@ -4788,14 +4794,14 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         }
     }
     [self layoutScrollImages:layerScrollView scrollWidth:layerScrollWidth scrollHeight:layerScrollHeight];
-    [self AddScrollView:layerScrollView];
+    [self addScrollView:layerScrollView];
     
     deleteMode = NO;
     doStopWobble = YES;
 
 }
 
--(void)AddAllLayersIntoFront{
+-(void)addAllLayersIntoFront{
     
     layerallow = 0 ;
     selectedAddMoreLayerTab = ARRANGE_LAYERTAB;
@@ -4816,7 +4822,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     NSInteger layerScrollHeight = 40;
     
     if(textLabelLayersArray.count == 0 && photoLayersArray.count  == 0 && symbolLayersArray.count == 0 && iconLayersArray == 0){
-        [self AddScrollView:addMoreLayerOrSaveFlyerLabel];
+        [self addScrollView:addMoreLayerOrSaveFlyerLabel];
         return;
     }
     
@@ -4942,7 +4948,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     layerScrollView.showsHorizontalScrollIndicator = NO;
     layerScrollView.showsVerticalScrollIndicator = NO;
     [self layoutScrollImages:layerScrollView scrollWidth:layerScrollWidth scrollHeight:layerScrollHeight];
-    [self AddScrollView:layerScrollView];
+    [self addScrollView:layerScrollView];
 
     deleteMode = NO;
     doStopWobble = YES;
@@ -4950,7 +4956,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 }
 
--(void)AddDonetoRightBarBotton{
+-(void)addDonetoRightBarBotton{
     UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [doneButton addTarget:self action:@selector(callAddMoreLayers) forControlEvents:UIControlEventTouchUpInside];
     [doneButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];

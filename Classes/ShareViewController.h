@@ -97,7 +97,7 @@
 
 -(void)shareOnInstagram;
 -(void)updateSocialStates;
--(void)SingleshareOnMMS;
+-(void)singleshareOnMMS;
 - (void)uploadImage:(NSData *)imageData isEmail:(BOOL)isEmail;
 -(void)shareOnEmail:(NSString *)link;
 -(void)shortenURL:(NSString *)url;

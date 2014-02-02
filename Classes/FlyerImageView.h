@@ -9,15 +9,16 @@
 #import <Foundation/Foundation.h>
 #import "CustomLabel.h"
 
-@interface FlyerImageView : UIImageView
+@interface FlyerImageView : UIImageView{
 
+    NSMutableDictionary *layers;
+}
+
+-(void)renderFlyer:(NSMutableDictionary *)flyPieces;
 
 -(void)renderLayer :(NSString *)uid layerDictionary:(NSMutableDictionary *)layDic;
 
 -(void)deleteLayer :(NSString *)uid;
-
-@property(strong,nonatomic) NSMutableDictionary *layers;
-
 
 
 @end

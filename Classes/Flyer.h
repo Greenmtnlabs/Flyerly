@@ -11,7 +11,11 @@
 #import "FlyerImageView.h"
 
 
-@interface Flyer : NSObject
+@interface Flyer : NSObject{
+    
+    NSString *piecesFile;
+
+}
 
 
 -(id)initWithPath:(NSString *)flyPath;
@@ -21,7 +25,7 @@
 
 -(void)deleteLayer :(NSString *)uid;
 
-
+-(NSMutableDictionary *)allKeys;
 
 -(NSMutableDictionary *)getLayerFromMaster :(NSString *)uid;
 
@@ -46,8 +50,5 @@
 +(NSString *)newFlyerPath;
 
 @property (strong, readonly) NSMutableDictionary *masterLayers;
-
-
-@property (retain, nonatomic) FlyerImageView *flyImageView;
 
 @end

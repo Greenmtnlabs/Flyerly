@@ -10,8 +10,6 @@
 
 @implementation FlyerImageView
 
-@synthesize layers;
-
 
 -(id)init{
    
@@ -101,6 +99,24 @@
         img = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 50, 50)];
     }
     
+    
+}
+
+
+/*
+ *Here we Render All Flyer Pieces
+ */
+-(void)renderFlyer:(NSMutableDictionary *)flyPieces {
+    
+    
+    for (NSString* key in flyPieces) {
+        
+        NSMutableDictionary *piece = [flyPieces objectForKey:key];
+        
+        //Temperory Check for Flyer Background Image
+        if (![key isEqualToString:@"Template"])
+            [self renderLayer:key layerDictionary:piece];
+    }
     
 }
 

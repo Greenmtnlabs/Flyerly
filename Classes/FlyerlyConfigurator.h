@@ -20,12 +20,12 @@
 - (NSArray*)defaultFavoriteSharersForMimeType:(NSString *)mimeType __attribute__((deprecated("use defaultFavoriteSharersForFile: instead")));
 - (NSArray*)defaultFavoriteSharersForFile:(SHKFile *)file;
 
-- (NSString*)CrittercismAppId;
-- (NSString*)ParseOnlineAppId;
-- (NSString*)ParseOnlineClientKey;
-- (NSString*)ParseOfflineAppId;
-- (NSString*)ParseOfflineClientKey;
-- (NSString*)FlurrySessionId;
+- (NSString*)crittercismAppId;
+- (NSString*)parseOnlineAppId;
+- (NSString*)parseOnlineClientKey;
+- (NSString*)parseOfflineAppId;
+- (NSString*)parseOfflineClientKey;
+- (NSString*)flurrySessionId;
 
 - (NSString*)vkontakteAppId;
 - (NSString*)facebookAppId;

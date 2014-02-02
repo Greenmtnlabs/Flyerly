@@ -65,7 +65,7 @@
     UIButton *createButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [createButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [createButton setBackgroundImage:[UIImage imageNamed:@"createButton"] forState:UIControlStateNormal];
-    [createButton addTarget:self action:@selector(CreateNewFlyer) forControlEvents:UIControlEventTouchUpInside];
+    [createButton addTarget:self action:@selector(createNewFlyer) forControlEvents:UIControlEventTouchUpInside];
     createButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *createBarButton = [[UIBarButtonItem alloc] initWithCustomView:createButton];
     
@@ -228,7 +228,7 @@
 }
 
 
--(IBAction)RateApp:(id)sender{
+-(IBAction)rateApp:(id)sender{
     
     float ver = [ globle.iosVersion floatValue];
     NSString* url;
@@ -300,7 +300,7 @@
 }
 
 
--(void)CreateNewFlyer{
+-(void)createNewFlyer{
     
 	ptController = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
     ptController.flyerNumber = -1;

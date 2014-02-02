@@ -23,35 +23,24 @@
 
 
 @interface LauchViewController : ParentViewController<UIWebViewDelegate,UIActionSheetDelegate,FacebookLikeViewDelegate> {
+    
 	CreateFlyerController *createFlyer;
 	FlyrViewController *tpController;
 	ShareSettingViewController *spController;
 	InviteFriendsController *addFriendsController;
     FlyerlySingleton *globle;
-    IBOutlet UILabel *createFlyrLabel;
-    IBOutlet UILabel *savedFlyrLabel;
-    IBOutlet UILabel *inviteFriendLabel;
-    IBOutlet UIButton *createFlyrButton;
-    IBOutlet UIButton *savedFlyrButton;
-    IBOutlet UIButton *inviteFriendButton;
-        IBOutlet UIButton *likeButton;
+    
+    IBOutlet UIButton *likeButton;
     IBOutlet UIButton *followButton;
     IBOutlet UIButton *setBotton;
-
-    IBOutlet UIImageView *firstFlyer;
-    IBOutlet UIImageView *secondFlyer;
-    IBOutlet UIImageView *thirdFlyer;
-    IBOutlet UIImageView *fourthFlyer;
     
-	//IBOutlet FBLoginButton *faceBookButton;
 	BOOL loadingViewFlag;
 	NSMutableArray *photoArray;
 	NSMutableArray *photoDetailArray;
     int numberOfFlyers;
     
+    
     UIView *opaqueView;
-    IBOutlet UIWebView *webview;
-    IBOutlet UIButton *crossButton;
     NSArray *twtAcconts;
     Flyer *flyer;
     

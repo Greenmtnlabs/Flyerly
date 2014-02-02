@@ -118,23 +118,23 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     [SHKConfiguration sharedInstanceWithConfigurator:configurator];
 
     // Crittercism for crash reports.
-    [Crittercism initWithAppID:[flyerConfigurator CrittercismAppId]];
+    [Crittercism initWithAppID:[flyerConfigurator crittercismAppId]];
     
 #ifdef DEBUG
     
     // Setup parse Offline
-    [Parse setApplicationId:[flyerConfigurator ParseOfflineAppId]
-                  clientKey:[flyerConfigurator ParseOfflineClientKey]];
+    [Parse setApplicationId:[flyerConfigurator parseOfflineAppId]
+                  clientKey:[flyerConfigurator parseOfflineClientKey]];
 #else
     
     // Setup parse Online
-    [Parse setApplicationId:[flyerConfigurator ParseOnlineAppId]
-                  clientKey:[flyerConfigurator ParseOnlineClientKey]];
+    [Parse setApplicationId:[flyerConfigurator parseOnlineAppId]
+                  clientKey:[flyerConfigurator parseOnlineClientKey]];
     
 #endif
     
     // Flurry stats
-    [Flurry startSession:[flyerConfigurator FlurrySessionId]];
+    [Flurry startSession:[flyerConfigurator flurrySessionId]];
 
     // Facebook initialization
     [PFFacebookUtils initializeFacebook];
@@ -144,8 +144,6 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     
     // Bitly configuration
     [[BitlyConfig sharedBitlyConfig] setBitlyLogin:[flyerConfigurator bitLyLogin] bitlyAPIKey:[flyerConfigurator bitLyKey]];
-    
-
     
 	changesFlag = NO;
 
@@ -183,11 +181,11 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
             [navigationController setRootViewController:accountController];
         } else {
             lauchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
-            [navigationController pushViewController:lauchController animated:YES];
+            [navigationController setRootViewController:lauchController];
         }
     }
     
-    [window setRootViewController:navigationController];
+    [window  setRootViewController:navigationController];
     
     // Override point for customization after application launch.
     [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound];
@@ -201,7 +199,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
  For Checking Twitter old Detail is available in parse or not
  if it exist then we call Merging Process
 */
--(void)TwitterChangeforNewVersion:(NSString *)olduser{
+-(void)twitterChangeforNewVersion:(NSString *)olduser{
 
     //Checking user Exist in Parse
     PFQuery *query = [PFUser  query];
@@ -230,7 +228,7 @@ Here we Getting user Email ID from Currently login facebook ID
 For Checking old Detail is available in parse or not
 if it exist then we call Merging Process
 */
--(void)FbChangeforNewVersion{
+-(void)fbChangeforNewVersion{
 
     // Create request for user's Facebook data
     FBRequest *request = [FBRequest requestForMe];

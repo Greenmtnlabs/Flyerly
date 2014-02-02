@@ -183,7 +183,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
                 FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
                 
                  // here we Checking  User Merge required or not
-                [appDelegate FbChangeforNewVersion];
+                [appDelegate fbChangeforNewVersion];
                 
                 // Remove Current UserName for Device configuration
                 [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"User"];
@@ -202,7 +202,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
                 
                 // Temp on for Testing here
                 // FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-                // [appDelegate FbChangeforNewVersion];
+                // [appDelegate fbChangeforNewVersion];
                 
                 // Login success Move to Flyerly
                 launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil] ;
@@ -215,17 +215,6 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     }
 }
 
-
--(BOOL)CheckUserExists :(NSString *)userName password:(NSString *)pwd{
-    NSError *loginError = nil;
-
-    [PFUser logInWithUsername:[userName lowercaseString] password:pwd error:&loginError];
-    if(loginError){
-        return NO;
-    }else{
-        return YES;
-    }
-}
 
 #pragma mark UIAlertView delegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
@@ -271,7 +260,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
                 FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
                 
                 // here we Checking  User Merge required or not
-                [appDelegate TwitterChangeforNewVersion:twitterUsername];
+                [appDelegate twitterChangeforNewVersion:twitterUsername];
                 
                 // Remove Current UserName for Device configuration
                 [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"User"];
@@ -291,7 +280,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
                 // For Parse New User Merge to old Twitter User
                 /*
                  FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-                 [appDelegate TwitterChangeforNewVersion:twitterUsername];*/
+                 [appDelegate twitterChangeforNewVersion:twitterUsername];*/
                 
                 
                 // Login success Move to Flyerly

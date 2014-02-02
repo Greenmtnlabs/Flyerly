@@ -48,7 +48,6 @@
 -(void)goBack;
 -(void)onSignUp;
 -(void)createUser:(NSString *)userName password:(NSString *)pwd;
--(BOOL)CheckUserExists :(NSString *)userName password:(NSString *)pwd;
 
 -(IBAction)userExist;
 -(IBAction)onSignUp;

@@ -39,10 +39,10 @@
 - (void)signOut;
 -(void)goBack;
 -(IBAction)gohelp;
--(IBAction)RateApp:(id)sender;
+-(IBAction)rateApp:(id)sender;
 -(IBAction)gotwitter:(id)sender;
 -(IBAction)goemail:(id)sender;
 
--(void)CreateNewFlyer;
+-(void)createNewFlyer;
 
 @end

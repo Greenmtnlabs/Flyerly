@@ -437,7 +437,7 @@
         if([InviteFriendsController connected]){
             [smsButton setSelected:YES];
             [UIPasteboard generalPasteboard].image = selectedFlyerImage;
-            [self SingleshareOnMMS];
+            [self singleshareOnMMS];
             [self updateSocialStates ];
             [self showAlert:@"Uploading flyer for sharing. Please wait..." message:@""];
             
@@ -640,7 +640,7 @@
 /*
  * Share on MMS
  */
--(void)SingleshareOnMMS{
+-(void)singleshareOnMMS{
 
     NSData *imageData = UIImagePNGRepresentation(selectedFlyerImage);
     [self uploadImage:imageData isEmail:NO];
