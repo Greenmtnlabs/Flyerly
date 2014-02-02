@@ -184,4 +184,14 @@
 
 }
 
+
+/*
+ * Here we set Flyer Border Color
+ */
+-(void)setTemplateBorder :(NSString *)borColor{
+
+
+}
+
+
 @end

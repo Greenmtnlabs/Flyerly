@@ -21,5 +21,7 @@
 
 -(void)setTemplate :(NSString *)imgPath;
 
+-(void)setTemplateBorder :(NSString *)borColor;
+
 @property (strong, readonly) NSMutableDictionary *layers;
 @end

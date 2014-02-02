@@ -2427,7 +2427,7 @@ int arrangeLayerIndex;
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:backBarButton,leftBarHelpButton,nil]];
     
     [self addBottomTabs:libFlyer];
-    [self addAllLayersIntoFront2 ];
+    [self addAllLayersIntoScrollView ];
     [flyer saveFlyer:currentLayer];
     currentLayer = @"";
     [self hideAddMoreButton];
@@ -4633,57 +4633,101 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     [UIView commitAnimations];
 }
 
+
+/*
+ *Here we Remove all Subviews of ScrollViews
+ */
+-(void)deleteSubviewsFromScrollView{
+
+    NSArray *ChildViews = [self.layerScrollView subviews];
+    
+    for (UIView *child in ChildViews) {
+    
+        [child removeFromSuperview];
+    }
+
+}
+
+
 /*
  * When we Back To Main View its Set
  * All Layers to Front for Edit and Delete
  */
--(void)addAllLayersIntoFront2 {
+-(void)addAllLayersIntoScrollView {
     layerallow = 0 ;
     selectedAddMoreLayerTab = ARRANGE_LAYERTAB;
     [self removeBordersFromAllLayers];
     
-    lableTouchFlag = NO;
-    symbolTouchFlag= NO;
-    iconTouchFlag = NO;
-    photoTouchFlag = NO;
+    [self deleteSubviewsFromScrollView];
     
     NSInteger layerScrollWidth = 55;
     NSInteger layerScrollHeight = 40;
     
-    if(textLabelLayersArray.count == 0 && photoLayersArray.count  == 0 && symbolLayersArray.count == 0 && iconLayersArray == 0){
+    if( self.flyimgView.layers.count == 0 ){
         [self addScrollView:addMoreLayerOrSaveFlyerLabel];
         return;
     }
     
-    //Adding Text of Flyer In ScrollView
-    if(textLabelLayersArray){
+    NSMutableDictionary *layers = self.flyimgView.layers ;
+    int cnt = 0;
+    for (NSString* uid in layers) {
         
-        if ([layersDic objectForKey:currentLayer]== nil) {
-            UILabel *label1 = (UILabel *) textLabelLayersArray.lastObject;
-            UILabel *label = [[UILabel alloc] initWithFrame:label1.frame];
-            label.text = label1.text;
-        
-            LayerTileButton *layerButton = [LayerTileButton  buttonWithType:UIButtonTypeCustom];
-            layerButton.uid = currentLayer;
-            layerButton.frame =CGRectMake(0, 5,layerScrollWidth, layerScrollHeight);
-        
-            [layerButton addTarget:self action:@selector(editLayer:) forControlEvents:UIControlEventTouchUpInside];
-        
-            [layerButton setBackgroundColor:[UIColor clearColor]];
-            [layerButton.layer setBorderWidth:2];
-            UIColor * c = [UIColor lightGrayColor];
-            [layerButton.layer setCornerRadius:8];
-            [layerButton.layer setBorderColor:c.CGColor];
-        
-            label.frame  = CGRectMake(layerButton.frame.origin.x+5, layerButton.frame.origin.y-2, layerButton.frame.size.width-10, layerButton.frame.size.height-7);
-            [layerButton addSubview:label];
-            layerButton.tag = [[NSString stringWithFormat:@"%@%d",@"111",textLabelLayersArray.count -1] integerValue];
+        //check for Flyer Background Key
+        if ( ![uid isEqualToString:@"Template"] ) {
             
-            [layerScrollView addSubview:layerButton];
-            [layersDic setValue:layerButton forKey:currentLayer];
+            id lay = [layers objectForKey:uid];
+            
+            // Checking for Label or ImageView
+            if ( [lay isKindOfClass:[UILabel class]] == YES ) {
+                
+                CustomLabel *lbl = lay;
+                CustomLabel *scrollLabel = [[CustomLabel alloc] initWithFrame:lbl.frame];
+                scrollLabel.backgroundColor = [UIColor clearColor];
+                scrollLabel.textAlignment = UITextAlignmentCenter;
+                scrollLabel.adjustsFontSizeToFitWidth = YES;
+                scrollLabel.lineBreakMode = UILineBreakModeClip;
+                scrollLabel.numberOfLines = 80;
+                scrollLabel.lineWidth = 2;
+                scrollLabel.text = lbl.text;
+                scrollLabel.font = lbl.font;
+                scrollLabel.borderColor = lbl.borderColor;
+                scrollLabel.textColor = lbl.textColor;
+                
+                
+                LayerTileButton *layerButton = [LayerTileButton  buttonWithType:UIButtonTypeCustom];
+                layerButton.uid = uid;
+                layerButton.frame =CGRectMake(0, 5,layerScrollWidth, layerScrollHeight);
+                
+                [layerButton addTarget:self action:@selector(editLayer:) forControlEvents:UIControlEventTouchUpInside];
+                
+                [layerButton setBackgroundColor:[UIColor clearColor]];
+                [layerButton.layer setBorderWidth:2];
+                UIColor * c = [UIColor lightGrayColor];
+                [layerButton.layer setCornerRadius:8];
+                [layerButton.layer setBorderColor:c.CGColor];
+                
+                scrollLabel.frame  = CGRectMake(layerButton.frame.origin.x+5, layerButton.frame.origin.y-2, layerButton.frame.size.width-10, layerButton.frame.size.height-7);
+                
+                [layerButton addSubview:scrollLabel];
+                
+                layerButton.tag = [[NSString stringWithFormat:@"%@%d",@"111",cnt] integerValue];
+                
+                [layerScrollView addSubview:layerButton];
 
+            
+            } else {
+                
+                //Here We write code for ImageView
+            
+            }
+
+            
         }
-    }
+        
+        cnt ++;
+        
+    }//Loop
+    
     [self layoutScrollImages:layerScrollView scrollWidth:layerScrollWidth scrollHeight:layerScrollHeight];
     [self addScrollView:layerScrollView];
     

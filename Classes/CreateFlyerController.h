@@ -275,7 +275,8 @@
 -(void)addScrollView:(id)obj;
 -(void)addBottomTabs:(id)obj;
 -(void)addAllLayersIntoFront;
--(void)addAllLayersIntoFront2;
+-(void)addAllLayersIntoScrollView;
+-(void)deleteSubviewsFromScrollView;
 
 -(void)addDonetoRightBarBotton;
 
