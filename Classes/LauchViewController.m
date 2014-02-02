@@ -35,24 +35,6 @@
     return self;
 }
 
-// Load Create Flyr Method With Thread
- -(void)loadPhotoView{
-     
-    NSString *flyPath = @"/Users/khurram/Library/Application Support/iPhone Simulator/7.0.3/Applications/7632F2F4-92E4-4427-BF0F-559C9E0E544F/Documents/nljaul89r1cfgvzrjp9z8udw1/Flyr/4";
-     
-    flyer = [[Flyer alloc]initWithPath:flyPath];
-     
-     
-     createFlyer = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
-     
-     // Set for Empty CreateFlyer Screen
-     createFlyer.flyerNumber = -1;
-     createFlyer.flyerPath = flyPath;
-     createFlyer.flyer = flyer;
-	[self.navigationController pushViewController:createFlyer animated:YES];
-     
-}
-
 -(IBAction)doNew:(id)sender{
     [Flurry logEvent:@"Create Flyer"];
 
@@ -334,33 +316,20 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
 }
 
 
--(IBAction)showFlyerDetail:(UIImageView *)sender{
-
-    [self loadPhotoView];
+-(IBAction)showFlyerDetail:(id)sender {
+    NSString *flyPath = @"/Users/khurram/Library/Application Support/iPhone Simulator/7.0.3/Applications/7632F2F4-92E4-4427-BF0F-559C9E0E544F/Documents/nljaul89r1cfgvzrjp9z8udw1/Flyr/4";
+    
+    flyer = [[Flyer alloc]initWithPath:flyPath];
+    
+    
+    createFlyer = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
+    
+    // Set for Empty CreateFlyer Screen
+    createFlyer.flyerNumber = -1;
+    createFlyer.flyerPath = flyPath;
+    createFlyer.flyer = flyer;
+	[self.navigationController pushViewController:createFlyer animated:YES];
 }
-
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    
-    UITouch *touch = [touches anyObject];
-    
-    if ([touch view] == firstFlyer) {
-        [self showFlyerDetail:firstFlyer];
-    } else if ([touch view] == secondFlyer) {
-        [self showFlyerDetail:secondFlyer];
-    } else if ([touch view] == thirdFlyer) {
-        [self showFlyerDetail:thirdFlyer];
-    } else if ([touch view] == fourthFlyer) {
-        [self showFlyerDetail:fourthFlyer];
-    }
-    /*else if ([touch view] == fifthFlyer) {
-        [self showFlyerDetail:fifthFlyer];
-    } else if ([touch view] == sixthFlyer) {
-        [self showFlyerDetail:sixthFlyer];
-    }*/
-    
-}
-
-
 
 #pragma Like code
 
