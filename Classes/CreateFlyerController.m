@@ -167,23 +167,16 @@ int photoLayerCount = 0; // Photo layer count to set tag value
                 nil];
 	
     // Add fonts in scroll view
-    [self addFontsInSubView];
+    //[self addFontsInSubView];
 	
     // Create color array
 	colorArray = 	[[NSArray  alloc] initWithObjects: [UIColor redColor], [UIColor blueColor], [UIColor greenColor], [UIColor blackColor], [UIColor colorWithRed:253.0/255.0 green:191.0/255.0 blue:38.0/224.0 alpha:1], [UIColor colorWithWhite:1.0f alpha:1.0f], [UIColor grayColor], [UIColor magentaColor], [UIColor yellowColor], [UIColor colorWithRed:163.0/255.0 green:25.0/255.0 blue:2.0/224.0 alpha:1], [UIColor colorWithRed:3.0/255.0 green:15.0/255.0 blue:41.0/224.0 alpha:1], [UIColor purpleColor], [UIColor colorWithRed:85.0/255.0 green:86.0/255.0 blue:12.0/224.0 alpha:1], [UIColor orangeColor], [UIColor colorWithRed:98.0/255.0 green:74.0/255.0 blue:9.0/224.0 alpha:1], [UIColor colorWithRed:80.0/255.0 green:7.0/255.0 blue:1.0/224.0 alpha:1], [UIColor colorWithRed:150.0/255.0 green:150.0/255.0 blue:97.0/224.0 alpha:1], [UIColor colorWithRed:111.0/255.0 green:168.0/255.0 blue:100.0/224.0 alpha:1], [UIColor cyanColor], [UIColor colorWithRed:17.0/255.0 green:69.0/255.0 blue:70.0/224.0 alpha:1], [UIColor colorWithRed:173.0/255.0 green:127.0/255.0 blue:251.0/224.0 alpha:1], nil];
 	
-    // Add colors in scroll view
-    [self addColorsInSubView];
     
     // Create border colors array
     borderArray = 	[[NSArray  alloc] initWithObjects: [UIColor blackColor], [UIColor grayColor], [UIColor darkGrayColor], [UIColor blueColor], [UIColor purpleColor], [UIColor colorWithRed:115.0/255.0 green:134.0/255.0 blue:144.0/255.0 alpha:1], [UIColor orangeColor], [UIColor greenColor], [UIColor redColor], [UIColor colorWithRed:14.0/255.0 green:95.0/255.0 blue:111.0/255.0 alpha:1], [UIColor colorWithRed:180.0/255.0 green:180.0/255.0 blue:149.0/255.0 alpha:1], [UIColor colorWithRed:228.0/255.0 green:128.0/255.0 blue:144.0/255.0 alpha:1], [UIColor colorWithRed:213.0/255.0 green:110.0/255.0 blue:86.0/255.0 alpha:1],[UIColor colorWithRed:156.0/255.0 green:195.0/255.0 blue:233.0/255.0 alpha:1],[UIColor colorWithRed:27.0/255.0 green:70.0/255.0 blue:148.0/255.0 alpha:1],[UIColor colorWithRed:234.0/255.0 green:230.0/255.0 blue:51.0/255.0 alpha:1],[UIColor cyanColor], [UIColor colorWithRed:232.0/255.0 green:236.0/255.0 blue:51.0/224.0 alpha:1],[UIColor magentaColor],[UIColor colorWithRed:57.0/255.0 green:87.0/255.0 blue:13.0/224.0 alpha:1], [UIColor colorWithRed:93.0/255.0 green:97.0/255.0 blue:196.0/224.0 alpha:1],nil];
 
-    
-    // Add size in scroll view
-	[self addSizeInSubView];
-    
-    // Add text border in scroll view
-    [self addTextBorderInSubView];
+
     
     // Add flyer border in scroll view
     [self addFlyerBorderInSubView];
@@ -529,10 +522,24 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 -(void)addFontsInSubView{
     
     
+    [self deleteSubviewsFromScrollView];
+    
+    CGFloat curXLoc = 0;
+    CGFloat curYLoc = 5;
+    int increment = 5;
+    
+    if(IS_IPHONE_5){
+        curYLoc = 10;
+        increment = 8;
+    }
+
+    
 	for (int i = 1; i <=[fontArray count] ; i++)
 	{
 		UIButton *font = [UIButton buttonWithType:UIButtonTypeCustom];
-		font.frame = CGRectMake(0, 0, fontScrollWidth, fontScrollHeight);        
+		font.frame = CGRectMake(0, 0, fontScrollWidth, fontScrollHeight);
+        
+        [font addTarget:self action:@selector(selectFont:) forControlEvents:UIControlEventTouchUpInside];
 		
 		[font setTitle:@"A" forState:UIControlStateNormal];
 		UIFont *fontname =fontArray[(i-1)];
@@ -540,9 +547,31 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 		[font setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 		font.tag = i;
 		[font setBackgroundImage:[UIImage imageNamed:@"a_bg"] forState:UIControlStateNormal];
-
-		[fontScrollView addSubview:font];
+        
+        //SET BUTTON POSITION ON SCROLLVIEW
+        CGRect frame = font.frame;
+        frame.origin = CGPointMake(curXLoc, curYLoc);
+        font.frame = frame;
+        curXLoc += (fontScrollWidth)+increment;
+        
+        if(IS_IPHONE_5){
+            if(curXLoc >= 300){
+                curXLoc = 0;
+                curYLoc = curYLoc + fontScrollWidth + 7;
+            }
+        }
+        
+        
+        [layerScrollView addSubview:font];
+        
 	}
+    
+    if(IS_IPHONE_5){
+        [layerScrollView setContentSize:CGSizeMake(320, curYLoc)];
+    } else {
+        [layerScrollView setContentSize:CGSizeMake((  [fontArray count]*(fontScrollWidth+5)), [layerScrollView bounds].size.height)];
+    }
+    
 }
 
 /*
@@ -550,11 +579,25 @@ int photoLayerCount = 0; // Photo layer count to set tag value
  */
 -(void)addSizeInSubView{
     
+    //DELETE SUBVIEWS
+    [self deleteSubviewsFromScrollView];
+    
+    CGFloat curXLoc = 0;
+    CGFloat curYLoc = 5;
+    int increment = 5;
+    
+    if(IS_IPHONE_5){
+        curYLoc = 10;
+        increment = 8;
+    }
+
     
 	for (int i = 1; i <=  [SIZE_ARRAY count] ; i++)
 	{
 		UIButton *size = [UIButton buttonWithType:UIButtonTypeCustom];
-		size.frame = CGRectMake(0, 5, sizeScrollWidth, sizeScrollHeight);
+        [size addTarget:self action:@selector(selectSize:) forControlEvents:UIControlEventTouchUpInside];
+
+		size.frame = CGRectMake(0, 0, sizeScrollWidth, sizeScrollHeight);
 		NSString *sizeValue =SIZE_ARRAY[(i-1)];
 		[size setBackgroundImage:[UIImage imageNamed:@"a_bg"] forState:UIControlStateNormal];
 		[size setTitle:sizeValue forState:UIControlStateNormal];
@@ -562,9 +605,28 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 		[size setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 		size.tag = i+60;
 		size.alpha = ALPHA1;
+        
+        CGRect frame = size.frame;
+        frame.origin = CGPointMake(curXLoc, curYLoc);
+        size.frame = frame;
+        curXLoc += (sizeScrollWidth)+increment;
+        
+        if(IS_IPHONE_5){
+            if(curXLoc >= 300){
+                curXLoc = 0;
+                curYLoc = curYLoc + sizeScrollHeight + 7;
+            }
+        }
 
-		[sizeScrollView addSubview:size];
+
+		[layerScrollView addSubview:size];
 	}
+    
+    if(IS_IPHONE_5){
+        [layerScrollView setContentSize:CGSizeMake(320, curYLoc)];
+    } else {
+        [layerScrollView setContentSize:CGSizeMake((  [SIZE_ARRAY count]*(sizeScrollWidth+5)), [layerScrollView bounds].size.height)];
+    }
 }
 
 /*
@@ -572,22 +634,55 @@ int photoLayerCount = 0; // Photo layer count to set tag value
  */
 -(void)addColorsInSubView{
     
+    //Delete Subviews
+    [self deleteSubviewsFromScrollView];
+    
+    CGFloat curXLoc = 0;
+    CGFloat curYLoc = 5;
+    int increment = 5;
+    
+    if(IS_IPHONE_5){
+        curYLoc = 10;
+        increment = 8;
+    }
+    
 	for (int i = 1; i <=  [colorArray count] ; i++)
 	{
 		UIButton *color = [UIButton buttonWithType:UIButtonTypeCustom];
-		color.frame = CGRectMake(0, 5, colorScrollWidth, colorScrollHeight);
+		color.frame = CGRectMake(0, 0, colorScrollWidth, colorScrollHeight);
+        [color addTarget:self action:@selector(selectColor:) forControlEvents:UIControlEventTouchUpInside];
 
-        
 		id colorName = colorArray[(i-1)];
-		UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(color.frame.origin.x, color.frame.origin.y-5, color.frame.size.width, color.frame.size.height)];
+		UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(color.frame.origin.x, color.frame.origin.y, color.frame.size.width, color.frame.size.height)];
 		[label setBackgroundColor:colorName];
         label.layer.borderColor = [UIColor grayColor].CGColor;
         label.layer.borderWidth = 1.0;
 		[color addSubview:label];
 		color.tag = i + 30;
 
-		[colorScrollView addSubview:color];
-	}
+        CGRect frame = color.frame;
+        frame.origin = CGPointMake(curXLoc, curYLoc);
+        color.frame = frame;
+        curXLoc += (colorScrollWidth)+increment;
+        
+        if(IS_IPHONE_5){
+            if(curXLoc >= 300){
+                curXLoc = 0;
+                curYLoc = curYLoc + colorScrollHeight + 7;
+            }
+        }
+
+        
+        [layerScrollView addSubview:color];
+	
+    }//Loop
+    
+    if(IS_IPHONE_5){
+        [layerScrollView setContentSize:CGSizeMake(320, curYLoc)];
+    } else {
+        [layerScrollView setContentSize:CGSizeMake((  [colorArray count]*(colorScrollWidth+5)), [layerScrollView bounds].size.height)];
+    }
+    
 }
 
 /*
@@ -595,21 +690,52 @@ int photoLayerCount = 0; // Photo layer count to set tag value
  */
 -(void)addTextBorderInSubView{
     
-
+    //Delete subview from ScrollView
+    [self deleteSubviewsFromScrollView ];
+    
+    CGFloat curXLoc = 0;
+    CGFloat curYLoc = 5;
+    int increment = 5;
+    
+    if(IS_IPHONE_5){
+        curYLoc = 10;
+        increment = 8;
+    }
+    
 	for (int i = 1; i <=  [borderArray count] ; i++)
 	{
 		UIButton *color = [UIButton buttonWithType:UIButtonTypeCustom];
-		color.frame = CGRectMake(0, 5, borderScrollWidth, borderScrollHeight);
+		color.frame = CGRectMake(0, 0, borderScrollWidth, borderScrollHeight);
+         [color addTarget:self action:@selector(selectFontBorder:) forControlEvents:UIControlEventTouchUpInside];
 		UIColor *colorName =borderArray[(i-1)];
-		UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(color.frame.origin.x, color.frame.origin.y-5, color.frame.size.width, color.frame.size.height)];
+		UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(color.frame.origin.x, color.frame.origin.y, color.frame.size.width, color.frame.size.height)];
         label.layer.borderColor = colorName.CGColor;
         label.layer.borderWidth = 3.0;
 		[color addSubview:label];
 		color.tag = i+90;
 		color.alpha = ALPHA1;
 
-		[fontBorderScrollView addSubview:color];
-	}
+        
+        CGRect frame = color.frame;
+        frame.origin = CGPointMake(curXLoc, curYLoc);
+        color.frame = frame;
+        curXLoc += (borderScrollWidth)+increment;
+        
+        if(IS_IPHONE_5){
+            if(curXLoc >= 300){
+                curXLoc = 0;
+                curYLoc = curYLoc + borderScrollHeight + 7;
+            }
+        }
+        
+		[layerScrollView addSubview:color];
+	}// Loop
+    
+    if(IS_IPHONE_5){
+        [layerScrollView setContentSize:CGSizeMake(320, curYLoc)];
+    } else {
+        [layerScrollView setContentSize:CGSizeMake((  [borderArray count]*(borderScrollWidth+5)), [layerScrollView bounds].size.height)];
+    }
 }
 
 /*
@@ -706,7 +832,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 	appDele.changesFlag = YES;
 	int  i=1;
 	UIButton *view = sender;
-	for(UIView *tempView  in [fontScrollView subviews]) 
+	for(UIView *tempView  in [layerScrollView subviews])
 	{
         // Add border to Un-select layer thumbnail
         CALayer * l = [tempView layer];
@@ -750,7 +876,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 	appDele.changesFlag = YES;
 	int  i=1;
 	UIButton *view = sender;
-	for(UIView *tempView  in [colorScrollView subviews])
+	for(UIView *tempView  in [layerScrollView subviews])
 	{
         // Add border to Un-select layer thumbnail
         CALayer * l = [tempView layer];
@@ -789,7 +915,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 	appDele.changesFlag = YES;
 	int  i=1;
 	UIButton *view = sender;
-	for(UIView *tempView  in [sizeScrollView subviews])
+	for(UIView *tempView  in [layerScrollView subviews])
 	{
         // Add border to Un-select layer thumbnail
         CALayer * l = [tempView layer];
@@ -832,14 +958,12 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 	appDele.changesFlag = YES;
 	int  i=1;
 	UIButton *view = sender;
-	for(UIView *tempView  in [fontBorderScrollView subviews]) {
+	for(UIView *tempView  in [layerScrollView subviews]) {
         
         // Add border to Un-select layer thumbnail
-
         tempView.backgroundColor = [UIColor clearColor];
-
         
-		if(tempView == view) {
+		if( tempView == view ) {
             
 			UIColor *borderColor = borderArray[i-1];
             
@@ -847,11 +971,6 @@ int photoLayerCount = 0; // Photo layer count to set tag value
             
             //Here we call Render Layer on View
             [flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
-            
-           // CustomLabel *lastLabel = [self textLabelLayersArray][arrangeLayerIndex];
-            //lastLabel.borderColor = borderColor;
-            //lastLabel.lineWidth = 2;
-           // [lastLabel drawRect:CGRectMake(lastLabel.frame.origin.x, lastLabel.frame.origin.y, lastLabel.frame.size.width, lastLabel.frame.size.height)];
             
             // Add border to selected layer thumbnail
             tempView.backgroundColor = [globle colorWithHexString:@"0197dd"];
@@ -2579,8 +2698,11 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 		[UIView beginAnimations:nil context:NULL];
 		[UIView setAnimationDuration:0.4f];
         
+        //Create ScrollView
+        [self addFontsInSubView ];
+        
          //Add ContextView
-        [self addScrollView:fontScrollView];
+        [self addScrollView:layerScrollView];
         
 		[fontTabButton setSelected:YES];
 	}
@@ -2589,8 +2711,11 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 		[UIView beginAnimations:nil context:NULL];
 		[UIView setAnimationDuration:0.4f];
         
+        //Create ScrollView
+        [self addColorsInSubView];
+        
         //Add ContextView
-        [self addScrollView:colorScrollView];
+        [self addScrollView:layerScrollView];
 		[UIView commitAnimations];
         [colorTabButton setSelected:YES];
         
@@ -2600,8 +2725,12 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 		[UIView beginAnimations:nil context:NULL];
 		[UIView setAnimationDuration:0.4f];
         
+        //Create ScrollView
+        [self   addSizeInSubView];
+
         //Add ContextView
-        [self addScrollView:sizeScrollView];
+        [self addScrollView:layerScrollView];
+        
 		[sizeTabButton setSelected:YES];
 		[UIView commitAnimations];
 	}
@@ -2610,8 +2739,11 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 		[UIView beginAnimations:nil context:NULL];
 		[UIView setAnimationDuration:0.4f];
         
+        //Create ScrollView
+        [self addTextBorderInSubView];
+        
         //Add ContextView
-        [self addScrollView:fontBorderScrollView];
+        [self addScrollView:layerScrollView];
         
 		[fontBorderTabButton setSelected:YES];
 		[UIView commitAnimations];
@@ -4650,14 +4782,13 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 
 /*
- * When we Back To Main View its Set
- * All Layers to Front for Edit and Delete
+ * When we Back To Main View its
+ * add All Layers to ScrollView for Edit and Delete Layers
  */
 -(void)addAllLayersIntoScrollView {
     layerallow = 0 ;
-    selectedAddMoreLayerTab = ARRANGE_LAYERTAB;
-    [self removeBordersFromAllLayers];
-    
+        
+    //Remove Subviews of ScrollView
     [self deleteSubviewsFromScrollView];
     
     NSInteger layerScrollWidth = 55;
@@ -4685,7 +4816,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
                 scrollLabel.backgroundColor = [UIColor clearColor];
                 scrollLabel.textAlignment = UITextAlignmentCenter;
                 scrollLabel.adjustsFontSizeToFitWidth = YES;
-                scrollLabel.lineBreakMode = UILineBreakModeClip;
+                scrollLabel.lineBreakMode = UILineBreakModeTailTruncation;
                 scrollLabel.numberOfLines = 80;
                 scrollLabel.lineWidth = 2;
                 scrollLabel.text = lbl.text;
