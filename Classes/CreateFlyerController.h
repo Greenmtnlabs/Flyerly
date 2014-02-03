@@ -8,7 +8,6 @@
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
 #import "CustomLabel.h"
-#import "EBPurchase.h"
 #import "FlyerlySingleton.h"
 #import "ParentViewController.h"
 #import "GalleryViewController.h"
@@ -29,7 +28,7 @@
 
 
 @class FlyerlySingleton,CameraViewController,GalleryViewController,Flyer,FlyerImageView;
-@interface CreateFlyerController :ParentViewController<UIActionSheetDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, EBPurchaseDelegate>
+@interface CreateFlyerController :ParentViewController<UIActionSheetDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 {
     int layerallow;
     FlyerlySingleton *globle;
@@ -74,7 +73,6 @@
 	UIActionSheet *alert;
 	UIView *distributeView;
 	UIImage *finalFlyer;
-    EBPurchase *demoPurchase;
 
 
 	NSInteger imgPickerFlag;
@@ -108,7 +106,6 @@
 	UIAlertView *editAlert ;
     UIAlertView *inAppAlert ;
 
-    BOOL isPurchased;
     BOOL deleteMode;
     BOOL doStopWobble;
     BOOL discardedLayer;
@@ -247,6 +244,7 @@
 
 
 -(void)loadCustomPhotoLibrary;
+-(void)openCustomCamera;
 
 -(void) chooseEdit;
 -(void) SetMenu;
@@ -255,13 +253,10 @@
 -(void) donePhoto;
 -(void) saveMyFlyer;
 -(void)callSaveAndShare;
--(void)openCustomCamera;
 -(BOOL)canAddMoreLayers;
 
-- (void)layoutScrollImages:(UIScrollView*)selectedScrollView scrollWidth:(NSInteger)kScrollObjWidth scrollHeight:(NSInteger)kScrollObjHeight;
 
--(NSData*)getCurrentFrameAndSaveIt;
--(void)loadPhotoLibrary;            	
+-(NSData*)getCurrentFrameAndSaveIt;           	
 
 + (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize;
 +(UIView *)setTitleViewWithTitle:(NSString *)title rect:(CGRect)rect;
@@ -269,8 +264,6 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil templateParam:(UIImage *)templateParam symbolArrayParam:(NSMutableArray *)symbolArrayParam iconArrayParam:(NSMutableArray *)iconArrayParam photoArrayParam:(NSMutableArray *)photoArrayParam textArrayParam:(NSMutableArray *)textArrayParam flyerNumberParam:(int)flyerNumberParam;
 
 
--(NSMutableDictionary *)getInAppDictionary;
--(void)setInAppDictionary:(NSMutableDictionary *)inAppDict;
 
 -(void)addScrollView:(id)obj;
 -(void)addBottomTabs:(id)obj;

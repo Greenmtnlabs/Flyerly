@@ -1266,42 +1266,7 @@ int arrangeLayerIndex;
     [self hideLoadingIndicator];
 }
 
-#pragma mark  imagePicker
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)img editingInfo:(NSDictionary *)editInfo {
-	
-	if(imgPickerFlag == 1){
-		
-		[[picker parentViewController] dismissModalViewControllerAnimated:YES];
-		UIImage *testImage = img;
-        selectedTemplate = testImage;
-		[self.imgView setImage:testImage] ;
-	}
-	else if(imgPickerFlag == 2){
-	
-		[[picker parentViewController] dismissModalViewControllerAnimated:YES];
-		UIImage *testImage = img;
-        
-        UIImageView *lastPhotoLayer = [[self photoLayersArray] lastObject];
-        [lastPhotoLayer setImage:testImage];
-
-		photoTouchFlag = YES;
-		lableTouchFlag = NO;
-        symbolTouchFlag= NO;
-        iconTouchFlag = NO;
-	}
-}
-
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
-{
-	[[self parentViewController] dismissModalViewControllerAnimated:YES];
-	if(imgPickerFlag == 2){
-		photoTouchFlag = YES;
-		lableTouchFlag = NO;
-        symbolTouchFlag= NO;
-        iconTouchFlag = NO;
-	}
-}
 
 -(void)loadCustomPhotoLibrary{
     
@@ -1310,63 +1275,10 @@ int arrangeLayerIndex;
     globle.NBUimage = nil;
     [self.navigationController pushViewController:nbuGallary animated:YES];
 
-    
-    /*
-    customPhotoController = [[CustomPhotoController alloc] initWithNibName:@"CustomPhotoController" bundle:nil];
-    customPhotoController.callbackObject = self;    
-    customPhotoController.callbackOnComplete = @selector(onCompleteSelectingImage:);
-    [self setLatestImageAndLoadPhotoLibrary];
-
-    photoTouchFlag = YES;
-    lableTouchFlag = NO;
-    symbolTouchFlag= NO;
-    iconTouchFlag = NO;
-
-    [self dismissModalViewControllerAnimated:YES];
-     */
-    
     [Flurry logEvent:@"Custom Background"];
 }
 
--(void)loadPhotoLibrary{
-	
-    self.imgPicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-	[self presentModalViewController:self.imgPicker animated:YES];
-	if(imgPickerFlag == 2){
-		photoTouchFlag = YES;
-		lableTouchFlag = NO;
-        symbolTouchFlag= NO;
-        iconTouchFlag = NO;
-	}
-}
 
-/**
- * Completed image.
- */
-- (void) onCompleteSelectingImage:(UIImage *)selectedImage {
-    
-	if(self.imgPickerFlag == 1){
-		
-		UIImage *testImage = selectedImage;
-        selectedTemplate = testImage;
-		[self.imgView setImage:testImage] ;
-	}
-	else if(self.imgPickerFlag == 2){
-        
-		UIImage *testImage = selectedImage;
-        UIImageView *lastPhotoLayer = [[self photoLayersArray] lastObject];
-        [lastPhotoLayer setImage:testImage];
-
-		self.photoTouchFlag = YES;
-		self.lableTouchFlag = NO;
-        symbolTouchFlag= NO;
-        iconTouchFlag = NO;
-        
-        if(selectedImage == nil)
-            [self setAddMoreLayerTabAction:addMorePhotoTabButton];
-
-	}
-}
 
 -(void)openCustomCamera{
 
@@ -1378,65 +1290,7 @@ int arrangeLayerIndex;
     [Flurry logEvent:@"Custom Background"];
 }
 
--(void)openCamera{
-    self.imgPicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-    [self presentModalViewController:self.imgPicker animated:YES];
-	if(imgPickerFlag == 2){
-		photoTouchFlag = YES;
-		lableTouchFlag = NO;
-        symbolTouchFlag= NO;
-        iconTouchFlag = NO;
-	}
-}
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-
-	if(self.imgPickerFlag == 1){
-
-        //[self.imgView setImage:info[UIImagePickerControllerOriginalImage]];
-        UIImage *image = info[UIImagePickerControllerOriginalImage];
-
-        if(IS_IPHONE_5){
-            image = [CreateFlyerController imageWithImage:image scaledToSize:CGSizeMake(320, 568)];
-        }else{
-            image = [CreateFlyerController imageWithImage:image scaledToSize:CGSizeMake(320, 480)];
-        }
-        
-        CGRect rect;
-        if(IS_IPHONE_5){
-            rect = CGRectMake(45,
-                              110,
-                              550, 750);
-        }else{
-            rect = CGRectMake(5,
-                              50,
-                              310, 342);
-        }
-        
-        // Create bitmap image from original image data,
-        // using rectangle to specify desired crop area
-        CGImageRef imageRef = CGImageCreateWithImageInRect([image CGImage], rect);
-        UIImage *img = [UIImage imageWithCGImage:imageRef];
-        CGImageRelease(imageRef);
-        
-        selectedTemplate = img;
-        [self.imgView setImage:img];
-        [self dismissViewControllerAnimated:YES completion:nil];
-	}
-	else if(self.imgPickerFlag == 2){
-        
-		[picker dismissModalViewControllerAnimated:YES];
-		UIImage *testImage = info[UIImagePickerControllerOriginalImage];
-        
-        UIImageView *lastPhotoLayer = [[self photoLayersArray] lastObject];
-        [lastPhotoLayer setImage:testImage];
-
-		self.photoTouchFlag = YES;
-		self.lableTouchFlag = NO;
-        symbolTouchFlag= NO;
-        iconTouchFlag = NO;
-	}
-}
 
 + (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
     //UIGraphicsBeginImageContext(newSize);
@@ -1496,19 +1350,8 @@ int arrangeLayerIndex;
     
         [self deleteLayer:editButtonGlobal overrided:nil];
         [Flurry logEvent:@"Layed Deleted"];
-	} else if(alertView == inAppAlert && (buttonIndex == 0 || buttonIndex == 1 || buttonIndex == 2)) {
-        
-       // NSLog(@"Purchase One Font Selected");
-        NSLog(@"%@",(demoPurchase.products)[buttonIndex]);
-        if (![demoPurchase purchaseProduct:(demoPurchase.products)[buttonIndex]]){
-            
-            // Returned NO, so notify user that In-App Purchase is Disabled in their Settings.
-            UIAlertView *settingsAlert = [[UIAlertView alloc] initWithTitle:@"Allow Purchases" message:@"You must first enable In-App Purchase in your iOS Settings before making this purchase." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [settingsAlert show];
-        }
-        
-    }
-    }
+	}
+  }
 }
 
 #pragma mark After ViewWillAppear Method Sequence
@@ -1554,22 +1397,6 @@ int arrangeLayerIndex;
         //Call Style
         [self callStyle];
         
-        //Replace RightBar Button With
-        //Delete Button
-        UIButton *delButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 4, 45, 42)];
-        [delButton addTarget:self action:@selector(callDeleteLayer) forControlEvents:UIControlEventTouchUpInside];
-        [delButton setBackgroundImage:[UIImage imageNamed:@"delete_button"] forState:UIControlStateNormal];
-        delButton.showsTouchWhenHighlighted = YES;
-        UIBarButtonItem *delBarButton = [[UIBarButtonItem alloc] initWithCustomView:delButton];
-        
-        //Done Bar Button
-        UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-        [doneButton addTarget:self action:@selector(callAddMoreLayers) forControlEvents:UIControlEventTouchUpInside];
-        [doneButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
-        doneButton.showsTouchWhenHighlighted = YES;
-        UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
-        
-        [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:doneBarButton,delBarButton,nil]];
     }
     else if([tag hasPrefix:@"222"])
     {
@@ -1796,10 +1623,6 @@ int arrangeLayerIndex;
 
 -(void)callWrite{
 
-	photoTouchFlag=NO;
-	lableTouchFlag=NO;
-    symbolTouchFlag= NO;
-    iconTouchFlag = NO;
 
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
     label.backgroundColor = [UIColor clearColor];
@@ -1833,12 +1656,9 @@ int arrangeLayerIndex;
     UITextView *lastTextView = msgTextView;
 	lastTextView.font = [UIFont fontWithName:@"Arial" size:16];
 	lastTextView.textColor = [UIColor blackColor];
-
-    // Make copy of layers to undo it later
-    [self makeCopyOfLayers];
     
     
-    CustomLabel *lastLabelView = [self textLabelLayersArray][arrangeLayerIndex];
+    CustomLabel *lastLabelView = [[CustomLabel alloc] init];
     
     selectedColor = lastLabelView.textColor;
 
@@ -1881,8 +1701,17 @@ int arrangeLayerIndex;
         [doneButton addTarget:self action:@selector(logTextAddedEvent) forControlEvents:UIControlEventTouchUpInside];
         [doneButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
          doneButton.showsTouchWhenHighlighted = YES;
-        UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
-        [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
+        UIBarButtonItem *DoneBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
+        
+        //Delete Button
+        UIButton *delButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 4, 45, 42)];
+        [delButton addTarget:self action:@selector(callDeleteLayer) forControlEvents:UIControlEventTouchUpInside];
+        [delButton setBackgroundImage:[UIImage imageNamed:@"delete_button"] forState:UIControlStateNormal];
+        delButton.showsTouchWhenHighlighted = YES;
+        UIBarButtonItem *delBarButton = [[UIBarButtonItem alloc] initWithCustomView:delButton];
+        
+        [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:DoneBarButton,delBarButton,nil]];
+        
     }
    
     [self hideAddMoreButton];
@@ -1927,32 +1756,9 @@ int arrangeLayerIndex;
 
     // SET BOTTOM BAR
     [self setStyleTabAction:fontTabButton];
-    CustomLabel *lastLabelView = [self textLabelLayersArray][arrangeLayerIndex];
-	lastLabelView.alpha=1;	
-	textBackgrnd.alpha = ALPHA1;
-	
-	[UIView commitAnimations];
-	
-	[lastTextView setTextColor:selectedColor];
-	[lastLabelView setTextColor:selectedColor];
-	CALayer * l = [lastTextView layer];
-	[l setMasksToBounds:YES];
-	[l setCornerRadius:0];
-	[l setBorderWidth:0];
-	[l setBorderColor:[[UIColor clearColor] CGColor]];
-	selectedText = lastTextView.text;
-	  
-//	lableLocation = CGPointMake(lastLabelView.frame.origin.x,lastLabelView.frame.origin.y);
-	lastLabelView.frame = CGRectMake(lastLabelView.frame.origin.x, lastLabelView.frame.origin.y, lastLabelView.frame.size.width, lastLabelView.frame.size.height);
-	lastLabelView.numberOfLines = 40;
-	lastLabelView.text = lastTextView.text;
+
 	[lastTextView resignFirstResponder];
 	[lastTextView removeFromSuperview];
-    
-	lableTouchFlag = YES;
-	photoTouchFlag = NO;
-    symbolTouchFlag= NO;
-    iconTouchFlag = NO;
 }
 
 -(void) donePhoto{
@@ -2302,17 +2108,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 }
 
 
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    
-    NSLog(@"Purchase One Font Selected");
-    
-    if (![demoPurchase purchaseProduct:(demoPurchase.products)[buttonIndex]]){
-        
-        // Returned NO, so notify user that In-App Purchase is Disabled in their Settings.
-        UIAlertView *settingsAlert = [[UIAlertView alloc] initWithTitle:@"Allow Purchases" message:@"You must first enable In-App Purchase in your iOS Settings before making this purchase." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [settingsAlert show];        
-    }
-}
+
 
 #pragma mark  TEXTVIEW delegate
 - (void)textViewDidBeginEditing:(UITextView *)textView
@@ -2533,10 +2329,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
         selectedAddMoreLayerTab = ADD_MORE_TEXTTAB;
 
-        symbolTouchFlag= NO;
-        photoTouchFlag = NO;
-        iconTouchFlag = NO;
-        lableTouchFlag = YES;
+        
         [addMoreFontTabButton setSelected:YES];
         [self plusButtonClick];
 	}
@@ -2735,119 +2528,10 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 // End New Code
 
     
-    
-    
     deleteMode = YES;
     undoCount = undoCount + 1;
     
     NSLog(@"Delete Layer Tag: %d", layerButton.tag);
-    NSString *tag = [NSString stringWithFormat:@"%d", layerButton.tag];
-    int index = [self getIndexFromTag:tag];
-    
-    // Make copy of layers to undo it later
-    [self makeCopyOfLayers];
-    
-    if([tag hasPrefix:@"111"])
-    {
-        // Remove layer
-        CustomLabel *label = textLabelLayersArray[index];
-        [label removeFromSuperview];
-        
-        // Remove from Array
-        [textLabelLayersArray removeObjectAtIndex:index];
-        
-        // Update remaining indexes
-        for(int updateIndex=0; updateIndex<[textLabelLayersArray count]; updateIndex++){
-            UIButton *layerButton = textLabelLayersArray[updateIndex];
-            layerButton.tag = [[NSString stringWithFormat:@"%@%d",@"111",updateIndex] integerValue];
-            
-            [textLabelLayersArray removeObjectAtIndex:updateIndex];
-            [textLabelLayersArray insertObject:layerButton atIndex:updateIndex];
-        }
-        
-        // Remove layer thumbnail
-        //LayerTileButton *layerThumbnail = (LayerTileButton *) [layerButton superview];
-        //[layerThumbnail removeFromSuperview];
-        
-        // Update layer scroll view
-        [self resetLayerScrollView:layerButton.uid];
-        
-    }
-    else if([tag hasPrefix:@"222"])
-    {
-        // Remove layer
-        UIImageView *photo = photoLayersArray[index];
-        [photo removeFromSuperview];
-        
-        // Remove from Array
-        [photoLayersArray removeObjectAtIndex:index];
-        
-        // Update remaining indexes
-        for(int updateIndex=0; updateIndex<[photoLayersArray count]; updateIndex++){
-            UIButton *layerButton = photoLayersArray[updateIndex];
-            layerButton.tag = [[NSString stringWithFormat:@"%@%d",@"222",updateIndex] integerValue];
-            
-            [photoLayersArray removeObjectAtIndex:updateIndex];
-            [photoLayersArray insertObject:layerButton atIndex:updateIndex];
-        }
-        
-        // Remove layer thumbnail
-        UIButton *layerThumbnail = (UIButton *) [layerButton superview];
-        [layerThumbnail removeFromSuperview];
-        
-        // Update layer scroll view
-        [self resetLayerScrollView];
-    }
-    else if([tag hasPrefix:@"333"])
-    {
-        // Remove layer
-        UIImageView *symbol = symbolLayersArray[index];
-        [symbol removeFromSuperview];
-        
-        // Remove from Array
-        [symbolLayersArray removeObjectAtIndex:index];
-        
-        // Update remaining indexes
-        for(int updateIndex=0; updateIndex<[symbolLayersArray count]; updateIndex++){
-            UIButton *layerButton = symbolLayersArray[updateIndex];
-            layerButton.tag = [[NSString stringWithFormat:@"%@%d",@"333",updateIndex] integerValue];
-            
-            [symbolLayersArray removeObjectAtIndex:updateIndex];
-            [symbolLayersArray insertObject:layerButton atIndex:updateIndex];
-        }
-        
-        // Remove layer thumbnail
-        UIButton *layerThumbnail = (UIButton *) [layerButton superview];
-        [layerThumbnail removeFromSuperview];
-        
-        // Update layer scroll view
-        [self resetLayerScrollView];
-    }
-    else if([tag hasPrefix:@"444"])
-    {
-        // Remove layer
-        UIImageView *icon = iconLayersArray[index];
-        [icon removeFromSuperview];
-        
-        // Remove from Array
-        [iconLayersArray removeObjectAtIndex:index];
-        
-        // Update remaining indexes
-        for(int updateIndex=0; updateIndex<[iconLayersArray count]; updateIndex++){
-            UIButton *layerButton = iconLayersArray[updateIndex];
-            layerButton.tag = [[NSString stringWithFormat:@"%@%d",@"444",updateIndex] integerValue];
-            
-            [iconLayersArray removeObjectAtIndex:updateIndex];
-            [iconLayersArray insertObject:layerButton atIndex:updateIndex];
-        }
-        
-        // Remove layer thumbnail
-        UIButton *layerThumbnail = (UIButton *) [layerButton superview];
-        [layerThumbnail removeFromSuperview];
-        
-        // Update layer scroll view
-        [self resetLayerScrollView];
-    }
     
     //Set Main View On Screen
     [self callAddMoreLayers];
@@ -2987,16 +2671,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     }
 }
 
-/*-(NSMutableArray *)textEditLayersArray{
-    
-    if(textEditLayersArray){
-        return textEditLayersArray;
-    } else {
-        
-        textEditLayersArray = [[NSMutableArray alloc] init];
-        return textEditLayersArray;
-    }
-}*/
+
 
 -(NSMutableArray *)textLabelLayersArray{
     
@@ -3043,25 +2718,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     if([self canAddMoreLayers]){
         if(selectedAddMoreLayerTab == ADD_MORE_TEXTTAB){
             
-            CustomLabel *newMsgLabel = [[CustomLabel alloc]initWithFrame:CGRectMake(20, 50, 280, 280)];
-
-            newMsgLabel.backgroundColor = [UIColor clearColor];
-            newMsgLabel.textColor = [UIColor blackColor];
-            newMsgLabel.borderColor = [UIColor clearColor];
-            newMsgLabel.textAlignment = UITextAlignmentCenter;
-            newMsgLabel.adjustsFontSizeToFitWidth = YES;
-            
-            //newMsgLabel.adjustsLetterSpacingToFitWidth = YES;
-            newMsgLabel.lineBreakMode = UILineBreakModeClip;
-            //[newMsgLabel.text]
-            //newMsgLabel.numberOfLines = 0;
-            //
-            //newMsgLabel.tag = textLayerCount++;
-            [self.imgView addSubview:newMsgLabel];
-
-            arrangeLayerIndex = [[self textLabelLayersArray] count];
-            [[self textLabelLayersArray] addObject:newMsgLabel];
-
             // set delete mode to NO when clicked on text tab
             deleteMode = NO;
             [self callWrite];
