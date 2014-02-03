@@ -488,7 +488,6 @@ int photoLayerCount = 0; // Photo layer count to set tag value
  */
 -(void)addTemplatesInSubView{
 
-    BOOL isAllTemplatePurchased = [self isProductPurchased:[PRODUCT_FULL_TEMPLATE stringByReplacingOccurrencesOfString:@"." withString:@""]];
     
     [templateArray removeAllObjects];
     
@@ -511,20 +510,6 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 		[templateButton addSubview:img];
 		templateButton.tag = i;
         
-        if(i>4){
-            if(!isAllTemplatePurchased){
-                
-                NSString *productToCheck = [[NSString stringWithFormat:@"%@%d",PREFIX_BACKGROUND_PRODUCT,i] stringByReplacingOccurrencesOfString:@"." withString:@""];
-                
-                if(![self isProductPurchased:productToCheck]){
-                    UIImageView *lock = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lock"]];
-                    lock.frame = CGRectMake(21, 18, 17, 19);
-                    [templateButton addSubview:lock];
-                    templateButton.userInteractionEnabled = NO;
-                }
-            }
-        }
-        
 		[templateScrollView addSubview:templateButton];
 	}
 }
@@ -534,7 +519,6 @@ int photoLayerCount = 0; // Photo layer count to set tag value
  */
 -(void)addFontsInSubView{
     
-    BOOL isAllFontPurchased = [self isProductPurchased:[PRODUCT_FULL_FONT stringByReplacingOccurrencesOfString:@"." withString:@""]];
     
 	for (int i = 1; i <=[fontArray count] ; i++)
 	{
@@ -547,21 +531,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 		[font setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 		font.tag = i;
 		[font setBackgroundImage:[UIImage imageNamed:@"a_bg"] forState:UIControlStateNormal];
-        
-        if(i>5){
-            if(!isAllFontPurchased){
-                
-                NSString *productToCheck = [[NSString stringWithFormat:@"%@%d",PREFIX_FONT_PRODUCT,i] stringByReplacingOccurrencesOfString:@"." withString:@""];
-                
-                if(![self isProductPurchased:productToCheck]){
-                    UIImageView *lock = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lock"]];
-                    lock.frame = CGRectMake(20, 20, 17, 19);
-                    [font addSubview:lock];
-                    font.userInteractionEnabled = NO;
-                }
-            }
-        }
-        
+
 		[fontScrollView addSubview:font];
 	}
 }
@@ -571,11 +541,6 @@ int photoLayerCount = 0; // Photo layer count to set tag value
  */
 -(void)addSizeInSubView{
     
-    BOOL isAnyFontPurchased = [self isProductPurchased:[PRODUCT_FONT stringByReplacingOccurrencesOfString:@"." withString:@""]];
-    BOOL isFullFontPurchased = [self isProductPurchased:[PRODUCT_FULL_FONT stringByReplacingOccurrencesOfString:@"." withString:@""]];
-    if(!isAnyFontPurchased){
-        isAnyFontPurchased = isFullFontPurchased;
-    }
     
 	for (int i = 1; i <=  [SIZE_ARRAY count] ; i++)
 	{
@@ -588,16 +553,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 		[size setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 		size.tag = i+60;
 		size.alpha = ALPHA1;
-        
-        if(i>5 && i<([SIZE_ARRAY count] - 1)){
-            if(!isAnyFontPurchased){
-                UIImageView *lock = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lock"]];
-                lock.frame = CGRectMake(20, 20, 17, 19);
-                [size addSubview:lock];
-                size.userInteractionEnabled = NO;
-            }
-        }
-        
+
 		[sizeScrollView addSubview:size];
 	}
 }
@@ -606,8 +562,6 @@ int photoLayerCount = 0; // Photo layer count to set tag value
  * Add colors in scroll views
  */
 -(void)addColorsInSubView{
-
-    BOOL isAllColorPurchased = [self isProductPurchased:[PRODUCT_FULL_FONT_COLOR stringByReplacingOccurrencesOfString:@"." withString:@""]];
     
 	for (int i = 1; i <=  [colorArray count] ; i++)
 	{
@@ -622,21 +576,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
         label.layer.borderWidth = 1.0;
 		[color addSubview:label];
 		color.tag = i + 30;
-        
-        if(i > 5){
-            if(!isAllColorPurchased){
-                
-                NSString *productToCheck = [[NSString stringWithFormat:@"%@%d",PREFIX_FONT_COLOR_PRODUCT,color.tag] stringByReplacingOccurrencesOfString:@"." withString:@""];
 
-                if(![self isProductPurchased:productToCheck]){
-                    UIImageView *lock = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lock"]];
-                    lock.frame = CGRectMake(20, 20, 17, 19);
-                    [color addSubview:lock];
-                    color.userInteractionEnabled = NO;
-                }
-            }
-        }
-        
 		[colorScrollView addSubview:color];
 	}
 }
@@ -646,7 +586,6 @@ int photoLayerCount = 0; // Photo layer count to set tag value
  */
 -(void)addTextBorderInSubView{
     
-    BOOL isAllColorBordersPurchased = [self isProductPurchased:[PRODUCT_FULL_FONT_BORDER_COLOR stringByReplacingOccurrencesOfString:@"." withString:@""]];
 
 	for (int i = 1; i <=  [borderArray count] ; i++)
 	{
@@ -659,21 +598,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 		[color addSubview:label];
 		color.tag = i+90;
 		color.alpha = ALPHA1;
-        
-        if(i>5){
-            if(!isAllColorBordersPurchased){
-                
-                NSString *productToCheck = [[NSString stringWithFormat:@"%@%d",PREFIX_TEXT_BORDER_PRODUCT,color.tag] stringByReplacingOccurrencesOfString:@"." withString:@""];
-                
-                if(![self isProductPurchased:productToCheck]){
-                    UIImageView *lock = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lock"]];
-                    lock.frame = CGRectMake(20, 20, 17, 19);
-                    [color addSubview:lock];
-                    color.userInteractionEnabled = NO;
-                }
-            }
-        }
-        
+
 		[fontBorderScrollView addSubview:color];
 	}
 }
@@ -681,9 +606,8 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 /*
  * Add flyer borders in scroll views
  */
--(void)addFlyerBorderInSubView{
+-(void)addFlyerBorderInSubView {
 
-    BOOL isAllFlyerBorderColorsPurchased = [self isProductPurchased:[PRODUCT_FULL_FLYER_BORDER_COLOR stringByReplacingOccurrencesOfString:@"." withString:@""]];
 
 	for (int i = 1; i <=  [borderArray count] ; i++)
 	{
@@ -696,20 +620,6 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 		[color addSubview:label];
 		color.tag = i+90;
 		color.alpha = ALPHA1;
-        
-        if(i>5){
-            if(!isAllFlyerBorderColorsPurchased){
-                
-                NSString *productToCheck = [[NSString stringWithFormat:@"%@%d",PREFIX_FLYER_BORDER_PRODUCT,color.tag] stringByReplacingOccurrencesOfString:@"." withString:@""];
-                
-                if(![self isProductPurchased:productToCheck]){
-                    UIImageView *lock = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lock"]];
-                    lock.frame = CGRectMake(20, 20, 17, 19);
-                    [color addSubview:lock];
-                    color.userInteractionEnabled = NO;
-                }
-            }
-        }
         
 		[borderScrollView addSubview:color];
 	}   
@@ -718,7 +628,6 @@ int photoLayerCount = 0; // Photo layer count to set tag value
  * Add flyer Symbols in scroll views
  */
 -(void)addSymbolsInSubView{
-        BOOL isAllsymbolPurchased = [self isProductPurchased:[PRODUCT_SYMBOL_ALL stringByReplacingOccurrencesOfString:@"." withString:@""]];
 
 	NSInteger symbolScrollWidth = 60;
 	NSInteger symbolScrollHeight = 50;
@@ -740,19 +649,6 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 		img.frame  = CGRectMake(symbolButton.frame.origin.x+5, symbolButton.frame.origin.y-2, symbolButton.frame.size.width-10, symbolButton.frame.size.height-7);
 		[symbolButton addSubview:img];
 		symbolButton.tag = i;
-        if(i>5){
-            if(!isAllsymbolPurchased){
-                NSString *productToCheck = [[NSString stringWithFormat:@"%@%d",PREFIX_SYMBOL_PRODUCT,symbolButton.tag] stringByReplacingOccurrencesOfString:@"." withString:@""];
-                
-                if(![self isProductPurchased:productToCheck]){
-                    UIImageView *lock = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lock"]];
-                    lock.frame = CGRectMake(21, 18, 17, 19);
-                    [symbolButton addSubview:lock];
-                    symbolButton.userInteractionEnabled = NO;
-                }
-                
-            }
-        }
         
 		[symbolScrollView addSubview:symbolButton];
 	}
@@ -763,7 +659,6 @@ int photoLayerCount = 0; // Photo layer count to set tag value
  * Add flyer Icons in scroll views
  */
 -(void)addFlyerIconInSubView{
-    BOOL isAlliconPurchased = [self isProductPurchased:[PRODUCT_ICON_ALL stringByReplacingOccurrencesOfString:@"." withString:@""]];
     
     NSInteger iconScrollWidth = 60;
 	NSInteger iconScrollHeight = 50;
@@ -785,19 +680,6 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 		img.frame  = CGRectMake(iconButton.frame.origin.x+5, iconButton.frame.origin.y-2, iconButton.frame.size.width-10, iconButton.frame.size.height-7);
 		[iconButton addSubview:img];
 		iconButton.tag = i;
-        if(i>5){
-            if(!isAlliconPurchased){
-                
-                NSString *productToCheck = [[NSString stringWithFormat:@"%@%d",PREFIX_ICON_PRODUCT,iconButton.tag] stringByReplacingOccurrencesOfString:@"." withString:@""];
-                
-                if(![self isProductPurchased:productToCheck]){
-                    UIImageView *lock = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lock"]];
-                    lock.frame = CGRectMake(21, 18, 17, 19);
-                    [iconButton addSubview:lock];
-                    iconButton.userInteractionEnabled = NO;
-                }
-            }
-        }
         
 		[iconScrollView addSubview:iconButton];
     }
