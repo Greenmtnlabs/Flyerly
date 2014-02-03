@@ -129,15 +129,11 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 	NSInteger symbolScrollWidth = 60;
 	NSInteger symbolScrollHeight = 50;
     
-    // Adding symbols Icon In Scrollview
-    [self addSymbolsInSubView];
-   
   
     NSInteger iconScrollWidth = 60;
 	NSInteger iconScrollHeight = 50;
     
-    // Adding Icon In Scrollview
-    [self addFlyerIconInSubView];
+
 
     
     
@@ -166,8 +162,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 				[UIFont fontWithName:@"Daniel Black" size:27],
                 nil];
 	
-    // Add fonts in scroll view
-    //[self addFontsInSubView];
+ 
 	
     // Create color array
 	colorArray = 	[[NSArray  alloc] initWithObjects: [UIColor redColor], [UIColor blueColor], [UIColor greenColor], [UIColor blackColor], [UIColor colorWithRed:253.0/255.0 green:191.0/255.0 blue:38.0/224.0 alpha:1], [UIColor colorWithWhite:1.0f alpha:1.0f], [UIColor grayColor], [UIColor magentaColor], [UIColor yellowColor], [UIColor colorWithRed:163.0/255.0 green:25.0/255.0 blue:2.0/224.0 alpha:1], [UIColor colorWithRed:3.0/255.0 green:15.0/255.0 blue:41.0/224.0 alpha:1], [UIColor purpleColor], [UIColor colorWithRed:85.0/255.0 green:86.0/255.0 blue:12.0/224.0 alpha:1], [UIColor orangeColor], [UIColor colorWithRed:98.0/255.0 green:74.0/255.0 blue:9.0/224.0 alpha:1], [UIColor colorWithRed:80.0/255.0 green:7.0/255.0 blue:1.0/224.0 alpha:1], [UIColor colorWithRed:150.0/255.0 green:150.0/255.0 blue:97.0/224.0 alpha:1], [UIColor colorWithRed:111.0/255.0 green:168.0/255.0 blue:100.0/224.0 alpha:1], [UIColor cyanColor], [UIColor colorWithRed:17.0/255.0 green:69.0/255.0 blue:70.0/224.0 alpha:1], [UIColor colorWithRed:173.0/255.0 green:127.0/255.0 blue:251.0/224.0 alpha:1], nil];
@@ -177,79 +172,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     borderArray = 	[[NSArray  alloc] initWithObjects: [UIColor blackColor], [UIColor grayColor], [UIColor darkGrayColor], [UIColor blueColor], [UIColor purpleColor], [UIColor colorWithRed:115.0/255.0 green:134.0/255.0 blue:144.0/255.0 alpha:1], [UIColor orangeColor], [UIColor greenColor], [UIColor redColor], [UIColor colorWithRed:14.0/255.0 green:95.0/255.0 blue:111.0/255.0 alpha:1], [UIColor colorWithRed:180.0/255.0 green:180.0/255.0 blue:149.0/255.0 alpha:1], [UIColor colorWithRed:228.0/255.0 green:128.0/255.0 blue:144.0/255.0 alpha:1], [UIColor colorWithRed:213.0/255.0 green:110.0/255.0 blue:86.0/255.0 alpha:1],[UIColor colorWithRed:156.0/255.0 green:195.0/255.0 blue:233.0/255.0 alpha:1],[UIColor colorWithRed:27.0/255.0 green:70.0/255.0 blue:148.0/255.0 alpha:1],[UIColor colorWithRed:234.0/255.0 green:230.0/255.0 blue:51.0/255.0 alpha:1],[UIColor cyanColor], [UIColor colorWithRed:232.0/255.0 green:236.0/255.0 blue:51.0/224.0 alpha:1],[UIColor magentaColor],[UIColor colorWithRed:57.0/255.0 green:87.0/255.0 blue:13.0/224.0 alpha:1], [UIColor colorWithRed:93.0/255.0 green:97.0/255.0 blue:196.0/224.0 alpha:1],nil];
 
 
-    
-    // Add flyer border in scroll view
-    [self addFlyerBorderInSubView];
 
-    
-
-	
-    // Set frame and actions for scrollview data
-	[fontScrollView setCanCancelContentTouches:NO];
-	fontScrollView.indicatorStyle = UIScrollViewIndicatorStyleBlack;
-	fontScrollView.clipsToBounds = YES;
-	fontScrollView.scrollEnabled = YES;
-	fontScrollView.pagingEnabled = NO;
-	fontScrollView.showsHorizontalScrollIndicator = NO;
-	fontScrollView.showsVerticalScrollIndicator = NO;
-	[self layoutScrollImages:fontScrollView scrollWidth:fontScrollWidth scrollHeight:fontScrollHeight];
-	
-	[colorScrollView setCanCancelContentTouches:NO];
-	colorScrollView.indicatorStyle = UIScrollViewIndicatorStyleBlack;
-	colorScrollView.clipsToBounds = YES;
-	colorScrollView.scrollEnabled = YES;
-	colorScrollView.pagingEnabled = NO;
-	colorScrollView.showsHorizontalScrollIndicator = NO;
-	colorScrollView.showsVerticalScrollIndicator = NO;
-	[self layoutScrollImages:colorScrollView scrollWidth:colorScrollWidth scrollHeight:colorScrollHeight];
-	
-	
-	[sizeScrollView setCanCancelContentTouches:NO];
-	sizeScrollView.indicatorStyle = UIScrollViewIndicatorStyleBlack;
-	sizeScrollView.clipsToBounds = YES;
-	sizeScrollView.scrollEnabled = YES;
-	sizeScrollView.pagingEnabled = NO;
-	sizeScrollView.showsHorizontalScrollIndicator = NO;
-	sizeScrollView.showsVerticalScrollIndicator = NO;
-	[self layoutScrollImages:sizeScrollView scrollWidth:sizeScrollWidth scrollHeight:sizeScrollHeight];
-	
-	[borderScrollView setCanCancelContentTouches:NO];
-	borderScrollView.indicatorStyle = UIScrollViewIndicatorStyleBlack;
-	borderScrollView.clipsToBounds = YES;
-	borderScrollView.scrollEnabled = YES;
-	borderScrollView.pagingEnabled = NO;
-	borderScrollView.showsHorizontalScrollIndicator = NO;
-	borderScrollView.showsVerticalScrollIndicator = NO;
-	[self layoutScrollImages:borderScrollView scrollWidth:borderScrollWidth scrollHeight:borderScrollHeight];
-    
-	[fontBorderScrollView setCanCancelContentTouches:NO];
-	fontBorderScrollView.indicatorStyle = UIScrollViewIndicatorStyleBlack;
-	fontBorderScrollView.clipsToBounds = YES;
-	fontBorderScrollView.scrollEnabled = YES;
-	fontBorderScrollView.pagingEnabled = NO;
-	fontBorderScrollView.showsHorizontalScrollIndicator = NO;
-	fontBorderScrollView.showsVerticalScrollIndicator = NO;
-	[self layoutScrollImages:fontBorderScrollView scrollWidth:fontBorderScrollWidth scrollHeight:fontBorderScrollHeight];
-    
-    [symbolScrollView setCanCancelContentTouches:NO];
-	symbolScrollView.indicatorStyle = UIScrollViewIndicatorStyleBlack;
-	symbolScrollView.clipsToBounds = YES;
-	symbolScrollView.scrollEnabled = YES;
-	symbolScrollView.pagingEnabled = NO;
-	symbolScrollView.showsHorizontalScrollIndicator = NO;
-	symbolScrollView.showsVerticalScrollIndicator = NO;
-
-	[self layoutScrollImages:symbolScrollView scrollWidth:symbolScrollWidth scrollHeight:symbolScrollHeight];
-    
-    [iconScrollView setCanCancelContentTouches:NO];
-	iconScrollView.indicatorStyle = UIScrollViewIndicatorStyleBlack;
-	iconScrollView.clipsToBounds = YES;
-	iconScrollView.scrollEnabled = YES;
-	iconScrollView.pagingEnabled = NO;
-	iconScrollView.showsHorizontalScrollIndicator = NO;
-	iconScrollView.showsVerticalScrollIndicator = NO;
-	[self layoutScrollImages:iconScrollView scrollWidth:iconScrollWidth scrollHeight:iconScrollHeight];
-    
 
     //Setting Tags
 	fontTabButton.tag = 10001;
@@ -357,12 +280,8 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     moreLayersButton = [[UIButton alloc] initWithFrame:CGRectMake(82, 445, 156, 43)];
     moreLayersLabel = [[UILabel alloc] initWithFrame:CGRectMake(125, 445, 156, 43)];
     
-    //all Main Scroll Views Initialize
-    //for Using in ContextView
-    templateScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,320,130)];
-    symbolScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,320,130)];
-    iconScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,320,130)];
-    layerScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(13, 0,300,130)];
+    // Main Scroll Views Initialize
+    layerScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,320,130)];
     layersDic = [[NSMutableDictionary alloc] init];
     
     //Setting ScrollView
@@ -373,16 +292,6 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     layerScrollView.pagingEnabled = NO;
     layerScrollView.showsHorizontalScrollIndicator = NO;
     layerScrollView.showsVerticalScrollIndicator = NO;
-    [self layoutScrollImages:layerScrollView scrollWidth:55 scrollHeight:40];
-
-    
-    //all Text Sub Scroll Views Initialize
-    //for Using in ContextView
-    fontScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(13, 0,320,130)];
-    colorScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(13, 0,320,130)];
-    sizeScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(13, 0,320,130)];
-    borderScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(13, 0,320,130)];
-    fontBorderScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(13, 0,320,130)];
     
     //all Labels Intialize
     //for Using in ContextView
@@ -392,20 +301,9 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     
     
     // Add Templates
-	templateScrollWidth = 60;
-	templateScrollHeight = 55;
-	templateArray = [[NSMutableArray alloc]init];
 
-    // Add templates in scroll view
-    [self addTemplatesInSubView];
+	templateArray = [[NSMutableArray alloc]init];
     
-	[templateScrollView setCanCancelContentTouches:NO];
-	templateScrollView.scrollEnabled = YES;
-	templateScrollView.pagingEnabled = NO;
-	templateScrollView.showsHorizontalScrollIndicator = NO;
-	templateScrollView.showsVerticalScrollIndicator = NO;
-	[self layoutScrollImages:templateScrollView scrollWidth:templateScrollWidth scrollHeight:templateScrollHeight];
-	   
 	imgPickerFlag =1;
     selectedAddMoreLayerTab = -1;
     
@@ -490,8 +388,21 @@ int photoLayerCount = 0; // Photo layer count to set tag value
  */
 -(void)addTemplatesInSubView{
 
+    templateScrollWidth = 60;
+	templateScrollHeight = 55;
+    
+    imgPickerFlag =1;
     
     [templateArray removeAllObjects];
+    
+    //Delete SubViews From ScrollView
+    [self deleteSubviewsFromScrollView];
+    
+    CGFloat curXLoc = 0;
+    CGFloat curYLoc = 5;
+    
+    if(IS_IPHONE_5)
+        curYLoc = 10;
     
 	for(int i=0;i<67;i++) {
         
@@ -505,6 +416,8 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 		
 		UIButton *templateButton = [UIButton  buttonWithType:UIButtonTypeCustom];
 		templateButton.frame =CGRectMake(0, 5,templateScrollWidth, templateScrollHeight);
+        [templateButton addTarget:self action:@selector(selectTemplate:) forControlEvents:UIControlEventTouchUpInside];
+
         [templateButton setBackgroundColor:[UIColor whiteColor]];
         
 		UIImageView *img = [[UIImageView alloc]initWithImage:iconImg];
@@ -512,8 +425,27 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 		[templateButton addSubview:img];
 		templateButton.tag = i;
         
-		[templateScrollView addSubview:templateButton];
-	}
+        CGRect frame = templateButton.frame;
+        frame.origin = CGPointMake(curXLoc, curYLoc);
+        templateButton.frame = frame;
+        curXLoc += (templateScrollWidth)+5;
+        
+        if(IS_IPHONE_5){
+            if(curXLoc >= 320){
+                curXLoc = 0;
+                curYLoc = curYLoc + templateScrollHeight + 7;
+            }
+        }
+        
+		[layerScrollView addSubview:templateButton];
+	}// Loop
+    
+    if(IS_IPHONE_5){
+        [layerScrollView setContentSize:CGSizeMake(320, curYLoc + templateScrollHeight)];
+    } else {
+        [layerScrollView setContentSize:CGSizeMake(([templateArray count]*(templateScrollWidth+5)), [layerScrollView bounds].size.height)];
+    }
+    
 }
 
 /*
@@ -529,6 +461,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     int increment = 5;
     
     if(IS_IPHONE_5){
+         curXLoc = 13;
         curYLoc = 10;
         increment = 8;
     }
@@ -556,7 +489,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
         
         if(IS_IPHONE_5){
             if(curXLoc >= 300){
-                curXLoc = 0;
+                curXLoc = 13;
                 curYLoc = curYLoc + fontScrollWidth + 7;
             }
         }
@@ -587,6 +520,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     int increment = 5;
     
     if(IS_IPHONE_5){
+        curXLoc = 13;
         curYLoc = 10;
         increment = 8;
     }
@@ -613,7 +547,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
         
         if(IS_IPHONE_5){
             if(curXLoc >= 300){
-                curXLoc = 0;
+                curXLoc = 13;
                 curYLoc = curYLoc + sizeScrollHeight + 7;
             }
         }
@@ -642,6 +576,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     int increment = 5;
     
     if(IS_IPHONE_5){
+        curXLoc = 13;
         curYLoc = 10;
         increment = 8;
     }
@@ -667,7 +602,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
         
         if(IS_IPHONE_5){
             if(curXLoc >= 300){
-                curXLoc = 0;
+                curXLoc = 13;
                 curYLoc = curYLoc + colorScrollHeight + 7;
             }
         }
@@ -698,6 +633,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     int increment = 5;
     
     if(IS_IPHONE_5){
+        curXLoc = 13;
         curYLoc = 10;
         increment = 8;
     }
@@ -723,7 +659,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
         
         if(IS_IPHONE_5){
             if(curXLoc >= 300){
-                curXLoc = 0;
+                curXLoc = 13;
                 curYLoc = curYLoc + borderScrollHeight + 7;
             }
         }
@@ -742,22 +678,53 @@ int photoLayerCount = 0; // Photo layer count to set tag value
  * Add flyer borders in scroll views
  */
 -(void)addFlyerBorderInSubView {
-
+    
+    //Delete Subviews From ScrollView
+    [self deleteSubviewsFromScrollView];
+    
+    CGFloat curXLoc = 0;
+    CGFloat curYLoc = 5;
+    int increment = 5;
+    
+    if(IS_IPHONE_5){
+        curXLoc = 13;
+        curYLoc = 10;
+        increment = 8;
+    }
 
 	for (int i = 1; i <=  [borderArray count] ; i++)
 	{
 		UIButton *color = [UIButton buttonWithType:UIButtonTypeCustom];
-		color.frame = CGRectMake(0, 5, borderScrollWidth, borderScrollHeight);
+		color.frame = CGRectMake(0, 0, borderScrollWidth, borderScrollHeight);
+        [color addTarget:self action:@selector(selectBorder:) forControlEvents:UIControlEventTouchUpInside];
 		UIColor *colorName =borderArray[(i-1)];
-		UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(color.frame.origin.x, color.frame.origin.y-5, color.frame.size.width, color.frame.size.height)];
+		UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(color.frame.origin.x, color.frame.origin.y, color.frame.size.width, color.frame.size.height)];
         label.layer.borderColor = colorName.CGColor;
         label.layer.borderWidth = 3.0;
 		[color addSubview:label];
 		color.tag = i+90;
 		color.alpha = ALPHA1;
         
-		[borderScrollView addSubview:color];
-	}   
+        CGRect frame = color.frame;
+        frame.origin = CGPointMake(curXLoc, curYLoc);
+        color.frame = frame;
+        curXLoc += (borderScrollWidth)+increment;
+        
+        if(IS_IPHONE_5){
+            if(curXLoc >= 300){
+                curXLoc = 13;
+                curYLoc = curYLoc + borderScrollHeight + 7;
+            }
+        }
+        
+		[layerScrollView addSubview:color];
+	}//Loop
+    
+    if(IS_IPHONE_5){
+        [layerScrollView setContentSize:CGSizeMake(320, curYLoc)];
+    } else {
+        [layerScrollView setContentSize:CGSizeMake((  [borderArray count]*(borderScrollWidth+5)), [layerScrollView bounds].size.height)];
+    }
 }
 /*
  * Add flyer Symbols in scroll views
@@ -769,6 +736,13 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 
 	symbolArray = [[NSMutableArray alloc]init];
     
+    //Delete Subviews of ScrollViews
+    [self deleteSubviewsFromScrollView];
+    
+    CGFloat curXLoc = 0;
+    CGFloat curYLoc = 5;
+    
+    
 	for(int i=1;i<=113;i++) {
         
 		NSString* symbolName = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"symbol%d",i] ofType:@"png"];
@@ -777,7 +751,10 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 		[symbolArray addObject:symbolImg];
 		
 		UIButton *symbolButton = [UIButton  buttonWithType:UIButtonTypeCustom];
-		symbolButton.frame =CGRectMake(0, 5,symbolScrollWidth, symbolScrollHeight);
+		symbolButton.frame =CGRectMake(0, 0,symbolScrollWidth, symbolScrollHeight);
+        
+        [symbolButton addTarget:self action:@selector(selectSymbol:) forControlEvents:UIControlEventTouchUpInside];
+        
         [symbolButton setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
         
 		UIImageView *img = [[UIImageView alloc]initWithImage:symbolImg];
@@ -785,8 +762,27 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 		[symbolButton addSubview:img];
 		symbolButton.tag = i;
         
-		[symbolScrollView addSubview:symbolButton];
-	}
+        
+        CGRect frame = symbolButton.frame;
+        frame.origin = CGPointMake(curXLoc, curYLoc);
+        symbolButton.frame = frame;
+        curXLoc += (symbolScrollWidth)+5;
+        
+        if(IS_IPHONE_5){
+            if(curXLoc >= 320){
+                curXLoc = 0;
+                curYLoc = curYLoc + symbolScrollHeight + 7;
+            }
+        }
+        
+		[layerScrollView addSubview:symbolButton];
+	}//loop
+    
+    if(IS_IPHONE_5){
+        [layerScrollView setContentSize:CGSizeMake(320, curYLoc + symbolScrollHeight)];
+    } else {
+        [layerScrollView setContentSize:CGSizeMake(([symbolArray count]*(symbolScrollWidth+5)), [layerScrollView bounds].size.height)];
+    }
 
 }
 
@@ -800,6 +796,15 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     
 	iconArray = [[NSMutableArray alloc]init];
     
+    //Delete SubViews from ScrollView
+    [self deleteSubviewsFromScrollView];
+    
+    CGFloat curXLoc = 0;
+    CGFloat curYLoc = 5;
+    
+    if(IS_IPHONE_5)
+        curYLoc = 10;
+    
 	for(int i=1;i<=94;i++) {
         
 		NSString* iconName = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"ricon%d",i] ofType:@"png"];
@@ -809,6 +814,8 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 		
 		UIButton *iconButton = [UIButton  buttonWithType:UIButtonTypeCustom];
 		iconButton.frame =CGRectMake(0, 5,iconScrollWidth, iconScrollHeight);
+        [iconButton addTarget:self action:@selector(selectIcon:) forControlEvents:UIControlEventTouchUpInside];
+
         [iconButton setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
         
 		UIImageView *img = [[UIImageView alloc]initWithImage:iconImg];
@@ -816,7 +823,27 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 		[iconButton addSubview:img];
 		iconButton.tag = i;
         
-		[iconScrollView addSubview:iconButton];
+        
+        CGRect frame = iconButton.frame;
+        frame.origin = CGPointMake(curXLoc, curYLoc);
+        iconButton.frame = frame;
+        curXLoc += (iconScrollWidth)+5;
+        
+        if(IS_IPHONE_5){
+            if(curXLoc >= 320){
+                curXLoc = 0;
+                curYLoc = curYLoc + iconScrollHeight + 7;
+            }
+        }
+
+        
+		[layerScrollView addSubview:iconButton];
+    }//loop
+    
+    if(IS_IPHONE_5){
+        [layerScrollView setContentSize:CGSizeMake(320, curYLoc + iconScrollHeight)];
+    } else {
+        [layerScrollView setContentSize:CGSizeMake(([iconArray count]*(iconScrollWidth+5)), [layerScrollView bounds].size.height)];
     }
 }
 
@@ -992,7 +1019,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 	UIButton *view = sender;
     
     //Handling Select Unselect
-    for(UIView *tempView  in [templateScrollView subviews])
+    for(UIView *tempView  in [layerScrollView subviews])
     {
         // Add border to Un-select layer thumbnail
         CALayer * l = [tempView layer];
@@ -1029,6 +1056,8 @@ int photoLayerCount = 0; // Photo layer count to set tag value
  */
 -(void)selectSymbol:(id)sender
 {
+    
+    UIButton *view = sender;
     [Flurry logEvent:@"Layer Added"];
     [Flurry logEvent:@"Symbol Added"];
 
@@ -1055,7 +1084,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
         // set borders on selected symbol
         FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
         appDele.changesFlag = YES;
-        UIButton *view = sender;
+
         selectedSymbol  =  symbolArray[(view.tag - 1)];
         CATransition *animation = [CATransition animation];
         [animation setType:kCATransitionPush];
@@ -1070,27 +1099,30 @@ int photoLayerCount = 0; // Photo layer count to set tag value
         [[lastSymbolLayer  layer] addAnimation:animation forKey:@"SwitchToView1"];
         [lastSymbolLayer setImage:selectedSymbol];
         
-        //Handling Select Unselect
-        for(UIView *tempView  in [symbolScrollView subviews])
-        {
-            // Add border to Un-select layer thumbnail
-            CALayer * l = [tempView layer];
-            [l setBorderWidth:1];
-            [l setCornerRadius:8];
-            UIColor * c = [UIColor clearColor];
-            [l setBorderColor:c.CGColor];
-            
-            if(tempView == view)
-            {
-                // Add border to selected layer thumbnail
-                CALayer * l = [tempView layer];
-                [l setBorderWidth:3.0];
-                UIColor * c = [globle colorWithHexString:@"0197dd"];
-                [l setBorderColor:c.CGColor];
-            }
-            
-        }
     }
+    
+    
+    //Handling Select Unselect
+    for(UIView *tempView  in [layerScrollView subviews])
+    {
+        // Add border to Un-select layer thumbnail
+        CALayer * l = [tempView layer];
+        [l setBorderWidth:1];
+        [l setCornerRadius:8];
+        UIColor * c = [UIColor clearColor];
+        [l setBorderColor:c.CGColor];
+        
+        if(tempView == view)
+        {
+            // Add border to selected layer thumbnail
+            CALayer * l = [tempView layer];
+            [l setBorderWidth:3.0];
+            UIColor * c = [globle colorWithHexString:@"0197dd"];
+            [l setBorderColor:c.CGColor];
+        }
+        
+    }
+
 }
 
 /*
@@ -1098,6 +1130,8 @@ int photoLayerCount = 0; // Photo layer count to set tag value
  */
 -(void)selectIcon:(id)sender
 {
+    
+    UIButton *view = sender;
     
     [Flurry logEvent:@"Layer Added"];
     [Flurry logEvent:@"Clip Art Added"];
@@ -1123,7 +1157,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
         
         FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
         appDele.changesFlag = YES;
-        UIButton *view = sender;
+
         selectedIcon  =  iconArray[(view.tag - 1)];
         CATransition *animation = [CATransition animation];
         [animation setType:kCATransitionPush];
@@ -1140,31 +1174,31 @@ int photoLayerCount = 0; // Photo layer count to set tag value
         UIImageView *lastIconLayer = [self iconLayersArray][arrangeLayerIndex];
         [[lastIconLayer  layer] addAnimation:animation forKey:@"SwitchToView1"];
         [lastIconLayer setImage:selectedIcon];
+    }
+    
+    
+    //Handling Select Unselect
+    for(UIView *tempView  in [layerScrollView subviews])
+    {
+        // Add border to Un-select layer thumbnail
+        CALayer * l = [tempView layer];
+        [l setBorderWidth:1];
+        [l setCornerRadius:8];
+        UIColor * c = [UIColor clearColor];
+        [l setBorderColor:c.CGColor];
         
-
-        //Handling Select Unselect
-        for(UIView *tempView  in [iconScrollView subviews])
+        if(tempView == view)
         {
-            // Add border to Un-select layer thumbnail
-            CALayer * l = [tempView layer];
-            [l setBorderWidth:1];
-            [l setCornerRadius:8];
-            UIColor * c = [UIColor clearColor];
+            // Add border to selected layer thumbnail
+            [l setBorderWidth:3.0];
+            UIColor * c = [globle colorWithHexString:@"0197dd"];
             [l setBorderColor:c.CGColor];
             
-            if(tempView == view)
-            {
-                // Add border to selected layer thumbnail
-                [l setBorderWidth:3.0];
-                UIColor * c = [globle colorWithHexString:@"0197dd"];
-                [l setBorderColor:c.CGColor];
-            }
-
+            
         }
-
         
-
     }
+    
 }
 
 int arrangeLayerIndex;
@@ -1193,14 +1227,21 @@ int arrangeLayerIndex;
 	appDele.changesFlag = YES;
 	int  i=1;
 	UIButton *view = sender;
-	for(UIView *tempView  in [borderScrollView subviews])
+	for(UIView *tempView  in [layerScrollView subviews])
 	{
+        
+        // Add border to Un-select layer thumbnail
+        tempView.backgroundColor = [UIColor clearColor];
+        
 		if(tempView == view)
 		{
 			UIColor *borderColor = borderArray[i-1];
             
             imgView.layer.borderColor = borderColor.CGColor;
             imgView.layer.borderWidth = 3.0;
+            
+            // Add border to selected layer thumbnail
+            tempView.backgroundColor = [globle colorWithHexString:@"0197dd"];
 		}
 		i++;
 	}
@@ -1215,406 +1256,7 @@ int arrangeLayerIndex;
     return [str integerValue];
 }
 
-/*
- * Layout scroll views
- */
-- (void)layoutScrollImages:(UIScrollView*)selectedScrollView scrollWidth:(NSInteger)kScrollObjWidth scrollHeight:(NSInteger)kScrollObjHeight {
 
-	if (selectedScrollView == templateScrollView)
-	{
-		UIButton *view = nil;
-		NSArray *subviews = [templateScrollView subviews];
-		CGFloat curXLoc = 0;
-		CGFloat curYLoc = 5;
-
-        if(IS_IPHONE_5)
-            curYLoc = 10;
-        
-		for (view in subviews)
-		{
-			if ([view isKindOfClass:[UIButton class]] )
-			{
-				CGRect frame = view.frame;
-				frame.origin = CGPointMake(curXLoc, curYLoc);
-				view.frame = frame;
-				curXLoc += (kScrollObjWidth)+5;
-				
-				imgPickerFlag =1;
-					
-                if(view.userInteractionEnabled){
-                    [view addTarget:self action:@selector(selectTemplate:) forControlEvents:UIControlEventTouchUpInside];
-                }else{
-                    view.userInteractionEnabled = YES;
-                    [view addTarget:self action:@selector(requestTemplate:) forControlEvents:UIControlEventTouchUpInside];;
-                }
-
-                if(IS_IPHONE_5){
-                    if(curXLoc >= 320){
-                        curXLoc = 0;
-                        curYLoc = curYLoc + kScrollObjHeight + 7;
-                    }
-                }
-			}
-		}
-        
-        if(IS_IPHONE_5){
-            [templateScrollView setContentSize:CGSizeMake(320, curYLoc + kScrollObjHeight)];
-        } else {
-            [templateScrollView setContentSize:CGSizeMake(([templateArray count]*(kScrollObjWidth+5)), [templateScrollView bounds].size.height)];
-        }
-	}
-	else if(selectedScrollView == fontScrollView)
-	{
-		
-		UIButton *view = nil;
-		NSArray *subviews = [fontScrollView subviews];
-		
-		CGFloat curXLoc = 0;
-		CGFloat curYLoc = 5;
-        int increment = 5;
-
-        if(IS_IPHONE_5){
-            curYLoc = 10;
-            increment = 8;
-        }
-        
-		for (view in subviews)
-		{
-			if ([view isKindOfClass:[UIButton class]] )
-			{
-				CGRect frame = view.frame;
-				frame.origin = CGPointMake(curXLoc, curYLoc);
-				view.frame = frame;
-				curXLoc += (kScrollObjWidth)+increment;
-                
-                if(view.userInteractionEnabled){
-                    [view addTarget:self action:@selector(selectFont:) forControlEvents:UIControlEventTouchUpInside];
-                }else{
-                    view.userInteractionEnabled = YES;
-                    [view addTarget:self action:@selector(requestFont:) forControlEvents:UIControlEventTouchUpInside];
-                }
-			
-                if(IS_IPHONE_5){
-                    if(curXLoc >= 300){
-                        curXLoc = 0;
-                        curYLoc = curYLoc + kScrollObjHeight + 7;
-                    }
-                }
-            }
-		}
-        
-        if(IS_IPHONE_5){
-            [fontScrollView setContentSize:CGSizeMake(320, curYLoc)];
-        } else {
-            [fontScrollView setContentSize:CGSizeMake((  [fontArray count]*(kScrollObjWidth+5)), [fontScrollView bounds].size.height)];
-        }
-	}
-	else if (selectedScrollView == colorScrollView)
-	{
-		UIButton *view = nil;
-		NSArray *subviews = [colorScrollView subviews];
-		
-		CGFloat curXLoc = 0;
-		CGFloat curYLoc = 5;
-        int increment = 5;
-        
-        if(IS_IPHONE_5){
-            curYLoc = 10;
-            increment = 8;
-        }
-        
-		for (view in subviews)
-		{
-			if ([view isKindOfClass:[UIButton class]] )
-			{
-				CGRect frame = view.frame;
-				frame.origin = CGPointMake(curXLoc, curYLoc);
-				view.frame = frame;
-				curXLoc += (kScrollObjWidth)+increment;                
-
-                if(view.userInteractionEnabled){
-                    [view addTarget:self action:@selector(selectColor:) forControlEvents:UIControlEventTouchUpInside];
-                }else{
-                    view.userInteractionEnabled = YES;
-                    [view addTarget:self action:@selector(requestColor:) forControlEvents:UIControlEventTouchUpInside];
-                }
-				
-                if(IS_IPHONE_5){
-                    if(curXLoc >= 300){
-                        curXLoc = 0;
-                        curYLoc = curYLoc + kScrollObjHeight + 7;
-                    }
-                }
-			}
-		}
-        
-        if(IS_IPHONE_5){
-            [colorScrollView setContentSize:CGSizeMake(320, curYLoc)];
-        } else {
-            [colorScrollView setContentSize:CGSizeMake((  [colorArray count]*(kScrollObjWidth+5)), [colorScrollView bounds].size.height)];
-        }
-	}
-	else if (selectedScrollView == sizeScrollView)
-	{
-		UIButton *view = nil;
-		NSArray *subviews = [sizeScrollView subviews];
-		
-		CGFloat curXLoc = 0;
-		CGFloat curYLoc = 5;
-        int increment = 5;
-
-        if(IS_IPHONE_5){
-            curYLoc = 10;
-            increment = 8;
-        }
-
-		for (view in subviews)
-		{
-			if ([view isKindOfClass:[UIButton class]])
-			{
-				CGRect frame = view.frame;
-				frame.origin = CGPointMake(curXLoc, curYLoc);
-				view.frame = frame;
-				curXLoc += (kScrollObjWidth)+increment;				
-				
-                if(view.userInteractionEnabled){
-                    [view addTarget:self action:@selector(selectSize:) forControlEvents:UIControlEventTouchUpInside];
-                }else{
-                    view.userInteractionEnabled = YES;
-                    [view addTarget:self action:@selector(requestSize:) forControlEvents:UIControlEventTouchUpInside];
-                }
-
-                if(IS_IPHONE_5){
-                    if(curXLoc >= 300){
-                        curXLoc = 0;
-                        curYLoc = curYLoc + kScrollObjHeight + 7;
-                    }
-                }
-			}
-		}
-        
-        if(IS_IPHONE_5){
-            [sizeScrollView setContentSize:CGSizeMake(320, curYLoc)];
-        } else {
-            [sizeScrollView setContentSize:CGSizeMake((  [SIZE_ARRAY count]*(kScrollObjWidth+5)), [sizeScrollView bounds].size.height)];
-        }
-	}
-    else if (selectedScrollView == borderScrollView)
-	{
-		UIButton *view = nil;
-		NSArray *subviews = [borderScrollView subviews];
-		
-		CGFloat curXLoc = 0;
-		CGFloat curYLoc = 5;
-        int increment = 5;
-
-        if(IS_IPHONE_5){
-            curYLoc = 10;
-            increment = 8;
-        }
-        
-		for (view in subviews)
-		{
-			if ([view isKindOfClass:[UIButton class]])
-			{
-				CGRect frame = view.frame;
-				frame.origin = CGPointMake(curXLoc, curYLoc);
-				view.frame = frame;
-				curXLoc += (kScrollObjWidth)+increment;
-                
-                if(view.userInteractionEnabled){
-                    [view addTarget:self action:@selector(selectBorder:) forControlEvents:UIControlEventTouchUpInside];
-                }else{
-                    view.userInteractionEnabled = YES;
-                    [view addTarget:self action:@selector(requestFlyerBorder:) forControlEvents:UIControlEventTouchUpInside];
-                }
-
-                if(IS_IPHONE_5){
-                    if(curXLoc >= 300){
-                        curXLoc = 0;
-                        curYLoc = curYLoc + kScrollObjHeight + 7;
-                    }
-                }
-			}
-		}
-        
-        if(IS_IPHONE_5){
-            [borderScrollView setContentSize:CGSizeMake(320, curYLoc)];
-        } else {
-            [borderScrollView setContentSize:CGSizeMake((  [borderArray count]*(kScrollObjWidth+5)), [borderScrollView bounds].size.height)];
-        }
-	}
-    else if (selectedScrollView == fontBorderScrollView)
-	{
-		UIButton *view = nil;
-		NSArray *subviews = [fontBorderScrollView subviews];
-		
-		CGFloat curXLoc = 0;
-		CGFloat curYLoc = 5;
-        int increment = 5;
-        
-        if(IS_IPHONE_5){
-            curYLoc = 10;
-            increment = 8;
-        }
-        
-		for (view in subviews)
-		{
-			if ([view isKindOfClass:[UIButton class]])
-			{
-				CGRect frame = view.frame;
-				frame.origin = CGPointMake(curXLoc, curYLoc);
-				view.frame = frame;
-				curXLoc += (kScrollObjWidth)+increment;
-                
-                if(view.userInteractionEnabled){
-                    [view addTarget:self action:@selector(selectFontBorder:) forControlEvents:UIControlEventTouchUpInside];
-                 }else{
-                     view.userInteractionEnabled = YES;
-                     [view addTarget:self action:@selector(requestFontBorder:) forControlEvents:UIControlEventTouchUpInside];
-                 }
-				
-                if(IS_IPHONE_5){
-                    if(curXLoc >= 300){
-                        curXLoc = 0;
-                        curYLoc = curYLoc + kScrollObjHeight + 7;
-                    }
-                }
-			}
-		}
-        
-        if(IS_IPHONE_5){
-            [fontBorderScrollView setContentSize:CGSizeMake(320, curYLoc)];
-        } else {
-            [fontBorderScrollView setContentSize:CGSizeMake((  [borderArray count]*(kScrollObjWidth+5)), [fontBorderScrollView bounds].size.height)];
-        }
-        
-	}
-    else if (selectedScrollView == symbolScrollView)
-	{
-		UIButton *view = nil;
-		NSArray *subviews = [symbolScrollView subviews];
-		CGFloat curXLoc = 0;
-		CGFloat curYLoc = 5;
-        
-        if(IS_IPHONE_5)
-            curYLoc = 10;
-        
-		for (view in subviews)
-		{
-			if ([view isKindOfClass:[UIButton class]] )
-			{
-				CGRect frame = view.frame;
-				frame.origin = CGPointMake(curXLoc, curYLoc);
-				view.frame = frame;
-				curXLoc += (kScrollObjWidth)+5;
-				
-				imgPickerFlag =1;
-                if(view.userInteractionEnabled){
-                    [view addTarget:self action:@selector(selectSymbol:) forControlEvents:UIControlEventTouchUpInside];
-                }else{
-                    view.userInteractionEnabled = YES;
-                    [view addTarget:self action:@selector(requestSymbols:) forControlEvents:UIControlEventTouchUpInside];
-                }
-				
-                if(IS_IPHONE_5){
-                    if(curXLoc >= 320){
-                        curXLoc = 0;
-                        curYLoc = curYLoc + kScrollObjHeight + 7;
-                    }
-                }
-			}
-		}
-        
-        if(IS_IPHONE_5){
-            [symbolScrollView setContentSize:CGSizeMake(320, curYLoc + kScrollObjHeight)];
-        } else {
-            [symbolScrollView setContentSize:CGSizeMake(([symbolArray count]*(kScrollObjWidth+5)), [symbolScrollView bounds].size.height)];
-        }
-	}
-    else if (selectedScrollView == iconScrollView)
-	{
-		UIButton *view = nil;
-		NSArray *subviews = [iconScrollView subviews];
-		CGFloat curXLoc = 0;
-		CGFloat curYLoc = 5;
-        
-        if(IS_IPHONE_5)
-            curYLoc = 10;
-        
-		for (view in subviews)
-		{
-			if ([view isKindOfClass:[UIButton class]] )
-			{
-				CGRect frame = view.frame;
-				frame.origin = CGPointMake(curXLoc, curYLoc);
-				view.frame = frame;
-				curXLoc += (kScrollObjWidth)+5;
-				
-				imgPickerFlag =1;
-                if(view.userInteractionEnabled){
-                    [view addTarget:self action:@selector(selectIcon:) forControlEvents:UIControlEventTouchUpInside];
-                }else{
-                    view.userInteractionEnabled = YES;
-                    [view addTarget:self action:@selector(requestIcons:) forControlEvents:UIControlEventTouchUpInside];
-                }
-
-				
-                if(IS_IPHONE_5){
-                    if(curXLoc >= 320){
-                        curXLoc = 0;
-                        curYLoc = curYLoc + kScrollObjHeight + 7;
-                    }
-                }
-			}
-		}
-        
-        if(IS_IPHONE_5){
-            [iconScrollView setContentSize:CGSizeMake(320, curYLoc + kScrollObjHeight)];
-        } else {
-            [iconScrollView setContentSize:CGSizeMake(([iconArray count]*(kScrollObjWidth+5)), [iconScrollView bounds].size.height)];
-        }
-	}
-    else if (selectedScrollView == layerScrollView)
-	{
-		UIButton *view = nil;
-		NSArray *subviews = [layerScrollView subviews];
-		CGFloat curXLoc = 0;
-		CGFloat curYLoc = 5;
-        
-        if(IS_IPHONE_5)
-            curYLoc = 10;
-        
-		for (view in subviews)
-		{
-			if ([view isKindOfClass:[UIButton class]] )
-			{
-				CGRect frame = view.frame;
-				frame.origin = CGPointMake(curXLoc, curYLoc);
-				view.frame = frame;
-				curXLoc += (kScrollObjWidth)+5;
-				
-				imgPickerFlag =1;
-                [view addTarget:self action:@selector(selectLayer:) forControlEvents:UIControlEventTouchUpInside];
-				
-                if(IS_IPHONE_5){
-                    if(curXLoc >= 320){
-                        curXLoc = 0;
-                        curYLoc = curYLoc + kScrollObjHeight + 7;
-                    }
-                }
-			}
-		}
-        
-        if(IS_IPHONE_5){
-            [layerScrollView setContentSize:CGSizeMake(320, curYLoc + kScrollObjHeight)];
-        } else {
-            [layerScrollView setContentSize:CGSizeMake(([self getLayerCounts]*(kScrollObjWidth+5)), [layerScrollView bounds].size.height)];
-        }
-	}
-}
-
-#pragma mark  HUD Method
 
 -(void)showLoadingView:(NSString *)message{
     [self showLoadingIndicator];
@@ -2776,9 +2418,11 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         [UIView beginAnimations:nil context:NULL];
 		[UIView setAnimationDuration:0.4f];
 
+        //Create ScrollView
+        [self addTemplatesInSubView];
         
         //Add ContextView
-        [self addScrollView:templateScrollView];
+        [self addScrollView:layerScrollView];
         [UIView commitAnimations];
         [backtemplates setSelected:YES];
     }
@@ -2799,8 +2443,11 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         [UIView beginAnimations:nil context:NULL];
 		[UIView setAnimationDuration:0.4f];
         
+        //Create ScrollView
+        [self addFlyerBorderInSubView];
+        
         //Add ContextView
-        [self addScrollView:borderScrollView];
+        [self addScrollView:layerScrollView];
     
 		[UIView commitAnimations];
     }
@@ -2922,11 +2569,16 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         iconTouchFlag = NO;
         [addMoreSymbolTabButton setSelected:YES];
         [self addDonetoRightBarBotton];
+        
        	[UIView beginAnimations:nil context:NULL];
         
+        //Create ScrollView
+        [self addFlyerIconInSubView];
+
         //Add Context
-        [self addScrollView:symbolScrollView];
-		[UIView setAnimationDuration:0.4f];
+        [self addScrollView:layerScrollView];
+		
+        [UIView setAnimationDuration:0.4f];
 		[UIView commitAnimations];
 	}
 	else if(selectedButton == addMoreIconTabButton)
@@ -2943,8 +2595,11 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 		[UIView beginAnimations:nil context:NULL];
 		[UIView setAnimationDuration:0.4f];
         
+        //Create ScrollView
+        [self addSymbolsInSubView];
+        
         //Add ContextView
-        [self addScrollView:iconScrollView];
+        [self addScrollView:layerScrollView];
 
 		[UIView commitAnimations];
 	}
@@ -4092,105 +3747,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     [socialArray writeToFile:finalImageWritePath atomically:YES];
 }
 
-#pragma mark - InappPurchase
-
--(void)showFontPurchaseSheet:(int)tag productList:(NSArray *)productList{
-    
-    // Show alert that no more matches are left. First buy
-    inAppAlert = [[UIAlertView alloc] initWithTitle:@"Purchase Products"
-                                                    message:@""
-                                                   delegate:self cancelButtonTitle:nil
-                                          otherButtonTitles:nil ,nil];
-    alert.tag = tag;
-    for( SKProduct *product in productList)  {
-        [inAppAlert addButtonWithTitle: [NSString stringWithFormat:@"%@ - %@", product.localizedTitle, product.priceAsString]];
-    }
-    [inAppAlert addButtonWithTitle:@"Cancel"];
-    inAppAlert.cancelButtonIndex = [productList count];
-
-    [inAppAlert show];
-}
-
--(BOOL)fontPackAvailable{
-
-    PFQuery *query = [PFQuery queryWithClassName:TABLE_JSON];
-    [query whereKey:COLUMN_USER equalTo:[PFUser currentUser]];
-    
-    NSError *error;
-    NSArray *postArray = [query findObjects:&error];
-    
-    if(!postArray){
-        return NO;
-    }
-    
-    if (!error) {
-        
-        PFObject *post = postArray.lastObject;
-        if(!post){
-            return NO;
-            
-        } else {
-            
-            NSString *remainingFontCount = post[COLUMN_REMINING_FONT_COUNT];
-            if(!remainingFontCount){
-                return NO;
-            }else{
-                
-                if(remainingFontCount > 0){
-                    return YES;
-                } else {
-                    return NO;
-                }
-            }
-        }
-    }
-    
-    return NO;
-}
-
--(BOOL)anyFontPurchased{
-    
-    PFQuery *query = [PFQuery queryWithClassName:TABLE_JSON];
-    [query whereKey:COLUMN_USER equalTo:[PFUser currentUser]];
-    
-    NSError *error;
-    NSArray *postArray = [query findObjects:&error];
-    
-    if(!postArray){
-        return NO;
-    }
-
-    PFObject *post = postArray.lastObject;
-    if(!post){
-        return NO;
-        
-    } else {
-        
-        NSDictionary *json = post[COLUMN_JSON];
-        if(!json){
-            return NO;
-        } else {
-            
-            NSString *key1 = [PRODUCT_FONT stringByReplacingOccurrencesOfString:@"." withString:@""];
-            NSString *key2 = [PRODUCT_FOUR_PACK_FONT stringByReplacingOccurrencesOfString:@"." withString:@""];
-            NSString *key3 = [PRODUCT_FULL_FONT stringByReplacingOccurrencesOfString:@"." withString:@""];
-            
-            if(json[key1] || json[key2] || json[key3]){
-                return YES;
-            }else{
-                return NO;
-            }
-        }
-    }
-    
-    return NO;
-}
-
--(void)requestSize:(UIButton *)button{
-    
-    UIAlertView *settingsAlert = [[UIAlertView alloc] initWithTitle:@"Reminder" message:@"Purchase any (1) font and all font sizes will be unlocked." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [settingsAlert show];
-}
 
 -(void)showAlert:(NSString *)title message:(NSString *)message{
     UIAlertView *salert = [[UIAlertView alloc] initWithTitle:title
@@ -4202,232 +3758,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 }
 
 
--(void)requestTemplate:(UIButton *)button{
-    
-    //[self showLoadingView:nil];
-    if([InviteFriendsController connected]){
-        
-        // Create an instance of EBPurchase (Inapp purchase).
-        demoPurchase = nil;
-        demoPurchase = [[EBPurchase alloc] init];
-        demoPurchase.delegate = self;
-        demoPurchase.customIndex = button.tag;
-        isPurchased = NO;
-        [demoPurchase requestProduct:@[PRODUCT_TEMPLATE, PRODUCT_FULL_TEMPLATE,PRODUCT_ALL_BUNDLE]];
-    
-    } else {
-        
-        [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
-    }
-
-}
-
-
--(void)requestSymbols:(UIButton *)button{
-    
-      if([InviteFriendsController connected]){
-          //[self showLoadingView:nil];
-          // Create an instance of EBPurchase (Inapp purchase).
-          demoPurchase = nil;
-          demoPurchase = [[EBPurchase alloc] init];
-          demoPurchase.delegate = self;
-          demoPurchase.customIndex = button.tag;
-          isPurchased = NO;
-    
-          [demoPurchase requestProduct:@[PRODUCT_SYMBOL_SELETED,PRODUCT_SYMBOL_ALL,PRODUCT_ALL_BUNDLE]];
-      }else{
-          [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
-      }
-    
-}
-
-
--(void)requestIcons:(UIButton *)button{
-    
-    if([InviteFriendsController connected]){
-        //[self showLoadingView:nil];
-    
-        // Create an instance of EBPurchase (Inapp purchase).
-        demoPurchase = nil;
-        demoPurchase = [[EBPurchase alloc] init];
-        demoPurchase.delegate = self;
-        demoPurchase.customIndex = button.tag;
-        isPurchased = NO;
-        [demoPurchase requestProduct:@[PRODUCT_ICON_SELETED,PRODUCT_ICON_ALL,PRODUCT_ALL_BUNDLE]];
-    }else{
-        [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
-    }
-    
-}
-
--(void)requestFont:(UIButton *)button{
-    
-    if([InviteFriendsController connected]){
-        //[self showLoadingView:nil];
-        // Create an instance of EBPurchase (Inapp purchase).
-        demoPurchase = nil;
-        demoPurchase = [[EBPurchase alloc] init];
-        demoPurchase.delegate = self;
-        demoPurchase.customIndex = button.tag;
-        isPurchased = NO;
-
-        [demoPurchase requestProduct:@[PRODUCT_FONT, PRODUCT_FULL_FONT, PRODUCT_ALL_BUNDLE]];
-    }else{
-        [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
-    }
- 
-}
-
--(void)requestColor:(UIButton *)button{
-    
-    if([InviteFriendsController connected]){
-        // [self showLoadingView:nil];
-
-        // Create an instance of EBPurchase (Inapp purchase).
- 
-        demoPurchase = nil;
-        demoPurchase = [[EBPurchase alloc] init];
-        demoPurchase.delegate = self;
-        demoPurchase.customIndex = button.tag;
-        isPurchased = NO;
-
-        [demoPurchase requestProduct:@[PRODUCT_FONT_COLOR, PRODUCT_FULL_FONT_COLOR,
-                                  PRODUCT_ALL_BUNDLE]];
-    }else{
-        [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
-    }
-}
-
--(void)requestFontBorder:(UIButton *)button{
-
-     if([InviteFriendsController connected]){
-         //[self showLoadingView:nil];
-
-         // Create an instance of EBPurchase (Inapp purchase).
-         demoPurchase = nil;
-         demoPurchase = [[EBPurchase alloc] init];
-         demoPurchase.delegate = self;
-         demoPurchase.customIndex = button.tag;
-         isPurchased = NO;
-         [demoPurchase requestProduct:@[PRODUCT_FONT_BORDER_COLOR, PRODUCT_FULL_FONT_BORDER_COLOR,
-                                  PRODUCT_ALL_BUNDLE]];
-     }else{
-         [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
-     }
-}
-
--(void)requestFlyerBorder:(UIButton *)button{
-    
-     if([InviteFriendsController connected]){
-         // [self showLoadingView:nil];
-
-         // Create an instance of EBPurchase (Inapp purchase).
-         demoPurchase = nil;
-         demoPurchase = [[EBPurchase alloc] init];
-         demoPurchase.delegate = self;
-         demoPurchase.customIndex = button.tag;
-         isPurchased = NO;
-
-         [demoPurchase requestProduct:@[PRODUCT_FLYER_BORDER_COLOR,
-                                  PRODUCT_FULL_FLYER_BORDER_COLOR, PRODUCT_ALL_BUNDLE]];
-     }else{
-         [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
-     }
-}
-
--(IBAction)restorePurchase
-{
-    // Restore a customer's previous non-consumable or subscription In-App Purchase.
-    // Required if a user reinstalled app on same device or another device.
-    
-    // Call restore method.
-    if (![demoPurchase restorePurchase]) {
-        // Returned NO, so notify user that In-App Purchase is Disabled in their Settings.
-        UIAlertView *settingsAlert = [[UIAlertView alloc] initWithTitle:@"Allow Purchases" message:@"You must first enable In-App Purchase in your iOS Settings before restoring a previous purchase." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [settingsAlert show];
-        
-    }
-}
-
-#pragma mark EBPurchaseDelegate Methods
-
--(void) requestedProduct:(EBPurchase*)ebp identifier:(NSString*)productId name:(NSString*)productName price:(NSString*)productPrice description:(NSString*)productDescription {
-    
-    NSLog(@"ProductId: %@", productId);
-    // First, ensure that the SKProduct that was requested by
-    // the EBPurchase requestProduct method in the viewWillAppear
-    // event is valid before trying to purchase it.
-    
-    //if user want to buy 1 match
-    if (demoPurchase.products != nil) {
-        
-       // [self removeLoadingView];
-
-        [self showFontPurchaseSheet:ebp.customIndex productList:demoPurchase.products];
-    }
-}
-
--(NSMutableDictionary *)getInAppDictionary{
-    
-    NSMutableDictionary *inAppDictionary = [[[NSUserDefaults standardUserDefaults] dictionaryForKey:IN_APP_DICTIONARY_KEY] mutableCopy];
-    
-    if(!inAppDictionary){
-        
-        NSMutableDictionary *newInAppDictionary = nil;
-        
-        if ( [PFUser currentUser] == nil ) {
-            NSLog(@"User is null!");
-        }
-        
-        PFQuery *query = [PFQuery queryWithClassName:TABLE_JSON];
-        [query whereKey:COLUMN_USER equalTo:[PFUser currentUser]];
-        
-        NSError *error;
-        NSArray *postArray = [query findObjects:&error];
-        
-        if(!postArray){
-            
-            newInAppDictionary = [[NSMutableDictionary alloc] init];
-            [self setInAppDictionary:newInAppDictionary];
-            return [self getInAppDictionary];
-        }
-        
-        PFObject *post = postArray.lastObject;
-        if(!post){
-        
-            newInAppDictionary = [[NSMutableDictionary alloc] init];
-            [self setInAppDictionary:newInAppDictionary];
-            return [self getInAppDictionary];
-
-        } else {
-            
-            newInAppDictionary = post[COLUMN_JSON];
-        }
-        
-        if(!newInAppDictionary){
-            
-            NSMutableDictionary *newInAppDictionary = [[NSMutableDictionary alloc] init];
-            [self setInAppDictionary:newInAppDictionary];
-            return [self getInAppDictionary];
-            
-        } else {
-            [self setInAppDictionary:newInAppDictionary];
-            return newInAppDictionary;
-        }
-
-    } else {
-        return inAppDictionary;
-    }
-    
-    return inAppDictionary;
-}
-
--(void)setInAppDictionary:(NSMutableDictionary *)inAppDict{
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    [prefs setObject:inAppDict forKey:IN_APP_DICTIONARY_KEY];
-    [prefs synchronize];
-}
-
 - (void)removeAllViewsFromScrollview:(UIScrollView *)scrollView {
     NSArray *subviews = scrollView.subviews;
     
@@ -4436,285 +3766,8 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     }
 }
 
--(void) successfulPurchase:(EBPurchase*)ebp restored:(bool)isRestore identifier:(NSString*)productId receipt:(NSData*)transactionReceipt
-{
-   
-    // Purchase or Restore request was successful, so...
-    // 1 - Unlock the purchased content for your new customer!
-    // 2 - Notify the user that the transaction was successful.
-    
-    if (!isPurchased)
-    {
-        // If paid status has not yet changed, then do so now. Checking
-        // isPurchased boolean ensures user is only shown Thank You message
-        // once even if multiple transaction receipts are successfully
-        // processed (such as past subscription renewals).
-        
-        isPurchased = YES;
-        
-        // handle post purchase functionality
-        if([productId isEqualToString:PRODUCT_FONT] || [productId isEqualToString:PRODUCT_FULL_FONT]){
-            
-            [self updatePurchaseRecord:ebp.customIndex identifier:productId productPrefix:PREFIX_FONT_PRODUCT];
 
-            // START Update view with no lock
-            // Remove all subview from the scrollview first.
-            [self removeAllViewsFromScrollview:sizeScrollView];
-            [self addSizeInSubView];
-            [self layoutScrollImages:sizeScrollView scrollWidth:sizeScrollWidth scrollHeight:sizeScrollHeight];
-            
-            [self removeAllViewsFromScrollview:fontScrollView];
-            [self addFontsInSubView];
-            [self layoutScrollImages:fontScrollView scrollWidth:fontScrollWidth scrollHeight:fontScrollHeight];
 
-            // END Update view with no lock
-
-        } else if([productId isEqualToString:PRODUCT_FONT_COLOR] || [productId isEqualToString:PRODUCT_FULL_FONT_COLOR]){
-           
-            [self updatePurchaseRecord:ebp.customIndex identifier:productId productPrefix:PREFIX_FONT_COLOR_PRODUCT];
-            
-            // START Update view with no lock
-            [self removeAllViewsFromScrollview:colorScrollView];
-            [self addColorsInSubView];
-            [self layoutScrollImages:colorScrollView scrollWidth:colorScrollWidth scrollHeight:colorScrollHeight];
-            // END Update view with no lock            
-        
-        } else if([productId isEqualToString:PRODUCT_FONT_BORDER_COLOR] || [productId isEqualToString:PRODUCT_FULL_FONT_BORDER_COLOR]){
-            
-            [self updatePurchaseRecord:ebp.customIndex identifier:productId productPrefix:PREFIX_TEXT_BORDER_PRODUCT];
-            
-            // START Update view with no lock
-            [self removeAllViewsFromScrollview:fontBorderScrollView];
-            [self addTextBorderInSubView];
-            [self layoutScrollImages:fontBorderScrollView scrollWidth:fontBorderScrollWidth scrollHeight:fontBorderScrollHeight];
-            // END Update view with no lock
-            
-        } else if([productId isEqualToString:PRODUCT_FLYER_BORDER_COLOR] || [productId isEqualToString:PRODUCT_FULL_FLYER_BORDER_COLOR]){
-            
-            [self updatePurchaseRecord:ebp.customIndex identifier:productId productPrefix:PREFIX_FLYER_BORDER_PRODUCT];
-            
-            // START Update view with no lock
-            [self removeAllViewsFromScrollview:borderScrollView];
-            [self addFlyerBorderInSubView];
-            [self layoutScrollImages:borderScrollView scrollWidth:borderScrollWidth scrollHeight:borderScrollHeight];
-            // END Update view with no lock
-            
-        } else if([productId isEqualToString:PRODUCT_TEMPLATE] || [productId isEqualToString:PRODUCT_FULL_TEMPLATE]){
-            
-            [self updatePurchaseRecord:ebp.customIndex identifier:productId productPrefix:PREFIX_BACKGROUND_PRODUCT];
-            
-            // START Update view with no lock
-            [self removeAllViewsFromScrollview:templateScrollView];
-            [self addTemplatesInSubView];
-            [self layoutScrollImages:templateScrollView scrollWidth:templateScrollWidth scrollHeight:templateScrollHeight];
-            // END Update view with no lock
-        } else if([productId isEqualToString:PRODUCT_ICON_SELETED] || [productId isEqualToString:PRODUCT_ICON_ALL]){
-            
-            [self updatePurchaseRecord:ebp.customIndex identifier:productId productPrefix:PREFIX_ICON_PRODUCT];
-            
-            // START Update view with no lock
-            [self removeAllViewsFromScrollview:iconScrollView];
-            [self addFlyerIconInSubView];
-            NSInteger iconScrollWidth = 60;
-            NSInteger iconScrollHeight = 50;
-            [self layoutScrollImages:iconScrollView scrollWidth:iconScrollWidth scrollHeight:iconScrollHeight];
-            // END Update view with no lock
-
-        } else if([productId isEqualToString:PRODUCT_SYMBOL_SELETED] || [productId isEqualToString:PRODUCT_SYMBOL_ALL]){
-            
-            [self updatePurchaseRecord:ebp.customIndex identifier:productId productPrefix:PREFIX_SYMBOL_PRODUCT];
-            
-            // START Update view with no lock
-            [self removeAllViewsFromScrollview:symbolScrollView];
-            [self addSymbolsInSubView];
-            NSInteger symbolScrollWidth = 60;
-            NSInteger symbolScrollHeight = 50;
-            [self layoutScrollImages:symbolScrollView scrollWidth:symbolScrollWidth scrollHeight:symbolScrollHeight];
-            // END Update view with no lock
-        } else if ( [productId isEqualToString:PRODUCT_ALL_BUNDLE] ) {
-            
-            // This is as if we have bought all the products.
-            [self updatePurchaseRecord:ebp.customIndex identifier:PRODUCT_FULL_FONT
-                         productPrefix:PREFIX_FONT_PRODUCT];
-            [self updatePurchaseRecord:ebp.customIndex identifier:PRODUCT_FULL_FONT_COLOR
-                         productPrefix:PREFIX_FONT_COLOR_PRODUCT];
-            [self updatePurchaseRecord:ebp.customIndex identifier:PRODUCT_FULL_FONT_BORDER_COLOR
-                         productPrefix:PREFIX_TEXT_BORDER_PRODUCT];
-            [self updatePurchaseRecord:ebp.customIndex identifier:PRODUCT_FULL_FLYER_BORDER_COLOR
-                         productPrefix:PREFIX_FLYER_BORDER_PRODUCT];
-            [self updatePurchaseRecord:ebp.customIndex identifier:PRODUCT_FULL_TEMPLATE
-                         productPrefix:PREFIX_BACKGROUND_PRODUCT];
-            [self updatePurchaseRecord:ebp.customIndex identifier:PRODUCT_SYMBOL_ALL
-                         productPrefix:PREFIX_SYMBOL_PRODUCT];
-            [self updatePurchaseRecord:ebp.customIndex identifier:PRODUCT_ICON_ALL
-                         productPrefix:PREFIX_ICON_PRODUCT];
-            
-            // START Update view with no lock
-            // Remove all subview from the scrollview first.
-            [self removeAllViewsFromScrollview:sizeScrollView];
-            [self addSizeInSubView];
-            [self layoutScrollImages:sizeScrollView scrollWidth:sizeScrollWidth scrollHeight:sizeScrollHeight];
-            
-            [self removeAllViewsFromScrollview:fontScrollView];
-            [self addFontsInSubView];
-            [self layoutScrollImages:fontScrollView scrollWidth:fontScrollWidth scrollHeight:fontScrollHeight];
-            
-            [self removeAllViewsFromScrollview:colorScrollView];
-            [self addColorsInSubView];
-            [self layoutScrollImages:colorScrollView scrollWidth:colorScrollWidth scrollHeight:colorScrollHeight];
-            
-            [self removeAllViewsFromScrollview:fontBorderScrollView];
-            [self addTextBorderInSubView];
-            [self layoutScrollImages:fontBorderScrollView scrollWidth:fontBorderScrollWidth scrollHeight:fontBorderScrollHeight];
-
-            [self removeAllViewsFromScrollview:borderScrollView];
-            [self addFlyerBorderInSubView];
-            [self layoutScrollImages:borderScrollView scrollWidth:borderScrollWidth scrollHeight:borderScrollHeight];
-            
-            [self removeAllViewsFromScrollview:templateScrollView];
-            [self addTemplatesInSubView];
-            [self layoutScrollImages:templateScrollView scrollWidth:templateScrollWidth scrollHeight:templateScrollHeight];
-            
-            [self removeAllViewsFromScrollview:symbolScrollView];
-            [self addSymbolsInSubView];
-            NSInteger symbolScrollWidth = 60;
-            NSInteger symbolScrollHeight = 50;
-            [self layoutScrollImages:symbolScrollView scrollWidth:symbolScrollWidth scrollHeight:symbolScrollHeight];
-            // START Update view with no lock
-            [self removeAllViewsFromScrollview:iconScrollView];
-            [self addFlyerIconInSubView];
-            NSInteger iconScrollWidth = 60;
-            NSInteger iconScrollHeight = 50;
-            [self layoutScrollImages:iconScrollView scrollWidth:iconScrollWidth scrollHeight:iconScrollHeight];
-            // END Update view with no lock
-            
-            // END Update view with no lock
-            
-        }
-    }
-}
-
-/*
- * handle post purchase functionality
- */
--(void)updatePurchaseRecord:(int)index identifier:(NSString*)productId productPrefix:(NSString *)productPrefix{
-    NSString *alertMessage;
-    
-    NSLog(@"ProductId to Store: %@", [[NSString stringWithFormat:@"%@%d", productPrefix, index] stringByReplacingOccurrencesOfString:@"." withString:@""]);
-    
-    // UPDATE RECORD IN NSUserDefaults
-    NSMutableDictionary *inAppDictionary = [self getInAppDictionary];
-    inAppDictionary[[productId stringByReplacingOccurrencesOfString:@"." withString:@""]] = @"1";
-    inAppDictionary[[[NSString stringWithFormat:@"%@%d", productPrefix, index] stringByReplacingOccurrencesOfString:@"." withString:@""]] = @"1";
-    [self setInAppDictionary:inAppDictionary];
-    
-    // UPDATE RECORD to PARSE
-    [self updateParseDB:productId];
-    
-    // Show message
-    alertMessage = [NSString stringWithFormat:@"Your purchase was successful. %@ is unlocked now.", productId];
-    
-    UIAlertView *updatedAlert = [[UIAlertView alloc] initWithTitle:@"Thank You!" message:alertMessage delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [updatedAlert show];
-}
-
--(void)productRequestFailed:(NSError *)error{
-    // Purchase or Restore request failed or was cancelled, so notify the user.
-    
-    UIAlertView *failedAlert = [[UIAlertView alloc] initWithTitle:@"Purchase Stopped" message:@"Either you cancelled the request or Apple reported a transaction error. Please try again later, or contact the app's customer support for assistance." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [failedAlert show];
-    
-   // [self removeLoadingView];
-}
-
--(void) failedPurchase:(EBPurchase*)ebp error:(NSInteger)errorCode message:(NSString*)errorMessage {
-    // Purchase or Restore request failed or was cancelled, so notify the user.
-    
-    UIAlertView *failedAlert = [[UIAlertView alloc] initWithTitle:@"Purchase Stopped" message:@"Either you cancelled the request or Apple reported a transaction error. Please try again later, or contact the app's customer support for assistance." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [failedAlert show];
-    
-  //  [self removeLoadingView];
-}
-
--(void) incompleteRestore:(EBPurchase*)ebp
-{
-    NSLog(@"ViewController incompleteRestore");
-    
-    // Restore queue did not include any transactions, so either the user has not yet made a purchase
-    // or the user's prior purchase is unavailable, so notify user to make a purchase within the app.
-    // If the user previously purchased the item, they will NOT be re-charged again, but it should
-    // restore their purchase.
-    
-    UIAlertView *restoreAlert = [[UIAlertView alloc] initWithTitle:@"Restore Issue" message:@"A prior purchase transaction could not be found. To restore the purchased product, tap the Buy button. Paid customers will NOT be charged again, but the purchase will be restored." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [restoreAlert show];
-    
-    //[self removeLoadingView];
-}
-
--(void) failedRestore:(EBPurchase*)ebp error:(NSInteger)errorCode message:(NSString*)errorMessage
-{
-    NSLog(@"ViewController failedRestore");
-    
-    // Restore request failed or was cancelled, so notify the user.
-    
-    UIAlertView *failedAlert = [[UIAlertView alloc] initWithTitle:@"Restore Stopped" message:@"Either you cancelled the request or your prior purchase could not be restored. Please try again later, or contact the app's customer support for assistance." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [failedAlert show];
-    
-    //[self removeLoadingView];
-}
-
--(void) cancelPurchase {
-   // [self removeLoadingView];
-}
-
-/*
- * Check for product if purchased or not
- */
--(BOOL)isProductPurchased:(NSString *)productToCheck{
-    NSMutableDictionary *inAppDictionary = [self getInAppDictionary];
-    if(inAppDictionary[productToCheck]){
-        return YES;
-    }
-    
-    return NO;
-}
-
-- (void)updateParseDB:(NSString *)productId{
-    NSMutableDictionary *dict = [self getInAppDictionary];
-    [self purchase:TABLE_JSON keyValuePair:dict productId:productId];
-}
-
--(void)purchase:(NSString *)class keyValuePair:(NSMutableDictionary *)keyValuePair productId:(NSString *)productId{
-    
-    PFQuery *query = [PFQuery queryWithClassName:class];
-    [query whereKey:COLUMN_USER equalTo:[PFUser currentUser]];
-    
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (!error) {
-            
-            NSLog(@"Product Purchased");
-
-            NSArray *postArray = objects;
-            PFObject *post = postArray.lastObject;
-            if(!post){
-                post = [PFObject objectWithClassName:class];
-                
-                PFUser *user = [PFUser currentUser];
-                post[COLUMN_USER] = user;
-            }
-
-            post[COLUMN_JSON] = keyValuePair;
-            [post saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                if (!error) {
-                    NSLog(@"Product Purchased");
-                }else{
-                    // Log details of the failure
-                    NSLog(@"Error: %@ %@", error, [error userInfo]);
-                }
-            }];
-        }
-    }];
-}
 
 #pragma mark  View Disappear Methods
 
@@ -4799,6 +3852,16 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         return;
     }
     
+    CGFloat curXLoc = 0;
+    CGFloat curYLoc = 5;
+    
+    if(IS_IPHONE_5)
+    {
+        curXLoc = 10;
+        curYLoc = 10;
+    }
+    
+    
     NSMutableDictionary *layers = self.flyimgView.layers ;
     int cnt = 0;
     for (NSString* uid in layers) {
@@ -4826,6 +3889,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
                 
                 
                 LayerTileButton *layerButton = [LayerTileButton  buttonWithType:UIButtonTypeCustom];
+                [layerButton addTarget:self action:@selector(selectLayer:) forControlEvents:UIControlEventTouchUpInside];
                 layerButton.uid = uid;
                 layerButton.frame =CGRectMake(0, 5,layerScrollWidth, layerScrollHeight);
                 
@@ -4843,7 +3907,21 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
                 
                 layerButton.tag = [[NSString stringWithFormat:@"%@%d",@"111",cnt] integerValue];
                 
+                CGRect frame = layerButton.frame;
+				frame.origin = CGPointMake(curXLoc, curYLoc);
+				layerButton.frame = frame;
+				curXLoc += (layerScrollWidth)+5;
+                
+                if(IS_IPHONE_5){
+                    if(curXLoc >= 320){
+                        curXLoc = 0;
+                        curYLoc = curYLoc + layerScrollHeight + 7;
+                    }
+                }
+                
                 [layerScrollView addSubview:layerButton];
+                
+                
 
             
             } else {
@@ -4859,7 +3937,12 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         
     }//Loop
     
-    [self layoutScrollImages:layerScrollView scrollWidth:layerScrollWidth scrollHeight:layerScrollHeight];
+    if(IS_IPHONE_5){
+        [layerScrollView setContentSize:CGSizeMake(320, curYLoc + layerScrollHeight)];
+    } else {
+        [layerScrollView setContentSize:CGSizeMake(([self getLayerCounts]*(layerScrollWidth+5)), [layerScrollView bounds].size.height)];
+    }
+    
     [self addScrollView:layerScrollView];
     
     deleteMode = NO;
@@ -4867,160 +3950,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 }
 
--(void)addAllLayersIntoFront{
-    
-    layerallow = 0 ;
-    selectedAddMoreLayerTab = ARRANGE_LAYERTAB;
-    [self removeBordersFromAllLayers];
-    
-    lableTouchFlag = NO;
-    symbolTouchFlag= NO;
-    iconTouchFlag = NO;
-    photoTouchFlag = NO;
-    
-    //if(layerScrollView){
-        //[layerScrollView removeFromSuperview];
-    //}
-    //layerScrollView = nil;
- 
-    
-    NSInteger layerScrollWidth = 55;
-    NSInteger layerScrollHeight = 40;
-    
-    if(textLabelLayersArray.count == 0 && photoLayersArray.count  == 0 && symbolLayersArray.count == 0 && iconLayersArray == 0){
-        [self addScrollView:addMoreLayerOrSaveFlyerLabel];
-        return;
-    }
-    
-    //Adding Text of Flyer In ScrollView
-    if(textLabelLayersArray){
-        
-        for(int text=0; text<[textLabelLayersArray count]; text++){
-            
-            UILabel *label1 = (UILabel *) textLabelLayersArray.lastObject;
-            UILabel *label = [[UILabel alloc] initWithFrame:label1.frame];
-            label.text = label1.text;
-            
-            LayerTileButton *layerButton = [LayerTileButton  buttonWithType:UIButtonTypeCustom];
-            layerButton.uid = currentLayer;
-            layerButton.frame =CGRectMake(0, 5,layerScrollWidth, layerScrollHeight);
-            
-            [layerButton addTarget:self action:@selector(editLayer:) forControlEvents:UIControlEventTouchUpInside];
-            
-            [layerButton setBackgroundColor:[UIColor clearColor]];
-            [layerButton.layer setBorderWidth:2];
-            UIColor * c = [UIColor lightGrayColor];
-            [layerButton.layer setCornerRadius:8];
-            [layerButton.layer setBorderColor:c.CGColor];
-            
-            label.frame  = CGRectMake(layerButton.frame.origin.x+5, layerButton.frame.origin.y-2, layerButton.frame.size.width-10, layerButton.frame.size.height-7);
-            [layerButton addSubview:label];
-            layerButton.tag = [[NSString stringWithFormat:@"%@",@"111"] integerValue];
-            
-            
-            [layerScrollView addSubview:layerButton];
-        }
-    }
-    
-    //Adding Photos of Flyer In ScrollView
-    if(photoLayersArray){
-        
-        for(int photo=0; photo<[photoLayersArray count]; photo++){
-            
-            UIImageView *img1 = (UIImageView *) photoLayersArray[photo];
-            UIImageView *img = [[UIImageView alloc] initWithImage:img1.image];
-            
-            UIButton *layerButton = [UIButton  buttonWithType:UIButtonTypeCustom];
-            layerButton.frame =CGRectMake(0, 5,layerScrollWidth, layerScrollHeight);
-            [layerButton addTarget:self action:@selector(editLayer:) forControlEvents:UIControlEventTouchUpInside];
-            [layerButton setBackgroundColor:[UIColor clearColor]];
-            [layerButton.layer setBorderWidth:2];
-            [layerButton.layer setCornerRadius:8];
-            UIColor * c = [UIColor lightGrayColor];
-            [layerButton.layer setBorderColor:c.CGColor];
 
-
-            [layerButton setBackgroundColor:[UIColor clearColor]];
-            
-            img.frame  = CGRectMake(layerButton.frame.origin.x+5, layerButton.frame.origin.y-2, layerButton.frame.size.width-10, layerButton.frame.size.height-7);
-            [layerButton addSubview:img];
-            layerButton.tag = [[NSString stringWithFormat:@"%@%d",@"222",photo] integerValue];
-            
-            [layerScrollView addSubview:layerButton];
-        }
-    }
-    
-    //Adding Symbols of Flyer In ScrollView
-    if(symbolLayersArray){
-
-        for(int symbol=0; symbol<[symbolLayersArray count]; symbol++){
-            
-            UIImageView *img1 = (UIImageView *) symbolLayersArray[symbol];
-            UIImageView *img = [[UIImageView alloc] initWithImage:img1.image];
-            
-            UIButton *layerButton = [UIButton  buttonWithType:UIButtonTypeCustom];
-            layerButton.frame =CGRectMake(0, 5,layerScrollWidth, layerScrollHeight);
-            [layerButton addTarget:self action:@selector(editLayer:) forControlEvents:UIControlEventTouchUpInside];
-            [layerButton setBackgroundColor:[UIColor clearColor]];
-            [layerButton.layer setBorderWidth:2];
-            [layerButton.layer setCornerRadius:8];
-            UIColor * c = [UIColor lightGrayColor];
-            [layerButton.layer setBorderColor:c.CGColor];
-
-            [layerButton setBackgroundColor:[UIColor clearColor]];
-            
-            img.frame  = CGRectMake(layerButton.frame.origin.x+5, layerButton.frame.origin.y-2, layerButton.frame.size.width-10, layerButton.frame.size.height-7);
-            [layerButton addSubview:img];
-            layerButton.tag = [[NSString stringWithFormat:@"%@%d",@"333",symbol] integerValue];
-            
-            [layerScrollView addSubview:layerButton];
-        }
-    }
-    
-    //Adding Icons of Flyer In ScrollView
-    if(iconLayersArray){
-
-        for(int icon=0; icon<[iconLayersArray count]; icon++){
-            
-            UIImageView *img1 = (UIImageView *) iconLayersArray[icon];
-            UIImageView *img = [[UIImageView alloc] initWithImage:img1.image];
-            
-            UIButton *layerButton = [UIButton  buttonWithType:UIButtonTypeCustom];
-            layerButton.frame =CGRectMake(0, 5,layerScrollWidth, layerScrollHeight);
-            [layerButton addTarget:self action:@selector(editLayer:) forControlEvents:UIControlEventTouchUpInside];
-            [layerButton setBackgroundColor:[UIColor clearColor]];
-            [layerButton.layer setBorderWidth:2];
-            [layerButton.layer setCornerRadius:8];
-            UIColor * c = [UIColor lightGrayColor];
-            [layerButton.layer setBorderColor:c.CGColor];
-
-            [layerButton setBackgroundColor:[UIColor clearColor]];
-            
-            img.frame  = CGRectMake(layerButton.frame.origin.x+5, layerButton.frame.origin.y-2, layerButton.frame.size.width-10, layerButton.frame.size.height-7);
-            [layerButton addSubview:img];
-            layerButton.tag = [[NSString stringWithFormat:@"%@%d",@"444",icon] integerValue];
-            
-            [layerScrollView addSubview:layerButton];
-        }
-    }
-    
-    
-    //Setting ScrollView
-    [layerScrollView setCanCancelContentTouches:NO];
-    layerScrollView.indicatorStyle = UIScrollViewIndicatorStyleBlack;
-    layerScrollView.clipsToBounds = YES;
-    layerScrollView.scrollEnabled = YES;
-    layerScrollView.pagingEnabled = NO;
-    layerScrollView.showsHorizontalScrollIndicator = NO;
-    layerScrollView.showsVerticalScrollIndicator = NO;
-    [self layoutScrollImages:layerScrollView scrollWidth:layerScrollWidth scrollHeight:layerScrollHeight];
-    [self addScrollView:layerScrollView];
-
-    deleteMode = NO;
-    doStopWobble = YES;
-
-
-}
 
 -(void)addDonetoRightBarBotton{
     UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
