@@ -77,7 +77,7 @@
                                 <action selector="doOpen:" destination="-1" eventType="touchUpInside" id="45"/>
                             </connections>
                         </button>
-                        <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="25">
+                        <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="25">
                             <rect key="frame" x="212" y="68" width="104" height="60"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <accessibility key="accessibilityConfiguration" label="Invite"/>
@@ -94,24 +94,48 @@
                                 <action selector="doInvite:" destination="-1" eventType="touchUpInside" id="46"/>
                             </connections>
                         </button>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="pinned_flyer_bg2.png" id="21">
-                            <rect key="frame" x="169" y="136" width="136" height="136"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                            <inset key="insetFor6xAndEarlier" minX="0.0" minY="44" maxX="0.0" maxY="-44"/>
-                        </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="pinned_flyer_bg2.png" id="22">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="ld5-eK-vpW">
                             <rect key="frame" x="15" y="136" width="136" height="136"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                            <inset key="insetFor6xAndEarlier" minX="0.0" minY="44" maxX="0.0" maxY="-44"/>
-                        </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="pinned_flyer_bg2.png" id="19">
-                            <rect key="frame" x="169" y="279" width="136" height="136"/>
-                            <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
-                        </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="pinned_flyer_bg2.png" id="20">
+                            <accessibility key="accessibilityConfiguration" label="FirstFlyer"/>
+                            <state key="normal" backgroundImage="pinned_flyer_bg2.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="showFlyerDetail:" destination="-1" eventType="touchUpInside" id="Pes-dt-NDq"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="nTT-jT-5cZ">
+                            <rect key="frame" x="169" y="136" width="136" height="136"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            <accessibility key="accessibilityConfiguration" label="SecondFlyer"/>
+                            <state key="normal" backgroundImage="pinned_flyer_bg2.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="showFlyerDetail:" destination="-1" eventType="touchUpInside" id="FLe-NP-aOG"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="BIU-DI-wID">
                             <rect key="frame" x="15" y="279" width="136" height="136"/>
-                            <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
-                        </imageView>
+                            <accessibility key="accessibilityConfiguration" label="ThirdFlyer"/>
+                            <state key="normal" backgroundImage="pinned_flyer_bg2.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="showFlyerDetail:" destination="-1" eventType="touchUpInside" id="cDL-C2-IC2"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="HU8-3B-hmJ">
+                            <rect key="frame" x="169" y="279" width="136" height="136"/>
+                            <accessibility key="accessibilityConfiguration" label="FourthFlyer"/>
+                            <state key="normal" backgroundImage="pinned_flyer_bg2.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="showFlyerDetail:" destination="-1" eventType="touchUpInside" id="Uvf-mg-VQ9"/>
+                            </connections>
+                        </button>
                         <view contentMode="scaleToFill" id="26">
                             <rect key="frame" x="0.0" y="431" width="320" height="49"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
@@ -163,33 +187,33 @@
                                 <action selector="doAbout:" destination="-1" eventType="touchUpInside" id="54"/>
                             </connections>
                         </button>
-                        <imageView tag="1000" contentMode="center" image="pinned_flyer2.png" id="14">
+                        <imageView userInteractionEnabled="NO" tag="1000" contentMode="center" image="pinned_flyer2.png" id="14">
                             <rect key="frame" x="15" y="136" width="136" height="136"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                            <accessibility key="accessibilityConfiguration" label="First Flyer">
-                                <bool key="isElement" value="YES"/>
+                            <accessibility key="accessibilityConfiguration" label="">
+                                <bool key="isElement" value="NO"/>
                             </accessibility>
                             <inset key="insetFor6xAndEarlier" minX="0.0" minY="44" maxX="0.0" maxY="-44"/>
                         </imageView>
-                        <imageView tag="1000" contentMode="center" image="pinned_flyer2.png" id="13">
+                        <imageView userInteractionEnabled="NO" tag="1000" contentMode="center" image="pinned_flyer2.png" id="13">
                             <rect key="frame" x="168" y="136" width="136" height="136"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                            <accessibility key="accessibilityConfiguration" label="Second Flyer">
-                                <bool key="isElement" value="YES"/>
+                            <accessibility key="accessibilityConfiguration" label="">
+                                <bool key="isElement" value="NO"/>
                             </accessibility>
                             <inset key="insetFor6xAndEarlier" minX="0.0" minY="44" maxX="0.0" maxY="-44"/>
                         </imageView>
-                        <imageView tag="1000" contentMode="center" image="pinned_flyer2.png" id="11">
+                        <imageView userInteractionEnabled="NO" tag="1000" contentMode="center" image="pinned_flyer2.png" id="11">
                             <rect key="frame" x="15" y="279" width="136" height="136"/>
-                            <accessibility key="accessibilityConfiguration" label="Third Flyer">
-                                <bool key="isElement" value="YES"/>
+                            <accessibility key="accessibilityConfiguration" label="">
+                                <bool key="isElement" value="NO"/>
                             </accessibility>
                             <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
                         </imageView>
-                        <imageView tag="1000" contentMode="center" image="pinned_flyer2.png" id="12">
+                        <imageView userInteractionEnabled="NO" tag="1000" contentMode="center" image="pinned_flyer2.png" id="12">
                             <rect key="frame" x="169" y="279" width="136" height="136"/>
-                            <accessibility key="accessibilityConfiguration" label="Fourth Flyer">
-                                <bool key="isElement" value="YES"/>
+                            <accessibility key="accessibilityConfiguration" label="">
+                                <bool key="isElement" value="NO"/>
                             </accessibility>
                             <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
                         </imageView>
