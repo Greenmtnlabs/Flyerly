@@ -166,12 +166,26 @@ NSString * const TEXTHEIGHT = @"280.000000";
  * return
  *      UniqueID
  */
--(NSString *)addSymbols :(int)imgid{
-
+-(NSString *)addSymbols{
     
     int timestamp = [[NSDate date] timeIntervalSince1970];
     
     NSString *uniqueId = [NSString stringWithFormat:@"%d",timestamp];
+    
+    
+    //Create Dictionary for Symbol
+    NSMutableDictionary *symbolDetailDictionary = [[NSMutableDictionary alloc] init];
+    symbolDetailDictionary[@"image"] = @"";
+    symbolDetailDictionary[@"x"] = @"10";
+    symbolDetailDictionary[@"y"] = @"10";
+    symbolDetailDictionary[@"width"] = @"90";
+    symbolDetailDictionary[@"height"] = @"70";
+    
+    [masterLayers setValue:symbolDetailDictionary forKey:uniqueId];
+    return uniqueId;
+}
+
+-(void)setSymbolImage :(NSString *)uid tag:(int)imgid{
     
     // Create Symbol direcrory if not created
     NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
@@ -182,7 +196,7 @@ NSString * const TEXTHEIGHT = @"280.000000";
     int index = 0;
     if (symbols.count != 0)index = symbols.count;
     NSString *symbolFolderPath = [NSString stringWithFormat:@"%@/%d.jpg", FolderPath,index];
-
+    
     
     //Getting Image From bundle
     NSString* symbolName = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"symbol%d",imgid] ofType:@"png"];
@@ -191,20 +205,14 @@ NSString * const TEXTHEIGHT = @"280.000000";
     
     //Copy to Current Flyer Folder
     [[NSFileManager defaultManager] createFileAtPath:symbolFolderPath contents:imgData attributes:nil];
-
     
-    //Create Dictionary for Symbol
-    NSMutableDictionary *symbolDetailDictionary = [[NSMutableDictionary alloc] init];
-    symbolDetailDictionary[@"image"] = symbolFolderPath;
-    symbolDetailDictionary[@"x"] = @"10";
-    symbolDetailDictionary[@"y"] = @"10";
-    symbolDetailDictionary[@"width"] = @"90";
-    symbolDetailDictionary[@"height"] = @"70";
+    NSMutableDictionary *symbolDetailDictionary = [self getLayerFromMaster:uid];
+    [symbolDetailDictionary setValue:symbolFolderPath forKey:@"image"];
     
-    [masterLayers setValue:symbolDetailDictionary forKey:uniqueId];
-    return uniqueId;
+    // Set to Master Dictionary
+    [masterLayers setValue:symbolDetailDictionary forKey:uid];
+    
 }
-
 
 
 /*

@@ -1061,8 +1061,19 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     [Flurry logEvent:@"Layer Added"];
     [Flurry logEvent:@"Symbol Added"];
     
-    currentLayer = [flyer addSymbols:view.tag];
     
+  if ( [currentLayer isEqualToString:@""] ) {
+      
+      currentLayer = [flyer addSymbols];
+      editButtonGlobal.uid = currentLayer;
+      
+  } else {
+      
+      currentLayer = editButtonGlobal.uid;
+      
+  }
+    //Set Symbol Image
+    [flyer setSymbolImage:currentLayer tag:view.tag];
     [self.flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
     
     //Handling Select Unselect
@@ -3583,7 +3594,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
                 tileImageView.image = dicImgView.image;
                 
                 layerButton = [LayerTileButton  buttonWithType:UIButtonTypeCustom];
-                [layerButton addTarget:self action:@selector(selectSymbol:) forControlEvents:UIControlEventTouchUpInside];
+                [layerButton addTarget:self action:@selector(selectLayer:) forControlEvents:UIControlEventTouchUpInside];
                 layerButton.uid = uid;
                 layerButton.frame =CGRectMake(0, 5,layerScrollWidth, layerScrollHeight);
                 
@@ -3599,7 +3610,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
                 
                 [layerButton addSubview:tileImageView];
                 
-                layerButton.tag = [[NSString stringWithFormat:@"%@%d",@"222",cnt] integerValue];
+                layerButton.tag = [[NSString stringWithFormat:@"%@%d",@"444",cnt] integerValue];
             
             }//End if Checking for Label or ImageView
             

@@ -41,11 +41,12 @@
 
 -(void)setFlyerTextBorderColor :(NSString *)uid Color:(id)rgb;
 
-
+-(void)setSymbolImage :(NSString *)uid tag:(int)imgid;
 
 -(NSString *)addPhoto;
--(NSString *)addSymbols :(int)imgid;
+-(NSString *)addSymbols;
 -(NSString *)addClipArt;
+
 
 
 +(NSString *)newFlyerPath;
