@@ -1060,7 +1060,33 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     UIButton *view = sender;
     [Flurry logEvent:@"Layer Added"];
     [Flurry logEvent:@"Symbol Added"];
-
+    
+    currentLayer = [flyer addSymbols:view.tag];
+    
+    [self.flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
+    
+    //Handling Select Unselect
+    for(UIView *tempView  in [layerScrollView subviews])
+    {
+        // Add border to Un-select layer thumbnail
+        CALayer * l = [tempView layer];
+        [l setBorderWidth:1];
+        [l setCornerRadius:8];
+        UIColor * c = [UIColor clearColor];
+        [l setBorderColor:c.CGColor];
+        
+        if(tempView == view)
+        {
+            // Add border to selected layer thumbnail
+            CALayer * l = [tempView layer];
+            [l setBorderWidth:3.0];
+            UIColor * c = [globle colorWithHexString:@"0197dd"];
+            [l setBorderColor:c.CGColor];
+        }
+        
+    }
+    
+/*
     // If not in delete mode then add a new frame for symbol
     if(!deleteMode){
         [self plusButtonClick];
@@ -1072,8 +1098,9 @@ int photoLayerCount = 0; // Photo layer count to set tag value
             [rightUndoBarButton setEnabled:YES];
         }
     }
-    
+    */
     // else update the selected index of symbol
+    /*
     if([[self symbolLayersArray] count] > 0){
         
         // reset flags
@@ -1100,28 +1127,9 @@ int photoLayerCount = 0; // Photo layer count to set tag value
         [lastSymbolLayer setImage:selectedSymbol];
         
     }
+    */
     
-    
-    //Handling Select Unselect
-    for(UIView *tempView  in [layerScrollView subviews])
-    {
-        // Add border to Un-select layer thumbnail
-        CALayer * l = [tempView layer];
-        [l setBorderWidth:1];
-        [l setCornerRadius:8];
-        UIColor * c = [UIColor clearColor];
-        [l setBorderColor:c.CGColor];
-        
-        if(tempView == view)
-        {
-            // Add border to selected layer thumbnail
-            CALayer * l = [tempView layer];
-            [l setBorderWidth:3.0];
-            UIColor * c = [globle colorWithHexString:@"0197dd"];
-            [l setBorderColor:c.CGColor];
-        }
-        
-    }
+
 
 }
 
@@ -1293,7 +1301,7 @@ int arrangeLayerIndex;
 
 
 + (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
-    //UIGraphicsBeginImageContext(newSize);
+ 
     UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
     [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
@@ -1308,14 +1316,8 @@ int arrangeLayerIndex;
         
         if(selectedAddMoreLayerTab == ADD_MORE_TEXTTAB){
             
-            textLayerCount--;
-            
             [msgTextView resignFirstResponder];
             [msgTextView removeFromSuperview];
-            
-            // Remove object from array if not in delete mode
-            if(!deleteMode)
-                [textLabelLayersArray removeLastObject];
             
         } else if(selectedAddMoreLayerTab == ADD_MORE_PHOTOTAB){
             
@@ -1375,7 +1377,7 @@ int arrangeLayerIndex;
     return titleView;
 }
 
--(void)editLayer:(UIButton *)editButton overrided:(BOOL)overrided{
+-(void)editLayer:(LayerTileButton *)editButton overrided:(BOOL)overrided{
     
     // Since we are editting we should enable the deleteNode On
     undoCount = undoCount + 1;
@@ -1386,14 +1388,15 @@ int arrangeLayerIndex;
     if([tag hasPrefix:@"111"])
     {
         // Set index
-        arrangeLayerIndex = [self getIndexFromTag:tag];
+      //  arrangeLayerIndex = [self getIndexFromTag:tag];
 
         
         selectedAddMoreLayerTab = ADD_MORE_TEXTTAB;
         
-        // Call Write
-        [self callWrite];
-        
+
+        NSArray *ary = [editButton subviews];
+        CustomLabel * txt = [ary objectAtIndex:0];
+        msgTextView.text = txt.text;
         //Call Style
         [self callStyle];
         
@@ -1720,7 +1723,6 @@ int arrangeLayerIndex;
     
     //Checking Empty String
     if ([lastTextView.text isEqualToString:@""] ) {
-        textLayerCount--;
         
         [msgTextView resignFirstResponder];
         [msgTextView removeFromSuperview];
@@ -1994,8 +1996,8 @@ int arrangeLayerIndex;
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:backBarButton,leftBarHelpButton,nil]];
     
     [self addBottomTabs:libFlyer];
-    [self addAllLayersIntoScrollView ];
     [flyer saveFlyer:currentLayer];
+    [self addAllLayersIntoScrollView ];
     currentLayer = @"";
     [self hideAddMoreButton];
 
@@ -2123,6 +2125,8 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 -(IBAction)setStyleTabAction:(id) sender
 {
+    
+    [self addBottomTabs:libText];
     
     [fontTabButton setSelected:NO];
     [colorTabButton setSelected:NO];
@@ -2447,9 +2451,11 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 -(void)editLayer:(LayerTileButton *)editButton{
     
+  
+    editButtonGlobal = editButton;
     currentLayer =  editButton.uid;
     editButtonGlobal.uid = currentLayer;
-    editButtonGlobal = editButton;
+   
    // [self chooseEdit];
     [self editLayer:editButtonGlobal overrided:YES];
 
@@ -2746,6 +2752,9 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
             
             
         } else if(selectedAddMoreLayerTab == ADD_MORE_ICONTAB){
+            
+            
+            
             CALayer * lastLayer = [[[self iconLayersArray] lastObject] layer];
             [lastLayer setMasksToBounds:YES];
             [lastLayer setCornerRadius:0];
@@ -3526,6 +3535,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         if ( ![uid isEqualToString:@"Template"] ) {
             
             id lay = [layers objectForKey:uid];
+            LayerTileButton *layerButton;
             
             // Checking for Label or ImageView
             if ( [lay isKindOfClass:[UILabel class]] == YES ) {
@@ -3544,7 +3554,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
                 scrollLabel.textColor = lbl.textColor;
                 
                 
-                LayerTileButton *layerButton = [LayerTileButton  buttonWithType:UIButtonTypeCustom];
+                layerButton = [LayerTileButton  buttonWithType:UIButtonTypeCustom];
                 [layerButton addTarget:self action:@selector(selectLayer:) forControlEvents:UIControlEventTouchUpInside];
                 layerButton.uid = uid;
                 layerButton.frame =CGRectMake(0, 5,layerScrollWidth, layerScrollHeight);
@@ -3562,29 +3572,50 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
                 [layerButton addSubview:scrollLabel];
                 
                 layerButton.tag = [[NSString stringWithFormat:@"%@%d",@"111",cnt] integerValue];
-                
-                CGRect frame = layerButton.frame;
-				frame.origin = CGPointMake(curXLoc, curYLoc);
-				layerButton.frame = frame;
-				curXLoc += (layerScrollWidth)+5;
-                
-                if(IS_IPHONE_5){
-                    if(curXLoc >= 320){
-                        curXLoc = 0;
-                        curYLoc = curYLoc + layerScrollHeight + 7;
-                    }
-                }
-                
-                [layerScrollView addSubview:layerButton];
-                
-                
-
+            
             
             } else {
                 
                 //Here We write code for ImageView
+                UIImageView *dicImgView = lay;
+                
+                UIImageView *tileImageView = [[UIImageView alloc] initWithFrame:dicImgView.frame];
+                tileImageView.image = dicImgView.image;
+                
+                layerButton = [LayerTileButton  buttonWithType:UIButtonTypeCustom];
+                [layerButton addTarget:self action:@selector(selectSymbol:) forControlEvents:UIControlEventTouchUpInside];
+                layerButton.uid = uid;
+                layerButton.frame =CGRectMake(0, 5,layerScrollWidth, layerScrollHeight);
+                
+                [layerButton addTarget:self action:@selector(editLayer:) forControlEvents:UIControlEventTouchUpInside];
+                
+                [layerButton setBackgroundColor:[UIColor clearColor]];
+                [layerButton.layer setBorderWidth:2];
+                UIColor * c = [UIColor lightGrayColor];
+                [layerButton.layer setCornerRadius:8];
+                [layerButton.layer setBorderColor:c.CGColor];
+                
+                tileImageView.frame  = CGRectMake(layerButton.frame.origin.x+5, layerButton.frame.origin.y-2, layerButton.frame.size.width-10, layerButton.frame.size.height-7);
+                
+                [layerButton addSubview:tileImageView];
+                
+                layerButton.tag = [[NSString stringWithFormat:@"%@%d",@"222",cnt] integerValue];
             
+            }//End if Checking for Label or ImageView
+            
+            CGRect frame = layerButton.frame;
+            frame.origin = CGPointMake(curXLoc, curYLoc);
+            layerButton.frame = frame;
+            curXLoc += (layerScrollWidth)+5;
+            
+            if(IS_IPHONE_5){
+                if(curXLoc >= 300){
+                    curXLoc = 10;
+                    curYLoc = curYLoc + layerScrollHeight + 7;
+                }
             }
+            
+            [layerScrollView addSubview:layerButton];
 
             
         }

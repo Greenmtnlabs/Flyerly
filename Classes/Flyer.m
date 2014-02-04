@@ -89,7 +89,53 @@ NSString * const TEXTHEIGHT = @"280.000000";
 
 
 -(NSArray *)allKeys{
+    
     return [masterLayers allKeys];
+}
+
+/*
+ *Here we sort Array for Exact Render of Flyer
+ * as last saved.
+ */
+-(NSMutableArray *)sortbyTimeStamp :(NSArray *)flyKeys {
+    
+    NSMutableArray *sortedAry = [[NSMutableArray alloc ]init];
+    NSString *timstring =@"";
+    NSString *sortedValue =@"";
+    int tmpStamp = 0;
+    int shortest = 0;
+
+    for (int i = 0; i < flyKeys.count; i++) {
+        
+        timstring = [flyKeys objectAtIndex:i];
+        
+        if (![timstring isEqualToString:@"Template"]) {
+            
+            shortest = [timstring integerValue];
+            sortedValue = [ NSString stringWithFormat:@"%d",shortest];
+            for (int ii = i ; ii < flyKeys.count; ii++) {
+                
+                timstring = [flyKeys objectAtIndex:ii];
+                tmpStamp = [timstring integerValue];
+                
+                NSLog(@"%d < %d",tmpStamp,shortest);
+                
+                if (tmpStamp < shortest && tmpStamp != 0) {
+                    sortedValue = [ NSString stringWithFormat:@"%d",tmpStamp];
+                    shortest = tmpStamp;
+                }
+            }
+            
+            [sortedAry addObject:sortedValue];
+            
+        }
+
+    }
+    
+    [sortedAry addObject:@"Template"];
+    
+    NSLog(@"%@",sortedAry);
+    return sortedAry;
 }
 
 
@@ -120,10 +166,45 @@ NSString * const TEXTHEIGHT = @"280.000000";
  * return
  *      UniqueID
  */
--(NSString *)addSymbols{
+-(NSString *)addSymbols :(int)imgid{
 
-    return @"";
+    
+    int timestamp = [[NSDate date] timeIntervalSince1970];
+    
+    NSString *uniqueId = [NSString stringWithFormat:@"%d",timestamp];
+    
+    // Create Symbol direcrory if not created
+    NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
+    NSString *FolderPath = [NSString stringWithFormat:@"%@/Symbol", currentpath];
+    
+    NSError *error;
+    NSArray *symbols = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:FolderPath error:&error];
+    int index = 0;
+    if (symbols.count != 0)index = symbols.count;
+    NSString *symbolFolderPath = [NSString stringWithFormat:@"%@/%d.jpg", FolderPath,index];
+
+    
+    //Getting Image From bundle
+    NSString* symbolName = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"symbol%d",imgid] ofType:@"png"];
+    UIImage *symbolImg =  [UIImage imageWithContentsOfFile:symbolName];
+    NSData *imgData = UIImagePNGRepresentation(symbolImg);
+    
+    //Copy to Current Flyer Folder
+    [[NSFileManager defaultManager] createFileAtPath:symbolFolderPath contents:imgData attributes:nil];
+
+    
+    //Create Dictionary for Symbol
+    NSMutableDictionary *symbolDetailDictionary = [[NSMutableDictionary alloc] init];
+    symbolDetailDictionary[@"image"] = symbolFolderPath;
+    symbolDetailDictionary[@"x"] = @"10";
+    symbolDetailDictionary[@"y"] = @"10";
+    symbolDetailDictionary[@"width"] = @"90";
+    symbolDetailDictionary[@"height"] = @"70";
+    
+    [masterLayers setValue:symbolDetailDictionary forKey:uniqueId];
+    return uniqueId;
 }
+
 
 
 /*
@@ -238,11 +319,9 @@ NSString * const TEXTHEIGHT = @"280.000000";
 -(NSString *)addText{
     NSLog(@"addText");
     
-    CFUUIDRef uuidRef = CFUUIDCreate(NULL);
-    CFStringRef uuidStringRef = CFUUIDCreateString(NULL, uuidRef);
-    CFRelease(uuidRef);
+    int timestamp = [[NSDate date] timeIntervalSince1970];
     
-    NSString *uniqueId = (__bridge NSString *)uuidStringRef;
+    NSString *uniqueId = [NSString stringWithFormat:@"%d",timestamp];
     
     //Add Defaualt dictionary
     NSMutableDictionary *textDetailDictionary = [[NSMutableDictionary alloc] init];

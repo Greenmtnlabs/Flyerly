@@ -44,8 +44,9 @@
 
 
 -(NSString *)addPhoto;
--(NSString *)addSymbols;
+-(NSString *)addSymbols :(int)imgid;
 -(NSString *)addClipArt;
+
 
 +(NSString *)newFlyerPath;
 

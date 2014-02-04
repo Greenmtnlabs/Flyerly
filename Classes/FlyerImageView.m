@@ -105,14 +105,45 @@
 
     } else {
 
-        // Here We Write Code for Image
-        UIImageView *img = nil;
-        img = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 50, 50)];
+        
+        //Check Layer Exist in Master Layers
+        if ([layers objectForKey:uid] == nil) {
+            
+            // Here We Write Code for Image
+            UIImageView *img = [[UIImageView alloc]initWithFrame:CGRectMake(10,10, 90, 70)];
+            
+            [self configureImageView:img ImageViewDictionary:layDic];
+            [self addSubview:img];
+            [layers setValue:img forKey:uid];
+            
+            
+        } else {
+        
+            UIImageView *img = [layers objectForKey:uid];
+            [self configureImageView:img ImageViewDictionary:layDic];
+            [layers setValue:img forKey:uid];
+        
+        }
     }
     
     
 }
 
+
+/*
+ *Here we set Properties of UIImageView
+ */
+-(void)configureImageView :(UIImageView *)imgView ImageViewDictionary:(NSMutableDictionary *)detail {
+    
+    //SetFrame
+    [imgView setFrame:CGRectMake([[detail valueForKey:@"x"] floatValue], [[detail valueForKey:@"y"] floatValue], [[detail valueForKey:@"width"] floatValue], [[detail valueForKey:@"height"] floatValue])];
+    
+    //Set Image
+    NSData *imageData = [[NSData alloc ]initWithContentsOfMappedFile:[detail valueForKey:@"image"]];
+    UIImage *currentImage = [UIImage imageWithData:imageData];
+    [imgView setImage:currentImage];
+
+}
 
 /*
  *Here we set Properties of uiLabel

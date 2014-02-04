@@ -317,7 +317,7 @@ NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
 
 
 -(IBAction)showFlyerDetail:(id)sender {
-    NSString *flyPath = @"/Users/khurram/Library/Application Support/iPhone Simulator/7.0.3/Applications/7632F2F4-92E4-4427-BF0F-559C9E0E544F/Documents/nljaul89r1cfgvzrjp9z8udw1/Flyr/4";
+    NSString *flyPath = @"/Users/khurram/Library/Application Support/iPhone Simulator/7.0.3/Applications/7632F2F4-92E4-4427-BF0F-559C9E0E544F/Documents/nljaul89r1cfgvzrjp9z8udw1/Flyr/80";
     
     flyer = [[Flyer alloc]initWithPath:flyPath];
     
