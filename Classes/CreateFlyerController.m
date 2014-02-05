@@ -1051,6 +1051,53 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     [Flurry logEvent:@"Background Selected"];
 }
 
+
+-(NSString *)getImagePathByTag :(NSString *)imgName{
+
+    // Create Symbol direcrory if not created
+    NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
+    
+    NSString *FolderPath;
+    NSString *dicPath;
+    
+    //when we create Symbols
+    if ([imgName rangeOfString:@"symbol"].location == NSNotFound) {
+        NSLog(@"sub string doesnt exist");
+    } else {
+        FolderPath = [NSString stringWithFormat:@"%@/Symbol", currentpath];
+        dicPath = @"Symbol";
+    }
+    
+    //when we create Icon
+    if ([imgName rangeOfString:@"ricon"].location == NSNotFound) {
+        NSLog(@"sub string doesnt exist");
+    } else {
+        FolderPath = [NSString stringWithFormat:@"%@/Icon", currentpath];
+        dicPath = @"Icon";
+    }
+    
+    
+    //Create Unique Id for Image
+    int timestamp = [[NSDate date] timeIntervalSince1970];
+    
+    NSString *imageFolderPath = [NSString stringWithFormat:@"%@/%d.jpg", FolderPath,timestamp];
+    
+    dicPath = [dicPath stringByAppendingString:[NSString stringWithFormat:@"/%d.jpg",timestamp]];
+    
+    //Getting Image From Bundle
+    NSString *existImagePath =[[NSBundle mainBundle] pathForResource:imgName ofType:@"png"];
+    UIImage *realImage =  [UIImage imageWithContentsOfFile:existImagePath];
+    NSData *imgData = UIImagePNGRepresentation(realImage);
+    
+    //Create a Image Copy to Current Flyer Folder
+    [[NSFileManager defaultManager] createFileAtPath:imageFolderPath contents:imgData attributes:nil];
+
+    
+    return dicPath;
+
+}
+
+
 /*
  * Called when select a symbol
  */
@@ -1062,18 +1109,11 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     [Flurry logEvent:@"Symbol Added"];
     
     
-  if ( [currentLayer isEqualToString:@""] ) {
-      
-      currentLayer = [flyer addSymbols];
-      editButtonGlobal.uid = currentLayer;
-      
-  } else {
-      
-      currentLayer = editButtonGlobal.uid;
-      
-  }
+    NSString *imgPath = [self getImagePathByTag:[NSString stringWithFormat:@"symbol%d",view.tag]];
+    
     //Set Symbol Image
-    [flyer setSymbolImage:currentLayer tag:view.tag];
+    [flyer setSymbolImage:currentLayer ImgPath:imgPath];
+    
     [self.flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
     
     //Handling Select Unselect
@@ -1155,45 +1195,13 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     [Flurry logEvent:@"Layer Added"];
     [Flurry logEvent:@"Clip Art Added"];
 
-    // If not in delete mode then add a new frame for icon
-    if(!deleteMode){
-        [self plusButtonClick];
-    }else{
-        //deleteMode = NO;
-        doStopWobble = NO;
-        
-        if(rightUndoBarButton){
-            [rightUndoBarButton setEnabled:YES];
-        }
-    }
-
-    // else update the selected index of icon
-    if([[self iconLayersArray] count] > 0){
-        
-        symbolTouchFlag = NO;
-        iconTouchFlag = YES;
-        photoTouchFlag = NO;
-        
-        FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
-        appDele.changesFlag = YES;
-
-        selectedIcon  =  iconArray[(view.tag - 1)];
-        CATransition *animation = [CATransition animation];
-        [animation setType:kCATransitionPush];
-        [animation setSubtype:kCATransitionMoveIn];
-        [animation setDuration:0.4f];
-        [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
-        
-        // Make copy of previous layers
-        if(undoCount > 1){
-            // Make copy of layers to undo it later
-            [self makeCopyOfLayers];
-        }
-
-        UIImageView *lastIconLayer = [self iconLayersArray][arrangeLayerIndex];
-        [[lastIconLayer  layer] addAnimation:animation forKey:@"SwitchToView1"];
-        [lastIconLayer setImage:selectedIcon];
-    }
+  
+    NSString *imgPath = [self getImagePathByTag:[NSString stringWithFormat:@"ricon%d",view.tag]];
+    
+    //Set Symbol Image
+    [flyer setSymbolImage:currentLayer ImgPath:imgPath];
+    
+    [self.flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
     
     
     //Handling Select Unselect
@@ -2371,10 +2379,8 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	{
         selectedAddMoreLayerTab = ADD_MORE_SYMBOLTAB;
 
-        symbolTouchFlag= YES;
-        photoTouchFlag= NO;
-        lableTouchFlag = NO;
-        iconTouchFlag = NO;
+        currentLayer = [flyer addSymbols];
+
         [addMoreSymbolTabButton setSelected:YES];
         [self addDonetoRightBarBotton];
         
@@ -2392,10 +2398,10 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	else if(selectedButton == addMoreIconTabButton)
 	{
         selectedAddMoreLayerTab = ADD_MORE_ICONTAB;
-        lableTouchFlag = NO;
-        symbolTouchFlag= NO;
-        iconTouchFlag = YES;
+        
         [addMoreIconTabButton setSelected:YES];
+        
+        currentLayer = [flyer addSymbols];
         
         //Add right Bar button
         [self addDonetoRightBarBotton];

@@ -185,29 +185,17 @@ NSString * const TEXTHEIGHT = @"280.000000";
     return uniqueId;
 }
 
--(void)setSymbolImage :(NSString *)uid tag:(int)imgid{
-    
-    // Create Symbol direcrory if not created
-    NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
-    NSString *FolderPath = [NSString stringWithFormat:@"%@/Symbol", currentpath];
-    
-    NSError *error;
-    NSArray *symbols = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:FolderPath error:&error];
-    int index = 0;
-    if (symbols.count != 0)index = symbols.count;
-    NSString *symbolFolderPath = [NSString stringWithFormat:@"%@/%d.jpg", FolderPath,index];
-    
-    
-    //Getting Image From bundle
-    NSString* symbolName = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"symbol%d",imgid] ofType:@"png"];
-    UIImage *symbolImg =  [UIImage imageWithContentsOfFile:symbolName];
-    NSData *imgData = UIImagePNGRepresentation(symbolImg);
-    
-    //Copy to Current Flyer Folder
-    [[NSFileManager defaultManager] createFileAtPath:symbolFolderPath contents:imgData attributes:nil];
-    
+-(void)setSymbolImage :(NSString *)uid ImgPath:(NSString *)imgPath{
+
     NSMutableDictionary *symbolDetailDictionary = [self getLayerFromMaster:uid];
-    [symbolDetailDictionary setValue:symbolFolderPath forKey:@"image"];
+    
+    //Here We Delete Old Map File if Exist
+    if (![[symbolDetailDictionary objectForKey:@"image"] isEqualToString:@""]) {
+        NSError *error;
+        [[NSFileManager defaultManager] removeItemAtPath:[symbolDetailDictionary objectForKey:@"image"] error:&error];
+    }
+    
+    [symbolDetailDictionary setValue:imgPath forKey:@"image"];
     
     // Set to Master Dictionary
     [masterLayers setValue:symbolDetailDictionary forKey:uid];
