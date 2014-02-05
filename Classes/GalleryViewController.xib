@@ -32,7 +32,7 @@
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
 			<object class="IBUIScrollView" id="166607531">
-				<reference key="NSNextResponder"/>
+				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">1298</int>
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="IBUIActivityIndicatorView" id="24268546">
@@ -40,7 +40,6 @@
 						<int key="NSvFlags">1316</int>
 						<string key="NSFrame">{{144, 232}, {37, 37}}</string>
 						<reference key="NSSuperview" ref="166607531"/>
-						<reference key="NSWindow"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<string key="NSHuggingPriority">{750, 750}</string>
 						<bool key="IBUIOpaque">NO</bool>
@@ -51,10 +50,7 @@
 					</object>
 				</array>
 				<object class="NSPSMatrix" key="NSFrameMatrix"/>
-				<string key="NSFrame">{{0, 64}, {320, 480}}</string>
-				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="24268546"/>
+				<string key="NSFrameSize">{320, 480}</string>
 				<object class="NSColor" key="IBUIBackgroundColor" id="508001730">
 					<int key="NSColorSpace">10</int>
 					<object class="NSImage" key="NSImage">
@@ -4467,6 +4463,7 @@ AAgAAgAAAAIAAAAAAAgAAgAIAAEAAQABAAE</bytes>
 			<object class="IBUIScrollView" id="408225491">
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">1292</int>
+				<array class="NSMutableArray" key="NSSubviews"/>
 				<object class="NSPSMatrix" key="NSFrameMatrix"/>
 				<string key="NSFrameSize">{320, 480}</string>
 				<reference key="NSSuperview"/>
@@ -4518,16 +4515,17 @@ AAgAAgAAAAIAAAAAAAgAAgAIAAEAAQABAAE</bytes>
 						<reference key="parent" ref="0"/>
 					</object>
 					<object class="IBObjectRecord">
+						<string key="id">26</string>
+						<reference key="object" ref="408225491"/>
+						<array class="NSMutableArray" key="children"/>
+						<reference key="parent" ref="0"/>
+					</object>
+					<object class="IBObjectRecord">
 						<string key="id">UTH-XC-121</string>
 						<reference key="object" ref="166607531"/>
 						<array class="NSMutableArray" key="children">
 							<reference ref="24268546"/>
 						</array>
-						<reference key="parent" ref="0"/>
-					</object>
-					<object class="IBObjectRecord">
-						<string key="id">26</string>
-						<reference key="object" ref="408225491"/>
 						<reference key="parent" ref="0"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -4585,7 +4583,7 @@ AAgAAgAAAAIAAAAAAAgAAgAIAAEAAQABAAE</bytes>
 						<string key="goToNext:">id</string>
 						<string key="goToPrevious:">id</string>
 						<string key="pageControlWasTapped:">id</string>
-						<string key="thumbnailWasTapped:">id</string>
+						<string key="thumbnailWasTapped:">UIView</string>
 						<string key="toggleFullscreen:">id</string>
 						<string key="toggleThumbnailsView:">id</string>
 					</dictionary>
@@ -4604,7 +4602,7 @@ AAgAAgAAAAIAAAAAAAgAAgAIAAEAAQABAAE</bytes>
 						</object>
 						<object class="IBActionInfo" key="thumbnailWasTapped:">
 							<string key="name">thumbnailWasTapped:</string>
-							<string key="candidateClassName">id</string>
+							<string key="candidateClassName">UIView</string>
 						</object>
 						<object class="IBActionInfo" key="toggleFullscreen:">
 							<string key="name">toggleFullscreen:</string>

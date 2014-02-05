@@ -23,6 +23,7 @@
         if (!error) {
             self.objectArray = assets;
             [self setShowThumbnailsView:YES];
+            self.title = @"GalleryView";
         }
      }];
 }
