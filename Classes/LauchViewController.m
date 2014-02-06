@@ -92,7 +92,7 @@
 /*
  * Here we Set recent Flyer
  */
-- (void)updateRecentFlyer:(NSMutableArray *)recentFlyers{
+- (void)updateRecentFlyer:(NSMutableArray *)recFlyers{
 
     firstFlyer.image = [UIImage imageNamed:@"pinned_flyer2.png"];
     secondFlyer.image = [UIImage imageNamed:@"pinned_flyer2.png"];
@@ -101,31 +101,27 @@
     
     CGSize size = CGSizeMake(firstFlyer.frame.size.width, firstFlyer.frame.size.height);
     
-    for (int i = 0 ; i < recentFlyers.count; i++) {
+    for (int i = 0 ; i < recFlyers.count; i++) {
         
-         UIImage *recentImage =  [UIImage imageWithContentsOfFile:[recentFlyers objectAtIndex:i]];
+         UIImage *recentImage =  [UIImage imageWithContentsOfFile:[recFlyers objectAtIndex:i]];
         
 
         UIImage *resizeImage = [self imageWithImage:recentImage scaledToSize:size];
         
         if ( i == 0 ){
             firstFlyer.image = resizeImage;
-            firstFlyer.tag = i;
         }
         
         if ( i == 1 ) {
             secondFlyer.image = resizeImage;
-            secondFlyer.tag = i;
         }
         
         if ( i == 2 ){
             thirdFlyer.image = resizeImage;
-            thirdFlyer.tag = i;
         }
         
         if ( i == 3 ) {
             fourthFlyer.image = resizeImage;
-            fourthFlyer.tag = i;
         }
        
     }
@@ -141,7 +137,7 @@
     globle.NBUimage = nil;
 
     //Getting Recent Flyers
-    NSMutableArray *recentFlyers = [Flyer recentFlyerPreview:4];
+    recentFlyers = [Flyer recentFlyerPreview:4];
 
     //Set Recent Flyers
     [self updateRecentFlyer:recentFlyers];
@@ -231,16 +227,33 @@
 
 
 -(IBAction)showFlyerDetail:(id)sender {
-    NSString *flyPath = @"/Users/khurram/Library/Application Support/iPhone Simulator/7.0.3/Applications/7632F2F4-92E4-4427-BF0F-559C9E0E544F/Documents/zohaib/Flyr/2";
+    
+    UIButton *clickButton = sender;
+    NSString *flyPath;
+    
+    NSLog(@"%d",clickButton.tag);
+    
+    if (clickButton.tag < [recentFlyers count]) {
+        
+        NSString *pathWitFileName = [recentFlyers objectAtIndex:clickButton.tag];
+        NSString *pathWithoutFileName = [pathWitFileName
+                                         stringByReplacingOccurrencesOfString:@"/flyer.jpg" withString:@""];
+        flyPath = pathWithoutFileName;
+        
+    }else {
+        
+        flyPath = [Flyer newFlyerPath];
+        
+    }
+    
     
     flyer = [[Flyer alloc]initWithPath:flyPath];
     
     
     createFlyer = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
     
-    // Set for Empty CreateFlyer Screen
+    // Set CreateFlyer Screen
     createFlyer.flyerNumber = -1;
-    createFlyer.flyerPath = flyPath;
     createFlyer.flyer = flyer;
 	[self.navigationController pushViewController:createFlyer animated:YES];
 }
@@ -594,4 +607,19 @@
     [self.likeView setHidden:YES];
 }
 
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    
+    UITouch *touch = [touches anyObject];
+    
+    if ([touch view] == firstFlyer) {
+        [self showFlyerDetail:firstFlyer];
+    } else if ([touch view] == secondFlyer) {
+        [self showFlyerDetail:secondFlyer];
+    } else if ([touch view] == thirdFlyer) {
+        [self showFlyerDetail:thirdFlyer];
+    } else if ([touch view] == fourthFlyer) {
+        [self showFlyerDetail:fourthFlyer];
+    }
+}
 @end

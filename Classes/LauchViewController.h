@@ -43,7 +43,7 @@
     UIView *opaqueView;
     NSArray *twtAcconts;
     Flyer *flyer;
-    
+    NSMutableArray *recentFlyers;
 
 }
 
