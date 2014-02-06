@@ -1287,9 +1287,15 @@ int arrangeLayerIndex;
     
     nbuGallary = [[GalleryViewController alloc] initWithNibName:@"GalleryViewController" bundle:nil];
     nbuGallary.desiredImageSize = CGSizeMake(300, 300);
-    globle.NBUimage = nil;
+    [nbuGallary setOnImageTaken:^(UIImage *img) {
+        NSLog(@"Image size: %.2f %.2f", img.size.width, img.size.height );
+        
+        dispatch_async( dispatch_get_main_queue(), ^{
+            // Do any UI operation here (render layer).
+        });
+    }];
+    
     [self.navigationController pushViewController:nbuGallary animated:YES];
-
     [Flurry logEvent:@"Custom Background"];
 }
 
@@ -1299,7 +1305,17 @@ int arrangeLayerIndex;
 
     nbuCamera = [[CameraViewController alloc]initWithNibName:@"CameraViewController" bundle:nil];
     nbuCamera.desiredImageSize = CGSizeMake(300, 300);
-    globle.NBUimage = nil;
+    
+    // Callback once image is selected.
+    [nbuCamera setOnImageTaken:^(UIImage *img) {
+        NSLog(@"Image size: %.2f %.2f", img.size.width, img.size.height );
+        
+        dispatch_async( dispatch_get_main_queue(), ^{
+            // Do any UI operation here (render layer).
+        });
+    }];
+    
+    
     [self.navigationController pushViewController:nbuCamera animated:YES];
 
     [Flurry logEvent:@"Custom Background"];

@@ -8,14 +8,11 @@
 
 #import "NBUCameraViewController.h"
 #import "UIImage+NBUAdditions.h"
-#import "FlyerlySingleton.h"
 
-@class FlyerlySingleton;
-@interface CameraViewController : NBUCameraViewController{
-   FlyerlySingleton *globle;
-}
+@interface CameraViewController : NBUCameraViewController
 
 @property CGSize desiredImageSize;
+@property (nonatomic, copy) void (^onImageTaken)(UIImage *);
 
 // Outlets
 @property (assign, nonatomic) IBOutlet UIImageView *cameraLines;

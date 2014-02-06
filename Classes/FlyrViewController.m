@@ -175,8 +175,10 @@ sd:;
 - (void)viewDidLoad {
     [super viewDidLoad];
     searching = NO;
-    globle = [FlyerlySingleton RetrieveSingleton];
+
+    FlyerlySingleton *globle = [FlyerlySingleton RetrieveSingleton];
     [self.view setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
+    
 	letUserSelectRow = YES;
     self.navigationItem.hidesBackButton = YES;
     searchTextField.placeholder = @"Flyerly search";
@@ -186,7 +188,6 @@ sd:;
     [searchTextField setBorderStyle:UITextBorderStyleRoundedRect];
 
 
-    
 	[self.tView setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
 	tView.dataSource = self;
 	tView.delegate = self;

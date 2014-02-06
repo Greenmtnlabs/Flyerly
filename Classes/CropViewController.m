@@ -7,10 +7,11 @@
 //
 
 #import "CropViewController.h"
+#import "FlyerlySingleton.h"
 
 @implementation CropViewController
 @synthesize desiredImageSize;
-@synthesize globle;
+@synthesize onImageTaken;
 
 #pragma mark - Initialization
 
@@ -20,7 +21,6 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     
     if (( self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil] )) {
-        self.globle = [FlyerlySingleton RetrieveSingleton];
         
         [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
 
@@ -73,8 +73,7 @@
     self.cropView.allowAspectFit = YES;
     
     // Use the image from filters for cropping.
-    self.filterView.image = self.globle.NBUimage;
-    self.image = self.filterView.image;
+    self.filterView.image = self.image;
     
     [super viewDidLoad];
 }
@@ -99,7 +98,7 @@
     [self.navigationController popViewControllerAnimated:YES];
     
     self.image = self.filterView.image;
-    self.globle.NBUimage = self.editedImage;
+    self.onImageTaken( self.editedImage );
 }
 
 @end

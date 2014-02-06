@@ -7,7 +7,6 @@
 
 #import <UIKit/UIKit.h>
 #import "CreateFlyerController.h"
-#import "FlyerlySingleton.h"
 #import "SaveFlyerCell.h"
 #import "Common.h"
 #import "ShareViewController.h"
@@ -28,8 +27,6 @@
     CreateFlyerController *ptController;
     BOOL searching;
     BOOL letUserSelectRow;
-    FlyerlySingleton *globle;
-
 }
 @property(nonatomic,strong) CreateFlyerController *ptController;
 @property(nonatomic,strong) NSMutableArray *photoArray;

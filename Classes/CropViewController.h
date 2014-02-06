@@ -7,14 +7,11 @@
 //
 
 #import "NBUEditImageViewController.h"
-#import "FlyerlySingleton.h"
-
-@class FlyerlySingleton;
 
 @interface CropViewController : NBUEditImageViewController
 
 @property CGSize desiredImageSize;
-@property (strong, nonatomic) FlyerlySingleton *globle;
+@property (nonatomic, copy) void (^onImageTaken)(UIImage *);
 
 @end
 
