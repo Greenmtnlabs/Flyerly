@@ -1318,6 +1318,16 @@ int arrangeLayerIndex;
 
 #pragma mark UIAlertView delegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    if(alertView == deleteAlert && buttonIndex == 1) {
+        
+        editButtonGlobal.uid = currentLayer;
+        [self deleteLayer:editButtonGlobal overrided:nil];
+        [Flurry logEvent:@"Layed Deleted"];
+	}
+
+    
+    /*
     if (layerallow == 0) {
       if(alertView == discardAlert && buttonIndex == 1) {
         
@@ -1356,11 +1366,13 @@ int arrangeLayerIndex;
         [self callAddMoreLayers];
         
 	} else if(alertView == deleteAlert && buttonIndex == 1) {
-    
+        
+        editButtonGlobal.uid = currentLayer;
         [self deleteLayer:editButtonGlobal overrided:nil];
         [Flurry logEvent:@"Layed Deleted"];
 	}
   }
+     */
 }
 
 #pragma mark After ViewWillAppear Method Sequence
@@ -1406,8 +1418,44 @@ int arrangeLayerIndex;
     currentLayer =  editButton.uid;
     editButtonGlobal.uid = currentLayer;
     
+
+    //when tap on Text Box
+    NSString *btnText = [flyer getText:currentLayer];
+
+    if (![btnText isEqualToString:@""] && btnText != nil) {
+        
+        msgTextView.text = btnText;
+        
+        //Call Style
+        [self callStyle];
+    }
+    
+    
+    //when tap on Image Box
+    NSString *imgName = [flyer getImageName:currentLayer];
+    
+    if (![imgName isEqualToString:@""] && imgName != nil) {
+        
+        //when we tap on Symbols
+        if ([imgName rangeOfString:@"Symbol"].location == NSNotFound) {
+            NSLog(@"sub string doesnt exist");
+        } else {
+            // Call Icon
+            [self setAddMoreLayerTabAction:addMoreIconTabButton];
+        }
+        
+        //when we tap on icon
+        if ([imgName rangeOfString:@"Icon"].location == NSNotFound) {
+            NSLog(@"sub string doesnt exist");
+        } else {
+            
+            // Call Symbol
+            [self setAddMoreLayerTabAction:addMoreSymbolTabButton];
+        }
+    }
+
     // [self chooseEdit];
-    [self editLayer:editButtonGlobal overrided:YES];
+    //[self editLayer:editButtonGlobal overrided:YES];
     
 }
 
@@ -1799,21 +1847,10 @@ int arrangeLayerIndex;
 
 -(void) donePhoto{
     
-    if (newPhotoImgView.image == nil) {
-        photoLayerCount--;
-        
-        CALayer * lastLayer = [[[self photoLayersArray] lastObject] layer];
-        [lastLayer setMasksToBounds:YES];
-        [lastLayer setCornerRadius:0];
-        [lastLayer setBorderWidth:0];
-        [lastLayer setBorderColor:[[UIColor clearColor] CGColor]];
-        
-        // Remove object from array if not in delete mode
-        if(!deleteMode){
-            [photoLayersArray[arrangeLayerIndex] removeFromSuperview];
-            [photoLayersArray removeLastObject];
-        }
 
+    if (newPhotoImgView.image == nil) {
+        editButtonGlobal.uid = currentLayer;
+        [self deleteLayer:editButtonGlobal ];
     }
     
     [self callAddMoreLayers];
@@ -1833,58 +1870,23 @@ int arrangeLayerIndex;
     label.text = @"PHOTO";
     self.navigationItem.titleView = label;
     
-    
-    if(selectedAddMoreLayerTab == -1){
-        UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-        shareButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
-        [shareButton addTarget:self action:@selector(callSaveAndShare) forControlEvents:UIControlEventTouchUpInside];
-        [shareButton setBackgroundImage:[UIImage imageNamed:@"share_button"] forState:UIControlStateNormal];
-        shareButton.showsTouchWhenHighlighted = YES;
-        UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
-        [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
-    } else {
-        UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-        [doneButton addTarget:self action:@selector(donePhoto) forControlEvents:UIControlEventTouchUpInside];
-        [doneButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
-        doneButton.showsTouchWhenHighlighted = YES;
-        UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
-        [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
-    }
+    //Delete Bar Button
+    UIButton *delButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 4, 45, 42)];
+    [delButton addTarget:self action:@selector(callDeleteLayer) forControlEvents:UIControlEventTouchUpInside];
+    [delButton setBackgroundImage:[UIImage imageNamed:@"delete_button"] forState:UIControlStateNormal];
+    delButton.showsTouchWhenHighlighted = YES;
+    UIBarButtonItem *delBarButton = [[UIBarButtonItem alloc] initWithCustomView:delButton];
 
-    // Make Copy of layers
-    if(undoCount > 1){
-        // Make copy of layers to undo it later
-        [self makeCopyOfLayers];
-    }
-
+    UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+    [doneButton addTarget:self action:@selector(donePhoto) forControlEvents:UIControlEventTouchUpInside];
+    [doneButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
+    doneButton.showsTouchWhenHighlighted = YES;
+    UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
+    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:doneBarButton,delBarButton,nil]];
+ 
     //Add Context Library
     [self addBottomTabs:libPhoto];
 
-    [self hideAddMoreButton];
-
-    CALayer * l = [[self  photoLayersArray][arrangeLayerIndex] layer];
-    [l setMasksToBounds:YES];
-    [l setCornerRadius:10];
-    [l setBorderWidth:1.0];
-    [l setBorderColor:[[UIColor grayColor] CGColor]];
-    [self.imgView addSubview:[self  photoLayersArray][arrangeLayerIndex]];
-	
-	[UIView beginAnimations:nil context:NULL];
-	[UIView setAnimationDuration:0.4f];
-
-    ((CustomLabel *)[[self textLabelLayersArray] lastObject]).alpha = 1;
-	[UIView commitAnimations];
-	
-    UIPinchGestureRecognizer *twoFingerPinch =
-    [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(twoFingerPinch:)];
-    [[self view] addGestureRecognizer:twoFingerPinch];
-    
-	lableTouchFlag = NO;
-	photoTouchFlag = YES;
-    symbolTouchFlag= NO;
-    iconTouchFlag = NO;
-    [self.imgView sendSubviewToBack:[self  photoLayersArray][arrangeLayerIndex]];
-	[self.imgView bringSubviewToFront:[[self textLabelLayersArray] lastObject]];
 }
 
 /*
@@ -2374,20 +2376,31 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	else if(selectedButton == addMorePhotoTabButton)
 	{
         selectedAddMoreLayerTab = ADD_MORE_PHOTOTAB;
-        if ([self canAddMoreLayers]) {
-            [self addScrollView:takeOrAddPhotoLabel];
-            
+        
+        
+        newPhotoImgView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 220, 200)];
+        newPhotoImgView.tag = photoLayerCount++;
+        
+        CALayer * l = [newPhotoImgView layer];
+        [l setMasksToBounds:YES];
+        [l setCornerRadius:10];
+        [l setBorderWidth:1.0];
+        [l setBorderColor:[[UIColor grayColor] CGColor]];
+        [self.flyimgView addSubview:newPhotoImgView];
+        
+        if ([currentLayer isEqualToString:@""]) {
+            currentLayer = [flyer addSymbols];
         }
 
-        symbolTouchFlag= NO;
-        iconTouchFlag = NO;
-        photoTouchFlag = YES;
-        lableTouchFlag = NO;
+        [self addScrollView:takeOrAddPhotoLabel];
+        
+        [self choosePhoto];
 		imgPickerFlag =2;
         textBackgrnd.alpha = ALPHA0;
         [addMorePhotoTabButton setSelected:YES];
+        
 
-        [self plusButtonClick];
+        //[self plusButtonClick];
 
 	}
 	else if(selectedButton == addMoreSymbolTabButton)
@@ -2799,24 +2812,8 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
             [[self iconLayersArray] addObject:newIconImgView];
             
         } else if(selectedAddMoreLayerTab == ADD_MORE_PHOTOTAB){
-            photoTouchFlag = YES;
             
-            CALayer * lastLayer = [[[self photoLayersArray] lastObject] layer];
-            [lastLayer setMasksToBounds:YES];
-            [lastLayer setCornerRadius:0];
-            [lastLayer setBorderWidth:0];
-            [lastLayer setBorderColor:[[UIColor clearColor] CGColor]];
-            
-            newPhotoImgView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 220, 200)];
-            newPhotoImgView.tag = photoLayerCount++;
-            arrangeLayerIndex = [[self photoLayersArray] count];
 
-            CALayer * l = [newPhotoImgView layer];
-            [l setMasksToBounds:YES];
-            [l setCornerRadius:10];
-            [l setBorderWidth:1.0];
-            [l setBorderColor:[[UIColor grayColor] CGColor]];
-            [self.imgView addSubview:newPhotoImgView];
             
             [[self photoLayersArray] addObject:newPhotoImgView];
             
@@ -3664,12 +3661,21 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 
 -(void)addDonetoRightBarBotton{
+    
+    //Delete Bar Button
+    UIButton *delButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 4, 45, 42)];
+    [delButton addTarget:self action:@selector(callDeleteLayer) forControlEvents:UIControlEventTouchUpInside];
+    [delButton setBackgroundImage:[UIImage imageNamed:@"delete_button"] forState:UIControlStateNormal];
+    delButton.showsTouchWhenHighlighted = YES;
+    UIBarButtonItem *delBarButton = [[UIBarButtonItem alloc] initWithCustomView:delButton];
+    
+    
     UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [doneButton addTarget:self action:@selector(callAddMoreLayers) forControlEvents:UIControlEventTouchUpInside];
     [doneButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
     doneButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
-    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
+    UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
+    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:doneBarButton,delBarButton,nil]];
     
 }
 

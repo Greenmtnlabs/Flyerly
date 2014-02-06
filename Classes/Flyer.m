@@ -87,6 +87,25 @@ NSString * const TEXTHEIGHT = @"280.000000";
 
 }
 
+/*
+ *Return textbox text
+ */
+-(NSString *)getText :(NSString *)uid{
+
+    NSMutableDictionary *textDic = [self getLayerFromMaster:uid];
+    return [textDic objectForKey:@"text"];
+}
+
+-(NSString *)getImageName :(NSString *)uid{
+    NSMutableDictionary *textDic = [self getLayerFromMaster:uid];
+    return [textDic objectForKey:@"image"];
+
+}
+
+
+
+
+
 
 -(NSArray *)allKeys{
     NSLog(@"%@", masterLayers);

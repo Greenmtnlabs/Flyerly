@@ -27,6 +27,10 @@
 
 -(NSArray *)allKeys;
 
+-(NSString *)getText :(NSString *)uid;
+
+-(NSString *)getImageName :(NSString *)uid;
+
 -(NSMutableDictionary *)getLayerFromMaster :(NSString *)uid;
 
 -(NSString *)addText;
