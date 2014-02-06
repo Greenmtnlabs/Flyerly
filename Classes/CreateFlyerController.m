@@ -2460,7 +2460,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         selectedAddMoreLayerTab = ADD_MORE_PHOTOTAB;
         
         
-        newPhotoImgView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 220, 200)];
+        newPhotoImgView = [[UIImageView alloc]initWithFrame:CGRectMake(100, 10, 200, 200)];
 
         
         CALayer * l = [newPhotoImgView layer];
