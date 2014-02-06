@@ -1287,7 +1287,7 @@ int arrangeLayerIndex;
     
     nbuGallary = [[GalleryViewController alloc] initWithNibName:@"GalleryViewController" bundle:nil];
     nbuGallary.desiredImageSize = CGSizeMake(300, 300);
-    [nbuCamera setOnImageTaken:^(UIImage *img) {
+    [nbuGallary setOnImageTaken:^(UIImage *img) {
         NSLog(@"Image size: %.2f %.2f", img.size.width, img.size.height );
         
         dispatch_async( dispatch_get_main_queue(), ^{
