@@ -56,8 +56,11 @@ NSString * const TEXTHEIGHT = @"280.000000";
  */
 -(void)loadFlyer :(NSString *)flyPath {
 
-    //Getting Dictionary
+    //set Pieces Dictionary File for Update
     piecesFile = [flyPath stringByAppendingString:[NSString stringWithFormat:@"/flyer.pieces"]];
+    
+    //set Flyer Image for Update
+    flyerImageFile = [flyPath stringByAppendingString:[NSString stringWithFormat:@"/flyer.jpg"]];
     
     masterLayers = [[NSMutableDictionary alloc] initWithContentsOfFile:piecesFile];
 }
@@ -67,10 +70,14 @@ NSString * const TEXTHEIGHT = @"280.000000";
 
 /*
  * Here we save the dictionary to .peices files
+ * and Update Flyer Image
  */
--(void)saveFlyer :(NSString *)uid{
+-(void)saveFlyer :(NSString *)uid :(UIImage *)snapShot {
+
+    NSData *snapShotData = UIImagePNGRepresentation(snapShot);
+    [snapShotData writeToFile:flyerImageFile atomically:YES];
     
-    
+    //Here we write the dictionary of .peices files
     [masterLayers writeToFile:piecesFile atomically:YES];
 
 }
@@ -111,10 +118,10 @@ NSString * const TEXTHEIGHT = @"280.000000";
     NSLog(@"%@", masterLayers);
     
     // Reutrn sorted (by id/timestamp) array of all keys in the layers dictionary
-    return [[masterLayers allKeys] sortedArrayUsingFunction:compareLayer context:NULL];
+    return [[masterLayers allKeys] sortedArrayUsingFunction:compareTimestamps context:NULL];
 }
 
-NSInteger compareLayer(id stringLeft, id stringRight, void *context) {
+NSInteger compareTimestamps(id stringLeft, id stringRight, void *context) {
     
     // Convert both strings to integers
     int intLeft = [stringLeft intValue];
@@ -330,27 +337,75 @@ NSInteger compareLayer(id stringLeft, id stringRight, void *context) {
         
         NSLog(@"Path Found");
         
-        //Getting All Files list
-        NSArray *files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:usernamePath error:nil];
+        int timestamp = [[NSDate date] timeIntervalSince1970];
         
-        int num = 0;
-        int maxnum = 0;
-
-        for (int i = 0 ; i < files.count; i++) {
-            
-            num = [files[i] integerValue];
-
-            if(maxnum < num){
-                maxnum = num;
-            }
-        }
-        
-        
-        NSString *flyerPath = [usernamePath stringByAppendingString:[NSString stringWithFormat:@"/%d",maxnum +1]];
+        NSString *flyerPath = [usernamePath stringByAppendingString:[NSString stringWithFormat:@"/%d",timestamp]];
         
     return flyerPath;
 
 }
+
+/*
+ * Here we Getting flyer directories which name are timestamp
+ * return
+ *      Decending Sorted Array
+ */
++ (NSMutableArray *)recentFlyerPreview:(NSInteger)flyCount{
+
+    PFUser *user = [PFUser currentUser];
+    
+    //Getting Home Directory
+	NSString *homeDirectoryPath = NSHomeDirectory();
+	NSString *usernamePath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/Flyr",[user objectForKey:@"username"]]];
+    
+     NSArray *flyersList = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:usernamePath error:nil];
+    
+    NSArray *sortedFlyersList = [flyersList sortedArrayUsingFunction:compareTimestamps context:NULL];
+    
+    NSString *lastFileName;
+    NSMutableArray *recentFlyers = [[NSMutableArray alloc] init];
+    
+    int start = [sortedFlyersList count] -1;
+    int end = [sortedFlyersList count] - flyCount;
+  
+    
+    for(int i = start ; i >= end ;i--)
+    {
+       lastFileName = sortedFlyersList[i];
+        NSString *recentflyPath = [NSString stringWithFormat:@"%@/%@/flyer.jpg",usernamePath,lastFileName];
+        [recentFlyers addObject:recentflyPath];
+        
+    }
+    
+    return recentFlyers;
+}
+
+
+
+
+/*
+ * Here We Change Flyer Directory Name to Current Time Stamp
+ */
+-(void)setRecentFlyer {
+
+    NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
+    
+    int timestamp = [[NSDate date] timeIntervalSince1970];
+    NSString *replaceDirName = [NSString stringWithFormat: @"%d",timestamp];
+    
+    //Here we Rename the Directory Name
+    NSString *newPath = [[currentpath stringByDeletingLastPathComponent] stringByAppendingPathComponent:replaceDirName];
+    NSError *error = nil;
+    [[NSFileManager defaultManager] moveItemAtPath:currentpath toPath:newPath error:&error];
+    
+    if (error) {
+        NSLog(@"%@",error.localizedDescription);
+    }
+
+
+}
+
+
 
 #pragma TEXT METHODS
 

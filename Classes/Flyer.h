@@ -14,6 +14,7 @@
 @interface Flyer : NSObject{
     
     NSString *piecesFile;
+    NSString *flyerImageFile;
 
 }
 
@@ -21,7 +22,7 @@
 -(id)initWithPath:(NSString *)flyPath;
 -(void)loadFlyer :(NSString *)flyPath;
 
--(void)saveFlyer :(NSString *)uid;
+-(void)saveFlyer :(NSString *)uid :(UIImage *)snapShot;
 
 -(void)deleteLayer :(NSString *)uid;
 
@@ -58,6 +59,8 @@
 
 
 +(NSString *)newFlyerPath;
++ (NSMutableArray *)recentFlyerPreview:(NSInteger)flyCount;
+-(void)setRecentFlyer;
 
 @property (strong, readonly) NSMutableDictionary *masterLayers;
 

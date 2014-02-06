@@ -76,12 +76,75 @@
 }
 //End
 
+
+/*
+ * here we Resize Image by providing image & Size as param
+ */
+- (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
+    
+    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+
+/*
+ * Here we Set recent Flyer
+ */
+- (void)updateRecentFlyer:(NSMutableArray *)recentFlyers{
+
+    firstFlyer.image = [UIImage imageNamed:@"pinned_flyer2.png"];
+    secondFlyer.image = [UIImage imageNamed:@"pinned_flyer2.png"];
+    thirdFlyer.image = [UIImage imageNamed:@"pinned_flyer2.png"];
+    fourthFlyer.image = [UIImage imageNamed:@"pinned_flyer2.png"];
+    
+    CGSize size = CGSizeMake(firstFlyer.frame.size.width, firstFlyer.frame.size.height);
+    
+    for (int i = 0 ; i < recentFlyers.count; i++) {
+        
+         UIImage *recentImage =  [UIImage imageWithContentsOfFile:[recentFlyers objectAtIndex:i]];
+        
+
+        UIImage *resizeImage = [self imageWithImage:recentImage scaledToSize:size];
+        
+        if ( i == 0 ){
+            firstFlyer.image = resizeImage;
+            firstFlyer.tag = i;
+        }
+        
+        if ( i == 1 ) {
+            secondFlyer.image = resizeImage;
+            secondFlyer.tag = i;
+        }
+        
+        if ( i == 2 ){
+            thirdFlyer.image = resizeImage;
+            thirdFlyer.tag = i;
+        }
+        
+        if ( i == 3 ) {
+            fourthFlyer.image = resizeImage;
+            fourthFlyer.tag = i;
+        }
+       
+    }
+
+}
+
+
 #pragma mark View Appear 
 
 -(void)viewWillAppear:(BOOL)animated{
 	[super viewWillAppear:YES];
     
     globle.NBUimage = nil;
+
+    //Getting Recent Flyers
+    NSMutableArray *recentFlyers = [Flyer recentFlyerPreview:4];
+
+    //Set Recent Flyers
+    [self updateRecentFlyer:recentFlyers];
     
     self.navigationController.navigationBarHidden = NO;
     
@@ -103,13 +166,8 @@
     self.navigationItem.titleView = logo;
     
     [self.navigationItem setHidesBackButton:YES];
-    
-    firstFlyer.image = [UIImage imageNamed:@"pinned_flyer2.png"];
-    secondFlyer.image = [UIImage imageNamed:@"pinned_flyer2.png"];
-    thirdFlyer.image = [UIImage imageNamed:@"pinned_flyer2.png"];
-    fourthFlyer.image = [UIImage imageNamed:@"pinned_flyer2.png"];
 
-	[self filesByModDate];
+
 }
 
 /*
@@ -168,156 +226,12 @@
     //GET FACEBOOK APP LIKE STATUS
     [self setFacebookLikeStatus];
     
-    
-    
-	//[spController initSession];
-
-    //initialize facebook
-
-/*
-	FlyrAppDelegate *appDelegate = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
-
-    
-    if(!appDelegate.facebook) {
-        
-        //get facebook app id
-        NSString *path = [[NSBundle mainBundle] pathForResource: @"Flyr-Info" ofType: @"plist"];
-        NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile: path];
-        appDelegate.facebook = [[Facebook alloc] initWithAppId:dict[@"FacebookAppID"] andDelegate:self];
-    }
-    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if ([defaults objectForKey:@"FBAccessTokenKey"] && [defaults objectForKey:@"FBExpirationDateKey"]) {
-        appDelegate.facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
-        appDelegate.facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
-    }
-    */
-
-    
 }
 
--(void)filesByModDate
-{
-	photoArray =[[NSMutableArray alloc]initWithCapacity:numberOfFlyers];
-	photoDetailArray =[[NSMutableArray alloc]initWithCapacity:numberOfFlyers];
-	NSString *homeDirectoryPath = NSHomeDirectory();
-    
-    PFUser *user = [PFUser currentUser];
-
-	NSString *unexpandedPath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/Flyr/",user.username]];
-    
-	NSString *folderPath = [NSString pathWithComponents:@[[NSString stringWithString:[unexpandedPath stringByExpandingTildeInPath]]]];
-	//NSString *unexpandedDetailPath = [homeDirectoryPath stringByAppendingString:@"/Documents/Detail/"];
-	//NSString *detailFolderPath = [NSString pathWithComponents:[NSArray arrayWithObjects:[NSString stringWithString:[unexpandedDetailPath stringByExpandingTildeInPath]], nil]];
-	
-	NSArray *files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:folderPath error:nil];
-	NSString *finalImagePath;
-	//NSArray *detailFiles = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:detailFolderPath error:nil];
-	NSString *detailFinalImagePath;
-
-	NSArray* sortedFiles;
-	NSArray* detailSortedFiles;
-    int fileCount = [files count];
-    //int detailFileCount = [detailFiles count];
-    
-	for(int i = 0; i < fileCount; i++)
-	{
-		NSString *img = files[i];
-		img = [@"/" stringByAppendingString:img];
-		finalImagePath= [folderPath stringByAppendingString:img];
-        
-        if([finalImagePath hasSuffix:@".jpg"]){
-            [photoArray addObject:finalImagePath];
-        } else if([finalImagePath hasSuffix:@".txt"]){
-            [photoDetailArray addObject:finalImagePath];
-        }
-	}
-	//for(int j = 0; j < detailFileCount; j++)
-	//{
-	//	NSString *fileName = [detailFiles objectAtIndex:j];
-	//	fileName = [@"/" stringByAppendingString:fileName];
-	//	detailFinalImagePath= [detailFolderPath stringByAppendingString:fileName];
-    //
-    //    [photoDetailArray addObject:detailFinalImagePath];
-	//}
-
-    sortedFiles = [photoArray sortedArrayUsingFunction:dateModifiedSortMain context:nil];
-    detailSortedFiles = [photoDetailArray sortedArrayUsingFunction:dateModifiedSortMain context:nil];
-
-	[photoArray removeAllObjects];
-	[photoDetailArray removeAllObjects];
-	for(int i =0;i< [sortedFiles count];i++)
-	{
-        CGSize size = CGSizeMake(firstFlyer.frame.size.width, firstFlyer.frame.size.height);
-        
-        finalImagePath = sortedFiles[i];
-        NSData *imageData = [[NSData alloc ]initWithContentsOfMappedFile:finalImagePath];
-        UIImage *currentFlyerImage = [UIImage imageWithData:imageData];
-
-        [photoArray addObject:finalImagePath];
-
-        if(i == 0){
-            firstFlyer.image = [LauchViewController imageWithImage:currentFlyerImage scaledToSize:size ];
-            firstFlyer.tag = i;
-        } else if(i  == 1){
-            secondFlyer.image = [LauchViewController imageWithImage:currentFlyerImage scaledToSize:size];
-            secondFlyer.tag = i;
-        } else if(i  == 2){
-            thirdFlyer.image = [LauchViewController imageWithImage:currentFlyerImage scaledToSize:size];
-            thirdFlyer.tag = i;
-        } else if(i  == 3){
-            fourthFlyer.image = [LauchViewController imageWithImage:currentFlyerImage scaledToSize:size];
-            fourthFlyer.tag = i;
-            
-            if(!IS_IPHONE_5){
-                break;
-            }
-            
-        }
-
-	}
-
-	for(int j =0;j< [detailSortedFiles count];j++)
-	{
-        detailFinalImagePath = detailSortedFiles[j];
-        //NSLog(@"detailFinalImagePath: %@", detailFinalImagePath);
-        NSArray *myArray = [NSArray arrayWithContentsOfFile:detailFinalImagePath];
-
-        if(j < numberOfFlyers){
-            [photoDetailArray addObject:myArray];
-        }
-	}
-}
-
-NSInteger dateModifiedSortMain(id file1, id file2, void *reverse) {
-    NSDictionary *attrs1 = [[NSFileManager defaultManager]
-                            attributesOfItemAtPath:file1
-                            error:nil];
-    NSDictionary *attrs2 = [[NSFileManager defaultManager]
-                            attributesOfItemAtPath:file2
-                            error:nil];
-	
-    if ((NSInteger *)reverse == 0) {
-        return [attrs2[NSFileModificationDate]
-                compare:attrs1[NSFileModificationDate]];
-    }
-	
-    return [attrs1[NSFileModificationDate]
-            compare:attrs2[NSFileModificationDate]];
-}
-
-+ (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
-    //UIGraphicsBeginImageContext(newSize);
-    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
-    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return newImage;
-}
 
 
 -(IBAction)showFlyerDetail:(id)sender {
-    NSString *flyPath = @"/Users/khurram/Library/Application Support/iPhone Simulator/7.0.3/Applications/7632F2F4-92E4-4427-BF0F-559C9E0E544F/Documents/zohaib/Flyr/16";
+    NSString *flyPath = @"/Users/khurram/Library/Application Support/iPhone Simulator/7.0.3/Applications/7632F2F4-92E4-4427-BF0F-559C9E0E544F/Documents/zohaib/Flyr/2";
     
     flyer = [[Flyer alloc]initWithPath:flyPath];
     
