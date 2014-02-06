@@ -31,9 +31,13 @@
 
 -(NSString *)getImageName :(NSString *)uid;
 
+
 -(NSMutableDictionary *)getLayerFromMaster :(NSString *)uid;
 
 -(NSString *)addText;
+
+-(void)setImageFrame :(NSString *)uid :(CGRect )photoFrame;
+
 
 -(void)setFlyerText :(NSString *)uid text:(NSString *)txt;
 

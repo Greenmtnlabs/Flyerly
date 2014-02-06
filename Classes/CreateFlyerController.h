@@ -75,7 +75,7 @@
 	UIImage *finalFlyer;
 
 
-	NSInteger imgPickerFlag;
+	 NSInteger imgPickerFlag;
 	
 	UIButton *addMorePhotoTabButton;
 	UIButton *addMoreIconTabButton;
@@ -258,6 +258,7 @@
 
 -(NSData*)getCurrentFrameAndSaveIt;
 -(NSString *)getImagePathByTag :(NSString *)imgName;
+-(NSString *)getImagePathforPhoto :(UIImage *)img;
 
 + (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize;
 +(UIView *)setTitleViewWithTitle:(NSString *)title rect:(CGRect)rect;

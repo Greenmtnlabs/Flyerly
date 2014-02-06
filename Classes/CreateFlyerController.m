@@ -56,18 +56,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     [super viewWillAppear:YES];
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
-    
-    // Set template image
-	if (globle.NBUimage != nil) {
-        
-        if (imgPickerFlag == 2) {
-            newPhotoImgView.image = globle.NBUimage;
-            imgPickerFlag = 1;
-        }else{
-            imgView.image = globle.NBUimage;
-            selectedTemplate = globle.NBUimage;
-        }
-    }
+
     
 }
 
@@ -1051,6 +1040,33 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     [Flurry logEvent:@"Background Selected"];
 }
 
+-(NSString *)getImagePathforPhoto :(UIImage *)img{
+    
+    // Create Symbol direcrory if not created
+    NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
+    
+    NSString *FolderPath;
+    NSString *dicPath;
+
+    FolderPath = [NSString stringWithFormat:@"%@/Photo", currentpath];
+    dicPath = @"Photo";
+    
+    //Create Unique Id for Image
+    int timestamp = [[NSDate date] timeIntervalSince1970];
+    
+    NSString *imageFolderPath = [NSString stringWithFormat:@"%@/%d.jpg", FolderPath,timestamp];
+    
+    dicPath = [dicPath stringByAppendingString:[NSString stringWithFormat:@"/%d.jpg",timestamp]];
+    
+    NSData *imgData = UIImagePNGRepresentation(img);
+    
+    //Create a Image Copy to Current Flyer Folder
+    [[NSFileManager defaultManager] createFileAtPath:imageFolderPath contents:imgData attributes:nil];
+    
+    
+    return dicPath;
+}
+
 
 -(NSString *)getImagePathByTag :(NSString *)imgName{
 
@@ -1292,6 +1308,24 @@ int arrangeLayerIndex;
         
         dispatch_async( dispatch_get_main_queue(), ^{
             // Do any UI operation here (render layer).
+            if (imgPickerFlag == 2) {
+                
+                newPhotoImgView.image = img;
+                NSString *imgPath = [self getImagePathforPhoto:img];
+                
+                //Set Image to dictionary
+                [flyer setSymbolImage:currentLayer ImgPath:imgPath];
+                
+                //Set frame to dictionary
+                [flyer setImageFrame:currentLayer :newPhotoImgView.frame];
+                
+                //Here we Create ImageView Layer
+                [self.flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
+                
+                imgPickerFlag = 1;
+            }else{
+                //Here We Write Code for Backgeound
+            }
         });
     }];
     
@@ -1312,6 +1346,25 @@ int arrangeLayerIndex;
         
         dispatch_async( dispatch_get_main_queue(), ^{
             // Do any UI operation here (render layer).
+            
+            if (imgPickerFlag == 2) {
+                
+                newPhotoImgView.image = img;
+                NSString *imgPath = [self getImagePathforPhoto:img];
+                
+                //Set Image to dictionary
+                [flyer setSymbolImage:currentLayer ImgPath:imgPath];
+                
+                //Set frame to dictionary
+                [flyer setImageFrame:currentLayer :newPhotoImgView.frame];
+                
+                //Here we Create ImageView Layer
+                [self.flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
+                
+                imgPickerFlag = 1;
+            }else{
+                //Here We Write Code for Backgeound
+            }
         });
     }];
     
@@ -1467,6 +1520,15 @@ int arrangeLayerIndex;
             
             // Call Symbol
             [self setAddMoreLayerTabAction:addMoreSymbolTabButton];
+        }
+        
+        //when we tap on icon
+        if ([imgName rangeOfString:@"Photo"].location == NSNotFound) {
+            NSLog(@"sub string doesnt exist");
+        } else {
+            
+            // Call Photo Tab
+            [self setAddMoreLayerTabAction:addMorePhotoTabButton];
         }
     }
 
@@ -1865,10 +1927,14 @@ int arrangeLayerIndex;
     
 
     if (newPhotoImgView.image == nil) {
-        editButtonGlobal.uid = currentLayer;
-        [self deleteLayer:editButtonGlobal ];
+        //Delete From Master Dictionary
+        [flyer deleteLayer:currentLayer];
+        
+        //Delete From View
+        [flyimgView deleteLayer:currentLayer];
     }
     
+    [newPhotoImgView removeFromSuperview];
     [self callAddMoreLayers];
     [self logLayerAddedEvent];
     [self logPhotoAddedEvent];
@@ -2395,7 +2461,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         
         
         newPhotoImgView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 220, 200)];
-        newPhotoImgView.tag = photoLayerCount++;
+
         
         CALayer * l = [newPhotoImgView layer];
         [l setMasksToBounds:YES];
@@ -2406,13 +2472,16 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         
         if ([currentLayer isEqualToString:@""]) {
             currentLayer = [flyer addSymbols];
+        }else{
+            NSString *imgPath = [flyer getImageName:currentLayer];
+            UIImage *realImage =  [UIImage imageWithContentsOfFile:imgPath];
+            newPhotoImgView.image = realImage;
+        
         }
 
         [self addScrollView:takeOrAddPhotoLabel];
-        
         [self choosePhoto];
 		imgPickerFlag =2;
-        textBackgrnd.alpha = ALPHA0;
         [addMorePhotoTabButton setSelected:YES];
         
 

@@ -220,6 +220,19 @@ NSInteger compareLayer(id stringLeft, id stringRight, void *context) {
     return uniqueId;
 }
 
+-(void)setImageFrame :(NSString *)uid :(CGRect)photoFrame {
+
+    NSMutableDictionary *symbolDetailDictionary = [self getLayerFromMaster:uid];
+    symbolDetailDictionary[@"x"] = [NSString stringWithFormat:@"%f",photoFrame.origin.x];
+    symbolDetailDictionary[@"y"] = [NSString stringWithFormat:@"%f",photoFrame.origin.y];
+    symbolDetailDictionary[@"width"] = [NSString stringWithFormat:@"%f",photoFrame.size.width];
+    symbolDetailDictionary[@"height"] = [NSString stringWithFormat:@"%f",photoFrame.size.height];
+    
+    [masterLayers setValue:symbolDetailDictionary forKey:uid];
+}
+
+
+
 -(void)setSymbolImage :(NSString *)uid ImgPath:(NSString *)imgPath{
 
     NSMutableDictionary *symbolDetailDictionary = [self getLayerFromMaster:uid];
