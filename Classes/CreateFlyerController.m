@@ -1230,18 +1230,6 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 
 int arrangeLayerIndex;
 
-/*
- * When any layer is selected while editing flyer
- */
--(void)selectLayer:(id)sender {
-    
-    UIView *sView = editButtonGlobal;
-    
-    NSString *tag = [NSString stringWithFormat:@"%d",sView.tag];
-    NSLog(@"%@",tag);
-    
-    //its Also Call editLayer Method
-}
 
 
 
@@ -1412,6 +1400,34 @@ int arrangeLayerIndex;
     return titleView;
 }
 
+
+/*
+ * When any layer is selected while editing flyer
+ */
+-(void)selectLayer:(id)sender {
+    
+    UIView *sView = editButtonGlobal;
+    
+    NSString *tag = [NSString stringWithFormat:@"%d",sView.tag];
+    NSLog(@"%@",tag);
+    
+    
+    //its Also Call editLayer Method
+}
+
+-(void)editLayer:(LayerTileButton *)editButton{
+    
+    
+    editButtonGlobal = editButton;
+    currentLayer =  editButton.uid;
+    editButtonGlobal.uid = currentLayer;
+    
+    // [self chooseEdit];
+    [self editLayer:editButtonGlobal overrided:YES];
+    
+}
+
+
 -(void)editLayer:(LayerTileButton *)editButton overrided:(BOOL)overrided{
     
     // Since we are editting we should enable the deleteNode On
@@ -1490,8 +1506,7 @@ int arrangeLayerIndex;
     }
     else if([tag hasPrefix:@"444"])
     {
-        // Set index
-        arrangeLayerIndex = [self getIndexFromTag:tag];
+
         
         // Call Icon
         [self setAddMoreLayerTabAction:addMoreIconTabButton];
@@ -2395,7 +2410,9 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	{
         selectedAddMoreLayerTab = ADD_MORE_SYMBOLTAB;
 
-        currentLayer = [flyer addSymbols];
+        if ([currentLayer isEqualToString:@""]) {
+            currentLayer = [flyer addSymbols];
+        }
 
         [addMoreSymbolTabButton setSelected:YES];
         [self addDonetoRightBarBotton];
@@ -2417,7 +2434,9 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         
         [addMoreIconTabButton setSelected:YES];
         
-        currentLayer = [flyer addSymbols];
+        if ([currentLayer isEqualToString:@""]) {
+            currentLayer = [flyer addSymbols];
+        }
         
         //Add right Bar button
         [self addDonetoRightBarBotton];
@@ -2481,18 +2500,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 }
 
 
-
--(void)editLayer:(LayerTileButton *)editButton{
-    
-  
-    editButtonGlobal = editButton;
-    currentLayer =  editButton.uid;
-    editButtonGlobal.uid = currentLayer;
-   
-   // [self chooseEdit];
-    [self editLayer:editButtonGlobal overrided:YES];
-
-}
 
 
 
@@ -3559,10 +3566,10 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         curYLoc = 10;
     }
     
-    
+    NSArray *sortedLayers = [flyer allKeys];
     NSMutableDictionary *layers = self.flyimgView.layers ;
     int cnt = 0;
-    for (NSString* uid in layers) {
+    for (NSString* uid in sortedLayers) {
         
         //check for Flyer Background Key
         if ( ![uid isEqualToString:@"Template"] ) {
