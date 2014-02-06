@@ -8,9 +8,11 @@
 
 #import "GalleryViewController.h"
 #import "CropViewController.h"
+#import "FlyerlySingleton.h"
 
 @implementation GalleryViewController
 @synthesize desiredImageSize;
+@synthesize onImageTaken;
 
 /**
  * Initialize the gallery.
@@ -33,7 +35,6 @@
  */
 - (void)viewDidLoad {
     [super viewDidLoad];
-     globle = [FlyerlySingleton RetrieveSingleton];
     
     // Setup the navigation bar.
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
@@ -69,13 +70,15 @@
 /**
  * Crop image using NBUKit
  */
--(void) cropImage {
+-(void) cropImage:(UIImage *)img {
     
     // Get out of full screen mode.
     [self viewWillDisappear:NO];
     
     CropViewController *nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController" bundle:nil];
     nbuCrop.desiredImageSize = desiredImageSize;
+    nbuCrop.image = img;
+    nbuCrop.onImageTaken = onImageTaken;
     
     // Pop the current view, and push the crop view.
     NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[[self navigationController] viewControllers]];
@@ -95,17 +98,21 @@
                                 size:NBUImageSizeFullResolution
                          resultBlock:^(UIImage * image,
                                        NSError * error)
-     {
-         globle.NBUimage = image;
+    {
+        if (!error) {
+                                 
+            dispatch_async( dispatch_get_main_queue(), ^{
+                // Crop the image
+                [self cropImage:image];
+            });
+        }
      }];
-    [self cropImage];
 }
 
 /**
  * Cancel and go back.
  */
 - (void)goBack {
-    globle.NBUimage = nil;
     [self.navigationController popViewControllerAnimated:YES];
 }
 

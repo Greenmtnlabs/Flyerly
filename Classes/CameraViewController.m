@@ -7,18 +7,18 @@
 
 #import "CameraViewController.h"
 #import "CropViewController.h"
+#import "GalleryViewController.h"
 
 @implementation CameraViewController
 @synthesize cameraLines;
 @synthesize desiredImageSize;
+@synthesize onImageTaken;
 
 /**
  * Setup the controller.
  */
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    globle = [FlyerlySingleton RetrieveSingleton];
     
     // Configure the camera view
     self.cameraView.shouldAutoRotateView = YES;
@@ -40,10 +40,14 @@
     self.cameraView.captureResultBlock = ^(UIImage * image,
                                            NSError * error) {
         if (!error) {
-            // Pass Image
-            globle.NBUimage = [image thumbnailWithSize:CGSizeMake(310.0, 309.0)];
-             self.navigationController.navigationBarHidden = NO;
-            [self cropImage];
+            
+            dispatch_async( dispatch_get_main_queue(), ^{
+                // Pass Image
+                self.navigationController.navigationBarHidden = NO;
+            
+                // Crop the image
+                [self cropImage:image];
+            });
         }
     };
     
@@ -60,10 +64,12 @@
 /**
  * Crop image using NBUKit
  */
--(void) cropImage {
+-(void) cropImage:(UIImage *)image {
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
     CropViewController *nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController" bundle:nil];
     nbuCrop.desiredImageSize = desiredImageSize;
+    nbuCrop.image = image;
+    nbuCrop.onImageTaken = onImageTaken;
 
     // Pop the current view, and push the crop view.
     NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[[self navigationController] viewControllers]];
@@ -89,7 +95,6 @@
  * Go Back.
  */
 - (void)cameraCancel:(id)sender{
-    globle.NBUimage = nil;
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -97,9 +102,9 @@
  * Move to the gallery.
  */
 - (IBAction)moveToGallery:(id)sender{
-    globle.NBUimage = nil;
-    globle.gallerComesFromCamera = @"yes";
     GalleryViewController *nbugallery = [[GalleryViewController alloc]initWithNibName:@"GalleryViewController" bundle:nil];
+    nbugallery.desiredImageSize = desiredImageSize;
+    nbugallery.onImageTaken = onImageTaken;
     
     // Pop the current view, and push the crop view.
     NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[[self navigationController] viewControllers]];

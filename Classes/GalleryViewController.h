@@ -13,14 +13,11 @@
 #import <NBUKit/NBUKit.h>
 #import "NBUImagePicker.h"
 #import "NBUGalleryView.h"
-#import "FlyerlySingleton.h"
 
-@class FlyerlySingleton;
-@interface GalleryViewController : NBUGalleryViewController {
-    FlyerlySingleton *globle;
-}
+@interface GalleryViewController : NBUGalleryViewController
 
 @property CGSize desiredImageSize;
+@property (nonatomic, copy) void (^onImageTaken)(UIImage *);
 
 @end
 
