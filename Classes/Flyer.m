@@ -89,8 +89,24 @@ NSString * const TEXTHEIGHT = @"280.000000";
 
 
 -(NSArray *)allKeys{
+    NSLog(@"%@", masterLayers);
     
-    return [masterLayers allKeys];
+    // Reutrn sorted (by id/timestamp) array of all keys in the layers dictionary
+    return [[masterLayers allKeys] sortedArrayUsingFunction:compareLayer context:NULL];
+}
+
+NSInteger compareLayer(id stringLeft, id stringRight, void *context) {
+    
+    // Convert both strings to integers
+    int intLeft = [stringLeft intValue];
+    int intRight = [stringRight intValue];
+    
+    if (intLeft < intRight)
+        return NSOrderedAscending;
+    else if (intLeft > intRight)
+        return NSOrderedDescending;
+    else
+        return NSOrderedSame;
 }
 
 /*
