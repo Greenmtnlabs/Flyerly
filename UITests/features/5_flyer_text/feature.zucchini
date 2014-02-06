@@ -15,7 +15,7 @@ Then on the "Flyer" screen:
   Tap "Text"
   Take a screenshot
   Type "RIKSOF" in the "Text input" field
-  Tap "Next"
+  Tap "Next / Delete / Undo"
   Tap "Tile5"
   Tap "Color"
   Tap "Tile3"
@@ -23,11 +23,11 @@ Then on the "Flyer" screen:
   Tap "Tile20"
   Tap "Text border"
   Tap "Tile5"
-  Tap "Done"
+  Tap "Done / Share"
   Take a screenshot
   Tap "Text"
   Type "SQA" in the "Text input" field
-  Tap "Next"
+  Tap "Next / Delete / Undo"
   Tap "Tile4"
   Tap "Color"
   Tap "Tile2"
@@ -35,13 +35,12 @@ Then on the "Flyer" screen:
   Tap "Tile21"
   Tap "Text border"
   Tap "Tile1"
-  Tap "Done"
+  Tap "Done / Share"
   Take a screenshot
   Tap "Tile1"
-  Tap "Text"
   Tap "Edit"
   Type " (Private) Limited" in the "Text input" field
-  Tap "Next"
+  Tap "Next / Delete / Undo"
   Tap "Tile4"
   Tap "Color"
   Tap "Tile5"
@@ -49,7 +48,7 @@ Then on the "Flyer" screen:
   Tap "Tile21"
   Tap "Text border"
   Tap "Tile4"
-  Tap "Done"	
+  Tap "Done / Share"	
   Take a screenshot
   Tap "Back"
   
