@@ -608,18 +608,5 @@
 }
 
 
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    
-    UITouch *touch = [touches anyObject];
-    
-    if ([touch view] == firstFlyer) {
-        [self showFlyerDetail:firstFlyer];
-    } else if ([touch view] == secondFlyer) {
-        [self showFlyerDetail:secondFlyer];
-    } else if ([touch view] == thirdFlyer) {
-        [self showFlyerDetail:thirdFlyer];
-    } else if ([touch view] == fourthFlyer) {
-        [self showFlyerDetail:fourthFlyer];
-    }
-}
+
 @end

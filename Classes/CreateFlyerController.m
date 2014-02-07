@@ -2418,7 +2418,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
         [widthTabButton  setSelected:YES];
         
-        UIImageView *lastImgView = [[self photoLayersArray] lastObject];
+        UIImageView *lastImgView = newPhotoImgView;
         lastImgView.frame = CGRectMake(lastImgView.frame.origin.x, lastImgView.frame.origin.y,lastImgView.frame.size.width-10,lastImgView.frame.size.height);
         
     }
@@ -2427,7 +2427,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
         [heightTabButton  setSelected:YES];
         
-        UIImageView *lastImgView = [[self photoLayersArray] lastObject];
+        UIImageView *lastImgView = newPhotoImgView;
         lastImgView.frame = CGRectMake(lastImgView.frame.origin.x, lastImgView.frame.origin.y,lastImgView.frame.size.width,lastImgView.frame.size.height-10);
     }
 }
