@@ -1928,16 +1928,6 @@ int arrangeLayerIndex;
 
 -(void) donePhoto{
     
-
-    if (newPhotoImgView.image == nil) {
-        //Delete From Master Dictionary
-        [flyer deleteLayer:currentLayer];
-        
-        //Delete From View
-        [flyimgView deleteLayer:currentLayer];
-    }
-    
-    [newPhotoImgView removeFromSuperview];
     [self callAddMoreLayers];
     [self logLayerAddedEvent];
     [self logPhotoAddedEvent];
@@ -2472,6 +2462,9 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
         if ([currentLayer isEqualToString:@""]) {
             currentLayer = [flyer addSymbols];
+            
+            CGRect imageFrame  = CGRectMake(100,10,200,200);
+            [flyer setImageFrame:currentLayer :imageFrame];
             NSMutableDictionary *dic = [flyer getLayerFromMaster:currentLayer];
             [self.flyimgView renderLayer:currentLayer layerDictionary:dic];
             [self.flyimgView layerIsBeingEdited:currentLayer];
