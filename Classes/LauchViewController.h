@@ -82,5 +82,6 @@
 - (IBAction)onTwitter:(id)sender;
 -(IBAction)goBack;
 
+- (void)updateRecentFlyer:(NSMutableArray *)recentFlyers;
 - (void)setFacebookLikeStatus;
 @end

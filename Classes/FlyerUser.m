@@ -244,6 +244,8 @@
         
         NSString *newDirectoryName = NewUIDFolderName;
         NSString *oldPath = OldUIDPath;
+        
+        //Here we Rename the Directory Name
         NSString *newPath = [[oldPath stringByDeletingLastPathComponent] stringByAppendingPathComponent:newDirectoryName];
         NSError *error = nil;
         [[NSFileManager defaultManager] moveItemAtPath:oldPath toPath:newPath error:&error];

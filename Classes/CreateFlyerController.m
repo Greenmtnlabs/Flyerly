@@ -1395,58 +1395,13 @@ int arrangeLayerIndex;
         [Flurry logEvent:@"Layed Deleted"];
 	}
 
-    
-    /*
-    if (layerallow == 0) {
-      if(alertView == discardAlert && buttonIndex == 1) {
-        
-        if(selectedAddMoreLayerTab == ADD_MORE_TEXTTAB){
-            
-            [msgTextView resignFirstResponder];
-            [msgTextView removeFromSuperview];
-            
-        } else if(selectedAddMoreLayerTab == ADD_MORE_PHOTOTAB){
-            
-            photoLayerCount--;
-            
-            CALayer * lastLayer = [[[self photoLayersArray] lastObject] layer];
-            [lastLayer setMasksToBounds:YES];
-            [lastLayer setCornerRadius:0];
-            [lastLayer setBorderWidth:0];
-            [lastLayer setBorderColor:[[UIColor clearColor] CGColor]];
-            
-            // Remove object from array if not in delete mode
-            if(!deleteMode){
-                [photoLayersArray[arrangeLayerIndex] removeFromSuperview];
-                [photoLayersArray removeLastObject];
-            }
-            
-        } else if(selectedAddMoreLayerTab == ADD_MORE_SYMBOLTAB){
-            [symbolLayersArray removeLastObject];
-        } else if(selectedAddMoreLayerTab == ADD_MORE_ICONTAB){
-            [iconLayersArray removeLastObject];
-        }
-        
-        if(undoCount > 0) {
-            undoCount = undoCount - 1;
-        }
-        
-        discardedLayer = YES;
-        [self callAddMoreLayers];
-        
-	} else if(alertView == deleteAlert && buttonIndex == 1) {
-        
-        editButtonGlobal.uid = currentLayer;
-        [self deleteLayer:editButtonGlobal overrided:nil];
-        [Flurry logEvent:@"Layed Deleted"];
-	}
   }
-     */
-}
 
 #pragma mark After ViewWillAppear Method Sequence
 -(void) callMenu
 {
+    // Update Recent Flyer List
+    [flyer setRecentFlyer];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -2114,7 +2069,17 @@ int arrangeLayerIndex;
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:backBarButton,leftBarHelpButton,nil]];
     
     [self addBottomTabs:libFlyer];
-    [flyer saveFlyer:currentLayer];
+    
+    
+    //Here we take Snap shot of Flyer
+    UIGraphicsBeginImageContextWithOptions(self.flyimgView.bounds.size, YES, 0.0f);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    [self.flyimgView.layer renderInContext:context];
+    UIImage *snapshotImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    
+    [flyer saveFlyer:currentLayer :snapshotImage];
     [self addAllLayersIntoScrollView ];
     currentLayer = @"";
     [self hideAddMoreButton];
