@@ -210,6 +210,7 @@
 @property(nonatomic, strong) IBOutlet UIView *libBackground;
 @property(nonatomic, strong) IBOutlet UIView *libText;
 @property(nonatomic, strong) IBOutlet UIView *libPhoto;
+@property(nonatomic, strong) IBOutlet UIView *libEmpty;
 
 
 // These are LibFlyer

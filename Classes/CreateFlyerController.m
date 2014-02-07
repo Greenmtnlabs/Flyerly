@@ -22,7 +22,7 @@
 
 //Version 3 Change
 @synthesize contextView,libraryContextView,libFlyer,backgroundTabButton,addMoreFontTabButton;
-@synthesize libText,libBackground,libPhoto,backtemplates,cameraTakePhoto,cameraRoll,flyerBorder;
+@synthesize libText,libBackground,libPhoto,libEmpty,backtemplates,cameraTakePhoto,cameraRoll,flyerBorder;
 @synthesize textLabelLayersArray,symbolLayersArray,iconLayersArray,photoLayersArray,currentLayer,layersDic;
 
 int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track selected Tab on Add More Layer screen
@@ -1018,6 +1018,15 @@ int photoLayerCount = 0; // Photo layer count to set tag value
         
         if(tempView == view)
         {
+            
+            NSString *imgPath = [self getImagePathByTag:[NSString stringWithFormat:@"Template%d",view.tag]];
+            
+            //Set Symbol Image
+           // [flyer setSymbolImage:currentLayer ImgPath:imgPath];
+            
+            [self.flyimgView setTemplate:imgPath];
+            
+            
             // Add border to selected layer thumbnail
             CALayer * l = [tempView layer];
             [l setBorderWidth:3.0];
@@ -1092,13 +1101,31 @@ int photoLayerCount = 0; // Photo layer count to set tag value
         dicPath = @"Icon";
     }
     
+    //when we set BackGround
+    if ([imgName rangeOfString:@"Template"].location == NSNotFound) {
+        NSLog(@"sub string doesnt exist");
+    } else {
+        FolderPath = [NSString stringWithFormat:@"%@/Template", currentpath];
+        dicPath = @"Template";
+    }
     
-    //Create Unique Id for Image
-    int timestamp = [[NSDate date] timeIntervalSince1970];
     
-    NSString *imageFolderPath = [NSString stringWithFormat:@"%@/%d.jpg", FolderPath,timestamp];
+    NSString *imageFolderPath ;
     
-    dicPath = [dicPath stringByAppendingString:[NSString stringWithFormat:@"/%d.jpg",timestamp]];
+    if ([dicPath isEqualToString:@"Template"]) {
+
+        imageFolderPath = [NSString stringWithFormat:@"%@/template.jpg", FolderPath];
+        dicPath = [dicPath stringByAppendingString:[NSString stringWithFormat:@"/template.jpg"]];
+    
+    } else {
+        
+        //Create Unique Id for Image
+        int timestamp = [[NSDate date] timeIntervalSince1970];
+        
+        imageFolderPath = [NSString stringWithFormat:@"%@/%d.jpg", FolderPath,timestamp];
+        dicPath = [dicPath stringByAppendingString:[NSString stringWithFormat:@"/%d.jpg",timestamp]];
+
+    }
     
     //Getting Image From Bundle
     NSString *existImagePath =[[NSBundle mainBundle] pathForResource:imgName ofType:@"png"];
@@ -2078,6 +2105,16 @@ int arrangeLayerIndex;
     UIImage *snapshotImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
+    //Empty Layer Delete
+    if (currentLayer != nil && ![currentLayer isEqualToString:@""]) {
+        NSString *flyerImg = [flyer getImageName:currentLayer];
+        NSString *flyertext = [flyer getText:currentLayer];
+        
+        if (flyertext == nil && [flyerImg isEqualToString:@""]) {
+            [flyer deleteLayer:currentLayer];
+            [self.flyimgView deleteLayer:currentLayer];
+        }
+    }
     
     [flyer saveFlyer:currentLayer :snapshotImage];
     [self addAllLayersIntoScrollView ];
@@ -2471,6 +2508,9 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
         //Add Context
         [self addScrollView:layerScrollView];
+        
+        //Add Bottom Tab
+        [self addBottomTabs:libEmpty];
 		
         [UIView setAnimationDuration:0.4f];
 		[UIView commitAnimations];
@@ -2496,6 +2536,9 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         
         //Add ContextView
         [self addScrollView:layerScrollView];
+        
+        //Add Bottom Tab
+        [self addBottomTabs:libEmpty];
 
 		[UIView commitAnimations];
 	}

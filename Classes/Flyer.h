@@ -60,6 +60,7 @@
 
 +(NSString *)newFlyerPath;
 + (NSMutableArray *)recentFlyerPreview:(NSInteger)flyCount;
+
 -(void)setRecentFlyer;
 
 @property (strong, readonly) NSMutableDictionary *masterLayers;

@@ -25,6 +25,7 @@
                 <outlet property="fontTabButton" destination="zu1-aU-CE3" id="4N8-mM-vZ8"/>
                 <outlet property="heightTabButton" destination="5Ya-yN-kTr" id="RhP-af-MbU"/>
                 <outlet property="libBackground" destination="wtn-Zi-MKo" id="Lbb-GH-gzo"/>
+                <outlet property="libEmpty" destination="suF-K7-Eeb" id="3h4-F6-z4R"/>
                 <outlet property="libFlyer" destination="P8i-Fw-Gci" id="DAb-aV-gaf"/>
                 <outlet property="libPhoto" destination="qGs-4G-Rgw" id="0fl-Oq-GpK"/>
                 <outlet property="libText" destination="8Ew-aX-Xah" id="Haw-gJ-FkB"/>
@@ -306,6 +307,17 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <accessibility key="accessibilityConfiguration" label=""/>
         </view>
+        <view contentMode="scaleToFill" id="suF-K7-Eeb">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blue_bar.png" id="QNp-yt-17q">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+        </view>
     </objects>
     <resources>
         <image name="07_camera.png" width="80" height="45"/>
@@ -326,6 +338,7 @@
         <image name="addbg_takephoto.png" width="80" height="45"/>
         <image name="addbg_takephoto_selected.png" width="80" height="45"/>
         <image name="arrangeicon_button.png" width="64" height="45"/>
+        <image name="blue_bar.png" width="320" height="46"/>
         <image name="color_button.png" width="64" height="45"/>
         <image name="color_button_selected.png" width="64" height="45"/>
         <image name="font_button.png" width="64" height="45"/>
