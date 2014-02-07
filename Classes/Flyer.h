@@ -21,7 +21,7 @@
 -(id)initWithPath:(NSString *)flyPath;
 -(void)loadFlyer :(NSString *)flyPath;
 
--(void)saveFlyer :(NSString *)uid :(UIImage *)snapShot;
+-(void)saveFlyer :(UIImage *)snapShot;
 
 -(void)deleteLayer :(NSString *)uid;
 
