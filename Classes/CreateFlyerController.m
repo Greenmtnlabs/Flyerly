@@ -1327,7 +1327,6 @@ int arrangeLayerIndex;
     nbuGallary = [[GalleryViewController alloc] initWithNibName:@"GalleryViewController" bundle:nil];
     nbuGallary.desiredImageSize = CGSizeMake(300, 300);
     [nbuGallary setOnImageTaken:^(UIImage *img) {
-        NSLog(@"Image size: %.2f %.2f", img.size.width, img.size.height );
         
         dispatch_async( dispatch_get_main_queue(), ^{
             // Do any UI operation here (render layer).
@@ -1367,21 +1366,16 @@ int arrangeLayerIndex;
     
     // Callback once image is selected.
     [nbuCamera setOnImageTaken:^(UIImage *img) {
-        NSLog(@"Image size: %.2f %.2f", img.size.width, img.size.height );
         
         dispatch_async( dispatch_get_main_queue(), ^{
             // Do any UI operation here (render layer).
             
             if (imgPickerFlag == 2) {
                 
-                newPhotoImgView.image = img;
                 NSString *imgPath = [self getImagePathforPhoto:img];
                 
                 //Set Image to dictionary
                 [flyer setSymbolImage:currentLayer ImgPath:imgPath];
-                
-                //Set frame to dictionary
-                [flyer setImageFrame:currentLayer :newPhotoImgView.frame];
                 
                 //Here we Create ImageView Layer
                 [self.flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
