@@ -1333,14 +1333,10 @@ int arrangeLayerIndex;
             // Do any UI operation here (render layer).
             if (imgPickerFlag == 2) {
                 
-                newPhotoImgView.image = img;
                 NSString *imgPath = [self getImagePathforPhoto:img];
                 
                 //Set Image to dictionary
                 [flyer setSymbolImage:currentLayer ImgPath:imgPath];
-                
-                //Set frame to dictionary
-                [flyer setImageFrame:currentLayer :newPhotoImgView.frame];
                 
                 //Here we Create ImageView Layer
                 [self.flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
@@ -2489,7 +2485,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
             NSString *imgPath = [flyer getImageName:currentLayer];
             UIImage *realImage =  [UIImage imageWithContentsOfFile:imgPath];
             newPhotoImgView.image = realImage;
-        
         }
 
         [self addScrollView:takeOrAddPhotoLabel];
