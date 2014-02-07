@@ -71,7 +71,7 @@ NSString * const TEXTHEIGHT = @"280.000000";
  * Here we save the dictionary to .peices files
  * and Update Flyer Image
  */
--(void)saveFlyer :(NSString *)uid :(UIImage *)snapShot {
+-(void)saveFlyer :(UIImage *)snapShot{
 
     NSData *snapShotData = UIImagePNGRepresentation(snapShot);
     [snapShotData writeToFile:flyerImageFile atomically:YES];

@@ -1434,8 +1434,20 @@ int arrangeLayerIndex;
 #pragma mark After ViewWillAppear Method Sequence
 -(void) callMenu
 {
+    //Here we take Snap shot of Flyer
+    UIGraphicsBeginImageContextWithOptions(self.flyimgView.bounds.size, YES, 0.0f);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    [self.flyimgView.layer renderInContext:context];
+    UIImage *snapshotImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    //Save OnBack
+    [flyer saveFlyer:snapshotImage];
+
+    
     // Update Recent Flyer List
     [flyer setRecentFlyer];
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -2135,7 +2147,7 @@ int arrangeLayerIndex;
         }
     }
     
-    [flyer saveFlyer:currentLayer :snapshotImage];
+    [flyer saveFlyer:snapshotImage];
     [self addAllLayersIntoScrollView ];
     currentLayer = @"";
     [self hideAddMoreButton];
