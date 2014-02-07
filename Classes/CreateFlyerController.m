@@ -2415,6 +2415,9 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         
         UIImageView *lastImgView = [self.flyimgView.layers objectForKey:currentLayer];
         lastImgView.frame = CGRectMake(lastImgView.frame.origin.x, lastImgView.frame.origin.y,lastImgView.frame.size.width-10,lastImgView.frame.size.height);
+
+        //Update Dictionary
+        [flyer setImageFrame:currentLayer :lastImgView.frame];
         
     }
     else if( selectedButton == heightTabButton )
@@ -2424,6 +2427,10 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         
         UIImageView *lastImgView = [self.flyimgView.layers objectForKey:currentLayer];
         lastImgView.frame = CGRectMake(lastImgView.frame.origin.x, lastImgView.frame.origin.y,lastImgView.frame.size.width,lastImgView.frame.size.height-10);
+        
+        //Update Dictionary
+        [flyer setImageFrame:currentLayer :lastImgView.frame];
+        
     }
 }
 
