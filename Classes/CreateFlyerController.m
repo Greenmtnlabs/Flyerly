@@ -2958,7 +2958,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 /************************************************************************************************/
 #pragma mark  ALL TOUCH FUNCTIONS
-
+/*
 - (void)animateFirstTouchAtPoint:(CGPoint)touchPoint forView:(UIView *)theView 
 {
     //[rightUndoBarButton setEnabled:YES];
@@ -3198,7 +3198,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 		}
 	}
      */
-}
+//}
 /************************************************************************************************/
 
 #pragma mark Save Flyer image and write to Documents/Flyr folder 

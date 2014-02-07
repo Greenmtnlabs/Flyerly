@@ -9,74 +9,55 @@
 #import "FlyerImageView.h"
 
 @implementation FlyerImageView
-
-
 @synthesize layers;
 
--(id)init{
-   
-    self = [super init];
-     return self;
-}
-
+/**
+ * Image initialization.
+ */
 - (void)awakeFromNib
 {
     [super awakeFromNib];
     
     //Set Master Layers
     layers = [[NSMutableDictionary alloc] init];
-    
+
     //Set Template Here
     
 }
-
-
 
 /*
  * Here we Delete One Layer from View
  */
 -(void)deleteLayer :(NSString *)uid{
     
-    CustomLabel *lble = [layers objectForKey:uid];
+    UIView *view = [layers objectForKey:uid];
     
-    int idx = lble.tag;
-
-    NSArray *ChildViews = [self subviews];
-    
-    for (UIView *child in ChildViews) {
+    // Make sure the view is valid.
+    if ( view != nil ) {
+        // Remove it from the superview.
+        [view removeFromSuperview];
         
-        if (child.tag == idx) {
-            
-            //Remove From View
-            [child removeFromSuperview];
-            
-            //Remove From Views Dictionary
-            [layers removeObjectForKey:uid];
-        }
+        // Also remove from dictionary.
+        [layers removeObjectForKey:uid];
     }
-    
-
-
 }
 
 /*
  * Here we create or update actual layer
  */
 -(void)renderLayer :(NSString *)uid layerDictionary:(NSMutableDictionary *)layDic {
-
+    
+    // This is a reference to the view that we use to do some generic stuff.
+    UIView *view = nil;
 
     //check for Flyer Background
     if ( [uid isEqualToString:@"Template"] ) {
-        
         [self setTemplate:[layDic valueForKey:@"image"]];
         return;
-        
     }
-    
     
     // Checking for Label or ImageView
     if ([layDic objectForKey:@"image"] == nil) {
-        
         
         //Check Layer Exist in Master Layers
         if ([layers objectForKey:uid] == nil) {
@@ -92,31 +73,26 @@
             [self addSubview:lble];
             [layers setValue:lble forKey:uid];
             
-            
+            view = lble;
         } else {
             
             CustomLabel *lble = [layers objectForKey:uid];
             [self configureLabel:lble labelDictionary:layDic ];
             [layers setValue:lble forKey:uid];
-
-            
         }
-
-
     } else {
 
-        
-        //Check Layer Exist in Master Layers
+        // Check Layer Exist in Master Layers
         if ([layers objectForKey:uid] == nil) {
             
             // Here We Write Code for Image
             UIImageView *img = [[UIImageView alloc]initWithFrame:CGRectMake(10,10, 90, 70)];
-            
+
             [self configureImageView:img ImageViewDictionary:layDic];
             [self addSubview:img];
             [layers setValue:img forKey:uid];
             
-            
+            view = img;
         } else {
         
             UIImageView *img = [layers objectForKey:uid];
@@ -126,7 +102,14 @@
         }
     }
     
-    
+    // Do the generic stuff that needs to happen for all views. For now,
+    // we add support for drag.
+    if ( view != nil ) {
+        view.userInteractionEnabled = YES;
+        
+        UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(layerMoved:)];
+        [view addGestureRecognizer:panGesture];
+    }
 }
 
 
@@ -224,5 +207,32 @@
 
 }
 
+#pragma mark - Drag & Drop Functionality
+
+/**
+ * This method does drag and drop functionality on the layer.
+ */
+- (void)layerMoved:(UIPanGestureRecognizer *)recognizer {
+    CGPoint translation = [recognizer translationInView:self];
+    recognizer.view.center = CGPointMake(recognizer.view.center.x + translation.x,
+                                         recognizer.view.center.y + translation.y);
+    [recognizer setTranslation:CGPointMake(0, 0) inView:self];
+}
+
+/**
+ * Get layer position
+ */
+- (CGRect)layerFrame:(NSString *)uid {
+    CGRect fr = CGRectMake(0, 0, 0, 0);
+    
+    UIView *view = [layers objectForKey:uid];
+    
+    // Make sure the view is valid.
+    if ( view != nil ) {
+        fr = view.frame;
+    }
+    
+    return fr;
+}
 
 @end
