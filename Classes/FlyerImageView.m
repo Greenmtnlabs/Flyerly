@@ -114,6 +114,9 @@
         
         UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(layerMoved:)];
         [view addGestureRecognizer:panGesture];
+        
+        UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(layerResized:)];
+        [view addGestureRecognizer:pinchGesture];
     }
 }
 
@@ -306,6 +309,27 @@
         
         [self.delegate frameChangedForLayer:key frame:fr];
     }
+}
+
+#pragma mark - Resize functionality
+
+/**
+ * Resize view when pinched.
+ */
+- (void)layerResized:(UIGestureRecognizer *)sender {
+    static CGRect initialBounds;
+    
+    UIView *_view = sender.view;
+    
+    if (sender.state == UIGestureRecognizerStateBegan)
+    {
+        initialBounds = _view.bounds;
+    }
+    CGFloat factor = [(UIPinchGestureRecognizer *)sender scale];
+    
+    CGAffineTransform zt = CGAffineTransformScale(CGAffineTransformIdentity, factor, factor);
+    _view.bounds = CGRectApplyAffineTransform(initialBounds, zt);
+    return;
 }
 
 @end
