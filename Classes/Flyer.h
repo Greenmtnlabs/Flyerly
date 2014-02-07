@@ -51,6 +51,8 @@
 
 -(void)setSymbolImage :(NSString *)uid ImgPath:(NSString *)imgPath;
 
+-(void)setFlyerBorder :(NSString *)uid RGBColor:(id)rgb;
+
 -(NSString *)addPhoto;
 -(NSString *)addSymbols;
 -(NSString *)addClipArt;

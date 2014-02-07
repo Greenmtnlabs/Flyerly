@@ -997,11 +997,10 @@ int photoLayerCount = 0; // Photo layer count to set tag value
         if(tempView == view)
         {
             
+            //Getting Image Path
             NSString *imgPath = [self getImagePathByTag:[NSString stringWithFormat:@"Template%d",view.tag]];
             
-            //Set Symbol Image
-           // [flyer setSymbolImage:currentLayer ImgPath:imgPath];
-            
+            //set template Image
             [self.flyimgView setTemplate:imgPath];
             
             
@@ -1015,16 +1014,27 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     }
     
     
-	selectedTemplate  =  templateArray[view.tag];
-	CATransition *animation = [CATransition animation];
-	[animation setType:kCATransitionPush];
-	[animation setSubtype:kCATransitionMoveIn];
-	[animation setDuration:0.4f];
-	[animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
-	[[self.imgView  layer] addAnimation:animation forKey:@"SwitchToView1"];
-	[imgView setImage:selectedTemplate];
+
     
     [Flurry logEvent:@"Background Selected"];
+}
+
+
+/*
+ *Here we Copy Image to Template Directory
+ */
+-(void)copyImageToTemplate :(UIImage *)img{
+    
+    // Create Symbol direcrory if not created
+    NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
+    
+    NSString *FolderPath = [NSString stringWithFormat:@"%@/Template/template.jpg", currentpath];
+    
+    NSData *imgData = UIImagePNGRepresentation(img);
+    
+    //Create a Image Copy to Current Flyer Folder
+    [[NSFileManager defaultManager] createFileAtPath:FolderPath contents:imgData attributes:nil];
+
 }
 
 -(NSString *)getImagePathforPhoto :(UIImage *)img{
@@ -1089,12 +1099,16 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     
     
     NSString *imageFolderPath ;
+    NSString *existImagePath ;
     
     if ([dicPath isEqualToString:@"Template"]) {
 
         imageFolderPath = [NSString stringWithFormat:@"%@/template.jpg", FolderPath];
         dicPath = [dicPath stringByAppendingString:[NSString stringWithFormat:@"/template.jpg"]];
-    
+
+        //Getting Image From Bundle
+        existImagePath =[[NSBundle mainBundle] pathForResource:imgName ofType:@"jpg"];
+
     } else {
         
         //Create Unique Id for Image
@@ -1103,10 +1117,11 @@ int photoLayerCount = 0; // Photo layer count to set tag value
         imageFolderPath = [NSString stringWithFormat:@"%@/%d.jpg", FolderPath,timestamp];
         dicPath = [dicPath stringByAppendingString:[NSString stringWithFormat:@"/%d.jpg",timestamp]];
 
+        //Getting Image From Bundle
+        existImagePath =[[NSBundle mainBundle] pathForResource:imgName ofType:@"png"];
+
     }
     
-    //Getting Image From Bundle
-    NSString *existImagePath =[[NSBundle mainBundle] pathForResource:imgName ofType:@"png"];
     UIImage *realImage =  [UIImage imageWithContentsOfFile:existImagePath];
     NSData *imgData = UIImagePNGRepresentation(realImage);
     
@@ -1271,10 +1286,13 @@ int arrangeLayerIndex;
         
 		if(tempView == view)
 		{
-			UIColor *borderColor = borderArray[i-1];
             
-            imgView.layer.borderColor = borderColor.CGColor;
-            imgView.layer.borderWidth = 3.0;
+            UIColor *borderColor = borderArray[i-1];
+            currentLayer = @"Template";
+            [flyer setFlyerBorder:currentLayer RGBColor:borderColor];
+            
+            //Here we call Render Layer on View
+            [flyimgView setTemplateBorder:[flyer getLayerFromMaster:currentLayer]];
             
             // Add border to selected layer thumbnail
             tempView.backgroundColor = [globle colorWithHexString:@"0197dd"];
@@ -1329,7 +1347,13 @@ int arrangeLayerIndex;
                 
                 imgPickerFlag = 1;
             }else{
-                //Here We Write Code for Backgeound
+                
+                //Create Copy of Image
+                [self copyImageToTemplate:img];
+                
+                //set template Image
+                [self.flyimgView setTemplate:@"Template/template.jpg"];
+                
             }
         });
     }];
@@ -1368,7 +1392,12 @@ int arrangeLayerIndex;
                 
                 imgPickerFlag = 1;
             }else{
-                //Here We Write Code for Backgeound
+                
+                //Create Copy of Image
+                [self copyImageToTemplate:img];
+                
+                //set template Image
+                [self.flyimgView setTemplate:@"Template/template.jpg"];
             }
         });
     }];

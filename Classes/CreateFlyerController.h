@@ -260,6 +260,8 @@
 -(NSData*)getCurrentFrameAndSaveIt;
 -(NSString *)getImagePathByTag :(NSString *)imgName;
 -(NSString *)getImagePathforPhoto :(UIImage *)img;
+-(void)copyImageToTemplate :(UIImage *)img;
+
 
 + (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize;
 +(UIView *)setTitleViewWithTitle:(NSString *)title rect:(CGRect)rect;

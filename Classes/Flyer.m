@@ -530,6 +530,33 @@ NSInteger compareTimestamps(id stringLeft, id stringRight, void *context) {
 
 
 
+/*
+ * Here we Set Flyer Color
+ */
+-(void)setFlyerBorder :(NSString *)uid RGBColor:(id)rgb{
+    
+    NSMutableDictionary *templateDictionary = [self getLayerFromMaster:uid];
+    
+    CGFloat red = 0.0, green = 0.0, blue = 0.0, alpha = 0.0,wht = 0.0;
+    
+    UILabel *labelToStore = [[UILabel alloc]init];
+    labelToStore.textColor = rgb;
+    
+    //Getting RGB Color Code
+    [labelToStore.textColor getRed:&red green:&green blue:&blue alpha:&alpha];
+    
+    if (red == 0 && green == 0 && blue ==0) {
+        [labelToStore.textColor getWhite:&wht alpha:&alpha];
+    }
+    
+    [templateDictionary setValue:[NSString stringWithFormat:@"%f, %f, %f", red, green, blue] forKey:@"bordercolor"];
+    [templateDictionary setValue:[NSString stringWithFormat:@"%f, %f", wht, alpha] forKey:@"bordercolorWhite"];
+    
+    // Set to Master Dictionary
+    [masterLayers setValue:templateDictionary forKey:uid];
+    
+}
+
 @end
 
 	

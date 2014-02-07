@@ -27,7 +27,7 @@
 
 -(void)setTemplate :(NSString *)imgPath;
 
--(void)setTemplateBorder :(NSString *)borColor;
+-(void)setTemplateBorder :(NSMutableDictionary *)layDic;
 
 @property (strong, readonly) NSMutableDictionary *layers;
 @property (weak, nonatomic) id<FlyerImageViewDelegate> IBOutlet delegate;

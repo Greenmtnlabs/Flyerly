@@ -53,6 +53,11 @@
     //check for Flyer Background
     if ( [uid isEqualToString:@"Template"] ) {
         [self setTemplate:[layDic valueForKey:@"image"]];
+
+        //Set Flyer Border
+        if ([layDic objectForKey:@"bordercolor"]) {
+            [self setTemplateBorder:layDic];
+        }
         return;
     }
     
@@ -214,9 +219,28 @@
 /*
  * Here we set Flyer Border Color
  */
--(void)setTemplateBorder :(NSString *)borColor{
+-(void)setTemplateBorder :(NSMutableDictionary *)layDic {
+    
+    UIColor *borderColor;
+    if ([[layDic valueForKey:@"bordercolor"] isEqualToString:@"0.000000, 0.000000, 0.000000"]) {
+        
+        if ([layDic valueForKey:@"bordercolorWhite"] != nil) {
+            NSArray *rgbBorder = [[layDic valueForKey:@"textborderWhite"] componentsSeparatedByString:@","];
+            
+            borderColor = [UIColor colorWithWhite:[rgbBorder[0] floatValue] alpha:[rgbBorder[1] floatValue]];
+            
+        }
+        
+    }else{
+        
+        NSArray *rgbBorder = [[layDic valueForKey:@"bordercolor"] componentsSeparatedByString:@","];
+        
+        borderColor = [UIColor colorWithRed:[rgbBorder[0] floatValue] green:[rgbBorder[1] floatValue] blue:[rgbBorder[2] floatValue] alpha:1];
+    }
 
 
+    self.layer.borderColor = borderColor.CGColor;
+    self.layer.borderWidth = 3.0;
 }
 
 #pragma mark - Drag & Drop Functionality
