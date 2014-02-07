@@ -110,10 +110,9 @@ NSString * const TEXTHEIGHT = @"280.000000";
 }
 
 
-
-
-
-
+/*
+ * Here we return All Unique Keys of layers
+ */
 -(NSArray *)allKeys{
     NSLog(@"%@", masterLayers);
     
@@ -121,6 +120,11 @@ NSString * const TEXTHEIGHT = @"280.000000";
     return [[masterLayers allKeys] sortedArrayUsingFunction:compareTimestamps context:NULL];
 }
 
+
+/*
+ *Here we sort Array for Exact Render of Flyer
+ * as last saved.
+ */
 NSInteger compareTimestamps(id stringLeft, id stringRight, void *context) {
     
     // Convert both strings to integers
@@ -134,52 +138,6 @@ NSInteger compareTimestamps(id stringLeft, id stringRight, void *context) {
     else
         return NSOrderedSame;
 }
-
-/*
- *Here we sort Array for Exact Render of Flyer
- * as last saved.
- */
--(NSMutableArray *)sortbyTimeStamp :(NSArray *)flyKeys {
-    
-    NSMutableArray *sortedAry = [[NSMutableArray alloc ]init];
-    NSString *timstring =@"";
-    NSString *sortedValue =@"";
-    int tmpStamp = 0;
-    int shortest = 0;
-
-    for (int i = 0; i < flyKeys.count; i++) {
-        
-        timstring = [flyKeys objectAtIndex:i];
-        
-        if (![timstring isEqualToString:@"Template"]) {
-            
-            shortest = [timstring integerValue];
-            sortedValue = [ NSString stringWithFormat:@"%d",shortest];
-            for (int ii = i ; ii < flyKeys.count; ii++) {
-                
-                timstring = [flyKeys objectAtIndex:ii];
-                tmpStamp = [timstring integerValue];
-                
-                NSLog(@"%d < %d",tmpStamp,shortest);
-                
-                if (tmpStamp < shortest && tmpStamp != 0) {
-                    sortedValue = [ NSString stringWithFormat:@"%d",tmpStamp];
-                    shortest = tmpStamp;
-                }
-            }
-            
-            [sortedAry addObject:sortedValue];
-            
-        }
-
-    }
-    
-    [sortedAry addObject:@"Template"];
-    
-    NSLog(@"%@",sortedAry);
-    return sortedAry;
-}
-
 
 
 /*
@@ -365,18 +323,45 @@ NSInteger compareTimestamps(id stringLeft, id stringRight, void *context) {
     NSString *lastFileName;
     NSMutableArray *recentFlyers = [[NSMutableArray alloc] init];
     
-    int start = [sortedFlyersList count] -1;
-    int end = [sortedFlyersList count] - flyCount;
-  
     
-    for(int i = start ; i >= end ;i--)
-    {
-       lastFileName = sortedFlyersList[i];
-        NSString *recentflyPath = [NSString stringWithFormat:@"%@/%@/flyer.jpg",usernamePath,lastFileName];
-        [recentFlyers addObject:recentflyPath];
+    if (sortedFlyersList.count > flyCount) {
         
-    }
+        //More then 4 Saved Flyer or Empty
+        int start = [sortedFlyersList count] -1;
+        int end = [sortedFlyersList count] - flyCount;
+        
+        for(int i = start ; i >= end ;i--)
+        {
+            lastFileName = sortedFlyersList[i];
+            
+            //Checking For Integer Dir Names Only
+            if ([[NSScanner scannerWithString:lastFileName] scanInt:nil]) {
+                
+                NSString *recentflyPath = [NSString stringWithFormat:@"%@/%@/flyer.jpg",usernamePath,lastFileName];
+                [recentFlyers addObject:recentflyPath];
+                
+            }
+            
+        }
+    } else {
+        
+        // Less then 4 Flyer or Empty
+        for(int i = 0 ; i < sortedFlyersList.count ;i++)
+        {
+            lastFileName = sortedFlyersList[i];
+            
+            //Checking For Integer Dir Names Only
+            if ([[NSScanner scannerWithString:lastFileName] scanInt:nil]) {
+              
+                NSString *recentflyPath = [NSString stringWithFormat:@"%@/%@/flyer.jpg",usernamePath,lastFileName];
+                [recentFlyers addObject:recentflyPath];
+
+            }
+
+        }
     
+    }
+
     return recentFlyers;
 }
 
