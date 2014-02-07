@@ -8,8 +8,6 @@
 
 #import "Flyer.h"
 
-@implementation Flyer
-
 NSString * const TEXT = @"";
 NSString * const TEXTFONTNAME = @".HelveticaNeueInterface-M3";
 NSString * const TEXTFONTSIZE = @"17.000000";
@@ -22,6 +20,7 @@ NSString * const TEXTyPOS = @"50.000000";
 NSString * const TEXTWIDTH = @"280.000000";
 NSString * const TEXTHEIGHT = @"280.000000";
 
+@implementation Flyer
 
 @synthesize masterLayers;
 

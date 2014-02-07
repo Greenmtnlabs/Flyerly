@@ -1779,6 +1779,9 @@ int arrangeLayerIndex;
 	[l setBorderWidth:1.0];
 	[l setBorderColor:[[UIColor grayColor] CGColor]];
 	[self.flyimgView addSubview:lastTextView];
+    
+    // Temporarily remove the layer if it was previously rendered.
+    [self.flyimgView deleteLayer:currentLayer];
 	
     // Show the keyboard.
 	[lastTextView becomeFirstResponder];
@@ -2176,19 +2179,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	[self.navigationController pushViewController:svController animated:YES];
 }
 
-
-
-
-#pragma mark  TEXTVIEW delegate
-- (void)textViewDidBeginEditing:(UITextView *)textView
-{
-
-}
-
-- (void)textViewDidEndEditing:(UITextView *)textView
-{
-
-}
 
 -(IBAction)setStyleTabAction:(id) sender
 {

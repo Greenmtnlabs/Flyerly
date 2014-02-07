@@ -16,5 +16,6 @@
 
 @property int lineWidth;
 @property(nonatomic, strong) UIColor *borderColor;
+@property CGSize originalSize;
 
 @end

@@ -28,7 +28,7 @@
 
 
 @class FlyerlySingleton,CameraViewController,GalleryViewController,Flyer,FlyerImageView;
-@interface CreateFlyerController :ParentViewController<UIActionSheetDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, FlyerImageViewDelegate >
+@interface CreateFlyerController :ParentViewController<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, FlyerImageViewDelegate >
 {
     int layerallow;
     FlyerlySingleton *globle;
