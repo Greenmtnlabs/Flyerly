@@ -75,6 +75,16 @@
     // Use the image from filters for cropping.
     self.filterView.image = self.image;
     
+    // Make sure the filters are visible. Get the current height based on
+    // navigation bar status and device height.
+    NSInteger height = [ [ UIScreen mainScreen ] bounds ].size.height;
+    
+    if ( height <= 480 ) {
+        CGRect fr = self.filterView.superview.frame;
+        fr.size.height -= 88;
+        self.filterView.superview.frame = fr;
+    }
+    
     [super viewDidLoad];
 }
 
