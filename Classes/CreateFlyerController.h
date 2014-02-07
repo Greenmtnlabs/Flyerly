@@ -28,7 +28,7 @@
 
 
 @class FlyerlySingleton,CameraViewController,GalleryViewController,Flyer,FlyerImageView;
-@interface CreateFlyerController :ParentViewController<UIActionSheetDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, FlyerImageViewDelegate >
+@interface CreateFlyerController :ParentViewController<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, FlyerImageViewDelegate >
 {
     int layerallow;
     FlyerlySingleton *globle;
@@ -54,7 +54,6 @@
 	UIScrollView *iconScrollView;
     UIScrollView *layerScrollView;
 
-	UITextView *msgTextView;
     UIImageView *newPhotoImgView;
 	CustomLabel *msgLabel;
 	UIImagePickerController *imgPicker;
@@ -132,6 +131,8 @@
     GalleryViewController *nbuGallary;
     CameraViewController *nbuCamera;
     FlyerImageView *flyerImageView;
+    
+    UITextView *lastTextView;
 }
 
 @property(nonatomic, strong) NSMutableArray *textLabelLayersArray;
@@ -151,7 +152,6 @@
 @property (nonatomic, strong) UIImageView *templateBckgrnd;
 @property (nonatomic, strong) UIImageView *textBackgrnd;
 @property (nonatomic, strong) UIImagePickerController *imgPicker;
-@property (nonatomic, strong) UITextView *msgTextView;
 
 @property (nonatomic,strong)  UIButton *moreLayersButton;
 @property (nonatomic,strong)  UILabel *moreLayersLabel;

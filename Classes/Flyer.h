@@ -10,7 +10,6 @@
 #import <Parse/Parse.h>
 #import "FlyerImageView.h"
 
-
 @interface Flyer : NSObject{
     
     NSString *piecesFile;

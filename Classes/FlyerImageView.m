@@ -137,6 +137,8 @@
     //SetFrame
     [lbl setFrame:CGRectMake([[detail valueForKey:@"x"] floatValue], [[detail valueForKey:@"y"] floatValue], [[detail valueForKey:@"width"] floatValue], [[detail valueForKey:@"height"] floatValue])];
 
+    // Remember originalsize
+    lbl.originalSize = lbl.frame.size;
 
     //set Label Text
     [lbl setText:[detail valueForKey:@"text"]];
@@ -172,6 +174,16 @@
         lbl.borderColor = [UIColor colorWithRed:[rgbBorder[0] floatValue] green:[rgbBorder[1] floatValue] blue:[rgbBorder[2] floatValue] alpha:1];
     }
     lbl.lineWidth = 2;
+    
+    // Make sure we are vertically aligned to the top and centerally aligned.
+    lbl.textAlignment = UITextAlignmentCenter;
+    [lbl setNumberOfLines:0];
+    [lbl sizeToFit];
+    
+    // Resize the frame's width to actual
+    CGRect fr = lbl.frame;
+    fr.size.width = [[detail valueForKey:@"width"] floatValue];
+    lbl.frame = fr;
 }
 
 
@@ -224,7 +236,16 @@
     // Let the delegate know that we changed frame.
     for ( int i = 0; i < keys.count; i++ ) {
         NSString *key = [keys objectAtIndex:i];
-        [self.delegate frameChangedForLayer:key frame:recognizer.view.frame];
+        
+        CGRect fr = recognizer.view.frame;
+        
+        // If this is a UILable, the size may have changed due to alignment issues.
+        // so we send the default size.
+        if ( [recognizer.view.class isSubclassOfClass:[CustomLabel class]] ) {
+            fr.size = [(CustomLabel *)recognizer.view originalSize];
+        }
+        
+        [self.delegate frameChangedForLayer:key frame:fr];
     }
 }
 
