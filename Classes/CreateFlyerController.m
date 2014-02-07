@@ -2467,9 +2467,12 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	{
         selectedAddMoreLayerTab = ADD_MORE_PHOTOTAB;
         
-        
+
         if ([currentLayer isEqualToString:@""]) {
             currentLayer = [flyer addSymbols];
+            NSMutableDictionary *dic = [flyer getLayerFromMaster:currentLayer];
+            [self.flyimgView renderLayer:currentLayer layerDictionary:dic];
+            [self.flyimgView layerIsBeingEdited:currentLayer];
         }else{
             NSString *imgPath = [flyer getImageName:currentLayer];
             UIImage *realImage =  [UIImage imageWithContentsOfFile:imgPath];

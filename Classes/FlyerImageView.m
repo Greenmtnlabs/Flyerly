@@ -127,9 +127,11 @@
     [imgView setFrame:CGRectMake([[detail valueForKey:@"x"] floatValue], [[detail valueForKey:@"y"] floatValue], [[detail valueForKey:@"width"] floatValue], [[detail valueForKey:@"height"] floatValue])];
     
     //Set Image
-    NSData *imageData = [[NSData alloc ]initWithContentsOfMappedFile:[detail valueForKey:@"image"]];
-    UIImage *currentImage = [UIImage imageWithData:imageData];
-    [imgView setImage:currentImage];
+    if ( ![[detail valueForKey:@"image"] isEqualToString:@""] ) {
+        NSData *imageData = [[NSData alloc ]initWithContentsOfMappedFile:[detail valueForKey:@"image"]];
+        UIImage *currentImage = [UIImage imageWithData:imageData];
+        [imgView setImage:currentImage];
+    }
 
 }
 
@@ -241,6 +243,39 @@
 
     self.layer.borderColor = borderColor.CGColor;
     self.layer.borderWidth = 3.0;
+}
+
+#pragma mark - Show layer as editable.
+
+/**
+ * Visually show a layer as being edited
+ */
+- (void)layerIsBeingEdited:(NSString *)uid {
+    UIView *view = [layers objectForKey:uid];
+    
+    // Show the layer as being edited.
+    if ( view != nil ) {
+        CALayer * l = view.layer;
+        [l setMasksToBounds:YES];
+        [l setCornerRadius:10];
+        [l setBorderWidth:1.0];
+        [l setBorderColor:[[UIColor grayColor] CGColor]];
+    }
+}
+
+/**
+ * Layer stopped editing.
+ */
+- (void)layerStoppedEditing:(NSString *)uid {
+    UIView *view = [layers objectForKey:uid];
+    
+    // Show the layer as being edited.
+    if ( view != nil ) {
+        CALayer * l = view.layer;
+        [l setCornerRadius:0.0];
+        [l setBorderWidth:0.0];
+        [l setBorderColor:[[UIColor clearColor] CGColor]];
+    }
 }
 
 #pragma mark - Drag & Drop Functionality
