@@ -1889,8 +1889,6 @@ int arrangeLayerIndex;
         [lastTextView removeFromSuperview];
         lastTextView = nil;
         
-        // Remove object from array if not in delete mode
-        if(!deleteMode)[textLabelLayersArray removeLastObject];
         [self callAddMoreLayers];
         return;
     }
@@ -2122,6 +2120,11 @@ int arrangeLayerIndex;
         NSString *flyertext = [flyer getText:currentLayer];
         
         if (flyertext == nil && [flyerImg isEqualToString:@""]) {
+            [flyer deleteLayer:currentLayer];
+            [self.flyimgView deleteLayer:currentLayer];
+        }
+        
+        if ([flyertext isEqualToString:@""] && flyerImg == nil) {
             [flyer deleteLayer:currentLayer];
             [self.flyimgView deleteLayer:currentLayer];
         }
