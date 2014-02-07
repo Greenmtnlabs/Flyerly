@@ -9,6 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "CustomLabel.h"
 
+@protocol FlyerImageViewDelegate <NSObject>
+
+- (void)frameChangedForLayer:(NSString *)uid frame:(CGRect)frame;
+
+@end
+
 @interface FlyerImageView : UIImageView{
 
    
@@ -23,6 +29,7 @@
 
 -(void)setTemplateBorder :(NSString *)borColor;
 
-
 @property (strong, readonly) NSMutableDictionary *layers;
+@property (weak, nonatomic) id<FlyerImageViewDelegate> IBOutlet delegate;
+
 @end
