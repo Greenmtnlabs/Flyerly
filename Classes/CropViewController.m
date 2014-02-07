@@ -98,7 +98,7 @@
     [self.navigationController popViewControllerAnimated:YES];
     
     self.image = self.filterView.image;
-    self.onImageTaken( self.editedImage );
+    self.onImageTaken( [self.editedImage imageWithOrientationUp] );
 }
 
 @end
