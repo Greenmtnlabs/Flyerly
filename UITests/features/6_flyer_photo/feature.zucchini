@@ -17,6 +17,22 @@ Then on the "Flyer" screen:
   Tap "Camera"
   
 Then on the "Camera" screen:
+  Take a screenshot
+  Tap "Grid"
+  Take a screenshot
+  Tap "Grid"
+  Tap "Rotate Camera"
+  Take a screenshot
+  Tap "Gallery"
+  
+Then on the "Gallery" screen:
+  Take a screenshot
+  Tap "Back"
+	
+Then on the "Flyer" screen:
+  Tap "Camera"
+
+Then on the "Camera" screen:
   Tap "Take a photo"
   
 Then on the "Crop" screen:
@@ -47,7 +63,39 @@ Then on the "Crop" screen:
   Tap "Done"
 
 Then on the "Flyer" screen:
-  Tap "Next / Delete / Undo"
+  Tap "Done / Share"
+  Take a screenshot
+  Tap "Photo"
+  Tap "Width"
+  Tap "Width"
+  Tap "Height"
+  Tap "Height"
+  Tap "Camera"
+
+Then on the "Camera" screen:
+  Tap "Take a photo"
+  
+Then on the "Crop" screen:
+  Tap "Done"
+	
+Then on the "Flyer" screen:
+  Tap "Done / Share"
+  Take screenshot
+  Tap "Tile1"
+  Tap "Camera"
+Then on the "Camera" screen:
+  Tap "Take a photo"
+  
+Then on the "Crop" screen:
+  Tap "Done"
+
+Then on the "Flyer" screen:
+  Tap "Photo"
+  Tap "Width"
+  Tap "Width"
+  Tap "Height"
+  Tap "Height"
+  Tap "Done / Share"
   Take a screenshot
   Tap "Back"
   
