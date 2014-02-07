@@ -1482,6 +1482,9 @@ int arrangeLayerIndex;
 
     if (![btnText isEqualToString:@""] && btnText != nil) {
         
+        
+        lastTextView = [[UITextView  alloc] init];
+        lastTextView.text = btnText;
         //Call Style
         [self callStyle];
     }
@@ -2418,7 +2421,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
         [widthTabButton  setSelected:YES];
         
-        UIImageView *lastImgView = newPhotoImgView;
+        UIImageView *lastImgView = [self.flyimgView.layers objectForKey:currentLayer];
         lastImgView.frame = CGRectMake(lastImgView.frame.origin.x, lastImgView.frame.origin.y,lastImgView.frame.size.width-10,lastImgView.frame.size.height);
         
     }
@@ -2427,7 +2430,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
         [heightTabButton  setSelected:YES];
         
-        UIImageView *lastImgView = newPhotoImgView;
+        UIImageView *lastImgView = [self.flyimgView.layers objectForKey:currentLayer];
         lastImgView.frame = CGRectMake(lastImgView.frame.origin.x, lastImgView.frame.origin.y,lastImgView.frame.size.width,lastImgView.frame.size.height-10);
     }
 }
@@ -2464,16 +2467,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	{
         selectedAddMoreLayerTab = ADD_MORE_PHOTOTAB;
         
-        
-        newPhotoImgView = [[UIImageView alloc]initWithFrame:CGRectMake(100, 10, 200, 200)];
-
-        
-        CALayer * l = [newPhotoImgView layer];
-        [l setMasksToBounds:YES];
-        [l setCornerRadius:10];
-        [l setBorderWidth:1.0];
-        [l setBorderColor:[[UIColor grayColor] CGColor]];
-        [self.flyimgView addSubview:newPhotoImgView];
         
         if ([currentLayer isEqualToString:@""]) {
             currentLayer = [flyer addSymbols];
