@@ -172,6 +172,16 @@
         lbl.borderColor = [UIColor colorWithRed:[rgbBorder[0] floatValue] green:[rgbBorder[1] floatValue] blue:[rgbBorder[2] floatValue] alpha:1];
     }
     lbl.lineWidth = 2;
+    
+    // Make sure we are vertically aligned to the top and centerally aligned.
+    lbl.textAlignment = UITextAlignmentCenter;
+    [lbl setNumberOfLines:0];
+    [lbl sizeToFit];
+    
+    // Resize the frame's width to actual
+    CGRect fr = lbl.frame;
+    fr.size.width = [[detail valueForKey:@"width"] floatValue];
+    lbl.frame = fr;
 }
 
 

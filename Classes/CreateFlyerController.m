@@ -8,7 +8,7 @@
 #import "CreateFlyerController.h"
 
 @implementation CreateFlyerController
-@synthesize flyimgView,imgView,imgPicker,imageNameNew,msgTextView,finalFlyer;
+@synthesize flyimgView,imgView,imgPicker,imageNameNew,finalFlyer;
 @synthesize fontScrollView,colorScrollView,templateScrollView,sizeScrollView,borderScrollView,fontBorderScrollView,symbolScrollView,iconScrollView;
 @synthesize selectedFont,selectedColor;
 @synthesize selectedTemplate,selectedSymbol,selectedIcon;
@@ -107,24 +107,6 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 	msgLabel.textColor = [UIColor blackColor];
 	msgLabel.textAlignment = UITextAlignmentCenter;
 	[self.imgView addSubview:msgLabel];
-    
-	msgTextView = [[UITextView alloc]initWithFrame:CGRectMake(20, 100, 280, 250)];
-	msgTextView.delegate = self;
-	msgTextView.font = [UIFont fontWithName:@"Arial" size:16];
-	msgTextView.textColor = [UIColor blackColor];
-	msgTextView.textAlignment = UITextAlignmentCenter;
-    
-    // Add Hight Width
-	NSInteger symbolScrollWidth = 60;
-	NSInteger symbolScrollHeight = 50;
-    
-  
-    NSInteger iconScrollWidth = 60;
-	NSInteger iconScrollHeight = 50;
-    
-
-
-    
     
     // Create font array
 	fontArray =[[NSArray  alloc] initWithObjects:
@@ -311,7 +293,6 @@ int photoLayerCount = 0; // Photo layer count to set tag value
     symbolTouchFlag = NO;
     iconTouchFlag = NO;
     [self hideAddMoreButton];
-	[msgTextView removeFromSuperview];
     
     // Call Main View
 	[self callAddMoreLayers];
@@ -862,7 +843,6 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 		{
 			selectedFont = fontArray[i-1];
 			selectedFont = [selectedFont fontWithSize:selectedSize];
-			msgTextView.font = selectedFont;
             
             //Here we set Font
             [flyer setFlyerTextFont:currentLayer FontName:[NSString stringWithFormat:@"%@",[selectedFont familyName]]];
@@ -904,7 +884,6 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 		if(tempView == view)
 		{
 			selectedColor = colorArray[i-1];
-			msgTextView.textColor = selectedColor;
             
             [flyer setFlyerTextColor:currentLayer RGBColor:selectedColor];
             
@@ -945,7 +924,6 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 			NSString *sizeStr = SIZE_ARRAY[i-1];
 			selectedSize = [sizeStr intValue];
 			selectedFont = [selectedFont fontWithSize:selectedSize];
-			msgTextView.font = selectedFont;
             
             [flyer setFlyerTextSize:currentLayer Size:selectedFont];
             
@@ -1448,8 +1426,6 @@ int arrangeLayerIndex;
 
     if (![btnText isEqualToString:@""] && btnText != nil) {
         
-        msgTextView.text = btnText;
-        
         //Call Style
         [self callStyle];
     }
@@ -1512,7 +1488,6 @@ int arrangeLayerIndex;
 
         NSArray *ary = [editButton subviews];
         CustomLabel * txt = [ary objectAtIndex:0];
-        msgTextView.text = txt.text;
         //Call Style
         [self callStyle];
         
@@ -1719,7 +1694,6 @@ int arrangeLayerIndex;
 }
 
 -(void)callKeyboard{
-		[msgTextView becomeFirstResponder];
 }
 
 
@@ -1770,35 +1744,44 @@ int arrangeLayerIndex;
     [self addBottomTabs:libText];
 
     [self hideAddMoreButton];
-
-    UITextView *lastTextView = msgTextView;
-	lastTextView.font = [UIFont fontWithName:@"Arial" size:16];
-	lastTextView.textColor = [UIColor blackColor];
     
+    // Get current layer properties.
+    NSDictionary *detail = [flyer getLayerFromMaster:currentLayer];
     
-    CustomLabel *lastLabelView = [[CustomLabel alloc] init];
+    // Prepare a new text layer.
+    lastTextView = [[UITextView alloc] initWithFrame:CGRectMake([[detail valueForKey:@"x"] floatValue], [[detail valueForKey:@"y"] floatValue], [[detail valueForKey:@"width"] floatValue], [[detail valueForKey:@"height"] floatValue])];
     
-    selectedColor = lastLabelView.textColor;
-
-	lastTextView.backgroundColor = [ UIColor colorWithWhite:1 alpha:0.3f];
-	lastLabelView.alpha =ALPHA0;
- 	lastTextView.text = lastLabelView.text ;
-	[NSTimer scheduledTimerWithTimeInterval:0.001f target:self selector:@selector(callKeyboard) userInfo:nil repeats:NO];
-	
+    // Set the text.
+    lastTextView.text = [detail valueForKey:@"text"];
+    
+    // Set the font.
+    lastTextView.font = [UIFont fontWithName:[detail valueForKey:@"fontname"] size:[[detail valueForKey:@"fontsize"] floatValue]];
+    
+    // Set the text color.
+    if ([[detail valueForKey:@"textcolor"] isEqualToString:@"0.000000, 0.000000, 0.000000"]) {
+        if ([detail valueForKey:@"textWhitecolor"]  != nil) {
+            NSArray *rgb = [[detail valueForKey:@"textWhitecolor"]  componentsSeparatedByString:@","];
+            lastTextView.textColor = [UIColor colorWithWhite:[rgb[0] floatValue] alpha:[rgb[1] floatValue]];
+        }
+    }else{
+        NSArray *rgb = [[detail valueForKey:@"textcolor"] componentsSeparatedByString:@","];
+        
+        lastTextView.textColor = [UIColor colorWithRed:[rgb[0] floatValue] green:[rgb[1] floatValue] blue:[rgb[2] floatValue] alpha:1];
+        
+    }
+    
+	lastTextView.textAlignment = UITextAlignmentCenter;
+	lastTextView.backgroundColor = [UIColor colorWithWhite:1 alpha:0.3f];
+    
 	CALayer * l = [lastTextView layer];
 	[l setMasksToBounds:YES];
 	[l setCornerRadius:10];
 	[l setBorderWidth:1.0];
 	[l setBorderColor:[[UIColor grayColor] CGColor]];
-	[self.view addSubview:lastTextView];
+	[self.flyimgView addSubview:lastTextView];
 	
-	[UIView beginAnimations:nil context:NULL];
-	[UIView setAnimationDuration:0.4f];
-    
-	templateBckgrnd.alpha = ALPHA0;
-
-
-	[UIView commitAnimations];
+    // Show the keyboard.
+	[lastTextView becomeFirstResponder];
 }
 
 -(void)callStyle
@@ -1834,13 +1817,13 @@ int arrangeLayerIndex;
    
     [self hideAddMoreButton];
 
-    UITextView *lastTextView = msgTextView;
     
     //Checking Empty String
     if ([lastTextView.text isEqualToString:@""] ) {
         
-        [msgTextView resignFirstResponder];
-        [msgTextView removeFromSuperview];
+        [lastTextView resignFirstResponder];
+        [lastTextView removeFromSuperview];
+        lastTextView = nil;
         
         // Remove object from array if not in delete mode
         if(!deleteMode)[textLabelLayersArray removeLastObject];
@@ -1861,7 +1844,7 @@ int arrangeLayerIndex;
     }
     
     //Set Text of Layer
-    [flyer setFlyerText:currentLayer text:msgTextView.text ];
+    [flyer setFlyerText:currentLayer text:lastTextView.text ];
     
     //Here we call Render Layer on View
     [flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
@@ -1876,6 +1859,7 @@ int arrangeLayerIndex;
 
 	[lastTextView resignFirstResponder];
 	[lastTextView removeFromSuperview];
+    lastTextView = nil;
 }
 
 -(void) donePhoto{
@@ -2812,6 +2796,8 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         if(selectedAddMoreLayerTab == ADD_MORE_TEXTTAB){
             
             // set delete mode to NO when clicked on text tab
+            currentLayer = [flyer addText];
+            editButtonGlobal.uid = currentLayer;
             deleteMode = NO;
             [self callWrite];
             

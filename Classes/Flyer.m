@@ -10,7 +10,7 @@
 
 @implementation Flyer
 
-NSString * const TEXT = @"Defualt";
+NSString * const TEXT = @"";
 NSString * const TEXTFONTNAME = @".HelveticaNeueInterface-M3";
 NSString * const TEXTFONTSIZE = @"17.000000";
 NSString * const TEXTCOLOR = @"0.000000, 0.000000, 0.000000";
