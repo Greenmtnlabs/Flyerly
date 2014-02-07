@@ -69,7 +69,7 @@
     self.filters = [NBUFilterProvider availableFilters];
     
     // Configure crop view. We may get big pixels with this factor!
-    self.maximumScaleFactor = 10.0;
+    self.maximumScaleFactor = 100.0;
     self.cropView.allowAspectFit = YES;
     
     // Use the image from filters for cropping.
