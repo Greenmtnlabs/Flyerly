@@ -1340,6 +1340,8 @@ int arrangeLayerIndex;
                 //Here we Create ImageView Layer
                 [self.flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
                 
+                [self.flyimgView layerStoppedEditing:currentLayer];
+                
                 imgPickerFlag = 1;
             }else{
                 
@@ -1379,6 +1381,8 @@ int arrangeLayerIndex;
                 
                 //Here we Create ImageView Layer
                 [self.flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
+                
+                [self.flyimgView layerStoppedEditing:currentLayer];
                 
                 imgPickerFlag = 1;
             }else{
