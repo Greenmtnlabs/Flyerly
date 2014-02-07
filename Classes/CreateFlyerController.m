@@ -2464,19 +2464,11 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	{
         selectedAddMoreLayerTab = ADD_MORE_PHOTOTAB;
         
-        
-        newPhotoImgView = [[UIImageView alloc]initWithFrame:CGRectMake(100, 10, 200, 200)];
-
-        
-        CALayer * l = [newPhotoImgView layer];
-        [l setMasksToBounds:YES];
-        [l setCornerRadius:10];
-        [l setBorderWidth:1.0];
-        [l setBorderColor:[[UIColor grayColor] CGColor]];
-        [self.flyimgView addSubview:newPhotoImgView];
-        
         if ([currentLayer isEqualToString:@""]) {
             currentLayer = [flyer addSymbols];
+            NSMutableDictionary *dic = [flyer getLayerFromMaster:currentLayer];
+            [self.flyimgView renderLayer:currentLayer layerDictionary:dic];
+            [self.flyimgView layerIsBeingEdited:currentLayer];
         }else{
             NSString *imgPath = [flyer getImageName:currentLayer];
             UIImage *realImage =  [UIImage imageWithContentsOfFile:imgPath];
