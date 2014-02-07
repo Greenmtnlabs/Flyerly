@@ -44,6 +44,9 @@
                     <rect key="frame" x="5" y="65" width="310" height="310"/>
                     <autoresizingMask key="autoresizingMask"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="-64"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="1Hx-Xl-UIu"/>
+                    </connections>
                 </imageView>
                 <view contentMode="scaleToFill" id="rbq-e2-wbO">
                     <rect key="frame" x="0.0" y="376" width="320" height="58"/>

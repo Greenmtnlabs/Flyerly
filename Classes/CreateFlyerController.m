@@ -3238,28 +3238,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     [socialArray writeToFile:finalImageWritePath atomically:YES];
 }
 
-
--(void)showAlert:(NSString *)title message:(NSString *)message{
-    UIAlertView *salert = [[UIAlertView alloc] initWithTitle:title
-                                                    message:message
-                                                   delegate:nil
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
-    [salert show];
-}
-
-
-- (void)removeAllViewsFromScrollview:(UIScrollView *)scrollView {
-    NSArray *subviews = scrollView.subviews;
-    
-    for ( UIView *v in subviews ) {
-        [v removeFromSuperview];
-    }
-}
-
-
-
-
 #pragma mark  View Disappear Methods
 
 -(void) logLayerAddedEvent{
@@ -3482,6 +3460,15 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
     [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:doneBarButton,delBarButton,nil]];
     
+}
+
+#pragma mark - Flyer Image View delegate
+
+/**
+ * Frame changed for layer, let the model know.
+ */
+- (void)frameChangedForLayer:(NSString *)uid frame:(CGRect)frame {
+    [flyer setImageFrame:uid :frame];
 }
 
 @end

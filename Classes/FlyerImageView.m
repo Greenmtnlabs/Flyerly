@@ -217,22 +217,15 @@
     recognizer.view.center = CGPointMake(recognizer.view.center.x + translation.x,
                                          recognizer.view.center.y + translation.y);
     [recognizer setTranslation:CGPointMake(0, 0) inView:self];
-}
-
-/**
- * Get layer position
- */
-- (CGRect)layerFrame:(NSString *)uid {
-    CGRect fr = CGRectMake(0, 0, 0, 0);
     
-    UIView *view = [layers objectForKey:uid];
+    // Get the key for this view.
+    NSArray *keys = [layers allKeysForObject:recognizer.view];
     
-    // Make sure the view is valid.
-    if ( view != nil ) {
-        fr = view.frame;
+    // Let the delegate know that we changed frame.
+    for ( int i = 0; i < keys.count; i++ ) {
+        NSString *key = [keys objectAtIndex:i];
+        [self.delegate frameChangedForLayer:key frame:recognizer.view.frame];
     }
-    
-    return fr;
 }
 
 @end
