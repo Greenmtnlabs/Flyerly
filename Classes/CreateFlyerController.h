@@ -30,7 +30,7 @@
 @class FlyerlySingleton,CameraViewController,GalleryViewController,Flyer,FlyerImageView;
 @interface CreateFlyerController :ParentViewController<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, FlyerImageViewDelegate >
 {
-    int layerallow;
+   
     FlyerlySingleton *globle;
 
 	UIImageView *templateBckgrnd;
@@ -44,7 +44,6 @@
     UILabel *addMoreLayerOrSaveFlyerLabel;
     UILabel *takeOrAddPhotoLabel;
 
-	UIScrollView *fontScrollView;
 	UIScrollView *colorScrollView;
 	UIScrollView *sizeScrollView;
 	UIScrollView *borderScrollView;
@@ -159,7 +158,6 @@
 @property (nonatomic,strong)  UILabel *takeOrAddPhotoLabel;
 
 @property (nonatomic, strong) UIScrollView *templateScrollView;
-@property (nonatomic, strong) UIScrollView *fontScrollView;
 @property (nonatomic, strong) UIScrollView *colorScrollView;
 @property (nonatomic, strong) UIScrollView *sizeScrollView;
 @property (nonatomic, strong) UIScrollView *borderScrollView;
@@ -254,7 +252,6 @@
 -(void) donePhoto;
 -(void) saveMyFlyer;
 -(void)callSaveAndShare;
--(BOOL)canAddMoreLayers;
 
 
 -(NSData*)getCurrentFrameAndSaveIt;
@@ -264,9 +261,6 @@
 
 
 + (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize;
-+(UIView *)setTitleViewWithTitle:(NSString *)title rect:(CGRect)rect;
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil templateParam:(UIImage *)templateParam symbolArrayParam:(NSMutableArray *)symbolArrayParam iconArrayParam:(NSMutableArray *)iconArrayParam photoArrayParam:(NSMutableArray *)photoArrayParam textArrayParam:(NSMutableArray *)textArrayParam flyerNumberParam:(int)flyerNumberParam;
 
 
 

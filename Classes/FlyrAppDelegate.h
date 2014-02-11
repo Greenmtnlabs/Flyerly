@@ -31,7 +31,6 @@ extern NSString *FacebookDidLoginNotification;
 @class AccountController;
 
 @interface FlyrAppDelegate : UIResponder <UIApplicationDelegate> {
-	UIScrollView *fontScrollView;
 	UIScrollView *colorScrollView;
 	UIScrollView *sizeScrollView;
 	SaveFlyerController *svController;
@@ -44,7 +43,6 @@ extern NSString *FacebookDidLoginNotification;
 
 @property (nonatomic, strong) IBOutlet UIWindow *window;
 @property (nonatomic, strong) IBOutlet UINavigationController *navigationController;
-@property (nonatomic, strong) UIScrollView *fontScrollView;
 @property (nonatomic, strong) UIScrollView *colorScrollView;
 @property (nonatomic, strong) UIScrollView *sizeScrollView;
 @property (nonatomic, strong) SaveFlyerController *svController;

@@ -137,6 +137,10 @@
         //Saving User Info for again login
         [[NSUserDefaults standardUserDefaults]  setObject:userName forKey:@"User"];
         [[NSUserDefaults standardUserDefaults]  setObject:pwd forKey:@"Password"];
+        
+        //Update Folder Structure For 3.0 Version
+        PFUser *user = [PFUser currentUser];
+        [FlyerUser updateFolderStructure:[user objectForKey:@"username"]];
 
         launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
         [self.navigationController pushViewController:launchController animated:YES];
@@ -249,10 +253,10 @@
 
                 // Temp on for Testing here
                 // For Parse New User Merge to old Twitter User
-                NSString *twitterUsername = [PFTwitterUtils twitter].screenName;
+                //NSString *twitterUsername = [PFTwitterUtils twitter].screenName;
                 
-                FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-                [appDelegate twitterChangeforNewVersion:twitterUsername];
+                //FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+                //[appDelegate twitterChangeforNewVersion:twitterUsername];
 
                 
                 // Login success Move to Flyerly

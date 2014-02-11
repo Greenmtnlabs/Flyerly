@@ -9,7 +9,7 @@
 
 @implementation CreateFlyerController
 @synthesize flyimgView,imgView,imgPicker,imageNameNew,finalFlyer;
-@synthesize fontScrollView,colorScrollView,templateScrollView,sizeScrollView,borderScrollView,fontBorderScrollView,symbolScrollView,iconScrollView;
+@synthesize colorScrollView,templateScrollView,sizeScrollView,borderScrollView,fontBorderScrollView,symbolScrollView,iconScrollView;
 @synthesize selectedFont,selectedColor;
 @synthesize selectedTemplate,selectedSymbol,selectedIcon;
 @synthesize fontTabButton,colorTabButton,sizeTabButton,fontEditButton,selectedText,selectedSize,fontBorderTabButton,addMoreIconTabButton,addMorePhotoTabButton,addMoreSymbolTabButton;
@@ -25,33 +25,13 @@
 @synthesize libText,libBackground,libPhoto,libEmpty,backtemplates,cameraTakePhoto,cameraRoll,flyerBorder;
 @synthesize textLabelLayersArray,symbolLayersArray,iconLayersArray,photoLayersArray,currentLayer,layersDic;
 
-int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track selected Tab on Add More Layer screen
-int symbolLayerCount = 0; // Symbol layer count to set tag value
-int iconLayerCount = 0; // Icon layer count to set tag value
-int textLayerCount = 0; // Text layer count to set tag value
-int photoLayerCount = 0; // Photo layer count to set tag value
+int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track selected Tab on Add More
 
-/*
- * This init method is called when editing a flyer is pressed
- */
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil templateParam:(UIImage *)templateParam symbolArrayParam:(NSMutableArray *)symbolArrayParam iconArrayParam:(NSMutableArray *)iconArrayParam photoArrayParam:(NSMutableArray *)photoArrayParam textArrayParam:(NSMutableArray *)textArrayParam flyerNumberParam:(int)flyerNumberParam{
-    
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        /*
-        // Custom initialization
-        selectedTemplate = templateParam;
-        symbolLayersArray = symbolArrayParam;
-        iconLayersArray = iconArrayParam;
-        photoLayersArray = photoArrayParam;
-        textLabelLayersArray = textArrayParam;
-        flyerNumber = flyerNumberParam;*/
-    }
-    return self;
-}
+
 
 #pragma mark  View Appear Methods
+
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
     
@@ -63,7 +43,7 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 
 -(void)viewDidAppear:(BOOL)animated{
     
-    layerallow = 0;
+
     
     // Setup buttons and labels
     [moreLayersButton setBackgroundImage:[UIImage imageNamed:@"07_addmore"] forState:UIControlStateNormal];
@@ -278,21 +258,6 @@ int photoLayerCount = 0; // Photo layer count to set tag value
 	imgPickerFlag =1;
     selectedAddMoreLayerTab = -1;
     
-    
-    //On Removing Background Screen so some
-    //Code paste here
-    deleteMode = NO;
-    undoCount = 0;
-    layerallow = 0;
-    
-    ((CustomLabel *)[[self textLabelLayersArray] lastObject]).alpha = 1;
-	textBackgrnd.alpha  =ALPHA0;
-    
-    photoTouchFlag = NO;
-	lableTouchFlag = NO;
-    symbolTouchFlag = NO;
-    iconTouchFlag = NO;
-    [self hideAddMoreButton];
     
     // Call Main View
 	[self callAddMoreLayers];
@@ -1305,52 +1270,10 @@ int photoLayerCount = 0; // Photo layer count to set tag value
         
     }
     
-/*
-    // If not in delete mode then add a new frame for symbol
-    if(!deleteMode){
-        [self plusButtonClick];
-     }else{
-       // deleteMode = NO;
-        doStopWobble = NO;
-        
-        if(rightUndoBarButton){
-            [rightUndoBarButton setEnabled:YES];
-        }
-    }
-    */
-    // else update the selected index of symbol
-    /*
-    if([[self symbolLayersArray] count] > 0){
-        
-        // reset flags
-        symbolTouchFlag = YES;
-        iconTouchFlag = NO;
-        photoTouchFlag = NO;
-        
-        // set borders on selected symbol
-        FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
-        appDele.changesFlag = YES;
-
-        selectedSymbol  =  symbolArray[(view.tag - 1)];
-        CATransition *animation = [CATransition animation];
-        [animation setType:kCATransitionPush];
-        [animation setSubtype:kCATransitionMoveIn];
-        [animation setDuration:0.4f];
-        [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
-
-        // Make copy of layers to undo it later
-        [self makeCopyOfLayers];
-        
-        UIImageView *lastSymbolLayer = [self symbolLayersArray][arrangeLayerIndex];
-        [[lastSymbolLayer  layer] addAnimation:animation forKey:@"SwitchToView1"];
-        [lastSymbolLayer setImage:selectedSymbol];
-        
-    }
-    */
-    
-
-
 }
+
+
+
 
 /*
  * Called when select icon
@@ -1463,7 +1386,7 @@ int arrangeLayerIndex;
         nbuGallary.desiredImageSize = CGSizeMake( [[dict valueForKey:@"width"] floatValue],
                                                 [[dict valueForKey:@"height"] floatValue]);
     } else {
-        nbuGallary.desiredImageSize = CGSizeMake( 620,  620 );
+        nbuGallary.desiredImageSize = CGSizeMake( 300,  300 );
     }
 
     [nbuGallary setOnImageTaken:^(UIImage *img) {
@@ -1510,7 +1433,7 @@ int arrangeLayerIndex;
         nbuCamera.desiredImageSize = CGSizeMake( [[dict valueForKey:@"width"] floatValue],
                                                  [[dict valueForKey:@"height"] floatValue]);
     } else {
-        nbuCamera.desiredImageSize = CGSizeMake( 620,  620 );
+        nbuCamera.desiredImageSize = CGSizeMake( 300,  300 );
     }
     
     // Callback once image is selected.
@@ -1592,24 +1515,11 @@ int arrangeLayerIndex;
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-+(UIView *)setTitleViewWithTitle:(NSString *)title rect:(CGRect)rect{
-    UILabel *label = [[UILabel alloc] initWithFrame:rect];
-    label.backgroundColor = [UIColor clearColor];
-    [label setFont:[UIFont fontWithName:@"Symbol" size:18]];
-    label.textAlignment = NSTextAlignmentCenter;
-    label.textColor = [UIColor whiteColor];
-    label.text = NSLocalizedString([title uppercaseString], @"");
-    [label sizeToFit];
-
-    UIView *titleView = [[UIView alloc] initWithFrame:CGRectZero];
-    [titleView addSubview:label];    
-    
-    return titleView;
-}
 
 
 /*
  * When any layer is selected while editing flyer
+ * its Also Call editLayer Method
  */
 -(void)selectLayer:(id)sender {
     
@@ -1618,10 +1528,13 @@ int arrangeLayerIndex;
     NSString *tag = [NSString stringWithFormat:@"%d",sView.tag];
     NSLog(@"%@",tag);
     
-    
-    //its Also Call editLayer Method
 }
 
+
+/*
+ * When any Layer Tap for Edit its Call 
+ * and Here we manage all Layers
+ */
 -(void)editLayer:(LayerTileButton *)editButton{
     
     
@@ -1629,16 +1542,17 @@ int arrangeLayerIndex;
     currentLayer =  editButton.uid;
     editButtonGlobal.uid = currentLayer;
     
+    [self.flyimgView layerIsBeingEdited:currentLayer];
+    
 
     //when tap on Text Box
     NSString *btnText = [flyer getText:currentLayer];
 
     if (![btnText isEqualToString:@""] && btnText != nil) {
         
+        [self callWrite];
         
-        lastTextView = [[UITextView  alloc] init];
-        lastTextView.text = btnText;
-        //Call Style
+        //For Immediate Showing Delete button
         [self callStyle];
     }
     
@@ -1678,114 +1592,6 @@ int arrangeLayerIndex;
 }
 
 
--(void) chooseEdit{
-    //[self resetLayerScrollView];
-    
-    // Remove border from layer thumbnail
-    for(UIView *subView in [layerScrollView subviews]){
-        if([subView isKindOfClass:[UIButton class]]){
-            CALayer * lastLayer = [subView layer];
-            [lastLayer setMasksToBounds:YES];
-            [lastLayer setCornerRadius:0];
-            [lastLayer setBorderWidth:0];
-            [lastLayer setBorderColor:[[UIColor clearColor] CGColor]];
-            [lastLayer setBackgroundColor:[[UIColor clearColor] CGColor]];
-        }
-    }
-
-    UIView *sView = editButtonGlobal.superview;
-    
-    FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
-	appDele.changesFlag = YES;
-    
-    // Add border to selected layer thumbnail
-    CALayer * l = [sView layer];
-    [l setMasksToBounds:YES];
-    [l setCornerRadius:10];
-    [l setBorderWidth:3.0];
-    UIColor * c = [globle colorWithHexString:@"0197dd"];
-    [l setBorderColor:c.CGColor];
-     NSString *tag = [NSString stringWithFormat:@"%d",sView.tag];
-    NSLog(@"%@",tag);
-    
-    
-    if([tag hasPrefix:@"111"]){
-        symbolTouchFlag = NO;
-        iconTouchFlag = NO;
-        photoTouchFlag = NO;
-        lableTouchFlag = YES;
-        
-        arrangeLayerIndex = [self getIndexFromTag:tag];
-        
-        [self removeBordersFromAllLayers];
-        UILabel *tempLabel = textLabelLayersArray[arrangeLayerIndex];
-        CALayer * l = [tempLabel layer];
-        [l setMasksToBounds:YES];
-        [l setCornerRadius:10];
-        [l setBorderWidth:1.0];
-        [l setBorderColor:[[UIColor grayColor] CGColor]];
-        [self.imgView bringSubviewToFront:[self textLabelLayersArray][arrangeLayerIndex]];
-        
-        
-        
-    }else if([tag hasPrefix:@"222"]){
-        symbolTouchFlag = NO;
-        iconTouchFlag = NO;
-        photoTouchFlag = YES;
-        lableTouchFlag = NO;
-        
-        arrangeLayerIndex = [self getIndexFromTag:tag];
-        
-        [self removeBordersFromAllLayers];
-        UIImageView *tempImgView = photoLayersArray[arrangeLayerIndex];
-        CALayer * l = [tempImgView layer];
-        [l setMasksToBounds:YES];
-        [l setCornerRadius:10];
-        [l setBorderWidth:1.0];
-        [l setBorderColor:[[UIColor grayColor] CGColor]];
-        [self.imgView bringSubviewToFront:[self photoLayersArray][arrangeLayerIndex]];
-        
-    } else if([tag hasPrefix:@"333"]){
-        symbolTouchFlag = YES;
-        iconTouchFlag = NO;
-        photoTouchFlag = NO;
-        lableTouchFlag = NO;
-        
-        arrangeLayerIndex = [self getIndexFromTag:tag];
-        
-        [self removeBordersFromAllLayers];
-        UIImageView *tempImgView = symbolLayersArray[arrangeLayerIndex];
-        CALayer * l = [tempImgView layer];
-        [l setMasksToBounds:YES];
-        [l setCornerRadius:10];
-        [l setBorderWidth:1.0];
-        [l setBorderColor:[[UIColor grayColor] CGColor]];
-        [self.imgView bringSubviewToFront:[self symbolLayersArray][arrangeLayerIndex]];
-        
-    } else if([tag hasPrefix:@"444"]){
-        symbolTouchFlag = NO;
-        iconTouchFlag = YES;
-        photoTouchFlag = NO;
-        lableTouchFlag = NO;
-        
-        arrangeLayerIndex = [self getIndexFromTag:tag];
-        
-        [self removeBordersFromAllLayers];
-        UIImageView *tempImgView = iconLayersArray[arrangeLayerIndex];
-        CALayer * l = [tempImgView layer];
-        [l setMasksToBounds:YES];
-        [l setCornerRadius:10];
-        [l setBorderWidth:1.0];
-        [l setBorderColor:[[UIColor grayColor] CGColor]];
-        [self.imgView bringSubviewToFront:[self iconLayersArray][arrangeLayerIndex]];
-    }
-    
-    deleteMode = YES;
-    undoCount = undoCount + 1;
-    [rightUndoBarButton setEnabled:YES];
-    [self makeCopyOfLayers];
-    
-}
 
 -(void)loadHelpController{
 
@@ -1794,28 +1600,14 @@ int arrangeLayerIndex;
     [self callAddMoreLayers];
 }
 
--(void)callKeyboard{
-}
 
 
--(void)hideAddMoreButton{
-    [self.moreLayersButton setHidden:YES];
-    [self.moreLayersLabel setHidden:YES];
-}
--(void)showAddMoreButton{
-    [self.moreLayersButton setHidden:NO];
-    [self.moreLayersLabel setHidden:NO];
-}
 
-
--(void)cancelLayer{
-    
-    discardAlert = [[UIAlertView alloc]initWithTitle:@"Warning" message:@"Do you want to go back? You will lose unsaved changes" delegate:self cancelButtonTitle:@"NO" otherButtonTitles:@"YES" ,nil];
-    [discardAlert show];
-}
-
+/*
+ * Here we Create Text Box for Getting Text And
+ * and Set Menu for Text Layer
+ */
 -(void)callWrite{
-
 
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
     label.backgroundColor = [UIColor clearColor];
@@ -1843,8 +1635,6 @@ int arrangeLayerIndex;
     
     //Add Context Library
     [self addBottomTabs:libText];
-
-    [self hideAddMoreButton];
     
     // Get current layer properties.
     NSDictionary *detail = [flyer getLayerFromMaster:currentLayer];
@@ -1871,9 +1661,9 @@ int arrangeLayerIndex;
         
     }
     
-	lastTextView.textAlignment = UITextAlignmentCenter;
+    lastTextView.textAlignment = UITextAlignmentCenter;
 	lastTextView.backgroundColor = [UIColor colorWithWhite:1 alpha:0.3f];
-    
+
 	CALayer * l = [lastTextView layer];
 	[l setMasksToBounds:YES];
 	[l setCornerRadius:10];
@@ -1888,39 +1678,31 @@ int arrangeLayerIndex;
 	[lastTextView becomeFirstResponder];
 }
 
+
+/*
+ * Here we Set ScrollView and Bottom Tabs
+ * after getting Text
+ */
 -(void)callStyle
 {
 
-    if(selectedAddMoreLayerTab == -1){
-        UIButton *photoButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
-        [photoButton addTarget:self action:@selector(choosePhoto) forControlEvents:UIControlEventTouchUpInside];
-        [photoButton setBackgroundImage:[UIImage imageNamed:@"photo_button"] forState:UIControlStateNormal];
-        photoButton.showsTouchWhenHighlighted = YES;
-        UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:photoButton];
-        
-        [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
-    } else {
-        UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-        [doneButton addTarget:self action:@selector(callAddMoreLayers) forControlEvents:UIControlEventTouchUpInside];
-        [doneButton addTarget:self action:@selector(logLayerAddedEvent) forControlEvents:UIControlEventTouchUpInside];
-        [doneButton addTarget:self action:@selector(logTextAddedEvent) forControlEvents:UIControlEventTouchUpInside];
-        [doneButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
+    // Done Bar Button
+    UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+    [doneButton addTarget:self action:@selector(callAddMoreLayers) forControlEvents:UIControlEventTouchUpInside];
+    [doneButton addTarget:self action:@selector(logLayerAddedEvent) forControlEvents:UIControlEventTouchUpInside];
+    [doneButton addTarget:self action:@selector(logTextAddedEvent) forControlEvents:UIControlEventTouchUpInside];
+    [doneButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
          doneButton.showsTouchWhenHighlighted = YES;
-        UIBarButtonItem *DoneBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
+    UIBarButtonItem *DoneBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
         
-        //Delete Button
-        UIButton *delButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 4, 45, 42)];
-        [delButton addTarget:self action:@selector(callDeleteLayer) forControlEvents:UIControlEventTouchUpInside];
-        [delButton setBackgroundImage:[UIImage imageNamed:@"delete_button"] forState:UIControlStateNormal];
-        delButton.showsTouchWhenHighlighted = YES;
-        UIBarButtonItem *delBarButton = [[UIBarButtonItem alloc] initWithCustomView:delButton];
+    //Delete Button
+    UIButton *delButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 4, 45, 42)];
+    [delButton addTarget:self action:@selector(callDeleteLayer) forControlEvents:UIControlEventTouchUpInside];
+    [delButton setBackgroundImage:[UIImage imageNamed:@"delete_button"] forState:UIControlStateNormal];
+    delButton.showsTouchWhenHighlighted = YES;
+    UIBarButtonItem *delBarButton = [[UIBarButtonItem alloc] initWithCustomView:delButton];
         
-        [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:DoneBarButton,delBarButton,nil]];
-        
-    }
-   
-    [self hideAddMoreButton];
-
+    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:DoneBarButton,delBarButton,nil]];
     
     //Checking Empty String
     if ([lastTextView.text isEqualToString:@""] ) {
@@ -1928,22 +1710,11 @@ int arrangeLayerIndex;
         [lastTextView resignFirstResponder];
         [lastTextView removeFromSuperview];
         lastTextView = nil;
-        
+
         [self callAddMoreLayers];
         return;
     }
     
-    if ([currentLayer isEqualToString:@""]) {
-        
-        //Here we write in Master Dictionary
-        currentLayer = [flyer addText];
-        editButtonGlobal.uid = currentLayer;
-        
-    } else {
-        
-        currentLayer = editButtonGlobal.uid;
-        
-    }
     
     //Set Text of Layer
     [flyer setFlyerText:currentLayer text:lastTextView.text ];
@@ -2156,6 +1927,9 @@ int arrangeLayerIndex;
     
     //Empty Layer Delete
     if (currentLayer != nil && ![currentLayer isEqualToString:@""]) {
+        
+        [self.flyimgView layerStoppedEditing:currentLayer];
+        
         NSString *flyerImg = [flyer getImageName:currentLayer];
         NSString *flyertext = [flyer getText:currentLayer];
         
@@ -2173,20 +1947,6 @@ int arrangeLayerIndex;
     [flyer saveFlyer:snapshotImage];
     [self addAllLayersIntoScrollView ];
     currentLayer = @"";
-    [self hideAddMoreButton];
-
-    templateBckgrnd.alpha = ALPHA0;
-    
-    
-    ((CustomLabel *)[[self textLabelLayersArray] lastObject]).alpha = 1;
-    photoImgView.alpha=0;
-   symbolImgView.alpha = 0;
-    iconImgView.alpha = 0;
-    
-	textBackgrnd.alpha = ALPHA0;
-
-    selectedAddMoreLayerTab = ADD_MORE_TEXTTAB;
-    discardedLayer = NO;
 
     [UIView commitAnimations];    
 }
@@ -2224,21 +1984,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 -(void)callSaveAndShare
 {
 
-    [Flurry logEvent:@"Saved Flyer"];
-
-    [self removeBordersFromAllLayers];
-
-	lableTouchFlag = NO;
-	photoTouchFlag = NO;
-    symbolTouchFlag= NO;
-    iconTouchFlag = NO;
-	photoImgView.userInteractionEnabled = NO;
-	
-    [self hideAddMoreButton];
-	textBackgrnd.alpha = ALPHA0;
     
-
-    ((CustomLabel *)[[self textLabelLayersArray] lastObject]).alpha = 1;
 
     FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
      
@@ -2420,8 +2166,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     UIButton *selectedButton = (UIButton*)sender;
     
     //Set here Un-Selected State of All Buttons
-    [cameraTabButton setSelected:NO];
-    [photoTabButton setSelected:NO];
     [widthTabButton setSelected:NO];
     [heightTabButton setSelected:NO];
     
@@ -2437,7 +2181,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         [UIView setAnimationDuration:0.4f];
         textBackgrnd.alpha = ALPHA0;
         [UIView commitAnimations];
-        [cameraTabButton setSelected:YES];
         [self openCustomCamera];
 
     }
@@ -2448,7 +2191,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0.4f];
         textBackgrnd.alpha = ALPHA0;
-        [photoTabButton setSelected:YES];
         [UIView commitAnimations];
     }
     else if( selectedButton == widthTabButton )
@@ -2479,7 +2221,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 
 -(IBAction) setAddMoreLayerTabAction:(id) sender {
-    layerallow = 0;
     
 	UIButton *selectedButton = (UIButton*)sender;
     [self SetMenu];
@@ -2534,8 +2275,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 		imgPickerFlag =2;
         [addMorePhotoTabButton setSelected:YES];
         
-
-        //[self plusButtonClick];
 
 	}
 	else if(selectedButton == addMoreSymbolTabButton)
@@ -2868,153 +2607,11 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     }
 }
 
--(BOOL)canAddMoreLayers{
 
-    if([self getLayerCounts] < 10){
-        return YES;
-    } else {
-        return NO;
-    }
-}
 
--(int)getLayerCounts{
- 
-    int layerCounts = 0;
-    
-    if(textLabelLayersArray){
-        layerCounts = layerCounts + [textLabelLayersArray count];
-    }
-    if(photoLayersArray){
-        layerCounts = layerCounts + [photoLayersArray count];
-    }
-    if(symbolLayersArray){
-        layerCounts = layerCounts + [symbolLayersArray count];
-    }
-    if(iconLayersArray){
-        layerCounts = layerCounts + [iconLayersArray count];
-    }
-    
-    return layerCounts;
-}
 
--(void)plusButtonClick{
-    
-    if([self canAddMoreLayers]){
-        if(selectedAddMoreLayerTab == ADD_MORE_TEXTTAB){
-            
-            // set delete mode to NO when clicked on text tab
-            currentLayer = [flyer addText];
-            editButtonGlobal.uid = currentLayer;
-            deleteMode = NO;
-            [self callWrite];
-            
-        } else if(selectedAddMoreLayerTab == ADD_MORE_SYMBOLTAB){
 
-            CALayer * lastLayer = [[[self symbolLayersArray] lastObject] layer];
-            [lastLayer setMasksToBounds:YES];
-            [lastLayer setCornerRadius:0];
-            [lastLayer setBorderWidth:0];
-            [lastLayer setBorderColor:[[UIColor clearColor] CGColor]];
-            
-            UIImageView *newSymbolImgView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 90, 70)];
-            newSymbolImgView.tag = symbolLayerCount++;
-            arrangeLayerIndex = [[self symbolLayersArray] count];
-
-            CALayer * l = [newSymbolImgView layer];
-            [l setMasksToBounds:YES];
-            [l setCornerRadius:10];
-            [l setBorderWidth:1.0];
-            [l setBorderColor:[[UIColor grayColor] CGColor]];
-            [self.imgView addSubview:newSymbolImgView];
-            
-            [[self symbolLayersArray] addObject:newSymbolImgView];
-            
-            
-            
-        } else if(selectedAddMoreLayerTab == ADD_MORE_ICONTAB){
-            
-            
-            
-            CALayer * lastLayer = [[[self iconLayersArray] lastObject] layer];
-            [lastLayer setMasksToBounds:YES];
-            [lastLayer setCornerRadius:0];
-            [lastLayer setBorderWidth:0];
-            [lastLayer setBorderColor:[[UIColor clearColor] CGColor]];
-            
-            UIImageView *newIconImgView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 90, 70)];
-            newIconImgView.tag = iconLayerCount++;
-            arrangeLayerIndex = [[self iconLayersArray] count];
-
-            CALayer * l = [newIconImgView layer];
-            [l setMasksToBounds:YES];
-            [l setCornerRadius:10];
-            [l setBorderWidth:1.0];
-            [l setBorderColor:[[UIColor grayColor] CGColor]];
-            [self.imgView addSubview:newIconImgView];
-            
-            [[self iconLayersArray] addObject:newIconImgView];
-            
-        } else if(selectedAddMoreLayerTab == ADD_MORE_PHOTOTAB){
-            
-
-            
-            [[self photoLayersArray] addObject:newPhotoImgView];
-            
-            // set delete mode to NO when clicked on photo tab
-            deleteMode = NO;
-
-            [self choosePhoto];
-        }
-    
-    } else {
-        layerallow = 1;
-        warningAlert = [[UIAlertView alloc]initWithTitle:@"You can add a total of 10 layers." message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Edit Layers" ,nil];
-		[warningAlert show];
-    }
-}
-
--(void)removeBordersFromAllLayers{
-
-    for(int text=0; text<[textLabelLayersArray count]; text++){
-        
-        CALayer * lastLayer = [textLabelLayersArray[text] layer];
-        [lastLayer setMasksToBounds:YES];
-        [lastLayer setCornerRadius:0];
-        [lastLayer setBorderWidth:0];
-        [lastLayer setBorderColor:[[UIColor clearColor] CGColor]];
-        [lastLayer setBackgroundColor:[[UIColor clearColor] CGColor]];
-    }
-    
-    for(int photo=0; photo<[photoLayersArray count]; photo++){
-        
-        CALayer * lastLayer = [photoLayersArray[photo] layer];
-        [lastLayer setMasksToBounds:YES];
-        [lastLayer setCornerRadius:0];
-        [lastLayer setBorderWidth:0];
-        [lastLayer setBorderColor:[[UIColor clearColor] CGColor]];
-    }
-
-    for(int symbol=0; symbol<[symbolLayersArray count]; symbol++){
-        
-        CALayer * lastLayer = [symbolLayersArray[symbol] layer];
-        [lastLayer setMasksToBounds:YES];
-        [lastLayer setCornerRadius:0];
-        [lastLayer setBorderWidth:0];
-        [lastLayer setBorderColor:[[UIColor clearColor] CGColor]];
-    }
-    
-    for(int icon=0; icon<[iconLayersArray count]; icon++){
-        
-        CALayer * lastLayer = [iconLayersArray[icon] layer];
-        [lastLayer setMasksToBounds:YES];
-        [lastLayer setCornerRadius:0];
-        [lastLayer setBorderWidth:0];
-        [lastLayer setBorderColor:[[UIColor clearColor] CGColor]];
-    }
-    
-}
-
-#pragma mark Save Flyer image and write to Documents/Flyr folder 
+#pragma mark Save Flyer image and write to Documents/Flyr folder
 
 -(NSData*)getCurrentFrameAndSaveIt
 {
@@ -3096,8 +2693,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         [[NSFileManager defaultManager] createDirectoryAtPath:folderPath withIntermediateDirectories:YES attributes:nil error:&error];
 	}
     
-    // Save flyer in pieces to make it editable later
-    [self saveFlyerInPieces:finalImgDetailWritePath flyerFolder:folderPath flyerNumberParam:largestImgCount];
+
 	
     // Save flyer details
     [self saveFlyerDetails:finalImgDetailWritePath];
@@ -3126,149 +2722,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	}
 }
 
-/*
- *Save flyer in pieces to make it editable later
- */
--(void)saveFlyerInPieces:(NSString *)filePath flyerFolder:(NSString *)flyerFolder flyerNumberParam:(int)flyerNumberParam{
-    
-    if(flyerNumberParam == -1)
-        flyerNumberParam = 0;
-    
-    NSString *piecesFile = [filePath stringByReplacingOccurrencesOfString:@".txt" withString:@".pieces"];
-    NSMutableDictionary *detailDictionary = [[NSMutableDictionary alloc] init];
-
-    // Create Template direcrory if not created
-    NSString *templateFolderPath = [NSString stringWithFormat:@"%@/Template/", flyerFolder];
-    NSString *templateIndexFolderPath = [NSString stringWithFormat:@"%@/%d", templateFolderPath, flyerNumberParam];
-    [self createDirectoryAtPath:templateFolderPath];
-    [self createDirectoryAtPath:templateIndexFolderPath];
-        
-    // Create Photo direcrory if not created
-    NSString *photoFolderPath = [NSString stringWithFormat:@"%@/Photo/", flyerFolder];
-    NSString *photoIndexFolderPath = [NSString stringWithFormat:@"%@/%d", photoFolderPath, flyerNumberParam];
-    [self createDirectoryAtPath:photoFolderPath];
-    [self createDirectoryAtPath:photoIndexFolderPath];
-
-    // Create Symbol direcrory if not created
-    NSString *symbolFolderPath = [NSString stringWithFormat:@"%@/Symbol/", flyerFolder];
-    NSString *symbolIndexFolderPath = [NSString stringWithFormat:@"%@/%d", symbolFolderPath, flyerNumberParam];
-    [self createDirectoryAtPath:symbolFolderPath];
-    [self createDirectoryAtPath:symbolIndexFolderPath];
-    
-    // Create Icon direcrory if not created
-    NSString *iconFolderPath = [NSString stringWithFormat:@"%@/Icon/", flyerFolder];
-    NSString *iconIndexFolderPath = [NSString stringWithFormat:@"%@/%d", iconFolderPath, flyerNumberParam];
-    [self createDirectoryAtPath:iconFolderPath];
-    [self createDirectoryAtPath:iconIndexFolderPath];
-    
-
-    // Store selected template
-    NSMutableDictionary *templateDetailDictionary = [[NSMutableDictionary alloc] init];
-    
-    NSString *finalTemplatePath = [templateIndexFolderPath stringByAppendingString:[NSString stringWithFormat:@"/template.jpg"]];
-    NSData *imgData = UIImagePNGRepresentation(selectedTemplate);
-    [[NSFileManager defaultManager] createFileAtPath:finalTemplatePath contents:imgData attributes:nil];
-    
-    templateDetailDictionary[@"image"] = finalTemplatePath;
-    detailDictionary[[NSString stringWithFormat:@"Template"]] = templateDetailDictionary;
-
-    int index = 0;
-    // Get and Save label information
-    for(CustomLabel *labelToStore in [self textLabelLayersArray]){
-        
-        CGFloat red = 0.0, green = 0.0, blue = 0.0, alpha = 0.0,wht = 0.0;
-
-        [labelToStore.textColor getRed:&red green:&green blue:&blue alpha:&alpha];
-        if (red == 0 && green == 0 && blue ==0) {
-            [labelToStore.textColor getWhite:&wht alpha:&alpha];
-        }
-
-        CGFloat borderRed = 0.0, borderGreen = 0.0, borderBlue = 0.0, borderAlpha = 0.0,bwht = 0.0;
-        UIColor* borderColor;
-        borderColor = labelToStore.borderColor;
-        [borderColor getRed:&borderRed green:&borderGreen blue:&borderBlue alpha:&borderAlpha];
-        
-        if (borderRed == 0 && borderGreen == 0 && borderBlue ==0) {
-            [labelToStore.borderColor getWhite:&bwht alpha:&borderAlpha];
-        }
-        
-        NSMutableDictionary *textDetailDictionary = [[NSMutableDictionary alloc] init];
-        textDetailDictionary[@"text"] = labelToStore.text;
-        textDetailDictionary[@"fontname"] = labelToStore.font.fontName;
-        textDetailDictionary[@"fontsize"] = [NSString stringWithFormat:@"%f", labelToStore.font.pointSize];
-        textDetailDictionary[@"textcolor"] = [NSString stringWithFormat:@"%f, %f, %f", red, green, blue];
-        textDetailDictionary[@"textWhitecolor"] = [NSString stringWithFormat:@"%f, %f", wht, alpha];
-        textDetailDictionary[@"textborderWhite"] = [NSString stringWithFormat:@"%f, %f", bwht, borderAlpha];
-        textDetailDictionary[@"textbordercolor"] = [NSString stringWithFormat:@"%f, %f, %f", borderRed, borderGreen, borderBlue];
-        textDetailDictionary[@"x"] = [NSString stringWithFormat:@"%f", labelToStore.frame.origin.x];
-        textDetailDictionary[@"y"] = [NSString stringWithFormat:@"%f", labelToStore.frame.origin.y];
-        textDetailDictionary[@"width"] = [NSString stringWithFormat:@"%f", labelToStore.frame.size.width];
-        textDetailDictionary[@"height"] = [NSString stringWithFormat:@"%f", labelToStore.frame.size.height];
-        
-        detailDictionary[[NSString stringWithFormat:@"Text-%d", index++]] = textDetailDictionary;
-    }
-
-    index = 0;
-    // Get and Save photo information
-    for(UIImageView *photoToStore in [self photoLayersArray]){
-        
-        NSMutableDictionary *photoDetailDictionary = [[NSMutableDictionary alloc] init];
-        
-		NSString *finalPhotoPath = [photoIndexFolderPath stringByAppendingString:[NSString stringWithFormat:@"/%d.jpg", index]];
-        NSData *imgData = UIImageJPEGRepresentation(photoToStore.image, 100);
-        [[NSFileManager defaultManager] createFileAtPath:finalPhotoPath contents:imgData attributes:nil];
-
-        photoDetailDictionary[@"image"] = finalPhotoPath;
-        photoDetailDictionary[@"x"] = [NSString stringWithFormat:@"%f", photoToStore.frame.origin.x];
-        photoDetailDictionary[@"y"] = [NSString stringWithFormat:@"%f", photoToStore.frame.origin.y];
-        photoDetailDictionary[@"width"] = [NSString stringWithFormat:@"%f", photoToStore.frame.size.width];
-        photoDetailDictionary[@"height"] = [NSString stringWithFormat:@"%f", photoToStore.frame.size.height];
-        
-        detailDictionary[[NSString stringWithFormat:@"Photo-%d", index++]] = photoDetailDictionary;
-    }
-    
-    index = 0;
-    // Get and Save symbol information
-    for(UIImageView *symbolToStore in [self symbolLayersArray]){
-        
-        NSMutableDictionary *symbolDetailDictionary = [[NSMutableDictionary alloc] init];
-        
-		NSString *finalSymbolPath = [symbolIndexFolderPath stringByAppendingString:[NSString stringWithFormat:@"/%d.jpg", index]];
-        NSData *imgData = UIImagePNGRepresentation(symbolToStore.image);
-        [[NSFileManager defaultManager] createFileAtPath:finalSymbolPath contents:imgData attributes:nil];
-        
-        symbolDetailDictionary[@"image"] = finalSymbolPath;
-        symbolDetailDictionary[@"x"] = [NSString stringWithFormat:@"%f", symbolToStore.frame.origin.x];
-        symbolDetailDictionary[@"y"] = [NSString stringWithFormat:@"%f", symbolToStore.frame.origin.y];
-        symbolDetailDictionary[@"width"] = [NSString stringWithFormat:@"%f", symbolToStore.frame.size.width];
-        symbolDetailDictionary[@"height"] = [NSString stringWithFormat:@"%f", symbolToStore.frame.size.height];
-        
-        detailDictionary[[NSString stringWithFormat:@"Symbol-%d", index++]] = symbolDetailDictionary;
-    }
-    
-    index = 0;
-    // Get and Save icon information
-    for(UIImageView *iconToStore in [self iconLayersArray]){
-        
-        NSMutableDictionary *iconDetailDictionary = [[NSMutableDictionary alloc] init];
-
-		NSString *finalIconPath = [iconIndexFolderPath stringByAppendingString:[NSString stringWithFormat:@"/%d.jpg", index]];
-        NSData *imgData = UIImagePNGRepresentation(iconToStore.image);
-        [[NSFileManager defaultManager] createFileAtPath:finalIconPath contents:imgData attributes:nil];
-        
-        iconDetailDictionary[@"image"] = finalIconPath;
-        iconDetailDictionary[@"x"] = [NSString stringWithFormat:@"%f", iconToStore.frame.origin.x];
-        iconDetailDictionary[@"y"] = [NSString stringWithFormat:@"%f", iconToStore.frame.origin.y];
-        iconDetailDictionary[@"width"] = [NSString stringWithFormat:@"%f", iconToStore.frame.size.width];
-        iconDetailDictionary[@"height"] = [NSString stringWithFormat:@"%f", iconToStore.frame.size.height];
-        
-        detailDictionary[[NSString stringWithFormat:@"Icon-%d", index++]] = iconDetailDictionary;
-    }
-
-    //NSLog(@"DetailDictionary: %@", detailDictionary);
-    //NSLog(@"Folder: %@", piecesFile);
-    [detailDictionary writeToFile:piecesFile atomically:YES];
-}
 
 /*
  *Save flyer details
@@ -3401,7 +2854,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
  * add All Layers to ScrollView for Edit and Delete Layers
  */
 -(void)addAllLayersIntoScrollView {
-    layerallow = 0 ;
         
     //Remove Subviews of ScrollView
     [self deleteSubviewsFromScrollView];
@@ -3521,11 +2973,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         
     }//Loop
     
-    if(IS_IPHONE_5){
-        [layerScrollView setContentSize:CGSizeMake(320, curYLoc + layerScrollHeight)];
-    } else {
-        [layerScrollView setContentSize:CGSizeMake(([self getLayerCounts]*(layerScrollWidth+5)), [layerScrollView bounds].size.height)];
-    }
+    [layerScrollView setContentSize:CGSizeMake(300, curYLoc + layerScrollHeight)];
     
     [self addScrollView:layerScrollView];
     
