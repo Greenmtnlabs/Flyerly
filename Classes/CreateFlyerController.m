@@ -69,11 +69,6 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 	[self.view addSubview:textBackgrnd];
 	textBackgrnd.alpha = ALPHA0;
     
-	msgLabel = [[CustomLabel alloc]initWithFrame:CGRectMake(0, 30, 320, 500)];
-	msgLabel.backgroundColor = [UIColor clearColor];
-	msgLabel.textColor = [UIColor blackColor];
-	msgLabel.textAlignment = UITextAlignmentCenter;
-	[self.imgView addSubview:msgLabel];
     
     // Create font array
 	fontArray =[[NSArray  alloc] initWithObjects:

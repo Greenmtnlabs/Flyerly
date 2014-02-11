@@ -45,8 +45,6 @@
 
 
     UIScrollView *layerScrollView;
-
-	CustomLabel *msgLabel;
 	
 	NSString *finalImgWritePath;
 	NSString *imageNameNew;
