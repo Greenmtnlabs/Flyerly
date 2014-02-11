@@ -436,6 +436,14 @@ int photoLayerCount = 0; // Photo layer count to set tag value
         increment = 8;
     }
 
+    NSMutableDictionary *textLayer;
+    NSString *textFamily;
+    
+   //Getting Last Info of Text Layer
+    if (![currentLayer isEqualToString:@""]) {
+        textLayer = [flyer getLayerFromMaster:currentLayer];
+        textFamily = [textLayer objectForKey:@"fontname"];
+    }
     
 	for (int i = 1; i <=[fontArray count] ; i++)
 	{
@@ -464,6 +472,23 @@ int photoLayerCount = 0; // Photo layer count to set tag value
             }
         }
         
+        
+        //Here we Highlight Last Font Selected
+        if (textLayer) {
+            
+            NSString *fontFamily = [fontname familyName];
+            
+            if ([textFamily isEqualToString:fontFamily]) {
+                
+                // Add border to selected layer thumbnail
+                [font.layer setBorderWidth:3.0];
+                [font.layer setCornerRadius:8];
+                UIColor * c = [globle colorWithHexString:@"0197dd"];
+                [font.layer setBorderColor:c.CGColor];
+            }
+            
+        }
+
         
         [layerScrollView addSubview:font];
         
@@ -495,6 +520,15 @@ int photoLayerCount = 0; // Photo layer count to set tag value
         increment = 8;
     }
 
+    NSMutableDictionary *textLayer;
+    NSString *textSize;
+
+    
+    //Getting Last Info of Text Layer
+    if (![currentLayer isEqualToString:@""]) {
+        textLayer = [flyer getLayerFromMaster:currentLayer];
+        textSize = [textLayer objectForKey:@"fontsize"];
+    }
     
 	for (int i = 1; i <=  [SIZE_ARRAY count] ; i++)
 	{
@@ -520,6 +554,23 @@ int photoLayerCount = 0; // Photo layer count to set tag value
                 curXLoc = 13;
                 curYLoc = curYLoc + sizeScrollHeight + 7;
             }
+        }
+
+        
+        //Here we Highlight Last Size Selected
+        if (textLayer) {
+            
+            NSString *tsize = [NSString stringWithFormat:@"%f", [sizeValue floatValue]];
+            
+            if ([textSize isEqualToString:tsize]) {
+                
+                // Add border to selected layer thumbnail
+                [size.layer setBorderWidth:3.0];
+                [size.layer setCornerRadius:8];
+                UIColor * c = [globle colorWithHexString:@"0197dd"];
+                [size.layer setBorderColor:c.CGColor];
+            }
+            
         }
 
 
@@ -551,6 +602,17 @@ int photoLayerCount = 0; // Photo layer count to set tag value
         increment = 8;
     }
     
+    NSMutableDictionary *textLayer;
+    NSString *textColor;
+    NSString *textWhiteColor;
+    
+    //Getting Last Info of Text Layer
+    if (![currentLayer isEqualToString:@""]) {
+        textLayer = [flyer getLayerFromMaster:currentLayer];
+        textColor = [textLayer objectForKey:@"textcolor"];
+        textWhiteColor = [textLayer objectForKey:@"textWhitecolor"];
+    }
+    
 	for (int i = 1; i <=  [colorArray count] ; i++)
 	{
 		UIButton *color = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -577,6 +639,36 @@ int photoLayerCount = 0; // Photo layer count to set tag value
             }
         }
 
+        
+        //Here we Highlight Last Color Selected
+        if (textLayer) {
+            
+            NSString *tcolor;
+            NSString *twhite;
+            CGFloat red = 0.0, green = 0.0, blue = 0.0, alpha = 0.0,wht = 0.0;
+            
+            UILabel *labelToStore = [[UILabel alloc]init];
+            labelToStore.textColor = colorName;
+            
+            //Getting RGB Color Code
+            [labelToStore.textColor getRed:&red green:&green blue:&blue alpha:&alpha];
+            
+            tcolor = [NSString stringWithFormat:@"%f, %f, %f", red, green, blue];
+            
+            [labelToStore.textColor getWhite:&wht alpha:&alpha];
+            twhite = [NSString stringWithFormat:@"%f, %f", wht, alpha];
+            
+            if ([textColor isEqualToString:tcolor] && [textWhiteColor isEqualToString:twhite] ) {
+                
+                // Add border to selected layer thumbnail
+                [color.layer setBorderWidth:3.0];
+                [color.layer setCornerRadius:8];
+                UIColor * c = [globle colorWithHexString:@"0197dd"];
+                [color.layer setBorderColor:c.CGColor];
+            }
+            
+        }
+        
         
         [layerScrollView addSubview:color];
 	
@@ -608,6 +700,17 @@ int photoLayerCount = 0; // Photo layer count to set tag value
         increment = 8;
     }
     
+    NSMutableDictionary *textLayer;
+    NSString *textColor;
+    NSString *textWhiteColor;
+    
+    //Getting Last Info of Text Layer
+    if (![currentLayer isEqualToString:@""]) {
+        textLayer = [flyer getLayerFromMaster:currentLayer];
+        textColor = [textLayer objectForKey:@"textbordercolor"];
+        textWhiteColor = [textLayer objectForKey:@"textborderWhite"];
+    }
+    
 	for (int i = 1; i <=  [borderArray count] ; i++)
 	{
 		UIButton *color = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -633,6 +736,35 @@ int photoLayerCount = 0; // Photo layer count to set tag value
                 curYLoc = curYLoc + borderScrollHeight + 7;
             }
         }
+        
+        //Here we Highlight Last Color Selected
+        if (textLayer) {
+            
+            NSString *tcolor;
+            NSString *twhite;
+            CGFloat red = 0.0, green = 0.0, blue = 0.0, alpha = 0.0,wht = 0.0;
+            
+            UILabel *labelToStore = [[UILabel alloc]init];
+            labelToStore.textColor = colorName;
+            
+            //Getting RGB Color Code
+            [labelToStore.textColor getRed:&red green:&green blue:&blue alpha:&alpha];
+            
+            tcolor = [NSString stringWithFormat:@"%f, %f, %f", red, green, blue];
+            
+            [labelToStore.textColor getWhite:&wht alpha:&alpha];
+            twhite = [NSString stringWithFormat:@"%f, %f", wht, alpha];
+            
+            if ([textColor isEqualToString:tcolor] && [textWhiteColor isEqualToString:twhite] ) {
+                // Add border to selected layer thumbnail
+                color.backgroundColor = [globle colorWithHexString:@"0197dd"];
+            }
+            
+        }
+
+        
+        
+        
         
 		[layerScrollView addSubview:color];
 	}// Loop
@@ -1527,119 +1659,8 @@ int arrangeLayerIndex;
             [self setAddMoreLayerTabAction:addMorePhotoTabButton];
         }
     }
-
-    // [self chooseEdit];
-    //[self editLayer:editButtonGlobal overrided:YES];
     
 }
-
-
--(void)editLayer:(LayerTileButton *)editButton overrided:(BOOL)overrided{
-    
-    // Since we are editting we should enable the deleteNode On
-    undoCount = undoCount + 1;
-    NSLog(@"Edit Layer Tag: %d", editButton.tag);
-    NSString *tag = [NSString stringWithFormat:@"%d", editButton.tag];
-
-    
-    if([tag hasPrefix:@"111"])
-    {
-        // Set index
-      //  arrangeLayerIndex = [self getIndexFromTag:tag];
-
-        
-        selectedAddMoreLayerTab = ADD_MORE_TEXTTAB;
-        
-
-        NSArray *ary = [editButton subviews];
-        CustomLabel * txt = [ary objectAtIndex:0];
-        //Call Style
-        [self callStyle];
-        
-    }
-    else if([tag hasPrefix:@"222"])
-    {
-        // Set index
-        arrangeLayerIndex = [self getIndexFromTag:tag];
-        
-        // Call Photo
-        [self choosePhoto];
-        
-        //Replace RightBar Button With
-        //Delete Bar Button
-        UIButton *delButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 4, 45, 42)];
-        [delButton addTarget:self action:@selector(callDeleteLayer) forControlEvents:UIControlEventTouchUpInside];
-        [delButton setBackgroundImage:[UIImage imageNamed:@"delete_button"] forState:UIControlStateNormal];
-        delButton.showsTouchWhenHighlighted = YES;
-        UIBarButtonItem *delBarButton = [[UIBarButtonItem alloc] initWithCustomView:delButton];
-        
-        //Done Bar Button
-        UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-        [doneButton addTarget:self action:@selector(donePhoto) forControlEvents:UIControlEventTouchUpInside];
-        [doneButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
-        doneButton.showsTouchWhenHighlighted = YES;
-        UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
-        
-        [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:doneBarButton,delBarButton,nil]];
-        
-    }
-    else if([tag hasPrefix:@"333"])
-    {
-        // Set index
-        arrangeLayerIndex = [self getIndexFromTag:tag];
-        
-        // Call Symbol
-        [self setAddMoreLayerTabAction:addMoreSymbolTabButton];
-        
-        //Replace RightBar Button With
-        //Delete Bar Button
-        UIButton *delButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 4, 45, 42)];
-        [delButton addTarget:self action:@selector(callDeleteLayer) forControlEvents:UIControlEventTouchUpInside];
-        [delButton setBackgroundImage:[UIImage imageNamed:@"delete_button"] forState:UIControlStateNormal];
-        delButton.showsTouchWhenHighlighted = YES;
-        UIBarButtonItem *delBarButton = [[UIBarButtonItem alloc] initWithCustomView:delButton];
-        
-        //Done Bar Button
-        UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-        [doneButton addTarget:self action:@selector(callAddMoreLayers) forControlEvents:UIControlEventTouchUpInside];
-        [doneButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
-        doneButton.showsTouchWhenHighlighted = YES;
-        UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
-        
-        [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:doneBarButton,delBarButton,nil]];
-        
-    }
-    else if([tag hasPrefix:@"444"])
-    {
-
-        
-        // Call Icon
-        [self setAddMoreLayerTabAction:addMoreIconTabButton];
-        
-        //Replace RightBar Button With
-        //Delete Bar Button
-        UIButton *delButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 4, 45, 42)];
-        [delButton addTarget:self action:@selector(callDeleteLayer) forControlEvents:UIControlEventTouchUpInside];
-        [delButton setBackgroundImage:[UIImage imageNamed:@"delete_button"] forState:UIControlStateNormal];
-        delButton.showsTouchWhenHighlighted = YES;
-        UIBarButtonItem *delBarButton = [[UIBarButtonItem alloc] initWithCustomView:delButton];
-        
-        //Done Bar Button
-        UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-        [doneButton addTarget:self action:@selector(callAddMoreLayers) forControlEvents:UIControlEventTouchUpInside];
-        [doneButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
-        doneButton.showsTouchWhenHighlighted = YES;
-        UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
-        
-        [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:doneBarButton,delBarButton,nil]];
-        
-    }
-    deleteMode = YES;
-    undoCount = undoCount + 1;
-    [rightUndoBarButton setEnabled:YES];
-    [self makeCopyOfLayers];
-}
-
 
 
 -(void) chooseEdit{
@@ -2123,12 +2144,12 @@ int arrangeLayerIndex;
         NSString *flyerImg = [flyer getImageName:currentLayer];
         NSString *flyertext = [flyer getText:currentLayer];
         
-        if (flyertext == nil && [flyerImg isEqualToString:@""]) {
+        if ([flyerImg isEqualToString:@""]) {
             [flyer deleteLayer:currentLayer];
             [self.flyimgView deleteLayer:currentLayer];
         }
         
-        if ([flyertext isEqualToString:@""] && flyerImg == nil) {
+        if ([flyertext isEqualToString:@""]) {
             [flyer deleteLayer:currentLayer];
             [self.flyimgView deleteLayer:currentLayer];
         }
@@ -2467,7 +2488,12 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
         
         [addMoreFontTabButton setSelected:YES];
-        [self plusButtonClick];
+        
+        if ([currentLayer isEqualToString:@""]) {
+            currentLayer = [flyer addText];
+            editButtonGlobal.uid = currentLayer;
+        }
+        [self callWrite];
 	}
 	else if(selectedButton == addMorePhotoTabButton)
 	{

@@ -52,10 +52,12 @@
                 lastFileName = [lastFileName stringByReplacingOccurrencesOfString:@"IMG_" withString:@""];
                 int imgnumber = [lastFileName intValue];
                 
+                
                 NSString *flyerPath;
+                int timestamp = [[NSDate date] timeIntervalSince1970];
                 
                 //Creating New Path
-                flyerPath = [NSString stringWithFormat:@"%@/%d",usernamePath,imgnumber];
+                flyerPath = [NSString stringWithFormat:@"%@/%d",usernamePath,timestamp];
                 NSError *error = nil;
                 
                 if (![[NSFileManager defaultManager] fileExistsAtPath:flyerPath isDirectory:NULL]) {
@@ -106,7 +108,7 @@
                         [[NSFileManager defaultManager] copyItemAtPath:source toPath:destination error:&error];
                     
                     
-                    //Here Coping Icon related Flyer
+                    //Here we Copy Icon files related this Flyer
                     source = [NSString stringWithFormat:@"%@/Icon/%d",usernamePath,imgnumber];
                     
                     if ([[NSFileManager defaultManager] fileExistsAtPath:source isDirectory:NULL]) {
@@ -228,14 +230,21 @@
     PFUser *user = [PFUser currentUser];
     user[@"contact"] = [oldUserobj objectForKey:@"contact"];
     user[@"name"] = [oldUserobj objectForKey:@"name"];
-    user[@"fbinvited"] = [oldUserobj objectForKey:@"fbinvited"];
-    user[@"tweetinvited"] = [oldUserobj objectForKey:@"tweetinvited"];
+    if ([oldUserobj objectForKey:@"fbinvited"])
+        user[@"fbinvited"] = [oldUserobj objectForKey:@"fbinvited"];
+   
+    if ([oldUserobj objectForKey:@"tweetinvited"])
+        user[@"tweetinvited"] = [oldUserobj objectForKey:@"tweetinvited"];
+    
+    if ([oldUserobj objectForKey:@"iphoneinvited"])
+        user[@"iphoneinvited"] = [oldUserobj objectForKey:@"iphoneinvited"];
+    
     [user saveInBackground];
     
     //Rename Old directory Name from New Username on device
 	NSString *homeDirectoryPath = NSHomeDirectory();
     NSString *NewUIDFolderName = [user objectForKey:@"username"];
-	NSString *OldUIDPath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/",[oldUserobj objectForKey:@"username"]]];
+	NSString *OldUIDPath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@",[oldUserobj objectForKey:@"username"]]];
     
     
     if (![[NSFileManager defaultManager] fileExistsAtPath:OldUIDPath isDirectory:NULL]) {

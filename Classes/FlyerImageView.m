@@ -230,7 +230,7 @@
     if ([[layDic valueForKey:@"bordercolor"] isEqualToString:@"0.000000, 0.000000, 0.000000"]) {
         
         if ([layDic valueForKey:@"bordercolorWhite"] != nil) {
-            NSArray *rgbBorder = [[layDic valueForKey:@"textborderWhite"] componentsSeparatedByString:@","];
+            NSArray *rgbBorder = [[layDic valueForKey:@"bordercolorWhite"] componentsSeparatedByString:@","];
             
             borderColor = [UIColor colorWithWhite:[rgbBorder[0] floatValue] alpha:[rgbBorder[1] floatValue]];
             

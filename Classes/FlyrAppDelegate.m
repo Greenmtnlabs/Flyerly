@@ -120,6 +120,8 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     // Crittercism for crash reports.
     [Crittercism initWithAppID:[flyerConfigurator crittercismAppId]];
     
+    
+    
 //#ifdef DEBUG
     
     // Setup parse Offline

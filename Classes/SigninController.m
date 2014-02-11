@@ -226,7 +226,7 @@
                 
                 NSLog(@"User signed up and logged in with Twitter!");
 
-                NSString *twitterUsername = [PFTwitterUtils twitter].userId;
+                NSString *twitterUsername = [PFTwitterUtils twitter].screenName;
                 
                 // For Parse New User Merge to old Twitter User
                 FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
@@ -249,9 +249,10 @@
 
                 // Temp on for Testing here
                 // For Parse New User Merge to old Twitter User
-                /*
+                NSString *twitterUsername = [PFTwitterUtils twitter].screenName;
+                
                 FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-                [appDelegate twitterChangeforNewVersion:twitterUsername];*/
+                [appDelegate twitterChangeforNewVersion:twitterUsername];
 
                 
                 // Login success Move to Flyerly
