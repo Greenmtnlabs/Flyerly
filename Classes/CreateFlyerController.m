@@ -1457,7 +1457,15 @@ int arrangeLayerIndex;
 -(void)loadCustomPhotoLibrary{
     
     nbuGallary = [[GalleryViewController alloc] initWithNibName:@"GalleryViewController" bundle:nil];
-    nbuGallary.desiredImageSize = CGSizeMake(300, 300);
+    
+    if ( imgPickerFlag == 2 ) {
+        NSDictionary *dict = [flyer getLayerFromMaster:currentLayer];
+        nbuGallary.desiredImageSize = CGSizeMake( [[dict valueForKey:@"width"] floatValue],
+                                                [[dict valueForKey:@"height"] floatValue]);
+    } else {
+        nbuGallary.desiredImageSize = CGSizeMake( 620,  620 );
+    }
+
     [nbuGallary setOnImageTaken:^(UIImage *img) {
         
         dispatch_async( dispatch_get_main_queue(), ^{
@@ -1496,7 +1504,14 @@ int arrangeLayerIndex;
 -(void)openCustomCamera{
 
     nbuCamera = [[CameraViewController alloc]initWithNibName:@"CameraViewController" bundle:nil];
-    nbuCamera.desiredImageSize = CGSizeMake(300, 300);
+    
+    if ( imgPickerFlag == 2 ) {
+        NSDictionary *dict = [flyer getLayerFromMaster:currentLayer];
+        nbuCamera.desiredImageSize = CGSizeMake( [[dict valueForKey:@"width"] floatValue],
+                                                 [[dict valueForKey:@"height"] floatValue]);
+    } else {
+        nbuCamera.desiredImageSize = CGSizeMake( 620,  620 );
+    }
     
     // Callback once image is selected.
     [nbuCamera setOnImageTaken:^(UIImage *img) {
