@@ -78,13 +78,11 @@
 
    
 
-    NSMutableArray *textEditLayersArray;
  
 	UIAlertView *warningAlert ;
-	UIAlertView *discardAlert ;
+
 	UIAlertView *deleteAlert ;
-	UIAlertView *editAlert ;
-    UIAlertView *inAppAlert ;
+
 
     BOOL deleteMode;
     BOOL doStopWobble;
@@ -155,10 +153,9 @@
 @property (nonatomic, strong) UIImage *finalFlyer;
 
 @property (nonatomic,strong) UIAlertView *warningAlert;
-@property (nonatomic,strong) UIAlertView *discardAlert;
+
 @property (nonatomic,strong) UIAlertView *deleteAlert;
-@property (nonatomic,strong) UIAlertView *editAlert;
-@property (nonatomic,strong) UIAlertView *inAppAlert;
+
 
 @property (nonatomic, assign) NSInteger imgPickerFlag;
 @property (nonatomic, assign) int flyerNumber;
@@ -214,7 +211,6 @@
 -(void)loadCustomPhotoLibrary;
 -(void)openCustomCamera;
 
--(void) chooseEdit;
 -(void) SetMenu;
 -(void) callDeleteLayer;
 -(void) choosePhoto;

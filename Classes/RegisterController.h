@@ -27,10 +27,7 @@
     UIView *waiting;
     FlyerlySingleton *globle;
     UIAlertView *warningAlert ;
-	UIAlertView *discardAlert ;
-	UIAlertView *deleteAlert ;
-	UIAlertView *editAlert ;
-    UIAlertView *inAppAlert ;
+
 }
 
 @property(nonatomic,strong) IBOutlet UIScrollView *scrollView;
