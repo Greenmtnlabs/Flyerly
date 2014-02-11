@@ -68,9 +68,6 @@
 	UIButton *addMoreIconTabButton;
 	UIButton *addMoreSymbolTabButton;
 	UIButton *arrangeLayerTabButton;
-
-	bool keyboardShown;
-	CGPoint lableLocation;
 	
 	NSMutableArray *templateArray;
 	NSMutableArray *iconArray;
@@ -157,7 +154,6 @@
 
 @property (nonatomic, strong) UIImage *finalFlyer;
 
-@property (nonatomic, assign) CGPoint lableLocation;
 @property (nonatomic,strong) UIAlertView *warningAlert;
 @property (nonatomic,strong) UIAlertView *discardAlert;
 @property (nonatomic,strong) UIAlertView *deleteAlert;

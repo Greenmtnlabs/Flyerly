@@ -14,7 +14,7 @@
 @synthesize fontTabButton,colorTabButton,sizeTabButton,fontEditButton,selectedText,selectedSize,fontBorderTabButton,addMoreIconTabButton,addMorePhotoTabButton,addMoreSymbolTabButton;
 @synthesize templateBckgrnd,textBackgrnd;
 @synthesize cameraTabButton,photoTabButton,widthTabButton,heightTabButton,photoImgView,symbolImgView,iconImgView;
-@synthesize lableLocation,warningAlert,discardAlert,deleteAlert,editAlert, inAppAlert;
+@synthesize warningAlert,discardAlert,deleteAlert,editAlert, inAppAlert;
 @synthesize  imgPickerFlag,finalImgWritePath, addMoreLayerOrSaveFlyerLabel, takeOrAddPhotoLabel,layerScrollView;
 @synthesize cpyTextLabelLayersArray,cpyIconLayersArray,cpyPhotoLayersArray,cpySymbolLayersArray;
 @synthesize flyerNumber,flyerPath,flyer;
@@ -198,7 +198,6 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     
     imgView.image = selectedTemplate;
     
-	lableLocation = CGPointMake(160,100);
     
     //layerTile Button
     editButtonGlobal = [[LayerTileButton alloc]init];
