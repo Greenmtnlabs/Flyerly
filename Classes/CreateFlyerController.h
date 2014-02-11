@@ -72,10 +72,6 @@
 	UIButton *arrangeLayerTabButton;
 
 	bool keyboardShown;
-	BOOL photoTouchFlag;
-	BOOL symbolTouchFlag;
-	BOOL iconTouchFlag;
-	BOOL lableTouchFlag;
 	CGPoint lableLocation;
 	
 	NSMutableArray *templateArray;
@@ -163,10 +159,6 @@
 
 @property (nonatomic, strong) UIImage *finalFlyer;
 
-@property (nonatomic, assign)BOOL photoTouchFlag;
-@property (nonatomic, assign)BOOL lableTouchFlag;
-@property (nonatomic, assign)BOOL symbolTouchFlag;
-@property (nonatomic, assign)BOOL iconTouchFlag;
 @property (nonatomic, assign) CGPoint lableLocation;
 @property (nonatomic,strong) UIAlertView *warningAlert;
 @property (nonatomic,strong) UIAlertView *discardAlert;

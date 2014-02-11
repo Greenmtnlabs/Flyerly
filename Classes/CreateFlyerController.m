@@ -14,7 +14,7 @@
 @synthesize fontTabButton,colorTabButton,sizeTabButton,fontEditButton,selectedText,selectedSize,fontBorderTabButton,addMoreIconTabButton,addMorePhotoTabButton,addMoreSymbolTabButton;
 @synthesize templateBckgrnd,textBackgrnd;
 @synthesize cameraTabButton,photoTabButton,widthTabButton,heightTabButton,photoImgView,symbolImgView,iconImgView;
-@synthesize photoTouchFlag,symbolTouchFlag,iconTouchFlag, lableTouchFlag,lableLocation,warningAlert,discardAlert,deleteAlert,editAlert, inAppAlert;
+@synthesize lableLocation,warningAlert,discardAlert,deleteAlert,editAlert, inAppAlert;
 @synthesize  imgPickerFlag,finalImgWritePath, addMoreLayerOrSaveFlyerLabel, takeOrAddPhotoLabel,layerScrollView;
 @synthesize cpyTextLabelLayersArray,cpyIconLayersArray,cpyPhotoLayersArray,cpySymbolLayersArray;
 @synthesize flyerNumber,flyerPath,flyer;
@@ -160,10 +160,6 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     [self.view setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
     [self.contextView setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
 
-    photoTouchFlag=NO;
-	symbolTouchFlag=NO;
-    iconTouchFlag = NO;
-	lableTouchFlag=NO;
     
     // Set height and width of each element of scroll view
     layerXposition =0;
