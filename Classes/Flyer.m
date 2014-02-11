@@ -165,7 +165,7 @@ NSInteger compareTimestamps(id stringLeft, id stringRight, void *context) {
  * return
  *      UniqueID
  */
--(NSString *)addSymbols{
+-(NSString *)addImage{
     
     int timestamp = [[NSDate date] timeIntervalSince1970];
     
@@ -173,44 +173,70 @@ NSInteger compareTimestamps(id stringLeft, id stringRight, void *context) {
     
     
     //Create Dictionary for Symbol
-    NSMutableDictionary *symbolDetailDictionary = [[NSMutableDictionary alloc] init];
-    symbolDetailDictionary[@"image"] = @"";
-    symbolDetailDictionary[@"x"] = @"10";
-    symbolDetailDictionary[@"y"] = @"10";
-    symbolDetailDictionary[@"width"] = @"90";
-    symbolDetailDictionary[@"height"] = @"70";
+    NSMutableDictionary *imageDetailDictionary = [[NSMutableDictionary alloc] init];
+    imageDetailDictionary[@"image"] = @"";
+    imageDetailDictionary[@"imageTag"] = @"";
+    imageDetailDictionary[@"x"] = @"10";
+    imageDetailDictionary[@"y"] = @"10";
+    imageDetailDictionary[@"width"] = @"90";
+    imageDetailDictionary[@"height"] = @"70";
     
-    [masterLayers setValue:symbolDetailDictionary forKey:uniqueId];
+    [masterLayers setValue:imageDetailDictionary forKey:uniqueId];
     return uniqueId;
 }
 
 -(void)setImageFrame :(NSString *)uid :(CGRect)photoFrame {
 
-    NSMutableDictionary *symbolDetailDictionary = [self getLayerFromMaster:uid];
-    symbolDetailDictionary[@"x"] = [NSString stringWithFormat:@"%f",photoFrame.origin.x];
-    symbolDetailDictionary[@"y"] = [NSString stringWithFormat:@"%f",photoFrame.origin.y];
-    symbolDetailDictionary[@"width"] = [NSString stringWithFormat:@"%f",photoFrame.size.width];
-    symbolDetailDictionary[@"height"] = [NSString stringWithFormat:@"%f",photoFrame.size.height];
+    NSMutableDictionary *imageDetailDictionary = [self getLayerFromMaster:uid];
+    imageDetailDictionary[@"x"] = [NSString stringWithFormat:@"%f",photoFrame.origin.x];
+    imageDetailDictionary[@"y"] = [NSString stringWithFormat:@"%f",photoFrame.origin.y];
+    imageDetailDictionary[@"width"] = [NSString stringWithFormat:@"%f",photoFrame.size.width];
+    imageDetailDictionary[@"height"] = [NSString stringWithFormat:@"%f",photoFrame.size.height];
     
-    [masterLayers setValue:symbolDetailDictionary forKey:uid];
+    [masterLayers setValue:imageDetailDictionary forKey:uid];
+}
+
+
+/*
+ * Set Image Tag For Highlight Last image
+ */
+-(void)setImageTag :(NSString *)uid Tag :(NSString *)tag {
+    
+    NSMutableDictionary *imageDetailDictionary = [self getLayerFromMaster:uid];
+        
+    [imageDetailDictionary setValue:tag forKey:@"imageTag"];
+    
+    // Set to Master Dictionary
+    [masterLayers setValue:imageDetailDictionary forKey:uid];
+
+}
+
+
+/*
+ * Return Image Tag
+ */
+-(NSString *)getImageTag :(NSString *)uid {
+    
+    NSMutableDictionary *imageDetailDictionary = [self getLayerFromMaster:uid];
+    return [imageDetailDictionary valueForKey:@"imageTag"] ;
 }
 
 
 
--(void)setSymbolImage :(NSString *)uid ImgPath:(NSString *)imgPath{
+-(void)setImagePath :(NSString *)uid ImgPath:(NSString *)imgPath{
 
-    NSMutableDictionary *symbolDetailDictionary = [self getLayerFromMaster:uid];
+    NSMutableDictionary *imageDetailDictionary = [self getLayerFromMaster:uid];
     
     //Here We Delete Old Map File if Exist
-    if (![[symbolDetailDictionary objectForKey:@"image"] isEqualToString:@""]) {
+    if (![[imageDetailDictionary objectForKey:@"image"] isEqualToString:@""]) {
         NSError *error;
-        [[NSFileManager defaultManager] removeItemAtPath:[symbolDetailDictionary objectForKey:@"image"] error:&error];
+        [[NSFileManager defaultManager] removeItemAtPath:[imageDetailDictionary objectForKey:@"image"] error:&error];
     }
     
-    [symbolDetailDictionary setValue:imgPath forKey:@"image"];
+    [imageDetailDictionary setValue:imgPath forKey:@"image"];
     
     // Set to Master Dictionary
-    [masterLayers setValue:symbolDetailDictionary forKey:uid];
+    [masterLayers setValue:imageDetailDictionary forKey:uid];
     
 }
 

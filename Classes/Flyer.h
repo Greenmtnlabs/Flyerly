@@ -37,7 +37,8 @@
 -(NSString *)addText;
 
 -(void)setImageFrame :(NSString *)uid :(CGRect )photoFrame;
-
+-(void)setImageTag :(NSString *)uid Tag :(NSString *)tag;
+-(NSString *)getImageTag :(NSString *)uid;
 
 -(void)setFlyerText :(NSString *)uid text:(NSString *)txt;
 
@@ -49,12 +50,12 @@
 
 -(void)setFlyerTextBorderColor :(NSString *)uid Color:(id)rgb;
 
--(void)setSymbolImage :(NSString *)uid ImgPath:(NSString *)imgPath;
+-(void)setImagePath :(NSString *)uid ImgPath:(NSString *)imgPath;
 
 -(void)setFlyerBorder :(NSString *)uid RGBColor:(id)rgb;
 
 -(NSString *)addPhoto;
--(NSString *)addSymbols;
+-(NSString *)addImage;
 -(NSString *)addClipArt;
 
 

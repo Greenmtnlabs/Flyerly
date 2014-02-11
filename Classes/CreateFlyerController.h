@@ -85,7 +85,6 @@
 
 
     BOOL deleteMode;
-    BOOL doStopWobble;
     BOOL discardedLayer;
     int undoCount;
     int flyerNumber;

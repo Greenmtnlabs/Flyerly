@@ -314,6 +314,9 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     if(IS_IPHONE_5)
         curYLoc = 10;
     
+    //Getting Last Image Tag for highlight
+    NSString *LastTag = [flyer getImageTag:@"Template"];
+    
 	for(int i=0;i<67;i++) {
         
 		NSString* templateName = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"Template%d",i] ofType:@"jpg"];
@@ -347,7 +350,22 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
             }
         }
         
+        //Here we Hightlight Last Selected Image
+        if (![LastTag isEqualToString:@""] && LastTag != nil) {
+            
+            if ([LastTag intValue] == i ) {
+                
+                // Add border to selected layer thumbnail
+                [templateButton.layer setCornerRadius:8];
+                [templateButton.layer setBorderWidth:3.0];
+                UIColor * c = [globle colorWithHexString:@"0197dd"];
+                [templateButton.layer setBorderColor:c.CGColor];
+            }
+            
+        }
+        
 		[layerScrollView addSubview:templateButton];
+        
 	}// Loop
     
     if(IS_IPHONE_5){
@@ -784,6 +802,8 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     CGFloat curXLoc = 0;
     CGFloat curYLoc = 5;
     
+    //Getting Last Image Tag for highlight
+    NSString *LastTag = [flyer getImageTag:currentLayer];
     
 	for(int i=1;i<=113;i++) {
         
@@ -817,7 +837,22 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
             }
         }
         
+        //Here we Hightlight Last Selected Image
+        if (![LastTag isEqualToString:@""]) {
+            
+            if ([LastTag intValue] == i ) {
+                
+                // Add border to selected layer thumbnail
+                [symbolButton.layer setCornerRadius:8];
+                [symbolButton.layer setBorderWidth:3.0];
+                UIColor * c = [globle colorWithHexString:@"0197dd"];
+                [symbolButton.layer setBorderColor:c.CGColor];
+            }
+            
+        }
+        
 		[layerScrollView addSubview:symbolButton];
+        
 	}//loop
     
     if(IS_IPHONE_5){
@@ -846,6 +881,9 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     
     if(IS_IPHONE_5)
         curYLoc = 10;
+    
+    //Getting Last Image Tag for highlight
+    NSString *LastTag = [flyer getImageTag:currentLayer];
     
 	for(int i=1;i<=94;i++) {
         
@@ -878,8 +916,22 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
             }
         }
 
+        //Here we Hightlight Last Selected Image
+        if (![LastTag isEqualToString:@""]) {
+            
+            if ([LastTag intValue] == i ) {
+                
+                // Add border to selected layer thumbnail
+                [iconButton.layer setCornerRadius:8];
+                [iconButton.layer setBorderWidth:3.0];
+                UIColor * c = [globle colorWithHexString:@"0197dd"];
+                [iconButton.layer setBorderColor:c.CGColor];
+            }
+            
+        }
         
 		[layerScrollView addSubview:iconButton];
+        
     }//loop
     
     if(IS_IPHONE_5){
@@ -1069,12 +1121,23 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
         if(tempView == view)
         {
             
-            //Getting Image Path
-            NSString *imgPath = [self getImagePathByTag:[NSString stringWithFormat:@"Template%d",view.tag]];
+            int lstTag = 500;
+            NSString *lastTag = [flyer getImageTag:@"Template"];
             
-            //set template Image
-            [self.flyimgView setTemplate:imgPath];
+            if (![lastTag isEqualToString:@""]) lstTag = [lastTag intValue];
             
+            if (lstTag != view.tag) {
+                
+                //Getting Image Path
+                NSString *imgPath = [self getImagePathByTag:[NSString stringWithFormat:@"Template%d",view.tag]];
+            
+                //set template Image
+                [self.flyimgView setTemplate:imgPath];
+                
+                //Set Image Tag
+                [flyer setImageTag:@"Template" Tag:[NSString stringWithFormat:@"%d",view.tag]];
+
+            }
             
             // Add border to selected layer thumbnail
             CALayer * l = [tempView layer];
@@ -1216,13 +1279,23 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     [Flurry logEvent:@"Layer Added"];
     [Flurry logEvent:@"Symbol Added"];
     
+    int lstTag = 500;
+    NSString *lastTag = [flyer getImageTag:currentLayer];
+
+    if (![lastTag isEqualToString:@""]) lstTag = [lastTag intValue];
     
-    NSString *imgPath = [self getImagePathByTag:[NSString stringWithFormat:@"symbol%d",view.tag]];
+    if (lstTag != view.tag) {
+        NSString *imgPath = [self getImagePathByTag:[NSString stringWithFormat:@"symbol%d",view.tag]];
     
-    //Set Symbol Image
-    [flyer setSymbolImage:currentLayer ImgPath:imgPath];
+        //Set Image Path
+        [flyer setImagePath:currentLayer ImgPath:imgPath];
     
-    [self.flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
+        //Set Image Tag
+        [flyer setImageTag:currentLayer Tag:[NSString stringWithFormat:@"%d",view.tag]];
+
+    
+        [self.flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
+    }
     
     //Handling Select Unselect
     for(UIView *tempView  in [layerScrollView subviews])
@@ -1261,13 +1334,23 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     [Flurry logEvent:@"Layer Added"];
     [Flurry logEvent:@"Clip Art Added"];
 
-  
-    NSString *imgPath = [self getImagePathByTag:[NSString stringWithFormat:@"ricon%d",view.tag]];
+    int lstTag = 500;
+    NSString *lastTag = [flyer getImageTag:currentLayer];
     
-    //Set Symbol Image
-    [flyer setSymbolImage:currentLayer ImgPath:imgPath];
+    if (![lastTag isEqualToString:@""]) lstTag = [lastTag intValue];
     
-    [self.flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
+    if (lstTag != view.tag) {
+        
+        NSString *imgPath = [self getImagePathByTag:[NSString stringWithFormat:@"ricon%d",view.tag]];
+    
+        //Set Symbol Image
+        [flyer setImagePath:currentLayer ImgPath:imgPath];
+        
+        //Set Image Tag
+        [flyer setImageTag:currentLayer Tag:[NSString stringWithFormat:@"%d",view.tag]];
+    
+        [self.flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
+    }
     
     
     //Handling Select Unselect
@@ -1373,7 +1456,7 @@ int arrangeLayerIndex;
                 NSString *imgPath = [self getImagePathforPhoto:img];
                 
                 //Set Image to dictionary
-                [flyer setSymbolImage:currentLayer ImgPath:imgPath];
+                [flyer setImagePath:currentLayer ImgPath:imgPath];
                 
                 //Here we Create ImageView Layer
                 [self.flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
@@ -1422,7 +1505,7 @@ int arrangeLayerIndex;
                 NSString *imgPath = [self getImagePathforPhoto:img];
                 
                 //Set Image to dictionary
-                [flyer setSymbolImage:currentLayer ImgPath:imgPath];
+                [flyer setImagePath:currentLayer ImgPath:imgPath];
                 
                 //Here we Create ImageView Layer
                 [self.flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
@@ -1525,7 +1608,8 @@ int arrangeLayerIndex;
 
     if (![btnText isEqualToString:@""] && btnText != nil) {
         
-        [self callWrite];
+        lastTextView = [[UITextView  alloc] init];
+        lastTextView.text = btnText;
         
         //For Immediate Showing Delete button
         [self callStyle];
@@ -2232,14 +2316,18 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         
 
         if ([currentLayer isEqualToString:@""]) {
-            currentLayer = [flyer addSymbols];
+            currentLayer = [flyer addImage];
             
             CGRect imageFrame  = CGRectMake(100,10,200,200);
             [flyer setImageFrame:currentLayer :imageFrame];
             NSMutableDictionary *dic = [flyer getLayerFromMaster:currentLayer];
             [self.flyimgView renderLayer:currentLayer layerDictionary:dic];
-            [self.flyimgView layerIsBeingEdited:currentLayer];
+           
         }
+        
+        //Here we Highlight The ImageView
+        [self.flyimgView layerIsBeingEdited:currentLayer];
+        
         
         [self addScrollView:takeOrAddPhotoLabel];
         [self choosePhoto];
@@ -2253,7 +2341,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         selectedAddMoreLayerTab = ADD_MORE_SYMBOLTAB;
 
         if ([currentLayer isEqualToString:@""]) {
-            currentLayer = [flyer addSymbols];
+            currentLayer = [flyer addImage];
         }
 
         [addMoreSymbolTabButton setSelected:YES];
@@ -2280,7 +2368,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         [addMoreIconTabButton setSelected:YES];
         
         if ([currentLayer isEqualToString:@""]) {
-            currentLayer = [flyer addSymbols];
+            currentLayer = [flyer addImage];
         }
         
         //Add right Bar button
@@ -2324,7 +2412,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
  */
 -(void)resetLayerScrollView :(NSString *)udid{
 
-   doStopWobble = YES;
     
     NSArray *ChildViews = [self.layerScrollView subviews];
     
@@ -2344,7 +2431,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 -(void)resetLayerScrollView{
 
-    doStopWobble = YES;
 }
 
 
@@ -2431,41 +2517,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     [self callAddMoreLayers];
 }
 
--(void)onLongPress:(UILongPressGestureRecognizer*)pGesture
-{
-    /*
-    // Get button
-    UIButton *button = (UIButton *) pGesture.view;
-    NSLog(@"Layer Tag: %d", button.tag);
-    
-    // Enable delete mode
-    deleteMode = YES;
-
-    if(layerScrollView){
-        
-        // Get layer thumbnail from scroll view
-        for(UIView *layerThumbnail in [layerScrollView subviews]){
-            if([layerThumbnail isKindOfClass:[UIButton class]]){
-                
-                // Get cross button from layer thumbnail
-                for(UIView *editButton in [layerThumbnail subviews]){
-                    if([editButton isKindOfClass:[UIButton class]]){
-                        
-                        // Enable cross button
-                        //[crossButton setHidden:NO];
-                        //[editButton setHidden:NO];
-                        //break;
-                    }
-                }
-                
-                // Wobble layer thumbnail
-                [self wobble:pGesture.view];
-            }
-        }
-    }
-     */
-}
-
 -(void)wobble:(UIView *)view{
 
     CGAffineTransform leftWobble = CGAffineTransformRotate(CGAffineTransformIdentity, RADIANS(-3));
@@ -2481,53 +2532,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     [UIView commitAnimations];
 }
 
--(void)unWobbleAll{
-
-    // Get layer thumbnail from scroll view
-    for(UIView *layerThumbnail in [layerScrollView subviews]){
-        if([layerThumbnail isKindOfClass:[UIButton class]]){
-            
-            // Get cross button from layer thumbnail
-            for(UIView *crossButton in [layerThumbnail subviews]){
-                if([crossButton isKindOfClass:[UIButton class]]){
-                    
-                    // Enable cross button
-                    [crossButton setHidden:YES];
-                    //break;
-                }
-            }
-            
-            CALayer *currentLayer = layerThumbnail.layer.presentationLayer;
-            [layerThumbnail.layer removeAllAnimations];
-            layerThumbnail.layer.transform = currentLayer.transform;
-            CATransform3D newTransform = CATransform3DIdentity;
-            
-            [UIView animateWithDuration:1.0
-                                  delay:0.0
-                                options:UIViewAnimationOptionAllowUserInteraction
-                             animations:^{
-                                 layerThumbnail.layer.transform = newTransform;
-                             }
-                             completion:NULL];
-            /*
-            // Wobble layer thumbnail
-            CGAffineTransform leftWobble = CGAffineTransformRotate(CGAffineTransformIdentity, RADIANS(-3));
-            CGAffineTransform rightWobble = CGAffineTransformRotate(CGAffineTransformIdentity, RADIANS(3));
-            
-            layerThumbnail.transform = leftWobble;  // starting point
-            
-            [UIView beginAnimations:@"wobble" context:NULL];
-            [UIView setAnimationBeginsFromCurrentState:YES];
-            [UIView setAnimationDuration:0.1];
-            layerThumbnail.transform = rightWobble; // end here & auto-reverse
-            [UIView commitAnimations];
-             */
-        }
-    }
-    
-    deleteMode = NO;
-
-}
 
 
 -(NSMutableArray *)photoLayersArray{
@@ -2949,7 +2953,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     [self addScrollView:layerScrollView];
     
     deleteMode = NO;
-    doStopWobble = YES;
 
 }
 
