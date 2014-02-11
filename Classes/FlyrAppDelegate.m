@@ -21,7 +21,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 @synthesize window;
 @synthesize navigationController;
 @synthesize faceBookPermissionFlag,changesFlag;
-@synthesize colorScrollView, sizeScrollView,svController,lauchController,accountController;
+@synthesize  svController,lauchController,accountController;
 @synthesize sharingProgressParentView;
 
 

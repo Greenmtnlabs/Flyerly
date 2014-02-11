@@ -39,23 +39,14 @@
 	UIImageView *symbolImgView;
 	UIImageView *iconImgView;
 
-    UIButton *moreLayersButton;
-    UILabel *moreLayersLabel;
     UILabel *addMoreLayerOrSaveFlyerLabel;
     UILabel *takeOrAddPhotoLabel;
 
-	UIScrollView *colorScrollView;
-	UIScrollView *sizeScrollView;
-	UIScrollView *borderScrollView;
-	UIScrollView *fontBorderScrollView;
-	UIScrollView *templateScrollView;
-    UIScrollView *symbolScrollView;
-	UIScrollView *iconScrollView;
+
+
     UIScrollView *layerScrollView;
 
-    UIImageView *newPhotoImgView;
 	CustomLabel *msgLabel;
-	UIImagePickerController *imgPicker;
 	
 	NSString *finalImgWritePath;
 	NSString *imageNameNew;
@@ -150,22 +141,14 @@
 @property(nonatomic, strong)  UIImageView *iconImgView;
 @property (nonatomic, strong) UIImageView *templateBckgrnd;
 @property (nonatomic, strong) UIImageView *textBackgrnd;
-@property (nonatomic, strong) UIImagePickerController *imgPicker;
 
-@property (nonatomic,strong)  UIButton *moreLayersButton;
-@property (nonatomic,strong)  UILabel *moreLayersLabel;
 @property (nonatomic,strong)  UILabel *addMoreLayerOrSaveFlyerLabel;
 @property (nonatomic,strong)  UILabel *takeOrAddPhotoLabel;
 
-@property (nonatomic, strong) UIScrollView *templateScrollView;
-@property (nonatomic, strong) UIScrollView *colorScrollView;
-@property (nonatomic, strong) UIScrollView *sizeScrollView;
-@property (nonatomic, strong) UIScrollView *borderScrollView;
-@property (nonatomic, strong) UIScrollView *fontBorderScrollView;
+
+
 @property (nonatomic, strong) UIScrollView *layerScrollView;
 
-@property (nonatomic, strong) UIScrollView *iconScrollView;
-@property (nonatomic, strong) UIScrollView *symbolScrollView;
 
 @property (nonatomic, strong) NSString *finalImgWritePath;
 @property (nonatomic, strong) NSString *imageNameNew;

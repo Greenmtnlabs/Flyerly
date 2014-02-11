@@ -8,15 +8,14 @@
 #import "CreateFlyerController.h"
 
 @implementation CreateFlyerController
-@synthesize flyimgView,imgView,imgPicker,imageNameNew,finalFlyer;
-@synthesize colorScrollView,templateScrollView,sizeScrollView,borderScrollView,fontBorderScrollView,symbolScrollView,iconScrollView;
+@synthesize flyimgView,imgView,imageNameNew,finalFlyer;
 @synthesize selectedFont,selectedColor;
 @synthesize selectedTemplate,selectedSymbol,selectedIcon;
 @synthesize fontTabButton,colorTabButton,sizeTabButton,fontEditButton,selectedText,selectedSize,fontBorderTabButton,addMoreIconTabButton,addMorePhotoTabButton,addMoreSymbolTabButton;
 @synthesize templateBckgrnd,textBackgrnd;
 @synthesize cameraTabButton,photoTabButton,widthTabButton,heightTabButton,photoImgView,symbolImgView,iconImgView;
 @synthesize photoTouchFlag,symbolTouchFlag,iconTouchFlag, lableTouchFlag,lableLocation,warningAlert,discardAlert,deleteAlert,editAlert, inAppAlert;
-@synthesize moreLayersLabel, moreLayersButton,imgPickerFlag,finalImgWritePath, addMoreLayerOrSaveFlyerLabel, takeOrAddPhotoLabel,layerScrollView;
+@synthesize  imgPickerFlag,finalImgWritePath, addMoreLayerOrSaveFlyerLabel, takeOrAddPhotoLabel,layerScrollView;
 @synthesize cpyTextLabelLayersArray,cpyIconLayersArray,cpyPhotoLayersArray,cpySymbolLayersArray;
 @synthesize flyerNumber,flyerPath,flyer;
 
@@ -44,18 +43,6 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 -(void)viewDidAppear:(BOOL)animated{
     
 
-    
-    // Setup buttons and labels
-    [moreLayersButton setBackgroundImage:[UIImage imageNamed:@"07_addmore"] forState:UIControlStateNormal];
-    [moreLayersButton addTarget:self action:@selector(callAddMoreLayers) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:moreLayersButton];
-    
-    [moreLayersLabel setText:@"Add more layers"];
-    [moreLayersLabel setBackgroundColor:[UIColor clearColor]];
-    [moreLayersLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:13]];
-    [moreLayersLabel setTextColor:[UIColor whiteColor]];
-    [self.view addSubview:moreLayersLabel];
-    
     [addMoreLayerOrSaveFlyerLabel setText:@"ADD MORE LAYERS OR ADJUST LAYERS BELOW"];    [addMoreLayerOrSaveFlyerLabel setNumberOfLines:2];
     [addMoreLayerOrSaveFlyerLabel setBackgroundColor:[UIColor clearColor]];
     [addMoreLayerOrSaveFlyerLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:16]];
@@ -228,8 +215,6 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     
     // Create Main Image View
     templateBckgrnd = [[UIImageView alloc]initWithFrame:CGRectMake(0, 413, 320, 135)];
-    moreLayersButton = [[UIButton alloc] initWithFrame:CGRectMake(82, 445, 156, 43)];
-    moreLayersLabel = [[UILabel alloc] initWithFrame:CGRectMake(125, 445, 156, 43)];
     
     // Main Scroll Views Initialize
     layerScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,320,130)];
@@ -2264,12 +2249,8 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
             NSMutableDictionary *dic = [flyer getLayerFromMaster:currentLayer];
             [self.flyimgView renderLayer:currentLayer layerDictionary:dic];
             [self.flyimgView layerIsBeingEdited:currentLayer];
-        }else{
-            NSString *imgPath = [flyer getImageName:currentLayer];
-            UIImage *realImage =  [UIImage imageWithContentsOfFile:imgPath];
-            newPhotoImgView.image = realImage;
         }
-
+        
         [self addScrollView:takeOrAddPhotoLabel];
         [self choosePhoto];
 		imgPickerFlag =2;
