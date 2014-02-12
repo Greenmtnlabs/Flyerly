@@ -23,6 +23,12 @@
 +(void)updateFolderStructure:(NSString *)usr{
 
  
+    NSString *flyerPath =@"";
+    NSString *source = @"";
+    NSString *destination = @"";
+    NSString *lastFileName = @"";
+    NSError *error = nil;
+
     //Getting Home Directory
 	NSString *homeDirectoryPath = NSHomeDirectory();
 	NSString *usernamePath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/Flyr",usr]];
@@ -34,7 +40,7 @@
 
         //Getting All Files list
         NSArray *files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:usernamePath error:nil];
-        NSString *lastFileName = nil;
+       
         
         for(int i = 0 ; i < [files count];i++)
         {
@@ -52,13 +58,8 @@
                 lastFileName = [lastFileName stringByReplacingOccurrencesOfString:@"IMG_" withString:@""];
                 int imgnumber = [lastFileName intValue];
                 
-                
-                NSString *flyerPath;
-                int timestamp = [[NSDate date] timeIntervalSince1970];
-                
                 //Creating New Path
-                flyerPath = [NSString stringWithFormat:@"%@/%d",usernamePath,timestamp];
-                NSError *error = nil;
+                flyerPath = [NSString stringWithFormat:@"%@/%d",usernamePath,imgnumber];
                 
                 if (![[NSFileManager defaultManager] fileExistsAtPath:flyerPath isDirectory:NULL]) {
                     
@@ -80,9 +81,7 @@
                     //This Is Sub Flyer Folder of Template
                     [[NSFileManager defaultManager] createDirectoryAtPath:[NSString stringWithFormat:@"%@/Template",flyerPath] withIntermediateDirectories:YES attributes:nil error:&error];
                     
-                //Here we start Coping SOURCE Files into New structure
-                    NSString *source = nil;
-                    NSString *destination = nil;
+                    //Here we start Coping SOURCE Files into New structure
                     
                     //Copy ImageFile
                     source = [NSString stringWithFormat:@"%@/IMG_%d.jpg",usernamePath,imgnumber];
@@ -91,6 +90,9 @@
                     if ( [[NSFileManager defaultManager] isReadableFileAtPath:source] )
                         [[NSFileManager defaultManager] copyItemAtPath:source toPath:destination error:&error];
                     
+                    //Delete Old File
+                    [[NSFileManager defaultManager] removeItemAtPath:source error:&error];
+                    
                     //Copy pieces
                     source = [NSString stringWithFormat:@"%@/IMG_%d.pieces",usernamePath,imgnumber];
                     destination = [NSString stringWithFormat:@"%@/flyer.pieces",flyerPath];
@@ -98,15 +100,19 @@
                     
                     if ( [[NSFileManager defaultManager] isReadableFileAtPath:source] )
                         [[NSFileManager defaultManager] copyItemAtPath:source toPath:destination error:&error];
+
+                    //Delete Old File
+                    [[NSFileManager defaultManager] removeItemAtPath:source error:&error];
                     
-                    //Copy txt
+                    //Copy txt File
                     source = [NSString stringWithFormat:@"%@/IMG_%d.txt",usernamePath,imgnumber];
                     destination = [NSString stringWithFormat:@"%@/flyer.txt",flyerPath];
                     
-                    
                     if ( [[NSFileManager defaultManager] isReadableFileAtPath:source] )
                         [[NSFileManager defaultManager] copyItemAtPath:source toPath:destination error:&error];
-                    
+
+                    //Delete Old File
+                    [[NSFileManager defaultManager] removeItemAtPath:source error:&error];
                     
                     //Here we Copy Icon files related this Flyer
                     source = [NSString stringWithFormat:@"%@/Icon/%d",usernamePath,imgnumber];
@@ -211,7 +217,44 @@
             
             }
             
-        }
+        }// Root Files Loop
+        
+        //Here we delete old folders list after copy Data
+
+        
+        //Delete Icon Folder
+        source = [NSString stringWithFormat:@"%@/Icon",usernamePath];
+        
+        if ([[NSFileManager defaultManager] isReadableFileAtPath:source] )
+            [[NSFileManager defaultManager] removeItemAtPath:source error:&error];
+        
+        //Delete Photo Folder
+        source = [NSString stringWithFormat:@"%@/Photo",usernamePath];
+        
+        if ([[NSFileManager defaultManager] isReadableFileAtPath:source] )
+            [[NSFileManager defaultManager] removeItemAtPath:source error:&error];
+        
+        //Delete Social Folder
+        source = [NSString stringWithFormat:@"%@/Social",usernamePath];
+        
+        if ([[NSFileManager defaultManager] isReadableFileAtPath:source] )
+            [[NSFileManager defaultManager] removeItemAtPath:source error:&error];
+
+        //Delete Symbol Folder
+        source = [NSString stringWithFormat:@"%@/Symbol",usernamePath];
+        
+        if ([[NSFileManager defaultManager] isReadableFileAtPath:source] )
+            [[NSFileManager defaultManager] removeItemAtPath:source error:&error];
+
+        
+        //Delete Templates Folder
+        source = [NSString stringWithFormat:@"%@/Template",usernamePath];
+        
+        if ([[NSFileManager defaultManager] isReadableFileAtPath:source] )
+            [[NSFileManager defaultManager] removeItemAtPath:source error:&error];
+
+        NSLog(@"Deleted Old Directories");
+        
 	}
 
 
@@ -228,8 +271,13 @@
     
     //Update fields of newly created user from old user
     PFUser *user = [PFUser currentUser];
-    user[@"contact"] = [oldUserobj objectForKey:@"contact"];
-    user[@"name"] = [oldUserobj objectForKey:@"name"];
+    
+    if ([oldUserobj objectForKey:@"name"])
+        user[@"name"] = [oldUserobj objectForKey:@"name"];
+
+    if ([oldUserobj objectForKey:@"contact"])
+        user[@"contact"] = [oldUserobj objectForKey:@"contact"];
+    
     if ([oldUserobj objectForKey:@"fbinvited"])
         user[@"fbinvited"] = [oldUserobj objectForKey:@"fbinvited"];
    

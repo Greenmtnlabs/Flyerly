@@ -19,6 +19,7 @@
 
 
 -(id)initWithPath:(NSString *)flyPath;
+
 -(void)loadFlyer :(NSString *)flyPath;
 
 -(void)saveFlyer :(UIImage *)snapShot;
@@ -37,7 +38,9 @@
 -(NSString *)addText;
 
 -(void)setImageFrame :(NSString *)uid :(CGRect )photoFrame;
+
 -(void)setImageTag :(NSString *)uid Tag :(NSString *)tag;
+
 -(NSString *)getImageTag :(NSString *)uid;
 
 -(void)setFlyerText :(NSString *)uid text:(NSString *)txt;
