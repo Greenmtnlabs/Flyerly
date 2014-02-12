@@ -198,8 +198,8 @@
             [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"User"];
 
             // Temp on for Testing here
-             FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-             [appDelegate fbChangeforNewVersion];
+            // FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+             //[appDelegate fbChangeforNewVersion];
             
             // Login success Move to Flyerly
             launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil] ;

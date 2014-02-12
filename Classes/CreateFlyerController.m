@@ -719,12 +719,9 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
             }
             
         }
-
-        
-        
-        
         
 		[layerScrollView addSubview:color];
+        
 	}// Loop
     
     if(IS_IPHONE_5){
@@ -751,6 +748,15 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
         curYLoc = 10;
         increment = 8;
     }
+    
+    NSMutableDictionary *templateDic;
+    NSString *textColor;
+    NSString *textWhiteColor;
+    
+    //Getting Last Info of Text Layer
+    templateDic = [flyer getLayerFromMaster:@"Template"];
+    textColor = [templateDic objectForKey:@"bordercolor"];
+    textWhiteColor = [templateDic objectForKey:@"bordercolorWhite"];
 
 	for (int i = 1; i <=  [borderArray count] ; i++)
 	{
@@ -777,7 +783,34 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
             }
         }
         
+        //Here we Highlight Last Color Selected
+        if (textColor != nil) {
+            
+            NSString *tcolor;
+            NSString *twhite;
+            CGFloat red = 0.0, green = 0.0, blue = 0.0, alpha = 0.0,wht = 0.0;
+            
+            UILabel *labelToStore = [[UILabel alloc]init];
+            labelToStore.textColor = colorName;
+            
+            //Getting RGB Color Code
+            [labelToStore.textColor getRed:&red green:&green blue:&blue alpha:&alpha];
+            
+            tcolor = [NSString stringWithFormat:@"%f, %f, %f", red, green, blue];
+            
+            [labelToStore.textColor getWhite:&wht alpha:&alpha];
+            twhite = [NSString stringWithFormat:@"%f, %f", wht, alpha];
+            
+            if ([textColor isEqualToString:tcolor] && [textWhiteColor isEqualToString:twhite] ) {
+                // Add border to selected layer thumbnail
+                color.backgroundColor = [globle colorWithHexString:@"0197dd"];
+            }
+            
+        }
+
+        
 		[layerScrollView addSubview:color];
+        
 	}//Loop
     
     if(IS_IPHONE_5){
