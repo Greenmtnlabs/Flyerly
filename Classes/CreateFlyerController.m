@@ -1328,6 +1328,9 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 
     
         [self.flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
+        
+        //Here we Highlight The ImageView
+        [self.flyimgView layerIsBeingEdited:currentLayer];
     }
     
     //Handling Select Unselect
@@ -1383,6 +1386,9 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
         [flyer setImageTag:currentLayer Tag:[NSString stringWithFormat:@"%d",view.tag]];
     
         [self.flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
+        
+        //Here we Highlight The ImageView
+        [self.flyimgView layerIsBeingEdited:currentLayer];
     }
     
     
@@ -1813,6 +1819,9 @@ int arrangeLayerIndex;
     
     //Here we call Render Layer on View
     [flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
+    
+    //Here we Highlight The ImageView
+    [self.flyimgView layerIsBeingEdited:currentLayer];
     
     [UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationDuration:0.4f];
@@ -2390,6 +2399,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         
         //Add Bottom Tab
         [self addBottomTabs:libEmpty];
+        
 		
         [UIView setAnimationDuration:0.4f];
 		[UIView commitAnimations];
