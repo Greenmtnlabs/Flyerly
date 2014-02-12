@@ -43,8 +43,10 @@ NSString * const TEXTHEIGHT = @"280.000000";
     //set Current Path of File Manager
     [[NSFileManager defaultManager] changeCurrentDirectoryPath:flyPath];
     
+    
     //Load flyer
     [self loadFlyer:flyPath];
+    
     return self;
 }
 
@@ -78,6 +80,45 @@ NSString * const TEXTHEIGHT = @"280.000000";
     
     //Here we write the dictionary of .peices files
     [masterLayers writeToFile:piecesFile atomically:YES];
+    
+    [self makeHistory];
+
+}
+
+/*
+ * Here we Copy Current Flyer folder with all related file
+ * to History folder name as timestamp for future Undo request
+ */
+-(void)makeHistory {
+    
+    NSError *error = nil;
+    NSString *lastFileName;
+    
+    //Getting Current Flyer folder Path
+    NSString* currentSourcepath  =   [[NSFileManager defaultManager] currentDirectoryPath];
+    
+    //Create History  folder Path
+    int timestamp = [[NSDate date] timeIntervalSince1970];
+    NSString* historyDestinationpath  =   [NSString stringWithFormat:@"%@/History/%d",currentSourcepath,timestamp];
+    
+    //Create Flyer folder
+    [[NSFileManager defaultManager] createDirectoryAtPath:historyDestinationpath withIntermediateDirectories:YES attributes:nil error:&error];
+    
+    NSArray *fileList = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:currentSourcepath error:nil];
+    
+    for(int i = 0 ; i < [fileList count];i++)
+    {
+        lastFileName = fileList[i];
+        
+        if (![lastFileName isEqualToString:@"History"]) {
+            NSString *source = [NSString stringWithFormat:@"%@/%@",currentSourcepath,lastFileName];
+            NSString *destination = [NSString stringWithFormat:@"%@/%@",historyDestinationpath,lastFileName];
+
+    
+            //Here we Copying that Folder
+            [[NSFileManager defaultManager] copyItemAtPath:source toPath:destination error:&error];
+        }
+    }
 
 }
 

@@ -24,6 +24,8 @@
 
 -(void)saveFlyer :(UIImage *)snapShot;
 
+-(void)makeHistory;
+
 -(void)deleteLayer :(NSString *)uid;
 
 -(NSArray *)allKeys;

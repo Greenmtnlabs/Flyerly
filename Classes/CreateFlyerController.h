@@ -114,13 +114,9 @@
 }
 
 @property(nonatomic, strong) NSMutableArray *textLabelLayersArray;
-@property(nonatomic, strong) NSMutableArray *cpyTextLabelLayersArray;
 @property(nonatomic, strong) NSMutableArray *symbolLayersArray;
-@property(nonatomic, strong) NSMutableArray *cpySymbolLayersArray;
 @property(nonatomic, strong) NSMutableArray *iconLayersArray;
-@property(nonatomic, strong) NSMutableArray *cpyIconLayersArray;
 @property(nonatomic, strong) NSMutableArray *photoLayersArray;
-@property(nonatomic, strong) NSMutableArray *cpyPhotoLayersArray;
 
 
 
@@ -234,6 +230,9 @@
 -(void)deleteSubviewsFromScrollView;
 
 -(void)addDonetoRightBarBotton;
+
+-(void)undoFlyer;
+-(void)setUndoStatus;
 
 -(IBAction)setAddMoreLayerTabAction:(id)sender;
 -(IBAction)setlibBackgroundTabAction:(id)sender;

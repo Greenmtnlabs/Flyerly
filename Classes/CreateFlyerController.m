@@ -16,7 +16,6 @@
 @synthesize cameraTabButton,photoTabButton,widthTabButton,heightTabButton,photoImgView,symbolImgView,iconImgView;
 @synthesize warningAlert,deleteAlert;
 @synthesize  imgPickerFlag,finalImgWritePath, addMoreLayerOrSaveFlyerLabel, takeOrAddPhotoLabel,layerScrollView;
-@synthesize cpyTextLabelLayersArray,cpyIconLayersArray,cpyPhotoLayersArray,cpySymbolLayersArray;
 @synthesize flyerNumber,flyerPath,flyer;
 
 //Version 3 Change
@@ -169,19 +168,7 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
         fontBorderScrollWidth = 35;
         fontBorderScrollHeight = 35;
 
-    undoCount = 0; // This is to track undo functionality. Set it to 0.
-    discardedLayer = NO; // This flag is used to check whether the layer is discarded or editted
     
-    // Make copy of layers to undo it later
-    [self makeCopyOfLayers:YES];
-    
-	FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
-	appDele.changesFlag = YES;
-
-	[[NSNotificationCenter defaultCenter] addObserver:[[UIApplication sharedApplication] delegate]
-											 selector:@selector(handleMemoryWarning:)
-												 name:@"UIApplicationMemoryWarningNotification"
-											   object:nil];
     
 	//Default Selection for start
 	selectedFont = [UIFont fontWithName:@"Arial" size:16];
@@ -234,8 +221,57 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     selectedAddMoreLayerTab = -1;
     
     
-    // Call Main View
-	[self callAddMoreLayers];
+    //Here we Set Top Bar Item
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont fontWithName:TITLE_FONT size:12];
+    label.textAlignment = UITextAlignmentCenter;
+    label.textColor = [UIColor whiteColor];
+    label.text = @"UNTITLED";
+    self.navigationItem.titleView = label;
+    
+    //Right ShareButton
+    UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+    shareButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
+	[shareButton addTarget:self action:@selector(callSaveAndShare) forControlEvents:UIControlEventTouchUpInside];
+    [shareButton setBackgroundImage:[UIImage imageNamed:@"share_button"] forState:UIControlStateNormal];
+    shareButton.showsTouchWhenHighlighted = YES;
+    
+    //Right UndoButton
+    UIButton *undoButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+    undoButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
+	[undoButton addTarget:self action:@selector(undo:) forControlEvents:UIControlEventTouchUpInside];
+    [undoButton setBackgroundImage:[UIImage imageNamed:@"undo"] forState:UIControlStateNormal];
+    undoButton.showsTouchWhenHighlighted = YES;
+    
+    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
+    rightUndoBarButton = [[UIBarButtonItem alloc] initWithCustomView:undoButton];
+    
+    
+    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,rightUndoBarButton,nil]];
+    
+    //Left BackButton
+    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+    [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+	[backButton addTarget:self action:@selector(callMenu) forControlEvents:UIControlEventTouchUpInside];
+    [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
+    backButton.showsTouchWhenHighlighted = YES;
+    UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    
+    //Left HelpButton
+    UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+    [helpButton addTarget:self action:@selector(loadHelpController) forControlEvents:UIControlEventTouchUpInside];
+    [helpButton setBackgroundImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
+    helpButton.showsTouchWhenHighlighted = YES;
+    UIBarButtonItem *leftBarHelpButton = [[UIBarButtonItem alloc] initWithCustomView:helpButton];
+    
+    [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:backBarButton,leftBarHelpButton,nil]];
+    
+    //Set Context View
+    [self addAllLayersIntoScrollView ];
+    
+    //Set Context Tabs
+    [self addBottomTabs:libFlyer];
 
 }
 
@@ -1595,6 +1631,10 @@ int arrangeLayerIndex;
 #pragma mark After ViewWillAppear Method Sequence
 -(void) callMenu
 {
+    
+    if (![currentLayer isEqualToString:@""]) [self.flyimgView layerStoppedEditing:currentLayer];
+        
+    
     //Here we take Snap shot of Flyer
     UIGraphicsBeginImageContextWithOptions(self.flyimgView.bounds.size, YES, 0.0f);
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -1874,95 +1914,27 @@ int arrangeLayerIndex;
 
 }
 
-/*
- * Make copy of layers to undo it later
- */
--(void)makeCopyOfLayers{
-    // Make copy of previous layers
-    if(flyerNumber == -1 && undoCount == 1){
-        // 1) If flyerNumber is -1 (i.e. no flyerNumber is assigned and this is a new flyer)
-        // 2) Undo is done for the first time
-        [self makeCopyOfLayers:YES];
-    } else if(undoCount > 1){
-        // Make copy of previous layers
-        //[self makeCopyOfLayers:YES];
-    }
-}
+
 
 /*
- * Make copy of layers to undo it later
+ * Here we Replace Current Flyer Folder From History in Decending Order
  */
--(void)makeCopyOfLayers:(BOOL)forceCopy{
+-(void)undoFlyer{
     
-    if(!self.cpyTextLabelLayersArray){
-        self.cpyTextLabelLayersArray = [[NSMutableArray alloc] init];
-    }
-    if(!self.cpyIconLayersArray){
-        self.cpyIconLayersArray = [[NSMutableArray alloc] init];
-    }
-    if(!self.cpyPhotoLayersArray){
-        self.cpyPhotoLayersArray = [[NSMutableArray alloc] init];
-    }
-    if(!self.cpySymbolLayersArray){
-        self.cpySymbolLayersArray = [[NSMutableArray alloc] init];
-    }
-    
-    [self.cpyTextLabelLayersArray removeAllObjects];
-    [self.cpyIconLayersArray removeAllObjects];
-    [self.cpyPhotoLayersArray removeAllObjects];
-    [self.cpySymbolLayersArray removeAllObjects];
-    
-
-    for(CustomLabel *label in textLabelLayersArray){
-        [self.cpyTextLabelLayersArray addObject:[NSKeyedUnarchiver unarchiveObjectWithData:[NSKeyedArchiver archivedDataWithRootObject:label]]];
-     }
-
-    for(UIImageView *symbolImage in symbolLayersArray){
-        [self.cpySymbolLayersArray addObject:[NSKeyedUnarchiver unarchiveObjectWithData:[NSKeyedArchiver archivedDataWithRootObject:symbolImage]]];
-    }
-    for(UIImageView *iconImage in iconLayersArray){
-        [self.cpyIconLayersArray addObject:[NSKeyedUnarchiver unarchiveObjectWithData:[NSKeyedArchiver archivedDataWithRootObject:iconImage]]];
-    }
-    for(UIImageView *photoImage in photoLayersArray){
-        [self.cpyPhotoLayersArray addObject:[NSKeyedUnarchiver unarchiveObjectWithData:[NSKeyedArchiver archivedDataWithRootObject:photoImage]]];
-    }
-}
-
--(void)undo:(UIButton *)undoButton{
-    
-    [textLabelLayersArray removeAllObjects];
-    [symbolLayersArray removeAllObjects];
-    [iconLayersArray removeAllObjects];
-    [photoLayersArray removeAllObjects];
-
-    for(CustomLabel *label in self.cpyTextLabelLayersArray){
-        [textLabelLayersArray addObject:[NSKeyedUnarchiver unarchiveObjectWithData:[NSKeyedArchiver archivedDataWithRootObject:label]]];
-    }
-    for(UIImageView *symbolImage in self.cpySymbolLayersArray){
-        [symbolLayersArray addObject:[NSKeyedUnarchiver unarchiveObjectWithData:[NSKeyedArchiver archivedDataWithRootObject:symbolImage]]];
-    }
-    for(UIImageView *iconImage in self.cpyIconLayersArray){
-        [iconLayersArray addObject:[NSKeyedUnarchiver unarchiveObjectWithData:[NSKeyedArchiver archivedDataWithRootObject:iconImage]]];
-    }
-    for(UIImageView *photoImage in self.cpyPhotoLayersArray){
-        [photoLayersArray addObject:[NSKeyedUnarchiver unarchiveObjectWithData:[NSKeyedArchiver archivedDataWithRootObject:photoImage]]];
-    }
-    
-    if(undoCount >= 1){
-        [rightUndoBarButton setEnabled:NO];
-        undoCount = 0;
-    }
-    
-    // RESET image view
-    [self resetImageview];
-
-    // RESET layers scroll view to show the undo layer again
-    [self resetLayerScrollView];
-    
+    [rightUndoBarButton setEnabled:NO];
     [Flurry logEvent:@"Undone"];
 
 }
 
+
+/*
+ * Here we Just Check History is Available in flyer Folder so Undo Bar Button Enable
+ * other wise we Disable Undo Bar Button
+ */
+-(void)setUndoStatus {
+
+
+}
 
 
 -(void)callAddMoreLayers {
@@ -1992,29 +1964,8 @@ int arrangeLayerIndex;
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
     rightUndoBarButton = [[UIBarButtonItem alloc] initWithCustomView:undoButton];
     
-    if(undoCount <= 0){
-        [rightUndoBarButton setEnabled:NO];
-        undoCount = 0;
-    }
 
     [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,rightUndoBarButton,nil]];
-    
-    //BackButton
-    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-	[backButton addTarget:self action:@selector(callMenu) forControlEvents:UIControlEventTouchUpInside];
-    [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
-     backButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-    
-    //HelpButton
-    UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    [helpButton addTarget:self action:@selector(loadHelpController) forControlEvents:UIControlEventTouchUpInside];
-    [helpButton setBackgroundImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
-    helpButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *leftBarHelpButton = [[UIBarButtonItem alloc] initWithCustomView:helpButton];
-    
-    [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:backBarButton,leftBarHelpButton,nil]];
     
     [self addBottomTabs:libFlyer];
     

@@ -81,6 +81,9 @@
                     //This Is Sub Flyer Folder of Template
                     [[NSFileManager defaultManager] createDirectoryAtPath:[NSString stringWithFormat:@"%@/Template",flyerPath] withIntermediateDirectories:YES attributes:nil error:&error];
                     
+                    //This Is Sub Flyer Folder of History
+                    [[NSFileManager defaultManager] createDirectoryAtPath:[NSString stringWithFormat:@"%@/History",flyerPath] withIntermediateDirectories:YES attributes:nil error:&error];
+                    
                     //Here we start Coping SOURCE Files into New structure
                     
                     //Copy ImageFile
