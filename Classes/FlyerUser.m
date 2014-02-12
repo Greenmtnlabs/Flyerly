@@ -96,13 +96,18 @@
                     //Copy pieces
                     source = [NSString stringWithFormat:@"%@/IMG_%d.pieces",usernamePath,imgnumber];
                     destination = [NSString stringWithFormat:@"%@/flyer.pieces",flyerPath];
-
+                    
                     
                     if ( [[NSFileManager defaultManager] isReadableFileAtPath:source] )
                         [[NSFileManager defaultManager] copyItemAtPath:source toPath:destination error:&error];
 
                     //Delete Old File
                     [[NSFileManager defaultManager] removeItemAtPath:source error:&error];
+                    
+                    //set Pieces Dictionary File for Update
+                    NSString *piecesFile = destination;
+                    
+                    NSMutableDictionary *masterLayers = [[NSMutableDictionary alloc] initWithContentsOfFile:piecesFile];
                     
                     //Copy txt File
                     source = [NSString stringWithFormat:@"%@/IMG_%d.txt",usernamePath,imgnumber];
@@ -129,10 +134,18 @@
                             source = [NSString stringWithFormat:@"%@/Icon/%d/%@",usernamePath,imgnumber,lastFileName];
                             destination = [NSString stringWithFormat:@"%@/Icon/%@",flyerPath,lastFileName];
                             
+                            NSMutableDictionary *layDic = [masterLayers objectForKey:[NSString stringWithFormat:@"Icon-%d",i]];
+
+                            [layDic setValue:[NSString stringWithFormat:@"Icon/%@",lastFileName] forKey:@"image"];
+                            
                             if ( [[NSFileManager defaultManager] isReadableFileAtPath:source] )
                                 [[NSFileManager defaultManager] copyItemAtPath:source toPath:destination error:&error];
+                            [masterLayers setValue:layDic forKey:[NSString stringWithFormat:@"Icon-%d",i]];
 
                         }//Loop
+                        
+                        //Here we write the dictionary of .peices files
+                        [masterLayers writeToFile:piecesFile atomically:YES];
 
                     }// End Icon Exist
 
@@ -152,10 +165,19 @@
                             source = [NSString stringWithFormat:@"%@/Photo/%d/%@",usernamePath,imgnumber,lastFileName];
                             destination = [NSString stringWithFormat:@"%@/Photo/%@",flyerPath,lastFileName];
                             
+                            NSMutableDictionary *layDic = [masterLayers objectForKey:[NSString stringWithFormat:@"Photo-%d",i]];
+                            
+                            [layDic setValue:[NSString stringWithFormat:@"Photo/%@",lastFileName] forKey:@"image"];
+                            
                             if ( [[NSFileManager defaultManager] isReadableFileAtPath:source] )
                                 [[NSFileManager defaultManager] copyItemAtPath:source toPath:destination error:&error];
                             
+                            [masterLayers setValue:layDic forKey:[NSString stringWithFormat:@"Photo-%d",i]];
+                            
                         }//Loop
+                        
+                        //Here we write the dictionary of .peices files
+                        [masterLayers writeToFile:piecesFile atomically:YES];
                         
                     }// End Photo Exist
                     
@@ -183,10 +205,19 @@
                             source = [NSString stringWithFormat:@"%@/Symbol/%d/%@",usernamePath,imgnumber,lastFileName];
                             destination = [NSString stringWithFormat:@"%@/Symbol/%@",flyerPath,lastFileName];
                             
+                            NSMutableDictionary *layDic = [masterLayers objectForKey:[NSString stringWithFormat:@"Symbol-%d",i]];
+                            
+                            [layDic setValue:[NSString stringWithFormat:@"Symbol/%@",lastFileName] forKey:@"image"];
+                            
                             if ( [[NSFileManager defaultManager] isReadableFileAtPath:source] )
                                 [[NSFileManager defaultManager] copyItemAtPath:source toPath:destination error:&error];
+                            [masterLayers setValue:layDic forKey:[NSString stringWithFormat:@"Symbol-%d",i]];
+
                             
                         }//Loop
+                        
+                        //Here we write the dictionary of .peices files
+                        [masterLayers writeToFile:piecesFile atomically:YES];
                         
                     }// End Symbol Exist
                     
@@ -196,19 +227,27 @@
                     if ([[NSFileManager defaultManager] fileExistsAtPath:source isDirectory:NULL]) {
                         NSLog(@"Exist");
                         
-                        NSArray *Symbolfiles = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:source error:nil];
+                        NSArray *templatefiles = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:source error:nil];
                         
-                        for(int i = 0 ; i < [Symbolfiles count];i++)
+                        for(int i = 0 ; i < [templatefiles count];i++)
                         {
-                            lastFileName = Symbolfiles[i];
+                            lastFileName = templatefiles[i];
                             
                             source = [NSString stringWithFormat:@"%@/Template/%d/%@",usernamePath,imgnumber,lastFileName];
                             destination = [NSString stringWithFormat:@"%@/Template/%@",flyerPath,lastFileName];
                             
+                            NSMutableDictionary *layDic = [masterLayers objectForKey:@"Template"];
+                            
+                            [layDic setValue:[NSString stringWithFormat:@"Template/%@",lastFileName] forKey:@"image"];
+                            
                             if ( [[NSFileManager defaultManager] isReadableFileAtPath:source] )
                                 [[NSFileManager defaultManager] copyItemAtPath:source toPath:destination error:&error];
+                            [masterLayers setValue:layDic forKey:@"Template"];
                             
                         }//Loop
+                        
+                        //Here we write the dictionary of .peices files
+                        [masterLayers writeToFile:piecesFile atomically:YES];
                         
                     }// End Template Exist
                     
