@@ -1924,13 +1924,14 @@ int arrangeLayerIndex;
     
     NSArray *fileList = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:historyDestinationpath error:nil];
     
-    if (fileList.count > 1) {
+    if (fileList.count > 2) {
         
         [rightUndoBarButton setEnabled:YES];
         
     } else {
     
         [rightUndoBarButton setEnabled:NO];
+        [flyer addToHistory];
     
     }
     
@@ -2060,7 +2061,12 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
     draftViewController.imageFileName = finalImgWritePath;
     draftViewController.detailFileName = [finalImgWritePath stringByReplacingOccurrencesOfString:@".jpg" withString:@".txt"];
-    [self.navigationController pushViewController:draftViewController animated:YES];
+    
+    UIView *sharePanel = [[UIView alloc] init];
+    sharePanel = draftViewController.view;
+    [sharePanel setFrame:CGRectMake(10, 100, 310,400 )];
+    [self.view addSubview:sharePanel];
+    //[self.navigationController pushViewController:draftViewController animated:YES];
 }
 
 
@@ -2588,6 +2594,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 -(NSData*)getCurrentFrameAndSaveIt
 {
+    return nil;//Temporary
 	CGSize size = CGSizeMake(self.imgView.bounds.size.width,self.imgView.bounds.size.height );
     //if ([UIScreen instancesRespondToSelector:@selector(scale)]) {
         //UIGraphicsBeginImageContextWithOptions(size, NO, 2.0);
@@ -2950,7 +2957,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     
     [self addScrollView:layerScrollView];
     
-    deleteMode = NO;
 
 }
 

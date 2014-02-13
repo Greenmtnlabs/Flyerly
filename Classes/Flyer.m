@@ -217,6 +217,8 @@ NSString * const TEXTHEIGHT = @"280.000000";
         
     }
     
+    
+    //Here we set Replace Current Folder From History recommended
     NSArray *historyLastFolderList = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:historyDestinationpath error:nil];
     
     
@@ -237,10 +239,6 @@ NSString * const TEXTHEIGHT = @"280.000000";
         }
     }
     
-    //Here we Delete Last History Folder
-    [[NSFileManager defaultManager] removeItemAtPath:historyDestinationpath error:&error];
-    
-
  
 }
 
