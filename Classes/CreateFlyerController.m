@@ -137,18 +137,8 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 -(void)viewDidLoad{
 	[super viewDidLoad];
     
-    NSArray *flyerPiecesKeys = [flyer allKeys];
-    
-    for (int i = 0 ; i < flyerPiecesKeys.count; i++) {
-
-        //Getting Layers Detail from Master Dictionary
-        NSMutableDictionary *dic = [flyer getLayerFromMaster:[flyerPiecesKeys objectAtIndex:i]];
-        
-        //Create Subview from dictionary
-        [self.flyimgView renderLayer:[flyerPiecesKeys objectAtIndex:i] layerDictionary:dic];
-
-    }
-
+    //Render Flyer
+    [self renderFlyer];
  
     globle = [FlyerlySingleton RetrieveSingleton];
     [self.view setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
@@ -240,7 +230,7 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     //Right UndoButton
     UIButton *undoButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     undoButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
-	[undoButton addTarget:self action:@selector(undo:) forControlEvents:UIControlEventTouchUpInside];
+	[undoButton addTarget:self action:@selector(undoFlyer) forControlEvents:UIControlEventTouchUpInside];
     [undoButton setBackgroundImage:[UIImage imageNamed:@"undo"] forState:UIControlStateNormal];
     undoButton.showsTouchWhenHighlighted = YES;
     
@@ -249,6 +239,9 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     
     
     [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,rightUndoBarButton,nil]];
+    
+    //Set Undo Bar Status
+    [self setUndoStatus];
     
     //Left BackButton
     UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
@@ -272,61 +265,34 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     
     //Set Context Tabs
     [self addBottomTabs:libFlyer];
+    
+    currentLayer = @"";
 
 }
 
 /*
  * This resets the flyer image view by removing and readding all its subviews
  */
--(void)resetImageview{
-    
+-(void)renderFlyer {
 
-    // Remo all views inside image view
-    
-    NSArray *viewsToRemove = [self.imgView subviews];
+    // Remove all Subviews inside image view
+    NSArray *viewsToRemove = [self.flyimgView subviews];
     for (UIView *v in viewsToRemove) {
         [v removeFromSuperview];
     }
     
-    // Remove image view from super view
+    NSArray *flyerPiecesKeys = [flyer allKeys];
     
-	// Create Main Image View
-    /*
-    if(IS_IPHONE_5){
-        imgView = [[UIImageView alloc]initWithFrame:CGRectMake(5, 65, 310, 310)];
-    }else{
-        imgView = [[UIImageView alloc]initWithFrame:CGRectMake(5, 44, 310, 310)];
-    }*/
-    
-     // Set template image
-     imgView.image = selectedTemplate;
-
-    
-    // Setting arrays if in edit mode
-    if(symbolLayersArray){
-        for(UIImageView *symbolImageView in symbolLayersArray){
-            [self.imgView addSubview:symbolImageView];
-        }
-    }
-    if(iconLayersArray){
-        for(UIImageView *iconImageView in iconLayersArray){
-            [self.imgView addSubview:iconImageView];
-        }
-    }
-    if(photoLayersArray){
-        for(UIImageView *photoImageView in photoLayersArray){
-            [self.imgView addSubview:photoImageView];
-        }
-    }
-    if(textLabelLayersArray){
-        for(CustomLabel *customLabel in textLabelLayersArray){
-            [self.imgView addSubview:customLabel];
-        }
+    for (int i = 0 ; i < flyerPiecesKeys.count; i++) {
+        
+        //Getting Layers Detail from Master Dictionary
+        NSMutableDictionary *dic = [flyer getLayerFromMaster:[flyerPiecesKeys objectAtIndex:i]];
+        
+        //Create Subview from dictionary
+        [self.flyimgView renderLayer:[flyerPiecesKeys objectAtIndex:i] layerDictionary:dic];
+        
     }
     
-    // Add image view to superview
-	//[self.view addSubview:imgView];
-    [self callAddMoreLayers];
 }
 
 /*
@@ -1917,11 +1883,29 @@ int arrangeLayerIndex;
 
 
 /*
- * Here we Replace Current Flyer Folder From History in Decending Order
+ * Here we Replace Current Flyer Folder From History of Last Generated
  */
 -(void)undoFlyer{
     
-    [rightUndoBarButton setEnabled:NO];
+    //Here we send Request to Model for Move Back
+    [flyer replaceFromHistory];
+        
+    //set Undo Bar Button Status
+    [self setUndoStatus];
+    
+    //Here we Re-Initialize Flyer Instance
+    NSString* currentPath  =   [[NSFileManager defaultManager] currentDirectoryPath];
+    self.flyer = [[Flyer alloc]initWithPath:currentPath];
+    
+    //Here we Remove all Object from Controller Dictionary
+    [self.flyimgView.layers removeAllObjects];
+    
+    //Here we Render Flyer
+    [self renderFlyer];
+    
+    //Here we Load Current Layer in ScrollView
+    [self addAllLayersIntoScrollView];
+    
     [Flurry logEvent:@"Undone"];
 
 }
@@ -1933,7 +1917,23 @@ int arrangeLayerIndex;
  */
 -(void)setUndoStatus {
 
-
+    //Getting Current Flyer folder Path
+    NSString* currentPath  =   [[NSFileManager defaultManager] currentDirectoryPath];
+    
+    NSString* historyDestinationpath  =  [NSString stringWithFormat:@"%@/History",currentPath];
+    
+    NSArray *fileList = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:historyDestinationpath error:nil];
+    
+    if (fileList.count > 1) {
+        
+        [rightUndoBarButton setEnabled:YES];
+        
+    } else {
+    
+        [rightUndoBarButton setEnabled:NO];
+    
+    }
+    
 }
 
 
@@ -1957,7 +1957,7 @@ int arrangeLayerIndex;
     //UndoButton
     UIButton *undoButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     undoButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
-	[undoButton addTarget:self action:@selector(undo:) forControlEvents:UIControlEventTouchUpInside];
+	[undoButton addTarget:self action:@selector(undoFlyer) forControlEvents:UIControlEventTouchUpInside];
     [undoButton setBackgroundImage:[UIImage imageNamed:@"undo"] forState:UIControlStateNormal];
     undoButton.showsTouchWhenHighlighted = YES;
     
@@ -1996,11 +1996,17 @@ int arrangeLayerIndex;
         }
     }
     
+    //Here we Save Flyer
     [flyer saveFlyer:snapshotImage];
-    [self addAllLayersIntoScrollView ];
-    currentLayer = @"";
 
-    [UIView commitAnimations];    
+    //Here we Set Undo Bar Button Status
+    [self setUndoStatus];
+    
+    //Here we Add All Generated Layers add into ScrollView
+    [self addAllLayersIntoScrollView ];
+    
+    currentLayer = @"";
+   
 }
 
 CGRect initialBounds;
@@ -2275,11 +2281,8 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 -(IBAction) setAddMoreLayerTabAction:(id) sender {
     
 	UIButton *selectedButton = (UIButton*)sender;
-    [self SetMenu];
+   // [self SetMenu];
     
-    if(undoCount >= 1){
-        [rightUndoBarButton setEnabled:YES];
-    }
     
     //Set Unselected All
     [addMoreFontTabButton setSelected:NO];
@@ -2432,7 +2435,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 
 -(void) SetMenu{
-    
+    /*
     //Back Button
     UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
@@ -2469,6 +2472,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     if(undoCount == 0){
         [rightUndoBarButton setEnabled:NO];
     }
+     */
 }
 
 -(void) callDeleteLayer{

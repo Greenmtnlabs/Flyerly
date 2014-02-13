@@ -38,6 +38,13 @@ NSString * const TEXTHEIGHT = @"280.000000";
         //Create New Directory
         [self createFlyerPath:flyPath];
         
+        //set Current Path of File Manager
+        [[NSFileManager defaultManager] changeCurrentDirectoryPath:flyPath];
+
+        //its Use Current Path
+        //For Future Undo Request
+        [self addToHistory];
+        
     }
     
     //set Current Path of File Manager
@@ -81,7 +88,7 @@ NSString * const TEXTHEIGHT = @"280.000000";
     //Here we write the dictionary of .peices files
     [masterLayers writeToFile:piecesFile atomically:YES];
     
-    [self makeHistory];
+    [self addToHistory];
 
 }
 
@@ -89,7 +96,7 @@ NSString * const TEXTHEIGHT = @"280.000000";
  * Here we Copy Current Flyer folder with all related file
  * to History folder name as timestamp for future Undo request
  */
--(void)makeHistory {
+-(void)addToHistory {
     
     NSError *error = nil;
     NSString *lastFileName;
@@ -97,29 +104,167 @@ NSString * const TEXTHEIGHT = @"280.000000";
     //Getting Current Flyer folder Path
     NSString* currentSourcepath  =   [[NSFileManager defaultManager] currentDirectoryPath];
     
-    //Create History  folder Path
-    int timestamp = [[NSDate date] timeIntervalSince1970];
-    NSString* historyDestinationpath  =   [NSString stringWithFormat:@"%@/History/%d",currentSourcepath,timestamp];
     
-    //Create Flyer folder
-    [[NSFileManager defaultManager] createDirectoryAtPath:historyDestinationpath withIntermediateDirectories:YES attributes:nil error:&error];
+    NSString* historyDestinationpath  =  [NSString stringWithFormat:@"%@/History",currentSourcepath];
     
-    NSArray *fileList = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:currentSourcepath error:nil];
+    NSArray *fileList = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:historyDestinationpath error:nil];
     
-    for(int i = 0 ; i < [fileList count];i++)
+    //HISTORY CHECK
+    if (fileList.count > 1) {
+        
+        //HISTORY AVAILABLE
+        
+        NSArray *sortedFlyersList = [fileList sortedArrayUsingFunction:compareDesc context:NULL];
+    
+        NSString* historyLastFilepath = [NSString stringWithFormat:@"%@/%@",historyDestinationpath,[sortedFlyersList objectAtIndex:0]];
+    
+        // Here we Compare Both Files One Current Flyer Folder and Second Last flyer Folder from History if
+        // its Mached  with each other then we are not create Directory
+        // in history Directory other wise we make a one copy.
+        if ([self compareFilesForMakeHistory:currentSourcepath LastHistoryPath:historyLastFilepath]) {
+    
+            //Create History  folder Path
+            int timestamp = [[NSDate date] timeIntervalSince1970];
+            NSString* historyDestinationpath  =   [NSString stringWithFormat:@"%@/History/%d",currentSourcepath,timestamp];
+    
+            //Create Flyer folder
+            [[NSFileManager defaultManager] createDirectoryAtPath:historyDestinationpath withIntermediateDirectories:YES attributes:nil error:&error];
+    
+            NSArray *fileList = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:currentSourcepath error:nil];
+    
+            for(int i = 0 ; i < [fileList count];i++)
+            {
+                lastFileName = fileList[i];
+        
+                if (![lastFileName isEqualToString:@"History"]) {
+                    NSString *source = [NSString stringWithFormat:@"%@/%@",currentSourcepath,lastFileName];
+                    NSString *destination = [NSString stringWithFormat:@"%@/%@",historyDestinationpath,lastFileName];
+    
+                    //Here we Copying that File or Folder
+                    [[NSFileManager defaultManager] copyItemAtPath:source toPath:destination error:&error];
+                }
+            }
+        
+        }// after Compare
+        
+    } else {
+    
+         //HISTORY NOT AVAILABLE
+        
+        //Create History  folder Path
+        int timestamp = [[NSDate date] timeIntervalSince1970];
+        NSString* historyDestinationpath  =   [NSString stringWithFormat:@"%@/History/%d",currentSourcepath,timestamp];
+        
+        //Create Flyer folder
+        [[NSFileManager defaultManager] createDirectoryAtPath:historyDestinationpath withIntermediateDirectories:YES attributes:nil error:&error];
+        
+        NSArray *fileList = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:currentSourcepath error:nil];
+        
+        for(int i = 0 ; i < [fileList count];i++)
+        {
+            lastFileName = fileList[i];
+            
+            if (![lastFileName isEqualToString:@"History"]) {
+                NSString *source = [NSString stringWithFormat:@"%@/%@",currentSourcepath,lastFileName];
+                NSString *destination = [NSString stringWithFormat:@"%@/%@",historyDestinationpath,lastFileName];
+                
+                //Here we Copying that File or Folder
+                [[NSFileManager defaultManager] copyItemAtPath:source toPath:destination error:&error];
+            }
+        }
+        
+    }//HISTORY CHECK
+
+}
+
+
+
+/*
+ * Here we Replace Current Flyer Folder From History of Last Generated
+ */
+-(void)replaceFromHistory{
+    
+    NSError *error = nil;
+    NSString *lastFileName;
+    
+    //Getting Current Flyer folder Path
+    NSString* currentPath  =   [[NSFileManager defaultManager] currentDirectoryPath];
+    
+    NSString* historyDestinationpath  =  [NSString stringWithFormat:@"%@/History",currentPath];
+    
+    NSArray *fileList = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:historyDestinationpath error:nil];
+    
+    NSArray *sortedFlyersList = [fileList sortedArrayUsingFunction:compareDesc context:NULL];
+    
+    if (sortedFlyersList.count <= 1)return;
+    int idx = 0;
+    
+   NSString *historyLastFilepath = [NSString stringWithFormat:@"%@/%@",historyDestinationpath,[sortedFlyersList objectAtIndex:idx]];
+    
+    
+    // Here we Compare Both Files One Current Flyer Folder and Second Last flyer Folder from History if
+    // its Mached  with each other then we get previous Directory for Undo if Exists
+    if (![self compareFilesForMakeHistory:currentPath LastHistoryPath:historyLastFilepath]) {
+        
+        idx++;
+        
+        //Here we Delete Last History Folder
+        [[NSFileManager defaultManager] removeItemAtPath:historyLastFilepath error:&error];
+        
+        if (sortedFlyersList.count >= idx) {
+            historyDestinationpath = [NSString stringWithFormat:@"%@/%@",historyDestinationpath,[sortedFlyersList objectAtIndex:idx]];
+        }
+        
+    }
+    
+    NSArray *historyLastFolderList = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:historyDestinationpath error:nil];
+    
+    
+    for(int i = 0 ; i < [historyLastFolderList count];i++)
     {
-        lastFileName = fileList[i];
+        lastFileName = historyLastFolderList[i];
         
         if (![lastFileName isEqualToString:@"History"]) {
-            NSString *source = [NSString stringWithFormat:@"%@/%@",currentSourcepath,lastFileName];
-            NSString *destination = [NSString stringWithFormat:@"%@/%@",historyDestinationpath,lastFileName];
-
-    
-            //Here we Copying that Folder
+            NSString *source = [NSString stringWithFormat:@"%@/%@",historyDestinationpath,lastFileName];
+            NSString *destination = [NSString stringWithFormat:@"%@/%@",currentPath,lastFileName];
+            
+            //First we Delete that File or Folder after we copy from History
+            //Here we Delete that File or Folder From Current Folder
+            [[NSFileManager defaultManager] removeItemAtPath:destination error:&error];
+            
+            //Here we Copy that File or Folder From History
             [[NSFileManager defaultManager] copyItemAtPath:source toPath:destination error:&error];
         }
     }
+    
+    //Here we Delete Last History Folder
+    [[NSFileManager defaultManager] removeItemAtPath:historyDestinationpath error:&error];
+    
 
+ 
+}
+
+
+-(BOOL)compareFilesForMakeHistory :(NSString *)curPath LastHistoryPath:(NSString *)hisPath {
+    
+    BOOL status = YES;
+    
+    //set Current Pieces Dictionary File
+    NSString *curPiecesFile = [curPath stringByAppendingString:[NSString stringWithFormat:@"/flyer.pieces"]];
+    
+    //set History Pieces Dictionary File
+    NSString *historyPiecesFile = [hisPath stringByAppendingString:[NSString stringWithFormat:@"/flyer.pieces"]];
+
+    NSError *error = nil;
+    
+    NSString *curStr = [[NSString alloc] initWithContentsOfFile:curPiecesFile encoding:NSUTF8StringEncoding error:&error];
+    NSString *hisStr =  [[NSString alloc] initWithContentsOfFile:historyPiecesFile encoding:NSUTF8StringEncoding error:&error];
+    
+    if ([curStr isEqualToString:hisStr]) {
+        status = NO;
+    }
+
+    return status;
 }
 
 
@@ -162,7 +307,7 @@ NSString * const TEXTHEIGHT = @"280.000000";
 
 
 /*
- *Here we sort Array for Exact Render of Flyer
+ *Here we sort Array in Ascending order for Exact Render of Flyer
  * as last saved.
  */
 NSInteger compareTimestamps(id stringLeft, id stringRight, void *context) {
@@ -179,6 +324,24 @@ NSInteger compareTimestamps(id stringLeft, id stringRight, void *context) {
         return NSOrderedSame;
 }
 
+
+/*
+ *Here we sort Array in Desending order for Exact Render of Flyer
+ * as last saved.
+ */
+NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
+    
+    // Convert both strings to integers
+    int intLeft = [stringLeft intValue];
+    int intRight = [stringRight intValue];
+    
+    if (intLeft < intRight)
+        return NSOrderedDescending;
+    else if (intLeft > intRight)
+        return NSOrderedAscending;
+    else
+        return NSOrderedSame;
+}
 
 /*
  * Here we get Selected Dictionary From MasterLayers
@@ -384,32 +547,13 @@ NSInteger compareTimestamps(id stringLeft, id stringRight, void *context) {
     
      NSArray *flyersList = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:usernamePath error:nil];
     
-    NSArray *sortedFlyersList = [flyersList sortedArrayUsingFunction:compareTimestamps context:NULL];
+    NSArray *sortedFlyersList = [flyersList sortedArrayUsingFunction:compareDesc context:NULL];
     
     NSString *lastFileName;
     NSMutableArray *recentFlyers = [[NSMutableArray alloc] init];
     
     
     if (sortedFlyersList.count > flyCount) {
-        
-        //More then 4 Saved Flyer or Empty
-        int start = [sortedFlyersList count] -1;
-        int end = [sortedFlyersList count] - flyCount;
-        
-        for(int i = start ; i >= end ;i--)
-        {
-            lastFileName = sortedFlyersList[i];
-            
-            //Checking For Integer Dir Names Only
-            if ([[NSScanner scannerWithString:lastFileName] scanInt:nil]) {
-                
-                NSString *recentflyPath = [NSString stringWithFormat:@"%@/%@/flyer.jpg",usernamePath,lastFileName];
-                [recentFlyers addObject:recentflyPath];
-                
-            }
-            
-        }
-    } else {
         
         // Less then 4 Flyer or Empty
         for(int i = 0 ; i < sortedFlyersList.count ;i++)

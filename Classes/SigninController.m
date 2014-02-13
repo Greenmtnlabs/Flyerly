@@ -199,7 +199,7 @@
 
             // Temp on for Testing here
             // FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-             //[appDelegate fbChangeforNewVersion];
+            // [appDelegate fbChangeforNewVersion];
             
             // Login success Move to Flyerly
             launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil] ;

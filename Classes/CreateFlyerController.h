@@ -231,6 +231,7 @@
 
 -(void)addDonetoRightBarBotton;
 
+-(void)renderFlyer;
 -(void)undoFlyer;
 -(void)setUndoStatus;
 

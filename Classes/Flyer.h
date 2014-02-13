@@ -24,7 +24,11 @@
 
 -(void)saveFlyer :(UIImage *)snapShot;
 
--(void)makeHistory;
+-(void)addToHistory;
+
+-(void)replaceFromHistory;
+
+-(BOOL)compareFilesForMakeHistory :(NSString *)curPath LastHistoryPath:(NSString *)hisPath;
 
 -(void)deleteLayer :(NSString *)uid;
 
