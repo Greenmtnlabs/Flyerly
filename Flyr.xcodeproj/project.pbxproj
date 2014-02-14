@@ -763,6 +763,7 @@
 		20920016184F40330034C4F6 /* InviteFriendsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20920014184F40330034C4F6 /* InviteFriendsCell.xib */; };
 		2092FFCB184E00BF0034C4F6 /* flyerlylogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 2092FFC9184E00BF0034C4F6 /* flyerlylogo.png */; };
 		2092FFCC184E00BF0034C4F6 /* flyerlylogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2092FFCA184E00BF0034C4F6 /* flyerlylogo@2x.png */; };
+		20982CDB18ADBFA40052AF58 /* UsersData in Resources */ = {isa = PBXBuildFile; fileRef = 20982CDA18ADBFA40052AF58 /* UsersData */; };
 		20B865F91851EF0400484D7D /* checkgreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 20B865F71851EF0400484D7D /* checkgreen.png */; };
 		20B865FA1851EF0400484D7D /* checkgreen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20B865F81851EF0400484D7D /* checkgreen@2x.png */; };
 		20B865FD1851EF6C00484D7D /* checkgray.png in Resources */ = {isa = PBXBuildFile; fileRef = 20B865FB1851EF6C00484D7D /* checkgray.png */; };
@@ -2118,6 +2119,7 @@
 		20920014184F40330034C4F6 /* InviteFriendsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteFriendsCell.xib; sourceTree = "<group>"; };
 		2092FFC9184E00BF0034C4F6 /* flyerlylogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flyerlylogo.png; sourceTree = "<group>"; };
 		2092FFCA184E00BF0034C4F6 /* flyerlylogo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flyerlylogo@2x.png"; sourceTree = "<group>"; };
+		20982CDA18ADBFA40052AF58 /* UsersData */ = {isa = PBXFileReference; lastKnownFileType = folder; path = UsersData; sourceTree = "<group>"; };
 		20B865F71851EF0400484D7D /* checkgreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkgreen.png; sourceTree = "<group>"; };
 		20B865F81851EF0400484D7D /* checkgreen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkgreen@2x.png"; sourceTree = "<group>"; };
 		20B865FB1851EF6C00484D7D /* checkgray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkgray.png; sourceTree = "<group>"; };
@@ -4137,6 +4139,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				20982CDA18ADBFA40052AF58 /* UsersData */,
 				201D11B318AC25EF008C5218 /* flyerbundle */,
 				65CC0AB5171802DF003D0BE7 /* Settings.bundle */,
 				8D1107310486CEB800E47090 /* Flyr-Info.plist */,
@@ -5243,6 +5246,7 @@
 				0F80C3B71785B41300D36795 /* welcome_button.png in Resources */,
 				0F80C3B81785B41300D36795 /* welcome_button@2x.png in Resources */,
 				0F80C3C51785B4AB00D36795 /* email_signin.png in Resources */,
+				20982CDB18ADBFA40052AF58 /* UsersData in Resources */,
 				0F80C3C61785B4AB00D36795 /* email_signin@2x.png in Resources */,
 				0F80C3C71785B4AB00D36795 /* password_signin.png in Resources */,
 				0F80C3C81785B4AB00D36795 /* password_signin@2x.png in Resources */,

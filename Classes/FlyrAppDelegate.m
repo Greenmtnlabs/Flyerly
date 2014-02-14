@@ -187,6 +187,10 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
         }
     }
     
+    if(![[NSUserDefaults standardUserDefaults] stringForKey:@"userDataExist"]){
+        [self copyUsersDataForTesting];
+    }
+    
     [window  setRootViewController:navigationController];
     
     // Override point for customization after application launch.
@@ -263,6 +267,64 @@ if it exist then we call Merging Process
 
         }
     }];
+}
+
+
+/*
+ * Here we Copy Data on Device For Testing Merge User Process
+ */
+-(void)copyUsersDataForTesting {
+    
+    //Getting Home Directory
+	NSString *homeDirectoryPath = NSHomeDirectory();
+	NSString *docPath = [homeDirectoryPath stringByAppendingString:@"/Documents"];
+
+    
+    //Here we Copy Default Directory From Resource Bundle
+    [self copyDirectory:docPath];
+    
+    //its for remember key of user Data already copy to Device
+    [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"userDataExist"];
+
+
+}
+
+
+
+/*
+ * Here we Copy User Bundle from Resource Bundle
+ */
+-(void) copyDirectory:(NSString *)directory {
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSError *error;
+    
+    NSString *documentDBFolderPath = directory;
+    NSString *resourceDBFolderPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"/UsersData"];
+    
+    if (![fileManager fileExistsAtPath:documentDBFolderPath]) {
+        //Create Directory!
+        [fileManager createDirectoryAtPath:documentDBFolderPath withIntermediateDirectories:NO attributes:nil error:&error];
+    } else {
+        NSLog(@"Directory exists! %@", documentDBFolderPath);
+    }
+    
+    NSArray *fileList = [fileManager contentsOfDirectoryAtPath:resourceDBFolderPath error:&error];
+    
+    for (NSString *s in fileList) {
+        
+        NSString *newFilePath = [documentDBFolderPath stringByAppendingPathComponent:s];
+        NSString *oldFilePath = [resourceDBFolderPath stringByAppendingPathComponent:s];
+        
+        if (![fileManager fileExistsAtPath:newFilePath]) {
+            
+            //File does not exist, copy it
+            [fileManager copyItemAtPath:oldFilePath toPath:newFilePath error:&error];
+            
+        } else {
+            NSLog(@"File exists: %@", newFilePath);
+        }
+    }
 }
 
 
