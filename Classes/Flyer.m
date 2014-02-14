@@ -245,31 +245,35 @@ NSString * const TEXTHEIGHT = @"280.000000";
         }
         if (sortedFlyersList.count > idx) {
             historyDestinationpath = [NSString stringWithFormat:@"%@/%@",historyDestinationpath,[sortedFlyersList objectAtIndex:idx]];
+        }else {
+            historyDestinationpath = [NSString stringWithFormat:@"%@/%@",historyDestinationpath,[sortedFlyersList objectAtIndex:idx -1]];
         }
+        
+        //Here we set Replace Current Folder From History recommended
+        NSArray *historyLastFolderList = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:historyDestinationpath error:nil];
+        
+        
+        for(int i = 0 ; i < [historyLastFolderList count];i++)
+        {
+            lastFileName = historyLastFolderList[i];
+            
+            if (![lastFileName isEqualToString:@"History"]) {
+                NSString *source = [NSString stringWithFormat:@"%@/%@",historyDestinationpath,lastFileName];
+                NSString *destination = [NSString stringWithFormat:@"%@/%@",currentPath,lastFileName];
+                
+                //First we Delete that File or Folder after we copy from History
+                //Here we Delete that File or Folder From Current Folder
+                [[NSFileManager defaultManager] removeItemAtPath:destination error:&error];
+                
+                //Here we Copy that File or Folder From History
+                [[NSFileManager defaultManager] copyItemAtPath:source toPath:destination error:&error];
+            }
+        }
+
         
     }
     
     
-    //Here we set Replace Current Folder From History recommended
-    NSArray *historyLastFolderList = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:historyDestinationpath error:nil];
-    
-    
-    for(int i = 0 ; i < [historyLastFolderList count];i++)
-    {
-        lastFileName = historyLastFolderList[i];
-        
-        if (![lastFileName isEqualToString:@"History"]) {
-            NSString *source = [NSString stringWithFormat:@"%@/%@",historyDestinationpath,lastFileName];
-            NSString *destination = [NSString stringWithFormat:@"%@/%@",currentPath,lastFileName];
-            
-            //First we Delete that File or Folder after we copy from History
-            //Here we Delete that File or Folder From Current Folder
-            [[NSFileManager defaultManager] removeItemAtPath:destination error:&error];
-            
-            //Here we Copy that File or Folder From History
-            [[NSFileManager defaultManager] copyItemAtPath:source toPath:destination error:&error];
-        }
-    }
     
  
 }

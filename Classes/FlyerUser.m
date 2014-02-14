@@ -255,12 +255,33 @@
                     }// End Template Exist
                     
                     
+                    //Create One Copy in History of Flyer
+                    NSString* historyDestinationpath  =  [NSString stringWithFormat:@"%@/History/%d",flyerPath,imgnumber];
+                    
+                    NSArray *fileList = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:flyerPath error:nil];
+                    
+                    //Create Flyer folder
+                    [[NSFileManager defaultManager] createDirectoryAtPath:historyDestinationpath withIntermediateDirectories:YES attributes:nil error:&error];
+                    
+                    for(int i = 0 ; i < [fileList count];i++)
+                    {
+                        lastFileName = fileList[i];
+                        
+                        if (![lastFileName isEqualToString:@"History"]) {
+                            NSString *source = [NSString stringWithFormat:@"%@/%@",flyerPath,lastFileName];
+                            NSString *destination = [NSString stringWithFormat:@"%@/%@",historyDestinationpath,lastFileName];
+                            
+                            //Here we Copying that File or Folder
+                            [[NSFileManager defaultManager] copyItemAtPath:source toPath:destination error:&error];
+                        }
+                    }//End Loop History
+
+                    
                 }
             
             }
             
-            //Here we Write Code For Make History
-            NSLog(@"History");
+
             
         }// Root Files Loop
         
