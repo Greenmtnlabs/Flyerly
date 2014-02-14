@@ -24,8 +24,6 @@
 @synthesize textLabelLayersArray,symbolLayersArray,iconLayersArray,photoLayersArray,currentLayer,layersDic;
 
 int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track selected Tab on Add More
-int selectedPhotoTab = 1;
-
 
 
 #pragma mark  View Appear Methods
