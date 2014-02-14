@@ -128,6 +128,7 @@
     
     //SetFrame
     [imgView setFrame:CGRectMake([[detail valueForKey:@"x"] floatValue], [[detail valueForKey:@"y"] floatValue], [[detail valueForKey:@"width"] floatValue], [[detail valueForKey:@"height"] floatValue])];
+              
     
     //Set Image
     if ( ![[detail valueForKey:@"image"] isEqualToString:@""] ) {
@@ -329,6 +330,19 @@
     
     CGAffineTransform zt = CGAffineTransformScale(CGAffineTransformIdentity, factor, factor);
     _view.bounds = CGRectApplyAffineTransform(initialBounds, zt);
+    
+    //Here we update frame of layer in Dictionary
+    // Get the key for this view.
+    NSArray *keys = [layers allKeysForObject:_view];
+    
+    // Let the delegate know that we changed frame.
+    for ( int i = 0; i < keys.count; i++ ) {
+        NSString *key = [keys objectAtIndex:i];
+        [self.delegate frameChangedForLayer:key frame:_view.frame];
+    }
+
+    
+    
     return;
 }
 

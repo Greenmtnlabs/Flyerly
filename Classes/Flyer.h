@@ -10,6 +10,8 @@
 #import <Parse/Parse.h>
 #import "FlyerImageView.h"
 
+#define IMAGETYPE @"flyer.jpg"
+
 @interface Flyer : NSObject{
     
     NSString *piecesFile;
@@ -38,6 +40,11 @@
 
 -(NSString *)getImageName :(NSString *)uid;
 
+-(CGRect)getImageFrame :(NSString *)uid;
+
+-(float)getWidth :(NSString *)uid;
+
+-(float)getHight :(NSString *)uid;
 
 -(NSMutableDictionary *)getLayerFromMaster :(NSString *)uid;
 
@@ -68,6 +75,7 @@
 -(NSString *)addClipArt;
 
 
+-(UIImage *)getImageForShare;
 
 +(NSString *)newFlyerPath;
 + (NSMutableArray *)recentFlyerPreview:(NSInteger)flyCount;

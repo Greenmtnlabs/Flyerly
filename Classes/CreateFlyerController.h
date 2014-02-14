@@ -206,7 +206,6 @@
 -(void)loadCustomPhotoLibrary;
 -(void)openCustomCamera;
 
--(void) SetMenu;
 -(void) callDeleteLayer;
 -(void) choosePhoto;
 -(void) donePhoto;
@@ -220,9 +219,6 @@
 -(void)copyImageToTemplate :(UIImage *)img;
 
 
-+ (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize;
-
-
 
 -(void)addScrollView:(id)obj;
 -(void)addBottomTabs:(id)obj;
@@ -234,6 +230,9 @@
 -(void)renderFlyer;
 -(void)undoFlyer;
 -(void)setUndoStatus;
+
+-(UIImage *)getFlyerSnapShot;
+
 
 -(IBAction)setAddMoreLayerTabAction:(id)sender;
 -(IBAction)setlibBackgroundTabAction:(id)sender;

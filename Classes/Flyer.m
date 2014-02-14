@@ -88,9 +88,22 @@ NSString * const TEXTHEIGHT = @"280.000000";
     //Here we write the dictionary of .peices files
     [masterLayers writeToFile:piecesFile atomically:YES];
     
-    [self addToHistory];
+}
+
+/*
+ * Here we return Current SnapShot for Sharing
+ */
+-(UIImage *)getImageForShare {
+
+    NSString* currentPath  =   [[NSFileManager defaultManager] currentDirectoryPath];
+    
+    NSString *imagePath = [currentPath stringByAppendingString:@"/flyer.jpg"];
+    
+    return nil;
 
 }
+
+
 
 /*
  * Here we Copy Current Flyer folder with all related file
@@ -109,12 +122,14 @@ NSString * const TEXTHEIGHT = @"280.000000";
     
     NSArray *fileList = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:historyDestinationpath error:nil];
     
+    
     //HISTORY CHECK
-    if (fileList.count > 1) {
+    if (fileList.count >= 1) {
         
         //HISTORY AVAILABLE
         
         NSArray *sortedFlyersList = [fileList sortedArrayUsingFunction:compareDesc context:NULL];
+        
     
         NSString* historyLastFilepath = [NSString stringWithFormat:@"%@/%@",historyDestinationpath,[sortedFlyersList objectAtIndex:0]];
     
@@ -123,6 +138,14 @@ NSString * const TEXTHEIGHT = @"280.000000";
         // in history Directory other wise we make a one copy.
         if ([self compareFilesForMakeHistory:currentSourcepath LastHistoryPath:historyLastFilepath]) {
     
+            //Here we Check Folder Quantity for Memory reserve
+            if (sortedFlyersList.count >= 4) {
+                
+                NSString* historyFirstFilepath = [NSString stringWithFormat:@"%@/%@",historyDestinationpath,[sortedFlyersList objectAtIndex:sortedFlyersList.count -1]];
+                [[NSFileManager defaultManager] removeItemAtPath:historyFirstFilepath error:&error];
+            }
+            
+            
             //Create History  folder Path
             int timestamp = [[NSDate date] timeIntervalSince1970];
             NSString* historyDestinationpath  =   [NSString stringWithFormat:@"%@/History/%d",currentSourcepath,timestamp];
@@ -150,6 +173,14 @@ NSString * const TEXTHEIGHT = @"280.000000";
     } else {
     
          //HISTORY NOT AVAILABLE
+        
+        //Delete .gitkeep File if Exist in History Directory
+        NSString* gitkeepFilepath = [NSString stringWithFormat:@"%@/History/.gitkeep",currentSourcepath];
+        if (![[NSFileManager defaultManager] fileExistsAtPath:gitkeepFilepath isDirectory:NULL]) {
+            NSLog(@"gitkeep Not Exist");
+        } else {
+            [[NSFileManager defaultManager] removeItemAtPath:gitkeepFilepath error:&error];
+        }
         
         //Create History  folder Path
         int timestamp = [[NSDate date] timeIntervalSince1970];
@@ -196,7 +227,7 @@ NSString * const TEXTHEIGHT = @"280.000000";
     
     NSArray *sortedFlyersList = [fileList sortedArrayUsingFunction:compareDesc context:NULL];
     
-    if (sortedFlyersList.count <= 1)return;
+    if (sortedFlyersList.count < 1)return;
     int idx = 0;
     
    NSString *historyLastFilepath = [NSString stringWithFormat:@"%@/%@",historyDestinationpath,[sortedFlyersList objectAtIndex:idx]];
@@ -208,10 +239,11 @@ NSString * const TEXTHEIGHT = @"280.000000";
         
         idx++;
         
-        //Here we Delete Last History Folder
-        [[NSFileManager defaultManager] removeItemAtPath:historyLastFilepath error:&error];
-        
-        if (sortedFlyersList.count >= idx) {
+        //Here we Delete Last History Folder if Only One copy Exist it will be not delete
+        if (sortedFlyersList.count > 1) {
+            [[NSFileManager defaultManager] removeItemAtPath:historyLastFilepath error:&error];
+        }
+        if (sortedFlyersList.count > idx) {
             historyDestinationpath = [NSString stringWithFormat:@"%@/%@",historyDestinationpath,[sortedFlyersList objectAtIndex:idx]];
         }
         
@@ -290,6 +322,23 @@ NSString * const TEXTHEIGHT = @"280.000000";
     NSMutableDictionary *textDic = [self getLayerFromMaster:uid];
     return [textDic objectForKey:@"image"];
 
+}
+
+-(CGRect)getImageFrame :(NSString *)uid{
+    NSMutableDictionary *detail = [self getLayerFromMaster:uid];
+    return CGRectMake([[detail valueForKey:@"x"] floatValue], [[detail valueForKey:@"y"] floatValue], [[detail valueForKey:@"width"] floatValue], [[detail valueForKey:@"height"] floatValue]);
+}
+
+
+-(float)getHight :(NSString *)uid {
+    NSMutableDictionary *textDic = [self getLayerFromMaster:uid];
+    return [[textDic objectForKey:@"height"] floatValue];
+}
+
+
+-(float)getWidth :(NSString *)uid {
+    NSMutableDictionary *textDic = [self getLayerFromMaster:uid];
+    return [[textDic objectForKey:@"width"] floatValue];
 }
 
 

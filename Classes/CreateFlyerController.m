@@ -24,7 +24,7 @@
 @synthesize textLabelLayersArray,symbolLayersArray,iconLayersArray,photoLayersArray,currentLayer,layersDic;
 
 int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track selected Tab on Add More
-
+int selectedPhotoTab = 1;
 
 
 
@@ -977,8 +977,6 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 }
 
 
-#pragma mark  ScrollView Function & Selection Methods for ScrollView
-
 /*
  * When any font is selected
  */
@@ -1009,7 +1007,6 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
             //Here we call Render Layer on View
             [flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
             
-            //((CustomLabel*)[self textLabelLayersArray][arrangeLayerIndex]).font = selectedFont;
             
             // Add border to selected layer thumbnail
             CALayer * l = [tempView layer];
@@ -1049,8 +1046,6 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
             //Here we call Render Layer on View
             [flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
             
-            //((CustomLabel*)[self textLabelLayersArray][arrangeLayerIndex]).textColor = selectedColor;
-            
             // Add border to selected layer thumbnail
             CALayer * l = [tempView layer];
             [l setBorderWidth:3.0];
@@ -1088,8 +1083,6 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
             
             //Here we call Render Layer on View
             [flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
-            
-           // ((CustomLabel*)[self textLabelLayersArray][arrangeLayerIndex]).font =selectedFont;
             
             // Add border to selected layer thumbnail
             CALayer * l = [tempView layer];
@@ -1418,9 +1411,6 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     
 }
 
-int arrangeLayerIndex;
-
-
 
 
 /*
@@ -1453,15 +1443,6 @@ int arrangeLayerIndex;
 		}
 		i++;
 	}
-}
-
-
-/*
- * Get index from a view tag
- */
--(int)getIndexFromTag:(NSString *)tag{
-    NSString *str = [tag substringWithRange:NSMakeRange(3, [tag length] - 3)];
-    return [str integerValue];
 }
 
 
@@ -1572,15 +1553,6 @@ int arrangeLayerIndex;
 }
 
 
-
-+ (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
- 
-    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
-    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return newImage;
-}
 
 #pragma mark UIAlertView delegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
@@ -1887,6 +1859,15 @@ int arrangeLayerIndex;
  */
 -(void)undoFlyer{
     
+    //Here we take Snap shot of Flyer
+    UIImage *snapshotImage = [self getFlyerSnapShot];
+    
+    //First we Save Current flyer in history
+    [flyer saveFlyer:snapshotImage];
+    
+    //Add Flyer in Histor if any Change Exists
+    [flyer addToHistory];
+    
     //Here we send Request to Model for Move Back
     [flyer replaceFromHistory];
         
@@ -1924,15 +1905,13 @@ int arrangeLayerIndex;
     
     NSArray *fileList = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:historyDestinationpath error:nil];
     
-    if (fileList.count > 2) {
+    if (fileList.count >= 1) {
         
         [rightUndoBarButton setEnabled:YES];
         
     } else {
     
         [rightUndoBarButton setEnabled:NO];
-        [flyer addToHistory];
-    
     }
     
 }
@@ -1970,18 +1949,16 @@ int arrangeLayerIndex;
     
     [self addBottomTabs:libFlyer];
     
-    
-    //Here we take Snap shot of Flyer
-    UIGraphicsBeginImageContextWithOptions(self.flyimgView.bounds.size, YES, 0.0f);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    [self.flyimgView.layer renderInContext:context];
-    UIImage *snapshotImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
+    //Set here Un-Selected State of HIGHT & WIDTH Buttons IF selected 
+    [widthTabButton setSelected:NO];
+    [heightTabButton setSelected:NO];
+
+
     
     //Empty Layer Delete
     if (currentLayer != nil && ![currentLayer isEqualToString:@""]) {
         
-        [self.flyimgView layerStoppedEditing:currentLayer];
+        
         
         NSString *flyerImg = [flyer getImageName:currentLayer];
         NSString *flyertext = [flyer getText:currentLayer];
@@ -1997,8 +1974,16 @@ int arrangeLayerIndex;
         }
     }
     
+    [self.flyimgView layerStoppedEditing:currentLayer];
+    
+    //Here we take Snap shot of Flyer
+    UIImage *snapshotImage = [self getFlyerSnapShot];
+    
     //Here we Save Flyer
     [flyer saveFlyer:snapshotImage];
+    
+    //Here we Create One History BackUp for Future Undo Request
+    [flyer addToHistory];
 
     //Here we Set Undo Bar Button Status
     [self setUndoStatus];
@@ -2015,8 +2000,7 @@ CGRect initialBounds;
 - (void)twoFingerPinch:(UIPinchGestureRecognizer *)gestureRecognizer
 {
     
-    UIImageView *lastImgView = [self photoLayersArray][arrangeLayerIndex];
-    
+    UIImageView *lastImgView ;
     if (gestureRecognizer.state == UIGestureRecognizerStateBegan)
     {
         initialBounds = lastImgView.bounds;
@@ -2061,12 +2045,12 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
     draftViewController.imageFileName = finalImgWritePath;
     draftViewController.detailFileName = [finalImgWritePath stringByReplacingOccurrencesOfString:@".jpg" withString:@".txt"];
-    
+    /*
     UIView *sharePanel = [[UIView alloc] init];
     sharePanel = draftViewController.view;
     [sharePanel setFrame:CGRectMake(10, 100, 310,400 )];
-    [self.view addSubview:sharePanel];
-    //[self.navigationController pushViewController:draftViewController animated:YES];
+    [self.view addSubview:sharePanel];*/
+    [self.navigationController pushViewController:draftViewController animated:YES];
 }
 
 
@@ -2229,7 +2213,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     
     UIButton *selectedButton = (UIButton*)sender;
     
-    //Set here Un-Selected State of All Buttons
+    //Set here Un-Selected State of HIGHT & WIDTH Buttons
     [widthTabButton setSelected:NO];
     [heightTabButton setSelected:NO];
     
@@ -2259,26 +2243,14 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     }
     else if( selectedButton == widthTabButton )
 	{
-
+        //FOR PINCH
         [widthTabButton  setSelected:YES];
-        
-        UIImageView *lastImgView = [self.flyimgView.layers objectForKey:currentLayer];
-        lastImgView.frame = CGRectMake(lastImgView.frame.origin.x, lastImgView.frame.origin.y,lastImgView.frame.size.width-10,lastImgView.frame.size.height);
-
-        //Update Dictionary
-        [flyer setImageFrame:currentLayer :lastImgView.frame];
         
     }
     else if( selectedButton == heightTabButton )
 	{
-
+        //FOR PINCH
         [heightTabButton  setSelected:YES];
-        
-        UIImageView *lastImgView = [self.flyimgView.layers objectForKey:currentLayer];
-        lastImgView.frame = CGRectMake(lastImgView.frame.origin.x, lastImgView.frame.origin.y,lastImgView.frame.size.width,lastImgView.frame.size.height-10);
-        
-        //Update Dictionary
-        [flyer setImageFrame:currentLayer :lastImgView.frame];
         
     }
 }
@@ -2287,8 +2259,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 -(IBAction) setAddMoreLayerTabAction:(id) sender {
     
 	UIButton *selectedButton = (UIButton*)sender;
-   // [self SetMenu];
-    
     
     //Set Unselected All
     [addMoreFontTabButton setSelected:NO];
@@ -2440,47 +2410,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 
 
--(void) SetMenu{
-    /*
-    //Back Button
-    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-    [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
-	[backButton addTarget:self action:@selector(callMenu) forControlEvents:UIControlEventTouchUpInside];
-    backButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *leftBarMenuButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-    
-    //Help Button
-    UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    [helpButton addTarget:self action:@selector(loadHelpController) forControlEvents:UIControlEventTouchUpInside];
-    [helpButton setBackgroundImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
-    helpButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *leftBarHelpButton = [[UIBarButtonItem alloc] initWithCustomView:helpButton];
-    
-    [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarMenuButton,leftBarHelpButton,nil]];
-    
-    //Share Button
-    UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    shareButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
-	[shareButton addTarget:self action:@selector(callSaveAndShare) forControlEvents:UIControlEventTouchUpInside];
-    [shareButton setBackgroundImage:[UIImage imageNamed:@"share_button"] forState:UIControlStateNormal];
-    shareButton.showsTouchWhenHighlighted = YES;
-    
-    //Undo Button
-    UIButton *undoButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    undoButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
-	[undoButton addTarget:self action:@selector(undo:) forControlEvents:UIControlEventTouchUpInside];
-    [undoButton setBackgroundImage:[UIImage imageNamed:@"undo"] forState:UIControlStateNormal];
-    undoButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
-    rightUndoBarButton = [[UIBarButtonItem alloc] initWithCustomView:undoButton];
-    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,rightUndoBarButton,nil]];
-    if(undoCount == 0){
-        [rightUndoBarButton setEnabled:NO];
-    }
-     */
-}
-
 -(void) callDeleteLayer{
     
     deleteAlert = [[UIAlertView alloc]initWithTitle:@"Warning" message:@"Delete this layer?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK" ,nil];
@@ -2500,20 +2429,11 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 -(void)deleteLayer:(LayerTileButton *)layerButton overrided:(BOOL)overrided{
     
     
-    
-// New Code
-    
      //Delete From Master Dictionary
     [flyer deleteLayer:layerButton.uid];
     
     //Delete From View
     [flyimgView deleteLayer:layerButton.uid];
-    
-// End New Code
-
-    
-    deleteMode = YES;
-    undoCount = undoCount + 1;
     
     NSLog(@"Delete Layer Tag: %d", layerButton.tag);
     
@@ -2987,7 +2907,45 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
  * Frame changed for layer, let the model know.
  */
 - (void)frameChangedForLayer:(NSString *)uid frame:(CGRect)frame {
+
+    if ([widthTabButton isSelected]) {
+        
+        CGRect lastFrame = [flyer getImageFrame:uid];
+        lastFrame.size.width = frame.size.width;
+        frame = lastFrame;
+        
+    } else if ([heightTabButton isSelected]) {
+        
+        CGRect lastFrame = [flyer getImageFrame:uid];
+        lastFrame.size.height = frame.size.height;
+        frame = lastFrame;
+
+    }
+
+    //Update Dictionary
     [flyer setImageFrame:uid :frame];
+    
+    //Update Controller
+    [self.flyimgView renderLayer:uid layerDictionary:[flyer getLayerFromMaster:uid]];
 }
+
+
+/*
+ * Here we Getting Snap Shot of Flyer Image View Context
+ * Return
+ *  Image
+ */
+-(UIImage *)getFlyerSnapShot {
+
+    //Here we take Snap shot of Flyer
+    UIGraphicsBeginImageContextWithOptions(self.flyimgView.bounds.size, YES, 0.0f);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    [self.flyimgView.layer renderInContext:context];
+    UIImage *snapshotImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return snapshotImage;
+}
+
 
 @end
