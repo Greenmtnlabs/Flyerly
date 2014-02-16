@@ -1854,7 +1854,8 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
  */
 -(void)undoFlyer{
     
-    
+    //Stop Edit Mode for remove Layer Border if Selected
+    [self.flyimgView layerStoppedEditing:currentLayer];
     
     //Here we take Snap shot of Flyer
     UIImage *snapshotImage = [self getFlyerSnapShot];
@@ -1992,40 +1993,10 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
    
 }
 
-CGRect initialBounds;
-
-- (void)twoFingerPinch:(UIPinchGestureRecognizer *)gestureRecognizer
-{
-    
-    UIImageView *lastImgView ;
-    if (gestureRecognizer.state == UIGestureRecognizerStateBegan)
-    {
-        initialBounds = lastImgView.bounds;
-    }
-    CGFloat factor = [(UIPinchGestureRecognizer *)gestureRecognizer scale];
-    
-    CGAffineTransform zt;
-    
-    if([widthTabButton isSelected]){
-        zt = CGAffineTransformScale(CGAffineTransformIdentity, factor, 1);
-    } else if([heightTabButton isSelected]){
-        zt = CGAffineTransformScale(CGAffineTransformIdentity, 1, factor);
-    }
-
-    lastImgView.bounds = CGRectApplyAffineTransform(initialBounds, zt);
-}
-
-CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
-{
-    return CGPointMake(point2.x - point1.x, point2.y - point1.y);
-};
-
 
 -(void)callSaveAndShare
 {
-
     
-
     FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
      
     NSData *data = [self getCurrentFrameAndSaveIt];
@@ -2075,6 +2046,11 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 }
 
 
+
+/*
+ * When we click on Text Tab
+ * This Method Manage Text SubTabs
+ */
 -(IBAction)setStyleTabAction:(id) sender
 {
     
@@ -2138,6 +2114,11 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     
 }
 
+
+/*
+ * When we click on Background Tab
+ * This Method Manage Background SubTabs
+ */
 -(IBAction)setlibBackgroundTabAction:(id)sender{
     UIButton *selectedButton = (UIButton*)sender;
     
@@ -2147,10 +2128,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     [cameraRoll setSelected:NO];
     [flyerBorder setSelected:NO];
     
-
-    if(undoCount >= 1){
-        [rightUndoBarButton setEnabled:YES];
-    }
     
     if( selectedButton == backtemplates )
 	{
@@ -2187,18 +2164,17 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 
 }
 
+
+
+
+/*
+ * When we click on Photo Tab
+ * This Method Manage Photo SubTabs
+ */
 -(IBAction)setlibPhotoTabAction:(id) sender{
     
     UIButton *selectedButton = (UIButton*)sender;
     
-    //Set here Un-Selected State of HIGHT & WIDTH Buttons
-    [widthTabButton setSelected:NO];
-    [heightTabButton setSelected:NO];
-    
-    
-    if(undoCount >= 1){
-        [rightUndoBarButton setEnabled:YES];
-    }
     
     if( selectedButton == cameraTabButton )
 	{
@@ -2215,19 +2191,42 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     }
     else if( selectedButton == widthTabButton )
 	{
-        //FOR PINCH
-        [widthTabButton  setSelected:YES];
+        if (widthTabButton.isSelected == YES) {
+            
+            //Set here Un-Selected
+            [widthTabButton setSelected:NO];
+        
+        } else {
+            //FOR PINCH
+            [widthTabButton  setSelected:YES];
+            [heightTabButton setSelected:NO];
+
+        }
         
     }
     else if( selectedButton == heightTabButton )
 	{
-        //FOR PINCH
-        [heightTabButton  setSelected:YES];
         
+        if (heightTabButton.isSelected == YES) {
+            
+            //Set here Un-Selected State
+            [heightTabButton setSelected:NO];
+        
+        } else {
+            //FOR PINCH
+            [heightTabButton  setSelected:YES];
+            [widthTabButton setSelected:NO];
+
+        }
     }
 }
 
 
+
+/* Main Bottom Tab Botton Handler
+ * When we click any Tab
+ * This Method Manage SubTabs
+ */
 -(IBAction) setAddMoreLayerTabAction:(id) sender {
     
 	UIButton *selectedButton = (UIButton*)sender;
@@ -2859,12 +2858,16 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     if ([widthTabButton isSelected]) {
         
         CGRect lastFrame = [flyer getImageFrame:uid];
+
+        lastFrame.origin.x = frame.origin.x;
         lastFrame.size.width = frame.size.width;
         frame = lastFrame;
         
     } else if ([heightTabButton isSelected]) {
         
         CGRect lastFrame = [flyer getImageFrame:uid];
+        
+        lastFrame.origin.y = frame.origin.y;
         lastFrame.size.height = frame.size.height;
         frame = lastFrame;
 

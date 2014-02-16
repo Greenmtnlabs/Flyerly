@@ -57,6 +57,8 @@
         //Set Flyer Border
         if ([layDic objectForKey:@"bordercolor"]) {
             [self setTemplateBorder:layDic];
+        }else {
+            [self removeFlyerBorder];
         }
         return;
     }
@@ -248,6 +250,18 @@
     self.layer.borderColor = borderColor.CGColor;
     self.layer.borderWidth = 3.0;
 }
+
+
+/*
+ *Here we Remove Flyer Border
+ */
+-(void)removeFlyerBorder{
+
+    UIColor *borderColor = [UIColor clearColor];
+    self.layer.borderColor = borderColor.CGColor;
+    self.layer.borderWidth = 0;
+}
+
 
 #pragma mark - Show layer as editable.
 

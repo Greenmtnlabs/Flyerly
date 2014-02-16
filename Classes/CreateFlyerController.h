@@ -86,7 +86,6 @@
 
     BOOL deleteMode;
     BOOL discardedLayer;
-    int undoCount;
     int flyerNumber;
     int layerXposition;
 
