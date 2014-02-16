@@ -1799,9 +1799,6 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     //Here we Highlight The ImageView
     [self.flyimgView layerIsBeingEdited:currentLayer];
     
-    [UIView beginAnimations:nil context:NULL];
-	[UIView setAnimationDuration:0.4f];
-    
 	textBackgrnd.alpha = ALPHA1;
 
     // SET BOTTOM BAR
@@ -2092,8 +2089,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	UIButton *selectedButton = (UIButton*)sender;
 	if(selectedButton == fontTabButton)
 	{
-		[UIView beginAnimations:nil context:NULL];
-		[UIView setAnimationDuration:0.4f];
         
         //Create ScrollView
         [self addFontsInSubView ];
@@ -2105,23 +2100,17 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	}
 	else if(selectedButton == colorTabButton)
 	{
-		[UIView beginAnimations:nil context:NULL];
-		[UIView setAnimationDuration:0.4f];
-        
+       
         //Create ScrollView
         [self addColorsInSubView];
         
         //Add ContextView
         [self addScrollView:layerScrollView];
-		[UIView commitAnimations];
         [colorTabButton setSelected:YES];
         
 	}
 	else if(selectedButton == sizeTabButton)
 	{
-		[UIView beginAnimations:nil context:NULL];
-		[UIView setAnimationDuration:0.4f];
-        
         //Create ScrollView
         [self   addSizeInSubView];
 
@@ -2129,12 +2118,9 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         [self addScrollView:layerScrollView];
         
 		[sizeTabButton setSelected:YES];
-		[UIView commitAnimations];
 	}
 	else if(selectedButton == fontBorderTabButton)
 	{
-		[UIView beginAnimations:nil context:NULL];
-		[UIView setAnimationDuration:0.4f];
         
         //Create ScrollView
         [self addTextBorderInSubView];
@@ -2143,7 +2129,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         [self addScrollView:layerScrollView];
         
 		[fontBorderTabButton setSelected:YES];
-		[UIView commitAnimations];
 	}
     else if(selectedButton == fontEditButton)
 	{
@@ -2170,15 +2155,12 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     if( selectedButton == backtemplates )
 	{
         [backtemplates setBackgroundImage:[UIImage imageNamed:@"addbg_library_selected"] forState:UIControlStateNormal];
-        [UIView beginAnimations:nil context:NULL];
-		[UIView setAnimationDuration:0.4f];
 
         //Create ScrollView
         [self addTemplatesInSubView];
         
         //Add ContextView
         [self addScrollView:layerScrollView];
-        [UIView commitAnimations];
         [backtemplates setSelected:YES];
     }
     else if(selectedButton == cameraTakePhoto)
@@ -2195,16 +2177,12 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     {
         [flyerBorder setSelected:YES];
         
-        [UIView beginAnimations:nil context:NULL];
-		[UIView setAnimationDuration:0.4f];
-        
         //Create ScrollView
         [self addFlyerBorderInSubView];
         
         //Add ContextView
         [self addScrollView:layerScrollView];
     
-		[UIView commitAnimations];
     }
 
 }
@@ -2225,10 +2203,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     if( selectedButton == cameraTabButton )
 	{
         imgPickerFlag =2;
-        [UIView beginAnimations:nil context:NULL];
-        [UIView setAnimationDuration:0.4f];
         textBackgrnd.alpha = ALPHA0;
-        [UIView commitAnimations];
         [self openCustomCamera];
 
     }
@@ -2236,10 +2211,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
 	{
         imgPickerFlag =2;
         [self loadCustomPhotoLibrary];
-        [UIView beginAnimations:nil context:NULL];
-        [UIView setAnimationDuration:0.4f];
         textBackgrnd.alpha = ALPHA0;
-        [UIView commitAnimations];
     }
     else if( selectedButton == widthTabButton )
 	{
@@ -2319,7 +2291,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         [addMoreSymbolTabButton setSelected:YES];
         [self addDonetoRightBarBotton];
         
-       	[UIView beginAnimations:nil context:NULL];
         
         //Create ScrollView
         [self addFlyerIconInSubView];
@@ -2330,9 +2301,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         //Add Bottom Tab
         [self addBottomTabs:libEmpty];
         
-		
-        [UIView setAnimationDuration:0.4f];
-		[UIView commitAnimations];
 	}
 	else if(selectedButton == addMoreIconTabButton)
 	{
@@ -2347,9 +2315,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         //Add right Bar button
         [self addDonetoRightBarBotton];
         
-		[UIView beginAnimations:nil context:NULL];
-		[UIView setAnimationDuration:0.4f];
-        
         //Create ScrollView
         [self addSymbolsInSubView];
         
@@ -2359,7 +2324,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         //Add Bottom Tab
         [self addBottomTabs:libEmpty];
 
-		[UIView commitAnimations];
 	}
     else if(selectedButton == backgroundTabButton)
 	{
@@ -2368,10 +2332,7 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         //Add right Bar button
         [self addDonetoRightBarBotton];
         
-        [UIView beginAnimations:nil context:NULL];
-		[UIView setAnimationDuration:0.4f];
-            [self setlibBackgroundTabAction:backtemplates];
-        [UIView commitAnimations];
+        [self setlibBackgroundTabAction:backtemplates];
 
         //Add ContextView
         [self addBottomTabs:libBackground];
@@ -2439,21 +2400,6 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     
     //Set Main View On Screen
     [self callAddMoreLayers];
-}
-
--(void)wobble:(UIView *)view{
-
-    CGAffineTransform leftWobble = CGAffineTransformRotate(CGAffineTransformIdentity, RADIANS(-3));
-    CGAffineTransform rightWobble = CGAffineTransformRotate(CGAffineTransformIdentity, RADIANS(3));
-    
-    view.transform = leftWobble;  // starting point
-    
-    [UIView beginAnimations:@"wobble" context:(__bridge void *)(view)];
-    [UIView setAnimationRepeatAutoreverses:YES];
-    [UIView setAnimationRepeatCount:INFINITY]; // adjustable
-    [UIView setAnimationDelegate:self];
-    view.transform = rightWobble; // end here & auto-reverse
-    [UIView commitAnimations];
 }
 
 
@@ -2709,8 +2655,11 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
         [v removeFromSuperview];
     }
     
-    //Add ScrollViews
-    [self.contextView addSubview:obj];
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.4f];
+        //Add ScrollViews
+        [self.contextView addSubview:obj];
+    [UIView commitAnimations];
 
 }
 
@@ -2727,9 +2676,8 @@ CGPoint CGPointDistance(CGPoint point1, CGPoint point2)
     
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.4f];
-    //Add ScrollViews
-    [self.libraryContextView addSubview:obj];
-    
+        //Add ScrollViews
+        [self.libraryContextView addSubview:obj];
     [UIView commitAnimations];
 }
 

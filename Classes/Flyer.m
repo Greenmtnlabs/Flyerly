@@ -603,26 +603,23 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     NSString *lastFileName;
     NSMutableArray *recentFlyers = [[NSMutableArray alloc] init];
     
-    
-    if (sortedFlyersList.count > flyCount) {
-        
-        // Less then 4 Flyer or Empty
-        for(int i = 0 ; i < sortedFlyersList.count ;i++)
-        {
-            lastFileName = sortedFlyersList[i];
-            
-            //Checking For Integer Dir Names Only
-            if ([[NSScanner scannerWithString:lastFileName] scanInt:nil]) {
-              
-                NSString *recentflyPath = [NSString stringWithFormat:@"%@/%@/flyer.jpg",usernamePath,lastFileName];
-                [recentFlyers addObject:recentflyPath];
 
-            }
+        
+    // Less then 4 Flyer or Empty
+    for(int i = 0 ; i < sortedFlyersList.count ;i++)
+    {
+        lastFileName = sortedFlyersList[i];
+            
+        //Checking For Integer Dir Names Only
+        if ([[NSScanner scannerWithString:lastFileName] scanInt:nil]) {
+              
+            NSString *recentflyPath = [NSString stringWithFormat:@"%@/%@/flyer.jpg",usernamePath,lastFileName];
+            [recentFlyers addObject:recentflyPath];
 
         }
-    
-    }
 
+    }
+    
     return recentFlyers;
 }
 
