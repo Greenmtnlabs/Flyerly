@@ -338,8 +338,15 @@
         if( [InviteFriendsController connected] ){
             
             [emailButton setSelected:YES];
-            [self shareOnEmail];
-            [self showAlert:@"Uploading flyer for sharing. Please wait..." message:@""];
+            
+            
+            // Current Item For Sharing
+            SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"#flyerly - %@ %@",titleView.text, selectedFlyerDescription ]];
+            
+            //Calling ShareKit for Sharing
+            [SHKMail shareItem:item];
+            
+            //[self shareOnEmail];
             
         } else {
             
@@ -432,19 +439,19 @@
         
     } else {
         
-        // Check internet connectivity
-        if([InviteFriendsController connected]){
-            [smsButton setSelected:YES];
-            [UIPasteboard generalPasteboard].image = selectedFlyerImage;
-            [self singleshareOnMMS];
-            [self updateSocialStates ];
-            [self showAlert:@"Uploading flyer for sharing. Please wait..." message:@""];
+        MFMessageComposeViewController *controller = [[MFMessageComposeViewController alloc] init];
+        if([MFMessageComposeViewController canSendAttachments])
+        {
+                        
+            NSData *exportData = UIImageJPEGRepresentation(selectedFlyerImage ,1.0);
             
-        } else {
-            
-            [self showAlert:@"You're not connected to the internet. Please connect and retry" message:@""];
+            [controller addAttachmentData:exportData typeIdentifier:@"public.data" filename:@"flyer.jpg"];
+            controller.messageComposeDelegate = self;
+            [self presentModalViewController:controller animated:YES];
             
         }
+        
+        
 
     }
 }
@@ -714,6 +721,9 @@
 }
 
 -(void)shareOnEmail:(NSString *)link{
+    
+    
+    
     
     MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];    
     if([MFMailComposeViewController canSendMail]){
