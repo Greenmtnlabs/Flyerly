@@ -219,14 +219,14 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     self.navigationItem.titleView = label;
     
     //Right ShareButton
-    UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+    UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 35, 28)];
     shareButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
 	[shareButton addTarget:self action:@selector(callSaveAndShare) forControlEvents:UIControlEventTouchUpInside];
     [shareButton setBackgroundImage:[UIImage imageNamed:@"share_button"] forState:UIControlStateNormal];
     shareButton.showsTouchWhenHighlighted = YES;
     
     //Right UndoButton
-    UIButton *undoButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+    UIButton *undoButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 35, 28)];
     undoButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
 	[undoButton addTarget:self action:@selector(undoFlyer) forControlEvents:UIControlEventTouchUpInside];
     [undoButton setBackgroundImage:[UIImage imageNamed:@"undo"] forState:UIControlStateNormal];
@@ -242,7 +242,7 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     [self setUndoStatus];
     
     //Left BackButton
-    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 35, 28)];
     [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
 	[backButton addTarget:self action:@selector(callMenu) forControlEvents:UIControlEventTouchUpInside];
     [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
@@ -250,7 +250,7 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     
     //Left HelpButton
-    UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+    UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 35, 28)];
     [helpButton addTarget:self action:@selector(loadHelpController) forControlEvents:UIControlEventTouchUpInside];
     [helpButton setBackgroundImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
     helpButton.showsTouchWhenHighlighted = YES;
@@ -1567,7 +1567,7 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 #pragma mark After ViewWillAppear Method Sequence
 -(void) callMenu
 {
-    
+    /*
     if (![currentLayer isEqualToString:@""]) [self.flyimgView layerStoppedEditing:currentLayer];
         
     
@@ -1584,7 +1584,7 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     
     // Update Recent Flyer List
     [flyer setRecentFlyer];
-    
+    */
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -1692,14 +1692,14 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     self.navigationItem.titleView = label;
 
 
-    UIButton *nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+    UIButton *nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 35, 28)];
 	[nextButton addTarget:self action:@selector(callStyle) forControlEvents:UIControlEventTouchUpInside];
     [nextButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
     nextButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
     [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
     
-    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 35, 28)];
 	[backButton addTarget:self action:@selector(callMenu) forControlEvents:UIControlEventTouchUpInside];
     [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
      backButton.showsTouchWhenHighlighted = YES;
@@ -1761,7 +1761,7 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 {
 
     // Done Bar Button
-    UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+    UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 35, 28)];
     [doneButton addTarget:self action:@selector(callAddMoreLayers) forControlEvents:UIControlEventTouchUpInside];
     [doneButton addTarget:self action:@selector(logLayerAddedEvent) forControlEvents:UIControlEventTouchUpInside];
     [doneButton addTarget:self action:@selector(logTextAddedEvent) forControlEvents:UIControlEventTouchUpInside];
@@ -1770,7 +1770,7 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     UIBarButtonItem *DoneBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
         
     //Delete Button
-    UIButton *delButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 4, 45, 42)];
+    UIButton *delButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 4, 35, 28)];
     [delButton addTarget:self action:@selector(callDeleteLayer) forControlEvents:UIControlEventTouchUpInside];
     [delButton setBackgroundImage:[UIImage imageNamed:@"delete_button"] forState:UIControlStateNormal];
     delButton.showsTouchWhenHighlighted = YES;
@@ -1829,13 +1829,13 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     self.navigationItem.titleView = label;
     
     //Delete Bar Button
-    UIButton *delButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 4, 45, 42)];
+    UIButton *delButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 4, 35, 28)];
     [delButton addTarget:self action:@selector(callDeleteLayer) forControlEvents:UIControlEventTouchUpInside];
     [delButton setBackgroundImage:[UIImage imageNamed:@"delete_button"] forState:UIControlStateNormal];
     delButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *delBarButton = [[UIBarButtonItem alloc] initWithCustomView:delButton];
 
-    UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+    UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 35, 28)];
     [doneButton addTarget:self action:@selector(donePhoto) forControlEvents:UIControlEventTouchUpInside];
     [doneButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
     doneButton.showsTouchWhenHighlighted = YES;
@@ -1926,14 +1926,14 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     self.navigationItem.titleView = label;
     
      //ShareButton
-    UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+    UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 35, 28)];
     shareButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
 	[shareButton addTarget:self action:@selector(callSaveAndShare) forControlEvents:UIControlEventTouchUpInside];
     [shareButton setBackgroundImage:[UIImage imageNamed:@"share_button"] forState:UIControlStateNormal];
     shareButton.showsTouchWhenHighlighted = YES;
     
     //UndoButton
-    UIButton *undoButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+    UIButton *undoButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 35, 28)];
     undoButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
 	[undoButton addTarget:self action:@selector(undoFlyer) forControlEvents:UIControlEventTouchUpInside];
     [undoButton setBackgroundImage:[UIImage imageNamed:@"undo"] forState:UIControlStateNormal];
@@ -2838,14 +2838,14 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 -(void)addDonetoRightBarBotton{
     
     //Delete Bar Button
-    UIButton *delButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 4, 45, 42)];
+    UIButton *delButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 4, 35, 28)];
     [delButton addTarget:self action:@selector(callDeleteLayer) forControlEvents:UIControlEventTouchUpInside];
     [delButton setBackgroundImage:[UIImage imageNamed:@"delete_button"] forState:UIControlStateNormal];
     delButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *delBarButton = [[UIBarButtonItem alloc] initWithCustomView:delButton];
     
     
-    UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+    UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 35, 28)];
     [doneButton addTarget:self action:@selector(callAddMoreLayers) forControlEvents:UIControlEventTouchUpInside];
     [doneButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
     doneButton.showsTouchWhenHighlighted = YES;

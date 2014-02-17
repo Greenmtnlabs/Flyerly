@@ -19,7 +19,7 @@
 @class InviteFriendsController;
 @class FBSession;
 @class FacebookLikeView;
-@class MainSettingViewController;
+@class MainSettingViewController,ParentViewController;
 
 
 @interface LauchViewController : ParentViewController<UIWebViewDelegate,UIActionSheetDelegate,FacebookLikeViewDelegate> {
@@ -43,7 +43,6 @@
     UIView *opaqueView;
     NSArray *twtAcconts;
     Flyer *flyer;
-    NSMutableArray *recentFlyers;
 
 }
 
@@ -72,6 +71,7 @@
 @property (nonatomic, strong) IBOutlet UIView *likeView;
 @property (nonatomic, strong) IBOutlet FacebookLikeView *facebookLikeView;
 @property (nonatomic, strong) IBOutlet UIWebView *webview;
+@property (nonatomic, strong) NSMutableArray *recentFlyers;
 
 -(IBAction)doNew:(id)sender;
 -(IBAction)doOpen:(id)sender;
@@ -84,4 +84,5 @@
 
 - (void)updateRecentFlyer:(NSMutableArray *)recentFlyers;
 - (void)setFacebookLikeStatus;
+
 @end

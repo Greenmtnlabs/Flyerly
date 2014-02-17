@@ -30,16 +30,8 @@ extern NSString *FacebookDidLoginNotification;
 @class AfterUpdateController;
 @class AccountController;
 
-@interface FlyrAppDelegate : UIResponder <UIApplicationDelegate> {
+@interface FlyrAppDelegate : UIResponder <UIApplicationDelegate>
 
-	
-	SaveFlyerController *svController;
-    LauchViewController *lauchController;
-    AccountController *accountController;
-	BOOL faceBookPermissionFlag;
-	BOOL changesFlag;
-    UIView *sharingProgressParentView;
-}
 
 @property (nonatomic, strong) IBOutlet UIWindow *window;
 @property (nonatomic, strong) IBOutlet UINavigationController *navigationController;

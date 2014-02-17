@@ -26,7 +26,7 @@
 @synthesize spController,tpController,createFlyrLabel,savedFlyrLabel,inviteFriendLabel,addFriendsController;
 @synthesize firstFlyer, secondFlyer, thirdFlyer, fourthFlyer, photoArray, photoDetailArray, createFlyrButton, savedFlyrButton, inviteFriendButton;
 @synthesize facebookLikeView;
-@synthesize likeButton,followButton,webview;
+@synthesize likeButton,followButton,webview,recentFlyers;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
@@ -594,7 +594,6 @@
         
     }
 
-
 }
 
 -(IBAction)goBack{
@@ -602,7 +601,5 @@
     
     [self.likeView setHidden:YES];
 }
-
-
 
 @end

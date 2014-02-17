@@ -177,17 +177,20 @@
         } else if (user.isNew) {
             
             NSLog(@"User with facebook signed up and logged in!");
-
-            FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
             
-            // For Parse New User Merge to old Facebook User
-            [appDelegate fbChangeforNewVersion];
             
              // Remove Current UserName for Device configuration
             [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"User"];
             
             // Login success Move to Flyerly
             launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil] ;
+            
+            FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+            appDelegate.lauchController = launchController;
+            
+            // For Parse New User Merge to old Facebook User
+            [appDelegate fbChangeforNewVersion];
+
             
             [self performSelectorOnMainThread:@selector(pushViewController:) withObject:launchController waitUntilDone:YES];
             
@@ -196,13 +199,16 @@
             
             // Remove Current UserName for Device configuration
             [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"User"];
-
-            // Temp on for Testing here
-             FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-             [appDelegate fbChangeforNewVersion];
+            
             
             // Login success Move to Flyerly
             launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil] ;
+            
+            // Temp on for Testing here
+            FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+            appDelegate.lauchController = launchController;
+            [appDelegate fbChangeforNewVersion];
+
             [self.navigationController pushViewController:launchController animated:YES];
 
         }
@@ -230,17 +236,20 @@
                 
                 NSLog(@"User signed up and logged in with Twitter!");
 
-                NSString *twitterUsername = [PFTwitterUtils twitter].screenName;
-                
-                // For Parse New User Merge to old Twitter User
-                FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-                [appDelegate twitterChangeforNewVersion:twitterUsername];
+                NSString *twitterUsername = [PFTwitterUtils twitter].screenName;                
+
                 
                 // Remove Current UserName for Device configuration
                 [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"User"];
 
                 // Login success Move to Flyerly
                 launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil] ;
+                
+                // For Parse New User Merge to old Twitter User
+                FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+                appDelegate.lauchController = launchController;
+                [appDelegate twitterChangeforNewVersion:twitterUsername];
+                
                 [self.navigationController pushViewController:launchController animated:YES];
                 
 
@@ -250,13 +259,6 @@
                 
                 // Remove Current UserName for Device configuration
                 [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"User"];
-
-                // Temp on for Testing here
-                // For Parse New User Merge to old Twitter User
-                //NSString *twitterUsername = [PFTwitterUtils twitter].screenName;
-                
-                //FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-                //[appDelegate twitterChangeforNewVersion:twitterUsername];
 
                 
                 // Login success Move to Flyerly
