@@ -211,6 +211,10 @@
 -(void)textViewDidEndEditing:(UITextView *)textView{
     if([descriptionView.text isEqualToString:@""]){
         [descriptionView setText:AddCaptionText];
+    }else {
+    
+        //Here we Update Flyer Discription in .txt File
+        [flyer setFlyerDescription:descriptionView.text];
     }
 }
 
@@ -234,6 +238,9 @@
 -(void)textFieldDidEndEditing:(UITextField *)textField{
     if([titleView.text isEqualToString:@""]){
         [titleView setText:NameYourFlyerText];
+    }else {
+        //Here we Update Flyer Title in .txt File
+        [flyer setFlyerTitle:titleView.text];
     }
 }
 
@@ -260,8 +267,9 @@
             //Calling ShareKit for Sharing
             [SHKFacebook shareItem:item];
             
-            // Update Flyer Info on Device
-            [self updateSocialStates];
+            
+            // Update Flyer Share Info in Social File
+            [self.flyer setSocialStatusAtIndex:0 StatusValue:1];
             
         } else {
             
@@ -294,8 +302,9 @@
             //Calling ShareKit for Sharing
             [SHKTwitter shareItem:item];
             
-            // Update Flyer Info on Device
-            [self updateSocialStates];
+            // Update Flyer Share Info in Social File
+            [self.flyer setSocialStatusAtIndex:1 StatusValue:1];
+
             
         } else {
             
@@ -346,6 +355,9 @@
             //Calling ShareKit for Sharing
             [SHKMail shareItem:item];
             
+            // Update Flyer Share Info in Social File
+            [self.flyer setSocialStatusAtIndex:2 StatusValue:1];
+
             //[self shareOnEmail];
             
         } else {
@@ -380,8 +392,9 @@
             //Calling ShareKit for Sharing
             [SHKTumblr shareItem:item];
             
-            // Update Flyer Info on Device
-            [self updateSocialStates ];
+            // Update Flyer Share Info in Social File
+            [self.flyer setSocialStatusAtIndex:3 StatusValue:1];
+
             
         } else {
             
@@ -415,8 +428,9 @@
             //Calling ShareKit for Sharing
             [SHKFlickr shareItem:item];
             
-            // Update Flyer Info on Device
-            [self updateSocialStates ];
+            // Update Flyer Share Info in Social File
+            [self.flyer setSocialStatusAtIndex:4 StatusValue:1];
+
             
         } else {
             
@@ -472,6 +486,9 @@
         [clipboardButton setSelected:YES];
         [clipboardlabel setTextColor:[globle colorWithHexString:@"3caaff"]];
         [self onclipcordClick];
+        
+        // Update Flyer Share Info in Social File
+        [self.flyer setSocialStatusAtIndex:7 StatusValue:1];
     }
 
 }
@@ -766,11 +783,19 @@
      self.dic=[UIDocumentInteractionController interactionControllerWithURL:igImageHookFile];
      self.dic.UTI = @"com.instagram.photo";
      self.dic.annotation = @{@"InstagramCaption": [NSString stringWithFormat:@"%@ %@", self.titleView.text,descriptionView.text]};
+    
+    
 
     BOOL displayed = [self.dic presentOpenInMenuFromRect:rect inView: self.view animated:YES];
     
+
+
+    
     if(!displayed){
         [self showAlert:@"Warning!" message:@"Please install Instagram app to share."];
+    }else {
+        // Update Flyer Share Info in Social File
+        [self.flyer setSocialStatusAtIndex:5 StatusValue:1];
     }
 }
 
@@ -830,6 +855,9 @@
 		case MFMailComposeResultSaved:
 			break;
 		case MFMailComposeResultSent:
+            // Update Flyer Share Info in Social File
+            [self.flyer setSocialStatusAtIndex:2 StatusValue:1];
+            
             NSLog(@"Sent");
 			break;
 		case MFMailComposeResultFailed:
@@ -845,6 +873,10 @@
 		case MessageComposeResultCancelled:
 			break;
 		case MessageComposeResultSent:
+            
+            // Update Flyer Share Info in Social File
+            [self.flyer setSocialStatusAtIndex:6 StatusValue:1];
+            
             NSLog(@"Sent");
 			break;
 		case MessageComposeResultFailed:

@@ -15,6 +15,9 @@
 @interface Flyer : NSObject{
     
     NSString *piecesFile;
+    NSString *textFile;
+    NSString *socialFile;
+
     NSString *flyerImageFile;
 
 }
@@ -60,9 +63,16 @@
 
 -(void)setFlyerBorder :(NSString *)uid RGBColor:(id)rgb;
 
--(NSString *)addPhoto;
+
+-(void)setSocialStatusAtIndex :(int)idx StatusValue:(int)status;
+
+-(void)setFlyerTitle :(NSString *)name;
+-(void)setFlyerDescription :(NSString *)desp;
+
+
+
 -(NSString *)addImage;
--(NSString *)addClipArt;
+
 
 -(NSString *)getText :(NSString *)uid;
 -(NSString *)getImageName :(NSString *)uid;
@@ -77,5 +87,7 @@
 -(void)setRecentFlyer;
 
 @property (strong, readonly) NSMutableDictionary *masterLayers;
+@property (strong, nonatomic) NSMutableArray *socialArray;
+@property (strong, nonatomic) NSMutableArray *textFileArray;
 
 @end

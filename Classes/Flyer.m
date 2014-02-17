@@ -22,7 +22,7 @@ NSString * const TEXTHEIGHT = @"280.000000";
 
 @implementation Flyer
 
-@synthesize masterLayers;
+@synthesize masterLayers,textFileArray,socialArray;
 
 /*
  * This method will be used to initiate the Flyer class
@@ -67,10 +67,23 @@ NSString * const TEXTHEIGHT = @"280.000000";
     //set Pieces Dictionary File for Update
     piecesFile = [flyPath stringByAppendingString:[NSString stringWithFormat:@"/flyer.pieces"]];
     
+    //set Text File for Update
+    textFile = [flyPath stringByAppendingString:[NSString stringWithFormat:@"/flyer.txt"]];
+
+    //set Share Status File for Update
+    socialFile = [flyPath stringByAppendingString:[NSString stringWithFormat:@"/Social/flyer.soc"]];
+
+    
     //set Flyer Image for Update
     flyerImageFile = [flyPath stringByAppendingString:[NSString stringWithFormat:@"/flyer.jpg"]];
     
     masterLayers = [[NSMutableDictionary alloc] initWithContentsOfFile:piecesFile];
+    
+    textFileArray = [[NSMutableArray alloc] initWithContentsOfFile:textFile];
+
+    socialArray = [[NSMutableArray alloc] initWithContentsOfFile:socialFile];
+    
+
 }
 
 
@@ -87,6 +100,13 @@ NSString * const TEXTHEIGHT = @"280.000000";
     
     //Here we write the dictionary of .peices files
     [masterLayers writeToFile:piecesFile atomically:YES];
+    
+    //Here we Update Flyer Date in Text File
+    NSDate *date = [NSDate date];
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc]init];
+    [dateFormat setDateFormat:@"MM/dd/YYYY"];
+    NSString *dateString = [dateFormat stringFromDate:date];
+    [self setFlyerDate:dateString];
     
 }
 
@@ -402,16 +422,6 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 }
 
 
-/*
- * When New Photo layer Add on Flyer
- * its will call and Add one Content in MasterLayers Dictionary
- * return
- *      UniqueID
- */
--(NSString *)addPhoto{
-
-    return @"";
-}
 
 
 /*
@@ -496,16 +506,6 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 }
 
 
-/*
- * When New ClipArt layer Add on Flyer
- * its will call and Add one Content in MasterLayers Dictionary
- * return
- *      UniqueID
- */
--(NSString *)addClipArt{
-
-    return @"";
-}
 
 
 /*
@@ -815,6 +815,57 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     [masterLayers setValue:templateDictionary forKey:uid];
     
 }
+
+
+/*
+ * Here we set Flyer Share Status of Social Network
+ */
+-(void)setSocialStatusAtIndex :(int)idx StatusValue:(int)status {
+    
+    [socialArray replaceObjectAtIndex:idx withObject:[NSString stringWithFormat:@"%d",status]];
+    
+    //Here we write the Array of Social files .soc
+    [socialArray writeToFile:socialFile atomically:YES];
+
+}
+
+/*
+ * Here we Set Flyer Title
+ */
+-(void)setFlyerTitle :(NSString *)name {
+    
+    [textFileArray replaceObjectAtIndex:0 withObject:name];
+    
+    //Here we write the Array of Text files .txt
+    [textFileArray writeToFile:textFile atomically:YES];
+}
+
+
+/*
+ * Here we Set Flyer Description
+ */
+-(void)setFlyerDescription :(NSString *)desp {
+
+    [textFileArray replaceObjectAtIndex:1 withObject:desp];
+    
+    //Here we write the Array of Text files .txt
+    [textFileArray writeToFile:textFile atomically:YES];
+
+
+}
+
+
+/*
+ * Here we Set Flyer Date
+ */
+-(void)setFlyerDate :(NSString *)dt {
+    
+    [textFileArray replaceObjectAtIndex:2 withObject:dt];
+    
+    //Here we write the Array of Text files .txt
+    [textFileArray writeToFile:textFile atomically:YES];
+}
+
 
 @end
 

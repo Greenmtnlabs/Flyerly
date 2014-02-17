@@ -59,11 +59,11 @@
                     </connections>
                 </textField>
                 <view contentMode="scaleToFill" id="59">
-                    <rect key="frame" x="5" y="232" width="310" height="201"/>
+                    <rect key="frame" x="5" y="232" width="310" height="329"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="11">
-                            <rect key="frame" x="1" y="6" width="130" height="34"/>
+                            <rect key="frame" x="14" y="6" width="172" height="34"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
                             <state key="normal" title="           Facebook" backgroundImage="facebook_share.png">
@@ -83,7 +83,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="12">
-                            <rect key="frame" x="1" y="46" width="130" height="34"/>
+                            <rect key="frame" x="14" y="46" width="172" height="34"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
                             <state key="normal" title="     Email" backgroundImage="email_share.png">
@@ -100,7 +100,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="13">
-                            <rect key="frame" x="1" y="86" width="130" height="34"/>
+                            <rect key="frame" x="14" y="86" width="171" height="34"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
                             <state key="normal" title="     Flickr" backgroundImage="flickr_share.png">
@@ -117,7 +117,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="14">
-                            <rect key="frame" x="1" y="127" width="130" height="34"/>
+                            <rect key="frame" x="14" y="127" width="171" height="34"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
                             <state key="normal" title="   SMS" backgroundImage="sms_share.png">
@@ -134,7 +134,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="15">
-                            <rect key="frame" x="181" y="6" width="130" height="34"/>
+                            <rect key="frame" x="15" y="169" width="170" height="34"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
                             <state key="normal" title="      Twitter" backgroundImage="twitter_share.png">
@@ -151,7 +151,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="16">
-                            <rect key="frame" x="180" y="46" width="130" height="34"/>
+                            <rect key="frame" x="14" y="209" width="171" height="34"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
                             <state key="normal" title="       Tumblr" backgroundImage="tumblr_share.png">
@@ -168,7 +168,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="17">
-                            <rect key="frame" x="180" y="86" width="130" height="34"/>
+                            <rect key="frame" x="14" y="249" width="171" height="34"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
                             <state key="normal" title="             Instagram" backgroundImage="instagram_share.png">
@@ -185,7 +185,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" id="18">
-                            <rect key="frame" x="180" y="127" width="130" height="34"/>
+                            <rect key="frame" x="14" y="291" width="171" height="34"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
                             <state key="normal" backgroundImage="cp_share.png">
@@ -202,7 +202,7 @@
                             </connections>
                         </button>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Copy To Clipboard" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="19">
-                            <rect key="frame" x="241" y="126" width="83" height="37"/>
+                            <rect key="frame" x="91" y="289" width="83" height="37"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
