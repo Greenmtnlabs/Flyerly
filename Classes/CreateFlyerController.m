@@ -1998,12 +1998,17 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 {
     
     FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
-     
-    NSData *data = [self getCurrentFrameAndSaveIt];
+    
+    
+    NSString *shareImagePath = [flyer getImageForShare];
+    UIImage *shareImage =  [UIImage imageWithContentsOfFile:shareImagePath];
+    //NSData *imgData = UIImagePNGRepresentation(shareImage);
+    //NSData *data =
+    //[self getCurrentFrameAndSaveIt];
     appDele.changesFlag = NO;
 
     ShareViewController *draftViewController = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
-    draftViewController.selectedFlyerImage = [UIImage imageWithData:data];
+    draftViewController.selectedFlyerImage = shareImage;
     draftViewController.selectedFlyerTitle = globle.flyerName;
     if([[self textLabelLayersArray] count] > 0){
         draftViewController.selectedFlyerDescription = ((CustomLabel*)[self textLabelLayersArray][0]).text;
@@ -2011,6 +2016,7 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
         draftViewController.selectedFlyerDescription = @"";
     }
 
+    draftViewController.flyer = self.flyer;
     draftViewController.imageFileName = finalImgWritePath;
     draftViewController.detailFileName = [finalImgWritePath stringByReplacingOccurrencesOfString:@".jpg" withString:@".txt"];
     /*

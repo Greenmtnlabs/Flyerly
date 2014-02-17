@@ -36,16 +36,6 @@
 
 -(NSArray *)allKeys;
 
--(NSString *)getText :(NSString *)uid;
-
--(NSString *)getImageName :(NSString *)uid;
-
--(CGRect)getImageFrame :(NSString *)uid;
-
--(float)getWidth :(NSString *)uid;
-
--(float)getHight :(NSString *)uid;
-
 -(NSMutableDictionary *)getLayerFromMaster :(NSString *)uid;
 
 -(NSString *)addText;
@@ -74,8 +64,12 @@
 -(NSString *)addImage;
 -(NSString *)addClipArt;
 
-
--(UIImage *)getImageForShare;
+-(NSString *)getText :(NSString *)uid;
+-(NSString *)getImageName :(NSString *)uid;
+-(CGRect)getImageFrame :(NSString *)uid;
+-(float)getWidth :(NSString *)uid;
+-(float)getHight :(NSString *)uid;
+-(NSString *)getImageForShare;
 
 +(NSString *)newFlyerPath;
 + (NSMutableArray *)recentFlyerPreview:(NSInteger)flyCount;

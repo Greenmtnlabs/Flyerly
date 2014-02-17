@@ -93,13 +93,13 @@ NSString * const TEXTHEIGHT = @"280.000000";
 /*
  * Here we return Current SnapShot for Sharing
  */
--(UIImage *)getImageForShare {
+-(NSString *)getImageForShare {
 
     NSString* currentPath  =   [[NSFileManager defaultManager] currentDirectoryPath];
     
     NSString *imagePath = [currentPath stringByAppendingString:@"/flyer.jpg"];
     
-    return nil;
+    return imagePath;
 
 }
 

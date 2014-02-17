@@ -27,6 +27,7 @@
 #import "JSON.h"
 #import "Flurry.h"
 #import "HelpController.h"
+#import "Flyer.h"
 
 
 @class FlyrViewController,FlyerlySingleton;
@@ -83,6 +84,8 @@
 @property(nonatomic,strong)NSString *imageFileName;
 @property(nonatomic,strong)FlyrViewController *fvController;
 @property (nonatomic, strong) LoadingView *loadingView;
+
+@property (nonatomic,strong) Flyer *flyer;
 
 
 -(IBAction)onClickFacebookButton;
