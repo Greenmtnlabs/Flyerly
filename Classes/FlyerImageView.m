@@ -275,8 +275,7 @@
     if ( view != nil ) {
         CALayer * l = view.layer;
         [l setMasksToBounds:YES];
-        [l setCornerRadius:10];
-        [l setBorderWidth:1.0];
+        [l setBorderWidth:0.5];
         [l setBorderColor:[[UIColor grayColor] CGColor]];
     }
 }
@@ -290,7 +289,6 @@
     // Show the layer as being edited.
     if ( view != nil ) {
         CALayer * l = view.layer;
-        [l setCornerRadius:0.0];
         [l setBorderWidth:0.0];
         [l setBorderColor:[[UIColor clearColor] CGColor]];
     }
