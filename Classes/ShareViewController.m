@@ -329,12 +329,13 @@
             // Current Item For Sharing
             SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"#flyerly - %@  %@",titleView.text, selectedFlyerDescription ]];
             
+            
             SHKSharer *iosSharer = [SHKFacebook shareItem:item];
 
             //Calling ShareKit for Sharing
 //            [SHKFacebook shareItem:item];
             
-            self.delegate =  iosSharer.shareDelegate;
+            iosSharer.shareDelegate = self;
                         
             // Update Flyer Share Info in Social File
             [self.flyer setSocialStatusAtIndex:0 StatusValue:1];
