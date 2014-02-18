@@ -35,7 +35,6 @@ BOOL selectAll;
     globle = [FlyerlySingleton RetrieveSingleton];
     self.navigationItem.hidesBackButton = YES;
     [self.view setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
     
     // Register notification for facebook login
     [[NSNotificationCenter defaultCenter] removeObserver:self name:FacebookDidLoginNotification object:nil];

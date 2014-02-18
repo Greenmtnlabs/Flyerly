@@ -25,7 +25,6 @@
 {
     [super viewDidLoad];
     self.navigationController.navigationBarHidden = NO;
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
     
     //Bar Title
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-50, -6, 150, 80)];

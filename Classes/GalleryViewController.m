@@ -36,9 +36,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Setup the navigation bar.
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
-    
     // BackButton
     UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     backButton.titleLabel.font = [UIFont systemFontOfSize:14.0];
@@ -77,7 +74,7 @@
     
     CropViewController *nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController" bundle:nil];
     nbuCrop.desiredImageSize = desiredImageSize;
-    nbuCrop.image = img;
+    nbuCrop.image = [img imageWithOrientationUp];
     nbuCrop.onImageTaken = onImageTaken;
     
     // Pop the current view, and push the crop view.

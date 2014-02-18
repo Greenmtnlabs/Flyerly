@@ -40,7 +40,6 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     self.navigationController.navigationBarHidden = NO;
     
     // for Navigation Bar Background
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.alpha = 1;
 
     //set title

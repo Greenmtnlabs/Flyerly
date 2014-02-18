@@ -28,15 +28,6 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 
 #pragma mark  View Appear Methods
 
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:YES];
-    
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
-
-    
-}
-
-
 -(void)viewDidAppear:(BOOL)animated{
     
 

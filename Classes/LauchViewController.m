@@ -28,12 +28,6 @@
 @synthesize facebookLikeView;
 @synthesize likeButton,followButton,webview;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-		
-    }
-    return self;
-}
 
 -(IBAction)doNew:(id)sender{
     [Flurry logEvent:@"Create Flyer"];
@@ -153,8 +147,6 @@
         [followButton setSelected:YES];
     }
     
-    // Set the background image on navigation bar
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
     
     // for Navigation Bar logo
     UIImageView *logo = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 87, 38)];

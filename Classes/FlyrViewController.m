@@ -222,8 +222,6 @@ sd:;
     
     // Set right bar items
     [self.navigationItem setRightBarButtonItems: [self rightBarItems]];
-
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
     
     //Create sorted array with modificate date as key
 	[self filesByModDate];

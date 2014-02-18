@@ -65,7 +65,6 @@
  * Crop image using NBUKit
  */
 -(void) cropImage:(UIImage *)image {
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
     CropViewController *nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController" bundle:nil];
     nbuCrop.desiredImageSize = desiredImageSize;
     nbuCrop.image = image;
