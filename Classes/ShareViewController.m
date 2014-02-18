@@ -85,65 +85,6 @@
     globle = [FlyerlySingleton RetrieveSingleton];
     globle.NBUimage = nil;
     showbars = YES;
-    
-    // Set facebook as per settings
-    if([[NSUserDefaults standardUserDefaults] stringForKey:@"facebookSetting"]){
-        [facebookButton setSelected:YES];
-    }else{
-        [facebookButton setSelected:NO];
-    }
-    
-    // Set twitter as per settings
-    if([[NSUserDefaults standardUserDefaults] stringForKey:@"twitterSetting"]){
-        [twitterButton setSelected:YES];
-    }else{
-        [twitterButton setSelected:NO];
-    }
-    
-    // Set instagram as per settings
-    if([[NSUserDefaults standardUserDefaults] stringForKey:@"instagramSetting"]){
-        [instagramButton setSelected:YES];
-    }else{
-        [instagramButton setSelected:NO];
-    }
-
-    // Set email as per settings
-    if([[NSUserDefaults standardUserDefaults] stringForKey:@"emailSetting"]){
-        [emailButton setSelected:YES];
-    }else{
-        [emailButton setSelected:NO];
-    }
-
-    // Set sms as per settings
-    if([[NSUserDefaults standardUserDefaults] stringForKey:@"smsSetting"]){
-        [smsButton setSelected:YES];
-    }else{
-        [smsButton setSelected:NO];
-    }
-
-    // Set clip as per settings
-    
-    if([[NSUserDefaults standardUserDefaults] stringForKey:@"clipSetting"]){
-        [clipboardButton setSelected:YES];
-        [clipboardlabel setTextColor:[globle colorWithHexString:@"3caaff"]];
-    }else{
-        [clipboardButton setSelected:NO];
-        [clipboardlabel setTextColor:[UIColor whiteColor] ];
-    }
-
-    // Set tumblr as per settings
-    if([[NSUserDefaults standardUserDefaults] stringForKey:@"tumblrSetting"]){
-        [tumblrButton setSelected:YES];
-    }else{
-        [tumblrButton setSelected:NO];
-    }
-
-    // Set flickr as per settings
-    if([[NSUserDefaults standardUserDefaults] stringForKey:@"flickrSetting"]){
-        [flickrButton setSelected:YES];
-    }else{
-        [flickrButton setSelected:NO];
-    }
         
     
 	self.navigationController.navigationBarHidden = NO;
@@ -209,6 +150,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    [self setSocialStatus];
+
     titleView.text = [flyer getFlyerTitle];
     descriptionView.text = [flyer getFlyerDescription];
     
@@ -315,12 +258,9 @@
  */
 -(IBAction)onClickFacebookButton{
     
-    if( [facebookButton isSelected] ){
-        
-        [facebookButton setSelected:NO];
-        
-    } else {
-        
+    [facebookButton setSelected:YES];
+    
+    
         // Check internet connectivity
         if( [InviteFriendsController connected] ){
             
@@ -329,13 +269,11 @@
             // Current Item For Sharing
             SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"#flyerly - %@  %@",titleView.text, selectedFlyerDescription ]];
             
-            SHKSharer *iosSharer = [SHKFacebook shareItem:item];
-
             //Calling ShareKit for Sharing
-//            [SHKFacebook shareItem:item];
+           iosSharer =  [SHKFacebook shareItem:item];
             
-            self.delegate =  iosSharer.shareDelegate;
-                        
+            iosSharer.shareDelegate = self;
+            
             // Update Flyer Share Info in Social File
             [self.flyer setSocialStatusAtIndex:0 StatusValue:1];
             
@@ -345,7 +283,6 @@
             
         }
         
-    }
 }
 
 
@@ -354,11 +291,6 @@
  */
 -(IBAction)onClickTwitterButton{
     
-    if( [twitterButton isSelected] ){
-        
-        [twitterButton setSelected:NO];
-    
-    } else {
 
         // Check internet connectivity
         if( [InviteFriendsController connected] ){
@@ -379,7 +311,7 @@
             [self showAlert:@"You're not connected to the internet. Please connect and retry" message:@""];
             
         }
-    }
+
 }
 
 
@@ -388,15 +320,10 @@
  */
 -(IBAction)onClickInstagramButton{
     
-    if( [instagramButton isSelected] ){
-        
-        [instagramButton setSelected:NO];
-        
-    } else {
+
         
         [instagramButton setSelected:YES];
         [self shareOnInstagram];
-    }
 }
 
 
@@ -405,11 +332,7 @@
  */
 -(IBAction)onClickEmailButton{
     
-    if( [emailButton isSelected] ){
-        
-        [emailButton setSelected:NO];
-        
-    } else {
+
         
         // Check internet connectivity
         if( [InviteFriendsController connected] ){
@@ -419,6 +342,7 @@
             
             // Current Item For Sharing
             SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"#flyerly - %@ %@",titleView.text, selectedFlyerDescription ]];
+            
             
             //Calling ShareKit for Sharing
             [SHKMail shareItem:item];
@@ -433,7 +357,7 @@
             [self showAlert:@"You're not connected to the internet. Please connect and retry" message:@""];
             
         }
-    }
+
     
 }
 
@@ -443,11 +367,7 @@
  */
 -(IBAction)onClickTumblrButton{
     
-    if( [tumblrButton isSelected] ){
-        
-        [tumblrButton setSelected:NO];
-        
-    } else {
+
         
         // Check internet connectivity
         if( [InviteFriendsController connected] ){
@@ -470,7 +390,7 @@
             
         }
         
-    }
+
     
 }
 
@@ -480,11 +400,7 @@
  */
 -(IBAction)onClickFlickrButton{
     
-    if( [flickrButton isSelected] ){
-        
-        [flickrButton setSelected:NO];
-        
-    } else {
+
 
         // Check internet connectivity
         if( [InviteFriendsController connected] ){
@@ -505,8 +421,7 @@
             [self showAlert:@"You're not connected to the internet. Please connect and retry" message:@""];
             
         }
-        
-    }
+
 }
 
 
@@ -515,11 +430,7 @@
  */
 -(IBAction)onClickSMSButton{
     
-    if( [smsButton isSelected] ){
-        
-        [smsButton setSelected:NO];
-        
-    } else {
+
         
         MFMessageComposeViewController *controller = [[MFMessageComposeViewController alloc] init];
         if([MFMessageComposeViewController canSendAttachments])
@@ -532,10 +443,8 @@
             [self presentModalViewController:controller animated:YES];
             
         }
-        
-        
+    
 
-    }
 }
 
 
@@ -544,20 +453,13 @@
  */
 -(IBAction)onClickClipboardButton{
     
-    if( [clipboardButton isSelected] ){
-        
-        [clipboardButton setSelected:NO];
-        [clipboardlabel setTextColor:[UIColor whiteColor] ];
-        
-    } else {
-        
         [clipboardButton setSelected:YES];
         [clipboardlabel setTextColor:[globle colorWithHexString:@"3caaff"]];
         [self onclipcordClick];
         
         // Update Flyer Share Info in Social File
         [self.flyer setSocialStatusAtIndex:7 StatusValue:1];
-    }
+
 
 }
 
@@ -992,6 +894,85 @@
  */
 -(IBAction)goback{
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+
+-(void)setSocialStatus {
+
+    // Set facebook Sharing Status From Social File
+    NSString *status = [flyer getFacebookStatus];
+    if([status isEqualToString:@"1"]){
+        [facebookButton setSelected:YES];
+    }else{
+        [facebookButton setSelected:NO];
+    }
+    
+    // Set Twitter Sharing Status From Social File
+    status = [flyer getTwitterStatus];
+    if([status isEqualToString:@"1"]){
+        [twitterButton setSelected:YES];
+    }else{
+        [twitterButton setSelected:NO];
+    }
+    
+    // Set Instagram Sharing Status From Social File
+    status = [flyer getInstagaramStatus];
+    if([status isEqualToString:@"1"]){
+        [instagramButton setSelected:YES];
+    }else{
+        [instagramButton setSelected:NO];
+    }
+    
+    // Set Email Sharing Status From Social File
+    status = [flyer getEmailStatus];
+    if([status isEqualToString:@"1"]){
+        [emailButton setSelected:YES];
+    }else{
+        [emailButton setSelected:NO];
+    }
+    
+    // Set Sms Sharing Status From Social File
+    if([MFMessageComposeViewController canSendAttachments])
+    {
+        [smsButton setEnabled:YES];
+        
+        status = [flyer getTwitterStatus];
+        if([status isEqualToString:@"1"]){
+            [smsButton setSelected:YES];
+        }else {
+            [smsButton setSelected:NO];
+        }
+        
+    }
+    
+    
+    // Set Clipboard Sharing Status From Social File
+    status = [flyer getClipboardStatus];
+    if([status isEqualToString:@"1"]){
+        [clipboardButton setSelected:YES];
+        [clipboardlabel setTextColor:[globle colorWithHexString:@"3caaff"]];
+    }else{
+        [clipboardButton setSelected:NO];
+        [clipboardlabel setTextColor:[UIColor whiteColor] ];
+    }
+    
+    // Set Thumbler Sharing Status From Social File
+    status = [flyer getThumblerStatus];
+    if([status isEqualToString:@"1"]){
+        [tumblrButton setSelected:YES];
+    }else{
+        [tumblrButton setSelected:NO];
+    }
+    
+    // Set Flicker Sharing Status From Social File
+    status = [flyer getFlickerStatus];
+    if([status isEqualToString:@"1"]){
+        [flickrButton setSelected:YES];
+    }else{
+        [flickrButton setSelected:NO];
+    }
+
+
 }
 
 @end

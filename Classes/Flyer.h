@@ -66,6 +66,17 @@
 
 -(void)setSocialStatusAtIndex :(int)idx StatusValue:(int)status;
 
+-(NSString *)getFacebookStatus;
+-(NSString *)getTwitterStatus;
+-(NSString *)getInstagaramStatus;
+-(NSString *)getFlickerStatus;
+-(NSString *)getThumblerStatus;
+-(NSString *)getEmailStatus;
+-(NSString *)getSmsStatus;
+-(NSString *)getClipboardStatus;
+
+
+
 -(void)setFlyerTitle :(NSString *)name;
 -(NSString *)getFlyerTitle;
 

@@ -57,6 +57,7 @@
     NSMutableArray *listOfPlaces;
     
     NSArray *arrayOfAccounts;
+    SHKSharer *iosSharer;
 }
 
 @property(nonatomic,strong) NSMutableArray *listOfPlaces;
@@ -106,6 +107,7 @@
 - (void)uploadImage:(NSData *)imageData isEmail:(BOOL)isEmail;
 -(void)shareOnEmail:(NSString *)link;
 -(void)shortenURL:(NSString *)url;
+-(void)setSocialStatus;
 
-@property (weak, nonatomic) id<SHKSharerDelegate> IBOutlet delegate;
+@property (weak, nonatomic) id<SHKSharerDelegate> delegate;
 @end
