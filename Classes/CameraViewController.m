@@ -65,6 +65,8 @@
  * Crop image using NBUKit
  */
 -(void) cropImage:(UIImage *)image {
+    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+    
     CropViewController *nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController" bundle:nil];
     nbuCrop.desiredImageSize = desiredImageSize;
     nbuCrop.image = image;
@@ -94,6 +96,7 @@
  * Go Back.
  */
 - (void)cameraCancel:(id)sender{
+    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -101,6 +104,8 @@
  * Move to the gallery.
  */
 - (IBAction)moveToGallery:(id)sender{
+    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+    
     GalleryViewController *nbugallery = [[GalleryViewController alloc]initWithNibName:@"GalleryViewController" bundle:nil];
     nbugallery.desiredImageSize = desiredImageSize;
     nbugallery.onImageTaken = onImageTaken;
