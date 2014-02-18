@@ -67,8 +67,10 @@
 -(void)setSocialStatusAtIndex :(int)idx StatusValue:(int)status;
 
 -(void)setFlyerTitle :(NSString *)name;
--(void)setFlyerDescription :(NSString *)desp;
+-(NSString *)getFlyerTitle;
 
+-(void)setFlyerDescription :(NSString *)desp;
+-(NSString *)getFlyerDescription;
 
 
 -(NSString *)addImage;

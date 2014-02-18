@@ -7,6 +7,7 @@
 #import <Parse/Parse.h>
 #import "ShareKit.h"
 #import "SHK.h"
+#import "SHKSharer.h"
 #import "SHKMail.h"
 #import "SHKFacebook.h"
 #import "SHKTwitter.h"
@@ -33,8 +34,9 @@
 @class FlyrViewController,FlyerlySingleton;
 @class CreateFlyerController;
 @class LoadingView;
+@class SHKSharer;
 
-@interface ShareViewController : ParentViewController<UIWebViewDelegate,UIDocumentInteractionControllerDelegate,MFMessageComposeViewControllerDelegate,MFMailComposeViewControllerDelegate,UITextViewDelegate,UITextFieldDelegate, BitlyURLShortenerDelegate> {
+@interface ShareViewController : ParentViewController<UIWebViewDelegate,UIDocumentInteractionControllerDelegate,MFMessageComposeViewControllerDelegate,MFMailComposeViewControllerDelegate,UITextViewDelegate,UITextFieldDelegate, BitlyURLShortenerDelegate,SHKSharerDelegate> {
 
 	UIImage *selectedFlyerImage;
 	NSString *selectedFlyerTitle;
@@ -105,4 +107,5 @@
 -(void)shareOnEmail:(NSString *)link;
 -(void)shortenURL:(NSString *)url;
 
+@property (weak, nonatomic) id<SHKSharerDelegate> IBOutlet delegate;
 @end

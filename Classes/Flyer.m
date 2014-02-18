@@ -829,6 +829,17 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 
 }
 
+
+/*
+ * Here we Return Flyer Title From .txt File
+ */
+-(NSString *)getFlyerTitle{
+    
+    return [textFileArray objectAtIndex:0];
+}
+
+
+
 /*
  * Here we Set Flyer Title
  */
@@ -838,6 +849,15 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     
     //Here we write the Array of Text files .txt
     [textFileArray writeToFile:textFile atomically:YES];
+}
+
+
+/*
+ * Here we Return Flyer Description From .txt File
+ */
+-(NSString *)getFlyerDescription{
+    
+    return [textFileArray objectAtIndex:1];
 }
 
 
@@ -853,6 +873,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 
 
 }
+
 
 
 /*

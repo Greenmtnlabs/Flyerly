@@ -215,6 +215,7 @@
         
 
         UIImage *img = [[UIImage alloc] initWithContentsOfFile:currentpath];
+        [self setContentMode:UIViewContentModeScaleToFill];
         self.image = img;
         
     }

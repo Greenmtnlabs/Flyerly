@@ -28,9 +28,23 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 
 #pragma mark  View Appear Methods
 
+-(void)viewWillAppear:(BOOL)animated{
+	[super viewWillAppear:YES];
+    
+    //Here we Set Top Bar Item
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont fontWithName:TITLE_FONT size:12];
+    label.textAlignment = UITextAlignmentCenter;
+    label.textColor = [UIColor redColor];
+    label.text = [flyer getFlyerTitle];
+    self.navigationItem.titleView = label;
+    
+}
+
 -(void)viewDidAppear:(BOOL)animated{
     
-
+    
     [addMoreLayerOrSaveFlyerLabel setText:@"ADD MORE LAYERS OR ADJUST LAYERS BELOW"];    [addMoreLayerOrSaveFlyerLabel setNumberOfLines:2];
     [addMoreLayerOrSaveFlyerLabel setBackgroundColor:[UIColor clearColor]];
     [addMoreLayerOrSaveFlyerLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:16]];
@@ -200,14 +214,7 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     selectedAddMoreLayerTab = -1;
     
     
-    //Here we Set Top Bar Item
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
-    label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont fontWithName:TITLE_FONT size:12];
-    label.textAlignment = UITextAlignmentCenter;
-    label.textColor = [UIColor whiteColor];
-    label.text = @"UNTITLED";
-    self.navigationItem.titleView = label;
+
     
     //Right ShareButton
     UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
@@ -1790,6 +1797,13 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     //Here we Highlight The ImageView
     [self.flyimgView layerIsBeingEdited:currentLayer];
     
+    //here we Update Flyer Description if Empty
+    NSString *desp = [flyer getFlyerDescription];
+    
+    if ([desp isEqualToString:@""]) {
+        [flyer setFlyerDescription:lastTextView.text];
+    }
+    
 	textBackgrnd.alpha = ALPHA1;
 
     // SET BOTTOM BAR
@@ -1912,8 +1926,8 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:TITLE_FONT size:12];
     label.textAlignment = UITextAlignmentCenter;
-    label.textColor = [UIColor whiteColor];
-    label.text = @"UNTITLED";
+    label.textColor = [UIColor redColor];
+    label.text = [flyer getFlyerTitle];
     self.navigationItem.titleView = label;
     
      //ShareButton

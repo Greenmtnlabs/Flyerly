@@ -11,7 +11,69 @@
 @implementation ShareViewController
 
 
-@synthesize selectedFlyerImage,imgView,fvController,titleView,descriptionView,selectedFlyerDescription,selectedFlyerTitle, detailFileName, imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,loadingView,dic,scrollView,  networkParentView,listOfPlaces,clipboardlabel,sharelink,bitly,flyer;
+@synthesize selectedFlyerImage,imgView,fvController,titleView,descriptionView,selectedFlyerDescription,selectedFlyerTitle, detailFileName, imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,loadingView,dic,scrollView,  networkParentView,listOfPlaces,clipboardlabel,sharelink,bitly,flyer,delegate;
+
+
+#pragma mark - Sharer Response
+
+- (void)sharerStartedSending:(SHKSharer *)aSharer
+{
+	
+}
+- (void)sharerFinishedSending:(SHKSharer *)sharer
+{
+    
+    // Update Flyer Share Info in Social File
+    [self.flyer setSocialStatusAtIndex:0 StatusValue:1];
+	//if (!sharer.quiet)
+		//[[SHKActivityIndicator currentIndicator] displayCompleted:SHKLocalizedString(@"Saved!")];
+}
+
+- (void)sharer:(SHKSharer *)sharer failedWithError:(NSError *)error shouldRelogin:(BOOL)shouldRelogin
+{
+    
+    //[[SHKActivityIndicator currentIndicator] hide];
+    
+    //if user sent the item already but needs to relogin we do not show alert
+    if (!sharer.quiet && sharer.pendingAction != SHKPendingShare && sharer.pendingAction != SHKPendingSend)
+	{
+		[[[UIAlertView alloc] initWithTitle:SHKLocalizedString(@"Error")
+                                    message:sharer.lastError!=nil?[sharer.lastError localizedDescription]:SHKLocalizedString(@"There was an error while sharing")
+                                   delegate:nil
+                          cancelButtonTitle:SHKLocalizedString(@"Close")
+                          otherButtonTitles:nil] show];
+    }		
+    if (shouldRelogin) {        
+        [sharer promptAuthorization];
+	}
+}
+
+- (void)sharerCancelledSending:(SHKSharer *)sharer
+{
+    
+}
+
+- (void)sharerShowBadCredentialsAlert:(SHKSharer *)sharer
+{
+    NSString *errorMessage = SHKLocalizedString(@"Sorry, %@ did not accept your credentials. Please try again.", [[sharer class] sharerTitle]);
+    
+    [[[UIAlertView alloc] initWithTitle:SHKLocalizedString(@"Login Error")
+                                message:errorMessage
+                               delegate:nil
+                      cancelButtonTitle:SHKLocalizedString(@"Close")
+                      otherButtonTitles:nil] show];
+}
+
+- (void)sharerShowOtherAuthorizationErrorAlert:(SHKSharer *)sharer
+{
+    NSString *errorMessage = SHKLocalizedString(@"Sorry, %@ encountered an error. Please try again.", [[sharer class] sharerTitle]);
+    
+    [[[UIAlertView alloc] initWithTitle:SHKLocalizedString(@"Login Error")
+                                message:errorMessage
+                               delegate:nil
+                      cancelButtonTitle:SHKLocalizedString(@"Close")
+                      otherButtonTitles:nil] show];
+}
 
 
 - (void)viewDidLoad {
@@ -124,7 +186,7 @@
     [titleView addTarget:self action:@selector(textFieldFinished:) forControlEvents: UIControlEventEditingDidEndOnExit];
     [titleView addTarget:self action:@selector(textFieldTapped:) forControlEvents:UIControlEventEditingDidBegin];
     
-
+/*
     if([selectedFlyerTitle isEqualToString:@""]){
         [titleView setText:NameYourFlyerText];
     }else{
@@ -140,11 +202,15 @@
     }else{
         [descriptionView setText:selectedFlyerDescription];
     }
+ */
     
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    titleView.text = [flyer getFlyerTitle];
+    descriptionView.text = [flyer getFlyerDescription];
     
     // Set sharing network to zero
     countOfSharingNetworks = 0;
@@ -263,10 +329,13 @@
             // Current Item For Sharing
             SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"#flyerly - %@  %@",titleView.text, selectedFlyerDescription ]];
             
+            SHKSharer *iosSharer = [SHKFacebook shareItem:item];
+
             //Calling ShareKit for Sharing
-            [SHKFacebook shareItem:item];
+//            [SHKFacebook shareItem:item];
             
-            
+            self.delegate =  iosSharer.shareDelegate;
+                        
             // Update Flyer Share Info in Social File
             [self.flyer setSocialStatusAtIndex:0 StatusValue:1];
             

@@ -111,9 +111,10 @@
                     NSString *piecesFile = destination;
                     
                     NSMutableDictionary *masterLayers = [[NSMutableDictionary alloc] initWithContentsOfFile:piecesFile];
-                    
+                   
                     //Here we Update Text Layer Position
                     NSArray * keys = [masterLayers allKeys];
+                    float y = 0;
                     for (int i = 0 ; i < keys.count  ; i++) {
                         
                         NSMutableDictionary *textLayer = [masterLayers objectForKey:[keys objectAtIndex:i]];
@@ -124,19 +125,21 @@
                             
                         } else {
                             NSString *yValue =  [textLayer valueForKey:@"y"] ;
-                            //yValue = [yValue stringByReplacingOccurrencesOfString:@"-"
-                              //                                         withString:@""];
-                            float y = [yValue floatValue];
+                            
+                            yValue = [yValue stringByReplacingOccurrencesOfString:@"-"
+                                                                       withString:@""];
+                            y = [yValue floatValue];
                             y = y + 44;
-                            [textLayer setValue:[NSString stringWithFormat:@"%f",y] forKey:@"y"];
-                            [masterLayers setValue:textLayer forKey:[keys objectAtIndex:i]];
                             
                         }
+                            
+                        [textLayer setValue:[NSString stringWithFormat:@"%f",y] forKey:@"y"];
+                        [masterLayers setValue:textLayer forKey:[keys objectAtIndex:i]];
+
                     }
                     
                     //Here we write the dictionary of .peices files
                     [masterLayers writeToFile:piecesFile atomically:YES];
-                    
                     
                     //Copy txt File
                     source = [NSString stringWithFormat:@"%@/IMG_%d.txt",usernamePath,imgnumber];
