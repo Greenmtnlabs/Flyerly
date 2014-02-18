@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import <Twitter/Twitter.h>
-#import "ObjectiveFlickr.h"
 #import "InputViewController.h"
 #import "ParentViewController.h"
 #import "FlyerlySingleton.h"
@@ -19,7 +18,7 @@
 #import "CreateFlyerController.h"
 
 @class InputViewController,FlyerlySingleton;
-@interface ShareSettingViewController : ParentViewController <OFFlickrAPIRequestDelegate, MFMailComposeViewControllerDelegate> {
+@interface ShareSettingViewController : ParentViewController <MFMailComposeViewControllerDelegate> {
     IBOutlet UIButton *facebookButton;
 	IBOutlet UIButton *twitterButton;
 	IBOutlet UIButton *emailButton;
@@ -33,7 +32,6 @@
 
     IBOutlet UIButton *helpTab;
     FlyerlySingleton *globle;
-    OFFlickrAPIRequest *flickrRequest;
 }
 
 @property(nonatomic,strong) IBOutlet UIButton *facebookButton;
