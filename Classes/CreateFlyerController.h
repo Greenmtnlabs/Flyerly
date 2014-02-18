@@ -110,6 +110,8 @@
     FlyerImageView *flyerImageView;
     
     UITextView *lastTextView;
+    UIView *sharePanel;
+    ShareViewController *shareviewcontroller;
 }
 
 @property(nonatomic, strong) NSMutableArray *textLabelLayersArray;

@@ -18,7 +18,7 @@
 
 - (void)sharerStartedSending:(SHKSharer *)aSharer
 {
-	
+	int i = 0;
 }
 - (void)sharerFinishedSending:(SHKSharer *)sharer
 {
@@ -50,7 +50,7 @@
 
 - (void)sharerCancelledSending:(SHKSharer *)sharer
 {
-    
+    NSLog(@"");
 }
 
 - (void)sharerShowBadCredentialsAlert:(SHKSharer *)sharer
@@ -79,71 +79,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-	[UIView beginAnimations:nil context:NULL];
-	[UIView setAnimationDuration:0.2f];
     
     globle = [FlyerlySingleton RetrieveSingleton];
     globle.NBUimage = nil;
-    showbars = YES;
-        
     
-	self.navigationController.navigationBarHidden = NO;
+    [self.view setBackgroundColor:[globle colorWithHexString:@"cdcdce"]];
 
-    // Set title on bar
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
-    label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont fontWithName:TITLE_FONT size:18];
-    label.textAlignment = UITextAlignmentCenter;
-    label.textColor = [UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0];
-    label.text = @"SHARE";
-    self.navigationItem.titleView = label;
-
-    //Back Bar Button
-    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
-    backButton.showsTouchWhenHighlighted = YES;
-    [backButton addTarget:self action:@selector(goback) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-
-    //help Bar button
-    UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    helpButton.showsTouchWhenHighlighted = YES;
-    [helpButton addTarget:self action:@selector(loadHelpController) forControlEvents:UIControlEventTouchUpInside];
-    [helpButton setBackgroundImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
-    UIBarButtonItem *leftHelpBarButton = [[UIBarButtonItem alloc] initWithCustomView:helpButton];
-    
-    [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:leftBarButton,leftHelpBarButton,nil]];
-
-	[UIView commitAnimations];
-    
-    
-	[imgView setImage:selectedFlyerImage forState:UIControlStateNormal];
-
-    NSString *flyerNumber = [FlyrViewController getFlyerNumberFromPath:imageFileName];
-    self.imgView.tag = [flyerNumber intValue];
     
     // Setup title text field
     [titleView setReturnKeyType:UIReturnKeyDone];
     [titleView addTarget:self action:@selector(textFieldFinished:) forControlEvents: UIControlEventEditingDidEndOnExit];
     [titleView addTarget:self action:@selector(textFieldTapped:) forControlEvents:UIControlEventEditingDidBegin];
     
-/*
-    if([selectedFlyerTitle isEqualToString:@""]){
-        [titleView setText:NameYourFlyerText];
-    }else{
-        [titleView setText:selectedFlyerTitle];}
-    
-    // Setup description text view
-    [descriptionView setFont:[UIFont fontWithName:OTHER_FONT size:10]];
-    [descriptionView setTextColor:[UIColor grayColor]];
-    [descriptionView setReturnKeyType:UIReturnKeyDone];
-    
-    if([selectedFlyerDescription isEqualToString:@""]){
-        [descriptionView setText:AddCaptionText];
-    }else{
-        [descriptionView setText:selectedFlyerDescription];
-    }
- */
     
 }
 
@@ -154,12 +101,7 @@
 
     titleView.text = [flyer getFlyerTitle];
     descriptionView.text = [flyer getFlyerDescription];
-    
-    // Set sharing network to zero
-    countOfSharingNetworks = 0;
-    
-    // Set default progress view
-    [self setDefaultProgressViewHeight];
+    selectedFlyerDescription = descriptionView.text;
     
 }
 
@@ -453,7 +395,6 @@
 -(IBAction)onClickClipboardButton{
     
         [clipboardButton setSelected:YES];
-        [clipboardlabel setTextColor:[globle colorWithHexString:@"3caaff"]];
         [self onclipcordClick];
         
         // Update Flyer Share Info in Social File
@@ -795,17 +736,6 @@
 }
 
 
--(void)setDefaultProgressViewHeight{
-    
-    if(IS_IPHONE_5){
-        [scrollView setFrame:CGRectMake(5, 0, 310, 600)];
-        [scrollView setContentSize:CGSizeMake(310, 600)];
-    }else{
-        [scrollView setFrame:CGRectMake(5, 0, 310, 401)];
-        [scrollView setContentSize:CGSizeMake(310, 401)];
-    }
-}
-
 
 #pragma Request receive code
 
@@ -892,7 +822,13 @@
  * pop to root view
  */
 -(IBAction)goback{
-    [self.navigationController popViewControllerAnimated:YES];
+    
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.4f];
+    [self.view setFrame:CGRectMake(320, 64, 310,400 )];
+    [UIView commitAnimations];
+    
+    [self removeFromParentViewController];
 }
 
 
@@ -930,29 +866,34 @@
         [emailButton setSelected:NO];
     }
     
-    // Set Sms Sharing Status From Social File
-    if([MFMessageComposeViewController canSendAttachments])
-    {
-        [smsButton setEnabled:YES];
+    
+    
+    BOOL MsgStatus = [MFMessageComposeViewController respondsToSelector:@selector(canSendAttachments)];
+    
+    if (MsgStatus) {
         
-        status = [flyer getTwitterStatus];
-        if([status isEqualToString:@"1"]){
-            [smsButton setSelected:YES];
-        }else {
-            [smsButton setSelected:NO];
+        // Set Sms Sharing Status From Social File
+        if([MFMessageComposeViewController canSendAttachments])
+        {
+            [smsButton setEnabled:YES];
+        
+            status = [flyer getTwitterStatus];
+            if([status isEqualToString:@"1"]){
+                [smsButton setSelected:YES];
+            }else {
+                [smsButton setSelected:NO];
+            }
+        
         }
-        
     }
     
     
     // Set Clipboard Sharing Status From Social File
     status = [flyer getClipboardStatus];
     if([status isEqualToString:@"1"]){
-        [clipboardButton setSelected:YES];
-        [clipboardlabel setTextColor:[globle colorWithHexString:@"3caaff"]];
+        [clipboardButton setSelected:YES];        
     }else{
         [clipboardButton setSelected:NO];
-        [clipboardlabel setTextColor:[UIColor whiteColor] ];
     }
     
     // Set Thumbler Sharing Status From Social File

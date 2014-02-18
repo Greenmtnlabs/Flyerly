@@ -2002,34 +2002,40 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 -(void)callSaveAndShare
 {
     
-    FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
     
-    
-    NSString *shareImagePath = [flyer getImageForShare];
-    UIImage *shareImage =  [UIImage imageWithContentsOfFile:shareImagePath];
-    //NSData *imgData = UIImagePNGRepresentation(shareImage);
-    //NSData *data =
-    //[self getCurrentFrameAndSaveIt];
-    appDele.changesFlag = NO;
+    if (sharePanel != nil) {
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:0.4f];
+        [sharePanel setFrame:CGRectMake(320, 64, 290,480 )];
 
-    ShareViewController *draftViewController = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
-    draftViewController.selectedFlyerImage = shareImage;
-    draftViewController.selectedFlyerTitle = globle.flyerName;
-    if([[self textLabelLayersArray] count] > 0){
-        draftViewController.selectedFlyerDescription = ((CustomLabel*)[self textLabelLayersArray][0]).text;
-    }else{
-        draftViewController.selectedFlyerDescription = @"";
+        [UIView commitAnimations];
+
+        [sharePanel removeFromSuperview];
+        sharePanel = nil;
+        
+    } else {
+
+        NSString *shareImagePath = [flyer getImageForShare];
+        UIImage *shareImage =  [UIImage imageWithContentsOfFile:shareImagePath];
+        //[self getCurrentFrameAndSaveIt];
+
+        shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
+        shareviewcontroller.selectedFlyerImage = shareImage;
+        shareviewcontroller.flyer = self.flyer;
+        shareviewcontroller.imageFileName = finalImgWritePath;
+        shareviewcontroller.detailFileName = [finalImgWritePath stringByReplacingOccurrencesOfString:@".jpg" withString:@".txt"];
+    
+        sharePanel = [[UIView alloc] init];
+        sharePanel = shareviewcontroller.view;
+        [sharePanel setFrame:CGRectMake(320, 64, 290,480 )];
+    
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:0.4f];
+        [sharePanel setFrame:CGRectMake(30, 64, 290,480 )];
+        [UIView commitAnimations];
+        [self.view addSubview:sharePanel];
+        
     }
-
-    draftViewController.flyer = self.flyer;
-    draftViewController.imageFileName = finalImgWritePath;
-    draftViewController.detailFileName = [finalImgWritePath stringByReplacingOccurrencesOfString:@".jpg" withString:@".txt"];
-    /*
-    UIView *sharePanel = [[UIView alloc] init];
-    sharePanel = draftViewController.view;
-    [sharePanel setFrame:CGRectMake(10, 100, 310,400 )];
-    [self.view addSubview:sharePanel];*/
-    [self.navigationController pushViewController:draftViewController animated:YES];
 }
 
 
