@@ -831,6 +831,75 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 
 
 /*
+ * Here we Return Facebook Share Status of Flyer
+ */
+-(NSString *)getFacebookStatus {
+    return [socialArray objectAtIndex:0];
+}
+
+
+/*
+ * Here we Return Twitter Share Status of Flyer
+ */
+-(NSString *)getTwitterStatus {
+    return [socialArray objectAtIndex:1];
+
+}
+
+
+/*
+ * Here we Return Email Share Status of Flyer
+ */
+
+-(NSString *)getEmailStatus {
+    return [socialArray objectAtIndex:2];
+    
+}
+
+
+/*
+ * Here we Return Thumbler Share Status of Flyer
+ */
+-(NSString *)getThumblerStatus {
+    return [socialArray objectAtIndex:3];
+    
+}
+
+/*
+ * Here we Return Flicker Share Status of Flyer
+ */
+-(NSString *)getFlickerStatus {
+    return [socialArray objectAtIndex:4];
+    
+}
+
+/*
+ * Here we Return Instagram Share Status of Flyer
+ */
+-(NSString *)getInstagaramStatus {
+    return [socialArray objectAtIndex:5];
+
+}
+
+
+/*
+ * Here we Return Sms Share Status of Flyer
+ */
+-(NSString *)getSmsStatus {
+    return [socialArray objectAtIndex:6];
+
+}
+
+/*
+ * Here we Return Clipboard Share Status of Flyer
+ */
+-(NSString *)getClipboardStatus {
+    return [socialArray objectAtIndex:7];
+
+}
+
+
+/*
  * Here we Return Flyer Title From .txt File
  */
 -(NSString *)getFlyerTitle{
