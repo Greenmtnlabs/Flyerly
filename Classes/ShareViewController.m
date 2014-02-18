@@ -212,9 +212,10 @@
             SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"#flyerly - %@  %@",titleView.text, selectedFlyerDescription ]];
 
             
-            SHKSharer *iosSharer = [SHKFacebook shareItem:item];
-            iosSharer.shareDelegate = self;
+           // SHKSharer *iosSharer = [SHKFacebook shareItem:item];
+           // iosSharer.shareDelegate = self;
 
+            [SHKFacebook shareItem:item];
             // Update Flyer Share Info in Social File
             [self.flyer setSocialStatusAtIndex:0 StatusValue:1];
             
@@ -238,7 +239,7 @@
              [twitterButton setSelected:YES];
 
             // Current Item For Sharing
-            SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"#flyerly - %@ %@",titleView.text, selectedFlyerDescription ]];
+            SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ %@ #flyerly",titleView.text, selectedFlyerDescription ]];
             
             //Calling ShareKit for Sharing
             [SHKTwitter shareItem:item];
@@ -316,7 +317,9 @@
            [tumblrButton setSelected:YES];
 
             // Current Item For Sharing
-            SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"#flyerly - %@  %@",titleView.text, selectedFlyerDescription ]];
+            SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@  %@",titleView.text, selectedFlyerDescription ]];
+            
+            item.tags =[NSArray arrayWithObjects: @"#flyerly", nil];
             
             //Calling ShareKit for Sharing
             [SHKTumblr shareItem:item];
@@ -348,7 +351,10 @@
             [flickrButton setSelected:YES];
 
             // Current Item For Sharing
-            SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"#flyerly - %@  %@",titleView.text, selectedFlyerDescription ]];
+            SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@",titleView.text  ]];
+              item.tags =[NSArray arrayWithObjects: @"#flyerly", nil];
+            
+      //      [item set ].description = selectedFlyerDescription;
             
             //Calling ShareKit for Sharing
             [SHKFlickr shareItem:item];

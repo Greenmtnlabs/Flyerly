@@ -111,6 +111,7 @@
     
     UITextView *lastTextView;
     UIView *sharePanel;
+    UIButton *shareButton;
     ShareViewController *shareviewcontroller;
 }
 

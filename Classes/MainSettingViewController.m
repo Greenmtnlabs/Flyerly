@@ -171,11 +171,11 @@
 - (void)tableView:(UITableView *)tView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
    
     if (indexPath.row == 0) {
-        oldsettingveiwcontroller = [[ShareSettingViewController alloc]initWithNibName:@"SettingViewController" bundle:nil];
+        oldsettingveiwcontroller = [[ShareSettingViewController alloc]initWithNibName:@"ShareSettingViewController" bundle:nil];
         [self.navigationController pushViewController:oldsettingveiwcontroller animated:YES];
   
     } else if(indexPath.row == 2) {
-        accountUpdater = [[ProfileViewController alloc]initWithNibName:@"AccountSelecter" bundle:nil];
+        accountUpdater = [[ProfileViewController alloc]initWithNibName:@"ProfileViewController" bundle:nil];
         [self.navigationController pushViewController:accountUpdater animated:YES];
     }else if(indexPath.row == 3){
         warningAlert = [[UIAlertView  alloc]initWithTitle:@"Are you sure?" message:@"" delegate:self cancelButtonTitle:@"Sign out" otherButtonTitles:@"Cancel",nil];

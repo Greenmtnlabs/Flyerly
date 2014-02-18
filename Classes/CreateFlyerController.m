@@ -217,10 +217,11 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 
     
     //Right ShareButton
-    UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+    shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     shareButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
 	[shareButton addTarget:self action:@selector(callSaveAndShare) forControlEvents:UIControlEventTouchUpInside];
     [shareButton setBackgroundImage:[UIImage imageNamed:@"share_button"] forState:UIControlStateNormal];
+
     shareButton.showsTouchWhenHighlighted = YES;
     
     //Right UndoButton
@@ -1930,11 +1931,8 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     self.navigationItem.titleView = label;
     
      //ShareButton
-    UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    shareButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
-	[shareButton addTarget:self action:@selector(callSaveAndShare) forControlEvents:UIControlEventTouchUpInside];
     [shareButton setBackgroundImage:[UIImage imageNamed:@"share_button"] forState:UIControlStateNormal];
-    shareButton.showsTouchWhenHighlighted = YES;
+
     
     //UndoButton
     UIButton *undoButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
@@ -2012,8 +2010,12 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
         [sharePanel removeFromSuperview];
         sharePanel = nil;
         
+        [shareButton setBackgroundImage:[UIImage imageNamed:@"share_button"] forState:UIControlStateNormal];
+
+        
     } else {
 
+    [shareButton setBackgroundImage:[UIImage imageNamed:@"share_button_selected"] forState:UIControlStateNormal];
         NSString *shareImagePath = [flyer getImageForShare];
         UIImage *shareImage =  [UIImage imageWithContentsOfFile:shareImagePath];
         //[self getCurrentFrameAndSaveIt];
