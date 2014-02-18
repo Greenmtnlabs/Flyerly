@@ -1558,7 +1558,7 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 #pragma mark After ViewWillAppear Method Sequence
 -(void) callMenu
 {
-    
+    /*
     if (![currentLayer isEqualToString:@""]) [self.flyimgView layerStoppedEditing:currentLayer];
         
     
@@ -1575,7 +1575,7 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     
     // Update Recent Flyer List
     [flyer setRecentFlyer];
-    
+    */
     [self.navigationController popViewControllerAnimated:YES];
 }
 

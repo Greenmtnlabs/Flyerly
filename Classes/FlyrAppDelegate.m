@@ -207,6 +207,8 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 */
 -(void)twitterChangeforNewVersion:(NSString *)olduser{
 
+    [lauchController showLoadingIndicator];
+
     //Checking user Exist in Parse
     PFQuery *query = [PFUser  query];
     [query whereKey:@"username" equalTo:[olduser lowercaseString]];
@@ -214,12 +216,20 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
         
         if (error) {
             NSLog(@"Twitter User Not Exits");
+            [lauchController hideLoadingIndicator];
             
         }else{
             NSLog(@"Old Twitter User found");
             
             // Migrate Account For 3.0 Version
             [FlyerUser migrateUserto3dot0:object];
+            
+            //Getting Recent Flyers
+            lauchController.recentFlyers = [Flyer recentFlyerPreview:4];
+            
+            //Set Recent Flyers
+            [lauchController updateRecentFlyer:lauchController.recentFlyers];
+            [lauchController hideLoadingIndicator];
             
         }
     }];
@@ -235,6 +245,8 @@ For Checking old Detail is available in parse or not
 if it exist then we call Merging Process
 */
 -(void)fbChangeforNewVersion{
+    
+    [lauchController showLoadingIndicator];
 
     // Create request for user's Facebook data
     FBRequest *request = [FBRequest requestForMe];
@@ -253,6 +265,7 @@ if it exist then we call Merging Process
             [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
                 if (error) {
                     
+                    [lauchController hideLoadingIndicator];
                     NSLog(@"Email NotExits");
 
                 }else{
@@ -260,6 +273,16 @@ if it exist then we call Merging Process
                     
                     // Migrate Account For 3.0 Version
                     [FlyerUser migrateUserto3dot0:object];
+                    
+                    //Getting Recent Flyers
+                    
+                    lauchController.recentFlyers = [Flyer recentFlyerPreview:4];
+                    
+                    //Set Recent Flyers
+                    [lauchController updateRecentFlyer:lauchController.recentFlyers];
+                    [lauchController hideLoadingIndicator];
+                    
+
 
                 }
             }];
@@ -285,6 +308,8 @@ if it exist then we call Merging Process
     
     //its for remember key of user Data already copy to Device
     [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"userDataExist"];
+    
+    NSLog(@"User Data Copied Successfully");
 
 
 }

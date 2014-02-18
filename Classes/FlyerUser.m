@@ -112,6 +112,32 @@
                     
                     NSMutableDictionary *masterLayers = [[NSMutableDictionary alloc] initWithContentsOfFile:piecesFile];
                     
+                    //Here we Update Text Layer Position
+                    NSArray * keys = [masterLayers allKeys];
+                    for (int i = 0 ; i < keys.count  ; i++) {
+                        
+                        NSMutableDictionary *textLayer = [masterLayers objectForKey:[keys objectAtIndex:i]];
+                        
+                        if ([[keys objectAtIndex:i] rangeOfString:@"Text"].location == NSNotFound) {
+                            
+                            NSLog(@"sub string doesnt exist");
+                            
+                        } else {
+                            NSString *yValue =  [textLayer valueForKey:@"y"] ;
+                            //yValue = [yValue stringByReplacingOccurrencesOfString:@"-"
+                              //                                         withString:@""];
+                            float y = [yValue floatValue];
+                            y = y + 44;
+                            [textLayer setValue:[NSString stringWithFormat:@"%f",y] forKey:@"y"];
+                            [masterLayers setValue:textLayer forKey:[keys objectAtIndex:i]];
+                            
+                        }
+                    }
+                    
+                    //Here we write the dictionary of .peices files
+                    [masterLayers writeToFile:piecesFile atomically:YES];
+                    
+                    
                     //Copy txt File
                     source = [NSString stringWithFormat:@"%@/IMG_%d.txt",usernamePath,imgnumber];
                     destination = [NSString stringWithFormat:@"%@/flyer.txt",flyerPath];
@@ -255,6 +281,7 @@
                     }// End Template Exist
                     
                     
+                    
                     //Create One Copy in History of Flyer
                     NSString* historyDestinationpath  =  [NSString stringWithFormat:@"%@/History/%d",flyerPath,imgnumber];
                     
@@ -319,7 +346,7 @@
         if ([[NSFileManager defaultManager] isReadableFileAtPath:source] )
             [[NSFileManager defaultManager] removeItemAtPath:source error:&error];
 
-        NSLog(@"Deleted Old Directories");
+        NSLog(@"Update Folder Process Complete...");
         
 	}
 
