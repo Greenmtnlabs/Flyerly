@@ -110,6 +110,9 @@
     FlyerImageView *flyerImageView;
     
     UITextView *lastTextView;
+    UIView *sharePanel;
+    UIButton *shareButton;
+    ShareViewController *shareviewcontroller;
 }
 
 @property(nonatomic, strong) NSMutableArray *textLabelLayersArray;
@@ -209,7 +212,7 @@
 -(void) choosePhoto;
 -(void) donePhoto;
 -(void) saveMyFlyer;
--(void)callSaveAndShare;
+-(void)share;
 
 
 -(NSData*)getCurrentFrameAndSaveIt;

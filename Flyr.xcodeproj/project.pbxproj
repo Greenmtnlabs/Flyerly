@@ -692,6 +692,10 @@
 		202FF12B17C3ABDE003C6245 /* bkg_register-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 202FF12817C3ABDE003C6245 /* bkg_register-568h@2x.png */; };
 		202FF12C17C3ABDE003C6245 /* bkg_register.png in Resources */ = {isa = PBXBuildFile; fileRef = 202FF12917C3ABDE003C6245 /* bkg_register.png */; };
 		202FF12D17C3ABDE003C6245 /* bkg_register@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 202FF12A17C3ABDE003C6245 /* bkg_register@2x.png */; };
+		2032022218B3DF320014A919 /* flat_text_box.png in Resources */ = {isa = PBXBuildFile; fileRef = 2032022018B3DF320014A919 /* flat_text_box.png */; };
+		2032022318B3DF320014A919 /* flat_text_box@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2032022118B3DF320014A919 /* flat_text_box@2x.png */; };
+		2032022618B4180D0014A919 /* share_button_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 2032022418B4180C0014A919 /* share_button_selected.png */; };
+		2032022718B4180D0014A919 /* share_button_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2032022518B4180C0014A919 /* share_button_selected@2x.png */; };
 		2032DCC91871B5DC007036B2 /* GalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2032DCC71871B5DC007036B2 /* GalleryViewController.m */; };
 		2032DCCA1871B5DC007036B2 /* GalleryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2032DCC81871B5DC007036B2 /* GalleryViewController.xib */; };
 		2032DCD01871BDFF007036B2 /* CropViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2032DCCE1871BDFF007036B2 /* CropViewController.m */; };
@@ -2031,6 +2035,10 @@
 		202FF12817C3ABDE003C6245 /* bkg_register-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bkg_register-568h@2x.png"; sourceTree = "<group>"; };
 		202FF12917C3ABDE003C6245 /* bkg_register.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bkg_register.png; sourceTree = "<group>"; };
 		202FF12A17C3ABDE003C6245 /* bkg_register@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bkg_register@2x.png"; sourceTree = "<group>"; };
+		2032022018B3DF320014A919 /* flat_text_box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flat_text_box.png; sourceTree = "<group>"; };
+		2032022118B3DF320014A919 /* flat_text_box@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flat_text_box@2x.png"; sourceTree = "<group>"; };
+		2032022418B4180C0014A919 /* share_button_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share_button_selected.png; sourceTree = "<group>"; };
+		2032022518B4180C0014A919 /* share_button_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share_button_selected@2x.png"; sourceTree = "<group>"; };
 		2032DCC61871B5DC007036B2 /* GalleryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = GalleryViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		2032DCC71871B5DC007036B2 /* GalleryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = GalleryViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		2032DCC81871B5DC007036B2 /* GalleryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GalleryViewController.xib; sourceTree = "<group>"; };
@@ -2745,6 +2753,8 @@
 		0DF3A361108DF47400D6C887 /* ImageLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				2032022018B3DF320014A919 /* flat_text_box.png */,
+				2032022118B3DF320014A919 /* flat_text_box@2x.png */,
 				201BDC9E18A45F6C009AB18E /* blue_bar.png */,
 				201BDC9F18A45F6C009AB18E /* blue_bar@2x.png */,
 				2026962E188F3E0600CF2F78 /* delete_button.png */,
@@ -3084,6 +3094,8 @@
 				0FF29F32174629780007B309 /* retry_share@2x.png */,
 				0FBC37CE174F980500004F21 /* right_arrow.png */,
 				0FBC37CF174F980500004F21 /* right_arrow@2x.png */,
+				2032022418B4180C0014A919 /* share_button_selected.png */,
+				2032022518B4180C0014A919 /* share_button_selected@2x.png */,
 				201686E8186AF56D00A238AE /* share_button.png */,
 				201686E9186AF56D00A238AE /* share_button@2x.png */,
 				65DB5987172FAD6200F251B0 /* save_bg.png */,
@@ -4614,6 +4626,7 @@
 				30D58D3E10FB1BF800E0C7E8 /* icon66.jpg in Resources */,
 				30D58D3F10FB1BF800E0C7E8 /* icon7.jpg in Resources */,
 				30D58D4010FB1BF800E0C7E8 /* icon8.jpg in Resources */,
+				2032022618B4180D0014A919 /* share_button_selected.png in Resources */,
 				30D58D4110FB1BF800E0C7E8 /* icon9.jpg in Resources */,
 				30D58D4210FB1BF800E0C7E8 /* Template0.jpg in Resources */,
 				30D58D4310FB1BF800E0C7E8 /* Template1.jpg in Resources */,
@@ -4659,6 +4672,7 @@
 				30D58D6A10FB1BF800E0C7E8 /* Template45.jpg in Resources */,
 				30D58D6B10FB1BF800E0C7E8 /* Template46.jpg in Resources */,
 				2064B2011880588E00DE7147 /* close_button.png in Resources */,
+				2032022218B3DF320014A919 /* flat_text_box.png in Resources */,
 				30D58D6C10FB1BF800E0C7E8 /* Template47.jpg in Resources */,
 				30D58D6D10FB1BF800E0C7E8 /* Template48.jpg in Resources */,
 				30D58D6E10FB1BF800E0C7E8 /* Template49.jpg in Resources */,
@@ -4977,6 +4991,7 @@
 				65C1A4491742516D00947D5E /* Template49@2x.jpg in Resources */,
 				65C1A44A1742516D00947D5E /* Template50@2x.jpg in Resources */,
 				65C1A44B1742516D00947D5E /* Template51@2x.jpg in Resources */,
+				2032022318B3DF320014A919 /* flat_text_box@2x.png in Resources */,
 				65C1A44C1742516D00947D5E /* Template52@2x.jpg in Resources */,
 				65C1A44D1742516D00947D5E /* Template53@2x.jpg in Resources */,
 				65C1A44E1742516D00947D5E /* Template54@2x.jpg in Resources */,
@@ -5305,6 +5320,7 @@
 				2087B6C717C7B07D007A6A90 /* register-bg-iPhone4.png in Resources */,
 				2087B6C817C7B07D007A6A90 /* register-bg-iPhone4@2x.png in Resources */,
 				2087B6C917C7B07D007A6A90 /* register-bg-iPhone5.png in Resources */,
+				2032022718B4180D0014A919 /* share_button_selected@2x.png in Resources */,
 				65C9039E17C8AE6500E9B0C2 /* save_gallery.png in Resources */,
 				65C9039F17C8AE6500E9B0C2 /* share_settings.png in Resources */,
 				65C903A017C8AE6500E9B0C2 /* signout.png in Resources */,

@@ -98,6 +98,7 @@
                             <rect key="frame" x="15" y="136" width="136" height="136"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             <accessibility key="accessibilityConfiguration" label="FirstFlyer"/>
+                            <inset key="insetFor6xAndEarlier" minX="0.0" minY="44" maxX="0.0" maxY="-44"/>
                             <state key="normal" backgroundImage="pinned_flyer_bg2.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -109,6 +110,7 @@
                             <rect key="frame" x="169" y="136" width="136" height="136"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             <accessibility key="accessibilityConfiguration" label="SecondFlyer"/>
+                            <inset key="insetFor6xAndEarlier" minX="0.0" minY="44" maxX="0.0" maxY="-44"/>
                             <state key="normal" backgroundImage="pinned_flyer_bg2.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -119,6 +121,7 @@
                         <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="BIU-DI-wID">
                             <rect key="frame" x="15" y="279" width="136" height="136"/>
                             <accessibility key="accessibilityConfiguration" label="ThirdFlyer"/>
+                            <inset key="insetFor6xAndEarlier" minX="0.0" minY="44" maxX="0.0" maxY="-44"/>
                             <state key="normal" backgroundImage="pinned_flyer_bg2.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -129,6 +132,7 @@
                         <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="HU8-3B-hmJ">
                             <rect key="frame" x="169" y="279" width="136" height="136"/>
                             <accessibility key="accessibilityConfiguration" label="FourthFlyer"/>
+                            <inset key="insetFor6xAndEarlier" minX="0.0" minY="44" maxX="0.0" maxY="-44"/>
                             <state key="normal" backgroundImage="pinned_flyer_bg2.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>

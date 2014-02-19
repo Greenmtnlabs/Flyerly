@@ -147,6 +147,13 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     [self.view setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
     [self.contextView setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
 
+    sharePanel = [[UIView alloc] initWithFrame:CGRectMake(320, 64, 290,480 )];
+    shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
+    sharePanel = shareviewcontroller.view;
+    sharePanel.hidden = YES;
+    [self.view addSubview:sharePanel];
+    
+
     
     // Set height and width of each element of scroll view
     layerXposition =0;
@@ -217,10 +224,11 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 
     
     //Right ShareButton
-    UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+    shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     shareButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
-	[shareButton addTarget:self action:@selector(callSaveAndShare) forControlEvents:UIControlEventTouchUpInside];
+	[shareButton addTarget:self action:@selector(share) forControlEvents:UIControlEventTouchUpInside];
     [shareButton setBackgroundImage:[UIImage imageNamed:@"share_button"] forState:UIControlStateNormal];
+
     shareButton.showsTouchWhenHighlighted = YES;
     
     //Right UndoButton
@@ -1565,7 +1573,7 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 #pragma mark After ViewWillAppear Method Sequence
 -(void) callMenu
 {
-    /*
+    
     if (![currentLayer isEqualToString:@""]) [self.flyimgView layerStoppedEditing:currentLayer];
         
     
@@ -1578,11 +1586,10 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     
     //Save OnBack
     [flyer saveFlyer:snapshotImage];
-
     
     // Update Recent Flyer List
     [flyer setRecentFlyer];
-    */
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -1931,11 +1938,8 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     self.navigationItem.titleView = label;
     
      //ShareButton
-    UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    shareButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
-	[shareButton addTarget:self action:@selector(callSaveAndShare) forControlEvents:UIControlEventTouchUpInside];
     [shareButton setBackgroundImage:[UIImage imageNamed:@"share_button"] forState:UIControlStateNormal];
-    shareButton.showsTouchWhenHighlighted = YES;
+
     
     //UndoButton
     UIButton *undoButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
@@ -1999,37 +2003,44 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 }
 
 
--(void)callSaveAndShare
+-(void)share
 {
+    float xValue = sharePanel.frame.origin.x;
     
-    FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
-    
-    
-    NSString *shareImagePath = [flyer getImageForShare];
-    UIImage *shareImage =  [UIImage imageWithContentsOfFile:shareImagePath];
-    //NSData *imgData = UIImagePNGRepresentation(shareImage);
-    //NSData *data =
-    //[self getCurrentFrameAndSaveIt];
-    appDele.changesFlag = NO;
+    if (xValue == 30) {
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:0.4f];
+        [sharePanel setFrame:CGRectMake(320, 64, 290,480 )];
 
-    ShareViewController *draftViewController = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
-    draftViewController.selectedFlyerImage = shareImage;
-    draftViewController.selectedFlyerTitle = globle.flyerName;
-    if([[self textLabelLayersArray] count] > 0){
-        draftViewController.selectedFlyerDescription = ((CustomLabel*)[self textLabelLayersArray][0]).text;
-    }else{
-        draftViewController.selectedFlyerDescription = @"";
+        [UIView commitAnimations];
+  
+
+        
+        [shareButton setBackgroundImage:[UIImage imageNamed:@"share_button"] forState:UIControlStateNormal];
+
+        
+    } else {
+        
+        sharePanel.hidden = NO;
+    [shareButton setBackgroundImage:[UIImage imageNamed:@"share_button_selected"] forState:UIControlStateNormal];
+        NSString *shareImagePath = [flyer getImageForShare];
+        UIImage *shareImage =  [UIImage imageWithContentsOfFile:shareImagePath];
+        //[self getCurrentFrameAndSaveIt];
+
+        shareviewcontroller.selectedFlyerImage = shareImage;
+        shareviewcontroller.flyer = self.flyer;
+        shareviewcontroller.imageFileName = finalImgWritePath;
+        shareviewcontroller.detailFileName = [finalImgWritePath stringByReplacingOccurrencesOfString:@".jpg" withString:@".txt"];
+    
+        //sharePanel = [[UIView alloc] init];
+        [sharePanel setFrame:CGRectMake(320, 64, 290,480 )];
+    
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:0.4f];
+            [sharePanel setFrame:CGRectMake(30, 64, 290,480 )];
+        [UIView commitAnimations];
+        
     }
-
-    draftViewController.flyer = self.flyer;
-    draftViewController.imageFileName = finalImgWritePath;
-    draftViewController.detailFileName = [finalImgWritePath stringByReplacingOccurrencesOfString:@".jpg" withString:@".txt"];
-    /*
-    UIView *sharePanel = [[UIView alloc] init];
-    sharePanel = draftViewController.view;
-    [sharePanel setFrame:CGRectMake(10, 100, 310,400 )];
-    [self.view addSubview:sharePanel];*/
-    [self.navigationController pushViewController:draftViewController animated:YES];
 }
 
 
@@ -2831,7 +2842,11 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
         
     }//Loop
     
-    [layerScrollView setContentSize:CGSizeMake(300, curYLoc + layerScrollHeight)];
+    if(IS_IPHONE_5){
+        [layerScrollView setContentSize:CGSizeMake(300, curYLoc + layerScrollHeight)];
+    } else {
+        [layerScrollView setContentSize:CGSizeMake(([layers count]*(layerScrollWidth+5)), [layerScrollView bounds].size.height)];
+    }
     
     [self addScrollView:layerScrollView];
     

@@ -47,12 +47,10 @@
 	FlyrViewController *fvController;
 	LoadingView *loadingView;
     UIDocumentInteractionController *dic;
-    BOOL showbars;
     NSMutableArray  *photoTitles;         // Titles of images
     NSMutableArray  *photoSmallImageData; // Image data (thumbnail)
     NSMutableArray  *photoURLsLargeImage; // URL to larger image
 	
-    int countOfSharingNetworks;
     
     NSMutableArray *listOfPlaces;
     
