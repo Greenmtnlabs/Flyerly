@@ -21,7 +21,8 @@
 
 @interface AssetsGroupViewController : NBUAssetsGroupViewController
 
-@property (strong, nonatomic) IBOutlet UIBarButtonItem * nextButton;
+@property CGSize desiredImageSize;
+@property (nonatomic, copy) void (^onImageTaken)(UIImage *);
 
 @end
 

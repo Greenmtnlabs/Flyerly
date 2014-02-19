@@ -20,6 +20,7 @@
 
 #import "LibraryViewController.h"
 #import "AssetsGroupViewController.h"
+#import "FlyerlySingleton.h"
 #import <NBUCompatibility.h>
 #import <NBUAssetsLibrary.h>
 
@@ -45,8 +46,33 @@
     
     // Customization
     self.customBackButtonTitle = @"Albums";
-    self.assetsGroupController = [[AssetsGroupViewController alloc] initWithNibName:@"NBUAssetsGroupViewController"
-                                                                             bundle:nil];
+    AssetsGroupViewController *asstController = [[AssetsGroupViewController alloc] initWithNibName:@"NBUAssetsGroupViewController"
+                                                                                            bundle:nil];
+    self.assetsGroupController = asstController;
+
+    // Pass the relevant properties
+    asstController.desiredImageSize = self.desiredImageSize;
+    asstController.onImageTaken = self.onImageTaken;
+    
+    // Navigation buttons
+    // BackButton
+    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+    backButton.titleLabel.font = [UIFont systemFontOfSize:14.0];
+    [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
+    backButton.showsTouchWhenHighlighted = YES;
+    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    [self.navigationItem setLeftBarButtonItem:leftBarButton];
+    
+    // Set the title view.
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-35, -6, 50, 50)];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont fontWithName:TITLE_FONT size:18];
+    label.textAlignment = UITextAlignmentCenter;
+    label.textColor = [UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0];
+    label.text = @"ALBUMS";
+    
+    self.navigationItem.titleView = label;
 }
 
 #pragma mark - Handling access authorization
@@ -82,6 +108,15 @@
                           cancelButtonTitle:@"OK"
                           otherButtonTitles:nil] show];
     }
+}
+
+#pragma mark - Button Handlers
+
+/**
+ * Cancel and go back.
+ */
+- (void)goBack {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

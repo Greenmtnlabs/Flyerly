@@ -21,6 +21,8 @@
 #import "AssetsGroupViewController.h"
 #import <NBUImagePicker/NBUImagePicker.h>
 #import <NBUCompatibility.h>
+#import "FlyerlySingleton.h"
+#import "CropViewController.h"
 
 @implementation AssetsGroupViewController
 
@@ -32,16 +34,27 @@
     self.gridView.margin = CGSizeMake(5.0, 5.0);
     self.gridView.nibNameForViews = @"CustomAssetThumbnailView";
     
-    // Add a next (continue) button
-    _nextButton = [[UIBarButtonItem alloc] initWithTitle:@"Next"
-                                                   style:UIBarButtonItemStyleBordered
-                                                  target:self
-                                                  action:@selector(pushSlideView:)];
-    self.navigationItem.rightBarButtonItem = _nextButton;
-    self.continueButton = _nextButton;
-    
     // Configure the selection behaviour
-    self.selectionCountLimit = 4;
+    self.selectionCountLimit = 1;
+    
+    // BackButton
+    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+    backButton.titleLabel.font = [UIFont systemFontOfSize:14.0];
+    [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
+    backButton.showsTouchWhenHighlighted = YES;
+    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    [self.navigationItem setLeftBarButtonItem:leftBarButton];
+    
+    // Set the title view.
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-35, -6, 50, 50)];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont fontWithName:TITLE_FONT size:18];
+    label.textAlignment = UITextAlignmentCenter;
+    label.textColor = [UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0];
+    label.text = self.assetsGroup.name;
+    
+    self.navigationItem.titleView = label;
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -55,16 +68,38 @@
     }
 }
 
-- (IBAction)pushSlideView:(id)sender
-{
-    // Get selected asstes' fullscreen images
-    NSArray * selectedAssets = self.selectedAssets;
+
+#pragma mark - Button Handlers
+
+/**
+ * Cancel and go back.
+ */
+- (void)goBack {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+/**
+ * An asset was selected. Process it.
+ */
+- (void)thumbnailViewSelectionStateChanged:(NSNotification *)notification {
+    // Refresh selected assets
+    NBUAssetThumbnailView *assetView = (NBUAssetThumbnailView *)notification.object;
+    NBUAsset *asset = assetView.asset;
     
-    // Push the gallery view controller
-    NBUGalleryViewController * controller = [NBUGalleryViewController new];
-    controller.objectArray = selectedAssets;
-    [self.navigationController pushViewController:controller
-                                         animated:YES];
+    // Get out of full screen mode.
+    [self viewWillDisappear:NO];
+    
+    CropViewController *nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController" bundle:nil];
+    nbuCrop.desiredImageSize = self.desiredImageSize;
+    nbuCrop.image = [asset.fullResolutionImage imageWithOrientationUp];
+    nbuCrop.onImageTaken = self.onImageTaken;
+    
+    // Pop the current view, and push the crop view.
+    NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[[self navigationController] viewControllers]];
+    [viewControllers removeLastObject];
+    [viewControllers removeLastObject];
+    [viewControllers addObject:nbuCrop];
+    [[self navigationController] setViewControllers:viewControllers animated:YES];
 }
 
 @end

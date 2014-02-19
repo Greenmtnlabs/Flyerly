@@ -21,6 +21,10 @@
 
 @interface LibraryViewController : NBUAssetsLibraryViewController
 
+@property CGSize desiredImageSize;
+@property (nonatomic, copy) void (^onImageTaken)(UIImage *);
+
+
 // Actions
 - (IBAction)accessInfo:(id)sender;
 
