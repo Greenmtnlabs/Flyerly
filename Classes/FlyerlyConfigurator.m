@@ -175,7 +175,7 @@
 }
 // To use xAuth, set to 1
 - (NSNumber*)twitterUseXAuth {
-	return [NSNumber numberWithInt:1];
+	return [NSNumber numberWithInt:0];
 }
 // Enter your app's twitter account if you'd like to ask the user to follow it when logging in. (Only for xAuth)
 - (NSString*)twitterUsername {

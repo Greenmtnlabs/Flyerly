@@ -217,10 +217,9 @@
             [item setText:selectedFlyerDescription];
             [item setTags:[NSArray arrayWithObjects: @"#flyerly", nil]];
             
-           // SHKSharer *iosSharer = [SHKFacebook shareItem:item];
-           // iosSharer.shareDelegate = self;
+            iosSharer = [SHKFacebook shareItem:item];
+            iosSharer.shareDelegate = self;
 
-            [SHKFacebook shareItem:item];
             // Update Flyer Share Info in Social File
             [self.flyer setSocialStatusAtIndex:0 StatusValue:1];
             
@@ -244,10 +243,11 @@
              [twitterButton setSelected:YES];
 
             // Current Item For Sharing
-            SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ %@ #flyerly",titleView.text, selectedFlyerDescription ]];
+             SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ %@ #flyerly",titleView.text, selectedFlyerDescription ]];
             
             //Calling ShareKit for Sharing
-            [SHKTwitter shareItem:item];
+            iosSharer = [SHKTwitter shareItem:item];
+            iosSharer.shareDelegate = self;
             
             // Update Flyer Share Info in Social File
             [self.flyer setSocialStatusAtIndex:1 StatusValue:1];
@@ -292,7 +292,9 @@
             
             
             //Calling ShareKit for Sharing
-            [SHKMail shareItem:item];
+            iosSharer = [SHKMail shareItem:item];
+            iosSharer.shareDelegate = self;
+
             
             // Update Flyer Share Info in Social File
             [self.flyer setSocialStatusAtIndex:2 StatusValue:1];
@@ -326,8 +328,11 @@
             
             item.tags =[NSArray arrayWithObjects: @"#flyerly", nil];
             
+            
             //Calling ShareKit for Sharing
-            [SHKTumblr shareItem:item];
+            iosSharer = [SHKTumblr shareItem:item];
+            iosSharer.shareDelegate = self;
+//            [SHKTumblr shareItem:item];
             
             // Update Flyer Share Info in Social File
             [self.flyer setSocialStatusAtIndex:3 StatusValue:1];
@@ -362,7 +367,8 @@
       //      [item set ].description = selectedFlyerDescription;
             
             //Calling ShareKit for Sharing
-            [SHKFlickr shareItem:item];
+            iosSharer = [SHKFlickr shareItem:item];
+            iosSharer.shareDelegate = self;
             
             // Update Flyer Share Info in Social File
             [self.flyer setSocialStatusAtIndex:4 StatusValue:1];
