@@ -276,7 +276,7 @@
         
         [flickrButton setSelected:YES];
         [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"flickrSetting"];
-        [flickrRequest setDelegate:self];
+        //[flickrRequest setDelegate:self];
         
         //NSString *authToken = [[NSUserDefaults standardUserDefaults] objectForKey:kStoredAuthTokenKeyName];
         //NSString *authTokenSecret = [[NSUserDefaults standardUserDefaults] objectForKey:kStoredAuthTokenSecretKeyName];

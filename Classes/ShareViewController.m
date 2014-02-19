@@ -33,7 +33,7 @@
 {
     
     //[[SHKActivityIndicator currentIndicator] hide];
-    
+    /*
     //if user sent the item already but needs to relogin we do not show alert
     if (!sharer.quiet && sharer.pendingAction != SHKPendingShare && sharer.pendingAction != SHKPendingSend)
 	{
@@ -45,7 +45,7 @@
     }		
     if (shouldRelogin) {        
         [sharer promptAuthorization];
-	}
+	}*/
 }
 
 - (void)sharerCancelledSending:(SHKSharer *)sharer
