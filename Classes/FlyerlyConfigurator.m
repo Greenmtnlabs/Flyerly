@@ -175,7 +175,7 @@
 }
 // To use xAuth, set to 1
 - (NSNumber*)twitterUseXAuth {
-	return [NSNumber numberWithInt:0];
+	return [NSNumber numberWithInt:1];
 }
 // Enter your app's twitter account if you'd like to ask the user to follow it when logging in. (Only for xAuth)
 - (NSString*)twitterUsername {
@@ -273,11 +273,15 @@
 
 // Tumblr - http://www.tumblr.com/docs/en/api/v2
 - (NSString*)tumblrConsumerKey {
-	return @"7g8ugn9opLIb2oKLQBlnbDjBoYKQHbVd9TgtVZRMz5NK1GXgXS";
+	return @"02d5PRV1F7FBSC8gTFzMzrnv8fwuIfFBVcrvCDVMtaV0fk7ZmN";
+    //return @"7g8ugn9opLIb2oKLQBlnbDjBoYKQHbVd9TgtVZRMz5NK1GXgXS";
+
 }
 
 - (NSString*)tumblrSecret {
-	return @"4uAmyM6YOL0UyGykUPaRpkCVVELLze9Nu1I2bNWXRWYOuDQA6u";
+	return @"fvCuTzmDPClRuhGCYLsfevDebgwFKYZy0wDJOvNQr2ngKYjHZ2";
+    //return @"7g8ugn9opLIb2oKLQBlnbDjBoYKQHbVd9TgtVZRMz5NK1GXgXS";
+
 }
 
 //you can put whatever here. It must be the same you entered in tumblr app registration, eg tumblr.sharekit.com

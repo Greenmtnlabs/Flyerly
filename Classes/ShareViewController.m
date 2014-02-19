@@ -209,8 +209,10 @@
             [facebookButton setSelected:YES];
             
             // Current Item For Sharing
-            SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"#flyerly - %@  %@",titleView.text, selectedFlyerDescription ]];
-
+            SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ %@ #flyerly",titleView.text, selectedFlyerDescription ]];
+            
+            [item setText:selectedFlyerDescription];
+            [item setTags:[NSArray arrayWithObjects: @"#flyerly", nil]];
             
            // SHKSharer *iosSharer = [SHKFacebook shareItem:item];
            // iosSharer.shareDelegate = self;
