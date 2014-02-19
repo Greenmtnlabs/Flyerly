@@ -26,14 +26,8 @@
 @synthesize spController,tpController,createFlyrLabel,savedFlyrLabel,inviteFriendLabel,addFriendsController;
 @synthesize firstFlyer, secondFlyer, thirdFlyer, fourthFlyer, photoArray, photoDetailArray, createFlyrButton, savedFlyrButton, inviteFriendButton;
 @synthesize facebookLikeView;
-@synthesize likeButton,followButton,webview;
+@synthesize likeButton,followButton,webview,recentFlyers;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-		
-    }
-    return self;
-}
 
 -(IBAction)doNew:(id)sender{
     [Flurry logEvent:@"Create Flyer"];
@@ -153,8 +147,6 @@
         [followButton setSelected:YES];
     }
     
-    // Set the background image on navigation bar
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
     
     // for Navigation Bar logo
     UIImageView *logo = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 87, 38)];
@@ -594,7 +586,6 @@
         
     }
 
-
 }
 
 -(IBAction)goBack{
@@ -602,7 +593,5 @@
     
     [self.likeView setHidden:YES];
 }
-
-
 
 @end

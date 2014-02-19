@@ -41,8 +41,7 @@
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
         self.tableView.contentInset = UIEdgeInsetsMake(-92, 0, 0, 0);
     }
-    
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top_bg_without_logo2"] forBarMetrics:UIBarMetricsDefault];
+
     self.navigationItem.hidesBackButton = YES;
     
     UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
@@ -76,7 +75,7 @@
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:TITLE_FONT size:18];
     label.textAlignment = UITextAlignmentCenter;
-    label.textColor = [UIColor whiteColor];
+    label.textColor = [UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0];
     label.text = @"SETTINGS";
     
     self.navigationItem.titleView = label;

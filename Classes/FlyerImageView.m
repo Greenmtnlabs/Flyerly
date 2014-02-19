@@ -57,6 +57,8 @@
         //Set Flyer Border
         if ([layDic objectForKey:@"bordercolor"]) {
             [self setTemplateBorder:layDic];
+        }else {
+            [self removeFlyerBorder];
         }
         return;
     }
@@ -128,6 +130,7 @@
     
     //SetFrame
     [imgView setFrame:CGRectMake([[detail valueForKey:@"x"] floatValue], [[detail valueForKey:@"y"] floatValue], [[detail valueForKey:@"width"] floatValue], [[detail valueForKey:@"height"] floatValue])];
+              
     
     //Set Image
     if ( ![[detail valueForKey:@"image"] isEqualToString:@""] ) {
@@ -213,6 +216,8 @@
 
         UIImage *img = [[UIImage alloc] initWithContentsOfFile:currentpath];
         self.image = img;
+        [self setContentMode:UIViewContentModeScaleToFill];
+
         
     }
     
@@ -248,6 +253,18 @@
     self.layer.borderWidth = 3.0;
 }
 
+
+/*
+ *Here we Remove Flyer Border
+ */
+-(void)removeFlyerBorder{
+
+    UIColor *borderColor = [UIColor clearColor];
+    self.layer.borderColor = borderColor.CGColor;
+    self.layer.borderWidth = 0;
+}
+
+
 #pragma mark - Show layer as editable.
 
 /**
@@ -260,8 +277,7 @@
     if ( view != nil ) {
         CALayer * l = view.layer;
         [l setMasksToBounds:YES];
-        [l setCornerRadius:10];
-        [l setBorderWidth:1.0];
+        [l setBorderWidth:0.5];
         [l setBorderColor:[[UIColor grayColor] CGColor]];
     }
 }
@@ -275,7 +291,6 @@
     // Show the layer as being edited.
     if ( view != nil ) {
         CALayer * l = view.layer;
-        [l setCornerRadius:0.0];
         [l setBorderWidth:0.0];
         [l setBorderColor:[[UIColor clearColor] CGColor]];
     }
@@ -329,6 +344,19 @@
     
     CGAffineTransform zt = CGAffineTransformScale(CGAffineTransformIdentity, factor, factor);
     _view.bounds = CGRectApplyAffineTransform(initialBounds, zt);
+    
+    //Here we update frame of layer in Dictionary
+    // Get the key for this view.
+    NSArray *keys = [layers allKeysForObject:_view];
+    
+    // Let the delegate know that we changed frame.
+    for ( int i = 0; i < keys.count; i++ ) {
+        NSString *key = [keys objectAtIndex:i];
+        [self.delegate frameChangedForLayer:key frame:_view.frame];
+    }
+
+    
+    
     return;
 }
 

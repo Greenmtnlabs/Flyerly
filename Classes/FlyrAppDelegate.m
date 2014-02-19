@@ -187,6 +187,10 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
         }
     }
     
+    if(![[NSUserDefaults standardUserDefaults] stringForKey:@"userDataExist"]){
+        [self copyUsersDataForTesting];
+    }
+    
     [window  setRootViewController:navigationController];
     
     // Override point for customization after application launch.
@@ -203,6 +207,8 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 */
 -(void)twitterChangeforNewVersion:(NSString *)olduser{
 
+    [lauchController showLoadingIndicator];
+
     //Checking user Exist in Parse
     PFQuery *query = [PFUser  query];
     [query whereKey:@"username" equalTo:[olduser lowercaseString]];
@@ -210,12 +216,20 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
         
         if (error) {
             NSLog(@"Twitter User Not Exits");
+            [lauchController hideLoadingIndicator];
             
         }else{
             NSLog(@"Old Twitter User found");
             
             // Migrate Account For 3.0 Version
             [FlyerUser migrateUserto3dot0:object];
+            
+            //Getting Recent Flyers
+            lauchController.recentFlyers = [Flyer recentFlyerPreview:4];
+            
+            //Set Recent Flyers
+            [lauchController updateRecentFlyer:lauchController.recentFlyers];
+            [lauchController hideLoadingIndicator];
             
         }
     }];
@@ -231,6 +245,8 @@ For Checking old Detail is available in parse or not
 if it exist then we call Merging Process
 */
 -(void)fbChangeforNewVersion{
+    
+    [lauchController showLoadingIndicator];
 
     // Create request for user's Facebook data
     FBRequest *request = [FBRequest requestForMe];
@@ -249,6 +265,7 @@ if it exist then we call Merging Process
             [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
                 if (error) {
                     
+                    [lauchController hideLoadingIndicator];
                     NSLog(@"Email NotExits");
 
                 }else{
@@ -256,6 +273,16 @@ if it exist then we call Merging Process
                     
                     // Migrate Account For 3.0 Version
                     [FlyerUser migrateUserto3dot0:object];
+                    
+                    //Getting Recent Flyers
+                    
+                    lauchController.recentFlyers = [Flyer recentFlyerPreview:4];
+                    
+                    //Set Recent Flyers
+                    [lauchController updateRecentFlyer:lauchController.recentFlyers];
+                    [lauchController hideLoadingIndicator];
+                    
+
 
                 }
             }];
@@ -263,6 +290,66 @@ if it exist then we call Merging Process
 
         }
     }];
+}
+
+
+/*
+ * Here we Copy Data on Device For Testing Merge User Process
+ */
+-(void)copyUsersDataForTesting {
+    
+    //Getting Home Directory
+	NSString *homeDirectoryPath = NSHomeDirectory();
+	NSString *docPath = [homeDirectoryPath stringByAppendingString:@"/Documents"];
+
+    
+    //Here we Copy Default Directory From Resource Bundle
+    [self copyDirectory:docPath];
+    
+    //its for remember key of user Data already copy to Device
+    [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"userDataExist"];
+    
+    NSLog(@"User Data Copied Successfully");
+
+
+}
+
+
+
+/*
+ * Here we Copy User Bundle from Resource Bundle
+ */
+-(void) copyDirectory:(NSString *)directory {
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSError *error;
+    
+    NSString *documentDBFolderPath = directory;
+    NSString *resourceDBFolderPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"/UsersData"];
+    
+    if (![fileManager fileExistsAtPath:documentDBFolderPath]) {
+        //Create Directory!
+        [fileManager createDirectoryAtPath:documentDBFolderPath withIntermediateDirectories:NO attributes:nil error:&error];
+    } else {
+        NSLog(@"Directory exists! %@", documentDBFolderPath);
+    }
+    
+    NSArray *fileList = [fileManager contentsOfDirectoryAtPath:resourceDBFolderPath error:&error];
+    
+    for (NSString *s in fileList) {
+        
+        NSString *newFilePath = [documentDBFolderPath stringByAppendingPathComponent:s];
+        NSString *oldFilePath = [resourceDBFolderPath stringByAppendingPathComponent:s];
+        
+        if (![fileManager fileExistsAtPath:newFilePath]) {
+            
+            //File does not exist, copy it
+            [fileManager copyItemAtPath:oldFilePath toPath:newFilePath error:&error];
+            
+        } else {
+            NSLog(@"File exists: %@", newFilePath);
+        }
+    }
 }
 
 

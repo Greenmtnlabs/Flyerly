@@ -7,6 +7,7 @@
 #import <Parse/Parse.h>
 #import "ShareKit.h"
 #import "SHK.h"
+#import "SHKSharer.h"
 #import "SHKMail.h"
 #import "SHKFacebook.h"
 #import "SHKTwitter.h"
@@ -27,13 +28,15 @@
 #import "JSON.h"
 #import "Flurry.h"
 #import "HelpController.h"
+#import "Flyer.h"
 
 
 @class FlyrViewController,FlyerlySingleton;
 @class CreateFlyerController;
 @class LoadingView;
+@class SHKSharer;
 
-@interface ShareViewController : ParentViewController<UIWebViewDelegate,UIDocumentInteractionControllerDelegate,MFMessageComposeViewControllerDelegate,MFMailComposeViewControllerDelegate,UITextViewDelegate,UITextFieldDelegate, BitlyURLShortenerDelegate> {
+@interface ShareViewController : ParentViewController<UIWebViewDelegate,UIDocumentInteractionControllerDelegate,MFMessageComposeViewControllerDelegate,MFMailComposeViewControllerDelegate,UITextViewDelegate,UITextFieldDelegate, BitlyURLShortenerDelegate,SHKSharerDelegate> {
 
 	UIImage *selectedFlyerImage;
 	NSString *selectedFlyerTitle;
@@ -84,6 +87,8 @@
 @property(nonatomic,strong)FlyrViewController *fvController;
 @property (nonatomic, strong) LoadingView *loadingView;
 
+@property (nonatomic,strong) Flyer *flyer;
+
 
 -(IBAction)onClickFacebookButton;
 -(IBAction)onClickTwitterButton;
@@ -101,5 +106,7 @@
 - (void)uploadImage:(NSData *)imageData isEmail:(BOOL)isEmail;
 -(void)shareOnEmail:(NSString *)link;
 -(void)shortenURL:(NSString *)url;
+-(void)setSocialStatus;
 
+@property (weak, nonatomic) id<SHKSharerDelegate> delegate;
 @end

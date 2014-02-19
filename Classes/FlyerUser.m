@@ -23,6 +23,12 @@
 +(void)updateFolderStructure:(NSString *)usr{
 
  
+    NSString *flyerPath =@"";
+    NSString *source = @"";
+    NSString *destination = @"";
+    NSString *lastFileName = @"";
+    NSError *error = nil;
+
     //Getting Home Directory
 	NSString *homeDirectoryPath = NSHomeDirectory();
 	NSString *usernamePath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/Flyr",usr]];
@@ -34,7 +40,7 @@
 
         //Getting All Files list
         NSArray *files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:usernamePath error:nil];
-        NSString *lastFileName = nil;
+       
         
         for(int i = 0 ; i < [files count];i++)
         {
@@ -52,13 +58,8 @@
                 lastFileName = [lastFileName stringByReplacingOccurrencesOfString:@"IMG_" withString:@""];
                 int imgnumber = [lastFileName intValue];
                 
-                
-                NSString *flyerPath;
-                int timestamp = [[NSDate date] timeIntervalSince1970];
-                
                 //Creating New Path
-                flyerPath = [NSString stringWithFormat:@"%@/%d",usernamePath,timestamp];
-                NSError *error = nil;
+                flyerPath = [NSString stringWithFormat:@"%@/%d",usernamePath,imgnumber];
                 
                 if (![[NSFileManager defaultManager] fileExistsAtPath:flyerPath isDirectory:NULL]) {
                     
@@ -80,9 +81,10 @@
                     //This Is Sub Flyer Folder of Template
                     [[NSFileManager defaultManager] createDirectoryAtPath:[NSString stringWithFormat:@"%@/Template",flyerPath] withIntermediateDirectories:YES attributes:nil error:&error];
                     
-                //Here we start Coping SOURCE Files into New structure
-                    NSString *source = nil;
-                    NSString *destination = nil;
+                    //This Is Sub Flyer Folder of History
+                    [[NSFileManager defaultManager] createDirectoryAtPath:[NSString stringWithFormat:@"%@/History",flyerPath] withIntermediateDirectories:YES attributes:nil error:&error];
+                    
+                    //Here we start Coping SOURCE Files into New structure
                     
                     //Copy ImageFile
                     source = [NSString stringWithFormat:@"%@/IMG_%d.jpg",usernamePath,imgnumber];
@@ -91,22 +93,63 @@
                     if ( [[NSFileManager defaultManager] isReadableFileAtPath:source] )
                         [[NSFileManager defaultManager] copyItemAtPath:source toPath:destination error:&error];
                     
+                    //Delete Old File
+                    [[NSFileManager defaultManager] removeItemAtPath:source error:&error];
+                    
                     //Copy pieces
                     source = [NSString stringWithFormat:@"%@/IMG_%d.pieces",usernamePath,imgnumber];
                     destination = [NSString stringWithFormat:@"%@/flyer.pieces",flyerPath];
-
+                    
                     
                     if ( [[NSFileManager defaultManager] isReadableFileAtPath:source] )
                         [[NSFileManager defaultManager] copyItemAtPath:source toPath:destination error:&error];
+
+                    //Delete Old File
+                    [[NSFileManager defaultManager] removeItemAtPath:source error:&error];
                     
-                    //Copy txt
+                    //set Pieces Dictionary File for Update
+                    NSString *piecesFile = destination;
+                    
+                    NSMutableDictionary *masterLayers = [[NSMutableDictionary alloc] initWithContentsOfFile:piecesFile];
+                   
+                    //Here we Update Text Layer Position
+                    NSArray * keys = [masterLayers allKeys];
+                    float y = 0;
+                    for (int i = 0 ; i < keys.count  ; i++) {
+                        
+                        NSMutableDictionary *textLayer = [masterLayers objectForKey:[keys objectAtIndex:i]];
+                        
+                        if ([[keys objectAtIndex:i] rangeOfString:@"Text"].location == NSNotFound) {
+                            
+                            NSLog(@"sub string doesnt exist");
+                            
+                        } else {
+                            NSString *yValue =  [textLayer valueForKey:@"y"] ;
+                            
+                            yValue = [yValue stringByReplacingOccurrencesOfString:@"-"
+                                                                       withString:@""];
+                            y = [yValue floatValue];
+                            y = y + 44;
+                            
+                        }
+                            
+                        [textLayer setValue:[NSString stringWithFormat:@"%f",y] forKey:@"y"];
+                        [masterLayers setValue:textLayer forKey:[keys objectAtIndex:i]];
+
+                    }
+                    
+                    //Here we write the dictionary of .peices files
+                    [masterLayers writeToFile:piecesFile atomically:YES];
+                    
+                    //Copy txt File
                     source = [NSString stringWithFormat:@"%@/IMG_%d.txt",usernamePath,imgnumber];
                     destination = [NSString stringWithFormat:@"%@/flyer.txt",flyerPath];
                     
-                    
                     if ( [[NSFileManager defaultManager] isReadableFileAtPath:source] )
                         [[NSFileManager defaultManager] copyItemAtPath:source toPath:destination error:&error];
-                    
+
+                    //Delete Old File
+                    [[NSFileManager defaultManager] removeItemAtPath:source error:&error];
                     
                     //Here we Copy Icon files related this Flyer
                     source = [NSString stringWithFormat:@"%@/Icon/%d",usernamePath,imgnumber];
@@ -123,10 +166,18 @@
                             source = [NSString stringWithFormat:@"%@/Icon/%d/%@",usernamePath,imgnumber,lastFileName];
                             destination = [NSString stringWithFormat:@"%@/Icon/%@",flyerPath,lastFileName];
                             
+                            NSMutableDictionary *layDic = [masterLayers objectForKey:[NSString stringWithFormat:@"Icon-%d",i]];
+
+                            [layDic setValue:[NSString stringWithFormat:@"Icon/%@",lastFileName] forKey:@"image"];
+                            
                             if ( [[NSFileManager defaultManager] isReadableFileAtPath:source] )
                                 [[NSFileManager defaultManager] copyItemAtPath:source toPath:destination error:&error];
+                            [masterLayers setValue:layDic forKey:[NSString stringWithFormat:@"Icon-%d",i]];
 
                         }//Loop
+                        
+                        //Here we write the dictionary of .peices files
+                        [masterLayers writeToFile:piecesFile atomically:YES];
 
                     }// End Icon Exist
 
@@ -146,10 +197,19 @@
                             source = [NSString stringWithFormat:@"%@/Photo/%d/%@",usernamePath,imgnumber,lastFileName];
                             destination = [NSString stringWithFormat:@"%@/Photo/%@",flyerPath,lastFileName];
                             
+                            NSMutableDictionary *layDic = [masterLayers objectForKey:[NSString stringWithFormat:@"Photo-%d",i]];
+                            
+                            [layDic setValue:[NSString stringWithFormat:@"Photo/%@",lastFileName] forKey:@"image"];
+                            
                             if ( [[NSFileManager defaultManager] isReadableFileAtPath:source] )
                                 [[NSFileManager defaultManager] copyItemAtPath:source toPath:destination error:&error];
                             
+                            [masterLayers setValue:layDic forKey:[NSString stringWithFormat:@"Photo-%d",i]];
+                            
                         }//Loop
+                        
+                        //Here we write the dictionary of .peices files
+                        [masterLayers writeToFile:piecesFile atomically:YES];
                         
                     }// End Photo Exist
                     
@@ -177,10 +237,19 @@
                             source = [NSString stringWithFormat:@"%@/Symbol/%d/%@",usernamePath,imgnumber,lastFileName];
                             destination = [NSString stringWithFormat:@"%@/Symbol/%@",flyerPath,lastFileName];
                             
+                            NSMutableDictionary *layDic = [masterLayers objectForKey:[NSString stringWithFormat:@"Symbol-%d",i]];
+                            
+                            [layDic setValue:[NSString stringWithFormat:@"Symbol/%@",lastFileName] forKey:@"image"];
+                            
                             if ( [[NSFileManager defaultManager] isReadableFileAtPath:source] )
                                 [[NSFileManager defaultManager] copyItemAtPath:source toPath:destination error:&error];
+                            [masterLayers setValue:layDic forKey:[NSString stringWithFormat:@"Symbol-%d",i]];
+
                             
                         }//Loop
+                        
+                        //Here we write the dictionary of .peices files
+                        [masterLayers writeToFile:piecesFile atomically:YES];
                         
                     }// End Symbol Exist
                     
@@ -190,28 +259,98 @@
                     if ([[NSFileManager defaultManager] fileExistsAtPath:source isDirectory:NULL]) {
                         NSLog(@"Exist");
                         
-                        NSArray *Symbolfiles = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:source error:nil];
+                        NSArray *templatefiles = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:source error:nil];
                         
-                        for(int i = 0 ; i < [Symbolfiles count];i++)
+                        for(int i = 0 ; i < [templatefiles count];i++)
                         {
-                            lastFileName = Symbolfiles[i];
+                            lastFileName = templatefiles[i];
                             
                             source = [NSString stringWithFormat:@"%@/Template/%d/%@",usernamePath,imgnumber,lastFileName];
                             destination = [NSString stringWithFormat:@"%@/Template/%@",flyerPath,lastFileName];
                             
+                            NSMutableDictionary *layDic = [masterLayers objectForKey:@"Template"];
+                            
+                            [layDic setValue:[NSString stringWithFormat:@"Template/%@",lastFileName] forKey:@"image"];
+                            
                             if ( [[NSFileManager defaultManager] isReadableFileAtPath:source] )
                                 [[NSFileManager defaultManager] copyItemAtPath:source toPath:destination error:&error];
+                            [masterLayers setValue:layDic forKey:@"Template"];
                             
                         }//Loop
                         
+                        //Here we write the dictionary of .peices files
+                        [masterLayers writeToFile:piecesFile atomically:YES];
+                        
                     }// End Template Exist
                     
+                    
+                    
+                    //Create One Copy in History of Flyer
+                    NSString* historyDestinationpath  =  [NSString stringWithFormat:@"%@/History/%d",flyerPath,imgnumber];
+                    
+                    NSArray *fileList = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:flyerPath error:nil];
+                    
+                    //Create Flyer folder
+                    [[NSFileManager defaultManager] createDirectoryAtPath:historyDestinationpath withIntermediateDirectories:YES attributes:nil error:&error];
+                    
+                    for(int i = 0 ; i < [fileList count];i++)
+                    {
+                        lastFileName = fileList[i];
+                        
+                        if (![lastFileName isEqualToString:@"History"]) {
+                            NSString *source = [NSString stringWithFormat:@"%@/%@",flyerPath,lastFileName];
+                            NSString *destination = [NSString stringWithFormat:@"%@/%@",historyDestinationpath,lastFileName];
+                            
+                            //Here we Copying that File or Folder
+                            [[NSFileManager defaultManager] copyItemAtPath:source toPath:destination error:&error];
+                        }
+                    }//End Loop History
+
                     
                 }
             
             }
             
-        }
+
+            
+        }// Root Files Loop
+        
+        //Here we delete old folders list after copy Data
+
+        
+        //Delete Icon Folder
+        source = [NSString stringWithFormat:@"%@/Icon",usernamePath];
+        
+        if ([[NSFileManager defaultManager] isReadableFileAtPath:source] )
+            [[NSFileManager defaultManager] removeItemAtPath:source error:&error];
+        
+        //Delete Photo Folder
+        source = [NSString stringWithFormat:@"%@/Photo",usernamePath];
+        
+        if ([[NSFileManager defaultManager] isReadableFileAtPath:source] )
+            [[NSFileManager defaultManager] removeItemAtPath:source error:&error];
+        
+        //Delete Social Folder
+        source = [NSString stringWithFormat:@"%@/Social",usernamePath];
+        
+        if ([[NSFileManager defaultManager] isReadableFileAtPath:source] )
+            [[NSFileManager defaultManager] removeItemAtPath:source error:&error];
+
+        //Delete Symbol Folder
+        source = [NSString stringWithFormat:@"%@/Symbol",usernamePath];
+        
+        if ([[NSFileManager defaultManager] isReadableFileAtPath:source] )
+            [[NSFileManager defaultManager] removeItemAtPath:source error:&error];
+
+        
+        //Delete Templates Folder
+        source = [NSString stringWithFormat:@"%@/Template",usernamePath];
+        
+        if ([[NSFileManager defaultManager] isReadableFileAtPath:source] )
+            [[NSFileManager defaultManager] removeItemAtPath:source error:&error];
+
+        NSLog(@"Update Folder Process Complete...");
+        
 	}
 
 
@@ -228,8 +367,13 @@
     
     //Update fields of newly created user from old user
     PFUser *user = [PFUser currentUser];
-    user[@"contact"] = [oldUserobj objectForKey:@"contact"];
-    user[@"name"] = [oldUserobj objectForKey:@"name"];
+    
+    if ([oldUserobj objectForKey:@"name"])
+        user[@"name"] = [oldUserobj objectForKey:@"name"];
+
+    if ([oldUserobj objectForKey:@"contact"])
+        user[@"contact"] = [oldUserobj objectForKey:@"contact"];
+    
     if ([oldUserobj objectForKey:@"fbinvited"])
         user[@"fbinvited"] = [oldUserobj objectForKey:@"fbinvited"];
    

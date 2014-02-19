@@ -85,9 +85,7 @@
 
 
     BOOL deleteMode;
-    BOOL doStopWobble;
     BOOL discardedLayer;
-    int undoCount;
     int flyerNumber;
     int layerXposition;
 
@@ -115,13 +113,9 @@
 }
 
 @property(nonatomic, strong) NSMutableArray *textLabelLayersArray;
-@property(nonatomic, strong) NSMutableArray *cpyTextLabelLayersArray;
 @property(nonatomic, strong) NSMutableArray *symbolLayersArray;
-@property(nonatomic, strong) NSMutableArray *cpySymbolLayersArray;
 @property(nonatomic, strong) NSMutableArray *iconLayersArray;
-@property(nonatomic, strong) NSMutableArray *cpyIconLayersArray;
 @property(nonatomic, strong) NSMutableArray *photoLayersArray;
-@property(nonatomic, strong) NSMutableArray *cpyPhotoLayersArray;
 
 
 
@@ -211,7 +205,6 @@
 -(void)loadCustomPhotoLibrary;
 -(void)openCustomCamera;
 
--(void) SetMenu;
 -(void) callDeleteLayer;
 -(void) choosePhoto;
 -(void) donePhoto;
@@ -225,9 +218,6 @@
 -(void)copyImageToTemplate :(UIImage *)img;
 
 
-+ (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize;
-
-
 
 -(void)addScrollView:(id)obj;
 -(void)addBottomTabs:(id)obj;
@@ -235,6 +225,13 @@
 -(void)deleteSubviewsFromScrollView;
 
 -(void)addDonetoRightBarBotton;
+
+-(void)renderFlyer;
+-(void)undoFlyer;
+-(void)setUndoStatus;
+
+-(UIImage *)getFlyerSnapShot;
+
 
 -(IBAction)setAddMoreLayerTabAction:(id)sender;
 -(IBAction)setlibBackgroundTabAction:(id)sender;
