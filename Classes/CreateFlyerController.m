@@ -1463,15 +1463,16 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 
 -(void)loadCustomPhotoLibrary{
     
-    nbuGallary = [[GalleryViewController alloc] initWithNibName:@"GalleryViewController" bundle:nil];
+    nbuGallary = [[LibraryViewController alloc] initWithNibName:@"LibraryViewController" bundle:nil];
     
     if ( imgPickerFlag == 2 ) {
         NSDictionary *dict = [flyer getLayerFromMaster:currentLayer];
-        nbuGallary.desiredImageSize = CGSizeMake( [[dict valueForKey:@"width"] floatValue],
-                                                [[dict valueForKey:@"height"] floatValue]);
+        //nbuGallary.desiredImageSize = CGSizeMake( [[dict valueForKey:@"width"] floatValue],
+        //                                        [[dict valueForKey:@"height"] floatValue]);
     } else {
-        nbuGallary.desiredImageSize = CGSizeMake( 300,  300 );
+        //nbuGallary.desiredImageSize = CGSizeMake( 300,  300 );
     }
+    /*
 
     [nbuGallary setOnImageTaken:^(UIImage *img) {
         
@@ -1501,7 +1502,7 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
             }
         });
     }];
-    
+    */
     [self.navigationController pushViewController:nbuGallary animated:YES];
     [Flurry logEvent:@"Custom Background"];
 }

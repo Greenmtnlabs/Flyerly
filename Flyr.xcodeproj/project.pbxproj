@@ -954,6 +954,11 @@
 		30D58D8310FB1BF800E0C7E8 /* Template8.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 30D58CFD10FB1BF800E0C7E8 /* Template8.jpg */; };
 		30D58D8410FB1BF800E0C7E8 /* Template9.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 30D58CFE10FB1BF800E0C7E8 /* Template9.jpg */; };
 		30D58E3510FB260200E0C7E8 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30D58E3410FB260200E0C7E8 /* MediaPlayer.framework */; };
+		4986857018B4FFC7002113E4 /* LibraryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4986856E18B4FFC7002113E4 /* LibraryViewController.m */; };
+		4986857118B4FFC7002113E4 /* LibraryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4986856F18B4FFC7002113E4 /* LibraryViewController.xib */; };
+		4986857418B500BB002113E4 /* AssetsGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4986857318B500BB002113E4 /* AssetsGroupViewController.m */; };
+		4986857718B50657002113E4 /* CustomAssetsGroupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4986857518B50657002113E4 /* CustomAssetsGroupView.xib */; };
+		4986857818B50657002113E4 /* CustomAssetThumbnailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4986857618B50657002113E4 /* CustomAssetThumbnailView.xib */; };
 		498BAB6C1885B21800221DFB /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 498BAB6B1885B21800221DFB /* Parse.framework */; };
 		49997FF717DF786400CF1038 /* ParentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49997FF617DF786400CF1038 /* ParentViewController.m */; };
 		49997FFB17E07FA100CF1038 /* SKProduct+LocalPrice.m in Sources */ = {isa = PBXBuildFile; fileRef = 49997FFA17E07FA100CF1038 /* SKProduct+LocalPrice.m */; };
@@ -2315,6 +2320,13 @@
 		30D58CFD10FB1BF800E0C7E8 /* Template8.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Template8.jpg; sourceTree = "<group>"; };
 		30D58CFE10FB1BF800E0C7E8 /* Template9.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Template9.jpg; sourceTree = "<group>"; };
 		30D58E3410FB260200E0C7E8 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		4986856D18B4FFC7002113E4 /* LibraryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibraryViewController.h; sourceTree = "<group>"; };
+		4986856E18B4FFC7002113E4 /* LibraryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibraryViewController.m; sourceTree = "<group>"; };
+		4986856F18B4FFC7002113E4 /* LibraryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LibraryViewController.xib; sourceTree = "<group>"; };
+		4986857218B500BB002113E4 /* AssetsGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssetsGroupViewController.h; sourceTree = "<group>"; };
+		4986857318B500BB002113E4 /* AssetsGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssetsGroupViewController.m; sourceTree = "<group>"; };
+		4986857518B50657002113E4 /* CustomAssetsGroupView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomAssetsGroupView.xib; sourceTree = "<group>"; };
+		4986857618B50657002113E4 /* CustomAssetThumbnailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomAssetThumbnailView.xib; sourceTree = "<group>"; };
 		498BAB6B1885B21800221DFB /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = ExternalFrameworks/Parse/Parse.framework; sourceTree = "<group>"; };
 		49997FF517DF786400CF1038 /* ParentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParentViewController.h; sourceTree = "<group>"; };
 		49997FF617DF786400CF1038 /* ParentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParentViewController.m; sourceTree = "<group>"; };
@@ -3843,6 +3855,13 @@
 		2032DCCB1871BDCE007036B2 /* Gallery */ = {
 			isa = PBXGroup;
 			children = (
+				4986857518B50657002113E4 /* CustomAssetsGroupView.xib */,
+				4986857618B50657002113E4 /* CustomAssetThumbnailView.xib */,
+				4986857218B500BB002113E4 /* AssetsGroupViewController.h */,
+				4986857318B500BB002113E4 /* AssetsGroupViewController.m */,
+				4986856D18B4FFC7002113E4 /* LibraryViewController.h */,
+				4986856E18B4FFC7002113E4 /* LibraryViewController.m */,
+				4986856F18B4FFC7002113E4 /* LibraryViewController.xib */,
 				2032DCC61871B5DC007036B2 /* GalleryViewController.h */,
 				2032DCC71871B5DC007036B2 /* GalleryViewController.m */,
 				2032DCC81871B5DC007036B2 /* GalleryViewController.xib */,
@@ -4908,6 +4927,7 @@
 				65BDB2D01733E8C80084E032 /* 07_roll@2x.png in Resources */,
 				65BDB2D11733E8C80084E032 /* 07_width_selected.png in Resources */,
 				65BDB2D21733E8C80084E032 /* 07_width_selected@2x.png in Resources */,
+				4986857718B50657002113E4 /* CustomAssetsGroupView.xib in Resources */,
 				65BDB2D31733E8C80084E032 /* 07_width.png in Resources */,
 				65BDB2D41733E8C80084E032 /* 07_width@2x.png in Resources */,
 				201686EB186AF56D00A238AE /* share_button@2x.png in Resources */,
@@ -5264,6 +5284,7 @@
 				0F805AD5179E92AD002AEA24 /* flash_icon_green.png in Resources */,
 				0F805AD6179E92AD002AEA24 /* flash_icon_green@2x.png in Resources */,
 				0F805AD7179E92AD002AEA24 /* flash_icon_off.png in Resources */,
+				4986857818B50657002113E4 /* CustomAssetThumbnailView.xib in Resources */,
 				0F805AD8179E92AD002AEA24 /* flash_icon_off@x.png in Resources */,
 				20F93DD417B2262200F6F88C /* MainSettingViewController.xib in Resources */,
 				20F4D8E117BA3D0A007B2DF5 /* ProfileViewController.xib in Resources */,
@@ -5369,6 +5390,7 @@
 				202C639217EA06E800CB9A75 /* ricon29.png in Resources */,
 				202C639317EA06E800CB9A75 /* ricon29@2x.png in Resources */,
 				202C639417EA06E800CB9A75 /* ricon30.png in Resources */,
+				4986857118B4FFC7002113E4 /* LibraryViewController.xib in Resources */,
 				202C639517EA06E800CB9A75 /* ricon30@2x.png in Resources */,
 				202C639617EA06E800CB9A75 /* ricon31.png in Resources */,
 				202C639717EA06E800CB9A75 /* ricon31@2x.png in Resources */,
@@ -5788,6 +5810,7 @@
 				2036661C188DB67300C71EAA /* FlyerUser.m in Sources */,
 				202C4801187D6E4B00FE0975 /* BitlyTwitterOAuthManager.m in Sources */,
 				49B8897D1886524D003766AD /* LoadingView.m in Sources */,
+				4986857418B500BB002113E4 /* AssetsGroupViewController.m in Sources */,
 				202C47FF187D6E4B00FE0975 /* BitlyTweetSheetAccountSelector.m in Sources */,
 				65E2615D171C2FA800C485B5 /* InviteFriendsController.m in Sources */,
 				654B255317202B360047C8F6 /* AfterUpdateController.m in Sources */,
@@ -5819,6 +5842,7 @@
 				2044FF96185088ED00A26B42 /* MainSettingCell.m in Sources */,
 				202C4825187D7A6B00FE0975 /* CDataScanner.m in Sources */,
 				49997FF717DF786400CF1038 /* ParentViewController.m in Sources */,
+				4986857018B4FFC7002113E4 /* LibraryViewController.m in Sources */,
 				49997FFB17E07FA100CF1038 /* SKProduct+LocalPrice.m in Sources */,
 				202C47FB187D6E4B00FE0975 /* BitlyLibUtil.m in Sources */,
 			);

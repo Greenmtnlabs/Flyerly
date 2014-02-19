@@ -1,6 +1,6 @@
 //
 //  LibraryViewController.m
-//  NBUKitDemo
+//  PickerDemo
 //
 //  Created by Ernesto Rivera on 2012/11/09.
 //  Copyright (c) 2012 CyberAgent Inc.
@@ -19,6 +19,9 @@
 //
 
 #import "LibraryViewController.h"
+#import "AssetsGroupViewController.h"
+#import <NBUCompatibility.h>
+#import <NBUAssetsLibrary.h>
 
 @implementation LibraryViewController
 
@@ -29,8 +32,8 @@
 //                                                              name:nil];
 //    [[NBUAssetsLibrary sharedLibrary] registerDirectoryGroupforURL:[NSBundle mainBundle].bundleURL
 //                                                              name:nil];
-    [[NBUAssetsLibrary sharedLibrary] registerDirectoryGroupforURL:[UIApplication sharedApplication].documentsDirectory
-                                                              name:@"Flyr"];
+  /*  [[NBUAssetsLibrary sharedLibrary] registerDirectoryGroupforURL:[UIApplication sharedApplication].documentsDirectory
+                                                              name:@"App's Documents directory"];*/
 }
 
 - (void)viewDidLoad

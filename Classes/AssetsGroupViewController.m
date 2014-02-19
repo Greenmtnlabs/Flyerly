@@ -1,6 +1,6 @@
 //
 //  AssetsGroupViewController.m
-//  NBUKitDemo
+//  PickerDemo
 //
 //  Created by Ernesto Rivera on 2012/11/09.
 //  Copyright (c) 2012 CyberAgent Inc.
@@ -19,10 +19,10 @@
 //
 
 #import "AssetsGroupViewController.h"
+#import <NBUImagePicker/NBUImagePicker.h>
+#import <NBUCompatibility.h>
 
 @implementation AssetsGroupViewController
-
-@synthesize nextButton = _nextButton;
 
 - (void)viewDidLoad
 {
