@@ -147,6 +147,13 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     [self.view setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
     [self.contextView setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
 
+    sharePanel = [[UIView alloc] initWithFrame:CGRectMake(320, 64, 290,480 )];
+    shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
+    sharePanel = shareviewcontroller.view;
+    sharePanel.hidden = YES;
+    [self.view addSubview:sharePanel];
+    
+
     
     // Set height and width of each element of scroll view
     layerXposition =0;
@@ -219,7 +226,7 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     //Right ShareButton
     shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     shareButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
-	[shareButton addTarget:self action:@selector(callSaveAndShare) forControlEvents:UIControlEventTouchUpInside];
+	[shareButton addTarget:self action:@selector(share) forControlEvents:UIControlEventTouchUpInside];
     [shareButton setBackgroundImage:[UIImage imageNamed:@"share_button"] forState:UIControlStateNormal];
 
     shareButton.showsTouchWhenHighlighted = YES;
@@ -1996,45 +2003,42 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 }
 
 
--(void)callSaveAndShare
+-(void)share
 {
+    float xValue = sharePanel.frame.origin.x;
     
-    
-    if (sharePanel != nil) {
+    if (xValue == 30) {
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0.4f];
         [sharePanel setFrame:CGRectMake(320, 64, 290,480 )];
 
         [UIView commitAnimations];
+  
 
-        [sharePanel removeFromSuperview];
-        sharePanel = nil;
         
         [shareButton setBackgroundImage:[UIImage imageNamed:@"share_button"] forState:UIControlStateNormal];
 
         
     } else {
-
+        
+        sharePanel.hidden = NO;
     [shareButton setBackgroundImage:[UIImage imageNamed:@"share_button_selected"] forState:UIControlStateNormal];
         NSString *shareImagePath = [flyer getImageForShare];
         UIImage *shareImage =  [UIImage imageWithContentsOfFile:shareImagePath];
         //[self getCurrentFrameAndSaveIt];
 
-        shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
         shareviewcontroller.selectedFlyerImage = shareImage;
         shareviewcontroller.flyer = self.flyer;
         shareviewcontroller.imageFileName = finalImgWritePath;
         shareviewcontroller.detailFileName = [finalImgWritePath stringByReplacingOccurrencesOfString:@".jpg" withString:@".txt"];
     
-        sharePanel = [[UIView alloc] init];
-        sharePanel = shareviewcontroller.view;
+        //sharePanel = [[UIView alloc] init];
         [sharePanel setFrame:CGRectMake(320, 64, 290,480 )];
     
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0.4f];
-        [sharePanel setFrame:CGRectMake(30, 64, 290,480 )];
+            [sharePanel setFrame:CGRectMake(30, 64, 290,480 )];
         [UIView commitAnimations];
-        [self.view addSubview:sharePanel];
         
     }
 }
@@ -2838,7 +2842,11 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
         
     }//Loop
     
-    [layerScrollView setContentSize:CGSizeMake(300, curYLoc + layerScrollHeight)];
+    if(IS_IPHONE_5){
+        [layerScrollView setContentSize:CGSizeMake(300, curYLoc + layerScrollHeight)];
+    } else {
+        [layerScrollView setContentSize:CGSizeMake(([layers count]*(layerScrollWidth+5)), [layerScrollView bounds].size.height)];
+    }
     
     [self addScrollView:layerScrollView];
     

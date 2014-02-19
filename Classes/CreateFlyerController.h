@@ -212,7 +212,7 @@
 -(void) choosePhoto;
 -(void) donePhoto;
 -(void) saveMyFlyer;
--(void)callSaveAndShare;
+-(void)share;
 
 
 -(NSData*)getCurrentFrameAndSaveIt;
