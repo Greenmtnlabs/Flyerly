@@ -2014,22 +2014,20 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 
         [UIView commitAnimations];
   
-
-        
         [shareButton setBackgroundImage:[UIImage imageNamed:@"share_button"] forState:UIControlStateNormal];
 
         
     } else {
         
         sharePanel.hidden = NO;
-    [shareButton setBackgroundImage:[UIImage imageNamed:@"share_button_selected"] forState:UIControlStateNormal];
+        [shareButton setBackgroundImage:[UIImage imageNamed:@"share_button_selected"] forState:UIControlStateNormal];
         NSString *shareImagePath = [flyer getImageForShare];
         UIImage *shareImage =  [UIImage imageWithContentsOfFile:shareImagePath];
         //[self getCurrentFrameAndSaveIt];
 
         shareviewcontroller.selectedFlyerImage = shareImage;
         shareviewcontroller.flyer = self.flyer;
-        shareviewcontroller.imageFileName = finalImgWritePath;
+        shareviewcontroller.imageFileName = shareImagePath;
         shareviewcontroller.detailFileName = [finalImgWritePath stringByReplacingOccurrencesOfString:@".jpg" withString:@".txt"];
     
         //sharePanel = [[UIView alloc] init];
