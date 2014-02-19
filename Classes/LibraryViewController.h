@@ -1,6 +1,6 @@
 //
 //  LibraryViewController.h
-//  NBUKitDemo
+//  PickerDemo
 //
 //  Created by Ernesto Rivera on 2012/11/09.
 //  Copyright (c) 2012 CyberAgent Inc.
@@ -17,12 +17,13 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 //
-#import "AssetsGroupViewController.h"
-#import <Foundation/Foundation.h>
-#import <NBUKit/NBUKit.h>
-#import "NBUImagePicker.h"
+#import <NBUImagePicker/NBUAssetsLibraryViewController.h>
 
 @interface LibraryViewController : NBUAssetsLibraryViewController
+
+@property CGSize desiredImageSize;
+@property (nonatomic, copy) void (^onImageTaken)(UIImage *);
+
 
 // Actions
 - (IBAction)accessInfo:(id)sender;

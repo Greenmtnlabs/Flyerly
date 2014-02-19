@@ -1,6 +1,6 @@
 //
 //  AssetsGroupViewController.h
-//  NBUKitDemo
+//  PickerDemo
 //
 //  Created by Ernesto Rivera on 2012/11/09.
 //  Copyright (c) 2012 CyberAgent Inc.
@@ -17,18 +17,12 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 //
-
-#import <Foundation/Foundation.h>
-#import <NBUKit/NBUKit.h>
-#import "NBUAsset.h"
-#import "NBUImagePickerPrivate.h"
-#import <AssetsLibrary/AssetsLibrary.h>
-#import <CoreLocation/CoreLocation.h>
-
+#import <NBUImagePicker/NBUAssetsGroupViewController.h>
 
 @interface AssetsGroupViewController : NBUAssetsGroupViewController
 
-@property (strong, nonatomic) IBOutlet UIBarButtonItem * nextButton;
+@property CGSize desiredImageSize;
+@property (nonatomic, copy) void (^onImageTaken)(UIImage *);
 
 @end
 

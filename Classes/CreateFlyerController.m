@@ -1463,7 +1463,7 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 
 -(void)loadCustomPhotoLibrary{
     
-    nbuGallary = [[GalleryViewController alloc] initWithNibName:@"GalleryViewController" bundle:nil];
+    nbuGallary = [[LibraryViewController alloc] initWithNibName:@"LibraryViewController" bundle:nil];
     
     if ( imgPickerFlag == 2 ) {
         NSDictionary *dict = [flyer getLayerFromMaster:currentLayer];
@@ -1472,6 +1472,7 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     } else {
         nbuGallary.desiredImageSize = CGSizeMake( 300,  300 );
     }
+    
 
     [nbuGallary setOnImageTaken:^(UIImage *img) {
         

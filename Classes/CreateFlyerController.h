@@ -5,12 +5,13 @@
 //
 //
 
+#import <Foundation/Foundation.h>
+#import <NBUKit/NBUKit.h>
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
 #import "CustomLabel.h"
 #import "FlyerlySingleton.h"
 #import "ParentViewController.h"
-#import "GalleryViewController.h"
 #import "CameraViewController.h"
 #import "Flyer.h"
 #import "FlyerImageView.h"
@@ -25,9 +26,9 @@
 #import "Flurry.h"
 #import "SKProduct+LocalPrice.h"
 #import "LayerTileButton.h"
+#import "LibraryViewController.h"
 
-
-@class FlyerlySingleton,CameraViewController,GalleryViewController,Flyer,FlyerImageView;
+@class FlyerlySingleton,CameraViewController,Flyer,FlyerImageView;
 @interface CreateFlyerController :ParentViewController<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, FlyerImageViewDelegate >
 {
    
@@ -105,7 +106,7 @@
     UIButton *crossButtonGlobal;
     LayerTileButton *editButtonGlobal;
     UIBarButtonItem *rightUndoBarButton;
-    GalleryViewController *nbuGallary;
+    LibraryViewController *nbuGallary;
     CameraViewController *nbuCamera;
     FlyerImageView *flyerImageView;
     

@@ -7,7 +7,7 @@
 
 #import "CameraViewController.h"
 #import "CropViewController.h"
-#import "GalleryViewController.h"
+#import "LibraryViewController.h"
 
 @implementation CameraViewController
 @synthesize cameraLines;
@@ -106,7 +106,7 @@
 - (IBAction)moveToGallery:(id)sender{
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
     
-    GalleryViewController *nbugallery = [[GalleryViewController alloc]initWithNibName:@"GalleryViewController" bundle:nil];
+    LibraryViewController *nbugallery = [[LibraryViewController alloc]initWithNibName:@"LibraryViewController" bundle:nil];
     nbugallery.desiredImageSize = desiredImageSize;
     nbugallery.onImageTaken = onImageTaken;
     

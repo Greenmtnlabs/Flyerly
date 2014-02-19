@@ -84,7 +84,10 @@
     globle.NBUimage = nil;
     
     [self.view setBackgroundColor:[globle colorWithHexString:@"cdcdce"]];
-
+    CALayer * l = self.view.layer;
+    [l setMasksToBounds:YES];
+    [l setBorderWidth:0.5];
+    [l setBorderColor:[[UIColor grayColor] CGColor]];
     
     // Setup title text field
     [titleView setReturnKeyType:UIReturnKeyDone];
