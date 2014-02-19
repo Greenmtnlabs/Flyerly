@@ -69,7 +69,7 @@
     
     CropViewController *nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController" bundle:nil];
     nbuCrop.desiredImageSize = desiredImageSize;
-    nbuCrop.image = image;
+    nbuCrop.image = [image imageWithOrientationUp];
     nbuCrop.onImageTaken = onImageTaken;
 
     // Pop the current view, and push the crop view.
