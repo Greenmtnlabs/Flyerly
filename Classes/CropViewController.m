@@ -91,9 +91,7 @@
  * Go back to the last screen.
  */
 -(void) goBack {
-    
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"Camerabottom"] forBarMetrics:UIBarMetricsDefault];
-    
+    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
