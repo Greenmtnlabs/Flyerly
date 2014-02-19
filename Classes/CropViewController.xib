@@ -24,6 +24,10 @@
                             <rect key="frame" x="140" y="142" width="37" height="37"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                         </activityIndicatorView>
+                        <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" id="MOJ-8L-CLy">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="23">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -58,7 +62,7 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="activityView" destination="TSZ-Aj-bQD" id="8i7-BQ-jv2"/>
-                        <outlet property="editingImageView" destination="23" id="iXz-1z-p9P"/>
+                        <outlet property="editingImageView" destination="MOJ-8L-CLy" id="fR3-d5-POB"/>
                         <outlet property="filterSlideView" destination="bYN-k1-t5S" id="VYw-zZ-EmH"/>
                     </connections>
                 </view>
