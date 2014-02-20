@@ -5,4 +5,4 @@ pod "ShareKit"
 pod 'GPUImage', :head
 pod 'NBUKit',  :head
 # For Imagepicker:https://github.com/CyberAgent/iOS-NBUImagePicker/commits/master
-pod 'NBUImagePicker', :git => 'https://github.com/CyberAgent/iOS-NBUImagePicker.git'
+pod 'NBUImagePicker', '1.0.0' 
