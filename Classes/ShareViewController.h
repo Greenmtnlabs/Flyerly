@@ -79,6 +79,7 @@
 @property(nonatomic,strong) IBOutlet UIButton *smsButton;
 @property(nonatomic,strong) IBOutlet UIButton *clipboardButton;
 @property(nonatomic,strong) IBOutlet UILabel *clipboardlabel;
+@property(nonatomic,strong) IBOutlet UILabel *topTitleLabel;
 @property (nonatomic, strong) UIDocumentInteractionController *dic;
 @property(nonatomic,strong)UIImage *selectedFlyerImage;
 @property(nonatomic,strong)NSString *selectedFlyerTitle;
@@ -102,7 +103,6 @@
 -(IBAction)goback;
 
 -(void)shareOnInstagram;
--(void)updateSocialStates;
 -(void)singleshareOnMMS;
 - (void)uploadImage:(NSData *)imageData isEmail:(BOOL)isEmail;
 -(void)shareOnEmail:(NSString *)link;
