@@ -8,6 +8,9 @@
 
 #import "CropViewController.h"
 #import "FlyerlySingleton.h"
+#import <NBUFilterProvider.h>
+#import <NBUCropView.h>
+#import <NBUImagePicker/NBUImagePicker.h>
 
 @implementation CropViewController
 @synthesize desiredImageSize;

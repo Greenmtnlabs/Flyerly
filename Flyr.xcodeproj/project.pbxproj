@@ -696,8 +696,6 @@
 		2032022318B3DF320014A919 /* flat_text_box@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2032022118B3DF320014A919 /* flat_text_box@2x.png */; };
 		2032022618B4180D0014A919 /* share_button_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 2032022418B4180C0014A919 /* share_button_selected.png */; };
 		2032022718B4180D0014A919 /* share_button_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2032022518B4180C0014A919 /* share_button_selected@2x.png */; };
-		2032DCC91871B5DC007036B2 /* GalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2032DCC71871B5DC007036B2 /* GalleryViewController.m */; };
-		2032DCCA1871B5DC007036B2 /* GalleryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2032DCC81871B5DC007036B2 /* GalleryViewController.xib */; };
 		2032DCD01871BDFF007036B2 /* CropViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2032DCCE1871BDFF007036B2 /* CropViewController.m */; };
 		2032DCD11871BDFF007036B2 /* CropViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2032DCCF1871BDFF007036B2 /* CropViewController.xib */; };
 		2034BFB217BE06BE003C15B0 /* menu_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 2034BFB017BE06BD003C15B0 /* menu_button.png */; };
@@ -2044,9 +2042,6 @@
 		2032022118B3DF320014A919 /* flat_text_box@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flat_text_box@2x.png"; sourceTree = "<group>"; };
 		2032022418B4180C0014A919 /* share_button_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share_button_selected.png; sourceTree = "<group>"; };
 		2032022518B4180C0014A919 /* share_button_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share_button_selected@2x.png"; sourceTree = "<group>"; };
-		2032DCC61871B5DC007036B2 /* GalleryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = GalleryViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		2032DCC71871B5DC007036B2 /* GalleryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = GalleryViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		2032DCC81871B5DC007036B2 /* GalleryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GalleryViewController.xib; sourceTree = "<group>"; };
 		2032DCCD1871BDFF007036B2 /* CropViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CropViewController.h; sourceTree = "<group>"; };
 		2032DCCE1871BDFF007036B2 /* CropViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CropViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		2032DCCF1871BDFF007036B2 /* CropViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CropViewController.xib; sourceTree = "<group>"; };
@@ -3862,9 +3857,6 @@
 				4986856D18B4FFC7002113E4 /* LibraryViewController.h */,
 				4986856E18B4FFC7002113E4 /* LibraryViewController.m */,
 				4986856F18B4FFC7002113E4 /* LibraryViewController.xib */,
-				2032DCC61871B5DC007036B2 /* GalleryViewController.h */,
-				2032DCC71871B5DC007036B2 /* GalleryViewController.m */,
-				2032DCC81871B5DC007036B2 /* GalleryViewController.xib */,
 			);
 			name = Gallery;
 			sourceTree = "<group>";
@@ -5384,7 +5376,6 @@
 				202C638D17EA06E800CB9A75 /* ricon26@2x.png in Resources */,
 				202C638E17EA06E800CB9A75 /* ricon27.png in Resources */,
 				202C638F17EA06E800CB9A75 /* ricon27@2x.png in Resources */,
-				2032DCCA1871B5DC007036B2 /* GalleryViewController.xib in Resources */,
 				202C639017EA06E800CB9A75 /* ricon28.png in Resources */,
 				202C639117EA06E800CB9A75 /* ricon28@2x.png in Resources */,
 				202C639217EA06E800CB9A75 /* ricon29.png in Resources */,
@@ -5814,7 +5805,6 @@
 				202C47FF187D6E4B00FE0975 /* BitlyTweetSheetAccountSelector.m in Sources */,
 				65E2615D171C2FA800C485B5 /* InviteFriendsController.m in Sources */,
 				654B255317202B360047C8F6 /* AfterUpdateController.m in Sources */,
-				2032DCC91871B5DC007036B2 /* GalleryViewController.m in Sources */,
 				20920015184F40330034C4F6 /* InviteFriendsCell.m in Sources */,
 				49B8898118865273003766AD /* Reachability.m in Sources */,
 				202C4827187D7A6B00FE0975 /* CJSONDeserializer.m in Sources */,

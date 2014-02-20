@@ -5,12 +5,13 @@
 //
 //
 
+#import <Foundation/Foundation.h>
+#import <NBUKit/NBUKit.h>
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
 #import "CustomLabel.h"
 #import "FlyerlySingleton.h"
 #import "ParentViewController.h"
-#import "GalleryViewController.h"
 #import "CameraViewController.h"
 #import "Flyer.h"
 #import "FlyerImageView.h"
