@@ -2008,8 +2008,8 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
         [sharePanel setFrame:CGRectMake(320, 64, 290,480 )];
         
         [UIView commitAnimations];
-        [self.libText becomeFirstResponder];
-        [shareviewcontroller textViewDidEndEditing:shareviewcontroller.descriptionView];
+        [shareviewcontroller.titleView resignFirstResponder];
+        [shareviewcontroller.descriptionView resignFirstResponder];
   
         [shareButton setBackgroundImage:[UIImage imageNamed:@"share_button"] forState:UIControlStateNormal];
 

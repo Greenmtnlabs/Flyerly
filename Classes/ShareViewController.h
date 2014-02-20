@@ -86,7 +86,7 @@
 @property(nonatomic,strong)NSString *selectedFlyerDescription;
 @property(nonatomic,strong)NSString *detailFileName;
 @property(nonatomic,strong)NSString *imageFileName;
-@property(nonatomic,strong)FlyrViewController *fvController;
+@property(nonatomic,weak)FlyrViewController *fvController;
 @property (nonatomic, strong) LoadingView *loadingView;
 
 @property (nonatomic,strong) Flyer *flyer;
