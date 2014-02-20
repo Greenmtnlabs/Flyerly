@@ -44,7 +44,7 @@
 	NSString *detailFileName;
 	NSString *imageFileName;
     FlyerlySingleton *globle;
-	FlyrViewController *fvController;
+
 	LoadingView *loadingView;
     UIDocumentInteractionController *dic;
     NSMutableArray  *photoTitles;         // Titles of images
