@@ -87,14 +87,6 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
          annotation:(id)annotation {
     
     if([[url absoluteString] hasPrefix:kCallbackURLBaseStringPrefix]){
-            NSString *token = nil;
-            NSString *verifier = nil;
-            /*BOOL result = OFExtractOAuthCallback(url, [NSURL URLWithString:kCallbackURLBaseString], &token, &verifier);
-            
-            if (!result) {
-                NSLog(@"Cannot obtain token/secret from URL: %@", [url absoluteString]);
-                return NO;
-            }*/
         return YES;
     } else if([[url absoluteString] hasPrefix:@"fb"]){
         return [PFFacebookUtils handleOpenURL:url];
