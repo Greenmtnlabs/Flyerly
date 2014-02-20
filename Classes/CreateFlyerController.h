@@ -114,6 +114,7 @@
     UIView *sharePanel;
     UIButton *shareButton;
     ShareViewController *shareviewcontroller;
+    UILabel *titleLabel;
 }
 
 @property(nonatomic, strong) NSMutableArray *textLabelLayersArray;

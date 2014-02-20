@@ -32,13 +32,13 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 	[super viewWillAppear:YES];
     
     //Here we Set Top Bar Item
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
-    label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont fontWithName:TITLE_FONT size:18];
-    label.textAlignment = UITextAlignmentCenter;
-    label.textColor = [UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0];
-    label.text = [flyer getFlyerTitle];
-    self.navigationItem.titleView = label;
+    titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
+    titleLabel.backgroundColor = [UIColor clearColor];
+    titleLabel.font = [UIFont fontWithName:TITLE_FONT size:18];
+    titleLabel.textAlignment = UITextAlignmentCenter;
+    titleLabel.textColor = [UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0];
+    titleLabel.text = [flyer getFlyerTitle];
+    self.navigationItem.titleView = titleLabel;
     
 }
 
@@ -1930,13 +1930,8 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 
 -(void)callAddMoreLayers {
     
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
-    label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont fontWithName:TITLE_FONT size:18];
-    label.textAlignment = UITextAlignmentCenter;
-    label.textColor = [UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0];
-    label.text = [flyer getFlyerTitle];
-    self.navigationItem.titleView = label;
+    titleLabel.text = [flyer getFlyerTitle];
+    //self.navigationItem.titleView = titleLabel;
     
      //ShareButton
     [shareButton setBackgroundImage:[UIImage imageNamed:@"share_button"] forState:UIControlStateNormal];
@@ -2028,10 +2023,14 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 
         shareviewcontroller.selectedFlyerImage = shareImage;
         shareviewcontroller.flyer = self.flyer;
-    //    shareviewcontroller.imageFileName = shareImagePath;
+        shareviewcontroller.imageFileName = shareImagePath;
         shareviewcontroller.detailFileName = [finalImgWritePath stringByReplacingOccurrencesOfString:@".jpg" withString:@".txt"];
         shareviewcontroller.titleView.text = [flyer getFlyerTitle];
+        shareviewcontroller.descriptionView.text = [flyer getFlyerDescription];
         shareviewcontroller.selectedFlyerDescription = [flyer getFlyerDescription];
+        shareviewcontroller.topTitleLabel = titleLabel;
+        
+        [shareviewcontroller setSocialStatus];
 
         [sharePanel setFrame:CGRectMake(320, 64, 290,480 )];
     

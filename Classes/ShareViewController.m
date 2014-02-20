@@ -11,14 +11,13 @@
 @implementation ShareViewController
 
 
-@synthesize selectedFlyerImage,imgView,fvController,titleView,descriptionView,selectedFlyerDescription,selectedFlyerTitle, detailFileName, imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,loadingView,dic,scrollView,  networkParentView,listOfPlaces,clipboardlabel,sharelink,bitly,flyer,delegate;
+@synthesize selectedFlyerImage,imgView,fvController,titleView,descriptionView,selectedFlyerDescription,selectedFlyerTitle, detailFileName, imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,loadingView,dic,scrollView,  networkParentView,listOfPlaces,clipboardlabel,sharelink,bitly,flyer,topTitleLabel,delegate;
 
 
 #pragma mark - Sharer Response
 
 - (void)sharerStartedSending:(SHKSharer *)aSharer
 {
-	int i = 0;
 }
 - (void)sharerFinishedSending:(SHKSharer *)sharer
 {
@@ -113,7 +112,6 @@
 	[super viewWillDisappear:animated];
 	
     [[NSNotificationCenter defaultCenter] removeObserver: self];
-    [self updateFlyerDetail];
 }
 
 
@@ -194,6 +192,7 @@
     }else {
         //Here we Update Flyer Title in .txt File
         [flyer setFlyerTitle:titleView.text];
+        topTitleLabel.text = titleView.text;
     }
 }
 
@@ -218,7 +217,7 @@
             [item setTags:[NSArray arrayWithObjects: @"#flyerly", nil]];
             
             iosSharer = [SHKFacebook shareItem:item];
-            iosSharer.shareDelegate = self;
+            //iosSharer.shareDelegate = self;
 
             // Update Flyer Share Info in Social File
             [self.flyer setSocialStatusAtIndex:0 StatusValue:1];
@@ -247,7 +246,7 @@
             
             //Calling ShareKit for Sharing
             iosSharer = [SHKTwitter shareItem:item];
-            iosSharer.shareDelegate = self;
+            //iosSharer.shareDelegate = self;
             
             // Update Flyer Share Info in Social File
             [self.flyer setSocialStatusAtIndex:1 StatusValue:1];
@@ -293,7 +292,7 @@
             
             //Calling ShareKit for Sharing
             iosSharer = [SHKMail shareItem:item];
-            iosSharer.shareDelegate = self;
+           // iosSharer.shareDelegate = self;
 
             
             // Update Flyer Share Info in Social File
@@ -331,7 +330,7 @@
             
             //Calling ShareKit for Sharing
             iosSharer = [SHKTumblr shareItem:item];
-            iosSharer.shareDelegate = self;
+           // iosSharer.shareDelegate = self;
 //            [SHKTumblr shareItem:item];
             
             // Update Flyer Share Info in Social File
@@ -364,11 +363,10 @@
             SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@",titleView.text  ]];
               item.tags =[NSArray arrayWithObjects: @"#flyerly", nil];
             
-      //      [item set ].description = selectedFlyerDescription;
             
             //Calling ShareKit for Sharing
             iosSharer = [SHKFlickr shareItem:item];
-            iosSharer.shareDelegate = self;
+            //iosSharer.shareDelegate = self;
             
             // Update Flyer Share Info in Social File
             [self.flyer setSocialStatusAtIndex:4 StatusValue:1];
@@ -398,7 +396,7 @@
             
             [controller addAttachmentData:exportData typeIdentifier:@"public.data" filename:@"flyer.jpg"];
             controller.messageComposeDelegate = self;
-            [self presentModalViewController:controller animated:YES];
+            [self.navigationController presentModalViewController:controller animated:YES];
             
         }
     
@@ -434,154 +432,6 @@
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];
     [alert show];
-}
-
-
--(void)updateSocialStates{    
-    
-    PFUser *user = [PFUser currentUser];
-
-    NSString *socialFlyerPath = [imageFileName stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@/Flyr/", user.username] withString:[NSString stringWithFormat:@"%@/Flyr/Social/", user.username]];
-	NSString *finalImgWritePath = [socialFlyerPath stringByReplacingOccurrencesOfString:@".jpg" withString:@".soc"];
-    
-    NSMutableArray *socialArray = [[NSMutableArray alloc] initWithContentsOfFile:finalImgWritePath];
-    if(!socialArray){
-        socialArray = [[NSMutableArray alloc] init];
-    }
-
-    if( [socialArray count] > 0 ){
-    
-        // Save states of all supported social media
-        if([facebookButton isSelected]){
-            [socialArray removeObjectAtIndex:0]; //Facebook
-            [socialArray insertObject:@"1" atIndex:0]; //Facebook
-        }
-        
-        if([twitterButton isSelected]){
-            [socialArray removeObjectAtIndex:1]; //Twitter
-            [socialArray insertObject:@"1" atIndex:1]; //Twitter
-        }
-        
-        if([emailButton isSelected]){
-            [socialArray removeObjectAtIndex:2]; //Email
-            [socialArray insertObject:@"1" atIndex:2]; //Email
-        }
-        
-        if([tumblrButton isSelected]){
-            [socialArray removeObjectAtIndex:3]; //Tumblr
-            [socialArray insertObject:@"1" atIndex:3]; //Tumblr
-        }
-        
-        if([flickrButton isSelected]){
-            [socialArray removeObjectAtIndex:4]; //Flickr
-            [socialArray insertObject:@"1" atIndex:4]; //Flickr
-        }
-        
-        if([instagramButton isSelected]){
-            [socialArray removeObjectAtIndex:5]; //Instagram
-            [socialArray insertObject:@"1" atIndex:5]; //Instagram
-        }
-        
-        if([smsButton isSelected]){
-            [socialArray removeObjectAtIndex:6]; //SMS
-            [socialArray insertObject:@"1" atIndex:6]; //SMS
-        }
-        if([clipboardButton isSelected]){
-            [socialArray removeObjectAtIndex:7]; //CLIPBOARD
-            [socialArray insertObject:@"1" atIndex:7]; //CLIPBOARD
-        }
-
-
-    } else {
-            
-        // Save states of all supported social media
-        if([facebookButton isSelected]){
-            [socialArray addObject:@"1"]; //Facebook
-        } else  {
-            [socialArray addObject:@"0"]; //Facebook
-        }
-        
-        if([twitterButton isSelected]){
-            [socialArray addObject:@"1"]; //Twitter
-        } else  {
-            [socialArray addObject:@"0"]; //Twitter
-        }
-        
-        if([emailButton isSelected]){
-            [socialArray addObject:@"1"]; //Email
-        } else  {
-            [socialArray addObject:@"0"]; //Email
-        }
-        
-        if([tumblrButton isSelected]){
-            [socialArray addObject:@"1"]; //Tumblr
-        } else  {
-            [socialArray addObject:@"0"]; //Tumblr
-        }
-        
-        if([flickrButton isSelected]){
-            [socialArray addObject:@"1"]; //Flickr
-        } else  {
-            [socialArray addObject:@"0"]; //Flickr
-        }
-        
-        if([instagramButton isSelected]){
-            [socialArray addObject:@"1"]; //Instagram
-        } else  {
-            [socialArray addObject:@"0"]; //Instagram
-        }
-        
-        if([smsButton isSelected]){
-            [socialArray addObject:@"1"]; //SMS
-        } else  {
-            [socialArray addObject:@"0"]; //SMS
-        }
-        
-        if([clipboardButton isSelected]){
-            [socialArray addObject:@"1"]; //CLIPBOARD
-        } else  {
-            [socialArray addObject:@"0"]; //CLIPBOARD
-        }
-        
-    }
-
-    [[NSFileManager defaultManager] removeItemAtPath:finalImgWritePath error:nil];
-    [socialArray writeToFile:finalImgWritePath atomically:YES];
-}
-
-
-
--(void)updateFlyerDetail {
-	
-    // delete already existing file and
-    // Add file with same name
-    [[NSFileManager defaultManager] removeItemAtPath:detailFileName error:nil];
-	NSMutableArray *array = [[NSMutableArray alloc] init];
-
-    if(!titleView.text || [titleView.text isEqualToString:NameYourFlyerText]){
-        [array addObject:NameYourFlyerText];
-    }else{
-        [array addObject:self.titleView.text];
-    }
-
-    if(!descriptionView.text || [descriptionView.text isEqualToString:AddCaptionText]){
-        [array addObject:@""];
-    }else{
-        [array addObject:self.descriptionView.text];
-    }
-    
-    NSDate *date = [NSDate date];
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc]init];
-    [dateFormat setDateFormat:FlyerDateFormat];
-    NSString *dateString = [dateFormat stringFromDate:date];
-    [array addObject:dateString];
-
-    [array writeToFile:detailFileName atomically:YES];
-	
-    [[NSFileManager defaultManager] removeItemAtPath:imageFileName error:nil];
-	NSData *imgData = UIImagePNGRepresentation(selectedFlyerImage);
-	[[NSFileManager defaultManager] createFileAtPath:imageFileName contents:imgData attributes:nil];
-
 }
 
 
@@ -698,7 +548,8 @@
      UIGraphicsBeginImageContextWithOptions(self.view.bounds.size, self.view.opaque, 0.0);
      [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
      UIGraphicsEndImageContext();
-     
+    
+    
      UIImage *originalImage = [UIImage imageWithContentsOfFile:imageFileName];
     
      NSString  *updatedImagePath = [imageFileName stringByReplacingOccurrencesOfString:@".jpg" withString:@".igo"];
