@@ -1931,7 +1931,6 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 -(void)callAddMoreLayers {
     
     titleLabel.text = [flyer getFlyerTitle];
-    //self.navigationItem.titleView = titleLabel;
     
      //ShareButton
     [shareButton setBackgroundImage:[UIImage imageNamed:@"share_button"] forState:UIControlStateNormal];

@@ -212,10 +212,7 @@
             
             // Current Item For Sharing
             SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ %@ #flyerly",titleView.text, selectedFlyerDescription ]];
-            
-            [item setText:selectedFlyerDescription];
-            [item setTags:[NSArray arrayWithObjects: @"#flyerly", nil]];
-            
+                        
             iosSharer = [SHKFacebook shareItem:item];
             //iosSharer.shareDelegate = self;
 
@@ -287,7 +284,7 @@
             
             
             // Current Item For Sharing
-            SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"#flyerly - %@ %@",titleView.text, selectedFlyerDescription ]];
+            SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@",titleView.text]];
             
             
             //Calling ShareKit for Sharing
@@ -396,7 +393,8 @@
             
             [controller addAttachmentData:exportData typeIdentifier:@"public.data" filename:@"flyer.jpg"];
             controller.messageComposeDelegate = self;
-            [self.navigationController presentModalViewController:controller animated:YES];
+            
+            [self  presentModalViewController:controller animated:YES];
             
         }
     
