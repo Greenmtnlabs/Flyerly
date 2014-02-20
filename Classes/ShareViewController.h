@@ -55,6 +55,9 @@
     NSMutableArray *listOfPlaces;
     
     NSArray *arrayOfAccounts;
+    
+    SHKSharer *iosSharer;
+
 }
 
 @property(nonatomic,strong) NSMutableArray *listOfPlaces;
