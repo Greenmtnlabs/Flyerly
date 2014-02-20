@@ -21,7 +21,8 @@
     // Remember the right bar button item.
     rightBarButtonItem = self.navigationItem.rightBarButtonItem;
     
-    UIActivityIndicatorView *uiBusy = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    UIActivityIndicatorView *uiBusy = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    [uiBusy setColor:[UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0]];
     uiBusy.hidesWhenStopped = YES;
     [uiBusy startAnimating];
     
