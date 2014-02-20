@@ -208,7 +208,8 @@
     spController = [[ShareSettingViewController alloc]initWithNibName:@"SettingViewController" bundle:nil];
     
     //GET FACEBOOK APP LIKE STATUS
-    [self setFacebookLikeStatus];
+    //Tenporary Commit that part
+   // [self setFacebookLikeStatus];
     
 }
 
