@@ -339,8 +339,6 @@
             [self showAlert:@"You're not connected to the internet. Please connect and retry" message:@""];
             
         }
-        
-
     
 }
 
@@ -350,8 +348,6 @@
  */
 -(IBAction)onClickFlickrButton{
     
-
-
         // Check internet connectivity
         if( [InviteFriendsController connected] ){
             [flickrButton setSelected:YES];
@@ -385,16 +381,16 @@
     
 
         
-        MFMessageComposeViewController *controller = [[MFMessageComposeViewController alloc] init];
+        //MFMessageComposeViewController *controller = [[MFMessageComposeViewController alloc] init];
         if([MFMessageComposeViewController canSendAttachments])
         {
                         
             NSData *exportData = UIImageJPEGRepresentation(selectedFlyerImage ,1.0);
+            [SHKTextMessage shareFileData:exportData filename:imageFileName title:@"Flyerly"];
             
-            [controller addAttachmentData:exportData typeIdentifier:@"public.data" filename:@"flyer.jpg"];
-            controller.messageComposeDelegate = self;
-            
-            [self  presentModalViewController:controller animated:YES];
+            //[controller addAttachmentData:exportData typeIdentifier:@"public.data" filename:@"flyer.jpg"];
+            //controller.messageComposeDelegate = self;
+           // [self presentModalViewController:controller animated:YES];
             
         }
     

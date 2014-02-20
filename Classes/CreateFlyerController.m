@@ -45,7 +45,7 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 -(void)viewDidAppear:(BOOL)animated{
     
     
-    [addMoreLayerOrSaveFlyerLabel setText:@"ADD MORE LAYERS OR ADJUST LAYERS BELOW"];    [addMoreLayerOrSaveFlyerLabel setNumberOfLines:2];
+    [addMoreLayerOrSaveFlyerLabel setText:@"CREATE YOUR FLYER WITH THE FEATURES BELOW THEN SHARE WITH THE WORLD"];    [addMoreLayerOrSaveFlyerLabel setNumberOfLines:2];
     [addMoreLayerOrSaveFlyerLabel setBackgroundColor:[UIColor clearColor]];
     [addMoreLayerOrSaveFlyerLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:16]];
     [addMoreLayerOrSaveFlyerLabel setTextColor:[UIColor grayColor]];
@@ -2006,8 +2006,10 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0.4f];
         [sharePanel setFrame:CGRectMake(320, 64, 290,480 )];
-
+        
         [UIView commitAnimations];
+        [self.libText becomeFirstResponder];
+        [shareviewcontroller textViewDidEndEditing:shareviewcontroller.descriptionView];
   
         [shareButton setBackgroundImage:[UIImage imageNamed:@"share_button"] forState:UIControlStateNormal];
 
