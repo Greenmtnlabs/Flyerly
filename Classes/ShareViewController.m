@@ -11,7 +11,7 @@
 @implementation ShareViewController
 
 
-@synthesize selectedFlyerImage,imgView,fvController,titleView,descriptionView,selectedFlyerDescription,  imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,dicController,scrollView, clipboardlabel,sharelink,flyer,topTitleLabel,delegate,activityIndicator;
+@synthesize selectedFlyerImage,imgView,fvController,titleView,descriptionView,selectedFlyerDescription,  imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,dicController, clipboardlabel,sharelink,flyer,topTitleLabel,delegate,activityIndicator;
 
 
 #pragma mark - Sharer Response

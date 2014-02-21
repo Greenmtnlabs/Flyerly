@@ -51,7 +51,6 @@
 @property(nonatomic,strong)  NSString *sharelink;
 
 
-@property(nonatomic,strong) IBOutlet UIScrollView *scrollView;
 @property(nonatomic,strong) IBOutlet UITextView *descriptionView;
 @property(nonatomic,strong) IBOutlet UITextField *titleView;
 @property(nonatomic,strong) IBOutlet UIButton *imgView;
