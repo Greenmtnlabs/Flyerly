@@ -44,7 +44,6 @@
 	NSString *selectedFlyerDescription;
 	NSString *imageFileName;
     FlyerlySingleton *globle;
-	LoadingView *loadingView;
     UIDocumentInteractionController *dic;
     NSMutableArray  *photoTitles;         // Titles of images
     NSMutableArray  *photoSmallImageData; // Image data (thumbnail)
@@ -80,7 +79,6 @@
 @property(nonatomic,strong)NSString *selectedFlyerDescription;
 @property(nonatomic,strong)NSString *imageFileName;
 @property(nonatomic,weak)FlyrViewController *fvController;
-@property (nonatomic, strong) LoadingView *loadingView;
 @property (strong, nonatomic) SHKActivityIndicator *activityIndicator;
 @property (nonatomic,strong) Flyer *flyer;
 @property (weak, nonatomic) id<SHKSharerDelegate> delegate;
