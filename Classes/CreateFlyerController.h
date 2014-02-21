@@ -34,8 +34,6 @@
    
     FlyerlySingleton *globle;
 
-	UIImageView *textBackgrnd;
-	UIImageView *photoImgView;
 	UIImageView *symbolImgView;
 	UIImageView *iconImgView;
 
@@ -116,7 +114,6 @@
 }
 
 
-@property (nonatomic,strong)  UIImageView *photoImgView;
 @property(nonatomic, strong)  UIImageView *symbolImgView;
 @property(nonatomic, strong)  UIImageView *iconImgView;
 @property (nonatomic, strong) UIImageView *textBackgrnd;
