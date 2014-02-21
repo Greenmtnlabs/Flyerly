@@ -103,7 +103,6 @@
 	NSInteger templateScrollWidth;
 	NSInteger templateScrollHeight;
 
-    UIButton *crossButtonGlobal;
     LayerTileButton *editButtonGlobal;
     UIBarButtonItem *rightUndoBarButton;
     LibraryViewController *nbuGallary;

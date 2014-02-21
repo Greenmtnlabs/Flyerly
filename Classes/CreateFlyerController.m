@@ -2466,7 +2466,6 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 
 -(void)deleteLayer:(UIButton *)crossButton{
 
-    crossButtonGlobal = crossButton;
     
     deleteAlert = [[UIAlertView alloc]initWithTitle:@"Warning" message:@"Delete this layer?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK" ,nil];
     [deleteAlert show];
