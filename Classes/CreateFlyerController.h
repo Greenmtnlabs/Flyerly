@@ -117,9 +117,6 @@
     UILabel *titleLabel;
 }
 
-@property(nonatomic, strong) NSMutableArray *textLabelLayersArray;
-
-
 
 @property (nonatomic,strong)  UIImageView *photoImgView;
 @property(nonatomic, strong)  UIImageView *symbolImgView;

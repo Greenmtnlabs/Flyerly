@@ -21,7 +21,7 @@
 //Version 3 Change
 @synthesize contextView,libraryContextView,libFlyer,backgroundTabButton,addMoreFontTabButton;
 @synthesize libText,libBackground,libPhoto,libEmpty,backtemplates,cameraTakePhoto,cameraRoll,flyerBorder;
-@synthesize textLabelLayersArray,currentLayer,layersDic;
+@synthesize currentLayer,layersDic;
 
 int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track selected Tab on Add More
 
@@ -2489,21 +2489,6 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 
 
 
--(NSMutableArray *)textLabelLayersArray{
-    
-    if(textLabelLayersArray){
-        return textLabelLayersArray;
-    } else {
-        
-        textLabelLayersArray = [[NSMutableArray alloc] init];
-        return textLabelLayersArray;
-    }
-}
-
-
-
-
-
 #pragma mark Save Flyer image and write to Documents/Flyr folder
 
 -(NSData*)getCurrentFrameAndSaveIt
@@ -2634,13 +2619,6 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
          globle.flyerName =@"";
     }
     
-    if([[self textLabelLayersArray] count] > 0){
-        //NSLog(@"%@", ((CustomLabel*)[[self textLabelLayersArray] objectAtIndex:0]).text);
-        [array addObject:((CustomLabel*)[self textLabelLayersArray][0]).text];
-    }else{
-        [array addObject:@""];
-    }
-   // NSLog(@"%@",array);
     NSDate *date = [NSDate date];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc]init];
     [dateFormat setDateFormat:FlyerDateFormat];
