@@ -38,7 +38,6 @@
     flyer = [[Flyer alloc]initWithPath:flyPath];
     
 	createFlyer = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
-    createFlyer.flyerNumber = -1;
     createFlyer.flyerPath = flyPath;
     createFlyer.flyer = flyer;
 	[self.navigationController pushViewController:createFlyer animated:YES];
@@ -242,7 +241,6 @@
     createFlyer = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
     
     // Set CreateFlyer Screen
-    createFlyer.flyerNumber = -1;
     createFlyer.flyer = flyer;
 	[self.navigationController pushViewController:createFlyer animated:YES];
 }

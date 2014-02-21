@@ -45,27 +45,10 @@
 	NSArray *colorArray;
 	NSArray *borderArray;
 	NSArray *fontArray;
- 
-	UIAlertView *deleteAlert ;
-
-
-    BOOL deleteMode;
-    BOOL discardedLayer;
-    int flyerNumber;
     int layerXposition;
-
-	NSInteger fontScrollWidth;
-	NSInteger fontScrollHeight;
-	NSInteger colorScrollWidth;
-	NSInteger colorScrollHeight;
-    NSInteger borderScrollWidth;
-	NSInteger borderScrollHeight;
-    NSInteger fontBorderScrollWidth;
-	NSInteger fontBorderScrollHeight;
-	NSInteger sizeScrollWidth;
-	NSInteger sizeScrollHeight;
-	NSInteger templateScrollWidth;
-	NSInteger templateScrollHeight;
+    
+    NSInteger widthValue;
+	NSInteger heightValue;
 
     LayerTileButton *editButtonGlobal;
     UIBarButtonItem *rightUndoBarButton;
@@ -94,7 +77,6 @@
 
 
 @property (nonatomic, assign) NSInteger imgPickerFlag;
-@property (nonatomic, assign) int flyerNumber;
 @property (nonatomic, strong) NSString *flyerPath;
 
 

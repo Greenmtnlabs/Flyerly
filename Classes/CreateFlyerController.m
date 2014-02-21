@@ -16,7 +16,7 @@
 @synthesize cameraTabButton,photoTabButton,widthTabButton,heightTabButton;
 @synthesize deleteAlert;
 @synthesize  imgPickerFlag, addMoreLayerOrSaveFlyerLabel, takeOrAddPhotoLabel,layerScrollView;
-@synthesize flyerNumber,flyerPath,flyer;
+@synthesize flyerPath,flyer;
 
 //Version 3 Change
 @synthesize contextView,libraryContextView,libFlyer,backgroundTabButton,addMoreFontTabButton;
@@ -149,16 +149,8 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     
     // Set height and width of each element of scroll view
     layerXposition =0;
-        fontScrollWidth = 35;
-        fontScrollHeight = 35;
-        colorScrollWidth = 35;
-        colorScrollHeight = 35;
-        sizeScrollWidth = 35;
-        sizeScrollHeight = 35;
-        borderScrollWidth = 35;
-        borderScrollHeight = 35;
-        fontBorderScrollWidth = 35;
-        fontBorderScrollHeight = 35;
+        widthValue = 35;
+        heightValue = 35;    
 
     
     
@@ -288,8 +280,8 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
  */
 -(void)addTemplatesInSubView{
 
-    templateScrollWidth = 60;
-	templateScrollHeight = 55;
+    widthValue = 60;
+	heightValue = 55;
     
     imgPickerFlag =1;
     
@@ -318,7 +310,7 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 		UIImage *iconImg =   [UIImage  imageWithContentsOfFile:iconName];
 		
 		UIButton *templateButton = [UIButton  buttonWithType:UIButtonTypeCustom];
-		templateButton.frame =CGRectMake(0, 5,templateScrollWidth, templateScrollHeight);
+		templateButton.frame =CGRectMake(0, 5,widthValue, heightValue);
         [templateButton addTarget:self action:@selector(selectTemplate:) forControlEvents:UIControlEventTouchUpInside];
 
         [templateButton setBackgroundColor:[UIColor whiteColor]];
@@ -331,12 +323,12 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
         CGRect frame = templateButton.frame;
         frame.origin = CGPointMake(curXLoc, curYLoc);
         templateButton.frame = frame;
-        curXLoc += (templateScrollWidth)+5;
+        curXLoc += (widthValue)+5;
         
         if(IS_IPHONE_5){
             if(curXLoc >= 320){
                 curXLoc = 0;
-                curYLoc = curYLoc + templateScrollHeight + 7;
+                curYLoc = curYLoc + heightValue + 7;
             }
         }
         
@@ -359,9 +351,9 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 	}// Loop
     
     if(IS_IPHONE_5){
-        [layerScrollView setContentSize:CGSizeMake(320, curYLoc + templateScrollHeight)];
+        [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
     } else {
-        [layerScrollView setContentSize:CGSizeMake(([templateArray count]*(templateScrollWidth+5)), [layerScrollView bounds].size.height)];
+        [layerScrollView setContentSize:CGSizeMake(([templateArray count]*(widthValue+5)), [layerScrollView bounds].size.height)];
     }
     
     [layerScrollView flashScrollIndicators];
@@ -398,7 +390,7 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 	for (int i = 1; i <=[fontArray count] ; i++)
 	{
 		UIButton *font = [UIButton buttonWithType:UIButtonTypeCustom];
-		font.frame = CGRectMake(0, 0, fontScrollWidth, fontScrollHeight);
+		font.frame = CGRectMake(0, 0, widthValue, heightValue);
         
         [font addTarget:self action:@selector(selectFont:) forControlEvents:UIControlEventTouchUpInside];
 		
@@ -413,12 +405,12 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
         CGRect frame = font.frame;
         frame.origin = CGPointMake(curXLoc, curYLoc);
         font.frame = frame;
-        curXLoc += (fontScrollWidth)+increment;
+        curXLoc += (widthValue)+increment;
         
         if(IS_IPHONE_5){
             if(curXLoc >= 300){
                 curXLoc = 13;
-                curYLoc = curYLoc + fontScrollWidth + 7;
+                curYLoc = curYLoc + widthValue + 7;
             }
         }
         
@@ -447,7 +439,7 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     if(IS_IPHONE_5){
         [layerScrollView setContentSize:CGSizeMake(320, curYLoc)];
     } else {
-        [layerScrollView setContentSize:CGSizeMake((  [fontArray count]*(fontScrollWidth+5)), [layerScrollView bounds].size.height)];
+        [layerScrollView setContentSize:CGSizeMake((  [fontArray count]*(widthValue+5)), [layerScrollView bounds].size.height)];
     }
 
     [layerScrollView flashScrollIndicators];
@@ -486,7 +478,7 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 		UIButton *size = [UIButton buttonWithType:UIButtonTypeCustom];
         [size addTarget:self action:@selector(selectSize:) forControlEvents:UIControlEventTouchUpInside];
 
-		size.frame = CGRectMake(0, 0, sizeScrollWidth, sizeScrollHeight);
+		size.frame = CGRectMake(0, 0, widthValue, heightValue);
 		NSString *sizeValue =SIZE_ARRAY[(i-1)];
 		[size setBackgroundImage:[UIImage imageNamed:@"a_bg"] forState:UIControlStateNormal];
 		[size setTitle:sizeValue forState:UIControlStateNormal];
@@ -498,12 +490,12 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
         CGRect frame = size.frame;
         frame.origin = CGPointMake(curXLoc, curYLoc);
         size.frame = frame;
-        curXLoc += (sizeScrollWidth)+increment;
+        curXLoc += (widthValue)+increment;
         
         if(IS_IPHONE_5){
             if(curXLoc >= 300){
                 curXLoc = 13;
-                curYLoc = curYLoc + sizeScrollHeight + 7;
+                curYLoc = curYLoc + heightValue + 7;
             }
         }
 
@@ -531,7 +523,7 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     if(IS_IPHONE_5){
         [layerScrollView setContentSize:CGSizeMake(320, curYLoc)];
     } else {
-        [layerScrollView setContentSize:CGSizeMake((  [SIZE_ARRAY count]*(sizeScrollWidth+5)), [layerScrollView bounds].size.height)];
+        [layerScrollView setContentSize:CGSizeMake((  [SIZE_ARRAY count]*(widthValue+5)), [layerScrollView bounds].size.height)];
     }
     
     [layerScrollView flashScrollIndicators];
@@ -570,7 +562,7 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 	for (int i = 1; i <=  [colorArray count] ; i++)
 	{
 		UIButton *color = [UIButton buttonWithType:UIButtonTypeCustom];
-		color.frame = CGRectMake(0, 0, colorScrollWidth, colorScrollHeight);
+		color.frame = CGRectMake(0, 0, widthValue, heightValue);
         [color addTarget:self action:@selector(selectColor:) forControlEvents:UIControlEventTouchUpInside];
 
 		id colorName = colorArray[(i-1)];
@@ -584,12 +576,12 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
         CGRect frame = color.frame;
         frame.origin = CGPointMake(curXLoc, curYLoc);
         color.frame = frame;
-        curXLoc += (colorScrollWidth)+increment;
+        curXLoc += (widthValue)+increment;
         
         if(IS_IPHONE_5){
             if(curXLoc >= 300){
                 curXLoc = 13;
-                curYLoc = curYLoc + colorScrollHeight + 7;
+                curYLoc = curYLoc + heightValue + 7;
             }
         }
 
@@ -631,7 +623,7 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     if(IS_IPHONE_5){
         [layerScrollView setContentSize:CGSizeMake(320, curYLoc)];
     } else {
-        [layerScrollView setContentSize:CGSizeMake((  [colorArray count]*(colorScrollWidth+5)), [layerScrollView bounds].size.height)];
+        [layerScrollView setContentSize:CGSizeMake((  [colorArray count]*(widthValue+5)), [layerScrollView bounds].size.height)];
     }
     
     [layerScrollView flashScrollIndicators];
@@ -669,7 +661,7 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 	for (int i = 1; i <=  [borderArray count] ; i++)
 	{
 		UIButton *color = [UIButton buttonWithType:UIButtonTypeCustom];
-		color.frame = CGRectMake(0, 0, borderScrollWidth, borderScrollHeight);
+		color.frame = CGRectMake(0, 0, widthValue, heightValue);
          [color addTarget:self action:@selector(selectFontBorder:) forControlEvents:UIControlEventTouchUpInside];
 		UIColor *colorName =borderArray[(i-1)];
 		UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(color.frame.origin.x, color.frame.origin.y, color.frame.size.width, color.frame.size.height)];
@@ -683,12 +675,12 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
         CGRect frame = color.frame;
         frame.origin = CGPointMake(curXLoc, curYLoc);
         color.frame = frame;
-        curXLoc += (borderScrollWidth)+increment;
+        curXLoc += (widthValue)+increment;
         
         if(IS_IPHONE_5){
             if(curXLoc >= 300){
                 curXLoc = 13;
-                curYLoc = curYLoc + borderScrollHeight + 7;
+                curYLoc = curYLoc + heightValue + 7;
             }
         }
         
@@ -724,7 +716,7 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     if(IS_IPHONE_5){
         [layerScrollView setContentSize:CGSizeMake(320, curYLoc)];
     } else {
-        [layerScrollView setContentSize:CGSizeMake((  [borderArray count]*(borderScrollWidth+5)), [layerScrollView bounds].size.height)];
+        [layerScrollView setContentSize:CGSizeMake((  [borderArray count]*(widthValue+5)), [layerScrollView bounds].size.height)];
     }
     
     [layerScrollView flashScrollIndicators];
@@ -761,7 +753,7 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 	for (int i = 1; i <=  [borderArray count] ; i++)
 	{
 		UIButton *color = [UIButton buttonWithType:UIButtonTypeCustom];
-		color.frame = CGRectMake(0, 0, borderScrollWidth, borderScrollHeight);
+		color.frame = CGRectMake(0, 0, widthValue, heightValue);
         [color addTarget:self action:@selector(selectBorder:) forControlEvents:UIControlEventTouchUpInside];
 		UIColor *colorName =borderArray[(i-1)];
 		UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(color.frame.origin.x, color.frame.origin.y, color.frame.size.width, color.frame.size.height)];
@@ -774,12 +766,12 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
         CGRect frame = color.frame;
         frame.origin = CGPointMake(curXLoc, curYLoc);
         color.frame = frame;
-        curXLoc += (borderScrollWidth)+increment;
+        curXLoc += (widthValue)+increment;
         
         if(IS_IPHONE_5){
             if(curXLoc >= 300){
                 curXLoc = 13;
-                curYLoc = curYLoc + borderScrollHeight + 7;
+                curYLoc = curYLoc + heightValue + 7;
             }
         }
         
@@ -816,7 +808,7 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     if(IS_IPHONE_5){
         [layerScrollView setContentSize:CGSizeMake(320, curYLoc)];
     } else {
-        [layerScrollView setContentSize:CGSizeMake((  [borderArray count]*(borderScrollWidth+5)), [layerScrollView bounds].size.height)];
+        [layerScrollView setContentSize:CGSizeMake((  [borderArray count]*(widthValue+5)), [layerScrollView bounds].size.height)];
     }
     
     [layerScrollView flashScrollIndicators];
