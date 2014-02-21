@@ -41,7 +41,6 @@
 	UIImage *selectedFlyerImage;
 	NSString *selectedFlyerTitle;
 	NSString *selectedFlyerDescription;
-	NSString *detailFileName;
 	NSString *imageFileName;
     FlyerlySingleton *globle;
 
@@ -84,7 +83,6 @@
 @property(nonatomic,strong)UIImage *selectedFlyerImage;
 @property(nonatomic,strong)NSString *selectedFlyerTitle;
 @property(nonatomic,strong)NSString *selectedFlyerDescription;
-@property(nonatomic,strong)NSString *detailFileName;
 @property(nonatomic,strong)NSString *imageFileName;
 @property(nonatomic,weak)FlyrViewController *fvController;
 @property (nonatomic, strong) LoadingView *loadingView;

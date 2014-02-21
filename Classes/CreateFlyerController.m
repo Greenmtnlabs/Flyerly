@@ -2036,7 +2036,6 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
         shareviewcontroller.selectedFlyerImage = shareImage;
         shareviewcontroller.flyer = self.flyer;
         shareviewcontroller.imageFileName = shareImagePath;
-        shareviewcontroller.detailFileName = [finalImgWritePath stringByReplacingOccurrencesOfString:@".jpg" withString:@".txt"];
         shareviewcontroller.titleView.text = [flyer getFlyerTitle];
         shareviewcontroller.descriptionView.text = [flyer getFlyerDescription];
         shareviewcontroller.selectedFlyerDescription = [flyer getFlyerDescription];
