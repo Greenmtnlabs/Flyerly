@@ -38,8 +38,6 @@
     UILabel *takeOrAddPhotoLabel;
     UIScrollView *layerScrollView;
 	
-	UIImage *selectedSymbol;
-	UIImage *selectedIcon;
 	NSInteger selectedSize;
 	id __weak selectedColor;
 	NSInteger selectedWidth;
@@ -112,8 +110,6 @@
 @property (nonatomic, weak) id selectedColor;
 @property (nonatomic, assign) NSInteger selectedSize;
 @property (nonatomic, strong) UIImage *selectedTemplate;
-@property (nonatomic, strong) UIImage *selectedSymbol;
-@property (nonatomic, strong) UIImage *selectedIcon;
 
 @property (nonatomic, strong) UIImage *finalFlyer;
 

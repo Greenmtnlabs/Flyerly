@@ -10,7 +10,7 @@
 @implementation CreateFlyerController
 @synthesize flyimgView,imgView,finalFlyer;
 @synthesize selectedFont,selectedColor;
-@synthesize selectedTemplate,selectedSymbol,selectedIcon;
+@synthesize selectedTemplate;
 @synthesize fontTabButton,colorTabButton,sizeTabButton,fontEditButton,selectedSize,fontBorderTabButton,addMoreIconTabButton,addMorePhotoTabButton,addMoreSymbolTabButton;
 @synthesize textBackgrnd;
 @synthesize cameraTabButton,photoTabButton,widthTabButton,heightTabButton;
