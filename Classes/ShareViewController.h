@@ -48,7 +48,6 @@
 
 }
 
-@property(nonatomic,strong)  NSString *sharelink;
 
 
 @property(nonatomic,strong) IBOutlet UITextView *descriptionView;
