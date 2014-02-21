@@ -41,7 +41,6 @@
 @interface ShareViewController : ParentViewController<UIWebViewDelegate,UIDocumentInteractionControllerDelegate,MFMessageComposeViewControllerDelegate,MFMailComposeViewControllerDelegate,UITextViewDelegate,UITextFieldDelegate, BitlyURLShortenerDelegate,SHKSharerDelegate> {
 
 	UIImage *selectedFlyerImage;
-	NSString *selectedFlyerTitle;
 	NSString *selectedFlyerDescription;
 	NSString *imageFileName;
     FlyerlySingleton *globle;
@@ -78,7 +77,6 @@
 @property(nonatomic,strong) IBOutlet UILabel *topTitleLabel;
 @property (nonatomic, strong) UIDocumentInteractionController *dic;
 @property(nonatomic,strong)UIImage *selectedFlyerImage;
-@property(nonatomic,strong)NSString *selectedFlyerTitle;
 @property(nonatomic,strong)NSString *selectedFlyerDescription;
 @property(nonatomic,strong)NSString *imageFileName;
 @property(nonatomic,weak)FlyrViewController *fvController;
