@@ -33,7 +33,6 @@
 {
    
     FlyerlySingleton *globle;
-
     UILabel *addMoreLayerOrSaveFlyerLabel;
     UILabel *takeOrAddPhotoLabel;
     UIScrollView *layerScrollView;
@@ -72,21 +71,13 @@
 @property (nonatomic, weak) id selectedColor;
 @property (nonatomic, assign) NSInteger selectedSize;
 @property (nonatomic, strong) UIImage *selectedTemplate;
-
 @property (nonatomic,strong) UIAlertView *deleteAlert;
-
-
 @property (nonatomic, assign) NSInteger imgPickerFlag;
 @property (nonatomic, strong) NSString *flyerPath;
-
-
-@property(nonatomic, strong) IBOutlet UIImageView *imgView;
-
 @property(nonatomic, strong) IBOutlet FlyerImageView *flyimgView;
 
-@property(nonatomic, strong) IBOutlet UIView *contextView;
-
 // These are ContextViews Library
+@property(nonatomic, strong) IBOutlet UIView *contextView;
 @property(nonatomic, strong) IBOutlet UIView *libraryContextView;
 @property(nonatomic, strong) IBOutlet UIView *libFlyer;
 @property(nonatomic, strong) IBOutlet UIView *libBackground;
