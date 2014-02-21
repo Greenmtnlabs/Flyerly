@@ -2052,21 +2052,6 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     }
 }
 
-
-
--(void)saveMyFlyer
-{
-	alert = [[UIActionSheet alloc] 
-			 initWithTitle: @"Save The Flyr " 
-			 delegate:self
-			 cancelButtonTitle:@"Cancel"
-			 destructiveButtonTitle:nil
-			 otherButtonTitles:@"Save",@"Save & Distribute",nil];
-	
-	[alert showInView:self.view];
-}
-
-
 -(void)loadDistributeView
 {
 	

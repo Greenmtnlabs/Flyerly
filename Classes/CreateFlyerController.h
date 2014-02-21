@@ -37,13 +37,7 @@
     UILabel *addMoreLayerOrSaveFlyerLabel;
     UILabel *takeOrAddPhotoLabel;
     UIScrollView *layerScrollView;
-	
-	NSInteger selectedSize;
-	id __weak selectedColor;
-	NSInteger selectedWidth;
-	NSInteger selectedHeight;
-	
-	UIActionSheet *alert;
+		
 	UIView *distributeView;
 	UIImage *finalFlyer;
 
@@ -175,7 +169,6 @@
 -(void) callDeleteLayer;
 -(void) choosePhoto;
 -(void) donePhoto;
--(void) saveMyFlyer;
 -(void)share;
 
 -(NSString *)getImagePathByTag :(NSString *)imgName;
