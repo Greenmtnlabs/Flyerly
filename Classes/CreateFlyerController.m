@@ -8,13 +8,13 @@
 #import "CreateFlyerController.h"
 
 @implementation CreateFlyerController
-@synthesize flyimgView,imgView,finalFlyer;
+@synthesize flyimgView,imgView;
 @synthesize selectedFont,selectedColor;
 @synthesize selectedTemplate;
 @synthesize fontTabButton,colorTabButton,sizeTabButton,fontEditButton,selectedSize,fontBorderTabButton,addMoreIconTabButton,addMorePhotoTabButton,addMoreSymbolTabButton;
 @synthesize textBackgrnd;
 @synthesize cameraTabButton,photoTabButton,widthTabButton,heightTabButton;
-@synthesize warningAlert,deleteAlert;
+@synthesize deleteAlert;
 @synthesize  imgPickerFlag, addMoreLayerOrSaveFlyerLabel, takeOrAddPhotoLabel,layerScrollView;
 @synthesize flyerNumber,flyerPath,flyer;
 
@@ -2051,16 +2051,6 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
         
     }
 }
-
--(void)loadDistributeView
-{
-	
-	SaveFlyerController *svController = [[SaveFlyerController alloc]initWithNibName:@"SaveFlyerController" bundle:nil];
-	svController.flyrImg = finalFlyer;
-	svController.ptController = self;
-	[self.navigationController pushViewController:svController animated:YES];
-}
-
 
 
 /*

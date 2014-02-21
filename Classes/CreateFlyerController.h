@@ -37,30 +37,15 @@
     UILabel *addMoreLayerOrSaveFlyerLabel;
     UILabel *takeOrAddPhotoLabel;
     UIScrollView *layerScrollView;
+    NSInteger imgPickerFlag;
 		
-	UIView *distributeView;
-	UIImage *finalFlyer;
-
-
-	 NSInteger imgPickerFlag;
-	
-	UIButton *addMorePhotoTabButton;
-	UIButton *addMoreIconTabButton;
-	UIButton *addMoreSymbolTabButton;
-	UIButton *arrangeLayerTabButton;
-	
 	NSMutableArray *templateArray;
 	NSMutableArray *iconArray;
 	NSMutableArray *symbolArray;
 	NSArray *colorArray;
 	NSArray *borderArray;
 	NSArray *fontArray;
-
-   
-
  
-	UIAlertView *warningAlert ;
-
 	UIAlertView *deleteAlert ;
 
 
@@ -104,10 +89,6 @@
 @property (nonatomic, weak) id selectedColor;
 @property (nonatomic, assign) NSInteger selectedSize;
 @property (nonatomic, strong) UIImage *selectedTemplate;
-
-@property (nonatomic, strong) UIImage *finalFlyer;
-
-@property (nonatomic,strong) UIAlertView *warningAlert;
 
 @property (nonatomic,strong) UIAlertView *deleteAlert;
 
