@@ -21,7 +21,7 @@
 //Version 3 Change
 @synthesize contextView,libraryContextView,libFlyer,backgroundTabButton,addMoreFontTabButton;
 @synthesize libText,libBackground,libPhoto,libEmpty,backtemplates,cameraTakePhoto,cameraRoll,flyerBorder;
-@synthesize textLabelLayersArray,symbolLayersArray,iconLayersArray,photoLayersArray,currentLayer,layersDic;
+@synthesize textLabelLayersArray,symbolLayersArray,iconLayersArray,currentLayer,layersDic;
 
 int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track selected Tab on Add More
 
@@ -196,32 +196,28 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     // Main Scroll Views Initialize
     layerScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,320,130)];
     layersDic = [[NSMutableDictionary alloc] init];
+
     
     //Setting ScrollView
+    /*
     [layerScrollView setCanCancelContentTouches:NO];
     layerScrollView.indicatorStyle = UIScrollViewIndicatorStyleBlack;
     layerScrollView.clipsToBounds = YES;
     layerScrollView.scrollEnabled = YES;
     layerScrollView.pagingEnabled = NO;
-    layerScrollView.showsHorizontalScrollIndicator = NO;
-    layerScrollView.showsVerticalScrollIndicator = NO;
+    layerScrollView.showsHorizontalScrollIndicator = YES;
+    layerScrollView.showsVerticalScrollIndicator = YES;*/
+  
     
     //all Labels Intialize
     //for Using in ContextView
     takeOrAddPhotoLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 5, 310, 43)];
     addMoreLayerOrSaveFlyerLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 5, 310, 63)];
     
-    
-    
-    // Add Templates
-
 	templateArray = [[NSMutableArray alloc]init];
     
 	imgPickerFlag =1;
     selectedAddMoreLayerTab = -1;
-    
-    
-
     
     //Right ShareButton
     shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
@@ -380,6 +376,8 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
         [layerScrollView setContentSize:CGSizeMake(([templateArray count]*(templateScrollWidth+5)), [layerScrollView bounds].size.height)];
     }
     
+    [layerScrollView flashScrollIndicators];
+
 }
 
 /*
@@ -463,7 +461,8 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     } else {
         [layerScrollView setContentSize:CGSizeMake((  [fontArray count]*(fontScrollWidth+5)), [layerScrollView bounds].size.height)];
     }
-    
+
+    [layerScrollView flashScrollIndicators];
 }
 
 /*
@@ -546,6 +545,9 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     } else {
         [layerScrollView setContentSize:CGSizeMake((  [SIZE_ARRAY count]*(sizeScrollWidth+5)), [layerScrollView bounds].size.height)];
     }
+    
+    [layerScrollView flashScrollIndicators];
+
 }
 
 /*
@@ -644,6 +646,7 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
         [layerScrollView setContentSize:CGSizeMake((  [colorArray count]*(colorScrollWidth+5)), [layerScrollView bounds].size.height)];
     }
     
+    [layerScrollView flashScrollIndicators];
 }
 
 /*
@@ -735,6 +738,9 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     } else {
         [layerScrollView setContentSize:CGSizeMake((  [borderArray count]*(borderScrollWidth+5)), [layerScrollView bounds].size.height)];
     }
+    
+    [layerScrollView flashScrollIndicators];
+
 }
 
 /*
@@ -824,6 +830,9 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     } else {
         [layerScrollView setContentSize:CGSizeMake((  [borderArray count]*(borderScrollWidth+5)), [layerScrollView bounds].size.height)];
     }
+    
+    [layerScrollView flashScrollIndicators];
+
 }
 /*
  * Add flyer Symbols in scroll views
@@ -899,6 +908,9 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     } else {
         [layerScrollView setContentSize:CGSizeMake(([symbolArray count]*(symbolScrollWidth+5)), [layerScrollView bounds].size.height)];
     }
+    
+    [layerScrollView flashScrollIndicators];
+
 
 }
 
@@ -978,6 +990,9 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     } else {
         [layerScrollView setContentSize:CGSizeMake(([iconArray count]*(iconScrollWidth+5)), [layerScrollView bounds].size.height)];
     }
+    
+    [layerScrollView flashScrollIndicators];
+
 }
 
 
@@ -1990,8 +2005,14 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     //Here we Set Undo Bar Button Status
     [self setUndoStatus];
     
-    //Here we Add All Generated Layers add into ScrollView
-    [self addAllLayersIntoScrollView ];
+    // Here we Start Animation
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.4f];
+        //Here we Add All Generated Layers add into ScrollView
+        [self addAllLayersIntoScrollView ];
+    [UIView commitAnimations];
+    //End Animation
+    
     
     currentLayer = @"";
    
@@ -2003,13 +2024,15 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     float xValue = sharePanel.frame.origin.x;
     
     if (xValue == 30) {
+        
+        [shareviewcontroller.titleView resignFirstResponder];
+        [shareviewcontroller.descriptionView resignFirstResponder];
+
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0.4f];
         [sharePanel setFrame:CGRectMake(320, 64, 290,480 )];
         
         [UIView commitAnimations];
-        [shareviewcontroller.titleView resignFirstResponder];
-        [shareviewcontroller.descriptionView resignFirstResponder];
   
         [shareButton setBackgroundImage:[UIImage imageNamed:@"share_button"] forState:UIControlStateNormal];
 
@@ -2088,8 +2111,13 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 	if(selectedButton == fontTabButton)
 	{
         
-        //Create ScrollView
-        [self addFontsInSubView ];
+        // Here we Start Animation
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:0.4f];
+            //Create ScrollView
+            [self addFontsInSubView ];
+        [UIView commitAnimations];
+		//End Animation
         
          //Add ContextView
         [self addScrollView:layerScrollView];
@@ -2098,9 +2126,14 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 	}
 	else if(selectedButton == colorTabButton)
 	{
-       
-        //Create ScrollView
-        [self addColorsInSubView];
+        // Here we Start Animation
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:0.4f];
+            //Create ScrollView
+            [self addColorsInSubView];
+        [UIView commitAnimations];
+		//End Animation
+        
         
         //Add ContextView
         [self addScrollView:layerScrollView];
@@ -2109,9 +2142,15 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 	}
 	else if(selectedButton == sizeTabButton)
 	{
-        //Create ScrollView
-        [self   addSizeInSubView];
 
+        // Here we Start Animation
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:0.4f];
+            //Create ScrollView
+            [self addSizeInSubView];
+        [UIView commitAnimations];
+		//End Animation
+        
         //Add ContextView
         [self addScrollView:layerScrollView];
         
@@ -2120,8 +2159,13 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 	else if(selectedButton == fontBorderTabButton)
 	{
         
-        //Create ScrollView
-        [self addTextBorderInSubView];
+        // Here we Start Animation
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:0.4f];
+            //Create ScrollView
+            [self addTextBorderInSubView];
+        [UIView commitAnimations];
+		//End Animation
         
         //Add ContextView
         [self addScrollView:layerScrollView];
@@ -2154,9 +2198,15 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     if( selectedButton == backtemplates )
 	{
         [backtemplates setBackgroundImage:[UIImage imageNamed:@"addbg_library_selected"] forState:UIControlStateNormal];
+        
+        // Here we Start Animation
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:0.4f];
+            //Create ScrollView
+            [self addTemplatesInSubView];
+        [UIView commitAnimations];
+		//End Animation
 
-        //Create ScrollView
-        [self addTemplatesInSubView];
         
         //Add ContextView
         [self addScrollView:layerScrollView];
@@ -2176,8 +2226,14 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     {
         [flyerBorder setSelected:YES];
         
-        //Create ScrollView
-        [self addFlyerBorderInSubView];
+        // Here we Start Animation
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:0.4f];
+            //Create ScrollView
+            [self addFlyerBorderInSubView];
+        [UIView commitAnimations];
+		//End Animation
+        
         
         //Add ContextView
         [self addScrollView:layerScrollView];
@@ -2293,8 +2349,9 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
         //Here we Highlight The ImageView
         [self.flyimgView layerIsBeingEdited:currentLayer];
         
-        
+        //Here we Add Some Text In ScrolView
         [self addScrollView:takeOrAddPhotoLabel];
+	    
         [self choosePhoto];
 		imgPickerFlag =2;
         [addMorePhotoTabButton setSelected:YES];
@@ -2312,9 +2369,12 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
         [addMoreSymbolTabButton setSelected:YES];
         [self addDonetoRightBarBotton];
         
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:0.4f];
+            //Create ScrollView
+            [self addFlyerIconInSubView];
+        [UIView commitAnimations];
         
-        //Create ScrollView
-        [self addFlyerIconInSubView];
 
         //Add Context
         [self addScrollView:layerScrollView];
@@ -2336,8 +2396,12 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
         //Add right Bar button
         [self addDonetoRightBarBotton];
         
-        //Create ScrollView
-        [self addSymbolsInSubView];
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:0.4f];
+            //Create ScrollView
+            [self addSymbolsInSubView];
+        [UIView commitAnimations];
+
         
         //Add ContextView
         [self addScrollView:layerScrollView];
@@ -2425,16 +2489,6 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 
 
 
--(NSMutableArray *)photoLayersArray{
-    
-    if(photoLayersArray){
-        return photoLayersArray;
-    } else {
-        
-        photoLayersArray = [[NSMutableArray alloc] init];
-        return photoLayersArray;
-    }
-}
 
 -(NSMutableArray *)symbolLayersArray{
 
@@ -2676,11 +2730,8 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
         [v removeFromSuperview];
     }
     
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.4f];
-        //Add ScrollViews
-        [self.contextView addSubview:obj];
-    [UIView commitAnimations];
+    //Add ScrollViews
+    [self.contextView addSubview:obj];
 
 }
 
@@ -2695,11 +2746,8 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
         [v removeFromSuperview];
     }
     
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.4f];
-        //Add ScrollViews
-        [self.libraryContextView addSubview:obj];
-    [UIView commitAnimations];
+    //Add ScrollViews
+    [self.libraryContextView addSubview:obj];
 }
 
 
