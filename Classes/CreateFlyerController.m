@@ -1631,6 +1631,7 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
         
         lastTextView = [[UITextView  alloc] init];
         lastTextView.text = btnText;
+        lastTextView.accessibilityLabel = @"TextInput";
         
         //For Immediate Showing Delete button
         [self callStyle];
@@ -1721,9 +1722,10 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     
     // Prepare a new text layer.
     lastTextView = [[UITextView alloc] initWithFrame:CGRectMake([[detail valueForKey:@"x"] floatValue], [[detail valueForKey:@"y"] floatValue], [[detail valueForKey:@"width"] floatValue], [[detail valueForKey:@"height"] floatValue])];
-    
+    lastTextView.accessibilityLabel = @"TextInput";
     // Set the text.
     lastTextView.text = [detail valueForKey:@"text"];
+    
     
     // Set the font.
     lastTextView.font = [UIFont fontWithName:[detail valueForKey:@"fontname"] size:[[detail valueForKey:@"fontsize"] floatValue]];
