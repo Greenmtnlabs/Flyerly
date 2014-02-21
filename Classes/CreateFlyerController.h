@@ -56,7 +56,7 @@
     FlyerImageView *flyerImageView;
     
     UITextView *lastTextView;
-    UIView *sharePanel;
+
     UIButton *shareButton;
     ShareViewController *shareviewcontroller;
     UILabel *titleLabel;
@@ -75,6 +75,7 @@
 @property (nonatomic, assign) NSInteger imgPickerFlag;
 @property (nonatomic, strong) NSString *flyerPath;
 @property(nonatomic, strong) IBOutlet FlyerImageView *flyimgView;
+@property (nonatomic, strong) UIView *sharePanel;
 
 // These are ContextViews Library
 @property(nonatomic, strong) IBOutlet UIView *contextView;

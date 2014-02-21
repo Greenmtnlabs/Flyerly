@@ -23,7 +23,6 @@
 #import "ParentViewController.h"
 #import "FlyrViewController.h"
 #import "Common.h"
-#import "LoadingView.h"
 #import "JSON.h"
 #import "Flurry.h"
 #import "HelpController.h"
@@ -32,19 +31,16 @@
 
 
 @class FlyrViewController,FlyerlySingleton;
-@class CreateFlyerController;
-@class LoadingView;
 @class SHKSharer;
 @class SHKActivityIndicator;
 
-@interface ShareViewController : ParentViewController<UIWebViewDelegate,UIDocumentInteractionControllerDelegate,MFMessageComposeViewControllerDelegate,MFMailComposeViewControllerDelegate,UITextViewDelegate,UITextFieldDelegate, SHKSharerDelegate> {
+@interface ShareViewController : UIViewController<UIWebViewDelegate,UIDocumentInteractionControllerDelegate,UITextViewDelegate,UITextFieldDelegate, SHKSharerDelegate> {
 
     FlyerlySingleton *globle;
     NSArray *arrayOfAccounts;
     SHKSharer *iosSharer;
 
 }
-
 
 
 @property(nonatomic,strong) IBOutlet UITextView *descriptionView;
@@ -79,10 +75,6 @@
 
 
 -(void)shareOnInstagram;
-
--(void)shareOnEmail:(NSString *)link;
--(void)shortenURL:(NSString *)url;
 -(void)setSocialStatus;
-
 
 @end

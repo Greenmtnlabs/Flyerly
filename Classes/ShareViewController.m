@@ -14,130 +14,10 @@
 @synthesize selectedFlyerImage,fvController,titleView,descriptionView,selectedFlyerDescription,  imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,dicController, clipboardlabel,flyer,topTitleLabel,delegate,activityIndicator;
 
 
-#pragma mark - Sharer Response
-
-// These are used if you do not provide your own custom UI and delegate
-- (void)sharerStartedSending:(SHKSharer *)sharer
-{
-    
-	if (!sharer.quiet)
-		[[SHKActivityIndicator currentIndicator] displayActivity:SHKLocalizedString(@"Saving to %@", [[sharer class] sharerTitle]) forSharer:sharer];
-}
-
-- (void)sharerFinishedSending:(SHKSharer *)sharer
-{
-    
-    // Here we Check Sharer for
-    // Update Flyer Share Info in Social File
-    if ( [sharer isKindOfClass:[SHKFacebook class]] == YES ) {
-        
-        [self.flyer setFacebookStatus:1];
-
-    } else if ( [sharer isKindOfClass:[SHKTwitter class]] == YES ) {
-        
-        [self.flyer setTwitterStatus:1];
-    
-    } else if ( [sharer isKindOfClass:[SHKTumblr class]] == YES ) {
-        
-        [self.flyer setThumblerStatus:1];
-    
-    } else if ( [sharer isKindOfClass:[SHKFlickr class]] == YES ) {
-        
-        [self.flyer setFlickerStatus:1];
-    
-    } else if ( [sharer isKindOfClass:[SHKMail class]] == YES ) {
-        
-        [self.flyer setEmailStatus:1];
-    } else if ( [sharer isKindOfClass:[SHKTextMessage class]] == YES ) {
-        
-        [self.flyer setSmsStatus:1];
-    }
-    
-    [self setSocialStatus];
-    
-    
-    if (!sharer.quiet)
-		[[SHKActivityIndicator currentIndicator] displayCompleted:SHKLocalizedString(@"Saved!")];
-}
-
-- (void)sharer:(SHKSharer *)sharer failedWithError:(NSError *)error shouldRelogin:(BOOL)shouldRelogin
-{
-    
-    [[SHKActivityIndicator currentIndicator] hide];
-    /*
-    //if user sent the item already but needs to relogin we do not show alert
-    if (!sharer.quiet && sharer.pendingAction != SHKPendingShare && sharer.pendingAction != SHKPendingSend)
-	{
-		[[[UIAlertView alloc] initWithTitle:SHKLocalizedString(@"Error")
-                                    message:sharer.lastError!=nil?[sharer.lastError localizedDescription]:SHKLocalizedString(@"There was an error while sharing")
-                                   delegate:nil
-                          cancelButtonTitle:SHKLocalizedString(@"Close")
-                          otherButtonTitles:nil] show];
-    }		
-    if (shouldRelogin) {        
-        [sharer promptAuthorization];*/
-	
-}
-
-- (void)sharerCancelledSending:(SHKSharer *)sharer
-{
-    NSLog(@"");
-}
-
-- (void)sharerShowBadCredentialsAlert:(SHKSharer *)sharer
-{
-    NSString *errorMessage = SHKLocalizedString(@"Sorry, %@ did not accept your credentials. Please try again.", [[sharer class] sharerTitle]);
-    
-    [[[UIAlertView alloc] initWithTitle:SHKLocalizedString(@"Login Error")
-                                message:errorMessage
-                               delegate:nil
-                      cancelButtonTitle:SHKLocalizedString(@"Close")
-                      otherButtonTitles:nil] show];
-}
-
-- (void)sharerShowOtherAuthorizationErrorAlert:(SHKSharer *)sharer
-{
-    NSString *errorMessage = SHKLocalizedString(@"Sorry, %@ encountered an error. Please try again.", [[sharer class] sharerTitle]);
-    
-    [[[UIAlertView alloc] initWithTitle:SHKLocalizedString(@"Login Error")
-                                message:errorMessage
-                               delegate:nil
-                      cancelButtonTitle:SHKLocalizedString(@"Close")
-                      otherButtonTitles:nil] show];
-}
-
-- (void)hideActivityIndicatorForSharer:(SHKSharer *)sharer {
-    
-    [self.activityIndicator hideForSharer:sharer];
-}
-
-- (void)displayActivity:(NSString *)activityDescription forSharer:(SHKSharer *)sharer {
-    
-    
-//    if (sharer.quiet) return;
-
-
-    [self.activityIndicator displayActivity:activityDescription forSharer:sharer];
-}
-
-- (void)displayCompleted:(NSString *)completionText forSharer:(SHKSharer *)sharer {
-    
-    if (sharer.quiet) return;
-    [self.activityIndicator displayCompleted:completionText forSharer:sharer];
-}
-
-- (void)showProgress:(CGFloat)progress forSharer:(SHKSharer *)sharer {
-    
-    if (sharer.quiet) return;
-    [self.activityIndicator showProgress:progress forSharer:sharer];
-}
-
-
-
+#pragma mark  View Appear Methods
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     
     globle = [FlyerlySingleton RetrieveSingleton];
     globle.NBUimage = nil;
@@ -175,6 +55,11 @@
 }
 
 
+#pragma mark  Custom Methods
+
+/*
+ *Here we Load Help Screen
+ */
 -(void)loadHelpController{
     
     HelpController *helpController = [[HelpController alloc]initWithNibName:@"HelpController" bundle:nil];
@@ -182,8 +67,175 @@
 }
 
 
+/*
+ * Share on Instagram
+ */
+-(void)shareOnInstagram{
+    
+    CGRect rect = CGRectMake(0 ,0 , 0, 0);
+    UIGraphicsBeginImageContextWithOptions(self.view.bounds.size, self.view.opaque, 0.0);
+    [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIGraphicsEndImageContext();
+    
+    
+    UIImage *originalImage = [UIImage imageWithContentsOfFile:imageFileName];
+    
+    NSString  *updatedImagePath = [imageFileName stringByReplacingOccurrencesOfString:@".jpg" withString:@".igo"];
+    NSData *imgData = UIImagePNGRepresentation(originalImage);
+    [[NSFileManager defaultManager] createFileAtPath:updatedImagePath contents:imgData attributes:nil];
+    
+    NSURL *igImageHookFile = [NSURL fileURLWithPath:updatedImagePath];
+    
+    self.dicController=[UIDocumentInteractionController interactionControllerWithURL:igImageHookFile];
+    self.dicController.UTI = @"com.instagram.photo";
+    self.dicController.annotation = @{@"InstagramCaption": [NSString stringWithFormat:@"%@ %@", self.titleView.text,descriptionView.text]};
+    
+    
+    
+    BOOL displayed = [self.dicController presentOpenInMenuFromRect:rect inView: self.view animated:YES];
+    
+    
+    
+    
+    if(!displayed){
+        [self showAlert:@"Warning!" message:@"Please install Instagram app to share."];
+        [instagramButton setSelected:NO];
+    }else {
+        // Update Flyer Share Info in Social File
+        [self.flyer setInstagaramStatus:1];
+    }
+}
 
-#pragma text field and text view delegates
+
+/*
+ * Check whether instagram app is installed or not
+ */
+-(BOOL)canOpenDocumentWithURL:(NSURL*)url inView:(UIView*)view {
+    BOOL canOpen = NO;
+    UIDocumentInteractionController* docController = [UIDocumentInteractionController
+                                                      interactionControllerWithURL:url];
+    if (docController)
+    {
+        docController.delegate = self;
+        canOpen = [docController presentOpenInMenuFromRect:CGRectZero
+                                                    inView:self.view animated:NO];
+        [docController dismissMenuAnimated:NO];
+    }
+    return canOpen;
+}
+
+
+
+- (UIDocumentInteractionController *) setupControllerWithURL: (NSURL*) fileURL usingDelegate: (id <UIDocumentInteractionControllerDelegate>) interactionDelegate {
+    UIDocumentInteractionController *interactionController = [UIDocumentInteractionController interactionControllerWithURL: fileURL];
+    interactionController.delegate = interactionDelegate;
+    return interactionController;
+}
+
+-(void)callFlyrView{
+	[self.navigationController popToViewController:fvController animated:YES];
+}
+
+
+
+/*
+ * Here we set all Social Button Select or Un-Select
+ */
+-(void)setSocialStatus {
+    
+    // Set facebook Sharing Status From Social File
+    NSString *status = [flyer getFacebookStatus];
+    if([status isEqualToString:@"1"]){
+        [facebookButton setSelected:YES];
+    }else{
+        [facebookButton setSelected:NO];
+    }
+    
+    // Set Twitter Sharing Status From Social File
+    status = [flyer getTwitterStatus];
+    if([status isEqualToString:@"1"]){
+        [twitterButton setSelected:YES];
+    }else{
+        [twitterButton setSelected:NO];
+    }
+    
+    // Set Instagram Sharing Status From Social File
+    status = [flyer getInstagaramStatus];
+    if([status isEqualToString:@"1"]){
+        [instagramButton setSelected:YES];
+    }else{
+        [instagramButton setSelected:NO];
+    }
+    
+    // Set Email Sharing Status From Social File
+    status = [flyer getEmailStatus];
+    if([status isEqualToString:@"1"]){
+        [emailButton setSelected:YES];
+    }else{
+        [emailButton setSelected:NO];
+    }
+    
+    
+    
+    BOOL MsgStatus = [MFMessageComposeViewController respondsToSelector:@selector(canSendAttachments)];
+    
+    if (MsgStatus) {
+        
+        // Set Sms Sharing Status From Social File
+        if([MFMessageComposeViewController canSendAttachments])
+        {
+            [smsButton setEnabled:YES];
+            
+            status = [flyer getTwitterStatus];
+            if([status isEqualToString:@"1"]){
+                [smsButton setSelected:YES];
+            }else {
+                [smsButton setSelected:NO];
+            }
+            
+        }
+    }
+    
+    
+    // Set Clipboard Sharing Status From Social File
+    status = [flyer getClipboardStatus];
+    if([status isEqualToString:@"1"]){
+        [clipboardButton setSelected:YES];
+    }else{
+        [clipboardButton setSelected:NO];
+    }
+    
+    // Set Thumbler Sharing Status From Social File
+    status = [flyer getThumblerStatus];
+    if([status isEqualToString:@"1"]){
+        [tumblrButton setSelected:YES];
+    }else{
+        [tumblrButton setSelected:NO];
+    }
+    
+    // Set Flicker Sharing Status From Social File
+    status = [flyer getFlickerStatus];
+    if([status isEqualToString:@"1"]){
+        [flickrButton setSelected:YES];
+    }else{
+        [flickrButton setSelected:NO];
+    }
+    
+    
+}
+
+
+-(void)showAlert:(NSString *)title message:(NSString *)message{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+                                                    message:message
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+}
+
+
+#pragma mark  Text Field Delegate
 
 - (BOOL) textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     
@@ -256,6 +308,7 @@
     }
 }
 
+#pragma mark Social Network
 
 /*
  * Called when facebook button is pressed
@@ -455,84 +508,6 @@
 }
 
 
--(void)showAlert:(NSString *)title message:(NSString *)message{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
-                                                    message:message
-                                                   delegate:nil
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
-    [alert show];
-}
-
-
-#pragma Sharing code
-
-/*
- * Share on Instagram
- */
--(void)shareOnInstagram{
-
-     CGRect rect = CGRectMake(0 ,0 , 0, 0);
-     UIGraphicsBeginImageContextWithOptions(self.view.bounds.size, self.view.opaque, 0.0);
-     [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
-     UIGraphicsEndImageContext();
-    
-    
-     UIImage *originalImage = [UIImage imageWithContentsOfFile:imageFileName];
-    
-     NSString  *updatedImagePath = [imageFileName stringByReplacingOccurrencesOfString:@".jpg" withString:@".igo"];
-     NSData *imgData = UIImagePNGRepresentation(originalImage);
-     [[NSFileManager defaultManager] createFileAtPath:updatedImagePath contents:imgData attributes:nil];
-     
-     NSURL *igImageHookFile = [NSURL fileURLWithPath:updatedImagePath];
-    
-     self.dicController=[UIDocumentInteractionController interactionControllerWithURL:igImageHookFile];
-     self.dicController.UTI = @"com.instagram.photo";
-     self.dicController.annotation = @{@"InstagramCaption": [NSString stringWithFormat:@"%@ %@", self.titleView.text,descriptionView.text]};
-    
-    
-
-    BOOL displayed = [self.dicController presentOpenInMenuFromRect:rect inView: self.view animated:YES];
-    
-
-
-    
-    if(!displayed){
-        [self showAlert:@"Warning!" message:@"Please install Instagram app to share."];
-        [instagramButton setSelected:NO];
-    }else {
-        // Update Flyer Share Info in Social File
-        [self.flyer setInstagaramStatus:1];
-    }
-}
-
-
-/*
- * Check whether instagram app is installed or not
- */
--(BOOL)canOpenDocumentWithURL:(NSURL*)url inView:(UIView*)view {
-    BOOL canOpen = NO;
-    UIDocumentInteractionController* docController = [UIDocumentInteractionController
-                                                      interactionControllerWithURL:url];
-    if (docController)
-    {
-        docController.delegate = self;
-        canOpen = [docController presentOpenInMenuFromRect:CGRectZero
-                                                    inView:self.view animated:NO];
-        [docController dismissMenuAnimated:NO];
-    }
-    return canOpen;
-}
-
-
-
-- (UIDocumentInteractionController *) setupControllerWithURL: (NSURL*) fileURL usingDelegate: (id <UIDocumentInteractionControllerDelegate>) interactionDelegate {
-    UIDocumentInteractionController *interactionController = [UIDocumentInteractionController interactionControllerWithURL: fileURL];
-    interactionController.delegate = interactionDelegate;
-    return interactionController;
-}
-
-
 
 #pragma Request receive code
 
@@ -544,129 +519,109 @@
 }
 
 
-- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
-	switch (result) {
-		case MFMailComposeResultCancelled:
-			break;
-		case MFMailComposeResultSaved:
-			break;
-		case MFMailComposeResultSent:
-            NSLog(@"Sent");
-			break;
-		case MFMailComposeResultFailed:
-			break;
-	}
+#pragma mark - All Shared Response
 
-    [controller dismissViewControllerAnimated:YES completion:nil];
-
+// These are used if you do not provide your own custom UI and delegate
+- (void)sharerStartedSending:(SHKSharer *)sharer
+{
+    
+	if (!sharer.quiet)
+		[[SHKActivityIndicator currentIndicator] displayActivity:SHKLocalizedString(@"Saving to %@", [[sharer class] sharerTitle]) forSharer:sharer];
 }
 
--(void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result{
-	switch (result) {
-		case MessageComposeResultCancelled:
-			break;
-		case MessageComposeResultSent:
-            
-            NSLog(@"Sent");
-			break;
-		case MessageComposeResultFailed:
-			break;
-	}
+- (void)sharerFinishedSending:(SHKSharer *)sharer
+{
     
-    [controller dismissViewControllerAnimated:YES completion:nil];
-    
+    // Here we Check Sharer for
+    // Update Flyer Share Info in Social File
+    if ( [sharer isKindOfClass:[SHKFacebook class]] == YES ) {
+        
+        [self.flyer setFacebookStatus:1];
+        
+    } else if ( [sharer isKindOfClass:[SHKTwitter class]] == YES ) {
+        
+        [self.flyer setTwitterStatus:1];
+        
+    } else if ( [sharer isKindOfClass:[SHKTumblr class]] == YES ) {
+        
+        [self.flyer setThumblerStatus:1];
+        
+    } else if ( [sharer isKindOfClass:[SHKFlickr class]] == YES ) {
+        
+        [self.flyer setFlickerStatus:1];
+        
+    } else if ( [sharer isKindOfClass:[SHKMail class]] == YES ) {
+        
+        [self.flyer setEmailStatus:1];
+    } else if ( [sharer isKindOfClass:[SHKTextMessage class]] == YES ) {
+        
+        [self.flyer setSmsStatus:1];
     }
-
-
-
--(void)callFlyrView{
-	[self.navigationController popToViewController:fvController animated:YES];
+    
+    [self setSocialStatus];
+    
+    
+    if (!sharer.quiet)
+		[[SHKActivityIndicator currentIndicator] displayCompleted:SHKLocalizedString(@"Saved!")];
 }
 
-
-
-
--(void)setSocialStatus {
-
-    // Set facebook Sharing Status From Social File
-    NSString *status = [flyer getFacebookStatus];
-    if([status isEqualToString:@"1"]){
-        [facebookButton setSelected:YES];
-    }else{
-        [facebookButton setSelected:NO];
-    }
+- (void)sharer:(SHKSharer *)sharer failedWithError:(NSError *)error shouldRelogin:(BOOL)shouldRelogin
+{
     
-    // Set Twitter Sharing Status From Social File
-    status = [flyer getTwitterStatus];
-    if([status isEqualToString:@"1"]){
-        [twitterButton setSelected:YES];
-    }else{
-        [twitterButton setSelected:NO];
-    }
-    
-    // Set Instagram Sharing Status From Social File
-    status = [flyer getInstagaramStatus];
-    if([status isEqualToString:@"1"]){
-        [instagramButton setSelected:YES];
-    }else{
-        [instagramButton setSelected:NO];
-    }
-    
-    // Set Email Sharing Status From Social File
-    status = [flyer getEmailStatus];
-    if([status isEqualToString:@"1"]){
-        [emailButton setSelected:YES];
-    }else{
-        [emailButton setSelected:NO];
-    }
-    
-    
-    
-    BOOL MsgStatus = [MFMessageComposeViewController respondsToSelector:@selector(canSendAttachments)];
-    
-    if (MsgStatus) {
-        
-        // Set Sms Sharing Status From Social File
-        if([MFMessageComposeViewController canSendAttachments])
-        {
-            [smsButton setEnabled:YES];
-        
-            status = [flyer getTwitterStatus];
-            if([status isEqualToString:@"1"]){
-                [smsButton setSelected:YES];
-            }else {
-                [smsButton setSelected:NO];
-            }
-        
-        }
-    }
-    
-    
-    // Set Clipboard Sharing Status From Social File
-    status = [flyer getClipboardStatus];
-    if([status isEqualToString:@"1"]){
-        [clipboardButton setSelected:YES];        
-    }else{
-        [clipboardButton setSelected:NO];
-    }
-    
-    // Set Thumbler Sharing Status From Social File
-    status = [flyer getThumblerStatus];
-    if([status isEqualToString:@"1"]){
-        [tumblrButton setSelected:YES];
-    }else{
-        [tumblrButton setSelected:NO];
-    }
-    
-    // Set Flicker Sharing Status From Social File
-    status = [flyer getFlickerStatus];
-    if([status isEqualToString:@"1"]){
-        [flickrButton setSelected:YES];
-    }else{
-        [flickrButton setSelected:NO];
-    }
-
-
+    [[SHKActivityIndicator currentIndicator] hide];
+	NSLog(@"Sharing Error");
 }
+
+- (void)sharerCancelledSending:(SHKSharer *)sharer
+{
+    NSLog(@"");
+}
+
+- (void)sharerShowBadCredentialsAlert:(SHKSharer *)sharer
+{
+    NSString *errorMessage = SHKLocalizedString(@"Sorry, %@ did not accept your credentials. Please try again.", [[sharer class] sharerTitle]);
+    
+    [[[UIAlertView alloc] initWithTitle:SHKLocalizedString(@"Login Error")
+                                message:errorMessage
+                               delegate:nil
+                      cancelButtonTitle:SHKLocalizedString(@"Close")
+                      otherButtonTitles:nil] show];
+}
+
+- (void)sharerShowOtherAuthorizationErrorAlert:(SHKSharer *)sharer
+{
+    NSString *errorMessage = SHKLocalizedString(@"Sorry, %@ encountered an error. Please try again.", [[sharer class] sharerTitle]);
+    
+    [[[UIAlertView alloc] initWithTitle:SHKLocalizedString(@"Login Error")
+                                message:errorMessage
+                               delegate:nil
+                      cancelButtonTitle:SHKLocalizedString(@"Close")
+                      otherButtonTitles:nil] show];
+}
+
+- (void)hideActivityIndicatorForSharer:(SHKSharer *)sharer {
+    
+    [self.activityIndicator hideForSharer:sharer];
+}
+
+- (void)displayActivity:(NSString *)activityDescription forSharer:(SHKSharer *)sharer {
+    
+    if (sharer.quiet) return;
+    
+    [self.activityIndicator displayActivity:activityDescription forSharer:sharer];
+}
+
+- (void)displayCompleted:(NSString *)completionText forSharer:(SHKSharer *)sharer {
+    
+    if (sharer.quiet) return;
+    [self.activityIndicator displayCompleted:completionText forSharer:sharer];
+}
+
+- (void)showProgress:(CGFloat)progress forSharer:(SHKSharer *)sharer {
+    
+    if (sharer.quiet) return;
+    [self.activityIndicator showProgress:progress forSharer:sharer];
+}
+
 
 @end

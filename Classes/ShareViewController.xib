@@ -13,7 +13,6 @@
                 <outlet property="facebookButton" destination="11" id="23"/>
                 <outlet property="flickrButton" destination="13" id="25"/>
                 <outlet property="instagramButton" destination="17" id="30"/>
-                <outlet property="networkParentView" destination="59" id="63"/>
                 <outlet property="smsButton" destination="14" id="26"/>
                 <outlet property="titleView" destination="7" id="21"/>
                 <outlet property="tumblrButton" destination="16" id="29"/>
