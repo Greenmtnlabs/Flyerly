@@ -12,7 +12,7 @@
 @synthesize selectedFont,selectedColor;
 @synthesize selectedTemplate,selectedSymbol,selectedIcon;
 @synthesize fontTabButton,colorTabButton,sizeTabButton,fontEditButton,selectedText,selectedSize,fontBorderTabButton,addMoreIconTabButton,addMorePhotoTabButton,addMoreSymbolTabButton;
-@synthesize templateBckgrnd,textBackgrnd;
+@synthesize textBackgrnd;
 @synthesize cameraTabButton,photoTabButton,widthTabButton,heightTabButton,photoImgView,symbolImgView,iconImgView;
 @synthesize warningAlert,deleteAlert;
 @synthesize  imgPickerFlag,finalImgWritePath, addMoreLayerOrSaveFlyerLabel, takeOrAddPhotoLabel,layerScrollView;
@@ -189,9 +189,6 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     //layerTile Button
     editButtonGlobal = [[LayerTileButton alloc]init];
     editButtonGlobal.uid = @"";
-    
-    // Create Main Image View
-    templateBckgrnd = [[UIImageView alloc]initWithFrame:CGRectMake(0, 413, 320, 135)];
     
     // Main Scroll Views Initialize
     layerScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,320,130)];

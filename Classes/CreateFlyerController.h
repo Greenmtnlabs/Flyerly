@@ -34,7 +34,6 @@
    
     FlyerlySingleton *globle;
 
-	UIImageView *templateBckgrnd;
 	UIImageView *textBackgrnd;
 	UIImageView *photoImgView;
 	UIImageView *symbolImgView;
@@ -120,7 +119,6 @@
 @property (nonatomic,strong)  UIImageView *photoImgView;
 @property(nonatomic, strong)  UIImageView *symbolImgView;
 @property(nonatomic, strong)  UIImageView *iconImgView;
-@property (nonatomic, strong) UIImageView *templateBckgrnd;
 @property (nonatomic, strong) UIImageView *textBackgrnd;
 
 @property (nonatomic,strong)  UILabel *addMoreLayerOrSaveFlyerLabel;
