@@ -118,7 +118,6 @@
 }
 
 @property(nonatomic, strong) NSMutableArray *textLabelLayersArray;
-@property(nonatomic, strong) NSMutableArray *symbolLayersArray;
 
 
 

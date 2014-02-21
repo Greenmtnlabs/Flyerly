@@ -21,7 +21,7 @@
 //Version 3 Change
 @synthesize contextView,libraryContextView,libFlyer,backgroundTabButton,addMoreFontTabButton;
 @synthesize libText,libBackground,libPhoto,libEmpty,backtemplates,cameraTakePhoto,cameraRoll,flyerBorder;
-@synthesize textLabelLayersArray,symbolLayersArray,currentLayer,layersDic;
+@synthesize textLabelLayersArray,currentLayer,layersDic;
 
 int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track selected Tab on Add More
 
@@ -2486,23 +2486,6 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     //Set Main View On Screen
     [self callAddMoreLayers];
 }
-
-
-
-
--(NSMutableArray *)symbolLayersArray{
-
-    if(symbolLayersArray){
-        return symbolLayersArray;
-    } else {
-    
-        symbolLayersArray = [[NSMutableArray alloc] init];
-        //[symbolLayersArray addObject:symbolImgView];
-        return symbolLayersArray;
-    }
-}
-
-
 
 
 
