@@ -2032,7 +2032,6 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
         [shareButton setBackgroundImage:[UIImage imageNamed:@"share_button_selected"] forState:UIControlStateNormal];
         NSString *shareImagePath = [flyer getImageForShare];
         UIImage *shareImage =  [UIImage imageWithContentsOfFile:shareImagePath];
-        //[self getCurrentFrameAndSaveIt];
 
         shareviewcontroller.selectedFlyerImage = shareImage;
         shareviewcontroller.flyer = self.flyer;
@@ -2476,111 +2475,6 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 }
 
 
-
-#pragma mark Save Flyer image and write to Documents/Flyr folder
-
--(NSData*)getCurrentFrameAndSaveIt
-{
-    return nil;//Temporary
-	CGSize size = CGSizeMake(self.imgView.bounds.size.width,self.imgView.bounds.size.height );
-    //if ([UIScreen instancesRespondToSelector:@selector(scale)]) {
-        //UIGraphicsBeginImageContextWithOptions(size, NO, 2.0);
-        UIGraphicsBeginImageContextWithOptions(size, NO, 2.0);
-    //} else {
-    //    UIGraphicsBeginImageContext(size);
-    //}
-	[self.imgView.layer renderInContext:UIGraphicsGetCurrentContext()];
-	UIImage *screenImage = UIGraphicsGetImageFromCurrentImageContext();
-	UIGraphicsEndImageContext();
-
-
-    PFUser *user = [PFUser currentUser];
-    
-	NSString *homeDirectoryPath = NSHomeDirectory();
-	NSString *usernamePath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/",user.username]];
-    if (![[NSFileManager defaultManager] fileExistsAtPath:usernamePath isDirectory:NULL]) {
-        NSError *error;
-		[[NSFileManager defaultManager] createDirectoryAtPath:usernamePath withIntermediateDirectories:YES attributes:nil error:&error];
-	}
-
-	NSString *MyFlyerPath = [usernamePath stringByAppendingString:[NSString stringWithFormat:@"Flyr/"]];
-	NSString *folderPath = [NSString pathWithComponents:@[[NSString stringWithString:[MyFlyerPath stringByStandardizingPath]]]];
-	NSInteger imgCount;
-	NSInteger largestImgCount=-1;
-	NSArray *files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:folderPath error:nil];
-	
-	NSString *finalImgDetailWritePath;
-
-	/************************ CREATE UNIQUE NAME FOR IMAGE ***********************************/
-    
-    // Not -1 means it is in Edit mode and we already have flyer number
-    if(flyerNumber != -1){
-    
-        finalImgWritePath = [folderPath stringByAppendingString:[NSString stringWithFormat:@"/IMG_%d.jpg", flyerNumber]];
-        finalImgDetailWritePath = [folderPath stringByAppendingString:[NSString stringWithFormat:@"/IMG_%d.txt", flyerNumber]];
-        largestImgCount = flyerNumber;
-        
-        imageNameNew = [NSString stringWithFormat:@"/IMG_%d.jpg",largestImgCount];
-
-    } else {
-    
-        if(files == nil)
-        {
-            finalImgWritePath = [folderPath stringByAppendingString:@"/IMG_0.jpg"];
-            finalImgDetailWritePath = [folderPath stringByAppendingString:@"/IMG_0.txt"];
-            
-        }
-        else
-        {
-           
-            for(int i = 0 ; i < [files count];i++)
-            {
-                NSString *lastFileName = files[i];
-                NSLog(@"%@",lastFileName);
-                lastFileName = [lastFileName stringByReplacingOccurrencesOfString:@".jpg" withString:@""];
-                lastFileName = [lastFileName stringByReplacingOccurrencesOfString:@"IMG_" withString:@""];
-                imgCount = [lastFileName intValue];
-                if(imgCount > largestImgCount){
-                    largestImgCount = imgCount;
-                }
-                
-            }
-            imageNameNew = [NSString stringWithFormat:@"/IMG_%d.jpg",++largestImgCount];
-            finalImgWritePath = [folderPath stringByAppendingString:imageNameNew];
-            NSString *newImgDetailName = [NSString stringWithFormat:@"/IMG_%d.txt",largestImgCount];
-            finalImgDetailWritePath = [folderPath stringByAppendingString:newImgDetailName];
-            
-        }
-    }
-	/************************ END OF CREATE UNIQUE NAME FOR IMAGE ***********************************/
-
-	NSString *imgPath = [NSString pathWithComponents:@[[NSString stringWithString:[finalImgWritePath stringByExpandingTildeInPath]]]];
-	if (![[NSFileManager defaultManager] fileExistsAtPath:folderPath isDirectory:NULL]) {
-        NSError *error;
-        [[NSFileManager defaultManager] createDirectoryAtPath:folderPath withIntermediateDirectories:YES attributes:nil error:&error];
-	}
-    
-
-	
-    // Save flyer details
-    [self saveFlyerDetails:finalImgDetailWritePath];
-	
-    // Save states of all supported social media
-    if(files){
-        [self saveSocialStates:folderPath imageName:imageNameNew];
-    }else{
-        [self saveSocialStates:folderPath imageName:@"/IMG_0.jpg"];
-    }
-
-	NSData *imgData = UIImagePNGRepresentation(screenImage);
-	[[NSFileManager defaultManager] createFileAtPath:imgPath contents:imgData attributes:nil];
-    
-    if([[NSUserDefaults standardUserDefaults] stringForKey:@"saveToCameraRollSetting"]){
-        UIImageWriteToSavedPhotosAlbum(screenImage, nil, nil, nil);
-    }
-
-	return imgData;
-}
 
 -(void)createDirectoryAtPath:(NSString *)directory{
 	if (![[NSFileManager defaultManager] fileExistsAtPath:directory isDirectory:NULL]) {

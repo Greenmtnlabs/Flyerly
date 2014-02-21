@@ -41,8 +41,6 @@
 
     UIScrollView *layerScrollView;
 	
-	NSString *finalImgWritePath;
-	NSString *imageNameNew;
 	UIFont *selectedFont;
 	NSString *selectedText;
 	UIImage *selectedSymbol;
@@ -199,8 +197,6 @@
 -(void) saveMyFlyer;
 -(void)share;
 
-
--(NSData*)getCurrentFrameAndSaveIt;
 -(NSString *)getImagePathByTag :(NSString *)imgName;
 -(NSString *)getImagePathforPhoto :(UIImage *)img;
 -(void)copyImageToTemplate :(UIImage *)img;
