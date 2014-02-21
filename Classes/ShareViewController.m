@@ -11,27 +11,59 @@
 @implementation ShareViewController
 
 
-@synthesize selectedFlyerImage,imgView,fvController,titleView,descriptionView,selectedFlyerDescription,selectedFlyerTitle,  imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,loadingView,dic,scrollView,  networkParentView,listOfPlaces,clipboardlabel,sharelink,bitly,flyer,topTitleLabel,delegate;
+@synthesize selectedFlyerImage,imgView,fvController,titleView,descriptionView,selectedFlyerDescription,selectedFlyerTitle,  imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,loadingView,dic,scrollView,  networkParentView,listOfPlaces,clipboardlabel,sharelink,bitly,flyer,topTitleLabel,delegate,activityIndicator;
 
 
 #pragma mark - Sharer Response
 
-- (void)sharerStartedSending:(SHKSharer *)aSharer
+// These are used if you do not provide your own custom UI and delegate
+- (void)sharerStartedSending:(SHKSharer *)sharer
 {
+    
+	if (!sharer.quiet)
+		[[SHKActivityIndicator currentIndicator] displayActivity:SHKLocalizedString(@"Saving to %@", [[sharer class] sharerTitle]) forSharer:sharer];
 }
+
 - (void)sharerFinishedSending:(SHKSharer *)sharer
 {
     
+    // Here we Check Sharer for
     // Update Flyer Share Info in Social File
-    [self.flyer setSocialStatusAtIndex:0 StatusValue:1];
-	//if (!sharer.quiet)
-		//[[SHKActivityIndicator currentIndicator] displayCompleted:SHKLocalizedString(@"Saved!")];
+    if ( [sharer isKindOfClass:[SHKFacebook class]] == YES ) {
+        
+        [self.flyer setFacebookStatus:1];
+
+    } else if ( [sharer isKindOfClass:[SHKTwitter class]] == YES ) {
+        
+        [self.flyer setTwitterStatus:1];
+    
+    } else if ( [sharer isKindOfClass:[SHKTumblr class]] == YES ) {
+        
+        [self.flyer setThumblerStatus:1];
+    
+    } else if ( [sharer isKindOfClass:[SHKFlickr class]] == YES ) {
+        
+        [self.flyer setFlickerStatus:1];
+    
+    } else if ( [sharer isKindOfClass:[SHKMail class]] == YES ) {
+        
+        [self.flyer setEmailStatus:1];
+    } else if ( [sharer isKindOfClass:[SHKTextMessage class]] == YES ) {
+        
+        [self.flyer setSmsStatus:1];
+    }
+    
+    [self setSocialStatus];
+    
+    
+    if (!sharer.quiet)
+		[[SHKActivityIndicator currentIndicator] displayCompleted:SHKLocalizedString(@"Saved!")];
 }
 
 - (void)sharer:(SHKSharer *)sharer failedWithError:(NSError *)error shouldRelogin:(BOOL)shouldRelogin
 {
     
-    //[[SHKActivityIndicator currentIndicator] hide];
+    [[SHKActivityIndicator currentIndicator] hide];
     /*
     //if user sent the item already but needs to relogin we do not show alert
     if (!sharer.quiet && sharer.pendingAction != SHKPendingShare && sharer.pendingAction != SHKPendingSend)
@@ -43,8 +75,8 @@
                           otherButtonTitles:nil] show];
     }		
     if (shouldRelogin) {        
-        [sharer promptAuthorization];
-	}*/
+        [sharer promptAuthorization];*/
+	
 }
 
 - (void)sharerCancelledSending:(SHKSharer *)sharer
@@ -74,6 +106,34 @@
                       otherButtonTitles:nil] show];
 }
 
+- (void)hideActivityIndicatorForSharer:(SHKSharer *)sharer {
+    
+    [self.activityIndicator hideForSharer:sharer];
+}
+
+- (void)displayActivity:(NSString *)activityDescription forSharer:(SHKSharer *)sharer {
+    
+    
+//    if (sharer.quiet) return;
+
+
+    [self.activityIndicator displayActivity:activityDescription forSharer:sharer];
+}
+
+- (void)displayCompleted:(NSString *)completionText forSharer:(SHKSharer *)sharer {
+    
+    if (sharer.quiet) return;
+    [self.activityIndicator displayCompleted:completionText forSharer:sharer];
+}
+
+- (void)showProgress:(CGFloat)progress forSharer:(SHKSharer *)sharer {
+    
+    if (sharer.quiet) return;
+    [self.activityIndicator showProgress:progress forSharer:sharer];
+}
+
+
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -92,7 +152,7 @@
     [titleView setReturnKeyType:UIReturnKeyDone];
     [titleView addTarget:self action:@selector(textFieldFinished:) forControlEvents: UIControlEventEditingDidEndOnExit];
     [titleView addTarget:self action:@selector(textFieldTapped:) forControlEvents:UIControlEventEditingDidBegin];
-    
+
     
 }
 
@@ -210,14 +270,14 @@
             
             [facebookButton setSelected:YES];
             
+            
             // Current Item For Sharing
             SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ %@ #flyerly",titleView.text, selectedFlyerDescription ]];
-                        
+            
+            iosSharer = [[ SHKSharer alloc] init];
             iosSharer = [SHKFacebook shareItem:item];
-            //iosSharer.shareDelegate = self;
-
-            // Update Flyer Share Info in Social File
-            [self.flyer setSocialStatusAtIndex:0 StatusValue:1];
+            iosSharer.shareDelegate = self;
+            
             
         } else {
             
@@ -242,11 +302,10 @@
              SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ %@ #flyerly",titleView.text, selectedFlyerDescription ]];
             
             //Calling ShareKit for Sharing
+            iosSharer = [[ SHKSharer alloc] init];
             iosSharer = [SHKTwitter shareItem:item];
-            //iosSharer.shareDelegate = self;
+            iosSharer.shareDelegate = self;
             
-            // Update Flyer Share Info in Social File
-            [self.flyer setSocialStatusAtIndex:1 StatusValue:1];
 
             
         } else {
@@ -263,10 +322,8 @@
  */
 -(IBAction)onClickInstagramButton{
     
-
-        
-        [instagramButton setSelected:YES];
-        [self shareOnInstagram];
+    [instagramButton setSelected:YES];
+    [self shareOnInstagram];
 }
 
 
@@ -275,8 +332,6 @@
  */
 -(IBAction)onClickEmailButton{
     
-
-        
         // Check internet connectivity
         if( [InviteFriendsController connected] ){
             
@@ -286,16 +341,11 @@
             // Current Item For Sharing
             SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@",titleView.text]];
             
-            
             //Calling ShareKit for Sharing
+            iosSharer = [[ SHKSharer alloc] init];
             iosSharer = [SHKMail shareItem:item];
-           // iosSharer.shareDelegate = self;
-
+            iosSharer.shareDelegate = self;
             
-            // Update Flyer Share Info in Social File
-            [self.flyer setSocialStatusAtIndex:2 StatusValue:1];
-
-            //[self shareOnEmail];
             
         } else {
             
@@ -312,8 +362,6 @@
  */
 -(IBAction)onClickTumblrButton{
     
-
-        
         // Check internet connectivity
         if( [InviteFriendsController connected] ){
             
@@ -326,13 +374,10 @@
             
             
             //Calling ShareKit for Sharing
+            iosSharer = [[ SHKSharer alloc] init];
             iosSharer = [SHKTumblr shareItem:item];
-           // iosSharer.shareDelegate = self;
-//            [SHKTumblr shareItem:item];
+            iosSharer.shareDelegate = self;
             
-            // Update Flyer Share Info in Social File
-            [self.flyer setSocialStatusAtIndex:3 StatusValue:1];
-
             
         } else {
             
@@ -358,12 +403,10 @@
             
             
             //Calling ShareKit for Sharing
+            iosSharer = [[ SHKSharer alloc] init];
             iosSharer = [SHKFlickr shareItem:item];
-            //iosSharer.shareDelegate = self;
+            iosSharer.shareDelegate = self;
             
-            // Update Flyer Share Info in Social File
-            [self.flyer setSocialStatusAtIndex:4 StatusValue:1];
-
             
         } else {
             
@@ -379,22 +422,16 @@
  */
 -(IBAction)onClickSMSButton{
     
-
-        
-        //MFMessageComposeViewController *controller = [[MFMessageComposeViewController alloc] init];
         if([MFMessageComposeViewController canSendAttachments])
         {
                         
             NSData *exportData = UIImageJPEGRepresentation(selectedFlyerImage ,1.0);
-            [SHKTextMessage shareFileData:exportData filename:imageFileName title:@"Flyerly"];
             
-            //[controller addAttachmentData:exportData typeIdentifier:@"public.data" filename:@"flyer.jpg"];
-            //controller.messageComposeDelegate = self;
-           // [self presentModalViewController:controller animated:YES];
+            iosSharer = [[ SHKSharer alloc] init];
+            iosSharer = [SHKTextMessage shareFileData:exportData filename:imageFileName title:@"Flyerly"];
+            iosSharer.shareDelegate = self;
             
         }
-    
-
 }
 
 
@@ -407,8 +444,7 @@
         [self onclipcordClick];
         
         // Update Flyer Share Info in Social File
-        [self.flyer setSocialStatusAtIndex:7 StatusValue:1];
-
+        [self.flyer setClipboardStatus:1];
 
 }
 
@@ -565,9 +601,10 @@
     
     if(!displayed){
         [self showAlert:@"Warning!" message:@"Please install Instagram app to share."];
+        [instagramButton setSelected:NO];
     }else {
         // Update Flyer Share Info in Social File
-        [self.flyer setSocialStatusAtIndex:5 StatusValue:1];
+        [self.flyer setInstagaramStatus:1];
     }
 }
 
@@ -616,9 +653,6 @@
 		case MFMailComposeResultSaved:
 			break;
 		case MFMailComposeResultSent:
-            // Update Flyer Share Info in Social File
-            [self.flyer setSocialStatusAtIndex:2 StatusValue:1];
-            
             NSLog(@"Sent");
 			break;
 		case MFMailComposeResultFailed:
@@ -634,9 +668,6 @@
 		case MessageComposeResultCancelled:
 			break;
 		case MessageComposeResultSent:
-            
-            // Update Flyer Share Info in Social File
-            [self.flyer setSocialStatusAtIndex:6 StatusValue:1];
             
             NSLog(@"Sent");
 			break;

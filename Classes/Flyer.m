@@ -817,16 +817,81 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 }
 
 
-/*
- * Here we set Flyer Share Status of Social Network
- */
--(void)setSocialStatusAtIndex :(int)idx StatusValue:(int)status {
-    
-    [socialArray replaceObjectAtIndex:idx withObject:[NSString stringWithFormat:@"%d",status]];
-    
-    //Here we write the Array of Social files .soc
-    [socialArray writeToFile:socialFile atomically:YES];
+#pragma mark  Social File Methods
 
+-(void)setFacebookStatus :(int)status {
+
+    [socialArray replaceObjectAtIndex:0 withObject:[NSString stringWithFormat:@"%d",status]];
+
+    //Here we write the Array of Text files .txt
+    [socialArray writeToFile:socialFile atomically:YES];
+    
+}
+
+
+-(void)setTwitterStatus :(int)status {
+    
+    [socialArray replaceObjectAtIndex:1 withObject:[NSString stringWithFormat:@"%d",status]];
+    
+    //Here we write the Array of Text files .txt
+    [socialArray writeToFile:socialFile atomically:YES];
+    
+}
+
+-(void)setEmailStatus :(int)status {
+    
+    [socialArray replaceObjectAtIndex:2 withObject:[NSString stringWithFormat:@"%d",status]];
+    
+    //Here we write the Array of Text files .txt
+    [socialArray writeToFile:socialFile atomically:YES];
+    
+}
+
+-(void)setThumblerStatus :(int)status {
+    
+    [socialArray replaceObjectAtIndex:3 withObject:[NSString stringWithFormat:@"%d",status]];
+    
+    //Here we write the Array of Text files .txt
+    [socialArray writeToFile:socialFile atomically:YES];
+    
+}
+
+
+-(void)setFlickerStatus :(int)status {
+    
+    [socialArray replaceObjectAtIndex:4 withObject:[NSString stringWithFormat:@"%d",status]];
+    
+    //Here we write the Array of Text files .txt
+    [socialArray writeToFile:socialFile atomically:YES];
+    
+}
+
+
+-(void)setInstagaramStatus :(int)status {
+    
+    [socialArray replaceObjectAtIndex:5 withObject:[NSString stringWithFormat:@"%d",status]];
+    
+    //Here we write the Array of Text files .txt
+    [socialArray writeToFile:socialFile atomically:YES];
+    
+}
+
+
+-(void)setSmsStatus :(int)status {
+    
+    [socialArray replaceObjectAtIndex:6 withObject:[NSString stringWithFormat:@"%d",status]];
+    
+    //Here we write the Array of Text files .txt
+    [socialArray writeToFile:socialFile atomically:YES];
+    
+}
+
+-(void)setClipboardStatus :(int)status {
+
+    [socialArray replaceObjectAtIndex:7 withObject:[NSString stringWithFormat:@"%d",status]];
+    
+    //Here we write the Array of Text files .txt
+    [socialArray writeToFile:socialFile atomically:YES];
 }
 
 

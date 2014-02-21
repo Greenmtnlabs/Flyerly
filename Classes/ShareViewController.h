@@ -29,12 +29,14 @@
 #import "Flurry.h"
 #import "HelpController.h"
 #import "Flyer.h"
+#import "SHKActivityIndicator.h"
 
 
 @class FlyrViewController,FlyerlySingleton;
 @class CreateFlyerController;
 @class LoadingView;
 @class SHKSharer;
+@class SHKActivityIndicator;
 
 @interface ShareViewController : ParentViewController<UIWebViewDelegate,UIDocumentInteractionControllerDelegate,MFMessageComposeViewControllerDelegate,MFMailComposeViewControllerDelegate,UITextViewDelegate,UITextFieldDelegate, BitlyURLShortenerDelegate,SHKSharerDelegate> {
 
@@ -43,18 +45,13 @@
 	NSString *selectedFlyerDescription;
 	NSString *imageFileName;
     FlyerlySingleton *globle;
-
 	LoadingView *loadingView;
     UIDocumentInteractionController *dic;
     NSMutableArray  *photoTitles;         // Titles of images
     NSMutableArray  *photoSmallImageData; // Image data (thumbnail)
     NSMutableArray  *photoURLsLargeImage; // URL to larger image
-	
-    
     NSMutableArray *listOfPlaces;
-    
     NSArray *arrayOfAccounts;
-    
     SHKSharer *iosSharer;
 
 }
@@ -86,9 +83,9 @@
 @property(nonatomic,strong)NSString *imageFileName;
 @property(nonatomic,weak)FlyrViewController *fvController;
 @property (nonatomic, strong) LoadingView *loadingView;
-
+@property (strong, nonatomic) SHKActivityIndicator *activityIndicator;
 @property (nonatomic,strong) Flyer *flyer;
-
+@property (weak, nonatomic) id<SHKSharerDelegate> delegate;
 
 -(IBAction)onClickFacebookButton;
 -(IBAction)onClickTwitterButton;
@@ -107,5 +104,5 @@
 -(void)shortenURL:(NSString *)url;
 -(void)setSocialStatus;
 
-@property (weak, nonatomic) id<SHKSharerDelegate> delegate;
+
 @end

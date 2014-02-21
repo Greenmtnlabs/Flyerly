@@ -64,7 +64,15 @@
 -(void)setFlyerBorder :(NSString *)uid RGBColor:(id)rgb;
 
 
--(void)setSocialStatusAtIndex :(int)idx StatusValue:(int)status;
+-(void)setFacebookStatus :(int)status;
+-(void)setTwitterStatus :(int)status;
+-(void)setInstagaramStatus :(int)status;
+-(void)setFlickerStatus :(int)status;
+-(void)setThumblerStatus :(int)status;
+-(void)setEmailStatus :(int)status;
+-(void)setSmsStatus :(int)status;
+-(void)setClipboardStatus :(int)status;
+
 
 -(NSString *)getFacebookStatus;
 -(NSString *)getTwitterStatus;
