@@ -119,7 +119,6 @@
 
 @property(nonatomic, strong) NSMutableArray *textLabelLayersArray;
 @property(nonatomic, strong) NSMutableArray *symbolLayersArray;
-@property(nonatomic, strong) NSMutableArray *iconLayersArray;
 
 
 
