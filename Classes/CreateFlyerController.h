@@ -120,7 +120,6 @@
 
 
 @property (nonatomic, strong) NSString *finalImgWritePath;
-@property (nonatomic, strong) NSString *imageNameNew;
 @property (nonatomic, strong) UIFont *selectedFont;
 @property (nonatomic, weak) id selectedColor;
 @property (nonatomic, strong) NSString *selectedText;
