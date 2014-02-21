@@ -11,7 +11,7 @@
 @implementation ShareViewController
 
 
-@synthesize selectedFlyerImage,imgView,fvController,titleView,descriptionView,selectedFlyerDescription,  imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,dic,scrollView,  networkParentView,listOfPlaces,clipboardlabel,sharelink,bitly,flyer,topTitleLabel,delegate,activityIndicator;
+@synthesize selectedFlyerImage,imgView,fvController,titleView,descriptionView,selectedFlyerDescription,  imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,dicController,scrollView, clipboardlabel,sharelink,flyer,topTitleLabel,delegate,activityIndicator;
 
 
 #pragma mark - Sharer Response
@@ -588,13 +588,13 @@
      
      NSURL *igImageHookFile = [NSURL fileURLWithPath:updatedImagePath];
     
-     self.dic=[UIDocumentInteractionController interactionControllerWithURL:igImageHookFile];
-     self.dic.UTI = @"com.instagram.photo";
-     self.dic.annotation = @{@"InstagramCaption": [NSString stringWithFormat:@"%@ %@", self.titleView.text,descriptionView.text]};
+     self.dicController=[UIDocumentInteractionController interactionControllerWithURL:igImageHookFile];
+     self.dicController.UTI = @"com.instagram.photo";
+     self.dicController.annotation = @{@"InstagramCaption": [NSString stringWithFormat:@"%@ %@", self.titleView.text,descriptionView.text]};
     
     
 
-    BOOL displayed = [self.dic presentOpenInMenuFromRect:rect inView: self.view animated:YES];
+    BOOL displayed = [self.dicController presentOpenInMenuFromRect:rect inView: self.view animated:YES];
     
 
 
@@ -679,31 +679,6 @@
     
     }
 
-
-#pragma Bitly code for URL shortening
-
--(void)shortenURL:(NSString *)url{
-  
-    bitly = [[BitlyURLShortener alloc] init];
-    bitly.delegate = self;
-    [bitly shortenLinksInText:url];
-}
-
-- (void)bitlyURLShortenerDidShortenText:(BitlyURLShortener *)shortener oldText:(NSString *)oldText text:(NSString *)text linkDictionary:(NSDictionary *)dictionary {
-    
-    NSLog(@"Old Text: %@", oldText);
-    NSLog(@"New Text: %@", text);
-    
-    [self shareOnMMS:text];
-}
-
-- (void)bitlyURLShortener:(BitlyURLShortener *)shortener
-        didFailForLongURL:(NSURL *)longURL
-               statusCode:(NSInteger)statusCode
-               statusText:(NSString *)statusText {
-    NSLog(@"Shortening failed for link %@: status code: %d, status text: %@",
-          [longURL absoluteString], statusCode, statusText);
-}
 
 
 -(void)callFlyrView{

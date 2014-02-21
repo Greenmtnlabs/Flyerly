@@ -21,7 +21,6 @@
 #import <QuartzCore/QuartzCore.h>
 #import "FlyerlySingleton.h"
 #import "ParentViewController.h"
-#import "BitlyURLShortener.h"
 #import "FlyrViewController.h"
 #import "Common.h"
 #import "LoadingView.h"
@@ -38,28 +37,20 @@
 @class SHKSharer;
 @class SHKActivityIndicator;
 
-@interface ShareViewController : ParentViewController<UIWebViewDelegate,UIDocumentInteractionControllerDelegate,MFMessageComposeViewControllerDelegate,MFMailComposeViewControllerDelegate,UITextViewDelegate,UITextFieldDelegate, BitlyURLShortenerDelegate,SHKSharerDelegate> {
+@interface ShareViewController : ParentViewController<UIWebViewDelegate,UIDocumentInteractionControllerDelegate,MFMessageComposeViewControllerDelegate,MFMailComposeViewControllerDelegate,UITextViewDelegate,UITextFieldDelegate, SHKSharerDelegate> {
 
 	UIImage *selectedFlyerImage;
 	NSString *selectedFlyerDescription;
 	NSString *imageFileName;
     FlyerlySingleton *globle;
-    UIDocumentInteractionController *dic;
-    NSMutableArray  *photoTitles;         // Titles of images
-    NSMutableArray  *photoSmallImageData; // Image data (thumbnail)
-    NSMutableArray  *photoURLsLargeImage; // URL to larger image
-    NSMutableArray *listOfPlaces;
     NSArray *arrayOfAccounts;
     SHKSharer *iosSharer;
 
 }
 
-@property(nonatomic,strong) NSMutableArray *listOfPlaces;
 @property(nonatomic,strong)  NSString *sharelink;
 
 
-@property(nonatomic, strong) BitlyURLShortener *bitly;
-@property(nonatomic,strong) IBOutlet UIView *networkParentView;
 @property(nonatomic,strong) IBOutlet UIScrollView *scrollView;
 @property(nonatomic,strong) IBOutlet UITextView *descriptionView;
 @property(nonatomic,strong) IBOutlet UITextField *titleView;
@@ -74,7 +65,7 @@
 @property(nonatomic,strong) IBOutlet UIButton *clipboardButton;
 @property(nonatomic,strong) IBOutlet UILabel *clipboardlabel;
 @property(nonatomic,strong) IBOutlet UILabel *topTitleLabel;
-@property (nonatomic, strong) UIDocumentInteractionController *dic;
+@property (nonatomic, strong) UIDocumentInteractionController *dicController;
 @property(nonatomic,strong)UIImage *selectedFlyerImage;
 @property(nonatomic,strong)NSString *selectedFlyerDescription;
 @property(nonatomic,strong)NSString *imageFileName;
