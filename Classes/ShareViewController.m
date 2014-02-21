@@ -11,7 +11,7 @@
 @implementation ShareViewController
 
 
-@synthesize selectedFlyerImage,imgView,fvController,titleView,descriptionView,selectedFlyerDescription,  imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,dicController, clipboardlabel,flyer,topTitleLabel,delegate,activityIndicator;
+@synthesize selectedFlyerImage,fvController,titleView,descriptionView,selectedFlyerDescription,  imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,dicController, clipboardlabel,flyer,topTitleLabel,delegate,activityIndicator;
 
 
 #pragma mark - Sharer Response
@@ -468,108 +468,6 @@
 #pragma Sharing code
 
 /*
- * Share on MMS
- */
--(void)singleshareOnMMS{
-
-    NSData *imageData = UIImagePNGRepresentation(selectedFlyerImage);
-    [self uploadImage:imageData isEmail:NO];
-    
-}
-
-
-
--(void)shareOnMMS:(NSString *)link{
-    MFMessageComposeViewController *controller = [[MFMessageComposeViewController alloc] init];
-    if([MFMessageComposeViewController canSendText])
-    {
-        //controller.body = [NSString stringWithFormat:@"%@ - %@ %@", selectedFlyerDescription,link, @"#flyerly"];
-        controller.body = [NSString stringWithFormat:@"%@ - %@ %@", self.titleView.text ,link, @"flyer.ly/SMS"];
-        controller.messageComposeDelegate = self;
-        [self presentModalViewController:controller animated:YES];
-    }
-}
-
-- (void)uploadImage:(NSData *)imageData isEmail:(BOOL)isEmail
-{
-    PFFile *imageFile = [PFFile fileWithName:[FlyrViewController getFlyerNumberFromPath:imageFileName] data:imageData];
-    
-    // Save PFFile
-    [imageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if (!error) {
-            
-            // Create a PFObject around a PFFile and associate it with the current user
-            PFObject *flyerObject = [PFObject objectWithClassName:@"Flyer"];
-            flyerObject[@"image"] = imageFile;
-            
-            // Set the access control list to current user for security purposes
-            flyerObject.ACL = [PFACL ACLWithUser:[PFUser currentUser]];
-            
-            PFUser *user = [PFUser currentUser];
-            flyerObject[@"user"] = user;
-            
-            [flyerObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                if (!error) {
-
-                    PFFile *theImage = flyerObject[@"image"];
-                    
-                    if(isEmail){
-                        [self shareOnEmail:[theImage url]];
-                    }else{
-                        [self shortenURL:[theImage url]];
-                    }
-                }
-                else{
-                    // Log details of the failure
-                    NSLog(@"Error: %@ %@", error, [error userInfo]);
-                }
-            }];
-        }
-        else{
-            // Log details of the failure
-            NSLog(@"Error: %@ %@", error, [error userInfo]);
-        }
-    } progressBlock:^(int percentDone) {
-    }];
-}
-
-
-/*
- * Share on Email
- */
--(void)shareOnEmail{
-    
-    NSData *imageData = UIImagePNGRepresentation(selectedFlyerImage);
-    [self uploadImage:imageData isEmail:YES];
-    
-}
-
--(void)shareOnEmail:(NSString *)link{
-    
-    
-    
-    
-    MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];    
-    if([MFMailComposeViewController canSendMail]){
-        
-        picker.mailComposeDelegate = self;
-        [picker setSubject:@"You just received a NEW flyer!"];        
-        NSMutableString *emailBody = [[NSMutableString alloc] initWithString:@"<html><body>"];
-        [emailBody appendString:@"<p><font size='4'><a href = 'http://www.flyer.ly/email'>A flyerly creation...</a></font></p>"];
-        
-        [emailBody appendString:[NSString stringWithFormat:@"<p><img src='%@'></p>",link]];
-        [emailBody appendString:@"<p><font size='4'><a href = 'http://www.flyer.ly'>Download flyerly & share a flyer</a></font></p>"];
-        [emailBody appendString:@"</body></html>"];
-        NSLog(@"%@",emailBody);
-        
-        //mail composer window
-        [picker setMessageBody:emailBody isHTML:YES];
-        [self presentModalViewController:picker animated:YES];
-    }
-}
-
-
-/*
  * Share on Instagram
  */
 -(void)shareOnInstagram{
@@ -686,18 +584,6 @@
 }
 
 
-/*
- * pop to root view
- */
--(IBAction)goback{
-    
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.4f];
-    [self.view setFrame:CGRectMake(320, 64, 310,400 )];
-    [UIView commitAnimations];
-    
-    [self removeFromParentViewController];
-}
 
 
 -(void)setSocialStatus {

@@ -39,9 +39,6 @@
 
 @interface ShareViewController : ParentViewController<UIWebViewDelegate,UIDocumentInteractionControllerDelegate,MFMessageComposeViewControllerDelegate,MFMailComposeViewControllerDelegate,UITextViewDelegate,UITextFieldDelegate, SHKSharerDelegate> {
 
-	UIImage *selectedFlyerImage;
-	NSString *selectedFlyerDescription;
-	NSString *imageFileName;
     FlyerlySingleton *globle;
     NSArray *arrayOfAccounts;
     SHKSharer *iosSharer;
@@ -52,7 +49,6 @@
 
 @property(nonatomic,strong) IBOutlet UITextView *descriptionView;
 @property(nonatomic,strong) IBOutlet UITextField *titleView;
-@property(nonatomic,strong) IBOutlet UIButton *imgView;
 @property(nonatomic,strong) IBOutlet UIButton *facebookButton;
 @property(nonatomic,strong) IBOutlet UIButton *twitterButton;
 @property(nonatomic,strong) IBOutlet UIButton *emailButton;
@@ -80,11 +76,10 @@
 -(IBAction)onClickFlickrButton;
 -(IBAction)onClickSMSButton;
 -(IBAction)onClickClipboardButton;
--(IBAction)goback;
+
 
 -(void)shareOnInstagram;
--(void)singleshareOnMMS;
-- (void)uploadImage:(NSData *)imageData isEmail:(BOOL)isEmail;
+
 -(void)shareOnEmail:(NSString *)link;
 -(void)shortenURL:(NSString *)url;
 -(void)setSocialStatus;
