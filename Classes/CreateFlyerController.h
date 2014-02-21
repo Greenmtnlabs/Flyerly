@@ -36,13 +36,8 @@
 
     UILabel *addMoreLayerOrSaveFlyerLabel;
     UILabel *takeOrAddPhotoLabel;
-
-
-
     UIScrollView *layerScrollView;
 	
-	UIFont *selectedFont;
-	NSString *selectedText;
 	UIImage *selectedSymbol;
 	UIImage *selectedIcon;
 	NSInteger selectedSize;
@@ -110,24 +105,15 @@
 
 
 @property (nonatomic, strong) UIImageView *textBackgrnd;
-
 @property (nonatomic,strong)  UILabel *addMoreLayerOrSaveFlyerLabel;
 @property (nonatomic,strong)  UILabel *takeOrAddPhotoLabel;
-
-
-
 @property (nonatomic, strong) UIScrollView *layerScrollView;
-
-
-@property (nonatomic, strong) NSString *finalImgWritePath;
 @property (nonatomic, strong) UIFont *selectedFont;
 @property (nonatomic, weak) id selectedColor;
-@property (nonatomic, strong) NSString *selectedText;
 @property (nonatomic, assign) NSInteger selectedSize;
 @property (nonatomic, strong) UIImage *selectedTemplate;
 @property (nonatomic, strong) UIImage *selectedSymbol;
 @property (nonatomic, strong) UIImage *selectedIcon;
-
 
 @property (nonatomic, strong) UIImage *finalFlyer;
 

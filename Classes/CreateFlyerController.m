@@ -11,11 +11,11 @@
 @synthesize flyimgView,imgView,finalFlyer;
 @synthesize selectedFont,selectedColor;
 @synthesize selectedTemplate,selectedSymbol,selectedIcon;
-@synthesize fontTabButton,colorTabButton,sizeTabButton,fontEditButton,selectedText,selectedSize,fontBorderTabButton,addMoreIconTabButton,addMorePhotoTabButton,addMoreSymbolTabButton;
+@synthesize fontTabButton,colorTabButton,sizeTabButton,fontEditButton,selectedSize,fontBorderTabButton,addMoreIconTabButton,addMorePhotoTabButton,addMoreSymbolTabButton;
 @synthesize textBackgrnd;
 @synthesize cameraTabButton,photoTabButton,widthTabButton,heightTabButton;
 @synthesize warningAlert,deleteAlert;
-@synthesize  imgPickerFlag,finalImgWritePath, addMoreLayerOrSaveFlyerLabel, takeOrAddPhotoLabel,layerScrollView;
+@synthesize  imgPickerFlag, addMoreLayerOrSaveFlyerLabel, takeOrAddPhotoLabel,layerScrollView;
 @synthesize flyerNumber,flyerPath,flyer;
 
 //Version 3 Change
@@ -165,7 +165,6 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 	//Default Selection for start
 	selectedFont = [UIFont fontWithName:@"Arial" size:16];
 	selectedColor = [UIColor blackColor];	
-	selectedText = @"";
 	selectedSize = 16;
     
     
