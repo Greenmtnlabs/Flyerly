@@ -13,7 +13,7 @@
 @synthesize selectedTemplate,selectedSymbol,selectedIcon;
 @synthesize fontTabButton,colorTabButton,sizeTabButton,fontEditButton,selectedText,selectedSize,fontBorderTabButton,addMoreIconTabButton,addMorePhotoTabButton,addMoreSymbolTabButton;
 @synthesize textBackgrnd;
-@synthesize cameraTabButton,photoTabButton,widthTabButton,heightTabButton,iconImgView;
+@synthesize cameraTabButton,photoTabButton,widthTabButton,heightTabButton;
 @synthesize warningAlert,deleteAlert;
 @synthesize  imgPickerFlag,finalImgWritePath, addMoreLayerOrSaveFlyerLabel, takeOrAddPhotoLabel,layerScrollView;
 @synthesize flyerNumber,flyerPath,flyer;
@@ -57,10 +57,7 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     [takeOrAddPhotoLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:18]];
     [takeOrAddPhotoLabel setTextColor:[UIColor grayColor]];
     [takeOrAddPhotoLabel setTextAlignment:UITextAlignmentCenter];
- 
-    
-	iconImgView = [[UIImageView alloc]initWithFrame:CGRectMake(150, 50, 90, 70)];
-	[iconImgView setUserInteractionEnabled:NO];
+     
 	
 	textBackgrnd = [[UIImageView alloc]initWithFrame:CGRectMake(0, 385, 320, 44)];
 	[self.view addSubview:textBackgrnd];
