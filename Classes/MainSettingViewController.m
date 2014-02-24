@@ -302,7 +302,6 @@
 -(void)createNewFlyer{
     
 	ptController = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
-    ptController.flyerNumber = -1;
 	[self.navigationController pushViewController:ptController animated:YES];
     
 }

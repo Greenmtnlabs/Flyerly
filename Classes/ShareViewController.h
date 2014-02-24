@@ -21,55 +21,30 @@
 #import <QuartzCore/QuartzCore.h>
 #import "FlyerlySingleton.h"
 #import "ParentViewController.h"
-#import "BitlyURLShortener.h"
 #import "FlyrViewController.h"
 #import "Common.h"
-#import "LoadingView.h"
 #import "JSON.h"
 #import "Flurry.h"
 #import "HelpController.h"
 #import "Flyer.h"
+#import "SHKActivityIndicator.h"
 
 
 @class FlyrViewController,FlyerlySingleton;
-@class CreateFlyerController;
-@class LoadingView;
 @class SHKSharer;
+@class SHKActivityIndicator;
 
-@interface ShareViewController : ParentViewController<UIWebViewDelegate,UIDocumentInteractionControllerDelegate,MFMessageComposeViewControllerDelegate,MFMailComposeViewControllerDelegate,UITextViewDelegate,UITextFieldDelegate, BitlyURLShortenerDelegate,SHKSharerDelegate> {
+@interface ShareViewController : UIViewController<UIWebViewDelegate,UIDocumentInteractionControllerDelegate,UITextViewDelegate,UITextFieldDelegate, SHKSharerDelegate> {
 
-	UIImage *selectedFlyerImage;
-	NSString *selectedFlyerTitle;
-	NSString *selectedFlyerDescription;
-	NSString *detailFileName;
-	NSString *imageFileName;
     FlyerlySingleton *globle;
-
-	LoadingView *loadingView;
-    UIDocumentInteractionController *dic;
-    NSMutableArray  *photoTitles;         // Titles of images
-    NSMutableArray  *photoSmallImageData; // Image data (thumbnail)
-    NSMutableArray  *photoURLsLargeImage; // URL to larger image
-	
-    
-    NSMutableArray *listOfPlaces;
-    
     NSArray *arrayOfAccounts;
-    
     SHKSharer *iosSharer;
 
 }
 
-@property(nonatomic,strong) NSMutableArray *listOfPlaces;
-@property(nonatomic,strong)  NSString *sharelink;
 
-
-@property(nonatomic, strong) BitlyURLShortener *bitly;
-@property(nonatomic,strong) IBOutlet UIView *networkParentView;
-@property(nonatomic,strong) IBOutlet UIScrollView *scrollView;
 @property(nonatomic,strong) IBOutlet UITextView *descriptionView;
 @property(nonatomic,strong) IBOutlet UITextField *titleView;
-@property(nonatomic,strong) IBOutlet UIButton *imgView;
 @property(nonatomic,strong) IBOutlet UIButton *facebookButton;
 @property(nonatomic,strong) IBOutlet UIButton *twitterButton;
 @property(nonatomic,strong) IBOutlet UIButton *emailButton;
@@ -80,17 +55,14 @@
 @property(nonatomic,strong) IBOutlet UIButton *clipboardButton;
 @property(nonatomic,strong) IBOutlet UILabel *clipboardlabel;
 @property(nonatomic,strong) IBOutlet UILabel *topTitleLabel;
-@property (nonatomic, strong) UIDocumentInteractionController *dic;
+@property (nonatomic, strong) UIDocumentInteractionController *dicController;
 @property(nonatomic,strong)UIImage *selectedFlyerImage;
-@property(nonatomic,strong)NSString *selectedFlyerTitle;
 @property(nonatomic,strong)NSString *selectedFlyerDescription;
-@property(nonatomic,strong)NSString *detailFileName;
 @property(nonatomic,strong)NSString *imageFileName;
 @property(nonatomic,weak)FlyrViewController *fvController;
-@property (nonatomic, strong) LoadingView *loadingView;
-
+@property (strong, nonatomic) SHKActivityIndicator *activityIndicator;
 @property (nonatomic,strong) Flyer *flyer;
-
+@property (weak, nonatomic) id<SHKSharerDelegate> delegate;
 
 -(IBAction)onClickFacebookButton;
 -(IBAction)onClickTwitterButton;
@@ -100,14 +72,9 @@
 -(IBAction)onClickFlickrButton;
 -(IBAction)onClickSMSButton;
 -(IBAction)onClickClipboardButton;
--(IBAction)goback;
+
 
 -(void)shareOnInstagram;
--(void)singleshareOnMMS;
-- (void)uploadImage:(NSData *)imageData isEmail:(BOOL)isEmail;
--(void)shareOnEmail:(NSString *)link;
--(void)shortenURL:(NSString *)url;
 -(void)setSocialStatus;
 
-@property (weak, nonatomic) id<SHKSharerDelegate> delegate;
 @end

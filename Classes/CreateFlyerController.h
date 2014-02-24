@@ -33,77 +33,22 @@
 {
    
     FlyerlySingleton *globle;
-
-	UIImageView *templateBckgrnd;
-	UIImageView *textBackgrnd;
-	UIImageView *photoImgView;
-	UIImageView *symbolImgView;
-	UIImageView *iconImgView;
-
     UILabel *addMoreLayerOrSaveFlyerLabel;
     UILabel *takeOrAddPhotoLabel;
-
-
-
     UIScrollView *layerScrollView;
-	
-	NSString *finalImgWritePath;
-	NSString *imageNameNew;
-	UIFont *selectedFont;
-	NSString *selectedText;
-	UIImage *selectedSymbol;
-	UIImage *selectedIcon;
-	NSInteger selectedSize;
-	id __weak selectedColor;
-	NSInteger selectedWidth;
-	NSInteger selectedHeight;
-	
-	UIActionSheet *alert;
-	UIView *distributeView;
-	UIImage *finalFlyer;
-
-
-	 NSInteger imgPickerFlag;
-	
-	UIButton *addMorePhotoTabButton;
-	UIButton *addMoreIconTabButton;
-	UIButton *addMoreSymbolTabButton;
-	UIButton *arrangeLayerTabButton;
-	
+    NSInteger imgPickerFlag;
+		
 	NSMutableArray *templateArray;
 	NSMutableArray *iconArray;
 	NSMutableArray *symbolArray;
 	NSArray *colorArray;
 	NSArray *borderArray;
 	NSArray *fontArray;
-
-   
-
- 
-	UIAlertView *warningAlert ;
-
-	UIAlertView *deleteAlert ;
-
-
-    BOOL deleteMode;
-    BOOL discardedLayer;
-    int flyerNumber;
     int layerXposition;
+    
+    NSInteger widthValue;
+	NSInteger heightValue;
 
-	NSInteger fontScrollWidth;
-	NSInteger fontScrollHeight;
-	NSInteger colorScrollWidth;
-	NSInteger colorScrollHeight;
-    NSInteger borderScrollWidth;
-	NSInteger borderScrollHeight;
-    NSInteger fontBorderScrollWidth;
-	NSInteger fontBorderScrollHeight;
-	NSInteger sizeScrollWidth;
-	NSInteger sizeScrollHeight;
-	NSInteger templateScrollWidth;
-	NSInteger templateScrollHeight;
-
-    UIButton *crossButtonGlobal;
     LayerTileButton *editButtonGlobal;
     UIBarButtonItem *rightUndoBarButton;
     LibraryViewController *nbuGallary;
@@ -111,63 +56,29 @@
     FlyerImageView *flyerImageView;
     
     UITextView *lastTextView;
-    UIView *sharePanel;
+
     UIButton *shareButton;
     ShareViewController *shareviewcontroller;
     UILabel *titleLabel;
 }
 
-@property(nonatomic, strong) NSMutableArray *textLabelLayersArray;
-@property(nonatomic, strong) NSMutableArray *symbolLayersArray;
-@property(nonatomic, strong) NSMutableArray *iconLayersArray;
-@property(nonatomic, strong) NSMutableArray *photoLayersArray;
 
-
-
-@property (nonatomic,strong)  UIImageView *photoImgView;
-@property(nonatomic, strong)  UIImageView *symbolImgView;
-@property(nonatomic, strong)  UIImageView *iconImgView;
-@property (nonatomic, strong) UIImageView *templateBckgrnd;
 @property (nonatomic, strong) UIImageView *textBackgrnd;
-
 @property (nonatomic,strong)  UILabel *addMoreLayerOrSaveFlyerLabel;
 @property (nonatomic,strong)  UILabel *takeOrAddPhotoLabel;
-
-
-
 @property (nonatomic, strong) UIScrollView *layerScrollView;
-
-
-@property (nonatomic, strong) NSString *finalImgWritePath;
-@property (nonatomic, strong) NSString *imageNameNew;
 @property (nonatomic, strong) UIFont *selectedFont;
 @property (nonatomic, weak) id selectedColor;
-@property (nonatomic, strong) NSString *selectedText;
 @property (nonatomic, assign) NSInteger selectedSize;
 @property (nonatomic, strong) UIImage *selectedTemplate;
-@property (nonatomic, strong) UIImage *selectedSymbol;
-@property (nonatomic, strong) UIImage *selectedIcon;
-
-
-@property (nonatomic, strong) UIImage *finalFlyer;
-
-@property (nonatomic,strong) UIAlertView *warningAlert;
-
 @property (nonatomic,strong) UIAlertView *deleteAlert;
-
-
 @property (nonatomic, assign) NSInteger imgPickerFlag;
-@property (nonatomic, assign) int flyerNumber;
 @property (nonatomic, strong) NSString *flyerPath;
-
-
-@property(nonatomic, strong) IBOutlet UIImageView *imgView;
-
 @property(nonatomic, strong) IBOutlet FlyerImageView *flyimgView;
-
-@property(nonatomic, strong) IBOutlet UIView *contextView;
+@property (nonatomic, strong) UIView *sharePanel;
 
 // These are ContextViews Library
+@property(nonatomic, strong) IBOutlet UIView *contextView;
 @property(nonatomic, strong) IBOutlet UIView *libraryContextView;
 @property(nonatomic, strong) IBOutlet UIView *libFlyer;
 @property(nonatomic, strong) IBOutlet UIView *libBackground;
@@ -213,11 +124,8 @@
 -(void) callDeleteLayer;
 -(void) choosePhoto;
 -(void) donePhoto;
--(void) saveMyFlyer;
 -(void)share;
 
-
--(NSData*)getCurrentFrameAndSaveIt;
 -(NSString *)getImagePathByTag :(NSString *)imgName;
 -(NSString *)getImagePathforPhoto :(UIImage *)img;
 -(void)copyImageToTemplate :(UIImage *)img;

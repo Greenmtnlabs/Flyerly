@@ -8,27 +8,20 @@
 #import "CreateFlyerController.h"
 
 @implementation CreateFlyerController
-@synthesize flyimgView,imgView,imageNameNew,finalFlyer;
-@synthesize selectedFont,selectedColor;
-@synthesize selectedTemplate,selectedSymbol,selectedIcon;
-@synthesize fontTabButton,colorTabButton,sizeTabButton,fontEditButton,selectedText,selectedSize,fontBorderTabButton,addMoreIconTabButton,addMorePhotoTabButton,addMoreSymbolTabButton;
-@synthesize templateBckgrnd,textBackgrnd;
-@synthesize cameraTabButton,photoTabButton,widthTabButton,heightTabButton,photoImgView,symbolImgView,iconImgView;
-@synthesize warningAlert,deleteAlert;
-@synthesize  imgPickerFlag,finalImgWritePath, addMoreLayerOrSaveFlyerLabel, takeOrAddPhotoLabel,layerScrollView;
-@synthesize flyerNumber,flyerPath,flyer;
 
-//Version 3 Change
+@synthesize selectedFont,selectedColor,selectedTemplate,fontTabButton,colorTabButton,sizeTabButton,fontEditButton,selectedSize,fontBorderTabButton,addMoreIconTabButton,addMorePhotoTabButton,addMoreSymbolTabButton,sharePanel;
+@synthesize textBackgrnd,cameraTabButton,photoTabButton,widthTabButton,heightTabButton,deleteAlert;
+@synthesize imgPickerFlag, addMoreLayerOrSaveFlyerLabel, takeOrAddPhotoLabel,layerScrollView,flyerPath;
 @synthesize contextView,libraryContextView,libFlyer,backgroundTabButton,addMoreFontTabButton;
 @synthesize libText,libBackground,libPhoto,libEmpty,backtemplates,cameraTakePhoto,cameraRoll,flyerBorder;
-@synthesize textLabelLayersArray,symbolLayersArray,iconLayersArray,photoLayersArray,currentLayer,layersDic;
+@synthesize flyimgView,currentLayer,layersDic,flyer;
 
-int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track selected Tab on Add More
+int selectedAddMoreLayerTab = -1;
 
 
 #pragma mark  View Appear Methods
 
--(void)viewWillAppear:(BOOL)animated{
+-(void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:YES];
     
     //Here we Set Top Bar Item
@@ -42,8 +35,7 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     
 }
 
--(void)viewDidAppear:(BOOL)animated{
-    
+-(void)viewDidAppear:(BOOL)animated {
     
     [addMoreLayerOrSaveFlyerLabel setText:@"CREATE YOUR FLYER WITH THE FEATURES BELOW THEN SHARE WITH THE WORLD"];    [addMoreLayerOrSaveFlyerLabel setNumberOfLines:2];
     [addMoreLayerOrSaveFlyerLabel setBackgroundColor:[UIColor clearColor]];
@@ -57,15 +49,7 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     [takeOrAddPhotoLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:18]];
     [takeOrAddPhotoLabel setTextColor:[UIColor grayColor]];
     [takeOrAddPhotoLabel setTextAlignment:UITextAlignmentCenter];
- 
-	photoImgView = [[UIImageView alloc]initWithFrame:CGRectMake(50, 50, 220, 200)];
-	[photoImgView setUserInteractionEnabled:NO];
-    
-	symbolImgView = [[UIImageView alloc]initWithFrame:CGRectMake(50, 50, 90, 70)];
-	[symbolImgView setUserInteractionEnabled:NO];
-    
-	iconImgView = [[UIImageView alloc]initWithFrame:CGRectMake(150, 50, 90, 70)];
-	[iconImgView setUserInteractionEnabled:NO];
+     
 	
 	textBackgrnd = [[UIImageView alloc]initWithFrame:CGRectMake(0, 385, 320, 44)];
 	[self.view addSubview:textBackgrnd];
@@ -152,83 +136,46 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     sharePanel = shareviewcontroller.view;
     sharePanel.hidden = YES;
     [self.view addSubview:sharePanel];
-    
 
-    
     // Set height and width of each element of scroll view
     layerXposition =0;
-        fontScrollWidth = 35;
-        fontScrollHeight = 35;
-        colorScrollWidth = 35;
-        colorScrollHeight = 35;
-        sizeScrollWidth = 35;
-        sizeScrollHeight = 35;
-        borderScrollWidth = 35;
-        borderScrollHeight = 35;
-        fontBorderScrollWidth = 35;
-        fontBorderScrollHeight = 35;
-
-    
+        widthValue = 35;
+        heightValue = 35;    
     
 	//Default Selection for start
 	selectedFont = [UIFont fontWithName:@"Arial" size:16];
 	selectedColor = [UIColor blackColor];	
-	selectedText = @"";
 	selectedSize = 16;
-    
     
     //Set Initial Background Image For Flyer New or Edit
     if(!selectedTemplate){
         selectedTemplate  = [UIImage imageNamed:@"main_area_bg"];
     }
     
-    
-    imgView.image = selectedTemplate;
-    
-    
     //layerTile Button
     editButtonGlobal = [[LayerTileButton alloc]init];
     editButtonGlobal.uid = @"";
     
-    // Create Main Image View
-    templateBckgrnd = [[UIImageView alloc]initWithFrame:CGRectMake(0, 413, 320, 135)];
-    
     // Main Scroll Views Initialize
     layerScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,320,130)];
     layersDic = [[NSMutableDictionary alloc] init];
-    
-    //Setting ScrollView
-    [layerScrollView setCanCancelContentTouches:NO];
-    layerScrollView.indicatorStyle = UIScrollViewIndicatorStyleBlack;
-    layerScrollView.clipsToBounds = YES;
-    layerScrollView.scrollEnabled = YES;
-    layerScrollView.pagingEnabled = NO;
-    layerScrollView.showsHorizontalScrollIndicator = NO;
-    layerScrollView.showsVerticalScrollIndicator = NO;
-    
+
+        
     //all Labels Intialize
     //for Using in ContextView
     takeOrAddPhotoLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 5, 310, 43)];
     addMoreLayerOrSaveFlyerLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 5, 310, 63)];
     
-    
-    
-    // Add Templates
-
 	templateArray = [[NSMutableArray alloc]init];
     
 	imgPickerFlag =1;
     selectedAddMoreLayerTab = -1;
-    
-    
-
     
     //Right ShareButton
     shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     shareButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
 	[shareButton addTarget:self action:@selector(share) forControlEvents:UIControlEventTouchUpInside];
     [shareButton setBackgroundImage:[UIImage imageNamed:@"share_button"] forState:UIControlStateNormal];
-
     shareButton.showsTouchWhenHighlighted = YES;
     
     //Right UndoButton
@@ -240,8 +187,6 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
     rightUndoBarButton = [[UIBarButtonItem alloc] initWithCustomView:undoButton];
-    
-    
     [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,rightUndoBarButton,nil]];
     
     //Set Undo Bar Status
@@ -274,38 +219,44 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 
 }
 
-/*
- * This resets the flyer image view by removing and readding all its subviews
- */
--(void)renderFlyer {
+#pragma mark  View DisAppear Methods
 
-    // Remove all Subviews inside image view
-    NSArray *viewsToRemove = [self.flyimgView subviews];
-    for (UIView *v in viewsToRemove) {
-        [v removeFromSuperview];
-    }
+/*
+ * This Method Call On Back Button
+ * and its Save Flyer then Exits Screen
+ */
+-(void) callMenu
+{
     
-    NSArray *flyerPiecesKeys = [flyer allKeys];
+    if (![currentLayer isEqualToString:@""]) [self.flyimgView layerStoppedEditing:currentLayer];
     
-    for (int i = 0 ; i < flyerPiecesKeys.count; i++) {
-        
-        //Getting Layers Detail from Master Dictionary
-        NSMutableDictionary *dic = [flyer getLayerFromMaster:[flyerPiecesKeys objectAtIndex:i]];
-        
-        //Create Subview from dictionary
-        [self.flyimgView renderLayer:[flyerPiecesKeys objectAtIndex:i] layerDictionary:dic];
-        
-    }
     
+    //Here we take Snap shot of Flyer
+    UIGraphicsBeginImageContextWithOptions(self.flyimgView.bounds.size, YES, 0.0f);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    [self.flyimgView.layer renderInContext:context];
+    UIImage *snapshotImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    //Save OnBack
+    [flyer saveFlyer:snapshotImage];
+    
+    // Update Recent Flyer List
+    [flyer setRecentFlyer];
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
+
+
+#pragma mark  Add Content In ScrollViews
 
 /*
  * Add templates in scroll views
  */
 -(void)addTemplatesInSubView{
 
-    templateScrollWidth = 60;
-	templateScrollHeight = 55;
+    widthValue = 60;
+	heightValue = 55;
     
     imgPickerFlag =1;
     
@@ -334,7 +285,7 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 		UIImage *iconImg =   [UIImage  imageWithContentsOfFile:iconName];
 		
 		UIButton *templateButton = [UIButton  buttonWithType:UIButtonTypeCustom];
-		templateButton.frame =CGRectMake(0, 5,templateScrollWidth, templateScrollHeight);
+		templateButton.frame =CGRectMake(0, 5,widthValue, heightValue);
         [templateButton addTarget:self action:@selector(selectTemplate:) forControlEvents:UIControlEventTouchUpInside];
 
         [templateButton setBackgroundColor:[UIColor whiteColor]];
@@ -347,12 +298,12 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
         CGRect frame = templateButton.frame;
         frame.origin = CGPointMake(curXLoc, curYLoc);
         templateButton.frame = frame;
-        curXLoc += (templateScrollWidth)+5;
+        curXLoc += (widthValue)+5;
         
         if(IS_IPHONE_5){
             if(curXLoc >= 320){
                 curXLoc = 0;
-                curYLoc = curYLoc + templateScrollHeight + 7;
+                curYLoc = curYLoc + heightValue + 7;
             }
         }
         
@@ -375,11 +326,17 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 	}// Loop
     
     if(IS_IPHONE_5){
-        [layerScrollView setContentSize:CGSizeMake(320, curYLoc + templateScrollHeight)];
+        [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
     } else {
-        [layerScrollView setContentSize:CGSizeMake(([templateArray count]*(templateScrollWidth+5)), [layerScrollView bounds].size.height)];
+        [layerScrollView setContentSize:CGSizeMake(([templateArray count]*(widthValue+5)), [layerScrollView bounds].size.height)];
     }
     
+    [layerScrollView flashScrollIndicators];
+    
+    // Ressize Hight Width again for others Layers Tile size is different
+    widthValue = 35;
+    heightValue = 35;
+
 }
 
 /*
@@ -387,7 +344,7 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
  */
 -(void)addFontsInSubView{
     
-    
+
     [self deleteSubviewsFromScrollView];
     
     CGFloat curXLoc = 0;
@@ -412,7 +369,7 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 	for (int i = 1; i <=[fontArray count] ; i++)
 	{
 		UIButton *font = [UIButton buttonWithType:UIButtonTypeCustom];
-		font.frame = CGRectMake(0, 0, fontScrollWidth, fontScrollHeight);
+		font.frame = CGRectMake(0, 0, widthValue, heightValue);
         
         [font addTarget:self action:@selector(selectFont:) forControlEvents:UIControlEventTouchUpInside];
 		
@@ -427,12 +384,12 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
         CGRect frame = font.frame;
         frame.origin = CGPointMake(curXLoc, curYLoc);
         font.frame = frame;
-        curXLoc += (fontScrollWidth)+increment;
+        curXLoc += (widthValue)+increment;
         
         if(IS_IPHONE_5){
             if(curXLoc >= 300){
                 curXLoc = 13;
-                curYLoc = curYLoc + fontScrollWidth + 7;
+                curYLoc = curYLoc + widthValue + 7;
             }
         }
         
@@ -461,9 +418,10 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     if(IS_IPHONE_5){
         [layerScrollView setContentSize:CGSizeMake(320, curYLoc)];
     } else {
-        [layerScrollView setContentSize:CGSizeMake((  [fontArray count]*(fontScrollWidth+5)), [layerScrollView bounds].size.height)];
+        [layerScrollView setContentSize:CGSizeMake((  [fontArray count]*(widthValue+5)), [layerScrollView bounds].size.height)];
     }
-    
+
+    [layerScrollView flashScrollIndicators];
 }
 
 /*
@@ -499,7 +457,7 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 		UIButton *size = [UIButton buttonWithType:UIButtonTypeCustom];
         [size addTarget:self action:@selector(selectSize:) forControlEvents:UIControlEventTouchUpInside];
 
-		size.frame = CGRectMake(0, 0, sizeScrollWidth, sizeScrollHeight);
+		size.frame = CGRectMake(0, 0, widthValue, heightValue);
 		NSString *sizeValue =SIZE_ARRAY[(i-1)];
 		[size setBackgroundImage:[UIImage imageNamed:@"a_bg"] forState:UIControlStateNormal];
 		[size setTitle:sizeValue forState:UIControlStateNormal];
@@ -511,12 +469,12 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
         CGRect frame = size.frame;
         frame.origin = CGPointMake(curXLoc, curYLoc);
         size.frame = frame;
-        curXLoc += (sizeScrollWidth)+increment;
+        curXLoc += (widthValue)+increment;
         
         if(IS_IPHONE_5){
             if(curXLoc >= 300){
                 curXLoc = 13;
-                curYLoc = curYLoc + sizeScrollHeight + 7;
+                curYLoc = curYLoc + heightValue + 7;
             }
         }
 
@@ -544,8 +502,11 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     if(IS_IPHONE_5){
         [layerScrollView setContentSize:CGSizeMake(320, curYLoc)];
     } else {
-        [layerScrollView setContentSize:CGSizeMake((  [SIZE_ARRAY count]*(sizeScrollWidth+5)), [layerScrollView bounds].size.height)];
+        [layerScrollView setContentSize:CGSizeMake((  [SIZE_ARRAY count]*(widthValue+5)), [layerScrollView bounds].size.height)];
     }
+    
+    [layerScrollView flashScrollIndicators];
+
 }
 
 /*
@@ -580,7 +541,7 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 	for (int i = 1; i <=  [colorArray count] ; i++)
 	{
 		UIButton *color = [UIButton buttonWithType:UIButtonTypeCustom];
-		color.frame = CGRectMake(0, 0, colorScrollWidth, colorScrollHeight);
+		color.frame = CGRectMake(0, 0, widthValue, heightValue);
         [color addTarget:self action:@selector(selectColor:) forControlEvents:UIControlEventTouchUpInside];
 
 		id colorName = colorArray[(i-1)];
@@ -594,12 +555,12 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
         CGRect frame = color.frame;
         frame.origin = CGPointMake(curXLoc, curYLoc);
         color.frame = frame;
-        curXLoc += (colorScrollWidth)+increment;
+        curXLoc += (widthValue)+increment;
         
         if(IS_IPHONE_5){
             if(curXLoc >= 300){
                 curXLoc = 13;
-                curYLoc = curYLoc + colorScrollHeight + 7;
+                curYLoc = curYLoc + heightValue + 7;
             }
         }
 
@@ -641,9 +602,10 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     if(IS_IPHONE_5){
         [layerScrollView setContentSize:CGSizeMake(320, curYLoc)];
     } else {
-        [layerScrollView setContentSize:CGSizeMake((  [colorArray count]*(colorScrollWidth+5)), [layerScrollView bounds].size.height)];
+        [layerScrollView setContentSize:CGSizeMake((  [colorArray count]*(widthValue+5)), [layerScrollView bounds].size.height)];
     }
     
+    [layerScrollView flashScrollIndicators];
 }
 
 /*
@@ -678,7 +640,7 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 	for (int i = 1; i <=  [borderArray count] ; i++)
 	{
 		UIButton *color = [UIButton buttonWithType:UIButtonTypeCustom];
-		color.frame = CGRectMake(0, 0, borderScrollWidth, borderScrollHeight);
+		color.frame = CGRectMake(0, 0, widthValue, heightValue);
          [color addTarget:self action:@selector(selectFontBorder:) forControlEvents:UIControlEventTouchUpInside];
 		UIColor *colorName =borderArray[(i-1)];
 		UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(color.frame.origin.x, color.frame.origin.y, color.frame.size.width, color.frame.size.height)];
@@ -692,12 +654,12 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
         CGRect frame = color.frame;
         frame.origin = CGPointMake(curXLoc, curYLoc);
         color.frame = frame;
-        curXLoc += (borderScrollWidth)+increment;
+        curXLoc += (widthValue)+increment;
         
         if(IS_IPHONE_5){
             if(curXLoc >= 300){
                 curXLoc = 13;
-                curYLoc = curYLoc + borderScrollHeight + 7;
+                curYLoc = curYLoc + heightValue + 7;
             }
         }
         
@@ -733,8 +695,11 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     if(IS_IPHONE_5){
         [layerScrollView setContentSize:CGSizeMake(320, curYLoc)];
     } else {
-        [layerScrollView setContentSize:CGSizeMake((  [borderArray count]*(borderScrollWidth+5)), [layerScrollView bounds].size.height)];
+        [layerScrollView setContentSize:CGSizeMake((  [borderArray count]*(widthValue+5)), [layerScrollView bounds].size.height)];
     }
+    
+    [layerScrollView flashScrollIndicators];
+
 }
 
 /*
@@ -767,7 +732,7 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 	for (int i = 1; i <=  [borderArray count] ; i++)
 	{
 		UIButton *color = [UIButton buttonWithType:UIButtonTypeCustom];
-		color.frame = CGRectMake(0, 0, borderScrollWidth, borderScrollHeight);
+		color.frame = CGRectMake(0, 0, widthValue, heightValue);
         [color addTarget:self action:@selector(selectBorder:) forControlEvents:UIControlEventTouchUpInside];
 		UIColor *colorName =borderArray[(i-1)];
 		UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(color.frame.origin.x, color.frame.origin.y, color.frame.size.width, color.frame.size.height)];
@@ -780,12 +745,12 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
         CGRect frame = color.frame;
         frame.origin = CGPointMake(curXLoc, curYLoc);
         color.frame = frame;
-        curXLoc += (borderScrollWidth)+increment;
+        curXLoc += (widthValue)+increment;
         
         if(IS_IPHONE_5){
             if(curXLoc >= 300){
                 curXLoc = 13;
-                curYLoc = curYLoc + borderScrollHeight + 7;
+                curYLoc = curYLoc + heightValue + 7;
             }
         }
         
@@ -822,8 +787,11 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     if(IS_IPHONE_5){
         [layerScrollView setContentSize:CGSizeMake(320, curYLoc)];
     } else {
-        [layerScrollView setContentSize:CGSizeMake((  [borderArray count]*(borderScrollWidth+5)), [layerScrollView bounds].size.height)];
+        [layerScrollView setContentSize:CGSizeMake((  [borderArray count]*(widthValue+5)), [layerScrollView bounds].size.height)];
     }
+    
+    [layerScrollView flashScrollIndicators];
+
 }
 /*
  * Add flyer Symbols in scroll views
@@ -899,6 +867,9 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     } else {
         [layerScrollView setContentSize:CGSizeMake(([symbolArray count]*(symbolScrollWidth+5)), [layerScrollView bounds].size.height)];
     }
+    
+    [layerScrollView flashScrollIndicators];
+
 
 }
 
@@ -978,8 +949,149 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     } else {
         [layerScrollView setContentSize:CGSizeMake(([iconArray count]*(iconScrollWidth+5)), [layerScrollView bounds].size.height)];
     }
+    
+    [layerScrollView flashScrollIndicators];
+
 }
 
+
+/*
+ * When we Back To Main View its
+ * add All Layers to ScrollView for Edit and Delete Layers
+ */
+-(void)addAllLayersIntoScrollView {
+    
+    //Remove Subviews of ScrollView
+    [self deleteSubviewsFromScrollView];
+    
+    NSInteger layerScrollWidth = 55;
+    NSInteger layerScrollHeight = 40;
+    
+    if( self.flyimgView.layers.count == 0 ){
+        [self addScrollView:addMoreLayerOrSaveFlyerLabel];
+        return;
+    }
+    
+    CGFloat curXLoc = 0;
+    CGFloat curYLoc = 5;
+    
+    if(IS_IPHONE_5)
+    {
+        curXLoc = 10;
+        curYLoc = 10;
+    }
+    
+    NSArray *sortedLayers = [flyer allKeys];
+    NSMutableDictionary *layers = self.flyimgView.layers ;
+    int cnt = 0;
+    for (NSString* uid in sortedLayers) {
+        
+        //check for Flyer Background Key
+        if ( ![uid isEqualToString:@"Template"] ) {
+            
+            id lay = [layers objectForKey:uid];
+            LayerTileButton *layerButton;
+            
+            // Checking for Label or ImageView
+            if ( [lay isKindOfClass:[UILabel class]] == YES ) {
+                
+                CustomLabel *lbl = lay;
+                CustomLabel *scrollLabel = [[CustomLabel alloc] initWithFrame:lbl.frame];
+                scrollLabel.backgroundColor = [UIColor clearColor];
+                scrollLabel.textAlignment = UITextAlignmentCenter;
+                scrollLabel.adjustsFontSizeToFitWidth = YES;
+                scrollLabel.lineBreakMode = UILineBreakModeTailTruncation;
+                scrollLabel.numberOfLines = 80;
+                scrollLabel.lineWidth = 2;
+                scrollLabel.text = lbl.text;
+                scrollLabel.font = lbl.font;
+                scrollLabel.borderColor = lbl.borderColor;
+                scrollLabel.textColor = lbl.textColor;
+                
+                
+                layerButton = [LayerTileButton  buttonWithType:UIButtonTypeCustom];
+                [layerButton addTarget:self action:@selector(selectLayer:) forControlEvents:UIControlEventTouchUpInside];
+                layerButton.uid = uid;
+                layerButton.frame =CGRectMake(0, 5,layerScrollWidth, layerScrollHeight);
+                
+                [layerButton addTarget:self action:@selector(editLayer:) forControlEvents:UIControlEventTouchUpInside];
+                
+                [layerButton setBackgroundColor:[UIColor clearColor]];
+                [layerButton.layer setBorderWidth:2];
+                UIColor * c = [UIColor lightGrayColor];
+                [layerButton.layer setCornerRadius:8];
+                [layerButton.layer setBorderColor:c.CGColor];
+                
+                scrollLabel.frame  = CGRectMake(layerButton.frame.origin.x+5, layerButton.frame.origin.y-2, layerButton.frame.size.width-10, layerButton.frame.size.height-7);
+                
+                [layerButton addSubview:scrollLabel];
+                
+                layerButton.tag = [[NSString stringWithFormat:@"%@%d",@"111",cnt] integerValue];
+                
+                
+            } else {
+                
+                //Here We write code for ImageView
+                UIImageView *dicImgView = lay;
+                
+                UIImageView *tileImageView = [[UIImageView alloc] initWithFrame:dicImgView.frame];
+                tileImageView.image = dicImgView.image;
+                
+                layerButton = [LayerTileButton  buttonWithType:UIButtonTypeCustom];
+                [layerButton addTarget:self action:@selector(selectLayer:) forControlEvents:UIControlEventTouchUpInside];
+                layerButton.uid = uid;
+                layerButton.frame =CGRectMake(0, 5,layerScrollWidth, layerScrollHeight);
+                
+                [layerButton addTarget:self action:@selector(editLayer:) forControlEvents:UIControlEventTouchUpInside];
+                
+                [layerButton setBackgroundColor:[UIColor clearColor]];
+                [layerButton.layer setBorderWidth:2];
+                UIColor * c = [UIColor lightGrayColor];
+                [layerButton.layer setCornerRadius:8];
+                [layerButton.layer setBorderColor:c.CGColor];
+                
+                tileImageView.frame  = CGRectMake(layerButton.frame.origin.x+5, layerButton.frame.origin.y-2, layerButton.frame.size.width-10, layerButton.frame.size.height-7);
+                
+                [layerButton addSubview:tileImageView];
+                
+                layerButton.tag = [[NSString stringWithFormat:@"%@%d",@"444",cnt] integerValue];
+                
+            }//End if Checking for Label or ImageView
+            
+            CGRect frame = layerButton.frame;
+            frame.origin = CGPointMake(curXLoc, curYLoc);
+            layerButton.frame = frame;
+            curXLoc += (layerScrollWidth)+5;
+            
+            if(IS_IPHONE_5){
+                if(curXLoc >= 300){
+                    curXLoc = 10;
+                    curYLoc = curYLoc + layerScrollHeight + 7;
+                }
+            }
+            
+            [layerScrollView addSubview:layerButton];
+            
+            
+        }
+        
+        cnt ++;
+        
+    }//Loop
+    
+    if(IS_IPHONE_5){
+        [layerScrollView setContentSize:CGSizeMake(300, curYLoc + layerScrollHeight)];
+    } else {
+        [layerScrollView setContentSize:CGSizeMake(([layers count]*(layerScrollWidth+5)), [layerScrollView bounds].size.height)];
+    }
+    
+    [self addScrollView:layerScrollView];
+    
+    
+}
+
+
+#pragma mark  Select Layer On ScrollView
 
 /*
  * When any font is selected
@@ -1187,119 +1299,6 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 }
 
 
-/*
- *Here we Copy Image to Template Directory
- */
--(void)copyImageToTemplate :(UIImage *)img{
-    
-    // Create Symbol direcrory if not created
-    NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
-    
-    NSString *FolderPath = [NSString stringWithFormat:@"%@/Template/template.jpg", currentpath];
-    
-    NSData *imgData = UIImagePNGRepresentation(img);
-    
-    //Create a Image Copy to Current Flyer Folder
-    [[NSFileManager defaultManager] createFileAtPath:FolderPath contents:imgData attributes:nil];
-
-}
-
--(NSString *)getImagePathforPhoto :(UIImage *)img{
-    
-    // Create Symbol direcrory if not created
-    NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
-    
-    NSString *FolderPath;
-    NSString *dicPath;
-
-    FolderPath = [NSString stringWithFormat:@"%@/Photo", currentpath];
-    dicPath = @"Photo";
-    
-    //Create Unique Id for Image
-    int timestamp = [[NSDate date] timeIntervalSince1970];
-    
-    NSString *imageFolderPath = [NSString stringWithFormat:@"%@/%d.jpg", FolderPath,timestamp];
-    
-    dicPath = [dicPath stringByAppendingString:[NSString stringWithFormat:@"/%d.jpg",timestamp]];
-    
-    NSData *imgData = UIImagePNGRepresentation(img);
-    
-    //Create a Image Copy to Current Flyer Folder
-    [[NSFileManager defaultManager] createFileAtPath:imageFolderPath contents:imgData attributes:nil];
-    
-    
-    return dicPath;
-}
-
-
--(NSString *)getImagePathByTag :(NSString *)imgName{
-
-    // Create Symbol direcrory if not created
-    NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
-    
-    NSString *FolderPath;
-    NSString *dicPath;
-    
-    //when we create Symbols
-    if ([imgName rangeOfString:@"symbol"].location == NSNotFound) {
-        NSLog(@"sub string doesnt exist");
-    } else {
-        FolderPath = [NSString stringWithFormat:@"%@/Symbol", currentpath];
-        dicPath = @"Symbol";
-    }
-    
-    //when we create Icon
-    if ([imgName rangeOfString:@"ricon"].location == NSNotFound) {
-        NSLog(@"sub string doesnt exist");
-    } else {
-        FolderPath = [NSString stringWithFormat:@"%@/Icon", currentpath];
-        dicPath = @"Icon";
-    }
-    
-    //when we set BackGround
-    if ([imgName rangeOfString:@"Template"].location == NSNotFound) {
-        NSLog(@"sub string doesnt exist");
-    } else {
-        FolderPath = [NSString stringWithFormat:@"%@/Template", currentpath];
-        dicPath = @"Template";
-    }
-    
-    
-    NSString *imageFolderPath ;
-    NSString *existImagePath ;
-    
-    if ([dicPath isEqualToString:@"Template"]) {
-
-        imageFolderPath = [NSString stringWithFormat:@"%@/template.jpg", FolderPath];
-        dicPath = [dicPath stringByAppendingString:[NSString stringWithFormat:@"/template.jpg"]];
-
-        //Getting Image From Bundle
-        existImagePath =[[NSBundle mainBundle] pathForResource:imgName ofType:@"jpg"];
-
-    } else {
-        
-        //Create Unique Id for Image
-        int timestamp = [[NSDate date] timeIntervalSince1970];
-        
-        imageFolderPath = [NSString stringWithFormat:@"%@/%d.jpg", FolderPath,timestamp];
-        dicPath = [dicPath stringByAppendingString:[NSString stringWithFormat:@"/%d.jpg",timestamp]];
-
-        //Getting Image From Bundle
-        existImagePath =[[NSBundle mainBundle] pathForResource:imgName ofType:@"png"];
-
-    }
-    
-    UIImage *realImage =  [UIImage imageWithContentsOfFile:existImagePath];
-    NSData *imgData = UIImagePNGRepresentation(realImage);
-    
-    //Create a Image Copy to Current Flyer Folder
-    [[NSFileManager defaultManager] createFileAtPath:imageFolderPath contents:imgData attributes:nil];
-
-    
-    return dicPath;
-
-}
-
 
 /*
  * Called when select a symbol
@@ -1418,7 +1417,7 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 
 
 /*
- * When any border is selected
+ * When any Flyer border is selected
  */
 -(void)selectBorder:(id)sender
 {
@@ -1449,7 +1448,21 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 	}
 }
 
+/*
+ * When any layer is selected while editing flyer
+ * its Also Call editLayer Method
+ */
+-(void)selectLayer:(id)sender {
+    
+    UIView *sView = editButtonGlobal;
+    
+    NSString *tag = [NSString stringWithFormat:@"%d",sView.tag];
+    NSLog(@"%@",tag);
+    
+}
 
+
+#pragma mark  Progress Indicator
 
 -(void)showLoadingView:(NSString *)message{
     [self showLoadingIndicator];
@@ -1459,8 +1472,11 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     [self hideLoadingIndicator];
 }
 
+#pragma mark  NBUKIT
 
-
+/*
+ * Here we Load Gallery
+ */
 -(void)loadCustomPhotoLibrary{
     
     nbuGallary = [[LibraryViewController alloc] initWithNibName:@"LibraryViewController" bundle:nil];
@@ -1508,7 +1524,9 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 }
 
 
-
+/*
+ * Here we Open Camera for Capture Image
+ */
 -(void)openCustomCamera{
 
     nbuCamera = [[CameraViewController alloc]initWithNibName:@"CameraViewController" bundle:nil];
@@ -1560,6 +1578,7 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 
 
 #pragma mark UIAlertView delegate
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     
     if(alertView == deleteAlert && buttonIndex == 1) {
@@ -1571,108 +1590,12 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 
   }
 
-#pragma mark After ViewWillAppear Method Sequence
--(void) callMenu
-{
-    
-    if (![currentLayer isEqualToString:@""]) [self.flyimgView layerStoppedEditing:currentLayer];
-        
-    
-    //Here we take Snap shot of Flyer
-    UIGraphicsBeginImageContextWithOptions(self.flyimgView.bounds.size, YES, 0.0f);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    [self.flyimgView.layer renderInContext:context];
-    UIImage *snapshotImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    //Save OnBack
-    [flyer saveFlyer:snapshotImage];
-    
-    // Update Recent Flyer List
-    [flyer setRecentFlyer];
-    
-    [self.navigationController popViewControllerAnimated:YES];
-}
 
-
+#pragma mark Custom Methods
 
 /*
- * When any layer is selected while editing flyer
- * its Also Call editLayer Method
+ * Load Help Screen
  */
--(void)selectLayer:(id)sender {
-    
-    UIView *sView = editButtonGlobal;
-    
-    NSString *tag = [NSString stringWithFormat:@"%d",sView.tag];
-    NSLog(@"%@",tag);
-    
-}
-
-
-/*
- * When any Layer Tap for Edit its Call 
- * and Here we manage all Layers
- */
--(void)editLayer:(LayerTileButton *)editButton{
-    
-    
-    editButtonGlobal = editButton;
-    currentLayer =  editButton.uid;
-    editButtonGlobal.uid = currentLayer;
-    
-    [self.flyimgView layerIsBeingEdited:currentLayer];
-    
-
-    //when tap on Text Box
-    NSString *btnText = [flyer getText:currentLayer];
-
-    if (![btnText isEqualToString:@""] && btnText != nil) {
-        
-        lastTextView = [[UITextView  alloc] init];
-        lastTextView.text = btnText;
-        lastTextView.accessibilityLabel = @"TextInput";
-        
-        //For Immediate Showing Delete button
-        [self callStyle];
-    }
-    
-    
-    //when tap on Image Box
-    NSString *imgName = [flyer getImageName:currentLayer];
-    
-    if (![imgName isEqualToString:@""] && imgName != nil) {
-        
-        //when we tap on Symbols
-        if ([imgName rangeOfString:@"Symbol"].location == NSNotFound) {
-            NSLog(@"sub string doesnt exist");
-        } else {
-            // Call Icon
-            [self setAddMoreLayerTabAction:addMoreIconTabButton];
-        }
-        
-        //when we tap on icon
-        if ([imgName rangeOfString:@"Icon"].location == NSNotFound) {
-            NSLog(@"sub string doesnt exist");
-        } else {
-            
-            // Call Symbol
-            [self setAddMoreLayerTabAction:addMoreSymbolTabButton];
-        }
-        
-        //when we tap on icon
-        if ([imgName rangeOfString:@"Photo"].location == NSNotFound) {
-            NSLog(@"sub string doesnt exist");
-        } else {
-            
-            // Call Photo Tab
-            [self setAddMoreLayerTabAction:addMorePhotoTabButton];
-        }
-    }
-    
-}
-
-
 
 -(void)loadHelpController{
 
@@ -1680,8 +1603,6 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     [self.navigationController pushViewController:helpController animated:NO];
     [self callAddMoreLayers];
 }
-
-
 
 
 /*
@@ -1760,6 +1681,28 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 	[lastTextView becomeFirstResponder];
 }
 
+
+/*
+ * Here we add or Replace Two Button on Top Bar
+ */
+-(void)addDonetoRightBarBotton{
+    
+    //Delete Bar Button
+    UIButton *delButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 4, 45, 42)];
+    [delButton addTarget:self action:@selector(callDeleteLayer) forControlEvents:UIControlEventTouchUpInside];
+    [delButton setBackgroundImage:[UIImage imageNamed:@"delete_button"] forState:UIControlStateNormal];
+    delButton.showsTouchWhenHighlighted = YES;
+    UIBarButtonItem *delBarButton = [[UIBarButtonItem alloc] initWithCustomView:delButton];
+    
+    
+    UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+    [doneButton addTarget:self action:@selector(callAddMoreLayers) forControlEvents:UIControlEventTouchUpInside];
+    [doneButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
+    doneButton.showsTouchWhenHighlighted = YES;
+    UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
+    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:doneBarButton,delBarButton,nil]];
+    
+}
 
 /*
  * Here we Set ScrollView and Bottom Tabs
@@ -1862,11 +1805,237 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 
 }
 
+-(void)deleteLayer:(UIButton *)crossButton{
+    
+    
+    deleteAlert = [[UIAlertView alloc]initWithTitle:@"Warning" message:@"Delete this layer?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK" ,nil];
+    [deleteAlert show];
+}
+
+-(void) callDeleteLayer{
+    
+    deleteAlert = [[UIAlertView alloc]initWithTitle:@"Warning" message:@"Delete this layer?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK" ,nil];
+    [deleteAlert show];
+    
+    
+}
+
+
+-(void)createDirectoryAtPath:(NSString *)directory{
+	if (![[NSFileManager defaultManager] fileExistsAtPath:directory isDirectory:NULL]) {
+        NSError *error;
+        [[NSFileManager defaultManager] createDirectoryAtPath:directory withIntermediateDirectories:YES attributes:nil error:&error];
+	}
+}
+
+/*
+ * For ScrollView Adding On runtime
+ */
+-(void)addScrollView:(id)obj{
+    
+    // Remove ScrollViews
+    NSArray *viewsToRemove = [self.contextView subviews];
+    for (UIView *v in viewsToRemove) {
+        [v removeFromSuperview];
+    }
+    
+    //Add ScrollViews
+    [self.contextView addSubview:obj];
+    
+}
+
+/*
+ * For Adding Bottom Button On runtime
+ */
+-(void)addBottomTabs:(id)obj{
+    
+    // Remove ScrollViews
+    NSArray *viewsToRemove = [self.libraryContextView subviews];
+    for (UIView *v in viewsToRemove) {
+        [v removeFromSuperview];
+    }
+    
+    //Add ScrollViews
+    [self.libraryContextView addSubview:obj];
+}
 
 
 /*
- * Here we Replace Current Flyer Folder From History of Last Generated
+ *Here we Remove all Subviews of ScrollViews
  */
+-(void)deleteSubviewsFromScrollView{
+    
+    NSArray *ChildViews = [self.layerScrollView subviews];
+    
+    for (UIView *child in ChildViews) {
+        
+        [child removeFromSuperview];
+    }
+    
+}
+
+/*
+ * Here we Getting Snap Shot of Flyer Image View Context
+ * Return
+ *  Image
+ */
+-(UIImage *)getFlyerSnapShot {
+    
+    //Here we take Snap shot of Flyer
+    UIGraphicsBeginImageContextWithOptions(self.flyimgView.bounds.size, YES, 0.0f);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    [self.flyimgView.layer renderInContext:context];
+    UIImage *snapshotImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return snapshotImage;
+}
+
+/*
+ * This resets the flyer image view by removing and readding all its subviews
+ */
+-(void)renderFlyer {
+    
+    // Remove all Subviews inside image view
+    NSArray *viewsToRemove = [self.flyimgView subviews];
+    for (UIView *v in viewsToRemove) {
+        [v removeFromSuperview];
+    }
+    
+    NSArray *flyerPiecesKeys = [flyer allKeys];
+    
+    for (int i = 0 ; i < flyerPiecesKeys.count; i++) {
+        
+        //Getting Layers Detail from Master Dictionary
+        NSMutableDictionary *dic = [flyer getLayerFromMaster:[flyerPiecesKeys objectAtIndex:i]];
+        
+        //Create Subview from dictionary
+        [self.flyimgView renderLayer:[flyerPiecesKeys objectAtIndex:i] layerDictionary:dic];
+        
+    }
+    
+}
+
+
+#pragma mark Flyer Modified
+
+
+/*
+ * When any Layer Tap for Edit its Call
+ * and Here we manage all Layers
+ */
+-(void)editLayer:(LayerTileButton *)editButton{
+    
+    
+    editButtonGlobal = editButton;
+    currentLayer =  editButton.uid;
+    editButtonGlobal.uid = currentLayer;
+    
+    [self.flyimgView layerIsBeingEdited:currentLayer];
+    
+    
+    //when tap on Text Box
+    NSString *btnText = [flyer getText:currentLayer];
+    
+    if (![btnText isEqualToString:@""] && btnText != nil) {
+        
+        lastTextView = [[UITextView  alloc] init];
+        lastTextView.text = btnText;
+        
+        lastTextView.accessibilityLabel = @"TextInput";
+        
+        //For Immediate Showing Delete button
+        [self callStyle];
+    }
+    
+    
+    //when tap on Image Box
+    NSString *imgName = [flyer getImageName:currentLayer];
+    
+    if (![imgName isEqualToString:@""] && imgName != nil) {
+        
+        //when we tap on Symbols
+        if ([imgName rangeOfString:@"Symbol"].location == NSNotFound) {
+            NSLog(@"sub string doesnt exist");
+        } else {
+            // Call Icon
+            [self setAddMoreLayerTabAction:addMoreIconTabButton];
+        }
+        
+        //when we tap on icon
+        if ([imgName rangeOfString:@"Icon"].location == NSNotFound) {
+            NSLog(@"sub string doesnt exist");
+        } else {
+            
+            // Call Symbol
+            [self setAddMoreLayerTabAction:addMoreSymbolTabButton];
+        }
+        
+        //when we tap on icon
+        if ([imgName rangeOfString:@"Photo"].location == NSNotFound) {
+            NSLog(@"sub string doesnt exist");
+        } else {
+            
+            // Call Photo Tab
+            [self setAddMoreLayerTabAction:addMorePhotoTabButton];
+        }
+    }
+    
+}
+
+
+/*
+ * Here we Delete Layer form Dictionary and Controller
+ */
+-(void)deleteLayer:(LayerTileButton *)layerButton overrided:(BOOL)overrided{
+    
+    
+    //Delete From Master Dictionary
+    [flyer deleteLayer:layerButton.uid];
+    
+    //Delete From View
+    [flyimgView deleteLayer:layerButton.uid];
+    
+    NSLog(@"Delete Layer Tag: %d", layerButton.tag);
+    
+    //Set Main View On Screen
+    [self callAddMoreLayers];
+}
+
+
+
+/**
+ * Frame changed for layer, let the model know.
+ */
+- (void)frameChangedForLayer:(NSString *)uid frame:(CGRect)frame {
+    
+    if ([widthTabButton isSelected]) {
+        
+        CGRect lastFrame = [flyer getImageFrame:uid];
+        
+        lastFrame.origin.x = frame.origin.x;
+        lastFrame.size.width = frame.size.width;
+        frame = lastFrame;
+        
+    } else if ([heightTabButton isSelected]) {
+        
+        CGRect lastFrame = [flyer getImageFrame:uid];
+        
+        lastFrame.origin.y = frame.origin.y;
+        lastFrame.size.height = frame.size.height;
+        frame = lastFrame;
+        
+    }
+    
+    //Update Dictionary
+    [flyer setImageFrame:uid :frame];
+    
+    //Update Controller
+    [self.flyimgView renderLayer:uid layerDictionary:[flyer getLayerFromMaster:uid]];
+}
+
+
+
 -(void)undoFlyer{
     
     //Stop Edit Mode for remove Layer Border if Selected
@@ -1936,7 +2105,6 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     
      //ShareButton
     [shareButton setBackgroundImage:[UIImage imageNamed:@"share_button"] forState:UIControlStateNormal];
-
     
     //UndoButton
     UIButton *undoButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
@@ -1992,26 +2160,35 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     //Here we Set Undo Bar Button Status
     [self setUndoStatus];
     
-    //Here we Add All Generated Layers add into ScrollView
-    [self addAllLayersIntoScrollView ];
+    // Here we Start Animation
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.4f];
+        //Here we Add All Generated Layers add into ScrollView
+        [self addAllLayersIntoScrollView ];
+    [UIView commitAnimations];
+    //End Animation
+    
     
     currentLayer = @"";
    
 }
 
+#pragma mark  Share Flyer
 
 -(void)share
 {
     float xValue = sharePanel.frame.origin.x;
     
     if (xValue == 30) {
+        
+        [shareviewcontroller.titleView resignFirstResponder];
+        [shareviewcontroller.descriptionView resignFirstResponder];
+
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0.4f];
         [sharePanel setFrame:CGRectMake(320, 64, 290,480 )];
         
         [UIView commitAnimations];
-        [shareviewcontroller.titleView resignFirstResponder];
-        [shareviewcontroller.descriptionView resignFirstResponder];
   
         [shareButton setBackgroundImage:[UIImage imageNamed:@"share_button"] forState:UIControlStateNormal];
 
@@ -2022,12 +2199,10 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
         [shareButton setBackgroundImage:[UIImage imageNamed:@"share_button_selected"] forState:UIControlStateNormal];
         NSString *shareImagePath = [flyer getImageForShare];
         UIImage *shareImage =  [UIImage imageWithContentsOfFile:shareImagePath];
-        //[self getCurrentFrameAndSaveIt];
 
         shareviewcontroller.selectedFlyerImage = shareImage;
         shareviewcontroller.flyer = self.flyer;
         shareviewcontroller.imageFileName = shareImagePath;
-        shareviewcontroller.detailFileName = [finalImgWritePath stringByReplacingOccurrencesOfString:@".jpg" withString:@".txt"];
         shareviewcontroller.titleView.text = [flyer getFlyerTitle];
         shareviewcontroller.descriptionView.text = [flyer getFlyerDescription];
         shareviewcontroller.selectedFlyerDescription = [flyer getFlyerDescription];
@@ -2046,31 +2221,7 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 }
 
 
-
--(void)saveMyFlyer
-{
-	alert = [[UIActionSheet alloc] 
-			 initWithTitle: @"Save The Flyr " 
-			 delegate:self
-			 cancelButtonTitle:@"Cancel"
-			 destructiveButtonTitle:nil
-			 otherButtonTitles:@"Save",@"Save & Distribute",nil];
-	
-	[alert showInView:self.view];
-}
-
-
--(void)loadDistributeView
-{
-	
-	SaveFlyerController *svController = [[SaveFlyerController alloc]initWithNibName:@"SaveFlyerController" bundle:nil];
-	svController.flyrImg = finalFlyer;
-	svController.ptController = self;
-	[self.navigationController pushViewController:svController animated:YES];
-}
-
-
-
+#pragma mark  Bottom Tabs Context
 /*
  * When we click on Text Tab
  * This Method Manage Text SubTabs
@@ -2090,8 +2241,13 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 	if(selectedButton == fontTabButton)
 	{
         
-        //Create ScrollView
-        [self addFontsInSubView ];
+        // Here we Start Animation
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:0.4f];
+            //Create ScrollView
+            [self addFontsInSubView ];
+        [UIView commitAnimations];
+		//End Animation
         
          //Add ContextView
         [self addScrollView:layerScrollView];
@@ -2100,9 +2256,14 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 	}
 	else if(selectedButton == colorTabButton)
 	{
-       
-        //Create ScrollView
-        [self addColorsInSubView];
+        // Here we Start Animation
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:0.4f];
+            //Create ScrollView
+            [self addColorsInSubView];
+        [UIView commitAnimations];
+		//End Animation
+        
         
         //Add ContextView
         [self addScrollView:layerScrollView];
@@ -2111,9 +2272,15 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 	}
 	else if(selectedButton == sizeTabButton)
 	{
-        //Create ScrollView
-        [self   addSizeInSubView];
 
+        // Here we Start Animation
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:0.4f];
+            //Create ScrollView
+            [self addSizeInSubView];
+        [UIView commitAnimations];
+		//End Animation
+        
         //Add ContextView
         [self addScrollView:layerScrollView];
         
@@ -2122,8 +2289,13 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
 	else if(selectedButton == fontBorderTabButton)
 	{
         
-        //Create ScrollView
-        [self addTextBorderInSubView];
+        // Here we Start Animation
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:0.4f];
+            //Create ScrollView
+            [self addTextBorderInSubView];
+        [UIView commitAnimations];
+		//End Animation
         
         //Add ContextView
         [self addScrollView:layerScrollView];
@@ -2156,9 +2328,15 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     if( selectedButton == backtemplates )
 	{
         [backtemplates setBackgroundImage:[UIImage imageNamed:@"addbg_library_selected"] forState:UIControlStateNormal];
+        
+        // Here we Start Animation
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:0.4f];
+            //Create ScrollView
+            [self addTemplatesInSubView];
+        [UIView commitAnimations];
+		//End Animation
 
-        //Create ScrollView
-        [self addTemplatesInSubView];
         
         //Add ContextView
         [self addScrollView:layerScrollView];
@@ -2178,8 +2356,14 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     {
         [flyerBorder setSelected:YES];
         
-        //Create ScrollView
-        [self addFlyerBorderInSubView];
+        // Here we Start Animation
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:0.4f];
+            //Create ScrollView
+            [self addFlyerBorderInSubView];
+        [UIView commitAnimations];
+		//End Animation
+        
         
         //Add ContextView
         [self addScrollView:layerScrollView];
@@ -2295,8 +2479,9 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
         //Here we Highlight The ImageView
         [self.flyimgView layerIsBeingEdited:currentLayer];
         
-        
+        //Here we Add Some Text In ScrolView
         [self addScrollView:takeOrAddPhotoLabel];
+	    
         [self choosePhoto];
 		imgPickerFlag =2;
         [addMorePhotoTabButton setSelected:YES];
@@ -2314,9 +2499,12 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
         [addMoreSymbolTabButton setSelected:YES];
         [self addDonetoRightBarBotton];
         
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:0.4f];
+            //Create ScrollView
+            [self addFlyerIconInSubView];
+        [UIView commitAnimations];
         
-        //Create ScrollView
-        [self addFlyerIconInSubView];
 
         //Add Context
         [self addScrollView:layerScrollView];
@@ -2338,8 +2526,12 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
         //Add right Bar button
         [self addDonetoRightBarBotton];
         
-        //Create ScrollView
-        [self addSymbolsInSubView];
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:0.4f];
+            //Create ScrollView
+            [self addSymbolsInSubView];
+        [UIView commitAnimations];
+
         
         //Add ContextView
         [self addScrollView:layerScrollView];
@@ -2364,296 +2556,8 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     }
 }
 
-/*
- * Here we Delete Button From Scrollview
- */
--(void)resetLayerScrollView :(NSString *)udid{
 
-    
-    NSArray *ChildViews = [self.layerScrollView subviews];
-    
-    for (LayerTileButton *child in ChildViews) {
-        
-        if (child.uid == udid) {
-            
-            //Remove From ScrollView
-            [child removeFromSuperview];
-
-        }
-    }
-    
-
-
-}
-
--(void)resetLayerScrollView{
-
-}
-
-
-
-
-
--(void) callDeleteLayer{
-    
-    deleteAlert = [[UIAlertView alloc]initWithTitle:@"Warning" message:@"Delete this layer?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK" ,nil];
-    [deleteAlert show];
-    
-
-}
-
--(void)deleteLayer:(UIButton *)crossButton{
-
-    crossButtonGlobal = crossButton;
-    
-    deleteAlert = [[UIAlertView alloc]initWithTitle:@"Warning" message:@"Delete this layer?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK" ,nil];
-    [deleteAlert show];
-}
-
--(void)deleteLayer:(LayerTileButton *)layerButton overrided:(BOOL)overrided{
-    
-    
-     //Delete From Master Dictionary
-    [flyer deleteLayer:layerButton.uid];
-    
-    //Delete From View
-    [flyimgView deleteLayer:layerButton.uid];
-    
-    NSLog(@"Delete Layer Tag: %d", layerButton.tag);
-    
-    //Set Main View On Screen
-    [self callAddMoreLayers];
-}
-
-
-
--(NSMutableArray *)photoLayersArray{
-    
-    if(photoLayersArray){
-        return photoLayersArray;
-    } else {
-        
-        photoLayersArray = [[NSMutableArray alloc] init];
-        return photoLayersArray;
-    }
-}
-
--(NSMutableArray *)symbolLayersArray{
-
-    if(symbolLayersArray){
-        return symbolLayersArray;
-    } else {
-    
-        symbolLayersArray = [[NSMutableArray alloc] init];
-        //[symbolLayersArray addObject:symbolImgView];
-        return symbolLayersArray;
-    }
-}
-
--(NSMutableArray *)iconLayersArray{
-    
-    if(iconLayersArray){
-        return iconLayersArray;
-    } else {
-        
-        iconLayersArray = [[NSMutableArray alloc] init];
-        //[iconLayersArray addObject:iconImgView];
-        return iconLayersArray;
-    }
-}
-
-
-
--(NSMutableArray *)textLabelLayersArray{
-    
-    if(textLabelLayersArray){
-        return textLabelLayersArray;
-    } else {
-        
-        textLabelLayersArray = [[NSMutableArray alloc] init];
-        return textLabelLayersArray;
-    }
-}
-
-
-
-
-
-#pragma mark Save Flyer image and write to Documents/Flyr folder
-
--(NSData*)getCurrentFrameAndSaveIt
-{
-    return nil;//Temporary
-	CGSize size = CGSizeMake(self.imgView.bounds.size.width,self.imgView.bounds.size.height );
-    //if ([UIScreen instancesRespondToSelector:@selector(scale)]) {
-        //UIGraphicsBeginImageContextWithOptions(size, NO, 2.0);
-        UIGraphicsBeginImageContextWithOptions(size, NO, 2.0);
-    //} else {
-    //    UIGraphicsBeginImageContext(size);
-    //}
-	[self.imgView.layer renderInContext:UIGraphicsGetCurrentContext()];
-	UIImage *screenImage = UIGraphicsGetImageFromCurrentImageContext();
-	UIGraphicsEndImageContext();
-
-
-    PFUser *user = [PFUser currentUser];
-    
-	NSString *homeDirectoryPath = NSHomeDirectory();
-	NSString *usernamePath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/",user.username]];
-    if (![[NSFileManager defaultManager] fileExistsAtPath:usernamePath isDirectory:NULL]) {
-        NSError *error;
-		[[NSFileManager defaultManager] createDirectoryAtPath:usernamePath withIntermediateDirectories:YES attributes:nil error:&error];
-	}
-
-	NSString *MyFlyerPath = [usernamePath stringByAppendingString:[NSString stringWithFormat:@"Flyr/"]];
-	NSString *folderPath = [NSString pathWithComponents:@[[NSString stringWithString:[MyFlyerPath stringByStandardizingPath]]]];
-	NSInteger imgCount;
-	NSInteger largestImgCount=-1;
-	NSArray *files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:folderPath error:nil];
-	
-	NSString *finalImgDetailWritePath;
-
-	/************************ CREATE UNIQUE NAME FOR IMAGE ***********************************/
-    
-    // Not -1 means it is in Edit mode and we already have flyer number
-    if(flyerNumber != -1){
-    
-        finalImgWritePath = [folderPath stringByAppendingString:[NSString stringWithFormat:@"/IMG_%d.jpg", flyerNumber]];
-        finalImgDetailWritePath = [folderPath stringByAppendingString:[NSString stringWithFormat:@"/IMG_%d.txt", flyerNumber]];
-        largestImgCount = flyerNumber;
-        
-        imageNameNew = [NSString stringWithFormat:@"/IMG_%d.jpg",largestImgCount];
-
-    } else {
-    
-        if(files == nil)
-        {
-            finalImgWritePath = [folderPath stringByAppendingString:@"/IMG_0.jpg"];
-            finalImgDetailWritePath = [folderPath stringByAppendingString:@"/IMG_0.txt"];
-            
-        }
-        else
-        {
-           
-            for(int i = 0 ; i < [files count];i++)
-            {
-                NSString *lastFileName = files[i];
-                NSLog(@"%@",lastFileName);
-                lastFileName = [lastFileName stringByReplacingOccurrencesOfString:@".jpg" withString:@""];
-                lastFileName = [lastFileName stringByReplacingOccurrencesOfString:@"IMG_" withString:@""];
-                imgCount = [lastFileName intValue];
-                if(imgCount > largestImgCount){
-                    largestImgCount = imgCount;
-                }
-                
-            }
-            imageNameNew = [NSString stringWithFormat:@"/IMG_%d.jpg",++largestImgCount];
-            finalImgWritePath = [folderPath stringByAppendingString:imageNameNew];
-            NSString *newImgDetailName = [NSString stringWithFormat:@"/IMG_%d.txt",largestImgCount];
-            finalImgDetailWritePath = [folderPath stringByAppendingString:newImgDetailName];
-            
-        }
-    }
-	/************************ END OF CREATE UNIQUE NAME FOR IMAGE ***********************************/
-
-	NSString *imgPath = [NSString pathWithComponents:@[[NSString stringWithString:[finalImgWritePath stringByExpandingTildeInPath]]]];
-	if (![[NSFileManager defaultManager] fileExistsAtPath:folderPath isDirectory:NULL]) {
-        NSError *error;
-        [[NSFileManager defaultManager] createDirectoryAtPath:folderPath withIntermediateDirectories:YES attributes:nil error:&error];
-	}
-    
-
-	
-    // Save flyer details
-    [self saveFlyerDetails:finalImgDetailWritePath];
-	
-    // Save states of all supported social media
-    if(files){
-        [self saveSocialStates:folderPath imageName:imageNameNew];
-    }else{
-        [self saveSocialStates:folderPath imageName:@"/IMG_0.jpg"];
-    }
-
-	NSData *imgData = UIImagePNGRepresentation(screenImage);
-	[[NSFileManager defaultManager] createFileAtPath:imgPath contents:imgData attributes:nil];
-    
-    if([[NSUserDefaults standardUserDefaults] stringForKey:@"saveToCameraRollSetting"]){
-        UIImageWriteToSavedPhotosAlbum(screenImage, nil, nil, nil);
-    }
-
-	return imgData;
-}
-
--(void)createDirectoryAtPath:(NSString *)directory{
-	if (![[NSFileManager defaultManager] fileExistsAtPath:directory isDirectory:NULL]) {
-        NSError *error;
-        [[NSFileManager defaultManager] createDirectoryAtPath:directory withIntermediateDirectories:YES attributes:nil error:&error];
-	}
-}
-
-
-/*
- *Save flyer details
- */
--(void)saveFlyerDetails:(NSString *)finalImgDetailWritePath{
-
-    NSArray *OldDetail = [[NSArray alloc] initWithContentsOfFile:finalImgDetailWritePath];
-   // NSLog(@"%@",OldDetail);
-    NSMutableArray *array = [[NSMutableArray alloc] init];
-    if ([OldDetail count] > 0) {
-
-        [array addObject:OldDetail[0]];
-        globle.flyerName = OldDetail[0];
-    }else{
-        [array addObject:@""];
-         globle.flyerName =@"";
-    }
-    
-    if([[self textLabelLayersArray] count] > 0){
-        //NSLog(@"%@", ((CustomLabel*)[[self textLabelLayersArray] objectAtIndex:0]).text);
-        [array addObject:((CustomLabel*)[self textLabelLayersArray][0]).text];
-    }else{
-        [array addObject:@""];
-    }
-   // NSLog(@"%@",array);
-    NSDate *date = [NSDate date];
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc]init];
-    [dateFormat setDateFormat:FlyerDateFormat];
-    NSString *dateString = [dateFormat stringFromDate:date];
-    [array addObject:dateString];
-    
-    [array writeToFile:finalImgDetailWritePath atomically:YES];
-}
-
-/*
- *Save states of all supported social media
- */
--(void)saveSocialStates:(NSString *)directory imageName:(NSString *)imageName{
-
-	NSMutableArray *socialArray = [[NSMutableArray alloc] init];
-    [socialArray addObject:@"0"]; //Facebook
-    [socialArray addObject:@"0"]; //Twitter
-    [socialArray addObject:@"0"]; //Email
-    [socialArray addObject:@"0"]; //Tumblr
-    [socialArray addObject:@"0"]; //Flickr
-    [socialArray addObject:@"0"]; //Instagram
-    [socialArray addObject:@"0"]; //SMS
-    [socialArray addObject:@"0"]; //Clipboard
-    
-	NSString *socialFlyerPath = [NSString stringWithFormat:@"%@/Social/", directory];
-    
-    NSString *str = [imageName stringByReplacingOccurrencesOfString:@".jpg" withString:@".soc"];
-	NSString *finalImageWritePath = [socialFlyerPath stringByAppendingString:str];
-   
-	if (![[NSFileManager defaultManager] fileExistsAtPath:socialFlyerPath isDirectory:NULL]) {
-        NSError *error;
-        [[NSFileManager defaultManager] createDirectoryAtPath:socialFlyerPath withIntermediateDirectories:YES attributes:nil error:&error];
-	}
-    
-    [socialArray writeToFile:finalImageWritePath atomically:YES];
-}
-
-#pragma mark  View Disappear Methods
+#pragma mark Flurry Methods
 
 -(void) logLayerAddedEvent{
     [Flurry logEvent:@"Layer Added"];
@@ -2667,263 +2571,119 @@ int selectedAddMoreLayerTab = -1; // This variable is used as a flag to track se
     [Flurry logEvent:@"Text Added"];
 }
 
+
+#pragma mark Access Image Directory
 /*
- * For ScrollView Adding On runtime
+ *Here we Copy Image to Template Directory
  */
--(void)addScrollView:(id)obj{
-
-    // Remove ScrollViews
-    NSArray *viewsToRemove = [self.contextView subviews];
-    for (UIView *v in viewsToRemove) {
-        [v removeFromSuperview];
-    }
+-(void)copyImageToTemplate :(UIImage *)img{
     
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.4f];
-        //Add ScrollViews
-        [self.contextView addSubview:obj];
-    [UIView commitAnimations];
-
+    // Create Symbol direcrory if not created
+    NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
+    
+    NSString *FolderPath = [NSString stringWithFormat:@"%@/Template/template.jpg", currentpath];
+    
+    NSData *imgData = UIImagePNGRepresentation(img);
+    
+    //Create a Image Copy to Current Flyer Folder
+    [[NSFileManager defaultManager] createFileAtPath:FolderPath contents:imgData attributes:nil];
+    
 }
 
-/*
- * For Adding Bottom Button On runtime
- */
--(void)addBottomTabs:(id)obj{
-
-    // Remove ScrollViews
-    NSArray *viewsToRemove = [self.libraryContextView subviews];
-    for (UIView *v in viewsToRemove) {
-        [v removeFromSuperview];
-    }
+-(NSString *)getImagePathforPhoto :(UIImage *)img{
     
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.4f];
-        //Add ScrollViews
-        [self.libraryContextView addSubview:obj];
-    [UIView commitAnimations];
-}
-
-
-/*
- *Here we Remove all Subviews of ScrollViews
- */
--(void)deleteSubviewsFromScrollView{
-
-    NSArray *ChildViews = [self.layerScrollView subviews];
+    // Create Symbol direcrory if not created
+    NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
     
-    for (UIView *child in ChildViews) {
+    NSString *FolderPath;
+    NSString *dicPath;
     
-        [child removeFromSuperview];
-    }
-
+    FolderPath = [NSString stringWithFormat:@"%@/Photo", currentpath];
+    dicPath = @"Photo";
+    
+    //Create Unique Id for Image
+    int timestamp = [[NSDate date] timeIntervalSince1970];
+    
+    NSString *imageFolderPath = [NSString stringWithFormat:@"%@/%d.jpg", FolderPath,timestamp];
+    
+    dicPath = [dicPath stringByAppendingString:[NSString stringWithFormat:@"/%d.jpg",timestamp]];
+    
+    NSData *imgData = UIImagePNGRepresentation(img);
+    
+    //Create a Image Copy to Current Flyer Folder
+    [[NSFileManager defaultManager] createFileAtPath:imageFolderPath contents:imgData attributes:nil];
+    
+    
+    return dicPath;
 }
 
 
-/*
- * When we Back To Main View its
- * add All Layers to ScrollView for Edit and Delete Layers
- */
--(void)addAllLayersIntoScrollView {
-        
-    //Remove Subviews of ScrollView
-    [self deleteSubviewsFromScrollView];
+-(NSString *)getImagePathByTag :(NSString *)imgName{
     
-    NSInteger layerScrollWidth = 55;
-    NSInteger layerScrollHeight = 40;
+    // Create Symbol direcrory if not created
+    NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
     
-    if( self.flyimgView.layers.count == 0 ){
-        [self addScrollView:addMoreLayerOrSaveFlyerLabel];
-        return;
-    }
+    NSString *FolderPath;
+    NSString *dicPath;
     
-    CGFloat curXLoc = 0;
-    CGFloat curYLoc = 5;
-    
-    if(IS_IPHONE_5)
-    {
-        curXLoc = 10;
-        curYLoc = 10;
-    }
-    
-    NSArray *sortedLayers = [flyer allKeys];
-    NSMutableDictionary *layers = self.flyimgView.layers ;
-    int cnt = 0;
-    for (NSString* uid in sortedLayers) {
-        
-        //check for Flyer Background Key
-        if ( ![uid isEqualToString:@"Template"] ) {
-            
-            id lay = [layers objectForKey:uid];
-            LayerTileButton *layerButton;
-            
-            // Checking for Label or ImageView
-            if ( [lay isKindOfClass:[UILabel class]] == YES ) {
-                
-                CustomLabel *lbl = lay;
-                CustomLabel *scrollLabel = [[CustomLabel alloc] initWithFrame:lbl.frame];
-                scrollLabel.backgroundColor = [UIColor clearColor];
-                scrollLabel.textAlignment = UITextAlignmentCenter;
-                scrollLabel.adjustsFontSizeToFitWidth = YES;
-                scrollLabel.lineBreakMode = UILineBreakModeTailTruncation;
-                scrollLabel.numberOfLines = 80;
-                scrollLabel.lineWidth = 2;
-                scrollLabel.text = lbl.text;
-                scrollLabel.font = lbl.font;
-                scrollLabel.borderColor = lbl.borderColor;
-                scrollLabel.textColor = lbl.textColor;
-                
-                
-                layerButton = [LayerTileButton  buttonWithType:UIButtonTypeCustom];
-                [layerButton addTarget:self action:@selector(selectLayer:) forControlEvents:UIControlEventTouchUpInside];
-                layerButton.uid = uid;
-                layerButton.frame =CGRectMake(0, 5,layerScrollWidth, layerScrollHeight);
-                
-                [layerButton addTarget:self action:@selector(editLayer:) forControlEvents:UIControlEventTouchUpInside];
-                
-                [layerButton setBackgroundColor:[UIColor clearColor]];
-                [layerButton.layer setBorderWidth:2];
-                UIColor * c = [UIColor lightGrayColor];
-                [layerButton.layer setCornerRadius:8];
-                [layerButton.layer setBorderColor:c.CGColor];
-                
-                scrollLabel.frame  = CGRectMake(layerButton.frame.origin.x+5, layerButton.frame.origin.y-2, layerButton.frame.size.width-10, layerButton.frame.size.height-7);
-                
-                [layerButton addSubview:scrollLabel];
-                
-                layerButton.tag = [[NSString stringWithFormat:@"%@%d",@"111",cnt] integerValue];
-            
-            
-            } else {
-                
-                //Here We write code for ImageView
-                UIImageView *dicImgView = lay;
-                
-                UIImageView *tileImageView = [[UIImageView alloc] initWithFrame:dicImgView.frame];
-                tileImageView.image = dicImgView.image;
-                
-                layerButton = [LayerTileButton  buttonWithType:UIButtonTypeCustom];
-                [layerButton addTarget:self action:@selector(selectLayer:) forControlEvents:UIControlEventTouchUpInside];
-                layerButton.uid = uid;
-                layerButton.frame =CGRectMake(0, 5,layerScrollWidth, layerScrollHeight);
-                
-                [layerButton addTarget:self action:@selector(editLayer:) forControlEvents:UIControlEventTouchUpInside];
-                
-                [layerButton setBackgroundColor:[UIColor clearColor]];
-                [layerButton.layer setBorderWidth:2];
-                UIColor * c = [UIColor lightGrayColor];
-                [layerButton.layer setCornerRadius:8];
-                [layerButton.layer setBorderColor:c.CGColor];
-                
-                tileImageView.frame  = CGRectMake(layerButton.frame.origin.x+5, layerButton.frame.origin.y-2, layerButton.frame.size.width-10, layerButton.frame.size.height-7);
-                
-                [layerButton addSubview:tileImageView];
-                
-                layerButton.tag = [[NSString stringWithFormat:@"%@%d",@"444",cnt] integerValue];
-            
-            }//End if Checking for Label or ImageView
-            
-            CGRect frame = layerButton.frame;
-            frame.origin = CGPointMake(curXLoc, curYLoc);
-            layerButton.frame = frame;
-            curXLoc += (layerScrollWidth)+5;
-            
-            if(IS_IPHONE_5){
-                if(curXLoc >= 300){
-                    curXLoc = 10;
-                    curYLoc = curYLoc + layerScrollHeight + 7;
-                }
-            }
-            
-            [layerScrollView addSubview:layerButton];
-
-            
-        }
-        
-        cnt ++;
-        
-    }//Loop
-    
-    if(IS_IPHONE_5){
-        [layerScrollView setContentSize:CGSizeMake(300, curYLoc + layerScrollHeight)];
+    //when we create Symbols
+    if ([imgName rangeOfString:@"symbol"].location == NSNotFound) {
+        NSLog(@"sub string doesnt exist");
     } else {
-        [layerScrollView setContentSize:CGSizeMake(([layers count]*(layerScrollWidth+5)), [layerScrollView bounds].size.height)];
+        FolderPath = [NSString stringWithFormat:@"%@/Symbol", currentpath];
+        dicPath = @"Symbol";
     }
     
-    [self addScrollView:layerScrollView];
-    
-
-}
-
-
-
--(void)addDonetoRightBarBotton{
-    
-    //Delete Bar Button
-    UIButton *delButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 4, 45, 42)];
-    [delButton addTarget:self action:@selector(callDeleteLayer) forControlEvents:UIControlEventTouchUpInside];
-    [delButton setBackgroundImage:[UIImage imageNamed:@"delete_button"] forState:UIControlStateNormal];
-    delButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *delBarButton = [[UIBarButtonItem alloc] initWithCustomView:delButton];
-    
-    
-    UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    [doneButton addTarget:self action:@selector(callAddMoreLayers) forControlEvents:UIControlEventTouchUpInside];
-    [doneButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
-    doneButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
-    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:doneBarButton,delBarButton,nil]];
-    
-}
-
-#pragma mark - Flyer Image View delegate
-
-/**
- * Frame changed for layer, let the model know.
- */
-- (void)frameChangedForLayer:(NSString *)uid frame:(CGRect)frame {
-
-    if ([widthTabButton isSelected]) {
-        
-        CGRect lastFrame = [flyer getImageFrame:uid];
-
-        lastFrame.origin.x = frame.origin.x;
-        lastFrame.size.width = frame.size.width;
-        frame = lastFrame;
-        
-    } else if ([heightTabButton isSelected]) {
-        
-        CGRect lastFrame = [flyer getImageFrame:uid];
-        
-        lastFrame.origin.y = frame.origin.y;
-        lastFrame.size.height = frame.size.height;
-        frame = lastFrame;
-
+    //when we create Icon
+    if ([imgName rangeOfString:@"ricon"].location == NSNotFound) {
+        NSLog(@"sub string doesnt exist");
+    } else {
+        FolderPath = [NSString stringWithFormat:@"%@/Icon", currentpath];
+        dicPath = @"Icon";
     }
-
-    //Update Dictionary
-    [flyer setImageFrame:uid :frame];
     
-    //Update Controller
-    [self.flyimgView renderLayer:uid layerDictionary:[flyer getLayerFromMaster:uid]];
-}
-
-
-/*
- * Here we Getting Snap Shot of Flyer Image View Context
- * Return
- *  Image
- */
--(UIImage *)getFlyerSnapShot {
-
-    //Here we take Snap shot of Flyer
-    UIGraphicsBeginImageContextWithOptions(self.flyimgView.bounds.size, YES, 0.0f);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    [self.flyimgView.layer renderInContext:context];
-    UIImage *snapshotImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
+    //when we set BackGround
+    if ([imgName rangeOfString:@"Template"].location == NSNotFound) {
+        NSLog(@"sub string doesnt exist");
+    } else {
+        FolderPath = [NSString stringWithFormat:@"%@/Template", currentpath];
+        dicPath = @"Template";
+    }
     
-    return snapshotImage;
+    
+    NSString *imageFolderPath ;
+    NSString *existImagePath ;
+    
+    if ([dicPath isEqualToString:@"Template"]) {
+        
+        imageFolderPath = [NSString stringWithFormat:@"%@/template.jpg", FolderPath];
+        dicPath = [dicPath stringByAppendingString:[NSString stringWithFormat:@"/template.jpg"]];
+        
+        //Getting Image From Bundle
+        existImagePath =[[NSBundle mainBundle] pathForResource:imgName ofType:@"jpg"];
+        
+    } else {
+        
+        //Create Unique Id for Image
+        int timestamp = [[NSDate date] timeIntervalSince1970];
+        
+        imageFolderPath = [NSString stringWithFormat:@"%@/%d.jpg", FolderPath,timestamp];
+        dicPath = [dicPath stringByAppendingString:[NSString stringWithFormat:@"/%d.jpg",timestamp]];
+        
+        //Getting Image From Bundle
+        existImagePath =[[NSBundle mainBundle] pathForResource:imgName ofType:@"png"];
+        
+    }
+    
+    UIImage *realImage =  [UIImage imageWithContentsOfFile:existImagePath];
+    NSData *imgData = UIImagePNGRepresentation(realImage);
+    
+    //Create a Image Copy to Current Flyer Folder
+    [[NSFileManager defaultManager] createFileAtPath:imageFolderPath contents:imgData attributes:nil];
+    
+    
+    return dicPath;
+    
 }
 
 
