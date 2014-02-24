@@ -24,13 +24,15 @@
 	NSMutableArray *iconArrayBackup;
 
 	IBOutlet UITableView *tView;
-    CreateFlyerController *ptController;
+    CreateFlyerController *createFlyer;
     BOOL searching;
     BOOL letUserSelectRow;
     
     
     Flyer *flyer;
     NSMutableArray *flyerPaths;
+    NSMutableArray *searchFlyerPaths;
+
 }
 @property(nonatomic,strong) CreateFlyerController *ptController;
 @property(nonatomic,strong) NSMutableArray *photoArray;
@@ -43,5 +45,7 @@
 -(void)goBack;
 
 -(NSMutableArray *)getFlyersPaths;
+
+-(IBAction)createFlyer:(id)sender;
 
 @end

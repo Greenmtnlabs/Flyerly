@@ -141,33 +141,29 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
      NSLog(@"%@", searchTextField.text);
    
 
-    [photoArrayBackup removeAllObjects];
-    [photoDetailArrayBackup removeAllObjects];
-    [iconArrayBackup removeAllObjects];
-	NSMutableArray *searchArray = [[NSMutableArray alloc] initWithArray:photoDetailArray];
+	searchFlyerPaths = [[NSMutableArray alloc] init];
 	
-	for (int i =0 ; i < [searchArray count] ; i++)
+	for (int i =0 ; i < [flyerPaths count] ; i++)
 	{
 		
- 		sTemp = searchArray[i][0];
-        sTemp1 = searchArray[i][1];
-        sTemp2 = searchArray[i][2];
+        Flyer *fly = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:i]];
+        
+ 		sTemp = [fly getFlyerTitle];
+        sTemp1 = [fly getFlyerDescription];
+        sTemp2 = [fly getFlyerDate];
 
-
+        
         NSRange titleResultsRange = [sTemp rangeOfString:searchText options:NSCaseInsensitiveSearch];
         NSRange titleResultsRange1 = [sTemp1 rangeOfString:searchText options:NSCaseInsensitiveSearch];
         NSRange titleResultsRange2 = [sTemp2 rangeOfString:searchText options:NSCaseInsensitiveSearch];
 
         if (titleResultsRange.length > 0 || titleResultsRange1.length > 0 || titleResultsRange2.length > 0){
-			[photoArrayBackup addObject:photoArray[i]];
-            [photoDetailArrayBackup addObject:photoDetailArray[i]];
-            [iconArrayBackup addObject:iconArray[i]];
+
+            [searchFlyerPaths addObject:[flyerPaths objectAtIndex:i]];
         }
         
 
 	}
-sd:;
-	searchArray = nil;
     [self.tView reloadData];
 }
 
@@ -201,8 +197,7 @@ sd:;
     [searchTextField addTarget:self action:@selector(textFieldTapped:) forControlEvents:UIControlEventEditingChanged];
     searchTextField.borderStyle = nil;
     
-    //Here we get Flyers
-    flyerPaths = nil;// [self getFlyersPaths];
+
 }
 
 -(void)callMenu
@@ -226,12 +221,11 @@ sd:;
     // Set right bar items
     [self.navigationItem setRightBarButtonItems: [self rightBarItems]];
     
-    //Create sorted array with modificate date as key
-	//[self filesByModDate];
+
+    //HERE WE GET FLYERS
+    flyerPaths = [self getFlyersPaths];
+
      [tView reloadData];
-    photoArrayBackup = [[NSMutableArray alloc] initWithArray:photoArray];
-    iconArrayBackup = [[NSMutableArray alloc] initWithArray:iconArray];
-    photoDetailArrayBackup  = [[NSMutableArray alloc] initWithArray:iconArray];
 
 }
 
@@ -271,7 +265,7 @@ sd:;
 
     // Create Button
     UIButton *createButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    [createButton addTarget:self action:@selector(doNew:) forControlEvents:UIControlEventTouchUpInside];
+    [createButton addTarget:self action:@selector(createFlyer:) forControlEvents:UIControlEventTouchUpInside];
     [createButton setBackgroundImage:[UIImage imageNamed:@"createButton"] forState:UIControlStateNormal];
     createButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *createBarButton = [[UIBarButtonItem alloc] initWithCustomView:createButton];
@@ -293,7 +287,7 @@ sd:;
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (searching){
-        return  [photoArrayBackup count];
+        return  [searchFlyerPaths count];
     }else{
         return  [flyerPaths count];
     }
@@ -322,6 +316,8 @@ sd:;
     static NSString *cellId = @"Cell";
     SaveFlyerCell *cell = (SaveFlyerCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
     
+    
+
   
     [cell setAccessoryType:UITableViewCellAccessoryNone];
     if (cell == nil) {
@@ -331,25 +327,27 @@ sd:;
     
     
     if( searching ){
-        /*
-        UIImage *image = iconArrayBackup[indexPath.row];
         
-        // Get image name from array
-        NSString *imageName = photoArrayBackup[indexPath.row];
-        
-        // get flyer detail from array
-        NSArray *detailArray = photoDetailArrayBackup[indexPath.row];
-        
-        [cell addToCell:detailArray[0] :detailArray[1] :detailArray[2] :image :imageName :indexPath];
-         */
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            flyer = [[Flyer alloc] initWithPath:[searchFlyerPaths objectAtIndex:indexPath.row]];
+            [cell renderCell:flyer];
+            
+        });
+
+
         return cell;
         
 
     }else{
 
-        NSLog(@"%@",flyerPaths) ;
-        flyer = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:indexPath.row]];
-        [cell renderCell:flyer];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            flyer = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:indexPath.row]];
+            [cell renderCell:flyer];
+            
+        });
+
 
          return cell;
         
@@ -363,11 +361,15 @@ sd:;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	 
-    ptController = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
+	
+    flyer = [[Flyer alloc]initWithPath:[flyerPaths objectAtIndex:indexPath.row]];
     
+    createFlyer = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
+    
+    // Set CreateFlyer Screen
+    createFlyer.flyer = flyer;
+	[self.navigationController pushViewController:createFlyer animated:YES];
 
-	[self.navigationController pushViewController:ptController animated:YES];
 	[self performSelector:@selector(deselect) withObject:nil afterDelay:0.2f];
 }
 
@@ -382,33 +384,37 @@ sd:;
         @[[NSIndexPath indexPathForRow:indexPath.row  inSection:indexPath.section]]
                          withRowAnimation:UITableViewRowAnimationLeft];
         
-        // Remove flyer
-        NSString *imageName = photoArray[[indexPath row]];
-        [[NSFileManager defaultManager] removeItemAtPath:imageName error:nil];
-        
-        // Remove flyer detail file
-        NSString *flyerFilePath = [imageName stringByReplacingOccurrencesOfString:@".jpg" withString:@".txt"];
-        [[NSFileManager defaultManager] removeItemAtPath:flyerFilePath error:nil];
+        // HERE WE REMOVE FLYER FROM DIRECTORY
+        if ( searching ) {
+            
+            [[NSFileManager defaultManager] removeItemAtPath:[searchFlyerPaths objectAtIndex:indexPath.row] error:nil];
+            [searchFlyerPaths removeObjectAtIndex:indexPath.row];
 
-        PFUser *user = [PFUser currentUser];
+        } else {
+            
+            [[NSFileManager defaultManager] removeItemAtPath:[flyerPaths objectAtIndex:indexPath.row] error:nil];
+            [flyerPaths removeObjectAtIndex:indexPath.row];
+        }
 
-        // Remove flyer social detail file
-        NSString *socialFlyerFolderPath = [imageName stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@/Flyr/", user.username] withString:[NSString stringWithFormat:@"%@/Flyr/Social/", user.username]];
-        NSString *socialFilePath = [socialFlyerFolderPath stringByReplacingOccurrencesOfString:@".jpg" withString:@".soc"];
-        [[NSFileManager defaultManager] removeItemAtPath:socialFilePath error:nil];
-
-        [photoArray removeObjectAtIndex:[indexPath row]];
-        [photoDetailArray removeObjectAtIndex:[indexPath row]];
-		[iconArray removeObjectAtIndex:[indexPath row]];
 	}
     
+    [tableView setEditing:NO animated:YES];
 	[tableView endUpdates];
 	[tableView reloadData];
 }
 
--(IBAction)doNew:(id)sender{
-	ptController = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
-	[self.navigationController pushViewController:ptController animated:YES];
+-(IBAction)createFlyer:(id)sender {
+
+    NSString *flyPath = [Flyer newFlyerPath];
+    
+    //Here We set Source for Flyer screen
+    flyer = [[Flyer alloc]initWithPath:flyPath];
+    
+	createFlyer = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
+    createFlyer.flyerPath = flyPath;
+    createFlyer.flyer = flyer;
+	[self.navigationController pushViewController:createFlyer animated:YES];
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

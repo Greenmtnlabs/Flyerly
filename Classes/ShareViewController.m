@@ -186,7 +186,7 @@
         {
             [smsButton setEnabled:YES];
             
-            status = [flyer getTwitterStatus];
+            status = [flyer getSmsStatus];
             if([status isEqualToString:@"1"]){
                 [smsButton setSelected:YES];
             }else {

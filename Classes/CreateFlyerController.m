@@ -49,7 +49,16 @@ int selectedAddMoreLayerTab = -1;
     [takeOrAddPhotoLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:18]];
     [takeOrAddPhotoLabel setTextColor:[UIColor grayColor]];
     [takeOrAddPhotoLabel setTextAlignment:UITextAlignmentCenter];
-     
+    
+    [layerScrollView setCanCancelContentTouches:NO];
+	layerScrollView.indicatorStyle = UIScrollViewIndicatorStyleBlack;
+	layerScrollView.clipsToBounds = YES;
+	layerScrollView.scrollEnabled = YES;
+	layerScrollView.pagingEnabled = NO;
+	layerScrollView.showsHorizontalScrollIndicator = YES;
+	layerScrollView.showsVerticalScrollIndicator = YES;
+
+    
 	
 	textBackgrnd = [[UIImageView alloc]initWithFrame:CGRectMake(0, 385, 320, 44)];
 	[self.view addSubview:textBackgrnd];
@@ -230,6 +239,8 @@ int selectedAddMoreLayerTab = -1;
     
     if (![currentLayer isEqualToString:@""]) [self.flyimgView layerStoppedEditing:currentLayer];
     
+    [shareviewcontroller.titleView resignFirstResponder];
+    [shareviewcontroller.descriptionView resignFirstResponder];
     
     //Here we take Snap shot of Flyer
     UIGraphicsBeginImageContextWithOptions(self.flyimgView.bounds.size, YES, 0.0f);
@@ -331,7 +342,6 @@ int selectedAddMoreLayerTab = -1;
         [layerScrollView setContentSize:CGSizeMake(([templateArray count]*(widthValue+5)), [layerScrollView bounds].size.height)];
     }
     
-    [layerScrollView flashScrollIndicators];
     
     // Ressize Hight Width again for others Layers Tile size is different
     widthValue = 35;
@@ -421,7 +431,6 @@ int selectedAddMoreLayerTab = -1;
         [layerScrollView setContentSize:CGSizeMake((  [fontArray count]*(widthValue+5)), [layerScrollView bounds].size.height)];
     }
 
-    [layerScrollView flashScrollIndicators];
 }
 
 /*
@@ -504,8 +513,6 @@ int selectedAddMoreLayerTab = -1;
     } else {
         [layerScrollView setContentSize:CGSizeMake((  [SIZE_ARRAY count]*(widthValue+5)), [layerScrollView bounds].size.height)];
     }
-    
-    [layerScrollView flashScrollIndicators];
 
 }
 
@@ -605,7 +612,6 @@ int selectedAddMoreLayerTab = -1;
         [layerScrollView setContentSize:CGSizeMake((  [colorArray count]*(widthValue+5)), [layerScrollView bounds].size.height)];
     }
     
-    [layerScrollView flashScrollIndicators];
 }
 
 /*
@@ -697,8 +703,6 @@ int selectedAddMoreLayerTab = -1;
     } else {
         [layerScrollView setContentSize:CGSizeMake((  [borderArray count]*(widthValue+5)), [layerScrollView bounds].size.height)];
     }
-    
-    [layerScrollView flashScrollIndicators];
 
 }
 
@@ -790,7 +794,6 @@ int selectedAddMoreLayerTab = -1;
         [layerScrollView setContentSize:CGSizeMake((  [borderArray count]*(widthValue+5)), [layerScrollView bounds].size.height)];
     }
     
-    [layerScrollView flashScrollIndicators];
 
 }
 /*
@@ -868,8 +871,6 @@ int selectedAddMoreLayerTab = -1;
         [layerScrollView setContentSize:CGSizeMake(([symbolArray count]*(symbolScrollWidth+5)), [layerScrollView bounds].size.height)];
     }
     
-    [layerScrollView flashScrollIndicators];
-
 
 }
 
@@ -922,7 +923,7 @@ int selectedAddMoreLayerTab = -1;
         if(IS_IPHONE_5){
             if(curXLoc >= 320){
                 curXLoc = 0;
-                curYLoc = curYLoc + iconScrollHeight + 7;
+                curYLoc = curYLoc + iconScrollHeight + 5;
             }
         }
 
@@ -950,8 +951,6 @@ int selectedAddMoreLayerTab = -1;
         [layerScrollView setContentSize:CGSizeMake(([iconArray count]*(iconScrollWidth+5)), [layerScrollView bounds].size.height)];
     }
     
-    [layerScrollView flashScrollIndicators];
-
 }
 
 
@@ -1869,9 +1868,13 @@ int selectedAddMoreLayerTab = -1;
     
     for (UIView *child in ChildViews) {
         
-        [child removeFromSuperview];
+      //  if ([child isKindOfClass:[LayerTileButton class]] || [child isKindOfClass:[UIButton class]] || [child isKindOfClass:[UILabel class]] ) {
+            [child removeFromSuperview];
+        //}
+        
     }
     
+
 }
 
 /*
@@ -2204,7 +2207,10 @@ int selectedAddMoreLayerTab = -1;
         shareviewcontroller.flyer = self.flyer;
         shareviewcontroller.imageFileName = shareImagePath;
         shareviewcontroller.titleView.text = [flyer getFlyerTitle];
-        shareviewcontroller.descriptionView.text = [flyer getFlyerDescription];
+        NSString *description = [flyer getFlyerDescription];
+        if (![description isEqualToString:@""]) {
+            shareviewcontroller.descriptionView.text = description;
+        }
         shareviewcontroller.selectedFlyerDescription = [flyer getFlyerDescription];
         shareviewcontroller.topTitleLabel = titleLabel;
         
@@ -2499,11 +2505,16 @@ int selectedAddMoreLayerTab = -1;
         [addMoreSymbolTabButton setSelected:YES];
         [self addDonetoRightBarBotton];
         
-        [UIView beginAnimations:nil context:NULL];
-        [UIView setAnimationDuration:0.4f];
-            //Create ScrollView
-            [self addFlyerIconInSubView];
-        [UIView commitAnimations];
+        //HERE WE SET ANIMATION
+        [UIView animateWithDuration:0.4f
+                         animations:^{
+                             //Create ScrollView
+                             [self addFlyerIconInSubView];
+                         }
+                         completion:^(BOOL finished){
+                             NSLog(@"completion block");
+                             [layerScrollView flashScrollIndicators];
+                         }];
         
 
         //Add Context
@@ -2555,6 +2566,7 @@ int selectedAddMoreLayerTab = -1;
 
     }
 }
+
 
 
 #pragma mark Flurry Methods
