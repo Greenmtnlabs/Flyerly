@@ -39,15 +39,12 @@
 
 -(NSArray *)allKeys;
 
--(NSMutableDictionary *)getLayerFromMaster :(NSString *)uid;
-
 -(NSString *)addText;
+-(NSString *)addImage;
 
 -(void)setImageFrame :(NSString *)uid :(CGRect )photoFrame;
 
 -(void)setImageTag :(NSString *)uid Tag :(NSString *)tag;
-
--(NSString *)getImageTag :(NSString *)uid;
 
 -(void)setFlyerText :(NSString *)uid text:(NSString *)txt;
 
@@ -63,6 +60,11 @@
 
 -(void)setFlyerBorder :(NSString *)uid RGBColor:(id)rgb;
 
+-(void)setFlyerTitle :(NSString *)name;
+
+-(void)setFlyerDescription :(NSString *)desp;
+
+-(void)setRecentFlyer;
 
 -(void)setFacebookStatus :(int)status;
 -(void)setTwitterStatus :(int)status;
@@ -73,7 +75,8 @@
 -(void)setSmsStatus :(int)status;
 -(void)setClipboardStatus :(int)status;
 
-
+-(NSMutableDictionary *)getLayerFromMaster :(NSString *)uid;
+-(NSString *)getImageTag :(NSString *)uid;
 -(NSString *)getFacebookStatus;
 -(NSString *)getTwitterStatus;
 -(NSString *)getInstagaramStatus;
@@ -82,30 +85,19 @@
 -(NSString *)getEmailStatus;
 -(NSString *)getSmsStatus;
 -(NSString *)getClipboardStatus;
-
-
-
--(void)setFlyerTitle :(NSString *)name;
--(NSString *)getFlyerTitle;
-
--(void)setFlyerDescription :(NSString *)desp;
 -(NSString *)getFlyerDescription;
-
-
--(NSString *)addImage;
-
-
+-(NSString *)getFlyerDate;
+-(NSString *)getFlyerTitle;
 -(NSString *)getText :(NSString *)uid;
 -(NSString *)getImageName :(NSString *)uid;
 -(CGRect)getImageFrame :(NSString *)uid;
 -(float)getWidth :(NSString *)uid;
 -(float)getHight :(NSString *)uid;
--(NSString *)getImageForShare;
+-(NSString *)getFlyerImage;
+
 
 +(NSString *)newFlyerPath;
 + (NSMutableArray *)recentFlyerPreview:(NSInteger)flyCount;
-
--(void)setRecentFlyer;
 
 @property (strong, readonly) NSMutableDictionary *masterLayers;
 @property (strong, nonatomic) NSMutableArray *socialArray;
