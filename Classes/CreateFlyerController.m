@@ -332,6 +332,10 @@ int selectedAddMoreLayerTab = -1;
     }
     
     [layerScrollView flashScrollIndicators];
+    
+    // Ressize Hight Width again for others Layers Tile size is different
+    widthValue = 35;
+    heightValue = 35;
 
 }
 
@@ -340,7 +344,7 @@ int selectedAddMoreLayerTab = -1;
  */
 -(void)addFontsInSubView{
     
-    
+
     [self deleteSubviewsFromScrollView];
     
     CGFloat curXLoc = 0;

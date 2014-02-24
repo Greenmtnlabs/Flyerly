@@ -568,7 +568,7 @@
 - (void)sharer:(SHKSharer *)sharer failedWithError:(NSError *)error shouldRelogin:(BOOL)shouldRelogin
 {
     
-    [[SHKActivityIndicator currentIndicator] hide];
+    [[SHKActivityIndicator currentIndicator] hideForSharer:sharer];
 	NSLog(@"Sharing Error");
 }
 
