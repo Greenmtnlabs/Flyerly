@@ -141,7 +141,7 @@
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="-64"/>
                 </activityIndicatorView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Zregister_flyer.png" id="6">
-                    <rect key="frame" x="139" y="78" width="42" height="56"/>
+                    <rect key="frame" x="138" y="79" width="42" height="56"/>
                     <autoresizingMask key="autoresizingMask"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="-64"/>
                 </imageView>

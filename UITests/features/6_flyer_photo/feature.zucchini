@@ -15,7 +15,8 @@ Then on the "Flyer" screen:
   Tap "Photo"
   Take a screenshot
   Tap "Camera"
-  
+  Show elements
+
 Then on the "Camera" screen:
   Take a screenshot
   Tap "Grid"
@@ -24,11 +25,11 @@ Then on the "Camera" screen:
   Tap "Rotate Camera"
   Take a screenshot
   Tap "Gallery"
-  
-Then on the "Gallery" screen:
+
+Then on the "gallery" screen:
   Take a screenshot
   Tap "Back"
-	
+
 Then on the "Flyer" screen:
   Tap "Camera"
 

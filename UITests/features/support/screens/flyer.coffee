@@ -14,7 +14,7 @@ class FlyerScreen extends Screen
     'Symbols' : -> $('#Symbols'),
     'Clipart' : -> $('#Clipart'),
     'Background' : -> $('#Background'),
-    'Text input' : -> view.textViews()[0],
+    'Text input' : ->$("#TextInput"),
     'Font' : -> $('#Font'),
     'Color' : -> $('#Color'),
     'Size' : -> $('#Size'),
