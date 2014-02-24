@@ -79,36 +79,36 @@ Then on the "Register" screen:
   Tap "Next"
   Take a screenshot
   Confirm "OK"
-	Tap " Back"
+  Tap "Back"
 	
 Then on the "Welcome" screen:
   Tap "Register"
-	
+
 Then on the "Register" screen:
-  Tap "SignUp"
+  Tap "Sign Up"
   Take a screenshot
   Confirm "OK"
-	Tap "Back"
+  Tap "Back"
 	
 Then on the "Welcome" screen:
   Tap "Register"
-	
+
 Then on the "Register" screen:
   Type "TeamLeadSQA" in the "Username" field
-	Type "test" in the "Password" field
-	Wait for "2" seconds
-	Take a screenshot
-	Tap "Back"
-	
+  Type "test" in the "Password" field
+  Wait for "2" seconds
+  Take a screenshot
+  Tap "Back"
+
 Then on the "Welcome" screen:
   Tap "Register"
-	
+
 Then on the "Register" screen:
   Type "TeamLeadSQA1" in the "Username" field
-	Type "test" in the "Password" field
-	Wait for "2" seconds
-	Take a screenshot
-	Tap "Back"
+  Type "test" in the "Password" field
+  Wait for "2" seconds
+  Take a screenshot
+  Tap "Back"
 	
 Then on the "Welcome" screen:
   Tap "Register"
@@ -117,7 +117,7 @@ Then on the "Register" screen:
   Type "tester" in the "Username" field
   Type "test" in the "Password" field
   Type "test123" in the "Confirm Password" field
-  Tap "SignUp"
+  Tap "Sign Up"
   Take a screenshot
   Confirm "OK"
   Tap "Back"
@@ -130,8 +130,8 @@ Then on the "Register" screen:
   Type "test" in the "Password" field
   Type "test" in the "Confirm Password" field
   Type "rehan.riksof@hotmail.com" in the "Email" field
-  Tap "SignUp"
+  Tap "Sign Up"
+  Wait for "2" seconds
   Take a screenshot
   Confirm "OK"
-  Tap "Back"
-	
+  Tap "Back"	

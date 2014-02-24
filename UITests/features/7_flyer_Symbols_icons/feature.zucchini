@@ -13,23 +13,23 @@ Then on the "Home" screen:
 Then on the "Flyer" screen:
   Take a screenshot
   Tap "Symbols"
-  Take screenshot
+  Take a screenshot
   Tap "Tile4"
-  Tap "Done"
-  Take s screenshot
+  Tap "Done / Share"
+  Take a screenshot
   Tap "Clipart"
-  Take screenshot
+  Take a screenshot
   Tap "Tile5"
-  Tap "Done"
+  Tap "Done / Share"
   Take a screenshot
   Tap "Tile1"
   Tap "Tile3"
-  Tap "Done"
+  Tap "Done / Share"
   Take a screenshot
   Tap "Tile2"
   Tap "Tile1"
-  Tap "Done"
-  Take screenshot
+  Tap "Done / Share"
+  Take a screenshot
   Tap "Back"
   
 Then on the "Home" screen:
@@ -37,4 +37,5 @@ Then on the "Home" screen:
   
 Then on the "Settings" screen:
   Tap "Sign Out"
+  Take a screenshot
   Confirm "Sign out"
