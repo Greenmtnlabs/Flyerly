@@ -113,7 +113,7 @@ NSString * const TEXTHEIGHT = @"280.000000";
 /*
  * Here we return Current SnapShot for Sharing
  */
--(NSString *)getImageForShare {
+-(NSString *)getFlyerImage {
 
     NSString* currentPath  =   [[NSFileManager defaultManager] currentDirectoryPath];
     
@@ -343,8 +343,8 @@ NSString * const TEXTHEIGHT = @"280.000000";
 }
 
 -(NSString *)getImageName :(NSString *)uid{
-    NSMutableDictionary *textDic = [self getLayerFromMaster:uid];
-    return [textDic objectForKey:@"image"];
+    NSMutableDictionary *layDic = [self getLayerFromMaster:uid];
+    return [layDic objectForKey:@"image"];
 
 }
 
@@ -603,9 +603,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     NSString *lastFileName;
     NSMutableArray *recentFlyers = [[NSMutableArray alloc] init];
     
-
         
-    // Less then 4 Flyer or Empty
     for(int i = 0 ; i < sortedFlyersList.count ;i++)
     {
         lastFileName = sortedFlyersList[i];
@@ -992,6 +990,15 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 -(NSString *)getFlyerDescription{
     
     return [textFileArray objectAtIndex:1];
+}
+
+
+/*
+ * Here we Return Flyer Date From .txt File
+ */
+
+-(NSString *)getFlyerDate{
+    return [textFileArray objectAtIndex:2];
 }
 
 

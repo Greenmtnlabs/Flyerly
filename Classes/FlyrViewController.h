@@ -13,12 +13,12 @@
 #import "Common.h"
 #import "HelpController.h"
 #import "FlyrAppDelegate.h"
+#import "Flyer.h"
 
-@class SaveFlyerCell;
+@class SaveFlyerCell,Flyer;
 @interface FlyrViewController : UIViewController <UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>{
-	NSMutableArray *photoArray;
-	NSMutableArray *photoDetailArray;
-	NSMutableArray *iconArray;
+
+    
     NSMutableArray *photoArrayBackup;
 	NSMutableArray *photoDetailArrayBackup;
 	NSMutableArray *iconArrayBackup;
@@ -27,6 +27,10 @@
     CreateFlyerController *ptController;
     BOOL searching;
     BOOL letUserSelectRow;
+    
+    
+    Flyer *flyer;
+    NSMutableArray *flyerPaths;
 }
 @property(nonatomic,strong) CreateFlyerController *ptController;
 @property(nonatomic,strong) NSMutableArray *photoArray;
@@ -37,5 +41,7 @@
 
 +(NSString *)getFlyerNumberFromPath:(NSString *)imagePath;
 -(void)goBack;
+
+-(NSMutableArray *)getFlyersPaths;
 
 @end

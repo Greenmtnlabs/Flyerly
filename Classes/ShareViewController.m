@@ -568,7 +568,7 @@
 - (void)sharer:(SHKSharer *)sharer failedWithError:(NSError *)error shouldRelogin:(BOOL)shouldRelogin
 {
     
-    [[SHKActivityIndicator currentIndicator] hideForSharer:sharer];
+    [[SHKActivityIndicator currentIndicator] hide];
 	NSLog(@"Sharing Error");
 }
 
@@ -601,26 +601,26 @@
 
 - (void)hideActivityIndicatorForSharer:(SHKSharer *)sharer {
     
-    [self.activityIndicator hideForSharer:sharer];
+    [[SHKActivityIndicator currentIndicator]  hideForSharer:sharer];
 }
 
 - (void)displayActivity:(NSString *)activityDescription forSharer:(SHKSharer *)sharer {
     
     if (sharer.quiet) return;
     
-    [self.activityIndicator displayActivity:activityDescription forSharer:sharer];
+    [[SHKActivityIndicator currentIndicator]  displayActivity:activityDescription forSharer:sharer];
 }
 
 - (void)displayCompleted:(NSString *)completionText forSharer:(SHKSharer *)sharer {
     
     if (sharer.quiet) return;
-    [self.activityIndicator displayCompleted:completionText forSharer:sharer];
+    [[SHKActivityIndicator currentIndicator]  displayCompleted:completionText forSharer:sharer];
 }
 
 - (void)showProgress:(CGFloat)progress forSharer:(SHKSharer *)sharer {
     
     if (sharer.quiet) return;
-    [self.activityIndicator showProgress:progress forSharer:sharer];
+    [[SHKActivityIndicator currentIndicator]  showProgress:progress forSharer:sharer];
 }
 
 

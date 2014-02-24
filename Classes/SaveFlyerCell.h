@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
+#import "Flyer.h"
 @interface SaveFlyerCell : UITableViewCell {
 
 
@@ -22,6 +23,8 @@
 @property(nonatomic, strong)IBOutlet UIImageView *cellImage;
 @property(nonatomic, strong)IBOutlet UIImageView *backgroundImage;
 @property(nonatomic, strong) NSString *filePath;
+
+
 @property int flyerNumber;
 
 @property(nonatomic, strong)IBOutlet UIImageView *fbImage;
@@ -32,6 +35,7 @@
 @property(nonatomic, strong)IBOutlet UIImageView *tumbImage;
 
 
+- (void)renderCell :(Flyer *)flyer;
 - (void)addToCell :(NSString *)tit :(NSString *)des :(NSString *)crted :(UIImage *)img :(NSString*)imgpath :  (int)flyerparam;
 
 @end

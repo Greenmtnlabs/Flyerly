@@ -200,6 +200,9 @@ sd:;
     [self.tView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [searchTextField addTarget:self action:@selector(textFieldTapped:) forControlEvents:UIControlEventEditingChanged];
     searchTextField.borderStyle = nil;
+    
+    //Here we get Flyers
+    flyerPaths = nil;// [self getFlyersPaths];
 }
 
 -(void)callMenu
@@ -224,7 +227,7 @@ sd:;
     [self.navigationItem setRightBarButtonItems: [self rightBarItems]];
     
     //Create sorted array with modificate date as key
-	[self filesByModDate];
+	//[self filesByModDate];
      [tView reloadData];
     photoArrayBackup = [[NSMutableArray alloc] initWithArray:photoArray];
     iconArrayBackup = [[NSMutableArray alloc] initWithArray:iconArray];
@@ -292,7 +295,7 @@ sd:;
     if (searching){
         return  [photoArrayBackup count];
     }else{
-        return  [photoArray count];
+        return  [flyerPaths count];
     }
 }
 
@@ -328,7 +331,7 @@ sd:;
     
     
     if( searching ){
-        
+        /*
         UIImage *image = iconArrayBackup[indexPath.row];
         
         // Get image name from array
@@ -338,21 +341,15 @@ sd:;
         NSArray *detailArray = photoDetailArrayBackup[indexPath.row];
         
         [cell addToCell:detailArray[0] :detailArray[1] :detailArray[2] :image :imageName :indexPath];
-
+         */
         return cell;
         
 
     }else{
 
-        // Get image from array
-        UIImage *image = iconArray[indexPath.row];
-        
-        // Get image name from array
-        NSString *imageName = photoArray[indexPath.row];
-        
-        // get flyer detail from array
-        NSArray *detailArray = photoDetailArray[indexPath.row];
-        [cell addToCell:detailArray[0] :detailArray[1] :detailArray[2] :image :imageName :indexPath];
+        NSLog(@"%@",flyerPaths) ;
+        flyer = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:indexPath.row]];
+        [cell renderCell:flyer];
 
          return cell;
         
@@ -423,5 +420,42 @@ sd:;
 -(void)goBack{
   	[self.navigationController popViewControllerAnimated:YES];
 }
+
+
+/*
+ * Here we get All Flyers Directories
+ * return
+ *      Nsarray of Flyers Path
+ */
+-(NSMutableArray *)getFlyersPaths{
+    
+    PFUser *user = [PFUser currentUser];
+    
+    //Getting Home Directory
+	NSString *homeDirectoryPath = NSHomeDirectory();
+	NSString *usernamePath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/Flyr",[user objectForKey:@"username"]]];
+
+    NSArray *files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:usernamePath error:nil];
+    
+    NSMutableArray *sortedList = [ Flyer recentFlyerPreview:files.count];
+    
+    for(int i = 0 ; i < [sortedList count];i++)
+    {
+        
+        //Here we remove File Name from Path
+        NSString *pathWithoutFileName = [[sortedList objectAtIndex:i]
+                                     stringByReplacingOccurrencesOfString:@"/flyer.jpg" withString:@""];
+        [sortedList replaceObjectAtIndex:i withObject:pathWithoutFileName];
+    }
+
+    
+    return sortedList;
+}
+
+
+
+
 @end
+
+
 

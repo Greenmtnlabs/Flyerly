@@ -2193,7 +2193,7 @@ int selectedAddMoreLayerTab = -1;
         
         sharePanel.hidden = NO;
         [shareButton setBackgroundImage:[UIImage imageNamed:@"share_button_selected"] forState:UIControlStateNormal];
-        NSString *shareImagePath = [flyer getImageForShare];
+        NSString *shareImagePath = [flyer getFlyerImage];
         UIImage *shareImage =  [UIImage imageWithContentsOfFile:shareImagePath];
 
         shareviewcontroller.selectedFlyerImage = shareImage;
