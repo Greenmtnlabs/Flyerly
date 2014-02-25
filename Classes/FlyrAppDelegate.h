@@ -40,8 +40,6 @@ extern NSString *FacebookDidLoginNotification;
 @property (nonatomic, strong) SaveFlyerController *svController;
 @property (nonatomic, strong) LauchViewController *lauchController;
 @property (nonatomic, strong) AccountController *accountController;
-@property (nonatomic,assign)	BOOL faceBookPermissionFlag;
-@property (nonatomic,assign) BOOL changesFlag;
 @property (nonatomic, strong) UIView *sharingProgressParentView;
 
 -(void)fbChangeforNewVersion;

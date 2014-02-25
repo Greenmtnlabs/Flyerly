@@ -72,6 +72,15 @@ BOOL selectAll;
     UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:backBarButton,leftBarButton,nil]];
     
+    
+    // NEXT BAR BOTTON
+    UIButton *nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+//	[nextButton addTarget:self action:@selector(callStyle) forControlEvents:UIControlEventTouchUpInside];
+    [nextButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
+    nextButton.showsTouchWhenHighlighted = YES;
+    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
+    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
+    
     [self.uiTableView  setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
     [searchTextField setReturnKeyType:UIReturnKeyDone];
     
@@ -247,6 +256,10 @@ BOOL selectAll;
  */
 - (IBAction)loadFacebookContacts:(UIButton *)sender{
     
+
+    fbSubClass *fb = [[fbSubClass alloc] init];
+    [fb freindList];
+    return;
     if([InviteFriendsController connected]){
         contactsCount = 0;
         invited = NO;

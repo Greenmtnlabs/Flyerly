@@ -1110,41 +1110,47 @@ int selectedAddMoreLayerTab = -1;
  */
 -(void)selectFont:(id)sender
 {
-	FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
-	appDele.changesFlag = YES;
+
 	int  i=1;
 	UIButton *view = sender;
+    
 	for(UIView *tempView  in [layerScrollView subviews])
 	{
-        // Add border to Un-select layer thumbnail
-        CALayer * l = [tempView layer];
-
-        [l setBorderWidth:1];
-        [l setCornerRadius:8];
-        UIColor * c = [UIColor clearColor];
-        [l setBorderColor:c.CGColor];
-
-		if(tempView == view)
-		{
-			selectedFont = fontArray[i-1];
-			selectedFont = [selectedFont fontWithSize:selectedSize];
-            
-            //Here we set Font
-            [flyer setFlyerTextFont:currentLayer FontName:[NSString stringWithFormat:@"%@",[selectedFont familyName]]];
-            
-            //Here we call Render Layer on View
-            [flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
-            
-            
-            // Add border to selected layer thumbnail
+        //CHECK UIIMAGEVIEW BECAUSE SCROLL VIEW HAVE ADDITIONAL
+        //SUBVIEWS OF UIIMAGEVIEW FOR FLASH INDICATORS
+        if (![tempView isKindOfClass:[UIImageView class]]) {
+ 
+            // Add border to Un-select layer thumbnail
             CALayer * l = [tempView layer];
-            [l setBorderWidth:3.0];
-            
-            UIColor * c = [globle colorWithHexString:@"0197dd"];
+
+            [l setBorderWidth:1];
+            [l setCornerRadius:8];
+            UIColor * c = [UIColor clearColor];
             [l setBorderColor:c.CGColor];
-		}
-		i++;
-	}
+
+            if(tempView == view)
+            {
+                selectedFont = fontArray[i-1];
+                selectedFont = [selectedFont fontWithSize:selectedSize];
+            
+                //Here we set Font
+                [flyer setFlyerTextFont:currentLayer FontName:[NSString stringWithFormat:@"%@",[selectedFont familyName]]];
+            
+                //Here we call Render Layer on View
+                [flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
+            
+            
+                // Add border to selected layer thumbnail
+                CALayer * l = [tempView layer];
+                [l setBorderWidth:3.0];
+            
+                UIColor * c = [globle colorWithHexString:@"0197dd"];
+                [l setBorderColor:c.CGColor];
+            }
+            i++;
+        }// uiImageView Found
+        
+	}// Loop
 }
 
 /*
@@ -1152,74 +1158,89 @@ int selectedAddMoreLayerTab = -1;
  */
 -(void)selectColor:(id)sender
 {
-	FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
-	appDele.changesFlag = YES;
 	int  i=1;
 	UIButton *view = sender;
+    
 	for(UIView *tempView  in [layerScrollView subviews])
 	{
-        // Add border to Un-select layer thumbnail
-        CALayer * l = [tempView layer];
-        [l setBorderWidth:1];
-        [l setCornerRadius:8];
-        UIColor * c = [UIColor clearColor];
-        [l setBorderColor:c.CGColor];
-        
-		if(tempView == view)
-		{
-			selectedColor = colorArray[i-1];
+
+        //CHECK UIIMAGEVIEW BECAUSE SCROLL VIEW HAVE ADDITIONAL
+        //SUBVIEWS OF UIIMAGEVIEW FOR FLASH INDICATORS
+        if (![tempView isKindOfClass:[UIImageView class]]) {
             
-            [flyer setFlyerTextColor:currentLayer RGBColor:selectedColor];
-            
-            //Here we call Render Layer on View
-            [flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
-            
-            // Add border to selected layer thumbnail
+            // Add border to Un-select layer thumbnail
             CALayer * l = [tempView layer];
-            [l setBorderWidth:3.0];
-            UIColor * c = [globle colorWithHexString:@"0197dd"];
+            [l setBorderWidth:1];
+            [l setCornerRadius:8];
+            UIColor * c = [UIColor clearColor];
             [l setBorderColor:c.CGColor];
-		}
-		i++;
-	}
+        
+            if(tempView == view)
+            {
+                selectedColor = colorArray[i-1];
+            
+                [flyer setFlyerTextColor:currentLayer RGBColor:selectedColor];
+            
+                //Here we call Render Layer on View
+                [flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
+            
+                // Add border to selected layer thumbnail
+                CALayer * l = [tempView layer];
+                [l setBorderWidth:3.0];
+                UIColor * c = [globle colorWithHexString:@"0197dd"];
+                [l setBorderColor:c.CGColor];
+            }
+            
+            i++;
+        }//UIIMAGEVIEW CHECK
+        
+	}// LOOP
 }
 
 /*
  * When any size is selected
  */
 -(void)selectSize:(id)sender{
-	FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
-	appDele.changesFlag = YES;
+
 	int  i=1;
 	UIButton *view = sender;
+    
 	for(UIView *tempView  in [layerScrollView subviews])
 	{
-        // Add border to Un-select layer thumbnail
-        CALayer * l = [tempView layer];
-        [l setBorderWidth:1];
-        [l setCornerRadius:8];
-        UIColor * c = [UIColor clearColor];
-        [l setBorderColor:c.CGColor];
         
-		if(tempView == view)
-		{
-			NSString *sizeStr = SIZE_ARRAY[i-1];
-			selectedSize = [sizeStr intValue];
-			selectedFont = [selectedFont fontWithSize:selectedSize];
+        //CHECK UIIMAGEVIEW BECAUSE SCROLL VIEW HAVE ADDITIONAL
+        //SUBVIEWS OF UIIMAGEVIEW FOR FLASH INDICATORS
+        if (![tempView isKindOfClass:[UIImageView class]]) {
             
-            [flyer setFlyerTextSize:currentLayer Size:selectedFont];
-            
-            //Here we call Render Layer on View
-            [flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
-            
-            // Add border to selected layer thumbnail
+            // Add border to Un-select layer thumbnail
             CALayer * l = [tempView layer];
-            [l setBorderWidth:3.0];
-            UIColor * c = [globle colorWithHexString:@"0197dd"];
+            [l setBorderWidth:1];
+            [l setCornerRadius:8];
+            UIColor * c = [UIColor clearColor];
             [l setBorderColor:c.CGColor];
-		}
-		i++;
-	}
+        
+            if(tempView == view)
+            {
+                NSString *sizeStr = SIZE_ARRAY[i-1];
+                selectedSize = [sizeStr intValue];
+                selectedFont = [selectedFont fontWithSize:selectedSize];
+            
+                [flyer setFlyerTextSize:currentLayer Size:selectedFont];
+            
+                //Here we call Render Layer on View
+                [flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
+            
+                // Add border to selected layer thumbnail
+                CALayer * l = [tempView layer];
+                [l setBorderWidth:3.0];
+                UIColor * c = [globle colorWithHexString:@"0197dd"];
+                [l setBorderColor:c.CGColor];
+            }
+            i++;
+            
+        }//UIIMAGEVIEW CHECK
+        
+	}//LOOP
 }
 
 
@@ -1228,30 +1249,35 @@ int selectedAddMoreLayerTab = -1;
  */
 -(void)selectFontBorder:(id)sender
 {
-	FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
-	appDele.changesFlag = YES;
 	int  i=1;
 	UIButton *view = sender;
+    
 	for(UIView *tempView  in [layerScrollView subviews]) {
         
-        // Add border to Un-select layer thumbnail
-        tempView.backgroundColor = [UIColor clearColor];
+        //CHECK UIIMAGEVIEW BECAUSE SCROLL VIEW HAVE ADDITIONAL
+        //SUBVIEWS OF UIIMAGEVIEW FOR FLASH INDICATORS
+        if (![tempView isKindOfClass:[UIImageView class]]) {
+            
+            // Add border to Un-select layer thumbnail
+            tempView.backgroundColor = [UIColor clearColor];
         
-		if( tempView == view ) {
+            if( tempView == view ) {
             
-			UIColor *borderColor = borderArray[i-1];
+                UIColor *borderColor = borderArray[i-1];
             
-            [flyer setFlyerTextBorderColor:currentLayer Color:borderColor ];
+                [flyer setFlyerTextBorderColor:currentLayer Color:borderColor ];
             
-            //Here we call Render Layer on View
-            [flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
+                //Here we call Render Layer on View
+                [flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
             
-            // Add border to selected layer thumbnail
-            tempView.backgroundColor = [globle colorWithHexString:@"0197dd"];
+                // Add border to selected layer thumbnail
+                tempView.backgroundColor = [globle colorWithHexString:@"0197dd"];
 
-		}
-		i++;
-	}
+            }
+            i++;
+            
+        }//UIIMAGEVIEW CHECK
+	}//LOOP
 }
 
 
@@ -1261,8 +1287,6 @@ int selectedAddMoreLayerTab = -1;
  */
 -(void)selectTemplate:(id)sender
 {
-	FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
-	appDele.changesFlag = YES;
 	UIButton *view = sender;
     
     //Handling Select Unselect
@@ -1433,31 +1457,36 @@ int selectedAddMoreLayerTab = -1;
  */
 -(void)selectBorder:(id)sender
 {
-	FlyrAppDelegate *appDele = (FlyrAppDelegate*)[[UIApplication sharedApplication]delegate];
-	appDele.changesFlag = YES;
 	int  i=1;
 	UIButton *view = sender;
+    
 	for(UIView *tempView  in [layerScrollView subviews])
 	{
         
-        // Add border to Un-select layer thumbnail
-        tempView.backgroundColor = [UIColor clearColor];
+        //CHECK UIIMAGEVIEW BECAUSE SCROLL VIEW HAVE ADDITIONAL
+        //SUBVIEWS OF UIIMAGEVIEW FOR FLASH INDICATORS
+        if (![tempView isKindOfClass:[UIImageView class]]) {
         
-		if(tempView == view)
-		{
+            // Add border to Un-select layer thumbnail
+            tempView.backgroundColor = [UIColor clearColor];
+        
+            if(tempView == view)
+            {
             
-            UIColor *borderColor = borderArray[i-1];
-            currentLayer = @"Template";
-            [flyer setFlyerBorder:currentLayer RGBColor:borderColor];
+                UIColor *borderColor = borderArray[i-1];
+                currentLayer = @"Template";
+                [flyer setFlyerBorder:currentLayer RGBColor:borderColor];
             
-            //Here we call Render Layer on View
-            [flyimgView setTemplateBorder:[flyer getLayerFromMaster:currentLayer]];
+                //Here we call Render Layer on View
+                [flyimgView setTemplateBorder:[flyer getLayerFromMaster:currentLayer]];
             
-            // Add border to selected layer thumbnail
-            tempView.backgroundColor = [globle colorWithHexString:@"0197dd"];
-		}
-		i++;
-	}
+                // Add border to selected layer thumbnail
+                tempView.backgroundColor = [globle colorWithHexString:@"0197dd"];
+            }
+            
+            i++;
+        }//UIIMAGEVIEW CHECK
+	}//LOOP
 }
 
 /*
@@ -1881,9 +1910,9 @@ int selectedAddMoreLayerTab = -1;
     
     for (UIView *child in ChildViews) {
         
-      //  if ([child isKindOfClass:[LayerTileButton class]] || [child isKindOfClass:[UIButton class]] || [child isKindOfClass:[UILabel class]] ) {
+        if ([child isKindOfClass:[LayerTileButton class]] || [child isKindOfClass:[UIButton class]] || [child isKindOfClass:[UILabel class]] ) {
             [child removeFromSuperview];
-        //}
+        }
         
     }
     
@@ -2262,13 +2291,16 @@ int selectedAddMoreLayerTab = -1;
 	if(selectedButton == fontTabButton)
 	{
         
-        // Here we Start Animation
-        [UIView beginAnimations:nil context:NULL];
-        [UIView setAnimationDuration:0.4f];
-            //Create ScrollView
-            [self addFontsInSubView ];
-        [UIView commitAnimations];
-		//End Animation
+        //HERE WE SET ANIMATION
+        [UIView animateWithDuration:0.4f
+                         animations:^{
+                             //Create ScrollView
+                             [self addFontsInSubView];
+                         }
+                         completion:^(BOOL finished){
+                             [layerScrollView flashScrollIndicators];
+                         }];
+        //END ANIMATION
         
          //Add ContextView
         [self addScrollView:layerScrollView];
@@ -2277,14 +2309,17 @@ int selectedAddMoreLayerTab = -1;
 	}
 	else if(selectedButton == colorTabButton)
 	{
-        // Here we Start Animation
-        [UIView beginAnimations:nil context:NULL];
-        [UIView setAnimationDuration:0.4f];
-            //Create ScrollView
-            [self addColorsInSubView];
-        [UIView commitAnimations];
-		//End Animation
         
+        //HERE WE SET ANIMATION
+        [UIView animateWithDuration:0.4f
+                         animations:^{
+                             //Create ScrollView
+                             [self addColorsInSubView];
+                         }
+                         completion:^(BOOL finished){
+                             [layerScrollView flashScrollIndicators];
+                         }];
+        //END ANIMATION
         
         //Add ContextView
         [self addScrollView:layerScrollView];
@@ -2294,13 +2329,16 @@ int selectedAddMoreLayerTab = -1;
 	else if(selectedButton == sizeTabButton)
 	{
 
-        // Here we Start Animation
-        [UIView beginAnimations:nil context:NULL];
-        [UIView setAnimationDuration:0.4f];
-            //Create ScrollView
-            [self addSizeInSubView];
-        [UIView commitAnimations];
-		//End Animation
+        //HERE WE SET ANIMATION
+        [UIView animateWithDuration:0.4f
+                         animations:^{
+                             //Create ScrollView
+                             [self addSizeInSubView];
+                         }
+                         completion:^(BOOL finished){
+                             [layerScrollView flashScrollIndicators];
+                         }];
+        //END ANIMATION
         
         //Add ContextView
         [self addScrollView:layerScrollView];
@@ -2309,14 +2347,17 @@ int selectedAddMoreLayerTab = -1;
 	}
 	else if(selectedButton == fontBorderTabButton)
 	{
-        
-        // Here we Start Animation
-        [UIView beginAnimations:nil context:NULL];
-        [UIView setAnimationDuration:0.4f];
-            //Create ScrollView
-            [self addTextBorderInSubView];
-        [UIView commitAnimations];
-		//End Animation
+
+        //HERE WE SET ANIMATION
+        [UIView animateWithDuration:0.4f
+                         animations:^{
+                             //Create ScrollView
+                             [self addTextBorderInSubView];
+                         }
+                         completion:^(BOOL finished){
+                             [layerScrollView flashScrollIndicators];
+                         }];
+        //END ANIMATION
         
         //Add ContextView
         [self addScrollView:layerScrollView];
@@ -2350,14 +2391,17 @@ int selectedAddMoreLayerTab = -1;
 	{
         [backtemplates setBackgroundImage:[UIImage imageNamed:@"addbg_library_selected"] forState:UIControlStateNormal];
         
-        // Here we Start Animation
-        [UIView beginAnimations:nil context:NULL];
-        [UIView setAnimationDuration:0.4f];
-            //Create ScrollView
-            [self addTemplatesInSubView];
-        [UIView commitAnimations];
-		//End Animation
-
+        
+        //HERE WE SET ANIMATION
+        [UIView animateWithDuration:0.4f
+                         animations:^{
+                             //Create ScrollView
+                             [self addTemplatesInSubView];
+                         }
+                         completion:^(BOOL finished){
+                             [layerScrollView flashScrollIndicators];
+                         }];
+        //END ANIMATION
         
         //Add ContextView
         [self addScrollView:layerScrollView];
@@ -2377,14 +2421,16 @@ int selectedAddMoreLayerTab = -1;
     {
         [flyerBorder setSelected:YES];
         
-        // Here we Start Animation
-        [UIView beginAnimations:nil context:NULL];
-        [UIView setAnimationDuration:0.4f];
-            //Create ScrollView
-            [self addFlyerBorderInSubView];
-        [UIView commitAnimations];
-		//End Animation
-        
+        //HERE WE SET ANIMATION
+        [UIView animateWithDuration:0.4f
+                         animations:^{
+                             //Create ScrollView
+                            [self addFlyerBorderInSubView];
+                         }
+                         completion:^(BOOL finished){
+                             [layerScrollView flashScrollIndicators];
+                         }];
+        //END ANIMATION
         
         //Add ContextView
         [self addScrollView:layerScrollView];
@@ -2527,7 +2573,6 @@ int selectedAddMoreLayerTab = -1;
                              [self addFlyerIconInSubView];
                          }
                          completion:^(BOOL finished){
-                             NSLog(@"completion block");
                              [layerScrollView flashScrollIndicators];
                          }];
         
@@ -2552,11 +2597,16 @@ int selectedAddMoreLayerTab = -1;
         //Add right Bar button
         [self addDonetoRightBarBotton];
         
-        [UIView beginAnimations:nil context:NULL];
-        [UIView setAnimationDuration:0.4f];
-            //Create ScrollView
-            [self addSymbolsInSubView];
-        [UIView commitAnimations];
+        
+        //HERE WE SET ANIMATION
+        [UIView animateWithDuration:0.4f
+                         animations:^{
+                             //Create ScrollView
+                             [self addSymbolsInSubView];
+                         }
+                         completion:^(BOOL finished){
+                             [layerScrollView flashScrollIndicators];
+                         }];
 
         
         //Add ContextView

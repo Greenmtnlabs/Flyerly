@@ -20,7 +20,6 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 
 @synthesize window;
 @synthesize navigationController;
-@synthesize faceBookPermissionFlag,changesFlag;
 @synthesize  svController,lauchController,accountController;
 @synthesize sharingProgressParentView;
 
@@ -29,8 +28,6 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 #pragma mark Application lifecycle
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
-
-	changesFlag = NO;
 	
     NSString *greeted = [[NSUserDefaults standardUserDefaults] stringForKey:@"greeted"];
     
@@ -139,8 +136,6 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     // Bitly configuration
     [[BitlyConfig sharedBitlyConfig] setBitlyLogin:[flyerConfigurator bitLyLogin] bitlyAPIKey:[flyerConfigurator bitLyKey]];
     
-	changesFlag = NO;
-
     // This flag represents the condition whether application setting has been altered first time
     // after installing app
     if( ![[NSUserDefaults standardUserDefaults] stringForKey:@"saveToCameraRollSettingFlag"] ){

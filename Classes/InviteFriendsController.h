@@ -22,6 +22,7 @@
 #import "AsyncImageView.h"
 #import "FlyerlySingleton.h"
 #import "InviteFriendsCell.h"
+#import "fbSubClass.h"
 
 @class LoadingView,FlyerlySingleton;
 
