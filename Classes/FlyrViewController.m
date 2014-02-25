@@ -224,8 +224,13 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
 
     //HERE WE GET FLYERS
     flyerPaths = [self getFlyersPaths];
-
-     [tView reloadData];
+    
+    //HERE WE SET SCROLL VIEW POSITION
+    if (flyerPaths.count != 0) {
+       NSIndexPath *scrollIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+        [tView scrollToRowAtIndexPath:scrollIndexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
+        [tView reloadData];
+    }
 
 }
 
@@ -240,7 +245,7 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
    
     UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-    [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
+    [backButton setBackgroundImage:[UIImage imageNamed:@"home_button"] forState:UIControlStateNormal];
     [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
     backButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];

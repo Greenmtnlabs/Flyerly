@@ -37,7 +37,7 @@ int selectedAddMoreLayerTab = -1;
 
 -(void)viewDidAppear:(BOOL)animated {
     
-    [addMoreLayerOrSaveFlyerLabel setText:@"CREATE YOUR FLYER WITH THE FEATURES BELOW THEN SHARE WITH THE WORLD"];    [addMoreLayerOrSaveFlyerLabel setNumberOfLines:2];
+    [addMoreLayerOrSaveFlyerLabel setText:@"CREATE YOUR FLYER WITH THE FEATURES BELOW THEN SHARE WITH THE WORLD!"];    [addMoreLayerOrSaveFlyerLabel setNumberOfLines:2];
     [addMoreLayerOrSaveFlyerLabel setBackgroundColor:[UIColor clearColor]];
     [addMoreLayerOrSaveFlyerLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:16]];
     [addMoreLayerOrSaveFlyerLabel setTextColor:[UIColor grayColor]];
@@ -147,9 +147,9 @@ int selectedAddMoreLayerTab = -1;
     [self.view addSubview:sharePanel];
 
     // Set height and width of each element of scroll view
-    layerXposition =0;
-        widthValue = 35;
-        heightValue = 35;    
+    layerXposition = 0;
+    widthValue = 35;
+    heightValue = 35;
     
 	//Default Selection for start
 	selectedFont = [UIFont fontWithName:@"Arial" size:16];
@@ -205,7 +205,20 @@ int selectedAddMoreLayerTab = -1;
     UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
 	[backButton addTarget:self action:@selector(callMenu) forControlEvents:UIControlEventTouchUpInside];
-    [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
+    
+    // HERE WE SET BACK BUTTON IMAGE AS REQUIRED
+    NSArray * arrayOfControllers =  self.navigationController.viewControllers;
+    int idx = [arrayOfControllers count] -2 ;
+    id previous = [arrayOfControllers objectAtIndex:idx];
+    if ([previous isKindOfClass:[FlyrViewController class]])
+    {
+        [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
+    } else {
+        [backButton setBackgroundImage:[UIImage imageNamed:@"home_button"] forState:UIControlStateNormal];
+    }
+
+    
+    
     backButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     
@@ -2106,6 +2119,7 @@ int selectedAddMoreLayerTab = -1;
     
     titleLabel.text = [flyer getFlyerTitle];
     
+    
      //ShareButton
     [shareButton setBackgroundImage:[UIImage imageNamed:@"share_button"] forState:UIControlStateNormal];
     
@@ -2192,13 +2206,14 @@ int selectedAddMoreLayerTab = -1;
         [sharePanel setFrame:CGRectMake(320, 64, 290,480 )];
         
         [UIView commitAnimations];
-  
+        rightUndoBarButton.enabled = YES;
         [shareButton setBackgroundImage:[UIImage imageNamed:@"share_button"] forState:UIControlStateNormal];
 
         
     } else {
         
         sharePanel.hidden = NO;
+        rightUndoBarButton.enabled = NO;
         [shareButton setBackgroundImage:[UIImage imageNamed:@"share_button_selected"] forState:UIControlStateNormal];
         NSString *shareImagePath = [flyer getFlyerImage];
         UIImage *shareImage =  [UIImage imageWithContentsOfFile:shareImagePath];

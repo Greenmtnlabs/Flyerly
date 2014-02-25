@@ -315,13 +315,9 @@
  */
 -(IBAction)onClickFacebookButton{
     
-    [facebookButton setSelected:YES];
-    
     
         // Check internet connectivity
         if( [InviteFriendsController connected] ){
-            
-            [facebookButton setSelected:YES];
             
             
             // Current Item For Sharing
@@ -349,7 +345,6 @@
 
         // Check internet connectivity
         if( [InviteFriendsController connected] ){
-             [twitterButton setSelected:YES];
 
             // Current Item For Sharing
              SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ %@ #flyerly",titleView.text, selectedFlyerDescription ]];
@@ -375,7 +370,6 @@
  */
 -(IBAction)onClickInstagramButton{
     
-    [instagramButton setSelected:YES];
     [self shareOnInstagram];
 }
 
@@ -388,11 +382,10 @@
         // Check internet connectivity
         if( [InviteFriendsController connected] ){
             
-            [emailButton setSelected:YES];
-            
             
             // Current Item For Sharing
-            SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@",titleView.text]];
+            SHKItem *item = [SHKItem image:selectedFlyerImage title:@"Flyerly for you!"];
+            item.text = @"Created & sent from Flyer.ly";
             
             //Calling ShareKit for Sharing
             iosSharer = [[ SHKSharer alloc] init];
@@ -418,8 +411,6 @@
         // Check internet connectivity
         if( [InviteFriendsController connected] ){
             
-           [tumblrButton setSelected:YES];
-
             // Current Item For Sharing
             SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@  %@",titleView.text, selectedFlyerDescription ]];
             
@@ -448,7 +439,6 @@
     
         // Check internet connectivity
         if( [InviteFriendsController connected] ){
-            [flickrButton setSelected:YES];
 
             // Current Item For Sharing
             SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@",titleView.text  ]];
@@ -481,7 +471,7 @@
             NSData *exportData = UIImageJPEGRepresentation(selectedFlyerImage ,1.0);
             
             iosSharer = [[ SHKSharer alloc] init];
-            iosSharer = [SHKTextMessage shareFileData:exportData filename:imageFileName title:@"Flyerly"];
+            iosSharer = [SHKTextMessage shareFileData:exportData filename:imageFileName title:@"Created & sent from Flyer.ly"];
             iosSharer.shareDelegate = self;
             
         }
