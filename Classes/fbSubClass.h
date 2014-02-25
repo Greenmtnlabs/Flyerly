@@ -7,7 +7,7 @@
 //
 
 #import "SHKFacebook.h"
-#import "Facebook.h"
+#import <FacebookSDK/FacebookSDK.h>
 
 @interface fbSubClass : SHKFacebook
 

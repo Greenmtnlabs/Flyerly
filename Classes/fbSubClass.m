@@ -64,25 +64,7 @@
 
 }
 
-/*
-- (BOOL)isAuthorized
-{
-    
-    Facebook *facebook = [SHKFacebook facebook];
-    if ([facebook isSessionValid]) return YES;
-    NSArray *permissions = [[NSArray alloc]initWithObjects:
-                            @"user_likes",
-                            @"read_stream",
-                            nil];
-    [facebook authorize:permissions delegate:delegate];
-    NSUserDefaults *defaults = [NSUserDefaultsstandardUserDefaults];
-    facebook.accessToken = [defaultsstringForKey:kSHKFacebookAccessTokenKey];
-    NSLog(@"access token is %@",facebook.accessToken);
-    facebook.expirationDate = [defaultsobjectForKey:kSHKFacebookExpiryDateKey];
-    NSLog(@"expiry date of access token%@",facebook.expirationDate);
-    return [facebook isSessionValid];
-}
-*/
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
