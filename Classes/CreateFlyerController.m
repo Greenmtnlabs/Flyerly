@@ -2489,7 +2489,7 @@ int selectedAddMoreLayerTab = -1;
         [self addScrollView:takeOrAddPhotoLabel];
 	    
         [self choosePhoto];
-		imgPickerFlag =2;
+		imgPickerFlag = 2;
         [addMorePhotoTabButton setSelected:YES];
         
 
