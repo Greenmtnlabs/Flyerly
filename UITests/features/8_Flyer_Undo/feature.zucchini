@@ -1,0 +1,101 @@
+Start on the "Welcome" screen:
+  Tap "SignIn"
+  
+Then on the "SignIn" screen:
+  Clear the "Username" field
+  Type "riksof.yahoo" in the "Username" field
+  Type "riksof123" in the "Password" field
+  Tap "Sign In"
+
+Then on the "Home" screen:
+  Tap "Create"
+
+Then on the "Flyer" screen:
+  Take a screenshot
+  Tap "Symbols"
+  Take a screenshot
+  Tap "Tile4"
+  Tap "Done / Share"
+  Tap "Next / Delete / Undo"
+  Take a screenshot
+  Tap "Clipart"
+  Take a screenshot
+  Tap "Tile5"
+  Tap "Done / Share"
+  Take a screenshot
+  Tap "Tile1"
+  Tap "Done / Share"
+  Take a screenshot
+  Tap "Tile1"
+  Tap "Done / Share"
+  Tap "Next / Delete / Undo"
+  Take a screenshot
+  Tap "Back"
+
+Then on the "Home" screen:
+  Tap "Create"
+
+Then on the "Flyer" screen:
+  Take a screenshot
+  Tap "Text"
+  Take a screenshot
+  Type "RIKSOF" in the "Text input" field
+  Tap "Next / Delete / Undo"
+  Tap "Tile5"
+  Tap "Color"
+  Tap "Tile3"
+  Tap "Size"
+  Tap "Tile20"
+  Tap "Text border"
+  Tap "Tile5"
+  Tap "Done / Share"
+  Take a screenshot
+  Tap "Text"
+  Type "SQA" in the "Text input" field
+  Tap "Next / Delete / Undo"
+  Tap "Tile4"
+  Tap "Color"
+  Tap "Tile2"
+  Tap "Size"
+  Tap "Tile21"
+  Tap "Text border"
+  Tap "Tile1"
+  Tap "Done / Share"
+  Take a screenshot
+  Tap "Tile1"
+  Tap "Edit"
+  Type " (Private) Limited" in the "Text input" field
+  Tap "Next / Delete / Undo"
+  Tap "Tile4"
+  Tap "Color"
+  Tap "Tile5"
+  Tap "Size"
+  Tap "Tile21"
+  Tap "Text border"
+  Tap "Tile4"
+  Tap "Done / Share"
+  Tap "Next / Delete / Undo"
+  Tap "Next / Delete / Undo"	
+  Take a screenshot
+  Tap "Photo"
+  Take a screenshot
+  Tap "Camera"
+
+Then on the "Camera" screen:
+  Take a screenshot
+  Tap "Take a photo"
+
+Then on the "Crop" screen:
+  Take a screenshot
+  Tap "Done"
+  Tap "Done / Share"
+  Tap "Next / Delete / Undo"
+  Tap "Back"
+
+Then on the "Home" screen:
+  Tap "Settings"
+  
+Then on the "Settings" screen:
+  Tap "Sign Out"
+  Take a screenshot
+  Confirm "Sign out"

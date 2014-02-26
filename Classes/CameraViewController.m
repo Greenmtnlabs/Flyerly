@@ -44,7 +44,7 @@
             dispatch_async( dispatch_get_main_queue(), ^{
                 // Pass Image
                 self.navigationController.navigationBarHidden = NO;
-            
+          
                 // Crop the image
                 [self cropImage:image];
             });

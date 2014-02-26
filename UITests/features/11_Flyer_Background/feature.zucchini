@@ -1,0 +1,44 @@
+Start on the "Welcome" screen:
+  Tap "SignIn"
+  
+Then on the "SignIn" screen:
+  Clear the "Username" field
+  Type "riksof.yahoo" in the "Username" field
+  Type "riksof123" in the "Password" field
+  Tap "Sign In"
+
+Then on the "Home" screen:
+  Tap "Create"
+
+Then on the "Flyer" screen:
+  Tap "Background"
+  Tap "Tile4"
+  Tap "Done / Share"
+  Tap "Background"
+  Tap "Tile5"
+  Tap "Done / Share"
+  Take a screenshot
+  Tap "Text"
+  Take a screenshot
+  Type "RIKSOF" in the "Text input" field
+  Tap "Next / Delete / Undo"
+  Tap "Done / Share"
+  Take a screenshot
+  Tap "Photo"
+  Tap "Camera"
+
+Then on the "Camera" screen:
+  Tap "Take a photo"
+
+Then on the "Crop" screen:
+  Take a screenshot
+  Tap "Done"
+  Tap "Done / Share"
+  Tap "Back"
+  
+Then on the "Home" screen:
+  Tap "Settings"
+  
+Then on the "Settings" screen:
+  Tap "Sign Out"
+  Confirm "Sign out"
