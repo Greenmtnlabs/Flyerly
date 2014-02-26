@@ -1,0 +1,50 @@
+Start on the "Welcome" screen:
+  Tap "SignIn"
+  
+Then on the "SignIn" screen:
+  Clear the "Username" field
+  Type "riksof.yahoo" in the "Username" field
+  Type "riksof123" in the "Password" field
+  Tap "Sign In"
+
+Then on the "Home" screen:
+  Tap "Create"
+
+Then on the "Flyer" screen:
+  Tap "Symbols"
+  Tap "Tile4"
+  Tap "Done / Share"
+  Tap "Clipart"
+  Tap "Tile5"
+  Tap "Done / Share"
+  Take a screenshot
+  Tap "Tile1"
+  Tap "Done / Share"
+  Take a screenshot
+  Tap "Tile1"
+  Take a screenshot
+  Tap "Done / Share"
+  Tap "Done / Share"
+  Tap "Facebook Button"
+  Tap "Post"
+  Wait for "15" seconds
+  Tap "Twitter Button"
+  Tap "Send to Twitter"
+  Tap "Tumblr Button"
+  Tap "Cancel"
+  Tap "Instagram Button"
+  Tap "Cancel"
+  Tap "Flicker Button"
+  Tap "Send to Flickr"
+  Tap "SMS Button"
+  Tap "Cancel"
+  Tap "Copy Button"
+  Tap "Back"
+  Show elements
+
+Then on the "Home" screen:
+  Tap "Settings"
+  
+Then on the "Settings" screen:
+  Tap "Sign Out"
+  Confirm "Sign out"

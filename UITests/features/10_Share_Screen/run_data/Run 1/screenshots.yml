@@ -1,0 +1,10 @@
+---
+- :screen: flyer
+  :orientation: Portrait
+  :rotated: true
+- :screen: flyer
+  :orientation: Portrait
+  :rotated: true
+- :screen: flyer
+  :orientation: Portrait
+  :rotated: true

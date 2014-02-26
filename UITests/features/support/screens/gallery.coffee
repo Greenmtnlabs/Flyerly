@@ -1,5 +1,5 @@
 class GalleryScreen extends Screen
-  anchor: -> $('navigationBar[name=GalleryView]')
+  anchor: -> $('navigationBar[name=9 albums]')
 
   constructor: ->
     super 'gallery'
