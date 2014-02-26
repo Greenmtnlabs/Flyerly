@@ -10,7 +10,7 @@
 
 
 @implementation FlyrViewController
-@synthesize photoArray,tView,iconArray,photoDetailArray,searchTextField;
+@synthesize tView,iconArray,photoDetailArray,searchTextField;
 
 
 - (UIImage *)scale:(NSString *)imageName toSize:(CGSize)size

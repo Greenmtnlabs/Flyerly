@@ -35,7 +35,6 @@
     IBOutlet UIButton *setBotton;
     
 	BOOL loadingViewFlag;
-	NSMutableArray *photoArray;
 	NSMutableArray *photoDetailArray;
     int numberOfFlyers;
     
@@ -65,7 +64,6 @@
 @property (nonatomic, strong) IBOutlet UIImageView *secondFlyer;
 @property (nonatomic, strong) IBOutlet UIImageView *thirdFlyer;
 @property (nonatomic, strong) IBOutlet UIImageView *fourthFlyer;
-@property(nonatomic,strong) NSMutableArray *photoArray;
 @property(nonatomic,strong) NSMutableArray *photoDetailArray;
 
 @property (nonatomic, strong) IBOutlet UIView *likeView;

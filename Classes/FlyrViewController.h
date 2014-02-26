@@ -10,7 +10,6 @@
 #import "SaveFlyerCell.h"
 #import "Common.h"
 #import "ShareViewController.h"
-#import "Common.h"
 #import "HelpController.h"
 #import "FlyrAppDelegate.h"
 #import "Flyer.h"
@@ -25,7 +24,6 @@
     NSMutableArray *searchFlyerPaths;
 
 }
-@property(nonatomic,strong) NSMutableArray *photoArray;
 @property(nonatomic,strong) NSMutableArray *photoDetailArray;
 @property(nonatomic,strong) NSMutableArray *iconArray;
 @property(nonatomic,strong) IBOutlet UITableView *tView;
