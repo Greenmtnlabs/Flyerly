@@ -1028,7 +1028,6 @@
 		65A21268172981A000ED0B9A /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65A212671729819F00ED0B9A /* ImageIO.framework */; };
 		65A2CEFA1725494F005C03B7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65A2CEF8172548D6005C03B7 /* AVFoundation.framework */; };
 		65A2CFC117257480005C03B7 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65A2CFC01725747F005C03B7 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		65A2CFC3172574F4005C03B7 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65A2CFC2172574F3005C03B7 /* AdSupport.framework */; };
 		65A464D11726C3D0002C32FB /* afterupdatescreen_bg-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65A464D01726C3D0002C32FB /* afterupdatescreen_bg-568h@2x.png */; };
 		65A464E41726CBA2002C32FB /* ALGER.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 65A464D21726CBA2002C32FB /* ALGER.TTF */; };
 		65A464E51726CBA2002C32FB /* BankGothic-Regular DB.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 65A464D31726CBA2002C32FB /* BankGothic-Regular DB.ttf */; };
@@ -2416,7 +2415,6 @@
 		65A212671729819F00ED0B9A /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		65A2CEF8172548D6005C03B7 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		65A2CFC01725747F005C03B7 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
-		65A2CFC2172574F3005C03B7 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		65A464D01726C3D0002C32FB /* afterupdatescreen_bg-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "afterupdatescreen_bg-568h@2x.png"; sourceTree = "<group>"; };
 		65A464D21726CBA2002C32FB /* ALGER.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; name = ALGER.TTF; path = Data/fonts/ALGER.TTF; sourceTree = "<group>"; };
 		65A464D31726CBA2002C32FB /* BankGothic-Regular DB.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BankGothic-Regular DB.ttf"; path = "Data/fonts/BankGothic-Regular DB.ttf"; sourceTree = "<group>"; };
@@ -2720,7 +2718,6 @@
 				0D335121109ABB6A0082810A /* libxml2.dylib in Frameworks */,
 				65A21268172981A000ED0B9A /* ImageIO.framework in Frameworks */,
 				65A212461729496F00ED0B9A /* AssetsLibrary.framework in Frameworks */,
-				65A2CFC3172574F4005C03B7 /* AdSupport.framework in Frameworks */,
 				65A2CFC117257480005C03B7 /* Social.framework in Frameworks */,
 				65A2CEFA1725494F005C03B7 /* AVFoundation.framework in Frameworks */,
 				65C7A50517216E71003F1A84 /* MobileCoreServices.framework in Frameworks */,
@@ -4230,7 +4227,6 @@
 				65F41C02173BCB2E000BA8CB /* SenTestingKit.framework */,
 				65A212671729819F00ED0B9A /* ImageIO.framework */,
 				65A212451729496F00ED0B9A /* AssetsLibrary.framework */,
-				65A2CFC2172574F3005C03B7 /* AdSupport.framework */,
 				65A2CFC01725747F005C03B7 /* Social.framework */,
 				65A2CEF8172548D6005C03B7 /* AVFoundation.framework */,
 				65C7A50417216E71003F1A84 /* MobileCoreServices.framework */,

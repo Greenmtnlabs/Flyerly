@@ -10,7 +10,7 @@
 
 
 @implementation FlyrViewController
-@synthesize photoArray,tView,iconArray,photoDetailArray,ptController,searchTextField;
+@synthesize photoArray,tView,iconArray,photoDetailArray,searchTextField;
 
 
 - (UIImage *)scale:(NSString *)imageName toSize:(CGSize)size
@@ -44,62 +44,6 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
             compare:attrs2[NSFileModificationDate]];
 }
 
-
-
--(void)filesByModDate
-{
-    
-    PFUser *user = [PFUser currentUser];
-
-	photoArray =[[NSMutableArray alloc]init];
-	photoDetailArray =[[NSMutableArray alloc]init];
-	iconArray = [[NSMutableArray alloc]init];
-	NSString *homeDirectoryPath = NSHomeDirectory();
-	NSString *unexpandedPath = [homeDirectoryPath stringByAppendingString: [NSString stringWithFormat:@"/Documents/%@/Flyr/",user.username]];
-	NSString *folderPath = [NSString pathWithComponents:@[[NSString stringWithString:[unexpandedPath stringByExpandingTildeInPath]]]];
-	
-	NSArray *files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:folderPath error:nil];
-	NSString *finalImagePath;
-	NSArray* sortedFiles;
-	NSArray* detailSortedFiles;
-	NSString *detailFinalImagePath;
-
-	for(int i =0;i< [files count];i++)
-	{
-        
-        NSString *img = files[i];
-		img = [@"/" stringByAppendingString:img];
-		finalImagePath= [folderPath stringByAppendingString:img];
-        
-        if([finalImagePath hasSuffix:@".jpg"]){
-            [photoArray addObject:finalImagePath];
-        } else if([finalImagePath hasSuffix:@".txt"]){
-            [photoDetailArray addObject:finalImagePath];
-        }
-	}
-    sortedFiles = [photoArray sortedArrayUsingFunction:dateModifiedSort context:nil];
-    detailSortedFiles = [photoDetailArray sortedArrayUsingFunction:dateModifiedSort context:nil];
-
-	[photoArray removeAllObjects];
-	[photoDetailArray removeAllObjects];
-    
-	for(int i =0;i< [sortedFiles count];i++)
-	{
-			finalImagePath = sortedFiles[i];
-			UIImage *temp = [self scale:finalImagePath toSize:CGSizeMake(640,640)];
-			[photoArray addObject:finalImagePath];
-			[iconArray addObject:temp];
-	}
-    
-    
-    
-	for(int j =0;j< [detailSortedFiles count];j++)
-	{
-        detailFinalImagePath = detailSortedFiles[j];
-        //NSLog(@"detailFinalImagePath: %@", detailFinalImagePath);
-        NSArray *myArray = [NSArray arrayWithContentsOfFile:detailFinalImagePath];
-        [photoDetailArray addObject:myArray];
-	}}
 
 
 - (void)textFieldTapped:(id)sender {
@@ -175,7 +119,6 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
     FlyerlySingleton *globle = [FlyerlySingleton RetrieveSingleton];
     [self.view setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
     
-	letUserSelectRow = YES;
     self.navigationItem.hidesBackButton = YES;
     searchTextField.placeholder = @"Flyerly search";
     searchTextField.font = [UIFont systemFontOfSize:12.0];
@@ -221,14 +164,15 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
     // Set right bar items
     [self.navigationItem setRightBarButtonItems: [self rightBarItems]];
     
-
     //HERE WE GET FLYERS
     flyerPaths = [self getFlyersPaths];
     
     //HERE WE SET SCROLL VIEW POSITION
     if (flyerPaths.count != 0) {
-       NSIndexPath *scrollIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-        [tView scrollToRowAtIndexPath:scrollIndexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
+        
+        NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:0];
+        [tView selectRowAtIndexPath:indexPath animated:YES  scrollPosition:UITableViewScrollPositionBottom];
+        
         [tView reloadData];
     }
 
