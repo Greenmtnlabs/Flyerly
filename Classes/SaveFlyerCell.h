@@ -25,7 +25,6 @@
 @property(nonatomic, strong) NSString *filePath;
 
 
-@property int flyerNumber;
 
 @property(nonatomic, strong)IBOutlet UIImageView *fbImage;
 @property(nonatomic, strong)IBOutlet UIImageView *twtImage;
@@ -36,6 +35,5 @@
 
 
 - (void)renderCell :(Flyer *)flyer;
-- (void)addToCell :(NSString *)tit :(NSString *)des :(NSString *)crted :(UIImage *)img :(NSString*)imgpath :  (int)flyerparam;
 
 @end

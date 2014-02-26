@@ -38,8 +38,8 @@
                         <outlet property="delegate" destination="-1" id="18"/>
                     </connections>
                 </textField>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="104" sectionHeaderHeight="10" sectionFooterHeight="10" id="kGq-MQ-Rhl">
-                    <rect key="frame" x="10" y="107" width="300" height="337"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" directionalLockEnabled="YES" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="104" sectionHeaderHeight="10" sectionFooterHeight="10" id="kGq-MQ-Rhl">
+                    <rect key="frame" x="10" y="107" width="300" height="373"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="0.0"/>

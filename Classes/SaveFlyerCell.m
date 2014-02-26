@@ -13,11 +13,13 @@
 @end
 
 @implementation SaveFlyerCell
-@synthesize nameLabel, description, dateLabel, createLabel,cellImage,backgroundImage,filePath,flyerNumber;
+@synthesize nameLabel, description, dateLabel, createLabel,cellImage,backgroundImage;
 @synthesize fbImage,twtImage,emailImage,instaImage,flickImage,tumbImage;
 
 
-
+/*
+ * HERE WE SET FLYER IMAGE ,TITLE,DESCRICPTION,DATE AND SOCIAL NETWORK STATUS
+ */
 - (void)renderCell :(Flyer *)flyer {
     
     self.backgroundImage.image =  [UIImage imageNamed:@"cell_bg_first"];
@@ -82,31 +84,6 @@
     }
 
 
-}
-
-
-- (void)addToCell :(NSString *)tit :(NSString *)des :(NSString *)crted :(UIImage *)img :(NSString*)imgpath :  (int)flyerparam{
-    
-    self.backgroundImage.image =  [UIImage imageNamed:@"cell_bg_first"];
-	[self.nameLabel setText: tit];
-    [self.description setText:des];
-    [self.dateLabel setText:crted];
-  
-    self.filePath = imgpath;
-    flyerNumber = flyerparam;
-    
-    PFUser *user = [PFUser currentUser];
-    
-    NSString *socialFlyerPath = [self.filePath stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@/Flyr/",user.username] withString:[NSString stringWithFormat:@"%@/Flyr/Social/", user.username]];
-	NSString *finalImgWritePath = [socialFlyerPath stringByReplacingOccurrencesOfString:@".jpg" withString:@".soc"];
-    
-    NSArray *arr = [[NSArray alloc] initWithContentsOfFile:finalImgWritePath];
-    // NSLog(@"%@", arr);
-    
-    self.cellImage.image = img;
-    
-    
-    
 }
 
 
