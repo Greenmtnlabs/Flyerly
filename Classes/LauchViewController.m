@@ -24,7 +24,7 @@
 @implementation LauchViewController
 
 @synthesize spController,tpController,createFlyrLabel,savedFlyrLabel,inviteFriendLabel,addFriendsController;
-@synthesize firstFlyer, secondFlyer, thirdFlyer, fourthFlyer, photoDetailArray, createFlyrButton, savedFlyrButton, inviteFriendButton;
+@synthesize firstFlyer, secondFlyer, thirdFlyer, fourthFlyer, createFlyrButton, savedFlyrButton, inviteFriendButton;
 @synthesize facebookLikeView;
 @synthesize likeButton,followButton,webview,recentFlyers;
 

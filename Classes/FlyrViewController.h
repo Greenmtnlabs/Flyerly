@@ -24,7 +24,6 @@
     NSMutableArray *searchFlyerPaths;
 
 }
-@property(nonatomic,strong) NSMutableArray *photoDetailArray;
 @property(nonatomic,strong) NSMutableArray *iconArray;
 @property(nonatomic,strong) IBOutlet UITableView *tView;
 @property(nonatomic,strong) IBOutlet UITextField *searchTextField;
