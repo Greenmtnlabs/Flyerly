@@ -10,5 +10,4 @@ class ShareSettingsScreen extends Screen
     'Facebook Button' : -> $('#Facebook'),
     'Twitter Button' : -> $('#Twitter'),
     'Instagram Button' : -> $('#Instagram'),
-    'Tumblr Button': -> $('#Tumblr'),
-    'Twitter Button' : -> $('#Twitter')
+    'Tumblr Button': -> $('#Tumblr')
