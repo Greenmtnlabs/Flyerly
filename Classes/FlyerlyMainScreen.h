@@ -22,7 +22,7 @@
 @class MainSettingViewController,ParentViewController;
 
 
-@interface LauchViewController : ParentViewController<UIWebViewDelegate,UIActionSheetDelegate,FacebookLikeViewDelegate> {
+@interface FlyerlyMainScreen : ParentViewController<UIWebViewDelegate,UIActionSheetDelegate,FacebookLikeViewDelegate> {
     
 	CreateFlyerController *createFlyer;
 	FlyrViewController *tpController;

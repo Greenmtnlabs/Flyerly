@@ -29,7 +29,7 @@
 		0DEE01A2108ED97400967DA5 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DEE01A1108ED97400967DA5 /* Security.framework */; };
 		0DEE05D0108F538000967DA5 /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DEE05CF108F538000967DA5 /* close.png */; };
 		0DF258FA10B194A000397105 /* lauchViewbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DF258F910B194A000397105 /* lauchViewbutton.png */; };
-		0DF3A2C5108DF1D200D6C887 /* LauchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DF3A2C2108DF1D200D6C887 /* LauchViewController.m */; };
+		0DF3A2C5108DF1D200D6C887 /* FlyerlyMainScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DF3A2C2108DF1D200D6C887 /* FlyerlyMainScreen.m */; };
 		0DF3A2C6108DF1D200D6C887 /* CreateFlyerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DF3A2C4108DF1D200D6C887 /* CreateFlyerController.m */; };
 		0DF3A367108DF47400D6C887 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DF3A362108DF47400D6C887 /* logo.png */; };
 		0DF3A369108DF47400D6C887 /* signin.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DF3A364108DF47400D6C887 /* signin.png */; };
@@ -148,8 +148,8 @@
 		0F805AD6179E92AD002AEA24 /* flash_icon_green@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F805AD0179E92AC002AEA24 /* flash_icon_green@2x.png */; };
 		0F805AD7179E92AD002AEA24 /* flash_icon_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F805AD1179E92AC002AEA24 /* flash_icon_off.png */; };
 		0F805AD8179E92AD002AEA24 /* flash_icon_off@x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F805AD2179E92AD002AEA24 /* flash_icon_off@x.png */; };
-		0F80C386178561C200D36795 /* AccountController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F80C385178561C200D36795 /* AccountController.m */; };
-		0F80C388178561DA00D36795 /* AccountController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F80C387178561DA00D36795 /* AccountController.xib */; };
+		0F80C386178561C200D36795 /* LaunchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F80C385178561C200D36795 /* LaunchController.m */; };
+		0F80C388178561DA00D36795 /* LaunchController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F80C387178561DA00D36795 /* LaunchController.xib */; };
 		0F80C38B178578CB00D36795 /* RegisterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F80C38A178578CB00D36795 /* RegisterController.m */; };
 		0F80C38D178578E400D36795 /* RegisterController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F80C38C178578E400D36795 /* RegisterController.xib */; };
 		0F80C3901785813E00D36795 /* SigninController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F80C38F1785813E00D36795 /* SigninController.m */; };
@@ -981,7 +981,7 @@
 		49B88989188652A2003766AD /* FacebookLikeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B88985188652A2003766AD /* FacebookLikeView.m */; };
 		49B8898A188652A2003766AD /* NSData+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B88987188652A2003766AD /* NSData+Extras.m */; };
 		6501CAF0173242FC00A89E59 /* Swiss_721_Black_Extended_BT.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6501CAEF173242FC00A89E59 /* Swiss_721_Black_Extended_BT.ttf */; };
-		6501CAF2173249C900A89E59 /* LauchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6501CAF1173249C900A89E59 /* LauchViewController.xib */; };
+		6501CAF2173249C900A89E59 /* FlyerlyMainScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6501CAF1173249C900A89E59 /* FlyerlyMainScreen.xib */; };
 		6501CAF51732654B00A89E59 /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = 6501CAF31732654B00A89E59 /* share.png */; };
 		6501CAF61732654B00A89E59 /* share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6501CAF41732654B00A89E59 /* share@2x.png */; };
 		6513C1951716C3DB00355FC3 /* cell_bg_first.png in Resources */ = {isa = PBXBuildFile; fileRef = 6513C1931716C3DB00355FC3 /* cell_bg_first.png */; };
@@ -1327,8 +1327,8 @@
 		0DEE01A1108ED97400967DA5 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		0DEE05CF108F538000967DA5 /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close.png; sourceTree = "<group>"; };
 		0DF258F910B194A000397105 /* lauchViewbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lauchViewbutton.png; sourceTree = "<group>"; };
-		0DF3A2C1108DF1D200D6C887 /* LauchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LauchViewController.h; sourceTree = "<group>"; };
-		0DF3A2C2108DF1D200D6C887 /* LauchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LauchViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		0DF3A2C1108DF1D200D6C887 /* FlyerlyMainScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlyerlyMainScreen.h; sourceTree = "<group>"; };
+		0DF3A2C2108DF1D200D6C887 /* FlyerlyMainScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FlyerlyMainScreen.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		0DF3A2C3108DF1D200D6C887 /* CreateFlyerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateFlyerController.h; sourceTree = "<group>"; };
 		0DF3A2C4108DF1D200D6C887 /* CreateFlyerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CreateFlyerController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		0DF3A309108DF33D00D6C887 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
@@ -1450,9 +1450,9 @@
 		0F805AD0179E92AC002AEA24 /* flash_icon_green@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flash_icon_green@2x.png"; sourceTree = "<group>"; };
 		0F805AD1179E92AC002AEA24 /* flash_icon_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flash_icon_off.png; sourceTree = "<group>"; };
 		0F805AD2179E92AD002AEA24 /* flash_icon_off@x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flash_icon_off@x.png"; sourceTree = "<group>"; };
-		0F80C384178561C200D36795 /* AccountController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountController.h; sourceTree = "<group>"; };
-		0F80C385178561C200D36795 /* AccountController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountController.m; sourceTree = "<group>"; };
-		0F80C387178561DA00D36795 /* AccountController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AccountController.xib; path = ../AccountController.xib; sourceTree = "<group>"; };
+		0F80C384178561C200D36795 /* LaunchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchController.h; sourceTree = "<group>"; };
+		0F80C385178561C200D36795 /* LaunchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchController.m; sourceTree = "<group>"; };
+		0F80C387178561DA00D36795 /* LaunchController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LaunchController.xib; path = ../LaunchController.xib; sourceTree = "<group>"; };
 		0F80C389178578CB00D36795 /* RegisterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterController.h; sourceTree = "<group>"; };
 		0F80C38A178578CB00D36795 /* RegisterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = RegisterController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		0F80C38C178578E400D36795 /* RegisterController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RegisterController.xib; path = ../RegisterController.xib; sourceTree = "<group>"; };
@@ -2367,7 +2367,7 @@
 		49B88986188652A2003766AD /* NSData+Extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Extras.h"; sourceTree = "<group>"; };
 		49B88987188652A2003766AD /* NSData+Extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Extras.m"; sourceTree = "<group>"; };
 		6501CAEF173242FC00A89E59 /* Swiss_721_Black_Extended_BT.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Swiss_721_Black_Extended_BT.ttf; path = Data/fonts/Swiss_721_Black_Extended_BT.ttf; sourceTree = "<group>"; };
-		6501CAF1173249C900A89E59 /* LauchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LauchViewController.xib; path = ../LauchViewController.xib; sourceTree = "<group>"; };
+		6501CAF1173249C900A89E59 /* FlyerlyMainScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FlyerlyMainScreen.xib; path = ../FlyerlyMainScreen.xib; sourceTree = "<group>"; };
 		6501CAF31732654B00A89E59 /* share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share.png; sourceTree = "<group>"; };
 		6501CAF41732654B00A89E59 /* share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share@2x.png"; sourceTree = "<group>"; };
 		6513C1931716C3DB00355FC3 /* cell_bg_first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cell_bg_first.png; sourceTree = "<group>"; };
@@ -2753,7 +2753,7 @@
 				2013528C188C608400822073 /* FlyerlyUpdate */,
 				2013528B188C5FC900822073 /* LaunchScreen */,
 				20F359741888D5B9001376B6 /* LoginControllers */,
-				20F3597B1888DBEE001376B6 /* FlyerMainScreen */,
+				20F3597B1888DBEE001376B6 /* FlyerlyMainScreen */,
 				20F3597C1888DC8A001376B6 /* CreateFlyer */,
 				2002C8981888CF3F005B18C9 /* ShareScreen */,
 				20F359781888D92E001376B6 /* InviteScreen */,
@@ -3812,9 +3812,9 @@
 		2013528B188C5FC900822073 /* LaunchScreen */ = {
 			isa = PBXGroup;
 			children = (
-				0F80C384178561C200D36795 /* AccountController.h */,
-				0F80C385178561C200D36795 /* AccountController.m */,
-				0F80C387178561DA00D36795 /* AccountController.xib */,
+				0F80C384178561C200D36795 /* LaunchController.h */,
+				0F80C385178561C200D36795 /* LaunchController.m */,
+				0F80C387178561DA00D36795 /* LaunchController.xib */,
 			);
 			name = LaunchScreen;
 			sourceTree = "<group>";
@@ -4113,14 +4113,14 @@
 			name = ShareSetting;
 			sourceTree = "<group>";
 		};
-		20F3597B1888DBEE001376B6 /* FlyerMainScreen */ = {
+		20F3597B1888DBEE001376B6 /* FlyerlyMainScreen */ = {
 			isa = PBXGroup;
 			children = (
-				0DF3A2C1108DF1D200D6C887 /* LauchViewController.h */,
-				0DF3A2C2108DF1D200D6C887 /* LauchViewController.m */,
-				6501CAF1173249C900A89E59 /* LauchViewController.xib */,
+				0DF3A2C1108DF1D200D6C887 /* FlyerlyMainScreen.h */,
+				0DF3A2C2108DF1D200D6C887 /* FlyerlyMainScreen.m */,
+				6501CAF1173249C900A89E59 /* FlyerlyMainScreen.xib */,
 			);
-			name = FlyerMainScreen;
+			name = FlyerlyMainScreen;
 			sourceTree = "<group>";
 		};
 		20F3597C1888DC8A001376B6 /* CreateFlyer */ = {
@@ -4957,7 +4957,7 @@
 				65DB59BD173018DC00F251B0 /* facebook_selected@2x.png in Resources */,
 				65DB59BE173018DC00F251B0 /* twitter_selected@2x.png in Resources */,
 				6501CAF0173242FC00A89E59 /* Swiss_721_Black_Extended_BT.ttf in Resources */,
-				6501CAF2173249C900A89E59 /* LauchViewController.xib in Resources */,
+				6501CAF2173249C900A89E59 /* FlyerlyMainScreen.xib in Resources */,
 				6501CAF51732654B00A89E59 /* share.png in Resources */,
 				6501CAF61732654B00A89E59 /* share@2x.png in Resources */,
 				65BDB2C51733E8C80084E032 /* 07_camera_selected.png in Resources */,
@@ -5297,7 +5297,7 @@
 				0FE6F9B81770763200C726F7 /* pinned_flyer2@2x.png in Resources */,
 				0FCC3A1C177D8C5C0046484C /* settings2.png in Resources */,
 				0FCC3A1D177D8C5C0046484C /* settings2@2x.png in Resources */,
-				0F80C388178561DA00D36795 /* AccountController.xib in Resources */,
+				0F80C388178561DA00D36795 /* LaunchController.xib in Resources */,
 				0F80C38D178578E400D36795 /* RegisterController.xib in Resources */,
 				0F80C3A81785B41300D36795 /* facebook_login.png in Resources */,
 				200773A61887BB8C00448346 /* addbg_cameraroll_selected.png in Resources */,
@@ -5849,7 +5849,7 @@
 				200D196818998BEB00EAD645 /* LayerTileButton.m in Sources */,
 				204635651895F90000A94C42 /* FlyerImageView.m in Sources */,
 				1D3623260D0F684500981E51 /* FlyrAppDelegate.m in Sources */,
-				0DF3A2C5108DF1D200D6C887 /* LauchViewController.m in Sources */,
+				0DF3A2C5108DF1D200D6C887 /* FlyerlyMainScreen.m in Sources */,
 				0DF3A2C6108DF1D200D6C887 /* CreateFlyerController.m in Sources */,
 				49B88989188652A2003766AD /* FacebookLikeView.m in Sources */,
 				202C47FE187D6E4B00FE0975 /* BitlyTweetSheet.m in Sources */,
@@ -5882,7 +5882,7 @@
 				202C4800187D6E4B00FE0975 /* BitlyTwitterOAuthAccount.m in Sources */,
 				202F992718BCAD1B002A25D9 /* fbSubClass.m in Sources */,
 				202C4826187D7A6B00FE0975 /* CDataScanner_Extensions.m in Sources */,
-				0F80C386178561C200D36795 /* AccountController.m in Sources */,
+				0F80C386178561C200D36795 /* LaunchController.m in Sources */,
 				0F80C38B178578CB00D36795 /* RegisterController.m in Sources */,
 				0F80C3901785813E00D36795 /* SigninController.m in Sources */,
 				20F93DD317B2262200F6F88C /* MainSettingViewController.m in Sources */,

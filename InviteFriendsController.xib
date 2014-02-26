@@ -21,7 +21,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fLE-dq-Lhv">
-                    <rect key="frame" x="0.0" y="102" width="319" height="41"/>
+                    <rect key="frame" x="0.0" y="66" width="319" height="41"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="-64"/>
@@ -53,7 +53,7 @@
                         <color key="titleColor" red="0.0037750839000000001" green="0.0060098032000000003" blue="0.010204077000000001" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="selected" image="invite_twitter.png"/>
+                    <state key="selected" image="invite_twitter_selected.png"/>
                     <state key="highlighted">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -77,8 +77,8 @@
                         <action selector="loadFacebookContacts:" destination="-1" eventType="touchUpInside" id="203"/>
                     </connections>
                 </button>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="singleLineEtched" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="80" sectionHeaderHeight="22" sectionFooterHeight="22" id="183">
-                    <rect key="frame" x="3" y="146" width="314" height="287"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="singleLineEtched" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="100" sectionHeaderHeight="22" sectionFooterHeight="22" id="183">
+                    <rect key="frame" x="3" y="115" width="314" height="318"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="0.0"/>
@@ -89,7 +89,7 @@
                     </connections>
                 </tableView>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="333">
-                    <rect key="frame" x="39" y="106" width="272" height="30"/>
+                    <rect key="frame" x="39" y="70" width="272" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="-64"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
@@ -98,25 +98,8 @@
                         <outlet property="delegate" destination="-1" id="335"/>
                     </connections>
                 </textField>
-                <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="165">
-                    <rect key="frame" x="0.0" y="64" width="320" height="38"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.01121286401" green="0.57007971449999995" blue="0.91810825890000003" alpha="1" colorSpace="calibratedRGB"/>
-                    <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="-64"/>
-                    <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="15"/>
-                    <state key="normal" title="INVITE">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="highlighted">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="invite" destination="-1" eventType="touchUpInside" id="206"/>
-                    </connections>
-                </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="searchicon.png" id="m72-Xh-oOT">
-                    <rect key="frame" x="13" y="114" width="13" height="14"/>
+                    <rect key="frame" x="13" y="78" width="13" height="14"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="-64"/>
                 </imageView>
@@ -132,6 +115,7 @@
         <image name="invite_sms.png" width="107" height="45"/>
         <image name="invite_sms_selected.png" width="107" height="45"/>
         <image name="invite_twitter.png" width="107" height="45"/>
+        <image name="invite_twitter_selected.png" width="107" height="45"/>
         <image name="searchicon.png" width="13" height="14"/>
     </resources>
 </document>

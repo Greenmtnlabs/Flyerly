@@ -35,7 +35,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
         NSLog(@"Welcome to the world of Flyerly");
         [[NSUserDefaults standardUserDefaults] setObject:@"greeted" forKey:@"greeted"];
 
-        lauchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
+        lauchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil];
 
         [navigationController pushViewController:lauchController animated:NO];
         [window addSubview:[navigationController view]];
@@ -47,8 +47,8 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
         
         NSLog(@"User already Greeted !");
 
-        lauchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
-        accountController = [[AccountController alloc]initWithNibName:@"AccountController" bundle:nil];
+        lauchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil];
+        accountController = [[LaunchController alloc]initWithNibName:@"LaunchController" bundle:nil];
         
         [navigationController pushViewController:lauchController animated:NO];
         [navigationController pushViewController:accountController animated:NO];
@@ -154,7 +154,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
         // Show the greeting before going to the main app.
         [[NSUserDefaults standardUserDefaults] setObject:@"greeted" forKey:@"greeted"];
         
-        lauchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
+        lauchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil];
         
         [navigationController pushViewController:lauchController animated:NO];
         
@@ -166,10 +166,10 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
         
         // Is the user logged in?
         if ( [PFUser currentUser] == nil ) {
-            accountController = [[AccountController alloc]initWithNibName:@"AccountController" bundle:nil];
+            accountController = [[LaunchController alloc]initWithNibName:@"LaunchController" bundle:nil];
             [navigationController setRootViewController:accountController];
         } else {
-            lauchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
+            lauchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil];
             [navigationController setRootViewController:lauchController];
         }
     }

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "LauchViewController.h"
+#import "FlyerlyMainScreen.h"
 #import "FlyrAppDelegate.h"
 #import "FlyerlySingleton.h"
 #import "ParentViewController.h"
@@ -16,12 +16,12 @@
 #import "Common.h"
 #import "FlyrAppDelegate.h"
 
-@class FlyerlySingleton,LauchViewController;
+@class FlyerlySingleton,FlyerlyMainScreen;
 @interface RegisterController : ParentViewController <UITextFieldDelegate>{
     
 
     
-    LauchViewController *launchController;
+    FlyerlyMainScreen *launchController;
     CGFloat animatedDistance;
     NSArray *twitterAccounts;
     UIView *waiting;

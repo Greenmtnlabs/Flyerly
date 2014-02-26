@@ -39,7 +39,7 @@
        SHKSharer *iosSharer = [[ SHKSharer alloc] init];
         // Create controller and set share options
         iosSharer= [[SHKFacebook alloc] init];
-      BOOL STATUS =  [iosSharer authorize];
+      BOOL STATUS =  [self  authorize];
     
     
   

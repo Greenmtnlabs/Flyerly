@@ -5,17 +5,15 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LauchViewController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FlyerlyMainScreen">
             <connections>
                 <outlet property="createFlyrButton" destination="23" id="51"/>
                 <outlet property="createFlyrLabel" destination="10" id="47"/>
                 <outlet property="facebookLikeView" destination="71" id="74"/>
                 <outlet property="firstFlyer" destination="14" id="50"/>
-                <outlet property="followButton" destination="28" id="55"/>
                 <outlet property="fourthFlyer" destination="12" id="38"/>
                 <outlet property="inviteFriendButton" destination="25" id="53"/>
                 <outlet property="inviteFriendLabel" destination="5" id="49"/>
-                <outlet property="likeButton" destination="29" id="57"/>
                 <outlet property="likeView" destination="68" id="73"/>
                 <outlet property="savedFlyrButton" destination="24" id="52"/>
                 <outlet property="savedFlyrLabel" destination="9" id="48"/>
@@ -143,36 +141,6 @@
                         <view contentMode="scaleToFill" id="26">
                             <rect key="frame" x="0.0" y="431" width="320" height="49"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
-                            <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="28">
-                                    <rect key="frame" x="241" y="0.0" width="79" height="49"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <accessibility key="accessibilityConfiguration" label="Twitter"/>
-                                    <state key="normal" backgroundImage="twitter_follow.png">
-                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <state key="selected" backgroundImage="twitter_following.png"/>
-                                    <connections>
-                                        <action selector="onTwitter:" destination="-1" eventType="touchUpInside" id="67"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="29">
-                                    <rect key="frame" x="0.0" y="0.0" width="79" height="49"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <accessibility key="accessibilityConfiguration" label="Facebook"/>
-                                    <state key="normal" backgroundImage="facebook_like.png">
-                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <state key="selected" backgroundImage="facebook_unlike.png"/>
-                                    <connections>
-                                        <action selector="showLikeButton" destination="-1" eventType="touchUpInside" id="58"/>
-                                    </connections>
-                                </button>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="settings_bg.png" id="27">
-                                    <rect key="frame" x="77" y="0.0" width="167" height="49"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
-                                </imageView>
-                            </subviews>
                             <color key="backgroundColor" red="0.0" green="0.59999999999999998" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="16">
@@ -303,18 +271,13 @@
     </objects>
     <resources>
         <image name="Zmain_screenbg-568h.png" width="253" height="35"/>
-        <image name="facebook_like.png" width="80" height="49"/>
-        <image name="facebook_unlike.png" width="80" height="49"/>
         <image name="likealertbg.png" width="213" height="100"/>
         <image name="likealertclose.png" width="58" height="24"/>
         <image name="mid_shadow.png" width="105" height="52"/>
         <image name="pinned_flyer2.png" width="63" height="83"/>
         <image name="pinned_flyer_bg2.png" width="130" height="130"/>
         <image name="settings2.png" width="71" height="69"/>
-        <image name="settings_bg.png" width="156" height="47"/>
         <image name="shadow.png" width="104" height="48"/>
         <image name="three_buttons.png" width="320" height="61"/>
-        <image name="twitter_follow.png" width="79" height="49"/>
-        <image name="twitter_following.png" width="79" height="49"/>
     </resources>
 </document>

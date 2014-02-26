@@ -1,5 +1,5 @@
 //
-//  AccountController.h
+//  LaunchController.h
 //  Flyr
 //
 //  Created by Riksof Pvt. Ltd. on 7/4/13.
@@ -14,7 +14,7 @@
 
 
 @class FlyerlySingleton,SigninController,RegisterController;
-@interface AccountController : UIViewController{
+@interface LaunchController : UIViewController{
     
     FlyerlySingleton  *globle;
     SigninController *signinController;

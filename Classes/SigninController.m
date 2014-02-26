@@ -141,7 +141,7 @@
         PFUser *user = [PFUser currentUser];
         [FlyerUser updateFolderStructure:[user objectForKey:@"username"]];
 
-        launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
+        launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil];
         [self.navigationController pushViewController:launchController animated:YES];
     }
     
@@ -182,7 +182,7 @@
             [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"User"];
             
             // Login success Move to Flyerly
-            launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil] ;
+            launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil] ;
             
             FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
             appDelegate.lauchController = launchController;
@@ -201,7 +201,7 @@
             
             
             // Login success Move to Flyerly
-            launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil] ;
+            launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil] ;
             
             // Temp on for Testing here
             FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
@@ -242,7 +242,7 @@
                 [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"User"];
 
                 // Login success Move to Flyerly
-                launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil] ;
+                launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil] ;
                 
                 // For Parse New User Merge to old Twitter User
                 FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
@@ -261,7 +261,7 @@
 
                 
                 // Login success Move to Flyerly
-                launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil] ;
+                launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil] ;
                 [self.navigationController pushViewController:launchController animated:YES];
 
                 

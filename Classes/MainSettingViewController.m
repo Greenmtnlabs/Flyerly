@@ -190,9 +190,9 @@
     
 	if(alertView == warningAlert && buttonIndex == 0) {
         [self signOut];
-        AccountController *actaController = nil;
+        LaunchController *actaController = nil;
         
-        actaController = [[AccountController alloc] initWithNibName:@"AccountController" bundle:nil];
+        actaController = [[LaunchController alloc] initWithNibName:@"LaunchController" bundle:nil];
         
         [self.navigationController setRootViewController:actaController];
     }

@@ -1,20 +1,20 @@
 //
-//  AccountController.m
+//  LaunchController.m
 //  Flyr
 //
 //  Created by Riksof Pvt. Ltd. on 22/Jan/2014.
 //
 //
 
-#import "AccountController.h"
+#import "LaunchController.h"
 #import "FlyrAppDelegate.h"
 #import "Common.h"
 
-@interface AccountController ()
+@interface LaunchController ()
 
 @end
 
-@implementation AccountController
+@implementation LaunchController
 @synthesize registerButton, signinButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil

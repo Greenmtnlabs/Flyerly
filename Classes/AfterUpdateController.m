@@ -17,7 +17,7 @@
 
 -(IBAction)ok {
     
-    accountController = [[AccountController alloc] initWithNibName:@"AccountController" bundle:nil];
+    accountController = [[LaunchController alloc] initWithNibName:@"LaunchController" bundle:nil];
     [self.navigationController pushViewController:accountController animated:YES];
 }
 

@@ -3,7 +3,7 @@
 //  Created by Riksof Pvt. Ltd. on 22/Jan/2014.
 //
 
-#import "LauchViewController.h"
+#import "FlyerlyMainScreen.h"
 #import "CreateFlyerController.h"
 #import "FlyrViewController.h"
 #import "ShareSettingViewController.h"
@@ -17,11 +17,11 @@
 #import "FlyerlyConfigurator.h"
 #import "FlyerUser.h"
 
-@interface LauchViewController () 
+@interface FlyerlyMainScreen () 
 
 @end
 
-@implementation LauchViewController
+@implementation FlyerlyMainScreen
 
 @synthesize spController,tpController,createFlyrLabel,savedFlyrLabel,inviteFriendLabel,addFriendsController;
 @synthesize firstFlyer, secondFlyer, thirdFlyer, fourthFlyer, createFlyrButton, savedFlyrButton, inviteFriendButton;

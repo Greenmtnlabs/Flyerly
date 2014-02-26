@@ -13,9 +13,9 @@
 #import "Common.h"
 #import "CreateFlyerController.h"
 #import <QuartzCore/QuartzCore.h>
-#import "LauchViewController.h"
+#import "FlyerlyMainScreen.h"
 #import "AfterUpdateController.h"
-#import "AccountController.h"
+#import "LaunchController.h"
 #import "ShareViewController.h"
 #import "Flurry.h"
 #import "SHKConfiguration.h"
@@ -26,9 +26,9 @@
 extern NSString *FacebookDidLoginNotification;
 
 @class SaveFlyerController;
-@class LauchViewController;
+@class FlyerlyMainScreen;
 @class AfterUpdateController;
-@class AccountController;
+@class LaunchController;
 
 @interface FlyrAppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -38,8 +38,8 @@ extern NSString *FacebookDidLoginNotification;
 
 
 @property (nonatomic, strong) SaveFlyerController *svController;
-@property (nonatomic, strong) LauchViewController *lauchController;
-@property (nonatomic, strong) AccountController *accountController;
+@property (nonatomic, strong) FlyerlyMainScreen *lauchController;
+@property (nonatomic, strong) LaunchController *accountController;
 @property (nonatomic, strong) UIView *sharingProgressParentView;
 
 -(void)fbChangeforNewVersion;

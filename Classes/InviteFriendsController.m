@@ -75,7 +75,7 @@ BOOL selectAll;
     
     // NEXT BAR BOTTON
     UIButton *nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-//	[nextButton addTarget:self action:@selector(callStyle) forControlEvents:UIControlEventTouchUpInside];
+	[nextButton addTarget:self action:@selector(invite) forControlEvents:UIControlEventTouchUpInside];
     [nextButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
     nextButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
@@ -86,6 +86,28 @@ BOOL selectAll;
     
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    
+    self.navigationItem.leftItemsSupplementBackButton = YES;
+    
+    // Load device contacts
+    [self loadLocalContacts:self.contactsButton];
+    loadingViewFlag = YES;
+}
+
+
+- (void)viewWillDisappear:(BOOL)animated {
+	[super viewWillDisappear:animated];
+    
+    if(loadingViewFlag){
+        for (UIView *subview in self.view.subviews) {
+            if([subview isKindOfClass:[LoadingView class]]){
+                [subview removeFromSuperview];
+                loadingViewFlag = NO;
+            }
+        }
+    }
+}
 
 
 -(void)loadHelpController{
@@ -102,6 +124,14 @@ BOOL selectAll;
  * This method is used to load device contact details
  */
 - (IBAction)loadLocalContacts:(UIButton *)sender{
+    
+    // HERE WE HIGHLIGHT BUTTON SELECT AND
+    // UNSELECTED BUTTON
+    [contactsButton setSelected:YES];
+    [twitterButton setSelected:NO];
+    [facebookButton setSelected:NO];
+
+    
     invited = NO;
     [deviceContactItems removeAllObjects];
     contactsCount = 0;
@@ -256,7 +286,13 @@ BOOL selectAll;
  */
 - (IBAction)loadFacebookContacts:(UIButton *)sender{
     
+    // HERE WE HIGHLIGHT BUTTON SELECT AND
+    // UNSELECTED BUTTON
+    [contactsButton setSelected:NO];
+    [twitterButton setSelected:NO];
+    [facebookButton setSelected:YES];
 
+    
     fbSubClass *fb = [[fbSubClass alloc] init];
     [fb freindList];
     return;
@@ -416,6 +452,14 @@ int totalCount = 0;
  *
  */
 - (IBAction)loadTwitterContacts:(UIButton *)sender{
+    
+    // HERE WE HIGHLIGHT BUTTON SELECT AND
+    // UNSELECTED BUTTON
+    [contactsButton setSelected:NO];
+    [twitterButton setSelected:YES];
+    [facebookButton setSelected:NO];
+
+    return;
     
     if([InviteFriendsController connected]){
         contactsCount = 0;
@@ -928,17 +972,18 @@ NSMutableDictionary *selectedIdentifierDictionary;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *CellIdentifier = @"InviteCell";
+
     
-    // Create My custom cell view
-    InviteFriendsCell *cell = (InviteFriendsCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    static NSString *cellId = @"InviteCell";
+    InviteFriendsCell *cell = (InviteFriendsCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
     
     [cell setAccessoryType:UITableViewCellAccessoryNone];
-    
-    if ( cell == nil ) {
-        cell = [[InviteFriendsCell alloc] initWithFrame:CGRectZero] ;
-        
+    if (cell == nil) {
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"InviteFriendsCell" owner:self options:nil];
+        cell = (InviteFriendsCell *)[nib objectAtIndex:0];
     }
+        
+    
     [cell setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -1085,26 +1130,6 @@ NSMutableDictionary *selectedIdentifierDictionary;
     [super didReceiveMemoryWarning];
 }
 
--(void)viewWillAppear:(BOOL)animated{
-    
-    self.navigationItem.leftItemsSupplementBackButton = YES;
-    
-    // Load device contacts
-    [self loadLocalContacts:self.contactsButton];
-    loadingViewFlag = YES;
-}
 
-- (void)viewWillDisappear:(BOOL)animated {
-	[super viewWillDisappear:animated];
-    
-    if(loadingViewFlag){
-        for (UIView *subview in self.view.subviews) {
-            if([subview isKindOfClass:[LoadingView class]]){
-                [subview removeFromSuperview];
-                loadingViewFlag = NO;
-            }
-        }
-    }
-}
 
 @end
