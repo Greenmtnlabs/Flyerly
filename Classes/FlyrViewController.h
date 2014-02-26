@@ -24,11 +24,10 @@
     NSMutableArray *searchFlyerPaths;
 
 }
-@property(nonatomic,strong) NSMutableArray *iconArray;
+
 @property(nonatomic,strong) IBOutlet UITableView *tView;
 @property(nonatomic,strong) IBOutlet UITextField *searchTextField;
 
-+(NSString *)getFlyerNumberFromPath:(NSString *)imagePath;
 -(void)goBack;
 
 -(NSMutableArray *)getFlyersPaths;
