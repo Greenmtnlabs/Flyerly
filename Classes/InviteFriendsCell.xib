@@ -52,7 +52,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="add_icon-grey.png" width="32" height="33"/>
+        <image name="add_icon-grey.png" width="253" height="35"/>
         <image name="cell_bg_first.png" width="311" height="101"/>
     </resources>
 </document>

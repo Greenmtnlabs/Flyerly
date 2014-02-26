@@ -23,10 +23,12 @@
 #import "FlyerlySingleton.h"
 #import "InviteFriendsCell.h"
 #import "fbSubClass.h"
+#import "ParentViewController.h"
+#import "SHKSharer.h"
 
-@class LoadingView,FlyerlySingleton;
+@class LoadingView,FlyerlySingleton,SHKSharer;
 
-@interface InviteFriendsController : UIViewController<UITableViewDelegate,UITableViewDataSource,MFMessageComposeViewControllerDelegate,UITextFieldDelegate, UIActionSheetDelegate>{
+@interface InviteFriendsController : ParentViewController<UITableViewDelegate,UITableViewDataSource,MFMessageComposeViewControllerDelegate,UITextFieldDelegate, UIActionSheetDelegate,SHKSharerDelegate>{
     FlyerlySingleton *globle;
     IBOutlet UILabel *contactsLabel;
     IBOutlet UILabel *facebookLabel;
@@ -61,6 +63,8 @@
     ACAccount *account;
     NSString *sName;
     NSString *sMessage;
+    
+    SHKSharer *iosSharer;
 }
 
 @property(nonatomic,strong) IBOutlet UILabel *contactsLabel;

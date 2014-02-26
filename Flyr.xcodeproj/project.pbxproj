@@ -781,6 +781,7 @@
 		20B865FA1851EF0400484D7D /* checkgreen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20B865F81851EF0400484D7D /* checkgreen@2x.png */; };
 		20B865FD1851EF6C00484D7D /* checkgray.png in Resources */ = {isa = PBXBuildFile; fileRef = 20B865FB1851EF6C00484D7D /* checkgray.png */; };
 		20B865FE1851EF6C00484D7D /* checkgray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20B865FC1851EF6C00484D7D /* checkgray@2x.png */; };
+		20BA7DED18BE083300991DCC /* Flyr-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D1107310486CEB800E47090 /* Flyr-Info.plist */; };
 		20CC6922180DA416002F2E6F /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2061ED8B17FF212100E9BECA /* icon.png */; };
 		20CC6925180DA44C002F2E6F /* icon-60.png in Resources */ = {isa = PBXBuildFile; fileRef = 20CC6923180DA44C002F2E6F /* icon-60.png */; };
 		20CC6926180DA44C002F2E6F /* icon-120.png in Resources */ = {isa = PBXBuildFile; fileRef = 20CC6924180DA44C002F2E6F /* icon-120.png */; };
@@ -4596,6 +4597,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20BA7DED18BE083300991DCC /* Flyr-Info.plist in Resources */,
 				0DF3A367108DF47400D6C887 /* logo.png in Resources */,
 				0DF3A369108DF47400D6C887 /* signin.png in Resources */,
 				0DF3A36A108DF47400D6C887 /* twitBack.png in Resources */,
