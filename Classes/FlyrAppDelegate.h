@@ -47,5 +47,7 @@ extern NSString *FacebookDidLoginNotification;
 
 -(void)copyUsersDataForTesting;
 
+-(void)createFlyerlyAlbum;
+
 @end
 

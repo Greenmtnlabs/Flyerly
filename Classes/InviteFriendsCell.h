@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ContactsModel.h"
 
-@interface InviteFriendsCell : UITableViewCell
+@interface InviteFriendsCell : UITableViewCell < ContactsDelegate >{
+
+}
 
 
 @property (nonatomic,strong)IBOutlet UIImageView *imgview;
@@ -16,7 +19,7 @@
 @property (nonatomic,strong)IBOutlet UILabel *description;
 @property (nonatomic,strong)IBOutlet UIButton *checkBtn;
 
--(void)setCellObjects :(NSString *)nam Description:(NSString *)desp :(UIImage *)imagename CheckImage :(NSString *)chkimage;
+-(void)setCellObjects :(ContactsModel *)model :(int)status;
 
 
 @end

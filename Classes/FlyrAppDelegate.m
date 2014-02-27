@@ -178,6 +178,13 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
         [self copyUsersDataForTesting];
     }
     
+    /*
+    if(![[NSUserDefaults standardUserDefaults] stringForKey:@"FlyerlyAlbum"]){
+        [self createFlyerlyAlbum];
+    }*/
+    
+
+    
     [window  setRootViewController:navigationController];
     
     // Override point for customization after application launch.
@@ -337,6 +344,34 @@ if it exist then we call Merging Process
             NSLog(@"File exists: %@", newFilePath);
         }
     }
+}
+
+
+/*** HERE WE CREATE FLYERLY SEPERATE ALBUM 
+ * FOR FLYER SAVING
+ *
+ */
+-(void)createFlyerlyAlbum {
+    
+    ALAssetsLibrary* library = [[ALAssetsLibrary alloc] init];
+    
+    NSString *albumName = @"Flyerly";
+    
+    [library addAssetsGroupAlbumWithName:albumName
+                                  resultBlock:^(ALAssetsGroup *group) {
+                                      
+ 
+                                    NSString *albumUrl = [group  valueForProperty:ALAssetsGroupPropertyURL];
+                                    
+                                      
+                                      [[NSUserDefaults standardUserDefaults]   setObject:albumUrl forKey:@"FlyerlyAlbum"];
+
+                                      NSLog(@"added album:%@", albumName);
+                                  }
+                                 failureBlock:^(NSError *error) {
+                                     NSLog(@"error adding album");
+                                 }];
+
 }
 
 

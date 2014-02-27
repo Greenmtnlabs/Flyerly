@@ -19,19 +19,25 @@
 
 /*
  * Set CellObjects
- * @param text as Description
- * @param image Name
  */
--(void)setCellObjects :(NSString *)nam Description:(NSString *)desp :(UIImage *)imagename CheckImage :(NSString *)chkimage{
-    
+-(void)setCellObjects :(ContactsModel *)model :(int)status {
+
     // Set Values
-    [dName setText:nam];
-    [description setText:desp];
-    [imgview setImage:imagename];
-    [checkBtn setBackgroundImage:[UIImage imageNamed:chkimage] forState:UIControlStateNormal];
+    [dName setText:model.name];
+    [description setText:model.description];
+    [imgview setImage:model.img];
+     model.delegate = self;
+    [model setInvitedStatus:status];
+   
+    
 }
 
 
+#pragma mark Contacts  Delegate
 
+-(void)contactInvited :(ContactsModel *)model{
+
+    [checkBtn setBackgroundImage:[UIImage imageNamed:model.checkImageName] forState:UIControlStateNormal];
+}
 
 @end

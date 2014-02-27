@@ -25,6 +25,7 @@
 #import "fbSubClass.h"
 #import "ParentViewController.h"
 #import "SHKSharer.h"
+#import "ContactsModel.h"
 
 @class LoadingView,FlyerlySingleton,SHKSharer;
 

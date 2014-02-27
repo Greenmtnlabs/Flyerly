@@ -219,6 +219,7 @@ BOOL selectAll;
     
     for (int i=0;i < nPeople;i++) {
         NSMutableDictionary *dOfPerson=[NSMutableDictionary dictionary];
+        ContactsModel *model = [[ContactsModel alloc] init];
         
         ABRecordRef ref = CFArrayGetValueAtIndex(allPeople,i);
         
@@ -233,13 +234,7 @@ BOOL selectAll;
         if(!lastName)
             lastName = (CFStringRef) @"";
         
-        dOfPerson[@"name"] = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
-        
-        //For Email ids
-        ABMutableMultiValueRef eMail  = ABRecordCopyValue(ref, kABPersonEmailProperty);
-        if(ABMultiValueGetCount(eMail) > 0) {
-            dOfPerson[@"email"] = (NSString *)CFBridgingRelease(ABMultiValueCopyValueAtIndex(eMail, 0));
-        }
+        model.name = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
         
         // For contact picture
         UIImage *contactPicture;
@@ -248,11 +243,11 @@ BOOL selectAll;
             if ( &ABPersonCopyImageDataWithFormat != nil ) {
                 // iOS >= 4.1
                 contactPicture = [UIImage imageWithData:(NSData *)CFBridgingRelease(ABPersonCopyImageDataWithFormat(ref, kABPersonImageFormatThumbnail))];
-                dOfPerson[@"image"] = contactPicture;
+               model.img = contactPicture;
             } else {
                 // iOS < 4.1
                 contactPicture = [UIImage imageWithData:(NSData *)CFBridgingRelease(ABPersonCopyImageData(ref))];
-                dOfPerson[@"image"] = contactPicture;
+                model.img = contactPicture;
             }
         }
         
@@ -264,14 +259,13 @@ BOOL selectAll;
             mobileLabel = (NSString*)CFBridgingRelease(ABMultiValueCopyLabelAtIndex(phones, i));
             if([mobileLabel isEqualToString:(NSString *)kABPersonPhoneMobileLabel])
             {
-                dOfPerson[@"Phone"] = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
-                dOfPerson[@"identifier"] = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
-                [contactsArray addObject:dOfPerson];
+                model.description = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
+                [contactsArray addObject:model];
             }
             else if ([mobileLabel isEqualToString:(NSString*)kABPersonPhoneIPhoneLabel])
             {
-                dOfPerson[@"Phone"] = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
-                [contactsArray addObject:dOfPerson];
+                model.description = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
+                [contactsArray addObject:model];
                 break ;
             }
         }
@@ -283,7 +277,7 @@ BOOL selectAll;
     contactBackupArray = contactsArray;
     [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
     [self hideLoadingIndicator];
-
+    
 }
 
 /**
@@ -430,18 +424,19 @@ int totalCount = 0;
         NSString *imageURL = friendData[@"picture"][@"data"][@"url"];
         
         // Here we will get the facebook contacts
-        NSMutableDictionary *dOfPerson=[NSMutableDictionary dictionary];
+        ContactsModel *model = [[ContactsModel   alloc]init];
         
-        dOfPerson[@"name"] = friendData[@"name"];
-        dOfPerson[@"identifier"] = friendData[@"id"];
+        model.name = friendData[@"name"];
+        model.description = friendData[@"id"];
         if (friendData[@"gender"]) {
-            dOfPerson[@"gender"] = friendData[@"gender"];
+            model.others = friendData[@"gender"];
         }
         if(imageURL){
-            dOfPerson[@"image"] = imageURL;
+            model.img = nil;
+            model.imageUrl = imageURL;
         }
 
-        [self.facebookArray addObject:dOfPerson];
+        [self.facebookArray addObject:model];
         
         count++;
         totalCount++;
@@ -601,20 +596,23 @@ int totalCount = 0;
                                                                        options:NSJSONReadingMutableLeaves
                                                                          error:&jsonError];
             NSDictionary *users = followers[@"users"];
+
             for (id user in users) {
-                NSMutableDictionary *dOfPerson=[NSMutableDictionary dictionary];
-                dOfPerson[@"name"] = user[@"name"];
-                dOfPerson[@"identifier"] = user[@"screen_name"];
-                dOfPerson[@"location"] = user[@"location"];
+
+                ContactsModel *model = [[ContactsModel   alloc]init];
+                model.name = user[@"name"];
+                model.description = user[@"screen_name"];
+                model.others = user[@"location"];
                 
                 NSString *imageURL = user[@"profile_image_url"];
                 NSString *new = [imageURL stringByReplacingOccurrencesOfString: @"normal" withString:@"bigger"];
                 
                 if(imageURL){
-                    dOfPerson[@"image"] = new;
+                    model.img = nil;
+                    model.imageUrl = new;
                 }
                 
-                [self.twitterArray addObject:dOfPerson];
+                [self.twitterArray addObject:model];
             }
             
             twitterBackupArray = nil;
@@ -1005,52 +1003,39 @@ NSMutableDictionary *selectedIdentifierDictionary;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-
     
     static NSString *cellId = @"InviteCell";
     InviteFriendsCell *cell = (InviteFriendsCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
     
-//   / [cell setAccessoryType:UITableViewCellAccessoryNone];
-    if (cell == nil) {
+    if ( cell == nil ) {
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"InviteFriendsCell" owner:self options:nil];
         cell = (InviteFriendsCell *)[nib objectAtIndex:0];
     }
         
     
-    [cell setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
-    
-   // cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
     if(!self.deviceContactItems){
         self.deviceContactItems = [[NSMutableArray alloc] init];
     }
     
-    NSMutableDictionary *dict2;
-    NSString *name2;
-    NSString *detailfield = nil;
-    UIImage *imgfile =nil;
-    NSString *imgfile2 =nil;
-    // Check index
-    if([[self getArrayOfSelectedTab] count] >= 1){
+    ContactsModel *receivedDic;
+    
+    if ( [[ self getArrayOfSelectedTab ] count ] >= 1 ){
         
-        dict2 = [self getArrayOfSelectedTab][(indexPath.row)];
-        name2 = dict2[@"name"];
-        if(selectedTab == FACEBOOK_TAB) detailfield = dict2[@"gender"];
-        if(selectedTab == TWITTER_TAB) detailfield = dict2[@"location"];
-        
-        if(selectedTab == FACEBOOK_TAB || selectedTab == TWITTER_TAB){
-            imgfile2 = dict2[@"image"];
-        } else {
-            
-            imgfile = dict2[@"image"];
-            detailfield = dict2[@"identifier"];
-        }
-        
+        // GETTING DATA FROM RECEIVED DICTIONARY
+        // SET OVER MODEL FROM DATA
+       
+        receivedDic = [ self getArrayOfSelectedTab ][(indexPath.row)];
     }
-    if (imgfile == nil) {
-        imgfile =[[UIImage alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"dfcontact" ofType:@"jpg"]];
+
+    if (receivedDic.img == nil) {
+        receivedDic.img =[[UIImage alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"dfcontact" ofType:@"jpg"]];
     }
-    if(selectedTab == FACEBOOK_TAB || selectedTab == TWITTER_TAB){
+    
+    
+    
+    //HERE WE LOAD IMAGE FROM URL FOR FACEBOOK AND TWITTER FRIENDS
+    if( selectedTab == FACEBOOK_TAB || selectedTab == TWITTER_TAB ){
+        
         dispatch_queue_t dispatchQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
         dispatch_async(dispatchQueue, ^(void)
                        {
@@ -1058,31 +1043,29 @@ NSMutableDictionary *selectedIdentifierDictionary;
                                aview = [[AsyncImageView alloc]initWithFrame:CGRectMake(6, 14,72, 72)];
                                [ aview setActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
 
-                               NSLog(@"%@",imgfile2);
-                               NSURL *imageurl = [NSURL URLWithString:imgfile2];
-                               NSLog(@"%@",imageurl);
+                               NSURL *imageurl = [NSURL URLWithString:receivedDic.imageUrl];
                                [aview setImageURL:imageurl];
                                [cell.contentView addSubview:aview];
                            });
                        });
     }
     
-    NSString *chkName = @"";
-    if ([self ckeckExistContact:dict2[@"identifier"]]) {
-        if ([self ckeckExistdb:dict2[@"identifier"]]) {
-            chkName =@"checkwhite";
+    // HERE WE CHECK STATUS OF FRIEND INVITE
+    int status = 0;
+    if ([self ckeckExistContact:receivedDic.description]) {
+        if ([self ckeckExistdb:receivedDic.description]) {
+            status = 0;
         }else{
-             chkName =@"checkgray";
+            status = 1;
         }
     }else{
-        chkName =@"checkgreen";
+        status = 2;
         
     }
-    // Set cell Values
-    [cell setCellObjects:name2 Description:detailfield :imgfile CheckImage:chkName];
-    [cell.checkBtn addTarget:self action:@selector(inviteFreind:) forControlEvents:UIControlEventTouchUpInside];
-    cell.checkBtn.tag = indexPath.row;
-    
+
+    // HERE WE PASS DATA TO CELL CLASS
+    [cell setCellObjects:receivedDic :status];
+        
     return cell;
 }
 
@@ -1093,24 +1076,62 @@ NSMutableDictionary *selectedIdentifierDictionary;
     // HERE WE WORK FOR CONTACTS
     if (selectedTab == 0) {
         
-        NSMutableDictionary *dict = [self getArrayOfSelectedTab][(indexPath.row)];
-        if ([self ckeckExistContact:dict[@"identifier"]]) {
-            [deviceContactItems addObject:[dict objectForKey:@"identifier"]];
+        ContactsModel *model = [self getArrayOfSelectedTab][(indexPath.row)];
+        
+        //CHECK FOR ALREADY SELECTED
+        if (model.status == 2) {
+            
+            //REMOVE FROM SENDING LIST
+            [deviceContactItems removeObject:model.description];
+
+            if ([self ckeckExistdb:model.description]) {
+                [model setInvitedStatus:1];
+            }else {
+                [model setInvitedStatus:0];
+            }
+        }else {
+            [model setInvitedStatus:2];
+            if ([self ckeckExistContact:model.description]) {
+                [deviceContactItems addObject:model.description];
+            }
         }
+        
     }
 
     // HERE WE WORK FOR FACEBOOK
     if (selectedTab == 1) {
         
-        NSMutableDictionary *dict = [self getArrayOfSelectedTab][(indexPath.row)];
+        ContactsModel *model = [self getArrayOfSelectedTab][(indexPath.row)];
         
-        //Calling ShareKit for Sharing
-        iosSharer = [[ SHKSharer alloc] init];
-        NSString *tweet = [NSString stringWithFormat:@"I'm using the @flyerlyapp to create and share flyers on the go! Flyer.ly/Twitter @%@ #flyerly",[dict objectForKey:@"identifier"]];
-        
-        [deviceContactItems addObject:[dict objectForKey:@"identifier"]];
-        iosSharer = [SHKFacebook shareText:tweet];
-        iosSharer.shareDelegate = self;
+
+        //CHECK FOR ALREADY SELECTED
+        if (model.status == 2) {
+            
+            //REMOVE FROM SENDING LIST
+            [deviceContactItems removeObject:model.description];
+            
+            if ([self ckeckExistdb:model.description]) {
+                [model setInvitedStatus:1];
+            }else {
+                [model setInvitedStatus:0];
+            }
+            
+        }else {
+            [model setInvitedStatus:2];
+            if ([self ckeckExistContact:model.description]) {
+                [deviceContactItems addObject:model.description];
+            }
+            
+            //Calling ShareKit for Sharing
+            iosSharer = [[ SHKSharer alloc] init];
+            NSString *tweet = [NSString stringWithFormat:@"I'm using the flyerly app to create and share flyers on the go! Flyer.ly/Facebook @%@ #flyerly",model.description];
+            
+            [deviceContactItems addObject:model.description];
+            iosSharer = [SHKFacebook shareText:tweet];
+            iosSharer.shareDelegate = self;
+
+        }
+
         
         
     }
@@ -1119,17 +1140,36 @@ NSMutableDictionary *selectedIdentifierDictionary;
     // HERE WE WORK FOR TWITTER
     if (selectedTab == 2) {
         
-        NSMutableDictionary *dict = [self getArrayOfSelectedTab][(indexPath.row)];
+        ContactsModel *model = [self getArrayOfSelectedTab][(indexPath.row)];
         
-        //Calling ShareKit for Sharing
-        iosSharer = [[ SHKSharer alloc] init];
-        NSString *tweet = [NSString stringWithFormat:@"I'm using the @flyerlyapp to create and share flyers on the go! Flyer.ly/Twitter @%@ #flyerly",[dict objectForKey:@"identifier"]];
-        
-        [deviceContactItems addObject:[dict objectForKey:@"identifier"]];
-        iosSharer = [SHKTwitter shareText:tweet];
-        iosSharer.shareDelegate = self;
-        
+        //CHECK FOR ALREADY SELECTED
+        if (model.status == 2) {
 
+            //REMOVE FROM SENDING LIST
+            [deviceContactItems removeObject:model.description];
+            
+            if ([self ckeckExistdb:model.description]) {
+                [model setInvitedStatus:1];
+            }else {
+                [model setInvitedStatus:0];
+            }
+            
+        }else {
+            [model setInvitedStatus:2];
+            if ([self ckeckExistContact:model.description]) {
+                [deviceContactItems addObject:model.description];
+            }
+            
+            //Calling ShareKit for Sharing
+            iosSharer = [[ SHKSharer alloc] init];
+            NSString *tweet = [NSString stringWithFormat:@"I'm using the @flyerlyapp to create and share flyers on the go! Flyer.ly/Twitter @%@ #flyerly",model.description];
+            
+            [deviceContactItems addObject:model.description];
+            iosSharer = [SHKTwitter shareText:tweet];
+            iosSharer.shareDelegate = self;
+            
+        }
+        
     }
 }
 
@@ -1239,7 +1279,7 @@ NSMutableDictionary *selectedIdentifierDictionary;
         user[@"iphoneinvited"] = iPhoneinvited;
     }
     
-    // HERE WE UPDATE PARSE ACCOUNT FOR SHOW INVITED LIST
+    // HERE WE UPDATE PARSE ACCOUNT FOR REMEMBER INVITED FRIENDS LIST
     [user saveInBackground];
     
     [self showAlert:@"Invitation Sent!" message:@"You have successfully invited your friends to join flyerly."];
@@ -1260,7 +1300,7 @@ NSMutableDictionary *selectedIdentifierDictionary;
 
 - (void)sharerCancelledSending:(SHKSharer *)sharer
 {
-    NSLog(@"");
+    [self.uiTableView reloadData ];
 }
 
 - (void)sharerShowBadCredentialsAlert:(SHKSharer *)sharer

@@ -777,6 +777,7 @@
 		20920016184F40330034C4F6 /* InviteFriendsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20920014184F40330034C4F6 /* InviteFriendsCell.xib */; };
 		2092FFCB184E00BF0034C4F6 /* flyerlylogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 2092FFC9184E00BF0034C4F6 /* flyerlylogo.png */; };
 		2092FFCC184E00BF0034C4F6 /* flyerlylogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2092FFCA184E00BF0034C4F6 /* flyerlylogo@2x.png */; };
+		2099301118BF0C5000A177A4 /* ContactsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2099301018BF0C5000A177A4 /* ContactsModel.m */; };
 		20B865F91851EF0400484D7D /* checkgreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 20B865F71851EF0400484D7D /* checkgreen.png */; };
 		20B865FA1851EF0400484D7D /* checkgreen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20B865F81851EF0400484D7D /* checkgreen@2x.png */; };
 		20B865FD1851EF6C00484D7D /* checkgray.png in Resources */ = {isa = PBXBuildFile; fileRef = 20B865FB1851EF6C00484D7D /* checkgray.png */; };
@@ -2149,6 +2150,8 @@
 		20920014184F40330034C4F6 /* InviteFriendsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteFriendsCell.xib; sourceTree = "<group>"; };
 		2092FFC9184E00BF0034C4F6 /* flyerlylogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flyerlylogo.png; sourceTree = "<group>"; };
 		2092FFCA184E00BF0034C4F6 /* flyerlylogo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flyerlylogo@2x.png"; sourceTree = "<group>"; };
+		2099300F18BF0C5000A177A4 /* ContactsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsModel.h; sourceTree = "<group>"; };
+		2099301018BF0C5000A177A4 /* ContactsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsModel.m; sourceTree = "<group>"; };
 		20B865F71851EF0400484D7D /* checkgreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkgreen.png; sourceTree = "<group>"; };
 		20B865F81851EF0400484D7D /* checkgreen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkgreen@2x.png"; sourceTree = "<group>"; };
 		20B865FB1851EF6C00484D7D /* checkgray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkgray.png; sourceTree = "<group>"; };
@@ -3973,6 +3976,15 @@
 			name = Config;
 			sourceTree = "<group>";
 		};
+		2099300E18BF0C1500A177A4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2099300F18BF0C5000A177A4 /* ContactsModel.h */,
+				2099301018BF0C5000A177A4 /* ContactsModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		20D7473D17BE77C800966BA6 /* NewLayOuts */ = {
 			isa = PBXGroup;
 			children = (
@@ -4079,6 +4091,7 @@
 			isa = PBXGroup;
 			children = (
 				202F992818BCAD20002A25D9 /* CustomClasses */,
+				2099300E18BF0C1500A177A4 /* Model */,
 				65E2615B171C2FA800C485B5 /* InviteFriendsController.h */,
 				65E2615C171C2FA800C485B5 /* InviteFriendsController.m */,
 				65E26156171C2EC400C485B5 /* InviteFriendsController.xib */,
@@ -5887,6 +5900,7 @@
 				0F80C386178561C200D36795 /* LaunchController.m in Sources */,
 				0F80C38B178578CB00D36795 /* RegisterController.m in Sources */,
 				0F80C3901785813E00D36795 /* SigninController.m in Sources */,
+				2099301118BF0C5000A177A4 /* ContactsModel.m in Sources */,
 				20F93DD317B2262200F6F88C /* MainSettingViewController.m in Sources */,
 				20F4D8E017BA3D0A007B2DF5 /* ProfileViewController.m in Sources */,
 				20F4D8E517BA40EA007B2DF5 /* FlyerlySingleton.m in Sources */,
