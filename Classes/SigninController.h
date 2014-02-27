@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "LauchViewController.h"
+#import "FlyerlyMainScreen.h"
 #import "RegisterController.h"
 #import <Parse/Parse.h>
 #import "FlyerlySingleton.h"
@@ -16,12 +16,12 @@
 
 
 
-@class FlyerlySingleton,RegisterController,ResetPWViewController,LauchViewController;
+@class FlyerlySingleton,RegisterController,ResetPWViewController,FlyerlyMainScreen;
 
 @interface SigninController : ParentViewController <PFLogInViewControllerDelegate,FBLoginViewDelegate >{
     
     NSString *usr;
-    LauchViewController *launchController;
+    FlyerlyMainScreen *launchController;
     RegisterController *registerController;
     FlyerlySingleton *globle;
 

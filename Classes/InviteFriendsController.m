@@ -75,7 +75,7 @@ BOOL selectAll;
     
     // NEXT BAR BOTTON
     UIButton *nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-//	[nextButton addTarget:self action:@selector(callStyle) forControlEvents:UIControlEventTouchUpInside];
+	[nextButton addTarget:self action:@selector(invite) forControlEvents:UIControlEventTouchUpInside];
     [nextButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
     nextButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
@@ -84,8 +84,31 @@ BOOL selectAll;
     [self.uiTableView  setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
     [searchTextField setReturnKeyType:UIReturnKeyDone];
     
+    // Load device contacts
+    [self loadLocalContacts:self.contactsButton];
+    
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    
+    self.navigationItem.leftItemsSupplementBackButton = YES;
+    
+    loadingViewFlag = YES;
+}
+
+
+- (void)viewWillDisappear:(BOOL)animated {
+	[super viewWillDisappear:animated];
+    
+    if(loadingViewFlag){
+        for (UIView *subview in self.view.subviews) {
+            if([subview isKindOfClass:[LoadingView class]]){
+                [subview removeFromSuperview];
+                loadingViewFlag = NO;
+            }
+        }
+    }
+}
 
 
 -(void)loadHelpController{
@@ -102,12 +125,22 @@ BOOL selectAll;
  * This method is used to load device contact details
  */
 - (IBAction)loadLocalContacts:(UIButton *)sender{
+    
+    
+    // HERE WE HIGHLIGHT BUTTON SELECT AND
+    // UNSELECTED BUTTON
+    [contactsButton setSelected:YES];
+    [twitterButton setSelected:NO];
+    [facebookButton setSelected:NO];
+
+    
     invited = NO;
     [deviceContactItems removeAllObjects];
     contactsCount = 0;
     if(selectedTab == CONTACTS_TAB){
         return;
     }
+    [self showLoadingIndicator];
     
     selectAll = YES;
     self.deviceContactItems = nil;
@@ -133,7 +166,7 @@ BOOL selectAll;
         [self onSearchClick:nil];
         
         [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
-        //[self.uiTableView reloadData];
+        [self hideLoadingIndicator];
         
     } else {
         
@@ -249,6 +282,8 @@ BOOL selectAll;
     contactBackupArray = nil;
     contactBackupArray = contactsArray;
     [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+    [self hideLoadingIndicator];
+
 }
 
 /**
@@ -256,11 +291,22 @@ BOOL selectAll;
  */
 - (IBAction)loadFacebookContacts:(UIButton *)sender{
     
+    
+    // HERE WE HIGHLIGHT BUTTON SELECT AND
+    // UNSELECTED BUTTON
+    [contactsButton setSelected:NO];
+    [twitterButton setSelected:NO];
+    [facebookButton setSelected:YES];
 
+    /*
     fbSubClass *fb = [[fbSubClass alloc] init];
     [fb freindList];
-    return;
+    return;*/
+    
     if([InviteFriendsController connected]){
+        
+        [self showLoadingIndicator];
+        
         contactsCount = 0;
         invited = NO;
 
@@ -268,11 +314,11 @@ BOOL selectAll;
         self.deviceContactItems = nil;
         self.deviceContactItems = [[NSMutableArray alloc] init];
         selectedIdentifierDictionary = nil;
-        
         selectedTab = FACEBOOK_TAB;
   
        // init facebook array
         NSLog(@"%@",facebookBackupArray);
+
         if(facebookBackupArray){
             
             // Reload table data after all the contacts get loaded
@@ -282,6 +328,8 @@ BOOL selectAll;
             // Filter contacts on new tab selection
             [self onSearchClick:nil];
             [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+            [self hideLoadingIndicator];
+
            
             
         } else{
@@ -289,10 +337,15 @@ BOOL selectAll;
           
              ACAccountStore *accountStore = [[ACAccountStore alloc]init];
              ACAccountType *FBaccountType= [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
-             NSDictionary *options = @{ACFacebookAppIdKey : @"136691489852349",
-             ACFacebookPermissionsKey : @[@"email", @"publish_stream"],
-             ACFacebookAudienceKey:ACFacebookAudienceFriends};
             
+            //get facebook app id
+            NSString *path = [[NSBundle mainBundle] pathForResource: @"Flyr-Info" ofType: @"plist"];
+            NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile: path];
+            
+            NSDictionary *options = @{ACFacebookAppIdKey : dict[@"FacebookAppID"],
+                                      ACFacebookPermissionsKey : @[@"email", @"publish_stream"],
+                                      ACFacebookAudienceKey:ACFacebookAudienceFriends};
+
             
             [accountStore requestAccessToAccountsWithType:FBaccountType options:options completion:^(BOOL granted, NSError *error) {
                 
@@ -404,11 +457,8 @@ int totalCount = 0;
             {
          totalCount = 0;
          
-         for (UIView *subview in self.view.subviews) {
-             if([subview isKindOfClass:[LoadingView class]]){
-                 [subview removeFromSuperview];
-             }
-         }
+        [self hideLoadingIndicator];
+
      }
 }
 
@@ -417,12 +467,22 @@ int totalCount = 0;
  */
 - (IBAction)loadTwitterContacts:(UIButton *)sender{
     
+    // HERE WE HIGHLIGHT BUTTON SELECT AND
+    // UNSELECTED BUTTON
+    [contactsButton setSelected:NO];
+    [twitterButton setSelected:YES];
+    [facebookButton setSelected:NO];
+
+    
     if([InviteFriendsController connected]){
+
         contactsCount = 0;
         invited = NO;
         if(selectedTab == TWITTER_TAB){
             return;
         }
+
+        [self showLoadingIndicator];
         
         selectAll = YES;
         self.deviceContactItems = nil;
@@ -440,6 +500,8 @@ int totalCount = 0;
             
             // Filter contacts on new tab selection
             [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+            [self hideLoadingIndicator];
+
             
         } else{
             PFUser *user = [PFUser currentUser];
@@ -560,6 +622,8 @@ int totalCount = 0;
             
             [uiTableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
             nextCursor = followers[@"next_cursor"];
+            [self hideLoadingIndicator];
+
         }
         
         if([nextCursor compare:[NSDecimalNumber zero]] == NSOrderedSame){
@@ -654,8 +718,12 @@ int totalCount = 0;
 }
 
 -(IBAction)inviteFreind:(id)sender{
+    
+    return;
     UIButton *cellImageButton = (UIButton *) sender;
     NSMutableDictionary *dict2;
+    
+
         // Check index
         if([[self getArrayOfSelectedTab] count] >= 1){
             dict2 = [self getArrayOfSelectedTab][(cellImageButton.tag)];
@@ -721,11 +789,20 @@ int totalCount = 0;
         if(selectedTab == 0){
             globle.accounts = [[NSMutableArray alloc] initWithArray:deviceContactItems];
             
+            SHKItem *item = [SHKItem text:@"I'm using the flyerly app to create and share flyers on the go! Flyer.ly/Invite"];
+            item.textMessageToRecipients = deviceContactItems;
+
+            iosSharer = [[ SHKSharer alloc] init];
+            iosSharer = [SHKTextMessage shareItem:item];
+            iosSharer.shareDelegate = self;
+            
+            /*
             // send tweets to contacts
-            [self sendSMS:@"I'm using the flyerly app to create and share flyers on the go! Flyer.ly/Invite" recipients:identifiers];
+            [self sendSMS:@"I'm using the flyerly app to create and share flyers on the go! Flyer.ly/Invite" recipients:identifiers];*/
             
         }else if(selectedTab == 2){
             
+                        
             // Send tweets to twitter contacts
             for(NSString *follower in identifiers){
                 
@@ -928,28 +1005,22 @@ NSMutableDictionary *selectedIdentifierDictionary;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *CellIdentifier = @"InviteCell";
+
     
-    // Create My custom cell view
-    InviteFriendsCell *cell = (InviteFriendsCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    static NSString *cellId = @"InviteCell";
+    InviteFriendsCell *cell = (InviteFriendsCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
     
-    [cell setAccessoryType:UITableViewCellAccessoryNone];
-    
-    if ( cell == nil ) {
-        cell = [[InviteFriendsCell alloc] initWithFrame:CGRectZero] ;
-        
+//   / [cell setAccessoryType:UITableViewCellAccessoryNone];
+    if (cell == nil) {
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"InviteFriendsCell" owner:self options:nil];
+        cell = (InviteFriendsCell *)[nib objectAtIndex:0];
     }
+        
+    
     [cell setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
     
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    if(loadingViewFlag){
-        for (UIView *subview in self.view.subviews) {
-            if([subview isKindOfClass:[LoadingView class]]){
-                [subview removeFromSuperview];
-                loadingViewFlag = NO;
-            }
-        }
-    }
+   // cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
     if(!self.deviceContactItems){
         self.deviceContactItems = [[NSMutableArray alloc] init];
     }
@@ -970,6 +1041,7 @@ NSMutableDictionary *selectedIdentifierDictionary;
         if(selectedTab == FACEBOOK_TAB || selectedTab == TWITTER_TAB){
             imgfile2 = dict2[@"image"];
         } else {
+            
             imgfile = dict2[@"image"];
             detailfield = dict2[@"identifier"];
         }
@@ -983,7 +1055,9 @@ NSMutableDictionary *selectedIdentifierDictionary;
         dispatch_async(dispatchQueue, ^(void)
                        {
                            dispatch_sync(dispatch_get_main_queue(), ^{
-                               aview = [[AsyncImageView alloc]initWithFrame:CGRectMake(9, 7,72, 72)];
+                               aview = [[AsyncImageView alloc]initWithFrame:CGRectMake(6, 14,72, 72)];
+                               [ aview setActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+
                                NSLog(@"%@",imgfile2);
                                NSURL *imageurl = [NSURL URLWithString:imgfile2];
                                NSLog(@"%@",imageurl);
@@ -1012,6 +1086,52 @@ NSMutableDictionary *selectedIdentifierDictionary;
     return cell;
 }
 
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	
+
+    // HERE WE WORK FOR CONTACTS
+    if (selectedTab == 0) {
+        
+        NSMutableDictionary *dict = [self getArrayOfSelectedTab][(indexPath.row)];
+        if ([self ckeckExistContact:dict[@"identifier"]]) {
+            [deviceContactItems addObject:[dict objectForKey:@"identifier"]];
+        }
+    }
+
+    // HERE WE WORK FOR FACEBOOK
+    if (selectedTab == 1) {
+        
+        NSMutableDictionary *dict = [self getArrayOfSelectedTab][(indexPath.row)];
+        
+        //Calling ShareKit for Sharing
+        iosSharer = [[ SHKSharer alloc] init];
+        NSString *tweet = [NSString stringWithFormat:@"I'm using the @flyerlyapp to create and share flyers on the go! Flyer.ly/Twitter @%@ #flyerly",[dict objectForKey:@"identifier"]];
+        
+        [deviceContactItems addObject:[dict objectForKey:@"identifier"]];
+        iosSharer = [SHKFacebook shareText:tweet];
+        iosSharer.shareDelegate = self;
+        
+        
+    }
+
+    
+    // HERE WE WORK FOR TWITTER
+    if (selectedTab == 2) {
+        
+        NSMutableDictionary *dict = [self getArrayOfSelectedTab][(indexPath.row)];
+        
+        //Calling ShareKit for Sharing
+        iosSharer = [[ SHKSharer alloc] init];
+        NSString *tweet = [NSString stringWithFormat:@"I'm using the @flyerlyapp to create and share flyers on the go! Flyer.ly/Twitter @%@ #flyerly",[dict objectForKey:@"identifier"]];
+        
+        [deviceContactItems addObject:[dict objectForKey:@"identifier"]];
+        iosSharer = [SHKTwitter shareText:tweet];
+        iosSharer.shareDelegate = self;
+        
+
+    }
+}
 
 - (IBAction)onSearchClick:(UIButton *)sender{
     
@@ -1085,26 +1205,109 @@ NSMutableDictionary *selectedIdentifierDictionary;
     [super didReceiveMemoryWarning];
 }
 
--(void)viewWillAppear:(BOOL)animated{
+#pragma mark - All Shared Response
+
+// These are used if you do not provide your own custom UI and delegate
+- (void)sharerStartedSending:(SHKSharer *)sharer
+{
     
-    self.navigationItem.leftItemsSupplementBackButton = YES;
-    
-    // Load device contacts
-    [self loadLocalContacts:self.contactsButton];
-    loadingViewFlag = YES;
+	if (!sharer.quiet)
+		[[SHKActivityIndicator currentIndicator] displayActivity:SHKLocalizedString(@"Saving to %@", [[sharer class] sharerTitle]) forSharer:sharer];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-	[super viewWillDisappear:animated];
+- (void)sharerFinishedSending:(SHKSharer *)sharer
+{
     
-    if(loadingViewFlag){
-        for (UIView *subview in self.view.subviews) {
-            if([subview isKindOfClass:[LoadingView class]]){
-                [subview removeFromSuperview];
-                loadingViewFlag = NO;
-            }
-        }
+    PFUser *user = [PFUser currentUser];
+    
+    // Here we Check Sharer for
+    // Update PARSE
+    if ( [sharer isKindOfClass:[SHKFacebook class]] == YES ) {
+        
+        //[self.flyer setFacebookStatus:1];
+        
+    } else if ( [sharer isKindOfClass:[SHKTwitter class]] == YES ) {
+        
+        // HERE WE GET AND SET SELECTED FOLLOWER
+        [Twitterinvited  addObjectsFromArray:deviceContactItems];
+        user[@"tweetinvited"] = Twitterinvited;
+ 
+    } else if ( [sharer isKindOfClass:[SHKTextMessage class]] == YES ) {
+        
+        // HERE WE GET AND SET SELECTED CONTACT LIST
+        [iPhoneinvited  addObjectsFromArray:deviceContactItems];
+        user[@"iphoneinvited"] = iPhoneinvited;
     }
+    
+    // HERE WE UPDATE PARSE ACCOUNT FOR SHOW INVITED LIST
+    [user saveInBackground];
+    
+    [self showAlert:@"Invitation Sent!" message:@"You have successfully invited your friends to join flyerly."];
+    [deviceContactItems   removeAllObjects];
+    [self.uiTableView reloadData ];
+    
+    
+    if (!sharer.quiet)
+		[[SHKActivityIndicator currentIndicator] displayCompleted:SHKLocalizedString(@"Saved!")];
 }
+
+- (void)sharer:(SHKSharer *)sharer failedWithError:(NSError *)error shouldRelogin:(BOOL)shouldRelogin
+{
+    
+    [[SHKActivityIndicator currentIndicator] hide];
+	NSLog(@"Sharing Error");
+}
+
+- (void)sharerCancelledSending:(SHKSharer *)sharer
+{
+    NSLog(@"");
+}
+
+- (void)sharerShowBadCredentialsAlert:(SHKSharer *)sharer
+{
+    NSString *errorMessage = SHKLocalizedString(@"Sorry, %@ did not accept your credentials. Please try again.", [[sharer class] sharerTitle]);
+    
+    [[[UIAlertView alloc] initWithTitle:SHKLocalizedString(@"Login Error")
+                                message:errorMessage
+                               delegate:nil
+                      cancelButtonTitle:SHKLocalizedString(@"Close")
+                      otherButtonTitles:nil] show];
+}
+
+- (void)sharerShowOtherAuthorizationErrorAlert:(SHKSharer *)sharer
+{
+    NSString *errorMessage = SHKLocalizedString(@"Sorry, %@ encountered an error. Please try again.", [[sharer class] sharerTitle]);
+    
+    [[[UIAlertView alloc] initWithTitle:SHKLocalizedString(@"Login Error")
+                                message:errorMessage
+                               delegate:nil
+                      cancelButtonTitle:SHKLocalizedString(@"Close")
+                      otherButtonTitles:nil] show];
+}
+
+- (void)hideActivityIndicatorForSharer:(SHKSharer *)sharer {
+    
+    [[SHKActivityIndicator currentIndicator]  hideForSharer:sharer];
+}
+
+- (void)displayActivity:(NSString *)activityDescription forSharer:(SHKSharer *)sharer {
+    
+    if (sharer.quiet) return;
+    
+    [[SHKActivityIndicator currentIndicator]  displayActivity:activityDescription forSharer:sharer];
+}
+
+- (void)displayCompleted:(NSString *)completionText forSharer:(SHKSharer *)sharer {
+    
+    if (sharer.quiet) return;
+    [[SHKActivityIndicator currentIndicator]  displayCompleted:completionText forSharer:sharer];
+}
+
+- (void)showProgress:(CGFloat)progress forSharer:(SHKSharer *)sharer {
+    
+    if (sharer.quiet) return;
+    [[SHKActivityIndicator currentIndicator]  showProgress:progress forSharer:sharer];
+}
+
 
 @end

@@ -319,15 +319,12 @@
         // Check internet connectivity
         if( [InviteFriendsController connected] ){
             
-            
             // Current Item For Sharing
             SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ %@ #flyerly",titleView.text, selectedFlyerDescription ]];
             
-            [SHKFacebook shareItem:item];
             iosSharer = [[ SHKSharer alloc] init];
             iosSharer = [SHKFacebook shareItem:item];
             iosSharer.shareDelegate = self;
-            
             
         } else {
             
@@ -354,8 +351,6 @@
             iosSharer = [[ SHKSharer alloc] init];
             iosSharer = [SHKTwitter shareItem:item];
             iosSharer.shareDelegate = self;
-            
-
             
         } else {
             

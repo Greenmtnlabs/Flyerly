@@ -10,97 +10,83 @@
 
 
 @implementation FlyrViewController
-@synthesize photoArray,tView,iconArray,photoDetailArray,ptController,searchTextField;
+@synthesize tView,searchTextField;
 
 
-- (UIImage *)scale:(NSString *)imageName toSize:(CGSize)size
-{
-	UIImage *image = [UIImage imageWithContentsOfFile:imageName ];
-	
-	UIGraphicsBeginImageContext(size);
-	[image drawInRect:CGRectMake(0, 0, size.width, size.height)];
-	UIImage *scaledImage = UIGraphicsGetImageFromCurrentImageContext();
-	NSData *jpegData = UIImageJPEGRepresentation(scaledImage, 0.2);
-	scaledImage = [UIImage imageWithData:jpegData];
-	UIGraphicsEndImageContext();
-	return scaledImage;
-}
+#pragma mark  View Methods
 
-// Modified Date sort function
-NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
-    NSDictionary *attrs1 = [[NSFileManager defaultManager]
-                            attributesOfItemAtPath:file1
-                            error:nil];
-    NSDictionary *attrs2 = [[NSFileManager defaultManager]
-                            attributesOfItemAtPath:file2
-                            error:nil];
-	
-    if ((NSInteger *)reverse == 0) {
-        return [attrs2[NSFileModificationDate]
-                compare:attrs1[NSFileModificationDate]];
+- (void)viewDidLoad {
+    
+    [super viewDidLoad];
+    searching = NO;
+    
+    FlyerlySingleton *globle = [FlyerlySingleton RetrieveSingleton];
+    [self.view setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
+    
+    self.navigationItem.hidesBackButton = YES;
+    searchTextField.placeholder = @"Flyerly search";
+    searchTextField.font = [UIFont systemFontOfSize:12.0];
+    searchTextField.textAlignment = UITextAlignmentLeft;
+    searchTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    [searchTextField setBorderStyle:UITextBorderStyleRoundedRect];
+    
+    
+	[self.tView setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
+	tView.dataSource = self;
+	tView.delegate = self;
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
+        self.tView.contentInset = UIEdgeInsetsMake(-30, 0, 0, 0);
     }
 	
-    return [attrs1[NSFileModificationDate]
-            compare:attrs2[NSFileModificationDate]];
+    [self.view addSubview:tView];
+    [self.tView setBackgroundView:nil];
+    [self.tView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    [searchTextField addTarget:self action:@selector(textFieldTapped:) forControlEvents:UIControlEventEditingChanged];
+    searchTextField.borderStyle = nil;
+    
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    searching = NO;
+    searchTextField.text = @"";
+    
+    self.navigationController.navigationBarHidden=NO;
+    self.navigationItem.leftItemsSupplementBackButton = YES;
+    
+    // Set left bar items
+    [self.navigationItem setLeftBarButtonItems: [self leftBarItems]];
+    
+    // Set right bar items
+    [self.navigationItem setRightBarButtonItems: [self rightBarItems]];
+    
+    //HERE WE GET FLYERS
+    flyerPaths = [self getFlyersPaths];
+    
+    //HERE WE SET SCROLL VIEW POSITION
+    if (flyerPaths.count != 0) {
+        
+        NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:0];
+        [tView selectRowAtIndexPath:indexPath animated:YES  scrollPosition:UITableViewScrollPositionBottom];
+        
+        [tView reloadData];
+    }
+    
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    self.navigationController.navigationBar.alpha = 1.0;
 }
 
 
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
 
--(void)filesByModDate
-{
-    
-    PFUser *user = [PFUser currentUser];
 
-	photoArray =[[NSMutableArray alloc]init];
-	photoDetailArray =[[NSMutableArray alloc]init];
-	iconArray = [[NSMutableArray alloc]init];
-	NSString *homeDirectoryPath = NSHomeDirectory();
-	NSString *unexpandedPath = [homeDirectoryPath stringByAppendingString: [NSString stringWithFormat:@"/Documents/%@/Flyr/",user.username]];
-	NSString *folderPath = [NSString pathWithComponents:@[[NSString stringWithString:[unexpandedPath stringByExpandingTildeInPath]]]];
-	
-	NSArray *files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:folderPath error:nil];
-	NSString *finalImagePath;
-	NSArray* sortedFiles;
-	NSArray* detailSortedFiles;
-	NSString *detailFinalImagePath;
-
-	for(int i =0;i< [files count];i++)
-	{
-        
-        NSString *img = files[i];
-		img = [@"/" stringByAppendingString:img];
-		finalImagePath= [folderPath stringByAppendingString:img];
-        
-        if([finalImagePath hasSuffix:@".jpg"]){
-            [photoArray addObject:finalImagePath];
-        } else if([finalImagePath hasSuffix:@".txt"]){
-            [photoDetailArray addObject:finalImagePath];
-        }
-	}
-    sortedFiles = [photoArray sortedArrayUsingFunction:dateModifiedSort context:nil];
-    detailSortedFiles = [photoDetailArray sortedArrayUsingFunction:dateModifiedSort context:nil];
-
-	[photoArray removeAllObjects];
-	[photoDetailArray removeAllObjects];
-    
-	for(int i =0;i< [sortedFiles count];i++)
-	{
-			finalImagePath = sortedFiles[i];
-			UIImage *temp = [self scale:finalImagePath toSize:CGSizeMake(640,640)];
-			[photoArray addObject:finalImagePath];
-			[iconArray addObject:temp];
-	}
-    
-    
-    
-	for(int j =0;j< [detailSortedFiles count];j++)
-	{
-        detailFinalImagePath = detailSortedFiles[j];
-        //NSLog(@"detailFinalImagePath: %@", detailFinalImagePath);
-        NSArray *myArray = [NSArray arrayWithContentsOfFile:detailFinalImagePath];
-        [photoDetailArray addObject:myArray];
-	}}
-
+#pragma mark  Text Field Delegete
 
 - (void)textFieldTapped:(id)sender {
     NSLog(@"%@",searchTextField.text);
@@ -131,6 +117,9 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
     }
     return YES;
 }
+
+
+#pragma mark  custom Methods
 
 - (void) searchTableView:(NSString *)schTxt {
 	NSString *sTemp;
@@ -168,71 +157,26 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
 }
 
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    searching = NO;
-
-    FlyerlySingleton *globle = [FlyerlySingleton RetrieveSingleton];
-    [self.view setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
+-(IBAction)createFlyer:(id)sender {
     
-	letUserSelectRow = YES;
-    self.navigationItem.hidesBackButton = YES;
-    searchTextField.placeholder = @"Flyerly search";
-    searchTextField.font = [UIFont systemFontOfSize:12.0];
-    searchTextField.textAlignment = UITextAlignmentLeft;
-    searchTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-    [searchTextField setBorderStyle:UITextBorderStyleRoundedRect];
-
-
-	[self.tView setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
-	tView.dataSource = self;
-	tView.delegate = self;
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
-        self.tView.contentInset = UIEdgeInsetsMake(-30, 0, 0, 0);
-    }
-	
-    [self.view addSubview:tView];
-    [self.tView setBackgroundView:nil];
-    [self.tView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-    [searchTextField addTarget:self action:@selector(textFieldTapped:) forControlEvents:UIControlEventEditingChanged];
-    searchTextField.borderStyle = nil;
+    NSString *flyPath = [Flyer newFlyerPath];
     
-
+    //Here We set Source for Flyer screen
+    flyer = [[Flyer alloc]initWithPath:flyPath];
+    
+	createFlyer = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
+    createFlyer.flyerPath = flyPath;
+    createFlyer.flyer = flyer;
+	[self.navigationController pushViewController:createFlyer animated:YES];
+    
 }
 
--(void)callMenu
-{
-    //Here We Rename the flyer Name for Recent flyer
-    
-	[self.navigationController popToRootViewControllerAnimated:YES];
+
+
+-(void)goBack{
+  	[self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    searching = NO;
-    searchTextField.text = @"";
-
-    self.navigationController.navigationBarHidden=NO;
-    self.navigationItem.leftItemsSupplementBackButton = YES;
-    
-    // Set left bar items
-    [self.navigationItem setLeftBarButtonItems: [self leftBarItems]];
-    
-    // Set right bar items
-    [self.navigationItem setRightBarButtonItems: [self rightBarItems]];
-    
-
-    //HERE WE GET FLYERS
-    flyerPaths = [self getFlyersPaths];
-    
-    //HERE WE SET SCROLL VIEW POSITION
-    if (flyerPaths.count != 0) {
-       NSIndexPath *scrollIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-        [tView scrollToRowAtIndexPath:scrollIndexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
-        [tView reloadData];
-    }
-
-}
 
 -(NSArray *)leftBarItems{
     
@@ -258,6 +202,11 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
     [self.navigationController pushViewController:helpController animated:NO];
 }
 
+- (void) deselect
+{
+	[self.tView deselectRowAtIndexPath:[self.tView indexPathForSelectedRow] animated:YES];
+}
+
 -(NSArray *)rightBarItems{
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
@@ -278,8 +227,34 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
     return [NSMutableArray arrayWithObjects:createBarButton,nil];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
+/*
+ * Here we get All Flyers Directories
+ * return
+ *      Nsarray of Flyers Path
+ */
+-(NSMutableArray *)getFlyersPaths{
+    
+    PFUser *user = [PFUser currentUser];
+    
+    //Getting Home Directory
+	NSString *homeDirectoryPath = NSHomeDirectory();
+	NSString *usernamePath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/Flyr",[user objectForKey:@"username"]]];
+    
+    NSArray *files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:usernamePath error:nil];
+    
+    NSMutableArray *sortedList = [ Flyer recentFlyerPreview:files.count];
+    
+    for(int i = 0 ; i < [sortedList count];i++)
+    {
+        
+        //Here we remove File Name from Path
+        NSString *pathWithoutFileName = [[sortedList objectAtIndex:i]
+                                         stringByReplacingOccurrencesOfString:@"/flyer.jpg" withString:@""];
+        [sortedList replaceObjectAtIndex:i withObject:pathWithoutFileName];
+    }
+    
+    
+    return sortedList;
 }
 
 
@@ -299,31 +274,11 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
 }
 
 
-
-
-
-+(NSString *)getFlyerNumberFromPath:(NSString *)imagePath{
-    
-    PFUser *user = [PFUser currentUser];
-
-	NSString *homeDirectoryPath = NSHomeDirectory();
-	NSString *flyerPath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/Flyr/",user.username]];
-	NSString *folderPath = [NSString pathWithComponents:@[[NSString stringWithString:[flyerPath stringByStandardizingPath]]]];
-	
-    NSString *onlyImageName = [imagePath stringByReplacingOccurrencesOfString:folderPath withString:@""];
-    NSString *lastFileName = [onlyImageName stringByReplacingOccurrencesOfString:@".jpg" withString:@""];
-    NSString *index = [lastFileName stringByReplacingOccurrencesOfString:@"/IMG_" withString:@""];
-
-    return index;
-}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     static NSString *cellId = @"Cell";
     SaveFlyerCell *cell = (SaveFlyerCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
     
-    
-
-  
     [cell setAccessoryType:UITableViewCellAccessoryNone];
     if (cell == nil) {
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SaveFlyerCell" owner:self options:nil];
@@ -358,11 +313,6 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
         
     }
     
-}
-
-- (void) deselect
-{
-	[self.tView deselectRowAtIndexPath:[self.tView indexPathForSelectedRow] animated:YES];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -407,63 +357,6 @@ NSInteger dateModifiedSort(id file1, id file2, void *reverse) {
 	[tableView endUpdates];
 	[tableView reloadData];
 }
-
--(IBAction)createFlyer:(id)sender {
-
-    NSString *flyPath = [Flyer newFlyerPath];
-    
-    //Here We set Source for Flyer screen
-    flyer = [[Flyer alloc]initWithPath:flyPath];
-    
-	createFlyer = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
-    createFlyer.flyerPath = flyPath;
-    createFlyer.flyer = flyer;
-	[self.navigationController pushViewController:createFlyer animated:YES];
-
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    self.navigationController.navigationBar.alpha = 1.0;
-}
-
-
--(void)goBack{
-  	[self.navigationController popViewControllerAnimated:YES];
-}
-
-
-/*
- * Here we get All Flyers Directories
- * return
- *      Nsarray of Flyers Path
- */
--(NSMutableArray *)getFlyersPaths{
-    
-    PFUser *user = [PFUser currentUser];
-    
-    //Getting Home Directory
-	NSString *homeDirectoryPath = NSHomeDirectory();
-	NSString *usernamePath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/Flyr",[user objectForKey:@"username"]]];
-
-    NSArray *files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:usernamePath error:nil];
-    
-    NSMutableArray *sortedList = [ Flyer recentFlyerPreview:files.count];
-    
-    for(int i = 0 ; i < [sortedList count];i++)
-    {
-        
-        //Here we remove File Name from Path
-        NSString *pathWithoutFileName = [[sortedList objectAtIndex:i]
-                                     stringByReplacingOccurrencesOfString:@"/flyer.jpg" withString:@""];
-        [sortedList replaceObjectAtIndex:i withObject:pathWithoutFileName];
-    }
-
-    
-    return sortedList;
-}
-
-
 
 
 @end

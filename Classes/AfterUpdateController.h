@@ -7,13 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AccountController.h"
+#import "LaunchController.h"
 
-@class AccountController;
+@class LaunchController;
 
 @interface AfterUpdateController : UIViewController{
 
-    AccountController *accountController;
+    LaunchController *accountController;
 
 }
 

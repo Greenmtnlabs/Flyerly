@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ShareSettingViewController.h"
 #import "FlyrAppDelegate.h"
-#import "AccountController.h"
+#import "LaunchController.h"
 #import "Common.h"
 #import "HelpController.h"
 #import "ShareSettingViewController.h"
@@ -22,7 +22,7 @@
 
 
 @class CreateFlyerController,InputViewController,FlyerlySingleton ;
-@class AccountController,HelpController,ShareSettingViewController,ProfileViewController;
+@class LaunchController,HelpController,ShareSettingViewController,ProfileViewController;
 @interface MainSettingViewController : UIViewController <UITableViewDelegate, MFMailComposeViewControllerDelegate>{
 
     NSMutableArray *category;

@@ -188,7 +188,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
                 [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"User"];
                 
                 // Login success Move to Flyerly
-                launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil] ;
+                launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil] ;
                 
                 [self.navigationController pushViewController:launchController animated:nil];
                 
@@ -204,7 +204,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
                 // [appDelegate fbChangeforNewVersion];
                 
                 // Login success Move to Flyerly
-                launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil] ;
+                launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil] ;
                 
                 [self.navigationController pushViewController:launchController animated:YES];
                 
@@ -220,7 +220,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 
 	if( alertView == warningAlert && buttonIndex == 1 ) {
 
-        launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
+        launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil];
         
         [self.navigationController pushViewController:launchController animated:YES];
 
@@ -265,7 +265,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
                 [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"User"];
                 
                 // Login success Move to Flyerly
-                launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil] ;
+                launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil] ;
                 [self.navigationController pushViewController:launchController animated:YES];
                 
             } else {
@@ -283,7 +283,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
                 
                 
                 // Login success Move to Flyerly
-                launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil] ;
+                launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil] ;
                 [self.navigationController pushViewController:launchController animated:YES];
                 
                 
@@ -368,7 +368,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
         } else {
             
             [PFUser logInWithUsername:userName password:pwd];
-            launchController = [[LauchViewController alloc]initWithNibName:@"LauchViewController" bundle:nil];
+            launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil];
             [self.navigationController pushViewController:launchController animated:YES];
         }
     }];

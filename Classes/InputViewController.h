@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Common.h"
 #import "FlyerlySingleton.h"
-#import "AccountController.h"
+#import "LaunchController.h"
 @class FlyerlySingleton;
 @interface InputViewController : UIViewController <UIActionSheetDelegate>{
     FlyerlySingleton *globle ;
