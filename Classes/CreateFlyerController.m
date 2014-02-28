@@ -270,8 +270,12 @@ int selectedAddMoreLayerTab = -1;
     //Save OnBack
     [flyer saveFlyer:snapshotImage];
     
-    // Update Recent Flyer List
-    [flyer setRecentFlyer];
+    
+    if (![[flyer getFlyerURL] isEqualToString:@""]) {
+        
+        // Update Recent Flyer List
+        [flyer setRecentFlyer];
+    }
     
     [self.navigationController popViewControllerAnimated:YES];
 }

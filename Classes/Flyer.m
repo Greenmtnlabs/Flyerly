@@ -98,8 +98,14 @@ NSString * const TEXTHEIGHT = @"280.000000";
     NSData *snapShotData = UIImagePNGRepresentation(snapShot);
     [snapShotData writeToFile:flyerImageFile atomically:YES];
     
-    //HERE WE WRITE IMAGE IN GALLERY
-    [self saveInGallery:snapShotData];
+    
+    // HERE WE CHECK USER ALLOWED TO SAVE IN GALLERY FROM SETTING
+    if([[NSUserDefaults standardUserDefaults] stringForKey:@"saveToCameraRollSetting"]){
+        
+        //USER ALLOWED
+        //HERE WE WRITE IMAGE IN GALLERY
+        [self saveInGallery:snapShotData];
+    }
     
     //Here we write the dictionary of .peices files
     [masterLayers writeToFile:piecesFile atomically:YES];
