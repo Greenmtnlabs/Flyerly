@@ -98,6 +98,9 @@ NSString * const TEXTHEIGHT = @"280.000000";
     NSData *snapShotData = UIImagePNGRepresentation(snapShot);
     [snapShotData writeToFile:flyerImageFile atomically:YES];
     
+    //HERE WE WRITE IMAGE IN GALLERY
+    [self saveInGallery:snapShotData];
+    
     //Here we write the dictionary of .peices files
     [masterLayers writeToFile:piecesFile atomically:YES];
     
@@ -108,6 +111,69 @@ NSString * const TEXTHEIGHT = @"280.000000";
     NSString *dateString = [dateFormat stringFromDate:date];
     [self setFlyerDate:dateString];
     
+    
+}
+
+/*** HERE WE SAVE IMAGE INTO GALLERY 
+ * AND LINK WITH FLYERLY ALBUM
+ *
+ */
+-(void)saveInGallery :(NSData *)imgData {
+    
+    
+    // CREATE LIBRARY OBJECT FIRST
+    ALAssetsLibrary * library = [[ALAssetsLibrary alloc] init];
+    
+    //GETTING IMAGE URL IF EXIST IN FLYER INFO FILE .TXT
+    NSString *currentUrl = [self getFlyerURL];
+
+    NSURL *imageUrl;
+    
+    // HERE WE SET URL OF LIBRARY FOR GETTING GROUP MEMBER
+    if ( [currentUrl isEqualToString:@""]) {
+        
+        // NOT EXISTS IN .TXT FILE THEN WE USE OVER GROUP URL
+       imageUrl  = [[NSURL alloc] initWithString:[[NSUserDefaults standardUserDefaults] stringForKey:@"FlyerlyAlbum"]];
+    }else {
+        
+        //URL FOUND WE USE EXISTING URL FOR REPLACE IMAGE
+        imageUrl = [[NSURL alloc] initWithString:currentUrl];
+    }
+    
+    // HERE WE GET GROUP OF IMAGE IN GALLERY
+    [library groupForURL:imageUrl resultBlock:^(ALAssetsGroup *group) {
+        
+        //HERE WE SAVE IMAGE IN GALLERY
+        [library writeImageDataToSavedPhotosAlbum:imgData metadata:nil completionBlock:^(NSURL *assetURL, NSError *error) {
+            
+            // HERE WE SAVE GENERATED URL IN OVER FLYER INFO FILE .TXT
+            // FOR FUTURE WORK
+            [self setFlyerURL:assetURL.absoluteString];
+            
+                // GETTING GENERATED IMAGE WITH URL
+                [library assetForURL:assetURL resultBlock:^(ALAsset *asset) {
+                    
+                    //HERE WE LINK IMAGE WITH FLYERLY ALBUM
+                    [group addAsset:asset];
+                    
+                } failureBlock:^(NSError *error) {
+                    
+                    NSLog(@"Image Not Link with Album");
+                }];
+            
+        }];
+        
+    }
+    failureBlock:^(NSError *error) {
+        
+        NSLog(@"error adding Image");
+        
+    }];
+    
+    
+    
+
+
 }
 
 /*
@@ -1001,6 +1067,14 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     return [textFileArray objectAtIndex:2];
 }
 
+/*
+ * Here we Return Flyer URL OF LINK IMAGE OF GALLERY From .txt File
+ */
+
+-(NSString *)getFlyerURL {
+    return [textFileArray objectAtIndex:3];
+}
+
 
 /*
  * Here we Set Flyer Description
@@ -1028,6 +1102,19 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     [textFileArray writeToFile:textFile atomically:YES];
 }
 
+
+/*
+ * HERE WE SAVE FLYER PATH OF GALLERY LINK IMAGE
+ */
+-(void)setFlyerURL :(NSString *)URL {
+
+    [textFileArray replaceObjectAtIndex:3 withObject:URL];
+    
+    //Here we write the Array of Text files .txt
+    [textFileArray writeToFile:textFile atomically:YES];
+
+    
+}
 
 @end
 

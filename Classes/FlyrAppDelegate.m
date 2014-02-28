@@ -174,16 +174,16 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
         }
     }
     
+    // HERE WE COPY SOME DATA TO DEVICE FOR FUTURE TESTING
     if(![[NSUserDefaults standardUserDefaults] stringForKey:@"userDataExist"]){
         [self copyUsersDataForTesting];
     }
     
-    /*
+    // HERE WE CREATE FLYERLY ALBUM ON DEVICE
     if(![[NSUserDefaults standardUserDefaults] stringForKey:@"FlyerlyAlbum"]){
         [self createFlyerlyAlbum];
-    }*/
+    }
     
-
     
     [window  setRootViewController:navigationController];
     
@@ -357,16 +357,16 @@ if it exist then we call Merging Process
     
     NSString *albumName = @"Flyerly";
     
+    //HERE WE SEN REQUEST FOR CREATE ALBUM
     [library addAssetsGroupAlbumWithName:albumName
                                   resultBlock:^(ALAssetsGroup *group) {
                                       
- 
-                                    NSString *albumUrl = [group  valueForProperty:ALAssetsGroupPropertyURL];
-                                    
+                                      // GETTING CREATED URL OF ALBUM
+                                      NSURL *groupURL = [group valueForProperty:ALAssetsGroupPropertyURL];
                                       
-                                      [[NSUserDefaults standardUserDefaults]   setObject:albumUrl forKey:@"FlyerlyAlbum"];
+                                      //SAVING IN PREFERENCES .PLIST FOR FUTURE USE
+                                      [[NSUserDefaults standardUserDefaults]   setObject:groupURL.absoluteString forKey:@"FlyerlyAlbum"];
 
-                                      NSLog(@"added album:%@", albumName);
                                   }
                                  failureBlock:^(NSError *error) {
                                      NSLog(@"error adding album");

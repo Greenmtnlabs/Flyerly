@@ -8,6 +8,7 @@
 
 #import "FlyerlySingleton.h"
 #import <Parse/Parse.h>
+#import <AssetsLibrary/AssetsLibrary.h>
 #import "FlyerUser.h"
 #import "Crittercism.h"
 #import "Common.h"

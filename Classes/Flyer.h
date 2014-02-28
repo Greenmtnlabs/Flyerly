@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <Parse/Parse.h>
 #import "FlyerImageView.h"
+#import <AssetsLibrary/AssetsLibrary.h>
 
 #define IMAGETYPE @"flyer.jpg"
 
@@ -17,7 +18,6 @@
     NSString *piecesFile;
     NSString *textFile;
     NSString *socialFile;
-
     NSString *flyerImageFile;
 
 }
@@ -64,6 +64,9 @@
 
 -(void)setFlyerDescription :(NSString *)desp;
 
+-(void)setFlyerURL :(NSString *)URL;
+
+
 -(void)setRecentFlyer;
 
 -(void)setFacebookStatus :(int)status;
@@ -85,9 +88,10 @@
 -(NSString *)getEmailStatus;
 -(NSString *)getSmsStatus;
 -(NSString *)getClipboardStatus;
+-(NSString *)getFlyerTitle;
 -(NSString *)getFlyerDescription;
 -(NSString *)getFlyerDate;
--(NSString *)getFlyerTitle;
+-(NSString *)getFlyerURL;
 -(NSString *)getText :(NSString *)uid;
 -(NSString *)getImageName :(NSString *)uid;
 -(CGRect)getImageFrame :(NSString *)uid;
