@@ -8,7 +8,6 @@
 
 #import "FlyerlySingleton.h"
 #import <Parse/Parse.h>
-#import <AssetsLibrary/AssetsLibrary.h>
 #import "FlyerUser.h"
 #import "Crittercism.h"
 #import "Common.h"
@@ -47,8 +46,6 @@ extern NSString *FacebookDidLoginNotification;
 -(void)twitterChangeforNewVersion:(NSString *)olduser;
 
 -(void)copyUsersDataForTesting;
-
--(void)createFlyerlyAlbum;
 
 @end
 

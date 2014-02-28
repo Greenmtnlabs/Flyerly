@@ -120,36 +120,34 @@ NSString * const TEXTHEIGHT = @"280.000000";
  */
 -(void)saveInGallery :(NSData *)imgData {
     
+    // HERE WE CREATE FLYERLY ALBUM ON DEVICE
+    if(![[NSUserDefaults standardUserDefaults] stringForKey:@"FlyerlyAlbum"]){
+        [self createFlyerlyAlbum];
+    }
     
     // CREATE LIBRARY OBJECT FIRST
     ALAssetsLibrary * library = [[ALAssetsLibrary alloc] init];
     
-    //GETTING IMAGE URL IF EXIST IN FLYER INFO FILE .TXT
-    NSString *currentUrl = [self getFlyerURL];
+    // HERE WE GET FLYERLY ALBUM URL
+     NSURL *groupUrl  = [[NSURL alloc] initWithString:[[NSUserDefaults standardUserDefaults] stringForKey:@"FlyerlyAlbum"]];
 
-    NSURL *imageUrl;
-    
-    // HERE WE SET URL OF LIBRARY FOR GETTING GROUP MEMBER
-    if ( [currentUrl isEqualToString:@""]) {
-        
-        // NOT EXISTS IN .TXT FILE THEN WE USE OVER GROUP URL
-       imageUrl  = [[NSURL alloc] initWithString:[[NSUserDefaults standardUserDefaults] stringForKey:@"FlyerlyAlbum"]];
-    }else {
-        
-        //URL FOUND WE USE EXISTING URL FOR REPLACE IMAGE
-        imageUrl = [[NSURL alloc] initWithString:currentUrl];
-    }
     
     // HERE WE GET GROUP OF IMAGE IN GALLERY
-    [library groupForURL:imageUrl resultBlock:^(ALAssetsGroup *group) {
+    [library groupForURL:groupUrl resultBlock:^(ALAssetsGroup *group) {
         
-        //HERE WE SAVE IMAGE IN GALLERY
-        [library writeImageDataToSavedPhotosAlbum:imgData metadata:nil completionBlock:^(NSURL *assetURL, NSError *error) {
+        //GETTING IMAGE URL IF EXIST IN FLYER INFO FILE .TXT
+        NSString *currentUrl = [self getFlyerURL];
+        
+        // CHECKING CRITERIA IMAGE CREATE OR MODIFY
+        if ( [currentUrl isEqualToString:@""]) {
             
-            // HERE WE SAVE GENERATED URL IN OVER FLYER INFO FILE .TXT
-            // FOR FUTURE WORK
-            [self setFlyerURL:assetURL.absoluteString];
-            
+            //HERE WE CREATE IMAGE IN GALLERY
+            [library writeImageDataToSavedPhotosAlbum:imgData metadata:nil completionBlock:^(NSURL *assetURL, NSError *error) {
+                
+                // HERE WE SAVE GENERATED URL IN OVER FLYER INFO FILE .TXT
+                // FOR FUTURE WORK
+                [self setFlyerURL:assetURL.absoluteString];
+                
                 // GETTING GENERATED IMAGE WITH URL
                 [library assetForURL:assetURL resultBlock:^(ALAsset *asset) {
                     
@@ -158,10 +156,36 @@ NSString * const TEXTHEIGHT = @"280.000000";
                     
                 } failureBlock:^(NSError *error) {
                     
-                    NSLog(@"Image Not Link with Album");
+                    NSLog(@"Image NOT CREATED IN GALLERY");
                 }];
+                
+            }];
+
             
-        }];
+        } else { // URL FOUND WE USE EXISTING URL FOR REPLACE IMAGE
+
+            // CONVERT STRING TO URL
+            NSURL *imageUrl = [[NSURL alloc] initWithString:currentUrl];
+            
+            // GETTING GENERATED IMAGE WITH URL
+            [library assetForURL:imageUrl resultBlock:^(ALAsset *asset) {
+                
+                //HERE WE UPDATE IMAGE WITH LATEST UPDATE
+                [asset setImageData:imgData metadata:nil completionBlock:^(NSURL *assetURL, NSError *error) {
+
+                    // FOR FUTURE WORK
+                    [self setFlyerURL:assetURL.absoluteString];
+                }];
+                
+            } failureBlock:^(NSError *error) {
+                
+                NSLog(@"Image Not Link with Album");
+            }];
+
+            
+        }
+
+        
         
     }
     failureBlock:^(NSError *error) {
@@ -713,6 +737,32 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 }
 
 
+/*** HERE WE CREATE FLYERLY SEPERATE ALBUM
+ * FOR FLYER SAVING
+ *
+ */
+-(void)createFlyerlyAlbum {
+    
+    ALAssetsLibrary* library = [[ALAssetsLibrary alloc] init];
+    
+    NSString *albumName = @"Flyerly";
+    
+    //HERE WE SEN REQUEST FOR CREATE ALBUM
+    [library addAssetsGroupAlbumWithName:albumName
+                             resultBlock:^(ALAssetsGroup *group) {
+                                 
+                                 // GETTING CREATED URL OF ALBUM
+                                 NSURL *groupURL = [group valueForProperty:ALAssetsGroupPropertyURL];
+                                 
+                                 //SAVING IN PREFERENCES .PLIST FOR FUTURE USE
+                                 [[NSUserDefaults standardUserDefaults]   setObject:groupURL.absoluteString forKey:@"FlyerlyAlbum"];
+                                 
+                             }
+                            failureBlock:^(NSError *error) {
+                                NSLog(@"error adding album");
+                            }];
+    
+}
 
 #pragma TEXT METHODS
 
