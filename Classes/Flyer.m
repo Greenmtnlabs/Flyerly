@@ -801,7 +801,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 }
 
 
-/*
+/* APPLY OVER LOADING HERE
  * THIS METHOD CREATE ALBUM ON DEVICE AFTER IT SAVING IMAGE IN LIBRARY
  */
 -(void)createFlyerlyAlbum :(NSData *)imgdata {
