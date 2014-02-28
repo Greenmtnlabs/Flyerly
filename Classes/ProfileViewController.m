@@ -13,7 +13,7 @@
 @end
 
 @implementation ProfileViewController
-@synthesize username,password,confirmPassword,email,name,phno,usrExist;
+@synthesize username,backimgUsername,email,name,phno;
 static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
 static const CGFloat MINIMUM_SCROLL_FRACTION = 0.2;
 static const CGFloat MAXIMUM_SCROLL_FRACTION = 0.8;
@@ -40,7 +40,6 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     label.font = [UIFont fontWithName:TITLE_FONT size:18];
     label.textAlignment = UITextAlignmentCenter;
     label.textColor = [UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0];
-    //    label.backgroundColor = [UIColor blueColor ];
     label.text = @"PROFILE";
     self.navigationItem.titleView = label;
 
@@ -55,10 +54,20 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     
     globle = [FlyerlySingleton RetrieveSingleton];
     PFUser *user = [PFUser currentUser];
-    username.text = user.username;
     email.text = user.email;
     name.text = user[@"name"];
     phno.text = user[@"contact"];
+
+    // HERE WE HIDE USER FIELD IF USER LOGIN WITH FACBOOK OR TWITTER
+    if([[NSUserDefaults standardUserDefaults] stringForKey:@"User"]){
+
+        username.text = user.username;
+    } else {
+        username.hidden = YES;
+        backimgUsername.hidden = YES;
+    
+    }
+    
 }
 
 -(void)goBack{
@@ -70,37 +79,18 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     // Dispose of any resources that can be recreated.
 }
 -(IBAction)save{
+    
+    //CHECKING INTERNET
     if([InviteFriendsController connected]){
+        
         if([self Uservalidate]){
             PFUser *user = [PFUser currentUser];
-            NSString *usr = user.username;
-            if(![usr isEqualToString:[username.text lowercaseString]]){
-                PFQuery *query = [PFUser query];
-                [query whereKey:@"username" equalTo:[username.text lowercaseString]];
-                [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
-                    if (error) {
-                        PFUser *user = [PFUser currentUser];
-                        user[@"username"] = [username.text lowercaseString];
-                        user[@"contact"] = phno.text;
-                        user[@"name"] = name.text;
-                        user[@"email"] = email.text;
-                        [user saveInBackground];
-                        [self showAlert:@"Profile Updated Successfully" message:@""];
-                    }else{
-                        [self showAlert:@"Username already taken" message:@""];
-                    }
-                }];
-            }else{
-                PFUser *user = [PFUser currentUser];
-                user[@"username"] = [username.text lowercaseString];
-                user[@"contact"] = phno.text;
-                user[@"name"] = name.text;
-                user[@"email"] = email.text;
-                [user saveInBackground];
-                [self showAlert:@"Profile Updated Successfully" message:@""];
-            }
+            user[@"contact"] = phno.text;
+            user[@"name"] = name.text;
+            user[@"email"] = email.text;
+            [user saveInBackground];
+            [self showAlert:@"Profile Updated Successfully" message:@""];
         }
-        [password resignFirstResponder];
     }else{
         [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
     }
@@ -118,23 +108,11 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 
 -(BOOL)Uservalidate{
     
-    // Check empty fields
-    if(!username || [username.text isEqualToString:@""]){
-        [self showAlert:@"Please complete all required fields" message:@""];
-        return NO;
-    }
-    
-    
-
     if([email.text length] == 0 ){
         [self showAlert:@"Email Address Must Required" message:@""];
         return NO;
     }
     
-    if([usrExist.text isEqualToString:@"taken"] ){
-        [self showAlert:@"Username already taken" message:@""];
-        return NO;
-    }
     return YES;
 }
 
@@ -149,26 +127,6 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     [alert show];
 }
 
-
--(IBAction)userExist{
-    PFUser *user = [PFUser currentUser];
-    NSString *usr = user.username;
-    if(username.text != nil && ![usr isEqualToString:[username.text lowercaseString]]){
-        PFQuery *query = [PFUser query];
-        [query whereKey:@"username" equalTo:[username.text lowercaseString]];
-        [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
-            if (error) {
-                [usrExist setHidden:NO];
-                [usrExist setText:@"available"];
-                [usrExist setTextColor:[UIColor greenColor]];
-            }else{
-                [usrExist setHidden:NO];
-                [usrExist setText:@"taken"];
-                [usrExist setTextColor:[UIColor redColor]];
-            }
-        }];
-    }
-}
 
 
 

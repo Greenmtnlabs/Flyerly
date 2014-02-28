@@ -133,7 +133,6 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
             
             //Saving User Info for again Login
             [[NSUserDefaults standardUserDefaults]  setObject:userName forKey:@"User"];
-            [[NSUserDefaults standardUserDefaults]  setObject:pwd forKey:@"Password"];
             
             warningAlert = [[UIAlertView  alloc]initWithTitle:@"Account already exists using this account." message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Sign In",nil];
             
@@ -227,7 +226,6 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     } else {
         
         [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"User"];
-        [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"Password"];
         
     }
     
@@ -355,7 +353,6 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     
     //Saving User Info for again login
     [[NSUserDefaults standardUserDefaults]  setObject:userName forKey:@"User"];
-    [[NSUserDefaults standardUserDefaults]  setObject:pwd forKey:@"Password"];
 
     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         

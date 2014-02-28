@@ -80,7 +80,6 @@
     
     self.navigationItem.titleView = label;
     category = [[NSMutableArray alloc] init];
-    [category addObject:@"Sharing Options"];
     [category addObject:@"Save to Gallery"];
     [category addObject:@"Account Setting"];
     [category addObject:@"Sign Out"];
@@ -107,25 +106,24 @@
     NSString *title =[NSString stringWithFormat:@"%@",category[indexPath.row]];
     NSString *imgname =@"";
    
-    if (indexPath.row == 0) imgname = @"share_settings";
     
-    if (indexPath.row == 1){
+    if (indexPath.row == 0){
         
         imgname = @"save_gallery";
         [cell setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"settingsrow"]]];
         
     }
     
-    if (indexPath.row == 2)imgname = @"account_settings";
+    if (indexPath.row == 1)imgname = @"account_settings";
     
-    if (indexPath.row == 3){
+    if (indexPath.row == 2){
         
         imgname = @"signout";
         [cell setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"settingsrow"]]];
         
     }
 
-        if (indexPath.row == 1){
+        if (indexPath.row == 0){
             UISwitch *mSwitch;
              if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
                  mSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(263, 4, 0, 0)] ;
@@ -170,14 +168,10 @@
 
 - (void)tableView:(UITableView *)tView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
    
-    if (indexPath.row == 0) {
-        oldsettingveiwcontroller = [[ShareSettingViewController alloc]initWithNibName:@"ShareSettingViewController" bundle:nil];
-        [self.navigationController pushViewController:oldsettingveiwcontroller animated:YES];
-  
-    } else if(indexPath.row == 2) {
+    if(indexPath.row == 1) {
         accountUpdater = [[ProfileViewController alloc]initWithNibName:@"ProfileViewController" bundle:nil];
         [self.navigationController pushViewController:accountUpdater animated:YES];
-    }else if(indexPath.row == 3){
+    }else if(indexPath.row == 2){
         warningAlert = [[UIAlertView  alloc]initWithTitle:@"Are you sure?" message:@"" delegate:self cancelButtonTitle:@"Sign out" otherButtonTitles:@"Cancel",nil];
         [warningAlert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:NO];
     }
@@ -202,9 +196,8 @@
 
 - (void)signOut{
 
-    //For FlyerLy
-    [[NSUserDefaults standardUserDefaults]  setObject:nil forKey:@"User"];
-    [[NSUserDefaults standardUserDefaults]  setObject:nil forKey:@"Password"];
+    //REMOVE KEYS
+    [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"User"];
 
     // Forget in app purchases.
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:IN_APP_DICTIONARY_KEY];

@@ -6,7 +6,6 @@
 #import "FlyerlyMainScreen.h"
 #import "CreateFlyerController.h"
 #import "FlyrViewController.h"
-#import "ShareSettingViewController.h"
 #import "InviteFriendsController.h"
 #import "FlyrAppDelegate.h"
 #import "ShareViewController.h"
@@ -23,7 +22,7 @@
 
 @implementation FlyerlyMainScreen
 
-@synthesize spController,tpController,createFlyrLabel,savedFlyrLabel,inviteFriendLabel,addFriendsController;
+@synthesize tpController,createFlyrLabel,savedFlyrLabel,inviteFriendLabel,addFriendsController;
 @synthesize firstFlyer, secondFlyer, thirdFlyer, fourthFlyer, createFlyrButton, savedFlyrButton, inviteFriendButton;
 @synthesize facebookLikeView;
 @synthesize likeButton,followButton,webview,recentFlyers;
@@ -204,7 +203,6 @@
     [savedFlyrLabel setText:NSLocalizedString(@"saved_flyers", nil)];
 
     [inviteFriendLabel setText:NSLocalizedString(@"invite_friends", nil)];
-    spController = [[ShareSettingViewController alloc]initWithNibName:@"SettingViewController" bundle:nil];
     
     //GET FACEBOOK APP LIKE STATUS
     //Tenporary Commit that part

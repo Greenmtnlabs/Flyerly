@@ -14,7 +14,6 @@
 #import "FlyerImageView.h"
 
 @class FlyrViewController;
-@class ShareSettingViewController;
 @class CreateFlyerController ;
 @class InviteFriendsController;
 @class FBSession;
@@ -26,7 +25,6 @@
     
 	CreateFlyerController *createFlyer;
 	FlyrViewController *tpController;
-	ShareSettingViewController *spController;
 	InviteFriendsController *addFriendsController;
     FlyerlySingleton *globle;
     
@@ -45,7 +43,6 @@
 }
 
 @property(nonatomic,strong) FlyrViewController *tpController;
-@property(nonatomic,strong) ShareSettingViewController *spController;
 @property(nonatomic,strong) InviteFriendsController *addFriendsController;
 
 @property (nonatomic, strong) IBOutlet UILabel *createFlyrLabel;

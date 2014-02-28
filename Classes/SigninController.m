@@ -50,12 +50,7 @@
     // set clear text overlay
     email.clearButtonMode = UITextFieldViewModeWhileEditing;
     password.clearButtonMode = UITextFieldViewModeWhileEditing;
-    usr = [[NSUserDefaults standardUserDefaults] stringForKey:@"User"];
     
-    if (usr != nil) {
-        email.text = usr;
-        password.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"Password"];
-    }
     
     // back button
     UIButton *backBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
@@ -120,6 +115,7 @@
 }
 
 -(void)signIn:(BOOL)validated username:(NSString *)userName password:(NSString *)pwd{
+    
     NSLog(@"User %@",userName);
 
     NSError *loginError = nil;
@@ -135,7 +131,6 @@
         
         //Saving User Info for again login
         [[NSUserDefaults standardUserDefaults]  setObject:userName forKey:@"User"];
-        [[NSUserDefaults standardUserDefaults]  setObject:pwd forKey:@"Password"];
         
         //Update Folder Structure For 3.0 Version
         PFUser *user = [PFUser currentUser];

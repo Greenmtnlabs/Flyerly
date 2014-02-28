@@ -18,14 +18,11 @@
     FlyerlySingleton *globle;
     CGFloat animatedDistance;
 }
-@property(nonatomic, strong) IBOutlet UITextField *username;
-@property(nonatomic, strong) IBOutlet UITextField *password;
-@property(nonatomic, strong) IBOutlet UITextField *confirmPassword;
+@property(nonatomic, strong) IBOutlet UILabel *username;
+@property(nonatomic, strong) IBOutlet UIImageView *backimgUsername;
 @property(nonatomic, strong) IBOutlet UITextField *email;
 @property(nonatomic, strong) IBOutlet UITextField *name;
 @property(nonatomic, strong) IBOutlet UITextField *phno;
-@property(nonatomic, strong) IBOutlet UILabel *usrExist;
--(IBAction)userExist;
 -(IBAction)save;
 -(IBAction)changePW;
 

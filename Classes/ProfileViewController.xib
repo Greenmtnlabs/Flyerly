@@ -7,11 +7,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProfileViewController">
             <connections>
+                <outlet property="backimgUsername" destination="68" id="IzY-3X-aoa"/>
                 <outlet property="email" destination="65" id="405"/>
                 <outlet property="name" destination="53" id="409"/>
                 <outlet property="phno" destination="52" id="408"/>
-                <outlet property="username" destination="62" id="410"/>
-                <outlet property="usrExist" destination="418" id="419"/>
+                <outlet property="username" destination="XuG-Gu-RGb" id="fKX-wP-AHR"/>
                 <outlet property="view" destination="50" id="403"/>
             </connections>
         </placeholder>
@@ -22,7 +22,7 @@
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="register-bg-iPhone4.png" id="51">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="text_box.png" id="59">
                     <rect key="frame" x="34" y="205" width="253" height="30"/>
@@ -40,15 +40,6 @@
                     <rect key="frame" x="34" y="141" width="253" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="center" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username (required)" minimumFontSize="17" id="62">
-                    <rect key="frame" x="48" y="141" width="239" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
-                    <connections>
-                        <action selector="userExist" destination="-1" eventType="editingDidEnd" id="420"/>
-                    </connections>
-                </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="center" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email (required)" minimumFontSize="17" id="65">
                     <rect key="frame" x="48" y="173" width="226" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -104,11 +95,10 @@
                         <action selector="changePW" destination="-1" eventType="touchUpInside" id="411"/>
                     </connections>
                 </button>
-                <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="available" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="418">
-                    <rect key="frame" x="235" y="120" width="48" height="21"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XuG-Gu-RGb">
+                    <rect key="frame" x="48" y="145" width="226" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="10"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>

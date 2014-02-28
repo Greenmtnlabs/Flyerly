@@ -39,8 +39,6 @@
 		0DF3A542108E0E5C00D6C887 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DF3A541108E0E5C00D6C887 /* libsqlite3.0.dylib */; settings = {ATTRIBUTES = (Weak, ); }; };
 		0DFC5320109576AB00B18478 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DFC5319109576AB00B18478 /* MainWindow.xib */; };
 		0DFC5321109576AB00B18478 /* CreateFlyerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DFC531A109576AB00B18478 /* CreateFlyerController.xib */; };
-		0DFC5322109576AB00B18478 /* ShareSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DFC531C109576AB00B18478 /* ShareSettingViewController.m */; };
-		0DFC5323109576AB00B18478 /* ShareSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DFC531D109576AB00B18478 /* ShareSettingViewController.xib */; };
 		0F734B541742737D0084A2F4 /* top_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F734B521742737D0084A2F4 /* top_bg.png */; };
 		0F734B551742737D0084A2F4 /* top_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F734B531742737D0084A2F4 /* top_bg@2x.png */; };
 		0F734B5617427B790084A2F4 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65B303FA171ED8C8006632E3 /* Accounts.framework */; };
@@ -1342,9 +1340,6 @@
 		0DF3A541108E0E5C00D6C887 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		0DFC5319109576AB00B18478 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MainWindow.xib; path = Classes/MainWindow.xib; sourceTree = "<group>"; };
 		0DFC531A109576AB00B18478 /* CreateFlyerController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateFlyerController.xib; sourceTree = "<group>"; };
-		0DFC531B109576AB00B18478 /* ShareSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareSettingViewController.h; sourceTree = "<group>"; };
-		0DFC531C109576AB00B18478 /* ShareSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareSettingViewController.m; sourceTree = "<group>"; };
-		0DFC531D109576AB00B18478 /* ShareSettingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShareSettingViewController.xib; sourceTree = "<group>"; };
 		0F734B521742737D0084A2F4 /* top_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = top_bg.png; sourceTree = "<group>"; };
 		0F734B531742737D0084A2F4 /* top_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "top_bg@2x.png"; sourceTree = "<group>"; };
 		0F7F02BB1765F7D300FC750F /* AlertViewBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AlertViewBackground.png; sourceTree = "<group>"; };
@@ -4111,20 +4106,9 @@
 				2044FF93185088ED00A26B42 /* MainSettingCell.h */,
 				2044FF94185088ED00A26B42 /* MainSettingCell.m */,
 				2044FF95185088ED00A26B42 /* MainSettingCell.xib */,
-				20F3597A1888DB06001376B6 /* ShareSetting */,
 				2013528A188C588100822073 /* Comments */,
 			);
 			name = Settings;
-			sourceTree = "<group>";
-		};
-		20F3597A1888DB06001376B6 /* ShareSetting */ = {
-			isa = PBXGroup;
-			children = (
-				0DFC531B109576AB00B18478 /* ShareSettingViewController.h */,
-				0DFC531C109576AB00B18478 /* ShareSettingViewController.m */,
-				0DFC531D109576AB00B18478 /* ShareSettingViewController.xib */,
-			);
-			name = ShareSetting;
 			sourceTree = "<group>";
 		};
 		20F3597B1888DBEE001376B6 /* FlyerlyMainScreen */ = {
@@ -4622,7 +4606,6 @@
 				E8A7347E1092CFF300661AAD /* ShareViewController.xib in Resources */,
 				0DFC5320109576AB00B18478 /* MainWindow.xib in Resources */,
 				0DFC5321109576AB00B18478 /* CreateFlyerController.xib in Resources */,
-				0DFC5323109576AB00B18478 /* ShareSettingViewController.xib in Resources */,
 				0D74CA081095EE5F00179C4F /* facebook.png in Resources */,
 				0D3BA0EC1096F55300A8064E /* cell.png in Resources */,
 				0D3BA19810970EB700A8064E /* navBar.png in Resources */,
@@ -5875,7 +5858,6 @@
 				2032DCD01871BDFF007036B2 /* CropViewController.m in Sources */,
 				49B8898A188652A2003766AD /* NSData+Extras.m in Sources */,
 				202C4803187D6E4B00FE0975 /* BitlyURLShortener.m in Sources */,
-				0DFC5322109576AB00B18478 /* ShareSettingViewController.m in Sources */,
 				2002C89618888CD4005B18C9 /* SaveFlyerCell.m in Sources */,
 				E8C7C36910976BFC0064935A /* SaveFlyerController.m in Sources */,
 				2036661C188DB67300C71EAA /* FlyerUser.m in Sources */,

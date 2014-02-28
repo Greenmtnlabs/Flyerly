@@ -20,7 +20,6 @@
 
 @interface SigninController : ParentViewController <PFLogInViewControllerDelegate,FBLoginViewDelegate >{
     
-    NSString *usr;
     FlyerlyMainScreen *launchController;
     RegisterController *registerController;
     FlyerlySingleton *globle;

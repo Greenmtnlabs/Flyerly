@@ -7,12 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ShareSettingViewController.h"
 #import "FlyrAppDelegate.h"
 #import "LaunchController.h"
 #import "Common.h"
 #import "HelpController.h"
-#import "ShareSettingViewController.h"
 #import "CreateFlyerController.h"
 #import "ProfileViewController.h"
 #import "InputViewController.h"
@@ -22,12 +20,11 @@
 
 
 @class CreateFlyerController,InputViewController,FlyerlySingleton ;
-@class LaunchController,HelpController,ShareSettingViewController,ProfileViewController;
+@class LaunchController,HelpController,ProfileViewController;
 @interface MainSettingViewController : UIViewController <UITableViewDelegate, MFMailComposeViewControllerDelegate>{
 
     NSMutableArray *category;
     NSMutableArray *groupCtg;
-    ShareSettingViewController *oldsettingveiwcontroller;
     UIAlertView *warningAlert;
     CreateFlyerController *ptController;
     ProfileViewController *accountUpdater;
