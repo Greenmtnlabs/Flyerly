@@ -151,6 +151,16 @@
                     //Delete Old File
                     [[NSFileManager defaultManager] removeItemAtPath:source error:&error];
                     
+                    //HERE WE UPDATE .TXT File for IMAGE URL
+                    NSString *textFile = destination;
+                    
+                    //GETTING FLYER INFO
+                    NSMutableArray *infoArray = [[NSMutableArray alloc] initWithContentsOfFile:textFile];
+                    
+                    //Here we ADD ONE INDEX FOR IMAGE URL
+                    [infoArray addObject:@""];
+                    [infoArray writeToFile:textFile atomically:YES];
+                    
                     //Here we Copy Icon files related this Flyer
                     source = [NSString stringWithFormat:@"%@/Icon/%d",usernamePath,imgnumber];
                     

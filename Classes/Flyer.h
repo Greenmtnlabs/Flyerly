@@ -33,6 +33,10 @@
 
 -(void)replaceFromHistory;
 
+-(void)createFlyerlyAlbum;
+
+-(void)createImageToFlyerlyAlbum :(NSURL *)groupURL ImageData :(NSData *)imgData;
+
 -(BOOL)compareFilesForMakeHistory :(NSString *)curPath LastHistoryPath:(NSString *)hisPath;
 
 -(void)deleteLayer :(NSString *)uid;

@@ -133,6 +133,11 @@ int selectedAddMoreLayerTab = -1;
 -(void)viewDidLoad{
 	[super viewDidLoad];
     
+    // HERE WE CREATE FLYERLY ALBUM ON DEVICE
+    if(![[NSUserDefaults standardUserDefaults] stringForKey:@"FlyerlyAlbum"]){
+        [flyer createFlyerlyAlbum];
+    }
+    
     //Render Flyer
     [self renderFlyer];
  
