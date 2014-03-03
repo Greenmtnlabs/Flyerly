@@ -2664,7 +2664,7 @@ int selectedAddMoreLayerTab = -1;
 #pragma mark Flurry Methods
 
 -(void) logLayerAddedEvent{
-    [Flurry logEvent:@"Layer Added"];
+    [Flurry  logEvent:@"Layer Added"];
 }
 
 -(void) logPhotoAddedEvent{
