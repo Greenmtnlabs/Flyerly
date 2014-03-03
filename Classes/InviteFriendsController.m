@@ -218,8 +218,9 @@ BOOL selectAll;
     CFIndex nPeople = ABAddressBookGetPersonCount(m_addressbook);
     
     for (int i=0;i < nPeople;i++) {
-        NSMutableDictionary *dOfPerson=[NSMutableDictionary dictionary];
         ContactsModel *model = [[ContactsModel alloc] init];
+        
+        model.others = @"";
         
         ABRecordRef ref = CFArrayGetValueAtIndex(allPeople,i);
         
@@ -1122,13 +1123,14 @@ NSMutableDictionary *selectedIdentifierDictionary;
                 [deviceContactItems addObject:model.description];
             }
             
+            /*
             //Calling ShareKit for Sharing
             iosSharer = [[ SHKSharer alloc] init];
             NSString *tweet = [NSString stringWithFormat:@"I'm using the flyerly app to create and share flyers on the go! Flyer.ly/Facebook @%@ #flyerly",model.description];
             
             [deviceContactItems addObject:model.description];
             iosSharer = [SHKFacebook shareText:tweet];
-            iosSharer.shareDelegate = self;
+            iosSharer.shareDelegate = self;*/
 
         }
 

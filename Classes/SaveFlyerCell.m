@@ -22,7 +22,6 @@
  */
 - (void)renderCell :(Flyer *)flyer {
     
-    self.backgroundImage.image =  [UIImage imageNamed:@"cell_bg_first"];
 
     // HERE WE SET FLYER INFORMATION FORM .TXT FILE
     [self.nameLabel setText: [flyer getFlyerTitle]];

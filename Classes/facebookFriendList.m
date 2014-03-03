@@ -6,14 +6,14 @@
 //
 //
 
-#import "fbSubClass.h"
+#import "facebookFriendList.h"
 
 
-@interface fbSubClass ()
+@interface facebookFriendList ()
 
 @end
 
-@implementation fbSubClass
+@implementation facebookFriendList
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

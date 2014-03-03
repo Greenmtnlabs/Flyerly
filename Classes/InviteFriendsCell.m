@@ -25,7 +25,7 @@
     // Set Values
     [dName setText:model.name];
     
-    if (model.others != nil){
+    if ([model.others isEqualToString:@""]){
         [description setText:model.description];
     }else {
         [description setText:model.others];

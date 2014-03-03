@@ -22,7 +22,7 @@
 #import "AsyncImageView.h"
 #import "FlyerlySingleton.h"
 #import "InviteFriendsCell.h"
-#import "fbSubClass.h"
+#import "facebookFriendList.h"
 #import "ParentViewController.h"
 #import "SHKSharer.h"
 #import "ContactsModel.h"

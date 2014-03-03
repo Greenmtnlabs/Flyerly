@@ -9,7 +9,7 @@
 #import "SHKFacebook.h"
 #import <FacebookSDK/FacebookSDK.h>
 
-@interface fbSubClass : SHKFacebook
+@interface facebookFriendList : SHKFacebook
 
 
 -(void)freindList;
