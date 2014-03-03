@@ -22,10 +22,11 @@
 #import "AsyncImageView.h"
 #import "FlyerlySingleton.h"
 #import "InviteFriendsCell.h"
-#import "facebookFriendList.h"
+#import "FlyerlyFacebookFriends.h"
 #import "ParentViewController.h"
 #import "SHKSharer.h"
 #import "ContactsModel.h"
+#import "FlyerlyFacebookFriends.h"
 
 @class LoadingView,FlyerlySingleton,SHKSharer;
 

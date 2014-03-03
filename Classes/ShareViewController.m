@@ -439,8 +439,7 @@
             // Current Item For Sharing
             SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@",titleView.text  ]];
               item.tags =[NSArray arrayWithObjects: @"#flyerly", nil];
-            
-            
+                    
             //Calling ShareKit for Sharing
             iosSharer = [[ SHKSharer alloc] init];
             iosSharer = [SHKFlickr shareItem:item];

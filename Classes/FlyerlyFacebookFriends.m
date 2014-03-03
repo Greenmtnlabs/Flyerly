@@ -1,4 +1,4 @@
-//
+	//
 //  fbSubClass.m
 //  Flyr
 //
@@ -6,14 +6,14 @@
 //
 //
 
-#import "facebookFriendList.h"
+#import "FlyerlyFacebookFriends.h"
 
 
-@interface facebookFriendList ()
+@interface FlyerlyFacebookFriends ()
 
 @end
 
-@implementation facebookFriendList
+@implementation FlyerlyFacebookFriends
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -36,17 +36,9 @@
  */
 -(void)freindList{
     
-       SHKSharer *iosSharer = [[ SHKSharer alloc] init];
-        // Create controller and set share options
-        iosSharer= [[SHKFacebook alloc] init];
-      BOOL STATUS =  [self  authorize];
-    
-    
-  
-        
-    /*
     // Create request for user's Facebook data
     FBRequest *request = [FBRequest requestForMyFriends];
+    
     
     // Send request to Facebook
     [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
@@ -58,11 +50,46 @@
         
         }
     }];
-*/
 
 
 
 }
+
+
+
++ (BOOL)canShareItem:(SHKItem *)item
+{
+    return YES ;
+}
+
+
+- (BOOL)shouldShareSilently {
+    
+    return YES;
+}
+
+- (BOOL)validateItem
+{
+    return YES;
+}
+
+
+- (void)doSend {
+
+    [self setQuiet:YES];
+    
+
+    
+    FBRequestConnection* con = [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+        
+        [self freindList];
+        NSLog(@"Freind List Found");
+
+    }];
+    [self.pendingConnections addObject:con];
+    
+}
+
 
 
 - (void)didReceiveMemoryWarning

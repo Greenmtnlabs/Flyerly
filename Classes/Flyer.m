@@ -793,16 +793,44 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     [library addAssetsGroupAlbumWithName:albumName
                              resultBlock:^(ALAssetsGroup *group) {
                                  
-                                // GETTING CREATED URL OF ALBUM
-                                NSURL *groupURL = [group valueForProperty:ALAssetsGroupPropertyURL];
+                                 //CHECKING ALBUM FOUND IN LIBRARY
+                        if (group == nil) {
+                                     
+                                     //ALBUM NAME ALREADY EXIST IN LIBRARY
+                                     [library enumerateGroupsWithTypes:ALAssetsGroupAlbum usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+                                         
+                                        NSString *existAlbumName = [group valueForProperty: ALAssetsGroupPropertyName];
+                                         
+                                         if ([existAlbumName isEqualToString:albumName]) {
+                                             *stop = YES;
+                                             
+                                             // GETTING CREATED URL OF ALBUM
+                                             NSURL *groupURL = [group valueForProperty:ALAssetsGroupPropertyURL];
+                                             
+                                             //SAVING IN PREFERENCES .PLIST FOR FUTURE USE
+                                             [[NSUserDefaults standardUserDefaults]   setObject:groupURL.absoluteString forKey:@"FlyerlyAlbum"];
+                                             
+                                            
+                                         }
+                                         
+                                     } failureBlock:^(NSError *error) {
+                                          NSLog(@"error adding album");
+                                     }];
+                                     
+                        }else {
                                  
-                                //SAVING IN PREFERENCES .PLIST FOR FUTURE USE
-                                [[NSUserDefaults standardUserDefaults]   setObject:groupURL.absoluteString forKey:@"FlyerlyAlbum"];
-                             }
+                                     //CREATE NEW ALBUM IN LIBRARY
+                                     // GETTING CREATED URL OF ALBUM
+                                     NSURL *groupURL = [group valueForProperty:ALAssetsGroupPropertyURL];
+
+                                     //SAVING IN PREFERENCES .PLIST FOR FUTURE USE
+                                     [[NSUserDefaults standardUserDefaults]   setObject:groupURL.absoluteString forKey:@"FlyerlyAlbum"];
+                        }
+                    }
      
-                            failureBlock:^(NSError *error) {
-                                NSLog(@"error adding album");
-                        }];
+                    failureBlock:^(NSError *error) {
+                        NSLog(@"error adding album");
+            }];
     
 }
 

@@ -292,11 +292,21 @@ BOOL selectAll;
     [contactsButton setSelected:NO];
     [twitterButton setSelected:NO];
     [facebookButton setSelected:YES];
+    
+    // Current Item For Sharing
+    SHKItem *item = [SHKItem image:[UIImage imageNamed:@"undo"] title:@"TEST"];
 
-    /*
-    fbSubClass *fb = [[fbSubClass alloc] init];
-    [fb freindList];
-    return;*/
+ 
+    SHKSharer *iosSharer = [[ SHKSharer alloc] init];
+    
+    // Create controller and set share options
+    iosSharer = [FlyerlyFacebookFriends shareItem:item];
+
+    
+    
+    
+    
+    return;
     
     if([InviteFriendsController connected]){
         
