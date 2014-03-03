@@ -24,7 +24,12 @@
 
     // Set Values
     [dName setText:model.name];
-    [description setText:model.description];
+    
+    if (model.others != nil){
+        [description setText:model.description];
+    }else {
+        [description setText:model.others];
+    }
     [imgview setImage:model.img];
      model.delegate = self;
     [model setInvitedStatus:status];

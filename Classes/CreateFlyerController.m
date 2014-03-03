@@ -255,6 +255,24 @@ int selectedAddMoreLayerTab = -1;
 -(void) callMenu
 {
     
+    //Delete Empty Layer if Exist
+    if (currentLayer != nil && ![currentLayer isEqualToString:@""]) {
+        
+        NSString *flyerImg = [flyer getImageName:currentLayer];
+        NSString *flyertext = [flyer getText:currentLayer];
+        
+        if ([flyerImg isEqualToString:@""]) {
+            [flyer deleteLayer:currentLayer];
+            [self.flyimgView deleteLayer:currentLayer];
+        }
+        
+        if ([flyertext isEqualToString:@""]) {
+            [flyer deleteLayer:currentLayer];
+            [self.flyimgView deleteLayer:currentLayer];
+        }
+    }
+    
+    // Remove Border if Any Layer Selected
     if (![currentLayer isEqualToString:@""]) [self.flyimgView layerStoppedEditing:currentLayer];
     
     [shareviewcontroller.titleView resignFirstResponder];
