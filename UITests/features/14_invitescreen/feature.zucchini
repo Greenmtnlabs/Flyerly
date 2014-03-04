@@ -1,0 +1,14 @@
+Start on the "Welcome" screen:
+  Tap "SignIn"
+  
+Then on the "SignIn" screen:
+  Clear the "Username" field
+  Type "riksof.yahoo" in the "Username" field
+  Type "riksof123" in the "Password" field
+  Tap "Sign In"
+  Wait for "5" seconds
+
+Then on the "Home" screen:
+  Tap "Invite"
+  Take a screenshot
+  Show elements
