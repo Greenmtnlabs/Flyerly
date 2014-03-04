@@ -288,7 +288,7 @@ BOOL selectAll;
     
     
     // HERE WE HIGHLIGHT BUTTON ON TOUCH
-    // AND OTHERS SET UNSELECTED 
+    // AND OTHERS SET UNSELECTED
     [contactsButton setSelected:NO];
     [twitterButton setSelected:NO];
     [facebookButton setSelected:YES];
