@@ -77,18 +77,41 @@
 }
 
 
+
+-(void)FBUserInfoRequestHandlerCallback:(FBRequestConnection *)connection
+                                 result:(id) result
+                                  error:(NSError *)error
+{
+	if(![self.pendingConnections containsObject:connection]){
+		NSLog(@"SHKFacebook - received a callback for a connection not in the pending requests.");
+	}
+	[self.pendingConnections removeObject:connection];
+	if (error) {
+		[self hideActivityIndicator];
+		[self sendDidFailWithError:error];
+	}else{
+		[result convertNSNullsToEmptyStrings];
+        self.friendsList = result;
+		[self sendDidFinishWithResponse:result];
+	}
+	[FBSession.activeSession close];	// unhook us
+}
+
 - (void)doSend {
 
     [self setQuiet:YES];
     
-
-    // HERE WE GET CONNECTION WITH NEW TOKEN
-    FBRequestConnection* con = [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-        
-        [self freindList];
-        NSLog(@"Freind List Found");
-
-    }];
+    FBRequest *request = [[[FBRequest alloc] initWithSession:[FBSession activeSessionIfOpen]
+                                                   graphPath:@"me/friends"
+                                                  parameters:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                              @"id,name,username,first_name,last_name", @"fields",
+                                                              nil]
+                                                  HTTPMethod:nil];
+                          
+FBRequestConnection* con = [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+        [self FBUserInfoRequestHandlerCallback:connection result:result error:error];
+    }]
+   
     [self.pendingConnections addObject:con];
     
 }

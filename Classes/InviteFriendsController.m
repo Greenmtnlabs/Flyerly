@@ -294,8 +294,11 @@ BOOL selectAll;
     [facebookButton setSelected:YES];
     
     // Current Item For Sharing
-    SHKItem *item = [SHKItem image:[UIImage imageNamed:@"undo"] title:@"TEST"];
- 
+    //SHKItem *item = [SHKItem image:[UIImage imageNamed:@"undo"] title:@"TEST"];
+    SHKItem *item = [[SHKItem alloc] init];
+	item.shareType = SHKShareTypeImage;
+
+    
     iosSharer = [[ SHKSharer alloc] init];
     
     // Create controller and set share options
