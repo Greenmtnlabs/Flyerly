@@ -11,7 +11,6 @@
 #import "LaunchController.h"
 #import "Common.h"
 #import "HelpController.h"
-#import "CreateFlyerController.h"
 #import "ProfileViewController.h"
 #import "InputViewController.h"
 #import "FlyerlySingleton.h"
@@ -19,14 +18,13 @@
 #import <ShareKit.h>
 
 
-@class CreateFlyerController,InputViewController,FlyerlySingleton ;
+@class InputViewController,FlyerlySingleton ;
 @class LaunchController,HelpController,ProfileViewController;
 @interface MainSettingViewController : UIViewController <UITableViewDelegate, MFMailComposeViewControllerDelegate>{
 
     NSMutableArray *category;
     NSMutableArray *groupCtg;
     UIAlertView *warningAlert;
-    CreateFlyerController *ptController;
     ProfileViewController *accountUpdater;
     FlyerlySingleton *globle;
 
@@ -39,7 +37,5 @@
 -(IBAction)rateApp:(id)sender;
 -(IBAction)gotwitter:(id)sender;
 -(IBAction)goemail:(id)sender;
-
--(void)createNewFlyer;
 
 @end

@@ -287,16 +287,26 @@ BOOL selectAll;
 - (IBAction)loadFacebookContacts:(UIButton *)sender{
     
     
-    // HERE WE HIGHLIGHT BUTTON SELECT AND
-    // UNSELECTED BUTTON
+    // HERE WE HIGHLIGHT BUTTON ON TOUCH
+    // AND OTHERS SET UNSELECTED 
     [contactsButton setSelected:NO];
     [twitterButton setSelected:NO];
     [facebookButton setSelected:YES];
+    
+    // Current Item For Sharing
+    //SHKItem *item = [SHKItem image:[UIImage imageNamed:@"undo"] title:@"TEST"];
+    SHKItem *item = [[SHKItem alloc] init];
+	item.shareType = SHKShareTypeImage;
 
-    /*
-    fbSubClass *fb = [[fbSubClass alloc] init];
-    [fb freindList];
-    return;*/
+    
+    iosSharer = [[ SHKSharer alloc] init];
+    
+    // Create controller and set share options
+    iosSharer = [FlyerlyFacebookFriends shareItem:item];
+
+    
+    //END NEW CODE
+    return;
     
     if([InviteFriendsController connected]){
         

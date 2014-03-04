@@ -9,7 +9,7 @@
 #import "SHKFacebook.h"
 #import <FacebookSDK/FacebookSDK.h>
 
-@interface facebookFriendList : SHKFacebook
+@interface FlyerlyFacebookFriends : SHKFacebook
 
 
 -(void)freindList;

@@ -692,7 +692,7 @@
 		202C658517EA07DC00CB9A75 /* symbol113@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 202C64CD17EA07DC00CB9A75 /* symbol113@2x.png */; };
 		202F992318BCA37B002A25D9 /* home_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 202F992118BCA37B002A25D9 /* home_button.png */; };
 		202F992418BCA37B002A25D9 /* home_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 202F992218BCA37B002A25D9 /* home_button@2x.png */; };
-		202F992718BCAD1B002A25D9 /* facebookFriendList.m in Sources */ = {isa = PBXBuildFile; fileRef = 202F992618BCAD1B002A25D9 /* facebookFriendList.m */; };
+		202F992718BCAD1B002A25D9 /* FlyerlyFacebookFriends.m in Sources */ = {isa = PBXBuildFile; fileRef = 202F992618BCAD1B002A25D9 /* FlyerlyFacebookFriends.m */; };
 		202F993518BCB426002A25D9 /* invite_facebook_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 202F992918BCB426002A25D9 /* invite_facebook_selected.png */; };
 		202F993618BCB426002A25D9 /* invite_facebook_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 202F992A18BCB426002A25D9 /* invite_facebook_selected@2x.png */; };
 		202F993718BCB426002A25D9 /* invite_facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 202F992B18BCB426002A25D9 /* invite_facebook.png */; };
@@ -2055,8 +2055,8 @@
 		202C64CD17EA07DC00CB9A75 /* symbol113@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "symbol113@2x.png"; path = "symbols/symbol113@2x.png"; sourceTree = "<group>"; };
 		202F992118BCA37B002A25D9 /* home_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_button.png; sourceTree = "<group>"; };
 		202F992218BCA37B002A25D9 /* home_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home_button@2x.png"; sourceTree = "<group>"; };
-		202F992518BCAD1B002A25D9 /* facebookFriendList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = facebookFriendList.h; sourceTree = "<group>"; };
-		202F992618BCAD1B002A25D9 /* facebookFriendList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = facebookFriendList.m; sourceTree = "<group>"; };
+		202F992518BCAD1B002A25D9 /* FlyerlyFacebookFriends.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlyerlyFacebookFriends.h; sourceTree = "<group>"; };
+		202F992618BCAD1B002A25D9 /* FlyerlyFacebookFriends.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlyerlyFacebookFriends.m; sourceTree = "<group>"; };
 		202F992918BCB426002A25D9 /* invite_facebook_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = invite_facebook_selected.png; sourceTree = "<group>"; };
 		202F992A18BCB426002A25D9 /* invite_facebook_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "invite_facebook_selected@2x.png"; sourceTree = "<group>"; };
 		202F992B18BCB426002A25D9 /* invite_facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = invite_facebook.png; sourceTree = "<group>"; };
@@ -3893,8 +3893,8 @@
 		202F992818BCAD20002A25D9 /* CustomClasses */ = {
 			isa = PBXGroup;
 			children = (
-				202F992518BCAD1B002A25D9 /* facebookFriendList.h */,
-				202F992618BCAD1B002A25D9 /* facebookFriendList.m */,
+				202F992518BCAD1B002A25D9 /* FlyerlyFacebookFriends.h */,
+				202F992618BCAD1B002A25D9 /* FlyerlyFacebookFriends.m */,
 			);
 			name = CustomClasses;
 			sourceTree = "<group>";
@@ -5893,7 +5893,7 @@
 				202C482A187D7A6B00FE0975 /* NSDictionary_JSONExtensions.m in Sources */,
 				202C4829187D7A6B00FE0975 /* CJSONSerializer.m in Sources */,
 				202C4800187D6E4B00FE0975 /* BitlyTwitterOAuthAccount.m in Sources */,
-				202F992718BCAD1B002A25D9 /* facebookFriendList.m in Sources */,
+				202F992718BCAD1B002A25D9 /* FlyerlyFacebookFriends.m in Sources */,
 				202C4826187D7A6B00FE0975 /* CDataScanner_Extensions.m in Sources */,
 				0F80C386178561C200D36795 /* LaunchController.m in Sources */,
 				0F80C38B178578CB00D36795 /* RegisterController.m in Sources */,

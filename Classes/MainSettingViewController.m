@@ -60,16 +60,7 @@
     
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:backBarButton,helpBarButton,nil ]];
     
-    
-    UIButton *createButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    [createButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-    [createButton setBackgroundImage:[UIImage imageNamed:@"createButton"] forState:UIControlStateNormal];
-    [createButton addTarget:self action:@selector(createNewFlyer) forControlEvents:UIControlEventTouchUpInside];
-    createButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *createBarButton = [[UIBarButtonItem alloc] initWithCustomView:createButton];
-    
-    [self.navigationItem setRightBarButtonItem:createBarButton];
-        
+            
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-35, -6, 50, 50)];
     label.backgroundColor = [UIColor clearColor];
@@ -291,13 +282,6 @@
 
 }
 
-
--(void)createNewFlyer{
-    
-	ptController = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
-	[self.navigationController pushViewController:ptController animated:YES];
-    
-}
 
 
 @end
