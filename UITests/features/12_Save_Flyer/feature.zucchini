@@ -1,0 +1,41 @@
+Start on the "Welcome" screen:
+  Tap "SignIn"
+  
+Then on the "SignIn" screen:
+  Clear the "Username" field
+  Type "riksof.yahoo" in the "Username" field
+  Type "riksof123" in the "Password" field
+  Tap "Sign In"
+
+Then on the "Home" screen:
+  Tap "Saved"
+  Show elements
+
+Then on the "Saved" screen:
+  Take a screenshot
+  Tap "Home"
+  Tap "Saved"
+  
+Then on the "Saved" screen:
+  Tap "Create"
+  Take a screenshot
+  Tap "Back"
+  Wait for "5" seconds
+  Show elements
+  Tap "Cell"
+  
+Then on the "Flyer" screen:
+  Take a screenshot
+  Tap "Back"
+
+Then on the "Saved" screen:
+  Tap "Home"
+
+Then on the "Home" screen:
+  Tap "Settings"
+  
+Then on the "Settings" screen:
+  Tap "Sign Out"
+  Confirm "Sign out"
+
+  

@@ -1,5 +1,6 @@
 class SettingsScreen extends Screen
   anchor: -> $('navigationBar[name=MainSettingView]')
+  anchor: -> $('tableview[name=Empty list]')
 
   constructor: ->
     super 'settings'
@@ -12,3 +13,6 @@ class SettingsScreen extends Screen
     'Twitter' : -> $('#Twitter'),
     'Help' : -> $('#Help'),
     'Sign Out' : -> $('#Sign Out')
+    'Account Setting' : -> $('#Account Setting')
+    'Save to Gallery' : -> $('#Save to Gallery')
+    'Cell' : -> view.tableViews()[0].scrollToElementWithName('Save to Gallery')

@@ -1,5 +1,5 @@
 class HomeScreen extends Screen
-  anchor: -> $('navigationBar[name=LauchView]')
+  anchor: -> $('navigationBar[name=FlyerlyMainScreen]')
 
   constructor: ->
     super 'home'
