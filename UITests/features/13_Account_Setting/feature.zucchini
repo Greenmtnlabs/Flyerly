@@ -1,0 +1,138 @@
+Start on the "Welcome" screen:
+  Tap "SignIn"
+  
+Then on the "SignIn" screen:
+  Clear the "Username" field
+  Type "riksof.yahoo" in the "Username" field
+  Type "riksof123" in the "Password" field
+  Tap "Sign In"
+  Wait for "5" seconds
+
+Then on the "Home" screen:
+  Tap "Settings"
+
+Then on the "Settings" screen:
+  Take a screenshot
+  Tap "Account Setting"
+  Wait for "5" seconds
+
+Then on the "Profile" screen:
+  Take a screenshot
+  Wait for "5" seconds
+  Type "rehan.riksof@yahoo.com" in the "Email" field
+  Type "rehan" in the "Name" field
+  Type "03242355513" in the "Phone" field
+  Tap "Back"
+
+Then on the "Settings" screen:
+  Tap "Save to Gallery"
+  Wait for "5" seconds
+  Tap "Email"
+  Take a screenshot
+  Tap "Send"
+  Wait for "5" seconds
+  Tap "Twitter"
+  Take a screenshot
+  Tap "Cancel"
+  Tap "Twitter"
+  Tap "Post"
+  Confirm "OK"
+  Type "rehan" in the "text" field
+  Tap "Post"
+  Wait for "15" seconds
+  Confirm "OK"
+  Tap "Help"
+  Wait for "5" seconds
+
+Then on the "Help1" screen:
+  Take a screenshot
+  Wait for "5" seconds
+  Tap "Back"
+
+Then on the "Settings" screen:
+  Tap "Sign Out"
+  Confirm "Sign out"
+
+Then on the "Welcome" screen:
+  Tap "SignIn"
+
+Then on the "SignIn" screen:
+  Tap "Facebook"
+  Take a screenshot
+
+Then on the "Home" screen:
+  Tap "Settings"
+
+Then on the "Settings" screen:
+  Take a screenshot
+  Tap "Account Setting"
+  Wait for "5" seconds
+
+Then on the "Profile" screen:
+  Take a screenshot
+  Wait for "5" seconds
+  Tap "Back"
+
+Then on the "Settings" screen:
+  Tap "Save to Gallery"
+  Wait for "5" seconds
+  Tap "Email"
+  Take a screenshot
+  Tap "Send"
+  Wait for "5" seconds
+  Tap "Twitter"
+  Take a screenshot
+  Tap "Cancel"
+  Tap "Help"
+  Wait for "5" seconds
+
+Then on the "Help1" screen:
+  Take a screenshot
+  Wait for "5" seconds
+  Tap "Back"
+
+Then on the "Settings" screen:
+  Tap "Sign Out"
+  Confirm "Sign out"
+
+Then on the "Welcome" screen:
+  Tap "SignIn"
+
+Then on the "SignIn" screen:
+  Tap "Twitter"
+  Wait for "15" seconds
+
+Then on the "Home" screen:
+  Tap "Settings"
+
+Then on the "Settings" screen:
+  Take a screenshot
+  Tap "Account Setting"
+  Wait for "5" seconds
+
+Then on the "Profile" screen:
+  Take a screenshot
+  Wait for "5" seconds
+  Tap "Back"
+
+Then on the "Settings" screen:
+  Tap "Save to Gallery"
+  Wait for "5" seconds
+  Tap "Email"
+  Take a screenshot
+  Tap "Send"
+  Wait for "5" seconds
+  Tap "Twitter"
+  Take a screenshot
+  Tap "Cancel"
+  Tap "Help"
+  Wait for "5" seconds
+
+Then on the "Help1" screen:
+  Take a screenshot
+  Wait for "5" seconds
+  Tap "Back"
+
+Then on the "Settings" screen:
+  Tap "Sign Out"
+  Confirm "Sign out"  
