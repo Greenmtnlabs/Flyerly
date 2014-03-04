@@ -44,9 +44,12 @@
     [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
         
         if (!error) {
+
+            //HERE WE GET FREINDS LIST
+            NSLog(@"%@",result);
         
         }else {
-        
+            NSLog(@"ERROR :%@",error);
         
         }
     }];
@@ -55,7 +58,7 @@
 
 }
 
-
+#pragma mark  SHAREKIT OVERRIDE METHODS
 
 + (BOOL)canShareItem:(SHKItem *)item
 {
@@ -79,7 +82,7 @@
     [self setQuiet:YES];
     
 
-    
+    // HERE WE GET CONNECTION WITH NEW TOKEN
     FBRequestConnection* con = [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
         
         [self freindList];
