@@ -294,16 +294,15 @@ BOOL selectAll;
     [facebookButton setSelected:YES];
     
     // Current Item For Sharing
-    //SHKItem *item = [SHKItem image:[UIImage imageNamed:@"undo"] title:@"TEST"];
     SHKItem *item = [[SHKItem alloc] init];
-	item.shareType = SHKShareTypeImage;
+	item.shareType = SHKShareTypeUserInfo;
 
     
     iosSharer = [[ SHKSharer alloc] init];
     
     // Create controller and set share options
     iosSharer = [FlyerlyFacebookFriends shareItem:item];
-
+    iosSharer.shareDelegate = self;
     
     //END NEW CODE
     return;
@@ -424,7 +423,58 @@ BOOL selectAll;
     [alert show];
 }
 
+
 int totalCount = 0;
+
+-(void)makeFacebookArray :(NSDictionary *)result{
+    
+    int count = 0;
+    
+    self.facebookArray = [[NSMutableArray alloc] init];
+    
+    for (NSDictionary *friendData in result[@"data"]) {
+        
+        NSString *imageURL = friendData[@"picture"][@"data"][@"url"];
+        
+        // Here we will get the facebook contacts
+        ContactsModel *model = [[ContactsModel   alloc]init];
+        
+        model.name = friendData[@"name"];
+        model.description = friendData[@"id"];
+        if (friendData[@"gender"]) {
+            model.others = friendData[@"gender"];
+        }
+        if(imageURL){
+            model.img = nil;
+            model.imageUrl = imageURL;
+        }
+        
+        [self.facebookArray addObject:model];
+        
+        count++;
+        totalCount++;
+    }
+    
+    facebookBackupArray = nil;
+    facebookBackupArray = facebookArray;
+    
+    // Filter contacts on new tab selection
+    [self onSearchClick:nil];
+    
+    [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+    {
+        totalCount = 0;
+        
+        [self hideLoadingIndicator];
+        
+    }
+}
+
+
+
+
+
+
 
 -(void)request:(FBRequest *)request didLoad:(id)result{
     
@@ -1269,6 +1319,17 @@ NSMutableDictionary *selectedIdentifierDictionary;
 
 - (void)sharerFinishedSending:(SHKSharer *)sharer
 {
+    
+    
+    if ( [sharer isKindOfClass:[FlyerlyFacebookFriends class]] == YES ) {
+        
+        FlyerlyFacebookFriends *facebook = (FlyerlyFacebookFriends*) sharer;
+        
+        [self makeFacebookArray:facebook.friendsList ];
+        [self.uiTableView reloadData];
+        return;
+    }
+
     
     PFUser *user = [PFUser currentUser];
     

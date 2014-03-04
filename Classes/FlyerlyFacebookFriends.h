@@ -8,9 +8,11 @@
 
 #import "SHKFacebook.h"
 #import <FacebookSDK/FacebookSDK.h>
+#import "FBSession.h"
 
+@class FBSession;
 @interface FlyerlyFacebookFriends : SHKFacebook
 
 
--(void)freindList;
+@property (nonatomic,strong)NSDictionary *friendsList;
 @end

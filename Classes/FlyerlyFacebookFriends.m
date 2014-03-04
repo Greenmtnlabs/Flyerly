@@ -15,48 +15,9 @@
 
 @implementation FlyerlyFacebookFriends
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
-}
+@synthesize friendsList;
 
 
-/*
- * HERE WE GET FREIND LIST USING SHAREKIT FOR INVITE FREINDS
- */
--(void)freindList{
-    
-    // Create request for user's Facebook data
-    FBRequest *request = [FBRequest requestForMyFriends];
-    
-    
-    // Send request to Facebook
-    [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-        
-        if (!error) {
-
-            //HERE WE GET FREINDS LIST
-            NSLog(@"%@",result);
-        
-        }else {
-            NSLog(@"ERROR :%@",error);
-        
-        }
-    }];
-
-
-
-}
 
 #pragma mark  SHAREKIT OVERRIDE METHODS
 
@@ -77,7 +38,6 @@
 }
 
 
-
 -(void)FBUserInfoRequestHandlerCallback:(FBRequestConnection *)connection
                                  result:(id) result
                                   error:(NSError *)error
@@ -85,43 +45,51 @@
 	if(![self.pendingConnections containsObject:connection]){
 		NSLog(@"SHKFacebook - received a callback for a connection not in the pending requests.");
 	}
+    
 	[self.pendingConnections removeObject:connection];
+    
 	if (error) {
-		[self hideActivityIndicator];
-		[self sendDidFailWithError:error];
+        
+        if ([self.shareDelegate respondsToSelector:@selector(sharer:failedWithError:shouldRelogin:)])
+            [self.shareDelegate sharer:self failedWithError:error shouldRelogin:NO];
+
 	}else{
-		[result convertNSNullsToEmptyStrings];
+        
+		//[result  convertNSNullsToEmptyStrings];
         self.friendsList = result;
 		[self sendDidFinishWithResponse:result];
 	}
+    
 	[FBSession.activeSession close];	// unhook us
+    
+}
+
+- (void)sendDidFinishWithResponse:(NSDictionary *)response {
+    
+    
+    if ([self.shareDelegate respondsToSelector:@selector(sharerFinishedSending:)])
+		[self.shareDelegate performSelector:@selector(sharerFinishedSending:) withObject:self];
 }
 
 - (void)doSend {
 
     [self setQuiet:YES];
     
-    FBRequest *request = [[[FBRequest alloc] initWithSession:[FBSession activeSessionIfOpen]
+    
+    FBRequest *request = [[FBRequest alloc] initWithSession:[FBSession activeSession]
                                                    graphPath:@"me/friends"
-                                                  parameters:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                              @"id,name,username,first_name,last_name", @"fields",
-                                                              nil]
+                            parameters:@{@"fields":@"name,gender,picture.height(72).width(72).type(small)"}
                                                   HTTPMethod:nil];
                           
-FBRequestConnection* con = [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+    FBRequestConnection* con = [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+        
         [self FBUserInfoRequestHandlerCallback:connection result:result error:error];
-    }]
+        
+    }];
    
     [self.pendingConnections addObject:con];
     
 }
 
-
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 @end
