@@ -27,6 +27,7 @@
 #import "SHKSharer.h"
 #import "ContactsModel.h"
 #import "FlyerlyFacebookFriends.h"
+#import "FlyerlyTwitterFriends.h"
 
 @class LoadingView,FlyerlySingleton,SHKSharer;
 

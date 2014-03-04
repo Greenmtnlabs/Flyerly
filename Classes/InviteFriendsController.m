@@ -293,6 +293,18 @@ BOOL selectAll;
     [twitterButton setSelected:NO];
     [facebookButton setSelected:YES];
     
+    
+    [self showLoadingIndicator];
+    
+    contactsCount = 0;
+    invited = NO;
+    
+    selectAll = YES;
+    self.deviceContactItems = nil;
+    self.deviceContactItems = [[NSMutableArray alloc] init];
+    selectedIdentifierDictionary = nil;
+    selectedTab = FACEBOOK_TAB;
+    
     // Current Item For Sharing
     SHKItem *item = [[SHKItem alloc] init];
 	item.shareType = SHKShareTypeUserInfo;
@@ -528,6 +540,20 @@ int totalCount = 0;
     [contactsButton setSelected:NO];
     [twitterButton setSelected:YES];
     [facebookButton setSelected:NO];
+    
+    
+    // Current Item For Sharing
+    SHKItem *item = [[SHKItem alloc] init];
+	item.shareType = SHKShareTypeUserInfo;
+    
+    
+    iosSharer = [[ SHKSharer alloc] init];
+    
+    // Create controller and set share options
+    iosSharer = [FlyerlyTwitterFriends shareItem:item];
+    iosSharer.shareDelegate = self;
+    
+    return;
 
     
     if([InviteFriendsController connected]){

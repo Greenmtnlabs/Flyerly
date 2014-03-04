@@ -38,39 +38,6 @@
 }
 
 
--(void)FBUserInfoRequestHandlerCallback:(FBRequestConnection *)connection
-                                 result:(id) result
-                                  error:(NSError *)error
-{
-	if(![self.pendingConnections containsObject:connection]){
-		NSLog(@"SHKFacebook - received a callback for a connection not in the pending requests.");
-	}
-    
-	[self.pendingConnections removeObject:connection];
-    
-	if (error) {
-        
-        if ([self.shareDelegate respondsToSelector:@selector(sharer:failedWithError:shouldRelogin:)])
-            [self.shareDelegate sharer:self failedWithError:error shouldRelogin:NO];
-
-	}else{
-        
-		//[result  convertNSNullsToEmptyStrings];
-        self.friendsList = result;
-		[self sendDidFinishWithResponse:result];
-	}
-    
-	[FBSession.activeSession close];	// unhook us
-    
-}
-
-- (void)sendDidFinishWithResponse:(NSDictionary *)response {
-    
-    
-    if ([self.shareDelegate respondsToSelector:@selector(sharerFinishedSending:)])
-		[self.shareDelegate performSelector:@selector(sharerFinishedSending:) withObject:self];
-}
-
 - (void)doSend {
 
     [self setQuiet:YES];
@@ -91,5 +58,37 @@
     
 }
 
+-(void)FBUserInfoRequestHandlerCallback:(FBRequestConnection *)connection
+                                 result:(id) result
+                                  error:(NSError *)error
+{
+	if(![self.pendingConnections containsObject:connection]){
+		NSLog(@"SHKFacebook - received a callback for a connection not in the pending requests.");
+	}
+    
+	[self.pendingConnections removeObject:connection];
+    
+	if (error) {
+        
+        if ([self.shareDelegate respondsToSelector:@selector(sharer:failedWithError:shouldRelogin:)])
+            [self.shareDelegate sharer:self failedWithError:error shouldRelogin:NO];
+        
+	}else{
+        
+		//[result  convertNSNullsToEmptyStrings];
+        self.friendsList = result;
+		[self sendDidFinishWithResponse:result];
+	}
+    
+	[FBSession.activeSession close];	// unhook us
+    
+}
+
+- (void)sendDidFinishWithResponse:(NSDictionary *)response {
+    
+    
+    if ([self.shareDelegate respondsToSelector:@selector(sharerFinishedSending:)])
+		[self.shareDelegate performSelector:@selector(sharerFinishedSending:) withObject:self];
+}
 
 @end
