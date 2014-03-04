@@ -10,7 +10,7 @@
 			<key>Message</key>
 			<string>target.setDeviceOrientation("1")</string>
 			<key>Timestamp</key>
-			<date>2014-02-25T12:07:50Z</date>
+			<date>2014-03-04T11:44:03Z</date>
 			<key>Type</key>
 			<integer>0</integer>
 		</dict>
@@ -20,7 +20,7 @@
 			<key>Message</key>
 			<string>Found anchor for screen 'Welcome'</string>
 			<key>Timestamp</key>
-			<date>2014-02-25T12:07:50Z</date>
+			<date>2014-03-04T11:44:06Z</date>
 			<key>Type</key>
 			<integer>1</integer>
 		</dict>
@@ -30,7 +30,7 @@
 			<key>Message</key>
 			<string>target.frontMostApp().elements()[0].elements()[2].tap()</string>
 			<key>Timestamp</key>
-			<date>2014-02-25T12:07:50Z</date>
+			<date>2014-03-04T11:44:06Z</date>
 			<key>Type</key>
 			<integer>0</integer>
 		</dict>
@@ -40,7 +40,7 @@
 			<key>Message</key>
 			<string>Found anchor for screen 'SignIn'</string>
 			<key>Timestamp</key>
-			<date>2014-02-25T12:07:51Z</date>
+			<date>2014-03-04T11:44:07Z</date>
 			<key>Type</key>
 			<integer>1</integer>
 		</dict>
@@ -50,7 +50,7 @@
 			<key>Message</key>
 			<string>target.frontMostApp().elements()[0].elements()[8].tap()</string>
 			<key>Timestamp</key>
-			<date>2014-02-25T12:07:51Z</date>
+			<date>2014-03-04T11:44:07Z</date>
 			<key>Type</key>
 			<integer>0</integer>
 		</dict>
@@ -60,7 +60,7 @@
 			<key>Message</key>
 			<string>target.frontMostApp().elements()[0].elements()[4].tap()</string>
 			<key>Timestamp</key>
-			<date>2014-02-25T12:07:52Z</date>
+			<date>2014-03-04T11:44:08Z</date>
 			<key>Type</key>
 			<integer>0</integer>
 		</dict>
@@ -70,7 +70,7 @@
 			<key>Message</key>
 			<string>target.frontMostApp().keyboard().typeString("riksof.yahoo")</string>
 			<key>Timestamp</key>
-			<date>2014-02-25T12:07:53Z</date>
+			<date>2014-03-04T11:44:09Z</date>
 			<key>Type</key>
 			<integer>0</integer>
 		</dict>
@@ -80,7 +80,7 @@
 			<key>Message</key>
 			<string>target.frontMostApp().elements()[0].elements()[6].tap()</string>
 			<key>Timestamp</key>
-			<date>2014-02-25T12:07:55Z</date>
+			<date>2014-03-04T11:44:10Z</date>
 			<key>Type</key>
 			<integer>0</integer>
 		</dict>
@@ -90,7 +90,7 @@
 			<key>Message</key>
 			<string>target.frontMostApp().keyboard().typeString("riksof123")</string>
 			<key>Timestamp</key>
-			<date>2014-02-25T12:07:55Z</date>
+			<date>2014-03-04T11:44:11Z</date>
 			<key>Type</key>
 			<integer>0</integer>
 		</dict>
@@ -100,7 +100,7 @@
 			<key>Message</key>
 			<string>target.frontMostApp().elements()[0].elements()[7].tap()</string>
 			<key>Timestamp</key>
-			<date>2014-02-25T12:07:56Z</date>
+			<date>2014-03-04T11:44:12Z</date>
 			<key>Type</key>
 			<integer>0</integer>
 		</dict>
@@ -110,7 +110,7 @@
 			<key>Message</key>
 			<string>Found anchor for screen 'Home'</string>
 			<key>Timestamp</key>
-			<date>2014-02-25T12:07:58Z</date>
+			<date>2014-03-04T11:44:14Z</date>
 			<key>Type</key>
 			<integer>1</integer>
 		</dict>
@@ -120,7 +120,7 @@
 			<key>Message</key>
 			<string>target.frontMostApp().elements()[0].elements()[19].tap()</string>
 			<key>Timestamp</key>
-			<date>2014-02-25T12:07:58Z</date>
+			<date>2014-03-04T11:44:14Z</date>
 			<key>Type</key>
 			<integer>0</integer>
 		</dict>
@@ -130,7 +130,7 @@
 			<key>Message</key>
 			<string>Found anchor for screen 'Flyer'</string>
 			<key>Timestamp</key>
-			<date>2014-02-25T12:08:00Z</date>
+			<date>2014-03-04T11:44:16Z</date>
 			<key>Type</key>
 			<integer>1</integer>
 		</dict>
@@ -140,7 +140,7 @@
 			<key>Message</key>
 			<string>target.frontMostApp().elements()[0].elements()[19].tap()</string>
 			<key>Timestamp</key>
-			<date>2014-02-25T12:08:00Z</date>
+			<date>2014-03-04T11:44:16Z</date>
 			<key>Type</key>
 			<integer>0</integer>
 		</dict>
@@ -150,7 +150,7 @@
 			<key>Message</key>
 			<string>target.frontMostApp().mainWindow().scrollViews()[0].buttons()[3].tap()</string>
 			<key>Timestamp</key>
-			<date>2014-02-25T12:08:02Z</date>
+			<date>2014-03-04T11:44:18Z</date>
 			<key>Type</key>
 			<integer>0</integer>
 		</dict>
@@ -160,7 +160,7 @@
 			<key>Message</key>
 			<string>target.frontMostApp().mainWindow().navigationBars()[0].buttons()[3].tap()</string>
 			<key>Timestamp</key>
-			<date>2014-02-25T12:08:03Z</date>
+			<date>2014-03-04T11:44:19Z</date>
 			<key>Type</key>
 			<integer>0</integer>
 		</dict>
@@ -170,7 +170,7 @@
 			<key>Message</key>
 			<string>target.frontMostApp().elements()[0].elements()[20].tap()</string>
 			<key>Timestamp</key>
-			<date>2014-02-25T12:08:04Z</date>
+			<date>2014-03-04T11:44:20Z</date>
 			<key>Type</key>
 			<integer>0</integer>
 		</dict>
@@ -180,7 +180,7 @@
 			<key>Message</key>
 			<string>target.frontMostApp().mainWindow().scrollViews()[0].buttons()[4].tap()</string>
 			<key>Timestamp</key>
-			<date>2014-02-25T12:08:05Z</date>
+			<date>2014-03-04T11:44:21Z</date>
 			<key>Type</key>
 			<integer>0</integer>
 		</dict>
@@ -190,7 +190,7 @@
 			<key>Message</key>
 			<string>target.frontMostApp().mainWindow().navigationBars()[0].buttons()[3].tap()</string>
 			<key>Timestamp</key>
-			<date>2014-02-25T12:08:06Z</date>
+			<date>2014-03-04T11:44:22Z</date>
 			<key>Type</key>
 			<integer>0</integer>
 		</dict>
@@ -200,7 +200,7 @@
 			<key>Message</key>
 			<string>Screenshot of screen 'flyer' taken with orientation 'Portrait'</string>
 			<key>Timestamp</key>
-			<date>2014-02-25T12:08:06Z</date>
+			<date>2014-03-04T11:44:23Z</date>
 			<key>Type</key>
 			<integer>1</integer>
 		</dict>
@@ -210,7 +210,7 @@
 			<key>Message</key>
 			<string>target.captureRectWithName("{origin:{x:0.00,y:0.00}, size:{height:568.00,width:320.00}}", "01_flyer")</string>
 			<key>Timestamp</key>
-			<date>2014-02-25T12:08:06Z</date>
+			<date>2014-03-04T11:44:23Z</date>
 			<key>Type</key>
 			<integer>0</integer>
 		</dict>
@@ -220,9 +220,9 @@
 			<key>Message</key>
 			<string>01_flyer</string>
 			<key>Screenshot</key>
-			<string>87951121-41F4-43D5-B6D2-79E6516F50AA</string>
+			<string>9FAF8083-04B8-4250-B2F9-5665B3406512</string>
 			<key>Timestamp</key>
-			<date>2014-02-25T12:08:06Z</date>
+			<date>2014-03-04T11:44:23Z</date>
 			<key>Type</key>
 			<integer>8</integer>
 		</dict>
@@ -232,7 +232,7 @@
 			<key>Message</key>
 			<string>target.frontMostApp().mainWindow().scrollViews()[0].buttons()[0].tap()</string>
 			<key>Timestamp</key>
-			<date>2014-02-25T12:08:06Z</date>
+			<date>2014-03-04T11:44:24Z</date>
 			<key>Type</key>
 			<integer>0</integer>
 		</dict>
@@ -242,7 +242,7 @@
 			<key>Message</key>
 			<string>target.frontMostApp().mainWindow().navigationBars()[0].buttons()[3].tap()</string>
 			<key>Timestamp</key>
-			<date>2014-02-25T12:08:08Z</date>
+			<date>2014-03-04T11:44:25Z</date>
 			<key>Type</key>
 			<integer>0</integer>
 		</dict>
@@ -252,7 +252,7 @@
 			<key>Message</key>
 			<string>Screenshot of screen 'flyer' taken with orientation 'Portrait'</string>
 			<key>Timestamp</key>
-			<date>2014-02-25T12:08:09Z</date>
+			<date>2014-03-04T11:44:26Z</date>
 			<key>Type</key>
 			<integer>1</integer>
 		</dict>
@@ -262,7 +262,7 @@
 			<key>Message</key>
 			<string>target.captureRectWithName("{origin:{x:0.00,y:0.00}, size:{height:568.00,width:320.00}}", "02_flyer")</string>
 			<key>Timestamp</key>
-			<date>2014-02-25T12:08:09Z</date>
+			<date>2014-03-04T11:44:26Z</date>
 			<key>Type</key>
 			<integer>0</integer>
 		</dict>
@@ -272,9 +272,9 @@
 			<key>Message</key>
 			<string>02_flyer</string>
 			<key>Screenshot</key>
-			<string>C4166412-8AC7-44CE-863A-8AE231D78EFA</string>
+			<string>1C5B6D4F-76D4-47F9-B71B-2AAD6297481E</string>
 			<key>Timestamp</key>
-			<date>2014-02-25T12:08:09Z</date>
+			<date>2014-03-04T11:44:27Z</date>
 			<key>Type</key>
 			<integer>8</integer>
 		</dict>
@@ -284,7 +284,7 @@
 			<key>Message</key>
 			<string>target.frontMostApp().mainWindow().scrollViews()[0].buttons()[0].tap()</string>
 			<key>Timestamp</key>
-			<date>2014-02-25T12:08:09Z</date>
+			<date>2014-03-04T11:44:27Z</date>
 			<key>Type</key>
 			<integer>0</integer>
 		</dict>
@@ -294,7 +294,7 @@
 			<key>Message</key>
 			<string>Screenshot of screen 'flyer' taken with orientation 'Portrait'</string>
 			<key>Timestamp</key>
-			<date>2014-02-25T12:08:09Z</date>
+			<date>2014-03-04T11:44:27Z</date>
 			<key>Type</key>
 			<integer>1</integer>
 		</dict>
@@ -304,7 +304,7 @@
 			<key>Message</key>
 			<string>target.captureRectWithName("{origin:{x:0.00,y:0.00}, size:{height:568.00,width:320.00}}", "03_flyer")</string>
 			<key>Timestamp</key>
-			<date>2014-02-25T12:08:09Z</date>
+			<date>2014-03-04T11:44:27Z</date>
 			<key>Type</key>
 			<integer>0</integer>
 		</dict>
@@ -314,9 +314,9 @@
 			<key>Message</key>
 			<string>03_flyer</string>
 			<key>Screenshot</key>
-			<string>3D30C614-839F-4A3B-9E53-806B9F1C6167</string>
+			<string>D61AEB7E-015F-408D-AEDC-A3C192882B0F</string>
 			<key>Timestamp</key>
-			<date>2014-02-25T12:08:09Z</date>
+			<date>2014-03-04T11:44:27Z</date>
 			<key>Type</key>
 			<integer>8</integer>
 		</dict>
@@ -326,7 +326,7 @@
 			<key>Message</key>
 			<string>target.frontMostApp().mainWindow().navigationBars()[0].buttons()[3].tap()</string>
 			<key>Timestamp</key>
-			<date>2014-02-25T12:08:10Z</date>
+			<date>2014-03-04T11:44:28Z</date>
 			<key>Type</key>
 			<integer>0</integer>
 		</dict>
@@ -336,7 +336,7 @@
 			<key>Message</key>
 			<string>target.frontMostApp().mainWindow().navigationBars()[0].buttons()[3].tap()</string>
 			<key>Timestamp</key>
-			<date>2014-02-25T12:08:10Z</date>
+			<date>2014-03-04T11:44:29Z</date>
 			<key>Type</key>
 			<integer>0</integer>
 		</dict>
@@ -346,7 +346,7 @@
 			<key>Message</key>
 			<string>target.frontMostApp().elements()[0].elements()[6].tap()</string>
 			<key>Timestamp</key>
-			<date>2014-02-25T12:08:11Z</date>
+			<date>2014-03-04T11:44:30Z</date>
 			<key>Type</key>
 			<integer>0</integer>
 		</dict>
@@ -356,7 +356,7 @@
 			<key>Message</key>
 			<string>target.frontMostApp().elements()[0].elements()[22].elements()[4].tap()</string>
 			<key>Timestamp</key>
-			<date>2014-02-25T12:08:13Z</date>
+			<date>2014-03-04T11:44:32Z</date>
 			<key>Type</key>
 			<integer>0</integer>
 		</dict>
@@ -366,7 +366,7 @@
 			<key>Message</key>
 			<string>target.frontMostApp().elements()[0].elements()[7].tap()</string>
 			<key>Timestamp</key>
-			<date>2014-02-25T12:08:28Z</date>
+			<date>2014-03-04T11:44:47Z</date>
 			<key>Type</key>
 			<integer>0</integer>
 		</dict>
@@ -376,7 +376,7 @@
 			<key>Message</key>
 			<string>target.frontMostApp().elements()[0].elements()[22].elements()[3].tap()</string>
 			<key>Timestamp</key>
-			<date>2014-02-25T12:08:29Z</date>
+			<date>2014-03-04T11:44:48Z</date>
 			<key>Type</key>
 			<integer>0</integer>
 		</dict>
@@ -386,7 +386,7 @@
 			<key>Message</key>
 			<string>target.frontMostApp().elements()[0].elements()[8].tap()</string>
 			<key>Timestamp</key>
-			<date>2014-02-25T12:08:30Z</date>
+			<date>2014-03-04T11:44:49Z</date>
 			<key>Type</key>
 			<integer>0</integer>
 		</dict>
@@ -396,7 +396,7 @@
 			<key>Message</key>
 			<string>target.frontMostApp().elements()[0].elements()[23].elements()[1].tap()</string>
 			<key>Timestamp</key>
-			<date>2014-02-25T12:08:31Z</date>
+			<date>2014-03-04T11:44:50Z</date>
 			<key>Type</key>
 			<integer>0</integer>
 		</dict>
@@ -406,7 +406,7 @@
 			<key>Message</key>
 			<string>target.frontMostApp().elements()[0].elements()[9].tap()</string>
 			<key>Timestamp</key>
-			<date>2014-02-25T12:08:32Z</date>
+			<date>2014-03-04T11:44:51Z</date>
 			<key>Type</key>
 			<integer>0</integer>
 		</dict>
@@ -416,7 +416,7 @@
 			<key>Message</key>
 			<string>target.frontMostApp().elements()[0].elements()[26].tap()</string>
 			<key>Timestamp</key>
-			<date>2014-02-25T12:08:33Z</date>
+			<date>2014-03-04T11:44:52Z</date>
 			<key>Type</key>
 			<integer>0</integer>
 		</dict>
@@ -426,7 +426,7 @@
 			<key>Message</key>
 			<string>target.frontMostApp().elements()[0].elements()[10].tap()</string>
 			<key>Timestamp</key>
-			<date>2014-02-25T12:08:34Z</date>
+			<date>2014-03-04T11:44:54Z</date>
 			<key>Type</key>
 			<integer>0</integer>
 		</dict>
@@ -436,7 +436,7 @@
 			<key>Message</key>
 			<string>target.frontMostApp().elements()[0].elements()[24].elements()[3].tap()</string>
 			<key>Timestamp</key>
-			<date>2014-02-25T12:08:35Z</date>
+			<date>2014-03-04T11:44:54Z</date>
 			<key>Type</key>
 			<integer>0</integer>
 		</dict>
@@ -446,7 +446,7 @@
 			<key>Message</key>
 			<string>target.frontMostApp().elements()[0].elements()[12].tap()</string>
 			<key>Timestamp</key>
-			<date>2014-02-25T12:08:36Z</date>
+			<date>2014-03-04T11:44:55Z</date>
 			<key>Type</key>
 			<integer>0</integer>
 		</dict>
@@ -456,7 +456,7 @@
 			<key>Message</key>
 			<string>target.frontMostApp().elements()[0].elements()[0].elements()[3].tap()</string>
 			<key>Timestamp</key>
-			<date>2014-02-25T12:08:38Z</date>
+			<date>2014-03-04T11:44:57Z</date>
 			<key>Type</key>
 			<integer>0</integer>
 		</dict>
@@ -466,7 +466,7 @@
 			<key>Message</key>
 			<string>target.frontMostApp().elements()[0].elements()[13].tap()</string>
 			<key>Timestamp</key>
-			<date>2014-02-25T12:08:39Z</date>
+			<date>2014-03-04T11:44:58Z</date>
 			<key>Type</key>
 			<integer>0</integer>
 		</dict>
@@ -476,7 +476,7 @@
 			<key>Message</key>
 			<string>target.frontMostApp().mainWindow().navigationBars()[0].buttons()[0].tap()</string>
 			<key>Timestamp</key>
-			<date>2014-02-25T12:08:39Z</date>
+			<date>2014-03-04T11:44:58Z</date>
 			<key>Type</key>
 			<integer>0</integer>
 		</dict>
@@ -486,9 +486,9 @@
 			<key>Message</key>
 			<string>UIAWindow: rect:{{0, 0}, {320, 568}}</string>
 			<key>Screenshot</key>
-			<string>45A2DCB3-2A82-4C5F-BB19-0D732096DC65</string>
+			<string>012EAAE9-D045-43AF-91FA-0066B0DD9EDA</string>
 			<key>Timestamp</key>
-			<date>2014-02-25T12:08:40Z</date>
+			<date>2014-03-04T11:45:00Z</date>
 			<key>Type</key>
 			<integer>0</integer>
 			<key>children</key>
@@ -497,11 +497,11 @@
 					<key>LogType</key>
 					<string>Debug</string>
 					<key>Message</key>
-					<string>UIANavigationBar: name:LauchView rect:{{0, 20}, {320, 44}}</string>
+					<string>UIANavigationBar: name:FlyerlyMainScreen rect:{{0, 20}, {320, 44}}</string>
 					<key>Screenshot</key>
-					<string>8654E72D-27D2-4CA2-8622-A405FF22C1B1</string>
+					<string>4F8E0A9D-F214-4899-95B6-7A2CF45CB6AD</string>
 					<key>Timestamp</key>
-					<date>2014-02-25T12:08:40Z</date>
+					<date>2014-03-04T11:45:00Z</date>
 					<key>Type</key>
 					<integer>0</integer>
 					<key>children</key>
@@ -512,9 +512,9 @@
 							<key>Message</key>
 							<string>UIAImage: rect:{{0, 0}, {320, 64}}</string>
 							<key>Screenshot</key>
-							<string>51462384-49B1-4F8F-8B58-9BB30CC099E9</string>
+							<string>A0C3E8A0-2CA1-4C95-9634-F575A271EFC7</string>
 							<key>Timestamp</key>
-							<date>2014-02-25T12:08:40Z</date>
+							<date>2014-03-04T11:45:00Z</date>
 							<key>Type</key>
 							<integer>0</integer>
 							<key>children</key>
@@ -525,9 +525,9 @@
 									<key>Message</key>
 									<string>UIAImage: rect:{{0, 64}, {320, 0}}</string>
 									<key>Screenshot</key>
-									<string>E76735B4-7736-4356-B3DD-4B5D58ACD814</string>
+									<string>EBDE8E32-EEC6-4B30-BB7C-46C80E2712B3</string>
 									<key>Timestamp</key>
-									<date>2014-02-25T12:08:40Z</date>
+									<date>2014-03-04T11:45:00Z</date>
 									<key>Type</key>
 									<integer>0</integer>
 									<key>children</key>
@@ -539,11 +539,11 @@
 							<key>LogType</key>
 							<string>Debug</string>
 							<key>Message</key>
-							<string>UIAButton: name:back button rect:{{16, 21}, {45, 42}}</string>
+							<string>UIAButton: name:home button rect:{{16, 21}, {45, 42}}</string>
 							<key>Screenshot</key>
-							<string>BD7EE042-FA77-4FA5-9794-25CBC19F27BE</string>
+							<string>0F5F3D0F-E6F8-4F63-AC13-1562BCA2D561</string>
 							<key>Timestamp</key>
-							<date>2014-02-25T12:08:40Z</date>
+							<date>2014-03-04T11:45:00Z</date>
 							<key>Type</key>
 							<integer>0</integer>
 							<key>children</key>
@@ -554,9 +554,9 @@
 									<key>Message</key>
 									<string>UIAImage: rect:{{-12, -8}, {100, 100}}</string>
 									<key>Screenshot</key>
-									<string>33CD7E23-2564-46D1-B924-3DDB6BB78A65</string>
+									<string>F6AA250F-2A89-43F2-8DB5-CD1CE4BA0B67</string>
 									<key>Timestamp</key>
-									<date>2014-02-25T12:08:40Z</date>
+									<date>2014-03-04T11:45:00Z</date>
 									<key>Type</key>
 									<integer>0</integer>
 									<key>children</key>
@@ -566,11 +566,11 @@
 									<key>LogType</key>
 									<string>Debug</string>
 									<key>Message</key>
-									<string>UIAImage: name:back_button rect:{{16, 21}, {45, 42}}</string>
+									<string>UIAImage: name:home_button rect:{{16, 21}, {45, 42}}</string>
 									<key>Screenshot</key>
-									<string>2BAA81FE-0075-4D22-BD70-C5B2BC8AC04D</string>
+									<string>4BA6736E-81E1-4FAE-9EA4-219ACF8414B1</string>
 									<key>Timestamp</key>
-									<date>2014-02-25T12:08:40Z</date>
+									<date>2014-03-04T11:45:00Z</date>
 									<key>Type</key>
 									<integer>0</integer>
 									<key>children</key>
@@ -584,9 +584,9 @@
 							<key>Message</key>
 							<string>UIAButton: name:help icon rect:{{69, 21}, {45, 42}}</string>
 							<key>Screenshot</key>
-							<string>B1A22932-02D9-4D17-ABCB-A473C1945733</string>
+							<string>5923E3C0-ABF7-4E6A-9FE8-5AE5C0FF95D6</string>
 							<key>Timestamp</key>
-							<date>2014-02-25T12:08:40Z</date>
+							<date>2014-03-04T11:45:00Z</date>
 							<key>Type</key>
 							<integer>0</integer>
 							<key>children</key>
@@ -597,9 +597,9 @@
 									<key>Message</key>
 									<string>UIAImage: rect:{{42, -8}, {100, 100}}</string>
 									<key>Screenshot</key>
-									<string>46C823AD-F489-40AF-8219-94187AEB97D6</string>
+									<string>53133324-EB93-4D3C-9FF8-8192C58F05DD</string>
 									<key>Timestamp</key>
-									<date>2014-02-25T12:08:40Z</date>
+									<date>2014-03-04T11:45:00Z</date>
 									<key>Type</key>
 									<integer>0</integer>
 									<key>children</key>
@@ -611,9 +611,9 @@
 									<key>Message</key>
 									<string>UIAImage: name:help_icon rect:{{69, 21}, {45, 42}}</string>
 									<key>Screenshot</key>
-									<string>19403B3A-0968-4033-97DB-41235434BD92</string>
+									<string>DC700796-6CCD-4B7D-B8DD-0E46630F87DD</string>
 									<key>Timestamp</key>
-									<date>2014-02-25T12:08:40Z</date>
+									<date>2014-03-04T11:45:00Z</date>
 									<key>Type</key>
 									<integer>0</integer>
 									<key>children</key>
@@ -627,9 +627,9 @@
 							<key>Message</key>
 							<string>UIAButton: name:Back rect:{{98, 21}, {45, 42}}</string>
 							<key>Screenshot</key>
-							<string>3480CC97-BC42-40E4-A14F-797903E196BC</string>
+							<string>84C42E4E-E5A5-4A14-A54D-A94D96F93B38</string>
 							<key>Timestamp</key>
-							<date>2014-02-25T12:08:40Z</date>
+							<date>2014-03-04T11:45:00Z</date>
 							<key>Type</key>
 							<integer>0</integer>
 							<key>children</key>
@@ -640,9 +640,9 @@
 									<key>Message</key>
 									<string>UIAStaticText: name:Back value:Back rect:{{116, 31}, {26, 22}}</string>
 									<key>Screenshot</key>
-									<string>D0A86446-6EC5-4F03-9FF5-7F82E29F1299</string>
+									<string>A85766BD-14FC-4602-892B-D4B4A18CD5E4</string>
 									<key>Timestamp</key>
-									<date>2014-02-25T12:08:40Z</date>
+									<date>2014-03-04T11:45:00Z</date>
 									<key>Type</key>
 									<integer>0</integer>
 									<key>children</key>
@@ -656,9 +656,9 @@
 							<key>Message</key>
 							<string>UIAImage: name:flyerlylogo rect:{{116, 23}, {87, 38}}</string>
 							<key>Screenshot</key>
-							<string>CA90BB6E-7862-45A6-AD20-C5E215329291</string>
+							<string>3FDBBF0D-FCA2-4A8A-854E-15C6E5E0230E</string>
 							<key>Timestamp</key>
-							<date>2014-02-25T12:08:40Z</date>
+							<date>2014-03-04T11:45:00Z</date>
 							<key>Type</key>
 							<integer>0</integer>
 							<key>children</key>
@@ -670,9 +670,9 @@
 							<key>Message</key>
 							<string>UIAButton: name:undo rect:{{206, 21}, {45, 42}}</string>
 							<key>Screenshot</key>
-							<string>726DA1AA-3608-47C8-9F20-F8E3335D3262</string>
+							<string>16CDC8EF-7D96-4509-B03F-A97E5613C32C</string>
 							<key>Timestamp</key>
-							<date>2014-02-25T12:08:40Z</date>
+							<date>2014-03-04T11:45:00Z</date>
 							<key>Type</key>
 							<integer>0</integer>
 							<key>children</key>
@@ -683,9 +683,9 @@
 									<key>Message</key>
 									<string>UIAImage: rect:{{178, -8}, {100, 100}}</string>
 									<key>Screenshot</key>
-									<string>A9B18093-AA03-4EEC-8504-D9B0CA1FF696</string>
+									<string>3D9050A4-8E6C-4229-82CD-8CE4341BA7CB</string>
 									<key>Timestamp</key>
-									<date>2014-02-25T12:08:40Z</date>
+									<date>2014-03-04T11:45:00Z</date>
 									<key>Type</key>
 									<integer>0</integer>
 									<key>children</key>
@@ -697,7 +697,7 @@
 									<key>Message</key>
 									<string>UIAStaticText: rect:{{206, 21}, {0, 0}}</string>
 									<key>Timestamp</key>
-									<date>2014-02-25T12:08:40Z</date>
+									<date>2014-03-04T11:45:00Z</date>
 									<key>Type</key>
 									<integer>0</integer>
 									<key>children</key>
@@ -709,9 +709,9 @@
 									<key>Message</key>
 									<string>UIAImage: name:undo rect:{{206, 21}, {45, 42}}</string>
 									<key>Screenshot</key>
-									<string>47529F86-A555-40DC-A7A0-023D23844104</string>
+									<string>2ED85E4C-7502-42E3-A752-CBFB240A97DB</string>
 									<key>Timestamp</key>
-									<date>2014-02-25T12:08:40Z</date>
+									<date>2014-03-04T11:45:00Z</date>
 									<key>Type</key>
 									<integer>0</integer>
 									<key>children</key>
@@ -725,9 +725,9 @@
 							<key>Message</key>
 							<string>UIAButton: name:share button selected rect:{{259, 21}, {45, 42}}</string>
 							<key>Screenshot</key>
-							<string>98E1EC49-458D-4F4D-A093-578B4ECF76EB</string>
+							<string>B9C69340-E9F3-4037-B6CD-665D0C350A9A</string>
 							<key>Timestamp</key>
-							<date>2014-02-25T12:08:40Z</date>
+							<date>2014-03-04T11:45:00Z</date>
 							<key>Type</key>
 							<integer>0</integer>
 							<key>children</key>
@@ -738,9 +738,9 @@
 									<key>Message</key>
 									<string>UIAImage: rect:{{232, -8}, {100, 100}}</string>
 									<key>Screenshot</key>
-									<string>DA2ACA17-E6B8-47EB-A9B7-B6B48B8E0058</string>
+									<string>7F052950-5A12-4874-9B40-195F7425FFCA</string>
 									<key>Timestamp</key>
-									<date>2014-02-25T12:08:40Z</date>
+									<date>2014-03-04T11:45:00Z</date>
 									<key>Type</key>
 									<integer>0</integer>
 									<key>children</key>
@@ -752,7 +752,7 @@
 									<key>Message</key>
 									<string>UIAStaticText: rect:{{259, 21}, {0, 0}}</string>
 									<key>Timestamp</key>
-									<date>2014-02-25T12:08:40Z</date>
+									<date>2014-03-04T11:45:00Z</date>
 									<key>Type</key>
 									<integer>0</integer>
 									<key>children</key>
@@ -764,9 +764,9 @@
 									<key>Message</key>
 									<string>UIAImage: name:share_button_selected rect:{{259, 21}, {45, 42}}</string>
 									<key>Screenshot</key>
-									<string>A3ED3965-ED24-4E55-BC87-79AC738F56CB</string>
+									<string>10498EEB-5BC4-4C25-AB34-BD94E07F5235</string>
 									<key>Timestamp</key>
-									<date>2014-02-25T12:08:40Z</date>
+									<date>2014-03-04T11:45:00Z</date>
 									<key>Type</key>
 									<integer>0</integer>
 									<key>children</key>
@@ -778,9 +778,9 @@
 							<key>LogType</key>
 							<string>Debug</string>
 							<key>Message</key>
-							<string>UIAStaticText: name:Flyer value:Flyer rect:{{320, 17}, {50, 50}}</string>
+							<string>UIAStaticText: name:Flyerly value:Flyerly rect:{{320, 17}, {60, 50}}</string>
 							<key>Timestamp</key>
-							<date>2014-02-25T12:08:40Z</date>
+							<date>2014-03-04T11:45:00Z</date>
 							<key>Type</key>
 							<integer>0</integer>
 							<key>children</key>
@@ -792,9 +792,9 @@
 							<key>Message</key>
 							<string>UIAButton: name:UINavigationBarBackIndicatorDefault.png rect:{{8, 32}, {12, 20}}</string>
 							<key>Screenshot</key>
-							<string>337E7E58-3AF8-4CFA-BC97-17F65A900A4F</string>
+							<string>68588398-8B2C-4C96-9EB6-108AE776052D</string>
 							<key>Timestamp</key>
-							<date>2014-02-25T12:08:40Z</date>
+							<date>2014-03-04T11:45:00Z</date>
 							<key>Type</key>
 							<integer>0</integer>
 							<key>children</key>
@@ -808,9 +808,9 @@
 					<key>Message</key>
 					<string>UIAImage: name:Zmain_screenbg-568h.png rect:{{0, 0}, {320, 519}}</string>
 					<key>Screenshot</key>
-					<string>ADA21471-EF1D-4FAC-8014-93334CF319D5</string>
+					<string>686B059B-535D-465C-B33D-BB4018077BFF</string>
 					<key>Timestamp</key>
-					<date>2014-02-25T12:08:40Z</date>
+					<date>2014-03-04T11:45:00Z</date>
 					<key>Type</key>
 					<integer>0</integer>
 					<key>children</key>
@@ -822,9 +822,9 @@
 					<key>Message</key>
 					<string>UIAImage: name:three_buttons.png rect:{{0, 68}, {320, 61}}</string>
 					<key>Screenshot</key>
-					<string>04526F32-08A9-4BF6-A99D-43B108D6EEC8</string>
+					<string>DA8EC2B3-35FF-499F-8138-3A9723C0CFED</string>
 					<key>Timestamp</key>
-					<date>2014-02-25T12:08:40Z</date>
+					<date>2014-03-04T11:45:00Z</date>
 					<key>Type</key>
 					<integer>0</integer>
 					<key>children</key>
@@ -836,9 +836,9 @@
 					<key>Message</key>
 					<string>UIAButton: name:SavedFlyers rect:{{4, 68}, {106, 60}}</string>
 					<key>Screenshot</key>
-					<string>FC77A949-77C4-438B-B7E0-A7FECB2DBDE4</string>
+					<string>2BB4FA79-C65F-44B4-A913-31D5265006B6</string>
 					<key>Timestamp</key>
-					<date>2014-02-25T12:08:40Z</date>
+					<date>2014-03-04T11:45:00Z</date>
 					<key>Type</key>
 					<integer>0</integer>
 					<key>children</key>
@@ -850,9 +850,9 @@
 					<key>Message</key>
 					<string>UIAButton: name:CreateFlyer rect:{{109, 69}, {103, 60}}</string>
 					<key>Screenshot</key>
-					<string>7808F671-97E1-4EEE-9372-2992E57940DA</string>
+					<string>D1C02F35-BB1A-4C35-BE20-3C6FA3693EA0</string>
 					<key>Timestamp</key>
-					<date>2014-02-25T12:08:40Z</date>
+					<date>2014-03-04T11:45:00Z</date>
 					<key>Type</key>
 					<integer>0</integer>
 					<key>children</key>
@@ -864,9 +864,9 @@
 					<key>Message</key>
 					<string>UIAButton: name:Invite rect:{{212, 68}, {104, 60}}</string>
 					<key>Screenshot</key>
-					<string>78A614BB-A0BC-4B81-875F-124E4A070AD2</string>
+					<string>257CB321-1B75-4E47-A869-EFCC2F0FA21F</string>
 					<key>Timestamp</key>
-					<date>2014-02-25T12:08:40Z</date>
+					<date>2014-03-04T11:45:00Z</date>
 					<key>Type</key>
 					<integer>0</integer>
 					<key>children</key>
@@ -878,9 +878,9 @@
 					<key>Message</key>
 					<string>UIAStaticText: name:Saved value:Saved rect:{{36, 100}, {51, 21}}</string>
 					<key>Screenshot</key>
-					<string>0143D775-7534-4245-954E-09B318A55FC2</string>
+					<string>08C09B7B-21F5-458D-944F-ED3BCC574ADC</string>
 					<key>Timestamp</key>
-					<date>2014-02-25T12:08:40Z</date>
+					<date>2014-03-04T11:45:00Z</date>
 					<key>Type</key>
 					<integer>0</integer>
 					<key>children</key>
@@ -892,9 +892,9 @@
 					<key>Message</key>
 					<string>UIAStaticText: name:Create value:Create rect:{{138, 100}, {59, 21}}</string>
 					<key>Screenshot</key>
-					<string>C765A5B2-60D1-4A73-91DC-E52F5A0AD183</string>
+					<string>7C508D83-FABF-40AF-B9C6-F8F222E63A89</string>
 					<key>Timestamp</key>
-					<date>2014-02-25T12:08:40Z</date>
+					<date>2014-03-04T11:45:00Z</date>
 					<key>Type</key>
 					<integer>0</integer>
 					<key>children</key>
@@ -906,9 +906,9 @@
 					<key>Message</key>
 					<string>UIAStaticText: name:Invite value:Invite rect:{{238, 100}, {51, 21}}</string>
 					<key>Screenshot</key>
-					<string>F9BA760D-C4DE-4464-9AAF-0A586B50334C</string>
+					<string>74BC5FC0-9725-4104-83E8-29264AA52EBF</string>
 					<key>Timestamp</key>
-					<date>2014-02-25T12:08:40Z</date>
+					<date>2014-03-04T11:45:00Z</date>
 					<key>Type</key>
 					<integer>0</integer>
 					<key>children</key>
@@ -920,9 +920,9 @@
 					<key>Message</key>
 					<string>UIAButton: name:FirstFlyer rect:{{15, 170}, {136, 136}}</string>
 					<key>Screenshot</key>
-					<string>D64AA09D-E1AA-4BE9-8473-22138F1105B2</string>
+					<string>C99410D4-DA72-4697-9D35-7B43E33FB039</string>
 					<key>Timestamp</key>
-					<date>2014-02-25T12:08:40Z</date>
+					<date>2014-03-04T11:45:00Z</date>
 					<key>Type</key>
 					<integer>0</integer>
 					<key>children</key>
@@ -934,9 +934,9 @@
 					<key>Message</key>
 					<string>UIAImage: rect:{{15, 170}, {136, 136}}</string>
 					<key>Screenshot</key>
-					<string>D271BE52-4109-4E2A-912F-06DDFECC307D</string>
+					<string>4D1ADE81-7734-4750-8765-CF906DF84B24</string>
 					<key>Timestamp</key>
-					<date>2014-02-25T12:08:40Z</date>
+					<date>2014-03-04T11:45:00Z</date>
 					<key>Type</key>
 					<integer>0</integer>
 					<key>children</key>
@@ -948,9 +948,9 @@
 					<key>Message</key>
 					<string>UIAImage: rect:{{168, 170}, {136, 136}}</string>
 					<key>Screenshot</key>
-					<string>E6ECA13F-B844-4DBB-A9A4-14DA22DDAF52</string>
+					<string>EF9DDF89-C08D-40C9-B736-3BC5D56451CC</string>
 					<key>Timestamp</key>
-					<date>2014-02-25T12:08:40Z</date>
+					<date>2014-03-04T11:45:00Z</date>
 					<key>Type</key>
 					<integer>0</integer>
 					<key>children</key>
@@ -962,9 +962,9 @@
 					<key>Message</key>
 					<string>UIAButton: name:SecondFlyer rect:{{169, 170}, {136, 136}}</string>
 					<key>Screenshot</key>
-					<string>1A29567A-4D1A-4A29-B89F-DEB1C4685A94</string>
+					<string>C9A6AA31-BFE5-46B5-A15C-5415794E7FEA</string>
 					<key>Timestamp</key>
-					<date>2014-02-25T12:08:40Z</date>
+					<date>2014-03-04T11:45:00Z</date>
 					<key>Type</key>
 					<integer>0</integer>
 					<key>children</key>
@@ -976,9 +976,9 @@
 					<key>Message</key>
 					<string>UIAImage: name:likealertbg.png rect:{{52, 260}, {215, 110}}</string>
 					<key>Screenshot</key>
-					<string>864E2CA7-4961-432D-B6FD-269352F595B4</string>
+					<string>148B6385-A884-41E5-8B99-6FFDE7B8ECD4</string>
 					<key>Timestamp</key>
-					<date>2014-02-25T12:08:40Z</date>
+					<date>2014-03-04T11:45:00Z</date>
 					<key>Type</key>
 					<integer>0</integer>
 					<key>children</key>
@@ -990,9 +990,9 @@
 					<key>Message</key>
 					<string>UIAStaticText: name:                 flyerly page on facebook to keep up with the latest on the app. value:                 flyerly page on facebook to keep up with the latest on the app. rect:{{61, 260}, {198, 68}}</string>
 					<key>Screenshot</key>
-					<string>66B51480-E4C4-4030-8A25-7675A3A2F432</string>
+					<string>484AF0B0-ED4F-4E83-A257-096AABEB0D81</string>
 					<key>Timestamp</key>
-					<date>2014-02-25T12:08:40Z</date>
+					<date>2014-03-04T11:45:00Z</date>
 					<key>Type</key>
 					<integer>0</integer>
 					<key>children</key>
@@ -1004,9 +1004,9 @@
 					<key>Message</key>
 					<string>UIAElement: name:FacebookLikeInPopup rect:{{60, 276}, {46, 17}}</string>
 					<key>Screenshot</key>
-					<string>5C91FCE0-57D6-440D-857D-DFAD1DF1F9FA</string>
+					<string>A5B30D56-1B9A-4A0C-848F-4CFBA9528659</string>
 					<key>Timestamp</key>
-					<date>2014-02-25T12:08:40Z</date>
+					<date>2014-03-04T11:45:00Z</date>
 					<key>Type</key>
 					<integer>0</integer>
 					<key>children</key>
@@ -1018,9 +1018,9 @@
 					<key>Message</key>
 					<string>UIAButton: name:FacebookClose rect:{{132, 327}, {55, 25}}</string>
 					<key>Screenshot</key>
-					<string>48ED1533-879F-4163-A824-82E55AA1475F</string>
+					<string>B1DC8405-D1F0-4E7C-ACA1-9168BBCA1125</string>
 					<key>Timestamp</key>
-					<date>2014-02-25T12:08:40Z</date>
+					<date>2014-03-04T11:45:00Z</date>
 					<key>Type</key>
 					<integer>0</integer>
 					<key>children</key>
@@ -1031,9 +1031,9 @@
 							<key>Message</key>
 							<string>UIAImage: name:likealertclose.png rect:{{132, 327}, {55, 25}}</string>
 							<key>Screenshot</key>
-							<string>B0B26A52-A35C-4A6D-BC4D-B812FE7FDC95</string>
+							<string>A0C8C66E-E158-4051-8509-19E03FC62E7A</string>
 							<key>Timestamp</key>
-							<date>2014-02-25T12:08:40Z</date>
+							<date>2014-03-04T11:45:00Z</date>
 							<key>Type</key>
 							<integer>0</integer>
 							<key>children</key>
@@ -1047,9 +1047,9 @@
 					<key>Message</key>
 					<string>UIAButton: name:ThirdFlyer rect:{{15, 350}, {136, 136}}</string>
 					<key>Screenshot</key>
-					<string>878A592D-AAA3-46C6-B6CB-1B75CF43AE38</string>
+					<string>C1F409F4-6FD2-4FCA-9804-80938D41A044</string>
 					<key>Timestamp</key>
-					<date>2014-02-25T12:08:40Z</date>
+					<date>2014-03-04T11:45:00Z</date>
 					<key>Type</key>
 					<integer>0</integer>
 					<key>children</key>
@@ -1061,9 +1061,9 @@
 					<key>Message</key>
 					<string>UIAImage: rect:{{15, 350}, {136, 136}}</string>
 					<key>Screenshot</key>
-					<string>8E6DFC67-2812-4FD0-AE7E-B36FF62283A4</string>
+					<string>95A1D282-61E7-463D-A111-0A1C77672B67</string>
 					<key>Timestamp</key>
-					<date>2014-02-25T12:08:40Z</date>
+					<date>2014-03-04T11:45:00Z</date>
 					<key>Type</key>
 					<integer>0</integer>
 					<key>children</key>
@@ -1075,9 +1075,9 @@
 					<key>Message</key>
 					<string>UIAButton: name:FourthFlyer rect:{{169, 350}, {136, 136}}</string>
 					<key>Screenshot</key>
-					<string>79E7D5A2-A04E-477E-96B4-BD200B9661C3</string>
+					<string>4D835279-10FF-4E4A-B8DC-5FE9E1282D73</string>
 					<key>Timestamp</key>
-					<date>2014-02-25T12:08:40Z</date>
+					<date>2014-03-04T11:45:00Z</date>
 					<key>Type</key>
 					<integer>0</integer>
 					<key>children</key>
@@ -1089,9 +1089,9 @@
 					<key>Message</key>
 					<string>UIAImage: rect:{{169, 350}, {136, 136}}</string>
 					<key>Screenshot</key>
-					<string>1078C084-5551-43D4-9EDA-EDF1AC48202D</string>
+					<string>9D4C7F49-C81D-4790-81A6-3232F5D6D57E</string>
 					<key>Timestamp</key>
-					<date>2014-02-25T12:08:40Z</date>
+					<date>2014-03-04T11:45:00Z</date>
 					<key>Type</key>
 					<integer>0</integer>
 					<key>children</key>
@@ -1103,51 +1103,9 @@
 					<key>Message</key>
 					<string>UIAButton: name:Settings rect:{{125, 500}, {71, 69}}</string>
 					<key>Screenshot</key>
-					<string>FD3D888E-2FB1-4EE6-91D5-85EC37686DD6</string>
+					<string>89E5AF37-09E1-4106-91E9-7A5E5D335077</string>
 					<key>Timestamp</key>
-					<date>2014-02-25T12:08:40Z</date>
-					<key>Type</key>
-					<integer>0</integer>
-					<key>children</key>
-					<array/>
-				</dict>
-				<dict>
-					<key>LogType</key>
-					<string>Debug</string>
-					<key>Message</key>
-					<string>UIAButton: name:Facebook rect:{{0, 519}, {79, 49}}</string>
-					<key>Screenshot</key>
-					<string>C0C8AE89-2FD3-49AD-8EA6-C16C2641E868</string>
-					<key>Timestamp</key>
-					<date>2014-02-25T12:08:40Z</date>
-					<key>Type</key>
-					<integer>0</integer>
-					<key>children</key>
-					<array/>
-				</dict>
-				<dict>
-					<key>LogType</key>
-					<string>Debug</string>
-					<key>Message</key>
-					<string>UIAImage: name:settings_bg.png rect:{{77, 519}, {167, 49}}</string>
-					<key>Screenshot</key>
-					<string>FD6D5CD9-21CE-4E9F-8140-BC93991ABAE1</string>
-					<key>Timestamp</key>
-					<date>2014-02-25T12:08:40Z</date>
-					<key>Type</key>
-					<integer>0</integer>
-					<key>children</key>
-					<array/>
-				</dict>
-				<dict>
-					<key>LogType</key>
-					<string>Debug</string>
-					<key>Message</key>
-					<string>UIAButton: name:Twitter rect:{{241, 519}, {79, 49}}</string>
-					<key>Screenshot</key>
-					<string>D1226C19-278A-479F-89DA-5A858592D9C8</string>
-					<key>Timestamp</key>
-					<date>2014-02-25T12:08:40Z</date>
+					<date>2014-03-04T11:45:00Z</date>
 					<key>Type</key>
 					<integer>0</integer>
 					<key>children</key>
@@ -1159,9 +1117,9 @@
 					<key>Message</key>
 					<string>UIAImage: name:UINavigationVerticalColumnShadow.png rect:{{311, 0}, {9, 568}}</string>
 					<key>Screenshot</key>
-					<string>981DA1A4-72E9-4CF8-AA7F-69F4A7F3EE55</string>
+					<string>9F089DB9-D402-4FD5-8D47-7A43E9D832E1</string>
 					<key>Timestamp</key>
-					<date>2014-02-25T12:08:40Z</date>
+					<date>2014-03-04T11:45:00Z</date>
 					<key>Type</key>
 					<integer>0</integer>
 					<key>children</key>
@@ -1171,9 +1129,9 @@
 					<key>LogType</key>
 					<string>Debug</string>
 					<key>Message</key>
-					<string>UIAImage: name:/private/var/mobile/Applications/16816FFA-8AAC-4479-82FE-CB5A2302E385/Documents/riksof.yahoo/Flyr/1393330078/Template/template.jpg rect:{{325, 65}, {310, 310}}</string>
+					<string>UIAImage: name:/private/var/mobile/Applications/B840A7C1-E04B-4AED-8E56-CC6108C5DDDD/Documents/riksof.yahoo/Flyr/1393933454/Template/template.jpg rect:{{325, 65}, {310, 310}}</string>
 					<key>Timestamp</key>
-					<date>2014-02-25T12:08:40Z</date>
+					<date>2014-03-04T11:45:00Z</date>
 					<key>Type</key>
 					<integer>0</integer>
 					<key>children</key>
@@ -1184,7 +1142,7 @@
 							<key>Message</key>
 							<string>UIAImage: rect:{{335, 75}, {90, 70}}</string>
 							<key>Timestamp</key>
-							<date>2014-02-25T12:08:40Z</date>
+							<date>2014-03-04T11:45:00Z</date>
 							<key>Type</key>
 							<integer>0</integer>
 							<key>children</key>
@@ -1196,7 +1154,7 @@
 							<key>Message</key>
 							<string>UIAImage: rect:{{335, 75}, {90, 70}}</string>
 							<key>Timestamp</key>
-							<date>2014-02-25T12:08:40Z</date>
+							<date>2014-03-04T11:45:00Z</date>
 							<key>Type</key>
 							<integer>0</integer>
 							<key>children</key>
@@ -1210,7 +1168,7 @@
 					<key>Message</key>
 					<string>UIAImage: name:flat_text_box.png rect:{{359, 69}, {271, 33}}</string>
 					<key>Timestamp</key>
-					<date>2014-02-25T12:08:40Z</date>
+					<date>2014-03-04T11:45:00Z</date>
 					<key>Type</key>
 					<integer>0</integer>
 					<key>children</key>
@@ -1220,9 +1178,9 @@
 					<key>LogType</key>
 					<string>Debug</string>
 					<key>Message</key>
-					<string>UIATextField: value:Flyer rect:{{362, 71}, {268, 28}}</string>
+					<string>UIATextField: value:Flyerly rect:{{362, 71}, {268, 28}}</string>
 					<key>Timestamp</key>
-					<date>2014-02-25T12:08:40Z</date>
+					<date>2014-03-04T11:45:00Z</date>
 					<key>Type</key>
 					<integer>0</integer>
 					<key>children</key>
@@ -1234,7 +1192,7 @@
 					<key>Message</key>
 					<string>UIAImage: name:flat_text_box.png rect:{{359, 110}, {271, 74}}</string>
 					<key>Timestamp</key>
-					<date>2014-02-25T12:08:40Z</date>
+					<date>2014-03-04T11:45:00Z</date>
 					<key>Type</key>
 					<integer>0</integer>
 					<key>children</key>
@@ -1246,7 +1204,7 @@
 					<key>Message</key>
 					<string>UIATextView: value: rect:{{359, 110}, {271, 74}}</string>
 					<key>Timestamp</key>
-					<date>2014-02-25T12:08:40Z</date>
+					<date>2014-03-04T11:45:00Z</date>
 					<key>Type</key>
 					<integer>0</integer>
 					<key>children</key>
@@ -1258,7 +1216,7 @@
 					<key>Message</key>
 					<string>UIAButton: name:Facebook value:1 rect:{{350, 192}, {290, 34}}</string>
 					<key>Timestamp</key>
-					<date>2014-02-25T12:08:40Z</date>
+					<date>2014-03-04T11:45:00Z</date>
 					<key>Type</key>
 					<integer>0</integer>
 					<key>children</key>
@@ -1270,7 +1228,7 @@
 					<key>Message</key>
 					<string>UIAButton: name:Twitter value:1 rect:{{350, 227}, {290, 34}}</string>
 					<key>Timestamp</key>
-					<date>2014-02-25T12:08:40Z</date>
+					<date>2014-03-04T11:45:00Z</date>
 					<key>Type</key>
 					<integer>0</integer>
 					<key>children</key>
@@ -1282,7 +1240,7 @@
 					<key>Message</key>
 					<string>UIAButton: name:Tumblr rect:{{350, 262}, {290, 34}}</string>
 					<key>Timestamp</key>
-					<date>2014-02-25T12:08:40Z</date>
+					<date>2014-03-04T11:45:00Z</date>
 					<key>Type</key>
 					<integer>0</integer>
 					<key>children</key>
@@ -1294,7 +1252,7 @@
 					<key>Message</key>
 					<string>UIAButton: name:Instagram value:1 rect:{{350, 297}, {290, 34}}</string>
 					<key>Timestamp</key>
-					<date>2014-02-25T12:08:40Z</date>
+					<date>2014-03-04T11:45:00Z</date>
 					<key>Type</key>
 					<integer>0</integer>
 					<key>children</key>
@@ -1304,9 +1262,9 @@
 					<key>LogType</key>
 					<string>Debug</string>
 					<key>Message</key>
-					<string>UIAButton: name:Flicker rect:{{350, 332}, {290, 34}}</string>
+					<string>UIAButton: name:Flicker value:1 rect:{{350, 332}, {290, 34}}</string>
 					<key>Timestamp</key>
-					<date>2014-02-25T12:08:40Z</date>
+					<date>2014-03-04T11:45:00Z</date>
 					<key>Type</key>
 					<integer>0</integer>
 					<key>children</key>
@@ -1318,7 +1276,7 @@
 					<key>Message</key>
 					<string>UIAButton: name:Email rect:{{350, 367}, {290, 34}}</string>
 					<key>Timestamp</key>
-					<date>2014-02-25T12:08:40Z</date>
+					<date>2014-03-04T11:45:00Z</date>
 					<key>Type</key>
 					<integer>0</integer>
 					<key>children</key>
@@ -1328,9 +1286,9 @@
 					<key>LogType</key>
 					<string>Debug</string>
 					<key>Message</key>
-					<string>UIAButton: name:SMS value:1 rect:{{350, 402}, {290, 34}}</string>
+					<string>UIAButton: name:SMS rect:{{350, 402}, {290, 34}}</string>
 					<key>Timestamp</key>
-					<date>2014-02-25T12:08:40Z</date>
+					<date>2014-03-04T11:45:00Z</date>
 					<key>Type</key>
 					<integer>0</integer>
 					<key>children</key>
@@ -1342,7 +1300,7 @@
 					<key>Message</key>
 					<string>UIAButton: name:Copy value:1 rect:{{350, 437}, {290, 34}}</string>
 					<key>Timestamp</key>
-					<date>2014-02-25T12:08:40Z</date>
+					<date>2014-03-04T11:45:00Z</date>
 					<key>Type</key>
 					<integer>0</integer>
 					<key>children</key>
@@ -1354,7 +1312,7 @@
 					<key>Message</key>
 					<string>UIAScrollView: rect:{{320, 376}, {320, 130}}</string>
 					<key>Timestamp</key>
-					<date>2014-02-25T12:08:40Z</date>
+					<date>2014-03-04T11:45:00Z</date>
 					<key>Type</key>
 					<integer>0</integer>
 					<key>children</key>
@@ -1365,7 +1323,7 @@
 							<key>Message</key>
 							<string>UIAButton: rect:{{330, 386}, {55, 40}}</string>
 							<key>Timestamp</key>
-							<date>2014-02-25T12:08:40Z</date>
+							<date>2014-03-04T11:45:00Z</date>
 							<key>Type</key>
 							<integer>0</integer>
 							<key>children</key>
@@ -1377,7 +1335,31 @@
 							<key>Message</key>
 							<string>UIAButton: rect:{{390, 386}, {55, 40}}</string>
 							<key>Timestamp</key>
-							<date>2014-02-25T12:08:40Z</date>
+							<date>2014-03-04T11:45:00Z</date>
+							<key>Type</key>
+							<integer>0</integer>
+							<key>children</key>
+							<array/>
+						</dict>
+						<dict>
+							<key>LogType</key>
+							<string>Debug</string>
+							<key>Message</key>
+							<string>UIAImage: rect:{{635, 378}, {2, 36}}</string>
+							<key>Timestamp</key>
+							<date>2014-03-04T11:45:00Z</date>
+							<key>Type</key>
+							<integer>0</integer>
+							<key>children</key>
+							<array/>
+						</dict>
+						<dict>
+							<key>LogType</key>
+							<string>Debug</string>
+							<key>Message</key>
+							<string>UIAImage: rect:{{633, 504}, {7, 2}}</string>
+							<key>Timestamp</key>
+							<date>2014-03-04T11:45:00Z</date>
 							<key>Type</key>
 							<integer>0</integer>
 							<key>children</key>
@@ -1391,7 +1373,7 @@
 					<key>Message</key>
 					<string>UIAImage: rect:{{320, 385}, {320, 44}}</string>
 					<key>Timestamp</key>
-					<date>2014-02-25T12:08:40Z</date>
+					<date>2014-03-04T11:45:00Z</date>
 					<key>Type</key>
 					<integer>0</integer>
 					<key>children</key>
@@ -1403,7 +1385,7 @@
 					<key>Message</key>
 					<string>UIAImage: rect:{{320, 385}, {320, 44}}</string>
 					<key>Timestamp</key>
-					<date>2014-02-25T12:08:40Z</date>
+					<date>2014-03-04T11:45:00Z</date>
 					<key>Type</key>
 					<integer>0</integer>
 					<key>children</key>
@@ -1415,7 +1397,7 @@
 					<key>Message</key>
 					<string>UIAImage: rect:{{320, 385}, {320, 44}}</string>
 					<key>Timestamp</key>
-					<date>2014-02-25T12:08:40Z</date>
+					<date>2014-03-04T11:45:00Z</date>
 					<key>Type</key>
 					<integer>0</integer>
 					<key>children</key>
@@ -1427,7 +1409,7 @@
 					<key>Message</key>
 					<string>UIAImage: rect:{{320, 385}, {320, 44}}</string>
 					<key>Timestamp</key>
-					<date>2014-02-25T12:08:40Z</date>
+					<date>2014-03-04T11:45:00Z</date>
 					<key>Type</key>
 					<integer>0</integer>
 					<key>children</key>
@@ -1439,7 +1421,7 @@
 					<key>Message</key>
 					<string>UIAImage: rect:{{320, 385}, {320, 44}}</string>
 					<key>Timestamp</key>
-					<date>2014-02-25T12:08:40Z</date>
+					<date>2014-03-04T11:45:00Z</date>
 					<key>Type</key>
 					<integer>0</integer>
 					<key>children</key>
@@ -1451,9 +1433,9 @@
 					<key>Message</key>
 					<string>UIAButton: name:Background rect:{{319, 523}, {66, 45}}</string>
 					<key>Screenshot</key>
-					<string>711AF419-071F-45F9-B19C-431187849FE5</string>
+					<string>79D78410-DC17-405D-BCBB-C7AFB22C1893</string>
 					<key>Timestamp</key>
-					<date>2014-02-25T12:08:40Z</date>
+					<date>2014-03-04T11:45:00Z</date>
 					<key>Type</key>
 					<integer>0</integer>
 					<key>children</key>
@@ -1465,7 +1447,7 @@
 					<key>Message</key>
 					<string>UIAButton: name:Text rect:{{383, 523}, {66, 45}}</string>
 					<key>Timestamp</key>
-					<date>2014-02-25T12:08:40Z</date>
+					<date>2014-03-04T11:45:00Z</date>
 					<key>Type</key>
 					<integer>0</integer>
 					<key>children</key>
@@ -1477,7 +1459,7 @@
 					<key>Message</key>
 					<string>UIAButton: name:Photo rect:{{447, 523}, {66, 45}}</string>
 					<key>Timestamp</key>
-					<date>2014-02-25T12:08:40Z</date>
+					<date>2014-03-04T11:45:00Z</date>
 					<key>Type</key>
 					<integer>0</integer>
 					<key>children</key>
@@ -1489,7 +1471,7 @@
 					<key>Message</key>
 					<string>UIAButton: name:Symbols value:1 rect:{{511, 523}, {66, 45}}</string>
 					<key>Timestamp</key>
-					<date>2014-02-25T12:08:40Z</date>
+					<date>2014-03-04T11:45:00Z</date>
 					<key>Type</key>
 					<integer>0</integer>
 					<key>children</key>
@@ -1501,7 +1483,7 @@
 					<key>Message</key>
 					<string>UIAButton: name:Clipart rect:{{575, 523}, {66, 45}}</string>
 					<key>Timestamp</key>
-					<date>2014-02-25T12:08:40Z</date>
+					<date>2014-03-04T11:45:00Z</date>
 					<key>Type</key>
 					<integer>0</integer>
 					<key>children</key>
@@ -1513,7 +1495,7 @@
 					<key>Message</key>
 					<string>UIAToolbar: rect:{{0, 568}, {320, 44}}</string>
 					<key>Timestamp</key>
-					<date>2014-02-25T12:08:40Z</date>
+					<date>2014-03-04T11:45:00Z</date>
 					<key>Type</key>
 					<integer>0</integer>
 					<key>children</key>
@@ -1524,9 +1506,9 @@
 							<key>Message</key>
 							<string>UIAImage: rect:{{0, 568}, {320, 0}}</string>
 							<key>Screenshot</key>
-							<string>30B58C03-C721-4040-B3AC-58B8BE50E7A7</string>
+							<string>2271991B-C4B9-4A9D-8D10-2CFE5B9E20BD</string>
 							<key>Timestamp</key>
-							<date>2014-02-25T12:08:40Z</date>
+							<date>2014-03-04T11:45:00Z</date>
 							<key>Type</key>
 							<integer>0</integer>
 							<key>children</key>
@@ -1538,7 +1520,7 @@
 							<key>Message</key>
 							<string>UIAImage: rect:{{0, 568}, {320, 44}}</string>
 							<key>Timestamp</key>
-							<date>2014-02-25T12:08:40Z</date>
+							<date>2014-03-04T11:45:00Z</date>
 							<key>Type</key>
 							<integer>0</integer>
 							<key>children</key>
@@ -1552,9 +1534,9 @@
 					<key>Message</key>
 					<string>UIAStaticText: rect:{{92, 216}, {136, 30}}</string>
 					<key>Screenshot</key>
-					<string>10702F96-CCE0-4B80-AA0F-8DEB22DB4EAE</string>
+					<string>8039A228-3424-4039-8DD8-075F31626174</string>
 					<key>Timestamp</key>
-					<date>2014-02-25T12:08:40Z</date>
+					<date>2014-03-04T11:45:00Z</date>
 					<key>Type</key>
 					<integer>0</integer>
 					<key>children</key>
@@ -1564,11 +1546,11 @@
 					<key>LogType</key>
 					<string>Debug</string>
 					<key>Message</key>
-					<string>UIAActivityIndicator: name:In progress value:1 rect:{{142, 266}, {37, 37}}</string>
+					<string>UIAStaticText: name:✓ value:✓ rect:{{92, 259}, {136, 50}}</string>
 					<key>Screenshot</key>
-					<string>B0EC488F-7AE0-48A5-B2C7-CAE9BD4E4403</string>
+					<string>8359B7E8-1525-49B3-A122-73FC1F430FC0</string>
 					<key>Timestamp</key>
-					<date>2014-02-25T12:08:40Z</date>
+					<date>2014-03-04T11:45:00Z</date>
 					<key>Type</key>
 					<integer>0</integer>
 					<key>children</key>
@@ -1578,11 +1560,11 @@
 					<key>LogType</key>
 					<string>Debug</string>
 					<key>Message</key>
-					<string>UIAStaticText: name:Saving to Flickr value:Saving to Flickr rect:{{92, 319}, {136, 30}}</string>
+					<string>UIAStaticText: name:Saved! value:Saved! rect:{{92, 319}, {136, 30}}</string>
 					<key>Screenshot</key>
-					<string>3F69755E-05D2-460E-98B6-A6EE17D8F134</string>
+					<string>C8AC80D3-6267-4C9E-9E0E-5A0BF6C51A61</string>
 					<key>Timestamp</key>
-					<date>2014-02-25T12:08:40Z</date>
+					<date>2014-03-04T11:45:00Z</date>
 					<key>Type</key>
 					<integer>0</integer>
 					<key>children</key>
@@ -1596,7 +1578,7 @@
 			<key>Message</key>
 			<string>Found anchor for screen 'Home'</string>
 			<key>Timestamp</key>
-			<date>2014-02-25T12:08:41Z</date>
+			<date>2014-03-04T11:45:00Z</date>
 			<key>Type</key>
 			<integer>1</integer>
 		</dict>
@@ -1606,7 +1588,7 @@
 			<key>Message</key>
 			<string>target.frontMostApp().elements()[0].elements()[21].tap()</string>
 			<key>Timestamp</key>
-			<date>2014-02-25T12:08:41Z</date>
+			<date>2014-03-04T11:45:00Z</date>
 			<key>Type</key>
 			<integer>0</integer>
 		</dict>
@@ -1616,7 +1598,7 @@
 			<key>Message</key>
 			<string>Found anchor for screen 'Settings'</string>
 			<key>Timestamp</key>
-			<date>2014-02-25T12:08:42Z</date>
+			<date>2014-03-04T11:45:00Z</date>
 			<key>Type</key>
 			<integer>1</integer>
 		</dict>
@@ -1624,9 +1606,9 @@
 			<key>LogType</key>
 			<string>Debug</string>
 			<key>Message</key>
-			<string>target.frontMostApp().elements()[0].elements()[1].elements()[3].elements()[0].tap()</string>
+			<string>target.frontMostApp().elements()[0].elements()[23].elements()[2].elements()[0].tap()</string>
 			<key>Timestamp</key>
-			<date>2014-02-25T12:08:42Z</date>
+			<date>2014-03-04T11:45:00Z</date>
 			<key>Type</key>
 			<integer>0</integer>
 		</dict>
@@ -1636,7 +1618,7 @@
 			<key>Message</key>
 			<string>target.frontMostApp().elements()[2].elements()[1].elements()[1].elements()[0].tap()</string>
 			<key>Timestamp</key>
-			<date>2014-02-25T12:08:43Z</date>
+			<date>2014-03-04T11:45:03Z</date>
 			<key>Type</key>
 			<integer>0</integer>
 		</dict>
