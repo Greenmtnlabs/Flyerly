@@ -1320,11 +1320,12 @@ NSMutableDictionary *selectedIdentifierDictionary;
 - (void)sharerFinishedSending:(SHKSharer *)sharer
 {
     
-    
+    // Here we Get Friend List which sended from FlyerlyFacbookFriends
     if ( [sharer isKindOfClass:[FlyerlyFacebookFriends class]] == YES ) {
         
         FlyerlyFacebookFriends *facebook = (FlyerlyFacebookFriends*) sharer;
         
+        // HERE WE MAKE ARRAY FOR SHOW DATA IN TABLEVIEW
         [self makeFacebookArray:facebook.friendsList ];
         [self.uiTableView reloadData];
         return;
