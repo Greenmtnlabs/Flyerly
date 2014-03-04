@@ -39,6 +39,7 @@
     NSError *error = nil;
     NSMutableDictionary *parsedData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
     
+    /*
     // Build a twitter request
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
    // params[@"cursor"] = nil ;//cursor;
@@ -65,7 +66,35 @@
                                                                          error:&jsonError];
         }
     }];
+*/
+}
 
+
+- (void)sendStatus
+{
+    
+    NSLog(@"");
+  
+    //[NSURL URLWithString:[NSString stringWithFormat:@"https://api.twitter.com/1.1/followers/list.json"]
+	OAMutableURLRequest *oRequest = [[OAMutableURLRequest alloc] initWithURL:[NSURL URLWithString:@""]
+                                                                    consumer:consumer
+                                                                       token:accessToken
+                                                                       realm:nil
+                                                           signatureProvider:nil];
+	
+	[oRequest setHTTPMethod:@"POST"];
+	
+	OARequestParameter *statusParam = [[OARequestParameter alloc] initWithName:@"status"
+                                                                         value:[self.item customValueForKey:@"status"]];
+    NSArray *params = [NSArray arrayWithObjects:statusParam, nil];
+	[oRequest setParameters:params];
+	
+	OAAsynchronousDataFetcher *fetcher = [OAAsynchronousDataFetcher asynchronousFetcherWithRequest:oRequest
+                                                                                          delegate:self
+                                                                                 didFinishSelector:@selector(sendTicket:didFinishWithData:)
+                                                                                   didFailSelector:@selector(sendTicket:didFailWithError:)];
+	
+	[fetcher start];
 }
 
 @end

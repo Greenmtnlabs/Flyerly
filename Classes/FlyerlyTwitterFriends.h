@@ -8,6 +8,7 @@
 
 #import "SHKTwitter.h"
 #import <Twitter/Twitter.h>
+#import "ShareKit.h"
 
 @interface FlyerlyTwitterFriends : SHKTwitter
 

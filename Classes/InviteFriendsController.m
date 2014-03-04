@@ -551,7 +551,7 @@ int totalCount = 0;
     
     // Current Item For Sharing
     SHKItem *item = [[SHKItem alloc] init];
-	item.shareType = SHKShareTypeUserInfo;
+	//item.shareType = SHKShareTypeUserInfo;
     
     
     iosSharer = [[ SHKSharer alloc] init];
