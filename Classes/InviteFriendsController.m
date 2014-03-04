@@ -470,6 +470,13 @@ int totalCount = 0;
     facebookBackupArray = nil;
     facebookBackupArray = facebookArray;
     
+    //Getting already Invited Freinds
+    PFUser *user = [PFUser currentUser];
+    self.fbinvited = [[NSMutableArray alloc] init];
+    if (user[@"fbinvited"]) {
+        self.fbinvited  = user[@"fbinvited"];
+    }
+    
     // Filter contacts on new tab selection
     [self onSearchClick:nil];
     
@@ -905,17 +912,17 @@ int totalCount = 0;
             [self.uiTableView reloadData ];
             
         }else if(selectedTab == 1){
-            NSLog(@"%@",identifiers);
-            [self tagFacebookUsersWithFeed:identifiers];
-            [fbinvited  addObjectsFromArray:deviceContactItems];
-            NSLog(@"%@",fbinvited);
             
-            PFUser *user = [PFUser currentUser];
-            user[@"fbinvited"] = fbinvited;
-            [user saveInBackground];
-            [deviceContactItems removeAllObjects];
-            [self showAlert:@"Invitation Sent!" message:@"You have successfully invited your friends to join flyerly."];
-            [self.uiTableView reloadData ];
+            // Current Item For Sharing
+            SHKItem *item = [SHKItem image:[UIImage imageNamed:@""] title:[NSString stringWithFormat:@"I'm using the flyerly app to create and share flyers on the go! Flyer.ly/Facebook  #flyerly"]];
+            item.tags = identifiers;
+            
+            //Calling ShareKit for Sharing
+            iosSharer = [[ SHKSharer alloc] init];
+            iosSharer = [FlyerlyFacebookInvite shareItem:item];
+            iosSharer.shareDelegate = self;
+            
+            
         }
         
     } else {
@@ -1209,14 +1216,6 @@ NSMutableDictionary *selectedIdentifierDictionary;
                 [deviceContactItems addObject:model.description];
             }
             
-            /*
-            //Calling ShareKit for Sharing
-            iosSharer = [[ SHKSharer alloc] init];
-            NSString *tweet = [NSString stringWithFormat:@"I'm using the flyerly app to create and share flyers on the go! Flyer.ly/Facebook @%@ #flyerly",model.description];
-            
-            [deviceContactItems addObject:model.description];
-            iosSharer = [SHKFacebook shareText:tweet];
-            iosSharer.shareDelegate = self;*/
 
         }
 
@@ -1354,9 +1353,13 @@ NSMutableDictionary *selectedIdentifierDictionary;
         // HERE WE MAKE ARRAY FOR SHOW DATA IN TABLEVIEW
         [self makeFacebookArray:facebook.friendsList ];
         [self.uiTableView reloadData];
+        
+
+
         return;
     }
-
+    
+    
     
     PFUser *user = [PFUser currentUser];
     
@@ -1377,8 +1380,14 @@ NSMutableDictionary *selectedIdentifierDictionary;
         // HERE WE GET AND SET SELECTED CONTACT LIST
         [iPhoneinvited  addObjectsFromArray:deviceContactItems];
         user[@"iphoneinvited"] = iPhoneinvited;
-    }
+        
+    } else  if ( [sharer isKindOfClass:[FlyerlyFacebookInvite class]] == YES ) {
     
+        // HERE WE GET AND SET SELECTED Facebook LIST
+        [fbinvited  addObjectsFromArray:deviceContactItems];
+        user[@"fbinvited"] = fbinvited;
+    }
+
     // HERE WE UPDATE PARSE ACCOUNT FOR REMEMBER INVITED FRIENDS LIST
     [user saveInBackground];
     
