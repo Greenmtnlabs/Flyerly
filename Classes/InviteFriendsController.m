@@ -278,6 +278,7 @@ BOOL selectAll;
             {
                 model.description = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
                 [contactsArray addObject:model];
+                break ;
             }
             else if ([mobileLabel isEqualToString:(NSString*)kABPersonPhoneIPhoneLabel])
             {

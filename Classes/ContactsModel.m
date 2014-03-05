@@ -31,7 +31,7 @@
     } else if (status == 2) {
         checkImageName = @"checkDouble";
     }else {
-        checkImageName = @"checkGray";
+        checkImageName = @"checkgray";
     }
     
     
