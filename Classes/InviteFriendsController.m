@@ -305,16 +305,23 @@ BOOL selectAll;
     selectedIdentifierDictionary = nil;
     selectedTab = FACEBOOK_TAB;
     
-    // Current Item For Sharing
-    SHKItem *item = [[SHKItem alloc] init];
-	item.shareType = SHKShareTypeUserInfo;
+    
+    if (facebookArray == nil) {
+        self.facebookArray = [[NSMutableArray alloc] init];
+        // Current Item For Sharing
+        SHKItem *item = [[SHKItem alloc] init];
+        item.shareType = SHKShareTypeUserInfo;
+    
+        iosSharer = [[ SHKSharer alloc] init];
+    
+        // Create controller and set share options
+        iosSharer = [FlyerlyFacebookFriends shareItem:item];
+        iosSharer.shareDelegate = self;
+    }else {
 
+        [self.uiTableView reloadData];
     
-    iosSharer = [[ SHKSharer alloc] init];
-    
-    // Create controller and set share options
-    iosSharer = [FlyerlyFacebookFriends shareItem:item];
-    iosSharer.shareDelegate = self;
+    }
     
     //END NEW CODE
     return;
@@ -442,8 +449,6 @@ int totalCount = 0;
     
     int count = 0;
     
-    self.facebookArray = [[NSMutableArray alloc] init];
-    
     for (NSDictionary *friendData in result[@"data"]) {
         
         NSString *imageURL = friendData[@"picture"][@"data"][@"url"];
@@ -492,7 +497,37 @@ int totalCount = 0;
 
 
 
+-(void)makeTwitterArray :(NSMutableDictionary *)followers{
 
+    NSDictionary *users = followers[@"users"];
+     
+     for (id user in users) {
+         
+         ContactsModel *model = [[ContactsModel   alloc]init];
+         model.name = user[@"name"];
+         model.description = user[@"screen_name"];
+         model.others = user[@"location"];
+         
+         NSString *imageURL = user[@"profile_image_url"];
+         NSString *new = [imageURL stringByReplacingOccurrencesOfString: @"normal" withString:@"bigger"];
+         
+         if(imageURL){
+             model.img = nil;
+             model.imageUrl = new;
+         }
+         
+         [self.twitterArray addObject:model];
+     }
+     
+     twitterBackupArray = nil;
+     twitterBackupArray = twitterArray;
+     
+     [uiTableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+    // nextCursor = followers[@"next_cursor"];
+     [self hideLoadingIndicator];
+
+
+}
 
 
 -(void)request:(FBRequest *)request didLoad:(id)result{
@@ -548,18 +583,29 @@ int totalCount = 0;
     [twitterButton setSelected:YES];
     [facebookButton setSelected:NO];
     
+    self.deviceContactItems = nil;
+    self.deviceContactItems = [[NSMutableArray alloc] init];
     
-    // Current Item For Sharing
-    SHKItem *item = [[SHKItem alloc] init];
-	//item.shareType = SHKShareTypeUserInfo;
+    selectedTab = TWITTER_TAB;
+
+    if (twitterArray == nil) {
+        self.twitterArray = [[NSMutableArray alloc] init];
+    
+        // Current Item For Sharing
+        SHKItem *item = [[SHKItem alloc] init];
+        //item.shareType = SHKShareTypeUserInfo;
     
     
-    iosSharer = [[ SHKSharer alloc] init];
+        iosSharer = [[ SHKSharer alloc] init];
     
-    // Create controller and set share options
-    iosSharer = [FlyerlyTwitterFriends shareItem:item];
-    iosSharer.shareDelegate = self;
+        // Create controller and set share options
+        iosSharer = [FlyerlyTwitterFriends shareItem:item];
+        iosSharer.shareDelegate = self;
+        
+    }else {
     
+        [self.uiTableView reloadData];
+    }
     return;
 
     
@@ -1356,6 +1402,23 @@ NSMutableDictionary *selectedIdentifierDictionary;
         
 
 
+        return;
+    }
+    
+    // Here we Get Friend List which sended from FlyerlyFacbookFriends
+    if ( [sharer isKindOfClass:[FlyerlyTwitterFriends class]] == YES ) {
+        
+        if (!sharer.quiet)
+            [[SHKActivityIndicator currentIndicator] displayCompleted:SHKLocalizedString(@"Saved!")];
+        
+        FlyerlyTwitterFriends *twitter = (FlyerlyTwitterFriends*) sharer;
+        
+        // HERE WE MAKE ARRAY FOR SHOW DATA IN TABLEVIEW
+        [self makeTwitterArray:twitter.friendsList ];
+        [self.uiTableView reloadData];
+        
+        
+        
         return;
     }
     
