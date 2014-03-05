@@ -92,7 +92,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="fpi-NX-k5V">
-                    <rect key="frame" x="192" y="0.0" width="66" height="45"/>
+                    <rect key="frame" x="191" y="0.0" width="66" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Symbols"/>
                     <state key="normal" image="symbolicon_button.png">
@@ -103,7 +103,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="a4z-OF-QiI">
-                    <rect key="frame" x="256" y="0.0" width="66" height="45"/>
+                    <rect key="frame" x="255" y="0.0" width="66" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Clipart"/>
                     <state key="normal" image="icon_button.png">

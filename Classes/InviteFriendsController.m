@@ -157,6 +157,14 @@ BOOL selectAll;
     [deviceContactItems removeAllObjects];
     contactsCount = 0;
     if(selectedTab == CONTACTS_TAB){
+        
+        // NEXT BAR BOTTON
+        UIButton *nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+        [nextButton addTarget:self action:@selector(invite) forControlEvents:UIControlEventTouchUpInside];
+        [nextButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
+        nextButton.showsTouchWhenHighlighted = YES;
+        UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
+        [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
         return;
     }
     [self showLoadingIndicator];
@@ -346,6 +354,15 @@ BOOL selectAll;
         iosSharer.shareDelegate = self;
     }else {
 
+        // NEXT BAR BOTTON
+        UIButton *nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+        [nextButton addTarget:self action:@selector(invite) forControlEvents:UIControlEventTouchUpInside];
+        [nextButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
+        nextButton.showsTouchWhenHighlighted = YES;
+        UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
+        [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
+        
+        //Update Table View
         [self.uiTableView reloadData];
     
     }
