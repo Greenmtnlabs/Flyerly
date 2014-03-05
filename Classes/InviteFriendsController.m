@@ -84,6 +84,20 @@ BOOL selectAll;
     [self.uiTableView  setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
     [searchTextField setReturnKeyType:UIReturnKeyDone];
     
+    
+    //HERE WE GET ALREADY INVITED FRIENDS
+    PFUser *user = [PFUser currentUser];
+    
+    self.iPhoneinvited = [[NSMutableArray alloc] init];
+    self.fbinvited = [[NSMutableArray alloc] init];
+
+    if (user[@"iphoneinvited"])
+        self.iPhoneinvited  = user[@"iphoneinvited"];
+
+    if (user[@"fbinvited"])
+        self.fbinvited  = user[@"fbinvited"];
+   
+    
     // Load device contacts
     [self loadLocalContacts:self.contactsButton];
     
@@ -94,6 +108,7 @@ BOOL selectAll;
     self.navigationItem.leftItemsSupplementBackButton = YES;
     
     loadingViewFlag = YES;
+    
 }
 
 
@@ -149,11 +164,6 @@ BOOL selectAll;
     
     selectedTab = CONTACTS_TAB;
     
-    PFUser *user = [PFUser currentUser];
-    self.iPhoneinvited = [[NSMutableArray alloc] init];
-    if (user[@"iphoneinvited"]) {
-        self.iPhoneinvited  = user[@"iphoneinvited"];
-    }
     
     // init contact array
     if(contactBackupArray){
@@ -204,7 +214,6 @@ BOOL selectAll;
 }
 
 
-
 /*
  * Mehod called to get contacts
  */
@@ -230,6 +239,7 @@ BOOL selectAll;
         firstName = ABRecordCopyValue(ref, kABPersonFirstNameProperty);
         lastName  = ABRecordCopyValue(ref, kABPersonLastNameProperty);
         
+        
         if(!firstName)
             firstName = (CFStringRef) @"";
         if(!lastName)
@@ -252,6 +262,8 @@ BOOL selectAll;
             }
         }
         
+        
+        
         //For Phone number
         NSString* mobileLabel;
         
@@ -264,6 +276,16 @@ BOOL selectAll;
                 [contactsArray addObject:model];
             }
             else if ([mobileLabel isEqualToString:(NSString*)kABPersonPhoneIPhoneLabel])
+            {
+                model.description = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
+                [contactsArray addObject:model];
+                break ;
+            }else if ([mobileLabel isEqualToString:(NSString*)kABHomeLabel])
+            {
+                model.description = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
+                [contactsArray addObject:model];
+                break ;
+            }else if ([mobileLabel isEqualToString:(NSString*)kABWorkLabel])
             {
                 model.description = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
                 [contactsArray addObject:model];
@@ -403,12 +425,7 @@ BOOL selectAll;
                  //Making Array for Loading
                  [self request:nil didLoad:list];
                  
-                 //Getting already Invited Freinds
-                 PFUser *user = [PFUser currentUser];
-                 self.fbinvited = [[NSMutableArray alloc] init];
-                 if (user[@"fbinvited"]) {
-                     self.fbinvited  = user[@"fbinvited"];
-                 }
+
                             [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
              }
              else{
@@ -474,14 +491,7 @@ int totalCount = 0;
     
     facebookBackupArray = nil;
     facebookBackupArray = facebookArray;
-    
-    //Getting already Invited Freinds
-    PFUser *user = [PFUser currentUser];
-    self.fbinvited = [[NSMutableArray alloc] init];
-    if (user[@"fbinvited"]) {
-        self.fbinvited  = user[@"fbinvited"];
-    }
-    
+        
     // Filter contacts on new tab selection
     [self onSearchClick:nil];
     
@@ -523,7 +533,6 @@ int totalCount = 0;
      twitterBackupArray = twitterArray;
      
      [uiTableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
-    // nextCursor = followers[@"next_cursor"];
      [self hideLoadingIndicator];
 
 
