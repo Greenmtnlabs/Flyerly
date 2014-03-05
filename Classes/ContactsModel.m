@@ -23,14 +23,18 @@
 
 -(void)setInvitedStatus :(int)sts{
 
+    
     status = sts;
-    if (status == 0) {
-        checkImageName = @"checkwhite";
-    } else if (status == 1) {
-        checkImageName = @"checkgray";
+    
+    if (status == 1) {
+        checkImageName = @"checkBlue";
     } else if (status == 2) {
-        checkImageName = @"checkgreen";
+        checkImageName = @"checkDouble";
+    }else {
+        checkImageName = @"checkGray";
     }
+    
+    
     [self.delegate contactInvited:self];
 }
 

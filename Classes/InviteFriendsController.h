@@ -94,7 +94,7 @@
 @property(nonatomic,strong) NSMutableArray *twitterBackupArray;
 @property(nonatomic,strong) NSMutableArray *deviceContactItems;
 @property(nonatomic,strong) NSMutableArray *fbinvited;
-@property(nonatomic,strong) NSMutableArray *Twitterinvited;
+@property(nonatomic,strong) NSMutableArray *twitterInvited;
 @property(nonatomic,strong) NSMutableArray *iPhoneinvited;
 
 - (IBAction)loadLocalContacts:(UIButton *)sender;
