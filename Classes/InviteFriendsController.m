@@ -73,12 +73,12 @@ BOOL selectAll;
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:backBarButton,leftBarButton,nil]];
     
     
-    // NEXT BAR BOTTON
-    UIButton *nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-	[nextButton addTarget:self action:@selector(invite) forControlEvents:UIControlEventTouchUpInside];
-    [nextButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
-    nextButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
+    // INVITE BAR BOTTON
+    UIButton *inviteButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+	[inviteButton addTarget:self action:@selector(invite) forControlEvents:UIControlEventTouchUpInside];
+    [inviteButton setBackgroundImage:[UIImage imageNamed:@"invite_friend"] forState:UIControlStateNormal];
+    inviteButton.showsTouchWhenHighlighted = YES;
+    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:inviteButton];
     [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
     
     [self.uiTableView  setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
@@ -158,13 +158,14 @@ BOOL selectAll;
     contactsCount = 0;
     if(selectedTab == CONTACTS_TAB){
         
-        // NEXT BAR BOTTON
-        UIButton *nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-        [nextButton addTarget:self action:@selector(invite) forControlEvents:UIControlEventTouchUpInside];
-        [nextButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
-        nextButton.showsTouchWhenHighlighted = YES;
-        UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
+        // INVITE BAR BOTTON
+        UIButton *inviteButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+        [inviteButton addTarget:self action:@selector(invite) forControlEvents:UIControlEventTouchUpInside];
+        [inviteButton setBackgroundImage:[UIImage imageNamed:@"invite_friend"] forState:UIControlStateNormal];
+        inviteButton.showsTouchWhenHighlighted = YES;
+        UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:inviteButton];
         [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
+
         return;
     }
     [self showLoadingIndicator];
@@ -343,6 +344,7 @@ BOOL selectAll;
     
     if (facebookArray == nil) {
         self.facebookArray = [[NSMutableArray alloc] init];
+        
         // Current Item For Sharing
         SHKItem *item = [[SHKItem alloc] init];
         item.shareType = SHKShareTypeUserInfo;
@@ -354,122 +356,20 @@ BOOL selectAll;
         iosSharer.shareDelegate = self;
     }else {
 
-        // NEXT BAR BOTTON
-        UIButton *nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-        [nextButton addTarget:self action:@selector(invite) forControlEvents:UIControlEventTouchUpInside];
-        [nextButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
-        nextButton.showsTouchWhenHighlighted = YES;
-        UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
+        // INVITE BAR BOTTON
+        UIButton *inviteButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+        [inviteButton addTarget:self action:@selector(invite) forControlEvents:UIControlEventTouchUpInside];
+        [inviteButton setBackgroundImage:[UIImage imageNamed:@"invite_friend"] forState:UIControlStateNormal];
+        inviteButton.showsTouchWhenHighlighted = YES;
+        UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:inviteButton];
         [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
+
         
         //Update Table View
         [self.uiTableView reloadData];
     
     }
     
-    //END NEW CODE
-    return;
-    
-    if([InviteFriendsController connected]){
-        
-        [self showLoadingIndicator];
-        
-        contactsCount = 0;
-        invited = NO;
-
-        selectAll = YES;
-        self.deviceContactItems = nil;
-        self.deviceContactItems = [[NSMutableArray alloc] init];
-        selectedIdentifierDictionary = nil;
-        selectedTab = FACEBOOK_TAB;
-  
-       // init facebook array
-        NSLog(@"%@",facebookBackupArray);
-
-        if(facebookBackupArray){
-            
-            // Reload table data after all the contacts get loaded
-            facebookArray = nil;
-            facebookArray = facebookBackupArray;
-            
-            // Filter contacts on new tab selection
-            [self onSearchClick:nil];
-            [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
-            [self hideLoadingIndicator];
-
-           
-            
-        } else{
-            
-          
-             ACAccountStore *accountStore = [[ACAccountStore alloc]init];
-             ACAccountType *FBaccountType= [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
-            
-            //get facebook app id
-            NSString *path = [[NSBundle mainBundle] pathForResource: @"Flyr-Info" ofType: @"plist"];
-            NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile: path];
-            
-            NSDictionary *options = @{ACFacebookAppIdKey : dict[@"FacebookAppID"],
-                                      ACFacebookPermissionsKey : @[@"email", @"publish_stream"],
-                                      ACFacebookAudienceKey:ACFacebookAudienceFriends};
-
-            
-            [accountStore requestAccessToAccountsWithType:FBaccountType options:options completion:^(BOOL granted, NSError *error) {
-                
-             // if User Login in device
-             if (granted) {
-             
-             // Populate array with all available Twitter accounts
-             arrayOfAccounts = [accountStore accountsWithAccountType:FBaccountType];
-             account = [arrayOfAccounts lastObject];
-             
-             // Sanity check
-             if ([arrayOfAccounts count] > 0) {
-             
-             NSURL *requestURL = [NSURL URLWithString:@"https://graph.facebook.com/me/friends"];
-             SLRequest *request = [SLRequest requestForServiceType:SLServiceTypeFacebook
-             requestMethod:SLRequestMethodGET
-             URL:requestURL
-             parameters:@{@"fields":@"name,gender,picture.height(72).width(72).type(small)"}];
-             request.account = account;
-             
-             [request performRequestWithHandler:^(NSData *data,
-             NSHTTPURLResponse *response,
-             NSError *error) {
-             
-             if(!error){
-                 NSDictionary *list =[NSJSONSerialization JSONObjectWithData:data
-                                                                     options:kNilOptions error:&error];
-                 NSLog(@"Dictionary contains: %@", list );
-                 
-                 self.facebookArray = [[NSMutableArray alloc] init];
-                 
-                 //Making Array for Loading
-                 [self request:nil didLoad:list];
-                 
-
-                            [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
-             }
-             else{
-             //handle error gracefully
-             }
-             
-             }];
-             }
-             
-             } else {
-             //Fail gracefully...
-                 NSLog(@"error getting permission %@",error);
-                 [self showAlert:@"There is no Facebook account configured. You can add or create a Facebook account in Settings" message:@""];
-             }
-             }];
-       
-         }
-    
-    } else {
-        
-        [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
-    }
 }
 
 -(void)showAlert:(NSString *)title message:(NSString *)message{
@@ -636,100 +536,6 @@ int totalCount = 0;
     }else {
     
         [self.uiTableView reloadData];
-    }
-    return;
-
-    
-    if([InviteFriendsController connected]){
-
-        contactsCount = 0;
-        invited = NO;
-        if(selectedTab == TWITTER_TAB){
-            return;
-        }
-
-        [self showLoadingIndicator];
-        
-        selectAll = YES;
-        self.deviceContactItems = nil;
-        self.deviceContactItems = [[NSMutableArray alloc] init];
-        selectedIdentifierDictionary = nil;
-
-        selectedTab = TWITTER_TAB;
-        
-        // init twitter array
-        if(twitterBackupArray){
-            
-            // Reload table data after all the contacts get loaded
-            twitterArray = nil;
-            twitterArray = twitterBackupArray;
-            
-            // Filter contacts on new tab selection
-            [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
-            [self hideLoadingIndicator];
-
-            
-        } else{
-            
-            // Empty table view
-            [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
-            
-            if([TWTweetComposeViewController canSendTweet]){
-                
-                ACAccountStore *accountStore = [[ACAccountStore alloc] init];
-                ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
-                
-                // Request access from the user to access their Twitter account
-                [accountStore requestAccessToAccountsWithType:accountType withCompletionHandler:^(BOOL granted, NSError *error) {
-                    
-                    // Did user allow us access?
-                    if (granted == YES) {
-                        
-                        // Populate array with all available Twitter accounts
-                        arrayOfAccounts = [accountStore accountsWithAccountType:accountType];
-                        self.twitterArray = [[NSMutableArray alloc] init];
-                        
-                        // Sanity check
-                        if ([arrayOfAccounts count] > 1) {
-                            
-                            // Show list of acccounts from which to select
-                            dispatch_async(dispatch_get_main_queue(), ^{
-                                UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:@"Choose Account" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles: nil];
-                                actionSheet.tag = 2;
-                                
-                                for (int i = 0; i < arrayOfAccounts.count; i++) {
-                                    ACAccount *acct = arrayOfAccounts[i];
-                                    [actionSheet addButtonWithTitle:acct.username];
-                                }
-                                
-                                [actionSheet addButtonWithTitle:@"Cancel"];
-                                [actionSheet showInView:self.view];
-                            });
-                        } else if ([arrayOfAccounts count] > 0 ) {
-                            [self cursoredTwitterContacts:[NSString stringWithFormat:@"%d", -1]
-                                                  account:arrayOfAccounts[0]];
-                        }
-                    }
-                }];
-                
-            } else {
-                
-                [self showAlert:@"No Twitter connection" message:@"You must be connected to Twitter to get contact list."];
-                
-                if(loadingViewFlag){
-                    for (UIView *subview in self.view.subviews) {
-                        if([subview isKindOfClass:[LoadingView class]]){
-                            [subview removeFromSuperview];
-                            loadingViewFlag = NO;
-                        }
-                    }
-                }
-            }
-        }
-        
-    } else {
-        
-        [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
     }
 }
 
@@ -1419,11 +1225,7 @@ NSMutableDictionary *selectedIdentifierDictionary;
     
     // Here we Check Sharer for
     // Update PARSE
-    if ( [sharer isKindOfClass:[SHKFacebook class]] == YES ) {
-        
-        //[self.flyer setFacebookStatus:1];
-        
-    } else if ( [sharer isKindOfClass:[SHKTwitter class]] == YES ) {
+    if ( [sharer isKindOfClass:[SHKTwitter class]] == YES ) {
         
         // HERE WE GET AND SET SELECTED FOLLOWER
         [twitterInvited  addObjectsFromArray:deviceContactItems];

@@ -63,7 +63,8 @@
 
 - (void)sendStatus
 {
-    
+    [self setQuiet:YES];
+
 	OAMutableURLRequest *oRequest = [[OAMutableURLRequest alloc] initWithURL:[NSURL URLWithString:@"https://api.twitter.com/1.1/followers/list.json"]
                                                                     consumer:consumer
                                                                        token:accessToken

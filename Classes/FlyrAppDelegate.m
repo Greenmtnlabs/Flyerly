@@ -60,6 +60,17 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 	[NSTimer scheduledTimerWithTimeInterval:TIME target:self selector:@selector(next) userInfo:nil repeats:YES];
 }
 
+- (void)applicationDidBecomeActive:(UIApplication *)application
+{
+    [SHKFacebook handleDidBecomeActive];
+}
+
+- (void)applicationWillTerminate:(UIApplication *)application
+{
+    // Save data if appropriate
+    [SHKFacebook handleWillTerminate];
+}
+
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
     [currentInstallation setDeviceTokenFromData:deviceToken];
@@ -82,6 +93,10 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation {
+    
+    if ([[url absoluteString] hasPrefix:[NSString stringWithFormat:@"fb%@", SHKCONFIG(facebookAppId)]]) {
+        return [SHKFacebook handleOpenURL:url];
+    }
     
     if([[url absoluteString] hasPrefix:kCallbackURLBaseStringPrefix]){
         return YES;
