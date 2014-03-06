@@ -673,22 +673,6 @@ int totalCount = 0;
     }
 }
 
-/**
- * invite contacts
- */
--(void)inviteFreindUnselected:(NSString *)tag{
-     NSMutableDictionary *dict2;
-    dict2 = [self getArrayOfSelectedTab][[tag intValue]];
-    NSString *identifier = [[NSString alloc]initWithString:dict2[@"identifier"]];
-
-    for (int i =0; i < deviceContactItems.count; i++) {
-        if ([identifier isEqualToString:deviceContactItems[i]]) {
-            [deviceContactItems removeObjectAtIndex:i];
-        }
-        
-    }
-    
-}
 
 - (BOOL)ckeckExistContact:(NSString *)identifier{
     for (int i = 0; i < deviceContactItems.count ; i++) {
