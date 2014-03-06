@@ -26,8 +26,12 @@
 
 @implementation AssetsGroupViewController
 
-- (void)viewDidLoad
-{
+#pragma mark - View Controller methods
+
+/**
+ * View loaded.
+ */
+- (void)viewDidLoad {
     [super viewDidLoad];
     
     // Configure the grid view
@@ -57,8 +61,10 @@
     self.navigationItem.titleView = label;
 }
 
-- (void)viewDidDisappear:(BOOL)animated
-{
+/**
+ * View disappeared.
+ */
+- (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     
     // Stop loading assets?
@@ -66,6 +72,19 @@
     {
         [self.assetsGroup stopLoadingAssets];
     }
+}
+
+/**
+ * View appeared.
+ *
+ * @param animated
+ *            BOOL indicating if the appearance was animated.
+ */
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    CGPoint bottomOffset = CGPointMake(0, self.scrollView.contentSize.height - self.scrollView.bounds.size.height);
+    [self.scrollView setContentOffset:bottomOffset animated:NO];
 }
 
 
