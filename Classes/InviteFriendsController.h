@@ -34,7 +34,6 @@
 
 @interface InviteFriendsController : ParentViewController<UITableViewDelegate,UITableViewDataSource,MFMessageComposeViewControllerDelegate,UITextFieldDelegate, UIActionSheetDelegate,SHKSharerDelegate>{
     FlyerlySingleton *globle;
-    IBOutlet UILabel *contactsLabel;
     IBOutlet UILabel *facebookLabel;
     IBOutlet UILabel *twitterLabel;
     IBOutlet UILabel *doneLabel;
@@ -71,7 +70,6 @@
     SHKSharer *iosSharer;
 }
 
-@property(nonatomic,strong) IBOutlet UILabel *contactsLabel;
 @property(nonatomic,strong) IBOutlet UILabel *facebookLabel;
 @property(nonatomic,strong) IBOutlet UILabel *twitterLabel;
 @property(nonatomic,strong) IBOutlet UILabel *doneLabel;
