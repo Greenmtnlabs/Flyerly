@@ -17,7 +17,7 @@
 #import "Flurry.h"
 
 @implementation InviteFriendsController
-@synthesize uiTableView, contactsArray, deviceContactItems,  facebookLabel, twitterLabel, doneLabel, selectAllLabel, unSelectAllLabel, inviteLabel, contactsButton, facebookButton, twitterButton, loadingView, searchTextField, facebookArray, twitterArray,fbinvited,twitterInvited,iPhoneinvited;
+@synthesize uiTableView, contactsArray, deviceContactItems,contactsButton, facebookButton, twitterButton, loadingView, searchTextField, facebookArray, twitterArray,fbinvited,twitterInvited,iPhoneinvited;
 @synthesize contactBackupArray, facebookBackupArray, twitterBackupArray;
 
 const int TWITTER_TAB = 2;

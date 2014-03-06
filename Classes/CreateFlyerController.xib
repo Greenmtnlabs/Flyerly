@@ -70,10 +70,10 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="rb6-j8-Siq">
-                    <rect key="frame" x="63" y="0.0" width="66" height="45"/>
-                    <autoresizingMask key="autoresizingMask"/>
+                    <rect key="frame" x="64" y="0.0" width="64" height="45"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Text"/>
-                    <state key="normal" image="text_icon.png">
+                    <state key="normal" backgroundImage="text_icon.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -81,10 +81,10 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="fcG-xw-IqZ">
-                    <rect key="frame" x="127" y="0.0" width="66" height="45"/>
-                    <autoresizingMask key="autoresizingMask"/>
+                    <rect key="frame" x="128" y="0.0" width="64" height="45"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Photo"/>
-                    <state key="normal" image="image_icon.png">
+                    <state key="normal" backgroundImage="image_icon.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -92,10 +92,10 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="fpi-NX-k5V">
-                    <rect key="frame" x="191" y="0.0" width="66" height="45"/>
+                    <rect key="frame" x="192" y="0.0" width="64" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Symbols"/>
-                    <state key="normal" image="symbolicon_button.png">
+                    <state key="normal" backgroundImage="symbolicon_button.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -103,10 +103,10 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="a4z-OF-QiI">
-                    <rect key="frame" x="255" y="0.0" width="66" height="45"/>
+                    <rect key="frame" x="256" y="0.0" width="64" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Clipart"/>
-                    <state key="normal" image="icon_button.png">
+                    <state key="normal" backgroundImage="icon_button.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -114,10 +114,10 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="zoh-mW-4K3">
-                    <rect key="frame" x="-1" y="0.0" width="66" height="45"/>
+                    <rect key="frame" x="0.0" y="0.0" width="64" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Background"/>
-                    <state key="normal" image="arrangeicon_button.png">
+                    <state key="normal" backgroundImage="arrangeicon_button.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -292,7 +292,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="5Ya-yN-kTr">
-                    <rect key="frame" x="241" y="0.0" width="80" height="45"/>
+                    <rect key="frame" x="240" y="0.0" width="80" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Height"/>
                     <state key="normal" image="07_height.png">
@@ -320,38 +320,38 @@
         </view>
     </objects>
     <resources>
-        <image name="07_camera.png" width="80" height="45"/>
+        <image name="07_camera.png" width="160" height="90"/>
         <image name="07_camera_selected.png" width="80" height="45"/>
         <image name="07_height.png" width="80" height="45"/>
         <image name="07_height_selected.png" width="80" height="45"/>
-        <image name="07_roll.png" width="80" height="45"/>
+        <image name="07_roll.png" width="160" height="90"/>
         <image name="07_roll_selected.png" width="80" height="45"/>
-        <image name="07_width.png" width="80" height="45"/>
+        <image name="07_width.png" width="160" height="90"/>
         <image name="07_width_selected.png" width="80" height="45"/>
         <image name="Template15.jpg" width="612" height="612"/>
-        <image name="addbg_border.png" width="80" height="45"/>
+        <image name="addbg_border.png" width="160" height="90"/>
         <image name="addbg_border_selected.png" width="80" height="45"/>
-        <image name="addbg_cameraroll.png" width="80" height="45"/>
+        <image name="addbg_cameraroll.png" width="160" height="90"/>
         <image name="addbg_cameraroll_selected.png" width="80" height="45"/>
-        <image name="addbg_library.png" width="80" height="45"/>
+        <image name="addbg_library.png" width="160" height="90"/>
         <image name="addbg_library_selected.png" width="80" height="45"/>
-        <image name="addbg_takephoto.png" width="80" height="45"/>
+        <image name="addbg_takephoto.png" width="160" height="90"/>
         <image name="addbg_takephoto_selected.png" width="80" height="45"/>
-        <image name="arrangeicon_button.png" width="64" height="45"/>
+        <image name="arrangeicon_button.png" width="128" height="90"/>
         <image name="blue_bar.png" width="320" height="46"/>
         <image name="color_button.png" width="64" height="45"/>
         <image name="color_button_selected.png" width="64" height="45"/>
         <image name="font_button.png" width="64" height="45"/>
         <image name="font_button_selected.png" width="64" height="45"/>
         <image name="icon_button.png" width="64" height="45"/>
-        <image name="image_icon.png" width="64" height="45"/>
+        <image name="image_icon.png" width="128" height="90"/>
         <image name="outline_button.png" width="64" height="45"/>
         <image name="outline_button_selected.png" width="64" height="45"/>
         <image name="size_button.png" width="64" height="45"/>
         <image name="size_button_selected.png" width="64" height="45"/>
-        <image name="symbolicon_button.png" width="64" height="45"/>
+        <image name="symbolicon_button.png" width="128" height="90"/>
         <image name="text_edit.png" width="64" height="45"/>
         <image name="text_edit_selected.png" width="64" height="45"/>
-        <image name="text_icon.png" width="64" height="45"/>
+        <image name="text_icon.png" width="128" height="90"/>
     </resources>
 </document>

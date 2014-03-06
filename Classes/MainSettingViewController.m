@@ -74,6 +74,7 @@
     [category addObject:@"Save to Gallery"];
     [category addObject:@"Account Setting"];
     [category addObject:@"Sign Out"];
+    
 
 }
 
