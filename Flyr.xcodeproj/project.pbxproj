@@ -779,6 +779,7 @@
 		2092FFCC184E00BF0034C4F6 /* flyerlylogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2092FFCA184E00BF0034C4F6 /* flyerlylogo@2x.png */; };
 		2095C90E18C5E89900E244A8 /* FlyerlyTwitterFriends.m in Sources */ = {isa = PBXBuildFile; fileRef = 2095C90D18C5E89900E244A8 /* FlyerlyTwitterFriends.m */; };
 		2095C91118C5F92700E244A8 /* FlyerlyFacebookInvite.m in Sources */ = {isa = PBXBuildFile; fileRef = 2095C91018C5F92700E244A8 /* FlyerlyFacebookInvite.m */; };
+		20967D9818C8973200B273FC /* FlyerlyTwitterLike.m in Sources */ = {isa = PBXBuildFile; fileRef = 20967D9718C8973200B273FC /* FlyerlyTwitterLike.m */; };
 		2099301118BF0C5000A177A4 /* ContactsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2099301018BF0C5000A177A4 /* ContactsModel.m */; };
 		20B865F91851EF0400484D7D /* checkBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = 20B865F71851EF0400484D7D /* checkBlue.png */; };
 		20B865FA1851EF0400484D7D /* checkBlue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20B865F81851EF0400484D7D /* checkBlue@2x.png */; };
@@ -2150,6 +2151,8 @@
 		2095C90D18C5E89900E244A8 /* FlyerlyTwitterFriends.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlyerlyTwitterFriends.m; sourceTree = "<group>"; };
 		2095C90F18C5F92700E244A8 /* FlyerlyFacebookInvite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlyerlyFacebookInvite.h; sourceTree = "<group>"; };
 		2095C91018C5F92700E244A8 /* FlyerlyFacebookInvite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlyerlyFacebookInvite.m; sourceTree = "<group>"; };
+		20967D9618C8973200B273FC /* FlyerlyTwitterLike.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlyerlyTwitterLike.h; sourceTree = "<group>"; };
+		20967D9718C8973200B273FC /* FlyerlyTwitterLike.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlyerlyTwitterLike.m; sourceTree = "<group>"; };
 		2099300F18BF0C5000A177A4 /* ContactsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsModel.h; sourceTree = "<group>"; };
 		2099301018BF0C5000A177A4 /* ContactsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsModel.m; sourceTree = "<group>"; };
 		20B865F71851EF0400484D7D /* checkBlue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkBlue.png; sourceTree = "<group>"; };
@@ -3972,6 +3975,15 @@
 			name = Config;
 			sourceTree = "<group>";
 		};
+		20967D9518C896E500B273FC /* FlyerlyLike */ = {
+			isa = PBXGroup;
+			children = (
+				20967D9618C8973200B273FC /* FlyerlyTwitterLike.h */,
+				20967D9718C8973200B273FC /* FlyerlyTwitterLike.m */,
+			);
+			name = FlyerlyLike;
+			sourceTree = "<group>";
+		};
 		2099300E18BF0C1500A177A4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -4101,6 +4113,7 @@
 		20F359791888DA9C001376B6 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				20967D9518C896E500B273FC /* FlyerlyLike */,
 				20F93DD017B2262200F6F88C /* MainSettingViewController.h */,
 				20F93DD117B2262200F6F88C /* MainSettingViewController.m */,
 				20F93DD217B2262200F6F88C /* MainSettingViewController.xib */,
@@ -5892,6 +5905,7 @@
 				2095C91118C5F92700E244A8 /* FlyerlyFacebookInvite.m in Sources */,
 				20FA7E721872AAF50057C3F3 /* CameraViewController.m in Sources */,
 				203E0B7617DDDD720039C3A7 /* InputViewController.m in Sources */,
+				20967D9818C8973200B273FC /* FlyerlyTwitterLike.m in Sources */,
 				204635621895E4AF00A94C42 /* Flyer.m in Sources */,
 				2044FF96185088ED00A26B42 /* MainSettingCell.m in Sources */,
 				202C4825187D7A6B00FE0975 /* CDataScanner.m in Sources */,

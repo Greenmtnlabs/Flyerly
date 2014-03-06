@@ -11,7 +11,7 @@
 @implementation ShareViewController
 
 
-@synthesize selectedFlyerImage,fvController,titleView,descriptionView,selectedFlyerDescription,  imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,dicController, clipboardlabel,flyer,topTitleLabel,delegate,activityIndicator;
+@synthesize Yvalue,rightUndoBarButton,selectedFlyerImage,fvController,titleView,descriptionView,selectedFlyerDescription,  imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,dicController, clipboardlabel,flyer,topTitleLabel,delegate,activityIndicator;
 
 
 #pragma mark  View Appear Methods
@@ -88,13 +88,10 @@
     
     self.dicController=[UIDocumentInteractionController interactionControllerWithURL:igImageHookFile];
     self.dicController.UTI = @"com.instagram.photo";
-    self.dicController.annotation = @{@"InstagramCaption": [NSString stringWithFormat:@"%@ %@", self.titleView.text,descriptionView.text]};
-    
+    self.dicController.annotation = @{@"InstagramCaption": [NSString stringWithFormat:@"%@ %@ #flyerly", self.titleView.text,descriptionView.text]};
     
     
     BOOL displayed = [self.dicController presentOpenInMenuFromRect:rect inView: self.view animated:YES];
-    
-    
     
     
     if(!displayed){
@@ -232,6 +229,20 @@
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];
     [alert show];
+}
+
+
+-(IBAction)hideMe {
+    
+//    [self.view setFrame:CGRectMake(0, [Yvalue integerValue], 320,400 )];
+    
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.4f];
+    [self.view setFrame:CGRectMake(0, [Yvalue integerValue], 320,425 )];
+    [UIView commitAnimations];
+    rightUndoBarButton.enabled = YES;
+
+
 }
 
 

@@ -145,7 +145,7 @@ int selectedAddMoreLayerTab = -1;
     [self.view setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
     [self.contextView setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
 
-    sharePanel = [[UIView alloc] initWithFrame:CGRectMake(320, 64, 290,480 )];
+    sharePanel = [[UIView alloc] initWithFrame:CGRectMake(0, 480, 320,400 )];
     shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
     sharePanel = shareviewcontroller.view;
     sharePanel.hidden = YES;
@@ -2250,33 +2250,20 @@ int selectedAddMoreLayerTab = -1;
 
 -(void)share
 {
-    float xValue = sharePanel.frame.origin.x;
     
-    if (xValue == 30) {
-        
-        [shareviewcontroller.titleView resignFirstResponder];
-        [shareviewcontroller.descriptionView resignFirstResponder];
 
-        [UIView beginAnimations:nil context:NULL];
-        [UIView setAnimationDuration:0.4f];
-        [sharePanel setFrame:CGRectMake(320, 64, 290,480 )];
-        
-        [UIView commitAnimations];
-        rightUndoBarButton.enabled = YES;
-        [shareButton setBackgroundImage:[UIImage imageNamed:@"share_button"] forState:UIControlStateNormal];
-
-        
-    } else {
-        
+    
+    if (sharePanel.frame.origin.y != self.view.frame.size.height -425) {
         sharePanel.hidden = NO;
         rightUndoBarButton.enabled = NO;
-        [shareButton setBackgroundImage:[UIImage imageNamed:@"share_button_selected"] forState:UIControlStateNormal];
+    
         NSString *shareImagePath = [flyer getFlyerImage];
         UIImage *shareImage =  [UIImage imageWithContentsOfFile:shareImagePath];
 
         shareviewcontroller.selectedFlyerImage = shareImage;
         shareviewcontroller.flyer = self.flyer;
         shareviewcontroller.imageFileName = shareImagePath;
+        shareviewcontroller.rightUndoBarButton = rightUndoBarButton;
         shareviewcontroller.titleView.text = [flyer getFlyerTitle];
         NSString *description = [flyer getFlyerDescription];
         if (![description isEqualToString:@""]) {
@@ -2284,17 +2271,18 @@ int selectedAddMoreLayerTab = -1;
         }
         shareviewcontroller.selectedFlyerDescription = [flyer getFlyerDescription];
         shareviewcontroller.topTitleLabel = titleLabel;
-        
+        shareviewcontroller.Yvalue = [NSString stringWithFormat:@"%f",self.view.frame.size.height];
+    
         [shareviewcontroller setSocialStatus];
 
-        [sharePanel setFrame:CGRectMake(320, 64, 290,480 )];
-    
+        [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height, 320,425 )];
+        sharePanel.alpha = 0.8;
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0.4f];
-            [sharePanel setFrame:CGRectMake(30, 64, 290,480 )];
+            [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height -425, 320,425 )];
         [UIView commitAnimations];
-        
     }
+
 }
 
 

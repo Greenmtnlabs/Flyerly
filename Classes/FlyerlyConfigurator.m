@@ -179,7 +179,7 @@
 }
 // Enter your app's twitter account if you'd like to ask the user to follow it when logging in. (Only for xAuth)
 - (NSString*)twitterUsername {
-	return @"";
+	return @"flyerlyapp";
 }
 
 // Evernote - http://www.evernote.com/about/developer/api/

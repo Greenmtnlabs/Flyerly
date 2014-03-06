@@ -16,6 +16,7 @@
 #import "FlyerlySingleton.h"
 #import "MainSettingCell.h"
 #import <ShareKit.h>
+#import "FlyerlyTwitterLike.h"
 
 
 @class InputViewController,FlyerlySingleton ;
@@ -33,9 +34,12 @@
 - (void)changeSwitch:(id)sender;
 - (void)signOut;
 -(void)goBack;
+-(void)likeFacebook;
+-(void)likeTwitter;
 -(IBAction)gohelp;
 -(IBAction)rateApp:(id)sender;
 -(IBAction)gotwitter:(id)sender;
 -(IBAction)goemail:(id)sender;
+
 
 @end

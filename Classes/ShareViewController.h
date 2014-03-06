@@ -55,6 +55,8 @@
 @property(nonatomic,strong) IBOutlet UIButton *clipboardButton;
 @property(nonatomic,strong) IBOutlet UILabel *clipboardlabel;
 @property(nonatomic,strong) IBOutlet UILabel *topTitleLabel;
+@property(nonatomic,strong) NSString *Yvalue;
+@property(nonatomic,strong) UIBarButtonItem *rightUndoBarButton;
 @property (nonatomic, strong) UIDocumentInteractionController *dicController;
 @property(nonatomic,strong)UIImage *selectedFlyerImage;
 @property(nonatomic,strong)NSString *selectedFlyerDescription;
@@ -72,9 +74,14 @@
 -(IBAction)onClickFlickrButton;
 -(IBAction)onClickSMSButton;
 -(IBAction)onClickClipboardButton;
+-(IBAction)hideMe;
 
 
 -(void)shareOnInstagram;
 -(void)setSocialStatus;
+
+
+
+
 
 @end
