@@ -129,6 +129,11 @@
         imgname = @"account_settings";
         [cell setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"SettingcellBack"]]];
     }
+    
+    if (indexPath.row == 2)imgname = @"fb_Like";
+    if (indexPath.row == 3)imgname = @"twt_follow";
+
+
     if (indexPath.row == 4)imgname = @"signout";
     
     

@@ -2276,7 +2276,7 @@ int selectedAddMoreLayerTab = -1;
         [shareviewcontroller setSocialStatus];
 
         [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height, 320,425 )];
-        sharePanel.alpha = 0.8;
+        sharePanel.alpha = 0.9;
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0.4f];
             [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height -425, 320,425 )];

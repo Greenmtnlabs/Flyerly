@@ -1219,7 +1219,14 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
  */
 
 -(NSString *)getFlyerURL {
-    return [textFileArray objectAtIndex:3];
+    
+    if (textFileArray.count > 3) {
+        return [textFileArray objectAtIndex:3];
+    } else {
+        [textFileArray addObject:@""];
+        [textFileArray writeToFile:textFile atomically:YES];
+        return @"";
+    }
 }
 
 

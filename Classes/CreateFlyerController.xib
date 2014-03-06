@@ -114,7 +114,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="zoh-mW-4K3">
-                    <rect key="frame" x="0.0" y="0.0" width="64" height="45"/>
+                    <rect key="frame" x="-1" y="0.0" width="64" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Background"/>
                     <state key="normal" backgroundImage="arrangeicon_button.png">
@@ -125,7 +125,7 @@
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
         </view>
         <view contentMode="scaleToFill" id="wtn-Zi-MKo">
             <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>

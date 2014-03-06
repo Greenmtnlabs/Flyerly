@@ -233,9 +233,7 @@
 
 
 -(IBAction)hideMe {
-    
-//    [self.view setFrame:CGRectMake(0, [Yvalue integerValue], 320,400 )];
-    
+        
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.4f];
     [self.view setFrame:CGRectMake(0, [Yvalue integerValue], 320,425 )];

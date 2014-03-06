@@ -26,11 +26,11 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="flat_text_box.png" id="69">
-                    <rect key="frame" x="25" y="28" width="271" height="33"/>
+                    <rect key="frame" x="10" y="45" width="298" height="33"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Title" minimumFontSize="17" id="7">
-                    <rect key="frame" x="28" y="30" width="268" height="28"/>
+                    <rect key="frame" x="16" y="47" width="268" height="28"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
@@ -40,11 +40,11 @@
                     </connections>
                 </textField>
                 <view contentMode="scaleToFill" id="59">
-                    <rect key="frame" x="1" y="114" width="320" height="280"/>
+                    <rect key="frame" x="1" y="273" width="320" height="135"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="11">
-                            <rect key="frame" x="0.0" y="1" width="320" height="34"/>
+                            <rect key="frame" x="9" y="7" width="60" height="60"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <accessibility key="accessibilityConfiguration" label="Facebook"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
@@ -65,7 +65,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="12">
-                            <rect key="frame" x="0.0" y="176" width="320" height="34"/>
+                            <rect key="frame" x="88" y="74" width="60" height="60"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <accessibility key="accessibilityConfiguration" label="Email"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
@@ -83,7 +83,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="13">
-                            <rect key="frame" x="0.0" y="141" width="320" height="34"/>
+                            <rect key="frame" x="9" y="74" width="60" height="60"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <accessibility key="accessibilityConfiguration" label="Flicker"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
@@ -101,7 +101,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="14">
-                            <rect key="frame" x="0.0" y="211" width="320" height="34"/>
+                            <rect key="frame" x="167" y="74" width="60" height="60"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <accessibility key="accessibilityConfiguration" label="SMS"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
@@ -119,7 +119,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="15">
-                            <rect key="frame" x="0.0" y="36" width="320" height="34"/>
+                            <rect key="frame" x="88" y="7" width="60" height="60"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <accessibility key="accessibilityConfiguration" label="Twitter"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
@@ -137,7 +137,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="16">
-                            <rect key="frame" x="0.0" y="71" width="320" height="34"/>
+                            <rect key="frame" x="167" y="7" width="60" height="60"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <accessibility key="accessibilityConfiguration" label="Tumblr"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
@@ -155,7 +155,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="17">
-                            <rect key="frame" x="0.0" y="106" width="320" height="34"/>
+                            <rect key="frame" x="245" y="7" width="60" height="60"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <accessibility key="accessibilityConfiguration" label="Instagram"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
@@ -173,7 +173,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" id="18">
-                            <rect key="frame" x="0.0" y="246" width="320" height="34"/>
+                            <rect key="frame" x="245" y="74" width="60" height="60"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <accessibility key="accessibilityConfiguration" label="Copy"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
@@ -191,14 +191,14 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="flat_text_box.png" id="cXJ-PV-xl2">
-                    <rect key="frame" x="25" y="62" width="271" height="51"/>
+                    <rect key="frame" x="10" y="79" width="298" height="83"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Description" id="41">
-                    <rect key="frame" x="25" y="62" width="271" height="44"/>
+                    <rect key="frame" x="10" y="79" width="271" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -208,37 +208,82 @@
                         <outlet property="delegate" destination="-1" id="43"/>
                     </connections>
                 </textView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="daL-dE-hOn">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
+                <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="daL-dE-hOn">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="37"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="V">
+                    <state key="normal" image="panel_close_button.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="hideMe" destination="-1" eventType="touchUpInside" id="ADD-C5-6sZ"/>
                     </connections>
                 </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="separator.png" id="Ze1-Bq-tyX">
+                    <rect key="frame" x="0.0" y="263" width="320" height="3"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="separator.png" id="miG-oA-Na9">
+                    <rect key="frame" x="0.0" y="173" width="320" height="3"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Public" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pTh-xS-qY3">
+                    <rect key="frame" x="16" y="208" width="58" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="H37-Jf-aNA">
+                    <rect key="frame" x="72" y="203" width="51" height="31"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="onTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="thumbTintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                </switch>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star.png" id="Mpk-de-jx8">
+                    <rect key="frame" x="247" y="207" width="25" height="24"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star.png" id="nEn-rU-sQD">
+                    <rect key="frame" x="275" y="207" width="25" height="24"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star_selected.png" id="yal-zb-FUz">
+                    <rect key="frame" x="161" y="207" width="25" height="24"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star_selected.png" id="bNp-aU-Kd7">
+                    <rect key="frame" x="190" y="207" width="25" height="24"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star_selected.png" id="EyH-89-Ghd">
+                    <rect key="frame" x="219" y="207" width="25" height="24"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
         </view>
     </objects>
     <resources>
-        <image name="cp_share.png" width="290" height="34"/>
-        <image name="cp_share_selected.png" width="290" height="34"/>
-        <image name="email_share.png" width="290" height="34"/>
-        <image name="email_share_selected.png" width="290" height="34"/>
-        <image name="facebook_share.png" width="290" height="34"/>
-        <image name="facebook_share_selected.png" width="290" height="34"/>
+        <image name="cp_share.png" width="120" height="120"/>
+        <image name="cp_share_selected.png" width="120" height="120"/>
+        <image name="email_share.png" width="120" height="120"/>
+        <image name="email_share_selected.png" width="120" height="120"/>
+        <image name="facebook_share.png" width="120" height="120"/>
+        <image name="facebook_share_selected.png" width="120" height="120"/>
         <image name="flat_text_box.png" width="253" height="35"/>
-        <image name="flickr_share.png" width="290" height="34"/>
-        <image name="flickr_share_selected.png" width="290" height="34"/>
-        <image name="instagram_share.png" width="290" height="34"/>
-        <image name="instagram_share_selected.png" width="290" height="34"/>
-        <image name="sms_share.png" width="290" height="34"/>
-        <image name="sms_share_selected.png" width="290" height="34"/>
-        <image name="tumblr_share.png" width="290" height="34"/>
-        <image name="tumblr_share_selected.png" width="290" height="34"/>
-        <image name="twitter_share.png" width="290" height="34"/>
-        <image name="twitter_share_selected.png" width="290" height="34"/>
+        <image name="flickr_share.png" width="120" height="120"/>
+        <image name="flickr_share_selected.png" width="120" height="120"/>
+        <image name="instagram_share.png" width="120" height="120"/>
+        <image name="instagram_share_selected.png" width="120" height="120"/>
+        <image name="panel_close_button.png" width="640" height="74"/>
+        <image name="separator.png" width="640" height="3"/>
+        <image name="sms_share.png" width="120" height="120"/>
+        <image name="sms_share_selected.png" width="120" height="120"/>
+        <image name="star.png" width="50" height="48"/>
+        <image name="star_selected.png" width="50" height="48"/>
+        <image name="tumblr_share.png" width="120" height="120"/>
+        <image name="tumblr_share_selected.png" width="120" height="120"/>
+        <image name="twitter_share.png" width="120" height="120"/>
+        <image name="twitter_share_selected.png" width="120" height="120"/>
     </resources>
 </document>
