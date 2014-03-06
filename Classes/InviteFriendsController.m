@@ -690,38 +690,6 @@ int totalCount = 0;
     
 }
 
--(IBAction)inviteFreind:(id)sender{
-    
-    return;
-    UIButton *cellImageButton = (UIButton *) sender;
-    NSMutableDictionary *dict2;
-    
-
-        // Check index
-        if([[self getArrayOfSelectedTab] count] >= 1){
-            dict2 = [self getArrayOfSelectedTab][(cellImageButton.tag)];
-            if ([self ckeckExistContact:dict2[@"identifier"]]) {
-                  if (contactsCount <15) {
-                      contactsCount = contactsCount +1;
-                      [deviceContactItems addObject:dict2[@"identifier"]];
-                      [cellImageButton setBackgroundImage:[UIImage imageNamed:@"checkgreen"] forState:UIControlStateNormal];
-                  }else{
-                      [self showAlert:@"You can only invite 15 user at a time" message:@""];
-                  }
-            }else{
-
-                [self inviteFreindUnselected:[NSString stringWithFormat:@"%d",cellImageButton.tag]];
-                 contactsCount = contactsCount -1;
-                if ([self ckeckExistdb:dict2[@"identifier"]]) {
-                    [cellImageButton setBackgroundImage:[UIImage imageNamed:@"checkwhite"] forState:UIControlStateNormal];
-                }else{
-                    [cellImageButton setBackgroundImage:[UIImage imageNamed:@"checkgray"] forState:UIControlStateNormal];
-                }
-            }
-        }
-
-    
-}
 - (BOOL)ckeckExistContact:(NSString *)identifier{
     for (int i = 0; i < deviceContactItems.count ; i++) {
         if ([identifier isEqualToString:deviceContactItems[i]]) {

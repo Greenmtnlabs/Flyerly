@@ -103,7 +103,6 @@
 - (IBAction)onSearchClick:(UIButton *)sender;
 -(IBAction)goBack;
 -(IBAction)invite;
--(IBAction)inviteFreind:(id)sender;
 -(void)inviteFreindUnselected:(NSString *)tag;
 
 
