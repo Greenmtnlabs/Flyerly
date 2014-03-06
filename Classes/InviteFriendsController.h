@@ -33,13 +33,12 @@
 @class LoadingView,FlyerlySingleton,SHKSharer;
 
 @interface InviteFriendsController : ParentViewController<UITableViewDelegate,UITableViewDataSource,MFMessageComposeViewControllerDelegate,UITextFieldDelegate, UIActionSheetDelegate,SHKSharerDelegate>{
+    
+    
     FlyerlySingleton *globle;
-    IBOutlet UILabel *facebookLabel;
-    IBOutlet UILabel *twitterLabel;
-    IBOutlet UILabel *doneLabel;
-    IBOutlet UILabel *selectAllLabel;
-    IBOutlet UILabel *unSelectAllLabel;
-    IBOutlet UILabel *inviteLabel;
+    
+    
+    
     IBOutlet UIButton *contactsButton;
     IBOutlet UIButton *facebookButton;
     IBOutlet UIButton *twitterButton;
@@ -70,12 +69,6 @@
     SHKSharer *iosSharer;
 }
 
-@property(nonatomic,strong) IBOutlet UILabel *facebookLabel;
-@property(nonatomic,strong) IBOutlet UILabel *twitterLabel;
-@property(nonatomic,strong) IBOutlet UILabel *doneLabel;
-@property(nonatomic,strong) IBOutlet UILabel *selectAllLabel;
-@property(nonatomic,strong) IBOutlet UILabel *unSelectAllLabel;
-@property(nonatomic,strong) IBOutlet UILabel *inviteLabel;
 @property(nonatomic,strong) IBOutlet UIButton *contactsButton;
 @property(nonatomic,strong) IBOutlet UIButton *facebookButton;
 @property(nonatomic,strong) IBOutlet UIButton *twitterButton;
