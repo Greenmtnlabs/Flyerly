@@ -73,7 +73,7 @@ BOOL selectAll;
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:backBarButton,leftBarButton,nil]];
     
     
-    // INVITE BAR BOTTON
+    // INVITE BAR BUTTON
     UIButton *inviteButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
 	[inviteButton addTarget:self action:@selector(invite) forControlEvents:UIControlEventTouchUpInside];
     [inviteButton setBackgroundImage:[UIImage imageNamed:@"invite_friend"] forState:UIControlStateNormal];
@@ -158,7 +158,7 @@ BOOL selectAll;
     contactsCount = 0;
     if(selectedTab == CONTACTS_TAB){
         
-        // INVITE BAR BOTTON
+        // INVITE BAR BUTTON
         UIButton *inviteButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
         [inviteButton addTarget:self action:@selector(invite) forControlEvents:UIControlEventTouchUpInside];
         [inviteButton setBackgroundImage:[UIImage imageNamed:@"invite_friend"] forState:UIControlStateNormal];
@@ -356,7 +356,7 @@ BOOL selectAll;
         iosSharer.shareDelegate = self;
     }else {
 
-        // INVITE BAR BOTTON
+        // INVITE BAR BUTTON
         UIButton *inviteButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
         [inviteButton addTarget:self action:@selector(invite) forControlEvents:UIControlEventTouchUpInside];
         [inviteButton setBackgroundImage:[UIImage imageNamed:@"invite_friend"] forState:UIControlStateNormal];
@@ -448,11 +448,14 @@ int totalCount = 0;
              model.imageUrl = new;
          }
          
-         [self.twitterArray addObject:model];
+         [self.twitterBackupArray addObject:model];
      }
      
-     twitterBackupArray = nil;
-     twitterBackupArray = twitterArray;
+     //twitterBackupArray = nil;
+     //twitterBackupArray = twitterArray;
+    
+        twitterArray = nil;
+        twitterArray = twitterBackupArray;
      
      [uiTableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
      [self hideLoadingIndicator];
@@ -519,8 +522,8 @@ int totalCount = 0;
     
     selectedTab = TWITTER_TAB;
 
-    if (twitterArray == nil) {
-        self.twitterArray = [[NSMutableArray alloc] init];
+    if (twitterBackupArray == nil) {
+        self.twitterBackupArray = [[NSMutableArray alloc] init];
     
         // Current Item For Sharing
         SHKItem *item = [[SHKItem alloc] init];
@@ -974,7 +977,7 @@ NSMutableDictionary *selectedIdentifierDictionary;
         // GETTING DATA FROM RECEIVED DICTIONARY
         // SET OVER MODEL FROM DATA
        
-        receivedDic = [ self getArrayOfSelectedTab ][(indexPath.row)];
+        receivedDic = [self getArrayOfSelectedTab ][(indexPath.row)];
     }
 
     if (receivedDic.img == nil) {
@@ -1144,12 +1147,14 @@ NSMutableDictionary *selectedIdentifierDictionary;
     
     for(int contactIndex=0; contactIndex<[[self getBackupArrayOfSelectedTab] count]; contactIndex++){
         // Get left contact data
-        NSMutableDictionary *dict1 = [self getBackupArrayOfSelectedTab][contactIndex];
-        NSString *name1 = dict1[@"name"];
         
-        if([[name1 lowercaseString] rangeOfString:[newString lowercaseString]].location == NSNotFound){
+        ContactsModel *model = [self getBackupArrayOfSelectedTab][contactIndex];
+        
+        NSString *name = model.name;
+        
+        if([[name lowercaseString] rangeOfString:[newString lowercaseString]].location == NSNotFound){
         } else {
-            [filteredArray addObject:dict1];
+            [filteredArray addObject:model];
         }
     }
     
@@ -1204,9 +1209,6 @@ NSMutableDictionary *selectedIdentifierDictionary;
     
     // Here we Get Friend List which sended from FlyerlyFacbookFriends
     if ( [sharer isKindOfClass:[FlyerlyTwitterFriends class]] == YES ) {
-        
-        if (!sharer.quiet)
-            [[SHKActivityIndicator currentIndicator] displayCompleted:SHKLocalizedString(@"Saved!")];
         
         FlyerlyTwitterFriends *twitter = (FlyerlyTwitterFriends*) sharer;
         
@@ -1265,6 +1267,10 @@ NSMutableDictionary *selectedIdentifierDictionary;
 
 - (void)sharerCancelledSending:(SHKSharer *)sharer
 {
+    
+    if ( [sharer isKindOfClass:[SHKTwitter class]] == YES ) {
+        [deviceContactItems   removeAllObjects];
+    }
     [self.uiTableView reloadData ];
 }
 

@@ -173,9 +173,7 @@ NSString * const TEXTHEIGHT = @"280.000000";
                         // URL Exist and Image Found
                         //HERE WE UPDATE IMAGE WITH LATEST UPDATE
                         [asset setImageData:imgData metadata:nil completionBlock:^(NSURL *assetURL, NSError *error) {
-
-                            // FOR FUTURE WORK
-                            [self setFlyerURL:assetURL.absoluteString];
+                             NSLog(@"Image Updated");
                         }];
                     }
                 
