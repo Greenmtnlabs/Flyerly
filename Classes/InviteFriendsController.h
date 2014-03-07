@@ -88,6 +88,12 @@
 @property(nonatomic,strong) NSMutableArray *twitterInvited;
 @property(nonatomic,strong) NSMutableArray *iPhoneinvited;
 
+@property(nonatomic,strong)IBOutlet UIView *fbView;
+@property(nonatomic,strong)IBOutlet UITextView *fbText;
+- (IBAction)fbSend:(UIButton *)sender;
+- (IBAction)fbCancel:(UIButton *)sender;
+
+
 - (IBAction)loadLocalContacts:(UIButton *)sender;
 - (IBAction)loadFacebookContacts:(UIButton *)sender;
 - (IBAction)loadTwitterContacts:(UIButton *)sender;

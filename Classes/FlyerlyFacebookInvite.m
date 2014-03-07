@@ -8,6 +8,7 @@
 
 #import "FlyerlyFacebookInvite.h"
 
+
 @interface FlyerlyFacebookInvite ()
 
 @end
@@ -18,11 +19,13 @@
 
 #pragma mark  SHAREKIT OVERRIDE METHODS
 
+
+
+
 + (BOOL)canShareItem:(SHKItem *)item
 {
     return YES ;
 }
-
 
 - (BOOL)shouldShareSilently {
     
@@ -39,19 +42,17 @@
     
     [self setQuiet:YES];
     
-   
-    
-    [FBRequestConnection startForPostStatusUpdate: self.item.title place:@"144479625584966" tags: self.item.tags completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+    FBRequestConnection *con = [FBRequestConnection startForPostStatusUpdate: self.item.text place:@"144479625584966" tags: self.item.tags completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
         
-        
-        [self.pendingConnections addObject:connection];
-        NSLog(@"New Result: %@", result);
+        //NSLog(@"New Result: %@", result);
         NSLog(@"Error: %@", error);
         
 		if ([self.shareDelegate respondsToSelector:@selector(sharerFinishedSending:)])
             [self.shareDelegate performSelector:@selector(sharerFinishedSending:) withObject:self];
     }];
     
+    [self.pendingConnections addObject:con];
+  
     
 }
 

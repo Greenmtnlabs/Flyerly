@@ -19,6 +19,7 @@
 @implementation InviteFriendsController
 @synthesize uiTableView, contactsArray, deviceContactItems,contactsButton, facebookButton, twitterButton, loadingView, searchTextField, facebookArray, twitterArray,fbinvited,twitterInvited,iPhoneinvited;
 @synthesize contactBackupArray, facebookBackupArray, twitterBackupArray;
+@synthesize fbView,fbText;
 
 const int TWITTER_TAB = 2;
 const int FACEBOOK_TAB = 1;
@@ -148,6 +149,7 @@ BOOL selectAll;
     
     // HERE WE HIGHLIGHT BUTTON SELECT AND
     // UNSELECTED BUTTON
+    fbView.hidden = YES;
     [contactsButton setSelected:YES];
     [twitterButton setSelected:NO];
     [facebookButton setSelected:NO];
@@ -325,6 +327,7 @@ BOOL selectAll;
     
     // HERE WE HIGHLIGHT BUTTON ON TOUCH
     // AND OTHERS SET UNSELECTED
+    fbView.hidden = YES;
     [contactsButton setSelected:NO];
     [twitterButton setSelected:NO];
     [facebookButton setSelected:YES];
@@ -349,7 +352,7 @@ BOOL selectAll;
         SHKItem *item = [[SHKItem alloc] init];
         item.shareType = SHKShareTypeUserInfo;
     
-        iosSharer = [[ SHKSharer alloc] init];
+        //iosSharer = [[ SHKSharer alloc] init];
     
         // Create controller and set share options
         iosSharer = [FlyerlyFacebookFriends shareItem:item];
@@ -513,6 +516,7 @@ int totalCount = 0;
     
     // HERE WE HIGHLIGHT BUTTON SELECT AND
     // UNSELECTED BUTTON
+    fbView.hidden = YES;
     [contactsButton setSelected:NO];
     [twitterButton setSelected:YES];
     [facebookButton setSelected:NO];
@@ -724,14 +728,12 @@ int totalCount = 0;
             
         }else if(selectedTab == 1){
             
-            // Current Item For Sharing
-            SHKItem *item = [SHKItem image:[UIImage imageNamed:@""] title:[NSString stringWithFormat:@"I'm using the flyerly app to create and share flyers on the go! Flyer.ly/Facebook  #flyerly"]];
-            item.tags = identifiers;
-            
-            //Calling ShareKit for Sharing
-            iosSharer = [[ SHKSharer alloc] init];
-            iosSharer = [FlyerlyFacebookInvite shareItem:item];
-            iosSharer.shareDelegate = self;
+            // Here we Start Animation
+            [UIView beginAnimations:nil context:NULL];
+            [UIView setAnimationDuration:0.4f];
+                fbView.hidden = NO;
+                fbText.text = @"I'm using the flyerly app to create and share flyers on the go! Flyer.ly/Facebook  #flyerly";
+            [UIView commitAnimations];
             
             
         }
@@ -858,6 +860,37 @@ int totalCount = 0;
         [self presentViewController:messageInstance animated:YES completion:nil];
         
     }
+}
+
+
+/*
+ * Here we Send Request to facebook for tags Friends
+ */
+- (IBAction)fbSend:(UIButton *)sender{
+    
+    [fbText resignFirstResponder];
+    fbView.hidden =YES;
+    
+    // Current Item For Sharing
+    SHKItem *item = [SHKItem text:fbText.text];
+    item.tags = deviceContactItems;
+    
+    //Calling ShareKit for Sharing
+    iosSharer = [FlyerlyFacebookInvite shareItem:item];
+    iosSharer.shareDelegate = self;
+
+
+}
+
+/*
+ * Here we Hide our facebook post View
+ */
+- (IBAction)fbCancel:(UIButton *)sender {
+    fbView.hidden = YES;
+    [fbText resignFirstResponder];
+    [deviceContactItems removeAllObjects];
+    [uiTableView reloadData];
+
 }
 
 #pragma mark Table view methods
