@@ -11,7 +11,7 @@
 @implementation ShareViewController
 
 
-@synthesize Yvalue,rightUndoBarButton,selectedFlyerImage,fvController,titleView,descriptionView,selectedFlyerDescription,  imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,dicController, clipboardlabel,flyer,topTitleLabel,delegate,activityIndicator;
+@synthesize Yvalue,rightUndoBarButton,shareButton,helpButton,selectedFlyerImage,fvController,titleView,descriptionView,selectedFlyerDescription,  imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,dicController, clipboardlabel,flyer,topTitleLabel,delegate,activityIndicator;
 
 
 #pragma mark  View Appear Methods
@@ -238,6 +238,8 @@
     [self.view setFrame:CGRectMake(0, [Yvalue integerValue], 320,425 )];
     [UIView commitAnimations];
     rightUndoBarButton.enabled = YES;
+    shareButton.enabled = YES;
+    helpButton.enabled = YES;
 
 
 }
@@ -445,7 +447,7 @@
         if( [InviteFriendsController connected] ){
 
             // Current Item For Sharing
-            SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@",titleView.text  ]];
+            SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ %@",titleView.text , selectedFlyerDescription ]];
               item.tags =[NSArray arrayWithObjects: @"#flyerly", nil];
                     
             //Calling ShareKit for Sharing

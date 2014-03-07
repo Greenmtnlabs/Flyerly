@@ -186,6 +186,7 @@ BOOL selectAll;
         // Reload table data after all the contacts get loaded
         contactsArray = nil;
         contactsArray = contactBackupArray;
+  
         
         // Filter contacts on new tab selection
         [self onSearchClick:nil];
@@ -194,10 +195,10 @@ BOOL selectAll;
         [self hideLoadingIndicator];
         
     } else {
-        
+       
         contactsArray = [[NSMutableArray alloc] init];
         ABAddressBookRef m_addressbook = ABAddressBookCreate();
-        
+         searchTextField.text = @"";
         
         if (m_addressbook == NULL) {
             m_addressbook = ABAddressBookCreate();
@@ -335,25 +336,20 @@ BOOL selectAll;
     
     [self showLoadingIndicator];
     
-    contactsCount = 0;
-    invited = NO;
-    
-    selectAll = YES;
     self.deviceContactItems = nil;
     self.deviceContactItems = [[NSMutableArray alloc] init];
     selectedIdentifierDictionary = nil;
     selectedTab = FACEBOOK_TAB;
     
     
-    if (facebookArray == nil) {
-        self.facebookArray = [[NSMutableArray alloc] init];
+    if (facebookBackupArray == nil || facebookBackupArray.count == 0) {
+        searchTextField.text = @"";
+        facebookBackupArray = [[NSMutableArray alloc] init];
         
         // Current Item For Sharing
         SHKItem *item = [[SHKItem alloc] init];
         item.shareType = SHKShareTypeUserInfo;
-    
-        //iosSharer = [[ SHKSharer alloc] init];
-    
+        
         // Create controller and set share options
         iosSharer = [FlyerlyFacebookFriends shareItem:item];
         iosSharer.shareDelegate = self;
@@ -367,7 +363,7 @@ BOOL selectAll;
         UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:inviteButton];
         [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
 
-        
+        [self onSearchClick:nil];
         //Update Table View
         [self.uiTableView reloadData];
     
@@ -408,14 +404,16 @@ int totalCount = 0;
             model.imageUrl = imageURL;
         }
         
-        [self.facebookArray addObject:model];
+        [self.facebookBackupArray addObject:model];
         
         count++;
         totalCount++;
     }
     
-    facebookBackupArray = nil;
-    facebookBackupArray = facebookArray;
+    self.facebookArray = [[NSMutableArray alloc] init];
+    facebookArray = facebookBackupArray ;
+
+
     
     // Filter contacts on new tab selection
     [self onSearchClick:nil];
@@ -526,22 +524,22 @@ int totalCount = 0;
     
     selectedTab = TWITTER_TAB;
 
-    if (twitterBackupArray == nil) {
+    if (twitterBackupArray == nil || twitterBackupArray.count == 0) {
+        searchTextField.text = @"";
         self.twitterBackupArray = [[NSMutableArray alloc] init];
     
         // Current Item For Sharing
+        //here we are not set Any Share Type for Override sendStatus Method of SHKTwitter
         SHKItem *item = [[SHKItem alloc] init];
-        //item.shareType = SHKShareTypeUserInfo;
-    
-    
-        iosSharer = [[ SHKSharer alloc] init];
-    
+        
         // Create controller and set share options
         iosSharer = [FlyerlyTwitterFriends shareItem:item];
         iosSharer.shareDelegate = self;
         
     }else {
     
+        [self onSearchClick:nil];
+        
         [self.uiTableView reloadData];
     }
 }

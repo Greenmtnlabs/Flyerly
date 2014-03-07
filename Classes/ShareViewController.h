@@ -57,6 +57,9 @@
 @property(nonatomic,strong) IBOutlet UILabel *topTitleLabel;
 @property(nonatomic,strong) NSString *Yvalue;
 @property(nonatomic,strong) UIBarButtonItem *rightUndoBarButton;
+@property(nonatomic,strong) UIButton *shareButton;
+@property(nonatomic,strong) UIButton *helpButton;
+
 @property (nonatomic, strong) UIDocumentInteractionController *dicController;
 @property(nonatomic,strong)UIImage *selectedFlyerImage;
 @property(nonatomic,strong)NSString *selectedFlyerDescription;

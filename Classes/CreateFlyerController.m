@@ -228,7 +228,7 @@ int selectedAddMoreLayerTab = -1;
     UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     
     //Left HelpButton
-    UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+    helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [helpButton addTarget:self action:@selector(loadHelpController) forControlEvents:UIControlEventTouchUpInside];
     [helpButton setBackgroundImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
     helpButton.showsTouchWhenHighlighted = YES;
@@ -2270,39 +2270,47 @@ int selectedAddMoreLayerTab = -1;
 
 #pragma mark  Share Flyer
 
--(void)share
-{
+
+/*
+ * HERE WE SHARE FLYER TO SOCIAL NETWORKS
+ */
+-(void)share {
     
+    // Disable  Buttons
+    sharePanel.hidden = NO;
+    rightUndoBarButton.enabled = NO;
+    shareButton.enabled = NO;
+    helpButton.enabled = NO;
 
     
-    if (sharePanel.frame.origin.y != self.view.frame.size.height -425) {
-        sharePanel.hidden = NO;
-        rightUndoBarButton.enabled = NO;
-    
-        NSString *shareImagePath = [flyer getFlyerImage];
-        UIImage *shareImage =  [UIImage imageWithContentsOfFile:shareImagePath];
+    NSString *shareImagePath = [flyer getFlyerImage];
+    UIImage *shareImage =  [UIImage imageWithContentsOfFile:shareImagePath];
 
-        shareviewcontroller.selectedFlyerImage = shareImage;
-        shareviewcontroller.flyer = self.flyer;
-        shareviewcontroller.imageFileName = shareImagePath;
-        shareviewcontroller.rightUndoBarButton = rightUndoBarButton;
-        shareviewcontroller.titleView.text = [flyer getFlyerTitle];
-        NSString *description = [flyer getFlyerDescription];
-        if (![description isEqualToString:@""]) {
-            shareviewcontroller.descriptionView.text = description;
-        }
-        shareviewcontroller.selectedFlyerDescription = [flyer getFlyerDescription];
-        shareviewcontroller.topTitleLabel = titleLabel;
-        shareviewcontroller.Yvalue = [NSString stringWithFormat:@"%f",self.view.frame.size.height];
-    
-        [shareviewcontroller setSocialStatus];
-
-        [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height, 320,425 )];
-        [UIView beginAnimations:nil context:NULL];
-        [UIView setAnimationDuration:0.4f];
-            [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height -425, 320,425 )];
-        [UIView commitAnimations];
+    //Here we Pass Param to Share Screen Which use for Sharing
+    shareviewcontroller.selectedFlyerImage = shareImage;
+    shareviewcontroller.flyer = self.flyer;
+    shareviewcontroller.imageFileName = shareImagePath;
+    shareviewcontroller.rightUndoBarButton = rightUndoBarButton;
+    shareviewcontroller.shareButton = shareButton;
+    shareviewcontroller.helpButton = helpButton;
+    shareviewcontroller.titleView.text = [flyer getFlyerTitle];
+    NSString *description = [flyer getFlyerDescription];
+    if (![description isEqualToString:@""]) {
+        shareviewcontroller.descriptionView.text = description;
     }
+    shareviewcontroller.selectedFlyerDescription = [flyer getFlyerDescription];
+    shareviewcontroller.topTitleLabel = titleLabel;
+    shareviewcontroller.Yvalue = [NSString stringWithFormat:@"%f",self.view.frame.size.height];
+    
+    [shareviewcontroller setSocialStatus];
+    
+    //Create Animation Here
+    [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height, 320,425 )];
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.4f];
+        [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height -425, 320,425 )];
+    [UIView commitAnimations];
+  
 
 }
 

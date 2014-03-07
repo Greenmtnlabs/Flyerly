@@ -47,27 +47,35 @@
     label.text = @"HELP CENTER";
     self.navigationItem.titleView = label;
 
-
+    
     if(IS_IPHONE_5){
         
         [doneButton setFrame:CGRectMake(doneButton.frame.origin.x, 1340, doneButton.frame.size.width, doneButton.frame.size.height)];
-        emailButton = [[UIButton alloc] initWithFrame:CGRectMake(55, 1357, 130, 10)];
-        linkButton = [[UIButton alloc] initWithFrame:CGRectMake(16, 1386, 172, 10)];
-        twitLink = [[UIButton alloc] initWithFrame:CGRectMake(16, 1417, 212, 10)];
-        linkFaceBook = [[UIButton alloc] initWithFrame:CGRectMake(16, 1431, 190, 10)];
+        emailButton = [[UIButton alloc] initWithFrame:CGRectMake(55, 1369, 130, 10)];
+        linkButton = [[UIButton alloc] initWithFrame:CGRectMake(16, 1400, 172, 10)];
+        twitLink = [[UIButton alloc] initWithFrame:CGRectMake(16, 1429, 212, 10)];
+        linkFaceBook = [[UIButton alloc] initWithFrame:CGRectMake(16, 1445, 190, 10)];
 
 
     } else {
         
         [doneButton setFrame:CGRectMake(doneButton.frame.origin.x, 1390, doneButton.frame.size.width, doneButton.frame.size.height)];
 
-        emailButton = [[UIButton alloc] initWithFrame:CGRectMake(55, 1266, 130, 10)];
-        linkButton = [[UIButton alloc] initWithFrame:CGRectMake(16, 1295, 172, 10)];
-        twitLink = [[UIButton alloc] initWithFrame:CGRectMake(16, 1323, 212, 10)];
-        linkFaceBook = [[UIButton alloc] initWithFrame:CGRectMake(16, 1336, 190, 10)];
+        emailButton = [[UIButton alloc] initWithFrame:CGRectMake(55, 1289, 130, 10)];
+        linkButton = [[UIButton alloc] initWithFrame:CGRectMake(16, 1315, 172, 10)];
+        twitLink = [[UIButton alloc] initWithFrame:CGRectMake(16, 1343, 212, 10)];
+        linkFaceBook = [[UIButton alloc] initWithFrame:CGRectMake(16, 1358, 190, 10)];
 
 
     }
+    
+    /* Position Testing
+    [emailButton setBackgroundColor:[UIColor blackColor] ];
+    [linkButton setBackgroundColor:[UIColor redColor] ];
+    [twitLink setBackgroundColor:[UIColor yellowColor] ];
+    [linkFaceBook setBackgroundColor:[UIColor greenColor] ];
+    */
+
     
     emailButton.showsTouchWhenHighlighted = YES;
     linkButton.showsTouchWhenHighlighted = YES;
