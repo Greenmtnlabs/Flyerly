@@ -12,6 +12,7 @@
 @protocol FlyerImageViewDelegate <NSObject>
 
 - (void)frameChangedForLayer:(NSString *)uid frame:(CGRect)frame;
+- (void)sendLayerToEditMode:(NSString *)uid;
 
 @end
 

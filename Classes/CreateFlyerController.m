@@ -1991,18 +1991,10 @@ int selectedAddMoreLayerTab = -1;
 
 #pragma mark Flyer Modified
 
-
-/*
- * When any Layer Tap for Edit its Call
- * and Here we manage all Layers
+/**
+ * Edit the current layer.
  */
--(void)editLayer:(LayerTileButton *)editButton{
-    
-    
-    editButtonGlobal = editButton;
-    currentLayer =  editButton.uid;
-    editButtonGlobal.uid = currentLayer;
-    
+- (void)editCurrentLayer {
     [self.flyimgView layerIsBeingEdited:currentLayer];
     
     
@@ -2052,7 +2044,19 @@ int selectedAddMoreLayerTab = -1;
             [self setAddMoreLayerTabAction:addMorePhotoTabButton];
         }
     }
+}
+
+/*
+ * When any Layer Tap for Edit its Call
+ * and Here we manage all Layers
+ */
+-(void)editLayer:(LayerTileButton *)editButton{
     
+    editButtonGlobal = editButton;
+    currentLayer =  editButton.uid;
+    editButtonGlobal.uid = currentLayer;
+    
+    [self editCurrentLayer];
 }
 
 
@@ -2074,7 +2078,7 @@ int selectedAddMoreLayerTab = -1;
     [self callAddMoreLayers];
 }
 
-
+#pragma mark - Delegate for Flyerly ImageView
 
 /**
  * Frame changed for layer, let the model know.
@@ -2106,7 +2110,18 @@ int selectedAddMoreLayerTab = -1;
     [self.flyimgView renderLayer:uid layerDictionary:[flyer getLayerFromMaster:uid]];
 }
 
+/**
+ * Frame changed for layer, let the model know.
+ */
+- (void)sendLayerToEditMode:(NSString *)uid  {
+    // Set the given layer as current.
+    self.currentLayer = uid;
 
+    // Edit the current layer.
+    [self editCurrentLayer];
+}
+
+#pragma mark - Undo Implementation
 
 -(void)undoFlyer{
     

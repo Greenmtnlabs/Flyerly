@@ -114,11 +114,17 @@
     if ( view != nil ) {
         view.userInteractionEnabled = YES;
         
+        // Gesture for moving layers
         UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(layerMoved:)];
         [view addGestureRecognizer:panGesture];
         
+        // Gesture for resizing layers
         UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(layerResized:)];
         [view addGestureRecognizer:pinchGesture];
+        
+        // Gesture for editing layers
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editLayer:)];
+        [view addGestureRecognizer:tapGesture];
     }
 }
 
@@ -358,6 +364,25 @@
     
     
     return;
+}
+
+#pragma mark - Tap to edit functionality
+
+/**
+ * Edit view when tapped.
+ */
+- (void)editLayer:(UIGestureRecognizer *)sender {
+    UIView *_view = sender.view;
+    
+    // Here we send the first matching layer in Dictionary
+    // in to edit mode.
+    NSArray *keys = [layers allKeysForObject:_view];
+    
+    // Let the delegate know that this layer needs to go in to edit mode.
+    if ( keys.count > 0 ) {
+        NSString *key = [keys objectAtIndex:0];
+        [self.delegate sendLayerToEditMode:key];
+    }
 }
 
 @end
