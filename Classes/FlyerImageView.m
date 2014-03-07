@@ -361,8 +361,6 @@
         [self.delegate frameChangedForLayer:key frame:_view.frame];
     }
 
-    
-    
     return;
 }
 

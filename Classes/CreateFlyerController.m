@@ -2114,11 +2114,18 @@ int selectedAddMoreLayerTab = -1;
  * Frame changed for layer, let the model know.
  */
 - (void)sendLayerToEditMode:(NSString *)uid  {
-    // Set the given layer as current.
-    self.currentLayer = uid;
+    // Set the given layer as current. If it is not
+    // already set.
+    if ( ![self.currentLayer isEqualToString:uid] ) {
+        self.currentLayer = uid;
 
-    // Edit the current layer.
-    [self editCurrentLayer];
+        // Edit the current layer.
+        [self editCurrentLayer];
+    } else if ( [flyer getText:self.currentLayer] != nil ) {
+        // If the current layer is a text layer, and its been tapped
+        // again then edit the text.
+        [self callWrite];
+    }
 }
 
 #pragma mark - Undo Implementation
