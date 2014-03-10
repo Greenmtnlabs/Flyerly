@@ -12,8 +12,14 @@
                 <outlet property="emailButton" destination="12" id="24"/>
                 <outlet property="facebookButton" destination="11" id="23"/>
                 <outlet property="flickrButton" destination="13" id="25"/>
+                <outlet property="flyerShareType" destination="02X-0M-pgw" id="RRD-OV-hAp"/>
                 <outlet property="instagramButton" destination="17" id="30"/>
                 <outlet property="smsButton" destination="14" id="26"/>
+                <outlet property="star1" destination="D0f-Ce-0gF" id="Qb0-gF-RHV"/>
+                <outlet property="star2" destination="mVn-Rd-jbl" id="CSS-K6-EAK"/>
+                <outlet property="star3" destination="yuC-Xa-KrZ" id="PgV-Ec-1x0"/>
+                <outlet property="star4" destination="iQw-qn-Bq4" id="ctm-Um-nI7"/>
+                <outlet property="star5" destination="N5u-za-btZ" id="eEZ-aC-WkI"/>
                 <outlet property="titleView" destination="7" id="21"/>
                 <outlet property="tumblrButton" destination="16" id="29"/>
                 <outlet property="twitterButton" destination="15" id="31"/>
@@ -28,6 +34,71 @@
                 <view alpha="0.92000000000000004" contentMode="scaleToFill" id="zpF-rw-gHy">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="425"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="02X-0M-pgw">
+                            <rect key="frame" x="14" y="202" width="108" height="31"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="private_off_button.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="selected" image="public_on.png"/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="D0f-Ce-0gF">
+                            <rect key="frame" x="165" y="205" width="25" height="24"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="star.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="selected" image="star_selected.png"/>
+                            <connections>
+                                <action selector="clickOnStarRate:" destination="-1" eventType="touchUpInside" id="T5b-Nc-aFV"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="mVn-Rd-jbl">
+                            <rect key="frame" x="192" y="205" width="25" height="24"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="star.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="selected" image="star_selected.png"/>
+                            <connections>
+                                <action selector="clickOnStarRate:" destination="-1" eventType="touchUpInside" id="5qy-be-4Wq"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="yuC-Xa-KrZ">
+                            <rect key="frame" x="217" y="205" width="25" height="24"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="star.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="selected" image="star_selected.png"/>
+                            <connections>
+                                <action selector="clickOnStarRate:" destination="-1" eventType="touchUpInside" id="tFB-nx-G5h"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="iQw-qn-Bq4">
+                            <rect key="frame" x="243" y="205" width="25" height="24"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="star.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="selected" image="star_selected.png"/>
+                            <connections>
+                                <action selector="clickOnStarRate:" destination="-1" eventType="touchUpInside" id="rQd-Cx-dzB"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="N5u-za-btZ">
+                            <rect key="frame" x="268" y="205" width="25" height="24"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="star.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="selected" image="star_selected.png"/>
+                            <connections>
+                                <action selector="clickOnStarRate:" destination="-1" eventType="touchUpInside" id="pdA-pa-q4Y"/>
+                            </connections>
+                        </button>
+                    </subviews>
                     <color key="backgroundColor" red="0.80392156862745101" green="0.80392156862745101" blue="0.80784313725490198" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="flat_text_box.png" id="69">
@@ -235,13 +306,6 @@
                     <rect key="frame" x="0.0" y="173" width="320" height="2"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Public" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pTh-xS-qY3">
-                    <rect key="frame" x="16" y="208" width="58" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
-                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rate Us" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NKl-xx-2vK">
                     <rect key="frame" x="140" y="241" width="180" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -249,32 +313,6 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="H37-Jf-aNA">
-                    <rect key="frame" x="72" y="203" width="51" height="31"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="onTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <color key="thumbTintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                </switch>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star.png" id="Mpk-de-jx8">
-                    <rect key="frame" x="247" y="207" width="25" height="24"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star.png" id="nEn-rU-sQD">
-                    <rect key="frame" x="275" y="207" width="25" height="24"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star_selected.png" id="yal-zb-FUz">
-                    <rect key="frame" x="161" y="207" width="25" height="24"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star_selected.png" id="bNp-aU-Kd7">
-                    <rect key="frame" x="190" y="207" width="25" height="24"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star_selected.png" id="EyH-89-Ghd">
-                    <rect key="frame" x="219" y="207" width="25" height="24"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </imageView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
         </view>
@@ -292,6 +330,8 @@
         <image name="instagram_share.png" width="120" height="120"/>
         <image name="instagram_share_selected.png" width="120" height="120"/>
         <image name="panel_close_button.png" width="640" height="74"/>
+        <image name="private_off_button.png" width="188" height="62"/>
+        <image name="public_on.png" width="246" height="81"/>
         <image name="separator.png" width="640" height="3"/>
         <image name="sms_share.png" width="120" height="120"/>
         <image name="sms_share_selected.png" width="120" height="120"/>

@@ -13,6 +13,8 @@
 
 @synthesize Yvalue,rightUndoBarButton,shareButton,helpButton,selectedFlyerImage,fvController,titleView,descriptionView,selectedFlyerDescription,  imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,dicController, clipboardlabel,flyer,topTitleLabel,delegate,activityIndicator;
 
+@synthesize flyerShareType,star1,star2,star3,star4,star5;
+
 
 #pragma mark  View Appear Methods
 
@@ -75,7 +77,6 @@
     UIGraphicsBeginImageContextWithOptions(self.view.bounds.size, self.view.opaque, 0.0);
     [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
     UIGraphicsEndImageContext();
-    
     
     UIImage *originalImage = [UIImage imageWithContentsOfFile:imageFileName];
     
@@ -616,6 +617,47 @@
     
     if (sharer.quiet) return;
     [[SHKActivityIndicator currentIndicator]  showProgress:progress forSharer:sharer];
+}
+
+
+#pragma mark  Rating Flyer
+
+-(IBAction)clickOnStarRate:(id)sender {
+    
+    [star1 setSelected:NO];
+    [star2 setSelected:NO];
+    [star3 setSelected:NO];
+    [star4 setSelected:NO];
+    [star5 setSelected:NO];
+
+    
+    if (sender == star1) {
+        [star1 setSelected:YES];
+    }else if (sender == star2){
+        [star1 setSelected:YES];
+        [star2 setSelected:YES];
+    }else if (sender == star3){
+        [star1 setSelected:YES];
+        [star2 setSelected:YES];
+        [star3 setSelected:YES];
+    }else if (sender == star4){
+        [star1 setSelected:YES];
+        [star2 setSelected:YES];
+        [star3 setSelected:YES];
+        [star4 setSelected:YES];
+    }else if (sender == star5){
+        [star1 setSelected:YES];
+        [star2 setSelected:YES];
+        [star3 setSelected:YES];
+        [star4 setSelected:YES];
+        [star5 setSelected:YES];
+    }
+    
+}
+
+
+-(IBAction)clickOnFlyerType:(id)sender {
+
 }
 
 

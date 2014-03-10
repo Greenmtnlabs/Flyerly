@@ -60,6 +60,14 @@
 @property(nonatomic,strong) UIButton *shareButton;
 @property(nonatomic,strong) UIButton *helpButton;
 
+@property(nonatomic,strong) IBOutlet UIButton *flyerShareType;
+@property(nonatomic,strong) IBOutlet UIButton *star1;
+@property(nonatomic,strong) IBOutlet UIButton *star2;
+@property(nonatomic,strong) IBOutlet UIButton *star3;
+@property(nonatomic,strong) IBOutlet UIButton *star4;
+@property(nonatomic,strong) IBOutlet UIButton *star5;
+
+
 @property (nonatomic, strong) UIDocumentInteractionController *dicController;
 @property(nonatomic,strong)UIImage *selectedFlyerImage;
 @property(nonatomic,strong)NSString *selectedFlyerDescription;
@@ -78,13 +86,11 @@
 -(IBAction)onClickSMSButton;
 -(IBAction)onClickClipboardButton;
 -(IBAction)hideMe;
+-(IBAction)clickOnStarRate:(id)sender;
+-(IBAction)clickOnFlyerType:(id)sender;
 
 
 -(void)shareOnInstagram;
 -(void)setSocialStatus;
-
-
-
-
 
 @end
