@@ -332,7 +332,7 @@
             // Current Item For Sharing
             SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ %@ #flyerly",titleView.text, selectedFlyerDescription ]];
             
-            iosSharer = [[ SHKSharer alloc] init];
+           // iosSharer = [[ SHKSharer alloc] init];
             iosSharer = [SHKFacebook shareItem:item];
             iosSharer.shareDelegate = self;
             

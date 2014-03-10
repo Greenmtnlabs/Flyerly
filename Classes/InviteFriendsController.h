@@ -25,6 +25,8 @@
 #import "FlyerlyFacebookFriends.h"
 #import "ParentViewController.h"
 #import "SHKSharer.h"
+#import <SHKFormController.h>
+#import "SHKFacebookCommon.h"
 #import "ContactsModel.h"
 #import "FlyerlyFacebookFriends.h"
 #import "FlyerlyFacebookInvite.h"
@@ -88,10 +90,9 @@
 @property(nonatomic,strong) NSMutableArray *twitterInvited;
 @property(nonatomic,strong) NSMutableArray *iPhoneinvited;
 
-@property(nonatomic,strong)IBOutlet UIView *fbView;
-@property(nonatomic,strong)IBOutlet UITextView *fbText;
-- (IBAction)fbSend:(UIButton *)sender;
-- (IBAction)fbCancel:(UIButton *)sender;
+@property(nonatomic,strong)NSString  *fbText;
+- (void)fbSend;
+- (void)fbCancel;
 
 
 - (IBAction)loadLocalContacts:(UIButton *)sender;

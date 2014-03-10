@@ -19,7 +19,7 @@
 @implementation InviteFriendsController
 @synthesize uiTableView, contactsArray, deviceContactItems,contactsButton, facebookButton, twitterButton, loadingView, searchTextField, facebookArray, twitterArray,fbinvited,twitterInvited,iPhoneinvited;
 @synthesize contactBackupArray, facebookBackupArray, twitterBackupArray;
-@synthesize fbView,fbText;
+@synthesize fbText;
 
 const int TWITTER_TAB = 2;
 const int FACEBOOK_TAB = 1;
@@ -149,7 +149,6 @@ BOOL selectAll;
     
     // HERE WE HIGHLIGHT BUTTON SELECT AND
     // UNSELECTED BUTTON
-    fbView.hidden = YES;
     [contactsButton setSelected:YES];
     [twitterButton setSelected:NO];
     [facebookButton setSelected:NO];
@@ -320,6 +319,9 @@ BOOL selectAll;
     
 }
 
+
+
+
 /**
  * Called when facebook  button is selected on screen
  */
@@ -328,7 +330,6 @@ BOOL selectAll;
     
     // HERE WE HIGHLIGHT BUTTON ON TOUCH
     // AND OTHERS SET UNSELECTED
-    fbView.hidden = YES;
     [contactsButton setSelected:NO];
     [twitterButton setSelected:NO];
     [facebookButton setSelected:YES];
@@ -514,7 +515,6 @@ int totalCount = 0;
     
     // HERE WE HIGHLIGHT BUTTON SELECT AND
     // UNSELECTED BUTTON
-    fbView.hidden = YES;
     [contactsButton setSelected:NO];
     [twitterButton setSelected:YES];
     [facebookButton setSelected:NO];
@@ -726,13 +726,39 @@ int totalCount = 0;
             
         }else if(selectedTab == 1){
             
-            // Here we Start Animation
-            [UIView beginAnimations:nil context:NULL];
-            [UIView setAnimationDuration:0.4f];
-                fbView.hidden = NO;
-                fbText.text = @"I'm using the flyerly app to create and share flyers on the go! Flyer.ly/Facebook  #flyerly";
-            [UIView commitAnimations];
+            SHKItem *i = [SHKItem text:@"I'm using the flyerly app to create and share flyers on the go! Flyer.ly/Invite"];
             
+            NSArray *shareFormFields = [SHKFacebookCommon shareFormFieldsForItem:i];
+            SHKFormController *rootView = [[SHKCONFIG(SHKFormControllerSubclass) alloc] initWithStyle:UITableViewStyleGrouped
+                                                                                                title:nil
+                                                                                     rightButtonTitle:SHKLocalizedString(@"Send to Facebook")
+                                           ];
+            
+            [rootView addSection:shareFormFields header:nil footer:i.URL!=nil?i.URL.absoluteString:nil];
+            
+            
+            rootView.validateBlock = ^(SHKFormController *form) {
+                
+                // default does no checking and proceeds to share
+                [form saveForm];
+                
+            };
+            
+            
+            rootView.saveBlock = ^(SHKFormController *form) {
+                
+                [self updateItemWithForm:form];
+                [self fbSend];
+                
+            };
+            
+            rootView.cancelBlock = ^(SHKFormController *form) {
+                
+                [self fbCancel];
+                
+            };
+            
+            [[SHK currentHelper] showViewController:rootView];
             
         }
         
@@ -742,6 +768,24 @@ int totalCount = 0;
     
     [Flurry logEvent:@"Friends Invited"];
 }
+
+
+/*
+ * Here we Get Text from SHKFormController
+ */
+- (void)updateItemWithForm:(SHKFormController *)form
+{
+	// Update item with new values from form
+    NSDictionary *formValues = [form formValues];
+	for(NSString *key in formValues)
+	{
+		
+		if ([key isEqualToString:@"text"]){
+            fbText = [formValues objectForKey:key];
+        }
+    }
+}
+
 
 - (void)messageComposeViewController:
 (MFMessageComposeViewController *)controller
@@ -864,16 +908,15 @@ int totalCount = 0;
 /*
  * Here we Send Request to facebook for tags Friends
  */
-- (IBAction)fbSend:(UIButton *)sender{
+- (void)fbSend{
     
-    [fbText resignFirstResponder];
-    fbView.hidden =YES;
     
     // Current Item For Sharing
-    SHKItem *item = [SHKItem text:fbText.text];
+    SHKItem *item = [SHKItem text:fbText];
     item.tags = deviceContactItems;
     
     //Calling ShareKit for Sharing
+    iosSharer = [[SHKSharer alloc] init];
     iosSharer = [FlyerlyFacebookInvite shareItem:item];
     iosSharer.shareDelegate = self;
 
@@ -883,9 +926,7 @@ int totalCount = 0;
 /*
  * Here we Hide our facebook post View
  */
-- (IBAction)fbCancel:(UIButton *)sender {
-    fbView.hidden = YES;
-    [fbText resignFirstResponder];
+- (void)fbCancel {
     [deviceContactItems removeAllObjects];
     [uiTableView reloadData];
 
