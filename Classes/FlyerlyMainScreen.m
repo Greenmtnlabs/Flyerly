@@ -599,8 +599,6 @@
  */
 -(void)getUserPurcahses {
 
-
-
     // HERE WE GET USER PURCHASES DETAIL
     if(![[NSUserDefaults standardUserDefaults] stringForKey:@"InAppPurchases"]){
 

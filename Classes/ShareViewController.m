@@ -653,10 +653,28 @@
         [star5 setSelected:YES];
     }
     
+  UIAlertView  *appRateAlert = [[UIAlertView alloc]initWithTitle:@"Do you want to rate us on App store" message:@"" delegate:self cancelButtonTitle:@"NO" otherButtonTitles:@"YES" ,nil];
+    [appRateAlert show];
+    
 }
 
+#pragma mark UIAlertView delegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+  
+    if(buttonIndex == 1) {
+        NSString *url = [NSString stringWithFormat: @"itms-apps://itunes.apple.com/app/id344130515"];
+        [[UIApplication sharedApplication] openURL: [NSURL URLWithString: url]];
+    }
+}
 
 -(IBAction)clickOnFlyerType:(id)sender {
+    
+    if ([flyerShareType isSelected]) {
+        [flyerShareType setSelected:NO];
+    }else {
+        [flyerShareType setSelected:YES];
+    }
 
 }
 

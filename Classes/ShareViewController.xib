@@ -31,6 +31,11 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="425"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" id="c1g-qi-Fqa">
+                    <rect key="frame" x="1" y="45" width="319" height="218"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.2807829288" green="0.75192376110000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
                 <view alpha="0.92000000000000004" contentMode="scaleToFill" id="zpF-rw-gHy">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="425"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -38,10 +43,13 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="02X-0M-pgw">
                             <rect key="frame" x="14" y="202" width="108" height="31"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" image="private_off_button.png">
+                            <state key="normal" image="public_on.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
-                            <state key="selected" image="public_on.png"/>
+                            <state key="selected" image="private_off_button.png"/>
+                            <connections>
+                                <action selector="clickOnFlyerType:" destination="-1" eventType="touchUpInside" id="FLx-Iu-VQG"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="D0f-Ce-0gF">
                             <rect key="frame" x="165" y="205" width="25" height="24"/>
@@ -99,7 +107,7 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" red="0.80392156862745101" green="0.80392156862745101" blue="0.80784313725490198" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="flat_text_box.png" id="69">
                     <rect key="frame" x="10" y="45" width="298" height="33"/>

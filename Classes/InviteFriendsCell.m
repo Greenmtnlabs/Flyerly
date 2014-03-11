@@ -42,7 +42,7 @@
 
 -(void)contactInvited :(ContactsModel *)model{
 
-    [checkBtn setBackgroundImage:[UIImage imageNamed:model.checkImageName] forState:UIControlStateNormal];
+    [checkBtn setImage:[UIImage imageNamed:model.checkImageName]];
 }
 
 @end

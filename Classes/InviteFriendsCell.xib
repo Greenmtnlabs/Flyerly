@@ -29,11 +29,6 @@
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Wta-6d-90h">
-                        <rect key="frame" x="282" y="39" width="28" height="28"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <state key="normal" backgroundImage="add_icon-grey.png"/>
-                    </button>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="auC-pW-5vs">
                         <rect key="frame" x="86" y="17" width="208" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -41,10 +36,14 @@
                         <color key="textColor" red="0.01121286401" green="0.57007971449999995" blue="0.91810825890000003" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Gc5-LK-JuL">
+                        <rect key="frame" x="282" y="39" width="28" height="28"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </imageView>
                 </subviews>
             </tableViewCellContentView>
             <connections>
-                <outlet property="checkBtn" destination="Wta-6d-90h" id="N7R-Fx-nkE"/>
+                <outlet property="checkBtn" destination="Gc5-LK-JuL" id="9gQ-ee-a0x"/>
                 <outlet property="dName" destination="auC-pW-5vs" id="Ht1-WY-oVS"/>
                 <outlet property="description" destination="kuq-Ax-mKE" id="dnN-r8-K6U"/>
                 <outlet property="imgview" destination="I3a-yk-g11" id="IRb-LN-fwd"/>
@@ -52,7 +51,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="add_icon-grey.png" width="253" height="35"/>
         <image name="invite_Bg.png" width="311" height="101"/>
     </resources>
 </document>

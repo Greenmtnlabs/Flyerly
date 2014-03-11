@@ -1390,8 +1390,8 @@
 		20269631188F3E0600CF2F78 /* edit_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "edit_button@2x.png"; sourceTree = "<group>"; };
 		2026992918CED6B000945218 /* RMStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMStore.h; sourceTree = "<group>"; };
 		2026992A18CED6B000945218 /* RMStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMStore.m; sourceTree = "<group>"; };
-		2026992C18CF200F00945218 /* blue_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blue_arrow.png; sourceTree = "<group>"; };
-		2026992D18CF200F00945218 /* lock_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lock_icon.png; sourceTree = "<group>"; };
+		2026992C18CF200F00945218 /* blue_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = blue_arrow.png; path = ../Classes/blue_arrow.png; sourceTree = "<group>"; };
+		2026992D18CF200F00945218 /* lock_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = lock_icon.png; path = ../Classes/lock_icon.png; sourceTree = "<group>"; };
 		202C47B3187D49FF00FE0975 /* cancel_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel_button.png; sourceTree = "<group>"; };
 		202C47B4187D49FF00FE0975 /* cancel_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancel_button@2x.png"; sourceTree = "<group>"; };
 		202C47B8187D6E4B00FE0975 /* BitlyConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitlyConfig.h; sourceTree = "<group>"; };
@@ -1737,8 +1737,8 @@
 		20ED041717CCB41F00DA702E /* SettingcellBack@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SettingcellBack@2x.png"; sourceTree = "<group>"; };
 		20ED041A17CCBCB000DA702E /* t_email_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = t_email_button.png; sourceTree = "<group>"; };
 		20ED041B17CCBCB000DA702E /* t_email_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "t_email_button@2x.png"; sourceTree = "<group>"; };
-		20F0936A18CDD74E00CD3BAA /* private_off_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = private_off_button.png; sourceTree = "<group>"; };
-		20F0936B18CDD74E00CD3BAA /* public_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = public_on.png; sourceTree = "<group>"; };
+		20F0936A18CDD74E00CD3BAA /* private_off_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = private_off_button.png; path = ../Classes/private_off_button.png; sourceTree = "<group>"; };
+		20F0936B18CDD74E00CD3BAA /* public_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = public_on.png; path = ../Classes/public_on.png; sourceTree = "<group>"; };
 		20F4D8DD17BA3D09007B2DF5 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		20F4D8DE17BA3D09007B2DF5 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		20F4D8DF17BA3D0A007B2DF5 /* ProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
@@ -2308,6 +2308,10 @@
 		0DF3A361108DF47400D6C887 /* ImageLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				20F0936A18CDD74E00CD3BAA /* private_off_button.png */,
+				20F0936B18CDD74E00CD3BAA /* public_on.png */,
+				2026992C18CF200F00945218 /* blue_arrow.png */,
+				2026992D18CF200F00945218 /* lock_icon.png */,
 				20967DA118C8D7EA00B273FC /* star_selected.png */,
 				20967DA218C8D7EA00B273FC /* star.png */,
 				20967D9B18C8CDA000B273FC /* separator.png */,
@@ -3052,8 +3056,6 @@
 				2002C89318888CD4005B18C9 /* SaveFlyerCell.h */,
 				2002C89418888CD4005B18C9 /* SaveFlyerCell.m */,
 				2002C89518888CD4005B18C9 /* SaveFlyerCell.xib */,
-				2026992C18CF200F00945218 /* blue_arrow.png */,
-				2026992D18CF200F00945218 /* lock_icon.png */,
 			);
 			name = SavedFlyers;
 			sourceTree = "<group>";
@@ -3064,8 +3066,6 @@
 				E8A7347A1092CFF300661AAD /* ShareViewController.h */,
 				E8A7347B1092CFF300661AAD /* ShareViewController.m */,
 				E8A7347C1092CFF300661AAD /* ShareViewController.xib */,
-				20F0936A18CDD74E00CD3BAA /* private_off_button.png */,
-				20F0936B18CDD74E00CD3BAA /* public_on.png */,
 			);
 			name = ShareScreen;
 			sourceTree = "<group>";

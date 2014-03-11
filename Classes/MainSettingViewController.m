@@ -73,8 +73,8 @@
     category = [[NSMutableArray alloc] init];
     [category addObject:@"Save to Gallery"];
     [category addObject:@"Account Setting"];
-    [category addObject:@"Like Us on Facebook"];
-    [category addObject:@"Like Us on Twitter"];
+    [category addObject:@"Like us on Facebook"];
+    [category addObject:@"Like us on Twitter"];
     [category addObject:@"Sign Out"];
     
 
