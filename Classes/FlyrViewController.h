@@ -16,18 +16,23 @@
 #import "RMStore.h"
 
 @class SaveFlyerCell,Flyer;
-@interface FlyrViewController : UIViewController <UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>{
+@interface FlyrViewController : UIViewController <UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,UIActionSheetDelegate,RMStoreObserver>{
 
     CreateFlyerController *createFlyer;
     BOOL searching;
+    BOOL lockFlyer;
     Flyer *flyer;
     NSMutableArray *flyerPaths;
     NSMutableArray *searchFlyerPaths;
+    NSArray *requestedProducts;
+
 
 }
 
 @property(nonatomic,strong) IBOutlet UITableView *tView;
 @property(nonatomic,strong) IBOutlet UITextField *searchTextField;
+
+
 
 -(void)goBack;
 
@@ -35,6 +40,10 @@
 
 -(IBAction)createFlyer:(id)sender;
 
--(void)purchaseProduct;
+-(void)requestProduct;
+-(void)purchaseProductID:(NSString *)pid;
+
+-(void)restorePurchase;
+
 
 @end

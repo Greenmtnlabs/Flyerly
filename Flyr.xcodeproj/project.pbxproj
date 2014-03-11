@@ -290,6 +290,8 @@
 		20269634188F3E0600CF2F78 /* edit_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 20269630188F3E0600CF2F78 /* edit_button.png */; };
 		20269635188F3E0600CF2F78 /* edit_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20269631188F3E0600CF2F78 /* edit_button@2x.png */; };
 		2026992B18CED6B000945218 /* RMStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 2026992A18CED6B000945218 /* RMStore.m */; };
+		2026992E18CF200F00945218 /* blue_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 2026992C18CF200F00945218 /* blue_arrow.png */; };
+		2026992F18CF200F00945218 /* lock_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2026992D18CF200F00945218 /* lock_icon.png */; };
 		202C47B5187D49FF00FE0975 /* cancel_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 202C47B3187D49FF00FE0975 /* cancel_button.png */; };
 		202C47B6187D49FF00FE0975 /* cancel_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 202C47B4187D49FF00FE0975 /* cancel_button@2x.png */; };
 		202C47F9187D6E4B00FE0975 /* BitlyConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 202C47B9187D6E4B00FE0975 /* BitlyConfig.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -1388,6 +1390,8 @@
 		20269631188F3E0600CF2F78 /* edit_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "edit_button@2x.png"; sourceTree = "<group>"; };
 		2026992918CED6B000945218 /* RMStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMStore.h; sourceTree = "<group>"; };
 		2026992A18CED6B000945218 /* RMStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMStore.m; sourceTree = "<group>"; };
+		2026992C18CF200F00945218 /* blue_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blue_arrow.png; sourceTree = "<group>"; };
+		2026992D18CF200F00945218 /* lock_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lock_icon.png; sourceTree = "<group>"; };
 		202C47B3187D49FF00FE0975 /* cancel_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel_button.png; sourceTree = "<group>"; };
 		202C47B4187D49FF00FE0975 /* cancel_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancel_button@2x.png"; sourceTree = "<group>"; };
 		202C47B8187D6E4B00FE0975 /* BitlyConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitlyConfig.h; sourceTree = "<group>"; };
@@ -2259,9 +2263,9 @@
 		080E96DDFE201D6D7F000001 /* FlyerlyClasses */ = {
 			isa = PBXGroup;
 			children = (
-				2026992818CED69600945218 /* Purchase */,
 				1D3623240D0F684500981E51 /* FlyrAppDelegate.h */,
 				1D3623250D0F684500981E51 /* FlyrAppDelegate.m */,
+				2026992818CED69600945218 /* Purchase */,
 				20366619188DB5BA00C71EAA /* Models */,
 				20F4D8E217BA40A5007B2DF5 /* GlobalClass */,
 				208C6850186DAB38004A74F2 /* Config */,
@@ -3048,6 +3052,8 @@
 				2002C89318888CD4005B18C9 /* SaveFlyerCell.h */,
 				2002C89418888CD4005B18C9 /* SaveFlyerCell.m */,
 				2002C89518888CD4005B18C9 /* SaveFlyerCell.xib */,
+				2026992C18CF200F00945218 /* blue_arrow.png */,
+				2026992D18CF200F00945218 /* lock_icon.png */,
 			);
 			name = SavedFlyers;
 			sourceTree = "<group>";
@@ -4821,9 +4827,11 @@
 				2039F7BB17F076D000DE2AA4 /* search_bg.png in Resources */,
 				2039F7BC17F076D000DE2AA4 /* search_bg@2x.png in Resources */,
 				2039F7C517F0837300DE2AA4 /* dfcontact.jpg in Resources */,
+				2026992F18CF200F00945218 /* lock_icon.png in Resources */,
 				2039F7C617F0837300DE2AA4 /* dfcontact@2x.jpg in Resources */,
 				20E3010A17F1749E006A1DE0 /* checkDouble.png in Resources */,
 				20E3010B17F1749E006A1DE0 /* checkDouble@2x.png in Resources */,
+				2026992E18CF200F00945218 /* blue_arrow.png in Resources */,
 				20E3010E17F1AA9A006A1DE0 /* searinvite.png in Resources */,
 				49B88988188652A2003766AD /* FacebookLikeView.html in Resources */,
 				20E3010F17F1AA9A006A1DE0 /* searinvite@2x.png in Resources */,
@@ -5012,6 +5020,7 @@
 					"$(SRCROOT)/ExternalFrameworks/Flurry/",
 					"$(SRCROOT)/ExternalFrameworks/Bitly/",
 					/Users/khurram/Documents/flyerly/ExternalFrameworks/Flurry,
+					"/Users/khurram/Documents/flyerly/Classes/Optional/openssl-1.0.1e/lib",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "$(inherited)";
@@ -5057,6 +5066,7 @@
 					"$(SRCROOT)/ExternalFrameworks/Flurry/",
 					"$(SRCROOT)/ExternalFrameworks/Bitly/",
 					/Users/khurram/Documents/flyerly/ExternalFrameworks/Flurry,
+					"/Users/khurram/Documents/flyerly/Classes/Optional/openssl-1.0.1e/lib",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "$(inherited)";
@@ -5093,6 +5103,7 @@
 					"$(SRCROOT)/ExternalFrameworks/Flurry/",
 					"$(SRCROOT)/ExternalFrameworks/Bitly/",
 					/Users/khurram/Documents/flyerly/ExternalFrameworks/Flurry,
+					"/Users/khurram/Documents/flyerly/Classes/Optional/openssl-1.0.1e/lib",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "$(inherited)";

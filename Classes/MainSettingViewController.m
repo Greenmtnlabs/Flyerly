@@ -205,9 +205,7 @@
 
     //REMOVE KEYS
     [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"User"];
-
-    // Forget in app purchases.
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:IN_APP_DICTIONARY_KEY];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"InAppPurchases"];
     
     // Log out from parse.
     [PFUser logOut];

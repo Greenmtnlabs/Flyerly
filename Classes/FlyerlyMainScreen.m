@@ -204,6 +204,9 @@
 
     [inviteFriendLabel setText:NSLocalizedString(@"invite_friends", nil)];
     
+    //GET UPDATED USER PUCHASES INFO
+    [self getUserPurcahses];
+    
     //GET FACEBOOK APP LIKE STATUS
     //Tenporary Commit that part
    // [self setFacebookLikeStatus];
@@ -589,6 +592,41 @@
 
     
     [self.likeView setHidden:YES];
+}
+
+/*
+ * HERE WE GET USER PURCHASES INFO FROM PARSE
+ */
+-(void)getUserPurcahses {
+
+
+
+    // HERE WE GET USER PURCHASES DETAIL
+    if(![[NSUserDefaults standardUserDefaults] stringForKey:@"InAppPurchases"]){
+
+        PFUser *user = [PFUser currentUser];
+        PFQuery *query = [PFQuery queryWithClassName:@"InApp"];
+        [query whereKey:@"user" equalTo:user];
+        
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            
+            if (!error) {
+                
+                if (objects.count >= 1) {
+                   NSMutableDictionary  *oldPurchases = [[objects objectAtIndex:0] valueForKey:@"json"];
+                    
+                    //its for remember key of InApp already copy to Device
+                    [[NSUserDefaults standardUserDefaults] setObject:oldPurchases forKey:@"InAppPurchases"];
+                    
+                }
+                // The find succeeded. The first 100 objects are available in objects
+            } else {
+                // Log details of the failure
+                NSLog(@"Error: %@ %@", error, [error userInfo]);
+            }
+        }];
+    }
+
 }
 
 @end

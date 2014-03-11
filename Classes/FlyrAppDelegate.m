@@ -201,6 +201,13 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound];
 
 	[window makeKeyAndVisible];
+    
+    /*
+    const BOOL iOS7OrHigher = floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1;
+    _receiptVerificator = iOS7OrHigher ? [[RMStoreAppReceiptVerificator alloc] init] : [[RMStoreTransactionReceiptVerificator alloc] init];
+    [RMStore defaultStore].receiptVerificator = _receiptVerificator;
+
+*/
 
     return YES;
 }

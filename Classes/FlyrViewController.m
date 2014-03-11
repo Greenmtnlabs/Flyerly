@@ -44,6 +44,10 @@
     [searchTextField addTarget:self action:@selector(textFieldTapped:) forControlEvents:UIControlEventEditingChanged];
     searchTextField.borderStyle = nil;
     
+    lockFlyer = YES;
+
+    
+    
     
 }
 
@@ -73,6 +77,17 @@
         [tView reloadData];
     }
     
+    //HERE WE GET USER PURCHASES INFO FROM PARSE
+    if(![[NSUserDefaults standardUserDefaults] stringForKey:@"InAppPurchases"]){
+        
+        NSMutableDictionary *oldPurchases = [[NSUserDefaults standardUserDefaults] valueForKey:@"InAppPurchases"];
+        
+        if ([oldPurchases objectForKey:@"comflyerlyAllDesignBundle"] ||  [oldPurchases objectForKey:@"comflyerlyUnlockSavedFlyers"]) {
+        
+            lockFlyer = NO;
+            [self.tView reloadData];
+        }
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -291,7 +306,9 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             
             flyer = [[Flyer alloc] initWithPath:[searchFlyerPaths objectAtIndex:indexPath.row]];
-            [cell renderCell:flyer];
+            [cell renderCell:flyer LockStatus:lockFlyer];
+            [cell.flyerLock addTarget:self action:@selector(requestProduct) forControlEvents:UIControlEventTouchUpInside];
+
             
         });
 
@@ -304,7 +321,8 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             
             flyer = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:indexPath.row]];
-            [cell renderCell:flyer];
+            [cell renderCell:flyer LockStatus:lockFlyer];
+            [cell.flyerLock addTarget:self action:@selector(requestProduct) forControlEvents:UIControlEventTouchUpInside];
             
         });
 
@@ -317,9 +335,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    [self purchaseProduct];
-    return;
-	
     flyer = [[Flyer alloc]initWithPath:[flyerPaths objectAtIndex:indexPath.row]];
     
     createFlyer = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
@@ -362,19 +377,155 @@
 }
 
 
+#pragma mark  PURCHASE PRODUCT
 
-/* HERE WE PURCHASE PRODUCT FROM APP STORE
- */
--(void)purchaseProduct {
+-(void)requestProduct {
     
-    NSSet *products = [NSSet setWithArray:@[@"com.flyerly.UnlockSavedFlyers"]];
+    //These are over Products on App Store
+    NSSet *products = [NSSet setWithArray:@[@"com.flyerly.AllDesignBundle",@"com.flyerly.UnlockSavedFlyers"]];
+    
+    
     [[RMStore defaultStore] requestProducts:products success:^(NSArray *products, NSArray *invalidProductIdentifiers) {
+        
         NSLog(@"Products loaded");
+        
+        requestedProducts = products;
+        UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:@"Choose Product" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles: nil];
+    
+        for(SKProduct *product in products)
+        {
+            
+            [actionSheet addButtonWithTitle:[NSString stringWithFormat:@"%@ - %@",product.localizedTitle,product.price]];
+        }
+        
+        [actionSheet addButtonWithTitle:@"Restore Purchase"];
+        [actionSheet addButtonWithTitle:@"Cancel"];
+        
+        [actionSheet showInView:self.view];
+        
+        
     } failure:^(NSError *error) {
         NSLog(@"Something went wrong");
     }];
 
 }
+
+
+
+
+/* HERE WE PURCHASE PRODUCT FROM APP STORE
+ */
+-(void)purchaseProductID:(NSString *)pid{
+
+    [[RMStore defaultStore] addPayment:pid success:^(SKPaymentTransaction *transaction) {
+        
+        
+        NSLog(@"Product purchased");
+        
+        //HERE WE GET USER PURCHASES INFO FROM PARSE
+        
+        NSString *strWithOutDot = [pid stringByReplacingOccurrencesOfString:@"." withString:@""];
+        
+        if(![[NSUserDefaults standardUserDefaults] stringForKey:@"InAppPurchases"]){
+            
+            NSMutableDictionary *userPurchase =[[NSMutableDictionary alloc] initWithDictionary:[[NSUserDefaults standardUserDefaults]valueForKey:@"InAppPurchases"]];
+            
+            [userPurchase setValue:@"1" forKey:strWithOutDot];
+            [[NSUserDefaults standardUserDefaults]setValue:userPurchase forKey:@"InAppPurchases"];
+            
+        
+        }else {
+            NSMutableDictionary *userPurchase =[[NSMutableDictionary alloc] init];
+            [userPurchase setValue:@"1" forKey:strWithOutDot];
+            [[NSUserDefaults standardUserDefaults]setValue:userPurchase forKey:@"InAppPurchases"];
+        
+        }
+        
+        //HERE WE UPDATE PARSE ACCOUNT
+        PFUser *user = [PFUser currentUser];
+        PFQuery *query = [PFQuery queryWithClassName:@"InApp"];
+         [query whereKey:@"user" equalTo:user];
+        [query getFirstObjectInBackgroundWithBlock:^(PFObject *InApp, NSError *error) {
+            
+            InApp[@"json"] = [[NSUserDefaults standardUserDefaults]objectForKey:@"InAppPurchases"];
+            [InApp saveInBackground];
+            lockFlyer = NO;
+            [self.tView reloadData];
+            
+        }];
+        
+        
+        [[RMStore defaultStore] removeStoreObserver:self];
+        
+    } failure:^(SKPaymentTransaction *transaction, NSError *error) {
+        
+        NSLog(@"Something went wrong");
+        
+    }];
+}
+
+- (void)storeProductsRequestFailed:(NSNotification*)notification
+{
+   // NSError *error = notification.storeError;
+}
+
+- (void)storeProductsRequestFinished:(NSNotification*)notification
+{
+   // NSArray *products = notification.products;
+}
+
+
+/**
+ * clickedButtonAtIndex (UIActionSheet)
+ *
+ * Handle the button clicks from mode of getting out selection.
+ */
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    
+    //if not cancel and Restore button presses
+    if(buttonIndex != 2 && buttonIndex != 3) {
+        
+        //This line pop up login screen if user not exist
+        [[RMStore defaultStore] addStoreObserver:self];
+        
+        //Getting Selected Product
+        SKProduct *product = [requestedProducts objectAtIndex:buttonIndex];
+        
+        [self purchaseProductID:product.productIdentifier];
+        
+    }
+    
+    //For Restore Purchase
+    if(buttonIndex == 2 ) {
+        [self restorePurchase];
+    }
+    
+    
+}
+
+#pragma mark  RESTORE PURCHASE
+
+/* HERE WE RESTORE PURCHASE PRODUCT FROM APP STORE
+ */
+-(void)restorePurchase {
+    
+    //This line pop up login screen if user not exist
+    [[RMStore defaultStore] addStoreObserver:self];
+    
+    [[RMStore defaultStore] restoreTransactionsOnSuccess:^{
+        NSLog(@"Transactions restored");
+    } failure:^(NSError *error) {
+        NSLog(@"Something went wrong");
+    }];
+}
+
+- (void)storeRestoreTransactionsFailed:(NSNotification*)notification;
+{
+   // NSError *error = notification.storeError;
+}
+
+- (void)storeRestoreTransactionsFinished:(NSNotification*)notification { }
 
 
 @end

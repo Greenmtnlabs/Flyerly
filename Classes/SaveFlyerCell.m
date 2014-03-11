@@ -14,15 +14,21 @@
 
 @implementation SaveFlyerCell
 @synthesize nameLabel, description, dateLabel, createLabel,cellImage,backgroundImage;
-@synthesize fbImage,twtImage,emailImage,instaImage,flickImage,tumbImage;
+@synthesize fbImage,twtImage,emailImage,instaImage,flickImage,tumbImage,flyerLock,lockImage;
 
 
 /*
  * HERE WE SET FLYER IMAGE ,TITLE,DESCRICPTION,DATE AND SOCIAL NETWORK STATUS
  */
-- (void)renderCell :(Flyer *)flyer {
+- (void)renderCell :(Flyer *)flyer LockStatus:(BOOL )status {
     
 
+    //HERE WE LOCK FLYER CELL
+    if (status) {
+        flyerLock.hidden = NO;
+        [lockImage setImage:[UIImage imageNamed:@"lock_icon"]];
+    }
+    
     // HERE WE SET FLYER INFORMATION FORM .TXT FILE
     [self.nameLabel setText: [flyer getFlyerTitle]];
     [self.description setText:[flyer getFlyerDescription]];
@@ -84,6 +90,5 @@
 
 
 }
-
 
 @end

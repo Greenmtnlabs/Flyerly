@@ -22,6 +22,7 @@
 #import "FlyerlyConfigurator.h"
 #import "BitlyConfig.h"
 #import "FlyerUser.h"
+#import "RMStore.h"
 
 extern NSString *FacebookDidLoginNotification;
 

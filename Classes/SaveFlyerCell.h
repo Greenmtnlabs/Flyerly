@@ -32,8 +32,11 @@
 @property(nonatomic, strong)IBOutlet UIImageView *instaImage;
 @property(nonatomic, strong)IBOutlet UIImageView *flickImage;
 @property(nonatomic, strong)IBOutlet UIImageView *tumbImage;
+@property(nonatomic, strong)IBOutlet UIImageView *lockImage;
+@property(nonatomic, strong)IBOutlet UIButton *flyerLock;
 
 
-- (void)renderCell :(Flyer *)flyer;
+
+- (void)renderCell :(Flyer *)flyer LockStatus:(BOOL )status;
 
 @end

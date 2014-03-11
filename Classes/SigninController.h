@@ -44,5 +44,4 @@
 -(IBAction)onSignInTwitter;
 -(IBAction)forgetPassword;
 -(void)signIn:(BOOL)validated username:(NSString *)userName password:(NSString *)pwd;
-
 @end

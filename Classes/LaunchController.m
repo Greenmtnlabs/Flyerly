@@ -31,6 +31,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     globle = [FlyerlySingleton RetrieveSingleton];
+
 }
 
 -(void)viewWillAppear:(BOOL)animated{

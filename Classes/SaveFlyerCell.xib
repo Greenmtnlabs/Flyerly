@@ -14,7 +14,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="300" height="103"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cell_bg_first.png" id="Yye-42-UbL">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="invite_Bg.png" id="Yye-42-UbL">
                         <rect key="frame" x="0.0" y="0.0" width="300" height="104"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
@@ -75,6 +75,18 @@
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blue_arrow.png" id="ot2-CF-xz6">
+                        <rect key="frame" x="284" y="44" width="10" height="16"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </imageView>
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="tr4-sN-ZUc">
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="104"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <state key="normal">
+                            <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
                 </subviews>
             </tableViewCellContentView>
             <connections>
@@ -86,7 +98,9 @@
                 <outlet property="emailImage" destination="5dI-Oq-C7c" id="jrB-kR-SaZ"/>
                 <outlet property="fbImage" destination="z79-gJ-DMF" id="X7M-LH-bRJ"/>
                 <outlet property="flickImage" destination="ewT-nG-9kd" id="N1p-g9-i0i"/>
+                <outlet property="flyerLock" destination="tr4-sN-ZUc" id="2No-bK-Xkb"/>
                 <outlet property="instaImage" destination="I2a-9L-hhr" id="Cy0-sn-UMJ"/>
+                <outlet property="lockImage" destination="ot2-CF-xz6" id="Beb-zA-cjc"/>
                 <outlet property="nameLabel" destination="nIU-g9-EY6" id="C3v-AI-gA6"/>
                 <outlet property="tumbImage" destination="XBk-Dh-0EO" id="EiB-KJ-Unw"/>
                 <outlet property="twtImage" destination="Vu7-BD-USu" id="0tD-5u-GOX"/>
@@ -94,11 +108,12 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="cell_bg_first.png" width="311" height="101"/>
+        <image name="blue_arrow.png" width="20" height="35"/>
         <image name="email_disabled_saved.png" width="20" height="15"/>
         <image name="facebook_disabled_saved.png" width="10" height="17"/>
         <image name="flickr_disabled_saved.png" width="22" height="12"/>
         <image name="instagram_disabled_saved.png" width="17" height="17"/>
+        <image name="invite_Bg.png" width="311" height="101"/>
         <image name="tumblr_disabled_saved.png" width="15" height="15"/>
         <image name="twitter_disabled_saved.png" width="19" height="15"/>
     </resources>
