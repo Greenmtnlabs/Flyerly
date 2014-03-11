@@ -316,6 +316,9 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    [self purchaseProduct];
+    return;
 	
     flyer = [[Flyer alloc]initWithPath:[flyerPaths objectAtIndex:indexPath.row]];
     
@@ -356,6 +359,21 @@
     [tableView setEditing:NO animated:YES];
 	[tableView endUpdates];
 	[tableView reloadData];
+}
+
+
+
+/* HERE WE PURCHASE PRODUCT FROM APP STORE
+ */
+-(void)purchaseProduct {
+    
+    NSSet *products = [NSSet setWithArray:@[@"com.flyerly.UnlockSavedFlyers"]];
+    [[RMStore defaultStore] requestProducts:products success:^(NSArray *products, NSArray *invalidProductIdentifiers) {
+        NSLog(@"Products loaded");
+    } failure:^(NSError *error) {
+        NSLog(@"Something went wrong");
+    }];
+
 }
 
 

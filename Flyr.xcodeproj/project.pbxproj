@@ -331,6 +331,7 @@
 		20269633188F3E0600CF2F78 /* delete_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2026962F188F3E0600CF2F78 /* delete_button@2x.png */; };
 		20269634188F3E0600CF2F78 /* edit_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 20269630188F3E0600CF2F78 /* edit_button.png */; };
 		20269635188F3E0600CF2F78 /* edit_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20269631188F3E0600CF2F78 /* edit_button@2x.png */; };
+		2026992B18CED6B000945218 /* RMStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 2026992A18CED6B000945218 /* RMStore.m */; };
 		202C47B5187D49FF00FE0975 /* cancel_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 202C47B3187D49FF00FE0975 /* cancel_button.png */; };
 		202C47B6187D49FF00FE0975 /* cancel_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 202C47B4187D49FF00FE0975 /* cancel_button@2x.png */; };
 		202C47F9187D6E4B00FE0975 /* BitlyConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 202C47B9187D6E4B00FE0975 /* BitlyConfig.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -1632,6 +1633,8 @@
 		2026962F188F3E0600CF2F78 /* delete_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete_button@2x.png"; sourceTree = "<group>"; };
 		20269630188F3E0600CF2F78 /* edit_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = edit_button.png; sourceTree = "<group>"; };
 		20269631188F3E0600CF2F78 /* edit_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "edit_button@2x.png"; sourceTree = "<group>"; };
+		2026992918CED6B000945218 /* RMStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMStore.h; sourceTree = "<group>"; };
+		2026992A18CED6B000945218 /* RMStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMStore.m; sourceTree = "<group>"; };
 		202C47B3187D49FF00FE0975 /* cancel_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel_button.png; sourceTree = "<group>"; };
 		202C47B4187D49FF00FE0975 /* cancel_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancel_button@2x.png"; sourceTree = "<group>"; };
 		202C47B8187D6E4B00FE0975 /* BitlyConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitlyConfig.h; sourceTree = "<group>"; };
@@ -2625,6 +2628,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0FE0BDD61758C07D00C4D78D /* StoreKit.framework in Frameworks */,
 				2025FAB9186074F300CC9188 /* CoreMotion.framework in Frameworks */,
 				2025FAB7186074D100CC9188 /* CoreText.framework in Frameworks */,
 				2025FAB51860742700CC9188 /* CoreMedia.framework in Frameworks */,
@@ -2632,7 +2636,6 @@
 				0DF3A53C108E0E5C00D6C887 /* CoreLocation.framework in Frameworks */,
 				0FD78054177B3BEC00DF5060 /* libz.1.1.3.dylib in Frameworks */,
 				0FD78050177B398800DF5060 /* AudioToolbox.framework in Frameworks */,
-				0FE0BDD61758C07D00C4D78D /* StoreKit.framework in Frameworks */,
 				0DF3A540108E0E5C00D6C887 /* SystemConfiguration.framework in Frameworks */,
 				0FEDD799174A9DF000DF71C0 /* libCrittercismCrashOnly_v3_3_4.a in Frameworks */,
 				0F734B5617427B790084A2F4 /* Accounts.framework in Frameworks */,
@@ -2666,6 +2669,7 @@
 		080E96DDFE201D6D7F000001 /* FlyerlyClasses */ = {
 			isa = PBXGroup;
 			children = (
+				2026992818CED69600945218 /* Purchase */,
 				1D3623240D0F684500981E51 /* FlyrAppDelegate.h */,
 				1D3623250D0F684500981E51 /* FlyrAppDelegate.m */,
 				20366619188DB5BA00C71EAA /* Models */,
@@ -3712,6 +3716,15 @@
 				201D647218C4832300F0D7D8 /* libFlurry_4.3.2.a */,
 			);
 			path = Flurry;
+			sourceTree = "<group>";
+		};
+		2026992818CED69600945218 /* Purchase */ = {
+			isa = PBXGroup;
+			children = (
+				2026992918CED6B000945218 /* RMStore.h */,
+				2026992A18CED6B000945218 /* RMStore.m */,
+			);
+			name = Purchase;
 			sourceTree = "<group>";
 		};
 		202C47B7187D6E4B00FE0975 /* Bitly */ = {
@@ -5746,6 +5759,7 @@
 				20FA7E721872AAF50057C3F3 /* CameraViewController.m in Sources */,
 				203E0B7617DDDD720039C3A7 /* InputViewController.m in Sources */,
 				20967D9818C8973200B273FC /* FlyerlyTwitterLike.m in Sources */,
+				2026992B18CED6B000945218 /* RMStore.m in Sources */,
 				204635621895E4AF00A94C42 /* Flyer.m in Sources */,
 				2044FF96185088ED00A26B42 /* MainSettingCell.m in Sources */,
 				202C4825187D7A6B00FE0975 /* CDataScanner.m in Sources */,

@@ -13,6 +13,7 @@
 #import "HelpController.h"
 #import "FlyrAppDelegate.h"
 #import "Flyer.h"
+#import "RMStore.h"
 
 @class SaveFlyerCell,Flyer;
 @interface FlyrViewController : UIViewController <UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>{
@@ -33,5 +34,7 @@
 -(NSMutableArray *)getFlyersPaths;
 
 -(IBAction)createFlyer:(id)sender;
+
+-(void)purchaseProduct;
 
 @end
