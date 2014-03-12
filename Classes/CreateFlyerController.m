@@ -294,7 +294,7 @@ int selectedAddMoreLayerTab = -1;
         // Update Recent Flyer List
         [flyer setRecentFlyer];
     }
-    
+    [Flurry logEvent:@"Saved Flyer"];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -1582,6 +1582,8 @@ int selectedAddMoreLayerTab = -1;
                 
                 //set template Image
                 [self.flyimgView setTemplate:@"Template/template.jpg"];
+                [Flurry logEvent:@"Custom Background"];
+
                 
             }
         });
@@ -1765,6 +1767,8 @@ int selectedAddMoreLayerTab = -1;
     
     UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [doneButton addTarget:self action:@selector(callAddMoreLayers) forControlEvents:UIControlEventTouchUpInside];
+    [doneButton addTarget:self action:@selector(logPhotoAddedEvent) forControlEvents:UIControlEventTouchUpInside];
+
     [doneButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
     doneButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
@@ -1778,12 +1782,11 @@ int selectedAddMoreLayerTab = -1;
  */
 -(void)callStyle
 {
-
     // Done Bar Button
     UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [doneButton addTarget:self action:@selector(callAddMoreLayers) forControlEvents:UIControlEventTouchUpInside];
-    [doneButton addTarget:self action:@selector(logLayerAddedEvent) forControlEvents:UIControlEventTouchUpInside];
     [doneButton addTarget:self action:@selector(logTextAddedEvent) forControlEvents:UIControlEventTouchUpInside];
+
     [doneButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
          doneButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *DoneBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
@@ -1838,7 +1841,6 @@ int selectedAddMoreLayerTab = -1;
 -(void) donePhoto{
     
     [self callAddMoreLayers];
-    [self logLayerAddedEvent];
     [self logPhotoAddedEvent];
     
 }
@@ -2304,9 +2306,21 @@ int selectedAddMoreLayerTab = -1;
     if (![description isEqualToString:@""]) {
         shareviewcontroller.descriptionView.text = description;
     }
+    NSString *shareType =   [flyer getShareType];
+    if ([shareType isEqualToString:@"Private"]) {
+        [shareviewcontroller.flyerShareType setSelected:YES];
+    }
+
     shareviewcontroller.selectedFlyerDescription = [flyer getFlyerDescription];
     shareviewcontroller.topTitleLabel = titleLabel;
     shareviewcontroller.Yvalue = [NSString stringWithFormat:@"%f",self.view.frame.size.height];
+    
+    PFUser *user = [PFUser currentUser];
+    if (user[@"appStarRate"])
+        [self setStarsofShareScreen:user[@"appStarRate"]];
+
+
+    [user saveInBackground];
     
     [shareviewcontroller setSocialStatus];
     
@@ -2320,6 +2334,38 @@ int selectedAddMoreLayerTab = -1;
 
 }
 
+/*
+ *Here we Set Stars
+ */
+-(void)setStarsofShareScreen :(NSString *)rate {
+    
+    if ([rate isEqualToString:@"1"]) {
+        [shareviewcontroller.star1 setSelected:YES];
+        
+    }else if ([rate isEqualToString:@"2"]) {
+        [shareviewcontroller.star1 setSelected:YES];
+        [shareviewcontroller.star2 setSelected:YES];
+        
+    }else if ([rate isEqualToString:@"3"]) {
+        [shareviewcontroller.star1 setSelected:YES];
+        [shareviewcontroller.star2 setSelected:YES];
+        [shareviewcontroller.star3 setSelected:YES];
+
+    }else if ([rate isEqualToString:@"4"]) {
+        [shareviewcontroller.star1 setSelected:YES];
+        [shareviewcontroller.star2 setSelected:YES];
+        [shareviewcontroller.star3 setSelected:YES];
+        [shareviewcontroller.star4 setSelected:YES];
+        
+    }else if ([rate isEqualToString:@"5"]) {
+        [shareviewcontroller.star1 setSelected:YES];
+        [shareviewcontroller.star2 setSelected:YES];
+        [shareviewcontroller.star3 setSelected:YES];
+        [shareviewcontroller.star4 setSelected:YES];
+        [shareviewcontroller.star5 setSelected:YES];
+    }
+
+}
 
 #pragma mark  Bottom Tabs Context
 /*
@@ -2685,10 +2731,6 @@ int selectedAddMoreLayerTab = -1;
 
 
 #pragma mark Flurry Methods
-
--(void) logLayerAddedEvent{
-    [Flurry  logEvent:@"Layer Added"];
-}
 
 -(void) logPhotoAddedEvent{
     [Flurry logEvent:@"Photo Added"];

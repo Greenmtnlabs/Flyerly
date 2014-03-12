@@ -10,6 +10,7 @@
 #import <Parse/Parse.h>
 #import "FlyerImageView.h"
 #import <AssetsLibrary/AssetsLibrary.h>
+#import "Flurry.h"
 
 #define IMAGETYPE @"flyer.jpg"
 
@@ -69,7 +70,7 @@
 -(void)setFlyerDescription :(NSString *)desp;
 
 -(void)setFlyerURL :(NSString *)URL;
-
+-(void)setShareType :(NSString *)type;
 
 -(void)setRecentFlyer;
 
@@ -96,6 +97,8 @@
 -(NSString *)getFlyerDescription;
 -(NSString *)getFlyerDate;
 -(NSString *)getFlyerURL;
+-(NSString *)getShareType;
+
 -(NSString *)getText :(NSString *)uid;
 -(NSString *)getImageName :(NSString *)uid;
 -(CGRect)getImageFrame :(NSString *)uid;

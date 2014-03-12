@@ -1256,18 +1256,23 @@ NSMutableDictionary *selectedIdentifierDictionary;
         // HERE WE GET AND SET SELECTED FOLLOWER
         [twitterInvited  addObjectsFromArray:deviceContactItems];
         user[@"tweetinvited"] = twitterInvited;
+        [self friendsInvited];
  
     } else if ( [sharer isKindOfClass:[SHKTextMessage class]] == YES ) {
         
         // HERE WE GET AND SET SELECTED CONTACT LIST
         [iPhoneinvited  addObjectsFromArray:deviceContactItems];
         user[@"iphoneinvited"] = iPhoneinvited;
+        [self friendsInvited];
+
         
     } else  if ( [sharer isKindOfClass:[FlyerlyFacebookInvite class]] == YES ) {
     
         // HERE WE GET AND SET SELECTED Facebook LIST
         [fbinvited  addObjectsFromArray:deviceContactItems];
         user[@"fbinvited"] = fbinvited;
+        [self friendsInvited];
+
     }
 
     // HERE WE UPDATE PARSE ACCOUNT FOR REMEMBER INVITED FRIENDS LIST
@@ -1344,5 +1349,10 @@ NSMutableDictionary *selectedIdentifierDictionary;
     [[SHKActivityIndicator currentIndicator]  showProgress:progress forSharer:sharer];
 }
 
+#pragma mark Flurry Methods
+
+-(void) friendsInvited {
+    [Flurry logEvent:@"Friends Invited"];
+}
 
 @end

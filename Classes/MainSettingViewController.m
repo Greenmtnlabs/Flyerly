@@ -74,7 +74,7 @@
     [category addObject:@"Save to Gallery"];
     [category addObject:@"Account Setting"];
     [category addObject:@"Like us on Facebook"];
-    [category addObject:@"Like us on Twitter"];
+    [category addObject:@"Follow us on Twitter"];
     [category addObject:@"Sign Out"];
     
 

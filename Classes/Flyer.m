@@ -37,6 +37,7 @@ NSString * const TEXTHEIGHT = @"280.000000";
         
         //Create New Directory
         [self createFlyerPath:flyPath];
+        [Flurry logEvent:@"Create Flyer"];
         
         //set Current Path of File Manager
         [[NSFileManager defaultManager] changeCurrentDirectoryPath:flyPath];
@@ -1229,6 +1230,21 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     }
 }
 
+/*
+ * HERE WE GET FLYER SHARE TYPE
+ */
+-(NSString *)getShareType {
+    
+    if (textFileArray.count > 4) {
+        return [textFileArray objectAtIndex:4];
+    } else {
+        [textFileArray addObject:@"Public"];
+        [textFileArray writeToFile:textFile atomically:YES];
+        return [textFileArray objectAtIndex:4];
+    }
+
+}
+
 
 /*
  * Here we Set Flyer Description
@@ -1269,6 +1285,20 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 
     
 }
+
+/*
+ * HERE WE SAVE FLYER SHARE TYPE
+ */
+-(void)setShareType :(NSString *)type {
+    [textFileArray replaceObjectAtIndex:4 withObject:type];
+    
+    //Here we write the Array of Text files .txt
+    [textFileArray writeToFile:textFile atomically:YES];
+
+
+}
+
+
 
 @end
 

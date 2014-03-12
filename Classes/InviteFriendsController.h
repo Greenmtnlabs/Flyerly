@@ -31,6 +31,7 @@
 #import "FlyerlyFacebookFriends.h"
 #import "FlyerlyFacebookInvite.h"
 #import "FlyerlyTwitterFriends.h"
+#import "Flurry.h"
 
 @class LoadingView,FlyerlySingleton,SHKSharer;
 

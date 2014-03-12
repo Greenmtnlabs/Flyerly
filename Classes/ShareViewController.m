@@ -100,6 +100,8 @@
     }else {
         // Update Flyer Share Info in Social File
         [self.flyer setInstagaramStatus:1];
+        [Flurry logEvent:@"Shared Instagram"];
+
     }
 }
 
@@ -533,25 +535,37 @@
     if ( [sharer isKindOfClass:[SHKFacebook class]] == YES ) {
         
         [self.flyer setFacebookStatus:1];
+        [Flurry logEvent:@"Shared Facebook"];
+
         
     } else if ( [sharer isKindOfClass:[SHKTwitter class]] == YES ) {
         
         [self.flyer setTwitterStatus:1];
+        [Flurry logEvent:@"Shared Twitter"];
+
         
     } else if ( [sharer isKindOfClass:[SHKTumblr class]] == YES ) {
         
         [self.flyer setThumblerStatus:1];
+        [Flurry logEvent:@"Shared Tumblr"];
+
         
     } else if ( [sharer isKindOfClass:[SHKFlickr class]] == YES ) {
         
         [self.flyer setFlickerStatus:1];
+        [Flurry logEvent:@"Shared Flickr"];
+
         
     } else if ( [sharer isKindOfClass:[SHKMail class]] == YES ) {
         
         [self.flyer setEmailStatus:1];
+        [Flurry logEvent:@"Shared Email"];
+
     } else if ( [sharer isKindOfClass:[SHKTextMessage class]] == YES ) {
         
         [self.flyer setSmsStatus:1];
+        [Flurry logEvent:@"Shared SMS"];
+
     }
     
     [self setSocialStatus];
@@ -630,22 +644,32 @@
     [star4 setSelected:NO];
     [star5 setSelected:NO];
 
+    NSString *starValue = @"";
     
     if (sender == star1) {
+        starValue = @"1";
         [star1 setSelected:YES];
+    
     }else if (sender == star2){
+        starValue = @"2";
         [star1 setSelected:YES];
         [star2 setSelected:YES];
+
     }else if (sender == star3){
+        starValue = @"3";
         [star1 setSelected:YES];
         [star2 setSelected:YES];
         [star3 setSelected:YES];
+
     }else if (sender == star4){
+        starValue = @"4";
         [star1 setSelected:YES];
         [star2 setSelected:YES];
         [star3 setSelected:YES];
         [star4 setSelected:YES];
+
     }else if (sender == star5){
+        starValue = @"5";
         [star1 setSelected:YES];
         [star2 setSelected:YES];
         [star3 setSelected:YES];
@@ -653,7 +677,11 @@
         [star5 setSelected:YES];
     }
     
-  UIAlertView  *appRateAlert = [[UIAlertView alloc]initWithTitle:@"Do you want to rate us on App store" message:@"" delegate:self cancelButtonTitle:@"NO" otherButtonTitles:@"YES" ,nil];
+    PFUser *user = [PFUser currentUser];
+    user[@"appStarRate"] = starValue;
+    [user saveInBackground];
+    
+  UIAlertView  *appRateAlert = [[UIAlertView alloc]initWithTitle:@"Do you want to rate us on App store" message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes" ,nil];
     [appRateAlert show];
     
 }
@@ -672,8 +700,11 @@
     
     if ([flyerShareType isSelected]) {
         [flyerShareType setSelected:NO];
+        [flyer setShareType:@"Public"];
+
     }else {
         [flyerShareType setSelected:YES];
+        [flyer setShareType:@"Private"];
     }
 
 }
