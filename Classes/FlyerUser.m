@@ -88,7 +88,7 @@
                     
                     //Copy ImageFile
                     source = [NSString stringWithFormat:@"%@/IMG_%d.jpg",usernamePath,imgnumber];
-                    destination = [NSString stringWithFormat:@"%@/flyer.jpg",flyerPath];
+                    destination = [NSString stringWithFormat:@"%@/flyer.%@",flyerPath,IMAGETYPE];
 
                     if ( [[NSFileManager defaultManager] isReadableFileAtPath:source] )
                         [[NSFileManager defaultManager] copyItemAtPath:source toPath:destination error:&error];
@@ -174,11 +174,11 @@
                             lastFileName = Iconfiles[i];
                             
                             source = [NSString stringWithFormat:@"%@/Icon/%d/%@",usernamePath,imgnumber,lastFileName];
-                            destination = [NSString stringWithFormat:@"%@/Icon/%@",flyerPath,lastFileName];
+                            destination = [NSString stringWithFormat:@"%@/Icon/%d.%@",flyerPath,i,IMAGETYPE];
                             
                             NSMutableDictionary *layDic = [masterLayers objectForKey:[NSString stringWithFormat:@"Icon-%d",i]];
 
-                            [layDic setValue:[NSString stringWithFormat:@"Icon/%@",lastFileName] forKey:@"image"];
+                            [layDic setValue:[NSString stringWithFormat:@"Icon/%d.%@",i,IMAGETYPE] forKey:@"image"];
                             
                             if ( [[NSFileManager defaultManager] isReadableFileAtPath:source] )
                                 [[NSFileManager defaultManager] copyItemAtPath:source toPath:destination error:&error];
@@ -205,11 +205,11 @@
                             lastFileName = Photofiles[i];
                             
                             source = [NSString stringWithFormat:@"%@/Photo/%d/%@",usernamePath,imgnumber,lastFileName];
-                            destination = [NSString stringWithFormat:@"%@/Photo/%@",flyerPath,lastFileName];
+                            destination = [NSString stringWithFormat:@"%@/Photo/%d.%@",flyerPath,i,IMAGETYPE];
                             
                             NSMutableDictionary *layDic = [masterLayers objectForKey:[NSString stringWithFormat:@"Photo-%d",i]];
                             
-                            [layDic setValue:[NSString stringWithFormat:@"Photo/%@",lastFileName] forKey:@"image"];
+                            [layDic setValue:[NSString stringWithFormat:@"Photo/%d.%@",i,IMAGETYPE] forKey:@"image"];
                             
                             if ( [[NSFileManager defaultManager] isReadableFileAtPath:source] )
                                 [[NSFileManager defaultManager] copyItemAtPath:source toPath:destination error:&error];
@@ -245,11 +245,11 @@
                             lastFileName = Symbolfiles[i];
                             
                             source = [NSString stringWithFormat:@"%@/Symbol/%d/%@",usernamePath,imgnumber,lastFileName];
-                            destination = [NSString stringWithFormat:@"%@/Symbol/%@",flyerPath,lastFileName];
+                            destination = [NSString stringWithFormat:@"%@/Symbol/%d.%@",flyerPath,i,IMAGETYPE];
                             
                             NSMutableDictionary *layDic = [masterLayers objectForKey:[NSString stringWithFormat:@"Symbol-%d",i]];
                             
-                            [layDic setValue:[NSString stringWithFormat:@"Symbol/%@",lastFileName] forKey:@"image"];
+                            [layDic setValue:[NSString stringWithFormat:@"Symbol/%d.%@",i,IMAGETYPE] forKey:@"image"];
                             
                             if ( [[NSFileManager defaultManager] isReadableFileAtPath:source] )
                                 [[NSFileManager defaultManager] copyItemAtPath:source toPath:destination error:&error];
@@ -276,11 +276,11 @@
                             lastFileName = templatefiles[i];
                             
                             source = [NSString stringWithFormat:@"%@/Template/%d/%@",usernamePath,imgnumber,lastFileName];
-                            destination = [NSString stringWithFormat:@"%@/Template/%@",flyerPath,lastFileName];
+                            destination = [NSString stringWithFormat:@"%@/Template/template.%@",flyerPath,IMAGETYPE];
                             
                             NSMutableDictionary *layDic = [masterLayers objectForKey:@"Template"];
                             
-                            [layDic setValue:[NSString stringWithFormat:@"Template/%@",lastFileName] forKey:@"image"];
+                            [layDic setValue:[NSString stringWithFormat:@"Template/template.%@",IMAGETYPE] forKey:@"image"];
                             
                             if ( [[NSFileManager defaultManager] isReadableFileAtPath:source] )
                                 [[NSFileManager defaultManager] copyItemAtPath:source toPath:destination error:&error];

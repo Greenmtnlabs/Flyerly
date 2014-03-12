@@ -76,7 +76,7 @@ NSString * const TEXTHEIGHT = @"280.000000";
 
     
     //set Flyer Image for Update
-    flyerImageFile = [flyPath stringByAppendingString:[NSString stringWithFormat:@"/flyer.jpg"]];
+    flyerImageFile = [flyPath stringByAppendingString:[NSString stringWithFormat:@"/flyer.%@",IMAGETYPE]];
     
     masterLayers = [[NSMutableDictionary alloc] initWithContentsOfFile:piecesFile];
     
@@ -248,7 +248,7 @@ NSString * const TEXTHEIGHT = @"280.000000";
 
     NSString* currentPath  =   [[NSFileManager defaultManager] currentDirectoryPath];
     
-    NSString *imagePath = [currentPath stringByAppendingString:@"/flyer.jpg"];
+    NSString *imagePath = [currentPath stringByAppendingString:[NSString stringWithFormat:@"/flyer.%@",IMAGETYPE] ];
     
     return imagePath;
 
@@ -742,7 +742,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
         //Checking For Integer Dir Names Only
         if ([[NSScanner scannerWithString:lastFileName] scanInt:nil]) {
               
-            NSString *recentflyPath = [NSString stringWithFormat:@"%@/%@/flyer.jpg",usernamePath,lastFileName];
+            NSString *recentflyPath = [NSString stringWithFormat:@"%@/%@/flyer.%@",usernamePath,lastFileName,IMAGETYPE];
             [recentFlyers addObject:recentflyPath];
 
         }

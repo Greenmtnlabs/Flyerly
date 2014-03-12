@@ -11,8 +11,8 @@
 #import "FlyerImageView.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "Flurry.h"
+#import "Common.h"
 
-#define IMAGETYPE @"flyer.jpg"
 
 @interface Flyer : NSObject{
     

@@ -226,7 +226,7 @@
         
         NSString *pathWitFileName = [recentFlyers objectAtIndex:clickButton.tag];
         NSString *pathWithoutFileName = [pathWitFileName
-                                         stringByReplacingOccurrencesOfString:@"/flyer.jpg" withString:@""];
+                                         stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"/flyer.%@",IMAGETYPE] withString:@""];
         flyPath = pathWithoutFileName;
         
     }else {

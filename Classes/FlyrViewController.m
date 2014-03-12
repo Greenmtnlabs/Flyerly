@@ -263,7 +263,7 @@
         
         //Here we remove File Name from Path
         NSString *pathWithoutFileName = [[sortedList objectAtIndex:i]
-                                         stringByReplacingOccurrencesOfString:@"/flyer.jpg" withString:@""];
+                                         stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"/flyer.%@",IMAGETYPE] withString:@""];
         [sortedList replaceObjectAtIndex:i withObject:pathWithoutFileName];
     }
     

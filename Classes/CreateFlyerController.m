@@ -1584,7 +1584,7 @@ int selectedAddMoreLayerTab = -1;
                 [self copyImageToTemplate:img];
                 
                 //set template Image
-                [self.flyimgView setTemplate:@"Template/template.jpg"];
+                [self.flyimgView setTemplate:[NSString stringWithFormat:@"Template/template.%@",IMAGETYPE] ];
                 [Flurry logEvent:@"Custom Background"];
 
                 
@@ -1637,7 +1637,7 @@ int selectedAddMoreLayerTab = -1;
                 [self copyImageToTemplate:img];
                 
                 //set template Image
-                [self.flyimgView setTemplate:@"Template/template.jpg"];
+                [self.flyimgView setTemplate:[NSString stringWithFormat:@"Template/template.%@",IMAGETYPE ]];
             }
         });
     }];
@@ -2753,7 +2753,7 @@ int selectedAddMoreLayerTab = -1;
     // Create Symbol direcrory if not created
     NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
     
-    NSString *FolderPath = [NSString stringWithFormat:@"%@/Template/template.jpg", currentpath];
+    NSString *FolderPath = [NSString stringWithFormat:@"%@/Template/template.%@", currentpath,IMAGETYPE];
     
     NSData *imgData = UIImagePNGRepresentation(img);
     
@@ -2776,9 +2776,9 @@ int selectedAddMoreLayerTab = -1;
     //Create Unique Id for Image
     int timestamp = [[NSDate date] timeIntervalSince1970];
     
-    NSString *imageFolderPath = [NSString stringWithFormat:@"%@/%d.jpg", FolderPath,timestamp];
+    NSString *imageFolderPath = [NSString stringWithFormat:@"%@/%d.%@", FolderPath,timestamp,IMAGETYPE];
     
-    dicPath = [dicPath stringByAppendingString:[NSString stringWithFormat:@"/%d.jpg",timestamp]];
+    dicPath = [dicPath stringByAppendingString:[NSString stringWithFormat:@"/%d.%@",timestamp,IMAGETYPE]];
     
     NSData *imgData = UIImagePNGRepresentation(img);
     
@@ -2828,8 +2828,8 @@ int selectedAddMoreLayerTab = -1;
     
     if ([dicPath isEqualToString:@"Template"]) {
         
-        imageFolderPath = [NSString stringWithFormat:@"%@/template.jpg", FolderPath];
-        dicPath = [dicPath stringByAppendingString:[NSString stringWithFormat:@"/template.jpg"]];
+        imageFolderPath = [NSString stringWithFormat:@"%@/template.%@", FolderPath,IMAGETYPE];
+        dicPath = [dicPath stringByAppendingString:[NSString stringWithFormat:@"/template.%@",IMAGETYPE]];
         
         //Getting Image From Bundle
         existImagePath =[[NSBundle mainBundle] pathForResource:imgName ofType:@"jpg"];
@@ -2839,8 +2839,8 @@ int selectedAddMoreLayerTab = -1;
         //Create Unique Id for Image
         int timestamp = [[NSDate date] timeIntervalSince1970];
         
-        imageFolderPath = [NSString stringWithFormat:@"%@/%d.jpg", FolderPath,timestamp];
-        dicPath = [dicPath stringByAppendingString:[NSString stringWithFormat:@"/%d.jpg",timestamp]];
+        imageFolderPath = [NSString stringWithFormat:@"%@/%d.%@", FolderPath,timestamp,IMAGETYPE];
+        dicPath = [dicPath stringByAppendingString:[NSString stringWithFormat:@"/%d.%@",timestamp,IMAGETYPE]];
         
         //Getting Image From Bundle
         existImagePath =[[NSBundle mainBundle] pathForResource:imgName ofType:@"png"];

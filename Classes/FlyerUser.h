@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <Parse/Parse.h>
+#import "Common.h"
 
 @interface FlyerUser : NSObject
 

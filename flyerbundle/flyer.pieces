@@ -5,7 +5,7 @@
 	<key>Template</key>
 	<dict>
 		<key>image</key>
-		<string>Template/template.jpg</string>
+		<string>Template/template.png</string>
 	</dict>
 </dict>
 </plist>
