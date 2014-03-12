@@ -74,15 +74,14 @@
     if ([txtfield.text isEqualToString:@""]) {
         [self showAlert:@"Please Enter Comments" message:@""];
     }else{
-       // NSLog(@"%@",globle.inputValue);
-        if([globle.inputValue isEqualToString:@"twitter"]) {
-            if([TWTweetComposeViewController canSendTweet]){
-                [self sendTwitterMessage:txtfield.text screenName:@"flyerlyapp"];
-            }  else {
-                [self showAlert:@"No Twitter connection" message:@"You must be connected to Twitter from device settings."];
-            }
-        }
-
+      
+        // Current Item For Sharing
+        SHKItem *item = [SHKItem text:[NSString stringWithFormat:@"%@ @flyerlyapp",txtfield.text]];
+        
+        //Calling ShareKit for Sharing
+        iosSharer = [[ SHKSharer alloc] init];
+        iosSharer = [SHKTwitter shareItem:item];
+        iosSharer.shareDelegate = self;
     }
 }
 
@@ -103,87 +102,83 @@
     [alert show];
 }
 
-- (void)makeTwitterPost:(ACAccount *)acct {
+#pragma mark - All Shared Response
+
+// These are used if you do not provide your own custom UI and delegate
+- (void)sharerStartedSending:(SHKSharer *)sharer
+{
     
-    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
-    params[@"status"] = [NSString stringWithFormat:@"@%@ %@", sName, sMessage];
+	if (!sharer.quiet)
+		[[SHKActivityIndicator currentIndicator] displayActivity:SHKLocalizedString(@"Saving to %@", [[sharer class] sharerTitle]) forSharer:sharer];
+}
+
+- (void)sharerFinishedSending:(SHKSharer *)sharer
+{
     
-    // Build a twitter request
-    TWRequest *postRequest = [[TWRequest alloc] initWithURL:[NSURL URLWithString:@"http://api.twitter.com/1/statuses/update.json"] parameters:params requestMethod:TWRequestMethodPOST];
-    
-    // Post the request
-    [postRequest setAccount:acct];
-    
-    // Block handler to manage the response
-    [postRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
-        NSLog(@"Twitter response, HTTP response: %i", [urlResponse statusCode]);
-    }];
-    
+    // Here we show Messege after Sending
     [self showAlert:@"Thank you. Your feedback has been sent to @flyerlyapp on Twitter." message:@""];
-    // Release stuff.
-    sName = nil;
-    sMessage = nil;
-    arrayOfAccounts = nil;
-    [self dismissModalViewControllerAnimated:YES];
+
+    if (!sharer.quiet)
+		[[SHKActivityIndicator currentIndicator] displayCompleted:SHKLocalizedString(@"Saved!")];
 }
 
-
-
-- (void)sendTwitterMessage:(NSString *)message screenName:(NSString *)screenName{
+- (void)sharer:(SHKSharer *)sharer failedWithError:(NSError *)error shouldRelogin:(BOOL)shouldRelogin
+{
     
-    ACAccountStore *account = [[ACAccountStore alloc] init];
-    ACAccountType *accountType = [account accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
-    
-    sName = screenName;
-    sMessage = message;
-    
-    // Request access from the user to access their Twitter account
-    [account requestAccessToAccountsWithType:accountType withCompletionHandler:^(BOOL granted, NSError *error) {
-        // Did user allow us access?
-        if (granted == YES) {
-            
-            // Populate array with all available Twitter accounts
-            arrayOfAccounts = [account accountsWithAccountType:accountType];
-            
-            // Sanity check
-            if ([arrayOfAccounts count] > 1 ) {
-                
-                // Show list of acccounts from which to select
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:@"Choose Account" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles: nil];
-                    
-                    for (int i = 0; i < arrayOfAccounts.count; i++) {
-                        ACAccount *acct = arrayOfAccounts[i];
-                        [actionSheet addButtonWithTitle:acct.username];
-                    }
-                    
-                    [actionSheet addButtonWithTitle:@"Cancel"];
-                    [actionSheet showInView:self.view];
-                });
-            } else if ( arrayOfAccounts.count > 0 ) {
-                ACAccount *acct = arrayOfAccounts[0];
-                [self makeTwitterPost:acct];
-            }
-        }
-    }];
+    [[SHKActivityIndicator currentIndicator] hide];
+	NSLog(@"Sharing Error");
 }
 
-/**
- * clickedButtonAtIndex (UIActionSheet)
- *
- * Handle the button clicks from mode of getting out selection.
- */
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    
-    //if not cancel button presses
-    if(buttonIndex != arrayOfAccounts.count) {
-        
-        //save to NSUserDefault
-        ACAccount *account = arrayOfAccounts[buttonIndex];
-        
-        //Convert twitter username to email
-        [self makeTwitterPost:account];
-    }
+- (void)sharerCancelledSending:(SHKSharer *)sharer
+{
+    NSLog(@"");
 }
+
+- (void)sharerShowBadCredentialsAlert:(SHKSharer *)sharer
+{
+    NSString *errorMessage = SHKLocalizedString(@"Sorry, %@ did not accept your credentials. Please try again.", [[sharer class] sharerTitle]);
+    
+    [[[UIAlertView alloc] initWithTitle:SHKLocalizedString(@"Login Error")
+                                message:errorMessage
+                               delegate:nil
+                      cancelButtonTitle:SHKLocalizedString(@"Close")
+                      otherButtonTitles:nil] show];
+}
+
+- (void)sharerShowOtherAuthorizationErrorAlert:(SHKSharer *)sharer
+{
+    NSString *errorMessage = SHKLocalizedString(@"Sorry, %@ encountered an error. Please try again.", [[sharer class] sharerTitle]);
+    
+    [[[UIAlertView alloc] initWithTitle:SHKLocalizedString(@"Login Error")
+                                message:errorMessage
+                               delegate:nil
+                      cancelButtonTitle:SHKLocalizedString(@"Close")
+                      otherButtonTitles:nil] show];
+}
+
+- (void)hideActivityIndicatorForSharer:(SHKSharer *)sharer {
+    
+    [[SHKActivityIndicator currentIndicator]  hideForSharer:sharer];
+}
+
+- (void)displayActivity:(NSString *)activityDescription forSharer:(SHKSharer *)sharer {
+    
+    if (sharer.quiet) return;
+    
+    [[SHKActivityIndicator currentIndicator]  displayActivity:activityDescription forSharer:sharer];
+}
+
+- (void)displayCompleted:(NSString *)completionText forSharer:(SHKSharer *)sharer {
+    
+    if (sharer.quiet) return;
+    [[SHKActivityIndicator currentIndicator]  displayCompleted:completionText forSharer:sharer];
+}
+
+- (void)showProgress:(CGFloat)progress forSharer:(SHKSharer *)sharer {
+    
+    if (sharer.quiet) return;
+    [[SHKActivityIndicator currentIndicator]  showProgress:progress forSharer:sharer];
+}
+
 
 @end

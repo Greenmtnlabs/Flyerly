@@ -43,7 +43,7 @@
     
     [self setQuiet:YES];
     
-    FBRequestConnection *con = [FBRequestConnection startForPostStatusUpdate: self.item.text place:@"144479625584966" tags: self.item.tags completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+    FBRequestConnection *con = [FBRequestConnection startForPostStatusUpdate: self.item.text place:@"500819963306066" tags: self.item.tags completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
         
         //NSLog(@"New Result: %@", result);
         NSLog(@"Error: %@", error);

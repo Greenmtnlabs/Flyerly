@@ -126,19 +126,19 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     
     
     
-//#ifdef DEBUG
+#ifdef DEBUG
     
     // Setup parse Offline
     [Parse setApplicationId:[flyerConfigurator parseOfflineAppId]
                   clientKey:[flyerConfigurator parseOfflineClientKey]];
-/*#else
+#else
     
     // Setup parse Online
     [Parse setApplicationId:[flyerConfigurator parseOnlineAppId]
                   clientKey:[flyerConfigurator parseOnlineClientKey]];
     
 #endif
-  */
+  
     // Flurry stats
     [Flurry startSession:[flyerConfigurator flurrySessionId]];
 

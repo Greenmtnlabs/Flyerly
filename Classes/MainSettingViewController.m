@@ -249,7 +249,7 @@
     if([MFMailComposeViewController canSendMail]){
         
         picker.mailComposeDelegate = self;
-        [picker setSubject:@"email feedback..."];
+        [picker setSubject:@"Flyerly Email Feedback..."];
         
         // Set up recipients
         NSMutableArray *toRecipients = [[NSMutableArray alloc]init];

@@ -10,13 +10,13 @@
 #import "Common.h"
 #import "FlyerlySingleton.h"
 #import "LaunchController.h"
+#import <SHKTwitter.h>
+
 @class FlyerlySingleton;
-@interface InputViewController : UIViewController <UIActionSheetDelegate>{
-    FlyerlySingleton *globle ;
+@interface InputViewController : UIViewController <SHKSharerDelegate>{
     
-    NSString *sName;
-    NSString *sMessage;
-    NSArray *arrayOfAccounts;
+    FlyerlySingleton *globle ;    
+    SHKSharer *iosSharer;
 
 }
 @property(nonatomic, strong) IBOutlet UITextView *txtfield;

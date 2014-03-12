@@ -291,6 +291,7 @@
     
         //Here we Update Flyer Discription in .txt File
         [flyer setFlyerDescription:descriptionView.text];
+        selectedFlyerDescription = descriptionView.text;
     }
 }
 
