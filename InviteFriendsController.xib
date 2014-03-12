@@ -31,7 +31,7 @@
                 </label>
                 <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="8">
                     <rect key="frame" x="0.0" y="435" width="106" height="45"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <fontDescription key="fontDescription" name="Symbol" family="Symbol" pointSize="15"/>
                     <state key="normal" backgroundImage="invite_sms.png">
                         <color key="titleColor" red="0.0037750839000000001" green="0.0060098032000000003" blue="0.010204077000000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -47,7 +47,7 @@
                 </button>
                 <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="9">
                     <rect key="frame" x="212" y="435" width="109" height="45"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="15"/>
                     <state key="normal" backgroundImage="invite_twitter.png">
                         <color key="titleColor" red="0.0037750839000000001" green="0.0060098032000000003" blue="0.010204077000000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -63,7 +63,7 @@
                 </button>
                 <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="11">
                     <rect key="frame" x="106" y="435" width="107" height="45"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="15"/>
                     <state key="normal" backgroundImage="invite_facebook.png">
                         <color key="titleColor" red="0.0037750839000000001" green="0.0060098032000000003" blue="0.010204077000000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -88,7 +88,7 @@
                         <outlet property="delegate" destination="-1" id="185"/>
                     </connections>
                 </tableView>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search Friends" minimumFontSize="17" id="333">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search Contacts" minimumFontSize="17" id="333">
                     <rect key="frame" x="39" y="70" width="272" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="-64"/>

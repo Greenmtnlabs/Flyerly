@@ -39,9 +39,6 @@
     
     
     FlyerlySingleton *globle;
-    
-    
-    
     IBOutlet UIButton *contactsButton;
     IBOutlet UIButton *facebookButton;
     IBOutlet UIButton *twitterButton;

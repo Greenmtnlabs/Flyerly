@@ -1319,6 +1319,7 @@ int selectedAddMoreLayerTab = -1;
     //Handling Select Unselect
     for(UIView *tempView  in [layerScrollView subviews])
     {
+        
         // Add border to Un-select layer thumbnail
         CALayer * l = [tempView layer];
         [l setBorderWidth:1];
@@ -1332,8 +1333,9 @@ int selectedAddMoreLayerTab = -1;
             NSString *lastTag = [flyer getImageTag:@"Template"];
             
             if (![lastTag isEqualToString:@""]) lstTag = [lastTag intValue];
-            
-            if (lstTag != view.tag) {
+
+
+            if (lstTag != view.tag || view.tag == 0) {
                 
                 //Getting Image Path
                 NSString *imgPath = [self getImagePathByTag:[NSString stringWithFormat:@"Template%d",view.tag]];
@@ -1352,6 +1354,7 @@ int selectedAddMoreLayerTab = -1;
             UIColor * c = [globle colorWithHexString:@"0197dd"];
             [l setBorderColor:c.CGColor];
         }
+     
         
     }
     

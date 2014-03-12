@@ -36,7 +36,7 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="02X-0M-pgw">
-                            <rect key="frame" x="14" y="202" width="108" height="31"/>
+                            <rect key="frame" x="24" y="202" width="93" height="31"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" image="public_on.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -333,8 +333,8 @@
         <image name="instagram_share.png" width="120" height="120"/>
         <image name="instagram_share_selected.png" width="120" height="120"/>
         <image name="panel_close_button.png" width="640" height="74"/>
-        <image name="private_off_button.png" width="188" height="62"/>
-        <image name="public_on.png" width="246" height="81"/>
+        <image name="private_off_button.png" width="185" height="62"/>
+        <image name="public_on.png" width="185" height="62"/>
         <image name="separator.png" width="640" height="3"/>
         <image name="sms_share.png" width="120" height="120"/>
         <image name="sms_share_selected.png" width="120" height="120"/>

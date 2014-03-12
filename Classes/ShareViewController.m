@@ -450,9 +450,10 @@
         if( [InviteFriendsController connected] ){
 
             // Current Item For Sharing
-            SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ %@",titleView.text , selectedFlyerDescription ]];
-              item.tags =[NSArray arrayWithObjects: @"#flyerly", nil];
-                    
+            SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@",titleView.text  ]];
+            item.tags =[NSArray arrayWithObjects: @"#flyerly", nil];
+            item.text = selectedFlyerDescription;
+            
             //Calling ShareKit for Sharing
             iosSharer = [[ SHKSharer alloc] init];
             iosSharer = [SHKFlickr shareItem:item];

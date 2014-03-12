@@ -55,9 +55,9 @@
                     <color key="backgroundColor" red="0.97879464289999996" green="0.51339056800000005" blue="0.1106798447" alpha="1" colorSpace="calibratedRGB"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="0.0"/>
                 </view>
-                <view contentMode="scaleToFill" id="hm4-bV-Hep">
+                <view autoresizesSubviews="NO" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="hm4-bV-Hep">
                     <rect key="frame" x="0.0" y="435" width="320" height="45"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <color key="backgroundColor" red="0.3575665864" green="0.76047690010000002" blue="0.97315449620000005" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
             </subviews>
@@ -67,13 +67,13 @@
         </view>
         <view contentMode="scaleToFill" id="P8i-Fw-Gci">
             <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="rb6-j8-Siq">
                     <rect key="frame" x="64" y="0.0" width="64" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Text"/>
-                    <state key="normal" backgroundImage="text_icon.png">
+                    <state key="normal" image="text_icon.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -84,7 +84,7 @@
                     <rect key="frame" x="128" y="0.0" width="64" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Photo"/>
-                    <state key="normal" backgroundImage="image_icon.png">
+                    <state key="normal" image="image_icon.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -95,7 +95,7 @@
                     <rect key="frame" x="192" y="0.0" width="64" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Symbols"/>
-                    <state key="normal" backgroundImage="symbolicon_button.png">
+                    <state key="normal" image="symbolicon_button.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -106,7 +106,7 @@
                     <rect key="frame" x="256" y="0.0" width="64" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Clipart"/>
-                    <state key="normal" backgroundImage="icon_button.png">
+                    <state key="normal" image="icon_button.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -114,10 +114,10 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="zoh-mW-4K3">
-                    <rect key="frame" x="-1" y="0.0" width="64" height="45"/>
+                    <rect key="frame" x="0.0" y="0.0" width="64" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Background"/>
-                    <state key="normal" backgroundImage="arrangeicon_button.png">
+                    <state key="normal" image="arrangeicon_button.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -343,7 +343,7 @@
         <image name="color_button_selected.png" width="64" height="45"/>
         <image name="font_button.png" width="64" height="45"/>
         <image name="font_button_selected.png" width="64" height="45"/>
-        <image name="icon_button.png" width="64" height="45"/>
+        <image name="icon_button.png" width="128" height="90"/>
         <image name="image_icon.png" width="128" height="90"/>
         <image name="outline_button.png" width="64" height="45"/>
         <image name="outline_button_selected.png" width="64" height="45"/>

@@ -14,17 +14,20 @@
 #import "FlyrAppDelegate.h"
 #import "Flyer.h"
 #import "RMStore.h"
+#import "ParentViewController.h"
 
 @class SaveFlyerCell,Flyer;
-@interface FlyrViewController : UIViewController <UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,UIActionSheetDelegate,RMStoreObserver>{
+@interface FlyrViewController : ParentViewController <UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,UIActionSheetDelegate,RMStoreObserver>{
 
     CreateFlyerController *createFlyer;
     BOOL searching;
     BOOL lockFlyer;
+    BOOL sheetAlreadyOpen;
     Flyer *flyer;
     NSMutableArray *flyerPaths;
     NSMutableArray *searchFlyerPaths;
     NSArray *requestedProducts;
+    
 
 
 }

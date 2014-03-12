@@ -100,7 +100,16 @@
 }
 
 -(void) openFbLink{
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.facebook.com/flyerlyapp"]];
+    NSURL *url = [NSURL URLWithString:@"fb://profile/500819963306066"];
+    
+    if ([[UIApplication sharedApplication] canOpenURL:url]){
+        [[UIApplication sharedApplication] openURL:url];
+    }
+    else {
+        //Open the url as usual
+        url = [NSURL URLWithString:@"https://www.facebook.com/flyerlyapp"];
+        [[UIApplication sharedApplication] openURL:url];
+    }
 }
 
 -(void)openTwLink{

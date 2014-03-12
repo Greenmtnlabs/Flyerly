@@ -24,7 +24,6 @@
     [self.view setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
     
     self.navigationItem.hidesBackButton = YES;
-    searchTextField.placeholder = @"Flyerly search";
     searchTextField.font = [UIFont systemFontOfSize:12.0];
     searchTextField.textAlignment = UITextAlignmentLeft;
     searchTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
@@ -381,6 +380,12 @@
 
 -(void)requestProduct {
     
+
+    if (sheetAlreadyOpen)return;
+        
+        
+    [self showLoadingIndicator];
+    sheetAlreadyOpen =YES;
     //These are over Products on App Store
     NSSet *products = [NSSet setWithArray:@[@"com.flyerly.AllDesignBundle",@"com.flyerly.UnlockSavedFlyers"]];
     
@@ -402,6 +407,8 @@
         [actionSheet addButtonWithTitle:@"Cancel"];
         
         [actionSheet showInView:self.view];
+        [self hideLoadingIndicator];
+        sheetAlreadyOpen = NO;
         
         
     } failure:^(NSError *error) {

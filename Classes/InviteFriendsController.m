@@ -178,7 +178,7 @@ BOOL selectAll;
     
     selectedTab = CONTACTS_TAB;
     
-    
+    [self.uiTableView reloadData];
     // init contact array
     if(contactBackupArray){
         
@@ -328,19 +328,20 @@ BOOL selectAll;
 - (IBAction)loadFacebookContacts:(UIButton *)sender{
     
     
+    selectedTab = FACEBOOK_TAB;
+    [self.uiTableView reloadData];
+
     // HERE WE HIGHLIGHT BUTTON ON TOUCH
     // AND OTHERS SET UNSELECTED
     [contactsButton setSelected:NO];
     [twitterButton setSelected:NO];
     [facebookButton setSelected:YES];
     
-    
     [self showLoadingIndicator];
     
     self.deviceContactItems = nil;
     self.deviceContactItems = [[NSMutableArray alloc] init];
     selectedIdentifierDictionary = nil;
-    selectedTab = FACEBOOK_TAB;
     
     
     if (facebookBackupArray == nil || facebookBackupArray.count == 0) {
@@ -523,6 +524,8 @@ int totalCount = 0;
     self.deviceContactItems = [[NSMutableArray alloc] init];
     
     selectedTab = TWITTER_TAB;
+    [self.uiTableView reloadData];
+
 
     if (twitterBackupArray == nil || twitterBackupArray.count == 0) {
         searchTextField.text = @"";
