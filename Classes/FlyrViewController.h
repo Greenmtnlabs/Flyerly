@@ -14,6 +14,7 @@
 #import "FlyrAppDelegate.h"
 #import "Flyer.h"
 #import "RMStore.h"
+#import "RMStoreKeychainPersistence.h"
 #import "ParentViewController.h"
 
 @class SaveFlyerCell,Flyer;
@@ -27,6 +28,7 @@
     NSMutableArray *flyerPaths;
     NSMutableArray *searchFlyerPaths;
     NSArray *requestedProducts;
+    RMStoreKeychainPersistence *_persistence;
     
 
 

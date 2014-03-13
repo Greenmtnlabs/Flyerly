@@ -116,6 +116,8 @@ NSString * const TEXTHEIGHT = @"280.000000";
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc]init];
     [dateFormat setDateFormat:@"MM/dd/YYYY"];
     NSString *dateString = [dateFormat stringFromDate:date];
+    
+    [self setFlyerUpdatedDate:dateString];
     [self setFlyerDate:dateString];
     
     
@@ -1245,6 +1247,19 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 
 }
 
+-(NSString *)getFlyerUpdateDate {
+    
+    if (textFileArray.count > 5) {
+        return [textFileArray objectAtIndex:5];
+    } else {
+        [textFileArray addObject:@""];
+        [textFileArray writeToFile:textFile atomically:YES];
+        return [textFileArray objectAtIndex:5];
+    }
+
+
+}
+
 
 /*
  * Here we Set Flyer Description
@@ -1271,6 +1286,19 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     //Here we write the Array of Text files .txt
     [textFileArray writeToFile:textFile atomically:YES];
 }
+
+
+/*
+ * Here we Set Flyer Date
+ */
+-(void)setFlyerUpdatedDate :(NSString *)dt {
+    
+    [textFileArray replaceObjectAtIndex:5 withObject:dt];
+    
+    //Here we write the Array of Text files .txt
+    [textFileArray writeToFile:textFile atomically:YES];
+}
+
 
 
 /*

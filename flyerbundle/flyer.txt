@@ -4,7 +4,9 @@
 <array>
 	<string>Flyerly</string>
 	<string></string>
-	<string>01/29/2014</string>
+	<string></string>
+    <string></string>
+    <string></string>
     <string></string>
 </array>
 </plist>

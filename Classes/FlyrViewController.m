@@ -241,6 +241,30 @@
     return [NSMutableArray arrayWithObjects:createBarButton,nil];
 }
 
+
+/*
+ * Here we update info to Parse account
+ */
+-(void)updateParse {
+    
+    //HERE WE UPDATE PARSE ACCOUNT
+    PFUser *user = [PFUser currentUser];
+    PFQuery *query = [PFQuery queryWithClassName:@"InApp"];
+    [query whereKey:@"user" equalTo:user];
+    [query getFirstObjectInBackgroundWithBlock:^(PFObject *InApp, NSError *error) {
+        
+        InApp[@"json"] = [[NSUserDefaults standardUserDefaults]objectForKey:@"InAppPurchases"];
+        [InApp saveInBackground];
+        lockFlyer = NO;
+        [self.tView reloadData];
+        [self hideLoadingIndicator];
+        
+    }];
+    
+    [[RMStore defaultStore] removeStoreObserver:self];
+
+}
+
 /*
  * Here we get All Flyers Directories
  * return
@@ -424,12 +448,12 @@
  */
 -(void)purchaseProductID:(NSString *)pid{
 
+    [self showLoadingIndicator];
+    
     [[RMStore defaultStore] addPayment:pid success:^(SKPaymentTransaction *transaction) {
         
         
         NSLog(@"Product purchased");
-        
-        //HERE WE GET USER PURCHASES INFO FROM PARSE
         
         NSString *strWithOutDot = [pid stringByReplacingOccurrencesOfString:@"." withString:@""];
         
@@ -447,22 +471,9 @@
             [[NSUserDefaults standardUserDefaults]setValue:userPurchase forKey:@"InAppPurchases"];
         
         }
-        
-        //HERE WE UPDATE PARSE ACCOUNT
-        PFUser *user = [PFUser currentUser];
-        PFQuery *query = [PFQuery queryWithClassName:@"InApp"];
-         [query whereKey:@"user" equalTo:user];
-        [query getFirstObjectInBackgroundWithBlock:^(PFObject *InApp, NSError *error) {
-            
-            InApp[@"json"] = [[NSUserDefaults standardUserDefaults]objectForKey:@"InAppPurchases"];
-            [InApp saveInBackground];
-            lockFlyer = NO;
-            [self.tView reloadData];
-            
-        }];
-        
-        
-        [[RMStore defaultStore] removeStoreObserver:self];
+
+        //Saved in Parse Account
+        [self updateParse];
         
     } failure:^(SKPaymentTransaction *transaction, NSError *error) {
         
@@ -473,12 +484,12 @@
 
 - (void)storeProductsRequestFailed:(NSNotification*)notification
 {
-   // NSError *error = notification.storeError;
+    NSError *error = notification.storeError;
 }
 
 - (void)storeProductsRequestFinished:(NSNotification*)notification
 {
-   // NSArray *products = notification.products;
+    NSArray *products = notification.products;
 }
 
 
@@ -521,6 +532,32 @@
     [[RMStore defaultStore] addStoreObserver:self];
     
     [[RMStore defaultStore] restoreTransactionsOnSuccess:^{
+        
+        //HERE WE GET SHARED INTANCE OF _persistence WHICH WE LINKED IN FlyrAppDelegate
+        FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+        NSArray *productIdentifiers = [[appDelegate._persistence purchasedProductIdentifiers] allObjects];
+
+        if (productIdentifiers.count >= 1) {
+            
+            [self showLoadingIndicator];
+            
+            NSMutableDictionary *userPurchase;
+            if(![[NSUserDefaults standardUserDefaults] stringForKey:@"InAppPurchases"]){
+                userPurchase =[[NSMutableDictionary alloc] initWithDictionary:[[NSUserDefaults standardUserDefaults]valueForKey:@"InAppPurchases"]];
+            }else {
+                userPurchase =[[NSMutableDictionary alloc] init];
+            }
+            
+            for (int i = 0; i < productIdentifiers.count; i++) {
+                
+                NSString *strWithOutDot = [[productIdentifiers objectAtIndex:i] stringByReplacingOccurrencesOfString:@"." withString:@""];
+                 [userPurchase setValue:@"1" forKey:strWithOutDot];
+            }
+            
+            [[NSUserDefaults standardUserDefaults]setValue:userPurchase forKey:@"InAppPurchases"];
+            [self updateParse];
+        }
+        
         NSLog(@"Transactions restored");
     } failure:^(NSError *error) {
         NSLog(@"Something went wrong");
@@ -529,10 +566,20 @@
 
 - (void)storeRestoreTransactionsFailed:(NSNotification*)notification;
 {
-   // NSError *error = notification.storeError;
+ //   NSError *error = notification.storeError;
 }
 
-- (void)storeRestoreTransactionsFinished:(NSNotification*)notification { }
+- (void)storeRestoreTransactionsFinished:(NSNotification*)notification {}
+
+
+#pragma mark RMStoreObserver
+
+
+- (void)storePaymentTransactionFinished:(NSNotification*)notification
+{
+
+
+}
 
 
 @end

@@ -23,6 +23,7 @@
 #import "BitlyConfig.h"
 #import "FlyerUser.h"
 #import "RMStore.h"
+#import "RMStoreKeychainPersistence.h"
 
 extern NSString *FacebookDidLoginNotification;
 
@@ -42,6 +43,7 @@ extern NSString *FacebookDidLoginNotification;
 @property (nonatomic, strong) FlyerlyMainScreen *lauchController;
 @property (nonatomic, strong) LaunchController *accountController;
 @property (nonatomic, strong) UIView *sharingProgressParentView;
+@property (nonatomic, strong) RMStoreKeychainPersistence *_persistence;
 
 -(void)fbChangeforNewVersion;
 -(void)twitterChangeforNewVersion:(NSString *)olduser;

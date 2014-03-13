@@ -279,6 +279,7 @@
 		201D647318C4832300F0D7D8 /* libFlurry_4.3.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 201D647218C4832300F0D7D8 /* libFlurry_4.3.2.a */; };
 		202233A317BD2A1F0093DD4E /* back_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 202233A117BD2A1E0093DD4E /* back_button.png */; };
 		202233A417BD2A1F0093DD4E /* back_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 202233A217BD2A1E0093DD4E /* back_button@2x.png */; };
+		2022C63518D1BAF000BCD5F7 /* RMStoreKeychainPersistence.m in Sources */ = {isa = PBXBuildFile; fileRef = 2022C63418D1BAF000BCD5F7 /* RMStoreKeychainPersistence.m */; };
 		2025FAB51860742700CC9188 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2025FAB41860742700CC9188 /* CoreMedia.framework */; };
 		2025FAB7186074D100CC9188 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2025FAB6186074D100CC9188 /* CoreText.framework */; };
 		2025FAB9186074F300CC9188 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2025FAB8186074F300CC9188 /* CoreMotion.framework */; };
@@ -1361,6 +1362,8 @@
 		201D647218C4832300F0D7D8 /* libFlurry_4.3.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_4.3.2.a; sourceTree = "<group>"; };
 		202233A117BD2A1E0093DD4E /* back_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back_button.png; sourceTree = "<group>"; };
 		202233A217BD2A1E0093DD4E /* back_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back_button@2x.png"; sourceTree = "<group>"; };
+		2022C63318D1BAF000BCD5F7 /* RMStoreKeychainPersistence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMStoreKeychainPersistence.h; sourceTree = "<group>"; };
+		2022C63418D1BAF000BCD5F7 /* RMStoreKeychainPersistence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMStoreKeychainPersistence.m; sourceTree = "<group>"; };
 		2025FAB41860742700CC9188 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		2025FAB6186074D100CC9188 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		2025FAB8186074F300CC9188 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
@@ -3062,6 +3065,8 @@
 		2026992818CED69600945218 /* Purchase */ = {
 			isa = PBXGroup;
 			children = (
+				2022C63318D1BAF000BCD5F7 /* RMStoreKeychainPersistence.h */,
+				2022C63418D1BAF000BCD5F7 /* RMStoreKeychainPersistence.m */,
 				2026992918CED6B000945218 /* RMStore.h */,
 				2026992A18CED6B000945218 /* RMStore.m */,
 			);
@@ -4882,6 +4887,7 @@
 				2026992B18CED6B000945218 /* RMStore.m in Sources */,
 				204635621895E4AF00A94C42 /* Flyer.m in Sources */,
 				2044FF96185088ED00A26B42 /* MainSettingCell.m in Sources */,
+				2022C63518D1BAF000BCD5F7 /* RMStoreKeychainPersistence.m in Sources */,
 				202C4825187D7A6B00FE0975 /* CDataScanner.m in Sources */,
 				49997FF717DF786400CF1038 /* ParentViewController.m in Sources */,
 				4986857018B4FFC7002113E4 /* LibraryViewController.m in Sources */,

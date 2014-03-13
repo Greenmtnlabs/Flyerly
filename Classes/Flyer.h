@@ -72,6 +72,7 @@
 -(void)setFlyerURL :(NSString *)URL;
 -(void)setShareType :(NSString *)type;
 
+
 -(void)setRecentFlyer;
 
 -(void)setFacebookStatus :(int)status;
@@ -98,6 +99,8 @@
 -(NSString *)getFlyerDate;
 -(NSString *)getFlyerURL;
 -(NSString *)getShareType;
+-(NSString *)getFlyerUpdateDate;
+
 
 -(NSString *)getText :(NSString *)uid;
 -(NSString *)getImageName :(NSString *)uid;

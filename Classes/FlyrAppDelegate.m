@@ -21,7 +21,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 @synthesize window;
 @synthesize navigationController;
 @synthesize  svController,lauchController,accountController;
-@synthesize sharingProgressParentView;
+@synthesize sharingProgressParentView,_persistence;
 
 
 #pragma mark -
@@ -114,6 +114,10 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
  */
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    
+    
+    _persistence = [[RMStoreKeychainPersistence alloc] init];
+    [RMStore defaultStore].transactionPersistor = _persistence;
     
     // Configurator initialization
     FlyerlyConfigurator *flyerConfigurator = [[FlyerlyConfigurator alloc] init];
