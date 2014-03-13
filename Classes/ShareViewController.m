@@ -88,7 +88,7 @@
     
     self.dicController=[UIDocumentInteractionController interactionControllerWithURL:igImageHookFile];
     self.dicController.UTI = @"com.instagram.photo";
-    self.dicController.annotation = @{@"InstagramCaption": [NSString stringWithFormat:@"%@ %@ #flyerly", self.titleView.text,descriptionView.text]};
+    self.dicController.annotation = @{@"InstagramCaption": [NSString stringWithFormat:@"%@ #flyerly", descriptionView.text]};
     
     
     BOOL displayed = [self.dicController presentOpenInMenuFromRect:rect inView: self.view animated:YES];
@@ -274,6 +274,7 @@
  * Called when clicked on description text view
  */
 - (void)textViewTapped:(id)sender {
+    
     if([descriptionView.text isEqualToString:AddCaptionText]){
         [descriptionView setText:@""];
         [descriptionView becomeFirstResponder];
@@ -303,6 +304,9 @@
  * Called when clicked on title text field
  */
 - (void)textFieldTapped:(id)sender {
+    
+    [titleView setReturnKeyType:UIReturnKeyDone];
+
     if([titleView.text isEqualToString:NameYourFlyerText]){
         [titleView setText:@""];
         [titleView becomeFirstResponder];
@@ -334,7 +338,7 @@
         if( [InviteFriendsController connected] ){
             
             // Current Item For Sharing
-            SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ %@ #flyerly",titleView.text, selectedFlyerDescription ]];
+            SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ #flyerly", selectedFlyerDescription ]];
             
            // iosSharer = [[ SHKSharer alloc] init];
             iosSharer = [SHKFacebook shareItem:item];
@@ -359,7 +363,7 @@
         if( [InviteFriendsController connected] ){
 
             // Current Item For Sharing
-             SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ %@ #flyerly",titleView.text, selectedFlyerDescription ]];
+             SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ #flyerly", selectedFlyerDescription ]];
             
             //Calling ShareKit for Sharing
             iosSharer = [[ SHKSharer alloc] init];
@@ -422,7 +426,7 @@
         if( [InviteFriendsController connected] ){
             
             // Current Item For Sharing
-            SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@  %@",titleView.text, selectedFlyerDescription ]];
+            SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@", selectedFlyerDescription ]];
             
             item.tags =[NSArray arrayWithObjects: @"#flyerly", nil];
             
@@ -451,7 +455,7 @@
         if( [InviteFriendsController connected] ){
 
             // Current Item For Sharing
-            SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@",titleView.text  ]];
+            SHKItem *item = [SHKItem image:selectedFlyerImage title:@""];
             item.tags =[NSArray arrayWithObjects: @"#flyerly", nil];
             item.text = selectedFlyerDescription;
             

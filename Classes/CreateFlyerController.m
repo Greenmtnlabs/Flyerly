@@ -2321,6 +2321,7 @@ int selectedAddMoreLayerTab = -1;
     [flyer setShareType:shareType];
     shareviewcontroller.selectedFlyerDescription = [flyer getFlyerDescription];
     shareviewcontroller.topTitleLabel = titleLabel;
+     [shareviewcontroller.descriptionView setReturnKeyType:UIReturnKeyDone];
     shareviewcontroller.Yvalue = [NSString stringWithFormat:@"%f",self.view.frame.size.height];
     
     PFUser *user = [PFUser currentUser];
