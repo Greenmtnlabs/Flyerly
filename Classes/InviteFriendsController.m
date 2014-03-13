@@ -729,7 +729,7 @@ int totalCount = 0;
             
         }else if(selectedTab == 1){
             
-            SHKItem *i = [SHKItem text:@"I'm using the flyerly app to create and share flyers on the go! Flyer.ly/Invite"];
+            SHKItem *i = [SHKItem text:@"I'm using the flyerly app to create and share flyers on the go! http://Flyer.ly/Invite"];
             
             NSArray *shareFormFields = [SHKFacebookCommon shareFormFieldsForItem:i];
             SHKFormController *rootView = [[SHKCONFIG(SHKFormControllerSubclass) alloc] initWithStyle:UITableViewStyleGrouped

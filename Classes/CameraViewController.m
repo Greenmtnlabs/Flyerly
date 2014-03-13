@@ -52,7 +52,7 @@
     };
     
     self.cameraView.flashButtonConfigurationBlock = [self.cameraView buttonConfigurationBlockWithTitleFrom:
-                                                    @[@"Flash", @"On", @"Auto"]];
+                                                    @[@"Flash Off", @"Flash On", @"Auto"]];
     self.cameraView.focusButtonConfigurationBlock = [self.cameraView buttonConfigurationBlockWithTitleFrom:
                                                     @[@"Fcs", @"Auto", @"Cont"]];
     self.cameraView.exposureButtonConfigurationBlock = [self.cameraView buttonConfigurationBlockWithTitleFrom:

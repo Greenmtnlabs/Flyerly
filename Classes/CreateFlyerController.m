@@ -1751,6 +1751,7 @@ int selectedAddMoreLayerTab = -1;
     [self.flyimgView deleteLayer:currentLayer];
 	
     // Show the keyboard.
+    lastTextView.returnKeyType = UIReturnKeyDone;
 	[lastTextView becomeFirstResponder];
 }
 

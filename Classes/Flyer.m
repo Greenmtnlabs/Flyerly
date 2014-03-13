@@ -15,8 +15,8 @@ NSString * const TEXTCOLOR = @"0.000000, 0.000000, 0.000000";
 NSString * const TEXTWHITECOLOR = @"0.000000, 1.000000";
 NSString * const TEXTBORDERWHITE = @"0.000000, 0.000000";
 NSString * const TEXTBORDERCOLOR = @"0.000000, 0.000000, 0.000000";
-NSString * const TEXTxPOS = @"20.000000";
-NSString * const TEXTyPOS = @"50.000000";
+NSString * const TEXTxPOS = @"15.000000";
+NSString * const TEXTyPOS = @"15.000000";
 NSString * const TEXTWIDTH = @"280.000000";
 NSString * const TEXTHEIGHT = @"280.000000";
 
