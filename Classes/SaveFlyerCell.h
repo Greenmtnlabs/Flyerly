@@ -17,9 +17,12 @@
 
 
 @property(nonatomic, strong)IBOutlet UILabel *createLabel;
+@property(nonatomic, strong)IBOutlet UILabel *updatedLabel;
 @property(nonatomic, strong)IBOutlet UILabel * nameLabel;
 @property(nonatomic, strong)IBOutlet UITextView * description;
 @property(nonatomic, strong)IBOutlet UILabel * dateLabel;
+@property(nonatomic, strong)IBOutlet UILabel * updatedDateLabel;
+
 @property(nonatomic, strong)IBOutlet UIImageView *cellImage;
 @property(nonatomic, strong)IBOutlet UIImageView *backgroundImage;
 @property(nonatomic, strong) NSString *filePath;

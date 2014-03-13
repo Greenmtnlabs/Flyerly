@@ -116,10 +116,14 @@ NSString * const TEXTHEIGHT = @"280.000000";
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc]init];
     [dateFormat setDateFormat:@"MM/dd/YYYY"];
     NSString *dateString = [dateFormat stringFromDate:date];
-    
-    [self setFlyerUpdatedDate:dateString];
-    [self setFlyerDate:dateString];
-    
+
+    NSString *createdDate = [self getFlyerDate];
+
+    if ([createdDate isEqualToString:@""]) {
+        [self setFlyerDate:dateString];
+    }else {
+        [self setFlyerUpdatedDate:dateString];
+    }
     
 }
 
@@ -1242,7 +1246,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     } else {
         [textFileArray addObject:@"Public"];
         [textFileArray writeToFile:textFile atomically:YES];
-        return [textFileArray objectAtIndex:4];
+        return @"";
     }
 
 }
@@ -1254,7 +1258,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     } else {
         [textFileArray addObject:@""];
         [textFileArray writeToFile:textFile atomically:YES];
-        return [textFileArray objectAtIndex:5];
+        return @"";
     }
 
 
@@ -1293,8 +1297,11 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
  */
 -(void)setFlyerUpdatedDate :(NSString *)dt {
     
-    [textFileArray replaceObjectAtIndex:5 withObject:dt];
-    
+    if (textFileArray.count > 5) {
+        [textFileArray replaceObjectAtIndex:5 withObject:dt];
+    }else {
+        [textFileArray addObject:dt];
+    }
     //Here we write the Array of Text files .txt
     [textFileArray writeToFile:textFile atomically:YES];
 }
