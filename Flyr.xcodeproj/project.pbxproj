@@ -280,6 +280,7 @@
 		202233A317BD2A1F0093DD4E /* back_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 202233A117BD2A1E0093DD4E /* back_button.png */; };
 		202233A417BD2A1F0093DD4E /* back_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 202233A217BD2A1E0093DD4E /* back_button@2x.png */; };
 		2022C63518D1BAF000BCD5F7 /* RMStoreKeychainPersistence.m in Sources */ = {isa = PBXBuildFile; fileRef = 2022C63418D1BAF000BCD5F7 /* RMStoreKeychainPersistence.m */; };
+		2022C63718D1E8FE00BCD5F7 /* privacy_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2022C63618D1E8FE00BCD5F7 /* privacy_icon.png */; };
 		2025FAB51860742700CC9188 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2025FAB41860742700CC9188 /* CoreMedia.framework */; };
 		2025FAB7186074D100CC9188 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2025FAB6186074D100CC9188 /* CoreText.framework */; };
 		2025FAB9186074F300CC9188 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2025FAB8186074F300CC9188 /* CoreMotion.framework */; };
@@ -1364,6 +1365,7 @@
 		202233A217BD2A1E0093DD4E /* back_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back_button@2x.png"; sourceTree = "<group>"; };
 		2022C63318D1BAF000BCD5F7 /* RMStoreKeychainPersistence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMStoreKeychainPersistence.h; sourceTree = "<group>"; };
 		2022C63418D1BAF000BCD5F7 /* RMStoreKeychainPersistence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMStoreKeychainPersistence.m; sourceTree = "<group>"; };
+		2022C63618D1E8FE00BCD5F7 /* privacy_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = privacy_icon.png; sourceTree = "<group>"; };
 		2025FAB41860742700CC9188 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		2025FAB6186074D100CC9188 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		2025FAB8186074F300CC9188 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
@@ -2277,6 +2279,7 @@
 		0DF3A361108DF47400D6C887 /* ImageLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				2022C63618D1E8FE00BCD5F7 /* privacy_icon.png */,
 				2017711018D07381002097AC /* private_off_button.png */,
 				2017711118D07382002097AC /* public_on.png */,
 				2017710E18D06C6A002097AC /* lock_icon.png */,
@@ -4071,6 +4074,7 @@
 				65C7A5211721A06B003F1A84 /* t_button.png in Resources */,
 				65C7A5221721A06B003F1A84 /* t_button@2x.png in Resources */,
 				65C7A5231721A06B003F1A84 /* take_photo.png in Resources */,
+				2022C63718D1E8FE00BCD5F7 /* privacy_icon.png in Resources */,
 				65C7A5241721A06B003F1A84 /* take_photo@2x.png in Resources */,
 				65C7A5251721A06B003F1A84 /* white_bg_thumbnail.png in Resources */,
 				65C7A5261721A06B003F1A84 /* white_bg_thumbnail@2x.png in Resources */,

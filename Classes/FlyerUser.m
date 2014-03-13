@@ -126,15 +126,24 @@
                         } else {
                             NSString *yValue =  [textLayer valueForKey:@"y"] ;
                             
-                            yValue = [yValue stringByReplacingOccurrencesOfString:@"-"
-                                                                       withString:@""];
-                            y = [yValue floatValue];
-                            y = y + 44;
+                            NSString *yValueTemp = [yValue stringByReplacingOccurrencesOfString:@"-"
+                                                                                     withString:@""];
+                            y = [yValueTemp floatValue];
                             
+                            if ( [yValueTemp isEqualToString:yValue] ) {
+                                
+                                y += 126;
+                            } else {
+
+                                y = 38 - y;
+
+                            }
+                            
+                            [textLayer setValue:[NSString stringWithFormat:@"%f",y] forKey:@"y"];
+                            [masterLayers setValue:textLayer forKey:[keys objectAtIndex:i]];
                         }
                             
-                        [textLayer setValue:[NSString stringWithFormat:@"%f",y] forKey:@"y"];
-                        [masterLayers setValue:textLayer forKey:[keys objectAtIndex:i]];
+
 
                     }
                     

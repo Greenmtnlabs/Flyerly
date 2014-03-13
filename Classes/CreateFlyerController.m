@@ -254,7 +254,8 @@ int selectedAddMoreLayerTab = -1;
  */
 -(void) callMenu
 {
-    
+    [self.navigationController popViewControllerAnimated:YES];
+    return;
     //Delete Empty Layer if Exist
     if (currentLayer != nil && ![currentLayer isEqualToString:@""]) {
         
@@ -2310,11 +2311,14 @@ int selectedAddMoreLayerTab = -1;
     if (![description isEqualToString:@""]) {
         shareviewcontroller.descriptionView.text = description;
     }
-    NSString *shareType =   [flyer getShareType];
+    
+    NSString *shareType  = [[NSUserDefaults standardUserDefaults] valueForKey:@"FlyerlyPublic"];
+    
     if ([shareType isEqualToString:@"Private"]) {
         [shareviewcontroller.flyerShareType setSelected:YES];
+        
     }
-
+    [flyer setShareType:shareType];
     shareviewcontroller.selectedFlyerDescription = [flyer getFlyerDescription];
     shareviewcontroller.topTitleLabel = titleLabel;
     shareviewcontroller.Yvalue = [NSString stringWithFormat:@"%f",self.view.frame.size.height];

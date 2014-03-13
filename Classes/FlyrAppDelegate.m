@@ -176,9 +176,10 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
         lauchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil];
         
         [navigationController pushViewController:lauchController animated:NO];
-        
+       
         AfterUpdateController *afterUpdateView = [[AfterUpdateController alloc]initWithNibName:@"AfterUpdateController" bundle:nil];
         [navigationController setRootViewController:afterUpdateView];
+        [[NSUserDefaults standardUserDefaults]  setObject:@"YES" forKey:@"UpdatedVersion"];
         
     } else {
         // User has already been greeted.
@@ -197,8 +198,11 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     if(![[NSUserDefaults standardUserDefaults] stringForKey:@"userDataExist"]){
         [self copyUsersDataForTesting];
     }
-        
     
+    // HERE WE SET ALL FLYER ARE PUBLIC DEFUALT
+    if(![[NSUserDefaults standardUserDefaults] stringForKey:@"FlyerlyPublic"]){
+        [[NSUserDefaults standardUserDefaults]  setObject:@"Public" forKey:@"FlyerlyPublic"];
+    }
     [window  setRootViewController:navigationController];
     
     // Override point for customization after application launch.
@@ -206,13 +210,6 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 
 	[window makeKeyAndVisible];
     
-    /*
-    const BOOL iOS7OrHigher = floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1;
-    _receiptVerificator = iOS7OrHigher ? [[RMStoreAppReceiptVerificator alloc] init] : [[RMStoreTransactionReceiptVerificator alloc] init];
-    [RMStore defaultStore].receiptVerificator = _receiptVerificator;
-
-*/
-
     return YES;
 }
 

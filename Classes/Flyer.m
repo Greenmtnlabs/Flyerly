@@ -1325,11 +1325,14 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
  * HERE WE SAVE FLYER SHARE TYPE
  */
 -(void)setShareType :(NSString *)type {
-    [textFileArray replaceObjectAtIndex:4 withObject:type];
+    if (textFileArray.count > 4) {
+        [textFileArray replaceObjectAtIndex:4 withObject:type];
+    }else {
+        [textFileArray addObject:type];
+    }
     
     //Here we write the Array of Text files .txt
     [textFileArray writeToFile:textFile atomically:YES];
-
 
 }
 

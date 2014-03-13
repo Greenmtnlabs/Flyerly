@@ -60,7 +60,6 @@
     
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:backBarButton,helpBarButton,nil ]];
     
-            
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-35, -6, 50, 50)];
     label.backgroundColor = [UIColor clearColor];
@@ -72,6 +71,7 @@
     self.navigationItem.titleView = label;
     category = [[NSMutableArray alloc] init];
     [category addObject:@"Save to Gallery"];
+    [category addObject:@"Flyerly public"];
     [category addObject:@"Account Setting"];
     [category addObject:@"Like us on Facebook"];
     [category addObject:@"Follow us on Twitter"];
@@ -126,15 +126,39 @@
     }
     
     if (indexPath.row == 1){
+        UISwitch *mSwitch;
+        if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
+            mSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(263, 4, 0, 0)] ;
+        }else{
+            mSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(223, 4, 0, 0)] ;
+        }
+        
+        [cell.contentView  addSubview:mSwitch];
+        [mSwitch addTarget:self action:@selector(flyerlypublic:) forControlEvents:UIControlEventValueChanged];
+        
+        NSString  *typ = [[NSUserDefaults standardUserDefaults] stringForKey:@"FlyerlyPublic"];
+        if ([typ isEqualToString:@"Public"]) {
+            [mSwitch setOn:YES];
+        }else{
+            [mSwitch setOn:NO];
+        }
+        
+        imgname = @"privacy_icon";
+        
+    }
+    
+    
+    if (indexPath.row == 2){
         imgname = @"account_settings";
         [cell setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"SettingcellBack"]]];
     }
     
-    if (indexPath.row == 2)imgname = @"fb_Like";
-    if (indexPath.row == 3)imgname = @"twt_follow";
+    
+    if (indexPath.row == 3)imgname = @"fb_Like";
+    if (indexPath.row == 4)imgname = @"twt_follow";
 
 
-    if (indexPath.row == 4)imgname = @"signout";
+    if (indexPath.row == 5)imgname = @"signout";
     
     
     // Set cell Values
@@ -142,6 +166,9 @@
     return cell;
 }
 
+/*
+ * HERE WE ENABLE AND DISABLE SAVING PICTURE IN GALLERY
+ */
 - (void)changeSwitch:(id)sender{
     
     if([sender isOn]){
@@ -161,22 +188,34 @@
 }
 
 
+- (void)flyerlypublic:(id)sender{
+    
+    if([sender isOn]){
+        [[NSUserDefaults standardUserDefaults]  setObject:@"Public" forKey:@"FlyerlyPublic"];
+        
+    } else{
+        
+        [[NSUserDefaults standardUserDefaults]  setObject:@"Private" forKey:@"FlyerlyPublic"];
+    }
+    
+}
+
 - (void)tableView:(UITableView *)tView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
    
-    if(indexPath.row == 1) {
+    if(indexPath.row == 2) {
         
         accountUpdater = [[ProfileViewController alloc]initWithNibName:@"ProfileViewController" bundle:nil];
         [self.navigationController pushViewController:accountUpdater animated:YES];
     
-    }else if(indexPath.row == 2){
+    }else if(indexPath.row == 3){
         
         [ self likeFacebook ];
         
-    }else if(indexPath.row == 3){
+    }else if(indexPath.row == 4){
         
         [self likeTwitter];
         
-    }else if(indexPath.row == 4){
+    }else if(indexPath.row == 5){
         
         warningAlert = [[UIAlertView  alloc]initWithTitle:@"Are you sure?" message:@"" delegate:self cancelButtonTitle:@"Sign out" otherButtonTitles:@"Cancel",nil];
         [warningAlert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:NO];
