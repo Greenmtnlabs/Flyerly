@@ -32,7 +32,7 @@
 }
 @property (strong, nonatomic)IBOutlet UITableView *tableView;
 - (void)changeSwitch:(id)sender;
-- (void)signOut;
++ (void)signOut;
 -(void)goBack;
 -(void)likeFacebook;
 -(void)likeTwitter;

@@ -229,7 +229,7 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     
 	if(alertView == warningAlert && buttonIndex == 0) {
-        [self signOut];
+        [MainSettingViewController signOut];
         LaunchController *actaController = nil;
         
         actaController = [[LaunchController alloc] initWithNibName:@"LaunchController" bundle:nil];
@@ -240,7 +240,7 @@
 }
 
 
-- (void)signOut{
++ (void)signOut{
 
     //REMOVE KEYS
     [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"User"];

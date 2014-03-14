@@ -20,6 +20,7 @@
 #import "Flurry.h"
 #import "SHKConfiguration.h"
 #import "FlyerlyConfigurator.h"
+#import "MainSettingViewController.h"
 #import "BitlyConfig.h"
 #import "FlyerUser.h"
 #import "RMStore.h"

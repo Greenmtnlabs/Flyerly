@@ -186,13 +186,34 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
         
         // Is the user logged in?
         if ( [PFUser currentUser] == nil ) {
+        
             accountController = [[LaunchController alloc]initWithNibName:@"LaunchController" bundle:nil];
             [navigationController setRootViewController:accountController];
+
         } else {
-            lauchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil];
-            [navigationController setRootViewController:lauchController];
+            
+            //THIS IS SIGN OUT CHECK WHEN USER INSTALL UPDATE VERSION OF FLYERLY
+            if([[NSUserDefaults standardUserDefaults] stringForKey:@"UpdatedVersion"]){
+                
+                lauchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil];
+                [navigationController setRootViewController:lauchController];
+                
+            } else {
+             
+                // Log out User.
+                [MainSettingViewController signOut];
+                
+                //its for remember key of user have Updated Version
+                [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"UpdatedVersion"];
+                accountController = [[LaunchController alloc]initWithNibName:@"LaunchController" bundle:nil];
+                [navigationController setRootViewController:accountController];
+
+                
+            }
         }
     }
+    
+
     
     // HERE WE COPY SOME DATA TO DEVICE FOR FUTURE TESTING
     if(![[NSUserDefaults standardUserDefaults] stringForKey:@"userDataExist"]){
