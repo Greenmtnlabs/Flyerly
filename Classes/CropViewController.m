@@ -85,11 +85,11 @@
         self.filterView.superview.frame = fr;
     }
     
-    UIImageView *cropImage = [[UIImageView alloc] initWithFrame:CGRectMake(20, 10, 127, 24)];
+    UIImageView *cropImage = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 127, 24)];
     [cropImage setImage:[UIImage imageNamed:@"crop_and_resize"]];
     [self.view addSubview:cropImage];
     
-    UIImageView *filterImage = [[UIImageView alloc] initWithFrame:CGRectMake(20, self.filterView.superview.frame.origin.y  -35, 56, 24)];
+    UIImageView *filterImage = [[UIImageView alloc] initWithFrame:CGRectMake(10, self.view.frame.size.height  -100, 56, 24)];
     [filterImage setImage:[UIImage imageNamed:@"filter"]];
     [self.view addSubview:filterImage];
 
