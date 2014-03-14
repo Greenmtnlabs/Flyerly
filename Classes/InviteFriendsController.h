@@ -42,11 +42,7 @@
     IBOutlet AsyncImageView *aview;
     
     int selectedTab;
-    NSArray *arrayOfAccounts;
-    ACAccount *account;
-    NSString *sName;
-    NSString *sMessage;
-    
+    ACAccount *account;    
     SHKSharer *iosSharer;
 }
 
@@ -63,7 +59,7 @@
 @property(nonatomic,strong) NSMutableArray *contactBackupArray;
 @property(nonatomic,strong) NSMutableArray *facebookBackupArray;
 @property(nonatomic,strong) NSMutableArray *twitterBackupArray;
-@property(nonatomic,strong) NSMutableArray *deviceContactItems;
+@property(nonatomic,strong) NSMutableArray *selectedIdentifiers;
 @property(nonatomic,strong) NSMutableArray *fbinvited;
 @property(nonatomic,strong) NSMutableArray *twitterInvited;
 @property(nonatomic,strong) NSMutableArray *iPhoneinvited;
@@ -83,7 +79,6 @@
 
 + (BOOL)connected;
 - (BOOL)ckeckExistContact:(NSString *)identifier;
-+(NSMutableDictionary *)getSelectedIdentifiersDictionary;
 +(void)disableSelectUnSelectFlags;
 
 @end

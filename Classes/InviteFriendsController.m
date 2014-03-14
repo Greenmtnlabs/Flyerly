@@ -16,7 +16,7 @@
 #import "Flurry.h"
 
 @implementation InviteFriendsController
-@synthesize uiTableView, contactsArray, deviceContactItems,contactsButton, facebookButton, twitterButton,  searchTextField, facebookArray, twitterArray,fbinvited,twitterInvited,iPhoneinvited;
+@synthesize uiTableView, contactsArray, selectedIdentifiers,contactsButton, facebookButton, twitterButton,  searchTextField, facebookArray, twitterArray,fbinvited,twitterInvited,iPhoneinvited;
 @synthesize contactBackupArray, facebookBackupArray, twitterBackupArray;
 @synthesize fbText;
 
@@ -30,7 +30,7 @@ BOOL selectAll;
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    self.deviceContactItems = [[NSMutableArray alloc] init];
+    self.selectedIdentifiers = [[NSMutableArray alloc] init];
     globle = [FlyerlySingleton RetrieveSingleton];
     self.navigationItem.hidesBackButton = YES;
     [self.view setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
@@ -139,7 +139,7 @@ BOOL selectAll;
     [facebookButton setSelected:NO];
 
     
-    [deviceContactItems removeAllObjects];
+    [selectedIdentifiers removeAllObjects];
     if(selectedTab == CONTACTS_TAB){
         
         // INVITE BAR BUTTON
@@ -155,9 +155,8 @@ BOOL selectAll;
     [self showLoadingIndicator];
     
     selectAll = YES;
-    self.deviceContactItems = nil;
-    self.deviceContactItems = [[NSMutableArray alloc] init];
-    selectedIdentifierDictionary = nil;
+    self.selectedIdentifiers = nil;
+    self.selectedIdentifiers = [[NSMutableArray alloc] init];
     
     selectedTab = CONTACTS_TAB;
     
@@ -322,9 +321,8 @@ BOOL selectAll;
     
     [self showLoadingIndicator];
     
-    self.deviceContactItems = nil;
-    self.deviceContactItems = [[NSMutableArray alloc] init];
-    selectedIdentifierDictionary = nil;
+    self.selectedIdentifiers = nil;
+    self.selectedIdentifiers = [[NSMutableArray alloc] init];
     
     
     if (facebookBackupArray == nil || facebookBackupArray.count == 0) {
@@ -457,7 +455,7 @@ int totalCount = 0;
 }
 
 /*
- *
+ * HERE WE REQUEST TO TWITTER FOR FRIENDS LIST
  */
 - (IBAction)loadTwitterContacts:(UIButton *)sender{
     
@@ -467,8 +465,8 @@ int totalCount = 0;
     [twitterButton setSelected:YES];
     [facebookButton setSelected:NO];
     
-    self.deviceContactItems = nil;
-    self.deviceContactItems = [[NSMutableArray alloc] init];
+    self.selectedIdentifiers = nil;
+    self.selectedIdentifiers = [[NSMutableArray alloc] init];
     
     selectedTab = TWITTER_TAB;
     [self.uiTableView reloadData];
@@ -531,8 +529,8 @@ int totalCount = 0;
 
 
 - (BOOL)ckeckExistContact:(NSString *)identifier{
-    for (int i = 0; i < deviceContactItems.count ; i++) {
-        if ([identifier isEqualToString:deviceContactItems[i]]) {
+    for (int i = 0; i < selectedIdentifiers.count ; i++) {
+        if ([identifier isEqualToString:selectedIdentifiers[i]]) {
             return YES;
         }
     }
@@ -560,17 +558,17 @@ int totalCount = 0;
 -(IBAction)invite{
     
     NSMutableArray *identifiers = [[NSMutableArray alloc] init];
-    identifiers = deviceContactItems;
+    identifiers = selectedIdentifiers;
     NSLog(@"%@",identifiers);
     
     if([identifiers count] > 0){
         
         // Send invitations
         if(selectedTab == 0){
-            globle.accounts = [[NSMutableArray alloc] initWithArray:deviceContactItems];
+            globle.accounts = [[NSMutableArray alloc] initWithArray:selectedIdentifiers];
             
             SHKItem *item = [SHKItem text:@"I'm using the flyerly app to create and share flyers on the go! Flyer.ly/Invite"];
-            item.textMessageToRecipients = deviceContactItems;
+            item.textMessageToRecipients = selectedIdentifiers;
 
             iosSharer = [[ SHKSharer alloc] init];
             iosSharer = [SHKTextMessage shareItem:item];
@@ -662,7 +660,7 @@ int totalCount = 0;
             PFUser *user = [PFUser currentUser];
             user[@"iphoneinvited"] = iPhoneinvited;
             [user saveInBackground];
-            [deviceContactItems   removeAllObjects];
+            [selectedIdentifiers   removeAllObjects];
             [self.uiTableView reloadData];
             break;
         }
@@ -766,7 +764,7 @@ int totalCount = 0;
     
     // Current Item For Sharing
     SHKItem *item = [SHKItem text:fbText];
-    item.tags = deviceContactItems;
+    item.tags = selectedIdentifiers;
     
     //Calling ShareKit for Sharing
     iosSharer = [[SHKSharer alloc] init];
@@ -780,7 +778,7 @@ int totalCount = 0;
  * Here we Hide our facebook post View
  */
 - (void)fbCancel {
-    [deviceContactItems removeAllObjects];
+    [selectedIdentifiers removeAllObjects];
     [uiTableView reloadData];
 
 }
@@ -815,16 +813,6 @@ int totalCount = 0;
     return  count;
 }
 
-NSMutableDictionary *selectedIdentifierDictionary;
-+(NSMutableDictionary *)getSelectedIdentifiersDictionary{
-    
-    if(selectedIdentifierDictionary){
-        return selectedIdentifierDictionary;
-    }else{
-        selectedIdentifierDictionary = [[NSMutableDictionary alloc] init];
-        return selectedIdentifierDictionary;
-    }
-}
 
 +(void)disableSelectUnSelectFlags{
     unSelectAll = NO;
@@ -843,8 +831,8 @@ NSMutableDictionary *selectedIdentifierDictionary;
     }
         
     
-    if(!self.deviceContactItems){
-        self.deviceContactItems = [[NSMutableArray alloc] init];
+    if(!self.selectedIdentifiers){
+        self.selectedIdentifiers = [[NSMutableArray alloc] init];
     }
     
     ContactsModel *receivedDic;
@@ -915,14 +903,14 @@ NSMutableDictionary *selectedIdentifierDictionary;
         if (model.status == 0) {
             
             [model setInvitedStatus:1];
-            [deviceContactItems addObject:model.description];
+            [selectedIdentifiers addObject:model.description];
             
         }else if (model.status == 1) {
             
             [model setInvitedStatus:0];
             
             //REMOVE FROM SENDING LIST
-            [deviceContactItems removeObject:model.description];
+            [selectedIdentifiers removeObject:model.description];
         }
         
     }
@@ -935,7 +923,7 @@ NSMutableDictionary *selectedIdentifierDictionary;
         //CHECK FOR ALREADY SELECTED
         if (model.status == 0) {
             [model setInvitedStatus:1];
-            [deviceContactItems addObject:model.description];
+            [selectedIdentifiers addObject:model.description];
 
             
         }else if (model.status == 1) {
@@ -943,7 +931,7 @@ NSMutableDictionary *selectedIdentifierDictionary;
             [model setInvitedStatus:0];
             
             //REMOVE FROM SENDING LIST
-            [deviceContactItems removeObject:model.description];
+            [selectedIdentifiers removeObject:model.description];
             
         }
         
@@ -959,13 +947,13 @@ NSMutableDictionary *selectedIdentifierDictionary;
         if (model.status == 0) {
             [model setInvitedStatus:1];
             
-            [deviceContactItems addObject:model.description];
+            [selectedIdentifiers addObject:model.description];
             
             //Calling ShareKit for Sharing
             iosSharer = [[ SHKSharer alloc] init];
             NSString *tweet = [NSString stringWithFormat:@"I'm using the @flyerlyapp to create and share flyers on the go! Flyer.ly/Twitter @%@ #flyerly",model.description];
             
-            [deviceContactItems addObject:model.description];
+            [selectedIdentifiers addObject:model.description];
             iosSharer = [SHKTwitter shareText:tweet];
             iosSharer.shareDelegate = self;
         
@@ -974,7 +962,7 @@ NSMutableDictionary *selectedIdentifierDictionary;
             [model setInvitedStatus:0];
 
             //REMOVE FROM SENDING LIST
-            [deviceContactItems removeObject:model.description];
+            [selectedIdentifiers removeObject:model.description];
             
         }
         
@@ -1107,14 +1095,14 @@ NSMutableDictionary *selectedIdentifierDictionary;
     if ( [sharer isKindOfClass:[SHKTwitter class]] == YES ) {
         
         // HERE WE GET AND SET SELECTED FOLLOWER
-        [twitterInvited  addObjectsFromArray:deviceContactItems];
+        [twitterInvited  addObjectsFromArray:selectedIdentifiers];
         user[@"tweetinvited"] = twitterInvited;
         [self friendsInvited];
  
     } else if ( [sharer isKindOfClass:[SHKTextMessage class]] == YES ) {
         
         // HERE WE GET AND SET SELECTED CONTACT LIST
-        [iPhoneinvited  addObjectsFromArray:deviceContactItems];
+        [iPhoneinvited  addObjectsFromArray:selectedIdentifiers];
         user[@"iphoneinvited"] = iPhoneinvited;
         [self friendsInvited];
 
@@ -1122,7 +1110,7 @@ NSMutableDictionary *selectedIdentifierDictionary;
     } else  if ( [sharer isKindOfClass:[FlyerlyFacebookInvite class]] == YES ) {
     
         // HERE WE GET AND SET SELECTED Facebook LIST
-        [fbinvited  addObjectsFromArray:deviceContactItems];
+        [fbinvited  addObjectsFromArray:selectedIdentifiers];
         user[@"fbinvited"] = fbinvited;
         [self friendsInvited];
 
@@ -1132,7 +1120,7 @@ NSMutableDictionary *selectedIdentifierDictionary;
     [user saveInBackground];
     
     [self showAlert:@"Invitation Sent!" message:@"You have successfully invited your friends to join flyerly."];
-    [deviceContactItems   removeAllObjects];
+    [selectedIdentifiers   removeAllObjects];
     [self.uiTableView reloadData ];
     
     
@@ -1151,7 +1139,7 @@ NSMutableDictionary *selectedIdentifierDictionary;
 {
     
     if ( [sharer isKindOfClass:[SHKTwitter class]] == YES ) {
-        [deviceContactItems   removeAllObjects];
+        [selectedIdentifiers   removeAllObjects];
     }
     [self.uiTableView reloadData ];
 }
