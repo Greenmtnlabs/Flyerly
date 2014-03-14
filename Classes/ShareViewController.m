@@ -333,22 +333,13 @@
  */
 -(IBAction)onClickFacebookButton{
     
+    // Current Item For Sharing
+    SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ #flyerly", selectedFlyerDescription ]];
     
-        // Check internet connectivity
-        if( [InviteFriendsController connected] ){
-            
-            // Current Item For Sharing
-            SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ #flyerly", selectedFlyerDescription ]];
-            
-           // iosSharer = [[ SHKSharer alloc] init];
-            iosSharer = [SHKFacebook shareItem:item];
-            iosSharer.shareDelegate = self;
-            
-        } else {
-            
-            [self showAlert:@"You're not connected to the internet. Please connect and retry" message:@""];
-            
-        }
+   // iosSharer = [[ SHKSharer alloc] init];
+    iosSharer = [SHKFacebook shareItem:item];
+    iosSharer.shareDelegate = self;
+    
         
 }
 
@@ -358,24 +349,14 @@
  */
 -(IBAction)onClickTwitterButton{
     
-
-        // Check internet connectivity
-        if( [InviteFriendsController connected] ){
-
-            // Current Item For Sharing
-             SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ #flyerly", selectedFlyerDescription ]];
-            
-            //Calling ShareKit for Sharing
-            iosSharer = [[ SHKSharer alloc] init];
-            iosSharer = [SHKTwitter shareItem:item];
-            iosSharer.shareDelegate = self;
-            
-        } else {
-            
-            [self showAlert:@"You're not connected to the internet. Please connect and retry" message:@""];
-            
-        }
-
+    // Current Item For Sharing
+     SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ #flyerly", selectedFlyerDescription ]];
+    
+    //Calling ShareKit for Sharing
+    iosSharer = [[ SHKSharer alloc] init];
+    iosSharer = [SHKTwitter shareItem:item];
+    iosSharer.shareDelegate = self;
+    
 }
 
 
@@ -393,26 +374,14 @@
  */
 -(IBAction)onClickEmailButton{
     
-        // Check internet connectivity
-        if( [InviteFriendsController connected] ){
-            
-            
-            // Current Item For Sharing
-            SHKItem *item = [SHKItem image:selectedFlyerImage title:@"Flyerly for you!"];
-            item.text = @"Created & sent from Flyer.ly";
-            
-            //Calling ShareKit for Sharing
-            iosSharer = [[ SHKSharer alloc] init];
-            iosSharer = [SHKMail shareItem:item];
-            iosSharer.shareDelegate = self;
-            
-            
-        } else {
-            
-            [self showAlert:@"You're not connected to the internet. Please connect and retry" message:@""];
-            
-        }
-
+    // Current Item For Sharing
+    SHKItem *item = [SHKItem image:selectedFlyerImage title:@"Flyerly for you!"];
+    item.text = @"Created & sent from Flyer.ly";
+    
+    //Calling ShareKit for Sharing
+    iosSharer = [[ SHKSharer alloc] init];
+    iosSharer = [SHKMail shareItem:item];
+    iosSharer.shareDelegate = self;
     
 }
 
@@ -422,25 +391,15 @@
  */
 -(IBAction)onClickTumblrButton{
     
-        // Check internet connectivity
-        if( [InviteFriendsController connected] ){
-            
-            // Current Item For Sharing
-            SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@", selectedFlyerDescription ]];
-            
-            item.tags =[NSArray arrayWithObjects: @"#flyerly", nil];
-            
-            //Calling ShareKit for Sharing
-            iosSharer = [[ SHKSharer alloc] init];
-            iosSharer = [SHKTumblr shareItem:item];
-            iosSharer.shareDelegate = self;
-            
-            
-        } else {
-            
-            [self showAlert:@"You're not connected to the internet. Please connect and retry" message:@""];
-            
-        }
+    // Current Item For Sharing
+    SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@", selectedFlyerDescription ]];
+    
+    item.tags =[NSArray arrayWithObjects: @"#flyerly", nil];
+    
+    //Calling ShareKit for Sharing
+    iosSharer = [[ SHKSharer alloc] init];
+    iosSharer = [SHKTumblr shareItem:item];
+    iosSharer.shareDelegate = self;
     
 }
 
@@ -450,26 +409,16 @@
  */
 -(IBAction)onClickFlickrButton{
     
-        // Check internet connectivity
-        if( [InviteFriendsController connected] ){
-
-            // Current Item For Sharing
-            SHKItem *item = [SHKItem image:selectedFlyerImage title:@""];
-            item.tags =[NSArray arrayWithObjects: @"#flyerly", nil];
-            item.text = selectedFlyerDescription;
-            
-            //Calling ShareKit for Sharing
-            iosSharer = [[ SHKSharer alloc] init];
-            iosSharer = [SHKFlickr shareItem:item];
-            iosSharer.shareDelegate = self;
-            
-            
-        } else {
-            
-            [self showAlert:@"You're not connected to the internet. Please connect and retry" message:@""];
-            
-        }
-
+    // Current Item For Sharing
+    SHKItem *item = [SHKItem image:selectedFlyerImage title:@""];
+    item.tags =[NSArray arrayWithObjects: @"#flyerly", nil];
+    item.text = selectedFlyerDescription;
+    
+    //Calling ShareKit for Sharing
+    iosSharer = [[ SHKSharer alloc] init];
+    iosSharer = [SHKFlickr shareItem:item];
+    iosSharer.shareDelegate = self;
+    
 }
 
 

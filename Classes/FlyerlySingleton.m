@@ -35,7 +35,11 @@ static FlyerlySingleton *sharedSingleton = nil;
     return nil;
 }
 
-
++ (BOOL)connected {
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
+    return !(networkStatus == NotReachable);
+}
 
 -(UIColor*)colorWithHexString:(NSString*)hex
 {

@@ -4,6 +4,7 @@
 
 #import <Foundation/Foundation.h>
 #import "ProfileViewController.h"
+#import "Reachability.h"
 
 @interface FlyerlySingleton : NSObject
 {
@@ -21,6 +22,7 @@
 @property (nonatomic, strong) UIImage *NBUimage;
 @property (nonatomic, strong) NSString *gallerComesFromCamera;
 +(FlyerlySingleton *)RetrieveSingleton;
++ (BOOL)connected;
 -(UIColor*)colorWithHexString:(NSString*)hex;
 
 @end

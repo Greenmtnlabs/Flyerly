@@ -157,7 +157,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     [self showLoadingView];
     
     //Internet Connectivity Check
-    if([InviteFriendsController connected]){
+    if([FlyerlySingleton connected]){
         
         // The permissions requested from the user
         NSArray *permissionsArray = @[ @"user_about_me", @"user_relationships", @"user_birthday", @"user_location"];
@@ -237,7 +237,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     [self showLoadingIndicator];
     
     //Connectivity Check
-    if([InviteFriendsController connected]){
+    if([FlyerlySingleton connected]){
         
         [PFTwitterUtils logInWithBlock:^(PFUser *user, NSError *error) {
             

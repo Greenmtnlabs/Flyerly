@@ -250,15 +250,9 @@
 
 - (IBAction)onTwitter:(id)sender {
     UIButton *button = (UIButton *) sender;
-    if([InviteFriendsController connected]){
-        if([button isSelected]){
-            [self unFollowOnTwitter:sender];
-        } else {
-            [self followOnTwitter:sender];
-        }
-    } else {
+
+
         [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
-    }
 }
 
 -(void)showAlert:(NSString *)title message:(NSString *)message{
@@ -461,7 +455,6 @@
 
 - (IBAction)showLikeButton {
     
-    if([InviteFriendsController connected]){
         
         ACAccountStore *accountStore = [[ACAccountStore alloc]init];
         ACAccountType *FBaccountType= [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
@@ -502,7 +495,7 @@
             }
         }];
     
-    }
+
         
 }
 
@@ -517,9 +510,7 @@
  */
 - (void)setFacebookLikeStatus{
 
-    if([InviteFriendsController connected]){
-        
-        
+    
         // getting Facebook account Info From Device
         ACAccountStore *accountStore = [[ACAccountStore alloc]init];
         ACAccountType *FBaccountType= [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
@@ -584,7 +575,6 @@
             }
         }];
         
-    }
 
 }
 

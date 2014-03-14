@@ -18,7 +18,6 @@
 #import <MessageUI/MFMessageComposeViewController.h>
 #import "FlyrAppDelegate.h"
 #import <SystemConfiguration/SystemConfiguration.h>
-#import "Reachability.h"
 #import "AsyncImageView.h"
 #import "FlyerlySingleton.h"
 #import "InviteFriendsCell.h"
@@ -35,7 +34,7 @@
 
 @class FlyerlySingleton,SHKSharer;
 
-@interface InviteFriendsController : ParentViewController<UITableViewDelegate,UITableViewDataSource,MFMessageComposeViewControllerDelegate,UITextFieldDelegate, UIActionSheetDelegate,SHKSharerDelegate>{
+@interface InviteFriendsController : ParentViewController<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate, SHKSharerDelegate>{
     
     
     FlyerlySingleton *globle;
@@ -75,10 +74,6 @@
 - (IBAction)onSearchClick:(UIButton *)sender;
 -(IBAction)goBack;
 -(IBAction)invite;
-
-
-+ (BOOL)connected;
 - (BOOL)ckeckExistContact:(NSString *)identifier;
-+(void)disableSelectUnSelectFlags;
 
 @end

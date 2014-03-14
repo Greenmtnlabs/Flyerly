@@ -23,9 +23,9 @@
 const int TWITTER_TAB = 2;
 const int FACEBOOK_TAB = 1;
 const int CONTACTS_TAB = 0;
-BOOL firstTableLoad = YES;
-BOOL unSelectAll;
-BOOL selectAll;
+
+
+#pragma mark  View Appear Methods
 
 - (void)viewDidLoad {
     
@@ -42,8 +42,6 @@ BOOL selectAll;
     // By default first tab is selected 'Contacts'
     selectedTab = -1;
 
-    
-    
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-28, -6, 50, 50)];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:TITLE_FONT size:18];
@@ -106,8 +104,6 @@ BOOL selectAll;
 -(void)viewWillAppear:(BOOL)animated{
     
     self.navigationItem.leftItemsSupplementBackButton = YES;
-    
-    
 }
 
 
@@ -115,6 +111,12 @@ BOOL selectAll;
 	[super viewWillDisappear:animated];    
 }
 
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+
+#pragma mark  Custom Methods
 
 -(void)loadHelpController{
     HelpController *helpController = [[HelpController alloc]initWithNibName:@"HelpController" bundle:nil];
@@ -125,6 +127,111 @@ BOOL selectAll;
     [self.navigationController popViewControllerAnimated:YES];
     
 }
+
+-(void)showAlert:(NSString *)title message:(NSString *)message{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+                                                    message:message
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+}
+
+- (BOOL)ckeckExistContact:(NSString *)identifier{
+    for (int i = 0; i < selectedIdentifiers.count ; i++) {
+        if ([identifier isEqualToString:selectedIdentifiers[i]]) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
+- (BOOL)ckeckExistdb:(NSString *)identifier{
+    NSMutableArray *checkary = [[NSMutableArray alloc] init];
+    if (selectedTab == FACEBOOK_TAB){
+        checkary = fbinvited;
+    }else if(selectedTab == TWITTER_TAB){
+        checkary = twitterInvited;
+    }else{
+        checkary = iPhoneinvited;
+    }
+    
+    for (int i = 0; i < checkary.count ; i++) {
+        if ([identifier isEqualToString:checkary[i]]) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
+-(IBAction)invite{
+    
+    NSMutableArray *identifiers = [[NSMutableArray alloc] init];
+    identifiers = selectedIdentifiers;
+    NSLog(@"%@",identifiers);
+    
+    if([identifiers count] > 0){
+        
+        // Send invitations
+        if(selectedTab == 0){
+            globle.accounts = [[NSMutableArray alloc] initWithArray:selectedIdentifiers];
+            
+            SHKItem *item = [SHKItem text:@"I'm using the flyerly app to create and share flyers on the go! Flyer.ly/Invite"];
+            item.textMessageToRecipients = selectedIdentifiers;
+            
+            iosSharer = [[ SHKSharer alloc] init];
+            iosSharer = [SHKTextMessage shareItem:item];
+            iosSharer.shareDelegate = self;
+            
+            
+        }else if(selectedTab == 1){
+            
+            SHKItem *i = [SHKItem text:@"I'm using the flyerly app to create and share flyers on the go! http://Flyer.ly/Invite"];
+            
+            NSArray *shareFormFields = [SHKFacebookCommon shareFormFieldsForItem:i];
+            SHKFormController *rootView = [[SHKCONFIG(SHKFormControllerSubclass) alloc] initWithStyle:UITableViewStyleGrouped
+                                                                                                title:nil
+                                                                                     rightButtonTitle:SHKLocalizedString(@"Send to Facebook")
+                                           ];
+            
+            [rootView addSection:shareFormFields header:nil footer:i.URL!=nil?i.URL.absoluteString:nil];
+            
+            
+            rootView.validateBlock = ^(SHKFormController *form) {
+                
+                // default does no checking and proceeds to share
+                [form saveForm];
+                
+            };
+            
+            
+            rootView.saveBlock = ^(SHKFormController *form) {
+                
+                [self updateItemWithForm:form];
+                [self fbSend];
+                
+            };
+            
+            rootView.cancelBlock = ^(SHKFormController *form) {
+                
+                [self fbCancel];
+                
+            };
+            
+            [[SHK currentHelper] showViewController:rootView];
+            
+        }
+        
+    } else {
+        [self showAlert:@"Please select any contact to invite !" message:@""];
+    }
+    
+    [Flurry logEvent:@"Friends Invited"];
+}
+
+
+
+#pragma mark  Device Contact List
 
 /*
  * This method is used to load device contact details
@@ -154,7 +261,6 @@ BOOL selectAll;
     }
     [self showLoadingIndicator];
     
-    selectAll = YES;
     self.selectedIdentifiers = nil;
     self.selectedIdentifiers = [[NSMutableArray alloc] init];
     
@@ -302,7 +408,7 @@ BOOL selectAll;
 }
 
 
-
+#pragma mark  Facebook Contact
 
 /**
  * Called when facebook  button is selected on screen
@@ -354,21 +460,12 @@ BOOL selectAll;
     
 }
 
--(void)showAlert:(NSString *)title message:(NSString *)message{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
-                                                    message:message
-                                                   delegate:nil
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
-    [alert show];
-}
 
-
-int totalCount = 0;
-
+/* HERE WE CREATE ARRAY LIST FOR UITABLEVIEW WHICH RECIVED FROM FACEBOOK REQUEST
+ *@PARAM
+ *  followers DICTIONARY
+ */
 -(void)makeFacebookArray :(NSDictionary *)result{
-    
-    int count = 0;
     
     for (NSDictionary *friendData in result[@"data"]) {
         
@@ -389,8 +486,6 @@ int totalCount = 0;
         
         [self.facebookBackupArray addObject:model];
         
-        count++;
-        totalCount++;
     }
     
     self.facebookArray = [[NSMutableArray alloc] init];
@@ -403,7 +498,6 @@ int totalCount = 0;
     
     [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
     {
-        totalCount = 0;
         
         [self hideLoadingIndicator];
         
@@ -411,48 +505,52 @@ int totalCount = 0;
 }
 
 
-
--(void)request:(FBRequest *)request didLoad:(id)result{
-    
-    int count = 0;
-    
-    for (NSDictionary *friendData in result[@"data"]) {
-        
-        NSString *imageURL = friendData[@"picture"][@"data"][@"url"];
-        
-        // Here we will get the facebook contacts
-        ContactsModel *model = [[ContactsModel   alloc]init];
-        
-        model.name = friendData[@"name"];
-        model.description = friendData[@"id"];
-        if (friendData[@"gender"]) {
-            model.others = friendData[@"gender"];
+/*
+ * Here we Get Text from SHKFormController
+ */
+- (void)updateItemWithForm:(SHKFormController *)form
+{
+	// Update item with new values from form
+    NSDictionary *formValues = [form formValues];
+	for(NSString *key in formValues)
+	{
+		
+		if ([key isEqualToString:@"text"]){
+            fbText = [formValues objectForKey:key];
         }
-        if(imageURL){
-            model.img = nil;
-            model.imageUrl = imageURL;
-        }
-
-        [self.facebookArray addObject:model];
-        
-        count++;
-        totalCount++;
     }
-    
-    facebookBackupArray = nil;
-    facebookBackupArray = facebookArray;
-    
-    // Filter contacts on new tab selection
-    [self onSearchClick:nil];
-    
-    [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
-            {
-         totalCount = 0;
-         
-        [self hideLoadingIndicator];
-
-     }
 }
+
+
+/*
+ * Here we Send Request to facebook for tags Friends
+ */
+- (void)fbSend{
+    
+    
+    // Current Item For Sharing
+    SHKItem *item = [SHKItem text:fbText];
+    item.tags = selectedIdentifiers;
+    
+    //Calling ShareKit for Sharing
+    iosSharer = [[SHKSharer alloc] init];
+    iosSharer = [FlyerlyFacebookInvite shareItem:item];
+    iosSharer.shareDelegate = self;
+    
+    
+}
+
+/*
+ * Here we Hide our facebook post View
+ */
+- (void)fbCancel {
+    [selectedIdentifiers removeAllObjects];
+    [uiTableView reloadData];
+    
+}
+
+
+#pragma mark  TWITTER CONTACTS
 
 /*
  * HERE WE REQUEST TO TWITTER FOR FRIENDS LIST
@@ -528,260 +626,7 @@ int totalCount = 0;
 }
 
 
-- (BOOL)ckeckExistContact:(NSString *)identifier{
-    for (int i = 0; i < selectedIdentifiers.count ; i++) {
-        if ([identifier isEqualToString:selectedIdentifiers[i]]) {
-            return YES;
-        }
-    }
-    return NO;
-}
 
-- (BOOL)ckeckExistdb:(NSString *)identifier{
-    NSMutableArray *checkary = [[NSMutableArray alloc] init];
-    if (selectedTab == FACEBOOK_TAB){
-        checkary = fbinvited;
-    }else if(selectedTab == TWITTER_TAB){
-        checkary = twitterInvited;
-    }else{
-        checkary = iPhoneinvited;
-    }
-    
-    for (int i = 0; i < checkary.count ; i++) {
-        if ([identifier isEqualToString:checkary[i]]) {
-            return YES;
-        }
-    }
-    return NO;
-}
-
--(IBAction)invite{
-    
-    NSMutableArray *identifiers = [[NSMutableArray alloc] init];
-    identifiers = selectedIdentifiers;
-    NSLog(@"%@",identifiers);
-    
-    if([identifiers count] > 0){
-        
-        // Send invitations
-        if(selectedTab == 0){
-            globle.accounts = [[NSMutableArray alloc] initWithArray:selectedIdentifiers];
-            
-            SHKItem *item = [SHKItem text:@"I'm using the flyerly app to create and share flyers on the go! Flyer.ly/Invite"];
-            item.textMessageToRecipients = selectedIdentifiers;
-
-            iosSharer = [[ SHKSharer alloc] init];
-            iosSharer = [SHKTextMessage shareItem:item];
-            iosSharer.shareDelegate = self;
-            
-            
-        }else if(selectedTab == 1){
-            
-            SHKItem *i = [SHKItem text:@"I'm using the flyerly app to create and share flyers on the go! http://Flyer.ly/Invite"];
-            
-            NSArray *shareFormFields = [SHKFacebookCommon shareFormFieldsForItem:i];
-            SHKFormController *rootView = [[SHKCONFIG(SHKFormControllerSubclass) alloc] initWithStyle:UITableViewStyleGrouped
-                                                                                                title:nil
-                                                                                     rightButtonTitle:SHKLocalizedString(@"Send to Facebook")
-                                           ];
-            
-            [rootView addSection:shareFormFields header:nil footer:i.URL!=nil?i.URL.absoluteString:nil];
-            
-            
-            rootView.validateBlock = ^(SHKFormController *form) {
-                
-                // default does no checking and proceeds to share
-                [form saveForm];
-                
-            };
-            
-            
-            rootView.saveBlock = ^(SHKFormController *form) {
-                
-                [self updateItemWithForm:form];
-                [self fbSend];
-                
-            };
-            
-            rootView.cancelBlock = ^(SHKFormController *form) {
-                
-                [self fbCancel];
-                
-            };
-            
-            [[SHK currentHelper] showViewController:rootView];
-            
-        }
-        
-    } else {
-        [self showAlert:@"Please select any contact to invite !" message:@""];
-    }
-    
-    [Flurry logEvent:@"Friends Invited"];
-}
-
-
-/*
- * Here we Get Text from SHKFormController
- */
-- (void)updateItemWithForm:(SHKFormController *)form
-{
-	// Update item with new values from form
-    NSDictionary *formValues = [form formValues];
-	for(NSString *key in formValues)
-	{
-		
-		if ([key isEqualToString:@"text"]){
-            fbText = [formValues objectForKey:key];
-        }
-    }
-}
-
-
-- (void)messageComposeViewController:
-(MFMessageComposeViewController *)controller
-                 didFinishWithResult:(MessageComposeResult)result
-{
-    switch (result)
-    {
-        case MessageComposeResultCancelled:
-            NSLog(@"Cancelled");
-            break;
-        case MessageComposeResultFailed:
-            NSLog(@"Failed");
-            break;
-        case MessageComposeResultSent: {
-            
-            [self showAlert:@"Invitation Sent!" message:@"You have successfully invited your friends to join flyerly."];
-            NSLog(@"%@",iPhoneinvited);
-            NSLog(@"%@",globle.accounts);
-            [iPhoneinvited  addObjectsFromArray:globle.accounts];
-            NSLog(@"%@",iPhoneinvited);
-            PFUser *user = [PFUser currentUser];
-            user[@"iphoneinvited"] = iPhoneinvited;
-            [user saveInBackground];
-            [selectedIdentifiers   removeAllObjects];
-            [self.uiTableView reloadData];
-            break;
-        }
-        default:
-            break;
-    }
-    [self dismissModalViewControllerAnimated:YES];
-}
-
-- (IBAction)tagFacebookUsersWithFeed:(NSArray *)identifiers {
-    
-    // Post a status update to the user's feed via the Graph API, and display an alert view
-    // with the results or an error.
-    
-    [self performPublishAction:^{
-        
-        [FBRequestConnection startForPostStatusUpdate:@"I'm using the flyerly app to create and share flyers on the go! Flyer.ly/Facebook" place:@"144479625584966" tags:identifiers completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-            
-            NSLog(@"New Result: %@", result);
-            NSLog(@"Error: %@", error);
-            
-            //[self showAlert:@"Invited !" message:@"You have successfully invited your friends to join flyerly."];
-        }];
-    }];
-}
-
-
-// Convenience method to perform some action that requires the "publish_actions" permissions.
-- (void) performPublishAction:(void (^)(void)) action {
-    
-    if ([[FBSession activeSession]isOpen]) {
-        /*
-         * if the current session has no publish permission we need to reauthorize
-         */
-        if ([[[FBSession activeSession]permissions]indexOfObject:@"publish_actions"] == NSNotFound) {
-            
-            [[FBSession activeSession] reauthorizeWithPublishPermissions:@[@"publish_actions"] defaultAudience:FBSessionDefaultAudienceOnlyMe completionHandler:^(FBSession *session, NSError *error) {
-                
-                [self publish_action:action];
-            }];
-            
-        }else{
-            
-            [self publish_action:action];
-            
-        }
-    }else{
-        
-        //open a new session with publish permission
-        [FBSession openActiveSessionWithPublishPermissions:@[@"publish_actions"] defaultAudience:FBSessionDefaultAudienceOnlyMe allowLoginUI:YES completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
-            
-            if (!error && status == FBSessionStateOpen) {
-                [self publish_action:action];
-            }else{
-                NSLog(@"error");
-            }
-        }];
-    }
-}
-
--(void)publish_action:(void (^)(void)) action{
-    
-    // we defer request for permission to post to the moment of post, then we check for the permission
-    if ([FBSession.activeSession.permissions indexOfObject:@"publish_actions"] == NSNotFound) {
-        
-        // if we don't already have the permission, then we request it now
-        [FBSession.activeSession requestNewPublishPermissions:@[@"publish_actions"]
-                                              defaultAudience:FBSessionDefaultAudienceFriends
-                                            completionHandler:^(FBSession *session, NSError *error) {
-                                                if (!error) {
-                                                    action();
-                                                }
-                                                //For this example, ignore errors (such as if user cancels).
-                                            }];
-    } else {
-        action();
-    }
-}
-
--(void)sendSMS:(NSString *)message recipients:(NSArray*)recipients {
-    
-    //send SMS
-    MFMessageComposeViewController *messageInstance = [[MFMessageComposeViewController alloc] init];
-    
-    if([MFMessageComposeViewController canSendText]) {
-        
-        [messageInstance setRecipients:recipients];
-        messageInstance.body = message;
-        messageInstance.messageComposeDelegate = self;
-        [self presentViewController:messageInstance animated:YES completion:nil];
-        
-    }
-}
-
-
-/*
- * Here we Send Request to facebook for tags Friends
- */
-- (void)fbSend{
-    
-    
-    // Current Item For Sharing
-    SHKItem *item = [SHKItem text:fbText];
-    item.tags = selectedIdentifiers;
-    
-    //Calling ShareKit for Sharing
-    iosSharer = [[SHKSharer alloc] init];
-    iosSharer = [FlyerlyFacebookInvite shareItem:item];
-    iosSharer.shareDelegate = self;
-
-
-}
-
-/*
- * Here we Hide our facebook post View
- */
-- (void)fbCancel {
-    [selectedIdentifiers removeAllObjects];
-    [uiTableView reloadData];
-
-}
 
 #pragma mark Table view methods
 
@@ -813,11 +658,6 @@ int totalCount = 0;
     return  count;
 }
 
-
-+(void)disableSelectUnSelectFlags{
-    unSelectAll = NO;
-    selectAll = NO;
-}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -1035,15 +875,7 @@ int totalCount = 0;
     return YES;
 }
 
-+ (BOOL)connected {
-    Reachability *reachability = [Reachability reachabilityForInternetConnection];
-    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
-    return !(networkStatus == NotReachable);
-}
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
 
 #pragma mark - All Shared Response
 

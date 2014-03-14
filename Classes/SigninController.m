@@ -100,12 +100,16 @@
 
 -(IBAction)onSignIn{
 
-    globle.twitterUser = nil;
-    [self showLoadingView];
-    
-    //Validation
-    if([self validate]){
-        [self signIn:YES username:email.text password:password.text];
+    if ([FlyerlySingleton connected]) {
+        globle.twitterUser = nil;
+        [self showLoadingView];
+        
+        //Validation
+        if([self validate]){
+            [self signIn:YES username:email.text password:password.text];
+        }
+    }else {
+        [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
     }
 }
 
@@ -214,7 +218,7 @@
 -(IBAction)onSignInTwitter{
     [self showLoadingIndicator];
     
-    if([InviteFriendsController connected]){
+    if([FlyerlySingleton connected]){
         
         [PFTwitterUtils logInWithBlock:^(PFUser *user, NSError *error) {
             

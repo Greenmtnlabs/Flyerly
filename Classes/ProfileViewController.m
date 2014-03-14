@@ -81,7 +81,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 -(IBAction)save{
     
     //CHECKING INTERNET
-    if([InviteFriendsController connected]){
+    if([FlyerlySingleton connected]){
         
         if([self Uservalidate]){
             PFUser *user = [PFUser currentUser];
