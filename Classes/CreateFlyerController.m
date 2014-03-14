@@ -209,7 +209,7 @@ int selectedAddMoreLayerTab = -1;
     //Left BackButton
     UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-	[backButton addTarget:self action:@selector(callMenu) forControlEvents:UIControlEventTouchUpInside];
+	[backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
     
     // HERE WE SET BACK BUTTON IMAGE AS REQUIRED
     NSArray * arrayOfControllers =  self.navigationController.viewControllers;
@@ -252,10 +252,8 @@ int selectedAddMoreLayerTab = -1;
  * This Method Call On Back Button
  * and its Save Flyer then Exits Screen
  */
--(void) callMenu
+-(void) goBack
 {
-    [self.navigationController popViewControllerAnimated:YES];
-    return;
     //Delete Empty Layer if Exist
     if (currentLayer != nil && ![currentLayer isEqualToString:@""]) {
         
@@ -1702,7 +1700,7 @@ int selectedAddMoreLayerTab = -1;
     [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
     
     UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-	[backButton addTarget:self action:@selector(callMenu) forControlEvents:UIControlEventTouchUpInside];
+	[backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
     [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
      backButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
