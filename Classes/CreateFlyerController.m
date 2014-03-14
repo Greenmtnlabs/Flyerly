@@ -171,7 +171,12 @@ int selectedAddMoreLayerTab = -1;
     editButtonGlobal.uid = @"";
     
     // Main Scroll Views Initialize
-    layerScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,320,130)];
+    // Device Check Maintain Size of ScrollView Because Scroll Indicator will show.
+    if(IS_IPHONE_5){
+        layerScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,320,150)];
+    }else {
+        layerScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,320,60)];
+    }
     layersDic = [[NSMutableDictionary alloc] init];
 
         
@@ -254,6 +259,20 @@ int selectedAddMoreLayerTab = -1;
  */
 -(void) goBack
 {
+    float yValue = self.view.frame.size.height -425;
+    
+    if (yValue == sharePanel.frame.origin.y) {
+        
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:0.4f];
+            [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height, 320,425 )];
+        [UIView commitAnimations];
+        rightUndoBarButton.enabled = YES;
+        shareButton.enabled = YES;
+        helpButton.enabled = YES;
+        return;
+    }
+    
     //Delete Empty Layer if Exist
     if (currentLayer != nil && ![currentLayer isEqualToString:@""]) {
         
@@ -1321,6 +1340,7 @@ int selectedAddMoreLayerTab = -1;
         
         // Add border to Un-select layer thumbnail
         CALayer * l = [tempView layer];
+        [tempView.layer setCornerRadius:8];
         [l setBorderWidth:1];
         UIColor * c = [UIColor clearColor];
         [l setBorderColor:c.CGColor];
@@ -1628,6 +1648,7 @@ int selectedAddMoreLayerTab = -1;
                 [self.flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
                 
                 [self.flyimgView layerStoppedEditing:currentLayer];
+                [Flurry logEvent:@"Custom Photo"];
                 
                 imgPickerFlag = 1;
             }else{
@@ -1637,14 +1658,13 @@ int selectedAddMoreLayerTab = -1;
                 
                 //set template Image
                 [self.flyimgView setTemplate:[NSString stringWithFormat:@"Template/template.%@",IMAGETYPE ]];
+                [Flurry logEvent:@"Custom Background"];
             }
         });
     }];
     
     
     [self.navigationController pushViewController:nbuCamera animated:YES];
-
-    [Flurry logEvent:@"Custom Background"];
 }
 
 
@@ -1657,7 +1677,7 @@ int selectedAddMoreLayerTab = -1;
         
         editButtonGlobal.uid = currentLayer;
         [self deleteLayer:editButtonGlobal overrided:nil];
-        [Flurry logEvent:@"Layed Deleted"];
+        [Flurry logEvent:@"Layer Deleted"];
 	}
 
   }

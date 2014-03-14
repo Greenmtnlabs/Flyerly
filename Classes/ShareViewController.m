@@ -80,7 +80,7 @@
     
     UIImage *originalImage = [UIImage imageWithContentsOfFile:imageFileName];
     
-    NSString  *updatedImagePath = [imageFileName stringByReplacingOccurrencesOfString:@".jpg" withString:@".igo"];
+    NSString  *updatedImagePath = [imageFileName stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@".%@",IMAGETYPE ] withString:@".igo"];
     NSData *imgData = UIImagePNGRepresentation(originalImage);
     [[NSFileManager defaultManager] createFileAtPath:updatedImagePath contents:imgData attributes:nil];
     
@@ -90,9 +90,7 @@
     self.dicController.UTI = @"com.instagram.photo";
     self.dicController.annotation = @{@"InstagramCaption": [NSString stringWithFormat:@"%@ #flyerly", descriptionView.text]};
     
-    
     BOOL displayed = [self.dicController presentOpenInMenuFromRect:rect inView: self.view animated:YES];
-    
     
     if(!displayed){
         [self showAlert:@"Warning!" message:@"Please install Instagram app to share."];
@@ -445,11 +443,12 @@
  */
 -(IBAction)onClickClipboardButton{
     
-        [clipboardButton setSelected:YES];
-        [self onclipcordClick];
-        
-        // Update Flyer Share Info in Social File
-        [self.flyer setClipboardStatus:1];
+    [clipboardButton setSelected:YES];
+    [self onclipcordClick];
+    
+    // Update Flyer Share Info in Social File
+    [self.flyer setClipboardStatus:1];
+    
 
 }
 
@@ -457,6 +456,8 @@
 -(void) onclipcordClick{
     [UIPasteboard generalPasteboard].image = selectedFlyerImage;
     [Flurry logEvent:@"Copy to Clipboard"];
+    [self showAlert:@"Flyer copied to clipboard!" message:@""];
+
 }
 
 
