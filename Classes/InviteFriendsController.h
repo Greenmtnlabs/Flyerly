@@ -33,34 +33,15 @@
 #import "FlyerlyTwitterFriends.h"
 #import "Flurry.h"
 
-@class LoadingView,FlyerlySingleton,SHKSharer;
+@class FlyerlySingleton,SHKSharer;
 
 @interface InviteFriendsController : ParentViewController<UITableViewDelegate,UITableViewDataSource,MFMessageComposeViewControllerDelegate,UITextFieldDelegate, UIActionSheetDelegate,SHKSharerDelegate>{
     
     
     FlyerlySingleton *globle;
-    IBOutlet UIButton *contactsButton;
-    IBOutlet UIButton *facebookButton;
-    IBOutlet UIButton *twitterButton;
-    IBOutlet UITextField *searchTextField;
-	LoadingView *loadingView;
     IBOutlet AsyncImageView *aview;
-    IBOutlet UITableView *uiTableView;
-	NSMutableArray *contactsArray;
-	NSMutableArray *facebookArray;
-	NSMutableArray *twitterArray;
-    NSMutableArray *fbinvited;
-
-    NSMutableArray *contactBackupArray;
-    NSMutableArray *facebookBackupArray;
-    NSMutableArray *twitterBackupArray;
     
-    NSMutableArray *deviceContactItems;
     int selectedTab;
-    int contactsCount;
-
-	BOOL loadingViewFlag;
-    BOOL invited;
     NSArray *arrayOfAccounts;
     ACAccount *account;
     NSString *sName;
@@ -73,7 +54,6 @@
 @property(nonatomic,strong) IBOutlet UIButton *facebookButton;
 @property(nonatomic,strong) IBOutlet UIButton *twitterButton;
 @property(nonatomic,strong) IBOutlet UITextField *searchTextField;
-@property (nonatomic, strong) LoadingView *loadingView;
 
 @property(nonatomic,strong) IBOutlet UITableView *uiTableView;
 @property(nonatomic,strong) NSMutableArray *contactsArray;

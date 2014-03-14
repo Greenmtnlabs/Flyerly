@@ -11,13 +11,12 @@
 #import <QuartzCore/QuartzCore.h>
 #import "FlyrAppDelegate.h"
 #import <FacebookSDK/FacebookSDK.h>
-#import "LoadingView.h"
 #import "CreateFlyerController.h"
 #import "HelpController.h"
 #import "Flurry.h"
 
 @implementation InviteFriendsController
-@synthesize uiTableView, contactsArray, deviceContactItems,contactsButton, facebookButton, twitterButton, loadingView, searchTextField, facebookArray, twitterArray,fbinvited,twitterInvited,iPhoneinvited;
+@synthesize uiTableView, contactsArray, deviceContactItems,contactsButton, facebookButton, twitterButton,  searchTextField, facebookArray, twitterArray,fbinvited,twitterInvited,iPhoneinvited;
 @synthesize contactBackupArray, facebookBackupArray, twitterBackupArray;
 @synthesize fbText;
 
@@ -31,7 +30,6 @@ BOOL selectAll;
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    contactsCount =0;
     self.deviceContactItems = [[NSMutableArray alloc] init];
     globle = [FlyerlySingleton RetrieveSingleton];
     self.navigationItem.hidesBackButton = YES;
@@ -43,9 +41,6 @@ BOOL selectAll;
     
     // By default first tab is selected 'Contacts'
     selectedTab = -1;
-	loadingViewFlag = NO;
-    loadingView = nil;
-	loadingView = [[LoadingView alloc]init];
 
     
     
@@ -112,22 +107,12 @@ BOOL selectAll;
     
     self.navigationItem.leftItemsSupplementBackButton = YES;
     
-    loadingViewFlag = YES;
     
 }
 
 
 - (void)viewWillDisappear:(BOOL)animated {
-	[super viewWillDisappear:animated];
-    
-    if(loadingViewFlag){
-        for (UIView *subview in self.view.subviews) {
-            if([subview isKindOfClass:[LoadingView class]]){
-                [subview removeFromSuperview];
-                loadingViewFlag = NO;
-            }
-        }
-    }
+	[super viewWillDisappear:animated];    
 }
 
 
@@ -154,9 +139,7 @@ BOOL selectAll;
     [facebookButton setSelected:NO];
 
     
-    invited = NO;
     [deviceContactItems removeAllObjects];
-    contactsCount = 0;
     if(selectedTab == CONTACTS_TAB){
         
         // INVITE BAR BUTTON
@@ -431,42 +414,6 @@ int totalCount = 0;
 
 
 
-
--(void)makeTwitterArray :(NSMutableDictionary *)followers{
-
-    NSDictionary *users = followers[@"users"];
-     
-     for (id user in users) {
-         
-         ContactsModel *model = [[ContactsModel   alloc]init];
-         model.name = user[@"name"];
-         model.description = user[@"screen_name"];
-         model.others = user[@"location"];
-         
-         NSString *imageURL = user[@"profile_image_url"];
-         NSString *new = [imageURL stringByReplacingOccurrencesOfString: @"normal" withString:@"bigger"];
-         
-         if(imageURL){
-             model.img = nil;
-             model.imageUrl = new;
-         }
-         
-         [self.twitterBackupArray addObject:model];
-     }
-     
-     //twitterBackupArray = nil;
-     //twitterBackupArray = twitterArray;
-    
-        twitterArray = nil;
-        twitterArray = twitterBackupArray;
-     
-     [uiTableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
-     [self hideLoadingIndicator];
-
-
-}
-
-
 -(void)request:(FBRequest *)request didLoad:(id)result{
     
     int count = 0;
@@ -547,135 +494,39 @@ int totalCount = 0;
     }
 }
 
--(void)cursoredTwitterContacts:(NSString *)cursor account:(ACAccount *)acct{
-    
-    account = acct;
-    
-    // Build a twitter request
-    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
-    params[@"cursor"] = cursor;
-    
-    //[params setObject:@"20" forKey:@"count"];
-    params[@"user_id"] = [acct identifier];
-    
-    TWRequest *getRequest = [[TWRequest alloc] initWithURL:
-                             [NSURL URLWithString:[NSString stringWithFormat:@"https://api.twitter.com/1.1/followers/list.json"]]
-                                                parameters:params requestMethod:TWRequestMethodGET];
-    // Post the request
-    [getRequest setAccount:acct];
-    
-    // Block handler to manage the response
-    [getRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
-        
-        NSError *jsonError = nil;
-        NSDecimalNumber *nextCursor;
-        
-        if(responseData){
-            
-            NSDictionary *followers =  [NSJSONSerialization JSONObjectWithData:responseData
-                                                                       options:NSJSONReadingMutableLeaves
-                                                                         error:&jsonError];
-            NSDictionary *users = followers[@"users"];
-
-            for (id user in users) {
-
-                ContactsModel *model = [[ContactsModel   alloc]init];
-                model.name = user[@"name"];
-                model.description = user[@"screen_name"];
-                model.others = user[@"location"];
-                
-                NSString *imageURL = user[@"profile_image_url"];
-                NSString *new = [imageURL stringByReplacingOccurrencesOfString: @"normal" withString:@"bigger"];
-                
-                if(imageURL){
-                    model.img = nil;
-                    model.imageUrl = new;
-                }
-                
-                [self.twitterArray addObject:model];
-            }
-            
-            twitterBackupArray = nil;
-            twitterBackupArray = twitterArray;
-            
-            [uiTableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
-            nextCursor = followers[@"next_cursor"];
-            [self hideLoadingIndicator];
-
-        }
-        
-        if([nextCursor compare:[NSDecimalNumber zero]] == NSOrderedSame){
-            
-            [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
-          
-        }else{
-            
-            [self cursoredTwitterContacts:[NSString stringWithFormat:@"%@", nextCursor] account:acct];
-        }
-        
-        NSLog(@"Twitter response, HTTP response: %i", [urlResponse statusCode]);
-    }];
-    
-    arrayOfAccounts = nil;
-}
-
-- (void)makeTwitterPost:(ACAccount *)acct {
-    
-    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
-    params[@"status"] = [NSString stringWithFormat:@"@%@ %@", sName, sMessage];
-    
-    // Build a twitter request
-    TWRequest *postRequest = [[TWRequest alloc] initWithURL:[NSURL URLWithString:@"http://api.twitter.com/1/statuses/update.json"] parameters:params requestMethod:TWRequestMethodPOST];
-    
-    // Post the request
-    [postRequest setAccount:acct];
-    
-    // Block handler to manage the response
-    [postRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
-        NSLog(@"Twitter response, HTTP response: %i", [urlResponse statusCode]);
-        
-        twitterBackupArray = nil;
-        twitterBackupArray = twitterArray;
-        [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
-    }];
-    
-    // Release stuff.
-    sName = nil;
-    sMessage = nil;
-    arrayOfAccounts = nil;
-}
-
-/**
- *
+/* HERE WE CREATE ARRAY LIST FOR UITABLEVIEW WHICH RECIVED FROM TWITTER REQUEST
+ *@PARAM
+ *  followers DICTIONARY
  */
-- (void)sendTwitterMessage:(NSString *)message screenName:(NSString *)screenName{
+-(void)makeTwitterArray :(NSMutableDictionary *)followers{
     
-    sName = screenName;
-    sMessage = message;
+    NSDictionary *users = followers[@"users"];
     
-    [self makeTwitterPost:account];
-}
-
-/**
- * clickedButtonAtIndex (UIActionSheet)
- *
- * Handle the button clicks from mode of getting out selection.
- */
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    
-    //if not cancel button presses
-    if(buttonIndex != arrayOfAccounts.count) {
+    for (id user in users) {
         
-        //save to NSUserDefault
-          account = arrayOfAccounts[buttonIndex];
+        ContactsModel *model = [[ContactsModel   alloc]init];
+        model.name = user[@"name"];
+        model.description = user[@"screen_name"];
+        model.others = user[@"location"];
         
-        //Convert twitter username to email
-        if ( actionSheet.tag == 1 ) {
-            [self makeTwitterPost:account];
-        } else {
-            [self cursoredTwitterContacts:[NSString stringWithFormat:@"%d", -1] account:account];
+        NSString *imageURL = user[@"profile_image_url"];
+        NSString *new = [imageURL stringByReplacingOccurrencesOfString: @"normal" withString:@"bigger"];
+        
+        if(imageURL){
+            model.img = nil;
+            model.imageUrl = new;
         }
+        
+        [self.twitterBackupArray addObject:model];
     }
+    
+    twitterArray = nil;
+    twitterArray = twitterBackupArray;
+    
+    [uiTableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+    [self hideLoadingIndicator];
+    
+    
 }
 
 
@@ -713,7 +564,6 @@ int totalCount = 0;
     NSLog(@"%@",identifiers);
     
     if([identifiers count] > 0){
-        contactsCount =0;
         
         // Send invitations
         if(selectedTab == 0){
