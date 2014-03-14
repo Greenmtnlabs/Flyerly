@@ -244,7 +244,7 @@
 
     //REMOVE KEYS
     [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"User"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"InAppPurchases"];
+    [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"InAppPurchases"];
     
     // Log out from parse.
     [PFUser logOut];

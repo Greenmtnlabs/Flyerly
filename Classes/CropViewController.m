@@ -26,9 +26,9 @@
     if (( self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil] )) {
     
         // Done Button
-        UIButton *nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+        UIButton *nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 42)];
         [nextButton addTarget:self action:@selector(onDone) forControlEvents:UIControlEventTouchUpInside];
-        [nextButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
+        [nextButton setBackgroundImage:[UIImage imageNamed:@"done_with_3"] forState:UIControlStateNormal];
         UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
     
         [self.navigationItem setRightBarButtonItem:doneBarButton];
@@ -84,6 +84,15 @@
         fr.size.height -= 88;
         self.filterView.superview.frame = fr;
     }
+    
+    UIImageView *cropImage = [[UIImageView alloc] initWithFrame:CGRectMake(20, 10, 127, 24)];
+    [cropImage setImage:[UIImage imageNamed:@"crop_and_resize"]];
+    [self.view addSubview:cropImage];
+    
+    UIImageView *filterImage = [[UIImageView alloc] initWithFrame:CGRectMake(20, self.filterView.superview.frame.origin.y  -35, 56, 24)];
+    [filterImage setImage:[UIImage imageNamed:@"filter"]];
+    [self.view addSubview:filterImage];
+
     
     [super viewDidLoad];
 }

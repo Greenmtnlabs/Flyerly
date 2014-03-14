@@ -213,13 +213,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
         }
     }
     
-
-    
-    // HERE WE COPY SOME DATA TO DEVICE FOR FUTURE TESTING
-    if(![[NSUserDefaults standardUserDefaults] stringForKey:@"userDataExist"]){
-        [self copyUsersDataForTesting];
-    }
-    
+           
     // HERE WE SET ALL FLYER ARE PUBLIC DEFUALT
     if(![[NSUserDefaults standardUserDefaults] stringForKey:@"FlyerlyPublic"]){
         [[NSUserDefaults standardUserDefaults]  setObject:@"Public" forKey:@"FlyerlyPublic"];

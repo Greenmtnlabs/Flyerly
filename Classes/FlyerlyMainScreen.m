@@ -590,8 +590,7 @@
 -(void)getUserPurcahses {
 
     // HERE WE GET USER PURCHASES DETAIL
-    if(![[NSUserDefaults standardUserDefaults] stringForKey:@"InAppPurchases"]){
-
+    if(![[NSUserDefaults standardUserDefaults] objectForKey:@"InAppPurchases"]){
         PFUser *user = [PFUser currentUser];
         PFQuery *query = [PFQuery queryWithClassName:@"InApp"];
         [query whereKey:@"user" equalTo:user];
@@ -601,7 +600,7 @@
             if (!error) {
                 
                 if (objects.count >= 1) {
-                   NSMutableDictionary  *oldPurchases = [[objects objectAtIndex:0] valueForKey:@"json"];
+                    NSMutableDictionary  *oldPurchases = [[objects objectAtIndex:0] valueForKey:@"json"];
                     
                     //its for remember key of InApp already copy to Device
                     [[NSUserDefaults standardUserDefaults] setObject:oldPurchases forKey:@"InAppPurchases"];
@@ -614,7 +613,6 @@
             }
         }];
     }
-
 }
 
 @end
