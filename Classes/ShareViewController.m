@@ -34,7 +34,7 @@
     [titleView addTarget:self action:@selector(textFieldFinished:) forControlEvents: UIControlEventEditingDidEndOnExit];
     [titleView addTarget:self action:@selector(textFieldTapped:) forControlEvents:UIControlEventEditingDidBegin];
     
-    descriptionView = [[UIPlaceHolderTextView alloc] initWithFrame:CGRectMake(16, 79, 292, 83)];
+    descriptionView = [[UIPlaceHolderTextView alloc] initWithFrame:CGRectMake(10, 79, 298, 83)];
     [descriptionView awakeFromNib];
     descriptionView.placeholder = @"Caption";
     descriptionView.placeholderColor = [UIColor lightGrayColor];
@@ -358,7 +358,7 @@
     
     //Calling ShareKit for Sharing
     iosSharer = [[ SHKSharer alloc] init];
-    iosSharer = [SHKTwitter shareItem:item];
+    iosSharer = [SHKiOSTwitter shareItem:item];
     iosSharer.shareDelegate = self;
     
 }

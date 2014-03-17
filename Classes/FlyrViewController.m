@@ -33,10 +33,6 @@
 	[self.tView setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
 	tView.dataSource = self;
 	tView.delegate = self;
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
-        self.tView.contentInset = UIEdgeInsetsMake(-30, 0, 0, 0);
-    }
-	
     [self.view addSubview:tView];
     [self.tView setBackgroundView:nil];
     [self.tView setSeparatorStyle:UITableViewCellSeparatorStyleNone];

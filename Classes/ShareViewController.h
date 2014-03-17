@@ -10,7 +10,8 @@
 #import "SHKSharer.h"
 #import "SHKMail.h"
 #import "SHKFacebook.h"
-#import "SHKTwitter.h"
+#import <SHKTwitter.h>
+#import <SHKiOSTwitter.h>
 #import "SHKTextMessage.h"
 #import "SHKInstagram.h"
 #import "SHKFlickr.h"
