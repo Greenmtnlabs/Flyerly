@@ -51,6 +51,19 @@
         }
     };
     
+    
+    // Configure for video
+    // self.cameraView.targetMovieFolder = [UIApplication sharedApplication];
+    self.cameraView.captureMovieResultBlock = ^(NSURL *movieUrl,NSError * error) {
+        if (!error) {
+            
+            NSLog(@"%@",movieUrl);
+        }
+        
+    };
+
+    
+    
     self.cameraView.flashButtonConfigurationBlock = [self.cameraView buttonConfigurationBlockWithTitleFrom:
                                                     @[@"Flash Off", @"Flash On", @"Auto"]];
     self.cameraView.focusButtonConfigurationBlock = [self.cameraView buttonConfigurationBlockWithTitleFrom:
@@ -60,6 +73,8 @@
     self.cameraView.whiteBalanceButtonConfigurationBlock = [self.cameraView buttonConfigurationBlockWithTitleFrom:
                                                             @[@"Lckd", @"Auto", @"Cont"]];
 }
+
+
 
 /**
  * Crop image using NBUKit

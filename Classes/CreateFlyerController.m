@@ -126,9 +126,43 @@ int selectedAddMoreLayerTab = -1;
     [addMoreIconTabButton setBackgroundImage:[UIImage imageNamed:@"icon_button_selected"] forState:UIControlStateHighlighted];
     addMoreIconTabButton.tag = 10004;
     
+    
+    NSString *url = [[NSBundle mainBundle]
+                     pathForResource:@"sample_sorenson"
+                     ofType:@"mov"];
+    
+    MPMoviePlayerController *player =
+    [[MPMoviePlayerController alloc]
+     initWithContentURL:[NSURL fileURLWithPath:url]];
+   
+    
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(movieFinishedCallback:)
+     name:MPMoviePlayerPlaybackDidFinishNotification
+     object:player];
+    player.accessibilityElementsHidden = YES;
+    [player.view setFrame:CGRectMake(0, 0, 200, 200)];
+   // [player.view setFrame:self.flyimgView.bounds];
+    player.movieSourceType  = MPMovieSourceTypeStreaming;
+    [self.flyimgView addSubview:player.view];
+    
+     [player prepareToPlay];
 
+        //---play movie---
+        [player play];
+    
+   
 }
 
+- (void) movieFinishedCallback:(NSNotification*) aNotification {
+    MPMoviePlayerController *player = [aNotification object];
+    [[NSNotificationCenter defaultCenter]
+     removeObserver:self
+     name:MPMoviePlayerPlaybackDidFinishNotification
+     object:player];
+    [player autorelease];
+}
 
 -(void)viewDidLoad{
 	[super viewDidLoad];

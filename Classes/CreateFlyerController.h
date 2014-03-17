@@ -28,6 +28,7 @@
 #import "LayerTileButton.h"
 #import "LibraryViewController.h"
 #import "UIPlaceHolderTextView.h"
+#import <MediaPlayer/MediaPlayer.h>
 
 @class FlyerlySingleton,CameraViewController,Flyer,FlyerImageView;
 @interface CreateFlyerController :ParentViewController<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, FlyerImageViewDelegate >
