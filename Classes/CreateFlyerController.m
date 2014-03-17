@@ -147,6 +147,7 @@ int selectedAddMoreLayerTab = -1;
 
     sharePanel = [[UIView alloc] initWithFrame:CGRectMake(0, 480, 320,400 )];
     shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
+
     sharePanel = shareviewcontroller.view;
     sharePanel.hidden = YES;
     [self.view addSubview:sharePanel];
@@ -267,6 +268,9 @@ int selectedAddMoreLayerTab = -1;
         [UIView setAnimationDuration:0.4f];
             [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height, 320,425 )];
         [UIView commitAnimations];
+        [shareviewcontroller.titleView resignFirstResponder];
+        [shareviewcontroller.descriptionView resignFirstResponder];
+
         rightUndoBarButton.enabled = YES;
         shareButton.enabled = YES;
         helpButton.enabled = YES;
@@ -1770,7 +1774,6 @@ int selectedAddMoreLayerTab = -1;
     [self.flyimgView deleteLayer:currentLayer];
 	
     // Show the keyboard.
-    lastTextView.returnKeyType = UIReturnKeyDone;
 	[lastTextView becomeFirstResponder];
 }
 
@@ -2339,7 +2342,7 @@ int selectedAddMoreLayerTab = -1;
     [flyer setShareType:shareType];
     shareviewcontroller.selectedFlyerDescription = [flyer getFlyerDescription];
     shareviewcontroller.topTitleLabel = titleLabel;
-     [shareviewcontroller.descriptionView setReturnKeyType:UIReturnKeyDone];
+    [shareviewcontroller.descriptionView setReturnKeyType:UIReturnKeyDone];
     shareviewcontroller.Yvalue = [NSString stringWithFormat:@"%f",self.view.frame.size.height];
     
     PFUser *user = [PFUser currentUser];

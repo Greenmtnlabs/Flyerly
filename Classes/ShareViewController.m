@@ -33,6 +33,18 @@
     [titleView setReturnKeyType:UIReturnKeyDone];
     [titleView addTarget:self action:@selector(textFieldFinished:) forControlEvents: UIControlEventEditingDidEndOnExit];
     [titleView addTarget:self action:@selector(textFieldTapped:) forControlEvents:UIControlEventEditingDidBegin];
+    
+    descriptionView = [[UIPlaceHolderTextView alloc] initWithFrame:CGRectMake(16, 79, 292, 83)];
+    [descriptionView awakeFromNib];
+    descriptionView.placeholder = @"Caption";
+    descriptionView.placeholderColor = [UIColor lightGrayColor];
+    descriptionView.font = [UIFont fontWithName:@"Arial" size:16];
+    
+    descriptionView.delegate = self;
+    
+    [self.view addSubview:descriptionView];
+
+
 
     
 }
@@ -238,6 +250,9 @@
     [UIView setAnimationDuration:0.4f];
     [self.view setFrame:CGRectMake(0, [Yvalue integerValue], 320,425 )];
     [UIView commitAnimations];
+    [self.titleView resignFirstResponder];
+    [self.descriptionView resignFirstResponder];
+
     rightUndoBarButton.enabled = YES;
     shareButton.enabled = YES;
     helpButton.enabled = YES;
@@ -273,10 +288,7 @@
  */
 - (void)textViewTapped:(id)sender {
     
-    if([descriptionView.text isEqualToString:AddCaptionText]){
-        [descriptionView setText:@""];
-        [descriptionView becomeFirstResponder];
-    }
+    [descriptionView becomeFirstResponder];
 }
 
 
@@ -284,15 +296,11 @@
  * Called when end editing on text view
  */
 -(void)textViewDidEndEditing:(UITextView *)textView{
-    if([descriptionView.text isEqualToString:@""]){
-        [descriptionView setText:AddCaptionText];
-    }else {
     
-        //Here we Update Flyer Discription in .txt File
-        [flyer setFlyerDescription:descriptionView.text];
-        selectedFlyerDescription = descriptionView.text;
-    }
-}
+    //Here we Update Flyer Discription in .txt File
+    [flyer setFlyerDescription:descriptionView.text];
+    selectedFlyerDescription = descriptionView.text;
+ }
 
 - (void)textFieldFinished:(id)sender {
     [sender resignFirstResponder];
@@ -334,11 +342,9 @@
     // Current Item For Sharing
     SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ #flyerly", selectedFlyerDescription ]];
     
-   // iosSharer = [[ SHKSharer alloc] init];
     iosSharer = [SHKFacebook shareItem:item];
     iosSharer.shareDelegate = self;
     
-        
 }
 
 

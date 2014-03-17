@@ -27,6 +27,7 @@
 #import "SKProduct+LocalPrice.h"
 #import "LayerTileButton.h"
 #import "LibraryViewController.h"
+#import "UIPlaceHolderTextView.h"
 
 @class FlyerlySingleton,CameraViewController,Flyer,FlyerImageView;
 @interface CreateFlyerController :ParentViewController<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, FlyerImageViewDelegate >

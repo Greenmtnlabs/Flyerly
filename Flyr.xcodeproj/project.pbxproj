@@ -591,6 +591,7 @@
 		20E3010A17F1749E006A1DE0 /* checkDouble.png in Resources */ = {isa = PBXBuildFile; fileRef = 20E3010817F1749E006A1DE0 /* checkDouble.png */; };
 		20E3010E17F1AA9A006A1DE0 /* searinvite.png in Resources */ = {isa = PBXBuildFile; fileRef = 20E3010C17F1AA9A006A1DE0 /* searinvite.png */; };
 		20E3010F17F1AA9A006A1DE0 /* searinvite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20E3010D17F1AA9A006A1DE0 /* searinvite@2x.png */; };
+		20ECF9A918D6E1AD0035E3DE /* UIPlaceHolderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 20ECF9A818D6E1AD0035E3DE /* UIPlaceHolderTextView.m */; };
 		20ED041817CCB41F00DA702E /* SettingcellBack.png in Resources */ = {isa = PBXBuildFile; fileRef = 20ED041617CCB41F00DA702E /* SettingcellBack.png */; };
 		20ED041917CCB41F00DA702E /* SettingcellBack@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20ED041717CCB41F00DA702E /* SettingcellBack@2x.png */; };
 		20ED041C17CCBCB000DA702E /* t_email_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 20ED041A17CCBCB000DA702E /* t_email_button.png */; };
@@ -1711,6 +1712,8 @@
 		20E3010817F1749E006A1DE0 /* checkDouble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkDouble.png; sourceTree = "<group>"; };
 		20E3010C17F1AA9A006A1DE0 /* searinvite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = searinvite.png; sourceTree = "<group>"; };
 		20E3010D17F1AA9A006A1DE0 /* searinvite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "searinvite@2x.png"; sourceTree = "<group>"; };
+		20ECF9A718D6E1AD0035E3DE /* UIPlaceHolderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPlaceHolderTextView.h; sourceTree = "<group>"; };
+		20ECF9A818D6E1AD0035E3DE /* UIPlaceHolderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPlaceHolderTextView.m; sourceTree = "<group>"; };
 		20ED041617CCB41F00DA702E /* SettingcellBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SettingcellBack.png; sourceTree = "<group>"; };
 		20ED041717CCB41F00DA702E /* SettingcellBack@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SettingcellBack@2x.png"; sourceTree = "<group>"; };
 		20ED041A17CCBCB000DA702E /* t_email_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = t_email_button.png; sourceTree = "<group>"; };
@@ -3026,6 +3029,8 @@
 				E8A7347A1092CFF300661AAD /* ShareViewController.h */,
 				E8A7347B1092CFF300661AAD /* ShareViewController.m */,
 				E8A7347C1092CFF300661AAD /* ShareViewController.xib */,
+				20ECF9A718D6E1AD0035E3DE /* UIPlaceHolderTextView.h */,
+				20ECF9A818D6E1AD0035E3DE /* UIPlaceHolderTextView.m */,
 			);
 			name = ShareScreen;
 			sourceTree = "<group>";
@@ -4861,6 +4866,7 @@
 				49B8898A188652A2003766AD /* NSData+Extras.m in Sources */,
 				202C4803187D6E4B00FE0975 /* BitlyURLShortener.m in Sources */,
 				2002C89618888CD4005B18C9 /* SaveFlyerCell.m in Sources */,
+				20ECF9A918D6E1AD0035E3DE /* UIPlaceHolderTextView.m in Sources */,
 				E8C7C36910976BFC0064935A /* SaveFlyerController.m in Sources */,
 				2036661C188DB67300C71EAA /* FlyerUser.m in Sources */,
 				202C4801187D6E4B00FE0975 /* BitlyTwitterOAuthManager.m in Sources */,

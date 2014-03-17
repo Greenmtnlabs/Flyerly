@@ -28,6 +28,7 @@
 #import "HelpController.h"
 #import "Flyer.h"
 #import "SHKActivityIndicator.h"
+#import "UIPlaceHolderTextView.h"
 
 
 @class FlyrViewController,FlyerlySingleton;
@@ -43,7 +44,7 @@
 }
 
 
-@property(nonatomic,strong) IBOutlet UITextView *descriptionView;
+@property(nonatomic,strong) IBOutlet UIPlaceHolderTextView *descriptionView;
 @property(nonatomic,strong) IBOutlet UITextField *titleView;
 @property(nonatomic,strong) IBOutlet UIButton *facebookButton;
 @property(nonatomic,strong) IBOutlet UIButton *twitterButton;
