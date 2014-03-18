@@ -55,8 +55,6 @@
     UIButton *shareButton;
     UIButton *helpButton;
 
-    LibraryViewController *nbuGallary;
-    CameraViewController *nbuCamera;
     FlyerImageView *flyerImageView;
     
     UITextView *lastTextView;
