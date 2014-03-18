@@ -30,9 +30,16 @@ int selectedAddMoreLayerTab = -1;
     titleLabel.font = [UIFont fontWithName:TITLE_FONT size:18];
     titleLabel.textAlignment = UITextAlignmentCenter;
     titleLabel.textColor = [UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0];
-    titleLabel.text = [flyer getFlyerTitle];
-    self.navigationItem.titleView = titleLabel;
     
+    NSString *title = [flyer getFlyerTitle];
+    
+    if ( [title isEqualToString:@""] ) {
+        titleLabel.text = @"Flyerly";
+    } else {
+        titleLabel.text = title;
+    }
+    
+    self.navigationItem.titleView = titleLabel;
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -2227,8 +2234,15 @@ int selectedAddMoreLayerTab = -1;
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:TITLE_FONT size:18];
     label.textAlignment = UITextAlignmentCenter;
-    label.textColor = [UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0];;
-    label.text = [flyer getFlyerTitle];
+    label.textColor = [UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0];
+    
+    NSString *title = [flyer getFlyerTitle];
+    
+    if ( [title isEqualToString:@""] ) {
+        label.text = @"Flyerly";
+    } else {
+        label.text = title;
+    }
     self.navigationItem.titleView = label;
     
 

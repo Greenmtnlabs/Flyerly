@@ -34,11 +34,12 @@
     [titleView addTarget:self action:@selector(textFieldFinished:) forControlEvents: UIControlEventEditingDidEndOnExit];
     [titleView addTarget:self action:@selector(textFieldTapped:) forControlEvents:UIControlEventEditingDidBegin];
     
-    descriptionView = [[UIPlaceHolderTextView alloc] initWithFrame:CGRectMake(10, 79, 298, 83)];
+    descriptionView = [[UIPlaceHolderTextView alloc] initWithFrame:CGRectMake(12, 79, 296, 83)];
     [descriptionView awakeFromNib];
-    descriptionView.placeholder = @"Caption";
-    descriptionView.placeholderColor = [UIColor lightGrayColor];
-    descriptionView.font = [UIFont fontWithName:@"Arial" size:16];
+    descriptionView.placeholder = @"Add a comment (example: \"Show this flyer for a free drink at the bar from 4pm-7pm\")";
+    descriptionView.placeholderColor = [UIColor colorWithWhite: 0.80 alpha:1];
+    descriptionView.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14];
+    descriptionView.textColor = [UIColor darkGrayColor];
     
     descriptionView.delegate = self;
     
@@ -310,26 +311,16 @@
  * Called when clicked on title text field
  */
 - (void)textFieldTapped:(id)sender {
-    
     [titleView setReturnKeyType:UIReturnKeyDone];
-
-    if([titleView.text isEqualToString:NameYourFlyerText]){
-        [titleView setText:@""];
-        [titleView becomeFirstResponder];
-    }
 }
 
 /*
  * Called when end editing on text field
  */
--(void)textFieldDidEndEditing:(UITextField *)textField{
-    if([titleView.text isEqualToString:@""]){
-        [titleView setText:NameYourFlyerText];
-    }else {
-        //Here we Update Flyer Title in .txt File
-        [flyer setFlyerTitle:titleView.text];
-        topTitleLabel.text = titleView.text;
-    }
+-(void)textFieldDidEndEditing:(UITextField *)textField {
+    //Here we Update Flyer Title in .txt File
+    [flyer setFlyerTitle:titleView.text];
+    topTitleLabel.text = titleView.text;
 }
 
 #pragma mark Social Network
