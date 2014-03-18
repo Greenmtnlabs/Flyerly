@@ -499,7 +499,7 @@
         [Flurry logEvent:@"Shared Facebook"];
 
         
-    } else if ( [sharer isKindOfClass:[SHKTwitter class]] == YES ) {
+    } else if ( [sharer isKindOfClass:[SHKiOSTwitter class]] == YES ) {
         
         [self.flyer setTwitterStatus:1];
         [Flurry logEvent:@"Shared Twitter"];
