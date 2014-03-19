@@ -478,14 +478,13 @@
     }];
 }
 
-- (void)storeProductsRequestFailed:(NSNotification*)notification
-{
+- (void)storeProductsRequestFailed:(NSNotification*)notification {
     NSError *error = notification.storeError;
+    NSLog(@"%@", error);
 }
 
-- (void)storeProductsRequestFinished:(NSNotification*)notification
-{
-    NSArray *products = notification.products;
+- (void)storeProductsRequestFinished:(NSNotification*)notification {
+    //NSArray *products = notification.products;
 }
 
 

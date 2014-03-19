@@ -30,9 +30,16 @@ int selectedAddMoreLayerTab = -1;
     titleLabel.font = [UIFont fontWithName:TITLE_FONT size:18];
     titleLabel.textAlignment = UITextAlignmentCenter;
     titleLabel.textColor = [UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0];
-    titleLabel.text = [flyer getFlyerTitle];
-    self.navigationItem.titleView = titleLabel;
     
+    NSString *title = [flyer getFlyerTitle];
+    
+    if ( [title isEqualToString:@""] ) {
+        titleLabel.text = @"Flyerly";
+    } else {
+        titleLabel.text = title;
+    }
+    
+    self.navigationItem.titleView = titleLabel;
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -124,8 +131,7 @@ int selectedAddMoreLayerTab = -1;
 	addMoreSymbolTabButton.tag = 10003;
     
     [addMoreIconTabButton setBackgroundImage:[UIImage imageNamed:@"icon_button_selected"] forState:UIControlStateHighlighted];
-    addMoreIconTabButton.tag = 10004;
-    
+    addMoreIconTabButton.tag = 10004;   
     
     NSString *url = [[NSBundle mainBundle]
                      pathForResource:@"sample_sorenson"
@@ -152,7 +158,7 @@ int selectedAddMoreLayerTab = -1;
         //---play movie---
         [player play];
     
-   
+
 }
 
 - (void) movieFinishedCallback:(NSNotification*) aNotification {
@@ -1607,7 +1613,7 @@ int selectedAddMoreLayerTab = -1;
  */
 -(void)loadCustomPhotoLibrary{
     
-    nbuGallary = [[LibraryViewController alloc] initWithNibName:@"LibraryViewController" bundle:nil];
+    LibraryViewController *nbuGallary = [[LibraryViewController alloc] initWithNibName:@"LibraryViewController" bundle:nil];
     
     if ( imgPickerFlag == 2 ) {
         NSDictionary *dict = [flyer getLayerFromMaster:currentLayer];
@@ -1617,33 +1623,33 @@ int selectedAddMoreLayerTab = -1;
         nbuGallary.desiredImageSize = CGSizeMake( 300,  300 );
     }
     
+    __weak CreateFlyerController *weakSelf = self;
 
     [nbuGallary setOnImageTaken:^(UIImage *img) {
         
         dispatch_async( dispatch_get_main_queue(), ^{
             // Do any UI operation here (render layer).
-            if (imgPickerFlag == 2) {
+            if (weakSelf.imgPickerFlag == 2) {
                 
-                NSString *imgPath = [self getImagePathforPhoto:img];
+                NSString *imgPath = [weakSelf getImagePathforPhoto:img];
                 
                 //Set Image to dictionary
-                [flyer setImagePath:currentLayer ImgPath:imgPath];
+                [weakSelf.flyer setImagePath:weakSelf.currentLayer ImgPath:imgPath];
                 
                 //Here we Create ImageView Layer
-                [self.flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
+                [weakSelf.flyimgView renderLayer:weakSelf.currentLayer layerDictionary:[weakSelf.flyer getLayerFromMaster:weakSelf.currentLayer]];
                 
-                [self.flyimgView layerStoppedEditing:currentLayer];
+                [weakSelf.flyimgView layerStoppedEditing:weakSelf.currentLayer];
                 
-                imgPickerFlag = 1;
+                weakSelf.imgPickerFlag = 1;
             }else{
                 
                 //Create Copy of Image
-                [self copyImageToTemplate:img];
+                [weakSelf copyImageToTemplate:img];
                 
                 //set template Image
-                [self.flyimgView setTemplate:[NSString stringWithFormat:@"Template/template.%@",IMAGETYPE] ];
+                [weakSelf.flyimgView setTemplate:[NSString stringWithFormat:@"Template/template.%@",IMAGETYPE] ];
                 [Flurry logEvent:@"Custom Background"];
-
                 
             }
         });
@@ -1659,7 +1665,7 @@ int selectedAddMoreLayerTab = -1;
  */
 -(void)openCustomCamera{
 
-    nbuCamera = [[CameraViewController alloc]initWithNibName:@"CameraViewController" bundle:nil];
+    CameraViewController *nbuCamera = [[CameraViewController alloc]initWithNibName:@"CameraViewController" bundle:nil];
     
     if ( imgPickerFlag == 2 ) {
         NSDictionary *dict = [flyer getLayerFromMaster:currentLayer];
@@ -1669,33 +1675,35 @@ int selectedAddMoreLayerTab = -1;
         nbuCamera.desiredImageSize = CGSizeMake( 300,  300 );
     }
     
+    __weak CreateFlyerController *weakSelf = self;
+    
     // Callback once image is selected.
     [nbuCamera setOnImageTaken:^(UIImage *img) {
         
         dispatch_async( dispatch_get_main_queue(), ^{
             // Do any UI operation here (render layer).
             
-            if (imgPickerFlag == 2) {
+            if (weakSelf.imgPickerFlag == 2) {
                 
-                NSString *imgPath = [self getImagePathforPhoto:img];
+                NSString *imgPath = [weakSelf getImagePathforPhoto:img];
                 
                 //Set Image to dictionary
-                [flyer setImagePath:currentLayer ImgPath:imgPath];
+                [weakSelf.flyer setImagePath:weakSelf.currentLayer ImgPath:imgPath];
                 
                 //Here we Create ImageView Layer
-                [self.flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
+                [weakSelf.flyimgView renderLayer:weakSelf.currentLayer layerDictionary:[weakSelf.flyer getLayerFromMaster:weakSelf.currentLayer]];
                 
-                [self.flyimgView layerStoppedEditing:currentLayer];
+                [weakSelf.flyimgView layerStoppedEditing:weakSelf.currentLayer];
                 [Flurry logEvent:@"Custom Photo"];
                 
-                imgPickerFlag = 1;
+                weakSelf.imgPickerFlag = 1;
             }else{
                 
                 //Create Copy of Image
-                [self copyImageToTemplate:img];
+                [weakSelf copyImageToTemplate:img];
                 
                 //set template Image
-                [self.flyimgView setTemplate:[NSString stringWithFormat:@"Template/template.%@",IMAGETYPE ]];
+                [weakSelf.flyimgView setTemplate:[NSString stringWithFormat:@"Template/template.%@",IMAGETYPE ]];
                 [Flurry logEvent:@"Custom Background"];
             }
         });
@@ -2261,8 +2269,15 @@ int selectedAddMoreLayerTab = -1;
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:TITLE_FONT size:18];
     label.textAlignment = UITextAlignmentCenter;
-    label.textColor = [UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0];;
-    label.text = [flyer getFlyerTitle];
+    label.textColor = [UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0];
+    
+    NSString *title = [flyer getFlyerTitle];
+    
+    if ( [title isEqualToString:@""] ) {
+        label.text = @"Flyerly";
+    } else {
+        label.text = title;
+    }
     self.navigationItem.titleView = label;
     
 

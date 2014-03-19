@@ -179,7 +179,6 @@
 		0FDB5627175E3E410078EBEC /* twitter_following@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FDB5623175E3E410078EBEC /* twitter_following@2x.png */; };
 		0FE0BDA21758798700C4D78D /* bg_invite_friends_bar.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FE0BDA01758798700C4D78D /* bg_invite_friends_bar.png */; };
 		0FE0BDA31758798700C4D78D /* bg_invite_friends_bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FE0BDA11758798700C4D78D /* bg_invite_friends_bar@2x.png */; };
-		0FE0BDD41758BBCD00C4D78D /* EBPurchase.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FE0BDD31758BBCD00C4D78D /* EBPurchase.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0FE0BDD61758C07D00C4D78D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FE0BDD51758C07D00C4D78D /* StoreKit.framework */; };
 		0FE6F9A1177069BB00C726F7 /* three_buttons.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FE6F99D177069BB00C726F7 /* three_buttons.png */; };
 		0FE6F9A2177069BB00C726F7 /* three_buttons@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FE6F99E177069BB00C726F7 /* three_buttons@2x.png */; };
@@ -1232,8 +1231,6 @@
 		0FDB5623175E3E410078EBEC /* twitter_following@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter_following@2x.png"; sourceTree = "<group>"; };
 		0FE0BDA01758798700C4D78D /* bg_invite_friends_bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_invite_friends_bar.png; sourceTree = "<group>"; };
 		0FE0BDA11758798700C4D78D /* bg_invite_friends_bar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_invite_friends_bar@2x.png"; sourceTree = "<group>"; };
-		0FE0BDD21758BBCD00C4D78D /* EBPurchase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EBPurchase.h; path = InAppPurchase/EBPurchase.h; sourceTree = "<group>"; };
-		0FE0BDD31758BBCD00C4D78D /* EBPurchase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EBPurchase.m; path = InAppPurchase/EBPurchase.m; sourceTree = "<group>"; };
 		0FE0BDD51758C07D00C4D78D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		0FE6F99D177069BB00C726F7 /* three_buttons.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = three_buttons.png; sourceTree = "<group>"; };
 		0FE6F99E177069BB00C726F7 /* three_buttons@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "three_buttons@2x.png"; sourceTree = "<group>"; };
@@ -2279,7 +2276,6 @@
 				49B8897A1886524D003766AD /* LoadingView */,
 				202C47B7187D6E4B00FE0975 /* Bitly */,
 				0F7FC383175CE261009DEB08 /* AsyncImageView */,
-				0FE0BDD11758BBB900C4D78D /* InAppPurchase */,
 				0FEDD769174A918C00DF71C0 /* Crittercism */,
 			);
 			path = ExternalFrameworks;
@@ -2956,15 +2952,6 @@
 				0F8007B0175378F0000FF7FA /* ricon9.png */,
 			);
 			name = icons;
-			sourceTree = "<group>";
-		};
-		0FE0BDD11758BBB900C4D78D /* InAppPurchase */ = {
-			isa = PBXGroup;
-			children = (
-				0FE0BDD21758BBCD00C4D78D /* EBPurchase.h */,
-				0FE0BDD31758BBCD00C4D78D /* EBPurchase.m */,
-			);
-			name = InAppPurchase;
 			sourceTree = "<group>";
 		};
 		0FEDD769174A918C00DF71C0 /* Crittercism */ = {
@@ -4884,7 +4871,6 @@
 				202C4827187D7A6B00FE0975 /* CJSONDeserializer.m in Sources */,
 				65BDB2DF17341D290084E032 /* CustomLabel.m in Sources */,
 				0FEF2DA9174E66FC00FDD8C9 /* HelpController.m in Sources */,
-				0FE0BDD41758BBCD00C4D78D /* EBPurchase.m in Sources */,
 				0F7FC386175CE26B009DEB08 /* AsyncImageView.m in Sources */,
 				202C482A187D7A6B00FE0975 /* NSDictionary_JSONExtensions.m in Sources */,
 				202C4829187D7A6B00FE0975 /* CJSONSerializer.m in Sources */,

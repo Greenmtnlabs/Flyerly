@@ -23,6 +23,7 @@
     // Configure the camera view
     self.cameraView.shouldAutoRotateView = YES;
     self.cameraView.savePicturesToLibrary = NO;
+    self.takesPicturesWithVolumeButtons = NO;
     
     // BackButton
     UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 30)];
@@ -37,16 +38,19 @@
     
     self.cameraView.targetResolution = CGSizeMake(640.0, 640.0); // The minimum resolution we want
     self.cameraView.keepFrontCameraPicturesMirrored = YES;
+    
+    __weak CameraViewController *weakSelf = self;
+    
     self.cameraView.captureResultBlock = ^(UIImage * image,
                                            NSError * error) {
         if (!error) {
             
             dispatch_async( dispatch_get_main_queue(), ^{
                 // Pass Image
-                self.navigationController.navigationBarHidden = NO;
+                weakSelf.navigationController.navigationBarHidden = NO;
           
                 // Crop the image
-                [self cropImage:image];
+                [weakSelf cropImage:image];
             });
         }
     };
