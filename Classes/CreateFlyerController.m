@@ -1854,13 +1854,6 @@ int selectedAddMoreLayerTab = -1;
     //Here we Highlight The ImageView
     [self.flyimgView layerIsBeingEdited:currentLayer];
     
-    //here we Update Flyer Description if Empty
-    NSString *desp = [flyer getFlyerDescription];
-    
-    if ([desp isEqualToString:@""]) {
-        [flyer setFlyerDescription:lastTextView.text];
-    }
-    
 	textBackgrnd.alpha = ALPHA1;
 
     // SET BOTTOM BAR
