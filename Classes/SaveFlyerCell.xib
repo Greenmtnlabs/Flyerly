@@ -129,7 +129,7 @@
         <image name="facebook_disabled_saved.png" width="10" height="17"/>
         <image name="flickr_disabled_saved.png" width="22" height="12"/>
         <image name="instagram_disabled_saved.png" width="17" height="17"/>
-        <image name="invite_Bg.png" width="311" height="101"/>
+        <image name="invite_Bg.png" width="622" height="201"/>
         <image name="tumblr_disabled_saved.png" width="15" height="15"/>
         <image name="twitter_disabled_saved.png" width="19" height="15"/>
     </resources>

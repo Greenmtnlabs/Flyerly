@@ -9,6 +9,7 @@
             <connections>
                 <outlet property="cameraLines" destination="R24-LX-G4Q" id="Hod-UC-CpV"/>
                 <outlet property="cameraView" destination="4" id="gI7-IU-C9E"/>
+                <outlet property="shootButton" destination="l4Y-bJ-bF3" id="XRE-5L-ipI"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>
@@ -29,7 +30,7 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="takePicture:" destination="4" eventType="touchUpInside" id="nZD-gx-4cn"/>
+                        <action selector="shoot:" destination="-1" eventType="touchUpInside" id="bP1-dO-Zc9"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="r5v-4E-eSi">
@@ -113,21 +114,10 @@
                                 <action selector="setCameraLine:" destination="-1" eventType="touchUpInside" id="D3z-CA-r5X"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="FpV-ys-W6E">
-                            <rect key="frame" x="16" y="208" width="46" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="Video">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="startStopRecording:" destination="4" eventType="touchUpInside" id="eFK-kg-ffG"/>
-                            </connections>
-                        </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="flashButton" destination="KHn-mP-8i7" id="Abh-Ap-Ru3"/>
-                        <outlet property="shootButton" destination="l4Y-bJ-bF3" id="OQ0-lM-UlH"/>
                         <outlet property="toggleCameraButton" destination="41" id="42"/>
                     </connections>
                 </view>
@@ -139,14 +129,14 @@
         </view>
     </objects>
     <resources>
-        <image name="Camerabottom.png" width="320" height="60"/>
-        <image name="camera_bottombg.png" width="320" height="146"/>
-        <image name="camera_button.png" width="80" height="80"/>
-        <image name="camera_change.png" width="45" height="23"/>
-        <image name="camera_flash.png" width="52" height="76"/>
-        <image name="camera_grid.png" width="23" height="23"/>
+        <image name="Camerabottom.png" width="640" height="119"/>
+        <image name="camera_bottombg.png" width="640" height="292"/>
+        <image name="camera_button.png" width="160" height="160"/>
+        <image name="camera_change.png" width="89" height="46"/>
+        <image name="camera_flash.png" width="20" height="31"/>
+        <image name="camera_grid.png" width="46" height="45"/>
         <image name="cameraline.png" width="26" height="844"/>
-        <image name="galleryicon.png" width="47" height="45"/>
+        <image name="galleryicon.png" width="94" height="90"/>
         <image name="new_grid_line.png" width="320" height="422"/>
     </resources>
 </document>

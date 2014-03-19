@@ -12,7 +12,7 @@
 @implementation CameraViewController
 @synthesize cameraLines;
 @synthesize desiredImageSize;
-@synthesize onImageTaken;
+@synthesize onImageTaken,onVideoFinished,forVideo,shootButton;
 
 /**
  * Setup the controller.
@@ -62,12 +62,12 @@
         if (!error) {
             
             NSLog(@"%@",movieUrl);
+            self.onVideoFinished(movieUrl);
+            [self.navigationController popViewControllerAnimated:YES];
         }
         
     };
 
-  UIButton *a =  self.cameraView.shootButton;
-    [a setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
     
     self.cameraView.flashButtonConfigurationBlock = [self.cameraView buttonConfigurationBlockWithTitleFrom:
                                                     @[@"Flash Off", @"Flash On", @"Auto"]];
@@ -81,6 +81,18 @@
 }
 
 
+/*
+ * Here we Handle Touch On Shoot Camera or Video
+ */
+- (IBAction)shoot:(id)sender {
+
+    if (forVideo) {
+        [self.cameraView startStopRecording:sender];
+    }else {
+        [self.cameraView takePicture:sender];
+    }
+
+}
 
 /**
  * Crop image using NBUKit

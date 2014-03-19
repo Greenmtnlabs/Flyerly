@@ -133,42 +133,10 @@ int selectedAddMoreLayerTab = -1;
     [addMoreIconTabButton setBackgroundImage:[UIImage imageNamed:@"icon_button_selected"] forState:UIControlStateHighlighted];
     addMoreIconTabButton.tag = 10004;
     
-    /*
-    NSString *url = [[NSBundle mainBundle]
-                     pathForResource:@"sample_sorenson"
-                     ofType:@"mov"];
     
-    MPMoviePlayerController *player =
-    [[MPMoviePlayerController alloc]
-     initWithContentURL:[NSURL fileURLWithPath:url]];
-   
-    
-    [[NSNotificationCenter defaultCenter]
-     addObserver:self
-     selector:@selector(movieFinishedCallback:)
-     name:MPMoviePlayerPlaybackDidFinishNotification
-     object:player];
-    player.accessibilityElementsHidden = YES;
-    [player.view setFrame:self.flyimgView.bounds];
-    player.movieSourceType  = MPMovieSourceTypeStreaming;
-    [self.flyimgView addSubview:player.view];
-    
-     [player prepareToPlay];
-
-        //---play movie---
-        [player play];*/
-    
-
 }
 
-- (void) movieFinishedCallback:(NSNotification*) aNotification {
-    MPMoviePlayerController *player = [aNotification object];
-    [[NSNotificationCenter defaultCenter]
-     removeObserver:self
-     name:MPMoviePlayerPlaybackDidFinishNotification
-     object:player];
-    [player autorelease];
-}
+
 
 -(void)viewDidLoad{
 	[super viewDidLoad];
@@ -289,6 +257,8 @@ int selectedAddMoreLayerTab = -1;
     [self addBottomTabs:libFlyer];
     
     currentLayer = @"";
+    
+
 
 }
 
@@ -1714,6 +1684,74 @@ int selectedAddMoreLayerTab = -1;
 }
 
 
+/*
+ * Here we Overload Open Camera for Video
+ */
+-(void)openCustomCamera :(BOOL *)forVideo{
+    
+    CameraViewController *nbuCamera = [[CameraViewController alloc]initWithNibName:@"CameraViewController" bundle:nil];
+    
+    nbuCamera.desiredImageSize = CGSizeMake( 300,  300 );
+    
+    [nbuCamera.shootButton setImage:[UIImage imageNamed:@"star"] forState:UIControlStateNormal];
+
+    nbuCamera.forVideo = YES;
+    
+    [nbuCamera setOnVideoFinished:^(NSURL *recvUrl) {
+        
+        NSLog(@"%@",recvUrl);
+        NSError *error = nil;
+
+        // HERE WE MOVE SOURCE FILE INTO FLYER FOLDER
+        NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
+        NSString *destination = [NSString stringWithFormat:@"%@/Template/template.mov",currentpath];
+        
+        NSURL *movieURL = [NSURL fileURLWithPath:destination];
+
+        //HERE WE MAKE SURE FILE ALREADY EXISTS THEN DELETE IT OTHERWISE IGNORE
+        if ([[NSFileManager defaultManager] fileExistsAtPath:destination isDirectory:NULL]) {
+            [[NSFileManager defaultManager] removeItemAtPath:destination error:&error];
+        }
+        
+        //HERE WE MOVE FILE INTO FLYER FOLDER
+        [[NSFileManager defaultManager] moveItemAtURL:recvUrl toURL:movieURL error:&error];
+
+        //HERE WE INITIALIZE MOVIE PLAYER AND
+        //PASS URL TO MOVIE PLAYER FOR PLAY FILE
+        MPMoviePlayerController *player =[[MPMoviePlayerController alloc] initWithContentURL:movieURL];
+        [player.view setFrame:self.flyimgView.bounds];
+        
+        [[NSNotificationCenter defaultCenter]
+         addObserver:self selector:@selector(movieFinishedCallback:)
+         name:MPMoviePlayerPlaybackDidFinishNotification
+         object:player];
+        
+        [self.flyimgView addSubview:player.view];
+        player.accessibilityElementsHidden = YES;
+        player.movieSourceType  = MPMovieSourceTypeFile;
+         player.controlStyle =  MPMovieControlStyleNone;
+        player.scalingMode = MPMovieScalingModeAspectFill;
+        player.backgroundView.backgroundColor = [UIColor whiteColor];
+        player.repeatMode = MPMovieRepeatModeOne;
+        
+        [player prepareToPlay];
+        if ([player isPreparedToPlay]) {
+            [player play];
+        }
+    }];
+    
+    [self.navigationController pushViewController:nbuCamera animated:YES];
+}
+
+- (void) movieFinishedCallback:(NSNotification*) aNotification {
+    MPMoviePlayerController *player = [aNotification object];
+    [[NSNotificationCenter defaultCenter]
+     removeObserver:self
+     name:MPMoviePlayerPlaybackDidFinishNotification
+     object:player];
+
+}
+
 
 #pragma mark UIAlertView delegate
 
@@ -2583,7 +2621,10 @@ int selectedAddMoreLayerTab = -1;
     else if(selectedButton == cameraRoll)
     {
         [cameraRoll setSelected:YES];
-        [self loadCustomPhotoLibrary];
+        
+        [self openCustomCamera:YES];
+        
+        //[self loadCustomPhotoLibrary];
     }
     else if(selectedButton == flyerBorder)
     {

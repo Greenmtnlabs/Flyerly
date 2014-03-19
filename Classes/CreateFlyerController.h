@@ -30,8 +30,9 @@
 #import "UIPlaceHolderTextView.h"
 #import <MediaPlayer/MediaPlayer.h>
 
+
 @class FlyerlySingleton,CameraViewController,Flyer,FlyerImageView;
-@interface CreateFlyerController :ParentViewController<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, FlyerImageViewDelegate >
+@interface CreateFlyerController :ParentViewController<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, FlyerImageViewDelegate,MPMediaPlayback >
 {
    
     FlyerlySingleton *globle;
@@ -62,6 +63,7 @@
 
     ShareViewController *shareviewcontroller;
     UILabel *titleLabel;
+    
 }
 
 

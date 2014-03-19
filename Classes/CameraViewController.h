@@ -16,12 +16,17 @@
 @property CGSize desiredImageSize;
 @property (nonatomic, copy) void (^onImageTaken)(UIImage *);
 
+@property (nonatomic, copy) void (^onVideoFinished)(NSURL *);
+
 // Outlets
 @property (assign, nonatomic) IBOutlet UIImageView *cameraLines;
+@property (assign, nonatomic) IBOutlet UIButton *shootButton;
+@property (nonatomic, assign) BOOL forVideo;
 
 // Actions
 - (IBAction)setCameraLine:(id)sender;
 - (IBAction)moveToGallery:(id)sender;
+- (IBAction)shoot:(id)sender;
 
 @end
 

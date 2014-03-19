@@ -41,9 +41,10 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Template15.jpg" id="Xaq-YE-kc7" customClass="FlyerImageView">
+                <imageView clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Xaq-YE-kc7" customClass="FlyerImageView">
                     <rect key="frame" x="5" y="65" width="310" height="310"/>
                     <autoresizingMask key="autoresizingMask"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="-64"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="1Hx-Xl-UIu"/>
@@ -325,20 +326,19 @@
         <image name="07_height.png" width="160" height="90"/>
         <image name="07_height_selected.png" width="160" height="90"/>
         <image name="07_roll.png" width="160" height="90"/>
-        <image name="07_roll_selected.png" width="80" height="45"/>
+        <image name="07_roll_selected.png" width="160" height="90"/>
         <image name="07_width.png" width="160" height="90"/>
-        <image name="07_width_selected.png" width="80" height="45"/>
-        <image name="Template15.jpg" width="612" height="612"/>
+        <image name="07_width_selected.png" width="160" height="90"/>
         <image name="addbg_border.png" width="160" height="90"/>
-        <image name="addbg_border_selected.png" width="80" height="45"/>
+        <image name="addbg_border_selected.png" width="160" height="90"/>
         <image name="addbg_cameraroll.png" width="160" height="90"/>
-        <image name="addbg_cameraroll_selected.png" width="80" height="45"/>
+        <image name="addbg_cameraroll_selected.png" width="160" height="90"/>
         <image name="addbg_library.png" width="160" height="90"/>
-        <image name="addbg_library_selected.png" width="80" height="45"/>
+        <image name="addbg_library_selected.png" width="160" height="90"/>
         <image name="addbg_takephoto.png" width="160" height="90"/>
-        <image name="addbg_takephoto_selected.png" width="80" height="45"/>
+        <image name="addbg_takephoto_selected.png" width="160" height="90"/>
         <image name="arrangeicon_button.png" width="128" height="90"/>
-        <image name="blue_bar.png" width="320" height="46"/>
+        <image name="blue_bar.png" width="640" height="91"/>
         <image name="color_button.png" width="64" height="45"/>
         <image name="color_button_selected.png" width="64" height="45"/>
         <image name="font_button.png" width="64" height="45"/>
@@ -350,8 +350,8 @@
         <image name="size_button.png" width="64" height="45"/>
         <image name="size_button_selected.png" width="64" height="45"/>
         <image name="symbolicon_button.png" width="128" height="90"/>
-        <image name="text_edit.png" width="64" height="45"/>
-        <image name="text_edit_selected.png" width="64" height="45"/>
+        <image name="text_edit.png" width="128" height="90"/>
+        <image name="text_edit_selected.png" width="128" height="90"/>
         <image name="text_icon.png" width="128" height="90"/>
     </resources>
 </document>
