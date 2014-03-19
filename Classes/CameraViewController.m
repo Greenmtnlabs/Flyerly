@@ -76,6 +76,8 @@
                                                         @[@"Exp", @"Auto", @"Cont"]];
     self.cameraView.whiteBalanceButtonConfigurationBlock = [self.cameraView buttonConfigurationBlockWithTitleFrom:
                                                             @[@"Lckd", @"Auto", @"Cont"]];
+   // self.cameraView.shootButton
+    
 }
 
 

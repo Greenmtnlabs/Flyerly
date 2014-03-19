@@ -131,7 +131,7 @@ int selectedAddMoreLayerTab = -1;
 	addMoreSymbolTabButton.tag = 10003;
     
     [addMoreIconTabButton setBackgroundImage:[UIImage imageNamed:@"icon_button_selected"] forState:UIControlStateHighlighted];
-    addMoreIconTabButton.tag = 10004;   
+    addMoreIconTabButton.tag = 10004;
     
     NSString *url = [[NSBundle mainBundle]
                      pathForResource:@"sample_sorenson"
@@ -148,8 +148,7 @@ int selectedAddMoreLayerTab = -1;
      name:MPMoviePlayerPlaybackDidFinishNotification
      object:player];
     player.accessibilityElementsHidden = YES;
-    [player.view setFrame:CGRectMake(0, 0, 200, 200)];
-   // [player.view setFrame:self.flyimgView.bounds];
+    [player.view setFrame:self.flyimgView.bounds];
     player.movieSourceType  = MPMovieSourceTypeStreaming;
     [self.flyimgView addSubview:player.view];
     
