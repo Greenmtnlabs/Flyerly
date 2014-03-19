@@ -41,9 +41,6 @@
     
     lockFlyer = YES;
 
-    
-    
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -420,7 +417,8 @@
         for(SKProduct *product in products)
         {
             
-            [actionSheet addButtonWithTitle:[NSString stringWithFormat:@"%@ - %@",product.localizedTitle,product.price]];
+            [actionSheet addButtonWithTitle:[NSString stringWithFormat:@"%@ - %@",product.localizedTitle,
+                                             product.priceAsString]];
         }
         
         [actionSheet addButtonWithTitle:@"Restore Purchase"];
