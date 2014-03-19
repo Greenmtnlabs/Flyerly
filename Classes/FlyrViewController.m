@@ -41,9 +41,6 @@
     
     lockFlyer = YES;
 
-    
-    
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated {

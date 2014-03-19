@@ -50,7 +50,6 @@
     // HERE WE SET SOCIAL NETWORK STATUS OF FLYER
     if([[flyer getFacebookStatus] isEqualToString:@"1"]){
         fbImage.image = [UIImage imageNamed:@"facebook_share_saved"];
-        [updatedDateLabel setText:@"Shared:"];
     } else {
         fbImage.image = [UIImage imageNamed:@"facebook_disabled_saved"];
     }
@@ -59,7 +58,6 @@
     
     if([[flyer getTwitterStatus] isEqualToString:@"1"]){
         twtImage.image = [UIImage imageNamed:@"twitter_share_saved"];
-        [updatedDateLabel setText:@"Shared:"];
     } else {
         twtImage.image = [UIImage imageNamed:@"twitter_disabled_saved"];
     }
@@ -67,7 +65,6 @@
     
     if([[flyer getEmailStatus] isEqualToString:@"1"]){
         emailImage.image = [UIImage imageNamed:@"email_share_saved"];
-        [updatedDateLabel setText:@"Shared:"];
     } else {
         emailImage.image = [UIImage imageNamed:@"email_disabled_saved"];
     }
@@ -75,7 +72,6 @@
     
     if([[flyer getInstagaramStatus] isEqualToString:@"1"]){
         instaImage.image = [UIImage imageNamed:@"instagram_share_saved"];
-        [updatedDateLabel setText:@"Shared:"];
     } else {
         instaImage.image = [UIImage imageNamed:@"instagram_disabled_saved"];
     }
@@ -83,7 +79,6 @@
     
     if([[flyer getFlickerStatus] isEqualToString:@"1"]){
         flickImage.image = [UIImage imageNamed:@"flickr_share_saved"];
-        [updatedDateLabel setText:@"Shared:"];
     } else {
         flickImage.image = [UIImage imageNamed:@"flickr_disabled_saved"];
     }
@@ -91,7 +86,6 @@
     
     if([[flyer getThumblerStatus] isEqualToString:@"1"]){
         tumbImage.image = [UIImage imageNamed:@"tumblr_share_saved"];
-        [updatedDateLabel setText:@"Shared:"];
     } else {
         tumbImage.image = [UIImage imageNamed:@"tumblr_disabled_saved"];
     }
