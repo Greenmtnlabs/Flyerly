@@ -66,7 +66,8 @@
         
     };
 
-    
+  UIButton *a =  self.cameraView.shootButton;
+    [a setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
     
     self.cameraView.flashButtonConfigurationBlock = [self.cameraView buttonConfigurationBlockWithTitleFrom:
                                                     @[@"Flash Off", @"Flash On", @"Auto"]];
@@ -76,7 +77,6 @@
                                                         @[@"Exp", @"Auto", @"Cont"]];
     self.cameraView.whiteBalanceButtonConfigurationBlock = [self.cameraView buttonConfigurationBlockWithTitleFrom:
                                                             @[@"Lckd", @"Auto", @"Cont"]];
-   // self.cameraView.shootButton
     
 }
 

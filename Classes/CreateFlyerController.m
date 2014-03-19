@@ -133,6 +133,7 @@ int selectedAddMoreLayerTab = -1;
     [addMoreIconTabButton setBackgroundImage:[UIImage imageNamed:@"icon_button_selected"] forState:UIControlStateHighlighted];
     addMoreIconTabButton.tag = 10004;
     
+    /*
     NSString *url = [[NSBundle mainBundle]
                      pathForResource:@"sample_sorenson"
                      ofType:@"mov"];
@@ -155,7 +156,7 @@ int selectedAddMoreLayerTab = -1;
      [player prepareToPlay];
 
         //---play movie---
-        [player play];
+        [player play];*/
     
 
 }
