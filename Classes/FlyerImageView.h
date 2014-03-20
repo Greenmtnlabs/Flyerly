@@ -13,6 +13,10 @@
 
 - (void)frameChangedForLayer:(NSString *)uid frame:(CGRect)frame;
 - (void)sendLayerToEditMode:(NSString *)uid;
+- (void)disableImageViewInteraction;
+- (void)addVideo :(NSString *)url;
+
+
 
 @end
 

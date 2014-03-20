@@ -14,7 +14,7 @@
 @synthesize imgPickerFlag, addMoreLayerOrSaveFlyerLabel, takeOrAddPhotoLabel,layerScrollView,flyerPath;
 @synthesize contextView,libraryContextView,libFlyer,backgroundTabButton,addMoreFontTabButton;
 @synthesize libText,libBackground,libPhoto,libEmpty,backtemplates,cameraTakePhoto,cameraRoll,flyerBorder;
-@synthesize flyimgView,currentLayer,layersDic,flyer;
+@synthesize flyimgView,currentLayer,layersDic,flyer,player,playerView;
 
 int selectedAddMoreLayerTab = -1;
 
@@ -24,6 +24,8 @@ int selectedAddMoreLayerTab = -1;
 -(void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:YES];
     
+    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+
     //Here we Set Top Bar Item
     titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
     titleLabel.backgroundColor = [UIColor clearColor];
@@ -56,6 +58,12 @@ int selectedAddMoreLayerTab = -1;
     [takeOrAddPhotoLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:18]];
     [takeOrAddPhotoLabel setTextColor:[UIColor grayColor]];
     [takeOrAddPhotoLabel setTextAlignment:UITextAlignmentCenter];
+
+    [videoLabel setText:@"Video Flyer"];
+    [videoLabel setBackgroundColor:[UIColor clearColor]];
+    [videoLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:18]];
+    [videoLabel setTextColor:[UIColor grayColor]];
+    [videoLabel setTextAlignment:UITextAlignmentCenter];
     
     [layerScrollView setCanCancelContentTouches:NO];
 	layerScrollView.indicatorStyle = UIScrollViewIndicatorStyleBlack;
@@ -68,7 +76,7 @@ int selectedAddMoreLayerTab = -1;
     
 	
 	textBackgrnd = [[UIImageView alloc]initWithFrame:CGRectMake(0, 385, 320, 44)];
-	[self.view addSubview:textBackgrnd];
+	//[self.view addSubview:textBackgrnd];
 	textBackgrnd.alpha = ALPHA0;
     
     
@@ -100,7 +108,7 @@ int selectedAddMoreLayerTab = -1;
  
 	
     // Create color array
-	colorArray = 	[[NSArray  alloc] initWithObjects: [UIColor redColor], [UIColor blueColor], [UIColor greenColor], [UIColor blackColor], [UIColor colorWithRed:253.0/255.0 green:191.0/255.0 blue:38.0/224.0 alpha:1], [UIColor colorWithWhite:1.0f alpha:1.0f], [UIColor grayColor], [UIColor magentaColor], [UIColor yellowColor], [UIColor colorWithRed:163.0/255.0 green:25.0/255.0 blue:2.0/224.0 alpha:1], [UIColor colorWithRed:3.0/255.0 green:15.0/255.0 blue:41.0/224.0 alpha:1], [UIColor purpleColor], [UIColor colorWithRed:85.0/255.0 green:86.0/255.0 blue:12.0/224.0 alpha:1], [UIColor orangeColor], [UIColor colorWithRed:98.0/255.0 green:74.0/255.0 blue:9.0/224.0 alpha:1], [UIColor colorWithRed:80.0/255.0 green:7.0/255.0 blue:1.0/224.0 alpha:1], [UIColor colorWithRed:150.0/255.0 green:150.0/255.0 blue:97.0/224.0 alpha:1], [UIColor colorWithRed:111.0/255.0 green:168.0/255.0 blue:100.0/224.0 alpha:1], [UIColor cyanColor], [UIColor colorWithRed:17.0/255.0 green:69.0/255.0 blue:70.0/224.0 alpha:1], [UIColor colorWithRed:173.0/255.0 green:127.0/255.0 blue:251.0/224.0 alpha:1], nil];
+	colorArray = [[NSArray  alloc] initWithObjects: [UIColor redColor], [UIColor blueColor], [UIColor greenColor], [UIColor blackColor], [UIColor colorWithRed:253.0/255.0 green:191.0/255.0 blue:38.0/224.0 alpha:1], [UIColor colorWithWhite:1.0f alpha:1.0f], [UIColor grayColor], [UIColor magentaColor], [UIColor yellowColor], [UIColor colorWithRed:163.0/255.0 green:25.0/255.0 blue:2.0/224.0 alpha:1], [UIColor colorWithRed:3.0/255.0 green:15.0/255.0 blue:41.0/224.0 alpha:1], [UIColor purpleColor], [UIColor colorWithRed:85.0/255.0 green:86.0/255.0 blue:12.0/224.0 alpha:1], [UIColor orangeColor], [UIColor colorWithRed:98.0/255.0 green:74.0/255.0 blue:9.0/224.0 alpha:1], [UIColor colorWithRed:80.0/255.0 green:7.0/255.0 blue:1.0/224.0 alpha:1], [UIColor colorWithRed:150.0/255.0 green:150.0/255.0 blue:97.0/224.0 alpha:1], [UIColor colorWithRed:111.0/255.0 green:168.0/255.0 blue:100.0/224.0 alpha:1], [UIColor cyanColor], [UIColor colorWithRed:17.0/255.0 green:69.0/255.0 blue:70.0/224.0 alpha:1], [UIColor colorWithRed:173.0/255.0 green:127.0/255.0 blue:251.0/224.0 alpha:1], nil];
 	
     
     // Create border colors array
@@ -192,6 +200,7 @@ int selectedAddMoreLayerTab = -1;
     //all Labels Intialize
     //for Using in ContextView
     takeOrAddPhotoLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 5, 310, 43)];
+    videoLabel  = [[UILabel alloc] initWithFrame:CGRectMake(0, 5, 310, 43)];
     addMoreLayerOrSaveFlyerLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 5, 310, 63)];
     
 	templateArray = [[NSMutableArray alloc]init];
@@ -1684,6 +1693,7 @@ int selectedAddMoreLayerTab = -1;
 }
 
 
+#pragma mark Add Video
 /*
  * Here we Overload Open Camera for Video
  */
@@ -1701,12 +1711,17 @@ int selectedAddMoreLayerTab = -1;
         
         NSLog(@"%@",recvUrl);
         NSError *error = nil;
+        
+        [self.flyer setFlyerTypeVideo];
+
 
         // HERE WE MOVE SOURCE FILE INTO FLYER FOLDER
         NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
         NSString *destination = [NSString stringWithFormat:@"%@/Template/template.mov",currentpath];
+        [self.flyer setFlyerVideoUrl:@"Template/template.mov"];
         
         NSURL *movieURL = [NSURL fileURLWithPath:destination];
+
 
         //HERE WE MAKE SURE FILE ALREADY EXISTS THEN DELETE IT OTHERWISE IGNORE
         if ([[NSFileManager defaultManager] fileExistsAtPath:destination isDirectory:NULL]) {
@@ -1718,37 +1733,59 @@ int selectedAddMoreLayerTab = -1;
 
         //HERE WE INITIALIZE MOVIE PLAYER AND
         //PASS URL TO MOVIE PLAYER FOR PLAY FILE
-        MPMoviePlayerController *player =[[MPMoviePlayerController alloc] initWithContentURL:movieURL];
-        [player.view setFrame:self.flyimgView.bounds];
+        [self loadPlayerWithURL:movieURL];
         
-        [[NSNotificationCenter defaultCenter]
-         addObserver:self selector:@selector(movieFinishedCallback:)
-         name:MPMoviePlayerPlaybackDidFinishNotification
-         object:player];
-        
-        [self.flyimgView addSubview:player.view];
-        player.accessibilityElementsHidden = YES;
-        player.movieSourceType  = MPMovieSourceTypeFile;
-         player.controlStyle =  MPMovieControlStyleNone;
-        player.scalingMode = MPMovieScalingModeAspectFill;
-        player.backgroundView.backgroundColor = [UIColor whiteColor];
-        player.repeatMode = MPMovieRepeatModeOne;
-        
-        [player prepareToPlay];
-        if ([player isPreparedToPlay]) {
-            [player play];
-        }
-    }];
+      }];
     
     [self.navigationController pushViewController:nbuCamera animated:YES];
 }
 
-- (void) movieFinishedCallback:(NSNotification*) aNotification {
-    MPMoviePlayerController *player = [aNotification object];
+
+/*
+ * Here we Configure Player and Load File in Player
+ */
+-(void)loadPlayerWithURL :(NSURL *)movieURL {
+    
+    player =[[MPMoviePlayerController alloc] initWithContentURL:movieURL];
+    [player.view setFrame:self.playerView.bounds];
+    
     [[NSNotificationCenter defaultCenter]
-     removeObserver:self
+     addObserver:self selector:@selector(movieFinishedCallback:)
      name:MPMoviePlayerPlaybackDidFinishNotification
      object:player];
+    
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self selector:@selector(movieStateChangeCallback:)
+     name:MPMoviePlayerPlaybackStateDidChangeNotification
+     object:player];
+    
+    self.flyimgView.image = nil;
+    [self.playerView addSubview:player.view];
+    player.accessibilityElementsHidden = YES;
+    player.shouldAutoplay = NO;
+    player.fullscreen = NO;
+    player.movieSourceType  = MPMovieSourceTypeFile;
+    player.controlStyle =  MPMovieControlStyleNone;
+    player.scalingMode = MPMovieScalingModeAspectFill;
+    player.backgroundView.backgroundColor = [UIColor whiteColor];
+    
+    [player prepareToPlay];
+
+
+}
+
+#pragma mark  Movie Player Delegate
+
+- (void) movieStateChangeCallback:(NSNotification*) aNotification {
+       
+    if (player.playbackState == MPMoviePlaybackStatePaused || player.playbackState == MPMoviePlaybackStateStopped ) {
+        [self performSelectorOnMainThread:@selector(enableImageViewInteraction) withObject:nil waitUntilDone:NO ];
+    }
+    
+
+}
+
+- (void) movieFinishedCallback:(NSNotification*) aNotification {
 
 }
 
@@ -2181,6 +2218,8 @@ int selectedAddMoreLayerTab = -1;
 
 #pragma mark - Delegate for Flyerly ImageView
 
+
+
 /**
  * Frame changed for layer, let the model know.
  */
@@ -2211,6 +2250,8 @@ int selectedAddMoreLayerTab = -1;
     [self.flyimgView renderLayer:uid layerDictionary:[flyer getLayerFromMaster:uid]];
 }
 
+
+
 /**
  * Frame changed for layer, let the model know.
  */
@@ -2227,6 +2268,39 @@ int selectedAddMoreLayerTab = -1;
         // again then edit the text.
         [self callWrite];
     }
+}
+
+/**
+ * Add video Player and Load Video .
+ */
+- (void)addVideo :(NSString *)url {
+    
+    // HERE WE MOVE SOURCE FILE INTO FLYER FOLDER
+    NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
+    NSString *destination = [NSString stringWithFormat:@"%@/%@",currentpath,url];
+    
+    [self loadPlayerWithURL:[NSURL fileURLWithPath:destination]];
+
+}
+
+/**
+ * Disable User Interaction of ImageView for video Player.
+ */
+- (void)disableImageViewInteraction {
+    self.flyimgView.userInteractionEnabled = NO;
+    player.controlStyle = MPMovieControlStyleEmbedded;
+    [player play];
+
+}
+
+
+/**
+ * Enable User Interaction of ImageView.
+ */
+- (void)enableImageViewInteraction {
+    self.flyimgView.userInteractionEnabled = YES;
+    player.controlStyle = MPMovieControlStyleNone;
+    
 }
 
 #pragma mark - Undo Implementation
@@ -2586,10 +2660,8 @@ int selectedAddMoreLayerTab = -1;
 -(IBAction)setlibBackgroundTabAction:(id)sender{
     UIButton *selectedButton = (UIButton*)sender;
     
-    //Uns Selected State of All Buttons
+    //Un Selected State of Buttons
     [backtemplates setSelected:NO];
-    [cameraTakePhoto setSelected:NO];
-    [cameraRoll setSelected:NO];
     [flyerBorder setSelected:NO];
     
     
@@ -2615,16 +2687,17 @@ int selectedAddMoreLayerTab = -1;
     }
     else if(selectedButton == cameraTakePhoto)
     {
-        [cameraTakePhoto setSelected:YES];
+
         [self openCustomCamera];
     }
     else if(selectedButton == cameraRoll)
     {
-        [cameraRoll setSelected:YES];
         
         [self openCustomCamera:YES];
         
-        //[self loadCustomPhotoLibrary];
+        //Add ContextView
+        [self addScrollView:videoLabel];
+        
     }
     else if(selectedButton == flyerBorder)
     {

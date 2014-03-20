@@ -1035,6 +1035,37 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 }
 
 
+/*
+ * Here we Set Flyer Type to Video Flyer
+ */
+-(void)setFlyerTypeVideo {
+
+    NSMutableDictionary *templateDictionary = [self getLayerFromMaster:@"Template"];
+    
+    [templateDictionary setValue:@"video" forKey:@"FlyerType"];
+    
+    // Set to Master Dictionary
+    [masterLayers setValue:templateDictionary forKey:@"Template"];
+
+
+}
+
+/*
+ * Here we Set Flyer Video Path
+ */
+-(void)setFlyerVideoUrl :(NSString *)url {
+    
+    NSMutableDictionary *templateDictionary = [self getLayerFromMaster:@"Template"];
+    
+    [templateDictionary setValue:url forKey:@"VideoURL"];
+    
+    // Set to Master Dictionary
+    [masterLayers setValue:templateDictionary forKey:@"Template"];
+
+
+}
+
+
 #pragma mark  Social File Methods
 
 -(void)setFacebookStatus :(int)status {

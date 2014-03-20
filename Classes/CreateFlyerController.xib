@@ -31,6 +31,7 @@
                 <outlet property="libText" destination="8Ew-aX-Xah" id="Haw-gJ-FkB"/>
                 <outlet property="libraryContextView" destination="hm4-bV-Hep" id="yQz-pZ-s3b"/>
                 <outlet property="photoTabButton" destination="O6L-IG-J9j" id="ntS-Xx-t5P"/>
+                <outlet property="playerView" destination="Foo-mb-HJb" id="cbu-mw-Eh1"/>
                 <outlet property="sizeTabButton" destination="Ybf-LY-Z1e" id="8QX-O7-r0o"/>
                 <outlet property="view" destination="1" id="3"/>
                 <outlet property="widthTabButton" destination="IOq-dI-vvl" id="TYH-DW-B0O"/>
@@ -41,6 +42,12 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" id="Foo-mb-HJb">
+                    <rect key="frame" x="5" y="65" width="310" height="310"/>
+                    <autoresizingMask key="autoresizingMask"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="-64"/>
+                </view>
                 <imageView clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Xaq-YE-kc7" customClass="FlyerImageView">
                     <rect key="frame" x="5" y="65" width="310" height="310"/>
                     <autoresizingMask key="autoresizingMask"/>

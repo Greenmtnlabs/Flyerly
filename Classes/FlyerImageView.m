@@ -18,6 +18,9 @@
 {
     [super awakeFromNib];
     
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editLayer:)];
+    [self addGestureRecognizer:tapGesture];
+    
     //Set Master Layers
     layers = [[NSMutableDictionary alloc] init];
 
@@ -52,7 +55,16 @@
 
     //check for Flyer Background
     if ( [uid isEqualToString:@"Template"] ) {
-        [self setTemplate:[layDic valueForKey:@"image"]];
+        
+        NSString *flyerTyp = [layDic objectForKey:@"FlyerType"];
+        if (flyerTyp != nil && [flyerTyp isEqualToString:@"video"]) {
+            
+            [self.delegate addVideo:[layDic objectForKey:@"VideoURL"]];
+        
+        }else {
+        
+            [self setTemplate:[layDic valueForKey:@"image"]];
+        }
 
         //Set Flyer Border
         if ([layDic objectForKey:@"bordercolor"]) {
@@ -380,6 +392,8 @@
     if ( keys.count > 0 ) {
         NSString *key = [keys objectAtIndex:0];
         [self.delegate sendLayerToEditMode:key];
+    }else {
+        [self.delegate disableImageViewInteraction] ;
     }
 }
 

@@ -32,12 +32,14 @@
 
 
 @class FlyerlySingleton,CameraViewController,Flyer,FlyerImageView;
-@interface CreateFlyerController :ParentViewController<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, FlyerImageViewDelegate,MPMediaPlayback >
+@interface CreateFlyerController :ParentViewController<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, FlyerImageViewDelegate >
 {
    
     FlyerlySingleton *globle;
     UILabel *addMoreLayerOrSaveFlyerLabel;
     UILabel *takeOrAddPhotoLabel;
+    UILabel *videoLabel;
+
     UIScrollView *layerScrollView;
     NSInteger imgPickerFlag;
 		
@@ -89,6 +91,7 @@
 @property(nonatomic, strong) IBOutlet UIView *libText;
 @property(nonatomic, strong) IBOutlet UIView *libPhoto;
 @property(nonatomic, strong) IBOutlet UIView *libEmpty;
+@property(nonatomic, strong) IBOutlet UIView *playerView;
 
 
 // These are LibFlyer
@@ -116,6 +119,7 @@
 @property (nonatomic,strong)IBOutlet UIButton *photoTabButton;
 @property (nonatomic,strong)IBOutlet UIButton *widthTabButton;
 @property (nonatomic,strong)IBOutlet UIButton *heightTabButton;
+@property (nonatomic,strong)MPMoviePlayerController *player;
 
 @property (nonatomic,strong) Flyer *flyer;
 @property(strong,nonatomic) NSString *currentLayer;
