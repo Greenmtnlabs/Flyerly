@@ -325,7 +325,7 @@ int selectedAddMoreLayerTab = -1;
     if ([flyer isVideoFlyer]) {
         
         //Here we take Image From Video Player
-        [flyer saveFlyer:videolastImage];
+        [flyer saveFlyer:[self getImageForVideo]];
         
     }else {
         
@@ -348,6 +348,7 @@ int selectedAddMoreLayerTab = -1;
     [Flurry logEvent:@"Saved Flyer"];
     [self.navigationController popViewControllerAnimated:YES];
 }
+
 
 
 #pragma mark  Add Content In ScrollViews
@@ -1719,14 +1720,10 @@ int selectedAddMoreLayerTab = -1;
  */
 -(void)openCustomCamera :(BOOL *)forVideo{
     
-    CameraViewController *nbuCamera = [[CameraViewController alloc]initWithNibName:@"CameraViewController" bundle:nil];
+    CameraViewController *nbuCamera = [[CameraViewController alloc]initWithNibName:@"VideoViewController" bundle:nil];
     
     nbuCamera.desiredImageSize = CGSizeMake( 300,  300 );
-    
-    [nbuCamera.shootButton setImage:[UIImage imageNamed:@"star"] forState:UIControlStateNormal];
-
-    nbuCamera.forVideo = YES;
-    
+        
     [nbuCamera setOnVideoFinished:^(NSURL *recvUrl) {
         
         NSLog(@"%@",recvUrl);
@@ -2142,6 +2139,8 @@ int selectedAddMoreLayerTab = -1;
     return snapshotImage;
 }
 
+
+
 /*
  * This resets the flyer image view by removing and readding all its subviews
  */
@@ -2167,6 +2166,29 @@ int selectedAddMoreLayerTab = -1;
     
 }
 
+/*
+ * HERE WE ADD VIDEO ICON WITH VIDEO IMAGE
+ */
+-(UIImage *)getImageForVideo
+{
+    
+    UIImage *bottomImage = videolastImage;
+    UIImage *image = [UIImage imageNamed:@"playIcon"];
+    
+    CGSize newSize = CGSizeMake(300, 300);
+    UIGraphicsBeginImageContext( newSize );
+    
+    // Use existing opacity as is
+    [bottomImage drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+    
+    // Apply supplied opacity
+    [image drawInRect:CGRectMake(90,90,120,120) blendMode:kCGBlendModeNormal alpha:1];
+    
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    return newImage;
+}
 
 #pragma mark Flyer Modified
 

@@ -25,11 +25,13 @@
                     <rect key="frame" x="120" y="369" width="80" height="80"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="TakePhoto"/>
-                    <state key="normal" image="camera_button.png">
+                    <state key="normal" image="recording_button.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <state key="selected" image="stop_button.png"/>
                     <connections>
-                        <action selector="takePicture:" destination="4" eventType="touchUpInside" id="gos-va-KjZ"/>
+                        <action selector="startRecording:" destination="-1" eventType="touchUpInside" id="U5J-91-Mf9"/>
+                        <action selector="startStopRecording:" destination="4" eventType="touchUpInside" id="DKh-AF-cHY"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="r5v-4E-eSi">
@@ -67,10 +69,6 @@
                             <rect key="frame" x="247" y="288" width="48" height="26"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         </imageView>
-                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera_flash.png" id="iSe-CT-fdN">
-                            <rect key="frame" x="149" y="288" width="20" height="27"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera_grid.png" id="R5D-kF-rxb">
                             <rect key="frame" x="38" y="288" width="26" height="26"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -91,16 +89,6 @@
                                 <action selector="toggleCamera:" destination="4" eventType="touchUpInside" id="43"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="KHn-mP-8i7">
-                            <rect key="frame" x="109" y="286" width="100" height="34"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
-                            <state key="normal">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="toggleFlashMode:" destination="4" eventType="touchUpInside" id="bzn-pK-Te3"/>
-                            </connections>
-                        </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="dfc-gL-ygN">
                             <rect key="frame" x="5" y="286" width="95" height="32"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
@@ -116,8 +104,7 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <connections>
-                        <outlet property="flashButton" destination="KHn-mP-8i7" id="Abh-Ap-Ru3"/>
-                        <outlet property="shootButton" destination="l4Y-bJ-bF3" id="cm8-NO-iTN"/>
+                        <outlet property="shootButton" destination="l4Y-bJ-bF3" id="RfU-yC-rdN"/>
                         <outlet property="toggleCameraButton" destination="41" id="42"/>
                     </connections>
                 </view>
@@ -131,12 +118,12 @@
     <resources>
         <image name="Camerabottom.png" width="640" height="119"/>
         <image name="camera_bottombg.png" width="640" height="292"/>
-        <image name="camera_button.png" width="160" height="160"/>
         <image name="camera_change.png" width="89" height="46"/>
-        <image name="camera_flash.png" width="20" height="31"/>
         <image name="camera_grid.png" width="46" height="45"/>
         <image name="cameraline.png" width="26" height="844"/>
         <image name="galleryicon.png" width="94" height="90"/>
         <image name="new_grid_line.png" width="320" height="422"/>
+        <image name="recording_button.png" width="160" height="160"/>
+        <image name="stop_button.png" width="160" height="160"/>
     </resources>
 </document>

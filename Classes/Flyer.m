@@ -1060,7 +1060,17 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     
     // Set to Master Dictionary
     [masterLayers setValue:templateDictionary forKey:@"Template"];
-
+    
+    //Checking if Video Exists then Delete it
+    NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
+    NSString *videoPath = [NSString stringWithFormat:@"%@/Template/template.mov",currentpath];
+    NSError *error = nil;
+    
+    if ([[NSFileManager defaultManager] fileExistsAtPath:videoPath isDirectory:NULL]) {
+        //Delete File
+        [[NSFileManager defaultManager] removeItemAtPath:videoPath error:&error];
+    
+    }
 }
 
 

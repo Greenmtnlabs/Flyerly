@@ -20,13 +20,11 @@
 
 // Outlets
 @property (assign, nonatomic) IBOutlet UIImageView *cameraLines;
-@property (assign, nonatomic) IBOutlet UIButton *shootButton;
-@property (nonatomic, assign) BOOL forVideo;
 
 // Actions
 - (IBAction)setCameraLine:(id)sender;
 - (IBAction)moveToGallery:(id)sender;
-- (IBAction)shoot:(id)sender;
+- (IBAction)startRecording:(id)sender;
 
 @end
 

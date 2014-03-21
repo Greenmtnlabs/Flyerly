@@ -12,7 +12,7 @@
 @implementation CameraViewController
 @synthesize cameraLines;
 @synthesize desiredImageSize;
-@synthesize onImageTaken,onVideoFinished,forVideo,shootButton;
+@synthesize onImageTaken,onVideoFinished;
 
 /**
  * Setup the controller.
@@ -80,18 +80,6 @@
 }
 
 
-/*
- * Here we Handle Touch On Shoot Camera or Video
- */
-- (IBAction)shoot:(id)sender {
-
-    if (forVideo) {
-        [self.cameraView startStopRecording:sender];
-    }else {
-        [self.cameraView takePicture:sender];
-    }
-
-}
 
 /**
  * Crop image using NBUKit
@@ -149,5 +137,11 @@
     [[self navigationController] setViewControllers:viewControllers animated:YES];
 }
 
+
+- (IBAction)startRecording:(id)sender {
+    UIButton *rec = sender;
+    [rec setSelected:YES];
+
+}
 @end
 
