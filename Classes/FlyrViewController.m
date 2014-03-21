@@ -403,6 +403,7 @@
         
     [self showLoadingIndicator];
     sheetAlreadyOpen =YES;
+    
     //These are over Products on App Store
     NSSet *products = [NSSet setWithArray:@[@"com.flyerly.AllDesignBundle",@"com.flyerly.UnlockSavedFlyers"]];
     

@@ -319,15 +319,25 @@ int selectedAddMoreLayerTab = -1;
     [shareviewcontroller.titleView resignFirstResponder];
     [shareviewcontroller.descriptionView resignFirstResponder];
     
-    //Here we take Snap shot of Flyer
-    UIGraphicsBeginImageContextWithOptions(self.flyimgView.bounds.size, YES, 0.0f);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    [self.flyimgView.layer renderInContext:context];
-    UIImage *snapshotImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
+
     
     //Save OnBack
-    [flyer saveFlyer:snapshotImage];
+    if ([flyer isVideoFlyer]) {
+        
+        //Here we take Image From Video Player
+        [flyer saveFlyer:videolastImage];
+        
+    }else {
+        
+        //Here we take Snap shot of Flyer
+        UIGraphicsBeginImageContextWithOptions(self.flyimgView.bounds.size, YES, 0.0f);
+        CGContextRef context = UIGraphicsGetCurrentContext();
+        [self.flyimgView.layer renderInContext:context];
+        UIImage *snapshotImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        
+        [flyer saveFlyer:snapshotImage];
+    }
     
     
     if (![[flyer getFlyerURL] isEqualToString:@""]) {
@@ -1379,6 +1389,9 @@ int selectedAddMoreLayerTab = -1;
 
             if (lstTag != view.tag || view.tag == 0) {
                 
+                //Here we Set Flyer Type
+                [flyer setFlyerTypeImage];
+                
                 //Getting Image Path
                 NSString *imgPath = [self getImagePathByTag:[NSString stringWithFormat:@"Template%d",view.tag]];
             
@@ -1387,6 +1400,9 @@ int selectedAddMoreLayerTab = -1;
                 
                 //Set Image Tag
                 [flyer setImageTag:@"Template" Tag:[NSString stringWithFormat:@"%d",view.tag]];
+                
+
+
 
             }
             
@@ -1661,6 +1677,7 @@ int selectedAddMoreLayerTab = -1;
         
         dispatch_async( dispatch_get_main_queue(), ^{
             // Do any UI operation here (render layer).
+
             
             if (weakSelf.imgPickerFlag == 2) {
                 
@@ -1677,6 +1694,9 @@ int selectedAddMoreLayerTab = -1;
                 
                 weakSelf.imgPickerFlag = 1;
             }else{
+                
+                //Here we Set Flyer Type
+                [weakSelf.flyer setFlyerTypeImage];
                 
                 //Create Copy of Image
                 [weakSelf copyImageToTemplate:img];
@@ -1731,9 +1751,8 @@ int selectedAddMoreLayerTab = -1;
         //HERE WE MOVE FILE INTO FLYER FOLDER
         [[NSFileManager defaultManager] moveItemAtURL:recvUrl toURL:movieURL error:&error];
 
-        //HERE WE INITIALIZE MOVIE PLAYER AND
-        //PASS URL TO MOVIE PLAYER FOR PLAY FILE
-        [self loadPlayerWithURL:movieURL];
+        //HERE WE RENDER MOVIE PLAYER
+        [self.flyimgView renderLayer:@"Template" layerDictionary:[self.flyer getLayerFromMaster:@"Template"]];
         
       }];
     
@@ -1759,6 +1778,8 @@ int selectedAddMoreLayerTab = -1;
      name:MPMoviePlayerPlaybackStateDidChangeNotification
      object:player];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(MPMoviePlayerThumbnailImageRequestDidFinishNotification::) name:MPMoviePlayerThumbnailImageRequestDidFinishNotification object:player];
+    
     self.flyimgView.image = nil;
     [self.playerView addSubview:player.view];
     player.accessibilityElementsHidden = YES;
@@ -1770,14 +1791,31 @@ int selectedAddMoreLayerTab = -1;
     player.backgroundView.backgroundColor = [UIColor whiteColor];
     
     [player prepareToPlay];
+    
+    videolastImage = [player thumbnailImageAtTime:player.duration /2
+                                       timeOption:MPMovieTimeOptionNearestKeyFrame];
 
 
 }
 
 #pragma mark  Movie Player Delegate
 
+/*
+ * Here we Get One Thumbnail which we use for Main Screen
+ */
+-(void)MPMoviePlayerThumbnailImageRequestDidFinishNotification: (NSDictionary*)info{
+    
+    UIImage *image = [info objectForKey:MPMoviePlayerThumbnailImageKey];
+}
+
+
+/*
+ * Here we Get Player Button Press Info
+ */
 - (void) movieStateChangeCallback:(NSNotification*) aNotification {
-       
+    
+    
+    //User Press Pause or Stop we Disable Player Access and Enable Flyer for Others Layers
     if (player.playbackState == MPMoviePlaybackStatePaused || player.playbackState == MPMoviePlaybackStateStopped ) {
         [self performSelectorOnMainThread:@selector(enableImageViewInteraction) withObject:nil waitUntilDone:NO ];
     }
@@ -1786,6 +1824,9 @@ int selectedAddMoreLayerTab = -1;
 }
 
 - (void) movieFinishedCallback:(NSNotification*) aNotification {
+    
+
+
 
 }
 
@@ -2432,7 +2473,7 @@ int selectedAddMoreLayerTab = -1;
     [self.flyimgView layerStoppedEditing:currentLayer];
     
     //Here we take Snap shot of Flyer
-    UIImage *snapshotImage = [self getFlyerSnapShot];
+    UIImage *snapshotImage =  [self getFlyerSnapShot];
     
     //Here we Save Flyer
     [flyer saveFlyer:snapshotImage];

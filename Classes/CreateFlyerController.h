@@ -65,6 +65,7 @@
 
     ShareViewController *shareviewcontroller;
     UILabel *titleLabel;
+    UIImage *videolastImage;
     
 }
 

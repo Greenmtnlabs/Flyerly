@@ -9,7 +9,7 @@
 #import "FlyerImageView.h"
 
 @implementation FlyerImageView
-@synthesize layers;
+@synthesize layers,flyerTapGesture;
 
 /**
  * Image initialization.
@@ -18,8 +18,6 @@
 {
     [super awakeFromNib];
     
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editLayer:)];
-    [self addGestureRecognizer:tapGesture];
     
     //Set Master Layers
     layers = [[NSMutableDictionary alloc] init];
@@ -58,11 +56,14 @@
         
         NSString *flyerTyp = [layDic objectForKey:@"FlyerType"];
         if (flyerTyp != nil && [flyerTyp isEqualToString:@"video"]) {
+
+            flyerTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editLayer:)];
+            [self addGestureRecognizer:flyerTapGesture];
             
             [self.delegate addVideo:[layDic objectForKey:@"VideoURL"]];
         
         }else {
-        
+            
             [self setTemplate:[layDic valueForKey:@"image"]];
         }
 
@@ -224,6 +225,8 @@
  */
 -(void)setTemplate :(NSString *)imgPath{
     
+    [self removeGestureRecognizer:flyerTapGesture];
+    flyerTapGesture = nil;
    
     NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
     

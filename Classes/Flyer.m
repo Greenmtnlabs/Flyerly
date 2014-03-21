@@ -1051,6 +1051,20 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 }
 
 /*
+ * Here we Set Flyer Type to Image Flyer
+ */
+-(void)setFlyerTypeImage {
+    NSMutableDictionary *templateDictionary = [self getLayerFromMaster:@"Template"];
+    
+    [templateDictionary setValue:@"image" forKey:@"FlyerType"];
+    
+    // Set to Master Dictionary
+    [masterLayers setValue:templateDictionary forKey:@"Template"];
+
+}
+
+
+/*
  * Here we Set Flyer Video Path
  */
 -(void)setFlyerVideoUrl :(NSString *)url {
@@ -1063,6 +1077,21 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     [masterLayers setValue:templateDictionary forKey:@"Template"];
 
 
+}
+
+/* Checking here Video Flyer or Image Flyer
+ *
+ */
+-(BOOL)isVideoFlyer {
+    
+    NSMutableDictionary *templateDictionary = [self getLayerFromMaster:@"Template"];
+    
+    NSString *typ = [templateDictionary valueForKey:@"FlyerType"];
+    
+    if ([typ isEqualToString:@"video"]) {
+        return YES;
+    }
+    return NO;
 }
 
 
