@@ -58,6 +58,7 @@
         if (flyerTyp != nil && [flyerTyp isEqualToString:@"video"]) {
 
             flyerTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editLayer:)];
+            flyerTapGesture.delegate = self;
             [self addGestureRecognizer:flyerTapGesture];
             
             [self.delegate addVideo:[layDic objectForKey:@"VideoURL"]];
@@ -380,7 +381,10 @@
 }
 
 #pragma mark - Tap to edit functionality
-
+- (BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    [self.delegate disableImageViewInteraction] ;
+    return FALSE;
+}
 /**
  * Edit view when tapped.
  */
@@ -395,8 +399,6 @@
     if ( keys.count > 0 ) {
         NSString *key = [keys objectAtIndex:0];
         [self.delegate sendLayerToEditMode:key];
-    }else {
-        [self.delegate disableImageViewInteraction] ;
     }
 }
 

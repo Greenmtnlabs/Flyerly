@@ -2353,7 +2353,7 @@ int selectedAddMoreLayerTab = -1;
 - (void)disableImageViewInteraction {
     self.flyimgView.userInteractionEnabled = NO;
     player.controlStyle = MPMovieControlStyleEmbedded;
-    [player play];
+    //[player play];
 
 }
 

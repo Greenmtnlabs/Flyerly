@@ -20,7 +20,7 @@
 
 @end
 
-@interface FlyerImageView : UIImageView{
+@interface FlyerImageView : UIImageView <UIGestureRecognizerDelegate>{
 
     
    
