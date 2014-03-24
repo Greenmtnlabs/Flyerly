@@ -11,7 +11,7 @@
 
 @implementation CameraViewController
 @synthesize cameraLines;
-@synthesize desiredImageSize;
+@synthesize desiredImageSize,progressView;
 @synthesize onImageTaken,onVideoFinished;
 
 /**
@@ -58,6 +58,7 @@
     
     // Configure for video
     // self.cameraView.targetMovieFolder = [UIApplication sharedApplication];
+    
     self.cameraView.captureMovieResultBlock = ^(NSURL *movieUrl,NSError * error) {
         if (!error) {
             
@@ -141,7 +142,33 @@
 - (IBAction)startRecording:(id)sender {
     UIButton *rec = sender;
     [rec setSelected:YES];
+    [self showWithProgress:nil];
 
 }
+
+
+static float progress = 0.0f;
+
+-(IBAction)showWithProgress:(id)sender {
+    progress = 0.0f;
+    progressView.progress = progress;
+    [self performSelector:@selector(increaseProgress) withObject:nil afterDelay:0.3];
+}
+
+-(void)increaseProgress {
+    progress+=0.01f;
+    progressView.progress = progress;
+    if(progress < 1.0)
+        [self performSelector:@selector(increaseProgress) withObject:nil afterDelay:0.3];
+    else
+        [self performSelector:@selector(dismiss) withObject:nil afterDelay:0.0];
+}
+
+-(void)dismiss {
+    
+    [self.cameraView startStopRecording:self.cameraView.shootButton];
+   // [self progressCompleted];
+}
+
 @end
 

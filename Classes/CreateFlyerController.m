@@ -320,25 +320,26 @@ int selectedAddMoreLayerTab = -1;
     [shareviewcontroller.descriptionView resignFirstResponder];
     
 
+    UIImage *snapshotImage;
     
     //Save OnBack
     if ([flyer isVideoFlyer]) {
         
         //Here we take Image From Video Player
-        [flyer saveFlyer:[self getImageForVideo]];
+        snapshotImage = [self getImageForVideo];
         
     }else {
         
-        //Here we take Snap shot of Flyer
-        UIGraphicsBeginImageContextWithOptions(self.flyimgView.bounds.size, YES, 0.0f);
-        CGContextRef context = UIGraphicsGetCurrentContext();
-        [self.flyimgView.layer renderInContext:context];
-        UIImage *snapshotImage = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
+         //Here we take Snap shot of Flyer
+      snapshotImage =  [self getFlyerSnapShot];
+
+
         
-        [flyer saveFlyer:snapshotImage];
     }
     
+    // Here we Save Flyer Info
+    [flyer saveFlyer:snapshotImage];
+
     
     if (![[flyer getFlyerURL] isEqualToString:@""]) {
         
@@ -2494,8 +2495,20 @@ int selectedAddMoreLayerTab = -1;
     
     [self.flyimgView layerStoppedEditing:currentLayer];
     
-    //Here we take Snap shot of Flyer
-    UIImage *snapshotImage =  [self getFlyerSnapShot];
+    UIImage *snapshotImage;
+    //Save OnBack
+    if ([flyer isVideoFlyer]) {
+        
+        //Here we take Image From Video Player
+        snapshotImage =  [self getImageForVideo];
+        
+    }else {
+        
+        //Here we take Snap shot of Flyer
+        snapshotImage =  [self getFlyerSnapShot];
+        
+
+    }
     
     //Here we Save Flyer
     [flyer saveFlyer:snapshotImage];

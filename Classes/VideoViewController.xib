@@ -9,6 +9,7 @@
             <connections>
                 <outlet property="cameraLines" destination="R24-LX-G4Q" id="Hod-UC-CpV"/>
                 <outlet property="cameraView" destination="4" id="gI7-IU-C9E"/>
+                <outlet property="progressView" destination="bDo-1k-GQ5" id="Kzb-uk-uja"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>
@@ -18,7 +19,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="camera_bottombg.png" id="EkM-Q2-85r">
-                    <rect key="frame" x="0.0" y="345" width="320" height="123"/>
+                    <rect key="frame" x="0.0" y="346" width="320" height="122"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinY="YES" heightSizable="YES"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="l4Y-bJ-bF3">
@@ -101,6 +102,10 @@
                                 <action selector="setCameraLine:" destination="-1" eventType="touchUpInside" id="D3z-CA-r5X"/>
                             </connections>
                         </button>
+                        <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" id="bDo-1k-GQ5">
+                            <rect key="frame" x="0.0" y="324" width="320" height="3"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+                        </progressView>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <connections>

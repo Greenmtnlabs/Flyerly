@@ -20,6 +20,7 @@
 
 // Outlets
 @property (assign, nonatomic) IBOutlet UIImageView *cameraLines;
+@property (assign, nonatomic) IBOutlet UIProgressView *progressView;
 
 // Actions
 - (IBAction)setCameraLine:(id)sender;
