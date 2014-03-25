@@ -12,7 +12,7 @@
 @implementation CameraViewController
 @synthesize cameraLines;
 @synthesize desiredImageSize,progressView;
-@synthesize onImageTaken,onVideoFinished;
+@synthesize onImageTaken,onVideoFinished,mode,videoAllow;
 
 /**
  * Setup the controller.
@@ -35,6 +35,12 @@
     [self.navigationItem setLeftBarButtonItem:leftBarButton];
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"Camerabottom"] forBarMetrics:UIBarMetricsDefault];
+    
+    if ([self.videoAllow isEqualToString:@"YES"]) {
+        mode.hidden = NO;
+    }else {
+        mode.hidden = YES;
+    }
     
     self.cameraView.targetResolution = CGSizeMake(640.0, 640.0); // The minimum resolution we want
     self.cameraView.keepFrontCameraPicturesMirrored = YES;
@@ -130,6 +136,7 @@
     LibraryViewController *nbugallery = [[LibraryViewController alloc]initWithNibName:@"LibraryViewController" bundle:nil];
     nbugallery.desiredImageSize = desiredImageSize;
     nbugallery.onImageTaken = onImageTaken;
+    nbugallery.onVideoFinished = onVideoFinished;
     
     // Pop the current view, and push the crop view.
     NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[[self navigationController] viewControllers]];
@@ -139,11 +146,71 @@
 }
 
 
+
+/*
+ * Here we Manage Camera Mode for Image or Video
+ */
+- (IBAction)setCameraMode:(id)sender {
+
+    UIButton *shoot = (UIButton *)  self.cameraView.shootButton;
+    UIButton *flash = (UIButton *)  self.cameraView.flashButton;
+
+
+    if ([mode isSelected] == YES) {
+
+        //Enable Camera Mode
+        [mode setSelected:NO];
+        [shoot setImage:[UIImage imageNamed:@"camera_button"] forState:UIControlStateNormal];
+        [shoot setImage:[UIImage imageNamed:@"camera_button"] forState:UIControlStateSelected];
+        [flash setHidden:NO];
+        progressView.hidden = YES;
+        
+    }else {
+        
+        //Enable Video Mode
+        [mode setSelected:YES];
+        [shoot setImage:[UIImage imageNamed:@"recording_button"] forState:UIControlStateNormal];
+        [shoot setImage:[UIImage imageNamed:@"stop_button"] forState:UIControlStateSelected];
+        [flash setHidden:YES];
+        progressView.hidden = NO;
+        
+    }
+}
+
+/*
+ *Here we Set Action Perform of Mode
+ */
+- (IBAction)setShootAction:(id)sender {
+    
+    UIButton *shoot = (UIButton *)  self.cameraView.shootButton;
+    
+    if ([mode isSelected] == YES) {
+        
+        //Action for Video Mode
+        [shoot setSelected:YES];
+        [self.cameraView startStopRecording:sender];
+        [self startRecording:sender];
+
+
+    } else {
+        
+        //Action for Camera Mode
+        [shoot setSelected:NO];
+        [self.cameraView takePicture:sender];
+    
+    }
+
+
+}
+
+
+#pragma mark Progress Bar
+
 - (IBAction)startRecording:(id)sender {
     UIButton *rec = sender;
     [rec setSelected:YES];
     [self showWithProgress:nil];
-
+    
 }
 
 
@@ -167,8 +234,9 @@ static float progress = 0.0f;
 -(void)dismiss {
     
     [self.cameraView startStopRecording:self.cameraView.shootButton];
-   // [self progressCompleted];
+    // [self progressCompleted];
 }
+
 
 @end
 

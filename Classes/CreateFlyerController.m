@@ -1652,6 +1652,14 @@ int selectedAddMoreLayerTab = -1;
         });
     }];
     
+    
+    [nbuGallary setOnVideoFinished:^(NSURL *recvUrl) {
+        
+        NSLog(@"%@",recvUrl);
+        NSError *error = nil;
+    }];
+    
+    
     [self.navigationController pushViewController:nbuGallary animated:YES];
     [Flurry logEvent:@"Custom Background"];
 }
@@ -1663,6 +1671,7 @@ int selectedAddMoreLayerTab = -1;
 -(void)openCustomCamera{
 
     CameraViewController *nbuCamera = [[CameraViewController alloc]initWithNibName:@"CameraViewController" bundle:nil];
+    
     
     if ( imgPickerFlag == 2 ) {
         NSDictionary *dict = [flyer getLayerFromMaster:currentLayer];
@@ -1721,8 +1730,9 @@ int selectedAddMoreLayerTab = -1;
  */
 -(void)openCustomCamera :(BOOL *)forVideo{
     
-    CameraViewController *nbuCamera = [[CameraViewController alloc]initWithNibName:@"VideoViewController" bundle:nil];
+    CameraViewController *nbuCamera = [[CameraViewController alloc]initWithNibName:@"CameraViewController" bundle:nil];
     
+    nbuCamera.videoAllow = @"YES";
     nbuCamera.desiredImageSize = CGSizeMake( 300,  300 );
         
     [nbuCamera setOnVideoFinished:^(NSURL *recvUrl) {
@@ -2764,12 +2774,12 @@ int selectedAddMoreLayerTab = -1;
     else if(selectedButton == cameraTakePhoto)
     {
 
-        [self openCustomCamera];
+        [self openCustomCamera:YES];
     }
     else if(selectedButton == cameraRoll)
     {
         
-        [self openCustomCamera:YES];
+        [self loadCustomPhotoLibrary];
         
         //Add ContextView
         [self addScrollView:videoLabel];

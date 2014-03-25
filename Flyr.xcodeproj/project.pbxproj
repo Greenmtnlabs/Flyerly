@@ -541,6 +541,7 @@
 		20D7476C17BE993800966BA6 /* Zpassword_box.png in Resources */ = {isa = PBXBuildFile; fileRef = 20D7476A17BE993700966BA6 /* Zpassword_box.png */; };
 		20D7476D17BE993800966BA6 /* Zpassword_box@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20D7476B17BE993700966BA6 /* Zpassword_box@2x.png */; };
 		20E3010A17F1749E006A1DE0 /* checkDouble.png in Resources */ = {isa = PBXBuildFile; fileRef = 20E3010817F1749E006A1DE0 /* checkDouble.png */; };
+		20E4715B18E05AEA00F0A8EC /* 07_width.png in Resources */ = {isa = PBXBuildFile; fileRef = 20E4715A18E05AEA00F0A8EC /* 07_width.png */; };
 		20EB11FF18DC5B4000F6A07F /* VideoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20EB11FE18DC5B4000F6A07F /* VideoViewController.xib */; };
 		20EB120118DC792800F6A07F /* playIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 20EB120018DC792800F6A07F /* playIcon.png */; };
 		20EB120418DC7AC900F6A07F /* recording_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 20EB120218DC7AC900F6A07F /* recording_button.png */; };
@@ -1576,6 +1577,7 @@
 		20D7476A17BE993700966BA6 /* Zpassword_box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Zpassword_box.png; sourceTree = "<group>"; };
 		20D7476B17BE993700966BA6 /* Zpassword_box@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Zpassword_box@2x.png"; sourceTree = "<group>"; };
 		20E3010817F1749E006A1DE0 /* checkDouble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkDouble.png; sourceTree = "<group>"; };
+		20E4715A18E05AEA00F0A8EC /* 07_width.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 07_width.png; sourceTree = "<group>"; };
 		20EB11FE18DC5B4000F6A07F /* VideoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoViewController.xib; sourceTree = "<group>"; };
 		20EB120018DC792800F6A07F /* playIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playIcon.png; sourceTree = "<group>"; };
 		20EB120218DC7AC900F6A07F /* recording_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = recording_button.png; sourceTree = "<group>"; };
@@ -2114,6 +2116,7 @@
 		0DF3A361108DF47400D6C887 /* ImageLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				20E4715A18E05AEA00F0A8EC /* 07_width.png */,
 				20EB120218DC7AC900F6A07F /* recording_button.png */,
 				20EB120318DC7AC900F6A07F /* stop_button.png */,
 				20EB120018DC792800F6A07F /* playIcon.png */,
@@ -3861,6 +3864,7 @@
 				65B3F191172A836400BEE7A4 /* outline_button_selected@2x.png in Resources */,
 				65B3F192172A836400BEE7A4 /* size_button_selected.png in Resources */,
 				65B3F193172A836400BEE7A4 /* size_button_selected@2x.png in Resources */,
+				20E4715B18E05AEA00F0A8EC /* 07_width.png in Resources */,
 				65B3F1A9172AB2F500BEE7A4 /* camera_bottombg.png in Resources */,
 				65B3F1AD172AB2F500BEE7A4 /* camera_button.png in Resources */,
 				65B3F1AF172AB2F500BEE7A4 /* camera_cancel.png in Resources */,

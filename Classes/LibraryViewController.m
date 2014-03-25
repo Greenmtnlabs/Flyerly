@@ -53,6 +53,7 @@
     // Pass the relevant properties
     asstController.desiredImageSize = self.desiredImageSize;
     asstController.onImageTaken = self.onImageTaken;
+    asstController.onVideoFinished = self.onVideoFinished;
     
     // Navigation buttons
     // BackButton

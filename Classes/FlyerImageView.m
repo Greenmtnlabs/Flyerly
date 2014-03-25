@@ -381,10 +381,7 @@
 }
 
 #pragma mark - Tap to edit functionality
-- (BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
-    [self.delegate disableImageViewInteraction] ;
-    return FALSE;
-}
+
 /**
  * Edit view when tapped.
  */
@@ -399,6 +396,8 @@
     if ( keys.count > 0 ) {
         NSString *key = [keys objectAtIndex:0];
         [self.delegate sendLayerToEditMode:key];
+    }else {
+        [self.delegate disableImageViewInteraction];
     }
 }
 

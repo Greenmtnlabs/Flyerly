@@ -9,6 +9,8 @@
             <connections>
                 <outlet property="cameraLines" destination="R24-LX-G4Q" id="Hod-UC-CpV"/>
                 <outlet property="cameraView" destination="4" id="gI7-IU-C9E"/>
+                <outlet property="mode" destination="KYJ-dZ-Tmw" id="sVa-wQ-71M"/>
+                <outlet property="progressView" destination="bur-b4-qQg" id="3Kc-BN-TPM"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>
@@ -29,7 +31,7 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="takePicture:" destination="4" eventType="touchUpInside" id="gos-va-KjZ"/>
+                        <action selector="setShootAction:" destination="-1" eventType="touchUpInside" id="EBd-wo-mdh"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="r5v-4E-eSi">
@@ -41,6 +43,17 @@
                     </state>
                     <connections>
                         <action selector="moveToGallery:" destination="-1" eventType="touchUpInside" id="cvx-l5-6Fa"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="KYJ-dZ-Tmw">
+                    <rect key="frame" x="225" y="376" width="70" height="48"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <state key="normal" title="Camera">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="selected" title="Video"/>
+                    <connections>
+                        <action selector="setCameraMode:" destination="-1" eventType="touchUpInside" id="42X-JE-o1p"/>
                     </connections>
                 </button>
                 <view clipsSubviews="YES" contentMode="scaleToFill" id="4" customClass="NBUCameraView">
@@ -65,10 +78,6 @@
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera_change.png" id="zNW-9L-HQ2">
                             <rect key="frame" x="247" y="288" width="48" height="26"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        </imageView>
-                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera_flash.png" id="iSe-CT-fdN">
-                            <rect key="frame" x="149" y="288" width="20" height="27"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera_grid.png" id="R5D-kF-rxb">
@@ -113,6 +122,10 @@
                                 <action selector="setCameraLine:" destination="-1" eventType="touchUpInside" id="D3z-CA-r5X"/>
                             </connections>
                         </button>
+                        <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" id="bur-b4-qQg">
+                            <rect key="frame" x="0.0" y="324" width="320" height="3"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+                        </progressView>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <connections>
@@ -133,7 +146,6 @@
         <image name="camera_bottombg.png" width="640" height="292"/>
         <image name="camera_button.png" width="160" height="160"/>
         <image name="camera_change.png" width="89" height="46"/>
-        <image name="camera_flash.png" width="20" height="31"/>
         <image name="camera_grid.png" width="46" height="45"/>
         <image name="cameraline.png" width="26" height="844"/>
         <image name="galleryicon.png" width="94" height="90"/>

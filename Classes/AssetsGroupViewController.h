@@ -18,11 +18,14 @@
 //  limitations under the License.
 //
 #import <NBUImagePicker/NBUAssetsGroupViewController.h>
+#import <AssetsLibrary/AssetsLibrary.h>
 
 @interface AssetsGroupViewController : NBUAssetsGroupViewController
 
 @property CGSize desiredImageSize;
 @property (nonatomic, copy) void (^onImageTaken)(UIImage *);
+@property (nonatomic, copy) void (^onVideoFinished)(NSURL *);
+
 
 @end
 

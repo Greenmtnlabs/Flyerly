@@ -97,13 +97,82 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+
+
+/*
+ * HERE WE GET BYTES FROM ASSET AND CREATE NEW FILE WITH SENDED PATH
+ */
+- (BOOL)writeDataToPath:(NSString*)filePath andAsset:(ALAsset*)asset
+{
+    [[NSFileManager defaultManager] createFileAtPath:filePath contents:nil attributes:nil];
+    NSFileHandle *handle = [NSFileHandle fileHandleForWritingAtPath:filePath];
+    if (!handle) {
+        return NO;
+    }
+    static const NSUInteger BufferSize = 1024*1024;
+    
+    ALAssetRepresentation *rep = [asset defaultRepresentation];
+    uint8_t *buffer = calloc(BufferSize, sizeof(*buffer));
+    NSUInteger offset = 0, bytesRead = 0;
+    
+    do {
+        @try {
+            bytesRead = [rep getBytes:buffer fromOffset:offset length:BufferSize error:nil];
+            [handle writeData:[NSData dataWithBytesNoCopy:buffer length:bytesRead freeWhenDone:NO]];
+            offset += bytesRead;
+        } @catch (NSException *exception) {
+            free(buffer);
+            
+            return NO;
+        }
+    } while (bytesRead > 0);
+    
+    free(buffer);
+    return YES;
+}
+
 /**
  * An asset was selected. Process it.
  */
 - (void)thumbnailViewSelectionStateChanged:(NSNotification *)notification {
+    
     // Refresh selected assets
     NBUAssetThumbnailView *assetView = (NBUAssetThumbnailView *)notification.object;
     NBUAsset *asset = assetView.asset;
+    
+    
+    //HERE WE CHECK SELECTED ITEM IS VIDEO
+    if (asset.type == NBUAssetTypeVideo) {
+        
+        NSError *error = nil;
+        NSString *homeDirectoryPath = NSHomeDirectory();
+        NSString *rootPath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/CustomMovie.mov"]];
+
+        //HERE WE MAKE SURE FILE ALREADY EXISTS THEN DELETE IT OTHERWISE IGNORE
+        if ( [[NSFileManager defaultManager] fileExistsAtPath:rootPath isDirectory:NULL] ) {
+            [[NSFileManager defaultManager] removeItemAtPath:rootPath error:&error];
+        }
+
+        NSURL *movieURL = [NSURL fileURLWithPath:rootPath];
+
+        //Background Thread
+       // dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+            BOOL status =  [self writeDataToPath:rootPath andAsset:asset.ALAsset];
+            
+            //WHEN FILE WILL COPIED INTO APP ROOT DIRECTORY THEN WE CALL OVER CALLBACK HERE
+            if ( status ) {
+                self.onVideoFinished(movieURL);
+            }
+            // Pop the current view, and push the crop view.
+            NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[[self navigationController] viewControllers]];
+            [viewControllers removeLastObject];
+            [viewControllers removeLastObject];
+            [[self navigationController] setViewControllers:viewControllers animated:YES];
+
+      //  });
+        
+        return;
+    }
     
     // Get out of full screen mode.
     [self viewWillDisappear:NO];
@@ -120,6 +189,14 @@
     [viewControllers addObject:nbuCrop];
     [[self navigationController] setViewControllers:viewControllers animated:YES];
 }
+
+- (void)objectUpdated:(NSDictionary *)userInfo
+{
+    [super objectUpdated:userInfo];
+}
+
+
+
 
 @end
 

@@ -21,9 +21,16 @@
 // Outlets
 @property (assign, nonatomic) IBOutlet UIImageView *cameraLines;
 @property (assign, nonatomic) IBOutlet UIProgressView *progressView;
+@property (strong, nonatomic) IBOutlet UIButton *mode;
+@property (strong, nonatomic) NSString *videoAllow;
+
+
 
 // Actions
 - (IBAction)setCameraLine:(id)sender;
+- (IBAction)setCameraMode:(id)sender;
+- (IBAction)setShootAction:(id)sender;
+
 - (IBAction)moveToGallery:(id)sender;
 - (IBAction)startRecording:(id)sender;
 
