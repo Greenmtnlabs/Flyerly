@@ -54,6 +54,7 @@
     asstController.desiredImageSize = self.desiredImageSize;
     asstController.onImageTaken = self.onImageTaken;
     asstController.onVideoFinished = self.onVideoFinished;
+    asstController.videoAllow = self.videoAllow;
     
     // Navigation buttons
     // BackButton

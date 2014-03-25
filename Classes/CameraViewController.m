@@ -137,6 +137,7 @@
     nbugallery.desiredImageSize = desiredImageSize;
     nbugallery.onImageTaken = onImageTaken;
     nbugallery.onVideoFinished = onVideoFinished;
+    nbugallery.videoAllow = videoAllow;
     
     // Pop the current view, and push the crop view.
     NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[[self navigationController] viewControllers]];

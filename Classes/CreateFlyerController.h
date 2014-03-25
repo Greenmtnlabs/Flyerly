@@ -127,7 +127,7 @@
 @property(strong,nonatomic) NSMutableDictionary *layersDic;
 
 
--(void)loadCustomPhotoLibrary;
+-(void)loadCustomPhotoLibrary :(NSString *)videoAllow;
 -(void)openCustomCamera;
 
 -(void) callDeleteLayer;

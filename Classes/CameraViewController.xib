@@ -46,12 +46,13 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="KYJ-dZ-Tmw">
-                    <rect key="frame" x="225" y="376" width="70" height="48"/>
+                    <rect key="frame" x="225" y="385" width="70" height="48"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <state key="normal" title="Camera">
+                    <state key="normal" title="Video">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="selected" title="Video"/>
+                    <state key="selected" title="Camera"/>
                     <connections>
                         <action selector="setCameraMode:" destination="-1" eventType="touchUpInside" id="42X-JE-o1p"/>
                     </connections>

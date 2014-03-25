@@ -190,13 +190,166 @@
     [[self navigationController] setViewControllers:viewControllers animated:YES];
 }
 
+
+#pragma mark  Override On selection
+
+
 - (void)objectUpdated:(NSDictionary *)userInfo
 {
-    [super objectUpdated:userInfo];
+    //[super objectUpdated:userInfo];
+    
+    // Clean up before reuse
+    NBUAssetsGroup * oldGroup = userInfo[NBUObjectUpdatedOldObjectKey];
+    if (oldGroup)
+    {
+        [oldGroup stopLoadingAssets];
+        [self.gridView resetGridView];
+    }
+    
+    // Set the group name
+    if (self.groupNameLabel)
+        self.groupNameLabel.text = self.assetsGroup.name;
+    else
+        self.title = self.assetsGroup.name;
+    self.selectedAssets = nil;
+    
+    // Check the number of images
+    [self.assetsGroup stopLoadingAssets];
+    NSUInteger totalCount;
+   
+    // Here we Check Selection For Photo or Background
+    if ([self.videoAllow isEqualToString:@"YES"]) {
+
+        totalCount = self.assetsGroup.assetsCount;
+        
+    }else {
+        
+        totalCount = self.assetsGroup.imageAssetsCount;
+    
+    }
+    
+    
+    
+    // And update the count label
+    if (self.assetsCountLabel)
+    {
+        switch (totalCount)
+        {
+            case 0:
+            {
+                self.assetsCountLabel.text = [NSString stringWithFormat:NBULocalizedString(@"NBUAssetsGroupViewController NoImagesLabel", @"No images"),
+                                          totalCount];
+                break;
+            }
+            case 1:
+            {
+                self.assetsCountLabel.text = [NSString stringWithFormat:NBULocalizedString(@"NBUAssetsGroupView Only one image", @"1 image"),
+                                          totalCount];
+                break;
+            }
+            default:
+            {
+                self.assetsCountLabel.text = [NSString stringWithFormat:NBULocalizedString(@"NBUAssetsGroupView Number of images", @"%d images"),
+                                          totalCount];
+                break;
+            }
+        }
+    }
+    
+    // No need to load assets
+    if (totalCount == 0)
+    {
+        self.loading = NO;
+        return;
+    }
+    
+    // Load assets
+    NBULogInfo(@"Loading %d images for group %@...", totalCount, self.assetsGroup.name);
+    dispatch_async(dispatch_get_main_queue(), ^
+                   {
+                       self.loading = YES;
+                   });
+    __unsafe_unretained NBUAssetsGroupViewController * weakSelf = self;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        
+        NBUAssetType *contentType;
+
+        // Here we Check Selection For Photo or Background
+        if ([self.videoAllow isEqualToString:@"YES"]) {
+            contentType = NBUAssetTypeAny;
+        } else {
+            contentType = NBUAssetTypeImage;
+        }
+        
+        [weakSelf.assetsGroup assetsWithTypes:contentType
+                                    atIndexes:nil
+                                 reverseOrder:self.reverseOrder
+                          incrementalLoadSize:self.loadSize
+                                  resultBlock:^(NSArray * assets,
+                                                NSError * error)
+         {
+             if (!error)
+             {
+                 assets = assets;
+                 
+                 // Update from time to time only...
+                 if (assets.count == 100 ||
+                     assets.count == 400 ||
+                     assets.count == totalCount)
+                 {
+                     NBULogVerbose(@"...%d images loaded", assets.count);
+                     
+                     // Stop loading?
+                     if (assets.count == totalCount)
+                     {
+                         dispatch_async(dispatch_get_main_queue(), ^
+                                        {
+                                            self.loading = NO;
+                                        });
+                     }
+                     
+                     // Check for selectedAssets
+                     NSArray * selectedAssets = [self selectedAssetsFromAssets:assets
+                                                            selectedAssetsURLs:self.selectedAssetsURLs];
+                     
+                     // Update grid view and selected assets on main thread
+                     dispatch_async(dispatch_get_main_queue(), ^
+                                    {
+                                        self.selectedAssets = selectedAssets;
+                                        weakSelf.gridView.objectArray = assets;
+                                    });
+                 }
+             }
+         }];
+    });
+    
 }
 
 
-
+- (NSArray *)selectedAssetsFromAssets:(NSArray *)assets
+                   selectedAssetsURLs:(NSArray *)selectedAssetsURLs
+{
+    NSMutableArray * selectedAssets;
+    if (selectedAssetsURLs.count > 0)
+    {
+        selectedAssets = [NSMutableArray array];
+        for (NBUAsset * asset in assets)
+        {
+            for (NSURL * url in selectedAssetsURLs)
+            {
+                if ([asset.URL.absoluteString isEqualToString:url.absoluteString])
+                {
+                    [selectedAssets addObject:asset];
+                    break;
+                }
+            }
+            // Stop looking if we found all of them
+            if (selectedAssets.count == selectedAssetsURLs.count)
+                break;
+        }
+    }
+    return selectedAssets;
+}
 
 @end
 

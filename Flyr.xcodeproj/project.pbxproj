@@ -542,7 +542,6 @@
 		20D7476D17BE993800966BA6 /* Zpassword_box@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20D7476B17BE993700966BA6 /* Zpassword_box@2x.png */; };
 		20E3010A17F1749E006A1DE0 /* checkDouble.png in Resources */ = {isa = PBXBuildFile; fileRef = 20E3010817F1749E006A1DE0 /* checkDouble.png */; };
 		20E4715B18E05AEA00F0A8EC /* 07_width.png in Resources */ = {isa = PBXBuildFile; fileRef = 20E4715A18E05AEA00F0A8EC /* 07_width.png */; };
-		20EB11FF18DC5B4000F6A07F /* VideoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20EB11FE18DC5B4000F6A07F /* VideoViewController.xib */; };
 		20EB120118DC792800F6A07F /* playIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 20EB120018DC792800F6A07F /* playIcon.png */; };
 		20EB120418DC7AC900F6A07F /* recording_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 20EB120218DC7AC900F6A07F /* recording_button.png */; };
 		20EB120518DC7AC900F6A07F /* stop_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 20EB120318DC7AC900F6A07F /* stop_button.png */; };
@@ -1578,7 +1577,6 @@
 		20D7476B17BE993700966BA6 /* Zpassword_box@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Zpassword_box@2x.png"; sourceTree = "<group>"; };
 		20E3010817F1749E006A1DE0 /* checkDouble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkDouble.png; sourceTree = "<group>"; };
 		20E4715A18E05AEA00F0A8EC /* 07_width.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 07_width.png; sourceTree = "<group>"; };
-		20EB11FE18DC5B4000F6A07F /* VideoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoViewController.xib; sourceTree = "<group>"; };
 		20EB120018DC792800F6A07F /* playIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playIcon.png; sourceTree = "<group>"; };
 		20EB120218DC7AC900F6A07F /* recording_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = recording_button.png; sourceTree = "<group>"; };
 		20EB120318DC7AC900F6A07F /* stop_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stop_button.png; sourceTree = "<group>"; };
@@ -2775,14 +2773,6 @@
 			name = ShareScreen;
 			sourceTree = "<group>";
 		};
-		200E764918D97F2A00DFEE42 /* Video */ = {
-			isa = PBXGroup;
-			children = (
-				20EB11FE18DC5B4000F6A07F /* VideoViewController.xib */,
-			);
-			name = Video;
-			sourceTree = "<group>";
-		};
 		2013528A188C588100822073 /* Comments */ = {
 			isa = PBXGroup;
 			children = (
@@ -3171,7 +3161,6 @@
 				20FA7E6F1872AAF50057C3F3 /* CameraViewController.h */,
 				20FA7E701872AAF50057C3F3 /* CameraViewController.m */,
 				20FA7E711872AAF50057C3F3 /* CameraViewController.xib */,
-				200E764918D97F2A00DFEE42 /* Video */,
 			);
 			name = Camera;
 			sourceTree = "<group>";
@@ -4248,7 +4237,6 @@
 				2087B6C717C7B07D007A6A90 /* register-bg-iPhone4.png in Resources */,
 				2087B6C817C7B07D007A6A90 /* register-bg-iPhone4@2x.png in Resources */,
 				2087B6C917C7B07D007A6A90 /* register-bg-iPhone5.png in Resources */,
-				20EB11FF18DC5B4000F6A07F /* VideoViewController.xib in Resources */,
 				65C9039E17C8AE6500E9B0C2 /* save_gallery.png in Resources */,
 				65C9039F17C8AE6500E9B0C2 /* share_settings.png in Resources */,
 				65C903A017C8AE6500E9B0C2 /* signout.png in Resources */,

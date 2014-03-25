@@ -1608,9 +1608,11 @@ int selectedAddMoreLayerTab = -1;
 /*
  * Here we Load Gallery
  */
--(void)loadCustomPhotoLibrary{
+-(void)loadCustomPhotoLibrary :(NSString *)videoAllow {
     
     LibraryViewController *nbuGallary = [[LibraryViewController alloc] initWithNibName:@"LibraryViewController" bundle:nil];
+    
+    nbuGallary.videoAllow = videoAllow;
     
     if ( imgPickerFlag == 2 ) {
         NSDictionary *dict = [flyer getLayerFromMaster:currentLayer];
@@ -1641,6 +1643,9 @@ int selectedAddMoreLayerTab = -1;
                 weakSelf.imgPickerFlag = 1;
             }else{
                 
+                //Here we Set Flyer Type
+                [weakSelf.flyer setFlyerTypeImage];
+
                 //Create Copy of Image
                 [weakSelf copyImageToTemplate:img];
                 
@@ -1657,12 +1662,37 @@ int selectedAddMoreLayerTab = -1;
         
         NSLog(@"%@",recvUrl);
         NSError *error = nil;
+        
+        [self.flyer setFlyerTypeVideo];
+        
+        
+        // HERE WE MOVE SOURCE FILE INTO FLYER FOLDER
+        NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
+        NSString *destination = [NSString stringWithFormat:@"%@/Template/template.mov",currentpath];
+        [self.flyer setFlyerVideoUrl:@"Template/template.mov"];
+        
+        NSURL *movieURL = [NSURL fileURLWithPath:destination];
+        
+        
+        //HERE WE MAKE SURE FILE ALREADY EXISTS THEN DELETE IT OTHERWISE IGNORE
+        if ([[NSFileManager defaultManager] fileExistsAtPath:destination isDirectory:NULL]) {
+            [[NSFileManager defaultManager] removeItemAtPath:destination error:&error];
+        }
+        
+        //HERE WE MOVE FILE INTO FLYER FOLDER
+        [[NSFileManager defaultManager] moveItemAtURL:recvUrl toURL:movieURL error:&error];
+        
+        //HERE WE RENDER MOVIE PLAYER
+        [self.flyimgView renderLayer:@"Template" layerDictionary:[self.flyer getLayerFromMaster:@"Template"]];
+
     }];
     
     
     [self.navigationController pushViewController:nbuGallary animated:YES];
     [Flurry logEvent:@"Custom Background"];
 }
+
+
 
 
 /*
@@ -1712,6 +1742,7 @@ int selectedAddMoreLayerTab = -1;
                 //Create Copy of Image
                 [weakSelf copyImageToTemplate:img];
                 
+                
                 //set template Image
                 [weakSelf.flyimgView setTemplate:[NSString stringWithFormat:@"Template/template.%@",IMAGETYPE ]];
                 [Flurry logEvent:@"Custom Background"];
@@ -1734,6 +1765,27 @@ int selectedAddMoreLayerTab = -1;
     
     nbuCamera.videoAllow = @"YES";
     nbuCamera.desiredImageSize = CGSizeMake( 300,  300 );
+    
+      __weak CreateFlyerController *weakSelf = self;
+    // Callback once image is selected.
+    [nbuCamera setOnImageTaken:^(UIImage *img) {
+        
+        dispatch_async( dispatch_get_main_queue(), ^{
+
+                //Here we Set Flyer Type
+                [weakSelf.flyer setFlyerTypeImage];
+                
+                //Create Copy of Image
+                [weakSelf copyImageToTemplate:img];
+                
+                
+                //set template Image
+                [weakSelf.flyimgView setTemplate:[NSString stringWithFormat:@"Template/template.%@",IMAGETYPE ]];
+                [Flurry logEvent:@"Custom Background"];
+
+        });
+    }];
+
         
     [nbuCamera setOnVideoFinished:^(NSURL *recvUrl) {
         
@@ -2779,7 +2831,7 @@ int selectedAddMoreLayerTab = -1;
     else if(selectedButton == cameraRoll)
     {
         
-        [self loadCustomPhotoLibrary];
+        [self loadCustomPhotoLibrary :@"YES"];
         
         //Add ContextView
         [self addScrollView:videoLabel];
@@ -2829,7 +2881,7 @@ int selectedAddMoreLayerTab = -1;
     else if( selectedButton == photoTabButton )
 	{
         imgPickerFlag =2;
-        [self loadCustomPhotoLibrary];
+        [self loadCustomPhotoLibrary :@"NO"];
         textBackgrnd.alpha = ALPHA0;
     }
     else if( selectedButton == widthTabButton )
