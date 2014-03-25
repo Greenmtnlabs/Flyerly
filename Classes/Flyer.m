@@ -97,6 +97,7 @@ NSString * const TEXTHEIGHT = @"280.000000";
 -(void)saveFlyer :(UIImage *)snapShot{
 
     NSData *snapShotData = UIImagePNGRepresentation(snapShot);
+    
     [snapShotData writeToFile:flyerImageFile atomically:YES];
     
     
@@ -105,7 +106,8 @@ NSString * const TEXTHEIGHT = @"280.000000";
         
         //USER ALLOWED
         //HERE WE WRITE IMAGE IN GALLERY
-        [self saveInGallery:snapShotData];
+        if (![self isVideoFlyer])
+            [self saveInGallery:snapShotData];
     }
     
     //Here we write the dictionary of .peices files
