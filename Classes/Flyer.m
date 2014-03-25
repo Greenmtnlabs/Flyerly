@@ -105,9 +105,12 @@ NSString * const TEXTHEIGHT = @"280.000000";
     if([[NSUserDefaults standardUserDefaults] stringForKey:@"saveToCameraRollSetting"]){
         
         //USER ALLOWED
-        //HERE WE WRITE IMAGE IN GALLERY
-        if (![self isVideoFlyer])
+        // Checking Flyer Type
+        if (![self isVideoFlyer]) {
+            
+            //HERE WE WRITE IMAGE IN GALLERY
             [self saveInGallery:snapShotData];
+        }
     }
     
     //Here we write the dictionary of .peices files

@@ -20,11 +20,7 @@
 
 @end
 
-@interface FlyerImageView : UIImageView <UIGestureRecognizerDelegate>{
-
-    
-   
-}
+@interface FlyerImageView : UIImageView <UIGestureRecognizerDelegate>
 
 
 -(void)renderLayer :(NSString *)uid layerDictionary:(NSMutableDictionary *)layDic;

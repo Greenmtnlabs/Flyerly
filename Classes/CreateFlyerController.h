@@ -93,6 +93,8 @@
 @property(nonatomic, strong) IBOutlet UIView *libPhoto;
 @property(nonatomic, strong) IBOutlet UIView *libEmpty;
 @property(nonatomic, strong) IBOutlet UIView *playerView;
+@property(nonatomic, strong) IBOutlet UIView *playerToolBar;
+
 
 
 // These are LibFlyer
@@ -120,6 +122,8 @@
 @property (nonatomic,strong)IBOutlet UIButton *photoTabButton;
 @property (nonatomic,strong)IBOutlet UIButton *widthTabButton;
 @property (nonatomic,strong)IBOutlet UIButton *heightTabButton;
+@property (nonatomic,strong)IBOutlet UIButton *playButton;
+
 @property (nonatomic,strong)MPMoviePlayerController *player;
 
 @property (nonatomic,strong) Flyer *flyer;
@@ -159,4 +163,7 @@
 -(IBAction)setlibBackgroundTabAction:(id)sender;
 -(IBAction)setStyleTabAction:(id) sender;
 -(IBAction)setlibPhotoTabAction:(id) sender;
+-(IBAction)play:(id)sender;
+-(IBAction)pause:(id)sender;
+
 @end

@@ -31,6 +31,8 @@
                 <outlet property="libText" destination="8Ew-aX-Xah" id="Haw-gJ-FkB"/>
                 <outlet property="libraryContextView" destination="hm4-bV-Hep" id="yQz-pZ-s3b"/>
                 <outlet property="photoTabButton" destination="O6L-IG-J9j" id="ntS-Xx-t5P"/>
+                <outlet property="playButton" destination="D6r-Rt-cPZ" id="cJb-Sr-l3L"/>
+                <outlet property="playerToolBar" destination="cip-7j-KrI" id="Ywv-su-GMG"/>
                 <outlet property="playerView" destination="Foo-mb-HJb" id="cbu-mw-Eh1"/>
                 <outlet property="sizeTabButton" destination="Ybf-LY-Z1e" id="8QX-O7-r0o"/>
                 <outlet property="view" destination="1" id="3"/>
@@ -325,6 +327,42 @@
                 </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+        </view>
+        <view alpha="0.59999999999999998" contentMode="scaleToFill" id="cip-7j-KrI">
+            <rect key="frame" x="0.0" y="0.0" width="310" height="40"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="D6r-Rt-cPZ">
+                    <rect key="frame" x="0.0" y="0.0" width="43" height="40"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <state key="normal" title="Play">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="selected" title="Stop"/>
+                    <connections>
+                        <action selector="play:" destination="-1" eventType="touchUpInside" id="Y6Z-gK-efT"/>
+                    </connections>
+                </button>
+                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" id="Mes-fj-ojE">
+                    <rect key="frame" x="91" y="3" width="218" height="34"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </slider>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="cZC-0U-PgR">
+                    <rect key="frame" x="44" y="0.0" width="41" height="40"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <state key="normal" title="Pause">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="pause:" destination="-1" eventType="touchUpInside" id="qaM-2j-CZy"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
         </view>
     </objects>
     <resources>

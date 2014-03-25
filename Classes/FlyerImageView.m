@@ -21,8 +21,6 @@
     
     //Set Master Layers
     layers = [[NSMutableDictionary alloc] init];
-
-    //Set Template Here
     
 }
 

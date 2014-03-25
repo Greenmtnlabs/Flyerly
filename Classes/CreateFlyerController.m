@@ -14,7 +14,7 @@
 @synthesize imgPickerFlag, addMoreLayerOrSaveFlyerLabel, takeOrAddPhotoLabel,layerScrollView,flyerPath;
 @synthesize contextView,libraryContextView,libFlyer,backgroundTabButton,addMoreFontTabButton;
 @synthesize libText,libBackground,libPhoto,libEmpty,backtemplates,cameraTakePhoto,cameraRoll,flyerBorder;
-@synthesize flyimgView,currentLayer,layersDic,flyer,player,playerView;
+@synthesize flyimgView,currentLayer,layersDic,flyer,player,playerView,playerToolBar,playButton;
 
 int selectedAddMoreLayerTab = -1;
 
@@ -1842,6 +1842,10 @@ int selectedAddMoreLayerTab = -1;
     
     self.flyimgView.image = nil;
     [self.playerView addSubview:player.view];
+    [playerToolBar setFrame:CGRectMake(0, 270, 310, 40)];
+    [self.playerView addSubview:playerToolBar];
+
+    
     player.accessibilityElementsHidden = YES;
     player.shouldAutoplay = NO;
     player.fullscreen = NO;
@@ -1857,6 +1861,25 @@ int selectedAddMoreLayerTab = -1;
 
 
 }
+
+-(IBAction)play:(id)sender {
+    
+    if ([playButton isSelected] == YES) {
+        [playButton setSelected:NO];
+          [player stop];
+
+    }else {
+        [playButton setSelected:YES];
+        [player play];
+      
+   
+    }
+}
+-(IBAction)pause:(id)sender {
+    [playButton setSelected:NO];
+    [player pause];
+}
+
 
 #pragma mark  Movie Player Delegate
 
@@ -2414,9 +2437,7 @@ int selectedAddMoreLayerTab = -1;
  */
 - (void)disableImageViewInteraction {
     self.flyimgView.userInteractionEnabled = NO;
-    player.controlStyle = MPMovieControlStyleEmbedded;
-    //[player play];
-
+    [playerToolBar setHidden:NO];
 }
 
 
@@ -2425,7 +2446,7 @@ int selectedAddMoreLayerTab = -1;
  */
 - (void)enableImageViewInteraction {
     self.flyimgView.userInteractionEnabled = YES;
-    player.controlStyle = MPMovieControlStyleNone;
+    [playerToolBar setHidden:YES];
     
 }
 
