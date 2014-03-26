@@ -274,10 +274,10 @@
         <image name="likealertbg.png" width="213" height="100"/>
         <image name="likealertclose.png" width="58" height="24"/>
         <image name="mid_shadow.png" width="105" height="52"/>
-        <image name="pinned_flyer2.png" width="63" height="83"/>
-        <image name="pinned_flyer_bg2.png" width="130" height="130"/>
-        <image name="settings2.png" width="71" height="69"/>
-        <image name="shadow.png" width="104" height="48"/>
-        <image name="three_buttons.png" width="320" height="61"/>
+        <image name="pinned_flyer2.png" width="126" height="165"/>
+        <image name="pinned_flyer_bg2.png" width="260" height="260"/>
+        <image name="settings2.png" width="142" height="137"/>
+        <image name="shadow.png" width="207" height="96"/>
+        <image name="three_buttons.png" width="640" height="122"/>
     </resources>
 </document>

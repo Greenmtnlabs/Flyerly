@@ -104,6 +104,10 @@
  */
 - (BOOL)writeDataToPath:(NSString*)filePath andAsset:(ALAsset*)asset
 {
+    
+
+    
+    
     [[NSFileManager defaultManager] createFileAtPath:filePath contents:nil attributes:nil];
     NSFileHandle *handle = [NSFileHandle fileHandleForWritingAtPath:filePath];
     if (!handle) {
@@ -153,23 +157,22 @@
             [[NSFileManager defaultManager] removeItemAtPath:rootPath error:&error];
         }
 
+        self.loading = YES;
         NSURL *movieURL = [NSURL fileURLWithPath:rootPath];
 
         //Background Thread
-       // dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
             BOOL status =  [self writeDataToPath:rootPath andAsset:asset.ALAsset];
             
-            //WHEN FILE WILL COPIED INTO APP ROOT DIRECTORY THEN WE CALL OVER CALLBACK HERE
+            //WHEN FILE WILL COPIED INTO APP ROOT DIRECTORY
             if ( status ) {
-                self.onVideoFinished(movieURL);
+                
+                //Here we make 30 Sec file
+                [self get30SecVideoWithURL:movieURL];
+               
             }
-            // Pop the current view, and push the crop view.
-            NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[[self navigationController] viewControllers]];
-            [viewControllers removeLastObject];
-            [viewControllers removeLastObject];
-            [[self navigationController] setViewControllers:viewControllers animated:YES];
 
-      //  });
+        });
         
         return;
     }
@@ -191,12 +194,73 @@
 }
 
 
+
+/*
+ * This code for Removing tracks:
+ */
+-(void)get30SecVideoWithURL :(NSURL *)url{
+
+    
+    // Get a pointer to the asset
+    AVURLAsset* firstAsset = [AVURLAsset URLAssetWithURL:url options:nil];
+    
+    // Make an instance of avmutablecomposition so that we can edit this asset:
+    AVMutableComposition* mixComposition = [[AVMutableComposition alloc] init];
+    
+    // Add tracks to this composition
+    AVMutableCompositionTrack *firstTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeVideo preferredTrackID:kCMPersistentTrackID_Invalid];
+    
+    /// Here we Get Set Video Limit of 30 Sec Only
+    Float64 seconds = 30;
+    int32_t preferredTimeScale = 1;
+    CMTime inTime = CMTimeMakeWithSeconds(seconds, preferredTimeScale);
+    
+    // Now insert the first 30 seconds from the asset to the new movie file
+    [firstTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, inTime) ofTrack:[[firstAsset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0] atTime:kCMTimeZero error:nil];
+    
+    //// Now to save this Track:
+    AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:mixComposition presetName:AVAssetExportPresetHighestQuality];
+    
+    NSString *homeDirectoryPath = NSHomeDirectory();
+    NSString *rootPath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/FlyerlyMovie.mov"]];
+
+    NSURL *exportURL = [NSURL fileURLWithPath:rootPath];;
+    exportSession.outputURL = exportURL;
+    exportSession.outputFileType = AVFileTypeQuickTimeMovie;
+    [exportSession exportAsynchronouslyWithCompletionHandler:^{
+        switch (exportSession.status) {
+            case AVAssetExportSessionStatusFailed:{
+                NSLog (@"FAIL = %@",exportSession.error);
+                break;
+            }
+            case AVAssetExportSessionStatusCompleted: {
+                
+                //HERE WE CALL OVER CALLBACK HERE
+                self.onVideoFinished(exportURL);
+                
+                //DELETE ORIGINAL FILE FROM APP ROOT DIRECTORY
+                    NSError *error = nil;
+                [[NSFileManager defaultManager] removeItemAtPath:url.path error:&error];
+                
+                // Pop the current view, and push the crop view.
+                NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[[self navigationController] viewControllers]];
+                [viewControllers removeLastObject];
+                [viewControllers removeLastObject];
+                [[self navigationController] setViewControllers:viewControllers animated:YES];
+
+                NSLog (@"SUCCESS");
+            }
+        };
+    }]; 
+
+}
+
 #pragma mark  Override On selection
 
 
 - (void)objectUpdated:(NSDictionary *)userInfo
 {
-    [super objectUpdated:userInfo];
+   // [super objectUpdated:userInfo];
     
     // Clean up before reuse
     NBUAssetsGroup * oldGroup = userInfo[NBUObjectUpdatedOldObjectKey];
@@ -283,7 +347,7 @@
         
         [weakSelf.assetsGroup assetsWithTypes:contentType
                                     atIndexes:nil
-                                 reverseOrder:self.reverseOrder
+                                 reverseOrder:YES
                           incrementalLoadSize:self.loadSize
                                   resultBlock:^(NSArray * assets,
                                                 NSError * error)
