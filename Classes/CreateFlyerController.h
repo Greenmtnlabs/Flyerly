@@ -66,6 +66,7 @@
     ShareViewController *shareviewcontroller;
     UILabel *titleLabel;
     UIImage *videolastImage;
+    BOOL *isPlaying;
     
 }
 
@@ -123,6 +124,8 @@
 @property (nonatomic,strong)IBOutlet UIButton *widthTabButton;
 @property (nonatomic,strong)IBOutlet UIButton *heightTabButton;
 @property (nonatomic,strong)IBOutlet UIButton *playButton;
+@property (nonatomic,strong)IBOutlet UISlider *playerSlider;
+
 
 @property (nonatomic,strong)MPMoviePlayerController *player;
 
@@ -132,6 +135,7 @@
 
 
 -(void)loadCustomPhotoLibrary :(NSString *)videoAllow;
+
 -(void)openCustomCamera;
 
 -(void) callDeleteLayer;
@@ -165,5 +169,6 @@
 -(IBAction)setlibPhotoTabAction:(id) sender;
 -(IBAction)play:(id)sender;
 -(IBAction)pause:(id)sender;
+-(IBAction)slide:(id)sender;
 
 @end

@@ -9,12 +9,13 @@
 
 @implementation CreateFlyerController
 
-@synthesize selectedFont,selectedColor,selectedTemplate,fontTabButton,colorTabButton,sizeTabButton,fontEditButton,selectedSize,fontBorderTabButton,addMoreIconTabButton,addMorePhotoTabButton,addMoreSymbolTabButton,sharePanel;
+@synthesize selectedFont,selectedColor,selectedTemplate,fontTabButton,colorTabButton,sizeTabButton,fontEditButton,selectedSize,
+fontBorderTabButton,addMoreIconTabButton,addMorePhotoTabButton,addMoreSymbolTabButton,sharePanel;
 @synthesize textBackgrnd,cameraTabButton,photoTabButton,widthTabButton,heightTabButton,deleteAlert;
 @synthesize imgPickerFlag, addMoreLayerOrSaveFlyerLabel, takeOrAddPhotoLabel,layerScrollView,flyerPath;
 @synthesize contextView,libraryContextView,libFlyer,backgroundTabButton,addMoreFontTabButton;
 @synthesize libText,libBackground,libPhoto,libEmpty,backtemplates,cameraTakePhoto,cameraRoll,flyerBorder;
-@synthesize flyimgView,currentLayer,layersDic,flyer,player,playerView,playerToolBar,playButton;
+@synthesize flyimgView,currentLayer,layersDic,flyer,player,playerView,playerToolBar,playButton,playerSlider;
 
 int selectedAddMoreLayerTab = -1;
 
@@ -1819,6 +1820,7 @@ int selectedAddMoreLayerTab = -1;
     [self.navigationController pushViewController:nbuCamera animated:YES];
 }
 
+#pragma mark  Movie Player
 
 /*
  * Here we Configure Player and Load File in Player
@@ -1840,9 +1842,16 @@ int selectedAddMoreLayerTab = -1;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(MPMoviePlayerThumbnailImageRequestDidFinishNotification::) name:MPMoviePlayerThumbnailImageRequestDidFinishNotification object:player];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(MPMoviePlayerLoadStateDidChange:)
+                                                 name:MPMoviePlayerLoadStateDidChangeNotification
+                                               object:nil];
+    
+    
     self.flyimgView.image = nil;
     [self.playerView addSubview:player.view];
     [playerToolBar setFrame:CGRectMake(0, 270, 310, 40)];
+
     [self.playerView addSubview:playerToolBar];
 
     
@@ -1853,42 +1862,72 @@ int selectedAddMoreLayerTab = -1;
     player.controlStyle =  MPMovieControlStyleNone;
     player.scalingMode = MPMovieScalingModeAspectFill;
     player.backgroundView.backgroundColor = [UIColor whiteColor];
-    
     [player prepareToPlay];
-    
     videolastImage = [player thumbnailImageAtTime:player.duration /2
                                        timeOption:MPMovieTimeOptionNearestKeyFrame];
 
 
 }
 
+
 -(IBAction)play:(id)sender {
     
     if ([playButton isSelected] == YES) {
         [playButton setSelected:NO];
-          [player stop];
+        isPlaying = NO;
+        playerSlider.value = 0.0;
+        [player stop];
 
     }else {
         [playButton setSelected:YES];
+        isPlaying = YES;
+        player.currentPlaybackTime = playerSlider.value;
+        [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateTime:) userInfo:nil repeats:NO];
         [player play];
-      
    
     }
 }
+
+-(IBAction)slide:(id)sender {
+
+    NSLog(@"%f",playerSlider.value);
+    player.currentPlaybackTime = playerSlider.value;
+    
+
+
+}
+
+- (void)updateTime:(NSTimer *)timer {
+    
+     NSLog(@"%f",player.currentPlaybackTime);
+    playerSlider.value = player.currentPlaybackTime;
+    
+    if (isPlaying) {
+        [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateTime:) userInfo:nil repeats:NO];
+    }
+}
+
 -(IBAction)pause:(id)sender {
     [playButton setSelected:NO];
     [player pause];
+    isPlaying = NO;
+
 }
 
 
 #pragma mark  Movie Player Delegate
 
+
 /*
- * Here we Get One Thumbnail which we use for Main Screen
+ * Here we Set Slider
  */
--(void)MPMoviePlayerThumbnailImageRequestDidFinishNotification: (NSDictionary*)info{
-    
-    UIImage *image = [info objectForKey:MPMoviePlayerThumbnailImageKey];
+- (void)MPMoviePlayerLoadStateDidChange:(NSNotification *)notification
+{
+    if ((player.loadState & MPMovieLoadStatePlaythroughOK) == MPMovieLoadStatePlaythroughOK)
+    {
+        playerSlider.maximumValue = player.duration;
+        playerSlider.value = 0.0;
+    }
 }
 
 
