@@ -30,6 +30,7 @@
 - (IBAction)setCameraLine:(id)sender;
 - (IBAction)setCameraMode:(id)sender;
 - (IBAction)setShootAction:(id)sender;
+- (IBAction)tapAndHold:(id)sender;
 
 - (IBAction)moveToGallery:(id)sender;
 - (IBAction)startRecording:(id)sender;

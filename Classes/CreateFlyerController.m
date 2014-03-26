@@ -267,8 +267,6 @@ int selectedAddMoreLayerTab = -1;
     [self addBottomTabs:libFlyer];
     
     currentLayer = @"";
-    
-
 
 }
 
@@ -1847,14 +1845,13 @@ int selectedAddMoreLayerTab = -1;
                                                  name:MPMoviePlayerLoadStateDidChangeNotification
                                                object:nil];
     
-    
+    [player.view removeFromSuperview];
+    [playerToolBar removeFromSuperview];
+
     self.flyimgView.image = nil;
     [self.playerView addSubview:player.view];
     [playerToolBar setFrame:CGRectMake(0, 270, 310, 40)];
-
     [self.playerView addSubview:playerToolBar];
-
-    
     player.accessibilityElementsHidden = YES;
     player.shouldAutoplay = NO;
     player.fullscreen = NO;
@@ -1875,8 +1872,7 @@ int selectedAddMoreLayerTab = -1;
     if ([playButton isSelected] == YES) {
         [playButton setSelected:NO];
         isPlaying = NO;
-        playerSlider.value = 0.0;
-        [player stop];
+        [player pause];
 
     }else {
         [playButton setSelected:YES];
@@ -1905,13 +1901,6 @@ int selectedAddMoreLayerTab = -1;
     if (isPlaying) {
         [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateTime:) userInfo:nil repeats:NO];
     }
-}
-
--(IBAction)pause:(id)sender {
-    [playButton setSelected:NO];
-    [player pause];
-    isPlaying = NO;
-
 }
 
 
@@ -1947,8 +1936,10 @@ int selectedAddMoreLayerTab = -1;
 
 - (void) movieFinishedCallback:(NSNotification*) aNotification {
     
-
-
+    playerSlider.value = 0.0;
+    isPlaying = NO;
+    [playButton setSelected:NO];
+     player.currentPlaybackTime = playerSlider.value;
 
 }
 

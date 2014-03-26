@@ -131,6 +131,7 @@
  * Move to the gallery.
  */
 - (IBAction)moveToGallery:(id)sender{
+    
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
     
     LibraryViewController *nbugallery = [[LibraryViewController alloc]initWithNibName:@"LibraryViewController" bundle:nil];
@@ -202,6 +203,18 @@
     }
 
 
+}
+
+- (IBAction)tapAndHold:(id)sender {
+    UIButton *shoot = (UIButton *)  self.cameraView.shootButton;
+    
+    if ([mode isSelected] == YES) {
+        
+        //Action for Video Mode
+        [shoot setSelected:YES];
+        [self.cameraView startStopRecording:sender];
+        [self startRecording:sender];
+    }
 }
 
 

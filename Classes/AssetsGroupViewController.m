@@ -196,7 +196,7 @@
 
 - (void)objectUpdated:(NSDictionary *)userInfo
 {
-    //[super objectUpdated:userInfo];
+    [super objectUpdated:userInfo];
     
     // Clean up before reuse
     NBUAssetsGroup * oldGroup = userInfo[NBUObjectUpdatedOldObjectKey];

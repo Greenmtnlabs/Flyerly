@@ -549,6 +549,8 @@
 		20ED041817CCB41F00DA702E /* SettingcellBack.png in Resources */ = {isa = PBXBuildFile; fileRef = 20ED041617CCB41F00DA702E /* SettingcellBack.png */; };
 		20ED041917CCB41F00DA702E /* SettingcellBack@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20ED041717CCB41F00DA702E /* SettingcellBack@2x.png */; };
 		20ED041C17CCBCB000DA702E /* t_email_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 20ED041A17CCBCB000DA702E /* t_email_button.png */; };
+		20F0393E18E2E4060002338F /* ModeCamera.png in Resources */ = {isa = PBXBuildFile; fileRef = 20F0393C18E2E4060002338F /* ModeCamera.png */; };
+		20F0393F18E2E4060002338F /* ModeVideo.png in Resources */ = {isa = PBXBuildFile; fileRef = 20F0393D18E2E4060002338F /* ModeVideo.png */; };
 		20F4D8E017BA3D0A007B2DF5 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F4D8DE17BA3D09007B2DF5 /* ProfileViewController.m */; };
 		20F4D8E117BA3D0A007B2DF5 /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20F4D8DF17BA3D0A007B2DF5 /* ProfileViewController.xib */; };
 		20F4D8E517BA40EA007B2DF5 /* FlyerlySingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F4D8E417BA40EA007B2DF5 /* FlyerlySingleton.m */; };
@@ -1585,6 +1587,8 @@
 		20ED041617CCB41F00DA702E /* SettingcellBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SettingcellBack.png; sourceTree = "<group>"; };
 		20ED041717CCB41F00DA702E /* SettingcellBack@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SettingcellBack@2x.png"; sourceTree = "<group>"; };
 		20ED041A17CCBCB000DA702E /* t_email_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = t_email_button.png; sourceTree = "<group>"; };
+		20F0393C18E2E4060002338F /* ModeCamera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ModeCamera.png; sourceTree = "<group>"; };
+		20F0393D18E2E4060002338F /* ModeVideo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ModeVideo.png; sourceTree = "<group>"; };
 		20F4D8DD17BA3D09007B2DF5 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		20F4D8DE17BA3D09007B2DF5 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		20F4D8DF17BA3D0A007B2DF5 /* ProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
@@ -2114,6 +2118,8 @@
 		0DF3A361108DF47400D6C887 /* ImageLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				20F0393C18E2E4060002338F /* ModeCamera.png */,
+				20F0393D18E2E4060002338F /* ModeVideo.png */,
 				20E4715A18E05AEA00F0A8EC /* 07_width.png */,
 				20EB120218DC7AC900F6A07F /* recording_button.png */,
 				20EB120318DC7AC900F6A07F /* stop_button.png */,
@@ -4129,6 +4135,7 @@
 				0F8007EC175378F0000FF7FA /* ricon18.png in Resources */,
 				0F8007EE175378F0000FF7FA /* ricon19.png in Resources */,
 				0F8007F0175378F0000FF7FA /* ricon20.png in Resources */,
+				20F0393F18E2E4060002338F /* ModeVideo.png in Resources */,
 				0F8007F2175378F0000FF7FA /* ricon21.png in Resources */,
 				201BDCA118A45F6C009AB18E /* blue_bar.png in Resources */,
 				0FDB5624175E3E410078EBEC /* facebook_unlike.png in Resources */,
@@ -4392,6 +4399,7 @@
 				202C653417EA07DC00CB9A75 /* symbol73.png in Resources */,
 				202F994018BCB426002A25D9 /* invite_twitter.png in Resources */,
 				202C653617EA07DC00CB9A75 /* symbol74.png in Resources */,
+				20F0393E18E2E4060002338F /* ModeCamera.png in Resources */,
 				202C653817EA07DC00CB9A75 /* symbol75.png in Resources */,
 				202C653A17EA07DC00CB9A75 /* symbol76.png in Resources */,
 				202C653C17EA07DC00CB9A75 /* symbol77.png in Resources */,
