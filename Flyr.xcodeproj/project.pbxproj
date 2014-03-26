@@ -526,7 +526,6 @@
 		20D7475817BE853700966BA6 /* email_box.png in Resources */ = {isa = PBXBuildFile; fileRef = 20D7475617BE853500966BA6 /* email_box.png */; };
 		20D7475917BE853700966BA6 /* email_box@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20D7475717BE853600966BA6 /* email_box@2x.png */; };
 		20D7475C17BE870B00966BA6 /* Zwelcome_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 20D7475A17BE870A00966BA6 /* Zwelcome_bg.png */; };
-		20D7475D17BE870B00966BA6 /* Zwelcome_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20D7475B17BE870B00966BA6 /* Zwelcome_bg@2x.png */; };
 		20D7476017BE886F00966BA6 /* Zlogin-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 20D7475E17BE886F00966BA6 /* Zlogin-bg.png */; };
 		20D7476117BE886F00966BA6 /* Zlogin-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20D7475F17BE886F00966BA6 /* Zlogin-bg@2x.png */; };
 		20D7476417BE8EE200966BA6 /* Zqemail_box.png in Resources */ = {isa = PBXBuildFile; fileRef = 20D7476217BE8EE100966BA6 /* Zqemail_box.png */; };
@@ -906,7 +905,6 @@
 		65E26165171C345D00C485B5 /* facebook_tab.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E2615F171C345C00C485B5 /* facebook_tab.png */; };
 		65E26168171C345D00C485B5 /* twitter_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E26162171C345D00C485B5 /* twitter_selected.png */; };
 		65E26173171C361400C485B5 /* done_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E2616E171C361400C485B5 /* done_selected@2x.png */; };
-		65E26174171C361400C485B5 /* done@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E2616F171C361400C485B5 /* done@2x.png */; };
 		65E26175171C361400C485B5 /* select_all_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E26170171C361400C485B5 /* select_all_selected.png */; };
 		65E26176171C361400C485B5 /* select_all.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E26171171C361400C485B5 /* select_all.png */; };
 		65E26177171C361400C485B5 /* unselect.png in Resources */ = {isa = PBXBuildFile; fileRef = 65E26172171C361400C485B5 /* unselect.png */; };
@@ -1543,7 +1541,6 @@
 		20D7475617BE853500966BA6 /* email_box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = email_box.png; sourceTree = "<group>"; };
 		20D7475717BE853600966BA6 /* email_box@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "email_box@2x.png"; sourceTree = "<group>"; };
 		20D7475A17BE870A00966BA6 /* Zwelcome_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Zwelcome_bg.png; sourceTree = "<group>"; };
-		20D7475B17BE870B00966BA6 /* Zwelcome_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Zwelcome_bg@2x.png"; sourceTree = "<group>"; };
 		20D7475E17BE886F00966BA6 /* Zlogin-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Zlogin-bg.png"; sourceTree = "<group>"; };
 		20D7475F17BE886F00966BA6 /* Zlogin-bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Zlogin-bg@2x.png"; sourceTree = "<group>"; };
 		20D7476217BE8EE100966BA6 /* Zqemail_box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Zqemail_box.png; sourceTree = "<group>"; };
@@ -1944,7 +1941,6 @@
 		65E2615F171C345C00C485B5 /* facebook_tab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook_tab.png; sourceTree = "<group>"; };
 		65E26162171C345D00C485B5 /* twitter_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twitter_selected.png; sourceTree = "<group>"; };
 		65E2616E171C361400C485B5 /* done_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "done_selected@2x.png"; sourceTree = "<group>"; };
-		65E2616F171C361400C485B5 /* done@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "done@2x.png"; sourceTree = "<group>"; };
 		65E26170171C361400C485B5 /* select_all_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = select_all_selected.png; sourceTree = "<group>"; };
 		65E26171171C361400C485B5 /* select_all.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = select_all.png; sourceTree = "<group>"; };
 		65E26172171C361400C485B5 /* unselect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unselect.png; sourceTree = "<group>"; };
@@ -2165,7 +2161,6 @@
 				0D49033710917AB700855C30 /* Default.png */,
 				65C7A5281721B78D003F1A84 /* Default@2x.png */,
 				65E2617B171C372C00C485B5 /* done.png */,
-				65E2616F171C361400C485B5 /* done@2x.png */,
 				65E2617A171C372C00C485B5 /* done_selected.png */,
 				65E2616E171C361400C485B5 /* done_selected@2x.png */,
 				20D7475617BE853500966BA6 /* email_box.png */,
@@ -2971,7 +2966,6 @@
 				20D7475E17BE886F00966BA6 /* Zlogin-bg.png */,
 				20D7475F17BE886F00966BA6 /* Zlogin-bg@2x.png */,
 				20D7475A17BE870A00966BA6 /* Zwelcome_bg.png */,
-				20D7475B17BE870B00966BA6 /* Zwelcome_bg@2x.png */,
 				20D7474E17BE803100966BA6 /* Zregister_flyer.png */,
 				20D7474F17BE803100966BA6 /* Zregister_flyer@2x.png */,
 				20D7474A17BE7CA800966BA6 /* Zsignup_button.png */,
@@ -3721,7 +3715,6 @@
 				200773A31887BB8C00448346 /* addbg_border_selected.png in Resources */,
 				65E26168171C345D00C485B5 /* twitter_selected.png in Resources */,
 				65E26173171C361400C485B5 /* done_selected@2x.png in Resources */,
-				65E26174171C361400C485B5 /* done@2x.png in Resources */,
 				65E26175171C361400C485B5 /* select_all_selected.png in Resources */,
 				65E26176171C361400C485B5 /* select_all.png in Resources */,
 				65E26177171C361400C485B5 /* unselect.png in Resources */,
@@ -4140,7 +4133,6 @@
 				20D7475917BE853700966BA6 /* email_box@2x.png in Resources */,
 				20D7475C17BE870B00966BA6 /* Zwelcome_bg.png in Resources */,
 				20269633188F3E0600CF2F78 /* delete_button.png in Resources */,
-				20D7475D17BE870B00966BA6 /* Zwelcome_bg@2x.png in Resources */,
 				20D7476017BE886F00966BA6 /* Zlogin-bg.png in Resources */,
 				20D7476117BE886F00966BA6 /* Zlogin-bg@2x.png in Resources */,
 				20D7476417BE8EE200966BA6 /* Zqemail_box.png in Resources */,
