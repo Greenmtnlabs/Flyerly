@@ -73,10 +73,11 @@ NSString * const TEXTHEIGHT = @"280.000000";
 
     //set Share Status File for Update
     socialFile = [flyPath stringByAppendingString:[NSString stringWithFormat:@"/Social/flyer.soc"]];
-
     
-    //set Flyer Image for Update
+    //set Flyer Files for Future Update
     flyerImageFile = [flyPath stringByAppendingString:[NSString stringWithFormat:@"/flyer.%@",IMAGETYPE]];
+
+    videoImageFile = [flyPath stringByAppendingString:[NSString stringWithFormat:@"/flyerOverlay.%@",IMAGETYPE]];
     
     masterLayers = [[NSMutableDictionary alloc] initWithContentsOfFile:piecesFile];
     
@@ -131,6 +132,17 @@ NSString * const TEXTHEIGHT = @"280.000000";
     }
     
 }
+
+/*
+ * Here we Update Image for Video Overlay Image
+ */
+-(void)setVideoOverlay :(UIImage *)snapShot {
+
+    NSData *snapShotData = UIImagePNGRepresentation(snapShot);
+    [snapShotData writeToFile:flyerImageFile atomically:YES];
+}
+
+
 
 /*** HERE WE SAVE IMAGE INTO GALLERY 
  * AND LINK WITH FLYERLY ALBUM

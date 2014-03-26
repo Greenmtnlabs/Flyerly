@@ -20,6 +20,8 @@
     NSString *textFile;
     NSString *socialFile;
     NSString *flyerImageFile;
+    NSString *videoImageFile;
+
 
 }
 

@@ -142,7 +142,7 @@ int selectedAddMoreLayerTab = -1;
     [addMoreIconTabButton setBackgroundImage:[UIImage imageNamed:@"icon_button_selected"] forState:UIControlStateHighlighted];
     addMoreIconTabButton.tag = 10004;
     
-    
+     self.flyimgView.image = nil;
 }
 
 

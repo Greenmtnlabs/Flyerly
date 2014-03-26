@@ -153,6 +153,6 @@
         <image name="camera_grid.png" width="46" height="45"/>
         <image name="cameraline.png" width="26" height="844"/>
         <image name="galleryicon.png" width="94" height="90"/>
-        <image name="new_grid_line.png" width="320" height="422"/>
+        <image name="new_grid_line.png" width="640" height="844"/>
     </resources>
 </document>
