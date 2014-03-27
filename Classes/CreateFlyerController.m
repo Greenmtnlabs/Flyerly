@@ -1921,9 +1921,7 @@ int selectedAddMoreLayerTab = -1;
         
         float minutes = floor(duration / 60);
         videoDuration = duration - minutes * 60;
-        NSLog(@"duration: %2.f", videoDuration);
-        
-        NSLog(@"%f",player.duration);
+
         playerSlider.value = 0.0;
     }
 }
@@ -2318,12 +2316,13 @@ int selectedAddMoreLayerTab = -1;
 
 
 /*****
- * HERE WE MERGE VIDEO FOR SHARING
+ * HERE WE CREATE VIDEO FROM FLYER IMAGE 
+ * BECAUSE WE WILL MERGE IN FUTURE FOR SHARE VIDEO
  * @PARAM
  *  NSURL VIDEO URL
  *  UIImage Flyer Overlay Image
  */
--(void)mergeVideoWithURL :(NSURL *)url FlyerOverlayImage:(UIImage *)image {
+-(void)createVideoWithURL :(NSURL *)url FlyerOverlayImage:(UIImage *)image {
 
     NSError *error = nil;
     AVAssetWriter *videoWriter = [[AVAssetWriter alloc] initWithURL:
@@ -2395,6 +2394,65 @@ int selectedAddMoreLayerTab = -1;
     
     return pxbuffer;
 }
+
+
+
+/*
+ * HERE WE MERGE TWO VIDEOS FOR SHARE VIDEO
+ */
+-(void)mergeVideosWithURL :(NSURL *)firstURL  SecondURL:(NSURL *)secondURL {
+    
+    
+    // Get a pointer to the asset
+    AVURLAsset* firstAsset = [AVURLAsset URLAssetWithURL:firstURL options:nil];
+    AVURLAsset* secondAsset = [AVURLAsset URLAssetWithURL:secondURL options:nil];
+    
+    // Make an instance of avmutablecomposition so that we can edit this asset:
+    AVMutableComposition* mixComposition = [[AVMutableComposition alloc] init];
+    
+    // Add tracks to this composition
+    AVMutableCompositionTrack *firstTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeVideo preferredTrackID:kCMPersistentTrackID_Invalid];
+    
+    /// Here we Get Set Video Limit of 30 Sec Only
+    int32_t preferredTimeScale = 1;
+    CMTime inTime = CMTimeMakeWithSeconds(videoDuration, preferredTimeScale);
+    
+    
+    [firstTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, inTime) ofTrack:[[firstAsset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0] atTime:kCMTimeZero error:nil];
+
+    [firstTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, inTime) ofTrack:[[secondAsset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0] atTime:kCMTimeZero error:nil];
+
+
+    
+    //// Now to save this Track:
+    AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:mixComposition presetName:AVAssetExportPresetHighestQuality];
+    
+    NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
+    NSString *destination = [NSString stringWithFormat:@"%@/FlyerlyMovie.mov",currentpath];
+
+    //Delete Old File if Exists
+        NSError *error = nil;
+    if ( [[NSFileManager defaultManager] isReadableFileAtPath:destination] )
+        [[NSFileManager defaultManager] removeItemAtPath:destination error:&error];
+    
+    NSURL *exportURL = [NSURL fileURLWithPath:destination];
+    exportSession.outputURL = exportURL;
+    exportSession.outputFileType = AVFileTypeQuickTimeMovie;
+    [exportSession exportAsynchronouslyWithCompletionHandler:^{
+        switch (exportSession.status) {
+            case AVAssetExportSessionStatusFailed:{
+                NSLog (@"FAIL = %@",exportSession.error);
+                break;
+            }
+            case AVAssetExportSessionStatusCompleted: {
+                
+                NSLog (@"SUCCESS");
+            }
+        };
+    }]; 
+    
+}
+
 
 #pragma mark Flyer Modified
 
@@ -2707,9 +2765,13 @@ int selectedAddMoreLayerTab = -1;
         //Here we Update Overlay
         [flyer setVideoOverlay:[self getFlyerSnapShot]];
         
-        //Here we Merge All Layers in Video File
-        [self videoMergeProcess];
-
+        //Background Thread
+        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+            
+            //Here we Merge All Layers in Video File
+            [self videoMergeProcess];
+            
+        });
         
         //Here we take Image From Video Player
         snapshotImage =  [self getImageForVideo];
@@ -2722,7 +2784,15 @@ int selectedAddMoreLayerTab = -1;
         
         //Temporary For Simulator
         videoDuration = 30;
-        [self videoMergeProcess];
+        
+        //Background Thread
+        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+            
+            //Here we Merge All Layers in Video File
+            [self videoMergeProcess];
+            
+        });
+
         
 
     }
@@ -2760,18 +2830,21 @@ int selectedAddMoreLayerTab = -1;
     //CREATING PATH FOR FLYER OVERLAY VIDEO
     NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
     NSString *videoPath = [NSString stringWithFormat:@"%@/Template/flyerImage.mov", currentpath];
+    NSString *originalVideoPath = [NSString stringWithFormat:@"%@/Template/template.mov", currentpath];
     
     //HERE WE MAKE SURE FILE ALREADY EXISTS THEN DELETE IT OTHERWISE IGNORE
       NSError *error = nil;
     if ( [[NSFileManager defaultManager] fileExistsAtPath:videoPath isDirectory:NULL] ) {
         [[NSFileManager defaultManager] removeItemAtPath:videoPath error:&error];
     }
-
     
     NSURL *movieURL = [NSURL fileURLWithPath:videoPath];
     
-    //HERE WE ARE MERGE ALL LAYERS INTO VIDEO
-    [self mergeVideoWithURL:movieURL FlyerOverlayImage:[flyer getFlyerOverlayImage]];
+    //HERE WE CREATE VIDEO FROM FLYER OVERLAY IMAGE
+    [self createVideoWithURL:movieURL FlyerOverlayImage:[flyer getFlyerOverlayImage]];
+
+    //HERE WE ARE MERGE OVER CREATED VIDEO AND USER SELECTED OR MAKE
+    [self mergeVideosWithURL:movieURL SecondURL:[NSURL fileURLWithPath:originalVideoPath]];
 
 
 }
