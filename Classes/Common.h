@@ -10,8 +10,8 @@
 #define ALPHA0 0
 #define ALPHA1 1
 #define IMAGETYPE @"png"
-#define flyerlyWidth 620
-#define flyerlyHeight 620
+#define flyerlyWidth 640
+#define flyerlyHeight 640
 
 
 #define RADIANS(degrees) ((degrees * M_PI) / 180.0)

@@ -2379,7 +2379,7 @@ int selectedAddMoreLayerTab = -1;
                                                  flyerlyHeight, 8, 4*flyerlyWidth, rgbColorSpace,
                                                  kCGImageAlphaNoneSkipFirst);
     NSParameterAssert(context);
-    CGContextConcatCTM(context, self.flyimgView.transform );
+    CGContextConcatCTM(context, self.view.transform );
     CGContextDrawImage(context, CGRectMake(0, 0, CGImageGetWidth(image),
                                            CGImageGetHeight(image)), image);
     CGColorSpaceRelease(rgbColorSpace);
@@ -2701,14 +2701,9 @@ int selectedAddMoreLayerTab = -1;
         //Here we Update Overlay
         [flyer setVideoOverlay:[self getFlyerSnapShot]];
         
-        //CREATING PATH FOR FLYER OVERLAY VIDEO
-        NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
-        NSString *videoPath = [NSString stringWithFormat:@"%@/Template/flyerImage.mov", currentpath];
+        //Here we Merge All Layers in Video File
+        [self videoMergeProcess];
 
-        NSURL *movieURL = [NSURL fileURLWithPath:videoPath];
-        
-        //HERE WE ARE MERGE ALL LAYERS INTO VIDEO
-        [self mergeVideoWithURL:movieURL FlyerOverlayImage:[flyer getFlyerOverlayImage]];
         
         //Here we take Image From Video Player
         snapshotImage =  [self getImageForVideo];
@@ -2720,18 +2715,7 @@ int selectedAddMoreLayerTab = -1;
         snapshotImage =  [self getFlyerSnapShot];
         
         //Temporary For Simulator
-        //Here we Update Overlay
-        [flyer setVideoOverlay:[self getFlyerSnapShot]];
-        
-        //CREATING PATH FOR FLYER OVERLAY VIDEO
-        NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
-        NSString *videoPath = [NSString stringWithFormat:@"%@/Template/flyerImage.mov", currentpath];
-        
-        NSURL *movieURL = [NSURL fileURLWithPath:videoPath];
-        
-        //HERE WE ARE MERGE ALL LAYERS INTO VIDEO
-        [self mergeVideoWithURL:movieURL FlyerOverlayImage:[flyer getFlyerOverlayImage]];
-
+        [self videoMergeProcess];
         
 
     }
@@ -2756,6 +2740,33 @@ int selectedAddMoreLayerTab = -1;
     
     currentLayer = @"";
    
+}
+
+/*
+ * Here we Merge Video
+ */
+-(void)videoMergeProcess {
+    
+    //Here we Update Overlay
+    [flyer setVideoOverlay:[self getFlyerSnapShot]];
+    
+    //CREATING PATH FOR FLYER OVERLAY VIDEO
+    NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
+    NSString *videoPath = [NSString stringWithFormat:@"%@/Template/flyerImage.mov", currentpath];
+    
+    //HERE WE MAKE SURE FILE ALREADY EXISTS THEN DELETE IT OTHERWISE IGNORE
+      NSError *error = nil;
+    if ( [[NSFileManager defaultManager] fileExistsAtPath:videoPath isDirectory:NULL] ) {
+        [[NSFileManager defaultManager] removeItemAtPath:videoPath error:&error];
+    }
+
+    
+    NSURL *movieURL = [NSURL fileURLWithPath:videoPath];
+    
+    //HERE WE ARE MERGE ALL LAYERS INTO VIDEO
+    [self mergeVideoWithURL:movieURL FlyerOverlayImage:[flyer getFlyerOverlayImage]];
+
+
 }
 
 #pragma mark  Share Flyer
