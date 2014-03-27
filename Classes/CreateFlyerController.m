@@ -1861,9 +1861,6 @@ int selectedAddMoreLayerTab = -1;
     player.scalingMode = MPMovieScalingModeAspectFill;
     player.backgroundView.backgroundColor = [UIColor whiteColor];
     [player prepareToPlay];
-    videolastImage = [player thumbnailImageAtTime:player.duration /2
-                                       timeOption:MPMovieTimeOptionNearestKeyFrame];
-
 
 }
 
@@ -1915,7 +1912,18 @@ int selectedAddMoreLayerTab = -1;
 {
     if ((player.loadState & MPMovieLoadStatePlaythroughOK) == MPMovieLoadStatePlaythroughOK)
     {
+        
+        videolastImage = [player thumbnailImageAtTime:player.duration /2
+                                           timeOption:MPMovieTimeOptionNearestKeyFrame];
+
         playerSlider.maximumValue = player.duration;
+        NSTimeInterval duration = player.duration;
+        
+        float minutes = floor(duration / 60);
+        videoDuration = duration - minutes * 60;
+        NSLog(@"duration: %2.f", videoDuration);
+        
+        NSLog(@"%f",player.duration);
         playerSlider.value = 0.0;
     }
 }
@@ -2313,6 +2321,7 @@ int selectedAddMoreLayerTab = -1;
  * HERE WE MERGE VIDEO FOR SHARING
  * @PARAM
  *  NSURL VIDEO URL
+ *  UIImage Flyer Overlay Image
  */
 -(void)mergeVideoWithURL :(NSURL *)url FlyerOverlayImage:(UIImage *)image {
 
@@ -2343,17 +2352,14 @@ int selectedAddMoreLayerTab = -1;
     CVPixelBufferPoolCreatePixelBuffer (NULL, adaptor.pixelBufferPool, &imageBuffer);
     
     [videoWriter startWriting];
-    [videoWriter startSessionAtSourceTime:CMTimeMake(0, 24)];
+    [videoWriter startSessionAtSourceTime:CMTimeMake(0, VIDEOFRAME)];
     
-    //for (int i =0; i < 30 * 24; i++) {
-        [adaptor appendPixelBuffer:imageBuffer withPresentationTime:CMTimeMake(0, 24)];
-        [adaptor appendPixelBuffer:imageBufferEnd withPresentationTime:CMTimeMake(24 * 30, 24)];
-    //}
+    [adaptor appendPixelBuffer:imageBuffer withPresentationTime:CMTimeMake(0, VIDEOFRAME)];
+    [adaptor appendPixelBuffer:imageBufferEnd withPresentationTime:CMTimeMake(VIDEOFRAME * videoDuration, VIDEOFRAME)];
     
-//    [writerInput appendSampleBuffer:imageBuffer];
     
     [writerInput markAsFinished];
-    [videoWriter endSessionAtSourceTime:CMTimeMake(30 * 24, 24)];
+    [videoWriter endSessionAtSourceTime:CMTimeMake(videoDuration * VIDEOFRAME, VIDEOFRAME)];
     [videoWriter finishWriting];
 
 }
@@ -2715,6 +2721,7 @@ int selectedAddMoreLayerTab = -1;
         snapshotImage =  [self getFlyerSnapShot];
         
         //Temporary For Simulator
+        videoDuration = 30;
         [self videoMergeProcess];
         
 

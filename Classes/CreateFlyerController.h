@@ -67,6 +67,7 @@
     UILabel *titleLabel;
     UIImage *videolastImage;
     BOOL *isPlaying;
+    float videoDuration;
     
 }
 

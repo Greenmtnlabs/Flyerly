@@ -12,6 +12,7 @@
 #define IMAGETYPE @"png"
 #define flyerlyWidth 640
 #define flyerlyHeight 640
+#define VIDEOFRAME 24
 
 
 #define RADIANS(degrees) ((degrees * M_PI) / 180.0)
