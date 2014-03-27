@@ -10,6 +10,9 @@
 #define ALPHA0 0
 #define ALPHA1 1
 #define IMAGETYPE @"png"
+#define flyerlyWidth 620
+#define flyerlyHeight 620
+
 
 #define RADIANS(degrees) ((degrees * M_PI) / 180.0)
 #define GROW_ANIMATION_DURATION_SECONDS 0.15

@@ -142,7 +142,6 @@ int selectedAddMoreLayerTab = -1;
     [addMoreIconTabButton setBackgroundImage:[UIImage imageNamed:@"icon_button_selected"] forState:UIControlStateHighlighted];
     addMoreIconTabButton.tag = 10004;
     
-     self.flyimgView.image = nil;
 }
 
 
@@ -1796,6 +1795,7 @@ int selectedAddMoreLayerTab = -1;
 
         // HERE WE MOVE SOURCE FILE INTO FLYER FOLDER
         NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
+
         NSString *destination = [NSString stringWithFormat:@"%@/Template/template.mov",currentpath];
         [self.flyer setFlyerVideoUrl:@"Template/template.mov"];
         
@@ -1807,7 +1807,8 @@ int selectedAddMoreLayerTab = -1;
             [[NSFileManager defaultManager] removeItemAtPath:destination error:&error];
         }
         
-        //HERE WE MOVE FILE INTO FLYER FOLDER
+
+        //THNE HERE WE MOVE FILE INTO FLYER TEMPLATE FOLDER
         [[NSFileManager defaultManager] moveItemAtURL:recvUrl toURL:movieURL error:&error];
 
         //HERE WE RENDER MOVIE PLAYER
@@ -2306,6 +2307,89 @@ int selectedAddMoreLayerTab = -1;
     return newImage;
 }
 
+
+
+/*****
+ * HERE WE MERGE VIDEO FOR SHARING
+ * @PARAM
+ *  NSURL VIDEO URL
+ */
+-(void)mergeVideoWithURL :(NSURL *)url FlyerOverlayImage:(UIImage *)image {
+
+    NSError *error = nil;
+    AVAssetWriter *videoWriter = [[AVAssetWriter alloc] initWithURL:
+                                  url fileType:AVFileTypeQuickTimeMovie
+                                                              error:&error];
+    NSParameterAssert(videoWriter);
+    
+    NSDictionary *videoSettings = [NSDictionary dictionaryWithObjectsAndKeys:
+                                   AVVideoCodecH264, AVVideoCodecKey,
+                                   [NSNumber numberWithInt:flyerlyWidth], AVVideoWidthKey,
+                                   [NSNumber numberWithInt:flyerlyHeight], AVVideoHeightKey,
+                                   nil];
+    AVAssetWriterInput* writerInput = [AVAssetWriterInput
+                                        assetWriterInputWithMediaType:AVMediaTypeVideo
+                                        outputSettings:videoSettings] ;
+    
+    NSParameterAssert(writerInput);
+    NSParameterAssert([videoWriter canAddInput:writerInput]);
+    [videoWriter addInput:writerInput];
+    
+    CVPixelBufferRef imageBuffer = [self newPixelBufferFromCGImage:[image CGImage]];
+    CVPixelBufferRef imageBufferEnd = [self newPixelBufferFromCGImage:[image CGImage]];
+ 
+    AVAssetWriterInputPixelBufferAdaptor *adaptor = [AVAssetWriterInputPixelBufferAdaptor assetWriterInputPixelBufferAdaptorWithAssetWriterInput:writerInput sourcePixelBufferAttributes:@{ (NSString *)kCVPixelBufferPixelFormatTypeKey : @(kCVPixelFormatType_32BGRA) }];
+    
+    CVPixelBufferPoolCreatePixelBuffer (NULL, adaptor.pixelBufferPool, &imageBuffer);
+    
+    [videoWriter startWriting];
+    [videoWriter startSessionAtSourceTime:CMTimeMake(0, 24)];
+    
+    //for (int i =0; i < 30 * 24; i++) {
+        [adaptor appendPixelBuffer:imageBuffer withPresentationTime:CMTimeMake(0, 24)];
+        [adaptor appendPixelBuffer:imageBufferEnd withPresentationTime:CMTimeMake(24 * 30, 24)];
+    //}
+    
+//    [writerInput appendSampleBuffer:imageBuffer];
+    
+    [writerInput markAsFinished];
+    [videoWriter endSessionAtSourceTime:CMTimeMake(30 * 24, 24)];
+    [videoWriter finishWriting];
+
+}
+
+- (CVPixelBufferRef) newPixelBufferFromCGImage: (CGImageRef) image
+{
+    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
+                             [NSNumber numberWithBool:YES], kCVPixelBufferCGImageCompatibilityKey,
+                             [NSNumber numberWithBool:YES], kCVPixelBufferCGBitmapContextCompatibilityKey,
+                             nil];
+    CVPixelBufferRef pxbuffer = NULL;
+    CVReturn status = CVPixelBufferCreate(kCFAllocatorDefault, flyerlyWidth,
+                                          flyerlyHeight, kCVPixelFormatType_32ARGB, (__bridge CFDictionaryRef) options,
+                                          &pxbuffer);
+    NSParameterAssert(status == kCVReturnSuccess && pxbuffer != NULL);
+    
+    CVPixelBufferLockBaseAddress(pxbuffer, 0);
+    void *pxdata = CVPixelBufferGetBaseAddress(pxbuffer);
+    NSParameterAssert(pxdata != NULL);
+    
+    CGColorSpaceRef rgbColorSpace = CGColorSpaceCreateDeviceRGB();
+    CGContextRef context = CGBitmapContextCreate(pxdata, flyerlyWidth,
+                                                 flyerlyHeight, 8, 4*flyerlyWidth, rgbColorSpace,
+                                                 kCGImageAlphaNoneSkipFirst);
+    NSParameterAssert(context);
+    CGContextConcatCTM(context, self.flyimgView.transform );
+    CGContextDrawImage(context, CGRectMake(0, 0, CGImageGetWidth(image),
+                                           CGImageGetHeight(image)), image);
+    CGColorSpaceRelease(rgbColorSpace);
+    CGContextRelease(context);
+    
+    CVPixelBufferUnlockBaseAddress(pxbuffer, 0);
+    
+    return pxbuffer;
+}
+
 #pragma mark Flyer Modified
 
 /**
@@ -2609,16 +2693,45 @@ int selectedAddMoreLayerTab = -1;
     [self.flyimgView layerStoppedEditing:currentLayer];
     
     UIImage *snapshotImage;
+    
     //Save OnBack
     if ([flyer isVideoFlyer]) {
         
+        
+        //Here we Update Overlay
+        [flyer setVideoOverlay:[self getFlyerSnapShot]];
+        
+        //CREATING PATH FOR FLYER OVERLAY VIDEO
+        NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
+        NSString *videoPath = [NSString stringWithFormat:@"%@/Template/flyerImage.mov", currentpath];
+
+        NSURL *movieURL = [NSURL fileURLWithPath:videoPath];
+        
+        //HERE WE ARE MERGE ALL LAYERS INTO VIDEO
+        [self mergeVideoWithURL:movieURL FlyerOverlayImage:[flyer getFlyerOverlayImage]];
+        
         //Here we take Image From Video Player
         snapshotImage =  [self getImageForVideo];
+
         
     }else {
         
         //Here we take Snap shot of Flyer
         snapshotImage =  [self getFlyerSnapShot];
+        
+        //Temporary For Simulator
+        //Here we Update Overlay
+        [flyer setVideoOverlay:[self getFlyerSnapShot]];
+        
+        //CREATING PATH FOR FLYER OVERLAY VIDEO
+        NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
+        NSString *videoPath = [NSString stringWithFormat:@"%@/Template/flyerImage.mov", currentpath];
+        
+        NSURL *movieURL = [NSURL fileURLWithPath:videoPath];
+        
+        //HERE WE ARE MERGE ALL LAYERS INTO VIDEO
+        [self mergeVideoWithURL:movieURL FlyerOverlayImage:[flyer getFlyerOverlayImage]];
+
         
 
     }

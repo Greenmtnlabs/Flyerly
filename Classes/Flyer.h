@@ -49,6 +49,9 @@
 -(NSString *)addText;
 -(NSString *)addImage;
 
+-(void)setVideoOverlay :(UIImage *)snapShot;
+-(UIImage *)getFlyerOverlayImage;
+
 -(void)setImageFrame :(NSString *)uid :(CGRect )photoFrame;
 
 -(void)setImageTag :(NSString *)uid Tag :(NSString *)tag;
@@ -106,6 +109,7 @@
 -(NSString *)getFlyerDescription;
 -(NSString *)getFlyerDate;
 -(NSString *)getFlyerURL;
+-(NSString *)getVideoURL;
 -(NSString *)getShareType;
 -(NSString *)getFlyerUpdateDate;
 

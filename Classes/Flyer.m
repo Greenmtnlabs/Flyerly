@@ -74,9 +74,10 @@ NSString * const TEXTHEIGHT = @"280.000000";
     //set Share Status File for Update
     socialFile = [flyPath stringByAppendingString:[NSString stringWithFormat:@"/Social/flyer.soc"]];
     
-    //set Flyer Files for Future Update
+    //set Flyer Image for Future Update
     flyerImageFile = [flyPath stringByAppendingString:[NSString stringWithFormat:@"/flyer.%@",IMAGETYPE]];
-
+    
+    //set Video Flyer Image for Future Update
     videoImageFile = [flyPath stringByAppendingString:[NSString stringWithFormat:@"/flyerOverlay.%@",IMAGETYPE]];
     
     masterLayers = [[NSMutableDictionary alloc] initWithContentsOfFile:piecesFile];
@@ -139,12 +140,24 @@ NSString * const TEXTHEIGHT = @"280.000000";
 -(void)setVideoOverlay :(UIImage *)snapShot {
 
     NSData *snapShotData = UIImagePNGRepresentation(snapShot);
-    [snapShotData writeToFile:flyerImageFile atomically:YES];
+    [snapShotData writeToFile:videoImageFile atomically:YES];
+}
+
+/*** HERE WE return Overlay Image
+ *
+ */
+-(UIImage *)getFlyerOverlayImage {
+
+    NSString* currentPath  =   [[NSFileManager defaultManager] currentDirectoryPath];
+    
+    NSString *imagePath = [currentPath stringByAppendingString:[NSString stringWithFormat:@"/flyerOverlay.%@",IMAGETYPE] ];
+    UIImage *shareImage =  [UIImage imageWithContentsOfFile:imagePath];
+
+    return shareImage;
 }
 
 
-
-/*** HERE WE SAVE IMAGE INTO GALLERY 
+/*** HERE WE SAVE IMAGE INTO GALLERY
  * AND LINK WITH FLYERLY ALBUM
  *
  */
@@ -1067,6 +1080,9 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 
 }
 
+
+
+
 /*
  * Here we Set Flyer Type to Image Flyer
  */
@@ -1104,6 +1120,15 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     [masterLayers setValue:templateDictionary forKey:@"Template"];
 
 
+}
+
+/*
+ * HERE WE RETURN VIDEO FILE PATH
+ */
+-(NSString *)getVideoURL {
+    NSMutableDictionary *templateDictionary = [self getLayerFromMaster:@"Template"];
+    
+    return [templateDictionary valueForKey:@"VideoURL"];
 }
 
 /* Checking here Video Flyer or Image Flyer

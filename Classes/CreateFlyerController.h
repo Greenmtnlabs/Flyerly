@@ -159,6 +159,8 @@
 -(void)renderFlyer;
 -(void)undoFlyer;
 -(void)setUndoStatus;
+-(void)mergeVideo :(NSURL *)url;
+
 
 -(UIImage *)getFlyerSnapShot;
 
