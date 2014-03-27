@@ -141,7 +141,7 @@ int selectedAddMoreLayerTab = -1;
     
     [addMoreIconTabButton setBackgroundImage:[UIImage imageNamed:@"icon_button_selected"] forState:UIControlStateHighlighted];
     addMoreIconTabButton.tag = 10004;
-    
+    self.flyimgView.image = nil;
 }
 
 
@@ -2407,11 +2407,18 @@ int selectedAddMoreLayerTab = -1;
     AVURLAsset* firstAsset = [AVURLAsset URLAssetWithURL:firstURL options:nil];
     AVURLAsset* secondAsset = [AVURLAsset URLAssetWithURL:secondURL options:nil];
     
+    
+    
+ 
     // Make an instance of avmutablecomposition so that we can edit this asset:
     AVMutableComposition* mixComposition = [[AVMutableComposition alloc] init];
     
     // Add tracks to this composition
     AVMutableCompositionTrack *firstTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeVideo preferredTrackID:kCMPersistentTrackID_Invalid];
+    
+    // Add tracks to this composition
+    AVMutableCompositionTrack *secondTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeVideo preferredTrackID:kCMPersistentTrackID_Invalid];
+
     
     /// Here we Get Set Video Limit of 30 Sec Only
     int32_t preferredTimeScale = 1;
@@ -2420,7 +2427,28 @@ int selectedAddMoreLayerTab = -1;
     
     [firstTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, inTime) ofTrack:[[firstAsset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0] atTime:kCMTimeZero error:nil];
 
-    [firstTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, inTime) ofTrack:[[secondAsset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0] atTime:kCMTimeZero error:nil];
+    [secondTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, inTime) ofTrack:[[secondAsset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0] atTime:kCMTimeZero error:nil];
+    
+    // Show both videos simultaneously
+    AVMutableVideoCompositionInstruction *mainInstruction = [AVMutableVideoCompositionInstruction videoCompositionInstruction];
+    
+    // Set the time duration
+    mainInstruction.timeRange = CMTimeRangeMake(kCMTimeZero, firstAsset.duration);
+    
+    // Image video
+    AVMutableVideoCompositionLayerInstruction *imageVideo = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:secondTrack];
+    
+    // Background video
+    AVMutableVideoCompositionLayerInstruction *backgroundVideo = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:firstTrack];
+    
+    // We need to play them together
+    mainInstruction.layerInstructions = [NSArray arrayWithObjects: imageVideo, backgroundVideo, nil];
+    
+    // Make a video composition
+    AVMutableVideoComposition *videoComposition = [AVMutableVideoComposition videoComposition];
+    videoComposition.instructions = [NSArray arrayWithObject:mainInstruction];
+    videoComposition.frameDuration = CMTimeMake(1, 30);
+    videoComposition.renderSize = CGSizeMake(620, 620);
 
 
     
@@ -2450,7 +2478,7 @@ int selectedAddMoreLayerTab = -1;
             }
         };
     }]; 
-    
+
 }
 
 
@@ -2783,7 +2811,7 @@ int selectedAddMoreLayerTab = -1;
         snapshotImage =  [self getFlyerSnapShot];
         
         //Temporary For Simulator
-        videoDuration = 30;
+        videoDuration = 1;
         
         //Background Thread
         dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){

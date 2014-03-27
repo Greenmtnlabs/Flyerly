@@ -169,7 +169,6 @@
 -(IBAction)setStyleTabAction:(id) sender;
 -(IBAction)setlibPhotoTabAction:(id) sender;
 -(IBAction)play:(id)sender;
--(IBAction)pause:(id)sender;
 -(IBAction)slide:(id)sender;
 
 @end
