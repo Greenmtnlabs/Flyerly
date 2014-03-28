@@ -1667,7 +1667,7 @@ int selectedAddMoreLayerTab = -1;
         // HERE WE MOVE SOURCE FILE INTO FLYER FOLDER
         NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
         NSString *destination = [NSString stringWithFormat:@"%@/Template/template.mov",currentpath];
-        [self.flyer setFlyerVideoUrl:@"Template/template.mov"];
+        [self.flyer setOriginalVideoUrl:@"Template/template.mov"];
         
         NSURL *movieURL = [NSURL fileURLWithPath:destination];
         
@@ -1799,7 +1799,7 @@ int selectedAddMoreLayerTab = -1;
         NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
 
         NSString *destination = [NSString stringWithFormat:@"%@/Template/template.mov",currentpath];
-        [self.flyer setFlyerVideoUrl:@"Template/template.mov"];
+        [self.flyer setOriginalVideoUrl:@"Template/template.mov"];
         
         NSURL *movieURL = [NSURL fileURLWithPath:destination];
 
@@ -2462,8 +2462,7 @@ int selectedAddMoreLayerTab = -1;
     //// Now to save this Track:
     AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:mixComposition presetName:AVAssetExportPresetHighestQuality];
     
-    NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
-    NSString *destination = [NSString stringWithFormat:@"%@/FlyerlyMovie.mov",currentpath];
+    NSString *destination = [self.flyer getSharingVideoPath];
 
     //Delete Old File if Exists
         NSError *error = nil;
@@ -2480,8 +2479,18 @@ int selectedAddMoreLayerTab = -1;
                 break;
             }
             case AVAssetExportSessionStatusCompleted: {
-                
                 NSLog (@"SUCCESS");
+
+                //Background Thread
+                dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+                    
+                    // Here we Add Video In Flyerly Album
+                    //This Data is Temporary Send For Crash Maintain on Simulator Other wise
+                    // it should be nil for Video Saving
+                    NSData *data = [[NSFileManager defaultManager] contentsAtPath:destination];
+                    [self.flyer saveInGallery:data];
+                    
+                });
             }
         };
     }]; 
@@ -2824,7 +2833,7 @@ int selectedAddMoreLayerTab = -1;
         dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
             
             //Here we Merge All Layers in Video File
-            //[self videoMergeProcess];
+            [self videoMergeProcess];
             
         });
 

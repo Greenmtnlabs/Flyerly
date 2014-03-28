@@ -32,6 +32,8 @@
 
 -(void)saveFlyer :(UIImage *)snapShot;
 
+-(void)saveInGallery :(NSData *)imgData;
+
 -(void)addToHistory;
 
 -(void)replaceFromHistory;
@@ -72,15 +74,17 @@
 -(void)setFlyerTypeVideo;
 -(void)setFlyerTypeImage;
 
--(void)setFlyerVideoUrl :(NSString *)url;
--(BOOL)isVideoFlyer;
+-(void)setOriginalVideoUrl :(NSString *)url;
 
+-(BOOL)isVideoFlyer;
 
 -(void)setFlyerTitle :(NSString *)name;
 
 -(void)setFlyerDescription :(NSString *)desp;
 
 -(void)setFlyerURL :(NSString *)URL;
+-(void)setVideoAsssetURL :(NSString *)URL;
+
 -(void)setShareType :(NSString *)type;
 
 
@@ -109,9 +113,13 @@
 -(NSString *)getFlyerDescription;
 -(NSString *)getFlyerDate;
 -(NSString *)getFlyerURL;
--(NSString *)getVideoURL;
+-(NSString *)getOriginalVideoURL;
+-(NSString *)getSharingVideoPath;
+
 -(NSString *)getShareType;
 -(NSString *)getFlyerUpdateDate;
+-(NSString *)getVideoAssetURL;
+
 
 
 -(NSString *)getText :(NSString *)uid;

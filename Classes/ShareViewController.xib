@@ -315,7 +315,7 @@
         <image name="email_share_selected.png" width="120" height="120"/>
         <image name="facebook_share.png" width="120" height="120"/>
         <image name="facebook_share_selected.png" width="120" height="120"/>
-        <image name="flat_text_box.png" width="253" height="35"/>
+        <image name="flat_text_box.png" width="503" height="69"/>
         <image name="flickr_share.png" width="120" height="120"/>
         <image name="flickr_share_selected.png" width="120" height="120"/>
         <image name="instagram_share.png" width="120" height="120"/>
