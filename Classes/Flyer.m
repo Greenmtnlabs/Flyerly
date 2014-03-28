@@ -108,8 +108,11 @@ NSString * const TEXTHEIGHT = @"280.000000";
         
         //USER ALLOWED
         // Checking Flyer Type
-        if (![self isVideoFlyer]) {
+        if ([self isVideoFlyer]) {
             
+            //HERE WE WRITE VIDEO IN GALLERY
+            //NSData *data = [[NSFileManager defaultManager] contentsAtPath:path];
+        }else {
             //HERE WE WRITE IMAGE IN GALLERY
             [self saveInGallery:snapShotData];
         }

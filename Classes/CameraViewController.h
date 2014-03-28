@@ -11,18 +11,24 @@
 #import <AVFoundation/AVFoundation.h>
 
 
+
 @interface CameraViewController : NBUCameraViewController
 
 @property CGSize desiredImageSize;
 @property (nonatomic, copy) void (^onImageTaken)(UIImage *);
-
 @property (nonatomic, copy) void (^onVideoFinished)(NSURL *);
+@property (nonatomic, copy) void (^onVideoCancel)();
+
 
 // Outlets
 @property (assign, nonatomic) IBOutlet UIImageView *cameraLines;
+
+@property (assign, nonatomic) IBOutlet UIImageView *flyerImageView;
+
 @property (assign, nonatomic) IBOutlet UIProgressView *progressView;
 @property (strong, nonatomic) IBOutlet UIButton *mode;
 @property (strong, nonatomic) NSString *videoAllow;
+
 
 
 

@@ -141,7 +141,7 @@ int selectedAddMoreLayerTab = -1;
     
     [addMoreIconTabButton setBackgroundImage:[UIImage imageNamed:@"icon_button_selected"] forState:UIControlStateHighlighted];
     addMoreIconTabButton.tag = 10004;
-    self.flyimgView.image = nil;
+
 }
 
 
@@ -1700,7 +1700,6 @@ int selectedAddMoreLayerTab = -1;
 
     CameraViewController *nbuCamera = [[CameraViewController alloc]initWithNibName:@"CameraViewController" bundle:nil];
     
-    
     if ( imgPickerFlag == 2 ) {
         NSDictionary *dict = [flyer getLayerFromMaster:currentLayer];
         nbuCamera.desiredImageSize = CGSizeMake( [[dict valueForKey:@"width"] floatValue],
@@ -1761,6 +1760,9 @@ int selectedAddMoreLayerTab = -1;
     
     CameraViewController *nbuCamera = [[CameraViewController alloc]initWithNibName:@"CameraViewController" bundle:nil];
     
+    //Here we Pass FlyerImageView For Video
+    nbuCamera.flyerImageView = self.flyimgView;
+    
     nbuCamera.videoAllow = @"YES";
     nbuCamera.desiredImageSize = CGSizeMake( 300,  300 );
     
@@ -1789,9 +1791,9 @@ int selectedAddMoreLayerTab = -1;
         
         NSLog(@"%@",recvUrl);
         NSError *error = nil;
+        [self.view addSubview:flyimgView];
         
         [self.flyer setFlyerTypeVideo];
-
 
         // HERE WE MOVE SOURCE FILE INTO FLYER FOLDER
         NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
@@ -1815,6 +1817,13 @@ int selectedAddMoreLayerTab = -1;
         [self.flyimgView renderLayer:@"Template" layerDictionary:[self.flyer getLayerFromMaster:@"Template"]];
         
       }];
+    
+    [nbuCamera setOnVideoCancel:^() {
+    
+      [self.view addSubview:flyimgView];
+    
+    }];
+
     
     [self.navigationController pushViewController:nbuCamera animated:YES];
 }
@@ -2407,9 +2416,7 @@ int selectedAddMoreLayerTab = -1;
     AVURLAsset* firstAsset = [AVURLAsset URLAssetWithURL:firstURL options:nil];
     AVURLAsset* secondAsset = [AVURLAsset URLAssetWithURL:secondURL options:nil];
     
-    
-    
- 
+
     // Make an instance of avmutablecomposition so that we can edit this asset:
     AVMutableComposition* mixComposition = [[AVMutableComposition alloc] init];
     
@@ -2817,7 +2824,7 @@ int selectedAddMoreLayerTab = -1;
         dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
             
             //Here we Merge All Layers in Video File
-            [self videoMergeProcess];
+            //[self videoMergeProcess];
             
         });
 

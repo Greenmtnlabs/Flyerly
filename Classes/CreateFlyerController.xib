@@ -338,23 +338,23 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="D6r-Rt-cPZ">
-                    <rect key="frame" x="2" y="0.0" width="58" height="40"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="D6r-Rt-cPZ">
+                    <rect key="frame" x="1" y="0.0" width="40" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <state key="normal" title="Play">
+                    <state key="normal" image="play_icon.png">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="selected" title="Pause"/>
+                    <state key="selected" image="pause_icon.png"/>
                     <connections>
                         <action selector="play:" destination="-1" eventType="touchUpInside" id="Y6Z-gK-efT"/>
                     </connections>
                 </button>
                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" id="Mes-fj-ojE">
-                    <rect key="frame" x="68" y="3" width="241" height="34"/>
+                    <rect key="frame" x="52" y="3" width="257" height="34"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="minimumTrackTintColor" red="0.2807829288" green="0.75192376110000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <color key="maximumTrackTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -392,6 +392,8 @@
         <image name="image_icon.png" width="128" height="90"/>
         <image name="outline_button.png" width="128" height="90"/>
         <image name="outline_button_selected.png" width="128" height="90"/>
+        <image name="pause_icon.png" width="80" height="80"/>
+        <image name="play_icon.png" width="80" height="80"/>
         <image name="size_button.png" width="128" height="90"/>
         <image name="size_button_selected.png" width="128" height="90"/>
         <image name="symbolicon_button.png" width="128" height="90"/>
