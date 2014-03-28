@@ -6,8 +6,6 @@
 #import <UIKit/UIKit.h>
 #import "MainSettingViewController.h"
 #import "ParentViewController.h"
-#import <FacebookSDK/FacebookSDK.h>
-#import "FacebookLikeView.h"
 #import "FlyerlySingleton.h"
 #import "Reachability.h"
 #import "Flyer.h"
@@ -16,29 +14,18 @@
 @class FlyrViewController;
 @class CreateFlyerController ;
 @class InviteFriendsController;
-@class FBSession,FlyerlySingleton;
-@class FacebookLikeView;
+@class FlyerlySingleton;
 @class MainSettingViewController,ParentViewController;
 
 
-@interface FlyerlyMainScreen : ParentViewController<UIWebViewDelegate,UIActionSheetDelegate,FacebookLikeViewDelegate> {
+@interface FlyerlyMainScreen : ParentViewController {
     
 	CreateFlyerController *createFlyer;
 	FlyrViewController *tpController;
 	InviteFriendsController *addFriendsController;
     FlyerlySingleton *globle;
-    
-    IBOutlet UIButton *likeButton;
-    IBOutlet UIButton *followButton;
     IBOutlet UIButton *setBotton;
-    
-	BOOL loadingViewFlag;
-    int numberOfFlyers;
-    
-    
-    UIView *opaqueView;
-    NSArray *twtAcconts;
-    Flyer *flyer;
+        Flyer *flyer;
 
 }
 
@@ -53,17 +40,11 @@
 @property (nonatomic, strong) IBOutlet UIButton *savedFlyrButton;
 @property (nonatomic, strong) IBOutlet UIButton *inviteFriendButton;
 
-@property (nonatomic, strong) IBOutlet UIButton *likeButton;
-@property (nonatomic, strong) IBOutlet UIButton *followButton;
-
 @property (nonatomic, strong) IBOutlet UIImageView *firstFlyer;
 @property (nonatomic, strong) IBOutlet UIImageView *secondFlyer;
 @property (nonatomic, strong) IBOutlet UIImageView *thirdFlyer;
 @property (nonatomic, strong) IBOutlet UIImageView *fourthFlyer;
 
-@property (nonatomic, strong) IBOutlet UIView *likeView;
-@property (nonatomic, strong) IBOutlet FacebookLikeView *facebookLikeView;
-@property (nonatomic, strong) IBOutlet UIWebView *webview;
 @property (nonatomic, strong) NSMutableArray *recentFlyers;
 
 -(IBAction)doNew:(id)sender;
@@ -71,11 +52,7 @@
 -(IBAction)doAbout:(id)sender;
 -(IBAction)doInvite:(id)sender;
 -(IBAction)showFlyerDetail:(UIImageView *)sender;
-- (IBAction)showLikeButton;
-- (IBAction)onTwitter:(id)sender;
--(IBAction)goBack;
 
 - (void)updateRecentFlyer:(NSMutableArray *)recentFlyers;
-- (void)setFacebookLikeStatus;
 
 @end

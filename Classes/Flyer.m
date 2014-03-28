@@ -352,13 +352,10 @@ NSString * const TEXTHEIGHT = @"280.000000";
 -(NSString *)getFlyerImage {
 
     NSString* currentPath  =   [[NSFileManager defaultManager] currentDirectoryPath];
-    
     NSString *imagePath = [currentPath stringByAppendingString:[NSString stringWithFormat:@"/flyer.%@",IMAGETYPE] ];
     
     return imagePath;
-
 }
-
 
 
 /*
@@ -372,8 +369,6 @@ NSString * const TEXTHEIGHT = @"280.000000";
     
     //Getting Current Flyer folder Path
     NSString* currentSourcepath  =   [[NSFileManager defaultManager] currentDirectoryPath];
-    
-    
     NSString* historyDestinationpath  =  [NSString stringWithFormat:@"%@/History",currentSourcepath];
     
     NSArray *fileList = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:historyDestinationpath error:nil];
@@ -383,10 +378,8 @@ NSString * const TEXTHEIGHT = @"280.000000";
     if (fileList.count >= 1) {
         
         //HISTORY AVAILABLE
-        
         NSArray *sortedFlyersList = [fileList sortedArrayUsingFunction:compareDesc context:NULL];
-        
-    
+
         NSString* historyLastFilepath = [NSString stringWithFormat:@"%@/%@",historyDestinationpath,[sortedFlyersList objectAtIndex:0]];
     
         // Here we Compare Both Files One Current Flyer Folder and Second Last flyer Folder from History if
@@ -400,7 +393,6 @@ NSString * const TEXTHEIGHT = @"280.000000";
                 NSString* historyFirstFilepath = [NSString stringWithFormat:@"%@/%@",historyDestinationpath,[sortedFlyersList objectAtIndex:sortedFlyersList.count -1]];
                 [[NSFileManager defaultManager] removeItemAtPath:historyFirstFilepath error:&error];
             }
-            
             
             //Create History  folder Path
             int timestamp = [[NSDate date] timeIntervalSince1970];
@@ -429,7 +421,6 @@ NSString * const TEXTHEIGHT = @"280.000000";
     } else {
     
          //HISTORY NOT AVAILABLE
-        
         //Delete .gitkeep File if Exist in History Directory
         NSString* gitkeepFilepath = [NSString stringWithFormat:@"%@/History/.gitkeep",currentSourcepath];
         if (![[NSFileManager defaultManager] fileExistsAtPath:gitkeepFilepath isDirectory:NULL]) {
@@ -526,12 +517,8 @@ NSString * const TEXTHEIGHT = @"280.000000";
             }
         }
 
-        
     }
     
-    
-    
- 
 }
 
 
@@ -657,9 +644,6 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     return [masterLayers objectForKey:uid];
 }
 
-
-
-
 /*
  * When New Symbol layer Add on Flyer
  * its will call and Add one Content in MasterLayers Dictionary
@@ -671,7 +655,6 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     int timestamp = [[NSDate date] timeIntervalSince1970];
     
     NSString *uniqueId = [NSString stringWithFormat:@"%d",timestamp];
-    
     
     //Create Dictionary for Symbol
     NSMutableDictionary *imageDetailDictionary = [[NSMutableDictionary alloc] init];
