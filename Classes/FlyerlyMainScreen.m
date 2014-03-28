@@ -23,8 +23,8 @@
 @implementation FlyerlyMainScreen
 
 @synthesize tpController,createFlyrLabel,savedFlyrLabel,inviteFriendLabel,addFriendsController;
-@synthesize firstFlyer, secondFlyer, thirdFlyer, fourthFlyer, createFlyrButton, savedFlyrButton, inviteFriendButton;
-@synthesize recentFlyers;
+@synthesize firstFlyer, secondFlyer, thirdFlyer, fourthFlyer, createFlyrButton, savedFlyrButton;
+@synthesize recentFlyers,inviteFriendButton;
 
 
 -(IBAction)doNew:(id)sender{
@@ -95,7 +95,6 @@
     for (int i = 0 ; i < recFlyers.count; i++) {
         
          UIImage *recentImage =  [UIImage imageWithContentsOfFile:[recFlyers objectAtIndex:i]];
-        
 
         UIImage *resizeImage = [self imageWithImage:recentImage scaledToSize:size];
         
@@ -136,7 +135,7 @@
     self.navigationController.navigationBarHidden = NO;
     
     // for Navigation Bar logo
-    UIImageView *logo = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 102, 38)];
+    UIImageView *logo = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 80, 44)];
     [logo setImage:[UIImage imageNamed:@"flyerlylogo"]];
     self.navigationItem.titleView = logo;
     

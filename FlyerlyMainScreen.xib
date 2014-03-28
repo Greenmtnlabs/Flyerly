@@ -157,7 +157,7 @@
                                 <action selector="doAbout:" destination="-1" eventType="touchUpInside" id="54"/>
                             </connections>
                         </button>
-                        <imageView userInteractionEnabled="NO" tag="1000" contentMode="scaleToFill" image="pinned_flyer2.png" id="14">
+                        <imageView userInteractionEnabled="NO" tag="1000" contentMode="center" image="pinned_flyer2.png" id="14">
                             <rect key="frame" x="15" y="136" width="136" height="136"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             <accessibility key="accessibilityConfiguration" label="">
@@ -165,7 +165,7 @@
                             </accessibility>
                             <inset key="insetFor6xAndEarlier" minX="0.0" minY="44" maxX="0.0" maxY="-44"/>
                         </imageView>
-                        <imageView userInteractionEnabled="NO" tag="1000" contentMode="scaleToFill" image="pinned_flyer2.png" id="13">
+                        <imageView userInteractionEnabled="NO" tag="1000" contentMode="center" image="pinned_flyer2.png" id="13">
                             <rect key="frame" x="168" y="136" width="136" height="136"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             <accessibility key="accessibilityConfiguration" label="">
@@ -173,14 +173,14 @@
                             </accessibility>
                             <inset key="insetFor6xAndEarlier" minX="0.0" minY="44" maxX="0.0" maxY="-44"/>
                         </imageView>
-                        <imageView userInteractionEnabled="NO" tag="1000" contentMode="scaleToFill" image="pinned_flyer2.png" id="11">
+                        <imageView userInteractionEnabled="NO" tag="1000" contentMode="center" image="pinned_flyer2.png" id="11">
                             <rect key="frame" x="15" y="279" width="136" height="136"/>
                             <accessibility key="accessibilityConfiguration" label="">
                                 <bool key="isElement" value="NO"/>
                             </accessibility>
                             <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
                         </imageView>
-                        <imageView userInteractionEnabled="NO" tag="1000" contentMode="scaleToFill" image="pinned_flyer2.png" id="12">
+                        <imageView userInteractionEnabled="NO" tag="1000" contentMode="center" image="pinned_flyer2.png" id="12">
                             <rect key="frame" x="169" y="279" width="136" height="136"/>
                             <accessibility key="accessibilityConfiguration" label="">
                                 <bool key="isElement" value="NO"/>

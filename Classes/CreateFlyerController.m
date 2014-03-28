@@ -16,7 +16,7 @@ fontBorderTabButton,addMoreIconTabButton,addMorePhotoTabButton,addMoreSymbolTabB
 @synthesize contextView,libraryContextView,libFlyer,backgroundTabButton,addMoreFontTabButton;
 @synthesize libText,libBackground,libPhoto,libEmpty,backtemplates,cameraTakePhoto,cameraRoll,flyerBorder;
 @synthesize flyimgView,currentLayer,layersDic,flyer,player,playerView,playerToolBar,playButton,playerSlider;
-
+@synthesize durationLabel,durationChange;
 int selectedAddMoreLayerTab = -1;
 
 
@@ -1895,8 +1895,7 @@ int selectedAddMoreLayerTab = -1;
 
     NSLog(@"%f",playerSlider.value);
     player.currentPlaybackTime = playerSlider.value;
-    
-
+    durationChange.text =[self stringFromTimeInterval:playerSlider.value];
 
 }
 
@@ -1904,6 +1903,7 @@ int selectedAddMoreLayerTab = -1;
     
      NSLog(@"%f",player.currentPlaybackTime);
     playerSlider.value = player.currentPlaybackTime;
+    durationChange.text =[self stringFromTimeInterval:player.currentPlaybackTime];
     
     if (isPlaying) {
         [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateTime:) userInfo:nil repeats:NO];
@@ -1927,14 +1927,21 @@ int selectedAddMoreLayerTab = -1;
 
         playerSlider.maximumValue = player.duration;
         NSTimeInterval duration = player.duration;
+        durationLabel.text =[NSString stringWithFormat:@"%@ sec",[self stringFromTimeInterval:player.duration]] ;
+        durationChange.text = @"00:00";
         
         float minutes = floor(duration / 60);
         videoDuration = duration - minutes * 60;
-
         playerSlider.value = 0.0;
     }
 }
 
+- (NSString *)stringFromTimeInterval:(NSTimeInterval)interval {
+    NSInteger ti = (NSInteger)interval;
+    NSInteger seconds = ti % 60;
+    NSInteger minutes = (ti / 60) % 60;
+    return [NSString stringWithFormat:@"%02ld:%02ld", (long)minutes, (long)seconds];
+}
 
 /*
  * Here we Get Player Button Press Info
