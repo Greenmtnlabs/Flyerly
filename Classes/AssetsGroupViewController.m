@@ -160,7 +160,17 @@
         //Background Thread
         dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
             [self writeDataToPath:rootPath andAsset:asset.ALAsset];
+            
+            // HERE WE CALL OVER CALLBACK HERE
+            NSURL *url = [NSURL fileURLWithPath:rootPath];
+            self.onVideoFinished( url );
         });
+        
+        // Pop the current view, and push the crop view.
+        NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[[self navigationController] viewControllers]];
+        [viewControllers removeLastObject];
+        [viewControllers removeLastObject];
+        [[self navigationController] setViewControllers:viewControllers animated:YES];
         
         return;
     }

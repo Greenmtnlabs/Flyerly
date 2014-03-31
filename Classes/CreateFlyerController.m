@@ -1934,6 +1934,8 @@ int selectedAddMoreLayerTab = -1;
         float minutes = floor(duration / 60);
         videoDuration = duration - minutes * 60;
         playerSlider.value = 0.0;
+    } else {
+        NSLog(@"Unknown load state: %u", player.loadState);
     }
 }
 
