@@ -1851,14 +1851,14 @@ int selectedAddMoreLayerTab = -1;
 
     self.flyimgView.image = nil;
     [self.playerView addSubview:player.view];
-    [playerToolBar setFrame:CGRectMake(0, 270, 310, 40)];
+    [playerToolBar setFrame:CGRectMake(0, self.playerView.frame.size.height - 40, 310, 40)];
     [self.playerView addSubview:playerToolBar];
     player.accessibilityElementsHidden = YES;
     player.shouldAutoplay = NO;
     player.fullscreen = NO;
     player.movieSourceType  = MPMovieSourceTypeFile;
     player.controlStyle =  MPMovieControlStyleNone;
-    player.scalingMode = MPMovieScalingModeAspectFill;
+    player.scalingMode = MPMovieScalingModeAspectFit;
     player.backgroundView.backgroundColor = [UIColor whiteColor];
     [player prepareToPlay];
 
@@ -2433,6 +2433,7 @@ int selectedAddMoreLayerTab = -1;
     videoComposition.instructions = @[passThroughInstruction];
     
     CALayer *parentLayer = [CALayer layer];
+    parentLayer.contentsGravity = kCAGravityCenter;
     CALayer *videoLayer = [CALayer layer];
     //parentLayer.frame = CGRectMake(0, 0, flyerlyWidth, flyerlyHeight);
     videoLayer.frame = CGRectMake(0, 0, videoComposition.renderSize.width, videoComposition.renderSize.height);
@@ -2440,7 +2441,8 @@ int selectedAddMoreLayerTab = -1;
     
     UIImage *backgroundImage = [flyer getFlyerOverlayImage];
     CALayer *imageLayer = [CALayer layer];
-    imageLayer.frame = CGRectMake(0, 0, videoComposition.renderSize.width,  videoComposition.renderSize.height);
+    imageLayer.contentsGravity = kCAGravityCenter;
+    imageLayer.frame = CGRectMake(0, 0, flyerlyWidth, flyerlyHeight );
     imageLayer.contents = (id)backgroundImage.CGImage;
     [parentLayer addSublayer:imageLayer];
     
