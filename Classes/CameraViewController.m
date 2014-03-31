@@ -12,7 +12,7 @@
 @implementation CameraViewController
 @synthesize cameraLines;
 @synthesize desiredImageSize,progressView;
-@synthesize onImageTaken,onVideoFinished,mode,videoAllow;
+@synthesize onImageTaken,onVideoFinished,onVideoCancel,mode,videoAllow,flyerImageView;
 
 /**
  * Setup the controller.
@@ -41,6 +41,10 @@
     }else {
         mode.hidden = YES;
     }
+    
+    //Here we Add Flyer ImageView For Video
+    [self.cameraView addSubview:flyerImageView];
+    flyerImageView.hidden = YES;
     
     self.cameraView.targetResolution = CGSizeMake(640.0, 640.0); // The minimum resolution we want
     self.cameraView.keepFrontCameraPicturesMirrored = YES;
@@ -123,6 +127,12 @@
  * Go Back.
  */
 - (void)cameraCancel:(id)sender{
+    
+    if ([self.videoAllow isEqualToString:@"YES"]) {
+        self.flyerImageView.hidden =NO;
+        self.onVideoCancel();
+    }
+    
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -166,6 +176,7 @@
         [shoot setImage:[UIImage imageNamed:@"camera_button"] forState:UIControlStateSelected];
         [flash setHidden:NO];
         progressView.hidden = YES;
+        flyerImageView.hidden = YES;
         
     }else {
         
@@ -175,6 +186,9 @@
         [shoot setImage:[UIImage imageNamed:@"stop_button"] forState:UIControlStateSelected];
         [flash setHidden:YES];
         progressView.hidden = NO;
+        flyerImageView.image = nil;
+        flyerImageView.hidden = NO;
+
         
     }
 }

@@ -183,13 +183,23 @@ NSString * const TEXTHEIGHT = @"280.000000";
         } else {
             
             //ALBUM FOUND
-            //GETTING IMAGE URL IF EXIST IN FLYER INFO FILE .TXT
-            NSString *currentUrl = [self getFlyerURL];
-        
-            // CHECKING CRITERIA IMAGE CREATE OR MODIFY
+            //GETTING IMAGE OR VIDEO URL IF EXIST IN FLYER INFO FILE .TXT
+                NSString *currentUrl;
+            
+            if ( [self isVideoFlyer] ){
+                currentUrl = [self getVideoAssetURL];
+            }else {
+                currentUrl = [self getFlyerURL];
+            }
+            
+            // CHECKING CRITERIA CREATE OR MODIFY
             if ( [currentUrl isEqualToString:@""]) {
             
-                [self createImageToFlyerlyAlbum:groupUrl ImageData:imgData];
+                if ( [self isVideoFlyer] ){
+                    [self createVideoToFlyerlyAlbum:groupUrl VideoData:[NSURL fileURLWithPath:[self getSharingVideoPath]]];
+                }else {
+                    [self createImageToFlyerlyAlbum:groupUrl ImageData:imgData];
+                }
             
             } else { // URL FOUND WE USE EXISTING URL FOR REPLACE IMAGE
 
@@ -202,16 +212,35 @@ NSString * const TEXTHEIGHT = @"280.000000";
                     if (asset == nil) {
  
                         // URL Exist and Image Not Found
-                        // we Create New Image In Gallery
-                        [self createImageToFlyerlyAlbum:groupUrl ImageData:imgData];
+                        // we Create New Content In Gallery
+                        if ( [self isVideoFlyer] ){
+                            
+                            //For Video
+                            [self createVideoToFlyerlyAlbum:groupUrl VideoData:[NSURL fileURLWithPath:[self getSharingVideoPath]]];
+                        }else {
+                            
+                            //For Image
+                            [self createImageToFlyerlyAlbum:groupUrl ImageData:imgData];
+                        }
                     
                     } else {
 
                         // URL Exist and Image Found
-                        //HERE WE UPDATE IMAGE WITH LATEST UPDATE
-                        [asset setImageData:imgData metadata:nil completionBlock:^(NSURL *assetURL, NSError *error) {
-                             NSLog(@"Image Updated");
-                        }];
+                        //HERE WE UPDATE Content WITH LATEST UPDATE
+                        
+                      if ( [self isVideoFlyer] ){
+                          
+                            //Update Video
+                            [asset setVideoAtPath:[NSURL fileURLWithPath:[self getSharingVideoPath]] completionBlock:^(NSURL *assetURL, NSError *error) {
+                                NSLog(@"Video Updated");
+                            }];
+                      }else {
+                          
+                          //Update Image
+                            [asset setImageData:imgData metadata:nil completionBlock:^(NSURL *assetURL, NSError *error) {
+                                 NSLog(@"Image Updated");
+                            }];
+                      }
                     }
                 
                 } failureBlock:^(NSError *error) {
@@ -249,11 +278,12 @@ NSString * const TEXTHEIGHT = @"280.000000";
     [library groupForURL:groupURL resultBlock:^(ALAssetsGroup *group) {
         
         //HERE WE CREATE IMAGE IN GALLERY
-        [library writeImageDataToSavedPhotosAlbum:imgData metadata:nil completionBlock:^(NSURL *assetURL, NSError *error) {
+        [library  writeImageDataToSavedPhotosAlbum:imgData metadata:nil completionBlock:^(NSURL *assetURL, NSError *error) {
             
-            // HERE WE SAVE GENERATED URL IN OVER FLYER INFO FILE .TXT
+            // HERE WE SAVE IMAGE GENERATED URL IN OVER FLYER INFO FILE .TXT
             // FOR FUTURE WORK
-            [self setFlyerURL:assetURL.absoluteString];
+
+                [self setFlyerURL:assetURL.absoluteString];
             
             // GETTING GENERATED IMAGE WITH URL
             [library assetForURL:assetURL resultBlock:^(ALAsset *asset) {
@@ -276,6 +306,45 @@ NSString * const TEXTHEIGHT = @"280.000000";
 
 }
 
+/*
+* HERE WE CREATE NEW VIDEO IN GALLERY
+*/
+-(void)createVideoToFlyerlyAlbum :(NSURL *)groupURL VideoData :(NSURL *)VideoURL {
+    
+    // CREATE LIBRARY OBJECT FIRST
+    ALAssetsLibrary * library = [[ALAssetsLibrary alloc] init];
+    
+    // HERE WE GET GROUP OF IMAGE IN GALLERY
+    [library groupForURL:groupURL resultBlock:^(ALAssetsGroup *group) {
+        
+        //HERE WE CREATE IMAGE IN GALLERY
+        [library  writeVideoAtPathToSavedPhotosAlbum:VideoURL completionBlock:^(NSURL *assetURL, NSError *error) {
+            
+            // HERE WE SAVE VIDEO GENERATED URL IN OVER FLYER INFO FILE .TXT
+            // FOR FUTURE WORK
+                [self setVideoAsssetURL:assetURL.absoluteString];
+            
+            // GETTING GENERATED Video WITH URL
+            [library assetForURL:assetURL resultBlock:^(ALAsset *asset) {
+                
+                //HERE WE LINK IMAGE WITH FLYERLY ALBUM
+                [group addAsset:asset];
+                
+            } failureBlock:^(NSError *error) {
+                
+                NSLog(@"Image NOT LINKED");
+            }];
+            
+        }];
+        
+        
+    } failureBlock:^(NSError *error) {
+        NSLog(@"Image NOT CREATED IN GALLERY");
+    }];
+    
+    
+}
+
 
 /*
  * Here we return Current SnapShot for Sharing
@@ -283,13 +352,10 @@ NSString * const TEXTHEIGHT = @"280.000000";
 -(NSString *)getFlyerImage {
 
     NSString* currentPath  =   [[NSFileManager defaultManager] currentDirectoryPath];
-    
     NSString *imagePath = [currentPath stringByAppendingString:[NSString stringWithFormat:@"/flyer.%@",IMAGETYPE] ];
     
     return imagePath;
-
 }
-
 
 
 /*
@@ -303,8 +369,6 @@ NSString * const TEXTHEIGHT = @"280.000000";
     
     //Getting Current Flyer folder Path
     NSString* currentSourcepath  =   [[NSFileManager defaultManager] currentDirectoryPath];
-    
-    
     NSString* historyDestinationpath  =  [NSString stringWithFormat:@"%@/History",currentSourcepath];
     
     NSArray *fileList = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:historyDestinationpath error:nil];
@@ -314,10 +378,8 @@ NSString * const TEXTHEIGHT = @"280.000000";
     if (fileList.count >= 1) {
         
         //HISTORY AVAILABLE
-        
         NSArray *sortedFlyersList = [fileList sortedArrayUsingFunction:compareDesc context:NULL];
-        
-    
+
         NSString* historyLastFilepath = [NSString stringWithFormat:@"%@/%@",historyDestinationpath,[sortedFlyersList objectAtIndex:0]];
     
         // Here we Compare Both Files One Current Flyer Folder and Second Last flyer Folder from History if
@@ -331,7 +393,6 @@ NSString * const TEXTHEIGHT = @"280.000000";
                 NSString* historyFirstFilepath = [NSString stringWithFormat:@"%@/%@",historyDestinationpath,[sortedFlyersList objectAtIndex:sortedFlyersList.count -1]];
                 [[NSFileManager defaultManager] removeItemAtPath:historyFirstFilepath error:&error];
             }
-            
             
             //Create History  folder Path
             int timestamp = [[NSDate date] timeIntervalSince1970];
@@ -360,7 +421,6 @@ NSString * const TEXTHEIGHT = @"280.000000";
     } else {
     
          //HISTORY NOT AVAILABLE
-        
         //Delete .gitkeep File if Exist in History Directory
         NSString* gitkeepFilepath = [NSString stringWithFormat:@"%@/History/.gitkeep",currentSourcepath];
         if (![[NSFileManager defaultManager] fileExistsAtPath:gitkeepFilepath isDirectory:NULL]) {
@@ -457,12 +517,8 @@ NSString * const TEXTHEIGHT = @"280.000000";
             }
         }
 
-        
     }
     
-    
-    
- 
 }
 
 
@@ -588,9 +644,6 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     return [masterLayers objectForKey:uid];
 }
 
-
-
-
 /*
  * When New Symbol layer Add on Flyer
  * its will call and Add one Content in MasterLayers Dictionary
@@ -602,7 +655,6 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     int timestamp = [[NSDate date] timeIntervalSince1970];
     
     NSString *uniqueId = [NSString stringWithFormat:@"%d",timestamp];
-    
     
     //Create Dictionary for Symbol
     NSMutableDictionary *imageDetailDictionary = [[NSMutableDictionary alloc] init];
@@ -888,7 +940,16 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
                                  //SAVING IN PREFERENCES .PLIST FOR FUTURE USE
                                  [[NSUserDefaults standardUserDefaults]   setObject:groupURL.absoluteString forKey:@"FlyerlyAlbum"];
                                  
-                                 [self createImageToFlyerlyAlbum:groupURL ImageData:imgdata];
+                                 //Checking Content Type
+                                 if ([self isVideoFlyer]) {
+                                     
+                                     //Create Video
+                                     [self createVideoToFlyerlyAlbum:groupURL VideoData:[NSURL fileURLWithPath:[self getSharingVideoPath]]];
+                                 }else {
+                                     
+                                     //Create Image
+                                     [self createImageToFlyerlyAlbum:groupURL ImageData:imgdata];
+                                 }
                              }
      
                             failureBlock:^(NSError *error) {
@@ -897,6 +958,8 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 
 
 }
+
+
 
 #pragma TEXT METHODS
 
@@ -1110,7 +1173,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 /*
  * Here we Set Flyer Video Path
  */
--(void)setFlyerVideoUrl :(NSString *)url {
+-(void)setOriginalVideoUrl :(NSString *)url {
     
     NSMutableDictionary *templateDictionary = [self getLayerFromMaster:@"Template"];
     
@@ -1125,11 +1188,27 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 /*
  * HERE WE RETURN VIDEO FILE PATH
  */
--(NSString *)getVideoURL {
+-(NSString *)getOriginalVideoURL {
     NSMutableDictionary *templateDictionary = [self getLayerFromMaster:@"Template"];
     
-    return [templateDictionary valueForKey:@"VideoURL"];
+    NSString* currentPath  =   [[NSFileManager defaultManager] currentDirectoryPath];
+    
+    NSString *videoPath = [currentPath stringByAppendingString:[NSString stringWithFormat:@"/%@",[templateDictionary valueForKey:@"VideoURL"]] ];
+
+    
+    return videoPath;
 }
+
+
+/*
+ * Here we Return Sharing Video Path
+ */
+-(NSString *)getSharingVideoPath{
+    NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
+    NSString *destination = [NSString stringWithFormat:@"%@/FlyerlyMovie.mov",currentpath];
+    return destination;
+}
+
 
 /* Checking here Video Flyer or Image Flyer
  *
@@ -1147,7 +1226,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 }
 
 
-#pragma mark  Social File Methods
+#pragma mark  Flyer Social File SET
 
 -(void)setFacebookStatus :(int)status {
 
@@ -1224,6 +1303,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     [socialArray writeToFile:socialFile atomically:YES];
 }
 
+#pragma mark  Flyer Social File GET
 
 /*
  * Here we Return Facebook Share Status of Flyer
@@ -1294,25 +1374,15 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 }
 
 
+#pragma mark  Flyer Text File GET
+
+
 /*
  * Here we Return Flyer Title From .txt File
  */
 -(NSString *)getFlyerTitle{
     
     return [textFileArray objectAtIndex:0];
-}
-
-
-
-/*
- * Here we Set Flyer Title
- */
--(void)setFlyerTitle :(NSString *)name {
-    
-    [textFileArray replaceObjectAtIndex:0 withObject:name];
-    
-    //Here we write the Array of Text files .txt
-    [textFileArray writeToFile:textFile atomically:YES];
 }
 
 
@@ -1363,6 +1433,9 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 
 }
 
+/*
+ * HERE WE GET Updated Date of Flyer For Save screen
+ */
 -(NSString *)getFlyerUpdateDate {
     
     if (textFileArray.count > 5) {
@@ -1374,6 +1447,36 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     }
 
 
+}
+
+/*
+ * HERE WE GET VIDEO URL
+ */
+-(NSString *)getVideoAssetURL {
+    
+    if (textFileArray.count > 6) {
+        return [textFileArray objectAtIndex:6];
+    } else {
+        [textFileArray addObject:@""];
+        [textFileArray writeToFile:textFile atomically:YES];
+        return @"";
+    }
+    
+    
+}
+
+#pragma mark  Flyer Text File SET
+
+
+/*
+ * Here we Set Flyer Title
+ */
+-(void)setFlyerTitle :(NSString *)name {
+    
+    [textFileArray replaceObjectAtIndex:0 withObject:name];
+    
+    //Here we write the Array of Text files .txt
+    [textFileArray writeToFile:textFile atomically:YES];
 }
 
 
@@ -1390,8 +1493,6 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 
 }
 
-
-
 /*
  * Here we Set Flyer Date
  */
@@ -1402,22 +1503,6 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     //Here we write the Array of Text files .txt
     [textFileArray writeToFile:textFile atomically:YES];
 }
-
-
-/*
- * Here we Set Flyer Date
- */
--(void)setFlyerUpdatedDate :(NSString *)dt {
-    
-    if (textFileArray.count > 5) {
-        [textFileArray replaceObjectAtIndex:5 withObject:dt];
-    }else {
-        [textFileArray addObject:dt];
-    }
-    //Here we write the Array of Text files .txt
-    [textFileArray writeToFile:textFile atomically:YES];
-}
-
 
 
 /*
@@ -1445,9 +1530,38 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     
     //Here we write the Array of Text files .txt
     [textFileArray writeToFile:textFile atomically:YES];
-
+    
 }
 
+/*
+ * Here we Set Flyer Date
+ */
+-(void)setFlyerUpdatedDate :(NSString *)dt {
+    
+    if (textFileArray.count > 5) {
+        [textFileArray replaceObjectAtIndex:5 withObject:dt];
+    }else {
+        [textFileArray addObject:dt];
+    }
+    //Here we write the Array of Text files .txt
+    [textFileArray writeToFile:textFile atomically:YES];
+}
+
+
+/*
+ * Here we Set Flyer Video Asset URL
+ */
+-(void)setVideoAsssetURL :(NSString *)URL {
+    
+    if (textFileArray.count > 6) {
+        [textFileArray replaceObjectAtIndex:6 withObject:URL];
+    }else {
+        [textFileArray addObject:URL];
+    }
+    //Here we write the Array of Text files .txt
+    [textFileArray writeToFile:textFile atomically:YES];
+
+}
 
 
 @end

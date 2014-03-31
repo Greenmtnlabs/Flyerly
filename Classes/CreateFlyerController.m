@@ -17,7 +17,7 @@ fontBorderTabButton,addMoreIconTabButton,addMorePhotoTabButton,addMoreSymbolTabB
 @synthesize contextView,libraryContextView,libFlyer,backgroundTabButton,addMoreFontTabButton;
 @synthesize libText,libBackground,libPhoto,libEmpty,backtemplates,cameraTakePhoto,cameraRoll,flyerBorder;
 @synthesize flyimgView,currentLayer,layersDic,flyer,player,playerView,playerToolBar,playButton,playerSlider;
-
+@synthesize durationLabel,durationChange;
 int selectedAddMoreLayerTab = -1;
 
 
@@ -142,7 +142,7 @@ int selectedAddMoreLayerTab = -1;
     
     [addMoreIconTabButton setBackgroundImage:[UIImage imageNamed:@"icon_button_selected"] forState:UIControlStateHighlighted];
     addMoreIconTabButton.tag = 10004;
-    self.flyimgView.image = nil;
+
 }
 
 
@@ -1668,7 +1668,7 @@ int selectedAddMoreLayerTab = -1;
         // HERE WE MOVE SOURCE FILE INTO FLYER FOLDER
         NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
         NSString *destination = [NSString stringWithFormat:@"%@/Template/template.mov",currentpath];
-        [self.flyer setFlyerVideoUrl:@"Template/template.mov"];
+        [self.flyer setOriginalVideoUrl:@"Template/template.mov"];
         
         NSURL *movieURL = [NSURL fileURLWithPath:destination];
         
@@ -1700,7 +1700,6 @@ int selectedAddMoreLayerTab = -1;
 -(void)openCustomCamera{
 
     CameraViewController *nbuCamera = [[CameraViewController alloc]initWithNibName:@"CameraViewController" bundle:nil];
-    
     
     if ( imgPickerFlag == 2 ) {
         NSDictionary *dict = [flyer getLayerFromMaster:currentLayer];
@@ -1762,6 +1761,9 @@ int selectedAddMoreLayerTab = -1;
     
     CameraViewController *nbuCamera = [[CameraViewController alloc]initWithNibName:@"CameraViewController" bundle:nil];
     
+    //Here we Pass FlyerImageView For Video
+    nbuCamera.flyerImageView = self.flyimgView;
+    
     nbuCamera.videoAllow = @"YES";
     nbuCamera.desiredImageSize = CGSizeMake( 300,  300 );
     
@@ -1790,15 +1792,15 @@ int selectedAddMoreLayerTab = -1;
         
         NSLog(@"%@",recvUrl);
         NSError *error = nil;
+        [self.view addSubview:flyimgView];
         
         [self.flyer setFlyerTypeVideo];
-
 
         // HERE WE MOVE SOURCE FILE INTO FLYER FOLDER
         NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
 
         NSString *destination = [NSString stringWithFormat:@"%@/Template/template.mov",currentpath];
-        [self.flyer setFlyerVideoUrl:@"Template/template.mov"];
+        [self.flyer setOriginalVideoUrl:@"Template/template.mov"];
         
         NSURL *movieURL = [NSURL fileURLWithPath:destination];
 
@@ -1816,6 +1818,13 @@ int selectedAddMoreLayerTab = -1;
         [self.flyimgView renderLayer:@"Template" layerDictionary:[self.flyer getLayerFromMaster:@"Template"]];
         
       }];
+    
+    [nbuCamera setOnVideoCancel:^() {
+    
+      [self.view addSubview:flyimgView];
+    
+    }];
+
     
     [self.navigationController pushViewController:nbuCamera animated:YES];
 }
@@ -1887,8 +1896,7 @@ int selectedAddMoreLayerTab = -1;
 
     NSLog(@"%f",playerSlider.value);
     player.currentPlaybackTime = playerSlider.value;
-    
-
+    durationChange.text =[self stringFromTimeInterval:playerSlider.value];
 
 }
 
@@ -1896,6 +1904,7 @@ int selectedAddMoreLayerTab = -1;
     
      NSLog(@"%f",player.currentPlaybackTime);
     playerSlider.value = player.currentPlaybackTime;
+    durationChange.text =[self stringFromTimeInterval:player.currentPlaybackTime];
     
     if (isPlaying) {
         [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateTime:) userInfo:nil repeats:NO];
@@ -1919,14 +1928,21 @@ int selectedAddMoreLayerTab = -1;
 
         playerSlider.maximumValue = player.duration;
         NSTimeInterval duration = player.duration;
+        durationLabel.text =[NSString stringWithFormat:@"%@ sec",[self stringFromTimeInterval:player.duration]] ;
+        durationChange.text = @"00:00";
         
         float minutes = floor(duration / 60);
         videoDuration = duration - minutes * 60;
-
         playerSlider.value = 0.0;
     }
 }
 
+- (NSString *)stringFromTimeInterval:(NSTimeInterval)interval {
+    NSInteger ti = (NSInteger)interval;
+    NSInteger seconds = ti % 60;
+    NSInteger minutes = (ti / 60) % 60;
+    return [NSString stringWithFormat:@"%02ld:%02ld", (long)minutes, (long)seconds];
+}
 
 /*
  * Here we Get Player Button Press Info
@@ -2403,7 +2419,7 @@ int selectedAddMoreLayerTab = -1;
     
     // Get a pointer to the asset
     AVURLAsset* firstAsset = [AVURLAsset URLAssetWithURL:firstURL options:nil];
-    
+
     // Make an instance of avmutablecomposition so that we can edit this asset:
     AVMutableComposition* mixComposition = [AVMutableComposition composition];
     
@@ -2451,8 +2467,7 @@ int selectedAddMoreLayerTab = -1;
     AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:mixComposition presetName:AVAssetExportPresetHighestQuality];
     exportSession.videoComposition = videoComposition;
     
-    NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
-    NSString *destination = [NSString stringWithFormat:@"%@/FlyerlyMovie.mov",currentpath];
+    NSString *destination = [self.flyer getSharingVideoPath];
 
     //Delete Old File if Exists
     NSError *error = nil;
@@ -2469,8 +2484,18 @@ int selectedAddMoreLayerTab = -1;
                 break;
             }
             case AVAssetExportSessionStatusCompleted: {
-                
                 NSLog (@"SUCCESS");
+
+                //Background Thread
+                dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+                    
+                    // Here we Add Video In Flyerly Album
+                    //This Data is Temporary Send For Crash Maintain on Simulator Other wise
+                    // it should be nil for Video Saving
+                    NSData *data = [[NSFileManager defaultManager] contentsAtPath:destination];
+                    [self.flyer saveInGallery:data];
+                    
+                });
             }
         };
     }]; 
@@ -2812,7 +2837,7 @@ int selectedAddMoreLayerTab = -1;
         dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
             
             //Here we Merge All Layers in Video File
-            [self videoMergeProcess];
+           // [self videoMergeProcess];
             
         });
 

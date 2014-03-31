@@ -126,6 +126,8 @@
 @property (nonatomic,strong)IBOutlet UIButton *heightTabButton;
 @property (nonatomic,strong)IBOutlet UIButton *playButton;
 @property (nonatomic,strong)IBOutlet UISlider *playerSlider;
+@property (nonatomic,strong)IBOutlet UILabel *durationLabel;
+@property (nonatomic,strong)IBOutlet UILabel *durationChange;
 
 
 @property (nonatomic,strong)MPMoviePlayerController *player;

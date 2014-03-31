@@ -18,6 +18,8 @@
                 <outlet property="cameraTakePhoto" destination="TUU-ew-jcU" id="4sp-iH-P0R"/>
                 <outlet property="colorTabButton" destination="RCh-PH-bvk" id="kzT-0A-OKE"/>
                 <outlet property="contextView" destination="rbq-e2-wbO" id="BDJ-TX-Ld1"/>
+                <outlet property="durationChange" destination="tOL-PL-xlu" id="c1O-G7-Aad"/>
+                <outlet property="durationLabel" destination="gqJ-fV-ZCI" id="8Hk-8V-eSV"/>
                 <outlet property="flyerBorder" destination="rR0-dC-sak" id="y4N-N4-MId"/>
                 <outlet property="flyimgView" destination="Xaq-YE-kc7" id="USc-nV-Q14"/>
                 <outlet property="fontBorderTabButton" destination="E2L-Wc-n71" id="qIM-iL-HJk"/>
@@ -336,25 +338,39 @@
                 <view alpha="0.59999999999999998" contentMode="scaleToFill" id="Nhc-S1-8Bh">
                     <rect key="frame" x="0.0" y="0.0" width="310" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="D6r-Rt-cPZ">
-                    <rect key="frame" x="2" y="0.0" width="58" height="40"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tOL-PL-xlu">
+                    <rect key="frame" x="44" y="10" width="41" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="13"/>
+                    <color key="textColor" red="0.3575665864" green="0.76047690010000002" blue="0.97315449620000005" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00 sec" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gqJ-fV-ZCI">
+                    <rect key="frame" x="246" y="10" width="64" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="13"/>
+                    <color key="textColor" red="0.3575665864" green="0.76047690010000002" blue="0.97315449620000005" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="D6r-Rt-cPZ">
+                    <rect key="frame" x="5" y="0.0" width="40" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <state key="normal" title="Play">
+                    <state key="normal" image="play_icon.png">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="selected" title="Pause"/>
+                    <state key="selected" image="pause_icon.png"/>
                     <connections>
                         <action selector="play:" destination="-1" eventType="touchUpInside" id="Y6Z-gK-efT"/>
                     </connections>
                 </button>
                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" id="Mes-fj-ojE">
-                    <rect key="frame" x="68" y="3" width="241" height="34"/>
+                    <rect key="frame" x="88" y="4" width="152" height="34"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="minimumTrackTintColor" red="0.2807829288" green="0.75192376110000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <color key="maximumTrackTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -392,6 +408,8 @@
         <image name="image_icon.png" width="128" height="90"/>
         <image name="outline_button.png" width="128" height="90"/>
         <image name="outline_button_selected.png" width="128" height="90"/>
+        <image name="pause_icon.png" width="80" height="80"/>
+        <image name="play_icon.png" width="80" height="80"/>
         <image name="size_button.png" width="128" height="90"/>
         <image name="size_button_selected.png" width="128" height="90"/>
         <image name="symbolicon_button.png" width="128" height="90"/>

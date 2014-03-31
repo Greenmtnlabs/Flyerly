@@ -23,9 +23,8 @@
 @implementation FlyerlyMainScreen
 
 @synthesize tpController,createFlyrLabel,savedFlyrLabel,inviteFriendLabel,addFriendsController;
-@synthesize firstFlyer, secondFlyer, thirdFlyer, fourthFlyer, createFlyrButton, savedFlyrButton, inviteFriendButton;
-@synthesize facebookLikeView;
-@synthesize likeButton,followButton,webview,recentFlyers;
+@synthesize firstFlyer, secondFlyer, thirdFlyer, fourthFlyer, createFlyrButton, savedFlyrButton;
+@synthesize recentFlyers,inviteFriendButton;
 
 
 -(IBAction)doNew:(id)sender{
@@ -96,7 +95,6 @@
     for (int i = 0 ; i < recFlyers.count; i++) {
         
          UIImage *recentImage =  [UIImage imageWithContentsOfFile:[recFlyers objectAtIndex:i]];
-        
 
         UIImage *resizeImage = [self imageWithImage:recentImage scaledToSize:size];
         
@@ -136,18 +134,8 @@
     
     self.navigationController.navigationBarHidden = NO;
     
-    
-    if([[NSUserDefaults standardUserDefaults] objectForKey:@"FACEBOOK_LIKED"]){
-        [likeButton setSelected:YES];
-    }
-    
-    if([[NSUserDefaults standardUserDefaults] objectForKey:@"TWITTER_FOLLOWING"]){
-        [followButton setSelected:YES];
-    }
-    
-    
     // for Navigation Bar logo
-    UIImageView *logo = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 87, 38)];
+    UIImageView *logo = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 80, 44)];
     [logo setImage:[UIImage imageNamed:@"flyerlylogo"]];
     self.navigationItem.titleView = logo;
     
@@ -188,16 +176,7 @@
     createFlyrButton.showsTouchWhenHighlighted = YES;
     savedFlyrButton.showsTouchWhenHighlighted = YES;
     inviteFriendButton.showsTouchWhenHighlighted = YES;
-    likeButton.showsTouchWhenHighlighted = YES;
-    followButton.showsTouchWhenHighlighted = YES;
 
-    
-    if(IS_IPHONE_5){
-        numberOfFlyers = 6;
-    }else{
-        numberOfFlyers = 4;
-    }
-    
     [createFlyrLabel setText:NSLocalizedString(@"create_flyer", nil)];
     
     [savedFlyrLabel setText:NSLocalizedString(@"saved_flyers", nil)];
@@ -206,10 +185,6 @@
     
     //GET UPDATED USER PUCHASES INFO
     [self getUserPurcahses];
-    
-    //GET FACEBOOK APP LIKE STATUS
-    //Tenporary Commit that part
-   // [self setFacebookLikeStatus];
     
 }
 
@@ -246,14 +221,6 @@
 	[self.navigationController pushViewController:createFlyer animated:YES];
 }
 
-#pragma Like code
-
-- (IBAction)onTwitter:(id)sender {
-    UIButton *button = (UIButton *) sender;
-
-
-        [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
-}
 
 -(void)showAlert:(NSString *)title message:(NSString *)message{
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
@@ -262,326 +229,6 @@
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];
     [alert show];
-}
-
-- (void)makeTwitterPost:(ACAccount *)acct follow:(int)follow {
-    
-    NSMutableDictionary *tempDict = [[NSMutableDictionary alloc] init];
-    [tempDict setValue:@"flyerlyapp" forKey:@"screen_name"];
-    [tempDict setValue:@"true" forKey:@"follow"];
-    
-    
-    TWRequest *postRequest;
-    if ( follow == 1 ) {
-        postRequest = [[TWRequest alloc] initWithURL:[NSURL URLWithString:@"https://api.twitter.com/1/friendships/create.json"]
-                                                 parameters:tempDict
-                                              requestMethod:TWRequestMethodPOST];
-    } else {
-        postRequest = [[TWRequest alloc] initWithURL:[NSURL URLWithString:@"https://api.twitter.com/1/friendships/destroy.json"]
-                                                     parameters:tempDict
-                                                  requestMethod:TWRequestMethodPOST];
-    }
-    
-    [postRequest setAccount:acct];
-    
-    [postRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
-        NSString *output = [NSString stringWithFormat:@"HTTP response status: %i", [urlResponse statusCode]];
-        NSLog(@"%@", output);
-        
-        [self hideLoadingIndicator];
-        
-        if([[output lowercaseString] rangeOfString:[@"200" lowercaseString]].location == NSNotFound){
-            
-            if ( follow == 1 ) {
-                [followButton setSelected:NO];
-                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"TWITTER_FOLLOWING"];
-            } else {
-                [followButton setSelected:YES];
-                [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"TWITTER_FOLLOWING"];
-            }
-        } else {
-            
-            if ( follow == 1 ) {
-                [followButton setSelected:YES];
-                [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"TWITTER_FOLLOWING"];
-            } else {
-                [followButton setSelected:NO];
-                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"TWITTER_FOLLOWING"];
-            }
-        }
-    }];
-    
-}
-
-- (IBAction)followOnTwitter:(id)sender {
-    [self showLoadingIndicator];
-    
-    ACAccountStore *accountStore = [[ACAccountStore alloc] init];
-    
-    ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
-    
-    [accountStore requestAccessToAccountsWithType:accountType withCompletionHandler:^(BOOL granted, NSError *error) {
-        
-        if(granted) {
-            // Get the list of Twitter accounts.
-          NSArray  *arrayOfAccounts = [accountStore accountsWithAccountType:accountType];
-            twtAcconts = [[NSArray alloc] initWithArray:arrayOfAccounts];
-            // If there are more than 1 account, ask user which they want to use.
-            if ( [arrayOfAccounts count] > 1 ) {
-                // Show list of acccounts from which to select
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:@"Choose Account" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles: nil];
-                    actionSheet.tag = 1;
-                    
-                    for (int i = 0; i < arrayOfAccounts.count; i++) {
-                        ACAccount *acct = arrayOfAccounts[i];
-                        [actionSheet addButtonWithTitle:acct.username];
-                    }
-                    
-                    [actionSheet addButtonWithTitle:@"Cancel"];
-                    [actionSheet showInView:self.view];
-                });
-                
-            } else if ( [arrayOfAccounts count] > 0 ) {
-                // Grab the initial Twitter account to tweet from.
-                ACAccount *twitterAccount = arrayOfAccounts[0];
-                [self makeTwitterPost:twitterAccount follow:1];
-            } else {
-                [self hideLoadingIndicator];
-            }
-        } else {
-            [self hideLoadingIndicator];
-        }
-    }];
-}
-
-- (IBAction)unFollowOnTwitter:(id)sender {
-    [self showLoadingIndicator];
-    
-    ACAccountStore *accountStore = [[ACAccountStore alloc] init];
-    
-    ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
-    
-    [accountStore requestAccessToAccountsWithType:accountType withCompletionHandler:^(BOOL granted, NSError *error) {
-        if(granted) {
-            
-            // Get the list of Twitter accounts.
-           NSArray *arrayOfAccounts = [accountStore accountsWithAccountType:accountType];
-            twtAcconts = [[NSArray alloc] initWithArray:arrayOfAccounts];
-            // If there are more than 1 account, ask user which they want to use.
-            if ( [arrayOfAccounts count] > 1 ) {
-                // Show list of acccounts from which to select
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:@"Choose Account" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles: nil];
-                    actionSheet.tag = 0;
-                    
-                    for (int i = 0; i < arrayOfAccounts.count; i++) {
-                        ACAccount *acct = arrayOfAccounts[i];
-                        [actionSheet addButtonWithTitle:acct.username];
-                    }
-                    
-                    [actionSheet addButtonWithTitle:@"Cancel"];
-                    [actionSheet showInView:self.view];
-                });
-                
-            } else if ( [arrayOfAccounts count] > 0 ) {
-                // Grab the initial Twitter account to tweet from.
-                ACAccount *twitterAccount = arrayOfAccounts[0];
-                [self makeTwitterPost:twitterAccount follow:0];
-            } else {
-                [self hideLoadingIndicator];
-            }
-        } else {
-            [self hideLoadingIndicator];
-        }
-    }];
-}
-
-/**
- * clickedButtonAtIndex (UIActionSheet)
- *
- * Handle the button clicks from mode of getting out selection.
- */
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    
-    //if not cancel button presses
- 
-    if(buttonIndex != twtAcconts.count) {
-        
-        //save to NSUserDefault
-        ACAccount *account = twtAcconts[buttonIndex];
-        
-        //Convert twitter username to email
-        [self makeTwitterPost:account follow:actionSheet.tag];
-    }
-    [self hideLoadingIndicator];
-}
-
-
-- (void)facebookLikeViewDidRender:(FacebookLikeView *)aFacebookLikeView {
-    
-    self.likeView.hidden = NO;
-    
-    [UIView beginAnimations:@"" context:nil];
-    [UIView setAnimationDelay:0.5];
-    [UIView commitAnimations];
-}
-
-- (void)facebookLikeViewDidUnlike:(FacebookLikeView *)aFacebookLikeView {
-    
-    // Set like button un selected
-    [likeButton setSelected:NO];
-
-    // Remove views
-    [self goBack];
-    
-    // Remove liked status
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"FACEBOOK_LIKED"];
-}
-
-- (void)facebookLikeViewDidLike:(FacebookLikeView *)aFacebookLikeView {
-    
-    // Set like button selected
-    [likeButton setSelected:YES];
-
-    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
-    
-    // Remove views
-    [self goBack];
-    
-    // Set like status
-    [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"FACEBOOK_LIKED"];
-}
-
-- (IBAction)showLikeButton {
-    
-        
-        ACAccountStore *accountStore = [[ACAccountStore alloc]init];
-        ACAccountType *FBaccountType= [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
-        
-        //get facebook app id
-        NSString *path = [[NSBundle mainBundle] pathForResource: @"Flyr-Info" ofType: @"plist"];
-        NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile: path];
-        
-        NSDictionary *options = @{ACFacebookAppIdKey : dict[@"FacebookAppID"],
-                                  ACFacebookPermissionsKey : @[@"email", @"publish_stream"],
-                                  ACFacebookAudienceKey:ACFacebookAudienceFriends};
-        
-        [accountStore requestAccessToAccountsWithType:FBaccountType options:options completion:^(BOOL granted, NSError *error) {
-            
-            // if User Login in device
-            if ( granted ) {
-                
-                // Populate array with all available Twitter accounts
-                NSArray *arrayOfAccounts = [accountStore accountsWithAccountType:FBaccountType];
-                
-                // Sanity check
-                if ([arrayOfAccounts count] > 0) {
-                    
-                    // Calling The Facebook Like Button
-                    self.facebookLikeView.delegate = self;
-                    self.facebookLikeView.href = [NSURL URLWithString:@"http://www.facebook.com/flyerlyapp"];
-                    self.facebookLikeView.layout = @"button_count";
-                    self.facebookLikeView.showFaces = NO;
-                    [self.facebookLikeView load];
-                    
-                 }
-                
-            } else {
-                
-                //Fail gracefully...
-                NSLog(@"error getting permission %@",error);
-                [self showAlert:@"There is no Facebook account configured. You can add or create a Facebook account in Settings" message:@""];
-            }
-        }];
-    
-
-        
-}
-
-
-- (void)facebookLikeViewRequiresLogin:(FacebookLikeView *)aFacebookLikeView {
-
-}
-
-
-/*
- * Getting
- */
-- (void)setFacebookLikeStatus{
-
-    
-        // getting Facebook account Info From Device
-        ACAccountStore *accountStore = [[ACAccountStore alloc]init];
-        ACAccountType *FBaccountType= [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
-        
-        // Get facebook account
-        DefaultSHKConfigurator *configurator = [[FlyerlyConfigurator alloc] init];
-        
-        NSDictionary *options = @{ACFacebookAppIdKey : [configurator facebookAppId],
-                                  ACFacebookPermissionsKey : @[@"email", @"publish_stream"],
-                                  ACFacebookAudienceKey:ACFacebookAudienceFriends};
-        
-        
-        [accountStore requestAccessToAccountsWithType:FBaccountType options:options completion:^(BOOL granted, NSError *error) {
-            
-            // if User Login in device
-            if ( granted ) {
-                
-                // Populate array with all available Twitter accounts
-                NSArray *arrayOfAccounts = [accountStore accountsWithAccountType:FBaccountType];
-                ACAccount *account = [arrayOfAccounts lastObject];
-                
-                // Sanity check
-                if ([arrayOfAccounts count] > 0) {
-                    
-                    NSURL *requestURL = [NSURL URLWithString:@"https://graph.facebook.com/me/likes"];
-                    SLRequest *request = [SLRequest requestForServiceType:SLServiceTypeFacebook
-                                                            requestMethod:SLRequestMethodGET
-                                                                      URL:requestURL
-                                                               parameters:nil];
-                    request.account = account;
-                    
-                    [request performRequestWithHandler:^(NSData *data,
-                                                         NSHTTPURLResponse *response,
-                                                         NSError *error) {
-                        
-                        if(!error){
-                            NSDictionary *likeslist =[NSJSONSerialization JSONObjectWithData:data
-                                                                                options:kNilOptions error:&error];
-                            
-                            //NSLog(@"Request received %@", likeslist);
-                              [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"FACEBOOK_LIKED"];
-                            for (NSDictionary *likesData in likeslist[@"data"]) {
-                                
-                                // Here we will get the facebook contacts
-                                
-                                NSString *likeName = likesData[@"name"];
-                                if([likeName isEqualToString:@"Flyerly"]){
-                                    [self.likeButton setSelected:YES];
-                                    [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"FACEBOOK_LIKED"];
-                                    return;
-                                } else {
-                                    [likeButton setSelected:NO];
-                                    
-                                }
-                            }
-                            
-                        }
-                        
-                    }];
-                }
-                
-            }
-        }];
-        
-
-}
-
--(IBAction)goBack{
-
-    
-    [self.likeView setHidden:YES];
 }
 
 /*
