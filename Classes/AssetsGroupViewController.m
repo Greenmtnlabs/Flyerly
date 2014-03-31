@@ -102,17 +102,14 @@
 /*
  * HERE WE GET BYTES FROM ASSET AND CREATE NEW FILE WITH SENDED PATH
  */
-- (BOOL)writeDataToPath:(NSString*)filePath andAsset:(ALAsset*)asset
-{
-    
-
-    
+- (BOOL)writeDataToPath:(NSString*)filePath andAsset:(ALAsset*)asset {
     
     [[NSFileManager defaultManager] createFileAtPath:filePath contents:nil attributes:nil];
     NSFileHandle *handle = [NSFileHandle fileHandleForWritingAtPath:filePath];
     if (!handle) {
         return NO;
     }
+    
     static const NSUInteger BufferSize = 1024*1024;
     
     ALAssetRepresentation *rep = [asset defaultRepresentation];
@@ -150,7 +147,8 @@
         
         NSError *error = nil;
         NSString *homeDirectoryPath = NSHomeDirectory();
-        NSString *rootPath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/CustomMovie.mov"]];
+        NSString *rootPath = [homeDirectoryPath stringByAppendingString:
+                              [NSString stringWithFormat:@"/Documents/FlyerlyMovie.mov"]];
 
         //HERE WE MAKE SURE FILE ALREADY EXISTS THEN DELETE IT OTHERWISE IGNORE
         if ( [[NSFileManager defaultManager] fileExistsAtPath:rootPath isDirectory:NULL] ) {
@@ -158,20 +156,10 @@
         }
 
         self.loading = YES;
-        NSURL *movieURL = [NSURL fileURLWithPath:rootPath];
-
+        
         //Background Thread
         dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-            BOOL status =  [self writeDataToPath:rootPath andAsset:asset.ALAsset];
-            
-            //WHEN FILE WILL COPIED INTO APP ROOT DIRECTORY
-            if ( status ) {
-                
-                //Here we make 30 Sec file
-                [self get30SecVideoWithURL:movieURL];
-               
-            }
-
+            [self writeDataToPath:rootPath andAsset:asset.ALAsset];
         });
         
         return;
@@ -191,68 +179,6 @@
     [viewControllers removeLastObject];
     [viewControllers addObject:nbuCrop];
     [[self navigationController] setViewControllers:viewControllers animated:YES];
-}
-
-
-
-/*
- * This code for Removing tracks:
- */
--(void)get30SecVideoWithURL :(NSURL *)url{
-
-    
-    // Get a pointer to the asset
-    AVURLAsset* firstAsset = [AVURLAsset URLAssetWithURL:url options:nil];
-    
-    // Make an instance of avmutablecomposition so that we can edit this asset:
-    AVMutableComposition* mixComposition = [[AVMutableComposition alloc] init];
-    
-    // Add tracks to this composition
-    AVMutableCompositionTrack *firstTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeVideo preferredTrackID:kCMPersistentTrackID_Invalid];
-    
-    /// Here we Get Set Video Limit of 30 Sec Only
-    Float64 seconds = 30;
-    int32_t preferredTimeScale = 1;
-    CMTime inTime = CMTimeMakeWithSeconds(seconds, preferredTimeScale);
-    
-    // Now insert the first 30 seconds from the asset to the new movie file
-    [firstTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, inTime) ofTrack:[[firstAsset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0] atTime:kCMTimeZero error:nil];
-    
-    //// Now to save this Track:
-    AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:mixComposition presetName:AVAssetExportPresetHighestQuality];
-    
-    NSString *homeDirectoryPath = NSHomeDirectory();
-    NSString *rootPath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/FlyerlyMovie.mov"]];
-
-    NSURL *exportURL = [NSURL fileURLWithPath:rootPath];;
-    exportSession.outputURL = exportURL;
-    exportSession.outputFileType = AVFileTypeQuickTimeMovie;
-    [exportSession exportAsynchronouslyWithCompletionHandler:^{
-        switch (exportSession.status) {
-            case AVAssetExportSessionStatusFailed:{
-                NSLog (@"FAIL = %@",exportSession.error);
-                break;
-            }
-            case AVAssetExportSessionStatusCompleted: {
-                
-                //HERE WE CALL OVER CALLBACK HERE
-                self.onVideoFinished(exportURL);
-                
-                //DELETE ORIGINAL FILE FROM APP ROOT DIRECTORY
-                    NSError *error = nil;
-                [[NSFileManager defaultManager] removeItemAtPath:url.path error:&error];
-                
-                // Pop the current view, and push the crop view.
-                NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[[self navigationController] viewControllers]];
-                [viewControllers removeLastObject];
-                [viewControllers removeLastObject];
-                [[self navigationController] setViewControllers:viewControllers animated:YES];
-
-                NSLog (@"SUCCESS");
-            }
-        };
-    }]; 
-
 }
 
 #pragma mark  Override On selection
@@ -283,16 +209,10 @@
    
     // Here we Check Selection For Photo or Background
     if ([self.videoAllow isEqualToString:@"YES"]) {
-
         totalCount = self.assetsGroup.assetsCount;
-        
-    }else {
-        
+    } else {
         totalCount = self.assetsGroup.imageAssetsCount;
-    
     }
-    
-    
     
     // And update the count label
     if (self.assetsCountLabel)
