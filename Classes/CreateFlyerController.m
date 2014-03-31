@@ -2253,7 +2253,7 @@ int selectedAddMoreLayerTab = -1;
 -(UIImage *)getFlyerSnapShot {
     
     //Here we take Snap shot of Flyer
-    UIGraphicsBeginImageContextWithOptions(self.flyimgView.bounds.size, YES, 0.0f);
+    UIGraphicsBeginImageContextWithOptions(self.flyimgView.bounds.size, NO, 0.0f);
     CGContextRef context = UIGraphicsGetCurrentContext();
     [self.flyimgView.layer renderInContext:context];
     UIImage *snapshotImage = UIGraphicsGetImageFromCurrentImageContext();
@@ -2354,11 +2354,11 @@ int selectedAddMoreLayerTab = -1;
     [videoWriter startSessionAtSourceTime:CMTimeMake(0, VIDEOFRAME)];
     
     [adaptor appendPixelBuffer:imageBuffer withPresentationTime:CMTimeMake(0, VIDEOFRAME)];
-    [adaptor appendPixelBuffer:imageBufferEnd withPresentationTime:CMTimeMake(VIDEOFRAME * videoDuration, VIDEOFRAME)];
+    [adaptor appendPixelBuffer:imageBufferEnd withPresentationTime:CMTimeMake(VIDEOFRAME * MAX_VIDEO_LENGTH, VIDEOFRAME)];
     
     
     [writerInput markAsFinished];
-    [videoWriter endSessionAtSourceTime:CMTimeMake(videoDuration * VIDEOFRAME, VIDEOFRAME)];
+    [videoWriter endSessionAtSourceTime:CMTimeMake(MAX_VIDEO_LENGTH * VIDEOFRAME, VIDEOFRAME)];
     [videoWriter finishWriting];
 
 }
@@ -2395,71 +2395,66 @@ int selectedAddMoreLayerTab = -1;
     return pxbuffer;
 }
 
-
-
 /*
  * HERE WE MERGE TWO VIDEOS FOR SHARE VIDEO
  */
--(void)mergeVideosWithURL :(NSURL *)firstURL  SecondURL:(NSURL *)secondURL {
-    
+-(void)mergeVideoWithOverlay:(NSURL *)firstURL {
     
     // Get a pointer to the asset
     AVURLAsset* firstAsset = [AVURLAsset URLAssetWithURL:firstURL options:nil];
-    AVURLAsset* secondAsset = [AVURLAsset URLAssetWithURL:secondURL options:nil];
     
-    
-    
- 
     // Make an instance of avmutablecomposition so that we can edit this asset:
-    AVMutableComposition* mixComposition = [[AVMutableComposition alloc] init];
+    AVMutableComposition* mixComposition = [AVMutableComposition composition];
     
     // Add tracks to this composition
     AVMutableCompositionTrack *firstTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeVideo preferredTrackID:kCMPersistentTrackID_Invalid];
     
-    // Add tracks to this composition
-    AVMutableCompositionTrack *secondTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeVideo preferredTrackID:kCMPersistentTrackID_Invalid];
-
+    // Image video is always 30 seconds. So we use that unless the background video is smaller.
+    /*CMTime inTime = secondAsset.duration;
+    if ( CMTimeCompare( firstAsset.duration, secondAsset.duration ) < 0 ) {
+        inTime = firstAsset.duration;
+    }*/
+    CMTime inTime = firstAsset.duration;
     
-    /// Here we Get Set Video Limit of 30 Sec Only
-    int32_t preferredTimeScale = 1;
-    CMTime inTime = CMTimeMakeWithSeconds(videoDuration, preferredTimeScale);
-    
-    
+    // Add first asset tracks to the first track.
     [firstTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, inTime) ofTrack:[[firstAsset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0] atTime:kCMTimeZero error:nil];
 
-    [secondTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, inTime) ofTrack:[[secondAsset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0] atTime:kCMTimeZero error:nil];
-    
-    // Show both videos simultaneously
-    AVMutableVideoCompositionInstruction *mainInstruction = [AVMutableVideoCompositionInstruction videoCompositionInstruction];
-    
-    // Set the time duration
-    mainInstruction.timeRange = CMTimeRangeMake(kCMTimeZero, firstAsset.duration);
-    
-    // Image video
-    AVMutableVideoCompositionLayerInstruction *imageVideo = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:secondTrack];
-    
-    // Background video
-    AVMutableVideoCompositionLayerInstruction *backgroundVideo = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:firstTrack];
-    
-    // We need to play them together
-    mainInstruction.layerInstructions = [NSArray arrayWithObjects: imageVideo, backgroundVideo, nil];
-    
-    // Make a video composition
+
     AVMutableVideoComposition *videoComposition = [AVMutableVideoComposition videoComposition];
-    videoComposition.instructions = [NSArray arrayWithObject:mainInstruction];
     videoComposition.frameDuration = CMTimeMake(1, 30);
-    videoComposition.renderSize = CGSizeMake(620, 620);
-
-
+    videoComposition.renderSize = firstTrack.naturalSize;
+    
+    AVMutableVideoCompositionInstruction *passThroughInstruction = [AVMutableVideoCompositionInstruction videoCompositionInstruction];
+    passThroughInstruction.timeRange = CMTimeRangeMake(kCMTimeZero, firstAsset.duration);
+    
+    AVMutableVideoCompositionLayerInstruction *passThroughLayer = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:firstTrack];
+    
+    passThroughInstruction.layerInstructions = @[passThroughLayer];
+    videoComposition.instructions = @[passThroughInstruction];
+    
+    CALayer *parentLayer = [CALayer layer];
+    CALayer *videoLayer = [CALayer layer];
+    //parentLayer.frame = CGRectMake(0, 0, flyerlyWidth, flyerlyHeight);
+    videoLayer.frame = CGRectMake(0, 0, videoComposition.renderSize.width, videoComposition.renderSize.height);
+    [parentLayer addSublayer:videoLayer];
+    
+    UIImage *backgroundImage = [flyer getFlyerOverlayImage];
+    CALayer *imageLayer = [CALayer layer];
+    imageLayer.frame = CGRectMake(0, 0, videoComposition.renderSize.width,  videoComposition.renderSize.height);
+    imageLayer.contents = (id)backgroundImage.CGImage;
+    [parentLayer addSublayer:imageLayer];
+    
+    videoComposition.animationTool = [AVVideoCompositionCoreAnimationTool videoCompositionCoreAnimationToolWithPostProcessingAsVideoLayer:videoLayer inLayer:parentLayer];
     
     //// Now to save this Track:
     AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:mixComposition presetName:AVAssetExportPresetHighestQuality];
+    exportSession.videoComposition = videoComposition;
     
     NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
     NSString *destination = [NSString stringWithFormat:@"%@/FlyerlyMovie.mov",currentpath];
 
     //Delete Old File if Exists
-        NSError *error = nil;
+    NSError *error = nil;
     if ( [[NSFileManager defaultManager] isReadableFileAtPath:destination] )
         [[NSFileManager defaultManager] removeItemAtPath:destination error:&error];
     
@@ -2635,7 +2630,6 @@ int selectedAddMoreLayerTab = -1;
     NSString *destination = [NSString stringWithFormat:@"%@/%@",currentpath,url];
     
     [self loadPlayerWithURL:[NSURL fileURLWithPath:destination]];
-
 }
 
 /**
@@ -2852,29 +2846,15 @@ int selectedAddMoreLayerTab = -1;
  */
 -(void)videoMergeProcess {
     
-    //Here we Update Overlay
+    // Here we Update Overlay
     [flyer setVideoOverlay:[self getFlyerSnapShot]];
     
-    //CREATING PATH FOR FLYER OVERLAY VIDEO
+    // CREATING PATH FOR FLYER OVERLAY VIDEO
     NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
-    NSString *videoPath = [NSString stringWithFormat:@"%@/Template/flyerImage.mov", currentpath];
     NSString *originalVideoPath = [NSString stringWithFormat:@"%@/Template/template.mov", currentpath];
     
-    //HERE WE MAKE SURE FILE ALREADY EXISTS THEN DELETE IT OTHERWISE IGNORE
-      NSError *error = nil;
-    if ( [[NSFileManager defaultManager] fileExistsAtPath:videoPath isDirectory:NULL] ) {
-        [[NSFileManager defaultManager] removeItemAtPath:videoPath error:&error];
-    }
-    
-    NSURL *movieURL = [NSURL fileURLWithPath:videoPath];
-    
-    //HERE WE CREATE VIDEO FROM FLYER OVERLAY IMAGE
-    [self createVideoWithURL:movieURL FlyerOverlayImage:[flyer getFlyerOverlayImage]];
-
     //HERE WE ARE MERGE OVER CREATED VIDEO AND USER SELECTED OR MAKE
-    [self mergeVideosWithURL:movieURL SecondURL:[NSURL fileURLWithPath:originalVideoPath]];
-
-
+    [self mergeVideoWithOverlay:[NSURL fileURLWithPath:originalVideoPath]];
 }
 
 #pragma mark  Share Flyer
