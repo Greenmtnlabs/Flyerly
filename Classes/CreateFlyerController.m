@@ -6,6 +6,7 @@
 //
 
 #import "CreateFlyerController.h"
+#import "UIImage+NBUAdditions.h"
 
 @implementation CreateFlyerController
 
@@ -2433,7 +2434,6 @@ int selectedAddMoreLayerTab = -1;
     videoComposition.instructions = @[passThroughInstruction];
     
     CALayer *parentLayer = [CALayer layer];
-    parentLayer.contentsGravity = kCAGravityCenter;
     CALayer *videoLayer = [CALayer layer];
     //parentLayer.frame = CGRectMake(0, 0, flyerlyWidth, flyerlyHeight);
     videoLayer.frame = CGRectMake(0, 0, videoComposition.renderSize.width, videoComposition.renderSize.height);
@@ -2441,8 +2441,7 @@ int selectedAddMoreLayerTab = -1;
     
     UIImage *backgroundImage = [flyer getFlyerOverlayImage];
     CALayer *imageLayer = [CALayer layer];
-    imageLayer.contentsGravity = kCAGravityCenter;
-    imageLayer.frame = CGRectMake(0, 0, flyerlyWidth, flyerlyHeight );
+    imageLayer.frame = CGRectMake(0, 0, videoComposition.renderSize.width, videoComposition.renderSize.height );
     imageLayer.contents = (id)backgroundImage.CGImage;
     [parentLayer addSublayer:imageLayer];
     
@@ -2843,20 +2842,48 @@ int selectedAddMoreLayerTab = -1;
    
 }
 
+
 /*
  * Here we Merge Video
  */
 -(void)videoMergeProcess {
     
-    // Here we Update Overlay
-    [flyer setVideoOverlay:[self getFlyerSnapShot]];
-    
     // CREATING PATH FOR FLYER OVERLAY VIDEO
     NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
     NSString *originalVideoPath = [NSString stringWithFormat:@"%@/Template/template.mov", currentpath];
+
+    // URL of the movie.
+    NSURL *url = [NSURL fileURLWithPath:originalVideoPath];
+    
+    // Here we Update Overlay
+    UIImage *image = [self getFlyerSnapShot];
+    
+    // Crop the image based on aspect ratio. First get the movie size.
+    CGSize movieSize = self.player.naturalSize;
+    
+    // Now compute the aspect ratio
+    CGFloat aspectRatio = movieSize.width / movieSize.height;
+    
+    // Now get the image height we need to use.
+    CGFloat imageHeight = image.size.width / aspectRatio;
+    
+    // Now compute the y offset from where we crop
+    CGFloat y = (image.size.height - imageHeight) / 2.0f;
+    
+    // Get the new cropped image
+    image = [image imageCroppedToRect:CGRectMake( 0, y, image.size.width, imageHeight)];
+    
+    // Now scale to the movie size
+    UIGraphicsBeginImageContextWithOptions( movieSize, NO, 0.0 );
+    [image drawInRect:CGRectMake(0, 0, movieSize.width, movieSize.height)];
+    image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    // Set the overlay image.
+    [flyer setVideoOverlay:image];
     
     //HERE WE ARE MERGE OVER CREATED VIDEO AND USER SELECTED OR MAKE
-    [self mergeVideoWithOverlay:[NSURL fileURLWithPath:originalVideoPath]];
+    [self mergeVideoWithOverlay:url];
 }
 
 #pragma mark  Share Flyer
