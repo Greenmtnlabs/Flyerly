@@ -2415,7 +2415,7 @@ int selectedAddMoreLayerTab = -1;
 /*
  * HERE WE MERGE TWO VIDEOS FOR SHARE VIDEO
  */
--(void)mergeVideoWithOverlay:(NSURL *)firstURL {
+-(void)mergeVideoWithOverlay:(NSURL *)firstURL image:(UIImage *)image {
     
     // Get a pointer to the asset
     AVURLAsset* firstAsset = [AVURLAsset URLAssetWithURL:firstURL options:nil];
@@ -2427,53 +2427,60 @@ int selectedAddMoreLayerTab = -1;
     AVMutableCompositionTrack *firstTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeVideo preferredTrackID:kCMPersistentTrackID_Invalid];
     
     // Image video is always 30 seconds. So we use that unless the background video is smaller.
-    /*CMTime inTime = secondAsset.duration;
-    if ( CMTimeCompare( firstAsset.duration, secondAsset.duration ) < 0 ) {
+    CMTime inTime = CMTimeMake( MAX_VIDEO_LENGTH * VIDEOFRAME, VIDEOFRAME );
+    if ( CMTimeCompare( firstAsset.duration, inTime ) < 0 ) {
         inTime = firstAsset.duration;
-    }*/
-    CMTime inTime = firstAsset.duration;
+    }
     
     // Add first asset tracks to the first track.
     [firstTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, inTime) ofTrack:[[firstAsset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0] atTime:kCMTimeZero error:nil];
 
-
+    // Set up the composition parameters.
     AVMutableVideoComposition *videoComposition = [AVMutableVideoComposition videoComposition];
-    videoComposition.frameDuration = CMTimeMake(1, 30);
+    videoComposition.frameDuration = CMTimeMake(1, VIDEOFRAME );
     videoComposition.renderSize = firstTrack.naturalSize;
     
+    // Pass through parameters for animation.
     AVMutableVideoCompositionInstruction *passThroughInstruction = [AVMutableVideoCompositionInstruction videoCompositionInstruction];
-    passThroughInstruction.timeRange = CMTimeRangeMake(kCMTimeZero, firstAsset.duration);
+    passThroughInstruction.timeRange = CMTimeRangeMake(kCMTimeZero, inTime);
     
+    // Layer instrcutions
     AVMutableVideoCompositionLayerInstruction *passThroughLayer = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:firstTrack];
     
     passThroughInstruction.layerInstructions = @[passThroughLayer];
     videoComposition.instructions = @[passThroughInstruction];
     
+    // Layer that merges the video and image
     CALayer *parentLayer = [CALayer layer];
+    
+    // Layer that renders the video.
     CALayer *videoLayer = [CALayer layer];
-    //parentLayer.frame = CGRectMake(0, 0, flyerlyWidth, flyerlyHeight);
     videoLayer.frame = CGRectMake(0, 0, videoComposition.renderSize.width, videoComposition.renderSize.height);
     [parentLayer addSublayer:videoLayer];
     
-    UIImage *backgroundImage = [flyer getFlyerOverlayImage];
+    // Layer that renders flyerly image.
     CALayer *imageLayer = [CALayer layer];
     imageLayer.frame = CGRectMake(0, 0, videoComposition.renderSize.width, videoComposition.renderSize.height );
-    imageLayer.contents = (id)backgroundImage.CGImage;
+    imageLayer.contents = (id)image.CGImage;
     [parentLayer addSublayer:imageLayer];
     
+    // Setup the animation tool
     videoComposition.animationTool = [AVVideoCompositionCoreAnimationTool videoCompositionCoreAnimationToolWithPostProcessingAsVideoLayer:videoLayer inLayer:parentLayer];
     
-    //// Now to save this Track:
+    // Now export the movie
     AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:mixComposition presetName:AVAssetExportPresetHighestQuality];
     exportSession.videoComposition = videoComposition;
     
+    // Export path
     NSString *destination = [self.flyer getSharingVideoPath];
 
-    //Delete Old File if Exists
+    // Delete Old File if they exist
     NSError *error = nil;
-    if ( [[NSFileManager defaultManager] isReadableFileAtPath:destination] )
+    if ( [[NSFileManager defaultManager] isReadableFileAtPath:destination] ) {
         [[NSFileManager defaultManager] removeItemAtPath:destination error:&error];
+    }
     
+    // Export the URL
     NSURL *exportURL = [NSURL fileURLWithPath:destination];
     exportSession.outputURL = exportURL;
     exportSession.outputFileType = AVFileTypeQuickTimeMovie;
@@ -2484,9 +2491,8 @@ int selectedAddMoreLayerTab = -1;
                 break;
             }
             case AVAssetExportSessionStatusCompleted: {
-                NSLog (@"SUCCESS");
-
-                //Background Thread
+                
+                // Background Thread
                 dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
                     
                     // Here we Add Video In Flyerly Album
@@ -2904,11 +2910,8 @@ int selectedAddMoreLayerTab = -1;
     image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
-    // Set the overlay image.
-    [flyer setVideoOverlay:image];
-    
-    //HERE WE ARE MERGE OVER CREATED VIDEO AND USER SELECTED OR MAKE
-    [self mergeVideoWithOverlay:url];
+    // HERE WE ARE MERGE OVER CREATED VIDEO AND USER SELECTED OR MAKE
+    [self mergeVideoWithOverlay:url image:image];
 }
 
 #pragma mark  Share Flyer
