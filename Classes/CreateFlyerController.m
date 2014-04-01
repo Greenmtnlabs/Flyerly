@@ -2332,88 +2332,6 @@ int selectedAddMoreLayerTab = -1;
     return newImage;
 }
 
-
-
-/*****
- * HERE WE CREATE VIDEO FROM FLYER IMAGE 
- * BECAUSE WE WILL MERGE IN FUTURE FOR SHARE VIDEO
- * @PARAM
- *  NSURL VIDEO URL
- *  UIImage Flyer Overlay Image
- */
--(void)createVideoWithURL :(NSURL *)url FlyerOverlayImage:(UIImage *)image {
-
-    NSError *error = nil;
-    AVAssetWriter *videoWriter = [[AVAssetWriter alloc] initWithURL:
-                                  url fileType:AVFileTypeQuickTimeMovie
-                                                              error:&error];
-    NSParameterAssert(videoWriter);
-    
-    NSDictionary *videoSettings = [NSDictionary dictionaryWithObjectsAndKeys:
-                                   AVVideoCodecH264, AVVideoCodecKey,
-                                   [NSNumber numberWithInt:flyerlyWidth], AVVideoWidthKey,
-                                   [NSNumber numberWithInt:flyerlyHeight], AVVideoHeightKey,
-                                   nil];
-    AVAssetWriterInput* writerInput = [AVAssetWriterInput
-                                        assetWriterInputWithMediaType:AVMediaTypeVideo
-                                        outputSettings:videoSettings] ;
-    
-    NSParameterAssert(writerInput);
-    NSParameterAssert([videoWriter canAddInput:writerInput]);
-    [videoWriter addInput:writerInput];
-    
-    CVPixelBufferRef imageBuffer = [self newPixelBufferFromCGImage:[image CGImage]];
-    CVPixelBufferRef imageBufferEnd = [self newPixelBufferFromCGImage:[image CGImage]];
- 
-    AVAssetWriterInputPixelBufferAdaptor *adaptor = [AVAssetWriterInputPixelBufferAdaptor assetWriterInputPixelBufferAdaptorWithAssetWriterInput:writerInput sourcePixelBufferAttributes:@{ (NSString *)kCVPixelBufferPixelFormatTypeKey : @(kCVPixelFormatType_32BGRA) }];
-    
-    CVPixelBufferPoolCreatePixelBuffer (NULL, adaptor.pixelBufferPool, &imageBuffer);
-    
-    [videoWriter startWriting];
-    [videoWriter startSessionAtSourceTime:CMTimeMake(0, VIDEOFRAME)];
-    
-    [adaptor appendPixelBuffer:imageBuffer withPresentationTime:CMTimeMake(0, VIDEOFRAME)];
-    [adaptor appendPixelBuffer:imageBufferEnd withPresentationTime:CMTimeMake(VIDEOFRAME * MAX_VIDEO_LENGTH, VIDEOFRAME)];
-    
-    
-    [writerInput markAsFinished];
-    [videoWriter endSessionAtSourceTime:CMTimeMake(MAX_VIDEO_LENGTH * VIDEOFRAME, VIDEOFRAME)];
-    [videoWriter finishWriting];
-
-}
-
-- (CVPixelBufferRef) newPixelBufferFromCGImage: (CGImageRef) image
-{
-    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
-                             [NSNumber numberWithBool:YES], kCVPixelBufferCGImageCompatibilityKey,
-                             [NSNumber numberWithBool:YES], kCVPixelBufferCGBitmapContextCompatibilityKey,
-                             nil];
-    CVPixelBufferRef pxbuffer = NULL;
-    CVReturn status = CVPixelBufferCreate(kCFAllocatorDefault, flyerlyWidth,
-                                          flyerlyHeight, kCVPixelFormatType_32ARGB, (__bridge CFDictionaryRef) options,
-                                          &pxbuffer);
-    NSParameterAssert(status == kCVReturnSuccess && pxbuffer != NULL);
-    
-    CVPixelBufferLockBaseAddress(pxbuffer, 0);
-    void *pxdata = CVPixelBufferGetBaseAddress(pxbuffer);
-    NSParameterAssert(pxdata != NULL);
-    
-    CGColorSpaceRef rgbColorSpace = CGColorSpaceCreateDeviceRGB();
-    CGContextRef context = CGBitmapContextCreate(pxdata, flyerlyWidth,
-                                                 flyerlyHeight, 8, 4*flyerlyWidth, rgbColorSpace,
-                                                 kCGImageAlphaNoneSkipFirst);
-    NSParameterAssert(context);
-    CGContextConcatCTM(context, self.view.transform );
-    CGContextDrawImage(context, CGRectMake(0, 0, CGImageGetWidth(image),
-                                           CGImageGetHeight(image)), image);
-    CGColorSpaceRelease(rgbColorSpace);
-    CGContextRelease(context);
-    
-    CVPixelBufferUnlockBaseAddress(pxbuffer, 0);
-    
-    return pxbuffer;
-}
-
 /*
  * HERE WE MERGE TWO VIDEOS FOR SHARE VIDEO
  */
@@ -2498,6 +2416,7 @@ int selectedAddMoreLayerTab = -1;
     NSURL *exportURL = [NSURL fileURLWithPath:destination];
     exportSession.outputURL = exportURL;
     exportSession.outputFileType = AVFileTypeQuickTimeMovie;
+    exportSession.shouldOptimizeForNetworkUse = YES;
     [exportSession exportAsynchronouslyWithCompletionHandler:^{
         switch (exportSession.status) {
             case AVAssetExportSessionStatusFailed:{
