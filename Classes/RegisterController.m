@@ -314,7 +314,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     
     
     // Check empty fields
-    if(!username || [username.text isEqualToString:@""]){
+    if(username.text == nil || [username.text isEqualToString:@""]){
         
         [self showAlert:@"Please complete all required fields" message:@""];
         [self removeLoadingView];
@@ -360,8 +360,10 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     user.username = [userName lowercaseString];
     user.password = pwd;
     user.email = email.text;
-    user[@"name"] = name.text;
-    user[@"contact"] = phno.text;
+    if (name.text != nil)
+        user[@"name"] = name.text;
+    if (phno.text != nil)
+        user[@"contact"] = phno.text;
     
     //Saving User Info for again login
     [[NSUserDefaults standardUserDefaults]  setObject:userName forKey:@"User"];

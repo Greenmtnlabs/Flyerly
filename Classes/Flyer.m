@@ -137,6 +137,18 @@ NSString * const TEXTHEIGHT = @"280.000000";
     // CREATE LIBRARY OBJECT FIRST
     ALAssetsLibrary * library = [[ALAssetsLibrary alloc] init];
     
+    //Checking Group Path should be not null for Flyer Saving In Gallery
+    if ([[NSUserDefaults standardUserDefaults] stringForKey:@"FlyerlyAlbum"] == nil) {
+        return;
+    }
+
+    //HERE WE CHECK USER DID ALLOWED TO ACESS PHOTO library
+    //if not allow so ignore Flyer saving in Gallery
+    if ([ALAssetsLibrary authorizationStatus] == ALAuthorizationStatusRestricted || [ALAssetsLibrary authorizationStatus] == ALAuthorizationStatusDenied) {
+        return;
+    }
+
+    
     // HERE WE GET FLYERLY ALBUM URL
      NSURL *groupUrl  = [[NSURL alloc] initWithString:[[NSUserDefaults standardUserDefaults] stringForKey:@"FlyerlyAlbum"]];
 

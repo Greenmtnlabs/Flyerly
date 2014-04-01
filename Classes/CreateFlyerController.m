@@ -2515,8 +2515,6 @@ int selectedAddMoreLayerTab = -1;
     
     //Uns Selected State of All Buttons
     [backtemplates setSelected:NO];
-    [cameraTakePhoto setSelected:NO];
-    [cameraRoll setSelected:NO];
     [flyerBorder setSelected:NO];
     
     
@@ -2542,12 +2540,20 @@ int selectedAddMoreLayerTab = -1;
     }
     else if(selectedButton == cameraTakePhoto)
     {
-        [cameraTakePhoto setSelected:YES];
         [self openCustomCamera];
     }
     else if(selectedButton == cameraRoll)
     {
-        [cameraRoll setSelected:YES];
+        
+        //HERE WE CHECK USER DID ALLOWED TO ACESS PHOTO library
+        if ([ALAssetsLibrary authorizationStatus] == ALAuthorizationStatusRestricted || [ALAssetsLibrary authorizationStatus] == ALAuthorizationStatusDenied) {
+            
+            UIAlertView *photoAlert = [[UIAlertView alloc ] initWithTitle:@"" message:@"Flyerly does not access to your photo album.To enable access goto the Setting app >> Privacy >> Photos and enable Flyerly" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [photoAlert show];
+            return;
+            
+        }
+        
         [self loadCustomPhotoLibrary];
     }
     else if(selectedButton == flyerBorder)
@@ -2594,6 +2600,16 @@ int selectedAddMoreLayerTab = -1;
     else if( selectedButton == photoTabButton )
 	{
         imgPickerFlag =2;
+        
+        //HERE WE CHECK USER DID ALLOWED TO ACESS PHOTO library
+        if ([ALAssetsLibrary authorizationStatus] == ALAuthorizationStatusRestricted || [ALAssetsLibrary authorizationStatus] == ALAuthorizationStatusDenied) {
+            
+            UIAlertView *photoAlert = [[UIAlertView alloc ] initWithTitle:@"" message:@"Flyerly does not access to your photo album.To enable access goto the Setting app >> Privacy >> Photos and enable Flyerly" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [photoAlert show];
+            return;
+            
+        }
+        
         [self loadCustomPhotoLibrary];
         textBackgrnd.alpha = ALPHA0;
     }

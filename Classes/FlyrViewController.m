@@ -415,10 +415,9 @@
         
         
         [[RMStore defaultStore] requestProducts:products success:^(NSArray *products, NSArray *invalidProductIdentifiers) {
-           
             
-            if (cancelRequest)
-                return ;
+            if (cancelRequest) return ;
+               
             NSLog(@"Products loaded");
             
             requestedProducts = products;
