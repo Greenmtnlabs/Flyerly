@@ -459,7 +459,7 @@ const int CONTACTS_TAB = 0;
         
         }
     }else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You are currently not connected to internet" message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You're not connected to the internet. Please connect and retry." message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         
         [alert show];
     }
@@ -597,7 +597,7 @@ const int CONTACTS_TAB = 0;
         }
     
     }else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You are currently not connected to internet" message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You're not connected to the internet. Please connect and retry." message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
     
         [alert show];
     }
