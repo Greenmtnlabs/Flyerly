@@ -41,6 +41,6 @@
     </objects>
     <resources>
         <image name="ok_button_bg.png" width="77" height="37"/>
-        <image name="splash_bg.png" width="320" height="460"/>
+        <image name="splash_bg.png" width="640" height="920"/>
     </resources>
 </document>

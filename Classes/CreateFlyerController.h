@@ -49,6 +49,7 @@
 	NSArray *colorArray;
 	NSArray *borderArray;
 	NSArray *fontArray;
+    NSArray *iconFontArray;
     int layerXposition;
     
     NSInteger widthValue;
@@ -91,6 +92,7 @@
 @property(nonatomic, strong) IBOutlet UIView *libraryContextView;
 @property(nonatomic, strong) IBOutlet UIView *libFlyer;
 @property(nonatomic, strong) IBOutlet UIView *libBackground;
+@property(nonatomic, strong) IBOutlet UIView *libClipartSymbols;
 @property(nonatomic, strong) IBOutlet UIView *libText;
 @property(nonatomic, strong) IBOutlet UIView *libPhoto;
 @property(nonatomic, strong) IBOutlet UIView *libEmpty;
@@ -129,6 +131,12 @@
 @property (nonatomic,strong)IBOutlet UILabel *durationLabel;
 @property (nonatomic,strong)IBOutlet UILabel *durationChange;
 
+
+// These are libClipartSymbols
+@property (nonatomic, strong)IBOutlet UIButton *addIconTabButton;
+@property (nonatomic, strong)IBOutlet UIButton *addImoticonTabButton;
+@property (nonatomic, strong)IBOutlet UIButton *iconSizeTabButton;
+@property (nonatomic, strong)IBOutlet UIButton *iconColorTabButton;
 
 @property (nonatomic,strong)MPMoviePlayerController *player;
 

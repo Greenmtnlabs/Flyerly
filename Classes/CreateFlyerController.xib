@@ -7,6 +7,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CreateFlyerController">
             <connections>
+                <outlet property="addIconTabButton" destination="Ky6-cl-iIY" id="xOu-hP-5pi"/>
+                <outlet property="addImoticonTabButton" destination="vCd-ZS-hvU" id="6ZW-8u-fLQ"/>
                 <outlet property="addMoreFontTabButton" destination="rb6-j8-Siq" id="Gf9-7b-4Nr"/>
                 <outlet property="addMoreIconTabButton" destination="fpi-NX-k5V" id="Dmn-8a-OqK"/>
                 <outlet property="addMorePhotoTabButton" destination="fcG-xw-IqZ" id="Mj3-Ub-wYi"/>
@@ -26,7 +28,10 @@
                 <outlet property="fontEditButton" destination="Rgs-rs-7a8" id="E8j-if-9v8"/>
                 <outlet property="fontTabButton" destination="zu1-aU-CE3" id="4N8-mM-vZ8"/>
                 <outlet property="heightTabButton" destination="5Ya-yN-kTr" id="RhP-af-MbU"/>
+                <outlet property="iconColorTabButton" destination="IMj-Bl-4Oo" id="eLU-jw-U3H"/>
+                <outlet property="iconSizeTabButton" destination="S89-0n-mtl" id="gC0-U6-kTL"/>
                 <outlet property="libBackground" destination="wtn-Zi-MKo" id="Lbb-GH-gzo"/>
+                <outlet property="libClipartSymbols" destination="P23-sd-q7Z" id="2Gr-cg-BSh"/>
                 <outlet property="libEmpty" destination="suF-K7-Eeb" id="3h4-F6-z4R"/>
                 <outlet property="libFlyer" destination="P8i-Fw-Gci" id="DAb-aV-gaf"/>
                 <outlet property="libPhoto" destination="qGs-4G-Rgw" id="0fl-Oq-GpK"/>
@@ -381,6 +386,41 @@
                 </slider>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+        </view>
+        <view contentMode="scaleToFill" id="P23-sd-q7Z">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Ky6-cl-iIY">
+                    <rect key="frame" x="0.0" y="0.0" width="80" height="45"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="Icons">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="vCd-ZS-hvU">
+                    <rect key="frame" x="80" y="0.0" width="80" height="45"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="Imoticons">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="S89-0n-mtl">
+                    <rect key="frame" x="160" y="0.0" width="80" height="45"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="Size">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="IMj-Bl-4Oo">
+                    <rect key="frame" x="240" y="0.0" width="80" height="45"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="Colour">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
         </view>
     </objects>
     <resources>

@@ -60,8 +60,8 @@
         </view>
     </objects>
     <resources>
-        <image name="Zpassword_box.png" width="252" height="36"/>
-        <image name="Zqemail_box.png" width="252" height="35"/>
-        <image name="Zwelcome_bg.png" width="320" height="460"/>
+        <image name="Zpassword_box.png" width="504" height="71"/>
+        <image name="Zqemail_box.png" width="504" height="70"/>
+        <image name="Zwelcome_bg.png" width="640" height="1136"/>
     </resources>
 </document>

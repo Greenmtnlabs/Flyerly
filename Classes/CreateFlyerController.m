@@ -14,7 +14,7 @@ fontBorderTabButton,addMoreIconTabButton,addMorePhotoTabButton,addMoreSymbolTabB
 @synthesize textBackgrnd,cameraTabButton,photoTabButton,widthTabButton,heightTabButton,deleteAlert;
 @synthesize imgPickerFlag, addMoreLayerOrSaveFlyerLabel, takeOrAddPhotoLabel,layerScrollView,flyerPath;
 @synthesize contextView,libraryContextView,libFlyer,backgroundTabButton,addMoreFontTabButton;
-@synthesize libText,libBackground,libPhoto,libEmpty,backtemplates,cameraTakePhoto,cameraRoll,flyerBorder;
+@synthesize libText,libBackground,libPhoto,libClipartSymbols,libEmpty,backtemplates,cameraTakePhoto,cameraRoll,flyerBorder;
 @synthesize flyimgView,currentLayer,layersDic,flyer,player,playerView,playerToolBar,playButton,playerSlider;
 @synthesize durationLabel,durationChange;
 int selectedAddMoreLayerTab = -1;
@@ -80,6 +80,11 @@ int selectedAddMoreLayerTab = -1;
 	//[self.view addSubview:textBackgrnd];
 	textBackgrnd.alpha = ALPHA0;
     
+    // Create Icon font array
+	iconFontArray =[[NSArray  alloc] initWithObjects:
+				[UIFont fontWithName:@"Arial" size:27],
+				[UIFont fontWithName:@"Daniel Black" size:27],
+                nil];
     
     // Create font array
 	fontArray =[[NSArray  alloc] initWithObjects:
@@ -445,6 +450,91 @@ int selectedAddMoreLayerTab = -1;
  */
 -(void)addFontsInSubView{
     
+    
+    [self deleteSubviewsFromScrollView];
+    
+    CGFloat curXLoc = 0;
+    CGFloat curYLoc = 5;
+    int increment = 5;
+    
+    if(IS_IPHONE_5){
+        curXLoc = 13;
+        curYLoc = 10;
+        increment = 8;
+    }
+    
+    NSMutableDictionary *textLayer;
+    NSString *textFamily;
+    
+    //Getting Last Info of Text Layer
+    if (![currentLayer isEqualToString:@""]) {
+        textLayer = [flyer getLayerFromMaster:currentLayer];
+        textFamily = [textLayer objectForKey:@"fontname"];
+    }
+    
+	for (int i = 1; i <=[fontArray count] ; i++)
+	{
+		UIButton *font = [UIButton buttonWithType:UIButtonTypeCustom];
+		font.frame = CGRectMake(0, 0, widthValue, heightValue);
+        
+        [font addTarget:self action:@selector(selectFont:) forControlEvents:UIControlEventTouchUpInside];
+		
+		[font setTitle:@"A" forState:UIControlStateNormal];
+		UIFont *fontname =fontArray[(i-1)];
+		[font.titleLabel setFont: fontname];
+		[font setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+		font.tag = i;
+		[font setBackgroundImage:[UIImage imageNamed:@"a_bg"] forState:UIControlStateNormal];
+        
+        //SET BUTTON POSITION ON SCROLLVIEW
+        CGRect frame = font.frame;
+        frame.origin = CGPointMake(curXLoc, curYLoc);
+        font.frame = frame;
+        curXLoc += (widthValue)+increment;
+        
+        if(IS_IPHONE_5){
+            if(curXLoc >= 300){
+                curXLoc = 13;
+                curYLoc = curYLoc + widthValue + 7;
+            }
+        }
+        
+        
+        //Here we Highlight Last Font Selected
+        if (textLayer) {
+            
+            NSString *fontFamily = [fontname familyName];
+            
+            if ([textFamily isEqualToString:fontFamily]) {
+                
+                // Add border to selected layer thumbnail
+                [font.layer setBorderWidth:3.0];
+                [font.layer setCornerRadius:8];
+                UIColor * c = [globle colorWithHexString:@"0197dd"];
+                [font.layer setBorderColor:c.CGColor];
+            }
+            
+        }
+        
+        
+        [layerScrollView addSubview:font];
+        
+	}
+    
+    if(IS_IPHONE_5){
+        [layerScrollView setContentSize:CGSizeMake(320, curYLoc)];
+    } else {
+        [layerScrollView setContentSize:CGSizeMake((  [fontArray count]*(widthValue+5)), [layerScrollView bounds].size.height)];
+    }
+    
+}
+
+
+/*
+ * Add Icon fonts in scroll views
+ */
+-(void)addIconFontsInSubView{
+    
 
     [self deleteSubviewsFromScrollView];
     
@@ -467,14 +557,18 @@ int selectedAddMoreLayerTab = -1;
         textFamily = [textLayer objectForKey:@"fontname"];
     }
     
-	for (int i = 1; i <=[fontArray count] ; i++)
+    NSArray *columnas = @[@"U+1F4DE", @"U+1F4F1", @"U+E789", @"U+E723"];
+    
+	for (int i = 1; i <=[columnas count] ; i++)
 	{
 		UIButton *font = [UIButton buttonWithType:UIButtonTypeCustom];
 		font.frame = CGRectMake(0, 0, widthValue, heightValue);
         
         [font addTarget:self action:@selector(selectFont:) forControlEvents:UIControlEventTouchUpInside];
-		
-		[font setTitle:@"A" forState:UIControlStateNormal];
+        
+        [font setTitle:columnas[i] forState:UIControlStateNormal];
+        
+        //[font setTitle:@"A" forState:UIControlStateNormal];
 		UIFont *fontname =fontArray[(i-1)];
 		[font.titleLabel setFont: fontname];
 		[font setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -3307,7 +3401,7 @@ int selectedAddMoreLayerTab = -1;
         [self addScrollView:layerScrollView];
         
         //Add Bottom Tab
-        [self addBottomTabs:libEmpty];
+        [self addBottomTabs:libClipartSymbols];
         
 	}
 	else if(selectedButton == addMoreIconTabButton)
@@ -3340,8 +3434,7 @@ int selectedAddMoreLayerTab = -1;
         
         //Add Bottom Tab
         [self addBottomTabs:libEmpty];
-
-	}
+    }
     else if(selectedButton == backgroundTabButton)
 	{
         
@@ -3353,8 +3446,6 @@ int selectedAddMoreLayerTab = -1;
 
         //Add ContextView
         [self addBottomTabs:libBackground];
-       
-
     }
 }
 
