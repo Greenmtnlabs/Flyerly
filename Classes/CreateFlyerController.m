@@ -2438,10 +2438,16 @@ int selectedAddMoreLayerTab = -1;
     }
     
     // Add to the video track.
-    [videoTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, inTime) ofTrack:[[firstAsset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0] atTime:kCMTimeZero error:nil];
+    NSArray *videos = [firstAsset tracksWithMediaType:AVMediaTypeVideo];
+    if ( videos.count > 0 ) {
+        [videoTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, inTime) ofTrack:[videos objectAtIndex:0] atTime:kCMTimeZero error:nil];
+    }
     
     // Add the audio track.
-    [audioTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, inTime) ofTrack:[[firstAsset tracksWithMediaType:AVMediaTypeAudio] objectAtIndex:0] atTime:kCMTimeZero error:nil];
+    NSArray *audios = [firstAsset tracksWithMediaType:AVMediaTypeAudio];
+    if ( audios.count > 0 ) {
+        [audioTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, inTime) ofTrack:[audios objectAtIndex:0] atTime:kCMTimeZero error:nil];
+    }
 
     // Set up the composition parameters.
     AVMutableVideoComposition *videoComposition = [AVMutableVideoComposition videoComposition];
