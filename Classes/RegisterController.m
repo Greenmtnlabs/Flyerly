@@ -103,15 +103,21 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 
 -(void)onSignUp{
     
-    [self showLoadingView];
-    
-    //Validations
-    if( [self validate] ){
+    //Internet Connectivity Check
+    if([FlyerlySingleton connected]){
+        [self showLoadingView];
         
-        [self signUp:YES username:username.text password:password.text];
+        //Validations
+        if( [self validate] ){
+            
+            [self signUp:YES username:username.text password:password.text];
+            
+        }
+    }else {
+        [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
         
     }
-    
+
 }
 
 
@@ -154,10 +160,10 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
  */
 -(IBAction)onSignUpFacebook{
     
-    [self showLoadingView];
-    
     //Internet Connectivity Check
     if([FlyerlySingleton connected]){
+        
+        [self showLoadingView];
         
         // The permissions requested from the user
         NSArray *permissionsArray = @[ @"user_about_me", @"user_relationships", @"user_birthday", @"user_location"];
@@ -210,6 +216,8 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
             }
         }];
 
+    }else {
+        [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
     }
 }
 
@@ -234,11 +242,13 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 
 -(IBAction)onSignUpTwitter{
 
-    [self showLoadingIndicator];
+
     
     //Connectivity Check
     if([FlyerlySingleton connected]){
         
+        [self showLoadingIndicator];
+
         [PFTwitterUtils logInWithBlock:^(PFUser *user, NSError *error) {
             
             [self hideLoadingIndicator];
@@ -301,6 +311,8 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 
 -(BOOL)validate{
 
+    
+    
     // Check empty fields
     if(!username || [username.text isEqualToString:@""]){
         

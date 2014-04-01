@@ -153,72 +153,81 @@
 
 -(IBAction)onSignInFacebook{
     
-    [self showLoadingView];
     
-    // The permissions requested from the user
-    NSArray *permissionsArray = @[ @"user_about_me", @"user_relationships", @"user_birthday", @"user_location"];
-
-    // Login PFUser using Facebook
-    [PFFacebookUtils logInWithPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
+    //Internet Connectivity Check
+    if([FlyerlySingleton connected]){
         
-        [self hideLoadingIndicator]; // Hide loading indicator
+        [self showLoadingView];
         
-        if ( !user ) {
+        // The permissions requested from the user
+        NSArray *permissionsArray = @[ @"user_about_me", @"user_relationships", @"user_birthday", @"user_location"];
 
-            //User denied to access fb account of Device
-            if ( !error ) {
-                NSLog(@"Uh oh. The user cancelled the Facebook login.");
+        // Login PFUser using Facebook
+        [PFFacebookUtils logInWithPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
+            
+            [self hideLoadingIndicator]; // Hide loading indicator
+            
+            if ( !user ) {
+
+                //User denied to access fb account of Device
+                if ( !error ) {
+                    NSLog(@"Uh oh. The user cancelled the Facebook login.");
+                } else {
+                    NSLog(@"Uh oh. An error occurred: %@", error);
+                }
+                
+            } else if (user.isNew) {
+                
+                NSLog(@"User with facebook signed up and logged in!");
+                
+                
+                 // Remove Current UserName for Device configuration
+                [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"User"];
+                
+                // Login success Move to Flyerly
+                launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil] ;
+                
+                FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+                appDelegate.lauchController = launchController;
+                
+                // For Parse New User Merge to old Facebook User
+                [appDelegate fbChangeforNewVersion];
+
+                
+                [self performSelectorOnMainThread:@selector(pushViewController:) withObject:launchController waitUntilDone:YES];
+                
             } else {
-                NSLog(@"Uh oh. An error occurred: %@", error);
+                NSLog(@"User with facebook logged in!");
+                
+                // Remove Current UserName for Device configuration
+                [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"User"];
+                
+                
+                // Login success Move to Flyerly
+                launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil] ;
+                
+                // Temp on for Testing here
+                FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+                appDelegate.lauchController = launchController;
+                [appDelegate fbChangeforNewVersion];
+
+                [self.navigationController pushViewController:launchController animated:YES];
+
             }
-            
-        } else if (user.isNew) {
-            
-            NSLog(@"User with facebook signed up and logged in!");
-            
-            
-             // Remove Current UserName for Device configuration
-            [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"User"];
-            
-            // Login success Move to Flyerly
-            launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil] ;
-            
-            FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-            appDelegate.lauchController = launchController;
-            
-            // For Parse New User Merge to old Facebook User
-            [appDelegate fbChangeforNewVersion];
-
-            
-            [self performSelectorOnMainThread:@selector(pushViewController:) withObject:launchController waitUntilDone:YES];
-            
-        } else {
-            NSLog(@"User with facebook logged in!");
-            
-            // Remove Current UserName for Device configuration
-            [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"User"];
-            
-            
-            // Login success Move to Flyerly
-            launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil] ;
-            
-            // Temp on for Testing here
-            FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-            appDelegate.lauchController = launchController;
-            [appDelegate fbChangeforNewVersion];
-
-            [self.navigationController pushViewController:launchController animated:YES];
-
-        }
-    }];
-
+        }];
+    }else {
+        [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
+    
+    }
         
 }
 
 -(IBAction)onSignInTwitter{
-    [self showLoadingIndicator];
+
     
     if([FlyerlySingleton connected]){
+        
+        [self showLoadingIndicator];
         
         [PFTwitterUtils logInWithBlock:^(PFUser *user, NSError *error) {
             
@@ -270,7 +279,6 @@
         
     }else{
         [self showAlert:@"You're not connected to the internet. Please connect and retry." message:@""];
-        [self removeLoadingView];
     }
 
 }
