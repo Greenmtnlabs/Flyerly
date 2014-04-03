@@ -330,12 +330,12 @@
  */
 -(IBAction)uploadOnYoutube:(id)sender {
     
-//    SHKFile *file = [[SHKFile alloc] initWithFilePath:@""];
+    SHKItem *item = [SHKItem filePath:[self.flyer getSharingVideoPath] title:titleView.text];
     
-//    iosSharer = [ SHKGooglePlus shareFilePath:[self.flyer getSharingVideoPath] title:@"YouTube Video"];
-    SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ #flyerly", selectedFlyerDescription ]];
+    item.tags =[NSArray arrayWithObjects: @"#flyerly", nil];
+    item.text = selectedFlyerDescription;
     
-    iosSharer = [SHKYouTube shareFilePath:[self.flyer getSharingVideoPath] title:@"sdf" ];
+    iosSharer = [SHKYouTube shareItem:item];
 
     iosSharer.shareDelegate = self;
 }
@@ -533,6 +533,10 @@
         [self.flyer setSmsStatus:1];
         [Flurry logEvent:@"Shared SMS"];
 
+    } else if ( [sharer isKindOfClass:[SHKYouTube class]] == YES ) {
+        
+        [Flurry logEvent:@"Shared Youtube"];
+        
     }
     
     [self setSocialStatus];
@@ -599,6 +603,7 @@
     if (sharer.quiet) return;
     [[SHKActivityIndicator currentIndicator]  showProgress:progress forSharer:sharer];
 }
+
 
 
 #pragma mark  Rating Flyer

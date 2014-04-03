@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AVFoundation/AVFoundation.h>
 #import <Parse/Parse.h>
 #import "FlyerImageView.h"
 #import <AssetsLibrary/AssetsLibrary.h>
@@ -115,6 +116,7 @@
 -(NSString *)getFlyerURL;
 -(NSString *)getOriginalVideoURL;
 -(NSString *)getSharingVideoPath;
+-(UIImage *)getSharingVideoCover;
 
 -(NSString *)getShareType;
 -(NSString *)getFlyerUpdateDate;

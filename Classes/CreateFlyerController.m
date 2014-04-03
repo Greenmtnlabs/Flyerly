@@ -1868,7 +1868,7 @@ int selectedAddMoreLayerTab = -1;
     player.fullscreen = NO;
     player.movieSourceType  = MPMovieSourceTypeFile;
     player.controlStyle =  MPMovieControlStyleNone;
-    player.scalingMode = MPMovieScalingModeAspectFit;
+    player.scalingMode = MPMovieScalingModeAspectFill;
     player.backgroundView.backgroundColor = [UIColor whiteColor];
     [player prepareToPlay];
 

@@ -100,8 +100,14 @@ NSString * const TEXTHEIGHT = @"280.000000";
 
     NSData *snapShotData = UIImagePNGRepresentation(snapShot);
     
-    [snapShotData writeToFile:flyerImageFile atomically:YES];
-    
+    if ([self isVideoFlyer]) {
+        
+        
+    }else {
+        
+        //Update Share Img of Image Flyer
+        [snapShotData writeToFile:flyerImageFile atomically:YES];
+    }
     
     // HERE WE CHECK USER ALLOWED TO SAVE IN GALLERY FROM SETTING
     if([[NSUserDefaults standardUserDefaults] stringForKey:@"saveToCameraRollSetting"]){
@@ -1209,7 +1215,25 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     return destination;
 }
 
+/*
+ * Here we Return Over generated Video Snap Shot For Main screen
+ */
+-(UIImage *)getSharingVideoCover {
 
+    NSString* filePath = [self getSharingVideoPath];
+    
+    AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:[NSURL fileURLWithPath:filePath] options:nil];
+    AVAssetImageGenerator *generator = [[AVAssetImageGenerator alloc] initWithAsset:asset];
+    generator.appliesPreferredTrackTransform = YES;
+    NSError *err = NULL;
+//    CMTime time = CMTimeMake(1, 60);
+    CGImageRef imgRef = [generator copyCGImageAtTime: asset.duration actualTime:NULL error:&err];
+    
+    return  [[UIImage alloc] initWithCGImage:imgRef];
+}
+
+    
+    
 /* Checking here Video Flyer or Image Flyer
  *
  */
