@@ -6,6 +6,7 @@
 //
 
 #import "CreateFlyerController.h"
+#import "UIImage+NBUAdditions.h"
 
 @implementation CreateFlyerController
 
@@ -1860,14 +1861,14 @@ int selectedAddMoreLayerTab = -1;
 
     self.flyimgView.image = nil;
     [self.playerView addSubview:player.view];
-    [playerToolBar setFrame:CGRectMake(0, 270, 310, 40)];
+    [playerToolBar setFrame:CGRectMake(0, self.playerView.frame.size.height - 40, 310, 40)];
     [self.playerView addSubview:playerToolBar];
     player.accessibilityElementsHidden = YES;
     player.shouldAutoplay = NO;
     player.fullscreen = NO;
     player.movieSourceType  = MPMovieSourceTypeFile;
     player.controlStyle =  MPMovieControlStyleNone;
-    player.scalingMode = MPMovieScalingModeAspectFill;
+    player.scalingMode = MPMovieScalingModeAspectFit;
     player.backgroundView.backgroundColor = [UIColor whiteColor];
     [player prepareToPlay];
 
@@ -1933,6 +1934,8 @@ int selectedAddMoreLayerTab = -1;
         float minutes = floor(duration / 60);
         videoDuration = duration - minutes * 60;
         playerSlider.value = 0.0;
+    } else {
+        NSLog(@"Unknown load state: %u", player.loadState);
     }
 }
 
@@ -2269,7 +2272,7 @@ int selectedAddMoreLayerTab = -1;
 -(UIImage *)getFlyerSnapShot {
     
     //Here we take Snap shot of Flyer
-    UIGraphicsBeginImageContextWithOptions(self.flyimgView.bounds.size, YES, 0.0f);
+    UIGraphicsBeginImageContextWithOptions(self.flyimgView.bounds.size, NO, 0.0f);
     CGContextRef context = UIGraphicsGetCurrentContext();
     [self.flyimgView.layer renderInContext:context];
     UIImage *snapshotImage = UIGraphicsGetImageFromCurrentImageContext();
@@ -2329,156 +2332,178 @@ int selectedAddMoreLayerTab = -1;
     return newImage;
 }
 
-
-
-/*****
- * HERE WE CREATE VIDEO FROM FLYER IMAGE 
- * BECAUSE WE WILL MERGE IN FUTURE FOR SHARE VIDEO
- * @PARAM
- *  NSURL VIDEO URL
- *  UIImage Flyer Overlay Image
+/**
+ * Rotate frames to ensure they are in their correct orientation. This method returns and instraction that we 
+ * can use to set it right.
+ *
+ * Details here: http://stackoverflow.com/questions/12136841/avmutablevideocomposition-rotated-video-captured-in-portrait-mode
  */
--(void)createVideoWithURL :(NSURL *)url FlyerOverlayImage:(UIImage *)image {
-
-    NSError *error = nil;
-    AVAssetWriter *videoWriter = [[AVAssetWriter alloc] initWithURL:
-                                  url fileType:AVFileTypeQuickTimeMovie
-                                                              error:&error];
-    NSParameterAssert(videoWriter);
+- (void)layerInstructionAfterFixingOrientation:(AVMutableVideoCompositionLayerInstruction *)videolayerInstruction
+                                     transform:(CGAffineTransform)videoTransform {
     
-    NSDictionary *videoSettings = [NSDictionary dictionaryWithObjectsAndKeys:
-                                   AVVideoCodecH264, AVVideoCodecKey,
-                                   [NSNumber numberWithInt:flyerlyWidth], AVVideoWidthKey,
-                                   [NSNumber numberWithInt:flyerlyHeight], AVVideoHeightKey,
-                                   nil];
-    AVAssetWriterInput* writerInput = [AVAssetWriterInput
-                                        assetWriterInputWithMediaType:AVMediaTypeVideo
-                                        outputSettings:videoSettings] ;
+    UIImageOrientation videoAssetOrientation_  = UIImageOrientationUp;
+    BOOL  isVideoAssetPortrait_  = YES;
     
-    NSParameterAssert(writerInput);
-    NSParameterAssert([videoWriter canAddInput:writerInput]);
-    [videoWriter addInput:writerInput];
+    if(videoTransform.a == 0 && videoTransform.b == 1.0 && videoTransform.c == -1.0 && videoTransform.d == 0)  {videoAssetOrientation_= UIImageOrientationRight; isVideoAssetPortrait_ = YES;}
+    if(videoTransform.a == 0 && videoTransform.b == -1.0 && videoTransform.c == 1.0 && videoTransform.d == 0)  {videoAssetOrientation_ =  UIImageOrientationLeft; isVideoAssetPortrait_ = YES;}
+    if(videoTransform.a == 1.0 && videoTransform.b == 0 && videoTransform.c == 0 && videoTransform.d == 1.0)   {videoAssetOrientation_ =  UIImageOrientationUp;}
+    if(videoTransform.a == -1.0 && videoTransform.b == 0 && videoTransform.c == 0 && videoTransform.d == -1.0) {videoAssetOrientation_ = UIImageOrientationDown;}
     
-    CVPixelBufferRef imageBuffer = [self newPixelBufferFromCGImage:[image CGImage]];
-    CVPixelBufferRef imageBufferEnd = [self newPixelBufferFromCGImage:[image CGImage]];
- 
-    AVAssetWriterInputPixelBufferAdaptor *adaptor = [AVAssetWriterInputPixelBufferAdaptor assetWriterInputPixelBufferAdaptorWithAssetWriterInput:writerInput sourcePixelBufferAttributes:@{ (NSString *)kCVPixelBufferPixelFormatTypeKey : @(kCVPixelFormatType_32BGRA) }];
+    CGFloat FirstAssetScaleToFitRatio = 1.0;
     
-    CVPixelBufferPoolCreatePixelBuffer (NULL, adaptor.pixelBufferPool, &imageBuffer);
-    
-    [videoWriter startWriting];
-    [videoWriter startSessionAtSourceTime:CMTimeMake(0, VIDEOFRAME)];
-    
-    [adaptor appendPixelBuffer:imageBuffer withPresentationTime:CMTimeMake(0, VIDEOFRAME)];
-    [adaptor appendPixelBuffer:imageBufferEnd withPresentationTime:CMTimeMake(VIDEOFRAME * videoDuration, VIDEOFRAME)];
-    
-    
-    [writerInput markAsFinished];
-    [videoWriter endSessionAtSourceTime:CMTimeMake(videoDuration * VIDEOFRAME, VIDEOFRAME)];
-    [videoWriter finishWriting];
-
+    if( YES ) {
+        CGAffineTransform FirstAssetScaleFactor = CGAffineTransformMakeScale(FirstAssetScaleToFitRatio,FirstAssetScaleToFitRatio);
+        [videolayerInstruction setTransform:CGAffineTransformConcat( videoTransform, FirstAssetScaleFactor) atTime:kCMTimeZero];
+    }else{
+        CGAffineTransform FirstAssetScaleFactor = CGAffineTransformMakeScale(FirstAssetScaleToFitRatio,FirstAssetScaleToFitRatio);
+        [videolayerInstruction setTransform:CGAffineTransformConcat(CGAffineTransformConcat( videoTransform, FirstAssetScaleFactor),CGAffineTransformMakeTranslation(0, 160)) atTime:kCMTimeZero];
+    }
 }
 
-- (CVPixelBufferRef) newPixelBufferFromCGImage: (CGImageRef) image
+/**
+ * Determine if this video asset is in portrait mode.
+ *
+ * @param asset
+ *           The asset that needs to be checked.
+ *
+ * @return
+ *           YES if in portrait, NO otherwise.
+ */
+-(BOOL) isVideoPortrait:(AVAsset *)asset
 {
-    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
-                             [NSNumber numberWithBool:YES], kCVPixelBufferCGImageCompatibilityKey,
-                             [NSNumber numberWithBool:YES], kCVPixelBufferCGBitmapContextCompatibilityKey,
-                             nil];
-    CVPixelBufferRef pxbuffer = NULL;
-    CVReturn status = CVPixelBufferCreate(kCFAllocatorDefault, flyerlyWidth,
-                                          flyerlyHeight, kCVPixelFormatType_32ARGB, (__bridge CFDictionaryRef) options,
-                                          &pxbuffer);
-    NSParameterAssert(status == kCVReturnSuccess && pxbuffer != NULL);
-    
-    CVPixelBufferLockBaseAddress(pxbuffer, 0);
-    void *pxdata = CVPixelBufferGetBaseAddress(pxbuffer);
-    NSParameterAssert(pxdata != NULL);
-    
-    CGColorSpaceRef rgbColorSpace = CGColorSpaceCreateDeviceRGB();
-    CGContextRef context = CGBitmapContextCreate(pxdata, flyerlyWidth,
-                                                 flyerlyHeight, 8, 4*flyerlyWidth, rgbColorSpace,
-                                                 kCGImageAlphaNoneSkipFirst);
-    NSParameterAssert(context);
-    CGContextConcatCTM(context, self.view.transform );
-    CGContextDrawImage(context, CGRectMake(0, 0, CGImageGetWidth(image),
-                                           CGImageGetHeight(image)), image);
-    CGColorSpaceRelease(rgbColorSpace);
-    CGContextRelease(context);
-    
-    CVPixelBufferUnlockBaseAddress(pxbuffer, 0);
-    
-    return pxbuffer;
+    BOOL isPortrait = FALSE;
+    NSArray *tracks = [asset tracksWithMediaType:AVMediaTypeVideo];
+    if([tracks    count] > 0) {
+        AVAssetTrack *videoTrack = [tracks objectAtIndex:0];
+        
+        CGAffineTransform t = videoTrack.preferredTransform;
+        // Portrait
+        if(t.a == 0 && t.b == 1.0 && t.c == -1.0 && t.d == 0)
+        {
+            isPortrait = YES;
+        }
+        // PortraitUpsideDown
+        if(t.a == 0 && t.b == -1.0 && t.c == 1.0 && t.d == 0)  {
+            
+            isPortrait = YES;
+        }
+        // LandscapeRight
+        if(t.a == 1.0 && t.b == 0 && t.c == 0 && t.d == 1.0)
+        {
+            isPortrait = FALSE;
+        }
+        // LandscapeLeft
+        if(t.a == -1.0 && t.b == 0 && t.c == 0 && t.d == -1.0)
+        {
+            isPortrait = FALSE;
+        }
+    }
+    return isPortrait;
 }
-
-
 
 /*
  * HERE WE MERGE TWO VIDEOS FOR SHARE VIDEO
  */
--(void)mergeVideosWithURL :(NSURL *)firstURL  SecondURL:(NSURL *)secondURL {
-    
+-(void)mergeVideoWithOverlay:(NSURL *)firstURL image:(UIImage *)image {
     
     // Get a pointer to the asset
     AVURLAsset* firstAsset = [AVURLAsset URLAssetWithURL:firstURL options:nil];
-    AVURLAsset* secondAsset = [AVURLAsset URLAssetWithURL:secondURL options:nil];
-    
 
     // Make an instance of avmutablecomposition so that we can edit this asset:
-    AVMutableComposition* mixComposition = [[AVMutableComposition alloc] init];
+    AVMutableComposition* mixComposition = [AVMutableComposition composition];
     
     // Add tracks to this composition
-    AVMutableCompositionTrack *firstTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeVideo preferredTrackID:kCMPersistentTrackID_Invalid];
+    AVMutableCompositionTrack *videoTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeVideo preferredTrackID:kCMPersistentTrackID_Invalid];
     
-    // Add tracks to this composition
-    AVMutableCompositionTrack *secondTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeVideo preferredTrackID:kCMPersistentTrackID_Invalid];
+    // Audio track
+    AVMutableCompositionTrack *audioTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeAudio preferredTrackID:kCMPersistentTrackID_Invalid];
+    
+    // Image video is always 30 seconds. So we use that unless the background video is smaller.
+    CMTime inTime = CMTimeMake( MAX_VIDEO_LENGTH * VIDEOFRAME, VIDEOFRAME );
+    if ( CMTimeCompare( firstAsset.duration, inTime ) < 0 ) {
+        inTime = firstAsset.duration;
+    }
 
+    // Add to the video track.
+    NSArray *videos = [firstAsset tracksWithMediaType:AVMediaTypeVideo];
+    CGAffineTransform transform;
+    if ( videos.count > 0 ) {
+        AVAssetTrack *track = [videos objectAtIndex:0];
+        [videoTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, inTime) ofTrack:track atTime:kCMTimeZero error:nil];
+        transform = track.preferredTransform;
+        videoTrack.preferredTransform = transform;
+    }
     
-    /// Here we Get Set Video Limit of 30 Sec Only
-    int32_t preferredTimeScale = 1;
-    CMTime inTime = CMTimeMakeWithSeconds(videoDuration, preferredTimeScale);
+    // Add the audio track.
+    NSArray *audios = [firstAsset tracksWithMediaType:AVMediaTypeAudio];
+    if ( audios.count > 0 ) {
+        [audioTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, inTime) ofTrack:[audios objectAtIndex:0] atTime:kCMTimeZero error:nil];
+    }
     
+    // Determine size of video based on orientation
+    BOOL isPortrait = [self isVideoPortrait:firstAsset];
+    CGSize videoSize = videoTrack.naturalSize;
+    if( isPortrait ) {
+        videoSize = CGSizeMake(videoSize.height, videoSize.width);
+    }
     
-    [firstTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, inTime) ofTrack:[[firstAsset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0] atTime:kCMTimeZero error:nil];
+    // Set the mix composition size.
+    mixComposition.naturalSize = videoSize;
 
-    [secondTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, inTime) ofTrack:[[secondAsset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0] atTime:kCMTimeZero error:nil];
-    
-    // Show both videos simultaneously
-    AVMutableVideoCompositionInstruction *mainInstruction = [AVMutableVideoCompositionInstruction videoCompositionInstruction];
-    
-    // Set the time duration
-    mainInstruction.timeRange = CMTimeRangeMake(kCMTimeZero, firstAsset.duration);
-    
-    // Image video
-    AVMutableVideoCompositionLayerInstruction *imageVideo = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:secondTrack];
-    
-    // Background video
-    AVMutableVideoCompositionLayerInstruction *backgroundVideo = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:firstTrack];
-    
-    // We need to play them together
-    mainInstruction.layerInstructions = [NSArray arrayWithObjects: imageVideo, backgroundVideo, nil];
-    
-    // Make a video composition
+    // Set up the composition parameters.
     AVMutableVideoComposition *videoComposition = [AVMutableVideoComposition videoComposition];
-    videoComposition.instructions = [NSArray arrayWithObject:mainInstruction];
-    videoComposition.frameDuration = CMTimeMake(1, 30);
-    videoComposition.renderSize = CGSizeMake(620, 620);
-
-
+    videoComposition.frameDuration = CMTimeMake(1, VIDEOFRAME );
+    videoComposition.renderSize = videoSize;
+    videoComposition.renderScale = 1.0;
     
-    //// Now to save this Track:
+    // Pass through parameters for animation.
+    AVMutableVideoCompositionInstruction *passThroughInstruction = [AVMutableVideoCompositionInstruction videoCompositionInstruction];
+    passThroughInstruction.timeRange = CMTimeRangeMake(kCMTimeZero, inTime);
+    
+    // Layer instructions
+    AVMutableVideoCompositionLayerInstruction *passThroughLayer = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:videoTrack];
+    
+    // Set the transform to maintain orientation
+    [passThroughLayer setTransform:transform atTime:kCMTimeZero];
+    
+    passThroughInstruction.layerInstructions = @[ passThroughLayer ];
+    videoComposition.instructions = @[passThroughInstruction];
+    
+    // Layer that merges the video and image
+    CALayer *parentLayer = [CALayer layer];
+    
+    // Layer that renders the video.
+    CALayer *videoLayer = [CALayer layer];
+    videoLayer.frame = CGRectMake(0, 0, videoComposition.renderSize.width, videoComposition.renderSize.height);
+    [parentLayer addSublayer:videoLayer];
+    
+    // Layer that renders flyerly image.
+    CALayer *imageLayer = [CALayer layer];
+    imageLayer.frame = CGRectMake(0, 0, videoComposition.renderSize.width, videoComposition.renderSize.height );
+    imageLayer.contents = (id)image.CGImage;
+    [parentLayer addSublayer:imageLayer];
+    
+    // Setup the animation tool
+    videoComposition.animationTool = [AVVideoCompositionCoreAnimationTool videoCompositionCoreAnimationToolWithPostProcessingAsVideoLayer:videoLayer inLayer:parentLayer];
+    
+    // Now export the movie
     AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:mixComposition presetName:AVAssetExportPresetHighestQuality];
+    exportSession.videoComposition = videoComposition;
     
+    // Export path
     NSString *destination = [self.flyer getSharingVideoPath];
 
-    //Delete Old File if Exists
-        NSError *error = nil;
-    if ( [[NSFileManager defaultManager] isReadableFileAtPath:destination] )
+    // Delete Old File if they exist
+    NSError *error = nil;
+    if ( [[NSFileManager defaultManager] isReadableFileAtPath:destination] ) {
         [[NSFileManager defaultManager] removeItemAtPath:destination error:&error];
+    }
     
+    // Export the URL
     NSURL *exportURL = [NSURL fileURLWithPath:destination];
     exportSession.outputURL = exportURL;
     exportSession.outputFileType = AVFileTypeQuickTimeMovie;
+    exportSession.shouldOptimizeForNetworkUse = YES;
     [exportSession exportAsynchronouslyWithCompletionHandler:^{
         switch (exportSession.status) {
             case AVAssetExportSessionStatusFailed:{
@@ -2486,9 +2511,8 @@ int selectedAddMoreLayerTab = -1;
                 break;
             }
             case AVAssetExportSessionStatusCompleted: {
-                NSLog (@"SUCCESS");
-
-                //Background Thread
+                
+                // Background Thread
                 dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
                     
                     // Here we Add Video In Flyerly Album
@@ -2658,7 +2682,6 @@ int selectedAddMoreLayerTab = -1;
     NSString *destination = [NSString stringWithFormat:@"%@/%@",currentpath,url];
     
     [self loadPlayerWithURL:[NSURL fileURLWithPath:destination]];
-
 }
 
 /**
@@ -2870,34 +2893,45 @@ int selectedAddMoreLayerTab = -1;
    
 }
 
+
 /*
  * Here we Merge Video
  */
 -(void)videoMergeProcess {
     
-    //Here we Update Overlay
-    [flyer setVideoOverlay:[self getFlyerSnapShot]];
-    
-    //CREATING PATH FOR FLYER OVERLAY VIDEO
+    // CREATING PATH FOR FLYER OVERLAY VIDEO
     NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
-    NSString *videoPath = [NSString stringWithFormat:@"%@/Template/flyerImage.mov", currentpath];
     NSString *originalVideoPath = [NSString stringWithFormat:@"%@/Template/template.mov", currentpath];
-    
-    //HERE WE MAKE SURE FILE ALREADY EXISTS THEN DELETE IT OTHERWISE IGNORE
-      NSError *error = nil;
-    if ( [[NSFileManager defaultManager] fileExistsAtPath:videoPath isDirectory:NULL] ) {
-        [[NSFileManager defaultManager] removeItemAtPath:videoPath error:&error];
-    }
-    
-    NSURL *movieURL = [NSURL fileURLWithPath:videoPath];
-    
-    //HERE WE CREATE VIDEO FROM FLYER OVERLAY IMAGE
-    [self createVideoWithURL:movieURL FlyerOverlayImage:[flyer getFlyerOverlayImage]];
 
-    //HERE WE ARE MERGE OVER CREATED VIDEO AND USER SELECTED OR MAKE
-    [self mergeVideosWithURL:movieURL SecondURL:[NSURL fileURLWithPath:originalVideoPath]];
-
-
+    // URL of the movie.
+    NSURL *url = [NSURL fileURLWithPath:originalVideoPath];
+    
+    // Here we Update Overlay
+    UIImage *image = [self getFlyerSnapShot];
+    
+    // Crop the image based on aspect ratio. First get the movie size.
+    CGSize movieSize = self.player.naturalSize;
+    
+    // Now compute the aspect ratio
+    CGFloat aspectRatio = movieSize.width / movieSize.height;
+    
+    // Now get the image height we need to use.
+    CGFloat imageHeight = image.size.width / aspectRatio;
+    
+    // Now compute the y offset from where we crop
+    CGFloat y = (image.size.height - imageHeight) / 2.0f;
+    
+    // Get the new cropped image
+    image = [image imageCroppedToRect:CGRectMake( 0, y, image.size.width, imageHeight)];
+    
+    // Now scale to the movie size
+    UIGraphicsBeginImageContextWithOptions( movieSize, NO, 0.0 );
+    [image drawInRect:CGRectMake(0, 0, movieSize.width, movieSize.height)];
+    image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    // HERE WE ARE MERGE OVER CREATED VIDEO AND USER SELECTED OR MAKE
+    [self mergeVideoWithOverlay:url image:image];
 }
 
 #pragma mark  Share Flyer
