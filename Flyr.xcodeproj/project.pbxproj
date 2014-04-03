@@ -390,6 +390,7 @@
 		20714DF3187F1B9D000D6838 /* cameraline.png in Resources */ = {isa = PBXBuildFile; fileRef = 20714DF2187F1B9D000D6838 /* cameraline.png */; };
 		20714DF7187F2105000D6838 /* cancelcamera.png in Resources */ = {isa = PBXBuildFile; fileRef = 20714DF5187F2105000D6838 /* cancelcamera.png */; };
 		20714DF9187F25E1000D6838 /* settingsrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 20714DF8187F25E1000D6838 /* settingsrow.png */; };
+		207AB32B18ED473400945924 /* ShareKit.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 207AB32A18ED473400945924 /* ShareKit.podspec */; };
 		2086F90C17C4C2E300664123 /* Zmain_screenbg-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2086F90917C4C2E300664123 /* Zmain_screenbg-568h@2x.png */; };
 		2086F90D17C4C2E300664123 /* Zmain_screenbg.png in Resources */ = {isa = PBXBuildFile; fileRef = 2086F90A17C4C2E300664123 /* Zmain_screenbg.png */; };
 		2086F90E17C4C2E300664123 /* Zmain_screenbg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2086F90B17C4C2E300664123 /* Zmain_screenbg@2x.png */; };
@@ -1246,6 +1247,7 @@
 		20714DF2187F1B9D000D6838 /* cameraline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cameraline.png; path = ../Classes/cameraline.png; sourceTree = "<group>"; };
 		20714DF5187F2105000D6838 /* cancelcamera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cancelcamera.png; path = ../Classes/cancelcamera.png; sourceTree = "<group>"; };
 		20714DF8187F25E1000D6838 /* settingsrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = settingsrow.png; path = ../Classes/settingsrow.png; sourceTree = "<group>"; };
+		207AB32A18ED473400945924 /* ShareKit.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ShareKit.podspec; sourceTree = "<group>"; };
 		2086F90917C4C2E300664123 /* Zmain_screenbg-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Zmain_screenbg-568h@2x.png"; sourceTree = "<group>"; };
 		2086F90A17C4C2E300664123 /* Zmain_screenbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Zmain_screenbg.png; sourceTree = "<group>"; };
 		2086F90B17C4C2E300664123 /* Zmain_screenbg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Zmain_screenbg@2x.png"; sourceTree = "<group>"; };
@@ -2458,6 +2460,14 @@
 			name = FlyerlyCustomClasses;
 			sourceTree = "<group>";
 		};
+		207AB32918ED471100945924 /* Podspecs */ = {
+			isa = PBXGroup;
+			children = (
+				207AB32A18ED473400945924 /* ShareKit.podspec */,
+			);
+			path = Podspecs;
+			sourceTree = "<group>";
+		};
 		208C6850186DAB38004A74F2 /* Config */ = {
 			isa = PBXGroup;
 			children = (
@@ -2660,6 +2670,7 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
+				207AB32918ED471100945924 /* Podspecs */,
 				96127DDA85BB40748EA10004 /* Pods.xcconfig */,
 			);
 			name = CustomTemplate;
@@ -3419,6 +3430,7 @@
 				65C1A46517425D6C00947D5E /* twitter_follow_selected@2x.png in Resources */,
 				65C1A46617425D6C00947D5E /* twitter_follow@2x.png in Resources */,
 				65C1A46D17425FCB00947D5E /* twitter_follow_selected.png in Resources */,
+				207AB32B18ED473400945924 /* ShareKit.podspec in Resources */,
 				65C1A46E17425FCB00947D5E /* twitter_follow.png in Resources */,
 				0FB11B7F174D146400A57DB9 /* new_grid_line.png in Resources */,
 				0FEF2D9A174E65B100FDD8C9 /* HelpController.xib in Resources */,

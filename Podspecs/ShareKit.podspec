@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name          = 'ShareKit'
-  s.version       = '2.4.6'
-  s.platform      = :ios, '5.0'
+  s.version       = '2.5.6'
+  s.platform      = :ios, '7.0'
   s.summary       = 'Drop in sharing features for all iPhone and iPad apps.'
   s.homepage      = 'http://getsharekit.com/'
   s.author        = 'ShareKit Community'
@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
                                %Q|The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n| +
                                %Q|THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE| }
   
-  non_arc_files = 'Classes/ShareKit/Core/Helpers/OAuth/**/*.{h,m}', 'Classes/ShareKit/Core/Categories/GTMNSString+HTML.m'
+  non_arc_files = 'Classes/ShareKit/Core/Helpers/OAuth/**/*.{h,m}', 'Classes/ShareKit/Core/Categories/GTMNSString+HTML.{h,m}', 'Classes/ShareKit/Core/Helpers/Debug.h'
 
   s.subspec 'Core' do |core|
     core.resource_bundle = {'ShareKit' => ['Classes/ShareKit/Core/SHKSharers.plist', 'Classes/ShareKit/Localization/*.lproj', 'Classes/ShareKit/*.png']}
@@ -45,14 +45,13 @@ Pod::Spec.new do |s|
 
   s.subspec 'Facebook' do |facebook|
     facebook.source_files   = 'Classes/ShareKit/Sharers/Services/Facebook/**/*.{h,m}'
-    facebook.dependency 'Facebook-iOS-SDK',"~> 3.8"
+    facebook.dependency 'Facebook-iOS-SDK'
     facebook.dependency 'ShareKit/Core'
   end
 
   s.subspec 'Flickr' do |flickr|
     flickr.source_files = 'Classes/ShareKit/Sharers/Services/Flickr/SHK*.{h,m}'
     flickr.framework = 'SystemConfiguration', 'CFNetwork'
-    flickr.dependency 'objectiveflickr', "~> 2.0"
     flickr.dependency 'ShareKit/Core'
   end
 
@@ -151,26 +150,40 @@ Pod::Spec.new do |s|
     instagram.dependency 'ShareKit/Core'
   end
 
+  #s.subspec 'GooglePlus' do |googleplus|
+  #  googleplus.source_files = 'Classes/ShareKit/Sharers/Services/Google Plus/**/*.{h,m}'
+  #  googleplus.vendored_frameworks = 'Frameworks/GooglePlus.framework', 'Frameworks/GoogleOpenSource.framework'
+  #  googleplus.resource = "Frameworks/GooglePlus.bundle"
+  #  googleplus.framework = 'AssetsLibrary', 'CoreLocation', 'CoreMotion', 'CoreGraphics', 'CoreText', 'MediaPlayer', 'Security', 'SystemConfiguration', 'AddressBook'
+  #  googleplus.dependency 'ShareKit/Core'
+  #  googleplus.xcconfig = { 'HEADER_SEARCH_PATHS' => '"${PODS_ROOT}/ShareKit/Frameworks/GoogleOpenSource.framework/Versions/A/Headers"' }
+  #end
+
+  #This version of GooglePlus subspec can coexist with YouTube. The prerequisite is that GooglePlus.framework can be used with 'Google-API-Client/Services/Plus'. Otherwise we must use GoogleOpenSource.framework, which causes conflicts with youtube subspec
+
+  #s.subspec 'GooglePlus' do |googleplus|
+    #googleplus.source_files = 'Classes/ShareKit/Sharers/Services/Google Plus/**/*.{h,m}'
+    #googleplus.vendored_frameworks = 'Frameworks/GooglePlus.framework'
+    #googleplus.resource = "Frameworks/GooglePlus.bundle"
+    #googleplus.framework = 'AssetsLibrary', 'CoreLocation', 'CoreMotion', 'CoreGraphics', 'CoreText', 'MediaPlayer', 'Security', 'SystemConfiguration', 'AddressBook'
+    #googleplus.dependency 'ShareKit/Core'
+    #googleplus.dependency 'Google-API-Client/Common'
+    #googleplus.dependency 'Google-API-Client/Objects'
+    #googleplus.dependency 'Google-API-Client/Utilities'
+    #googleplus.dependency 'Google-API-Client/Services/Plus'
+    #googleplus.dependency 'OpenInChrome'
+    #googleplus.dependency 'gtm-logger'
+  #end
+
+  #working version of YouTube subspec. It uses cutting edge Google-API-Client, which is incopatible with current GooglePlus (GooglePlus needs older version). Unfortunately older version of Google-API-Client is not available on CocoaPods. You have to choose between YouTube or GooglePlus - can not use both at the moment, as there would be duplicate symbols (Google-API-Client vs. GoogleOpenSource.framework).
+
   s.subspec 'YouTube' do |youtube|
     youtube.source_files = 'Classes/ShareKit/Sharers/Services/YouTube/**/*.{h,m}'
     youtube.dependency 'ShareKit/Core'
-    youtube.dependency 'Google-API-Client/Services/YouTube'
-    youtube.dependency 'Google-API-Client/Common'
-    youtube.dependency 'Google-API-Client/Objects'
-    youtube.dependency 'Google-API-Client/Utilities'
-  end
-
-  s.subspec 'GooglePlus' do |googleplus|
-    googleplus.source_files = 'Classes/ShareKit/Sharers/Services/Google Plus/**/*.{h,m}'
-    googleplus.vendored_frameworks = 'Frameworks/GooglePlus.framework'
-    googleplus.framework = 'AssetsLibrary', 'CoreLocation', 'CoreMotion', 'CoreGraphics', 'CoreText', 'MediaPlayer', 'Security', 'SystemConfiguration'
-    googleplus.dependency 'ShareKit/Core'
-    googleplus.dependency 'Google-API-Client/Common'
-    googleplus.dependency 'Google-API-Client/Objects'
-    googleplus.dependency 'Google-API-Client/Utilities'
-    googleplus.dependency 'Google-API-Client/Services/Plus'
-    googleplus.dependency 'OpenInChrome'
-    googleplus.dependency 'gtm-logger'
+    #youtube.dependency 'Google-API-Client/Services/YouTube'
+    #youtube.dependency 'Google-API-Client/Common'
+    #youtube.dependency 'Google-API-Client/Objects'
+    #youtube.dependency 'Google-API-Client/Utilities'
   end
 
 end

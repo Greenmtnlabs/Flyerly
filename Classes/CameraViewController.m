@@ -129,7 +129,7 @@
 - (void)cameraCancel:(id)sender{
     
     if ([self.videoAllow isEqualToString:@"YES"]) {
-        self.flyerImageView.hidden =NO;
+        self.flyerImageView.hidden = NO;
         self.onVideoCancel();
     }
     
@@ -167,7 +167,6 @@
     UIButton *shoot = (UIButton *)  self.cameraView.shootButton;
     UIButton *flash = (UIButton *)  self.cameraView.flashButton;
 
-
     if ([mode isSelected] == YES) {
 
         //Enable Camera Mode
@@ -204,7 +203,7 @@
         
         //Action for Video Mode
         [shoot setSelected:YES];
-        [self.cameraView startStopRecording:sender];
+        [self.cameraView startStopRecording:nil];
         [self startRecording:sender];
 
 
@@ -212,7 +211,7 @@
         
         //Action for Camera Mode
         [shoot setSelected:NO];
-        [self.cameraView takePicture:sender];
+        [self.cameraView takePicture:nil];
     
     }
 
@@ -226,7 +225,7 @@
         
         //Action for Video Mode
         [shoot setSelected:YES];
-        [self.cameraView startStopRecording:sender];
+        [self.cameraView startStopRecording:nil];
         [self startRecording:sender];
     }
 }
@@ -261,8 +260,7 @@ static float progress = 0.0f;
 
 -(void)dismiss {
     
-    [self.cameraView startStopRecording:self.cameraView.shootButton];
-    // [self progressCompleted];
+    [self.cameraView startStopRecording:nil];
 }
 
 

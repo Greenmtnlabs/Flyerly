@@ -60,9 +60,9 @@ int selectedAddMoreLayerTab = -1;
     [takeOrAddPhotoLabel setTextColor:[UIColor grayColor]];
     [takeOrAddPhotoLabel setTextAlignment:UITextAlignmentCenter];
 
-    [videoLabel setText:@"Video Flyer"];
+    [videoLabel setText:@"SET PHOTO OR VIDEO AS BACKGROUND"];
     [videoLabel setBackgroundColor:[UIColor clearColor]];
-    [videoLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:18]];
+    [videoLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:16]];
     [videoLabel setTextColor:[UIColor grayColor]];
     [videoLabel setTextAlignment:UITextAlignmentCenter];
     
@@ -3133,6 +3133,7 @@ int selectedAddMoreLayerTab = -1;
     {
 
         [self openCustomCamera:YES];
+        [self addScrollView:videoLabel];
     }
     else if(selectedButton == cameraRoll)
     {

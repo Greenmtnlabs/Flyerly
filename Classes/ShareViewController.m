@@ -326,13 +326,27 @@
 #pragma mark Social Network
 
 /*
+ * Called when Youtube button is pressed
+ */
+-(IBAction)uploadOnYoutube:(id)sender {
+    
+//    SHKFile *file = [[SHKFile alloc] initWithFilePath:@""];
+    
+//    iosSharer = [ SHKGooglePlus shareFilePath:[self.flyer getSharingVideoPath] title:@"YouTube Video"];
+    SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ #flyerly", selectedFlyerDescription ]];
+    
+    iosSharer = [SHKYouTube shareFilePath:[self.flyer getSharingVideoPath] title:@"sdf" ];
+
+    iosSharer.shareDelegate = self;
+}
+
+/*
  * Called when facebook button is pressed
  */
 -(IBAction)onClickFacebookButton{
     
     // Current Item For Sharing
     SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ #flyerly", selectedFlyerDescription ]];
-    
     
     iosSharer = [SHKFacebook shareItem:item];
     iosSharer.shareDelegate = self;

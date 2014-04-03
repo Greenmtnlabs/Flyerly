@@ -121,7 +121,7 @@
  register the bundle ID of your application.
  */
 - (NSString*)googlePlusClientId {
-    return @"";
+    return @"144370279359-lsst3ttqhr7nrj1krv21hk3urfsou6ic.apps.googleusercontent.com";
 }
 
 //Pocket v3 consumer key. http://getpocket.com/developer/apps/. If you have old read it later app, you should obtain new key.
@@ -335,11 +335,11 @@
 
 // YouTube - https://developers.google.com/youtube/v3/guides/authentication#OAuth2_Register
 - (NSString*)youTubeConsumerKey {
-	return @"";
+	return @"144370279359-lsst3ttqhr7nrj1krv21hk3urfsou6ic.apps.googleusercontent.com";
 }
 
 - (NSString*)youTubeSecret {
-	return @"";
+	return @"tSn0qB7etxqNv59PZE10oU5d";
 }
 
 // Dropbox - https://www.dropbox.com/developers/apps

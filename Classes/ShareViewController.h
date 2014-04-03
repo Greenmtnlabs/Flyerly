@@ -10,6 +10,7 @@
 #import "SHKSharer.h"
 #import "SHKMail.h"
 #import "SHKFacebook.h"
+#import <SHKYouTube.h>
 #import <SHKTwitter.h>
 #import <SHKiOSTwitter.h>
 #import "SHKTextMessage.h"
@@ -91,6 +92,7 @@
 -(IBAction)clickOnStarRate:(id)sender;
 -(IBAction)clickOnFlyerType:(id)sender;
 
+-(IBAction)uploadOnYoutube:(id)sender;
 
 -(void)shareOnInstagram;
 -(void)setSocialStatus;
