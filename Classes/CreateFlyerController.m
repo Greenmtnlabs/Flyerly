@@ -2332,6 +2332,75 @@ int selectedAddMoreLayerTab = -1;
     return newImage;
 }
 
+/**
+ * Rotate frames to ensure they are in their correct orientation. This method returns and instraction that we 
+ * can use to set it right.
+ *
+ * Details here: http://stackoverflow.com/questions/12136841/avmutablevideocomposition-rotated-video-captured-in-portrait-mode
+ */
+- (void)layerInstructionAfterFixingOrientation:(AVMutableVideoCompositionLayerInstruction *)videolayerInstruction
+                                     transform:(CGAffineTransform)videoTransform {
+    
+    UIImageOrientation videoAssetOrientation_  = UIImageOrientationUp;
+    BOOL  isVideoAssetPortrait_  = YES;
+    
+    if(videoTransform.a == 0 && videoTransform.b == 1.0 && videoTransform.c == -1.0 && videoTransform.d == 0)  {videoAssetOrientation_= UIImageOrientationRight; isVideoAssetPortrait_ = YES;}
+    if(videoTransform.a == 0 && videoTransform.b == -1.0 && videoTransform.c == 1.0 && videoTransform.d == 0)  {videoAssetOrientation_ =  UIImageOrientationLeft; isVideoAssetPortrait_ = YES;}
+    if(videoTransform.a == 1.0 && videoTransform.b == 0 && videoTransform.c == 0 && videoTransform.d == 1.0)   {videoAssetOrientation_ =  UIImageOrientationUp;}
+    if(videoTransform.a == -1.0 && videoTransform.b == 0 && videoTransform.c == 0 && videoTransform.d == -1.0) {videoAssetOrientation_ = UIImageOrientationDown;}
+    
+    CGFloat FirstAssetScaleToFitRatio = 1.0;
+    
+    if( YES ) {
+        CGAffineTransform FirstAssetScaleFactor = CGAffineTransformMakeScale(FirstAssetScaleToFitRatio,FirstAssetScaleToFitRatio);
+        [videolayerInstruction setTransform:CGAffineTransformConcat( videoTransform, FirstAssetScaleFactor) atTime:kCMTimeZero];
+    }else{
+        CGAffineTransform FirstAssetScaleFactor = CGAffineTransformMakeScale(FirstAssetScaleToFitRatio,FirstAssetScaleToFitRatio);
+        [videolayerInstruction setTransform:CGAffineTransformConcat(CGAffineTransformConcat( videoTransform, FirstAssetScaleFactor),CGAffineTransformMakeTranslation(0, 160)) atTime:kCMTimeZero];
+    }
+}
+
+/**
+ * Determine if this video asset is in portrait mode.
+ *
+ * @param asset
+ *           The asset that needs to be checked.
+ *
+ * @return
+ *           YES if in portrait, NO otherwise.
+ */
+-(BOOL) isVideoPortrait:(AVAsset *)asset
+{
+    BOOL isPortrait = FALSE;
+    NSArray *tracks = [asset tracksWithMediaType:AVMediaTypeVideo];
+    if([tracks    count] > 0) {
+        AVAssetTrack *videoTrack = [tracks objectAtIndex:0];
+        
+        CGAffineTransform t = videoTrack.preferredTransform;
+        // Portrait
+        if(t.a == 0 && t.b == 1.0 && t.c == -1.0 && t.d == 0)
+        {
+            isPortrait = YES;
+        }
+        // PortraitUpsideDown
+        if(t.a == 0 && t.b == -1.0 && t.c == 1.0 && t.d == 0)  {
+            
+            isPortrait = YES;
+        }
+        // LandscapeRight
+        if(t.a == 1.0 && t.b == 0 && t.c == 0 && t.d == 1.0)
+        {
+            isPortrait = FALSE;
+        }
+        // LandscapeLeft
+        if(t.a == -1.0 && t.b == 0 && t.c == 0 && t.d == -1.0)
+        {
+            isPortrait = FALSE;
+        }
+    }
+    return isPortrait;
+}
+
 /*
  * HERE WE MERGE TWO VIDEOS FOR SHARE VIDEO
  */
@@ -2354,11 +2423,15 @@ int selectedAddMoreLayerTab = -1;
     if ( CMTimeCompare( firstAsset.duration, inTime ) < 0 ) {
         inTime = firstAsset.duration;
     }
-    
+
     // Add to the video track.
     NSArray *videos = [firstAsset tracksWithMediaType:AVMediaTypeVideo];
+    CGAffineTransform transform;
     if ( videos.count > 0 ) {
-        [videoTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, inTime) ofTrack:[videos objectAtIndex:0] atTime:kCMTimeZero error:nil];
+        AVAssetTrack *track = [videos objectAtIndex:0];
+        [videoTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, inTime) ofTrack:track atTime:kCMTimeZero error:nil];
+        transform = track.preferredTransform;
+        videoTrack.preferredTransform = transform;
     }
     
     // Add the audio track.
@@ -2366,20 +2439,34 @@ int selectedAddMoreLayerTab = -1;
     if ( audios.count > 0 ) {
         [audioTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, inTime) ofTrack:[audios objectAtIndex:0] atTime:kCMTimeZero error:nil];
     }
+    
+    // Determine size of video based on orientation
+    BOOL isPortrait = [self isVideoPortrait:firstAsset];
+    CGSize videoSize = videoTrack.naturalSize;
+    if( isPortrait ) {
+        videoSize = CGSizeMake(videoSize.height, videoSize.width);
+    }
+    
+    // Set the mix composition size.
+    mixComposition.naturalSize = videoSize;
 
     // Set up the composition parameters.
     AVMutableVideoComposition *videoComposition = [AVMutableVideoComposition videoComposition];
     videoComposition.frameDuration = CMTimeMake(1, VIDEOFRAME );
-    videoComposition.renderSize = videoTrack.naturalSize;
+    videoComposition.renderSize = videoSize;
+    videoComposition.renderScale = 1.0;
     
     // Pass through parameters for animation.
     AVMutableVideoCompositionInstruction *passThroughInstruction = [AVMutableVideoCompositionInstruction videoCompositionInstruction];
     passThroughInstruction.timeRange = CMTimeRangeMake(kCMTimeZero, inTime);
     
-    // Layer instrcutions
+    // Layer instructions
     AVMutableVideoCompositionLayerInstruction *passThroughLayer = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:videoTrack];
     
-    passThroughInstruction.layerInstructions = @[passThroughLayer];
+    // Set the transform to maintain orientation
+    [passThroughLayer setTransform:transform atTime:kCMTimeZero];
+    
+    passThroughInstruction.layerInstructions = @[ passThroughLayer ];
     videoComposition.instructions = @[passThroughInstruction];
     
     // Layer that merges the video and image
