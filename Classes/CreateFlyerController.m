@@ -3210,9 +3210,6 @@ int selectedAddMoreLayerTab = -1;
     else if( selectedButton == photoTabButton )
 	{
         imgPickerFlag =2;
-<<<<<<< HEAD
-        [self loadCustomPhotoLibrary :@"NO"];
-=======
         
         //HERE WE CHECK USER DID ALLOWED TO ACESS PHOTO library
         if ([ALAssetsLibrary authorizationStatus] == ALAuthorizationStatusRestricted || [ALAssetsLibrary authorizationStatus] == ALAuthorizationStatusDenied) {
@@ -3223,8 +3220,8 @@ int selectedAddMoreLayerTab = -1;
             
         }
         
-        [self loadCustomPhotoLibrary];
->>>>>>> v4.0.1
+        [self loadCustomPhotoLibrary :@"NO"];
+
         textBackgrnd.alpha = ALPHA0;
     }
     else if( selectedButton == widthTabButton )
