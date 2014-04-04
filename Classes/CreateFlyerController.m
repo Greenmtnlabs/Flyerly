@@ -325,7 +325,7 @@ int selectedAddMoreLayerTab = -1;
     if ([flyer isVideoFlyer]) {
         
         //Here we take Image From Video Player
-        snapshotImage = [self getImageForVideo];
+        snapshotImage = [self.flyer getImageForVideo];
         
     }else {
         
@@ -2308,29 +2308,7 @@ int selectedAddMoreLayerTab = -1;
     
 }
 
-/*
- * HERE WE ADD VIDEO ICON WITH VIDEO IMAGE
- */
--(UIImage *)getImageForVideo
-{
-    
-    UIImage *bottomImage = videolastImage;
-    UIImage *image = [UIImage imageNamed:@"playIcon"];
-    
-    CGSize newSize = CGSizeMake(300, 300);
-    UIGraphicsBeginImageContext( newSize );
-    
-    // Use existing opacity as is
-    [bottomImage drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
-    
-    // Apply supplied opacity
-    [image drawInRect:CGRectMake(90,90,120,120) blendMode:kCGBlendModeNormal alpha:1];
-    
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-    
-    UIGraphicsEndImageContext();
-    return newImage;
-}
+
 
 /**
  * Rotate frames to ensure they are in their correct orientation. This method returns and instraction that we 
@@ -2848,7 +2826,7 @@ int selectedAddMoreLayerTab = -1;
         });
         
         //Here we take Image From Video Player
-        snapshotImage =  [self getImageForVideo];
+        snapshotImage =  [self.flyer getImageForVideo];
 
         
     }else {

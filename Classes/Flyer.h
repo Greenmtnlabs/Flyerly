@@ -121,6 +121,7 @@
 -(NSString *)getShareType;
 -(NSString *)getFlyerUpdateDate;
 -(NSString *)getVideoAssetURL;
+-(UIImage *)getImageForVideo;
 
 
 

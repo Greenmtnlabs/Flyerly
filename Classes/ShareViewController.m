@@ -338,6 +338,8 @@
     iosSharer = [SHKYouTube shareItem:item];
 
     iosSharer.shareDelegate = self;
+    
+    
 }
 
 /*
@@ -534,6 +536,8 @@
         [Flurry logEvent:@"Shared SMS"];
 
     } else if ( [sharer isKindOfClass:[SHKYouTube class]] == YES ) {
+        
+        SHKYouTube *yt =(SHKYouTube *) sharer;
         
         [Flurry logEvent:@"Shared Youtube"];
         

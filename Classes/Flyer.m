@@ -100,14 +100,7 @@ NSString * const TEXTHEIGHT = @"280.000000";
 
     NSData *snapShotData = UIImagePNGRepresentation(snapShot);
     
-    if ([self isVideoFlyer]) {
-        
-        
-    }else {
-        
-        //Update Share Img of Image Flyer
-        [snapShotData writeToFile:flyerImageFile atomically:YES];
-    }
+    [snapShotData writeToFile:flyerImageFile atomically:YES];
     
     // HERE WE CHECK USER ALLOWED TO SAVE IN GALLERY FROM SETTING
     if([[NSUserDefaults standardUserDefaults] stringForKey:@"saveToCameraRollSetting"]){
@@ -1222,16 +1215,47 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 
     NSString* filePath = [self getSharingVideoPath];
     
-    AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:[NSURL fileURLWithPath:filePath] options:nil];
-    AVAssetImageGenerator *generator = [[AVAssetImageGenerator alloc] initWithAsset:asset];
-    generator.appliesPreferredTrackTransform = YES;
-    NSError *err = NULL;
-//    CMTime time = CMTimeMake(1, 60);
-    CGImageRef imgRef = [generator copyCGImageAtTime: asset.duration actualTime:NULL error:&err];
+    UIImage *img;
+    if ([[NSFileManager defaultManager] fileExistsAtPath:filePath isDirectory:NULL]) {
+        
+        //Getting One frame from Video For Video Cover on Main Screen
+        AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:[NSURL fileURLWithPath:filePath] options:nil];
+        AVAssetImageGenerator *generator = [[AVAssetImageGenerator alloc] initWithAsset:asset];
+        generator.appliesPreferredTrackTransform = YES;
+        NSError *err = NULL;
+        CMTime time = CMTimeMake(0, 0);
+        CGImageRef imgRef = [generator copyCGImageAtTime: asset.duration  actualTime:NULL error:&err];
+        
+        img = [[UIImage alloc] initWithCGImage:imgRef];
+    }
     
-    return  [[UIImage alloc] initWithCGImage:imgRef];
+    return img;
 }
 
+    
+/*
+ * HERE WE ADD VIDEO ICON WITH VIDEO IMAGE
+ */
+-(UIImage *)getImageForVideo {
+    
+    UIImage *bottomImage = [self  getSharingVideoCover];
+    
+    UIImage *image = [UIImage imageNamed:@"playIcon"];
+    
+    CGSize newSize = CGSizeMake(300, 300);
+    UIGraphicsBeginImageContext( newSize );
+    
+    // Use existing opacity as is
+    [bottomImage drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+    
+    // Apply supplied opacity
+    [image drawInRect:CGRectMake(90,90,120,120) blendMode:kCGBlendModeNormal alpha:1];
+    
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    return newImage;
+}
     
     
 /* Checking here Video Flyer or Image Flyer
