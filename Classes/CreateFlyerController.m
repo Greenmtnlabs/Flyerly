@@ -1928,7 +1928,7 @@ int selectedAddMoreLayerTab = -1;
 
         playerSlider.maximumValue = player.duration;
         NSTimeInterval duration = player.duration;
-        durationLabel.text =[NSString stringWithFormat:@"%@ sec",[self stringFromTimeInterval:player.duration]] ;
+        durationLabel.text =[NSString stringWithFormat:@"%@",[self stringFromTimeInterval:player.duration]] ;
         durationChange.text = @"00:00";
         
         float minutes = floor(duration / 60);
