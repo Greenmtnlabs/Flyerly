@@ -162,7 +162,7 @@ int selectedAddMoreLayerTab = -1;
     [self.view setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
     [self.contextView setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
 
-    sharePanel = [[UIView alloc] initWithFrame:CGRectMake(0, 480, 320,400 )];
+    sharePanel = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.origin.y, 320,400 )];
     shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
 
     sharePanel = shareviewcontroller.view;
@@ -2914,6 +2914,20 @@ int selectedAddMoreLayerTab = -1;
         });
     }*/
     
+    [sharePanel removeFromSuperview];
+
+    if ([flyer isVideoFlyer]) {
+        shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareVideoViewController" bundle:nil];
+        
+    }else {
+        shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
+    }
+    sharePanel = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.origin.y, 320,400 )];
+    
+    sharePanel = shareviewcontroller.view;
+    [self.view addSubview:sharePanel];
+    
+    sharePanel = shareviewcontroller.view;
     NSString *shareImagePath = [flyer getFlyerImage];
     UIImage *shareImage =  [UIImage imageWithContentsOfFile:shareImagePath];
 

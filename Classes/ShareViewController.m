@@ -11,7 +11,7 @@
 @implementation ShareViewController
 
 
-@synthesize Yvalue,rightUndoBarButton,shareButton,helpButton,selectedFlyerImage,fvController,titleView,descriptionView,selectedFlyerDescription,  imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,dicController, clipboardlabel,flyer,topTitleLabel,delegate,activityIndicator;
+@synthesize Yvalue,rightUndoBarButton,shareButton,helpButton,selectedFlyerImage,fvController,titleView,descriptionView,selectedFlyerDescription,  imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,dicController, clipboardlabel,flyer,topTitleLabel,delegate,activityIndicator,youTubeButton;
 
 @synthesize flyerShareType,star1,star2,star3,star4,star5;
 
@@ -542,7 +542,7 @@
 
     } else if ( [sharer isKindOfClass:[SHKYouTube class]] == YES ) {
         
-        
+        [youTubeButton setSelected:YES];
         [Flurry logEvent:@"Shared Youtube"];
         
     }

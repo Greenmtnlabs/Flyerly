@@ -418,6 +418,10 @@
 		20967DA318C8D7EA00B273FC /* star_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 20967DA118C8D7EA00B273FC /* star_selected.png */; };
 		20967DA418C8D7EA00B273FC /* star.png in Resources */ = {isa = PBXBuildFile; fileRef = 20967DA218C8D7EA00B273FC /* star.png */; };
 		2099301118BF0C5000A177A4 /* ContactsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2099301018BF0C5000A177A4 /* ContactsModel.m */; };
+		20A1CD6318EEF63200484391 /* SubNBUCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 20A1CD6218EEF63200484391 /* SubNBUCamera.m */; };
+		20A1CD6518EF0B0400484391 /* ShareVideoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20A1CD6418EF0B0400484391 /* ShareVideoViewController.xib */; };
+		20A1CD6818EF0B8700484391 /* youtube_share.png in Resources */ = {isa = PBXBuildFile; fileRef = 20A1CD6618EF0B8700484391 /* youtube_share.png */; };
+		20A1CD6918EF0B8700484391 /* youtube_share_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 20A1CD6718EF0B8700484391 /* youtube_share_selected.png */; };
 		20B865F91851EF0400484D7D /* checkBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = 20B865F71851EF0400484D7D /* checkBlue.png */; };
 		20BA7DED18BE083300991DCC /* Flyr-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D1107310486CEB800E47090 /* Flyr-Info.plist */; };
 		20CC6922180DA416002F2E6F /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2061ED8B17FF212100E9BECA /* icon.png */; };
@@ -1282,6 +1286,11 @@
 		20967DA218C8D7EA00B273FC /* star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star.png; sourceTree = "<group>"; };
 		2099300F18BF0C5000A177A4 /* ContactsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsModel.h; sourceTree = "<group>"; };
 		2099301018BF0C5000A177A4 /* ContactsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsModel.m; sourceTree = "<group>"; };
+		20A1CD6118EEF63200484391 /* SubNBUCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubNBUCamera.h; sourceTree = "<group>"; };
+		20A1CD6218EEF63200484391 /* SubNBUCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubNBUCamera.m; sourceTree = "<group>"; };
+		20A1CD6418EF0B0400484391 /* ShareVideoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareVideoViewController.xib; sourceTree = "<group>"; };
+		20A1CD6618EF0B8700484391 /* youtube_share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = youtube_share.png; sourceTree = "<group>"; };
+		20A1CD6718EF0B8700484391 /* youtube_share_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = youtube_share_selected.png; sourceTree = "<group>"; };
 		20B865F71851EF0400484D7D /* checkBlue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkBlue.png; sourceTree = "<group>"; };
 		20B996D2180450CC007B616D /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
 		20CC6923180DA44C002F2E6F /* icon-60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-60.png"; sourceTree = "<group>"; };
@@ -1770,6 +1779,8 @@
 		0DF3A361108DF47400D6C887 /* ImageLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				20A1CD6618EF0B8700484391 /* youtube_share.png */,
+				20A1CD6718EF0B8700484391 /* youtube_share_selected.png */,
 				201597CC18E55FF600D18A12 /* pause_icon.png */,
 				201597CD18E55FF600D18A12 /* play_icon.png */,
 				20F0393C18E2E4060002338F /* ModeCamera.png */,
@@ -2267,6 +2278,7 @@
 				E8A7347A1092CFF300661AAD /* ShareViewController.h */,
 				E8A7347B1092CFF300661AAD /* ShareViewController.m */,
 				E8A7347C1092CFF300661AAD /* ShareViewController.xib */,
+				20A1CD6418EF0B0400484391 /* ShareVideoViewController.xib */,
 				20ECF9A718D6E1AD0035E3DE /* UIPlaceHolderTextView.h */,
 				20ECF9A818D6E1AD0035E3DE /* UIPlaceHolderTextView.m */,
 			);
@@ -2652,6 +2664,8 @@
 				20FA7E6F1872AAF50057C3F3 /* CameraViewController.h */,
 				20FA7E701872AAF50057C3F3 /* CameraViewController.m */,
 				20FA7E711872AAF50057C3F3 /* CameraViewController.xib */,
+				20A1CD6118EEF63200484391 /* SubNBUCamera.h */,
+				20A1CD6218EEF63200484391 /* SubNBUCamera.m */,
 			);
 			name = Camera;
 			sourceTree = "<group>";
@@ -3160,6 +3174,7 @@
 				30D58D3810FB1BF800E0C7E8 /* icon60.jpg in Resources */,
 				30D58D3910FB1BF800E0C7E8 /* icon61.jpg in Resources */,
 				30D58D3A10FB1BF800E0C7E8 /* icon62.jpg in Resources */,
+				20A1CD6518EF0B0400484391 /* ShareVideoViewController.xib in Resources */,
 				30D58D3B10FB1BF800E0C7E8 /* icon63.jpg in Resources */,
 				30D58D3C10FB1BF800E0C7E8 /* icon64.jpg in Resources */,
 				30D58D3D10FB1BF800E0C7E8 /* icon65.jpg in Resources */,
@@ -3418,6 +3433,7 @@
 				65C1A4501742516D00947D5E /* Template56@2x.jpg in Resources */,
 				65C1A4511742516D00947D5E /* Template57@2x.jpg in Resources */,
 				65C1A4521742516D00947D5E /* Template58@2x.jpg in Resources */,
+				20A1CD6818EF0B8700484391 /* youtube_share.png in Resources */,
 				65C1A4531742516D00947D5E /* Template59@2x.jpg in Resources */,
 				65C1A4541742516D00947D5E /* Template60@2x.jpg in Resources */,
 				65C1A4551742516D00947D5E /* Template61@2x.jpg in Resources */,
@@ -3639,6 +3655,7 @@
 				202C63F217EA06E800CB9A75 /* ricon77.png in Resources */,
 				202C63F417EA06E800CB9A75 /* ricon78.png in Resources */,
 				202F993E18BCB426002A25D9 /* invite_twitter_selected.png in Resources */,
+				20A1CD6918EF0B8700484391 /* youtube_share_selected.png in Resources */,
 				20967D9F18C8D63400B273FC /* fb_Like.png in Resources */,
 				202C63F617EA06E800CB9A75 /* ricon79.png in Resources */,
 				202C63F817EA06E800CB9A75 /* ricon80.png in Resources */,
@@ -3819,6 +3836,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				202C47F9187D6E4B00FE0975 /* BitlyConfig.m in Sources */,
+				20A1CD6318EEF63200484391 /* SubNBUCamera.m in Sources */,
 				2095C90E18C5E89900E244A8 /* FlyerlyTwitterFriends.m in Sources */,
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				202C47FA187D6E4B00FE0975 /* BitlyDebug.m in Sources */,

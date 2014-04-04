@@ -88,8 +88,10 @@
     self.cameraView.whiteBalanceButtonConfigurationBlock = [self.cameraView buttonConfigurationBlockWithTitleFrom:
                                                             @[@"Lckd", @"Auto", @"Cont"]];
     
-}
 
+
+    
+}
 
 
 /**
@@ -226,6 +228,9 @@
 
 
 }
+
+
+
 
 - (IBAction)tapAndHold:(id)sender {
     UIButton *shoot = (UIButton *)  self.cameraView.shootButton;

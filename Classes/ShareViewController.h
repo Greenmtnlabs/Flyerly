@@ -55,6 +55,8 @@
 @property(nonatomic,strong) IBOutlet UIButton *flickrButton;
 @property(nonatomic,strong) IBOutlet UIButton *instagramButton;
 @property(nonatomic,strong) IBOutlet UIButton *smsButton;
+@property(nonatomic,strong) IBOutlet UIButton *youTubeButton;
+
 @property(nonatomic,strong) IBOutlet UIButton *clipboardButton;
 @property(nonatomic,strong) IBOutlet UILabel *clipboardlabel;
 @property(nonatomic,strong) IBOutlet UILabel *topTitleLabel;

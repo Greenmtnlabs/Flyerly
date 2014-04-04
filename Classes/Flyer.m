@@ -1242,7 +1242,8 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
         
         img = [[UIImage alloc] initWithCGImage:imgRef];
     }else {
-        NSLog(@"asdasd");
+        NSLog(@"Video cover not found");
+        
     }
     
     

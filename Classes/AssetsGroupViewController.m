@@ -293,6 +293,7 @@
                  {
                      NBULogVerbose(@"...%d images loaded", assets.count);
                      
+                     
                      // Stop loading?
                      if (assets.count == totalCount)
                      {
@@ -311,6 +312,7 @@
                                     {
                                         self.selectedAssets = selectedAssets;
                                         weakSelf.gridView.objectArray = assets;
+                                        
                                     });
                  }
              }
@@ -344,6 +346,7 @@
     }
     return selectedAssets;
 }
+
 
 @end
 
