@@ -17,6 +17,7 @@
 #import "RMStoreKeychainPersistence.h"
 #import "ParentViewController.h"
 
+
 @class SaveFlyerCell,Flyer;
 @interface FlyrViewController : ParentViewController <UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,UIActionSheetDelegate,RMStoreObserver>{
 
@@ -24,6 +25,8 @@
     BOOL searching;
     BOOL lockFlyer;
     BOOL sheetAlreadyOpen;
+    BOOL cancelRequest;
+
     Flyer *flyer;
     NSMutableArray *flyerPaths;
     NSMutableArray *searchFlyerPaths;

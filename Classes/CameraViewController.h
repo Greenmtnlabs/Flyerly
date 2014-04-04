@@ -9,7 +9,7 @@
 #import "NBUCameraViewController.h"
 #import "UIImage+NBUAdditions.h"
 #import <AVFoundation/AVFoundation.h>
-
+#import <AssetsLibrary/AssetsLibrary.h>
 
 
 @interface CameraViewController : NBUCameraViewController

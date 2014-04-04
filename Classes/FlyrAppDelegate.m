@@ -95,13 +95,13 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
          annotation:(id)annotation {
     
     if ([[url absoluteString] hasPrefix:[NSString stringWithFormat:@"fb%@", SHKCONFIG(facebookAppId)]]) {
-        return [SHKFacebook handleOpenURL:url];
+        [SHKFacebook handleOpenURL:url];
+        [PFFacebookUtils handleOpenURL:url];
+        return YES;
     }
     
     if([[url absoluteString] hasPrefix:kCallbackURLBaseStringPrefix]){
         return YES;
-    } else if([[url absoluteString] hasPrefix:@"fb"]){
-        return [PFFacebookUtils handleOpenURL:url];
     } else {
   
         return nil;
@@ -154,6 +154,9 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     
     // Bitly configuration
     [[BitlyConfig sharedBitlyConfig] setBitlyLogin:[flyerConfigurator bitLyLogin] bitlyAPIKey:[flyerConfigurator bitLyKey]];
+
+    //This is For remove Notification
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
     
     // This flag represents the condition whether application setting has been altered first time
     // after installing app

@@ -3146,15 +3146,25 @@ int selectedAddMoreLayerTab = -1;
 
         [self openCustomCamera:YES];
         [self addScrollView:videoLabel];
+
     }
     else if(selectedButton == cameraRoll)
     {
+
+        //HERE WE CHECK USER DID ALLOWED TO ACCESS PHOTO library
+        if ([ALAssetsLibrary authorizationStatus] == ALAuthorizationStatusRestricted || [ALAssetsLibrary authorizationStatus] == ALAuthorizationStatusDenied) {
+            
+            UIAlertView *photoAlert = [[UIAlertView alloc ] initWithTitle:@"" message:@"Flyerly does not access to your photo album.To enable access goto the Setting app >> Privacy >> Photos and enable Flyerly" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [photoAlert show];
+            return;
+            
+        }
         
         [self loadCustomPhotoLibrary :@"YES"];
         
         //Add ContextView
         [self addScrollView:videoLabel];
-        
+
     }
     else if(selectedButton == flyerBorder)
     {
@@ -3200,7 +3210,21 @@ int selectedAddMoreLayerTab = -1;
     else if( selectedButton == photoTabButton )
 	{
         imgPickerFlag =2;
+<<<<<<< HEAD
         [self loadCustomPhotoLibrary :@"NO"];
+=======
+        
+        //HERE WE CHECK USER DID ALLOWED TO ACESS PHOTO library
+        if ([ALAssetsLibrary authorizationStatus] == ALAuthorizationStatusRestricted || [ALAssetsLibrary authorizationStatus] == ALAuthorizationStatusDenied) {
+            
+            UIAlertView *photoAlert = [[UIAlertView alloc ] initWithTitle:@"" message:@"Flyerly does not access to your photo album.To enable access goto the Setting app >> Privacy >> Photos and enable Flyerly" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [photoAlert show];
+            return;
+            
+        }
+        
+        [self loadCustomPhotoLibrary];
+>>>>>>> v4.0.1
         textBackgrnd.alpha = ALPHA0;
     }
     else if( selectedButton == widthTabButton )

@@ -353,12 +353,18 @@
  */
 -(void)likeTwitter {
     
-    // Current Item For Sharing
-    SHKItem *item = [[SHKItem alloc] init];
+    if ([FlyerlySingleton connected]) {
+        // Current Item For Sharing
+        SHKItem *item = [[SHKItem alloc] init];
     
-    SHKSharer  *iosSharer = [[ SHKSharer alloc] init];
-    iosSharer = [FlyerlyTwitterLike shareItem:item];
+        SHKSharer  *iosSharer = [[ SHKSharer alloc] init];
+        iosSharer = [FlyerlyTwitterLike shareItem:item];
+    }else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You're not connected to the internet. Please connect and retry." message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        
+        [alert show];
     
+    }
 }
 
 

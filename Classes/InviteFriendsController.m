@@ -415,49 +415,54 @@ const int CONTACTS_TAB = 0;
  */
 - (IBAction)loadFacebookContacts:(UIButton *)sender{
     
-    
-    selectedTab = FACEBOOK_TAB;
-    [self.uiTableView reloadData];
-
-    // HERE WE HIGHLIGHT BUTTON ON TOUCH
-    // AND OTHERS SET UNSELECTED
-    [contactsButton setSelected:NO];
-    [twitterButton setSelected:NO];
-    [facebookButton setSelected:YES];
-    
-    [self showLoadingIndicator];
-    
-    self.selectedIdentifiers = nil;
-    self.selectedIdentifiers = [[NSMutableArray alloc] init];
-    
-    
-    if (facebookBackupArray == nil || facebookBackupArray.count == 0) {
-        searchTextField.text = @"";
-        facebookBackupArray = [[NSMutableArray alloc] init];
+    if ([FlyerlySingleton connected]) {
         
-        // Current Item For Sharing
-        SHKItem *item = [[SHKItem alloc] init];
-        item.shareType = SHKShareTypeUserInfo;
-        
-        // Create controller and set share options
-        iosSharer = [FlyerlyFacebookFriends shareItem:item];
-        iosSharer.shareDelegate = self;
-    }else {
-
-        // INVITE BAR BUTTON
-        UIButton *inviteButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-        [inviteButton addTarget:self action:@selector(invite) forControlEvents:UIControlEventTouchUpInside];
-        [inviteButton setBackgroundImage:[UIImage imageNamed:@"invite_friend"] forState:UIControlStateNormal];
-        inviteButton.showsTouchWhenHighlighted = YES;
-        UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:inviteButton];
-        [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
-
-        [self onSearchClick:nil];
-        //Update Table View
+        selectedTab = FACEBOOK_TAB;
         [self.uiTableView reloadData];
-    
+
+        // HERE WE HIGHLIGHT BUTTON ON TOUCH
+        // AND OTHERS SET UNSELECTED
+        [contactsButton setSelected:NO];
+        [twitterButton setSelected:NO];
+        [facebookButton setSelected:YES];
+        
+        [self showLoadingIndicator];
+        
+        self.selectedIdentifiers = nil;
+        self.selectedIdentifiers = [[NSMutableArray alloc] init];
+        
+        
+        if (facebookBackupArray == nil || facebookBackupArray.count == 0) {
+            searchTextField.text = @"";
+            facebookBackupArray = [[NSMutableArray alloc] init];
+            
+            // Current Item For Sharing
+            SHKItem *item = [[SHKItem alloc] init];
+            item.shareType = SHKShareTypeUserInfo;
+            
+            // Create controller and set share options
+            iosSharer = [FlyerlyFacebookFriends shareItem:item];
+            iosSharer.shareDelegate = self;
+        }else {
+
+            // INVITE BAR BUTTON
+            UIButton *inviteButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+            [inviteButton addTarget:self action:@selector(invite) forControlEvents:UIControlEventTouchUpInside];
+            [inviteButton setBackgroundImage:[UIImage imageNamed:@"invite_friend"] forState:UIControlStateNormal];
+            inviteButton.showsTouchWhenHighlighted = YES;
+            UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:inviteButton];
+            [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
+
+            [self onSearchClick:nil];
+            //Update Table View
+            [self.uiTableView reloadData];
+        
+        }
+    }else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You're not connected to the internet. Please connect and retry." message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        
+        [alert show];
     }
-    
 }
 
 
@@ -557,36 +562,44 @@ const int CONTACTS_TAB = 0;
  */
 - (IBAction)loadTwitterContacts:(UIButton *)sender{
     
-    // HERE WE HIGHLIGHT BUTTON SELECT AND
-    // UNSELECTED BUTTON
-    [contactsButton setSelected:NO];
-    [twitterButton setSelected:YES];
-    [facebookButton setSelected:NO];
-    
-    self.selectedIdentifiers = nil;
-    self.selectedIdentifiers = [[NSMutableArray alloc] init];
-    
-    selectedTab = TWITTER_TAB;
-    [self.uiTableView reloadData];
-
-
-    if (twitterBackupArray == nil || twitterBackupArray.count == 0) {
-        searchTextField.text = @"";
-        self.twitterBackupArray = [[NSMutableArray alloc] init];
-    
-        // Current Item For Sharing
-        //here we are not set Any Share Type for Override sendStatus Method of SHKTwitter
-        SHKItem *item = [[SHKItem alloc] init];
+    if ([FlyerlySingleton connected]) {
         
-        // Create controller and set share options
-        iosSharer = [FlyerlyTwitterFriends shareItem:item];
-        iosSharer.shareDelegate = self;
+        // HERE WE HIGHLIGHT BUTTON SELECT AND
+        // UNSELECTED BUTTON
+        [contactsButton setSelected:NO];
+        [twitterButton setSelected:YES];
+        [facebookButton setSelected:NO];
         
-    }else {
-    
-        [self onSearchClick:nil];
+        self.selectedIdentifiers = nil;
+        self.selectedIdentifiers = [[NSMutableArray alloc] init];
         
+        selectedTab = TWITTER_TAB;
         [self.uiTableView reloadData];
+
+
+        if (twitterBackupArray == nil || twitterBackupArray.count == 0) {
+            searchTextField.text = @"";
+            self.twitterBackupArray = [[NSMutableArray alloc] init];
+        
+            // Current Item For Sharing
+            //here we are not set Any Share Type for Override sendStatus Method of SHKTwitter
+            SHKItem *item = [[SHKItem alloc] init];
+            
+            // Create controller and set share options
+            iosSharer = [FlyerlyTwitterFriends shareItem:item];
+            iosSharer.shareDelegate = self;
+            
+        }else {
+        
+            [self onSearchClick:nil];
+            
+            [self.uiTableView reloadData];
+        }
+    
+    }else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You're not connected to the internet. Please connect and retry." message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    
+        [alert show];
     }
 }
 

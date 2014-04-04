@@ -166,6 +166,7 @@
 
 -(IBAction)createFlyer:(id)sender {
     
+    cancelRequest = YES;
     NSString *flyPath = [Flyer newFlyerPath];
     
     //Here We set Source for Flyer screen
@@ -182,6 +183,7 @@
 
 -(void)goBack{
   	[self.navigationController popViewControllerAnimated:YES];
+    cancelRequest = YES;
 }
 
 
@@ -205,6 +207,7 @@
 }
 
 -(void)loadHelpController{
+    cancelRequest = YES;
     HelpController *helpController = [[HelpController alloc]initWithNibName:@"HelpController" bundle:nil];
     [self.navigationController pushViewController:helpController animated:NO];
 }
@@ -398,42 +401,52 @@
 -(void)requestProduct {
     
 
-    if (sheetAlreadyOpen)return;
+    if ([FlyerlySingleton connected]) {
         
-        
-    [self showLoadingIndicator];
-    sheetAlreadyOpen =YES;
-    
-    //These are over Products on App Store
-    NSSet *products = [NSSet setWithArray:@[@"com.flyerly.AllDesignBundle",@"com.flyerly.UnlockSavedFlyers"]];
-    
-    
-    [[RMStore defaultStore] requestProducts:products success:^(NSArray *products, NSArray *invalidProductIdentifiers) {
-        
-        NSLog(@"Products loaded");
-        
-        requestedProducts = products;
-        UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:@"Choose Product" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles: nil];
-    
-        for(SKProduct *product in products)
-        {
-            
-            [actionSheet addButtonWithTitle:[NSString stringWithFormat:@"%@ - %@",product.localizedTitle,
-                                             product.priceAsString]];
-        }
-        
-        [actionSheet addButtonWithTitle:@"Restore Purchase"];
-        [actionSheet addButtonWithTitle:@"Cancel"];
-        
-        [actionSheet showInView:self.view];
-        [self hideLoadingIndicator];
-        sheetAlreadyOpen = NO;
-        
-        
-    } failure:^(NSError *error) {
-        NSLog(@"Something went wrong");
-    }];
+        if (sheetAlreadyOpen)return;
 
+        //Check For Crash Maintain
+        cancelRequest = NO;
+        
+        [self showLoadingIndicator];
+        sheetAlreadyOpen =YES;
+        //These are over Products on App Store
+        NSSet *products = [NSSet setWithArray:@[@"com.flyerly.AllDesignBundle",@"com.flyerly.UnlockSavedFlyers"]];
+        
+        [[RMStore defaultStore] requestProducts:products success:^(NSArray *products, NSArray *invalidProductIdentifiers) {
+            
+            if (cancelRequest) return ;
+               
+            NSLog(@"Products loaded");
+            
+            requestedProducts = products;
+            UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:@"Choose Product" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles: nil];
+        
+            for(SKProduct *product in products)
+            {
+                
+                [actionSheet addButtonWithTitle:[NSString stringWithFormat:@"%@ - %@",product.localizedTitle,
+                                                 product.priceAsString]];
+            }
+            
+            [actionSheet addButtonWithTitle:@"Restore Purchase"];
+            [actionSheet addButtonWithTitle:@"Cancel"];
+            
+            [actionSheet showInView:self.view];
+            [self hideLoadingIndicator];
+            sheetAlreadyOpen = NO;
+            
+            
+        } failure:^(NSError *error) {
+            NSLog(@"Something went wrong");
+        }];
+    } else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You're not connected to the internet. Please connect and retry." message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            
+        [alert show];
+        [self hideLoadingIndicator];
+    
+    }
 }
 
 
