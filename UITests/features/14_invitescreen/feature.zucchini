@@ -26,6 +26,7 @@ Then on the "Invite123" screen:
   Take a screenshot
   Wait for "50" seconds
   Tap "1Cell"
+  Wait for "5" seconds
   Tap "invite friend"
   Tap "Send to Facebook"
   Wait for "5" seconds
@@ -35,11 +36,10 @@ Then on the "Invite123" screen:
   Take a screenshot
   Wait for "5" seconds
   Tap "Cell"
-  Tap "invite friend"
-  Wait for "5" seconds
   Tap "Send to Twitter"
   Wait for "5" seconds
   Confirm "OK"
+  Tap "Home"
 
 Then on the "Home" screen:
   Tap "Settings"
