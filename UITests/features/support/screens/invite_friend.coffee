@@ -11,4 +11,4 @@ class Invite123Screen extends Screen
     'Create' : -> view.navigationBars()[0].buttons()[2],
     'Search Box' : -> $('#Search'),
     'Cell' : -> view.tableViews()[0].cells()[0],
-    '1Cell' : -> view.tableViews()[0].cells()[2],
+    '1Cell' : -> view.tableViews()[0].cells()[5],

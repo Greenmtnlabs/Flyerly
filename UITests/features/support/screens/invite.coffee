@@ -1,4 +1,4 @@
-class InviteScreen extends Screen
+class Invite123Screen extends Screen
   anchor: -> $('navigationBar[name=InviteFriends]')
   anchor: -> $('tableview[name=Empty list]')
 
