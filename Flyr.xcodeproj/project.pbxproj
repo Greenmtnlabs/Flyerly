@@ -422,6 +422,7 @@
 		20A1CD6518EF0B0400484391 /* ShareVideoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20A1CD6418EF0B0400484391 /* ShareVideoViewController.xib */; };
 		20A1CD6818EF0B8700484391 /* youtube_share.png in Resources */ = {isa = PBXBuildFile; fileRef = 20A1CD6618EF0B8700484391 /* youtube_share.png */; };
 		20A1CD6918EF0B8700484391 /* youtube_share_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 20A1CD6718EF0B8700484391 /* youtube_share_selected.png */; };
+		20A1CD6F18EF19B400484391 /* YouTubeSubClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 20A1CD6E18EF19B400484391 /* YouTubeSubClass.m */; };
 		20B865F91851EF0400484D7D /* checkBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = 20B865F71851EF0400484D7D /* checkBlue.png */; };
 		20BA7DED18BE083300991DCC /* Flyr-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D1107310486CEB800E47090 /* Flyr-Info.plist */; };
 		20CC6922180DA416002F2E6F /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2061ED8B17FF212100E9BECA /* icon.png */; };
@@ -1291,6 +1292,8 @@
 		20A1CD6418EF0B0400484391 /* ShareVideoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareVideoViewController.xib; sourceTree = "<group>"; };
 		20A1CD6618EF0B8700484391 /* youtube_share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = youtube_share.png; sourceTree = "<group>"; };
 		20A1CD6718EF0B8700484391 /* youtube_share_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = youtube_share_selected.png; sourceTree = "<group>"; };
+		20A1CD6D18EF19B400484391 /* YouTubeSubClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouTubeSubClass.h; sourceTree = "<group>"; };
+		20A1CD6E18EF19B400484391 /* YouTubeSubClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YouTubeSubClass.m; sourceTree = "<group>"; };
 		20B865F71851EF0400484D7D /* checkBlue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkBlue.png; sourceTree = "<group>"; };
 		20B996D2180450CC007B616D /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
 		20CC6923180DA44C002F2E6F /* icon-60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-60.png"; sourceTree = "<group>"; };
@@ -2281,6 +2284,8 @@
 				20A1CD6418EF0B0400484391 /* ShareVideoViewController.xib */,
 				20ECF9A718D6E1AD0035E3DE /* UIPlaceHolderTextView.h */,
 				20ECF9A818D6E1AD0035E3DE /* UIPlaceHolderTextView.m */,
+				20A1CD6D18EF19B400484391 /* YouTubeSubClass.h */,
+				20A1CD6E18EF19B400484391 /* YouTubeSubClass.m */,
 			);
 			name = ShareScreen;
 			sourceTree = "<group>";
@@ -3869,6 +3874,7 @@
 				202C4827187D7A6B00FE0975 /* CJSONDeserializer.m in Sources */,
 				65BDB2DF17341D290084E032 /* CustomLabel.m in Sources */,
 				0FEF2DA9174E66FC00FDD8C9 /* HelpController.m in Sources */,
+				20A1CD6F18EF19B400484391 /* YouTubeSubClass.m in Sources */,
 				0F7FC386175CE26B009DEB08 /* AsyncImageView.m in Sources */,
 				202C482A187D7A6B00FE0975 /* NSDictionary_JSONExtensions.m in Sources */,
 				202C4829187D7A6B00FE0975 /* CJSONSerializer.m in Sources */,

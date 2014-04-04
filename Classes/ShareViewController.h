@@ -31,6 +31,7 @@
 #import "Flyer.h"
 #import "SHKActivityIndicator.h"
 #import "UIPlaceHolderTextView.h"
+#import "YouTubeSubClass.h"
 
 
 @class FlyrViewController,FlyerlySingleton;

@@ -335,8 +335,8 @@
     item.tags =[NSArray arrayWithObjects: @"#flyerly", nil];
     item.text = selectedFlyerDescription;
     
-    iosSharer = [SHKYouTube shareItem:item];
-
+    iosSharer = [YouTubeSubClass shareItem:item];
+    
     iosSharer.shareDelegate = self;
     
     
@@ -540,7 +540,11 @@
         [self.flyer setSmsStatus:1];
         [Flurry logEvent:@"Shared SMS"];
 
-    } else if ( [sharer isKindOfClass:[SHKYouTube class]] == YES ) {
+    } else if ( [sharer isKindOfClass:[YouTubeSubClass class]] == YES ) {
+        
+        YouTubeSubClass *youtube = (YouTubeSubClass *) sharer;
+
+        NSLog(@"%@",youtube.uploadLocationURL);
         
         [youTubeButton setSelected:YES];
         [Flurry logEvent:@"Shared Youtube"];
