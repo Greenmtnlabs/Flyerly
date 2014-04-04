@@ -348,8 +348,13 @@
 -(IBAction)onClickFacebookButton{
     
     // Current Item For Sharing
-    SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ #flyerly", selectedFlyerDescription ]];
-    
+    SHKItem *item;
+
+    if ([flyer isVideoFlyer]) {
+        item = [SHKItem filePath:[self.flyer getSharingVideoPath] title:titleView.text];
+    }else {
+        item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ #flyerly", selectedFlyerDescription ]];
+    }
     iosSharer = [SHKFacebook shareItem:item];
     iosSharer.shareDelegate = self;
     
@@ -537,7 +542,6 @@
 
     } else if ( [sharer isKindOfClass:[SHKYouTube class]] == YES ) {
         
-        SHKYouTube *yt =(SHKYouTube *) sharer;
         
         [Flurry logEvent:@"Shared Youtube"];
         

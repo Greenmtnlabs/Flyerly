@@ -97,10 +97,12 @@ NSString * const TEXTHEIGHT = @"280.000000";
  * and Update Flyer Image
  */
 -(void)saveFlyer :(UIImage *)snapShot{
-
-    NSData *snapShotData = UIImagePNGRepresentation(snapShot);
     
-    [snapShotData writeToFile:flyerImageFile atomically:YES];
+    NSData *snapShotData = UIImagePNGRepresentation(snapShot);
+
+    if (![self isVideoFlyer]) {
+        [snapShotData writeToFile:flyerImageFile atomically:YES];
+    }
     
     // HERE WE CHECK USER ALLOWED TO SAVE IN GALLERY FROM SETTING
     if([[NSUserDefaults standardUserDefaults] stringForKey:@"saveToCameraRollSetting"]){
@@ -136,10 +138,10 @@ NSString * const TEXTHEIGHT = @"280.000000";
 /*
  * Here we Update Image for Video Overlay Image
  */
--(void)setVideoOverlay :(UIImage *)snapShot {
+-(void)setVideoCover :(UIImage *)snapShot {
 
     NSData *snapShotData = UIImagePNGRepresentation(snapShot);
-    [snapShotData writeToFile:videoImageFile atomically:YES];
+    [snapShotData writeToFile:flyerImageFile atomically:YES];
 }
 
 /*** HERE WE return Overlay Image
@@ -1239,7 +1241,10 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
         CGImageRef imgRef = [generator copyCGImageAtTime: asset.duration  actualTime:NULL error:&err];
         
         img = [[UIImage alloc] initWithCGImage:imgRef];
+    }else {
+        NSLog(@"asdasd");
     }
+    
     
     return img;
 }
@@ -1613,14 +1618,16 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
  */
 -(void)setVideoAsssetURL :(NSString *)URL {
     
-    if (textFileArray.count > 6) {
-        [textFileArray replaceObjectAtIndex:6 withObject:URL];
-    }else {
-        [textFileArray addObject:URL];
+    if (URL != nil) {
+        if (textFileArray.count > 6) {
+        
+            [textFileArray replaceObjectAtIndex:6 withObject:URL];
+        }else {
+            [textFileArray addObject:URL];
+        }
+        //Here we write the Array of Text files .txt
+        [textFileArray writeToFile:textFile atomically:YES];
     }
-    //Here we write the Array of Text files .txt
-    [textFileArray writeToFile:textFile atomically:YES];
-
 }
 
 

@@ -322,19 +322,21 @@ int selectedAddMoreLayerTab = -1;
     UIImage *snapshotImage;
     
     //Save OnBack
+    
+    
     if ([flyer isVideoFlyer]) {
         
-        //Here we take Image From Video Player
-        snapshotImage = [self.flyer getImageForVideo];
-        
-    }else {
-        
-         //Here we take Snap shot of Flyer
-      snapshotImage =  [self getFlyerSnapShot];
-
-
-        
+        //Background Thread
+        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+            
+            //Here we Merge All Layers in Video File
+            [self videoMergeProcess];
+            
+        });
     }
+    
+    //Here we take Snap shot of Flyer
+      snapshotImage =  [self getFlyerSnapShot];
     
     // Here we Save Flyer Info
     [flyer saveFlyer:snapshotImage];
@@ -343,7 +345,9 @@ int selectedAddMoreLayerTab = -1;
     if (![[flyer getFlyerURL] isEqualToString:@""]) {
         
         // Update Recent Flyer List
-        [flyer setRecentFlyer];
+         if (![flyer isVideoFlyer]) {
+             [flyer setRecentFlyer];
+         }
     }
     [Flurry logEvent:@"Saved Flyer"];
     [self.navigationController popViewControllerAnimated:YES];
@@ -2490,14 +2494,21 @@ int selectedAddMoreLayerTab = -1;
             }
             case AVAssetExportSessionStatusCompleted: {
                 
+                
+                //Here we take Image From Video Player
+                UIImage *videoCover = [self.flyer getImageForVideo];
+                [self.flyer setVideoCover:videoCover];
+                
+                //Update Recent Flyer
+                [self.flyer setRecentFlyer];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"updateCover" object:nil];
+                
                 // Background Thread
                 dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
                     
                     // Here we Add Video In Flyerly Album
-                    //This Data is Temporary Send For Crash Maintain on Simulator Other wise
-                    // it should be nil for Video Saving
-                    NSData *data = [[NSFileManager defaultManager] contentsAtPath:destination];
-                    [self.flyer saveInGallery:data];
+                    [self.flyer saveInGallery:nil];
+                    
                     
                 });
             }
@@ -2811,43 +2822,8 @@ int selectedAddMoreLayerTab = -1;
     UIImage *snapshotImage;
     
     //Save OnBack
-    if ([flyer isVideoFlyer]) {
-        
-        
-        //Here we Update Overlay
-        [flyer setVideoOverlay:[self getFlyerSnapShot]];
-        
-        //Background Thread
-        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-            
-            //Here we Merge All Layers in Video File
-            [self videoMergeProcess];
-            
-        });
-        
-        //Here we take Image From Video Player
-        snapshotImage =  [self.flyer getImageForVideo];
-
-        
-    }else {
-        
-        //Here we take Snap shot of Flyer
-        snapshotImage =  [self getFlyerSnapShot];
-        
-        //Temporary For Simulator
-        videoDuration = 1;
-        
-        //Background Thread
-        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-            
-            //Here we Merge All Layers in Video File
-           // [self videoMergeProcess];
-            
-        });
-
-        
-
-    }
+    //Here we take Snap shot of Flyer
+    snapshotImage =  [self getFlyerSnapShot];
     
     //Here we Save Flyer
     [flyer saveFlyer:snapshotImage];
@@ -2926,6 +2902,17 @@ int selectedAddMoreLayerTab = -1;
     shareButton.enabled = NO;
     helpButton.enabled = NO;
 
+/*    //Here we Merge Video for Sharing
+    if ([flyer isVideoFlyer]) {
+        
+        //Background Thread
+        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+            
+            //Here we Merge All Layers in Video File
+            [self videoMergeProcess];
+            
+        });
+    }*/
     
     NSString *shareImagePath = [flyer getFlyerImage];
     UIImage *shareImage =  [UIImage imageWithContentsOfFile:shareImagePath];

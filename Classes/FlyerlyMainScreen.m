@@ -38,7 +38,9 @@
 	createFlyer = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
     createFlyer.flyerPath = flyPath;
     createFlyer.flyer = flyer;
+    
 	[self.navigationController pushViewController:createFlyer animated:YES];
+
 }
 //End
 
@@ -140,7 +142,7 @@
     self.navigationItem.titleView = logo;
     
     [self.navigationItem setHidesBackButton:YES];
-
+    
 
 }
 
@@ -186,6 +188,11 @@
     //GET UPDATED USER PUCHASES INFO
     [self getUserPurcahses];
     
+    //Here we set Notification For CreateScreen
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveEvent:) name:@"updateCover" object:nil];
+
+    
+    
 }
 
 
@@ -218,9 +225,24 @@
     
     // Set CreateFlyer Screen
     createFlyer.flyer = flyer;
+    
 	[self.navigationController pushViewController:createFlyer animated:YES];
 }
 
+
+
+/*
+ * Called whenever an event named "updateCover" is fired, from any object.
+ */
+- (void)receiveEvent:(NSNotification *)notification {
+    NSLog(@"Notification Recieved");
+    
+    //Getting Recent Flyers
+    recentFlyers = [Flyer recentFlyerPreview:4];
+    
+    //Set Recent Flyers
+    [self updateRecentFlyer:recentFlyers];
+}
 
 -(void)showAlert:(NSString *)title message:(NSString *)message{
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
