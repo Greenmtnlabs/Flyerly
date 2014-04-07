@@ -8,14 +8,8 @@
 
 #import "NBUCameraView.h"
 #import <AVFoundation/AVFoundation.h>
-#import <AssetsLibrary/AssetsLibrary.h>
-#import "UIApplication+NBUAdditions.h"
-#import "NSFileManager+NBUAdditions.h"
-@interface SubNBUCamera : NBUCameraView <AVCaptureFileOutputRecordingDelegate, AVCaptureVideoDataOutputSampleBufferDelegate>{
 
- AVCaptureSession * captureSession;
-AVCaptureMovieFileOutput * captureMovieOutput;
+@interface SubNBUCamera : NBUCameraView {
 }
 
-@property (nonatomic, strong)           NSURL * targetMovieFolder;
 @end

@@ -10,74 +10,32 @@
 
 @implementation SubNBUCamera
 
-@synthesize  targetMovieFolder;
+/**
+ * We override the recording to allow us to add support for audio.
+ */
+- (IBAction)startStopRecording:(id)sender {
 
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
-    }
-    return self;
-}
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
-
-
-- (IBAction)startStopRecording:(id)sender
-{
-    
-    [super startStopRecording:nil];
-
-    /*
-    if (!self.recording)
-    {
 #ifndef __i386__
-        if (!captureMovieOutput)
-        {
-            captureMovieOutput = [AVCaptureMovieFileOutput new];
-        }
-        
+    // If we are going to start recording.
+    if ( !self.recording ) {
+
+        // Since capture session is a private variable, this is the only way we can get it.
+        AVCaptureSession *_captureSession = [self valueForKey:@"_captureSession"];
         NSError *error;
+        
+        // Get the audio device
         AVCaptureDevice *audioCaptureDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeAudio];
         AVCaptureDeviceInput *audioInput = [AVCaptureDeviceInput deviceInputWithDevice:audioCaptureDevice error:&error];
         
-        if ([captureSession canAddOutput:captureMovieOutput])
-        {
-            [captureSession addOutput:captureMovieOutput];
-            [captureSession addInput:audioInput];
-            
+        // Make sure we can add audio input to this session. If we can do it!
+        if ([_captureSession canAddInput:audioInput]) {
+            [_captureSession addInput:audioInput];
         }
-        
-        if (!targetMovieFolder)
-        {
-            targetMovieFolder = [UIApplication sharedApplication].documentsDirectory;
-        }
-        
-        NSURL * movieOutputURL = [NSFileManager URLForNewFileAtDirectory:targetMovieFolder
-                                                      fileNameWithFormat:@"movie%02d.mov"];
-        
-        [captureMovieOutput startRecordingToOutputFileURL:movieOutputURL
-                                         recordingDelegate:self];
-
-#else
-        NBULogInfo(@"No mock video recording on Simulator");
+    }
 #endif
-    }
-    else
-    {
-         [captureMovieOutput stopRecording];
-    }
-
-    */
-  
+    
+    // Rest of the things stay the same.
+    [super startStopRecording:nil];
 }
 
 
