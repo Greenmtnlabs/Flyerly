@@ -32,13 +32,14 @@
 
 
 @class FlyerlySingleton,CameraViewController,Flyer,FlyerImageView;
-@interface CreateFlyerController :ParentViewController<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, FlyerImageViewDelegate >
+@interface CreateFlyerController :ParentViewController<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, FlyerImageViewDelegate,UIGestureRecognizerDelegate >
 {
    
     FlyerlySingleton *globle;
     UILabel *addMoreLayerOrSaveFlyerLabel;
     UILabel *takeOrAddPhotoLabel;
     UILabel *videoLabel;
+    UIActivityIndicatorView *uiBusy;
 
     UIScrollView *layerScrollView;
     NSInteger imgPickerFlag;
@@ -67,6 +68,7 @@
     UILabel *titleLabel;
     UIImage *videolastImage;
     BOOL *isPlaying;
+    BOOL *isVideoReadyForShare;
     float videoDuration;
     
 }

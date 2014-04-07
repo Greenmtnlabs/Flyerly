@@ -40,7 +40,7 @@
 						<int key="NSvFlags">274</int>
 						<string key="NSFrame">{{1, 1}, {98, 118}}</string>
 						<reference key="NSSuperview" ref="763630530"/>
-						<reference key="NSNextKeyView" ref="1028199477"/>
+						<reference key="NSNextKeyView" ref="26679026"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">2</int>
@@ -64,7 +64,7 @@
 							<string key="NSResourceName">NBUImagePicker.bundle/checkmark.png</string>
 						</object>
 					</object>
-					<object class="IBUIImageView" id="1028199477">
+					<object class="IBUIImageView" id="26679026">
 						<reference key="NSNextResponder" ref="763630530"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{8, 90}, {30, 30}}</string>
@@ -114,7 +114,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">videoIcon</string>
 						<reference key="source" ref="763630530"/>
-						<reference key="destination" ref="1028199477"/>
+						<reference key="destination" ref="26679026"/>
 					</object>
 					<string key="id">TyV-G7-J5U</string>
 				</object>
@@ -144,7 +144,7 @@
 						<array class="NSMutableArray" key="children">
 							<reference ref="162881289"/>
 							<reference ref="547649990"/>
-							<reference ref="1028199477"/>
+							<reference ref="26679026"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -160,7 +160,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<string key="id">OfI-Fz-lPv</string>
-						<reference key="object" ref="1028199477"/>
+						<reference key="object" ref="26679026"/>
 						<reference key="parent" ref="763630530"/>
 					</object>
 				</array>

@@ -44,6 +44,7 @@ int selectedAddMoreLayerTab = -1;
     }
     
     self.navigationItem.titleView = titleLabel;
+    [uiBusy removeFromSuperview];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -1613,6 +1614,14 @@ int selectedAddMoreLayerTab = -1;
  */
 -(void)loadCustomPhotoLibrary :(NSString *)videoAllow {
     
+    uiBusy = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    [uiBusy setFrame:CGRectMake(280, 5, 20, 20)];
+    [uiBusy setColor:[UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0]];
+    uiBusy.hidesWhenStopped = YES;
+    [uiBusy startAnimating];
+
+    [self.flyimgView addSubview:uiBusy];
+    
     LibraryViewController *nbuGallary = [[LibraryViewController alloc] initWithNibName:@"LibraryViewController" bundle:nil];
     
     nbuGallary.videoAllow = videoAllow;
@@ -1629,6 +1638,8 @@ int selectedAddMoreLayerTab = -1;
 
     [nbuGallary setOnImageTaken:^(UIImage *img) {
         
+        [uiBusy stopAnimating];
+        [uiBusy removeFromSuperview];
         dispatch_async( dispatch_get_main_queue(), ^{
             // Do any UI operation here (render layer).
             if (weakSelf.imgPickerFlag == 2) {
@@ -1663,6 +1674,9 @@ int selectedAddMoreLayerTab = -1;
     
     [nbuGallary setOnVideoFinished:^(NSURL *recvUrl) {
         
+        [uiBusy stopAnimating];
+        [uiBusy removeFromSuperview];
+
         NSLog(@"%@",recvUrl);
         NSError *error = nil;
         
@@ -1843,6 +1857,7 @@ int selectedAddMoreLayerTab = -1;
     player =[[MPMoviePlayerController alloc] initWithContentURL:movieURL];
     [player.view setFrame:self.playerView.bounds];
     
+    
     [[NSNotificationCenter defaultCenter]
      addObserver:self selector:@selector(movieFinishedCallback:)
      name:MPMoviePlayerPlaybackDidFinishNotification
@@ -1864,7 +1879,12 @@ int selectedAddMoreLayerTab = -1;
     [playerToolBar removeFromSuperview];
 
     self.flyimgView.image = nil;
+    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap:)];
+    [player.view  addGestureRecognizer:tap];
+    tap.delegate = self;
     [self.playerView addSubview:player.view];
+ 
+
     [playerToolBar setFrame:CGRectMake(0, self.playerView.frame.size.height - 40, 310, 40)];
     [self.playerView addSubview:playerToolBar];
     player.accessibilityElementsHidden = YES;
@@ -1875,6 +1895,8 @@ int selectedAddMoreLayerTab = -1;
     player.scalingMode = MPMovieScalingModeAspectFill;
     player.backgroundView.backgroundColor = [UIColor whiteColor];
     [player prepareToPlay];
+    
+
 
 }
 
@@ -2510,6 +2532,9 @@ int selectedAddMoreLayerTab = -1;
                     [self.flyer saveInGallery:nil];
                     NSLog(@"Video Merge Process Completed");
                     
+                    //Here we Open Share Panel for Share Flyer
+                    [self openPanel];
+
                     
                 });
             }
@@ -2898,13 +2923,15 @@ int selectedAddMoreLayerTab = -1;
 -(void)share {
     
     // Disable  Buttons
-    sharePanel.hidden = NO;
     rightUndoBarButton.enabled = NO;
     shareButton.enabled = NO;
     helpButton.enabled = NO;
 
+    [self showLoadingIndicator];
+    
     //Here we Merge Video for Sharing
     if ([flyer isVideoFlyer]) {
+        
         
         //Background Thread
         dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
@@ -2913,10 +2940,24 @@ int selectedAddMoreLayerTab = -1;
             [self videoMergeProcess];
             
         });
+    }else {
+        
+        //Here we Open Share Panel for Share Flyer
+        [self openPanel];
     }
     
-    [sharePanel removeFromSuperview];
 
+
+}
+
+/*
+ * Here we Open Share Panel
+ */
+-(void)openPanel {
+    
+    sharePanel.hidden = NO;
+    [sharePanel removeFromSuperview];
+    
     if ([flyer isVideoFlyer]) {
         shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareVideoViewController" bundle:nil];
         
@@ -2931,7 +2972,7 @@ int selectedAddMoreLayerTab = -1;
     sharePanel = shareviewcontroller.view;
     NSString *shareImagePath = [flyer getFlyerImage];
     UIImage *shareImage =  [UIImage imageWithContentsOfFile:shareImagePath];
-
+    
     //Here we Pass Param to Share Screen Which use for Sharing
     shareviewcontroller.selectedFlyerImage = shareImage;
     shareviewcontroller.flyer = self.flyer;
@@ -2961,8 +3002,8 @@ int selectedAddMoreLayerTab = -1;
     PFUser *user = [PFUser currentUser];
     if (user[@"appStarRate"])
         [self setStarsofShareScreen:user[@"appStarRate"]];
-
-
+    
+    
     [user saveInBackground];
     
     [shareviewcontroller setSocialStatus];
@@ -2981,12 +3022,11 @@ int selectedAddMoreLayerTab = -1;
     [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height, 320,425 )];
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.4f];
-        [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height -425, 320,425 )];
+    [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height -425, 320,425 )];
     [UIView commitAnimations];
-  
+    [self hideLoadingIndicator];
 
 }
-
 /*
  *Here we Set Stars
  */
@@ -3532,5 +3572,20 @@ int selectedAddMoreLayerTab = -1;
     
 }
 
+
+#pragma mark - gesture delegate
+
+// this allows you to dispatch touches
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    return YES;
+}
+// this enables you to handle multiple recognizers on single view
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    return YES;
+}
+
+- (void)onTap:(UITapGestureRecognizer *)gesture {
+    [self enableImageViewInteraction];
+}
 
 @end

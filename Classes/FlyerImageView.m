@@ -396,6 +396,7 @@
         [self.delegate sendLayerToEditMode:key];
     }else {
         [self.delegate disableImageViewInteraction];
+       
     }
 }
 

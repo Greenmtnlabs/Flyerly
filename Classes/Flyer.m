@@ -1257,7 +1257,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     
     UIImage *bottomImage = [self  getSharingVideoCover];
     
-    UIImage *image = [UIImage imageNamed:@"playIcon"];
+    UIImage *image = [UIImage imageNamed:@"ModeVideo"];
     
     CGSize newSize = CGSizeMake(300, 300);
     UIGraphicsBeginImageContext( newSize );

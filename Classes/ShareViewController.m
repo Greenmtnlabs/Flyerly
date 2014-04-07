@@ -33,14 +33,16 @@
     [titleView setReturnKeyType:UIReturnKeyDone];
     [titleView addTarget:self action:@selector(textFieldFinished:) forControlEvents: UIControlEventEditingDidEndOnExit];
     [titleView addTarget:self action:@selector(textFieldTapped:) forControlEvents:UIControlEventEditingDidBegin];
-    
+   
     descriptionView = [[UIPlaceHolderTextView alloc] initWithFrame:CGRectMake(12, 79, 296, 83)];
-    [descriptionView awakeFromNib];
+ 
     descriptionView.placeholder = @"Add a comment (example: \"Show this flyer for a free drink at the bar from 4pm-7pm\")";
+    /*
     descriptionView.placeholderColor = [UIColor colorWithWhite: 0.80 alpha:1];
     descriptionView.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14];
     descriptionView.textColor = [UIColor darkGrayColor];
-    
+     */
+       [descriptionView awakeFromNib];
     descriptionView.delegate = self;
     
     [self.view addSubview:descriptionView];
@@ -206,13 +208,15 @@
         {
             if (![self.flyer isVideoFlyer]) {
                 [smsButton setEnabled:YES];
+
+                status = [flyer getSmsStatus];
+                if([status isEqualToString:@"1"]){
+                    [smsButton setSelected:YES];
+                }else {
+                    [smsButton setSelected:NO];
+                }
             }
-            status = [flyer getSmsStatus];
-            if([status isEqualToString:@"1"]){
-                [smsButton setSelected:YES];
-            }else {
-                [smsButton setSelected:NO];
-            }
+
             
         }
     }
