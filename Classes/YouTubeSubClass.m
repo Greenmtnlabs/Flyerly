@@ -14,7 +14,7 @@
 
 @implementation YouTubeSubClass
 
-@dynamic uploadLocationURL,uploadTicket,youTubeService;
+@dynamic uploadLocationURL,uploadTicket,youTubeService,youTubeVideoID;
 
 
 
@@ -36,6 +36,8 @@
     ^(GTLServiceTicket *ticket, GTLYouTubeVideo *uploadedVideo, NSError *error){
         self.uploadTicket = nil;
         if (error == nil) {
+           NSString *UID =   uploadedVideo.identifier;
+          //  youTubeVideoID = uploadedVideo.identifier;
             [self sendDidFinish];
         } else {
             [self sendDidFailWithError:[SHK error:SHKLocalizedString(@"The service encountered an error. Please try again later.")] shouldRelogin:NO];
