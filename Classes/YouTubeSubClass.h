@@ -8,6 +8,7 @@
 
 #import "SHKYouTube.h"
 #import "SharersCommonHeaders.h"
+#import "Common.h"
 
 #import "GTLYouTube.h"
 #import "GTLUtilities.h"
@@ -21,6 +22,6 @@
 
 @property (nonatomic, strong) NSURL *uploadLocationURL;
 @property (nonatomic, strong) GTLServiceTicket *uploadTicket;
-@property (nonatomic, strong) NSString *youTubeVideoID;
+@property (nonatomic, strong) NSString *youTubeVideoURL;
 
 @end

@@ -2281,14 +2281,13 @@
 		2002C8981888CF3F005B18C9 /* ShareScreen */ = {
 			isa = PBXGroup;
 			children = (
+				202F48BC18F2BDC2000B62DB /* YouTube */,
 				E8A7347A1092CFF300661AAD /* ShareViewController.h */,
 				E8A7347B1092CFF300661AAD /* ShareViewController.m */,
 				E8A7347C1092CFF300661AAD /* ShareViewController.xib */,
 				20A1CD6418EF0B0400484391 /* ShareVideoViewController.xib */,
 				20ECF9A718D6E1AD0035E3DE /* UIPlaceHolderTextView.h */,
 				20ECF9A818D6E1AD0035E3DE /* UIPlaceHolderTextView.m */,
-				20A1CD6D18EF19B400484391 /* YouTubeSubClass.h */,
-				20A1CD6E18EF19B400484391 /* YouTubeSubClass.m */,
 			);
 			name = ShareScreen;
 			sourceTree = "<group>";
@@ -2391,6 +2390,15 @@
 				202C4824187D7A6B00FE0975 /* NSDictionary_JSONExtensions.m */,
 			);
 			path = TouchJSON;
+			sourceTree = "<group>";
+		};
+		202F48BC18F2BDC2000B62DB /* YouTube */ = {
+			isa = PBXGroup;
+			children = (
+				20A1CD6D18EF19B400484391 /* YouTubeSubClass.h */,
+				20A1CD6E18EF19B400484391 /* YouTubeSubClass.m */,
+			);
+			name = YouTube;
 			sourceTree = "<group>";
 		};
 		202F992818BCAD20002A25D9 /* CustomClasses */ = {

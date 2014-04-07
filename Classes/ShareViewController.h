@@ -99,5 +99,6 @@
 
 -(void)shareOnInstagram;
 -(void)setSocialStatus;
+-(void)enableAllShareOptions;
 
 @end

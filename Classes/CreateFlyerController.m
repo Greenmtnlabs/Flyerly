@@ -2508,6 +2508,7 @@ int selectedAddMoreLayerTab = -1;
                     
                     // Here we Add Video In Flyerly Album
                     [self.flyer saveInGallery:nil];
+                    NSLog(@"Video Merge Process Completed");
                     
                     
                 });
@@ -2902,7 +2903,7 @@ int selectedAddMoreLayerTab = -1;
     shareButton.enabled = NO;
     helpButton.enabled = NO;
 
-/*    //Here we Merge Video for Sharing
+    //Here we Merge Video for Sharing
     if ([flyer isVideoFlyer]) {
         
         //Background Thread
@@ -2912,7 +2913,7 @@ int selectedAddMoreLayerTab = -1;
             [self videoMergeProcess];
             
         });
-    }*/
+    }
     
     [sharePanel removeFromSuperview];
 
@@ -2956,6 +2957,7 @@ int selectedAddMoreLayerTab = -1;
     [shareviewcontroller.descriptionView setReturnKeyType:UIReturnKeyDone];
     shareviewcontroller.Yvalue = [NSString stringWithFormat:@"%f",self.view.frame.size.height];
     
+    
     PFUser *user = [PFUser currentUser];
     if (user[@"appStarRate"])
         [self setStarsofShareScreen:user[@"appStarRate"]];
@@ -2964,6 +2966,16 @@ int selectedAddMoreLayerTab = -1;
     [user saveInBackground];
     
     [shareviewcontroller setSocialStatus];
+    
+    
+    //Here we Get youtube Link
+    NSString *isAnyVideoUploadOnYoutube = [self.flyer getYoutubeLink];
+    
+    // Any Uploaded Video Link Available of Youtube
+    // then we Enable Other Sharing Options
+    if (![isAnyVideoUploadOnYoutube isEqualToString:@""]) {
+        [shareviewcontroller enableAllShareOptions];
+    }
     
     //Create Animation Here
     [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height, 320,425 )];

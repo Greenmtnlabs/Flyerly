@@ -1237,7 +1237,6 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
         AVAssetImageGenerator *generator = [[AVAssetImageGenerator alloc] initWithAsset:asset];
         generator.appliesPreferredTrackTransform = YES;
         NSError *err = NULL;
-        CMTime time = CMTimeMake(0, 0);
         CGImageRef imgRef = [generator copyCGImageAtTime: asset.duration  actualTime:NULL error:&err];
         
         img = [[UIImage alloc] initWithCGImage:imgRef];
@@ -1365,6 +1364,19 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 
     [socialArray replaceObjectAtIndex:7 withObject:[NSString stringWithFormat:@"%d",status]];
     
+    //Here we write the Array of Text files .txt
+    [socialArray writeToFile:socialFile atomically:YES];
+}
+
+//Set Youtube Share Info
+-(void)setYouTubeStatus :(int)status {
+    
+    if (socialArray.count > 8) {
+        [socialArray replaceObjectAtIndex:8 withObject:[NSString stringWithFormat:@"%d",status]];
+    }else {
+        [socialArray addObject:@""];
+        [self setYouTubeStatus:status];
+    }
     //Here we write the Array of Text files .txt
     [socialArray writeToFile:socialFile atomically:YES];
 }
@@ -1531,6 +1543,22 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     
 }
 
+/*
+ * HERE WE GET YOUTUBE URL
+ */
+-(NSString *)getYoutubeLink {
+    
+    if (textFileArray.count > 7) {
+        return [textFileArray objectAtIndex:7];
+    } else {
+        [textFileArray addObject:@""];
+        [textFileArray writeToFile:textFile atomically:YES];
+        return @"";
+    }
+    
+}
+
+
 #pragma mark  Flyer Text File SET
 
 
@@ -1624,13 +1652,32 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
         
             [textFileArray replaceObjectAtIndex:6 withObject:URL];
         }else {
-            [textFileArray addObject:URL];
+            [textFileArray addObject:@""];
+            [self setVideoAsssetURL:URL];
         }
         //Here we write the Array of Text files .txt
         [textFileArray writeToFile:textFile atomically:YES];
     }
 }
 
+
+/*
+ * Here we Set Flyer Youtube URL
+ */
+-(void)setYoutubeLink :(NSString *)URL {
+    
+    if (URL != nil) {
+        if (textFileArray.count > 7) {
+            
+            [textFileArray replaceObjectAtIndex:7 withObject:URL];
+        }else {
+            [textFileArray addObject:@""];
+            [self setYoutubeLink:URL];
+        }
+        //Here we write the Array of Text files .txt
+        [textFileArray writeToFile:textFile atomically:YES];
+    }
+}
 
 @end
 

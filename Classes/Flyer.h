@@ -85,6 +85,7 @@
 
 -(void)setFlyerURL :(NSString *)URL;
 -(void)setVideoAsssetURL :(NSString *)URL;
+-(void)setYoutubeLink :(NSString *)URL;
 
 -(void)setShareType :(NSString *)type;
 
@@ -99,6 +100,7 @@
 -(void)setEmailStatus :(int)status;
 -(void)setSmsStatus :(int)status;
 -(void)setClipboardStatus :(int)status;
+-(void)setYouTubeStatus :(int)status;
 
 -(NSMutableDictionary *)getLayerFromMaster :(NSString *)uid;
 -(NSString *)getImageTag :(NSString *)uid;
@@ -121,6 +123,7 @@
 -(NSString *)getShareType;
 -(NSString *)getFlyerUpdateDate;
 -(NSString *)getVideoAssetURL;
+-(NSString *)getYoutubeLink;
 -(UIImage *)getImageForVideo;
 
 

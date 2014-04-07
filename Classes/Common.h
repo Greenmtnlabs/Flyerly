@@ -10,6 +10,7 @@
 #define ALPHA0 0
 #define ALPHA1 1
 #define IMAGETYPE @"png"
+#define YOUTUBEPREFIX @"https://youtube.com/watch?v="
 #define flyerlyWidth 620
 #define flyerlyHeight 620
 #define VIDEOFRAME 30

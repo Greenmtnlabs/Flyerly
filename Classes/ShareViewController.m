@@ -86,6 +86,16 @@
  */
 -(void)shareOnInstagram{
     
+
+    if ([self.flyer isVideoFlyer]) {
+        NSURL *instagramURL = [NSURL URLWithString:@"instagram://app"];
+        if ([[UIApplication sharedApplication] canOpenURL:instagramURL]) {
+            [[UIApplication sharedApplication] openURL:instagramURL];
+        }
+        return;
+    }
+    
+    
     CGRect rect = CGRectMake(0 ,0 , 0, 0);
     UIGraphicsBeginImageContextWithOptions(self.view.bounds.size, self.view.opaque, 0.0);
     [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
@@ -194,8 +204,9 @@
         // Set Sms Sharing Status From Social File
         if([MFMessageComposeViewController canSendAttachments])
         {
-            [smsButton setEnabled:YES];
-            
+            if (![self.flyer isVideoFlyer]) {
+                [smsButton setEnabled:YES];
+            }
             status = [flyer getSmsStatus];
             if([status isEqualToString:@"1"]){
                 [smsButton setSelected:YES];
@@ -257,10 +268,15 @@
     rightUndoBarButton.enabled = YES;
     shareButton.enabled = YES;
     helpButton.enabled = YES;
-
-
 }
 
+-(void)enableAllShareOptions {
+    [twitterButton setEnabled:YES];
+    [emailButton setEnabled:YES];
+    [smsButton setEnabled:YES];
+    [instagramButton setEnabled:YES];
+    [clipboardButton setEnabled:YES];
+}
 
 #pragma mark  Text Field Delegate
 
@@ -366,14 +382,23 @@
  */
 -(IBAction)onClickTwitterButton{
     
-    // Current Item For Sharing
-     SHKItem *item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ #flyerly", selectedFlyerDescription ]];
+    
+    SHKItem *item;
+    if ([self.flyer isVideoFlyer]) {
+        
+        // Current Video Link For Sharing
+        item = [SHKItem text: [NSString stringWithFormat:@"%@ %@ #flyerly",[self.flyer getYoutubeLink], selectedFlyerDescription ]];
+        
+    }else {
+        
+        // Current Image For Sharing
+         item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ #flyerly", selectedFlyerDescription ]];
+    }
     
     //Calling ShareKit for Sharing
     iosSharer = [[ SHKSharer alloc] init];
     iosSharer = [SHKiOSTwitter shareItem:item];
     iosSharer.shareDelegate = self;
-    
 }
 
 
@@ -392,8 +417,18 @@
 -(IBAction)onClickEmailButton{
     
     // Current Item For Sharing
-    SHKItem *item = [SHKItem image:selectedFlyerImage title:@"Flyerly for you!"];
-    item.text = @"Created & sent from Flyer.ly";
+    SHKItem *item;
+    if ([self.flyer isVideoFlyer]) {
+        
+        // Current Video Link For Sharing
+//        item = [SHKItem text: [NSString stringWithFormat:@"%@ Created & sent from Flyer.ly",[self.flyer getYoutubeLink]]];
+        
+        item = [SHKItem URL:[NSURL URLWithString:[self.flyer getYoutubeLink]] title:@"Flyerly for you!" contentType:SHKURLContentTypeVideo];
+    }else {
+        
+        item = [SHKItem image:selectedFlyerImage title:@"Flyerly for you!"];
+        item.text = @"Created & sent from Flyer.ly";
+    }
     
     //Calling ShareKit for Sharing
     iosSharer = [[ SHKSharer alloc] init];
@@ -426,8 +461,18 @@
  */
 -(IBAction)onClickFlickrButton{
     
-    // Current Item For Sharing
-    SHKItem *item = [SHKItem image:selectedFlyerImage title:@""];
+    
+    SHKItem *item;
+    if ([self.flyer isVideoFlyer]) {
+        
+        // Current Video Link For Sharing
+        item = [SHKItem filePath:[self.flyer getSharingVideoPath] title:titleView.text];
+        //item = [SHKItem text: [NSString stringWithFormat:@"%@",[self.flyer getYoutubeLink] ]];
+    }else {
+        // Current Item For Sharing
+        item = [SHKItem image:selectedFlyerImage title:@""];
+    }
+    
     item.tags =[NSArray arrayWithObjects: @"#flyerly", nil];
     item.text = selectedFlyerDescription;
     
@@ -444,16 +489,25 @@
  */
 -(IBAction)onClickSMSButton{
     
-        if([MFMessageComposeViewController canSendAttachments])
-        {
-                        
+    if([MFMessageComposeViewController canSendAttachments])
+    {
+        
+        if ([self.flyer isVideoFlyer]) {
+            
+            // Current Video Link For Sharing
+            SHKItem *item = [SHKItem text: [NSString stringWithFormat:@"%@ Created & sent from Flyer.ly",[self.flyer getYoutubeLink] ]];
+            
+            iosSharer = [SHKTextMessage shareItem:item];
+            iosSharer.shareDelegate = self;
+        }else {
+
             NSData *exportData = UIImageJPEGRepresentation(selectedFlyerImage ,1.0);
             
             iosSharer = [[ SHKSharer alloc] init];
             iosSharer = [SHKTextMessage shareFileData:exportData filename:imageFileName title:@"Created & sent from Flyer.ly"];
             iosSharer.shareDelegate = self;
-            
         }
+    }
 }
 
 
@@ -473,7 +527,19 @@
 
 
 -(void) onclipcordClick{
-    [UIPasteboard generalPasteboard].image = selectedFlyerImage;
+    
+    //Checking Flyer Type
+    if ([self.flyer isVideoFlyer]) {
+        
+        //Coping Video Link
+        [[UIPasteboard generalPasteboard] setString:[self.flyer getYoutubeLink]];
+
+    }else {
+        
+        //Coping Image
+        [UIPasteboard generalPasteboard].image = selectedFlyerImage;
+    }
+    
     [Flurry logEvent:@"Copy to Clipboard"];
     [self showAlert:@"Flyer copied to clipboard!" message:@""];
 
@@ -543,11 +609,14 @@
     } else if ( [sharer isKindOfClass:[YouTubeSubClass class]] == YES ) {
         
         YouTubeSubClass *youtube = (YouTubeSubClass *) sharer;
-
-        NSLog(@"%@",youtube.uploadLocationURL);
         
-        [youTubeButton setSelected:YES];
+        // Save Link In .Text File of Flyer
+        [self.flyer setYoutubeLink:youtube.youTubeVideoURL];
+        
+        // Mark Social Status In .soc File of Flyer
+        [self.flyer setYouTubeStatus:1];
         [Flurry logEvent:@"Shared Youtube"];
+        [self enableAllShareOptions];
         
     }
     
