@@ -21,4 +21,6 @@
 
 @property (nonatomic, strong) NSURL *uploadLocationURL;
 @property (nonatomic, strong) GTLServiceTicket *uploadTicket;
+@property (nonatomic, strong) NSString *youTubeVideoID;
+
 @end
