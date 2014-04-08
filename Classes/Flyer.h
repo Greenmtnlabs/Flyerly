@@ -31,11 +31,14 @@
 
 -(void)loadFlyer :(NSString *)flyPath;
 
--(void)saveFlyer :(UIImage *)snapShot;
+-(void)saveFlyer;
+
+-(void)setUpdatedSnapshotWithImage :(UIImage *)snapShot;
 
 -(void)saveInGallery :(NSData *)imgData;
 
 -(void)addToHistory;
+-(void)addToGallery :(NSData *)snapShotData;
 
 -(void)replaceFromHistory;
 

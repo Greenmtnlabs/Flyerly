@@ -90,31 +90,42 @@ NSString * const TEXTHEIGHT = @"280.000000";
 }
 
 
+/*
+ * Here we Update Current Flyer Snapshot
+ */
+-(void)setUpdatedSnapshotWithImage :(UIImage *)snapShot {
+    
+    //Convert Imgae into Data
+    NSData *snapShotData = UIImagePNGRepresentation(snapShot);
+    
+    //Here we Update Flyer File from Current Snapshot
+    [snapShotData writeToFile:flyerImageFile atomically:YES];
+    
+    //Here we Add Image in Flyerly Album
+    [self addToGallery:snapShotData];
+
+}
 
 
 /*
- * Here we save the dictionary to .peices files
- * and Update Flyer Image
+ * HERE WE SAVE CONTENT IN USER GALLERY
  */
--(void)saveFlyer :(UIImage *)snapShot{
-    
-    NSData *snapShotData = UIImagePNGRepresentation(snapShot);
-
-    if (![self isVideoFlyer]) {
-        [snapShotData writeToFile:flyerImageFile atomically:YES];
-    }
+-(void)addToGallery :(NSData *)snapShotData {
     
     // HERE WE CHECK USER ALLOWED TO SAVE IN GALLERY FROM SETTING
     if([[NSUserDefaults standardUserDefaults] stringForKey:@"saveToCameraRollSetting"]){
         
         //USER ALLOWED
-        // Checking Flyer Type
-        if (![self isVideoFlyer]) {
-            
-            //HERE WE WRITE IMAGE IN GALLERY
-            [self saveInGallery:snapShotData];
-        }
+        //HERE WE WRITE IMAGE OR VIDEO IN GALLERY
+        [self saveInGallery:snapShotData];
     }
+
+}
+
+/*
+ * Here we save the dictionary to .peices files
+ */
+-(void)saveFlyer{
     
     //Here we write the dictionary of .peices files
     [masterLayers writeToFile:piecesFile atomically:YES];
@@ -420,7 +431,7 @@ NSString * const TEXTHEIGHT = @"280.000000";
             {
                 lastFileName = fileList[i];
         
-                if (![lastFileName isEqualToString:@"History"]) {
+                if (![lastFileName isEqualToString:@"History"] && ![lastFileName isEqualToString:@"FlyerlyMovie.mov"] ) {
                     NSString *source = [NSString stringWithFormat:@"%@/%@",currentSourcepath,lastFileName];
                     NSString *destination = [NSString stringWithFormat:@"%@/%@",historyDestinationpath,lastFileName];
     

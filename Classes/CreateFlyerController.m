@@ -318,11 +318,7 @@ int selectedAddMoreLayerTab = -1;
     [shareviewcontroller.titleView resignFirstResponder];
     [shareviewcontroller.descriptionView resignFirstResponder];
     
-
-    UIImage *snapshotImage;
-    
     //Save OnBack
-    
     
     if ([flyer isVideoFlyer]) {
         
@@ -333,14 +329,20 @@ int selectedAddMoreLayerTab = -1;
             [self videoMergeProcess];
             
         });
+        
+    } else {
+        
+        //Here we remove Borders from layer if user touch any layer
+        [self.flyimgView layerStoppedEditing:currentLayer];
+        
+        //Here we take Snap shot of Flyer and
+        //Flyer Add to Gallery if user allow to Access there photos
+        [flyer setUpdatedSnapshotWithImage:[self getFlyerSnapShot]];
+
     }
     
-    //Here we take Snap shot of Flyer
-      snapshotImage =  [self getFlyerSnapShot];
-    
     // Here we Save Flyer Info
-    [flyer saveFlyer:snapshotImage];
-
+    [flyer saveFlyer];
     
     if (![[flyer getFlyerURL] isEqualToString:@""]) {
         
@@ -1641,6 +1643,7 @@ int selectedAddMoreLayerTab = -1;
         [uiBusy stopAnimating];
         [uiBusy removeFromSuperview];
         dispatch_async( dispatch_get_main_queue(), ^{
+            
             // Do any UI operation here (render layer).
             if (weakSelf.imgPickerFlag == 2) {
                 
@@ -1919,7 +1922,7 @@ int selectedAddMoreLayerTab = -1;
     [self.playerView addSubview:player.view];
  
 
-    [playerToolBar setFrame:CGRectMake(0, self.playerView.frame.size.height - 40, 310, 40)];
+    [playerToolBar setFrame:CGRectMake(0, self.playerView.frame.size.height - 40, 306, 40)];
     [self.playerView addSubview:playerToolBar];
     player.accessibilityElementsHidden = YES;
     player.shouldAutoplay = NO;
@@ -2555,22 +2558,21 @@ int selectedAddMoreLayerTab = -1;
                 UIImage *videoCover = [self.flyer getImageForVideo];
                 [self.flyer setVideoCover:videoCover];
                 
-                //Update Recent Flyer
-                [self.flyer setRecentFlyer];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"updateCover" object:nil];
                 
                 // Background Thread
-                dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+                // Remove for Speed
+                // dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
                     
                     // Here we Add Video In Flyerly Album
-                    [self.flyer saveInGallery:nil];
+                    [self.flyer addToGallery:nil];
                     NSLog(@"Video Merge Process Completed");
                     
                     //Here we Open Share Panel for Share Flyer
                     [self openPanel];
 
                     
-                });
+               // });
             }
         };
     }]; 
@@ -2755,16 +2757,17 @@ int selectedAddMoreLayerTab = -1;
 
 -(void)undoFlyer{
     
-    //Stop Edit Mode for remove Layer Border if Selected
+    //Here we remove Borders from layer if user touch any layer
     [self.flyimgView layerStoppedEditing:currentLayer];
     
-    //Here we take Snap shot of Flyer
-    UIImage *snapshotImage = [self getFlyerSnapShot];
+    //Here we take Snap shot of Flyer and
+    //Flyer Add to Gallery if user allow to Access there photos
+    [flyer setUpdatedSnapshotWithImage:[self getFlyerSnapShot]];
     
     //First we Save Current flyer in history
-    [flyer saveFlyer:snapshotImage];
+    [flyer saveFlyer];
     
-    //Add Flyer in Histor if any Change Exists
+    //Add Flyer in History if any Change Exists
     [flyer addToHistory];
     
     //Here we send Request to Model for Move Back
@@ -2861,8 +2864,6 @@ int selectedAddMoreLayerTab = -1;
     //Empty Layer Delete
     if (currentLayer != nil && ![currentLayer isEqualToString:@""]) {
         
-        
-        
         NSString *flyerImg = [flyer getImageName:currentLayer];
         NSString *flyertext = [flyer getText:currentLayer];
         
@@ -2877,16 +2878,12 @@ int selectedAddMoreLayerTab = -1;
         }
     }
     
+    //Save OnBack
+    //Here we remove Borders from layer if user touch any layer
     [self.flyimgView layerStoppedEditing:currentLayer];
     
-    UIImage *snapshotImage;
-    
-    //Save OnBack
-    //Here we take Snap shot of Flyer
-    snapshotImage =  [self getFlyerSnapShot];
-    
     //Here we Save Flyer
-    [flyer saveFlyer:snapshotImage];
+    [flyer saveFlyer];
     
     //Here we Create One History BackUp for Future Undo Request
     [flyer addToHistory];
@@ -2975,6 +2972,14 @@ int selectedAddMoreLayerTab = -1;
             
         });
     }else {
+        
+        //Here we remove Borders from layer if user touch any layer
+        [self.flyimgView layerStoppedEditing:currentLayer];
+
+        //Here we take Snap shot of Flyer and
+        //Flyer Add to Gallery if user allow to Access there photos
+        [flyer setUpdatedSnapshotWithImage:[self getFlyerSnapShot]];
+        
         
         //Here we Open Share Panel for Share Flyer
         [self openPanel];
