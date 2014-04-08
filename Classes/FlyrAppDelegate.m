@@ -173,6 +173,27 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     NSString *greeted = [[NSUserDefaults standardUserDefaults] stringForKey:@"greeted"];
     
     if( !greeted ) {
+    
+        // This is a first time Flyerly user, so
+        
+        // Firstly we allow anonymous Parse user
+        [PFUser enableAutomaticUser];
+        [PFUser currentUser].username = @"anonymous";
+        
+        if ([[PFUser currentUser] isAuthenticated]) {
+            NSLog(@"Haiiinnnn! Anonymous user is authenticated.");
+        } else {
+            NSLog(@"Anonymous user is NOT authenticated.");
+        }
+        
+        // Then we create a directory for anonymous users data
+        NSString *homeDirectoryPath = NSHomeDirectory();
+        NSString *anonymusUserPath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/anonymous"]];
+        
+        NSError *error;
+        if ([[NSFileManager defaultManager] fileExistsAtPath:anonymusUserPath isDirectory:NULL])
+            [[NSFileManager defaultManager] createDirectoryAtPath:anonymusUserPath withIntermediateDirectories:YES attributes:nil error:&error];
+        
         // Show the greeting before going to the main app.
         [[NSUserDefaults standardUserDefaults] setObject:@"greeted" forKey:@"greeted"];
         

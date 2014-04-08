@@ -16,9 +16,9 @@
 }
 
 -(IBAction)ok {
-    
-    accountController = [[LaunchController alloc] initWithNibName:@"LaunchController" bundle:nil];
-    [self.navigationController pushViewController:accountController animated:YES];
+
+    mainScreen = [[FlyerlyMainScreen alloc] initWithNibName:@"FlyerlyMainScreen" bundle:nil];
+    [self.navigationController pushViewController:mainScreen animated:YES];
 }
 
 @end
