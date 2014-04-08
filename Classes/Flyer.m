@@ -1325,11 +1325,12 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
  */
 -(void)setFlyerURL :(NSString *)URL {
 
-    [textFileArray replaceObjectAtIndex:3 withObject:URL];
+    if (URL != nil) {
+        [textFileArray replaceObjectAtIndex:3 withObject:URL];
     
-    //Here we write the Array of Text files .txt
-    [textFileArray writeToFile:textFile atomically:YES];
-
+        //Here we write the Array of Text files .txt
+        [textFileArray writeToFile:textFile atomically:YES];
+    }
     
 }
 

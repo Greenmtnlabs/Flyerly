@@ -47,7 +47,8 @@
                                                    graphPath:@"me/friends"
                             parameters:@{@"fields":@"name,gender,picture.height(72).width(72).type(small)"}
                                                   HTTPMethod:nil];
-                          
+    
+    
     FBRequestConnection* con = [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
         
         [self FBUserInfoRequestHandlerCallback:connection result:result error:error];
