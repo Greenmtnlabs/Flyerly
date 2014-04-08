@@ -369,6 +369,36 @@ NSString * const TEXTHEIGHT = @"280.000000";
 
 
 /*
+ * Here we Matching Current Layers File with Last history Layers File
+ */
+-(BOOL)isVideoMergeProcessRequired {
+    
+    //Getting Current Flyer folder Path
+    NSString* currentSourcepath  =   [[NSFileManager defaultManager] currentDirectoryPath];
+    NSString* historyDestinationpath  =  [NSString stringWithFormat:@"%@/History",currentSourcepath];
+    
+    NSArray *fileList = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:historyDestinationpath error:nil];
+    
+    
+    //HISTORY CHECK
+    if (fileList.count >= 1) {
+        
+        //HISTORY AVAILABLE
+        NSArray *sortedFlyersList = [fileList sortedArrayUsingFunction:compareDesc context:NULL];
+        
+        NSString* historyLastFilepath = [NSString stringWithFormat:@"%@/%@",historyDestinationpath,[sortedFlyersList objectAtIndex:0]];
+        
+        // Here we Compare Both Files One Current Flyer Folder and Second Last flyer Folder from History if
+        // its Mached  with each other then we are not create Directory
+        // in history Directory other wise we make a one copy.
+        if ([self compareFilesForMakeHistory:currentSourcepath LastHistoryPath:historyLastFilepath]) {
+            
+            return YES;
+        }
+    }
+    return NO;
+}
+/*
  * Here we Copy Current Flyer folder with all related file
  * to History folder name as timestamp for future Undo request
  */

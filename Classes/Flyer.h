@@ -137,7 +137,7 @@
 -(float)getHight :(NSString *)uid;
 -(NSString *)getFlyerImage;
 
-
+-(BOOL)isVideoMergeProcessRequired;
 +(NSString *)newFlyerPath;
 + (NSMutableArray *)recentFlyerPreview:(NSInteger)flyCount;
 

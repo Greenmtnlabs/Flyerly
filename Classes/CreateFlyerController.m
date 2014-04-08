@@ -2963,14 +2963,20 @@ int selectedAddMoreLayerTab = -1;
     //Here we Merge Video for Sharing
     if ([flyer isVideoFlyer]) {
         
-        
-        //Background Thread
-        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+        //Here Compare Current Flyer with history Flyer
+        if ([self.flyer isVideoMergeProcessRequired]) {
+            //Background Thread
+            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+                
+                //Here we Merge All Layers in Video File
+                [self videoMergeProcess];
+                
+            });
+        }else {
             
-            //Here we Merge All Layers in Video File
-            [self videoMergeProcess];
-            
-        });
+            //Here we Open Share Panel for Share Flyer
+            [self openPanel];
+        }
     }else {
         
         //Here we remove Borders from layer if user touch any layer
