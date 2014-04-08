@@ -16,7 +16,7 @@
 @class FlyrViewController;
 @class CreateFlyerController ;
 @class InviteFriendsController;
-@class FBSession,FlyerlySingleton;
+@class FlyerlySingleton;
 @class FacebookLikeView;
 @class MainSettingViewController,ParentViewController;
 
