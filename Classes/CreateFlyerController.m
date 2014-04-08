@@ -44,7 +44,6 @@ int selectedAddMoreLayerTab = -1;
     }
     
     self.navigationItem.titleView = titleLabel;
-    [uiBusy removeFromSuperview];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -1613,13 +1612,14 @@ int selectedAddMoreLayerTab = -1;
  * Here we Load Gallery
  */
 -(void)loadCustomPhotoLibrary :(NSString *)videoAllow {
-    
+
+
     uiBusy = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     [uiBusy setFrame:CGRectMake(280, 5, 20, 20)];
     [uiBusy setColor:[UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0]];
     uiBusy.hidesWhenStopped = YES;
     [uiBusy startAnimating];
-
+    
     [self.flyimgView addSubview:uiBusy];
     
     LibraryViewController *nbuGallary = [[LibraryViewController alloc] initWithNibName:@"LibraryViewController" bundle:nil];
@@ -1704,7 +1704,13 @@ int selectedAddMoreLayerTab = -1;
 
     }];
     
-    
+    [nbuGallary setOnVideoCancel:^() {
+        
+        [self.view addSubview:flyimgView];
+        [uiBusy stopAnimating];
+        [uiBusy removeFromSuperview];
+        
+    }];
     [self.navigationController pushViewController:nbuGallary animated:YES];
     [Flurry logEvent:@"Custom Background"];
 }
@@ -1717,6 +1723,15 @@ int selectedAddMoreLayerTab = -1;
  */
 -(void)openCustomCamera{
 
+
+    uiBusy = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    [uiBusy setFrame:CGRectMake(280, 5, 20, 20)];
+    [uiBusy setColor:[UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0]];
+    uiBusy.hidesWhenStopped = YES;
+    [uiBusy startAnimating];
+    
+    [self.view addSubview:uiBusy];
+    
     CameraViewController *nbuCamera = [[CameraViewController alloc]initWithNibName:@"CameraViewController" bundle:nil];
     
     if ( imgPickerFlag == 2 ) {
@@ -1732,6 +1747,8 @@ int selectedAddMoreLayerTab = -1;
     // Callback once image is selected.
     [nbuCamera setOnImageTaken:^(UIImage *img) {
         
+         [uiBusy stopAnimating];
+        [uiBusy removeFromSuperview];
         dispatch_async( dispatch_get_main_queue(), ^{
             // Do any UI operation here (render layer).
 
@@ -1777,6 +1794,14 @@ int selectedAddMoreLayerTab = -1;
  */
 -(void)openCustomCamera :(BOOL *)forVideo{
     
+
+    uiBusy = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    [uiBusy setFrame:CGRectMake(280, 5, 20, 20)];
+    [uiBusy setColor:[UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0]];
+    uiBusy.hidesWhenStopped = YES;
+    [uiBusy startAnimating];
+    [self.view addSubview:uiBusy];
+    
     CameraViewController *nbuCamera = [[CameraViewController alloc]initWithNibName:@"CameraViewController" bundle:nil];
     
     //Here we Pass FlyerImageView For Video
@@ -1789,6 +1814,8 @@ int selectedAddMoreLayerTab = -1;
     // Callback once image is selected.
     [nbuCamera setOnImageTaken:^(UIImage *img) {
         
+         [uiBusy stopAnimating];
+        [uiBusy removeFromSuperview];
         dispatch_async( dispatch_get_main_queue(), ^{
 
                 //Here we Set Flyer Type
@@ -1808,6 +1835,9 @@ int selectedAddMoreLayerTab = -1;
         
     [nbuCamera setOnVideoFinished:^(NSURL *recvUrl) {
         
+        [uiBusy stopAnimating];
+        [uiBusy removeFromSuperview];
+
         NSLog(@"%@",recvUrl);
         NSError *error = nil;
         [self.view addSubview:flyimgView];
@@ -1840,6 +1870,8 @@ int selectedAddMoreLayerTab = -1;
     [nbuCamera setOnVideoCancel:^() {
     
       [self.view addSubview:flyimgView];
+        [uiBusy stopAnimating];
+        [uiBusy removeFromSuperview];
     
     }];
 
@@ -1854,6 +1886,8 @@ int selectedAddMoreLayerTab = -1;
  */
 -(void)loadPlayerWithURL :(NSURL *)movieURL {
     
+    
+    NSLog(@"Video URL = %@",movieURL);
     player =[[MPMoviePlayerController alloc] initWithContentURL:movieURL];
     [player.view setFrame:self.playerView.bounds];
     

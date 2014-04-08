@@ -1257,7 +1257,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     
     UIImage *bottomImage = [self  getSharingVideoCover];
     
-    UIImage *image = [UIImage imageNamed:@"ModeVideo"];
+    UIImage *image = [UIImage imageNamed:@"play_icon"];
     
     CGSize newSize = CGSizeMake(300, 300);
     UIGraphicsBeginImageContext( newSize );
@@ -1266,7 +1266,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     [bottomImage drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
     
     // Apply supplied opacity
-    [image drawInRect:CGRectMake(90,90,120,120) blendMode:kCGBlendModeNormal alpha:1];
+    [image drawInRect:CGRectMake(95,95,120,120) blendMode:kCGBlendModeNormal alpha:1];
     
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     

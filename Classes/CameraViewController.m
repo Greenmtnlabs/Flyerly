@@ -159,6 +159,7 @@
     nbugallery.desiredImageSize = desiredImageSize;
     nbugallery.onImageTaken = onImageTaken;
     nbugallery.onVideoFinished = onVideoFinished;
+    nbugallery.onVideoCancel = onVideoCancel;
     nbugallery.videoAllow = videoAllow;
     
     // Pop the current view, and push the crop view.

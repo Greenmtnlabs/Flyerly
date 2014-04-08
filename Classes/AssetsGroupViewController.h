@@ -28,6 +28,7 @@
 @property (nonatomic, copy) void (^onImageTaken)(UIImage *);
 @property (nonatomic, copy) void (^onVideoFinished)(NSURL *);
 
+
 @property (strong, nonatomic) NSString *videoAllow;
 
 
