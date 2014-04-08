@@ -11,5 +11,5 @@
 
 @interface SubNBUCamera : NBUCameraView {
 }
-
+- (IBAction)addAudioDevice:(id)sender;
 @end

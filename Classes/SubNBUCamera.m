@@ -13,8 +13,8 @@
 /**
  * We override the recording to allow us to add support for audio.
  */
-- (IBAction)startStopRecording:(id)sender {
-/*
+- (void)addAudioDevice:(id)sender {
+
 #ifndef __i386__
     // If we are going to start recording.
     if ( !self.recording ) {
@@ -33,9 +33,7 @@
         }
     }
 #endif
-    */
-    // Rest of the things stay the same.
-    [super startStopRecording:nil];
+
 }
 
 

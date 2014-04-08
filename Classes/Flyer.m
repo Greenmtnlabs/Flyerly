@@ -77,9 +77,6 @@ NSString * const TEXTHEIGHT = @"280.000000";
     //set Flyer Image for Future Update
     flyerImageFile = [flyPath stringByAppendingString:[NSString stringWithFormat:@"/flyer.%@",IMAGETYPE]];
     
-    //set Video Flyer Image for Future Update
-    videoImageFile = [flyPath stringByAppendingString:[NSString stringWithFormat:@"/flyerOverlay.%@",IMAGETYPE]];
-    
     masterLayers = [[NSMutableDictionary alloc] initWithContentsOfFile:piecesFile];
     
     textFileArray = [[NSMutableArray alloc] initWithContentsOfFile:textFile];
@@ -155,18 +152,7 @@ NSString * const TEXTHEIGHT = @"280.000000";
     [snapShotData writeToFile:flyerImageFile atomically:YES];
 }
 
-/*** HERE WE return Overlay Image
- *
- */
--(UIImage *)getFlyerOverlayImage {
 
-    NSString* currentPath  =   [[NSFileManager defaultManager] currentDirectoryPath];
-    
-    NSString *imagePath = [currentPath stringByAppendingString:[NSString stringWithFormat:@"/flyerOverlay.%@",IMAGETYPE] ];
-    UIImage *shareImage =  [UIImage imageWithContentsOfFile:imagePath];
-
-    return shareImage;
-}
 
 
 /*** HERE WE SAVE IMAGE INTO GALLERY

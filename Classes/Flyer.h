@@ -56,7 +56,6 @@
 -(NSString *)addImage;
 
 -(void)setVideoCover :(UIImage *)snapShot;
--(UIImage *)getFlyerOverlayImage;
 
 -(void)setImageFrame :(NSString *)uid :(CGRect )photoFrame;
 
