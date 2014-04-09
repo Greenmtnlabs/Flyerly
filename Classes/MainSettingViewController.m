@@ -72,12 +72,22 @@
     category = [[NSMutableArray alloc] init];
     [category addObject:@"Save to Gallery"];
     [category addObject:@"Flyerly public"];
-    [category addObject:@"Account Setting"];
+    
+    //Checking if the user is valid or anonymous
+    if ([[PFUser currentUser] sessionToken]) {
+        //GET UPDATED USER PUCHASES INFO
+        [category addObject:@"Account Setting"];
+    }
+    
     [category addObject:@"Like us on Facebook"];
     [category addObject:@"Follow us on Twitter"];
-    [category addObject:@"Sign Out"];
     
-
+    //Checking if the user is valid or anonymus
+    if ([[PFUser currentUser] sessionToken]) {
+        [category addObject:@"Sign Out"];
+    } else {
+        [category addObject:@"Sign In"];
+    }
 }
 
 #pragma TableView Events
@@ -147,18 +157,29 @@
         
     }
     
-    
     if (indexPath.row == 2){
-        imgname = @"account_settings";
-        [cell setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"SettingcellBack"]]];
+        //Checking if the user is valid or anonymus
+        if ([[PFUser currentUser] sessionToken]) {
+            //account setting row clicked
+            imgname = @"account_settings";
+            [cell setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"SettingcellBack"]]];
+        } else {
+            [ self likeFacebook ];
+        }
+
+        
     }
     
-    
-    if (indexPath.row == 3)imgname = @"fb_Like";
-    if (indexPath.row == 4)imgname = @"twt_follow";
-
-
-    if (indexPath.row == 5)imgname = @"signout";
+    if ([[PFUser currentUser] sessionToken]) {
+        if (indexPath.row == 3)imgname = @"fb_Like";
+        if (indexPath.row == 4)imgname = @"twt_follow";
+        if (indexPath.row == 5)imgname = @"signout";
+    } else {
+        if (indexPath.row == 2)imgname = @"fb_Like";
+        if (indexPath.row == 3)imgname = @"twt_follow";
+        if (indexPath.row == 4)imgname = @"signin";
+    }
+   
     
     
     // Set cell Values
@@ -202,26 +223,49 @@
 
 - (void)tableView:(UITableView *)tView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
    
-    if(indexPath.row == 2) {
-        
-        accountUpdater = [[ProfileViewController alloc]initWithNibName:@"ProfileViewController" bundle:nil];
-        [self.navigationController pushViewController:accountUpdater animated:YES];
+    // Checking if the user is valid
+    if ([[PFUser currentUser] sessionToken]) {
+        if(indexPath.row == 2) {
+            
+            accountUpdater = [[ProfileViewController alloc]initWithNibName:@"ProfileViewController" bundle:nil];
+            [self.navigationController pushViewController:accountUpdater animated:YES];
+            
+        }else if(indexPath.row == 3){
+            
+            [ self likeFacebook ];
+            
+        }else if(indexPath.row == 4){
+            
+            [self likeTwitter];
+            
+        }else if(indexPath.row == 5){
+            
+            warningAlert = [[UIAlertView  alloc]initWithTitle:@"Are you sure?" message:@"" delegate:self cancelButtonTitle:@"Sign out" otherButtonTitles:@"Cancel",nil];
+            [warningAlert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:NO];
+            
+        }
+        [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
     
-    }else if(indexPath.row == 3){
-        
-        [ self likeFacebook ];
-        
-    }else if(indexPath.row == 4){
-        
-        [self likeTwitter];
-        
-    }else if(indexPath.row == 5){
-        
-        warningAlert = [[UIAlertView  alloc]initWithTitle:@"Are you sure?" message:@"" delegate:self cancelButtonTitle:@"Sign out" otherButtonTitles:@"Cancel",nil];
-        [warningAlert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:NO];
-        
+        // Otherwise the user is anonymous
+    } else {
+        if(indexPath.row == 2) {
+            
+            [ self likeFacebook ];
+            
+        }else if(indexPath.row == 3){
+            
+            [self likeTwitter];
+            
+        }else if(indexPath.row == 4){
+            
+            signInController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
+            [self.navigationController pushViewController:signInController animated:YES];            
+            
+        }
+        [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
     }
-    [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
+    
+    
     
 }
 
