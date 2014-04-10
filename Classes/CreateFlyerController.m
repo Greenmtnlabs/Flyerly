@@ -319,38 +319,52 @@ int selectedAddMoreLayerTab = -1;
     [shareviewcontroller.descriptionView resignFirstResponder];
     
     //Save OnBack
-    
-    if ([flyer isVideoFlyer]) {
-        
-        //Background Thread
-        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-            
-            //Here we Merge All Layers in Video File
-            [self videoMergeProcess];
-            
-        });
-        
-    } else {
-        
-        //Here we remove Borders from layer if user touch any layer
-        [self.flyimgView layerStoppedEditing:currentLayer];
-        
-        //Here we take Snap shot of Flyer and
-        //Flyer Add to Gallery if user allow to Access there photos
-        [flyer setUpdatedSnapshotWithImage:[self getFlyerSnapShot]];
-
-    }
-    
     // Here we Save Flyer Info
     [flyer saveFlyer];
     
-    if (![[flyer getFlyerURL] isEqualToString:@""]) {
+    //Set Recent Flyer
+    [flyer setRecentFlyer];
+    
+    
+    //Here we Manage Updated Flyer
+    if ([flyer isVideoFlyer]) {
+        
+        //Here Compare Current Flyer with history Flyer
+        if ([self.flyer isVideoMergeProcessRequired]) {
+            
+            panelWillOpen = NO;
+            
+            //Background Thread
+            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+                
+                //Here we Merge All Layers in Video File
+                [self videoMergeProcess];
+                
+            });
+        }
+        
+    } else {
+        
+        //Background Thread
+        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+
+            //Here we remove Borders from layer if user touch any layer
+            [self.flyimgView layerStoppedEditing:currentLayer];
+            
+            //Here we take Snap shot of Flyer and
+            //Flyer Add to Gallery if user allow to Access there photos
+            [flyer setUpdatedSnapshotWithImage:[self getFlyerSnapShot]];
+                
+        });
+        
+    }
+
+    //if (![[flyer getFlyerURL] isEqualToString:@""]) {
         
         // Update Recent Flyer List
-         if (![flyer isVideoFlyer]) {
-             [flyer setRecentFlyer];
-         }
-    }
+         //if (![flyer isVideoFlyer]) {
+         //}
+//    }
     [Flurry logEvent:@"Saved Flyer"];
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -2442,6 +2456,48 @@ int selectedAddMoreLayerTab = -1;
     return isPortrait;
 }
 
+
+/*
+ * Here we Merge Video
+ */
+-(void)videoMergeProcess {
+    
+    // CREATING PATH FOR FLYER OVERLAY VIDEO
+    NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
+    NSString *originalVideoPath = [NSString stringWithFormat:@"%@/Template/template.mov", currentpath];
+    
+    // URL of the movie.
+    NSURL *url = [NSURL fileURLWithPath:originalVideoPath];
+    
+    // Here we Update Overlay
+    UIImage *image = [self getFlyerSnapShot];
+    
+    // Crop the image based on aspect ratio. First get the movie size.
+    CGSize movieSize = self.player.naturalSize;
+    
+    // Now compute the aspect ratio
+    CGFloat aspectRatio = movieSize.width / movieSize.height;
+    
+    // Now get the image height we need to use.
+    CGFloat imageHeight = image.size.width / aspectRatio;
+    
+    // Now compute the y offset from where we crop
+    CGFloat y = (image.size.height - imageHeight) / 2.0f;
+    
+    // Get the new cropped image
+    image = [image imageCroppedToRect:CGRectMake( 0, y, image.size.width, imageHeight)];
+    
+    // Now scale to the movie size
+    UIGraphicsBeginImageContextWithOptions( movieSize, NO, 0.0 );
+    [image drawInRect:CGRectMake(0, 0, movieSize.width, movieSize.height)];
+    image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    // HERE WE ARE MERGE OVER CREATED VIDEO AND USER SELECTED OR MAKE
+    [self mergeVideoWithOverlay:url image:image];
+}
+
+
 /*
  * HERE WE MERGE TWO VIDEOS FOR SHARE VIDEO
  */
@@ -2559,20 +2615,22 @@ int selectedAddMoreLayerTab = -1;
                 [self.flyer setVideoCover:videoCover];
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"updateCover" object:nil];
+                NSLog(@"Video Merge Process Completed");
                 
-                // Background Thread
-                // Remove for Speed
-                // dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-                    
-                    // Here we Add Video In Flyerly Album
-                    [self.flyer addToGallery:nil];
-                    NSLog(@"Video Merge Process Completed");
-                    
-                    //Here we Open Share Panel for Share Flyer
-                    [self openPanel];
+                if (panelWillOpen) {
+                
+                    // Main Thread
+                    dispatch_async( dispatch_get_main_queue(), ^{
 
-                    
-               // });
+                        //Here we Open Share Panel for Share Flyer
+                        [self openPanel];
+                        
+                    });
+                }
+                
+                // Here we Add Video In Flyerly Album
+                [self.flyer addToGallery:nil];
+                
             }
         };
     }]; 
@@ -2905,45 +2963,6 @@ int selectedAddMoreLayerTab = -1;
 }
 
 
-/*
- * Here we Merge Video
- */
--(void)videoMergeProcess {
-    
-    // CREATING PATH FOR FLYER OVERLAY VIDEO
-    NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
-    NSString *originalVideoPath = [NSString stringWithFormat:@"%@/Template/template.mov", currentpath];
-
-    // URL of the movie.
-    NSURL *url = [NSURL fileURLWithPath:originalVideoPath];
-    
-    // Here we Update Overlay
-    UIImage *image = [self getFlyerSnapShot];
-    
-    // Crop the image based on aspect ratio. First get the movie size.
-    CGSize movieSize = self.player.naturalSize;
-    
-    // Now compute the aspect ratio
-    CGFloat aspectRatio = movieSize.width / movieSize.height;
-    
-    // Now get the image height we need to use.
-    CGFloat imageHeight = image.size.width / aspectRatio;
-    
-    // Now compute the y offset from where we crop
-    CGFloat y = (image.size.height - imageHeight) / 2.0f;
-    
-    // Get the new cropped image
-    image = [image imageCroppedToRect:CGRectMake( 0, y, image.size.width, imageHeight)];
-    
-    // Now scale to the movie size
-    UIGraphicsBeginImageContextWithOptions( movieSize, NO, 0.0 );
-    [image drawInRect:CGRectMake(0, 0, movieSize.width, movieSize.height)];
-    image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    // HERE WE ARE MERGE OVER CREATED VIDEO AND USER SELECTED OR MAKE
-    [self mergeVideoWithOverlay:url image:image];
-}
 
 #pragma mark  Share Flyer
 
@@ -2965,6 +2984,9 @@ int selectedAddMoreLayerTab = -1;
         
         //Here Compare Current Flyer with history Flyer
         if ([self.flyer isVideoMergeProcessRequired]) {
+            
+            panelWillOpen = YES;
+
             //Background Thread
             dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
                 
@@ -2979,20 +3001,25 @@ int selectedAddMoreLayerTab = -1;
         }
     }else {
         
-        //Here we remove Borders from layer if user touch any layer
-        [self.flyimgView layerStoppedEditing:currentLayer];
-
-        //Here we take Snap shot of Flyer and
-        //Flyer Add to Gallery if user allow to Access there photos
-        [flyer setUpdatedSnapshotWithImage:[self getFlyerSnapShot]];
+        //Background Thread
+        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+            
+            //Here we remove Borders from layer if user touch any layer
+            [self.flyimgView layerStoppedEditing:currentLayer];
+            
+            //Here we take Snap shot of Flyer and
+            //Flyer Add to Gallery if user allow to Access there photos
+            [flyer setUpdatedSnapshotWithImage:[self getFlyerSnapShot]];
+            
+            dispatch_async( dispatch_get_main_queue(), ^{
+                //Here we Open Share Panel for Share Flyer
+                [self openPanel];
+            });
+            
+        });
         
-        
-        //Here we Open Share Panel for Share Flyer
-        [self openPanel];
     }
     
-
-
 }
 
 /*

@@ -69,6 +69,7 @@
     UIImage *videolastImage;
     BOOL *isPlaying;
     BOOL *isVideoReadyForShare;
+    BOOL *panelWillOpen;
     float videoDuration;
     
 }

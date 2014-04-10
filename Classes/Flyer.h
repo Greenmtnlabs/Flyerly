@@ -88,6 +88,8 @@
 -(void)setFlyerURL :(NSString *)URL;
 -(void)setVideoAsssetURL :(NSString *)URL;
 -(void)setYoutubeLink :(NSString *)URL;
+-(void)setVideoMergeAddress :(NSString *)address;
+
 
 -(void)setShareType :(NSString *)type;
 
@@ -126,6 +128,8 @@
 -(NSString *)getFlyerUpdateDate;
 -(NSString *)getVideoAssetURL;
 -(NSString *)getYoutubeLink;
+-(NSString *)getVideoMergeAddress;
+
 -(UIImage *)getImageForVideo;
 
 

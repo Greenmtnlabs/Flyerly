@@ -373,10 +373,14 @@ NSString * const TEXTHEIGHT = @"280.000000";
  */
 -(BOOL)isVideoMergeProcessRequired {
     
+    
+    NSString *lastFolderName = [self getVideoMergeAddress];
+    
     //Getting Current Flyer folder Path
     NSString* currentSourcepath  =   [[NSFileManager defaultManager] currentDirectoryPath];
     NSString* historyDestinationpath  =  [NSString stringWithFormat:@"%@/History",currentSourcepath];
     
+    //Gettin List From Path
     NSArray *fileList = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:historyDestinationpath error:nil];
     
     
@@ -386,17 +390,23 @@ NSString * const TEXTHEIGHT = @"280.000000";
         //HISTORY AVAILABLE
         NSArray *sortedFlyersList = [fileList sortedArrayUsingFunction:compareDesc context:NULL];
         
-        NSString* historyLastFilepath = [NSString stringWithFormat:@"%@/%@",historyDestinationpath,[sortedFlyersList objectAtIndex:0]];
-        
-        // Here we Compare Both Files One Current Flyer Folder and Second Last flyer Folder from History if
-        // its Mached  with each other then we are not create Directory
-        // in history Directory other wise we make a one copy.
-        if ([self compareFilesForMakeHistory:currentSourcepath LastHistoryPath:historyLastFilepath]) {
+        // Here we handle Flyer First Time Video Merge
+        if ([lastFolderName isEqualToString:@""]) {
             
+            [self setVideoMergeAddress:[sortedFlyersList objectAtIndex:0]];
             return YES;
         }
+        
+        // Here we handle Flyer have any Change then Video Merge
+        if ([lastFolderName isEqualToString:[sortedFlyersList objectAtIndex:0]]) {
+            return NO;
+        }else {
+            [self setVideoMergeAddress:[sortedFlyersList objectAtIndex:0]];
+        }
+        
+        
     }
-    return NO;
+    return YES;
 }
 /*
  * Here we Copy Current Flyer folder with all related file
@@ -895,12 +905,16 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     
     //Here we Rename the Directory Name
     NSString *newPath = [[currentpath stringByDeletingLastPathComponent] stringByAppendingPathComponent:replaceDirName];
+    
     NSError *error = nil;
     [[NSFileManager defaultManager] moveItemAtPath:currentpath toPath:newPath error:&error];
     
     if (error) {
-        NSLog(@"%@",error.localizedDescription);
+        NSLog(@"Recent flyer :%@",error.localizedDescription);
     }
+
+    //set Current Path of File Manager
+    [[NSFileManager defaultManager] changeCurrentDirectoryPath:newPath];
 
 
 }
@@ -1585,6 +1599,20 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     
 }
 
+/*
+ * HERE WE GET History Folder Name for Video Merge Process
+ */
+-(NSString *)getVideoMergeAddress {
+    
+    if (textFileArray.count > 8) {
+        return [textFileArray objectAtIndex:8];
+    } else {
+        [textFileArray addObject:@""];
+        [textFileArray writeToFile:textFile atomically:YES];
+        return @"";
+    }
+
+}
 
 #pragma mark  Flyer Text File SET
 
@@ -1700,6 +1728,24 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
         }else {
             [textFileArray addObject:@""];
             [self setYoutubeLink:URL];
+        }
+        //Here we write the Array of Text files .txt
+        [textFileArray writeToFile:textFile atomically:YES];
+    }
+}
+
+/*
+ * Here we Set Flyer History Folder Name for Video Merge Process
+ */
+-(void)setVideoMergeAddress :(NSString *)address {
+    
+    if (address != nil) {
+        if (textFileArray.count > 8) {
+            
+            [textFileArray replaceObjectAtIndex:8 withObject:address];
+        }else {
+            [textFileArray addObject:@""];
+            [self setVideoMergeAddress:address];
         }
         //Here we write the Array of Text files .txt
         [textFileArray writeToFile:textFile atomically:YES];
