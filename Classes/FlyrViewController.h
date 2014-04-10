@@ -28,7 +28,6 @@
     BOOL cancelRequest;
 
     Flyer *flyer;
-    NSMutableArray *flyerPaths;
     NSMutableArray *searchFlyerPaths;
     NSArray *requestedProducts;
     RMStoreKeychainPersistence *_persistence;
@@ -39,7 +38,7 @@
 
 @property(nonatomic,strong) IBOutlet UITableView *tView;
 @property(nonatomic,strong) IBOutlet UITextField *searchTextField;
-
+@property(nonatomic,strong)NSMutableArray *flyerPaths;
 
 
 -(void)goBack;
