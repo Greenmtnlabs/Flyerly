@@ -138,6 +138,7 @@
 @property (nonatomic,strong) Flyer *flyer;
 @property(strong,nonatomic) NSString *currentLayer;
 @property(strong,nonatomic) NSMutableDictionary *layersDic;
+@property (nonatomic, copy) void (^onFlyerBack)(NSString *);
 
 
 -(void)loadCustomPhotoLibrary :(NSString *)videoAllow;

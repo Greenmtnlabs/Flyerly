@@ -92,6 +92,13 @@ NSString * const TEXTHEIGHT = @"280.000000";
  */
 -(void)setUpdatedSnapshotWithImage :(UIImage *)snapShot {
     
+    //Getting Current Path
+    NSString* currentPath  =   [[NSFileManager defaultManager] currentDirectoryPath];
+    
+    //set Flyer Image for Future Update
+    flyerImageFile = [currentPath stringByAppendingString:[NSString stringWithFormat:@"/flyer.%@",IMAGETYPE]];
+
+    
     //Convert Imgae into Data
     NSData *snapShotData = UIImagePNGRepresentation(snapShot);
     
@@ -147,6 +154,12 @@ NSString * const TEXTHEIGHT = @"280.000000";
  * Here we Update Image for Video Overlay Image
  */
 -(void)setVideoCover :(UIImage *)snapShot {
+    
+    NSString* currentPath  =   [[NSFileManager defaultManager] currentDirectoryPath];
+    
+    //set Flyer Image for Future Update
+    flyerImageFile = [currentPath stringByAppendingString:[NSString stringWithFormat:@"/flyer.%@",IMAGETYPE]];
+
 
     NSData *snapShotData = UIImagePNGRepresentation(snapShot);
     [snapShotData writeToFile:flyerImageFile atomically:YES];

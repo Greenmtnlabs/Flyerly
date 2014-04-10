@@ -17,7 +17,7 @@ fontBorderTabButton,addMoreIconTabButton,addMorePhotoTabButton,addMoreSymbolTabB
 @synthesize contextView,libraryContextView,libFlyer,backgroundTabButton,addMoreFontTabButton;
 @synthesize libText,libBackground,libPhoto,libEmpty,backtemplates,cameraTakePhoto,cameraRoll,flyerBorder;
 @synthesize flyimgView,currentLayer,layersDic,flyer,player,playerView,playerToolBar,playButton,playerSlider;
-@synthesize durationLabel,durationChange;
+@synthesize durationLabel,durationChange,onFlyerBack;
 int selectedAddMoreLayerTab = -1;
 
 
@@ -315,6 +315,7 @@ int selectedAddMoreLayerTab = -1;
     // Remove Border if Any Layer Selected
     if (![currentLayer isEqualToString:@""]) [self.flyimgView layerStoppedEditing:currentLayer];
     
+    //Close Keyboard if Open
     [shareviewcontroller.titleView resignFirstResponder];
     [shareviewcontroller.descriptionView resignFirstResponder];
     
@@ -322,9 +323,8 @@ int selectedAddMoreLayerTab = -1;
     // Here we Save Flyer Info
     [flyer saveFlyer];
     
-    //Set Recent Flyer
-    [flyer setRecentFlyer];
-    
+    //Here we Create One History BackUp for Future Undo Request
+    [flyer addToHistory];
     
     //Here we Manage Updated Flyer
     if ([flyer isVideoFlyer]) {
@@ -341,6 +341,10 @@ int selectedAddMoreLayerTab = -1;
                 [self videoMergeProcess];
                 
             });
+        }else {
+            
+            //Here we call Block for update Main UI
+            self.onFlyerBack(@"");
         }
         
     } else {
@@ -354,17 +358,20 @@ int selectedAddMoreLayerTab = -1;
             //Here we take Snap shot of Flyer and
             //Flyer Add to Gallery if user allow to Access there photos
             [flyer setUpdatedSnapshotWithImage:[self getFlyerSnapShot]];
+            
+            
+            // Main Thread
+            dispatch_async( dispatch_get_main_queue(), ^{
                 
+                //Here we call Block for update Main UI
+                self.onFlyerBack(@"");
+                
+            });
+            
         });
         
     }
 
-    //if (![[flyer getFlyerURL] isEqualToString:@""]) {
-        
-        // Update Recent Flyer List
-         //if (![flyer isVideoFlyer]) {
-         //}
-//    }
     [Flurry logEvent:@"Saved Flyer"];
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -2614,7 +2621,6 @@ int selectedAddMoreLayerTab = -1;
                 UIImage *videoCover = [self.flyer getImageForVideo];
                 [self.flyer setVideoCover:videoCover];
                 
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"updateCover" object:nil];
                 NSLog(@"Video Merge Process Completed");
                 
                 if (panelWillOpen) {
@@ -2626,6 +2632,16 @@ int selectedAddMoreLayerTab = -1;
                         [self openPanel];
                         
                     });
+                }else {
+                
+                    // Main Thread
+                    dispatch_async( dispatch_get_main_queue(), ^{
+                        
+                        //Here we Open Share Panel for Share Flyer
+                        self.onFlyerBack(@"");
+                        
+                    });
+
                 }
                 
                 // Here we Add Video In Flyerly Album

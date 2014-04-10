@@ -10,14 +10,18 @@
                 <outlet property="createFlyrButton" destination="23" id="51"/>
                 <outlet property="createFlyrLabel" destination="10" id="47"/>
                 <outlet property="firstFlyer" destination="14" id="50"/>
+                <outlet property="firstFlyerButton" destination="ld5-eK-vpW" id="Pdy-eB-ftz"/>
                 <outlet property="fourthFlyer" destination="12" id="38"/>
+                <outlet property="fourthFlyerButton" destination="HU8-3B-hmJ" id="W2E-DD-laU"/>
                 <outlet property="inviteFriendButton" destination="25" id="53"/>
                 <outlet property="inviteFriendLabel" destination="5" id="49"/>
                 <outlet property="savedFlyrButton" destination="24" id="52"/>
                 <outlet property="savedFlyrLabel" destination="9" id="48"/>
                 <outlet property="secondFlyer" destination="13" id="37"/>
+                <outlet property="secondFlyerButton" destination="nTT-jT-5cZ" id="cVq-q0-yRg"/>
                 <outlet property="setBotton" destination="16" id="78"/>
                 <outlet property="thirdFlyer" destination="11" id="39"/>
+                <outlet property="thirdFlyerButton" destination="BIU-DI-wID" id="4kH-QI-XHk"/>
                 <outlet property="view" destination="3" id="43"/>
             </connections>
         </placeholder>

@@ -26,7 +26,6 @@
     FlyerlySingleton *globle;
     IBOutlet UIButton *setBotton;
         Flyer *flyer;
-
 }
 
 @property(nonatomic,strong) FlyrViewController *tpController;
@@ -45,7 +44,20 @@
 @property (nonatomic, strong) IBOutlet UIImageView *thirdFlyer;
 @property (nonatomic, strong) IBOutlet UIImageView *fourthFlyer;
 
+@property (nonatomic, strong) IBOutlet UIButton *firstFlyerButton;
+@property (nonatomic, strong) IBOutlet UIButton *secondFlyerButton;
+@property (nonatomic, strong) IBOutlet UIButton *thirdFlyerButton;
+@property (nonatomic, strong) IBOutlet UIButton *fourthFlyerButton;
+
+
 @property (nonatomic, strong) NSMutableArray *recentFlyers;
+@property (nonatomic, assign) BOOL showIndicators;
+@property (nonatomic, strong)UIActivityIndicatorView *uiBusy1;
+@property (nonatomic, strong)UIActivityIndicatorView *uiBusy2;
+@property (nonatomic, strong)UIActivityIndicatorView *uiBusy3;
+@property (nonatomic, strong)UIActivityIndicatorView *uiBusy4;
+
+
 
 -(IBAction)doNew:(id)sender;
 -(IBAction)doOpen:(id)sender;
