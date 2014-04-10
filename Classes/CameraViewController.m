@@ -240,7 +240,6 @@
         
         //Action for Video Mode
         [shoot setSelected:YES];
-        [cameraViewChild addAudioDevice:nil];
         [self.cameraView startStopRecording:nil];
         [self startRecording:sender];
     }

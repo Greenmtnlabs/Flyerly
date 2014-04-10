@@ -10,6 +10,8 @@
 #import <AVFoundation/AVFoundation.h>
 
 @interface SubNBUCamera : NBUCameraView {
+    
+    AVCaptureDeviceInput *audioInput;
 }
-- (IBAction)addAudioDevice:(id)sender;
+
 @end

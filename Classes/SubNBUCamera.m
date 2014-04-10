@@ -13,7 +13,9 @@
 /**
  * We override the recording to allow us to add support for audio.
  */
-- (void)addAudioDevice:(id)sender {
+- (IBAction)startStopRecording:(id)sender {
+    
+ 
 
 #ifndef __i386__
     // If we are going to start recording.
@@ -25,14 +27,20 @@
         
         // Get the audio device
         AVCaptureDevice *audioCaptureDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeAudio];
-        AVCaptureDeviceInput *audioInput = [AVCaptureDeviceInput deviceInputWithDevice:audioCaptureDevice error:&error];
+        audioInput = [AVCaptureDeviceInput deviceInputWithDevice:audioCaptureDevice error:&error];
         
         // Make sure we can add audio input to this session. If we can do it!
         if ([_captureSession canAddInput:audioInput]) {
             [_captureSession addInput:audioInput];
         }
+    }else {
+    
+         AVCaptureSession *_captureSession = [self valueForKey:@"_captureSession"];
+        [_captureSession removeInput:audioInput];
     }
 #endif
+
+    [super startStopRecording:nil];
 
 }
 
