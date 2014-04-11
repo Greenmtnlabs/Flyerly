@@ -926,10 +926,6 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
         NSLog(@"Recent flyer :%@",error.localizedDescription);
     }
 
-    //set Current Path of File Manager
-    [[NSFileManager defaultManager] changeCurrentDirectoryPath:newPath];
-
-
 }
 
 

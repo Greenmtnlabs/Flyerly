@@ -2472,7 +2472,7 @@ int selectedAddMoreLayerTab = -1;
     // CREATING PATH FOR FLYER OVERLAY VIDEO
     NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
     NSString *originalVideoPath = [NSString stringWithFormat:@"%@/Template/template.mov", currentpath];
-    
+
     // URL of the movie.
     NSURL *url = [NSURL fileURLWithPath:originalVideoPath];
     
@@ -2509,6 +2509,7 @@ int selectedAddMoreLayerTab = -1;
  * HERE WE MERGE TWO VIDEOS FOR SHARE VIDEO
  */
 -(void)mergeVideoWithOverlay:(NSURL *)firstURL image:(UIImage *)image {
+    
     
     // Get a pointer to the asset
     AVURLAsset* firstAsset = [AVURLAsset URLAssetWithURL:firstURL options:nil];

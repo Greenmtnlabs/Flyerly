@@ -18,7 +18,7 @@
 #import "ParentViewController.h"
 
 
-@class SaveFlyerCell,Flyer;
+@class SaveFlyerCell,Flyer,CreateFlyerController;
 @interface FlyrViewController : ParentViewController <UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,UIActionSheetDelegate,RMStoreObserver>{
 
     CreateFlyerController *createFlyer;

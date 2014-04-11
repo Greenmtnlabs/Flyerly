@@ -30,7 +30,7 @@
 #import <MediaPlayer/MediaPlayer.h>
 
 
-@class FlyerlySingleton,CameraViewController,Flyer,FlyerImageView;
+@class FlyerlySingleton,CameraViewController,Flyer,FlyerImageView,ShareViewController;
 @interface CreateFlyerController :ParentViewController<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, FlyerImageViewDelegate,UIGestureRecognizerDelegate >
 {
    
@@ -165,6 +165,7 @@
 -(void)renderFlyer;
 -(void)undoFlyer;
 -(void)setUndoStatus;
+-(void)videoMergeProcess;
 
 -(UIImage *)getFlyerSnapShot;
 
