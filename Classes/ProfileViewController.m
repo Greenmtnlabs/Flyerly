@@ -85,9 +85,13 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
         
         if([self Uservalidate]){
             PFUser *user = [PFUser currentUser];
-            user[@"contact"] = phno.text;
-            user[@"name"] = name.text;
-            user[@"email"] = email.text;
+            if (phno.text != nil)
+                user[@"contact"] = phno.text;
+            if (name.text != nil)
+                user[@"name"] = name.text;
+            if (name.text != nil)
+                user[@"email"] = email.text;
+            
             [user saveInBackground];
             [self showAlert:@"Profile Updated Successfully" message:@""];
         }
