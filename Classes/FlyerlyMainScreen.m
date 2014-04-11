@@ -204,8 +204,15 @@
 
     [inviteFriendLabel setText:NSLocalizedString(@"invite_friends", nil)];
     
-    //GET UPDATED USER PUCHASES INFO
-    [self getUserPurcahses];
+    //Checking if the user is valid or anonymus
+    if ([[PFUser currentUser] sessionToken]) {
+        //GET UPDATED USER PUCHASES INFO
+        [self getUserPurcahses];
+    } else {
+        NSLog(@"Anonymous user is NOT authenticated.");
+    }
+    
+    
     
     //GET FACEBOOK APP LIKE STATUS
     //Tenporary Commit that part

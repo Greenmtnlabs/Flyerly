@@ -12,6 +12,8 @@
 #import "Common.h"
 #import "HelpController.h"
 #import "ProfileViewController.h"
+#import "SigninController.h"
+#import "RegisterController.h"
 #import "InputViewController.h"
 #import "FlyerlySingleton.h"
 #import "MainSettingCell.h"
@@ -27,6 +29,8 @@
     NSMutableArray *groupCtg;
     UIAlertView *warningAlert;
     ProfileViewController *accountUpdater;
+    SigninController *signInController;
+    RegisterController *registerController;
     FlyerlySingleton *globle;
 
 }
