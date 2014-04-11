@@ -20,7 +20,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 
 @synthesize window;
 @synthesize navigationController;
-@synthesize  svController,lauchController,accountController;
+@synthesize  lauchController,accountController;
 @synthesize sharingProgressParentView,_persistence;
 
 
@@ -60,10 +60,24 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 	[NSTimer scheduledTimerWithTimeInterval:TIME target:self selector:@selector(next) userInfo:nil repeats:YES];
 }
 
+
+- (void)applicationWillResignActive:(UIApplication *)application {
+
+    NSLog(@"Not Active");
+    if ([[self.navigationController topViewController] isKindOfClass:[CreateFlyerController class]]) {
+        
+        //Here we Save Data for Future Error Handling
+          NSLog(@"Yes it is");
+    }
+    
+}
+
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     [SHKFacebook handleDidBecomeActive];
 }
+
+
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {

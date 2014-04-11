@@ -28,7 +28,6 @@
 
 extern NSString *FacebookDidLoginNotification;
 
-@class SaveFlyerController;
 @class FlyerlyMainScreen;
 @class AfterUpdateController;
 @class LaunchController;
@@ -40,7 +39,6 @@ extern NSString *FacebookDidLoginNotification;
 @property (nonatomic, strong) IBOutlet UINavigationController *navigationController;
 
 
-@property (nonatomic, strong) SaveFlyerController *svController;
 @property (nonatomic, strong) FlyerlyMainScreen *lauchController;
 @property (nonatomic, strong) LaunchController *accountController;
 @property (nonatomic, strong) UIView *sharingProgressParentView;

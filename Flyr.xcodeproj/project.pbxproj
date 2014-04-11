@@ -793,8 +793,6 @@
 		65F41C8B173BDC03000BA8CB /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F41C8A173BDC02000BA8CB /* libxml2.2.dylib */; };
 		E8A7347D1092CFF300661AAD /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8A7347B1092CFF300661AAD /* ShareViewController.m */; };
 		E8A7347E1092CFF300661AAD /* ShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E8A7347C1092CFF300661AAD /* ShareViewController.xib */; };
-		E8C7C36910976BFC0064935A /* SaveFlyerController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8C7C36710976BFC0064935A /* SaveFlyerController.m */; };
-		E8C7C36A10976BFC0064935A /* SaveFlyerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E8C7C36810976BFC0064935A /* SaveFlyerController.xib */; };
 		E8E424ACA7CB4913890F4F3B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26D73E02307543D994C6C8BE /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -1690,9 +1688,6 @@
 		E8A7347A1092CFF300661AAD /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
 		E8A7347B1092CFF300661AAD /* ShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
 		E8A7347C1092CFF300661AAD /* ShareViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShareViewController.xib; sourceTree = "<group>"; };
-		E8C7C36610976BFC0064935A /* SaveFlyerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveFlyerController.h; sourceTree = "<group>"; };
-		E8C7C36710976BFC0064935A /* SaveFlyerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveFlyerController.m; sourceTree = "<group>"; };
-		E8C7C36810976BFC0064935A /* SaveFlyerController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SaveFlyerController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1760,9 +1755,6 @@
 				20F359761888D69B001376B6 /* HelpScreen */,
 				20F359791888DA9C001376B6 /* Settings */,
 				20F3597D1888DCE1001376B6 /* UserProfile */,
-				E8C7C36610976BFC0064935A /* SaveFlyerController.h */,
-				E8C7C36710976BFC0064935A /* SaveFlyerController.m */,
-				E8C7C36810976BFC0064935A /* SaveFlyerController.xib */,
 			);
 			name = FlyerlyClasses;
 			path = Classes;
@@ -3126,7 +3118,6 @@
 				E8A7347E1092CFF300661AAD /* ShareViewController.xib in Resources */,
 				0DFC5320109576AB00B18478 /* MainWindow.xib in Resources */,
 				0DFC5321109576AB00B18478 /* CreateFlyerController.xib in Resources */,
-				E8C7C36A10976BFC0064935A /* SaveFlyerController.xib in Resources */,
 				200773B91887E39E00448346 /* text_edit.png in Resources */,
 				0DE1F282109883A20012819A /* twit.png in Resources */,
 				0DE1F283109883A20012819A /* twit1.png in Resources */,
@@ -3875,7 +3866,6 @@
 				202C4803187D6E4B00FE0975 /* BitlyURLShortener.m in Sources */,
 				2002C89618888CD4005B18C9 /* SaveFlyerCell.m in Sources */,
 				20ECF9A918D6E1AD0035E3DE /* UIPlaceHolderTextView.m in Sources */,
-				E8C7C36910976BFC0064935A /* SaveFlyerController.m in Sources */,
 				2036661C188DB67300C71EAA /* FlyerUser.m in Sources */,
 				202C4801187D6E4B00FE0975 /* BitlyTwitterOAuthManager.m in Sources */,
 				49B8897D1886524D003766AD /* LoadingView.m in Sources */,
