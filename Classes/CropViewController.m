@@ -65,6 +65,8 @@
     // Set the grid size.
     self.cropGuideSize = desiredImageSize;
     
+//    [NBUFilterProvider initialize];
+    
     // Configure and set all available filters
     self.filters = [NBUFilterProvider availableFilters];
     
@@ -74,6 +76,7 @@
     
     // Use the image from filters for cropping.
     self.filterView.image = self.image;
+ 
     
     // Make sure the filters are visible. Get the current height based on
     // navigation bar status and device height.
