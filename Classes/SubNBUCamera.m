@@ -15,8 +15,10 @@
  */
 - (IBAction)startStopRecording:(id)sender {
     
+    [super startStopRecording:nil];
+    
 #ifndef __i386__
-   
+/*
     // If we are going to start recording.
     if ( !self.recording ) {
 
@@ -35,11 +37,6 @@
         [super startStopRecording:nil];
     }else {
 
-
-        /*
-        AVCaptureSession *_captureSession = [self valueForKey:@"_captureSession"];
-        [_captureSession removeInput:audioInput];
-        */
         
         AVCaptureMovieFileOutput * _captureMovieOutput =[self valueForKey:@"_captureMovieOutput"];
         [_captureMovieOutput stopRecording];
@@ -49,7 +46,7 @@
         [audioSession setActive:NO error: &error];
         NSLog(@"error: %@", error);
 
-    }
+    }*/
 #endif
 
 

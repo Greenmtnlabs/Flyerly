@@ -347,15 +347,25 @@
 
     // HERE WE GET USER PURCHASES DETAIL
     if(![[NSUserDefaults standardUserDefaults] objectForKey:@"InAppPurchases"]){
+        
+        
+        //Getting Current User
         PFUser *user = [PFUser currentUser];
+        
+        //Create Query for get User Purchases
         PFQuery *query = [PFQuery queryWithClassName:@"InApp"];
+        
+        //define criteria
         [query whereKey:@"user" equalTo:user];
         
+        //run query on Parse
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             
             if (!error) {
                 
                 if (objects.count >= 1) {
+                    
+                    //Getting Required Data
                     NSMutableDictionary  *oldPurchases = [[objects objectAtIndex:0] valueForKey:@"json"];
                     
                     //its for remember key of InApp already copy to Device
@@ -364,6 +374,7 @@
                 }
                 // The find succeeded. The first 100 objects are available in objects
             } else {
+                
                 // Log details of the failure
                 NSLog(@"Error: %@ %@", error, [error userInfo]);
             }
