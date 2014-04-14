@@ -83,9 +83,23 @@
             view = lble;
         } else {
             
-            CustomLabel *lble = [layers objectForKey:uid];
-            [self configureLabel:lble labelDictionary:layDic ];
-            [layers setValue:lble forKey:uid];
+            
+            id lastControl = [layers objectForKey:uid];
+            
+            if ([lastControl isKindOfClass:[CustomLabel class]]) {
+                
+                //here we Update Label
+                CustomLabel *lble = [layers objectForKey:uid];
+                [self configureLabel:lble labelDictionary:layDic ];
+                [layers setValue:lble forKey:uid];
+                
+            }else {
+            
+                //here we Update ImageView
+                UIImageView *img = [layers objectForKey:uid];
+                [self configureImageView:img ImageViewDictionary:layDic];
+                [layers setValue:img forKey:uid];
+            }
         }
     } else {
 
@@ -139,7 +153,7 @@
               
     
     //Set Image
-    if ( ![[detail valueForKey:@"image"] isEqualToString:@""] ) {
+    if ( ![[detail valueForKey:@"image"] isEqualToString:@""] && [detail valueForKey:@"image"] != nil ) {
         NSData *imageData = [[NSData alloc ]initWithContentsOfMappedFile:[detail valueForKey:@"image"]];
         UIImage *currentImage = [UIImage imageWithData:imageData];
         [imgView setImage:currentImage];

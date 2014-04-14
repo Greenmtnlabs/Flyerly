@@ -598,7 +598,7 @@
         //Getting Current User
         PFUser *user = [PFUser currentUser];
         
-        //Return on User nil
+        //Return on User not exists
         if (user == nil)return;
         
         //Create query for get user purchases
