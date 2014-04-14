@@ -153,10 +153,13 @@
               
     
     //Set Image
-    if ( ![[detail valueForKey:@"image"] isEqualToString:@""] && [detail valueForKey:@"image"] != nil ) {
-        NSData *imageData = [[NSData alloc ]initWithContentsOfMappedFile:[detail valueForKey:@"image"]];
-        UIImage *currentImage = [UIImage imageWithData:imageData];
-        [imgView setImage:currentImage];
+    if ([detail objectForKey:@"image"] != nil) {
+        
+        if ( ![[detail valueForKey:@"image"] isEqualToString:@""]) {
+            NSData *imageData = [[NSData alloc ]initWithContentsOfMappedFile:[detail valueForKey:@"image"]];
+            UIImage *currentImage = [UIImage imageWithData:imageData];
+            [imgView setImage:currentImage];
+        }
     }
 
 }
