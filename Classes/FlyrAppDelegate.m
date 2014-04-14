@@ -24,41 +24,8 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 @synthesize sharingProgressParentView,_persistence;
 
 
-#pragma mark -
 #pragma mark Application lifecycle
 
-- (void)applicationDidFinishLaunching:(UIApplication *)application {
-	
-    NSString *greeted = [[NSUserDefaults standardUserDefaults] stringForKey:@"greeted"];
-    
-    if(!greeted){
-        NSLog(@"Welcome to the world of Flyerly");
-        [[NSUserDefaults standardUserDefaults] setObject:@"greeted" forKey:@"greeted"];
-
-        lauchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil];
-
-        [navigationController pushViewController:lauchController animated:NO];
-        [window addSubview:[navigationController view]];
-
-        AfterUpdateController *afterUpdateView = [[AfterUpdateController alloc]initWithNibName:@"AfterUpdateController" bundle:nil];
-        [navigationController pushViewController:afterUpdateView animated:NO];
-        
-    } else {
-        
-        NSLog(@"User already Greeted !");
-
-        lauchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil];
-        accountController = [[LaunchController alloc]initWithNibName:@"LaunchController" bundle:nil];
-        
-        [navigationController pushViewController:lauchController animated:NO];
-        [navigationController pushViewController:accountController animated:NO];
-        [window addSubview:[navigationController view]];
-    }
-
-	[window makeKeyAndVisible];
-	
-	[NSTimer scheduledTimerWithTimeInterval:TIME target:self selector:@selector(next) userInfo:nil repeats:YES];
-}
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
