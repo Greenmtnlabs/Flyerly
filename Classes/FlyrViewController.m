@@ -10,7 +10,7 @@
 
 
 @implementation FlyrViewController
-@synthesize tView,searchTextField;
+@synthesize tView,searchTextField,signInSignUpAlert;
 
 
 #pragma mark  View Methods
@@ -509,23 +509,42 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     
     
-    //if not cancel and Restore button presses
-    if(buttonIndex != 2 && buttonIndex != 3) {
+        //if not cancel and Restore button presses
+        if(buttonIndex != 2 && buttonIndex != 3) {
+            
+            //Checking if the user is valid or anonymus
+            if ([[PFUser currentUser] sessionToken]) {
+                //This line pop up login screen if user not exist
+                [[RMStore defaultStore] addStoreObserver:self];
+                
+                //Getting Selected Product
+                SKProduct *product = [requestedProducts objectAtIndex:buttonIndex];
+                
+                [self purchaseProductID:product.productIdentifier];
+
+            } else {
+                // Alert when user logged in as anonymous
+                signInSignUpAlert = [[UIAlertView alloc] initWithTitle:@"Sign In"
+                                                               message:@"This feature requires you to sign in first. Do you want to sign in now?"
+                                                              delegate:self
+                                                     cancelButtonTitle:nil
+                                                     otherButtonTitles:nil];
+                [signInSignUpAlert addButtonWithTitle:@"Sign In"];
+                [signInSignUpAlert addButtonWithTitle: @"Later"];
+                
+                [signInSignUpAlert show];
+            }
+            
+        }
         
-        //This line pop up login screen if user not exist
-        [[RMStore defaultStore] addStoreObserver:self];
-        
-        //Getting Selected Product
-        SKProduct *product = [requestedProducts objectAtIndex:buttonIndex];
-        
-        [self purchaseProductID:product.productIdentifier];
-        
-    }
+        //For Restore Purchase
+        if(buttonIndex == 2 ) {
+            [self restorePurchase];
+            
+        }
     
-    //For Restore Purchase
-    if(buttonIndex == 2 ) {
-        [self restorePurchase];
-    }
+    
+    
     
     
 }
@@ -578,6 +597,27 @@
 }
 
 - (void)storeRestoreTransactionsFinished:(NSNotification*)notification {}
+
+// Buttons event handler,when user click on invite button in anonymous mood
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+    
+    if(alertView == signInSignUpAlert && [title isEqualToString:@"Sign In"])
+    {
+        NSLog(@"Sign In was selected.");
+        signInController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
+        [self.navigationController pushViewController:signInController animated:YES];
+    
+    } else if(alertView == signInSignUpAlert && [title isEqualToString:@"Sign Up"])
+    {
+        NSLog(@"Sign Up was selected.");
+        signUpController = [[RegisterController alloc]initWithNibName:@"RegisterController" bundle:nil];
+        [self.navigationController pushViewController:signUpController
+                                             animated:YES];
+    }
+    
+}
 
 
 #pragma mark RMStoreObserver

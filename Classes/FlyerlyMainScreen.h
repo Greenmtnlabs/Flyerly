@@ -13,6 +13,7 @@
 #import "Flyer.h"
 #import "FlyerImageView.h"
 
+//@class SigninController;
 @class FlyrViewController;
 @class CreateFlyerController ;
 @class InviteFriendsController;
@@ -21,12 +22,13 @@
 @class MainSettingViewController,ParentViewController;
 
 
-@interface FlyerlyMainScreen : ParentViewController<UIWebViewDelegate,UIActionSheetDelegate,FacebookLikeViewDelegate> {
+@interface FlyerlyMainScreen : ParentViewController<UIWebViewDelegate,UIActionSheetDelegate,FacebookLikeViewDelegate,UIAlertViewDelegate> {
     
 	CreateFlyerController *createFlyer;
 	FlyrViewController *tpController;
 	InviteFriendsController *addFriendsController;
     FlyerlySingleton *globle;
+    //SigninController *signInController;
     
     IBOutlet UIButton *likeButton;
     IBOutlet UIButton *followButton;
@@ -39,7 +41,7 @@
     UIView *opaqueView;
     NSArray *twtAcconts;
     Flyer *flyer;
-
+    
 }
 
 @property(nonatomic,strong) FlyrViewController *tpController;

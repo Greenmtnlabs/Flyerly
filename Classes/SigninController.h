@@ -20,12 +20,14 @@
 
 @interface SigninController : ParentViewController <PFLogInViewControllerDelegate,FBLoginViewDelegate >{
     
-    FlyerlyMainScreen *launchController;
+    //FlyerlyMainScreen *launchController;
     RegisterController *registerController;
     FlyerlySingleton *globle;
 
     NSString *dbUsername;
     UIAlertView *warningAlert;
+    
+    
 }
 
 @property(nonatomic, strong) IBOutlet UIImageView *emailImage;
@@ -38,10 +40,16 @@
 @property(nonatomic, strong) IBOutlet UIButton *signInTwitter;
 @property(nonatomic, strong) IBOutlet UIButton *forgetPassword1;
 
+@property(nonatomic, strong) FlyerlyMainScreen *launchController;
+
+@property(nonatomic, copy)   void (^signInCompletion)(void);
+
 -(IBAction)onSignIn;
 -(IBAction)onSignUp;
 -(IBAction)onSignInFacebook;
 -(IBAction)onSignInTwitter;
 -(IBAction)forgetPassword;
+
 -(void)signIn:(BOOL)validated username:(NSString *)userName password:(NSString *)pwd;
+
 @end

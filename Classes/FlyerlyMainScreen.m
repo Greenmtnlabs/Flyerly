@@ -27,7 +27,6 @@
 @synthesize facebookLikeView;
 @synthesize likeButton,followButton,webview,recentFlyers;
 
-
 -(IBAction)doNew:(id)sender{
     [Flurry logEvent:@"Create Flyer"];
 
@@ -62,12 +61,64 @@
 // Load invite friends
 -(IBAction)doInvite:(id)sender{
     
-	addFriendsController = [[InviteFriendsController alloc]initWithNibName:@"InviteFriendsController" bundle:nil];
-
-	[self.navigationController pushViewController:addFriendsController animated:YES];
+    //Checking if the user is valid or anonymous
+    if ([[PFUser currentUser] sessionToken]) {
+       
+        addFriendsController = [[InviteFriendsController alloc]initWithNibName:@"InviteFriendsController" bundle:nil];
+        
+        [self.navigationController pushViewController:addFriendsController animated:YES];
+        
+    } else {
+        
+        // Alert when user logged in as anonymous
+        UIAlertView *signInAlert = [[UIAlertView alloc] initWithTitle:@"Sign In"
+                                                              message:@"This feature requires you to sign in first. Do you want to sign in now?"
+                                                             delegate:self
+                                                    cancelButtonTitle:nil
+                                                    otherButtonTitles:nil];
+        [signInAlert addButtonWithTitle:@"Sign In"];
+        [signInAlert addButtonWithTitle: @"Later"];
+        
+        [signInAlert show];
+     
+    }
+	
 }
 //End
 
+// Buttons event handler,when user click on invite button in anonymous mood
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+    
+    if([title isEqualToString:@"Sign In"])
+    {
+        
+        NSLog(@"Sign In was selected.");
+        SigninController *signInController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
+        
+        signInController.launchController = self;
+        
+        __weak FlyerlyMainScreen *weakMainFlyerScreen = self;
+                        
+        signInController.signInCompletion = ^void(void) {
+                NSLog(@"Sign In via Invite");
+            
+                //dispatch_async(dispatch_get_main_queue(), ^(void) {
+                 
+                // Push Invite friends screen on navigation stack
+                weakMainFlyerScreen.addFriendsController = [[InviteFriendsController alloc]initWithNibName:@"InviteFriendsController" bundle:nil];
+            
+                [weakMainFlyerScreen.navigationController pushViewController:weakMainFlyerScreen.addFriendsController animated:YES];
+            
+            //});
+            
+        };
+        
+        [self.navigationController pushViewController:signInController animated:NO];
+    }
+    
+}
 
 /*
  * here we Resize Image by providing image & Size as param

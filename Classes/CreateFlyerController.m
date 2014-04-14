@@ -1,6 +1,7 @@
 
 //  Flyer
 //
+
 //  Created by Riksof Pvt. Ltd on 12/10/09.
 //
 //
@@ -10,7 +11,7 @@
 @implementation CreateFlyerController
 
 @synthesize selectedFont,selectedColor,selectedTemplate,fontTabButton,colorTabButton,sizeTabButton,fontEditButton,selectedSize,fontBorderTabButton,addMoreIconTabButton,addMorePhotoTabButton,addMoreSymbolTabButton,sharePanel;
-@synthesize textBackgrnd,cameraTabButton,photoTabButton,widthTabButton,heightTabButton,deleteAlert;
+@synthesize textBackgrnd,cameraTabButton,photoTabButton,widthTabButton,heightTabButton,deleteAlert,signInAlert;
 @synthesize imgPickerFlag, addMoreLayerOrSaveFlyerLabel, takeOrAddPhotoLabel,layerScrollView,flyerPath;
 @synthesize contextView,libraryContextView,libFlyer,backgroundTabButton,addMoreFontTabButton;
 @synthesize libText,libBackground,libPhoto,libEmpty,backtemplates,cameraTakePhoto,cameraRoll,flyerBorder;
@@ -1684,12 +1685,22 @@ int selectedAddMoreLayerTab = -1;
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     
+    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+    
     if(alertView == deleteAlert && buttonIndex == 1) {
         
         editButtonGlobal.uid = currentLayer;
         [self deleteLayer:editButtonGlobal overrided:nil];
         [Flurry logEvent:@"Layer Deleted"];
-	}
+	} else if(alertView == signInAlert &&  [title isEqualToString:@"Sign In"]) {
+        
+           NSLog(@"Sign In was selected.");
+           signInController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
+           [self.navigationController pushViewController:signInController animated:YES];
+       
+    }
+    
+    
 
   }
 
@@ -2352,12 +2363,26 @@ int selectedAddMoreLayerTab = -1;
     [shareviewcontroller.descriptionView setReturnKeyType:UIReturnKeyDone];
     shareviewcontroller.Yvalue = [NSString stringWithFormat:@"%f",self.view.frame.size.height];
     
-    PFUser *user = [PFUser currentUser];
-    if (user[@"appStarRate"])
-        [self setStarsofShareScreen:user[@"appStarRate"]];
-
-
-    [user saveInBackground];
+    if ([[PFUser currentUser] sessionToken]) {
+        PFUser *user = [PFUser currentUser];
+        if (user[@"appStarRate"])
+            [self setStarsofShareScreen:user[@"appStarRate"]];
+        
+        [user saveInBackground];
+    } else {
+    
+        // Alert when user logged in as anonymous
+        UIAlertView *signInAlert = [[UIAlertView alloc] initWithTitle:@"Sign In"
+                                                          message:@"This feature requires you to sign in first. Do you want to sign in now?"
+                                                         delegate:self
+                                                cancelButtonTitle:nil
+                                                otherButtonTitles:nil];
+        [signInAlert addButtonWithTitle:@"Sign In"];
+        [signInAlert addButtonWithTitle: @"Later"];
+        
+        [signInAlert show];
+    }
+    
     
     [shareviewcontroller setSocialStatus];
     
@@ -2370,6 +2395,7 @@ int selectedAddMoreLayerTab = -1;
   
 
 }
+
 
 /*
  *Here we Set Stars
