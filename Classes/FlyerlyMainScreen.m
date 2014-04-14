@@ -206,17 +206,13 @@
     
     //Checking if the user is valid or anonymus
     if ([[PFUser currentUser] sessionToken]) {
+        
         //GET UPDATED USER PUCHASES INFO
         [self getUserPurcahses];
     } else {
         NSLog(@"Anonymous user is NOT authenticated.");
     }
     
-    
-    
-    //GET FACEBOOK APP LIKE STATUS
-    //Tenporary Commit that part
-   // [self setFacebookLikeStatus];
     
 }
 
@@ -598,15 +594,27 @@
 
     // HERE WE GET USER PURCHASES DETAIL
     if(![[NSUserDefaults standardUserDefaults] objectForKey:@"InAppPurchases"]){
+        
+        //Getting Current User
         PFUser *user = [PFUser currentUser];
+        
+        //Return on User nil
+        if (user == nil)return;
+        
+        //Create query for get user purchases
         PFQuery *query = [PFQuery queryWithClassName:@"InApp"];
+        
+        //define criteria
         [query whereKey:@"user" equalTo:user];
         
+        //Calling Query
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             
             if (!error) {
                 
                 if (objects.count >= 1) {
+                    
+                    //Get required data
                     NSMutableDictionary  *oldPurchases = [[objects objectAtIndex:0] valueForKey:@"json"];
                     
                     //its for remember key of InApp already copy to Device
@@ -615,6 +623,7 @@
                 }
                 // The find succeeded. The first 100 objects are available in objects
             } else {
+                
                 // Log details of the failure
                 NSLog(@"Error: %@ %@", error, [error userInfo]);
             }
