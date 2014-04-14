@@ -446,4 +446,35 @@
 
 }
 
+
+
+/*
+ * This will rename the anonymous user directoy to the logged in user name directory
+ */
++(void)mergeAnonymousUser{
+
+    // Check if there is a directory in app contents named "anonymous"
+    NSString *homeDirectoryPath = NSHomeDirectory();
+    NSString *anonymousUserPath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/anonymous"]];
+    
+    PFUser *user = [PFUser currentUser];
+    
+    NSString *usernamePath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/Flyr", user.username]];
+    
+    
+    if ([[NSFileManager defaultManager] fileExistsAtPath:anonymousUserPath]) {
+        
+        NSLog(@"/Documents/anonymous found");
+        
+        NSError* error;
+        [[NSFileManager defaultManager]moveItemAtPath:anonymousUserPath toPath:usernamePath error:&error];
+        
+        
+        
+    }
+    // If yes
+    // Rename anonymous folder to user.username
+
+}
+
 @end

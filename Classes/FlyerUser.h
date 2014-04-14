@@ -16,4 +16,5 @@
 
 +(void)updateFolderStructure:(NSString *)usr;
 
++(void)mergeAnonymousUser;
 @end
