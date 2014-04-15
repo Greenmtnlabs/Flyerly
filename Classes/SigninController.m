@@ -51,7 +51,6 @@
     email.clearButtonMode = UITextFieldViewModeWhileEditing;
     password.clearButtonMode = UITextFieldViewModeWhileEditing;
     
-    
     // back button
     UIButton *backBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [backBtn addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
@@ -144,8 +143,7 @@
         
         [navigationController popViewControllerAnimated:NO];
         
-        [self onSignInSuccess];
-        //[self mergeAnonymousUser];
+        [self onSignInSuccess];        
         
         if (self.launchController == nil) {
             self.launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil];
@@ -190,6 +188,7 @@
                 
                 NSLog(@"User with facebook signed up and logged in!");
                 
+                [self onSignInSuccess];
                 
                  // Remove Current UserName for Device configuration
                 [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"User"];
@@ -210,8 +209,6 @@
                 NSLog(@"User with facebook logged in!");
                 
                 [self onSignInSuccess];
-                
-                //[self mergeAnonymousUser];
                 
                 // Remove Current UserName for Device configuration
                 [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"User"];
@@ -255,6 +252,8 @@
             } else if ( user.isNew ) {
                 
                 NSLog(@"User signed up and logged in with Twitter!");
+                
+                [self onSignInSuccess];
 
                 NSString *twitterUsername = [PFTwitterUtils twitter].screenName;                
 
@@ -278,8 +277,6 @@
                 NSLog(@"User logged in with Twitter!");
                 
                 [self onSignInSuccess];
-                
-                //[self mergeAnonymousUser];
                 
                 // Remove Current UserName for Device configuration
                 [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"User"];
@@ -348,6 +345,8 @@
     
     if (self.signInCompletion) {
         self.signInCompletion();
+        [FlyerUser mergeAnonymousUser];
+        
     }
     
 }

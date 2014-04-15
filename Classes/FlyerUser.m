@@ -459,7 +459,7 @@
     
     PFUser *user = [PFUser currentUser];
     
-    NSString *usernamePath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/Flyr", user.username]];
+    NSString *usernamePath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@", user.username]];
     
     
     if ([[NSFileManager defaultManager] fileExistsAtPath:anonymousUserPath]) {
@@ -468,12 +468,7 @@
         
         NSError* error;
         [[NSFileManager defaultManager]moveItemAtPath:anonymousUserPath toPath:usernamePath error:&error];
-        
-        
-        
     }
-    // If yes
-    // Rename anonymous folder to user.username
 
 }
 
