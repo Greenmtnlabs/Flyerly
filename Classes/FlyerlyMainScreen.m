@@ -70,17 +70,10 @@
         
     } else {
         
-        // Alert when user logged in as anonymous
-        UIAlertView *signInAlert = [[UIAlertView alloc] initWithTitle:@"Sign In"
-                                                              message:@"This feature requires you to sign in first. Do you want to sign in now?"
-                                                             delegate:self
-                                                    cancelButtonTitle:nil
-                                                    otherButtonTitles:nil];
-        [signInAlert addButtonWithTitle:@"Sign In"];
-        [signInAlert addButtonWithTitle: @"Later"];
-        
+         // Alert when user logged in as anonymous
+        UIAlertView *signInAlert = [[UIAlertView alloc] initWithTitle:@"Sign In" message:@"This feature requires you to sign in first. Do you want to sign in now?" delegate:self cancelButtonTitle:@"Sign In" otherButtonTitles:@"Later",nil];
         [signInAlert show];
-     
+      
     }
 	
 }
@@ -89,9 +82,8 @@
 // Buttons event handler,when user click on invite button in anonymous mood
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
-    
-    if([title isEqualToString:@"Sign In"])
+   //when click on sign in button in alert view
+    if(buttonIndex == 0)
     {
         
         NSLog(@"Sign In was selected.");
@@ -113,6 +105,7 @@
         
         [self.navigationController pushViewController:signInController animated:NO];
     }
+   
     
 }
 

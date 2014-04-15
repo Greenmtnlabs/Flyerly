@@ -1,5 +1,11 @@
-Start on the "Welcome" screen:
-  Tap "SignIn"
+Start on the "Home" screen:
+  Take a screenshot
+  Tap "Settings"
+
+Then on the "Settings" screen:
+  Show elements
+  Tap "Sign In"
+  Take a screenshot
 
 Then on the "SignIn" screen:
   Take a screenshot
@@ -22,16 +28,19 @@ Then on the "SignIn" screen:
   Tap "Forgot"
 
 Then on the "Forgot" screen:
+  Take a screenshot
   Tap "Back"
 
 Then on the "SignIn" screen:
   Tap "SignUp"
 
 Then on the "Register" screen:
+  Take a screenshot
   Tap "Back"
 
 Then on the "SignIn" screen:
   Tap "Facebook"
+  Take a screenshot
   Wait for "10" seconds
 
 Then on the "Home" screen:
@@ -45,8 +54,9 @@ Then on the "Welcome" screen:
   Tap "SignIn"
 
 Then on the "SignIn" screen:
+  Take a screenshot
   Tap "Twitter"
-  Wait for "15" seconds
+  Wait for "50" seconds
 
 Then on the "Home" screen:
   Tap "Settings"
@@ -54,43 +64,3 @@ Then on the "Home" screen:
 Then on the "Settings" screen:
   Tap "Sign Out"
   Confirm "Sign out"
-
-Then on the "Welcome" screen:
-  Tap "SignIn"
-
-Then on the "SignIn" screen:
-  Tap "Sign In"
-  Take a screenshot
-  Confirm "OK"
-  Tap "Back"
-
-Then on the "Welcome" screen:
-  Tap "SignIn"
-	
-Then on the "SignIn" screen:
-  Type "RehanAli" in the "Username" field
-  Tap "Sign In"
-  Take a screenshot
-  Confirm "OK"
-  Tap "Back"
-
-Then on the "Welcome" screen:
-  Tap "SignIn"
-
-Then on the "SignIn" screen:
-  Type "teamleadsqa" in the "Username" field
-  Type "null" in the "Password" field
-  Tap "Sign In"
-  Take a screenshot
-  Confirm "Register"
-  
-Then on the "Register" screen:
-  Tap "Back"
-
-Then on the "SignIn" screen:
-  Clear the "Username" field
-  Type "rehanriksof" in the "Username" field
-  Type "null" in the "Password" field
-  Tap "Sign In"
-  Take a screenshot
-  Tap "Back"

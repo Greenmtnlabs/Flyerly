@@ -16,3 +16,4 @@ class SettingsScreen extends Screen
     'Account Setting' : -> $('#Account Setting')
     'Save to Gallery' : -> $('#Save to Gallery')
     'Cell' : -> view.tableViews()[0].scrollToElementWithName('Save to Gallery')
+    'Sign In' : -> view.tableViews()[0].cells()[4]
