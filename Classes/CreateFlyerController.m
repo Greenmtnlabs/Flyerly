@@ -1706,15 +1706,14 @@ int selectedAddMoreLayerTab = -1;
         signInController.signInCompletion = ^void(void) {
             NSLog(@"Sign In via Share");
             
-            // Push Invite friends screen on navigation stack
-            //weakMainFlyerScreen.addFriendsController = [[InviteFriendsController alloc]initWithNibName:@"InviteFriendsController" bundle:nil];
+            UINavigationController* navigationController = weakSigninController.navigationController;
             
-            [weakSigninController.navigationController popViewControllerAnimated:YES];
+            [navigationController popViewControllerAnimated:NO];
+
+            [weakSigninController.navigationController popViewController:weakSigninController];
             
             [shareButton sendActionsForControlEvents: UIControlEventTouchUpInside];
 
-            //[weakMainFlyerScreen.navigationController pushViewController:weakMainFlyerScreen.addFriendsController animated:YES];
-            
         };
         
         [self.navigationController pushViewController:signInController animated:YES];
@@ -2347,6 +2346,7 @@ int selectedAddMoreLayerTab = -1;
 /*
  * HERE WE SHARE FLYER TO SOCIAL NETWORKS
  */
+
 -(void)share {
     
     if ([[PFUser currentUser] sessionToken]) {

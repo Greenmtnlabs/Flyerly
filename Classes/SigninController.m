@@ -188,6 +188,12 @@
                 
                 NSLog(@"User with facebook signed up and logged in!");
                 
+                UINavigationController* navigationController = self.navigationController;
+                
+                [navigationController popViewControllerAnimated:NO];
+                
+                [self onSignInSuccess];
+                
                 [self onSignInSuccess];
                 
                  // Remove Current UserName for Device configuration
@@ -207,6 +213,10 @@
                 
             } else {
                 NSLog(@"User with facebook logged in!");
+                
+                UINavigationController* navigationController = self.navigationController;
+                
+                [navigationController popViewControllerAnimated:NO];
                 
                 [self onSignInSuccess];
                 
@@ -253,6 +263,11 @@
                 
                 NSLog(@"User signed up and logged in with Twitter!");
                 
+                UINavigationController* navigationController = self.navigationController;
+                
+                [navigationController popViewControllerAnimated:NO];
+
+                
                 [self onSignInSuccess];
 
                 NSString *twitterUsername = [PFTwitterUtils twitter].screenName;                
@@ -275,6 +290,11 @@
             } else {
                 
                 NSLog(@"User logged in with Twitter!");
+                
+                UINavigationController* navigationController = self.navigationController;
+                
+                [navigationController popViewControllerAnimated:NO];
+
                 
                 [self onSignInSuccess];
                 
