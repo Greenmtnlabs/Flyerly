@@ -1,6 +1,12 @@
-Start on the "Welcome" screen:
-  Tap "SignIn"
-  
+Start on the "Home" screen:
+  Take a screenshot
+  Tap "Settings"
+
+Then on the "Settings" screen:
+  Show elements
+  Tap "Sign In"
+  Take a screenshot
+
 Then on the "SignIn" screen:
   Clear the "Username" field
   Type "riksof.yahoo" in the "Username" field
@@ -9,10 +15,11 @@ Then on the "SignIn" screen:
 
 Then on the "Home" screen:
   Tap "Create"
+  Wait for "2" seconds
 
 Then on the "Flyer" screen:
   Tap "Symbols"
-  Tap "Tile4"
+  Tap "Tile5"
   Tap "Next / Delete / Undo"
   Confirm "OK"
   Take a screenshot

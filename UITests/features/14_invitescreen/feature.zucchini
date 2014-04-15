@@ -1,5 +1,11 @@
-Start on the "Welcome" screen:
-  Tap "SignIn"
+Start on the "Home" screen:
+  Take a screenshot
+  Tap "Settings"
+
+Then on the "Settings" screen:
+  Show elements
+  Tap "Sign In"
+  Take a screenshot
   
 Then on the "SignIn" screen:
   Clear the "Username" field
@@ -12,3 +18,38 @@ Then on the "Home" screen:
   Tap "Invite"
   Take a screenshot
   Show elements
+
+Then on the "Invite123" screen:
+  Tap "invite friend"
+  Confirm "OK"
+  Wait for "5" seconds
+  Take a screenshot
+  Tap "Cell"
+  Tap "invite friend"
+  Tap "Cancel"
+  Wait for "5" seconds
+  Tap "invite facebook"
+  Take a screenshot
+  Wait for "50" seconds
+  Tap "1Cell"
+  Wait for "5" seconds
+  Tap "invite friend"
+  Tap "Send to Facebook"
+  Wait for "5" seconds
+  Confirm "OK"
+  Wait for "5" seconds
+  Tap "invite twitter"
+  Take a screenshot
+  Wait for "5" seconds
+  Tap "Cell"
+  Tap "Send to Twitter"
+  Wait for "5" seconds
+  Confirm "OK"
+  Tap "Home"
+
+Then on the "Home" screen:
+  Tap "Settings"
+  
+Then on the "Settings" screen:
+  Tap "Sign Out"
+  Confirm "Sign out"

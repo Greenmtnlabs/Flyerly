@@ -1,12 +1,12 @@
-Start on the "Welcome" screen:
+Start on the "Home" screen:
   Take a screenshot
-  Tap "Register"
+  Tap "Settings"
 
-Then on the "Register" screen:
+Then on the "Settings" screen:
+  Show elements
+  Tap "Sign In"
+  Take a screenshot
+
+Then on the "SignIn" screen:
   Tap "Back"
-  
-Then on the "Welcome" screen:
-  Tap "SignIn"
-  
-Then on the "Sign In" screen:
-  Tap "Back"
+  Take a screenshot
