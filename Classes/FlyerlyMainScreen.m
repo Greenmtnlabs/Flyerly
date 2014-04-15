@@ -102,16 +102,12 @@
         __weak FlyerlyMainScreen *weakMainFlyerScreen = self;
                         
         signInController.signInCompletion = ^void(void) {
-                NSLog(@"Sign In via Invite");
+            NSLog(@"Sign In via Invite");
+             
+            // Push Invite friends screen on navigation stack
+            weakMainFlyerScreen.addFriendsController = [[InviteFriendsController alloc]initWithNibName:@"InviteFriendsController" bundle:nil];
             
-                //dispatch_async(dispatch_get_main_queue(), ^(void) {
-                 
-                // Push Invite friends screen on navigation stack
-                weakMainFlyerScreen.addFriendsController = [[InviteFriendsController alloc]initWithNibName:@"InviteFriendsController" bundle:nil];
-            
-                [weakMainFlyerScreen.navigationController pushViewController:weakMainFlyerScreen.addFriendsController animated:YES];
-            
-            //});
+            [weakMainFlyerScreen.navigationController pushViewController:weakMainFlyerScreen.addFriendsController animated:YES];
             
         };
         

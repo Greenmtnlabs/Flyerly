@@ -23,7 +23,6 @@
     appDelegate.lauchController = mainScreen;
     
     [self.navigationController pushViewController:mainScreen animated:YES];
-    //[self.navigationController setRootViewController:mainScreen];
 }
 
 @end
