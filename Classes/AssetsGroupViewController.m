@@ -101,6 +101,7 @@
  * An asset was selected. Process it.
  */
 - (void)thumbnailViewSelectionStateChanged:(NSNotification *)notification {
+    
     // Refresh selected assets
     NBUAssetThumbnailView *assetView = (NBUAssetThumbnailView *)notification.object;
     NBUAsset *asset = assetView.asset;

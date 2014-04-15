@@ -69,6 +69,7 @@
     label.text = @"SETTINGS";
     
     self.navigationItem.titleView = label;
+    
     category = [[NSMutableArray alloc] init];
     [category addObject:@"Save to Gallery"];
     [category addObject:@"Flyerly public"];
@@ -163,10 +164,7 @@
             //account setting row clicked
             imgname = @"account_settings";
             [cell setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"SettingcellBack"]]];
-        } else {
-            [ self likeFacebook ];
         }
-
         
     }
     
