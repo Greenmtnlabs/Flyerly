@@ -10,7 +10,7 @@
 			<key>Message</key>
 			<string>target.setDeviceOrientation("1")</string>
 			<key>Timestamp</key>
-			<date>2014-04-15T11:01:56Z</date>
+			<date>2014-04-15T11:01:29Z</date>
 			<key>Type</key>
 			<integer>0</integer>
 		</dict>
@@ -20,7 +20,7 @@
 			<key>Message</key>
 			<string>Found anchor for screen 'Home'</string>
 			<key>Timestamp</key>
-			<date>2014-04-15T11:01:56Z</date>
+			<date>2014-04-15T11:01:30Z</date>
 			<key>Type</key>
 			<integer>1</integer>
 		</dict>
@@ -30,7 +30,7 @@
 			<key>Message</key>
 			<string>Screenshot of screen 'home' taken with orientation 'Portrait'</string>
 			<key>Timestamp</key>
-			<date>2014-04-15T11:01:57Z</date>
+			<date>2014-04-15T11:01:30Z</date>
 			<key>Type</key>
 			<integer>1</integer>
 		</dict>
@@ -40,7 +40,7 @@
 			<key>Message</key>
 			<string>target.captureRectWithName("{origin:{x:0.00,y:0.00}, size:{height:480.00,width:320.00}}", "01_home")</string>
 			<key>Timestamp</key>
-			<date>2014-04-15T11:01:57Z</date>
+			<date>2014-04-15T11:01:30Z</date>
 			<key>Type</key>
 			<integer>0</integer>
 		</dict>
@@ -50,9 +50,9 @@
 			<key>Message</key>
 			<string>01_home</string>
 			<key>Screenshot</key>
-			<string>246410F2-BE32-41B1-B0AD-B2D8D52E5311</string>
+			<string>B2E72E5B-603E-4410-B907-AE418CF0D1A0</string>
 			<key>Timestamp</key>
-			<date>2014-04-15T11:01:58Z</date>
+			<date>2014-04-15T11:01:30Z</date>
 			<key>Type</key>
 			<integer>8</integer>
 		</dict>
@@ -62,7 +62,7 @@
 			<key>Message</key>
 			<string>target.frontMostApp().elements()[0].elements()[21].tap()</string>
 			<key>Timestamp</key>
-			<date>2014-04-15T11:01:58Z</date>
+			<date>2014-04-15T11:01:31Z</date>
 			<key>Type</key>
 			<integer>0</integer>
 		</dict>
@@ -72,7 +72,7 @@
 			<key>Message</key>
 			<string>Found anchor for screen 'Settings'</string>
 			<key>Timestamp</key>
-			<date>2014-04-15T11:01:59Z</date>
+			<date>2014-04-15T11:01:32Z</date>
 			<key>Type</key>
 			<integer>1</integer>
 		</dict>
@@ -82,9 +82,9 @@
 			<key>Message</key>
 			<string>UIAWindow: rect:{{0, 0}, {320, 480}}</string>
 			<key>Screenshot</key>
-			<string>A64675BA-4624-452D-A62B-06A09FAF5B26</string>
+			<string>5DE9E767-3214-496E-95CD-9012A7FBEA07</string>
 			<key>Timestamp</key>
-			<date>2014-04-15T11:01:59Z</date>
+			<date>2014-04-15T11:01:32Z</date>
 			<key>Type</key>
 			<integer>0</integer>
 			<key>children</key>
@@ -95,9 +95,9 @@
 					<key>Message</key>
 					<string>UIANavigationBar: name:MainSettingView rect:{{0, 20}, {320, 44}}</string>
 					<key>Screenshot</key>
-					<string>A5A7E518-CC6F-49B9-9B8C-D4C93D572637</string>
+					<string>80C186A9-4C42-4A4E-BCFA-426EA023D86C</string>
 					<key>Timestamp</key>
-					<date>2014-04-15T11:01:59Z</date>
+					<date>2014-04-15T11:01:32Z</date>
 					<key>Type</key>
 					<integer>0</integer>
 					<key>children</key>
@@ -108,9 +108,9 @@
 							<key>Message</key>
 							<string>UIAImage: rect:{{0, 0}, {320, 64}}</string>
 							<key>Screenshot</key>
-							<string>B395031E-B91C-477C-B637-7F9E64629AEF</string>
+							<string>223D46AB-0DE8-44B0-A221-837EB9977DC0</string>
 							<key>Timestamp</key>
-							<date>2014-04-15T11:01:59Z</date>
+							<date>2014-04-15T11:01:32Z</date>
 							<key>Type</key>
 							<integer>0</integer>
 							<key>children</key>
@@ -121,9 +121,9 @@
 									<key>Message</key>
 									<string>UIAImage: rect:{{0, 64}, {320, 0}}</string>
 									<key>Screenshot</key>
-									<string>A0744B10-0170-44D8-9112-D61B3F40F885</string>
+									<string>4133DA51-3CDF-4417-89E5-2B7E7902513D</string>
 									<key>Timestamp</key>
-									<date>2014-04-15T11:01:59Z</date>
+									<date>2014-04-15T11:01:32Z</date>
 									<key>Type</key>
 									<integer>0</integer>
 									<key>children</key>
@@ -137,9 +137,9 @@
 							<key>Message</key>
 							<string>UIAButton: name:home button rect:{{16, 21}, {45, 42}}</string>
 							<key>Screenshot</key>
-							<string>4D466EC2-3E89-41F2-9683-E9ECF2A464EE</string>
+							<string>4FD32560-1DE1-4E48-8E03-E91FEC995698</string>
 							<key>Timestamp</key>
-							<date>2014-04-15T11:01:59Z</date>
+							<date>2014-04-15T11:01:32Z</date>
 							<key>Type</key>
 							<integer>0</integer>
 							<key>children</key>
@@ -151,9 +151,9 @@
 							<key>Message</key>
 							<string>UIAButton: name:help icon rect:{{69, 21}, {45, 42}}</string>
 							<key>Screenshot</key>
-							<string>E96A18DB-3C1A-4400-A6EF-5924E5344FEC</string>
+							<string>7968B31F-F392-441D-8DF0-41005B73D5F7</string>
 							<key>Timestamp</key>
-							<date>2014-04-15T11:01:59Z</date>
+							<date>2014-04-15T11:01:32Z</date>
 							<key>Type</key>
 							<integer>0</integer>
 							<key>children</key>
@@ -165,9 +165,9 @@
 							<key>Message</key>
 							<string>UIAStaticText: name:SETTINGS value:SETTINGS rect:{{120, 17}, {87, 50}}</string>
 							<key>Screenshot</key>
-							<string>89035BDD-3C4E-41C5-8889-AAC384CD1465</string>
+							<string>68D4C5D0-9536-4329-A030-5DE0FD4D1645</string>
 							<key>Timestamp</key>
-							<date>2014-04-15T11:01:59Z</date>
+							<date>2014-04-15T11:01:32Z</date>
 							<key>Type</key>
 							<integer>0</integer>
 							<key>children</key>
@@ -179,9 +179,9 @@
 							<key>Message</key>
 							<string>UIAButton: name:Back rect:{{8, 32}, {12, 20}}</string>
 							<key>Screenshot</key>
-							<string>5112F10A-B8E8-44D7-9D03-F0F7CAAD6E7D</string>
+							<string>D225B09D-1AAD-42FC-A27E-961DE6BFA6AC</string>
 							<key>Timestamp</key>
-							<date>2014-04-15T11:01:59Z</date>
+							<date>2014-04-15T11:01:32Z</date>
 							<key>Type</key>
 							<integer>0</integer>
 							<key>children</key>
@@ -193,11 +193,11 @@
 					<key>LogType</key>
 					<string>Debug</string>
 					<key>Message</key>
-					<string>UIATableView: name:Empty list value:rows 1 to 5 of 5 rect:{{0, 64}, {320, 368}}</string>
+					<string>UIATableView: name:Empty list value:rows 1 to 6 of 6 rect:{{0, 64}, {320, 368}}</string>
 					<key>Screenshot</key>
-					<string>951BCCA0-93A9-4FA5-B3C5-2A1962B21EF7</string>
+					<string>2447143B-87AB-4F4F-BCCE-847867394FC1</string>
 					<key>Timestamp</key>
-					<date>2014-04-15T11:01:59Z</date>
+					<date>2014-04-15T11:01:32Z</date>
 					<key>Type</key>
 					<integer>0</integer>
 					<key>children</key>
@@ -208,9 +208,9 @@
 							<key>Message</key>
 							<string>UIATableCell: name:Save to Gallery value: rect:{{0, 71}, {320, 40}}</string>
 							<key>Screenshot</key>
-							<string>BC231749-D3D8-4D19-9297-34FE427A1846</string>
+							<string>B4DA543E-46B1-4AC5-AF4B-80B006616492</string>
 							<key>Timestamp</key>
-							<date>2014-04-15T11:01:59Z</date>
+							<date>2014-04-15T11:01:32Z</date>
 							<key>Type</key>
 							<integer>0</integer>
 							<key>children</key>
@@ -221,9 +221,9 @@
 									<key>Message</key>
 									<string>UIAStaticText: name:Save to Gallery value: rect:{{0, 71}, {320, 40}}</string>
 									<key>Screenshot</key>
-									<string>FA6DDDDE-380F-4CC2-A343-C74C5B562AB1</string>
+									<string>99E445F0-F008-4C7F-80C6-6F6A3F3B65F5</string>
 									<key>Timestamp</key>
-									<date>2014-04-15T11:01:59Z</date>
+									<date>2014-04-15T11:01:32Z</date>
 									<key>Type</key>
 									<integer>0</integer>
 									<key>children</key>
@@ -235,9 +235,9 @@
 									<key>Message</key>
 									<string>UIASwitch: name:Save to Gallery value:1 rect:{{263, 75}, {51, 31}}</string>
 									<key>Screenshot</key>
-									<string>4307A5E3-E92A-42C9-81DB-787B404D5CBD</string>
+									<string>4C0789A3-7E56-4E7E-A82B-91ACDCDC8308</string>
 									<key>Timestamp</key>
-									<date>2014-04-15T11:01:59Z</date>
+									<date>2014-04-15T11:01:32Z</date>
 									<key>Type</key>
 									<integer>0</integer>
 									<key>children</key>
@@ -251,9 +251,9 @@
 							<key>Message</key>
 							<string>UIATableCell: name:Flyerly public value: rect:{{0, 111}, {320, 40}}</string>
 							<key>Screenshot</key>
-							<string>C701E7E3-3F81-497D-9774-C7C1F9B2F090</string>
+							<string>02AF12E2-D65A-456F-AF8E-F5E63ECDD244</string>
 							<key>Timestamp</key>
-							<date>2014-04-15T11:01:59Z</date>
+							<date>2014-04-15T11:01:32Z</date>
 							<key>Type</key>
 							<integer>0</integer>
 							<key>children</key>
@@ -264,9 +264,9 @@
 									<key>Message</key>
 									<string>UIAStaticText: name:Flyerly public value: rect:{{0, 111}, {320, 40}}</string>
 									<key>Screenshot</key>
-									<string>070095AC-BC0F-428B-A11F-735C3E8FB6E1</string>
+									<string>50FA4E4C-54DD-4029-84C3-259857A02963</string>
 									<key>Timestamp</key>
-									<date>2014-04-15T11:01:59Z</date>
+									<date>2014-04-15T11:01:32Z</date>
 									<key>Type</key>
 									<integer>0</integer>
 									<key>children</key>
@@ -278,9 +278,9 @@
 									<key>Message</key>
 									<string>UIASwitch: name:Flyerly public value:1 rect:{{263, 115}, {51, 31}}</string>
 									<key>Screenshot</key>
-									<string>BEA9818D-0682-4C8F-93C4-2B1443C1D55B</string>
+									<string>727B8E01-70F7-4D6F-A06D-902E52630FD0</string>
 									<key>Timestamp</key>
-									<date>2014-04-15T11:01:59Z</date>
+									<date>2014-04-15T11:01:32Z</date>
 									<key>Type</key>
 									<integer>0</integer>
 									<key>children</key>
@@ -292,11 +292,11 @@
 							<key>LogType</key>
 							<string>Debug</string>
 							<key>Message</key>
-							<string>UIATableCell: name:Like us on Facebook value: rect:{{0, 151}, {320, 40}}</string>
+							<string>UIATableCell: name:Account Setting value: rect:{{0, 151}, {320, 40}}</string>
 							<key>Screenshot</key>
-							<string>45B0920E-55A2-445D-BD53-BF7888DF3C8D</string>
+							<string>B72E6CEE-3160-41AB-ADD7-2049088F1C36</string>
 							<key>Timestamp</key>
-							<date>2014-04-15T11:01:59Z</date>
+							<date>2014-04-15T11:01:32Z</date>
 							<key>Type</key>
 							<integer>0</integer>
 							<key>children</key>
@@ -305,11 +305,11 @@
 									<key>LogType</key>
 									<string>Debug</string>
 									<key>Message</key>
-									<string>UIAStaticText: name:Like us on Facebook value: rect:{{0, 151}, {320, 40}}</string>
+									<string>UIAStaticText: name:Account Setting value: rect:{{0, 151}, {320, 40}}</string>
 									<key>Screenshot</key>
-									<string>298E81D2-426C-445E-B4DB-E2321010B349</string>
+									<string>8CEE0A38-96B4-41BD-8705-80CE9B974414</string>
 									<key>Timestamp</key>
-									<date>2014-04-15T11:01:59Z</date>
+									<date>2014-04-15T11:01:32Z</date>
 									<key>Type</key>
 									<integer>0</integer>
 									<key>children</key>
@@ -321,11 +321,11 @@
 							<key>LogType</key>
 							<string>Debug</string>
 							<key>Message</key>
-							<string>UIATableCell: name:Follow us on Twitter value: rect:{{0, 191}, {320, 40}}</string>
+							<string>UIATableCell: name:Like us on Facebook value: rect:{{0, 191}, {320, 40}}</string>
 							<key>Screenshot</key>
-							<string>3BA2986E-FA9E-4BAC-9E8A-0AF937964851</string>
+							<string>D2F18D98-A4EB-46B0-B333-AA606BF31AF3</string>
 							<key>Timestamp</key>
-							<date>2014-04-15T11:01:59Z</date>
+							<date>2014-04-15T11:01:32Z</date>
 							<key>Type</key>
 							<integer>0</integer>
 							<key>children</key>
@@ -334,11 +334,11 @@
 									<key>LogType</key>
 									<string>Debug</string>
 									<key>Message</key>
-									<string>UIAStaticText: name:Follow us on Twitter value: rect:{{0, 191}, {320, 40}}</string>
+									<string>UIAStaticText: name:Like us on Facebook value: rect:{{0, 191}, {320, 40}}</string>
 									<key>Screenshot</key>
-									<string>03BAB0EF-CB9B-4721-99C2-FFBEB26A2FF3</string>
+									<string>3F3FDB8D-1FE6-45D1-A735-6A795A8383F1</string>
 									<key>Timestamp</key>
-									<date>2014-04-15T11:01:59Z</date>
+									<date>2014-04-15T11:01:32Z</date>
 									<key>Type</key>
 									<integer>0</integer>
 									<key>children</key>
@@ -350,11 +350,11 @@
 							<key>LogType</key>
 							<string>Debug</string>
 							<key>Message</key>
-							<string>UIATableCell: name:Sign In value: rect:{{0, 231}, {320, 40}}</string>
+							<string>UIATableCell: name:Follow us on Twitter value: rect:{{0, 231}, {320, 40}}</string>
 							<key>Screenshot</key>
-							<string>7E9623BA-D9D8-4AB9-BDB1-667DDD2B5514</string>
+							<string>AD5A017D-AA69-456B-9D54-3FEBB20B71A9</string>
 							<key>Timestamp</key>
-							<date>2014-04-15T11:01:59Z</date>
+							<date>2014-04-15T11:01:32Z</date>
 							<key>Type</key>
 							<integer>0</integer>
 							<key>children</key>
@@ -363,11 +363,40 @@
 									<key>LogType</key>
 									<string>Debug</string>
 									<key>Message</key>
-									<string>UIAStaticText: name:Sign In value: rect:{{0, 231}, {320, 40}}</string>
+									<string>UIAStaticText: name:Follow us on Twitter value: rect:{{0, 231}, {320, 40}}</string>
 									<key>Screenshot</key>
-									<string>F4323821-4E17-4810-BBDB-3F4973E61171</string>
+									<string>DB1C4AB9-BE32-4B76-975D-772AA4B14107</string>
 									<key>Timestamp</key>
-									<date>2014-04-15T11:01:59Z</date>
+									<date>2014-04-15T11:01:32Z</date>
+									<key>Type</key>
+									<integer>0</integer>
+									<key>children</key>
+									<array/>
+								</dict>
+							</array>
+						</dict>
+						<dict>
+							<key>LogType</key>
+							<string>Debug</string>
+							<key>Message</key>
+							<string>UIATableCell: name:Sign Out value: rect:{{0, 271}, {320, 40}}</string>
+							<key>Screenshot</key>
+							<string>AE668513-F4EE-4FF4-9D13-B1FEEA4693FA</string>
+							<key>Timestamp</key>
+							<date>2014-04-15T11:01:32Z</date>
+							<key>Type</key>
+							<integer>0</integer>
+							<key>children</key>
+							<array>
+								<dict>
+									<key>LogType</key>
+									<string>Debug</string>
+									<key>Message</key>
+									<string>UIAStaticText: name:Sign Out value: rect:{{0, 271}, {320, 40}}</string>
+									<key>Screenshot</key>
+									<string>0E2B917A-0F46-415F-B109-D86291E2BDE8</string>
+									<key>Timestamp</key>
+									<date>2014-04-15T11:01:32Z</date>
 									<key>Type</key>
 									<integer>0</integer>
 									<key>children</key>
@@ -383,9 +412,9 @@
 					<key>Message</key>
 					<string>UIAButton: name:SettingsEmail rect:{{0, 433}, {80, 47}}</string>
 					<key>Screenshot</key>
-					<string>01D2B28C-288A-4ECD-B56C-6125EC22772B</string>
+					<string>328E8D31-121B-44DD-9E32-DCECE81AC31A</string>
 					<key>Timestamp</key>
-					<date>2014-04-15T11:01:59Z</date>
+					<date>2014-04-15T11:01:32Z</date>
 					<key>Type</key>
 					<integer>0</integer>
 					<key>children</key>
@@ -397,9 +426,9 @@
 					<key>Message</key>
 					<string>UIAButton: name:AppReview rect:{{80, 433}, {80, 47}}</string>
 					<key>Screenshot</key>
-					<string>3F109596-3186-44BB-9A59-301536B6DE74</string>
+					<string>A766C83A-FBF5-44BF-87C7-42212BB6543B</string>
 					<key>Timestamp</key>
-					<date>2014-04-15T11:01:59Z</date>
+					<date>2014-04-15T11:01:32Z</date>
 					<key>Type</key>
 					<integer>0</integer>
 					<key>children</key>
@@ -411,9 +440,9 @@
 					<key>Message</key>
 					<string>UIAButton: name:Twitter rect:{{160, 433}, {80, 47}}</string>
 					<key>Screenshot</key>
-					<string>846A4DDF-E35F-4041-9782-B2F94157D6EA</string>
+					<string>99E708B5-7D04-48F8-A548-897CE776286A</string>
 					<key>Timestamp</key>
-					<date>2014-04-15T11:01:59Z</date>
+					<date>2014-04-15T11:01:32Z</date>
 					<key>Type</key>
 					<integer>0</integer>
 					<key>children</key>
@@ -425,9 +454,9 @@
 					<key>Message</key>
 					<string>UIAButton: name:Help rect:{{240, 433}, {80, 47}}</string>
 					<key>Screenshot</key>
-					<string>1C40CFFA-D837-48B1-9E20-A8A3A72ECB7E</string>
+					<string>26BDEA10-61B2-48C6-B21D-EB53737A3E80</string>
 					<key>Timestamp</key>
-					<date>2014-04-15T11:01:59Z</date>
+					<date>2014-04-15T11:01:32Z</date>
 					<key>Type</key>
 					<integer>0</integer>
 					<key>children</key>
@@ -439,7 +468,7 @@
 					<key>Message</key>
 					<string>UIAToolbar: rect:{{0, 480}, {320, 44}}</string>
 					<key>Timestamp</key>
-					<date>2014-04-15T11:01:59Z</date>
+					<date>2014-04-15T11:01:32Z</date>
 					<key>Type</key>
 					<integer>0</integer>
 					<key>children</key>
@@ -450,9 +479,9 @@
 							<key>Message</key>
 							<string>UIAImage: rect:{{0, 480}, {320, 0}}</string>
 							<key>Screenshot</key>
-							<string>FA780E5C-3479-48CB-B69E-B0F2ADD68545</string>
+							<string>7BA6C026-5443-4294-822C-144688052447</string>
 							<key>Timestamp</key>
-							<date>2014-04-15T11:01:59Z</date>
+							<date>2014-04-15T11:01:32Z</date>
 							<key>Type</key>
 							<integer>0</integer>
 							<key>children</key>
@@ -464,7 +493,7 @@
 							<key>Message</key>
 							<string>UIAImage: rect:{{0, 480}, {320, 44}}</string>
 							<key>Timestamp</key>
-							<date>2014-04-15T11:01:59Z</date>
+							<date>2014-04-15T11:01:32Z</date>
 							<key>Type</key>
 							<integer>0</integer>
 							<key>children</key>
@@ -480,7 +509,7 @@
 			<key>Message</key>
 			<string>target.frontMostApp().mainWindow().tableViews()[0].cells()[4].tap()</string>
 			<key>Timestamp</key>
-			<date>2014-04-15T11:01:59Z</date>
+			<date>2014-04-15T11:01:32Z</date>
 			<key>Type</key>
 			<integer>0</integer>
 		</dict>
@@ -490,7 +519,7 @@
 			<key>Message</key>
 			<string>Screenshot of screen 'settings' taken with orientation 'Portrait'</string>
 			<key>Timestamp</key>
-			<date>2014-04-15T11:02:00Z</date>
+			<date>2014-04-15T11:01:33Z</date>
 			<key>Type</key>
 			<integer>1</integer>
 		</dict>
@@ -500,7 +529,7 @@
 			<key>Message</key>
 			<string>target.captureRectWithName("{origin:{x:0.00,y:0.00}, size:{height:480.00,width:320.00}}", "02_settings")</string>
 			<key>Timestamp</key>
-			<date>2014-04-15T11:02:00Z</date>
+			<date>2014-04-15T11:01:33Z</date>
 			<key>Type</key>
 			<integer>0</integer>
 		</dict>
@@ -510,475 +539,11 @@
 			<key>Message</key>
 			<string>02_settings</string>
 			<key>Screenshot</key>
-			<string>B880C3A7-0012-4455-890A-02589B365301</string>
+			<string>7B54183E-3C49-47AE-889A-37DC4748D534</string>
 			<key>Timestamp</key>
-			<date>2014-04-15T11:02:00Z</date>
+			<date>2014-04-15T11:01:33Z</date>
 			<key>Type</key>
 			<integer>8</integer>
-		</dict>
-		<dict>
-			<key>LogType</key>
-			<string>Default</string>
-			<key>Message</key>
-			<string>Found anchor for screen 'SignIn'</string>
-			<key>Timestamp</key>
-			<date>2014-04-15T11:02:00Z</date>
-			<key>Type</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>LogType</key>
-			<string>Debug</string>
-			<key>Message</key>
-			<string>target.frontMostApp().elements()[0].elements()[4].tap()</string>
-			<key>Timestamp</key>
-			<date>2014-04-15T11:02:01Z</date>
-			<key>Type</key>
-			<integer>0</integer>
-		</dict>
-		<dict>
-			<key>LogType</key>
-			<string>Debug</string>
-			<key>Message</key>
-			<string>target.frontMostApp().elements()[0].elements()[4].tap()</string>
-			<key>Timestamp</key>
-			<date>2014-04-15T11:02:02Z</date>
-			<key>Type</key>
-			<integer>0</integer>
-		</dict>
-		<dict>
-			<key>LogType</key>
-			<string>Debug</string>
-			<key>Message</key>
-			<string>target.frontMostApp().keyboard().typeString("riksof.yahoo")</string>
-			<key>Timestamp</key>
-			<date>2014-04-15T11:02:02Z</date>
-			<key>Type</key>
-			<integer>0</integer>
-		</dict>
-		<dict>
-			<key>LogType</key>
-			<string>Debug</string>
-			<key>Message</key>
-			<string>target.frontMostApp().elements()[0].elements()[6].tap()</string>
-			<key>Timestamp</key>
-			<date>2014-04-15T11:02:05Z</date>
-			<key>Type</key>
-			<integer>0</integer>
-		</dict>
-		<dict>
-			<key>LogType</key>
-			<string>Debug</string>
-			<key>Message</key>
-			<string>target.frontMostApp().keyboard().typeString("riksof123")</string>
-			<key>Timestamp</key>
-			<date>2014-04-15T11:02:05Z</date>
-			<key>Type</key>
-			<integer>0</integer>
-		</dict>
-		<dict>
-			<key>LogType</key>
-			<string>Debug</string>
-			<key>Message</key>
-			<string>target.frontMostApp().elements()[0].elements()[7].tap()</string>
-			<key>Timestamp</key>
-			<date>2014-04-15T11:02:07Z</date>
-			<key>Type</key>
-			<integer>0</integer>
-		</dict>
-		<dict>
-			<key>LogType</key>
-			<string>Default</string>
-			<key>Message</key>
-			<string>Found anchor for screen 'Home'</string>
-			<key>Timestamp</key>
-			<date>2014-04-15T11:02:12Z</date>
-			<key>Type</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>LogType</key>
-			<string>Debug</string>
-			<key>Message</key>
-			<string>target.frontMostApp().elements()[0].elements()[4].tap()</string>
-			<key>Timestamp</key>
-			<date>2014-04-15T11:02:12Z</date>
-			<key>Type</key>
-			<integer>0</integer>
-		</dict>
-		<dict>
-			<key>LogType</key>
-			<string>Default</string>
-			<key>Message</key>
-			<string>Found anchor for screen 'Flyer'</string>
-			<key>Timestamp</key>
-			<date>2014-04-15T11:02:14Z</date>
-			<key>Type</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>LogType</key>
-			<string>Default</string>
-			<key>Message</key>
-			<string>Screenshot of screen 'flyer' taken with orientation 'Portrait'</string>
-			<key>Timestamp</key>
-			<date>2014-04-15T11:02:15Z</date>
-			<key>Type</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>LogType</key>
-			<string>Debug</string>
-			<key>Message</key>
-			<string>target.captureRectWithName("{origin:{x:0.00,y:0.00}, size:{height:480.00,width:320.00}}", "03_flyer")</string>
-			<key>Timestamp</key>
-			<date>2014-04-15T11:02:15Z</date>
-			<key>Type</key>
-			<integer>0</integer>
-		</dict>
-		<dict>
-			<key>LogType</key>
-			<string>Screenshot</string>
-			<key>Message</key>
-			<string>03_flyer</string>
-			<key>Screenshot</key>
-			<string>84121534-D3B3-498B-AE1B-4F16B6FAD556</string>
-			<key>Timestamp</key>
-			<date>2014-04-15T11:02:15Z</date>
-			<key>Type</key>
-			<integer>8</integer>
-		</dict>
-		<dict>
-			<key>LogType</key>
-			<string>Debug</string>
-			<key>Message</key>
-			<string>target.frontMostApp().elements()[0].elements()[30].tap()</string>
-			<key>Timestamp</key>
-			<date>2014-04-15T11:02:15Z</date>
-			<key>Type</key>
-			<integer>0</integer>
-		</dict>
-		<dict>
-			<key>LogType</key>
-			<string>Default</string>
-			<key>Message</key>
-			<string>Screenshot of screen 'flyer' taken with orientation 'Portrait'</string>
-			<key>Timestamp</key>
-			<date>2014-04-15T11:02:16Z</date>
-			<key>Type</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>LogType</key>
-			<string>Debug</string>
-			<key>Message</key>
-			<string>target.captureRectWithName("{origin:{x:0.00,y:0.00}, size:{height:480.00,width:320.00}}", "04_flyer")</string>
-			<key>Timestamp</key>
-			<date>2014-04-15T11:02:16Z</date>
-			<key>Type</key>
-			<integer>0</integer>
-		</dict>
-		<dict>
-			<key>LogType</key>
-			<string>Screenshot</string>
-			<key>Message</key>
-			<string>04_flyer</string>
-			<key>Screenshot</key>
-			<string>4EE2679C-4F24-4E87-BF5E-AB48EBF9A339</string>
-			<key>Timestamp</key>
-			<date>2014-04-15T11:02:16Z</date>
-			<key>Type</key>
-			<integer>8</integer>
-		</dict>
-		<dict>
-			<key>LogType</key>
-			<string>Debug</string>
-			<key>Message</key>
-			<string>target.frontMostApp().mainWindow().scrollViews()[0].buttons()[3].tap()</string>
-			<key>Timestamp</key>
-			<date>2014-04-15T11:02:19Z</date>
-			<key>Type</key>
-			<integer>0</integer>
-		</dict>
-		<dict>
-			<key>LogType</key>
-			<string>Debug</string>
-			<key>Message</key>
-			<string>target.frontMostApp().mainWindow().navigationBars()[0].buttons()[3].tap()</string>
-			<key>Timestamp</key>
-			<date>2014-04-15T11:02:19Z</date>
-			<key>Type</key>
-			<integer>0</integer>
-		</dict>
-		<dict>
-			<key>LogType</key>
-			<string>Debug</string>
-			<key>Message</key>
-			<string>target.frontMostApp().mainWindow().navigationBars()[0].buttons()[2].tap()</string>
-			<key>Timestamp</key>
-			<date>2014-04-15T11:02:21Z</date>
-			<key>Type</key>
-			<integer>0</integer>
-		</dict>
-		<dict>
-			<key>LogType</key>
-			<string>Default</string>
-			<key>Message</key>
-			<string>Screenshot of screen 'flyer' taken with orientation 'Portrait'</string>
-			<key>Timestamp</key>
-			<date>2014-04-15T11:02:22Z</date>
-			<key>Type</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>LogType</key>
-			<string>Debug</string>
-			<key>Message</key>
-			<string>target.captureRectWithName("{origin:{x:0.00,y:0.00}, size:{height:480.00,width:320.00}}", "05_flyer")</string>
-			<key>Timestamp</key>
-			<date>2014-04-15T11:02:22Z</date>
-			<key>Type</key>
-			<integer>0</integer>
-		</dict>
-		<dict>
-			<key>LogType</key>
-			<string>Screenshot</string>
-			<key>Message</key>
-			<string>05_flyer</string>
-			<key>Screenshot</key>
-			<string>F36890FA-524E-4427-B2E5-0AD76ABC55B3</string>
-			<key>Timestamp</key>
-			<date>2014-04-15T11:02:22Z</date>
-			<key>Type</key>
-			<integer>8</integer>
-		</dict>
-		<dict>
-			<key>LogType</key>
-			<string>Debug</string>
-			<key>Message</key>
-			<string>target.frontMostApp().elements()[0].elements()[31].tap()</string>
-			<key>Timestamp</key>
-			<date>2014-04-15T11:02:23Z</date>
-			<key>Type</key>
-			<integer>0</integer>
-		</dict>
-		<dict>
-			<key>LogType</key>
-			<string>Default</string>
-			<key>Message</key>
-			<string>Screenshot of screen 'flyer' taken with orientation 'Portrait'</string>
-			<key>Timestamp</key>
-			<date>2014-04-15T11:02:24Z</date>
-			<key>Type</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>LogType</key>
-			<string>Debug</string>
-			<key>Message</key>
-			<string>target.captureRectWithName("{origin:{x:0.00,y:0.00}, size:{height:480.00,width:320.00}}", "06_flyer")</string>
-			<key>Timestamp</key>
-			<date>2014-04-15T11:02:24Z</date>
-			<key>Type</key>
-			<integer>0</integer>
-		</dict>
-		<dict>
-			<key>LogType</key>
-			<string>Screenshot</string>
-			<key>Message</key>
-			<string>06_flyer</string>
-			<key>Screenshot</key>
-			<string>0B45158C-218C-4941-B431-0BC3017F354F</string>
-			<key>Timestamp</key>
-			<date>2014-04-15T11:02:24Z</date>
-			<key>Type</key>
-			<integer>8</integer>
-		</dict>
-		<dict>
-			<key>LogType</key>
-			<string>Debug</string>
-			<key>Message</key>
-			<string>target.frontMostApp().mainWindow().scrollViews()[0].buttons()[4].tap()</string>
-			<key>Timestamp</key>
-			<date>2014-04-15T11:02:26Z</date>
-			<key>Type</key>
-			<integer>0</integer>
-		</dict>
-		<dict>
-			<key>LogType</key>
-			<string>Debug</string>
-			<key>Message</key>
-			<string>target.frontMostApp().mainWindow().navigationBars()[0].buttons()[3].tap()</string>
-			<key>Timestamp</key>
-			<date>2014-04-15T11:02:27Z</date>
-			<key>Type</key>
-			<integer>0</integer>
-		</dict>
-		<dict>
-			<key>LogType</key>
-			<string>Default</string>
-			<key>Message</key>
-			<string>Screenshot of screen 'flyer' taken with orientation 'Portrait'</string>
-			<key>Timestamp</key>
-			<date>2014-04-15T11:02:28Z</date>
-			<key>Type</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>LogType</key>
-			<string>Debug</string>
-			<key>Message</key>
-			<string>target.captureRectWithName("{origin:{x:0.00,y:0.00}, size:{height:480.00,width:320.00}}", "07_flyer")</string>
-			<key>Timestamp</key>
-			<date>2014-04-15T11:02:28Z</date>
-			<key>Type</key>
-			<integer>0</integer>
-		</dict>
-		<dict>
-			<key>LogType</key>
-			<string>Screenshot</string>
-			<key>Message</key>
-			<string>07_flyer</string>
-			<key>Screenshot</key>
-			<string>10096F50-35F8-4826-9A31-D0B43C76F7CF</string>
-			<key>Timestamp</key>
-			<date>2014-04-15T11:02:28Z</date>
-			<key>Type</key>
-			<integer>8</integer>
-		</dict>
-		<dict>
-			<key>LogType</key>
-			<string>Debug</string>
-			<key>Message</key>
-			<string>target.frontMostApp().mainWindow().scrollViews()[0].buttons()[0].tap()</string>
-			<key>Timestamp</key>
-			<date>2014-04-15T11:02:28Z</date>
-			<key>Type</key>
-			<integer>0</integer>
-		</dict>
-		<dict>
-			<key>LogType</key>
-			<string>Debug</string>
-			<key>Message</key>
-			<string>target.frontMostApp().mainWindow().navigationBars()[0].buttons()[3].tap()</string>
-			<key>Timestamp</key>
-			<date>2014-04-15T11:02:31Z</date>
-			<key>Type</key>
-			<integer>0</integer>
-		</dict>
-		<dict>
-			<key>LogType</key>
-			<string>Default</string>
-			<key>Message</key>
-			<string>Screenshot of screen 'flyer' taken with orientation 'Portrait'</string>
-			<key>Timestamp</key>
-			<date>2014-04-15T11:02:32Z</date>
-			<key>Type</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>LogType</key>
-			<string>Debug</string>
-			<key>Message</key>
-			<string>target.captureRectWithName("{origin:{x:0.00,y:0.00}, size:{height:480.00,width:320.00}}", "08_flyer")</string>
-			<key>Timestamp</key>
-			<date>2014-04-15T11:02:32Z</date>
-			<key>Type</key>
-			<integer>0</integer>
-		</dict>
-		<dict>
-			<key>LogType</key>
-			<string>Screenshot</string>
-			<key>Message</key>
-			<string>08_flyer</string>
-			<key>Screenshot</key>
-			<string>88B95F2D-7B34-4244-8A32-9D9E64B712AD</string>
-			<key>Timestamp</key>
-			<date>2014-04-15T11:02:33Z</date>
-			<key>Type</key>
-			<integer>8</integer>
-		</dict>
-		<dict>
-			<key>LogType</key>
-			<string>Debug</string>
-			<key>Message</key>
-			<string>target.frontMostApp().mainWindow().scrollViews()[0].buttons()[0].tap()</string>
-			<key>Timestamp</key>
-			<date>2014-04-15T11:02:33Z</date>
-			<key>Type</key>
-			<integer>0</integer>
-		</dict>
-		<dict>
-			<key>LogType</key>
-			<string>Debug</string>
-			<key>Message</key>
-			<string>target.frontMostApp().mainWindow().navigationBars()[0].buttons()[3].tap()</string>
-			<key>Timestamp</key>
-			<date>2014-04-15T11:02:35Z</date>
-			<key>Type</key>
-			<integer>0</integer>
-		</dict>
-		<dict>
-			<key>LogType</key>
-			<string>Debug</string>
-			<key>Message</key>
-			<string>target.frontMostApp().mainWindow().navigationBars()[0].buttons()[2].tap()</string>
-			<key>Timestamp</key>
-			<date>2014-04-15T11:02:36Z</date>
-			<key>Type</key>
-			<integer>0</integer>
-		</dict>
-		<dict>
-			<key>LogType</key>
-			<string>Default</string>
-			<key>Message</key>
-			<string>Screenshot of screen 'flyer' taken with orientation 'Portrait'</string>
-			<key>Timestamp</key>
-			<date>2014-04-15T11:02:37Z</date>
-			<key>Type</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>LogType</key>
-			<string>Debug</string>
-			<key>Message</key>
-			<string>target.captureRectWithName("{origin:{x:0.00,y:0.00}, size:{height:480.00,width:320.00}}", "09_flyer")</string>
-			<key>Timestamp</key>
-			<date>2014-04-15T11:02:37Z</date>
-			<key>Type</key>
-			<integer>0</integer>
-		</dict>
-		<dict>
-			<key>LogType</key>
-			<string>Screenshot</string>
-			<key>Message</key>
-			<string>09_flyer</string>
-			<key>Screenshot</key>
-			<string>203E8FEF-E134-4671-8AFB-662D34397EC8</string>
-			<key>Timestamp</key>
-			<date>2014-04-15T11:02:38Z</date>
-			<key>Type</key>
-			<integer>8</integer>
-		</dict>
-		<dict>
-			<key>LogType</key>
-			<string>Debug</string>
-			<key>Message</key>
-			<string>target.frontMostApp().mainWindow().navigationBars()[0].buttons()[0].tap()</string>
-			<key>Timestamp</key>
-			<date>2014-04-15T11:02:38Z</date>
-			<key>Type</key>
-			<integer>0</integer>
-		</dict>
-		<dict>
-			<key>LogType</key>
-			<string>Error</string>
-			<key>Message</key>
-			<string>Script threw an uncaught JavaScript error: Could not find anchor for screen 'Home' on line 615 of feature.js</string>
-			<key>Timestamp</key>
-			<date>2014-04-15T11:02:46Z</date>
-			<key>Type</key>
-			<integer>10</integer>
 		</dict>
 		<dict>
 			<key>LogType</key>
@@ -986,7 +551,7 @@
 			<key>Message</key>
 			<string>Script was stopped by the user</string>
 			<key>Timestamp</key>
-			<date>2014-04-15T11:02:46Z</date>
+			<date>2014-04-15T14:00:01Z</date>
 			<key>Type</key>
 			<integer>9</integer>
 		</dict>
