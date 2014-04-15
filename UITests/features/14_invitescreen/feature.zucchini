@@ -1,12 +1,12 @@
 Start on the "Home" screen:
   Take a screenshot
-  Tap "Settings"
-
-Then on the "Settings" screen:
+  Tap "Invite"
+  Wait for "2" seconds
   Show elements
-  Tap "Sign In"
-  Take a screenshot
-  
+  Confirm "Later"
+  Tap "Invite"
+  Tap "Sign In1"
+
 Then on the "SignIn" screen:
   Clear the "Username" field
   Type "riksof.yahoo" in the "Username" field
