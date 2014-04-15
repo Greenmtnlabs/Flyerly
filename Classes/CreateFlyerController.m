@@ -1692,11 +1692,32 @@ int selectedAddMoreLayerTab = -1;
         editButtonGlobal.uid = currentLayer;
         [self deleteLayer:editButtonGlobal overrided:nil];
         [Flurry logEvent:@"Layer Deleted"];
+        
 	} else if(alertView == signInAlert &&  [title isEqualToString:@"Sign In"]) {
         
-           NSLog(@"Sign In was selected.");
-           signInController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
-           [self.navigationController pushViewController:signInController animated:YES];
+        NSLog(@"Sign In was selected.");
+        signInController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
+
+        FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+        signInController.launchController = appDelegate.lauchController;
+        
+        __weak SigninController *weakSigninController = signInController;
+        
+        signInController.signInCompletion = ^void(void) {
+            NSLog(@"Sign In via Share");
+            
+            // Push Invite friends screen on navigation stack
+            //weakMainFlyerScreen.addFriendsController = [[InviteFriendsController alloc]initWithNibName:@"InviteFriendsController" bundle:nil];
+            
+            [weakSigninController.navigationController popViewControllerAnimated:YES];
+            
+            [shareButton sendActionsForControlEvents: UIControlEventTouchUpInside];
+
+            //[weakMainFlyerScreen.navigationController pushViewController:weakMainFlyerScreen.addFriendsController animated:YES];
+            
+        };
+        
+        [self.navigationController pushViewController:signInController animated:YES];
        
     }
     
@@ -2328,70 +2349,76 @@ int selectedAddMoreLayerTab = -1;
  */
 -(void)share {
     
-    // Disable  Buttons
-    sharePanel.hidden = NO;
-    rightUndoBarButton.enabled = NO;
-    shareButton.enabled = NO;
-    helpButton.enabled = NO;
-
-    
-    NSString *shareImagePath = [flyer getFlyerImage];
-    UIImage *shareImage =  [UIImage imageWithContentsOfFile:shareImagePath];
-
-    //Here we Pass Param to Share Screen Which use for Sharing
-    shareviewcontroller.selectedFlyerImage = shareImage;
-    shareviewcontroller.flyer = self.flyer;
-    shareviewcontroller.imageFileName = shareImagePath;
-    shareviewcontroller.rightUndoBarButton = rightUndoBarButton;
-    shareviewcontroller.shareButton = shareButton;
-    shareviewcontroller.helpButton = helpButton;
-    shareviewcontroller.titleView.text = [flyer getFlyerTitle];
-    NSString *description = [flyer getFlyerDescription];
-    if (![description isEqualToString:@""]) {
-        shareviewcontroller.descriptionView.text = description;
-    }
-    
-    NSString *shareType  = [[NSUserDefaults standardUserDefaults] valueForKey:@"FlyerlyPublic"];
-    
-    if ([shareType isEqualToString:@"Private"]) {
-        [shareviewcontroller.flyerShareType setSelected:YES];
-        
-    }
-    [flyer setShareType:shareType];
-    shareviewcontroller.selectedFlyerDescription = [flyer getFlyerDescription];
-    shareviewcontroller.topTitleLabel = titleLabel;
-    [shareviewcontroller.descriptionView setReturnKeyType:UIReturnKeyDone];
-    shareviewcontroller.Yvalue = [NSString stringWithFormat:@"%f",self.view.frame.size.height];
-    
     if ([[PFUser currentUser] sessionToken]) {
+        
+        // Disable  Buttons
+        sharePanel.hidden = NO;
+        rightUndoBarButton.enabled = NO;
+        shareButton.enabled = NO;
+        helpButton.enabled = NO;
+        
+        
+        NSString *shareImagePath = [flyer getFlyerImage];
+        UIImage *shareImage =  [UIImage imageWithContentsOfFile:shareImagePath];
+        
+        //Here we Pass Param to Share Screen Which use for Sharing
+        shareviewcontroller.selectedFlyerImage = shareImage;
+        shareviewcontroller.flyer = self.flyer;
+        shareviewcontroller.imageFileName = shareImagePath;
+        shareviewcontroller.rightUndoBarButton = rightUndoBarButton;
+        shareviewcontroller.shareButton = shareButton;
+        shareviewcontroller.helpButton = helpButton;
+        shareviewcontroller.titleView.text = [flyer getFlyerTitle];
+        NSString *description = [flyer getFlyerDescription];
+        if (![description isEqualToString:@""]) {
+            shareviewcontroller.descriptionView.text = description;
+        }
+        
+        NSString *shareType  = [[NSUserDefaults standardUserDefaults] valueForKey:@"FlyerlyPublic"];
+        
+        if ([shareType isEqualToString:@"Private"]) {
+            [shareviewcontroller.flyerShareType setSelected:YES];
+            
+        }
+        [flyer setShareType:shareType];
+        shareviewcontroller.selectedFlyerDescription = [flyer getFlyerDescription];
+        shareviewcontroller.topTitleLabel = titleLabel;
+        [shareviewcontroller.descriptionView setReturnKeyType:UIReturnKeyDone];
+        shareviewcontroller.Yvalue = [NSString stringWithFormat:@"%f",self.view.frame.size.height];
+        
         PFUser *user = [PFUser currentUser];
         if (user[@"appStarRate"])
             [self setStarsofShareScreen:user[@"appStarRate"]];
         
         [user saveInBackground];
-    } else {
     
+        [shareviewcontroller setSocialStatus];
+        
+        //Create Animation Here
+        [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height, 320,425 )];
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:0.4f];
+        [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height -425, 320,425 )];
+        [UIView commitAnimations];
+        
+    } else {
+       
         // Alert when user logged in as anonymous
-        UIAlertView *signInAlert = [[UIAlertView alloc] initWithTitle:@"Sign In"
-                                                          message:@"This feature requires you to sign in first. Do you want to sign in now?"
-                                                         delegate:self
-                                                cancelButtonTitle:nil
-                                                otherButtonTitles:nil];
+        signInAlert = [[UIAlertView alloc] initWithTitle:@"Sign In"
+                                                              message:@"This feature requires you to sign in first. Do you want to sign in now?"
+                                                             delegate:self
+                                                    cancelButtonTitle:nil
+                                                    otherButtonTitles:nil];
+        
         [signInAlert addButtonWithTitle:@"Sign In"];
         [signInAlert addButtonWithTitle: @"Later"];
         
         [signInAlert show];
+        
+        
     }
     
     
-    [shareviewcontroller setSocialStatus];
-    
-    //Create Animation Here
-    [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height, 320,425 )];
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.4f];
-        [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height -425, 320,425 )];
-    [UIView commitAnimations];
   
 
 }
