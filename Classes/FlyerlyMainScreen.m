@@ -103,7 +103,7 @@
             
         };
         
-        [self.navigationController pushViewController:signInController animated:NO];
+        [self.navigationController pushViewController:signInController animated:YES];
     }
    
     

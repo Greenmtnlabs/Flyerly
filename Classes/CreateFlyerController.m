@@ -1693,7 +1693,7 @@ int selectedAddMoreLayerTab = -1;
         [self deleteLayer:editButtonGlobal overrided:nil];
         [Flurry logEvent:@"Layer Deleted"];
         
-	} else if(alertView == signInAlert &&  [title isEqualToString:@"Sign In"]) {
+	} else if(alertView == signInAlert && buttonIndex == 0) {
         
         NSLog(@"Sign In was selected.");
         signInController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
@@ -1707,9 +1707,7 @@ int selectedAddMoreLayerTab = -1;
             NSLog(@"Sign In via Share");
             
             UINavigationController* navigationController = weakSigninController.navigationController;
-            
             [navigationController popViewControllerAnimated:NO];
-
             [weakSigninController.navigationController popViewController:weakSigninController];
             
             [shareButton sendActionsForControlEvents: UIControlEventTouchUpInside];
@@ -2407,11 +2405,9 @@ int selectedAddMoreLayerTab = -1;
         signInAlert = [[UIAlertView alloc] initWithTitle:@"Sign In"
                                                               message:@"This feature requires you to sign in first. Do you want to sign in now?"
                                                              delegate:self
-                                                    cancelButtonTitle:nil
-                                                    otherButtonTitles:nil];
+                                                    cancelButtonTitle:@"Sign In"
+                                                    otherButtonTitles:@"Later",nil];
         
-        [signInAlert addButtonWithTitle:@"Sign In"];
-        [signInAlert addButtonWithTitle: @"Later"];
         
         [signInAlert show];
         
