@@ -11,6 +11,7 @@
 
 @implementation FlyrViewController
 @synthesize tView,searchTextField,signInSignUpAlert;
+NSInteger productSelected;
 
 
 #pragma mark  View Methods
@@ -451,8 +452,6 @@
 }
 
 
-
-
 /* HERE WE PURCHASE PRODUCT FROM APP STORE
  */
 -(void)purchaseProductID:(NSString *)pid{
@@ -512,6 +511,8 @@
         //if not cancel and Restore button presses
         if(buttonIndex != 2 && buttonIndex != 3) {
             
+            productSelected = buttonIndex;
+            
             //Checking if the user is valid or anonymus
             if ([[PFUser currentUser] sessionToken]) {
                 //This line pop up login screen if user not exist
@@ -520,6 +521,7 @@
                 //Getting Selected Product
                 SKProduct *product = [requestedProducts objectAtIndex:buttonIndex];
                 
+                
                 [self purchaseProductID:product.productIdentifier];
 
             } else {
@@ -527,10 +529,8 @@
                 signInSignUpAlert = [[UIAlertView alloc] initWithTitle:@"Sign In"
                                                                message:@"This feature requires you to sign in first. Do you want to sign in now?"
                                                               delegate:self
-                                                     cancelButtonTitle:nil
-                                                     otherButtonTitles:nil];
-                [signInSignUpAlert addButtonWithTitle:@"Sign In"];
-                [signInSignUpAlert addButtonWithTitle: @"Later"];
+                                                     cancelButtonTitle:@"Sign In"
+                                                     otherButtonTitles:@"Later",nil];
                 
                 [signInSignUpAlert show];
             }
@@ -603,11 +603,29 @@
 {
     NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
     
-    if(alertView == signInSignUpAlert && [title isEqualToString:@"Sign In"])
+    if(alertView == signInSignUpAlert &&  buttonIndex == 0)
     {
         NSLog(@"Sign In was selected.");
         signInController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
-        [self.navigationController pushViewController:signInController animated:YES];
+        
+        FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+        signInController.launchController = appDelegate.lauchController;
+        
+         __weak SigninController *weakSigninController = signInController;
+        
+        signInController.signInCompletion = ^void(void) {
+            NSLog(@"Sign In via Invite");
+            
+            UINavigationController* navigationController = weakSigninController.navigationController;
+            [navigationController popViewControllerAnimated:NO];
+            [weakSigninController.navigationController popViewController:weakSigninController];      
+            
+            //Getting Selected Product
+            SKProduct *product = [requestedProducts objectAtIndex:productSelected];
+            [self purchaseProductID:product.productIdentifier];           
+        };
+        
+        [self.navigationController pushViewController:signInController animated:YES];       
     
     } else if(alertView == signInSignUpAlert && [title isEqualToString:@"Sign Up"])
     {

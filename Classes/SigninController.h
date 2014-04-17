@@ -43,6 +43,7 @@
 
 @property(nonatomic, copy)   void (^signInCompletion)(void);
 
+
 -(IBAction)onSignIn;
 -(IBAction)onSignUp;
 -(IBAction)onSignInFacebook;
@@ -50,5 +51,6 @@
 -(IBAction)forgetPassword;
 
 -(void)signIn:(BOOL)validated username:(NSString *)userName password:(NSString *)pwd;
+-(void) onSignInSuccess;
 
 @end

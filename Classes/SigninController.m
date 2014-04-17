@@ -142,7 +142,6 @@
         [FlyerUser updateFolderStructure:[user objectForKey:@"username"]];
         
         UINavigationController* navigationController = self.navigationController;
-        
         [navigationController popViewControllerAnimated:NO];
         
         [self onSignInSuccess];        
@@ -161,8 +160,7 @@
 }
 
 
--(IBAction)onSignInFacebook{
-    
+-(IBAction)onSignInFacebook{    
     
     //Internet Connectivity Check
     if([FlyerlySingleton connected]){
@@ -196,7 +194,6 @@
                 
                 [self onSignInSuccess];
                 
-                [self onSignInSuccess];
                 
                  // Remove Current UserName for Device configuration
                 [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"User"];
@@ -209,7 +206,6 @@
                 
                 // For Parse New User Merge to old Facebook User
                 [appDelegate fbChangeforNewVersion];
-
                 
                 [self performSelectorOnMainThread:@selector(pushViewController:) withObject: launchController waitUntilDone:YES];
                 
@@ -268,12 +264,10 @@
                 UINavigationController* navigationController = self.navigationController;
                 
                 [navigationController popViewControllerAnimated:NO];
-
                 
                 [self onSignInSuccess];
 
-                NSString *twitterUsername = [PFTwitterUtils twitter].screenName;                
-
+                NSString *twitterUsername = [PFTwitterUtils twitter].screenName;
                 
                 // Remove Current UserName for Device configuration
                 [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"User"];
@@ -296,13 +290,11 @@
                 UINavigationController* navigationController = self.navigationController;
                 
                 [navigationController popViewControllerAnimated:NO];
-
                 
                 [self onSignInSuccess];
                 
                 // Remove Current UserName for Device configuration
                 [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"User"];
-
                 
                 // Login success Move to Flyerly
                 launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil] ;
@@ -328,7 +320,9 @@
     }else{
         registerController = [[RegisterController alloc]initWithNibName:@"RegisterController" bundle:nil];
     }
-
+    
+    registerController.signInController = self;
+    
     [self.navigationController pushViewController:registerController animated:YES];
 }
 

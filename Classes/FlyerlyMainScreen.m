@@ -88,21 +88,26 @@
         NSLog(@"Sign In was selected.");
         SigninController *signInController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
         
+        FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+        signInController.launchController = appDelegate.lauchController;
+        
         signInController.launchController = self;
         
         __weak FlyerlyMainScreen *weakMainFlyerScreen = self;
                         
         signInController.signInCompletion = ^void(void) {
             NSLog(@"Sign In via Invite");
-             
-            // Push Invite friends screen on navigation stack
-            weakMainFlyerScreen.addFriendsController = [[InviteFriendsController alloc]initWithNibName:@"InviteFriendsController" bundle:nil];
             
+            UINavigationController* navigationController = weakMainFlyerScreen.navigationController;
+            [navigationController popViewControllerAnimated:NO];
+            
+            // Push Invite friends screen on navigation stack
+            weakMainFlyerScreen.addFriendsController = [[InviteFriendsController alloc]initWithNibName:@"InviteFriendsController" bundle:nil];            
             [weakMainFlyerScreen.navigationController pushViewController:weakMainFlyerScreen.addFriendsController animated:YES];
             
         };
         
-        [self.navigationController pushViewController:signInController animated:NO];
+        [self.navigationController pushViewController:signInController animated:YES];
     }
    
     
@@ -638,7 +643,7 @@
         PFUser *user = [PFUser currentUser];
         
         //Return on User not exists
-        if (user == nil)return;
+        if ([[user sessionToken] length] == 0)return;
         
         //Create query for get user purchases
         PFQuery *query = [PFQuery queryWithClassName:@"InApp"];
