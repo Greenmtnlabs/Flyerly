@@ -634,21 +634,61 @@
     PFUser *user = [PFUser currentUser];
     user[@"appStarRate"] = starValue;
     [user saveInBackground];
+
+    // check if the user rated from 1 star to 3 star
+    if( sender == star1 || sender == star2 || sender == star3)
+    {
+        UIAlertView  *appRateAlertEmail ;
+         appRateAlertEmail.tag = 0;
+   appRateAlertEmail  = [[UIAlertView alloc]initWithTitle:@"Thank you! Please shares your feedback" message:@"" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"Later" ,nil];
+        
+   
     
-  UIAlertView  *appRateAlert = [[UIAlertView alloc]initWithTitle:@"Do you want to rate us on App store" message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes" ,nil];
-    [appRateAlert show];
-    
+   [appRateAlertEmail show];
+    }
+    //check if the user rated from 4 star to 5 star
+    else if( sender == star4 || sender == star5)
+    {
+        UIAlertView *appRateAlertStore;
+        appRateAlertStore.tag = 1 ;
+       appRateAlertStore  = [[UIAlertView alloc]initWithTitle:@"Thank you! Please shares your kind words on the App store" message:@"" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"Later" ,nil];
+        
+        
+        [appRateAlertStore show];
+    }
 }
 
 #pragma mark UIAlertView delegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-  
-    if(buttonIndex == 1) {
-        NSString *url = [NSString stringWithFormat: @"itms-apps://itunes.apple.com/app/id344130515"];
-        [[UIApplication sharedApplication] openURL: [NSURL URLWithString: url]];
+  // if 1 alert view selected having tag 0
+   switch (alertView.tag)
+  {
+          case 0:
+       if (buttonIndex == 0 )
+      {
+          [self sendAlertEmail];
+       /*
+          SHKItem *item = [SHKItem text:@""];
+          item.title = @"Shares your feedback";
+          [SHKMail shareItem:item];
+       */
+      }
+    break;
+          
+    //if 2 alert view selected having tag 1
+        case 1:
+    
+    if(buttonIndex == 0) {
+            NSString *url = [NSString stringWithFormat: @"itms-apps://itunes.apple.com/app/id344130515"];
+            [[UIApplication sharedApplication] openURL: [NSURL URLWithString: url]];
+        }
+    
+    break;
+    
+      }
     }
-}
+
 
 -(IBAction)clickOnFlyerType:(id)sender {
     
@@ -663,5 +703,39 @@
 
 }
 
+-(void)sendAlertEmail{
+  
+    
+    MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
+    
+    if([MFMailComposeViewController canSendMail]){
+        
+        picker.mailComposeDelegate = self;
+        [picker setSubject:@"Inquiry..."];
+        
+        // Set up recipients
+        NSMutableArray *toRecipients = [[NSMutableArray alloc]init];
+        [toRecipients addObject:@"info@greenmtnlabs.com"];
+        [picker setToRecipients:toRecipients];
+    
+      
+    }
+    
+  [self presentModalViewController:picker animated:YES];
+}
 
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
+	switch (result) {
+		case MFMailComposeResultCancelled:
+			break;
+		case MFMailComposeResultSaved:
+			break;
+		case MFMailComposeResultSent:
+			break;
+		case MFMailComposeResultFailed:
+			break;
+	}
+    
+    [controller dismissModalViewControllerAnimated:YES];
+}
 @end
