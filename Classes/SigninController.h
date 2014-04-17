@@ -18,9 +18,8 @@
 
 @class FlyerlySingleton,RegisterController,ResetPWViewController,FlyerlyMainScreen;
 
-@interface SigninController : ParentViewController <PFLogInViewControllerDelegate,FBLoginViewDelegate >{
-    
-    //FlyerlyMainScreen *launchController;
+@interface SigninController : ParentViewController <PFLogInViewControllerDelegate,FBLoginViewDelegate> {
+
     RegisterController *registerController;
     FlyerlySingleton *globle;
 

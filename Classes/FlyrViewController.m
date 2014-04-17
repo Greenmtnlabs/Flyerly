@@ -622,9 +622,7 @@ NSInteger productSelected;
             
             //Getting Selected Product
             SKProduct *product = [requestedProducts objectAtIndex:productSelected];
-            [self purchaseProductID:product.productIdentifier];
-
-            
+            [self purchaseProductID:product.productIdentifier];           
         };
         
         [self.navigationController pushViewController:signInController animated:YES];       
