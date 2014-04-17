@@ -231,7 +231,7 @@
                 appDelegate.lauchController = self.launchController;
                 [appDelegate fbChangeforNewVersion];
 
-                [self.navigationController pushViewController:self.launchController animated:YES];
+                [navigationController pushViewController:self.launchController animated:YES];
 
             }
         }];
@@ -284,7 +284,7 @@
                 appDelegate.lauchController = self.launchController;
                 [appDelegate twitterChangeforNewVersion:twitterUsername];
                 
-                [self.navigationController pushViewController:self.launchController animated:YES];
+                [navigationController pushViewController:self.launchController animated:YES];
                 
 
             } else {
@@ -304,7 +304,7 @@
                 
                 // Login success Move to Flyerly
                 self.launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil] ;
-                [self.navigationController pushViewController:self.launchController animated:YES];
+                [navigationController pushViewController:self.launchController animated:YES];
 
                 
             }     
