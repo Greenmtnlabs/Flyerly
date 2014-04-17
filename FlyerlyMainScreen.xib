@@ -270,7 +270,7 @@
         </view>
     </objects>
     <resources>
-        <image name="Zmain_screenbg-568h.png" width="253" height="35"/>
+        <image name="Zmain_screenbg-568h.png" width="612" height="612"/>
         <image name="likealertbg.png" width="213" height="100"/>
         <image name="likealertclose.png" width="58" height="24"/>
         <image name="mid_shadow.png" width="105" height="52"/>
