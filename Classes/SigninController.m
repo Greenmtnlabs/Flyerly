@@ -140,7 +140,6 @@
         [FlyerUser updateFolderStructure:[user objectForKey:@"username"]];
         
         UINavigationController* navigationController = self.navigationController;
-        
         [navigationController popViewControllerAnimated:NO];
         
         [self onSignInSuccess];        
@@ -266,7 +265,6 @@
                 UINavigationController* navigationController = self.navigationController;
                 
                 [navigationController popViewControllerAnimated:NO];
-
                 
                 [self onSignInSuccess];
 
@@ -294,7 +292,6 @@
                 UINavigationController* navigationController = self.navigationController;
                 
                 [navigationController popViewControllerAnimated:NO];
-
                 
                 [self onSignInSuccess];
                 
@@ -326,7 +323,9 @@
     }else{
         registerController = [[RegisterController alloc]initWithNibName:@"RegisterController" bundle:nil];
     }
-
+    
+    registerController.signInController = self;
+    
     [self.navigationController pushViewController:registerController animated:YES];
 }
 

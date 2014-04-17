@@ -257,6 +257,12 @@
         }else if(indexPath.row == 4){
             
             signInController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
+            
+            signInController.signInCompletion = ^void(void) {
+                
+                NSLog(@"Sign In via Settings");
+            };
+            
             [self.navigationController pushViewController:signInController animated:YES];            
             
         }
