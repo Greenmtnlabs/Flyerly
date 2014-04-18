@@ -709,11 +709,11 @@
   
     
     MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
-    [self.view.window.rootViewController presentViewController:picker animated:YES completion:nil];
+  
     if([MFMailComposeViewController canSendMail]){
         
         picker.mailComposeDelegate = self;
-        [picker setSubject:@"Please shares your feedback"];
+        [picker setSubject:@"Shares your feedback"];
         
         // Set up recipients
         NSMutableArray *toRecipients = [[NSMutableArray alloc]init];
@@ -721,8 +721,7 @@
         [picker setToRecipients:toRecipients];
       
     }
-    
-  [self presentModalViewController:picker animated:YES];
+      [self.view.window.rootViewController presentViewController:picker animated:YES completion:nil];
 }
 
 - (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
