@@ -141,14 +141,16 @@
         PFUser *user = [PFUser currentUser];
         [FlyerUser updateFolderStructure:[user objectForKey:@"username"]];
         
-        UINavigationController* navigationController = self.navigationController;
-        [navigationController popViewControllerAnimated:NO];
+        // We keep an instance of navigation contrller since the completion block might pop us out of the
+        // navigation controller
+        UINavigationController *navigationController = self.navigationController;
         
-        [self onSignInSuccess];        
+        [self onSignInSuccess];
         
         if (launchController == nil) {
             launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil];
             [navigationController pushViewController: launchController animated:YES];
+
         }
         
     }
@@ -188,14 +190,9 @@
                 
                 NSLog(@"User with facebook signed up and logged in!");
                 
-                UINavigationController* navigationController = self.navigationController;
-                
-                [navigationController popViewControllerAnimated:NO];
-                
                 [self onSignInSuccess];
-                
-                
-                 // Remove Current UserName for Device configuration
+
+                // Remove Current UserName for Device configuration
                 [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"User"];
                 
                 // Login success Move to Flyerly
@@ -205,16 +202,18 @@
                 appDelegate.lauchController = launchController;
                 
                 // For Parse New User Merge to old Facebook User
+
                 [appDelegate fbChangeforNewVersion];
                 
                 [self performSelectorOnMainThread:@selector(pushViewController:) withObject: launchController waitUntilDone:YES];
+
                 
             } else {
                 NSLog(@"User with facebook logged in!");
                 
-                UINavigationController* navigationController = self.navigationController;
-                
-                [navigationController popViewControllerAnimated:NO];
+                // We keep an instance of navigation contrller since the completion block might pop us out of the
+                // navigation controller
+                UINavigationController *navigationController = self.navigationController;
                 
                 [self onSignInSuccess];
                 
@@ -229,7 +228,10 @@
                 appDelegate.lauchController = launchController;
                 [appDelegate fbChangeforNewVersion];
 
-                [navigationController pushViewController: launchController animated:YES];
+                if (launchController == nil) {
+                    launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil];
+                    [navigationController pushViewController: launchController animated:YES];
+                }
 
             }
         }];
@@ -245,7 +247,7 @@
     
     if([FlyerlySingleton connected]){
         
-        [self showLoadingIndicator];
+        [self showLoadingView];
         
         [PFTwitterUtils logInWithBlock:^(PFUser *user, NSError *error) {
             
@@ -261,9 +263,9 @@
                 
                 NSLog(@"User signed up and logged in with Twitter!");
                 
-                UINavigationController* navigationController = self.navigationController;
-                
-                [navigationController popViewControllerAnimated:NO];
+                // We keep an instance of navigation contrller since the completion block might pop us out of the
+                // navigation controller
+                UINavigationController *navigationController = self.navigationController;
                 
                 [self onSignInSuccess];
 
@@ -279,17 +281,19 @@
                 FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
                 appDelegate.lauchController = launchController;
                 [appDelegate twitterChangeforNewVersion:twitterUsername];
-                
-                [navigationController pushViewController: launchController animated:YES];
-                
 
+                if ( launchController == nil) {
+                    launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil];
+                    [navigationController pushViewController:launchController animated:YES];
+                }
+                
             } else {
                 
                 NSLog(@"User logged in with Twitter!");
                 
-                UINavigationController* navigationController = self.navigationController;
-                
-                [navigationController popViewControllerAnimated:NO];
+                // We keep an instance of navigation contrller since the completion block might pop us out of the
+                // navigation controller
+                UINavigationController *navigationController = self.navigationController;
                 
                 [self onSignInSuccess];
                 
@@ -297,10 +301,12 @@
                 [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"User"];
                 
                 // Login success Move to Flyerly
-                launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil] ;
-                [navigationController pushViewController:launchController animated:YES];
 
-                
+                if ( launchController == nil) {
+                    launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil];
+                    [navigationController pushViewController:launchController animated:YES];
+                }
+
             }     
         }];
     
