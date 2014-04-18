@@ -401,16 +401,15 @@ int productSelected;
 
 -(void)requestProduct {
     
-
     if ([FlyerlySingleton connected]) {
-        
+ 
         if (sheetAlreadyOpen)return;
 
         //Check For Crash Maintain
         cancelRequest = NO;
         
         [self showLoadingIndicator];
-        sheetAlreadyOpen =YES;
+        //sheetAlreadyOpen =YES;
         //These are over Products on App Store
         NSSet *products = [NSSet setWithArray:@[@"com.flyerly.AllDesignBundle",@"com.flyerly.UnlockSavedFlyers"]];
         
@@ -422,6 +421,7 @@ int productSelected;
             NSLog(@"Products loaded");
             
             requestedProducts = products;
+            /*
             UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:@"Choose Product" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles: nil];
         
             for(SKProduct *product in products)
@@ -437,7 +437,27 @@ int productSelected;
             [actionSheet showInView:self.view];
             [self hideLoadingIndicator];
             sheetAlreadyOpen = NO;
+            */
             
+            NSString* alertMessage = @"";
+            
+            
+            
+            for(SKProduct *product in products)
+            {
+                
+                alertMessage = [alertMessage stringByAppendingString:[NSString stringWithFormat:@"%C %@ - %@\n", (unichar) 0x2022, product.localizedTitle,
+                                                 product.priceAsString]];
+            }
+            
+            signInSignUpAlert = [[UIAlertView alloc]
+                                  initWithTitle: @"Sign In to purchase or restore any of the following"
+                                  message: alertMessage
+                                  delegate: self
+                                  cancelButtonTitle:@"Later"
+                                  otherButtonTitles:@"Sign In", nil];
+            
+            [signInSignUpAlert show];
             
         } failure:^(NSError *error) {
             NSLog(@"Something went wrong");
@@ -520,7 +540,6 @@ int productSelected;
                 
                 //Getting Selected Product
                 SKProduct *product = [requestedProducts objectAtIndex:buttonIndex];
-                
                 [self purchaseProductID:product.productIdentifier];
 
             } else {
