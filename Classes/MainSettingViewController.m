@@ -72,7 +72,7 @@
     
     category = [[NSMutableArray alloc] init];
     [category addObject:@"Save to Gallery"];
-    [category addObject:@"Flyerly public"];
+    [category addObject:@"Flyers are public"];
     
     //Checking if the user is valid or anonymous
     if ([[PFUser currentUser] sessionToken].length != 0) {

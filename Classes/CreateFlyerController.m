@@ -1687,13 +1687,13 @@ int selectedAddMoreLayerTab = -1;
     
     NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
     
-    if(alertView == deleteAlert && buttonIndex == 1) {
+    if(alertView == deleteAlert && buttonIndex == 0) {
         
         editButtonGlobal.uid = currentLayer;
         [self deleteLayer:editButtonGlobal overrided:nil];
         [Flurry logEvent:@"Layer Deleted"];
         
-	} else if(alertView == signInAlert && buttonIndex == 0) {
+	} else if(alertView == signInAlert && buttonIndex == 1) {
         
         NSLog(@"Sign In was selected.");
         signInController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
@@ -2405,8 +2405,8 @@ int selectedAddMoreLayerTab = -1;
         signInAlert = [[UIAlertView alloc] initWithTitle:@"Sign In"
                                                               message:@"This feature requires you to sign in first. Do you want to sign in now?"
                                                              delegate:self
-                                                    cancelButtonTitle:@"Sign In"
-                                                    otherButtonTitles:@"Later",nil];
+                                                    cancelButtonTitle:@"Later"
+                                                    otherButtonTitles:@"Sign In",nil];
         
         
         [signInAlert show];

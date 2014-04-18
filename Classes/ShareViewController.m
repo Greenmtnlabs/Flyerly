@@ -478,7 +478,7 @@
 {
     
 	if (!sharer.quiet)
-		[[SHKActivityIndicator currentIndicator] displayActivity:SHKLocalizedString(@"Saving to %@", [[sharer class] sharerTitle]) forSharer:sharer];
+		[[SHKActivityIndicator currentIndicator] displayActivity:SHKLocalizedString(@"Sharing to %@", [[sharer class] sharerTitle]) forSharer:sharer];
 }
 
 - (void)sharerFinishedSending:(SHKSharer *)sharer
@@ -526,7 +526,7 @@
     
     
     if (!sharer.quiet)
-		[[SHKActivityIndicator currentIndicator] displayCompleted:SHKLocalizedString(@"Saved!")];
+		[[SHKActivityIndicator currentIndicator] displayCompleted:SHKLocalizedString(@"Flyer Posted!")];
 }
 
 - (void)sharer:(SHKSharer *)sharer failedWithError:(NSError *)error shouldRelogin:(BOOL)shouldRelogin
@@ -634,21 +634,52 @@
     PFUser *user = [PFUser currentUser];
     user[@"appStarRate"] = starValue;
     [user saveInBackground];
-    
-  UIAlertView  *appRateAlert = [[UIAlertView alloc]initWithTitle:@"Do you want to rate us on App store" message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes" ,nil];
-    [appRateAlert show];
-    
+
+    // check if the user rated from 1 star to 3 star
+    if( sender == star1 || sender == star2 || sender == star3)
+    {
+        UIAlertView  *appRateAlertEmail = [[UIAlertView alloc]initWithTitle:@"Thank you! Please shares your feedback" message:@"" delegate:self cancelButtonTitle:@"Later" otherButtonTitles:@"Yes" ,nil];
+        
+        appRateAlertEmail.tag = 0;
+        
+        [appRateAlertEmail show];
+        
+        //check if the user rated from 4 star to 5 star
+    } else if( sender == star4 || sender == star5) {
+        UIAlertView *appRateAlertStore = [[UIAlertView alloc]initWithTitle:@"Thank you! Please shares your kind words on the App store" message:@"" delegate:self cancelButtonTitle:@"Later" otherButtonTitles:@"Yes" ,nil];
+        
+        appRateAlertStore.tag = 1;
+        
+        [appRateAlertStore show];
+    }
 }
 
 #pragma mark UIAlertView delegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
   
+    
+    NSLog(@"%d",alertView.tag);
+   switch (alertView.tag)
+  {
+    // if 1 alert view selected having tag 0
+      case 0:
+          if (buttonIndex == 1 ){
+          [self sendAlertEmail];
+      }
+    break;
+          
+    //if 2 alert view selected having tag 1
+      case 1:
     if(buttonIndex == 1) {
-        NSString *url = [NSString stringWithFormat: @"itms-apps://itunes.apple.com/app/id344130515"];
-        [[UIApplication sharedApplication] openURL: [NSURL URLWithString: url]];
+            NSString *url = [NSString stringWithFormat: @"itms-apps://itunes.apple.com/app/id344130515"];
+            [[UIApplication sharedApplication] openURL: [NSURL URLWithString: url]];
+        }
+    break;
+    
+      }
     }
-}
+
 
 -(IBAction)clickOnFlyerType:(id)sender {
     
@@ -663,5 +694,36 @@
 
 }
 
+-(void)sendAlertEmail{
+  
+    
+    MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
+  
+    if([MFMailComposeViewController canSendMail]){
+        
+        picker.mailComposeDelegate = self;
+        [picker setSubject:@"Shares your feedback"];
+        
+        // Set up recipients
+        NSMutableArray *toRecipients = [[NSMutableArray alloc]init];
+        [toRecipients addObject:@"info@greenmtnlabs.com"];
+        [picker setToRecipients:toRecipients];
+      
+    }
+      [self.view.window.rootViewController presentViewController:picker animated:YES completion:nil];
+}
 
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
+	switch (result) {
+		case MFMailComposeResultCancelled:
+			break;
+		case MFMailComposeResultSaved:
+			break;
+		case MFMailComposeResultSent:
+			break;
+		case MFMailComposeResultFailed:
+			break;
+	}
+    [controller dismissViewControllerAnimated:YES completion:nil];
+}
 @end

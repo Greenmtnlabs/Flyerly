@@ -69,9 +69,8 @@
         [self.navigationController pushViewController:addFriendsController animated:YES];
         
     } else {
-        
          // Alert when user logged in as anonymous
-        UIAlertView *signInAlert = [[UIAlertView alloc] initWithTitle:@"Sign In" message:@"This feature requires you to sign in first. Do you want to sign in now?" delegate:self cancelButtonTitle:@"Sign In" otherButtonTitles:@"Later",nil];
+        UIAlertView *signInAlert = [[UIAlertView alloc] initWithTitle:@"Sign In" message:@"This feature requires you to sign in first. Do you want to sign in now?" delegate:self cancelButtonTitle:@"Later" otherButtonTitles:@"Sign In",nil];
         [signInAlert show];
       
     }
@@ -83,7 +82,7 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
    //when click on sign in button in alert view
-    if(buttonIndex == 0)
+    if(buttonIndex == 1)
     {
         
         NSLog(@"Sign In was selected.");

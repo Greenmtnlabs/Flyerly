@@ -599,6 +599,7 @@ int productSelected;
 // Buttons event handler,when user click on invite button in anonymous mood
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+
     if(alertView == signInSignUpAlert && buttonIndex == 1 )
     {
         NSLog(@"Sign In was selected.");
