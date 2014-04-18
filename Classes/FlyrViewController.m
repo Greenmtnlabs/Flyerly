@@ -107,8 +107,6 @@ NSInteger productSelected;
     }else{
         searching = YES;
         [self searchTableView:[NSString stringWithFormat:@"%@", ((UITextField *)sender).text]];
-     
-        
     }
 }
 

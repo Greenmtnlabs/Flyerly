@@ -79,6 +79,8 @@
 @property (nonatomic,strong) Flyer *flyer;
 @property (weak, nonatomic) id<SHKSharerDelegate> delegate;
 
+@property (strong, nonatomic) NSTimer *timer;
+
 -(IBAction)onClickFacebookButton;
 -(IBAction)onClickTwitterButton;
 -(IBAction)onClickInstagramButton;
