@@ -53,6 +53,17 @@
        registerController = [[RegisterController alloc] initWithNibName:@"RegisterController" bundle:nil];
 
     }
+    
+    signinController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
+    registerController.signInController = signinController;
+    
+    signinController.signInCompletion = ^void(void) {
+        NSLog(@"Sign In via LauchController Register");
+        
+        FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+        [appDelegate.lauchController.navigationController popToViewController:appDelegate.lauchController animated:YES];
+        
+    };
 
     [self.navigationController pushViewController:registerController animated:YES];
 }

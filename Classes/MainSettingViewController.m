@@ -293,7 +293,7 @@
         
         actaController = [[LaunchController alloc] initWithNibName:@"LaunchController" bundle:nil];
         
-        [self.navigationController setRootViewController:actaController];
+        [self.navigationController pushViewController:actaController animated:YES];
     }
     
 }

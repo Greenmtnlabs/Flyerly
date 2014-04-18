@@ -22,7 +22,7 @@
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     appDelegate.lauchController = mainScreen;
     
-    [self.navigationController pushViewController:mainScreen animated:YES];
+    [self.navigationController setRootViewController:mainScreen];
 }
 
 @end
