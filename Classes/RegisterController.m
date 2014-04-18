@@ -239,7 +239,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     //Connectivity Check
     if([FlyerlySingleton connected]){
         
-        [self showLoadingIndicator];
+        [self showLoadingView];
 
         [PFTwitterUtils logInWithBlock:^(PFUser *user, NSError *error) {
             

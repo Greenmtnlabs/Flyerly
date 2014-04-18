@@ -11,7 +11,7 @@
 
 @implementation FlyrViewController
 @synthesize tView,searchTextField,signInSignUpAlert;
-NSInteger productSelected;
+int productSelected;
 
 
 #pragma mark  View Methods
@@ -505,20 +505,19 @@ NSInteger productSelected;
  */
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     
-    
         //if not cancel and Restore button presses
         if(buttonIndex != 2 && buttonIndex != 3) {
             
             productSelected = buttonIndex;
             
             //Checking if the user is valid or anonymus
-            if ([[PFUser currentUser] sessionToken]) {
+            if ([[PFUser currentUser] sessionToken].length != 0) {
+                
                 //This line pop up login screen if user not exist
                 [[RMStore defaultStore] addStoreObserver:self];
                 
                 //Getting Selected Product
                 SKProduct *product = [requestedProducts objectAtIndex:buttonIndex];
-                
                 
                 [self purchaseProductID:product.productIdentifier];
 
@@ -540,11 +539,10 @@ NSInteger productSelected;
             [self restorePurchase];
             
         }
-    
-    
-    
-    
-    
+}
+
+-(SKProduct*) getSelectedProduct {
+    return [requestedProducts objectAtIndex:productSelected];
 }
 
 #pragma mark  RESTORE PURCHASE
@@ -599,9 +597,8 @@ NSInteger productSelected;
 // Buttons event handler,when user click on invite button in anonymous mood
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
-    
-    if(alertView == signInSignUpAlert &&  buttonIndex == 1)
+
+    if(alertView == signInSignUpAlert && buttonIndex == 1 )
     {
         NSLog(@"Sign In was selected.");
         signInController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
@@ -609,30 +606,26 @@ NSInteger productSelected;
         FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
         signInController.launchController = appDelegate.lauchController;
         
-         __weak SigninController *weakSigninController = signInController;
+        __weak FlyrViewController *weakFlyrViewController = self;
         
         signInController.signInCompletion = ^void(void) {
-            NSLog(@"Sign In via Invite");
+            NSLog(@"Sign In via In App");
             
-            UINavigationController* navigationController = weakSigninController.navigationController;
+            UINavigationController* navigationController = weakFlyrViewController.navigationController;
             [navigationController popViewControllerAnimated:NO];
-            [weakSigninController.navigationController popViewController:weakSigninController];      
+            
+            //This line pop up login screen if user not exist
+            [[RMStore defaultStore] addStoreObserver:weakFlyrViewController];
             
             //Getting Selected Product
-            SKProduct *product = [requestedProducts objectAtIndex:productSelected];
-            [self purchaseProductID:product.productIdentifier];           
+            SKProduct *product = [weakFlyrViewController getSelectedProduct];
+            [weakFlyrViewController purchaseProductID:product.productIdentifier];
+            
         };
         
         [self.navigationController pushViewController:signInController animated:YES];       
     
-    } else if(alertView == signInSignUpAlert && [title isEqualToString:@"Sign Up"])
-    {
-        NSLog(@"Sign Up was selected.");
-        signUpController = [[RegisterController alloc]initWithNibName:@"RegisterController" bundle:nil];
-        [self.navigationController pushViewController:signUpController
-                                             animated:YES];
     }
-    
 }
 
 

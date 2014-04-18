@@ -52,6 +52,7 @@
 
 -(void)requestProduct;
 -(void)purchaseProductID:(NSString *)pid;
+-(SKProduct*) getSelectedProduct;
 
 -(void)restorePurchase;
 
