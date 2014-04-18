@@ -529,8 +529,8 @@ NSInteger productSelected;
                 signInSignUpAlert = [[UIAlertView alloc] initWithTitle:@"Sign In"
                                                                message:@"This feature requires you to sign in first. Do you want to sign in now?"
                                                               delegate:self
-                                                     cancelButtonTitle:@"Sign In"
-                                                     otherButtonTitles:@"Later",nil];
+                                                     cancelButtonTitle:@"Later"
+                                                     otherButtonTitles:@"Sign In",nil];
                 
                 [signInSignUpAlert show];
             }
@@ -603,7 +603,7 @@ NSInteger productSelected;
 {
     NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
     
-    if(alertView == signInSignUpAlert &&  buttonIndex == 0)
+    if(alertView == signInSignUpAlert &&  buttonIndex == 1)
     {
         NSLog(@"Sign In was selected.");
         signInController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];

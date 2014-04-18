@@ -478,7 +478,7 @@
 {
     
 	if (!sharer.quiet)
-		[[SHKActivityIndicator currentIndicator] displayActivity:SHKLocalizedString(@"Saving to %@", [[sharer class] sharerTitle]) forSharer:sharer];
+		[[SHKActivityIndicator currentIndicator] displayActivity:SHKLocalizedString(@"Sharing to %@", [[sharer class] sharerTitle]) forSharer:sharer];
 }
 
 - (void)sharerFinishedSending:(SHKSharer *)sharer
@@ -526,7 +526,7 @@
     
     
     if (!sharer.quiet)
-		[[SHKActivityIndicator currentIndicator] displayCompleted:SHKLocalizedString(@"Saved!")];
+		[[SHKActivityIndicator currentIndicator] displayCompleted:SHKLocalizedString(@"Flyer Posted!")];
 }
 
 - (void)sharer:(SHKSharer *)sharer failedWithError:(NSError *)error shouldRelogin:(BOOL)shouldRelogin
@@ -640,7 +640,7 @@
     {
         UIAlertView  *appRateAlertEmail ;
          appRateAlertEmail.tag = 0;
-   appRateAlertEmail  = [[UIAlertView alloc]initWithTitle:@"Thank you! Please shares your feedback" message:@"" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"Later" ,nil];
+   appRateAlertEmail  = [[UIAlertView alloc]initWithTitle:@"Thank you! Please shares your feedback" message:@"" delegate:self cancelButtonTitle:@"Later" otherButtonTitles:@"Yes" ,nil];
         
    
     
@@ -651,7 +651,7 @@
     {
         UIAlertView *appRateAlertStore;
         appRateAlertStore.tag = 1 ;
-       appRateAlertStore  = [[UIAlertView alloc]initWithTitle:@"Thank you! Please shares your kind words on the App store" message:@"" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"Later" ,nil];
+       appRateAlertStore  = [[UIAlertView alloc]initWithTitle:@"Thank you! Please shares your kind words on the App store" message:@"" delegate:self cancelButtonTitle:@"Later" otherButtonTitles:@"Yes" ,nil];
         
         
         [appRateAlertStore show];
@@ -665,8 +665,10 @@
    switch (alertView.tag)
   {
           case 0:
-       if (buttonIndex == 0 )
+       if (buttonIndex == 1 )
       {
+          
+          
           [self sendAlertEmail];
        /*
           SHKItem *item = [SHKItem text:@""];
@@ -679,7 +681,7 @@
     //if 2 alert view selected having tag 1
         case 1:
     
-    if(buttonIndex == 0) {
+    if(buttonIndex == 1) {
             NSString *url = [NSString stringWithFormat: @"itms-apps://itunes.apple.com/app/id344130515"];
             [[UIApplication sharedApplication] openURL: [NSURL URLWithString: url]];
         }
@@ -707,17 +709,16 @@
   
     
     MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
-    
+    [self.view.window.rootViewController presentViewController:picker animated:YES completion:nil];
     if([MFMailComposeViewController canSendMail]){
         
         picker.mailComposeDelegate = self;
-        [picker setSubject:@"Inquiry..."];
+        [picker setSubject:@"Please shares your feedback"];
         
         // Set up recipients
         NSMutableArray *toRecipients = [[NSMutableArray alloc]init];
         [toRecipients addObject:@"info@greenmtnlabs.com"];
         [picker setToRecipients:toRecipients];
-    
       
     }
     
