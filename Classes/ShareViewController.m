@@ -638,9 +638,7 @@
     // check if the user rated from 1 star to 3 star
     if( sender == star1 || sender == star2 || sender == star3)
     {
-        UIAlertView  *appRateAlertEmail ;
-        
-        appRateAlertEmail  = [[UIAlertView alloc]initWithTitle:@"Thank you! Please shares your feedback" message:@"" delegate:self cancelButtonTitle:@"Later" otherButtonTitles:@"Yes" ,nil];
+        UIAlertView  *appRateAlertEmail = [[UIAlertView alloc]initWithTitle:@"Thank you! Please shares your feedback" message:@"" delegate:self cancelButtonTitle:@"Later" otherButtonTitles:@"Yes" ,nil];
         
         appRateAlertEmail.tag = 0;
         
@@ -648,9 +646,7 @@
         
         //check if the user rated from 4 star to 5 star
     } else if( sender == star4 || sender == star5) {
-        UIAlertView *appRateAlertStore;
-        
-        appRateAlertStore  = [[UIAlertView alloc]initWithTitle:@"Thank you! Please shares your kind words on the App store" message:@"" delegate:self cancelButtonTitle:@"Later" otherButtonTitles:@"Yes" ,nil];
+        UIAlertView *appRateAlertStore = [[UIAlertView alloc]initWithTitle:@"Thank you! Please shares your kind words on the App store" message:@"" delegate:self cancelButtonTitle:@"Later" otherButtonTitles:@"Yes" ,nil];
         
         appRateAlertStore.tag = 1;
         
@@ -661,11 +657,12 @@
 #pragma mark UIAlertView delegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-  // if 1 alert view selected having tag 0
+  
     
     NSLog(@"%d",alertView.tag);
    switch (alertView.tag)
   {
+    // if 1 alert view selected having tag 0
       case 0:
           if (buttonIndex == 1 ){
           [self sendAlertEmail];
