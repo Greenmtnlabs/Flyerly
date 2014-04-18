@@ -75,7 +75,7 @@
     [category addObject:@"Flyerly public"];
     
     //Checking if the user is valid or anonymous
-    if ([[PFUser currentUser] sessionToken]) {
+    if ([[PFUser currentUser] sessionToken].length != 0) {
         //GET UPDATED USER PUCHASES INFO
         [category addObject:@"Account Setting"];
     }
@@ -84,7 +84,7 @@
     [category addObject:@"Follow us on Twitter"];
     
     //Checking if the user is valid or anonymus
-    if ([[PFUser currentUser] sessionToken]) {
+    if ([[PFUser currentUser] sessionToken].length != 0) {
         [category addObject:@"Sign Out"];
     } else {
         [category addObject:@"Sign In"];
@@ -160,7 +160,7 @@
     
     if (indexPath.row == 2){
         //Checking if the user is valid or anonymus
-        if ([[PFUser currentUser] sessionToken]) {
+        if ([[PFUser currentUser] sessionToken].length != 0) {
             //account setting row clicked
             imgname = @"account_settings";
             [cell setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"SettingcellBack"]]];
@@ -168,7 +168,7 @@
         
     }
     
-    if ([[PFUser currentUser] sessionToken]) {
+    if ([[PFUser currentUser] sessionToken].length != 0) {
         if (indexPath.row == 3)imgname = @"fb_Like";
         if (indexPath.row == 4)imgname = @"twt_follow";
         if (indexPath.row == 5)imgname = @"signout";
@@ -222,7 +222,7 @@
 - (void)tableView:(UITableView *)tView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
    
     // Checking if the user is valid
-    if ([[PFUser currentUser] sessionToken]) {
+    if ([[PFUser currentUser] sessionToken].length != 0) {
         if(indexPath.row == 2) {
             
             accountUpdater = [[ProfileViewController alloc]initWithNibName:@"ProfileViewController" bundle:nil];
@@ -258,10 +258,21 @@
             
             signInController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
             
+            NSLog(@"Sign In was selected.");
+            signInController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
+            
+            FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+            signInController.launchController = appDelegate.lauchController;
+            
+            __weak SigninController *weakSigninController = signInController;
+            
             signInController.signInCompletion = ^void(void) {
+                NSLog(@"Sign In via Setting");
                 
-                NSLog(@"Sign In via Settings");
-            };
+                UINavigationController* navigationController = weakSigninController.navigationController;
+                [navigationController popViewControllerAnimated:NO];
+                [weakSigninController.navigationController popViewController:weakSigninController];             };
+
             
             [self.navigationController pushViewController:signInController animated:YES];            
             

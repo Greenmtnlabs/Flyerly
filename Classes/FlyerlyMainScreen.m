@@ -89,9 +89,6 @@
         NSLog(@"Sign In was selected.");
         SigninController *signInController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
         
-        FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-        signInController.launchController = appDelegate.lauchController;
-        
         signInController.launchController = self;
         
         __weak FlyerlyMainScreen *weakMainFlyerScreen = self;
@@ -643,8 +640,8 @@
         //Getting Current User
         PFUser *user = [PFUser currentUser];
         
-        //Return on User not exists
-        if ([[user sessionToken] length] == 0)return;
+        //Return on User not exists OR if session tokken is null(current user is anonyumous)
+        if (user == nil || [[user sessionToken] length] == 0)return;
         
         //Create query for get user purchases
         PFQuery *query = [PFQuery queryWithClassName:@"InApp"];
