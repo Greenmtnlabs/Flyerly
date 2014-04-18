@@ -639,20 +639,20 @@
     if( sender == star1 || sender == star2 || sender == star3)
     {
         UIAlertView  *appRateAlertEmail ;
-         appRateAlertEmail.tag = 0;
-   appRateAlertEmail  = [[UIAlertView alloc]initWithTitle:@"Thank you! Please shares your feedback" message:@"" delegate:self cancelButtonTitle:@"Later" otherButtonTitles:@"Yes" ,nil];
         
-   
-    
-   [appRateAlertEmail show];
-    }
-    //check if the user rated from 4 star to 5 star
-    else if( sender == star4 || sender == star5)
-    {
+        appRateAlertEmail  = [[UIAlertView alloc]initWithTitle:@"Thank you! Please shares your feedback" message:@"" delegate:self cancelButtonTitle:@"Later" otherButtonTitles:@"Yes" ,nil];
+        
+        appRateAlertEmail.tag = 0;
+        
+        [appRateAlertEmail show];
+        
+        //check if the user rated from 4 star to 5 star
+    } else if( sender == star4 || sender == star5) {
         UIAlertView *appRateAlertStore;
-        appRateAlertStore.tag = 1 ;
-       appRateAlertStore  = [[UIAlertView alloc]initWithTitle:@"Thank you! Please shares your kind words on the App store" message:@"" delegate:self cancelButtonTitle:@"Later" otherButtonTitles:@"Yes" ,nil];
         
+        appRateAlertStore  = [[UIAlertView alloc]initWithTitle:@"Thank you! Please shares your kind words on the App store" message:@"" delegate:self cancelButtonTitle:@"Later" otherButtonTitles:@"Yes" ,nil];
+        
+        appRateAlertStore.tag = 1;
         
         [appRateAlertStore show];
     }
@@ -662,30 +662,22 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
   // if 1 alert view selected having tag 0
+    
+    NSLog(@"%d",alertView.tag);
    switch (alertView.tag)
   {
-          case 0:
-       if (buttonIndex == 1 )
-      {
-          
-          
+      case 0:
+          if (buttonIndex == 1 ){
           [self sendAlertEmail];
-       /*
-          SHKItem *item = [SHKItem text:@""];
-          item.title = @"Shares your feedback";
-          [SHKMail shareItem:item];
-       */
       }
     break;
           
     //if 2 alert view selected having tag 1
-        case 1:
-    
+      case 1:
     if(buttonIndex == 1) {
             NSString *url = [NSString stringWithFormat: @"itms-apps://itunes.apple.com/app/id344130515"];
             [[UIApplication sharedApplication] openURL: [NSURL URLWithString: url]];
         }
-    
     break;
     
       }
@@ -735,7 +727,6 @@
 		case MFMailComposeResultFailed:
 			break;
 	}
-    
-    [controller dismissModalViewControllerAnimated:YES];
+    [controller dismissViewControllerAnimated:YES completion:nil];
 }
 @end
