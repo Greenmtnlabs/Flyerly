@@ -11,7 +11,7 @@
 @implementation ShareViewController
 
 
-@synthesize Yvalue,rightUndoBarButton,shareButton,helpButton,selectedFlyerImage,fvController,titleView,descriptionView,selectedFlyerDescription,  imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,dicController, clipboardlabel,flyer,topTitleLabel,delegate,activityIndicator;
+@synthesize Yvalue,rightUndoBarButton,shareButton,helpButton,selectedFlyerImage,fvController,titleView,descriptionView,selectedFlyerDescription,  imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,dicController, clipboardlabel,flyer,topTitleLabel,delegate,activityIndicator,timer;
 
 @synthesize flyerShareType,star1,star2,star3,star4,star5;
 
@@ -33,6 +33,8 @@
     [titleView setReturnKeyType:UIReturnKeyDone];
     [titleView addTarget:self action:@selector(textFieldFinished:) forControlEvents: UIControlEventEditingDidEndOnExit];
     [titleView addTarget:self action:@selector(textFieldTapped:) forControlEvents:UIControlEventEditingDidBegin];
+    titleView.placeholder = @"Flyerly Title (e.g. \"Parker's Party\")";
+    timer = [NSTimer scheduledTimerWithTimeInterval:0.9 target:self selector:@selector(toggleLabelAlpha) userInfo:nil repeats:YES];
     
     descriptionView = [[UIPlaceHolderTextView alloc] initWithFrame:CGRectMake(12, 79, 296, 83)];
     [descriptionView awakeFromNib];
@@ -49,7 +51,10 @@
 
     
 }
-
+- (void)toggleLabelAlpha {
+    
+    [titleView setHidden:(!titleView.hidden)];
+}
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
@@ -305,13 +310,15 @@
 
 - (void)textFieldFinished:(id)sender {
     [sender resignFirstResponder];
+    
 }
 
 /*
  * Called when clicked on title text field
  */
 - (void)textFieldTapped:(id)sender {
-    [titleView setReturnKeyType:UIReturnKeyDone];
+    [timer invalidate];
+[titleView setReturnKeyType:UIReturnKeyDone];
 }
 
 /*
@@ -726,4 +733,6 @@
 	}
     [controller dismissViewControllerAnimated:YES completion:nil];
 }
+
+
 @end

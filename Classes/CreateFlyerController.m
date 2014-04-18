@@ -300,8 +300,12 @@ int selectedAddMoreLayerTab = -1;
         }
     }
     
-    // Remove Border if Any Layer Selected
-    if (![currentLayer isEqualToString:@""]) [self.flyimgView layerStoppedEditing:currentLayer];
+    // Remove Border if Any Layer Selected check the entire layers in a flyer
+    
+    for ( NSString* key in flyimgView.layers ) {
+           if (![key isEqualToString:@""])
+            [self.flyimgView layerStoppedEditing:key];
+    }
     
     [shareviewcontroller.titleView resignFirstResponder];
     [shareviewcontroller.descriptionView resignFirstResponder];
@@ -2110,6 +2114,14 @@ int selectedAddMoreLayerTab = -1;
 -(void)editLayer:(LayerTileButton *)editButton{
     
     editButtonGlobal = editButton;
+  /*
+    if ([currentLayer isEqualToString:@""]) {
+        [flyer deleteLayer:currentLayer];
+        [self.flyimgView deleteLayer:currentLayer];
+    }
+  
+    [self.flyimgView layerStoppedEditing:currentLayer];
+    */
     currentLayer =  editButton.uid;
     editButtonGlobal.uid = currentLayer;
     
