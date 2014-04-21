@@ -57,6 +57,7 @@
     signinController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
     registerController.signInController = signinController;
     
+    //Redirecting the user to Main screen on succesfull login
     signinController.signInCompletion = ^void(void) {
         NSLog(@"Sign In via LauchController Register");
         
@@ -70,7 +71,19 @@
 
 -(IBAction)onSignIn{
     
-   signinController = [[SigninController alloc] initWithNibName:@"SigninController" bundle:nil];
+   
+    signinController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
+    registerController.signInController = signinController;
+    
+    //Redirecting the user to Main screen on succesfull login
+    signinController.signInCompletion = ^void(void) {
+        
+        NSLog(@"Sign In via LauchController Sign In");
+        
+        FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+        [appDelegate.lauchController.navigationController popToViewController:appDelegate.lauchController animated:YES];
+        
+    };
     
     [self.navigationController pushViewController:signinController animated:YES];
 }

@@ -11,7 +11,6 @@
 
 @implementation FlyrViewController
 @synthesize tView,searchTextField,signInSignUpAlert;
-int productSelected;
 
 
 #pragma mark  View Methods
@@ -407,7 +406,7 @@ int productSelected;
         cancelRequest = NO;
         
         [self showLoadingIndicator];
-        //sheetAlreadyOpen =YES;
+        sheetAlreadyOpen =YES;
         //These are over Products on App Store
         NSSet *products = [NSSet setWithArray:@[@"com.flyerly.AllDesignBundle",@"com.flyerly.UnlockSavedFlyers"]];
         
@@ -419,43 +418,42 @@ int productSelected;
             NSLog(@"Products loaded");
             
             requestedProducts = products;
-            /*
-            UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:@"Choose Product" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles: nil];
+            bool disablePurchase = ([[PFUser currentUser] sessionToken].length == 0);
+            
+            NSString *sheetTitle = @"Choose Product";
+            
+            if (disablePurchase) {
+                sheetTitle = @"This feature requires Sign In";
+            }
+            
+            UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:sheetTitle delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles: nil];
+            
+            int index = -1;
         
             for(SKProduct *product in products)
             {
                 
-                [actionSheet addButtonWithTitle:[NSString stringWithFormat:@"%@ - %@",product.localizedTitle,
-                                                 product.priceAsString]];
+                index = [actionSheet addButtonWithTitle:[NSString stringWithFormat:@"%@ - %@",product.localizedTitle, product.priceAsString]];
+                
+                // Disabling the in app purchase buttons
+                if( disablePurchase ) {
+                    ((UIButton*)[[actionSheet subviews] objectAtIndex:index+1]).enabled = NO;
+                }
             }
             
-            [actionSheet addButtonWithTitle:@"Restore Purchase"];
+            index = [actionSheet addButtonWithTitle:@"Restore Purchase"];
+        
+            // Also disable restore purchase b utton and add sign in button
+            if( disablePurchase ) {
+                ((UIButton*)[[actionSheet subviews] objectAtIndex:index+1]).enabled = NO;
+                [actionSheet addButtonWithTitle:@"Sign In"];
+            }
+            
             [actionSheet addButtonWithTitle:@"Cancel"];
             
             [actionSheet showInView:self.view];
             [self hideLoadingIndicator];
             sheetAlreadyOpen = NO;
-            */
-            
-            NSString* alertMessage = @"";
-            
-            
-            
-            for(SKProduct *product in products)
-            {
-                
-                alertMessage = [alertMessage stringByAppendingString:[NSString stringWithFormat:@"%C %@ - %@\n", (unichar) 0x2022, product.localizedTitle,
-                                                 product.priceAsString]];
-            }
-            
-            signInSignUpAlert = [[UIAlertView alloc]
-                                  initWithTitle: @"Sign In to purchase or restore any of the following"
-                                  message: alertMessage
-                                  delegate: self
-                                  cancelButtonTitle:@"Later"
-                                  otherButtonTitles:@"Sign In", nil];
-            
-            [signInSignUpAlert show];
             
         } failure:^(NSError *error) {
             NSLog(@"Something went wrong");
@@ -528,8 +526,6 @@ int productSelected;
         //if not cancel and Restore button presses
         if(buttonIndex != 2 && buttonIndex != 3) {
             
-            productSelected = buttonIndex;
-            
             //Checking if the user is valid or anonymus
             if ([[PFUser currentUser] sessionToken].length != 0) {
                 
@@ -539,29 +535,44 @@ int productSelected;
                 //Getting Selected Product
                 SKProduct *product = [requestedProducts objectAtIndex:buttonIndex];
                 [self purchaseProductID:product.productIdentifier];
-
-            } else {
-                // Alert when user logged in as anonymous
-                signInSignUpAlert = [[UIAlertView alloc] initWithTitle:@"Sign In"
-                                                               message:@"The selected feature requires that you sign in. Would you like to register or sign in now?"
-                                                              delegate:self
-                                                     cancelButtonTitle:@"Later"
-                                                     otherButtonTitles:@"Sign In",nil];
-                
-                [signInSignUpAlert show];
             }
-            
         }
-        
+    
+    // checking user is anonymous or not
+    if ([[PFUser currentUser] sessionToken].length != 0) {
         //For Restore Purchase
-        if(buttonIndex == 2 ) {
+        if( buttonIndex == 2 ) {
             [self restorePurchase];
+        }
+    
+    // if user is anonymous
+    }else {
+         if ( buttonIndex == 3 ) {
+            
+            NSLog(@"Sign In was selected.");
+            signInController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
+            
+            FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+            signInController.launchController = appDelegate.lauchController;
+            
+            __weak FlyrViewController *weakFlyrViewController = self;
+            
+            signInController.signInCompletion = ^void(void) {
+                NSLog(@"Sign In via In App");
+                
+                UINavigationController* navigationController = weakFlyrViewController.navigationController;
+                [navigationController popViewControllerAnimated:NO];
+                
+                // Showing action sheet after succesfull sign in
+                [weakFlyrViewController requestProduct];
+                
+            };
+             
+            [self.navigationController pushViewController:signInController animated:YES];
             
         }
-}
-
--(SKProduct*) getSelectedProduct {
-    return [requestedProducts objectAtIndex:productSelected];
+    }
+    
 }
 
 #pragma mark  RESTORE PURCHASE
@@ -613,43 +624,7 @@ int productSelected;
 
 - (void)storeRestoreTransactionsFinished:(NSNotification*)notification {}
 
-// Buttons event handler,when user click on invite button in anonymous mood
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-
-    if(alertView == signInSignUpAlert && buttonIndex == 1 )
-    {
-        NSLog(@"Sign In was selected.");
-        signInController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
-        
-        FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-        signInController.launchController = appDelegate.lauchController;
-        
-        __weak FlyrViewController *weakFlyrViewController = self;
-        
-        signInController.signInCompletion = ^void(void) {
-            NSLog(@"Sign In via In App");
-            
-            UINavigationController* navigationController = weakFlyrViewController.navigationController;
-            [navigationController popViewControllerAnimated:NO];
-            
-            //This line pop up login screen if user not exist
-            [[RMStore defaultStore] addStoreObserver:weakFlyrViewController];
-            
-            //Getting Selected Product
-            SKProduct *product = [weakFlyrViewController getSelectedProduct];
-            [weakFlyrViewController purchaseProductID:product.productIdentifier];
-            
-        };
-        
-        [self.navigationController pushViewController:signInController animated:YES];       
-    
-    }
-}
-
-
 #pragma mark RMStoreObserver
-
 
 - (void)storePaymentTransactionFinished:(NSNotification*)notification
 {
