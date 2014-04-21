@@ -256,28 +256,35 @@
             
         }else if(indexPath.row == 4){
             
-            signInController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
-            
             NSLog(@"Sign In was selected.");
             signInController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
             
             FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
             signInController.launchController = appDelegate.lauchController;
             
-            __weak SigninController *weakSigninController = signInController;
+            // Keep a reference to navigation controller as we are going to pop this view controller mid way
+            UINavigationController* navigationController = self.navigationController;
             
             signInController.signInCompletion = ^void(void) {
                 NSLog(@"Sign In via Setting");
                 
-                UINavigationController* navigationController = weakSigninController.navigationController;
+                // Pop out sign in controller as user has successfully signed in
                 [navigationController popViewControllerAnimated:NO];
-                [weakSigninController.navigationController popViewController:weakSigninController];             };
-
+                
+                // Since we popped settings controller out of stack we need to puch a new one.
+                // This should be done in a better way e.g., reloadData instead of popping it out and pushing a new one
+                MainSettingViewController *mainsettingviewcontroller = [[MainSettingViewController alloc]initWithNibName:@"MainSettingViewController" bundle:nil] ;
+                [navigationController pushViewController:mainsettingviewcontroller animated:YES];
+                
+            };
             
-            [self.navigationController pushViewController:signInController animated:YES];            
+            // Pop out settings controller
+            [navigationController popViewControllerAnimated:NO];
+            
+            // Push sign in controller on the stack
+            [navigationController pushViewController:signInController animated:YES];
             
         }
-        [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
     }
     
     
