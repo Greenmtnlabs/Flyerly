@@ -419,7 +419,8 @@ int productSelected;
             NSLog(@"Products loaded");
             
             requestedProducts = products;
-            /*
+            
+            if ([[PFUser currentUser] sessionToken].length != 0) {
             UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:@"Choose Product" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles: nil];
         
             for(SKProduct *product in products)
@@ -435,12 +436,35 @@ int productSelected;
             [actionSheet showInView:self.view];
             [self hideLoadingIndicator];
             sheetAlreadyOpen = NO;
-            */
+            }else {
+                UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:@"This feature requires Sign In" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles: nil];
+                
+                for(SKProduct *product in products)
+                {
+                    
+                    int index = [actionSheet addButtonWithTitle:[NSString stringWithFormat:@"%@ - %@",product.localizedTitle, product.priceAsString]];
+                    
+                    ((UIButton*)[[actionSheet subviews] objectAtIndex:index]).enabled = NO;
+                }
+                
+                [actionSheet addButtonWithTitle:@"Restore Purchase"];
+                [actionSheet addButtonWithTitle:@"Sign In"];
+                
+                /*for(UIView *v in [actionSheet subviews])
+                {
+                    ((UIButton*)v).enabled = NO;
+                }*/
+                
+                [actionSheet addButtonWithTitle:@"Cancel"];
+                
+                [actionSheet showInView:self.view];
+                [self hideLoadingIndicator];
+                sheetAlreadyOpen = NO;
             
-            NSString* alertMessage = @"";
+            }
             
             
-            
+            /*NSString* alertMessage = @"";
             for(SKProduct *product in products)
             {
                 
@@ -455,7 +479,7 @@ int productSelected;
                                   cancelButtonTitle:@"Later"
                                   otherButtonTitles:@"Sign In", nil];
             
-            [signInSignUpAlert show];
+            [signInSignUpAlert show];*/
             
         } failure:^(NSError *error) {
             NSLog(@"Something went wrong");
@@ -539,25 +563,60 @@ int productSelected;
                 //Getting Selected Product
                 SKProduct *product = [requestedProducts objectAtIndex:buttonIndex];
                 [self purchaseProductID:product.productIdentifier];
-
-            } else {
-                // Alert when user logged in as anonymous
-                signInSignUpAlert = [[UIAlertView alloc] initWithTitle:@"Sign In"
-                                                               message:@"This feature requires you to sign in first. Do you want to sign in now?"
-                                                              delegate:self
-                                                     cancelButtonTitle:@"Later"
-                                                     otherButtonTitles:@"Sign In",nil];
-                
-                [signInSignUpAlert show];
             }
+
+//            } else {
+//                // Alert when user logged in as anonymous
+//                signInSignUpAlert = [[UIAlertView alloc] initWithTitle:@"Sign In"
+//                                                               message:@"This feature requires you to sign in first. Do you want to sign in now?"
+//                                                              delegate:self
+//                                                     cancelButtonTitle:@"Later"
+//                                                     otherButtonTitles:@"Sign In",nil];
+//                
+//                [signInSignUpAlert show];
+//            }
             
         }
-        
+    
+    if ([[PFUser currentUser] sessionToken].length != 0) {
         //For Restore Purchase
-        if(buttonIndex == 2 ) {
+        if( buttonIndex == 2 ) {
+            [self restorePurchase];
+        }
+    
+    }else {
+        //For Restore Purchase
+        if( buttonIndex == 2 ) {
+            
             [self restorePurchase];
             
+        }else if ( buttonIndex == 3 ) {
+            
+            NSLog(@"Sign In was selected.");
+            signInController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
+            
+            FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+            signInController.launchController = appDelegate.lauchController;
+            
+            __weak FlyrViewController *weakFlyrViewController = self;
+            
+            __block FlyrViewController *blocksafeSelf = self;
+            
+            signInController.signInCompletion = ^void(void) {
+                NSLog(@"Sign In via In App");
+                
+                UINavigationController* navigationController = weakFlyrViewController.navigationController;
+                [navigationController popViewControllerAnimated:NO];
+                
+                [blocksafeSelf requestProduct];
+                
+            };
+            
+            [self.navigationController pushViewController:signInController animated:YES];
+            
         }
+    }
+    
 }
 
 -(SKProduct*) getSelectedProduct {
