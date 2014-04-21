@@ -2135,14 +2135,6 @@ int selectedAddMoreLayerTab = -1;
 -(void)editLayer:(LayerTileButton *)editButton{
     
     editButtonGlobal = editButton;
-  /*
-    if ([currentLayer isEqualToString:@""]) {
-        [flyer deleteLayer:currentLayer];
-        [self.flyimgView deleteLayer:currentLayer];
-    }
-  
-    [self.flyimgView layerStoppedEditing:currentLayer];
-    */
     currentLayer =  editButton.uid;
     editButtonGlobal.uid = currentLayer;
     
@@ -2436,7 +2428,7 @@ int selectedAddMoreLayerTab = -1;
        
         // Alert when user logged in as anonymous
         signInAlert = [[UIAlertView alloc] initWithTitle:@"Sign In"
-                                                              message:@"This feature requires you to sign in first. Do you want to sign in now?"
+                                                              message:@"The selected feature requires that you sign in. Would you like to register or sign in now?"
                                                              delegate:self
                                                     cancelButtonTitle:@"Later"
                                                     otherButtonTitles:@"Sign In",nil];
