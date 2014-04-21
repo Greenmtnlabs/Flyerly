@@ -284,10 +284,9 @@ int selectedAddMoreLayerTab = -1;
     }
     
     // Remove Border if Any Layer Selected check the entire layers in a flyer
+    // This happens when a layer is added but before 'Done' another layer is selected by tapping on it.
     for ( NSString* key in self.flyimgView.layers ) {
         [self.flyimgView layerStoppedEditing:key];
-         NSLog(@ "%@",self.flyimgView.layer);
-        NSLog(@ "%@",key);
         
         //Delete Empty Layer if Exist
         if (key != nil && ![key isEqualToString:@""]) {
@@ -303,8 +302,7 @@ int selectedAddMoreLayerTab = -1;
                 [flyer deleteLayer:key];
             }
         }
-
-        }
+    }
     
     [shareviewcontroller.titleView resignFirstResponder];
     [shareviewcontroller.descriptionView resignFirstResponder];
@@ -1897,10 +1895,9 @@ int selectedAddMoreLayerTab = -1;
 
 -(void) donePhoto{
     // Remove Border if Any Layer Selected check the entire layers in a flyer
+    // This happens when a layer is added but before 'Done' another layer is selected by tapping on it.
     for ( NSString* key in self.flyimgView.layers ) {
         [self.flyimgView layerStoppedEditing:key];
-        NSLog(@ "%@",self.flyimgView.layer);
-        NSLog(@ "%@",key);
         
         //Delete Empty Layer if Exist
         if (key != nil && ![key isEqualToString:@""]) {
@@ -1916,9 +1913,7 @@ int selectedAddMoreLayerTab = -1;
                 [flyer deleteLayer:key];
             }
         }
-        
     }
-    
     
     [self callAddMoreLayers];
     [self logPhotoAddedEvent];
@@ -2135,14 +2130,6 @@ int selectedAddMoreLayerTab = -1;
 -(void)editLayer:(LayerTileButton *)editButton{
     
     editButtonGlobal = editButton;
-  /*
-    if ([currentLayer isEqualToString:@""]) {
-        [flyer deleteLayer:currentLayer];
-        [self.flyimgView deleteLayer:currentLayer];
-    }
-  
-    [self.flyimgView layerStoppedEditing:currentLayer];
-    */
     currentLayer =  editButton.uid;
     editButtonGlobal.uid = currentLayer;
     
@@ -2285,6 +2272,7 @@ int selectedAddMoreLayerTab = -1;
 
 -(void)callAddMoreLayers {
     
+    
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:TITLE_FONT size:18];
@@ -2322,30 +2310,30 @@ int selectedAddMoreLayerTab = -1;
     //Set here Un-Selected State of HIGHT & WIDTH Buttons IF selected 
     [widthTabButton setSelected:NO];
     [heightTabButton setSelected:NO];
-
-
     
-    //Empty Layer Delete
-    if (currentLayer != nil && ![currentLayer isEqualToString:@""]) {
+    // Remove Border if Any Layer Selected check the entire layers in a flyer
+    // This happens when a layer is added but before 'Done' another layer is selected by tapping on it.
+    for ( NSString* key in self.flyimgView.layers ) {
         
+        [self.flyimgView layerStoppedEditing:key];
         
-        
-        NSString *flyerImg = [flyer getImageName:currentLayer];
-        NSString *flyertext = [flyer getText:currentLayer];
-        
-        if ([flyerImg isEqualToString:@""]) {
-            [flyer deleteLayer:currentLayer];
-            [self.flyimgView deleteLayer:currentLayer];
+        //Delete Empty Layer if Exist
+        if (key != nil && ![key isEqualToString:@""]) {
+            
+            NSString *flyerImg = [flyer getImageName:key];
+            NSString *flyertext = [flyer getText:key];
+            
+            if ([flyerImg isEqualToString:@""]) {
+                [flyer deleteLayer:key];
+            }
+            
+            if ([flyertext isEqualToString:@""]) {
+                [flyer deleteLayer:key];
+            }
         }
         
-        if ([flyertext isEqualToString:@""]) {
-            [flyer deleteLayer:currentLayer];
-            [self.flyimgView deleteLayer:currentLayer];
-        }
     }
-    
-    [self.flyimgView layerStoppedEditing:currentLayer];
-    
+
     //Here we take Snap shot of Flyer
     UIImage *snapshotImage = [self getFlyerSnapShot];
     
@@ -2436,7 +2424,7 @@ int selectedAddMoreLayerTab = -1;
        
         // Alert when user logged in as anonymous
         signInAlert = [[UIAlertView alloc] initWithTitle:@"Sign In"
-                                                              message:@"This feature requires you to sign in first. Do you want to sign in now?"
+                                                              message:@"The selected feature requires that you sign in. Would you like to register or sign in now?"
                                                              delegate:self
                                                     cancelButtonTitle:@"Later"
                                                     otherButtonTitles:@"Sign In",nil];

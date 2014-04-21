@@ -34,8 +34,6 @@
     [titleView addTarget:self action:@selector(textFieldFinished:) forControlEvents: UIControlEventEditingDidEndOnExit];
     [titleView addTarget:self action:@selector(textFieldTapped:) forControlEvents:UIControlEventEditingDidBegin];
     titleView.placeholder = @"Flyerly Title (e.g. \"Parker's Party\")";
-    // TIMER FOR FALSHING THE TEXT
-    timer = [NSTimer scheduledTimerWithTimeInterval:0.9 target:self selector:@selector(toggleLabelAlpha) userInfo:nil repeats:YES];
     
     descriptionView = [[UIPlaceHolderTextView alloc] initWithFrame:CGRectMake(12, 79, 296, 83)];
     [descriptionView awakeFromNib];
@@ -51,11 +49,6 @@
 
 
     
-}
-//method for flashing the text in title
-- (void)toggleLabelAlpha {
-    
-    [titleView setHidden:(!titleView.hidden)];
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -319,9 +312,6 @@
  * Called when clicked on title text field
  */
 - (void)textFieldTapped:(id)sender {
-    // stop falshing text
-    [timer invalidate];
-    
     [titleView setReturnKeyType:UIReturnKeyDone];
 }
 
