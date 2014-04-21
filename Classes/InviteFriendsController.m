@@ -176,7 +176,7 @@ const int CONTACTS_TAB = 0;
         if(selectedTab == 0){
             globle.accounts = [[NSMutableArray alloc] initWithArray:selectedIdentifiers];
             
-            SHKItem *item = [SHKItem text:@"I'm using the flyerly app to create and share flyers on the go! Want to give it a try? Flyer.ly/Invite "];
+            SHKItem *item = [SHKItem text:@"I'm using the Flyerly app to create and share flyers on the go! Want to give it a try? Flyer.ly/Invite "];
             item.textMessageToRecipients = selectedIdentifiers;
             
             iosSharer = [[ SHKSharer alloc] init];
@@ -186,7 +186,7 @@ const int CONTACTS_TAB = 0;
             
         }else if(selectedTab == 1){
             
-            SHKItem *i = [SHKItem text:@"I'm using the flyerly app to create and share flyers on the go! Want to give it a try? http://Flyer.ly/Invite"];
+            SHKItem *i = [SHKItem text:@"I'm using the Flyerly app to create and share flyers on the go! Want to give it a try? http://Flyer.ly/Invite"];
             
             NSArray *shareFormFields = [SHKFacebookCommon shareFormFieldsForItem:i];
             SHKFormController *rootView = [[SHKCONFIG(SHKFormControllerSubclass) alloc] initWithStyle:UITableViewStyleGrouped

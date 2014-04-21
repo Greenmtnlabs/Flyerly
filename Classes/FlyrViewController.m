@@ -543,7 +543,7 @@ int productSelected;
             } else {
                 // Alert when user logged in as anonymous
                 signInSignUpAlert = [[UIAlertView alloc] initWithTitle:@"Sign In"
-                                                               message:@"This feature requires you to sign in first. Do you want to sign in now?"
+                                                               message:@"The selected feature requires that you sign in. Would you like to register or sign in now?"
                                                               delegate:self
                                                      cancelButtonTitle:@"Later"
                                                      otherButtonTitles:@"Sign In",nil];

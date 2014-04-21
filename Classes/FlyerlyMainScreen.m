@@ -70,7 +70,7 @@
         
     } else {
          // Alert when user logged in as anonymous
-        UIAlertView *signInAlert = [[UIAlertView alloc] initWithTitle:@"Sign In" message:@"This feature requires you to sign in first. Do you want to sign in now?" delegate:self cancelButtonTitle:@"Later" otherButtonTitles:@"Sign In",nil];
+        UIAlertView *signInAlert = [[UIAlertView alloc] initWithTitle:@"Sign In" message:@"The selected feature requires that you sign in. Would you like to register or sign in now?" delegate:self cancelButtonTitle:@"Later" otherButtonTitles:@"Sign In",nil];
         [signInAlert show];
       
     }
