@@ -77,7 +77,8 @@
     
     //Redirecting the user to Main screen on succesfull login
     signinController.signInCompletion = ^void(void) {
-        NSLog(@"Sign In via LauchController Register");
+        
+        NSLog(@"Sign In via LauchController Sign In");
         
         FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
         [appDelegate.lauchController.navigationController popToViewController:appDelegate.lauchController animated:YES];
