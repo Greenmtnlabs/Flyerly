@@ -475,7 +475,6 @@
 		202C658217EA07DC00CB9A75 /* symbol112.png in Resources */ = {isa = PBXBuildFile; fileRef = 202C64CA17EA07DC00CB9A75 /* symbol112.png */; };
 		202C658417EA07DC00CB9A75 /* symbol113.png in Resources */ = {isa = PBXBuildFile; fileRef = 202C64CC17EA07DC00CB9A75 /* symbol113.png */; };
 		202D2ABA190155DA00E86C98 /* main_area_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 202D2AB9190155DA00E86C98 /* main_area_bg@2x.png */; };
-		202D2ABC1901568300E86C98 /* main_area_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 202D2ABB1901568300E86C98 /* main_area_bg.png */; };
 		202F992318BCA37B002A25D9 /* home_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 202F992118BCA37B002A25D9 /* home_button.png */; };
 		202F992418BCA37B002A25D9 /* home_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 202F992218BCA37B002A25D9 /* home_button@2x.png */; };
 		202F992718BCAD1B002A25D9 /* FlyerlyFacebookFriends.m in Sources */ = {isa = PBXBuildFile; fileRef = 202F992618BCAD1B002A25D9 /* FlyerlyFacebookFriends.m */; };
@@ -1580,7 +1579,6 @@
 		202C64CA17EA07DC00CB9A75 /* symbol112.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = symbol112.png; path = symbols/symbol112.png; sourceTree = "<group>"; };
 		202C64CC17EA07DC00CB9A75 /* symbol113.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = symbol113.png; path = symbols/symbol113.png; sourceTree = "<group>"; };
 		202D2AB9190155DA00E86C98 /* main_area_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "main_area_bg@2x.png"; sourceTree = "<group>"; };
-		202D2ABB1901568300E86C98 /* main_area_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = main_area_bg.png; sourceTree = "<group>"; };
 		202F992118BCA37B002A25D9 /* home_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_button.png; sourceTree = "<group>"; };
 		202F992218BCA37B002A25D9 /* home_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home_button@2x.png"; sourceTree = "<group>"; };
 		202F992518BCAD1B002A25D9 /* FlyerlyFacebookFriends.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlyerlyFacebookFriends.h; sourceTree = "<group>"; };
@@ -2282,7 +2280,6 @@
 		0DF3A361108DF47400D6C887 /* ImageLibrary */ = {
 			isa = PBXGroup;
 			children = (
-				202D2ABB1901568300E86C98 /* main_area_bg.png */,
 				202D2AB9190155DA00E86C98 /* main_area_bg@2x.png */,
 				368F15BC18F5815B00C2225D /* signin@2x.png */,
 				2022C63618D1E8FE00BCD5F7 /* privacy_icon.png */,
@@ -4063,7 +4060,6 @@
 				654B254B17202A4C0047C8F6 /* afterupdatescreen_bg@2x.png in Resources */,
 				654B254C17202A4C0047C8F6 /* ok_button_bg.png in Resources */,
 				654B254D17202A4C0047C8F6 /* ok_button_bg@2x.png in Resources */,
-				202D2ABC1901568300E86C98 /* main_area_bg.png in Resources */,
 				654B255017202B1C0047C8F6 /* AfterUpdateController.xib in Resources */,
 				65C7A51B1721A06B003F1A84 /* ad_bg_bg.png in Resources */,
 				65C7A51C1721A06B003F1A84 /* ad_bg_bg@2x.png in Resources */,
