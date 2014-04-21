@@ -283,29 +283,28 @@ int selectedAddMoreLayerTab = -1;
         return;
     }
     
-    //Delete Empty Layer if Exist
-    if (currentLayer != nil && ![currentLayer isEqualToString:@""]) {
-        
-        NSString *flyerImg = [flyer getImageName:currentLayer];
-        NSString *flyertext = [flyer getText:currentLayer];
-        
-        if ([flyerImg isEqualToString:@""]) {
-            [flyer deleteLayer:currentLayer];
-            [self.flyimgView deleteLayer:currentLayer];
-        }
-        
-        if ([flyertext isEqualToString:@""]) {
-            [flyer deleteLayer:currentLayer];
-            [self.flyimgView deleteLayer:currentLayer];
-        }
-    }
-    
     // Remove Border if Any Layer Selected check the entire layers in a flyer
-    
-    for ( NSString* key in flyimgView.layers ) {
-           if (![key isEqualToString:@""])
-            [self.flyimgView layerStoppedEditing:key];
-    }
+    for ( NSString* key in self.flyimgView.layers ) {
+        [self.flyimgView layerStoppedEditing:key];
+         NSLog(@ "%@",self.flyimgView.layer);
+        NSLog(@ "%@",key);
+        
+        //Delete Empty Layer if Exist
+        if (key != nil && ![key isEqualToString:@""]) {
+            
+            NSString *flyerImg = [flyer getImageName:key];
+            NSString *flyertext = [flyer getText:key];
+            
+            if ([flyerImg isEqualToString:@""]) {
+                [flyer deleteLayer:key];
+            }
+            
+            if ([flyertext isEqualToString:@""]) {
+                [flyer deleteLayer:key];
+            }
+        }
+
+        }
     
     [shareviewcontroller.titleView resignFirstResponder];
     [shareviewcontroller.descriptionView resignFirstResponder];
@@ -329,7 +328,6 @@ int selectedAddMoreLayerTab = -1;
     [Flurry logEvent:@"Saved Flyer"];
     [self.navigationController popViewControllerAnimated:YES];
 }
-
 
 #pragma mark  Add Content In ScrollViews
 
@@ -1898,6 +1896,29 @@ int selectedAddMoreLayerTab = -1;
 }
 
 -(void) donePhoto{
+    // Remove Border if Any Layer Selected check the entire layers in a flyer
+    for ( NSString* key in self.flyimgView.layers ) {
+        [self.flyimgView layerStoppedEditing:key];
+        NSLog(@ "%@",self.flyimgView.layer);
+        NSLog(@ "%@",key);
+        
+        //Delete Empty Layer if Exist
+        if (key != nil && ![key isEqualToString:@""]) {
+            
+            NSString *flyerImg = [flyer getImageName:key];
+            NSString *flyertext = [flyer getText:key];
+            
+            if ([flyerImg isEqualToString:@""]) {
+                [flyer deleteLayer:key];
+            }
+            
+            if ([flyertext isEqualToString:@""]) {
+                [flyer deleteLayer:key];
+            }
+        }
+        
+    }
+    
     
     [self callAddMoreLayers];
     [self logPhotoAddedEvent];
