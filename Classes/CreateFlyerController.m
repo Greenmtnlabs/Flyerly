@@ -329,7 +329,6 @@ int selectedAddMoreLayerTab = -1;
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-
 #pragma mark  Add Content In ScrollViews
 
 /*
@@ -1897,6 +1896,29 @@ int selectedAddMoreLayerTab = -1;
 }
 
 -(void) donePhoto{
+    // Remove Border if Any Layer Selected check the entire layers in a flyer
+    for ( NSString* key in self.flyimgView.layers ) {
+        [self.flyimgView layerStoppedEditing:key];
+        NSLog(@ "%@",self.flyimgView.layer);
+        NSLog(@ "%@",key);
+        
+        //Delete Empty Layer if Exist
+        if (key != nil && ![key isEqualToString:@""]) {
+            
+            NSString *flyerImg = [flyer getImageName:key];
+            NSString *flyertext = [flyer getText:key];
+            
+            if ([flyerImg isEqualToString:@""]) {
+                [flyer deleteLayer:key];
+            }
+            
+            if ([flyertext isEqualToString:@""]) {
+                [flyer deleteLayer:key];
+            }
+        }
+        
+    }
+    
     
     [self callAddMoreLayers];
     [self logPhotoAddedEvent];
