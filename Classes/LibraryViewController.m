@@ -51,6 +51,7 @@
     self.assetsGroupController = asstController;
 
     // Pass the relevant properties
+    asstController.reverseOrder = YES;
     asstController.desiredImageSize = self.desiredImageSize;
     asstController.onImageTaken = self.onImageTaken;
     

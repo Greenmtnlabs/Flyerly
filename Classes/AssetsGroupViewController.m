@@ -83,8 +83,10 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    CGPoint bottomOffset = CGPointMake(0, self.scrollView.contentSize.height - self.scrollView.bounds.size.height);
-    [self.scrollView setContentOffset:bottomOffset animated:NO];
+    // We are not scorlling, just showing latest on top
+    //CGPoint bottomOffset = CGPointMake(0, self.scrollView.contentSize.height - self.scrollView.bounds.size.height);
+    //[self.scrollView setContentOffset:bottomOffset animated:NO];
+    
 }
 
 
