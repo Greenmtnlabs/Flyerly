@@ -77,9 +77,6 @@ NSString * const TEXTHEIGHT = @"280.000000";
     //set Flyer Image for Future Update
     flyerImageFile = [flyPath stringByAppendingString:[NSString stringWithFormat:@"/flyer.%@",IMAGETYPE]];
     
-    //set Video Flyer Image for Future Update
-    videoImageFile = [flyPath stringByAppendingString:[NSString stringWithFormat:@"/flyerOverlay.%@",IMAGETYPE]];
-    
     masterLayers = [[NSMutableDictionary alloc] initWithContentsOfFile:piecesFile];
     
     textFileArray = [[NSMutableArray alloc] initWithContentsOfFile:textFile];
@@ -90,29 +87,49 @@ NSString * const TEXTHEIGHT = @"280.000000";
 }
 
 
+/*
+ * Here we Update Current Flyer Snapshot
+ */
+-(void)setUpdatedSnapshotWithImage :(UIImage *)snapShot {
+    
+    //Getting Current Path
+    NSString* currentPath  =   [[NSFileManager defaultManager] currentDirectoryPath];
+    
+    //set Flyer Image for Future Update
+    flyerImageFile = [currentPath stringByAppendingString:[NSString stringWithFormat:@"/flyer.%@",IMAGETYPE]];
+
+    
+    //Convert Imgae into Data
+    NSData *snapShotData = UIImagePNGRepresentation(snapShot);
+    
+    //Here we Update Flyer File from Current Snapshot
+    [snapShotData writeToFile:flyerImageFile atomically:YES];
+    
+    //Here we Add Image in Flyerly Album
+    [self addToGallery:snapShotData];
+
+}
 
 
 /*
- * Here we save the dictionary to .peices files
- * and Update Flyer Image
+ * HERE WE SAVE CONTENT IN USER GALLERY
  */
--(void)saveFlyer :(UIImage *)snapShot{
-
-    NSData *snapShotData = UIImagePNGRepresentation(snapShot);
-    
-    [snapShotData writeToFile:flyerImageFile atomically:YES];
+-(void)addToGallery :(NSData *)snapShotData {
     
     // HERE WE CHECK USER ALLOWED TO SAVE IN GALLERY FROM SETTING
     if([[NSUserDefaults standardUserDefaults] stringForKey:@"saveToCameraRollSetting"]){
         
         //USER ALLOWED
-        // Checking Flyer Type
-        if (![self isVideoFlyer]) {
-            
-            //HERE WE WRITE IMAGE IN GALLERY
-            [self saveInGallery:snapShotData];
-        }
+        //HERE WE WRITE IMAGE OR VIDEO IN GALLERY
+        [self saveInGallery:snapShotData];
     }
+
+}
+
+/*
+ * Here we save the dictionary to .peices files
+ */
+-(void)saveFlyer{
     
     //Here we write the dictionary of .peices files
     [masterLayers writeToFile:piecesFile atomically:YES];
@@ -136,24 +153,19 @@ NSString * const TEXTHEIGHT = @"280.000000";
 /*
  * Here we Update Image for Video Overlay Image
  */
--(void)setVideoOverlay :(UIImage *)snapShot {
-
-    NSData *snapShotData = UIImagePNGRepresentation(snapShot);
-    [snapShotData writeToFile:videoImageFile atomically:YES];
-}
-
-/*** HERE WE return Overlay Image
- *
- */
--(UIImage *)getFlyerOverlayImage {
-
+-(void)setVideoCover :(UIImage *)snapShot {
+    
     NSString* currentPath  =   [[NSFileManager defaultManager] currentDirectoryPath];
     
-    NSString *imagePath = [currentPath stringByAppendingString:[NSString stringWithFormat:@"/flyerOverlay.%@",IMAGETYPE] ];
-    UIImage *shareImage =  [UIImage imageWithContentsOfFile:imagePath];
+    //set Flyer Image for Future Update
+    flyerImageFile = [currentPath stringByAppendingString:[NSString stringWithFormat:@"/flyer.%@",IMAGETYPE]];
 
-    return shareImage;
+
+    NSData *snapShotData = UIImagePNGRepresentation(snapShot);
+    [snapShotData writeToFile:flyerImageFile atomically:YES];
 }
+
+
 
 
 /*** HERE WE SAVE IMAGE INTO GALLERY
@@ -370,6 +382,46 @@ NSString * const TEXTHEIGHT = @"280.000000";
 
 
 /*
+ * Here we Matching Current Layers File with Last history Layers File
+ */
+-(BOOL)isVideoMergeProcessRequired {
+    
+    
+    NSString *lastFolderName = [self getVideoMergeAddress];
+    
+    //Getting Current Flyer folder Path
+    NSString* currentSourcepath  =   [[NSFileManager defaultManager] currentDirectoryPath];
+    NSString* historyDestinationpath  =  [NSString stringWithFormat:@"%@/History",currentSourcepath];
+    
+    //Gettin List From Path
+    NSArray *fileList = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:historyDestinationpath error:nil];
+    
+    
+    //HISTORY CHECK
+    if (fileList.count >= 1) {
+        
+        //HISTORY AVAILABLE
+        NSArray *sortedFlyersList = [fileList sortedArrayUsingFunction:compareDesc context:NULL];
+        
+        // Here we handle Flyer First Time Video Merge
+        if ([lastFolderName isEqualToString:@""]) {
+            
+            [self setVideoMergeAddress:[sortedFlyersList objectAtIndex:0]];
+            return YES;
+        }
+        
+        // Here we handle Flyer have any Change then Video Merge
+        if ([lastFolderName isEqualToString:[sortedFlyersList objectAtIndex:0]]) {
+            return NO;
+        }else {
+            [self setVideoMergeAddress:[sortedFlyersList objectAtIndex:0]];
+        }
+        
+        
+    }
+    return YES;
+}
+/*
  * Here we Copy Current Flyer folder with all related file
  * to History folder name as timestamp for future Undo request
  */
@@ -418,7 +470,7 @@ NSString * const TEXTHEIGHT = @"280.000000";
             {
                 lastFileName = fileList[i];
         
-                if (![lastFileName isEqualToString:@"History"]) {
+                if (![lastFileName isEqualToString:@"History"] && ![lastFileName isEqualToString:@"FlyerlyMovie.mov"] ) {
                     NSString *source = [NSString stringWithFormat:@"%@/%@",currentSourcepath,lastFileName];
                     NSString *destination = [NSString stringWithFormat:@"%@/%@",historyDestinationpath,lastFileName];
     
@@ -866,13 +918,13 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     
     //Here we Rename the Directory Name
     NSString *newPath = [[currentpath stringByDeletingLastPathComponent] stringByAppendingPathComponent:replaceDirName];
+    
     NSError *error = nil;
     [[NSFileManager defaultManager] moveItemAtPath:currentpath toPath:newPath error:&error];
     
     if (error) {
-        NSLog(@"%@",error.localizedDescription);
+        NSLog(@"Recent flyer :%@",error.localizedDescription);
     }
-
 
 }
 
@@ -1235,11 +1287,14 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
         AVAssetImageGenerator *generator = [[AVAssetImageGenerator alloc] initWithAsset:asset];
         generator.appliesPreferredTrackTransform = YES;
         NSError *err = NULL;
-        CMTime time = CMTimeMake(0, 0);
         CGImageRef imgRef = [generator copyCGImageAtTime: asset.duration  actualTime:NULL error:&err];
         
         img = [[UIImage alloc] initWithCGImage:imgRef];
+    }else {
+        NSLog(@"Video cover not found");
+        
     }
+    
     
     return img;
 }
@@ -1252,7 +1307,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     
     UIImage *bottomImage = [self  getSharingVideoCover];
     
-    UIImage *image = [UIImage imageNamed:@"playIcon"];
+    UIImage *image = [UIImage imageNamed:@"play_icon"];
     
     CGSize newSize = CGSizeMake(300, 300);
     UIGraphicsBeginImageContext( newSize );
@@ -1261,7 +1316,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     [bottomImage drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
     
     // Apply supplied opacity
-    [image drawInRect:CGRectMake(90,90,120,120) blendMode:kCGBlendModeNormal alpha:1];
+    [image drawInRect:CGRectMake(95,95,120,120) blendMode:kCGBlendModeNormal alpha:1];
     
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     
@@ -1359,6 +1414,19 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 
     [socialArray replaceObjectAtIndex:7 withObject:[NSString stringWithFormat:@"%d",status]];
     
+    //Here we write the Array of Text files .txt
+    [socialArray writeToFile:socialFile atomically:YES];
+}
+
+//Set Youtube Share Info
+-(void)setYouTubeStatus :(int)status {
+    
+    if (socialArray.count > 8) {
+        [socialArray replaceObjectAtIndex:8 withObject:[NSString stringWithFormat:@"%d",status]];
+    }else {
+        [socialArray addObject:@""];
+        [self setYouTubeStatus:status];
+    }
     //Here we write the Array of Text files .txt
     [socialArray writeToFile:socialFile atomically:YES];
 }
@@ -1525,6 +1593,36 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     
 }
 
+/*
+ * HERE WE GET YOUTUBE URL
+ */
+-(NSString *)getYoutubeLink {
+    
+    if (textFileArray.count > 7) {
+        return [textFileArray objectAtIndex:7];
+    } else {
+        [textFileArray addObject:@""];
+        [textFileArray writeToFile:textFile atomically:YES];
+        return @"";
+    }
+    
+}
+
+/*
+ * HERE WE GET History Folder Name for Video Merge Process
+ */
+-(NSString *)getVideoMergeAddress {
+    
+    if (textFileArray.count > 8) {
+        return [textFileArray objectAtIndex:8];
+    } else {
+        [textFileArray addObject:@""];
+        [textFileArray writeToFile:textFile atomically:YES];
+        return @"";
+    }
+
+}
+
 #pragma mark  Flyer Text File SET
 
 
@@ -1613,16 +1711,55 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
  */
 -(void)setVideoAsssetURL :(NSString *)URL {
     
-    if (textFileArray.count > 6) {
-        [textFileArray replaceObjectAtIndex:6 withObject:URL];
-    }else {
-        [textFileArray addObject:URL];
+    if (URL != nil) {
+        if (textFileArray.count > 6) {
+        
+            [textFileArray replaceObjectAtIndex:6 withObject:URL];
+        }else {
+            [textFileArray addObject:@""];
+            [self setVideoAsssetURL:URL];
+        }
+        //Here we write the Array of Text files .txt
+        [textFileArray writeToFile:textFile atomically:YES];
     }
-    //Here we write the Array of Text files .txt
-    [textFileArray writeToFile:textFile atomically:YES];
-
 }
 
+
+/*
+ * Here we Set Flyer Youtube URL
+ */
+-(void)setYoutubeLink :(NSString *)URL {
+    
+    if (URL != nil) {
+        if (textFileArray.count > 7) {
+            
+            [textFileArray replaceObjectAtIndex:7 withObject:URL];
+        }else {
+            [textFileArray addObject:@""];
+            [self setYoutubeLink:URL];
+        }
+        //Here we write the Array of Text files .txt
+        [textFileArray writeToFile:textFile atomically:YES];
+    }
+}
+
+/*
+ * Here we Set Flyer History Folder Name for Video Merge Process
+ */
+-(void)setVideoMergeAddress :(NSString *)address {
+    
+    if (address != nil) {
+        if (textFileArray.count > 8) {
+            
+            [textFileArray replaceObjectAtIndex:8 withObject:address];
+        }else {
+            [textFileArray addObject:@""];
+            [self setVideoMergeAddress:address];
+        }
+        //Here we write the Array of Text files .txt
+        [textFileArray writeToFile:textFile atomically:YES];
+    }
+}
 
 @end
 

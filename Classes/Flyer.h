@@ -31,11 +31,14 @@
 
 -(void)loadFlyer :(NSString *)flyPath;
 
--(void)saveFlyer :(UIImage *)snapShot;
+-(void)saveFlyer;
+
+-(void)setUpdatedSnapshotWithImage :(UIImage *)snapShot;
 
 -(void)saveInGallery :(NSData *)imgData;
 
 -(void)addToHistory;
+-(void)addToGallery :(NSData *)snapShotData;
 
 -(void)replaceFromHistory;
 
@@ -52,8 +55,7 @@
 -(NSString *)addText;
 -(NSString *)addImage;
 
--(void)setVideoOverlay :(UIImage *)snapShot;
--(UIImage *)getFlyerOverlayImage;
+-(void)setVideoCover :(UIImage *)snapShot;
 
 -(void)setImageFrame :(NSString *)uid :(CGRect )photoFrame;
 
@@ -85,6 +87,9 @@
 
 -(void)setFlyerURL :(NSString *)URL;
 -(void)setVideoAsssetURL :(NSString *)URL;
+-(void)setYoutubeLink :(NSString *)URL;
+-(void)setVideoMergeAddress :(NSString *)address;
+
 
 -(void)setShareType :(NSString *)type;
 
@@ -99,6 +104,7 @@
 -(void)setEmailStatus :(int)status;
 -(void)setSmsStatus :(int)status;
 -(void)setClipboardStatus :(int)status;
+-(void)setYouTubeStatus :(int)status;
 
 -(NSMutableDictionary *)getLayerFromMaster :(NSString *)uid;
 -(NSString *)getImageTag :(NSString *)uid;
@@ -121,6 +127,9 @@
 -(NSString *)getShareType;
 -(NSString *)getFlyerUpdateDate;
 -(NSString *)getVideoAssetURL;
+-(NSString *)getYoutubeLink;
+-(NSString *)getVideoMergeAddress;
+
 -(UIImage *)getImageForVideo;
 
 
@@ -132,7 +141,7 @@
 -(float)getHight :(NSString *)uid;
 -(NSString *)getFlyerImage;
 
-
+-(BOOL)isVideoMergeProcessRequired;
 +(NSString *)newFlyerPath;
 + (NSMutableArray *)recentFlyerPreview:(NSInteger)flyCount;
 

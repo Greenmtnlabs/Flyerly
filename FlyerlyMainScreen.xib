@@ -10,14 +10,18 @@
                 <outlet property="createFlyrButton" destination="23" id="51"/>
                 <outlet property="createFlyrLabel" destination="10" id="47"/>
                 <outlet property="firstFlyer" destination="14" id="50"/>
+                <outlet property="firstFlyerButton" destination="ld5-eK-vpW" id="Pdy-eB-ftz"/>
                 <outlet property="fourthFlyer" destination="12" id="38"/>
+                <outlet property="fourthFlyerButton" destination="HU8-3B-hmJ" id="W2E-DD-laU"/>
                 <outlet property="inviteFriendButton" destination="25" id="53"/>
                 <outlet property="inviteFriendLabel" destination="5" id="49"/>
                 <outlet property="savedFlyrButton" destination="24" id="52"/>
                 <outlet property="savedFlyrLabel" destination="9" id="48"/>
                 <outlet property="secondFlyer" destination="13" id="37"/>
+                <outlet property="secondFlyerButton" destination="nTT-jT-5cZ" id="cVq-q0-yRg"/>
                 <outlet property="setBotton" destination="16" id="78"/>
                 <outlet property="thirdFlyer" destination="11" id="39"/>
+                <outlet property="thirdFlyerButton" destination="BIU-DI-wID" id="4kH-QI-XHk"/>
                 <outlet property="view" destination="3" id="43"/>
             </connections>
         </placeholder>
@@ -223,9 +227,9 @@
         </view>
     </objects>
     <resources>
-        <image name="Zmain_screenbg-568h.png" width="253" height="35"/>
+        <image name="Zmain_screenbg-568h.png" width="128" height="90"/>
         <image name="mid_shadow.png" width="105" height="52"/>
-        <image name="pinned_flyer2.png" width="126" height="165"/>
+        <image name="pinned_flyer2.png" width="63" height="82"/>
         <image name="pinned_flyer_bg2.png" width="260" height="260"/>
         <image name="settings2.png" width="142" height="137"/>
         <image name="shadow.png" width="207" height="96"/>

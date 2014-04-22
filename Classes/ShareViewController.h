@@ -31,6 +31,7 @@
 #import "Flyer.h"
 #import "SHKActivityIndicator.h"
 #import "UIPlaceHolderTextView.h"
+#import "YouTubeSubClass.h"
 
 
 @class FlyrViewController,FlyerlySingleton;
@@ -55,6 +56,8 @@
 @property(nonatomic,strong) IBOutlet UIButton *flickrButton;
 @property(nonatomic,strong) IBOutlet UIButton *instagramButton;
 @property(nonatomic,strong) IBOutlet UIButton *smsButton;
+@property(nonatomic,strong) IBOutlet UIButton *youTubeButton;
+
 @property(nonatomic,strong) IBOutlet UIButton *clipboardButton;
 @property(nonatomic,strong) IBOutlet UILabel *clipboardlabel;
 @property(nonatomic,strong) IBOutlet UILabel *topTitleLabel;
@@ -96,5 +99,6 @@
 
 -(void)shareOnInstagram;
 -(void)setSocialStatus;
+-(void)enableAllShareOptions;
 
 @end

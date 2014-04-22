@@ -72,7 +72,7 @@
     self.cameraView.captureMovieResultBlock = ^(NSURL *movieUrl,NSError * error) {
         if (!error) {
             
-            NSLog(@"%@",movieUrl);
+           // NSLog(@"%@",movieUrl);
             self.onVideoFinished(movieUrl);
             [self.navigationController popViewControllerAnimated:YES];
         }
@@ -88,8 +88,10 @@
     self.cameraView.whiteBalanceButtonConfigurationBlock = [self.cameraView buttonConfigurationBlockWithTitleFrom:
                                                             @[@"Lckd", @"Auto", @"Cont"]];
     
-}
 
+
+    
+}
 
 
 /**
@@ -157,6 +159,7 @@
     nbugallery.desiredImageSize = desiredImageSize;
     nbugallery.onImageTaken = onImageTaken;
     nbugallery.onVideoFinished = onVideoFinished;
+    nbugallery.onVideoCancel = onVideoCancel;
     nbugallery.videoAllow = videoAllow;
     
     // Pop the current view, and push the crop view.
@@ -212,9 +215,7 @@
         
         //Action for Video Mode
         [shoot setSelected:YES];
-        [self.cameraView startStopRecording:nil];
-        [self startRecording:sender];
-
+         progress = 1;
 
     } else {
         
@@ -226,6 +227,9 @@
 
 
 }
+
+
+
 
 - (IBAction)tapAndHold:(id)sender {
     UIButton *shoot = (UIButton *)  self.cameraView.shootButton;
@@ -255,14 +259,14 @@ static float progress = 0.0f;
 -(IBAction)showWithProgress:(id)sender {
     progress = 0.0f;
     progressView.progress = progress;
-    [self performSelector:@selector(increaseProgress) withObject:nil afterDelay:0.3];
+    [self performSelector:@selector(increaseProgress) withObject:nil afterDelay:0.1];
 }
 
 -(void)increaseProgress {
-    progress+=0.01f;
+    progress+=0.0033;
     progressView.progress = progress;
     if(progress < 1.0)
-        [self performSelector:@selector(increaseProgress) withObject:nil afterDelay:0.3];
+        [self performSelector:@selector(increaseProgress) withObject:nil afterDelay:0.1];
     else
         [self performSelector:@selector(dismiss) withObject:nil afterDelay:0.0];
 }

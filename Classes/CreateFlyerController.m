@@ -17,7 +17,7 @@ fontBorderTabButton,addMoreIconTabButton,addMorePhotoTabButton,addMoreSymbolTabB
 @synthesize contextView,libraryContextView,libFlyer,backgroundTabButton,addMoreFontTabButton;
 @synthesize libText,libBackground,libPhoto,libEmpty,backtemplates,cameraTakePhoto,cameraRoll,flyerBorder;
 @synthesize flyimgView,currentLayer,layersDic,flyer,player,playerView,playerToolBar,playButton,playerSlider;
-@synthesize durationLabel,durationChange;
+@synthesize durationLabel,durationChange,onFlyerBack;
 int selectedAddMoreLayerTab = -1;
 
 
@@ -162,7 +162,7 @@ int selectedAddMoreLayerTab = -1;
     [self.view setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
     [self.contextView setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
 
-    sharePanel = [[UIView alloc] initWithFrame:CGRectMake(0, 480, 320,400 )];
+    sharePanel = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.origin.y, 320,400 )];
     shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
 
     sharePanel = shareviewcontroller.view;
@@ -315,36 +315,63 @@ int selectedAddMoreLayerTab = -1;
     // Remove Border if Any Layer Selected
     if (![currentLayer isEqualToString:@""]) [self.flyimgView layerStoppedEditing:currentLayer];
     
+    //Close Keyboard if Open
     [shareviewcontroller.titleView resignFirstResponder];
     [shareviewcontroller.descriptionView resignFirstResponder];
     
-
-    UIImage *snapshotImage;
-    
     //Save OnBack
+    // Here we Save Flyer Info
+    [flyer saveFlyer];
+    
+    //Here we Create One History BackUp for Future Undo Request
+    [flyer addToHistory];
+    
+    //Here we Manage Updated Flyer
     if ([flyer isVideoFlyer]) {
         
-        //Here we take Image From Video Player
-        snapshotImage = [self.flyer getImageForVideo];
+        //Here Compare Current Flyer with history Flyer
+        if ([self.flyer isVideoMergeProcessRequired]) {
+            
+            panelWillOpen = NO;
+            
+            //Background Thread
+            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+                
+                //Here we Merge All Layers in Video File
+                [self videoMergeProcess];
+                
+            });
+        }else {
+            
+            //Here we call Block for update Main UI
+            self.onFlyerBack(@"");
+        }
         
-    }else {
+    } else {
         
-         //Here we take Snap shot of Flyer
-      snapshotImage =  [self getFlyerSnapShot];
+        //Background Thread
+        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
 
-
+            //Here we remove Borders from layer if user touch any layer
+            [self.flyimgView layerStoppedEditing:currentLayer];
+            
+            //Here we take Snap shot of Flyer and
+            //Flyer Add to Gallery if user allow to Access there photos
+            [flyer setUpdatedSnapshotWithImage:[self getFlyerSnapShot]];
+            
+            
+            // Main Thread
+            dispatch_async( dispatch_get_main_queue(), ^{
+                
+                //Here we call Block for update Main UI
+                self.onFlyerBack(@"");
+                
+            });
+            
+        });
         
     }
-    
-    // Here we Save Flyer Info
-    [flyer saveFlyer:snapshotImage];
 
-    
-    if (![[flyer getFlyerURL] isEqualToString:@""]) {
-        
-        // Update Recent Flyer List
-        [flyer setRecentFlyer];
-    }
     [Flurry logEvent:@"Saved Flyer"];
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -1608,6 +1635,15 @@ int selectedAddMoreLayerTab = -1;
  * Here we Load Gallery
  */
 -(void)loadCustomPhotoLibrary :(NSString *)videoAllow {
+
+
+    uiBusy = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    [uiBusy setFrame:CGRectMake(280, 5, 20, 20)];
+    [uiBusy setColor:[UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0]];
+    uiBusy.hidesWhenStopped = YES;
+    [uiBusy startAnimating];
+    
+    [self.flyimgView addSubview:uiBusy];
     
     LibraryViewController *nbuGallary = [[LibraryViewController alloc] initWithNibName:@"LibraryViewController" bundle:nil];
     
@@ -1625,7 +1661,10 @@ int selectedAddMoreLayerTab = -1;
 
     [nbuGallary setOnImageTaken:^(UIImage *img) {
         
+        [uiBusy stopAnimating];
+        [uiBusy removeFromSuperview];
         dispatch_async( dispatch_get_main_queue(), ^{
+            
             // Do any UI operation here (render layer).
             if (weakSelf.imgPickerFlag == 2) {
                 
@@ -1659,6 +1698,9 @@ int selectedAddMoreLayerTab = -1;
     
     [nbuGallary setOnVideoFinished:^(NSURL *recvUrl) {
         
+        [uiBusy stopAnimating];
+        [uiBusy removeFromSuperview];
+
         NSLog(@"%@",recvUrl);
         NSError *error = nil;
         
@@ -1686,7 +1728,13 @@ int selectedAddMoreLayerTab = -1;
 
     }];
     
-    
+    [nbuGallary setOnVideoCancel:^() {
+        
+        [self.view addSubview:flyimgView];
+        [uiBusy stopAnimating];
+        [uiBusy removeFromSuperview];
+        
+    }];
     [self.navigationController pushViewController:nbuGallary animated:YES];
     [Flurry logEvent:@"Custom Background"];
 }
@@ -1699,6 +1747,15 @@ int selectedAddMoreLayerTab = -1;
  */
 -(void)openCustomCamera{
 
+
+    uiBusy = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    [uiBusy setFrame:CGRectMake(280, 5, 20, 20)];
+    [uiBusy setColor:[UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0]];
+    uiBusy.hidesWhenStopped = YES;
+    [uiBusy startAnimating];
+    
+    [self.view addSubview:uiBusy];
+    
     CameraViewController *nbuCamera = [[CameraViewController alloc]initWithNibName:@"CameraViewController" bundle:nil];
     
     if ( imgPickerFlag == 2 ) {
@@ -1714,6 +1771,8 @@ int selectedAddMoreLayerTab = -1;
     // Callback once image is selected.
     [nbuCamera setOnImageTaken:^(UIImage *img) {
         
+         [uiBusy stopAnimating];
+        [uiBusy removeFromSuperview];
         dispatch_async( dispatch_get_main_queue(), ^{
             // Do any UI operation here (render layer).
 
@@ -1759,6 +1818,14 @@ int selectedAddMoreLayerTab = -1;
  */
 -(void)openCustomCamera :(BOOL *)forVideo{
     
+
+    uiBusy = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    [uiBusy setFrame:CGRectMake(280, 5, 20, 20)];
+    [uiBusy setColor:[UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0]];
+    uiBusy.hidesWhenStopped = YES;
+    [uiBusy startAnimating];
+    [self.view addSubview:uiBusy];
+    
     CameraViewController *nbuCamera = [[CameraViewController alloc]initWithNibName:@"CameraViewController" bundle:nil];
     
     //Here we Pass FlyerImageView For Video
@@ -1771,6 +1838,8 @@ int selectedAddMoreLayerTab = -1;
     // Callback once image is selected.
     [nbuCamera setOnImageTaken:^(UIImage *img) {
         
+         [uiBusy stopAnimating];
+        [uiBusy removeFromSuperview];
         dispatch_async( dispatch_get_main_queue(), ^{
 
                 //Here we Set Flyer Type
@@ -1790,6 +1859,9 @@ int selectedAddMoreLayerTab = -1;
         
     [nbuCamera setOnVideoFinished:^(NSURL *recvUrl) {
         
+        [uiBusy stopAnimating];
+        [uiBusy removeFromSuperview];
+
         NSLog(@"%@",recvUrl);
         NSError *error = nil;
         [self.view addSubview:flyimgView];
@@ -1822,6 +1894,8 @@ int selectedAddMoreLayerTab = -1;
     [nbuCamera setOnVideoCancel:^() {
     
       [self.view addSubview:flyimgView];
+        [uiBusy stopAnimating];
+        [uiBusy removeFromSuperview];
     
     }];
 
@@ -1836,8 +1910,11 @@ int selectedAddMoreLayerTab = -1;
  */
 -(void)loadPlayerWithURL :(NSURL *)movieURL {
     
+    
+    NSLog(@"Video URL = %@",movieURL);
     player =[[MPMoviePlayerController alloc] initWithContentURL:movieURL];
     [player.view setFrame:self.playerView.bounds];
+    
     
     [[NSNotificationCenter defaultCenter]
      addObserver:self selector:@selector(movieFinishedCallback:)
@@ -1860,8 +1937,13 @@ int selectedAddMoreLayerTab = -1;
     [playerToolBar removeFromSuperview];
 
     self.flyimgView.image = nil;
+    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap:)];
+    [player.view  addGestureRecognizer:tap];
+    tap.delegate = self;
     [self.playerView addSubview:player.view];
-    [playerToolBar setFrame:CGRectMake(0, self.playerView.frame.size.height - 40, 310, 40)];
+ 
+
+    [playerToolBar setFrame:CGRectMake(0, self.playerView.frame.size.height - 40, 306, 40)];
     [self.playerView addSubview:playerToolBar];
     player.accessibilityElementsHidden = YES;
     player.shouldAutoplay = NO;
@@ -1871,6 +1953,8 @@ int selectedAddMoreLayerTab = -1;
     player.scalingMode = MPMovieScalingModeAspectFill;
     player.backgroundView.backgroundColor = [UIColor whiteColor];
     [player prepareToPlay];
+    
+
 
 }
 
@@ -2379,10 +2463,53 @@ int selectedAddMoreLayerTab = -1;
     return isPortrait;
 }
 
+
+/*
+ * Here we Merge Video
+ */
+-(void)videoMergeProcess {
+    
+    // CREATING PATH FOR FLYER OVERLAY VIDEO
+    NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
+    NSString *originalVideoPath = [NSString stringWithFormat:@"%@/Template/template.mov", currentpath];
+
+    // URL of the movie.
+    NSURL *url = [NSURL fileURLWithPath:originalVideoPath];
+    
+    // Here we Update Overlay
+    UIImage *image = [self getFlyerSnapShot];
+    
+    // Crop the image based on aspect ratio. First get the movie size.
+    CGSize movieSize = self.player.naturalSize;
+    
+    // Now compute the aspect ratio
+    CGFloat aspectRatio = movieSize.width / movieSize.height;
+    
+    // Now get the image height we need to use.
+    CGFloat imageHeight = image.size.width / aspectRatio;
+    
+    // Now compute the y offset from where we crop
+    CGFloat y = (image.size.height - imageHeight) / 2.0f;
+    
+    // Get the new cropped image
+    image = [image imageCroppedToRect:CGRectMake( 0, y, image.size.width, imageHeight)];
+    
+    // Now scale to the movie size
+    UIGraphicsBeginImageContextWithOptions( movieSize, NO, 0.0 );
+    [image drawInRect:CGRectMake(0, 0, movieSize.width, movieSize.height)];
+    image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    // HERE WE ARE MERGE OVER CREATED VIDEO AND USER SELECTED OR MAKE
+    [self mergeVideoWithOverlay:url image:image];
+}
+
+
 /*
  * HERE WE MERGE TWO VIDEOS FOR SHARE VIDEO
  */
 -(void)mergeVideoWithOverlay:(NSURL *)firstURL image:(UIImage *)image {
+    
     
     // Get a pointer to the asset
     AVURLAsset* firstAsset = [AVURLAsset URLAssetWithURL:firstURL options:nil];
@@ -2490,16 +2617,37 @@ int selectedAddMoreLayerTab = -1;
             }
             case AVAssetExportSessionStatusCompleted: {
                 
-                // Background Thread
-                dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-                    
-                    // Here we Add Video In Flyerly Album
-                    //This Data is Temporary Send For Crash Maintain on Simulator Other wise
-                    // it should be nil for Video Saving
-                    NSData *data = [[NSFileManager defaultManager] contentsAtPath:destination];
-                    [self.flyer saveInGallery:data];
-                    
-                });
+                
+                //Here we take Image From Video Player
+                UIImage *videoCover = [self.flyer getImageForVideo];
+                [self.flyer setVideoCover:videoCover];
+                
+                NSLog(@"Video Merge Process Completed");
+                
+                if (panelWillOpen) {
+                
+                    // Main Thread
+                    dispatch_async( dispatch_get_main_queue(), ^{
+
+                        //Here we Open Share Panel for Share Flyer
+                        [self openPanel];
+                        
+                    });
+                }else {
+                
+                    // Main Thread
+                    dispatch_async( dispatch_get_main_queue(), ^{
+                        
+                        //Here we Open Share Panel for Share Flyer
+                        self.onFlyerBack(@"");
+                        
+                    });
+
+                }
+                
+                // Here we Add Video In Flyerly Album
+                [self.flyer addToGallery:nil];
+                
             }
         };
     }]; 
@@ -2684,16 +2832,17 @@ int selectedAddMoreLayerTab = -1;
 
 -(void)undoFlyer{
     
-    //Stop Edit Mode for remove Layer Border if Selected
+    //Here we remove Borders from layer if user touch any layer
     [self.flyimgView layerStoppedEditing:currentLayer];
     
-    //Here we take Snap shot of Flyer
-    UIImage *snapshotImage = [self getFlyerSnapShot];
+    //Here we take Snap shot of Flyer and
+    //Flyer Add to Gallery if user allow to Access there photos
+    [flyer setUpdatedSnapshotWithImage:[self getFlyerSnapShot]];
     
     //First we Save Current flyer in history
-    [flyer saveFlyer:snapshotImage];
+    [flyer saveFlyer];
     
-    //Add Flyer in Histor if any Change Exists
+    //Add Flyer in History if any Change Exists
     [flyer addToHistory];
     
     //Here we send Request to Model for Move Back
@@ -2790,8 +2939,6 @@ int selectedAddMoreLayerTab = -1;
     //Empty Layer Delete
     if (currentLayer != nil && ![currentLayer isEqualToString:@""]) {
         
-        
-        
         NSString *flyerImg = [flyer getImageName:currentLayer];
         NSString *flyertext = [flyer getText:currentLayer];
         
@@ -2806,51 +2953,12 @@ int selectedAddMoreLayerTab = -1;
         }
     }
     
+    //Save OnBack
+    //Here we remove Borders from layer if user touch any layer
     [self.flyimgView layerStoppedEditing:currentLayer];
     
-    UIImage *snapshotImage;
-    
-    //Save OnBack
-    if ([flyer isVideoFlyer]) {
-        
-        
-        //Here we Update Overlay
-        [flyer setVideoOverlay:[self getFlyerSnapShot]];
-        
-        //Background Thread
-        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-            
-            //Here we Merge All Layers in Video File
-            [self videoMergeProcess];
-            
-        });
-        
-        //Here we take Image From Video Player
-        snapshotImage =  [self.flyer getImageForVideo];
-
-        
-    }else {
-        
-        //Here we take Snap shot of Flyer
-        snapshotImage =  [self getFlyerSnapShot];
-        
-        //Temporary For Simulator
-        videoDuration = 1;
-        
-        //Background Thread
-        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-            
-            //Here we Merge All Layers in Video File
-           // [self videoMergeProcess];
-            
-        });
-
-        
-
-    }
-    
     //Here we Save Flyer
-    [flyer saveFlyer:snapshotImage];
+    [flyer saveFlyer];
     
     //Here we Create One History BackUp for Future Undo Request
     [flyer addToHistory];
@@ -2872,45 +2980,6 @@ int selectedAddMoreLayerTab = -1;
 }
 
 
-/*
- * Here we Merge Video
- */
--(void)videoMergeProcess {
-    
-    // CREATING PATH FOR FLYER OVERLAY VIDEO
-    NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
-    NSString *originalVideoPath = [NSString stringWithFormat:@"%@/Template/template.mov", currentpath];
-
-    // URL of the movie.
-    NSURL *url = [NSURL fileURLWithPath:originalVideoPath];
-    
-    // Here we Update Overlay
-    UIImage *image = [self getFlyerSnapShot];
-    
-    // Crop the image based on aspect ratio. First get the movie size.
-    CGSize movieSize = self.player.naturalSize;
-    
-    // Now compute the aspect ratio
-    CGFloat aspectRatio = movieSize.width / movieSize.height;
-    
-    // Now get the image height we need to use.
-    CGFloat imageHeight = image.size.width / aspectRatio;
-    
-    // Now compute the y offset from where we crop
-    CGFloat y = (image.size.height - imageHeight) / 2.0f;
-    
-    // Get the new cropped image
-    image = [image imageCroppedToRect:CGRectMake( 0, y, image.size.width, imageHeight)];
-    
-    // Now scale to the movie size
-    UIGraphicsBeginImageContextWithOptions( movieSize, NO, 0.0 );
-    [image drawInRect:CGRectMake(0, 0, movieSize.width, movieSize.height)];
-    image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    // HERE WE ARE MERGE OVER CREATED VIDEO AND USER SELECTED OR MAKE
-    [self mergeVideoWithOverlay:url image:image];
-}
 
 #pragma mark  Share Flyer
 
@@ -2921,15 +2990,78 @@ int selectedAddMoreLayerTab = -1;
 -(void)share {
     
     // Disable  Buttons
-    sharePanel.hidden = NO;
     rightUndoBarButton.enabled = NO;
     shareButton.enabled = NO;
     helpButton.enabled = NO;
 
+    [self showLoadingIndicator];
     
+    //Here we Merge Video for Sharing
+    if ([flyer isVideoFlyer]) {
+        
+        //Here Compare Current Flyer with history Flyer
+        if ([self.flyer isVideoMergeProcessRequired]) {
+            
+            panelWillOpen = YES;
+
+            //Background Thread
+            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+                
+                //Here we Merge All Layers in Video File
+                [self videoMergeProcess];
+                
+            });
+        }else {
+            
+            //Here we Open Share Panel for Share Flyer
+            [self openPanel];
+        }
+    }else {
+        
+        //Background Thread
+        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+            
+            //Here we remove Borders from layer if user touch any layer
+            [self.flyimgView layerStoppedEditing:currentLayer];
+            
+            //Here we take Snap shot of Flyer and
+            //Flyer Add to Gallery if user allow to Access there photos
+            [flyer setUpdatedSnapshotWithImage:[self getFlyerSnapShot]];
+            
+            dispatch_async( dispatch_get_main_queue(), ^{
+                //Here we Open Share Panel for Share Flyer
+                [self openPanel];
+            });
+            
+        });
+        
+    }
+    
+}
+
+/*
+ * Here we Open Share Panel
+ */
+-(void)openPanel {
+    
+    sharePanel.hidden = NO;
+    [sharePanel removeFromSuperview];
+    
+    if ([flyer isVideoFlyer]) {
+        shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareVideoViewController" bundle:nil];
+        
+    }else {
+        shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
+    }
+    sharePanel = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.origin.y, 320,400 )];
+    
+    sharePanel = shareviewcontroller.view;
+    [self.view addSubview:sharePanel];
+    
+    sharePanel = shareviewcontroller.view;
     NSString *shareImagePath = [flyer getFlyerImage];
     UIImage *shareImage =  [UIImage imageWithContentsOfFile:shareImagePath];
-
+    
     //Here we Pass Param to Share Screen Which use for Sharing
     shareviewcontroller.selectedFlyerImage = shareImage;
     shareviewcontroller.flyer = self.flyer;
@@ -2955,25 +3087,35 @@ int selectedAddMoreLayerTab = -1;
     [shareviewcontroller.descriptionView setReturnKeyType:UIReturnKeyDone];
     shareviewcontroller.Yvalue = [NSString stringWithFormat:@"%f",self.view.frame.size.height];
     
+    
     PFUser *user = [PFUser currentUser];
     if (user[@"appStarRate"])
         [self setStarsofShareScreen:user[@"appStarRate"]];
-
-
+    
+    
     [user saveInBackground];
     
     [shareviewcontroller setSocialStatus];
+    
+    
+    //Here we Get youtube Link
+    NSString *isAnyVideoUploadOnYoutube = [self.flyer getYoutubeLink];
+    
+    // Any Uploaded Video Link Available of Youtube
+    // then we Enable Other Sharing Options
+    if (![isAnyVideoUploadOnYoutube isEqualToString:@""]) {
+        [shareviewcontroller enableAllShareOptions];
+    }
     
     //Create Animation Here
     [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height, 320,425 )];
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.4f];
-        [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height -425, 320,425 )];
+    [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height -425, 320,425 )];
     [UIView commitAnimations];
-  
+    [self hideLoadingIndicator];
 
 }
-
 /*
  *Here we Set Stars
  */
@@ -3519,5 +3661,20 @@ int selectedAddMoreLayerTab = -1;
     
 }
 
+
+#pragma mark - gesture delegate
+
+// this allows you to dispatch touches
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    return YES;
+}
+// this enables you to handle multiple recognizers on single view
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    return YES;
+}
+
+- (void)onTap:(UITapGestureRecognizer *)gesture {
+    [self enableImageViewInteraction];
+}
 
 @end

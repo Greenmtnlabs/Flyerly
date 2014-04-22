@@ -124,7 +124,7 @@
 		0FE6F9A2177069BB00C726F7 /* three_buttons.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FE6F99E177069BB00C726F7 /* three_buttons.png */; };
 		0FE6F9AC177072CC00C726F7 /* shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FE6F9A8177072CC00C726F7 /* shadow.png */; };
 		0FE6F9B2177074E700C726F7 /* pinned_flyer_bg2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FE6F9AF177074E700C726F7 /* pinned_flyer_bg2.png */; };
-		0FE6F9B81770763200C726F7 /* pinned_flyer2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FE6F9B51770763200C726F7 /* pinned_flyer2.png */; };
+		0FE6F9B81770763200C726F7 /* pinned_flyer2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FE6F9B51770763200C726F7 /* pinned_flyer2@2x.png */; };
 		0FEDD799174A9DF000DF71C0 /* libCrittercismCrashOnly_v3_3_4.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FEDD76E174A91A800DF71C0 /* libCrittercismCrashOnly_v3_3_4.a */; };
 		0FEF2D9A174E65B100FDD8C9 /* HelpController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FEF2D99174E65B100FDD8C9 /* HelpController.xib */; };
 		0FEF2D9E174E665100FDD8C9 /* help_done.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FEF2D9C174E665100FDD8C9 /* help_done.png */; };
@@ -154,6 +154,7 @@
 		200A818818D32C9D0095AA3E /* filter.png in Resources */ = {isa = PBXBuildFile; fileRef = 200A818518D32C9D0095AA3E /* filter.png */; };
 		200D196818998BEB00EAD645 /* LayerTileButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 200D196718998BEA00EAD645 /* LayerTileButton.m */; };
 		200FA574187FEB01003576DA /* galleryicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 200FA572187FEB01003576DA /* galleryicon.png */; };
+		20142EDE18F437E10069FBDE /* flyerbundle in Resources */ = {isa = PBXBuildFile; fileRef = 20142EDD18F437E10069FBDE /* flyerbundle */; };
 		201597CE18E55FF600D18A12 /* pause_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 201597CC18E55FF600D18A12 /* pause_icon.png */; };
 		201597CF18E55FF600D18A12 /* play_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 201597CD18E55FF600D18A12 /* play_icon.png */; };
 		201686EB186AF56D00A238AE /* share_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 201686E9186AF56D00A238AE /* share_button.png */; };
@@ -359,6 +360,7 @@
 		202C658017EA07DC00CB9A75 /* symbol111.png in Resources */ = {isa = PBXBuildFile; fileRef = 202C64C817EA07DC00CB9A75 /* symbol111.png */; };
 		202C658217EA07DC00CB9A75 /* symbol112.png in Resources */ = {isa = PBXBuildFile; fileRef = 202C64CA17EA07DC00CB9A75 /* symbol112.png */; };
 		202C658417EA07DC00CB9A75 /* symbol113.png in Resources */ = {isa = PBXBuildFile; fileRef = 202C64CC17EA07DC00CB9A75 /* symbol113.png */; };
+		202F48BB18F28A60000B62DB /* CustomAssets.m in Sources */ = {isa = PBXBuildFile; fileRef = 202F48BA18F28A60000B62DB /* CustomAssets.m */; };
 		202F992418BCA37B002A25D9 /* home_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 202F992218BCA37B002A25D9 /* home_button.png */; };
 		202F992718BCAD1B002A25D9 /* FlyerlyFacebookFriends.m in Sources */ = {isa = PBXBuildFile; fileRef = 202F992618BCAD1B002A25D9 /* FlyerlyFacebookFriends.m */; };
 		202F993618BCB426002A25D9 /* invite_facebook_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 202F992A18BCB426002A25D9 /* invite_facebook_selected.png */; };
@@ -407,7 +409,7 @@
 		208ED66117C4CD660097EFCE /* cp_share_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 208ED65F17C4CD660097EFCE /* cp_share_selected.png */; };
 		20920015184F40330034C4F6 /* InviteFriendsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 20920013184F40330034C4F6 /* InviteFriendsCell.m */; };
 		20920016184F40330034C4F6 /* InviteFriendsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20920014184F40330034C4F6 /* InviteFriendsCell.xib */; };
-		2092FFCC184E00BF0034C4F6 /* flyerlylogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 2092FFCA184E00BF0034C4F6 /* flyerlylogo.png */; };
+		2092FFCC184E00BF0034C4F6 /* flyerlylogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2092FFCA184E00BF0034C4F6 /* flyerlylogo@2x.png */; };
 		2095C90E18C5E89900E244A8 /* FlyerlyTwitterFriends.m in Sources */ = {isa = PBXBuildFile; fileRef = 2095C90D18C5E89900E244A8 /* FlyerlyTwitterFriends.m */; };
 		2095C91118C5F92700E244A8 /* FlyerlyFacebookInvite.m in Sources */ = {isa = PBXBuildFile; fileRef = 2095C91018C5F92700E244A8 /* FlyerlyFacebookInvite.m */; };
 		20967D9818C8973200B273FC /* FlyerlyTwitterLike.m in Sources */ = {isa = PBXBuildFile; fileRef = 20967D9718C8973200B273FC /* FlyerlyTwitterLike.m */; };
@@ -418,6 +420,11 @@
 		20967DA318C8D7EA00B273FC /* star_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 20967DA118C8D7EA00B273FC /* star_selected.png */; };
 		20967DA418C8D7EA00B273FC /* star.png in Resources */ = {isa = PBXBuildFile; fileRef = 20967DA218C8D7EA00B273FC /* star.png */; };
 		2099301118BF0C5000A177A4 /* ContactsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2099301018BF0C5000A177A4 /* ContactsModel.m */; };
+		20A1CD6318EEF63200484391 /* SubNBUCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 20A1CD6218EEF63200484391 /* SubNBUCamera.m */; };
+		20A1CD6518EF0B0400484391 /* ShareVideoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20A1CD6418EF0B0400484391 /* ShareVideoViewController.xib */; };
+		20A1CD6818EF0B8700484391 /* youtube_share.png in Resources */ = {isa = PBXBuildFile; fileRef = 20A1CD6618EF0B8700484391 /* youtube_share.png */; };
+		20A1CD6918EF0B8700484391 /* youtube_share_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 20A1CD6718EF0B8700484391 /* youtube_share_selected.png */; };
+		20A1CD6F18EF19B400484391 /* YouTubeSubClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 20A1CD6E18EF19B400484391 /* YouTubeSubClass.m */; };
 		20B865F91851EF0400484D7D /* checkBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = 20B865F71851EF0400484D7D /* checkBlue.png */; };
 		20BA7DED18BE083300991DCC /* Flyr-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D1107310486CEB800E47090 /* Flyr-Info.plist */; };
 		20CC6922180DA416002F2E6F /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2061ED8B17FF212100E9BECA /* icon.png */; };
@@ -444,7 +451,6 @@
 		20ED041C17CCBCB000DA702E /* t_email_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 20ED041A17CCBCB000DA702E /* t_email_button.png */; };
 		20F0393E18E2E4060002338F /* ModeCamera.png in Resources */ = {isa = PBXBuildFile; fileRef = 20F0393C18E2E4060002338F /* ModeCamera.png */; };
 		20F0393F18E2E4060002338F /* ModeVideo.png in Resources */ = {isa = PBXBuildFile; fileRef = 20F0393D18E2E4060002338F /* ModeVideo.png */; };
-		20F2FC3418E32BE50054F115 /* flyerbundle in Resources */ = {isa = PBXBuildFile; fileRef = 20F2FC3318E32BE50054F115 /* flyerbundle */; };
 		20F4D8E017BA3D0A007B2DF5 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F4D8DE17BA3D09007B2DF5 /* ProfileViewController.m */; };
 		20F4D8E117BA3D0A007B2DF5 /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20F4D8DF17BA3D0A007B2DF5 /* ProfileViewController.xib */; };
 		20F4D8E517BA40EA007B2DF5 /* FlyerlySingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F4D8E417BA40EA007B2DF5 /* FlyerlySingleton.m */; };
@@ -787,8 +793,6 @@
 		65F41C8B173BDC03000BA8CB /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F41C8A173BDC02000BA8CB /* libxml2.2.dylib */; };
 		E8A7347D1092CFF300661AAD /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8A7347B1092CFF300661AAD /* ShareViewController.m */; };
 		E8A7347E1092CFF300661AAD /* ShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E8A7347C1092CFF300661AAD /* ShareViewController.xib */; };
-		E8C7C36910976BFC0064935A /* SaveFlyerController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8C7C36710976BFC0064935A /* SaveFlyerController.m */; };
-		E8C7C36A10976BFC0064935A /* SaveFlyerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E8C7C36810976BFC0064935A /* SaveFlyerController.xib */; };
 		E8E424ACA7CB4913890F4F3B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26D73E02307543D994C6C8BE /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -919,7 +923,7 @@
 		0FE6F99E177069BB00C726F7 /* three_buttons.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = three_buttons.png; sourceTree = "<group>"; };
 		0FE6F9A8177072CC00C726F7 /* shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shadow.png; sourceTree = "<group>"; };
 		0FE6F9AF177074E700C726F7 /* pinned_flyer_bg2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pinned_flyer_bg2.png; sourceTree = "<group>"; };
-		0FE6F9B51770763200C726F7 /* pinned_flyer2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pinned_flyer2.png; sourceTree = "<group>"; };
+		0FE6F9B51770763200C726F7 /* pinned_flyer2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pinned_flyer2@2x.png"; sourceTree = "<group>"; };
 		0FEDD76A174A91A800DF71C0 /* CrashReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrashReporter.h; path = Crittercism/CrashReporter.h; sourceTree = "<group>"; };
 		0FEDD76B174A91A800DF71C0 /* Crittercism.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Crittercism.h; path = Crittercism/Crittercism.h; sourceTree = "<group>"; };
 		0FEDD76C174A91A800DF71C0 /* CrittercismJSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrittercismJSONKit.h; path = Crittercism/CrittercismJSONKit.h; sourceTree = "<group>"; };
@@ -982,6 +986,7 @@
 		200D196618998BEA00EAD645 /* LayerTileButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LayerTileButton.h; sourceTree = "<group>"; };
 		200D196718998BEA00EAD645 /* LayerTileButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LayerTileButton.m; sourceTree = "<group>"; };
 		200FA572187FEB01003576DA /* galleryicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = galleryicon.png; path = ../Classes/galleryicon.png; sourceTree = "<group>"; };
+		20142EDD18F437E10069FBDE /* flyerbundle */ = {isa = PBXFileReference; lastKnownFileType = folder; path = flyerbundle; sourceTree = "<group>"; };
 		201597CC18E55FF600D18A12 /* pause_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause_icon.png; sourceTree = "<group>"; };
 		201597CD18E55FF600D18A12 /* play_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play_icon.png; sourceTree = "<group>"; };
 		201686E9186AF56D00A238AE /* share_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share_button.png; sourceTree = "<group>"; };
@@ -1208,6 +1213,8 @@
 		202C64C817EA07DC00CB9A75 /* symbol111.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = symbol111.png; path = symbols/symbol111.png; sourceTree = "<group>"; };
 		202C64CA17EA07DC00CB9A75 /* symbol112.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = symbol112.png; path = symbols/symbol112.png; sourceTree = "<group>"; };
 		202C64CC17EA07DC00CB9A75 /* symbol113.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = symbol113.png; path = symbols/symbol113.png; sourceTree = "<group>"; };
+		202F48B918F28A60000B62DB /* CustomAssets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomAssets.h; sourceTree = "<group>"; };
+		202F48BA18F28A60000B62DB /* CustomAssets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAssets.m; sourceTree = "<group>"; };
 		202F992218BCA37B002A25D9 /* home_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_button.png; sourceTree = "<group>"; };
 		202F992518BCAD1B002A25D9 /* FlyerlyFacebookFriends.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlyerlyFacebookFriends.h; sourceTree = "<group>"; };
 		202F992618BCAD1B002A25D9 /* FlyerlyFacebookFriends.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlyerlyFacebookFriends.m; sourceTree = "<group>"; };
@@ -1267,7 +1274,7 @@
 		20920012184F40330034C4F6 /* InviteFriendsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteFriendsCell.h; sourceTree = "<group>"; };
 		20920013184F40330034C4F6 /* InviteFriendsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteFriendsCell.m; sourceTree = "<group>"; };
 		20920014184F40330034C4F6 /* InviteFriendsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteFriendsCell.xib; sourceTree = "<group>"; };
-		2092FFCA184E00BF0034C4F6 /* flyerlylogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flyerlylogo.png; sourceTree = "<group>"; };
+		2092FFCA184E00BF0034C4F6 /* flyerlylogo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flyerlylogo@2x.png"; sourceTree = "<group>"; };
 		2095C90C18C5E89900E244A8 /* FlyerlyTwitterFriends.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlyerlyTwitterFriends.h; sourceTree = "<group>"; };
 		2095C90D18C5E89900E244A8 /* FlyerlyTwitterFriends.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlyerlyTwitterFriends.m; sourceTree = "<group>"; };
 		2095C90F18C5F92700E244A8 /* FlyerlyFacebookInvite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlyerlyFacebookInvite.h; sourceTree = "<group>"; };
@@ -1282,6 +1289,13 @@
 		20967DA218C8D7EA00B273FC /* star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star.png; sourceTree = "<group>"; };
 		2099300F18BF0C5000A177A4 /* ContactsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsModel.h; sourceTree = "<group>"; };
 		2099301018BF0C5000A177A4 /* ContactsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsModel.m; sourceTree = "<group>"; };
+		20A1CD6118EEF63200484391 /* SubNBUCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubNBUCamera.h; sourceTree = "<group>"; };
+		20A1CD6218EEF63200484391 /* SubNBUCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubNBUCamera.m; sourceTree = "<group>"; };
+		20A1CD6418EF0B0400484391 /* ShareVideoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareVideoViewController.xib; sourceTree = "<group>"; };
+		20A1CD6618EF0B8700484391 /* youtube_share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = youtube_share.png; sourceTree = "<group>"; };
+		20A1CD6718EF0B8700484391 /* youtube_share_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = youtube_share_selected.png; sourceTree = "<group>"; };
+		20A1CD6D18EF19B400484391 /* YouTubeSubClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouTubeSubClass.h; sourceTree = "<group>"; };
+		20A1CD6E18EF19B400484391 /* YouTubeSubClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YouTubeSubClass.m; sourceTree = "<group>"; };
 		20B865F71851EF0400484D7D /* checkBlue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkBlue.png; sourceTree = "<group>"; };
 		20B996D2180450CC007B616D /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
 		20CC6923180DA44C002F2E6F /* icon-60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-60.png"; sourceTree = "<group>"; };
@@ -1308,7 +1322,6 @@
 		20ED041A17CCBCB000DA702E /* t_email_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = t_email_button.png; sourceTree = "<group>"; };
 		20F0393C18E2E4060002338F /* ModeCamera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ModeCamera.png; sourceTree = "<group>"; };
 		20F0393D18E2E4060002338F /* ModeVideo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ModeVideo.png; sourceTree = "<group>"; };
-		20F2FC3318E32BE50054F115 /* flyerbundle */ = {isa = PBXFileReference; lastKnownFileType = folder; path = flyerbundle; sourceTree = "<group>"; };
 		20F4D8DD17BA3D09007B2DF5 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		20F4D8DE17BA3D09007B2DF5 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		20F4D8DF17BA3D0A007B2DF5 /* ProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
@@ -1675,9 +1688,6 @@
 		E8A7347A1092CFF300661AAD /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
 		E8A7347B1092CFF300661AAD /* ShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
 		E8A7347C1092CFF300661AAD /* ShareViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShareViewController.xib; sourceTree = "<group>"; };
-		E8C7C36610976BFC0064935A /* SaveFlyerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveFlyerController.h; sourceTree = "<group>"; };
-		E8C7C36710976BFC0064935A /* SaveFlyerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveFlyerController.m; sourceTree = "<group>"; };
-		E8C7C36810976BFC0064935A /* SaveFlyerController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SaveFlyerController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1745,9 +1755,6 @@
 				20F359761888D69B001376B6 /* HelpScreen */,
 				20F359791888DA9C001376B6 /* Settings */,
 				20F3597D1888DCE1001376B6 /* UserProfile */,
-				E8C7C36610976BFC0064935A /* SaveFlyerController.h */,
-				E8C7C36710976BFC0064935A /* SaveFlyerController.m */,
-				E8C7C36810976BFC0064935A /* SaveFlyerController.xib */,
 			);
 			name = FlyerlyClasses;
 			path = Classes;
@@ -1770,6 +1777,8 @@
 		0DF3A361108DF47400D6C887 /* ImageLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				20A1CD6618EF0B8700484391 /* youtube_share.png */,
+				20A1CD6718EF0B8700484391 /* youtube_share_selected.png */,
 				201597CC18E55FF600D18A12 /* pause_icon.png */,
 				201597CD18E55FF600D18A12 /* play_icon.png */,
 				20F0393C18E2E4060002338F /* ModeCamera.png */,
@@ -1822,7 +1831,7 @@
 				20714DF5187F2105000D6838 /* cancelcamera.png */,
 				20714DF2187F1B9D000D6838 /* cameraline.png */,
 				201686ED186AF95A00A238AE /* searchicon.png */,
-				2092FFCA184E00BF0034C4F6 /* flyerlylogo.png */,
+				2092FFCA184E00BF0034C4F6 /* flyerlylogo@2x.png */,
 				20E3010817F1749E006A1DE0 /* checkDouble.png */,
 				2019A94018C75DC1009882CE /* checkgray.png */,
 				20B865F71851EF0400484D7D /* checkBlue.png */,
@@ -1904,7 +1913,7 @@
 				65A465061726F219002C32FB /* outline_button.png */,
 				65B3F189172A836400BEE7A4 /* outline_button_selected.png */,
 				20D7475317BE850B00966BA6 /* password_box.png */,
-				0FE6F9B51770763200C726F7 /* pinned_flyer2.png */,
+				0FE6F9B51770763200C726F7 /* pinned_flyer2@2x.png */,
 				0FE6F9AF177074E700C726F7 /* pinned_flyer_bg2.png */,
 				0FBC37CF174F980500004F21 /* right_arrow.png */,
 				201686E9186AF56D00A238AE /* share_button.png */,
@@ -2264,9 +2273,11 @@
 		2002C8981888CF3F005B18C9 /* ShareScreen */ = {
 			isa = PBXGroup;
 			children = (
+				202F48BC18F2BDC2000B62DB /* YouTube */,
 				E8A7347A1092CFF300661AAD /* ShareViewController.h */,
 				E8A7347B1092CFF300661AAD /* ShareViewController.m */,
 				E8A7347C1092CFF300661AAD /* ShareViewController.xib */,
+				20A1CD6418EF0B0400484391 /* ShareVideoViewController.xib */,
 				20ECF9A718D6E1AD0035E3DE /* UIPlaceHolderTextView.h */,
 				20ECF9A818D6E1AD0035E3DE /* UIPlaceHolderTextView.m */,
 			);
@@ -2373,6 +2384,15 @@
 			path = TouchJSON;
 			sourceTree = "<group>";
 		};
+		202F48BC18F2BDC2000B62DB /* YouTube */ = {
+			isa = PBXGroup;
+			children = (
+				20A1CD6D18EF19B400484391 /* YouTubeSubClass.h */,
+				20A1CD6E18EF19B400484391 /* YouTubeSubClass.m */,
+			);
+			name = YouTube;
+			sourceTree = "<group>";
+		};
 		202F992818BCAD20002A25D9 /* CustomClasses */ = {
 			isa = PBXGroup;
 			children = (
@@ -2406,6 +2426,8 @@
 				4986856D18B4FFC7002113E4 /* LibraryViewController.h */,
 				4986856E18B4FFC7002113E4 /* LibraryViewController.m */,
 				4986856F18B4FFC7002113E4 /* LibraryViewController.xib */,
+				202F48B918F28A60000B62DB /* CustomAssets.h */,
+				202F48BA18F28A60000B62DB /* CustomAssets.m */,
 			);
 			name = Gallery;
 			sourceTree = "<group>";
@@ -2652,6 +2674,8 @@
 				20FA7E6F1872AAF50057C3F3 /* CameraViewController.h */,
 				20FA7E701872AAF50057C3F3 /* CameraViewController.m */,
 				20FA7E711872AAF50057C3F3 /* CameraViewController.xib */,
+				20A1CD6118EEF63200484391 /* SubNBUCamera.h */,
+				20A1CD6218EEF63200484391 /* SubNBUCamera.m */,
 			);
 			name = Camera;
 			sourceTree = "<group>";
@@ -2688,7 +2712,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				20F2FC3318E32BE50054F115 /* flyerbundle */,
+				20142EDD18F437E10069FBDE /* flyerbundle */,
 				65CC0AB5171802DF003D0BE7 /* Settings.bundle */,
 				8D1107310486CEB800E47090 /* Flyr-Info.plist */,
 				0DFC5319109576AB00B18478 /* MainWindow.xib */,
@@ -3094,7 +3118,6 @@
 				E8A7347E1092CFF300661AAD /* ShareViewController.xib in Resources */,
 				0DFC5320109576AB00B18478 /* MainWindow.xib in Resources */,
 				0DFC5321109576AB00B18478 /* CreateFlyerController.xib in Resources */,
-				E8C7C36A10976BFC0064935A /* SaveFlyerController.xib in Resources */,
 				200773B91887E39E00448346 /* text_edit.png in Resources */,
 				0DE1F282109883A20012819A /* twit.png in Resources */,
 				0DE1F283109883A20012819A /* twit1.png in Resources */,
@@ -3160,6 +3183,7 @@
 				30D58D3810FB1BF800E0C7E8 /* icon60.jpg in Resources */,
 				30D58D3910FB1BF800E0C7E8 /* icon61.jpg in Resources */,
 				30D58D3A10FB1BF800E0C7E8 /* icon62.jpg in Resources */,
+				20A1CD6518EF0B0400484391 /* ShareVideoViewController.xib in Resources */,
 				30D58D3B10FB1BF800E0C7E8 /* icon63.jpg in Resources */,
 				30D58D3C10FB1BF800E0C7E8 /* icon64.jpg in Resources */,
 				30D58D3D10FB1BF800E0C7E8 /* icon65.jpg in Resources */,
@@ -3252,6 +3276,7 @@
 				20714DF7187F2105000D6838 /* cancelcamera.png in Resources */,
 				65CC0AB7171803FB003D0BE7 /* Localizable.strings in Resources */,
 				65CC0AB6171802DF003D0BE7 /* Settings.bundle in Resources */,
+				20142EDE18F437E10069FBDE /* flyerbundle in Resources */,
 				65E26157171C2EC400C485B5 /* InviteFriendsController.xib in Resources */,
 				20714DF3187F1B9D000D6838 /* cameraline.png in Resources */,
 				200773A31887BB8C00448346 /* addbg_border_selected.png in Resources */,
@@ -3367,7 +3392,6 @@
 				65C1A4201742516D00947D5E /* Template8@2x.jpg in Resources */,
 				65C1A4211742516D00947D5E /* Template9@2x.jpg in Resources */,
 				65C1A4221742516D00947D5E /* Template10@2x.jpg in Resources */,
-				20F2FC3418E32BE50054F115 /* flyerbundle in Resources */,
 				65C1A4231742516D00947D5E /* Template11@2x.jpg in Resources */,
 				65C1A4241742516D00947D5E /* Template12@2x.jpg in Resources */,
 				65C1A4251742516D00947D5E /* Template13@2x.jpg in Resources */,
@@ -3418,6 +3442,7 @@
 				65C1A4501742516D00947D5E /* Template56@2x.jpg in Resources */,
 				65C1A4511742516D00947D5E /* Template57@2x.jpg in Resources */,
 				65C1A4521742516D00947D5E /* Template58@2x.jpg in Resources */,
+				20A1CD6818EF0B8700484391 /* youtube_share.png in Resources */,
 				65C1A4531742516D00947D5E /* Template59@2x.jpg in Resources */,
 				65C1A4541742516D00947D5E /* Template60@2x.jpg in Resources */,
 				65C1A4551742516D00947D5E /* Template61@2x.jpg in Resources */,
@@ -3516,7 +3541,7 @@
 				200773B01887BB8C00448346 /* addbg_takephoto.png in Resources */,
 				0FE6F9AC177072CC00C726F7 /* shadow.png in Resources */,
 				0FE6F9B2177074E700C726F7 /* pinned_flyer_bg2.png in Resources */,
-				0FE6F9B81770763200C726F7 /* pinned_flyer2.png in Resources */,
+				0FE6F9B81770763200C726F7 /* pinned_flyer2@2x.png in Resources */,
 				0FCC3A1D177D8C5C0046484C /* settings2.png in Resources */,
 				0F80C388178561DA00D36795 /* LaunchController.xib in Resources */,
 				0F80C38D178578E400D36795 /* RegisterController.xib in Resources */,
@@ -3576,7 +3601,7 @@
 				2019A94518C77939009882CE /* invite_friend.png in Resources */,
 				203E0B7717DDDD720039C3A7 /* InputViewController.xib in Resources */,
 				202C638417EA06E800CB9A75 /* ricon22.png in Resources */,
-				2092FFCC184E00BF0034C4F6 /* flyerlylogo.png in Resources */,
+				2092FFCC184E00BF0034C4F6 /* flyerlylogo@2x.png in Resources */,
 				202C638617EA06E800CB9A75 /* ricon23.png in Resources */,
 				202C638817EA06E800CB9A75 /* ricon24.png in Resources */,
 				202F993B18BCB426002A25D9 /* invite_sms.png in Resources */,
@@ -3639,6 +3664,7 @@
 				202C63F217EA06E800CB9A75 /* ricon77.png in Resources */,
 				202C63F417EA06E800CB9A75 /* ricon78.png in Resources */,
 				202F993E18BCB426002A25D9 /* invite_twitter_selected.png in Resources */,
+				20A1CD6918EF0B8700484391 /* youtube_share_selected.png in Resources */,
 				20967D9F18C8D63400B273FC /* fb_Like.png in Resources */,
 				202C63F617EA06E800CB9A75 /* ricon79.png in Resources */,
 				202C63F817EA06E800CB9A75 /* ricon80.png in Resources */,
@@ -3819,7 +3845,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				202C47F9187D6E4B00FE0975 /* BitlyConfig.m in Sources */,
+				20A1CD6318EEF63200484391 /* SubNBUCamera.m in Sources */,
 				2095C90E18C5E89900E244A8 /* FlyerlyTwitterFriends.m in Sources */,
+				202F48BB18F28A60000B62DB /* CustomAssets.m in Sources */,
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				202C47FA187D6E4B00FE0975 /* BitlyDebug.m in Sources */,
 				200D196818998BEB00EAD645 /* LayerTileButton.m in Sources */,
@@ -3838,7 +3866,6 @@
 				202C4803187D6E4B00FE0975 /* BitlyURLShortener.m in Sources */,
 				2002C89618888CD4005B18C9 /* SaveFlyerCell.m in Sources */,
 				20ECF9A918D6E1AD0035E3DE /* UIPlaceHolderTextView.m in Sources */,
-				E8C7C36910976BFC0064935A /* SaveFlyerController.m in Sources */,
 				2036661C188DB67300C71EAA /* FlyerUser.m in Sources */,
 				202C4801187D6E4B00FE0975 /* BitlyTwitterOAuthManager.m in Sources */,
 				49B8897D1886524D003766AD /* LoadingView.m in Sources */,
@@ -3851,6 +3878,7 @@
 				202C4827187D7A6B00FE0975 /* CJSONDeserializer.m in Sources */,
 				65BDB2DF17341D290084E032 /* CustomLabel.m in Sources */,
 				0FEF2DA9174E66FC00FDD8C9 /* HelpController.m in Sources */,
+				20A1CD6F18EF19B400484391 /* YouTubeSubClass.m in Sources */,
 				0F7FC386175CE26B009DEB08 /* AsyncImageView.m in Sources */,
 				202C482A187D7A6B00FE0975 /* NSDictionary_JSONExtensions.m in Sources */,
 				202C4829187D7A6B00FE0975 /* CJSONSerializer.m in Sources */,

@@ -10,7 +10,7 @@
 
 
 @implementation FlyrViewController
-@synthesize tView,searchTextField;
+@synthesize tView,searchTextField,flyerPaths;
 
 
 #pragma mark  View Methods
@@ -40,6 +40,8 @@
     searchTextField.borderStyle = nil;
     
     lockFlyer = YES;
+    
+
 
 }
 
@@ -61,7 +63,7 @@
     flyerPaths = [self getFlyersPaths];
     
     //HERE WE SET SCROLL VIEW POSITION
-    if (flyerPaths.count != 0) {
+    if (flyerPaths.count >= 1 ) {
         
         NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:0];
         [tView selectRowAtIndexPath:indexPath animated:YES  scrollPosition:UITableViewScrollPositionBottom];
@@ -175,6 +177,18 @@
 	createFlyer = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
     createFlyer.flyerPath = flyPath;
     createFlyer.flyer = flyer;
+    
+    __weak FlyrViewController *weakSelf = self;
+    
+    //Here we Manage Block for Update
+    [createFlyer setOnFlyerBack:^(NSString *nothing) {
+        
+        //HERE WE GET FLYERS
+        weakSelf.flyerPaths = [weakSelf getFlyersPaths];
+        [weakSelf.tView reloadData];
+        
+    }];
+
 	[self.navigationController pushViewController:createFlyer animated:YES];
     
 }
@@ -360,6 +374,21 @@
     
     // Set CreateFlyer Screen
     createFlyer.flyer = flyer;
+    
+    __weak FlyrViewController *weakSelf = self;
+     __weak CreateFlyerController *weakCreate = createFlyer;
+    
+    //Here we Manage Block for Update
+    [createFlyer setOnFlyerBack:^(NSString *nothing) {
+        
+        //HERE WE GET FLYERS
+        [weakCreate.flyer setRecentFlyer];
+        [weakSelf.flyerPaths removeAllObjects];
+        weakSelf.flyerPaths = [weakSelf getFlyersPaths];
+        [weakSelf.tView reloadData];
+        
+    }];
+    
 	[self.navigationController pushViewController:createFlyer animated:YES];
 
 	[self performSelector:@selector(deselect) withObject:nil afterDelay:0.2f];

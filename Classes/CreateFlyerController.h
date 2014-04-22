@@ -19,7 +19,6 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "Common.h"
 #import "FlyrAppDelegate.h"
-#import "SaveFlyerController.h"
 #import "ShareViewController.h"
 #import "HelpController.h"
 #import "LoadingView.h"
@@ -31,14 +30,15 @@
 #import <MediaPlayer/MediaPlayer.h>
 
 
-@class FlyerlySingleton,CameraViewController,Flyer,FlyerImageView;
-@interface CreateFlyerController :ParentViewController<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, FlyerImageViewDelegate >
+@class FlyerlySingleton,CameraViewController,Flyer,FlyerImageView,ShareViewController;
+@interface CreateFlyerController :ParentViewController<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, FlyerImageViewDelegate,UIGestureRecognizerDelegate >
 {
    
     FlyerlySingleton *globle;
     UILabel *addMoreLayerOrSaveFlyerLabel;
     UILabel *takeOrAddPhotoLabel;
     UILabel *videoLabel;
+    UIActivityIndicatorView *uiBusy;
 
     UIScrollView *layerScrollView;
     NSInteger imgPickerFlag;
@@ -67,6 +67,8 @@
     UILabel *titleLabel;
     UIImage *videolastImage;
     BOOL *isPlaying;
+    BOOL *isVideoReadyForShare;
+    BOOL *panelWillOpen;
     float videoDuration;
     
 }
@@ -135,6 +137,7 @@
 @property (nonatomic,strong) Flyer *flyer;
 @property(strong,nonatomic) NSString *currentLayer;
 @property(strong,nonatomic) NSMutableDictionary *layersDic;
+@property (nonatomic, copy) void (^onFlyerBack)(NSString *);
 
 
 -(void)loadCustomPhotoLibrary :(NSString *)videoAllow;
@@ -162,6 +165,7 @@
 -(void)renderFlyer;
 -(void)undoFlyer;
 -(void)setUndoStatus;
+-(void)videoMergeProcess;
 
 -(UIImage *)getFlyerSnapShot;
 

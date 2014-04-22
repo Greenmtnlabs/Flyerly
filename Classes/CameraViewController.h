@@ -10,9 +10,13 @@
 #import "UIImage+NBUAdditions.h"
 #import <AVFoundation/AVFoundation.h>
 #import <AssetsLibrary/AssetsLibrary.h>
+#import "SubNBUCamera.h"
 
 
-@interface CameraViewController : NBUCameraViewController
+@interface CameraViewController : NBUCameraViewController {
+
+    SubNBUCamera *cameraViewChild;
+}
 
 @property CGSize desiredImageSize;
 @property (nonatomic, copy) void (^onImageTaken)(UIImage *);
@@ -28,6 +32,7 @@
 @property (assign, nonatomic) IBOutlet UIProgressView *progressView;
 @property (strong, nonatomic) IBOutlet UIButton *mode;
 @property (strong, nonatomic) NSString *videoAllow;
+
 
 
 

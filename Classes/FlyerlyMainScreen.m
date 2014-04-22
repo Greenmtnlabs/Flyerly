@@ -24,7 +24,8 @@
 
 @synthesize tpController,createFlyrLabel,savedFlyrLabel,inviteFriendLabel,addFriendsController;
 @synthesize firstFlyer, secondFlyer, thirdFlyer, fourthFlyer, createFlyrButton, savedFlyrButton;
-@synthesize recentFlyers,inviteFriendButton;
+@synthesize recentFlyers,inviteFriendButton,showIndicators;
+@synthesize uiBusy1,uiBusy2,uiBusy3,uiBusy4,firstFlyerButton,secondFlyerButton,thirdFlyerButton,fourthFlyerButton;
 
 
 -(IBAction)doNew:(id)sender{
@@ -34,11 +35,45 @@
 
     //Here We set Source for Flyer screen
     flyer = [[Flyer alloc]initWithPath:flyPath];
-    
+    showIndicators = YES;
 	createFlyer = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
     createFlyer.flyerPath = flyPath;
     createFlyer.flyer = flyer;
+    
+    __weak FlyerlyMainScreen *weakSelf = self;
+    __weak CreateFlyerController *weakCreate = createFlyer;
+    
+    [createFlyer setOnFlyerBack:^(NSString *flyPath) {
+        
+        //Here we setCurrent Flyer is Most Recent Flyer
+        [weakCreate.flyer setRecentFlyer];
+        
+        //Getting Recent Flyers
+        weakSelf.recentFlyers = [Flyer recentFlyerPreview:4];
+        
+        //Set Recent Flyers
+        [weakSelf updateRecentFlyer:weakSelf.recentFlyers];
+        
+        //For Manage Indicators
+        weakSelf.showIndicators = NO;
+        
+        //Stop Animations
+        [weakSelf.uiBusy1 stopAnimating];
+        [weakSelf.uiBusy2 stopAnimating];
+        [weakSelf.uiBusy3 stopAnimating];
+        [weakSelf.uiBusy4 stopAnimating];
+        
+        //Enable User Interaction of Recent Flyer
+        [weakSelf.firstFlyerButton setUserInteractionEnabled:YES];
+        [weakSelf.secondFlyerButton setUserInteractionEnabled:YES];
+        [weakSelf.thirdFlyerButton setUserInteractionEnabled:YES];
+        [weakSelf.fourthFlyerButton setUserInteractionEnabled:YES];
+        
+    }];
+
+    
 	[self.navigationController pushViewController:createFlyer animated:YES];
+
 }
 //End
 
@@ -132,6 +167,46 @@
     //Set Recent Flyers
     [self updateRecentFlyer:recentFlyers];
     
+    //Here we Show Progress when return From Create Screen
+    if (showIndicators){
+        
+        uiBusy1 = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+        [uiBusy1 setFrame:CGRectMake(58,58, 20, 20)];
+        [uiBusy1 setColor:[UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0]];
+        uiBusy1.hidesWhenStopped = YES;
+        [uiBusy1 startAnimating];
+        
+        uiBusy2 = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+        [uiBusy2 setFrame:CGRectMake(58,58, 20, 20)];
+        [uiBusy2 setColor:[UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0]];
+        uiBusy2.hidesWhenStopped = YES;
+        [uiBusy2 startAnimating];
+        
+        uiBusy3 = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+        [uiBusy3 setFrame:CGRectMake(58,58, 20, 20)];
+        [uiBusy3 setColor:[UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0]];
+        uiBusy3.hidesWhenStopped = YES;
+        [uiBusy3 startAnimating];
+        
+        uiBusy4 = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+        [uiBusy4 setFrame:CGRectMake(58,58, 20, 20)];
+        [uiBusy4 setColor:[UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0]];
+        uiBusy4.hidesWhenStopped = YES;
+        [uiBusy4 startAnimating];
+
+        [self.firstFlyer addSubview:uiBusy1];
+        [self.secondFlyer addSubview:uiBusy2];
+        [self.thirdFlyer addSubview:uiBusy3];
+        [self.fourthFlyer addSubview:uiBusy4];
+        
+        [firstFlyerButton setUserInteractionEnabled:NO];
+        [secondFlyerButton setUserInteractionEnabled:NO];
+        [thirdFlyerButton setUserInteractionEnabled:NO];
+        [fourthFlyerButton setUserInteractionEnabled:NO];
+
+        showIndicators = NO;
+    }
+    
     self.navigationController.navigationBarHidden = NO;
     
     // for Navigation Bar logo
@@ -140,7 +215,7 @@
     self.navigationItem.titleView = logo;
     
     [self.navigationItem setHidesBackButton:YES];
-
+    
 
 }
 
@@ -218,6 +293,40 @@
     
     // Set CreateFlyer Screen
     createFlyer.flyer = flyer;
+    showIndicators = YES;
+
+    __weak FlyerlyMainScreen *weakSelf = self;
+    __weak CreateFlyerController *weakCreate = createFlyer;
+    
+    [createFlyer setOnFlyerBack:^(NSString *flyPath) {
+
+        //Here we setCurrent Flyer is Most Recent Flyer
+        [weakCreate.flyer setRecentFlyer];
+
+        //Getting Recent Flyers
+        weakSelf.recentFlyers = [Flyer recentFlyerPreview:4];
+        
+        //Set Recent Flyers
+        [weakSelf updateRecentFlyer:weakSelf.recentFlyers];
+        
+        //For Manage Indicators
+        weakSelf.showIndicators = NO;
+        
+        //Stop Animations
+        [weakSelf.uiBusy1 stopAnimating];
+        [weakSelf.uiBusy2 stopAnimating];
+        [weakSelf.uiBusy3 stopAnimating];
+        [weakSelf.uiBusy4 stopAnimating];
+        
+        //Enable User Interaction of Recent Flyer
+        [weakSelf.firstFlyerButton setUserInteractionEnabled:YES];
+        [weakSelf.secondFlyerButton setUserInteractionEnabled:YES];
+        [weakSelf.thirdFlyerButton setUserInteractionEnabled:YES];
+        [weakSelf.fourthFlyerButton setUserInteractionEnabled:YES];
+
+    }];
+
+    
 	[self.navigationController pushViewController:createFlyer animated:YES];
 }
 

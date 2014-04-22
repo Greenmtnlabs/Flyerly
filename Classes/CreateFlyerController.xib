@@ -47,10 +47,10 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" id="Foo-mb-HJb">
-                    <rect key="frame" x="5" y="65" width="310" height="310"/>
+                <view clipsSubviews="YES" contentMode="scaleToFill" id="Foo-mb-HJb">
+                    <rect key="frame" x="7" y="65" width="306" height="306"/>
                     <autoresizingMask key="autoresizingMask"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="-64"/>
                 </view>
                 <imageView clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Xaq-YE-kc7" customClass="FlyerImageView">
@@ -70,7 +70,7 @@
                 </view>
                 <view autoresizesSubviews="NO" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="hm4-bV-Hep">
                     <rect key="frame" x="0.0" y="435" width="320" height="45"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                     <color key="backgroundColor" red="0.3575665864" green="0.76047690010000002" blue="0.97315449620000005" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
             </subviews>
@@ -331,33 +331,31 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
         </view>
-        <view contentMode="scaleToFill" id="cip-7j-KrI">
-            <rect key="frame" x="0.0" y="0.0" width="310" height="40"/>
+        <view hidden="YES" contentMode="scaleToFill" id="cip-7j-KrI">
+            <rect key="frame" x="0.0" y="0.0" width="306" height="40"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view alpha="0.59999999999999998" contentMode="scaleToFill" id="Nhc-S1-8Bh">
-                    <rect key="frame" x="0.0" y="0.0" width="310" height="40"/>
+                    <rect key="frame" x="0.0" y="0.0" width="306" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <subviews>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gqJ-fV-ZCI">
-                            <rect key="frame" x="274" y="9" width="36" height="21"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="13"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                    </subviews>
                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gqJ-fV-ZCI">
+                    <rect key="frame" x="264" y="10" width="36" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="13"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tOL-PL-xlu">
-                    <rect key="frame" x="44" y="10" width="41" height="21"/>
+                    <rect key="frame" x="42" y="10" width="41" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="13"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="D6r-Rt-cPZ">
-                    <rect key="frame" x="5" y="0.0" width="40" height="40"/>
+                    <rect key="frame" x="2" y="0.0" width="40" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
@@ -372,7 +370,7 @@
                     </connections>
                 </button>
                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" id="Mes-fj-ojE">
-                    <rect key="frame" x="88" y="4" width="177" height="34"/>
+                    <rect key="frame" x="79" y="4" width="177" height="34"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="minimumTrackTintColor" red="0.2807829288" green="0.75192376110000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <color key="maximumTrackTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

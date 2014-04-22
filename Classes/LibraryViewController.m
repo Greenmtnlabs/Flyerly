@@ -118,6 +118,7 @@
  * Cancel and go back.
  */
 - (void)goBack {
+    self.onVideoCancel();
     [self.navigationController popViewControllerAnimated:YES];
 }
 
