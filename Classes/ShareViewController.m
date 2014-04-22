@@ -339,6 +339,7 @@
     iosSharer = [SHKFacebook shareItem:item];
     iosSharer.shareDelegate = self;
     
+    
 }
 
 
@@ -354,6 +355,7 @@
     iosSharer = [[ SHKSharer alloc] init];
     iosSharer = [SHKiOSTwitter shareItem:item];
     iosSharer.shareDelegate = self;
+    iosSharer = nil;
     
 }
 
@@ -381,6 +383,8 @@
     iosSharer = [SHKMail shareItem:item];
     iosSharer.shareDelegate = self;
     
+    iosSharer = nil;
+    
 }
 
 
@@ -398,6 +402,7 @@
     iosSharer = [[ SHKSharer alloc] init];
     iosSharer = [SHKTumblr shareItem:item];
     iosSharer.shareDelegate = self;
+    iosSharer = nil;
     
 }
 
@@ -416,6 +421,8 @@
     iosSharer = [[ SHKSharer alloc] init];
     iosSharer = [SHKFlickr shareItem:item];
     iosSharer.shareDelegate = self;
+    
+    iosSharer = nil;
     
 }
 
@@ -477,6 +484,31 @@
 // These are used if you do not provide your own custom UI and delegate
 - (void)sharerStartedSending:(SHKSharer *)sharer
 {
+    // Update Flyer Share Info in Social File
+    if ( [sharer isKindOfClass:[SHKFacebook class]] == YES ) {
+        
+        facebookButton.enabled = NO;
+        
+    } else if ( [sharer isKindOfClass:[SHKiOSTwitter class]] == YES ) {
+        
+        twitterButton.enabled = NO;
+        
+    } else if ( [sharer isKindOfClass:[SHKTumblr class]] == YES ) {
+        
+        tumblrButton.enabled = NO;
+        
+    } else if ( [sharer isKindOfClass:[SHKFlickr class]] == YES ) {
+        
+        flickrButton.enabled = NO;
+        
+    } else if ( [sharer isKindOfClass:[SHKMail class]] == YES ) {
+        
+        emailButton.enabled = NO;
+        
+    } else if ( [sharer isKindOfClass:[SHKTextMessage class]] == YES ) {
+        
+        smsButton.enabled = NO;
+    }
     
 	if (!sharer.quiet)
 		[[SHKActivityIndicator currentIndicator] displayActivity:SHKLocalizedString(@"Sharing to %@", [[sharer class] sharerTitle]) forSharer:sharer];
@@ -489,35 +521,41 @@
     // Update Flyer Share Info in Social File
     if ( [sharer isKindOfClass:[SHKFacebook class]] == YES ) {
         
+        facebookButton.enabled = YES;
         [self.flyer setFacebookStatus:1];
         [Flurry logEvent:@"Shared Facebook"];
 
         
     } else if ( [sharer isKindOfClass:[SHKiOSTwitter class]] == YES ) {
         
+        twitterButton.enabled = YES;
         [self.flyer setTwitterStatus:1];
         [Flurry logEvent:@"Shared Twitter"];
 
         
     } else if ( [sharer isKindOfClass:[SHKTumblr class]] == YES ) {
         
+        tumblrButton.enabled = YES;
         [self.flyer setThumblerStatus:1];
         [Flurry logEvent:@"Shared Tumblr"];
 
         
     } else if ( [sharer isKindOfClass:[SHKFlickr class]] == YES ) {
         
+        flickrButton.enabled = YES;
         [self.flyer setFlickerStatus:1];
         [Flurry logEvent:@"Shared Flickr"];
 
         
     } else if ( [sharer isKindOfClass:[SHKMail class]] == YES ) {
         
+        emailButton.enabled = YES;
         [self.flyer setEmailStatus:1];
         [Flurry logEvent:@"Shared Email"];
 
     } else if ( [sharer isKindOfClass:[SHKTextMessage class]] == YES ) {
         
+        smsButton.enabled = NO;
         [self.flyer setSmsStatus:1];
         [Flurry logEvent:@"Shared SMS"];
 
@@ -530,6 +568,7 @@
 		[[SHKActivityIndicator currentIndicator] displayCompleted:SHKLocalizedString(@"Flyer Posted!") forSharer:sharer];
     
     iosSharer.shareDelegate = nil;
+    iosSharer = nil;
 }
 
 - (void)sharer:(SHKSharer *)sharer failedWithError:(NSError *)error shouldRelogin:(BOOL)shouldRelogin
@@ -543,6 +582,7 @@
 - (void)sharerCancelledSending:(SHKSharer *)sharer
 {
     iosSharer.shareDelegate = nil;
+    iosSharer = nil;
     NSLog(@"");
 }
 
@@ -556,6 +596,7 @@
                       cancelButtonTitle:SHKLocalizedString(@"Close")
                       otherButtonTitles:nil] show];
     iosSharer.shareDelegate = nil;
+    iosSharer = nil;
 }
 
 - (void)sharerShowOtherAuthorizationErrorAlert:(SHKSharer *)sharer
@@ -568,6 +609,7 @@
                       cancelButtonTitle:SHKLocalizedString(@"Close")
                       otherButtonTitles:nil] show];
      iosSharer.shareDelegate = nil;
+    iosSharer = nil;
 }
 
 - (void)hideActivityIndicatorForSharer:(SHKSharer *)sharer {
