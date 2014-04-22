@@ -267,16 +267,11 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
                 
                 // For Parse New User Merge to old Twitter User
                 FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-                //appDelegate.lauchController = self.launchController;
                 [appDelegate twitterChangeforNewVersion:twitterUsername];
                 
             } else {
                 
                 NSLog(@"User logged in with Twitter!");
-                
-                //UINavigationController* navigationController = self.navigationController;
-                
-                //[navigationController popViewControllerAnimated:NO];
                 
                 // Remove Current UserName for Device configuration
                 [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"User"];
