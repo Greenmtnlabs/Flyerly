@@ -527,18 +527,22 @@
     
     
     if (!sharer.quiet)
-		[[SHKActivityIndicator currentIndicator] displayCompleted:SHKLocalizedString(@"Flyer Posted!")];
+		[[SHKActivityIndicator currentIndicator] displayCompleted:SHKLocalizedString(@"Flyer Posted!") forSharer:sharer];
+    
+    iosSharer.shareDelegate = nil;
 }
 
 - (void)sharer:(SHKSharer *)sharer failedWithError:(NSError *)error shouldRelogin:(BOOL)shouldRelogin
 {
     
-    [[SHKActivityIndicator currentIndicator] hide];
+    [[SHKActivityIndicator currentIndicator] hideForSharer:sharer];
+    iosSharer.shareDelegate = nil;
 	NSLog(@"Sharing Error");
 }
 
 - (void)sharerCancelledSending:(SHKSharer *)sharer
 {
+    iosSharer.shareDelegate = nil;
     NSLog(@"");
 }
 
@@ -551,6 +555,7 @@
                                delegate:nil
                       cancelButtonTitle:SHKLocalizedString(@"Close")
                       otherButtonTitles:nil] show];
+    iosSharer.shareDelegate = nil;
 }
 
 - (void)sharerShowOtherAuthorizationErrorAlert:(SHKSharer *)sharer
@@ -562,6 +567,7 @@
                                delegate:nil
                       cancelButtonTitle:SHKLocalizedString(@"Close")
                       otherButtonTitles:nil] show];
+     iosSharer.shareDelegate = nil;
 }
 
 - (void)hideActivityIndicatorForSharer:(SHKSharer *)sharer {
