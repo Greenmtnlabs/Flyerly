@@ -55,13 +55,15 @@
     }
     
     signinController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    signinController.launchController = appDelegate.lauchController;
+    
     registerController.signInController = signinController;
     
     //Redirecting the user to Main screen on succesfull login
     signinController.signInCompletion = ^void(void) {
         NSLog(@"Sign In via LauchController Register");
-        
-        FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    
         [appDelegate.lauchController.navigationController popToViewController:appDelegate.lauchController animated:YES];
         
     };
@@ -73,14 +75,15 @@
     
    
     signinController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    signinController.launchController = appDelegate.lauchController;
+    
     registerController.signInController = signinController;
     
     //Redirecting the user to Main screen on succesfull login
     signinController.signInCompletion = ^void(void) {
-        
         NSLog(@"Sign In via LauchController Sign In");
         
-        FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
         [appDelegate.lauchController.navigationController popToViewController:appDelegate.lauchController animated:YES];
         
     };
