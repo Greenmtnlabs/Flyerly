@@ -687,7 +687,7 @@
     // check if the user rated from 1 star to 3 star
     if( sender == star1 || sender == star2 || sender == star3)
     {
-        UIAlertView  *appRateAlertEmail = [[UIAlertView alloc]initWithTitle:@"Thank you! Please shares your feedback" message:@"" delegate:self cancelButtonTitle:@"Later" otherButtonTitles:@"Yes" ,nil];
+        UIAlertView  *appRateAlertEmail = [[UIAlertView alloc]initWithTitle:@"Thank you! Please share your feedback." message:@"" delegate:self cancelButtonTitle:@"Later" otherButtonTitles:@"Yes" ,nil];
         
         appRateAlertEmail.tag = 0;
         
@@ -695,7 +695,7 @@
         
         //check if the user rated from 4 star to 5 star
     } else if( sender == star4 || sender == star5) {
-        UIAlertView *appRateAlertStore = [[UIAlertView alloc]initWithTitle:@"Thank you! Please shares your kind words on the App store" message:@"" delegate:self cancelButtonTitle:@"Later" otherButtonTitles:@"Yes" ,nil];
+        UIAlertView *appRateAlertStore = [[UIAlertView alloc]initWithTitle:@"Thank you! Please share your kind words on the App Store." message:@"" delegate:self cancelButtonTitle:@"Later" otherButtonTitles:@"Yes" ,nil];
         
         appRateAlertStore.tag = 1;
         
@@ -751,7 +751,7 @@
     if([MFMailComposeViewController canSendMail]){
         
         picker.mailComposeDelegate = self;
-        [picker setSubject:@"Shares your feedback"];
+        [picker setSubject:@"Flyerly Email Feedback"];
         
         // Set up recipients
         NSMutableArray *toRecipients = [[NSMutableArray alloc]init];
