@@ -12,7 +12,7 @@
 
 @synthesize selectedFont,selectedColor,selectedTemplate,fontTabButton,colorTabButton,sizeTabButton,fontEditButton,selectedSize,
 fontBorderTabButton,addMoreIconTabButton,addMorePhotoTabButton,addMoreSymbolTabButton,sharePanel;
-@synthesize textBackgrnd,cameraTabButton,photoTabButton,widthTabButton,heightTabButton,deleteAlert;
+@synthesize textBackgrnd,cameraTabButton,photoTabButton,widthTabButton,heightTabButton,deleteAlert,signInAlert;
 @synthesize imgPickerFlag, addMoreLayerOrSaveFlyerLabel, takeOrAddPhotoLabel,layerScrollView,flyerPath;
 @synthesize contextView,libraryContextView,libFlyer,backgroundTabButton,addMoreFontTabButton;
 @synthesize libText,libBackground,libPhoto,libEmpty,backtemplates,cameraTakePhoto,cameraRoll,flyerBorder;
@@ -2063,7 +2063,31 @@ int selectedAddMoreLayerTab = -1;
         editButtonGlobal.uid = currentLayer;
         [self deleteLayer:editButtonGlobal overrided:nil];
         [Flurry logEvent:@"Layer Deleted"];
-	}
+        
+	} else if(alertView == signInAlert && buttonIndex == 1) {
+        
+        NSLog(@"Sign In was selected.");
+        signInController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
+        
+        FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+        signInController.launchController = appDelegate.lauchController;
+        
+        __weak SigninController *weakSigninController = signInController;
+        
+        signInController.signInCompletion = ^void(void) {
+            NSLog(@"Sign In via Share");
+            
+            UINavigationController* navigationController = weakSigninController.navigationController;
+            [navigationController popViewControllerAnimated:NO];
+            [weakSigninController.navigationController popViewController:weakSigninController];
+            
+            [shareButton sendActionsForControlEvents: UIControlEventTouchUpInside];
+            
+        };
+        
+        [self.navigationController pushViewController:signInController animated:YES];
+        
+    }
 
   }
 
@@ -3044,76 +3068,89 @@ int selectedAddMoreLayerTab = -1;
  */
 -(void)openPanel {
     
-    sharePanel.hidden = NO;
-    [sharePanel removeFromSuperview];
-    
-    if ([flyer isVideoFlyer]) {
-        shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareVideoViewController" bundle:nil];
+    if ( [[PFUser currentUser] sessionToken] ) {
+        sharePanel.hidden = NO;
+        [sharePanel removeFromSuperview];
         
-    }else {
-        shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
-    }
-    sharePanel = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.origin.y, 320,400 )];
-    
-    sharePanel = shareviewcontroller.view;
-    [self.view addSubview:sharePanel];
-    
-    sharePanel = shareviewcontroller.view;
-    NSString *shareImagePath = [flyer getFlyerImage];
-    UIImage *shareImage =  [UIImage imageWithContentsOfFile:shareImagePath];
-    
-    //Here we Pass Param to Share Screen Which use for Sharing
-    shareviewcontroller.selectedFlyerImage = shareImage;
-    shareviewcontroller.flyer = self.flyer;
-    shareviewcontroller.imageFileName = shareImagePath;
-    shareviewcontroller.rightUndoBarButton = rightUndoBarButton;
-    shareviewcontroller.shareButton = shareButton;
-    shareviewcontroller.helpButton = helpButton;
-    shareviewcontroller.titleView.text = [flyer getFlyerTitle];
-    NSString *description = [flyer getFlyerDescription];
-    if (![description isEqualToString:@""]) {
-        shareviewcontroller.descriptionView.text = description;
-    }
-    
-    NSString *shareType  = [[NSUserDefaults standardUserDefaults] valueForKey:@"FlyerlyPublic"];
-    
-    if ([shareType isEqualToString:@"Private"]) {
-        [shareviewcontroller.flyerShareType setSelected:YES];
+        if ([flyer isVideoFlyer]) {
+            shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareVideoViewController" bundle:nil];
+            
+        } else {
+            shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
+        }
+        sharePanel = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.origin.y, 320,400 )];
         
+        sharePanel = shareviewcontroller.view;
+        [self.view addSubview:sharePanel];
+        
+        sharePanel = shareviewcontroller.view;
+        NSString *shareImagePath = [flyer getFlyerImage];
+        UIImage *shareImage =  [UIImage imageWithContentsOfFile:shareImagePath];
+        
+        //Here we Pass Param to Share Screen Which use for Sharing
+        shareviewcontroller.selectedFlyerImage = shareImage;
+        shareviewcontroller.flyer = self.flyer;
+        shareviewcontroller.imageFileName = shareImagePath;
+        shareviewcontroller.rightUndoBarButton = rightUndoBarButton;
+        shareviewcontroller.shareButton = shareButton;
+        shareviewcontroller.helpButton = helpButton;
+        shareviewcontroller.titleView.text = [flyer getFlyerTitle];
+        NSString *description = [flyer getFlyerDescription];
+        if (![description isEqualToString:@""]) {
+            shareviewcontroller.descriptionView.text = description;
+        }
+        
+        NSString *shareType  = [[NSUserDefaults standardUserDefaults] valueForKey:@"FlyerlyPublic"];
+        
+        if ([shareType isEqualToString:@"Private"]) {
+            [shareviewcontroller.flyerShareType setSelected:YES];
+        }
+        
+        [flyer setShareType:shareType];
+        shareviewcontroller.selectedFlyerDescription = [flyer getFlyerDescription];
+        shareviewcontroller.topTitleLabel = titleLabel;
+        [shareviewcontroller.descriptionView setReturnKeyType:UIReturnKeyDone];
+        shareviewcontroller.Yvalue = [NSString stringWithFormat:@"%f",self.view.frame.size.height];
+        
+        
+        PFUser *user = [PFUser currentUser];
+        if (user[@"appStarRate"])
+            [self setStarsofShareScreen:user[@"appStarRate"]];
+        
+        
+        [user saveInBackground];
+        
+        [shareviewcontroller setSocialStatus];
+        
+        
+        //Here we Get youtube Link
+        NSString *isAnyVideoUploadOnYoutube = [self.flyer getYoutubeLink];
+        
+        // Any Uploaded Video Link Available of Youtube
+        // then we Enable Other Sharing Options
+        if (![isAnyVideoUploadOnYoutube isEqualToString:@""]) {
+            [shareviewcontroller enableAllShareOptions];
+        }
+        
+        //Create Animation Here
+        [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height, 320,425 )];
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:0.4f];
+        [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height -425, 320,425 )];
+        [UIView commitAnimations];
+        [self hideLoadingIndicator];
+        
+    } else {
+        // Alert when user logged in as anonymous
+        signInAlert = [[UIAlertView alloc] initWithTitle:@"Sign In"
+                                                 message:@"The selected feature requires that you sign in. Would you like to register or sign in now?"
+                                                delegate:self
+                                       cancelButtonTitle:@"Later"
+                                       otherButtonTitles:@"Sign In",nil];
+        
+        
+        [signInAlert show];
     }
-    [flyer setShareType:shareType];
-    shareviewcontroller.selectedFlyerDescription = [flyer getFlyerDescription];
-    shareviewcontroller.topTitleLabel = titleLabel;
-    [shareviewcontroller.descriptionView setReturnKeyType:UIReturnKeyDone];
-    shareviewcontroller.Yvalue = [NSString stringWithFormat:@"%f",self.view.frame.size.height];
-    
-    
-    PFUser *user = [PFUser currentUser];
-    if (user[@"appStarRate"])
-        [self setStarsofShareScreen:user[@"appStarRate"]];
-    
-    
-    [user saveInBackground];
-    
-    [shareviewcontroller setSocialStatus];
-    
-    
-    //Here we Get youtube Link
-    NSString *isAnyVideoUploadOnYoutube = [self.flyer getYoutubeLink];
-    
-    // Any Uploaded Video Link Available of Youtube
-    // then we Enable Other Sharing Options
-    if (![isAnyVideoUploadOnYoutube isEqualToString:@""]) {
-        [shareviewcontroller enableAllShareOptions];
-    }
-    
-    //Create Animation Here
-    [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height, 320,425 )];
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.4f];
-    [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height -425, 320,425 )];
-    [UIView commitAnimations];
-    [self hideLoadingIndicator];
 
 }
 /*

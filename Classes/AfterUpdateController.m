@@ -16,9 +16,13 @@
 }
 
 -(IBAction)ok {
+
+    mainScreen = [[FlyerlyMainScreen alloc] initWithNibName:@"FlyerlyMainScreen" bundle:nil];
     
-    accountController = [[LaunchController alloc] initWithNibName:@"LaunchController" bundle:nil];
-    [self.navigationController pushViewController:accountController animated:YES];
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    appDelegate.lauchController = mainScreen;
+    
+    [self.navigationController setRootViewController:mainScreen];
 }
 
 @end

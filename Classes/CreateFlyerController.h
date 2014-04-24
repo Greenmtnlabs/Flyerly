@@ -25,13 +25,14 @@
 #import "Flurry.h"
 #import "SKProduct+LocalPrice.h"
 #import "LayerTileButton.h"
+#import "SigninController.h"
 #import "LibraryViewController.h"
 #import "UIPlaceHolderTextView.h"
 #import <MediaPlayer/MediaPlayer.h>
 
-
-@class FlyerlySingleton,CameraViewController,Flyer,FlyerImageView,ShareViewController;
+@class FlyerlySingleton, CameraViewController, Flyer, FlyerImageView, ShareViewController, SigninController;
 @interface CreateFlyerController :ParentViewController<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, FlyerImageViewDelegate,UIGestureRecognizerDelegate >
+
 {
    
     FlyerlySingleton *globle;
@@ -62,7 +63,7 @@
     FlyerImageView *flyerImageView;
     
     UITextView *lastTextView;
-
+    SigninController *signInController;
     ShareViewController *shareviewcontroller;
     UILabel *titleLabel;
     UIImage *videolastImage;
@@ -83,6 +84,7 @@
 @property (nonatomic, assign) NSInteger selectedSize;
 @property (nonatomic, strong) UIImage *selectedTemplate;
 @property (nonatomic,strong) UIAlertView *deleteAlert;
+@property (nonatomic,strong) UIAlertView *signInAlert;
 @property (nonatomic, assign) NSInteger imgPickerFlag;
 @property (nonatomic, strong) NSString *flyerPath;
 @property(nonatomic, strong) IBOutlet FlyerImageView *flyimgView;

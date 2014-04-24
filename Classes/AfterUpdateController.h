@@ -7,13 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "LaunchController.h"
+#import "FlyerlyMainScreen.h"
 
-@class LaunchController;
+@class FlyerlyMainScreen;
 
 @interface AfterUpdateController : UIViewController{
 
-    LaunchController *accountController;
+    FlyerlyMainScreen *mainScreen;
 
 }
 

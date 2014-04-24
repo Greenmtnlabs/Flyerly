@@ -8,6 +8,7 @@
 
 #import "NBUEditImageViewController.h"
 
+
 @interface CropViewController : NBUEditImageViewController
 
 @property CGSize desiredImageSize;

@@ -1,6 +1,12 @@
-Start on the "Welcome" screen:
-  Tap "SignIn"
-  
+Start on the "Home" screen:
+  Take a screenshot
+  Tap "Settings"
+
+Then on the "Settings" screen:
+  Show elements
+  Tap "Sign In"
+  Take a screenshot
+
 Then on the "SignIn" screen:
   Clear the "Username" field
   Type "riksof.yahoo" in the "Username" field
@@ -36,7 +42,8 @@ Then on the "Flyer" screen:
 
 Then on the "Camera" screen:
   Tap "Take a photo"
-  
+  Wait for "2" seconds
+
 Then on the "Crop" screen:
   Take a screenshot
   Tap "Done"
@@ -61,7 +68,7 @@ Then on the "Flyer" screen:
 
 Then on the "Camera" screen:
   Tap "Take a photo"
-  
+
 Then on the "Crop" screen:
   Tap "Done"
 
@@ -77,10 +84,10 @@ Then on the "Flyer" screen:
 
 Then on the "Camera" screen:
   Tap "Take a photo"
-  
+
 Then on the "Crop" screen:
   Tap "Done"
-	
+
 Then on the "Flyer" screen:
   Tap "Done / Share"
   Take a screenshot
@@ -89,7 +96,7 @@ Then on the "Flyer" screen:
 
 Then on the "Camera" screen:
   Tap "Take a photo"
-  
+
 Then on the "Crop" screen:
   Tap "Done"
 

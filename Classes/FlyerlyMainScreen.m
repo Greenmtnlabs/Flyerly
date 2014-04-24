@@ -27,7 +27,6 @@
 @synthesize recentFlyers,inviteFriendButton,showIndicators;
 @synthesize uiBusy1,uiBusy2,uiBusy3,uiBusy4,firstFlyerButton,secondFlyerButton,thirdFlyerButton,fourthFlyerButton;
 
-
 -(IBAction)doNew:(id)sender{
     [Flurry logEvent:@"Create Flyer"];
 
@@ -96,12 +95,54 @@
 // Load invite friends
 -(IBAction)doInvite:(id)sender{
     
-	addFriendsController = [[InviteFriendsController alloc]initWithNibName:@"InviteFriendsController" bundle:nil];
-
-	[self.navigationController pushViewController:addFriendsController animated:YES];
+    //Checking if the user is valid or anonymous
+    if ([[PFUser currentUser] sessionToken]) {
+       
+        addFriendsController = [[InviteFriendsController alloc]initWithNibName:@"InviteFriendsController" bundle:nil];
+        
+        [self.navigationController pushViewController:addFriendsController animated:YES];
+        
+    } else {
+         // Alert when user logged in as anonymous
+        UIAlertView *signInAlert = [[UIAlertView alloc] initWithTitle:@"Sign In" message:@"The selected feature requires that you sign in. Would you like to register or sign in now?" delegate:self cancelButtonTitle:@"Later" otherButtonTitles:@"Sign In",nil];
+        [signInAlert show];
+      
+    }
+	
 }
 //End
 
+// Buttons event handler,when user click on invite button in anonymous mood
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+   //when click on sign in button in alert view
+    if(buttonIndex == 1)
+    {
+        
+        NSLog(@"Sign In was selected.");
+        SigninController *signInController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
+        
+        signInController.launchController = self;
+        
+        __weak FlyerlyMainScreen *weakMainFlyerScreen = self;
+                        
+        signInController.signInCompletion = ^void(void) {
+            NSLog(@"Sign In via Invite");
+            
+            UINavigationController* navigationController = weakMainFlyerScreen.navigationController;
+            [navigationController popViewControllerAnimated:NO];
+            
+            // Push Invite friends screen on navigation stack
+            weakMainFlyerScreen.addFriendsController = [[InviteFriendsController alloc]initWithNibName:@"InviteFriendsController" bundle:nil];            
+            [weakMainFlyerScreen.navigationController pushViewController:weakMainFlyerScreen.addFriendsController animated:YES];
+            
+        };
+        
+        [self.navigationController pushViewController:signInController animated:YES];
+    }
+   
+    
+}
 
 /*
  * here we Resize Image by providing image & Size as param
@@ -258,8 +299,14 @@
 
     [inviteFriendLabel setText:NSLocalizedString(@"invite_friends", nil)];
     
-    //GET UPDATED USER PUCHASES INFO
-    [self getUserPurcahses];
+    //Checking if the user is valid or anonymus
+    if ([[PFUser currentUser] sessionToken]) {
+        
+        //GET UPDATED USER PUCHASES INFO
+        [self getUserPurcahses];
+    } else {
+        NSLog(@"Anonymous user is NOT authenticated.");
+    }
     
 }
 
@@ -348,24 +395,28 @@
     // HERE WE GET USER PURCHASES DETAIL
     if(![[NSUserDefaults standardUserDefaults] objectForKey:@"InAppPurchases"]){
         
-        
         //Getting Current User
         PFUser *user = [PFUser currentUser];
         
-        //Create Query for get User Purchases
+        //Return on User not exists OR if session tokken is null(current user is anonyumous)
+        if (user == nil || [[user sessionToken] length] == 0)return;
+        
+        //Create query for get user purchases
         PFQuery *query = [PFQuery queryWithClassName:@"InApp"];
         
         //define criteria
         [query whereKey:@"user" equalTo:user];
         
         //run query on Parse
+
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             
             if (!error) {
                 
                 if (objects.count >= 1) {
                     
-                    //Getting Required Data
+                    //Get required data
+
                     NSMutableDictionary  *oldPurchases = [[objects objectAtIndex:0] valueForKey:@"json"];
                     
                     //its for remember key of InApp already copy to Device

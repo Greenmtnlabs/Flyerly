@@ -11,12 +11,13 @@
 #import "Flyer.h"
 #import "FlyerImageView.h"
 
+//@class SigninController;
 @class FlyrViewController;
 @class CreateFlyerController ;
 @class InviteFriendsController;
 @class FlyerlySingleton;
-@class MainSettingViewController,ParentViewController;
 
+@class MainSettingViewController,ParentViewController;
 
 @interface FlyerlyMainScreen : ParentViewController {
     
@@ -24,8 +25,10 @@
 	FlyrViewController *tpController;
 	InviteFriendsController *addFriendsController;
     FlyerlySingleton *globle;
+
     IBOutlet UIButton *setBotton;
-        Flyer *flyer;
+    Flyer *flyer;
+
 }
 
 @property(nonatomic,strong) FlyrViewController *tpController;

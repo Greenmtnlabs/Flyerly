@@ -24,41 +24,8 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 @synthesize sharingProgressParentView,_persistence;
 
 
-#pragma mark -
 #pragma mark Application lifecycle
 
-- (void)applicationDidFinishLaunching:(UIApplication *)application {
-	
-    NSString *greeted = [[NSUserDefaults standardUserDefaults] stringForKey:@"greeted"];
-    
-    if(!greeted){
-        NSLog(@"Welcome to the world of Flyerly");
-        [[NSUserDefaults standardUserDefaults] setObject:@"greeted" forKey:@"greeted"];
-
-        lauchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil];
-
-        [navigationController pushViewController:lauchController animated:NO];
-        [window addSubview:[navigationController view]];
-
-        AfterUpdateController *afterUpdateView = [[AfterUpdateController alloc]initWithNibName:@"AfterUpdateController" bundle:nil];
-        [navigationController pushViewController:afterUpdateView animated:NO];
-        
-    } else {
-        
-        NSLog(@"User already Greeted !");
-
-        lauchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil];
-        accountController = [[LaunchController alloc]initWithNibName:@"LaunchController" bundle:nil];
-        
-        [navigationController pushViewController:lauchController animated:NO];
-        [navigationController pushViewController:accountController animated:NO];
-        [window addSubview:[navigationController view]];
-    }
-
-	[window makeKeyAndVisible];
-	
-	[NSTimer scheduledTimerWithTimeInterval:TIME target:self selector:@selector(next) userInfo:nil repeats:YES];
-}
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -233,10 +200,26 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
         [[NSUserDefaults standardUserDefaults] setInteger:2 forKey:@"cameraSetting"];
     }
 
+    // We allow anonymous Parse users, so a new user doesn't necessarily have to signup/signin
+    [PFUser enableAutomaticUser];
+    
     // Determin if the user has been greeted?
     NSString *greeted = [[NSUserDefaults standardUserDefaults] stringForKey:@"greeted"];
     
     if( !greeted ) {
+    
+        // This is a first time Flyerly user, so
+        
+        [PFUser currentUser].username = @"anonymous";
+        
+        // Then we create a directory for anonymous users data
+        NSString *homeDirectoryPath = NSHomeDirectory();
+        NSString *anonymusUserPath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/anonymous"]];
+        
+        NSError *error;
+        if ([[NSFileManager defaultManager] fileExistsAtPath:anonymusUserPath isDirectory:NULL])
+            [[NSFileManager defaultManager] createDirectoryAtPath:anonymusUserPath withIntermediateDirectories:YES attributes:nil error:&error];
+        
         // Show the greeting before going to the main app.
         [[NSUserDefaults standardUserDefaults] setObject:@"greeted" forKey:@"greeted"];
         
@@ -251,20 +234,32 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     } else {
         // User has already been greeted.
         
-        // Is the user logged in?
-        if ( [PFUser currentUser] == nil ) {
         
-            accountController = [[LaunchController alloc]initWithNibName:@"LaunchController" bundle:nil];
-            [navigationController setRootViewController:accountController];
-
+        // Then we check if the users data has a directory for an anonymous user
+        NSString *homeDirectoryPath = NSHomeDirectory();
+        NSString *flyersDir = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents"]];
+        NSArray *contentOfDirectory = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:flyersDir error:NULL];
+        NSLog(@"Directory Count,%i",contentOfDirectory.count);
+        NSLog(@"%@", contentOfDirectory);
+       
+        // If the Documents folder has only one directory named anonymous then this is an anonymous user (hasn't signed up yet)
+        if(contentOfDirectory.count > 0 && [[contentOfDirectory objectAtIndex:0] isEqual:@"anonymous"]){
+            
+            [PFUser currentUser].username = @"anonymous";
+            
+            lauchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil];
+            [navigationController setRootViewController:lauchController];
+            
+        // Otherwise we have an already signed up user
         } else {
             
-            //THIS IS SIGN OUT CHECK WHEN USER INSTALL UPDATE VERSION OF FLYERLY
+            // If user has already updated to 4.0, the flow is normal
             if([[NSUserDefaults standardUserDefaults] stringForKey:@"UpdatedVersion"]){
                 
                 lauchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil];
                 [navigationController setRootViewController:lauchController];
-                
+            
+            // Otherwise this is the first time user has updated to 4.0
             } else {
              
                 // Log out User.

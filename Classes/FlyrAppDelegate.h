@@ -41,6 +41,7 @@ extern NSString *FacebookDidLoginNotification;
 
 @property (nonatomic, strong) FlyerlyMainScreen *lauchController;
 @property (nonatomic, strong) LaunchController *accountController;
+
 @property (nonatomic, strong) UIView *sharingProgressParentView;
 @property (nonatomic, strong) RMStoreKeychainPersistence *_persistence;
 

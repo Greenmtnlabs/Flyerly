@@ -360,6 +360,7 @@
 		202C658017EA07DC00CB9A75 /* symbol111.png in Resources */ = {isa = PBXBuildFile; fileRef = 202C64C817EA07DC00CB9A75 /* symbol111.png */; };
 		202C658217EA07DC00CB9A75 /* symbol112.png in Resources */ = {isa = PBXBuildFile; fileRef = 202C64CA17EA07DC00CB9A75 /* symbol112.png */; };
 		202C658417EA07DC00CB9A75 /* symbol113.png in Resources */ = {isa = PBXBuildFile; fileRef = 202C64CC17EA07DC00CB9A75 /* symbol113.png */; };
+		202D2ABA190155DA00E86C98 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		202F48BB18F28A60000B62DB /* CustomAssets.m in Sources */ = {isa = PBXBuildFile; fileRef = 202F48BA18F28A60000B62DB /* CustomAssets.m */; };
 		202F992418BCA37B002A25D9 /* home_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 202F992218BCA37B002A25D9 /* home_button.png */; };
 		202F992718BCAD1B002A25D9 /* FlyerlyFacebookFriends.m in Sources */ = {isa = PBXBuildFile; fileRef = 202F992618BCAD1B002A25D9 /* FlyerlyFacebookFriends.m */; };
@@ -393,6 +394,7 @@
 		20714DF7187F2105000D6838 /* cancelcamera.png in Resources */ = {isa = PBXBuildFile; fileRef = 20714DF5187F2105000D6838 /* cancelcamera.png */; };
 		20714DF9187F25E1000D6838 /* settingsrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 20714DF8187F25E1000D6838 /* settingsrow.png */; };
 		207AB32B18ED473400945924 /* ShareKit.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 207AB32A18ED473400945924 /* ShareKit.podspec */; };
+		20824B371908DFDA00AC0CB5 /* signin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20824B361908DFDA00AC0CB5 /* signin@2x.png */; };
 		2086F90C17C4C2E300664123 /* Zmain_screenbg-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2086F90917C4C2E300664123 /* Zmain_screenbg-568h@2x.png */; };
 		2086F90D17C4C2E300664123 /* Zmain_screenbg.png in Resources */ = {isa = PBXBuildFile; fileRef = 2086F90A17C4C2E300664123 /* Zmain_screenbg.png */; };
 		2086F90E17C4C2E300664123 /* Zmain_screenbg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2086F90B17C4C2E300664123 /* Zmain_screenbg@2x.png */; };
@@ -1255,6 +1257,7 @@
 		20714DF5187F2105000D6838 /* cancelcamera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cancelcamera.png; path = ../Classes/cancelcamera.png; sourceTree = "<group>"; };
 		20714DF8187F25E1000D6838 /* settingsrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = settingsrow.png; path = ../Classes/settingsrow.png; sourceTree = "<group>"; };
 		207AB32A18ED473400945924 /* ShareKit.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ShareKit.podspec; sourceTree = "<group>"; };
+		20824B361908DFDA00AC0CB5 /* signin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "signin@2x.png"; sourceTree = "<group>"; };
 		2086F90917C4C2E300664123 /* Zmain_screenbg-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Zmain_screenbg-568h@2x.png"; sourceTree = "<group>"; };
 		2086F90A17C4C2E300664123 /* Zmain_screenbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Zmain_screenbg.png; sourceTree = "<group>"; };
 		2086F90B17C4C2E300664123 /* Zmain_screenbg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Zmain_screenbg@2x.png"; sourceTree = "<group>"; };
@@ -2521,6 +2524,7 @@
 		20D7473D17BE77C800966BA6 /* NewLayOuts */ = {
 			isa = PBXGroup;
 			children = (
+				20824B361908DFDA00AC0CB5 /* signin@2x.png */,
 				20ED041A17CCBCB000DA702E /* t_email_button.png */,
 				20ED041717CCB41F00DA702E /* SettingcellBack.png */,
 				65C9039A17C8AE6500E9B0C2 /* signout.png */,
@@ -3549,6 +3553,7 @@
 				0F80C3B21785B41300D36795 /* signin_long_button.png in Resources */,
 				0F80C3B41785B41300D36795 /* signup_button.png in Resources */,
 				20EB120418DC7AC900F6A07F /* recording_button.png in Resources */,
+				20824B371908DFDA00AC0CB5 /* signin@2x.png in Resources */,
 				0F80C3B51785B41300D36795 /* twitter_login.png in Resources */,
 				0F80C3B61785B41300D36795 /* twitter_login@2x.png in Resources */,
 				0F80C3B71785B41300D36795 /* welcome_button.png in Resources */,
@@ -3711,6 +3716,7 @@
 				202C64FA17EA07DC00CB9A75 /* symbol44.png in Resources */,
 				202C64FC17EA07DC00CB9A75 /* symbol45.png in Resources */,
 				202C64FE17EA07DC00CB9A75 /* symbol46.png in Resources */,
+				202D2ABA190155DA00E86C98 /* (null) in Resources */,
 				202C650017EA07DC00CB9A75 /* symbol47.png in Resources */,
 				202C650217EA07DC00CB9A75 /* symbol48.png in Resources */,
 				202C650417EA07DC00CB9A75 /* symbol49.png in Resources */,

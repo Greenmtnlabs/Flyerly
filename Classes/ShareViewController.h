@@ -38,7 +38,7 @@
 @class SHKSharer;
 @class SHKActivityIndicator;
 
-@interface ShareViewController : UIViewController<UIWebViewDelegate,UIDocumentInteractionControllerDelegate,UITextViewDelegate,UITextFieldDelegate, SHKSharerDelegate> {
+@interface ShareViewController : UIViewController<UIWebViewDelegate,UIDocumentInteractionControllerDelegate,UITextViewDelegate,UITextFieldDelegate, SHKSharerDelegate,MFMailComposeViewControllerDelegate> {
 
     FlyerlySingleton *globle;
     NSArray *arrayOfAccounts;
@@ -82,6 +82,8 @@
 @property (strong, nonatomic) SHKActivityIndicator *activityIndicator;
 @property (nonatomic,strong) Flyer *flyer;
 @property (weak, nonatomic) id<SHKSharerDelegate> delegate;
+
+@property (strong, nonatomic) NSTimer *timer;
 
 -(IBAction)onClickFacebookButton;
 -(IBAction)onClickTwitterButton;

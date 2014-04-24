@@ -1,1 +1,5 @@
---- []
+---
+- :screen: home
+  :orientation: Portrait
+- :screen: settings
+  :orientation: Portrait

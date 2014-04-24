@@ -10,7 +10,6 @@
 
 @implementation ShareViewController
 
-
 @synthesize Yvalue,rightUndoBarButton,shareButton,helpButton,selectedFlyerImage,fvController,titleView,descriptionView,selectedFlyerDescription,  imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,dicController, clipboardlabel,flyer,topTitleLabel,delegate,activityIndicator,youTubeButton;
 
 @synthesize flyerShareType,star1,star2,star3,star4,star5;
@@ -33,7 +32,9 @@
     [titleView setReturnKeyType:UIReturnKeyDone];
     [titleView addTarget:self action:@selector(textFieldFinished:) forControlEvents: UIControlEventEditingDidEndOnExit];
     [titleView addTarget:self action:@selector(textFieldTapped:) forControlEvents:UIControlEventEditingDidBegin];
-   
+
+    titleView.placeholder = @"Flyerly Title (e.g. \"Parker's Party\")";
+
     descriptionView = [[UIPlaceHolderTextView alloc] initWithFrame:CGRectMake(12, 79, 296, 83)];
  
     descriptionView.placeholder = @"Add a comment (example: \"Show this flyer for a free drink at the bar from 4pm-7pm\")";
@@ -51,7 +52,6 @@
 
     
 }
-
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
@@ -325,6 +325,7 @@
 
 - (void)textFieldFinished:(id)sender {
     [sender resignFirstResponder];
+    
 }
 
 /*
@@ -368,6 +369,7 @@
 -(IBAction)onClickFacebookButton{
     
     // Current Item For Sharing
+
     SHKItem *item;
 
     if ([flyer isVideoFlyer]) {
@@ -379,6 +381,7 @@
     item.tags =[NSArray arrayWithObjects: @"#flyerly", nil];
     iosSharer = [SHKFacebook shareItem:item];
     iosSharer.shareDelegate = self;
+    
     
 }
 
@@ -405,6 +408,8 @@
     iosSharer = [[ SHKSharer alloc] init];
     iosSharer = [SHKiOSTwitter shareItem:item];
     iosSharer.shareDelegate = self;
+    iosSharer = nil;
+
 }
 
 
@@ -441,6 +446,8 @@
     iosSharer = [SHKMail shareItem:item];
     iosSharer.shareDelegate = self;
     
+    iosSharer = nil;
+    
 }
 
 
@@ -458,6 +465,7 @@
     iosSharer = [[ SHKSharer alloc] init];
     iosSharer = [SHKTumblr shareItem:item];
     iosSharer.shareDelegate = self;
+    iosSharer = nil;
     
 }
 
@@ -486,6 +494,8 @@
     iosSharer = [[ SHKSharer alloc] init];
     iosSharer = [SHKFlickr shareItem:item];
     iosSharer.shareDelegate = self;
+    
+    iosSharer = nil;
     
 }
 
@@ -568,9 +578,34 @@
 // These are used if you do not provide your own custom UI and delegate
 - (void)sharerStartedSending:(SHKSharer *)sharer
 {
+    // Update Flyer Share Info in Social File
+    if ( [sharer isKindOfClass:[SHKFacebook class]] == YES ) {
+        
+        facebookButton.enabled = NO;
+        
+    } else if ( [sharer isKindOfClass:[SHKiOSTwitter class]] == YES ) {
+        
+        twitterButton.enabled = NO;
+        
+    } else if ( [sharer isKindOfClass:[SHKTumblr class]] == YES ) {
+        
+        tumblrButton.enabled = NO;
+        
+    } else if ( [sharer isKindOfClass:[SHKFlickr class]] == YES ) {
+        
+        flickrButton.enabled = NO;
+        
+    } else if ( [sharer isKindOfClass:[SHKMail class]] == YES ) {
+        
+        emailButton.enabled = NO;
+        
+    } else if ( [sharer isKindOfClass:[SHKTextMessage class]] == YES ) {
+        
+        smsButton.enabled = NO;
+    }
     
 	if (!sharer.quiet)
-		[[SHKActivityIndicator currentIndicator] displayActivity:SHKLocalizedString(@"Saving to %@", [[sharer class] sharerTitle]) forSharer:sharer];
+		[[SHKActivityIndicator currentIndicator] displayActivity:SHKLocalizedString(@"Sharing to %@", [[sharer class] sharerTitle]) forSharer:sharer];
 }
 
 - (void)sharerFinishedSending:(SHKSharer *)sharer
@@ -580,35 +615,41 @@
     // Update Flyer Share Info in Social File
     if ( [sharer isKindOfClass:[SHKFacebook class]] == YES ) {
         
+        facebookButton.enabled = YES;
         [self.flyer setFacebookStatus:1];
         [Flurry logEvent:@"Shared Facebook"];
 
         
     } else if ( [sharer isKindOfClass:[SHKiOSTwitter class]] == YES ) {
         
+        twitterButton.enabled = YES;
         [self.flyer setTwitterStatus:1];
         [Flurry logEvent:@"Shared Twitter"];
 
         
     } else if ( [sharer isKindOfClass:[SHKTumblr class]] == YES ) {
         
+        tumblrButton.enabled = YES;
         [self.flyer setThumblerStatus:1];
         [Flurry logEvent:@"Shared Tumblr"];
 
         
     } else if ( [sharer isKindOfClass:[SHKFlickr class]] == YES ) {
         
+        flickrButton.enabled = YES;
         [self.flyer setFlickerStatus:1];
         [Flurry logEvent:@"Shared Flickr"];
 
         
     } else if ( [sharer isKindOfClass:[SHKMail class]] == YES ) {
         
+        emailButton.enabled = YES;
         [self.flyer setEmailStatus:1];
         [Flurry logEvent:@"Shared Email"];
 
     } else if ( [sharer isKindOfClass:[SHKTextMessage class]] == YES ) {
         
+        smsButton.enabled = NO;
         [self.flyer setSmsStatus:1];
         [Flurry logEvent:@"Shared SMS"];
 
@@ -630,18 +671,24 @@
     
     
     if (!sharer.quiet)
-		[[SHKActivityIndicator currentIndicator] displayCompleted:SHKLocalizedString(@"Saved!")];
+		[[SHKActivityIndicator currentIndicator] displayCompleted:SHKLocalizedString(@"Flyer Posted!") forSharer:sharer];
+    
+    iosSharer.shareDelegate = nil;
+    iosSharer = nil;
 }
 
 - (void)sharer:(SHKSharer *)sharer failedWithError:(NSError *)error shouldRelogin:(BOOL)shouldRelogin
 {
     
-    [[SHKActivityIndicator currentIndicator] hide];
+    [[SHKActivityIndicator currentIndicator] hideForSharer:sharer];
+    iosSharer.shareDelegate = nil;
 	NSLog(@"Sharing Error");
 }
 
 - (void)sharerCancelledSending:(SHKSharer *)sharer
 {
+    iosSharer.shareDelegate = nil;
+    iosSharer = nil;
     NSLog(@"");
 }
 
@@ -654,6 +701,8 @@
                                delegate:nil
                       cancelButtonTitle:SHKLocalizedString(@"Close")
                       otherButtonTitles:nil] show];
+    iosSharer.shareDelegate = nil;
+    iosSharer = nil;
 }
 
 - (void)sharerShowOtherAuthorizationErrorAlert:(SHKSharer *)sharer
@@ -665,6 +714,8 @@
                                delegate:nil
                       cancelButtonTitle:SHKLocalizedString(@"Close")
                       otherButtonTitles:nil] show];
+     iosSharer.shareDelegate = nil;
+    iosSharer = nil;
 }
 
 - (void)hideActivityIndicatorForSharer:(SHKSharer *)sharer {
@@ -739,21 +790,52 @@
     PFUser *user = [PFUser currentUser];
     user[@"appStarRate"] = starValue;
     [user saveInBackground];
-    
-  UIAlertView  *appRateAlert = [[UIAlertView alloc]initWithTitle:@"Do you want to rate us on App store" message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes" ,nil];
-    [appRateAlert show];
-    
+
+    // check if the user rated from 1 star to 3 star
+    if( sender == star1 || sender == star2 || sender == star3)
+    {
+        UIAlertView  *appRateAlertEmail = [[UIAlertView alloc]initWithTitle:@"Thank you! Please share your feedback." message:@"" delegate:self cancelButtonTitle:@"Later" otherButtonTitles:@"Yes" ,nil];
+        
+        appRateAlertEmail.tag = 0;
+        
+        [appRateAlertEmail show];
+        
+        //check if the user rated from 4 star to 5 star
+    } else if( sender == star4 || sender == star5) {
+        UIAlertView *appRateAlertStore = [[UIAlertView alloc]initWithTitle:@"Thank you! Please share your kind words on the App Store." message:@"" delegate:self cancelButtonTitle:@"Later" otherButtonTitles:@"Yes" ,nil];
+        
+        appRateAlertStore.tag = 1;
+        
+        [appRateAlertStore show];
+    }
 }
 
 #pragma mark UIAlertView delegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
   
+    
+    NSLog(@"%d",alertView.tag);
+   switch (alertView.tag)
+  {
+    // if 1 alert view selected having tag 0
+      case 0:
+          if (buttonIndex == 1 ){
+          [self sendAlertEmail];
+      }
+    break;
+          
+    //if 2 alert view selected having tag 1
+      case 1:
     if(buttonIndex == 1) {
-        NSString *url = [NSString stringWithFormat: @"itms-apps://itunes.apple.com/app/id344130515"];
-        [[UIApplication sharedApplication] openURL: [NSURL URLWithString: url]];
+            NSString *url = [NSString stringWithFormat: @"itms-apps://itunes.apple.com/app/id344130515"];
+            [[UIApplication sharedApplication] openURL: [NSURL URLWithString: url]];
+        }
+    break;
+    
+      }
     }
-}
+
 
 -(IBAction)clickOnFlyerType:(id)sender {
     
@@ -766,6 +848,39 @@
         [flyer setShareType:@"Private"];
     }
 
+}
+
+-(void)sendAlertEmail{
+  
+    
+    MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
+  
+    if([MFMailComposeViewController canSendMail]){
+        
+        picker.mailComposeDelegate = self;
+        [picker setSubject:@"Flyerly Email Feedback"];
+        
+        // Set up recipients
+        NSMutableArray *toRecipients = [[NSMutableArray alloc]init];
+        [toRecipients addObject:@"info@greenmtnlabs.com"];
+        [picker setToRecipients:toRecipients];
+      
+    }
+      [self.view.window.rootViewController presentViewController:picker animated:YES completion:nil];
+}
+
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
+	switch (result) {
+		case MFMailComposeResultCancelled:
+			break;
+		case MFMailComposeResultSaved:
+			break;
+		case MFMailComposeResultSent:
+			break;
+		case MFMailComposeResultFailed:
+			break;
+	}
+    [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
 

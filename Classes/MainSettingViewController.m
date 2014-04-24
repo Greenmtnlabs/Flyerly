@@ -69,15 +69,26 @@
     label.text = @"SETTINGS";
     
     self.navigationItem.titleView = label;
+    
     category = [[NSMutableArray alloc] init];
     [category addObject:@"Save to Gallery"];
-    [category addObject:@"Flyerly public"];
-    [category addObject:@"Account Setting"];
+    [category addObject:@"Flyers are public"];
+    
+    //Checking if the user is valid or anonymous
+    if ([[PFUser currentUser] sessionToken].length != 0) {
+        //GET UPDATED USER PUCHASES INFO
+        [category addObject:@"Account Setting"];
+    }
+    
     [category addObject:@"Like us on Facebook"];
     [category addObject:@"Follow us on Twitter"];
-    [category addObject:@"Sign Out"];
     
-
+    //Checking if the user is valid or anonymus
+    if ([[PFUser currentUser] sessionToken].length != 0) {
+        [category addObject:@"Sign Out"];
+    } else {
+        [category addObject:@"Sign In"];
+    }
 }
 
 #pragma TableView Events
@@ -147,18 +158,26 @@
         
     }
     
-    
     if (indexPath.row == 2){
-        imgname = @"account_settings";
-        [cell setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"SettingcellBack"]]];
+        //Checking if the user is valid or anonymus
+        if ([[PFUser currentUser] sessionToken].length != 0) {
+            //account setting row clicked
+            imgname = @"account_settings";
+            [cell setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"SettingcellBack"]]];
+        }
+        
     }
     
-    
-    if (indexPath.row == 3)imgname = @"fb_Like";
-    if (indexPath.row == 4)imgname = @"twt_follow";
-
-
-    if (indexPath.row == 5)imgname = @"signout";
+    if ([[PFUser currentUser] sessionToken].length != 0) {
+        if (indexPath.row == 3)imgname = @"fb_Like";
+        if (indexPath.row == 4)imgname = @"twt_follow";
+        if (indexPath.row == 5)imgname = @"signout";
+    } else {
+        if (indexPath.row == 2)imgname = @"fb_Like";
+        if (indexPath.row == 3)imgname = @"twt_follow";
+        if (indexPath.row == 4)imgname = @"signin";
+    }
+   
     
     
     // Set cell Values
@@ -202,26 +221,73 @@
 
 - (void)tableView:(UITableView *)tView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
    
-    if(indexPath.row == 2) {
-        
-        accountUpdater = [[ProfileViewController alloc]initWithNibName:@"ProfileViewController" bundle:nil];
-        [self.navigationController pushViewController:accountUpdater animated:YES];
+    // Checking if the user is valid
+    if ([[PFUser currentUser] sessionToken].length != 0) {
+        if(indexPath.row == 2) {
+            
+            accountUpdater = [[ProfileViewController alloc]initWithNibName:@"ProfileViewController" bundle:nil];
+            [self.navigationController pushViewController:accountUpdater animated:YES];
+            
+        }else if(indexPath.row == 3){
+            
+            [ self likeFacebook ];
+            
+        }else if(indexPath.row == 4){
+            
+            [self likeTwitter];
+            
+        }else if(indexPath.row == 5){
+            
+            warningAlert = [[UIAlertView  alloc]initWithTitle:@"Are you sure?" message:@"" delegate:self cancelButtonTitle:@"Sign out" otherButtonTitles:@"Cancel",nil];
+            [warningAlert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:NO];
+            
+        }
+        [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
     
-    }else if(indexPath.row == 3){
-        
-        [ self likeFacebook ];
-        
-    }else if(indexPath.row == 4){
-        
-        [self likeTwitter];
-        
-    }else if(indexPath.row == 5){
-        
-        warningAlert = [[UIAlertView  alloc]initWithTitle:@"Are you sure?" message:@"" delegate:self cancelButtonTitle:@"Sign out" otherButtonTitles:@"Cancel",nil];
-        [warningAlert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:NO];
-        
+        // Otherwise the user is anonymous
+    } else {
+        if(indexPath.row == 2) {
+            
+            [ self likeFacebook ];
+            
+        }else if(indexPath.row == 3){
+            
+            [self likeTwitter];
+            
+        }else if(indexPath.row == 4){
+            
+            NSLog(@"Sign In was selected.");
+            signInController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
+            
+            FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+            signInController.launchController = appDelegate.lauchController;
+            
+            // Keep a reference to navigation controller as we are going to pop this view controller mid way
+            UINavigationController* navigationController = self.navigationController;
+            
+            signInController.signInCompletion = ^void(void) {
+                NSLog(@"Sign In via Setting");
+                
+                // Pop out sign in controller as user has successfully signed in
+                [navigationController popViewControllerAnimated:NO];
+                
+                // Since we popped settings controller out of stack we need to puch a new one.
+                // This should be done in a better way e.g., reloadData instead of popping it out and pushing a new one
+                MainSettingViewController *mainsettingviewcontroller = [[MainSettingViewController alloc]initWithNibName:@"MainSettingViewController" bundle:nil] ;
+                [navigationController pushViewController:mainsettingviewcontroller animated:YES];
+                
+            };
+            
+            // Pop out settings controller
+            [navigationController popViewControllerAnimated:NO];
+            
+            // Push sign in controller on the stack
+            [navigationController pushViewController:signInController animated:YES];
+            
+        }
     }
-    [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
+    
+    
     
 }
 
@@ -234,7 +300,7 @@
         
         actaController = [[LaunchController alloc] initWithNibName:@"LaunchController" bundle:nil];
         
-        [self.navigationController setRootViewController:actaController];
+        [self.navigationController pushViewController:actaController animated:YES];
     }
     
 }

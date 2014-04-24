@@ -192,10 +192,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
                 // Remove Current UserName for Device configuration
                 [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"User"];
                 
-                // Login success Move to Flyerly
-                launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil] ;
-                
-                [self.navigationController pushViewController:launchController animated:nil];
+               [self onRegistrationSuccess];
                 
             } else {
                 
@@ -208,10 +205,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
                 // FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
                 // [appDelegate fbChangeforNewVersion];
                 
-                // Login success Move to Flyerly
-                launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil] ;
-                
-                [self.navigationController pushViewController:launchController animated:YES];
+                [self onRegistrationSuccess];
                 
             }
         }];
@@ -241,19 +235,17 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 
 
 -(IBAction)onSignUpTwitter{
-
-
     
     //Connectivity Check
     if([FlyerlySingleton connected]){
         
-        [self showLoadingIndicator];
+        [self showLoadingView];
 
         [PFTwitterUtils logInWithBlock:^(PFUser *user, NSError *error) {
             
             [self hideLoadingIndicator];
             
-            if (!user) {
+            if ( !user ) {
                 
                 NSLog(@"Uh oh. The user cancelled the Twitter login.");
                 return;
@@ -262,19 +254,20 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
                 
                 NSLog(@"User signed up and logged in with Twitter!");
                 
+                UINavigationController* navigationController = self.navigationController;
+                
+                [navigationController popViewControllerAnimated:NO];
+                
+                [self onRegistrationSuccess];
+                
                 NSString *twitterUsername = [PFTwitterUtils twitter].userId;
-                
-                FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-                
-                // here we Checking  User Merge required or not
-                [appDelegate twitterChangeforNewVersion:twitterUsername];
                 
                 // Remove Current UserName for Device configuration
                 [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"User"];
                 
-                // Login success Move to Flyerly
-                launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil] ;
-                [self.navigationController pushViewController:launchController animated:YES];
+                // For Parse New User Merge to old Twitter User
+                FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+                [appDelegate twitterChangeforNewVersion:twitterUsername];
                 
             } else {
                 
@@ -289,12 +282,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
                  FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
                  [appDelegate twitterChangeforNewVersion:twitterUsername];*/
                 
-                
-                // Login success Move to Flyerly
-                launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil] ;
-                [self.navigationController pushViewController:launchController animated:YES];
-                
-                
+                [self onRegistrationSuccess];
             }
         }];
         
@@ -310,8 +298,6 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 
 
 -(BOOL)validate{
-
-    
     
     // Check empty fields
     if(username.text == nil || [username.text isEqualToString:@""]){
@@ -379,10 +365,27 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
         } else {
             
             [PFUser logInWithUsername:userName password:pwd];
-            launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil];
-            [self.navigationController pushViewController:launchController animated:YES];
+            [self onRegistrationSuccess];
+            
         }
     }];
+}
+
+-(void) onRegistrationSuccess {
+
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    
+    UINavigationController* navigationController = self.navigationController;
+    [navigationController popViewControllerAnimated:NO];
+    
+    if (self.signInController != nil) {        
+        [self.signInController onSignInSuccess];
+    }
+    
+    if( appDelegate.lauchController == nil ) {
+        launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil];
+        [self.navigationController pushViewController:launchController animated:YES];
+    }
 }
 
 

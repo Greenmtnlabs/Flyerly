@@ -176,7 +176,7 @@ const int CONTACTS_TAB = 0;
         if(selectedTab == 0){
             globle.accounts = [[NSMutableArray alloc] initWithArray:selectedIdentifiers];
             
-            SHKItem *item = [SHKItem text:@"I'm using the flyerly app to create and share flyers on the go! Flyer.ly/Invite"];
+            SHKItem *item = [SHKItem text:@"I'm using the Flyerly app to create and share flyers on the go! Want to give it a try? Flyer.ly/Invite "];
             item.textMessageToRecipients = selectedIdentifiers;
             
             iosSharer = [[ SHKSharer alloc] init];
@@ -186,7 +186,7 @@ const int CONTACTS_TAB = 0;
             
         }else if(selectedTab == 1){
             
-            SHKItem *i = [SHKItem text:@"I'm using the flyerly app to create and share flyers on the go! http://Flyer.ly/Invite"];
+            SHKItem *i = [SHKItem text:@"I'm using the Flyerly app to create and share flyers on the go! Want to give it a try? http://Flyer.ly/Invite"];
             
             NSArray *shareFormFields = [SHKFacebookCommon shareFormFieldsForItem:i];
             SHKFormController *rootView = [[SHKCONFIG(SHKFormControllerSubclass) alloc] initWithStyle:UITableViewStyleGrouped
@@ -804,7 +804,7 @@ const int CONTACTS_TAB = 0;
             
             //Calling ShareKit for Sharing
             iosSharer = [[ SHKSharer alloc] init];
-            NSString *tweet = [NSString stringWithFormat:@"I'm using the @flyerlyapp to create and share flyers on the go! Flyer.ly/Twitter @%@ #flyerly",model.description];
+            NSString *tweet = [NSString stringWithFormat:@"I'm using the @flyerlyapp to create and share flyers on the go! Want to give it a try? Flyer.ly/Twitter @%@ #flyerly",model.description];
             
             [selectedIdentifiers addObject:model.description];
             iosSharer = [SHKTwitter shareText:tweet];

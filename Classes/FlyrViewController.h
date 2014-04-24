@@ -18,7 +18,8 @@
 #import "ParentViewController.h"
 
 
-@class SaveFlyerCell,Flyer,CreateFlyerController;
+@class SaveFlyerCell, Flyer, SigninController, RegisterController, CreateFlyerController;
+
 @interface FlyrViewController : ParentViewController <UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,UIActionSheetDelegate,RMStoreObserver>{
 
     CreateFlyerController *createFlyer;
@@ -28,6 +29,11 @@
     BOOL cancelRequest;
 
     Flyer *flyer;
+
+    SigninController *signInController;
+    RegisterController *signUpController;
+    NSMutableArray *flyerPaths;
+
     NSMutableArray *searchFlyerPaths;
     NSArray *requestedProducts;
     RMStoreKeychainPersistence *_persistence;

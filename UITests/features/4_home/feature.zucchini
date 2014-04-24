@@ -1,5 +1,11 @@
-Start on the "Welcome" screen:
-  Tap "SignIn"
+Start on the "Home" screen:
+  Take a screenshot
+  Tap "Settings"
+
+Then on the "Settings" screen:
+  Show elements
+  Tap "Sign In"
+  Take a screenshot
 
 Then on the "SignIn" screen:
   Clear the "Username" field
@@ -143,12 +149,6 @@ Then on the "Home" screen:
   Tap "Create"
 	
 Then on the "Flyer" screen:
-  Tap "Back"
-
-Then on the "Home" screen:
-  Tap "Invite"
-	
-Then on the "Invite" screen:
   Tap "Back"
 
 Then on the "Home" screen:

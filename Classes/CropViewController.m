@@ -59,6 +59,7 @@
 #pragma mark - View Events
 
 - (void)viewDidLoad {
+    
     // Set working size for filters.
     self.workingSize = desiredImageSize;
     
@@ -67,14 +68,21 @@
     
     // Configure and set all available filters
     self.filters = [NBUFilterProvider availableFilters];
+
+
     
     // Configure crop view. We may get big pixels with this factor!
     self.maximumScaleFactor = 10.0;
     self.cropView.allowAspectFit = YES;
     
     // Use the image from filters for cropping.
-    self.filterView.image = self.image;
+    [self.filterView setImage:self.image];
     
+    
+ 
+
+//    self.filterView.image = self.image;
+ 
     // Make sure the filters are visible. Get the current height based on
     // navigation bar status and device height.
     NSInteger height = [ [ UIScreen mainScreen ] bounds ].size.height;
@@ -86,6 +94,9 @@
     }
     
     [super viewDidLoad];
+    
+    //Testing
+    //[self.filterView.filterSlideView setObject:self.filters];
 }
 
 #pragma - Button Event Handlers
