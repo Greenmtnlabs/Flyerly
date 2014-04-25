@@ -281,6 +281,19 @@ int selectedAddMoreLayerTab = -1;
  */
 -(void) goBack
 {
+    
+    //Checking Empty String
+    if ([lastTextView.text isEqualToString:@""] ) {
+        
+        [lastTextView resignFirstResponder];
+        [lastTextView removeFromSuperview];
+        lastTextView = nil;
+        
+        //[self callAddMoreLayers];
+        
+    }
+    
+    
     float yValue = self.view.frame.size.height -425;
     
     if (yValue == sharePanel.frame.origin.y) {
