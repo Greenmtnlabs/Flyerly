@@ -28,12 +28,28 @@
     [l setBorderWidth:0.5];
     [l setBorderColor:[[UIColor grayColor] CGColor]];
     
+    [UIView animateWithDuration:1.0
+                          delay:0.0
+                        options:UIViewAnimationOptionAutoreverse | UIViewAnimationOptionRepeat
+                     animations:^{
+                         self.titleView.alpha = 0.0;
+                     }
+                     completion:nil];
+
+    
+    
     // Setup title text field
     [titleView setReturnKeyType:UIReturnKeyDone];
     [titleView addTarget:self action:@selector(textFieldFinished:) forControlEvents: UIControlEventEditingDidEndOnExit];
     [titleView addTarget:self action:@selector(textFieldTapped:) forControlEvents:UIControlEventEditingDidBegin];
 
     titleView.placeholder = @"Flyerly Title (e.g. \"Parker's Party\")";
+    
+    
+//    UITapGestureRecognizer *tapped = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(textFieldTapped:)];
+//    tapped.numberOfTapsRequired = 1;
+//    [self.titleView addGestureRecognizer:tapped];
+//    [titleView setUserInteractionEnabled:YES];
 
     descriptionView = [[UIPlaceHolderTextView alloc] initWithFrame:CGRectMake(12, 79, 296, 83)];
  
