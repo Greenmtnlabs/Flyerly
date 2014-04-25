@@ -27,6 +27,9 @@ int selectedAddMoreLayerTab = -1;
 	[super viewWillAppear:YES];
     
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+    
+    //Render Flyer
+    [self renderFlyer];
 
     //Here we Set Top Bar Item
     titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
@@ -156,7 +159,7 @@ int selectedAddMoreLayerTab = -1;
     }
     
     //Render Flyer
-    [self renderFlyer];
+    //[self renderFlyer];
  
     globle = [FlyerlySingleton RetrieveSingleton];
     [self.view setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
@@ -2072,16 +2075,19 @@ int selectedAddMoreLayerTab = -1;
         FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
         signInController.launchController = appDelegate.lauchController;
         
-        __weak SigninController *weakSigninController = signInController;
+        __weak CreateFlyerController *weakSelf = self;
+        //__weak CreateFlyerController *weakCreateFlyerController = signInController;
         
         signInController.signInCompletion = ^void(void) {
             NSLog(@"Sign In via Share");
             
-            UINavigationController* navigationController = weakSigninController.navigationController;
+            UINavigationController* navigationController = weakSelf.navigationController;
             [navigationController popViewControllerAnimated:NO];
-            [weakSigninController.navigationController popViewController:weakSigninController];
+            //[navigationController popViewController:weakSigninController];
+            //[navigationController popToViewController:weakSelf animated:YES];
             
-            [shareButton sendActionsForControlEvents: UIControlEventTouchUpInside];
+            [weakSelf openPanel];
+            //[shareButton sendActionsForControlEvents: UIControlEventTouchUpInside];
             
         };
         
@@ -3112,11 +3118,9 @@ int selectedAddMoreLayerTab = -1;
         [shareviewcontroller.descriptionView setReturnKeyType:UIReturnKeyDone];
         shareviewcontroller.Yvalue = [NSString stringWithFormat:@"%f",self.view.frame.size.height];
         
-        
         PFUser *user = [PFUser currentUser];
         if (user[@"appStarRate"])
             [self setStarsofShareScreen:user[@"appStarRate"]];
-        
         
         [user saveInBackground];
         
