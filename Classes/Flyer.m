@@ -1316,7 +1316,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     [bottomImage drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
     
     // Apply supplied opacity
-    [image drawInRect:CGRectMake(95,95,120,120) blendMode:kCGBlendModeNormal alpha:1];
+    [image drawInRect:CGRectMake(0,0,80,80) blendMode:kCGBlendModeNormal alpha:1];
     
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     
