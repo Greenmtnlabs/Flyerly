@@ -249,8 +249,6 @@ int selectedAddMoreLayerTab = -1;
         [backButton setBackgroundImage:[UIImage imageNamed:@"home_button"] forState:UIControlStateNormal];
     }
 
-    
-    
     backButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     
@@ -2283,11 +2281,39 @@ int selectedAddMoreLayerTab = -1;
 
 -(void) donePhoto{
     
+    [self deSelectPreviousLayer];
     [self callAddMoreLayers];
     [self logPhotoAddedEvent];
     
 }
 
+
+-(void)deSelectPreviousLayer {
+
+    // Remove Border if Any Layer Selected check the entire layers in a flyer
+    for ( NSString* key in self.flyimgView.layers ) {
+        [self.flyimgView layerStoppedEditing:key];
+        NSLog(@ "%@",self.flyimgView.layer);
+        NSLog(@ "%@",key);
+        
+        //Delete Empty Layer if Exist
+        if (key != nil && ![key isEqualToString:@""]) {
+            
+            NSString *flyerImg = [flyer getImageName:key];
+            NSString *flyertext = [flyer getText:key];
+            
+            if ([flyerImg isEqualToString:@""]) {
+                [flyer deleteLayer:key];
+            }
+            
+            if ([flyertext isEqualToString:@""]) {
+                [flyer deleteLayer:key];
+            }
+        }
+        
+    }
+
+}
 
 -(void)choosePhoto
 {
