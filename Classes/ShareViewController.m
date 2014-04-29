@@ -10,7 +10,7 @@
 
 @implementation ShareViewController
 
-@synthesize Yvalue,rightUndoBarButton,shareButton,helpButton,selectedFlyerImage,fvController,titleView,descriptionView,selectedFlyerDescription,  imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,dicController, clipboardlabel,flyer,topTitleLabel,delegate,activityIndicator,youTubeButton;
+@synthesize Yvalue,rightUndoBarButton,shareButton,helpButton,selectedFlyerImage,fvController,titleView,descriptionView,selectedFlyerDescription,  imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,dicController, clipboardlabel,flyer,topTitleLabel,delegate,activityIndicator,youTubeButton,titleViewBorder;
 
 @synthesize flyerShareType,star1,star2,star3,star4,star5;
 
@@ -28,15 +28,17 @@
     [l setBorderWidth:0.5];
     [l setBorderColor:[[UIColor grayColor] CGColor]];
     
-    [UIView animateWithDuration:1.0
+    titleViewBorder.layer.borderColor = [UIColor colorWithRed:0/255.0 green:155/255.0 blue:224/255.0 alpha:1].CGColor;
+    titleViewBorder.layer.borderWidth = 1.0f;
+    titleViewBorder.userInteractionEnabled = NO;
+    
+    [UIView animateWithDuration:0.5
                           delay:0.0
                         options:UIViewAnimationOptionAutoreverse | UIViewAnimationOptionRepeat
                      animations:^{
-                         self.titleView.alpha = 0.0;
+                         self.titleViewBorder.alpha = 0.0;
                      }
                      completion:nil];
-
-    
     
     // Setup title text field
     [titleView setReturnKeyType:UIReturnKeyDone];
@@ -64,9 +66,6 @@
     
     [self.view addSubview:descriptionView];
 
-
-
-    
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -79,6 +78,19 @@
     
 }
 
+
+- (void)viewDidAppear:(BOOL)animated {
+    
+    [super viewDidAppear:animated];
+    
+    // Checking if titleView text feild is empty
+    if( [titleView hasText] ) {
+        
+        //removing animation on titleVIew text feild
+        [titleViewBorder.layer removeAllAnimations];
+        
+    }
+}
 
 - (void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
@@ -348,6 +360,8 @@
  * Called when clicked on title text field
  */
 - (void)textFieldTapped:(id)sender {
+    
+    [titleViewBorder.layer removeAllAnimations];
     [titleView setReturnKeyType:UIReturnKeyDone];
 }
 

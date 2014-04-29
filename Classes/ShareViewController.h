@@ -49,6 +49,7 @@
 
 @property(nonatomic,strong) IBOutlet UIPlaceHolderTextView *descriptionView;
 @property(nonatomic,strong) IBOutlet UITextField *titleView;
+@property(nonatomic,strong) IBOutlet UIView *titleViewBorder;
 @property(nonatomic,strong) IBOutlet UIButton *facebookButton;
 @property(nonatomic,strong) IBOutlet UIButton *twitterButton;
 @property(nonatomic,strong) IBOutlet UIButton *emailButton;
