@@ -305,7 +305,7 @@
         //GET UPDATED USER PUCHASES INFO
         [self getUserPurcahses];
     } else {
-        NSLog(@"Anonymous user is NOT authenticated.");
+        NSLog(@"Anonymous,User is NOT authenticated.");
     }
     
 }

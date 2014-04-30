@@ -108,6 +108,7 @@
 
 -(NSMutableDictionary *)getLayerFromMaster :(NSString *)uid;
 -(NSString *)getImageTag :(NSString *)uid;
+-(NSString *)getYouTubeStatus;
 -(NSString *)getFacebookStatus;
 -(NSString *)getTwitterStatus;
 -(NSString *)getInstagaramStatus;

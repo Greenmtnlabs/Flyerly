@@ -197,7 +197,12 @@
         [emailButton setSelected:NO];
     }
     
-    
+    status = [flyer getYouTubeStatus];
+    if([status isEqualToString:@"1"]){
+        [youTubeButton setSelected:YES];
+    }else{
+        [youTubeButton setSelected:NO];
+    }
     
     BOOL MsgStatus = [MFMessageComposeViewController respondsToSelector:@selector(canSendAttachments)];
     
@@ -602,6 +607,9 @@
     } else if ( [sharer isKindOfClass:[SHKTextMessage class]] == YES ) {
         
         smsButton.enabled = NO;
+    } else if ( [sharer isKindOfClass:[YouTubeSubClass class]] == YES ) {
+    
+        youTubeButton.enabled = NO;
     }
     
 	if (!sharer.quiet)
@@ -655,6 +663,7 @@
 
     } else if ( [sharer isKindOfClass:[YouTubeSubClass class]] == YES ) {
         
+        youTubeButton.enabled = YES;
         YouTubeSubClass *youtube = (YouTubeSubClass *) sharer;
         
         // Save Link In .Text File of Flyer

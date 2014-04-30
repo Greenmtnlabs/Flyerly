@@ -48,6 +48,10 @@ int selectedAddMoreLayerTab = -1;
 
 -(void)viewDidAppear:(BOOL)animated {
     
+    
+    //Render Flyer
+    [self renderFlyer];
+    
     [addMoreLayerOrSaveFlyerLabel setText:@"CREATE YOUR FLYER WITH THE FEATURES BELOW THEN SHARE WITH THE WORLD!"];    [addMoreLayerOrSaveFlyerLabel setNumberOfLines:2];
     [addMoreLayerOrSaveFlyerLabel setBackgroundColor:[UIColor clearColor]];
     [addMoreLayerOrSaveFlyerLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:16]];
@@ -74,13 +78,10 @@ int selectedAddMoreLayerTab = -1;
 	layerScrollView.pagingEnabled = NO;
 	layerScrollView.showsHorizontalScrollIndicator = YES;
 	layerScrollView.showsVerticalScrollIndicator = YES;
-
-    
 	
 	textBackgrnd = [[UIImageView alloc]initWithFrame:CGRectMake(0, 385, 320, 44)];
 	//[self.view addSubview:textBackgrnd];
 	textBackgrnd.alpha = ALPHA0;
-    
     
     // Create font array
 	fontArray =[[NSArray  alloc] initWithObjects:
@@ -115,10 +116,7 @@ int selectedAddMoreLayerTab = -1;
     
     // Create border colors array
     borderArray = 	[[NSArray  alloc] initWithObjects: [UIColor blackColor], [UIColor grayColor], [UIColor darkGrayColor], [UIColor blueColor], [UIColor purpleColor], [UIColor colorWithRed:115.0/255.0 green:134.0/255.0 blue:144.0/255.0 alpha:1], [UIColor orangeColor], [UIColor greenColor], [UIColor redColor], [UIColor colorWithRed:14.0/255.0 green:95.0/255.0 blue:111.0/255.0 alpha:1], [UIColor colorWithRed:180.0/255.0 green:180.0/255.0 blue:149.0/255.0 alpha:1], [UIColor colorWithRed:228.0/255.0 green:128.0/255.0 blue:144.0/255.0 alpha:1], [UIColor colorWithRed:213.0/255.0 green:110.0/255.0 blue:86.0/255.0 alpha:1],[UIColor colorWithRed:156.0/255.0 green:195.0/255.0 blue:233.0/255.0 alpha:1],[UIColor colorWithRed:27.0/255.0 green:70.0/255.0 blue:148.0/255.0 alpha:1],[UIColor colorWithRed:234.0/255.0 green:230.0/255.0 blue:51.0/255.0 alpha:1],[UIColor cyanColor], [UIColor colorWithRed:232.0/255.0 green:236.0/255.0 blue:51.0/224.0 alpha:1],[UIColor magentaColor],[UIColor colorWithRed:57.0/255.0 green:87.0/255.0 blue:13.0/224.0 alpha:1], [UIColor colorWithRed:93.0/255.0 green:97.0/255.0 blue:196.0/224.0 alpha:1],nil];
-
-
-
-
+    
     //Setting Tags
 	fontTabButton.tag = 10001;
 	colorTabButton.tag = 10002;
@@ -246,8 +244,6 @@ int selectedAddMoreLayerTab = -1;
         [backButton setBackgroundImage:[UIImage imageNamed:@"home_button"] forState:UIControlStateNormal];
     }
 
-    
-    
     backButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     
@@ -1679,6 +1675,10 @@ int selectedAddMoreLayerTab = -1;
                 [weakSelf.flyimgView layerStoppedEditing:weakSelf.currentLayer];
                 
                 weakSelf.imgPickerFlag = 1;
+                
+                
+                //Render Flyer
+                //[self renderFlyer];
             }else{
                 
                 //Here we Set Flyer Type
@@ -1753,7 +1753,6 @@ int selectedAddMoreLayerTab = -1;
     [uiBusy setColor:[UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0]];
     uiBusy.hidesWhenStopped = YES;
     [uiBusy startAnimating];
-    
     [self.view addSubview:uiBusy];
     
     CameraViewController *nbuCamera = [[CameraViewController alloc]initWithNibName:@"CameraViewController" bundle:nil];
@@ -1767,15 +1766,13 @@ int selectedAddMoreLayerTab = -1;
     }
     
     __weak CreateFlyerController *weakSelf = self;
-    
     // Callback once image is selected.
     [nbuCamera setOnImageTaken:^(UIImage *img) {
         
-         [uiBusy stopAnimating];
+        [uiBusy stopAnimating];
         [uiBusy removeFromSuperview];
         dispatch_async( dispatch_get_main_queue(), ^{
             // Do any UI operation here (render layer).
-
             
             if (weakSelf.imgPickerFlag == 2) {
                 
@@ -1791,6 +1788,7 @@ int selectedAddMoreLayerTab = -1;
                 [Flurry logEvent:@"Custom Photo"];
                 
                 weakSelf.imgPickerFlag = 1;
+                
             }else{
                 
                 //Here we Set Flyer Type
@@ -1803,6 +1801,7 @@ int selectedAddMoreLayerTab = -1;
                 //set template Image
                 [weakSelf.flyimgView setTemplate:[NSString stringWithFormat:@"Template/template.%@",IMAGETYPE ]];
                 [Flurry logEvent:@"Custom Background"];
+                
             }
         });
     }];
@@ -1829,7 +1828,7 @@ int selectedAddMoreLayerTab = -1;
     CameraViewController *nbuCamera = [[CameraViewController alloc]initWithNibName:@"CameraViewController" bundle:nil];
     
     //Here we Pass FlyerImageView For Video
-    nbuCamera.flyerImageView = self.flyimgView;
+   // nbuCamera.flyerImageView = self.flyimgView;
     
     nbuCamera.videoAllow = @"YES";
     nbuCamera.desiredImageSize = CGSizeMake( 300,  300 );
@@ -1838,7 +1837,7 @@ int selectedAddMoreLayerTab = -1;
     // Callback once image is selected.
     [nbuCamera setOnImageTaken:^(UIImage *img) {
         
-         [uiBusy stopAnimating];
+        [uiBusy stopAnimating];
         [uiBusy removeFromSuperview];
         dispatch_async( dispatch_get_main_queue(), ^{
 
@@ -1852,8 +1851,11 @@ int selectedAddMoreLayerTab = -1;
                 //set template Image
                 [weakSelf.flyimgView setTemplate:[NSString stringWithFormat:@"Template/template.%@",IMAGETYPE ]];
                 [Flurry logEvent:@"Custom Background"];
-
+            
+                
         });
+        
+        
     }];
 
         
@@ -2064,7 +2066,16 @@ int selectedAddMoreLayerTab = -1;
         [self deleteLayer:editButtonGlobal overrided:nil];
         [Flurry logEvent:@"Layer Deleted"];
         
-	} else if(alertView == signInAlert && buttonIndex == 1) {
+	}else if(alertView == signInAlert && buttonIndex == 0) {
+        
+        // Enable  Buttons
+        rightUndoBarButton.enabled = YES;
+        shareButton.enabled = YES;
+        helpButton.enabled = YES;
+        
+        [self hideLoadingIndicator];        
+        
+    }else if(alertView == signInAlert && buttonIndex == 1) {
         
         NSLog(@"Sign In was selected.");
         signInController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
@@ -2074,15 +2085,23 @@ int selectedAddMoreLayerTab = -1;
         
         __weak SigninController *weakSigninController = signInController;
         
+         __weak CreateFlyerController *weakSelf = self;
+        
         signInController.signInCompletion = ^void(void) {
             NSLog(@"Sign In via Share");
             
-            UINavigationController* navigationController = weakSigninController.navigationController;
+            //UINavigationController* navigationController = weakSigninController.navigationController;
+            UINavigationController* navigationController = weakSelf.navigationController;
             [navigationController popViewControllerAnimated:NO];
             [weakSigninController.navigationController popViewController:weakSigninController];
+
+            //Render Flyer
+            [weakSelf renderFlyer];
             
-            [shareButton sendActionsForControlEvents: UIControlEventTouchUpInside];
+            //[shareButton sendActionsForControlEvents: UIControlEventTouchUpInside];
+            [weakSelf openPanel];
             
+           
         };
         
         [self.navigationController pushViewController:signInController animated:YES];
@@ -2396,11 +2415,11 @@ int selectedAddMoreLayerTab = -1;
  */
 -(void)renderFlyer {
     
-    // Remove all Subviews inside image view
-    NSArray *viewsToRemove = [self.flyimgView subviews];
-    for (UIView *v in viewsToRemove) {
-        [v removeFromSuperview];
-    }
+//    // Remove all Subviews inside image view
+//    NSArray *viewsToRemove = [self.flyimgView subviews];
+//    for (UIView *v in viewsToRemove) {
+//        [v removeFromSuperview];
+//    }
     
     NSArray *flyerPiecesKeys = [flyer allKeys];
     
