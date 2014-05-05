@@ -11,7 +11,7 @@
 
 @implementation FlyrViewController
 
-@synthesize tView,searchTextField,flyerPaths;
+@synthesize tView,searchTextField,flyerPaths,inAppPurchasePanel;
 
 #pragma mark  View Methods
 
@@ -30,6 +30,13 @@
     [searchTextField setBorderStyle:UITextBorderStyleRoundedRect];
     
     
+    inAppPurchasePanel = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.origin.y, 320,400 )];
+    inappviewcontroller = [[InAppPurchaseViewController alloc] initWithNibName:@"InAppPurchaseViewController" bundle:nil];
+    
+    inAppPurchasePanel = inappviewcontroller.view;
+    inAppPurchasePanel.hidden = YES;
+    [self.view addSubview:inAppPurchasePanel];
+    
 	[self.tView setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
 	tView.dataSource = self;
 	tView.delegate = self;
@@ -40,7 +47,6 @@
     searchTextField.borderStyle = nil;
     
     lockFlyer = YES;
-    
 
 
 }
@@ -321,6 +327,8 @@
 }
 
 
+
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *cellId = @"Cell";
@@ -339,7 +347,7 @@
             
             flyer = [[Flyer alloc] initWithPath:[searchFlyerPaths objectAtIndex:indexPath.row]];
             [cell renderCell:flyer LockStatus:lockFlyer];
-            [cell.flyerLock addTarget:self action:@selector(requestProduct) forControlEvents:UIControlEventTouchUpInside];
+            [cell.flyerLock addTarget:self action:@selector(openPanel) forControlEvents:UIControlEventTouchUpInside];
 
             
         });
@@ -354,7 +362,7 @@
             
             flyer = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:indexPath.row]];
             [cell renderCell:flyer LockStatus:lockFlyer];
-            [cell.flyerLock addTarget:self action:@selector(requestProduct) forControlEvents:UIControlEventTouchUpInside];
+            [cell.flyerLock addTarget:self action:@selector(openPanel) forControlEvents:UIControlEventTouchUpInside];
             
         });
 
@@ -659,6 +667,87 @@
 {
 
 
+}
+
+/*
+ * Here we Open Share Panel
+ */
+-(void)openPanel {
+    
+    
+        inAppPurchasePanel.hidden = NO;
+        [inAppPurchasePanel removeFromSuperview];
+        
+        if ([flyer isVideoFlyer]) {
+            inappviewcontroller = [[InAppPurchaseViewController alloc] initWithNibName:@"InAppPurchaseViewController" bundle:nil];
+            
+        } else {
+            inappviewcontroller = [[InAppPurchaseViewController alloc] initWithNibName:@"InAppPurchaseViewController" bundle:nil];
+        }
+        inAppPurchasePanel = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.origin.y, 320,400 )];
+    
+        //inAppPurchasePanel = shareviewcontroller.view;
+        inAppPurchasePanel = inappviewcontroller.view;
+        [self.view addSubview:inAppPurchasePanel];
+        
+//        inAppPurchasePanel = inAppPurchaseViewController.view;
+//        NSString *shareImagePath = [flyer getFlyerImage];
+//        UIImage *shareImage =  [UIImage imageWithContentsOfFile:shareImagePath];
+//        
+//        //Here we Pass Param to Share Screen Which use for Sharing
+//        inAppPurchaseViewController.selectedFlyerImage = shareImage;
+//        inAppPurchaseViewController.flyer = self.flyer;
+//        shareviewcontroller.imageFileName = shareImagePath;
+//        shareviewcontroller.rightUndoBarButton = rightUndoBarButton;
+//        shareviewcontroller.shareButton = shareButton;
+//        shareviewcontroller.helpButton = helpButton;
+//        shareviewcontroller.titleView.text = [flyer getFlyerTitle];
+//        NSString *description = [flyer getFlyerDescription];
+//        if (![description isEqualToString:@""]) {
+//            shareviewcontroller.descriptionView.text = description;
+//        }
+//        
+//        NSString *shareType  = [[NSUserDefaults standardUserDefaults] valueForKey:@"FlyerlyPublic"];
+//        
+//        if ([shareType isEqualToString:@"Private"]) {
+//            [shareviewcontroller.flyerShareType setSelected:YES];
+//        }
+//        
+//        [flyer setShareType:shareType];
+//        shareviewcontroller.selectedFlyerDescription = [flyer getFlyerDescription];
+//        shareviewcontroller.topTitleLabel = titleLabel;
+//        [shareviewcontroller.descriptionView setReturnKeyType:UIReturnKeyDone];
+        inappviewcontroller.Yvalue = [NSString stringWithFormat:@"%f",self.view.frame.size.height];
+//        
+//        PFUser *user = [PFUser currentUser];
+//        if (user[@"appStarRate"])
+//            [self setStarsofShareScreen:user[@"appStarRate"]];
+//        
+//        
+//        [user saveInBackground];
+//        
+//        [shareviewcontroller setSocialStatus];
+//        
+//        
+//        //Here we Get youtube Link
+//        NSString *isAnyVideoUploadOnYoutube = [self.flyer getYoutubeLink];
+//        
+//        // Any Uploaded Video Link Available of Youtube
+//        // then we Enable Other Sharing Options
+//        if (![isAnyVideoUploadOnYoutube isEqualToString:@""]) {
+//            [shareviewcontroller enableAllShareOptions];
+//        }
+    
+        //Create Animation Here
+        [inAppPurchasePanel setFrame:CGRectMake(0, self.view.frame.size.height, 320,425 )];
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:0.4f];
+        [inAppPurchasePanel setFrame:CGRectMake(0, self.view.frame.size.height -425, 320,425 )];
+        [UIView commitAnimations];
+        [self hideLoadingIndicator];
+        
+    
+    
 }
 
 
