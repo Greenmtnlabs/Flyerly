@@ -9,19 +9,25 @@
 #import "NBUCameraViewController.h"
 #import "UIImage+NBUAdditions.h"
 #import <AVFoundation/AVFoundation.h>
+#import "InAppPurchaseViewController.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "SubNBUCamera.h"
 
 
-@interface CameraViewController : NBUCameraViewController {
+@interface CameraViewController : NBUCameraViewController <inAppPurchasePanelButtonProtocol, UserPurchasesDelegate> {
 
     SubNBUCamera *cameraViewChild;
+    InAppPurchaseViewController *inappviewcontroller;
+    SigninController *signInController;
+    BOOL productPurchased;
+    
 }
 
 @property CGSize desiredImageSize;
 @property (nonatomic, copy) void (^onImageTaken)(UIImage *);
 @property (nonatomic, copy) void (^onVideoFinished)(NSURL *);
 @property (nonatomic, copy) void (^onVideoCancel)();
+
 
 
 // Outlets
@@ -32,8 +38,7 @@
 @property (assign, nonatomic) IBOutlet UIProgressView *progressView;
 @property (strong, nonatomic) IBOutlet UIButton *mode;
 @property (strong, nonatomic) NSString *videoAllow;
-
-
+@property (nonatomic, strong) UIView *inAppPurchasePanel;
 
 
 
