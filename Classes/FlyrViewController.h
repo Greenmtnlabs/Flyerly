@@ -5,6 +5,7 @@
 //  Created by Riksof Pvt. Ltd. on 22/Jan/2014.
 //
 
+
 #import <UIKit/UIKit.h>
 #import "CreateFlyerController.h"
 #import "SaveFlyerCell.h"
@@ -21,7 +22,7 @@
 
 @class SaveFlyerCell, Flyer, SigninController, RegisterController, CreateFlyerController,InAppPurchaseViewController,ShareViewController;
 
-@interface FlyrViewController : ParentViewController <UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,UIActionSheetDelegate,RMStoreObserver>{
+@interface FlyrViewController : ParentViewController <UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,UIActionSheetDelegate,RMStoreObserver,inAppPurchasePanelButtonProtocol, UserPurchasesDelegate>{
 
     CreateFlyerController *createFlyer;
     BOOL searching;
@@ -35,14 +36,12 @@
     RegisterController *signUpController;
     ShareViewController *shareviewcontroller;
     InAppPurchaseViewController *inappviewcontroller;
+    UserPurchases *userPurchases;
     NSMutableArray *flyerPaths;
 
     NSMutableArray *searchFlyerPaths;
     NSArray *requestedProducts;
     RMStoreKeychainPersistence *_persistence;
-    
-
-
 }
 
 
@@ -54,15 +53,9 @@
 
 
 -(void)goBack;
-
 -(NSMutableArray *)getFlyersPaths;
-
 -(IBAction)createFlyer:(id)sender;
-
--(void)requestProduct;
 -(void)purchaseProductID:(NSString *)pid;
-
--(void)restorePurchase;
 
 
 @end
