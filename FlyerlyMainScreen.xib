@@ -227,7 +227,7 @@
         </view>
     </objects>
     <resources>
-        <image name="Zmain_screenbg-568h.png" width="128" height="90"/>
+        <image name="Zmain_screenbg-568h.png" width="612" height="612"/>
         <image name="mid_shadow.png" width="105" height="52"/>
         <image name="pinned_flyer2.png" width="63" height="82"/>
         <image name="pinned_flyer_bg2.png" width="260" height="260"/>

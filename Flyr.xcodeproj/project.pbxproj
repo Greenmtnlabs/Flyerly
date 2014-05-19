@@ -420,6 +420,8 @@
 		2087B6C817C7B07D007A6A90 /* register-bg-iPhone4.png in Resources */ = {isa = PBXBuildFile; fileRef = 2087B6C517C7B07D007A6A90 /* register-bg-iPhone4.png */; };
 		2087B6C917C7B07D007A6A90 /* register-bg-iPhone5.png in Resources */ = {isa = PBXBuildFile; fileRef = 2087B6C617C7B07D007A6A90 /* register-bg-iPhone5.png */; };
 		208C684F186DAA59004A74F2 /* FlyerlyConfigurator.m in Sources */ = {isa = PBXBuildFile; fileRef = 208C684E186DAA59004A74F2 /* FlyerlyConfigurator.m */; };
+		208D5AA1192A2B05000CDB25 /* Symbols.xib in Resources */ = {isa = PBXBuildFile; fileRef = 208D5AA0192A2B00000CDB25 /* Symbols.xib */; };
+		208D5AA3192A2B4A000CDB25 /* Symbols-iPhone4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 208D5AA2192A2B4A000CDB25 /* Symbols-iPhone4.xib */; };
 		208E35A217C1F5C500CE54BE /* SigninController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 208E35A117C1F5C500CE54BE /* SigninController.xib */; };
 		208E35A417C20CC700CE54BE /* RegisterViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 208E35A317C20CC700CE54BE /* RegisterViewController_iPhone5.xib */; };
 		208E35A817C20E0100CE54BE /* tick.png in Resources */ = {isa = PBXBuildFile; fileRef = 208E35A617C20E0100CE54BE /* tick.png */; };
@@ -1305,6 +1307,8 @@
 		2087B6C617C7B07D007A6A90 /* register-bg-iPhone5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "register-bg-iPhone5.png"; sourceTree = "<group>"; };
 		208C684D186DAA59004A74F2 /* FlyerlyConfigurator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = FlyerlyConfigurator.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		208C684E186DAA59004A74F2 /* FlyerlyConfigurator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FlyerlyConfigurator.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		208D5AA0192A2B00000CDB25 /* Symbols.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Symbols.xib; sourceTree = "<group>"; };
+		208D5AA2192A2B4A000CDB25 /* Symbols-iPhone4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Symbols-iPhone4.xib"; sourceTree = "<group>"; };
 		208E35A117C1F5C500CE54BE /* SigninController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SigninController.xib; path = ../SigninController.xib; sourceTree = "<group>"; };
 		208E35A317C20CC700CE54BE /* RegisterViewController_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RegisterViewController_iPhone5.xib; path = ../RegisterViewController_iPhone5.xib; sourceTree = "<group>"; };
 		208E35A617C20E0100CE54BE /* tick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tick.png; sourceTree = "<group>"; };
@@ -2706,6 +2710,8 @@
 				2012ECAE1926078E00D5EA58 /* Sizes-iPhone4.xib */,
 				2012ECB219261B0F00D5EA58 /* Colours.xib */,
 				2012ECBA19261D0B00D5EA58 /* Colours-iPhone4s.xib */,
+				208D5AA0192A2B00000CDB25 /* Symbols.xib */,
+				208D5AA2192A2B4A000CDB25 /* Symbols-iPhone4.xib */,
 			);
 			name = CreateFlyer;
 			sourceTree = "<group>";
@@ -3569,6 +3575,7 @@
 				0F80078D17537861000FF7FA /* symbol13.png in Resources */,
 				0F80078F17537861000FF7FA /* symbol14.png in Resources */,
 				0F80079117537861000FF7FA /* symbol15.png in Resources */,
+				208D5AA3192A2B4A000CDB25 /* Symbols-iPhone4.xib in Resources */,
 				0F80079317537861000FF7FA /* symbol16.png in Resources */,
 				0F80079517537861000FF7FA /* symbol17.png in Resources */,
 				0F80079717537861000FF7FA /* symbol18.png in Resources */,
@@ -3804,6 +3811,7 @@
 				202C652217EA07DC00CB9A75 /* symbol64.png in Resources */,
 				202C652417EA07DC00CB9A75 /* symbol65.png in Resources */,
 				202C652617EA07DC00CB9A75 /* symbol66.png in Resources */,
+				208D5AA1192A2B05000CDB25 /* Symbols.xib in Resources */,
 				202C652817EA07DC00CB9A75 /* symbol67.png in Resources */,
 				202C652A17EA07DC00CB9A75 /* symbol68.png in Resources */,
 				200773AB1887BB8C00448346 /* addbg_library_selected.png in Resources */,
