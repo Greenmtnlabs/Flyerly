@@ -12,7 +12,6 @@
                 <outlet property="facebookButton" destination="11" id="23"/>
                 <outlet property="flickrButton" destination="13" id="25"/>
                 <outlet property="flyerShareType" destination="02X-0M-pgw" id="RRD-OV-hAp"/>
-                <outlet property="instagramButton" destination="17" id="30"/>
                 <outlet property="smsButton" destination="14" id="26"/>
                 <outlet property="star1" destination="D0f-Ce-0gF" id="Qb0-gF-RHV"/>
                 <outlet property="star2" destination="mVn-Rd-jbl" id="CSS-K6-EAK"/>
@@ -20,6 +19,7 @@
                 <outlet property="star4" destination="iQw-qn-Bq4" id="ctm-Um-nI7"/>
                 <outlet property="star5" destination="N5u-za-btZ" id="eEZ-aC-WkI"/>
                 <outlet property="titleView" destination="7" id="21"/>
+                <outlet property="titleViewBorder" destination="p0z-2m-JBW" id="R9L-WS-dUb"/>
                 <outlet property="twitterButton" destination="15" id="31"/>
                 <outlet property="view" destination="1" id="3"/>
                 <outlet property="youTubeButton" destination="0gS-1q-L37" id="4dL-wE-a52"/>
@@ -107,6 +107,11 @@
                     <rect key="frame" x="10" y="45" width="298" height="33"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
+                <view contentMode="scaleToFill" id="p0z-2m-JBW">
+                    <rect key="frame" x="10" y="45" width="298" height="33"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Flyerly Title (e.g. &quot;Parker's Party&quot;)" minimumFontSize="17" id="7">
                     <rect key="frame" x="16" y="47" width="292" height="28"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -214,24 +219,6 @@
                                 <action selector="onClickTwitterButton" destination="-1" eventType="touchUpInside" id="33"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="17">
-                            <rect key="frame" x="245" y="7" width="60" height="60"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <accessibility key="accessibilityConfiguration" label="Instagram"/>
-                            <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
-                            <state key="normal" backgroundImage="instagram_share.png">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <state key="selected" backgroundImage="instagram_share_selected.png">
-                                <color key="titleColor" red="0.3575665864" green="0.76047690010000002" blue="0.97315449620000005" alpha="1" colorSpace="calibratedRGB"/>
-                            </state>
-                            <state key="highlighted">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="onClickInstagramButton" destination="-1" eventType="touchUpInside" id="34"/>
-                            </connections>
-                        </button>
                         <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" id="18">
                             <rect key="frame" x="245" y="74" width="60" height="60"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -311,8 +298,6 @@
         <image name="flat_text_box.png" width="503" height="69"/>
         <image name="flickr_share.png" width="120" height="120"/>
         <image name="flickr_share_selected.png" width="120" height="120"/>
-        <image name="instagram_share.png" width="120" height="120"/>
-        <image name="instagram_share_selected.png" width="120" height="120"/>
         <image name="panel_close_button.png" width="640" height="74"/>
         <image name="private_off_button.png" width="185" height="62"/>
         <image name="public_on.png" width="185" height="62"/>
