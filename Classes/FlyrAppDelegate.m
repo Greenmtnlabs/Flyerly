@@ -21,7 +21,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 @synthesize window;
 @synthesize navigationController;
 @synthesize  lauchController,accountController;
-@synthesize sharingProgressParentView,_persistence;
+@synthesize sharingProgressParentView,_persistence,userPurchases;
 
 
 #pragma mark Application lifecycle
@@ -186,6 +186,9 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     // Bitly configuration
     [[BitlyConfig sharedBitlyConfig] setBitlyLogin:[flyerConfigurator bitLyLogin] bitlyAPIKey:[flyerConfigurator bitLyKey]];
 
+    // here we intializing userpurchases class
+    userPurchases = [[UserPurchases alloc] init];
+    
     //This is For remove Notification
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
     

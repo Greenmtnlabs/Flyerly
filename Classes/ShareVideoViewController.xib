@@ -19,6 +19,7 @@
                 <outlet property="star4" destination="iQw-qn-Bq4" id="ctm-Um-nI7"/>
                 <outlet property="star5" destination="N5u-za-btZ" id="eEZ-aC-WkI"/>
                 <outlet property="titleView" destination="7" id="21"/>
+                <outlet property="titleViewBorder" destination="p0z-2m-JBW" id="R9L-WS-dUb"/>
                 <outlet property="twitterButton" destination="15" id="31"/>
                 <outlet property="view" destination="1" id="3"/>
                 <outlet property="youTubeButton" destination="0gS-1q-L37" id="4dL-wE-a52"/>
@@ -106,6 +107,11 @@
                     <rect key="frame" x="10" y="45" width="298" height="33"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
+                <view contentMode="scaleToFill" id="p0z-2m-JBW">
+                    <rect key="frame" x="10" y="45" width="298" height="33"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Flyerly Title (e.g. &quot;Parker's Party&quot;)" minimumFontSize="17" id="7">
                     <rect key="frame" x="16" y="47" width="292" height="28"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

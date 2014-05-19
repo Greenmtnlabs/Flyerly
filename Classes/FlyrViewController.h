@@ -5,11 +5,13 @@
 //  Created by Riksof Pvt. Ltd. on 22/Jan/2014.
 //
 
+
 #import <UIKit/UIKit.h>
 #import "CreateFlyerController.h"
 #import "SaveFlyerCell.h"
 #import "Common.h"
 #import "ShareViewController.h"
+#import "InAppPurchaseViewController.h"
 #import "HelpController.h"
 #import "FlyrAppDelegate.h"
 #import "Flyer.h"
@@ -18,9 +20,9 @@
 #import "ParentViewController.h"
 
 
-@class SaveFlyerCell, Flyer, SigninController, RegisterController, CreateFlyerController;
+@class SaveFlyerCell, Flyer, SigninController, RegisterController, CreateFlyerController,InAppPurchaseViewController,ShareViewController;
 
-@interface FlyrViewController : ParentViewController <UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,UIActionSheetDelegate,RMStoreObserver>{
+@interface FlyrViewController : ParentViewController <UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,UIActionSheetDelegate,RMStoreObserver,inAppPurchasePanelButtonProtocol, UserPurchasesDelegate>{
 
     CreateFlyerController *createFlyer;
     BOOL searching;
@@ -32,31 +34,28 @@
 
     SigninController *signInController;
     RegisterController *signUpController;
+    ShareViewController *shareviewcontroller;
+    InAppPurchaseViewController *inappviewcontroller;
+    UserPurchases *userPurchases;
     NSMutableArray *flyerPaths;
 
     NSMutableArray *searchFlyerPaths;
     NSArray *requestedProducts;
     RMStoreKeychainPersistence *_persistence;
-    
-
-
 }
+
+
 
 @property(nonatomic,strong) IBOutlet UITableView *tView;
 @property(nonatomic,strong) IBOutlet UITextField *searchTextField;
 @property(nonatomic,strong)NSMutableArray *flyerPaths;
+@property (nonatomic, strong) UIView *inAppPurchasePanel;
 
 
 -(void)goBack;
-
 -(NSMutableArray *)getFlyersPaths;
-
 -(IBAction)createFlyer:(id)sender;
-
--(void)requestProduct;
 -(void)purchaseProductID:(NSString *)pid;
-
--(void)restorePurchase;
 
 
 @end

@@ -1316,7 +1316,8 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     [bottomImage drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
     
     // Apply supplied opacity
-    [image drawInRect:CGRectMake(0,0,80,80) blendMode:kCGBlendModeNormal alpha:1];
+
+    [image drawInRect:CGRectMake(225,-15,90,90 ) blendMode:kCGBlendModeNormal alpha:1];
     
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     
@@ -1501,6 +1502,16 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 
 }
 
+/*
+ * Here we Return YouTube Share Status of Flyer
+ */
+-(NSString *)getYouTubeStatus {
+    
+    if (socialArray.count > 8) {
+        return [socialArray objectAtIndex:8];
+    }
+    return nil;
+}
 
 #pragma mark  Flyer Text File GET
 
