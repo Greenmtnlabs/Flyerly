@@ -26,6 +26,10 @@
 
 @implementation AssetsGroupViewController
 
+NSMutableArray *productArray;
+
+@synthesize inAppPurchasePanel;
+
 #pragma mark - View Controller methods
 
 /**
@@ -40,6 +44,14 @@
     
     // Configure the selection behaviour
     self.selectionCountLimit = 1;
+    
+    inAppPurchasePanel = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.origin.y, 320,400 )];
+    inappviewcontroller = [[InAppPurchaseViewController alloc] initWithNibName:@"InAppPurchaseViewController" bundle:nil];
+    
+    inAppPurchasePanel = inappviewcontroller.view;
+    //inAppPurchasePanel.hidden = YES;
+    [self.view addSubview:inAppPurchasePanel];
+    
     
     // BackButton
     UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
@@ -147,34 +159,52 @@
     //HERE WE CHECK SELECTED ITEM IS VIDEO
     if (asset.type == NBUAssetTypeVideo) {
         
-        NSError *error = nil;
-        NSString *homeDirectoryPath = NSHomeDirectory();
-        NSString *rootPath = [homeDirectoryPath stringByAppendingString:
-                              [NSString stringWithFormat:@"/Documents/FlyerlyMovie.mov"]];
-
-        //HERE WE MAKE SURE FILE ALREADY EXISTS THEN DELETE IT OTHERWISE IGNORE
-        if ( [[NSFileManager defaultManager] fileExistsAtPath:rootPath isDirectory:NULL] ) {
-            [[NSFileManager defaultManager] removeItemAtPath:rootPath error:&error];
-        }
-
-        self.loading = YES;
+        FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+        UserPurchases *userPurchases_ = appDelegate.userPurchases;
         
-        //Background Thread
-        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-            [self writeDataToPath:rootPath andAsset:asset.ALAsset];
+        if ([[PFUser currentUser] sessionToken].length != 0) {
             
-            // HERE WE CALL OVER CALLBACK HERE
-            NSURL *url = [NSURL fileURLWithPath:rootPath];
-            self.onVideoFinished( url );
-        });
+            if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
+                 [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"] ) {
+                
+                NSError *error = nil;
+                NSString *homeDirectoryPath = NSHomeDirectory();
+                NSString *rootPath = [homeDirectoryPath stringByAppendingString:
+                                      [NSString stringWithFormat:@"/Documents/FlyerlyMovie.mov"]];
+                
+                //HERE WE MAKE SURE FILE ALREADY EXISTS THEN DELETE IT OTHERWISE IGNORE
+                if ( [[NSFileManager defaultManager] fileExistsAtPath:rootPath isDirectory:NULL] ) {
+                    [[NSFileManager defaultManager] removeItemAtPath:rootPath error:&error];
+                }
+                
+                self.loading = YES;
+                
+                //Background Thread
+                dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+                    [self writeDataToPath:rootPath andAsset:asset.ALAsset];
+                    
+                    // HERE WE CALL OVER CALLBACK HERE
+                    NSURL *url = [NSURL fileURLWithPath:rootPath];
+                    self.onVideoFinished( url );
+                });
+                
+                // Pop the current view, and push the crop view.
+                NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[[self navigationController] viewControllers]];
+                [viewControllers removeLastObject];
+                [viewControllers removeLastObject];
+                [[self navigationController] setViewControllers:viewControllers animated:YES];
+                
+                return;
+            }
+            
+        }else {
+            
+            [self openPanel];
+            return;
+        }
         
-        // Pop the current view, and push the crop view.
-        NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[[self navigationController] viewControllers]];
-        [viewControllers removeLastObject];
-        [viewControllers removeLastObject];
-        [[self navigationController] setViewControllers:viewControllers animated:YES];
         
-        return;
+        
     }
     
     // Get out of full screen mode.
@@ -191,6 +221,49 @@
     [viewControllers removeLastObject];
     [viewControllers addObject:nbuCrop];
     [[self navigationController] setViewControllers:viewControllers animated:YES];
+}
+
+- ( void )inAppPurchasePanelContent {
+    
+    [inappviewcontroller.contentLoaderIndicatorView stopAnimating];
+    inappviewcontroller.contentLoaderIndicatorView.hidden = YES;
+    [inappviewcontroller inAppDataLoaded];
+}
+
+
+/*
+ * Here we Open InAppPurchase Panel
+ */
+-(void)openPanel {
+    
+    inappviewcontroller.buttondelegate = self;
+    
+    if ( productArray.count == 0 ){
+        [inappviewcontroller requestProduct];
+    }
+    
+    inAppPurchasePanel.hidden = NO;
+    [inAppPurchasePanel removeFromSuperview];
+    
+    inAppPurchasePanel = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.origin.y, 320,400 )];
+    
+    //inAppPurchasePanel = shareviewcontroller.view;
+    inAppPurchasePanel = inappviewcontroller.view;
+    [self.view addSubview:inAppPurchasePanel];
+    inappviewcontroller.buttondelegate = self;
+    inappviewcontroller.Yvalue = [NSString stringWithFormat:@"%f",self.view.frame.size.height];
+    
+    //Create Animation Here
+    [inAppPurchasePanel setFrame:CGRectMake(0, self.view.frame.size.height, 320,265 )];
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.4f];
+    [inAppPurchasePanel setFrame:CGRectMake(0, self.view.frame.size.height - 265, 320,265 )];
+    [UIView commitAnimations];
+    if( productArray.count != 0 ) {
+        
+        [inappviewcontroller.contentLoaderIndicatorView stopAnimating];
+        inappviewcontroller.contentLoaderIndicatorView.hidden = YES;
+    }
 }
 
 #pragma mark  Override On selection
