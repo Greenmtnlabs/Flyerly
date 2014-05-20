@@ -615,6 +615,7 @@
 		30D58D8310FB1BF800E0C7E8 /* Template8.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 30D58CFD10FB1BF800E0C7E8 /* Template8.jpg */; };
 		30D58D8410FB1BF800E0C7E8 /* Template9.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 30D58CFE10FB1BF800E0C7E8 /* Template9.jpg */; };
 		30D58E3510FB260200E0C7E8 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30D58E3410FB260200E0C7E8 /* MediaPlayer.framework */; };
+		490FBB16192B4E0500AA3C18 /* AssetsGroupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 490FBB15192B4E0400AA3C18 /* AssetsGroupViewController.xib */; };
 		4986857018B4FFC7002113E4 /* LibraryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4986856E18B4FFC7002113E4 /* LibraryViewController.m */; };
 		4986857118B4FFC7002113E4 /* LibraryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4986856F18B4FFC7002113E4 /* LibraryViewController.xib */; };
 		4986857418B500BB002113E4 /* AssetsGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4986857318B500BB002113E4 /* AssetsGroupViewController.m */; };
@@ -1516,6 +1517,7 @@
 		30D58CFD10FB1BF800E0C7E8 /* Template8.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Template8.jpg; sourceTree = "<group>"; };
 		30D58CFE10FB1BF800E0C7E8 /* Template9.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Template9.jpg; sourceTree = "<group>"; };
 		30D58E3410FB260200E0C7E8 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		490FBB15192B4E0400AA3C18 /* AssetsGroupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AssetsGroupViewController.xib; sourceTree = "<group>"; };
 		4986856D18B4FFC7002113E4 /* LibraryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibraryViewController.h; sourceTree = "<group>"; };
 		4986856E18B4FFC7002113E4 /* LibraryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibraryViewController.m; sourceTree = "<group>"; };
 		4986856F18B4FFC7002113E4 /* LibraryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LibraryViewController.xib; sourceTree = "<group>"; };
@@ -2477,6 +2479,7 @@
 				4986857618B50657002113E4 /* CustomAssetThumbnailView.xib */,
 				4986857218B500BB002113E4 /* AssetsGroupViewController.h */,
 				4986857318B500BB002113E4 /* AssetsGroupViewController.m */,
+				490FBB15192B4E0400AA3C18 /* AssetsGroupViewController.xib */,
 				4986856D18B4FFC7002113E4 /* LibraryViewController.h */,
 				4986856E18B4FFC7002113E4 /* LibraryViewController.m */,
 				4986856F18B4FFC7002113E4 /* LibraryViewController.xib */,
@@ -3847,6 +3850,7 @@
 				202C655A17EA07DC00CB9A75 /* symbol92.png in Resources */,
 				202C655C17EA07DC00CB9A75 /* symbol93.png in Resources */,
 				202C655E17EA07DC00CB9A75 /* symbol94.png in Resources */,
+				490FBB16192B4E0500AA3C18 /* AssetsGroupViewController.xib in Resources */,
 				202C656017EA07DC00CB9A75 /* symbol95.png in Resources */,
 				202C656217EA07DC00CB9A75 /* symbol96.png in Resources */,
 				202C656417EA07DC00CB9A75 /* symbol97.png in Resources */,
@@ -4076,7 +4080,7 @@
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "FEA7F04F-1640-4F76-B084-8BD1855BFF9D";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
-				VALID_ARCHS = "armv7 armv7s";
+				VALID_ARCHS = "armv7 armv7s i386";
 			};
 			name = "Ad Hoc";
 		};
@@ -4122,7 +4126,7 @@
 				PROVISIONING_PROFILE = "BFAFAACA-09D6-40BD-8B17-15886C14AF32";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
-				VALID_ARCHS = "armv7 armv7s";
+				VALID_ARCHS = "armv7 armv7s i386";
 			};
 			name = Debug;
 		};
@@ -4165,7 +4169,7 @@
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BC3C6EA7-311E-4696-8D1D-13A747090EA5";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
-				VALID_ARCHS = "armv7 armv7s";
+				VALID_ARCHS = "armv7 armv7s i386";
 			};
 			name = Release;
 		};
