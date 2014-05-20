@@ -57,3 +57,8 @@ Running Tests
    ```ZUCCHINI_DEVICE="iOS Device" zucchini run --reports-dir <directory for reports> UITests/features/<test to run>/``` 
 
 Reports need to be emailed to the QA team
+
+
+### Release History
+
+http://appshopper.com/productivity/socialflyr
