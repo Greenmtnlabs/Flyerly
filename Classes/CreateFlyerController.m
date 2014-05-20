@@ -726,9 +726,6 @@ int selectedAddMoreLayerTab = -1;
  */
 -(void)addTextBorderInSubView{
     
-    
-    
-    
     //Delete subview from ScrollView
     [self deleteSubviewsFromScrollView ];
     
@@ -753,66 +750,103 @@ int selectedAddMoreLayerTab = -1;
         textWhiteColor = [textLayer objectForKey:@"textborderWhite"];
     }
     
-	for (int i = 1; i <=  [borderArray count] ; i++)
-	{
-		UIButton *color = [UIButton buttonWithType:UIButtonTypeCustom];
-		color.frame = CGRectMake(0, 0, widthValue, heightValue);
-         [color addTarget:self action:@selector(selectFontBorder:) forControlEvents:UIControlEventTouchUpInside];
-		UIColor *colorName =borderArray[(i-1)];
-		UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(color.frame.origin.x, color.frame.origin.y, color.frame.size.width, color.frame.size.height)];
-        label.layer.borderColor = colorName.CGColor;
-        label.layer.borderWidth = 3.0;
-		[color addSubview:label];
-		color.tag = i+90;
-		color.alpha = ALPHA1;
+    
+    UIView *mainView;
+    NSArray *subviewArray;
+    
+    if(IS_IPHONE_5){
+        subviewArray = [[NSBundle mainBundle] loadNibNamed:@"Borders" owner:self options:nil];
+        mainView = [subviewArray objectAtIndex:0];
+        [layerScrollView addSubview:mainView];
+        
+        [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
+    } else {
+        
+        subviewArray = [[NSBundle mainBundle] loadNibNamed:@"Borders-iPhone4" owner:self options:nil];
+        mainView = [subviewArray objectAtIndex:0];
+        [layerScrollView addSubview:mainView];
+        
+        [layerScrollView setContentSize:CGSizeMake(mainView.frame.size.width, [layerScrollView bounds].size.height)];
+    }
+    
+    mainView = [subviewArray objectAtIndex:0];
+    NSArray *bodersArray = mainView.subviews;
+    
+    int i=1;
+    for (UIView *sub in bodersArray)
+    {
+        if ([sub isKindOfClass:[UIButton class]])
+        {
+            UIButton *color = (UIButton *) sub;
+            UIColor *colorName =borderArray[(i-1)];
+            
+            //Here we Highlight Last Color Selected
+            if (textLayer) {
+                
+                NSString *tcolor;
+                NSString *twhite;
+                CGFloat red = 0.0, green = 0.0, blue = 0.0, alpha = 0.0,wht = 0.0;
+                
+                UILabel *labelToStore = [[UILabel alloc]init];
+                labelToStore.textColor = colorName;
+                
+                //Getting RGB Color Code
+                [labelToStore.textColor getRed:&red green:&green blue:&blue alpha:&alpha];
+                
+                tcolor = [NSString stringWithFormat:@"%f, %f, %f", red, green, blue];
+                
+                [labelToStore.textColor getWhite:&wht alpha:&alpha];
+                twhite = [NSString stringWithFormat:@"%f, %f", wht, alpha];
+                
+                if ([textColor isEqualToString:tcolor] && [textWhiteColor isEqualToString:twhite] ) {
+                    // Add border to selected layer thumbnail
+                    color.backgroundColor = [globle colorWithHexString:@"0197dd"];
+                }
+                
+                i++;
+        }
+    }
+    
+    
+	//for (int i = 1; i <=  [borderArray count] ; i++)
+	//{
+		
+//         [color addTarget:self action:@selector(selectFontBorder:) forControlEvents:UIControlEventTouchUpInside];
+//		UIColor *colorName =borderArray[(i-1)];
+//		UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(color.frame.origin.x, color.frame.origin.y, color.frame.size.width, color.frame.size.height)];
+//        label.layer.borderColor = colorName.CGColor;
+//        label.layer.borderWidth = 3.0;
+//		[color addSubview:label];
+//		color.tag = i+90;
+//		color.alpha = ALPHA1;
 
         
-        CGRect frame = color.frame;
-        frame.origin = CGPointMake(curXLoc, curYLoc);
-        color.frame = frame;
-        curXLoc += (widthValue)+increment;
+//        CGRect frame = color.frame;
+//        frame.origin = CGPointMake(curXLoc, curYLoc);
+//        color.frame = frame;
+//        curXLoc += (widthValue)+increment;
+//        
+//        if(IS_IPHONE_5){
+//            if(curXLoc >= 300){
+//                curXLoc = 13;
+//                curYLoc = curYLoc + heightValue + 7;
+//            }
+//        }
         
-        if(IS_IPHONE_5){
-            if(curXLoc >= 300){
-                curXLoc = 13;
-                curYLoc = curYLoc + heightValue + 7;
-            }
-        }
         
-        //Here we Highlight Last Color Selected
-        if (textLayer) {
-            
-            NSString *tcolor;
-            NSString *twhite;
-            CGFloat red = 0.0, green = 0.0, blue = 0.0, alpha = 0.0,wht = 0.0;
-            
-            UILabel *labelToStore = [[UILabel alloc]init];
-            labelToStore.textColor = colorName;
-            
-            //Getting RGB Color Code
-            [labelToStore.textColor getRed:&red green:&green blue:&blue alpha:&alpha];
-            
-            tcolor = [NSString stringWithFormat:@"%f, %f, %f", red, green, blue];
-            
-            [labelToStore.textColor getWhite:&wht alpha:&alpha];
-            twhite = [NSString stringWithFormat:@"%f, %f", wht, alpha];
-            
-            if ([textColor isEqualToString:tcolor] && [textWhiteColor isEqualToString:twhite] ) {
-                // Add border to selected layer thumbnail
-                color.backgroundColor = [globle colorWithHexString:@"0197dd"];
-            }
-            
-        }
         
-		[layerScrollView addSubview:color];
+            
+       // }
+        
+		//[layerScrollView addSubview:color];
         
 	}// Loop
     
-    if(IS_IPHONE_5){
-        [layerScrollView setContentSize:CGSizeMake(320, curYLoc)];
-    } else {
-        [layerScrollView setContentSize:CGSizeMake((  [borderArray count]*(widthValue+5)), [layerScrollView bounds].size.height)];
-    }
+//    if(IS_IPHONE_5){
+//        [layerScrollView setContentSize:CGSizeMake(320, curYLoc)];
+//    } else {
+//        [layerScrollView setContentSize:CGSizeMake((  [borderArray count]*(widthValue+5)), [layerScrollView bounds].size.height)];
+//    }
 
 }
 
@@ -1358,16 +1392,22 @@ int selectedAddMoreLayerTab = -1;
 /*
  * When any font border is selected
  */
--(void)selectFontBorder:(id)sender
+-(IBAction)selectFontBorder:(id)sender
 {
+    
+    NSArray *subviewArray = [layerScrollView subviews];
+    UIView *mainView = [subviewArray objectAtIndex:0];
+    
+    
 	int  i=1;
 	UIButton *view = sender;
     
-	for(UIView *tempView  in [layerScrollView subviews]) {
+	for(UIView *tempView  in [mainView subviews])
+    {
         
         //CHECK UIIMAGEVIEW BECAUSE SCROLL VIEW HAVE ADDITIONAL
         //SUBVIEWS OF UIIMAGEVIEW FOR FLASH INDICATORS
-        if (![tempView isKindOfClass:[UIImageView class]]) {
+        if ([tempView isKindOfClass:[UIButton class]]) {
             
             // Add border to Un-select layer thumbnail
             tempView.backgroundColor = [UIColor clearColor];
