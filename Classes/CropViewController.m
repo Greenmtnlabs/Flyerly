@@ -67,10 +67,20 @@
     self.cropGuideSize = desiredImageSize;
     
     // Configure and set all available filters
-    self.filters = [NBUFilterProvider availableFilters];
-
-
+    // Configure and set all available filters
+    NSMutableArray *allFilters = [NSMutableArray arrayWithArray:[NBUFilterProvider availableFilters]];
     
+    // Remove the filters we do not want.
+    for ( int i = allFilters.count - 1; i >= 0; i--) {
+        NBUFilter *filter = [allFilters objectAtIndex:i];
+        
+        if ( filter.type == NBUFilterTypeNone ) {
+            [allFilters removeObject:filter];
+        }
+    }
+    
+    self.filters = allFilters;
+
     // Configure crop view. We may get big pixels with this factor!
     self.maximumScaleFactor = 10.0;
     self.cropView.allowAspectFit = YES;
