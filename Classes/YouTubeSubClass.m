@@ -55,9 +55,9 @@
     void (^uploadProgress)(GTLServiceTicket *ticket, unsigned long long numberOfBytesRead, unsigned long long dataLength) =
     ^(GTLServiceTicket *ticket, unsigned long long numberOfBytesRead, unsigned long long dataLength){
         float progress = (double)numberOfBytesRead / (double)dataLength;
-        if(progress < 1)
-            [self showProgress:progress];
-        else{
+        if(progress < 1) {
+            //[self showProgress:progress];
+        } else {
             [self displayActivity:SHKLocalizedString(@"Processing Video...")];
         }
         

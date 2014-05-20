@@ -13,14 +13,12 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "SubNBUCamera.h"
 
-
 @interface CameraViewController : NBUCameraViewController <inAppPurchasePanelButtonProtocol, UserPurchasesDelegate> {
-
+    CGFloat progress;
     SubNBUCamera *cameraViewChild;
     InAppPurchaseViewController *inappviewcontroller;
     SigninController *signInController;
     BOOL productPurchased;
-    
 }
 
 @property CGSize desiredImageSize;

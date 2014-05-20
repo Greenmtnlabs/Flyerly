@@ -67,21 +67,26 @@
     self.cropGuideSize = desiredImageSize;
     
     // Configure and set all available filters
-    self.filters = [NBUFilterProvider availableFilters];
-
-
+    // Configure and set all available filters
+    NSMutableArray *allFilters = [NSMutableArray arrayWithArray:[NBUFilterProvider availableFilters]];
     
+    // Remove the filters we do not want.
+    for ( int i = allFilters.count - 1; i >= 0; i--) {
+        NBUFilter *filter = [allFilters objectAtIndex:i];
+        
+        if ( filter.type == NBUFilterTypeNone ) {
+            [allFilters removeObject:filter];
+        }
+    }
+    
+    self.filters = allFilters;
+
     // Configure crop view. We may get big pixels with this factor!
     self.maximumScaleFactor = 10.0;
     self.cropView.allowAspectFit = YES;
     
     // Use the image from filters for cropping.
     [self.filterView setImage:self.image];
-    
-    
- 
-
-//    self.filterView.image = self.image;
  
     // Make sure the filters are visible. Get the current height based on
     // navigation bar status and device height.
@@ -95,8 +100,13 @@
     
     [super viewDidLoad];
     
-    //Testing
-    //[self.filterView.filterSlideView setObject:self.filters];
+    // By default the auto filter is selected.
+    for ( NBUFilter *filter in self.filters) {
+        if ( filter.type == NBUFilterTypeAuto ) {
+            self.filterView.currentFilter = filter;
+            break;
+        }
+    }
 }
 
 #pragma - Button Event Handlers

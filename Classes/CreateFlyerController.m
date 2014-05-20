@@ -403,16 +403,10 @@ int selectedAddMoreLayerTab = -1;
     imgPickerFlag =1;
     
     [templateArray removeAllObjects];
-    int tempelateCount = 0;
     
     //Delete SubViews From ScrollView
     [self deleteSubviewsFromScrollView];
     
-    CGFloat curXLoc = 0;
-    CGFloat curYLoc = 5;
-    
-    if(IS_IPHONE_5)
-        curYLoc = 10;
     
     //[layerScrollView addSubview:tempelateView];
     
@@ -2182,7 +2176,7 @@ int selectedAddMoreLayerTab = -1;
             //UINavigationController* navigationController = weakSigninController.navigationController;
             UINavigationController* navigationController = weakSelf.navigationController;
             [navigationController popViewControllerAnimated:NO];
-            [weakSigninController.navigationController popViewController:weakSigninController];
+            [weakSignInController.navigationController popViewController:weakSignInController];
 
             //Render Flyer
             [weakSelf renderFlyer];
@@ -2192,7 +2186,6 @@ int selectedAddMoreLayerTab = -1;
              */
             //>>>>>>> tempBranch
             
-           
         };
         
         [self.navigationController pushViewController:signInController animated:YES];
@@ -2381,7 +2374,6 @@ int selectedAddMoreLayerTab = -1;
 }
 
 -(void)deSelectPreviousLayer {
-    
     // Remove Border if Any Layer Selected check the entire layers in a flyer
     for ( NSString* key in self.flyimgView.layers ) {
         [self.flyimgView layerStoppedEditing:key];
@@ -2404,7 +2396,7 @@ int selectedAddMoreLayerTab = -1;
         }
         
     }
-    
+
 }
 
 -(void)choosePhoto

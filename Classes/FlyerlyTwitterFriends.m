@@ -66,8 +66,8 @@
     [self setQuiet:YES];
 
 	OAMutableURLRequest *oRequest = [[OAMutableURLRequest alloc] initWithURL:[NSURL URLWithString:@"https://api.twitter.com/1.1/followers/list.json"]
-                                                                    consumer:consumer
-                                                                       token:accessToken
+                                                                    consumer:self.consumer
+                                                                       token:self.accessToken
                                                                        realm:nil
                                                            signatureProvider:nil];
 	
@@ -91,8 +91,8 @@
 {
     
 	OAMutableURLRequest *oRequest = [[OAMutableURLRequest alloc] initWithURL:[NSURL URLWithString:@"https://api.twitter.com/1.1/followers/list.json"]
-                                                                    consumer:consumer
-                                                                       token:accessToken
+                                                                    consumer:self.consumer
+                                                                       token:self.accessToken
                                                                        realm:nil
                                                            signatureProvider:nil];
 	

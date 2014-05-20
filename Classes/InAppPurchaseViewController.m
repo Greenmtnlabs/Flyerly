@@ -223,8 +223,6 @@ NSMutableDictionary *userPreviousPurchases;
     
     [[RMStore defaultStore] addPayment:pid success:^(SKPaymentTransaction *transaction) {
         
-        FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-        
         NSLog(@"Product purchased");
         
         NSString *strWithOutDot = [pid stringByReplacingOccurrencesOfString:@"." withString:@""];

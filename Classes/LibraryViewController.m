@@ -46,7 +46,7 @@
     
     // Customization
     self.customBackButtonTitle = @"Albums";
-    AssetsGroupViewController *asstController = [[AssetsGroupViewController alloc] initWithNibName:@"NBUAssetsGroupViewController"
+    AssetsGroupViewController *asstController = [[AssetsGroupViewController alloc] initWithNibName:@"AssetsGroupViewController"
                                                                                             bundle:nil];
     self.assetsGroupController = asstController;
 
