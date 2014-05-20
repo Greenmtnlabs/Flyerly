@@ -14,7 +14,7 @@
 #import "SubNBUCamera.h"
 
 @interface CameraViewController : NBUCameraViewController <inAppPurchasePanelButtonProtocol, UserPurchasesDelegate> {
-
+    CGFloat progress;
     SubNBUCamera *cameraViewChild;
     InAppPurchaseViewController *inappviewcontroller;
     SigninController *signInController;
