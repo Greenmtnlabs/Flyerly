@@ -14,8 +14,8 @@
 
 
 @interface CameraViewController : NBUCameraViewController {
-
     SubNBUCamera *cameraViewChild;
+    float progress;
 }
 
 @property CGSize desiredImageSize;

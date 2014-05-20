@@ -46,7 +46,7 @@
     [self.cameraView addSubview:flyerImageView];
     flyerImageView.hidden = YES;
     
-    self.cameraView.targetResolution = CGSizeMake(640.0, 640.0); // The minimum resolution we want
+    self.cameraView.targetResolution = CGSizeMake( 1024, 1024 ); // The minimum resolution we want
     self.cameraView.keepFrontCameraPicturesMirrored = YES;
     
     __weak CameraViewController *weakSelf = self;
@@ -252,9 +252,6 @@
     [self showWithProgress:nil];
     
 }
-
-
-static float progress = 0.0f;
 
 -(IBAction)showWithProgress:(id)sender {
     progress = 0.0f;

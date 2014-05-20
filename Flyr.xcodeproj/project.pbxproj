@@ -3971,6 +3971,11 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Flyr_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+					"COCOAPODS_POD_AVAILABLE_NBUImagePicker_Filters=1",
+				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "Flyr-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
@@ -3985,8 +3990,8 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = Flyr;
-				PROVISIONING_PROFILE = "0DD3EDB4-8A33-4D49-BF64-6DB98E71E47F";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0DD3EDB4-8A33-4D49-BF64-6DB98E71E47F";
+				PROVISIONING_PROFILE = "FEA7F04F-1640-4F76-B084-8BD1855BFF9D";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "FEA7F04F-1640-4F76-B084-8BD1855BFF9D";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 armv7s";
@@ -4000,8 +4005,8 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jennifer Junger (ZLDN4YF5WY)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jennifer Junger (ZLDN4YF5WY)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: CarButler Tester (D9YUDTHV7G)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: CarButler Tester (D9YUDTHV7G)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4016,6 +4021,7 @@
 					"$(inherited)",
 					"COCOAPODS=1",
 					"DEBUG=1",
+					"COCOAPODS_POD_AVAILABLE_NBUImagePicker_Filters=1",
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "Flyr-Info.plist";
@@ -4031,7 +4037,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = Flyr;
-				PROVISIONING_PROFILE = "BAB6CA13-2068-43E5-BF9B-5018D73B6460";
+				PROVISIONING_PROFILE = "BFAFAACA-09D6-40BD-8B17-15886C14AF32";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 armv7s";
@@ -4054,6 +4060,11 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Flyr_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+					"COCOAPODS_POD_AVAILABLE_NBUImagePicker_Filters=1",
+				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "Flyr-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
