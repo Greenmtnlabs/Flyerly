@@ -35,13 +35,13 @@ Pod::Spec.new do |s|
     reachability.requires_arc = false
   end
 
-  s.subspec 'Evernote' do |evernote|
-    evernote.source_files = 'Classes/ShareKit/Sharers/Services/Evernote/**/*.{h,m}'
-    evernote.dependency 'Evernote-SDK-iOS', '~> 1.3.0'
-    evernote.dependency 'ShareKit/Core'
-    evernote.libraries = 'xml2'
-    evernote.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(SDKROOT)/usr/include/libxml2' }
-  end
+  #s.subspec 'Evernote' do |evernote|
+  #  evernote.source_files = 'Classes/ShareKit/Sharers/Services/Evernote/**/*.{h,m}'
+  #  evernote.dependency 'Evernote-SDK-iOS', '~> 1.3.0'
+  #  evernote.dependency 'ShareKit/Core'
+  #  evernote.libraries = 'xml2'
+  #  evernote.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(SDKROOT)/usr/include/libxml2' }
+  #end
 
   s.subspec 'Facebook' do |facebook|
     facebook.source_files   = 'Classes/ShareKit/Sharers/Services/Facebook/**/*.{h,m}'

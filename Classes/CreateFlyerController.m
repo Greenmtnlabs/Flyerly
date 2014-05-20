@@ -957,61 +957,82 @@ int selectedAddMoreLayerTab = -1;
     //Getting Last Image Tag for highlight
     NSString *LastTag = [flyer getImageTag:currentLayer];
     
+    UIView *mainView;
+    NSArray *subviewArray;
+    
+    if(IS_IPHONE_5){
+        subviewArray = [[NSBundle mainBundle] loadNibNamed:@"Symbols" owner:self options:nil];
+        mainView = [subviewArray objectAtIndex:0];
+        [layerScrollView addSubview:mainView];
+        
+        [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
+    } else {
+        
+        subviewArray = [[NSBundle mainBundle] loadNibNamed:@"Symbols-iPhone4" owner:self options:nil];
+        mainView = [subviewArray objectAtIndex:0];
+        [layerScrollView addSubview:mainView];
+        
+        [layerScrollView setContentSize:CGSizeMake(mainView.frame.size.width, [layerScrollView bounds].size.height)];
+    }
+    
+    mainView = [subviewArray objectAtIndex:0];
+    NSArray *bodersArray = mainView.subviews;
+    
 	for(int i=1;i<=113;i++) {
         
-		NSString* symbolName = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"symbol%d",i] ofType:@"png"];
-		UIImage *symbolImg =  [UIImage imageWithContentsOfFile:symbolName];
+		//NSString* symbolName = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"symbol%d",i] ofType:@"png"];
+		//UIImage *symbolImg =  [UIImage imageWithContentsOfFile:symbolName];
         
-		[symbolArray addObject:symbolImg];
+		//[symbolArray addObject:symbolImg];
 		
-		UIButton *symbolButton = [UIButton  buttonWithType:UIButtonTypeCustom];
-		symbolButton.frame =CGRectMake(0, 0,symbolScrollWidth, symbolScrollHeight);
+		//UIButton *symbolButton = [UIButton  buttonWithType:UIButtonTypeCustom];
+		//symbolButton.frame =CGRectMake(0, 0,symbolScrollWidth, symbolScrollHeight);
         
-        [symbolButton addTarget:self action:@selector(selectSymbol:) forControlEvents:UIControlEventTouchUpInside];
+        //[symbolButton addTarget:self action:@selector(selectSymbol:) forControlEvents:UIControlEventTouchUpInside];
         
-        [symbolButton setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
+        //[symbolButton setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
         
-		UIImageView *img = [[UIImageView alloc]initWithImage:symbolImg];
-		img.frame  = CGRectMake(symbolButton.frame.origin.x+5, symbolButton.frame.origin.y-2, symbolButton.frame.size.width-10, symbolButton.frame.size.height-7);
-		[symbolButton addSubview:img];
-		symbolButton.tag = i;
+		//UIImageView *img = [[UIImageView alloc]initWithImage:symbolImg];
+		//img.frame  = CGRectMake(symbolButton.frame.origin.x+5, symbolButton.frame.origin.y-2, symbolButton.frame.size.width-10, symbolButton.frame.size.height-7);
+		//[symbolButton addSubview:img];
+		//symbolButton.tag = i;
         
         
-        CGRect frame = symbolButton.frame;
-        frame.origin = CGPointMake(curXLoc, curYLoc);
-        symbolButton.frame = frame;
-        curXLoc += (symbolScrollWidth)+5;
+//        CGRect frame = symbolButton.frame;
+//        frame.origin = CGPointMake(curXLoc, curYLoc);
+//        symbolButton.frame = frame;
+//        curXLoc += (symbolScrollWidth)+5;
+//        
+//        if(IS_IPHONE_5){
+//            if(curXLoc >= 320){
+//                curXLoc = 0;
+//                curYLoc = curYLoc + symbolScrollHeight + 7;
+//            }
+//        }
+//        
+//        //Here we Hightlight Last Selected Image
+//        if (![LastTag isEqualToString:@""]) {
+//            
+//            if ([LastTag intValue] == i ) {
+//                
+//                // Add border to selected layer thumbnail
+//                [symbolButton.layer setCornerRadius:8];
+//                [symbolButton.layer setBorderWidth:3.0];
+//                UIColor * c = [globle colorWithHexString:@"0197dd"];
+//                [symbolButton.layer setBorderColor:c.CGColor];
+//            }
+//            
+//        }
         
-        if(IS_IPHONE_5){
-            if(curXLoc >= 320){
-                curXLoc = 0;
-                curYLoc = curYLoc + symbolScrollHeight + 7;
-            }
-        }
-        
-        //Here we Hightlight Last Selected Image
-        if (![LastTag isEqualToString:@""]) {
-            
-            if ([LastTag intValue] == i ) {
-                
-                // Add border to selected layer thumbnail
-                [symbolButton.layer setCornerRadius:8];
-                [symbolButton.layer setBorderWidth:3.0];
-                UIColor * c = [globle colorWithHexString:@"0197dd"];
-                [symbolButton.layer setBorderColor:c.CGColor];
-            }
-            
-        }
-        
-		[layerScrollView addSubview:symbolButton];
+		//[layerScrollView addSubview:symbolButton];
         
 	}//loop
     
-    if(IS_IPHONE_5){
-        [layerScrollView setContentSize:CGSizeMake(320, curYLoc + symbolScrollHeight)];
-    } else {
-        [layerScrollView setContentSize:CGSizeMake(([symbolArray count]*(symbolScrollWidth+5)), [layerScrollView bounds].size.height)];
-    }
+//    if(IS_IPHONE_5){
+//        [layerScrollView setContentSize:CGSizeMake(320, curYLoc + symbolScrollHeight)];
+//    } else {
+//        [layerScrollView setContentSize:CGSizeMake(([symbolArray count]*(symbolScrollWidth+5)), [layerScrollView bounds].size.height)];
+//    }
     
 
 }
@@ -1493,7 +1514,7 @@ int selectedAddMoreLayerTab = -1;
 /*
  * Called when select a symbol
  */
--(void)selectSymbol:(id)sender
+-(IBAction)selectSymbol:(id)sender
 {
     
     UIButton *view = sender;

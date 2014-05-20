@@ -478,6 +478,8 @@
 		20F93DD417B2262200F6F88C /* MainSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20F93DD217B2262200F6F88C /* MainSettingViewController.xib */; };
 		20FA7E721872AAF50057C3F3 /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20FA7E701872AAF50057C3F3 /* CameraViewController.m */; };
 		20FA7E731872AAF50057C3F3 /* CameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20FA7E711872AAF50057C3F3 /* CameraViewController.xib */; };
+		243DD521192B24B500391786 /* FlyerIcons.xib in Resources */ = {isa = PBXBuildFile; fileRef = 243DD520192B24B500391786 /* FlyerIcons.xib */; };
+		243DD523192B24CB00391786 /* FlyerIcons-iPhone4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 243DD522192B24CB00391786 /* FlyerIcons-iPhone4.xib */; };
 		24CAE4B5192A472F00CC4AEF /* Symbols.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24CAE4B4192A472F00CC4AEF /* Symbols.xib */; };
 		2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
 		30D58CFF10FB1BF800E0C7E8 /* icon0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 30D58C7810FB1BF800E0C7E8 /* icon0.jpg */; };
@@ -1376,6 +1378,8 @@
 		20FA7E6F1872AAF50057C3F3 /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
 		20FA7E701872AAF50057C3F3 /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CameraViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		20FA7E711872AAF50057C3F3 /* CameraViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraViewController.xib; sourceTree = "<group>"; };
+		243DD520192B24B500391786 /* FlyerIcons.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FlyerIcons.xib; sourceTree = "<group>"; };
+		243DD522192B24CB00391786 /* FlyerIcons-iPhone4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "FlyerIcons-iPhone4.xib"; sourceTree = "<group>"; };
 		24CAE4B4192A472F00CC4AEF /* Symbols.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Symbols.xib; sourceTree = "<group>"; };
 		26D73E02307543D994C6C8BE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -2694,7 +2698,6 @@
 		20F3597C1888DC8A001376B6 /* CreateFlyer */ = {
 			isa = PBXGroup;
 			children = (
-				24CAE4B4192A472F00CC4AEF /* Symbols.xib */,
 				2075A9921899EAB600F410FB /* FlyerlyCustomClasses */,
 				2046355F1895E47100A94C42 /* Models */,
 				204635661895F90900A94C42 /* Controller */,
@@ -2711,7 +2714,10 @@
 				2012ECAE1926078E00D5EA58 /* Sizes-iPhone4.xib */,
 				2012ECB219261B0F00D5EA58 /* Colours.xib */,
 				2012ECBA19261D0B00D5EA58 /* Colours-iPhone4s.xib */,
+				24CAE4B4192A472F00CC4AEF /* Symbols.xib */,
 				208D5AA2192A2B4A000CDB25 /* Symbols-iPhone4.xib */,
+				243DD520192B24B500391786 /* FlyerIcons.xib */,
+				243DD522192B24CB00391786 /* FlyerIcons-iPhone4.xib */,
 			);
 			name = CreateFlyer;
 			sourceTree = "<group>";
@@ -3301,6 +3307,7 @@
 				30D58D6610FB1BF800E0C7E8 /* Template41.jpg in Resources */,
 				30D58D6710FB1BF800E0C7E8 /* Template42.jpg in Resources */,
 				30D58D6810FB1BF800E0C7E8 /* Template43.jpg in Resources */,
+				243DD523192B24CB00391786 /* FlyerIcons-iPhone4.xib in Resources */,
 				30D58D6910FB1BF800E0C7E8 /* Template44.jpg in Resources */,
 				30D58D6A10FB1BF800E0C7E8 /* Template45.jpg in Resources */,
 				30D58D6B10FB1BF800E0C7E8 /* Template46.jpg in Resources */,
@@ -3309,6 +3316,7 @@
 				30D58D6E10FB1BF800E0C7E8 /* Template49.jpg in Resources */,
 				30D58D6F10FB1BF800E0C7E8 /* Template5.jpg in Resources */,
 				30D58D7010FB1BF800E0C7E8 /* Template50.jpg in Resources */,
+				243DD521192B24B500391786 /* FlyerIcons.xib in Resources */,
 				30D58D7110FB1BF800E0C7E8 /* Template51.jpg in Resources */,
 				30D58D7210FB1BF800E0C7E8 /* Template52.jpg in Resources */,
 				30D58D7310FB1BF800E0C7E8 /* Template53.jpg in Resources */,
@@ -4030,8 +4038,8 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				PREBINDING = NO;
-				PROVISIONING_PROFILE = "329B085E-B96D-4173-B65F-543FD6E47596";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "329B085E-B96D-4173-B65F-543FD6E47596";
+				PROVISIONING_PROFILE = "FEA7F04F-1640-4F76-B084-8BD1855BFF9D";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "FEA7F04F-1640-4F76-B084-8BD1855BFF9D";
 				SDKROOT = iphoneos;
 			};
 			name = "Ad Hoc";
@@ -4067,8 +4075,8 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = Flyr;
-				PROVISIONING_PROFILE = "329B085E-B96D-4173-B65F-543FD6E47596";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "329B085E-B96D-4173-B65F-543FD6E47596";
+				PROVISIONING_PROFILE = "FEA7F04F-1640-4F76-B084-8BD1855BFF9D";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "FEA7F04F-1640-4F76-B084-8BD1855BFF9D";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 armv7s";
@@ -4113,7 +4121,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = Flyr;
-				PROVISIONING_PROFILE = "38CE66CF-977C-4A18-8799-F2B061BE73D4";
+				PROVISIONING_PROFILE = "BFAFAACA-09D6-40BD-8B17-15886C14AF32";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 armv7s";
@@ -4127,7 +4135,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Green Mtn Labs Inc (4MGKP9P5WH)";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4150,8 +4158,8 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = Flyr;
-				PROVISIONING_PROFILE = "329B085E-B96D-4173-B65F-543FD6E47596";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "329B085E-B96D-4173-B65F-543FD6E47596";
+				PROVISIONING_PROFILE = "FEA7F04F-1640-4F76-B084-8BD1855BFF9D";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "FEA7F04F-1640-4F76-B084-8BD1855BFF9D";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 armv7s";
@@ -4174,8 +4182,8 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "";
 				PREBINDING = NO;
-				PROVISIONING_PROFILE = "38CE66CF-977C-4A18-8799-F2B061BE73D4";
-				"PROVISIONING_PROFILE[sdk=iphoneos7.0]" = "38CE66CF-977C-4A18-8799-F2B061BE73D4";
+				PROVISIONING_PROFILE = "BFAFAACA-09D6-40BD-8B17-15886C14AF32";
+				"PROVISIONING_PROFILE[sdk=iphoneos7.0]" = "BFAFAACA-09D6-40BD-8B17-15886C14AF32";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -4196,8 +4204,8 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				PREBINDING = NO;
-				PROVISIONING_PROFILE = "329B085E-B96D-4173-B65F-543FD6E47596";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "329B085E-B96D-4173-B65F-543FD6E47596";
+				PROVISIONING_PROFILE = "FEA7F04F-1640-4F76-B084-8BD1855BFF9D";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "FEA7F04F-1640-4F76-B084-8BD1855BFF9D";
 				SDKROOT = iphoneos;
 			};
 			name = Release;
