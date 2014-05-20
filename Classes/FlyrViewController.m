@@ -7,11 +7,13 @@
 //
 
 #import "FlyrViewController.h"
+#import "UserPurchases.h"
 
 
 @implementation FlyrViewController
 
-@synthesize tView,searchTextField,flyerPaths;
+NSMutableArray *productArray;
+@synthesize tView,searchTextField,flyerPaths,inAppPurchasePanel;
 
 #pragma mark  View Methods
 
@@ -30,6 +32,13 @@
     [searchTextField setBorderStyle:UITextBorderStyleRoundedRect];
     
     
+    inAppPurchasePanel = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.origin.y, 320,400 )];
+    inappviewcontroller = [[InAppPurchaseViewController alloc] initWithNibName:@"InAppPurchaseViewController" bundle:nil];
+    
+    inAppPurchasePanel = inappviewcontroller.view;
+    inAppPurchasePanel.hidden = YES;
+    [self.view addSubview:inAppPurchasePanel];
+    
 	[self.tView setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
 	tView.dataSource = self;
 	tView.delegate = self;
@@ -40,12 +49,12 @@
     searchTextField.borderStyle = nil;
     
     lockFlyer = YES;
-    
 
 
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    
     [super viewWillAppear:animated];
     searching = NO;
     searchTextField.text = @"";
@@ -75,10 +84,14 @@
     //HERE WE GET USER PURCHASES INFO FROM PARSE
     if(![[NSUserDefaults standardUserDefaults] stringForKey:@"InAppPurchases"]){
         
-        NSMutableDictionary *oldPurchases = [[NSUserDefaults standardUserDefaults] valueForKey:@"InAppPurchases"];
+        FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+        UserPurchases *userPurchases_ = appDelegate.userPurchases;
+        //NSMutableDictionary *oldPurchases =  userPurchases_.oldPurchases;//[[NSUserDefaults standardUserDefaults] valueForKey:@"InAppPurchases"];
+       
         
-        if ([oldPurchases objectForKey:@"comflyerlyAllDesignBundle"] ||  [oldPurchases objectForKey:@"comflyerlyUnlockSavedFlyers"]) {
-        
+        if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
+            [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
+            
             lockFlyer = NO;
             [self.tView reloadData];
         }
@@ -251,28 +264,6 @@
 }
 
 
-/*
- * Here we update info to Parse account
- */
--(void)updateParse {
-    
-    //HERE WE UPDATE PARSE ACCOUNT
-    PFUser *user = [PFUser currentUser];
-    PFQuery *query = [PFQuery queryWithClassName:@"InApp"];
-    [query whereKey:@"user" equalTo:user];
-    [query getFirstObjectInBackgroundWithBlock:^(PFObject *InApp, NSError *error) {
-        
-        InApp[@"json"] = [[NSUserDefaults standardUserDefaults]objectForKey:@"InAppPurchases"];
-        [InApp saveInBackground];
-        lockFlyer = NO;
-        [self.tView reloadData];
-        [self hideLoadingIndicator];
-        
-    }];
-    
-    [[RMStore defaultStore] removeStoreObserver:self];
-
-}
 
 /*
  * Here we get All Flyers Directories
@@ -321,6 +312,8 @@
 }
 
 
+
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *cellId = @"Cell";
@@ -339,7 +332,7 @@
             
             flyer = [[Flyer alloc] initWithPath:[searchFlyerPaths objectAtIndex:indexPath.row]];
             [cell renderCell:flyer LockStatus:lockFlyer];
-            [cell.flyerLock addTarget:self action:@selector(requestProduct) forControlEvents:UIControlEventTouchUpInside];
+            [cell.flyerLock addTarget:self action:@selector(openPanel) forControlEvents:UIControlEventTouchUpInside];
 
             
         });
@@ -354,7 +347,7 @@
             
             flyer = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:indexPath.row]];
             [cell renderCell:flyer LockStatus:lockFlyer];
-            [cell.flyerLock addTarget:self action:@selector(requestProduct) forControlEvents:UIControlEventTouchUpInside];
+            [cell.flyerLock addTarget:self action:@selector(openPanel) forControlEvents:UIControlEventTouchUpInside];
             
         });
 
@@ -423,244 +416,174 @@
 	[tableView reloadData];
 }
 
-
-#pragma mark  PURCHASE PRODUCT
-
--(void)requestProduct {
-    
-    if ([FlyerlySingleton connected]) {
- 
-        if (sheetAlreadyOpen)return;
-
-        //Check For Crash Maintain
-        cancelRequest = NO;
-        
-        [self showLoadingIndicator];
-        sheetAlreadyOpen =YES;
-        //These are over Products on App Store
-        NSSet *products = [NSSet setWithArray:@[@"com.flyerly.AllDesignBundle",@"com.flyerly.UnlockSavedFlyers"]];
-        
-        [[RMStore defaultStore] requestProducts:products success:^(NSArray *products, NSArray *invalidProductIdentifiers) {
-            
-            if (cancelRequest) return ;
-               
-            NSLog(@"Products loaded");
-            
-            requestedProducts = products;
-            bool disablePurchase = ([[PFUser currentUser] sessionToken].length == 0);
-            
-            NSString *sheetTitle = @"Choose Product";
-            
-            if (disablePurchase) {
-                sheetTitle = @"This feature requires Sign In";
-            }
-            
-            UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:sheetTitle delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles: nil];
-            
-            int index = -1;
-        
-            for(SKProduct *product in products)
-            {
-                
-                index = [actionSheet addButtonWithTitle:[NSString stringWithFormat:@"%@ - %@",product.localizedTitle, product.priceAsString]];
-                
-                // Disabling the in app purchase buttons
-                if( disablePurchase ) {
-                    ((UIButton*)[[actionSheet subviews] objectAtIndex:index+1]).enabled = NO;
-                }
-            }
-            
-            index = [actionSheet addButtonWithTitle:@"Restore Purchase"];
-        
-            // Also disable restore purchase b utton and add sign in button
-            if( disablePurchase ) {
-                ((UIButton*)[[actionSheet subviews] objectAtIndex:index+1]).enabled = NO;
-                [actionSheet addButtonWithTitle:@"Sign In"];
-            }
-            
-            [actionSheet addButtonWithTitle:@"Cancel"];
-            
-            [actionSheet showInView:self.view];
-            [self hideLoadingIndicator];
-            sheetAlreadyOpen = NO;
-            
-        } failure:^(NSError *error) {
-            NSLog(@"Something went wrong");
-        }];
-    } else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You're not connected to the internet. Please connect and retry." message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-            
-        [alert show];
-        [self hideLoadingIndicator];
-    
-    }
-}
-
-
-/* HERE WE PURCHASE PRODUCT FROM APP STORE
- */
--(void)purchaseProductID:(NSString *)pid{
-
-    [self showLoadingIndicator];
-    
-    [[RMStore defaultStore] addPayment:pid success:^(SKPaymentTransaction *transaction) {
-        
-        
-        NSLog(@"Product purchased");
-        
-        NSString *strWithOutDot = [pid stringByReplacingOccurrencesOfString:@"." withString:@""];
-        
-        if(![[NSUserDefaults standardUserDefaults] stringForKey:@"InAppPurchases"]){
-            
-            NSMutableDictionary *userPurchase =[[NSMutableDictionary alloc] initWithDictionary:[[NSUserDefaults standardUserDefaults]valueForKey:@"InAppPurchases"]];
-            
-            [userPurchase setValue:@"1" forKey:strWithOutDot];
-            [[NSUserDefaults standardUserDefaults]setValue:userPurchase forKey:@"InAppPurchases"];
-            
-        
-        }else {
-            NSMutableDictionary *userPurchase =[[NSMutableDictionary alloc] init];
-            [userPurchase setValue:@"1" forKey:strWithOutDot];
-            [[NSUserDefaults standardUserDefaults]setValue:userPurchase forKey:@"InAppPurchases"];
-        
-        }
-
-        //Saved in Parse Account
-        [self updateParse];
-        
-    } failure:^(SKPaymentTransaction *transaction, NSError *error) {
-        
-        NSLog(@"Something went wrong");
-        
-    }];
-}
-
-- (void)storeProductsRequestFailed:(NSNotification*)notification {
-    NSError *error = notification.storeError;
-    NSLog(@"%@", error);
-}
-
-- (void)storeProductsRequestFinished:(NSNotification*)notification {
-    //NSArray *products = notification.products;
-}
-
-
 /**
  * clickedButtonAtIndex (UIActionSheet)
  *
  * Handle the button clicks from mode of getting out selection.
  */
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+//- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+//    
+//        //if not cancel and Restore button presses
+//        if(buttonIndex != 2 && buttonIndex != 3) {
+//            
+//            //Checking if the user is valid or anonymus
+//            if ([[PFUser currentUser] sessionToken].length != 0) {
+//                
+//                //This line pop up login screen if user not exist
+//                [[RMStore defaultStore] addStoreObserver:self];
+//                
+//                //Getting Selected Product
+//                SKProduct *product = [requestedProducts objectAtIndex:buttonIndex];
+//                [self purchaseProductID:product.productIdentifier];
+//            }
+//        }
+//    
+//    // checking user is anonymous or not
+//    if ([[PFUser currentUser] sessionToken].length != 0) {
+//        //For Restore Purchase
+//        if( buttonIndex == 2 ) {
+//            [self restorePurchase];
+//        }
+//    
+//    // if user is anonymous
+//    }else {
+//         if ( buttonIndex == 3 ) {
+//            
+//            NSLog(@"Sign In was selected.");
+//            signInController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
+//            
+//            FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+//            signInController.launchController = appDelegate.lauchController;
+//            
+//            __weak FlyrViewController *weakFlyrViewController = self;
+//            
+//            signInController.signInCompletion = ^void(void) {
+//                NSLog(@"Sign In via In App");
+//                
+//                UINavigationController* navigationController = weakFlyrViewController.navigationController;
+//                [navigationController popViewControllerAnimated:NO];
+//                
+//                // Showing action sheet after succesfull sign in
+//                [weakFlyrViewController requestProduct];
+//                
+//            };
+//             
+//            [self.navigationController pushViewController:signInController animated:YES];
+//            
+//        }
+//    }
+//    
+//}
+
+
+- ( void )productSuccesfullyPurchased: (NSString *)productId {
     
-        //if not cancel and Restore button presses
-        if(buttonIndex != 2 && buttonIndex != 3) {
-            
-            //Checking if the user is valid or anonymus
-            if ([[PFUser currentUser] sessionToken].length != 0) {
-                
-                //This line pop up login screen if user not exist
-                [[RMStore defaultStore] addStoreObserver:self];
-                
-                //Getting Selected Product
-                SKProduct *product = [requestedProducts objectAtIndex:buttonIndex];
-                [self purchaseProductID:product.productIdentifier];
-            }
-        }
-    
-    // checking user is anonymous or not
-    if ([[PFUser currentUser] sessionToken].length != 0) {
-        //For Restore Purchase
-        if( buttonIndex == 2 ) {
-            [self restorePurchase];
-        }
-    
-    // if user is anonymous
-    }else {
-         if ( buttonIndex == 3 ) {
-            
-            NSLog(@"Sign In was selected.");
-            signInController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
-            
-            FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-            signInController.launchController = appDelegate.lauchController;
-            
-            __weak FlyrViewController *weakFlyrViewController = self;
-            
-            signInController.signInCompletion = ^void(void) {
-                NSLog(@"Sign In via In App");
-                
-                UINavigationController* navigationController = weakFlyrViewController.navigationController;
-                [navigationController popViewControllerAnimated:NO];
-                
-                // Showing action sheet after succesfull sign in
-                [weakFlyrViewController requestProduct];
-                
-            };
-             
-            [self.navigationController pushViewController:signInController animated:YES];
-            
-        }
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    UserPurchases *userPurchases_ = appDelegate.userPurchases;
+    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
+        [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
+        
+        lockFlyer = NO;
+        [self.tView reloadData];
     }
     
 }
+- ( void )inAppPurchasePanelContent {
+    
+    [inappviewcontroller.contentLoaderIndicatorView stopAnimating];
+    inappviewcontroller.contentLoaderIndicatorView.hidden = YES;
+    [inappviewcontroller inAppDataLoaded];
+}
 
-#pragma mark  RESTORE PURCHASE
-
-/* HERE WE RESTORE PURCHASE PRODUCT FROM APP STORE
+/*
+ * Here we Open InAppPurchase Panel
  */
--(void)restorePurchase {
+-(void)openPanel {
     
-    //This line pop up login screen if user not exist
-    [[RMStore defaultStore] addStoreObserver:self];
+    inappviewcontroller.buttondelegate = self;
     
-    [[RMStore defaultStore] restoreTransactionsOnSuccess:^{
+    if ( productArray.count == 0 ){
+        [inappviewcontroller requestProduct];
+    }
+
+    inAppPurchasePanel.hidden = NO;
+    [inAppPurchasePanel removeFromSuperview];
+
+    if ([flyer isVideoFlyer]) {
+        inappviewcontroller = [[InAppPurchaseViewController alloc] initWithNibName:@"InAppPurchaseViewController" bundle:nil];
         
-        //HERE WE GET SHARED INTANCE OF _persistence WHICH WE LINKED IN FlyrAppDelegate
+    } else {
+        inappviewcontroller = [[InAppPurchaseViewController alloc] initWithNibName:@"InAppPurchaseViewController" bundle:nil];
+    }
+    inAppPurchasePanel = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.origin.y, 320,400 )];
+
+    //inAppPurchasePanel = shareviewcontroller.view;
+    inAppPurchasePanel = inappviewcontroller.view;
+    [self.view addSubview:inAppPurchasePanel];
+    inappviewcontroller.buttondelegate = self;
+    inappviewcontroller.Yvalue = [NSString stringWithFormat:@"%f",self.view.frame.size.height];
+
+    //Create Animation Here
+    [inAppPurchasePanel setFrame:CGRectMake(0, self.view.frame.size.height, 320,265 )];
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.4f];
+    [inAppPurchasePanel setFrame:CGRectMake(0, self.view.frame.size.height - 265, 320,265 )];
+    [UIView commitAnimations];
+    if( productArray.count != 0 ) {
+        
+        [inappviewcontroller.contentLoaderIndicatorView stopAnimating];
+        inappviewcontroller.contentLoaderIndicatorView.hidden = YES;
+    }
+}
+
+- (void)inAppPurchasePanelButtonTappedWasPressed:(NSString *)inAppPurchasePanelButtonCurrentTitle {
+    
+    __weak InAppPurchaseViewController *inappviewcontroller_ = inappviewcontroller;
+    if ([inAppPurchasePanelButtonCurrentTitle isEqualToString:(@"Sign In")]) {
+        // Put code here for button's intended action.
+        NSLog(@"Sign In was selected.");
+        
+        signInController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
+        
         FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-        NSArray *productIdentifiers = [[appDelegate._persistence purchasedProductIdentifiers] allObjects];
-
-        if (productIdentifiers.count >= 1) {
-            
-            [self showLoadingIndicator];
-            
-            NSMutableDictionary *userPurchase;
-            if(![[NSUserDefaults standardUserDefaults] stringForKey:@"InAppPurchases"]){
-                userPurchase =[[NSMutableDictionary alloc] initWithDictionary:[[NSUserDefaults standardUserDefaults]valueForKey:@"InAppPurchases"]];
-            }else {
-                userPurchase =[[NSMutableDictionary alloc] init];
-            }
-            
-            for (int i = 0; i < productIdentifiers.count; i++) {
-                
-                NSString *strWithOutDot = [[productIdentifiers objectAtIndex:i] stringByReplacingOccurrencesOfString:@"." withString:@""];
-                 [userPurchase setValue:@"1" forKey:strWithOutDot];
-            }
-            
-            [[NSUserDefaults standardUserDefaults]setValue:userPurchase forKey:@"InAppPurchases"];
-            [self updateParse];
-        }
+        signInController.launchController = appDelegate.lauchController;
         
-        NSLog(@"Transactions restored");
-    } failure:^(NSError *error) {
-        NSLog(@"Something went wrong");
-    }];
+        __weak FlyrViewController *flyrViewController = self;
+        __weak UserPurchases *userPurchases_ = appDelegate.userPurchases;
+        userPurchases_.delegate = self;
+        
+        signInController.signInCompletion = ^void(void) {
+            NSLog(@"Sign In via In App");
+            
+            UINavigationController* navigationController = flyrViewController.navigationController;
+            [navigationController popViewControllerAnimated:NO];
+            
+            [inappviewcontroller_.inAppPurchasePanelButton setTitle:@"RESTORE PURCHASES"];
+            // Showing action sheet after succesfull sign in
+            [userPurchases_ setUserPurcahsesFromParse];
+        };
+        
+        [self.navigationController pushViewController:signInController animated:YES];
+    }else if ([inAppPurchasePanelButtonCurrentTitle isEqualToString:(@"RESTORE PURCHASES")]){
+        //[inappviewcontroller_ restorePurchase];
+    }
 }
 
-- (void)storeRestoreTransactionsFailed:(NSNotification*)notification;
-{
- //   NSError *error = notification.storeError;
+- (void) userPurchasesLoaded {
+    
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    UserPurchases *userPurchases_ = appDelegate.userPurchases;
+    
+    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]  ||
+        [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
+        
+        NSLog(@"Sample,key found");
+        lockFlyer = NO;
+        [self.tView reloadData];
+        [inappviewcontroller.tView reloadData];
+    }
+
 }
-
-- (void)storeRestoreTransactionsFinished:(NSNotification*)notification {}
-
-#pragma mark RMStoreObserver
-
-- (void)storePaymentTransactionFinished:(NSNotification*)notification
-{
-
-
-}
-
 
 @end
 

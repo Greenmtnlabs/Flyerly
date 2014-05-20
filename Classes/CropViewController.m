@@ -87,11 +87,6 @@
     
     // Use the image from filters for cropping.
     [self.filterView setImage:self.image];
-    
-    
- 
-
-//    self.filterView.image = self.image;
  
     // Make sure the filters are visible. Get the current height based on
     // navigation bar status and device height.
@@ -105,8 +100,13 @@
     
     [super viewDidLoad];
     
-    //Testing
-    //[self.filterView.filterSlideView setObject:self.filters];
+    // By default the auto filter is selected.
+    for ( NBUFilter *filter in self.filters) {
+        if ( filter.type == NBUFilterTypeAuto ) {
+            self.filterView.currentFilter = filter;
+            break;
+        }
+    }
 }
 
 #pragma - Button Event Handlers

@@ -8,6 +8,7 @@
 #import "ParentViewController.h"
 #import "FlyerlySingleton.h"
 #import "Reachability.h"
+#import "UserPurchases.h"
 #import "Flyer.h"
 #import "FlyerImageView.h"
 
@@ -25,6 +26,7 @@
 	FlyrViewController *tpController;
 	InviteFriendsController *addFriendsController;
     FlyerlySingleton *globle;
+    UserPurchases *userPurchases;
 
     IBOutlet UIButton *setBotton;
     Flyer *flyer;

@@ -1,3 +1,4 @@
+
 //
 //  CustomAssets.m
 //  Flyr
@@ -6,6 +7,7 @@
 //
 //
 
+#import "FlyrAppDelegate.h"
 #import "CustomAssets.h"
 
 @implementation CustomAssets
@@ -22,8 +24,23 @@
     
     //Here we Check Content is Video Or Image
     if ( asset.type == NBUAssetTypeVideo) {
-        
         videoIcon.alpha = 1;
+        
+        FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+        UserPurchases *userPurchases_ = appDelegate.userPurchases;
+        
+        if ([[PFUser currentUser] sessionToken].length != 0) {
+            
+            if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
+                 [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"] ) {
+                
+                UIImage *image = [UIImage imageNamed: @"ModeVideo.png"];
+                videoIcon.image = image;
+            }
+            
+        }
+        
+        
     }else {
         videoIcon.alpha = 0;
     }
