@@ -8,13 +8,13 @@
 
 @protocol inAppPurchasePanelButtonProtocol
 
-- (void)inAppPurchasePanelButtonTappedWasPressed:(NSString *)inAppPurchasePanelButtonCurrentTitle;
+-(void)inAppPurchasePanelButtonTappedWasPressed:(NSString *)inAppPurchasePanelButtonCurrentTitle;
 
-- (void)inAppPurchasePanelContent;
+-(void)inAppPurchasePanelContent;
 
--( void )productSuccesfullyPurchased: (NSString *)productId;
+-(void)productSuccesfullyPurchased:(NSString *)productId;
 
-- (void)purchaseProductAtIndex : (int *)index;
+//-(void)purchaseProductAtIndex:(int)index;
 
 @end
 

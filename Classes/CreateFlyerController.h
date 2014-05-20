@@ -183,6 +183,7 @@
 -(IBAction)selectSize:(id)sender;
 -(IBAction)selectColor:(id)sender;
 -(IBAction)selectSymbol:(id)sender;
+-(IBAction)selectIcon:(id)sender;
 -(IBAction)selectFontBorder:(id)sender;
 -(IBAction)setlibPhotoTabAction:(id) sender;
 -(IBAction)play:(id)sender;

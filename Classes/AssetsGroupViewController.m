@@ -230,6 +230,73 @@ NSMutableArray *productArray;
     [inappviewcontroller inAppDataLoaded];
 }
 
+- ( void )productSuccesfullyPurchased: (NSString *)productId {
+    
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    UserPurchases *userPurchases_ = appDelegate.userPurchases;
+    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
+        [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
+        
+        //UIImage *buttonImage = [UIImage imageNamed:@"ModeVideo.png"];
+        //[mode setImage:buttonImage forState:UIControlStateNormal];
+    }
+    
+}
+
+
+- (void) userPurchasesLoaded {
+    
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    UserPurchases *userPurchases_ = appDelegate.userPurchases;
+    
+    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]  ||
+        [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
+        
+        NSLog(@"Sample,key found");
+        productPurchased = YES;
+        UIImage *buttonImage = [UIImage imageNamed:@"ModeVideo.png"];
+        //[mode setImage:buttonImage forState:UIControlStateNormal];
+        //[mode setImage:[UIImage imageNamed:@"ModeVideo.png"] forState:UIControlStateHighlighted];
+        [inappviewcontroller.tView reloadData];
+    }
+    
+}
+
+
+
+- (void)inAppPurchasePanelButtonTappedWasPressed:(NSString *)inAppPurchasePanelButtonCurrentTitle {
+    
+    __weak InAppPurchaseViewController *inappviewcontroller_ = inappviewcontroller;
+    if ([inAppPurchasePanelButtonCurrentTitle isEqualToString:(@"Sign In")]) {
+        // Put code here for button's intended action.
+        NSLog(@"Sign In was selected.");
+        
+        signInController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
+        
+        FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+        signInController.launchController = appDelegate.lauchController;
+        
+        __weak AssetsGroupViewController *assetsGroupViewController = self;
+        __weak UserPurchases *userPurchases_ = appDelegate.userPurchases;
+        userPurchases_.delegate = self;
+        
+        signInController.signInCompletion = ^void(void) {
+            NSLog(@"Sign In via In App");
+            
+            UINavigationController* navigationController = assetsGroupViewController.navigationController;
+            [navigationController popViewControllerAnimated:NO];
+            
+            [inappviewcontroller_.inAppPurchasePanelButton setTitle:@"RESTORE PURCHASES"];
+            // Showing action sheet after succesfull sign in
+            [userPurchases_ setUserPurcahsesFromParse];
+        };
+        
+        [self.navigationController pushViewController:signInController animated:YES];
+    }else if ([inAppPurchasePanelButtonCurrentTitle isEqualToString:(@"RESTORE PURCHASES")]){
+        //[inappviewcontroller_ restorePurchase];
+    }
+}
+
 
 /*
  * Here we Open InAppPurchase Panel
