@@ -391,16 +391,10 @@ int selectedAddMoreLayerTab = -1;
     imgPickerFlag =1;
     
     [templateArray removeAllObjects];
-    int tempelateCount = 0;
     
     //Delete SubViews From ScrollView
     [self deleteSubviewsFromScrollView];
     
-    CGFloat curXLoc = 0;
-    CGFloat curYLoc = 5;
-    
-    if(IS_IPHONE_5)
-        curYLoc = 10;
     
     //[layerScrollView addSubview:tempelateView];
     

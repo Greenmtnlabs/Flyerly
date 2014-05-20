@@ -55,7 +55,6 @@
 -(void)goBack;
 -(NSMutableArray *)getFlyersPaths;
 -(IBAction)createFlyer:(id)sender;
--(void)purchaseProductID:(NSString *)pid;
 
 
 @end
