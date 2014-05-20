@@ -76,7 +76,7 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">ModeVideo.png</string>
+							<string key="NSResourceName">ModeVideowithLock.png</string>
 						</object>
 					</object>
 				</array>
@@ -195,7 +195,7 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="ModeVideo.png">{60, 60}</string>
+			<string key="ModeVideowithLock.png">{60, 60}</string>
 			<string key="NBUImagePicker.bundle/checkmark.png">{30, 30}</string>
 			<string key="NBUImagePicker.bundle/image_notloaded.png">{30, 30}</string>
 		</dictionary>

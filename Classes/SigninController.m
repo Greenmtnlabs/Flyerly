@@ -365,10 +365,10 @@
 // return the Sign In succes status
 - (void) onSignInSuccess {
     
+    [FlyerUser mergeAnonymousUser];
+    
     if (signInCompletion) {
         signInCompletion();
-        [FlyerUser mergeAnonymousUser];
-        
     }
     
 }

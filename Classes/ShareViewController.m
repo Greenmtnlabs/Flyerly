@@ -65,19 +65,7 @@
     descriptionView.delegate = self;
     
     [self.view addSubview:descriptionView];
-
 }
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-    [self setSocialStatus];
-
-    titleView.text = [flyer getFlyerTitle];
-    descriptionView.text = [flyer getFlyerDescription];
-    selectedFlyerDescription = descriptionView.text;
-    
-}
-
 
 - (void)viewDidAppear:(BOOL)animated {
     
@@ -90,6 +78,18 @@
         [titleViewBorder.layer removeAllAnimations];
         
     }
+
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self setSocialStatus];
+
+    titleView.text = [flyer getFlyerTitle];
+    descriptionView.text = [flyer getFlyerDescription];
+    selectedFlyerDescription = descriptionView.text;
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -225,7 +225,12 @@
         [emailButton setSelected:NO];
     }
     
-    
+    status = [flyer getYouTubeStatus];
+    if([status isEqualToString:@"1"]){
+        [youTubeButton setSelected:YES];
+    }else{
+        [youTubeButton setSelected:NO];
+    }
     
     BOOL MsgStatus = [MFMessageComposeViewController respondsToSelector:@selector(canSendAttachments)];
     
@@ -360,7 +365,7 @@
  * Called when clicked on title text field
  */
 - (void)textFieldTapped:(id)sender {
-    
+
     [titleViewBorder.layer removeAllAnimations];
     [titleView setReturnKeyType:UIReturnKeyDone];
 }
@@ -632,6 +637,9 @@
     } else if ( [sharer isKindOfClass:[SHKTextMessage class]] == YES ) {
         
         smsButton.enabled = NO;
+    } else if ( [sharer isKindOfClass:[YouTubeSubClass class]] == YES ) {
+    
+        youTubeButton.enabled = NO;
     }
     
 	if (!sharer.quiet)
@@ -685,6 +693,7 @@
 
     } else if ( [sharer isKindOfClass:[YouTubeSubClass class]] == YES ) {
         
+        youTubeButton.enabled = YES;
         YouTubeSubClass *youtube = (YouTubeSubClass *) sharer;
         
         // Save Link In .Text File of Flyer

@@ -19,14 +19,21 @@
 //
 #import <NBUImagePicker/NBUAssetsGroupViewController.h>
 #import <AssetsLibrary/AssetsLibrary.h>
+#import "InAppPurchaseViewController.h"
 #import "NBUImagePickerPrivate.h"
 
 @class ObjectGridView, NBUAssetsGroup;
-@interface AssetsGroupViewController : NBUAssetsGroupViewController 
+@interface AssetsGroupViewController : NBUAssetsGroupViewController <inAppPurchasePanelButtonProtocol, UserPurchasesDelegate> {
+    
+    InAppPurchaseViewController *inappviewcontroller;
+    UserPurchases *userPurchases;
+}
 
 @property CGSize desiredImageSize;
 @property (nonatomic, copy) void (^onImageTaken)(UIImage *);
 @property (nonatomic, copy) void (^onVideoFinished)(NSURL *);
+@property (nonatomic, strong) UIView *inAppPurchasePanel;
+
 
 
 @property (strong, nonatomic) NSString *videoAllow;

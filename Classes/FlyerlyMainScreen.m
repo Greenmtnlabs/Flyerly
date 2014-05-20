@@ -10,6 +10,7 @@
 #import "FlyrAppDelegate.h"
 #import "ShareViewController.h"
 #import "Common.h"
+#import "UserPurchases.h"
 #import "HelpController.h"
 #import "Flurry.h"
 #import "SHKConfiguration.h"
@@ -302,10 +303,14 @@
     //Checking if the user is valid or anonymus
     if ([[PFUser currentUser] sessionToken]) {
         
+        FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+        userPurchases = appDelegate.userPurchases;
+        
         //GET UPDATED USER PUCHASES INFO
-        [self getUserPurcahses];
+        [userPurchases setUserPurcahsesFromParse];
+        
     } else {
-        NSLog(@"Anonymous user is NOT authenticated.");
+        NSLog(@"Anonymous,User is NOT authenticated.");
     }
     
 }
@@ -387,50 +392,5 @@
     [alert show];
 }
 
-/*
- * HERE WE GET USER PURCHASES INFO FROM PARSE
- */
--(void)getUserPurcahses {
-
-    // HERE WE GET USER PURCHASES DETAIL
-    if(![[NSUserDefaults standardUserDefaults] objectForKey:@"InAppPurchases"]){
-        
-        //Getting Current User
-        PFUser *user = [PFUser currentUser];
-        
-        //Return on User not exists OR if session tokken is null(current user is anonyumous)
-        if (user == nil || [[user sessionToken] length] == 0)return;
-        
-        //Create query for get user purchases
-        PFQuery *query = [PFQuery queryWithClassName:@"InApp"];
-        
-        //define criteria
-        [query whereKey:@"user" equalTo:user];
-        
-        //run query on Parse
-
-        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-            
-            if (!error) {
-                
-                if (objects.count >= 1) {
-                    
-                    //Get required data
-
-                    NSMutableDictionary  *oldPurchases = [[objects objectAtIndex:0] valueForKey:@"json"];
-                    
-                    //its for remember key of InApp already copy to Device
-                    [[NSUserDefaults standardUserDefaults] setObject:oldPurchases forKey:@"InAppPurchases"];
-                    
-                }
-                // The find succeeded. The first 100 objects are available in objects
-            } else {
-                
-                // Log details of the failure
-                NSLog(@"Error: %@ %@", error, [error userInfo]);
-            }
-        }];
-    }
-}
 
 @end

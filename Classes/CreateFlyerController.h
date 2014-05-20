@@ -103,6 +103,10 @@
 
 
 
+//--------
+@property(nonatomic, strong) IBOutlet UIView *tempelateView;
+//---------
+
 // These are LibFlyer
 @property (nonatomic, strong) IBOutlet UIButton *addMoreFontTabButton;
 @property (nonatomic, strong)IBOutlet UIButton *addMorePhotoTabButton;
@@ -175,6 +179,11 @@
 -(IBAction)setAddMoreLayerTabAction:(id)sender;
 -(IBAction)setlibBackgroundTabAction:(id)sender;
 -(IBAction)setStyleTabAction:(id) sender;
+-(IBAction)selectFont:(id)sender;
+-(IBAction)selectSize:(id)sender;
+-(IBAction)selectColor:(id)sender;
+-(IBAction)selectSymbol:(id)sender;
+-(IBAction)selectFontBorder:(id)sender;
 -(IBAction)setlibPhotoTabAction:(id) sender;
 -(IBAction)play:(id)sender;
 -(IBAction)slide:(id)sender;
