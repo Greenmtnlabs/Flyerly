@@ -1705,8 +1705,7 @@ int selectedAddMoreLayerTab = -1;
 /*
  * Here we Load Gallery
  */
--(void)loadCustomPhotoLibrary :(NSString *)videoAllow {
-
+-(void)loadCustomPhotoLibrary :(BOOL)videoAllow {
 
     uiBusy = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     [uiBusy setFrame:CGRectMake(280, 5, 20, 20)];
@@ -1815,84 +1814,12 @@ int selectedAddMoreLayerTab = -1;
 }
 
 
-
-
-/*
- * Here we Open Camera for Capture Image
- */
--(void)openCustomCamera{
-
-
-    uiBusy = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-    [uiBusy setFrame:CGRectMake(280, 5, 20, 20)];
-    [uiBusy setColor:[UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0]];
-    uiBusy.hidesWhenStopped = YES;
-    [uiBusy startAnimating];
-    [self.view addSubview:uiBusy];
-    
-    CameraViewController *nbuCamera = [[CameraViewController alloc]initWithNibName:@"CameraViewController" bundle:nil];
-    
-    if ( imgPickerFlag == 2 ) {
-        NSDictionary *dict = [flyer getLayerFromMaster:currentLayer];
-        nbuCamera.desiredImageSize = CGSizeMake( [[dict valueForKey:@"width"] floatValue],
-                                                 [[dict valueForKey:@"height"] floatValue]);
-    } else {
-        nbuCamera.desiredImageSize = CGSizeMake( 300,  300 );
-    }
-    
-    __weak CreateFlyerController *weakSelf = self;
-    // Callback once image is selected.
-    [nbuCamera setOnImageTaken:^(UIImage *img) {
-        
-        [uiBusy stopAnimating];
-        [uiBusy removeFromSuperview];
-        dispatch_async( dispatch_get_main_queue(), ^{
-            // Do any UI operation here (render layer).
-            
-            if (weakSelf.imgPickerFlag == 2) {
-                
-                NSString *imgPath = [weakSelf getImagePathforPhoto:img];
-                
-                //Set Image to dictionary
-                [weakSelf.flyer setImagePath:weakSelf.currentLayer ImgPath:imgPath];
-                
-                //Here we Create ImageView Layer
-                [weakSelf.flyimgView renderLayer:weakSelf.currentLayer layerDictionary:[weakSelf.flyer getLayerFromMaster:weakSelf.currentLayer]];
-                
-                [weakSelf.flyimgView layerStoppedEditing:weakSelf.currentLayer];
-                [Flurry logEvent:@"Custom Photo"];
-                
-                weakSelf.imgPickerFlag = 1;
-                
-            }else{
-                
-                //Here we Set Flyer Type
-                [weakSelf.flyer setFlyerTypeImage];
-                
-                //Create Copy of Image
-                [weakSelf copyImageToTemplate:img];
-                
-                
-                //set template Image
-                [weakSelf.flyimgView setTemplate:[NSString stringWithFormat:@"Template/template.%@",IMAGETYPE ]];
-                [Flurry logEvent:@"Custom Background"];
-                
-            }
-        });
-    }];
-    
-    
-    [self.navigationController pushViewController:nbuCamera animated:YES];
-}
-
-
 #pragma mark Add Video
 /*
  * Here we Overload Open Camera for Video
  */
--(void)openCustomCamera :(BOOL)forVideo{
+-(void)openCustomCamera:(BOOL)forVideo {
     
-
     uiBusy = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     [uiBusy setFrame:CGRectMake(280, 5, 20, 20)];
     [uiBusy setColor:[UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0]];
@@ -1902,13 +1829,11 @@ int selectedAddMoreLayerTab = -1;
     
     CameraViewController *nbuCamera = [[CameraViewController alloc]initWithNibName:@"CameraViewController" bundle:nil];
     
-    //Here we Pass FlyerImageView For Video
-   // nbuCamera.flyerImageView = self.flyimgView;
-    
     nbuCamera.videoAllow = forVideo;
     nbuCamera.desiredImageSize = CGSizeMake( 300,  300 );
     
-      __weak CreateFlyerController *weakSelf = self;
+    __weak CreateFlyerController *weakSelf = self;
+    
     // Callback once image is selected.
     [nbuCamera setOnImageTaken:^(UIImage *img) {
         
@@ -1933,7 +1858,7 @@ int selectedAddMoreLayerTab = -1;
         
     }];
 
-        
+    // Call back for when video is selected.
     [nbuCamera setOnVideoFinished:^(NSURL *recvUrl) {
         
         [uiBusy stopAnimating];
@@ -3471,7 +3396,7 @@ int selectedAddMoreLayerTab = -1;
             
         }
         
-        [self loadCustomPhotoLibrary :@"YES"];
+        [self loadCustomPhotoLibrary:YES];
         
         //Add ContextView
         [self addScrollView:videoLabel];
@@ -3515,7 +3440,7 @@ int selectedAddMoreLayerTab = -1;
 	{
         imgPickerFlag =2;
         textBackgrnd.alpha = ALPHA0;
-        [self openCustomCamera];
+        [self openCustomCamera:NO];
 
     }
     else if( selectedButton == photoTabButton )
@@ -3531,7 +3456,7 @@ int selectedAddMoreLayerTab = -1;
             
         }
         
-        [self loadCustomPhotoLibrary :@"NO"];
+        [self loadCustomPhotoLibrary:NO];
 
         textBackgrnd.alpha = ALPHA0;
     }

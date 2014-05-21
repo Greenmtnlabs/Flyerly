@@ -13,5 +13,6 @@
 @property CGSize desiredVideoSize;
 @property (nonatomic, strong) NSURL *url;
 @property (nonatomic, copy) void (^onVideoFinished)(NSURL *);
+@property (nonatomic, copy) void (^onVideoCancel)();
 
 @end
