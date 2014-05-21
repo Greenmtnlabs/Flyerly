@@ -26,7 +26,7 @@
 @property (nonatomic, copy) void (^onVideoFinished)(NSURL *);
 @property (nonatomic, copy) void (^onVideoCancel)();
 
-@property (strong, nonatomic) NSString *videoAllow;
+@property BOOL videoAllow;
 
 
 

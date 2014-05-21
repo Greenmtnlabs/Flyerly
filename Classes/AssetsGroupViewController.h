@@ -36,7 +36,7 @@
 
 
 
-@property (strong, nonatomic) NSString *videoAllow;
+@property BOOL videoAllow;
 
 
 //required For Override

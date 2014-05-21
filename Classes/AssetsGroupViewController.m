@@ -293,7 +293,7 @@ NSMutableArray *productArray;
     NSUInteger totalCount;
    
     // Here we Check Selection For Photo or Background
-    if ([self.videoAllow isEqualToString:@"YES"]) {
+    if ( _videoAllow ) {
         totalCount = self.assetsGroup.assetsCount;
     } else {
         totalCount = self.assetsGroup.imageAssetsCount;
@@ -344,7 +344,7 @@ NSMutableArray *productArray;
         NBUAssetType *contentType;
 
         // Here we Check Selection For Photo or Background
-        if ([self.videoAllow isEqualToString:@"YES"]) {
+        if ( _videoAllow ) {
             contentType = NBUAssetTypeAny;
         } else {
             contentType = NBUAssetTypeImage;

@@ -631,6 +631,8 @@
 		49B88988188652A2003766AD /* FacebookLikeView.html in Resources */ = {isa = PBXBuildFile; fileRef = 49B88984188652A2003766AD /* FacebookLikeView.html */; };
 		49B88989188652A2003766AD /* FacebookLikeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B88985188652A2003766AD /* FacebookLikeView.m */; };
 		49B8898A188652A2003766AD /* NSData+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B88987188652A2003766AD /* NSData+Extras.m */; };
+		49F109D1192C7926002B0CD4 /* CropVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F109CF192C7926002B0CD4 /* CropVideoViewController.m */; };
+		49F109D2192C7926002B0CD4 /* CropVideoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F109D0192C7926002B0CD4 /* CropVideoViewController.xib */; };
 		6501CAF0173242FC00A89E59 /* Swiss_721_Black_Extended_BT.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6501CAEF173242FC00A89E59 /* Swiss_721_Black_Extended_BT.ttf */; };
 		6501CAF2173249C900A89E59 /* FlyerlyMainScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6501CAF1173249C900A89E59 /* FlyerlyMainScreen.xib */; };
 		6513C1961716C3DB00355FC3 /* cell_bg_first.png in Resources */ = {isa = PBXBuildFile; fileRef = 6513C1941716C3DB00355FC3 /* cell_bg_first.png */; };
@@ -1543,6 +1545,9 @@
 		49B88985188652A2003766AD /* FacebookLikeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookLikeView.m; sourceTree = "<group>"; };
 		49B88986188652A2003766AD /* NSData+Extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Extras.h"; sourceTree = "<group>"; };
 		49B88987188652A2003766AD /* NSData+Extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Extras.m"; sourceTree = "<group>"; };
+		49F109CE192C7926002B0CD4 /* CropVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CropVideoViewController.h; sourceTree = "<group>"; };
+		49F109CF192C7926002B0CD4 /* CropVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CropVideoViewController.m; sourceTree = "<group>"; };
+		49F109D0192C7926002B0CD4 /* CropVideoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CropVideoViewController.xib; sourceTree = "<group>"; };
 		6501CAEF173242FC00A89E59 /* Swiss_721_Black_Extended_BT.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Swiss_721_Black_Extended_BT.ttf; path = Data/fonts/Swiss_721_Black_Extended_BT.ttf; sourceTree = "<group>"; };
 		6501CAF1173249C900A89E59 /* FlyerlyMainScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FlyerlyMainScreen.xib; path = ../FlyerlyMainScreen.xib; sourceTree = "<group>"; };
 		6513C1941716C3DB00355FC3 /* cell_bg_first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cell_bg_first.png; sourceTree = "<group>"; };
@@ -2471,6 +2476,7 @@
 			children = (
 				20FA7E6E1872AAE10057C3F3 /* Camera */,
 				2032DCCC1871BDE1007036B2 /* CropImage */,
+				49F109CD192C78F6002B0CD4 /* CropVideo */,
 				2032DCCB1871BDCE007036B2 /* Gallery */,
 			);
 			name = NBU;
@@ -3093,6 +3099,16 @@
 			path = FacebookLikeView;
 			sourceTree = "<group>";
 		};
+		49F109CD192C78F6002B0CD4 /* CropVideo */ = {
+			isa = PBXGroup;
+			children = (
+				49F109CE192C7926002B0CD4 /* CropVideoViewController.h */,
+				49F109CF192C7926002B0CD4 /* CropVideoViewController.m */,
+				49F109D0192C7926002B0CD4 /* CropVideoViewController.xib */,
+			);
+			name = CropVideo;
+			sourceTree = "<group>";
+		};
 		6513C1AB1716FE0F00355FC3 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -3585,6 +3601,7 @@
 				0F80078B17537861000FF7FA /* symbol12.png in Resources */,
 				0F80078D17537861000FF7FA /* symbol13.png in Resources */,
 				0F80078F17537861000FF7FA /* symbol14.png in Resources */,
+				49F109D2192C7926002B0CD4 /* CropVideoViewController.xib in Resources */,
 				0F80079117537861000FF7FA /* symbol15.png in Resources */,
 				208D5AA3192A2B4A000CDB25 /* Symbols-iPhone4.xib in Resources */,
 				0F80079317537861000FF7FA /* symbol16.png in Resources */,
@@ -3987,6 +4004,7 @@
 				0F80C38B178578CB00D36795 /* RegisterController.m in Sources */,
 				0F80C3901785813E00D36795 /* SigninController.m in Sources */,
 				2099301118BF0C5000A177A4 /* ContactsModel.m in Sources */,
+				49F109D1192C7926002B0CD4 /* CropVideoViewController.m in Sources */,
 				200E6764191B6318003849D4 /* UserPurchases.m in Sources */,
 				20F93DD317B2262200F6F88C /* MainSettingViewController.m in Sources */,
 				20F4D8E017BA3D0A007B2DF5 /* ProfileViewController.m in Sources */,
@@ -4087,7 +4105,7 @@
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "FEA7F04F-1640-4F76-B084-8BD1855BFF9D";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
-				VALID_ARCHS = "armv7 armv7s i386";
+				VALID_ARCHS = "armv7 armv7s i386 x86_64";
 			};
 			name = "Ad Hoc";
 		};
@@ -4133,7 +4151,7 @@
 				PROVISIONING_PROFILE = "BFAFAACA-09D6-40BD-8B17-15886C14AF32";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
-				VALID_ARCHS = "armv7 armv7s i386";
+				VALID_ARCHS = "armv7 armv7s i386 x86_64";
 			};
 			name = Debug;
 		};
@@ -4176,7 +4194,7 @@
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "FEA7F04F-1640-4F76-B084-8BD1855BFF9D";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
-				VALID_ARCHS = "armv7 armv7s i386";
+				VALID_ARCHS = "armv7 armv7s i386 x86_64";
 			};
 			name = Release;
 		};

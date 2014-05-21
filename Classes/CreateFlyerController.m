@@ -1890,7 +1890,7 @@ int selectedAddMoreLayerTab = -1;
 /*
  * Here we Overload Open Camera for Video
  */
--(void)openCustomCamera :(BOOL *)forVideo{
+-(void)openCustomCamera :(BOOL)forVideo{
     
 
     uiBusy = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
@@ -1905,7 +1905,7 @@ int selectedAddMoreLayerTab = -1;
     //Here we Pass FlyerImageView For Video
    // nbuCamera.flyerImageView = self.flyimgView;
     
-    nbuCamera.videoAllow = @"YES";
+    nbuCamera.videoAllow = forVideo;
     nbuCamera.desiredImageSize = CGSizeMake( 300,  300 );
     
       __weak CreateFlyerController *weakSelf = self;

@@ -35,7 +35,7 @@
 
 @property (assign, nonatomic) IBOutlet UIProgressView *progressView;
 @property (strong, nonatomic) IBOutlet UIButton *mode;
-@property (strong, nonatomic) NSString *videoAllow;
+@property BOOL videoAllow;
 @property (nonatomic, strong) UIView *inAppPurchasePanel;
 
 

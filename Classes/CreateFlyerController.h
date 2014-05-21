@@ -147,9 +147,6 @@
 
 
 -(void)loadCustomPhotoLibrary :(NSString *)videoAllow;
-
--(void)openCustomCamera;
-
 -(void) callDeleteLayer;
 -(void) choosePhoto;
 -(void) donePhoto;
