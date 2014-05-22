@@ -79,11 +79,19 @@
     
     registerController.signInController = signinController;
     
+    __weak LaunchController *launchController = self;
+    
     //Redirecting the user to Main screen on succesfull login
     signinController.signInCompletion = ^void(void) {
         
         [appDelegate.lauchController.navigationController popToViewController:appDelegate.lauchController animated:YES];
         
+        FlyerlyMainScreen *mainScreen = [[FlyerlyMainScreen alloc] initWithNibName:@"FlyerlyMainScreen" bundle:nil];
+        
+        FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+        appDelegate.lauchController = mainScreen;
+        
+        [launchController.navigationController setRootViewController:mainScreen];
     };
     
     [self.navigationController pushViewController:signinController animated:YES];
