@@ -13,7 +13,7 @@
 @implementation FlyrViewController
 
 NSMutableArray *productArray;
-@synthesize tView,searchTextField,flyerPaths,inAppPurchasePanel;
+@synthesize tView,searchTextField,flyerPaths;
 
 #pragma mark  View Methods
 
@@ -31,15 +31,7 @@ NSMutableArray *productArray;
     searchTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     [searchTextField setBorderStyle:UITextBorderStyleRoundedRect];
     
-    
-    inAppPurchasePanel = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.origin.y, 320,400 )];
-    inappviewcontroller = [[InAppPurchaseViewController alloc] initWithNibName:@"InAppPurchaseViewController" bundle:nil];
-    
-    inAppPurchasePanel = inappviewcontroller.view;
-    inAppPurchasePanel.hidden = YES;
-    [self.view addSubview:inAppPurchasePanel];
-    
-	[self.tView setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
+    [self.tView setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
 	tView.dataSource = self;
 	tView.delegate = self;
     [self.view addSubview:tView];
@@ -49,7 +41,6 @@ NSMutableArray *productArray;
     searchTextField.borderStyle = nil;
     
     lockFlyer = YES;
-
 
 }
 
@@ -86,12 +77,12 @@ NSMutableArray *productArray;
         
         FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
         UserPurchases *userPurchases_ = appDelegate.userPurchases;
-        //NSMutableDictionary *oldPurchases =  userPurchases_.oldPurchases;//[[NSUserDefaults standardUserDefaults] valueForKey:@"InAppPurchases"];
-       
         
-        if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
-            [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
+        //Checking if user valid purchases
+        if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]   ||
+             [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"]    ) {
             
+            //Unloking features
             lockFlyer = NO;
             [self.tView reloadData];
         }
@@ -112,7 +103,6 @@ NSMutableArray *productArray;
 #pragma mark  Text Field Delegete
 
 - (void)textFieldTapped:(id)sender {
-    NSLog(@"%@",searchTextField.text);
     
     if (searchTextField.text == nil || [searchTextField.text isEqualToString:@""])
     {
@@ -148,9 +138,7 @@ NSMutableArray *productArray;
 	NSString *sTemp2;
 
 	NSString *searchText = searchTextField.text;
-     NSLog(@"%@", searchTextField.text);
    
-
 	searchFlyerPaths = [[NSMutableArray alloc] init];
 	
 	for (int i =0 ; i < [flyerPaths count] ; i++)
@@ -312,8 +300,6 @@ NSMutableArray *productArray;
 }
 
 
-
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *cellId = @"Cell";
@@ -324,7 +310,6 @@ NSMutableArray *productArray;
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SaveFlyerCell" owner:self options:nil];
         cell = (SaveFlyerCell *)[nib objectAtIndex:0];
     }
-    
     
     if( searching ){
         
@@ -368,7 +353,7 @@ NSMutableArray *productArray;
     createFlyer.flyer = flyer;
     
     __weak FlyrViewController *weakSelf = self;
-     __weak CreateFlyerController *weakCreate = createFlyer;
+    __weak CreateFlyerController *weakCreate = createFlyer;
     
     //Here we Manage Block for Update
     [createFlyer setOnFlyerBack:^(NSString *nothing) {
@@ -416,65 +401,6 @@ NSMutableArray *productArray;
 	[tableView reloadData];
 }
 
-/**
- * clickedButtonAtIndex (UIActionSheet)
- *
- * Handle the button clicks from mode of getting out selection.
- */
-//- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-//    
-//        //if not cancel and Restore button presses
-//        if(buttonIndex != 2 && buttonIndex != 3) {
-//            
-//            //Checking if the user is valid or anonymus
-//            if ([[PFUser currentUser] sessionToken].length != 0) {
-//                
-//                //This line pop up login screen if user not exist
-//                [[RMStore defaultStore] addStoreObserver:self];
-//                
-//                //Getting Selected Product
-//                SKProduct *product = [requestedProducts objectAtIndex:buttonIndex];
-//                [self purchaseProductID:product.productIdentifier];
-//            }
-//        }
-//    
-//    // checking user is anonymous or not
-//    if ([[PFUser currentUser] sessionToken].length != 0) {
-//        //For Restore Purchase
-//        if( buttonIndex == 2 ) {
-//            [self restorePurchase];
-//        }
-//    
-//    // if user is anonymous
-//    }else {
-//         if ( buttonIndex == 3 ) {
-//            
-//            NSLog(@"Sign In was selected.");
-//            signInController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
-//            
-//            FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-//            signInController.launchController = appDelegate.lauchController;
-//            
-//            __weak FlyrViewController *weakFlyrViewController = self;
-//            
-//            signInController.signInCompletion = ^void(void) {
-//                NSLog(@"Sign In via In App");
-//                
-//                UINavigationController* navigationController = weakFlyrViewController.navigationController;
-//                [navigationController popViewControllerAnimated:NO];
-//                
-//                // Showing action sheet after succesfull sign in
-//                [weakFlyrViewController requestProduct];
-//                
-//            };
-//             
-//            [self.navigationController pushViewController:signInController animated:YES];
-//            
-//        }
-//    }
-//    
-//}
-
 
 - ( void )productSuccesfullyPurchased: (NSString *)productId {
     
@@ -485,13 +411,11 @@ NSMutableArray *productArray;
         
         lockFlyer = NO;
         [self.tView reloadData];
+        [inappviewcontroller.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     }
     
 }
 - ( void )inAppPurchasePanelContent {
-    
-    [inappviewcontroller.contentLoaderIndicatorView stopAnimating];
-    inappviewcontroller.contentLoaderIndicatorView.hidden = YES;
     [inappviewcontroller inAppDataLoaded];
 }
 
@@ -500,48 +424,40 @@ NSMutableArray *productArray;
  */
 -(void)openPanel {
     
+    inappviewcontroller = [[[InAppViewController alloc] init] autorelease];
+    [self presentModalViewController:inappviewcontroller animated:YES];
+    if ( productArray.count == 0 ){
+        [inappviewcontroller requestProduct];
+    }
+    if( productArray.count != 0 ) {
+        
+        //[inappviewcontroller.contentLoaderIndicatorView stopAnimating];
+        //inappviewcontroller.contentLoaderIndicatorView.hidden = YES;
+    }
+    
+    inappviewcontroller.buttondelegate = self;
+    
+    //InAppPurchaseViewController_ *sampleView = [[[InAppPurchaseViewController_ alloc] init] autorelease];
+    //[self presentModalViewController:sampleView animated:YES];
+    /*
     inappviewcontroller.buttondelegate = self;
     
     if ( productArray.count == 0 ){
         [inappviewcontroller requestProduct];
     }
 
-    inAppPurchasePanel.hidden = NO;
-    [inAppPurchasePanel removeFromSuperview];
-
-    if ([flyer isVideoFlyer]) {
-        inappviewcontroller = [[InAppPurchaseViewController alloc] initWithNibName:@"InAppPurchaseViewController" bundle:nil];
-        
-    } else {
-        inappviewcontroller = [[InAppPurchaseViewController alloc] initWithNibName:@"InAppPurchaseViewController" bundle:nil];
-    }
-    inAppPurchasePanel = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.origin.y, 320,400 )];
-
-    //inAppPurchasePanel = shareviewcontroller.view;
-    inAppPurchasePanel = inappviewcontroller.view;
-    [self.view addSubview:inAppPurchasePanel];
-    inappviewcontroller.buttondelegate = self;
-    inappviewcontroller.Yvalue = [NSString stringWithFormat:@"%f",self.view.frame.size.height];
-
-    //Create Animation Here
-    [inAppPurchasePanel setFrame:CGRectMake(0, self.view.frame.size.height, 320,265 )];
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.4f];
-    [inAppPurchasePanel setFrame:CGRectMake(0, self.view.frame.size.height - 265, 320,265 )];
-    [UIView commitAnimations];
     if( productArray.count != 0 ) {
         
         [inappviewcontroller.contentLoaderIndicatorView stopAnimating];
         inappviewcontroller.contentLoaderIndicatorView.hidden = YES;
     }
+     */
 }
 
 - (void)inAppPurchasePanelButtonTappedWasPressed:(NSString *)inAppPurchasePanelButtonCurrentTitle {
     
-    __weak InAppPurchaseViewController *inappviewcontroller_ = inappviewcontroller;
+    __weak InAppViewController *inappviewcontroller_ = inappviewcontroller;
     if ([inAppPurchasePanelButtonCurrentTitle isEqualToString:(@"Sign In")]) {
-        // Put code here for button's intended action.
-        NSLog(@"Sign In was selected.");
         
         signInController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
         
@@ -552,20 +468,21 @@ NSMutableArray *productArray;
         __weak UserPurchases *userPurchases_ = appDelegate.userPurchases;
         userPurchases_.delegate = self;
         
+        [inappviewcontroller_.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+        
         signInController.signInCompletion = ^void(void) {
-            NSLog(@"Sign In via In App");
             
             UINavigationController* navigationController = flyrViewController.navigationController;
             [navigationController popViewControllerAnimated:NO];
-            
-            [inappviewcontroller_.inAppPurchasePanelButton setTitle:@"RESTORE PURCHASES"];
-            // Showing action sheet after succesfull sign in
             [userPurchases_ setUserPurcahsesFromParse];
+            
+            [flyrViewController presentModalViewController:inappviewcontroller_ animated:YES];
         };
         
         [self.navigationController pushViewController:signInController animated:YES];
+        
     }else if ([inAppPurchasePanelButtonCurrentTitle isEqualToString:(@"RESTORE PURCHASES")]){
-        //[inappviewcontroller_ restorePurchase];
+        [inappviewcontroller_ restorePurchase];
     }
 }
 
@@ -575,12 +492,11 @@ NSMutableArray *productArray;
     UserPurchases *userPurchases_ = appDelegate.userPurchases;
     
     if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]  ||
-        [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
-        
-        NSLog(@"Sample,key found");
+         [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
+
         lockFlyer = NO;
         [self.tView reloadData];
-        [inappviewcontroller.tView reloadData];
+        [inappviewcontroller.paidFeaturesTview reloadData];
     }
 
 }

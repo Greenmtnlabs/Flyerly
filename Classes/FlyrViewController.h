@@ -11,16 +11,15 @@
 #import "SaveFlyerCell.h"
 #import "Common.h"
 #import "ShareViewController.h"
-#import "InAppPurchaseViewController.h"
 #import "HelpController.h"
 #import "FlyrAppDelegate.h"
 #import "Flyer.h"
+#import "InAppViewController.h"
 #import "RMStore.h"
 #import "RMStoreKeychainPersistence.h"
 #import "ParentViewController.h"
 
-
-@class SaveFlyerCell, Flyer, SigninController, RegisterController, CreateFlyerController,InAppPurchaseViewController,ShareViewController;
+@class SaveFlyerCell, Flyer, SigninController, RegisterController, InAppViewController, CreateFlyerController,ShareViewController;
 
 @interface FlyrViewController : ParentViewController <UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,UIActionSheetDelegate,RMStoreObserver,inAppPurchasePanelButtonProtocol, UserPurchasesDelegate>{
 
@@ -35,7 +34,7 @@
     SigninController *signInController;
     RegisterController *signUpController;
     ShareViewController *shareviewcontroller;
-    InAppPurchaseViewController *inappviewcontroller;
+    InAppViewController *inappviewcontroller;
     UserPurchases *userPurchases;
     NSMutableArray *flyerPaths;
 
@@ -49,7 +48,6 @@
 @property(nonatomic,strong) IBOutlet UITableView *tView;
 @property(nonatomic,strong) IBOutlet UITextField *searchTextField;
 @property(nonatomic,strong)NSMutableArray *flyerPaths;
-@property (nonatomic, strong) UIView *inAppPurchasePanel;
 
 
 -(void)goBack;
