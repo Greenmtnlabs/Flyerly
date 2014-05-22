@@ -15,7 +15,7 @@ NSMutableArray *productArray;
 
 @synthesize cameraLines;
 @synthesize desiredImageSize,progressView;
-@synthesize onImageTaken,onVideoFinished,onVideoCancel,mode,videoAllow,flyerImageView,inAppPurchasePanel;
+@synthesize onImageTaken,onVideoFinished,onVideoCancel,mode,videoAllow,flyerImageView;
 
 /**
  * Setup the controller.
@@ -49,24 +49,18 @@ NSMutableArray *productArray;
     
     
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-    UserPurchases *userPurchases_ = appDelegate.userPurchases;
+    userPurchases = appDelegate.userPurchases;
    
     if ([[PFUser currentUser] sessionToken].length != 0) {
         
-        if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
-            [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"] ) {
+        if ( [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
+             [userPurchases checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"] ) {
             
-            productPurchased = YES;
+            [mode setBackgroundImage:[UIImage imageNamed:@"ModeVideo.png"]
+                                forState:UIControlStateNormal];
         }
         
     }
-    
-    inAppPurchasePanel = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.origin.y, 320,400 )];
-    inappviewcontroller = [[InAppPurchaseViewController alloc] initWithNibName:@"InAppPurchaseViewController" bundle:nil];
-    
-    inAppPurchasePanel = inappviewcontroller.view;
-    inAppPurchasePanel.hidden = YES;
-    [self.view addSubview:inAppPurchasePanel];
     
     //Here we Add Flyer ImageView For Video
     [self.cameraView addSubview:flyerImageView];
@@ -97,8 +91,6 @@ NSMutableArray *productArray;
     
     self.cameraView.captureMovieResultBlock = ^(NSURL *movieUrl,NSError * error) {
         if (!error) {
-            
-           // NSLog(@"%@",movieUrl);
             self.onVideoFinished(movieUrl);
             [self.navigationController popViewControllerAnimated:YES];
         }
@@ -112,46 +104,26 @@ NSMutableArray *productArray;
     self.cameraView.exposureButtonConfigurationBlock = [self.cameraView buttonConfigurationBlockWithTitleFrom:
                                                         @[@"Exp", @"Auto", @"Cont"]];
     self.cameraView.whiteBalanceButtonConfigurationBlock = [self.cameraView buttonConfigurationBlockWithTitleFrom:
-                                                            @[@"Lckd", @"Auto", @"Cont"]];
-    
-
-
-    
+                                                            @[@"Lckd", @"Auto", @"Cont"]];  
 }
 
 /*
- * Here we Open InAppPurchase Panel
+ * Here we Open InAppPurchase Modal View
  */
 -(void)openPanel {
     
-    inappviewcontroller.buttondelegate = self;
-    
+    inappviewcontroller = [[[InAppViewController alloc] init] autorelease];
+    [self presentModalViewController:inappviewcontroller animated:YES];
     if ( productArray.count == 0 ){
         [inappviewcontroller requestProduct];
     }
-    
-    inAppPurchasePanel.hidden = NO;
-    [inAppPurchasePanel removeFromSuperview];
-    
-    inAppPurchasePanel = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.origin.y, 320,400 )];
-    
-    //inAppPurchasePanel = shareviewcontroller.view;
-    inAppPurchasePanel = inappviewcontroller.view;
-    [self.view addSubview:inAppPurchasePanel];
-    inappviewcontroller.buttondelegate = self;
-    inappviewcontroller.Yvalue = [NSString stringWithFormat:@"%f",self.view.frame.size.height];
-    
-    //Create Animation Here
-    [inAppPurchasePanel setFrame:CGRectMake(0, self.view.frame.size.height, 320,265 )];
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.4f];
-    [inAppPurchasePanel setFrame:CGRectMake(0, self.view.frame.size.height - 265, 320,265 )];
-    [UIView commitAnimations];
     if( productArray.count != 0 ) {
         
-        [inappviewcontroller.contentLoaderIndicatorView stopAnimating];
-        inappviewcontroller.contentLoaderIndicatorView.hidden = YES;
+        //[inappviewcontroller.contentLoaderIndicatorView stopAnimating];
+        //inappviewcontroller.contentLoaderIndicatorView.hidden = YES;
     }
+    
+    inappviewcontroller.buttondelegate = self;
 }
 
 
@@ -232,8 +204,6 @@ NSMutableArray *productArray;
 
 - ( void )inAppPurchasePanelContent {
     
-    [inappviewcontroller.contentLoaderIndicatorView stopAnimating];
-    inappviewcontroller.contentLoaderIndicatorView.hidden = YES;
     [inappviewcontroller inAppDataLoaded];
 }
 
@@ -245,39 +215,37 @@ NSMutableArray *productArray;
     UIButton *shoot = (UIButton *)  self.cameraView.shootButton;
     UIButton *flash = (UIButton *)  self.cameraView.flashButton;
 
+    if ([[PFUser currentUser] sessionToken].length != 0) {
     
-    if ( !productPurchased )
-    {
+        if ( [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
+             [userPurchases checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"] ) {
+            
+            if ([mode isSelected] == YES) {
+                
+                //Enable Camera Mode
+                [mode setSelected:NO];
+                [shoot setImage:[UIImage imageNamed:@"camera_button"] forState:UIControlStateNormal];
+                [shoot setImage:[UIImage imageNamed:@"camera_button"] forState:UIControlStateSelected];
+                [flash setHidden:NO];
+                progressView.hidden = YES;
+                flyerImageView.hidden = YES;
+                
+            }else {
+                
+                //Enable Video Mode
+                [mode setSelected:YES];
+                [shoot setImage:[UIImage imageNamed:@"recording_button"] forState:UIControlStateNormal];
+                [shoot setImage:[UIImage imageNamed:@"stop_button"] forState:UIControlStateSelected];
+                [flash setHidden:YES];
+                progressView.hidden = NO;
+                flyerImageView.image = nil;
+                flyerImageView.hidden = NO;
+            }
+        }
+    
+    }else {
         [self openPanel];
     }
-    else
-    {
-        if ([mode isSelected] == YES) {
-            
-            //Enable Camera Mode
-            [mode setSelected:NO];
-            [shoot setImage:[UIImage imageNamed:@"camera_button"] forState:UIControlStateNormal];
-            [shoot setImage:[UIImage imageNamed:@"camera_button"] forState:UIControlStateSelected];
-            [flash setHidden:NO];
-            progressView.hidden = YES;
-            flyerImageView.hidden = YES;
-            
-        }else {
-            
-            //Enable Video Mode
-            [mode setSelected:YES];
-            [shoot setImage:[UIImage imageNamed:@"recording_button"] forState:UIControlStateNormal];
-            [shoot setImage:[UIImage imageNamed:@"stop_button"] forState:UIControlStateSelected];
-            [flash setHidden:YES];
-            progressView.hidden = NO;
-            flyerImageView.image = nil;
-            flyerImageView.hidden = NO;
-            
-            
-        }
-    }
-    
-    
     
 }
 
@@ -352,11 +320,10 @@ NSMutableArray *productArray;
 
 - (void)inAppPurchasePanelButtonTappedWasPressed:(NSString *)inAppPurchasePanelButtonCurrentTitle {
     
-    __weak InAppPurchaseViewController *inappviewcontroller_ = inappviewcontroller;
+    __weak InAppViewController *inappviewcontroller_ = inappviewcontroller;
     if ([inAppPurchasePanelButtonCurrentTitle isEqualToString:(@"Sign In")]) {
-        // Put code here for button's intended action.
-        NSLog(@"Sign In was selected.");
         
+        // Put code here for button's intended action.
         signInController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
         
         FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
@@ -366,20 +333,20 @@ NSMutableArray *productArray;
         __weak UserPurchases *userPurchases_ = appDelegate.userPurchases;
         userPurchases_.delegate = self;
         
+        [inappviewcontroller_.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+        
         signInController.signInCompletion = ^void(void) {
-            NSLog(@"Sign In via In App");
             
             UINavigationController* navigationController = cameraViewController.navigationController;
             [navigationController popViewControllerAnimated:NO];
-            
-            [inappviewcontroller_.inAppPurchasePanelButton setTitle:@"RESTORE PURCHASES"];
-            // Showing action sheet after succesfull sign in
             [userPurchases_ setUserPurcahsesFromParse];
+            
+            [cameraViewController presentModalViewController:inappviewcontroller_ animated:YES];
         };
         
         [self.navigationController pushViewController:signInController animated:YES];
     }else if ([inAppPurchasePanelButtonCurrentTitle isEqualToString:(@"RESTORE PURCHASES")]){
-        //[inappviewcontroller_ restorePurchase];
+        [inappviewcontroller_ restorePurchase];
     }
 }
 
@@ -389,14 +356,11 @@ NSMutableArray *productArray;
     UserPurchases *userPurchases_ = appDelegate.userPurchases;
     
     if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]  ||
-        [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
+         [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
         
-         NSLog(@"Sample,key found");
-        productPurchased = YES;
-        UIImage *buttonImage = [UIImage imageNamed:@"ModeVideo.png"];
-        [mode setImage:buttonImage forState:UIControlStateNormal];
-        //[mode setImage:[UIImage imageNamed:@"ModeVideo.png"] forState:UIControlStateHighlighted];
-        [inappviewcontroller.tView reloadData];
+        [mode setBackgroundImage:[UIImage imageNamed:@"ModeVideo.png"]
+                        forState:UIControlStateNormal];
+        [inappviewcontroller.paidFeaturesTview reloadData];
     }
     
 }
