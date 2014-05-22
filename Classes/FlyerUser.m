@@ -35,8 +35,6 @@
     
 
     if ([[NSFileManager defaultManager] fileExistsAtPath:usernamePath isDirectory:NULL]) {
-        
-        NSLog(@"Path Found");
 
         //Getting All Files list
         NSArray *files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:usernamePath error:nil];
@@ -49,7 +47,7 @@
             //Checking Any flyer contain
             if ([lastFileName rangeOfString:@".jpg"].location == NSNotFound) {
                 
-                  NSLog(@"Flyer does not contain in this Index");
+                  //NSLog(@"Flyer does not contain in this Index");
                 
             } else {
                 
@@ -121,7 +119,7 @@
                         
                         if ([[keys objectAtIndex:i] rangeOfString:@"Text"].location == NSNotFound) {
                             
-                            NSLog(@"sub string doesnt exist");
+                            //NSLog(@"sub string doesnt exist");
                             
                         } else {
                             NSString *yValue =  [textLayer valueForKey:@"y"] ;
@@ -174,7 +172,6 @@
                     source = [NSString stringWithFormat:@"%@/Icon/%d",usernamePath,imgnumber];
                     
                     if ([[NSFileManager defaultManager] fileExistsAtPath:source isDirectory:NULL]) {
-                        NSLog(@"Exist");
                         
                         NSArray *Iconfiles = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:source error:nil];
                         
@@ -205,7 +202,6 @@
                     source = [NSString stringWithFormat:@"%@/Photo/%d",usernamePath,imgnumber];
                     
                     if ([[NSFileManager defaultManager] fileExistsAtPath:source isDirectory:NULL]) {
-                        NSLog(@"Exist");
                         
                         NSArray *Photofiles = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:source error:nil];
                         
@@ -245,7 +241,6 @@
                     source = [NSString stringWithFormat:@"%@/Symbol/%d",usernamePath,imgnumber];
                     
                     if ([[NSFileManager defaultManager] fileExistsAtPath:source isDirectory:NULL]) {
-                        NSLog(@"Exist");
                         
                         NSArray *Symbolfiles = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:source error:nil];
                         
@@ -276,7 +271,6 @@
                     source = [NSString stringWithFormat:@"%@/Template/%d",usernamePath,imgnumber];
                     
                     if ([[NSFileManager defaultManager] fileExistsAtPath:source isDirectory:NULL]) {
-                        NSLog(@"Exist");
                         
                         NSArray *templatefiles = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:source error:nil];
                         
@@ -411,7 +405,7 @@
     
     
     if (![[NSFileManager defaultManager] fileExistsAtPath:OldUIDPath isDirectory:NULL]) {
-        NSLog(@"");
+        
 	}else{
         
         NSString *newDirectoryName = NewUIDFolderName;
@@ -463,8 +457,6 @@
     
     
     if ([[NSFileManager defaultManager] fileExistsAtPath:anonymousUserPath]) {
-        
-        NSLog(@"/Documents/anonymous found");
         
         NSError* error;
         [[NSFileManager defaultManager]moveItemAtPath:anonymousUserPath toPath:usernamePath error:&error];

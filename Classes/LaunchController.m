@@ -62,7 +62,6 @@
     
     //Redirecting the user to Main screen on succesfull login
     signinController.signInCompletion = ^void(void) {
-        NSLog(@"Sign In via LauchController Register");
     
         [appDelegate.lauchController.navigationController popToViewController:appDelegate.lauchController animated:YES];
         
@@ -82,7 +81,6 @@
     
     //Redirecting the user to Main screen on succesfull login
     signinController.signInCompletion = ^void(void) {
-        NSLog(@"Sign In via LauchController Sign In");
         
         [appDelegate.lauchController.navigationController popToViewController:appDelegate.lauchController animated:YES];
         

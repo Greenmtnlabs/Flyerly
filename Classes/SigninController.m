@@ -120,8 +120,6 @@
 }
 
 -(void)signIn:(BOOL)validated username:(NSString *)userName password:(NSString *)pwd{
-    
-    NSLog(@"User %@",userName);
 
     NSError *loginError = nil;
     userName = [userName lowercaseString];

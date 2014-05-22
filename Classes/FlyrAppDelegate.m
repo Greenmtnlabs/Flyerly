@@ -30,11 +30,9 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 
 - (void)applicationWillResignActive:(UIApplication *)application {
 
-    NSLog(@"Not Active");
     if ([[self.navigationController topViewController] isKindOfClass:[CreateFlyerController class]]) {
         
         //Here we Save Data for Future Error Handling
-        NSLog(@"Yes it is");
         NSArray *views = [self.navigationController viewControllers];
         CreateFlyerController *createView;
 
@@ -242,8 +240,6 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
         NSString *homeDirectoryPath = NSHomeDirectory();
         NSString *flyersDir = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents"]];
         NSArray *contentOfDirectory = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:flyersDir error:NULL];
-        NSLog(@"Directory Count,%i",contentOfDirectory.count);
-        NSLog(@"%@", contentOfDirectory);
        
         // If the Documents folder has only one directory named anonymous then this is an anonymous user (hasn't signed up yet)
         if(contentOfDirectory.count > 0 && [[contentOfDirectory objectAtIndex:0] isEqual:@"anonymous"]){
@@ -307,11 +303,9 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
         
         if (error) {
-            NSLog(@"Twitter User Not Exits");
             [lauchController hideLoadingIndicator];
             
         }else{
-            NSLog(@"Old Twitter User found");
             
             // Migrate Account For 3.0 Version
             [FlyerUser migrateUserto3dot0:object];
@@ -358,10 +352,8 @@ if it exist then we call Merging Process
                 if (error) {
                     
                     [lauchController hideLoadingIndicator];
-                    NSLog(@"Email NotExits");
 
                 }else{
-                    NSLog(@"Email Exist");
                     
                     // Migrate Account For 3.0 Version
                     [FlyerUser migrateUserto3dot0:object];
@@ -423,7 +415,7 @@ if it exist then we call Merging Process
         //Create Directory!
         [fileManager createDirectoryAtPath:documentDBFolderPath withIntermediateDirectories:NO attributes:nil error:&error];
     } else {
-        NSLog(@"Directory exists! %@", documentDBFolderPath);
+        //NSLog(@"Directory exists! %@", documentDBFolderPath);
     }
     
     NSArray *fileList = [fileManager contentsOfDirectoryAtPath:resourceDBFolderPath error:&error];
@@ -439,7 +431,7 @@ if it exist then we call Merging Process
             [fileManager copyItemAtPath:oldFilePath toPath:newFilePath error:&error];
             
         } else {
-            NSLog(@"File exists: %@", newFilePath);
+            //NSLog(@"File exists: %@", newFilePath);
         }
     }
 }

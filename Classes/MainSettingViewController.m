@@ -193,13 +193,11 @@
     if([sender isOn]){
         
         // Execute any code when the switch is ON
-        NSLog(@"Switch is ON");
         [[NSUserDefaults standardUserDefaults]  setObject:@"enabled" forKey:@"saveToCameraRollSetting"];
         
     } else{
         
         // Execute any code when the switch is OFF
-        NSLog(@"Switch is OFF");
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"saveToCameraRollSetting"];
         
     }
@@ -256,7 +254,6 @@
             
         }else if(indexPath.row == 4){
             
-            NSLog(@"Sign In was selected.");
             signInController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
             
             FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
@@ -266,7 +263,6 @@
             UINavigationController* navigationController = self.navigationController;
             
             signInController.signInCompletion = ^void(void) {
-                NSLog(@"Sign In via Setting");
                 
                 // Pop out sign in controller as user has successfully signed in
                 [navigationController popViewControllerAnimated:NO];

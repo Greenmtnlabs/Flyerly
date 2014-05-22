@@ -119,19 +119,19 @@
     [self showAlert:@"Thank you. Your feedback has been sent to @flyerlyapp on Twitter." message:@""];
 
     if (!sharer.quiet)
-		[[SHKActivityIndicator currentIndicator] displayCompleted:SHKLocalizedString(@"Saved!")];
+		[[SHKActivityIndicator currentIndicator] displayCompleted:SHKLocalizedString(@"Saved!") forSharer:sharer];
 }
 
 - (void)sharer:(SHKSharer *)sharer failedWithError:(NSError *)error shouldRelogin:(BOOL)shouldRelogin
 {
     
-    [[SHKActivityIndicator currentIndicator] hide];
+    [[SHKActivityIndicator currentIndicator] hideForSharer:sharer];
 	NSLog(@"Sharing Error");
 }
 
 - (void)sharerCancelledSending:(SHKSharer *)sharer
 {
-    NSLog(@"");
+    NSLog(@"Sending cancelled.");
 }
 
 - (void)sharerShowBadCredentialsAlert:(SHKSharer *)sharer

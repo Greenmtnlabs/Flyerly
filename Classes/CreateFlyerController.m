@@ -783,7 +783,6 @@ int selectedAddMoreLayerTab = -1;
     {
         if ([sub isKindOfClass:[UIButton class]])
         {
-            UIButton *color = (UIButton *) sub;
             UIColor *colorName =borderArray[(i-1)];
             
             //Here we Highlight Last Color Selected
@@ -812,48 +811,8 @@ int selectedAddMoreLayerTab = -1;
                 i++;
         }
     }
+}// Loop
     
-    
-	//for (int i = 1; i <=  [borderArray count] ; i++)
-	//{
-		
-//         [color addTarget:self action:@selector(selectFontBorder:) forControlEvents:UIControlEventTouchUpInside];
-//		UIColor *colorName =borderArray[(i-1)];
-//		UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(color.frame.origin.x, color.frame.origin.y, color.frame.size.width, color.frame.size.height)];
-//        label.layer.borderColor = colorName.CGColor;
-//        label.layer.borderWidth = 3.0;
-//		[color addSubview:label];
-//		color.tag = i+90;
-//		color.alpha = ALPHA1;
-
-        
-//        CGRect frame = color.frame;
-//        frame.origin = CGPointMake(curXLoc, curYLoc);
-//        color.frame = frame;
-//        curXLoc += (widthValue)+increment;
-//        
-//        if(IS_IPHONE_5){
-//            if(curXLoc >= 300){
-//                curXLoc = 13;
-//                curYLoc = curYLoc + heightValue + 7;
-//            }
-//        }
-        
-        
-        
-            
-       // }
-        
-		//[layerScrollView addSubview:color];
-        
-	}// Loop
-    
-//    if(IS_IPHONE_5){
-//        [layerScrollView setContentSize:CGSizeMake(320, curYLoc)];
-//    } else {
-//        [layerScrollView setContentSize:CGSizeMake((  [borderArray count]*(widthValue+5)), [layerScrollView bounds].size.height)];
-//    }
-
 }
 
 /*
@@ -1368,7 +1327,7 @@ int selectedAddMoreLayerTab = -1;
         if ([tempView isKindOfClass:[UIButton class]]) {
             
             // Add border to Un-select layer thumbnail
-            tempView.backgroundColor = [UIColor clearColor];
+            //tempView.backgroundColor = [UIColor clearColor];
         
             if( tempView == view ) {
             

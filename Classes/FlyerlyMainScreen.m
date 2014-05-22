@@ -119,8 +119,7 @@
    //when click on sign in button in alert view
     if(buttonIndex == 1)
     {
-        
-        NSLog(@"Sign In was selected.");
+
         SigninController *signInController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
         
         signInController.launchController = self;
@@ -128,7 +127,6 @@
         __weak FlyerlyMainScreen *weakMainFlyerScreen = self;
                         
         signInController.signInCompletion = ^void(void) {
-            NSLog(@"Sign In via Invite");
             
             UINavigationController* navigationController = weakMainFlyerScreen.navigationController;
             [navigationController popViewControllerAnimated:NO];
@@ -310,7 +308,7 @@
         [userPurchases setUserPurcahsesFromParse];
         
     } else {
-        NSLog(@"Anonymous,User is NOT authenticated.");
+        NSLog(@"Anonymous, User is NOT authenticated.");
     }
     
 }
@@ -321,8 +319,6 @@
     
     UIButton *clickButton = sender;
     NSString *flyPath;
-    
-    NSLog(@"%d",clickButton.tag);
     
     if (clickButton.tag < [recentFlyers count]) {
         

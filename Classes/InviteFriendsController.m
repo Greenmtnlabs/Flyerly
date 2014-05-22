@@ -970,13 +970,13 @@ const int CONTACTS_TAB = 0;
     
     
     if (!sharer.quiet)
-		[[SHKActivityIndicator currentIndicator] displayCompleted:SHKLocalizedString(@"Saved!")];
+		[[SHKActivityIndicator currentIndicator] displayCompleted:SHKLocalizedString(@"Saved!") forSharer:sharer];
 }
 
 - (void)sharer:(SHKSharer *)sharer failedWithError:(NSError *)error shouldRelogin:(BOOL)shouldRelogin
 {
     
-    [[SHKActivityIndicator currentIndicator] hide];
+    [[SHKActivityIndicator currentIndicator] hideForSharer:sharer];
 	NSLog(@"Sharing Error");
 }
 

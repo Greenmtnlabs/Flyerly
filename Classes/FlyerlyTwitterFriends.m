@@ -50,8 +50,6 @@
         [self.shareDelegate performSelector:@selector(sharerFinishedSending:) withObject:self];
     
     if([nextCursor compare:[NSDecimalNumber zero]] == NSOrderedSame){
-        
-        NSLog(@"Twitter Contact Complete");
 
     }else{
 

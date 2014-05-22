@@ -519,7 +519,7 @@
         //item = [SHKItem text: [NSString stringWithFormat:@"%@",[self.flyer getYoutubeLink] ]];
     }else {
         // Current Item For Sharing
-        item = [SHKItem image:selectedFlyerImage title:@""];
+        item = [SHKItem image:selectedFlyerImage title:titleView.text];
     }
     
     item.tags =[NSArray arrayWithObjects: @"#flyerly", nil];
@@ -601,8 +601,6 @@
 #pragma Request receive code
 
 - (BOOL)presentOptionsMenuFromRect:(CGRect)rect inView:(UIView *)view animated:(BOOL)animated{
-
-    NSLog(@"presentOptionsMenuFromRect");
     
     return YES;
 }
@@ -728,7 +726,7 @@
 {
     iosSharer.shareDelegate = nil;
     iosSharer = nil;
-    NSLog(@"");
+    NSLog(@"Sending cancelled");
 }
 
 - (void)sharerShowBadCredentialsAlert:(SHKSharer *)sharer
@@ -853,8 +851,6 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
   
-    
-    NSLog(@"%d",alertView.tag);
    switch (alertView.tag)
   {
     // if 1 alert view selected having tag 0
