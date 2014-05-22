@@ -45,14 +45,6 @@ NSMutableArray *productArray;
     // Configure the selection behaviour
     self.selectionCountLimit = 1;
     
-    inAppPurchasePanel = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.origin.y, 320,400 )];
-    inappviewcontroller = [[InAppPurchaseViewController alloc] initWithNibName:@"InAppPurchaseViewController" bundle:nil];
-    
-    inAppPurchasePanel = inappviewcontroller.view;
-    //inAppPurchasePanel.hidden = YES;
-    [self.view addSubview:inAppPurchasePanel];
-    
-    
     // BackButton
     UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     backButton.titleLabel.font = [UIFont systemFontOfSize:14.0];
@@ -225,8 +217,6 @@ NSMutableArray *productArray;
 
 - ( void )inAppPurchasePanelContent {
     
-    [inappviewcontroller.contentLoaderIndicatorView stopAnimating];
-    inappviewcontroller.contentLoaderIndicatorView.hidden = YES;
     [inappviewcontroller inAppDataLoaded];
 }
 
@@ -250,26 +240,33 @@ NSMutableArray *productArray;
     UserPurchases *userPurchases_ = appDelegate.userPurchases;
     
     if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]  ||
-        [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
+         [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
         
-        NSLog(@"Sample,key found");
-        productPurchased = YES;
-        UIImage *buttonImage = [UIImage imageNamed:@"ModeVideo.png"];
-        //[mode setImage:buttonImage forState:UIControlStateNormal];
-        //[mode setImage:[UIImage imageNamed:@"ModeVideo.png"] forState:UIControlStateHighlighted];
-        [inappviewcontroller.tView reloadData];
+        [inappviewcontroller.paidFeaturesTview reloadData];
     }
+    
+    
+//    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+//    UserPurchases *userPurchases_ = appDelegate.userPurchases;
+//    
+//    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]  ||
+//        [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
+//        
+//        NSLog(@"Sample,key found");
+//        productPurchased = YES;
+//        UIImage *buttonImage = [UIImage imageNamed:@"ModeVideo.png"];
+//        //[mode setImage:buttonImage forState:UIControlStateNormal];
+//        //[mode setImage:[UIImage imageNamed:@"ModeVideo.png"] forState:UIControlStateHighlighted];
+//        [inappviewcontroller.tView reloadData];
+//    }
     
 }
 
-
-
 - (void)inAppPurchasePanelButtonTappedWasPressed:(NSString *)inAppPurchasePanelButtonCurrentTitle {
     
-    __weak InAppPurchaseViewController *inappviewcontroller_ = inappviewcontroller;
+    __weak InAppViewController *inappviewcontroller_ = inappviewcontroller;
     if ([inAppPurchasePanelButtonCurrentTitle isEqualToString:(@"Sign In")]) {
         // Put code here for button's intended action.
-        NSLog(@"Sign In was selected.");
         
         signInController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
         
@@ -280,20 +277,21 @@ NSMutableArray *productArray;
         __weak UserPurchases *userPurchases_ = appDelegate.userPurchases;
         userPurchases_.delegate = self;
         
+        [inappviewcontroller_.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+        
         signInController.signInCompletion = ^void(void) {
-            NSLog(@"Sign In via In App");
             
             UINavigationController* navigationController = assetsGroupViewController.navigationController;
             [navigationController popViewControllerAnimated:NO];
-            
-            [inappviewcontroller_.inAppPurchasePanelButton setTitle:@"RESTORE PURCHASES"];
-            // Showing action sheet after succesfull sign in
             [userPurchases_ setUserPurcahsesFromParse];
+
+            
+           [assetsGroupViewController presentModalViewController:inappviewcontroller_ animated:YES];
         };
         
         [self.navigationController pushViewController:signInController animated:YES];
     }else if ([inAppPurchasePanelButtonCurrentTitle isEqualToString:(@"RESTORE PURCHASES")]){
-        //[inappviewcontroller_ restorePurchase];
+        [inappviewcontroller_ restorePurchase];
     }
 }
 
@@ -303,34 +301,19 @@ NSMutableArray *productArray;
  */
 -(void)openPanel {
     
-    inappviewcontroller.buttondelegate = self;
     
+    inappviewcontroller = [[[InAppViewController alloc] init] autorelease];
+    [self presentModalViewController:inappviewcontroller animated:YES];
     if ( productArray.count == 0 ){
         [inappviewcontroller requestProduct];
     }
-    
-    inAppPurchasePanel.hidden = NO;
-    [inAppPurchasePanel removeFromSuperview];
-    
-    inAppPurchasePanel = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.origin.y, 320,400 )];
-    
-    //inAppPurchasePanel = shareviewcontroller.view;
-    inAppPurchasePanel = inappviewcontroller.view;
-    [self.view addSubview:inAppPurchasePanel];
-    inappviewcontroller.buttondelegate = self;
-    inappviewcontroller.Yvalue = [NSString stringWithFormat:@"%f",self.view.frame.size.height];
-    
-    //Create Animation Here
-    [inAppPurchasePanel setFrame:CGRectMake(0, self.view.frame.size.height, 320,265 )];
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.4f];
-    [inAppPurchasePanel setFrame:CGRectMake(0, self.view.frame.size.height - 265, 320,265 )];
-    [UIView commitAnimations];
     if( productArray.count != 0 ) {
         
-        [inappviewcontroller.contentLoaderIndicatorView stopAnimating];
-        inappviewcontroller.contentLoaderIndicatorView.hidden = YES;
+        //[inappviewcontroller.contentLoaderIndicatorView stopAnimating];
+        //inappviewcontroller.contentLoaderIndicatorView.hidden = YES;
     }
+    
+    inappviewcontroller.buttondelegate = self;
 }
 
 #pragma mark  Override On selection

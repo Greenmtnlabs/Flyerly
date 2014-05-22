@@ -19,13 +19,13 @@
 //
 #import <NBUImagePicker/NBUAssetsGroupViewController.h>
 #import <AssetsLibrary/AssetsLibrary.h>
-#import "InAppPurchaseViewController.h"
+#import "InAppViewController.h"
 #import "NBUImagePickerPrivate.h"
 
 @class ObjectGridView, NBUAssetsGroup;
 @interface AssetsGroupViewController : NBUAssetsGroupViewController <inAppPurchasePanelButtonProtocol, UserPurchasesDelegate> {
     
-    InAppPurchaseViewController *inappviewcontroller;
+    InAppViewController *inappviewcontroller;
     UserPurchases *userPurchases;
     SigninController *signInController;
     BOOL productPurchased;
@@ -57,12 +57,6 @@
 
 /// The number of assets to be incrementally loaded. Default `100`, set to `0` to load all at once;
 @property (nonatomic)                               NSUInteger loadSize;
-
-
-
-
-
-
 
 
 @end
