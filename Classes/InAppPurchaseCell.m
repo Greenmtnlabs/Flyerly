@@ -10,9 +10,7 @@
 
 @implementation InAppPurchaseCell
 
-@synthesize packageName,packagePrice,packageDescription,packageImage,packageButton;
-
-
+@synthesize packageName,packagePrice,packageDescription;
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
@@ -21,13 +19,11 @@
     // Configure the view for the selected state
 }
 
--(void)setCellValueswithProductTitle :(NSString *)title ProductPrice:(NSString *)price ProductDescription: (NSString *)description ProductImage : (NSString *) productImage {
+-(void)setCellValueswithProductTitle :(NSString *)title ProductPrice:(NSString *)price ProductDescription: (NSString *)description{
     
     packageName.text = title;
     packagePrice.text = price;
     packageDescription.text = description;
-    [packageImage setImage:[UIImage imageNamed:productImage] ];
-    
 }
 
 @end

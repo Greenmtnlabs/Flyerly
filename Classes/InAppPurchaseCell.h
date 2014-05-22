@@ -10,15 +10,12 @@
 
 @interface InAppPurchaseCell : UITableViewCell
 
-@property(nonatomic, strong)IBOutlet UILabel *packageName;
-@property(nonatomic, strong)IBOutlet UILabel *packagePrice;
-@property(nonatomic, strong)IBOutlet UILabel *packageDescription;
-
-@property(nonatomic, strong)IBOutlet UIImageView *packageImage;
-
-@property(nonatomic, strong)IBOutlet UIButton *packageButton;
+@property(nonatomic, retain)IBOutlet UILabel *packageName;
+@property(nonatomic, retain)IBOutlet UILabel *packagePrice;
+@property(nonatomic, retain)IBOutlet UILabel *packageDescription;
 
 
+-(void)setCellValueswithProductTitle :(NSString *)title ProductPrice:(NSString *)price ProductDescription: (NSString *)description;
 
--(void)setCellValueswithProductTitle :(NSString *)title ProductPrice:(NSString *)price ProductDescription: (NSString *)description ProductImage : (NSString *) productImage;
+
 @end
