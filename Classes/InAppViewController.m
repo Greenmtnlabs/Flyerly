@@ -38,6 +38,7 @@ NSMutableArray *productArray;
     //Checking if the user is valid or anonymus
     if ([[PFUser currentUser] sessionToken].length != 0) {
         [loginButton setTitle:(@"RESTORE PURCHASES")];
+        loginButton.titleLabel.textAlignment = UITextAlignmentCenter;
     }else {
         [loginButton setTitle:(@"Sign In")];
     }

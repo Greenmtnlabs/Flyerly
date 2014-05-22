@@ -475,8 +475,6 @@ NSMutableArray *productArray;
             UINavigationController* navigationController = flyrViewController.navigationController;
             [navigationController popViewControllerAnimated:NO];
             [userPurchases_ setUserPurcahsesFromParse];
-            
-            [flyrViewController presentModalViewController:inappviewcontroller_ animated:YES];
         };
         
         [self.navigationController pushViewController:signInController animated:YES];
@@ -497,6 +495,9 @@ NSMutableArray *productArray;
         lockFlyer = NO;
         [self.tView reloadData];
         [inappviewcontroller.paidFeaturesTview reloadData];
+    }else {
+            
+            [self presentModalViewController:inappviewcontroller animated:YES];
     }
 
 }

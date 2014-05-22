@@ -243,22 +243,10 @@ NSMutableArray *productArray;
          [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
         
         [inappviewcontroller.paidFeaturesTview reloadData];
+    }else {
+        
+        [self presentModalViewController:inappviewcontroller animated:YES];
     }
-    
-    
-//    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-//    UserPurchases *userPurchases_ = appDelegate.userPurchases;
-//    
-//    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]  ||
-//        [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
-//        
-//        NSLog(@"Sample,key found");
-//        productPurchased = YES;
-//        UIImage *buttonImage = [UIImage imageNamed:@"ModeVideo.png"];
-//        //[mode setImage:buttonImage forState:UIControlStateNormal];
-//        //[mode setImage:[UIImage imageNamed:@"ModeVideo.png"] forState:UIControlStateHighlighted];
-//        [inappviewcontroller.tView reloadData];
-//    }
     
 }
 
@@ -285,8 +273,6 @@ NSMutableArray *productArray;
             [navigationController popViewControllerAnimated:NO];
             [userPurchases_ setUserPurcahsesFromParse];
 
-            
-           [assetsGroupViewController presentModalViewController:inappviewcontroller_ animated:YES];
         };
         
         [self.navigationController pushViewController:signInController animated:YES];

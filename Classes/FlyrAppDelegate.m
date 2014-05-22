@@ -210,7 +210,6 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     if( !greeted ) {
     
         // This is a first time Flyerly user, so
-        
         [PFUser currentUser].username = @"anonymous";
         
         // Then we create a directory for anonymous users data
@@ -235,7 +234,6 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     } else {
         // User has already been greeted.
         
-        
         // Then we check if the users data has a directory for an anonymous user
         NSString *homeDirectoryPath = NSHomeDirectory();
         NSString *flyersDir = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents"]];
@@ -255,7 +253,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
             // If user has already updated to 4.0, the flow is normal
             if([[NSUserDefaults standardUserDefaults] stringForKey:@"UpdatedVersion"]){
                 
-                lauchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil];
+                LaunchController *lauchController = [[LaunchController alloc]initWithNibName:@"LaunchController" bundle:nil];
                 [navigationController setRootViewController:lauchController];
             
             // Otherwise this is the first time user has updated to 4.0

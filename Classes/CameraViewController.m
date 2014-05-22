@@ -340,8 +340,6 @@ NSMutableArray *productArray;
             UINavigationController* navigationController = cameraViewController.navigationController;
             [navigationController popViewControllerAnimated:NO];
             [userPurchases_ setUserPurcahsesFromParse];
-            
-            [cameraViewController presentModalViewController:inappviewcontroller_ animated:YES];
         };
         
         [self.navigationController pushViewController:signInController animated:YES];
@@ -356,11 +354,14 @@ NSMutableArray *productArray;
     UserPurchases *userPurchases_ = appDelegate.userPurchases;
     
     if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]  ||
-         [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
+         [userPurchases_ checkKeyExistsInPurchases:@"com.flyerly.UnlockCreateVideoFlyerOption"] ) {
         
         [mode setBackgroundImage:[UIImage imageNamed:@"ModeVideo.png"]
                         forState:UIControlStateNormal];
         [inappviewcontroller.paidFeaturesTview reloadData];
+    }else {
+        
+        [self presentModalViewController:inappviewcontroller animated:YES];
     }
     
 }
@@ -370,7 +371,7 @@ NSMutableArray *productArray;
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     UserPurchases *userPurchases_ = appDelegate.userPurchases;
     if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
-        [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
+        [userPurchases_ checkKeyExistsInPurchases:@"com.flyerly.UnlockCreateVideoFlyerOption"] ) {
         
         UIImage *buttonImage = [UIImage imageNamed:@"ModeVideo.png"];
         [mode setImage:buttonImage forState:UIControlStateNormal];
@@ -387,7 +388,7 @@ NSMutableArray *productArray;
     
     
     if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
-        [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
+        [userPurchases_ checkKeyExistsInPurchases:@"com.flyerly.UnlockCreateVideoFlyerOption"] ) {
         
         UIImage *buttonImage = [UIImage imageNamed:@"ModeVideo.png"];
         [mode setImage:buttonImage forState:UIControlStateNormal];
