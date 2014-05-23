@@ -39,6 +39,7 @@
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
+                <outlet property="packageDescription" destination="me5-Yh-5xH" id="NM0-9q-XCU"/>
                 <outlet property="packageName" destination="mW3-tW-9Si" id="v4N-y4-pwJ"/>
                 <outlet property="packagePrice" destination="I9c-Dv-5tD" id="Tmb-KT-vMt"/>
             </connections>

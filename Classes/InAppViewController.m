@@ -16,7 +16,7 @@
 @implementation InAppViewController 
 
 NSMutableArray *productArray;
-@synthesize freeFeaturesTview,paidFeaturesTview,loginButton;
+@synthesize freeFeaturesTview,paidFeaturesTview,loginButton,completeDesignBundleButton;
 
 
 - (void)viewDidLoad
@@ -52,6 +52,14 @@ NSMutableArray *productArray;
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
+/*
+ * Here we
+ */
+-(IBAction)purchaseCompleteBundle {
+    
+    [self purchaseProductAtIndex:0];
+
+}
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -211,8 +219,12 @@ NSMutableArray *productArray;
             
         }
         
+        if([[product objectForKey:@"productidentifier"] isEqualToString:@"com.flyerly.AllDesignBundle"]) {
+            [completeDesignBundleButton setTitle:[product objectForKey:@"packageprice"] forState:UIControlStateNormal];
+        }
+        
         //Setting the packagename,packageprice,packagedesciption values for cell view
-        [cell setCellValueswithProductTitle:[product objectForKey:@"packagename"] ProductPrice:[product objectForKey:@"packageprice"]ProductDescription:[product objectForKey:@"packagedesciption"]];
+        [cell setCellValueswithProductTitle:[product objectForKey:@"packagename"] ProductPrice:[product objectForKey:@"packageprice"] ProductDescription:[product objectForKey:@"packagedesciption"]];
         
         return cell;
     }else {

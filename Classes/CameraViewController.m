@@ -256,6 +256,8 @@ NSMutableArray *productArray;
                 _flyerImageView.image = nil;
                 _flyerImageView.hidden = NO;
             }
+        }else {
+            [self openPanel];
         }
     
     }else {
