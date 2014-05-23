@@ -396,8 +396,10 @@ NSMutableArray *productArray;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    
     [super viewWillAppear:animated];
+    
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"Camerabottom"] forBarMetrics:UIBarMetricsDefault];
+    
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     UserPurchases *userPurchases_ = appDelegate.userPurchases;
     //NSMutableDictionary *oldPurchases =  userPurchases_.oldPurchases;//[[NSUserDefaults standardUserDefaults] valueForKey:@"InAppPurchases"];

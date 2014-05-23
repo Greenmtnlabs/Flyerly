@@ -386,6 +386,9 @@ int selectedAddMoreLayerTab = -1;
 
     [Flurry logEvent:@"Saved Flyer"];
     [self.navigationController popViewControllerAnimated:YES];
+    
+    // Remove observers
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 
