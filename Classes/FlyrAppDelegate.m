@@ -247,13 +247,13 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
             lauchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil];
             [navigationController setRootViewController:lauchController];
             
-        // Otherwise we have an already signed up user
-        } else {
+        // Otherwise we have an already logged in user
+        } else if ([[NSUserDefaults standardUserDefaults] stringForKey:@"User"] != nil ){
             
             // If user has already updated to 4.0, the flow is normal
             if([[NSUserDefaults standardUserDefaults] stringForKey:@"UpdatedVersion"]){
                 
-                LaunchController *lauchController = [[LaunchController alloc]initWithNibName:@"LaunchController" bundle:nil];
+                lauchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil];
                 [navigationController setRootViewController:lauchController];
             
             // Otherwise this is the first time user has updated to 4.0
@@ -269,6 +269,13 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 
                 
             }
+        // A use signed up on this device but is currently not logged in
+        } else if (contentOfDirectory.count > 0
+                   && !([[contentOfDirectory objectAtIndex:0] isEqual:@"anonymous"])) {
+            
+            accountController = [[LaunchController alloc]initWithNibName:@"LaunchController" bundle:nil];
+            [navigationController setRootViewController:accountController];
+            
         }
     }
     
