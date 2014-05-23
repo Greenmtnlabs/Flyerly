@@ -27,7 +27,6 @@
             return false;
         }
     }
-    
 
 }
 
@@ -36,7 +35,18 @@
  */
 - (void)setUserPurcahsesFromParse {
     
-    if ([[PFUser currentUser] sessionToken].length != 0) {
+    // We assume here that clearPurchases is called on logout, so these do not exist after a user logs out
+    if([[NSUserDefaults standardUserDefaults] valueForKey:@"InAppPurchases"]) {
+        
+        oldPurchases = [[NSMutableDictionary alloc]
+                                            initWithDictionary:[[NSUserDefaults standardUserDefaults]
+                                                                valueForKey:@"InAppPurchases"]];
+        
+        if ( delegate != nil ) {
+            [delegate userPurchasesLoaded];
+        }
+        
+    } else if ([[PFUser currentUser] sessionToken].length != 0) {
         
         //Getting Current User
         PFUser *user = [PFUser currentUser];
@@ -57,9 +67,11 @@
                     //Here we set User purchse details which returned from Parse
                     oldPurchases = [[objects objectAtIndex:0] valueForKey:@"json"];
                     
+                    [[NSUserDefaults standardUserDefaults]setValue:oldPurchases forKey:@"InAppPurchases"];
+                    
                 }
                 
-                if ( delegate != nil /*&& [delegate respondsToSelector:@selector(userPurchasesLoaded:)]*/ ) {
+                if ( delegate != nil ) {
                     [delegate userPurchasesLoaded];
                 }
 
@@ -71,14 +83,11 @@
                 NSLog(@"Error: %@ %@", error, [error userInfo]);
             }
         }];
-    }else {
+    } else {
         oldPurchases = nil;
     }
     
 }
-
-
-
 
 @end
 

@@ -59,7 +59,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     phno.text = user[@"contact"];
 
     // HERE WE HIDE USER FIELD IF USER LOGIN WITH FACBOOK OR TWITTER
-    if([[NSUserDefaults standardUserDefaults] stringForKey:@"User"]){
+    if([[NSUserDefaults standardUserDefaults] stringForKey:@"FlyerlyUser"]){
 
         username.text = user.username;
     } else {

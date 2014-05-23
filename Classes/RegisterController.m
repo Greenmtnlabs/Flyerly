@@ -139,6 +139,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
             
             //Saving User Info for again Login
             [[NSUserDefaults standardUserDefaults]  setObject:userName forKey:@"User"];
+            [[NSUserDefaults standardUserDefaults]  setBool:YES forKey:@"FlyerlyUser"];
             
             warningAlert = [[UIAlertView  alloc]initWithTitle:@"Account already exists using this account." message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Sign In",nil];
             
@@ -189,8 +190,8 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
                  // here we Checking  User Merge required or not
                 [appDelegate fbChangeforNewVersion];
                 
-                // Remove Current UserName for Device configuration
-                [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"User"];
+                //Saving User Info for again login
+                [[NSUserDefaults standardUserDefaults]  setObject:[user.username lowercaseString] forKey:@"User"];
                 
                [self onRegistrationSuccess];
                 
@@ -198,12 +199,8 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
                 
                 NSLog(@"User with facebook logged in!");
                 
-                // Remove Current UserName for Device configuration
-                [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"User"];
-                
-                // Temp on for Testing here
-                // FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-                // [appDelegate fbChangeforNewVersion];
+                //Saving User Info for again login
+                [[NSUserDefaults standardUserDefaults]  setObject:[user.username lowercaseString] forKey:@"User"];
                 
                 [self onRegistrationSuccess];
                 
@@ -262,8 +259,8 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
                 
                 NSString *twitterUsername = [PFTwitterUtils twitter].userId;
                 
-                // Remove Current UserName for Device configuration
-                [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"User"];
+                //Saving User Info for again login
+                [[NSUserDefaults standardUserDefaults]  setObject:[user.username lowercaseString] forKey:@"User"];
                 
                 // For Parse New User Merge to old Twitter User
                 FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
@@ -273,14 +270,8 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
                 
                 NSLog(@"User logged in with Twitter!");
                 
-                // Remove Current UserName for Device configuration
-                [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"User"];
-                
-                // Temp on for Testing here
-                // For Parse New User Merge to old Twitter User
-                /*
-                 FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-                 [appDelegate twitterChangeforNewVersion:twitterUsername];*/
+                //Saving User Info for again login
+                [[NSUserDefaults standardUserDefaults]  setObject:[user.username lowercaseString] forKey:@"User"];
                 
                 [self onRegistrationSuccess];
             }
@@ -353,6 +344,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     
     //Saving User Info for again login
     [[NSUserDefaults standardUserDefaults]  setObject:userName forKey:@"User"];
+    [[NSUserDefaults standardUserDefaults]  setBool:YES forKey:@"FlyerlyUser"];
 
     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         

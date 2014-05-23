@@ -134,6 +134,7 @@
         
         //Saving User Info for again login
         [[NSUserDefaults standardUserDefaults]  setObject:userName forKey:@"User"];
+        [[NSUserDefaults standardUserDefaults]  setBool:YES forKey:@"FlyerlyUser"];
         
         //Update Folder Structure For 3.0 Version
         PFUser *user = [PFUser currentUser];
@@ -190,8 +191,8 @@
                 
                 [self onSignInSuccess];
 
-                // Remove Current UserName for Device configuration
-                [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"User"];
+                //Saving User Info for again login
+                [[NSUserDefaults standardUserDefaults]  setObject:[user.username lowercaseString] forKey:@"User"];
                 
                 // Login success Move to Flyerly
                  launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil] ;
@@ -215,8 +216,8 @@
                 
                 [self onSignInSuccess];
                 
-                // Remove Current UserName for Device configuration
-                [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"User"];
+                //Saving User Info for again login
+                [[NSUserDefaults standardUserDefaults]  setObject:[user.username lowercaseString] forKey:@"User"];
                 
                 // Login success Move to Flyerly
                 launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil] ;
@@ -269,8 +270,8 @@
 
                 NSString *twitterUsername = [PFTwitterUtils twitter].screenName;
                 
-                // Remove Current UserName for Device configuration
-                [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"User"];
+                //Saving User Info for again login
+                [[NSUserDefaults standardUserDefaults]  setObject:[user.username lowercaseString] forKey:@"User"];
 
                 // Login success Move to Flyerly
                 launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil] ;
@@ -295,8 +296,8 @@
                 
                 [self onSignInSuccess];
                 
-                // Remove Current UserName for Device configuration
-                [[NSUserDefaults standardUserDefaults]  removeObjectForKey:@"User"];
+                //Saving User Info for again login
+                [[NSUserDefaults standardUserDefaults]  setObject:[user.username lowercaseString] forKey:@"User"];
                 
                 // Login success Move to Flyerly
 

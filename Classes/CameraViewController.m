@@ -370,8 +370,8 @@ NSMutableArray *productArray;
     
     if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]  ||
          [userPurchases_ checkKeyExistsInPurchases:@"com.flyerly.UnlockCreateVideoFlyerOption"] ) {
-        [_mode setBackgroundImage:[UIImage imageNamed:@"ModeVideo.png"]
-                        forState:UIControlStateNormal];
+        
+        [_mode setImage:[UIImage imageNamed:@"ModeVideo.png"] forState:UIControlStateNormal];
         [inappviewcontroller.paidFeaturesTview reloadData];
     }else {
         
