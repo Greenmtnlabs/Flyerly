@@ -2767,8 +2767,8 @@
 		20FA7E6E1872AAE10057C3F3 /* Camera */ = {
 			isa = PBXGroup;
 			children = (
-				24803522192F3207009403F7 /* CameraViewController.m */,
 				20FA7E6F1872AAF50057C3F3 /* CameraViewController.h */,
+				24803522192F3207009403F7 /* CameraViewController.m */,
 				20FA7E711872AAF50057C3F3 /* CameraViewController.xib */,
 				20A1CD6118EEF63200484391 /* SubNBUCamera.h */,
 				20A1CD6218EEF63200484391 /* SubNBUCamera.m */,
