@@ -8,14 +8,11 @@
 #import "CameraViewController.h"
 #import "CropViewController.h"
 #import "LibraryViewController.h"
+#import "CropVideoViewController.h"
 
 @implementation CameraViewController
 
 NSMutableArray *productArray;
-
-@synthesize cameraLines;
-@synthesize desiredImageSize,progressView;
-@synthesize onImageTaken,onVideoFinished,onVideoCancel,mode,videoAllow,flyerImageView;
 
 /**
  * Setup the controller.
@@ -40,13 +37,7 @@ NSMutableArray *productArray;
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"Camerabottom"] forBarMetrics:UIBarMetricsDefault];
     
     productPurchased = NO;
-    
-    if ([self.videoAllow isEqualToString:@"YES"]) {
-        mode.hidden = NO;
-    }else {
-        mode.hidden = YES;
-    }
-    
+    _mode.hidden = !_videoAllow;
     
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     userPurchases = appDelegate.userPurchases;
@@ -56,15 +47,15 @@ NSMutableArray *productArray;
         if ( [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
              [userPurchases checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"] ) {
             
-            [mode setBackgroundImage:[UIImage imageNamed:@"ModeVideo.png"]
+            [_mode setBackgroundImage:[UIImage imageNamed:@"ModeVideo.png"]
                                 forState:UIControlStateNormal];
         }
         
     }
     
     //Here we Add Flyer ImageView For Video
-    [self.cameraView addSubview:flyerImageView];
-    flyerImageView.hidden = YES;
+    [self.cameraView addSubview:_flyerImageView];
+    _flyerImageView.hidden = YES;
     
     self.cameraView.targetResolution = CGSizeMake( 1024, 1024 ); // The minimum resolution we want
     self.cameraView.keepFrontCameraPicturesMirrored = YES;
@@ -86,13 +77,20 @@ NSMutableArray *productArray;
     };
     
     
-    // Configure for video
-    // self.cameraView.targetMovieFolder = [UIApplication sharedApplication];
-    
-    self.cameraView.captureMovieResultBlock = ^(NSURL *movieUrl,NSError * error) {
+    // Capture block for videos
+    self.cameraView.captureMovieResultBlock = ^(NSURL *movieUrl, NSError * error) {
         if (!error) {
-            self.onVideoFinished(movieUrl);
-            [self.navigationController popViewControllerAnimated:YES];
+
+            
+            // Do in the main UI thread.
+            dispatch_async( dispatch_get_main_queue(), ^{
+                // Show navigation bar
+                weakSelf.navigationController.navigationBarHidden = NO;
+                
+                // Crop the video
+                [weakSelf cropVideo:movieUrl];
+            });
+
         }
         
     };
@@ -104,7 +102,10 @@ NSMutableArray *productArray;
     self.cameraView.exposureButtonConfigurationBlock = [self.cameraView buttonConfigurationBlockWithTitleFrom:
                                                         @[@"Exp", @"Auto", @"Cont"]];
     self.cameraView.whiteBalanceButtonConfigurationBlock = [self.cameraView buttonConfigurationBlockWithTitleFrom:
-                                                            @[@"Lckd", @"Auto", @"Cont"]];  
+
+                                                            @[@"Lckd", @"Auto", @"Cont"]];
+        
+
 }
 
 /*
@@ -134,14 +135,33 @@ NSMutableArray *productArray;
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
     
     CropViewController *nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController" bundle:nil];
-    nbuCrop.desiredImageSize = desiredImageSize;
+    nbuCrop.desiredImageSize = _desiredImageSize;
     nbuCrop.image = [image imageWithOrientationUp];
-    nbuCrop.onImageTaken = onImageTaken;
+    nbuCrop.onImageTaken = _onImageTaken;
 
     // Pop the current view, and push the crop view.
     NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[[self navigationController] viewControllers]];
     [viewControllers removeLastObject];
     [viewControllers addObject:nbuCrop];
+    [[self navigationController] setViewControllers:viewControllers animated:YES];
+}
+
+/**
+ * Crop video using crop video view controller.
+ */
+-(void) cropVideo:(NSURL *)movieUrl {
+    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+    
+    CropVideoViewController *cropVideo = [[CropVideoViewController alloc] initWithNibName:@"CropVideoViewController" bundle:nil];
+    cropVideo.desiredVideoSize = _desiredImageSize;
+    cropVideo.url = movieUrl;
+    cropVideo.onVideoFinished = _onVideoFinished;
+    cropVideo.onVideoCancel = _onVideoCancel;
+    
+    // Pop the current view, and push the crop view.
+    NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[[self navigationController] viewControllers]];
+    [viewControllers removeLastObject];
+    [viewControllers addObject:cropVideo];
     [[self navigationController] setViewControllers:viewControllers animated:YES];
 }
 
@@ -151,11 +171,7 @@ NSMutableArray *productArray;
  * Show / hide camera lines.
  */
 - (IBAction)setCameraLine:(id)sender{
-    if (cameraLines.hidden == YES) {
-        cameraLines.hidden = NO;
-    }else{
-        cameraLines.hidden = YES;
-    }
+    _cameraLines.hidden = !_cameraLines.hidden;
 }
 
 /**
@@ -163,7 +179,7 @@ NSMutableArray *productArray;
  */
 - (void)cameraCancel:(id)sender{
     
-    if ([self.videoAllow isEqualToString:@"YES"]) {
+    if ( _videoAllow ) {
         self.flyerImageView.hidden = NO;
         self.onVideoCancel();
     }
@@ -189,11 +205,11 @@ NSMutableArray *productArray;
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
     
     LibraryViewController *nbugallery = [[LibraryViewController alloc]initWithNibName:@"LibraryViewController" bundle:nil];
-    nbugallery.desiredImageSize = desiredImageSize;
-    nbugallery.onImageTaken = onImageTaken;
-    nbugallery.onVideoFinished = onVideoFinished;
-    nbugallery.onVideoCancel = onVideoCancel;
-    nbugallery.videoAllow = videoAllow;
+    nbugallery.desiredImageSize = _desiredImageSize;
+    nbugallery.onImageTaken = _onImageTaken;
+    nbugallery.onVideoFinished = _onVideoFinished;
+    nbugallery.onVideoCancel = _onVideoCancel;
+    nbugallery.videoAllow = _videoAllow;
     
     // Pop the current view, and push the crop view.
     NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[[self navigationController] viewControllers]];
@@ -216,30 +232,29 @@ NSMutableArray *productArray;
     UIButton *flash = (UIButton *)  self.cameraView.flashButton;
 
     if ([[PFUser currentUser] sessionToken].length != 0) {
-    
         if ( [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
              [userPurchases checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"] ) {
             
-            if ([mode isSelected] == YES) {
+            if ([_mode isSelected] == YES) {
                 
                 //Enable Camera Mode
-                [mode setSelected:NO];
+                [_mode setSelected:NO];
                 [shoot setImage:[UIImage imageNamed:@"camera_button"] forState:UIControlStateNormal];
                 [shoot setImage:[UIImage imageNamed:@"camera_button"] forState:UIControlStateSelected];
                 [flash setHidden:NO];
-                progressView.hidden = YES;
-                flyerImageView.hidden = YES;
+                _progressView.hidden = YES;
+                _flyerImageView.hidden = YES;
                 
             }else {
                 
                 //Enable Video Mode
-                [mode setSelected:YES];
+                [_mode setSelected:YES];
                 [shoot setImage:[UIImage imageNamed:@"recording_button"] forState:UIControlStateNormal];
                 [shoot setImage:[UIImage imageNamed:@"stop_button"] forState:UIControlStateSelected];
                 [flash setHidden:YES];
-                progressView.hidden = NO;
-                flyerImageView.image = nil;
-                flyerImageView.hidden = NO;
+                _progressView.hidden = NO;
+                _flyerImageView.image = nil;
+                _flyerImageView.hidden = NO;
             }
         }
     
@@ -256,7 +271,7 @@ NSMutableArray *productArray;
     
     UIButton *shoot = (UIButton *)  self.cameraView.shootButton;
     
-    if ([mode isSelected] == YES) {
+    if ([_mode isSelected] == YES) {
         
         //Action for Video Mode
         [shoot setSelected:YES];
@@ -279,7 +294,7 @@ NSMutableArray *productArray;
 - (IBAction)tapAndHold:(id)sender {
     UIButton *shoot = (UIButton *)  self.cameraView.shootButton;
     
-    if ([mode isSelected] == YES) {
+    if ([_mode isSelected] == YES) {
         
         //Action for Video Mode
         [shoot setSelected:YES];
@@ -300,13 +315,13 @@ NSMutableArray *productArray;
 
 -(IBAction)showWithProgress:(id)sender {
     progress = 0.0f;
-    progressView.progress = progress;
+    _progressView.progress = progress;
     [self performSelector:@selector(increaseProgress) withObject:nil afterDelay:0.1];
 }
 
 -(void)increaseProgress {
     progress+=0.0033;
-    progressView.progress = progress;
+    _progressView.progress = progress;
     if(progress < 1.0)
         [self performSelector:@selector(increaseProgress) withObject:nil afterDelay:0.1];
     else
@@ -355,8 +370,7 @@ NSMutableArray *productArray;
     
     if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]  ||
          [userPurchases_ checkKeyExistsInPurchases:@"com.flyerly.UnlockCreateVideoFlyerOption"] ) {
-        
-        [mode setBackgroundImage:[UIImage imageNamed:@"ModeVideo.png"]
+        [_mode setBackgroundImage:[UIImage imageNamed:@"ModeVideo.png"]
                         forState:UIControlStateNormal];
         [inappviewcontroller.paidFeaturesTview reloadData];
     }else {
@@ -374,7 +388,7 @@ NSMutableArray *productArray;
         [userPurchases_ checkKeyExistsInPurchases:@"com.flyerly.UnlockCreateVideoFlyerOption"] ) {
         
         UIImage *buttonImage = [UIImage imageNamed:@"ModeVideo.png"];
-        [mode setImage:buttonImage forState:UIControlStateNormal];
+        [_mode setImage:buttonImage forState:UIControlStateNormal];
     }
     
 }
@@ -391,7 +405,7 @@ NSMutableArray *productArray;
         [userPurchases_ checkKeyExistsInPurchases:@"com.flyerly.UnlockCreateVideoFlyerOption"] ) {
         
         UIImage *buttonImage = [UIImage imageNamed:@"ModeVideo.png"];
-        [mode setImage:buttonImage forState:UIControlStateNormal];
+        [_mode setImage:buttonImage forState:UIControlStateNormal];
     }
 }
 

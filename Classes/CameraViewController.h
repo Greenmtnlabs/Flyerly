@@ -27,7 +27,7 @@
 
 @property CGSize desiredImageSize;
 @property (nonatomic, copy) void (^onImageTaken)(UIImage *);
-@property (nonatomic, copy) void (^onVideoFinished)(NSURL *);
+@property (nonatomic, copy) void (^onVideoFinished)(NSURL *, CGRect, CGFloat);
 @property (nonatomic, copy) void (^onVideoCancel)();
 
 
@@ -37,7 +37,7 @@
 @property (assign, nonatomic) IBOutlet UIImageView *flyerImageView;
 @property (assign, nonatomic) IBOutlet UIProgressView *progressView;
 @property (strong, nonatomic) IBOutlet UIButton *mode;
-@property (strong, nonatomic) NSString *videoAllow;
+@property BOOL videoAllow;
 @property (nonatomic, strong) UIView *inAppPurchasePanel;
 
 

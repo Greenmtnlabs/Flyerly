@@ -145,11 +145,6 @@
 @property(strong,nonatomic) NSMutableDictionary *layersDic;
 @property (nonatomic, copy) void (^onFlyerBack)(NSString *);
 
-
--(void)loadCustomPhotoLibrary :(NSString *)videoAllow;
-
--(void)openCustomCamera;
-
 -(void) callDeleteLayer;
 -(void) choosePhoto;
 -(void) donePhoto;

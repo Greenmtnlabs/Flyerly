@@ -21,7 +21,7 @@ fontBorderTabButton,addMoreIconTabButton,addMorePhotoTabButton,addMoreSymbolTabB
 int selectedAddMoreLayerTab = -1;
 
 
-#pragma mark  View Appear Methods
+#pragma mark -  View Appear Methods
 
 -(void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:YES];
@@ -269,7 +269,7 @@ int selectedAddMoreLayerTab = -1;
 
 }
 
-#pragma mark  View DisAppear Methods
+#pragma mark -  View DisAppear Methods
 
 /*
  * This Method Call On Back Button
@@ -389,7 +389,7 @@ int selectedAddMoreLayerTab = -1;
 
 
 
-#pragma mark  Add Content In ScrollViews
+#pragma mark -  Add Content In ScrollViews
 
 /*
  * Add templates in scroll views
@@ -1151,7 +1151,7 @@ int selectedAddMoreLayerTab = -1;
 }
 
 
-#pragma mark  Select Layer On ScrollView
+#pragma mark -  Select Layer On ScrollView
 
 /*
  * When any font is selected
@@ -1580,7 +1580,7 @@ int selectedAddMoreLayerTab = -1;
 }
 
 
-#pragma mark  Progress Indicator
+#pragma mark -  Progress Indicator
 
 -(void)showLoadingView:(NSString *)message{
     [self showLoadingIndicator];
@@ -1590,13 +1590,12 @@ int selectedAddMoreLayerTab = -1;
     [self hideLoadingIndicator];
 }
 
-#pragma mark  NBUKIT
+#pragma mark -  NBUKIT
 
 /*
  * Here we Load Gallery
  */
--(void)loadCustomPhotoLibrary :(NSString *)videoAllow {
-
+-(void)loadCustomPhotoLibrary :(BOOL)videoAllow {
 
     uiBusy = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     [uiBusy setFrame:CGRectMake(280, 5, 20, 20)];
@@ -1660,7 +1659,7 @@ int selectedAddMoreLayerTab = -1;
         });
     }];
     
-    
+    /*
     [nbuGallary setOnVideoFinished:^(NSURL *recvUrl) {
         
         [uiBusy stopAnimating];
@@ -1691,7 +1690,7 @@ int selectedAddMoreLayerTab = -1;
         //HERE WE RENDER MOVIE PLAYER
         [self.flyimgView renderLayer:@"Template" layerDictionary:[self.flyer getLayerFromMaster:@"Template"]];
 
-    }];
+    }];*/
     
     [nbuGallary setOnVideoCancel:^() {
         
@@ -1705,84 +1704,12 @@ int selectedAddMoreLayerTab = -1;
 }
 
 
-
-
-/*
- * Here we Open Camera for Capture Image
- */
--(void)openCustomCamera{
-
-
-    uiBusy = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-    [uiBusy setFrame:CGRectMake(280, 5, 20, 20)];
-    [uiBusy setColor:[UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0]];
-    uiBusy.hidesWhenStopped = YES;
-    [uiBusy startAnimating];
-    [self.view addSubview:uiBusy];
-    
-    CameraViewController *nbuCamera = [[CameraViewController alloc]initWithNibName:@"CameraViewController" bundle:nil];
-    
-    if ( imgPickerFlag == 2 ) {
-        NSDictionary *dict = [flyer getLayerFromMaster:currentLayer];
-        nbuCamera.desiredImageSize = CGSizeMake( [[dict valueForKey:@"width"] floatValue],
-                                                 [[dict valueForKey:@"height"] floatValue]);
-    } else {
-        nbuCamera.desiredImageSize = CGSizeMake( 300,  300 );
-    }
-    
-    __weak CreateFlyerController *weakSelf = self;
-    // Callback once image is selected.
-    [nbuCamera setOnImageTaken:^(UIImage *img) {
-        
-        [uiBusy stopAnimating];
-        [uiBusy removeFromSuperview];
-        dispatch_async( dispatch_get_main_queue(), ^{
-            // Do any UI operation here (render layer).
-            
-            if (weakSelf.imgPickerFlag == 2) {
-                
-                NSString *imgPath = [weakSelf getImagePathforPhoto:img];
-                
-                //Set Image to dictionary
-                [weakSelf.flyer setImagePath:weakSelf.currentLayer ImgPath:imgPath];
-                
-                //Here we Create ImageView Layer
-                [weakSelf.flyimgView renderLayer:weakSelf.currentLayer layerDictionary:[weakSelf.flyer getLayerFromMaster:weakSelf.currentLayer]];
-                
-                [weakSelf.flyimgView layerStoppedEditing:weakSelf.currentLayer];
-                [Flurry logEvent:@"Custom Photo"];
-                
-                weakSelf.imgPickerFlag = 1;
-                
-            }else{
-                
-                //Here we Set Flyer Type
-                [weakSelf.flyer setFlyerTypeImage];
-                
-                //Create Copy of Image
-                [weakSelf copyImageToTemplate:img];
-                
-                
-                //set template Image
-                [weakSelf.flyimgView setTemplate:[NSString stringWithFormat:@"Template/template.%@",IMAGETYPE ]];
-                [Flurry logEvent:@"Custom Background"];
-                
-            }
-        });
-    }];
-    
-    
-    [self.navigationController pushViewController:nbuCamera animated:YES];
-}
-
-
-#pragma mark Add Video
+#pragma mark - Add Video
 /*
  * Here we Overload Open Camera for Video
  */
--(void)openCustomCamera :(BOOL *)forVideo{
+-(void)openCustomCamera:(BOOL)forVideo {
     
-
     uiBusy = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     [uiBusy setFrame:CGRectMake(280, 5, 20, 20)];
     [uiBusy setColor:[UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0]];
@@ -1792,13 +1719,11 @@ int selectedAddMoreLayerTab = -1;
     
     CameraViewController *nbuCamera = [[CameraViewController alloc]initWithNibName:@"CameraViewController" bundle:nil];
     
-    //Here we Pass FlyerImageView For Video
-   // nbuCamera.flyerImageView = self.flyimgView;
-    
-    nbuCamera.videoAllow = @"YES";
+    nbuCamera.videoAllow = forVideo;
     nbuCamera.desiredImageSize = CGSizeMake( 300,  300 );
     
-      __weak CreateFlyerController *weakSelf = self;
+    __weak CreateFlyerController *weakSelf = self;
+    
     // Callback once image is selected.
     [nbuCamera setOnImageTaken:^(UIImage *img) {
         
@@ -1823,19 +1748,18 @@ int selectedAddMoreLayerTab = -1;
         
     }];
 
-        
-    [nbuCamera setOnVideoFinished:^(NSURL *recvUrl) {
+    // Call back for when video is selected.
+    [nbuCamera setOnVideoFinished:^(NSURL *recvUrl, CGRect cropRect, CGFloat scale ) {
         
         [uiBusy stopAnimating];
         [uiBusy removeFromSuperview];
 
-        NSLog(@"%@",recvUrl);
         NSError *error = nil;
-        [self.view addSubview:flyimgView];
         
+        [self.view addSubview:flyimgView];
         [self.flyer setFlyerTypeVideo];
-
-        // HERE WE MOVE SOURCE FILE INTO FLYER FOLDER
+        
+        // Move video in to the sour flyer.
         NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
 
         NSString *destination = [NSString stringWithFormat:@"%@/Template/template.mov",currentpath];
@@ -1843,18 +1767,30 @@ int selectedAddMoreLayerTab = -1;
         
         NSURL *movieURL = [NSURL fileURLWithPath:destination];
 
-
-        //HERE WE MAKE SURE FILE ALREADY EXISTS THEN DELETE IT OTHERWISE IGNORE
+        // Make sure the video does not exist already. If it does, delete it.
         if ([[NSFileManager defaultManager] fileExistsAtPath:destination isDirectory:NULL]) {
             [[NSFileManager defaultManager] removeItemAtPath:destination error:&error];
         }
         
-
-        //THNE HERE WE MOVE FILE INTO FLYER TEMPLATE FOLDER
-        [[NSFileManager defaultManager] moveItemAtURL:recvUrl toURL:movieURL error:&error];
-
-        //HERE WE RENDER MOVIE PLAYER
-        [self.flyimgView renderLayer:@"Template" layerDictionary:[self.flyer getLayerFromMaster:@"Template"]];
+        // Make sure the video is scaled and cropped as required.
+        [self modifyVideo:recvUrl destination:movieURL crop:cropRect scale:scale overlay:nil completion:^(NSInteger status, NSError *error) {
+            switch ( status ) {
+                case AVAssetExportSessionStatusFailed:
+                    NSLog (@"FAIL = %@", error );
+                    break;
+                
+                case AVAssetExportSessionStatusCompleted:
+                    
+                    // Main Thread
+                    dispatch_async( dispatch_get_main_queue(), ^{
+                            
+                        // Render the movie player.
+                        [self.flyimgView renderLayer:@"Template" layerDictionary:[self.flyer getLayerFromMaster:@"Template"]];
+                            
+                    });
+                    break;
+            }
+        }];
         
       }];
     
@@ -1870,7 +1806,7 @@ int selectedAddMoreLayerTab = -1;
     [self.navigationController pushViewController:nbuCamera animated:YES];
 }
 
-#pragma mark  Movie Player
+#pragma mark -  Movie Player
 
 /*
  * Here we Configure Player and Load File in Player
@@ -1963,7 +1899,7 @@ int selectedAddMoreLayerTab = -1;
 }
 
 
-#pragma mark  Movie Player Delegate
+#pragma mark -  Movie Player Delegate
 
 
 /*
@@ -2021,7 +1957,7 @@ int selectedAddMoreLayerTab = -1;
 }
 
 
-#pragma mark UIAlertView delegate
+#pragma mark - UIAlertView delegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     
@@ -2085,7 +2021,7 @@ int selectedAddMoreLayerTab = -1;
   }
 
 
-#pragma mark Custom Methods
+#pragma mark - Custom Methods
 
 /*
  * Load Help Screen
@@ -2506,6 +2442,114 @@ int selectedAddMoreLayerTab = -1;
     return isPortrait;
 }
 
+# pragma mark - Video editing
+
+/**
+ * Export video to given destination, from given source, cropped and scaled to specified
+ * rect with the given overlay.
+ */
+- (void)modifyVideo:(NSURL *)src destination:(NSURL *)dest crop:(CGRect)crop
+              scale:(CGFloat)scale overlay:(UIImage *)image
+         completion:(void (^)(NSInteger, NSError *))callback {
+    
+    // Get a pointer to the asset
+    AVURLAsset* firstAsset = [AVURLAsset URLAssetWithURL:src options:nil];
+    
+    // Make an instance of avmutablecomposition so that we can edit this asset:
+    AVMutableComposition* mixComposition = [AVMutableComposition composition];
+    
+    // Add tracks to this composition
+    AVMutableCompositionTrack *videoTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeVideo preferredTrackID:kCMPersistentTrackID_Invalid];
+    
+    // Audio track
+    AVMutableCompositionTrack *audioTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeAudio preferredTrackID:kCMPersistentTrackID_Invalid];
+    
+    // Image video is always 30 seconds. So we use that unless the background video is smaller.
+    CMTime inTime = CMTimeMake( MAX_VIDEO_LENGTH * VIDEOFRAME, VIDEOFRAME );
+    if ( CMTimeCompare( firstAsset.duration, inTime ) < 0 ) {
+        inTime = firstAsset.duration;
+    }
+    
+    // Add to the video track.
+    NSArray *videos = [firstAsset tracksWithMediaType:AVMediaTypeVideo];
+    CGAffineTransform transform;
+    if ( videos.count > 0 ) {
+        AVAssetTrack *track = [videos objectAtIndex:0];
+        [videoTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, inTime) ofTrack:track atTime:kCMTimeZero error:nil];
+        transform = track.preferredTransform;
+        videoTrack.preferredTransform = transform;
+    }
+    
+    // Add the audio track.
+    NSArray *audios = [firstAsset tracksWithMediaType:AVMediaTypeAudio];
+    if ( audios.count > 0 ) {
+        [audioTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, inTime) ofTrack:[audios objectAtIndex:0] atTime:kCMTimeZero error:nil];
+    }
+    
+    // Set the mix composition size.
+    mixComposition.naturalSize = crop.size;
+    
+    // Set up the composition parameters.
+    AVMutableVideoComposition *videoComposition = [AVMutableVideoComposition videoComposition];
+    videoComposition.frameDuration = CMTimeMake(1, VIDEOFRAME );
+    videoComposition.renderSize = crop.size;
+    videoComposition.renderScale = 1.0;
+    
+    // Pass through parameters for animation.
+    AVMutableVideoCompositionInstruction *passThroughInstruction = [AVMutableVideoCompositionInstruction videoCompositionInstruction];
+    passThroughInstruction.timeRange = CMTimeRangeMake(kCMTimeZero, inTime);
+    
+    // Layer instructions
+    AVMutableVideoCompositionLayerInstruction *passThroughLayer = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:videoTrack];
+    
+    // Set the transform to maintain orientation
+    if ( scale != 1.0 ) {
+        CGAffineTransform scaleTransform = CGAffineTransformMakeScale( scale, scale);
+        CGAffineTransform translateTransform = CGAffineTransformTranslate( CGAffineTransformIdentity,
+                                                                          -crop.origin.x,
+                                                                          -crop.origin.y);
+        transform = CGAffineTransformConcat( transform, scaleTransform );
+        transform = CGAffineTransformConcat( transform, translateTransform);
+    }
+    
+    [passThroughLayer setTransform:transform atTime:kCMTimeZero];
+    
+    passThroughInstruction.layerInstructions = @[ passThroughLayer ];
+    videoComposition.instructions = @[passThroughInstruction];
+    
+    // If an image is given, then put that in the animation.
+    if ( image != nil ) {
+    
+        // Layer that merges the video and image
+        CALayer *parentLayer = [CALayer layer];
+    
+        // Layer that renders the video.
+        CALayer *videoLayer = [CALayer layer];
+        videoLayer.frame = CGRectMake(0, 0, videoComposition.renderSize.width, videoComposition.renderSize.height);
+        [parentLayer addSublayer:videoLayer];
+    
+        // Layer that renders flyerly image.
+        CALayer *imageLayer = [CALayer layer];
+        imageLayer.frame = CGRectMake(0, 0, videoComposition.renderSize.width, videoComposition.renderSize.height );
+        imageLayer.contents = (id)image.CGImage;
+        [parentLayer addSublayer:imageLayer];
+    
+        // Setup the animation tool
+        videoComposition.animationTool = [AVVideoCompositionCoreAnimationTool videoCompositionCoreAnimationToolWithPostProcessingAsVideoLayer:videoLayer inLayer:parentLayer];
+    }
+    
+    // Now export the movie
+    AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:mixComposition presetName:AVAssetExportPresetHighestQuality];
+    exportSession.videoComposition = videoComposition;
+    
+    // Export the URL
+    exportSession.outputURL = dest;
+    exportSession.outputFileType = AVFileTypeQuickTimeMovie;
+    exportSession.shouldOptimizeForNetworkUse = YES;
+    [exportSession exportAsynchronouslyWithCompletionHandler:^{
+        callback( exportSession.status, exportSession.error );
+    }];
+}
 
 /*
  * Here we Merge Video
@@ -2553,94 +2597,9 @@ int selectedAddMoreLayerTab = -1;
  */
 -(void)mergeVideoWithOverlay:(NSURL *)firstURL image:(UIImage *)image {
     
-    
-    // Get a pointer to the asset
-    AVURLAsset* firstAsset = [AVURLAsset URLAssetWithURL:firstURL options:nil];
-
-    // Make an instance of avmutablecomposition so that we can edit this asset:
-    AVMutableComposition* mixComposition = [AVMutableComposition composition];
-    
-    // Add tracks to this composition
-    AVMutableCompositionTrack *videoTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeVideo preferredTrackID:kCMPersistentTrackID_Invalid];
-    
-    // Audio track
-    AVMutableCompositionTrack *audioTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeAudio preferredTrackID:kCMPersistentTrackID_Invalid];
-    
-    // Image video is always 30 seconds. So we use that unless the background video is smaller.
-    CMTime inTime = CMTimeMake( MAX_VIDEO_LENGTH * VIDEOFRAME, VIDEOFRAME );
-    if ( CMTimeCompare( firstAsset.duration, inTime ) < 0 ) {
-        inTime = firstAsset.duration;
-    }
-
-    // Add to the video track.
-    NSArray *videos = [firstAsset tracksWithMediaType:AVMediaTypeVideo];
-    CGAffineTransform transform;
-    if ( videos.count > 0 ) {
-        AVAssetTrack *track = [videos objectAtIndex:0];
-        [videoTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, inTime) ofTrack:track atTime:kCMTimeZero error:nil];
-        transform = track.preferredTransform;
-        videoTrack.preferredTransform = transform;
-    }
-    
-    // Add the audio track.
-    NSArray *audios = [firstAsset tracksWithMediaType:AVMediaTypeAudio];
-    if ( audios.count > 0 ) {
-        [audioTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, inTime) ofTrack:[audios objectAtIndex:0] atTime:kCMTimeZero error:nil];
-    }
-    
-    // Determine size of video based on orientation
-    BOOL isPortrait = [self isVideoPortrait:firstAsset];
-    CGSize videoSize = videoTrack.naturalSize;
-    if( isPortrait ) {
-        videoSize = CGSizeMake(videoSize.height, videoSize.width);
-    }
-    
-    // Set the mix composition size.
-    mixComposition.naturalSize = videoSize;
-
-    // Set up the composition parameters.
-    AVMutableVideoComposition *videoComposition = [AVMutableVideoComposition videoComposition];
-    videoComposition.frameDuration = CMTimeMake(1, VIDEOFRAME );
-    videoComposition.renderSize = videoSize;
-    videoComposition.renderScale = 1.0;
-    
-    // Pass through parameters for animation.
-    AVMutableVideoCompositionInstruction *passThroughInstruction = [AVMutableVideoCompositionInstruction videoCompositionInstruction];
-    passThroughInstruction.timeRange = CMTimeRangeMake(kCMTimeZero, inTime);
-    
-    // Layer instructions
-    AVMutableVideoCompositionLayerInstruction *passThroughLayer = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:videoTrack];
-    
-    // Set the transform to maintain orientation
-    [passThroughLayer setTransform:transform atTime:kCMTimeZero];
-    
-    passThroughInstruction.layerInstructions = @[ passThroughLayer ];
-    videoComposition.instructions = @[passThroughInstruction];
-    
-    // Layer that merges the video and image
-    CALayer *parentLayer = [CALayer layer];
-    
-    // Layer that renders the video.
-    CALayer *videoLayer = [CALayer layer];
-    videoLayer.frame = CGRectMake(0, 0, videoComposition.renderSize.width, videoComposition.renderSize.height);
-    [parentLayer addSublayer:videoLayer];
-    
-    // Layer that renders flyerly image.
-    CALayer *imageLayer = [CALayer layer];
-    imageLayer.frame = CGRectMake(0, 0, videoComposition.renderSize.width, videoComposition.renderSize.height );
-    imageLayer.contents = (id)image.CGImage;
-    [parentLayer addSublayer:imageLayer];
-    
-    // Setup the animation tool
-    videoComposition.animationTool = [AVVideoCompositionCoreAnimationTool videoCompositionCoreAnimationToolWithPostProcessingAsVideoLayer:videoLayer inLayer:parentLayer];
-    
-    // Now export the movie
-    AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:mixComposition presetName:AVAssetExportPresetHighestQuality];
-    exportSession.videoComposition = videoComposition;
-    
     // Export path
     NSString *destination = [self.flyer getSharingVideoPath];
-
+    
     // Delete Old File if they exist
     NSError *error = nil;
     if ( [[NSFileManager defaultManager] isReadableFileAtPath:destination] ) {
@@ -2649,13 +2608,11 @@ int selectedAddMoreLayerTab = -1;
     
     // Export the URL
     NSURL *exportURL = [NSURL fileURLWithPath:destination];
-    exportSession.outputURL = exportURL;
-    exportSession.outputFileType = AVFileTypeQuickTimeMovie;
-    exportSession.shouldOptimizeForNetworkUse = YES;
-    [exportSession exportAsynchronouslyWithCompletionHandler:^{
-        switch (exportSession.status) {
+    
+    [self modifyVideo:firstURL destination:exportURL crop:CGRectMake(0, 0, 300, 300) scale:1 overlay:image completion:^(NSInteger status, NSError *error) {
+        switch ( status ) {
             case AVAssetExportSessionStatusFailed:{
-                NSLog (@"FAIL = %@",exportSession.error);
+                NSLog (@"FAIL = %@", error );
                 break;
             }
             case AVAssetExportSessionStatusCompleted: {
@@ -2668,16 +2625,16 @@ int selectedAddMoreLayerTab = -1;
                 NSLog(@"Video Merge Process Completed");
                 
                 if (panelWillOpen) {
-                
+                    
                     // Main Thread
                     dispatch_async( dispatch_get_main_queue(), ^{
-
+                        
                         //Here we Open Share Panel for Share Flyer
                         [self openPanel];
                         
                     });
                 }else {
-                
+                    
                     // Main Thread
                     dispatch_async( dispatch_get_main_queue(), ^{
                         
@@ -2685,20 +2642,18 @@ int selectedAddMoreLayerTab = -1;
                         self.onFlyerBack(@"");
                         
                     });
-
+                    
                 }
                 
                 // Here we Add Video In Flyerly Album
                 [self.flyer addToGallery:nil];
-                
             }
         };
-    }]; 
-
+    }];
 }
 
 
-#pragma mark Flyer Modified
+#pragma mark - Flyer Modified
 
 /**
  * Edit the current layer.
@@ -3029,7 +2984,7 @@ int selectedAddMoreLayerTab = -1;
 
 
 
-#pragma mark  Share Flyer
+#pragma mark -  Share Flyer
 
 
 /*
@@ -3208,7 +3163,7 @@ int selectedAddMoreLayerTab = -1;
 
 }
 
-#pragma mark  Bottom Tabs Context
+#pragma mark -  Bottom Tabs Context
 /*
  * When we click on Text Tab
  * This Method Manage Text SubTabs
@@ -3361,7 +3316,7 @@ int selectedAddMoreLayerTab = -1;
             
         }
         
-        [self loadCustomPhotoLibrary :@"YES"];
+        [self loadCustomPhotoLibrary:YES];
         
         //Add ContextView
         [self addScrollView:videoLabel];
@@ -3405,7 +3360,7 @@ int selectedAddMoreLayerTab = -1;
 	{
         imgPickerFlag =2;
         textBackgrnd.alpha = ALPHA0;
-        [self openCustomCamera];
+        [self openCustomCamera:NO];
 
     }
     else if( selectedButton == photoTabButton )
@@ -3421,7 +3376,7 @@ int selectedAddMoreLayerTab = -1;
             
         }
         
-        [self loadCustomPhotoLibrary :@"NO"];
+        [self loadCustomPhotoLibrary:NO];
 
         textBackgrnd.alpha = ALPHA0;
     }
@@ -3595,7 +3550,7 @@ int selectedAddMoreLayerTab = -1;
 
 
 
-#pragma mark Flurry Methods
+#pragma mark - Flurry Methods
 
 -(void) logPhotoAddedEvent{
     [Flurry logEvent:@"Photo Added"];
@@ -3606,7 +3561,7 @@ int selectedAddMoreLayerTab = -1;
 }
 
 
-#pragma mark Access Image Directory
+#pragma mark - Access Image Directory
 /*
  *Here we Copy Image to Template Directory
  */

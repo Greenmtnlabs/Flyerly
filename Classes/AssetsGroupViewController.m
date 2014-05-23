@@ -177,7 +177,7 @@ NSMutableArray *productArray;
                     
                     // HERE WE CALL OVER CALLBACK HERE
                     NSURL *url = [NSURL fileURLWithPath:rootPath];
-                    self.onVideoFinished( url );
+                    //self.onVideoFinished( url );
                 });
                 
                 // Pop the current view, and push the crop view.
@@ -185,34 +185,28 @@ NSMutableArray *productArray;
                 [viewControllers removeLastObject];
                 [viewControllers removeLastObject];
                 [[self navigationController] setViewControllers:viewControllers animated:YES];
-                
-                return;
             }
             
-        }else {
-            
+        } else {
             [self openPanel];
-            return;
         }
+    } else {
+    
+        // Get out of full screen mode.
+        [self viewWillDisappear:NO];
         
-        
-        
+        CropViewController *nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController" bundle:nil];
+        nbuCrop.desiredImageSize = self.desiredImageSize;
+        nbuCrop.image = [asset.fullResolutionImage imageWithOrientationUp];
+        nbuCrop.onImageTaken = self.onImageTaken;
+    
+        // Pop the current view, and push the crop view.
+        NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[[self navigationController] viewControllers]];
+        [viewControllers removeLastObject];
+        [viewControllers removeLastObject];
+        [viewControllers addObject:nbuCrop];
+        [[self navigationController] setViewControllers:viewControllers animated:YES];
     }
-    
-    // Get out of full screen mode.
-    [self viewWillDisappear:NO];
-    
-    CropViewController *nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController" bundle:nil];
-    nbuCrop.desiredImageSize = self.desiredImageSize;
-    nbuCrop.image = [asset.fullResolutionImage imageWithOrientationUp];
-    nbuCrop.onImageTaken = self.onImageTaken;
-    
-    // Pop the current view, and push the crop view.
-    NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[[self navigationController] viewControllers]];
-    [viewControllers removeLastObject];
-    [viewControllers removeLastObject];
-    [viewControllers addObject:nbuCrop];
-    [[self navigationController] setViewControllers:viewControllers animated:YES];
 }
 
 - ( void )inAppPurchasePanelContent {
@@ -329,7 +323,7 @@ NSMutableArray *productArray;
     NSUInteger totalCount;
    
     // Here we Check Selection For Photo or Background
-    if ([self.videoAllow isEqualToString:@"YES"]) {
+    if ( _videoAllow ) {
         totalCount = self.assetsGroup.assetsCount;
     } else {
         totalCount = self.assetsGroup.imageAssetsCount;
@@ -380,7 +374,7 @@ NSMutableArray *productArray;
         NBUAssetType *contentType;
 
         // Here we Check Selection For Photo or Background
-        if ([self.videoAllow isEqualToString:@"YES"]) {
+        if ( _videoAllow ) {
             contentType = NBUAssetTypeAny;
         } else {
             contentType = NBUAssetTypeImage;
