@@ -29,8 +29,7 @@ NSMutableDictionary *userPreviousPurchases;
     [inAppPurchasePanelButton addTarget:self action:@selector(inAppPurchasePanelButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.tView setSeparatorColor:[UIColor whiteColor]];
-    
-	tView.dataSource = self;
+    tView.dataSource = self;
 	tView.delegate = self;
     [self.view addSubview:tView];
     [self.tView setBackgroundView:nil];
@@ -39,13 +38,12 @@ NSMutableDictionary *userPreviousPurchases;
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     userPurchases = appDelegate.userPurchases;    
     //[userPurchases setUserPurcahsesFromParse];
-    
-    NSLog(@"%i",[[PFUser currentUser] sessionToken].length);
 
     //Checking if the user is valid or anonymus
     if ([[PFUser currentUser] sessionToken].length != 0) {
         
         [inAppPurchasePanelButton setTitle:(@"RESTORE PURCHASES")];
+        //loginButton.titleLabel.textAlignment = UITextAlignmentCenter;
         
     }else {
         
@@ -72,10 +70,6 @@ NSMutableDictionary *userPreviousPurchases;
    
 }
 
-- (void)inAppPurchasePanelButtonTapped:(id)sender {
-    
-        [self.buttondelegate inAppPurchasePanelButtonTappedWasPressed:inAppPurchasePanelButton.currentTitle];
-}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -103,7 +97,7 @@ NSMutableDictionary *userPreviousPurchases;
         
     }
     
-    [cell setCellValueswithProductTitle:[dict objectForKey:@"packagename"] ProductPrice:[dict objectForKey:@"packageprice"]ProductDescription:[dict objectForKey:@"packagedesciption"] ProductImage:productImage];
+    [cell setCellValueswithProductTitle:[dict objectForKey:@"packagename"] ProductPrice:[dict objectForKey:@"packageprice"]ProductDescription:[dict objectForKey:@"packagedesciption"]];
 
     
 //    UIImage *imageIcon = [UIImage imageNamed:[dict objectForKey:@"image"]];
@@ -146,6 +140,18 @@ NSMutableDictionary *userPreviousPurchases;
     [self performSelector:@selector(deselect) withObject:nil afterDelay:0.2f];
 }
 
+- (void) purchaseProductAtIndex:(int) index {
+    
+    //This line pop up login screen if user not exist
+    [[RMStore defaultStore] addStoreObserver:self];
+    //Getting Selected Product
+    NSDictionary *product = [productArray objectAtIndex:index];
+    NSString* productIdentifier= product[@"productidentifier"];
+    //SKProduct *product = [productArray objectAtIndex:1];
+    [self purchaseProductID:productIdentifier];
+}
+
+
 - (void) deselect
 {
 	[self.tView deselectRowAtIndexPath:[self.tView indexPathForSelectedRow] animated:YES];
@@ -157,13 +163,11 @@ NSMutableDictionary *userPreviousPurchases;
     
     if ([FlyerlySingleton connected]) {
         
-        if (sheetAlreadyOpen)return;
         
         //Check For Crash Maintain
         cancelRequest = NO;
         
         //[self showLoadingIndicator];
-        sheetAlreadyOpen =YES;
         //These are over Products on App Store
         NSSet *productIdentifiers = [NSSet setWithArray:@[@"com.flyerly.AllDesignBundle",@"com.flyerly.UnlockSavedFlyers",@"com.flyerly.UnlockCreateVideoFlyerOption"]];
         
@@ -199,7 +203,7 @@ NSMutableDictionary *userPreviousPurchases;
             
             [self.buttondelegate inAppPurchasePanelContent];
             
-            sheetAlreadyOpen = NO;
+            
             
         } failure:^(NSError *error) {
             NSLog(@"Something went wrong");
@@ -319,19 +323,6 @@ NSMutableDictionary *userPreviousPurchases;
     
     
 }
-
-- (void) purchaseProductAtIndex:(int) index {
-    
-    //This line pop up login screen if user not exist
-    [[RMStore defaultStore] addStoreObserver:self];
-    //Getting Selected Product
-    NSDictionary *product = [productArray objectAtIndex:index];
-    NSString* productIdentifier= product[@"productidentifier"];
-    //SKProduct *product = [productArray objectAtIndex:1];
-    [self purchaseProductID:productIdentifier];
-}
-
-
 
 /*
  * Here we update info to Parse account

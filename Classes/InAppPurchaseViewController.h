@@ -6,6 +6,7 @@
 //
 //
 
+/*
 @protocol inAppPurchasePanelButtonProtocol
 
 -(void)inAppPurchasePanelButtonTappedWasPressed:(NSString *)inAppPurchasePanelButtonCurrentTitle;
@@ -17,7 +18,7 @@
 //-(void)purchaseProductAtIndex:(int)index;
 
 @end
-
+*/
 
 #import <UIKit/UIKit.h>
 #import "CreateFlyerController.h"
@@ -35,8 +36,6 @@
 @interface InAppPurchaseViewController : ParentViewController <UITableViewDelegate,UITableViewDataSource,RMStoreObserver> {
 
     NSArray *requestedProducts;
-    BOOL lockFlyer;
-    BOOL sheetAlreadyOpen;
     BOOL cancelRequest;
     
     UserPurchases *userPurchases;

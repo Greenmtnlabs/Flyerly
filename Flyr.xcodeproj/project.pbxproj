@@ -478,8 +478,13 @@
 		20F93DD417B2262200F6F88C /* MainSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20F93DD217B2262200F6F88C /* MainSettingViewController.xib */; };
 		20FA7E721872AAF50057C3F3 /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20FA7E701872AAF50057C3F3 /* CameraViewController.m */; };
 		20FA7E731872AAF50057C3F3 /* CameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20FA7E711872AAF50057C3F3 /* CameraViewController.xib */; };
+		242D9831192B9C2100649E53 /* inAppPurchaseViewBg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 242D9830192B9C2100649E53 /* inAppPurchaseViewBg@2x.png */; };
 		243DD521192B24B500391786 /* FlyerIcons.xib in Resources */ = {isa = PBXBuildFile; fileRef = 243DD520192B24B500391786 /* FlyerIcons.xib */; };
 		243DD523192B24CB00391786 /* FlyerIcons-iPhone4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 243DD522192B24CB00391786 /* FlyerIcons-iPhone4.xib */; };
+		2478E5E3192C7A6E0081B31B /* InAppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2478E5E1192C7A6E0081B31B /* InAppViewController.m */; };
+		2478E5E4192C7A6E0081B31B /* InAppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2478E5E2192C7A6E0081B31B /* InAppViewController.xib */; };
+		2478E5ED192C8C0A0081B31B /* FreeFeaturesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2478E5EB192C8C0A0081B31B /* FreeFeaturesTableViewCell.m */; };
+		2478E5EE192C8C0A0081B31B /* FreeFeaturesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2478E5EC192C8C0A0081B31B /* FreeFeaturesTableViewCell.xib */; };
 		24CAE4B5192A472F00CC4AEF /* Symbols.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24CAE4B4192A472F00CC4AEF /* Symbols.xib */; };
 		2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
 		30D58CFF10FB1BF800E0C7E8 /* icon0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 30D58C7810FB1BF800E0C7E8 /* icon0.jpg */; };
@@ -1379,8 +1384,15 @@
 		20FA7E6F1872AAF50057C3F3 /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
 		20FA7E701872AAF50057C3F3 /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CameraViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		20FA7E711872AAF50057C3F3 /* CameraViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraViewController.xib; sourceTree = "<group>"; };
+		242D9830192B9C2100649E53 /* inAppPurchaseViewBg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "inAppPurchaseViewBg@2x.png"; sourceTree = "<group>"; };
 		243DD520192B24B500391786 /* FlyerIcons.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FlyerIcons.xib; sourceTree = "<group>"; };
 		243DD522192B24CB00391786 /* FlyerIcons-iPhone4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "FlyerIcons-iPhone4.xib"; sourceTree = "<group>"; };
+		2478E5E0192C7A6E0081B31B /* InAppViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InAppViewController.h; sourceTree = "<group>"; };
+		2478E5E1192C7A6E0081B31B /* InAppViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InAppViewController.m; sourceTree = "<group>"; };
+		2478E5E2192C7A6E0081B31B /* InAppViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InAppViewController.xib; sourceTree = "<group>"; };
+		2478E5EA192C8C0A0081B31B /* FreeFeaturesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreeFeaturesTableViewCell.h; sourceTree = "<group>"; };
+		2478E5EB192C8C0A0081B31B /* FreeFeaturesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreeFeaturesTableViewCell.m; sourceTree = "<group>"; };
+		2478E5EC192C8C0A0081B31B /* FreeFeaturesTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FreeFeaturesTableViewCell.xib; sourceTree = "<group>"; };
 		24CAE4B4192A472F00CC4AEF /* Symbols.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Symbols.xib; sourceTree = "<group>"; };
 		26D73E02307543D994C6C8BE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -1827,6 +1839,7 @@
 		0DF3A361108DF47400D6C887 /* ImageLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				242D9830192B9C2100649E53 /* inAppPurchaseViewBg@2x.png */,
 				2012ECB0192612A000D5EA58 /* a_bg@2x.png */,
 				201AAE7F19223AF500B34E0D /* ModeVideowithLock.png */,
 				20A1CD6618EF0B8700484391 /* youtube_share.png */,
@@ -2385,11 +2398,17 @@
 				2004C8391913A60900E4BBFB /* InAppPurchaseViewController.h */,
 				2004C83A1913A60900E4BBFB /* InAppPurchaseViewController.m */,
 				20F1C1331913E09C00CD384F /* InAppPurchaseViewController.xib */,
-				2004C83E1913AA5F00E4BBFB /* InAppPurchaseCell.xib */,
-				2004C8431913AE8200E4BBFB /* InAppPurchaseCell.h */,
-				2004C8441913AE8200E4BBFB /* InAppPurchaseCell.m */,
 				200E6762191B6318003849D4 /* UserPurchases.h */,
 				200E6763191B6318003849D4 /* UserPurchases.m */,
+				2478E5E0192C7A6E0081B31B /* InAppViewController.h */,
+				2478E5E1192C7A6E0081B31B /* InAppViewController.m */,
+				2478E5E2192C7A6E0081B31B /* InAppViewController.xib */,
+				2004C8431913AE8200E4BBFB /* InAppPurchaseCell.h */,
+				2004C8441913AE8200E4BBFB /* InAppPurchaseCell.m */,
+				2004C83E1913AA5F00E4BBFB /* InAppPurchaseCell.xib */,
+				2478E5EA192C8C0A0081B31B /* FreeFeaturesTableViewCell.h */,
+				2478E5EB192C8C0A0081B31B /* FreeFeaturesTableViewCell.m */,
+				2478E5EC192C8C0A0081B31B /* FreeFeaturesTableViewCell.xib */,
 			);
 			name = Purchase;
 			sourceTree = "<group>";
@@ -3561,6 +3580,8 @@
 				0FBC37EF174F980600004F21 /* sms_setting_selected.png in Resources */,
 				0FBC37F1174F980600004F21 /* sms_setting.png in Resources */,
 				0FBC37F3174F980600004F21 /* tmb_setting_selected.png in Resources */,
+				242D9831192B9C2100649E53 /* inAppPurchaseViewBg@2x.png in Resources */,
+				2478E5EE192C8C0A0081B31B /* FreeFeaturesTableViewCell.xib in Resources */,
 				0FBC37F5174F980600004F21 /* tmb_setting.png in Resources */,
 				206068A71924FFEB00AB5230 /* Fonts-iPhone4.xib in Resources */,
 				0FBC37F6174F980600004F21 /* twt_setting_selected.png in Resources */,
@@ -3832,6 +3853,7 @@
 				202C653417EA07DC00CB9A75 /* symbol73.png in Resources */,
 				202F994018BCB426002A25D9 /* invite_twitter.png in Resources */,
 				202C653617EA07DC00CB9A75 /* symbol74.png in Resources */,
+				2478E5E4192C7A6E0081B31B /* InAppViewController.xib in Resources */,
 				20F0393E18E2E4060002338F /* ModeCamera.png in Resources */,
 				202C653817EA07DC00CB9A75 /* symbol75.png in Resources */,
 				202C653A17EA07DC00CB9A75 /* symbol76.png in Resources */,
@@ -4002,9 +4024,11 @@
 				2026992B18CED6B000945218 /* RMStore.m in Sources */,
 				204635621895E4AF00A94C42 /* Flyer.m in Sources */,
 				2044FF96185088ED00A26B42 /* MainSettingCell.m in Sources */,
+				2478E5E3192C7A6E0081B31B /* InAppViewController.m in Sources */,
 				2022C63518D1BAF000BCD5F7 /* RMStoreKeychainPersistence.m in Sources */,
 				202C4825187D7A6B00FE0975 /* CDataScanner.m in Sources */,
 				49997FF717DF786400CF1038 /* ParentViewController.m in Sources */,
+				2478E5ED192C8C0A0081B31B /* FreeFeaturesTableViewCell.m in Sources */,
 				4986857018B4FFC7002113E4 /* LibraryViewController.m in Sources */,
 				49997FFB17E07FA100CF1038 /* SKProduct+LocalPrice.m in Sources */,
 				202C47FB187D6E4B00FE0975 /* BitlyLibUtil.m in Sources */,
