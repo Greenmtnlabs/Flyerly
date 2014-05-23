@@ -101,7 +101,7 @@
     // Get the scale ratio.
     if ( player.naturalSize.width < player.naturalSize.height ) {
         // If the video is in portrait mode.
-        scaleRatio = _cropView.frame.size.width / player.naturalSize.width;
+        scaleRatio = _desiredVideoSize.width / player.naturalSize.width;
         
         // Adjust the cropview to match current width of portrait. Keep view centered.
         CGFloat width = _playerView.frame.size.height * aspectRatio;
@@ -115,7 +115,7 @@
         
     } else {
         // If the video is landscape or square.
-        scaleRatio = _cropView.frame.size.height / player.naturalSize.height;
+        scaleRatio = _desiredVideoSize.height / player.naturalSize.height;
         
         // Adjust the cropview to match current width of portrait. Keep view centered.
         CGFloat height = _playerView.frame.size.width / aspectRatio;
@@ -166,8 +166,8 @@
     CGSize conceptualSize = CGSizeMake( sizeRatio * _cropView.frame.size.width,
                                        sizeRatio * _cropView.frame.size.height );
     */
-    CGRect cropRect = CGRectMake( _cropView.origin.x,
-                                 _cropView.origin.y,
+    CGRect cropRect = CGRectMake( _cropView.origin.x * player.naturalSize.width / _playerView.frame.size.width,
+                                 (_cropView.origin.y - 64) * player.naturalSize.height / _playerView.frame.size.height,
                                  _desiredVideoSize.width,
                                  _desiredVideoSize.height );
     
