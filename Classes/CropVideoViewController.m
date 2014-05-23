@@ -96,7 +96,7 @@
     aspectRatio = player.naturalSize.width / player.naturalSize.height;
     
     // Remember the untranslated crop size.
-    originalConceptualSize = _cropView.frame.size;
+    originalConceptualFrame = _cropView.frame;
     
     // Get the scale ratio.
     if ( player.naturalSize.width < player.naturalSize.height ) {
@@ -129,7 +129,7 @@
     }
     
     // Remember the translated crop size.
-    originalCropSize = _cropView.frame.size;
+    originalCropFrame = _cropView.frame;
     
     // Bring this view to front.
     [_playerView bringSubviewToFront:_cropView];
@@ -157,7 +157,7 @@
  * We are done, use the cropped and filtered image.
  */
 -(void)onDone {
-    
+    /*
     // The change in width needs to be first translated from our UI width to
     // our conceptual width.
     CGFloat sizeRatio = originalConceptualSize.width / originalCropSize.width;
@@ -175,10 +175,10 @@
     } else {
         // If the video is landscape or square.
         scaleRatio = conceptualSize.height / player.naturalSize.height;
-    }
+    }*/
     
-    _onVideoFinished( _url, CGRectMake( _cropView.origin.x,
-                                        _cropView.origin.y,
+    _onVideoFinished( _url, CGRectMake( _cropView.origin.x - originalCropFrame.origin.x,
+                                        _cropView.origin.y - originalCropFrame.origin.y,
                                        _desiredVideoSize.width,
                                        _desiredVideoSize.height ),
                      scaleRatio );

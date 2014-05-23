@@ -14,8 +14,8 @@
     MPMoviePlayerController     *player;
     CGFloat                     aspectRatio;
     CGFloat                     scaleRatio;
-    CGSize                      originalConceptualSize;
-    CGSize                      originalCropSize;
+    CGRect                     originalConceptualFrame;
+    CGRect                      originalCropFrame;
 }
 
 @property CGSize desiredVideoSize;
