@@ -64,6 +64,8 @@
     recognizer.view.center = CGPointMake(recognizer.view.center.x + translation.x,
                                          recognizer.view.center.y + translation.y);
     [recognizer setTranslation:CGPointMake(0, 0) inView:self];
+    
+    self.frame = recognizer.view.frame;
 }
 
 #pragma mark - Resize functionality
