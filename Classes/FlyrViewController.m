@@ -436,22 +436,7 @@ NSMutableArray *productArray;
     }
     
     inappviewcontroller.buttondelegate = self;
-    
-    //InAppPurchaseViewController_ *sampleView = [[[InAppPurchaseViewController_ alloc] init] autorelease];
-    //[self presentModalViewController:sampleView animated:YES];
-    /*
-    inappviewcontroller.buttondelegate = self;
-    
-    if ( productArray.count == 0 ){
-        [inappviewcontroller requestProduct];
-    }
 
-    if( productArray.count != 0 ) {
-        
-        [inappviewcontroller.contentLoaderIndicatorView stopAnimating];
-        inappviewcontroller.contentLoaderIndicatorView.hidden = YES;
-    }
-     */
 }
 
 - (void)inAppPurchasePanelButtonTappedWasPressed:(NSString *)inAppPurchasePanelButtonCurrentTitle {
@@ -480,6 +465,8 @@ NSMutableArray *productArray;
         [self.navigationController pushViewController:signInController animated:YES];
         
     }else if ([inAppPurchasePanelButtonCurrentTitle isEqualToString:(@"RESTORE PURCHASES")]){
+        
+        
         [inappviewcontroller_ restorePurchase];
     }
 }
