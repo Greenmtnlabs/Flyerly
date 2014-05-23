@@ -186,6 +186,8 @@ NSMutableArray *productArray;
                 [viewControllers addObject:cropVideo];
                 [[self navigationController] setViewControllers:viewControllers animated:YES];
                 
+            }else {
+                [self openPanel];
             }
             
         } else {
