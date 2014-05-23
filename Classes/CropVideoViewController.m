@@ -22,7 +22,7 @@
     if (( self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil] )) {
         
         // Done Button
-        UIButton *nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 42)];
+        UIButton *nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
         [nextButton addTarget:self action:@selector(onDone) forControlEvents:UIControlEventTouchUpInside];
         [nextButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
         UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];

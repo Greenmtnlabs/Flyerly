@@ -22,6 +22,8 @@
 {
     [super viewDidLoad];
     
+    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+    
     globle = [FlyerlySingleton RetrieveSingleton];
     
     NSMutableAttributedString *titleString = [[NSMutableAttributedString alloc] initWithString:@"Forgot Password?"];

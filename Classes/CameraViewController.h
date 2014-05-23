@@ -34,7 +34,6 @@
 
 // Outlets
 @property (assign, nonatomic) IBOutlet UIImageView *cameraLines;
-@property (assign, nonatomic) IBOutlet UIImageView *flyerImageView;
 @property (assign, nonatomic) IBOutlet UIProgressView *progressView;
 @property (strong, nonatomic) IBOutlet UIButton *mode;
 @property BOOL videoAllow;

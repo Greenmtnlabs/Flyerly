@@ -386,6 +386,9 @@ int selectedAddMoreLayerTab = -1;
 
     [Flurry logEvent:@"Saved Flyer"];
     [self.navigationController popViewControllerAnimated:YES];
+    
+    // Remove observers
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 
@@ -1827,6 +1830,9 @@ int selectedAddMoreLayerTab = -1;
  */
 -(void)loadPlayerWithURL :(NSURL *)movieURL {
     
+    if ( player != nil ) {
+        [player.view removeFromSuperview];
+    }
     
     NSLog(@"Video URL = %@",movieURL);
     player =[[MPMoviePlayerController alloc] initWithContentURL:movieURL];
@@ -1849,9 +1855,6 @@ int selectedAddMoreLayerTab = -1;
                                              selector:@selector(MPMoviePlayerLoadStateDidChange:)
                                                  name:MPMoviePlayerLoadStateDidChangeNotification
                                                object:nil];
-    
-    [player.view removeFromSuperview];
-    [playerToolBar removeFromSuperview];
 
     self.flyimgView.image = nil;
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap:)];
@@ -1870,9 +1873,6 @@ int selectedAddMoreLayerTab = -1;
     player.scalingMode = MPMovieScalingModeAspectFill;
     player.backgroundView.backgroundColor = [UIColor whiteColor];
     [player prepareToPlay];
-    
-
-
 }
 
 
