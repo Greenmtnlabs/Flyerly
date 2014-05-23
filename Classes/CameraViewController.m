@@ -53,10 +53,6 @@ NSMutableArray *productArray;
         
     }
     
-    //Here we Add Flyer ImageView For Video
-    [self.cameraView addSubview:_flyerImageView];
-    _flyerImageView.hidden = YES;
-    
     self.cameraView.targetResolution = CGSizeMake( 1024, 1024 ); // The minimum resolution we want
     self.cameraView.keepFrontCameraPicturesMirrored = YES;
     
@@ -180,7 +176,6 @@ NSMutableArray *productArray;
 - (void)cameraCancel:(id)sender{
     
     if ( _videoAllow ) {
-        self.flyerImageView.hidden = NO;
         self.onVideoCancel();
     }
     
@@ -243,8 +238,6 @@ NSMutableArray *productArray;
                 [shoot setImage:[UIImage imageNamed:@"camera_button"] forState:UIControlStateSelected];
                 [flash setHidden:NO];
                 _progressView.hidden = YES;
-                _flyerImageView.hidden = YES;
-                
             }else {
                 
                 //Enable Video Mode
@@ -253,8 +246,6 @@ NSMutableArray *productArray;
                 [shoot setImage:[UIImage imageNamed:@"stop_button"] forState:UIControlStateSelected];
                 [flash setHidden:YES];
                 _progressView.hidden = NO;
-                _flyerImageView.image = nil;
-                _flyerImageView.hidden = NO;
             }
         }else {
             [self openPanel];
