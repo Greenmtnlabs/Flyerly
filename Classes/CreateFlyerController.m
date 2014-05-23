@@ -7,6 +7,7 @@
 
 #import "CreateFlyerController.h"
 #import "UIImage+NBUAdditions.h"
+#import "Common.h"
 
 @implementation CreateFlyerController
 
@@ -1614,7 +1615,7 @@ int selectedAddMoreLayerTab = -1;
         nbuGallary.desiredImageSize = CGSizeMake( [[dict valueForKey:@"width"] floatValue],
                                                 [[dict valueForKey:@"height"] floatValue]);
     } else {
-        nbuGallary.desiredImageSize = CGSizeMake( 300,  300 );
+        nbuGallary.desiredImageSize = CGSizeMake( flyerlyWidth,  flyerlyHeight );
     }
     
     __weak CreateFlyerController *weakSelf = self;
@@ -1720,7 +1721,7 @@ int selectedAddMoreLayerTab = -1;
     CameraViewController *nbuCamera = [[CameraViewController alloc]initWithNibName:@"CameraViewController" bundle:nil];
     
     nbuCamera.videoAllow = forVideo;
-    nbuCamera.desiredImageSize = CGSizeMake( 300,  300 );
+    nbuCamera.desiredImageSize = CGSizeMake( flyerlyWidth,  flyerlyHeight );
     
     __weak CreateFlyerController *weakSelf = self;
     
@@ -2335,10 +2336,12 @@ int selectedAddMoreLayerTab = -1;
 -(UIImage *)getFlyerSnapShot {
     
     //Here we take Snap shot of Flyer
-    UIGraphicsBeginImageContextWithOptions(self.flyimgView.bounds.size, NO, 0.0f);
+    UIGraphicsBeginImageContextWithOptions( self.flyimgView.frame.size, NO, 0);
+    
     CGContextRef context = UIGraphicsGetCurrentContext();
     [self.flyimgView.layer renderInContext:context];
     UIImage *snapshotImage = UIGraphicsGetImageFromCurrentImageContext();
+    
     UIGraphicsEndImageContext();
     
     return snapshotImage;
@@ -2486,6 +2489,8 @@ int selectedAddMoreLayerTab = -1;
         [audioTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, inTime) ofTrack:[audios objectAtIndex:0] atTime:kCMTimeZero error:nil];
     }
     
+    NSLog(@"Natural size: %.2f x %.2f", videoTrack.naturalSize.width, videoTrack.naturalSize.height);
+    
     // Set the mix composition size.
     mixComposition.naturalSize = crop.size;
     
@@ -2522,16 +2527,19 @@ int selectedAddMoreLayerTab = -1;
     
         // Layer that merges the video and image
         CALayer *parentLayer = [CALayer layer];
+        parentLayer.frame = CGRectMake( 0, 0, crop.size.width, crop.size.height);
     
         // Layer that renders the video.
         CALayer *videoLayer = [CALayer layer];
-        videoLayer.frame = CGRectMake(0, 0, videoComposition.renderSize.width, videoComposition.renderSize.height);
+        videoLayer.frame = CGRectMake(0, 0, crop.size.width, crop.size.height );
         [parentLayer addSublayer:videoLayer];
     
         // Layer that renders flyerly image.
         CALayer *imageLayer = [CALayer layer];
-        imageLayer.frame = CGRectMake(0, 0, videoComposition.renderSize.width, videoComposition.renderSize.height );
+        imageLayer.frame = CGRectMake(0, 0, crop.size.width, crop.size.height );
         imageLayer.contents = (id)image.CGImage;
+        [imageLayer setMasksToBounds:YES];
+        
         [parentLayer addSublayer:imageLayer];
     
         // Setup the animation tool
@@ -2566,27 +2574,6 @@ int selectedAddMoreLayerTab = -1;
     // Here we Update Overlay
     UIImage *image = [self getFlyerSnapShot];
     
-    // Crop the image based on aspect ratio. First get the movie size.
-    CGSize movieSize = self.player.naturalSize;
-    
-    // Now compute the aspect ratio
-    CGFloat aspectRatio = movieSize.width / movieSize.height;
-    
-    // Now get the image height we need to use.
-    CGFloat imageHeight = image.size.width / aspectRatio;
-    
-    // Now compute the y offset from where we crop
-    CGFloat y = (image.size.height - imageHeight) / 2.0f;
-    
-    // Get the new cropped image
-    image = [image imageCroppedToRect:CGRectMake( 0, y, image.size.width, imageHeight)];
-    
-    // Now scale to the movie size
-    UIGraphicsBeginImageContextWithOptions( movieSize, NO, 0.0 );
-    [image drawInRect:CGRectMake(0, 0, movieSize.width, movieSize.height)];
-    image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
     // HERE WE ARE MERGE OVER CREATED VIDEO AND USER SELECTED OR MAKE
     [self mergeVideoWithOverlay:url image:image];
 }
@@ -2609,7 +2596,7 @@ int selectedAddMoreLayerTab = -1;
     // Export the URL
     NSURL *exportURL = [NSURL fileURLWithPath:destination];
     
-    [self modifyVideo:firstURL destination:exportURL crop:CGRectMake(0, 0, 300, 300) scale:1 overlay:image completion:^(NSInteger status, NSError *error) {
+    [self modifyVideo:firstURL destination:exportURL crop:CGRectMake(0, 0, flyerlyWidth, flyerlyHeight ) scale:1 overlay:image completion:^(NSInteger status, NSError *error) {
         switch ( status ) {
             case AVAssetExportSessionStatusFailed:{
                 NSLog (@"FAIL = %@", error );

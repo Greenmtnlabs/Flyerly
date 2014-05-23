@@ -7,6 +7,7 @@
 //
 
 #import "Flyer.h"
+#import "Common.h"
 
 NSString * const TEXT = @"";
 NSString * const TEXTFONTNAME = @".HelveticaNeueInterface-M3";
@@ -1309,7 +1310,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     
     UIImage *image = [UIImage imageNamed:@"play_icon"];
     
-    CGSize newSize = CGSizeMake(300, 300);
+    CGSize newSize = CGSizeMake( flyerlyWidth, flyerlyHeight );
     UIGraphicsBeginImageContext( newSize );
     
     // Use existing opacity as is
@@ -1317,7 +1318,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     
     // Apply supplied opacity
 
-    [image drawInRect:CGRectMake(225,-15,90,90 ) blendMode:kCGBlendModeNormal alpha:1];
+    [image drawInRect:CGRectMake( 550, -15, 90, 90 ) blendMode:kCGBlendModeNormal alpha:1];
     
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     
