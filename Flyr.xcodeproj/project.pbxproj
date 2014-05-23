@@ -135,7 +135,6 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		2002C89618888CD4005B18C9 /* SaveFlyerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2002C89418888CD4005B18C9 /* SaveFlyerCell.m */; };
 		2002C89718888CD4005B18C9 /* SaveFlyerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2002C89518888CD4005B18C9 /* SaveFlyerCell.xib */; };
-		2004C83B1913A60900E4BBFB /* InAppPurchaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2004C83A1913A60900E4BBFB /* InAppPurchaseViewController.m */; };
 		2004C83F1913AA5F00E4BBFB /* InAppPurchaseCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2004C83E1913AA5F00E4BBFB /* InAppPurchaseCell.xib */; };
 		2004C8451913AE8200E4BBFB /* InAppPurchaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2004C8441913AE8200E4BBFB /* InAppPurchaseCell.m */; };
 		200773A31887BB8C00448346 /* addbg_border_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 200773931887BB8B00448346 /* addbg_border_selected.png */; };
@@ -470,13 +469,11 @@
 		20ED041C17CCBCB000DA702E /* t_email_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 20ED041A17CCBCB000DA702E /* t_email_button.png */; };
 		20F0393E18E2E4060002338F /* ModeCamera.png in Resources */ = {isa = PBXBuildFile; fileRef = 20F0393C18E2E4060002338F /* ModeCamera.png */; };
 		20F0393F18E2E4060002338F /* ModeVideo.png in Resources */ = {isa = PBXBuildFile; fileRef = 20F0393D18E2E4060002338F /* ModeVideo.png */; };
-		20F1C1341913E09C00CD384F /* InAppPurchaseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20F1C1331913E09C00CD384F /* InAppPurchaseViewController.xib */; };
 		20F4D8E017BA3D0A007B2DF5 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F4D8DE17BA3D09007B2DF5 /* ProfileViewController.m */; };
 		20F4D8E117BA3D0A007B2DF5 /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20F4D8DF17BA3D0A007B2DF5 /* ProfileViewController.xib */; };
 		20F4D8E517BA40EA007B2DF5 /* FlyerlySingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F4D8E417BA40EA007B2DF5 /* FlyerlySingleton.m */; };
 		20F93DD317B2262200F6F88C /* MainSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F93DD117B2262200F6F88C /* MainSettingViewController.m */; };
 		20F93DD417B2262200F6F88C /* MainSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20F93DD217B2262200F6F88C /* MainSettingViewController.xib */; };
-		20FA7E721872AAF50057C3F3 /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20FA7E701872AAF50057C3F3 /* CameraViewController.m */; };
 		20FA7E731872AAF50057C3F3 /* CameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20FA7E711872AAF50057C3F3 /* CameraViewController.xib */; };
 		242D9831192B9C2100649E53 /* inAppPurchaseViewBg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 242D9830192B9C2100649E53 /* inAppPurchaseViewBg@2x.png */; };
 		243DD521192B24B500391786 /* FlyerIcons.xib in Resources */ = {isa = PBXBuildFile; fileRef = 243DD520192B24B500391786 /* FlyerIcons.xib */; };
@@ -485,6 +482,7 @@
 		2478E5E4192C7A6E0081B31B /* InAppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2478E5E2192C7A6E0081B31B /* InAppViewController.xib */; };
 		2478E5ED192C8C0A0081B31B /* FreeFeaturesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2478E5EB192C8C0A0081B31B /* FreeFeaturesTableViewCell.m */; };
 		2478E5EE192C8C0A0081B31B /* FreeFeaturesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2478E5EC192C8C0A0081B31B /* FreeFeaturesTableViewCell.xib */; };
+		24803523192F3207009403F7 /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24803522192F3207009403F7 /* CameraViewController.m */; };
 		24CAE4B5192A472F00CC4AEF /* Symbols.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24CAE4B4192A472F00CC4AEF /* Symbols.xib */; };
 		2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
 		30D58CFF10FB1BF800E0C7E8 /* icon0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 30D58C7810FB1BF800E0C7E8 /* icon0.jpg */; };
@@ -998,8 +996,6 @@
 		2002C89318888CD4005B18C9 /* SaveFlyerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveFlyerCell.h; sourceTree = "<group>"; };
 		2002C89418888CD4005B18C9 /* SaveFlyerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveFlyerCell.m; sourceTree = "<group>"; };
 		2002C89518888CD4005B18C9 /* SaveFlyerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SaveFlyerCell.xib; sourceTree = "<group>"; };
-		2004C8391913A60900E4BBFB /* InAppPurchaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InAppPurchaseViewController.h; sourceTree = "<group>"; };
-		2004C83A1913A60900E4BBFB /* InAppPurchaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InAppPurchaseViewController.m; sourceTree = "<group>"; };
 		2004C83E1913AA5F00E4BBFB /* InAppPurchaseCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InAppPurchaseCell.xib; sourceTree = "<group>"; };
 		2004C8431913AE8200E4BBFB /* InAppPurchaseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InAppPurchaseCell.h; sourceTree = "<group>"; };
 		2004C8441913AE8200E4BBFB /* InAppPurchaseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InAppPurchaseCell.m; sourceTree = "<group>"; };
@@ -1375,7 +1371,6 @@
 		20ED041A17CCBCB000DA702E /* t_email_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = t_email_button.png; sourceTree = "<group>"; };
 		20F0393C18E2E4060002338F /* ModeCamera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ModeCamera.png; sourceTree = "<group>"; };
 		20F0393D18E2E4060002338F /* ModeVideo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ModeVideo.png; sourceTree = "<group>"; };
-		20F1C1331913E09C00CD384F /* InAppPurchaseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InAppPurchaseViewController.xib; sourceTree = "<group>"; };
 		20F4D8DD17BA3D09007B2DF5 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		20F4D8DE17BA3D09007B2DF5 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		20F4D8DF17BA3D0A007B2DF5 /* ProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
@@ -1385,7 +1380,6 @@
 		20F93DD117B2262200F6F88C /* MainSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainSettingViewController.m; sourceTree = "<group>"; };
 		20F93DD217B2262200F6F88C /* MainSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainSettingViewController.xib; sourceTree = "<group>"; };
 		20FA7E6F1872AAF50057C3F3 /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
-		20FA7E701872AAF50057C3F3 /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CameraViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		20FA7E711872AAF50057C3F3 /* CameraViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraViewController.xib; sourceTree = "<group>"; };
 		242D9830192B9C2100649E53 /* inAppPurchaseViewBg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "inAppPurchaseViewBg@2x.png"; sourceTree = "<group>"; };
 		243DD520192B24B500391786 /* FlyerIcons.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FlyerIcons.xib; sourceTree = "<group>"; };
@@ -1396,6 +1390,7 @@
 		2478E5EA192C8C0A0081B31B /* FreeFeaturesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreeFeaturesTableViewCell.h; sourceTree = "<group>"; };
 		2478E5EB192C8C0A0081B31B /* FreeFeaturesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreeFeaturesTableViewCell.m; sourceTree = "<group>"; };
 		2478E5EC192C8C0A0081B31B /* FreeFeaturesTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FreeFeaturesTableViewCell.xib; sourceTree = "<group>"; };
+		24803522192F3207009403F7 /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraViewController.m; sourceTree = "<group>"; };
 		24CAE4B4192A472F00CC4AEF /* Symbols.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Symbols.xib; sourceTree = "<group>"; };
 		26D73E02307543D994C6C8BE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -2403,9 +2398,6 @@
 				2022C63418D1BAF000BCD5F7 /* RMStoreKeychainPersistence.m */,
 				2026992918CED6B000945218 /* RMStore.h */,
 				2026992A18CED6B000945218 /* RMStore.m */,
-				2004C8391913A60900E4BBFB /* InAppPurchaseViewController.h */,
-				2004C83A1913A60900E4BBFB /* InAppPurchaseViewController.m */,
-				20F1C1331913E09C00CD384F /* InAppPurchaseViewController.xib */,
 				200E6762191B6318003849D4 /* UserPurchases.h */,
 				200E6763191B6318003849D4 /* UserPurchases.m */,
 				2478E5E0192C7A6E0081B31B /* InAppViewController.h */,
@@ -2775,8 +2767,8 @@
 		20FA7E6E1872AAE10057C3F3 /* Camera */ = {
 			isa = PBXGroup;
 			children = (
+				24803522192F3207009403F7 /* CameraViewController.m */,
 				20FA7E6F1872AAF50057C3F3 /* CameraViewController.h */,
-				20FA7E701872AAF50057C3F3 /* CameraViewController.m */,
 				20FA7E711872AAF50057C3F3 /* CameraViewController.xib */,
 				20A1CD6118EEF63200484391 /* SubNBUCamera.h */,
 				20A1CD6218EEF63200484391 /* SubNBUCamera.m */,
@@ -3936,7 +3928,6 @@
 				20967DA018C8D63400B273FC /* twt_follow.png in Resources */,
 				2009F6E21806E68F00FE4665 /* symbol41.png in Resources */,
 				2009F6E51806E92B00FE4665 /* symbol86.png in Resources */,
-				20F1C1341913E09C00CD384F /* InAppPurchaseViewController.xib in Resources */,
 				2009F6E61806E92B00FE4665 /* symbol86@2x.png in Resources */,
 				20CC6922180DA416002F2E6F /* icon.png in Resources */,
 				20CC6925180DA44C002F2E6F /* icon-60.png in Resources */,
@@ -4018,7 +4009,6 @@
 				49B8898118865273003766AD /* Reachability.m in Sources */,
 				202C4827187D7A6B00FE0975 /* CJSONDeserializer.m in Sources */,
 				2004C8451913AE8200E4BBFB /* InAppPurchaseCell.m in Sources */,
-				2004C83B1913A60900E4BBFB /* InAppPurchaseViewController.m in Sources */,
 				65BDB2DF17341D290084E032 /* CustomLabel.m in Sources */,
 				0FEF2DA9174E66FC00FDD8C9 /* HelpController.m in Sources */,
 				20A1CD6F18EF19B400484391 /* YouTubeSubClass.m in Sources */,
@@ -4040,9 +4030,9 @@
 				202C4828187D7A6B00FE0975 /* CJSONScanner.m in Sources */,
 				202C47FD187D6E4B00FE0975 /* BitlyTextView.m in Sources */,
 				2087B6C017C73B40007A6A90 /* ResetPWViewController.m in Sources */,
+				24803523192F3207009403F7 /* CameraViewController.m in Sources */,
 				202C4802187D6E4B00FE0975 /* BitlyTwitterOAuthViewController.m in Sources */,
 				2095C91118C5F92700E244A8 /* FlyerlyFacebookInvite.m in Sources */,
-				20FA7E721872AAF50057C3F3 /* CameraViewController.m in Sources */,
 				203E0B7617DDDD720039C3A7 /* InputViewController.m in Sources */,
 				20967D9818C8973200B273FC /* FlyerlyTwitterLike.m in Sources */,
 				2026992B18CED6B000945218 /* RMStore.m in Sources */,
