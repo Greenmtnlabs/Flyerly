@@ -47,7 +47,7 @@ NSMutableArray *productArray;
         if ( [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
              [userPurchases checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"] ) {
             
-            [_mode setBackgroundImage:[UIImage imageNamed:@"ModeVideo.png"]
+            [_mode setImage:[UIImage imageNamed:@"ModeVideo.png"]
                                 forState:UIControlStateNormal];
         }
         
