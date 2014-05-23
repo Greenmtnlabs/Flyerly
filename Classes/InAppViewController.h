@@ -39,8 +39,10 @@
 @property(nonatomic,strong) IBOutlet UITableView *freeFeaturesTview;
 @property(nonatomic,strong) IBOutlet UITableView *paidFeaturesTview;
 @property(nonatomic,strong) IBOutlet UIButton *loginButton;
+@property(nonatomic,strong) IBOutlet UIButton *completeDesignBundleButton;
 
 -(IBAction)hideMe;
+-(IBAction)purchaseCompleteBundle;
 -(void) requestProduct;
 -(void) inAppDataLoaded;
 -(void) restorePurchase;
