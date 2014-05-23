@@ -7,12 +7,23 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MediaPlayer/MediaPlayer.h>
+#import "CropView.h"
 
-@interface CropVideoViewController : UIViewController
+@interface CropVideoViewController : UIViewController {
+    MPMoviePlayerController     *player;
+    CGFloat                     aspectRatio;
+    CGFloat                     scaleRatio;
+    CGSize                      originalConceptualSize;
+    CGSize                      originalCropSize;
+}
 
 @property CGSize desiredVideoSize;
 @property (nonatomic, strong) NSURL *url;
-@property (nonatomic, copy) void (^onVideoFinished)(NSURL *);
+@property (nonatomic, copy) void (^onVideoFinished)(NSURL *, CGRect, CGFloat);
 @property (nonatomic, copy) void (^onVideoCancel)();
+
+@property (nonatomic, strong) IBOutlet UIView *playerView;
+@property (nonatomic, strong) IBOutlet CropView *cropView;
 
 @end

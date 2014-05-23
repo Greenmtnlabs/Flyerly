@@ -185,7 +185,7 @@ NSMutableArray *productArray;
                     
                     // HERE WE CALL OVER CALLBACK HERE
                     NSURL *url = [NSURL fileURLWithPath:rootPath];
-                    self.onVideoFinished( url );
+                    //self.onVideoFinished( url );
                 });
                 
                 // Pop the current view, and push the crop view.

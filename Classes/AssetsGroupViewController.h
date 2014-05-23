@@ -31,7 +31,7 @@
 
 @property CGSize desiredImageSize;
 @property (nonatomic, copy) void (^onImageTaken)(UIImage *);
-@property (nonatomic, copy) void (^onVideoFinished)(NSURL *);
+@property (nonatomic, copy) void (^onVideoFinished)(NSURL *, CGRect, CGFloat);
 @property (nonatomic, strong) UIView *inAppPurchasePanel;
 
 

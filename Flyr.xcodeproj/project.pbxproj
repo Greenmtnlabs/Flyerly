@@ -633,6 +633,7 @@
 		49B8898A188652A2003766AD /* NSData+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B88987188652A2003766AD /* NSData+Extras.m */; };
 		49F109D1192C7926002B0CD4 /* CropVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F109CF192C7926002B0CD4 /* CropVideoViewController.m */; };
 		49F109D2192C7926002B0CD4 /* CropVideoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F109D0192C7926002B0CD4 /* CropVideoViewController.xib */; };
+		49F5CA03192E11C200681C6E /* CropView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F5CA02192E11C200681C6E /* CropView.m */; };
 		6501CAF0173242FC00A89E59 /* Swiss_721_Black_Extended_BT.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6501CAEF173242FC00A89E59 /* Swiss_721_Black_Extended_BT.ttf */; };
 		6501CAF2173249C900A89E59 /* FlyerlyMainScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6501CAF1173249C900A89E59 /* FlyerlyMainScreen.xib */; };
 		6513C1961716C3DB00355FC3 /* cell_bg_first.png in Resources */ = {isa = PBXBuildFile; fileRef = 6513C1941716C3DB00355FC3 /* cell_bg_first.png */; };
@@ -1548,6 +1549,8 @@
 		49F109CE192C7926002B0CD4 /* CropVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CropVideoViewController.h; sourceTree = "<group>"; };
 		49F109CF192C7926002B0CD4 /* CropVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CropVideoViewController.m; sourceTree = "<group>"; };
 		49F109D0192C7926002B0CD4 /* CropVideoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CropVideoViewController.xib; sourceTree = "<group>"; };
+		49F5CA01192E11C200681C6E /* CropView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CropView.h; sourceTree = "<group>"; };
+		49F5CA02192E11C200681C6E /* CropView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CropView.m; sourceTree = "<group>"; };
 		6501CAEF173242FC00A89E59 /* Swiss_721_Black_Extended_BT.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Swiss_721_Black_Extended_BT.ttf; path = Data/fonts/Swiss_721_Black_Extended_BT.ttf; sourceTree = "<group>"; };
 		6501CAF1173249C900A89E59 /* FlyerlyMainScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FlyerlyMainScreen.xib; path = ../FlyerlyMainScreen.xib; sourceTree = "<group>"; };
 		6513C1941716C3DB00355FC3 /* cell_bg_first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cell_bg_first.png; sourceTree = "<group>"; };
@@ -3105,6 +3108,8 @@
 				49F109CE192C7926002B0CD4 /* CropVideoViewController.h */,
 				49F109CF192C7926002B0CD4 /* CropVideoViewController.m */,
 				49F109D0192C7926002B0CD4 /* CropVideoViewController.xib */,
+				49F5CA01192E11C200681C6E /* CropView.h */,
+				49F5CA02192E11C200681C6E /* CropView.m */,
 			);
 			name = CropVideo;
 			sourceTree = "<group>";
@@ -3961,6 +3966,7 @@
 				20A1CD6318EEF63200484391 /* SubNBUCamera.m in Sources */,
 				2095C90E18C5E89900E244A8 /* FlyerlyTwitterFriends.m in Sources */,
 				202F48BB18F28A60000B62DB /* CustomAssets.m in Sources */,
+				49F5CA03192E11C200681C6E /* CropView.m in Sources */,
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				202C47FA187D6E4B00FE0975 /* BitlyDebug.m in Sources */,
 				200D196818998BEB00EAD645 /* LayerTileButton.m in Sources */,
