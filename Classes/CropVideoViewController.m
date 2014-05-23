@@ -165,23 +165,30 @@
     // Now get the conceptual size based on ui size.
     CGSize conceptualSize = CGSizeMake( sizeRatio * _cropView.frame.size.width,
                                        sizeRatio * _cropView.frame.size.height );
+    */
+    CGRect cropRect = CGRectMake( _cropView.origin.x,
+                                 _cropView.origin.y,
+                                 _desiredVideoSize.width,
+                                 _desiredVideoSize.height );
     
     // Update scale ratio to reflect the change in crop size from original.
     if ( player.naturalSize.width < player.naturalSize.height ) {
+        // If this is portrait, then do not allow x translations
+        cropRect.origin.x = 0;
+        
         
         // If the video is in portrait mode.
-        scaleRatio = conceptualSize.width / player.naturalSize.width;
+        //scaleRatio = conceptualSize.width / player.naturalSize.width;
         
     } else {
+        // If its landscape do not allow y translations
+        cropRect.origin.y = 0;
+        
         // If the video is landscape or square.
-        scaleRatio = conceptualSize.height / player.naturalSize.height;
-    }*/
+        //scaleRatio = conceptualSize.height / player.naturalSize.height;
+    }
     
-    _onVideoFinished( _url, CGRectMake( _cropView.origin.x - originalCropFrame.origin.x,
-                                        _cropView.origin.y - originalCropFrame.origin.y,
-                                       _desiredVideoSize.width,
-                                       _desiredVideoSize.height ),
-                     scaleRatio );
+    _onVideoFinished( _url, cropRect, scaleRatio );
     
     // Go back to the last screen.
     [self.navigationController popViewControllerAnimated:YES];
