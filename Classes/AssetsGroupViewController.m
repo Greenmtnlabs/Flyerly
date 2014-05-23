@@ -23,6 +23,7 @@
 #import <NBUCompatibility.h>
 #import "FlyerlySingleton.h"
 #import "CropViewController.h"
+#import "CropVideoViewController.h"
 
 @implementation AssetsGroupViewController
 
@@ -172,19 +173,19 @@ NSMutableArray *productArray;
                 self.loading = YES;
                 
                 //Background Thread
-                dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-                    [self writeDataToPath:rootPath andAsset:asset.ALAsset];
+                CropVideoViewController *cropVideo = [[CropVideoViewController alloc] initWithNibName:@"CropVideoViewController" bundle:nil];
+                cropVideo.desiredVideoSize = _desiredImageSize;
+                cropVideo.url = asset.ALAsset.defaultRepresentation.url;
+                cropVideo.onVideoFinished = _onVideoFinished;
+                cropVideo.onVideoCancel = _onVideoCancel;
                     
-                    // HERE WE CALL OVER CALLBACK HERE
-                    NSURL *url = [NSURL fileURLWithPath:rootPath];
-                    //self.onVideoFinished( url );
-                });
-                
                 // Pop the current view, and push the crop view.
                 NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[[self navigationController] viewControllers]];
                 [viewControllers removeLastObject];
                 [viewControllers removeLastObject];
+                [viewControllers addObject:cropVideo];
                 [[self navigationController] setViewControllers:viewControllers animated:YES];
+                
             }
             
         } else {

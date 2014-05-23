@@ -1660,8 +1660,8 @@ int selectedAddMoreLayerTab = -1;
         });
     }];
     
-    /*
-    [nbuGallary setOnVideoFinished:^(NSURL *recvUrl) {
+    
+    [nbuGallary setOnVideoFinished:^(NSURL *recvUrl, CGRect cropRect, CGFloat scale ) {
         
         [uiBusy stopAnimating];
         [uiBusy removeFromSuperview];
@@ -1669,13 +1669,12 @@ int selectedAddMoreLayerTab = -1;
         NSLog(@"%@",recvUrl);
         NSError *error = nil;
         
-        [self.flyer setFlyerTypeVideo];
-        
+        [weakSelf.flyer setFlyerTypeVideo];
         
         // HERE WE MOVE SOURCE FILE INTO FLYER FOLDER
         NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
         NSString *destination = [NSString stringWithFormat:@"%@/Template/template.mov",currentpath];
-        [self.flyer setOriginalVideoUrl:@"Template/template.mov"];
+        [weakSelf.flyer setOriginalVideoUrl:@"Template/template.mov"];
         
         NSURL *movieURL = [NSURL fileURLWithPath:destination];
         
@@ -1685,13 +1684,26 @@ int selectedAddMoreLayerTab = -1;
             [[NSFileManager defaultManager] removeItemAtPath:destination error:&error];
         }
         
-        //HERE WE MOVE FILE INTO FLYER FOLDER
-        [[NSFileManager defaultManager] moveItemAtURL:recvUrl toURL:movieURL error:&error];
-        
-        //HERE WE RENDER MOVIE PLAYER
-        [self.flyimgView renderLayer:@"Template" layerDictionary:[self.flyer getLayerFromMaster:@"Template"]];
-
-    }];*/
+        // Make sure the video is scaled and cropped as required.
+        [weakSelf modifyVideo:recvUrl destination:movieURL crop:cropRect scale:scale overlay:nil completion:^(NSInteger status, NSError *error) {
+            switch ( status ) {
+                case AVAssetExportSessionStatusFailed:
+                    NSLog (@"FAIL = %@", error );
+                    break;
+                    
+                case AVAssetExportSessionStatusCompleted:
+                    
+                    // Main Thread
+                    dispatch_async( dispatch_get_main_queue(), ^{
+                        
+                        // Render the movie player.
+                        [weakSelf.flyimgView renderLayer:@"Template" layerDictionary:[self.flyer getLayerFromMaster:@"Template"]];
+                        
+                    });
+                    break;
+            }
+        }];
+    }];
     
     [nbuGallary setOnVideoCancel:^() {
         
@@ -1700,6 +1712,7 @@ int selectedAddMoreLayerTab = -1;
         [uiBusy removeFromSuperview];
         
     }];
+    
     [self.navigationController pushViewController:nbuGallary animated:YES];
     [Flurry logEvent:@"Custom Background"];
 }
@@ -1757,14 +1770,14 @@ int selectedAddMoreLayerTab = -1;
 
         NSError *error = nil;
         
-        [self.view addSubview:flyimgView];
-        [self.flyer setFlyerTypeVideo];
+        [weakSelf.view addSubview:flyimgView];
+        [weakSelf.flyer setFlyerTypeVideo];
         
         // Move video in to the sour flyer.
         NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
 
         NSString *destination = [NSString stringWithFormat:@"%@/Template/template.mov",currentpath];
-        [self.flyer setOriginalVideoUrl:@"Template/template.mov"];
+        [weakSelf.flyer setOriginalVideoUrl:@"Template/template.mov"];
         
         NSURL *movieURL = [NSURL fileURLWithPath:destination];
 
@@ -1774,7 +1787,7 @@ int selectedAddMoreLayerTab = -1;
         }
         
         // Make sure the video is scaled and cropped as required.
-        [self modifyVideo:recvUrl destination:movieURL crop:cropRect scale:scale overlay:nil completion:^(NSInteger status, NSError *error) {
+        [weakSelf modifyVideo:recvUrl destination:movieURL crop:cropRect scale:scale overlay:nil completion:^(NSInteger status, NSError *error) {
             switch ( status ) {
                 case AVAssetExportSessionStatusFailed:
                     NSLog (@"FAIL = %@", error );
@@ -1786,7 +1799,7 @@ int selectedAddMoreLayerTab = -1;
                     dispatch_async( dispatch_get_main_queue(), ^{
                             
                         // Render the movie player.
-                        [self.flyimgView renderLayer:@"Template" layerDictionary:[self.flyer getLayerFromMaster:@"Template"]];
+                        [weakSelf.flyimgView renderLayer:@"Template" layerDictionary:[self.flyer getLayerFromMaster:@"Template"]];
                             
                     });
                     break;
@@ -1796,11 +1809,11 @@ int selectedAddMoreLayerTab = -1;
       }];
     
     [nbuCamera setOnVideoCancel:^() {
-    
-      [self.view addSubview:flyimgView];
-        [uiBusy stopAnimating];
-        [uiBusy removeFromSuperview];
-    
+        dispatch_async( dispatch_get_main_queue(), ^{
+            [weakSelf.view addSubview:flyimgView];
+            [uiBusy stopAnimating];
+            [uiBusy removeFromSuperview];
+        });
     }];
 
     
