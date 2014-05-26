@@ -221,14 +221,12 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
             [[NSFileManager defaultManager] createDirectoryAtPath:anonymusUserPath withIntermediateDirectories:YES attributes:nil error:&error];
         
         // Show the greeting before going to the main app.
-        [[NSUserDefaults standardUserDefaults] setObject:@"greeted" forKey:@"greeted"];
-        
+        //[[NSUserDefaults standardUserDefaults] setObject:@"greeted" forKey:@"greeted"];
         lauchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil];
-        
-        [navigationController pushViewController:lauchController animated:NO];
+        //[navigationController pushViewController:lauchController animated:NO];
        
-        AfterUpdateController *afterUpdateView = [[AfterUpdateController alloc]initWithNibName:@"AfterUpdateController" bundle:nil];
-        [navigationController setRootViewController:afterUpdateView];
+        //AfterUpdateController *afterUpdateView = [[AfterUpdateController alloc]initWithNibName:@"AfterUpdateController" bundle:nil];
+        [navigationController setRootViewController:lauchController];
         [[NSUserDefaults standardUserDefaults]  setObject:@"YES" forKey:@"UpdatedVersion"];
         
     } else {

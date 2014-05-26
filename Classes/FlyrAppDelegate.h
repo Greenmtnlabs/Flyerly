@@ -44,13 +44,11 @@ extern NSString *FacebookDidLoginNotification;
 @property (nonatomic, strong) LaunchController *accountController;
 @property (nonatomic, strong) UserPurchases *userPurchases;
 
-
 @property (nonatomic, strong) UIView *sharingProgressParentView;
 @property (nonatomic, strong) RMStoreKeychainPersistence *_persistence;
 
 -(void)fbChangeforNewVersion;
 -(void)twitterChangeforNewVersion:(NSString *)olduser;
-
 -(void)copyUsersDataForTesting;
 
 @end

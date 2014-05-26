@@ -23,6 +23,9 @@
 
 @implementation FlyerlyMainScreen
 
+NSMutableArray *productArray;
+
+
 @synthesize tpController,createFlyrLabel,savedFlyrLabel,inviteFriendLabel,addFriendsController;
 @synthesize firstFlyer, secondFlyer, thirdFlyer, fourthFlyer, createFlyrButton, savedFlyrButton;
 @synthesize recentFlyers,inviteFriendButton,showIndicators;
@@ -283,10 +286,54 @@
     [self.navigationController pushViewController:helpController animated:NO];
 }
 
+/*
+ * Here we Open InAppPurchase Panel
+ */
+-(void)openPanel {
+    
+    inappviewcontroller = [[[InAppViewController alloc] init] autorelease];
+    [self presentModalViewController:inappviewcontroller animated:YES];
+    if ( productArray.count == 0 ){
+        [inappviewcontroller requestProduct];
+    }
+    if( productArray.count != 0 ) {
+        
+        //[inappviewcontroller.contentLoaderIndicatorView stopAnimating];
+        //inappviewcontroller.contentLoaderIndicatorView.hidden = YES;
+    }
+    
+    inappviewcontroller.buttondelegate = self;
+    
+}
+
+- ( void )inAppPurchasePanelContent {
+    [inappviewcontroller inAppDataLoaded];
+}
+
+
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    
+    // Determin if the user has been greeted?
+    NSString *greeted = [[NSUserDefaults standardUserDefaults] stringForKey:@"greeted"];
+    
+    if( !greeted ) {
         
+        // Determining the previous version of app
+        NSString *previuosVersion = [[NSUserDefaults standardUserDefaults] stringForKey:@"previousVersion"];
+        
+        if( ![previuosVersion isEqualToString:[self appVersion]] ||
+            previuosVersion == nil ) {
+            [self openPanel];
+        }
+        
+        // Show the greeting before going to the main app.
+        [[NSUserDefaults standardUserDefaults] setObject:@"greeted" forKey:@"greeted"];
+    
+    }
+    
+    
 	globle = [FlyerlySingleton RetrieveSingleton];
     createFlyrButton.showsTouchWhenHighlighted = YES;
     savedFlyrButton.showsTouchWhenHighlighted = YES;
@@ -313,6 +360,53 @@
     
 }
 
+- (void)inAppPurchasePanelButtonTappedWasPressed:(NSString *)inAppPurchasePanelButtonCurrentTitle {
+    
+    __weak InAppViewController *inappviewcontroller_ = inappviewcontroller;
+    if ([inAppPurchasePanelButtonCurrentTitle isEqualToString:(@"Sign In")]) {
+        
+        signInController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
+        
+        FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+        signInController.launchController = appDelegate.lauchController;
+        
+        __weak FlyerlyMainScreen *flyerlyMainScreen = self;
+        __weak UserPurchases *userPurchases_ = appDelegate.userPurchases;
+        userPurchases_.delegate = self;
+        
+        [inappviewcontroller_.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+        
+        signInController.signInCompletion = ^void(void) {
+            
+            UINavigationController* navigationController = flyerlyMainScreen.navigationController;
+            [navigationController popViewControllerAnimated:NO];
+            [userPurchases_ setUserPurcahsesFromParse];
+        };
+        
+        [self.navigationController pushViewController:signInController animated:YES];
+        
+    }else if ([inAppPurchasePanelButtonCurrentTitle isEqualToString:(@"RESTORE PURCHASES")]){
+        
+        
+        [inappviewcontroller_ restorePurchase];
+    }
+}
+
+- (void) userPurchasesLoaded {
+    
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    UserPurchases *userPurchases_ = appDelegate.userPurchases;
+    
+    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]  ||
+         [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
+        
+        //[inappviewcontroller.paidFeaturesTview reloadData];
+    }else {
+        
+        //[self presentModalViewController:inappviewcontroller animated:YES];
+    }
+    
+}
 
 
 -(IBAction)showFlyerDetail:(id)sender {
@@ -387,6 +481,13 @@
                                           otherButtonTitles:nil];
     [alert show];
 }
+
+- (NSString *) appVersion
+{
+    NSString* abc = [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleShortVersionString"];
+    return [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleShortVersionString"];
+}
+
 
 
 @end

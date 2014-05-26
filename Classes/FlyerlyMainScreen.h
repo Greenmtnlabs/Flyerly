@@ -9,23 +9,29 @@
 #import "FlyerlySingleton.h"
 #import "Reachability.h"
 #import "UserPurchases.h"
+#import "InAppViewController.h"
 #import "Flyer.h"
+#import "RMStore.h"
+#import "RMStoreKeychainPersistence.h"
 #import "FlyerImageView.h"
 
 //@class SigninController;
 @class FlyrViewController;
 @class CreateFlyerController ;
 @class InviteFriendsController;
-@class FlyerlySingleton;
+@class InAppViewController;
+@class FlyerlySingleton,SigninController;
 
 @class MainSettingViewController,ParentViewController;
 
-@interface FlyerlyMainScreen : ParentViewController {
+@interface FlyerlyMainScreen : ParentViewController <RMStoreObserver,inAppPurchasePanelButtonProtocol, UserPurchasesDelegate> {
     
 	CreateFlyerController *createFlyer;
 	FlyrViewController *tpController;
 	InviteFriendsController *addFriendsController;
     FlyerlySingleton *globle;
+    SigninController *signInController;
+    InAppViewController *inappviewcontroller;
     UserPurchases *userPurchases;
 
     IBOutlet UIButton *setBotton;
@@ -35,6 +41,7 @@
 
 @property(nonatomic,strong) FlyrViewController *tpController;
 @property(nonatomic,strong) InviteFriendsController *addFriendsController;
+
 
 @property (nonatomic, strong) IBOutlet UILabel *createFlyrLabel;
 @property (nonatomic, strong) IBOutlet UILabel *savedFlyrLabel;

@@ -47,6 +47,9 @@ int selectedAddMoreLayerTab = -1;
         titleLabel.text = title;
     }
     
+    [self addScrollView:layerScrollView];
+    
+    
     self.navigationItem.titleView = titleLabel;
 }
 
@@ -1150,9 +1153,6 @@ int selectedAddMoreLayerTab = -1;
 -(IBAction)selectColor:(id)sender
 {
     
-    NSArray *subviewArray = [layerScrollView subviews];
-    UIView *mainView = [subviewArray objectAtIndex:0];
-    
 	int  i=1;
 	UIButton *view = sender;
     
@@ -1278,17 +1278,12 @@ int selectedAddMoreLayerTab = -1;
 	}//LOOP
 }
 
-
-
 /*
  * When any template is selected
  */
 -(void)selectTemplate:(id)sender
 {
 	UIButton *view = sender;
-    
-    NSArray *subviewArray = [layerScrollView subviews];
-    UIView *mainView = [subviewArray objectAtIndex:0];
     
     //Handling Select Unselect
     for(UIView *tempView  in [mainView subviews])
@@ -1336,8 +1331,6 @@ int selectedAddMoreLayerTab = -1;
     
     [Flurry logEvent:@"Background Selected"];
 }
-
-
 
 /*
  * Called when select a symbol
@@ -1387,9 +1380,7 @@ int selectedAddMoreLayerTab = -1;
             UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
             [l setBorderColor:c.CGColor];
         }
-        
     }
-    
 }
 
 /*
@@ -1441,11 +1432,8 @@ int selectedAddMoreLayerTab = -1;
             UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
             [l setBorderColor:c.CGColor];
             
-            
         }
-        
     }
-    
 }
 
 /*
