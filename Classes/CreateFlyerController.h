@@ -79,6 +79,7 @@
 @property (nonatomic,strong)  UILabel *addMoreLayerOrSaveFlyerLabel;
 @property (nonatomic,strong)  UILabel *takeOrAddPhotoLabel;
 @property (nonatomic, strong) UIScrollView *layerScrollView;
+@property (nonatomic, strong) UIView *mainView;
 @property (nonatomic, strong) UIFont *selectedFont;
 @property (nonatomic, weak) id selectedColor;
 @property (nonatomic, assign) NSInteger selectedSize;
@@ -108,7 +109,7 @@
 //---------
 
 // These are LibFlyer
-@property (nonatomic, strong) IBOutlet UIButton *addMoreFontTabButton;
+@property (nonatomic, strong)IBOutlet UIButton *addMoreFontTabButton;
 @property (nonatomic, strong)IBOutlet UIButton *addMorePhotoTabButton;
 @property (nonatomic, strong)IBOutlet UIButton *addMoreIconTabButton;
 @property (nonatomic, strong)IBOutlet UIButton *addMoreSymbolTabButton;

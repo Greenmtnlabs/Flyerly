@@ -18,7 +18,7 @@ fontBorderTabButton,addMoreIconTabButton,addMorePhotoTabButton,addMoreSymbolTabB
 @synthesize contextView,libraryContextView,libFlyer,backgroundTabButton,addMoreFontTabButton;
 @synthesize libText,libBackground,libPhoto,libEmpty,backtemplates,cameraTakePhoto,cameraRoll,flyerBorder;
 @synthesize flyimgView,currentLayer,layersDic,flyer,player,playerView,playerToolBar,playButton,playerSlider,tempelateView;
-@synthesize durationLabel,durationChange,onFlyerBack;
+@synthesize durationLabel,durationChange,onFlyerBack,mainView;
 int selectedAddMoreLayerTab = -1;
 
 
@@ -400,10 +400,6 @@ int selectedAddMoreLayerTab = -1;
  */
 -(void)addTemplatesInSubView{
     
-    
-    widthValue = tempelateView.frame.size.width;
-	heightValue = tempelateView.frame.size.height;
-    
     imgPickerFlag =1;
     
     [templateArray removeAllObjects];
@@ -413,9 +409,6 @@ int selectedAddMoreLayerTab = -1;
     
     
     //[layerScrollView addSubview:tempelateView];
-    
-    UIView *mainView;
-    
     if(IS_IPHONE_5){
         NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"Backgrounds" owner:self options:nil];
         mainView = [subviewArray objectAtIndex:0];
@@ -438,12 +431,6 @@ int selectedAddMoreLayerTab = -1;
             
         }
     }
-    
-    
-    // Ressize Hight Width again for others Layers Tile size is different
-    widthValue = 35;
-    heightValue = 35;
-
 }
 
 /*
@@ -465,8 +452,6 @@ int selectedAddMoreLayerTab = -1;
 
     NSMutableDictionary *textLayer;
     NSString *textFamily;
-    
-    UIView *mainView;
     NSArray *subviewArray;
     
     if(IS_IPHONE_5){
@@ -504,20 +489,6 @@ int selectedAddMoreLayerTab = -1;
 		[font.titleLabel setFont: fontname];
 		[font setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 		[font setBackgroundImage:[UIImage imageNamed:@"a_bg"] forState:UIControlStateNormal];
-        
-        //SET BUTTON POSITION ON SCROLLVIEW
-        /*CGRect frame = font.frame;
-        frame.origin = CGPointMake(curXLoc, curYLoc);
-        font.frame = frame;
-        curXLoc += (widthValue)+increment;
-        
-        if(IS_IPHONE_5){
-            if(curXLoc >= 300){
-                curXLoc = 13;
-                curYLoc = curYLoc + widthValue + 7;
-            }
-        }*/
-        
         
         //Here we Highlight Last Font Selected
         if (textLayer) {
@@ -565,8 +536,6 @@ int selectedAddMoreLayerTab = -1;
         textSize = [textLayer objectForKey:@"fontsize"];
     }
     
-    
-    UIView *mainView;
     NSArray *subviewArray;
     
     if(IS_IPHONE_5){
@@ -646,8 +615,6 @@ int selectedAddMoreLayerTab = -1;
         textColor = [textLayer objectForKey:@"textcolor"];
         textWhiteColor = [textLayer objectForKey:@"textWhitecolor"];
     }
-    
-    UIView *mainView;
     NSArray *subviewArray;
     
     if(IS_IPHONE_5){
@@ -676,29 +643,6 @@ int selectedAddMoreLayerTab = -1;
         }
         
         id colorName = colorArray[(i-1)];
-		/*
-        
-		UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(color.frame.origin.x, color.frame.origin.y, color.frame.size.width, color.frame.size.height)];
-		[label setBackgroundColor:colorName];
-        label.layer.borderColor = [UIColor grayColor].CGColor;
-        label.layer.borderWidth = 1.0;
-		[color addSubview:label];
-		color.tag = i + 30;
-         
-
-        CGRect frame = color.frame;
-        frame.origin = CGPointMake(curXLoc, curYLoc);
-        color.frame = frame;
-        curXLoc += (widthValue)+increment;
-        
-        if(IS_IPHONE_5){
-            if(curXLoc >= 300){
-                curXLoc = 13;
-                curYLoc = curYLoc + heightValue + 7;
-            }
-        }*/
-
-        
         //Here we Highlight Last Color Selected
         if (textLayer) {
             
@@ -725,7 +669,6 @@ int selectedAddMoreLayerTab = -1;
                 UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
                 [color.layer setBorderColor:c.CGColor];
             }
-            
         }
         
     }//Loop
@@ -761,7 +704,7 @@ int selectedAddMoreLayerTab = -1;
     }
     
     
-    UIView *mainView;
+    
     NSArray *subviewArray;
     
     if(IS_IPHONE_5){
@@ -920,7 +863,6 @@ int selectedAddMoreLayerTab = -1;
     //Getting Last Image Tag for highlight
     NSString *LastTag = [flyer getImageTag:currentLayer];
     
-    UIView *mainView;
     NSArray *subviewArray;
     
     if(IS_IPHONE_5){
@@ -967,13 +909,11 @@ int selectedAddMoreLayerTab = -1;
  */
 -(void)addFlyerIconInSubView{
     
-    
-	iconArray = [[NSMutableArray alloc]init];
+    iconArray = [[NSMutableArray alloc]init];
     
     //Delete SubViews from ScrollView
-    [self deleteSubviewsFromScrollView];    
+    [self deleteSubviewsFromScrollView];
     
-    UIView *mainView;
     NSArray *subviewArray;
     
     if(IS_IPHONE_5){
@@ -1162,10 +1102,6 @@ int selectedAddMoreLayerTab = -1;
  */
 -(IBAction)selectFont:(id)sender
 {
-
-    NSArray *subviewArray = [layerScrollView subviews];
-    UIView *mainView = [subviewArray objectAtIndex:0];
-    
 	int  i=1;
 	UIButton *view = sender;
     
@@ -1217,7 +1153,6 @@ int selectedAddMoreLayerTab = -1;
     NSArray *subviewArray = [layerScrollView subviews];
     UIView *mainView = [subviewArray objectAtIndex:0];
     
-    
 	int  i=1;
 	UIButton *view = sender;
     
@@ -1263,10 +1198,6 @@ int selectedAddMoreLayerTab = -1;
  */
 -(IBAction)selectSize:(id)sender{
 
-    
-    NSArray *subviewArray = [layerScrollView subviews];
-    UIView *mainView = [subviewArray objectAtIndex:0];
-    
     
 	int  i=1;
 	UIButton *view = sender;
@@ -1315,11 +1246,6 @@ int selectedAddMoreLayerTab = -1;
  */
 -(IBAction)selectFontBorder:(id)sender
 {
-    
-    NSArray *subviewArray = [layerScrollView subviews];
-    UIView *mainView = [subviewArray objectAtIndex:0];
-    
-    
 	int  i=1;
 	UIButton *view = sender;
     
@@ -1421,7 +1347,6 @@ int selectedAddMoreLayerTab = -1;
     
     UIButton *view = sender;
     [Flurry logEvent:@"Layer Added"];
-    [Flurry logEvent:@"Symbol Added"];
     
     int lstTag = 500;
     NSString *lastTag = [flyer getImageTag:currentLayer];
@@ -1445,11 +1370,11 @@ int selectedAddMoreLayerTab = -1;
     }
     
     //Handling Select Unselect
-    for(UIView *tempView  in [layerScrollView subviews])
+    for(UIView *tempView  in [mainView subviews])
     {
         // Add border to Un-select layer thumbnail
         CALayer * l = [tempView layer];
-        [l setBorderWidth:1];
+        [l setBorderWidth:3.0];
         [l setCornerRadius:8];
         UIColor * c = [UIColor clearColor];
         [l setBorderColor:c.CGColor];
@@ -1467,9 +1392,6 @@ int selectedAddMoreLayerTab = -1;
     
 }
 
-
-
-
 /*
  * Called when select icon
  */
@@ -1478,7 +1400,6 @@ int selectedAddMoreLayerTab = -1;
     
     UIButton *view = sender;
     
-    [Flurry logEvent:@"Layer Added"];
     [Flurry logEvent:@"Clip Art Added"];
 
     int lstTag = 500;
@@ -1504,7 +1425,7 @@ int selectedAddMoreLayerTab = -1;
     
     
     //Handling Select Unselect
-    for(UIView *tempView  in [layerScrollView subviews])
+    for(UIView *tempView  in [mainView subviews])
     {
         // Add border to Un-select layer thumbnail
         CALayer * l = [tempView layer];
@@ -1526,8 +1447,6 @@ int selectedAddMoreLayerTab = -1;
     }
     
 }
-
-
 
 /*
  * When any Flyer border is selected
