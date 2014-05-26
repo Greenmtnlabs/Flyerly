@@ -19,6 +19,7 @@
 #import <UIKit/UIKit.h>
 #import "CreateFlyerController.h"
 #import "InAppPurchaseCell.h"
+#import "FreeFeatureCell.h"
 #import "FlyrAppDelegate.h"
 #import "Flyer.h"
 #import "UserPurchases.h"

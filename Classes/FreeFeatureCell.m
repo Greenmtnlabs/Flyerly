@@ -6,14 +6,11 @@
 //
 //
 
-#import "FreeFeaturesTableViewCell.h"
+#import "FreeFeatureCell.h"
 
-@implementation FreeFeaturesTableViewCell
+@implementation FreeFeatureCell
 
-- (void)awakeFromNib
-{
-    // Initialization code
-}
+@synthesize featureName,featureDesc;
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
@@ -22,4 +19,10 @@
     // Configure the view for the selected state
 }
 
+
+-(void)setCellValueswithProductTitle :(NSString *)title ProductDescription: (NSString *)description{
+    
+    featureName.text = title;
+    featureDesc.text = description;
+}
 @end

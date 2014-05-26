@@ -66,8 +66,12 @@ NSMutableArray *productArray;
     
     if (tableView == paidFeaturesTview)
         return  productArray.count;
-    else
-        return 0;
+    else {
+        // Find out the path of recipes.plist
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"free-features" ofType:@"plist"];
+        NSDictionary *freeFeaturesDictionary = [[NSDictionary alloc] initWithContentsOfFile:path];
+        return [[freeFeaturesDictionary allKeys] count];
+    }
     
 }
 
@@ -191,15 +195,16 @@ NSMutableArray *productArray;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (tableView == paidFeaturesTview){
+    
+    if ( [tableView isEqual:self.paidFeaturesTview] ){
         
         static NSString *cellId = @"InAppPurchaseCell";
-        InAppPurchaseCell *cell = (InAppPurchaseCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
+        InAppPurchaseCell *inAppCell = (InAppPurchaseCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
         
-        [cell setAccessoryType:UITableViewCellAccessoryNone];
-        if (cell == nil) {
+        [inAppCell setAccessoryType:UITableViewCellAccessoryNone];
+        if (inAppCell == nil) {
             NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"InAppPurchaseCell" owner:self options:nil];
-            cell = (InAppPurchaseCell *)[nib objectAtIndex:0];
+            inAppCell = (InAppPurchaseCell *)[nib objectAtIndex:0];
         }
         
         // Getting the product against tapped/selected cell
@@ -214,7 +219,7 @@ NSMutableArray *productArray;
             if ( [userPurchases checkKeyExistsInPurchases:productIdentifier] ) {
                 
                 // Disabling the cellview user interection if user already have valid purchases
-                cell.userInteractionEnabled = NO;
+                inAppCell.userInteractionEnabled = NO;
             }
             
         }
@@ -224,13 +229,30 @@ NSMutableArray *productArray;
         }
         
         //Setting the packagename,packageprice,packagedesciption values for cell view
-        [cell setCellValueswithProductTitle:[product objectForKey:@"packagename"] ProductPrice:[product objectForKey:@"packageprice"] ProductDescription:[product objectForKey:@"packagedesciption"]];
+        [inAppCell setCellValueswithProductTitle:[product objectForKey:@"packagename"] ProductPrice:[product objectForKey:@"packageprice"] ProductDescription:[product objectForKey:@"packagedesciption"]];
         
-        return cell;
+        return inAppCell;
+        
     }else {
-      return nil;
+        
+        static NSString *cellId = @"FreeFeatureCell";
+        FreeFeatureCell *freeFeatureCell = (FreeFeatureCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
+        [freeFeatureCell setAccessoryType:UITableViewCellAccessoryNone];
+        if (freeFeatureCell == nil) {
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"FreeFeatureCell" owner:self options:nil];
+            freeFeatureCell = (FreeFeatureCell *)[nib objectAtIndex:0];
+        }
+        
+        // Find out the path of free-features.plist
+        NSString *freeFeaturesPlistPath = [[NSBundle mainBundle] pathForResource:@"free-features" ofType:@"plist"];
+        NSDictionary *freeFeatuersDictionary = [[NSDictionary alloc] initWithContentsOfFile:freeFeaturesPlistPath];
+        
+        NSArray* freeFeatures = [freeFeatuersDictionary allKeys];
+        //Setting the feature name,feature description values for cell view using plist
+        [freeFeatureCell setCellValueswithProductTitle:freeFeatures[indexPath.row] ProductDescription:[freeFeatuersDictionary objectForKey:[freeFeatures objectAtIndex:indexPath.row]]];
+        
+        return freeFeatureCell;
     }
-   
 }
 
 #pragma mark  PURCHASE PRODUCT
