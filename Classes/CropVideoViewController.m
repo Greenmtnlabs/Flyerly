@@ -167,7 +167,7 @@
                                        sizeRatio * _cropView.frame.size.height );
     */
     CGRect cropRect = CGRectMake( _cropView.origin.x * player.naturalSize.width / _playerView.frame.size.width,
-                                 (_cropView.origin.y - 64) * player.naturalSize.height / _playerView.frame.size.height,
+                                 (_cropView.origin.y) * player.naturalSize.height / _playerView.frame.size.height,
                                  _desiredVideoSize.width,
                                  _desiredVideoSize.height );
     
