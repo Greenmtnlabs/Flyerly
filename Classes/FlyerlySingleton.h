@@ -23,6 +23,5 @@
 @property (nonatomic, strong) NSString *gallerComesFromCamera;
 +(FlyerlySingleton *)RetrieveSingleton;
 + (BOOL)connected;
--(UIColor*)colorWithHexString:(NSString*)hex;
 
 @end

@@ -33,7 +33,7 @@ const int CONTACTS_TAB = 0;
     self.selectedIdentifiers = [[NSMutableArray alloc] init];
     globle = [FlyerlySingleton RetrieveSingleton];
     self.navigationItem.hidesBackButton = YES;
-    [self.view setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
+    [self.view setBackgroundColor:[UIColor colorWithRed:245/255.0 green:241/255.0 blue:222/255.0 alpha:1]];
     
     // Register notification for facebook login
     [[NSNotificationCenter defaultCenter] removeObserver:self name:FacebookDidLoginNotification object:nil];
@@ -75,7 +75,7 @@ const int CONTACTS_TAB = 0;
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:inviteButton];
     [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
     
-    [self.uiTableView  setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
+    [self.uiTableView  setBackgroundColor:[UIColor colorWithRed:245/255.0 green:241/255.0 blue:222/255.0 alpha:1.0]];
     [searchTextField setReturnKeyType:UIReturnKeyDone];
     
     

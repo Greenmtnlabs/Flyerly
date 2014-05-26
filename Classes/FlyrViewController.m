@@ -23,7 +23,8 @@ NSMutableArray *productArray;
     searching = NO;
     
     FlyerlySingleton *globle = [FlyerlySingleton RetrieveSingleton];
-    [self.view setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
+    [self.view setBackgroundColor:[UIColor colorWithRed:245/255.0 green:241/255.0 blue:222/255.0 alpha:1.0]];
+    
     
     self.navigationItem.hidesBackButton = YES;
     searchTextField.font = [UIFont systemFontOfSize:12.0];
@@ -31,7 +32,7 @@ NSMutableArray *productArray;
     searchTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     [searchTextField setBorderStyle:UITextBorderStyleRoundedRect];
     
-    [self.tView setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
+    [self.tView setBackgroundColor:[UIColor colorWithRed:245/255.0 green:241/255.0 blue:222/255.0 alpha:1.0]];
 	tView.dataSource = self;
 	tView.delegate = self;
     [self.view addSubview:tView];

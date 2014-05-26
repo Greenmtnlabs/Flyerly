@@ -31,11 +31,11 @@
     [super viewDidLoad];
     
     globle = [FlyerlySingleton RetrieveSingleton];
-    [self.view setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
+    [self.view setBackgroundColor:[UIColor colorWithRed:245/255.0 green:241/255.0 blue:222/255.0 alpha:1]];
     self.tableView.rowHeight = 40;
 
     self.tableView.backgroundView = nil;
-    [self.tableView setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
+    [self.tableView setBackgroundColor:[UIColor colorWithRed:245/255.0 green:241/255.0 blue:222/255.0 alpha:1]];
     [self.tableView setSeparatorColor:[UIColor lightGrayColor]];
     
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {

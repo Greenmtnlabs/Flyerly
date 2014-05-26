@@ -161,8 +161,8 @@ int selectedAddMoreLayerTab = -1;
     //[self renderFlyer];
  
     globle = [FlyerlySingleton RetrieveSingleton];
-    [self.view setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
-    [self.contextView setBackgroundColor:[globle colorWithHexString:@"f5f1de"]];
+    [self.view setBackgroundColor:[UIColor colorWithRed:245/255.0 green:241/255.0 blue:222/255.0 alpha:1]];
+    [self.contextView setBackgroundColor:[UIColor colorWithRed:245/255.0 green:241/255.0 blue:222/255.0 alpha:1]];
 
     sharePanel = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.origin.y, 320,400 )];
     shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
@@ -529,7 +529,7 @@ int selectedAddMoreLayerTab = -1;
                 // Add border to selected layer thumbnail
                 [font.layer setBorderWidth:3.0];
                 [font.layer setCornerRadius:8];
-                UIColor * c = [globle colorWithHexString:@"0197dd"];
+                UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
                 [font.layer setBorderColor:c.CGColor];
             }
         }
@@ -608,7 +608,7 @@ int selectedAddMoreLayerTab = -1;
                 // Add border to selected layer thumbnail
                 [size.layer setBorderWidth:3.0];
                 [size.layer setCornerRadius:8];
-                UIColor * c = [globle colorWithHexString:@"0197dd"];
+                UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
                 [size.layer setBorderColor:c.CGColor];
             }
             
@@ -722,7 +722,7 @@ int selectedAddMoreLayerTab = -1;
                 // Add border to selected layer thumbnail
                 [color.layer setBorderWidth:3.0];
                 [color.layer setCornerRadius:8];
-                UIColor * c = [globle colorWithHexString:@"0197dd"];
+                UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
                 [color.layer setBorderColor:c.CGColor];
             }
             
@@ -809,7 +809,7 @@ int selectedAddMoreLayerTab = -1;
                 
                 if ([textColor isEqualToString:tcolor] && [textWhiteColor isEqualToString:twhite] ) {
                     // Add border to selected layer thumbnail
-                   // color.backgroundColor = [globle colorWithHexString:@"0197dd"];
+                   // color.backgroundColor = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
                 }
                 
                 i++;
@@ -891,7 +891,7 @@ int selectedAddMoreLayerTab = -1;
             
             if ([textColor isEqualToString:tcolor] && [textWhiteColor isEqualToString:twhite] ) {
                 // Add border to selected layer thumbnail
-                color.backgroundColor = [globle colorWithHexString:@"0197dd"];
+                color.backgroundColor = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
             }
             
         }
@@ -952,7 +952,7 @@ int selectedAddMoreLayerTab = -1;
                 // Add border to selected layer thumbnail
                 [symbolButton.layer setCornerRadius:8];
                 [symbolButton.layer setBorderWidth:3.0];
-                UIColor * c = [globle colorWithHexString:@"0197dd"];
+                UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
                 [symbolButton.layer setBorderColor:c.CGColor];
             }
     
@@ -1009,7 +1009,7 @@ int selectedAddMoreLayerTab = -1;
                 UIButton *iconButton = flyerIconArray[i-1];
                 [iconButton.layer setCornerRadius:8];
                 [iconButton.layer setBorderWidth:3.0];
-                UIColor * c = [globle colorWithHexString:@"0197dd"];
+                UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
                 [iconButton.layer setBorderColor:c.CGColor];
             }
         }
@@ -1199,7 +1199,7 @@ int selectedAddMoreLayerTab = -1;
                 CALayer * l = [tempView layer];
                 [l setBorderWidth:3.0];
             
-                UIColor * c = [globle colorWithHexString:@"0197dd"];
+                UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
                 [l setBorderColor:c.CGColor];
             }
             i++;
@@ -1248,7 +1248,7 @@ int selectedAddMoreLayerTab = -1;
                 CALayer * l = [tempView layer];
                 [l setBorderWidth:3.0];
                 [l setCornerRadius:8];
-                UIColor * c = [globle colorWithHexString:@"0197dd"];
+                UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
                 [l setBorderColor:c.CGColor];
             }
             
@@ -1299,7 +1299,7 @@ int selectedAddMoreLayerTab = -1;
                 // Add border to selected layer thumbnail
                 CALayer * l = [tempView layer];
                 [l setBorderWidth:3.0];
-                UIColor * c = [globle colorWithHexString:@"0197dd"];
+                UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
                 [l setBorderColor:c.CGColor];
             }
             i++;
@@ -1343,7 +1343,7 @@ int selectedAddMoreLayerTab = -1;
                 [flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
             
                 // Add border to selected layer thumbnail
-                //tempView.backgroundColor = [globle colorWithHexString:@"0197dd"];
+                //tempView.backgroundColor = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
 
             }
             i++;
@@ -1403,7 +1403,7 @@ int selectedAddMoreLayerTab = -1;
             // Add border to selected layer thumbnail
             CALayer * l = [tempView layer];
             [l setBorderWidth:3.0];
-            UIColor * c = [globle colorWithHexString:@"0197dd"];
+            UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
             [l setBorderColor:c.CGColor];
         }
     }
@@ -1459,7 +1459,7 @@ int selectedAddMoreLayerTab = -1;
             // Add border to selected layer thumbnail
             CALayer * l = [tempView layer];
             [l setBorderWidth:3.0];
-            UIColor * c = [globle colorWithHexString:@"0197dd"];
+            UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
             [l setBorderColor:c.CGColor];
         }
         
@@ -1517,7 +1517,7 @@ int selectedAddMoreLayerTab = -1;
         {
             // Add border to selected layer thumbnail
             [l setBorderWidth:3.0];
-            UIColor * c = [globle colorWithHexString:@"0197dd"];
+            UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
             [l setBorderColor:c.CGColor];
             
             
@@ -1558,7 +1558,7 @@ int selectedAddMoreLayerTab = -1;
                 [flyimgView setTemplateBorder:[flyer getLayerFromMaster:currentLayer]];
             
                 // Add border to selected layer thumbnail
-                tempView.backgroundColor = [globle colorWithHexString:@"0197dd"];
+                tempView.backgroundColor = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
             }
             
             i++;
