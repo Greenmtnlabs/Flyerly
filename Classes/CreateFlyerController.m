@@ -13,8 +13,8 @@
 
 @synthesize selectedFont,selectedColor,selectedTemplate,fontTabButton,colorTabButton,sizeTabButton,fontEditButton,selectedSize,
 fontBorderTabButton,addMoreIconTabButton,addMorePhotoTabButton,addMoreSymbolTabButton,sharePanel;
-@synthesize textBackgrnd,cameraTabButton,photoTabButton,widthTabButton,heightTabButton,deleteAlert,signInAlert;
-@synthesize imgPickerFlag, addMoreLayerOrSaveFlyerLabel, takeOrAddPhotoLabel,layerScrollView,flyerPath;
+@synthesize cameraTabButton,photoTabButton,widthTabButton,heightTabButton,deleteAlert,signInAlert;
+@synthesize imgPickerFlag,layerScrollView,flyerPath;
 @synthesize contextView,libraryContextView,libFlyer,backgroundTabButton,addMoreFontTabButton;
 @synthesize libText,libBackground,libPhoto,libEmpty,backtemplates,cameraTakePhoto,cameraRoll,flyerBorder;
 @synthesize flyimgView,currentLayer,layersDic,flyer,player,playerView,playerToolBar,playButton,playerSlider,tempelateView;
@@ -24,60 +24,49 @@ int selectedAddMoreLayerTab = -1;
 
 #pragma mark -  View Appear Methods
 
--(void)viewWillAppear:(BOOL)animated {
-	[super viewWillAppear:YES];
+/**
+ * Update the view once it appears.
+ */
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
     
     //Render Flyer
     [self renderFlyer];
+    
+    NSString *title = [flyer getFlyerTitle];
+    
+    if ( ![title isEqualToString:@""] ) {
+        titleLabel.text = title;
+    } else {
+        titleLabel.text = @"Flyer";
+    }
+}
 
-    //Here we Set Top Bar Item
+/**
+ * View setup. This is done once per instance.
+ */
+-(void)viewDidLoad{
+	[super viewDidLoad];
+    
+    // Here we Set Top Bar Item
     titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
     titleLabel.backgroundColor = [UIColor clearColor];
     titleLabel.font = [UIFont fontWithName:TITLE_FONT size:18];
     titleLabel.textAlignment = UITextAlignmentCenter;
     titleLabel.textColor = [UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0];
     
-    NSString *title = [flyer getFlyerTitle];
+    self.navigationItem.titleView = titleLabel;
     
-    if ( [title isEqualToString:@""] ) {
-        titleLabel.text = @"Flyerly";
+    // Device Check Maintain Size of ScrollView Because Scroll Indicator will show.
+    if ( IS_IPHONE_5 ) {
+        layerScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,320,150)];
     } else {
-        titleLabel.text = title;
+        layerScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,320,60)];
     }
     
-    [self addScrollView:layerScrollView];
-    
-    
-    self.navigationItem.titleView = titleLabel;
-}
-
--(void)viewDidAppear:(BOOL)animated {
-    
-    
-    //Render Flyer
-    [self renderFlyer];
-    
-    [addMoreLayerOrSaveFlyerLabel setText:@"CREATE YOUR FLYER WITH THE FEATURES BELOW THEN SHARE WITH THE WORLD!"];    [addMoreLayerOrSaveFlyerLabel setNumberOfLines:2];
-    [addMoreLayerOrSaveFlyerLabel setBackgroundColor:[UIColor clearColor]];
-    [addMoreLayerOrSaveFlyerLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:16]];
-    [addMoreLayerOrSaveFlyerLabel setTextColor:[UIColor grayColor]];
-    [addMoreLayerOrSaveFlyerLabel setTextAlignment:UITextAlignmentCenter];
-
-    
-    [takeOrAddPhotoLabel setText:@"TAKE OR ADD PHOTO & RESIZE"];
-    [takeOrAddPhotoLabel setBackgroundColor:[UIColor clearColor]];
-    [takeOrAddPhotoLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:18]];
-    [takeOrAddPhotoLabel setTextColor:[UIColor grayColor]];
-    [takeOrAddPhotoLabel setTextAlignment:UITextAlignmentCenter];
-
-    [videoLabel setText:@"SET PHOTO OR VIDEO AS BACKGROUND"];
-    [videoLabel setBackgroundColor:[UIColor clearColor]];
-    [videoLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:16]];
-    [videoLabel setTextColor:[UIColor grayColor]];
-    [videoLabel setTextAlignment:UITextAlignmentCenter];
-    
+    // Configure its scroll view.
     [layerScrollView setCanCancelContentTouches:NO];
 	layerScrollView.indicatorStyle = UIScrollViewIndicatorStyleBlack;
 	layerScrollView.clipsToBounds = YES;
@@ -85,134 +74,14 @@ int selectedAddMoreLayerTab = -1;
 	layerScrollView.pagingEnabled = NO;
 	layerScrollView.showsHorizontalScrollIndicator = YES;
 	layerScrollView.showsVerticalScrollIndicator = YES;
-	
-	textBackgrnd = [[UIImageView alloc]initWithFrame:CGRectMake(0, 385, 320, 44)];
-	//[self.view addSubview:textBackgrnd];
-	textBackgrnd.alpha = ALPHA0;
     
-    // Create font array
-	fontArray =[[NSArray  alloc] initWithObjects:
-				[UIFont fontWithName:@"Arial" size:27],
-				[UIFont fontWithName:@"GoodDog" size:27],
-				[UIFont fontWithName:@"GrandHotel-Regular" size:27],
-				[UIFont fontWithName:@"Kankin" size:27],
-				[UIFont fontWithName:@"Molot" size:27],
-				[UIFont fontWithName:@"Nexa Bold" size:27],
-				[UIFont fontWithName:@"Quicksand" size:27],
-				[UIFont fontWithName:@"StMarie-Thin" size:27],
-				[UIFont fontWithName:@"BlackJack" size:27],
-				[UIFont fontWithName:@"Comfortaa-Bold" size:27],
-				[UIFont fontWithName:@"Swis721 BlkEx BT" size:27], // Missing
-				[UIFont fontWithName:@"Algerian" size:27],
-				[UIFont fontWithName:@"HelveticaInseratCyr Upright" size:27],
-				[UIFont fontWithName:@"Helvetica Rounded LT Std" size:27],
-				[UIFont fontWithName:@"Lucida Handwriting" size:27],
-				[UIFont fontWithName:@"Anjelika Rose" size:27],
-				[UIFont fontWithName:@"BankGothic DB" size:27],
-				[UIFont fontWithName:@"Segoe UI" size:27],
-				[UIFont fontWithName:@"AvantGarde CE" size:27],
-				[UIFont fontWithName:@"BlueNoon" size:27],
-				[UIFont fontWithName:@"Daniel Black" size:27],
-                nil];
-	
- 
-	
-    // Create color array
-	colorArray = [[NSArray  alloc] initWithObjects: [UIColor redColor], [UIColor blueColor], [UIColor greenColor], [UIColor blackColor], [UIColor colorWithRed:253.0/255.0 green:191.0/255.0 blue:38.0/224.0 alpha:1], [UIColor colorWithWhite:1.0f alpha:1.0f], [UIColor grayColor], [UIColor magentaColor], [UIColor yellowColor], [UIColor colorWithRed:163.0/255.0 green:25.0/255.0 blue:2.0/224.0 alpha:1], [UIColor colorWithRed:3.0/255.0 green:15.0/255.0 blue:41.0/224.0 alpha:1], [UIColor purpleColor], [UIColor colorWithRed:85.0/255.0 green:86.0/255.0 blue:12.0/224.0 alpha:1], [UIColor orangeColor], [UIColor colorWithRed:98.0/255.0 green:74.0/255.0 blue:9.0/224.0 alpha:1], [UIColor colorWithRed:80.0/255.0 green:7.0/255.0 blue:1.0/224.0 alpha:1], [UIColor colorWithRed:150.0/255.0 green:150.0/255.0 blue:97.0/224.0 alpha:1], [UIColor colorWithRed:111.0/255.0 green:168.0/255.0 blue:100.0/224.0 alpha:1], [UIColor cyanColor], [UIColor colorWithRed:17.0/255.0 green:69.0/255.0 blue:70.0/224.0 alpha:1], [UIColor colorWithRed:173.0/255.0 green:127.0/255.0 blue:251.0/224.0 alpha:1], nil];
-	
+    // Show the layers first up.
+    [self addScrollView:layerScrollView];
     
-    // Create border colors array
-    borderArray = 	[[NSArray  alloc] initWithObjects: [UIColor blackColor], [UIColor grayColor], [UIColor darkGrayColor], [UIColor blueColor], [UIColor purpleColor], [UIColor colorWithRed:115.0/255.0 green:134.0/255.0 blue:144.0/255.0 alpha:1], [UIColor orangeColor], [UIColor greenColor], [UIColor redColor], [UIColor colorWithRed:14.0/255.0 green:95.0/255.0 blue:111.0/255.0 alpha:1], [UIColor colorWithRed:180.0/255.0 green:180.0/255.0 blue:149.0/255.0 alpha:1], [UIColor colorWithRed:228.0/255.0 green:128.0/255.0 blue:144.0/255.0 alpha:1], [UIColor colorWithRed:213.0/255.0 green:110.0/255.0 blue:86.0/255.0 alpha:1],[UIColor colorWithRed:156.0/255.0 green:195.0/255.0 blue:233.0/255.0 alpha:1],[UIColor colorWithRed:27.0/255.0 green:70.0/255.0 blue:148.0/255.0 alpha:1],[UIColor colorWithRed:234.0/255.0 green:230.0/255.0 blue:51.0/255.0 alpha:1],[UIColor cyanColor], [UIColor colorWithRed:232.0/255.0 green:236.0/255.0 blue:51.0/224.0 alpha:1],[UIColor magentaColor],[UIColor colorWithRed:57.0/255.0 green:87.0/255.0 blue:13.0/224.0 alpha:1], [UIColor colorWithRed:93.0/255.0 green:97.0/255.0 blue:196.0/224.0 alpha:1],nil];
-    
-    //Setting Tags
-	fontTabButton.tag = 10001;
-	colorTabButton.tag = 10002;
-    sizeTabButton.tag = 10003;
-	fontBorderTabButton.tag = 10004; //tag Change 5 to 4    //borderTabButton.tag = 10004;
-   
-    //Setting LibPhoto tabs tag
-	cameraTabButton.tag = 10001;
-	photoTabButton.tag = 10002;
-	widthTabButton.tag = 10003;
-	heightTabButton.tag = 10004;
-	
-    // Add more layer tabs
-	addMoreFontTabButton.tag = 10001;
-	
-    [addMorePhotoTabButton setBackgroundImage:[UIImage imageNamed:@"image_icon_selected"] forState:UIControlStateHighlighted];
-	addMorePhotoTabButton.tag = 10002;
-	
-    [addMoreSymbolTabButton setBackgroundImage:[UIImage imageNamed:@"symbolicon_button_selected"] forState:UIControlStateHighlighted];
-	addMoreSymbolTabButton.tag = 10003;
-    
-    [addMoreIconTabButton setBackgroundImage:[UIImage imageNamed:@"icon_button_selected"] forState:UIControlStateHighlighted];
-    addMoreIconTabButton.tag = 10004;
-
-}
-
-
-
--(void)viewDidLoad{
-	[super viewDidLoad];
-    
-    // HERE WE CREATE FLYERLY ALBUM ON DEVICE
-    if(![[NSUserDefaults standardUserDefaults] stringForKey:@"FlyerlyAlbum"]){
-        [flyer createFlyerlyAlbum];
-    }
-    
-    //Render Flyer
-    //[self renderFlyer];
- 
-    globle = [FlyerlySingleton RetrieveSingleton];
-    [self.view setBackgroundColor:[UIColor colorWithRed:245/255.0 green:241/255.0 blue:222/255.0 alpha:1]];
-    [self.contextView setBackgroundColor:[UIColor colorWithRed:245/255.0 green:241/255.0 blue:222/255.0 alpha:1]];
-
-    sharePanel = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.origin.y, 320,400 )];
-    shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
-
-    sharePanel = shareviewcontroller.view;
-    sharePanel.hidden = YES;
-    [self.view addSubview:sharePanel];
-
-    // Set height and width of each element of scroll view
-    layerXposition = 0;
-    widthValue = 35;
-    heightValue = 35;
-    
-	//Default Selection for start
-	selectedFont = [UIFont fontWithName:@"Arial" size:16];
-	selectedColor = [UIColor blackColor];	
-	selectedSize = 16;
-    
-    //Set Initial Background Image For Flyer New or Edit
-    if(!selectedTemplate){
-        selectedTemplate  = [UIImage imageNamed:@"main_area_bg"];
-    }
-    
-    //layerTile Button
-    editButtonGlobal = [[LayerTileButton alloc]init];
-    editButtonGlobal.uid = @"";
-    
-    // Main Scroll Views Initialize
-    // Device Check Maintain Size of ScrollView Because Scroll Indicator will show.
-    if(IS_IPHONE_5){
-        layerScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,320,150)];
-    }else {
-        layerScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,320,60)];
-    }
-    layersDic = [[NSMutableDictionary alloc] init];
-
-        
-    //all Labels Intialize
-    //for Using in ContextView
-    takeOrAddPhotoLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 5, 310, 43)];
-    videoLabel  = [[UILabel alloc] initWithFrame:CGRectMake(0, 5, 310, 43)];
-    addMoreLayerOrSaveFlyerLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 5, 310, 63)];
-    
-	templateArray = [[NSMutableArray alloc]init];
-    
-	imgPickerFlag =1;
-    selectedAddMoreLayerTab = -1;
+    // Setup the label fonts
+    [_addMoreLayerOrSaveFlyerLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:16]];
+    [_takeOrAddPhotoLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:18]];
+    [_videoLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:16]];
     
     //Right ShareButton
     shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
@@ -221,7 +90,7 @@ int selectedAddMoreLayerTab = -1;
     [shareButton setBackgroundImage:[UIImage imageNamed:@"share_button"] forState:UIControlStateNormal];
     shareButton.showsTouchWhenHighlighted = YES;
     
-    //Right UndoButton
+    // Right UndoButton
     UIButton *undoButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     undoButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
 	[undoButton addTarget:self action:@selector(undoFlyer) forControlEvents:UIControlEventTouchUpInside];
@@ -232,10 +101,7 @@ int selectedAddMoreLayerTab = -1;
     rightUndoBarButton = [[UIBarButtonItem alloc] initWithCustomView:undoButton];
     [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,rightUndoBarButton,nil]];
     
-    //Set Undo Bar Status
-    [self setUndoStatus];
-    
-    //Left BackButton
+    // Left BackButton
     UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
 	[backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
@@ -250,11 +116,11 @@ int selectedAddMoreLayerTab = -1;
     } else {
         [backButton setBackgroundImage:[UIImage imageNamed:@"home_button"] forState:UIControlStateNormal];
     }
-
+    
     backButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     
-    //Left HelpButton
+    // Left HelpButton
     helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [helpButton addTarget:self action:@selector(loadHelpController) forControlEvents:UIControlEventTouchUpInside];
     [helpButton setBackgroundImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
@@ -263,14 +129,89 @@ int selectedAddMoreLayerTab = -1;
     
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:backBarButton,leftBarHelpButton,nil]];
     
-    //Set Context View
-    [self addAllLayersIntoScrollView ];
+    // Set height and width of each element of scroll view
+    layerXposition = 0;
+    widthValue = 35;
+    heightValue = 35;
     
-    //Set Context Tabs
-    [self addBottomTabs:libFlyer];
+	// Default Selection for start
+	selectedFont = [UIFont fontWithName:@"Arial" size:16];
+	selectedColor = [UIColor blackColor];
+	selectedSize = 16;
     
+    // Set Initial Background Image For Flyer New or Edit
+    if( !selectedTemplate ) {
+        selectedTemplate  = [UIImage imageNamed:@"main_area_bg"];
+    }
+    
+    // layerTile Button
+    editButtonGlobal = [[LayerTileButton alloc]init];
+    editButtonGlobal.uid = @"";
+    
+    // Main Scroll Views Initialize
+    layersDic = [[NSMutableDictionary alloc] init];
+	templateArray = [[NSMutableArray alloc] init];
+	imgPickerFlag = 1;
+    selectedAddMoreLayerTab = -1;
+    
+    // Current selected layer.
     currentLayer = @"";
-
+    
+    // Execute the rest of the stuff, a little delayed to speed up loading.
+    dispatch_async( dispatch_get_main_queue(), ^{
+        fontArray =[[NSArray  alloc] initWithObjects:
+                    [UIFont fontWithName:@"Arial" size:27],
+                    [UIFont fontWithName:@"GoodDog" size:27],
+                    [UIFont fontWithName:@"GrandHotel-Regular" size:27],
+                    [UIFont fontWithName:@"Kankin" size:27],
+                    [UIFont fontWithName:@"Molot" size:27],
+                    [UIFont fontWithName:@"Nexa Bold" size:27],
+                    [UIFont fontWithName:@"Quicksand" size:27],
+                    [UIFont fontWithName:@"StMarie-Thin" size:27],
+                    [UIFont fontWithName:@"BlackJack" size:27],
+                    [UIFont fontWithName:@"Comfortaa-Bold" size:27],
+                    [UIFont fontWithName:@"Swis721 BlkEx BT" size:27], // Missing
+                    [UIFont fontWithName:@"Algerian" size:27],
+                    [UIFont fontWithName:@"HelveticaInseratCyr Upright" size:27],
+                    [UIFont fontWithName:@"Helvetica Rounded LT Std" size:27],
+                    [UIFont fontWithName:@"Lucida Handwriting" size:27],
+                    [UIFont fontWithName:@"Anjelika Rose" size:27],
+                    [UIFont fontWithName:@"BankGothic DB" size:27],
+                    [UIFont fontWithName:@"Segoe UI" size:27],
+                    [UIFont fontWithName:@"AvantGarde CE" size:27],
+                    [UIFont fontWithName:@"BlueNoon" size:27],
+                    [UIFont fontWithName:@"Daniel Black" size:27],
+                    nil];
+        
+        // Create color array
+        colorArray = [[NSArray  alloc] initWithObjects: [UIColor redColor], [UIColor blueColor], [UIColor greenColor], [UIColor blackColor], [UIColor colorWithRed:253.0/255.0 green:191.0/255.0 blue:38.0/224.0 alpha:1], [UIColor colorWithWhite:1.0f alpha:1.0f], [UIColor grayColor], [UIColor magentaColor], [UIColor yellowColor], [UIColor colorWithRed:163.0/255.0 green:25.0/255.0 blue:2.0/224.0 alpha:1], [UIColor colorWithRed:3.0/255.0 green:15.0/255.0 blue:41.0/224.0 alpha:1], [UIColor purpleColor], [UIColor colorWithRed:85.0/255.0 green:86.0/255.0 blue:12.0/224.0 alpha:1], [UIColor orangeColor], [UIColor colorWithRed:98.0/255.0 green:74.0/255.0 blue:9.0/224.0 alpha:1], [UIColor colorWithRed:80.0/255.0 green:7.0/255.0 blue:1.0/224.0 alpha:1], [UIColor colorWithRed:150.0/255.0 green:150.0/255.0 blue:97.0/224.0 alpha:1], [UIColor colorWithRed:111.0/255.0 green:168.0/255.0 blue:100.0/224.0 alpha:1], [UIColor cyanColor], [UIColor colorWithRed:17.0/255.0 green:69.0/255.0 blue:70.0/224.0 alpha:1], [UIColor colorWithRed:173.0/255.0 green:127.0/255.0 blue:251.0/224.0 alpha:1], nil];
+        
+        
+        // Create border colors array
+        borderArray = 	[[NSArray  alloc] initWithObjects: [UIColor blackColor], [UIColor grayColor], [UIColor darkGrayColor], [UIColor blueColor], [UIColor purpleColor], [UIColor colorWithRed:115.0/255.0 green:134.0/255.0 blue:144.0/255.0 alpha:1], [UIColor orangeColor], [UIColor greenColor], [UIColor redColor], [UIColor colorWithRed:14.0/255.0 green:95.0/255.0 blue:111.0/255.0 alpha:1], [UIColor colorWithRed:180.0/255.0 green:180.0/255.0 blue:149.0/255.0 alpha:1], [UIColor colorWithRed:228.0/255.0 green:128.0/255.0 blue:144.0/255.0 alpha:1], [UIColor colorWithRed:213.0/255.0 green:110.0/255.0 blue:86.0/255.0 alpha:1],[UIColor colorWithRed:156.0/255.0 green:195.0/255.0 blue:233.0/255.0 alpha:1],[UIColor colorWithRed:27.0/255.0 green:70.0/255.0 blue:148.0/255.0 alpha:1],[UIColor colorWithRed:234.0/255.0 green:230.0/255.0 blue:51.0/255.0 alpha:1],[UIColor cyanColor], [UIColor colorWithRed:232.0/255.0 green:236.0/255.0 blue:51.0/224.0 alpha:1],[UIColor magentaColor],[UIColor colorWithRed:57.0/255.0 green:87.0/255.0 blue:13.0/224.0 alpha:1], [UIColor colorWithRed:93.0/255.0 green:97.0/255.0 blue:196.0/224.0 alpha:1],nil];
+        
+        // HERE WE CREATE FLYERLY ALBUM ON DEVICE
+        if(![[NSUserDefaults standardUserDefaults] stringForKey:@"FlyerlyAlbum"]){
+            [flyer createFlyerlyAlbum];
+        }
+        
+        // Setup the share panel.
+        sharePanel = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.origin.y, 320,400 )];
+        shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
+        
+        sharePanel = shareviewcontroller.view;
+        sharePanel.hidden = YES;
+        [self.view addSubview:sharePanel];
+        
+        //Set Undo Bar Status
+        [self setUndoStatus];
+        
+        //Set Context View
+        [self addAllLayersIntoScrollView ];
+        
+        //Set Context Tabs
+        [self addBottomTabs:libFlyer];
+    });
 }
 
 #pragma mark -  View DisAppear Methods
@@ -975,7 +916,7 @@ int selectedAddMoreLayerTab = -1;
     NSInteger layerScrollHeight = 40;
     
     if( self.flyimgView.layers.count == 0 ){
-        [self addScrollView:addMoreLayerOrSaveFlyerLabel];
+        _addMoreLayerOrSaveFlyerLabel.alpha = 1;
         return;
     }
     
@@ -1644,7 +1585,14 @@ int selectedAddMoreLayerTab = -1;
     CameraViewController *nbuCamera = [[CameraViewController alloc]initWithNibName:@"CameraViewController" bundle:nil];
     
     nbuCamera.videoAllow = forVideo;
-    nbuCamera.desiredImageSize = CGSizeMake( flyerlyWidth,  flyerlyHeight );
+    
+    if ( imgPickerFlag == 2 ) {
+        NSDictionary *dict = [flyer getLayerFromMaster:currentLayer];
+        nbuCamera.desiredImageSize = CGSizeMake( [[dict valueForKey:@"width"] floatValue],
+                                                 [[dict valueForKey:@"height"] floatValue]);
+    } else {
+        nbuCamera.desiredImageSize = CGSizeMake( flyerlyWidth,  flyerlyHeight );
+    }
     
     __weak CreateFlyerController *weakSelf = self;
     
@@ -1655,6 +1603,21 @@ int selectedAddMoreLayerTab = -1;
         [uiBusy removeFromSuperview];
         dispatch_async( dispatch_get_main_queue(), ^{
 
+            if ( imgPickerFlag == 2 ) {
+                NSString *imgPath = [weakSelf getImagePathforPhoto:img];
+                
+                // Set Image to dictionary
+                [weakSelf.flyer setImagePath:weakSelf.currentLayer ImgPath:imgPath];
+                
+                // Here we Create ImageView Layer
+                [weakSelf.flyimgView renderLayer:weakSelf.currentLayer layerDictionary:[weakSelf.flyer getLayerFromMaster:weakSelf.currentLayer]];
+                
+                [weakSelf.flyimgView layerStoppedEditing:weakSelf.currentLayer];
+                
+                weakSelf.imgPickerFlag = 1;
+                
+            } else {
+            
                 //Here we Set Flyer Type
                 [weakSelf.flyer setFlyerTypeImage];
                 
@@ -1665,6 +1628,7 @@ int selectedAddMoreLayerTab = -1;
                 //set template Image
                 [weakSelf.flyimgView setTemplate:[NSString stringWithFormat:@"Template/template.%@",IMAGETYPE ]];
                 [Flurry logEvent:@"Custom Background"];
+            }
             
                 
         });
@@ -2101,8 +2065,6 @@ int selectedAddMoreLayerTab = -1;
     
     //Here we Highlight The ImageView
     [self.flyimgView layerIsBeingEdited:currentLayer];
-    
-	textBackgrnd.alpha = ALPHA1;
 
     // SET BOTTOM BAR
     [self setStyleTabAction:fontTabButton];
@@ -2245,7 +2207,10 @@ int selectedAddMoreLayerTab = -1;
         
     }
     
-
+    // Hide the labels.
+    _addMoreLayerOrSaveFlyerLabel.alpha = 0;
+    _takeOrAddPhotoLabel.alpha = 0;
+    _videoLabel.alpha = 0;
 }
 
 /*
@@ -3211,7 +3176,7 @@ int selectedAddMoreLayerTab = -1;
     {
 
         [self openCustomCamera:YES];
-        [self addScrollView:videoLabel];
+        _videoLabel.alpha = 1;
 
     }
     else if(selectedButton == cameraRoll)
@@ -3229,7 +3194,7 @@ int selectedAddMoreLayerTab = -1;
         [self loadCustomPhotoLibrary:YES];
         
         //Add ContextView
-        [self addScrollView:videoLabel];
+        _videoLabel.alpha = 1;
 
     }
     else if(selectedButton == flyerBorder)
@@ -3269,7 +3234,6 @@ int selectedAddMoreLayerTab = -1;
     if( selectedButton == cameraTabButton )
 	{
         imgPickerFlag =2;
-        textBackgrnd.alpha = ALPHA0;
         [self openCustomCamera:NO];
 
     }
@@ -3287,8 +3251,6 @@ int selectedAddMoreLayerTab = -1;
         }
         
         [self loadCustomPhotoLibrary:NO];
-
-        textBackgrnd.alpha = ALPHA0;
     }
     else if( selectedButton == widthTabButton )
 	{
@@ -3373,7 +3335,7 @@ int selectedAddMoreLayerTab = -1;
         [self.flyimgView layerIsBeingEdited:currentLayer];
         
         //Here we Add Some Text In ScrolView
-        [self addScrollView:takeOrAddPhotoLabel];
+        _takeOrAddPhotoLabel.alpha = 1;
 	    
         [self choosePhoto];
 		imgPickerFlag = 2;

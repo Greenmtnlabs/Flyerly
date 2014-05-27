@@ -10,7 +10,6 @@
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
 #import "CustomLabel.h"
-#import "FlyerlySingleton.h"
 #import "ParentViewController.h"
 #import "CameraViewController.h"
 #import "Flyer.h"
@@ -30,15 +29,10 @@
 #import "UIPlaceHolderTextView.h"
 #import <MediaPlayer/MediaPlayer.h>
 
-@class FlyerlySingleton, CameraViewController, Flyer, FlyerImageView, ShareViewController, SigninController;
+@class FlyerlySingleton, Flyer, FlyerImageView, ShareViewController, SigninController;
 @interface CreateFlyerController :ParentViewController<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, FlyerImageViewDelegate,UIGestureRecognizerDelegate >
 
 {
-   
-    FlyerlySingleton *globle;
-    UILabel *addMoreLayerOrSaveFlyerLabel;
-    UILabel *takeOrAddPhotoLabel;
-    UILabel *videoLabel;
     UIActivityIndicatorView *uiBusy;
 
     UIScrollView *layerScrollView;
@@ -74,10 +68,10 @@
     
 }
 
+@property (nonatomic,strong)  IBOutlet UILabel *takeOrAddPhotoLabel;
+@property (nonatomic,strong)  IBOutlet UILabel *videoLabel;
+@property (nonatomic,strong)  IBOutlet UILabel *addMoreLayerOrSaveFlyerLabel;
 
-@property (nonatomic, strong) UIImageView *textBackgrnd;
-@property (nonatomic, strong) UILabel *addMoreLayerOrSaveFlyerLabel;
-@property (nonatomic, strong) UILabel *takeOrAddPhotoLabel;
 @property (nonatomic, strong) UIScrollView *layerScrollView;
 @property (nonatomic, strong) UIView *mainView;
 @property (nonatomic, strong) UIFont *selectedFont;

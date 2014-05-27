@@ -12,9 +12,10 @@
 #import "InAppViewController.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "SubNBUCamera.h"
+#import "UserPurchases.h"
 
 @class SigninController;
-
+@class InAppViewController;
 
 @interface CameraViewController : NBUCameraViewController <inAppPurchasePanelButtonProtocol, UserPurchasesDelegate> {
     CGFloat progress;
