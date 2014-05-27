@@ -123,7 +123,7 @@ NSMutableArray *productArray;
     if(buttonIndex == 1)
     {
 
-        SigninController *signInController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
+        signInController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
         
         signInController.launchController = self;
         
@@ -483,7 +483,7 @@ NSMutableArray *productArray;
 }
 
 
--(void)showAlert:(NSString *)title message:(NSString *)message{
+-(void)showAlert:(NSString *)title message:(NSString *)message {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
                                                     message:message
                                                    delegate:nil
@@ -492,12 +492,18 @@ NSMutableArray *productArray;
     [alert show];
 }
 
-- (NSString *) appVersion
-{
-    NSString* abc = [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleShortVersionString"];
+- (NSString *) appVersion {
     return [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleShortVersionString"];
 }
 
-
+- ( void )productSuccesfullyPurchased: (NSString *)productId {
+    
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    UserPurchases *userPurchases_ = appDelegate.userPurchases;
+    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
+        [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
+    }
+    
+}
 
 @end

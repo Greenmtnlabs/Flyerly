@@ -24,7 +24,7 @@
 
 @class MainSettingViewController,ParentViewController;
 
-@interface FlyerlyMainScreen : ParentViewController <RMStoreObserver,inAppPurchasePanelButtonProtocol, UserPurchasesDelegate> {
+@interface FlyerlyMainScreen : ParentViewController <InAppPurchasePanelButtonProtocol, UserPurchasesDelegate> {
     
 	CreateFlyerController *createFlyer;
 	FlyrViewController *tpController;

@@ -17,7 +17,7 @@
 @class SigninController;
 @class InAppViewController;
 
-@interface CameraViewController : NBUCameraViewController <inAppPurchasePanelButtonProtocol, UserPurchasesDelegate> {
+@interface CameraViewController : NBUCameraViewController <InAppPurchasePanelButtonProtocol, UserPurchasesDelegate> {
     CGFloat progress;
     SubNBUCamera *cameraViewChild;
     InAppViewController *inappviewcontroller;

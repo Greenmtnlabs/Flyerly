@@ -23,7 +23,7 @@
 #import "NBUImagePickerPrivate.h"
 
 @class ObjectGridView, NBUAssetsGroup;
-@interface AssetsGroupViewController : NBUAssetsGroupViewController <inAppPurchasePanelButtonProtocol, UserPurchasesDelegate> {
+@interface AssetsGroupViewController : NBUAssetsGroupViewController <InAppPurchasePanelButtonProtocol, UserPurchasesDelegate> {
     
     InAppViewController *inappviewcontroller;
     UserPurchases *userPurchases;

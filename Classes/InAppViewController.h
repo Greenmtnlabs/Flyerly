@@ -6,7 +6,7 @@
 //
 //
 
-@protocol inAppPurchasePanelButtonProtocol
+@protocol InAppPurchasePanelButtonProtocol
 
 -(void)inAppPurchasePanelButtonTappedWasPressed:(NSString *)inAppPurchasePanelButtonCurrentTitle;
 
@@ -36,7 +36,7 @@
 }
 
 
-@property (nonatomic, assign) id <inAppPurchasePanelButtonProtocol> buttondelegate;
+@property (nonatomic, assign) id <InAppPurchasePanelButtonProtocol> buttondelegate;
 @property(nonatomic,strong) IBOutlet UITableView *freeFeaturesTview;
 @property(nonatomic,strong) IBOutlet UITableView *paidFeaturesTview;
 @property(nonatomic,strong) IBOutlet UIButton *loginButton;
