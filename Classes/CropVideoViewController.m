@@ -157,35 +157,33 @@
  * We are done, use the cropped and filtered image.
  */
 -(void)onDone {
-    /*
-    // The change in width needs to be first translated from our UI width to
-    // our conceptual width.
-    CGFloat sizeRatio = originalConceptualSize.width / originalCropSize.width;
+    // Crop rect to use will differ based on whether this is from gallery
+    // or camera. Camera has the video rotated.
+    CGRect cropRect;
     
-    // Now get the conceptual size based on ui size.
-    CGSize conceptualSize = CGSizeMake( sizeRatio * _cropView.frame.size.width,
-                                       sizeRatio * _cropView.frame.size.height );
-    */
-    CGRect cropRect = CGRectMake( _cropView.origin.x * player.naturalSize.width / _playerView.frame.size.width,
-                                 (_cropView.origin.y) * player.naturalSize.height / _playerView.frame.size.height,
-                                 _desiredVideoSize.width,
-                                 _desiredVideoSize.height );
+    if ( _fromCamera ) {
+        cropRect = CGRectMake(
+                _cropView.origin.x * player.naturalSize.height / _playerView.frame.size.width,
+                _cropView.origin.y * player.naturalSize.width / _playerView.frame.size.height,
+                _desiredVideoSize.width,
+                _desiredVideoSize.height );
+    } else {
+        cropRect = CGRectMake(
+                _cropView.origin.x * player.naturalSize.width / _playerView.frame.size.width,
+                _cropView.origin.y * player.naturalSize.height / _playerView.frame.size.height,
+                _desiredVideoSize.width,
+                _desiredVideoSize.height );
+    }
     
     // Update scale ratio to reflect the change in crop size from original.
     if ( player.naturalSize.width < player.naturalSize.height ) {
         // If this is portrait, then do not allow x translations
         cropRect.origin.x = 0;
-        
-        
-        // If the video is in portrait mode.
-        //scaleRatio = conceptualSize.width / player.naturalSize.width;
-        
+    
     } else {
         // If its landscape do not allow y translations
         cropRect.origin.y = 0;
-        
-        // If the video is landscape or square.
-        //scaleRatio = conceptualSize.height / player.naturalSize.height;
+    
     }
     
     _onVideoFinished( _url, cropRect, scaleRatio );
