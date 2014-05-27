@@ -320,7 +320,10 @@ NSMutableArray *productArray;
         
         //HERE WE GET SHARED INTANCE OF _persistence WHICH WE LINKED IN FlyrAppDelegate
         FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-        NSArray *productIdentifiers = [[appDelegate._persistence purchasedProductIdentifiers] allObjects];
+        //NSArray *productIdentifiers = [[appDelegate._persistence purchasedProductIdentifiers] allObjects];
+        NSArray *productIdentifiers = @[@"com.flyerly.AllDesignBundle",@"com.flyerly.UnlockSavedFlyers",@"com.flyerly.UnlockCreateVideoFlyerOption"];
+        //NSSet *productIdentifiers = [NSSet setWithArray:@[@"com.flyerly.AllDesignBundle",@"com.flyerly.UnlockSavedFlyers",@"com.flyerly.UnlockCreateVideoFlyerOption"]];
+        
         
         if (productIdentifiers.count >= 1) {
             
@@ -335,8 +338,10 @@ NSMutableArray *productArray;
             
             for (int i = 0; i < productIdentifiers.count; i++) {
                 
-                NSString *strWithOutDot = [[productIdentifiers objectAtIndex:i] stringByReplacingOccurrencesOfString:@"." withString:@""];
-                [userPurchase setValue:@"1" forKey:strWithOutDot];
+                if( [appDelegate._persistence isPurchasedProductOfIdentifier:[productIdentifiers objectAtIndex:i] ]) {
+                    NSString *strWithOutDot = [[productIdentifiers objectAtIndex:i] stringByReplacingOccurrencesOfString:@"." withString:@""];
+                    [userPurchase setValue:@"1" forKey:strWithOutDot];
+                }
             }
             
             [[NSUserDefaults standardUserDefaults]setValue:userPurchase forKey:@"InAppPurchases"];

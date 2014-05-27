@@ -76,19 +76,19 @@
 
 
 @property (nonatomic, strong) UIImageView *textBackgrnd;
-@property (nonatomic,strong)  UILabel *addMoreLayerOrSaveFlyerLabel;
-@property (nonatomic,strong)  UILabel *takeOrAddPhotoLabel;
+@property (nonatomic, strong) UILabel *addMoreLayerOrSaveFlyerLabel;
+@property (nonatomic, strong) UILabel *takeOrAddPhotoLabel;
 @property (nonatomic, strong) UIScrollView *layerScrollView;
 @property (nonatomic, strong) UIView *mainView;
 @property (nonatomic, strong) UIFont *selectedFont;
 @property (nonatomic, weak) id selectedColor;
 @property (nonatomic, assign) NSInteger selectedSize;
 @property (nonatomic, strong) UIImage *selectedTemplate;
-@property (nonatomic,strong) UIAlertView *deleteAlert;
-@property (nonatomic,strong) UIAlertView *signInAlert;
+@property (nonatomic, strong) UIAlertView *deleteAlert;
+@property (nonatomic, strong) UIAlertView *signInAlert;
 @property (nonatomic, assign) NSInteger imgPickerFlag;
 @property (nonatomic, strong) NSString *flyerPath;
-@property(nonatomic, strong) IBOutlet FlyerImageView *flyimgView;
+@property (nonatomic, strong) IBOutlet FlyerImageView *flyimgView;
 @property (nonatomic, strong) UIView *sharePanel;
 
 // These are ContextViews Library

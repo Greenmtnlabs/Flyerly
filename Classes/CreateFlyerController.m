@@ -2974,6 +2974,7 @@ int selectedAddMoreLayerTab = -1;
         UIImage *shareImage =  [UIImage imageWithContentsOfFile:shareImagePath];
         
         //Here we Pass Param to Share Screen Which use for Sharing
+        [shareviewcontroller.titleView becomeFirstResponder];
         shareviewcontroller.selectedFlyerImage = shareImage;
         shareviewcontroller.flyer = self.flyer;
         shareviewcontroller.imageFileName = shareImagePath;
@@ -2995,6 +2996,7 @@ int selectedAddMoreLayerTab = -1;
         [flyer setShareType:shareType];
         shareviewcontroller.selectedFlyerDescription = [flyer getFlyerDescription];
         shareviewcontroller.topTitleLabel = titleLabel;
+        
         [shareviewcontroller.descriptionView setReturnKeyType:UIReturnKeyDone];
         shareviewcontroller.Yvalue = [NSString stringWithFormat:@"%f",self.view.frame.size.height];
         
@@ -3022,6 +3024,7 @@ int selectedAddMoreLayerTab = -1;
         [UIView setAnimationDuration:0.4f];
         [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height -425, 320,425 )];
         [UIView commitAnimations];
+        
         [self hideLoadingIndicator];
         
     } else {

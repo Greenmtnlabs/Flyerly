@@ -28,18 +28,6 @@
     [l setBorderWidth:0.5];
     [l setBorderColor:[[UIColor grayColor] CGColor]];
     
-    titleViewBorder.layer.borderColor = [UIColor colorWithRed:0/255.0 green:155/255.0 blue:224/255.0 alpha:1].CGColor;
-    titleViewBorder.layer.borderWidth = 1.0f;
-    titleViewBorder.userInteractionEnabled = NO;
-    
-    [UIView animateWithDuration:0.5
-                          delay:0.0
-                        options:UIViewAnimationOptionAutoreverse | UIViewAnimationOptionRepeat
-                     animations:^{
-                         self.titleViewBorder.alpha = 0.0;
-                     }
-                     completion:nil];
-    
     // Setup title text field
     [titleView setReturnKeyType:UIReturnKeyDone];
     [titleView addTarget:self action:@selector(textFieldFinished:) forControlEvents: UIControlEventEditingDidEndOnExit];
@@ -51,7 +39,7 @@
 //    UITapGestureRecognizer *tapped = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(textFieldTapped:)];
 //    tapped.numberOfTapsRequired = 1;
 //    [self.titleView addGestureRecognizer:tapped];
-//    [titleView setUserInteractionEnabled:YES];
+    [titleView setUserInteractionEnabled:YES];
 
     descriptionView = [[UIPlaceHolderTextView alloc] initWithFrame:CGRectMake(12, 79, 296, 83)];
  
