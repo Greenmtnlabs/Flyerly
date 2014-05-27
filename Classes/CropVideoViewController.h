@@ -22,6 +22,7 @@
 @property (nonatomic, strong) NSURL *url;
 @property (nonatomic, copy) void (^onVideoFinished)(NSURL *, CGRect, CGFloat);
 @property (nonatomic, copy) void (^onVideoCancel)();
+@property BOOL fromCamera;
 
 @property (nonatomic, strong) IBOutlet UIView *playerView;
 @property (nonatomic, strong) IBOutlet CropView *cropView;

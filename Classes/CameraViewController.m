@@ -157,6 +157,7 @@ NSMutableArray *productArray;
     cropVideo.url = movieUrl;
     cropVideo.onVideoFinished = _onVideoFinished;
     cropVideo.onVideoCancel = _onVideoCancel;
+    cropVideo.fromCamera = YES;
     
     // Pop the current view, and push the crop view.
     NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[[self navigationController] viewControllers]];
