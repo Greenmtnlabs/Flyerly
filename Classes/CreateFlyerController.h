@@ -30,7 +30,7 @@
 #import "UIPlaceHolderTextView.h"
 #import <MediaPlayer/MediaPlayer.h>
 
-@class FlyerlySingleton, CameraViewController, Flyer, FlyerImageView, ShareViewController, SigninController;
+@class FlyerlySingleton, Flyer, FlyerImageView, ShareViewController, SigninController;
 @interface CreateFlyerController :ParentViewController<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, FlyerImageViewDelegate,UIGestureRecognizerDelegate >
 
 {

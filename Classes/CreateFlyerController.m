@@ -1644,7 +1644,14 @@ int selectedAddMoreLayerTab = -1;
     CameraViewController *nbuCamera = [[CameraViewController alloc]initWithNibName:@"CameraViewController" bundle:nil];
     
     nbuCamera.videoAllow = forVideo;
-    nbuCamera.desiredImageSize = CGSizeMake( flyerlyWidth,  flyerlyHeight );
+    
+    if ( imgPickerFlag == 2 ) {
+        NSDictionary *dict = [flyer getLayerFromMaster:currentLayer];
+        nbuCamera.desiredImageSize = CGSizeMake( [[dict valueForKey:@"width"] floatValue],
+                                                 [[dict valueForKey:@"height"] floatValue]);
+    } else {
+        nbuCamera.desiredImageSize = CGSizeMake( flyerlyWidth,  flyerlyHeight );
+    }
     
     __weak CreateFlyerController *weakSelf = self;
     
@@ -1655,6 +1662,21 @@ int selectedAddMoreLayerTab = -1;
         [uiBusy removeFromSuperview];
         dispatch_async( dispatch_get_main_queue(), ^{
 
+            if ( imgPickerFlag == 2 ) {
+                NSString *imgPath = [weakSelf getImagePathforPhoto:img];
+                
+                // Set Image to dictionary
+                [weakSelf.flyer setImagePath:weakSelf.currentLayer ImgPath:imgPath];
+                
+                // Here we Create ImageView Layer
+                [weakSelf.flyimgView renderLayer:weakSelf.currentLayer layerDictionary:[weakSelf.flyer getLayerFromMaster:weakSelf.currentLayer]];
+                
+                [weakSelf.flyimgView layerStoppedEditing:weakSelf.currentLayer];
+                
+                weakSelf.imgPickerFlag = 1;
+                
+            } else {
+            
                 //Here we Set Flyer Type
                 [weakSelf.flyer setFlyerTypeImage];
                 
@@ -1665,6 +1687,7 @@ int selectedAddMoreLayerTab = -1;
                 //set template Image
                 [weakSelf.flyimgView setTemplate:[NSString stringWithFormat:@"Template/template.%@",IMAGETYPE ]];
                 [Flurry logEvent:@"Custom Background"];
+            }
             
                 
         });
