@@ -109,7 +109,11 @@ NSMutableArray *productArray;
  */
 -(void)openPanel {
     
-    inappviewcontroller = [[[InAppViewController alloc] init] autorelease];
+    if(IS_IPHONE_5){
+        inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
+    }else {
+        inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController-iPhone4" bundle:nil];
+    }
     [self presentModalViewController:inappviewcontroller animated:YES];
     if ( productArray.count == 0 ){
         [inappviewcontroller requestProduct];
@@ -351,7 +355,7 @@ NSMutableArray *productArray;
         };
         
         [self.navigationController pushViewController:signInController animated:YES];
-    }else if ([inAppPurchasePanelButtonCurrentTitle isEqualToString:(@"RESTORE PURCHASES")]){
+    }else if ([inAppPurchasePanelButtonCurrentTitle isEqualToString:(@"Restore Purchases")]){
         [inappviewcontroller_ restorePurchase];
     }
 }

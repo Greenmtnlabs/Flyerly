@@ -238,7 +238,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
         NSArray *contentOfDirectory = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:flyersDir error:NULL];
        
         // If the Documents folder has only one directory named anonymous then this is an anonymous user (hasn't signed up yet)
-        if(contentOfDirectory.count > 0 && [[contentOfDirectory objectAtIndex:0] isEqual:@"anonymous"]){
+        if(contentOfDirectory.count  > 0 && [[contentOfDirectory objectAtIndex:0] isEqual:@"anonymous"]){
             
             [PFUser currentUser].username = @"anonymous";
             

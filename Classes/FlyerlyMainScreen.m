@@ -291,8 +291,17 @@ NSMutableArray *productArray;
  */
 -(void)openPanel {
     
-    inappviewcontroller = [[[InAppViewController alloc] init] autorelease];
+    if(IS_IPHONE_5){
+        inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
+        [inappviewcontroller setModalPresentationStyle:UIModalPresentationFullScreen];
+        
+    }else {
+        inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController-iPhone4" bundle:nil];
+        [inappviewcontroller setModalPresentationStyle:UIModalPresentationFullScreen];
+        
+    }
     [self presentModalViewController:inappviewcontroller animated:YES];
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:NO];
     if ( productArray.count == 0 ){
         [inappviewcontroller requestProduct];
     }
@@ -375,6 +384,7 @@ NSMutableArray *productArray;
         userPurchases_.delegate = self;
         
         [inappviewcontroller_.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+        [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:NO];
         
         signInController.signInCompletion = ^void(void) {
             
@@ -385,7 +395,7 @@ NSMutableArray *productArray;
         
         [self.navigationController pushViewController:signInController animated:YES];
         
-    }else if ([inAppPurchasePanelButtonCurrentTitle isEqualToString:(@"RESTORE PURCHASES")]){
+    }else if ([inAppPurchasePanelButtonCurrentTitle isEqualToString:(@"Restore Purchases")]){
         
         
         [inappviewcontroller_ restorePurchase];
