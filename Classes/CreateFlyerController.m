@@ -387,8 +387,7 @@ int selectedAddMoreLayerTab = -1;
     
     [self deleteSubviewsFromScrollView];
     
-        // Load sizes xib asynchronously
-        dispatch_async( dispatch_get_main_queue(), ^{
+    
         CGFloat curXLoc = 0;
         CGFloat curYLoc = 5;
         int increment = 5;
@@ -399,6 +398,9 @@ int selectedAddMoreLayerTab = -1;
             increment = 8;
         }
 
+        // Load sizes xib asynchronously
+        dispatch_async( dispatch_get_main_queue(), ^{
+            
         NSMutableDictionary *textLayer;
         NSString *textFamily;
         NSArray *subviewArray;
