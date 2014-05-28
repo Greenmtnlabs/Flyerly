@@ -2,11 +2,13 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>Create Flyers</key>
-	<string>Create flyers customized for your events.</string>
+	<key>Compose Flyers</key>
+	<string>Flyers for events, invitations and marketing.</string>
+	<key>Photos</key>
+	<string>Add photos, crop them and apply beautiful effects.</string>
+	<key>Stock Art</key>
+	<string>200+ icons to choose from.</string>
 	<key>Share Flyers</key>
-	<string>Share flyers for free on various social networks including MMS and email.</string>
-	<key>Themes</key>
-	<string>Use one of the freely available backgrounds, icons, clipart and fonts.</string>
+	<string>Share flyers on social networks, SMS and email.</string>
 </dict>
 </plist>

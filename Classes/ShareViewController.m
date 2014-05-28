@@ -29,9 +29,9 @@
     [l setBorderColor:[[UIColor grayColor] CGColor]];
     
     // Setup title text field
-    [titleView setReturnKeyType:UIReturnKeyDone];
-    [titleView addTarget:self action:@selector(textFieldFinished:) forControlEvents: UIControlEventEditingDidEndOnExit];
-    [titleView addTarget:self action:@selector(textFieldTapped:) forControlEvents:UIControlEventEditingDidBegin];
+    //[titleView setReturnKeyType:UIReturnKeyDone];
+    //[titleView addTarget:self action:@selector(textFieldFinished:) forControlEvents: UIControlEventEditingDidEndOnExit];
+    //[titleView addTarget:self action:@selector(textFieldTapped:) forControlEvents:UIControlEventEditingDidBegin];
 
     titleView.placeholder = @"Flyerly Title (e.g. \"Parker's Party\")";
     
@@ -53,20 +53,6 @@
     descriptionView.delegate = self;
     
     [self.view addSubview:descriptionView];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    
-    [super viewDidAppear:animated];
-    
-    // Checking if titleView text feild is empty
-    if( [titleView hasText] ) {
-        
-        //removing animation on titleVIew text feild
-        [titleViewBorder.layer removeAllAnimations];
-        
-    }
-
 }
 
 - (void)viewWillAppear:(BOOL)animated {
