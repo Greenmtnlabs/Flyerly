@@ -91,6 +91,7 @@
 @property(nonatomic, strong) IBOutlet UIView *libFlyer;
 @property(nonatomic, strong) IBOutlet UIView *libBackground;
 @property(nonatomic, strong) IBOutlet UIView *libText;
+@property(nonatomic, strong) IBOutlet UIView *libArts;
 @property(nonatomic, strong) IBOutlet UIView *libPhoto;
 @property(nonatomic, strong) IBOutlet UIView *libEmpty;
 @property(nonatomic, strong) IBOutlet UIView *playerView;

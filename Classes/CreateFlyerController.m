@@ -11,12 +11,14 @@
 
 @implementation CreateFlyerController
 
+CameraViewController *nbuCamera;
+
 @synthesize selectedFont,selectedColor,selectedTemplate,fontTabButton,colorTabButton,sizeTabButton,fontEditButton,selectedSize,
 fontBorderTabButton,addMoreIconTabButton,addMorePhotoTabButton,addMoreSymbolTabButton,sharePanel;
 @synthesize cameraTabButton,photoTabButton,widthTabButton,heightTabButton,deleteAlert,signInAlert;
 @synthesize imgPickerFlag,layerScrollView,flyerPath;
 @synthesize contextView,libraryContextView,libFlyer,backgroundTabButton,addMoreFontTabButton;
-@synthesize libText,libBackground,libPhoto,libEmpty,backtemplates,cameraTakePhoto,cameraRoll,flyerBorder;
+@synthesize libText,libBackground,libArts,libPhoto,libEmpty,backtemplates,cameraTakePhoto,cameraRoll,flyerBorder;
 @synthesize flyimgView,currentLayer,layersDic,flyer,player,playerView,playerToolBar,playButton,playerSlider,tempelateView;
 @synthesize durationLabel,durationChange,onFlyerBack,mainView;
 int selectedAddMoreLayerTab = -1;
@@ -1615,7 +1617,7 @@ int selectedAddMoreLayerTab = -1;
     [uiBusy startAnimating];
     [self.view addSubview:uiBusy];
     
-    CameraViewController *nbuCamera = [[CameraViewController alloc]initWithNibName:@"CameraViewController" bundle:nil];
+    nbuCamera = [[CameraViewController alloc]initWithNibName:@"CameraViewController" bundle:nil];
     
     nbuCamera.videoAllow = forVideo;
     
@@ -3384,7 +3386,20 @@ int selectedAddMoreLayerTab = -1;
 	}
 	else if(selectedButton == addMoreSymbolTabButton)
 	{
-        selectedAddMoreLayerTab = ADD_MORE_SYMBOLTAB;
+        
+        [backgroundTabButton setSelected:YES];
+        [addMoreSymbolTabButton setSelected:YES];
+        
+        
+        //Add right Bar button
+        //[self addDonetoRightBarBotton];
+        
+//        /[self setlibBackgroundTabAction:backtemplates];
+        
+        //Add ContextView
+        [self addBottomTabs:libArts];
+        
+        /*selectedAddMoreLayerTab = ADD_MORE_SYMBOLTAB;
 
         if ([currentLayer isEqualToString:@""]) {
             currentLayer = [flyer addImage];
@@ -3408,11 +3423,16 @@ int selectedAddMoreLayerTab = -1;
         [self addScrollView:layerScrollView];
         
         //Add Bottom Tab
-        [self addBottomTabs:libEmpty];
+        [self addBottomTabs:libEmpty];*/
         
 	}
 	else if(selectedButton == addMoreIconTabButton)
 	{
+        
+        [self openCustomCamera:YES];
+        _videoLabel.alpha = 1;
+        nbuCamera.isVideoFlyer = YES;
+        /*
         selectedAddMoreLayerTab = ADD_MORE_ICONTAB;
         
         [addMoreIconTabButton setSelected:YES];
@@ -3440,7 +3460,7 @@ int selectedAddMoreLayerTab = -1;
         [self addScrollView:layerScrollView];
         
         //Add Bottom Tab
-        [self addBottomTabs:libEmpty];
+        [self addBottomTabs:libEmpty];*/
 
 	}
     else if(selectedButton == backgroundTabButton)
