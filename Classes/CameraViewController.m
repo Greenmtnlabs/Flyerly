@@ -38,6 +38,7 @@ NSMutableArray *productArray;
     
     productPurchased = NO;
     _mode.hidden = !_videoAllow;
+    _mode.selected = YES;
     
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     userPurchases = appDelegate.userPurchases;
@@ -102,6 +103,7 @@ NSMutableArray *productArray;
                                                             @[@"Lckd", @"Auto", @"Cont"]];
         
 
+    [self setCameraModeForVideo];
 }
 
 /*
@@ -227,15 +229,30 @@ NSMutableArray *productArray;
  * Here we Manage Camera Mode for Image or Video
  */
 - (IBAction)setCameraMode:(id)sender {
+    
+    [self setCameraModeForVideo];
+}
+
+
+/*
+ * Here we Manage Camera Mode for Image or Video
+ */
+- (void)setCameraModeForVideo {
 
     UIButton *shoot = (UIButton *)  self.cameraView.shootButton;
     UIButton *flash = (UIButton *)  self.cameraView.flashButton;
 
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    UserPurchases *userPurchases_ = appDelegate.userPurchases;
+    
+    if ( self.isVideoFlyer )
+        _mode.selected = NO;
+    
     if ([[PFUser currentUser] sessionToken].length != 0) {
-        if ( [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
-             [userPurchases checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"] ) {
+        if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
+             [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"] ) {
             
-            if ([_mode isSelected] == YES) {
+            if ( [_mode isSelected] == YES ) {
                 
                 //Enable Camera Mode
                 [_mode setSelected:NO];

@@ -72,6 +72,7 @@
 
 -(void)setFlyerBorder :(NSString *)uid RGBColor:(id)rgb;
 -(void)setFlyerTypeVideo;
+-(NSString *)getFlyerTypeVideo;
 -(void)setFlyerTypeImage;
 
 -(void)setOriginalVideoUrl :(NSString *)url;

@@ -1722,9 +1722,13 @@ int selectedAddMoreLayerTab = -1;
             [uiBusy removeFromSuperview];
         });
     }];
-
     
+    if ( [[weakSelf.flyer getFlyerTypeVideo]isEqualToString:@"video"] ){
+        
+        nbuCamera.isVideoFlyer = YES;
+    }
     [self.navigationController pushViewController:nbuCamera animated:YES];
+    
 }
 
 #pragma mark -  Movie Player
@@ -2979,7 +2983,9 @@ int selectedAddMoreLayerTab = -1;
         shareviewcontroller.rightUndoBarButton = rightUndoBarButton;
         shareviewcontroller.shareButton = shareButton;
         shareviewcontroller.helpButton = helpButton;
-        shareviewcontroller.titleView.text = [flyer getFlyerTitle];
+        if( [shareviewcontroller.titleView.text isEqualToString:@"Flyer"] ) {
+            shareviewcontroller.titleView.text = [flyer getFlyerTitle];
+        }
         NSString *description = [flyer getFlyerDescription];
         if (![description isEqualToString:@""]) {
             shareviewcontroller.descriptionView.text = description;
