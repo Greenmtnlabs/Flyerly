@@ -24,15 +24,18 @@
 #import "Flurry.h"
 #import "SKProduct+LocalPrice.h"
 #import "LayerTileButton.h"
+#import "InAppViewController.h"
 #import "SigninController.h"
 #import "LibraryViewController.h"
 #import "UIPlaceHolderTextView.h"
 #import <MediaPlayer/MediaPlayer.h>
 
-@class FlyerlySingleton, Flyer, FlyerImageView, ShareViewController, SigninController;
-@interface CreateFlyerController :ParentViewController<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, FlyerImageViewDelegate,UIGestureRecognizerDelegate >
+@class FlyerlySingleton, Flyer, FlyerImageView, ShareViewController, SigninController,InAppViewController;
+@interface CreateFlyerController :ParentViewController<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, FlyerImageViewDelegate,UIGestureRecognizerDelegate,InAppPurchasePanelButtonProtocol, UserPurchasesDelegate >
 
 {
+    
+    InAppViewController *inappviewcontroller;
     UIActivityIndicatorView *uiBusy;
 
     UIScrollView *layerScrollView;
@@ -106,7 +109,7 @@
 // These are LibFlyer
 @property (nonatomic, strong)IBOutlet UIButton *addMoreFontTabButton;
 @property (nonatomic, strong)IBOutlet UIButton *addMorePhotoTabButton;
-@property (nonatomic, strong)IBOutlet UIButton *addMoreIconTabButton;
+@property (nonatomic, strong)IBOutlet UIButton *addVideoTabButton;
 @property (nonatomic, strong)IBOutlet UIButton *addMoreSymbolTabButton;
 @property (nonatomic, strong)IBOutlet UIButton *backgroundTabButton;
 

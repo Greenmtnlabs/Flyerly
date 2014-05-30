@@ -29,6 +29,7 @@
     [l setBorderColor:[[UIColor grayColor] CGColor]];
     
     // Setup title text field
+    //[titleView addTarget:delegate action:@selector(textFieldFinished:) forControlEvents:UIControlEventEditingDidBegin];
     //[titleView setReturnKeyType:UIReturnKeyDone];
     //[titleView addTarget:self action:@selector(textFieldFinished:) forControlEvents: UIControlEventEditingDidEndOnExit];
     //[titleView addTarget:self action:@selector(textFieldTapped:) forControlEvents:UIControlEventEditingDidBegin];
@@ -331,8 +332,8 @@
  }
 
 - (void)textFieldFinished:(id)sender {
-    [sender resignFirstResponder];
     
+    [sender resignFirstResponder];
 }
 
 /*
@@ -349,8 +350,17 @@
  */
 -(void)textFieldDidEndEditing:(UITextField *)textField {
     //Here we Update Flyer Title in .txt File
+    
     [flyer setFlyerTitle:titleView.text];
     topTitleLabel.text = titleView.text;
+    // Check to see if it's blank
+    if([titleView.text isEqualToString:@""]) {
+        // There's no text in the box.
+        [flyer setFlyerTitle:@"Flyer"];
+        topTitleLabel.text = @"Flyer";
+    }
+    
+    
 }
 
 #pragma mark Social Network

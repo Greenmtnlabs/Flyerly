@@ -13,8 +13,9 @@
 
 CameraViewController *nbuCamera;
 
+NSMutableArray *productArray;
 @synthesize selectedFont,selectedColor,selectedTemplate,fontTabButton,colorTabButton,sizeTabButton,fontEditButton,selectedSize,
-fontBorderTabButton,addMoreIconTabButton,addMorePhotoTabButton,addMoreSymbolTabButton,sharePanel;
+fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addMoreSymbolTabButton,sharePanel;
 @synthesize cameraTabButton,photoTabButton,widthTabButton,heightTabButton,deleteAlert,signInAlert;
 @synthesize imgPickerFlag,layerScrollView,flyerPath;
 @synthesize contextView,libraryContextView,libFlyer,backgroundTabButton,addMoreFontTabButton;
@@ -38,6 +39,22 @@ int selectedAddMoreLayerTab = -1;
     [self renderFlyer];
     
     NSString *title = [flyer getFlyerTitle];
+    
+    //HERE WE GET USER PURCHASES INFO FROM PARSE
+    if(![[NSUserDefaults standardUserDefaults] stringForKey:@"InAppPurchases"]){
+        
+        FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+        UserPurchases *userPurchases_ = appDelegate.userPurchases;
+        
+        //Checking if user valid purchases
+        if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]   ||
+            [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"]    ) {
+            
+            //Unloking features
+            UIImage *buttonImage = [UIImage imageNamed:@"video_tab.png"];
+            [addVideoTabButton setImage:buttonImage forState:UIControlStateNormal];
+        }
+    }
     
     if ( ![title isEqualToString:@""] ) {
         titleLabel.text = title;
@@ -2619,7 +2636,7 @@ int selectedAddMoreLayerTab = -1;
             NSLog(@"sub string doesnt exist");
         } else {
             // Call Icon
-            [self setAddMoreLayerTabAction:addMoreIconTabButton];
+            //[self setAddMoreLayerTabAction:addMoreIconTabButton];
         }
         
         //when we tap on icon
@@ -2968,6 +2985,31 @@ int selectedAddMoreLayerTab = -1;
     }
     
 }
+
+/*
+ * Here we Open InAppPurchase Panel
+ */
+-(void)openInAppPanel {
+    
+    if(IS_IPHONE_5){
+        inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
+    }else {
+        inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController-iPhone4" bundle:nil];
+    }
+    [self presentModalViewController:inappviewcontroller animated:YES];
+    if ( productArray.count == 0 ){
+        [inappviewcontroller requestProduct];
+    }
+    if( productArray.count != 0 ) {
+        
+        //[inappviewcontroller.contentLoaderIndicatorView stopAnimating];
+        //inappviewcontroller.contentLoaderIndicatorView.hidden = YES;
+    }
+    
+    inappviewcontroller.buttondelegate = self;
+    
+}
+
 
 /*
  * Here we Open Share Panel
@@ -3355,7 +3397,7 @@ int selectedAddMoreLayerTab = -1;
     [addMoreFontTabButton setSelected:NO];
     [addMorePhotoTabButton setSelected:NO];
     [addMoreSymbolTabButton setSelected:NO];
-    [addMoreIconTabButton setSelected:NO];
+    [addVideoTabButton setSelected:NO];
     [backgroundTabButton setSelected:NO];
 
 
@@ -3415,69 +3457,26 @@ int selectedAddMoreLayerTab = -1;
         //Add ContextView
         [self addBottomTabs:libArts];
         
-        /*selectedAddMoreLayerTab = ADD_MORE_SYMBOLTAB;
-
-        if ([currentLayer isEqualToString:@""]) {
-            currentLayer = [flyer addImage];
-        }
-
-        [addMoreSymbolTabButton setSelected:YES];
-        [self addDonetoRightBarBotton];
-        
-        //HERE WE SET ANIMATION
-        [UIView animateWithDuration:0.4f
-                         animations:^{
-                             //Create ScrollView
-                             [self addFlyerIconInSubView];
-                         }
-                         completion:^(BOOL finished){
-                             [layerScrollView flashScrollIndicators];
-                         }];
-        
-
-        //Add Context
-        [self addScrollView:layerScrollView];
-        
-        //Add Bottom Tab
-        [self addBottomTabs:libEmpty];*/
-        
 	}
-	else if(selectedButton == addMoreIconTabButton)
+	else if(selectedButton == addVideoTabButton)
 	{
-        
-        [self openCustomCamera:YES];
-        _videoLabel.alpha = 1;
-        nbuCamera.isVideoFlyer = YES;
-        /*
-        selectedAddMoreLayerTab = ADD_MORE_ICONTAB;
-        
-        [addMoreIconTabButton setSelected:YES];
-        
-        if ([currentLayer isEqualToString:@""]) {
-            currentLayer = [flyer addImage];
+        FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+        UserPurchases *userPurchases_ = appDelegate.userPurchases;
+    
+        if ([[PFUser currentUser] sessionToken].length != 0) {
+            if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
+                 [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"] ) {
+                
+                [self openCustomCamera:YES];
+                _videoLabel.alpha = 1;
+                nbuCamera.isVideoFlyer = YES;
+            }else {
+                [self openInAppPanel];
+            }
+            
+        }else {
+            [self openInAppPanel];
         }
-        
-        //Add right Bar button
-        [self addDonetoRightBarBotton];
-        
-        
-        //HERE WE SET ANIMATION
-        [UIView animateWithDuration:0.4f
-                         animations:^{
-                             //Create ScrollView
-                             [self addSymbolsInSubView];
-                         }
-                         completion:^(BOOL finished){
-                             [layerScrollView flashScrollIndicators];
-                         }];
-
-        
-        //Add ContextView
-        [self addScrollView:layerScrollView];
-        
-        //Add Bottom Tab
-        [self addBottomTabs:libEmpty];*/
-
 	}
     else if(selectedButton == backgroundTabButton)
 	{
@@ -3637,5 +3636,80 @@ int selectedAddMoreLayerTab = -1;
 - (void)onTap:(UITapGestureRecognizer *)gesture {
     [self enableImageViewInteraction];
 }
+
+
+- ( void )productSuccesfullyPurchased: (NSString *)productId {
+    
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    UserPurchases *userPurchases_ = appDelegate.userPurchases;
+    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
+         [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"] ) {
+        
+        UIImage *buttonImage = [UIImage imageNamed:@"video_tab.png"];
+        [addVideoTabButton setImage:buttonImage forState:UIControlStateNormal];
+        [inappviewcontroller.paidFeaturesTview reloadData];
+        [inappviewcontroller.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    }
+    
+}
+
+- ( void )inAppPurchasePanelContent {
+    [inappviewcontroller inAppDataLoaded];
+}
+
+
+- (void)inAppPurchasePanelButtonTappedWasPressed:(NSString *)inAppPurchasePanelButtonCurrentTitle {
+    
+    __weak InAppViewController *inappviewcontroller_ = inappviewcontroller;
+    if ([inAppPurchasePanelButtonCurrentTitle isEqualToString:(@"Sign In")]) {
+        
+        signInController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
+        
+        FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+        signInController.launchController = appDelegate.lauchController;
+        
+        __weak CreateFlyerController *createFlyerController = self;
+        __weak UserPurchases *userPurchases_ = appDelegate.userPurchases;
+        userPurchases_.delegate = self;
+        
+        [inappviewcontroller_.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+        
+        signInController.signInCompletion = ^void(void) {
+            
+            UINavigationController* navigationController = createFlyerController.navigationController;
+            [navigationController popViewControllerAnimated:NO];
+            [userPurchases_ setUserPurcahsesFromParse];
+        };
+        
+        [self.navigationController pushViewController:signInController animated:YES];
+        
+    }else if ([inAppPurchasePanelButtonCurrentTitle isEqualToString:(@"Restore Purchases")]){
+        
+        
+        [inappviewcontroller_ restorePurchase];
+    }
+}
+
+- (void) userPurchasesLoaded {
+    
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    UserPurchases *userPurchases_ = appDelegate.userPurchases;
+    
+    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]  ||
+         [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"] ) {
+        
+        
+        UIImage *buttonImage = [UIImage imageNamed:@"video_tab.png"];
+        [addVideoTabButton setImage:buttonImage forState:UIControlStateNormal];
+        [inappviewcontroller.paidFeaturesTview reloadData];
+        
+    }else {
+        
+        [self presentModalViewController:inappviewcontroller animated:YES];
+    }
+    
+}
+
+
 
 @end
