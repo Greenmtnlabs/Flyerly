@@ -709,13 +709,15 @@ int selectedAddMoreLayerTab = -1;
             NSArray *bodersArray = mainView.subviews;
             int count = (bodersArray.count)/3;
         
-            
             int i=1;
             for (int index = 0; index < count; index++ )
             {
                 
                 //if ( ( index % 2) != 0)
-                //{
+                //{UIButton *font;
+                
+                
+                
                     UIColor *colorName = borderArray[(i-1)];
                     
                     //Here we Highlight Last Color Selected
@@ -737,8 +739,9 @@ int selectedAddMoreLayerTab = -1;
                         twhite = [NSString stringWithFormat:@"%f, %f", wht, alpha];
                         
                         if ([textColor isEqualToString:tcolor] && [textWhiteColor isEqualToString:twhite] ) {
+                            UIButton *color = (UIButton *) bodersArray[index];
                             // Add border to selected layer thumbnail
-                           // color.backgroundColor = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
+                            //color.backgroundColor = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
                         }
                         
                         i++;
@@ -777,7 +780,72 @@ int selectedAddMoreLayerTab = -1;
     textColor = [templateDic objectForKey:@"bordercolor"];
     textWhiteColor = [templateDic objectForKey:@"bordercolorWhite"];
 
-	for (int i = 1; i <=  [borderArray count] ; i++)
+    // Load sizes xib asynchronously
+    dispatch_async( dispatch_get_main_queue(), ^{
+        
+        NSArray *subviewArray;
+        
+        if(IS_IPHONE_5){
+            subviewArray = [[NSBundle mainBundle] loadNibNamed:@"Borders" owner:self options:nil];
+            mainView = [subviewArray objectAtIndex:0];
+            [layerScrollView addSubview:mainView];
+            
+            [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
+        } else {
+            
+            subviewArray = [[NSBundle mainBundle] loadNibNamed:@"Borders-iPhone4" owner:self options:nil];
+            mainView = [subviewArray objectAtIndex:0];
+            [layerScrollView addSubview:mainView];
+            
+            [layerScrollView setContentSize:CGSizeMake(mainView.frame.size.width, [layerScrollView bounds].size.height)];
+        }
+        
+        mainView = [subviewArray objectAtIndex:0];
+        NSArray *bodersArray = mainView.subviews;
+        int count = (bodersArray.count)/3;
+        
+        int i=1;
+        int index_ = 0;
+        for (int index = 0; index < count; index++ )
+        {
+            
+            UIColor *colorName = borderArray[(i-1)];
+            
+            //Here we Highlight Last Color Selected
+            if (textColor != nil) {
+                
+                NSString *tcolor;
+                NSString *twhite;
+                CGFloat red = 0.0, green = 0.0, blue = 0.0, alpha = 0.0,wht = 0.0;
+                
+                UILabel *labelToStore = [[UILabel alloc]init];
+                labelToStore.textColor = colorName;
+                
+                //Getting RGB Color Code
+                [labelToStore.textColor getRed:&red green:&green blue:&blue alpha:&alpha];
+                
+                tcolor = [NSString stringWithFormat:@"%f, %f, %f", red, green, blue];
+                
+                [labelToStore.textColor getWhite:&wht alpha:&alpha];
+                twhite = [NSString stringWithFormat:@"%f, %f", wht, alpha];
+                
+                if ([textColor isEqualToString:tcolor] && [textWhiteColor isEqualToString:twhite] ) {
+                    // Add border to selected layer thumbnail
+                    //color.backgroundColor = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
+                }
+                
+                i++;
+            }
+        }// Loop
+        
+        for (int counter = 2; counter  < bodersArray.count; counter += 3) {
+            NSLog(@"%d",counter);
+            [[bodersArray objectAtIndex:counter] addTarget:self action:@selector(selectBorder:) forControlEvents:UIControlEventTouchUpInside];
+        }
+    });
+    
+    
+	/*for (int i = 1; i <=  [borderArray count] ; i++)
 	{
 		UIButton *color = [UIButton buttonWithType:UIButtonTypeCustom];
 		color.frame = CGRectMake(0, 0, widthValue, heightValue);
@@ -836,7 +904,7 @@ int selectedAddMoreLayerTab = -1;
         [layerScrollView setContentSize:CGSizeMake(320, curYLoc)];
     } else {
         [layerScrollView setContentSize:CGSizeMake((  [borderArray count]*(widthValue+5)), [layerScrollView bounds].size.height)];
-    }
+    }*/
     
 
 }
@@ -1238,56 +1306,6 @@ int selectedAddMoreLayerTab = -1;
 
 
 /*
- * When any font border is selected
- */
--(IBAction)selectFontBorder:(id)sender
-{
-    NSArray *bodersArray = mainView.subviews;
-    int count = (bodersArray.count);
-    
-    UIView *tempView;
-    
-    int  i=1;
-	UIButton *view = sender;
-    
-	for (int index = 0; index < count; index++ )
-    {
-        tempView  = [bodersArray objectAtIndex:index];
-        
-        if ( (index % 3) == 0)
-        {
-            tempView  = [bodersArray objectAtIndex:index];
-            
-            // Add border to Un-select layer thumbnail
-            CALayer * l = [tempView layer];
-            [l setBorderWidth:1];
-            [l setCornerRadius:0];
-            UIColor * c = [UIColor clearColor];
-            [l setBorderColor:c.CGColor];
-            i++;
-        
-        }
-        
-        if(tempView == view)
-        {
-            UIColor *borderColor = borderArray[i-2];
-            [flyer setFlyerTextBorderColor:currentLayer Color:borderColor ];
-            //Here we call Render Layer on View
-            [flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
-            
-            // Add border to selected layer thumbnail
-            tempView = [bodersArray objectAtIndex:(index-2)];
-            CALayer * l = [tempView layer];
-            [l setBorderWidth:5.0];
-            [l setCornerRadius:8];
-            UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
-            [l setBorderColor:c.CGColor];
-        }
-        
-	}//LOOP
-}
-
-/*
  * When any template is selected
  */
 -(void)selectTemplate:(id)sender
@@ -1446,39 +1464,106 @@ int selectedAddMoreLayerTab = -1;
 }
 
 /*
+ * When any font border is selected
+ */
+-(IBAction)selectFontBorder:(id)sender
+{
+    NSArray *bodersArray = mainView.subviews;
+    int count = (bodersArray.count);
+    
+    UIView *tempView;
+    
+    int  i=1;
+	UIButton *view = sender;
+    
+	for (int index = 0; index < count; index++ )
+    {
+        tempView  = [bodersArray objectAtIndex:index];
+        
+        if ( (index % 3) == 0)
+        {
+            tempView  = [bodersArray objectAtIndex:index];
+            
+            // Add border to Un-select layer thumbnail
+            CALayer * l = [tempView layer];
+            [l setBorderWidth:1];
+            [l setCornerRadius:0];
+            UIColor * c = [UIColor clearColor];
+            [l setBorderColor:c.CGColor];
+            i++;
+            
+        }
+        
+        if(tempView == view)
+        {
+            UIColor *borderColor = borderArray[i-2];
+            [flyer setFlyerTextBorderColor:currentLayer Color:borderColor ];
+            //Here we call Render Layer on View
+            [flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
+            
+            // Add border to selected layer thumbnail
+            tempView = [bodersArray objectAtIndex:(index-2)];
+            CALayer * l = [tempView layer];
+            [l setBorderWidth:5.0];
+            [l setCornerRadius:8];
+            UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
+            [l setBorderColor:c.CGColor];
+        }
+        
+	}//LOOP
+}
+
+
+/*
  * When any Flyer border is selected
  */
 -(void)selectBorder:(id)sender
 {
-	int  i=1;
+    
+    NSArray *bodersArray = mainView.subviews;
+    int count = (bodersArray.count);
+    
+    UIView *tempView;
+    
+    int  i=1;
 	UIButton *view = sender;
     
-	for(UIView *tempView  in [layerScrollView subviews])
-	{
+	for (int index = 0; index < count; index++ )
+    {
+        tempView  = [bodersArray objectAtIndex:index];
         
-        //CHECK UIIMAGEVIEW BECAUSE SCROLL VIEW HAVE ADDITIONAL
-        //SUBVIEWS OF UIIMAGEVIEW FOR FLASH INDICATORS
-        if (![tempView isKindOfClass:[UIImageView class]]) {
-        
+        if ( (index % 3) == 0)
+        {
+            tempView  = [bodersArray objectAtIndex:index];
+            
             // Add border to Un-select layer thumbnail
-            tempView.backgroundColor = [UIColor clearColor];
-        
-            if(tempView == view)
-            {
-            
-                UIColor *borderColor = borderArray[i-1];
-                currentLayer = @"Template";
-                [flyer setFlyerBorder:currentLayer RGBColor:borderColor];
-            
-                //Here we call Render Layer on View
-                [flyimgView setTemplateBorder:[flyer getLayerFromMaster:currentLayer]];
-            
-                // Add border to selected layer thumbnail
-                tempView.backgroundColor = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
-            }
-            
+            CALayer * l = [tempView layer];
+            [l setBorderWidth:1];
+            [l setCornerRadius:0];
+            UIColor * c = [UIColor clearColor];
+            [l setBorderColor:c.CGColor];
             i++;
-        }//UIIMAGEVIEW CHECK
+            
+        }
+        
+        if(tempView == view)
+        {
+            UIColor *borderColor = borderArray[i-2];
+            currentLayer = @"Template";
+            [flyer setFlyerBorder:currentLayer RGBColor:borderColor];
+            
+            //Here we call Render Layer on View
+            [flyimgView setTemplateBorder:[flyer getLayerFromMaster:currentLayer]];
+            
+            // Add border to selected layer thumbnail
+            tempView = [bodersArray objectAtIndex:(index-2)];
+            CALayer * l = [tempView layer];
+            [l setBorderWidth:5.0];
+            [l setCornerRadius:8];
+            UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
+            [l setBorderColor:c.CGColor];
+        }
+        
 	}//LOOP
 }
 
