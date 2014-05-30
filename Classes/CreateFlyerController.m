@@ -690,17 +690,20 @@ int selectedAddMoreLayerTab = -1;
             
             mainView = [subviewArray objectAtIndex:0];
             NSArray *bodersArray = mainView.subviews;
+            int count = (bodersArray.count)/3;
+        
             
             int i=1;
-            for (UIView *sub in bodersArray)
+            for (int index = 0; index < count; index++ )
             {
-                if ([sub isKindOfClass:[UIButton class]])
-                {
-                    UIColor *colorName =borderArray[(i-1)];
+                
+                //if ( ( index % 2) != 0)
+                //{
+                    UIColor *colorName = borderArray[(i-1)];
                     
                     //Here we Highlight Last Color Selected
                     if (textLayer) {
-                        
+                    
                         NSString *tcolor;
                         NSString *twhite;
                         CGFloat red = 0.0, green = 0.0, blue = 0.0, alpha = 0.0,wht = 0.0;
@@ -722,7 +725,7 @@ int selectedAddMoreLayerTab = -1;
                         }
                         
                         i++;
-                }
+                //}
             }
         }// Loop
         
@@ -1222,35 +1225,48 @@ int selectedAddMoreLayerTab = -1;
  */
 -(IBAction)selectFontBorder:(id)sender
 {
-	int  i=1;
+    NSArray *bodersArray = mainView.subviews;
+    int count = (bodersArray.count);
+    
+    UIView *tempView;
+    
+    int  i=1;
 	UIButton *view = sender;
     
-	for(UIView *tempView  in [mainView subviews])
+	for (int index = 0; index < count; index++ )
     {
+        tempView  = [bodersArray objectAtIndex:index];
         
-        //CHECK UIIMAGEVIEW BECAUSE SCROLL VIEW HAVE ADDITIONAL
-        //SUBVIEWS OF UIIMAGEVIEW FOR FLASH INDICATORS
-        if ([tempView isKindOfClass:[UIButton class]]) {
+        if ( (index % 3) == 0)
+        {
+            tempView  = [bodersArray objectAtIndex:index];
             
             // Add border to Un-select layer thumbnail
-            //tempView.backgroundColor = [UIColor clearColor];
-        
-            if( tempView == view ) {
-            
-                UIColor *borderColor = borderArray[i-1];
-            
-                [flyer setFlyerTextBorderColor:currentLayer Color:borderColor ];
-            
-                //Here we call Render Layer on View
-                [flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
-            
-                // Add border to selected layer thumbnail
-                //tempView.backgroundColor = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
-
-            }
+            CALayer * l = [tempView layer];
+            [l setBorderWidth:1];
+            [l setCornerRadius:0];
+            UIColor * c = [UIColor clearColor];
+            [l setBorderColor:c.CGColor];
             i++;
+        
+        }
+        
+        if(tempView == view)
+        {
+            UIColor *borderColor = borderArray[i-2];
+            [flyer setFlyerTextBorderColor:currentLayer Color:borderColor ];
+            //Here we call Render Layer on View
+            [flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
             
-        }//UIIMAGEVIEW CHECK
+            // Add border to selected layer thumbnail
+            tempView = [bodersArray objectAtIndex:(index-2)];
+            CALayer * l = [tempView layer];
+            [l setBorderWidth:5.0];
+            [l setCornerRadius:8];
+            UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
+            [l setBorderColor:c.CGColor];
+        }
+        
 	}//LOOP
 }
 
