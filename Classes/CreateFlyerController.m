@@ -239,27 +239,25 @@ int selectedAddMoreLayerTab = -1;
  * This Method Call On Back Button
  * and its Save Flyer then Exits Screen
  */
--(void) goBack
-{
+-(void) goBack {
 
-    //Checking Empty String
-    if ([lastTextView.text isEqualToString:@""] ) {
-        
-        [lastTextView resignFirstResponder];
-        [lastTextView removeFromSuperview];
-        lastTextView = nil;
-        
-        //[self callAddMoreLayers];
-        
-    }
+    // Make sure we hide the keyboard.
+    [lastTextView resignFirstResponder];
+    [lastTextView removeFromSuperview];
+    lastTextView = nil;
     
-    float yValue = self.view.frame.size.height -425;
-    
+    // If the sharing panel is open, we are just going to close it down.
+    // Do not need to do any thing else.
+    float yValue = self.view.frame.size.height - 425;
     if (yValue == sharePanel.frame.origin.y) {
+        
+        // Close Keyboard if Open
+        [shareviewcontroller.titleView resignFirstResponder];
+        [shareviewcontroller.descriptionView resignFirstResponder];
         
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0.4f];
-            [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height, 320,425 )];
+            [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height, 320, 425)];
         [UIView commitAnimations];
         [shareviewcontroller.titleView resignFirstResponder];
         [shareviewcontroller.descriptionView resignFirstResponder];
@@ -270,91 +268,67 @@ int selectedAddMoreLayerTab = -1;
         return;
     }
     
-    //Delete Empty Layer if Exist
-    if (currentLayer != nil && ![currentLayer isEqualToString:@""]) {
+    // Delete empty layer if it exists.
+    if ( currentLayer != nil && ![currentLayer isEqualToString:@""] ) {
         
         NSString *flyerImg = [flyer getImageName:currentLayer];
         NSString *flyertext = [flyer getText:currentLayer];
         
-        if ([flyerImg isEqualToString:@""]) {
-            [flyer deleteLayer:currentLayer];
-            [self.flyimgView deleteLayer:currentLayer];
-        }
-        
-        if ([flyertext isEqualToString:@""]) {
+        if ( [flyerImg isEqualToString:@""] || [flyertext isEqualToString:@""] ) {
             [flyer deleteLayer:currentLayer];
             [self.flyimgView deleteLayer:currentLayer];
         }
     }
     
-    // Remove Border if Any Layer Selected
-    if (![currentLayer isEqualToString:@""]) [self.flyimgView layerStoppedEditing:currentLayer];
+    // If a layer is selected, unselect it.
+    if ( ![currentLayer isEqualToString:@""] ) {
+        [self.flyimgView layerStoppedEditing:currentLayer];
+    }
     
-    //Close Keyboard if Open
-    [shareviewcontroller.titleView resignFirstResponder];
-    [shareviewcontroller.descriptionView resignFirstResponder];
-    
-    //Save OnBack
-    // Here we Save Flyer Info
-    [flyer saveFlyer];
-    
-    //Here we Create One History BackUp for Future Undo Request
-    [flyer addToHistory];
-    
-    //Here we Manage Updated Flyer
-    if ([flyer isVideoFlyer]) {
+    // This work will be done in the background to prevent the UI from being
+    // stuck.
+    dispatch_async( dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        // Save flyer to disk
+        [flyer saveFlyer];
         
-        //Here Compare Current Flyer with history Flyer
-        if ([self.flyer isVideoMergeProcessRequired]) {
+        // Make a history entry if needed.
+        [flyer addToHistory];
+        
+        // If this is a video flyer, then merge the video.
+        if ( [flyer isVideoFlyer] ) {
             
-            panelWillOpen = NO;
-            
-            //Background Thread
-            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+            // Here Compare Current Flyer with history Flyer
+            if ( [self.flyer isVideoMergeProcessRequired] ) {
                 
-                //Here we Merge All Layers in Video File
+                panelWillOpen = NO;
+                
+                // Here we Merge All Layers in Video File
                 [self videoMergeProcess];
                 
-            });
-        }else {
+            }
             
-            //Here we call Block for update Main UI
-            self.onFlyerBack(@"");
+        } else {
+            // Here we take Snap shot of Flyer and
+            // Flyer Add to Gallery if user allow to Access there photos
+            [flyer setUpdatedSnapshotWithImage:[self getFlyerSnapShot]];
         }
         
-    } else {
-        
-        //Background Thread
-        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-
-            //Here we remove Borders from layer if user touch any layer
-            [self.flyimgView layerStoppedEditing:currentLayer];
+        // Go to the main thread and let the home screen know that flyer is
+        // updated.
+        dispatch_async( dispatch_get_main_queue(), ^{
             
-            //Here we take Snap shot of Flyer and
-            //Flyer Add to Gallery if user allow to Access there photos
-            [flyer setUpdatedSnapshotWithImage:[self getFlyerSnapShot]];
-            
-            
-            // Main Thread
-            dispatch_async( dispatch_get_main_queue(), ^{
-                
-                //Here we call Block for update Main UI
-                self.onFlyerBack(@"");
-                
-            });
-            
+            // Here we call Block for update Main UI
+            self.onFlyerBack( @"" );
         });
         
-    }
-
-    [Flurry logEvent:@"Saved Flyer"];
+        [Flurry logEvent:@"Saved Flyer"];
+    });
+    
     [self.navigationController popViewControllerAnimated:YES];
     
     // Remove observers
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-
-
 
 #pragma mark -  Add Content In ScrollViews
 
