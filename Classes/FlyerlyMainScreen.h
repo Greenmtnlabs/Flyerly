@@ -61,15 +61,9 @@
 @property (nonatomic, strong) IBOutlet UIButton *thirdFlyerButton;
 @property (nonatomic, strong) IBOutlet UIButton *fourthFlyerButton;
 
+@property (nonatomic, strong) IBOutletCollection( UIActivityIndicatorView ) NSArray *activityIndicators;
 
 @property (nonatomic, strong) NSMutableArray *recentFlyers;
-@property (nonatomic, assign) BOOL showIndicators;
-@property (nonatomic, strong)UIActivityIndicatorView *uiBusy1;
-@property (nonatomic, strong)UIActivityIndicatorView *uiBusy2;
-@property (nonatomic, strong)UIActivityIndicatorView *uiBusy3;
-@property (nonatomic, strong)UIActivityIndicatorView *uiBusy4;
-
-
 
 -(IBAction)doNew:(id)sender;
 -(IBAction)doOpen:(id)sender;
