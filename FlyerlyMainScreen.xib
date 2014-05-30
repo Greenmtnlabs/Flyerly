@@ -9,24 +9,24 @@
             <connections>
                 <outlet property="createFlyrButton" destination="23" id="51"/>
                 <outlet property="createFlyrLabel" destination="10" id="47"/>
-                <outlet property="firstFlyer" destination="14" id="50"/>
-                <outlet property="firstFlyerButton" destination="ld5-eK-vpW" id="Pdy-eB-ftz"/>
-                <outlet property="fourthFlyer" destination="12" id="38"/>
-                <outlet property="fourthFlyerButton" destination="HU8-3B-hmJ" id="W2E-DD-laU"/>
                 <outlet property="inviteFriendButton" destination="25" id="53"/>
                 <outlet property="inviteFriendLabel" destination="5" id="49"/>
                 <outlet property="savedFlyrButton" destination="24" id="52"/>
                 <outlet property="savedFlyrLabel" destination="9" id="48"/>
-                <outlet property="secondFlyer" destination="13" id="37"/>
-                <outlet property="secondFlyerButton" destination="nTT-jT-5cZ" id="cVq-q0-yRg"/>
                 <outlet property="setBotton" destination="16" id="78"/>
-                <outlet property="thirdFlyer" destination="11" id="39"/>
-                <outlet property="thirdFlyerButton" destination="BIU-DI-wID" id="4kH-QI-XHk"/>
                 <outlet property="view" destination="3" id="43"/>
                 <outletCollection property="activityIndicators" destination="Ivy-k7-Sij" id="hkP-3s-iWv"/>
                 <outletCollection property="activityIndicators" destination="dz9-uK-AEr" id="8ff-DO-q0b"/>
                 <outletCollection property="activityIndicators" destination="dWW-0E-DdE" id="DrN-Dm-B6Y"/>
                 <outletCollection property="activityIndicators" destination="gvF-Is-tFo" id="PYx-Wt-S6P"/>
+                <outletCollection property="flyerPreviews" destination="14" id="pxV-mV-7hH"/>
+                <outletCollection property="flyerPreviews" destination="13" id="6a6-ZL-bA7"/>
+                <outletCollection property="flyerPreviews" destination="11" id="a47-yg-KQK"/>
+                <outletCollection property="flyerPreviews" destination="12" id="QFb-iy-rSy"/>
+                <outletCollection property="flyerButtons" destination="ld5-eK-vpW" id="6kf-W8-3vx"/>
+                <outletCollection property="flyerButtons" destination="nTT-jT-5cZ" id="ruK-vn-Qta"/>
+                <outletCollection property="flyerButtons" destination="BIU-DI-wID" id="HOf-zb-XaW"/>
+                <outletCollection property="flyerButtons" destination="HU8-3B-hmJ" id="jpj-K4-xfZ"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

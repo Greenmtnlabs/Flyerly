@@ -15,7 +15,6 @@
 #import "RMStoreKeychainPersistence.h"
 #import "FlyerImageView.h"
 
-//@class SigninController;
 @class FlyrViewController;
 @class CreateFlyerController ;
 @class InviteFriendsController;
@@ -51,15 +50,8 @@
 @property (nonatomic, strong) IBOutlet UIButton *savedFlyrButton;
 @property (nonatomic, strong) IBOutlet UIButton *inviteFriendButton;
 
-@property (nonatomic, strong) IBOutlet UIImageView *firstFlyer;
-@property (nonatomic, strong) IBOutlet UIImageView *secondFlyer;
-@property (nonatomic, strong) IBOutlet UIImageView *thirdFlyer;
-@property (nonatomic, strong) IBOutlet UIImageView *fourthFlyer;
-
-@property (nonatomic, strong) IBOutlet UIButton *firstFlyerButton;
-@property (nonatomic, strong) IBOutlet UIButton *secondFlyerButton;
-@property (nonatomic, strong) IBOutlet UIButton *thirdFlyerButton;
-@property (nonatomic, strong) IBOutlet UIButton *fourthFlyerButton;
+@property (nonatomic, strong) IBOutletCollection( UIImageView ) NSArray *flyerPreviews;
+@property (nonatomic, strong) IBOutletCollection( UIButton ) NSArray *flyerButtons;
 
 @property (nonatomic, strong) IBOutletCollection( UIActivityIndicatorView ) NSArray *activityIndicators;
 

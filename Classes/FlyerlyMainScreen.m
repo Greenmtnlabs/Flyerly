@@ -25,11 +25,15 @@
 
 NSMutableArray *productArray;
 
-
-@synthesize tpController,createFlyrLabel,savedFlyrLabel,inviteFriendLabel,addFriendsController;
-@synthesize firstFlyer, secondFlyer, thirdFlyer, fourthFlyer, createFlyrButton, savedFlyrButton;
-@synthesize recentFlyers,inviteFriendButton;
-@synthesize firstFlyerButton,secondFlyerButton,thirdFlyerButton,fourthFlyerButton;
+@synthesize tpController;
+@synthesize createFlyrLabel;
+@synthesize savedFlyrLabel;
+@synthesize inviteFriendLabel;
+@synthesize addFriendsController;
+@synthesize createFlyrButton;
+@synthesize savedFlyrButton;
+@synthesize recentFlyers;
+@synthesize inviteFriendButton;
 
 -(IBAction)doNew:(id)sender{
     [Flurry logEvent:@"Create Flyer"];
@@ -56,33 +60,26 @@ NSMutableArray *productArray;
         //Set Recent Flyers
         [weakSelf updateRecentFlyer:weakSelf.recentFlyers];
         
-        // Stop Animations
+        // Stop Animations ane enable buttons
         for ( int i = 0; i < weakSelf.activityIndicators.count; i++ ) {
             UIActivityIndicatorView *indicator = [weakSelf.activityIndicators objectAtIndex:i];
             [indicator stopAnimating];
+            
+            UIButton *button = [weakSelf.flyerButtons objectAtIndex:i];
+            [button setUserInteractionEnabled:YES];
         }
-        
-        //Enable User Interaction of Recent Flyer
-        [weakSelf.firstFlyerButton setUserInteractionEnabled:YES];
-        [weakSelf.secondFlyerButton setUserInteractionEnabled:YES];
-        [weakSelf.thirdFlyerButton setUserInteractionEnabled:YES];
-        [weakSelf.fourthFlyerButton setUserInteractionEnabled:YES];
-        
     }];
     
 	[self.navigationController pushViewController:createFlyer animated:YES];
     
-    // Stop Animations
-    for ( int i = 0; i < weakSelf.activityIndicators.count; i++ ) {
-        UIActivityIndicatorView *indicator = [weakSelf.activityIndicators objectAtIndex:i];
+    // Start animations and disable buttons
+    for ( int i = 0; i < _activityIndicators.count; i++ ) {
+        UIActivityIndicatorView *indicator = [_activityIndicators objectAtIndex:i];
         [indicator startAnimating];
+        
+        UIButton *button = [_flyerButtons objectAtIndex:i];
+        [button setUserInteractionEnabled:NO];
     }
-
-    // Disable the buttons
-    [firstFlyerButton setUserInteractionEnabled:NO];
-    [secondFlyerButton setUserInteractionEnabled:NO];
-    [thirdFlyerButton setUserInteractionEnabled:NO];
-    [fourthFlyerButton setUserInteractionEnabled:NO];
 }
 
 -(IBAction)doOpen:(id)sender{
@@ -166,37 +163,29 @@ NSMutableArray *productArray;
  */
 - (void)updateRecentFlyer:(NSMutableArray *)recFlyers{
 
-    firstFlyer.image = [UIImage imageNamed:@"pinned_flyer2.png"];
-    secondFlyer.image = [UIImage imageNamed:@"pinned_flyer2.png"];
-    thirdFlyer.image = [UIImage imageNamed:@"pinned_flyer2.png"];
-    fourthFlyer.image = [UIImage imageNamed:@"pinned_flyer2.png"];
-    
-    CGSize size = CGSizeMake(firstFlyer.frame.size.width, firstFlyer.frame.size.height);
-    
-    for (int i = 0 ; i < recFlyers.count; i++) {
+    for ( int i = 0; i < _flyerPreviews.count; i++ ) {
+        UIImageView *preview = [_flyerPreviews objectAtIndex:i];
         
-         UIImage *recentImage =  [UIImage imageWithContentsOfFile:[recFlyers objectAtIndex:i]];
-
-        UIImage *resizeImage = [self imageWithImage:recentImage scaledToSize:size];
         
-        if ( i == 0 ){
-            firstFlyer.image = resizeImage;
+        // Get the size.
+        CGSize size = CGSizeMake( preview.frame.size.width, preview.frame.size.height );
+        
+        // Do we have a flyer at this index?
+        if ( recFlyers.count > i ) {
+            // Get the recent image
+            UIImage *recentImage =  [UIImage imageWithContentsOfFile:[recFlyers objectAtIndex:i]];
+            
+            // Resize it
+            UIImage *resizeImage = [self imageWithImage:recentImage scaledToSize:size];
+            
+            // Set this image for preview
+            preview.image = resizeImage;
+        } else {
+            // Use default image.
+            preview.image = [UIImage imageNamed:@"pinned_flyer2.png"];
         }
         
-        if ( i == 1 ) {
-            secondFlyer.image = resizeImage;
-        }
-        
-        if ( i == 2 ){
-            thirdFlyer.image = resizeImage;
-        }
-        
-        if ( i == 3 ) {
-            fourthFlyer.image = resizeImage;
-        }
-       
     }
-
 }
 
 
@@ -422,32 +411,27 @@ NSMutableArray *productArray;
         //Set Recent Flyers
         [weakSelf updateRecentFlyer:weakSelf.recentFlyers];
         
-        // Stop Animations
+        // Stop Animations and enable buttons
         for ( int i = 0; i < weakSelf.activityIndicators.count; i++ ) {
             UIActivityIndicatorView *indicator = [weakSelf.activityIndicators objectAtIndex:i];
             [indicator stopAnimating];
+            
+            UIButton *button = [weakSelf.flyerButtons objectAtIndex:i];
+            [button setUserInteractionEnabled:YES];
         }
         
-        //Enable User Interaction of Recent Flyer
-        [weakSelf.firstFlyerButton setUserInteractionEnabled:YES];
-        [weakSelf.secondFlyerButton setUserInteractionEnabled:YES];
-        [weakSelf.thirdFlyerButton setUserInteractionEnabled:YES];
-        [weakSelf.fourthFlyerButton setUserInteractionEnabled:YES];
     }];
 
 	[self.navigationController pushViewController:createFlyer animated:YES];
     
-    // Stop Animations
-    for ( int i = 0; i < weakSelf.activityIndicators.count; i++ ) {
-        UIActivityIndicatorView *indicator = [weakSelf.activityIndicators objectAtIndex:i];
+    // Start Animations and disable buttons
+    for ( int i = 0; i < _activityIndicators.count; i++ ) {
+        UIActivityIndicatorView *indicator = [_activityIndicators objectAtIndex:i];
         [indicator startAnimating];
+        
+        UIButton *button = [_flyerButtons objectAtIndex:i];
+        [button setUserInteractionEnabled:NO];
     }
-    
-    // Disable the buttons
-    [firstFlyerButton setUserInteractionEnabled:NO];
-    [secondFlyerButton setUserInteractionEnabled:NO];
-    [thirdFlyerButton setUserInteractionEnabled:NO];
-    [fourthFlyerButton setUserInteractionEnabled:NO];
 }
 
 
