@@ -17,13 +17,14 @@
 #import "InputViewController.h"
 #import "FlyerlySingleton.h"
 #import "MainSettingCell.h"
+#import "UserPurchases.h"
 #import <ShareKit.h>
 #import "FlyerlyTwitterLike.h"
 
 
 @class InputViewController,FlyerlySingleton ;
-@class LaunchController,HelpController,ProfileViewController;
-@interface MainSettingViewController : UIViewController <UITableViewDelegate, MFMailComposeViewControllerDelegate>{
+@class LaunchController,HelpController,ProfileViewController,InAppViewController;
+@interface MainSettingViewController : UIViewController <UITableViewDelegate, MFMailComposeViewControllerDelegate,InAppPurchasePanelButtonProtocol,UserPurchasesDelegate>{
 
     NSMutableArray *category;
     NSMutableArray *groupCtg;
@@ -32,6 +33,7 @@
     SigninController *signInController;
     RegisterController *registerController;
     FlyerlySingleton *globle;
+    InAppViewController *inappviewcontroller;
 
 }
 @property (strong, nonatomic)IBOutlet UITableView *tableView;

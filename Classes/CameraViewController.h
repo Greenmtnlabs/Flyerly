@@ -38,9 +38,11 @@
 @property (assign, nonatomic) IBOutlet UIProgressView *progressView;
 @property (strong, nonatomic) IBOutlet UIButton *mode;
 @property BOOL videoAllow;
+@property BOOL isVideoFlyer;
 @property (nonatomic, strong) UIView *inAppPurchasePanel;
 
 
+-(void)setCameraModeForVideo;
 
 // Actions
 - (IBAction)setCameraLine:(id)sender;

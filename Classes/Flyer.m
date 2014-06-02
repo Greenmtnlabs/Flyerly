@@ -1207,6 +1207,16 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 
 }
 
+/*
+ * Here we Get Flyer Type for Video Flyer
+ */
+-(NSString *)getFlyerTypeVideo {
+    
+    NSMutableDictionary *templateDictionary = [self getLayerFromMaster:@"Template"];
+    return [templateDictionary objectForKey:@"FlyerType"];
+    
+}
+
 
 
 

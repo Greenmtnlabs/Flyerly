@@ -11,12 +11,15 @@
 
 @implementation CreateFlyerController
 
+CameraViewController *nbuCamera;
+
+NSMutableArray *productArray;
 @synthesize selectedFont,selectedColor,selectedTemplate,fontTabButton,colorTabButton,sizeTabButton,fontEditButton,selectedSize,
-fontBorderTabButton,addMoreIconTabButton,addMorePhotoTabButton,addMoreSymbolTabButton,sharePanel;
+fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addMoreSymbolTabButton,sharePanel;
 @synthesize cameraTabButton,photoTabButton,widthTabButton,heightTabButton,deleteAlert,signInAlert;
 @synthesize imgPickerFlag,layerScrollView,flyerPath;
 @synthesize contextView,libraryContextView,libFlyer,backgroundTabButton,addMoreFontTabButton;
-@synthesize libText,libBackground,libPhoto,libEmpty,backtemplates,cameraTakePhoto,cameraRoll,flyerBorder;
+@synthesize libText,libBackground,libArts,libPhoto,libEmpty,backtemplates,cameraTakePhoto,cameraRoll,flyerBorder;
 @synthesize flyimgView,currentLayer,layersDic,flyer,player,playerView,playerToolBar,playButton,playerSlider,tempelateView;
 @synthesize durationLabel,durationChange,onFlyerBack,mainView;
 int selectedAddMoreLayerTab = -1;
@@ -36,6 +39,22 @@ int selectedAddMoreLayerTab = -1;
     [self renderFlyer];
     
     NSString *title = [flyer getFlyerTitle];
+    
+    //HERE WE GET USER PURCHASES INFO FROM PARSE
+    if(![[NSUserDefaults standardUserDefaults] stringForKey:@"InAppPurchases"]){
+        
+        FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+        UserPurchases *userPurchases_ = appDelegate.userPurchases;
+        
+        //Checking if user valid purchases
+        if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]   ||
+            [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"]    ) {
+            
+            //Unloking features
+            UIImage *buttonImage = [UIImage imageNamed:@"video_tab.png"];
+            [addVideoTabButton setImage:buttonImage forState:UIControlStateNormal];
+        }
+    }
     
     if ( ![title isEqualToString:@""] ) {
         titleLabel.text = title;
@@ -662,17 +681,22 @@ int selectedAddMoreLayerTab = -1;
             
             mainView = [subviewArray objectAtIndex:0];
             NSArray *bodersArray = mainView.subviews;
-            
+            int count = (bodersArray.count)/3;
+        
             int i=1;
-            for (UIView *sub in bodersArray)
+            for (int index = 0; index < count; index++ )
             {
-                if ([sub isKindOfClass:[UIButton class]])
-                {
-                    UIColor *colorName =borderArray[(i-1)];
+                
+                //if ( ( index % 2) != 0)
+                //{UIButton *font;
+                
+                
+                
+                    UIColor *colorName = borderArray[(i-1)];
                     
                     //Here we Highlight Last Color Selected
                     if (textLayer) {
-                        
+                    
                         NSString *tcolor;
                         NSString *twhite;
                         CGFloat red = 0.0, green = 0.0, blue = 0.0, alpha = 0.0,wht = 0.0;
@@ -689,12 +713,13 @@ int selectedAddMoreLayerTab = -1;
                         twhite = [NSString stringWithFormat:@"%f, %f", wht, alpha];
                         
                         if ([textColor isEqualToString:tcolor] && [textWhiteColor isEqualToString:twhite] ) {
+                            UIButton *color = (UIButton *) bodersArray[index];
                             // Add border to selected layer thumbnail
-                           // color.backgroundColor = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
+                            //color.backgroundColor = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
                         }
                         
                         i++;
-                }
+                //}
             }
         }// Loop
         
@@ -729,7 +754,72 @@ int selectedAddMoreLayerTab = -1;
     textColor = [templateDic objectForKey:@"bordercolor"];
     textWhiteColor = [templateDic objectForKey:@"bordercolorWhite"];
 
-	for (int i = 1; i <=  [borderArray count] ; i++)
+    // Load sizes xib asynchronously
+    dispatch_async( dispatch_get_main_queue(), ^{
+        
+        NSArray *subviewArray;
+        
+        if(IS_IPHONE_5){
+            subviewArray = [[NSBundle mainBundle] loadNibNamed:@"Borders" owner:self options:nil];
+            mainView = [subviewArray objectAtIndex:0];
+            [layerScrollView addSubview:mainView];
+            
+            [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
+        } else {
+            
+            subviewArray = [[NSBundle mainBundle] loadNibNamed:@"Borders-iPhone4" owner:self options:nil];
+            mainView = [subviewArray objectAtIndex:0];
+            [layerScrollView addSubview:mainView];
+            
+            [layerScrollView setContentSize:CGSizeMake(mainView.frame.size.width, [layerScrollView bounds].size.height)];
+        }
+        
+        mainView = [subviewArray objectAtIndex:0];
+        NSArray *bodersArray = mainView.subviews;
+        int count = (bodersArray.count)/3;
+        
+        int i=1;
+        int index_ = 0;
+        for (int index = 0; index < count; index++ )
+        {
+            
+            UIColor *colorName = borderArray[(i-1)];
+            
+            //Here we Highlight Last Color Selected
+            if (textColor != nil) {
+                
+                NSString *tcolor;
+                NSString *twhite;
+                CGFloat red = 0.0, green = 0.0, blue = 0.0, alpha = 0.0,wht = 0.0;
+                
+                UILabel *labelToStore = [[UILabel alloc]init];
+                labelToStore.textColor = colorName;
+                
+                //Getting RGB Color Code
+                [labelToStore.textColor getRed:&red green:&green blue:&blue alpha:&alpha];
+                
+                tcolor = [NSString stringWithFormat:@"%f, %f, %f", red, green, blue];
+                
+                [labelToStore.textColor getWhite:&wht alpha:&alpha];
+                twhite = [NSString stringWithFormat:@"%f, %f", wht, alpha];
+                
+                if ([textColor isEqualToString:tcolor] && [textWhiteColor isEqualToString:twhite] ) {
+                    // Add border to selected layer thumbnail
+                    //color.backgroundColor = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
+                }
+                
+                i++;
+            }
+        }// Loop
+        
+        for (int counter = 2; counter  < bodersArray.count; counter += 3) {
+            NSLog(@"%d",counter);
+            [[bodersArray objectAtIndex:counter] addTarget:self action:@selector(selectBorder:) forControlEvents:UIControlEventTouchUpInside];
+        }
+    });
+    
+    
+	/*for (int i = 1; i <=  [borderArray count] ; i++)
 	{
 		UIButton *color = [UIButton buttonWithType:UIButtonTypeCustom];
 		color.frame = CGRectMake(0, 0, widthValue, heightValue);
@@ -788,7 +878,7 @@ int selectedAddMoreLayerTab = -1;
         [layerScrollView setContentSize:CGSizeMake(320, curYLoc)];
     } else {
         [layerScrollView setContentSize:CGSizeMake((  [borderArray count]*(widthValue+5)), [layerScrollView bounds].size.height)];
-    }
+    }*/
     
 
 }
@@ -1190,43 +1280,6 @@ int selectedAddMoreLayerTab = -1;
 
 
 /*
- * When any font border is selected
- */
--(IBAction)selectFontBorder:(id)sender
-{
-	int  i=1;
-	UIButton *view = sender;
-    
-	for(UIView *tempView  in [mainView subviews])
-    {
-        
-        //CHECK UIIMAGEVIEW BECAUSE SCROLL VIEW HAVE ADDITIONAL
-        //SUBVIEWS OF UIIMAGEVIEW FOR FLASH INDICATORS
-        if ([tempView isKindOfClass:[UIButton class]]) {
-            
-            // Add border to Un-select layer thumbnail
-            //tempView.backgroundColor = [UIColor clearColor];
-        
-            if( tempView == view ) {
-            
-                UIColor *borderColor = borderArray[i-1];
-            
-                [flyer setFlyerTextBorderColor:currentLayer Color:borderColor ];
-            
-                //Here we call Render Layer on View
-                [flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
-            
-                // Add border to selected layer thumbnail
-                //tempView.backgroundColor = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
-
-            }
-            i++;
-            
-        }//UIIMAGEVIEW CHECK
-	}//LOOP
-}
-
-/*
  * When any template is selected
  */
 -(void)selectTemplate:(id)sender
@@ -1385,39 +1438,106 @@ int selectedAddMoreLayerTab = -1;
 }
 
 /*
+ * When any font border is selected
+ */
+-(IBAction)selectFontBorder:(id)sender
+{
+    NSArray *bodersArray = mainView.subviews;
+    int count = (bodersArray.count);
+    
+    UIView *tempView;
+    
+    int  i=1;
+	UIButton *view = sender;
+    
+	for (int index = 0; index < count; index++ )
+    {
+        tempView  = [bodersArray objectAtIndex:index];
+        
+        if ( (index % 3) == 0)
+        {
+            tempView  = [bodersArray objectAtIndex:index];
+            
+            // Add border to Un-select layer thumbnail
+            CALayer * l = [tempView layer];
+            [l setBorderWidth:1];
+            [l setCornerRadius:0];
+            UIColor * c = [UIColor clearColor];
+            [l setBorderColor:c.CGColor];
+            i++;
+            
+        }
+        
+        if(tempView == view)
+        {
+            UIColor *borderColor = borderArray[i-2];
+            [flyer setFlyerTextBorderColor:currentLayer Color:borderColor ];
+            //Here we call Render Layer on View
+            [flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
+            
+            // Add border to selected layer thumbnail
+            tempView = [bodersArray objectAtIndex:(index-2)];
+            CALayer * l = [tempView layer];
+            [l setBorderWidth:5.0];
+            [l setCornerRadius:8];
+            UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
+            [l setBorderColor:c.CGColor];
+        }
+        
+	}//LOOP
+}
+
+
+/*
  * When any Flyer border is selected
  */
 -(void)selectBorder:(id)sender
 {
-	int  i=1;
+    
+    NSArray *bodersArray = mainView.subviews;
+    int count = (bodersArray.count);
+    
+    UIView *tempView;
+    
+    int  i=1;
 	UIButton *view = sender;
     
-	for(UIView *tempView  in [layerScrollView subviews])
-	{
+	for (int index = 0; index < count; index++ )
+    {
+        tempView  = [bodersArray objectAtIndex:index];
         
-        //CHECK UIIMAGEVIEW BECAUSE SCROLL VIEW HAVE ADDITIONAL
-        //SUBVIEWS OF UIIMAGEVIEW FOR FLASH INDICATORS
-        if (![tempView isKindOfClass:[UIImageView class]]) {
-        
+        if ( (index % 3) == 0)
+        {
+            tempView  = [bodersArray objectAtIndex:index];
+            
             // Add border to Un-select layer thumbnail
-            tempView.backgroundColor = [UIColor clearColor];
-        
-            if(tempView == view)
-            {
-            
-                UIColor *borderColor = borderArray[i-1];
-                currentLayer = @"Template";
-                [flyer setFlyerBorder:currentLayer RGBColor:borderColor];
-            
-                //Here we call Render Layer on View
-                [flyimgView setTemplateBorder:[flyer getLayerFromMaster:currentLayer]];
-            
-                // Add border to selected layer thumbnail
-                tempView.backgroundColor = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
-            }
-            
+            CALayer * l = [tempView layer];
+            [l setBorderWidth:1];
+            [l setCornerRadius:0];
+            UIColor * c = [UIColor clearColor];
+            [l setBorderColor:c.CGColor];
             i++;
-        }//UIIMAGEVIEW CHECK
+            
+        }
+        
+        if(tempView == view)
+        {
+            UIColor *borderColor = borderArray[i-2];
+            currentLayer = @"Template";
+            [flyer setFlyerBorder:currentLayer RGBColor:borderColor];
+            
+            //Here we call Render Layer on View
+            [flyimgView setTemplateBorder:[flyer getLayerFromMaster:currentLayer]];
+            
+            // Add border to selected layer thumbnail
+            tempView = [bodersArray objectAtIndex:(index-2)];
+            CALayer * l = [tempView layer];
+            [l setBorderWidth:5.0];
+            [l setCornerRadius:8];
+            UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
+            [l setBorderColor:c.CGColor];
+        }
+        
 	}//LOOP
 }
 
@@ -1589,7 +1709,7 @@ int selectedAddMoreLayerTab = -1;
     [uiBusy startAnimating];
     [self.view addSubview:uiBusy];
     
-    CameraViewController *nbuCamera = [[CameraViewController alloc]initWithNibName:@"CameraViewController" bundle:nil];
+    nbuCamera = [[CameraViewController alloc]initWithNibName:@"CameraViewController" bundle:nil];
     
     nbuCamera.videoAllow = forVideo;
     
@@ -1696,9 +1816,13 @@ int selectedAddMoreLayerTab = -1;
             [uiBusy removeFromSuperview];
         });
     }];
-
     
+    if ( [[weakSelf.flyer getFlyerTypeVideo]isEqualToString:@"video"] ){
+        
+        nbuCamera.isVideoFlyer = YES;
+    }
     [self.navigationController pushViewController:nbuCamera animated:YES];
+    
 }
 
 #pragma mark -  Movie Player
@@ -2571,7 +2695,7 @@ int selectedAddMoreLayerTab = -1;
             NSLog(@"sub string doesnt exist");
         } else {
             // Call Icon
-            [self setAddMoreLayerTabAction:addMoreIconTabButton];
+            //[self setAddMoreLayerTabAction:addMoreIconTabButton];
         }
         
         //when we tap on icon
@@ -2922,6 +3046,31 @@ int selectedAddMoreLayerTab = -1;
 }
 
 /*
+ * Here we Open InAppPurchase Panel
+ */
+-(void)openInAppPanel {
+    
+    if(IS_IPHONE_5){
+        inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
+    }else {
+        inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController-iPhone4" bundle:nil];
+    }
+    [self presentModalViewController:inappviewcontroller animated:YES];
+    if ( productArray.count == 0 ){
+        [inappviewcontroller requestProduct];
+    }
+    if( productArray.count != 0 ) {
+        
+        //[inappviewcontroller.contentLoaderIndicatorView stopAnimating];
+        //inappviewcontroller.contentLoaderIndicatorView.hidden = YES;
+    }
+    
+    inappviewcontroller.buttondelegate = self;
+    
+}
+
+
+/*
  * Here we Open Share Panel
  */
 -(void)openPanel {
@@ -2953,7 +3102,9 @@ int selectedAddMoreLayerTab = -1;
         shareviewcontroller.rightUndoBarButton = rightUndoBarButton;
         shareviewcontroller.shareButton = shareButton;
         shareviewcontroller.helpButton = helpButton;
-        shareviewcontroller.titleView.text = [flyer getFlyerTitle];
+        if( [shareviewcontroller.titleView.text isEqualToString:@"Flyer"] ) {
+            shareviewcontroller.titleView.text = [flyer getFlyerTitle];
+        }
         NSString *description = [flyer getFlyerDescription];
         if (![description isEqualToString:@""]) {
             shareviewcontroller.descriptionView.text = description;
@@ -3305,7 +3456,7 @@ int selectedAddMoreLayerTab = -1;
     [addMoreFontTabButton setSelected:NO];
     [addMorePhotoTabButton setSelected:NO];
     [addMoreSymbolTabButton setSelected:NO];
-    [addMoreIconTabButton setSelected:NO];
+    [addVideoTabButton setSelected:NO];
     [backgroundTabButton setSelected:NO];
 
 
@@ -3352,64 +3503,39 @@ int selectedAddMoreLayerTab = -1;
 	}
 	else if(selectedButton == addMoreSymbolTabButton)
 	{
-        selectedAddMoreLayerTab = ADD_MORE_SYMBOLTAB;
-
-        if ([currentLayer isEqualToString:@""]) {
-            currentLayer = [flyer addImage];
-        }
-
+        
+        [backgroundTabButton setSelected:YES];
         [addMoreSymbolTabButton setSelected:YES];
-        [self addDonetoRightBarBotton];
         
-        //HERE WE SET ANIMATION
-        [UIView animateWithDuration:0.4f
-                         animations:^{
-                             //Create ScrollView
-                             [self addFlyerIconInSubView];
-                         }
-                         completion:^(BOOL finished){
-                             [layerScrollView flashScrollIndicators];
-                         }];
-        
-
-        //Add Context
-        [self addScrollView:layerScrollView];
-        
-        //Add Bottom Tab
-        [self addBottomTabs:libEmpty];
-        
-	}
-	else if(selectedButton == addMoreIconTabButton)
-	{
-        selectedAddMoreLayerTab = ADD_MORE_ICONTAB;
-        
-        [addMoreIconTabButton setSelected:YES];
-        
-        if ([currentLayer isEqualToString:@""]) {
-            currentLayer = [flyer addImage];
-        }
         
         //Add right Bar button
-        [self addDonetoRightBarBotton];
+        //[self addDonetoRightBarBotton];
         
-        
-        //HERE WE SET ANIMATION
-        [UIView animateWithDuration:0.4f
-                         animations:^{
-                             //Create ScrollView
-                             [self addSymbolsInSubView];
-                         }
-                         completion:^(BOOL finished){
-                             [layerScrollView flashScrollIndicators];
-                         }];
-
+//        /[self setlibBackgroundTabAction:backtemplates];
         
         //Add ContextView
-        [self addScrollView:layerScrollView];
+        [self addBottomTabs:libArts];
         
-        //Add Bottom Tab
-        [self addBottomTabs:libEmpty];
-
+	}
+	else if(selectedButton == addVideoTabButton)
+	{
+        FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+        UserPurchases *userPurchases_ = appDelegate.userPurchases;
+    
+        if ([[PFUser currentUser] sessionToken].length != 0) {
+            if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
+                 [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"] ) {
+                
+                [self openCustomCamera:YES];
+                _videoLabel.alpha = 1;
+                nbuCamera.isVideoFlyer = YES;
+            }else {
+                [self openInAppPanel];
+            }
+            
+        }else {
+            [self openInAppPanel];
+        }
 	}
     else if(selectedButton == backgroundTabButton)
 	{
@@ -3569,5 +3695,80 @@ int selectedAddMoreLayerTab = -1;
 - (void)onTap:(UITapGestureRecognizer *)gesture {
     [self enableImageViewInteraction];
 }
+
+
+- ( void )productSuccesfullyPurchased: (NSString *)productId {
+    
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    UserPurchases *userPurchases_ = appDelegate.userPurchases;
+    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
+         [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"] ) {
+        
+        UIImage *buttonImage = [UIImage imageNamed:@"video_tab.png"];
+        [addVideoTabButton setImage:buttonImage forState:UIControlStateNormal];
+        [inappviewcontroller.paidFeaturesTview reloadData];
+        [inappviewcontroller.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    }
+    
+}
+
+- ( void )inAppPurchasePanelContent {
+    [inappviewcontroller inAppDataLoaded];
+}
+
+
+- (void)inAppPurchasePanelButtonTappedWasPressed:(NSString *)inAppPurchasePanelButtonCurrentTitle {
+    
+    __weak InAppViewController *inappviewcontroller_ = inappviewcontroller;
+    if ([inAppPurchasePanelButtonCurrentTitle isEqualToString:(@"Sign In")]) {
+        
+        signInController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
+        
+        FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+        signInController.launchController = appDelegate.lauchController;
+        
+        __weak CreateFlyerController *createFlyerController = self;
+        __weak UserPurchases *userPurchases_ = appDelegate.userPurchases;
+        userPurchases_.delegate = self;
+        
+        [inappviewcontroller_.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+        
+        signInController.signInCompletion = ^void(void) {
+            
+            UINavigationController* navigationController = createFlyerController.navigationController;
+            [navigationController popViewControllerAnimated:NO];
+            [userPurchases_ setUserPurcahsesFromParse];
+        };
+        
+        [self.navigationController pushViewController:signInController animated:YES];
+        
+    }else if ([inAppPurchasePanelButtonCurrentTitle isEqualToString:(@"Restore Purchases")]){
+        
+        
+        [inappviewcontroller_ restorePurchase];
+    }
+}
+
+- (void) userPurchasesLoaded {
+    
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    UserPurchases *userPurchases_ = appDelegate.userPurchases;
+    
+    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]  ||
+         [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"] ) {
+        
+        
+        UIImage *buttonImage = [UIImage imageNamed:@"video_tab.png"];
+        [addVideoTabButton setImage:buttonImage forState:UIControlStateNormal];
+        [inappviewcontroller.paidFeaturesTview reloadData];
+        
+    }else {
+        
+        [self presentModalViewController:inappviewcontroller animated:YES];
+    }
+    
+}
+
+
 
 @end

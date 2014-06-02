@@ -16,6 +16,7 @@
 @implementation InAppViewController 
 
 NSMutableArray *productArray;
+NSArray *freeFeaturesArray;
 @synthesize freeFeaturesTview,paidFeaturesTview,loginButton,completeDesignBundleButton;
 
 
@@ -30,6 +31,10 @@ NSMutableArray *productArray;
     
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     userPurchases = appDelegate.userPurchases;
+    
+    // Find out the path of free-features.plist
+    NSString *freeFeaturesPlistPath = [[NSBundle mainBundle] pathForResource:@"free-features" ofType:@"plist"];
+    freeFeaturesArray = [[NSArray alloc] initWithContentsOfFile:freeFeaturesPlistPath];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -68,9 +73,10 @@ NSMutableArray *productArray;
         return  productArray.count;
     else {
         // Find out the path of recipes.plist
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"free-features" ofType:@"plist"];
-        NSDictionary *freeFeaturesDictionary = [[NSDictionary alloc] initWithContentsOfFile:path];
-        return [[freeFeaturesDictionary allKeys] count];
+        NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"free-features" ofType:@"plist"];
+        NSArray *contentArray = [NSArray arrayWithContentsOfFile:plistPath];
+        return [contentArray count];
+        
     }
     
 }
@@ -243,13 +249,10 @@ NSMutableArray *productArray;
             freeFeatureCell = (FreeFeatureCell *)[nib objectAtIndex:0];
         }
         
-        // Find out the path of free-features.plist
-        NSString *freeFeaturesPlistPath = [[NSBundle mainBundle] pathForResource:@"free-features" ofType:@"plist"];
-        NSDictionary *freeFeatuersDictionary = [[NSDictionary alloc] initWithContentsOfFile:freeFeaturesPlistPath];
-        
+        NSDictionary *freeFeatuersDictionary = [freeFeaturesArray objectAtIndex:indexPath.row];
         NSArray* freeFeatures = [freeFeatuersDictionary allKeys];
         //Setting the feature name,feature description values for cell view using plist
-        [freeFeatureCell setCellValueswithProductTitle:freeFeatures[indexPath.row] ProductDescription:[freeFeatuersDictionary objectForKey:[freeFeatures objectAtIndex:indexPath.row]]];
+        [freeFeatureCell setCellValueswithProductTitle:freeFeatures[0] ProductDescription:[freeFeatuersDictionary objectForKey:freeFeatures[0]]];
         
         return freeFeatureCell;
     }
@@ -265,7 +268,7 @@ NSMutableArray *productArray;
         cancelRequest = NO;
         
         //These are over Products on App Store
-        NSSet *productIdentifiers = [NSSet setWithArray:@[@"com.flyerly.AllDesignBundle",@"com.flyerly.UnlockSavedFlyers",@"com.flyerly.UnlockCreateVideoFlyerOption"]];
+        NSSet *productIdentifiers = [NSSet setWithArray:@[@"com.flyerly.AllDesignBundle",@"com.flyerly.UnlockSavedFlyers",@"com.flyerly.UnlockCreateVideoFlyerOption",@"com.flyerly.RemoveAds"]];
         
         [[RMStore defaultStore] requestProducts:productIdentifiers success:^(NSArray *products, NSArray *invalidProductIdentifiers) {
             
@@ -321,7 +324,7 @@ NSMutableArray *productArray;
         //HERE WE GET SHARED INTANCE OF _persistence WHICH WE LINKED IN FlyrAppDelegate
         FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
         //NSArray *productIdentifiers = [[appDelegate._persistence purchasedProductIdentifiers] allObjects];
-        NSArray *productIdentifiers = @[@"com.flyerly.AllDesignBundle",@"com.flyerly.UnlockSavedFlyers",@"com.flyerly.UnlockCreateVideoFlyerOption"];
+        NSArray *productIdentifiers = @[@"com.flyerly.AllDesignBundle",@"com.flyerly.UnlockSavedFlyers",@"com.flyerly.UnlockCreateVideoFlyerOption",@"com.flyerly.RemoveAds"];
         //NSSet *productIdentifiers = [NSSet setWithArray:@[@"com.flyerly.AllDesignBundle",@"com.flyerly.UnlockSavedFlyers",@"com.flyerly.UnlockCreateVideoFlyerOption"]];
         
         
@@ -363,5 +366,10 @@ NSMutableArray *productArray;
     [paidFeaturesTview reloadData];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [self.paidFeaturesTview flashScrollIndicators];
+}
 
 @end

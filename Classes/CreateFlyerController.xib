@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment version="784" defaultVersion="1280" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
@@ -8,10 +8,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CreateFlyerController">
             <connections>
                 <outlet property="addMoreFontTabButton" destination="rb6-j8-Siq" id="Gf9-7b-4Nr"/>
-                <outlet property="addMoreIconTabButton" destination="fpi-NX-k5V" id="Dmn-8a-OqK"/>
                 <outlet property="addMoreLayerOrSaveFlyerLabel" destination="hHc-sJ-Fbt" id="Gsh-QR-PY7"/>
                 <outlet property="addMorePhotoTabButton" destination="fcG-xw-IqZ" id="Mj3-Ub-wYi"/>
                 <outlet property="addMoreSymbolTabButton" destination="a4z-OF-QiI" id="fVq-xN-FAx"/>
+                <outlet property="addVideoTabButton" destination="fpi-NX-k5V" id="Lhi-rN-REs"/>
                 <outlet property="backgroundTabButton" destination="zoh-mW-4K3" id="jKZ-37-kHq"/>
                 <outlet property="backtemplates" destination="WvZ-dV-5Fn" id="5XB-pz-W0O"/>
                 <outlet property="cameraRoll" destination="t0N-7F-yOw" id="jXi-au-Q5l"/>
@@ -27,6 +27,7 @@
                 <outlet property="fontEditButton" destination="Rgs-rs-7a8" id="E8j-if-9v8"/>
                 <outlet property="fontTabButton" destination="zu1-aU-CE3" id="4N8-mM-vZ8"/>
                 <outlet property="heightTabButton" destination="5Ya-yN-kTr" id="RhP-af-MbU"/>
+                <outlet property="libArts" destination="weP-Ld-FsM" id="x98-Xu-7Y9"/>
                 <outlet property="libBackground" destination="wtn-Zi-MKo" id="Lbb-GH-gzo"/>
                 <outlet property="libEmpty" destination="suF-K7-Eeb" id="3h4-F6-z4R"/>
                 <outlet property="libFlyer" destination="P8i-Fw-Gci" id="DAb-aV-gaf"/>
@@ -135,7 +136,7 @@
                     <rect key="frame" x="192" y="0.0" width="64" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Symbols"/>
-                    <state key="normal" image="symbolicon_button.png">
+                    <state key="normal" image="video_tab_locked.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <state key="highlighted" backgroundImage="icon_button_selected"/>
@@ -147,7 +148,7 @@
                     <rect key="frame" x="256" y="0.0" width="64" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Clipart"/>
-                    <state key="normal" image="icon_button.png">
+                    <state key="normal" image="art_tab.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <state key="highlighted" backgroundImage="symbolicon_button_selected"/>
@@ -411,6 +412,62 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
         </view>
+        <view contentMode="scaleToFill" id="weP-Ld-FsM">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button opaque="NO" tag="10001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="LPQ-8t-r0c">
+                    <rect key="frame" x="0.0" y="0.0" width="80" height="45"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <accessibility key="accessibilityConfiguration" label="Font"/>
+                    <state key="normal" image="clipart_tab.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="selected" image="font_button_selected.png"/>
+                    <connections>
+                        <action selector="setStyleTabAction:" destination="-1" eventType="touchUpInside" id="9yU-4C-lmD"/>
+                    </connections>
+                </button>
+                <button opaque="NO" tag="10002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="gde-ht-Yew">
+                    <rect key="frame" x="80" y="0.0" width="80" height="45"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <accessibility key="accessibilityConfiguration" label="Color"/>
+                    <state key="normal" image="emoticons_tab.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="selected" image="color_button_selected.png"/>
+                    <connections>
+                        <action selector="setStyleTabAction:" destination="-1" eventType="touchUpInside" id="4Ce-q5-F3w"/>
+                    </connections>
+                </button>
+                <button opaque="NO" tag="10003" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="Dde-Nb-nED">
+                    <rect key="frame" x="160" y="0.0" width="80" height="45"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <accessibility key="accessibilityConfiguration" label="Size"/>
+                    <state key="normal" image="color_tab.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="selected" image="size_button_selected.png"/>
+                    <connections>
+                        <action selector="setStyleTabAction:" destination="-1" eventType="touchUpInside" id="Vrc-zw-7wo"/>
+                    </connections>
+                </button>
+                <button opaque="NO" tag="10004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="5Cl-rC-EDu">
+                    <rect key="frame" x="240" y="0.0" width="80" height="45"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <accessibility key="accessibilityConfiguration" label="TextBorder"/>
+                    <state key="normal" image="resize_tab.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="selected" image="outline_button_selected.png"/>
+                    <connections>
+                        <action selector="setStyleTabAction:" destination="-1" eventType="touchUpInside" id="ebm-3k-53U"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <accessibility key="accessibilityConfiguration" label=""/>
+        </view>
     </objects>
     <resources>
         <image name="07_camera.png" width="160" height="90"/>
@@ -428,12 +485,15 @@
         <image name="addbg_library_selected.png" width="160" height="90"/>
         <image name="addbg_takephoto_selected.png" width="160" height="90"/>
         <image name="arrangeicon_button.png" width="128" height="90"/>
+        <image name="art_tab.png" width="64" height="45"/>
         <image name="blue_bar.png" width="640" height="91"/>
+        <image name="clipart_tab.png" width="80" height="45"/>
         <image name="color_button.png" width="128" height="90"/>
         <image name="color_button_selected.png" width="128" height="90"/>
+        <image name="color_tab.png" width="80" height="45"/>
+        <image name="emoticons_tab.png" width="80" height="45"/>
         <image name="font_button.png" width="128" height="90"/>
         <image name="font_button_selected.png" width="128" height="90"/>
-        <image name="icon_button.png" width="128" height="90"/>
         <image name="icon_button_selected" width="612" height="612"/>
         <image name="image_icon.png" width="128" height="90"/>
         <image name="image_icon_selected" width="612" height="612"/>
@@ -441,12 +501,13 @@
         <image name="outline_button_selected.png" width="128" height="90"/>
         <image name="pause_icon.png" width="80" height="80"/>
         <image name="play_icon.png" width="80" height="80"/>
+        <image name="resize_tab.png" width="80" height="45"/>
         <image name="size_button.png" width="128" height="90"/>
         <image name="size_button_selected.png" width="128" height="90"/>
-        <image name="symbolicon_button.png" width="128" height="90"/>
         <image name="symbolicon_button_selected" width="612" height="612"/>
         <image name="text_edit.png" width="128" height="90"/>
         <image name="text_edit_selected.png" width="128" height="90"/>
         <image name="text_icon.png" width="128" height="90"/>
+        <image name="video_tab_locked.png" width="64" height="45"/>
     </resources>
 </document>

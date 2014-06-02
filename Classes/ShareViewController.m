@@ -29,9 +29,10 @@
     [l setBorderColor:[[UIColor grayColor] CGColor]];
     
     // Setup title text field
-    [titleView setReturnKeyType:UIReturnKeyDone];
-    [titleView addTarget:self action:@selector(textFieldFinished:) forControlEvents: UIControlEventEditingDidEndOnExit];
-    [titleView addTarget:self action:@selector(textFieldTapped:) forControlEvents:UIControlEventEditingDidBegin];
+    //[titleView addTarget:delegate action:@selector(textFieldFinished:) forControlEvents:UIControlEventEditingDidBegin];
+    //[titleView setReturnKeyType:UIReturnKeyDone];
+    //[titleView addTarget:self action:@selector(textFieldFinished:) forControlEvents: UIControlEventEditingDidEndOnExit];
+    //[titleView addTarget:self action:@selector(textFieldTapped:) forControlEvents:UIControlEventEditingDidBegin];
 
     titleView.placeholder = @"Flyerly Title (e.g. \"Parker's Party\")";
     
@@ -53,20 +54,6 @@
     descriptionView.delegate = self;
     
     [self.view addSubview:descriptionView];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    
-    [super viewDidAppear:animated];
-    
-    // Checking if titleView text feild is empty
-    if( [titleView hasText] ) {
-        
-        //removing animation on titleVIew text feild
-        [titleViewBorder.layer removeAllAnimations];
-        
-    }
-
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -345,8 +332,8 @@
  }
 
 - (void)textFieldFinished:(id)sender {
-    [sender resignFirstResponder];
     
+    [sender resignFirstResponder];
 }
 
 /*
@@ -363,8 +350,17 @@
  */
 -(void)textFieldDidEndEditing:(UITextField *)textField {
     //Here we Update Flyer Title in .txt File
+    
     [flyer setFlyerTitle:titleView.text];
     topTitleLabel.text = titleView.text;
+    // Check to see if it's blank
+    if([titleView.text isEqualToString:@""]) {
+        // There's no text in the box.
+        [flyer setFlyerTitle:@"Flyer"];
+        topTitleLabel.text = @"Flyer";
+    }
+    
+    
 }
 
 #pragma mark Social Network

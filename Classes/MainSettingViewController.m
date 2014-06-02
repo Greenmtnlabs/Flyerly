@@ -10,9 +10,11 @@
 
 @interface MainSettingViewController ()
 
+
 @end
 
 @implementation MainSettingViewController
+NSMutableArray *productArray;
 @synthesize tableView;
 
 
@@ -71,6 +73,7 @@
     self.navigationItem.titleView = label;
     
     category = [[NSMutableArray alloc] init];
+    [category addObject:@"Premium Features"];
     [category addObject:@"Save to Gallery"];
     [category addObject:@"Flyers are public"];
     
@@ -110,10 +113,8 @@
 
     NSString *title =[NSString stringWithFormat:@"%@",category[indexPath.row]];
     NSString *imgname =@"";
-   
 
-
-    if (indexPath.row == 0){
+    if (indexPath.row == 1){
             
             imgname = @"save_gallery";
             [cell setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"settingsrow"]]];
@@ -136,7 +137,7 @@
             }
     }
     
-    if (indexPath.row == 1){
+    if (indexPath.row == 2){
         UISwitch *mSwitch;
         if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
             mSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(263, 4, 0, 0)] ;
@@ -158,7 +159,7 @@
         
     }
     
-    if (indexPath.row == 2){
+    if (indexPath.row == 3){
         //Checking if the user is valid or anonymus
         if ([[PFUser currentUser] sessionToken].length != 0) {
             //account setting row clicked
@@ -169,13 +170,13 @@
     }
     
     if ([[PFUser currentUser] sessionToken].length != 0) {
+        if (indexPath.row == 4)imgname = @"fb_Like";
+        if (indexPath.row == 5)imgname = @"twt_follow";
+        if (indexPath.row == 6)imgname = @"signout";
+    } else {
         if (indexPath.row == 3)imgname = @"fb_Like";
         if (indexPath.row == 4)imgname = @"twt_follow";
-        if (indexPath.row == 5)imgname = @"signout";
-    } else {
-        if (indexPath.row == 2)imgname = @"fb_Like";
-        if (indexPath.row == 3)imgname = @"twt_follow";
-        if (indexPath.row == 4)imgname = @"signin";
+        if (indexPath.row == 5)imgname = @"signin";
     }
    
     
@@ -184,6 +185,31 @@
     [cell setCellObjects:title leftimage:imgname];
     return cell;
 }
+
+/*
+ * Here we Open InAppPurchase Panel
+ */
+-(void)openPanel {
+    
+    if(IS_IPHONE_5){
+        inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
+    }else {
+        inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController-iPhone4" bundle:nil];
+    }
+    [self presentModalViewController:inappviewcontroller animated:YES];
+    if ( productArray.count == 0 ){
+        [inappviewcontroller requestProduct];
+    }
+    if( productArray.count != 0 ) {
+        
+        //[inappviewcontroller.contentLoaderIndicatorView stopAnimating];
+        //inappviewcontroller.contentLoaderIndicatorView.hidden = YES;
+    }
+    
+    inappviewcontroller.buttondelegate = self;
+    
+}
+
 
 /*
  * HERE WE ENABLE AND DISABLE SAVING PICTURE IN GALLERY
@@ -219,9 +245,18 @@
 
 - (void)tableView:(UITableView *)tView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
    
+    
+    //Opening InApp Panel when click on Premium Features row
+    if (indexPath.row == 0){
+        
+        [self openPanel];
+        
+    }
+    
+    
     // Checking if the user is valid
     if ([[PFUser currentUser] sessionToken].length != 0) {
-        if(indexPath.row == 2) {
+        if(indexPath.row == 3) {
             
             accountUpdater = [[ProfileViewController alloc]initWithNibName:@"ProfileViewController" bundle:nil];
             [self.navigationController pushViewController:accountUpdater animated:YES];
@@ -230,11 +265,11 @@
             
             [ self likeFacebook ];
             
-        }else if(indexPath.row == 4){
+        }else if(indexPath.row == 5){
             
             [self likeTwitter];
             
-        }else if(indexPath.row == 5){
+        }else if(indexPath.row == 6){
             
             warningAlert = [[UIAlertView  alloc]initWithTitle:@"Are you sure?" message:@"" delegate:self cancelButtonTitle:@"Sign out" otherButtonTitles:@"Cancel",nil];
             [warningAlert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:NO];
@@ -244,15 +279,15 @@
     
         // Otherwise the user is anonymous
     } else {
-        if(indexPath.row == 2) {
+        if(indexPath.row == 3) {
             
             [ self likeFacebook ];
             
-        }else if(indexPath.row == 3){
+        }else if(indexPath.row == 4){
             
             [self likeTwitter];
             
-        }else if(indexPath.row == 4){
+        }else if(indexPath.row == 5){
             
             signInController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
             
@@ -429,6 +464,69 @@
     }
 }
 
+- ( void )productSuccesfullyPurchased: (NSString *)productId {
+    
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    UserPurchases *userPurchases_ = appDelegate.userPurchases;
+    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
+        [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
+        
+        [inappviewcontroller.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    }
+    
+}
+
+- (void)inAppPurchasePanelButtonTappedWasPressed:(NSString *)inAppPurchasePanelButtonCurrentTitle {
+    
+    __weak InAppViewController *inappviewcontroller_ = inappviewcontroller;
+    if ([inAppPurchasePanelButtonCurrentTitle isEqualToString:(@"Sign In")]) {
+        
+        signInController = [[SigninController alloc]initWithNibName:@"SigninController" bundle:nil];
+        
+        FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+        signInController.launchController = appDelegate.lauchController;
+        
+        __weak MainSettingViewController *mainSettingViewController = self;
+        __weak UserPurchases *userPurchases_ = appDelegate.userPurchases;
+        userPurchases_.delegate = self;
+        
+        [inappviewcontroller_.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+        
+        signInController.signInCompletion = ^void(void) {
+            
+            UINavigationController* navigationController = mainSettingViewController.navigationController;
+            [navigationController popViewControllerAnimated:NO];
+            [userPurchases_ setUserPurcahsesFromParse];
+        };
+        
+        [self.navigationController pushViewController:signInController animated:YES];
+        
+    }else if ([inAppPurchasePanelButtonCurrentTitle isEqualToString:(@"Restore Purchases")]){
+        
+        
+        [inappviewcontroller_ restorePurchase];
+    }
+}
+
+- ( void )inAppPurchasePanelContent {
+    [inappviewcontroller inAppDataLoaded];
+}
+
+- (void) userPurchasesLoaded {
+    
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    UserPurchases *userPurchases_ = appDelegate.userPurchases;
+    
+    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]  ||
+         [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
+        
+        [inappviewcontroller.paidFeaturesTview reloadData];
+    }else {
+        
+        [self presentModalViewController:inappviewcontroller animated:YES];
+    }
+    
+}
 
 
 @end
