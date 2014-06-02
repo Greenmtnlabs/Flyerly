@@ -110,7 +110,7 @@
 @property (nonatomic, strong)IBOutlet UIButton *addMoreFontTabButton;
 @property (nonatomic, strong)IBOutlet UIButton *addMorePhotoTabButton;
 @property (nonatomic, strong)IBOutlet UIButton *addVideoTabButton;
-@property (nonatomic, strong)IBOutlet UIButton *addMoreSymbolTabButton;
+@property (nonatomic, strong)IBOutlet UIButton *addArtsTabButton;
 @property (nonatomic, strong)IBOutlet UIButton *backgroundTabButton;
 
 //These are LibBackground
@@ -125,6 +125,12 @@
 @property (nonatomic, strong)IBOutlet UIButton *sizeTabButton;
 @property (nonatomic, strong)IBOutlet UIButton *fontBorderTabButton;
 @property (nonatomic, strong)IBOutlet UIButton *fontEditButton;
+
+//These are Art Tab Buttons
+@property (nonatomic, strong)IBOutlet UIButton *clipArtTabButton;
+@property (nonatomic, strong)IBOutlet UIButton *emoticonsTabButton;
+@property (nonatomic, strong)IBOutlet UIButton *artsColorTabButton;
+@property (nonatomic, strong)IBOutlet UIButton *artsSizeTabButton;
 
 //These are LibPhoto
 @property (nonatomic,strong)IBOutlet UIButton *cameraTabButton;
@@ -178,6 +184,7 @@
 -(IBAction)selectColor:(id)sender;
 -(IBAction)selectSymbol:(id)sender;
 -(IBAction)selectIcon:(id)sender;
+-(IBAction)selectEmoticon:(id)sender;
 -(IBAction)selectFontBorder:(id)sender;
 -(IBAction)setlibPhotoTabAction:(id) sender;
 -(IBAction)play:(id)sender;

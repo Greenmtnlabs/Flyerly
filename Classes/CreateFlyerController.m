@@ -15,7 +15,7 @@ CameraViewController *nbuCamera;
 
 NSMutableArray *productArray;
 @synthesize selectedFont,selectedColor,selectedTemplate,fontTabButton,colorTabButton,sizeTabButton,fontEditButton,selectedSize,
-fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addMoreSymbolTabButton,sharePanel;
+fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sharePanel,clipArtTabButton,emoticonsTabButton,artsColorTabButton,artsSizeTabButton;
 @synthesize cameraTabButton,photoTabButton,widthTabButton,heightTabButton,deleteAlert,signInAlert;
 @synthesize imgPickerFlag,layerScrollView,flyerPath;
 @synthesize contextView,libraryContextView,libFlyer,backgroundTabButton,addMoreFontTabButton;
@@ -372,6 +372,30 @@ int selectedAddMoreLayerTab = -1;
         }
     });
 }
+
+/*
+ * Add ClipArts in scroll views
+ */
+-(void)addClipArtsInSubView{
+    
+}
+
+
+/*
+ * Add Arts Colors in scroll views
+ */
+-(void)addArtsColorsInSubView{
+    
+}
+
+/*
+ * Add Arts Sizes in scroll views
+ */
+-(void)addArtsSizesInSubView{
+    
+}
+
+
 
 /*
  * Add fonts in scroll views
@@ -939,6 +963,68 @@ int selectedAddMoreLayerTab = -1;
 
 }
 
+
+/*
+ * Add Emoticons in scroll views
+ */
+-(void)addEmoticonsInSubView{
+    
+    iconArray = [[NSMutableArray alloc]init];
+    
+    //Delete SubViews from ScrollView
+    [self deleteSubviewsFromScrollView];
+    
+    
+    // Load sizes xib asynchronously
+    dispatch_async( dispatch_get_main_queue(), ^{
+        
+        NSArray *subviewArray;
+        
+        if(IS_IPHONE_5){
+            subviewArray = [[NSBundle mainBundle] loadNibNamed:@"Emoticons" owner:self options:nil];
+            mainView = [subviewArray objectAtIndex:0];
+            [layerScrollView addSubview:mainView];
+            
+            [layerScrollView setContentSize:CGSizeMake(320, mainView.frame.size.height)];
+        } else {
+            
+            subviewArray = [[NSBundle mainBundle] loadNibNamed:@"Emoticons-iPhone4" owner:self options:nil];
+            mainView = [subviewArray objectAtIndex:0];
+            [layerScrollView addSubview:mainView];
+            
+            [layerScrollView setContentSize:CGSizeMake(mainView.frame.size.width, [layerScrollView bounds].size.height)];
+        }
+        
+        mainView = [subviewArray objectAtIndex:0];
+        NSArray *flyerIconArray = mainView.subviews;
+        
+        //Getting Last Image Tag for highlight
+        NSString *LastTag = [flyer getImageTag:currentLayer];
+        
+        for(int i=1;i<=94;i++) {
+            
+            //Here we Hightlight Last Selected Image
+            if (![LastTag isEqualToString:@""]) {
+                
+                
+                if ([LastTag intValue] == i ) {
+                    
+                    // Add border to selected layer thumbnail
+                    UIButton *iconButton = flyerIconArray[i-1];
+                    [iconButton.layer setCornerRadius:8];
+                    [iconButton.layer setBorderWidth:3.0];
+                    UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
+                    [iconButton.layer setBorderColor:c.CGColor];
+                }
+            }
+            
+        }//loop
+        
+    });
+    
+}
+
+
 /*
  * Add flyer Icons in scroll views
  */
@@ -1385,15 +1471,15 @@ int selectedAddMoreLayerTab = -1;
 }
 
 /*
- * Called when select icon
+ * Called when select emoticon
  */
--(IBAction)selectIcon:(id)sender
-{
+-(IBAction)selectEmoticon:(id)sender {
+    
     
     UIButton *view = sender;
     
-    [Flurry logEvent:@"Clip Art Added"];
-
+    [Flurry logEvent:@"Emoticon Added"];
+    
     int lstTag = 500;
     NSString *lastTag = [flyer getImageTag:currentLayer];
     
@@ -1401,14 +1487,14 @@ int selectedAddMoreLayerTab = -1;
     
     if (lstTag != view.tag) {
         
-        NSString *imgPath = [self getImagePathByTag:[NSString stringWithFormat:@"ricon%d",view.tag]];
-    
+        NSString *imgPath = [self getImagePathByTag:[NSString stringWithFormat:@"emoticon%d@2x",view.tag]];
+        
         //Set Symbol Image
         [flyer setImagePath:currentLayer ImgPath:imgPath];
         
         //Set Image Tag
         [flyer setImageTag:currentLayer Tag:[NSString stringWithFormat:@"%d",view.tag]];
-    
+        
         [self.flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
         
         //Here we Highlight The ImageView
@@ -1432,9 +1518,60 @@ int selectedAddMoreLayerTab = -1;
             [l setBorderWidth:3.0];
             UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
             [l setBorderColor:c.CGColor];
-            
         }
     }
+}
+/*
+ * Called when select icon
+ */
+-(IBAction)selectIcon:(id)sender
+{
+    
+    UIButton *view = sender;
+    
+    [Flurry logEvent:@"Clip Art Added"];
+    
+    int lstTag = 500;
+    NSString *lastTag = [flyer getImageTag:currentLayer];
+    
+    if (![lastTag isEqualToString:@""]) lstTag = [lastTag intValue];
+    
+    if (lstTag != view.tag) {
+        
+        NSString *imgPath = [self getImagePathByTag:[NSString stringWithFormat:@"ricon%d",view.tag]];
+        
+        //Set Symbol Image
+        [flyer setImagePath:currentLayer ImgPath:imgPath];
+        
+        //Set Image Tag
+        [flyer setImageTag:currentLayer Tag:[NSString stringWithFormat:@"%d",view.tag]];
+        
+        [self.flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
+        
+        //Here we Highlight The ImageView
+        [self.flyimgView layerIsBeingEdited:currentLayer];
+    }
+    
+    
+    //Handling Select Unselect
+    for(UIView *tempView  in [mainView subviews])
+    {
+        // Add border to Un-select layer thumbnail
+        CALayer * l = [tempView layer];
+        [l setBorderWidth:1];
+        [l setCornerRadius:8];
+        UIColor * c = [UIColor clearColor];
+        [l setBorderColor:c.CGColor];
+        
+        if(tempView == view)
+        {
+            // Add border to selected layer thumbnail
+            [l setBorderWidth:3.0];
+            UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
+            [l setBorderColor:c.CGColor];
+        }
+    }
+    
 }
 
 /*
@@ -2704,7 +2841,7 @@ int selectedAddMoreLayerTab = -1;
         } else {
             
             // Call Symbol
-            [self setAddMoreLayerTabAction:addMoreSymbolTabButton];
+            [self setAddMoreLayerTabAction:addArtsTabButton];
         }
         
         //when we tap on icon
@@ -3196,6 +3333,99 @@ int selectedAddMoreLayerTab = -1;
 
 }
 
+/*
+ * When we click on Arts Tab
+ * This Method Manage Arts SubTabs
+ */
+-(IBAction)setArtsTabAction:(id) sender
+{
+
+    [self addBottomTabs:libArts];
+    [clipArtTabButton setSelected:NO];
+    [emoticonsTabButton setSelected:NO];
+    [artsColorTabButton setSelected:NO];
+    [artsSizeTabButton setSelected:NO];
+    UIButton *selectedButton = (UIButton*)sender;
+    if(selectedButton == clipArtTabButton)
+	{
+        
+        //HERE WE SET ANIMATION
+        [UIView animateWithDuration:0.4f
+                         animations:^{
+                             //Create ScrollView
+                             [self addClipArtsInSubView];
+                         }
+                         completion:^(BOOL finished){
+                             [layerScrollView flashScrollIndicators];
+                         }];
+        //END ANIMATION
+        
+        //Add ContextView
+        [self addScrollView:layerScrollView];
+        
+		[clipArtTabButton setSelected:YES];
+	}
+    else if(selectedButton == emoticonsTabButton)
+	{
+        
+        //HERE WE SET ANIMATION
+        [UIView animateWithDuration:0.4f
+                         animations:^{
+                             //Create ScrollView
+                             [self addEmoticonsInSubView];
+                         }
+                         completion:^(BOOL finished){
+                             [layerScrollView flashScrollIndicators];
+                         }];
+        //END ANIMATION
+        
+        //Add ContextView
+        [self addScrollView:layerScrollView];
+        
+		[emoticonsTabButton setSelected:YES];
+	}
+    else if(selectedButton == artsColorTabButton)
+	{
+        
+        //HERE WE SET ANIMATION
+        [UIView animateWithDuration:0.4f
+                         animations:^{
+                             //Create ScrollView
+                             [self addArtsColorsInSubView];
+                         }
+                         completion:^(BOOL finished){
+                             [layerScrollView flashScrollIndicators];
+                         }];
+        //END ANIMATION
+        
+        //Add ContextView
+        [self addScrollView:layerScrollView];
+        
+		[artsColorTabButton setSelected:YES];
+	}
+    else if(selectedButton == artsSizeTabButton)
+	{
+        
+        //HERE WE SET ANIMATION
+        [UIView animateWithDuration:0.4f
+                         animations:^{
+                             //Create ScrollView
+                             [self addArtsSizesInSubView];
+                         }
+                         completion:^(BOOL finished){
+                             [layerScrollView flashScrollIndicators];
+                         }];
+        //END ANIMATION
+        
+        //Add ContextView
+        [self addScrollView:layerScrollView];
+        
+		[artsSizeTabButton setSelected:YES];
+	}
+    
+    
+}
+
 #pragma mark -  Bottom Tabs Context
 /*
  * When we click on Text Tab
@@ -3212,8 +3442,9 @@ int selectedAddMoreLayerTab = -1;
     [fontBorderTabButton setSelected:NO];
     [fontEditButton setSelected:NO];
     
-	UIButton *selectedButton = (UIButton*)sender;
-	if(selectedButton == fontTabButton)
+    UIButton *selectedButton = (UIButton*)sender;
+	
+    if(selectedButton == fontTabButton)
 	{
         
         //HERE WE SET ANIMATION
@@ -3455,7 +3686,7 @@ int selectedAddMoreLayerTab = -1;
     //Set Unselected All
     [addMoreFontTabButton setSelected:NO];
     [addMorePhotoTabButton setSelected:NO];
-    [addMoreSymbolTabButton setSelected:NO];
+    [addArtsTabButton setSelected:NO];
     [addVideoTabButton setSelected:NO];
     [backgroundTabButton setSelected:NO];
 
@@ -3465,7 +3696,6 @@ int selectedAddMoreLayerTab = -1;
 
         selectedAddMoreLayerTab = ADD_MORE_TEXTTAB;
 
-        
         [addMoreFontTabButton setSelected:YES];
         
         if ([currentLayer isEqualToString:@""]) {
@@ -3501,17 +3731,41 @@ int selectedAddMoreLayerTab = -1;
         
 
 	}
-	else if(selectedButton == addMoreSymbolTabButton)
+	else if(selectedButton == addArtsTabButton)
 	{
+        selectedAddMoreLayerTab = ADD_MORE_SYMBOLTAB;
         
-        [backgroundTabButton setSelected:YES];
-        [addMoreSymbolTabButton setSelected:YES];
+        if ([currentLayer isEqualToString:@""]) {
+            currentLayer = [flyer addImage];
+        }
         
+        [addArtsTabButton setSelected:YES];
         
+        [self addDonetoRightBarBotton];
+        
+        //HERE WE SET ANIMATION
+        [UIView animateWithDuration:0.4f
+                         animations:^{
+                             //Create ScrollView
+                             [self addFlyerIconInSubView];
+                         }
+                         completion:^(BOOL finished){
+                             [layerScrollView flashScrollIndicators];
+                         }];
+        
+
+        
+        [clipArtTabButton setSelected:YES];
         //Add right Bar button
-        //[self addDonetoRightBarBotton];
+        [self addDonetoRightBarBotton];
         
-//        /[self setlibBackgroundTabAction:backtemplates];
+        // SET BOTTOM BAR
+        [self setArtsTabAction:clipArtTabButton];
+        //[self setlibBackgroundTabAction:backtemplates];
+        
+        //Add Context
+        [self addScrollView:layerScrollView];
+        
         
         //Add ContextView
         [self addBottomTabs:libArts];
@@ -3636,6 +3890,14 @@ int selectedAddMoreLayerTab = -1;
         dicPath = @"Icon";
     }
     
+    //when we create emoticons
+    if ([imgName rangeOfString:@"emoticon"].location == NSNotFound) {
+        NSLog(@"sub string doesnt exist");
+    } else {
+        FolderPath = [NSString stringWithFormat:@"%@/Emoticon", currentpath];
+        dicPath = @"Emoticon";
+    }
+    
     //when we set BackGround
     if ([imgName rangeOfString:@"Template"].location == NSNotFound) {
         NSLog(@"sub string doesnt exist");
@@ -3643,7 +3905,6 @@ int selectedAddMoreLayerTab = -1;
         FolderPath = [NSString stringWithFormat:@"%@/Template", currentpath];
         dicPath = @"Template";
     }
-    
     
     NSString *imageFolderPath ;
     NSString *existImagePath ;
