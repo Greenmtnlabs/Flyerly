@@ -2271,7 +2271,7 @@ int selectedAddMoreLayerTab = -1;
 -(void)addDonetoRightBarBotton{
     
     //Delete Bar Button
-    UIButton *delButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 4, 45, 42)];
+    UIButton *delButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [delButton addTarget:self action:@selector(callDeleteLayer) forControlEvents:UIControlEventTouchUpInside];
     [delButton setBackgroundImage:[UIImage imageNamed:@"delete_button"] forState:UIControlStateNormal];
     delButton.showsTouchWhenHighlighted = YES;
@@ -2305,7 +2305,7 @@ int selectedAddMoreLayerTab = -1;
     UIBarButtonItem *DoneBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
         
     //Delete Button
-    UIButton *delButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 4, 45, 42)];
+    UIButton *delButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [delButton addTarget:self action:@selector(callDeleteLayer) forControlEvents:UIControlEventTouchUpInside];
     [delButton setBackgroundImage:[UIImage imageNamed:@"delete_button"] forState:UIControlStateNormal];
     delButton.showsTouchWhenHighlighted = YES;
@@ -2387,7 +2387,7 @@ int selectedAddMoreLayerTab = -1;
     self.navigationItem.titleView = label;
     
     //Delete Bar Button
-    UIButton *delButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 4, 45, 42)];
+    UIButton *delButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [delButton addTarget:self action:@selector(callDeleteLayer) forControlEvents:UIControlEventTouchUpInside];
     [delButton setBackgroundImage:[UIImage imageNamed:@"delete_button"] forState:UIControlStateNormal];
     delButton.showsTouchWhenHighlighted = YES;
