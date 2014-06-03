@@ -89,6 +89,8 @@
 		<string>Signika-Light.otf</string>
 		<string>Signika-Regular.otf</string>
 		<string>Signika-Semibold.otf</string>
+		<string>Entypo.otf</string>
+		<string>Entypo-Social.otf</string>
 	</array>
 	<key>UIPrerenderedIcon</key>
 	<true/>

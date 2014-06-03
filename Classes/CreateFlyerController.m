@@ -378,6 +378,68 @@ int selectedAddMoreLayerTab = -1;
  */
 -(void)addClipArtsInSubView{
     
+    [self deleteSubviewsFromScrollView];
+    
+    CGFloat curXLoc = 0;
+    CGFloat curYLoc = 5;
+    int increment = 5;
+    
+    if(IS_IPHONE_5){
+        curXLoc = 13;
+        curYLoc = 10;
+        increment = 8;
+    }
+    
+    // Load sizes xib asynchronously
+    dispatch_async( dispatch_get_main_queue(), ^{
+        
+        NSMutableDictionary *textLayer;
+        NSString *textFamily;
+        NSArray *subviewArray;
+        
+        if(IS_IPHONE_5){
+            subviewArray = [[NSBundle mainBundle] loadNibNamed:@"Cliparts" owner:self options:nil];
+            mainView = [subviewArray objectAtIndex:0];
+            [layerScrollView addSubview:mainView];
+            
+            [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
+        } else {
+            
+            subviewArray = [[NSBundle mainBundle] loadNibNamed:@"Cliparts-iPhone4" owner:self options:nil];
+            mainView = [subviewArray objectAtIndex:0];
+            [layerScrollView addSubview:mainView];
+            
+            [layerScrollView setContentSize:CGSizeMake(mainView.frame.size.width, [layerScrollView bounds].size.height)];
+        }
+        
+        mainView = [subviewArray objectAtIndex:0];
+        NSArray *fontsArray = mainView.subviews;
+        
+        //Getting Last Info of Text Layer
+        if (![currentLayer isEqualToString:@""]) {
+            textLayer = [flyer getLayerFromMaster:currentLayer];
+            textFamily = [textLayer objectForKey:@"fontname"];
+        }
+        
+        // Find out the path of Cliparts.plist
+        NSString *clipartsPlistPath = [[NSBundle mainBundle] pathForResource:@"Cliparts" ofType:@"plist"];
+        NSArray *cliparts = [[NSArray alloc] initWithContentsOfFile:clipartsPlistPath];
+        
+        for (int i = 0; i < [cliparts count] ; i++)
+        {
+            UIButton *font;
+            if ([fontsArray[i] isKindOfClass:[UIButton class]]) {
+                font = (UIButton *) fontsArray[i];
+            }
+            
+            UIFont *fontType = [UIFont fontWithName:[cliparts[i] objectForKey:@"fontType"] size:33.0f];
+            
+            [font.titleLabel setFont: fontType];
+            
+            [font setTitle:[cliparts[i] objectForKey:@"character" ] forState:UIControlStateNormal];
+
+        }
+    });
 }
 
 
@@ -455,8 +517,6 @@ int selectedAddMoreLayerTab = -1;
             
             UIFont *fontname =fontArray[(i-1)];
             [font.titleLabel setFont: fontname];
-            [font setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            [font setBackgroundImage:[UIImage imageNamed:@"a_bg"] forState:UIControlStateNormal];
             
             //Here we Highlight Last Font Selected
             if (textLayer) {
@@ -3747,7 +3807,7 @@ int selectedAddMoreLayerTab = -1;
         [UIView animateWithDuration:0.4f
                          animations:^{
                              //Create ScrollView
-                             [self addFlyerIconInSubView];
+                             //[self addFlyerIconInSubView];
                          }
                          completion:^(BOOL finished){
                              [layerScrollView flashScrollIndicators];

@@ -479,6 +479,8 @@
 		243DD521192B24B500391786 /* FlyerIcons.xib in Resources */ = {isa = PBXBuildFile; fileRef = 243DD520192B24B500391786 /* FlyerIcons.xib */; };
 		243DD523192B24CB00391786 /* FlyerIcons-iPhone4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 243DD522192B24CB00391786 /* FlyerIcons-iPhone4.xib */; };
 		245C0FA51933081200B5B31C /* free-features.plist in Resources */ = {isa = PBXBuildFile; fileRef = 245C0FA41933081200B5B31C /* free-features.plist */; };
+		245D48E2193DEF9000E670E6 /* Entypo-Social.otf in Resources */ = {isa = PBXBuildFile; fileRef = 245D48E1193DEF9000E670E6 /* Entypo-Social.otf */; };
+		245D48E4193DF05500E670E6 /* Entypo.otf in Resources */ = {isa = PBXBuildFile; fileRef = 245D48E3193DF05500E670E6 /* Entypo.otf */; };
 		246EF476193C506B004539B2 /* Emoticons.xib in Resources */ = {isa = PBXBuildFile; fileRef = 246EF475193C506B004539B2 /* Emoticons.xib */; };
 		246EF4E0193C515D004539B2 /* emoticon100@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 246EF478193C515D004539B2 /* emoticon100@2x.png */; };
 		246EF4E1193C515D004539B2 /* emoticon101@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 246EF479193C515D004539B2 /* emoticon101@2x.png */; };
@@ -598,8 +600,9 @@
 		2478E5ED192C8C0A0081B31B /* FreeFeatureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2478E5EB192C8C0A0081B31B /* FreeFeatureCell.m */; };
 		2478E5EE192C8C0A0081B31B /* FreeFeatureCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2478E5EC192C8C0A0081B31B /* FreeFeatureCell.xib */; };
 		24803523192F3207009403F7 /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24803522192F3207009403F7 /* CameraViewController.m */; };
-		24B7511B193D9CAF007B6B85 /* entypo-social.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 24B75119193D9CAF007B6B85 /* entypo-social.ttf */; };
-		24B7511C193D9CAF007B6B85 /* entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 24B7511A193D9CAF007B6B85 /* entypo.ttf */; };
+		24B7511E193DA02F007B6B85 /* Cliparts.plist in Resources */ = {isa = PBXBuildFile; fileRef = 24B7511D193DA02F007B6B85 /* Cliparts.plist */; };
+		24B75120193DA06D007B6B85 /* Cliparts.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24B7511F193DA06D007B6B85 /* Cliparts.xib */; };
+		24B75122193DA07C007B6B85 /* Cliparts-iPhone4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24B75121193DA07C007B6B85 /* Cliparts-iPhone4.xib */; };
 		24CAE4B5192A472F00CC4AEF /* Symbols.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24CAE4B4192A472F00CC4AEF /* Symbols.xib */; };
 		2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
 		30D58CFF10FB1BF800E0C7E8 /* icon0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 30D58C7810FB1BF800E0C7E8 /* icon0.jpg */; };
@@ -1505,6 +1508,8 @@
 		243DD520192B24B500391786 /* FlyerIcons.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FlyerIcons.xib; sourceTree = "<group>"; };
 		243DD522192B24CB00391786 /* FlyerIcons-iPhone4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "FlyerIcons-iPhone4.xib"; sourceTree = "<group>"; };
 		245C0FA41933081200B5B31C /* free-features.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "free-features.plist"; sourceTree = "<group>"; };
+		245D48E1193DEF9000E670E6 /* Entypo-Social.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Entypo-Social.otf"; path = "Data/fonts/Entypo-Social.otf"; sourceTree = "<group>"; };
+		245D48E3193DF05500E670E6 /* Entypo.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Entypo.otf; path = Data/fonts/Entypo.otf; sourceTree = "<group>"; };
 		246EF475193C506B004539B2 /* Emoticons.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Emoticons.xib; sourceTree = "<group>"; };
 		246EF478193C515D004539B2 /* emoticon100@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emoticon100@2x.png"; sourceTree = "<group>"; };
 		246EF479193C515D004539B2 /* emoticon101@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emoticon101@2x.png"; sourceTree = "<group>"; };
@@ -1626,8 +1631,9 @@
 		2478E5EB192C8C0A0081B31B /* FreeFeatureCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreeFeatureCell.m; sourceTree = "<group>"; };
 		2478E5EC192C8C0A0081B31B /* FreeFeatureCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FreeFeatureCell.xib; sourceTree = "<group>"; };
 		24803522192F3207009403F7 /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraViewController.m; sourceTree = "<group>"; };
-		24B75119193D9CAF007B6B85 /* entypo-social.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "entypo-social.ttf"; path = "Data/fonts/entypo-social.ttf"; sourceTree = "<group>"; };
-		24B7511A193D9CAF007B6B85 /* entypo.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = entypo.ttf; path = Data/fonts/entypo.ttf; sourceTree = "<group>"; };
+		24B7511D193DA02F007B6B85 /* Cliparts.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Cliparts.plist; sourceTree = "<group>"; };
+		24B7511F193DA06D007B6B85 /* Cliparts.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Cliparts.xib; sourceTree = "<group>"; };
+		24B75121193DA07C007B6B85 /* Cliparts-iPhone4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Cliparts-iPhone4.xib"; sourceTree = "<group>"; };
 		24CAE4B4192A472F00CC4AEF /* Symbols.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Symbols.xib; sourceTree = "<group>"; };
 		26D73E02307543D994C6C8BE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -2993,6 +2999,9 @@
 				243DD522192B24CB00391786 /* FlyerIcons-iPhone4.xib */,
 				246EF475193C506B004539B2 /* Emoticons.xib */,
 				246EF548193C5AE0004539B2 /* Emoticons-iPhone4.xib */,
+				24B7511D193DA02F007B6B85 /* Cliparts.plist */,
+				24B7511F193DA06D007B6B85 /* Cliparts.xib */,
+				24B75121193DA07C007B6B85 /* Cliparts-iPhone4.xib */,
 			);
 			name = CreateFlyer;
 			sourceTree = "<group>";
@@ -3494,8 +3503,8 @@
 		6513C1AB1716FE0F00355FC3 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				24B75119193D9CAF007B6B85 /* entypo-social.ttf */,
-				24B7511A193D9CAF007B6B85 /* entypo.ttf */,
+				245D48E3193DF05500E670E6 /* Entypo.otf */,
+				245D48E1193DEF9000E670E6 /* Entypo-Social.otf */,
 				6501CAEF173242FC00A89E59 /* Swiss_721_Black_Extended_BT.ttf */,
 				65A464F61726D703002C32FB /* Anjelika Rose.ttf */,
 				65A464F71726D703002C32FB /* danielbk.ttf */,
@@ -3631,6 +3640,7 @@
 				30D58D1710FB1BF800E0C7E8 /* icon30.jpg in Resources */,
 				30D58D1810FB1BF800E0C7E8 /* icon31.jpg in Resources */,
 				30D58D1910FB1BF800E0C7E8 /* icon32.jpg in Resources */,
+				245D48E2193DEF9000E670E6 /* Entypo-Social.otf in Resources */,
 				246EF542193C515D004539B2 /* emoticon95@2x.png in Resources */,
 				30D58D1A10FB1BF800E0C7E8 /* icon33.jpg in Resources */,
 				24751A651938A1F600DF03B2 /* emoticons_tab@2x.png in Resources */,
@@ -3745,7 +3755,6 @@
 				30D58D7410FB1BF800E0C7E8 /* Template54.jpg in Resources */,
 				30D58D7510FB1BF800E0C7E8 /* Template55.jpg in Resources */,
 				246EF50C193C515D004539B2 /* emoticon46@2x.png in Resources */,
-				24B7511B193D9CAF007B6B85 /* entypo-social.ttf in Resources */,
 				30D58D7610FB1BF800E0C7E8 /* Template56.jpg in Resources */,
 				30D58D7710FB1BF800E0C7E8 /* Template57.jpg in Resources */,
 				243D8E42193476A700D5312D /* inAppPurchaseViewBg-iPhone4.png in Resources */,
@@ -3810,6 +3819,7 @@
 				246EF52A193C515D004539B2 /* emoticon73@2x.png in Resources */,
 				65A464D11726C3D0002C32FB /* afterupdatescreen_bg.png in Resources */,
 				65A464E41726CBA2002C32FB /* ALGER.TTF in Resources */,
+				24B7511E193DA02F007B6B85 /* Cliparts.plist in Resources */,
 				65A464E51726CBA2002C32FB /* BankGothic-Regular DB.ttf in Resources */,
 				65A464E61726CBA2002C32FB /* black_jack.ttf in Resources */,
 				246EF4FD193C515D004539B2 /* emoticon32@2x.png in Resources */,
@@ -3876,7 +3886,6 @@
 				65DB59AB172FAD6200F251B0 /* sms_share_selected.png in Resources */,
 				20920016184F40330034C4F6 /* InviteFriendsCell.xib in Resources */,
 				65DB59AD172FAD6200F251B0 /* sms_share.png in Resources */,
-				24B7511C193D9CAF007B6B85 /* entypo.ttf in Resources */,
 				65DB59AF172FAD6200F251B0 /* tumblr_share_selected.png in Resources */,
 				65DB59B1172FAD6200F251B0 /* tumblr_share.png in Resources */,
 				65DB59B3172FAD6200F251B0 /* twitter_share_selected.png in Resources */,
@@ -3956,6 +3965,7 @@
 				65C1A4321742516D00947D5E /* Template26@2x.jpg in Resources */,
 				65C1A4331742516D00947D5E /* Template27@2x.jpg in Resources */,
 				65C1A4341742516D00947D5E /* Template28@2x.jpg in Resources */,
+				24B75122193DA07C007B6B85 /* Cliparts-iPhone4.xib in Resources */,
 				65C1A4351742516D00947D5E /* Template29@2x.jpg in Resources */,
 				65C1A4361742516D00947D5E /* Template30@2x.jpg in Resources */,
 				65C1A4371742516D00947D5E /* Template31@2x.jpg in Resources */,
@@ -4165,6 +4175,7 @@
 				2086F90C17C4C2E300664123 /* Zmain_screenbg-568h@2x.png in Resources */,
 				2086F90D17C4C2E300664123 /* Zmain_screenbg.png in Resources */,
 				2086F90E17C4C2E300664123 /* Zmain_screenbg@2x.png in Resources */,
+				24B75120193DA06D007B6B85 /* Cliparts.xib in Resources */,
 				246EF504193C515D004539B2 /* emoticon39@2x.png in Resources */,
 				246EF50A193C515D004539B2 /* emoticon44@2x.png in Resources */,
 				2086F91117C4C96F00664123 /* cp_share.png in Resources */,
@@ -4347,6 +4358,7 @@
 				202F994018BCB426002A25D9 /* invite_twitter.png in Resources */,
 				202C653617EA07DC00CB9A75 /* symbol74.png in Resources */,
 				2478E5E4192C7A6E0081B31B /* InAppViewController.xib in Resources */,
+				245D48E4193DF05500E670E6 /* Entypo.otf in Resources */,
 				20F0393E18E2E4060002338F /* ModeCamera.png in Resources */,
 				202C653817EA07DC00CB9A75 /* symbol75.png in Resources */,
 				202C653A17EA07DC00CB9A75 /* symbol76.png in Resources */,
@@ -4586,7 +4598,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/ExternalFrameworks/Parse/",
-					/Users/mkhurramali/Documents/engineering/flyer.ly/ExternalFrameworks/Parse,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Flyr_Prefix.pch;
@@ -4630,7 +4641,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/ExternalFrameworks/Parse/",
-					/Users/mkhurramali/Documents/engineering/flyer.ly/ExternalFrameworks/Parse,
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -4675,7 +4685,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/ExternalFrameworks/Parse/",
-					/Users/mkhurramali/Documents/engineering/flyer.ly/ExternalFrameworks/Parse,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Flyr_Prefix.pch;
