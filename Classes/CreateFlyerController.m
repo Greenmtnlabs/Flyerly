@@ -3801,6 +3801,11 @@ int selectedAddMoreLayerTab = -1;
         
         if ([currentLayer isEqualToString:@""]) {
             currentLayer = [flyer addImage];
+            
+            CGRect imageFrame  = CGRectMake(0,0,64,64);
+            [flyer setImageFrame:currentLayer :imageFrame];
+            NSMutableDictionary *dic = [flyer getLayerFromMaster:currentLayer];
+            [self.flyimgView renderLayer:currentLayer layerDictionary:dic];
         }
         
         [addArtsTabButton setSelected:YES];
