@@ -402,14 +402,18 @@ int selectedAddMoreLayerTab = -1;
             mainView = [subviewArray objectAtIndex:0];
             [layerScrollView addSubview:mainView];
             
-            [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
+            
+            [layerScrollView setContentSize:CGSizeMake(320, mainView.frame.size.height)];
+            //[layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
         } else {
             
             subviewArray = [[NSBundle mainBundle] loadNibNamed:@"Cliparts-iPhone4" owner:self options:nil];
             mainView = [subviewArray objectAtIndex:0];
             [layerScrollView addSubview:mainView];
             
+            
             [layerScrollView setContentSize:CGSizeMake(mainView.frame.size.width, [layerScrollView bounds].size.height)];
+            //[layerScrollView setContentSize:CGSizeMake(mainView.frame.size.width, [layerScrollView bounds].size.height)];
         }
         
         mainView = [subviewArray objectAtIndex:0];
