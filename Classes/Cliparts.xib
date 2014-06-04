@@ -20,6 +20,9 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="DTe-aL-aQf"/>
+                    </connections>
                 </button>
                 <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Q2c-JU-gO3">
                     <rect key="frame" x="56" y="11" width="35" height="35"/>
@@ -30,6 +33,9 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="mKh-2B-lv2"/>
+                    </connections>
                 </button>
                 <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="59O-V9-PlJ">
                     <rect key="frame" x="99" y="11" width="35" height="35"/>
@@ -40,6 +46,9 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="ufG-Jj-ZIh"/>
+                    </connections>
                 </button>
                 <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="zCg-mO-726">
                     <rect key="frame" x="142" y="11" width="35" height="35"/>
@@ -50,6 +59,9 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="u7c-ne-yxB"/>
+                    </connections>
                 </button>
                 <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="PPW-if-OKA">
                     <rect key="frame" x="185" y="11" width="35" height="35"/>
@@ -60,6 +72,9 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="VsQ-SZ-TO1"/>
+                    </connections>
                 </button>
                 <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="3Id-8T-dNe">
                     <rect key="frame" x="228" y="11" width="35" height="35"/>
@@ -70,6 +85,9 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="LPS-lH-Q9Z"/>
+                    </connections>
                 </button>
                 <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="shg-du-43Z">
                     <rect key="frame" x="271" y="11" width="35" height="35"/>
@@ -80,6 +98,9 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="Z3I-c7-lOZ"/>
+                    </connections>
                 </button>
                 <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="VP8-a3-RCf">
                     <rect key="frame" x="13" y="54" width="35" height="35"/>
@@ -90,6 +111,9 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="Zb6-e0-teK"/>
+                    </connections>
                 </button>
                 <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="tkJ-Vi-eTG">
                     <rect key="frame" x="56" y="54" width="35" height="35"/>
@@ -100,6 +124,9 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="SpF-Lg-EIr"/>
+                    </connections>
                 </button>
                 <button opaque="NO" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="jLJ-G8-7gl">
                     <rect key="frame" x="99" y="54" width="35" height="35"/>
@@ -110,6 +137,9 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="Gq1-2G-YKT"/>
+                    </connections>
                 </button>
                 <button opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="TkX-TW-msI">
                     <rect key="frame" x="142" y="54" width="35" height="35"/>
@@ -120,6 +150,9 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="phT-Ra-qQr"/>
+                    </connections>
                 </button>
                 <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="eai-8w-DhW">
                     <rect key="frame" x="185" y="54" width="35" height="35"/>
@@ -130,6 +163,9 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="8jS-R0-MnQ"/>
+                    </connections>
                 </button>
                 <button opaque="NO" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="wLs-9n-hev">
                     <rect key="frame" x="228" y="54" width="35" height="35"/>
@@ -140,6 +176,9 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="uEn-hK-H9W"/>
+                    </connections>
                 </button>
                 <button opaque="NO" tag="13" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="0Km-dS-gty">
                     <rect key="frame" x="271" y="54" width="35" height="35"/>
@@ -150,6 +189,9 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="YnC-Pb-2r1"/>
+                    </connections>
                 </button>
                 <button opaque="NO" tag="14" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="NZU-Sn-Huh">
                     <rect key="frame" x="13" y="97" width="35" height="35"/>
@@ -160,18 +202,11 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="QMk-E8-rPP"/>
+                    </connections>
                 </button>
                 <button opaque="NO" tag="15" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="t6i-1E-cSI">
-                    <rect key="frame" x="99" y="97" width="35" height="35"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="27"/>
-                    <state key="normal" backgroundImage="a_bg.png">
-                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    </state>
-                </button>
-                <button opaque="NO" tag="16" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Alh-pf-Lo6">
                     <rect key="frame" x="56" y="97" width="35" height="35"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -180,6 +215,22 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="LPv-Ko-Mpp"/>
+                    </connections>
+                </button>
+                <button opaque="NO" tag="16" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Alh-pf-Lo6">
+                    <rect key="frame" x="99" y="97" width="35" height="35"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                    <state key="normal" backgroundImage="a_bg.png">
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="FIH-QF-e8a"/>
+                    </connections>
                 </button>
                 <button opaque="NO" tag="17" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="v2q-za-Rs9">
                     <rect key="frame" x="142" y="97" width="35" height="35"/>
@@ -190,6 +241,9 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="30Z-sh-6aC"/>
+                    </connections>
                 </button>
                 <button opaque="NO" tag="18" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Vij-Q0-PHZ">
                     <rect key="frame" x="185" y="97" width="35" height="35"/>
@@ -200,6 +254,9 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="OKz-ZN-e5a"/>
+                    </connections>
                 </button>
                 <button opaque="NO" tag="19" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bcn-k5-nia">
                     <rect key="frame" x="228" y="97" width="35" height="35"/>
@@ -210,6 +267,9 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="Nk3-BQ-bH7"/>
+                    </connections>
                 </button>
                 <button opaque="NO" tag="20" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bv8-fC-Apm">
                     <rect key="frame" x="271" y="97" width="35" height="35"/>
@@ -220,6 +280,9 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="x3H-ZQ-1s6"/>
+                    </connections>
                 </button>
                 <button opaque="NO" tag="21" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Z14-Ip-z14">
                     <rect key="frame" x="13" y="140" width="35" height="35"/>
@@ -230,6 +293,9 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="R2Q-SQ-joA"/>
+                    </connections>
                 </button>
                 <button opaque="NO" tag="22" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="6rO-yQ-t9e">
                     <rect key="frame" x="56" y="140" width="35" height="35"/>
@@ -240,6 +306,9 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="BTh-0i-98q"/>
+                    </connections>
                 </button>
                 <button opaque="NO" tag="23" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="UAR-IF-4e2">
                     <rect key="frame" x="99" y="140" width="35" height="35"/>
@@ -250,6 +319,9 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="zbS-m9-Wgo"/>
+                    </connections>
                 </button>
                 <button opaque="NO" tag="24" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="XXb-vA-QHD">
                     <rect key="frame" x="142" y="140" width="35" height="35"/>
@@ -260,6 +332,9 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="RR0-a7-39e"/>
+                    </connections>
                 </button>
                 <button opaque="NO" tag="25" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="hsa-Tp-diJ">
                     <rect key="frame" x="185" y="140" width="35" height="35"/>
@@ -270,6 +345,9 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="2lA-bo-rwn"/>
+                    </connections>
                 </button>
                 <button opaque="NO" tag="26" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="aQc-mb-S0v">
                     <rect key="frame" x="228" y="140" width="35" height="35"/>
@@ -280,6 +358,9 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="B25-bG-mkt"/>
+                    </connections>
                 </button>
                 <button opaque="NO" tag="27" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="6ew-zP-u9n">
                     <rect key="frame" x="271" y="140" width="35" height="35"/>
@@ -290,6 +371,9 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="jIv-BZ-Ktt"/>
+                    </connections>
                 </button>
                 <button opaque="NO" tag="28" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="eCa-zL-M96">
                     <rect key="frame" x="13" y="183" width="35" height="35"/>
@@ -300,6 +384,9 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="hDe-gn-wFL"/>
+                    </connections>
                 </button>
                 <button opaque="NO" tag="29" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="yTU-aY-Oa3">
                     <rect key="frame" x="56" y="183" width="35" height="35"/>
@@ -310,6 +397,9 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="TJW-pv-tMb"/>
+                    </connections>
                 </button>
                 <button opaque="NO" tag="30" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="D3e-7V-DTB">
                     <rect key="frame" x="99" y="183" width="35" height="35"/>
@@ -320,6 +410,9 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="9hB-gm-rMy"/>
+                    </connections>
                 </button>
                 <button opaque="NO" tag="31" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="rzI-ZK-HZu">
                     <rect key="frame" x="142" y="183" width="35" height="35"/>
@@ -330,6 +423,9 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="7ZQ-fZ-VKF"/>
+                    </connections>
                 </button>
                 <button opaque="NO" tag="32" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="kue-tS-OOh">
                     <rect key="frame" x="185" y="183" width="35" height="35"/>
@@ -340,6 +436,9 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="10b-uB-JYS"/>
+                    </connections>
                 </button>
                 <button opaque="NO" tag="33" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="0eW-8g-yx3">
                     <rect key="frame" x="228" y="183" width="35" height="35"/>
@@ -350,6 +449,9 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="TnR-wj-9cw"/>
+                    </connections>
                 </button>
                 <button opaque="NO" tag="34" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="MAT-pn-xPW">
                     <rect key="frame" x="271" y="183" width="35" height="35"/>
@@ -360,6 +462,9 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="xNN-3w-a5G"/>
+                    </connections>
                 </button>
                 <button opaque="NO" tag="35" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="b14-MC-Oub">
                     <rect key="frame" x="13" y="226" width="35" height="35"/>
@@ -370,6 +475,9 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="5hj-bR-MlR"/>
+                    </connections>
                 </button>
                 <button opaque="NO" tag="36" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="hBh-YS-pCN">
                     <rect key="frame" x="56" y="226" width="35" height="35"/>
@@ -380,6 +488,9 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="c0c-R3-43j"/>
+                    </connections>
                 </button>
                 <button opaque="NO" tag="37" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="gov-gZ-Kjy">
                     <rect key="frame" x="99" y="226" width="35" height="35"/>
@@ -390,6 +501,9 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="cWu-2G-10B"/>
+                    </connections>
                 </button>
                 <button opaque="NO" tag="38" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Rb0-Nh-w22">
                     <rect key="frame" x="142" y="226" width="35" height="35"/>
@@ -400,6 +514,9 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="Oku-js-Juj"/>
+                    </connections>
                 </button>
                 <button opaque="NO" tag="39" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="zVE-jZ-z2f">
                     <rect key="frame" x="185" y="226" width="35" height="35"/>
@@ -410,6 +527,9 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="U94-Mm-fqU"/>
+                    </connections>
                 </button>
                 <button opaque="NO" tag="40" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="cCW-2K-FG4">
                     <rect key="frame" x="228" y="226" width="35" height="35"/>
@@ -420,6 +540,9 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="4WA-0d-2gO"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
