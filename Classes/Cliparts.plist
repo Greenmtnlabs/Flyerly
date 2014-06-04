@@ -130,9 +130,11 @@
 	</dict>
 	<dict>
 		<key>fontType</key>
-		<string>Entypo</string>
+		<string>Entypo Social</string>
 		<key>character</key>
-		<string></string>
+		<string></string>
+		<key>name</key>
+		<string>google-circles</string>
 	</dict>
 	<dict>
 		<key>fontType</key>
