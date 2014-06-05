@@ -203,7 +203,27 @@ int selectedAddMoreLayerTab = -1;
                     nil];
         
         // Create color array
-        colorArray = [[NSArray  alloc] initWithObjects: [UIColor redColor], [UIColor blueColor], [UIColor greenColor], [UIColor blackColor], [UIColor colorWithRed:253.0/255.0 green:191.0/255.0 blue:38.0/224.0 alpha:1], [UIColor colorWithWhite:1.0f alpha:1.0f], [UIColor grayColor], [UIColor magentaColor], [UIColor yellowColor], [UIColor colorWithRed:163.0/255.0 green:25.0/255.0 blue:2.0/224.0 alpha:1], [UIColor colorWithRed:3.0/255.0 green:15.0/255.0 blue:41.0/224.0 alpha:1], [UIColor purpleColor], [UIColor colorWithRed:85.0/255.0 green:86.0/255.0 blue:12.0/224.0 alpha:1], [UIColor orangeColor], [UIColor colorWithRed:98.0/255.0 green:74.0/255.0 blue:9.0/224.0 alpha:1], [UIColor colorWithRed:80.0/255.0 green:7.0/255.0 blue:1.0/224.0 alpha:1], [UIColor colorWithRed:150.0/255.0 green:150.0/255.0 blue:97.0/224.0 alpha:1], [UIColor colorWithRed:111.0/255.0 green:168.0/255.0 blue:100.0/224.0 alpha:1], [UIColor cyanColor], [UIColor colorWithRed:17.0/255.0 green:69.0/255.0 blue:70.0/224.0 alpha:1], [UIColor colorWithRed:173.0/255.0 green:127.0/255.0 blue:251.0/224.0 alpha:1], nil];
+        colorArray = [[NSArray  alloc] initWithObjects: [UIColor redColor],
+                      [UIColor blueColor],
+                      [UIColor greenColor],
+                      [UIColor blackColor],
+                      [UIColor colorWithRed:253.0/255.0 green:191.0/255.0 blue:38.0/224.0 alpha:1],
+                      [UIColor colorWithWhite:1.0f alpha:1.0f],
+                      [UIColor grayColor],
+                      [UIColor magentaColor],
+                      [UIColor yellowColor],
+                      [UIColor colorWithRed:163.0/255.0 green:25.0/255.0 blue:2.0/224.0 alpha:1],
+                      [UIColor colorWithRed:3.0/255.0 green:15.0/255.0 blue:41.0/224.0 alpha:1],
+                      [UIColor purpleColor],
+                      [UIColor colorWithRed:66.0/255.0 green:2.0/255.0 blue:2.0/224.0 alpha:1],
+                      [UIColor orangeColor],
+                      [UIColor colorWithRed:98.0/255.0 green:74.0/255.0 blue:9.0/224.0 alpha:1],
+                      [UIColor colorWithRed:80.0/255.0 green:7.0/255.0 blue:1.0/224.0 alpha:1],
+                      [UIColor colorWithRed:150.0/255.0 green:150.0/255.0 blue:97.0/224.0 alpha:1],
+                      [UIColor colorWithRed:111.0/255.0 green:168.0/255.0 blue:100.0/224.0 alpha:1],
+                      [UIColor cyanColor],
+                      [UIColor colorWithRed:17.0/255.0 green:69.0/255.0 blue:70.0/224.0 alpha:1],
+                      [UIColor colorWithRed:173.0/255.0 green:127.0/255.0 blue:251.0/224.0 alpha:1], nil];
         
         
         // Create border colors array
@@ -1346,20 +1366,45 @@ int selectedAddMoreLayerTab = -1;
         
             if(tempView == view)
             {
-                NSString *sizeStr = SIZE_ARRAY[i-1];
-                selectedSize = [sizeStr intValue];
-                selectedFont = [selectedFont fontWithSize:selectedSize];
+                NSString *flyerImg = [flyer getImageName:currentLayer];
+                
+                if ( flyerImg == nil ) {
+                    
+                    NSString *sizeStr = SIZE_ARRAY[i-1];
+                    selectedSize = [sizeStr intValue];
+                    selectedFont = [selectedFont fontWithSize:selectedSize];
+                
+                    [flyer setFlyerTextSize:currentLayer Size:selectedFont];
+                
+                    //Here we call Render Layer on View
+                    [flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
+                
+                    // Add border to selected layer thumbnail
+                    CALayer * l = [tempView layer];
+                    [l setBorderWidth:3.0];
+                    UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
+                    [l setBorderColor:c.CGColor];
+                }else {
+                    
+                    NSString *sizeStr = SIZE_ARRAY[i-1];
+                    
+                    CGRect lastFrame = [flyer getImageFrame:currentLayer];
+                    
+                    CGRect imageFrame  = CGRectMake(lastFrame.origin.x,lastFrame.origin.y,[sizeStr floatValue],[sizeStr floatValue]);
+                    [flyer setImageFrame:currentLayer :imageFrame];
+                    NSMutableDictionary *dic = [flyer getLayerFromMaster:currentLayer];
+                    [self.flyimgView renderLayer:currentLayer layerDictionary:dic];
             
-                [flyer setFlyerTextSize:currentLayer Size:selectedFont];
-            
-                //Here we call Render Layer on View
-                [flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
-            
-                // Add border to selected layer thumbnail
-                CALayer * l = [tempView layer];
-                [l setBorderWidth:3.0];
-                UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
-                [l setBorderColor:c.CGColor];
+                    //Here we call Render Layer on View
+                    [flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
+                    
+                    // Add border to selected layer thumbnail
+                    CALayer * l = [tempView layer];
+                    [l setBorderWidth:3.0];
+                    UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
+                    [l setBorderColor:c.CGColor];
+                
+                }
             }
             i++;
             
@@ -3740,9 +3785,9 @@ int selectedAddMoreLayerTab = -1;
         selectedAddMoreLayerTab = ADD_MORE_SYMBOLTAB;
         
         if ([currentLayer isEqualToString:@""]) {
-            //currentLayer = [flyer addImage];
             
-            currentLayer = [flyer addText];
+            currentLayer = [flyer addImage];
+            //currentLayer = [flyer addText];
             editButtonGlobal.uid = currentLayer;
             
             
