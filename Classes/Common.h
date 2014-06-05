@@ -15,6 +15,7 @@
 #define flyerlyHeight 620
 #define VIDEOFRAME 30
 #define MAX_VIDEO_LENGTH 30
+#define FLYER_ALBUM_NAME @"Flyerly"
 
 
 #define RADIANS(degrees) ((degrees * M_PI) / 180.0)

@@ -147,5 +147,6 @@
 @property (strong, readonly) NSMutableDictionary *masterLayers;
 @property (strong, nonatomic) NSMutableArray *socialArray;
 @property (strong, nonatomic) NSMutableArray *textFileArray;
+@property (strong, nonatomic) ALAssetsLibrary *library;
 
 @end

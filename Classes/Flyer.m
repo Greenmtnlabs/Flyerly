@@ -177,7 +177,11 @@ NSString * const TEXTHEIGHT = @"280.000000";
     
 
     // CREATE LIBRARY OBJECT FIRST
-    ALAssetsLibrary * library = [[ALAssetsLibrary alloc] init];
+    if ( _library == nil ) {
+        _library = [[ALAssetsLibrary alloc] init];
+    }
+    
+    __weak ALAssetsLibrary* library = _library;
     
     //Checking Group Path should be not null for Flyer Saving In Gallery
     if ([[NSUserDefaults standardUserDefaults] stringForKey:@"FlyerlyAlbum"] == nil) {
@@ -196,7 +200,7 @@ NSString * const TEXTHEIGHT = @"280.000000";
 
     
     // HERE WE GET GROUP OF IMAGE IN GALLERY
-    [library groupForURL:groupUrl resultBlock:^(ALAssetsGroup *group) {
+    [_library groupForURL:groupUrl resultBlock:^(ALAssetsGroup *group) {
         
        //CHECKING ALBUM EXIST IN DEVICE
         if ( group == nil ) {
@@ -296,10 +300,14 @@ NSString * const TEXTHEIGHT = @"280.000000";
 -(void)createImageToFlyerlyAlbum :(NSURL *)groupURL ImageData :(NSData *)imgData {
     
     // CREATE LIBRARY OBJECT FIRST
-    ALAssetsLibrary * library = [[ALAssetsLibrary alloc] init];
+    if ( _library == nil ) {
+        _library = [[ALAssetsLibrary alloc] init];
+    }
+    
+    __weak ALAssetsLibrary* library = _library;
     
     // HERE WE GET GROUP OF IMAGE IN GALLERY
-    [library groupForURL:groupURL resultBlock:^(ALAssetsGroup *group) {
+    [_library groupForURL:groupURL resultBlock:^(ALAssetsGroup *group) {
         
         //HERE WE CREATE IMAGE IN GALLERY
         [library  writeImageDataToSavedPhotosAlbum:imgData metadata:nil completionBlock:^(NSURL *assetURL, NSError *error) {
@@ -336,10 +344,14 @@ NSString * const TEXTHEIGHT = @"280.000000";
 -(void)createVideoToFlyerlyAlbum :(NSURL *)groupURL VideoData :(NSURL *)VideoURL {
     
     // CREATE LIBRARY OBJECT FIRST
-    ALAssetsLibrary * library = [[ALAssetsLibrary alloc] init];
+    if ( _library == nil ) {
+        _library = [[ALAssetsLibrary alloc] init];
+    }
+    
+    __weak ALAssetsLibrary* library = _library;
     
     // HERE WE GET GROUP OF IMAGE IN GALLERY
-    [library groupForURL:groupURL resultBlock:^(ALAssetsGroup *group) {
+    [_library groupForURL:groupURL resultBlock:^(ALAssetsGroup *group) {
         
         //HERE WE CREATE IMAGE IN GALLERY
         [library  writeVideoAtPathToSavedPhotosAlbum:VideoURL completionBlock:^(NSURL *assetURL, NSError *error) {
@@ -936,12 +948,14 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
  */
 -(void)createFlyerlyAlbum {
     
-    ALAssetsLibrary* library = [[ALAssetsLibrary alloc] init];
+    if ( _library == nil ) {
+        _library = [[ALAssetsLibrary alloc] init];
+    }
     
-    NSString *albumName = @"Flyerly";
+    __weak ALAssetsLibrary* library = _library;
     
     //HERE WE SEN REQUEST FOR CREATE ALBUM
-    [library addAssetsGroupAlbumWithName:albumName
+    [_library addAssetsGroupAlbumWithName:FLYER_ALBUM_NAME
                              resultBlock:^(ALAssetsGroup *group) {
                                  
                                  //CHECKING ALBUM FOUND IN LIBRARY
@@ -952,7 +966,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
                                          
                                         NSString *existAlbumName = [group valueForProperty: ALAssetsGroupPropertyName];
                                          
-                                         if ([existAlbumName isEqualToString:albumName]) {
+                                         if ([existAlbumName isEqualToString:FLYER_ALBUM_NAME]) {
                                              *stop = YES;
                                              
                                              // GETTING CREATED URL OF ALBUM
@@ -990,12 +1004,15 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
  * THIS METHOD CREATE ALBUM ON DEVICE AFTER IT SAVING IMAGE IN LIBRARY
  */
 -(void)createFlyerlyAlbum :(NSData *)imgdata {
-    ALAssetsLibrary* library = [[ALAssetsLibrary alloc] init];
     
-    NSString *albumName = @"Flyerly";
+    if ( _library == nil ) {
+        _library = [[ALAssetsLibrary alloc] init];
+    }
+    __weak Flyer *weakSelf = self;
+    
     
     //HERE WE SEN REQUEST FOR CREATE ALBUM
-    [library addAssetsGroupAlbumWithName:albumName
+    [_library addAssetsGroupAlbumWithName:FLYER_ALBUM_NAME
                              resultBlock:^(ALAssetsGroup *group) {
                                  
                                  // GETTING CREATED URL OF ALBUM
@@ -1005,14 +1022,14 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
                                  [[NSUserDefaults standardUserDefaults]   setObject:groupURL.absoluteString forKey:@"FlyerlyAlbum"];
                                  
                                  //Checking Content Type
-                                 if ([self isVideoFlyer]) {
+                                 if ([weakSelf isVideoFlyer]) {
                                      
                                      //Create Video
-                                     [self createVideoToFlyerlyAlbum:groupURL VideoData:[NSURL fileURLWithPath:[self getSharingVideoPath]]];
+                                     [weakSelf createVideoToFlyerlyAlbum:groupURL VideoData:[NSURL fileURLWithPath:[weakSelf getSharingVideoPath]]];
                                  }else {
                                      
                                      //Create Image
-                                     [self createImageToFlyerlyAlbum:groupURL ImageData:imgdata];
+                                     [weakSelf createImageToFlyerlyAlbum:groupURL ImageData:imgdata];
                                  }
                              }
      
