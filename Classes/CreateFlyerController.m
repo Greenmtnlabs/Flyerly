@@ -1234,7 +1234,6 @@ int selectedAddMoreLayerTab = -1;
     
 }
 
-
 #pragma mark -  Select Layer On ScrollView
 
 /*
@@ -1245,47 +1244,36 @@ int selectedAddMoreLayerTab = -1;
 	int  i=1;
 	UIButton *view = sender;
     
-    int  index = [[mainView subviews] indexOfObject:view];
-    // Find out the path of Cliparts.plist
-    NSString *clipartsPlistPath = [[NSBundle mainBundle] pathForResource:@"Cliparts" ofType:@"plist"];
-    NSArray *cliparts = [[NSArray alloc] initWithContentsOfFile:clipartsPlistPath];
-    
-    UIFont *fontType = [UIFont fontWithName:[cliparts[i] objectForKey:@"fontType"] size:64.0f];
-    
 	for(UIView *tempView  in [mainView subviews])
 	{
         //CHECK UIIMAGEVIEW BECAUSE SCROLL VIEW HAVE ADDITIONAL
         //SUBVIEWS OF UIIMAGEVIEW FOR FLASH INDICATORS
         if (![tempView isKindOfClass:[UIImageView class]]) {
- 
+            
             // Add border to Un-select layer thumbnail
             CALayer * l = [tempView layer];
-
+            
             [l setBorderWidth:1];
             [l setCornerRadius:8];
             UIColor * c = [UIColor clearColor];
             [l setBorderColor:c.CGColor];
-
+            
             if(tempView == view)
             {
+                selectedFont = fontArray[i-1];
+                selectedFont = [selectedFont fontWithSize:selectedSize];
                 
-                [self.flyimgView addSubview:lastTextView];
-                
-                //Set Text of Layer
-                [flyer setFlyerText:currentLayer text:view.currentTitle ];
-                
-                selectedFont = fontType;
-                
-                [flyer setFlyerTextFont:currentLayer FontName:[cliparts[index] objectForKey:@"fontType"]];
-                
-                [flyer setFlyerTextSize:currentLayer Size:selectedFont];
+                //Here we set Font
+                [flyer setFlyerTextFont:currentLayer FontName:[NSString stringWithFormat:@"%@",[selectedFont familyName]]];
                 
                 //Here we call Render Layer on View
                 [flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
                 
+                
                 // Add border to selected layer thumbnail
                 CALayer * l = [tempView layer];
                 [l setBorderWidth:3.0];
+                
                 UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
                 [l setBorderColor:c.CGColor];
             }
@@ -3786,8 +3774,8 @@ int selectedAddMoreLayerTab = -1;
         
         if ([currentLayer isEqualToString:@""]) {
             
-            currentLayer = [flyer addImage];
-            //currentLayer = [flyer addText];
+            //currentLayer = [flyer addImage];
+            currentLayer = [flyer addText];
             editButtonGlobal.uid = currentLayer;
             
             
