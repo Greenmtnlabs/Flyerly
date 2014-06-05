@@ -2785,18 +2785,17 @@ int selectedAddMoreLayerTab = -1;
     
     [self.flyimgView layerIsBeingEdited:currentLayer];
     
+    // Get the type of layer
+    NSString *type = [flyer getLayerType:currentLayer];
     
-    //when tap on Text Box
-    NSString *btnText = [flyer getText:currentLayer];
-    
-    if (![btnText isEqualToString:@""] && btnText != nil) {
+    if ( [type isEqualToString:FLYER_LAYER_TEXT] ) {
         
         lastTextView = [[UITextView  alloc] init];
-        lastTextView.text = btnText;
+        lastTextView.text = [flyer getText:currentLayer];
         
         lastTextView.accessibilityLabel = @"TextInput";
         
-        //For Immediate Showing Delete button
+        // For Immediate Showing Delete button
         [self callStyle];
     }
     
