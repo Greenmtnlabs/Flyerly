@@ -1355,8 +1355,47 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     return NO;
 }
 
+#pragma mark - Layer Types
 
-#pragma mark  Flyer Social File SET
+/**
+ * Set the type of layer.
+ *
+ * @param uid
+ *            ID of the layer.
+ * @param type
+ *            Type of the layer.
+ */
+-(void)setLayerType:(NSString *)uid type:(NSString *)type {
+    NSMutableDictionary *layerDic = [self getLayerFromMaster:uid];
+    [layerDic setValue:type forKey:@"type"];
+}
+
+/**
+ * Get the type of layer.
+ *
+ * @param uid
+ *            ID of the layer.
+ */
+-(NSString *)getLayerType:(NSString *)uid {
+    NSMutableDictionary *layerDic = [self getLayerFromMaster:uid];
+    NSString *type = [layerDic objectForKey:@"type"];
+    
+    // For legacy flyers, this value will not exist. We set the value
+    // according to the data present.
+    if ( type == nil ) {
+        // If image is not set, then this is a flyer text layer.
+        if ( [self getImageName:uid] == nil ) {
+            type = FLYER_LAYER_TEXT;
+        } else {
+            type = FLYER_LAYER_IMAGE;
+        }
+    }
+    
+    return type;
+}
+
+
+#pragma mark - Flyer Social File SET
 
 -(void)setFacebookStatus :(int)status {
 
