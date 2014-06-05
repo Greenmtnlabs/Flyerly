@@ -3404,7 +3404,7 @@ int selectedAddMoreLayerTab = -1;
         
         //Add ContextView
         [self addScrollView:layerScrollView];
-        [colorTabButton setSelected:YES];
+        [artsColorTabButton setSelected:YES];
 	}
     else if(selectedButton == artsSizeTabButton)
 	{
