@@ -475,48 +475,48 @@
         </view>
     </objects>
     <resources>
-        <image name="07_camera.png" width="160" height="90"/>
-        <image name="07_camera_selected.png" width="160" height="90"/>
-        <image name="07_height.png" width="160" height="90"/>
-        <image name="07_height_selected.png" width="160" height="90"/>
-        <image name="07_roll.png" width="160" height="90"/>
-        <image name="07_roll_selected.png" width="160" height="90"/>
-        <image name="07_width.png" width="160" height="90"/>
-        <image name="07_width_selected.png" width="160" height="90"/>
-        <image name="addbg_border.png" width="160" height="90"/>
-        <image name="addbg_border_selected.png" width="160" height="90"/>
-        <image name="addbg_cameraroll_selected.png" width="160" height="90"/>
-        <image name="addbg_library.png" width="160" height="90"/>
-        <image name="addbg_library_selected.png" width="160" height="90"/>
-        <image name="addbg_takephoto_selected.png" width="160" height="90"/>
+        <image name="07_camera.png" width="80" height="45"/>
+        <image name="07_camera_selected.png" width="80" height="45"/>
+        <image name="07_height.png" width="80" height="45"/>
+        <image name="07_height_selected.png" width="80" height="45"/>
+        <image name="07_roll.png" width="80" height="45"/>
+        <image name="07_roll_selected.png" width="80" height="45"/>
+        <image name="07_width.png" width="80" height="45"/>
+        <image name="07_width_selected.png" width="80" height="45"/>
+        <image name="addbg_border.png" width="80" height="45"/>
+        <image name="addbg_border_selected.png" width="80" height="45"/>
+        <image name="addbg_cameraroll_selected.png" width="80" height="45"/>
+        <image name="addbg_library.png" width="80" height="45"/>
+        <image name="addbg_library_selected.png" width="80" height="45"/>
+        <image name="addbg_takephoto_selected.png" width="80" height="45"/>
         <image name="art_tab.png" width="64" height="45"/>
         <image name="bg_tab.png" width="64" height="45"/>
-        <image name="blue_bar.png" width="640" height="91"/>
+        <image name="blue_bar.png" width="320" height="45"/>
         <image name="clipart_tab.png" width="80" height="45"/>
         <image name="clipart_tab_selected.png" width="80" height="45"/>
-        <image name="color_button.png" width="128" height="90"/>
-        <image name="color_button_selected.png" width="128" height="90"/>
+        <image name="color_button.png" width="64" height="45"/>
+        <image name="color_button_selected.png" width="64" height="45"/>
         <image name="color_tab.png" width="80" height="45"/>
         <image name="color_tab_selected.png" width="80" height="45"/>
         <image name="emoticons_tab.png" width="80" height="45"/>
         <image name="emoticons_tab_selected.png" width="80" height="45"/>
-        <image name="font_button.png" width="128" height="90"/>
-        <image name="font_button_selected.png" width="128" height="90"/>
+        <image name="font_button.png" width="64" height="45"/>
+        <image name="font_button_selected.png" width="64" height="45"/>
         <image name="icon_button_selected" width="612" height="612"/>
-        <image name="image_icon.png" width="128" height="90"/>
+        <image name="image_icon.png" width="64" height="45"/>
         <image name="image_icon_selected" width="612" height="612"/>
-        <image name="outline_button.png" width="128" height="90"/>
-        <image name="outline_button_selected.png" width="128" height="90"/>
-        <image name="pause_icon.png" width="80" height="80"/>
-        <image name="play_icon.png" width="80" height="80"/>
-        <image name="size_button.png" width="128" height="90"/>
-        <image name="size_button_selected.png" width="128" height="90"/>
+        <image name="outline_button.png" width="64" height="45"/>
+        <image name="outline_button_selected.png" width="64" height="45"/>
+        <image name="pause_icon.png" width="40" height="40"/>
+        <image name="play_icon.png" width="40" height="40"/>
+        <image name="size_button.png" width="64" height="45"/>
+        <image name="size_button_selected.png" width="64" height="45"/>
         <image name="size_tab.png" width="80" height="45"/>
         <image name="size_tab_selected.png" width="80" height="45"/>
         <image name="symbolicon_button_selected" width="612" height="612"/>
-        <image name="text_edit.png" width="128" height="90"/>
-        <image name="text_edit_selected.png" width="128" height="90"/>
-        <image name="text_icon.png" width="128" height="90"/>
+        <image name="text_edit.png" width="64" height="45"/>
+        <image name="text_edit_selected.png" width="64" height="45"/>
+        <image name="text_icon.png" width="64" height="45"/>
         <image name="video_tab_lock.png" width="64" height="45"/>
         <image name="video_tab_selected.png" width="64" height="45"/>
     </resources>
