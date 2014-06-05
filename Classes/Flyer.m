@@ -23,7 +23,9 @@ NSString * const TEXTHEIGHT = @"280.000000";
 
 @implementation Flyer
 
-@synthesize masterLayers,textFileArray,socialArray;
+@synthesize masterLayers;
+@synthesize textFileArray;
+@synthesize socialArray;
 
 /*
  * This method will be used to initiate the Flyer class
@@ -260,20 +262,16 @@ NSString * const TEXTHEIGHT = @"280.000000";
                           
                             //Update Video
                             [asset setVideoAtPath:[NSURL fileURLWithPath:[self getSharingVideoPath]] completionBlock:^(NSURL *assetURL, NSError *error) {
-                                NSLog(@"Video Updated");
                             }];
                       }else {
                           
                           //Update Image
                             [asset setImageData:imgData metadata:nil completionBlock:^(NSURL *assetURL, NSError *error) {
-                                 NSLog(@"Image Updated");
                             }];
                       }
                     }
                 
                 } failureBlock:^(NSError *error) {
-                
-                    NSLog(@"Image Not Link with Album");
                 }];
 
             
@@ -282,9 +280,6 @@ NSString * const TEXTHEIGHT = @"280.000000";
         
     }
     failureBlock:^(NSError *error) {
-        
-        NSLog(@"error adding Image");
-        
     }];
     
     
@@ -324,15 +319,14 @@ NSString * const TEXTHEIGHT = @"280.000000";
                 [group addAsset:asset];
                 
             } failureBlock:^(NSError *error) {
-                
-                NSLog(@"Image NOT LINKED");
+                NSLog( @"Image not linked: %@", error.localizedDescription );
             }];
             
         }];
 
         
     } failureBlock:^(NSError *error) {
-        NSLog(@"Image NOT CREATED IN GALLERY");
+        NSLog( @"Image not created in gallery: %@", error.localizedDescription );
     }];
 
 
@@ -368,16 +362,15 @@ NSString * const TEXTHEIGHT = @"280.000000";
                 
             } failureBlock:^(NSError *error) {
                 
-                NSLog(@"Image NOT LINKED");
+                NSLog( @"Image not linked: %@", error.localizedDescription );
             }];
             
         }];
         
         
     } failureBlock:^(NSError *error) {
-        NSLog(@"Image NOT CREATED IN GALLERY");
+        NSLog( @"Image not created in gallery: %@", error.localizedDescription );
     }];
-    
     
 }
 
@@ -500,7 +493,6 @@ NSString * const TEXTHEIGHT = @"280.000000";
         //Delete .gitkeep File if Exist in History Directory
         NSString* gitkeepFilepath = [NSString stringWithFormat:@"%@/History/.gitkeep",currentSourcepath];
         if (![[NSFileManager defaultManager] fileExistsAtPath:gitkeepFilepath isDirectory:NULL]) {
-            NSLog(@"gitkeep Not Exist");
         } else {
             [[NSFileManager defaultManager] removeItemAtPath:gitkeepFilepath error:&error];
         }
@@ -669,7 +661,6 @@ NSString * const TEXTHEIGHT = @"280.000000";
  * Here we return All Unique Keys of layers
  */
 -(NSArray *)allKeys{
-    NSLog(@"%@", masterLayers);
     
     // Reutrn sorted (by id/timestamp) array of all keys in the layers dictionary
     return [[masterLayers allKeys] sortedArrayUsingFunction:compareTimestamps context:NULL];
@@ -830,7 +821,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
         //Create Directory!
         [fileManager createDirectoryAtPath:documentDBFolderPath withIntermediateDirectories:NO attributes:nil error:&error];
     } else {
-        NSLog(@"Directory exists! %@", documentDBFolderPath);
+        NSLog(@"Directory already exists: %@", documentDBFolderPath);
     }
     
     NSArray *fileList = [fileManager contentsOfDirectoryAtPath:resourceDBFolderPath error:&error];
@@ -846,7 +837,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
             [fileManager copyItemAtPath:oldFilePath toPath:newFilePath error:&error];
             
         } else {
-            NSLog(@"File exists: %@", newFilePath);
+            NSLog(@"File already exists: %@", newFilePath);
         }
     }
 }
@@ -867,8 +858,6 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     
     if ([[NSFileManager defaultManager] fileExistsAtPath:usernamePath isDirectory:NULL])
             [[NSFileManager defaultManager] createDirectoryAtPath:usernamePath withIntermediateDirectories:YES attributes:nil error:&error];
-        
-        NSLog(@"Path Found");
         
         int timestamp = [[NSDate date] timeIntervalSince1970];
         
@@ -936,7 +925,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     [[NSFileManager defaultManager] moveItemAtPath:currentpath toPath:newPath error:&error];
     
     if (error) {
-        NSLog(@"Recent flyer :%@",error.localizedDescription);
+        NSLog( @"Recent flyer error: %@", error.localizedDescription );
     }
 
 }
@@ -979,7 +968,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
                                          }
                                          
                                      } failureBlock:^(NSError *error) {
-                                          NSLog(@"error adding album");
+                                          NSLog( @"Error adding album: %@", error.localizedDescription );
                                      }];
                                      
                         }else {
@@ -994,7 +983,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
                     }
      
                     failureBlock:^(NSError *error) {
-                        NSLog(@"error adding album");
+                        NSLog( @"Error adding album: %@", error.localizedDescription );
             }];
     
 }
@@ -1034,7 +1023,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
                              }
      
                             failureBlock:^(NSError *error) {
-                                NSLog(@"error adding album");
+                                NSLog( @"Error adding album: %@", error.localizedDescription );
                             }];
 
 
@@ -1050,9 +1039,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
  * return
  *      UniqueID
  */
--(NSString *)addText{
-    NSLog(@"addText");
-    
+-(NSString *)addText {
     int timestamp = [[NSDate date] timeIntervalSince1970];
     
     NSString *uniqueId = [NSString stringWithFormat:@"%d",timestamp];
@@ -1318,9 +1305,8 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
         CGImageRef imgRef = [generator copyCGImageAtTime: asset.duration  actualTime:NULL error:&err];
         
         img = [[UIImage alloc] initWithCGImage:imgRef];
-    }else {
-        NSLog(@"Video cover not found");
-        
+    } else {
+        NSLog( @"Video cover not found" );
     }
     
     
