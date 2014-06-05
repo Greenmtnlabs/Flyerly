@@ -815,12 +815,6 @@ int selectedAddMoreLayerTab = -1;
                     [labelToStore.textColor getWhite:&wht alpha:&alpha];
                     twhite = [NSString stringWithFormat:@"%f, %f", wht, alpha];
                     
-                    if ([textColor isEqualToString:tcolor] && [textWhiteColor isEqualToString:twhite] ) {
-                        UIButton *color = (UIButton *) bodersArray[index];
-                        // Add border to selected layer thumbnail
-                        //color.backgroundColor = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
-                    }
-                    
                     i++;
                 
             }
@@ -882,7 +876,6 @@ int selectedAddMoreLayerTab = -1;
         int count = (bodersArray.count)/3;
         
         int i=1;
-        int index_ = 0;
         for (int index = 0; index < count; index++ )
         {
             
@@ -1157,11 +1150,11 @@ int selectedAddMoreLayerTab = -1;
                 
                 
                 layerButton = [LayerTileButton  buttonWithType:UIButtonTypeCustom];
-                [layerButton addTarget:self action:@selector(selectLayer:) forControlEvents:UIControlEventTouchUpInside];
+                [layerButton addTarget:self action:@selector(editLayer:) forControlEvents:UIControlEventTouchUpInside];
                 layerButton.uid = uid;
                 layerButton.frame =CGRectMake(0, 5,layerScrollWidth, layerScrollHeight);
                 
-                [layerButton addTarget:self action:@selector(editLayer:) forControlEvents:UIControlEventTouchUpInside];
+                
                 
                 [layerButton setBackgroundColor:[UIColor clearColor]];
                 [layerButton.layer setBorderWidth:2];
@@ -1185,11 +1178,10 @@ int selectedAddMoreLayerTab = -1;
                 tileImageView.image = dicImgView.image;
                 
                 layerButton = [LayerTileButton  buttonWithType:UIButtonTypeCustom];
-                [layerButton addTarget:self action:@selector(selectLayer:) forControlEvents:UIControlEventTouchUpInside];
+                [layerButton addTarget:self action:@selector(editLayer:) forControlEvents:UIControlEventTouchUpInside];
                 layerButton.uid = uid;
                 layerButton.frame =CGRectMake(0, 5,layerScrollWidth, layerScrollHeight);
                 
-                [layerButton addTarget:self action:@selector(editLayer:) forControlEvents:UIControlEventTouchUpInside];
                 
                 [layerButton setBackgroundColor:[UIColor clearColor]];
                 [layerButton.layer setBorderWidth:2];
@@ -1722,23 +1714,6 @@ int selectedAddMoreLayerTab = -1;
         }
         
 	}//LOOP
-}
-
-/*
- * When any layer is selected while editing flyer
- * its Also Call editLayer Method
- */
--(void)selectLayer:(id)sender {
-    
-    [self deSelectPreviousLayer];
-    
-    [self renderFlyer];
-    
-    UIView *sView = editButtonGlobal;
-    
-    NSString *tag = [NSString stringWithFormat:@"%d",sView.tag];
-    NSLog(@"%@",tag);
-    
 }
 
 

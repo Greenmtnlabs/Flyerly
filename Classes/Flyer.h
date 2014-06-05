@@ -14,6 +14,11 @@
 #import "Flurry.h"
 #import "Common.h"
 
+// Layer Types
+#define FLYER_LAYER_TEXT      @"0"
+#define FLYER_LAYER_IMAGE     @"1"
+#define FLYER_LAYER_CLIP_ART  @"2"
+#define FLYER_LAYER_EMOTICON  @"3"
 
 @interface Flyer : NSObject{
     
@@ -147,5 +152,6 @@
 @property (strong, readonly) NSMutableDictionary *masterLayers;
 @property (strong, nonatomic) NSMutableArray *socialArray;
 @property (strong, nonatomic) NSMutableArray *textFileArray;
+@property (strong, nonatomic) ALAssetsLibrary *library;
 
 @end

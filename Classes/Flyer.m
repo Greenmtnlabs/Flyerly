@@ -23,7 +23,9 @@ NSString * const TEXTHEIGHT = @"280.000000";
 
 @implementation Flyer
 
-@synthesize masterLayers,textFileArray,socialArray;
+@synthesize masterLayers;
+@synthesize textFileArray;
+@synthesize socialArray;
 
 /*
  * This method will be used to initiate the Flyer class
@@ -177,7 +179,11 @@ NSString * const TEXTHEIGHT = @"280.000000";
     
 
     // CREATE LIBRARY OBJECT FIRST
-    ALAssetsLibrary * library = [[ALAssetsLibrary alloc] init];
+    if ( _library == nil ) {
+        _library = [[ALAssetsLibrary alloc] init];
+    }
+    
+    __weak ALAssetsLibrary* library = _library;
     
     //Checking Group Path should be not null for Flyer Saving In Gallery
     if ([[NSUserDefaults standardUserDefaults] stringForKey:@"FlyerlyAlbum"] == nil) {
@@ -196,7 +202,7 @@ NSString * const TEXTHEIGHT = @"280.000000";
 
     
     // HERE WE GET GROUP OF IMAGE IN GALLERY
-    [library groupForURL:groupUrl resultBlock:^(ALAssetsGroup *group) {
+    [_library groupForURL:groupUrl resultBlock:^(ALAssetsGroup *group) {
         
        //CHECKING ALBUM EXIST IN DEVICE
         if ( group == nil ) {
@@ -256,20 +262,16 @@ NSString * const TEXTHEIGHT = @"280.000000";
                           
                             //Update Video
                             [asset setVideoAtPath:[NSURL fileURLWithPath:[self getSharingVideoPath]] completionBlock:^(NSURL *assetURL, NSError *error) {
-                                NSLog(@"Video Updated");
                             }];
                       }else {
                           
                           //Update Image
                             [asset setImageData:imgData metadata:nil completionBlock:^(NSURL *assetURL, NSError *error) {
-                                 NSLog(@"Image Updated");
                             }];
                       }
                     }
                 
                 } failureBlock:^(NSError *error) {
-                
-                    NSLog(@"Image Not Link with Album");
                 }];
 
             
@@ -278,9 +280,6 @@ NSString * const TEXTHEIGHT = @"280.000000";
         
     }
     failureBlock:^(NSError *error) {
-        
-        NSLog(@"error adding Image");
-        
     }];
     
     
@@ -296,10 +295,14 @@ NSString * const TEXTHEIGHT = @"280.000000";
 -(void)createImageToFlyerlyAlbum :(NSURL *)groupURL ImageData :(NSData *)imgData {
     
     // CREATE LIBRARY OBJECT FIRST
-    ALAssetsLibrary * library = [[ALAssetsLibrary alloc] init];
+    if ( _library == nil ) {
+        _library = [[ALAssetsLibrary alloc] init];
+    }
+    
+    __weak ALAssetsLibrary* library = _library;
     
     // HERE WE GET GROUP OF IMAGE IN GALLERY
-    [library groupForURL:groupURL resultBlock:^(ALAssetsGroup *group) {
+    [_library groupForURL:groupURL resultBlock:^(ALAssetsGroup *group) {
         
         //HERE WE CREATE IMAGE IN GALLERY
         [library  writeImageDataToSavedPhotosAlbum:imgData metadata:nil completionBlock:^(NSURL *assetURL, NSError *error) {
@@ -316,15 +319,14 @@ NSString * const TEXTHEIGHT = @"280.000000";
                 [group addAsset:asset];
                 
             } failureBlock:^(NSError *error) {
-                
-                NSLog(@"Image NOT LINKED");
+                NSLog( @"Image not linked: %@", error.localizedDescription );
             }];
             
         }];
 
         
     } failureBlock:^(NSError *error) {
-        NSLog(@"Image NOT CREATED IN GALLERY");
+        NSLog( @"Image not created in gallery: %@", error.localizedDescription );
     }];
 
 
@@ -336,10 +338,14 @@ NSString * const TEXTHEIGHT = @"280.000000";
 -(void)createVideoToFlyerlyAlbum :(NSURL *)groupURL VideoData :(NSURL *)VideoURL {
     
     // CREATE LIBRARY OBJECT FIRST
-    ALAssetsLibrary * library = [[ALAssetsLibrary alloc] init];
+    if ( _library == nil ) {
+        _library = [[ALAssetsLibrary alloc] init];
+    }
+    
+    __weak ALAssetsLibrary* library = _library;
     
     // HERE WE GET GROUP OF IMAGE IN GALLERY
-    [library groupForURL:groupURL resultBlock:^(ALAssetsGroup *group) {
+    [_library groupForURL:groupURL resultBlock:^(ALAssetsGroup *group) {
         
         //HERE WE CREATE IMAGE IN GALLERY
         [library  writeVideoAtPathToSavedPhotosAlbum:VideoURL completionBlock:^(NSURL *assetURL, NSError *error) {
@@ -356,16 +362,15 @@ NSString * const TEXTHEIGHT = @"280.000000";
                 
             } failureBlock:^(NSError *error) {
                 
-                NSLog(@"Image NOT LINKED");
+                NSLog( @"Image not linked: %@", error.localizedDescription );
             }];
             
         }];
         
         
     } failureBlock:^(NSError *error) {
-        NSLog(@"Image NOT CREATED IN GALLERY");
+        NSLog( @"Image not created in gallery: %@", error.localizedDescription );
     }];
-    
     
 }
 
@@ -488,7 +493,6 @@ NSString * const TEXTHEIGHT = @"280.000000";
         //Delete .gitkeep File if Exist in History Directory
         NSString* gitkeepFilepath = [NSString stringWithFormat:@"%@/History/.gitkeep",currentSourcepath];
         if (![[NSFileManager defaultManager] fileExistsAtPath:gitkeepFilepath isDirectory:NULL]) {
-            NSLog(@"gitkeep Not Exist");
         } else {
             [[NSFileManager defaultManager] removeItemAtPath:gitkeepFilepath error:&error];
         }
@@ -657,7 +661,6 @@ NSString * const TEXTHEIGHT = @"280.000000";
  * Here we return All Unique Keys of layers
  */
 -(NSArray *)allKeys{
-    NSLog(@"%@", masterLayers);
     
     // Reutrn sorted (by id/timestamp) array of all keys in the layers dictionary
     return [[masterLayers allKeys] sortedArrayUsingFunction:compareTimestamps context:NULL];
@@ -818,7 +821,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
         //Create Directory!
         [fileManager createDirectoryAtPath:documentDBFolderPath withIntermediateDirectories:NO attributes:nil error:&error];
     } else {
-        NSLog(@"Directory exists! %@", documentDBFolderPath);
+        NSLog(@"Directory already exists: %@", documentDBFolderPath);
     }
     
     NSArray *fileList = [fileManager contentsOfDirectoryAtPath:resourceDBFolderPath error:&error];
@@ -834,7 +837,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
             [fileManager copyItemAtPath:oldFilePath toPath:newFilePath error:&error];
             
         } else {
-            NSLog(@"File exists: %@", newFilePath);
+            NSLog(@"File already exists: %@", newFilePath);
         }
     }
 }
@@ -855,8 +858,6 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     
     if ([[NSFileManager defaultManager] fileExistsAtPath:usernamePath isDirectory:NULL])
             [[NSFileManager defaultManager] createDirectoryAtPath:usernamePath withIntermediateDirectories:YES attributes:nil error:&error];
-        
-        NSLog(@"Path Found");
         
         int timestamp = [[NSDate date] timeIntervalSince1970];
         
@@ -924,7 +925,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     [[NSFileManager defaultManager] moveItemAtPath:currentpath toPath:newPath error:&error];
     
     if (error) {
-        NSLog(@"Recent flyer :%@",error.localizedDescription);
+        NSLog( @"Recent flyer error: %@", error.localizedDescription );
     }
 
 }
@@ -936,12 +937,14 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
  */
 -(void)createFlyerlyAlbum {
     
-    ALAssetsLibrary* library = [[ALAssetsLibrary alloc] init];
+    if ( _library == nil ) {
+        _library = [[ALAssetsLibrary alloc] init];
+    }
     
-    NSString *albumName = @"Flyerly";
+    __weak ALAssetsLibrary* library = _library;
     
     //HERE WE SEN REQUEST FOR CREATE ALBUM
-    [library addAssetsGroupAlbumWithName:albumName
+    [_library addAssetsGroupAlbumWithName:FLYER_ALBUM_NAME
                              resultBlock:^(ALAssetsGroup *group) {
                                  
                                  //CHECKING ALBUM FOUND IN LIBRARY
@@ -952,7 +955,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
                                          
                                         NSString *existAlbumName = [group valueForProperty: ALAssetsGroupPropertyName];
                                          
-                                         if ([existAlbumName isEqualToString:albumName]) {
+                                         if ([existAlbumName isEqualToString:FLYER_ALBUM_NAME]) {
                                              *stop = YES;
                                              
                                              // GETTING CREATED URL OF ALBUM
@@ -965,7 +968,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
                                          }
                                          
                                      } failureBlock:^(NSError *error) {
-                                          NSLog(@"error adding album");
+                                          NSLog( @"Error adding album: %@", error.localizedDescription );
                                      }];
                                      
                         }else {
@@ -980,7 +983,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
                     }
      
                     failureBlock:^(NSError *error) {
-                        NSLog(@"error adding album");
+                        NSLog( @"Error adding album: %@", error.localizedDescription );
             }];
     
 }
@@ -990,12 +993,15 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
  * THIS METHOD CREATE ALBUM ON DEVICE AFTER IT SAVING IMAGE IN LIBRARY
  */
 -(void)createFlyerlyAlbum :(NSData *)imgdata {
-    ALAssetsLibrary* library = [[ALAssetsLibrary alloc] init];
     
-    NSString *albumName = @"Flyerly";
+    if ( _library == nil ) {
+        _library = [[ALAssetsLibrary alloc] init];
+    }
+    __weak Flyer *weakSelf = self;
+    
     
     //HERE WE SEN REQUEST FOR CREATE ALBUM
-    [library addAssetsGroupAlbumWithName:albumName
+    [_library addAssetsGroupAlbumWithName:FLYER_ALBUM_NAME
                              resultBlock:^(ALAssetsGroup *group) {
                                  
                                  // GETTING CREATED URL OF ALBUM
@@ -1005,19 +1011,19 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
                                  [[NSUserDefaults standardUserDefaults]   setObject:groupURL.absoluteString forKey:@"FlyerlyAlbum"];
                                  
                                  //Checking Content Type
-                                 if ([self isVideoFlyer]) {
+                                 if ([weakSelf isVideoFlyer]) {
                                      
                                      //Create Video
-                                     [self createVideoToFlyerlyAlbum:groupURL VideoData:[NSURL fileURLWithPath:[self getSharingVideoPath]]];
+                                     [weakSelf createVideoToFlyerlyAlbum:groupURL VideoData:[NSURL fileURLWithPath:[weakSelf getSharingVideoPath]]];
                                  }else {
                                      
                                      //Create Image
-                                     [self createImageToFlyerlyAlbum:groupURL ImageData:imgdata];
+                                     [weakSelf createImageToFlyerlyAlbum:groupURL ImageData:imgdata];
                                  }
                              }
      
                             failureBlock:^(NSError *error) {
-                                NSLog(@"error adding album");
+                                NSLog( @"Error adding album: %@", error.localizedDescription );
                             }];
 
 
@@ -1033,9 +1039,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
  * return
  *      UniqueID
  */
--(NSString *)addText{
-    NSLog(@"addText");
-    
+-(NSString *)addText {
     int timestamp = [[NSDate date] timeIntervalSince1970];
     
     NSString *uniqueId = [NSString stringWithFormat:@"%d",timestamp];
@@ -1301,9 +1305,8 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
         CGImageRef imgRef = [generator copyCGImageAtTime: asset.duration  actualTime:NULL error:&err];
         
         img = [[UIImage alloc] initWithCGImage:imgRef];
-    }else {
-        NSLog(@"Video cover not found");
-        
+    } else {
+        NSLog( @"Video cover not found" );
     }
     
     
@@ -1352,8 +1355,47 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     return NO;
 }
 
+#pragma mark - Layer Types
 
-#pragma mark  Flyer Social File SET
+/**
+ * Set the type of layer.
+ *
+ * @param uid
+ *            ID of the layer.
+ * @param type
+ *            Type of the layer.
+ */
+-(void)setLayerType:(NSString *)uid type:(NSString *)type {
+    NSMutableDictionary *layerDic = [self getLayerFromMaster:uid];
+    [layerDic setValue:type forKey:@"type"];
+}
+
+/**
+ * Get the type of layer.
+ *
+ * @param uid
+ *            ID of the layer.
+ */
+-(NSString *)getLayerType:(NSString *)uid {
+    NSMutableDictionary *layerDic = [self getLayerFromMaster:uid];
+    NSString *type = [layerDic objectForKey:@"type"];
+    
+    // For legacy flyers, this value will not exist. We set the value
+    // according to the data present.
+    if ( type == nil ) {
+        // If image is not set, then this is a flyer text layer.
+        if ( [self getImageName:uid] == nil ) {
+            type = FLYER_LAYER_TEXT;
+        } else {
+            type = FLYER_LAYER_IMAGE;
+        }
+    }
+    
+    return type;
+}
+
+
+#pragma mark - Flyer Social File SET
 
 -(void)setFacebookStatus :(int)status {
 
