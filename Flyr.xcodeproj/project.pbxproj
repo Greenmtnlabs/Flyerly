@@ -348,6 +348,21 @@
 		246EF546193C515D004539B2 /* emoticon99@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 246EF4DE193C515D004539B2 /* emoticon99@2x.png */; };
 		246EF547193C515D004539B2 /* emoticon9@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 246EF4DF193C515D004539B2 /* emoticon9@2x.png */; };
 		246EF549193C5AE0004539B2 /* Emoticons-iPhone4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 246EF548193C5AE0004539B2 /* Emoticons-iPhone4.xib */; };
+		2471593219408E5F00B30301 /* facebook@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2471592419408E5F00B30301 /* facebook@2x.png */; };
+		2471593319408E5F00B30301 /* flickr_disabled_saved@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2471592519408E5F00B30301 /* flickr_disabled_saved@2x.png */; };
+		2471593419408E5F00B30301 /* flickr_share_saved@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2471592619408E5F00B30301 /* flickr_share_saved@2x.png */; };
+		2471593519408E5F00B30301 /* instagram_disabled_saved@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2471592719408E5F00B30301 /* instagram_disabled_saved@2x.png */; };
+		2471593619408E5F00B30301 /* instagram_share_saved@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2471592819408E5F00B30301 /* instagram_share_saved@2x.png */; };
+		2471593719408E5F00B30301 /* invite_facebook_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2471592919408E5F00B30301 /* invite_facebook_selected@2x.png */; };
+		2471593819408E5F00B30301 /* invite_facebook@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2471592A19408E5F00B30301 /* invite_facebook@2x.png */; };
+		2471593919408E5F00B30301 /* invite_sms_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2471592B19408E5F00B30301 /* invite_sms_selected@2x.png */; };
+		2471593A19408E5F00B30301 /* invite_sms@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2471592C19408E5F00B30301 /* invite_sms@2x.png */; };
+		2471593B19408E5F00B30301 /* invite_twitter_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2471592D19408E5F00B30301 /* invite_twitter_selected@2x.png */; };
+		2471593C19408E5F00B30301 /* invite_twitter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2471592E19408E5F00B30301 /* invite_twitter@2x.png */; };
+		2471593D19408E5F00B30301 /* tumblr_disabled_saved@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2471592F19408E5F00B30301 /* tumblr_disabled_saved@2x.png */; };
+		2471593E19408E5F00B30301 /* tumblr_share_saved@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2471593019408E5F00B30301 /* tumblr_share_saved@2x.png */; };
+		2471593F19408E5F00B30301 /* Zpassword_box@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2471593119408E5F00B30301 /* Zpassword_box@2x.png */; };
+		247159411940907800B30301 /* premium_features@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 247159401940907800B30301 /* premium_features@2x.png */; };
 		24751A641938A1F600DF03B2 /* color_tab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24751A611938A1F600DF03B2 /* color_tab@2x.png */; };
 		24751A651938A1F600DF03B2 /* emoticons_tab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24751A621938A1F600DF03B2 /* emoticons_tab@2x.png */; };
 		24751A6A1938A3B300DF03B2 /* clipart_tab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24751A691938A3B300DF03B2 /* clipart_tab@2x.png */; };
@@ -1206,6 +1221,21 @@
 		246EF4DE193C515D004539B2 /* emoticon99@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emoticon99@2x.png"; sourceTree = "<group>"; };
 		246EF4DF193C515D004539B2 /* emoticon9@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emoticon9@2x.png"; sourceTree = "<group>"; };
 		246EF548193C5AE0004539B2 /* Emoticons-iPhone4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Emoticons-iPhone4.xib"; sourceTree = "<group>"; };
+		2471592419408E5F00B30301 /* facebook@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook@2x.png"; sourceTree = "<group>"; };
+		2471592519408E5F00B30301 /* flickr_disabled_saved@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flickr_disabled_saved@2x.png"; sourceTree = "<group>"; };
+		2471592619408E5F00B30301 /* flickr_share_saved@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flickr_share_saved@2x.png"; sourceTree = "<group>"; };
+		2471592719408E5F00B30301 /* instagram_disabled_saved@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "instagram_disabled_saved@2x.png"; sourceTree = "<group>"; };
+		2471592819408E5F00B30301 /* instagram_share_saved@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "instagram_share_saved@2x.png"; sourceTree = "<group>"; };
+		2471592919408E5F00B30301 /* invite_facebook_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "invite_facebook_selected@2x.png"; sourceTree = "<group>"; };
+		2471592A19408E5F00B30301 /* invite_facebook@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "invite_facebook@2x.png"; sourceTree = "<group>"; };
+		2471592B19408E5F00B30301 /* invite_sms_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "invite_sms_selected@2x.png"; sourceTree = "<group>"; };
+		2471592C19408E5F00B30301 /* invite_sms@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "invite_sms@2x.png"; sourceTree = "<group>"; };
+		2471592D19408E5F00B30301 /* invite_twitter_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "invite_twitter_selected@2x.png"; sourceTree = "<group>"; };
+		2471592E19408E5F00B30301 /* invite_twitter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "invite_twitter@2x.png"; sourceTree = "<group>"; };
+		2471592F19408E5F00B30301 /* tumblr_disabled_saved@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tumblr_disabled_saved@2x.png"; sourceTree = "<group>"; };
+		2471593019408E5F00B30301 /* tumblr_share_saved@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tumblr_share_saved@2x.png"; sourceTree = "<group>"; };
+		2471593119408E5F00B30301 /* Zpassword_box@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Zpassword_box@2x.png"; sourceTree = "<group>"; };
+		247159401940907800B30301 /* premium_features@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "premium_features@2x.png"; sourceTree = "<group>"; };
 		24751A611938A1F600DF03B2 /* color_tab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "color_tab@2x.png"; sourceTree = "<group>"; };
 		24751A621938A1F600DF03B2 /* emoticons_tab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emoticons_tab@2x.png"; sourceTree = "<group>"; };
 		24751A691938A3B300DF03B2 /* clipart_tab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clipart_tab@2x.png"; sourceTree = "<group>"; };
@@ -1857,6 +1887,21 @@
 		0DF3A361108DF47400D6C887 /* ImageLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				247159401940907800B30301 /* premium_features@2x.png */,
+				2471592419408E5F00B30301 /* facebook@2x.png */,
+				2471592519408E5F00B30301 /* flickr_disabled_saved@2x.png */,
+				2471592619408E5F00B30301 /* flickr_share_saved@2x.png */,
+				2471592719408E5F00B30301 /* instagram_disabled_saved@2x.png */,
+				2471592819408E5F00B30301 /* instagram_share_saved@2x.png */,
+				2471592919408E5F00B30301 /* invite_facebook_selected@2x.png */,
+				2471592A19408E5F00B30301 /* invite_facebook@2x.png */,
+				2471592B19408E5F00B30301 /* invite_sms_selected@2x.png */,
+				2471592C19408E5F00B30301 /* invite_sms@2x.png */,
+				2471592D19408E5F00B30301 /* invite_twitter_selected@2x.png */,
+				2471592E19408E5F00B30301 /* invite_twitter@2x.png */,
+				2471592F19408E5F00B30301 /* tumblr_disabled_saved@2x.png */,
+				2471593019408E5F00B30301 /* tumblr_share_saved@2x.png */,
+				2471593119408E5F00B30301 /* Zpassword_box@2x.png */,
 				249F214C193F62020072835E /* pinned_flyer_bg2@2x.png */,
 				249F2148193F615F0072835E /* Zmain_screenbg-568h@2x.png */,
 				249F2149193F615F0072835E /* Zmain_screenbg.png */,
@@ -3349,6 +3394,8 @@
 				30D58D1310FB1BF800E0C7E8 /* icon27.jpg in Resources */,
 				30D58D1410FB1BF800E0C7E8 /* icon28.jpg in Resources */,
 				30D58D1510FB1BF800E0C7E8 /* icon29.jpg in Resources */,
+				2471593919408E5F00B30301 /* invite_sms_selected@2x.png in Resources */,
+				2471593719408E5F00B30301 /* invite_facebook_selected@2x.png in Resources */,
 				30D58D1610FB1BF800E0C7E8 /* icon3.jpg in Resources */,
 				30D58D1710FB1BF800E0C7E8 /* icon30.jpg in Resources */,
 				249F1F9C193F55D50072835E /* app_store_selected@2x.png in Resources */,
@@ -3367,11 +3414,13 @@
 				30D58D1D10FB1BF800E0C7E8 /* icon36.jpg in Resources */,
 				30D58D1E10FB1BF800E0C7E8 /* icon37.jpg in Resources */,
 				30D58D1F10FB1BF800E0C7E8 /* icon38.jpg in Resources */,
+				2471593419408E5F00B30301 /* flickr_share_saved@2x.png in Resources */,
 				30D58D2010FB1BF800E0C7E8 /* icon39.jpg in Resources */,
 				30D58D2110FB1BF800E0C7E8 /* icon4.jpg in Resources */,
 				30D58D2210FB1BF800E0C7E8 /* icon40.jpg in Resources */,
 				30D58D2310FB1BF800E0C7E8 /* icon41.jpg in Resources */,
 				246EF4F3193C515D004539B2 /* emoticon23@2x.png in Resources */,
+				2471593F19408E5F00B30301 /* Zpassword_box@2x.png in Resources */,
 				30D58D2410FB1BF800E0C7E8 /* icon42.jpg in Resources */,
 				30D58D2510FB1BF800E0C7E8 /* icon43.jpg in Resources */,
 				30D58D2610FB1BF800E0C7E8 /* icon44.jpg in Resources */,
@@ -3534,6 +3583,7 @@
 				249F1FCA193F55E90072835E /* email_share_selected@2x.png in Resources */,
 				246EF528193C515D004539B2 /* emoticon71@2x.png in Resources */,
 				246EF476193C506B004539B2 /* Emoticons.xib in Resources */,
+				2471593E19408E5F00B30301 /* tumblr_share_saved@2x.png in Resources */,
 				246EF4F7193C515D004539B2 /* emoticon27@2x.png in Resources */,
 				246EF502193C515D004539B2 /* emoticon37@2x.png in Resources */,
 				246EF52A193C515D004539B2 /* emoticon73@2x.png in Resources */,
@@ -3629,6 +3679,7 @@
 				65C1A4251742516D00947D5E /* Template13@2x.jpg in Resources */,
 				65C1A4261742516D00947D5E /* Template14@2x.jpg in Resources */,
 				65C1A4271742516D00947D5E /* Template15@2x.jpg in Resources */,
+				2471593219408E5F00B30301 /* facebook@2x.png in Resources */,
 				65C1A4281742516D00947D5E /* Template16@2x.jpg in Resources */,
 				65C1A4291742516D00947D5E /* Template17@2x.jpg in Resources */,
 				65C1A42A1742516D00947D5E /* Template18@2x.jpg in Resources */,
@@ -3646,6 +3697,7 @@
 				65C1A4321742516D00947D5E /* Template26@2x.jpg in Resources */,
 				65C1A4331742516D00947D5E /* Template27@2x.jpg in Resources */,
 				65C1A4341742516D00947D5E /* Template28@2x.jpg in Resources */,
+				2471593819408E5F00B30301 /* invite_facebook@2x.png in Resources */,
 				24B75122193DA07C007B6B85 /* Cliparts-iPhone4.xib in Resources */,
 				65C1A4351742516D00947D5E /* Template29@2x.jpg in Resources */,
 				65C1A4361742516D00947D5E /* Template30@2x.jpg in Resources */,
@@ -3657,6 +3709,7 @@
 				65C1A43A1742516D00947D5E /* Template34@2x.jpg in Resources */,
 				249F1F8C193F55D50072835E /* 07_height_selected@2x.png in Resources */,
 				249F2045193F562C0072835E /* separator@2x.png in Resources */,
+				247159411940907800B30301 /* premium_features@2x.png in Resources */,
 				65C1A43B1742516D00947D5E /* Template35@2x.jpg in Resources */,
 				65C1A43C1742516D00947D5E /* Template36@2x.jpg in Resources */,
 				65C1A43D1742516D00947D5E /* Template37@2x.jpg in Resources */,
@@ -3730,6 +3783,7 @@
 				249F2147193F5FAB0072835E /* password_email_icon@2x.png in Resources */,
 				249F201D193F562C0072835E /* fb_setting@2x.png in Resources */,
 				246EF51B193C515D004539B2 /* emoticon5@2x.png in Resources */,
+				2471593C19408E5F00B30301 /* invite_twitter@2x.png in Resources */,
 				246EF52B193C515D004539B2 /* emoticon74@2x.png in Resources */,
 				0F8007CA175378F0000FF7FA /* ricon1.png in Resources */,
 				0F8007CC175378F0000FF7FA /* ricon2.png in Resources */,
@@ -3821,6 +3875,7 @@
 				202C639417EA06E800CB9A75 /* ricon30.png in Resources */,
 				4986857118B4FFC7002113E4 /* LibraryViewController.xib in Resources */,
 				202C639617EA06E800CB9A75 /* ricon31.png in Resources */,
+				2471593319408E5F00B30301 /* flickr_disabled_saved@2x.png in Resources */,
 				249F2035193F562C0072835E /* outline_button_selected@2x.png in Resources */,
 				202C639817EA06E800CB9A75 /* ricon32.png in Resources */,
 				202C639A17EA06E800CB9A75 /* ricon33.png in Resources */,
@@ -3901,6 +3956,7 @@
 				202C63F817EA06E800CB9A75 /* ricon80.png in Resources */,
 				20714DF9187F25E1000D6838 /* settingsrow.png in Resources */,
 				202C63FA17EA06E800CB9A75 /* ricon81.png in Resources */,
+				2471593519408E5F00B30301 /* instagram_disabled_saved@2x.png in Resources */,
 				202C63FC17EA06E800CB9A75 /* ricon82.png in Resources */,
 				202C63FE17EA06E800CB9A75 /* ricon83.png in Resources */,
 				249F2023193F562C0072835E /* help_icon@2x.png in Resources */,
@@ -3931,6 +3987,7 @@
 				249F1F98193F55D50072835E /* addbg_library@2x.png in Resources */,
 				200A818618D32C9D0095AA3E /* crop_and_resize.png in Resources */,
 				248A362D193F221E0005FCAD /* clipart_tab_selected@2x.png in Resources */,
+				2471593D19408E5F00B30301 /* tumblr_disabled_saved@2x.png in Resources */,
 				246EF4E5193C515D004539B2 /* emoticon10@2x.png in Resources */,
 				249F1FAF193F55D50072835E /* color_button_selected@2x.png in Resources */,
 				202D2ABA190155DA00E86C98 /* (null) in Resources */,
@@ -3938,6 +3995,7 @@
 				246EF4EE193C515D004539B2 /* emoticon19@2x.png in Resources */,
 				246EF4F2193C515D004539B2 /* emoticon22@2x.png in Resources */,
 				249F2043193F562C0072835E /* search_bg@2x.png in Resources */,
+				2471593B19408E5F00B30301 /* invite_twitter_selected@2x.png in Resources */,
 				246EF50B193C515D004539B2 /* emoticon45@2x.png in Resources */,
 				246EF4F1193C515D004539B2 /* emoticon21@2x.png in Resources */,
 				246EF4EB193C515D004539B2 /* emoticon16@2x.png in Resources */,
@@ -3958,6 +4016,7 @@
 				2026992E18CF200F00945218 /* blue_arrow.png in Resources */,
 				249F1F93193F55D50072835E /* addbg_border_selected@2x.png in Resources */,
 				246EF537193C515D004539B2 /* emoticon85@2x.png in Resources */,
+				2471593619408E5F00B30301 /* instagram_share_saved@2x.png in Resources */,
 				49B88988188652A2003766AD /* FacebookLikeView.html in Resources */,
 				2061ED8A17FF210300E9BECA /* icon@2x.png in Resources */,
 				246EF518193C515D004539B2 /* emoticon57@2x.png in Resources */,
@@ -3965,6 +4024,7 @@
 				246EF512193C515D004539B2 /* emoticon51@2x.png in Resources */,
 				249F202F193F562C0072835E /* main_area_bg@2x.png in Resources */,
 				246EF4E7193C515D004539B2 /* emoticon12@2x.png in Resources */,
+				2471593A19408E5F00B30301 /* invite_sms@2x.png in Resources */,
 				20CC6922180DA416002F2E6F /* icon.png in Resources */,
 				246EF524193C515D004539B2 /* emoticon68@2x.png in Resources */,
 				20CC6925180DA44C002F2E6F /* icon-60.png in Resources */,
