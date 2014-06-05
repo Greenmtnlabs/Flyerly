@@ -21,7 +21,7 @@
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="DTe-aL-aQf"/>
+                        <action selector="selectIcon:" destination="-1" eventType="touchUpInside" id="HwE-B2-InI"/>
                     </connections>
                 </button>
                 <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Q2c-JU-gO3">
@@ -34,7 +34,7 @@
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="mKh-2B-lv2"/>
+                        <action selector="selectIcon:" destination="-1" eventType="touchUpInside" id="Lcj-yR-r0K"/>
                     </connections>
                 </button>
                 <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="59O-V9-PlJ">
@@ -60,7 +60,7 @@
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="u7c-ne-yxB"/>
+                        <action selector="selectIcon:" destination="-1" eventType="touchUpInside" id="Ovl-CX-6F5"/>
                     </connections>
                 </button>
                 <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="PPW-if-OKA">
@@ -73,7 +73,7 @@
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="VsQ-SZ-TO1"/>
+                        <action selector="selectIcon:" destination="-1" eventType="touchUpInside" id="tFK-Wc-uj4"/>
                     </connections>
                 </button>
                 <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="3Id-8T-dNe">
@@ -86,7 +86,7 @@
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="LPS-lH-Q9Z"/>
+                        <action selector="selectIcon:" destination="-1" eventType="touchUpInside" id="Zod-3r-quc"/>
                     </connections>
                 </button>
                 <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="shg-du-43Z">
@@ -99,7 +99,7 @@
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="Z3I-c7-lOZ"/>
+                        <action selector="selectIcon:" destination="-1" eventType="touchUpInside" id="jve-7H-HUc"/>
                     </connections>
                 </button>
                 <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="VP8-a3-RCf">
@@ -112,7 +112,7 @@
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="Zb6-e0-teK"/>
+                        <action selector="selectIcon:" destination="-1" eventType="touchUpInside" id="1IW-sW-SBz"/>
                     </connections>
                 </button>
                 <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="tkJ-Vi-eTG">
@@ -125,7 +125,7 @@
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="SpF-Lg-EIr"/>
+                        <action selector="selectIcon:" destination="-1" eventType="touchUpInside" id="Wcn-DS-Z83"/>
                     </connections>
                 </button>
                 <button opaque="NO" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="jLJ-G8-7gl">
@@ -138,7 +138,7 @@
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="Gq1-2G-YKT"/>
+                        <action selector="selectIcon:" destination="-1" eventType="touchUpInside" id="RXM-Db-Z9C"/>
                     </connections>
                 </button>
                 <button opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="TkX-TW-msI">
@@ -151,7 +151,7 @@
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="phT-Ra-qQr"/>
+                        <action selector="selectIcon:" destination="-1" eventType="touchUpInside" id="xu1-sI-HYL"/>
                     </connections>
                 </button>
                 <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="eai-8w-DhW">
@@ -164,7 +164,7 @@
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="8jS-R0-MnQ"/>
+                        <action selector="selectIcon:" destination="-1" eventType="touchUpInside" id="UD5-02-R7N"/>
                     </connections>
                 </button>
                 <button opaque="NO" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="wLs-9n-hev">
@@ -177,7 +177,7 @@
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="uEn-hK-H9W"/>
+                        <action selector="selectIcon:" destination="-1" eventType="touchUpInside" id="Riy-yV-oPA"/>
                     </connections>
                 </button>
                 <button opaque="NO" tag="13" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="0Km-dS-gty">
@@ -190,7 +190,7 @@
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="YnC-Pb-2r1"/>
+                        <action selector="selectIcon:" destination="-1" eventType="touchUpInside" id="Qtq-Ch-DFm"/>
                     </connections>
                 </button>
                 <button opaque="NO" tag="14" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="NZU-Sn-Huh">
@@ -203,7 +203,7 @@
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="QMk-E8-rPP"/>
+                        <action selector="selectIcon:" destination="-1" eventType="touchUpInside" id="0fJ-Kg-aQ3"/>
                     </connections>
                 </button>
                 <button opaque="NO" tag="15" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="t6i-1E-cSI">
@@ -216,7 +216,7 @@
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="LPv-Ko-Mpp"/>
+                        <action selector="selectIcon:" destination="-1" eventType="touchUpInside" id="sSs-Zj-Dei"/>
                     </connections>
                 </button>
                 <button opaque="NO" tag="16" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Alh-pf-Lo6">
@@ -229,7 +229,7 @@
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="FIH-QF-e8a"/>
+                        <action selector="selectIcon:" destination="-1" eventType="touchUpInside" id="7ze-Ao-ock"/>
                     </connections>
                 </button>
                 <button opaque="NO" tag="17" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="v2q-za-Rs9">
@@ -242,7 +242,7 @@
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="30Z-sh-6aC"/>
+                        <action selector="selectIcon:" destination="-1" eventType="touchUpInside" id="Fsv-QO-UcL"/>
                     </connections>
                 </button>
                 <button opaque="NO" tag="18" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Vij-Q0-PHZ">
@@ -255,7 +255,7 @@
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="OKz-ZN-e5a"/>
+                        <action selector="selectIcon:" destination="-1" eventType="touchUpInside" id="VoN-ql-B0S"/>
                     </connections>
                 </button>
                 <button opaque="NO" tag="19" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bcn-k5-nia">
@@ -268,7 +268,7 @@
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="Nk3-BQ-bH7"/>
+                        <action selector="selectIcon:" destination="-1" eventType="touchUpInside" id="35D-aM-QW1"/>
                     </connections>
                 </button>
                 <button opaque="NO" tag="20" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bv8-fC-Apm">
@@ -281,7 +281,7 @@
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="x3H-ZQ-1s6"/>
+                        <action selector="selectIcon:" destination="-1" eventType="touchUpInside" id="mGt-IU-1IU"/>
                     </connections>
                 </button>
                 <button opaque="NO" tag="21" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Z14-Ip-z14">
@@ -294,7 +294,7 @@
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="R2Q-SQ-joA"/>
+                        <action selector="selectIcon:" destination="-1" eventType="touchUpInside" id="WRD-MI-ISL"/>
                     </connections>
                 </button>
                 <button opaque="NO" tag="22" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="6rO-yQ-t9e">
@@ -307,7 +307,7 @@
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="BTh-0i-98q"/>
+                        <action selector="selectIcon:" destination="-1" eventType="touchUpInside" id="cSw-Me-PIk"/>
                     </connections>
                 </button>
                 <button opaque="NO" tag="23" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="UAR-IF-4e2">
@@ -320,7 +320,7 @@
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="zbS-m9-Wgo"/>
+                        <action selector="selectIcon:" destination="-1" eventType="touchUpInside" id="rHl-FM-oik"/>
                     </connections>
                 </button>
                 <button opaque="NO" tag="24" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="XXb-vA-QHD">
@@ -333,7 +333,7 @@
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="RR0-a7-39e"/>
+                        <action selector="selectIcon:" destination="-1" eventType="touchUpInside" id="8ja-X7-Mx1"/>
                     </connections>
                 </button>
                 <button opaque="NO" tag="25" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="hsa-Tp-diJ">
@@ -346,7 +346,7 @@
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="2lA-bo-rwn"/>
+                        <action selector="selectIcon:" destination="-1" eventType="touchUpInside" id="SK8-B2-4SZ"/>
                     </connections>
                 </button>
                 <button opaque="NO" tag="26" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="aQc-mb-S0v">
@@ -359,7 +359,7 @@
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="B25-bG-mkt"/>
+                        <action selector="selectIcon:" destination="-1" eventType="touchUpInside" id="H9Z-yN-DZo"/>
                     </connections>
                 </button>
                 <button opaque="NO" tag="27" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="6ew-zP-u9n">
@@ -372,7 +372,7 @@
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="jIv-BZ-Ktt"/>
+                        <action selector="selectIcon:" destination="-1" eventType="touchUpInside" id="4ZB-e6-S50"/>
                     </connections>
                 </button>
                 <button opaque="NO" tag="28" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="eCa-zL-M96">
@@ -385,7 +385,7 @@
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="hDe-gn-wFL"/>
+                        <action selector="selectIcon:" destination="-1" eventType="touchUpInside" id="71J-p5-6kn"/>
                     </connections>
                 </button>
                 <button opaque="NO" tag="29" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="yTU-aY-Oa3">
@@ -398,7 +398,7 @@
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="TJW-pv-tMb"/>
+                        <action selector="selectIcon:" destination="-1" eventType="touchUpInside" id="5uy-19-svO"/>
                     </connections>
                 </button>
                 <button opaque="NO" tag="30" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="D3e-7V-DTB">
@@ -411,7 +411,7 @@
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="9hB-gm-rMy"/>
+                        <action selector="selectIcon:" destination="-1" eventType="touchUpInside" id="wzu-ke-Dfi"/>
                     </connections>
                 </button>
                 <button opaque="NO" tag="31" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="rzI-ZK-HZu">
@@ -424,7 +424,7 @@
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="7ZQ-fZ-VKF"/>
+                        <action selector="selectIcon:" destination="-1" eventType="touchUpInside" id="Cnw-bY-OmN"/>
                     </connections>
                 </button>
                 <button opaque="NO" tag="32" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="kue-tS-OOh">
@@ -437,7 +437,7 @@
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="10b-uB-JYS"/>
+                        <action selector="selectIcon:" destination="-1" eventType="touchUpInside" id="a2u-mN-hXP"/>
                     </connections>
                 </button>
                 <button opaque="NO" tag="33" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="0eW-8g-yx3">
@@ -450,7 +450,7 @@
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="TnR-wj-9cw"/>
+                        <action selector="selectIcon:" destination="-1" eventType="touchUpInside" id="rAJ-n5-ZZP"/>
                     </connections>
                 </button>
                 <button opaque="NO" tag="34" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="MAT-pn-xPW">
@@ -463,7 +463,7 @@
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="xNN-3w-a5G"/>
+                        <action selector="selectIcon:" destination="-1" eventType="touchUpInside" id="Ljj-9V-OdS"/>
                     </connections>
                 </button>
                 <button opaque="NO" tag="35" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="b14-MC-Oub">
@@ -476,7 +476,7 @@
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="5hj-bR-MlR"/>
+                        <action selector="selectIcon:" destination="-1" eventType="touchUpInside" id="2Df-sQ-3R2"/>
                     </connections>
                 </button>
                 <button opaque="NO" tag="36" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="hBh-YS-pCN">
@@ -489,7 +489,7 @@
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="c0c-R3-43j"/>
+                        <action selector="selectIcon:" destination="-1" eventType="touchUpInside" id="Wy6-pc-Ah9"/>
                     </connections>
                 </button>
                 <button opaque="NO" tag="37" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="gov-gZ-Kjy">
@@ -502,7 +502,7 @@
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="cWu-2G-10B"/>
+                        <action selector="selectIcon:" destination="-1" eventType="touchUpInside" id="Z2K-gq-Yec"/>
                     </connections>
                 </button>
                 <button opaque="NO" tag="38" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Rb0-Nh-w22">
@@ -515,7 +515,7 @@
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="Oku-js-Juj"/>
+                        <action selector="selectIcon:" destination="-1" eventType="touchUpInside" id="3nT-Em-Ide"/>
                     </connections>
                 </button>
                 <button opaque="NO" tag="39" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="zVE-jZ-z2f">
@@ -528,7 +528,7 @@
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="U94-Mm-fqU"/>
+                        <action selector="selectIcon:" destination="-1" eventType="touchUpInside" id="VFt-T4-TdV"/>
                     </connections>
                 </button>
                 <button opaque="NO" tag="40" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="cCW-2K-FG4">
@@ -541,7 +541,7 @@
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="4WA-0d-2gO"/>
+                        <action selector="selectIcon:" destination="-1" eventType="touchUpInside" id="oF2-bu-xfp"/>
                     </connections>
                 </button>
             </subviews>

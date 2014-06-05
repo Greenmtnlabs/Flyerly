@@ -1564,50 +1564,59 @@ int selectedAddMoreLayerTab = -1;
 -(IBAction)selectIcon:(id)sender
 {
     
-    UIButton *view = sender;
-    
     [Flurry logEvent:@"Clip Art Added"];
     
-    int lstTag = 500;
-    NSString *lastTag = [flyer getImageTag:currentLayer];
+    int  i=1;
+	UIButton *view = sender;
     
-    if (![lastTag isEqualToString:@""]) lstTag = [lastTag intValue];
+    int  index = [[mainView subviews] indexOfObject:view];
+    // Find out the path of Cliparts.plist
+    NSString *clipartsPlistPath = [[NSBundle mainBundle] pathForResource:@"Cliparts" ofType:@"plist"];
+    NSArray *cliparts = [[NSArray alloc] initWithContentsOfFile:clipartsPlistPath];
     
-    if (lstTag != view.tag) {
-        
-        NSString *imgPath = [self getImagePathByTag:[NSString stringWithFormat:@"ricon%d",view.tag]];
-        
-        //Set Symbol Image
-        [flyer setImagePath:currentLayer ImgPath:imgPath];
-        
-        //Set Image Tag
-        [flyer setImageTag:currentLayer Tag:[NSString stringWithFormat:@"%d",view.tag]];
-        
-        [self.flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
-        
-        //Here we Highlight The ImageView
-        [self.flyimgView layerIsBeingEdited:currentLayer];
-    }
+    UIFont *fontType = [UIFont fontWithName:[cliparts[i] objectForKey:@"fontType"] size:64.0f];
     
-    
-    //Handling Select Unselect
-    for(UIView *tempView  in [mainView subviews])
-    {
-        // Add border to Un-select layer thumbnail
-        CALayer * l = [tempView layer];
-        [l setBorderWidth:1];
-        [l setCornerRadius:8];
-        UIColor * c = [UIColor clearColor];
-        [l setBorderColor:c.CGColor];
-        
-        if(tempView == view)
-        {
-            // Add border to selected layer thumbnail
-            [l setBorderWidth:3.0];
-            UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
+	for(UIView *tempView  in [mainView subviews])
+	{
+        //CHECK UIIMAGEVIEW BECAUSE SCROLL VIEW HAVE ADDITIONAL
+        //SUBVIEWS OF UIIMAGEVIEW FOR FLASH INDICATORS
+        if (![tempView isKindOfClass:[UIImageView class]]) {
+            
+            // Add border to Un-select layer thumbnail
+            CALayer * l = [tempView layer];
+            
+            [l setBorderWidth:1];
+            [l setCornerRadius:8];
+            UIColor * c = [UIColor clearColor];
             [l setBorderColor:c.CGColor];
-        }
-    }
+            
+            if(tempView == view)
+            {
+                
+                [self.flyimgView addSubview:lastTextView];
+                
+                //Set Text of Layer
+                [flyer setFlyerText:currentLayer text:view.currentTitle ];
+                
+                selectedFont = fontType;
+                
+                [flyer setFlyerTextFont:currentLayer FontName:[cliparts[index] objectForKey:@"fontType"]];
+                
+                [flyer setFlyerTextSize:currentLayer Size:selectedFont];
+                
+                //Here we call Render Layer on View
+                [flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
+                
+                // Add border to selected layer thumbnail
+                CALayer * l = [tempView layer];
+                [l setBorderWidth:3.0];
+                UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
+                [l setBorderColor:c.CGColor];
+            }
+            i++;
+        }// uiImageView Found
+        
+	}// Loop
     
 }
 
