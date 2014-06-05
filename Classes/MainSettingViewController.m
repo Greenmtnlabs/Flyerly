@@ -114,7 +114,10 @@ NSMutableArray *productArray;
     NSString *title =[NSString stringWithFormat:@"%@",category[indexPath.row]];
     NSString *imgname =@"";
 
-    if (indexPath.row == 1){
+    if (indexPath.row == 0){
+        imgname = @"premium_features";
+    }
+    else if (indexPath.row == 1){
             
             imgname = @"save_gallery";
             [cell setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"settingsrow"]]];
