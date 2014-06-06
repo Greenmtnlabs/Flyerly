@@ -136,6 +136,8 @@
 
 -(UIImage *)getImageForVideo;
 
+-(void)setLayerType:(NSString *)uid type:(NSString *)type;
+-(NSString *)getLayerType:(NSString *)uid;
 
 
 -(NSString *)getText :(NSString *)uid;

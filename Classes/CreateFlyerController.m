@@ -38,6 +38,9 @@ int selectedAddMoreLayerTab = -1;
     //Render Flyer
     [self renderFlyer];
     
+    //Set Context View
+    [self addAllLayersIntoScrollView ];
+    
     NSString *title = [flyer getFlyerTitle];
     
     //HERE WE GET USER PURCHASES INFO FROM PARSE
@@ -244,9 +247,6 @@ int selectedAddMoreLayerTab = -1;
         
         //Set Undo Bar Status
         [self setUndoStatus];
-        
-        //Set Context View
-        [self addAllLayersIntoScrollView ];
         
         //Set Context Tabs
         [self addBottomTabs:libFlyer];
@@ -1109,6 +1109,8 @@ int selectedAddMoreLayerTab = -1;
     
     if( self.flyimgView.layers.count == 0 ){
         _addMoreLayerOrSaveFlyerLabel.alpha = 1;
+        _takeOrAddPhotoLabel.alpha = 0;
+        _videoLabel.alpha = 0;
         return;
     }
     
@@ -1524,6 +1526,10 @@ int selectedAddMoreLayerTab = -1;
         //Set Image Tag
         [flyer setImageTag:currentLayer Tag:[NSString stringWithFormat:@"%d",view.tag]];
         
+        // Set the layer type and make sure there is no text.
+        [flyer setLayerType:currentLayer type:FLYER_LAYER_EMOTICON];
+        [flyer setFlyerText:currentLayer text:nil];
+        
         [self.flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
         
         //Here we Highlight The ImageView
@@ -1598,6 +1604,11 @@ int selectedAddMoreLayerTab = -1;
                 
                 //Here we call Render Layer on View
                 [flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
+                
+                // Set the type
+                [flyer setLayerType:currentLayer type:FLYER_LAYER_CLIP_ART];
+                [flyer setImagePath:currentLayer ImgPath:nil];
+                [flyer setImageTag:currentLayer Tag:nil];
                 
                 // Add border to selected layer thumbnail
                 CALayer * l = [tempView layer];
@@ -2449,16 +2460,25 @@ int selectedAddMoreLayerTab = -1;
 	}
 }
 
+/**
+ * Clean up previous scrollviews.
+ */
+-(void)removeAllScrolviews {
+    // Remove only scrollViews
+    NSArray *viewsToRemove = [self.contextView subviews];
+    for (UIView *v in viewsToRemove) {
+        if ( [v isKindOfClass:[UIScrollView class]] ) {
+            [v removeFromSuperview];
+        }
+    }
+}
+
 /*
  * For ScrollView Adding On runtime
  */
 -(void)addScrollView:(id)obj{
-    
-    // Remove ScrollViews
-    NSArray *viewsToRemove = [self.contextView subviews];
-    for (UIView *v in viewsToRemove) {
-        [v removeFromSuperview];
-    }
+    // Remove previously added scrollviews.
+    [self removeAllScrolviews];
     
     //Add ScrollViews
     [self.contextView addSubview:obj];
@@ -2470,11 +2490,8 @@ int selectedAddMoreLayerTab = -1;
  */
 -(void)addBottomTabs:(id)obj{
     
-    // Remove ScrollViews
-    NSArray *viewsToRemove = [self.libraryContextView subviews];
-    for (UIView *v in viewsToRemove) {
-        [v removeFromSuperview];
-    }
+    // Remove previously added scrollviews.
+    [self removeAllScrolviews];
     
     //Add ScrollViews
     [self.libraryContextView addSubview:obj];
@@ -2827,52 +2844,22 @@ int selectedAddMoreLayerTab = -1;
     
     [self.flyimgView layerIsBeingEdited:currentLayer];
     
+    // Get the type of layer
+    NSString *type = [flyer getLayerType:currentLayer];
     
-    //when tap on Text Box
-    NSString *btnText = [flyer getText:currentLayer];
-    
-    if (![btnText isEqualToString:@""] && btnText != nil) {
+    if ( [type isEqualToString:FLYER_LAYER_TEXT] ) {
         
         lastTextView = [[UITextView  alloc] init];
-        lastTextView.text = btnText;
+        lastTextView.text = [flyer getText:currentLayer];
         
         lastTextView.accessibilityLabel = @"TextInput";
         
-        //For Immediate Showing Delete button
+        // For Immediate Showing Delete button
         [self callStyle];
-    }
-    
-    
-    //when tap on Image Box
-    NSString *imgName = [flyer getImageName:currentLayer];
-    
-    if (![imgName isEqualToString:@""] && imgName != nil) {
+    } else if ( [type isEqualToString:FLYER_LAYER_IMAGE] ) {
         
-        //when we tap on Symbols
-        if ([imgName rangeOfString:@"Symbol"].location == NSNotFound) {
-            NSLog(@"sub string doesnt exist");
-        } else {
-            // Call Icon
-            //[self setAddMoreLayerTabAction:addMoreIconTabButton];
-        }
-        
-        //when we tap on icon
-        if ([imgName rangeOfString:@"Icon"].location == NSNotFound) {
-            NSLog(@"sub string doesnt exist");
-        } else {
-            
-            // Call Symbol
-            [self setAddMoreLayerTabAction:addArtsTabButton];
-        }
-        
-        //when we tap on icon
-        if ([imgName rangeOfString:@"Photo"].location == NSNotFound) {
-            NSLog(@"sub string doesnt exist");
-        } else {
-            
-            // Call Photo Tab
-            [self setAddMoreLayerTabAction:addMorePhotoTabButton];
-        }
+        // Call Photo Tab
+        [self setAddMoreLayerTabAction:addMorePhotoTabButton];
     }
 }
 
@@ -3587,6 +3574,9 @@ int selectedAddMoreLayerTab = -1;
 
         [self openCustomCamera:YES];
         _videoLabel.alpha = 1;
+        
+        _addMoreLayerOrSaveFlyerLabel.alpha = 0;
+        _takeOrAddPhotoLabel.alpha = 0;
 
     }
     else if(selectedButton == cameraRoll)
@@ -3605,6 +3595,9 @@ int selectedAddMoreLayerTab = -1;
         
         //Add ContextView
         _videoLabel.alpha = 1;
+        
+        _addMoreLayerOrSaveFlyerLabel.alpha = 0;
+        _takeOrAddPhotoLabel.alpha = 0;
 
     }
     else if(selectedButton == flyerBorder)
@@ -3745,6 +3738,9 @@ int selectedAddMoreLayerTab = -1;
         
         //Here we Add Some Text In ScrolView
         _takeOrAddPhotoLabel.alpha = 1;
+        
+        _addMoreLayerOrSaveFlyerLabel.alpha = 0;
+        _videoLabel.alpha = 0;
 	    
         [self choosePhoto];
 		imgPickerFlag = 2;
@@ -3812,6 +3808,10 @@ int selectedAddMoreLayerTab = -1;
                 
                 [self openCustomCamera:YES];
                 _videoLabel.alpha = 1;
+                
+                _addMoreLayerOrSaveFlyerLabel.alpha = 0;
+                _takeOrAddPhotoLabel.alpha = 0;
+                
                 nbuCamera.isVideoFlyer = YES;
             }else {
                 [self openInAppPanel];
