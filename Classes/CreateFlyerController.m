@@ -1526,6 +1526,10 @@ int selectedAddMoreLayerTab = -1;
         //Set Image Tag
         [flyer setImageTag:currentLayer Tag:[NSString stringWithFormat:@"%d",view.tag]];
         
+        // Set the layer type and make sure there is no text.
+        [flyer setLayerType:currentLayer type:FLYER_LAYER_EMOTICON];
+        [flyer setFlyerText:currentLayer text:nil];
+        
         [self.flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
         
         //Here we Highlight The ImageView
@@ -1600,6 +1604,11 @@ int selectedAddMoreLayerTab = -1;
                 
                 //Here we call Render Layer on View
                 [flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
+                
+                // Set the type
+                [flyer setLayerType:currentLayer type:FLYER_LAYER_CLIP_ART];
+                [flyer setImagePath:currentLayer ImgPath:nil];
+                [flyer setImageTag:currentLayer Tag:nil];
                 
                 // Add border to selected layer thumbnail
                 CALayer * l = [tempView layer];
