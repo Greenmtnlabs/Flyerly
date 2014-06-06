@@ -38,6 +38,9 @@ int selectedAddMoreLayerTab = -1;
     //Render Flyer
     [self renderFlyer];
     
+    //Set Context View
+    [self addAllLayersIntoScrollView ];
+    
     NSString *title = [flyer getFlyerTitle];
     
     //HERE WE GET USER PURCHASES INFO FROM PARSE
@@ -244,9 +247,6 @@ int selectedAddMoreLayerTab = -1;
         
         //Set Undo Bar Status
         [self setUndoStatus];
-        
-        //Set Context View
-        [self addAllLayersIntoScrollView ];
         
         //Set Context Tabs
         [self addBottomTabs:libFlyer];
