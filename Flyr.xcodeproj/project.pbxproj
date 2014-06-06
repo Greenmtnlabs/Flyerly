@@ -372,6 +372,8 @@
 		2478E5E4192C7A6E0081B31B /* InAppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2478E5E2192C7A6E0081B31B /* InAppViewController.xib */; };
 		2478E5ED192C8C0A0081B31B /* FreeFeatureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2478E5EB192C8C0A0081B31B /* FreeFeatureCell.m */; };
 		2478E5EE192C8C0A0081B31B /* FreeFeatureCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2478E5EC192C8C0A0081B31B /* FreeFeatureCell.xib */; };
+		2479BC651941FB8400FF5FF5 /* TextBorders-iPhone4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2479BC631941FB8400FF5FF5 /* TextBorders-iPhone4.xib */; };
+		2479BC671941FB9400FF5FF5 /* TextBorders.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2479BC661941FB9400FF5FF5 /* TextBorders.xib */; };
 		24803523192F3207009403F7 /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24803522192F3207009403F7 /* CameraViewController.m */; };
 		248A3625193EF44D0005FCAD /* Entypo.otf in Resources */ = {isa = PBXBuildFile; fileRef = 248A3624193EF44D0005FCAD /* Entypo.otf */; };
 		248A3628193F20F30005FCAD /* video_tab_lock@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 248A3626193F20F30005FCAD /* video_tab_lock@2x.png */; };
@@ -1247,6 +1249,8 @@
 		2478E5EA192C8C0A0081B31B /* FreeFeatureCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreeFeatureCell.h; sourceTree = "<group>"; };
 		2478E5EB192C8C0A0081B31B /* FreeFeatureCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreeFeatureCell.m; sourceTree = "<group>"; };
 		2478E5EC192C8C0A0081B31B /* FreeFeatureCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FreeFeatureCell.xib; sourceTree = "<group>"; };
+		2479BC631941FB8400FF5FF5 /* TextBorders-iPhone4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "TextBorders-iPhone4.xib"; sourceTree = "<group>"; };
+		2479BC661941FB9400FF5FF5 /* TextBorders.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextBorders.xib; sourceTree = "<group>"; };
 		24803522192F3207009403F7 /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraViewController.m; sourceTree = "<group>"; };
 		248A3624193EF44D0005FCAD /* Entypo.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Entypo.otf; path = Data/fonts/Entypo.otf; sourceTree = "<group>"; };
 		248A3626193F20F30005FCAD /* video_tab_lock@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "video_tab_lock@2x.png"; sourceTree = "<group>"; };
@@ -2615,6 +2619,8 @@
 		20F3597C1888DC8A001376B6 /* CreateFlyer */ = {
 			isa = PBXGroup;
 			children = (
+				2479BC661941FB9400FF5FF5 /* TextBorders.xib */,
+				2479BC631941FB8400FF5FF5 /* TextBorders-iPhone4.xib */,
 				2075A9921899EAB600F410FB /* FlyerlyCustomClasses */,
 				2046355F1895E47100A94C42 /* Models */,
 				204635661895F90900A94C42 /* Controller */,
@@ -3704,6 +3710,7 @@
 				65C1A4371742516D00947D5E /* Template31@2x.jpg in Resources */,
 				246EF51C193C515D004539B2 /* emoticon60@2x.png in Resources */,
 				65C1A4381742516D00947D5E /* Template32@2x.jpg in Resources */,
+				2479BC651941FB8400FF5FF5 /* TextBorders-iPhone4.xib in Resources */,
 				249F214D193F62020072835E /* pinned_flyer_bg2@2x.png in Resources */,
 				65C1A4391742516D00947D5E /* Template33@2x.jpg in Resources */,
 				65C1A43A1742516D00947D5E /* Template34@2x.jpg in Resources */,
@@ -3779,6 +3786,7 @@
 				249F1FC5193F55E90072835E /* email_box@2x.png in Resources */,
 				249F2026193F562C0072835E /* icon_button@2x.png in Resources */,
 				49F109D2192C7926002B0CD4 /* CropVideoViewController.xib in Resources */,
+				2479BC671941FB9400FF5FF5 /* TextBorders.xib in Resources */,
 				249F201E193F562C0072835E /* flickr_share_selected@2x.png in Resources */,
 				249F2147193F5FAB0072835E /* password_email_icon@2x.png in Resources */,
 				249F201D193F562C0072835E /* fb_setting@2x.png in Resources */,
