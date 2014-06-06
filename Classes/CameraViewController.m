@@ -13,6 +13,7 @@
 @implementation CameraViewController
 
 NSMutableArray *productArray;
+@synthesize isVideoFlyer;
 
 /**
  * Setup the controller.
@@ -274,9 +275,21 @@ NSMutableArray *productArray;
         }
     
     }else {
-        [self openPanel];
+       
+        if ( [_mode isSelected] == NO) {
+            [self openPanel];
+        }
+        
+        //Enable Camera Mode
+        [_mode setSelected:NO];
+        [shoot setImage:[UIImage imageNamed:@"camera_button"] forState:UIControlStateNormal];
+        [shoot setImage:[UIImage imageNamed:@"camera_button"] forState:UIControlStateSelected];
+        [flash setHidden:NO];
+        _progressView.hidden = YES;
+        
     }
     
+    isVideoFlyer = NO;
 }
 
 /*
@@ -400,10 +413,11 @@ NSMutableArray *productArray;
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     UserPurchases *userPurchases_ = appDelegate.userPurchases;
     if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
-        [userPurchases_ checkKeyExistsInPurchases:@"com.flyerly.UnlockCreateVideoFlyerOption"] ) {
+         [userPurchases_ checkKeyExistsInPurchases:@"com.flyerly.UnlockCreateVideoFlyerOption"] ) {
         
         UIImage *buttonImage = [UIImage imageNamed:@"ModeVideo.png"];
         [_mode setImage:buttonImage forState:UIControlStateNormal];
+        [self dismissModalViewControllerAnimated:NO];
     }
     
 }
@@ -415,8 +429,6 @@ NSMutableArray *productArray;
     
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     UserPurchases *userPurchases_ = appDelegate.userPurchases;
-    //NSMutableDictionary *oldPurchases =  userPurchases_.oldPurchases;//[[NSUserDefaults standardUserDefaults] valueForKey:@"InAppPurchases"];
-    
     
     if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
         [userPurchases_ checkKeyExistsInPurchases:@"com.flyerly.UnlockCreateVideoFlyerOption"] ) {
