@@ -271,7 +271,16 @@ NSMutableArray *productArray;
                 _progressView.hidden = NO;
             }
         }else {
-            [self openPanel];
+            if ( [_mode isSelected] == NO) {
+                [self openPanel];
+            }
+            
+            //Enable Camera Mode
+            [_mode setSelected:NO];
+            [shoot setImage:[UIImage imageNamed:@"camera_button"] forState:UIControlStateNormal];
+            [shoot setImage:[UIImage imageNamed:@"camera_button"] forState:UIControlStateSelected];
+            [flash setHidden:NO];
+            _progressView.hidden = YES;
         }
     
     }else {
