@@ -299,6 +299,8 @@ NSMutableArray *productArray;
             
             // Keep a reference to navigation controller as we are going to pop this view controller mid way
             UINavigationController* navigationController = self.navigationController;
+            __weak UserPurchases *userPurchases_ = appDelegate.userPurchases;
+            
             
             signInController.signInCompletion = ^void(void) {
                 
@@ -309,7 +311,7 @@ NSMutableArray *productArray;
                 // This should be done in a better way e.g., reloadData instead of popping it out and pushing a new one
                 MainSettingViewController *mainsettingviewcontroller = [[MainSettingViewController alloc]initWithNibName:@"MainSettingViewController" bundle:nil] ;
                 [navigationController pushViewController:mainsettingviewcontroller animated:YES];
-                
+                [userPurchases_ setUserPurcahsesFromParse];
             };
             
             // Pop out settings controller
