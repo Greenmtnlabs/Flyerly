@@ -29,18 +29,11 @@
     [l setBorderColor:[[UIColor grayColor] CGColor]];
     
     // Setup title text field
-    //[titleView addTarget:delegate action:@selector(textFieldFinished:) forControlEvents:UIControlEventEditingDidBegin];
-    //[titleView setReturnKeyType:UIReturnKeyDone];
-    //[titleView addTarget:self action:@selector(textFieldFinished:) forControlEvents: UIControlEventEditingDidEndOnExit];
-    //[titleView addTarget:self action:@selector(textFieldTapped:) forControlEvents:UIControlEventEditingDidBegin];
-
+    [titleView setReturnKeyType:UIReturnKeyDone];
+    [titleView addTarget:self action:@selector(textFieldFinished:) forControlEvents: UIControlEventEditingDidEndOnExit];
+    [titleView addTarget:self action:@selector(textFieldTapped:) forControlEvents:UIControlEventEditingDidBegin];
     titleView.placeholder = @"Flyerly Title (e.g. \"Parker's Party\")";
-    
-    
-//    UITapGestureRecognizer *tapped = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(textFieldTapped:)];
-//    tapped.numberOfTapsRequired = 1;
-//    [self.titleView addGestureRecognizer:tapped];
-    [titleView setUserInteractionEnabled:YES];
+
 
     descriptionView = [[UIPlaceHolderTextView alloc] initWithFrame:CGRectMake(12, 79, 296, 83)];
  
@@ -316,6 +309,7 @@
  * Called when clicked on description text view
  */
 - (void)textViewTapped:(id)sender {
+    
     
     [descriptionView becomeFirstResponder];
 }
