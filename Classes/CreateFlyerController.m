@@ -3220,22 +3220,29 @@ int selectedAddMoreLayerTab = -1;
 	}
     else if(selectedButton == artsColorTabButton)
 	{
-        
-        //HERE WE SET ANIMATION
-        [UIView animateWithDuration:0.4f
-                         animations:^{
-                             //Create ScrollView
-                             [self addColorsInSubView];
-                         }
-                         completion:^(BOOL finished){
-                             [layerScrollView flashScrollIndicators];
-                         }];
-        //END ANIMATION
-        
-        //Add ContextView
-        [self addScrollView:layerScrollView];
-        [artsColorTabButton setSelected:YES];
-	}
+        // Set the type
+        if ( [[flyer getLayerType:currentLayer] isEqualToString:FLYER_LAYER_EMOTICON] ) {
+            
+            _addMoreLayerOrSaveFlyerLabel.alpha = 1;
+            _addMoreLayerOrSaveFlyerLabel.text = @"COLORS CANNOT APPLY BE APPLIED ON EMOTICONS";
+            
+        }else {
+            //HERE WE SET ANIMATION
+            [UIView animateWithDuration:0.4f
+                             animations:^{
+                                 //Create ScrollView
+                                 [self addColorsInSubView];
+                             }
+                             completion:^(BOOL finished){
+                                 [layerScrollView flashScrollIndicators];
+                             }];
+            //END ANIMATION
+            
+            //Add ContextView
+            [self addScrollView:layerScrollView];
+            [artsColorTabButton setSelected:YES];
+        }
+    }
     else if(selectedButton == artsSizeTabButton)
 	{
         
