@@ -78,8 +78,18 @@
     // Checking for Label or ImageView
     if ([layDic objectForKey:@"image"] == nil) {
         
+        id lastControl = [layers objectForKey:uid];
+        
+        // If we have switched from an image to a text view, then we need to
+        // make a new label.
+        if ( lastControl != nil && [layDic objectForKey:@"text"] != nil &&
+            ![lastControl isKindOfClass:[CustomLabel class]] ) {
+            [lastControl removeFromSuperview];
+            lastControl = nil;
+        }
+        
         //Check Layer Exist in Master Layers
-        if ([layers objectForKey:uid] == nil) {
+        if ( lastControl == nil) {
             
             CustomLabel *lble = [[CustomLabel alloc] init];
             lble.tag = layers.count;
@@ -94,18 +104,15 @@
             
             view = lble;
         } else {
-            
-            
-            id lastControl = [layers objectForKey:uid];
-            
+
             if ([lastControl isKindOfClass:[CustomLabel class]]) {
                 
                 //here we Update Label
                 CustomLabel *lble = [layers objectForKey:uid];
                 [self configureLabel:lble labelDictionary:layDic ];
                 [layers setValue:lble forKey:uid];
-                
-            }else {
+            
+            } else {
             
                 //here we Update ImageView
                 UIImageView *img = [layers objectForKey:uid];
@@ -114,9 +121,18 @@
             }
         }
     } else {
+        id lastControl = [layers objectForKey:uid];
+        
+        // If we have switched from an text to a image view, then we need to
+        // make a new label.
+        if ( lastControl != nil &&
+            ![lastControl isKindOfClass:[UIImageView class]] ) {
+            [lastControl removeFromSuperview];
+            lastControl = nil;
+        }
 
         // Check Layer Exist in Master Layers
-        if ([layers objectForKey:uid] == nil) {
+        if ( lastControl == nil) {
             
             // Here We Write Code for Image
             UIImageView *img = [[UIImageView alloc]initWithFrame:CGRectMake(10,10, 90, 70)];
