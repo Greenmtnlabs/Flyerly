@@ -21,7 +21,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 @synthesize contextView,libraryContextView,libFlyer,backgroundTabButton,addMoreFontTabButton;
 @synthesize libText,libBackground,libArts,libPhoto,libEmpty,backtemplates,cameraTakePhoto,cameraRoll,flyerBorder;
 @synthesize flyimgView,currentLayer,layersDic,flyer,player,playerView,playerToolBar,playButton,playerSlider,tempelateView;
-@synthesize durationLabel,durationChange,onFlyerBack,mainView;
+@synthesize durationLabel,durationChange,onFlyerBack;
+@synthesize backgroundsView,flyerBordersView,fontsView,colorsView,sizesView,textBordersView,clipartsView,emoticonsView;
 int selectedAddMoreLayerTab = -1;
 
 
@@ -250,6 +251,60 @@ int selectedAddMoreLayerTab = -1;
         
         //Set Context Tabs
         [self addBottomTabs:libFlyer];
+        
+        if(IS_IPHONE_5){
+            NSArray *flyerbackgroundsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Backgrounds" owner:self options:nil];
+            backgroundsView = [flyerbackgroundsViewArray objectAtIndex:0];
+            
+            NSArray *flyerBordersViewArray = [[NSBundle mainBundle] loadNibNamed:@"Borders" owner:self options:nil];
+            flyerBordersView = [flyerBordersViewArray objectAtIndex:0];
+            
+            NSArray *fontViewArray = [[NSBundle mainBundle] loadNibNamed:@"Fonts" owner:self options:nil];
+            fontsView = [fontViewArray objectAtIndex:0];
+            
+            NSArray *fontColorsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Colours" owner:self options:nil];
+            colorsView = [fontColorsViewArray objectAtIndex:0];
+            
+            NSArray *fontSizesViewArray = [[NSBundle mainBundle] loadNibNamed:@"Sizes" owner:self options:nil];
+            sizesView = [fontSizesViewArray objectAtIndex:0];
+            
+            NSArray *textBordersViewArray = [[NSBundle mainBundle] loadNibNamed:@"TextBorders" owner:self options:nil];
+            textBordersView = [textBordersViewArray objectAtIndex:0];
+            
+            NSArray *clipartsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Cliparts" owner:self options:nil];
+            clipartsView = [clipartsViewArray objectAtIndex:0];
+            
+            NSArray *emoticonsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Emoticons" owner:self options:nil];
+            emoticonsView = [emoticonsViewArray objectAtIndex:0];
+            
+        } else {
+            
+            NSArray *flyerbackgroundsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Backgrounds-iPhone4" owner:self options:nil];
+            backgroundsView = [flyerbackgroundsViewArray objectAtIndex:0];
+            
+            NSArray *flyerBordersViewArray = [[NSBundle mainBundle] loadNibNamed:@"Borders-iPhone4" owner:self options:nil];
+            flyerBordersView = [flyerBordersViewArray objectAtIndex:0];
+            
+            NSArray *fontViewArray = [[NSBundle mainBundle] loadNibNamed:@"Fonts-iPhone4" owner:self options:nil];
+            fontsView = [fontViewArray objectAtIndex:0];
+            
+            NSArray *fontColorsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Colours-iPhone4" owner:self options:nil];
+            colorsView = [fontColorsViewArray objectAtIndex:0];
+            
+            NSArray *fontSizesViewArray = [[NSBundle mainBundle] loadNibNamed:@"Sizes-iPhone4" owner:self options:nil];
+            sizesView = [fontSizesViewArray objectAtIndex:0];
+            
+            NSArray *textBordersViewArray = [[NSBundle mainBundle] loadNibNamed:@"TextBorders-iPhone4" owner:self options:nil];
+            textBordersView = [textBordersViewArray objectAtIndex:0];
+            
+            NSArray *clipartsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Cliparts-iPhone4" owner:self options:nil];
+            clipartsView = [clipartsViewArray objectAtIndex:0];
+            
+            NSArray *emoticonsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Emoticons-iPhone4" owner:self options:nil];
+            emoticonsView = [emoticonsViewArray objectAtIndex:0];
+        }
+        
+        
     });
 }
 
@@ -366,24 +421,19 @@ int selectedAddMoreLayerTab = -1;
         //Delete SubViews From ScrollView
         [self deleteSubviewsFromScrollView];
 
-
-        //[layerScrollView addSubview:tempelateView];
         if(IS_IPHONE_5){
-            NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"Backgrounds" owner:self options:nil];
-            mainView = [subviewArray objectAtIndex:0];
-            [layerScrollView addSubview:mainView];
             
-            [layerScrollView setContentSize:CGSizeMake(320, mainView.frame.size.height)];
+            [layerScrollView addSubview:backgroundsView];
+            [layerScrollView setContentSize:CGSizeMake(320, backgroundsView.frame.size.height)];
+            
         } else {
             
-            NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"Backgrounds-iPhone4" owner:self options:nil];
-            mainView = [subviewArray objectAtIndex:0];
-            [layerScrollView addSubview:mainView];
+            [layerScrollView addSubview:backgroundsView];
+            [layerScrollView setContentSize:CGSizeMake(backgroundsView.frame.size.width, [layerScrollView bounds].size.height)];
             
-            [layerScrollView setContentSize:CGSizeMake(mainView.frame.size.width, [layerScrollView bounds].size.height)];
         }
-
-        for (UIView *sub in mainView.subviews) {
+        
+        for (UIView *sub in backgroundsView.subviews) {
             if ([sub isKindOfClass:[UIButton class]]) {
                 UIButton *btn = (UIButton *) sub;
                 [btn addTarget:self action:@selector(selectTemplate:) forControlEvents:UIControlEventTouchUpInside];
@@ -393,10 +443,96 @@ int selectedAddMoreLayerTab = -1;
     });
 }
 
+
 /*
- * Add ClipArts in scroll views
+ * Add flyer borders in scroll views
  */
--(void)addClipArtsInSubView{
+-(void)addFlyerBorderInSubView {
+    
+    //Delete Subviews From ScrollView
+    [self deleteSubviewsFromScrollView];
+    
+    CGFloat curXLoc = 0;
+    CGFloat curYLoc = 5;
+    int increment = 5;
+    
+    if(IS_IPHONE_5){
+        curXLoc = 13;
+        curYLoc = 10;
+        increment = 8;
+    }
+    
+    NSMutableDictionary *templateDic;
+    NSString *textColor;
+    NSString *textWhiteColor;
+    
+    //Getting Last Info of Text Layer
+    templateDic = [flyer getLayerFromMaster:@"Template"];
+    textColor = [templateDic objectForKey:@"bordercolor"];
+    textWhiteColor = [templateDic objectForKey:@"bordercolorWhite"];
+    
+    // Load sizes xib asynchronously
+    dispatch_async( dispatch_get_main_queue(), ^{
+        
+        if(IS_IPHONE_5){
+            
+            [layerScrollView addSubview:flyerBordersView];
+            [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
+            
+            
+        } else {
+            
+            [layerScrollView addSubview:flyerBordersView];
+            [layerScrollView setContentSize:CGSizeMake(flyerBordersView.frame.size.width, [layerScrollView bounds].size.height)];
+        }
+        
+        NSArray *bodersArray = flyerBordersView.subviews;
+        int count = (bodersArray.count)/3;
+        
+        int i=1;
+        for (int index = 0; index < count; index++ )
+        {
+            
+            UIColor *colorName = borderArray[(i-1)];
+            
+            //Here we Highlight Last Color Selected
+            if (textColor != nil) {
+                
+                NSString *tcolor;
+                NSString *twhite;
+                CGFloat red = 0.0, green = 0.0, blue = 0.0, alpha = 0.0,wht = 0.0;
+                
+                UILabel *labelToStore = [[UILabel alloc]init];
+                labelToStore.textColor = colorName;
+                
+                //Getting RGB Color Code
+                [labelToStore.textColor getRed:&red green:&green blue:&blue alpha:&alpha];
+                
+                tcolor = [NSString stringWithFormat:@"%f, %f, %f", red, green, blue];
+                
+                [labelToStore.textColor getWhite:&wht alpha:&alpha];
+                twhite = [NSString stringWithFormat:@"%f, %f", wht, alpha];
+                
+                if ([textColor isEqualToString:tcolor] && [textWhiteColor isEqualToString:twhite] ) {
+                    // Add border to selected layer thumbnail
+                    //color.backgroundColor = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
+                }
+                
+                i++;
+            }
+        }// Loop
+        
+        /*for (int counter = 2; counter  < bodersArray.count; counter += 3) {
+            NSLog(@"%d",counter);
+            [[bodersArray objectAtIndex:counter] addTarget:self action:@selector(selectBorder:) forControlEvents:UIControlEventTouchUpInside];
+        }*/
+    });
+}
+
+/*
+ * Add fonts in scroll views
+ */
+-(void)addFontsInSubView{
     
     [self deleteSubviewsFromScrollView];
     
@@ -415,118 +551,22 @@ int selectedAddMoreLayerTab = -1;
         
         NSMutableDictionary *textLayer;
         NSString *textFamily;
-        NSArray *subviewArray;
         
         if(IS_IPHONE_5){
-            subviewArray = [[NSBundle mainBundle] loadNibNamed:@"Cliparts" owner:self options:nil];
-            mainView = [subviewArray objectAtIndex:0];
-            [layerScrollView addSubview:mainView];
             
+            [layerScrollView addSubview:fontsView];
+            [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
             
-            [layerScrollView setContentSize:CGSizeMake(320, mainView.frame.size.height)];
-            //[layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
         } else {
             
-            subviewArray = [[NSBundle mainBundle] loadNibNamed:@"Cliparts-iPhone4" owner:self options:nil];
-            mainView = [subviewArray objectAtIndex:0];
-            [layerScrollView addSubview:mainView];
+            [layerScrollView addSubview:fontsView];
+            [layerScrollView setContentSize:CGSizeMake(fontsView.frame.size.width, [layerScrollView bounds].size.height)];
             
-            
-            [layerScrollView setContentSize:CGSizeMake(mainView.frame.size.width, [layerScrollView bounds].size.height)];
-            //[layerScrollView setContentSize:CGSizeMake(mainView.frame.size.width, [layerScrollView bounds].size.height)];
         }
         
-        mainView = [subviewArray objectAtIndex:0];
-        NSArray *fontsArray = mainView.subviews;
+        NSArray *fontsArray = fontsView.subviews;
         
         //Getting Last Info of Text Layer
-        if (![currentLayer isEqualToString:@""]) {
-            textLayer = [flyer getLayerFromMaster:currentLayer];
-            textFamily = [textLayer objectForKey:@"fontname"];
-        }
-        
-        // Find out the path of Cliparts.plist
-        NSString *clipartsPlistPath = [[NSBundle mainBundle] pathForResource:@"Cliparts" ofType:@"plist"];
-        NSArray *cliparts = [[NSArray alloc] initWithContentsOfFile:clipartsPlistPath];
-        
-        for (int i = 0; i < [cliparts count] ; i++)
-        {
-            UIButton *font;
-            if ([fontsArray[i] isKindOfClass:[UIButton class]]) {
-                font = (UIButton *) fontsArray[i];
-            }
-            
-            UIFont *fontType = [UIFont fontWithName:[cliparts[i] objectForKey:@"fontType"] size:33.0f];
-            
-            [font.titleLabel setFont: fontType];
-            
-            [font setTitle:[cliparts[i] objectForKey:@"character" ] forState:UIControlStateNormal];
-
-        }
-    });
-}
-
-
-/*
- * Add Arts Colors in scroll views
- */
--(void)addArtsColorsInSubView{
-    
-}
-
-/*
- * Add Arts Sizes in scroll views
- */
--(void)addArtsSizesInSubView{
-    
-}
-
-
-
-/*
- * Add fonts in scroll views
- */
--(void)addFontsInSubView{
-    
-    [self deleteSubviewsFromScrollView];
-    
-    
-        CGFloat curXLoc = 0;
-        CGFloat curYLoc = 5;
-        int increment = 5;
-        
-        if(IS_IPHONE_5){
-             curXLoc = 13;
-            curYLoc = 10;
-            increment = 8;
-        }
-
-        // Load sizes xib asynchronously
-        dispatch_async( dispatch_get_main_queue(), ^{
-            
-        NSMutableDictionary *textLayer;
-        NSString *textFamily;
-        NSArray *subviewArray;
-        
-        if(IS_IPHONE_5){
-            subviewArray = [[NSBundle mainBundle] loadNibNamed:@"Fonts" owner:self options:nil];
-            mainView = [subviewArray objectAtIndex:0];
-            [layerScrollView addSubview:mainView];
-            
-            [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
-        } else {
-            
-            subviewArray = [[NSBundle mainBundle] loadNibNamed:@"Fonts-iPhone4" owner:self options:nil];
-            mainView = [subviewArray objectAtIndex:0];
-            [layerScrollView addSubview:mainView];
-            
-            [layerScrollView setContentSize:CGSizeMake(mainView.frame.size.width, [layerScrollView bounds].size.height)];
-        }
-        
-        mainView = [subviewArray objectAtIndex:0];
-        NSArray *fontsArray = mainView.subviews;
-        
-       //Getting Last Info of Text Layer
         if (![currentLayer isEqualToString:@""]) {
             textLayer = [flyer getLayerFromMaster:currentLayer];
             textFamily = [textLayer objectForKey:@"fontname"];
@@ -536,7 +576,7 @@ int selectedAddMoreLayerTab = -1;
         {
             UIButton *font;
             if ([fontsArray[i-1] isKindOfClass:[UIButton class]]) {
-                font = (UIButton *) fontsArray[i-1];            
+                font = (UIButton *) fontsArray[i-1];
             }
             
             UIFont *fontname =fontArray[(i-1)];
@@ -558,93 +598,8 @@ int selectedAddMoreLayerTab = -1;
             }
         }
     });
-
 }
 
-/*
- * Add sizes in scroll views
- */
--(void)addSizeInSubView{
-    
-    //DELETE SUBVIEWS
-    [self deleteSubviewsFromScrollView];
-    
-    CGFloat curXLoc = 0;
-    CGFloat curYLoc = 5;
-    int increment = 5;
-    
-    if(IS_IPHONE_5){
-        curXLoc = 13;
-        curYLoc = 10;
-        increment = 8;
-    }
-
-    NSMutableDictionary *textLayer;
-    NSString *textSize;
-
-    
-    //Getting Last Info of Text Layer
-    if (![currentLayer isEqualToString:@""]) {
-        textLayer = [flyer getLayerFromMaster:currentLayer];
-        textSize = [textLayer objectForKey:@"fontsize"];
-    }
-    
-    // Load sizes xib asynchronously
-    dispatch_async( dispatch_get_main_queue(), ^{
-        
-        NSArray *subviewArray;
-        
-        if(IS_IPHONE_5){
-            
-            subviewArray = [[NSBundle mainBundle] loadNibNamed:@"Sizes" owner:self options:nil];
-          
-            mainView = [subviewArray objectAtIndex:0];
-            [layerScrollView addSubview:mainView];
-            
-            [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
-        } else {
-            
-            subviewArray = [[NSBundle mainBundle] loadNibNamed:@"Sizes-iPhone4" owner:self options:nil];
-            mainView = [subviewArray objectAtIndex:0];
-            [layerScrollView addSubview:mainView];
-            
-            [layerScrollView setContentSize:CGSizeMake(mainView.frame.size.width, [layerScrollView bounds].size.height)];
-        }
-        
-        mainView = [subviewArray objectAtIndex:0];
-        NSArray *sizesArray = mainView.subviews;
-        
-        for (int i = 1; i <=  [SIZE_ARRAY count] ; i++)
-        {
-            
-            UIButton *size;
-            if ([sizesArray[i-1] isKindOfClass:[UIButton class]]) {
-                size = (UIButton *) sizesArray[i-1];
-            }
-            
-            NSString *sizeValue =SIZE_ARRAY[(i-1)];
-            [size setTitle:sizeValue forState:UIControlStateNormal];
-            
-            //Here we Highlight Last Size Selected
-            if (textLayer) {
-                
-                NSString *tsize = [NSString stringWithFormat:@"%f", [sizeValue floatValue]];
-                
-                if ([textSize isEqualToString:tsize]) {
-                    
-                    // Add border to selected layer thumbnail
-                    [size.layer setBorderWidth:3.0];
-                    [size.layer setCornerRadius:8];
-                    UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
-                    [size.layer setBorderColor:c.CGColor];
-                }
-                
-            }
-        
-        }
-    });
-    
-}
 
 /*
  * Add colors in scroll views
@@ -677,28 +632,22 @@ int selectedAddMoreLayerTab = -1;
     
     // Load sizes xib asynchronously
     dispatch_async( dispatch_get_main_queue(), ^{
-        NSArray *subviewArray;
         
         if(IS_IPHONE_5){
-            subviewArray = [[NSBundle mainBundle] loadNibNamed:@"Colours" owner:self options:nil];
-            mainView = [subviewArray objectAtIndex:0];
-            [layerScrollView addSubview:mainView];
             
+            [layerScrollView addSubview:colorsView];
             [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
+            
         } else {
             
-            subviewArray = [[NSBundle mainBundle] loadNibNamed:@"Colours-iPhone4s" owner:self options:nil];
-            mainView = [subviewArray objectAtIndex:0];
-            [layerScrollView addSubview:mainView];
-            
-            [layerScrollView setContentSize:CGSizeMake(mainView.frame.size.width, [layerScrollView bounds].size.height)];
+            [layerScrollView addSubview:colorsView];
+            [layerScrollView setContentSize:CGSizeMake(colorsView.frame.size.width, [layerScrollView bounds].size.height)];
         }
         
-        mainView = [subviewArray objectAtIndex:0];
-        NSArray *coloursArray = mainView.subviews;
+        NSArray *coloursArray = colorsView.subviews;
         
         for (int i = 1; i <=  [colorArray count] ; i++)
-        {        
+        {
             UIButton *color;
             if ([coloursArray[i-1] isKindOfClass:[UIButton class]]) {
                 color = (UIButton *) coloursArray[i-1];
@@ -737,6 +686,83 @@ int selectedAddMoreLayerTab = -1;
     });
 }
 
+
+/*
+ * Add sizes in scroll views
+ */
+-(void)addSizeInSubView{
+    
+    //DELETE SUBVIEWS
+    [self deleteSubviewsFromScrollView];
+    
+    CGFloat curXLoc = 0;
+    CGFloat curYLoc = 5;
+    int increment = 5;
+    
+    if(IS_IPHONE_5){
+        curXLoc = 13;
+        curYLoc = 10;
+        increment = 8;
+    }
+    
+    NSMutableDictionary *textLayer;
+    NSString *textSize;
+    
+    
+    //Getting Last Info of Text Layer
+    if (![currentLayer isEqualToString:@""]) {
+        textLayer = [flyer getLayerFromMaster:currentLayer];
+        textSize = [textLayer objectForKey:@"fontsize"];
+    }
+    
+    // Load sizes xib asynchronously
+    dispatch_async( dispatch_get_main_queue(), ^{
+        
+        if(IS_IPHONE_5){
+            
+            [layerScrollView addSubview:sizesView];
+            [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
+            
+        } else {
+            
+            [layerScrollView addSubview:sizesView];
+            [layerScrollView setContentSize:CGSizeMake(sizesView.frame.size.width, [layerScrollView bounds].size.height)];
+            
+        }
+        
+        NSArray *sizesArray = sizesView.subviews;
+        for (int i = 1; i <=  [SIZE_ARRAY count] ; i++)
+        {
+            
+            UIButton *size;
+            if ([sizesArray[i-1] isKindOfClass:[UIButton class]]) {
+                size = (UIButton *) sizesArray[i-1];
+            }
+            
+            NSString *sizeValue =SIZE_ARRAY[(i-1)];
+            [size setTitle:sizeValue forState:UIControlStateNormal];
+            
+            //Here we Highlight Last Size Selected
+            if (textLayer) {
+                
+                NSString *tsize = [NSString stringWithFormat:@"%f", [sizeValue floatValue]];
+                
+                if ([textSize isEqualToString:tsize]) {
+                    
+                    // Add border to selected layer thumbnail
+                    [size.layer setBorderWidth:3.0];
+                    [size.layer setCornerRadius:8];
+                    UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
+                    [size.layer setBorderColor:c.CGColor];
+                }
+                
+            }
+            
+        }
+    });
+}
+
+
 /*
  * Add text borders in scroll views
  */
@@ -766,113 +792,22 @@ int selectedAddMoreLayerTab = -1;
         textWhiteColor = [textLayer objectForKey:@"textborderWhite"];
     }
     
-    
     // Load sizes xib asynchronously
     dispatch_async( dispatch_get_main_queue(), ^{
-        
-            NSArray *subviewArray;
-            
-            if(IS_IPHONE_5){
-                subviewArray = [[NSBundle mainBundle] loadNibNamed:@"Borders" owner:self options:nil];
-                mainView = [subviewArray objectAtIndex:0];
-                [layerScrollView addSubview:mainView];
-                
-                [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
-            } else {
-                
-                subviewArray = [[NSBundle mainBundle] loadNibNamed:@"Borders-iPhone4" owner:self options:nil];
-                mainView = [subviewArray objectAtIndex:0];
-                [layerScrollView addSubview:mainView];
-                
-                [layerScrollView setContentSize:CGSizeMake(mainView.frame.size.width, [layerScrollView bounds].size.height)];
-            }
-            
-            mainView = [subviewArray objectAtIndex:0];
-            NSArray *bodersArray = mainView.subviews;
-            int count = (bodersArray.count)/3;
-        
-            int i=1;
-            for (int index = 0; index < count; index++ )
-            {
-                
-                UIColor *colorName = borderArray[(i-1)];
-                
-                //Here we Highlight Last Color Selected
-                if (textLayer) {
-                
-                    NSString *tcolor;
-                    NSString *twhite;
-                    CGFloat red = 0.0, green = 0.0, blue = 0.0, alpha = 0.0,wht = 0.0;
-                    
-                    UILabel *labelToStore = [[UILabel alloc]init];
-                    labelToStore.textColor = colorName;
-                    
-                    //Getting RGB Color Code
-                    [labelToStore.textColor getRed:&red green:&green blue:&blue alpha:&alpha];
-                    
-                    tcolor = [NSString stringWithFormat:@"%f, %f, %f", red, green, blue];
-                    
-                    [labelToStore.textColor getWhite:&wht alpha:&alpha];
-                    twhite = [NSString stringWithFormat:@"%f, %f", wht, alpha];
-                    
-                    i++;
-                
-            }
-        }// Loop
-        
-    });
-    
-}
-
-/*
- * Add flyer borders in scroll views
- */
--(void)addFlyerBorderInSubView {
-    
-    //Delete Subviews From ScrollView
-    [self deleteSubviewsFromScrollView];
-    
-    CGFloat curXLoc = 0;
-    CGFloat curYLoc = 5;
-    int increment = 5;
-    
-    if(IS_IPHONE_5){
-        curXLoc = 13;
-        curYLoc = 10;
-        increment = 8;
-    }
-    
-    NSMutableDictionary *templateDic;
-    NSString *textColor;
-    NSString *textWhiteColor;
-    
-    //Getting Last Info of Text Layer
-    templateDic = [flyer getLayerFromMaster:@"Template"];
-    textColor = [templateDic objectForKey:@"bordercolor"];
-    textWhiteColor = [templateDic objectForKey:@"bordercolorWhite"];
-
-    // Load sizes xib asynchronously
-    dispatch_async( dispatch_get_main_queue(), ^{
-        
-        NSArray *subviewArray;
         
         if(IS_IPHONE_5){
-            subviewArray = [[NSBundle mainBundle] loadNibNamed:@"Borders" owner:self options:nil];
-            mainView = [subviewArray objectAtIndex:0];
-            [layerScrollView addSubview:mainView];
             
+            [layerScrollView addSubview:textBordersView];
             [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
+            
         } else {
             
-            subviewArray = [[NSBundle mainBundle] loadNibNamed:@"Borders-iPhone4" owner:self options:nil];
-            mainView = [subviewArray objectAtIndex:0];
-            [layerScrollView addSubview:mainView];
-            
-            [layerScrollView setContentSize:CGSizeMake(mainView.frame.size.width, [layerScrollView bounds].size.height)];
+            [layerScrollView addSubview:textBordersView];
+            [layerScrollView setContentSize:CGSizeMake(textBordersView.frame.size.width, [layerScrollView bounds].size.height)];
         }
         
-        mainView = [subviewArray objectAtIndex:0];
-        NSArray *bodersArray = mainView.subviews;
+        
+        NSArray *bodersArray = textBordersView.subviews;
         int count = (bodersArray.count)/3;
         
         int i=1;
@@ -882,7 +817,7 @@ int selectedAddMoreLayerTab = -1;
             UIColor *colorName = borderArray[(i-1)];
             
             //Here we Highlight Last Color Selected
-            if (textColor != nil) {
+            if (textLayer) {
                 
                 NSString *tcolor;
                 NSString *twhite;
@@ -899,77 +834,75 @@ int selectedAddMoreLayerTab = -1;
                 [labelToStore.textColor getWhite:&wht alpha:&alpha];
                 twhite = [NSString stringWithFormat:@"%f, %f", wht, alpha];
                 
-                if ([textColor isEqualToString:tcolor] && [textWhiteColor isEqualToString:twhite] ) {
-                    // Add border to selected layer thumbnail
-                    //color.backgroundColor = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
-                }
-                
                 i++;
             }
         }// Loop
-        
-        for (int counter = 2; counter  < bodersArray.count; counter += 3) {
-            NSLog(@"%d",counter);
-            [[bodersArray objectAtIndex:counter] addTarget:self action:@selector(selectBorder:) forControlEvents:UIControlEventTouchUpInside];
-        }
     });
-    
 }
+
+
 /*
- * Add flyer Symbols in scroll views
+ * Add ClipArts in scroll views
  */
--(void)addSymbolsInSubView{
+-(void)addClipArtsInSubView{
     
-    //Delete Subviews of ScrollViews
     [self deleteSubviewsFromScrollView];
     
-    //Getting Last Image Tag for highlight
-    NSString *LastTag = [flyer getImageTag:currentLayer];
+    CGFloat curXLoc = 0;
+    CGFloat curYLoc = 5;
+    int increment = 5;
+    
+    if(IS_IPHONE_5){
+        curXLoc = 13;
+        curYLoc = 10;
+        increment = 8;
+    }
     
     // Load sizes xib asynchronously
     dispatch_async( dispatch_get_main_queue(), ^{
         
+        NSMutableDictionary *textLayer;
+        NSString *textFamily;
         
-            NSArray *subviewArray;
+        if(IS_IPHONE_5){
             
-            if(IS_IPHONE_5){
-                subviewArray = [[NSBundle mainBundle] loadNibNamed:@"Symbols" owner:self options:nil];
-                mainView = [subviewArray objectAtIndex:0];
-                [layerScrollView addSubview:mainView];
-                
-                [layerScrollView setContentSize:CGSizeMake(320, mainView.frame.size.height)];
-            } else {
-                
-                subviewArray = [[NSBundle mainBundle] loadNibNamed:@"Symbols-iPhone4" owner:self options:nil];
-                mainView = [subviewArray objectAtIndex:0];
-                [layerScrollView addSubview:mainView];
-                
-                [layerScrollView setContentSize:CGSizeMake(mainView.frame.size.width, [layerScrollView bounds].size.height)];
+            [layerScrollView addSubview:clipartsView];
+            [layerScrollView setContentSize:CGSizeMake(320, clipartsView.frame.size.height)];
+            
+        } else {
+            
+            [layerScrollView addSubview:clipartsView];
+            [layerScrollView setContentSize:CGSizeMake(clipartsView.frame.size.width, [layerScrollView bounds].size.height)];
+            
+        }
+        
+        NSArray *fontsArray = clipartsView.subviews;
+        
+        //Getting Last Info of Text Layer
+        if (![currentLayer isEqualToString:@""]) {
+            textLayer = [flyer getLayerFromMaster:currentLayer];
+            textFamily = [textLayer objectForKey:@"fontname"];
+        }
+        
+        // Find out the path of Cliparts.plist
+        NSString *clipartsPlistPath = [[NSBundle mainBundle] pathForResource:@"Cliparts" ofType:@"plist"];
+        NSArray *cliparts = [[NSArray alloc] initWithContentsOfFile:clipartsPlistPath];
+        
+        for (int i = 0; i < [cliparts count] ; i++)
+        {
+            UIButton *font;
+            if ([fontsArray[i] isKindOfClass:[UIButton class]]) {
+                font = (UIButton *) fontsArray[i];
             }
             
-            mainView = [subviewArray objectAtIndex:0];
-            NSArray *symbolsArray = mainView.subviews;
+            UIFont *fontType = [UIFont fontWithName:[cliparts[i] objectForKey:@"fontType"] size:33.0f];
             
-            for(int i=1;i<=113;i++) {
-                
-                //Here we Hightlight Last Selected Image
-                if (![LastTag isEqualToString:@""]) {
-                    
-                    if ([LastTag intValue] == i ) {
-                        
-                        UIButton *symbolButton = symbolsArray[i-1];
-                        // Add border to selected layer thumbnail
-                        [symbolButton.layer setCornerRadius:8];
-                        [symbolButton.layer setBorderWidth:3.0];
-                        UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
-                        [symbolButton.layer setBorderColor:c.CGColor];
-                    }
+            [font.titleLabel setFont: fontType];
             
-                }
-                
-            }//loop
-    });
+            [font setTitle:[cliparts[i] objectForKey:@"character" ] forState:UIControlStateNormal];
 
+        }
+    });
 }
 
 
@@ -987,25 +920,18 @@ int selectedAddMoreLayerTab = -1;
     // Load sizes xib asynchronously
     dispatch_async( dispatch_get_main_queue(), ^{
         
-        NSArray *subviewArray;
-        
         if(IS_IPHONE_5){
-            subviewArray = [[NSBundle mainBundle] loadNibNamed:@"Emoticons" owner:self options:nil];
-            mainView = [subviewArray objectAtIndex:0];
-            [layerScrollView addSubview:mainView];
             
-            [layerScrollView setContentSize:CGSizeMake(320, mainView.frame.size.height)];
+            [layerScrollView addSubview:emoticonsView];
+            [layerScrollView setContentSize:CGSizeMake(320, emoticonsView.frame.size.height)];
+            
         } else {
             
-            subviewArray = [[NSBundle mainBundle] loadNibNamed:@"Emoticons-iPhone4" owner:self options:nil];
-            mainView = [subviewArray objectAtIndex:0];
-            [layerScrollView addSubview:mainView];
-            
-            [layerScrollView setContentSize:CGSizeMake(mainView.frame.size.width, [layerScrollView bounds].size.height)];
+            [layerScrollView addSubview:emoticonsView];
+            [layerScrollView setContentSize:CGSizeMake(emoticonsView.frame.size.width, [layerScrollView bounds].size.height)];
         }
         
-        mainView = [subviewArray objectAtIndex:0];
-        NSArray *flyerIconArray = mainView.subviews;
+        NSArray *flyerIconArray = emoticonsView.subviews;
         
         //Getting Last Image Tag for highlight
         NSString *LastTag = [flyer getImageTag:currentLayer];
@@ -1035,65 +961,18 @@ int selectedAddMoreLayerTab = -1;
 
 
 /*
- * Add flyer Icons in scroll views
+ * Add Arts Colors in scroll views
  */
--(void)addFlyerIconInSubView{
-    
-    iconArray = [[NSMutableArray alloc]init];
-    
-    //Delete SubViews from ScrollView
-    [self deleteSubviewsFromScrollView];
-    
-    
-    // Load sizes xib asynchronously
-    dispatch_async( dispatch_get_main_queue(), ^{
-        
-    NSArray *subviewArray;
-        
-            if(IS_IPHONE_5){
-                subviewArray = [[NSBundle mainBundle] loadNibNamed:@"FlyerIcons" owner:self options:nil];
-                mainView = [subviewArray objectAtIndex:0];
-                [layerScrollView addSubview:mainView];
-                
-                [layerScrollView setContentSize:CGSizeMake(320, mainView.frame.size.height)];
-            } else {
-                
-                subviewArray = [[NSBundle mainBundle] loadNibNamed:@"FlyerIcons-iPhone4" owner:self options:nil];
-                mainView = [subviewArray objectAtIndex:0];
-                [layerScrollView addSubview:mainView];
-                
-                [layerScrollView setContentSize:CGSizeMake(mainView.frame.size.width, [layerScrollView bounds].size.height)];
-            }
-            
-            mainView = [subviewArray objectAtIndex:0];
-            NSArray *flyerIconArray = mainView.subviews;
-            
-            //Getting Last Image Tag for highlight
-            NSString *LastTag = [flyer getImageTag:currentLayer];
-            
-            for(int i=1;i<=94;i++) {        
-
-                //Here we Hightlight Last Selected Image
-                if (![LastTag isEqualToString:@""]) {
-                    
-                    
-                    if ([LastTag intValue] == i ) {
-                        
-                        // Add border to selected layer thumbnail
-                        UIButton *iconButton = flyerIconArray[i-1];
-                        [iconButton.layer setCornerRadius:8];
-                        [iconButton.layer setBorderWidth:3.0];
-                        UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
-                        [iconButton.layer setBorderColor:c.CGColor];
-                    }
-                }
-                      
-            }//loop
-        
-    });
+-(void)addArtsColorsInSubView{
     
 }
 
+/*
+ * Add Arts Sizes in scroll views
+ */
+-(void)addArtsSizesInSubView{
+    
+}
 
 /*
  * When we Back To Main View its
@@ -1238,7 +1117,7 @@ int selectedAddMoreLayerTab = -1;
 	int  i=1;
 	UIButton *view = sender;
     
-	for(UIView *tempView  in [mainView subviews])
+	for(UIView *tempView  in [fontsView subviews])
 	{
         //CHECK UIIMAGEVIEW BECAUSE SCROLL VIEW HAVE ADDITIONAL
         //SUBVIEWS OF UIIMAGEVIEW FOR FLASH INDICATORS
@@ -1286,7 +1165,7 @@ int selectedAddMoreLayerTab = -1;
 	int  i=1;
 	UIButton *view = sender;
     
-	for(UIView *tempView  in [mainView subviews])
+	for(UIView *tempView  in [colorsView subviews])
 	{
 
         //CHECK UIIMAGEVIEW BECAUSE SCROLL VIEW HAVE ADDITIONAL
@@ -1328,11 +1207,10 @@ int selectedAddMoreLayerTab = -1;
  */
 -(IBAction)selectSize:(id)sender{
 
-    
-	int  i=1;
+    int  i=1;
 	UIButton *view = sender;
     
-	for(UIView *tempView  in [mainView subviews])
+	for(UIView *tempView  in [sizesView subviews])
 	{
         
         //CHECK UIIMAGEVIEW BECAUSE SCROLL VIEW HAVE ADDITIONAL
@@ -1404,7 +1282,7 @@ int selectedAddMoreLayerTab = -1;
 	UIButton *view = sender;
     
     //Handling Select Unselect
-    for(UIView *tempView  in [mainView subviews])
+    for(UIView *tempView  in [backgroundsView subviews])
     {
         
         // Add border to Un-select layer thumbnail
@@ -1450,56 +1328,6 @@ int selectedAddMoreLayerTab = -1;
     [Flurry logEvent:@"Background Selected"];
 }
 
-/*
- * Called when select a symbol
- */
--(IBAction)selectSymbol:(id)sender
-{
-    
-    UIButton *view = sender;
-    [Flurry logEvent:@"Layer Added"];
-    
-    int lstTag = 500;
-    NSString *lastTag = [flyer getImageTag:currentLayer];
-
-    if (![lastTag isEqualToString:@""]) lstTag = [lastTag intValue];
-    
-    if (lstTag != view.tag) {
-        NSString *imgPath = [self getImagePathByTag:[NSString stringWithFormat:@"symbol%d",view.tag]];
-    
-        //Set Image Path
-        [flyer setImagePath:currentLayer ImgPath:imgPath];
-    
-        //Set Image Tag
-        [flyer setImageTag:currentLayer Tag:[NSString stringWithFormat:@"%d",view.tag]];
-
-    
-        [self.flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
-        
-        //Here we Highlight The ImageView
-        [self.flyimgView layerIsBeingEdited:currentLayer];
-    }
-    
-    //Handling Select Unselect
-    for(UIView *tempView  in [mainView subviews])
-    {
-        // Add border to Un-select layer thumbnail
-        CALayer * l = [tempView layer];
-        [l setBorderWidth:3.0];
-        [l setCornerRadius:8];
-        UIColor * c = [UIColor clearColor];
-        [l setBorderColor:c.CGColor];
-        
-        if(tempView == view)
-        {
-            // Add border to selected layer thumbnail
-            CALayer * l = [tempView layer];
-            [l setBorderWidth:3.0];
-            UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
-            [l setBorderColor:c.CGColor];
-        }
-    }
-}
 
 /*
  * Called when select emoticon
@@ -1538,7 +1366,7 @@ int selectedAddMoreLayerTab = -1;
     
     
     //Handling Select Unselect
-    for(UIView *tempView  in [mainView subviews])
+    for(UIView *tempView  in [emoticonsView subviews])
     {
         // Add border to Un-select layer thumbnail
         CALayer * l = [tempView layer];
@@ -1567,14 +1395,14 @@ int selectedAddMoreLayerTab = -1;
     int  i=1;
 	UIButton *view = sender;
     
-    int  index = [[mainView subviews] indexOfObject:view];
+    int  index = [[clipartsView subviews] indexOfObject:view];
     // Find out the path of Cliparts.plist
     NSString *clipartsPlistPath = [[NSBundle mainBundle] pathForResource:@"Cliparts" ofType:@"plist"];
     NSArray *cliparts = [[NSArray alloc] initWithContentsOfFile:clipartsPlistPath];
     
     UIFont *fontType = [UIFont fontWithName:[cliparts[i] objectForKey:@"fontType"] size:64.0f];
     
-	for(UIView *tempView  in [mainView subviews])
+	for(UIView *tempView  in [clipartsView subviews])
 	{
         //CHECK UIIMAGEVIEW BECAUSE SCROLL VIEW HAVE ADDITIONAL
         //SUBVIEWS OF UIIMAGEVIEW FOR FLASH INDICATORS
@@ -1622,13 +1450,12 @@ int selectedAddMoreLayerTab = -1;
 	}// Loop
     
 }
-
 /*
  * When any font border is selected
  */
 -(IBAction)selectFontBorder:(id)sender
 {
-    NSArray *bodersArray = mainView.subviews;
+    NSArray *bodersArray = textBordersView.subviews;
     int count = (bodersArray.count);
     
     UIView *tempView;
@@ -1669,7 +1496,7 @@ int selectedAddMoreLayerTab = -1;
             UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
             [l setBorderColor:c.CGColor];
         }
-        
+    
 	}//LOOP
 }
 
@@ -1677,10 +1504,10 @@ int selectedAddMoreLayerTab = -1;
 /*
  * When any Flyer border is selected
  */
--(void)selectBorder:(id)sender
+-(IBAction)selectBorder:(id)sender
 {
     
-    NSArray *bodersArray = mainView.subviews;
+    NSArray *bodersArray = flyerBordersView.subviews;
     int count = (bodersArray.count);
     
     UIView *tempView;
@@ -1726,7 +1553,6 @@ int selectedAddMoreLayerTab = -1;
         
 	}//LOOP
 }
-
 
 #pragma mark -  Progress Indicator
 
@@ -2482,7 +2308,6 @@ int selectedAddMoreLayerTab = -1;
     
     //Add ScrollViews
     [self.contextView addSubview:obj];
-    
 }
 
 /*
@@ -3354,6 +3179,7 @@ int selectedAddMoreLayerTab = -1;
     [artsColorTabButton setSelected:NO];
     [artsSizeTabButton setSelected:NO];
     UIButton *selectedButton = (UIButton*)sender;
+    
     if(selectedButton == clipArtTabButton)
 	{
         
@@ -3785,16 +3611,14 @@ int selectedAddMoreLayerTab = -1;
         //Add right Bar button
         [self addDonetoRightBarBotton];
         
-        // SET BOTTOM BAR
-        [self setArtsTabAction:clipArtTabButton];
-        //[self setlibBackgroundTabAction:backtemplates];
-        
         //Add Context
         [self addScrollView:layerScrollView];
         
-        
         //Add ContextView
         [self addBottomTabs:libArts];
+        
+        // SET BOTTOM BAR
+        [self setArtsTabAction:clipArtTabButton];
         
 	}
 	else if(selectedButton == addVideoTabButton)
@@ -3828,11 +3652,10 @@ int selectedAddMoreLayerTab = -1;
         //Add right Bar button
         [self addDonetoRightBarBotton];
         
-        [self setlibBackgroundTabAction:backtemplates];
-
         //Add ContextView
         [self addBottomTabs:libBackground];
        
+        [self setlibBackgroundTabAction:backtemplates];
 
     }
 }

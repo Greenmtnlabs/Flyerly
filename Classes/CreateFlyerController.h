@@ -71,12 +71,22 @@
     
 }
 
+//-----
+@property (nonatomic, strong) UIView *backgroundsView;
+@property (nonatomic, strong) UIView *flyerBordersView;
+@property (nonatomic, strong) UIView *fontsView;
+@property (nonatomic, strong) UIView *colorsView;
+@property (nonatomic, strong) UIView *sizesView;
+@property (nonatomic, strong) UIView *textBordersView;
+@property (nonatomic, strong) UIView *clipartsView;
+@property (nonatomic, strong) UIView *emoticonsView;
+//-----
+
 @property (nonatomic,strong)  IBOutlet UILabel *takeOrAddPhotoLabel;
 @property (nonatomic,strong)  IBOutlet UILabel *videoLabel;
 @property (nonatomic,strong)  IBOutlet UILabel *addMoreLayerOrSaveFlyerLabel;
 
 @property (nonatomic, strong) UIScrollView *layerScrollView;
-@property (nonatomic, strong) UIView *mainView;
 @property (nonatomic, strong) UIFont *selectedFont;
 @property (nonatomic, weak) id selectedColor;
 @property (nonatomic, assign) NSInteger selectedSize;
@@ -179,10 +189,9 @@
 -(IBAction)setAddMoreLayerTabAction:(id)sender;
 -(IBAction)setlibBackgroundTabAction:(id)sender;
 -(IBAction)setStyleTabAction:(id) sender;
--(IBAction)selectFont:(id)sender;
+-(IBAction)selectBorder:(id)sender;
 -(IBAction)selectSize:(id)sender;
 -(IBAction)selectColor:(id)sender;
--(IBAction)selectSymbol:(id)sender;
 -(IBAction)selectIcon:(id)sender;
 -(IBAction)selectEmoticon:(id)sender;
 -(IBAction)selectFontBorder:(id)sender;
