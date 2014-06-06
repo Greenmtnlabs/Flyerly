@@ -161,29 +161,26 @@
     // or camera. Camera has the video rotated.
     CGRect cropRect;
     
-    if ( _fromCamera ) {
+    // If this is portrait, then do not allow x translations
+    if ( player.naturalSize.width < player.naturalSize.height ) {
         cropRect = CGRectMake(
-                _cropView.origin.x * player.naturalSize.height / _playerView.frame.size.width,
+                0,
                 _cropView.origin.y * player.naturalSize.width / _playerView.frame.size.height,
                 _desiredVideoSize.width,
                 _desiredVideoSize.height );
     } else {
+        CGFloat maxHeight = 568.0;
+        
+        if ( IS_IPHONE ) {
+            maxHeight = 480;
+        }
+        
         cropRect = CGRectMake(
-                _cropView.origin.x * player.naturalSize.width / _playerView.frame.size.width,
-                _cropView.origin.y * player.naturalSize.height / _playerView.frame.size.height,
+                player.naturalSize.width / _playerView.frame.size.width +
+                              ( _cropView.origin.x * maxHeight / _playerView.frame.size.width )  ,
+                0,
                 _desiredVideoSize.width,
                 _desiredVideoSize.height );
-    }
-    
-    // Update scale ratio to reflect the change in crop size from original.
-    if ( player.naturalSize.width < player.naturalSize.height ) {
-        // If this is portrait, then do not allow x translations
-        cropRect.origin.x = 0;
-    
-    } else {
-        // If its landscape do not allow y translations
-        cropRect.origin.y = 0;
-    
     }
     
     _onVideoFinished( _url, cropRect, scaleRatio );
