@@ -1089,6 +1089,8 @@ int selectedAddMoreLayerTab = -1;
     
     if( self.flyimgView.layers.count == 0 ){
         _addMoreLayerOrSaveFlyerLabel.alpha = 1;
+        _takeOrAddPhotoLabel.alpha = 0;
+        _videoLabel.alpha = 0;
         return;
     }
     
@@ -2407,16 +2409,25 @@ int selectedAddMoreLayerTab = -1;
 	}
 }
 
+/**
+ * Clean up previous scrollviews.
+ */
+-(void)removeAllScrolviews {
+    // Remove only scrollViews
+    NSArray *viewsToRemove = [self.contextView subviews];
+    for (UIView *v in viewsToRemove) {
+        if ( [v isKindOfClass:[UIScrollView class]] ) {
+            [v removeFromSuperview];
+        }
+    }
+}
+
 /*
  * For ScrollView Adding On runtime
  */
 -(void)addScrollView:(id)obj{
-    
-    // Remove ScrollViews
-    NSArray *viewsToRemove = [self.contextView subviews];
-    for (UIView *v in viewsToRemove) {
-        [v removeFromSuperview];
-    }
+    // Remove previously added scrollviews.
+    [self removeAllScrolviews];
     
     //Add ScrollViews
     [self.contextView addSubview:obj];
@@ -2428,11 +2439,8 @@ int selectedAddMoreLayerTab = -1;
  */
 -(void)addBottomTabs:(id)obj{
     
-    // Remove ScrollViews
-    NSArray *viewsToRemove = [self.libraryContextView subviews];
-    for (UIView *v in viewsToRemove) {
-        [v removeFromSuperview];
-    }
+    // Remove previously added scrollviews.
+    [self removeAllScrolviews];
     
     //Add ScrollViews
     [self.libraryContextView addSubview:obj];
@@ -2797,39 +2805,10 @@ int selectedAddMoreLayerTab = -1;
         
         // For Immediate Showing Delete button
         [self callStyle];
-    }
-    
-    
-    //when tap on Image Box
-    NSString *imgName = [flyer getImageName:currentLayer];
-    
-    if (![imgName isEqualToString:@""] && imgName != nil) {
+    } else if ( [type isEqualToString:FLYER_LAYER_IMAGE] ) {
         
-        //when we tap on Symbols
-        if ([imgName rangeOfString:@"Symbol"].location == NSNotFound) {
-            NSLog(@"sub string doesnt exist");
-        } else {
-            // Call Icon
-            //[self setAddMoreLayerTabAction:addMoreIconTabButton];
-        }
-        
-        //when we tap on icon
-        if ([imgName rangeOfString:@"Icon"].location == NSNotFound) {
-            NSLog(@"sub string doesnt exist");
-        } else {
-            
-            // Call Symbol
-            [self setAddMoreLayerTabAction:addArtsTabButton];
-        }
-        
-        //when we tap on icon
-        if ([imgName rangeOfString:@"Photo"].location == NSNotFound) {
-            NSLog(@"sub string doesnt exist");
-        } else {
-            
-            // Call Photo Tab
-            [self setAddMoreLayerTabAction:addMorePhotoTabButton];
-        }
+        // Call Photo Tab
+        [self setAddMoreLayerTabAction:addMorePhotoTabButton];
     }
 }
 
@@ -3544,6 +3523,9 @@ int selectedAddMoreLayerTab = -1;
 
         [self openCustomCamera:YES];
         _videoLabel.alpha = 1;
+        
+        _addMoreLayerOrSaveFlyerLabel.alpha = 0;
+        _takeOrAddPhotoLabel.alpha = 0;
 
     }
     else if(selectedButton == cameraRoll)
@@ -3562,6 +3544,9 @@ int selectedAddMoreLayerTab = -1;
         
         //Add ContextView
         _videoLabel.alpha = 1;
+        
+        _addMoreLayerOrSaveFlyerLabel.alpha = 0;
+        _takeOrAddPhotoLabel.alpha = 0;
 
     }
     else if(selectedButton == flyerBorder)
@@ -3702,6 +3687,9 @@ int selectedAddMoreLayerTab = -1;
         
         //Here we Add Some Text In ScrolView
         _takeOrAddPhotoLabel.alpha = 1;
+        
+        _addMoreLayerOrSaveFlyerLabel.alpha = 0;
+        _videoLabel.alpha = 0;
 	    
         [self choosePhoto];
 		imgPickerFlag = 2;
@@ -3769,6 +3757,10 @@ int selectedAddMoreLayerTab = -1;
                 
                 [self openCustomCamera:YES];
                 _videoLabel.alpha = 1;
+                
+                _addMoreLayerOrSaveFlyerLabel.alpha = 0;
+                _takeOrAddPhotoLabel.alpha = 0;
+                
                 nbuCamera.isVideoFlyer = YES;
             }else {
                 [self openInAppPanel];
