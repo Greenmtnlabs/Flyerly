@@ -204,76 +204,59 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     // We allow anonymous Parse users, so a new user doesn't necessarily have to signup/signin
     [PFUser enableAutomaticUser];
     
-    // Determin if the user has been greeted?
-    NSString *greeted = [[NSUserDefaults standardUserDefaults] stringForKey:@"greeted"];
+    // Then we create a directory for anonymous users data
+    NSString *homeDirectoryPath = NSHomeDirectory();
+    NSString *anonymousUserPath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents"]];
+    NSArray *contentOfDirectory = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:anonymousUserPath error:NULL];
     
-    if( !greeted ) {
-    
-        // This is a first time Flyerly user, so
+    NSError *error;
+    if ( contentOfDirectory.count == 0 ) {
+        [[NSFileManager defaultManager] createDirectoryAtPath:[anonymousUserPath stringByAppendingString:@"/anonymous"] withIntermediateDirectories:YES attributes:nil error:&error];
+        
+        // Now check contents of document directory again
+        contentOfDirectory = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:anonymousUserPath error:NULL];
+    }
+
+    // If the Documents folder has only one directory named anonymous then this is an anonymous user (hasn't signed up yet)
+    if(contentOfDirectory.count  > 0 && [[contentOfDirectory objectAtIndex:0] isEqual:@"anonymous"]){
+        
+        // This is an anonymous user
         [PFUser currentUser].username = @"anonymous";
+        [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"UpdatedVersion"];
         
-        // Then we create a directory for anonymous users data
-        NSString *homeDirectoryPath = NSHomeDirectory();
-        NSString *anonymusUserPath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/anonymous"]];
-        
-        NSError *error;
-        if ([[NSFileManager defaultManager] fileExistsAtPath:anonymusUserPath isDirectory:NULL])
-            [[NSFileManager defaultManager] createDirectoryAtPath:anonymusUserPath withIntermediateDirectories:YES attributes:nil error:&error];
-        
-        // Show the greeting before going to the main app.
         lauchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil];
-        
         [navigationController setRootViewController:lauchController];
-        [[NSUserDefaults standardUserDefaults]  setObject:@"YES" forKey:@"UpdatedVersion"];
         
-    } else {
-        // User has already been greeted.
+    // Otherwise we have an already logged in user
+    } else if ([[NSUserDefaults standardUserDefaults] stringForKey:@"User"] != nil ){
         
-        // Then we check if the users data has a directory for an anonymous user
-        NSString *homeDirectoryPath = NSHomeDirectory();
-        NSString *flyersDir = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents"]];
-        NSArray *contentOfDirectory = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:flyersDir error:NULL];
-       
-        // If the Documents folder has only one directory named anonymous then this is an anonymous user (hasn't signed up yet)
-        if(contentOfDirectory.count  > 0 && [[contentOfDirectory objectAtIndex:0] isEqual:@"anonymous"]){
-            
-            [PFUser currentUser].username = @"anonymous";
+        // If user has already updated to 4.0, the flow is normal
+        if([[NSUserDefaults standardUserDefaults] stringForKey:@"UpdatedVersion"]){
             
             lauchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil];
             [navigationController setRootViewController:lauchController];
+        
+        // Otherwise this is the first time user has updated to 4.0
+        } else {
+         
+            // Log out User.
+            [MainSettingViewController signOut];
             
-        // Otherwise we have an already logged in user
-        } else if ([[NSUserDefaults standardUserDefaults] stringForKey:@"User"] != nil ){
-            
-            // If user has already updated to 4.0, the flow is normal
-            if([[NSUserDefaults standardUserDefaults] stringForKey:@"UpdatedVersion"]){
-                
-                lauchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil];
-                [navigationController setRootViewController:lauchController];
-            
-            // Otherwise this is the first time user has updated to 4.0
-            } else {
-             
-                // Log out User.
-                [MainSettingViewController signOut];
-                
-                //its for remember key of user have Updated Version
-                [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"UpdatedVersion"];
-                accountController = [[LaunchController alloc]initWithNibName:@"LaunchController" bundle:nil];
-                [navigationController setRootViewController:accountController];
-
-                
-            }
-        // A use signed up on this device but is currently not logged in
-        } else if (contentOfDirectory.count > 0
-                   && !([[contentOfDirectory objectAtIndex:0] isEqual:@"anonymous"])) {
-            
+            //its for remember key of user have Updated Version
+            [[NSUserDefaults standardUserDefaults] setObject:@"enabled" forKey:@"UpdatedVersion"];
             accountController = [[LaunchController alloc]initWithNibName:@"LaunchController" bundle:nil];
             [navigationController setRootViewController:accountController];
+
             
         }
+    // A use signed up on this device but is currently not logged in
+    } else if (contentOfDirectory.count > 0
+               && !([[contentOfDirectory objectAtIndex:0] isEqual:@"anonymous"])) {
+        
+        accountController = [[LaunchController alloc]initWithNibName:@"LaunchController" bundle:nil];
+        [navigationController setRootViewController:accountController];
+        
     }
-    
            
     // HERE WE SET ALL FLYER ARE PUBLIC DEFUALT
     if(![[NSUserDefaults standardUserDefaults] stringForKey:@"FlyerlyPublic"]){
