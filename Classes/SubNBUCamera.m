@@ -8,50 +8,47 @@
 
 #import "SubNBUCamera.h"
 
+@interface NBUCameraView ()
+- (void)updateCaptureSessionInput;
+@end
+
 @implementation SubNBUCamera
 
 /**
- * We override the recording to allow us to add support for audio.
+ * Override from parent class to add audio to recording.
  */
-- (IBAction)startStopRecording:(id)sender {
+- (void)updateCaptureSessionInput {
+    [super updateCaptureSessionInput];
     
-    [super startStopRecording:nil];
+    AVCaptureSession * _captureSession = [self valueForKey:@"_captureSession"];
     
-#ifndef __i386__
-/*
-    // If we are going to start recording.
-    if ( !self.recording ) {
-
-        // Since capture session is a private variable, this is the only way we can get it.
-        AVCaptureSession *_captureSession = [self valueForKey:@"_captureSession"];
-        NSError *error;
-        
-        // Get the audio device
-        audioCaptureDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeAudio];
-        audioInput = [AVCaptureDeviceInput deviceInputWithDevice:audioCaptureDevice error:&error];
-        
-        // Make sure we can add audio input to this session. If we can do it!
-        if ([_captureSession canAddInput:audioInput]) {
-            [_captureSession addInput:audioInput];
-        }
-        [super startStopRecording:nil];
-    }else {
-
-        
-        AVCaptureMovieFileOutput * _captureMovieOutput =[self valueForKey:@"_captureMovieOutput"];
-        [_captureMovieOutput stopRecording];
-        
-        AVAudioSession *audioSession = [AVAudioSession sharedInstance];
-        NSError* error = nil;
-        [audioSession setActive:NO error: &error];
-        NSLog(@"error: %@", error);
-
-    }*/
-#endif
-
-
+    [_captureSession beginConfiguration];
     
+    // Remove previous input
+    if ( _audioInput != nil ) {
+        [_captureSession removeInput:_audioInput];
+    }
+    
+    // Create a capture input
+    NSError *error;
+    
+    AVCaptureDevice *_audioCaptureDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeAudio];
+    
+    _audioInput = [AVCaptureDeviceInput deviceInputWithDevice:_audioCaptureDevice
+                                                          error:&error];
+    if ( error ) {
+        NSLog( @"Error creating an AVCaptureDeviceInput for audio: %@", error );
+        return;
+    }
+    
+    // Add audio input to session
+    if ( [_captureSession canAddInput:_audioInput] ) {
+        [_captureSession addInput:_audioInput];
+    } else {
+        NSLog( @"Unable to add audio to recording." );
+    }
+    
+    [_captureSession commitConfiguration];
 }
-
 
 @end

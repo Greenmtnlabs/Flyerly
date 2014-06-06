@@ -11,8 +11,8 @@
 
 @interface SubNBUCamera : NBUCameraView {
     
-    AVCaptureDeviceInput *audioInput;
-    AVCaptureDevice *audioCaptureDevice;
+    AVCaptureDeviceInput *_audioInput;
+    //AVCaptureDevice *_audioCaptureDevice;
     ;
 }
 

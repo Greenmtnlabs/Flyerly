@@ -1588,7 +1588,7 @@ int selectedAddMoreLayerTab = -1;
         nbuGallary.desiredImageSize = CGSizeMake( [[dict valueForKey:@"width"] floatValue],
                                                 [[dict valueForKey:@"height"] floatValue]);
     } else {
-        nbuGallary.desiredImageSize = CGSizeMake( flyerlyWidth,  flyerlyHeight );
+        nbuGallary.desiredImageSize = CGSizeMake( self.flyimgView.size.width,  self.flyimgView.size.height );
     }
     
     __weak CreateFlyerController *weakSelf = self;
@@ -1713,7 +1713,7 @@ int selectedAddMoreLayerTab = -1;
         nbuCamera.desiredImageSize = CGSizeMake( [[dict valueForKey:@"width"] floatValue],
                                                  [[dict valueForKey:@"height"] floatValue]);
     } else {
-        nbuCamera.desiredImageSize = CGSizeMake( flyerlyWidth,  flyerlyHeight );
+        nbuCamera.desiredImageSize = CGSizeMake( self.flyimgView.size.width, self.flyimgView.size.height );
     }
     
     __weak CreateFlyerController *weakSelf = self;
