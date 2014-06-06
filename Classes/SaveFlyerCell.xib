@@ -89,7 +89,7 @@
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lock_icon.png" id="ot2-CF-xz6">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blue_arrow.png" id="ot2-CF-xz6">
                         <rect key="frame" x="290" y="30" width="20" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
@@ -124,13 +124,13 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="email_disabled_saved.png" width="39" height="29"/>
-        <image name="facebook_disabled_saved.png" width="19" height="33"/>
-        <image name="flickr_disabled_saved.png" width="43" height="23"/>
-        <image name="instagram_disabled_saved.png" width="34" height="34"/>
-        <image name="invite_Bg.png" width="622" height="201"/>
-        <image name="lock_icon.png" width="101" height="160"/>
-        <image name="tumblr_disabled_saved.png" width="29" height="30"/>
-        <image name="twitter_disabled_saved.png" width="19" height="15"/>
+        <image name="blue_arrow.png" width="20" height="35"/>
+        <image name="email_disabled_saved.png" width="19" height="14"/>
+        <image name="facebook_disabled_saved.png" width="9" height="16"/>
+        <image name="flickr_disabled_saved.png" width="21" height="11"/>
+        <image name="instagram_disabled_saved.png" width="17" height="17"/>
+        <image name="invite_Bg.png" width="311" height="100"/>
+        <image name="tumblr_disabled_saved.png" width="14" height="15"/>
+        <image name="twitter_disabled_saved.png" width="18" height="15"/>
     </resources>
 </document>

@@ -274,7 +274,9 @@ NSMutableArray *productArray;
         }
     
     }else {
-        [self openPanel];
+        if ( [_mode isSelected] == NO ) {
+            [self openPanel];
+        }
     }
     
 }
@@ -415,8 +417,6 @@ NSMutableArray *productArray;
     
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     UserPurchases *userPurchases_ = appDelegate.userPurchases;
-    //NSMutableDictionary *oldPurchases =  userPurchases_.oldPurchases;//[[NSUserDefaults standardUserDefaults] valueForKey:@"InAppPurchases"];
-    
     
     if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
         [userPurchases_ checkKeyExistsInPurchases:@"com.flyerly.UnlockCreateVideoFlyerOption"] ) {
