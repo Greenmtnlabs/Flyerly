@@ -2685,7 +2685,16 @@ int selectedAddMoreLayerTab = -1;
         
         // Call Photo Tab
         [self setAddMoreLayerTabAction:addMorePhotoTabButton];
+    }else if ( [type isEqualToString:FLYER_LAYER_CLIP_ART] ) {
+        
+        // Call Photo Tab
+        [self setArtsTabAction:clipArtTabButton];
+    }else if ( [type isEqualToString:FLYER_LAYER_EMOTICON] ) {
+        
+        // Call Photo Tab
+        [self setArtsTabAction:emoticonsTabButton];
     }
+    
 }
 
 /*
