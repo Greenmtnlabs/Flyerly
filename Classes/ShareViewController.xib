@@ -20,7 +20,6 @@
                 <outlet property="star4" destination="iQw-qn-Bq4" id="ctm-Um-nI7"/>
                 <outlet property="star5" destination="N5u-za-btZ" id="eEZ-aC-WkI"/>
                 <outlet property="titleView" destination="7" id="21"/>
-                <outlet property="titleViewBorder" destination="9qK-Vw-BM8" id="0Fu-yB-tlZ"/>
                 <outlet property="tumblrButton" destination="16" id="29"/>
                 <outlet property="twitterButton" destination="15" id="31"/>
                 <outlet property="view" destination="1" id="3"/>
@@ -118,11 +117,6 @@
                         <outlet property="delegate" destination="-1" id="54"/>
                     </connections>
                 </textField>
-                <view contentMode="scaleToFill" id="9qK-Vw-BM8">
-                    <rect key="frame" x="10" y="45" width="298" height="33"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                </view>
                 <view contentMode="scaleToFill" id="59">
                     <rect key="frame" x="1" y="273" width="320" height="135"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
