@@ -9,7 +9,7 @@
 #import "FlyerImageView.h"
 
 @implementation FlyerImageView
-@synthesize layers,flyerTapGesture;
+@synthesize layers,flyerTapGesture,flyer;
 
 /**
  * Image initialization.
@@ -94,7 +94,12 @@
             CustomLabel *lble = [[CustomLabel alloc] init];
             lble.tag = layers.count;
             lble.backgroundColor = [UIColor clearColor];
-            lble.textAlignment = UITextAlignmentCenter;
+            // Get the type of layer
+            //NSString *type = [flyer getLayerType:currentLayer];
+            //if( [type isEqualToString:FLYER_LAYER_CLIP_ART] ){
+
+            lble.textAlignment = UITextAlignmentLeft;//    UITextAlignmentCenter;
+            //}
             lble.adjustsFontSizeToFitWidth = YES;
             lble.lineBreakMode = UILineBreakModeClip;
             lble.numberOfLines = 80;

@@ -10,7 +10,7 @@
 
 @implementation ShareViewController
 
-@synthesize Yvalue,rightUndoBarButton,shareButton,helpButton,selectedFlyerImage,fvController,titleView,descriptionView,selectedFlyerDescription,  imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,dicController, clipboardlabel,flyer,topTitleLabel,delegate,activityIndicator,youTubeButton,titleViewBorder;
+@synthesize Yvalue,rightUndoBarButton,shareButton,helpButton,selectedFlyerImage,fvController,titleView,descriptionView,selectedFlyerDescription,  imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,dicController, clipboardlabel,flyer,topTitleLabel,delegate,activityIndicator,youTubeButton;
 
 @synthesize flyerShareType,star1,star2,star3,star4,star5;
 
@@ -29,18 +29,11 @@
     [l setBorderColor:[[UIColor grayColor] CGColor]];
     
     // Setup title text field
-    //[titleView addTarget:delegate action:@selector(textFieldFinished:) forControlEvents:UIControlEventEditingDidBegin];
-    //[titleView setReturnKeyType:UIReturnKeyDone];
-    //[titleView addTarget:self action:@selector(textFieldFinished:) forControlEvents: UIControlEventEditingDidEndOnExit];
-    //[titleView addTarget:self action:@selector(textFieldTapped:) forControlEvents:UIControlEventEditingDidBegin];
-
+    [titleView setReturnKeyType:UIReturnKeyDone];
+    [titleView addTarget:self action:@selector(textFieldFinished:) forControlEvents: UIControlEventEditingDidEndOnExit];
+    [titleView addTarget:self action:@selector(textFieldTapped:) forControlEvents:UIControlEventEditingDidBegin];
     titleView.placeholder = @"Flyerly Title (e.g. \"Parker's Party\")";
-    
-    
-//    UITapGestureRecognizer *tapped = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(textFieldTapped:)];
-//    tapped.numberOfTapsRequired = 1;
-//    [self.titleView addGestureRecognizer:tapped];
-    [titleView setUserInteractionEnabled:YES];
+
 
     descriptionView = [[UIPlaceHolderTextView alloc] initWithFrame:CGRectMake(12, 79, 296, 83)];
  
@@ -215,8 +208,7 @@
         if([MFMessageComposeViewController canSendAttachments])
         {
             if (![self.flyer isVideoFlyer]) {
-                [smsButton setEnabled:YES];
-
+               
                 status = [flyer getSmsStatus];
                 if([status isEqualToString:@"1"]){
                     [smsButton setSelected:YES];
@@ -224,8 +216,6 @@
                     [smsButton setSelected:NO];
                 }
             }
-
-            
         }
     }
     
@@ -288,6 +278,7 @@
     [smsButton setEnabled:YES];
     [instagramButton setEnabled:YES];
     [clipboardButton setEnabled:YES];
+    [facebookButton setEnabled:YES];
 }
 
 #pragma mark  Text Field Delegate
@@ -317,6 +308,7 @@
  */
 - (void)textViewTapped:(id)sender {
     
+    
     [descriptionView becomeFirstResponder];
 }
 
@@ -341,8 +333,8 @@
  */
 - (void)textFieldTapped:(id)sender {
 
-    [titleViewBorder.layer removeAllAnimations];
-    [titleView setReturnKeyType:UIReturnKeyDone];
+    
+    //[titleView setReturnKeyType:UIReturnKeyDone];
 }
 
 /*
@@ -383,29 +375,6 @@
 }
 
 /*
- * Called when facebook button is pressed
- */
--(IBAction)onClickFacebookButton{
-    
-    // Current Item For Sharing
-
-    SHKItem *item;
-
-    if ([flyer isVideoFlyer]) {
-        item = [SHKItem filePath:[self.flyer getSharingVideoPath] title:titleView.text];
-    }else {
-        item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ #flyerly", selectedFlyerDescription ]];
-    }
-    
-    item.tags =[NSArray arrayWithObjects: @"#flyerly", nil];
-    iosSharer = [SHKFacebook shareItem:item];
-    iosSharer.shareDelegate = self;
-    
-    
-}
-
-
-/*
  * Called when twitter button is pressed
  */
 -(IBAction)onClickTwitterButton{
@@ -439,36 +408,6 @@
     
     [self shareOnInstagram];
 }
-
-
-/*
- * Called when email button is pressed
- */
--(IBAction)onClickEmailButton{
-    
-    // Current Item For Sharing
-    SHKItem *item;
-    if ([self.flyer isVideoFlyer]) {
-        
-        // Current Video Link For Sharing
-//        item = [SHKItem text: [NSString stringWithFormat:@"%@ Created & sent from Flyer.ly",[self.flyer getYoutubeLink]]];
-        
-        item = [SHKItem URL:[NSURL URLWithString:[self.flyer getYoutubeLink]] title:@"Flyerly for you!" contentType:SHKURLContentTypeVideo];
-    }else {
-        
-        item = [SHKItem image:selectedFlyerImage title:@"Flyerly for you!"];
-        item.text = @"Created & sent from Flyer.ly";
-    }
-    
-    //Calling ShareKit for Sharing
-    iosSharer = [[ SHKSharer alloc] init];
-    iosSharer = [SHKMail shareItem:item];
-    iosSharer.shareDelegate = self;
-    
-    iosSharer = nil;
-    
-}
-
 
 /*
  * Called when tumblr button is pressed
@@ -518,6 +457,33 @@
     
 }
 
+/*
+ * Called when email button is pressed
+ */
+-(IBAction)onClickEmailButton{
+    
+    // Current Item For Sharing
+    SHKItem *item;
+    if ([self.flyer isVideoFlyer]) {
+        
+        // Current Video Link For Sharing
+        //        item = [SHKItem text: [NSString stringWithFormat:@"%@ Created & sent from Flyer.ly",[self.flyer getYoutubeLink]]];
+        
+        item = [SHKItem URL:[NSURL URLWithString:[self.flyer getYoutubeLink]] title:@"Flyerly for you!" contentType:SHKURLContentTypeVideo];
+    }else {
+        
+        item = [SHKItem image:selectedFlyerImage title:@"Flyerly for you!"];
+        item.text = @"Created & sent from Flyer.ly";
+    }
+    
+    //Calling ShareKit for Sharing
+    iosSharer = [[ SHKSharer alloc] init];
+    iosSharer = [SHKMail shareItem:item];
+    iosSharer.shareDelegate = self;
+    
+    iosSharer = nil;
+    
+}
 
 /*
  * Called when sms button is pressed
@@ -541,10 +507,41 @@
             iosSharer = [[ SHKSharer alloc] init];
             iosSharer = [SHKTextMessage shareFileData:exportData filename:imageFileName title:@"Created & sent from Flyer.ly"];
             iosSharer.shareDelegate = self;
+            
         }
     }
 }
 
+
+/*
+ * Called when facebook button is pressed
+ */
+-(IBAction)onClickFacebookButton{
+    
+    // Current Item For Sharing
+    SHKItem *item;
+    
+    if ([flyer isVideoFlyer]) {
+        
+        item = [SHKItem text:[NSString stringWithFormat:@"%@ #flyerly %@", selectedFlyerDescription , [self.flyer getYoutubeLink]]];
+        //item = [SHKItem filePath:[self.flyer getSharingVideoPath] title:titleView.text];
+        
+        item.tags =[NSArray arrayWithObjects: @"#flyerly", nil];
+        iosSharer = [SHKFacebook shareItem:item];
+        iosSharer.shareDelegate = self;
+        
+    }else {
+        item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ #flyerly ", selectedFlyerDescription ]];
+        
+        item.tags =[NSArray arrayWithObjects: @"#flyerly", nil];
+        iosSharer = [SHKFacebook shareItem:item];
+        iosSharer.shareDelegate = self;
+    }
+    
+    
+    
+    
+}
 
 /*
  * Called when clipboard button is pressed

@@ -56,6 +56,7 @@
 
 -(NSString *)addText;
 -(NSString *)addImage;
+-(NSString *)addClipArt;
 
 -(void)setVideoCover :(UIImage *)snapShot;
 

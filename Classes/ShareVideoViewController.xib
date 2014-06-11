@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment version="768" defaultVersion="1280" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ShareViewController">
@@ -19,7 +19,6 @@
                 <outlet property="star4" destination="iQw-qn-Bq4" id="ctm-Um-nI7"/>
                 <outlet property="star5" destination="N5u-za-btZ" id="eEZ-aC-WkI"/>
                 <outlet property="titleView" destination="7" id="21"/>
-                <outlet property="titleViewBorder" destination="p0z-2m-JBW" id="R9L-WS-dUb"/>
                 <outlet property="twitterButton" destination="15" id="31"/>
                 <outlet property="view" destination="1" id="3"/>
                 <outlet property="youTubeButton" destination="0gS-1q-L37" id="4dL-wE-a52"/>
@@ -107,11 +106,6 @@
                     <rect key="frame" x="10" y="45" width="298" height="33"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <view contentMode="scaleToFill" id="p0z-2m-JBW">
-                    <rect key="frame" x="10" y="45" width="298" height="33"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                </view>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Flyerly Title (e.g. &quot;Parker's Party&quot;)" minimumFontSize="17" id="7">
                     <rect key="frame" x="16" y="47" width="292" height="28"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -126,8 +120,8 @@
                     <rect key="frame" x="1" y="273" width="320" height="135"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="11">
-                            <rect key="frame" x="88" y="7" width="60" height="60"/>
+                        <button opaque="NO" tag="1" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="11">
+                            <rect key="frame" x="245" y="6" width="60" height="60"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <accessibility key="accessibilityConfiguration" label="Facebook"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
@@ -166,7 +160,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="13">
-                            <rect key="frame" x="167" y="7" width="60" height="60"/>
+                            <rect key="frame" x="88" y="6" width="60" height="60"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <accessibility key="accessibilityConfiguration" label="Flicker"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
@@ -289,26 +283,26 @@
         </view>
     </objects>
     <resources>
-        <image name="cp_share.png" width="120" height="120"/>
-        <image name="cp_share_selected.png" width="120" height="120"/>
-        <image name="email_share.png" width="120" height="120"/>
-        <image name="email_share_selected.png" width="120" height="120"/>
-        <image name="facebook_share.png" width="120" height="120"/>
-        <image name="facebook_share_selected.png" width="120" height="120"/>
-        <image name="flat_text_box.png" width="503" height="69"/>
-        <image name="flickr_share.png" width="120" height="120"/>
-        <image name="flickr_share_selected.png" width="120" height="120"/>
-        <image name="panel_close_button.png" width="640" height="74"/>
-        <image name="private_off_button.png" width="185" height="62"/>
-        <image name="public_on.png" width="185" height="62"/>
-        <image name="separator.png" width="640" height="3"/>
-        <image name="sms_share.png" width="120" height="120"/>
-        <image name="sms_share_selected.png" width="120" height="120"/>
-        <image name="star.png" width="50" height="48"/>
-        <image name="star_selected.png" width="50" height="48"/>
-        <image name="twitter_share.png" width="120" height="120"/>
-        <image name="twitter_share_selected.png" width="120" height="120"/>
-        <image name="youtube_share.png" width="120" height="120"/>
-        <image name="youtube_share_selected.png" width="120" height="120"/>
+        <image name="cp_share.png" width="60" height="60"/>
+        <image name="cp_share_selected.png" width="60" height="60"/>
+        <image name="email_share.png" width="60" height="60"/>
+        <image name="email_share_selected.png" width="60" height="60"/>
+        <image name="facebook_share.png" width="60" height="60"/>
+        <image name="facebook_share_selected.png" width="60" height="60"/>
+        <image name="flat_text_box.png" width="251" height="34"/>
+        <image name="flickr_share.png" width="60" height="60"/>
+        <image name="flickr_share_selected.png" width="60" height="60"/>
+        <image name="panel_close_button.png" width="320" height="37"/>
+        <image name="private_off_button.png" width="92" height="31"/>
+        <image name="public_on.png" width="92" height="31"/>
+        <image name="separator.png" width="320" height="1"/>
+        <image name="sms_share.png" width="60" height="60"/>
+        <image name="sms_share_selected.png" width="60" height="60"/>
+        <image name="star.png" width="25" height="24"/>
+        <image name="star_selected.png" width="25" height="24"/>
+        <image name="twitter_share.png" width="60" height="60"/>
+        <image name="twitter_share_selected.png" width="60" height="60"/>
+        <image name="youtube_share.png" width="60" height="60"/>
+        <image name="youtube_share_selected.png" width="60" height="60"/>
     </resources>
 </document>

@@ -44,22 +44,6 @@ int selectedAddMoreLayerTab = -1;
     
     NSString *title = [flyer getFlyerTitle];
     
-    //HERE WE GET USER PURCHASES INFO FROM PARSE
-    if(![[NSUserDefaults standardUserDefaults] stringForKey:@"InAppPurchases"]){
-        
-        FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-        UserPurchases *userPurchases_ = appDelegate.userPurchases;
-        
-        //Checking if user valid purchases
-        if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]   ||
-            [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"]    ) {
-            
-            //Unloking features
-            UIImage *buttonImage = [UIImage imageNamed:@"video_tab.png"];
-            [addVideoTabButton setImage:buttonImage forState:UIControlStateNormal];
-        }
-    }
-    
     if ( ![title isEqualToString:@""] ) {
         titleLabel.text = title;
     } else {
@@ -179,6 +163,22 @@ int selectedAddMoreLayerTab = -1;
     
     // Current selected layer.
     currentLayer = @"";
+    
+    //HERE WE GET USER PURCHASES INFO FROM PARSE
+    if(![[NSUserDefaults standardUserDefaults] stringForKey:@"InAppPurchases"]){
+        
+        FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+        UserPurchases *userPurchases_ = appDelegate.userPurchases;
+        
+        //Checking if user valid purchases
+        if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]   ||
+            [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"]    ) {
+            
+            //Unloking features
+            UIImage *buttonImage = [UIImage imageNamed:@"video_tab.png"];
+            [addVideoTabButton setImage:buttonImage forState:UIControlStateNormal];
+        }
+    }
     
     // Execute the rest of the stuff, a little delayed to speed up loading.
     dispatch_async( dispatch_get_main_queue(), ^{
@@ -303,8 +303,6 @@ int selectedAddMoreLayerTab = -1;
             NSArray *emoticonsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Emoticons-iPhone4" owner:self options:nil];
             emoticonsView = [emoticonsViewArray objectAtIndex:0];
         }
-        
-        
     });
 }
 
@@ -479,7 +477,6 @@ int selectedAddMoreLayerTab = -1;
             [layerScrollView addSubview:flyerBordersView];
             [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
             
-            
         } else {
             
             [layerScrollView addSubview:flyerBordersView];
@@ -521,11 +518,6 @@ int selectedAddMoreLayerTab = -1;
                 i++;
             }
         }// Loop
-        
-        /*for (int counter = 2; counter  < bodersArray.count; counter += 3) {
-            NSLog(@"%d",counter);
-            [[bodersArray objectAtIndex:counter] addTarget:self action:@selector(selectBorder:) forControlEvents:UIControlEventTouchUpInside];
-        }*/
     });
 }
 
@@ -672,6 +664,10 @@ int selectedAddMoreLayerTab = -1;
                 [labelToStore.textColor getWhite:&wht alpha:&alpha];
                 twhite = [NSString stringWithFormat:@"%f, %f", wht, alpha];
                 
+                UIColor * c = [UIColor clearColor];
+                [color.layer setBorderColor:c.CGColor];
+                [color.layer setCornerRadius:0];
+                
                 if ([textColor isEqualToString:tcolor] && [textWhiteColor isEqualToString:twhite] ) {
                     
                     // Add border to selected layer thumbnail
@@ -706,9 +702,8 @@ int selectedAddMoreLayerTab = -1;
     }
     
     NSMutableDictionary *textLayer;
-    NSString *textSize;
-    
-    
+    __block NSString *textSize;
+
     //Getting Last Info of Text Layer
     if (![currentLayer isEqualToString:@""]) {
         textLayer = [flyer getLayerFromMaster:currentLayer];
@@ -730,6 +725,19 @@ int selectedAddMoreLayerTab = -1;
             
         }
         
+        // Get the type of layer
+        NSString *type = [flyer getLayerType:currentLayer];
+        if( [type isEqualToString:FLYER_LAYER_CLIP_ART] ){
+            
+            textSize = [NSString stringWithFormat:@"%f", ([textSize floatValue]/3.0)];
+            
+        }else if ( [type isEqualToString:FLYER_LAYER_EMOTICON] ) {
+            
+            CGRect lastFrame = [flyer getImageFrame:currentLayer];
+            textSize = [NSString stringWithFormat:@"%f", (lastFrame.size.height/1.5)];
+        }
+        
+        
         NSArray *sizesArray = sizesView.subviews;
         for (int i = 1; i <=  [SIZE_ARRAY count] ; i++)
         {
@@ -741,6 +749,11 @@ int selectedAddMoreLayerTab = -1;
             
             NSString *sizeValue =SIZE_ARRAY[(i-1)];
             [size setTitle:sizeValue forState:UIControlStateNormal];
+            
+            UIColor * c = [UIColor clearColor];
+            [size.layer setBorderColor:c.CGColor];
+            [size.layer setCornerRadius:0];
+            
             
             //Here we Highlight Last Size Selected
             if (textLayer) {
@@ -755,9 +768,7 @@ int selectedAddMoreLayerTab = -1;
                     UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
                     [size.layer setBorderColor:c.CGColor];
                 }
-                
             }
-            
         }
     });
 }
@@ -900,7 +911,6 @@ int selectedAddMoreLayerTab = -1;
             [font.titleLabel setFont: fontType];
             
             [font setTitle:[cliparts[i] objectForKey:@"character" ] forState:UIControlStateNormal];
-
         }
     });
 }
@@ -941,7 +951,6 @@ int selectedAddMoreLayerTab = -1;
             //Here we Hightlight Last Selected Image
             if (![LastTag isEqualToString:@""]) {
                 
-                
                 if ([LastTag intValue] == i ) {
                     
                     // Add border to selected layer thumbnail
@@ -952,27 +961,10 @@ int selectedAddMoreLayerTab = -1;
                     [iconButton.layer setBorderColor:c.CGColor];
                 }
             }
-            
         }//loop
-        
     });
-    
 }
 
-
-/*
- * Add Arts Colors in scroll views
- */
--(void)addArtsColorsInSubView{
-    
-}
-
-/*
- * Add Arts Sizes in scroll views
- */
--(void)addArtsSizesInSubView{
-    
-}
 
 /*
  * When we Back To Main View its
@@ -1029,13 +1021,10 @@ int selectedAddMoreLayerTab = -1;
                 scrollLabel.borderColor = lbl.borderColor;
                 scrollLabel.textColor = lbl.textColor;
                 
-                
                 layerButton = [LayerTileButton  buttonWithType:UIButtonTypeCustom];
                 [layerButton addTarget:self action:@selector(editLayer:) forControlEvents:UIControlEventTouchUpInside];
                 layerButton.uid = uid;
                 layerButton.frame =CGRectMake(0, 5,layerScrollWidth, layerScrollHeight);
-                
-                
                 
                 [layerButton setBackgroundColor:[UIColor clearColor]];
                 [layerButton.layer setBorderWidth:2];
@@ -1072,7 +1061,11 @@ int selectedAddMoreLayerTab = -1;
                 
                 tileImageView.frame  = CGRectMake(layerButton.frame.origin.x+5, layerButton.frame.origin.y-2, layerButton.frame.size.width-10, layerButton.frame.size.height-7);
                 
+                tileImageView.contentMode = UIViewContentModeScaleAspectFit;
+                
                 [layerButton addSubview:tileImageView];
+                
+                //layerButton.contentMode = UIViewContentModeScaleAspectFit;
                 
                 layerButton.tag = [[NSString stringWithFormat:@"%@%d",@"444",cnt] integerValue];
                 
@@ -1232,6 +1225,7 @@ int selectedAddMoreLayerTab = -1;
                     
                     NSString *sizeStr = SIZE_ARRAY[i-1];
                     selectedSize = [sizeStr intValue];
+                    selectedSize = selectedSize * 3.0;
                     selectedFont = [selectedFont fontWithSize:selectedSize];
                 
                     [flyer setFlyerTextSize:currentLayer Size:selectedFont];
@@ -1250,7 +1244,7 @@ int selectedAddMoreLayerTab = -1;
                     
                     CGRect lastFrame = [flyer getImageFrame:currentLayer];
                     
-                    CGRect imageFrame  = CGRectMake(lastFrame.origin.x,lastFrame.origin.y,[sizeStr floatValue],[sizeStr floatValue]);
+                    CGRect imageFrame  = CGRectMake(lastFrame.origin.x,lastFrame.origin.y,([sizeStr floatValue]*1.5),([sizeStr floatValue]*1.5));
                     [flyer setImageFrame:currentLayer :imageFrame];
                     NSMutableDictionary *dic = [flyer getLayerFromMaster:currentLayer];
                     [self.flyimgView renderLayer:currentLayer layerDictionary:dic];
@@ -1339,6 +1333,11 @@ int selectedAddMoreLayerTab = -1;
     
     [Flurry logEvent:@"Emoticon Added"];
     
+    CGRect imageFrame  = CGRectMake(0,0,63,63);
+    [flyer setImageFrame:currentLayer :imageFrame];
+    NSMutableDictionary *dic = [flyer getLayerFromMaster:currentLayer];
+    [self.flyimgView renderLayer:currentLayer layerDictionary:dic];
+    
     int lstTag = 500;
     NSString *lastTag = [flyer getImageTag:currentLayer];
     
@@ -1400,7 +1399,8 @@ int selectedAddMoreLayerTab = -1;
     NSString *clipartsPlistPath = [[NSBundle mainBundle] pathForResource:@"Cliparts" ofType:@"plist"];
     NSArray *cliparts = [[NSArray alloc] initWithContentsOfFile:clipartsPlistPath];
     
-    UIFont *fontType = [UIFont fontWithName:[cliparts[i] objectForKey:@"fontType"] size:64.0f];
+    
+    UIFont *fontType = [UIFont fontWithName:[cliparts[i] objectForKey:@"fontType"] size:60.0f];
     
 	for(UIView *tempView  in [clipartsView subviews])
 	{
@@ -1615,7 +1615,6 @@ int selectedAddMoreLayerTab = -1;
                 
                 weakSelf.imgPickerFlag = 1;
                 
-                
                 //Render Flyer
                 //[self renderFlyer];
             }else{
@@ -1754,10 +1753,7 @@ int selectedAddMoreLayerTab = -1;
                 [Flurry logEvent:@"Custom Background"];
             }
             
-                
         });
-        
-        
     }];
 
     // Call back for when video is selected.
@@ -1956,8 +1952,6 @@ int selectedAddMoreLayerTab = -1;
     if (player.playbackState == MPMoviePlaybackStatePaused || player.playbackState == MPMoviePlaybackStateStopped ) {
         [self performSelectorOnMainThread:@selector(enableImageViewInteraction) withObject:nil waitUntilDone:NO ];
     }
-    
-
 }
 
 - (void) movieFinishedCallback:(NSNotification*) aNotification {
@@ -2687,7 +2681,21 @@ int selectedAddMoreLayerTab = -1;
         
         // Call Photo Tab
         [self setAddMoreLayerTabAction:addMorePhotoTabButton];
+    }else if ( [type isEqualToString:FLYER_LAYER_CLIP_ART] ) {
+        
+        // Call Photo Tab
+        [self setArtsTabAction:clipArtTabButton];
+        
+        [self addDonetoRightBarBotton];
+        
+    }else if ( [type isEqualToString:FLYER_LAYER_EMOTICON] ) {
+        
+        // Call Photo Tab
+        [self setArtsTabAction:emoticonsTabButton];
+        
+        [self addDonetoRightBarBotton];
     }
+    
 }
 
 /*
@@ -2695,6 +2703,7 @@ int selectedAddMoreLayerTab = -1;
  * and Here we manage all Layers
  */
 -(void)editLayer:(LayerTileButton *)editButton{
+    
     
     editButtonGlobal = editButton;
     currentLayer =  editButton.uid;
@@ -2772,7 +2781,13 @@ int selectedAddMoreLayerTab = -1;
     } else if ( [flyer getText:self.currentLayer] != nil ) {
         // If the current layer is a text layer, and its been tapped
         // again then edit the text.
-        [self callWrite];
+        
+        // Get the type of layer
+        NSString *type = [flyer getLayerType:currentLayer];
+        //Checking if layer in clip art,we do not open text editing mood
+        if( ![type isEqualToString:FLYER_LAYER_CLIP_ART] ){
+            [self callWrite];
+        }
     }
 }
 
@@ -3077,6 +3092,12 @@ int selectedAddMoreLayerTab = -1;
         if( [shareviewcontroller.titleView.text isEqualToString:@"Flyer"] ) {
             shareviewcontroller.titleView.text = [flyer getFlyerTitle];
         }
+        
+        NSString *title = [flyer getFlyerTitle];
+        if (![title isEqualToString:@""]) {
+            shareviewcontroller.titleView.text = title;
+        }
+        
         NSString *description = [flyer getFlyerDescription];
         if (![description isEqualToString:@""]) {
             shareviewcontroller.descriptionView.text = description;
@@ -3165,7 +3186,6 @@ int selectedAddMoreLayerTab = -1;
         [shareviewcontroller.star4 setSelected:YES];
         [shareviewcontroller.star5 setSelected:YES];
     }
-
 }
 
 /*
@@ -3222,22 +3242,29 @@ int selectedAddMoreLayerTab = -1;
 	}
     else if(selectedButton == artsColorTabButton)
 	{
-        
-        //HERE WE SET ANIMATION
-        [UIView animateWithDuration:0.4f
-                         animations:^{
-                             //Create ScrollView
-                             [self addColorsInSubView];
-                         }
-                         completion:^(BOOL finished){
-                             [layerScrollView flashScrollIndicators];
-                         }];
-        //END ANIMATION
-        
-        //Add ContextView
-        [self addScrollView:layerScrollView];
-        [artsColorTabButton setSelected:YES];
-	}
+        // Set the type
+        if ( [[flyer getLayerType:currentLayer] isEqualToString:FLYER_LAYER_EMOTICON] ) {
+            
+            _addMoreLayerOrSaveFlyerLabel.alpha = 1;
+            _addMoreLayerOrSaveFlyerLabel.text = @"COLORS CANNOT APPLY BE APPLIED ON EMOTICONS";
+            
+        }else {
+            //HERE WE SET ANIMATION
+            [UIView animateWithDuration:0.4f
+                             animations:^{
+                                 //Create ScrollView
+                                 [self addColorsInSubView];
+                             }
+                             completion:^(BOOL finished){
+                                 [layerScrollView flashScrollIndicators];
+                             }];
+            //END ANIMATION
+            
+            //Add ContextView
+            [self addScrollView:layerScrollView];
+            [artsColorTabButton setSelected:YES];
+        }
+    }
     else if(selectedButton == artsSizeTabButton)
 	{
         
@@ -3582,15 +3609,9 @@ int selectedAddMoreLayerTab = -1;
         
         if ([currentLayer isEqualToString:@""]) {
             
-            //currentLayer = [flyer addImage];
-            currentLayer = [flyer addText];
+            currentLayer = [flyer addClipArt];
+            
             editButtonGlobal.uid = currentLayer;
-            
-            
-            CGRect imageFrame  = CGRectMake(0,0,64,64);
-            [flyer setImageFrame:currentLayer :imageFrame];
-            NSMutableDictionary *dic = [flyer getLayerFromMaster:currentLayer];
-            [self.flyimgView renderLayer:currentLayer layerDictionary:dic];
         }
         
         [addArtsTabButton setSelected:YES];

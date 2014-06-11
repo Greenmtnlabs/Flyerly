@@ -11,7 +11,7 @@
 
 NSString * const TEXT = @"";
 NSString * const TEXTFONTNAME = @".HelveticaNeueInterface-M3";
-NSString * const TEXTFONTSIZE = @"17.000000";
+NSString * const TEXTFONTSIZE = @"18.000000";
 NSString * const TEXTCOLOR = @"0.000000, 0.000000, 0.000000";
 NSString * const TEXTWHITECOLOR = @"0.000000, 1.000000";
 NSString * const TEXTBORDERWHITE = @"0.000000, 0.000000";
@@ -20,6 +20,12 @@ NSString * const TEXTxPOS = @"15.000000";
 NSString * const TEXTyPOS = @"15.000000";
 NSString * const TEXTWIDTH = @"280.000000";
 NSString * const TEXTHEIGHT = @"280.000000";
+
+NSString * const CLIPARTFONTSIZE = @"8.000000";
+NSString * const CLIPARTxPOS = @"0.000000";
+NSString * const CLIPARTyPOS = @"0.000000";
+NSString * const CLIPARTWIDTH = @"160.000000";
+NSString * const CLIPARTHEIGHT = @"100.000000";
 
 @implementation Flyer
 
@@ -167,9 +173,6 @@ NSString * const TEXTHEIGHT = @"280.000000";
     NSData *snapShotData = UIImagePNGRepresentation(snapShot);
     [snapShotData writeToFile:flyerImageFile atomically:YES];
 }
-
-
-
 
 /*** HERE WE SAVE IMAGE INTO GALLERY
  * AND LINK WITH FLYERLY ALBUM
@@ -1063,6 +1066,39 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     
     return uniqueId;
 }
+
+/*
+ * When New text layer Add on Flyer
+ * its will call and Add one Content in MasterLayers Dictionary
+ * return
+ *      UniqueID
+ */
+-(NSString *)addClipArt {
+    int timestamp = [[NSDate date] timeIntervalSince1970];
+    
+    NSString *uniqueId = [NSString stringWithFormat:@"%d",timestamp];
+    
+    //Add Defaualt dictionary
+    NSMutableDictionary *textDetailDictionary = [[NSMutableDictionary alloc] init];
+    textDetailDictionary[@"text"] = TEXT;
+    textDetailDictionary[@"fontname"] = TEXTFONTNAME;
+    textDetailDictionary[@"fontsize"] = CLIPARTFONTSIZE;
+    textDetailDictionary[@"textcolor"] = TEXTCOLOR;
+    textDetailDictionary[@"textWhitecolor"] = TEXTWHITECOLOR;
+    textDetailDictionary[@"textborderWhite"] = TEXTBORDERWHITE;
+    textDetailDictionary[@"textbordercolor"] = TEXTBORDERCOLOR;
+    textDetailDictionary[@"x"] = CLIPARTxPOS;
+    textDetailDictionary[@"y"] = CLIPARTyPOS;
+    textDetailDictionary[@"width"] = CLIPARTWIDTH;
+    textDetailDictionary[@"height"] = CLIPARTHEIGHT;
+    
+    
+    [masterLayers setValue:textDetailDictionary forKey:uniqueId];
+    
+    return uniqueId;
+}
+
+
 
 
 /*

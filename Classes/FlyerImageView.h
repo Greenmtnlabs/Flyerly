@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "CustomLabel.h"
 
+@class Flyer;
+
 @protocol FlyerImageViewDelegate <NSObject>
 
 - (void)frameChangedForLayer:(NSString *)uid frame:(CGRect)frame;
@@ -33,6 +35,7 @@
 
 @property (strong, readonly) NSMutableDictionary *layers;
 @property (strong, nonatomic)UITapGestureRecognizer *flyerTapGesture;
+@property (nonatomic,strong) Flyer *flyer;
 
 @property (weak, nonatomic) id<FlyerImageViewDelegate> IBOutlet delegate;
 

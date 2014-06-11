@@ -49,7 +49,7 @@
 
 @property(nonatomic,strong) IBOutlet UIPlaceHolderTextView *descriptionView;
 @property(nonatomic,strong) IBOutlet UITextField *titleView;
-@property(nonatomic,strong) IBOutlet UIView *titleViewBorder;
+
 @property(nonatomic,strong) IBOutlet UIButton *facebookButton;
 @property(nonatomic,strong) IBOutlet UIButton *twitterButton;
 @property(nonatomic,strong) IBOutlet UIButton *emailButton;
@@ -58,7 +58,6 @@
 @property(nonatomic,strong) IBOutlet UIButton *instagramButton;
 @property(nonatomic,strong) IBOutlet UIButton *smsButton;
 @property(nonatomic,strong) IBOutlet UIButton *youTubeButton;
-
 @property(nonatomic,strong) IBOutlet UIButton *clipboardButton;
 @property(nonatomic,strong) IBOutlet UILabel *clipboardlabel;
 @property(nonatomic,strong) IBOutlet UILabel *topTitleLabel;
