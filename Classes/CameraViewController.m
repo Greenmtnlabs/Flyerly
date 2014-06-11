@@ -156,7 +156,7 @@ NSMutableArray *productArray;
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
     
     CropVideoViewController *cropVideo = [[CropVideoViewController alloc] initWithNibName:@"CropVideoViewController" bundle:nil];
-    cropVideo.desiredVideoSize = _desiredImageSize;
+    cropVideo.desiredVideoSize = _desiredVideoSize;
     cropVideo.url = movieUrl;
     cropVideo.onVideoFinished = _onVideoFinished;
     cropVideo.onVideoCancel = _onVideoCancel;
@@ -209,6 +209,7 @@ NSMutableArray *productArray;
     
     LibraryViewController *nbugallery = [[LibraryViewController alloc]initWithNibName:@"LibraryViewController" bundle:nil];
     nbugallery.desiredImageSize = _desiredImageSize;
+    nbugallery.desiredVideoSize = _desiredVideoSize;
     nbugallery.onImageTaken = _onImageTaken;
     nbugallery.onVideoFinished = _onVideoFinished;
     nbugallery.onVideoCancel = _onVideoCancel;

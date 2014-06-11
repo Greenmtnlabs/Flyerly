@@ -32,6 +32,7 @@
 }
 
 @property CGSize desiredImageSize;
+@property CGSize desiredVideoSize;
 @property (nonatomic, copy) void (^onImageTaken)(UIImage *);
 @property (nonatomic, copy) void (^onVideoFinished)(NSURL *, CGRect, CGFloat);
 @property (nonatomic, copy) void (^onVideoCancel)();
