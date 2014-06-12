@@ -22,8 +22,8 @@ NSString * const TEXTWIDTH = @"280.000000";
 NSString * const TEXTHEIGHT = @"280.000000";
 
 NSString * const CLIPARTFONTSIZE = @"8.000000";
-NSString * const CLIPARTxPOS = @"0.000000";
-NSString * const CLIPARTyPOS = @"0.000000";
+NSString * const CLIPARTxPOS = @"5.000000";
+NSString * const CLIPARTyPOS = @"5.000000";
 NSString * const CLIPARTWIDTH = @"160.000000";
 NSString * const CLIPARTHEIGHT = @"100.000000";
 
@@ -1367,7 +1367,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     
     // Apply supplied opacity
 
-    [image drawInRect:CGRectMake( 550, -15, 90, 90 ) blendMode:kCGBlendModeNormal alpha:1];
+    [image drawInRect:CGRectMake( 480, -15, 180, 180 ) blendMode:kCGBlendModeNormal alpha:1];
     
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     
