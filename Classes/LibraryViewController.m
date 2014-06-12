@@ -53,6 +53,7 @@
     // Pass the relevant properties
     asstController.reverseOrder = YES;
     asstController.desiredImageSize = self.desiredImageSize;
+    asstController.desiredVideoSize = _desiredVideoSize;
     asstController.onImageTaken = self.onImageTaken;
     asstController.onVideoFinished = self.onVideoFinished;
     asstController.videoAllow = self.videoAllow;

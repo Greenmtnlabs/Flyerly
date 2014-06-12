@@ -174,7 +174,7 @@ NSMutableArray *productArray;
                 
                 //Background Thread
                 CropVideoViewController *cropVideo = [[CropVideoViewController alloc] initWithNibName:@"CropVideoViewController" bundle:nil];
-                cropVideo.desiredVideoSize = _desiredImageSize;
+                cropVideo.desiredVideoSize = _desiredVideoSize;
                 cropVideo.url = asset.ALAsset.defaultRepresentation.url;
                 cropVideo.onVideoFinished = _onVideoFinished;
                 cropVideo.onVideoCancel = _onVideoCancel;
