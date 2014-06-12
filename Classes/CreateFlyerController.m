@@ -288,7 +288,7 @@ int selectedAddMoreLayerTab = -1;
             NSArray *fontViewArray = [[NSBundle mainBundle] loadNibNamed:@"Fonts-iPhone4" owner:self options:nil];
             fontsView = [fontViewArray objectAtIndex:0];
             
-            NSArray *fontColorsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Colours-iPhone4" owner:self options:nil];
+            NSArray *fontColorsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Colours-iPhone4s" owner:self options:nil];
             colorsView = [fontColorsViewArray objectAtIndex:0];
             
             NSArray *fontSizesViewArray = [[NSBundle mainBundle] loadNibNamed:@"Sizes-iPhone4" owner:self options:nil];
@@ -3073,6 +3073,7 @@ int selectedAddMoreLayerTab = -1;
         sharePanel = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.origin.y, 320,400 )];
         
         sharePanel = shareviewcontroller.view;
+        
         [self.view addSubview:sharePanel];
         
         sharePanel = shareviewcontroller.view;
@@ -3107,7 +3108,10 @@ int selectedAddMoreLayerTab = -1;
             [shareviewcontroller.flyerShareType setSelected:YES];
         }
         
-        [flyer setShareType:shareType];
+        if ([[flyer getShareType] isEqualToString:@"Private"]){
+            [shareviewcontroller.flyerShareType setSelected:YES];
+        }
+        
         shareviewcontroller.selectedFlyerDescription = [flyer getFlyerDescription];
         shareviewcontroller.topTitleLabel = titleLabel;
         
