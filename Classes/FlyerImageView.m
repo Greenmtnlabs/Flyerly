@@ -1,4 +1,4 @@
-//
+ //
 //  FlyerImageView.m
 //  Flyr
 //
@@ -189,7 +189,11 @@
     if ([detail objectForKey:@"image"] != nil) {
         
         if ( ![[detail valueForKey:@"image"] isEqualToString:@""]) {
-            NSData *imageData = [[NSData alloc ]initWithContentsOfMappedFile:[detail valueForKey:@"image"]];
+            NSError *error = nil;
+            NSData *imageData = [[NSData alloc] initWithContentsOfFile:[detail valueForKey:@"image"]
+                                                          options:NSDataReadingMappedIfSafe
+                                                            error:&error];
+            //NSData *imageData = [[NSData alloc ]initWithContentsOfMappedFile:[detail valueForKey:@"image"]];
             UIImage *currentImage = [UIImage imageWithData:imageData];
             [imgView setImage:currentImage];
         }
@@ -245,13 +249,16 @@
     lbl.lineWidth = 2;
     
     // Make sure we are vertically aligned to the top and centerally aligned.
-    lbl.textAlignment = UITextAlignmentCenter;
+    
+    lbl.textAlignment = UITextAlignmentCenter;//UITextAlignmentLeft;//
     [lbl setNumberOfLines:0];
     [lbl sizeToFit];
     
     // Resize the frame's width to actual
     CGRect fr = lbl.frame;
     fr.size.width = [[detail valueForKey:@"width"] floatValue];
+    fr.origin.x = [[detail valueForKey:@"x"] floatValue];
+    fr.origin.y = [[detail valueForKey:@"y"] floatValue];
     lbl.frame = fr;
 }
 
