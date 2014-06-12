@@ -242,7 +242,7 @@
 		243DD523192B24CB00391786 /* FlyerIcons-iPhone4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 243DD522192B24CB00391786 /* FlyerIcons-iPhone4.xib */; };
 		245C0FA51933081200B5B31C /* free-features.plist in Resources */ = {isa = PBXBuildFile; fileRef = 245C0FA41933081200B5B31C /* free-features.plist */; };
 		245D48E2193DEF9000E670E6 /* Entypo-Social.otf in Resources */ = {isa = PBXBuildFile; fileRef = 245D48E1193DEF9000E670E6 /* Entypo-Social.otf */; };
-		246264DF1947416A00933A69 /* Cliparts-Paid.plist in Resources */ = {isa = PBXBuildFile; fileRef = 246264DE1947416A00933A69 /* Cliparts-Paid.plist */; };
+		246264DF1947416A00933A69 /* Cliparts-paid.plist in Resources */ = {isa = PBXBuildFile; fileRef = 246264DE1947416A00933A69 /* Cliparts-paid.plist */; };
 		246EF476193C506B004539B2 /* Emoticons.xib in Resources */ = {isa = PBXBuildFile; fileRef = 246EF475193C506B004539B2 /* Emoticons.xib */; };
 		246EF4E0193C515D004539B2 /* emoticon100@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 246EF478193C515D004539B2 /* emoticon100@2x.png */; };
 		246EF4E1193C515D004539B2 /* emoticon101@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 246EF479193C515D004539B2 /* emoticon101@2x.png */; };
@@ -369,6 +369,63 @@
 		24751A6A1938A3B300DF03B2 /* clipart_tab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24751A691938A3B300DF03B2 /* clipart_tab@2x.png */; };
 		24751A6C1938A41A00DF03B2 /* art_tab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24751A6B1938A41A00DF03B2 /* art_tab@2x.png */; };
 		24751A701938A52800DF03B2 /* video_tab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24751A6E1938A52800DF03B2 /* video_tab@2x.png */; };
+		2478587F19485BAC0062F1E4 /* Fonts.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2478587E19485BAC0062F1E4 /* Fonts.plist */; };
+		247858851948736B0062F1E4 /* Aleo-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 247858801948736B0062F1E4 /* Aleo-Regular.otf */; };
+		247858861948736B0062F1E4 /* AlexBrush-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 247858811948736B0062F1E4 /* AlexBrush-Regular.ttf */; };
+		247858871948736B0062F1E4 /* Aller-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 247858821948736B0062F1E4 /* Aller-Regular.ttf */; };
+		247858881948736B0062F1E4 /* Amble-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 247858831948736B0062F1E4 /* Amble-Regular.ttf */; };
+		247858891948736B0062F1E4 /* AMBROSIA_DEMO-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 247858841948736B0062F1E4 /* AMBROSIA_DEMO-Regular.ttf */; };
+		2478588F194873E60062F1E4 /* Anson-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2478588A194873E60062F1E4 /* Anson-Regular.otf */; };
+		24785890194873E60062F1E4 /* Aurora-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2478588B194873E60062F1E4 /* Aurora-Regular.ttf */; };
+		24785891194873E60062F1E4 /* Balham-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2478588C194873E60062F1E4 /* Balham-Regular.otf */; };
+		24785892194873E60062F1E4 /* Bellota-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2478588D194873E60062F1E4 /* Bellota-Regular.otf */; };
+		24785893194873E60062F1E4 /* Canter Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2478588E194873E60062F1E4 /* Canter Light.otf */; };
+		24785899194874B70062F1E4 /* CaviarDreams-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 24785894194874B70062F1E4 /* CaviarDreams-Regular.ttf */; };
+		2478589A194874B70062F1E4 /* circula-medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 24785895194874B70062F1E4 /* circula-medium.otf */; };
+		2478589B194874B70062F1E4 /* CODE Light-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 24785896194874B70062F1E4 /* CODE Light-Regular.otf */; };
+		2478589C194874B70062F1E4 /* Exo-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 24785897194874B70062F1E4 /* Exo-Regular.otf */; };
+		2478589D194874B70062F1E4 /* FlexDisplay-Thin-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 24785898194874B70062F1E4 /* FlexDisplay-Thin-Regular.otf */; };
+		247858A31948757C0062F1E4 /* Foresee-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2478589E1948757C0062F1E4 /* Foresee-Regular.ttf */; };
+		247858A41948757C0062F1E4 /* Gent-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2478589F1948757C0062F1E4 /* Gent-Regular.otf */; };
+		247858A51948757C0062F1E4 /* Gnuolane-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 247858A01948757C0062F1E4 /* Gnuolane-Regular.ttf */; };
+		247858A61948757C0062F1E4 /* Gutsy-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 247858A11948757C0062F1E4 /* Gutsy-Regular.ttf */; };
+		247858A71948757C0062F1E4 /* Hightide-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 247858A21948757C0062F1E4 /* Hightide-Regular.ttf */; };
+		247858B2194875D20062F1E4 /* Homestead-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 247858A8194875D20062F1E4 /* Homestead-Regular.ttf */; };
+		247858B3194875D20062F1E4 /* Homizio-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 247858A9194875D20062F1E4 /* Homizio-Regular.ttf */; };
+		247858B4194875D20062F1E4 /* Jalane_light-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 247858AA194875D20062F1E4 /* Jalane_light-Regular.ttf */; };
+		247858B5194875D20062F1E4 /* Journal-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 247858AB194875D20062F1E4 /* Journal-Regular.ttf */; };
+		247858B6194875D20062F1E4 /* Junction-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 247858AC194875D20062F1E4 /* Junction-Regular.otf */; };
+		247858B7194875D20062F1E4 /* K†nkin∏ FREE FONT-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 247858AD194875D20062F1E4 /* K†nkin∏ FREE FONT-Regular.ttf */; };
+		247858B8194875D20062F1E4 /* Kaiju-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 247858AE194875D20062F1E4 /* Kaiju-Regular.ttf */; };
+		247858B9194875D20062F1E4 /* KlinicSlabMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 247858AF194875D20062F1E4 /* KlinicSlabMedium.otf */; };
+		247858BA194875D20062F1E4 /* Komoda-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 247858B0194875D20062F1E4 /* Komoda-Regular.otf */; };
+		247858BB194875D20062F1E4 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 247858B1194875D20062F1E4 /* Lato-Regular.ttf */; };
+		247858C61948764D0062F1E4 /* Lavanderia-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 247858BC1948764D0062F1E4 /* Lavanderia-Regular.otf */; };
+		247858C71948764D0062F1E4 /* LilyScriptOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 247858BD1948764D0062F1E4 /* LilyScriptOne-Regular.ttf */; };
+		247858C81948764D0062F1E4 /* LinLibertine-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 247858BE1948764D0062F1E4 /* LinLibertine-Regular.ttf */; };
+		247858C91948764D0062F1E4 /* Lobster-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 247858BF1948764D0062F1E4 /* Lobster-Regular.otf */; };
+		247858CA1948764D0062F1E4 /* Manteka-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 247858C01948764D0062F1E4 /* Manteka-Regular.ttf */; };
+		247858CB1948764D0062F1E4 /* Market_Deco-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 247858C11948764D0062F1E4 /* Market_Deco-Regular.ttf */; };
+		247858CC1948764D0062F1E4 /* Mohave-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 247858C21948764D0062F1E4 /* Mohave-Regular.otf */; };
+		247858CD1948764D0062F1E4 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 247858C31948764D0062F1E4 /* Montserrat-Regular.ttf */; };
+		247858CE1948764D0062F1E4 /* Moonhouse-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 247858C41948764D0062F1E4 /* Moonhouse-Regular.ttf */; };
+		247858CF1948764D0062F1E4 /* Myra 4F Caps-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 247858C51948764D0062F1E4 /* Myra 4F Caps-Regular.ttf */; };
+		247858D5194878080062F1E4 /* ONRAMP-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 247858D0194878080062F1E4 /* ONRAMP-Regular.ttf */; };
+		247858D6194878080062F1E4 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 247858D1194878080062F1E4 /* OpenSans-Regular.ttf */; };
+		247858D7194878080062F1E4 /* OSP-DIN-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 247858D2194878080062F1E4 /* OSP-DIN-Regular.ttf */; };
+		247858D8194878080062F1E4 /* PaihuenMapuche-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 247858D3194878080062F1E4 /* PaihuenMapuche-Regular.ttf */; };
+		247858D9194878080062F1E4 /* Pinstripe Limo-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 247858D4194878080062F1E4 /* Pinstripe Limo-Regular.ttf */; };
+		247858DF1948788C0062F1E4 /* QuattrocentoSans-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 247858DA1948788C0062F1E4 /* QuattrocentoSans-Regular.otf */; };
+		247858E01948788C0062F1E4 /* Quicksand-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 247858DB1948788C0062F1E4 /* Quicksand-Regular.otf */; };
+		247858E11948788C0062F1E4 /* Raleway-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 247858DC1948788C0062F1E4 /* Raleway-Regular.otf */; };
+		247858E21948788C0062F1E4 /* RBNo2Light-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 247858DD1948788C0062F1E4 /* RBNo2Light-Regular.otf */; };
+		247858E31948788C0062F1E4 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 247858DE1948788C0062F1E4 /* Roboto-Regular.ttf */; };
+		247858EA194878CE0062F1E4 /* Seagle-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 247858E4194878CE0062F1E4 /* Seagle-Regular.otf */; };
+		247858EB194878CE0062F1E4 /* Sintony-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 247858E5194878CE0062F1E4 /* Sintony-Regular.otf */; };
+		247858EC194878CE0062F1E4 /* Sofia-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 247858E6194878CE0062F1E4 /* Sofia-Regular.otf */; };
+		247858ED194878CE0062F1E4 /* SourceSansPro-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 247858E7194878CE0062F1E4 /* SourceSansPro-Regular.otf */; };
+		247858EE194878CE0062F1E4 /* telegrafico-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 247858E8194878CE0062F1E4 /* telegrafico-Regular.ttf */; };
+		247858EF194878CE0062F1E4 /* Track-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 247858E9194878CE0062F1E4 /* Track-Regular.ttf */; };
 		2478E5E3192C7A6E0081B31B /* InAppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2478E5E1192C7A6E0081B31B /* InAppViewController.m */; };
 		2478E5E4192C7A6E0081B31B /* InAppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2478E5E2192C7A6E0081B31B /* InAppViewController.xib */; };
 		2478E5ED192C8C0A0081B31B /* FreeFeatureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2478E5EB192C8C0A0081B31B /* FreeFeatureCell.m */; };
@@ -1118,7 +1175,7 @@
 		243DD522192B24CB00391786 /* FlyerIcons-iPhone4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "FlyerIcons-iPhone4.xib"; sourceTree = "<group>"; };
 		245C0FA41933081200B5B31C /* free-features.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "free-features.plist"; sourceTree = "<group>"; };
 		245D48E1193DEF9000E670E6 /* Entypo-Social.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Entypo-Social.otf"; path = "Data/fonts/Entypo-Social.otf"; sourceTree = "<group>"; };
-		246264DE1947416A00933A69 /* Cliparts-Paid.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Cliparts-Paid.plist"; sourceTree = "<group>"; };
+		246264DE1947416A00933A69 /* Cliparts-paid.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Cliparts-paid.plist"; sourceTree = "<group>"; };
 		246EF475193C506B004539B2 /* Emoticons.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Emoticons.xib; sourceTree = "<group>"; };
 		246EF478193C515D004539B2 /* emoticon100@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emoticon100@2x.png"; sourceTree = "<group>"; };
 		246EF479193C515D004539B2 /* emoticon101@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emoticon101@2x.png"; sourceTree = "<group>"; };
@@ -1245,6 +1302,63 @@
 		24751A691938A3B300DF03B2 /* clipart_tab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clipart_tab@2x.png"; sourceTree = "<group>"; };
 		24751A6B1938A41A00DF03B2 /* art_tab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "art_tab@2x.png"; sourceTree = "<group>"; };
 		24751A6E1938A52800DF03B2 /* video_tab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "video_tab@2x.png"; sourceTree = "<group>"; };
+		2478587E19485BAC0062F1E4 /* Fonts.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Fonts.plist; sourceTree = "<group>"; };
+		247858801948736B0062F1E4 /* Aleo-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Aleo-Regular.otf"; path = "Data/fonts/Aleo-Regular.otf"; sourceTree = "<group>"; };
+		247858811948736B0062F1E4 /* AlexBrush-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "AlexBrush-Regular.ttf"; path = "Data/fonts/AlexBrush-Regular.ttf"; sourceTree = "<group>"; };
+		247858821948736B0062F1E4 /* Aller-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Aller-Regular.ttf"; path = "Data/fonts/Aller-Regular.ttf"; sourceTree = "<group>"; };
+		247858831948736B0062F1E4 /* Amble-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Amble-Regular.ttf"; path = "Data/fonts/Amble-Regular.ttf"; sourceTree = "<group>"; };
+		247858841948736B0062F1E4 /* AMBROSIA_DEMO-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "AMBROSIA_DEMO-Regular.ttf"; path = "Data/fonts/AMBROSIA_DEMO-Regular.ttf"; sourceTree = "<group>"; };
+		2478588A194873E60062F1E4 /* Anson-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Anson-Regular.otf"; path = "Data/fonts/Anson-Regular.otf"; sourceTree = "<group>"; };
+		2478588B194873E60062F1E4 /* Aurora-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Aurora-Regular.ttf"; path = "Data/fonts/Aurora-Regular.ttf"; sourceTree = "<group>"; };
+		2478588C194873E60062F1E4 /* Balham-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Balham-Regular.otf"; path = "Data/fonts/Balham-Regular.otf"; sourceTree = "<group>"; };
+		2478588D194873E60062F1E4 /* Bellota-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Bellota-Regular.otf"; path = "Data/fonts/Bellota-Regular.otf"; sourceTree = "<group>"; };
+		2478588E194873E60062F1E4 /* Canter Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Canter Light.otf"; path = "Data/fonts/Canter Light.otf"; sourceTree = "<group>"; };
+		24785894194874B70062F1E4 /* CaviarDreams-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "CaviarDreams-Regular.ttf"; path = "Data/fonts/CaviarDreams-Regular.ttf"; sourceTree = "<group>"; };
+		24785895194874B70062F1E4 /* circula-medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "circula-medium.otf"; path = "Data/fonts/circula-medium.otf"; sourceTree = "<group>"; };
+		24785896194874B70062F1E4 /* CODE Light-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "CODE Light-Regular.otf"; path = "Data/fonts/CODE Light-Regular.otf"; sourceTree = "<group>"; };
+		24785897194874B70062F1E4 /* Exo-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Exo-Regular.otf"; path = "Data/fonts/Exo-Regular.otf"; sourceTree = "<group>"; };
+		24785898194874B70062F1E4 /* FlexDisplay-Thin-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "FlexDisplay-Thin-Regular.otf"; path = "Data/fonts/FlexDisplay-Thin-Regular.otf"; sourceTree = "<group>"; };
+		2478589E1948757C0062F1E4 /* Foresee-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Foresee-Regular.ttf"; path = "Data/fonts/Foresee-Regular.ttf"; sourceTree = "<group>"; };
+		2478589F1948757C0062F1E4 /* Gent-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Gent-Regular.otf"; path = "Data/fonts/Gent-Regular.otf"; sourceTree = "<group>"; };
+		247858A01948757C0062F1E4 /* Gnuolane-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Gnuolane-Regular.ttf"; path = "Data/fonts/Gnuolane-Regular.ttf"; sourceTree = "<group>"; };
+		247858A11948757C0062F1E4 /* Gutsy-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Gutsy-Regular.ttf"; path = "Data/fonts/Gutsy-Regular.ttf"; sourceTree = "<group>"; };
+		247858A21948757C0062F1E4 /* Hightide-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Hightide-Regular.ttf"; path = "Data/fonts/Hightide-Regular.ttf"; sourceTree = "<group>"; };
+		247858A8194875D20062F1E4 /* Homestead-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Homestead-Regular.ttf"; path = "Data/fonts/Homestead-Regular.ttf"; sourceTree = "<group>"; };
+		247858A9194875D20062F1E4 /* Homizio-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Homizio-Regular.ttf"; path = "Data/fonts/Homizio-Regular.ttf"; sourceTree = "<group>"; };
+		247858AA194875D20062F1E4 /* Jalane_light-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Jalane_light-Regular.ttf"; path = "Data/fonts/Jalane_light-Regular.ttf"; sourceTree = "<group>"; };
+		247858AB194875D20062F1E4 /* Journal-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Journal-Regular.ttf"; path = "Data/fonts/Journal-Regular.ttf"; sourceTree = "<group>"; };
+		247858AC194875D20062F1E4 /* Junction-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Junction-Regular.otf"; path = "Data/fonts/Junction-Regular.otf"; sourceTree = "<group>"; };
+		247858AD194875D20062F1E4 /* K†nkin∏ FREE FONT-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "K†nkin∏ FREE FONT-Regular.ttf"; path = "Data/fonts/K†nkin∏ FREE FONT-Regular.ttf"; sourceTree = "<group>"; };
+		247858AE194875D20062F1E4 /* Kaiju-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Kaiju-Regular.ttf"; path = "Data/fonts/Kaiju-Regular.ttf"; sourceTree = "<group>"; };
+		247858AF194875D20062F1E4 /* KlinicSlabMedium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = KlinicSlabMedium.otf; path = Data/fonts/KlinicSlabMedium.otf; sourceTree = "<group>"; };
+		247858B0194875D20062F1E4 /* Komoda-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Komoda-Regular.otf"; path = "Data/fonts/Komoda-Regular.otf"; sourceTree = "<group>"; };
+		247858B1194875D20062F1E4 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Regular.ttf"; path = "Data/fonts/Lato-Regular.ttf"; sourceTree = "<group>"; };
+		247858BC1948764D0062F1E4 /* Lavanderia-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lavanderia-Regular.otf"; path = "Data/fonts/Lavanderia-Regular.otf"; sourceTree = "<group>"; };
+		247858BD1948764D0062F1E4 /* LilyScriptOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "LilyScriptOne-Regular.ttf"; path = "Data/fonts/LilyScriptOne-Regular.ttf"; sourceTree = "<group>"; };
+		247858BE1948764D0062F1E4 /* LinLibertine-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "LinLibertine-Regular.ttf"; path = "Data/fonts/LinLibertine-Regular.ttf"; sourceTree = "<group>"; };
+		247858BF1948764D0062F1E4 /* Lobster-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lobster-Regular.otf"; path = "Data/fonts/Lobster-Regular.otf"; sourceTree = "<group>"; };
+		247858C01948764D0062F1E4 /* Manteka-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Manteka-Regular.ttf"; path = "Data/fonts/Manteka-Regular.ttf"; sourceTree = "<group>"; };
+		247858C11948764D0062F1E4 /* Market_Deco-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Market_Deco-Regular.ttf"; path = "Data/fonts/Market_Deco-Regular.ttf"; sourceTree = "<group>"; };
+		247858C21948764D0062F1E4 /* Mohave-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Mohave-Regular.otf"; path = "Data/fonts/Mohave-Regular.otf"; sourceTree = "<group>"; };
+		247858C31948764D0062F1E4 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Regular.ttf"; path = "Data/fonts/Montserrat-Regular.ttf"; sourceTree = "<group>"; };
+		247858C41948764D0062F1E4 /* Moonhouse-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Moonhouse-Regular.ttf"; path = "Data/fonts/Moonhouse-Regular.ttf"; sourceTree = "<group>"; };
+		247858C51948764D0062F1E4 /* Myra 4F Caps-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Myra 4F Caps-Regular.ttf"; path = "Data/fonts/Myra 4F Caps-Regular.ttf"; sourceTree = "<group>"; };
+		247858D0194878080062F1E4 /* ONRAMP-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ONRAMP-Regular.ttf"; path = "Data/fonts/ONRAMP-Regular.ttf"; sourceTree = "<group>"; };
+		247858D1194878080062F1E4 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Regular.ttf"; path = "Data/fonts/OpenSans-Regular.ttf"; sourceTree = "<group>"; };
+		247858D2194878080062F1E4 /* OSP-DIN-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OSP-DIN-Regular.ttf"; path = "Data/fonts/OSP-DIN-Regular.ttf"; sourceTree = "<group>"; };
+		247858D3194878080062F1E4 /* PaihuenMapuche-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "PaihuenMapuche-Regular.ttf"; path = "Data/fonts/PaihuenMapuche-Regular.ttf"; sourceTree = "<group>"; };
+		247858D4194878080062F1E4 /* Pinstripe Limo-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pinstripe Limo-Regular.ttf"; path = "Data/fonts/Pinstripe Limo-Regular.ttf"; sourceTree = "<group>"; };
+		247858DA1948788C0062F1E4 /* QuattrocentoSans-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "QuattrocentoSans-Regular.otf"; path = "Data/fonts/QuattrocentoSans-Regular.otf"; sourceTree = "<group>"; };
+		247858DB1948788C0062F1E4 /* Quicksand-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Quicksand-Regular.otf"; path = "Data/fonts/Quicksand-Regular.otf"; sourceTree = "<group>"; };
+		247858DC1948788C0062F1E4 /* Raleway-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Raleway-Regular.otf"; path = "Data/fonts/Raleway-Regular.otf"; sourceTree = "<group>"; };
+		247858DD1948788C0062F1E4 /* RBNo2Light-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "RBNo2Light-Regular.otf"; path = "Data/fonts/RBNo2Light-Regular.otf"; sourceTree = "<group>"; };
+		247858DE1948788C0062F1E4 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Regular.ttf"; path = "Data/fonts/Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		247858E4194878CE0062F1E4 /* Seagle-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Seagle-Regular.otf"; path = "Data/fonts/Seagle-Regular.otf"; sourceTree = "<group>"; };
+		247858E5194878CE0062F1E4 /* Sintony-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Sintony-Regular.otf"; path = "Data/fonts/Sintony-Regular.otf"; sourceTree = "<group>"; };
+		247858E6194878CE0062F1E4 /* Sofia-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Sofia-Regular.otf"; path = "Data/fonts/Sofia-Regular.otf"; sourceTree = "<group>"; };
+		247858E7194878CE0062F1E4 /* SourceSansPro-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SourceSansPro-Regular.otf"; path = "Data/fonts/SourceSansPro-Regular.otf"; sourceTree = "<group>"; };
+		247858E8194878CE0062F1E4 /* telegrafico-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "telegrafico-Regular.ttf"; path = "Data/fonts/telegrafico-Regular.ttf"; sourceTree = "<group>"; };
+		247858E9194878CE0062F1E4 /* Track-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Track-Regular.ttf"; path = "Data/fonts/Track-Regular.ttf"; sourceTree = "<group>"; };
 		2478E5E0192C7A6E0081B31B /* InAppViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InAppViewController.h; sourceTree = "<group>"; };
 		2478E5E1192C7A6E0081B31B /* InAppViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InAppViewController.m; sourceTree = "<group>"; };
 		2478E5E2192C7A6E0081B31B /* InAppViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InAppViewController.xib; sourceTree = "<group>"; };
@@ -2644,9 +2758,10 @@
 				246EF475193C506B004539B2 /* Emoticons.xib */,
 				246EF548193C5AE0004539B2 /* Emoticons-iPhone4.xib */,
 				24B7511D193DA02F007B6B85 /* Cliparts.plist */,
-				246264DE1947416A00933A69 /* Cliparts-Paid.plist */,
+				246264DE1947416A00933A69 /* Cliparts-paid.plist */,
 				24B7511F193DA06D007B6B85 /* Cliparts.xib */,
 				24B75121193DA07C007B6B85 /* Cliparts-iPhone4.xib */,
+				2478587E19485BAC0062F1E4 /* Fonts.plist */,
 			);
 			name = CreateFlyer;
 			sourceTree = "<group>";
@@ -3266,6 +3381,62 @@
 		6513C1AB1716FE0F00355FC3 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				247858E4194878CE0062F1E4 /* Seagle-Regular.otf */,
+				247858E5194878CE0062F1E4 /* Sintony-Regular.otf */,
+				247858E6194878CE0062F1E4 /* Sofia-Regular.otf */,
+				247858E7194878CE0062F1E4 /* SourceSansPro-Regular.otf */,
+				247858E8194878CE0062F1E4 /* telegrafico-Regular.ttf */,
+				247858E9194878CE0062F1E4 /* Track-Regular.ttf */,
+				247858DA1948788C0062F1E4 /* QuattrocentoSans-Regular.otf */,
+				247858DB1948788C0062F1E4 /* Quicksand-Regular.otf */,
+				247858DC1948788C0062F1E4 /* Raleway-Regular.otf */,
+				247858DD1948788C0062F1E4 /* RBNo2Light-Regular.otf */,
+				247858DE1948788C0062F1E4 /* Roboto-Regular.ttf */,
+				247858D0194878080062F1E4 /* ONRAMP-Regular.ttf */,
+				247858D1194878080062F1E4 /* OpenSans-Regular.ttf */,
+				247858D2194878080062F1E4 /* OSP-DIN-Regular.ttf */,
+				247858D3194878080062F1E4 /* PaihuenMapuche-Regular.ttf */,
+				247858D4194878080062F1E4 /* Pinstripe Limo-Regular.ttf */,
+				247858BC1948764D0062F1E4 /* Lavanderia-Regular.otf */,
+				247858BD1948764D0062F1E4 /* LilyScriptOne-Regular.ttf */,
+				247858BE1948764D0062F1E4 /* LinLibertine-Regular.ttf */,
+				247858BF1948764D0062F1E4 /* Lobster-Regular.otf */,
+				247858C01948764D0062F1E4 /* Manteka-Regular.ttf */,
+				247858C11948764D0062F1E4 /* Market_Deco-Regular.ttf */,
+				247858C21948764D0062F1E4 /* Mohave-Regular.otf */,
+				247858C31948764D0062F1E4 /* Montserrat-Regular.ttf */,
+				247858C41948764D0062F1E4 /* Moonhouse-Regular.ttf */,
+				247858C51948764D0062F1E4 /* Myra 4F Caps-Regular.ttf */,
+				247858A8194875D20062F1E4 /* Homestead-Regular.ttf */,
+				247858A9194875D20062F1E4 /* Homizio-Regular.ttf */,
+				247858AA194875D20062F1E4 /* Jalane_light-Regular.ttf */,
+				247858AB194875D20062F1E4 /* Journal-Regular.ttf */,
+				247858AC194875D20062F1E4 /* Junction-Regular.otf */,
+				247858AD194875D20062F1E4 /* K†nkin∏ FREE FONT-Regular.ttf */,
+				247858AE194875D20062F1E4 /* Kaiju-Regular.ttf */,
+				247858AF194875D20062F1E4 /* KlinicSlabMedium.otf */,
+				247858B0194875D20062F1E4 /* Komoda-Regular.otf */,
+				247858B1194875D20062F1E4 /* Lato-Regular.ttf */,
+				2478589E1948757C0062F1E4 /* Foresee-Regular.ttf */,
+				2478589F1948757C0062F1E4 /* Gent-Regular.otf */,
+				247858A01948757C0062F1E4 /* Gnuolane-Regular.ttf */,
+				247858A11948757C0062F1E4 /* Gutsy-Regular.ttf */,
+				247858A21948757C0062F1E4 /* Hightide-Regular.ttf */,
+				24785894194874B70062F1E4 /* CaviarDreams-Regular.ttf */,
+				24785895194874B70062F1E4 /* circula-medium.otf */,
+				24785896194874B70062F1E4 /* CODE Light-Regular.otf */,
+				24785897194874B70062F1E4 /* Exo-Regular.otf */,
+				24785898194874B70062F1E4 /* FlexDisplay-Thin-Regular.otf */,
+				2478588A194873E60062F1E4 /* Anson-Regular.otf */,
+				2478588B194873E60062F1E4 /* Aurora-Regular.ttf */,
+				2478588C194873E60062F1E4 /* Balham-Regular.otf */,
+				2478588D194873E60062F1E4 /* Bellota-Regular.otf */,
+				2478588E194873E60062F1E4 /* Canter Light.otf */,
+				247858801948736B0062F1E4 /* Aleo-Regular.otf */,
+				247858811948736B0062F1E4 /* AlexBrush-Regular.ttf */,
+				247858821948736B0062F1E4 /* Aller-Regular.ttf */,
+				247858831948736B0062F1E4 /* Amble-Regular.ttf */,
+				247858841948736B0062F1E4 /* AMBROSIA_DEMO-Regular.ttf */,
 				248A3624193EF44D0005FCAD /* Entypo.otf */,
 				245D48E1193DEF9000E670E6 /* Entypo-Social.otf */,
 				6501CAEF173242FC00A89E59 /* Swiss_721_Black_Extended_BT.ttf */,
@@ -3362,17 +3533,20 @@
 				20BA7DED18BE083300991DCC /* Flyr-Info.plist in Resources */,
 				0D4903BC1091893B00855C30 /* FlyrViewController.xib in Resources */,
 				E8A7347E1092CFF300661AAD /* ShareViewController.xib in Resources */,
+				24785891194873E60062F1E4 /* Balham-Regular.otf in Resources */,
 				249F1FA0193F55D50072835E /* bkg_register@2x.png in Resources */,
 				0DFC5320109576AB00B18478 /* MainWindow.xib in Resources */,
 				0DFC5321109576AB00B18478 /* CreateFlyerController.xib in Resources */,
 				249F203C193F562C0072835E /* private_off_button@2x.png in Resources */,
 				249F202E193F562C0072835E /* login_email_icon@2x.png in Resources */,
+				247858CD1948764D0062F1E4 /* Montserrat-Regular.ttf in Resources */,
 				30D58CFF10FB1BF800E0C7E8 /* icon0.jpg in Resources */,
 				30D58D0010FB1BF800E0C7E8 /* icon1.jpg in Resources */,
 				30D58D0110FB1BF800E0C7E8 /* icon10.jpg in Resources */,
 				248A3628193F20F30005FCAD /* video_tab_lock@2x.png in Resources */,
 				249F2041193F562C0072835E /* save_bg@2x.png in Resources */,
 				30D58D0210FB1BF800E0C7E8 /* icon11.jpg in Resources */,
+				247858D6194878080062F1E4 /* OpenSans-Regular.ttf in Resources */,
 				249F2049193F562C0072835E /* signout@2x.png in Resources */,
 				30D58D0310FB1BF800E0C7E8 /* icon12.jpg in Resources */,
 				30D58D0410FB1BF800E0C7E8 /* icon13.jpg in Resources */,
@@ -3390,6 +3564,7 @@
 				30D58D0B10FB1BF800E0C7E8 /* icon2.jpg in Resources */,
 				249F202C193F562C0072835E /* invite_friend@2x.png in Resources */,
 				206068A51924FFD300AB5230 /* Fonts.xib in Resources */,
+				247858B5194875D20062F1E4 /* Journal-Regular.ttf in Resources */,
 				30D58D0C10FB1BF800E0C7E8 /* icon20.jpg in Resources */,
 				30D58D0D10FB1BF800E0C7E8 /* icon21.jpg in Resources */,
 				30D58D0E10FB1BF800E0C7E8 /* icon22.jpg in Resources */,
@@ -3399,6 +3574,7 @@
 				30D58D1010FB1BF800E0C7E8 /* icon24.jpg in Resources */,
 				246EF547193C515D004539B2 /* emoticon9@2x.png in Resources */,
 				30D58D1110FB1BF800E0C7E8 /* icon25.jpg in Resources */,
+				247858D9194878080062F1E4 /* Pinstripe Limo-Regular.ttf in Resources */,
 				30D58D1210FB1BF800E0C7E8 /* icon26.jpg in Resources */,
 				30D58D1310FB1BF800E0C7E8 /* icon27.jpg in Resources */,
 				30D58D1410FB1BF800E0C7E8 /* icon28.jpg in Resources */,
@@ -3412,6 +3588,7 @@
 				249F1FA6193F55D50072835E /* camera_grid@2x.png in Resources */,
 				30D58D1910FB1BF800E0C7E8 /* icon32.jpg in Resources */,
 				245D48E2193DEF9000E670E6 /* Entypo-Social.otf in Resources */,
+				24785892194873E60062F1E4 /* Bellota-Regular.otf in Resources */,
 				246EF542193C515D004539B2 /* emoticon95@2x.png in Resources */,
 				30D58D1A10FB1BF800E0C7E8 /* icon33.jpg in Resources */,
 				24751A651938A1F600DF03B2 /* emoticons_tab@2x.png in Resources */,
@@ -3422,9 +3599,13 @@
 				245C0FA51933081200B5B31C /* free-features.plist in Resources */,
 				30D58D1D10FB1BF800E0C7E8 /* icon36.jpg in Resources */,
 				30D58D1E10FB1BF800E0C7E8 /* icon37.jpg in Resources */,
+				247858D8194878080062F1E4 /* PaihuenMapuche-Regular.ttf in Resources */,
 				30D58D1F10FB1BF800E0C7E8 /* icon38.jpg in Resources */,
+				247858B3194875D20062F1E4 /* Homizio-Regular.ttf in Resources */,
 				2471593419408E5F00B30301 /* flickr_share_saved@2x.png in Resources */,
+				247858851948736B0062F1E4 /* Aleo-Regular.otf in Resources */,
 				30D58D2010FB1BF800E0C7E8 /* icon39.jpg in Resources */,
+				24785899194874B70062F1E4 /* CaviarDreams-Regular.ttf in Resources */,
 				30D58D2110FB1BF800E0C7E8 /* icon4.jpg in Resources */,
 				30D58D2210FB1BF800E0C7E8 /* icon40.jpg in Resources */,
 				30D58D2310FB1BF800E0C7E8 /* icon41.jpg in Resources */,
@@ -3432,6 +3613,7 @@
 				2471593F19408E5F00B30301 /* Zpassword_box@2x.png in Resources */,
 				30D58D2410FB1BF800E0C7E8 /* icon42.jpg in Resources */,
 				30D58D2510FB1BF800E0C7E8 /* icon43.jpg in Resources */,
+				247858B7194875D20062F1E4 /* K†nkin∏ FREE FONT-Regular.ttf in Resources */,
 				30D58D2610FB1BF800E0C7E8 /* icon44.jpg in Resources */,
 				248A3634193F231D0005FCAD /* size_tab_selected@2x.png in Resources */,
 				30D58D2710FB1BF800E0C7E8 /* icon45.jpg in Resources */,
@@ -3443,9 +3625,11 @@
 				30D58D2B10FB1BF800E0C7E8 /* icon49.jpg in Resources */,
 				30D58D2C10FB1BF800E0C7E8 /* icon5.jpg in Resources */,
 				246EF4FC193C515D004539B2 /* emoticon31@2x.png in Resources */,
+				247858861948736B0062F1E4 /* AlexBrush-Regular.ttf in Resources */,
 				30D58D2D10FB1BF800E0C7E8 /* icon50.jpg in Resources */,
 				30D58D2E10FB1BF800E0C7E8 /* icon51.jpg in Resources */,
 				30D58D2F10FB1BF800E0C7E8 /* icon52.jpg in Resources */,
+				247858CA1948764D0062F1E4 /* Manteka-Regular.ttf in Resources */,
 				30D58D3010FB1BF800E0C7E8 /* icon53.jpg in Resources */,
 				249F2042193F562C0072835E /* save_gallery@2x.png in Resources */,
 				249F1FB4193F55D50072835E /* Default@2x.png in Resources */,
@@ -3460,6 +3644,7 @@
 				30D58D3810FB1BF800E0C7E8 /* icon60.jpg in Resources */,
 				30D58D3910FB1BF800E0C7E8 /* icon61.jpg in Resources */,
 				30D58D3A10FB1BF800E0C7E8 /* icon62.jpg in Resources */,
+				247858ED194878CE0062F1E4 /* SourceSansPro-Regular.otf in Resources */,
 				20A1CD6518EF0B0400484391 /* ShareVideoViewController.xib in Resources */,
 				30D58D3B10FB1BF800E0C7E8 /* icon63.jpg in Resources */,
 				30D58D3C10FB1BF800E0C7E8 /* icon64.jpg in Resources */,
@@ -3470,10 +3655,12 @@
 				30D58D4010FB1BF800E0C7E8 /* icon8.jpg in Resources */,
 				246EF4E0193C515D004539B2 /* emoticon100@2x.png in Resources */,
 				249F2033193F562C0072835E /* new_grid_line@2x.png in Resources */,
+				247858EF194878CE0062F1E4 /* Track-Regular.ttf in Resources */,
 				249F1F94193F55D50072835E /* addbg_border@2x.png in Resources */,
 				30D58D4110FB1BF800E0C7E8 /* icon9.jpg in Resources */,
+				247858A41948757C0062F1E4 /* Gent-Regular.otf in Resources */,
 				30D58D4210FB1BF800E0C7E8 /* Template0.jpg in Resources */,
-				246264DF1947416A00933A69 /* Cliparts-Paid.plist in Resources */,
+				246264DF1947416A00933A69 /* Cliparts-paid.plist in Resources */,
 				30D58D4310FB1BF800E0C7E8 /* Template1.jpg in Resources */,
 				30D58D4410FB1BF800E0C7E8 /* Template10.jpg in Resources */,
 				249F2034193F562C0072835E /* next_button@2x.png in Resources */,
@@ -3485,6 +3672,7 @@
 				30D58D4910FB1BF800E0C7E8 /* Template15.jpg in Resources */,
 				30D58D4A10FB1BF800E0C7E8 /* Template16.jpg in Resources */,
 				30D58D4B10FB1BF800E0C7E8 /* Template17.jpg in Resources */,
+				247858C71948764D0062F1E4 /* LilyScriptOne-Regular.ttf in Resources */,
 				30D58D4C10FB1BF800E0C7E8 /* Template18.jpg in Resources */,
 				30D58D4D10FB1BF800E0C7E8 /* Template19.jpg in Resources */,
 				249F2055193F562C0072835E /* text_box@2x.png in Resources */,
@@ -3510,6 +3698,7 @@
 				30D58D5B10FB1BF800E0C7E8 /* Template31.jpg in Resources */,
 				30D58D5C10FB1BF800E0C7E8 /* Template32.jpg in Resources */,
 				249F2044193F562C0072835E /* searchicon@2x.png in Resources */,
+				2478589C194874B70062F1E4 /* Exo-Regular.otf in Resources */,
 				30D58D5D10FB1BF800E0C7E8 /* Template33.jpg in Resources */,
 				30D58D5E10FB1BF800E0C7E8 /* Template34.jpg in Resources */,
 				30D58D5F10FB1BF800E0C7E8 /* Template35.jpg in Resources */,
@@ -3544,6 +3733,8 @@
 				30D58D7110FB1BF800E0C7E8 /* Template51.jpg in Resources */,
 				30D58D7210FB1BF800E0C7E8 /* Template52.jpg in Resources */,
 				30D58D7310FB1BF800E0C7E8 /* Template53.jpg in Resources */,
+				247858C81948764D0062F1E4 /* LinLibertine-Regular.ttf in Resources */,
+				247858B6194875D20062F1E4 /* Junction-Regular.otf in Resources */,
 				30D58D7410FB1BF800E0C7E8 /* Template54.jpg in Resources */,
 				30D58D7510FB1BF800E0C7E8 /* Template55.jpg in Resources */,
 				246EF50C193C515D004539B2 /* emoticon46@2x.png in Resources */,
@@ -3558,6 +3749,7 @@
 				30D58D7D10FB1BF800E0C7E8 /* Template62.jpg in Resources */,
 				30D58D7E10FB1BF800E0C7E8 /* Template63.jpg in Resources */,
 				30D58D7F10FB1BF800E0C7E8 /* Template64.jpg in Resources */,
+				2478588F194873E60062F1E4 /* Anson-Regular.otf in Resources */,
 				249F202A193F562C0072835E /* instagram_share@2x.png in Resources */,
 				30D58D8010FB1BF800E0C7E8 /* Template65.jpg in Resources */,
 				30D58D8110FB1BF800E0C7E8 /* Template66.jpg in Resources */,
@@ -3573,6 +3765,8 @@
 				20714DF7187F2105000D6838 /* cancelcamera.png in Resources */,
 				249F205C193F562C0072835E /* twitter_share_selected@2x.png in Resources */,
 				65CC0AB7171803FB003D0BE7 /* Localizable.strings in Resources */,
+				247858A31948757C0062F1E4 /* Foresee-Regular.ttf in Resources */,
+				247858D7194878080062F1E4 /* OSP-DIN-Regular.ttf in Resources */,
 				246EF506193C515D004539B2 /* emoticon40@2x.png in Resources */,
 				246EF4E9193C515D004539B2 /* emoticon14@2x.png in Resources */,
 				65CC0AB6171802DF003D0BE7 /* Settings.bundle in Resources */,
@@ -3582,9 +3776,11 @@
 				249F1F9A193F55D50072835E /* addbg_takephoto@2x.png in Resources */,
 				20714DF3187F1B9D000D6838 /* cameraline.png in Resources */,
 				246EF4F6193C515D004539B2 /* emoticon26@2x.png in Resources */,
+				247858A61948757C0062F1E4 /* Gutsy-Regular.ttf in Resources */,
 				249F2028193F562C0072835E /* inAppPurchaseViewBg@2x.png in Resources */,
 				2004C83F1913AA5F00E4BBFB /* InAppPurchaseCell.xib in Resources */,
 				246EF53E193C515D004539B2 /* emoticon91@2x.png in Resources */,
+				247858891948736B0062F1E4 /* AMBROSIA_DEMO-Regular.ttf in Resources */,
 				654B255017202B1C0047C8F6 /* AfterUpdateController.xib in Resources */,
 				246EF50E193C515D004539B2 /* emoticon48@2x.png in Resources */,
 				246EF515193C515D004539B2 /* emoticon54@2x.png in Resources */,
@@ -3592,6 +3788,7 @@
 				246EF53D193C515D004539B2 /* emoticon90@2x.png in Resources */,
 				249F1FCA193F55E90072835E /* email_share_selected@2x.png in Resources */,
 				246EF528193C515D004539B2 /* emoticon71@2x.png in Resources */,
+				247858D5194878080062F1E4 /* ONRAMP-Regular.ttf in Resources */,
 				246EF476193C506B004539B2 /* Emoticons.xib in Resources */,
 				2471593E19408E5F00B30301 /* tumblr_share_saved@2x.png in Resources */,
 				246EF4F7193C515D004539B2 /* emoticon27@2x.png in Resources */,
@@ -3602,6 +3799,7 @@
 				65A464E51726CBA2002C32FB /* BankGothic-Regular DB.ttf in Resources */,
 				65A464E61726CBA2002C32FB /* black_jack.ttf in Resources */,
 				246EF4FD193C515D004539B2 /* emoticon32@2x.png in Resources */,
+				247858E31948788C0062F1E4 /* Roboto-Regular.ttf in Resources */,
 				65A464E71726CBA2002C32FB /* BlueNoon.ttf in Resources */,
 				249F2046193F562C0072835E /* SettingcellBack@2x.png in Resources */,
 				65A464E81726CBA2002C32FB /* Comfortaa_Bold.ttf in Resources */,
@@ -3621,6 +3819,7 @@
 				65A464F01726CBA2002C32FB /* Quicksand_Bold.otf in Resources */,
 				246EF4E8193C515D004539B2 /* emoticon13@2x.png in Resources */,
 				65A464F11726CBA2002C32FB /* Signika-Bold.otf in Resources */,
+				2478589B194874B70062F1E4 /* CODE Light-Regular.otf in Resources */,
 				65A464F21726CBA2002C32FB /* Signika-Light.otf in Resources */,
 				246EF522193C515D004539B2 /* emoticon66@2x.png in Resources */,
 				65A464F31726CBA2002C32FB /* Signika-Regular.otf in Resources */,
@@ -3634,6 +3833,7 @@
 				65A464FD1726D703002C32FB /* HelveticaRoundedLTStd-BdCn_0.otf in Resources */,
 				249F2056193F562C0072835E /* text_edit_selected@2x.png in Resources */,
 				246EF532193C515D004539B2 /* emoticon80@2x.png in Resources */,
+				247858C91948764D0062F1E4 /* Lobster-Regular.otf in Resources */,
 				249F1FAC193F55D50072835E /* clip_setting_selected@2x.png in Resources */,
 				249F1FC9193F55E90072835E /* email_share_saved@2x.png in Resources */,
 				2012ECB319261B0F00D5EA58 /* Colours.xib in Resources */,
@@ -3657,9 +3857,11 @@
 				249F2063193F562C0072835E /* Zqemail_box@2x.png in Resources */,
 				246EF510193C515D004539B2 /* emoticon4@2x.png in Resources */,
 				249F1FD2193F55E90072835E /* flat_text_box@2x.png in Resources */,
+				247858CF1948764D0062F1E4 /* Myra 4F Caps-Regular.ttf in Resources */,
 				246EF52F193C515D004539B2 /* emoticon78@2x.png in Resources */,
 				249F205B193F562C0072835E /* tumblr_share@2x.png in Resources */,
 				4986857718B50657002113E4 /* CustomAssetsGroupView.xib in Resources */,
+				2478587F19485BAC0062F1E4 /* Fonts.plist in Resources */,
 				246EF527193C515D004539B2 /* emoticon70@2x.png in Resources */,
 				65F1BE97173AA13400EE6F9F /* facebook_share_saved.png in Resources */,
 				65F1BEAC173AA13400EE6F9F /* twitter_disabled_saved@2x.png in Resources */,
@@ -3681,11 +3883,14 @@
 				65C1A41D1742516D00947D5E /* Template5@2x.jpg in Resources */,
 				65C1A41E1742516D00947D5E /* Template6@2x.jpg in Resources */,
 				65C1A41F1742516D00947D5E /* Template7@2x.jpg in Resources */,
+				247858A71948757C0062F1E4 /* Hightide-Regular.ttf in Resources */,
+				247858CE1948764D0062F1E4 /* Moonhouse-Regular.ttf in Resources */,
 				65C1A4201742516D00947D5E /* Template8@2x.jpg in Resources */,
 				65C1A4211742516D00947D5E /* Template9@2x.jpg in Resources */,
 				65C1A4221742516D00947D5E /* Template10@2x.jpg in Resources */,
 				65C1A4231742516D00947D5E /* Template11@2x.jpg in Resources */,
 				65C1A4241742516D00947D5E /* Template12@2x.jpg in Resources */,
+				247858EE194878CE0062F1E4 /* telegrafico-Regular.ttf in Resources */,
 				65C1A4251742516D00947D5E /* Template13@2x.jpg in Resources */,
 				65C1A4261742516D00947D5E /* Template14@2x.jpg in Resources */,
 				65C1A4271742516D00947D5E /* Template15@2x.jpg in Resources */,
@@ -3731,6 +3936,7 @@
 				65C1A4411742516D00947D5E /* Template41@2x.jpg in Resources */,
 				65C1A4421742516D00947D5E /* Template42@2x.jpg in Resources */,
 				249F2029193F562C0072835E /* instagram_share_selected@2x.png in Resources */,
+				247858B2194875D20062F1E4 /* Homestead-Regular.ttf in Resources */,
 				246EF514193C515D004539B2 /* emoticon53@2x.png in Resources */,
 				65C1A4431742516D00947D5E /* Template43@2x.jpg in Resources */,
 				65C1A4441742516D00947D5E /* Template44@2x.jpg in Resources */,
@@ -3741,6 +3947,7 @@
 				65C1A4481742516D00947D5E /* Template48@2x.jpg in Resources */,
 				249F1FCE193F55E90072835E /* facebook_share_selected@2x.png in Resources */,
 				65C1A4491742516D00947D5E /* Template49@2x.jpg in Resources */,
+				247858E21948788C0062F1E4 /* RBNo2Light-Regular.otf in Resources */,
 				65C1A44A1742516D00947D5E /* Template50@2x.jpg in Resources */,
 				65C1A44B1742516D00947D5E /* Template51@2x.jpg in Resources */,
 				65C1A44C1742516D00947D5E /* Template52@2x.jpg in Resources */,
@@ -3759,6 +3966,7 @@
 				246EF4E6193C515D004539B2 /* emoticon11@2x.png in Resources */,
 				65C1A4541742516D00947D5E /* Template60@2x.jpg in Resources */,
 				249F2048193F562C0072835E /* share_settings@2x.png in Resources */,
+				247858C61948764D0062F1E4 /* Lavanderia-Regular.otf in Resources */,
 				249F1FAE193F55D50072835E /* close_button@2x.png in Resources */,
 				65C1A4551742516D00947D5E /* Template61@2x.jpg in Resources */,
 				65C1A4561742516D00947D5E /* Template62@2x.jpg in Resources */,
@@ -3772,13 +3980,17 @@
 				246EF536193C515D004539B2 /* emoticon84@2x.png in Resources */,
 				0FEF2D9A174E65B100FDD8C9 /* HelpController.xib in Resources */,
 				246EF549193C5AE0004539B2 /* Emoticons-iPhone4.xib in Resources */,
+				247858B4194875D20062F1E4 /* Jalane_light-Regular.ttf in Resources */,
 				20714DF1187F167A000D6838 /* Camerabottom.png in Resources */,
 				20FA7E731872AAF50057C3F3 /* CameraViewController.xib in Resources */,
 				246EF513193C515D004539B2 /* emoticon52@2x.png in Resources */,
 				246EF511193C515D004539B2 /* emoticon50@2x.png in Resources */,
+				247858E11948788C0062F1E4 /* Raleway-Regular.otf in Resources */,
 				2478E5EE192C8C0A0081B31B /* FreeFeatureCell.xib in Resources */,
+				24785893194873E60062F1E4 /* Canter Light.otf in Resources */,
 				206068A71924FFEB00AB5230 /* Fonts-iPhone4.xib in Resources */,
 				249F2024193F562C0072835E /* help_img@2x.png in Resources */,
+				247858A51948757C0062F1E4 /* Gnuolane-Regular.ttf in Resources */,
 				249F2054193F562C0072835E /* t_setting_button@2x.png in Resources */,
 				4977B1DD193C90CC0024A209 /* delete_button@2x.png in Resources */,
 				246EF543193C515D004539B2 /* emoticon96@2x.png in Resources */,
@@ -3788,7 +4000,9 @@
 				246EF538193C515D004539B2 /* emoticon86@2x.png in Resources */,
 				249F1F8B193F55D50072835E /* 07_camera@2x.png in Resources */,
 				249F1FC5193F55E90072835E /* email_box@2x.png in Resources */,
+				247858DF1948788C0062F1E4 /* QuattrocentoSans-Regular.otf in Resources */,
 				249F2026193F562C0072835E /* icon_button@2x.png in Resources */,
+				2478589A194874B70062F1E4 /* circula-medium.otf in Resources */,
 				49F109D2192C7926002B0CD4 /* CropVideoViewController.xib in Resources */,
 				2479BC671941FB9400FF5FF5 /* TextBorders.xib in Resources */,
 				249F201E193F562C0072835E /* flickr_share_selected@2x.png in Resources */,
@@ -3807,6 +4021,7 @@
 				0F8007D2175378F0000FF7FA /* ricon5.png in Resources */,
 				246EF540193C515D004539B2 /* emoticon93@2x.png in Resources */,
 				0F8007D4175378F0000FF7FA /* ricon6.png in Resources */,
+				247858CB1948764D0062F1E4 /* Market_Deco-Regular.ttf in Resources */,
 				0F8007D6175378F0000FF7FA /* ricon7.png in Resources */,
 				0F8007D8175378F0000FF7FA /* ricon8.png in Resources */,
 				249F2038193F562C0072835E /* password_box@2x.png in Resources */,
@@ -3817,6 +4032,7 @@
 				0F8007E0175378F0000FF7FA /* ricon12.png in Resources */,
 				0F8007E2175378F0000FF7FA /* ricon13.png in Resources */,
 				0F8007E4175378F0000FF7FA /* ricon14.png in Resources */,
+				247858B9194875D20062F1E4 /* KlinicSlabMedium.otf in Resources */,
 				0F8007E6175378F0000FF7FA /* ricon15.png in Resources */,
 				0F8007E8175378F0000FF7FA /* ricon16.png in Resources */,
 				0F8007EA175378F0000FF7FA /* ricon17.png in Resources */,
@@ -3846,6 +4062,7 @@
 				246EF500193C515D004539B2 /* emoticon35@2x.png in Resources */,
 				20F4D8E117BA3D0A007B2DF5 /* ProfileViewController.xib in Resources */,
 				249F2037193F562C0072835E /* panel_close_button@2x.png in Resources */,
+				247858E01948788C0062F1E4 /* Quicksand-Regular.otf in Resources */,
 				246EF53B193C515D004539B2 /* emoticon89@2x.png in Resources */,
 				249F2047193F562C0072835E /* settings2@2x.png in Resources */,
 				20D7474117BE77E900966BA6 /* splash_bg.png in Resources */,
@@ -3858,6 +4075,7 @@
 				208E35AC17C224B100CE54BE /* welcome_bg-568h@2x.png in Resources */,
 				2012ECAF1926078E00D5EA58 /* Sizes-iPhone4.xib in Resources */,
 				202FF12B17C3ABDE003C6245 /* bkg_register-568h@2x.png in Resources */,
+				247858BA194875D20062F1E4 /* Komoda-Regular.otf in Resources */,
 				2086F90E17C4C2E300664123 /* Zmain_screenbg@2x.png in Resources */,
 				24B75120193DA06D007B6B85 /* Cliparts.xib in Resources */,
 				246EF504193C515D004539B2 /* emoticon39@2x.png in Resources */,
@@ -3877,6 +4095,7 @@
 				4977B1DF193C90FA0024A209 /* tick@2x.png in Resources */,
 				202C638A17EA06E800CB9A75 /* ricon25.png in Resources */,
 				249F2030193F562C0072835E /* ModeCamera@2x.png in Resources */,
+				247858881948736B0062F1E4 /* Amble-Regular.ttf in Resources */,
 				249F1FAB193F55D50072835E /* checkgray@2x.png in Resources */,
 				202C638C17EA06E800CB9A75 /* ricon26.png in Resources */,
 				249F1F9F193F55D50072835E /* back_button@2x.png in Resources */,
@@ -3890,6 +4109,7 @@
 				2471593319408E5F00B30301 /* flickr_disabled_saved@2x.png in Resources */,
 				249F2035193F562C0072835E /* outline_button_selected@2x.png in Resources */,
 				202C639817EA06E800CB9A75 /* ricon32.png in Resources */,
+				247858EB194878CE0062F1E4 /* Sintony-Regular.otf in Resources */,
 				202C639A17EA06E800CB9A75 /* ricon33.png in Resources */,
 				249F1FCD193F55E90072835E /* facebook_login@2x.png in Resources */,
 				202C639C17EA06E800CB9A75 /* ricon34.png in Resources */,
@@ -3915,6 +4135,7 @@
 				202C63B217EA06E800CB9A75 /* ricon45.png in Resources */,
 				202C63B417EA06E800CB9A75 /* ricon46.png in Resources */,
 				202C63B617EA06E800CB9A75 /* ricon47.png in Resources */,
+				247858BB194875D20062F1E4 /* Lato-Regular.ttf in Resources */,
 				202C63B817EA06E800CB9A75 /* ricon48.png in Resources */,
 				202C63BA17EA06E800CB9A75 /* ricon49.png in Resources */,
 				202C63BC17EA06E800CB9A75 /* ricon50.png in Resources */,
@@ -3928,6 +4149,7 @@
 				202C63C817EA06E800CB9A75 /* ricon56.png in Resources */,
 				202C63CA17EA06E800CB9A75 /* ricon57.png in Resources */,
 				249F1FCF193F55E90072835E /* facebook_share@2x.png in Resources */,
+				247858871948736B0062F1E4 /* Aller-Regular.ttf in Resources */,
 				202C63CC17EA06E800CB9A75 /* ricon58.png in Resources */,
 				246EF4F5193C515D004539B2 /* emoticon25@2x.png in Resources */,
 				202C63CE17EA06E800CB9A75 /* ricon59.png in Resources */,
@@ -3958,6 +4180,7 @@
 				249F2050193F562C0072835E /* star@2x.png in Resources */,
 				249F204B193F562C0072835E /* size_button@2x.png in Resources */,
 				249F2062193F562C0072835E /* Zlogin-bg@2x.png in Resources */,
+				247858B8194875D20062F1E4 /* Kaiju-Regular.ttf in Resources */,
 				202C63EE17EA06E800CB9A75 /* ricon75.png in Resources */,
 				202C63F017EA06E800CB9A75 /* ricon76.png in Resources */,
 				249F2052193F562C0072835E /* symbolicon_button@2x.png in Resources */,
@@ -3976,16 +4199,20 @@
 				246EF507193C515D004539B2 /* emoticon41@2x.png in Resources */,
 				246EF4EA193C515D004539B2 /* emoticon15@2x.png in Resources */,
 				202C640217EA06E800CB9A75 /* ricon85.png in Resources */,
+				247858EA194878CE0062F1E4 /* Seagle-Regular.otf in Resources */,
 				202C640417EA06E800CB9A75 /* ricon86.png in Resources */,
 				249F1FCB193F55E90072835E /* email_share@2x.png in Resources */,
 				202C640617EA06E800CB9A75 /* ricon87.png in Resources */,
 				202C640817EA06E800CB9A75 /* ricon88.png in Resources */,
+				247858CC1948764D0062F1E4 /* Mohave-Regular.otf in Resources */,
 				202C640A17EA06E800CB9A75 /* ricon89.png in Resources */,
 				202C640C17EA06E800CB9A75 /* ricon90.png in Resources */,
 				202C640E17EA06E800CB9A75 /* ricon91.png in Resources */,
 				202C641017EA06E800CB9A75 /* ricon92.png in Resources */,
+				2478589D194874B70062F1E4 /* FlexDisplay-Thin-Regular.otf in Resources */,
 				202C641217EA06E800CB9A75 /* ricon93.png in Resources */,
 				202C641417EA06E800CB9A75 /* ricon94.png in Resources */,
+				247858EC194878CE0062F1E4 /* Sofia-Regular.otf in Resources */,
 				249F1F8E193F55D50072835E /* 07_roll_selected@2x.png in Resources */,
 				249F2061193F562C0072835E /* youtube_share@2x.png in Resources */,
 				246EF4F0193C515D004539B2 /* emoticon20@2x.png in Resources */,
@@ -3999,6 +4226,7 @@
 				249F1F98193F55D50072835E /* addbg_library@2x.png in Resources */,
 				200A818618D32C9D0095AA3E /* crop_and_resize.png in Resources */,
 				248A362D193F221E0005FCAD /* clipart_tab_selected@2x.png in Resources */,
+				24785890194873E60062F1E4 /* Aurora-Regular.ttf in Resources */,
 				2471593D19408E5F00B30301 /* tumblr_disabled_saved@2x.png in Resources */,
 				246EF4E5193C515D004539B2 /* emoticon10@2x.png in Resources */,
 				249F1FAF193F55D50072835E /* color_button_selected@2x.png in Resources */,

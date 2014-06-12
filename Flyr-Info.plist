@@ -65,6 +65,7 @@
 	<string>MainWindow</string>
 	<key>UIAppFonts</key>
 	<array>
+		<string></string>
 		<string>HelveticaRoundedLTStd-BdCn_0.otf</string>
 		<string>Swiss_721_Black_Extended_BT.ttf</string>
 		<string>Anjelika Rose.ttf</string>
@@ -91,6 +92,64 @@
 		<string>Signika-Semibold.otf</string>
 		<string>Entypo.otf</string>
 		<string>Entypo-Social.otf</string>
+		<string>Aleo-Regular.otf</string>
+		<string>AlexBrush-Regular.ttf</string>
+		<string>Aller-Regular.ttf</string>
+		<string>Amble-Regular.ttf</string>
+		<string>AMBROSIA_DEMO-Regular.ttf</string>
+		<string>Anson-Regular.otf</string>
+		<string>Aurora-Regular.ttf</string>
+		<string>Balham-Regular.otf</string>
+		<string>Bellota-Regular.otf</string>
+		<string>Canter Light.otf</string>
+		<string>CaviarDreams-Regular.ttf</string>
+		<string>circula-medium.otf</string>
+		<string>CODE Light-Regular.otf</string>
+		<string>Exo-Regular.otf</string>
+		<string>FlexDisplay-Thin-Regular.otf</string>
+		<string>Foresee-Regular.ttf</string>
+		<string>Gent-Regular.otf</string>
+		<string>Gnuolane-Regular.ttf</string>
+		<string>Gutsy-Regular.ttf</string>
+		<string>Hightide-Regular.ttf</string>
+		<string>Homestead-Regular.ttf</string>
+		<string>Homizio-Regular.ttf</string>
+		<string>Jalane_light-Regular.ttf</string>
+		<string>Journal-Regular.ttf</string>
+		<string>Junction-Regular.otf</string>
+		<string>K†nkin∏ FREE FONT-Regular.ttf</string>
+		<string>Kaiju-Regular.ttf</string>
+		<string>KlinicSlabMedium.otf</string>
+		<string>Komoda-Regular.otf</string>
+		<string>Lato-Regular.ttf</string>
+		<string>Lavanderia-Regular.otf</string>
+		<string>LilyScriptOne-Regular.ttf</string>
+		<string>LinLibertine-Regular.ttf</string>
+		<string>Lobster-Regular.otf</string>
+		<string>Manteka-Regular.ttf</string>
+		<string>Market_Deco-Regular.ttf</string>
+		<string>Mohave-Regular.otf</string>
+		<string>Montserrat-Regular.ttf</string>
+		<string>Moonhouse-Regular.ttf</string>
+		<string>Myra 4F Caps-Regular.ttf</string>
+		<string>Homestead-Regular.ttf</string>
+		<string>Homestead-Regular.ttf</string>
+		<string>ONRAMP-Regular.ttf</string>
+		<string>OpenSans-Regular.ttf</string>
+		<string>OSP-DIN-Regular.ttf</string>
+		<string>PaihuenMapuche-Regular.ttf</string>
+		<string>Pinstripe Limo-Regular.ttf</string>
+		<string>QuattrocentoSans-Regular.otf</string>
+		<string>Quicksand-Regular.otf</string>
+		<string>Raleway-Regular.otf</string>
+		<string>RBNo2Light-Regular.otf</string>
+		<string>Roboto-Regular.ttf</string>
+		<string>Seagle-Regular.otf</string>
+		<string>Sintony-Regular.otf</string>
+		<string>Sofia-Regular.otf</string>
+		<string>SourceSansPro-Regular.otf</string>
+		<string>telegrafico-Regular.ttf</string>
+		<string>Track-Regular.ttf</string>
 	</array>
 	<key>UIPrerenderedIcon</key>
 	<true/>
