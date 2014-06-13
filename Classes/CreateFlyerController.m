@@ -1908,15 +1908,12 @@ NSArray *emoticons;
                                                object:nil];
 
     self.flyimgView.image = nil;
-    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap:)];
-    [player.view  addGestureRecognizer:tap];
-    tap.delegate = self;
+    
     [self.playerView addSubview:player.view];
- 
 
     [playerToolBar setFrame:CGRectMake(0, self.playerView.frame.size.height - 40, 306, 40)];
-    //[self.transparentView addSubview:playerToolBar];
-    [playerView addSubview:playerToolBar];
+    [self.flyimgView addSubview:playerToolBar];
+
     player.accessibilityElementsHidden = YES;
     player.shouldAutoplay = NO;
     player.fullscreen = NO;
@@ -2007,7 +2004,7 @@ NSArray *emoticons;
     
     //User Press Pause or Stop we Disable Player Access and Enable Flyer for Others Layers
     if (player.playbackState == MPMoviePlaybackStatePaused || player.playbackState == MPMoviePlaybackStateStopped ) {
-        [self performSelectorOnMainThread:@selector(enableImageViewInteraction) withObject:nil waitUntilDone:NO ];
+        [self performSelectorOnMainThread:@selector(toggleImageViewInteraction) withObject:nil waitUntilDone:NO ];
     }
 }
 
@@ -2633,6 +2630,9 @@ NSArray *emoticons;
  */
 -(void)videoMergeProcess {
     
+    // Make sure we hide the play bar.
+    [playerToolBar setHidden:YES];
+    
     // CREATING PATH FOR FLYER OVERLAY VIDEO
     NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
     NSString *originalVideoPath = [NSString stringWithFormat:@"%@/Template/template.mov", currentpath];
@@ -2863,24 +2863,17 @@ NSArray *emoticons;
 /**
  * Disable User Interaction of ImageView for video Player.
  */
-- (void)disableImageViewInteraction {
-    //flyimgView.userInteractionEnabled = NO;
-    //transparentView.userInteractionEnabled = YES;
-    [playerToolBar setHidden:NO];
-    //[[self flyimgView] bringSubviewToFront:playerToolBar];
-    [playerView bringSubviewToFront:playerView];
-}
 
+- (void)toggleImageViewInteraction {
+    
+    // If the toolbar is hidden, show it.
+    if ( playerToolBar.hidden ) {
+        [self.flyimgView bringSubviewToFront:playerToolBar];
+        [playerToolBar setHidden:NO];
+    } else {
+        [playerToolBar setHidden:YES];
+    }
 
-/**
- * Enable User Interaction of ImageView.
- */
-- (void)enableImageViewInteraction {
-    //flyimgView.userInteractionEnabled = YES;
-    //transparentView.userInteractionEnabled = NO;
-    [playerToolBar setHidden:YES];
-    [playerView sendSubviewToBack:playerView];
-    //[self.flyimgView sendSubviewToBack:flyimgView];
 }
 
 #pragma mark - Undo Implementation
@@ -3953,11 +3946,6 @@ NSArray *emoticons;
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
     return YES;
 }
-
-- (void)onTap:(UITapGestureRecognizer *)gesture {
-    [self enableImageViewInteraction];
-}
-
 
 - ( void )productSuccesfullyPurchased: (NSString *)productId {
     
