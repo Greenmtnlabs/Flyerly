@@ -65,7 +65,6 @@
 	<string>MainWindow</string>
 	<key>UIAppFonts</key>
 	<array>
-		<string></string>
 		<string>HelveticaRoundedLTStd-BdCn_0.otf</string>
 		<string>Swiss_721_Black_Extended_BT.ttf</string>
 		<string>Anjelika Rose.ttf</string>

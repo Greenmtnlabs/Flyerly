@@ -14,6 +14,9 @@
 CameraViewController *nbuCamera;
 
 NSMutableArray *productArray;
+
+
+
 @synthesize selectedFont,selectedColor,selectedTemplate,fontTabButton,colorTabButton,sizeTabButton,fontEditButton,selectedSize,
 fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sharePanel,clipArtTabButton,emoticonsTabButton,artsColorTabButton,artsSizeTabButton;
 @synthesize cameraTabButton,photoTabButton,widthTabButton,heightTabButton,deleteAlert,signInAlert;
@@ -25,6 +28,13 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 @synthesize backgroundsView,flyerBordersView,fontsView,colorsView,sizesView,textBordersView,clipartsView,emoticonsView;
 int selectedAddMoreLayerTab = -1;
 
+UIView* premiumFontsView;
+UIView* premiumEmoticonsView;
+UIView* premiumClipartsView;
+
+NSArray *premiumFonts;
+NSArray *premiumCliparts;
+NSArray *emoticons;
 
 #pragma mark -  View Appear Methods
 
@@ -182,6 +192,12 @@ int selectedAddMoreLayerTab = -1;
     
     // Execute the rest of the stuff, a little delayed to speed up loading.
     dispatch_async( dispatch_get_main_queue(), ^{
+        
+        // Find out the path of empticons.plist
+        NSString *emoticonsPlistPath = [[NSBundle mainBundle] pathForResource:@"Emoticons-paid" ofType:@"plist"];
+        emoticons = [[NSArray alloc] initWithContentsOfFile:emoticonsPlistPath];
+        
+        
         fontArray =[[NSArray  alloc] initWithObjects:
                     [UIFont fontWithName:@"Arial" size:27],
                     [UIFont fontWithName:@"GoodDog" size:27],
@@ -259,8 +275,9 @@ int selectedAddMoreLayerTab = -1;
             NSArray *flyerBordersViewArray = [[NSBundle mainBundle] loadNibNamed:@"Borders" owner:self options:nil];
             flyerBordersView = [flyerBordersViewArray objectAtIndex:0];
             
-            NSArray *fontViewArray = [[NSBundle mainBundle] loadNibNamed:@"Fonts" owner:self options:nil];
-            fontsView = [fontViewArray objectAtIndex:0];
+            [self addFontsInSubView];
+            //NSArray *fontViewArray = [[NSBundle mainBundle] loadNibNamed:@"Fonts" owner:self options:nil];
+            //fontsView = [fontViewArray objectAtIndex:0];
             
             NSArray *fontColorsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Colours" owner:self options:nil];
             colorsView = [fontColorsViewArray objectAtIndex:0];
@@ -271,11 +288,13 @@ int selectedAddMoreLayerTab = -1;
             NSArray *textBordersViewArray = [[NSBundle mainBundle] loadNibNamed:@"TextBorders" owner:self options:nil];
             textBordersView = [textBordersViewArray objectAtIndex:0];
             
-            NSArray *clipartsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Cliparts" owner:self options:nil];
-            clipartsView = [clipartsViewArray objectAtIndex:0];
+            [self addClipArtsInSubView];
+            //NSArray *clipartsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Cliparts" owner:self options:nil];
+            //clipartsView = [clipartsViewArray objectAtIndex:0];
             
-            NSArray *emoticonsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Emoticons" owner:self options:nil];
-            emoticonsView = [emoticonsViewArray objectAtIndex:0];
+            [self addEmoticonsInSubView];
+            //NSArray *emoticonsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Emoticons" owner:self options:nil];
+            //emoticonsView = [emoticonsViewArray objectAtIndex:0];
             
         } else {
             
@@ -526,6 +545,13 @@ int selectedAddMoreLayerTab = -1;
  */
 -(void)addFontsInSubView{
     
+    premiumFontsView = [[UIView alloc] init];
+    
+    
+    
+    NSString *premiuimFontsPath = [[NSBundle mainBundle] pathForResource:@"Fonts-paid" ofType:@"plist"];
+    premiumFonts = [[NSArray alloc] initWithContentsOfFile:premiuimFontsPath];
+    
     [self deleteSubviewsFromScrollView];
     
     CGFloat curXLoc = 0;
@@ -538,58 +564,63 @@ int selectedAddMoreLayerTab = -1;
         increment = 8;
     }
     
-    // Load sizes xib asynchronously
-    dispatch_async( dispatch_get_main_queue(), ^{
+    NSMutableDictionary *textLayer;
+    NSString *textFamily;
+    
+    //Getting Last Info of Text Layer
+    if (![currentLayer isEqualToString:@""]) {
+        textLayer = [flyer getLayerFromMaster:currentLayer];
+        textFamily = [textLayer objectForKey:@"fontname"];
+    }
+    
+	for (int i = 1; i <=[premiumFonts count] ; i++)
+	{
+		UIButton *font = [UIButton buttonWithType:UIButtonTypeCustom];
+		font.frame = CGRectMake(0, 0, widthValue, heightValue);
         
-        NSMutableDictionary *textLayer;
-        NSString *textFamily;
+        [font addTarget:self action:@selector(selectFont:) forControlEvents:UIControlEventTouchUpInside];
+		
+		[font setTitle:@"A" forState:UIControlStateNormal];
+		UIFont *fontname = premiumFonts[(i-1)];
+		[font.titleLabel setFont: fontname];
+		[font setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+		font.tag = i;
+		[font setBackgroundImage:[UIImage imageNamed:@"a_bg"] forState:UIControlStateNormal];
+        
+        //SET BUTTON POSITION ON SCROLLVIEW
+        CGRect frame = font.frame;
+        frame.origin = CGPointMake(curXLoc, curYLoc);
+        font.frame = frame;
+        curXLoc += (widthValue)+increment;
         
         if(IS_IPHONE_5){
-            
-            [layerScrollView addSubview:fontsView];
-            [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
-            
-        } else {
-            
-            [layerScrollView addSubview:fontsView];
-            [layerScrollView setContentSize:CGSizeMake(fontsView.frame.size.width, [layerScrollView bounds].size.height)];
-            
-        }
-        
-        NSArray *fontsArray = fontsView.subviews;
-        
-        //Getting Last Info of Text Layer
-        if (![currentLayer isEqualToString:@""]) {
-            textLayer = [flyer getLayerFromMaster:currentLayer];
-            textFamily = [textLayer objectForKey:@"fontname"];
-        }
-        
-        for (int i = 1; i <=[fontArray count] ; i++)
-        {
-            UIButton *font;
-            if ([fontsArray[i-1] isKindOfClass:[UIButton class]]) {
-                font = (UIButton *) fontsArray[i-1];
-            }
-            
-            UIFont *fontname =fontArray[(i-1)];
-            [font.titleLabel setFont: fontname];
-            
-            //Here we Highlight Last Font Selected
-            if (textLayer) {
-                
-                NSString *fontFamily = [fontname familyName];
-                
-                if ([textFamily isEqualToString:fontFamily]) {
-                    
-                    // Add border to selected layer thumbnail
-                    [font.layer setBorderWidth:3.0];
-                    [font.layer setCornerRadius:8];
-                    UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
-                    [font.layer setBorderColor:c.CGColor];
-                }
+            if(curXLoc >= 300){
+                curXLoc = 13;
+                curYLoc = curYLoc + widthValue + 7;
             }
         }
-    });
+        
+        //Here we Highlight Last Font Selected
+        if (textLayer) {
+            
+            NSString *fontFamily = [fontname familyName];
+            
+            if ([textFamily isEqualToString:fontFamily]) {
+                
+                // Add border to selected layer thumbnail
+                [font.layer setBorderWidth:3.0];
+                [font.layer setCornerRadius:8];
+                UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
+                [font.layer setBorderColor:c.CGColor];
+            }
+            
+        }
+        
+        [premiumFontsView addSubview:font];
+    }
+    
+    premiumFontsView.size = CGSizeMake(320, curYLoc);
+   
 }
 
 
@@ -857,6 +888,11 @@ int selectedAddMoreLayerTab = -1;
  */
 -(void)addClipArtsInSubView{
     
+    premiumClipartsView = [[UIView alloc] init];
+    
+    NSString *premiuimClipartsPath = [[NSBundle mainBundle] pathForResource:@"Cliparts-paid" ofType:@"plist"];
+    premiumCliparts = [[NSArray alloc] initWithContentsOfFile:premiuimClipartsPath];
+    
     [self deleteSubviewsFromScrollView];
     
     CGFloat curXLoc = 0;
@@ -869,50 +905,61 @@ int selectedAddMoreLayerTab = -1;
         increment = 8;
     }
     
-    // Load sizes xib asynchronously
-    dispatch_async( dispatch_get_main_queue(), ^{
+    NSMutableDictionary *textLayer;
+    NSString *textFamily;
+    
+    //Getting Last Info of Text Layer
+    if (![currentLayer isEqualToString:@""]) {
+        textLayer = [flyer getLayerFromMaster:currentLayer];
+        textFamily = [textLayer objectForKey:@"fontname"];
+    }
+    
+	for (int i = 1; i <=[premiumCliparts count] ; i++)
+	{
+		UIButton *font = [UIButton buttonWithType:UIButtonTypeCustom];
+		font.frame = CGRectMake(0, 0, widthValue, heightValue);
+        [font addTarget:self action:@selector(selectIcon:) forControlEvents:UIControlEventTouchUpInside];
+        UIFont *fontType = [UIFont fontWithName:[premiumCliparts[i-1] objectForKey:@"fontType"] size:33.0f];
+        [font.titleLabel setFont: fontType];
+        [font setTitle:[premiumCliparts[i-1] objectForKey:@"character"] forState:UIControlStateNormal];
+		[font setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+		font.tag = i;
+		[font setBackgroundImage:[UIImage imageNamed:@"a_bg"] forState:UIControlStateNormal];
         
-        NSMutableDictionary *textLayer;
-        NSString *textFamily;
+        //SET BUTTON POSITION ON SCROLLVIEW
+        CGRect frame = font.frame;
+        frame.origin = CGPointMake(curXLoc, curYLoc);
+        font.frame = frame;
+        curXLoc += (widthValue)+increment;
         
         if(IS_IPHONE_5){
-            
-            [layerScrollView addSubview:clipartsView];
-            [layerScrollView setContentSize:CGSizeMake(320, clipartsView.frame.size.height)];
-            
-        } else {
-            
-            [layerScrollView addSubview:clipartsView];
-            [layerScrollView setContentSize:CGSizeMake(clipartsView.frame.size.width, [layerScrollView bounds].size.height)];
-            
+            if(curXLoc >= 300){
+                curXLoc = 13;
+                curYLoc = curYLoc + widthValue + 7;
+            }
         }
         
-        NSArray *fontsArray = clipartsView.subviews;
-        
-        //Getting Last Info of Text Layer
-        if (![currentLayer isEqualToString:@""]) {
-            textLayer = [flyer getLayerFromMaster:currentLayer];
-            textFamily = [textLayer objectForKey:@"fontname"];
-        }
-        
-        // Find out the path of Cliparts.plist
-        NSString *clipartsPlistPath = [[NSBundle mainBundle] pathForResource:@"Cliparts" ofType:@"plist"];
-        NSArray *cliparts = [[NSArray alloc] initWithContentsOfFile:clipartsPlistPath];
-        
-        for (int i = 0; i < [cliparts count] ; i++)
-        {
-            UIButton *font;
-            if ([fontsArray[i] isKindOfClass:[UIButton class]]) {
-                font = (UIButton *) fontsArray[i];
+        //Here we Highlight Last Font Selected
+        /*if (textLayer) {
+            
+            NSString *fontFamily = [fontname familyName];
+            
+            if ([textFamily isEqualToString:fontFamily]) {
+                
+                // Add border to selected layer thumbnail
+                [font.layer setBorderWidth:3.0];
+                [font.layer setCornerRadius:8];
+                UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
+                [font.layer setBorderColor:c.CGColor];
             }
             
-            UIFont *fontType = [UIFont fontWithName:[cliparts[i] objectForKey:@"fontType"] size:33.0f];
-            
-            [font.titleLabel setFont: fontType];
-            
-            [font setTitle:[cliparts[i] objectForKey:@"character" ] forState:UIControlStateNormal];
-        }
-    });
+        }*/
+        
+        [premiumClipartsView addSubview:font];
+    }
+    
+    premiumClipartsView.size = CGSizeMake(320, curYLoc);
+    //[layerScrollView setContentSize:CGSizeMake(320, curYLoc)];
 }
 
 
@@ -921,50 +968,65 @@ int selectedAddMoreLayerTab = -1;
  */
 -(void)addEmoticonsInSubView{
     
-    iconArray = [[NSMutableArray alloc]init];
+    premiumEmoticonsView = [[UIView alloc] init];
     
-    //Delete SubViews from ScrollView
-    [self deleteSubviewsFromScrollView];
+    NSInteger symbolScrollWidth = 60;
+    NSInteger symbolScrollHeight = 50;
     
+    symbolArray = [[NSMutableArray alloc]init];
     
-    // Load sizes xib asynchronously
-    dispatch_async( dispatch_get_main_queue(), ^{
+    CGFloat curXLoc = 0;
+    CGFloat curYLoc = 5;
+    
+    //Getting Last Image Tag for highlight
+    NSString *LastTag = [flyer getImageTag:currentLayer];
+    
+    for( int i=1 ; i<= emoticons.count ; i++ ) {
+        
+        NSString* symbolName = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"%@",[emoticons objectAtIndex:(i-1)]] ofType:@"png"];
+        UIImage *symbolImg = [UIImage imageWithContentsOfFile:symbolName];
+        
+        [symbolArray addObject:symbolImg];
+        
+        UIButton *symbolButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        symbolButton.frame =CGRectMake(0, 0, symbolScrollWidth, symbolScrollHeight);
+        [symbolButton setImage:symbolImg forState:UIControlStateNormal];
+        
+        symbolButton.tag = i;
+        [symbolButton addTarget:self action:@selector(selectEmoticon:) forControlEvents:UIControlEventTouchUpInside];
+        
+        CGRect frame = symbolButton.frame;
+        frame.origin = CGPointMake(curXLoc, curYLoc);
+        symbolButton.frame = frame;
+        curXLoc += (symbolScrollWidth)+5;
         
         if(IS_IPHONE_5){
-            
-            [layerScrollView addSubview:emoticonsView];
-            [layerScrollView setContentSize:CGSizeMake(320, emoticonsView.frame.size.height)];
-            
-        } else {
-            
-            [layerScrollView addSubview:emoticonsView];
-            [layerScrollView setContentSize:CGSizeMake(emoticonsView.frame.size.width, [layerScrollView bounds].size.height)];
+            if(curXLoc >= 320){
+                curXLoc = 0;
+                curYLoc = curYLoc + symbolScrollHeight + 7;
+            }
         }
         
-        NSArray *flyerIconArray = emoticonsView.subviews;
-        
-        //Getting Last Image Tag for highlight
-        NSString *LastTag = [flyer getImageTag:currentLayer];
-        
-        for(int i=1;i<=94;i++) {
+        //Here we Hightlight Last Selected Image
+        if (![LastTag isEqualToString:@""]) {
             
-            //Here we Hightlight Last Selected Image
-            if (![LastTag isEqualToString:@""]) {
+            if ([LastTag intValue] == i ) {
                 
-                if ([LastTag intValue] == i ) {
-                    
-                    // Add border to selected layer thumbnail
-                    UIButton *iconButton = flyerIconArray[i-1];
-                    [iconButton.layer setCornerRadius:8];
-                    [iconButton.layer setBorderWidth:3.0];
-                    UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
-                    [iconButton.layer setBorderColor:c.CGColor];
-                }
+                // Add border to selected layer thumbnail
+                [symbolButton.layer setCornerRadius:8];
+                [symbolButton.layer setBorderWidth:3.0];
+                UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
+                [symbolButton.layer setBorderColor:c.CGColor];
             }
-        }//loop
-    });
+        }
+        
+        [premiumEmoticonsView addSubview:symbolButton];
+        
+    }//loop
+    
+    premiumEmoticonsView.size = CGSizeMake(320, curYLoc + symbolScrollHeight + 5);
+    [layerScrollView setContentSize:CGSizeMake(320, curYLoc + symbolScrollHeight)];
 }
-
 
 /*
  * When we Back To Main View its
@@ -1105,7 +1167,7 @@ int selectedAddMoreLayerTab = -1;
 /*
  * When any font is selected
  */
--(IBAction)selectFont:(id)sender
+-(void)selectFont:(id)sender
 {
 	int  i=1;
 	UIButton *view = sender;
@@ -1225,7 +1287,11 @@ int selectedAddMoreLayerTab = -1;
                     
                     NSString *sizeStr = SIZE_ARRAY[i-1];
                     selectedSize = [sizeStr intValue];
-                    selectedSize = selectedSize * 3.0;
+                    NSString *type = [flyer getLayerType:currentLayer];
+                    //Checking if layer in clip art,we do not open text editing mood
+                    if( [type isEqualToString:FLYER_LAYER_CLIP_ART] ){
+                        selectedSize = selectedSize * 3.0;
+                    }
                     selectedFont = [selectedFont fontWithSize:selectedSize];
                 
                     [flyer setFlyerTextSize:currentLayer Size:selectedFont];
@@ -1326,12 +1392,9 @@ int selectedAddMoreLayerTab = -1;
 /*
  * Called when select emoticon
  */
--(IBAction)selectEmoticon:(id)sender {
-    
+-(void)selectEmoticon:(id)sender {
     
     UIButton *view = sender;
-    
-    [Flurry logEvent:@"Emoticon Added"];
     
     CGRect imageFrame  = CGRectMake(0,0,63,63);
     [flyer setImageFrame:currentLayer :imageFrame];
@@ -1345,7 +1408,7 @@ int selectedAddMoreLayerTab = -1;
     
     if (lstTag != view.tag) {
         
-        NSString *imgPath = [self getImagePathByTag:[NSString stringWithFormat:@"emoticon%d@2x",view.tag]];
+        NSString *imgPath = [self getEmoticon:[NSString stringWithFormat:@"%@",[emoticons objectAtIndex:(view.tag-1)]]];
         
         //Set Symbol Image
         [flyer setImagePath:currentLayer ImgPath:imgPath];
@@ -1363,9 +1426,8 @@ int selectedAddMoreLayerTab = -1;
         [self.flyimgView layerIsBeingEdited:currentLayer];
     }
     
-    
     //Handling Select Unselect
-    for(UIView *tempView  in [emoticonsView subviews])
+    for(UIView *tempView in [premiumEmoticonsView subviews])
     {
         // Add border to Un-select layer thumbnail
         CALayer * l = [tempView layer];
@@ -1383,27 +1445,24 @@ int selectedAddMoreLayerTab = -1;
         }
     }
 }
+
+
 /*
  * Called when select icon
  */
--(IBAction)selectIcon:(id)sender
+-(void)selectIcon:(id)sender
 {
+    int i=1;
+    UIButton *view = sender;
     
-    [Flurry logEvent:@"Clip Art Added"];
+    NSString *premiumClipartsPlistPath = [[NSBundle mainBundle] pathForResource:@"Cliparts-paid" ofType:@"plist"];
+    NSArray *premiumCliparts = [[NSArray alloc] initWithContentsOfFile:premiumClipartsPlistPath];
+    UIFont *fontType = [UIFont fontWithName:[premiumCliparts[i] objectForKey:@"fontType"] size:60.0f];
     
-    int  i=1;
-	UIButton *view = sender;
+    int  index = [[premiumClipartsView subviews] indexOfObject:view];
     
-    int  index = [[clipartsView subviews] indexOfObject:view];
-    // Find out the path of Cliparts.plist
-    NSString *clipartsPlistPath = [[NSBundle mainBundle] pathForResource:@"Cliparts" ofType:@"plist"];
-    NSArray *cliparts = [[NSArray alloc] initWithContentsOfFile:clipartsPlistPath];
-    
-    
-    UIFont *fontType = [UIFont fontWithName:[cliparts[i] objectForKey:@"fontType"] size:60.0f];
-    
-	for(UIView *tempView  in [clipartsView subviews])
-	{
+    for(UIView *tempView in [premiumClipartsView subviews])
+    {
         //CHECK UIIMAGEVIEW BECAUSE SCROLL VIEW HAVE ADDITIONAL
         //SUBVIEWS OF UIIMAGEVIEW FOR FLASH INDICATORS
         if (![tempView isKindOfClass:[UIImageView class]]) {
@@ -1418,16 +1477,13 @@ int selectedAddMoreLayerTab = -1;
             
             if(tempView == view)
             {
-                
                 [self.flyimgView addSubview:lastTextView];
                 
                 //Set Text of Layer
                 [flyer setFlyerText:currentLayer text:view.currentTitle ];
                 
                 selectedFont = fontType;
-                
-                [flyer setFlyerTextFont:currentLayer FontName:[cliparts[index] objectForKey:@"fontType"]];
-                
+                [flyer setFlyerTextFont:currentLayer FontName:[premiumCliparts[index] objectForKey:@"fontType"]];
                 [flyer setFlyerTextSize:currentLayer Size:selectedFont];
                 
                 //Here we call Render Layer on View
@@ -1443,12 +1499,12 @@ int selectedAddMoreLayerTab = -1;
                 [l setBorderWidth:3.0];
                 UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
                 [l setBorderColor:c.CGColor];
+                
             }
             i++;
-        }// uiImageView Found
+        }
         
-	}// Loop
-    
+    }// Loop
 }
 /*
  * When any font border is selected
@@ -1859,7 +1915,8 @@ int selectedAddMoreLayerTab = -1;
  
 
     [playerToolBar setFrame:CGRectMake(0, self.playerView.frame.size.height - 40, 306, 40)];
-    [self.playerView addSubview:playerToolBar];
+    //[self.transparentView addSubview:playerToolBar];
+    [playerView addSubview:playerToolBar];
     player.accessibilityElementsHidden = YES;
     player.shouldAutoplay = NO;
     player.fullscreen = NO;
@@ -2807,8 +2864,11 @@ int selectedAddMoreLayerTab = -1;
  * Disable User Interaction of ImageView for video Player.
  */
 - (void)disableImageViewInteraction {
-    self.flyimgView.userInteractionEnabled = NO;
+    //flyimgView.userInteractionEnabled = NO;
+    //transparentView.userInteractionEnabled = YES;
     [playerToolBar setHidden:NO];
+    //[[self flyimgView] bringSubviewToFront:playerToolBar];
+    [playerView bringSubviewToFront:playerView];
 }
 
 
@@ -2816,9 +2876,11 @@ int selectedAddMoreLayerTab = -1;
  * Enable User Interaction of ImageView.
  */
 - (void)enableImageViewInteraction {
-    self.flyimgView.userInteractionEnabled = YES;
+    //flyimgView.userInteractionEnabled = YES;
+    //transparentView.userInteractionEnabled = NO;
     [playerToolBar setHidden:YES];
-    
+    [playerView sendSubviewToBack:playerView];
+    //[self.flyimgView sendSubviewToBack:flyimgView];
 }
 
 #pragma mark - Undo Implementation
@@ -3213,7 +3275,17 @@ int selectedAddMoreLayerTab = -1;
         [UIView animateWithDuration:0.4f
                          animations:^{
                              //Create ScrollView
-                             [self addClipArtsInSubView];
+                             //[self addClipArtsInSubView];
+                             if(IS_IPHONE_5){
+                                 
+                                 //Delete SubViews from ScrollView
+                                 [self deleteSubviewsFromScrollView];
+                                 [layerScrollView addSubview:premiumClipartsView];
+                                 [layerScrollView setContentSize:CGSizeMake(320, premiumClipartsView.size.height)];
+                                 
+                             } else {
+                                 //[layerScrollView setContentSize:CGSizeMake(([symbolArray count]*(symbolScrollWidth+5)), [layerScrollView bounds].size.height)];
+                             }
                          }
                          completion:^(BOOL finished){
                              [layerScrollView flashScrollIndicators];
@@ -3231,8 +3303,18 @@ int selectedAddMoreLayerTab = -1;
         //HERE WE SET ANIMATION
         [UIView animateWithDuration:0.4f
                          animations:^{
-                             //Create ScrollView
-                             [self addEmoticonsInSubView];
+                             
+                             if(IS_IPHONE_5){
+                                 
+                                 //Delete SubViews from ScrollView
+                                 [self deleteSubviewsFromScrollView];
+                                 
+                                 [layerScrollView addSubview:premiumEmoticonsView];
+                                 [layerScrollView setContentSize:CGSizeMake(320, premiumEmoticonsView.size.height)];
+    
+                             } else {
+                                 //[layerScrollView setContentSize:CGSizeMake(([symbolArray count]*(symbolScrollWidth+5)), [layerScrollView bounds].size.height)];
+                             }
                          }
                          completion:^(BOOL finished){
                              [layerScrollView flashScrollIndicators];
@@ -3313,18 +3395,28 @@ int selectedAddMoreLayerTab = -1;
 	
     if(selectedButton == fontTabButton)
 	{
-        
         //HERE WE SET ANIMATION
         [UIView animateWithDuration:0.4f
                          animations:^{
                              //Create ScrollView
-                             [self addFontsInSubView];
+                             //[self addFontsInSubView];
+                             if(IS_IPHONE_5){
+                                 
+                                 //Delete SubViews from ScrollView
+                                 [self deleteSubviewsFromScrollView];
+                                 [layerScrollView addSubview:premiumFontsView];
+                                 [layerScrollView setContentSize:CGSizeMake(320, premiumFontsView.size.height)];
+                                 
+                             } else {
+                                 //[layerScrollView setContentSize:CGSizeMake(([symbolArray count]*(symbolScrollWidth+5)), [layerScrollView bounds].size.height)];
+                             }
+
                          }
                          completion:^(BOOL finished){
                              [layerScrollView flashScrollIndicators];
                          }];
         //END ANIMATION
-        
+      
          //Add ContextView
         [self addScrollView:layerScrollView];
         
@@ -3819,6 +3911,35 @@ int selectedAddMoreLayerTab = -1;
     
     return dicPath;
     
+}
+
+-(NSString *)getEmoticon:(NSString *) imgName{
+    
+    // Create Symbol direcrory if not created
+    NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
+    
+    NSString *FolderPath = [NSString stringWithFormat:@"%@/Emoticon", currentpath];
+    NSString *dicPath = @"Emoticon";
+
+    
+    //Create Unique Id for Image
+    int timestamp = [[NSDate date] timeIntervalSince1970];
+    
+    NSString *imageFolderPath = [NSString stringWithFormat:@"%@/%d.%@", FolderPath,timestamp,IMAGETYPE];
+    dicPath = [dicPath stringByAppendingString:[NSString stringWithFormat:@"/%d.%@",timestamp,IMAGETYPE]];
+    
+    //Getting Image From Bundle
+    NSString *existImagePath =[[NSBundle mainBundle] pathForResource:imgName ofType:@"png"];
+    
+
+
+    UIImage *realImage =  [UIImage imageWithContentsOfFile:existImagePath];
+    NSData *imgData = UIImagePNGRepresentation(realImage);
+
+    //Create a Image Copy to Current Flyer Folder
+    [[NSFileManager defaultManager] createFileAtPath:imageFolderPath contents:imgData attributes:nil];
+    
+    return dicPath;
 }
 
 
