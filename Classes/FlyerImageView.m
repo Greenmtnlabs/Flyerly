@@ -440,7 +440,7 @@
         NSString *key = [keys objectAtIndex:0];
         [self.delegate sendLayerToEditMode:key];
     }else {
-        [self.delegate disableImageViewInteraction];
+        [self.delegate toggleImageViewInteraction];
        
     }
 }
