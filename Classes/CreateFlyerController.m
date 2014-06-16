@@ -32,7 +32,7 @@ UIView* premiumFontsView;
 UIView* premiumEmoticonsView;
 UIView* premiumClipartsView;
 
-NSArray *premiumFonts;
+NSMutableArray *premiumFonts;
 NSArray *premiumCliparts;
 NSArray *emoticons;
 
@@ -429,6 +429,9 @@ NSArray *emoticons;
  */
 -(void)addTemplatesInSubView{
     
+    widthValue = 60;
+    heightValue = 55;
+    
     // Load sizes xib asynchronously
     dispatch_async( dispatch_get_main_queue(), ^{
         imgPickerFlag =1;
@@ -546,11 +549,14 @@ NSArray *emoticons;
 -(void)addFontsInSubView{
     
     premiumFontsView = [[UIView alloc] init];
-    
-    
+    premiumFonts = [[NSMutableArray alloc] init];
     
     NSString *premiuimFontsPath = [[NSBundle mainBundle] pathForResource:@"Fonts-paid" ofType:@"plist"];
-    premiumFonts = [[NSArray alloc] initWithContentsOfFile:premiuimFontsPath];
+    NSArray *premiumFontFamilies = [[NSArray alloc] initWithContentsOfFile:premiuimFontsPath];
+    
+    for ( NSString *fontFamily in premiumFontFamilies ) {
+        [premiumFonts addObject:[UIFont fontWithName:fontFamily size:27]];
+    }
     
     [self deleteSubviewsFromScrollView];
     
@@ -619,7 +625,7 @@ NSArray *emoticons;
         [premiumFontsView addSubview:font];
     }
     
-    premiumFontsView.size = CGSizeMake(320, curYLoc);
+    premiumFontsView.size = CGSizeMake(320, curYLoc + heightValue + 5);
    
 }
 
@@ -959,7 +965,6 @@ NSArray *emoticons;
     }
     
     premiumClipartsView.size = CGSizeMake(320, curYLoc);
-    //[layerScrollView setContentSize:CGSizeMake(320, curYLoc)];
 }
 
 
@@ -1172,11 +1177,12 @@ NSArray *emoticons;
 	int  i=1;
 	UIButton *view = sender;
     
-	for(UIView *tempView  in [fontsView subviews])
+	for(UIView *tempView  in [premiumFontsView subviews])
 	{
         //CHECK UIIMAGEVIEW BECAUSE SCROLL VIEW HAVE ADDITIONAL
         //SUBVIEWS OF UIIMAGEVIEW FOR FLASH INDICATORS
         if (![tempView isKindOfClass:[UIImageView class]]) {
+            
             
             // Add border to Un-select layer thumbnail
             CALayer * l = [tempView layer];
@@ -1188,7 +1194,7 @@ NSArray *emoticons;
             
             if(tempView == view)
             {
-                selectedFont = fontArray[i-1];
+                selectedFont = premiumFonts[i-1];
                 selectedFont = [selectedFont fontWithSize:selectedSize];
                 
                 //Here we set Font
@@ -3301,7 +3307,6 @@ NSArray *emoticons;
                                  
                                  //Delete SubViews from ScrollView
                                  [self deleteSubviewsFromScrollView];
-                                 
                                  [layerScrollView addSubview:premiumEmoticonsView];
                                  [layerScrollView setContentSize:CGSizeMake(320, premiumEmoticonsView.size.height)];
     
@@ -3392,7 +3397,6 @@ NSArray *emoticons;
         [UIView animateWithDuration:0.4f
                          animations:^{
                              //Create ScrollView
-                             //[self addFontsInSubView];
                              if(IS_IPHONE_5){
                                  
                                  //Delete SubViews from ScrollView
