@@ -976,7 +976,7 @@ NSArray *emoticons;
     premiumEmoticonsView = [[UIView alloc] init];
     
     NSInteger symbolScrollWidth = 60;
-    NSInteger symbolScrollHeight = 50;
+    NSInteger symbolScrollHeight = 60;
     
     symbolArray = [[NSMutableArray alloc]init];
     
