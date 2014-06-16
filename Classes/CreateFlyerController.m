@@ -1467,6 +1467,11 @@ NSArray *emoticons;
     
     int  index = [[premiumClipartsView subviews] indexOfObject:view];
     
+    // Set the type
+    [flyer setLayerType:currentLayer type:FLYER_LAYER_CLIP_ART];
+    [flyer setImagePath:currentLayer ImgPath:nil];
+    [flyer setImageTag:currentLayer Tag:nil];
+    
     for(UIView *tempView in [premiumClipartsView subviews])
     {
         //CHECK UIIMAGEVIEW BECAUSE SCROLL VIEW HAVE ADDITIONAL
@@ -1494,11 +1499,6 @@ NSArray *emoticons;
                 
                 //Here we call Render Layer on View
                 [flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
-                
-                // Set the type
-                [flyer setLayerType:currentLayer type:FLYER_LAYER_CLIP_ART];
-                [flyer setImagePath:currentLayer ImgPath:nil];
-                [flyer setImageTag:currentLayer Tag:nil];
                 
                 // Add border to selected layer thumbnail
                 CALayer * l = [tempView layer];
