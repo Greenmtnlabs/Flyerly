@@ -1401,9 +1401,6 @@ NSArray *emoticons;
 -(void)selectEmoticon:(id)sender {
     
     UIButton *view = sender;
-    
-    CGRect imageFrame  = CGRectMake(0,0,63,63);
-    [flyer setImageFrame:currentLayer :imageFrame];
     NSMutableDictionary *dic = [flyer getLayerFromMaster:currentLayer];
     [self.flyimgView renderLayer:currentLayer layerDictionary:dic];
     
@@ -3279,6 +3276,7 @@ NSArray *emoticons;
                                  
                                  //Delete SubViews from ScrollView
                                  [self deleteSubviewsFromScrollView];
+                                 //[self setSelectedItem];
                                  [layerScrollView addSubview:premiumClipartsView];
                                  [layerScrollView setContentSize:CGSizeMake(320, premiumClipartsView.size.height)];
                                  
@@ -3305,10 +3303,30 @@ NSArray *emoticons;
                              
                              if(IS_IPHONE_5){
                                  
-                                 //Delete SubViews from ScrollView
+                                 // Delete SubViews from ScrollView and add Emoticons view
                                  [self deleteSubviewsFromScrollView];
                                  [layerScrollView addSubview:premiumEmoticonsView];
                                  [layerScrollView setContentSize:CGSizeMake(320, premiumEmoticonsView.size.height)];
+                                 
+                                 // Highlight the button based on current layer
+                                 NSString *imageTag = [flyer getImageTag:currentLayer];
+                                 
+                                 UIButton* selectedEmoticon = nil;
+                                 //If this layer is of type image AND ... AND layer type is emoticon
+                                 if ( imageTag != nil && (![imageTag isEqualToString:@""]) && ([[flyer getLayerType:currentLayer] isEqualToString:FLYER_LAYER_EMOTICON]) ) {
+                                     
+                                     if ( [imageTag intValue] ) {
+                                         
+                                         // Add border to selected layer thumbnail
+                                         selectedEmoticon = (UIButton*)[premiumEmoticonsView viewWithTag:[imageTag intValue]];
+                                         [self highlightButton:selectedEmoticon];
+                                        
+                                     }
+                                     
+                                 } else {
+                                     // If no emoticon is selected then scroll to top
+                                     [layerScrollView scrollToTopAnimated:NO];
+                                 }
     
                              } else {
                                  //[layerScrollView setContentSize:CGSizeMake(([symbolArray count]*(symbolScrollWidth+5)), [layerScrollView bounds].size.height)];
@@ -3373,6 +3391,27 @@ NSArray *emoticons;
     
 }
 
+
+
+- (void) highlightButton:(UIButton*) buttonToHighlight {
+    
+    // Draw border around this button
+    [buttonToHighlight.layer setCornerRadius:8];
+    [buttonToHighlight.layer setBorderWidth:3.0];
+    UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
+    [buttonToHighlight.layer setBorderColor:c.CGColor];
+    
+    // Scroll to highlightedButton
+    [layerScrollView scrollRectToVisible:buttonToHighlight.frame animated:NO];
+}
+
+- (NSInteger*) getTagForEmoticon: (NSString*)imageName {
+  
+    
+    return 1;
+    
+}
+
 #pragma mark -  Bottom Tabs Context
 /*
  * When we click on Text Tab
@@ -3401,6 +3440,7 @@ NSArray *emoticons;
                                  
                                  //Delete SubViews from ScrollView
                                  [self deleteSubviewsFromScrollView];
+                                 //[self setSelectedItem];
                                  [layerScrollView addSubview:premiumFontsView];
                                  [layerScrollView setContentSize:CGSizeMake(320, premiumFontsView.size.height)];
                                  
@@ -3569,9 +3609,6 @@ NSArray *emoticons;
     }
 
 }
-
-
-
 
 /*
  * When we click on Photo Tab
