@@ -91,7 +91,7 @@ NSArray *freeFeaturesArray;
     
     int rowIndex = indexPath.row;
     //if not cancel and Restore button presses
-    if(rowIndex == 0 || rowIndex == 1 || rowIndex == 2) {
+    if(rowIndex == 0 || rowIndex == 1 || rowIndex == 2 || rowIndex == 3) {
         
         //Checking if the user is valid or anonymus
         if ([[PFUser currentUser] sessionToken].length != 0) {
@@ -268,7 +268,7 @@ NSArray *freeFeaturesArray;
         cancelRequest = NO;
         
         //These are over Products on App Store
-        NSSet *productIdentifiers = [NSSet setWithArray:@[@"com.flyerly.AllDesignBundle",@"com.flyerly.UnlockSavedFlyers",@"com.flyerly.UnlockCreateVideoFlyerOption",@"com.flyerly.RemoveAds"]];
+        NSSet *productIdentifiers = [NSSet setWithArray:@[@"com.flyerly.AllDesignBundle",@"com.flyerly.UnlockSavedFlyers",@"com.flyerly.UnlockCreateVideoFlyerOption",@"com.flyerly.IconsBundle"]];
         
         [[RMStore defaultStore] requestProducts:productIdentifiers success:^(NSArray *products, NSArray *invalidProductIdentifiers) {
             
@@ -324,7 +324,7 @@ NSArray *freeFeaturesArray;
         //HERE WE GET SHARED INTANCE OF _persistence WHICH WE LINKED IN FlyrAppDelegate
         FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
         //NSArray *productIdentifiers = [[appDelegate._persistence purchasedProductIdentifiers] allObjects];
-        NSArray *productIdentifiers = @[@"com.flyerly.AllDesignBundle",@"com.flyerly.UnlockSavedFlyers",@"com.flyerly.UnlockCreateVideoFlyerOption",@"com.flyerly.RemoveAds"];
+        NSArray *productIdentifiers = @[@"com.flyerly.AllDesignBundle",@"com.flyerly.UnlockSavedFlyers",@"com.flyerly.UnlockCreateVideoFlyerOption",@"ccom.flyerly.IconsBundle"];
         //NSSet *productIdentifiers = [NSSet setWithArray:@[@"com.flyerly.AllDesignBundle",@"com.flyerly.UnlockSavedFlyers",@"com.flyerly.UnlockCreateVideoFlyerOption"]];
         
         
