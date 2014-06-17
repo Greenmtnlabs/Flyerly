@@ -2,155 +2,26 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <array>
-	<dict>
-		<key>fontName</key>
-		<string>Arial</string>
-		<key>fontSize</key>
-		<string>27</string>
-	</dict>
-	<dict>
-		<key>fontName</key>
-		<string>GoodDog</string>
-		<key>fontSize</key>
-		<string>27</string>
-	</dict>
-	<dict>
-		<key>fontName</key>
-		<string>GrandHotel-Regular</string>
-		<key>fontSize</key>
-		<string>27</string>
-	</dict>
-	<dict>
-		<key>fontName</key>
-		<string>Kankin</string>
-		<key>fontSize</key>
-		<string>27</string>
-	</dict>
-	<dict>
-		<key>fontName</key>
-		<string>Molot</string>
-		<key>fontSize</key>
-		<string>27</string>
-	</dict>
-	<dict>
-		<key>fontName</key>
-		<string>Nexa Bold</string>
-		<key>fontSize</key>
-		<string>27</string>
-	</dict>
-	<dict>
-		<key>fontName</key>
-		<string>Quicksand</string>
-		<key>fontSize</key>
-		<string>27</string>
-	</dict>
-	<dict>
-		<key>fontName</key>
-		<string>StMarie-Thin</string>
-		<key>fontSize</key>
-		<string>27</string>
-	</dict>
-	<dict>
-		<key>fontName</key>
-		<string>BlackJack</string>
-		<key>fontSize</key>
-		<string>27</string>
-	</dict>
-	<dict>
-		<key>fontName</key>
-		<string>Comfortaa-Bold</string>
-		<key>fontSize</key>
-		<string>27</string>
-	</dict>
-	<dict>
-		<key>fontName</key>
-		<string>Swis721 BlkEx BT</string>
-		<key>fontSize</key>
-		<string>27</string>
-	</dict>
-	<dict>
-		<key>fontName</key>
-		<string>Algerian</string>
-		<key>fontSize</key>
-		<string>27</string>
-	</dict>
-	<dict>
-		<key>fontName</key>
-		<string>HelveticaInseratCyr Upright</string>
-		<key>fontSize</key>
-		<string>27</string>
-	</dict>
-	<dict>
-		<key>fontName</key>
-		<string>Helvetica Rounded LT Std</string>
-		<key>fontSize</key>
-		<string>27</string>
-	</dict>
-	<dict>
-		<key>fontName</key>
-		<string>Lucida Handwriting</string>
-		<key>fontSize</key>
-		<string>27</string>
-	</dict>
-	<dict>
-		<key>fontName</key>
-		<string>Anjelika Rose</string>
-		<key>fontSize</key>
-		<string>27</string>
-	</dict>
-	<dict>
-		<key>fontName</key>
-		<string>BankGothic DB</string>
-		<key>fontSize</key>
-		<string>27</string>
-	</dict>
-	<dict>
-		<key>fontName</key>
-		<string>Segoe UI</string>
-		<key>fontSize</key>
-		<string>27</string>
-	</dict>
-	<dict>
-		<key>fontName</key>
-		<string>AvantGarde CE</string>
-		<key>fontSize</key>
-		<string>27</string>
-	</dict>
-	<dict>
-		<key>fontName</key>
-		<string>BlueNoon</string>
-		<key>fontSize</key>
-		<string>27</string>
-	</dict>
-	<dict>
-		<key>fontName</key>
-		<string>Daniel Black</string>
-		<key>fontSize</key>
-		<string>27</string>
-	</dict>
-	<dict>
-		<key>fontName</key>
-		<string>Lucida Handwriting</string>
-		<key>fontSize</key>
-		<string>27</string>
-	</dict>
-	<dict>
-		<key>fontName</key>
-		<string>Lucida Handwriting</string>
-		<key>fontSize</key>
-		<string>27</string>
-	</dict>
-	<dict>
-		<key>fontName</key>
-		<string>Lucida Handwriting</string>
-		<key>fontSize</key>
-		<string>27</string>
-	</dict>
-	<dict>
-		<key>fontName</key>
-		<string>Lucida Handwriting</string>
-		<key>fontSize</key>
-		<string>27</string>
-	</dict>
+	<string>Aleo</string>
+	<string>Alex Brush</string>
+	<string>Algerian</string>
+	<string>Aller</string>
+	<string>Amble</string>
+	<string>Ambrosia Demo</string>
+	<string>Anjelika Rose</string>
+	<string>Anson</string>
+	<string>aurora</string>
+	<string>Balham</string>
+	<string>BankGothic DB</string>
+	<string>Bellota</string>
+	<string>BlackJack</string>
+	<string>BlueNoon</string>
+	<string>Canter</string>
+	<string>Caviar Dreams</string>
+	<string>Circula</string>
+	<string>Code Light</string>
+	<string>Comfortaa</string>
+	<string>Daniel Black</string>
+	<string>Exo</string>
 </array>
 </plist>
