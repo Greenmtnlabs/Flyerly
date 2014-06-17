@@ -10,7 +10,12 @@
 
 @implementation ResourcesView
 
-NSInteger highlightedResourceTag = -1;
+- (id) init {
+
+    highlightedResourceTag = -1;
+    return [super init];
+    
+}
 
 - (void) highlightResource:(NSInteger) tag {
     

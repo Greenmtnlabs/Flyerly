@@ -8,7 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ResourcesView : UIView
+@interface ResourcesView : UIView {
+    
+    NSInteger highlightedResourceTag;
+    
+}
 
 
 - (void) highlightResource:(NSInteger) tag;
