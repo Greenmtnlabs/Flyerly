@@ -8,6 +8,7 @@
 #import "CreateFlyerController.h"
 #import "UIImage+NBUAdditions.h"
 #import "Common.h"
+#import "ResourcesView.h"
 
 @implementation CreateFlyerController
 
@@ -28,9 +29,9 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 @synthesize backgroundsView,flyerBordersView,fontsView,colorsView,sizesView,textBordersView,clipartsView,emoticonsView;
 int selectedAddMoreLayerTab = -1;
 
-UIView* premiumFontsView;
-UIView* premiumEmoticonsView;
-UIView* premiumClipartsView;
+
+ResourcesView* premiumEmoticonsView,*premiumClipartsView,*premiumFontsView;
+
 
 NSMutableArray *premiumFonts;
 NSArray *premiumCliparts;
@@ -548,7 +549,7 @@ NSArray *emoticons;
  */
 -(void)addFontsInSubView{
     
-    premiumFontsView = [[UIView alloc] init];
+    premiumFontsView = [[ResourcesView alloc] init];
     premiumFonts = [[NSMutableArray alloc] init];
     
     NSString *premiuimFontsPath = [[NSBundle mainBundle] pathForResource:@"Fonts-paid" ofType:@"plist"];
@@ -894,7 +895,7 @@ NSArray *emoticons;
  */
 -(void)addClipArtsInSubView{
     
-    premiumClipartsView = [[UIView alloc] init];
+    premiumClipartsView = [[ResourcesView alloc] init];
     
     NSString *premiuimClipartsPath = [[NSBundle mainBundle] pathForResource:@"Cliparts-paid" ofType:@"plist"];
     premiumCliparts = [[NSArray alloc] initWithContentsOfFile:premiuimClipartsPath];
@@ -973,7 +974,7 @@ NSArray *emoticons;
  */
 -(void)addEmoticonsInSubView{
     
-    premiumEmoticonsView = [[UIView alloc] init];
+    premiumEmoticonsView = [[ResourcesView alloc] init];
     
     NSInteger symbolScrollWidth = 60;
     NSInteger symbolScrollHeight = 60;
@@ -3250,6 +3251,88 @@ NSArray *emoticons;
     }
 }
 
+-(NSString *) getTagForText:(NSString*)clipart {
+    
+    NSMutableDictionary *textLayer = [flyer getLayerFromMaster:currentLayer];
+    NSString *textFamily = [textLayer objectForKey:@"fontname"];
+    
+    for(UIView *tempView in [premiumFontsView subviews]) {
+        if ([tempView isKindOfClass:[UIButton class]]) {
+            UIButton *btn = (UIButton *) tempView;
+            NSString *fontName = btn.titleLabel.font.familyName;
+            
+            if ( [textFamily isEqualToString:fontName] ) {
+                return [NSString stringWithFormat: @"%d", btn.tag];
+                
+            }
+        }
+        
+    }
+    
+    return [NSString stringWithFormat: @"%d", -1];
+}
+
+-(NSString *) getTagForClipart:(NSString*)clipart {
+    
+    for(UIView *tempView in [premiumClipartsView subviews]) {
+        if ([tempView isKindOfClass:[UIButton class]]) {
+            UIButton *btn = (UIButton *) tempView;
+            if ( [btn.currentTitle isEqualToString:clipart] ) {
+                return [NSString stringWithFormat: @"%d", btn.tag];
+
+            }
+        }
+        
+    }
+    
+    return [NSString stringWithFormat: @"%d", -1];
+}
+
+-(NSString*) getCurrentLayerTag {
+    
+    NSString* tag = nil;
+    
+    NSString* layerType = [flyer getLayerType:currentLayer];
+    
+    if( [layerType isEqualToString:FLYER_LAYER_CLIP_ART] ){
+        
+        tag = [self getTagForClipart:[flyer getText:currentLayer]];
+        
+    } else if ( [layerType isEqualToString:FLYER_LAYER_EMOTICON] ) {
+        
+        tag = [flyer getImageTag:currentLayer];
+        
+    }else if ( [layerType isEqualToString:FLYER_LAYER_TEXT] ) {
+        
+        tag = [self getTagForText:currentLayer];
+        
+    }
+    
+    return tag;
+}
+
+-(void) setSelectedItem:(NSString*)layerType inView:(ResourcesView*)view {
+    
+    NSString* tag = [self getCurrentLayerTag];
+    
+    //If this layer is of type image AND there is a selected layer AND layer type is emoticon
+    if ( tag != nil && (![currentLayer isEqualToString:@""]) && ([[flyer getLayerType:currentLayer] isEqualToString:layerType]) ) {
+        
+        if ( [tag intValue] ) {
+            
+            // Highlight selected resource
+            [view highlightResource:[tag intValue]];
+            [layerScrollView scrollRectToVisible:[view getHighlightedResource].frame animated:NO];
+            
+        }
+        
+    } else {
+        // If no emoticon is selected then scroll to top
+        [layerScrollView scrollToTopAnimated:NO];
+        [view dehighlightResource];
+    }
+}
+
 /*
  * When we click on Arts Tab
  * This Method Manage Arts SubTabs
@@ -3271,14 +3354,14 @@ NSArray *emoticons;
         [UIView animateWithDuration:0.4f
                          animations:^{
                              //Create ScrollView
-                             //[self addClipArtsInSubView];
                              if(IS_IPHONE_5){
                                  
-                                 //Delete SubViews from ScrollView
+                                 // Delete SubViews from ScrollView and add Emoticons view
                                  [self deleteSubviewsFromScrollView];
-                                 //[self setSelectedItem];
                                  [layerScrollView addSubview:premiumClipartsView];
                                  [layerScrollView setContentSize:CGSizeMake(320, premiumClipartsView.size.height)];
+                                 
+                                 [self setSelectedItem:FLYER_LAYER_CLIP_ART inView:premiumClipartsView];
                                  
                              } else {
                                  //[layerScrollView setContentSize:CGSizeMake(([symbolArray count]*(symbolScrollWidth+5)), [layerScrollView bounds].size.height)];
@@ -3308,26 +3391,8 @@ NSArray *emoticons;
                                  [layerScrollView addSubview:premiumEmoticonsView];
                                  [layerScrollView setContentSize:CGSizeMake(320, premiumEmoticonsView.size.height)];
                                  
-                                 // Highlight the button based on current layer
-                                 NSString *imageTag = [flyer getImageTag:currentLayer];
-                                 
-                                 UIButton* selectedEmoticon = nil;
-                                 //If this layer is of type image AND ... AND layer type is emoticon
-                                 if ( imageTag != nil && (![imageTag isEqualToString:@""]) && ([[flyer getLayerType:currentLayer] isEqualToString:FLYER_LAYER_EMOTICON]) ) {
-                                     
-                                     if ( [imageTag intValue] ) {
-                                         
-                                         // Add border to selected layer thumbnail
-                                         selectedEmoticon = (UIButton*)[premiumEmoticonsView viewWithTag:[imageTag intValue]];
-                                         [self highlightButton:selectedEmoticon];
-                                        
-                                     }
-                                     
-                                 } else {
-                                     // If no emoticon is selected then scroll to top
-                                     [layerScrollView scrollToTopAnimated:NO];
-                                 }
-    
+                                 [self setSelectedItem:FLYER_LAYER_EMOTICON inView:premiumEmoticonsView];
+
                              } else {
                                  //[layerScrollView setContentSize:CGSizeMake(([symbolArray count]*(symbolScrollWidth+5)), [layerScrollView bounds].size.height)];
                              }
@@ -3339,8 +3404,7 @@ NSArray *emoticons;
         
         //Add ContextView
         [self addScrollView:layerScrollView];
-        
-		[emoticonsTabButton setSelected:YES];
+        [emoticonsTabButton setSelected:YES];
 	}
     else if(selectedButton == artsColorTabButton)
 	{
@@ -3391,27 +3455,6 @@ NSArray *emoticons;
     
 }
 
-
-
-- (void) highlightButton:(UIButton*) buttonToHighlight {
-    
-    // Draw border around this button
-    [buttonToHighlight.layer setCornerRadius:8];
-    [buttonToHighlight.layer setBorderWidth:3.0];
-    UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
-    [buttonToHighlight.layer setBorderColor:c.CGColor];
-    
-    // Scroll to highlightedButton
-    [layerScrollView scrollRectToVisible:buttonToHighlight.frame animated:NO];
-}
-
-- (NSInteger*) getTagForEmoticon: (NSString*)imageName {
-  
-    
-    return 1;
-    
-}
-
 #pragma mark -  Bottom Tabs Context
 /*
  * When we click on Text Tab
@@ -3443,6 +3486,8 @@ NSArray *emoticons;
                                  //[self setSelectedItem];
                                  [layerScrollView addSubview:premiumFontsView];
                                  [layerScrollView setContentSize:CGSizeMake(320, premiumFontsView.size.height)];
+                                 
+                                 [self setSelectedItem:FLYER_LAYER_TEXT inView:premiumFontsView];
                                  
                              } else {
                                  //[layerScrollView setContentSize:CGSizeMake(([symbolArray count]*(symbolScrollWidth+5)), [layerScrollView bounds].size.height)];

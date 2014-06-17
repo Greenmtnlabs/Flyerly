@@ -543,6 +543,7 @@
 		246EF546193C515D004539B2 /* emoticon99@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 246EF4DE193C515D004539B2 /* emoticon99@2x.png */; };
 		246EF547193C515D004539B2 /* emoticon9@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 246EF4DF193C515D004539B2 /* emoticon9@2x.png */; };
 		246EF549193C5AE0004539B2 /* Emoticons-iPhone4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 246EF548193C5AE0004539B2 /* Emoticons-iPhone4.xib */; };
+		247058E7194F348300678CC5 /* ResourcesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 247058E6194F348300678CC5 /* ResourcesView.m */; };
 		2471593219408E5F00B30301 /* facebook@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2471592419408E5F00B30301 /* facebook@2x.png */; };
 		2471593319408E5F00B30301 /* flickr_disabled_saved@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2471592519408E5F00B30301 /* flickr_disabled_saved@2x.png */; };
 		2471593419408E5F00B30301 /* flickr_share_saved@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2471592619408E5F00B30301 /* flickr_share_saved@2x.png */; };
@@ -1670,6 +1671,8 @@
 		246EF4DE193C515D004539B2 /* emoticon99@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emoticon99@2x.png"; sourceTree = "<group>"; };
 		246EF4DF193C515D004539B2 /* emoticon9@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emoticon9@2x.png"; sourceTree = "<group>"; };
 		246EF548193C5AE0004539B2 /* Emoticons-iPhone4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Emoticons-iPhone4.xib"; sourceTree = "<group>"; };
+		247058E5194F348300678CC5 /* ResourcesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourcesView.h; sourceTree = "<group>"; };
+		247058E6194F348300678CC5 /* ResourcesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResourcesView.m; sourceTree = "<group>"; };
 		2471592419408E5F00B30301 /* facebook@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook@2x.png"; sourceTree = "<group>"; };
 		2471592519408E5F00B30301 /* flickr_disabled_saved@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flickr_disabled_saved@2x.png"; sourceTree = "<group>"; };
 		2471592619408E5F00B30301 /* flickr_share_saved@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flickr_share_saved@2x.png"; sourceTree = "<group>"; };
@@ -2983,6 +2986,8 @@
 				65BDB2DE17341D290084E032 /* CustomLabel.m */,
 				200D196618998BEA00EAD645 /* LayerTileButton.h */,
 				200D196718998BEA00EAD645 /* LayerTileButton.m */,
+				247058E5194F348300678CC5 /* ResourcesView.h */,
+				247058E6194F348300678CC5 /* ResourcesView.m */,
 			);
 			name = FlyerlyCustomClasses;
 			sourceTree = "<group>";
@@ -5113,6 +5118,7 @@
 				2002C89618888CD4005B18C9 /* SaveFlyerCell.m in Sources */,
 				20ECF9A918D6E1AD0035E3DE /* UIPlaceHolderTextView.m in Sources */,
 				2036661C188DB67300C71EAA /* FlyerUser.m in Sources */,
+				247058E7194F348300678CC5 /* ResourcesView.m in Sources */,
 				202C4801187D6E4B00FE0975 /* BitlyTwitterOAuthManager.m in Sources */,
 				49B8897D1886524D003766AD /* LoadingView.m in Sources */,
 				4986857418B500BB002113E4 /* AssetsGroupViewController.m in Sources */,
