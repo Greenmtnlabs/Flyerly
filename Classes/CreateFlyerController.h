@@ -27,6 +27,7 @@
 #import "InAppViewController.h"
 #import "SigninController.h"
 #import "LibraryViewController.h"
+#import "ResourcesView.h"
 #import "UIPlaceHolderTextView.h"
 #import <MediaPlayer/MediaPlayer.h>
 
@@ -73,10 +74,10 @@
 
 //-----
 @property (nonatomic, strong) UIView *backgroundsView;
-@property (nonatomic, strong) UIView *flyerBordersView;
+@property (nonatomic, strong) ResourcesView *flyerBordersView;
 @property (nonatomic, strong) UIView *fontsView;
-@property (nonatomic, strong) UIView *colorsView;
-@property (nonatomic, strong) UIView *sizesView;
+@property (nonatomic, strong) ResourcesView *colorsView;
+@property (nonatomic, strong) ResourcesView *sizesView;
 @property (nonatomic, strong) UIView *textBordersView;
 @property (nonatomic, strong) UIView *clipartsView;
 @property (nonatomic, strong) UIView *emoticonsView;

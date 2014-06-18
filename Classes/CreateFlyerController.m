@@ -26,15 +26,17 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 @synthesize libText,libBackground,libArts,libPhoto,libEmpty,backtemplates,cameraTakePhoto,cameraRoll,flyerBorder;
 @synthesize flyimgView,currentLayer,layersDic,flyer,player,playerView,playerToolBar,playButton,playerSlider,tempelateView;
 @synthesize durationLabel,durationChange,onFlyerBack;
-@synthesize backgroundsView,flyerBordersView,colorsView,sizesView,textBordersView,clipartsView,emoticonsView;
+@synthesize backgroundsView,flyerBordersView,colorsView,sizesView,textBordersView;
 int selectedAddMoreLayerTab = -1;
 
 
-ResourcesView* premiumEmoticonsView,*premiumClipartsView,*fontsView;
+ResourcesView* emoticonsView,*clipartsView,*fontsView;
 
 NSString *fontsViewResourcePath,*clipartsViewResourcePath,*emoticonsViewResourcePath;
 
 NSMutableArray *fontsArray,*clipartsArray,*emoticonsArray;
+
+NSArray *coloursArray;
 
 #pragma mark -  View Appear Methods
 
@@ -292,7 +294,7 @@ NSMutableArray *fontsArray,*clipartsArray,*emoticonsArray;
             
             NSArray *flyerBordersViewArray = [[NSBundle mainBundle] loadNibNamed:@"Borders" owner:self options:nil];
             flyerBordersView = [flyerBordersViewArray objectAtIndex:0];
-            
+        
             [self addFontsInSubView];
             //NSArray *fontViewArray = [[NSBundle mainBundle] loadNibNamed:@"Fonts" owner:self options:nil];
             //fontsView = [fontViewArray objectAtIndex:0];
@@ -676,7 +678,7 @@ NSMutableArray *fontsArray,*clipartsArray,*emoticonsArray;
             [layerScrollView setContentSize:CGSizeMake(colorsView.frame.size.width, [layerScrollView bounds].size.height)];
         }
         
-        NSArray *coloursArray = colorsView.subviews;
+        coloursArray = colorsView.subviews;
         
         for (int i = 1; i <=  [colorArray count] ; i++)
         {
@@ -704,21 +706,26 @@ NSMutableArray *fontsArray,*clipartsArray,*emoticonsArray;
                 [labelToStore.textColor getWhite:&wht alpha:&alpha];
                 twhite = [NSString stringWithFormat:@"%f, %f", wht, alpha];
                 
-                UIColor * c = [UIColor clearColor];
-                [color.layer setBorderColor:c.CGColor];
-                [color.layer setCornerRadius:0];
                 
-                if ([textColor isEqualToString:tcolor] && [textWhiteColor isEqualToString:twhite] ) {
+                
+                /*UIColor * c = [UIColor clearColor];
+                [color.layer setBorderColor:c.CGColor];
+                [color.layer setCornerRadius:0];*/
+                
+                /*if ([textColor isEqualToString:tcolor] && [textWhiteColor isEqualToString:twhite] ) {
                     
                     // Add border to selected layer thumbnail
                     [color.layer setBorderWidth:3.0];
                     [color.layer setCornerRadius:8];
                     UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
                     [color.layer setBorderColor:c.CGColor];
-                }
+                }*/
             }
             
         }//Loop
+        
+        //Handling Select Unselect
+        [self setSelectedItem:[flyer getLayerType:currentLayer] inView:colorsView ofLayerAttribute:LAYER_ATTRIBUTE_COLOR];
     });
 }
 
@@ -777,7 +784,6 @@ NSMutableArray *fontsArray,*clipartsArray,*emoticonsArray;
             textSize = [NSString stringWithFormat:@"%f", (lastFrame.size.height/1.5)];
         }
         
-        
         NSArray *sizesArray = sizesView.subviews;
         for (int i = 1; i <=  [SIZE_ARRAY count] ; i++)
         {
@@ -789,27 +795,10 @@ NSMutableArray *fontsArray,*clipartsArray,*emoticonsArray;
             
             NSString *sizeValue =SIZE_ARRAY[(i-1)];
             [size setTitle:sizeValue forState:UIControlStateNormal];
-            
-            UIColor * c = [UIColor clearColor];
-            [size.layer setBorderColor:c.CGColor];
-            [size.layer setCornerRadius:0];
-            
-            
-            //Here we Highlight Last Size Selected
-            if (textLayer) {
-                
-                NSString *tsize = [NSString stringWithFormat:@"%f", [sizeValue floatValue]];
-                
-                if ([textSize isEqualToString:tsize]) {
-                    
-                    // Add border to selected layer thumbnail
-                    [size.layer setBorderWidth:3.0];
-                    [size.layer setCornerRadius:8];
-                    UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
-                    [size.layer setBorderColor:c.CGColor];
-                }
-            }
         }
+        
+        //Handling Select Unselect
+        [self setSelectedItem:[flyer getLayerType:currentLayer] inView:sizesView ofLayerAttribute:LAYER_ATTRIBUTE_SIZE];
     });
 }
 
@@ -900,7 +889,7 @@ NSMutableArray *fontsArray,*clipartsArray,*emoticonsArray;
     widthValue = 35;
     heightValue = 35;
     
-    premiumClipartsView = [[ResourcesView alloc] init];
+    clipartsView = [[ResourcesView alloc] init];
     clipartsArray  = [[NSMutableArray alloc] initWithContentsOfFile:clipartsViewResourcePath];
     
     [self deleteSubviewsFromScrollView];
@@ -948,12 +937,10 @@ NSMutableArray *fontsArray,*clipartsArray,*emoticonsArray;
                 curYLoc = curYLoc + widthValue + 7;
             }
         }
-        
-                
-        [premiumClipartsView addSubview:font];
+        [clipartsView addSubview:font];
     }
-    
-    premiumClipartsView.size = CGSizeMake(320, curYLoc);
+    clipartsView.size = CGSizeMake(320, curYLoc);
+
 }
 
 
@@ -965,7 +952,7 @@ NSMutableArray *fontsArray,*clipartsArray,*emoticonsArray;
     widthValue = 35;
     heightValue = 35;
     
-    premiumEmoticonsView = [[ResourcesView alloc] init];
+    emoticonsView = [[ResourcesView alloc] init];
     emoticonsArray = [[NSMutableArray alloc] initWithContentsOfFile:emoticonsViewResourcePath];
     
     NSInteger symbolScrollWidth = 60;
@@ -1002,11 +989,11 @@ NSMutableArray *fontsArray,*clipartsArray,*emoticonsArray;
             }
         }
         
-        [premiumEmoticonsView addSubview:symbolButton];
+        [emoticonsView addSubview:symbolButton];
         
     }//loop
     
-    premiumEmoticonsView.size = CGSizeMake(320, curYLoc + symbolScrollHeight + 5);
+    emoticonsView.size = CGSizeMake(320, curYLoc + symbolScrollHeight + 5);
     [layerScrollView setContentSize:CGSizeMake(320, curYLoc + symbolScrollHeight)];
 }
 
@@ -1172,7 +1159,7 @@ NSMutableArray *fontsArray,*clipartsArray,*emoticonsArray;
                 [flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
                 
                 //Handling Select Unselect
-                [self setSelectedItem:FLYER_LAYER_TEXT inView:fontsView];
+                [self setSelectedItem:FLYER_LAYER_TEXT inView:fontsView ofLayerAttribute:LAYER_ATTRIBUTE_FONT];
             }
             i++;
         }// uiImageView Found
@@ -1196,13 +1183,6 @@ NSMutableArray *fontsArray,*clipartsArray,*emoticonsArray;
         //SUBVIEWS OF UIIMAGEVIEW FOR FLASH INDICATORS
         if (![tempView isKindOfClass:[UIImageView class]]) {
             
-            // Add border to Un-select layer thumbnail
-            CALayer * l = [tempView layer];
-            [l setBorderWidth:1];
-            [l setCornerRadius:0];
-            UIColor * c = [UIColor clearColor];
-            [l setBorderColor:c.CGColor];
-        
             if(tempView == view)
             {
                 selectedColor = colorArray[i-1];
@@ -1212,12 +1192,19 @@ NSMutableArray *fontsArray,*clipartsArray,*emoticonsArray;
                 //Here we call Render Layer on View
                 [flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
             
-                // Add border to selected layer thumbnail
-                CALayer * l = [tempView layer];
-                [l setBorderWidth:3.0];
-                [l setCornerRadius:8];
-                UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
-                [l setBorderColor:c.CGColor];
+                NSString *type = [flyer getLayerType:currentLayer];
+                if( [type isEqualToString:FLYER_LAYER_CLIP_ART] ){
+                    
+                    //Handling Select Unselect
+                    [self setSelectedItem:FLYER_LAYER_CLIP_ART inView:colorsView ofLayerAttribute:LAYER_ATTRIBUTE_COLOR];
+                    
+                }else {
+                    
+                    //Handling Select Unselect
+                    [self setSelectedItem:FLYER_LAYER_TEXT inView:colorsView ofLayerAttribute:LAYER_ATTRIBUTE_COLOR];
+                }
+                break;
+                
             }
             
             i++;
@@ -1241,13 +1228,6 @@ NSMutableArray *fontsArray,*clipartsArray,*emoticonsArray;
         //SUBVIEWS OF UIIMAGEVIEW FOR FLASH INDICATORS
         if (![tempView isKindOfClass:[UIImageView class]]) {
             
-            // Add border to Un-select layer thumbnail
-            CALayer * l = [tempView layer];
-            [l setBorderWidth:1];
-            [l setCornerRadius:8];
-            UIColor * c = [UIColor clearColor];
-            [l setBorderColor:c.CGColor];
-        
             if(tempView == view)
             {
                 NSString *flyerImg = [flyer getImageName:currentLayer];
@@ -1257,22 +1237,29 @@ NSMutableArray *fontsArray,*clipartsArray,*emoticonsArray;
                     NSString *sizeStr = SIZE_ARRAY[i-1];
                     selectedSize = [sizeStr intValue];
                     NSString *type = [flyer getLayerType:currentLayer];
+                    
                     //Checking if layer in clip art,we do not open text editing mood
                     if( [type isEqualToString:FLYER_LAYER_CLIP_ART] ){
                         selectedSize = selectedSize * 3.0;
                     }
+                    
                     selectedFont = [selectedFont fontWithSize:selectedSize];
-                
+                    
                     [flyer setFlyerTextSize:currentLayer Size:selectedFont];
                 
                     //Here we call Render Layer on View
                     [flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
+                    
+                    if( [type isEqualToString:FLYER_LAYER_CLIP_ART] ){
+                        
+                        //Handling Select Unselect
+                        [self setSelectedItem:FLYER_LAYER_CLIP_ART inView:sizesView ofLayerAttribute:LAYER_ATTRIBUTE_SIZE];
+                    }else {
+                        
+                        //Handling Select Unselect
+                        [self setSelectedItem:FLYER_LAYER_TEXT inView:sizesView ofLayerAttribute:LAYER_ATTRIBUTE_SIZE];
+                    }
                 
-                    // Add border to selected layer thumbnail
-                    CALayer * l = [tempView layer];
-                    [l setBorderWidth:3.0];
-                    UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
-                    [l setBorderColor:c.CGColor];
                 }else {
                     
                     NSString *sizeStr = SIZE_ARRAY[i-1];
@@ -1287,12 +1274,9 @@ NSMutableArray *fontsArray,*clipartsArray,*emoticonsArray;
                     //Here we call Render Layer on View
                     [flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
                     
-                    // Add border to selected layer thumbnail
-                    CALayer * l = [tempView layer];
-                    [l setBorderWidth:3.0];
-                    UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
-                    [l setBorderColor:c.CGColor];
-                
+                    //Handling Select Unselect
+                    [self setSelectedItem:FLYER_LAYER_EMOTICON inView:sizesView ofLayerAttribute:LAYER_ATTRIBUTE_SIZE];
+                    
                 }
             }
             i++;
@@ -1364,14 +1348,40 @@ NSMutableArray *fontsArray,*clipartsArray,*emoticonsArray;
 -(void)selectEmoticon:(id)sender {
     
     UIButton *view = sender;
-    CGRect lastFrame = [flyer getImageFrame:currentLayer];
-    CGRect defaultSize = CGRectMake(5, 5, 90, 90);
-    [flyer setImageFrame:currentLayer :defaultSize];
-    // Get the type of layer
-    NSString *type = [flyer getLayerType:currentLayer];
-    if ( [type isEqualToString:FLYER_LAYER_EMOTICON] ) {
-        [flyer setImageFrame:currentLayer :lastFrame];
+    
+    // Get current layer type
+    NSString* previousLayerType = [flyer getLayerType:currentLayer];
+    
+    // Set the layer type and make sure there is no text.
+    [flyer setLayerType:currentLayer type:FLYER_LAYER_EMOTICON];
+    [flyer setFlyerText:currentLayer text:nil];
+    
+    
+    //Getting Last Info of Layer
+    if (![currentLayer isEqualToString:@""]) {
+        
+        CGRect currentFrame = [flyer getImageFrame:currentLayer];
+        if ( ![previousLayerType isEqualToString:FLYER_LAYER_EMOTICON] ){
+            
+            float currentCenterX = ((currentFrame.origin.x + currentFrame.size.width)/2);
+            float currentCenterY = ((currentFrame.origin.y + currentFrame.size.height)/2);
+            
+            currentFrame.size.height = 90.0f;
+            currentFrame.size.width = currentFrame.size.height;
+            
+            currentFrame.origin.x  = currentCenterX - 45;
+            currentFrame.origin.y  = currentCenterY - 45;
+            
+            [flyer setImageFrame:currentLayer :currentFrame];
+        }
+        /*
+        textLayer = [flyer getLayerFromMaster:currentLayer];
+        textSize = [textLayer objectForKey:@"fontsize"];
+        */
     }
+    //fontType = [UIFont fontWithName:[clipartsArray[i] objectForKey:@"fontType"] size:([textSize floatValue])];
+   
+    
     NSMutableDictionary *dic = [flyer getLayerFromMaster:currentLayer];
     [self.flyimgView renderLayer:currentLayer layerDictionary:dic];
     
@@ -1390,10 +1400,6 @@ NSMutableArray *fontsArray,*clipartsArray,*emoticonsArray;
         //Set Image Tag
         [flyer setImageTag:currentLayer Tag:[NSString stringWithFormat:@"%d",view.tag]];
         
-        // Set the layer type and make sure there is no text.
-        [flyer setLayerType:currentLayer type:FLYER_LAYER_EMOTICON];
-        [flyer setFlyerText:currentLayer text:nil];
-        
         [self.flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
         
         //Here we Highlight The ImageView
@@ -1401,7 +1407,7 @@ NSMutableArray *fontsArray,*clipartsArray,*emoticonsArray;
     }
     
     //Handling Select Unselect
-    [self setSelectedItem:FLYER_LAYER_EMOTICON inView:premiumEmoticonsView];
+    [self setSelectedItem:FLYER_LAYER_EMOTICON inView:emoticonsView ofLayerAttribute:LAYER_ATTRIBUTE_IMAGE];
 }
 
 
@@ -1413,9 +1419,12 @@ NSMutableArray *fontsArray,*clipartsArray,*emoticonsArray;
     int i=1;
     UIButton *view = sender;
     
-    NSString *premiumClipartsPlistPath = [[NSBundle mainBundle] pathForResource:@"Cliparts-paid" ofType:@"plist"];
-    NSArray *premiumCliparts = [[NSArray alloc] initWithContentsOfFile:premiumClipartsPlistPath];
-    UIFont *fontType = [UIFont fontWithName:[premiumCliparts[i] objectForKey:@"fontType"] size:60.0f];
+    // Set the type
+    [flyer setLayerType:currentLayer type:FLYER_LAYER_CLIP_ART];
+    [flyer setImagePath:currentLayer ImgPath:nil];
+    [flyer setImageTag:currentLayer Tag:nil];
+    
+    UIFont *fontType = [UIFont fontWithName:[clipartsArray[i] objectForKey:@"fontType"] size:60.0f];
     
     NSMutableDictionary *textLayer;
     __block NSString *textSize;
@@ -1428,17 +1437,15 @@ NSMutableArray *fontsArray,*clipartsArray,*emoticonsArray;
             textLayer = [flyer getLayerFromMaster:currentLayer];
             textSize = [textLayer objectForKey:@"fontsize"];
         }
-        fontType = [UIFont fontWithName:[premiumCliparts[i] objectForKey:@"fontType"] size:([textSize floatValue])];
+        fontType = [UIFont fontWithName:[clipartsArray[i] objectForKey:@"fontType"] size:([textSize floatValue])];
     }
     
-    int  index = [[premiumClipartsView subviews] indexOfObject:view];
+    int  index = [[clipartsView subviews] indexOfObject:view];
     
-    // Set the type
-    [flyer setLayerType:currentLayer type:FLYER_LAYER_CLIP_ART];
-    [flyer setImagePath:currentLayer ImgPath:nil];
-    [flyer setImageTag:currentLayer Tag:nil];
+    //Handling Select Unselect
+    //[self setSelectedItem:FLYER_LAYER_EMOTICON inView:emoticonsView ofLayerAttribute:LAYER_ATTRIBUTE_SIZE];
 
-    for(UIView *tempView in [premiumClipartsView subviews])
+    for(UIView *tempView in [clipartsView subviews])
     {
         //CHECK UIIMAGEVIEW BECAUSE SCROLL VIEW HAVE ADDITIONAL
         //SUBVIEWS OF UIIMAGEVIEW FOR FLASH INDICATORS
@@ -1452,13 +1459,17 @@ NSMutableArray *fontsArray,*clipartsArray,*emoticonsArray;
                 [flyer setFlyerText:currentLayer text:view.currentTitle ];
                 
                 selectedFont = fontType;
-                [flyer setFlyerTextFont:currentLayer FontName:[premiumCliparts[index] objectForKey:@"fontType"]];
+                //Checking if layer in clip art,we do not open text editing mood
+                if( [type isEqualToString:FLYER_LAYER_CLIP_ART] ){
+                    selectedSize = selectedSize * 3.0;
+                }
+                [flyer setFlyerTextFont:currentLayer FontName:[clipartsArray[index] objectForKey:@"fontType"]];
                 [flyer setFlyerTextSize:currentLayer Size:selectedFont];
                 
                 //Here we call Render Layer on View
                 [flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
                 
-                [self setSelectedItem:FLYER_LAYER_CLIP_ART inView:premiumClipartsView];
+                [self setSelectedItem:FLYER_LAYER_CLIP_ART inView:clipartsView ofLayerAttribute:LAYER_ATTRIBUTE_IMAGE];
             }
             i++;
         }
@@ -1827,7 +1838,10 @@ NSMutableArray *fontsArray,*clipartsArray,*emoticonsArray;
     
     if ( [[weakSelf.flyer getFlyerTypeVideo]isEqualToString:@"video"] ){
         
-        nbuCamera.isVideoFlyer = YES;
+        //nbuCamera.isVideoFlyer = YES;
+        if ( ![[flyer getLayerType:currentLayer]isEqualToString:FLYER_LAYER_IMAGE] ) {
+            nbuCamera.isVideoFlyer = YES;
+        }
     }
     [self.navigationController pushViewController:nbuCamera animated:YES];
     
@@ -3255,7 +3269,7 @@ NSMutableArray *fontsArray,*clipartsArray,*emoticonsArray;
 
 -(NSString *) getTagForClipart:(NSString*)clipart {
     
-    for(UIView *tempView in [premiumClipartsView subviews]) {
+    for(UIView *tempView in [clipartsView subviews]) {
         if ([tempView isKindOfClass:[UIButton class]]) {
             UIButton *btn = (UIButton *) tempView;
             if ( [btn.currentTitle isEqualToString:clipart] ) {
@@ -3269,32 +3283,151 @@ NSMutableArray *fontsArray,*clipartsArray,*emoticonsArray;
     return [NSString stringWithFormat: @"%d", -1];
 }
 
--(NSString*) getCurrentLayerTag {
+-(NSString *) getTagForColor:(NSString*)layerType ofView:(ResourcesView*)view{
+    
+    [view dehighlightResource];
+    
+    NSString* tag = nil;
+    
+    NSMutableDictionary *textLayer;
+    NSString *textColor;
+    NSString *textWhiteColor;
+    
+    //Getting Last Info of Text Layer
+    if (![currentLayer isEqualToString:@""]) {
+        textLayer = [flyer getLayerFromMaster:currentLayer];
+        textColor = [textLayer objectForKey:@"textcolor"];
+        textWhiteColor = [textLayer objectForKey:@"textWhitecolor"];
+    }
+    
+   
+    for (int i = 1; i <=  [colorArray count] ; i++)
+    {
+        UIButton *color;
+        if ([coloursArray[i-1] isKindOfClass:[UIButton class]]) {
+            color = (UIButton *) coloursArray[i-1];
+        }
+        
+        id colorName = colorArray[(i-1)];
+        //Here we Highlight Last Color Selected
+        if (textLayer) {
+            
+            NSString *tcolor;
+            NSString *twhite;
+            CGFloat red = 0.0, green = 0.0, blue = 0.0, alpha = 0.0,wht = 0.0;
+            
+            UILabel *labelToStore = [[UILabel alloc]init];
+            labelToStore.textColor = colorName;
+            
+            //Getting RGB Color Code
+            [labelToStore.textColor getRed:&red green:&green blue:&blue alpha:&alpha];
+            
+            tcolor = [NSString stringWithFormat:@"%f, %f, %f", red, green, blue];
+            
+            [labelToStore.textColor getWhite:&wht alpha:&alpha];
+            twhite = [NSString stringWithFormat:@"%f, %f", wht, alpha];
+            
+            if ([textColor isEqualToString:tcolor] && [textWhiteColor isEqualToString:twhite] ) {
+                
+                tag = [NSString stringWithFormat: @"%d", color.tag];
+                break;
+            }
+        }
+    }
+    
+    return tag;
+}
+
+-(NSString *) getTagForSize:(NSString*)layerType ofView:(ResourcesView*)view{
+    
+    [view dehighlightResource];
+    
+    NSString* tag = nil;
+   
+    NSMutableDictionary *textLayer;
+    NSString *textSize;
+    
+    //Getting Last Info of Text Layer
+    if (![currentLayer isEqualToString:@""]) {
+        textLayer = [flyer getLayerFromMaster:currentLayer];
+        textSize = [textLayer objectForKey:@"fontsize"];
+    }
+    
+    if( [layerType isEqualToString:FLYER_LAYER_CLIP_ART] ){
+        
+        textSize = [NSString stringWithFormat:@"%f", ([textSize floatValue]/3.0)];
+        
+    } else if ( [layerType isEqualToString:FLYER_LAYER_EMOTICON] ) {
+        
+        CGRect lastFrame = [flyer getImageFrame:currentLayer];
+        textSize = [NSString stringWithFormat:@"%f", (lastFrame.size.height/1.5)];
+        
+    }else if ( [layerType isEqualToString:FLYER_LAYER_TEXT] ) {
+        
+        
+    }
+    
+    NSArray *sizesArray = sizesView.subviews;
+    for (int i = 1; i <=  [sizesArray count] ; i++)
+    {
+        
+        UIButton *size;
+        if ([sizesArray[i-1] isKindOfClass:[UIButton class]]) {
+            size = (UIButton *) sizesArray[i-1];
+        }
+        
+        NSString *btnTitleToBeHighlighted = [NSString stringWithFormat:@"%f", [size.currentTitle floatValue]];
+                       
+        if ( [btnTitleToBeHighlighted isEqualToString:textSize] ){
+            
+            tag = [NSString stringWithFormat: @"%d", size.tag];
+            break;
+        }
+    }
+    
+    return tag;
+}
+
+
+-(NSString*) getCurrentLayerTag:(NSString *)layerAttribute inView:(ResourcesView*)view {
     
     NSString* tag = nil;
     
     NSString* layerType = [flyer getLayerType:currentLayer];
-    
     if( [layerType isEqualToString:FLYER_LAYER_CLIP_ART] ){
         
         tag = [self getTagForClipart:[flyer getText:currentLayer]];
+        if ( [layerAttribute isEqualToString:LAYER_ATTRIBUTE_SIZE] ) {
+            tag = [self getTagForSize:layerType ofView:view];
+        }else if ( [layerAttribute isEqualToString:LAYER_ATTRIBUTE_COLOR] ) {
+            tag = [self getTagForColor:layerType ofView:view];
+        }
         
     } else if ( [layerType isEqualToString:FLYER_LAYER_EMOTICON] ) {
         
         tag = [flyer getImageTag:currentLayer];
+        if ( [layerAttribute isEqualToString:LAYER_ATTRIBUTE_SIZE] ) {
+            tag = [self getTagForSize:layerType ofView:view];
+        }
         
     }else if ( [layerType isEqualToString:FLYER_LAYER_TEXT] ) {
         
         tag = [self getTagForText:currentLayer];
+        if ( [layerAttribute isEqualToString:LAYER_ATTRIBUTE_SIZE] ) {
+            tag = [self getTagForSize:layerType ofView:view];
+        }else if ( [layerAttribute isEqualToString:LAYER_ATTRIBUTE_COLOR] ) {
+            tag = [self getTagForColor:layerType ofView:view];
+        }
+        
         
     }
     
     return tag;
 }
 
--(void) setSelectedItem:(NSString*)layerType inView:(ResourcesView*)view {
+-(void) setSelectedItem:(NSString*)layerType inView:(ResourcesView*)view ofLayerAttribute:(NSString *)layerAttribute {
     
-    NSString* tag = [self getCurrentLayerTag];
+    NSString* tag = [self getCurrentLayerTag:layerAttribute inView:view];
     
     //If this layer is of type image AND there is a selected layer AND layer type is emoticon
     if ( tag != nil && ![tag isEqualToString:@""] && (![currentLayer isEqualToString:@""]) && ([[flyer getLayerType:currentLayer] isEqualToString:layerType]) ) {
@@ -3339,10 +3472,10 @@ NSMutableArray *fontsArray,*clipartsArray,*emoticonsArray;
                                  
                                  // Delete SubViews from ScrollView and add Emoticons view
                                  [self deleteSubviewsFromScrollView];
-                                 [layerScrollView addSubview:premiumClipartsView];
-                                 [layerScrollView setContentSize:CGSizeMake(320, premiumClipartsView.size.height)];
+                                 [layerScrollView addSubview:clipartsView];
+                                 [layerScrollView setContentSize:CGSizeMake(320, clipartsView.size.height)];
                                  
-                                 [self setSelectedItem:FLYER_LAYER_CLIP_ART inView:premiumClipartsView];
+                                 [self setSelectedItem:FLYER_LAYER_CLIP_ART inView:clipartsView ofLayerAttribute:LAYER_ATTRIBUTE_IMAGE];
                                  
                              } else {
                                  //[layerScrollView setContentSize:CGSizeMake(([symbolArray count]*(symbolScrollWidth+5)), [layerScrollView bounds].size.height)];
@@ -3369,10 +3502,10 @@ NSMutableArray *fontsArray,*clipartsArray,*emoticonsArray;
                                  
                                  // Delete SubViews from ScrollView and add Emoticons view
                                  [self deleteSubviewsFromScrollView];
-                                 [layerScrollView addSubview:premiumEmoticonsView];
-                                 [layerScrollView setContentSize:CGSizeMake(320, premiumEmoticonsView.size.height)];
+                                 [layerScrollView addSubview:emoticonsView];
+                                 [layerScrollView setContentSize:CGSizeMake(320, emoticonsView.size.height)];
                                  
-                                 [self setSelectedItem:FLYER_LAYER_EMOTICON inView:premiumEmoticonsView];
+                                 [self setSelectedItem:FLYER_LAYER_EMOTICON inView:emoticonsView ofLayerAttribute:LAYER_ATTRIBUTE_IMAGE];
 
                              } else {
                                  //[layerScrollView setContentSize:CGSizeMake(([symbolArray count]*(symbolScrollWidth+5)), [layerScrollView bounds].size.height)];
@@ -3467,7 +3600,7 @@ NSMutableArray *fontsArray,*clipartsArray,*emoticonsArray;
                                  [layerScrollView addSubview:fontsView];
                                  [layerScrollView setContentSize:CGSizeMake(320, fontsView.size.height)];
                                  
-                                 [self setSelectedItem:FLYER_LAYER_TEXT inView:fontsView];
+                                 [self setSelectedItem:FLYER_LAYER_TEXT inView:fontsView ofLayerAttribute:LAYER_ATTRIBUTE_FONT];
                                  
                              } else {
                                  //[layerScrollView setContentSize:CGSizeMake(([symbolArray count]*(symbolScrollWidth+5)), [layerScrollView bounds].size.height)];
@@ -3646,7 +3779,7 @@ NSMutableArray *fontsArray,*clipartsArray,*emoticonsArray;
     
     if( selectedButton == cameraTabButton )
 	{
-        imgPickerFlag =2;
+        imgPickerFlag = 2;
         [self openCustomCamera:NO];
 
     }

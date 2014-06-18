@@ -171,6 +171,13 @@ nil]
 #define IS_IPHONE   ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
 #define IS_IPHONE_5 ([[UIScreen mainScreen] bounds ].size.height == HEIGHT_IPHONE_5 )
 
+#define LAYER_ATTRIBUTE_SIZE @"Size"
+#define LAYER_ATTRIBUTE_COLOR @"Color"
+#define LAYER_ATTRIBUTE_BORDER @"Border"
+#define LAYER_ATTRIBUTE_IMAGE @"Image"
+#define LAYER_ATTRIBUTE_FONT @"Font"
+
+
 #define FlickrAPIKey @"b2ea05c41f53e1dc4d6e6edee9e6ee06"
 #define FlickrSecretKey @"d4af50fe93325de3"
 #define kStoredAuthTokenKeyName @"FlickrOAuthToken"
