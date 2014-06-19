@@ -21,7 +21,7 @@ NSString * const TEXTyPOS = @"15.000000";
 NSString * const TEXTWIDTH = @"280.000000";
 NSString * const TEXTHEIGHT = @"280.000000";
 
-NSString * const CLIPARTFONTSIZE = @"8.000000";
+NSString * const CLIPARTFONTSIZE = @"60.000000";
 NSString * const CLIPARTxPOS = @"5.000000";
 NSString * const CLIPARTyPOS = @"5.000000";
 NSString * const CLIPARTWIDTH = @"160.000000";
@@ -634,6 +634,18 @@ NSString * const CLIPARTHEIGHT = @"100.000000";
 
     NSMutableDictionary *textDic = [self getLayerFromMaster:uid];
     return [textDic objectForKey:@"text"];
+}
+
+/*
+ * Here we Set Text Size
+ */
+-(UIFont *)getTextFont :(NSString *)uid {
+    
+    NSString* fontName = [[self getLayerFromMaster:uid] objectForKey:@"fontname"];
+    float fontSize = [[[self getLayerFromMaster:uid] objectForKey:@"fontsize"] floatValue ];
+    UIFont* textFont = [UIFont fontWithName:fontName size:fontSize];
+    
+    return textFont;
 }
 
 -(NSString *)getImageName :(NSString *)uid{

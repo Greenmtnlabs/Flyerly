@@ -139,6 +139,7 @@
 
 -(void)setLayerType:(NSString *)uid type:(NSString *)type;
 -(NSString *)getLayerType:(NSString *)uid;
+-(UIFont *)getTextFont :(NSString *)uid;
 
 
 -(NSString *)getText :(NSString *)uid;

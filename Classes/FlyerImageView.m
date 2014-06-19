@@ -255,11 +255,11 @@
     [lbl sizeToFit];
     
     // Resize the frame's width to actual
-    CGRect fr = lbl.frame;
-    fr.size.width = [[detail valueForKey:@"width"] floatValue];
-    fr.origin.x = [[detail valueForKey:@"x"] floatValue];
-    fr.origin.y = [[detail valueForKey:@"y"] floatValue];
-    lbl.frame = fr;
+    //CGRect fr = lbl.frame;
+    //fr.size.width = [[detail valueForKey:@"width"] floatValue];
+    //fr.origin.x = [[detail valueForKey:@"x"] floatValue];
+    //fr.origin.y = [[detail valueForKey:@"y"] floatValue];
+    //lbl.frame = fr;
 }
 
 

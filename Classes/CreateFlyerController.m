@@ -184,7 +184,7 @@ NSArray *coloursArray;
         
         //Checking if user valid purchases
         if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]   ||
-             [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"]    ) {
+             [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"]    ) {
             
             //Unloking features
             UIImage *buttonImage = [UIImage imageNamed:@"video_tab.png"];
@@ -1341,6 +1341,85 @@ NSArray *coloursArray;
     [Flurry logEvent:@"Background Selected"];
 }
 
+/*
+ * Used to convert a clipart frame to emoticon frame and vice versa.
+ */
+- (CGRect) convertFrameFromLayerType:(NSString*)fromLayerType toLayerType:(NSString*)toLayerType {
+    
+    CGRect currentFrame = [flyer getImageFrame:currentLayer];
+    
+    float artLayerSize = 10.0f;
+    
+    if ( [fromLayerType isEqualToString:FLYER_LAYER_CLIP_ART] ) {
+        
+        float currentCenterX = (currentFrame.origin.x + (currentFrame.size.width)/2);
+        float currentCenterY = (currentFrame.origin.y + (currentFrame.size.height)/2);
+        
+        NSDictionary* textLayer = [flyer getLayerFromMaster:currentLayer];
+        artLayerSize = [[textLayer objectForKey:@"fontsize"] floatValue] / 3.0;
+        //UIFont* artLayerFont = [flyer getTextFont:currentLayer];
+        
+        /*
+        float scsc = artLayerFont.pointSize;
+        float hewf = artLayerFont.lineHeight;
+        float wwes = artLayerFont.capHeight;
+        float rsdf = artLayerFont.ascender;
+        float pqrs = artLayerFont.descender;
+        
+        CGSize stringSize;
+        
+        if ([self respondsToSelector:@selector(sizeWithAttributes:)])
+        {
+            NSDictionary* attribs = @{NSFontAttributeName:artLayerFont};
+            stringSize = ([NSAttributedString sizeWithAttributes:attribs]);
+        }
+        return ([self sizeWithFont:fontToUse]);
+        */
+        
+        currentFrame.size.height = artLayerSize * 1.5;
+        currentFrame.size.width = artLayerSize * 1.5;
+        
+        currentFrame.origin.x  = currentCenterX - (currentFrame.size.width / 2);
+        currentFrame.origin.y  = currentCenterY - (currentFrame.size.height / 2);
+        
+    } else if ( [fromLayerType isEqualToString:FLYER_LAYER_EMOTICON] ) {
+        
+        float currentCenterX = (currentFrame.origin.x + (currentFrame.size.width)/2);
+        float currentCenterY = (currentFrame.origin.y + (currentFrame.size.height)/2);
+        //artLayerSize = currentFrame.size.height / 1.5;
+        
+        currentFrame.size.width = 90;
+        currentFrame.size.height = 90;
+        
+        currentFrame.origin.x  = currentCenterX - (currentFrame.size.width / 2);
+        currentFrame.origin.y  = currentCenterY - (currentFrame.size.height / 2);
+    }
+    
+    
+    
+    return currentFrame;
+}
+
+- (float) getRelativeSizeFromLayer:(NSString*) uid {
+    
+    NSString* layerType = [flyer getLayerType:uid];
+    
+    float artLayerSize = 10.0f;
+    
+    if ( [layerType isEqualToString:FLYER_LAYER_CLIP_ART] ) {
+        
+        NSDictionary* layer = [flyer getLayerFromMaster:uid];
+        artLayerSize = [[layer objectForKey:@"fontsize"] floatValue] / 3.0;
+        
+    } else if ([layerType isEqualToString:FLYER_LAYER_EMOTICON]) {
+        
+        CGRect frame = [flyer getImageFrame:uid];
+        artLayerSize = frame.size.height / 1.5;
+        
+    }
+    
+    return artLayerSize;
+}
 
 /*
  * Called when select emoticon
@@ -1356,31 +1435,15 @@ NSArray *coloursArray;
     [flyer setLayerType:currentLayer type:FLYER_LAYER_EMOTICON];
     [flyer setFlyerText:currentLayer text:nil];
     
-    
-    //Getting Last Info of Layer
+    // Getting Last Info of Layer
     if (![currentLayer isEqualToString:@""]) {
         
-        CGRect currentFrame = [flyer getImageFrame:currentLayer];
-        if ( ![previousLayerType isEqualToString:FLYER_LAYER_EMOTICON] ){
+        if ( ![previousLayerType isEqualToString:FLYER_LAYER_EMOTICON] ) {
             
-            float currentCenterX = ((currentFrame.origin.x + currentFrame.size.width)/2);
-            float currentCenterY = ((currentFrame.origin.y + currentFrame.size.height)/2);
-            
-            currentFrame.size.height = 90.0f;
-            currentFrame.size.width = currentFrame.size.height;
-            
-            currentFrame.origin.x  = currentCenterX - 45;
-            currentFrame.origin.y  = currentCenterY - 45;
-            
-            [flyer setImageFrame:currentLayer :currentFrame];
+            [flyer setImageFrame:currentLayer :[self convertFrameFromLayerType:previousLayerType toLayerType:FLYER_LAYER_EMOTICON]];
         }
-        /*
-        textLayer = [flyer getLayerFromMaster:currentLayer];
-        textSize = [textLayer objectForKey:@"fontsize"];
-        */
+        
     }
-    //fontType = [UIFont fontWithName:[clipartsArray[i] objectForKey:@"fontType"] size:([textSize floatValue])];
-   
     
     NSMutableDictionary *dic = [flyer getLayerFromMaster:currentLayer];
     [self.flyimgView renderLayer:currentLayer layerDictionary:dic];
@@ -1419,32 +1482,28 @@ NSArray *coloursArray;
     int i=1;
     UIButton *view = sender;
     
+    // Get current layer type
+    NSString* previousLayerType = [flyer getLayerType:currentLayer];
+    
     // Set the type
     [flyer setLayerType:currentLayer type:FLYER_LAYER_CLIP_ART];
     [flyer setImagePath:currentLayer ImgPath:nil];
     [flyer setImageTag:currentLayer Tag:nil];
     
-    UIFont *fontType = [UIFont fontWithName:[clipartsArray[i] objectForKey:@"fontType"] size:60.0f];
-    
-    NSMutableDictionary *textLayer;
-    __block NSString *textSize;
-    
-    // Get the type of layer
-    NSString *type = [flyer getLayerType:currentLayer];
-    if ( [type isEqualToString:FLYER_LAYER_CLIP_ART] ) {
-        //Getting Last Info of Text Layer
-        if (![currentLayer isEqualToString:@""]) {
-            textLayer = [flyer getLayerFromMaster:currentLayer];
-            textSize = [textLayer objectForKey:@"fontsize"];
+    // Getting Last Info of Layer
+    if (![currentLayer isEqualToString:@""]) {
+        
+        if ( ![previousLayerType isEqualToString:FLYER_LAYER_CLIP_ART] ) {
+            
+            [flyer setImageFrame:currentLayer :[self convertFrameFromLayerType:previousLayerType toLayerType:FLYER_LAYER_EMOTICON]];
         }
-        fontType = [UIFont fontWithName:[clipartsArray[i] objectForKey:@"fontType"] size:([textSize floatValue])];
+        
     }
     
-    int  index = [[clipartsView subviews] indexOfObject:view];
+    UIFont *fontType = [UIFont fontWithName:[clipartsArray[i] objectForKey:@"fontType"] size:([self getRelativeSizeFromLayer:currentLayer] * 3.0)];
     
-    //Handling Select Unselect
-    //[self setSelectedItem:FLYER_LAYER_EMOTICON inView:emoticonsView ofLayerAttribute:LAYER_ATTRIBUTE_SIZE];
-
+    NSUInteger index = [[clipartsView subviews] indexOfObject:view];
+    
     for(UIView *tempView in [clipartsView subviews])
     {
         //CHECK UIIMAGEVIEW BECAUSE SCROLL VIEW HAVE ADDITIONAL
@@ -1459,10 +1518,6 @@ NSArray *coloursArray;
                 [flyer setFlyerText:currentLayer text:view.currentTitle ];
                 
                 selectedFont = fontType;
-                //Checking if layer in clip art,we do not open text editing mood
-                if( [type isEqualToString:FLYER_LAYER_CLIP_ART] ){
-                    selectedSize = selectedSize * 3.0;
-                }
                 [flyer setFlyerTextFont:currentLayer FontName:[clipartsArray[index] objectForKey:@"fontType"]];
                 [flyer setFlyerTextSize:currentLayer Size:selectedFont];
                 
@@ -1839,7 +1894,7 @@ NSArray *coloursArray;
     if ( [[weakSelf.flyer getFlyerTypeVideo]isEqualToString:@"video"] ){
         
         //nbuCamera.isVideoFlyer = YES;
-        if ( ![[flyer getLayerType:currentLayer]isEqualToString:FLYER_LAYER_IMAGE] ) {
+        if ( [[flyer getLayerType:currentLayer]isEqualToString:FLYER_LAYER_IMAGE] ) {
             nbuCamera.isVideoFlyer = YES;
         }
     }
@@ -3526,7 +3581,7 @@ NSArray *coloursArray;
         if ( [[flyer getLayerType:currentLayer] isEqualToString:FLYER_LAYER_EMOTICON] ) {
             
             _addMoreLayerOrSaveFlyerLabel.alpha = 1;
-            _addMoreLayerOrSaveFlyerLabel.text = @"COLORS CANNOT APPLY BE APPLIED ON EMOTICONS";
+            _addMoreLayerOrSaveFlyerLabel.text = @"COLORS CANNOT BE APPLIED ON EMOTICONS";
             
         }else {
             //HERE WE SET ANIMATION

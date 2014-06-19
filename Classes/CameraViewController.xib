@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1280" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CameraViewController">
@@ -11,20 +11,21 @@
                 <outlet property="cameraView" destination="4" id="gI7-IU-C9E"/>
                 <outlet property="mode" destination="KYJ-dZ-Tmw" id="sVa-wQ-71M"/>
                 <outlet property="progressView" destination="bur-b4-qQg" id="3Kc-BN-TPM"/>
+                <outlet property="tapAndHoldLabel" destination="B8Y-F9-FyA" id="OCr-YQ-kwI"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="1">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="468"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="camera_bottombg.png" id="EkM-Q2-85r">
-                    <rect key="frame" x="0.0" y="345" width="320" height="123"/>
+                    <rect key="frame" x="0.0" y="419" width="320" height="149"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinY="YES" heightSizable="YES"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="l4Y-bJ-bF3">
-                    <rect key="frame" x="120" y="369" width="80" height="80"/>
+                    <rect key="frame" x="120" y="469" width="80" height="80"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="TakePhoto"/>
                     <state key="normal" image="camera_button.png">
@@ -36,7 +37,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="r5v-4E-eSi">
-                    <rect key="frame" x="33" y="386" width="47" height="45"/>
+                    <rect key="frame" x="33" y="486" width="47" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Gallery"/>
                     <state key="normal" image="galleryicon.png">
@@ -47,7 +48,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="KYJ-dZ-Tmw">
-                    <rect key="frame" x="251" y="394" width="30" height="30"/>
+                    <rect key="frame" x="251" y="494" width="30" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <state key="normal" image="ModeVideowithLock.png">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -59,35 +60,35 @@
                     </connections>
                 </button>
                 <view clipsSubviews="YES" contentMode="scaleToFill" id="4" customClass="SubNBUCamera">
-                    <rect key="frame" x="0.0" y="20" width="320" height="326"/>
+                    <rect key="frame" x="0.0" y="20" width="320" height="426"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Camerabottom.png" id="bKb-vb-3e4">
-                            <rect key="frame" x="0.0" y="273" width="320" height="53"/>
+                            <rect key="frame" x="0.0" y="373" width="320" height="53"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="new_grid_line.png" id="R24-LX-G4Q">
-                            <rect key="frame" x="0.0" y="-15" width="320" height="341"/>
+                            <rect key="frame" x="0.0" y="-15" width="320" height="441"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cameraline.png" id="eIX-2K-bz4">
-                            <rect key="frame" x="0.0" y="44" width="8" height="229"/>
+                            <rect key="frame" x="0.0" y="44" width="8" height="329"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cameraline.png" id="ch6-vV-ig1">
-                            <rect key="frame" x="312" y="44" width="8" height="229"/>
+                            <rect key="frame" x="312" y="44" width="8" height="329"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" heightSizable="YES"/>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera_change.png" id="zNW-9L-HQ2">
-                            <rect key="frame" x="247" y="288" width="48" height="26"/>
+                            <rect key="frame" x="247" y="388" width="48" height="26"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera_grid.png" id="R5D-kF-rxb">
-                            <rect key="frame" x="38" y="288" width="26" height="26"/>
+                            <rect key="frame" x="38" y="388" width="26" height="26"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="41">
-                            <rect key="frame" x="217" y="283" width="98" height="37"/>
+                            <rect key="frame" x="217" y="371" width="98" height="49"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                             <accessibility key="accessibilityConfiguration" label="RotateCamera"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -103,7 +104,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="KHn-mP-8i7">
-                            <rect key="frame" x="109" y="286" width="100" height="34"/>
+                            <rect key="frame" x="109" y="375" width="100" height="45"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                             <state key="normal">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -113,7 +114,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="dfc-gL-ygN">
-                            <rect key="frame" x="5" y="286" width="95" height="32"/>
+                            <rect key="frame" x="5" y="376" width="95" height="42"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                             <accessibility key="accessibilityConfiguration" label="Grid"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -125,7 +126,7 @@
                             </connections>
                         </button>
                         <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" id="bur-b4-qQg">
-                            <rect key="frame" x="0.0" y="324" width="320" height="3"/>
+                            <rect key="frame" x="0.0" y="424" width="320" height="3"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                         </progressView>
                     </subviews>
@@ -136,23 +137,30 @@
                         <outlet property="toggleCameraButton" destination="41" id="42"/>
                     </connections>
                 </view>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap and hold" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="B8Y-F9-FyA">
+                    <rect key="frame" x="110" y="546" width="100" height="22"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
     </objects>
     <resources>
         <image name="Camerabottom.png" width="640" height="119"/>
-        <image name="ModeCamera.png" width="60" height="60"/>
-        <image name="ModeVideowithLock.png" width="60" height="60"/>
-        <image name="camera_bottombg.png" width="640" height="292"/>
-        <image name="camera_button.png" width="160" height="160"/>
-        <image name="camera_change.png" width="89" height="46"/>
-        <image name="camera_grid.png" width="46" height="45"/>
+        <image name="ModeCamera.png" width="30" height="30"/>
+        <image name="ModeVideowithLock.png" width="30" height="30"/>
+        <image name="camera_bottombg.png" width="320" height="146"/>
+        <image name="camera_button.png" width="80" height="80"/>
+        <image name="camera_change.png" width="44" height="23"/>
+        <image name="camera_grid.png" width="23" height="22"/>
         <image name="cameraline.png" width="26" height="844"/>
         <image name="galleryicon.png" width="94" height="90"/>
-        <image name="new_grid_line.png" width="640" height="844"/>
+        <image name="new_grid_line.png" width="320" height="422"/>
     </resources>
 </document>
