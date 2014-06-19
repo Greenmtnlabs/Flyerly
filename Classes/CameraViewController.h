@@ -41,6 +41,7 @@
 @property BOOL videoAllow;
 @property BOOL isVideoFlyer;
 @property (nonatomic, strong) UIView *inAppPurchasePanel;
+@property (strong, nonatomic) IBOutlet UILabel *tapAndHoldLabel;
 
 
 -(void)setCameraModeForVideo;

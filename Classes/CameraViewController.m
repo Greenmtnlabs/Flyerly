@@ -13,7 +13,7 @@
 @implementation CameraViewController
 
 NSMutableArray *productArray;
-@synthesize isVideoFlyer;
+@synthesize isVideoFlyer,tapAndHoldLabel;
 
 /**
  * Setup the controller.
@@ -261,6 +261,7 @@ NSMutableArray *productArray;
                 [shoot setImage:[UIImage imageNamed:@"camera_button"] forState:UIControlStateNormal];
                 [shoot setImage:[UIImage imageNamed:@"camera_button"] forState:UIControlStateSelected];
                 [flash setHidden:NO];
+                tapAndHoldLabel.alpha = 0;
                 _progressView.hidden = YES;
             }else {
                 
@@ -268,7 +269,11 @@ NSMutableArray *productArray;
                 [_mode setSelected:YES];
                 [shoot setImage:[UIImage imageNamed:@"recording_button"] forState:UIControlStateNormal];
                 [shoot setImage:[UIImage imageNamed:@"stop_button"] forState:UIControlStateSelected];
-                [flash setHidden:YES];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [flash setHidden:YES];//works
+                });
+                
+                tapAndHoldLabel.alpha = 1;
                 _progressView.hidden = NO;
             }
         }else {
