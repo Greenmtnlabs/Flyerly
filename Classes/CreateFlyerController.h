@@ -57,8 +57,6 @@
     UIBarButtonItem *rightUndoBarButton;
     UIButton *shareButton;
     UIButton *helpButton;
-
-    FlyerImageView *flyerImageView;
     
     UITextView *lastTextView;
     SigninController *signInController;

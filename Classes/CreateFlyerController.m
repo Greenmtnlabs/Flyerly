@@ -218,6 +218,7 @@ NSArray *coloursArray;
     // Execute the rest of the stuff, a little delayed to speed up loading.
     dispatch_async( dispatch_get_main_queue(), ^{
         
+        /*
         fontArray =[[NSArray  alloc] initWithObjects:
                     [UIFont fontWithName:@"Arial" size:27],
                     [UIFont fontWithName:@"GoodDog" size:27],
@@ -241,6 +242,7 @@ NSArray *coloursArray;
                     [UIFont fontWithName:@"BlueNoon" size:27],
                     [UIFont fontWithName:@"Daniel Black" size:27],
                     nil];
+        */
         
         // Create color array
         colorArray = [[NSArray  alloc] initWithObjects: [UIColor redColor],
@@ -1344,58 +1346,47 @@ NSArray *coloursArray;
 /*
  * Used to convert a clipart frame to emoticon frame and vice versa.
  */
-- (CGRect) convertFrameFromLayerType:(NSString*)fromLayerType toLayerType:(NSString*)toLayerType {
+- (CGRect) convertFrameFromLayerType:(NSString*)fromLayerType toLayerType:(NSString*)toLayerType forClipart:(NSString*)clipart{
     
-    CGRect currentFrame = [flyer getImageFrame:currentLayer];
+    CGRect currentFrame;
     
-    float artLayerSize = 10.0f;
-    
-    if ( [fromLayerType isEqualToString:FLYER_LAYER_CLIP_ART] ) {
+    // Get current view layer
+    UIView *view = [flyimgView.layers objectForKey:currentLayer];
+    CALayer* l = nil;
+    if ( view != nil ) {
+        l = view.layer;
+   
+        currentFrame = [flyer getImageFrame:currentLayer];
+        float currentCenterX = l.frame.origin.x + (l.frame.size.width / 2);
+        float currentCenterY = l.frame.origin.y + (l.frame.size.height / 2);
+            
+        float artLayerSize = 10.0f;
         
-        float currentCenterX = (currentFrame.origin.x + (currentFrame.size.width)/2);
-        float currentCenterY = (currentFrame.origin.y + (currentFrame.size.height)/2);
-        
-        NSDictionary* textLayer = [flyer getLayerFromMaster:currentLayer];
-        artLayerSize = [[textLayer objectForKey:@"fontsize"] floatValue] / 3.0;
-        //UIFont* artLayerFont = [flyer getTextFont:currentLayer];
-        
-        /*
-        float scsc = artLayerFont.pointSize;
-        float hewf = artLayerFont.lineHeight;
-        float wwes = artLayerFont.capHeight;
-        float rsdf = artLayerFont.ascender;
-        float pqrs = artLayerFont.descender;
-        
-        CGSize stringSize;
-        
-        if ([self respondsToSelector:@selector(sizeWithAttributes:)])
-        {
-            NSDictionary* attribs = @{NSFontAttributeName:artLayerFont};
-            stringSize = ([NSAttributedString sizeWithAttributes:attribs]);
+        if ( [fromLayerType isEqualToString:FLYER_LAYER_CLIP_ART] ) {
+            
+            NSDictionary* textLayer = [flyer getLayerFromMaster:currentLayer];
+            artLayerSize = [[textLayer objectForKey:@"fontsize"] floatValue] / 3.0;
+                   
+            currentFrame.size.height = artLayerSize * 1.5;
+            currentFrame.size.width = artLayerSize * 1.5;
+            
+            currentFrame.origin.x  = currentCenterX - (currentFrame.size.width / 2);
+            currentFrame.origin.y  = currentCenterY - (currentFrame.size.height / 2);
+            
+        } else if ( [fromLayerType isEqualToString:FLYER_LAYER_EMOTICON] ) {
+            
+            artLayerSize = currentFrame.size.height / 1.5;
+          
+            currentFrame.size.height = artLayerSize * 3.0;
+            currentFrame.size.width = artLayerSize * 3.0;
+            
+            UIFont* fontType = [UIFont fontWithName:[clipartsArray[0] objectForKey:@"fontType"] size:(artLayerSize * 3.0)];
+            CGSize clipartSize = [clipart sizeWithAttributes:@{ NSFontAttributeName : fontType}];
+            
+            currentFrame.origin.x  = currentCenterX - (clipartSize.width / 2);
+            currentFrame.origin.y  = currentCenterY - (clipartSize.height / 2);
         }
-        return ([self sizeWithFont:fontToUse]);
-        */
-        
-        currentFrame.size.height = artLayerSize * 1.5;
-        currentFrame.size.width = artLayerSize * 1.5;
-        
-        currentFrame.origin.x  = currentCenterX - (currentFrame.size.width / 2);
-        currentFrame.origin.y  = currentCenterY - (currentFrame.size.height / 2);
-        
-    } else if ( [fromLayerType isEqualToString:FLYER_LAYER_EMOTICON] ) {
-        
-        float currentCenterX = (currentFrame.origin.x + (currentFrame.size.width)/2);
-        float currentCenterY = (currentFrame.origin.y + (currentFrame.size.height)/2);
-        //artLayerSize = currentFrame.size.height / 1.5;
-        
-        currentFrame.size.width = 90;
-        currentFrame.size.height = 90;
-        
-        currentFrame.origin.x  = currentCenterX - (currentFrame.size.width / 2);
-        currentFrame.origin.y  = currentCenterY - (currentFrame.size.height / 2);
     }
-    
-    
     
     return currentFrame;
 }
@@ -1420,7 +1411,7 @@ NSArray *coloursArray;
     
     return artLayerSize;
 }
-
+    
 /*
  * Called when select emoticon
  */
@@ -1435,14 +1426,19 @@ NSArray *coloursArray;
     [flyer setLayerType:currentLayer type:FLYER_LAYER_EMOTICON];
     [flyer setFlyerText:currentLayer text:nil];
     
-    // Getting Last Info of Layer
-    if (![currentLayer isEqualToString:@""]) {
+    // Getting info of selected layer
+    UIView *layerView = [flyimgView.layers objectForKey:currentLayer];
+    if ( layerView != nil ) {
+    //if (![currentLayer isEqualToString:@""]) {
         
         if ( ![previousLayerType isEqualToString:FLYER_LAYER_EMOTICON] ) {
             
-            [flyer setImageFrame:currentLayer :[self convertFrameFromLayerType:previousLayerType toLayerType:FLYER_LAYER_EMOTICON]];
+            [flyer setImageFrame:currentLayer :[self convertFrameFromLayerType:previousLayerType toLayerType:FLYER_LAYER_EMOTICON forClipart:nil]];
         }
-        
+    
+    // If no layer is selected then have the emoticon of default size
+    } else {
+        [flyer setImageFrame:currentLayer:CGRectMake(5, 5, 90, 90)];
     }
     
     NSMutableDictionary *dic = [flyer getLayerFromMaster:currentLayer];
@@ -1490,17 +1486,33 @@ NSArray *coloursArray;
     [flyer setImagePath:currentLayer ImgPath:nil];
     [flyer setImageTag:currentLayer Tag:nil];
     
-    // Getting Last Info of Layer
-    if (![currentLayer isEqualToString:@""]) {
+    UIFont* fontType = nil;
+
+    // Getting info of selected layer
+    UIView *layerView = [flyimgView.layers objectForKey:currentLayer];
+    if ( layerView != nil ) {
+    //if (![currentLayer isEqualToString:@""]) {
         
         if ( ![previousLayerType isEqualToString:FLYER_LAYER_CLIP_ART] ) {
             
-            [flyer setImageFrame:currentLayer :[self convertFrameFromLayerType:previousLayerType toLayerType:FLYER_LAYER_EMOTICON]];
+            CGRect frame = [self convertFrameFromLayerType:previousLayerType toLayerType:FLYER_LAYER_EMOTICON forClipart:view.currentTitle];
+            [flyer setImageFrame:currentLayer:frame];
+            fontType = [UIFont fontWithName:[clipartsArray[i] objectForKey:@"fontType"] size:frame.size.height];
+            
+        } else {
+            
+            // Get size of current clipart and set it for new clipart
+            NSDictionary* textLayer = [flyer getLayerFromMaster:currentLayer];
+            fontType = [UIFont fontWithName:[clipartsArray[i] objectForKey:@"fontType"] size:[[textLayer objectForKey:@"fontsize"] floatValue]];
+            
         }
         
-    }
+    } else {
     
-    UIFont *fontType = [UIFont fontWithName:[clipartsArray[i] objectForKey:@"fontType"] size:([self getRelativeSizeFromLayer:currentLayer] * 3.0)];
+        //Set default icon (entypo) size
+        fontType = [UIFont fontWithName:[clipartsArray[i] objectForKey:@"fontType"] size:(60 * 3.0)];
+        
+    }
     
     NSUInteger index = [[clipartsView subviews] indexOfObject:view];
     

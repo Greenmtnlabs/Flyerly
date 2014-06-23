@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 #import <Parse/Parse.h>
-#import "FlyerImageView.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "Flurry.h"
 #import "Common.h"
