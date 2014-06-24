@@ -1434,12 +1434,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
         // If image is not set, then this is a flyer text layer.
         if ( [self getImageName:uid] == nil ) {
             type = FLYER_LAYER_TEXT;
-        } else if ( [type isEqualToString:@"2"] ){
-            type = FLYER_LAYER_CLIP_ART;
-        }else if ( [type isEqualToString:@"3"] ){
-            type = FLYER_LAYER_EMOTICON;
         } else {
-            // If its not anything else, then it is an image layer.
             type = FLYER_LAYER_IMAGE;
         }
     }
