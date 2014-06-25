@@ -419,21 +419,29 @@ NSArray *coloursArray;
                 // Here we Merge All Layers in Video File
                 [self videoMergeProcess];
                 
+            } else {
+                // Go to the main thread and let the home screen know that flyer is
+                // updated.
+                dispatch_async( dispatch_get_main_queue(), ^{
+                    
+                    // Here we call Block for update Main UI
+                    self.onFlyerBack( @"" );
+                });
             }
             
         } else {
             // Here we take Snap shot of Flyer and
             // Flyer Add to Gallery if user allow to Access there photos
             [flyer setUpdatedSnapshotWithImage:[self getFlyerSnapShot]];
-        }
-        
-        // Go to the main thread and let the home screen know that flyer is
-        // updated.
-        dispatch_async( dispatch_get_main_queue(), ^{
             
-            // Here we call Block for update Main UI
-            self.onFlyerBack( @"" );
-        });
+            // Go to the main thread and let the home screen know that flyer is
+            // updated.
+            dispatch_async( dispatch_get_main_queue(), ^{
+                
+                // Here we call Block for update Main UI
+                self.onFlyerBack( @"" );
+            });
+        }
         
         [Flurry logEvent:@"Saved Flyer"];
     });
