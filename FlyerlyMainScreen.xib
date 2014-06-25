@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1280" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FlyerlyMainScreen">
@@ -57,7 +57,7 @@
                                 <color key="titleColor" red="0.0037750839000000001" green="0.0060098032000000003" blue="0.010204077000000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
-                            <state key="highlighted" image="mid_shadow.png">
+                            <state key="highlighted">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
@@ -65,7 +65,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="24">
-                            <rect key="frame" x="4" y="68" width="106" height="60"/>
+                            <rect key="frame" x="0.0" y="68" width="106" height="60"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <accessibility key="accessibilityConfiguration" label="SavedFlyers"/>
                             <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="-64"/>
@@ -74,7 +74,7 @@
                                 <color key="titleColor" red="0.0037750839000000001" green="0.0060098032000000003" blue="0.010204077000000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
-                            <state key="highlighted" image="shadow.png">
+                            <state key="highlighted">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
@@ -91,7 +91,7 @@
                                 <color key="titleColor" red="0.0037750839000000001" green="0.0060098032000000003" blue="0.010204077000000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
-                            <state key="highlighted" image="shadow.png">
+                            <state key="highlighted">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
@@ -250,11 +250,9 @@
     </objects>
     <resources>
         <image name="Zmain_screenbg-568h.png" width="612" height="612"/>
-        <image name="mid_shadow.png" width="105" height="52"/>
         <image name="pinned_flyer2.png" width="63" height="82"/>
-        <image name="pinned_flyer_bg2.png" width="260" height="260"/>
-        <image name="settings2.png" width="142" height="137"/>
-        <image name="shadow.png" width="207" height="96"/>
-        <image name="three_buttons.png" width="640" height="122"/>
+        <image name="pinned_flyer_bg2.png" width="130" height="130"/>
+        <image name="settings2.png" width="71" height="68"/>
+        <image name="three_buttons.png" width="320" height="61"/>
     </resources>
 </document>
