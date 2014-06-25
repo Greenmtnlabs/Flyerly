@@ -1,4 +1,4 @@
-//
+ //
 //  FlyerClass.m
 //  Flyr
 //
@@ -67,6 +67,22 @@ NSString * const CLIPARTHEIGHT = @"100.000000";
     return self;
 }
 
+/**
+ * Set up the paths.
+ */
+- (void)setupPaths:(NSString *)flyPath {
+    //set Pieces Dictionary File for Update
+    piecesFile = [flyPath stringByAppendingString:[NSString stringWithFormat:@"/flyer.pieces"]];
+    
+    //set Text File for Update
+    textFile = [flyPath stringByAppendingString:[NSString stringWithFormat:@"/flyer.txt"]];
+    
+    //set Share Status File for Update
+    socialFile = [flyPath stringByAppendingString:[NSString stringWithFormat:@"/Social/flyer.soc"]];
+    
+    //set Flyer Image for Future Update
+    flyerImageFile = [flyPath stringByAppendingString:[NSString stringWithFormat:@"/flyer.%@",IMAGETYPE]];
+}
 
 
 /*
@@ -74,17 +90,7 @@ NSString * const CLIPARTHEIGHT = @"100.000000";
  */
 -(void)loadFlyer :(NSString *)flyPath {
 
-    //set Pieces Dictionary File for Update
-    piecesFile = [flyPath stringByAppendingString:[NSString stringWithFormat:@"/flyer.pieces"]];
-    
-    //set Text File for Update
-    textFile = [flyPath stringByAppendingString:[NSString stringWithFormat:@"/flyer.txt"]];
-
-    //set Share Status File for Update
-    socialFile = [flyPath stringByAppendingString:[NSString stringWithFormat:@"/Social/flyer.soc"]];
-    
-    //set Flyer Image for Future Update
-    flyerImageFile = [flyPath stringByAppendingString:[NSString stringWithFormat:@"/flyer.%@",IMAGETYPE]];
+    [self setupPaths:flyPath];
     
     masterLayers = [[NSMutableDictionary alloc] initWithContentsOfFile:piecesFile];
     
@@ -255,7 +261,6 @@ NSString * const CLIPARTHEIGHT = @"100.000000";
                             //For Image
                             [self createImageToFlyerlyAlbum:groupUrl ImageData:imgData];
                         }
-                    
                     } else {
 
                         // URL Exist and Image Found
@@ -312,8 +317,10 @@ NSString * const CLIPARTHEIGHT = @"100.000000";
             
             // HERE WE SAVE IMAGE GENERATED URL IN OVER FLYER INFO FILE .TXT
             // FOR FUTURE WORK
-
-                [self setFlyerURL:assetURL.absoluteString];
+            __weak Flyer *weakSelf = self;
+            dispatch_async( dispatch_get_main_queue(), ^{
+                [weakSelf setFlyerURL:assetURL.absoluteString];
+            });
             
             // GETTING GENERATED IMAGE WITH URL
             [library assetForURL:assetURL resultBlock:^(ALAsset *asset) {
@@ -355,7 +362,10 @@ NSString * const CLIPARTHEIGHT = @"100.000000";
             
             // HERE WE SAVE VIDEO GENERATED URL IN OVER FLYER INFO FILE .TXT
             // FOR FUTURE WORK
-                [self setVideoAsssetURL:assetURL.absoluteString];
+            __weak Flyer *weakSelf = self;
+            dispatch_async( dispatch_get_main_queue(), ^{
+                [weakSelf setVideoAsssetURL:assetURL.absoluteString];
+            });
             
             // GETTING GENERATED Video WITH URL
             [library assetForURL:assetURL resultBlock:^(ALAsset *asset) {
@@ -933,7 +943,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     int timestamp = [[NSDate date] timeIntervalSince1970];
     NSString *replaceDirName = [NSString stringWithFormat: @"%d",timestamp];
     
-    //Here we Rename the Directory Name
+    // Here we Rename the Directory Name
     NSString *newPath = [[currentpath stringByDeletingLastPathComponent] stringByAppendingPathComponent:replaceDirName];
     
     NSError *error = nil;
@@ -942,7 +952,9 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     if (error) {
         NSLog( @"Recent flyer error: %@", error.localizedDescription );
     }
-
+    
+    // Make sure we update the flyer paths.
+    [self setupPaths:newPath];
 }
 
 
@@ -1434,14 +1446,9 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
         // If image is not set, then this is a flyer text layer.
         if ( [self getImageName:uid] == nil ) {
             type = FLYER_LAYER_TEXT;
-        } else if ( [type isEqualToString:@"1"] ){
+        } else {
             type = FLYER_LAYER_IMAGE;
-        } else if ( [type isEqualToString:@"2"] ){
-            type = FLYER_LAYER_CLIP_ART;
-        }else if ( [type isEqualToString:@"3"] ){
-            type = FLYER_LAYER_EMOTICON;
         }
-        
     }
     
     return type;
@@ -1828,15 +1835,15 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
  */
 -(void)setVideoAsssetURL :(NSString *)URL {
     
-    if (URL != nil) {
+    if ( URL != nil ) {
         if (textFileArray.count > 6) {
-        
             [textFileArray replaceObjectAtIndex:6 withObject:URL];
-        }else {
+        } else {
             [textFileArray addObject:@""];
             [self setVideoAsssetURL:URL];
         }
-        //Here we write the Array of Text files .txt
+        
+        // Here we write the Array of Text files .txt
         [textFileArray writeToFile:textFile atomically:YES];
     }
 }
@@ -1865,15 +1872,15 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
  */
 -(void)setVideoMergeAddress :(NSString *)address {
     
-    if (address != nil) {
+    if ( address != nil ) {
         if (textFileArray.count > 8) {
-            
-            [textFileArray replaceObjectAtIndex:8 withObject:address];
-        }else {
+            [textFileArray replaceObjectAtIndex:8 withObject:[NSString stringWithString:address]];
+        } else {
             [textFileArray addObject:@""];
             [self setVideoMergeAddress:address];
         }
-        //Here we write the Array of Text files .txt
+        
+        // Here we write the Array of Text files .txt
         [textFileArray writeToFile:textFile atomically:YES];
     }
 }
