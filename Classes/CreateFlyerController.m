@@ -4146,9 +4146,10 @@ NSArray *coloursArray;
     
 }
 
--(NSString *)getEmoticon:(NSString *) imgName{
+-(NSString *)getEmoticon:(NSString *) imgName {
     
     // Create Symbol direcrory if not created
+    static int randomNumber = 0;
     NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
     
     NSString *FolderPath = [NSString stringWithFormat:@"%@/Symbol", currentpath];
@@ -4156,9 +4157,10 @@ NSArray *coloursArray;
 
     //Create Unique Id for Image
     int timestamp = [[NSDate date] timeIntervalSince1970];
+    randomNumber = (randomNumber + 1) % 100;
     
-    NSString *imageFolderPath = [NSString stringWithFormat:@"%@/%d.%@", FolderPath,timestamp,IMAGETYPE];
-    dicPath = [dicPath stringByAppendingString:[NSString stringWithFormat:@"/%d.%@",timestamp,IMAGETYPE]];
+    NSString *imageFolderPath = [NSString stringWithFormat:@"%@/%u%u.%@", FolderPath, timestamp, randomNumber, IMAGETYPE];
+    dicPath = [dicPath stringByAppendingString:[NSString stringWithFormat:@"/%u%u.%@", timestamp, randomNumber, IMAGETYPE]];
     
     //Getting Image From Bundle
     NSString *existImagePath =[[NSBundle mainBundle] pathForResource:imgName ofType:@"png"];
