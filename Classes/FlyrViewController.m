@@ -359,7 +359,7 @@ NSMutableArray *productArray;
     [createFlyer setOnFlyerBack:^(NSString *nothing) {
         
         //HERE WE GET FLYERS
-        [weakCreate.flyer setRecentFlyer];
+        //[weakCreate.flyer setRecentFlyer];
         [weakSelf.flyerPaths removeAllObjects];
         weakSelf.flyerPaths = [weakSelf getFlyersPaths];
         [weakSelf.tView reloadData];
