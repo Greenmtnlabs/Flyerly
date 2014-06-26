@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment version="784" defaultVersion="1280" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CreateFlyerController">
@@ -144,7 +144,6 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <state key="selected" image="video_tab_selected.png"/>
-                    <state key="highlighted" backgroundImage="icon_button_selected"/>
                     <connections>
                         <action selector="setAddMoreLayerTabAction:" destination="-1" eventType="touchUpInside" id="CED-OA-X9Z"/>
                     </connections>
@@ -156,7 +155,6 @@
                     <state key="normal" image="art_tab.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="highlighted" backgroundImage="symbolicon_button_selected"/>
                     <connections>
                         <action selector="setAddMoreLayerTabAction:" destination="-1" eventType="touchUpInside" id="a7u-gC-Jvt"/>
                     </connections>
@@ -502,7 +500,6 @@
         <image name="emoticons_tab_selected.png" width="80" height="45"/>
         <image name="font_button.png" width="64" height="45"/>
         <image name="font_button_selected.png" width="64" height="45"/>
-        <image name="icon_button_selected" width="612" height="612"/>
         <image name="image_icon.png" width="64" height="45"/>
         <image name="image_icon_selected" width="612" height="612"/>
         <image name="outline_button.png" width="64" height="45"/>
@@ -513,7 +510,6 @@
         <image name="size_button_selected.png" width="64" height="45"/>
         <image name="size_tab.png" width="80" height="45"/>
         <image name="size_tab_selected.png" width="80" height="45"/>
-        <image name="symbolicon_button_selected" width="612" height="612"/>
         <image name="text_edit.png" width="64" height="45"/>
         <image name="text_edit_selected.png" width="64" height="45"/>
         <image name="text_icon.png" width="64" height="45"/>
