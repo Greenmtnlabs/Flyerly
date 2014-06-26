@@ -218,32 +218,6 @@ NSArray *coloursArray;
     // Execute the rest of the stuff, a little delayed to speed up loading.
     dispatch_async( dispatch_get_main_queue(), ^{
         
-        /*
-        fontArray =[[NSArray  alloc] initWithObjects:
-                    [UIFont fontWithName:@"Arial" size:27],
-                    [UIFont fontWithName:@"GoodDog" size:27],
-                    [UIFont fontWithName:@"GrandHotel-Regular" size:27],
-                    [UIFont fontWithName:@"Kankin" size:27],
-                    [UIFont fontWithName:@"Molot" size:27],
-                    [UIFont fontWithName:@"Nexa Bold" size:27],
-                    [UIFont fontWithName:@"Quicksand" size:27],
-                    [UIFont fontWithName:@"StMarie-Thin" size:27],
-                    [UIFont fontWithName:@"BlackJack" size:27],
-                    [UIFont fontWithName:@"Comfortaa-Bold" size:27],
-                    [UIFont fontWithName:@"Swis721 BlkEx BT" size:27], // Missing
-                    [UIFont fontWithName:@"Algerian" size:27],
-                    [UIFont fontWithName:@"HelveticaInseratCyr Upright" size:27],
-                    [UIFont fontWithName:@"Helvetica Rounded LT Std" size:27],
-                    [UIFont fontWithName:@"Lucida Handwriting" size:27],
-                    [UIFont fontWithName:@"Anjelika Rose" size:27],
-                    [UIFont fontWithName:@"BankGothic DB" size:27],
-                    [UIFont fontWithName:@"Segoe UI" size:27],
-                    [UIFont fontWithName:@"AvantGarde CE" size:27],
-                    [UIFont fontWithName:@"BlueNoon" size:27],
-                    [UIFont fontWithName:@"Daniel Black" size:27],
-                    nil];
-        */
-        
         // Create color array
         colorArray = [[NSArray  alloc] initWithObjects: [UIColor redColor],
                       [UIColor blueColor],
@@ -290,6 +264,9 @@ NSArray *coloursArray;
         //Set Context Tabs
         [self addBottomTabs:libFlyer];
         
+        // Execute the rest of the stuff, a little delayed to speed up loading.
+        dispatch_async( dispatch_get_main_queue(), ^{
+            
         if(IS_IPHONE_5){
             NSArray *flyerbackgroundsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Backgrounds" owner:self options:nil];
             backgroundsView = [flyerbackgroundsViewArray objectAtIndex:0];
@@ -344,6 +321,7 @@ NSArray *coloursArray;
             NSArray *emoticonsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Emoticons-iPhone4" owner:self options:nil];
             emoticonsView = [emoticonsViewArray objectAtIndex:0];
         }
+            });
     });
 }
 
@@ -1361,6 +1339,8 @@ NSArray *coloursArray;
     // Get current view layer
     UIView *view = [flyimgView.layers objectForKey:currentLayer];
     CALayer* l = nil;
+    
+    
     if ( view != nil ) {
         l = view.layer;
    
@@ -1398,27 +1378,6 @@ NSArray *coloursArray;
     
     return currentFrame;
 }
-
-- (float) getRelativeSizeFromLayer:(NSString*) uid {
-    
-    NSString* layerType = [flyer getLayerType:uid];
-    
-    float artLayerSize = 10.0f;
-    
-    if ( [layerType isEqualToString:FLYER_LAYER_CLIP_ART] ) {
-        
-        NSDictionary* layer = [flyer getLayerFromMaster:uid];
-        artLayerSize = [[layer objectForKey:@"fontsize"] floatValue] / 3.0;
-        
-    } else if ([layerType isEqualToString:FLYER_LAYER_EMOTICON]) {
-        
-        CGRect frame = [flyer getImageFrame:uid];
-        artLayerSize = frame.size.height / 1.5;
-        
-    }
-    
-    return artLayerSize;
-}
     
 /*
  * Called when select emoticon
@@ -1442,6 +1401,12 @@ NSArray *coloursArray;
         if ( ![previousLayerType isEqualToString:FLYER_LAYER_EMOTICON] ) {
             
             [flyer setImageFrame:currentLayer :[self convertFrameFromLayerType:previousLayerType toLayerType:FLYER_LAYER_EMOTICON forClipart:nil]];
+        }else {
+            
+            // Get size of current clipart and set it for new clipart
+            //NSDictionary* textLayer = [flyer getLayerFromMaster:currentLayer];
+            //fontType = [UIFont fontWithName:[clipartsArray[i] objectForKey:@"fontType"] size:[[textLayer objectForKey:@"fontsize"] floatValue]];
+            
         }
     
     // If no layer is selected then have the emoticon of default size
@@ -1459,6 +1424,7 @@ NSArray *coloursArray;
     
     if (lstTag != view.tag) {
         
+        //Getting Image Path
         NSString *imgPath = [self getEmoticon:[NSString stringWithFormat:@"%@",[emoticonsArray objectAtIndex:(view.tag-1)]]];
         
         //Set Symbol Image
@@ -4188,7 +4154,6 @@ NSArray *coloursArray;
     NSString *FolderPath = [NSString stringWithFormat:@"%@/Emoticon", currentpath];
     NSString *dicPath = @"Emoticon";
 
-    
     //Create Unique Id for Image
     int timestamp = [[NSDate date] timeIntervalSince1970];
     
@@ -4198,8 +4163,6 @@ NSArray *coloursArray;
     //Getting Image From Bundle
     NSString *existImagePath =[[NSBundle mainBundle] pathForResource:imgName ofType:@"png"];
     
-
-
     UIImage *realImage =  [UIImage imageWithContentsOfFile:existImagePath];
     NSData *imgData = UIImagePNGRepresentation(realImage);
 
