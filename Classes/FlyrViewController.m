@@ -64,7 +64,7 @@ NSMutableArray *productArray;
     
     //HERE WE SET SCROLL VIEW POSITION
 
-    if ( flyerPaths.count >= 1 ) {
+    if ( flyerPaths.count > 1 ) {
 
         NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:0];
         [tView selectRowAtIndexPath:indexPath animated:YES  scrollPosition:UITableViewScrollPositionBottom];
