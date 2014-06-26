@@ -531,9 +531,7 @@
         iosSharer.shareDelegate = self;
         
     }else {
-        [FBSettings setDefaultDisplayName:[[FBSettings defaultDisplayName] precomposedStringWithCanonicalMapping]];
         item = [SHKItem image:selectedFlyerImage title:[NSString stringWithFormat:@"%@ #flyerly ", selectedFlyerDescription ]];
-        //
         item.tags =[NSArray arrayWithObjects: @"#flyerly", nil];
         iosSharer = [SHKFacebook shareItem:item];
         iosSharer.shareDelegate = self;
