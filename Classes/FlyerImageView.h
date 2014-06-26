@@ -32,6 +32,7 @@
 -(void)setTemplateBorder :(NSMutableDictionary *)layDic;
 -(void)layerIsBeingEdited:(NSString *)uid;
 -(void)layerStoppedEditing:(NSString *)uid;
+-(void)removeAllLayers;
 
 @property (strong, readonly) NSMutableDictionary *layers;
 @property (strong, nonatomic)UITapGestureRecognizer *flyerTapGesture;

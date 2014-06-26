@@ -24,6 +24,19 @@
     
 }
 
+/**
+ * Removes all sub views from layers dictionary as well as UIImageView
+ */
+-(void)removeAllLayers {
+    
+    //Here we Remove all Object from Controller Dictionary
+    [self.layers removeAllObjects];
+    
+    // Remove all subviews from uiview as well
+    [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+
+}
+
 /*
  * Here we Delete One Layer from View
  */
@@ -45,7 +58,7 @@
  * Here we create or update actual layer
  */
 -(void)renderLayer :(NSString *)uid layerDictionary:(NSMutableDictionary *)layDic {
-    
+   
     // This is a reference to the view that we use to do some generic stuff.
     UIView *view = nil;
 

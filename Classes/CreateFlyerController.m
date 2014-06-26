@@ -2927,7 +2927,8 @@ NSArray *coloursArray;
     //Flyer Add to Gallery if user allow to Access there photos
     [flyer setUpdatedSnapshotWithImage:[self getFlyerSnapShot]];
     
-    //First we Save Current flyer in history
+    //First we Save Current flyer in history,
+    //if we didn't do this here, so when we undo, it will back to 2 steps back.
     [flyer saveFlyer];
     
     //Add Flyer in History if any Change Exists
@@ -2943,8 +2944,8 @@ NSArray *coloursArray;
     NSString* currentPath  =   [[NSFileManager defaultManager] currentDirectoryPath];
     self.flyer = [[Flyer alloc]initWithPath:currentPath];
     
-    //Here we Remove all Object from Controller Dictionary
-    [self.flyimgView.layers removeAllObjects];
+    // Remove all sub views
+    [self.flyimgView removeAllLayers];
     
     //Here we Render Flyer
     [self renderFlyer];
