@@ -4099,8 +4099,8 @@ NSArray *coloursArray;
     if ([imgName rangeOfString:@"emoticon"].location == NSNotFound) {
         NSLog(@"sub string doesnt exist");
     } else {
-        FolderPath = [NSString stringWithFormat:@"%@/Emoticon", currentpath];
-        dicPath = @"Emoticon";
+        FolderPath = [NSString stringWithFormat:@"%@/Symbol", currentpath];
+        dicPath = @"Symbol";
     }
     
     //when we set BackGround
@@ -4151,8 +4151,8 @@ NSArray *coloursArray;
     // Create Symbol direcrory if not created
     NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
     
-    NSString *FolderPath = [NSString stringWithFormat:@"%@/Emoticon", currentpath];
-    NSString *dicPath = @"Emoticon";
+    NSString *FolderPath = [NSString stringWithFormat:@"%@/Symbol", currentpath];
+    NSString *dicPath = @"Symbol";
 
     //Create Unique Id for Image
     int timestamp = [[NSDate date] timeIntervalSince1970];
