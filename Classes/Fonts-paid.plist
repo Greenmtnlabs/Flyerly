@@ -15,7 +15,6 @@
 	<string>BankGothic DB</string>
 	<string>Bellota</string>
 	<string>BlackJack</string>
-	<string>BlueNoon</string>
 	<string>Canter</string>
 	<string>Caviar Dreams</string>
 	<string>Circula</string>
@@ -30,21 +29,20 @@
 	<string>GoodDog</string>
 	<string>Grand Hotel</string>
 	<string>Gutsy</string>
+	<string>Lily Script One</string>
 	<string>High Tide</string>
 	<string>Homestead</string>
 	<string>Homizio Nova</string>
 	<string>AvantGarde CE</string>
 	<string>Jalane_light</string>
 	<string>Journal</string>
-	<string>junction regular</string>
+	<string>Junction</string>
 	<string>Kaiju</string>
 	<string>Kankin</string>
 	<string>Klinic Slab</string>
 	<string>Komoda</string>
-	<string>Kankin FREE FONT</string>
 	<string>Lato</string>
 	<string>Lavanderia</string>
-	<string>Lily Script One</string>
 	<string>Linux Libertine</string>
 	<string>Lobster 1.4</string>
 	<string>Manteka</string>
@@ -75,5 +73,6 @@
 	<string>Swis721 BlkEx BT</string>
 	<string>Telegrafico</string>
 	<string>Track</string>
+	<string>Oswald</string>
 </array>
 </plist>
