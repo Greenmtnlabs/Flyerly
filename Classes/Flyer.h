@@ -76,6 +76,9 @@
 -(void)setImagePath :(NSString *)uid ImgPath:(NSString *)imgPath;
 
 -(void)setFlyerBorder :(NSString *)uid RGBColor:(id)rgb;
+
+-(NSString *) getCurrentTimestamp;
+
 -(void)setFlyerTypeVideo;
 -(NSString *)getFlyerTypeVideo;
 -(void)setFlyerTypeImage;
