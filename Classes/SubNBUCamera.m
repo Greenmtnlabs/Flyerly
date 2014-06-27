@@ -51,4 +51,14 @@
     [_captureSession commitConfiguration];
 }
 
+/**
+ * Start stop recoding should happen inside configuration block.
+ */
+- (IBAction)startStopRecording:(id)sender {
+    AVCaptureSession * _captureSession = [self valueForKey:@"_captureSession"];
+    
+    [_captureSession setSessionPreset:AVCaptureSessionPresetHigh];
+    [super startStopRecording:sender];
+}
+
 @end
