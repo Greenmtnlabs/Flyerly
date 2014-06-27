@@ -1265,10 +1265,12 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     
     [templateDictionary setValue:@"video" forKey:@"FlyerType"];
     
+    // Set timeStamp
+    [templateDictionary setValue:[self getCurrentTimestamp] forKey:@"Timestamp"];
+
     // Set to Master Dictionary
     [masterLayers setValue:templateDictionary forKey:@"Template"];
-
-
+    
 }
 
 /*
@@ -1281,8 +1283,13 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     
 }
 
-
-
+/**
+ * Only @returns timeStampString
+ */
+-(NSString *) getCurrentTimestamp {
+    int timestamp = [[NSDate date] timeIntervalSince1970];
+    return [NSString stringWithFormat:@"%d",timestamp];
+}
 
 /*
  * Here we Set Flyer Type to Image Flyer
@@ -1291,6 +1298,8 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     NSMutableDictionary *templateDictionary = [self getLayerFromMaster:@"Template"];
     
     [templateDictionary setValue:@"image" forKey:@"FlyerType"];
+    // Set timeStamp
+    [templateDictionary setValue:[self getCurrentTimestamp] forKey:@"Timestamp"];
     
     // Set to Master Dictionary
     [masterLayers setValue:templateDictionary forKey:@"Template"];
@@ -1332,8 +1341,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     NSString* currentPath  =   [[NSFileManager defaultManager] currentDirectoryPath];
     
     NSString *videoPath = [currentPath stringByAppendingString:[NSString stringWithFormat:@"/%@",[templateDictionary valueForKey:@"VideoURL"]] ];
-
-    
+   
     return videoPath;
 }
 
@@ -1361,10 +1369,18 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
         AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:[NSURL fileURLWithPath:filePath] options:nil];
         AVAssetImageGenerator *generator = [[AVAssetImageGenerator alloc] initWithAsset:asset];
         generator.appliesPreferredTrackTransform = YES;
+        
         NSError *err = NULL;
-        CGImageRef imgRef = [generator copyCGImageAtTime: asset.duration  actualTime:NULL error:&err];
+        
+        //  Get thumbnail at the very start of the video
+        CMTime thumbnailTime = [asset duration];
+        thumbnailTime.value = 0;
+        
+        CGImageRef imgRef = [generator copyCGImageAtTime: thumbnailTime  actualTime:NULL error:&err];
         
         img = [[UIImage alloc] initWithCGImage:imgRef];
+
+        CGImageRelease(imgRef);
     } else {
         NSLog( @"Video cover not found" );
     }
