@@ -84,7 +84,7 @@
 		<string>Quicksand_Bold.otf</string>
 		<string>Nexa Bold.otf</string>
 		<string>Molot.otf</string>
-		<string>Kankin.otf</string>
+		<string>Kankin.ttf</string>
 		<string>GrandHotel-Regular.otf</string>
 		<string>GoodDog.otf</string>
 		<string>Signika-Bold.otf</string>
@@ -117,7 +117,7 @@
 		<string>Homizio-Regular.ttf</string>
 		<string>Jalane_light-Regular.ttf</string>
 		<string>Journal-Regular.ttf</string>
-		<string>Junction-Regular.otf</string>
+		<string>Junction.ttf</string>
 		<string>K†nkin∏ FREE FONT-Regular.ttf</string>
 		<string>Kaiju-Regular.ttf</string>
 		<string>KlinicSlabMedium.otf</string>
@@ -151,6 +151,7 @@
 		<string>SourceSansPro-Regular.otf</string>
 		<string>telegrafico-Regular.ttf</string>
 		<string>Track-Regular.ttf</string>
+		<string>Oswald-Regular.ttf</string>
 	</array>
 	<key>UIPrerenderedIcon</key>
 	<true/>

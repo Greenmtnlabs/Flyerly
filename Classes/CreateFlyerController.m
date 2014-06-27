@@ -26,11 +26,11 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 @synthesize libText,libBackground,libArts,libPhoto,libEmpty,backtemplates,cameraTakePhoto,cameraRoll,flyerBorder;
 @synthesize flyimgView,currentLayer,layersDic,flyer,player,playerView,playerToolBar,playButton,playerSlider,tempelateView;
 @synthesize durationLabel,durationChange,onFlyerBack;
-@synthesize backgroundsView,flyerBordersView,colorsView,sizesView,textBordersView;
+@synthesize backgroundsView,flyerBordersView,colorsView,sizesView;
 int selectedAddMoreLayerTab = -1;
 
 
-ResourcesView* emoticonsView,*clipartsView,*fontsView;
+ResourcesView *emoticonsView,*clipartsView,*fontsView,*textBordersView;
 
 NSString *fontsViewResourcePath,*clipartsViewResourcePath,*emoticonsViewResourcePath;
 
@@ -693,21 +693,6 @@ NSArray *coloursArray;
                 
                 [labelToStore.textColor getWhite:&wht alpha:&alpha];
                 twhite = [NSString stringWithFormat:@"%f, %f", wht, alpha];
-                
-                
-                
-                /*UIColor * c = [UIColor clearColor];
-                [color.layer setBorderColor:c.CGColor];
-                [color.layer setCornerRadius:0];*/
-                
-                /*if ([textColor isEqualToString:tcolor] && [textWhiteColor isEqualToString:twhite] ) {
-                    
-                    // Add border to selected layer thumbnail
-                    [color.layer setBorderWidth:3.0];
-                    [color.layer setCornerRadius:8];
-                    UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
-                    [color.layer setBorderColor:c.CGColor];
-                }*/
             }
             
         }//Loop
@@ -865,6 +850,9 @@ NSArray *coloursArray;
                 i++;
             }
         }// Loop
+        
+        //Handling Select Unselect
+        [self setSelectedItem:[flyer getLayerType:currentLayer] inView:textBordersView ofLayerAttribute:LAYER_ATTRIBUTE_BORDER];
     });
 }
 
@@ -1539,11 +1527,11 @@ NSArray *coloursArray;
             tempView  = [bodersArray objectAtIndex:index];
             
             // Add border to Un-select layer thumbnail
-            CALayer * l = [tempView layer];
+            /*CALayer * l = [tempView layer];
             [l setBorderWidth:1];
             [l setCornerRadius:0];
             UIColor * c = [UIColor clearColor];
-            [l setBorderColor:c.CGColor];
+            [l setBorderColor:c.CGColor];*/
             i++;
             
         }
@@ -1557,11 +1545,14 @@ NSArray *coloursArray;
             
             // Add border to selected layer thumbnail
             tempView = [bodersArray objectAtIndex:(index-2)];
-            CALayer * l = [tempView layer];
+            
+            [self setSelectedItem:FLYER_LAYER_TEXT inView:clipartsView ofLayerAttribute:LAYER_ATTRIBUTE_BORDER];
+            
+            /*CALayer * l = [tempView layer];
             [l setBorderWidth:5.0];
             [l setCornerRadius:8];
             UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
-            [l setBorderColor:c.CGColor];
+            [l setBorderColor:c.CGColor];*/
         }
     
 	}//LOOP
@@ -3379,6 +3370,68 @@ NSArray *coloursArray;
     return tag;
 }
 
+-(NSString *) getTagForTextBorder:(NSString*)layerType ofView:(ResourcesView*)view{
+
+    [view dehighlightResource];
+    
+    NSString* tag = nil;
+    
+    NSMutableDictionary *textLayer;
+    NSString *textColor;
+    NSString *textWhiteColor;
+    
+    //Getting Last Info of Text Layer
+    if (![currentLayer isEqualToString:@""]) {
+        textLayer = [flyer getLayerFromMaster:currentLayer];
+        textColor = [textLayer objectForKey:@"textbordercolor"];
+        textWhiteColor = [textLayer objectForKey:@"textborderWhite"];
+    }
+    
+    NSArray *bodersArray = textBordersView.subviews;
+    int count = (bodersArray.count)/3;
+    
+    int i=1,j=0;
+    for (int index = 0; index < count; index++ )
+    {
+        
+        UIButton *border;
+        if ([bodersArray[j] isKindOfClass:[UIButton class]]) {
+            border = (UIButton *) bodersArray[j];
+        }
+        j = j+2;
+        
+        UIColor *colorName = borderArray[(i-1)];
+        
+        //Here we Highlight Last Color Selected
+        if (textLayer) {
+            
+            NSString *tcolor;
+            NSString *twhite;
+            CGFloat red = 0.0, green = 0.0, blue = 0.0, alpha = 0.0,wht = 0.0;
+            
+            UILabel *labelToStore = [[UILabel alloc]init];
+            labelToStore.textColor = colorName;
+            
+            //Getting RGB Color Code
+            [labelToStore.textColor getRed:&red green:&green blue:&blue alpha:&alpha];
+            
+            tcolor = [NSString stringWithFormat:@"%f, %f, %f", red, green, blue];
+            
+            [labelToStore.textColor getWhite:&wht alpha:&alpha];
+            twhite = [NSString stringWithFormat:@"%f, %f", wht, alpha];
+            
+            if ([textColor isEqualToString:tcolor] && [textWhiteColor isEqualToString:twhite] ) {
+                
+                tag = [NSString stringWithFormat: @"%d", border.tag];
+                break;
+            }
+            i++;
+        }
+    }// Loop
+    
+    return tag;
+}
+
 -(NSString *) getTagForSize:(NSString*)layerType ofView:(ResourcesView*)view{
     
     [view dehighlightResource];
@@ -3458,6 +3511,8 @@ NSArray *coloursArray;
             tag = [self getTagForSize:layerType ofView:view];
         }else if ( [layerAttribute isEqualToString:LAYER_ATTRIBUTE_COLOR] ) {
             tag = [self getTagForColor:layerType ofView:view];
+        }else if ( [layerAttribute isEqualToString:LAYER_ATTRIBUTE_BORDER] ) {
+            tag = [self getTagForTextBorder:layerType ofView:view];
         }
         
         

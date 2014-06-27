@@ -98,7 +98,7 @@
             //NSString *type = [flyer getLayerType:currentLayer];
             //if( [type isEqualToString:FLYER_LAYER_CLIP_ART] ){
 
-            lble.textAlignment = UITextAlignmentLeft;//    UITextAlignmentCenter;
+            lble.textAlignment = UITextAlignmentCenter;//    UITextAlignmentCenter;
             //}
             lble.adjustsFontSizeToFitWidth = YES;
             lble.lineBreakMode = UILineBreakModeClip;
@@ -250,7 +250,7 @@
     
     // Make sure we are vertically aligned to the top and centerally aligned.
     
-    lbl.textAlignment = UITextAlignmentCenter;//UITextAlignmentLeft;//
+    lbl.textAlignment = UITextAlignmentRight;//UITextAlignmentLeft;//
     [lbl setNumberOfLines:0];
     [lbl sizeToFit];
     

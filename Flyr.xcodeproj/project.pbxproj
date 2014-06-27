@@ -235,6 +235,9 @@
 		20F4D8E017BA3D0A007B2DF5 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F4D8DE17BA3D09007B2DF5 /* ProfileViewController.m */; };
 		20F4D8E117BA3D0A007B2DF5 /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20F4D8DF17BA3D0A007B2DF5 /* ProfileViewController.xib */; };
 		20F4D8E517BA40EA007B2DF5 /* FlyerlySingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F4D8E417BA40EA007B2DF5 /* FlyerlySingleton.m */; };
+		20F73718195D4AD800B24C1D /* Oswald-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 20F73717195D4AD800B24C1D /* Oswald-Regular.ttf */; };
+		20F7371A195D882000B24C1D /* Junction.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 20F73719195D882000B24C1D /* Junction.ttf */; };
+		20F7371C195D985E00B24C1D /* Kankin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 20F7371B195D985E00B24C1D /* Kankin.ttf */; };
 		20F93DD317B2262200F6F88C /* MainSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F93DD117B2262200F6F88C /* MainSettingViewController.m */; };
 		20F93DD417B2262200F6F88C /* MainSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20F93DD217B2262200F6F88C /* MainSettingViewController.xib */; };
 		20FA7E731872AAF50057C3F3 /* CameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20FA7E711872AAF50057C3F3 /* CameraViewController.xib */; };
@@ -590,8 +593,6 @@
 		247858B3194875D20062F1E4 /* Homizio-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 247858A9194875D20062F1E4 /* Homizio-Regular.ttf */; };
 		247858B4194875D20062F1E4 /* Jalane_light-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 247858AA194875D20062F1E4 /* Jalane_light-Regular.ttf */; };
 		247858B5194875D20062F1E4 /* Journal-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 247858AB194875D20062F1E4 /* Journal-Regular.ttf */; };
-		247858B6194875D20062F1E4 /* Junction-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 247858AC194875D20062F1E4 /* Junction-Regular.otf */; };
-		247858B7194875D20062F1E4 /* K†nkin∏ FREE FONT-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 247858AD194875D20062F1E4 /* K†nkin∏ FREE FONT-Regular.ttf */; };
 		247858B8194875D20062F1E4 /* Kaiju-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 247858AE194875D20062F1E4 /* Kaiju-Regular.ttf */; };
 		247858B9194875D20062F1E4 /* KlinicSlabMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 247858AF194875D20062F1E4 /* KlinicSlabMedium.otf */; };
 		247858BA194875D20062F1E4 /* Komoda-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 247858B0194875D20062F1E4 /* Komoda-Regular.otf */; };
@@ -950,7 +951,6 @@
 		65A464E91726CBA2002C32FB /* GoodDog.otf in Resources */ = {isa = PBXBuildFile; fileRef = 65A464D71726CBA2002C32FB /* GoodDog.otf */; };
 		65A464EA1726CBA2002C32FB /* GrandHotel-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 65A464D81726CBA2002C32FB /* GrandHotel-Regular.otf */; };
 		65A464EB1726CBA2002C32FB /* Helvetica Inserat Cyrillic Upright.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 65A464D91726CBA2002C32FB /* Helvetica Inserat Cyrillic Upright.ttf */; };
-		65A464EC1726CBA2002C32FB /* Kankin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 65A464DA1726CBA2002C32FB /* Kankin.otf */; };
 		65A464ED1726CBA2002C32FB /* LHANDW.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 65A464DB1726CBA2002C32FB /* LHANDW.TTF */; };
 		65A464EE1726CBA2002C32FB /* Molot.otf in Resources */ = {isa = PBXBuildFile; fileRef = 65A464DC1726CBA2002C32FB /* Molot.otf */; };
 		65A464EF1726CBA2002C32FB /* Nexa Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 65A464DD1726CBA2002C32FB /* Nexa Bold.otf */; };
@@ -1361,6 +1361,9 @@
 		20F4D8DF17BA3D0A007B2DF5 /* ProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
 		20F4D8E317BA40EA007B2DF5 /* FlyerlySingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = FlyerlySingleton.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		20F4D8E417BA40EA007B2DF5 /* FlyerlySingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FlyerlySingleton.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		20F73717195D4AD800B24C1D /* Oswald-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Oswald-Regular.ttf"; path = "Data/fonts/Oswald-Regular.ttf"; sourceTree = "<group>"; };
+		20F73719195D882000B24C1D /* Junction.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Junction.ttf; path = Data/fonts/Junction.ttf; sourceTree = "<group>"; };
+		20F7371B195D985E00B24C1D /* Kankin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Kankin.ttf; path = Data/fonts/Kankin.ttf; sourceTree = "<group>"; };
 		20F93DD017B2262200F6F88C /* MainSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainSettingViewController.h; sourceTree = "<group>"; };
 		20F93DD117B2262200F6F88C /* MainSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainSettingViewController.m; sourceTree = "<group>"; };
 		20F93DD217B2262200F6F88C /* MainSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainSettingViewController.xib; sourceTree = "<group>"; };
@@ -1719,8 +1722,6 @@
 		247858A9194875D20062F1E4 /* Homizio-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Homizio-Regular.ttf"; path = "Data/fonts/Homizio-Regular.ttf"; sourceTree = "<group>"; };
 		247858AA194875D20062F1E4 /* Jalane_light-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Jalane_light-Regular.ttf"; path = "Data/fonts/Jalane_light-Regular.ttf"; sourceTree = "<group>"; };
 		247858AB194875D20062F1E4 /* Journal-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Journal-Regular.ttf"; path = "Data/fonts/Journal-Regular.ttf"; sourceTree = "<group>"; };
-		247858AC194875D20062F1E4 /* Junction-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Junction-Regular.otf"; path = "Data/fonts/Junction-Regular.otf"; sourceTree = "<group>"; };
-		247858AD194875D20062F1E4 /* K†nkin∏ FREE FONT-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "K†nkin∏ FREE FONT-Regular.ttf"; path = "Data/fonts/K†nkin∏ FREE FONT-Regular.ttf"; sourceTree = "<group>"; };
 		247858AE194875D20062F1E4 /* Kaiju-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Kaiju-Regular.ttf"; path = "Data/fonts/Kaiju-Regular.ttf"; sourceTree = "<group>"; };
 		247858AF194875D20062F1E4 /* KlinicSlabMedium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = KlinicSlabMedium.otf; path = Data/fonts/KlinicSlabMedium.otf; sourceTree = "<group>"; };
 		247858B0194875D20062F1E4 /* Komoda-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Komoda-Regular.otf"; path = "Data/fonts/Komoda-Regular.otf"; sourceTree = "<group>"; };
@@ -2206,7 +2207,6 @@
 		65A464D71726CBA2002C32FB /* GoodDog.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = GoodDog.otf; path = Data/fonts/GoodDog.otf; sourceTree = "<group>"; };
 		65A464D81726CBA2002C32FB /* GrandHotel-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "GrandHotel-Regular.otf"; path = "Data/fonts/GrandHotel-Regular.otf"; sourceTree = "<group>"; };
 		65A464D91726CBA2002C32FB /* Helvetica Inserat Cyrillic Upright.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Helvetica Inserat Cyrillic Upright.ttf"; path = "Data/fonts/Helvetica Inserat Cyrillic Upright.ttf"; sourceTree = "<group>"; };
-		65A464DA1726CBA2002C32FB /* Kankin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Kankin.otf; path = Data/fonts/Kankin.otf; sourceTree = "<group>"; };
 		65A464DB1726CBA2002C32FB /* LHANDW.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; name = LHANDW.TTF; path = Data/fonts/LHANDW.TTF; sourceTree = "<group>"; };
 		65A464DC1726CBA2002C32FB /* Molot.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Molot.otf; path = Data/fonts/Molot.otf; sourceTree = "<group>"; };
 		65A464DD1726CBA2002C32FB /* Nexa Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Nexa Bold.otf"; path = "Data/fonts/Nexa Bold.otf"; sourceTree = "<group>"; };
@@ -3128,8 +3128,6 @@
 		20F3597C1888DC8A001376B6 /* CreateFlyer */ = {
 			isa = PBXGroup;
 			children = (
-				2479BC661941FB9400FF5FF5 /* TextBorders.xib */,
-				2479BC631941FB8400FF5FF5 /* TextBorders-iPhone4.xib */,
 				2075A9921899EAB600F410FB /* FlyerlyCustomClasses */,
 				2046355F1895E47100A94C42 /* Models */,
 				204635661895F90900A94C42 /* Controller */,
@@ -3140,6 +3138,8 @@
 				2060689C1924CCE400AB5230 /* Backgrounds-iPhone4.xib */,
 				206068A01924EE7500AB5230 /* Borders.xib */,
 				206068A21924F68400AB5230 /* Borders-iPhone4.xib */,
+				2479BC661941FB9400FF5FF5 /* TextBorders.xib */,
+				2479BC631941FB8400FF5FF5 /* TextBorders-iPhone4.xib */,
 				206068A41924FFD300AB5230 /* Fonts.xib */,
 				206068A61924FFEB00AB5230 /* Fonts-iPhone4.xib */,
 				2012ECAC1926077800D5EA58 /* Sizes.xib */,
@@ -3968,6 +3968,9 @@
 		6513C1AB1716FE0F00355FC3 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				20F7371B195D985E00B24C1D /* Kankin.ttf */,
+				20F73719195D882000B24C1D /* Junction.ttf */,
+				20F73717195D4AD800B24C1D /* Oswald-Regular.ttf */,
 				247858801948736B0062F1E4 /* Aleo-Regular.otf */,
 				247858811948736B0062F1E4 /* AlexBrush-Regular.ttf */,
 				65A464D21726CBA2002C32FB /* ALGER.TTF */,
@@ -4006,12 +4009,9 @@
 				65A464F91726D703002C32FB /* ITC Avant Garde CE Gothic Book.ttf */,
 				247858AA194875D20062F1E4 /* Jalane_light-Regular.ttf */,
 				247858AB194875D20062F1E4 /* Journal-Regular.ttf */,
-				247858AC194875D20062F1E4 /* Junction-Regular.otf */,
 				247858AE194875D20062F1E4 /* Kaiju-Regular.ttf */,
-				65A464DA1726CBA2002C32FB /* Kankin.otf */,
 				247858AF194875D20062F1E4 /* KlinicSlabMedium.otf */,
 				247858B0194875D20062F1E4 /* Komoda-Regular.otf */,
-				247858AD194875D20062F1E4 /* K†nkin∏ FREE FONT-Regular.ttf */,
 				247858B1194875D20062F1E4 /* Lato-Regular.ttf */,
 				247858BC1948764D0062F1E4 /* Lavanderia-Regular.otf */,
 				65A464DB1726CBA2002C32FB /* LHANDW.TTF */,
@@ -4218,7 +4218,6 @@
 				2471593F19408E5F00B30301 /* Zpassword_box@2x.png in Resources */,
 				30D58D2410FB1BF800E0C7E8 /* icon42.jpg in Resources */,
 				30D58D2510FB1BF800E0C7E8 /* icon43.jpg in Resources */,
-				247858B7194875D20062F1E4 /* K†nkin∏ FREE FONT-Regular.ttf in Resources */,
 				30D58D2610FB1BF800E0C7E8 /* icon44.jpg in Resources */,
 				2421848E194B4AEC00FDDA97 /* emoticon127@2x.png in Resources */,
 				248A3634193F231D0005FCAD /* size_tab_selected@2x.png in Resources */,
@@ -4367,7 +4366,6 @@
 				30D58D7210FB1BF800E0C7E8 /* Template52.jpg in Resources */,
 				30D58D7310FB1BF800E0C7E8 /* Template53.jpg in Resources */,
 				247858C81948764D0062F1E4 /* LinLibertine-Regular.ttf in Resources */,
-				247858B6194875D20062F1E4 /* Junction-Regular.otf in Resources */,
 				30D58D7410FB1BF800E0C7E8 /* Template54.jpg in Resources */,
 				30D58D7510FB1BF800E0C7E8 /* Template55.jpg in Resources */,
 				246EF50C193C515D004539B2 /* emoticon46@2x.png in Resources */,
@@ -4465,7 +4463,6 @@
 				249F214A193F615F0072835E /* Zmain_screenbg-568h@2x.png in Resources */,
 				242184C1194B4AEC00FDDA97 /* emoticon179@2x.png in Resources */,
 				242184CC194B4AEC00FDDA97 /* fins-icon.png in Resources */,
-				65A464EC1726CBA2002C32FB /* Kankin.otf in Resources */,
 				242184D8194B4AEC00FDDA97 /* football-icon.png in Resources */,
 				65A464ED1726CBA2002C32FB /* LHANDW.TTF in Resources */,
 				65A464EE1726CBA2002C32FB /* Molot.otf in Resources */,
@@ -4617,6 +4614,7 @@
 				247159411940907800B30301 /* premium_features@2x.png in Resources */,
 				65C1A43B1742516D00947D5E /* Template35@2x.jpg in Resources */,
 				65C1A43C1742516D00947D5E /* Template36@2x.jpg in Resources */,
+				20F7371C195D985E00B24C1D /* Kankin.ttf in Resources */,
 				65C1A43D1742516D00947D5E /* Template37@2x.jpg in Resources */,
 				242184A9194B4AEC00FDDA97 /* emoticon155@2x.png in Resources */,
 				65C1A43E1742516D00947D5E /* Template38@2x.jpg in Resources */,
@@ -4624,6 +4622,7 @@
 				65C1A43F1742516D00947D5E /* Template39@2x.jpg in Resources */,
 				242184FA194B4AEC00FDDA97 /* Skating-icon.png in Resources */,
 				65C1A4401742516D00947D5E /* Template40@2x.jpg in Resources */,
+				20F7371A195D882000B24C1D /* Junction.ttf in Resources */,
 				65C1A4411742516D00947D5E /* Template41@2x.jpg in Resources */,
 				65C1A4421742516D00947D5E /* Template42@2x.jpg in Resources */,
 				242184C6194B4AEC00FDDA97 /* equestrian-dressage-icon.png in Resources */,
@@ -4676,6 +4675,7 @@
 				249F1FAE193F55D50072835E /* close_button@2x.png in Resources */,
 				65C1A4551742516D00947D5E /* Template61@2x.jpg in Resources */,
 				65C1A4561742516D00947D5E /* Template62@2x.jpg in Resources */,
+				20F73718195D4AD800B24C1D /* Oswald-Regular.ttf in Resources */,
 				65C1A4571742516D00947D5E /* Template63@2x.jpg in Resources */,
 				65C1A4581742516D00947D5E /* Template64@2x.jpg in Resources */,
 				65C1A4591742516D00947D5E /* Template65@2x.jpg in Resources */,

@@ -76,7 +76,7 @@
 @property (nonatomic, strong) UIView *fontsView;
 @property (nonatomic, strong) ResourcesView *colorsView;
 @property (nonatomic, strong) ResourcesView *sizesView;
-@property (nonatomic, strong) UIView *textBordersView;
+@property (nonatomic, strong) ResourcesView *textBordersView;
 @property (nonatomic, strong) UIView *clipartsView;
 @property (nonatomic, strong) UIView *emoticonsView;
 //-----
