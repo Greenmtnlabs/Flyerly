@@ -26,6 +26,9 @@ NSMutableArray *productArray;
     self.cameraView.savePicturesToLibrary = NO;
     self.takesPicturesWithVolumeButtons = NO;
     
+    // Target folder is the temp directory.
+    self.cameraView.targetMovieFolder = [UIApplication sharedApplication].temporaryDirectory;
+    
     // BackButton
     UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 30)];
     backButton.titleLabel.font = [UIFont systemFontOfSize:14.0];
