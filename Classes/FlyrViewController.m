@@ -24,7 +24,6 @@ NSMutableArray *productArray;
 
     [self.view setBackgroundColor:[UIColor colorWithRed:245/255.0 green:241/255.0 blue:222/255.0 alpha:1.0]];
     
-    
     self.navigationItem.hidesBackButton = YES;
     searchTextField.font = [UIFont systemFontOfSize:12.0];
     searchTextField.textAlignment = UITextAlignmentLeft;
@@ -66,7 +65,7 @@ NSMutableArray *productArray;
 
     if ( flyerPaths.count > 1 ) {
 
-        NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:0];
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
         [tView selectRowAtIndexPath:indexPath animated:YES  scrollPosition:UITableViewScrollPositionBottom];
         
         [tView reloadData];
@@ -359,7 +358,7 @@ NSMutableArray *productArray;
     [createFlyer setOnFlyerBack:^(NSString *nothing) {
         
         //HERE WE GET FLYERS
-        //[weakCreate.flyer setRecentFlyer];
+        [weakCreate.flyer setRecentFlyer];
         [weakSelf.flyerPaths removeAllObjects];
         weakSelf.flyerPaths = [weakSelf getFlyersPaths];
         [weakSelf.tView reloadData];
