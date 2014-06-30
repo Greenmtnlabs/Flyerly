@@ -3,20 +3,28 @@
 <plist version="1.0">
 <array>
 	<dict>
-		<key>Compose Flyers</key>
-		<string>Flyers for events, invitations and marketing.</string>
+		<key>Create Flyers</key>
+		<string>Create brilliant flyers for any event or occasion.</string>
+	</dict>
+	<dict>
+		<key>Background</key>
+		<string>Use the included designs for your flyer, take a photo or access your own images.</string>
 	</dict>
 	<dict>
 		<key>Photos</key>
-		<string>Add photos, crop them and apply beautiful effects.</string>
+		<string>Add photos, crop &amp; apply effects.</string>
 	</dict>
 	<dict>
-		<key>Stock Art</key>
-		<string>200+ icons to choose from.</string>
+		<key>Art</key>
+		<string>Many included art &amp; symbol options.</string>
 	</dict>
 	<dict>
-		<key>Share Flyers</key>
-		<string>Share flyers on social networks, SMS and email.</string>
+		<key>Share</key>
+		<string>Share flyers via email, text, Twitter, Facebook, Instagram &amp; more.</string>
+	</dict>
+	<dict>
+		<key>Edit</key>
+		<string>Access and edit four most recently saved flyers shown on main screen.</string>
 	</dict>
 </array>
 </plist>
