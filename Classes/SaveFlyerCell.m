@@ -14,7 +14,7 @@
 
 @implementation SaveFlyerCell
 @synthesize nameLabel, description, dateLabel, createLabel,cellImage,backgroundImage;
-@synthesize fbImage,twtImage,emailImage,instaImage,flickImage,tumbImage,flyerLock,lockImage,updatedDateLabel,updatedLabel;
+@synthesize flyerLock,lockImage,updatedDateLabel,updatedLabel;
 
 
 /*
@@ -48,49 +48,44 @@
     
     
     // HERE WE SET SOCIAL NETWORK STATUS OF FLYER
-    if([[flyer getFacebookStatus] isEqualToString:@"1"]){
-        fbImage.image = [UIImage imageNamed:@"facebook_share_saved"];
-    } else {
-        fbImage.image = [UIImage imageNamed:@"facebook_disabled_saved"];
+    NSInteger sharingCount = 0;
+    UIImageView *iconImage;
+    
+    iconImage = [_socialStatus objectAtIndex:sharingCount];
+    if ( [[flyer getFacebookStatus] isEqualToString:@"1"] ) {
+        iconImage.image = [UIImage imageNamed:@"facebook_share_saved"];
+        sharingCount++;
     }
     
+	iconImage = [_socialStatus objectAtIndex:sharingCount];
+    if ( [[flyer getTwitterStatus] isEqualToString:@"1"] ) {
+        iconImage.image = [UIImage imageNamed:@"twitter_share_saved"];
+        sharingCount++;
+    }
 	
-    
-    if([[flyer getTwitterStatus] isEqualToString:@"1"]){
-        twtImage.image = [UIImage imageNamed:@"twitter_share_saved"];
-    } else {
-        twtImage.image = [UIImage imageNamed:@"twitter_disabled_saved"];
-    }
-	
-    
-    if([[flyer getEmailStatus] isEqualToString:@"1"]){
-        emailImage.image = [UIImage imageNamed:@"email_share_saved"];
-    } else {
-        emailImage.image = [UIImage imageNamed:@"email_disabled_saved"];
+    iconImage = [_socialStatus objectAtIndex:sharingCount];
+    if ( [[flyer getEmailStatus] isEqualToString:@"1"] ) {
+        iconImage.image = [UIImage imageNamed:@"email_share_saved"];
+        sharingCount++;
     }
     
-    
-    if([[flyer getInstagaramStatus] isEqualToString:@"1"]){
-        instaImage.image = [UIImage imageNamed:@"instagram_share_saved"];
-    } else {
-        instaImage.image = [UIImage imageNamed:@"instagram_disabled_saved"];
+    iconImage = [_socialStatus objectAtIndex:sharingCount];
+    if ( [[flyer getInstagaramStatus] isEqualToString:@"1"] ) {
+        iconImage.image = [UIImage imageNamed:@"instagram_share_saved"];
+        sharingCount++;
     }
     
-    
-    if([[flyer getFlickerStatus] isEqualToString:@"1"]){
-        flickImage.image = [UIImage imageNamed:@"flickr_share_saved"];
-    } else {
-        flickImage.image = [UIImage imageNamed:@"flickr_disabled_saved"];
+    iconImage = [_socialStatus objectAtIndex:sharingCount];
+    if ( [[flyer getFlickerStatus] isEqualToString:@"1"] ) {
+        iconImage.image = [UIImage imageNamed:@"flickr_share_saved"];
+        sharingCount++;
     }
     
-    
-    if([[flyer getThumblerStatus] isEqualToString:@"1"]){
-        tumbImage.image = [UIImage imageNamed:@"tumblr_share_saved"];
-    } else {
-        tumbImage.image = [UIImage imageNamed:@"tumblr_disabled_saved"];
+    iconImage = [_socialStatus objectAtIndex:sharingCount];
+    if ( [[flyer getThumblerStatus] isEqualToString:@"1"] ) {
+        iconImage.image = [UIImage imageNamed:@"tumblr_share_saved"];
+        sharingCount++;
     }
-
-
 }
 
 @end
