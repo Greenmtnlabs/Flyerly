@@ -2860,6 +2860,12 @@ NSArray *coloursArray;
     // Set the given layer as current. If it is not
     // already set.
     if ( ![self.currentLayer isEqualToString:uid] ) {
+        
+        // Make sure we hide the keyboard.
+        [lastTextView resignFirstResponder];
+        [lastTextView removeFromSuperview];
+        lastTextView = nil;
+        
         self.currentLayer = uid;
 
         // Edit the current layer.
