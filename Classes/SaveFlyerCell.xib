@@ -44,28 +44,28 @@
                         <rect key="frame" x="13" y="12" width="80" height="80"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="facebook_disabled_saved.png" id="z79-gJ-DMF">
-                        <rect key="frame" x="111" y="74" width="10" height="17"/>
+                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="z79-gJ-DMF">
+                        <rect key="frame" x="111" y="74" width="20" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="twitter_disabled_saved.png" id="Vu7-BD-USu">
-                        <rect key="frame" x="135" y="76" width="19" height="15"/>
+                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Vu7-BD-USu">
+                        <rect key="frame" x="135" y="74" width="20" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="email_disabled_saved.png" id="5dI-Oq-C7c">
-                        <rect key="frame" x="166" y="75" width="20" height="15"/>
+                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="5dI-Oq-C7c">
+                        <rect key="frame" x="160" y="74" width="20" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="instagram_disabled_saved.png" id="I2a-9L-hhr">
-                        <rect key="frame" x="200" y="74" width="17" height="17"/>
+                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="I2a-9L-hhr">
+                        <rect key="frame" x="185" y="74" width="20" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="flickr_disabled_saved.png" id="ewT-nG-9kd">
-                        <rect key="frame" x="230" y="77" width="22" height="12"/>
+                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="ewT-nG-9kd">
+                        <rect key="frame" x="210" y="74" width="20" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tumblr_disabled_saved.png" id="XBk-Dh-0EO">
-                        <rect key="frame" x="264" y="75" width="15" height="15"/>
+                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="XBk-Dh-0EO">
+                        <rect key="frame" x="236" y="74" width="20" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="N9E-L4-Ap0">
@@ -109,28 +109,22 @@
                 <outlet property="createLabel" destination="SG8-5z-Dx0" id="roa-XH-MTQ"/>
                 <outlet property="dateLabel" destination="N9E-L4-Ap0" id="H7f-Xl-TdM"/>
                 <outlet property="description" destination="O2h-x4-GPI" id="Iu8-Dh-YyS"/>
-                <outlet property="emailImage" destination="5dI-Oq-C7c" id="jrB-kR-SaZ"/>
-                <outlet property="fbImage" destination="z79-gJ-DMF" id="X7M-LH-bRJ"/>
-                <outlet property="flickImage" destination="ewT-nG-9kd" id="N1p-g9-i0i"/>
                 <outlet property="flyerLock" destination="tr4-sN-ZUc" id="2No-bK-Xkb"/>
-                <outlet property="instaImage" destination="I2a-9L-hhr" id="Cy0-sn-UMJ"/>
                 <outlet property="lockImage" destination="ot2-CF-xz6" id="Beb-zA-cjc"/>
                 <outlet property="nameLabel" destination="nIU-g9-EY6" id="C3v-AI-gA6"/>
-                <outlet property="tumbImage" destination="XBk-Dh-0EO" id="EiB-KJ-Unw"/>
-                <outlet property="twtImage" destination="Vu7-BD-USu" id="0tD-5u-GOX"/>
                 <outlet property="updatedDateLabel" destination="RUH-7h-bUU" id="JXB-rE-RYU"/>
                 <outlet property="updatedLabel" destination="wiq-Qg-wub" id="m6k-QD-CLO"/>
+                <outletCollection property="socialStatus" destination="z79-gJ-DMF" id="Qdy-IF-W8M"/>
+                <outletCollection property="socialStatus" destination="Vu7-BD-USu" id="kc9-GD-7eU"/>
+                <outletCollection property="socialStatus" destination="5dI-Oq-C7c" id="8d5-Im-EPZ"/>
+                <outletCollection property="socialStatus" destination="I2a-9L-hhr" id="NtQ-MB-5rq"/>
+                <outletCollection property="socialStatus" destination="ewT-nG-9kd" id="wHR-Lm-AK8"/>
+                <outletCollection property="socialStatus" destination="XBk-Dh-0EO" id="xfc-zv-LLj"/>
             </connections>
         </tableViewCell>
     </objects>
     <resources>
         <image name="blue_arrow.png" width="20" height="35"/>
-        <image name="email_disabled_saved.png" width="19" height="14"/>
-        <image name="facebook_disabled_saved.png" width="9" height="16"/>
-        <image name="flickr_disabled_saved.png" width="21" height="11"/>
-        <image name="instagram_disabled_saved.png" width="17" height="17"/>
         <image name="invite_Bg.png" width="311" height="100"/>
-        <image name="tumblr_disabled_saved.png" width="14" height="15"/>
-        <image name="twitter_disabled_saved.png" width="18" height="15"/>
     </resources>
 </document>

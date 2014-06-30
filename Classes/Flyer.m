@@ -637,6 +637,15 @@ NSString * const CLIPARTHEIGHT = @"100.000000";
 
 }
 
+/**
+ * We update the key for this layer to the new key.
+ */
+-(void)updateLayerKey:(NSString *)old newKey:(NSString *)key {
+    id obj = [masterLayers objectForKey:old];
+    [masterLayers removeObjectForKey:old];
+    [masterLayers setObject:obj forKey:key];
+}
+
 /*
  *Return textbox text
  */
