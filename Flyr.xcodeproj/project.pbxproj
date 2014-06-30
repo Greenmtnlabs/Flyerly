@@ -438,6 +438,7 @@
 		243D8E4419347BAE00D5312D /* InAppViewController-iPhone4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 243D8E4319347BAE00D5312D /* InAppViewController-iPhone4.xib */; };
 		243DD521192B24B500391786 /* FlyerIcons.xib in Resources */ = {isa = PBXBuildFile; fileRef = 243DD520192B24B500391786 /* FlyerIcons.xib */; };
 		243DD523192B24CB00391786 /* FlyerIcons-iPhone4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 243DD522192B24CB00391786 /* FlyerIcons-iPhone4.xib */; };
+		2459E8B0196130810072A56C /* greenButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 2459E8AF196130810072A56C /* greenButton.png */; };
 		245C0FA51933081200B5B31C /* free-features.plist in Resources */ = {isa = PBXBuildFile; fileRef = 245C0FA41933081200B5B31C /* free-features.plist */; };
 		245D48E2193DEF9000E670E6 /* Entypo-Social.otf in Resources */ = {isa = PBXBuildFile; fileRef = 245D48E1193DEF9000E670E6 /* Entypo-Social.otf */; };
 		246264DF1947416A00933A69 /* Cliparts-paid.plist in Resources */ = {isa = PBXBuildFile; fileRef = 246264DE1947416A00933A69 /* Cliparts-paid.plist */; };
@@ -1566,6 +1567,7 @@
 		243D8E4319347BAE00D5312D /* InAppViewController-iPhone4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "InAppViewController-iPhone4.xib"; sourceTree = "<group>"; };
 		243DD520192B24B500391786 /* FlyerIcons.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FlyerIcons.xib; sourceTree = "<group>"; };
 		243DD522192B24CB00391786 /* FlyerIcons-iPhone4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "FlyerIcons-iPhone4.xib"; sourceTree = "<group>"; };
+		2459E8AF196130810072A56C /* greenButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greenButton.png; sourceTree = "<group>"; };
 		245C0FA41933081200B5B31C /* free-features.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "free-features.plist"; sourceTree = "<group>"; };
 		245D48E1193DEF9000E670E6 /* Entypo-Social.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Entypo-Social.otf"; path = "Data/fonts/Entypo-Social.otf"; sourceTree = "<group>"; };
 		246264DE1947416A00933A69 /* Cliparts-paid.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Cliparts-paid.plist"; sourceTree = "<group>"; };
@@ -2398,6 +2400,7 @@
 		0DF3A361108DF47400D6C887 /* ImageLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				2459E8AF196130810072A56C /* greenButton.png */,
 				2018AF8E195AF14C00188F8E /* image_icon_selected@2x.png */,
 				247159401940907800B30301 /* premium_features@2x.png */,
 				2471592419408E5F00B30301 /* facebook@2x.png */,
@@ -4908,6 +4911,7 @@
 				247858871948736B0062F1E4 /* Aller-Regular.ttf in Resources */,
 				202C63CC17EA06E800CB9A75 /* ricon58.png in Resources */,
 				246EF4F5193C515D004539B2 /* emoticon25@2x.png in Resources */,
+				2459E8B0196130810072A56C /* greenButton.png in Resources */,
 				202C63CE17EA06E800CB9A75 /* ricon59.png in Resources */,
 				202C63D017EA06E800CB9A75 /* ricon60.png in Resources */,
 				202C63D217EA06E800CB9A75 /* ricon61.png in Resources */,
