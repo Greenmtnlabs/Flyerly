@@ -15,6 +15,7 @@
 CameraViewController *nbuCamera;
 
 NSMutableArray *productArray;
+UIButton *backButton;
 
 
 
@@ -52,7 +53,7 @@ NSArray *coloursArray;
     [self renderFlyer];
     
     //Set Context View
-    [self addAllLayersIntoScrollView ];
+    [self addAllLayersIntoScrollView];
     
     NSString *title = [flyer getFlyerTitle];
     
@@ -121,7 +122,7 @@ NSArray *coloursArray;
     [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,rightUndoBarButton,nil]];
     
     // Left BackButton
-    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+    backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
 	[backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
     
@@ -1104,7 +1105,6 @@ NSArray *coloursArray;
     }
     
     [self addScrollView:layerScrollView];
-    
 }
 
 #pragma mark -  Select Layer On ScrollView
@@ -2822,7 +2822,6 @@ NSArray *coloursArray;
 #pragma mark - Delegate for Flyerly ImageView
 
 
-
 /**
  * Frame changed for layer, let the model know.
  */
@@ -2862,6 +2861,12 @@ NSArray *coloursArray;
     // Set the given layer as current. If it is not
     // already set.
     if ( ![self.currentLayer isEqualToString:uid] ) {
+        
+        // Make sure we hide the keyboard.
+        [lastTextView resignFirstResponder];
+        [lastTextView removeFromSuperview];
+        lastTextView = nil;
+        
         self.currentLayer = uid;
 
         // Edit the current layer.
@@ -2905,6 +2910,18 @@ NSArray *coloursArray;
         [playerToolBar setHidden:YES];
     }
 
+}
+
+/**
+ * A layer needs to be brought to the front.
+ */
+-(void)bringLayerToFront:(NSString *)oldUid new:(NSString *)uid {
+    [self.flyer updateLayerKey:oldUid newKey:uid];
+    
+    // Only update layers if we are not editing any layer.
+    if ( [currentLayer isEqualToString:@""] ) {
+        [self addAllLayersIntoScrollView];
+    }
 }
 
 #pragma mark - Undo Implementation
@@ -3050,7 +3067,7 @@ NSArray *coloursArray;
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.4f];
         //Here we Add All Generated Layers add into ScrollView
-        [self addAllLayersIntoScrollView ];
+    [self addAllLayersIntoScrollView];
     [UIView commitAnimations];
     //End Animation
     
@@ -3155,6 +3172,7 @@ NSArray *coloursArray;
         
         if ([flyer isVideoFlyer]) {
             shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareVideoViewController" bundle:nil];
+            shareviewcontroller.cfController = self;
             
         } else {
             shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
@@ -4055,6 +4073,7 @@ NSArray *coloursArray;
 	}
     else if(selectedButton == backgroundTabButton)
 	{
+        currentLayer = nil;
         
         [backgroundTabButton setSelected:YES];
         //Add right Bar button
@@ -4347,6 +4366,11 @@ NSArray *coloursArray;
     
 }
 
+-(void)enableHome:(BOOL)enable{
+
+    [backButton setEnabled:enable];
+    
+}
 
 
 @end

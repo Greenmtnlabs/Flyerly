@@ -172,7 +172,6 @@
 
 -(void)addScrollView:(id)obj;
 -(void)addBottomTabs:(id)obj;
--(void)addAllLayersIntoScrollView;
 -(void)deleteSubviewsFromScrollView;
 
 -(void)addDonetoRightBarBotton;
@@ -181,6 +180,8 @@
 -(void)undoFlyer;
 -(void)setUndoStatus;
 -(void)videoMergeProcess;
+-(void)enableHome:(BOOL)enable;
+
 
 -(UIImage *)getFlyerSnapShot;
 
