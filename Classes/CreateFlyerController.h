@@ -181,6 +181,8 @@
 -(void)undoFlyer;
 -(void)setUndoStatus;
 -(void)videoMergeProcess;
+-(void)enableHome:(BOOL)enable;
+
 
 -(UIImage *)getFlyerSnapShot;
 

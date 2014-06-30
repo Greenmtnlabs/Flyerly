@@ -79,6 +79,7 @@
 @property(nonatomic,strong)NSString *selectedFlyerDescription;
 @property(nonatomic,strong)NSString *imageFileName;
 @property(nonatomic,weak)FlyrViewController *fvController;
+@property(nonatomic,weak)CreateFlyerController *cfController;
 @property (strong, nonatomic) SHKActivityIndicator *activityIndicator;
 @property (nonatomic,strong) Flyer *flyer;
 @property (weak, nonatomic) id<SHKSharerDelegate> delegate;

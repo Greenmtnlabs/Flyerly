@@ -15,6 +15,7 @@
 CameraViewController *nbuCamera;
 
 NSMutableArray *productArray;
+UIButton *backButton;
 
 
 
@@ -121,7 +122,7 @@ NSArray *coloursArray;
     [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,rightUndoBarButton,nil]];
     
     // Left BackButton
-    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+    backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
 	[backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
     
@@ -3155,6 +3156,7 @@ NSArray *coloursArray;
         
         if ([flyer isVideoFlyer]) {
             shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareVideoViewController" bundle:nil];
+            shareviewcontroller.cfController = self;
             
         } else {
             shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
@@ -4347,6 +4349,11 @@ NSArray *coloursArray;
     
 }
 
+-(void)enableHome:(BOOL)enable{
+
+    [backButton setEnabled:enable];
+    
+}
 
 
 @end

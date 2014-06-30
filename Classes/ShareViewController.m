@@ -591,6 +591,8 @@
 // These are used if you do not provide your own custom UI and delegate
 - (void)sharerStartedSending:(SHKSharer *)sharer
 {
+    [self.cfController enableHome:NO];
+    
     // Update Flyer Share Info in Social File
     if ( [sharer isKindOfClass:[SHKFacebook class]] == YES ) {
         
@@ -622,7 +624,14 @@
     
 	if (!sharer.quiet)
 		[[SHKActivityIndicator currentIndicator] displayActivity:SHKLocalizedString(@"Sharing to %@", [[sharer class] sharerTitle]) forSharer:sharer];
+    
 }
+
+
+
+
+
+
 
 - (void)sharerFinishedSending:(SHKSharer *)sharer
 {
@@ -648,8 +657,7 @@
         tumblrButton.enabled = YES;
         [self.flyer setThumblerStatus:1];
         [Flurry logEvent:@"Shared Tumblr"];
-
-        
+       
     } else if ( [sharer isKindOfClass:[SHKFlickr class]] == YES ) {
         
         flickrButton.enabled = YES;
@@ -692,6 +700,8 @@
     
     iosSharer.shareDelegate = nil;
     iosSharer = nil;
+    [self.cfController enableHome:YES];
+    
 }
 
 - (void)sharer:(SHKSharer *)sharer failedWithError:(NSError *)error shouldRelogin:(BOOL)shouldRelogin
@@ -700,6 +710,7 @@
     [[SHKActivityIndicator currentIndicator] hideForSharer:sharer];
     iosSharer.shareDelegate = nil;
 	NSLog(@"Sharing Error");
+    [self.cfController enableHome:YES];
 }
 
 - (void)sharerCancelledSending:(SHKSharer *)sharer
@@ -707,6 +718,7 @@
     iosSharer.shareDelegate = nil;
     iosSharer = nil;
     NSLog(@"Sending cancelled");
+    [self.cfController enableHome:YES];
 }
 
 - (void)sharerShowBadCredentialsAlert:(SHKSharer *)sharer
