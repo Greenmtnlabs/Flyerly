@@ -50,6 +50,7 @@
 -(BOOL)compareFilesForMakeHistory :(NSString *)curPath LastHistoryPath:(NSString *)hisPath;
 
 -(void)deleteLayer :(NSString *)uid;
+-(void)updateLayerKey:(NSString *)old newKey:(NSString *)key;
 
 -(NSArray *)allKeys;
 
@@ -150,8 +151,8 @@
 -(float)getWidth :(NSString *)uid;
 -(float)getHight :(NSString *)uid;
 -(NSString *)getFlyerImage;
-
 -(BOOL)isVideoMergeProcessRequired;
+
 +(NSString *)newFlyerPath;
 + (NSMutableArray *)recentFlyerPreview:(NSInteger)flyCount;
 
