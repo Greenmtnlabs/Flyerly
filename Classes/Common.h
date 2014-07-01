@@ -254,3 +254,9 @@ nil]
 #define TITLE_FONT @"AvenirNext-Bold"
 // Other font
 #define OTHER_FONT @"HelveticaNeue"
+
+// Layer Types
+#define FLYER_LAYER_TEXT      @"0"
+#define FLYER_LAYER_IMAGE     @"1"
+#define FLYER_LAYER_CLIP_ART  @"2"
+#define FLYER_LAYER_EMOTICON  @"3"
