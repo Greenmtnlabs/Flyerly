@@ -2063,6 +2063,8 @@ NSArray *coloursArray;
             [navigationController popViewControllerAnimated:NO];
             [userPurchases_ setUserPurcahsesFromParse];
             
+            [weakSelf openPanel];
+            
             [weakSelf hideLoadingIndicator];
         };
         
