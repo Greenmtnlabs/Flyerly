@@ -351,7 +351,7 @@ NSMutableArray *productArray;
     // Set CreateFlyer Screen
     createFlyer.flyer = flyer;
     
-    [createFlyer.flyer setRecentFlyer];
+    [flyer setRecentFlyer];
     
     __weak FlyrViewController *weakSelf = self;
     
