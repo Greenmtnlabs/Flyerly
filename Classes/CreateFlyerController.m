@@ -1522,23 +1522,23 @@ NSArray *coloursArray;
     {
         tempView  = [bodersArray objectAtIndex:index];
         
-        if ( (index % 3) == 0)
+        /*if ( (index % 3) == 0)
         {
             tempView  = [bodersArray objectAtIndex:index];
             
             // Add border to Un-select layer thumbnail
-            /*CALayer * l = [tempView layer];
+            CALayer * l = [tempView layer];
             [l setBorderWidth:1];
             [l setCornerRadius:0];
             UIColor * c = [UIColor clearColor];
-            [l setBorderColor:c.CGColor];*/
+            [l setBorderColor:c.CGColor];
             i++;
             
-        }
+        }*/
         
         if(tempView == view)
         {
-            UIColor *borderColor = borderArray[i-2];
+            UIColor *borderColor = borderArray[index];
             [flyer setFlyerTextBorderColor:currentLayer Color:borderColor ];
             //Here we call Render Layer on View
             [flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
@@ -2051,6 +2051,9 @@ NSArray *coloursArray;
         signInController.launchController = appDelegate.lauchController;
         
         __weak CreateFlyerController *weakSelf = self;
+        __weak UserPurchases *userPurchases_ = appDelegate.userPurchases;
+        userPurchases_.delegate = self;
+        
         //__weak CreateFlyerController *weakCreateFlyerController = signInController;
         
         signInController.signInCompletion = ^void(void) {
@@ -2058,26 +2061,9 @@ NSArray *coloursArray;
             
             UINavigationController* navigationController = weakSelf.navigationController;
             [navigationController popViewControllerAnimated:NO];
-            //[navigationController popViewController:weakSigninController];
-            //[navigationController popToViewController:weakSelf animated:YES];
+            [userPurchases_ setUserPurcahsesFromParse];
             
-            [weakSelf openPanel];
-            //[shareButton sendActionsForControlEvents: UIControlEventTouchUpInside];
-            //=======
-            /*
-            //UINavigationController* navigationController = weakSigninController.navigationController;
-            UINavigationController* navigationController = weakSelf.navigationController;
-            [navigationController popViewControllerAnimated:NO];
-            [weakSignInController.navigationController popViewController:weakSignInController];
-
-            //Render Flyer
-            [weakSelf renderFlyer];
-            
-            //[shareButton sendActionsForControlEvents: UIControlEventTouchUpInside];
-            [weakSelf openPanel];
-             */
-            //>>>>>>> tempBranch
-            
+            [weakSelf hideLoadingIndicator];
         };
         
         [self.navigationController pushViewController:signInController animated:YES];
