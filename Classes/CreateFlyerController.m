@@ -2806,17 +2806,43 @@ NSArray *coloursArray;
  */
 -(void)deleteLayer:(LayerTileButton *)layerButton overrided:(BOOL)overrided{
     
+    if(layerButton.uid != nil ){
+        //Delete From Master Dictionary
+        [flyer deleteLayer:layerButton.uid];
     
-    //Delete From Master Dictionary
-    [flyer deleteLayer:layerButton.uid];
+        //Delete From View
+        [flyimgView deleteLayer:layerButton.uid];
     
-    //Delete From View
-    [flyimgView deleteLayer:layerButton.uid];
-    
-    NSLog(@"Delete Layer Tag: %d", layerButton.tag);
-    
-    //Set Main View On Screen
-    [self callAddMoreLayers];
+        NSLog(@"Delete Layer Tag: %d", layerButton.tag);
+        
+        //Set Main View On Screen
+        [self callAddMoreLayers];
+        
+    } else{
+        NSLog(@"Deleting background layer");
+        
+        // Make sure we hide the play bar.
+        [playerToolBar setHidden:YES];
+        
+        //Here we Set Flyer Type
+        [flyer setFlyerTypeImage];
+        
+        //Getting Image Path
+        NSString *imgPath = [self getImagePathByTag:[NSString stringWithFormat:@"Template%d",2]];
+        
+        //set template Image
+        [self.flyimgView setTemplate:imgPath];
+        
+        //Set Image Tag
+        [flyer setImageTag:@"Template" Tag:[NSString stringWithFormat:@"%d",2]];
+        
+        //Set Main View On Screen
+        [self callAddMoreLayers];
+        
+        //Render flyer
+        [self renderFlyer];
+        
+    }
 }
 
 #pragma mark - Delegate for Flyerly ImageView
