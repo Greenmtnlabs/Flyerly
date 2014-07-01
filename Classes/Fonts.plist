@@ -2,14 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <array>
+	<string>Cutive Mono</string>
 	<string>Aleo</string>
-	<string>Alex Brush</string>
-	<string>Algerian</string>
-	<string>Aller</string>
-	<string>Amble</string>
-	<string>Ambrosia Demo</string>
-	<string>Anjelika Rose</string>
-	<string>Anson</string>
+	<string>Lora</string>
+	<string>Monoton</string>
+	<string>Montserrat Alternates</string>
+	<string>Raleway</string>
+	<string>Sancreek</string>
+	<string>Yanone Kaffeesatz</string>
 	<string>aurora</string>
 	<string>Balham</string>
 	<string>BankGothic DB</string>

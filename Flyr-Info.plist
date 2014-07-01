@@ -56,7 +56,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>432</string>
+	<string>433</string>
 	<key>FacebookAppID</key>
 	<string>136691489852349</string>
 	<key>FacebookDisplayName</key>
@@ -152,6 +152,14 @@
 		<string>telegrafico-Regular.ttf</string>
 		<string>Track-Regular.ttf</string>
 		<string>Oswald-Regular.ttf</string>
+		<string>CutiveMono-Regular.ttf</string>
+		<string>Lora-Italic.ttf</string>
+		<string>Monoton-Regular.ttf</string>
+		<string>Raleway-Light.ttf</string>
+		<string>Sancreek-Regular.ttf</string>
+		<string>YanoneKaffeesatz-Light.ttf</string>
+		<string>MontserratAlternates-Regular.ttf</string>
+		<string>Lobster.ttf</string>
 	</array>
 	<key>UIPrerenderedIcon</key>
 	<true/>
