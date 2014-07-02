@@ -2818,7 +2818,7 @@ NSArray *coloursArray;
         //Set Main View On Screen
         [self callAddMoreLayers];
         
-    } else{
+    } else {
         NSLog(@"Deleting background layer");
         
         // Make sure we hide the play bar.
@@ -2827,19 +2827,31 @@ NSArray *coloursArray;
         //Here we Set Flyer Type
         [flyer setFlyerTypeImage];
         
-        //Getting Image Path
-        NSString *imgPath = [self getImagePathByTag:[NSString stringWithFormat:@"Template%d",2]];
+        // Get path of current flyer background and remove it
+        NSString *currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
+        NSString *replaceDirName = @"Template/template.png";
+        NSString *flyerTemplate = [currentpath stringByAppendingPathComponent:replaceDirName];
         
-        //set template Image
-        [self.flyimgView setTemplate:imgPath];
+        NSError *error;
+        [[NSFileManager defaultManager] removeItemAtPath:flyerTemplate error:&error];
+        if (error) {
+            NSLog(@"%@", error.debugDescription);
+        }
         
-        //Set Image Tag
-        [flyer setImageTag:@"Template" Tag:[NSString stringWithFormat:@"%d",2]];
+        // Getting Image Path of default background image
+        NSString *defaultTemplate = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"flyerbundle/flyer.png"];
         
-        //Set Main View On Screen
-        [self callAddMoreLayers];
+        // Copy default template again into flyer as its background has been deleted
+        [[NSFileManager defaultManager] copyItemAtPath:defaultTemplate toPath:flyerTemplate error:&error];
         
-        //Render flyer
+        if (error) {
+            NSLog(@"%@", error.debugDescription);
+        }
+        
+        //Set Image Tag of default background image
+        [flyer setImageTag:@"Template" Tag:[NSString stringWithFormat:@"%d",-1]];
+        
+        // Render flyer
         [self renderFlyer];
         
     }
