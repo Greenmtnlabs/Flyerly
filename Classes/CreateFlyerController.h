@@ -71,14 +71,12 @@
 }
 
 //-----
-@property (nonatomic, strong) UIView *backgroundsView;
+@property (nonatomic, strong) ResourcesView *backgroundsView;
 @property (nonatomic, strong) ResourcesView *flyerBordersView;
 @property (nonatomic, strong) UIView *fontsView;
 @property (nonatomic, strong) ResourcesView *colorsView;
 @property (nonatomic, strong) ResourcesView *sizesView;
 @property (nonatomic, strong) ResourcesView *textBordersView;
-@property (nonatomic, strong) UIView *clipartsView;
-@property (nonatomic, strong) UIView *emoticonsView;
 //-----
 
 @property (nonatomic,strong)  IBOutlet UILabel *takeOrAddPhotoLabel;

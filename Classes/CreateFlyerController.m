@@ -2837,6 +2837,9 @@ NSArray *coloursArray;
         //Set Image Tag of default background image
         [flyer setImageTag:@"Template" Tag:[NSString stringWithFormat:@"%d",-1]];
         
+        //Set Main View On Screen
+        [self callAddMoreLayers];
+
         // Render flyer
         [self renderFlyer];
         
@@ -4098,6 +4101,18 @@ NSArray *coloursArray;
     else if(selectedButton == backgroundTabButton)
 	{
         currentLayer = nil;
+        
+        NSMutableDictionary *templateDictionary = [flyer getLayerFromMaster:@"Template"];
+        NSInteger *backgroundImageTag = [[templateDictionary objectForKey:@"imageTag"] intValue];
+        
+        [layerScrollView setContentSize:CGSizeMake(backgroundsView.frame.size.width, backgroundsView.frame.size.height)];
+        
+        if ( backgroundImageTag ) {
+            [backgroundsView highlightResource:backgroundImageTag];
+            UIButton *highLight = [backgroundsView getHighlightedResource];
+            
+            [layerScrollView scrollRectToVisible:highLight.frame animated:YES];
+        }
         
         [backgroundTabButton setSelected:YES];
         //Add right Bar button
