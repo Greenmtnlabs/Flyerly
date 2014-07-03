@@ -1778,6 +1778,9 @@ NSArray *coloursArray;
     // Callback once image is selected.
     [nbuCamera setOnImageTaken:^(UIImage *img) {
         
+        //Remove tag of selected background
+        [flyer setImageTag:@"Template" Tag:[NSString stringWithFormat:@"%d",-1]];
+        
         [uiBusy stopAnimating];
         [uiBusy removeFromSuperview];
         dispatch_async( dispatch_get_main_queue(), ^{
