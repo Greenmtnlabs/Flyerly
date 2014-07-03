@@ -224,23 +224,23 @@ NSArray *coloursArray;
                       [UIColor blueColor],
                       [UIColor greenColor],
                       [UIColor blackColor],
-                      [UIColor colorWithRed:253.0/255.0 green:191.0/255.0 blue:38.0/224.0 alpha:1],
+                      [UIColor colorWithRed:164.0/255.0 green:166.0/255.0 blue:131.0/255.0 alpha:1],
                       [UIColor colorWithWhite:1.0f alpha:1.0f],
                       [UIColor grayColor],
                       [UIColor magentaColor],
                       [UIColor yellowColor],
-                      [UIColor colorWithRed:163.0/255.0 green:25.0/255.0 blue:2.0/224.0 alpha:1],
-                      [UIColor colorWithRed:3.0/255.0 green:15.0/255.0 blue:41.0/224.0 alpha:1],
+                      [UIColor colorWithRed:0.0/255.0 green:77.0/255.0 blue:92.0/255.0 alpha:1],
+                      [UIColor colorWithRed:219.0/255.0 green:105.0/255.0 blue:126.0/255.0 alpha:1],
                       [UIColor purpleColor],
-                      [UIColor colorWithRed:66.0/255.0 green:2.0/255.0 blue:2.0/224.0 alpha:1],
+                      [UIColor colorWithRed:201.0/255.0 green:88.0/255.0 blue:69.0/255.0 alpha:1],
                       [UIColor orangeColor],
-                      [UIColor colorWithRed:98.0/255.0 green:74.0/255.0 blue:9.0/224.0 alpha:1],
-                      [UIColor colorWithRed:80.0/255.0 green:7.0/255.0 blue:1.0/224.0 alpha:1],
-                      [UIColor colorWithRed:150.0/255.0 green:150.0/255.0 blue:97.0/224.0 alpha:1],
-                      [UIColor colorWithRed:111.0/255.0 green:168.0/255.0 blue:100.0/224.0 alpha:1],
+                      [UIColor colorWithRed:139.0/255.0 green:181.0/255.0 blue:227.0/255.0 alpha:1],
+                      [UIColor colorWithRed:22.0/255.0 green:50.0/255.0 blue:129.0/255.0 alpha:1],
+                      [UIColor colorWithRed:229.0/255.0 green:228.0/255.0 blue:47.0/255.0 alpha:1],
+                      [UIColor colorWithRed:226.0/255.0 green:236.0/255.0 blue:48.0/255.0 alpha:1],
                       [UIColor cyanColor],
-                      [UIColor colorWithRed:17.0/255.0 green:69.0/255.0 blue:70.0/224.0 alpha:1],
-                      [UIColor colorWithRed:173.0/255.0 green:127.0/255.0 blue:251.0/224.0 alpha:1], nil];
+                      [UIColor colorWithRed:38.0/255.0 green:72.0/255.0 blue:18.0/255.0 alpha:1],
+                      [UIColor colorWithRed:73.0/255.0 green:69.0/255.0 blue:215.0/255.0 alpha:1], nil];
         
         
         // Create border colors array
@@ -3375,6 +3375,8 @@ NSArray *coloursArray;
         textWhiteColor = [textLayer objectForKey:@"textWhitecolor"];
     }
     
+    NSArray *RGB = [textColor componentsSeparatedByString:@","];
+    UIColor *fontColor = [UIColor colorWithRed:[RGB[0] floatValue] green:[RGB[1] floatValue] blue:[RGB[2] floatValue] alpha:1.0];
    
     for (int i = 1; i <=  [colorArray count] ; i++)
     {
@@ -3382,6 +3384,8 @@ NSArray *coloursArray;
         if ([coloursArray[i-1] isKindOfClass:[UIButton class]]) {
             color = (UIButton *) coloursArray[i-1];
         }
+        
+        UIColor* buttonColor = color.backgroundColor;
         
         id colorName = colorArray[(i-1)];
         //Here we Highlight Last Color Selected
@@ -3402,8 +3406,9 @@ NSArray *coloursArray;
             [labelToStore.textColor getWhite:&wht alpha:&alpha];
             twhite = [NSString stringWithFormat:@"%f, %f", wht, alpha];
             
-            if ([textColor isEqualToString:tcolor] && [textWhiteColor isEqualToString:twhite] ) {
-                
+            //if ([textColor isEqualToString:tcolor] && [textWhiteColor isEqualToString:twhite] ) {
+            if ( [Flyer compareColor:buttonColor withColor:fontColor] ) {
+                  
                 tag = [NSString stringWithFormat: @"%d", color.tag];
                 break;
             }
