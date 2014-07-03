@@ -383,6 +383,9 @@
         }else{
             registerController = [[RegisterController alloc]initWithNibName:@"RegisterController" bundle:nil];
         }
+        
+        registerController.signInController = self;
+        
         [self.navigationController pushViewController:registerController animated:YES];
         
     }
