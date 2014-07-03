@@ -1692,9 +1692,6 @@ NSArray *coloursArray;
     
     [nbuGallary setOnVideoFinished:^(NSURL *recvUrl, CGRect cropRect, CGFloat scale ) {
         
-        //Remove tag of selected background
-        [flyer setImageTag:@"Template" Tag:[NSString stringWithFormat:@"%d",-1]];
-        
         [uiBusy stopAnimating];
         [uiBusy removeFromSuperview];
 
@@ -1817,6 +1814,10 @@ NSArray *coloursArray;
 
     // Call back for when video is selected.
     [nbuCamera setOnVideoFinished:^(NSURL *recvUrl, CGRect cropRect, CGFloat scale ) {
+        
+        
+        //Remove tag of selected background
+        [flyer setImageTag:@"Template" Tag:[NSString stringWithFormat:@"%d",-1]];
         
         [uiBusy stopAnimating];
         [uiBusy removeFromSuperview];
