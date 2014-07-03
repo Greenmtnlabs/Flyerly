@@ -2836,7 +2836,7 @@ NSArray *coloursArray;
             NSLog(@"%@", error.debugDescription);
         }
         
-        //Set Image Tag of default background image
+        //Remove tag of selected background
         [flyer setImageTag:@"Template" Tag:[NSString stringWithFormat:@"%d",-1]];
         
         //Set Main View On Screen
