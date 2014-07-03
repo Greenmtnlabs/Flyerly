@@ -938,7 +938,7 @@ NSArray *coloursArray;
         }
         [clipartsView addSubview:font];
     }
-    clipartsView.size = CGSizeMake(320, curYLoc);
+    clipartsView.size = CGSizeMake(320, curYLoc + (heightValue + 7) );
 
 }
 
@@ -2801,7 +2801,7 @@ NSArray *coloursArray;
         //Set Main View On Screen
         [self callAddMoreLayers];
         
-    } else{
+    } else {
         NSLog(@"Deleting background layer");
         
         // Make sure we hide the play bar.
@@ -2810,19 +2810,34 @@ NSArray *coloursArray;
         //Here we Set Flyer Type
         [flyer setFlyerTypeImage];
         
-        //Getting Image Path
-        NSString *imgPath = [self getImagePathByTag:[NSString stringWithFormat:@"Template%d",2]];
+        // Get path of current flyer background and remove it
+        NSString *currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
+        NSString *replaceDirName = @"Template/template.png";
+        NSString *flyerTemplate = [currentpath stringByAppendingPathComponent:replaceDirName];
         
-        //set template Image
-        [self.flyimgView setTemplate:imgPath];
+        NSError *error;
+        [[NSFileManager defaultManager] removeItemAtPath:flyerTemplate error:&error];
+        if (error) {
+            NSLog(@"%@", error.debugDescription);
+        }
         
-        //Set Image Tag
-        [flyer setImageTag:@"Template" Tag:[NSString stringWithFormat:@"%d",2]];
+        // Getting Image Path of default background image
+        NSString *defaultTemplate = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"flyerbundle/flyer.png"];
+        
+        // Copy default template again into flyer as its background has been deleted
+        [[NSFileManager defaultManager] copyItemAtPath:defaultTemplate toPath:flyerTemplate error:&error];
+        
+        if (error) {
+            NSLog(@"%@", error.debugDescription);
+        }
+        
+        //Remove tag of selected background
+        [flyer setImageTag:@"Template" Tag:[NSString stringWithFormat:@"%d",-1]];
         
         //Set Main View On Screen
         [self callAddMoreLayers];
-        
-        //Render flyer
+
+        // Render flyer
         [self renderFlyer];
         
     }
@@ -4072,6 +4087,18 @@ NSArray *coloursArray;
 	{
         currentLayer = nil;
         
+        NSMutableDictionary *templateDictionary = [flyer getLayerFromMaster:@"Template"];
+        NSInteger *backgroundImageTag = [[templateDictionary objectForKey:@"imageTag"] intValue];
+        
+        [layerScrollView setContentSize:CGSizeMake(backgroundsView.frame.size.width, backgroundsView.frame.size.height)];
+        
+        if ( backgroundImageTag ) {
+            [backgroundsView highlightResource:backgroundImageTag];
+            UIButton *highLight = [backgroundsView getHighlightedResource];
+            
+            [layerScrollView scrollRectToVisible:highLight.frame animated:YES];
+        }
+        
         [backgroundTabButton setSelected:YES];
         //Add right Bar button
         [self addDonetoRightBarBotton];
@@ -4358,7 +4385,11 @@ NSArray *coloursArray;
         
     }else {
         
-        [self presentModalViewController:inappviewcontroller animated:YES];
+        if ( [sharePanel isHidden] ) {
+            [self presentModalViewController:inappviewcontroller animated:YES];
+        }
+       
+        
     }
     
 }
