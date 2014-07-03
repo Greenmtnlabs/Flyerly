@@ -916,7 +916,7 @@ NSArray *coloursArray;
         }
         [clipartsView addSubview:font];
     }
-    clipartsView.size = CGSizeMake(320, curYLoc);
+    clipartsView.size = CGSizeMake(320, curYLoc + (heightValue + 7) );
 
 }
 
