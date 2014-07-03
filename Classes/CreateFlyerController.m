@@ -244,7 +244,29 @@ NSArray *coloursArray;
         
         
         // Create border colors array
-        borderArray = 	[[NSArray  alloc] initWithObjects: [UIColor blackColor], [UIColor grayColor], [UIColor darkGrayColor], [UIColor blueColor], [UIColor purpleColor], [UIColor colorWithRed:115.0/255.0 green:134.0/255.0 blue:144.0/255.0 alpha:1], [UIColor orangeColor], [UIColor greenColor], [UIColor redColor], [UIColor colorWithRed:14.0/255.0 green:95.0/255.0 blue:111.0/255.0 alpha:1], [UIColor colorWithRed:180.0/255.0 green:180.0/255.0 blue:149.0/255.0 alpha:1], [UIColor colorWithRed:228.0/255.0 green:128.0/255.0 blue:144.0/255.0 alpha:1], [UIColor colorWithRed:213.0/255.0 green:110.0/255.0 blue:86.0/255.0 alpha:1],[UIColor colorWithRed:156.0/255.0 green:195.0/255.0 blue:233.0/255.0 alpha:1],[UIColor colorWithRed:27.0/255.0 green:70.0/255.0 blue:148.0/255.0 alpha:1],[UIColor colorWithRed:234.0/255.0 green:230.0/255.0 blue:51.0/255.0 alpha:1],[UIColor cyanColor], [UIColor colorWithRed:232.0/255.0 green:236.0/255.0 blue:51.0/224.0 alpha:1],[UIColor magentaColor],[UIColor colorWithRed:57.0/255.0 green:87.0/255.0 blue:13.0/224.0 alpha:1], [UIColor colorWithRed:93.0/255.0 green:97.0/255.0 blue:196.0/224.0 alpha:1],nil];
+        borderArray = 	[[NSArray  alloc] initWithObjects:
+                         [UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:1], // black
+                         [UIColor colorWithRed:128.0/255.0 green:128.0/255.0 blue:128.0/255.0 alpha:1], // grayColor
+                         [UIColor colorWithRed:67.0/255.0 green:67.0/255.0 blue:67.0/255.0 alpha:1], // darkGrayColor
+                         [UIColor blueColor],
+                         [UIColor purpleColor],
+                         [UIColor colorWithRed:95.0/255.0 green:115.0/255.0 blue:125.0/255.0 alpha:1],
+                         [UIColor orangeColor],
+                         [UIColor greenColor],
+                         [UIColor redColor],
+                         [UIColor colorWithRed:0.0/255.0 green:77.0/255.0 blue:92.0/255.0 alpha:1],
+                         [UIColor colorWithRed:164.0/255.0 green:166.0/255.0 blue:131.0/255.0 alpha:1],
+                         [UIColor colorWithRed:219.0/255.0 green:105.0/255.0 blue:126.0/255.0 alpha:1],
+                         [UIColor colorWithRed:201.0/255.0 green:88.0/255.0 blue:69.0/255.0 alpha:1],
+                         [UIColor colorWithRed:139.0/255.0 green:181.0/255.0 blue:227.0/255.0 alpha:1],
+                         [UIColor colorWithRed:22.0/255.0 green:50.0/255.0 blue:129.0/255.0 alpha:1],
+                         [UIColor colorWithRed:229.0/255.0 green:228.0/255.0 blue:47.0/255.0 alpha:1],
+                         [UIColor cyanColor],
+                         [UIColor colorWithRed:226.0/255.0 green:236.0/255.0 blue:48.0/255.0 alpha:1],
+                         [UIColor magentaColor],
+                         [UIColor colorWithRed:38.0/255.0 green:72.0/255.0 blue:18.0/255.0 alpha:1],
+                         [UIColor colorWithRed:73.0/255.0 green:69.0/255.0 blue:215.0/255.0 alpha:1],
+                         nil];
         
         // HERE WE CREATE FLYERLY ALBUM ON DEVICE
         if(![[NSUserDefaults standardUserDefaults] stringForKey:@"FlyerlyAlbum"]){
@@ -1510,52 +1532,25 @@ NSArray *coloursArray;
  */
 -(IBAction)selectFontBorder:(id)sender
 {
-    NSArray *bodersArray = textBordersView.subviews;
-    int count = (bodersArray.count);
-    
-    UIView *tempView;
-    
-    int  i=1;
 	UIButton *view = sender;
     
-	for (int index = 0; index < count; index++ )
-    {
-        tempView  = [bodersArray objectAtIndex:index];
-        
-        /*if ( (index % 3) == 0)
-        {
-            tempView  = [bodersArray objectAtIndex:index];
-            
-            // Add border to Un-select layer thumbnail
-            CALayer * l = [tempView layer];
-            [l setBorderWidth:1];
-            [l setCornerRadius:0];
-            UIColor * c = [UIColor clearColor];
-            [l setBorderColor:c.CGColor];
-            i++;
-            
-        }*/
-        
+	for(UIView *tempView  in [textBordersView subviews])
+	{
         if(tempView == view)
         {
-            UIColor *borderColor = borderArray[index];
-            [flyer setFlyerTextBorderColor:currentLayer Color:borderColor ];
+            UIColor *borderColor = borderArray[ (((tempView.tag)/3) - 1) ];
+            
+            [flyer setFlyerTextBorderColor:currentLayer Color:borderColor];
+            
             //Here we call Render Layer on View
             [flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
             
-            // Add border to selected layer thumbnail
-            tempView = [bodersArray objectAtIndex:(index-2)];
+            //Handling Select Unselect
+            [self setSelectedItem:FLYER_LAYER_TEXT inView:textBordersView ofLayerAttribute:LAYER_ATTRIBUTE_BORDER];
             
-            [self setSelectedItem:FLYER_LAYER_TEXT inView:clipartsView ofLayerAttribute:LAYER_ATTRIBUTE_BORDER];
-            
-            /*CALayer * l = [tempView layer];
-            [l setBorderWidth:5.0];
-            [l setCornerRadius:8];
-            UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
-            [l setBorderColor:c.CGColor];*/
+            break;
         }
-    
-	}//LOOP
+	}// LOOP
 }
 
 
@@ -3425,56 +3420,44 @@ NSArray *coloursArray;
     NSString* tag = nil;
     
     NSMutableDictionary *textLayer;
-    NSString *textColor;
-    NSString *textWhiteColor;
+    NSString *textBorderColor;
+    NSString *textBorderWhiteColor;
     
     //Getting Last Info of Text Layer
     if (![currentLayer isEqualToString:@""]) {
         textLayer = [flyer getLayerFromMaster:currentLayer];
-        textColor = [textLayer objectForKey:@"textbordercolor"];
-        textWhiteColor = [textLayer objectForKey:@"textborderWhite"];
+        textBorderColor = [textLayer objectForKey:@"textbordercolor"];
+        textBorderWhiteColor = [textLayer objectForKey:@"textborderWhite"];
     }
+    
+    NSArray *RGB = [textBorderColor componentsSeparatedByString:@","];
+    UIColor *borderColor = [UIColor colorWithRed:[RGB[0] floatValue] green:[RGB[1] floatValue] blue:[RGB[2] floatValue] alpha:1.0];
     
     NSArray *bodersArray = textBordersView.subviews;
     int count = (bodersArray.count)/3;
     
-    int i=1,j=0;
+    int i=1,j=1;
     for (int index = 0; index < count; index++ )
     {
+        
         
         UIButton *border;
         if ([bodersArray[j] isKindOfClass:[UIButton class]]) {
             border = (UIButton *) bodersArray[j];
         }
-        j = j+2;
+        j = j+3;
         
-        UIColor *colorName = borderArray[(i-1)];
+        UIColor* buttonColor = border.backgroundColor;
         
-        //Here we Highlight Last Color Selected
-        if (textLayer) {
+        if ( [Flyer compareColor:buttonColor withColor:borderColor] ) {
+        //if( [buttonColor isEqual:borderColor] ) {
+            tag = [NSString stringWithFormat: @"%d", ((border.tag) - 1)];
+            break;
             
-            NSString *tcolor;
-            NSString *twhite;
-            CGFloat red = 0.0, green = 0.0, blue = 0.0, alpha = 0.0,wht = 0.0;
-            
-            UILabel *labelToStore = [[UILabel alloc]init];
-            labelToStore.textColor = colorName;
-            
-            //Getting RGB Color Code
-            [labelToStore.textColor getRed:&red green:&green blue:&blue alpha:&alpha];
-            
-            tcolor = [NSString stringWithFormat:@"%f, %f, %f", red, green, blue];
-            
-            [labelToStore.textColor getWhite:&wht alpha:&alpha];
-            twhite = [NSString stringWithFormat:@"%f, %f", wht, alpha];
-            
-            if ([textColor isEqualToString:tcolor] && [textWhiteColor isEqualToString:twhite] ) {
-                
-                tag = [NSString stringWithFormat: @"%d", border.tag];
-                break;
-            }
-            i++;
         }
+        
+        i++;
+    
     }// Loop
     
     return tag;

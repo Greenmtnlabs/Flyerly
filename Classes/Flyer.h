@@ -149,6 +149,7 @@
 
 +(NSString *)newFlyerPath;
 + (NSMutableArray *)recentFlyerPreview:(NSInteger)flyCount;
++ (BOOL) compareColor:(UIColor*)color1 withColor:(UIColor*)color2;
 
 @property (strong, readonly) NSMutableDictionary *masterLayers;
 @property (strong, nonatomic) NSMutableArray *socialArray;

@@ -1911,6 +1911,41 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     }
 }
 
+/**
+ * UIColor isEqual:color doesn't work in all cases. The float values need to be dealt with differently for
+ * different color models. See: http://stackoverflow.com/questions/970475/how-to-compare-uicolors
+ * Hence this function
+ */
++(BOOL) compareColor:(UIColor*)color1 withColor:(UIColor*)color2 {
+    
+    BOOL equal = YES;
+    
+    CGFloat red1, green1, blue1, alpha1;
+    CGFloat red2, green2, blue2, alpha2;
+    
+    [color1 getRed:&red1 green:&green1 blue:&blue1 alpha:&alpha1];
+    [color2 getRed:&red2 green:&green2 blue:&blue2 alpha:&alpha2];
+    
+    // Multiply all components by 255, then ceil them to convert them to integers
+    red1 = round(red1 * 255.0);
+    green1 = round(green1 * 255.0);
+    blue1 = round(blue1 * 255.0);
+    
+    red2 = round(red2 * 255.0);
+    green2 = round(green2 * 255.0);
+    blue2 = round(blue2 * 255.0);
+    
+    if ( red1 != red2 ) {
+        equal = NO;
+    } else if ( green1 != green2 ) {
+        equal = NO;
+    } else if ( blue1 != blue2 ) {
+        equal = NO;
+    }
+    
+    return equal;
+}
+
 @end
 
 	
