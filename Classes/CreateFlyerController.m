@@ -2063,6 +2063,8 @@ NSArray *coloursArray;
             [navigationController popViewControllerAnimated:NO];
             [userPurchases_ setUserPurcahsesFromParse];
             
+            [weakSelf openPanel];
+            
             [weakSelf hideLoadingIndicator];
         };
         
@@ -4400,7 +4402,11 @@ NSArray *coloursArray;
         
     }else {
         
-        [self presentModalViewController:inappviewcontroller animated:YES];
+        if ( [sharePanel isHidden] ) {
+            [self presentModalViewController:inappviewcontroller animated:YES];
+        }
+       
+        
     }
     
 }
