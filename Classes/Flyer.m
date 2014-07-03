@@ -489,7 +489,8 @@ NSString * const CLIPARTHEIGHT = @"100.000000";
             {
                 lastFileName = fileList[i];
         
-                if (![lastFileName isEqualToString:@"History"] && ![lastFileName isEqualToString:@"FlyerlyMovie.mov"] ) {
+                //if (![lastFileName isEqualToString:@"History"] && ![lastFileName isEqualToString:@"FlyerlyMovie.mov"] )
+                if ( ![lastFileName isEqualToString:@"History"] ) {
                     NSString *source = [NSString stringWithFormat:@"%@/%@",currentSourcepath,lastFileName];
                     NSString *destination = [NSString stringWithFormat:@"%@/%@",historyDestinationpath,lastFileName];
     

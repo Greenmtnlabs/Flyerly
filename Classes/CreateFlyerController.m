@@ -1602,7 +1602,7 @@ NSArray *coloursArray;
             [l setCornerRadius:8];
             UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
             [l setBorderColor:c.CGColor];
-        }
+        } 
         
 	}//LOOP
 }
@@ -1648,6 +1648,9 @@ NSArray *coloursArray;
     __weak CreateFlyerController *weakSelf = self;
 
     [nbuGallary setOnImageTaken:^(UIImage *img) {
+        
+        //Remove tag of selected background
+        [flyer setImageTag:@"Template" Tag:[NSString stringWithFormat:@"%d",-1]];
         
         [uiBusy stopAnimating];
         [uiBusy removeFromSuperview];
@@ -1775,6 +1778,9 @@ NSArray *coloursArray;
     // Callback once image is selected.
     [nbuCamera setOnImageTaken:^(UIImage *img) {
         
+        //Remove tag of selected background
+        [flyer setImageTag:@"Template" Tag:[NSString stringWithFormat:@"%d",-1]];
+        
         [uiBusy stopAnimating];
         [uiBusy removeFromSuperview];
         dispatch_async( dispatch_get_main_queue(), ^{
@@ -1811,6 +1817,10 @@ NSArray *coloursArray;
 
     // Call back for when video is selected.
     [nbuCamera setOnVideoFinished:^(NSURL *recvUrl, CGRect cropRect, CGFloat scale ) {
+        
+        
+        //Remove tag of selected background
+        [flyer setImageTag:@"Template" Tag:[NSString stringWithFormat:@"%d",-1]];
         
         [uiBusy stopAnimating];
         [uiBusy removeFromSuperview];
