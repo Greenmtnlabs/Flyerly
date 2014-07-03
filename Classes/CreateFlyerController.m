@@ -1602,7 +1602,7 @@ NSArray *coloursArray;
             [l setCornerRadius:8];
             UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
             [l setBorderColor:c.CGColor];
-        }
+        } 
         
 	}//LOOP
 }
