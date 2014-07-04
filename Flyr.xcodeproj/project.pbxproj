@@ -965,7 +965,6 @@
 		65A464F41726CBA2002C32FB /* Signika-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 65A464E21726CBA2002C32FB /* Signika-Semibold.otf */; };
 		65A464F51726CBA2002C32FB /* StMarie-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 65A464E31726CBA2002C32FB /* StMarie-Thin.otf */; };
 		65A464FB1726D703002C32FB /* Anjelika Rose.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 65A464F61726D703002C32FB /* Anjelika Rose.ttf */; };
-		65A464FC1726D703002C32FB /* danielbk.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 65A464F71726D703002C32FB /* danielbk.ttf */; };
 		65A464FD1726D703002C32FB /* HelveticaRoundedLTStd-BdCn_0.otf in Resources */ = {isa = PBXBuildFile; fileRef = 65A464F81726D703002C32FB /* HelveticaRoundedLTStd-BdCn_0.otf */; };
 		65A464FE1726D703002C32FB /* ITC Avant Garde CE Gothic Book.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 65A464F91726D703002C32FB /* ITC Avant Garde CE Gothic Book.ttf */; };
 		65A464FF1726D703002C32FB /* segoeui.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 65A464FA1726D703002C32FB /* segoeui.ttf */; };
@@ -2223,7 +2222,6 @@
 		65A464E21726CBA2002C32FB /* Signika-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Signika-Semibold.otf"; path = "Data/fonts/Signika-Semibold.otf"; sourceTree = "<group>"; };
 		65A464E31726CBA2002C32FB /* StMarie-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "StMarie-Thin.otf"; path = "Data/fonts/StMarie-Thin.otf"; sourceTree = "<group>"; };
 		65A464F61726D703002C32FB /* Anjelika Rose.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Anjelika Rose.ttf"; path = "Data/fonts/Anjelika Rose.ttf"; sourceTree = "<group>"; };
-		65A464F71726D703002C32FB /* danielbk.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = danielbk.ttf; path = Data/fonts/danielbk.ttf; sourceTree = "<group>"; };
 		65A464F81726D703002C32FB /* HelveticaRoundedLTStd-BdCn_0.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "HelveticaRoundedLTStd-BdCn_0.otf"; path = "Data/fonts/HelveticaRoundedLTStd-BdCn_0.otf"; sourceTree = "<group>"; };
 		65A464F91726D703002C32FB /* ITC Avant Garde CE Gothic Book.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ITC Avant Garde CE Gothic Book.ttf"; path = "Data/fonts/ITC Avant Garde CE Gothic Book.ttf"; sourceTree = "<group>"; };
 		65A464FA1726D703002C32FB /* segoeui.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = segoeui.ttf; path = Data/fonts/segoeui.ttf; sourceTree = "<group>"; };
@@ -3997,7 +3995,6 @@
 				24785895194874B70062F1E4 /* circula-medium.otf */,
 				24785896194874B70062F1E4 /* CODE Light-Regular.otf */,
 				65A464D61726CBA2002C32FB /* Comfortaa_Bold.ttf */,
-				65A464F71726D703002C32FB /* danielbk.ttf */,
 				245D48E1193DEF9000E670E6 /* Entypo-Social.otf */,
 				248A3624193EF44D0005FCAD /* Entypo.otf */,
 				24785897194874B70062F1E4 /* Exo-Regular.otf */,
@@ -4503,7 +4500,6 @@
 				65A464FB1726D703002C32FB /* Anjelika Rose.ttf in Resources */,
 				2421847B194B4AEC00FDDA97 /* emoticon108@2x.png in Resources */,
 				24218505194B4AEC00FDDA97 /* taekwondo-icon.png in Resources */,
-				65A464FC1726D703002C32FB /* danielbk.ttf in Resources */,
 				242184AA194B4AEC00FDDA97 /* emoticon156@2x.png in Resources */,
 				65A464FD1726D703002C32FB /* HelveticaRoundedLTStd-BdCn_0.otf in Resources */,
 				249F2056193F562C0072835E /* text_edit_selected@2x.png in Resources */,
