@@ -74,8 +74,7 @@ NSMutableArray *productArray;
     //HERE WE GET USER PURCHASES INFO FROM PARSE
     if(![[NSUserDefaults standardUserDefaults] stringForKey:@"InAppPurchases"]){
         
-        FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-        UserPurchases *userPurchases_ = appDelegate.userPurchases;
+        UserPurchases *userPurchases_ = [UserPurchases getInstance];
         
         //Checking if user valid purchases
         if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]   ||
@@ -403,8 +402,8 @@ NSMutableArray *productArray;
 
 - ( void )productSuccesfullyPurchased: (NSString *)productId {
     
-    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-    UserPurchases *userPurchases_ = appDelegate.userPurchases;
+    UserPurchases *userPurchases_ = [UserPurchases getInstance];
+    
     if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
         [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
         
@@ -453,7 +452,9 @@ NSMutableArray *productArray;
         signInController.launchController = appDelegate.lauchController;
         
         __weak FlyrViewController *flyrViewController = self;
-        __weak UserPurchases *userPurchases_ = appDelegate.userPurchases;
+        
+        UserPurchases *userPurchases_ = [UserPurchases getInstance];
+        
         userPurchases_.delegate = self;
         
         [inappviewcontroller_.presentingViewController dismissViewControllerAnimated:YES completion:nil];
@@ -476,8 +477,7 @@ NSMutableArray *productArray;
 
 - (void) userPurchasesLoaded {
     
-    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-    UserPurchases *userPurchases_ = appDelegate.userPurchases;
+    UserPurchases *userPurchases_ = [UserPurchases getInstance];
     
     if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]  ||
          [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {

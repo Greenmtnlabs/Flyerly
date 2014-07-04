@@ -180,8 +180,7 @@ NSArray *coloursArray;
     //HERE WE GET USER PURCHASES INFO FROM PARSE
     if(![[NSUserDefaults standardUserDefaults] stringForKey:@"InAppPurchases"]){
         
-        FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-        UserPurchases *userPurchases_ = appDelegate.userPurchases;
+        UserPurchases *userPurchases_ = [UserPurchases getInstance];
         
         //Checking if user valid purchases
         if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]   ||
@@ -2056,7 +2055,8 @@ NSArray *coloursArray;
         signInController.launchController = appDelegate.lauchController;
         
         __weak CreateFlyerController *weakSelf = self;
-        __weak UserPurchases *userPurchases_ = appDelegate.userPurchases;
+        
+        UserPurchases *userPurchases_ = [UserPurchases getInstance];
         userPurchases_.delegate = self;
         
         //__weak CreateFlyerController *weakCreateFlyerController = signInController;
@@ -2240,8 +2240,7 @@ NSArray *coloursArray;
     //Here we Highlight The ImageView
     [self.flyimgView layerIsBeingEdited:currentLayer];
 
-    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-    UserPurchases *userPurchases_ = appDelegate.userPurchases;
+    UserPurchases *userPurchases_ = [UserPurchases getInstance];
     
     //Checking if user valid purchases
     if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]   ||
@@ -4076,8 +4075,7 @@ NSArray *coloursArray;
 	}
 	else if(selectedButton == addVideoTabButton)
 	{
-        FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-        UserPurchases *userPurchases_ = appDelegate.userPurchases;
+        UserPurchases *userPurchases_ = [UserPurchases getInstance];
     
         if ([[PFUser currentUser] sessionToken].length != 0) {
             if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
@@ -4302,8 +4300,8 @@ NSArray *coloursArray;
 
 - ( void )productSuccesfullyPurchased: (NSString *)productId {
     
-    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-    UserPurchases *userPurchases_ = appDelegate.userPurchases;
+    UserPurchases *userPurchases_ = [UserPurchases getInstance];
+    
     if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
          [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"] ) {
         
@@ -4352,7 +4350,8 @@ NSArray *coloursArray;
         signInController.launchController = appDelegate.lauchController;
         
         __weak CreateFlyerController *createFlyerController = self;
-        __weak UserPurchases *userPurchases_ = appDelegate.userPurchases;
+        
+        UserPurchases *userPurchases_ = [UserPurchases getInstance];
         userPurchases_.delegate = self;
         
         [inappviewcontroller_.presentingViewController dismissViewControllerAnimated:YES completion:nil];
@@ -4375,8 +4374,7 @@ NSArray *coloursArray;
 
 - (void) userPurchasesLoaded {
     
-    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-    UserPurchases *userPurchases_ = appDelegate.userPurchases;
+    UserPurchases *userPurchases_ = [UserPurchases getInstance];
     
     if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]  ||
          [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"] ) {

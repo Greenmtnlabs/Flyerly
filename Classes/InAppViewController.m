@@ -29,9 +29,6 @@ NSArray *freeFeaturesArray;
     freeFeaturesTview.dataSource = self;
 	freeFeaturesTview.delegate = self;
     
-    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-    userPurchases = appDelegate.userPurchases;
-    
     // Find out the path of free-features.plist
     NSString *freeFeaturesPlistPath = [[NSBundle mainBundle] pathForResource:@"free-features" ofType:@"plist"];
     freeFeaturesArray = [[NSArray alloc] initWithContentsOfFile:freeFeaturesPlistPath];
@@ -175,8 +172,7 @@ NSArray *freeFeaturesArray;
  */
 -(void)updateParse {
     
-    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-    __weak UserPurchases *userPurchases_ = appDelegate.userPurchases;
+    UserPurchases *userPurchases_ = [UserPurchases getInstance];
     
     //HERE WE UPDATE PARSE ACCOUNT
     PFUser *user = [PFUser currentUser];

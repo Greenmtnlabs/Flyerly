@@ -14,6 +14,25 @@
 @synthesize oldPurchases;
 @synthesize delegate;
 
+static UserPurchases *sharedSingleton = nil;
+
+/**
+ * This method would be called by runtime only once per class, and we are initializing
+ * the singleton instance here.
+ * Ref: http://stackoverflow.com/a/343191
+ */
++ (void)initialize
+{
+    if(!sharedSingleton)
+    {
+        sharedSingleton = [[UserPurchases alloc] init];
+    }
+}
+
++ (id) getInstance {
+    return sharedSingleton;
+}
+
 - (BOOL) checkKeyExistsInPurchases : (NSString *)productId {
 
     if ( [oldPurchases objectForKey:@"comflyerlyAllDesignBundle"] ) {
@@ -69,6 +88,10 @@
                     
                     [[NSUserDefaults standardUserDefaults]setValue:oldPurchases forKey:@"InAppPurchases"];
                     
+                } else {
+                    
+                    //Here we set User purchse details which returned from Parse
+                    oldPurchases = nil;
                 }
                 
                 if ( delegate != nil ) {

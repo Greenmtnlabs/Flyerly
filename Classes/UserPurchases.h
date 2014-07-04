@@ -12,6 +12,7 @@
 
 - (void) userPurchasesLoaded;
 
+
 @end
 
 @interface UserPurchases : NSObject
@@ -19,6 +20,7 @@
 @property(nonatomic, strong)NSMutableDictionary *oldPurchases;
 @property (nonatomic, assign) id <UserPurchasesDelegate> delegate;
 
++ (id) getInstance;
 - (void) setUserPurcahsesFromParse;
 - (BOOL) checkKeyExistsInPurchases : (NSString *)productId;
 
