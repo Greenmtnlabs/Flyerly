@@ -74,7 +74,7 @@ NSMutableArray *productArray;
     
     category = [[NSMutableArray alloc] init];
     [category addObject:@"Premium Features"];
-    [category addObject:@"Save to Gallery"];
+    [category addObject:@"Autosave to Gallery"];
     [category addObject:@"Flyers are public"];
     
     //Checking if the user is valid or anonymous
