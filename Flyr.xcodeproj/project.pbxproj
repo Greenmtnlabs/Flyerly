@@ -633,6 +633,7 @@
 		2478E5E4192C7A6E0081B31B /* InAppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2478E5E2192C7A6E0081B31B /* InAppViewController.xib */; };
 		2478E5ED192C8C0A0081B31B /* FreeFeatureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2478E5EB192C8C0A0081B31B /* FreeFeatureCell.m */; };
 		2478E5EE192C8C0A0081B31B /* FreeFeatureCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2478E5EC192C8C0A0081B31B /* FreeFeatureCell.xib */; };
+		2479A29C19658ABF00B57F86 /* Sofia-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2479A29B19658ABF00B57F86 /* Sofia-Regular.otf */; };
 		2479BC651941FB8400FF5FF5 /* TextBorders-iPhone4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2479BC631941FB8400FF5FF5 /* TextBorders-iPhone4.xib */; };
 		2479BC671941FB9400FF5FF5 /* TextBorders.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2479BC661941FB9400FF5FF5 /* TextBorders.xib */; };
 		24803523192F3207009403F7 /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24803522192F3207009403F7 /* CameraViewController.m */; };
@@ -1765,6 +1766,7 @@
 		2478E5EA192C8C0A0081B31B /* FreeFeatureCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreeFeatureCell.h; sourceTree = "<group>"; };
 		2478E5EB192C8C0A0081B31B /* FreeFeatureCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreeFeatureCell.m; sourceTree = "<group>"; };
 		2478E5EC192C8C0A0081B31B /* FreeFeatureCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FreeFeatureCell.xib; sourceTree = "<group>"; };
+		2479A29B19658ABF00B57F86 /* Sofia-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Sofia-Regular.otf"; path = "Data/fonts/Sofia-Regular.otf"; sourceTree = "<group>"; };
 		2479BC631941FB8400FF5FF5 /* TextBorders-iPhone4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "TextBorders-iPhone4.xib"; sourceTree = "<group>"; };
 		2479BC661941FB9400FF5FF5 /* TextBorders.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextBorders.xib; sourceTree = "<group>"; };
 		24803522192F3207009403F7 /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraViewController.m; sourceTree = "<group>"; };
@@ -3966,6 +3968,7 @@
 		6513C1AB1716FE0F00355FC3 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				2479A29B19658ABF00B57F86 /* Sofia-Regular.otf */,
 				20563E0B1962D64200C206FD /* CutiveMono-Regular.ttf */,
 				20563E0D1962D64200C206FD /* Lora-Italic.ttf */,
 				20563E0E1962D64200C206FD /* Monoton-Regular.ttf */,
@@ -4858,6 +4861,7 @@
 				202C639217EA06E800CB9A75 /* ricon29.png in Resources */,
 				24218501194B4AEC00FDDA97 /* Surfing-icon.png in Resources */,
 				202C639417EA06E800CB9A75 /* ricon30.png in Resources */,
+				2479A29C19658ABF00B57F86 /* Sofia-Regular.otf in Resources */,
 				242184BA194B4AEC00FDDA97 /* emoticon172@2x.png in Resources */,
 				4986857118B4FFC7002113E4 /* LibraryViewController.xib in Resources */,
 				202C639617EA06E800CB9A75 /* ricon31.png in Resources */,
