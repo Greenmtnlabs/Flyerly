@@ -56,7 +56,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>431</string>
+	<string>436</string>
 	<key>FacebookAppID</key>
 	<string>136691489852349</string>
 	<key>FacebookDisplayName</key>
@@ -72,7 +72,7 @@
 		<string>Anjelika Rose.ttf</string>
 		<string>segoeui.ttf</string>
 		<string>ITC Avant Garde CE Gothic Book.ttf</string>
-		<string>danielbk.ttf</string>
+		<string>Monoton-Regular.ttf</string>
 		<string>BlueNoon.ttf</string>
 		<string>BankGothic-Regular DB.ttf</string>
 		<string>LHANDW.TTF</string>
@@ -152,6 +152,14 @@
 		<string>telegrafico-Regular.ttf</string>
 		<string>Track-Regular.ttf</string>
 		<string>Oswald-Regular.ttf</string>
+		<string>CutiveMono-Regular.ttf</string>
+		<string>Lora-Italic.ttf</string>
+		<string>Monoton-Regular.ttf</string>
+		<string>Raleway-Light.ttf</string>
+		<string>Sancreek-Regular.ttf</string>
+		<string>YanoneKaffeesatz-Light.ttf</string>
+		<string>MontserratAlternates-Regular.ttf</string>
+		<string>Lobster.ttf</string>
 	</array>
 	<key>UIPrerenderedIcon</key>
 	<true/>

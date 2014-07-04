@@ -13,12 +13,6 @@
 #import "Flurry.h"
 #import "Common.h"
 
-// Layer Types
-#define FLYER_LAYER_TEXT      @"0"
-#define FLYER_LAYER_IMAGE     @"1"
-#define FLYER_LAYER_CLIP_ART  @"2"
-#define FLYER_LAYER_EMOTICON  @"3"
-
 @interface Flyer : NSObject{
     
     NSString *piecesFile;
@@ -155,6 +149,7 @@
 
 +(NSString *)newFlyerPath;
 + (NSMutableArray *)recentFlyerPreview:(NSInteger)flyCount;
++ (BOOL) compareColor:(UIColor*)color1 withColor:(UIColor*)color2;
 
 @property (strong, readonly) NSMutableDictionary *masterLayers;
 @property (strong, nonatomic) NSMutableArray *socialArray;

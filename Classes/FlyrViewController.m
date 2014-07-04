@@ -351,14 +351,14 @@ NSMutableArray *productArray;
     // Set CreateFlyer Screen
     createFlyer.flyer = flyer;
     
+    [flyer setRecentFlyer];
+    
     __weak FlyrViewController *weakSelf = self;
-    __weak CreateFlyerController *weakCreate = createFlyer;
     
     //Here we Manage Block for Update
     [createFlyer setOnFlyerBack:^(NSString *nothing) {
         
         //HERE WE GET FLYERS
-        [weakCreate.flyer setRecentFlyer];
         [weakSelf.flyerPaths removeAllObjects];
         weakSelf.flyerPaths = [weakSelf getFlyersPaths];
         [weakSelf.tView reloadData];

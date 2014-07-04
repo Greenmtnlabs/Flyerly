@@ -10,7 +10,7 @@
 
 @implementation ShareViewController
 
-@synthesize Yvalue,rightUndoBarButton,shareButton,helpButton,selectedFlyerImage,fvController,titleView,descriptionView,selectedFlyerDescription,  imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,dicController, clipboardlabel,flyer,topTitleLabel,delegate,activityIndicator,youTubeButton;
+@synthesize Yvalue,rightUndoBarButton,shareButton,helpButton,selectedFlyerImage,fvController,titleView,descriptionView,selectedFlyerDescription,  imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,dicController, clipboardlabel,flyer,topTitleLabel,delegate,activityIndicator,youTubeButton,lblFirstShareOnYoutube;
 
 @synthesize flyerShareType,star1,star2,star3,star4,star5;
 
@@ -196,6 +196,7 @@
     status = [flyer getYouTubeStatus];
     if([status isEqualToString:@"1"]){
         [youTubeButton setSelected:YES];
+        
     }else{
         [youTubeButton setSelected:NO];
     }
@@ -279,6 +280,7 @@
     [instagramButton setEnabled:YES];
     [clipboardButton setEnabled:YES];
     [facebookButton setEnabled:YES];
+    [lblFirstShareOnYoutube setHidden:YES];
 }
 
 #pragma mark  Text Field Delegate

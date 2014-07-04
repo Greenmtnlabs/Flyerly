@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "CustomLabel.h"
+#import "Common.h"
 
 @class Flyer;
 

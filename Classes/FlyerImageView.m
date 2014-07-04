@@ -262,17 +262,22 @@
     lbl.lineWidth = 2;
     
     // Make sure we are vertically aligned to the top and centerally aligned.
-    
-    lbl.textAlignment = UITextAlignmentRight;//UITextAlignmentLeft;//
-    [lbl setNumberOfLines:0];
-    [lbl sizeToFit];
-    
-    // Resize the frame's width to actual
-    //CGRect fr = lbl.frame;
-    //fr.size.width = [[detail valueForKey:@"width"] floatValue];
-    //fr.origin.x = [[detail valueForKey:@"x"] floatValue];
-    //fr.origin.y = [[detail valueForKey:@"y"] floatValue];
-    //lbl.frame = fr;
+    if( [[detail valueForKey:@"type"] isEqualToString:FLYER_LAYER_CLIP_ART] ){
+        lbl.textAlignment = UITextAlignmentLeft;//
+        [lbl setNumberOfLines:0];
+        [lbl sizeToFit];
+    } else{
+       lbl.textAlignment = UITextAlignmentCenter;//UITextAlignmentLeft;//
+       [lbl setNumberOfLines:0];
+       [lbl sizeToFit];
+       
+       // Resize the frame's width to actual
+       CGRect fr = lbl.frame;
+       fr.size.width = [[detail valueForKey:@"width"] floatValue];
+       //fr.origin.x = [[detail valueForKey:@"x"] floatValue];
+       //fr.origin.y = [[detail valueForKey:@"y"] floatValue];
+       lbl.frame = fr;
+    }
 }
 
 

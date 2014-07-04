@@ -183,6 +183,7 @@
 		202C641217EA06E800CB9A75 /* ricon93.png in Resources */ = {isa = PBXBuildFile; fileRef = 202C638017EA06E800CB9A75 /* ricon93.png */; };
 		202C641417EA06E800CB9A75 /* ricon94.png in Resources */ = {isa = PBXBuildFile; fileRef = 202C638217EA06E800CB9A75 /* ricon94.png */; };
 		202D2ABA190155DA00E86C98 /* (null) in Resources */ = {isa = PBXBuildFile; };
+		202D78141962BAAE00D54F3B /* facebook_share_saved@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 202D78131962BAAE00D54F3B /* facebook_share_saved@2x.png */; };
 		202F48BB18F28A60000B62DB /* CustomAssets.m in Sources */ = {isa = PBXBuildFile; fileRef = 202F48BA18F28A60000B62DB /* CustomAssets.m */; };
 		202F992718BCAD1B002A25D9 /* FlyerlyFacebookFriends.m in Sources */ = {isa = PBXBuildFile; fileRef = 202F992618BCAD1B002A25D9 /* FlyerlyFacebookFriends.m */; };
 		202FF12B17C3ABDE003C6245 /* bkg_register-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 202FF12817C3ABDE003C6245 /* bkg_register-568h@2x.png */; };
@@ -196,6 +197,13 @@
 		2044FF97185088ED00A26B42 /* MainSettingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2044FF95185088ED00A26B42 /* MainSettingCell.xib */; };
 		204635621895E4AF00A94C42 /* Flyer.m in Sources */ = {isa = PBXBuildFile; fileRef = 204635611895E4AF00A94C42 /* Flyer.m */; };
 		204635651895F90000A94C42 /* FlyerImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 204635641895F90000A94C42 /* FlyerImageView.m */; };
+		20563E131962D64200C206FD /* CutiveMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 20563E0B1962D64200C206FD /* CutiveMono-Regular.ttf */; };
+		20563E151962D64200C206FD /* Lora-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 20563E0D1962D64200C206FD /* Lora-Italic.ttf */; };
+		20563E161962D64200C206FD /* Monoton-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 20563E0E1962D64200C206FD /* Monoton-Regular.ttf */; };
+		20563E171962D64200C206FD /* MontserratAlternates-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 20563E0F1962D64200C206FD /* MontserratAlternates-Regular.ttf */; };
+		20563E181962D64200C206FD /* Raleway-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 20563E101962D64200C206FD /* Raleway-Light.ttf */; };
+		20563E191962D64200C206FD /* Sancreek-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 20563E111962D64200C206FD /* Sancreek-Regular.ttf */; };
+		20563E1A1962D64200C206FD /* YanoneKaffeesatz-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 20563E121962D64200C206FD /* YanoneKaffeesatz-Light.ttf */; };
 		2060689B1924CC6100AB5230 /* Backgrounds.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2060689A1924CC6100AB5230 /* Backgrounds.xib */; };
 		2060689D1924CCE400AB5230 /* Backgrounds-iPhone4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2060689C1924CCE400AB5230 /* Backgrounds-iPhone4.xib */; };
 		206068A11924EE7500AB5230 /* Borders.xib in Resources */ = {isa = PBXBuildFile; fileRef = 206068A01924EE7500AB5230 /* Borders.xib */; };
@@ -618,7 +626,6 @@
 		247858E31948788C0062F1E4 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 247858DE1948788C0062F1E4 /* Roboto-Regular.ttf */; };
 		247858EA194878CE0062F1E4 /* Seagle-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 247858E4194878CE0062F1E4 /* Seagle-Regular.otf */; };
 		247858EB194878CE0062F1E4 /* Sintony-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 247858E5194878CE0062F1E4 /* Sintony-Regular.otf */; };
-		247858EC194878CE0062F1E4 /* Sofia-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 247858E6194878CE0062F1E4 /* Sofia-Regular.otf */; };
 		247858ED194878CE0062F1E4 /* SourceSansPro-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 247858E7194878CE0062F1E4 /* SourceSansPro-Regular.otf */; };
 		247858EE194878CE0062F1E4 /* telegrafico-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 247858E8194878CE0062F1E4 /* telegrafico-Regular.ttf */; };
 		247858EF194878CE0062F1E4 /* Track-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 247858E9194878CE0062F1E4 /* Track-Regular.ttf */; };
@@ -626,6 +633,7 @@
 		2478E5E4192C7A6E0081B31B /* InAppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2478E5E2192C7A6E0081B31B /* InAppViewController.xib */; };
 		2478E5ED192C8C0A0081B31B /* FreeFeatureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2478E5EB192C8C0A0081B31B /* FreeFeatureCell.m */; };
 		2478E5EE192C8C0A0081B31B /* FreeFeatureCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2478E5EC192C8C0A0081B31B /* FreeFeatureCell.xib */; };
+		2479A29C19658ABF00B57F86 /* Sofia-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2479A29B19658ABF00B57F86 /* Sofia-Regular.otf */; };
 		2479BC651941FB8400FF5FF5 /* TextBorders-iPhone4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2479BC631941FB8400FF5FF5 /* TextBorders-iPhone4.xib */; };
 		2479BC671941FB9400FF5FF5 /* TextBorders.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2479BC661941FB9400FF5FF5 /* TextBorders.xib */; };
 		24803523192F3207009403F7 /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24803522192F3207009403F7 /* CameraViewController.m */; };
@@ -958,7 +966,6 @@
 		65A464F41726CBA2002C32FB /* Signika-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 65A464E21726CBA2002C32FB /* Signika-Semibold.otf */; };
 		65A464F51726CBA2002C32FB /* StMarie-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 65A464E31726CBA2002C32FB /* StMarie-Thin.otf */; };
 		65A464FB1726D703002C32FB /* Anjelika Rose.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 65A464F61726D703002C32FB /* Anjelika Rose.ttf */; };
-		65A464FC1726D703002C32FB /* danielbk.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 65A464F71726D703002C32FB /* danielbk.ttf */; };
 		65A464FD1726D703002C32FB /* HelveticaRoundedLTStd-BdCn_0.otf in Resources */ = {isa = PBXBuildFile; fileRef = 65A464F81726D703002C32FB /* HelveticaRoundedLTStd-BdCn_0.otf */; };
 		65A464FE1726D703002C32FB /* ITC Avant Garde CE Gothic Book.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 65A464F91726D703002C32FB /* ITC Avant Garde CE Gothic Book.ttf */; };
 		65A464FF1726D703002C32FB /* segoeui.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 65A464FA1726D703002C32FB /* segoeui.ttf */; };
@@ -1036,7 +1043,6 @@
 		65CC0AB7171803FB003D0BE7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 65CC0AB9171803FB003D0BE7 /* Localizable.strings */; };
 		65E26157171C2EC400C485B5 /* InviteFriendsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65E26156171C2EC400C485B5 /* InviteFriendsController.xib */; };
 		65E2615D171C2FA800C485B5 /* InviteFriendsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E2615C171C2FA800C485B5 /* InviteFriendsController.m */; };
-		65F1BE97173AA13400EE6F9F /* facebook_share_saved.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F1BE74173AA12100EE6F9F /* facebook_share_saved.png */; };
 		65F1BEAE173AA13400EE6F9F /* twitter_share_saved@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F1BE8B173AA13400EE6F9F /* twitter_share_saved@2x.png */; };
 		65F41C8B173BDC03000BA8CB /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F41C8A173BDC02000BA8CB /* libxml2.2.dylib */; };
 		E8A7347D1092CFF300661AAD /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8A7347B1092CFF300661AAD /* ShareViewController.m */; };
@@ -1285,6 +1291,7 @@
 		202C637E17EA06E800CB9A75 /* ricon92.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ricon92.png; path = icons/ricon92.png; sourceTree = "<group>"; };
 		202C638017EA06E800CB9A75 /* ricon93.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ricon93.png; path = icons/ricon93.png; sourceTree = "<group>"; };
 		202C638217EA06E800CB9A75 /* ricon94.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ricon94.png; path = icons/ricon94.png; sourceTree = "<group>"; };
+		202D78131962BAAE00D54F3B /* facebook_share_saved@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook_share_saved@2x.png"; sourceTree = "<group>"; };
 		202F48B918F28A60000B62DB /* CustomAssets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomAssets.h; sourceTree = "<group>"; };
 		202F48BA18F28A60000B62DB /* CustomAssets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAssets.m; sourceTree = "<group>"; };
 		202F992518BCAD1B002A25D9 /* FlyerlyFacebookFriends.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlyerlyFacebookFriends.h; sourceTree = "<group>"; };
@@ -1306,6 +1313,13 @@
 		204635611895E4AF00A94C42 /* Flyer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = Flyer.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		204635631895F90000A94C42 /* FlyerImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlyerImageView.h; sourceTree = "<group>"; };
 		204635641895F90000A94C42 /* FlyerImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlyerImageView.m; sourceTree = "<group>"; };
+		20563E0B1962D64200C206FD /* CutiveMono-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "CutiveMono-Regular.ttf"; path = "Data/fonts/CutiveMono-Regular.ttf"; sourceTree = "<group>"; };
+		20563E0D1962D64200C206FD /* Lora-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lora-Italic.ttf"; path = "Data/fonts/Lora-Italic.ttf"; sourceTree = "<group>"; };
+		20563E0E1962D64200C206FD /* Monoton-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Monoton-Regular.ttf"; path = "Data/fonts/Monoton-Regular.ttf"; sourceTree = "<group>"; };
+		20563E0F1962D64200C206FD /* MontserratAlternates-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "MontserratAlternates-Regular.ttf"; path = "Data/fonts/MontserratAlternates-Regular.ttf"; sourceTree = "<group>"; };
+		20563E101962D64200C206FD /* Raleway-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Raleway-Light.ttf"; path = "Data/fonts/Raleway-Light.ttf"; sourceTree = "<group>"; };
+		20563E111962D64200C206FD /* Sancreek-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Sancreek-Regular.ttf"; path = "Data/fonts/Sancreek-Regular.ttf"; sourceTree = "<group>"; };
+		20563E121962D64200C206FD /* YanoneKaffeesatz-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "YanoneKaffeesatz-Light.ttf"; path = "Data/fonts/YanoneKaffeesatz-Light.ttf"; sourceTree = "<group>"; };
 		2060689A1924CC6100AB5230 /* Backgrounds.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Backgrounds.xib; sourceTree = "<group>"; };
 		2060689C1924CCE400AB5230 /* Backgrounds-iPhone4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Backgrounds-iPhone4.xib"; sourceTree = "<group>"; };
 		206068A01924EE7500AB5230 /* Borders.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Borders.xib; sourceTree = "<group>"; };
@@ -1743,7 +1757,6 @@
 		247858DE1948788C0062F1E4 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Regular.ttf"; path = "Data/fonts/Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		247858E4194878CE0062F1E4 /* Seagle-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Seagle-Regular.otf"; path = "Data/fonts/Seagle-Regular.otf"; sourceTree = "<group>"; };
 		247858E5194878CE0062F1E4 /* Sintony-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Sintony-Regular.otf"; path = "Data/fonts/Sintony-Regular.otf"; sourceTree = "<group>"; };
-		247858E6194878CE0062F1E4 /* Sofia-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Sofia-Regular.otf"; path = "Data/fonts/Sofia-Regular.otf"; sourceTree = "<group>"; };
 		247858E7194878CE0062F1E4 /* SourceSansPro-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SourceSansPro-Regular.otf"; path = "Data/fonts/SourceSansPro-Regular.otf"; sourceTree = "<group>"; };
 		247858E8194878CE0062F1E4 /* telegrafico-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "telegrafico-Regular.ttf"; path = "Data/fonts/telegrafico-Regular.ttf"; sourceTree = "<group>"; };
 		247858E9194878CE0062F1E4 /* Track-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Track-Regular.ttf"; path = "Data/fonts/Track-Regular.ttf"; sourceTree = "<group>"; };
@@ -1753,6 +1766,7 @@
 		2478E5EA192C8C0A0081B31B /* FreeFeatureCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreeFeatureCell.h; sourceTree = "<group>"; };
 		2478E5EB192C8C0A0081B31B /* FreeFeatureCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreeFeatureCell.m; sourceTree = "<group>"; };
 		2478E5EC192C8C0A0081B31B /* FreeFeatureCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FreeFeatureCell.xib; sourceTree = "<group>"; };
+		2479A29B19658ABF00B57F86 /* Sofia-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Sofia-Regular.otf"; path = "Data/fonts/Sofia-Regular.otf"; sourceTree = "<group>"; };
 		2479BC631941FB8400FF5FF5 /* TextBorders-iPhone4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "TextBorders-iPhone4.xib"; sourceTree = "<group>"; };
 		2479BC661941FB9400FF5FF5 /* TextBorders.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextBorders.xib; sourceTree = "<group>"; };
 		24803522192F3207009403F7 /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraViewController.m; sourceTree = "<group>"; };
@@ -2210,7 +2224,6 @@
 		65A464E21726CBA2002C32FB /* Signika-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Signika-Semibold.otf"; path = "Data/fonts/Signika-Semibold.otf"; sourceTree = "<group>"; };
 		65A464E31726CBA2002C32FB /* StMarie-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "StMarie-Thin.otf"; path = "Data/fonts/StMarie-Thin.otf"; sourceTree = "<group>"; };
 		65A464F61726D703002C32FB /* Anjelika Rose.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Anjelika Rose.ttf"; path = "Data/fonts/Anjelika Rose.ttf"; sourceTree = "<group>"; };
-		65A464F71726D703002C32FB /* danielbk.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = danielbk.ttf; path = Data/fonts/danielbk.ttf; sourceTree = "<group>"; };
 		65A464F81726D703002C32FB /* HelveticaRoundedLTStd-BdCn_0.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "HelveticaRoundedLTStd-BdCn_0.otf"; path = "Data/fonts/HelveticaRoundedLTStd-BdCn_0.otf"; sourceTree = "<group>"; };
 		65A464F91726D703002C32FB /* ITC Avant Garde CE Gothic Book.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ITC Avant Garde CE Gothic Book.ttf"; path = "Data/fonts/ITC Avant Garde CE Gothic Book.ttf"; sourceTree = "<group>"; };
 		65A464FA1726D703002C32FB /* segoeui.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = segoeui.ttf; path = Data/fonts/segoeui.ttf; sourceTree = "<group>"; };
@@ -2292,7 +2305,6 @@
 		65E26156171C2EC400C485B5 /* InviteFriendsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = InviteFriendsController.xib; path = ../InviteFriendsController.xib; sourceTree = "<group>"; };
 		65E2615B171C2FA800C485B5 /* InviteFriendsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteFriendsController.h; sourceTree = "<group>"; };
 		65E2615C171C2FA800C485B5 /* InviteFriendsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteFriendsController.m; sourceTree = "<group>"; };
-		65F1BE74173AA12100EE6F9F /* facebook_share_saved.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook_share_saved.png; sourceTree = "<group>"; };
 		65F1BE8B173AA13400EE6F9F /* twitter_share_saved@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter_share_saved@2x.png"; sourceTree = "<group>"; };
 		65F41C02173BCB2E000BA8CB /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		65F41C8A173BDC02000BA8CB /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
@@ -2390,6 +2402,7 @@
 		0DF3A361108DF47400D6C887 /* ImageLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				202D78131962BAAE00D54F3B /* facebook_share_saved@2x.png */,
 				20449F92196181A6007BE4BF /* discount.png */,
 				2459E8AF196130810072A56C /* greenButton.png */,
 				2018AF8E195AF14C00188F8E /* image_icon_selected@2x.png */,
@@ -2564,7 +2577,6 @@
 				2092FFCA184E00BF0034C4F6 /* flyerlylogo@2x.png */,
 				0FD887001786C3810059BC54 /* current_location@2x.png */,
 				65C7A5271721B78D003F1A84 /* Default-568h@2x.png */,
-				65F1BE74173AA12100EE6F9F /* facebook_share_saved.png */,
 				6560C1C31727FAF9005BE8DD /* grids.png */,
 				0FE6F9B51770763200C726F7 /* pinned_flyer2@2x.png */,
 				0F80C3A31785B41300D36795 /* twitter_login@2x.png */,
@@ -3956,6 +3968,14 @@
 		6513C1AB1716FE0F00355FC3 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				2479A29B19658ABF00B57F86 /* Sofia-Regular.otf */,
+				20563E0B1962D64200C206FD /* CutiveMono-Regular.ttf */,
+				20563E0D1962D64200C206FD /* Lora-Italic.ttf */,
+				20563E0E1962D64200C206FD /* Monoton-Regular.ttf */,
+				20563E0F1962D64200C206FD /* MontserratAlternates-Regular.ttf */,
+				20563E101962D64200C206FD /* Raleway-Light.ttf */,
+				20563E111962D64200C206FD /* Sancreek-Regular.ttf */,
+				20563E121962D64200C206FD /* YanoneKaffeesatz-Light.ttf */,
 				20F7371B195D985E00B24C1D /* Kankin.ttf */,
 				20F73719195D882000B24C1D /* Junction.ttf */,
 				20F73717195D4AD800B24C1D /* Oswald-Regular.ttf */,
@@ -3978,7 +3998,6 @@
 				24785895194874B70062F1E4 /* circula-medium.otf */,
 				24785896194874B70062F1E4 /* CODE Light-Regular.otf */,
 				65A464D61726CBA2002C32FB /* Comfortaa_Bold.ttf */,
-				65A464F71726D703002C32FB /* danielbk.ttf */,
 				245D48E1193DEF9000E670E6 /* Entypo-Social.otf */,
 				248A3624193EF44D0005FCAD /* Entypo.otf */,
 				24785897194874B70062F1E4 /* Exo-Regular.otf */,
@@ -4032,7 +4051,6 @@
 				65A464E11726CBA2002C32FB /* Signika-Regular.otf */,
 				65A464E21726CBA2002C32FB /* Signika-Semibold.otf */,
 				247858E5194878CE0062F1E4 /* Sintony-Regular.otf */,
-				247858E6194878CE0062F1E4 /* Sofia-Regular.otf */,
 				247858E7194878CE0062F1E4 /* SourceSansPro-Regular.otf */,
 				65A464E31726CBA2002C32FB /* StMarie-Thin.otf */,
 				6501CAEF173242FC00A89E59 /* Swiss_721_Black_Extended_BT.ttf */,
@@ -4301,6 +4319,7 @@
 				248A3631193F22CE0005FCAD /* color_tab_selected@2x.png in Resources */,
 				30D58D5510FB1BF800E0C7E8 /* Template26.jpg in Resources */,
 				30D58D5610FB1BF800E0C7E8 /* Template27.jpg in Resources */,
+				20563E151962D64200C206FD /* Lora-Italic.ttf in Resources */,
 				242184DC194B4AEC00FDDA97 /* gymnastics-rhythmic-icon.png in Resources */,
 				30D58D5710FB1BF800E0C7E8 /* Template28.jpg in Resources */,
 				30D58D5810FB1BF800E0C7E8 /* Template29.jpg in Resources */,
@@ -4330,6 +4349,7 @@
 				30D58D6510FB1BF800E0C7E8 /* Template40.jpg in Resources */,
 				249F1F97193F55D50072835E /* addbg_library_selected@2x.png in Resources */,
 				30D58D6610FB1BF800E0C7E8 /* Template41.jpg in Resources */,
+				20563E171962D64200C206FD /* MontserratAlternates-Regular.ttf in Resources */,
 				30D58D6710FB1BF800E0C7E8 /* Template42.jpg in Resources */,
 				249F2027193F562C0072835E /* inAppPurchaseViewBg-iPhone4@2x.png in Resources */,
 				30D58D6810FB1BF800E0C7E8 /* Template43.jpg in Resources */,
@@ -4441,6 +4461,7 @@
 				247858E31948788C0062F1E4 /* Roboto-Regular.ttf in Resources */,
 				65A464E71726CBA2002C32FB /* BlueNoon.ttf in Resources */,
 				249F2046193F562C0072835E /* SettingcellBack@2x.png in Resources */,
+				20563E191962D64200C206FD /* Sancreek-Regular.ttf in Resources */,
 				65A464E81726CBA2002C32FB /* Comfortaa_Bold.ttf in Resources */,
 				2018AF8F195AF14C00188F8E /* image_icon_selected@2x.png in Resources */,
 				65A464E91726CBA2002C32FB /* GoodDog.otf in Resources */,
@@ -4482,7 +4503,6 @@
 				65A464FB1726D703002C32FB /* Anjelika Rose.ttf in Resources */,
 				2421847B194B4AEC00FDDA97 /* emoticon108@2x.png in Resources */,
 				24218505194B4AEC00FDDA97 /* taekwondo-icon.png in Resources */,
-				65A464FC1726D703002C32FB /* danielbk.ttf in Resources */,
 				242184AA194B4AEC00FDDA97 /* emoticon156@2x.png in Resources */,
 				65A464FD1726D703002C32FB /* HelveticaRoundedLTStd-BdCn_0.otf in Resources */,
 				249F2056193F562C0072835E /* text_edit_selected@2x.png in Resources */,
@@ -4523,7 +4543,6 @@
 				4986857718B50657002113E4 /* CustomAssetsGroupView.xib in Resources */,
 				2478587F19485BAC0062F1E4 /* Fonts.plist in Resources */,
 				246EF527193C515D004539B2 /* emoticon70@2x.png in Resources */,
-				65F1BE97173AA13400EE6F9F /* facebook_share_saved.png in Resources */,
 				249F1F9D193F55D50072835E /* app_store@2x.png in Resources */,
 				65F1BEAE173AA13400EE6F9F /* twitter_share_saved@2x.png in Resources */,
 				65C1A4181742516D00947D5E /* Template0@2x.jpg in Resources */,
@@ -4616,6 +4635,7 @@
 				242184C6194B4AEC00FDDA97 /* equestrian-dressage-icon.png in Resources */,
 				249F2029193F562C0072835E /* instagram_share_selected@2x.png in Resources */,
 				247858B2194875D20062F1E4 /* Homestead-Regular.ttf in Resources */,
+				20563E181962D64200C206FD /* Raleway-Light.ttf in Resources */,
 				246EF514193C515D004539B2 /* emoticon53@2x.png in Resources */,
 				65C1A4431742516D00947D5E /* Template43@2x.jpg in Resources */,
 				65C1A4441742516D00947D5E /* Template44@2x.jpg in Resources */,
@@ -4660,6 +4680,7 @@
 				24218511194B4AEC00FDDA97 /* weightlifting-icon.png in Resources */,
 				242184B6194B4AEC00FDDA97 /* emoticon168@2x.png in Resources */,
 				247858C61948764D0062F1E4 /* Lavanderia-Regular.otf in Resources */,
+				20563E131962D64200C206FD /* CutiveMono-Regular.ttf in Resources */,
 				249F1FAE193F55D50072835E /* close_button@2x.png in Resources */,
 				65C1A4551742516D00947D5E /* Template61@2x.jpg in Resources */,
 				65C1A4561742516D00947D5E /* Template62@2x.jpg in Resources */,
@@ -4679,6 +4700,7 @@
 				0FEF2D9A174E65B100FDD8C9 /* HelpController.xib in Resources */,
 				242184E0194B4AEC00FDDA97 /* Hockey-icon.png in Resources */,
 				246EF549193C5AE0004539B2 /* Emoticons-iPhone4.xib in Resources */,
+				20563E161962D64200C206FD /* Monoton-Regular.ttf in Resources */,
 				247858B4194875D20062F1E4 /* Jalane_light-Regular.ttf in Resources */,
 				20714DF1187F167A000D6838 /* Camerabottom.png in Resources */,
 				20FA7E731872AAF50057C3F3 /* CameraViewController.xib in Resources */,
@@ -4751,6 +4773,7 @@
 				0F8007E8175378F0000FF7FA /* ricon16.png in Resources */,
 				0F8007EA175378F0000FF7FA /* ricon17.png in Resources */,
 				0F8007EC175378F0000FF7FA /* ricon18.png in Resources */,
+				202D78141962BAAE00D54F3B /* facebook_share_saved@2x.png in Resources */,
 				249F1FD1193F55E90072835E /* fb_setting_selected@2x.png in Resources */,
 				0F8007EE175378F0000FF7FA /* ricon19.png in Resources */,
 				242184E6194B4AEC00FDDA97 /* mask-icon.png in Resources */,
@@ -4838,6 +4861,7 @@
 				202C639217EA06E800CB9A75 /* ricon29.png in Resources */,
 				24218501194B4AEC00FDDA97 /* Surfing-icon.png in Resources */,
 				202C639417EA06E800CB9A75 /* ricon30.png in Resources */,
+				2479A29C19658ABF00B57F86 /* Sofia-Regular.otf in Resources */,
 				242184BA194B4AEC00FDDA97 /* emoticon172@2x.png in Resources */,
 				4986857118B4FFC7002113E4 /* LibraryViewController.xib in Resources */,
 				202C639617EA06E800CB9A75 /* ricon31.png in Resources */,
@@ -4968,7 +4992,6 @@
 				242184A8194B4AEC00FDDA97 /* emoticon154@2x.png in Resources */,
 				24218493194B4AEC00FDDA97 /* emoticon132@2x.png in Resources */,
 				202C641417EA06E800CB9A75 /* ricon94.png in Resources */,
-				247858EC194878CE0062F1E4 /* Sofia-Regular.otf in Resources */,
 				249F1F8E193F55D50072835E /* 07_roll_selected@2x.png in Resources */,
 				249F2061193F562C0072835E /* youtube_share@2x.png in Resources */,
 				246EF4F0193C515D004539B2 /* emoticon20@2x.png in Resources */,
@@ -5002,6 +5025,7 @@
 				249F1FAD193F55D50072835E /* clip_setting@2x.png in Resources */,
 				249F1FC4193F55E90072835E /* dfcontact@2x.jpg in Resources */,
 				246EF52E193C515D004539B2 /* emoticon77@2x.png in Resources */,
+				20563E1A1962D64200C206FD /* YanoneKaffeesatz-Light.ttf in Resources */,
 				249F1F9B193F55D50072835E /* afterupdatescreen_bg@2x.png in Resources */,
 				490FBB16192B4E0500AA3C18 /* AssetsGroupViewController.xib in Resources */,
 				2421845A194B4AEC00FDDA97 /* badminton-icon.png in Resources */,

@@ -224,27 +224,49 @@ NSArray *coloursArray;
                       [UIColor blueColor],
                       [UIColor greenColor],
                       [UIColor blackColor],
-                      [UIColor colorWithRed:253.0/255.0 green:191.0/255.0 blue:38.0/224.0 alpha:1],
+                      [UIColor colorWithRed:164.0/255.0 green:166.0/255.0 blue:131.0/255.0 alpha:1],
                       [UIColor colorWithWhite:1.0f alpha:1.0f],
                       [UIColor grayColor],
                       [UIColor magentaColor],
                       [UIColor yellowColor],
-                      [UIColor colorWithRed:163.0/255.0 green:25.0/255.0 blue:2.0/224.0 alpha:1],
-                      [UIColor colorWithRed:3.0/255.0 green:15.0/255.0 blue:41.0/224.0 alpha:1],
+                      [UIColor colorWithRed:0.0/255.0 green:77.0/255.0 blue:92.0/255.0 alpha:1],
+                      [UIColor colorWithRed:219.0/255.0 green:105.0/255.0 blue:126.0/255.0 alpha:1],
                       [UIColor purpleColor],
-                      [UIColor colorWithRed:66.0/255.0 green:2.0/255.0 blue:2.0/224.0 alpha:1],
+                      [UIColor colorWithRed:201.0/255.0 green:88.0/255.0 blue:69.0/255.0 alpha:1],
                       [UIColor orangeColor],
-                      [UIColor colorWithRed:98.0/255.0 green:74.0/255.0 blue:9.0/224.0 alpha:1],
-                      [UIColor colorWithRed:80.0/255.0 green:7.0/255.0 blue:1.0/224.0 alpha:1],
-                      [UIColor colorWithRed:150.0/255.0 green:150.0/255.0 blue:97.0/224.0 alpha:1],
-                      [UIColor colorWithRed:111.0/255.0 green:168.0/255.0 blue:100.0/224.0 alpha:1],
+                      [UIColor colorWithRed:139.0/255.0 green:181.0/255.0 blue:227.0/255.0 alpha:1],
+                      [UIColor colorWithRed:22.0/255.0 green:50.0/255.0 blue:129.0/255.0 alpha:1],
+                      [UIColor colorWithRed:229.0/255.0 green:228.0/255.0 blue:47.0/255.0 alpha:1],
+                      [UIColor colorWithRed:226.0/255.0 green:236.0/255.0 blue:48.0/255.0 alpha:1],
                       [UIColor cyanColor],
-                      [UIColor colorWithRed:17.0/255.0 green:69.0/255.0 blue:70.0/224.0 alpha:1],
-                      [UIColor colorWithRed:173.0/255.0 green:127.0/255.0 blue:251.0/224.0 alpha:1], nil];
+                      [UIColor colorWithRed:38.0/255.0 green:72.0/255.0 blue:18.0/255.0 alpha:1],
+                      [UIColor colorWithRed:73.0/255.0 green:69.0/255.0 blue:215.0/255.0 alpha:1], nil];
         
         
         // Create border colors array
-        borderArray = 	[[NSArray  alloc] initWithObjects: [UIColor blackColor], [UIColor grayColor], [UIColor darkGrayColor], [UIColor blueColor], [UIColor purpleColor], [UIColor colorWithRed:115.0/255.0 green:134.0/255.0 blue:144.0/255.0 alpha:1], [UIColor orangeColor], [UIColor greenColor], [UIColor redColor], [UIColor colorWithRed:14.0/255.0 green:95.0/255.0 blue:111.0/255.0 alpha:1], [UIColor colorWithRed:180.0/255.0 green:180.0/255.0 blue:149.0/255.0 alpha:1], [UIColor colorWithRed:228.0/255.0 green:128.0/255.0 blue:144.0/255.0 alpha:1], [UIColor colorWithRed:213.0/255.0 green:110.0/255.0 blue:86.0/255.0 alpha:1],[UIColor colorWithRed:156.0/255.0 green:195.0/255.0 blue:233.0/255.0 alpha:1],[UIColor colorWithRed:27.0/255.0 green:70.0/255.0 blue:148.0/255.0 alpha:1],[UIColor colorWithRed:234.0/255.0 green:230.0/255.0 blue:51.0/255.0 alpha:1],[UIColor cyanColor], [UIColor colorWithRed:232.0/255.0 green:236.0/255.0 blue:51.0/224.0 alpha:1],[UIColor magentaColor],[UIColor colorWithRed:57.0/255.0 green:87.0/255.0 blue:13.0/224.0 alpha:1], [UIColor colorWithRed:93.0/255.0 green:97.0/255.0 blue:196.0/224.0 alpha:1],nil];
+        borderArray = 	[[NSArray  alloc] initWithObjects:
+                         [UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:1], // black
+                         [UIColor colorWithRed:128.0/255.0 green:128.0/255.0 blue:128.0/255.0 alpha:1], // grayColor
+                         [UIColor colorWithRed:67.0/255.0 green:67.0/255.0 blue:67.0/255.0 alpha:1], // darkGrayColor
+                         [UIColor blueColor],
+                         [UIColor purpleColor],
+                         [UIColor colorWithRed:95.0/255.0 green:115.0/255.0 blue:125.0/255.0 alpha:1],
+                         [UIColor orangeColor],
+                         [UIColor greenColor],
+                         [UIColor redColor],
+                         [UIColor colorWithRed:0.0/255.0 green:77.0/255.0 blue:92.0/255.0 alpha:1],
+                         [UIColor colorWithRed:164.0/255.0 green:166.0/255.0 blue:131.0/255.0 alpha:1],
+                         [UIColor colorWithRed:219.0/255.0 green:105.0/255.0 blue:126.0/255.0 alpha:1],
+                         [UIColor colorWithRed:201.0/255.0 green:88.0/255.0 blue:69.0/255.0 alpha:1],
+                         [UIColor colorWithRed:139.0/255.0 green:181.0/255.0 blue:227.0/255.0 alpha:1],
+                         [UIColor colorWithRed:22.0/255.0 green:50.0/255.0 blue:129.0/255.0 alpha:1],
+                         [UIColor colorWithRed:229.0/255.0 green:228.0/255.0 blue:47.0/255.0 alpha:1],
+                         [UIColor cyanColor],
+                         [UIColor colorWithRed:226.0/255.0 green:236.0/255.0 blue:48.0/255.0 alpha:1],
+                         [UIColor magentaColor],
+                         [UIColor colorWithRed:38.0/255.0 green:72.0/255.0 blue:18.0/255.0 alpha:1],
+                         [UIColor colorWithRed:73.0/255.0 green:69.0/255.0 blue:215.0/255.0 alpha:1],
+                         nil];
         
         // HERE WE CREATE FLYERLY ALBUM ON DEVICE
         if(![[NSUserDefaults standardUserDefaults] stringForKey:@"FlyerlyAlbum"]){
@@ -916,7 +938,7 @@ NSArray *coloursArray;
         }
         [clipartsView addSubview:font];
     }
-    clipartsView.size = CGSizeMake(320, curYLoc);
+    clipartsView.size = CGSizeMake(320, curYLoc + (heightValue + 7) );
 
 }
 
@@ -1510,52 +1532,25 @@ NSArray *coloursArray;
  */
 -(IBAction)selectFontBorder:(id)sender
 {
-    NSArray *bodersArray = textBordersView.subviews;
-    int count = (bodersArray.count);
-    
-    UIView *tempView;
-    
-    int  i=1;
 	UIButton *view = sender;
     
-	for (int index = 0; index < count; index++ )
-    {
-        tempView  = [bodersArray objectAtIndex:index];
-        
-        if ( (index % 3) == 0)
-        {
-            tempView  = [bodersArray objectAtIndex:index];
-            
-            // Add border to Un-select layer thumbnail
-            /*CALayer * l = [tempView layer];
-            [l setBorderWidth:1];
-            [l setCornerRadius:0];
-            UIColor * c = [UIColor clearColor];
-            [l setBorderColor:c.CGColor];*/
-            i++;
-            
-        }
-        
+	for(UIView *tempView  in [textBordersView subviews])
+	{
         if(tempView == view)
         {
-            UIColor *borderColor = borderArray[i-2];
-            [flyer setFlyerTextBorderColor:currentLayer Color:borderColor ];
+            UIColor *borderColor = borderArray[ (((tempView.tag)/3) - 1) ];
+            
+            [flyer setFlyerTextBorderColor:currentLayer Color:borderColor];
+            
             //Here we call Render Layer on View
             [flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
             
-            // Add border to selected layer thumbnail
-            tempView = [bodersArray objectAtIndex:(index-2)];
+            //Handling Select Unselect
+            [self setSelectedItem:FLYER_LAYER_TEXT inView:textBordersView ofLayerAttribute:LAYER_ATTRIBUTE_BORDER];
             
-            [self setSelectedItem:FLYER_LAYER_TEXT inView:clipartsView ofLayerAttribute:LAYER_ATTRIBUTE_BORDER];
-            
-            /*CALayer * l = [tempView layer];
-            [l setBorderWidth:5.0];
-            [l setCornerRadius:8];
-            UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
-            [l setBorderColor:c.CGColor];*/
+            break;
         }
-    
-	}//LOOP
+	}// LOOP
 }
 
 
@@ -1607,7 +1602,7 @@ NSArray *coloursArray;
             [l setCornerRadius:8];
             UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
             [l setBorderColor:c.CGColor];
-        }
+        } 
         
 	}//LOOP
 }
@@ -1653,6 +1648,9 @@ NSArray *coloursArray;
     __weak CreateFlyerController *weakSelf = self;
 
     [nbuGallary setOnImageTaken:^(UIImage *img) {
+        
+        //Remove tag of selected background
+        [flyer setImageTag:@"Template" Tag:[NSString stringWithFormat:@"%d",-1]];
         
         [uiBusy stopAnimating];
         [uiBusy removeFromSuperview];
@@ -1780,6 +1778,9 @@ NSArray *coloursArray;
     // Callback once image is selected.
     [nbuCamera setOnImageTaken:^(UIImage *img) {
         
+        //Remove tag of selected background
+        [flyer setImageTag:@"Template" Tag:[NSString stringWithFormat:@"%d",-1]];
+        
         [uiBusy stopAnimating];
         [uiBusy removeFromSuperview];
         dispatch_async( dispatch_get_main_queue(), ^{
@@ -1816,6 +1817,10 @@ NSArray *coloursArray;
 
     // Call back for when video is selected.
     [nbuCamera setOnVideoFinished:^(NSURL *recvUrl, CGRect cropRect, CGFloat scale ) {
+        
+        
+        //Remove tag of selected background
+        [flyer setImageTag:@"Template" Tag:[NSString stringWithFormat:@"%d",-1]];
         
         [uiBusy stopAnimating];
         [uiBusy removeFromSuperview];
@@ -2051,6 +2056,9 @@ NSArray *coloursArray;
         signInController.launchController = appDelegate.lauchController;
         
         __weak CreateFlyerController *weakSelf = self;
+        __weak UserPurchases *userPurchases_ = appDelegate.userPurchases;
+        userPurchases_.delegate = self;
+        
         //__weak CreateFlyerController *weakCreateFlyerController = signInController;
         
         signInController.signInCompletion = ^void(void) {
@@ -2058,26 +2066,11 @@ NSArray *coloursArray;
             
             UINavigationController* navigationController = weakSelf.navigationController;
             [navigationController popViewControllerAnimated:NO];
-            //[navigationController popViewController:weakSigninController];
-            //[navigationController popToViewController:weakSelf animated:YES];
+            [userPurchases_ setUserPurcahsesFromParse];
             
             [weakSelf openPanel];
-            //[shareButton sendActionsForControlEvents: UIControlEventTouchUpInside];
-            //=======
-            /*
-            //UINavigationController* navigationController = weakSigninController.navigationController;
-            UINavigationController* navigationController = weakSelf.navigationController;
-            [navigationController popViewControllerAnimated:NO];
-            [weakSignInController.navigationController popViewController:weakSignInController];
-
-            //Render Flyer
-            [weakSelf renderFlyer];
             
-            //[shareButton sendActionsForControlEvents: UIControlEventTouchUpInside];
-            [weakSelf openPanel];
-             */
-            //>>>>>>> tempBranch
-            
+            [weakSelf hideLoadingIndicator];
         };
         
         [self.navigationController pushViewController:signInController animated:YES];
@@ -2806,17 +2799,58 @@ NSArray *coloursArray;
  */
 -(void)deleteLayer:(LayerTileButton *)layerButton overrided:(BOOL)overrided{
     
+    if(layerButton.uid != nil ){
+        //Delete From Master Dictionary
+        [flyer deleteLayer:layerButton.uid];
     
-    //Delete From Master Dictionary
-    [flyer deleteLayer:layerButton.uid];
+        //Delete From View
+        [flyimgView deleteLayer:layerButton.uid];
     
-    //Delete From View
-    [flyimgView deleteLayer:layerButton.uid];
-    
-    NSLog(@"Delete Layer Tag: %d", layerButton.tag);
-    
-    //Set Main View On Screen
-    [self callAddMoreLayers];
+        NSLog(@"Delete Layer Tag: %d", layerButton.tag);
+        
+        //Set Main View On Screen
+        [self callAddMoreLayers];
+        
+    } else {
+        NSLog(@"Deleting background layer");
+        
+        // Make sure we hide the play bar.
+        [playerToolBar setHidden:YES];
+        
+        //Here we Set Flyer Type
+        [flyer setFlyerTypeImage];
+        
+        // Get path of current flyer background and remove it
+        NSString *currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
+        NSString *replaceDirName = @"Template/template.png";
+        NSString *flyerTemplate = [currentpath stringByAppendingPathComponent:replaceDirName];
+        
+        NSError *error;
+        [[NSFileManager defaultManager] removeItemAtPath:flyerTemplate error:&error];
+        if (error) {
+            NSLog(@"%@", error.debugDescription);
+        }
+        
+        // Getting Image Path of default background image
+        NSString *defaultTemplate = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"flyerbundle/flyer.png"];
+        
+        // Copy default template again into flyer as its background has been deleted
+        [[NSFileManager defaultManager] copyItemAtPath:defaultTemplate toPath:flyerTemplate error:&error];
+        
+        if (error) {
+            NSLog(@"%@", error.debugDescription);
+        }
+        
+        //Remove tag of selected background
+        [flyer setImageTag:@"Template" Tag:[NSString stringWithFormat:@"%d",-1]];
+        
+        //Set Main View On Screen
+        [self callAddMoreLayers];
+
+        // Render flyer
+        [self renderFlyer];
+        
+    }
 }
 
 #pragma mark - Delegate for Flyerly ImageView
@@ -3351,6 +3385,8 @@ NSArray *coloursArray;
         textWhiteColor = [textLayer objectForKey:@"textWhitecolor"];
     }
     
+    NSArray *RGB = [textColor componentsSeparatedByString:@","];
+    UIColor *fontColor = [UIColor colorWithRed:[RGB[0] floatValue] green:[RGB[1] floatValue] blue:[RGB[2] floatValue] alpha:1.0];
    
     for (int i = 1; i <=  [colorArray count] ; i++)
     {
@@ -3358,6 +3394,8 @@ NSArray *coloursArray;
         if ([coloursArray[i-1] isKindOfClass:[UIButton class]]) {
             color = (UIButton *) coloursArray[i-1];
         }
+        
+        UIColor* buttonColor = color.backgroundColor;
         
         id colorName = colorArray[(i-1)];
         //Here we Highlight Last Color Selected
@@ -3378,8 +3416,9 @@ NSArray *coloursArray;
             [labelToStore.textColor getWhite:&wht alpha:&alpha];
             twhite = [NSString stringWithFormat:@"%f, %f", wht, alpha];
             
-            if ([textColor isEqualToString:tcolor] && [textWhiteColor isEqualToString:twhite] ) {
-                
+            //if ([textColor isEqualToString:tcolor] && [textWhiteColor isEqualToString:twhite] ) {
+            if ( [Flyer compareColor:buttonColor withColor:fontColor] ) {
+                  
                 tag = [NSString stringWithFormat: @"%d", color.tag];
                 break;
             }
@@ -3396,56 +3435,44 @@ NSArray *coloursArray;
     NSString* tag = nil;
     
     NSMutableDictionary *textLayer;
-    NSString *textColor;
-    NSString *textWhiteColor;
+    NSString *textBorderColor;
+    NSString *textBorderWhiteColor;
     
     //Getting Last Info of Text Layer
     if (![currentLayer isEqualToString:@""]) {
         textLayer = [flyer getLayerFromMaster:currentLayer];
-        textColor = [textLayer objectForKey:@"textbordercolor"];
-        textWhiteColor = [textLayer objectForKey:@"textborderWhite"];
+        textBorderColor = [textLayer objectForKey:@"textbordercolor"];
+        textBorderWhiteColor = [textLayer objectForKey:@"textborderWhite"];
     }
+    
+    NSArray *RGB = [textBorderColor componentsSeparatedByString:@","];
+    UIColor *borderColor = [UIColor colorWithRed:[RGB[0] floatValue] green:[RGB[1] floatValue] blue:[RGB[2] floatValue] alpha:1.0];
     
     NSArray *bodersArray = textBordersView.subviews;
     int count = (bodersArray.count)/3;
     
-    int i=1,j=0;
+    int i=1,j=1;
     for (int index = 0; index < count; index++ )
     {
+        
         
         UIButton *border;
         if ([bodersArray[j] isKindOfClass:[UIButton class]]) {
             border = (UIButton *) bodersArray[j];
         }
-        j = j+2;
+        j = j+3;
         
-        UIColor *colorName = borderArray[(i-1)];
+        UIColor* buttonColor = border.backgroundColor;
         
-        //Here we Highlight Last Color Selected
-        if (textLayer) {
+        if ( [Flyer compareColor:buttonColor withColor:borderColor] ) {
+        //if( [buttonColor isEqual:borderColor] ) {
+            tag = [NSString stringWithFormat: @"%d", ((border.tag) - 1)];
+            break;
             
-            NSString *tcolor;
-            NSString *twhite;
-            CGFloat red = 0.0, green = 0.0, blue = 0.0, alpha = 0.0,wht = 0.0;
-            
-            UILabel *labelToStore = [[UILabel alloc]init];
-            labelToStore.textColor = colorName;
-            
-            //Getting RGB Color Code
-            [labelToStore.textColor getRed:&red green:&green blue:&blue alpha:&alpha];
-            
-            tcolor = [NSString stringWithFormat:@"%f, %f, %f", red, green, blue];
-            
-            [labelToStore.textColor getWhite:&wht alpha:&alpha];
-            twhite = [NSString stringWithFormat:@"%f, %f", wht, alpha];
-            
-            if ([textColor isEqualToString:tcolor] && [textWhiteColor isEqualToString:twhite] ) {
-                
-                tag = [NSString stringWithFormat: @"%d", border.tag];
-                break;
-            }
-            i++;
         }
+        
+        i++;
+    
     }// Loop
     
     return tag;
@@ -4075,6 +4102,18 @@ NSArray *coloursArray;
 	{
         currentLayer = nil;
         
+        NSMutableDictionary *templateDictionary = [flyer getLayerFromMaster:@"Template"];
+        NSInteger *backgroundImageTag = [[templateDictionary objectForKey:@"imageTag"] intValue];
+        
+        [layerScrollView setContentSize:CGSizeMake(backgroundsView.frame.size.width, backgroundsView.frame.size.height)];
+        
+        if ( backgroundImageTag ) {
+            [backgroundsView highlightResource:backgroundImageTag];
+            UIButton *highLight = [backgroundsView getHighlightedResource];
+            
+            [layerScrollView scrollRectToVisible:highLight.frame animated:YES];
+        }
+        
         [backgroundTabButton setSelected:YES];
         //Add right Bar button
         [self addDonetoRightBarBotton];
@@ -4361,7 +4400,11 @@ NSArray *coloursArray;
         
     }else {
         
-        [self presentModalViewController:inappviewcontroller animated:YES];
+        if ( [sharePanel isHidden] ) {
+            [self presentModalViewController:inappviewcontroller animated:YES];
+        }
+       
+        
     }
     
 }
