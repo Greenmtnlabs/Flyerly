@@ -193,23 +193,29 @@ NSMutableArray *productArray;
  * Here we Open InAppPurchase Panel
  */
 -(void)openPanel {
-    
-    if(IS_IPHONE_5){
-        inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
-    }else {
-        inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController-iPhone4" bundle:nil];
-    }
-    [self presentModalViewController:inappviewcontroller animated:YES];
-    if ( productArray.count == 0 ){
-        [inappviewcontroller requestProduct];
-    }
-    if( productArray.count != 0 ) {
+    if ([FlyerlySingleton connected]) {
+        if(IS_IPHONE_5){
+            inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
+        }else {
+            inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController-iPhone4" bundle:nil];
+        }
+        [self presentModalViewController:inappviewcontroller animated:YES];
+        if ( productArray.count == 0 ){
+            [inappviewcontroller requestProduct];
+        }
+        if( productArray.count != 0 ) {
+            
+            //[inappviewcontroller.contentLoaderIndicatorView stopAnimating];
+            //inappviewcontroller.contentLoaderIndicatorView.hidden = YES;
+        }
         
-        //[inappviewcontroller.contentLoaderIndicatorView stopAnimating];
-        //inappviewcontroller.contentLoaderIndicatorView.hidden = YES;
+        inappviewcontroller.buttondelegate = self;
+    }else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You're not connected to the internet. Please connect and retry." message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        
+        [alert show];
+        
     }
-    
-    inappviewcontroller.buttondelegate = self;
     
 }
 
@@ -264,7 +270,7 @@ NSMutableArray *productArray;
             accountUpdater = [[ProfileViewController alloc]initWithNibName:@"ProfileViewController" bundle:nil];
             [self.navigationController pushViewController:accountUpdater animated:YES];
             
-        }else if(indexPath.row == 3){
+        }else if(indexPath.row == 4){
             
             [ self likeFacebook ];
             
@@ -437,16 +443,23 @@ NSMutableArray *productArray;
  * Here we Like Our App
  */
 -(void)likeFacebook {
-
-    NSURL *url = [NSURL URLWithString:@"fb://profile/500819963306066"];
     
-    if ([[UIApplication sharedApplication] canOpenURL:url]){
-        [[UIApplication sharedApplication] openURL:url];
-    }
-    else {
-        //Open the url as usual
-        url = [NSURL URLWithString:@"https://www.facebook.com/flyerlyapp"];
-        [[UIApplication sharedApplication] openURL:url];
+    if ([FlyerlySingleton connected]) {
+        NSURL *url = [NSURL URLWithString:@"fb://profile/500819963306066"];
+        
+        if ([[UIApplication sharedApplication] canOpenURL:url]){
+            [[UIApplication sharedApplication] openURL:url];
+        }
+        else {
+            //Open the url as usual
+            url = [NSURL URLWithString:@"https://www.facebook.com/flyerlyapp"];
+            [[UIApplication sharedApplication] openURL:url];
+        }
+    }else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You're not connected to the internet. Please connect and retry." message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        
+        [alert show];
+        
     }
 }
 
