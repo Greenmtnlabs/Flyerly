@@ -364,14 +364,18 @@
  */
 -(IBAction)uploadOnYoutube:(id)sender {
     
-    SHKItem *item = [SHKItem filePath:[self.flyer getSharingVideoPath] title:titleView.text];
-    
-    item.tags =[NSArray arrayWithObjects: @"#flyerly", nil];
-    item.text = selectedFlyerDescription;
-    
-    iosSharer = [YouTubeSubClass shareItem:item];
-    
-    iosSharer.shareDelegate = self;
+    if ([FlyerlySingleton connected]) {
+        SHKItem *item = [SHKItem filePath:[self.flyer getSharingVideoPath] title:titleView.text];
+        
+        item.tags =[NSArray arrayWithObjects: @"#flyerly", nil];
+        item.text = selectedFlyerDescription;
+        
+        iosSharer = [YouTubeSubClass shareItem:item];
+        
+        iosSharer.shareDelegate = self;
+    } else {
+        [FlyerlySingleton showNotConnectedAlert];
+    }
     
     
 }
@@ -717,6 +721,7 @@
 
 - (void)sharerCancelledSending:(SHKSharer *)sharer
 {
+    [[SHKActivityIndicator currentIndicator] hideForSharer:sharer];
     iosSharer.shareDelegate = nil;
     iosSharer = nil;
     NSLog(@"Sending cancelled");
