@@ -13,7 +13,10 @@
 @implementation FlyrViewController
 
 NSMutableArray *productArray;
-@synthesize tView,searchTextField,flyerPaths;
+@synthesize tView;
+@synthesize searchTextField;
+@synthesize flyerPaths;
+@synthesize flyer;
 
 #pragma mark  View Methods
 
@@ -40,7 +43,9 @@ NSMutableArray *productArray;
     searchTextField.borderStyle = nil;
     
     lockFlyer = YES;
-
+    
+    // Load the flyers.
+    flyerPaths = [self getFlyersPaths];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -57,19 +62,6 @@ NSMutableArray *productArray;
     
     // Set right bar items
     [self.navigationItem setRightBarButtonItems: [self rightBarItems]];
-    
-    //HERE WE GET FLYERS
-    flyerPaths = [self getFlyersPaths];
-    
-    //HERE WE SET SCROLL VIEW POSITION
-
-    if ( flyerPaths.count > 1 ) {
-
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-        [tView selectRowAtIndexPath:indexPath animated:YES  scrollPosition:UITableViewScrollPositionBottom];
-        
-        [tView reloadData];
-    }
     
     //HERE WE GET USER PURCHASES INFO FROM PARSE
     if(![[NSUserDefaults standardUserDefaults] stringForKey:@"InAppPurchases"]){
@@ -142,7 +134,7 @@ NSMutableArray *productArray;
 	for (int i =0 ; i < [flyerPaths count] ; i++)
 	{
 		
-        Flyer *fly = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:i]];
+        Flyer *fly = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:i] setDirectory:NO];
         
  		sTemp = [fly getFlyerTitle];
         sTemp1 = [fly getFlyerDescription];
@@ -170,7 +162,7 @@ NSMutableArray *productArray;
     NSString *flyPath = [Flyer newFlyerPath];
     
     //Here We set Source for Flyer screen
-    flyer = [[Flyer alloc]initWithPath:flyPath];
+    flyer = [[Flyer alloc]initWithPath:flyPath setDirectory:YES];
     
 	createFlyer = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
     createFlyer.flyerPath = flyPath;
@@ -224,10 +216,6 @@ NSMutableArray *productArray;
     [self.navigationController pushViewController:helpController animated:NO];
 }
 
-- (void) deselect
-{
-	[self.tView deselectRowAtIndexPath:[self.tView indexPathForSelectedRow] animated:YES];
-}
 
 -(NSArray *)rightBarItems{
     
@@ -258,18 +246,9 @@ NSMutableArray *productArray;
  */
 -(NSMutableArray *)getFlyersPaths{
     
-    PFUser *user = [PFUser currentUser];
+    NSMutableArray *sortedList = [ Flyer recentFlyerPreview:0];
     
-    //Getting Home Directory
-	NSString *homeDirectoryPath = NSHomeDirectory();
-	NSString *usernamePath = [homeDirectoryPath stringByAppendingString:[NSString stringWithFormat:@"/Documents/%@/Flyr",[user objectForKey:@"username"]]];
-    
-    NSArray *files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:usernamePath error:nil];
-    
-    NSMutableArray *sortedList = [ Flyer recentFlyerPreview:files.count];
-    
-    for(int i = 0 ; i < [sortedList count];i++)
-    {
+    for(int i = 0 ; i < [sortedList count];i++) {
         
         //Here we remove File Name from Path
         NSString *pathWithoutFileName = [[sortedList objectAtIndex:i]
@@ -313,7 +292,7 @@ NSMutableArray *productArray;
         
         dispatch_async(dispatch_get_main_queue(), ^{
             
-            flyer = [[Flyer alloc] initWithPath:[searchFlyerPaths objectAtIndex:indexPath.row]];
+            flyer = [[Flyer alloc] initWithPath:[searchFlyerPaths objectAtIndex:indexPath.row] setDirectory:NO];
             [cell renderCell:flyer LockStatus:lockFlyer];
             [cell.flyerLock addTarget:self action:@selector(openPanel) forControlEvents:UIControlEventTouchUpInside];
 
@@ -328,7 +307,7 @@ NSMutableArray *productArray;
 
         dispatch_async(dispatch_get_main_queue(), ^{
             
-            flyer = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:indexPath.row]];
+            flyer = [[Flyer alloc] initWithPath:[flyerPaths objectAtIndex:indexPath.row] setDirectory:NO];
             [cell renderCell:flyer LockStatus:lockFlyer];
             [cell.flyerLock addTarget:self action:@selector(openPanel) forControlEvents:UIControlEventTouchUpInside];
             
@@ -343,30 +322,28 @@ NSMutableArray *productArray;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    flyer = [[Flyer alloc]initWithPath:[flyerPaths objectAtIndex:indexPath.row]];
+    flyer = [[Flyer alloc]initWithPath:[flyerPaths objectAtIndex:indexPath.row] setDirectory:YES];
     
     createFlyer = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
     
     // Set CreateFlyer Screen
     createFlyer.flyer = flyer;
     
-    [flyer setRecentFlyer];
-    
     __weak FlyrViewController *weakSelf = self;
     
     //Here we Manage Block for Update
     [createFlyer setOnFlyerBack:^(NSString *nothing) {
         
-        //HERE WE GET FLYERS
-        [weakSelf.flyerPaths removeAllObjects];
+        // Here we setCurrent Flyer is Most Recent Flyer
+        [weakSelf.flyer setRecentFlyer];
+        
+        // HERE WE GET FLYERS
         weakSelf.flyerPaths = [weakSelf getFlyersPaths];
         [weakSelf.tView reloadData];
         
     }];
     
 	[self.navigationController pushViewController:createFlyer animated:YES];
-
-	[self performSelector:@selector(deselect) withObject:nil afterDelay:0.2f];
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {

@@ -29,8 +29,6 @@
     BOOL sheetAlreadyOpen;
     BOOL cancelRequest;
 
-    Flyer *flyer;
-
     SigninController *signInController;
     RegisterController *signUpController;
     ShareViewController *shareviewcontroller;
@@ -45,9 +43,10 @@
 
 
 
-@property(nonatomic,strong) IBOutlet UITableView *tView;
-@property(nonatomic,strong) IBOutlet UITextField *searchTextField;
-@property(nonatomic,strong)NSMutableArray *flyerPaths;
+@property ( nonatomic, strong ) IBOutlet UITableView *tView;
+@property ( nonatomic, strong ) IBOutlet UITextField *searchTextField;
+@property ( nonatomic, strong ) NSMutableArray *flyerPaths;
+@property ( nonatomic, strong ) Flyer *flyer;
 
 
 -(void)goBack;

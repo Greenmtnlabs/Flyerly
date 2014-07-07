@@ -42,7 +42,7 @@ NSMutableArray *productArray;
     NSString *flyPath = [Flyer newFlyerPath];
 
     //Here We set Source for Flyer screen
-    flyer = [[Flyer alloc]initWithPath:flyPath];
+    flyer = [[Flyer alloc]initWithPath:flyPath setDirectory:YES];
 	createFlyer = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
     createFlyer.flyerPath = flyPath;
     createFlyer.flyer = flyer;
@@ -403,7 +403,7 @@ NSMutableArray *productArray;
     }
     
     
-    flyer = [[Flyer alloc]initWithPath:flyPath];
+    flyer = [[Flyer alloc]initWithPath:flyPath setDirectory:YES];
     
     createFlyer = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
     
