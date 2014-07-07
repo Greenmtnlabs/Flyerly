@@ -223,11 +223,10 @@ NSArray *freeFeaturesArray;
                 // Disabling the cellview user interection if user already have valid purchases
                 inAppCell.userInteractionEnabled = NO;
             }
-            
         }
         
         if([[product objectForKey:@"productidentifier"] isEqualToString:@"com.flyerly.AllDesignBundle"]) {
-            [completeDesignBundleButton setTitle:[product objectForKey:@"packageprice"] forState:UIControlStateNormal];
+            [completeDesignBundleButton setTitle:@"Help us grow Flyerly!"];
         }
         
         //Setting the packagename,packageprice,packagedesciption values for cell view
