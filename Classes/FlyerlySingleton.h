@@ -23,5 +23,6 @@
 @property (nonatomic, strong) NSString *gallerComesFromCamera;
 +(FlyerlySingleton *)RetrieveSingleton;
 + (BOOL)connected;
++ (void)showNotConnectedAlert;
 
 @end
