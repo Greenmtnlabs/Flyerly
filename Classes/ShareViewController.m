@@ -208,7 +208,7 @@
         // Set Sms Sharing Status From Social File
         if([MFMessageComposeViewController canSendAttachments])
         {
-            if (![self.flyer isVideoFlyer]) {
+            //if (![self.flyer isVideoFlyer]) {
                
                 status = [flyer getSmsStatus];
                 if([status isEqualToString:@"1"]){
@@ -216,7 +216,7 @@
                 }else {
                     [smsButton setSelected:NO];
                 }
-            }
+            //}
         }
     }
     
@@ -679,7 +679,7 @@
 
     } else if ( [sharer isKindOfClass:[SHKTextMessage class]] == YES ) {
         
-        smsButton.enabled = NO;
+        smsButton.enabled = YES;
         [self.flyer setSmsStatus:1];
         [Flurry logEvent:@"Shared SMS"];
 

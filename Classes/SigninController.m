@@ -226,6 +226,12 @@
                 
                 // Temp on for Testing here
                 FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+                
+                UserPurchases *userPurchases_ = [UserPurchases getInstance];
+                
+                //GET UPDATED USER PUCHASES INFO
+                [userPurchases_ setUserPurcahsesFromParse];
+                
                 appDelegate.lauchController = launchController;
                 [appDelegate fbChangeforNewVersion];
 
@@ -367,6 +373,10 @@
 - (void) onSignInSuccess {
     
     [FlyerUser mergeAnonymousUser];
+    
+    UserPurchases *userPurchases_ = [UserPurchases getInstance];
+
+    [userPurchases_ setUserPurcahsesFromParse];
     
     if (signInCompletion) {
         signInCompletion();

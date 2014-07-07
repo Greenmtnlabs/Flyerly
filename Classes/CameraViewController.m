@@ -44,8 +44,7 @@ NSMutableArray *productArray;
     _mode.hidden = !_videoAllow;
     _mode.selected = YES;
     
-    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-    userPurchases = appDelegate.userPurchases;
+    UserPurchases *userPurchases_ = [UserPurchases getInstance];
    
     if ([[PFUser currentUser] sessionToken].length != 0) {
         
@@ -247,8 +246,7 @@ NSMutableArray *productArray;
     UIButton *shoot = (UIButton *)  self.cameraView.shootButton;
     UIButton *flash = (UIButton *)  self.cameraView.flashButton;
 
-    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-    UserPurchases *userPurchases_ = appDelegate.userPurchases;
+    UserPurchases *userPurchases_ = [UserPurchases getInstance];
     
     if ( self.isVideoFlyer )
         _mode.selected = NO;
@@ -391,7 +389,8 @@ NSMutableArray *productArray;
         signInController.launchController = appDelegate.lauchController;
         
         __weak CameraViewController *cameraViewController = self;
-        __weak UserPurchases *userPurchases_ = appDelegate.userPurchases;
+        UserPurchases *userPurchases_ = [UserPurchases getInstance];
+        
         userPurchases_.delegate = self;
         
         [inappviewcontroller_.presentingViewController dismissViewControllerAnimated:YES completion:nil];
@@ -411,8 +410,7 @@ NSMutableArray *productArray;
 
 - (void) userPurchasesLoaded {
     
-    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-    UserPurchases *userPurchases_ = appDelegate.userPurchases;
+    UserPurchases *userPurchases_ = [UserPurchases getInstance];
     
     if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]  ||
          [userPurchases_ checkKeyExistsInPurchases:@"com.flyerly.UnlockCreateVideoFlyerOption"] ) {
@@ -428,8 +426,8 @@ NSMutableArray *productArray;
 
 - ( void )productSuccesfullyPurchased: (NSString *)productId {
     
-    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-    UserPurchases *userPurchases_ = appDelegate.userPurchases;
+    UserPurchases *userPurchases_ = [UserPurchases getInstance];
+    
     if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
          [userPurchases_ checkKeyExistsInPurchases:@"com.flyerly.UnlockCreateVideoFlyerOption"] ) {
         
@@ -445,8 +443,7 @@ NSMutableArray *productArray;
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"Camerabottom"] forBarMetrics:UIBarMetricsDefault];
     
-    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-    UserPurchases *userPurchases_ = appDelegate.userPurchases;
+    UserPurchases *userPurchases_ = [UserPurchases getInstance];
     
     if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
         [userPurchases_ checkKeyExistsInPurchases:@"com.flyerly.UnlockCreateVideoFlyerOption"] ) {

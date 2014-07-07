@@ -305,8 +305,6 @@ NSMutableArray *productArray;
             
             // Keep a reference to navigation controller as we are going to pop this view controller mid way
             UINavigationController* navigationController = self.navigationController;
-            __weak UserPurchases *userPurchases_ = appDelegate.userPurchases;
-            
             
             signInController.signInCompletion = ^void(void) {
                 
@@ -317,6 +315,7 @@ NSMutableArray *productArray;
                 // This should be done in a better way e.g., reloadData instead of popping it out and pushing a new one
                 MainSettingViewController *mainsettingviewcontroller = [[MainSettingViewController alloc]initWithNibName:@"MainSettingViewController" bundle:nil] ;
                 [navigationController pushViewController:mainsettingviewcontroller animated:YES];
+                UserPurchases *userPurchases_ = [UserPurchases getInstance];
                 [userPurchases_ setUserPurcahsesFromParse];
             };
             
@@ -484,8 +483,8 @@ NSMutableArray *productArray;
 
 - ( void )productSuccesfullyPurchased: (NSString *)productId {
     
-    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-    UserPurchases *userPurchases_ = appDelegate.userPurchases;
+    UserPurchases *userPurchases_ = [UserPurchases getInstance];
+    
     if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
         [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
         
@@ -505,7 +504,8 @@ NSMutableArray *productArray;
         signInController.launchController = appDelegate.lauchController;
         
         __weak MainSettingViewController *mainSettingViewController = self;
-        __weak UserPurchases *userPurchases_ = appDelegate.userPurchases;
+        
+        UserPurchases *userPurchases_ = [UserPurchases getInstance];
         userPurchases_.delegate = self;
         
         [inappviewcontroller_.presentingViewController dismissViewControllerAnimated:YES completion:nil];
@@ -532,8 +532,7 @@ NSMutableArray *productArray;
 
 - (void) userPurchasesLoaded {
     
-    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-    UserPurchases *userPurchases_ = appDelegate.userPurchases;
+    UserPurchases *userPurchases_ = [UserPurchases getInstance];
     
     if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]  ||
          [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {

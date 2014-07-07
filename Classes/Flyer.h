@@ -19,10 +19,11 @@
     NSString *textFile;
     NSString *socialFile;
     NSString *flyerImageFile;
+    BOOL     *_setDirectory;
 }
 
 
--(id)initWithPath:(NSString *)flyPath;
+-(id)initWithPath:(NSString *)flyPath setDirectory:(BOOL)setDirectory;
 
 -(void)loadFlyer :(NSString *)flyPath;
 

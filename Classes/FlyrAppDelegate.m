@@ -21,7 +21,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 @synthesize window;
 @synthesize navigationController;
 @synthesize  lauchController,accountController;
-@synthesize sharingProgressParentView,_persistence,userPurchases;
+@synthesize sharingProgressParentView,_persistence;
 
 
 #pragma mark Application lifecycle
@@ -184,9 +184,6 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     // Bitly configuration
     [[BitlyConfig sharedBitlyConfig] setBitlyLogin:[flyerConfigurator bitLyLogin] bitlyAPIKey:[flyerConfigurator bitLyKey]];
 
-    // here we intializing userpurchases class
-    userPurchases = [[UserPurchases alloc] init];
-    
     //This is For remove Notification
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
     
@@ -229,6 +226,8 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
         
     // Otherwise we have an already logged in user
     } else if ([[NSUserDefaults standardUserDefaults] stringForKey:@"User"] != nil ){
+        
+        
         
         // If user has already updated to 4.0, the flow is normal
         if([[NSUserDefaults standardUserDefaults] stringForKey:@"UpdatedVersion"]){

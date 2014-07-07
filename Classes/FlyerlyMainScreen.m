@@ -1,4 +1,5 @@
 
+
 //
 //  Created by Riksof Pvt. Ltd. on 22/Jan/2014.
 //
@@ -41,7 +42,7 @@ NSMutableArray *productArray;
     NSString *flyPath = [Flyer newFlyerPath];
 
     //Here We set Source for Flyer screen
-    flyer = [[Flyer alloc]initWithPath:flyPath];
+    flyer = [[Flyer alloc]initWithPath:flyPath setDirectory:YES];
 	createFlyer = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
     createFlyer.flyerPath = flyPath;
     createFlyer.flyer = flyer;
@@ -211,7 +212,20 @@ NSMutableArray *productArray;
     
     [self.navigationItem setHidesBackButton:YES];
     
-
+    
+    //Checking if the user is valid or anonymus
+    if ([[PFUser currentUser] sessionToken]) {
+        
+        UserPurchases *userPurchases_ = [UserPurchases getInstance];
+        
+        //GET UPDATED USER PUCHASES INFO
+        [userPurchases_ setUserPurcahsesFromParse];
+        
+    } else {
+        NSLog(@"Anonymous, User is NOT authenticated.");
+    }
+    
+    
 }
 
 /*
@@ -309,11 +323,10 @@ NSMutableArray *productArray;
     //Checking if the user is valid or anonymus
     if ([[PFUser currentUser] sessionToken]) {
         
-        FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-        userPurchases = appDelegate.userPurchases;
+        UserPurchases *userPurchases_ = [UserPurchases getInstance];
         
         //GET UPDATED USER PUCHASES INFO
-        [userPurchases setUserPurcahsesFromParse];
+        [userPurchases_ setUserPurcahsesFromParse];
         
     } else {
         NSLog(@"Anonymous, User is NOT authenticated.");
@@ -332,7 +345,8 @@ NSMutableArray *productArray;
         signInController.launchController = appDelegate.lauchController;
         
         __weak FlyerlyMainScreen *flyerlyMainScreen = self;
-        __weak UserPurchases *userPurchases_ = appDelegate.userPurchases;
+        
+        UserPurchases *userPurchases_ = [UserPurchases getInstance];
         userPurchases_.delegate = self;
         
         [inappviewcontroller_.presentingViewController dismissViewControllerAnimated:YES completion:nil];
@@ -356,8 +370,7 @@ NSMutableArray *productArray;
 
 - (void) userPurchasesLoaded {
     
-    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-    UserPurchases *userPurchases_ = appDelegate.userPurchases;
+    UserPurchases *userPurchases_ = [UserPurchases getInstance];
     
     if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]  ||
          [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
@@ -390,7 +403,7 @@ NSMutableArray *productArray;
     }
     
     
-    flyer = [[Flyer alloc]initWithPath:flyPath];
+    flyer = [[Flyer alloc]initWithPath:flyPath setDirectory:YES];
     
     createFlyer = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
     
@@ -450,8 +463,8 @@ NSMutableArray *productArray;
 
 - ( void )productSuccesfullyPurchased: (NSString *)productId {
     
-    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-    UserPurchases *userPurchases_ = appDelegate.userPurchases;
+    UserPurchases *userPurchases_ = [UserPurchases getInstance];
+    
     if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
         [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
     }

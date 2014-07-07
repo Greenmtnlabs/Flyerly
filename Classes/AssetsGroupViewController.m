@@ -152,8 +152,7 @@ NSMutableArray *productArray;
     //HERE WE CHECK SELECTED ITEM IS VIDEO
     if (asset.type == NBUAssetTypeVideo) {
         
-        FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-        UserPurchases *userPurchases_ = appDelegate.userPurchases;
+        UserPurchases *userPurchases_ = [UserPurchases getInstance];
         
         if ([[PFUser currentUser] sessionToken].length != 0) {
             
@@ -219,8 +218,8 @@ NSMutableArray *productArray;
 
 - ( void )productSuccesfullyPurchased: (NSString *)productId {
     
-    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-    UserPurchases *userPurchases_ = appDelegate.userPurchases;
+    UserPurchases *userPurchases_ = [UserPurchases getInstance];
+    
     if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
         [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
         
@@ -233,8 +232,7 @@ NSMutableArray *productArray;
 
 - (void) userPurchasesLoaded {
     
-    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-    UserPurchases *userPurchases_ = appDelegate.userPurchases;
+    UserPurchases *userPurchases_ = [UserPurchases getInstance];
     
     if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]  ||
          [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockSavedFlyers"] ) {
@@ -259,7 +257,8 @@ NSMutableArray *productArray;
         signInController.launchController = appDelegate.lauchController;
         
         __weak AssetsGroupViewController *assetsGroupViewController = self;
-        __weak UserPurchases *userPurchases_ = appDelegate.userPurchases;
+        
+        UserPurchases *userPurchases_ = [UserPurchases getInstance];
         userPurchases_.delegate = self;
         
         [inappviewcontroller_.presentingViewController dismissViewControllerAnimated:YES completion:nil];

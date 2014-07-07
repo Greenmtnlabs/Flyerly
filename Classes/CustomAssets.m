@@ -26,9 +26,7 @@
     if ( asset.type == NBUAssetTypeVideo) {
         videoIcon.alpha = 1;
         
-        FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-        UserPurchases *userPurchases_ = appDelegate.userPurchases;
-        
+        UserPurchases *userPurchases_ = [UserPurchases getInstance];
         if ([[PFUser currentUser] sessionToken].length != 0) {
             
             if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
