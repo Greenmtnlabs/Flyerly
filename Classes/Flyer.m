@@ -38,7 +38,7 @@ NSString * const CLIPARTHEIGHT = @"100.000000";
  * set Flyer Path to Open In create Screen
  * it will create a directory structure for 3.0 Version if not Exist
  */
--(id)initWithPath:(NSString *)flyPath{
+-(id)initWithPath:(NSString *)flyPath setDirectory:(BOOL)setDirectory {
     
       self = [super init];
     
@@ -48,7 +48,7 @@ NSString * const CLIPARTHEIGHT = @"100.000000";
         [self createFlyerPath:flyPath];
         [Flurry logEvent:@"Create Flyer"];
         
-        //set Current Path of File Manager
+        // set Current Path of File Manager
         [[NSFileManager defaultManager] changeCurrentDirectoryPath:flyPath];
 
         //its Use Current Path
@@ -57,9 +57,13 @@ NSString * const CLIPARTHEIGHT = @"100.000000";
         
     }
     
-    //set Current Path of File Manager
-    [[NSFileManager defaultManager] changeCurrentDirectoryPath:flyPath];
+    _setDirectory = setDirectory;
     
+    // Set Current Path of File Manager. Do not do this if we have been
+    // asked not to do it.
+    if ( _setDirectory ) {
+        [[NSFileManager defaultManager] changeCurrentDirectoryPath:flyPath];
+    }
     
     //Load flyer
     [self loadFlyer:flyPath];
@@ -393,8 +397,15 @@ NSString * const CLIPARTHEIGHT = @"100.000000";
  */
 -(NSString *)getFlyerImage {
 
-    NSString* currentPath  =   [[NSFileManager defaultManager] currentDirectoryPath];
-    NSString *imagePath = [currentPath stringByAppendingString:[NSString stringWithFormat:@"/flyer.%@",IMAGETYPE] ];
+    NSString *imagePath;
+    
+    // If we have the directory set to this flyer.
+    if ( _setDirectory ) {
+        NSString* currentPath  =   [[NSFileManager defaultManager] currentDirectoryPath];
+        imagePath = [currentPath stringByAppendingString:[NSString stringWithFormat:@"/flyer.%@",IMAGETYPE] ];
+    } else {
+        imagePath = flyerImageFile;
+    }
     
     return imagePath;
 }
@@ -932,6 +943,11 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
               
             NSString *recentflyPath = [NSString stringWithFormat:@"%@/%@/flyer.%@",usernamePath,lastFileName,IMAGETYPE];
             [recentFlyers addObject:recentflyPath];
+            
+            // Only get the number of previews that we need.
+            if ( flyCount != 0 && flyCount == i - 1 ) {
+                break;
+            }
 
         }
 

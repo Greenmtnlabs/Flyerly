@@ -2983,7 +2983,7 @@ NSArray *coloursArray;
     
     //Here we Re-Initialize Flyer Instance
     NSString* currentPath  =   [[NSFileManager defaultManager] currentDirectoryPath];
-    self.flyer = [[Flyer alloc]initWithPath:currentPath];
+    self.flyer = [[Flyer alloc]initWithPath:currentPath setDirectory:YES];
     
     // Remove all sub views
     [self.flyimgView removeAllLayers];
