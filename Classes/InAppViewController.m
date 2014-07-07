@@ -227,6 +227,7 @@ NSArray *freeFeaturesArray;
         
         if([[product objectForKey:@"productidentifier"] isEqualToString:@"com.flyerly.AllDesignBundle"]) {
             [completeDesignBundleButton setTitle:@"Help us grow Flyerly!"];
+            [completeDesignBundleButton.titleLabel setTextAlignment:UITextAlignmentCenter];
         }
         
         //Setting the packagename,packageprice,packagedesciption values for cell view
