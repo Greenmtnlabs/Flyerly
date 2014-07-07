@@ -263,9 +263,14 @@
     
     // Make sure we are vertically aligned to the top and centerally aligned.
     if( [[detail valueForKey:@"type"] isEqualToString:FLYER_LAYER_CLIP_ART] ){
-        lbl.textAlignment = UITextAlignmentLeft;//
+        lbl.textAlignment = UITextAlignmentCenter;
         [lbl setNumberOfLines:0];
         [lbl sizeToFit];
+        
+        CGRect fr = lbl.frame;
+        fr.size.width = 150;
+        lbl.frame = fr;
+        
     } else{
        lbl.textAlignment = UITextAlignmentCenter;//UITextAlignmentLeft;//
        [lbl setNumberOfLines:0];

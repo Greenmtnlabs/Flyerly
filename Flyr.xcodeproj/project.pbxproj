@@ -5242,8 +5242,6 @@
 					"$(SRCROOT)/ExternalFrameworks/Crittercism/",
 					"$(SRCROOT)/ExternalFrameworks/Flurry/",
 					"$(SRCROOT)/ExternalFrameworks/Bitly/",
-					/Users/khurram/Documents/flyerly/ExternalFrameworks/Flurry,
-					"/Users/khurram/Documents/flyerly/Classes/Optional/openssl-1.0.1e/lib",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "$(inherited)";
@@ -5288,8 +5286,6 @@
 					"$(SRCROOT)/ExternalFrameworks/Crittercism/",
 					"$(SRCROOT)/ExternalFrameworks/Flurry/",
 					"$(SRCROOT)/ExternalFrameworks/Bitly/",
-					/Users/khurram/Documents/flyerly/ExternalFrameworks/Flurry,
-					"/Users/khurram/Documents/flyerly/Classes/Optional/openssl-1.0.1e/lib",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "$(inherited)";
@@ -5329,8 +5325,6 @@
 					"$(SRCROOT)/ExternalFrameworks/Crittercism/",
 					"$(SRCROOT)/ExternalFrameworks/Flurry/",
 					"$(SRCROOT)/ExternalFrameworks/Bitly/",
-					/Users/khurram/Documents/flyerly/ExternalFrameworks/Flurry,
-					"/Users/khurram/Documents/flyerly/Classes/Optional/openssl-1.0.1e/lib",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "$(inherited)";
@@ -5347,8 +5341,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jennifer Junger (ZLDN4YF5WY)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jennifer Junger (ZLDN4YF5WY)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: CarButler Tester (D9YUDTHV7G)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: CarButler Tester (D9YUDTHV7G)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
