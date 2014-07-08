@@ -5282,7 +5282,7 @@
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "FEA7F04F-1640-4F76-B084-8BD1855BFF9D";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
-				VALID_ARCHS = "armv7 armv7s i386 x86_64";
+				VALID_ARCHS = "armv7 armv7s i386 x86_64 arm64";
 			};
 			name = "Ad Hoc";
 		};
@@ -5325,7 +5325,7 @@
 				PROVISIONING_PROFILE = "BFAFAACA-09D6-40BD-8B17-15886C14AF32";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
-				VALID_ARCHS = "armv7 armv7s i386 x86_64";
+				VALID_ARCHS = "armv7 armv7s i386 x86_64 arm64";
 			};
 			name = Debug;
 		};
@@ -5365,7 +5365,7 @@
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BC3C6EA7-311E-4696-8D1D-13A747090EA5";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
-				VALID_ARCHS = "armv7 armv7s i386 x86_64";
+				VALID_ARCHS = "armv7 armv7s i386 x86_64 arm64";
 			};
 			name = Release;
 		};

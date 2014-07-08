@@ -14,7 +14,6 @@
 @end
 
 @implementation MainSettingViewController
-NSMutableArray *productArray;
 @synthesize tableView;
 
 
@@ -200,15 +199,8 @@ NSMutableArray *productArray;
             inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController-iPhone4" bundle:nil];
         }
         [self presentModalViewController:inappviewcontroller animated:YES];
-        if ( productArray.count == 0 ){
-            [inappviewcontroller requestProduct];
-        }
-        if( productArray.count != 0 ) {
-            
-            //[inappviewcontroller.contentLoaderIndicatorView stopAnimating];
-            //inappviewcontroller.contentLoaderIndicatorView.hidden = YES;
-        }
         
+        [inappviewcontroller requestProduct];
         inappviewcontroller.buttondelegate = self;
     }else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You're not connected to the internet. Please connect and retry." message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];

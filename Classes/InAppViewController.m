@@ -10,14 +10,15 @@
 #import "InAppViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
-@interface InAppViewController ()
+@interface InAppViewController () {
+    NSMutableArray *productArray;
+    NSArray *freeFeaturesArray;
+}
 
 @end
 
 @implementation InAppViewController 
 
-NSMutableArray *productArray;
-NSArray *freeFeaturesArray;
 @synthesize freeFeaturesTview,paidFeaturesTview,loginButton,completeDesignBundleButton;
 
 

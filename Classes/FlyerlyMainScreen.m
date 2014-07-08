@@ -24,8 +24,6 @@
 
 @implementation FlyerlyMainScreen
 
-NSMutableArray *productArray;
-
 @synthesize tpController;
 @synthesize createFlyrLabel;
 @synthesize savedFlyrLabel;
@@ -268,17 +266,9 @@ NSMutableArray *productArray;
     }
     [self presentModalViewController:inappviewcontroller animated:YES];
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:NO];
-    if ( productArray.count == 0 ){
-        [inappviewcontroller requestProduct];
-    }
-    if( productArray.count != 0 ) {
-        
-        //[inappviewcontroller.contentLoaderIndicatorView stopAnimating];
-        //inappviewcontroller.contentLoaderIndicatorView.hidden = YES;
-    }
     
+    [inappviewcontroller requestProduct];
     inappviewcontroller.buttondelegate = self;
-    
 }
 
 - ( void )inAppPurchasePanelContent {

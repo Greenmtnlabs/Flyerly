@@ -12,7 +12,6 @@
 
 @implementation FlyrViewController
 
-NSMutableArray *productArray;
 @synthesize tView;
 @synthesize searchTextField;
 @synthesize flyerPaths;
@@ -405,17 +404,9 @@ NSMutableArray *productArray;
         inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController-iPhone4" bundle:nil];
     }
     [self presentModalViewController:inappviewcontroller animated:YES];
-    if ( productArray.count == 0 ){
-        [inappviewcontroller requestProduct];
-    }
-    if( productArray.count != 0 ) {
-        
-        //[inappviewcontroller.contentLoaderIndicatorView stopAnimating];
-        //inappviewcontroller.contentLoaderIndicatorView.hidden = YES;
-    }
     
+    [inappviewcontroller requestProduct];
     inappviewcontroller.buttondelegate = self;
-
 }
 
 - (void)inAppPurchasePanelButtonTappedWasPressed:(NSString *)inAppPurchasePanelButtonCurrentTitle {
