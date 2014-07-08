@@ -32,6 +32,8 @@ NSArray *freeFeaturesArray;
     // Find out the path of free-features.plist
     NSString *freeFeaturesPlistPath = [[NSBundle mainBundle] pathForResource:@"free-features" ofType:@"plist"];
     freeFeaturesArray = [[NSArray alloc] initWithContentsOfFile:freeFeaturesPlistPath];
+    
+    userPurchases = [UserPurchases getInstance];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -93,7 +95,22 @@ NSArray *freeFeaturesArray;
         //Checking if the user is valid or anonymus
         if ([[PFUser currentUser] sessionToken].length != 0) {
             
-            [self purchaseProductAtIndex:rowIndex];
+            //Getting Selected Product
+            NSDictionary *product = [productArray objectAtIndex:rowIndex];
+            NSString* productIdentifier= product[@"productidentifier"];
+            
+            if ( [userPurchases checkKeyExistsInPurchases:productIdentifier] ) {
+                
+                UIAlertView *alradyPurchasedAlert = [[UIAlertView alloc] initWithTitle: @"Product already purchased"
+                                                                    message: @"You have already purchased this item."
+                                                                   delegate: self cancelButtonTitle: @"OK" otherButtonTitles: nil];
+                
+                [alradyPurchasedAlert show];
+                
+            }else {
+                
+                [self purchaseProductAtIndex:rowIndex];
+            }
             
         }else {
             UIAlertView *someError = [[UIAlertView alloc] initWithTitle: @"Please sign in first"
@@ -106,6 +123,7 @@ NSArray *freeFeaturesArray;
     
     [self performSelector:@selector(deselect) withObject:nil afterDelay:0.2f];
 }
+
 
 - (void) purchaseProductAtIndex:(int) index {
     
@@ -221,7 +239,7 @@ NSArray *freeFeaturesArray;
             if ( [userPurchases checkKeyExistsInPurchases:productIdentifier] ) {
                 
                 // Disabling the cellview user interection if user already have valid purchases
-                inAppCell.userInteractionEnabled = NO;
+                //inAppCell.userInteractionEnabled = NO;
             }
         }
         

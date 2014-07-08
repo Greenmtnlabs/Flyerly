@@ -44,7 +44,7 @@ NSMutableArray *productArray;
     _mode.hidden = !_videoAllow;
     _mode.selected = YES;
     
-    UserPurchases *userPurchases_ = [UserPurchases getInstance];
+    //UserPurchases *userPurchases = [UserPurchases getInstance];
    
     if ([[PFUser currentUser] sessionToken].length != 0) {
         
