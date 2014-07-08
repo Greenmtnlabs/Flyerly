@@ -8,6 +8,7 @@
 //
 
 #import "InAppViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface InAppViewController ()
 
@@ -34,6 +35,11 @@ NSArray *freeFeaturesArray;
     freeFeaturesArray = [[NSArray alloc] initWithContentsOfFile:freeFeaturesPlistPath];
     
     userPurchases = [UserPurchases getInstance];
+    
+    // setting border for login/restore purchases button
+    loginButton.layer.borderWidth=1.0f;
+    [loginButton.layer setCornerRadius:3.0];
+    loginButton.layer.borderColor=[[UIColor whiteColor] CGColor];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -384,6 +390,7 @@ NSArray *freeFeaturesArray;
     [super viewDidAppear:animated];
     
     [self.paidFeaturesTview flashScrollIndicators];
+    [self.freeFeaturesTview flashScrollIndicators];
 }
 
 @end
