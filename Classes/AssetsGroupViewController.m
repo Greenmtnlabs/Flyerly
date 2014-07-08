@@ -27,8 +27,6 @@
 
 @implementation AssetsGroupViewController
 
-NSMutableArray *productArray;
-
 @synthesize inAppPurchasePanel;
 
 #pragma mark - View Controller methods
@@ -290,15 +288,8 @@ NSMutableArray *productArray;
     }
     
     [self presentModalViewController:inappviewcontroller animated:YES];
-    if ( productArray.count == 0 ){
-        [inappviewcontroller requestProduct];
-    }
-    if( productArray.count != 0 ) {
-        
-        //[inappviewcontroller.contentLoaderIndicatorView stopAnimating];
-        //inappviewcontroller.contentLoaderIndicatorView.hidden = YES;
-    }
     
+    [inappviewcontroller requestProduct];
     inappviewcontroller.buttondelegate = self;
 }
 

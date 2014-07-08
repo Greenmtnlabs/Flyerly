@@ -143,10 +143,12 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
  */
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    
-    
     _persistence = [[RMStoreKeychainPersistence alloc] init];
     [RMStore defaultStore].transactionPersistor = _persistence;
+    
+    /* Uncomment this line if you want to remove transactions from the phone.
+    [_persistence removeTransactions];
+    */
     
     // Configurator initialization
     FlyerlyConfigurator *flyerConfigurator = [[FlyerlyConfigurator alloc] init];
