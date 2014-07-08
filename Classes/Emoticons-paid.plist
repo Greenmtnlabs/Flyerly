@@ -295,5 +295,13 @@
 	<string>wrestling-freestyle-icon</string>
 	<string>wrestling-greco-roman-icon</string>
 	<string>Wrestling-icon</string>
+	<string>black_dollar</string>
+	<string>black_pound</string>
+	<string>black_euro</string>
+	<string>black_yuan</string>
+	<string>blue_dollar</string>
+	<string>blue_pound</string>
+	<string>blue_euro</string>
+	<string>blue_yuan</string>
 </array>
 </plist>
