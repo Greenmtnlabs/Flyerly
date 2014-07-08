@@ -187,6 +187,14 @@
 		202F48BB18F28A60000B62DB /* CustomAssets.m in Sources */ = {isa = PBXBuildFile; fileRef = 202F48BA18F28A60000B62DB /* CustomAssets.m */; };
 		202F992718BCAD1B002A25D9 /* FlyerlyFacebookFriends.m in Sources */ = {isa = PBXBuildFile; fileRef = 202F992618BCAD1B002A25D9 /* FlyerlyFacebookFriends.m */; };
 		202FF12B17C3ABDE003C6245 /* bkg_register-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 202FF12817C3ABDE003C6245 /* bkg_register-568h@2x.png */; };
+		2030B1C3196BEC99004DE050 /* black_dollar.png in Resources */ = {isa = PBXBuildFile; fileRef = 2030B1BB196BEC99004DE050 /* black_dollar.png */; };
+		2030B1C4196BEC99004DE050 /* black_euro.png in Resources */ = {isa = PBXBuildFile; fileRef = 2030B1BC196BEC99004DE050 /* black_euro.png */; };
+		2030B1C5196BEC99004DE050 /* black_pound.png in Resources */ = {isa = PBXBuildFile; fileRef = 2030B1BD196BEC99004DE050 /* black_pound.png */; };
+		2030B1C6196BEC99004DE050 /* black_yuan.png in Resources */ = {isa = PBXBuildFile; fileRef = 2030B1BE196BEC99004DE050 /* black_yuan.png */; };
+		2030B1C7196BEC99004DE050 /* blue_dollar.png in Resources */ = {isa = PBXBuildFile; fileRef = 2030B1BF196BEC99004DE050 /* blue_dollar.png */; };
+		2030B1C8196BEC99004DE050 /* blue_euro.png in Resources */ = {isa = PBXBuildFile; fileRef = 2030B1C0196BEC99004DE050 /* blue_euro.png */; };
+		2030B1C9196BEC99004DE050 /* blue_pound.png in Resources */ = {isa = PBXBuildFile; fileRef = 2030B1C1196BEC99004DE050 /* blue_pound.png */; };
+		2030B1CA196BEC99004DE050 /* blue_yuan.png in Resources */ = {isa = PBXBuildFile; fileRef = 2030B1C2196BEC99004DE050 /* blue_yuan.png */; };
 		2032DCD01871BDFF007036B2 /* CropViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2032DCCE1871BDFF007036B2 /* CropViewController.m */; };
 		2032DCD11871BDFF007036B2 /* CropViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2032DCCF1871BDFF007036B2 /* CropViewController.xib */; };
 		2036661C188DB67300C71EAA /* FlyerUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2036661B188DB67300C71EAA /* FlyerUser.m */; };
@@ -1297,6 +1305,14 @@
 		202F992518BCAD1B002A25D9 /* FlyerlyFacebookFriends.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlyerlyFacebookFriends.h; sourceTree = "<group>"; };
 		202F992618BCAD1B002A25D9 /* FlyerlyFacebookFriends.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlyerlyFacebookFriends.m; sourceTree = "<group>"; };
 		202FF12817C3ABDE003C6245 /* bkg_register-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bkg_register-568h@2x.png"; sourceTree = "<group>"; };
+		2030B1BB196BEC99004DE050 /* black_dollar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = black_dollar.png; sourceTree = "<group>"; };
+		2030B1BC196BEC99004DE050 /* black_euro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = black_euro.png; sourceTree = "<group>"; };
+		2030B1BD196BEC99004DE050 /* black_pound.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = black_pound.png; sourceTree = "<group>"; };
+		2030B1BE196BEC99004DE050 /* black_yuan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = black_yuan.png; sourceTree = "<group>"; };
+		2030B1BF196BEC99004DE050 /* blue_dollar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blue_dollar.png; sourceTree = "<group>"; };
+		2030B1C0196BEC99004DE050 /* blue_euro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blue_euro.png; sourceTree = "<group>"; };
+		2030B1C1196BEC99004DE050 /* blue_pound.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blue_pound.png; sourceTree = "<group>"; };
+		2030B1C2196BEC99004DE050 /* blue_yuan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blue_yuan.png; sourceTree = "<group>"; };
 		2032DCCD1871BDFF007036B2 /* CropViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CropViewController.h; sourceTree = "<group>"; };
 		2032DCCE1871BDFF007036B2 /* CropViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CropViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		2032DCCF1871BDFF007036B2 /* CropViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CropViewController.xib; sourceTree = "<group>"; };
@@ -3196,6 +3212,14 @@
 		246EF477193C515D004539B2 /* Emoticons */ = {
 			isa = PBXGroup;
 			children = (
+				2030B1BB196BEC99004DE050 /* black_dollar.png */,
+				2030B1BC196BEC99004DE050 /* black_euro.png */,
+				2030B1BD196BEC99004DE050 /* black_pound.png */,
+				2030B1BE196BEC99004DE050 /* black_yuan.png */,
+				2030B1BF196BEC99004DE050 /* blue_dollar.png */,
+				2030B1C0196BEC99004DE050 /* blue_euro.png */,
+				2030B1C1196BEC99004DE050 /* blue_pound.png */,
+				2030B1C2196BEC99004DE050 /* blue_yuan.png */,
 				24218397194B4AEC00FDDA97 /* anchor-icon.png */,
 				24218398194B4AEC00FDDA97 /* archery-icon.png */,
 				24218399194B4AEC00FDDA97 /* athletics-icon.png */,
@@ -4291,6 +4315,7 @@
 				242184DB194B4AEC00FDDA97 /* gymnastics-artistic-icon.png in Resources */,
 				242184DA194B4AEC00FDDA97 /* gold-ingot-icon.png in Resources */,
 				2421847E194B4AEC00FDDA97 /* emoticon111@2x.png in Resources */,
+				2030B1C5196BEC99004DE050 /* black_pound.png in Resources */,
 				30D58D4610FB1BF800E0C7E8 /* Template12.jpg in Resources */,
 				30D58D4710FB1BF800E0C7E8 /* Template13.jpg in Resources */,
 				246EF508193C515D004539B2 /* emoticon42@2x.png in Resources */,
@@ -4410,6 +4435,7 @@
 				2044FF97185088ED00A26B42 /* MainSettingCell.xib in Resources */,
 				20714DF7187F2105000D6838 /* cancelcamera.png in Resources */,
 				249F205C193F562C0072835E /* twitter_share_selected@2x.png in Resources */,
+				2030B1CA196BEC99004DE050 /* blue_yuan.png in Resources */,
 				2421846A194B4AEC00FDDA97 /* Case-icon.png in Resources */,
 				65CC0AB7171803FB003D0BE7 /* Localizable.strings in Resources */,
 				247858A31948757C0062F1E4 /* Foresee-Regular.ttf in Resources */,
@@ -4424,6 +4450,7 @@
 				20142EDE18F437E10069FBDE /* flyerbundle in Resources */,
 				65E26157171C2EC400C485B5 /* InviteFriendsController.xib in Resources */,
 				249F1F9A193F55D50072835E /* addbg_takephoto@2x.png in Resources */,
+				2030B1C9196BEC99004DE050 /* blue_pound.png in Resources */,
 				2421848B194B4AEC00FDDA97 /* emoticon124@2x.png in Resources */,
 				20714DF3187F1B9D000D6838 /* cameraline.png in Resources */,
 				246EF4F6193C515D004539B2 /* emoticon26@2x.png in Resources */,
@@ -4462,6 +4489,7 @@
 				65A464E71726CBA2002C32FB /* BlueNoon.ttf in Resources */,
 				249F2046193F562C0072835E /* SettingcellBack@2x.png in Resources */,
 				20563E191962D64200C206FD /* Sancreek-Regular.ttf in Resources */,
+				2030B1C3196BEC99004DE050 /* black_dollar.png in Resources */,
 				65A464E81726CBA2002C32FB /* Comfortaa_Bold.ttf in Resources */,
 				2018AF8F195AF14C00188F8E /* image_icon_selected@2x.png in Resources */,
 				65A464E91726CBA2002C32FB /* GoodDog.otf in Resources */,
@@ -4546,6 +4574,7 @@
 				249F1F9D193F55D50072835E /* app_store@2x.png in Resources */,
 				65F1BEAE173AA13400EE6F9F /* twitter_share_saved@2x.png in Resources */,
 				65C1A4181742516D00947D5E /* Template0@2x.jpg in Resources */,
+				2030B1C7196BEC99004DE050 /* blue_dollar.png in Resources */,
 				65C1A4191742516D00947D5E /* Template1@2x.jpg in Resources */,
 				246EF533193C515D004539B2 /* emoticon81@2x.png in Resources */,
 				246EF4E1193C515D004539B2 /* emoticon101@2x.png in Resources */,
@@ -4630,6 +4659,7 @@
 				242184FA194B4AEC00FDDA97 /* Skating-icon.png in Resources */,
 				65C1A4401742516D00947D5E /* Template40@2x.jpg in Resources */,
 				20F7371A195D882000B24C1D /* Junction.ttf in Resources */,
+				2030B1C8196BEC99004DE050 /* blue_euro.png in Resources */,
 				65C1A4411742516D00947D5E /* Template41@2x.jpg in Resources */,
 				65C1A4421742516D00947D5E /* Template42@2x.jpg in Resources */,
 				242184C6194B4AEC00FDDA97 /* equestrian-dressage-icon.png in Resources */,
@@ -4771,6 +4801,7 @@
 				242184B3194B4AEC00FDDA97 /* emoticon165@2x.png in Resources */,
 				24218497194B4AEC00FDDA97 /* emoticon136@2x.png in Resources */,
 				0F8007E8175378F0000FF7FA /* ricon16.png in Resources */,
+				2030B1C6196BEC99004DE050 /* black_yuan.png in Resources */,
 				0F8007EA175378F0000FF7FA /* ricon17.png in Resources */,
 				0F8007EC175378F0000FF7FA /* ricon18.png in Resources */,
 				202D78141962BAAE00D54F3B /* facebook_share_saved@2x.png in Resources */,
@@ -4889,6 +4920,7 @@
 				202C63AC17EA06E800CB9A75 /* ricon42.png in Resources */,
 				249F1FB3193F55D50072835E /* createButton@2x.png in Resources */,
 				242184F9194B4AEC00FDDA97 /* shooting-icon.png in Resources */,
+				2030B1C4196BEC99004DE050 /* black_euro.png in Resources */,
 				202C63AE17EA06E800CB9A75 /* ricon43.png in Resources */,
 				246EF501193C515D004539B2 /* emoticon36@2x.png in Resources */,
 				2032DCD11871BDFF007036B2 /* CropViewController.xib in Resources */,
