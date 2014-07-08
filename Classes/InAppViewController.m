@@ -95,7 +95,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    int rowIndex = indexPath.row;
+    int rowIndex = (int) indexPath.row;
+    
     //if not cancel and Restore button presses
     if(rowIndex == 0 || rowIndex == 1 || rowIndex == 2 || rowIndex == 3) {
         
@@ -201,9 +202,6 @@
     
     //HERE WE UPDATE PARSE ACCOUNT
     PFUser *user = [PFUser currentUser];
-    //PFQuery *query = [PFQuery queryWithClassName:@"InApp"];
-    //[query whereKey:@"user" equalTo:user];
-    //[query getFirstObjectInBackgroundWithBlock:^(PFObject *InApp, NSError *error) {
     
     PFObject *inApp = [[PFObject alloc] initWithClassName:@"InApp"];
     [inApp setObject:user forKey:@"user"];
@@ -213,7 +211,6 @@
         if( succeeded ) {
             [userPurchases_ setUserPurcahsesFromParse];
         }
-        
     }];
     
     [[RMStore defaultStore] removeStoreObserver:self];
@@ -236,19 +233,6 @@
         
         // Getting the product against tapped/selected cell
         NSDictionary *product = [productArray objectAtIndex:indexPath.row];
-        
-        NSString *productIdentifier = [product objectForKey:@"productidentifier"];
-        
-        // Checking if user is valid or anonymous
-        if ([[PFUser currentUser] sessionToken].length != 0) {
-            
-            // Checking if user have  valid purchases
-            if ( [userPurchases checkKeyExistsInPurchases:productIdentifier] ) {
-                
-                // Disabling the cellview user interection if user already have valid purchases
-                //inAppCell.userInteractionEnabled = NO;
-            }
-        }
         
         if([[product objectForKey:@"productidentifier"] isEqualToString:@"com.flyerly.AllDesignBundle"]) {
             [completeDesignBundleButton setTitle:@"Help us grow Flyerly!"];
@@ -344,10 +328,7 @@
         
         //HERE WE GET SHARED INTANCE OF _persistence WHICH WE LINKED IN FlyrAppDelegate
         FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-        //NSArray *productIdentifiers = [[appDelegate._persistence purchasedProductIdentifiers] allObjects];
         NSArray *productIdentifiers = @[@"com.flyerly.AllDesignBundle",@"com.flyerly.UnlockSavedFlyers",@"com.flyerly.UnlockCreateVideoFlyerOption",@"ccom.flyerly.IconsBundle"];
-        //NSSet *productIdentifiers = [NSSet setWithArray:@[@"com.flyerly.AllDesignBundle",@"com.flyerly.UnlockSavedFlyers",@"com.flyerly.UnlockCreateVideoFlyerOption"]];
-        
         
         if (productIdentifiers.count >= 1) {
             
