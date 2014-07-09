@@ -328,8 +328,9 @@ NSArray *coloursArray;
             NSArray *flyerBordersViewArray = [[NSBundle mainBundle] loadNibNamed:@"Borders-iPhone4" owner:self options:nil];
             flyerBordersView = [flyerBordersViewArray objectAtIndex:0];
             
-            NSArray *fontViewArray = [[NSBundle mainBundle] loadNibNamed:@"Fonts-iPhone4" owner:self options:nil];
-            fontsView = [fontViewArray objectAtIndex:0];
+            [self addFontsInSubView];
+            //NSArray *fontViewArray = [[NSBundle mainBundle] loadNibNamed:@"Fonts-iPhone4" owner:self options:nil];
+            //fontsView = [fontViewArray objectAtIndex:0];
             
             NSArray *fontColorsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Colours-iPhone4s" owner:self options:nil];
             colorsView = [fontColorsViewArray objectAtIndex:0];
@@ -642,12 +643,16 @@ NSArray *coloursArray;
             }
         }
         
-        
-        
         [fontsView addSubview:font];
     }
     
-    fontsView.size = CGSizeMake(320, curYLoc + heightValue + 5);
+    if(IS_IPHONE_5){
+        fontsView.size = CGSizeMake(320, curYLoc + heightValue + 5);
+        [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
+    }else {
+        fontsView.size = CGSizeMake(curXLoc , heightValue + 5);
+        [layerScrollView setContentSize:CGSizeMake(fontsView.size.width , heightValue)];
+    }
 }
 
 
@@ -944,18 +949,13 @@ NSArray *coloursArray;
         [clipartsView addSubview:font];
     }
     
-    
-
     if(IS_IPHONE_5){
-        
         clipartsView.size = CGSizeMake(320, curYLoc + (heightValue + 7) );
-        //emoticonsView.size = CGSizeMake(320, curYLoc + symbolScrollHeight + 5);
-        //[layerScrollView setContentSize:CGSizeMake(320, curYLoc + symbolScrollHeight)];
+        [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
     }else {
         clipartsView.size = CGSizeMake(curXLoc + heightValue + 5 , heightValue + 5);
         [layerScrollView setContentSize:CGSizeMake(clipartsView.size.width , heightValue)];
     }
-    
 }
 
 
@@ -3771,6 +3771,13 @@ NSArray *coloursArray;
                                  [self setSelectedItem:FLYER_LAYER_TEXT inView:fontsView ofLayerAttribute:LAYER_ATTRIBUTE_FONT];
                                  
                              } else {
+                                 
+                                 //Delete SubViews from ScrollView
+                                 [self deleteSubviewsFromScrollView];
+                                 [layerScrollView addSubview:fontsView];
+                                 [layerScrollView setContentSize:CGSizeMake(fontsView.size.width , fontsView.size.height)];
+                                 
+                                 [self setSelectedItem:FLYER_LAYER_TEXT inView:fontsView ofLayerAttribute:LAYER_ATTRIBUTE_FONT];
                                  //[layerScrollView setContentSize:CGSizeMake(([symbolArray count]*(symbolScrollWidth+5)), [layerScrollView bounds].size.height)];
                              }
 
