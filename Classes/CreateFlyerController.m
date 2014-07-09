@@ -9,6 +9,7 @@
 #import "UIImage+NBUAdditions.h"
 #import "Common.h"
 #import "ResourcesView.h"
+#import "UserVoice.h"
 
 @implementation CreateFlyerController
 
@@ -68,6 +69,9 @@ NSArray *coloursArray;
  */
 -(void)viewDidLoad{
 	[super viewDidLoad];
+    
+    UVConfig *config = [UVConfig configWithSite:@"http://flyerly.uservoice.com/"];
+    [UserVoice initialize:config];
     
     // Here we Set Top Bar Item
     titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
@@ -2087,9 +2091,7 @@ NSArray *coloursArray;
 
 -(void)loadHelpController{
 
-    HelpController *helpController = [[HelpController alloc]initWithNibName:@"HelpController" bundle:nil];
-    [self.navigationController pushViewController:helpController animated:NO];
-    [self callAddMoreLayers];
+    [UserVoice presentUserVoiceInterfaceForParentViewController:self];
 }
 
 
@@ -3665,7 +3667,19 @@ NSArray *coloursArray;
             [UIView animateWithDuration:0.4f
                              animations:^{
                                  //Create ScrollView
-                                 [self addColorsInSubView];
+                                 if(IS_IPHONE_5){
+                                     
+                                     // Delete SubViews from ScrollView and add Emoticons view
+                                     [self deleteSubviewsFromScrollView];
+                                     [layerScrollView addSubview:colorsView];
+                                     [layerScrollView setContentSize:CGSizeMake(320, colorsView.size.height)];
+                                     
+                                     [self setSelectedItem:FLYER_LAYER_CLIP_ART inView:colorsView ofLayerAttribute:LAYER_ATTRIBUTE_COLOR];
+                                     
+                                 } else {
+                                     //[layerScrollView setContentSize:CGSizeMake(([symbolArray count]*(symbolScrollWidth+5)), [layerScrollView bounds].size.height)];
+                                 }
+                                 //[self addColorsInSubView];
                              }
                              completion:^(BOOL finished){
                                  [layerScrollView flashScrollIndicators];

@@ -7,6 +7,7 @@
 //
 
 #import "MainSettingViewController.h"
+#import "UserVoice.h"
 
 @interface MainSettingViewController ()
 
@@ -30,6 +31,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    UVConfig *config = [UVConfig configWithSite:@"http://flyerly.uservoice.com/"];
+    [UserVoice initialize:config];
     
     globle = [FlyerlySingleton RetrieveSingleton];
     [self.view setBackgroundColor:[UIColor colorWithRed:245/255.0 green:241/255.0 blue:222/255.0 alpha:1]];
@@ -423,9 +427,7 @@
 
 -(void)gohelp{
     
-    HelpController *helpController = [[HelpController alloc]initWithNibName:@"HelpController" bundle:nil];
-    [self.navigationController pushViewController:helpController animated:NO];
-
+    [UserVoice presentUserVoiceInterfaceForParentViewController:self];
 }
 
 #pragma mark  LIKE

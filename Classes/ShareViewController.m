@@ -7,6 +7,7 @@
 //
 
 #import "ShareViewController.h"
+#import "UserVoice.h"
 
 @implementation ShareViewController
 
@@ -19,6 +20,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    UVConfig *config = [UVConfig configWithSite:@"http://flyerly.uservoice.com/"];
+    [UserVoice initialize:config];
     
     globle = [FlyerlySingleton RetrieveSingleton];
     globle.NBUimage = nil;
@@ -74,8 +78,8 @@
  */
 -(void)loadHelpController{
     
-    HelpController *helpController = [[HelpController alloc]initWithNibName:@"HelpController" bundle:nil];
-    [self.navigationController pushViewController:helpController animated:NO];
+    [UserVoice presentUserVoiceInterfaceForParentViewController:self];
+    
 }
 
 
