@@ -14,6 +14,7 @@
 #import "CreateFlyerController.h"
 #import "HelpController.h"
 #import "Flurry.h"
+#import "UserVoice.h"
 
 @implementation InviteFriendsController
 @synthesize uiTableView, contactsArray, selectedIdentifiers,contactsButton, facebookButton, twitterButton,  searchTextField, facebookArray, twitterArray,fbinvited,twitterInvited,iPhoneinvited;
@@ -30,6 +31,10 @@ const int CONTACTS_TAB = 0;
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    
+    UVConfig *config = [UVConfig configWithSite:@"http://flyerly.uservoice.com/"];
+    [UserVoice initialize:config];
+    
     self.selectedIdentifiers = [[NSMutableArray alloc] init];
     globle = [FlyerlySingleton RetrieveSingleton];
     self.navigationItem.hidesBackButton = YES;
@@ -119,8 +124,8 @@ const int CONTACTS_TAB = 0;
 #pragma mark  Custom Methods
 
 -(void)loadHelpController{
-    HelpController *helpController = [[HelpController alloc]initWithNibName:@"HelpController" bundle:nil];
-    [self.navigationController pushViewController:helpController animated:NO];
+    
+    [UserVoice presentUserVoiceInterfaceForParentViewController:self];
 }
 
 -(IBAction)goBack{

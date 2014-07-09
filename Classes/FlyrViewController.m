@@ -8,6 +8,7 @@
 
 #import "FlyrViewController.h"
 #import "UserPurchases.h"
+#import "UserVoice.h"
 
 
 @implementation FlyrViewController
@@ -22,6 +23,10 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    
+    UVConfig *config = [UVConfig configWithSite:@"http://flyerly.uservoice.com/"];
+    [UserVoice initialize:config];
+    
     searching = NO;
 
     [self.view setBackgroundColor:[UIColor colorWithRed:245/255.0 green:241/255.0 blue:222/255.0 alpha:1.0]];
@@ -210,9 +215,8 @@
 }
 
 -(void)loadHelpController{
-    cancelRequest = YES;
-    HelpController *helpController = [[HelpController alloc]initWithNibName:@"HelpController" bundle:nil];
-    [self.navigationController pushViewController:helpController animated:NO];
+    
+    [UserVoice presentUserVoiceInterfaceForParentViewController:self];
 }
 
 

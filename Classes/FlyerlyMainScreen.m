@@ -17,6 +17,9 @@
 #import "SHKConfiguration.h"
 #import "FlyerlyConfigurator.h"
 #import "FlyerUser.h"
+#import "UVConfig.h"
+#import "UserVoice.h"
+#import "Common.h"
 
 @interface FlyerlyMainScreen () 
 
@@ -246,8 +249,8 @@
 }
 
 -(void)loadHelpController{
-    HelpController *helpController = [[HelpController alloc]initWithNibName:@"HelpController" bundle:nil];
-    [self.navigationController pushViewController:helpController animated:NO];
+    
+    [UserVoice presentUserVoiceInterfaceForParentViewController:self];
 }
 
 /*
@@ -279,6 +282,9 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    
+    UVConfig *config = [UVConfig configWithSite:@"http://flyerly.uservoice.com/"];
+    [UserVoice initialize:config];
     
     // Determin if the user has been greeted?
     NSString *greeted = [[NSUserDefaults standardUserDefaults] stringForKey:@"greeted"];
