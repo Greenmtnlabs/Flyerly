@@ -161,7 +161,7 @@
 -(void) callDeleteLayer;
 -(void) choosePhoto;
 -(void) donePhoto;
--(void)share;
+-(void) share;
 
 -(NSString *)getImagePathByTag :(NSString *)imgName;
 -(NSString *)getImagePathforPhoto :(UIImage *)img;
