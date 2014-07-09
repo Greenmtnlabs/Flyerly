@@ -332,8 +332,9 @@ NSArray *coloursArray;
             NSArray *flyerBordersViewArray = [[NSBundle mainBundle] loadNibNamed:@"Borders-iPhone4" owner:self options:nil];
             flyerBordersView = [flyerBordersViewArray objectAtIndex:0];
             
-            NSArray *fontViewArray = [[NSBundle mainBundle] loadNibNamed:@"Fonts-iPhone4" owner:self options:nil];
-            fontsView = [fontViewArray objectAtIndex:0];
+            [self addFontsInSubView];
+            //NSArray *fontViewArray = [[NSBundle mainBundle] loadNibNamed:@"Fonts-iPhone4" owner:self options:nil];
+            //fontsView = [fontViewArray objectAtIndex:0];
             
             NSArray *fontColorsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Colours-iPhone4s" owner:self options:nil];
             colorsView = [fontColorsViewArray objectAtIndex:0];
@@ -344,11 +345,14 @@ NSArray *coloursArray;
             NSArray *textBordersViewArray = [[NSBundle mainBundle] loadNibNamed:@"TextBorders-iPhone4" owner:self options:nil];
             textBordersView = [textBordersViewArray objectAtIndex:0];
             
-            NSArray *clipartsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Cliparts-iPhone4" owner:self options:nil];
-            clipartsView = [clipartsViewArray objectAtIndex:0];
+            [self addClipArtsInSubView];
+            //NSArray *clipartsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Cliparts-iPhone4" owner:self options:nil];
+            //clipartsView = [clipartsViewArray objectAtIndex:0];
             
-            NSArray *emoticonsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Emoticons-iPhone4" owner:self options:nil];
-            emoticonsView = [emoticonsViewArray objectAtIndex:0];
+            [self addEmoticonsInSubView];
+            
+            //NSArray *emoticonsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Emoticons-iPhone4" owner:self options:nil];
+            //emoticonsView = [emoticonsViewArray objectAtIndex:0];
         }
             });
     });
@@ -643,12 +647,16 @@ NSArray *coloursArray;
             }
         }
         
-        
-        
         [fontsView addSubview:font];
     }
     
-    fontsView.size = CGSizeMake(320, curYLoc + heightValue + 5);
+    if(IS_IPHONE_5){
+        fontsView.size = CGSizeMake(320, curYLoc + heightValue + 5);
+        [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
+    }else {
+        fontsView.size = CGSizeMake(curXLoc , heightValue + 5);
+        [layerScrollView setContentSize:CGSizeMake(fontsView.size.width , heightValue)];
+    }
 }
 
 
@@ -944,8 +952,14 @@ NSArray *coloursArray;
         }
         [clipartsView addSubview:font];
     }
-    clipartsView.size = CGSizeMake(320, curYLoc + (heightValue + 7) );
-
+    
+    if(IS_IPHONE_5){
+        clipartsView.size = CGSizeMake(320, curYLoc + (heightValue + 7) );
+        [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
+    }else {
+        clipartsView.size = CGSizeMake(curXLoc + heightValue + 5 , heightValue + 5);
+        [layerScrollView setContentSize:CGSizeMake(clipartsView.size.width , heightValue)];
+    }
 }
 
 
@@ -998,8 +1012,13 @@ NSArray *coloursArray;
         
     }//loop
     
-    emoticonsView.size = CGSizeMake(320, curYLoc + symbolScrollHeight + 5);
-    [layerScrollView setContentSize:CGSizeMake(320, curYLoc + symbolScrollHeight)];
+    if(IS_IPHONE_5){
+        emoticonsView.size = CGSizeMake(320, curYLoc + symbolScrollHeight + 5);
+        [layerScrollView setContentSize:CGSizeMake(320, curYLoc + symbolScrollHeight)];
+    }else {
+        emoticonsView.size = CGSizeMake(curXLoc + symbolScrollWidth + 5 , symbolScrollHeight + 5);
+        [layerScrollView setContentSize:CGSizeMake(emoticonsView.size.width , symbolScrollHeight)];
+    }
 }
 
 /*
@@ -3621,6 +3640,13 @@ NSArray *coloursArray;
                                  [self setSelectedItem:FLYER_LAYER_CLIP_ART inView:clipartsView ofLayerAttribute:LAYER_ATTRIBUTE_IMAGE];
                                  
                              } else {
+                                 
+                                 // Delete SubViews from ScrollView and add Emoticons view
+                                 [self deleteSubviewsFromScrollView];
+                                 [layerScrollView addSubview:clipartsView];
+                                 [layerScrollView setContentSize:CGSizeMake(clipartsView.size.width , clipartsView.size.height)];
+                                 
+                                 [self setSelectedItem:FLYER_LAYER_CLIP_ART inView:clipartsView ofLayerAttribute:LAYER_ATTRIBUTE_IMAGE];
                                  //[layerScrollView setContentSize:CGSizeMake(([symbolArray count]*(symbolScrollWidth+5)), [layerScrollView bounds].size.height)];
                              }
                          }
@@ -3651,6 +3677,14 @@ NSArray *coloursArray;
                                  [self setSelectedItem:FLYER_LAYER_EMOTICON inView:emoticonsView ofLayerAttribute:LAYER_ATTRIBUTE_IMAGE];
 
                              } else {
+                                 
+                                 
+                                 // Delete SubViews from ScrollView and add Emoticons view
+                                 [self deleteSubviewsFromScrollView];
+                                 [layerScrollView addSubview:emoticonsView];
+                                 [layerScrollView setContentSize:CGSizeMake(emoticonsView.size.width , emoticonsView.size.height)];
+                                 
+                                 [self setSelectedItem:FLYER_LAYER_EMOTICON inView:emoticonsView ofLayerAttribute:LAYER_ATTRIBUTE_IMAGE];
                                  //[layerScrollView setContentSize:CGSizeMake(([symbolArray count]*(symbolScrollWidth+5)), [layerScrollView bounds].size.height)];
                              }
                          }
@@ -3676,19 +3710,7 @@ NSArray *coloursArray;
             [UIView animateWithDuration:0.4f
                              animations:^{
                                  //Create ScrollView
-                                 if(IS_IPHONE_5){
-                                     
-                                     // Delete SubViews from ScrollView and add Emoticons view
-                                     [self deleteSubviewsFromScrollView];
-                                     [layerScrollView addSubview:colorsView];
-                                     [layerScrollView setContentSize:CGSizeMake(320, colorsView.size.height)];
-                                     
-                                     [self setSelectedItem:FLYER_LAYER_CLIP_ART inView:colorsView ofLayerAttribute:LAYER_ATTRIBUTE_COLOR];
-                                     
-                                 } else {
-                                     //[layerScrollView setContentSize:CGSizeMake(([symbolArray count]*(symbolScrollWidth+5)), [layerScrollView bounds].size.height)];
-                                 }
-                                 //[self addColorsInSubView];
+                                 [self addColorsInSubView];
                              }
                              completion:^(BOOL finished){
                                  [layerScrollView flashScrollIndicators];
@@ -3758,6 +3780,13 @@ NSArray *coloursArray;
                                  [self setSelectedItem:FLYER_LAYER_TEXT inView:fontsView ofLayerAttribute:LAYER_ATTRIBUTE_FONT];
                                  
                              } else {
+                                 
+                                 //Delete SubViews from ScrollView
+                                 [self deleteSubviewsFromScrollView];
+                                 [layerScrollView addSubview:fontsView];
+                                 [layerScrollView setContentSize:CGSizeMake(fontsView.size.width , fontsView.size.height)];
+                                 
+                                 [self setSelectedItem:FLYER_LAYER_TEXT inView:fontsView ofLayerAttribute:LAYER_ATTRIBUTE_FONT];
                                  //[layerScrollView setContentSize:CGSizeMake(([symbolArray count]*(symbolScrollWidth+5)), [layerScrollView bounds].size.height)];
                              }
 
