@@ -20,7 +20,7 @@ UIButton *backButton;
 
 @synthesize selectedFont,selectedColor,selectedTemplate,fontTabButton,colorTabButton,sizeTabButton,fontEditButton,selectedSize,
 fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sharePanel,clipArtTabButton,emoticonsTabButton,artsColorTabButton,artsSizeTabButton;
-@synthesize cameraTabButton,photoTabButton,widthTabButton,heightTabButton,deleteAlert,signInAlert;
+@synthesize cameraTabButton,photoTabButton,widthTabButton,heightTabButton,deleteAlert,signInAlert,spaceUnavailableAlert;
 @synthesize imgPickerFlag,layerScrollView,flyerPath;
 @synthesize contextView,libraryContextView,libFlyer,backgroundTabButton,addMoreFontTabButton;
 @synthesize libText,libBackground,libArts,libPhoto,libEmpty,backtemplates,cameraTakePhoto,cameraRoll,flyerBorder;
@@ -68,6 +68,9 @@ NSArray *coloursArray;
  */
 -(void)viewDidLoad{
 	[super viewDidLoad];
+    
+    // If 50mb space not availble then go to Back
+    [self isDiskSpaceAvailable];
     
     // Here we Set Top Bar Item
     titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
@@ -2036,7 +2039,12 @@ NSArray *coloursArray;
         [self deleteLayer:editButtonGlobal overrided:nil];
         [Flurry logEvent:@"Layer Deleted"];
         
-	}else if(alertView == signInAlert && buttonIndex == 0) {
+	}else if(alertView == spaceUnavailableAlert && buttonIndex == 0) {
+        
+        [self goBack];
+        
+    }
+    else if(alertView == signInAlert && buttonIndex == 0) {
         
         // Enable  Buttons
         rightUndoBarButton.enabled = YES;
@@ -4404,5 +4412,42 @@ NSArray *coloursArray;
     
 }
 
+//return free space in in mb
+-(unsigned long long)getFreeDiskspace {
+    unsigned long long totalSpace = 0;
+    unsigned long long totalFreeSpace = 0;
+    NSError *error = nil;
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSDictionary *dictionary = [[NSFileManager defaultManager] attributesOfFileSystemForPath:[paths lastObject] error: &error];
+    
+    if (dictionary) {
+        NSNumber *fileSystemSizeInBytes = [dictionary objectForKey: NSFileSystemSize];
+        NSNumber *freeFileSystemSizeInBytes = [dictionary objectForKey:NSFileSystemFreeSize];
+        totalSpace = (([fileSystemSizeInBytes unsignedLongLongValue]/1024ll)/1024ll);
+        totalFreeSpace = (([freeFileSystemSizeInBytes unsignedLongLongValue]/1024ll)/1024ll);
+        
+        NSLog(@"Memory Capacity of %llu MiB with %llu MiB Free memory available.",totalSpace , totalFreeSpace);
+    } else {
+        NSLog(@"Error Obtaining System Memory Info: Domain = %@, Code = %@", [error domain], [error code]);
+    }
+    
+    return totalFreeSpace;
+}
+
+// If 50mb space not availble then go to Back
+-(void) isDiskSpaceAvailable {
+    
+    unsigned long long totalFreeSpace = [self getFreeDiskspace];
+    
+    if( totalFreeSpace < 50 ){
+        spaceUnavailableAlert = [[UIAlertView alloc] initWithTitle:@"Not Enough Storage"
+                                                     message:@"Please clear storage space in your device then try again"
+                                                     delegate:self
+                                                     cancelButtonTitle:@"OK"
+                                                     otherButtonTitles:nil];
+        
+        [spaceUnavailableAlert show];
+    }
+}
 
 @end
