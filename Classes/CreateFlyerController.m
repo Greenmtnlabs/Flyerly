@@ -3667,19 +3667,7 @@ NSArray *coloursArray;
             [UIView animateWithDuration:0.4f
                              animations:^{
                                  //Create ScrollView
-                                 if(IS_IPHONE_5){
-                                     
-                                     // Delete SubViews from ScrollView and add Emoticons view
-                                     [self deleteSubviewsFromScrollView];
-                                     [layerScrollView addSubview:colorsView];
-                                     [layerScrollView setContentSize:CGSizeMake(320, colorsView.size.height)];
-                                     
-                                     [self setSelectedItem:FLYER_LAYER_CLIP_ART inView:colorsView ofLayerAttribute:LAYER_ATTRIBUTE_COLOR];
-                                     
-                                 } else {
-                                     //[layerScrollView setContentSize:CGSizeMake(([symbolArray count]*(symbolScrollWidth+5)), [layerScrollView bounds].size.height)];
-                                 }
-                                 //[self addColorsInSubView];
+                                 [self addColorsInSubView];
                              }
                              completion:^(BOOL finished){
                                  [layerScrollView flashScrollIndicators];
