@@ -82,4 +82,15 @@
     
     // TODO: Monitor application going to background/foreground to pause and resume uploads. Possibly tie into offline upload, as we may go offline mid upload
 }
+
+- (void)authorizationCanceled:(id)sender
+{
+    /*
+     GTMOAuth2ViewControllerTouch *controller = self.viewControllers[0];
+     [controller cancelSigningIn];
+     */
+    [[SHK currentHelper] hideCurrentViewControllerAnimated:YES];
+    [self authDidFinish:NO];
+    [[SHK currentHelper] removeSharerReference:self];
+}
 @end
