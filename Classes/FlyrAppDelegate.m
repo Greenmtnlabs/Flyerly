@@ -157,7 +157,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     [SHKConfiguration sharedInstanceWithConfigurator:configurator];
 
     // Crittercism for crash reports.
-    [Crittercism initWithAppID:[flyerConfigurator crittercismAppId]];
+    [Crittercism enableWithAppID:[flyerConfigurator crittercismAppId]];
     
     
     

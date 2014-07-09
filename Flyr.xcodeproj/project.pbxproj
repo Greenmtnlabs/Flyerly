@@ -61,7 +61,6 @@
 		0FD887061786C3810059BC54 /* current_location@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FD887001786C3810059BC54 /* current_location@2x.png */; };
 		0FE0BDD61758C07D00C4D78D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FE0BDD51758C07D00C4D78D /* StoreKit.framework */; };
 		0FE6F9B81770763200C726F7 /* pinned_flyer2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FE6F9B51770763200C726F7 /* pinned_flyer2@2x.png */; };
-		0FEDD799174A9DF000DF71C0 /* libCrittercismCrashOnly_v3_3_4.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FEDD76E174A91A800DF71C0 /* libCrittercismCrashOnly_v3_3_4.a */; };
 		0FEF2D9A174E65B100FDD8C9 /* HelpController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FEF2D99174E65B100FDD8C9 /* HelpController.xib */; };
 		0FEF2DA9174E66FC00FDD8C9 /* HelpController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FEF2DA8174E66FC00FDD8C9 /* HelpController.m */; };
 		1D3623260D0F684500981E51 /* FlyrAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* FlyrAppDelegate.m */; };
@@ -255,6 +254,7 @@
 		20F73718195D4AD800B24C1D /* Oswald-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 20F73717195D4AD800B24C1D /* Oswald-Regular.ttf */; };
 		20F7371A195D882000B24C1D /* Junction.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 20F73719195D882000B24C1D /* Junction.ttf */; };
 		20F7371C195D985E00B24C1D /* Kankin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 20F7371B195D985E00B24C1D /* Kankin.ttf */; };
+		20F8380B196D1BB0006B72A0 /* libCrittercism_v4_3_4.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 20F8380A196D1BB0006B72A0 /* libCrittercism_v4_3_4.a */; };
 		20F93DD317B2262200F6F88C /* MainSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F93DD117B2262200F6F88C /* MainSettingViewController.m */; };
 		20F93DD417B2262200F6F88C /* MainSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20F93DD217B2262200F6F88C /* MainSettingViewController.xib */; };
 		20FA7E731872AAF50057C3F3 /* CameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20FA7E711872AAF50057C3F3 /* CameraViewController.xib */; };
@@ -1391,6 +1391,9 @@
 		20F73717195D4AD800B24C1D /* Oswald-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Oswald-Regular.ttf"; path = "Data/fonts/Oswald-Regular.ttf"; sourceTree = "<group>"; };
 		20F73719195D882000B24C1D /* Junction.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Junction.ttf; path = Data/fonts/Junction.ttf; sourceTree = "<group>"; };
 		20F7371B195D985E00B24C1D /* Kankin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Kankin.ttf; path = Data/fonts/Kankin.ttf; sourceTree = "<group>"; };
+		20F8380A196D1BB0006B72A0 /* libCrittercism_v4_3_4.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libCrittercism_v4_3_4.a; path = Crittercism/libCrittercism_v4_3_4.a; sourceTree = "<group>"; };
+		20F8380C196D1BD3006B72A0 /* CRFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CRFilter.h; path = Crittercism/CRFilter.h; sourceTree = "<group>"; };
+		20F8380D196D1BD3006B72A0 /* CrittercismDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrittercismDelegate.h; path = Crittercism/CrittercismDelegate.h; sourceTree = "<group>"; };
 		20F93DD017B2262200F6F88C /* MainSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainSettingViewController.h; sourceTree = "<group>"; };
 		20F93DD117B2262200F6F88C /* MainSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainSettingViewController.m; sourceTree = "<group>"; };
 		20F93DD217B2262200F6F88C /* MainSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainSettingViewController.xib; sourceTree = "<group>"; };
@@ -2345,7 +2348,6 @@
 				0FD78054177B3BEC00DF5060 /* libz.1.1.3.dylib in Frameworks */,
 				0FD78050177B398800DF5060 /* AudioToolbox.framework in Frameworks */,
 				0DF3A540108E0E5C00D6C887 /* SystemConfiguration.framework in Frameworks */,
-				0FEDD799174A9DF000DF71C0 /* libCrittercismCrashOnly_v3_3_4.a in Frameworks */,
 				0F734B5617427B790084A2F4 /* Accounts.framework in Frameworks */,
 				65F41C8B173BDC03000BA8CB /* libxml2.2.dylib in Frameworks */,
 				0D335121109ABB6A0082810A /* libxml2.dylib in Frameworks */,
@@ -2357,6 +2359,7 @@
 				65C7A50517216E71003F1A84 /* MobileCoreServices.framework in Frameworks */,
 				0D33511D109ABB6A0082810A /* AddressBookUI.framework in Frameworks */,
 				0D33511B109ABB6A0082810A /* AddressBook.framework in Frameworks */,
+				20F8380B196D1BB0006B72A0 /* libCrittercism_v4_3_4.a in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */,
@@ -2724,6 +2727,9 @@
 		0FEDD769174A918C00DF71C0 /* Crittercism */ = {
 			isa = PBXGroup;
 			children = (
+				20F8380C196D1BD3006B72A0 /* CRFilter.h */,
+				20F8380D196D1BD3006B72A0 /* CrittercismDelegate.h */,
+				20F8380A196D1BB0006B72A0 /* libCrittercism_v4_3_4.a */,
 				0FEDD76E174A91A800DF71C0 /* libCrittercismCrashOnly_v3_3_4.a */,
 				0FEDD76A174A91A800DF71C0 /* CrashReporter.h */,
 				0FEDD76B174A91A800DF71C0 /* Crittercism.h */,
@@ -5274,6 +5280,7 @@
 					"$(SRCROOT)/ExternalFrameworks/Crittercism/",
 					"$(SRCROOT)/ExternalFrameworks/Flurry/",
 					"$(SRCROOT)/ExternalFrameworks/Bitly/",
+					"$(PROJECT_DIR)/ExternalFrameworks/Crittercism",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "$(inherited)";
@@ -5318,6 +5325,7 @@
 					"$(SRCROOT)/ExternalFrameworks/Crittercism/",
 					"$(SRCROOT)/ExternalFrameworks/Flurry/",
 					"$(SRCROOT)/ExternalFrameworks/Bitly/",
+					"$(PROJECT_DIR)/ExternalFrameworks/Crittercism",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "$(inherited)";
@@ -5357,6 +5365,7 @@
 					"$(SRCROOT)/ExternalFrameworks/Crittercism/",
 					"$(SRCROOT)/ExternalFrameworks/Flurry/",
 					"$(SRCROOT)/ExternalFrameworks/Bitly/",
+					"$(PROJECT_DIR)/ExternalFrameworks/Crittercism",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "$(inherited)";
