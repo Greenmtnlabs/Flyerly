@@ -30,12 +30,12 @@
 #import "ResourcesView.h"
 #import "UIPlaceHolderTextView.h"
 #import <MediaPlayer/MediaPlayer.h>
+#import "GADInterstitialDelegate.h"
 
 @class FlyerlySingleton, Flyer, FlyerImageView, ShareViewController, SigninController,InAppViewController;
-@interface CreateFlyerController :ParentViewController<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, FlyerImageViewDelegate,UIGestureRecognizerDelegate,InAppPurchasePanelButtonProtocol, UserPurchasesDelegate >
+@interface CreateFlyerController :ParentViewController<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, FlyerImageViewDelegate,UIGestureRecognizerDelegate,InAppPurchasePanelButtonProtocol, UserPurchasesDelegate, GADInterstitialDelegate>
 
 {
-    
     InAppViewController *inappviewcontroller;
     UIActivityIndicatorView *uiBusy;
 
@@ -69,6 +69,8 @@
     float videoDuration;
     
 }
+
+@property(nonatomic, strong) GADInterstitial *interstitial;
 
 //-----
 @property (nonatomic, strong) ResourcesView *backgroundsView;

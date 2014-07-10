@@ -10,6 +10,9 @@
 #import "Common.h"
 #import "ResourcesView.h"
 #import "UserVoice.h"
+#import "GADInterstitial.h"
+#import "GADInterstitialDelegate.h"
+
 
 @implementation CreateFlyerController
 
@@ -64,11 +67,43 @@ NSArray *coloursArray;
     }
 }
 
+- (GADRequest *)request {
+    GADRequest *request = [GADRequest request];
+    
+    // Make the request for a test ad. Put in an identifier for the simulator as well as any devices
+    // you want to receive test ads.
+    request.testDevices = @[
+                            // TODO: Add your device/simulator test identifiers here. Your device identifier is printed to
+                            // the console when the app is launched.
+                            //NSString *udid = [UIDevice currentDevice].uniqueIdentifier;
+                            GAD_SIMULATOR_ID
+                            ];
+    return request;
+}
+
+- (void)interstitialDidReceiveAd:(GADInterstitial *)ad
+{
+    [self.interstitial presentFromRootViewController:self];
+}
+
 /**
  * View setup. This is done once per instance.
  */
 -(void)viewDidLoad{
 	[super viewDidLoad];
+
+    // Create a new GADInterstitial each time. A GADInterstitial will only show one request in its
+    // lifetime. The property will release the old one and set the new one.
+    self.interstitial = [[GADInterstitial alloc] init];
+    self.interstitial.delegate = self;
+    
+    // Note: Edit SampleConstants.h to update kSampleAdUnitId with your interstitial ad unit id.
+    self.interstitial.adUnitID = @"ca-app-pub-5409664730066465/9926514430";
+    
+    //[self.interstitial loadRequest:[self request]];
+    
+    // Show the interstitial.
+    //[self.interstitial presentFromRootViewController:self];
 
     // If 50mb space not availble then go to Back
     [self isDiskSpaceAvailable];
@@ -424,6 +459,10 @@ NSArray *coloursArray;
             
             // Here Compare Current Flyer with history Flyer
             if ( [self.flyer isVideoMergeProcessRequired] ) {
+                
+                [self.interstitial loadRequest:[self request]];
+                // Show the interstitial.
+                [self.interstitial presentFromRootViewController:self];
                 
                 panelWillOpen = NO;
                 
@@ -3161,6 +3200,10 @@ NSArray *coloursArray;
         //Here Compare Current Flyer with history Flyer
         if ([self.flyer isVideoMergeProcessRequired]) {
             
+            [self.interstitial loadRequest:[self request]];
+            // Show the interstitial.
+            [self.interstitial presentFromRootViewController:self];
+            
             panelWillOpen = YES;
 
             //Background Thread
@@ -3191,11 +3234,8 @@ NSArray *coloursArray;
                 //Here we Open Share Panel for Share Flyer
                 [self openPanel];
             });
-            
         });
-        
     }
-    
 }
 
 /*
