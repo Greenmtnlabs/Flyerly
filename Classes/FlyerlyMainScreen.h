@@ -14,6 +14,7 @@
 #import "RMStore.h"
 #import "RMStoreKeychainPersistence.h"
 #import "FlyerImageView.h"
+#import "GADInterstitialDelegate.h"
 
 @class FlyrViewController;
 @class CreateFlyerController ;
@@ -23,7 +24,7 @@
 
 @class MainSettingViewController,ParentViewController;
 
-@interface FlyerlyMainScreen : ParentViewController <InAppPurchasePanelButtonProtocol, UserPurchasesDelegate> {
+@interface FlyerlyMainScreen : ParentViewController <InAppPurchasePanelButtonProtocol, UserPurchasesDelegate ,GADInterstitialDelegate> {
     
 	CreateFlyerController *createFlyer;
 	FlyrViewController *tpController;
@@ -37,6 +38,8 @@
     Flyer *flyer;
 
 }
+
+@property(nonatomic, strong) GADInterstitial *interstitial;
 
 @property(nonatomic,strong) FlyrViewController *tpController;
 @property(nonatomic,strong) InviteFriendsController *addFriendsController;

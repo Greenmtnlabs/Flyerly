@@ -29,7 +29,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 @synthesize contextView,libraryContextView,libFlyer,backgroundTabButton,addMoreFontTabButton;
 @synthesize libText,libBackground,libArts,libPhoto,libEmpty,backtemplates,cameraTakePhoto,cameraRoll,flyerBorder;
 @synthesize flyimgView,currentLayer,layersDic,flyer,player,playerView,playerToolBar,playButton,playerSlider,tempelateView;
-@synthesize durationLabel,durationChange,onFlyerBack;
+@synthesize durationLabel,durationChange,onFlyerBack,shouldShowAdd;
 @synthesize backgroundsView,flyerBordersView,colorsView,sizesView;
 int selectedAddMoreLayerTab = -1;
 
@@ -81,11 +81,6 @@ NSArray *coloursArray;
     return request;
 }
 
-- (void)interstitialDidReceiveAd:(GADInterstitial *)ad
-{
-    [self.interstitial presentFromRootViewController:self];
-}
-
 /**
  * View setup. This is done once per instance.
  */
@@ -100,7 +95,7 @@ NSArray *coloursArray;
     // Note: Edit SampleConstants.h to update kSampleAdUnitId with your interstitial ad unit id.
     self.interstitial.adUnitID = @"ca-app-pub-5409664730066465/9926514430";
     
-    //[self.interstitial loadRequest:[self request]];
+    [self.interstitial loadRequest:[self request]];
     
     // Show the interstitial.
     //[self.interstitial presentFromRootViewController:self];
@@ -460,9 +455,7 @@ NSArray *coloursArray;
             // Here Compare Current Flyer with history Flyer
             if ( [self.flyer isVideoMergeProcessRequired] ) {
                 
-                [self.interstitial loadRequest:[self request]];
-                // Show the interstitial.
-                [self.interstitial presentFromRootViewController:self];
+                self.shouldShowAdd ( @"" );
                 
                 panelWillOpen = NO;
                 
@@ -3200,9 +3193,9 @@ NSArray *coloursArray;
         //Here Compare Current Flyer with history Flyer
         if ([self.flyer isVideoMergeProcessRequired]) {
             
-            [self.interstitial loadRequest:[self request]];
-            // Show the interstitial.
-            [self.interstitial presentFromRootViewController:self];
+            if ( [self.interstitial isReady]  && ![self.interstitial hasBeenUsed] ) {
+                 [self.interstitial presentFromRootViewController:self];
+            }
             
             panelWillOpen = YES;
 

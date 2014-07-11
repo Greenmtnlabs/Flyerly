@@ -20,6 +20,8 @@
 #import "UVConfig.h"
 #import "UserVoice.h"
 #import "Common.h"
+#import "GADInterstitial.h"
+#import "GADInterstitialDelegate.h"
 
 @interface FlyerlyMainScreen () 
 
@@ -36,6 +38,9 @@
 @synthesize savedFlyrButton;
 @synthesize recentFlyers;
 @synthesize inviteFriendButton;
+@synthesize interstitial;
+
+BOOL adLoaded = false;
 
 -(IBAction)doNew:(id)sender{
     [Flurry logEvent:@"Create Flyer"];
@@ -278,6 +283,25 @@
     [inappviewcontroller inAppDataLoaded];
 }
 
+- (GADRequest *)request {
+    GADRequest *request = [GADRequest request];
+    
+    // Make the request for a test ad. Put in an identifier for the simulator as well as any devices
+    // you want to receive test ads.
+    request.testDevices = @[
+                            // TODO: Add your device/simulator test identifiers here. Your device identifier is printed to
+                            // the console when the app is launched.
+                            //NSString *udid = [UIDevice currentDevice].uniqueIdentifier;
+                            GAD_SIMULATOR_ID
+                            ];
+    return request;
+}
+
+- (void)interstitialDidReceiveAd:(GADInterstitial *)ad
+{
+    //adLoaded = true;
+    //[self.interstitial presentFromRootViewController:self];
+}
 
 - (void)viewDidLoad {
     
@@ -285,6 +309,24 @@
     
     UVConfig *config = [UVConfig configWithSite:@"http://flyerly.uservoice.com/"];
     [UserVoice initialize:config];
+    
+    // Create a new GADInterstitial each time. A GADInterstitial will only show one request in its
+    // lifetime. The property will release the old one and set the new one.
+    self.interstitial = [[GADInterstitial alloc] init];
+    self.interstitial.delegate = self;
+    
+    // Note: Edit SampleConstants.h to update kSampleAdUnitId with your interstitial ad unit id.
+    self.interstitial.adUnitID = @"ca-app-pub-5409664730066465/9926514430";
+    
+    //UIViewController *adView = [[UIViewController alloc] init];
+    
+    //[weakSelf.navigationController pushViewController:adView animated:NO];
+    
+    dispatch_async( dispatch_get_main_queue(), ^{
+        
+        [self.interstitial loadRequest:[self request]];
+        
+    });
     
     // Determin if the user has been greeted?
     NSString *greeted = [[NSUserDefaults standardUserDefaults] stringForKey:@"greeted"];
@@ -428,6 +470,18 @@
             UIButton *button = [weakSelf.flyerButtons objectAtIndex:i];
             [button setUserInteractionEnabled:YES];
         }
+        
+    }];
+    
+    [createFlyer setShouldShowAdd:^(NSString *flyPath) {
+        
+        dispatch_async( dispatch_get_main_queue(), ^{
+            
+            if ( [weakSelf.interstitial isReady]  && ![weakSelf.interstitial hasBeenUsed] ) {
+                [weakSelf.interstitial presentFromRootViewController:weakSelf];
+            }
+            
+        });
         
     }];
 
