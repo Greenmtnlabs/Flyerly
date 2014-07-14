@@ -12,7 +12,8 @@
 #import "UserVoice.h"
 #import "GADInterstitial.h"
 #import "GADInterstitialDelegate.h"
-
+#import "GADBannerView.h"
+#import "GADBannerViewDelegate.h"
 
 @implementation CreateFlyerController
 
@@ -67,6 +68,17 @@ NSArray *coloursArray;
     }
 }
 
+- (void)interstitialDidDismissScreen:(GADInterstitial *)ad {
+    
+    self.interstitialAdd.delegate = nil;
+    
+    // Prepare next interstitial.
+    self.interstitialAdd = [[GADInterstitial alloc] init];
+    self.interstitialAdd.adUnitID = @"ca-app-pub-5409664730066465/9926514430";
+    self.interstitialAdd.delegate = self;
+    [self.interstitialAdd loadRequest:[self request]];
+}
+
 - (GADRequest *)request {
     GADRequest *request = [GADRequest request];
     
@@ -81,6 +93,52 @@ NSArray *coloursArray;
     return request;
 }
 
+- (GADRequest *)request_ {
+    GADRequest *request = [GADRequest request];
+    
+    // Make the request for a test ad. Put in an identifier for the simulator as well as any devices
+    // you want to receive test ads.
+    request.testDevices = @[
+                            // TODO: Add your device/simulator test identifiers here. Your device identifier is printed to
+                            // the console when the app is launched.
+                            //NSString *udid = [UIDevice currentDevice].uniqueIdentifier;
+                            GAD_SIMULATOR_ID
+                            ];
+    return request;
+}
+
+- (void)showTopBanner:(UIView *)banner{
+    
+    //if (banner &amp;&amp; [banner isHidden]) {
+        
+        [UIView beginAnimations:@"bannerOn" context:NULL];
+        
+        banner.frame = CGRectOffset(banner.frame, 0, banner.frame.size.height);
+        
+        [UIView commitAnimations];
+        
+        banner.hidden = NO;
+        
+   // }
+    
+}
+
+
+// We've received an ad successfully.
+- (void)adViewDidReceiveAd:(GADBannerView *)adView {
+    
+    /*//self.showTopBanner:contextView;
+     
+     [self showTopBanner:contextView];
+     
+     //[contextView addSubview:self.bannerAdd];
+     //contextView commit
+     NSLog(@"banner add receive");*/
+    
+    [self.view addSubview:self.bannerAdd];
+    NSLog(@"Received ad successfully");
+}
+
 /**
  * View setup. This is done once per instance.
  */
@@ -89,17 +147,43 @@ NSArray *coloursArray;
 
     // Create a new GADInterstitial each time. A GADInterstitial will only show one request in its
     // lifetime. The property will release the old one and set the new one.
-    self.interstitial = [[GADInterstitial alloc] init];
-    self.interstitial.delegate = self;
+    self.interstitialAdd = [[GADInterstitial alloc] init];
+    self.interstitialAdd.delegate = self;
     
     // Note: Edit SampleConstants.h to update kSampleAdUnitId with your interstitial ad unit id.
-    self.interstitial.adUnitID = @"ca-app-pub-5409664730066465/9926514430";
+    self.interstitialAdd.adUnitID = @"ca-app-pub-5409664730066465/9926514430";
     
-    [self.interstitial loadRequest:[self request]];
+    [self.interstitialAdd loadRequest:[self request]];
     
-    // Show the interstitial.
-    //[self.interstitial presentFromRootViewController:self];
-
+    // Initialize the banner at the bottom of the screen.
+    CGPoint origin = CGPointMake(0.0,
+                                 self.view.frame.size.height -
+                                 CGSizeFromGADAdSize(kGADAdSizeBanner).height);
+    
+    // Use predefined GADAdSize constants to define the GADBannerView.
+    self.bannerAdd = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner origin:origin];
+    
+    // Note: Edit SampleConstants.h to provide a definition for kSampleAdUnitID before compiling.
+    self.bannerAdd.adUnitID = @"ca-app-pub-5409664730066465/8030978831";;
+    self.bannerAdd.delegate = self;
+    self.bannerAdd.rootViewController = self;
+    
+    [self.bannerAdd loadRequest:[self request]];
+    
+    /*CGSize sz = CGSizeMake(280, 30);
+    
+    GADAdSize customAdSize = GADAdSizeFromCGSize(sz);
+    
+    self.bannerAdd = [[GADBannerView alloc] initWithAdSize:customAdSize];
+    self.bannerAdd.rootViewController = self;
+    self.bannerAdd.delegate =self;
+    // Note: Edit SampleConstants.h to update kSampleAdUnitId with your interstitial ad unit id.
+    self.bannerAdd.adUnitID = @"ca-app-pub-5409664730066465/8030978831";
+    [self.bannerAdd loadRequest:[self request_]];*/
+    
+    
+    
+    
     // If 50mb space not availble then go to Back
     [self isDiskSpaceAvailable];
 
@@ -3193,9 +3277,14 @@ NSArray *coloursArray;
         //Here Compare Current Flyer with history Flyer
         if ([self.flyer isVideoMergeProcessRequired]) {
             
-            if ( [self.interstitial isReady]  && ![self.interstitial hasBeenUsed] ) {
-                 [self.interstitial presentFromRootViewController:self];
+            UserPurchases *userPurchases_ = [UserPurchases getInstance];
+            
+            if ( ![userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ) {
+                if ( [self.interstitialAdd isReady]  && ![self.interstitialAdd hasBeenUsed] ) {
+                     [self.interstitialAdd presentFromRootViewController:self];
+                }
             }
+            
             
             panelWillOpen = YES;
 

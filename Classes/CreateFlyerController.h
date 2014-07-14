@@ -31,9 +31,10 @@
 #import "UIPlaceHolderTextView.h"
 #import <MediaPlayer/MediaPlayer.h>
 #import "GADInterstitialDelegate.h"
+#import "GADBannerView.h"
 
 @class FlyerlySingleton, Flyer, FlyerImageView, ShareViewController, SigninController,InAppViewController;
-@interface CreateFlyerController :ParentViewController<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, FlyerImageViewDelegate,UIGestureRecognizerDelegate,InAppPurchasePanelButtonProtocol, UserPurchasesDelegate, GADInterstitialDelegate>
+@interface CreateFlyerController :ParentViewController<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, FlyerImageViewDelegate,UIGestureRecognizerDelegate,InAppPurchasePanelButtonProtocol, UserPurchasesDelegate, GADInterstitialDelegate, GADBannerViewDelegate>
 
 {
     InAppViewController *inappviewcontroller;
@@ -70,7 +71,8 @@
     
 }
 
-@property(nonatomic, strong) GADInterstitial *interstitial;
+@property(nonatomic, strong) GADInterstitial *interstitialAdd;
+@property(nonatomic, strong) GADBannerView *bannerAdd;
 
 //-----
 @property (nonatomic, strong) ResourcesView *backgroundsView;
