@@ -31,7 +31,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 @synthesize libText,libBackground,libArts,libPhoto,libEmpty,backtemplates,cameraTakePhoto,cameraRoll,flyerBorder;
 @synthesize flyimgView,currentLayer,layersDic,flyer,player,playerView,playerToolBar,playButton,playerSlider,tempelateView;
 @synthesize durationLabel,durationChange,onFlyerBack,shouldShowAdd;
-@synthesize backgroundsView,flyerBordersView,colorsView,sizesView;
+@synthesize backgroundsView,flyerBordersView,colorsView,sizesView,bannerAddView,bannerAddDismissButton;
 int selectedAddMoreLayerTab = -1;
 
 
@@ -124,19 +124,20 @@ NSArray *coloursArray;
 }
 
 
-// We've received an ad successfully.
+// We've received an Banner ad successfully.
 - (void)adViewDidReceiveAd:(GADBannerView *)adView {
     
-    /*//self.showTopBanner:contextView;
-     
-     [self showTopBanner:contextView];
-     
-     //[contextView addSubview:self.bannerAdd];
-     //contextView commit
-     NSLog(@"banner add receive");*/
+    //Adding ad in custom view
+    [self.bannerAddView addSubview:self.bannerAdd];
+    //Making dismiss button visible,and bring it to front
+    bannerAddDismissButton.alpha = 1.0;
+    [self.bannerAddView bringSubviewToFront:bannerAddDismissButton];
+}
+
+// Dismiss action for banner ad
+-(IBAction)dissmisBannerAdd:(id)sender{
     
-    [self.view addSubview:self.bannerAdd];
-    NSLog(@"Received ad successfully");
+    [self.bannerAddView removeFromSuperview];
 }
 
 /**
@@ -155,42 +156,12 @@ NSArray *coloursArray;
     
     [self.interstitialAdd loadRequest:[self request]];
     
-    // Initialize the banner at the bottom of the screen.
-    CGPoint origin = CGPointMake(0.0,
-                                 self.view.frame.size.height -
-                                 CGSizeFromGADAdSize(kGADAdSizeBanner).height);
-    
-    // Use predefined GADAdSize constants to define the GADBannerView.
-    self.bannerAdd = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner origin:origin];
-    
-    // Note: Edit SampleConstants.h to provide a definition for kSampleAdUnitID before compiling.
-    self.bannerAdd.adUnitID = @"ca-app-pub-5409664730066465/8030978831";;
-    self.bannerAdd.delegate = self;
-    self.bannerAdd.rootViewController = self;
-    
-    [self.bannerAdd loadRequest:[self request]];
-    
-    /*CGSize sz = CGSizeMake(280, 30);
-    
-    GADAdSize customAdSize = GADAdSizeFromCGSize(sz);
-    
-    self.bannerAdd = [[GADBannerView alloc] initWithAdSize:customAdSize];
-    self.bannerAdd.rootViewController = self;
-    self.bannerAdd.delegate =self;
-    // Note: Edit SampleConstants.h to update kSampleAdUnitId with your interstitial ad unit id.
-    self.bannerAdd.adUnitID = @"ca-app-pub-5409664730066465/8030978831";
-    [self.bannerAdd loadRequest:[self request_]];*/
-    
-    
-    
-    
     // If 50mb space not availble then go to Back
     [self isDiskSpaceAvailable];
 
     UVConfig *config = [UVConfig configWithSite:@"http://flyerly.uservoice.com/"];
     [UserVoice initialize:config];
 
-    
     // Here we Set Top Bar Item
     titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
     titleLabel.backgroundColor = [UIColor clearColor];
@@ -411,6 +382,21 @@ NSArray *coloursArray;
         dispatch_async( dispatch_get_main_queue(), ^{
             
         if(IS_IPHONE_5){
+            
+            // Initialize the banner at the bottom of the screen.
+            CGPoint origin;
+            origin = CGPointMake(0.0,0.0);
+            
+            // Use predefined GADAdSize constants to define the GADBannerView.
+            self.bannerAdd = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner origin:origin];
+            
+            // Note: Edit SampleConstants.h to provide a definition for kSampleAdUnitID before compiling.
+            self.bannerAdd.adUnitID = @"ca-app-pub-5409664730066465/8030978831";;
+            self.bannerAdd.delegate = self;
+            self.bannerAdd.rootViewController = self;
+            
+            [self.bannerAdd loadRequest:[self request]];
+            
             NSArray *flyerbackgroundsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Backgrounds" owner:self options:nil];
             backgroundsView = [flyerbackgroundsViewArray objectAtIndex:0];
             
@@ -418,8 +404,6 @@ NSArray *coloursArray;
             flyerBordersView = [flyerBordersViewArray objectAtIndex:0];
         
             [self addFontsInSubView];
-            //NSArray *fontViewArray = [[NSBundle mainBundle] loadNibNamed:@"Fonts" owner:self options:nil];
-            //fontsView = [fontViewArray objectAtIndex:0];
             
             NSArray *fontColorsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Colours" owner:self options:nil];
             colorsView = [fontColorsViewArray objectAtIndex:0];
@@ -431,14 +415,12 @@ NSArray *coloursArray;
             textBordersView = [textBordersViewArray objectAtIndex:0];
             
             [self addClipArtsInSubView];
-            //NSArray *clipartsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Cliparts" owner:self options:nil];
-            //clipartsView = [clipartsViewArray objectAtIndex:0];
             
             [self addEmoticonsInSubView];
-            //NSArray *emoticonsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Emoticons" owner:self options:nil];
-            //emoticonsView = [emoticonsViewArray objectAtIndex:0];
             
         } else {
+            
+            [self.bannerAddView removeFromSuperview];
             
             NSArray *flyerbackgroundsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Backgrounds-iPhone4" owner:self options:nil];
             backgroundsView = [flyerbackgroundsViewArray objectAtIndex:0];
@@ -460,13 +442,9 @@ NSArray *coloursArray;
             textBordersView = [textBordersViewArray objectAtIndex:0];
             
             [self addClipArtsInSubView];
-            //NSArray *clipartsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Cliparts-iPhone4" owner:self options:nil];
-            //clipartsView = [clipartsViewArray objectAtIndex:0];
             
             [self addEmoticonsInSubView];
             
-            //NSArray *emoticonsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Emoticons-iPhone4" owner:self options:nil];
-            //emoticonsView = [emoticonsViewArray objectAtIndex:0];
         }
             });
     });

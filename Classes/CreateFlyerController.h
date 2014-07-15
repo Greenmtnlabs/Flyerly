@@ -74,6 +74,11 @@
 @property(nonatomic, strong) GADInterstitial *interstitialAdd;
 @property(nonatomic, strong) GADBannerView *bannerAdd;
 
+@property(nonatomic, strong) IBOutlet UIView *bannerAddView;
+
+@property (nonatomic, strong)IBOutlet UIButton *bannerAddDismissButton;
+
+
 //-----
 @property (nonatomic, strong) ResourcesView *backgroundsView;
 @property (nonatomic, strong) ResourcesView *flyerBordersView;
@@ -202,5 +207,7 @@
 -(IBAction)setlibPhotoTabAction:(id) sender;
 -(IBAction)play:(id)sender;
 -(IBAction)slide:(id)sender;
+
+-(IBAction)dissmisBannerAdd:(id)sender;
 
 @end
