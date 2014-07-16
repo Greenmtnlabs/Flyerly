@@ -11,7 +11,7 @@
 
 @implementation ShareViewController
 
-@synthesize Yvalue,rightUndoBarButton,shareButton,helpButton,selectedFlyerImage,fvController,titleView,descriptionView,selectedFlyerDescription,  imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,dicController, clipboardlabel,flyer,topTitleLabel,delegate,activityIndicator,youTubeButton,lblFirstShareOnYoutube;
+@synthesize Yvalue,rightUndoBarButton,shareButton,helpButton,selectedFlyerImage,fvController,titleView,cfController,descriptionView,selectedFlyerDescription,  imageFileName,flickrButton,facebookButton,twitterButton,instagramButton,tumblrButton,clipboardButton,emailButton,smsButton,dicController, clipboardlabel,flyer,topTitleLabel,delegate,activityIndicator,youTubeButton,lblFirstShareOnYoutube;
 
 @synthesize flyerShareType,star1,star2,star3,star4,star5;
 
@@ -443,7 +443,22 @@
  */
 -(IBAction)onClickFlickrButton{
     
+    [self.cfController printFlyer];
+    [self hideMe];
+    //UIViewController* parent = (UIViewController*)[self presentedViewController];
+    //[parent someMethod:YES];
     
+    /*
+    
+    [self dismissModalViewControllerAnimated: NO];*/
+    
+    //[self.view.window.rootViewController.presentedViewController dismissViewControllerAnimated:NO completion:nil];
+    
+    //[inappviewcontroller.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    
+    //[self.view.window.rootViewController presentViewController:printViewController animated:YES completion:nil];
+    //
+    /*
     SHKItem *item;
     if ([self.flyer isVideoFlyer]) {
         
@@ -463,7 +478,7 @@
     iosSharer = [SHKFlickr shareItem:item];
     iosSharer.shareDelegate = self;
     
-    iosSharer = nil;
+    iosSharer = nil;*/
     
 }
 

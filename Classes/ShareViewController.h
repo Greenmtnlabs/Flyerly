@@ -33,7 +33,6 @@
 #import "UIPlaceHolderTextView.h"
 #import "YouTubeSubClass.h"
 
-
 @class FlyrViewController,FlyerlySingleton;
 @class SHKSharer;
 @class SHKActivityIndicator;
