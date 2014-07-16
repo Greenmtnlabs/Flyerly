@@ -16,6 +16,7 @@
                 <outlet property="artsSizeTabButton" destination="5Cl-rC-EDu" id="I6i-9N-PRr"/>
                 <outlet property="backgroundTabButton" destination="zoh-mW-4K3" id="jKZ-37-kHq"/>
                 <outlet property="backtemplates" destination="WvZ-dV-5Fn" id="5XB-pz-W0O"/>
+                <outlet property="bannerAddBackView" destination="290-zh-BTa" id="g0v-Oy-1wF"/>
                 <outlet property="bannerAddDismissButton" destination="r8c-KP-iPm" id="Ngt-Pt-r6S"/>
                 <outlet property="bannerAddView" destination="24Y-ZP-E8v" id="ZUu-Pr-Gsc"/>
                 <outlet property="cameraRoll" destination="t0N-7F-yOw" id="jXi-au-Q5l"/>
@@ -101,14 +102,14 @@
                     <color key="backgroundColor" red="0.96078431369999995" green="0.94509803920000002" blue="0.87058823529999996" alpha="1" colorSpace="calibratedRGB"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="0.0"/>
                 </view>
-                <view contentMode="scaleToFill" id="24Y-ZP-E8v">
-                    <rect key="frame" x="0.0" y="473" width="320" height="50"/>
+                <view contentMode="scaleToFill" id="290-zh-BTa">
+                    <rect key="frame" x="0.0" y="453" width="320" height="70"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="r8c-KP-iPm">
-                            <rect key="frame" x="275" y="-10" width="50" height="41"/>
+                            <rect key="frame" x="295" y="0.0" width="23" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" image="close_button.png">
+                            <state key="normal" image="closeAd.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
@@ -116,6 +117,11 @@
                             </connections>
                         </button>
                     </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" id="24Y-ZP-E8v">
+                    <rect key="frame" x="0.0" y="473" width="320" height="50"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
                 <view autoresizesSubviews="NO" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="hm4-bV-Hep">
@@ -491,6 +497,10 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <accessibility key="accessibilityConfiguration" label=""/>
         </view>
+        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" id="AH5-Xr-weS">
+            <rect key="frame" x="0.0" y="0.0" width="37" height="37"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+        </activityIndicatorView>
     </objects>
     <resources>
         <image name="07_camera.png" width="80" height="45"/>
@@ -512,7 +522,7 @@
         <image name="blue_bar.png" width="320" height="45"/>
         <image name="clipart_tab.png" width="80" height="45"/>
         <image name="clipart_tab_selected.png" width="80" height="45"/>
-        <image name="close_button.png" width="45" height="41"/>
+        <image name="closeAd.png" width="36" height="36"/>
         <image name="color_button.png" width="64" height="45"/>
         <image name="color_button_selected.png" width="64" height="45"/>
         <image name="color_tab.png" width="80" height="45"/>

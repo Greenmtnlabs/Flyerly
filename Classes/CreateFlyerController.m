@@ -14,6 +14,7 @@
 #import "GADInterstitialDelegate.h"
 #import "GADBannerView.h"
 #import "GADBannerViewDelegate.h"
+#import "PrintViewController.h"
 
 @implementation CreateFlyerController
 
@@ -31,7 +32,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 @synthesize libText,libBackground,libArts,libPhoto,libEmpty,backtemplates,cameraTakePhoto,cameraRoll,flyerBorder;
 @synthesize flyimgView,currentLayer,layersDic,flyer,player,playerView,playerToolBar,playButton,playerSlider,tempelateView;
 @synthesize durationLabel,durationChange,onFlyerBack,shouldShowAdd;
-@synthesize backgroundsView,flyerBordersView,colorsView,sizesView,bannerAddView,bannerAddDismissButton;
+@synthesize backgroundsView,flyerBordersView,colorsView,sizesView,bannerAddView,bannerAddBackView,bannerAddDismissButton;
 int selectedAddMoreLayerTab = -1;
 
 
@@ -137,6 +138,7 @@ NSArray *coloursArray;
 // Dismiss action for banner ad
 -(IBAction)dissmisBannerAdd:(id)sender{
     
+    [self.bannerAddBackView removeFromSuperview];
     [self.bannerAddView removeFromSuperview];
 }
 
@@ -3326,11 +3328,13 @@ NSArray *coloursArray;
         
         if ([flyer isVideoFlyer]) {
             shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareVideoViewController" bundle:nil];
-            shareviewcontroller.cfController = self;
             
         } else {
             shareviewcontroller = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
         }
+        
+        shareviewcontroller.cfController = self;
+        
         sharePanel = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.origin.y, 320,400 )];
         
         sharePanel = shareviewcontroller.view;
@@ -3386,7 +3390,6 @@ NSArray *coloursArray;
         [user saveInBackground];
         
         [shareviewcontroller setSocialStatus];
-        
         
         //Here we Get youtube Link
         NSString *isAnyVideoUploadOnYoutube = [self.flyer getYoutubeLink];
@@ -4592,6 +4595,17 @@ NSArray *coloursArray;
         
         [spaceUnavailableAlert show];
     }
+}
+
+- (void)printFlyer {
+    
+    if(IS_IPHONE_5){
+        printViewController = [[PrintViewController alloc] initWithNibName:@"PrintViewController" bundle:nil];
+    }else {
+        printViewController = [[PrintViewController alloc] initWithNibName:@"InAppViewController-iPhone4" bundle:nil];
+    }
+    
+    [self presentModalViewController:printViewController animated:NO];
 }
 
 @end

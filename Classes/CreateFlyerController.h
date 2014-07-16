@@ -33,10 +33,11 @@
 #import "GADInterstitialDelegate.h"
 #import "GADBannerView.h"
 
-@class FlyerlySingleton, Flyer, FlyerImageView, ShareViewController, SigninController,InAppViewController;
+@class FlyerlySingleton, Flyer, FlyerImageView, ShareViewController, SigninController,InAppViewController,PrintViewController;
 @interface CreateFlyerController :ParentViewController<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, FlyerImageViewDelegate,UIGestureRecognizerDelegate,InAppPurchasePanelButtonProtocol, UserPurchasesDelegate, GADInterstitialDelegate, GADBannerViewDelegate>
 
 {
+    PrintViewController *printViewController;
     InAppViewController *inappviewcontroller;
     UIActivityIndicatorView *uiBusy;
 
@@ -75,6 +76,7 @@
 @property(nonatomic, strong) GADBannerView *bannerAdd;
 
 @property(nonatomic, strong) IBOutlet UIView *bannerAddView;
+@property(nonatomic, strong) IBOutlet UIView *bannerAddBackView;
 
 @property (nonatomic, strong)IBOutlet UIButton *bannerAddDismissButton;
 
@@ -172,6 +174,7 @@
 -(void) choosePhoto;
 -(void) donePhoto;
 -(void) share;
+-(void)printFlyer;
 
 -(NSString *)getImagePathByTag :(NSString *)imgName;
 -(NSString *)getImagePathforPhoto :(UIImage *)img;
