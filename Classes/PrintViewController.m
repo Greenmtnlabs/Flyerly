@@ -7,6 +7,7 @@
 //
 
 #import "PrintViewController.h"
+#import "CreateFlyerController.h"
 
 @interface PrintViewController ()
 
@@ -15,12 +16,23 @@
 @implementation PrintViewController
 
 
-@synthesize printButton;
+@synthesize printButton,startButton,flyer;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    // setting border for login/restore purchases button
+    
+    //Setting up border on start button
+    startButton.layer.borderWidth=1.0f;
+    [startButton.layer setCornerRadius:3.0];
+    startButton.layer.borderColor=[[UIColor whiteColor] CGColor];
+    
+    //Setting up border on print button
+    printButton.layer.borderWidth=1.0f;
+    [printButton.layer setCornerRadius:3.0];
+    printButton.layer.borderColor=[[UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0] CGColor];
 }
 
 - (void)didReceiveMemoryWarning
@@ -34,36 +46,26 @@
 }
 
 - (IBAction)onPrintFlyer:(UIButton *)sender {
+    
     UIPrintInteractionController *pic = [UIPrintInteractionController sharedPrintController];
     
-    //UIPrintInfo *printInfo = [UIPrintInfo printInfo];
-    //printInfo.outputType = UIPrintInfoOutputGeneral;
-    //printInfo.jobName = PRINT_DOCUMENT_NAME;
-    //pic.printInfo = printInfo;
-    
-    /*UIMarkupTextPrintFormatter *htmlFormatter = [[UIMarkupTextPrintFormatter alloc]
-                                                 initWithMarkupText:[self prepareReport]];*/
-   //htmlFormatter.startPage = 0;
-    //htmlFormatter.contentInsets = UIEdgeInsetsMake(72.0, 72.0, 72.0, 72.0); // 1 inch margins
-    //htmlFormatter.maximumContentWidth = 6 * 72.0;
-    //pic.printFormatter = htmlFormatter;
-    pic.showsPageRange = YES;
-    
     void (^completionHandler)(UIPrintInteractionController *, BOOL, NSError *) =
-    ^(UIPrintInteractionController *printController, BOOL completed, NSError *error) {
-        if (!completed && error) {
-            
-            NSLog(@"Error Occured");
-            /*UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"UNABLE_EMAIL_TITLE"
-                                                            message:[@"UNABLE_EMAIL_MESSAGE]"
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"UNABLE_EMAIL_CANCEL_BUTTON"
-                                                  otherButtonTitles:@"UNABLE_EMAIL_OTHER_BUTTONS"];
-            [alert show];*/
-        }
+    ^(UIPrintInteractionController *pic, BOOL completed, NSError *error) {
+        if (!completed && error) NSLog(@"Print error: %@", error);
     };
     
-    [pic presentFromRect:printButton.frame inView:printButton.superview animated:YES completionHandler:completionHandler];
+    NSString *imageToPrintPath = [flyer getFlyerImage];
+    UIImage *imageToPrint =  [UIImage imageWithContentsOfFile:imageToPrintPath];
+    pic.printingItem = imageToPrint;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        //[printController presentFromRect:printButton.frame inView:printButton.superview
+                                //animated:YES completionHandler:completionHandler];
+    } else {
+        [pic presentAnimated:YES completionHandler:completionHandler];
+    }
+}
+
+- (IBAction)startButton:(UIButton *)sender {
 }
 
 @end

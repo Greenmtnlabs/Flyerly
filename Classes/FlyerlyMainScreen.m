@@ -318,10 +318,6 @@ BOOL adLoaded = false;
     // Note: Edit SampleConstants.h to update kSampleAdUnitId with your interstitial ad unit id.
     self.interstitial.adUnitID = @"ca-app-pub-5409664730066465/9926514430";
     
-    //UIViewController *adView = [[UIViewController alloc] init];
-    
-    //[weakSelf.navigationController pushViewController:adView animated:NO];
-    
     dispatch_async( dispatch_get_main_queue(), ^{
         
         [self.interstitial loadRequest:[self request]];
@@ -345,7 +341,6 @@ BOOL adLoaded = false;
         [[NSUserDefaults standardUserDefaults] setObject:@"greeted" forKey:@"greeted"];
     
     }
-    
     
 	globle = [FlyerlySingleton RetrieveSingleton];
     createFlyrButton.showsTouchWhenHighlighted = YES;

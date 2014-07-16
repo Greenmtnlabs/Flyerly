@@ -4605,6 +4605,8 @@ NSArray *coloursArray;
         printViewController = [[PrintViewController alloc] initWithNibName:@"InAppViewController-iPhone4" bundle:nil];
     }
     
+    printViewController.flyer = self.flyer;
+    
     [self presentModalViewController:printViewController animated:NO];
 }
 

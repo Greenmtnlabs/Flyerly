@@ -254,6 +254,8 @@
 		20D7474717BE7A9900966BA6 /* login_email_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 20D7474317BE7A9900966BA6 /* login_email_icon.png */; };
 		20ECF9A918D6E1AD0035E3DE /* UIPlaceHolderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 20ECF9A818D6E1AD0035E3DE /* UIPlaceHolderTextView.m */; };
 		20F1FB061976526600D40E60 /* closeAd@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20F1FB051976526600D40E60 /* closeAd@2x.png */; };
+		20F1FB09197690D500D40E60 /* printer_sharing_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 20F1FB07197690D500D40E60 /* printer_sharing_selected.png */; };
+		20F1FB0A197690D500D40E60 /* printer_sharing.png in Resources */ = {isa = PBXBuildFile; fileRef = 20F1FB08197690D500D40E60 /* printer_sharing.png */; };
 		20F4D8E017BA3D0A007B2DF5 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F4D8DE17BA3D09007B2DF5 /* ProfileViewController.m */; };
 		20F4D8E117BA3D0A007B2DF5 /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20F4D8DF17BA3D0A007B2DF5 /* ProfileViewController.xib */; };
 		20F4D8E517BA40EA007B2DF5 /* FlyerlySingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F4D8E417BA40EA007B2DF5 /* FlyerlySingleton.m */; };
@@ -1414,6 +1416,8 @@
 		20ECF9A718D6E1AD0035E3DE /* UIPlaceHolderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPlaceHolderTextView.h; sourceTree = "<group>"; };
 		20ECF9A818D6E1AD0035E3DE /* UIPlaceHolderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPlaceHolderTextView.m; sourceTree = "<group>"; };
 		20F1FB051976526600D40E60 /* closeAd@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "closeAd@2x.png"; sourceTree = "<group>"; };
+		20F1FB07197690D500D40E60 /* printer_sharing_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = printer_sharing_selected.png; sourceTree = "<group>"; };
+		20F1FB08197690D500D40E60 /* printer_sharing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = printer_sharing.png; sourceTree = "<group>"; };
 		20F4D8DD17BA3D09007B2DF5 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		20F4D8DE17BA3D09007B2DF5 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		20F4D8DF17BA3D0A007B2DF5 /* ProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
@@ -2513,6 +2517,8 @@
 		0DF3A361108DF47400D6C887 /* ImageLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				20F1FB07197690D500D40E60 /* printer_sharing_selected.png */,
+				20F1FB08197690D500D40E60 /* printer_sharing.png */,
 				20F1FB051976526600D40E60 /* closeAd@2x.png */,
 				202D78131962BAAE00D54F3B /* facebook_share_saved@2x.png */,
 				20449F92196181A6007BE4BF /* discount.png */,
@@ -4457,6 +4463,7 @@
 				246EF520193C515D004539B2 /* emoticon64@2x.png in Resources */,
 				242184BE194B4AEC00FDDA97 /* emoticon176@2x.png in Resources */,
 				245C0FA51933081200B5B31C /* free-features.plist in Resources */,
+				20F1FB09197690D500D40E60 /* printer_sharing_selected.png in Resources */,
 				2421849B194B4AEC00FDDA97 /* emoticon140@2x.png in Resources */,
 				24218463194B4AEC00FDDA97 /* basketball-icon.png in Resources */,
 				30D58D1D10FB1BF800E0C7E8 /* icon36.jpg in Resources */,
@@ -4954,6 +4961,7 @@
 				65C1A4581742516D00947D5E /* Template64@2x.jpg in Resources */,
 				65C1A4591742516D00947D5E /* Template65@2x.jpg in Resources */,
 				65C1A45A1742516D00947D5E /* Template66@2x.jpg in Resources */,
+				20F1FB0A197690D500D40E60 /* printer_sharing.png in Resources */,
 				20F83859196D292C006B72A0 /* uv_logo.png in Resources */,
 				249F2032193F562C0072835E /* ModeVideowithLock@2x.png in Resources */,
 				242184DE194B4AEC00FDDA97 /* handball-icon.png in Resources */,
