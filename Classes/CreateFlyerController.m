@@ -15,6 +15,7 @@
 #import "GADBannerView.h"
 #import "GADBannerViewDelegate.h"
 #import "PrintViewController.h"
+#import "InviteForPrint.h"
 
 @implementation CreateFlyerController
 
@@ -2846,7 +2847,6 @@ NSArray *coloursArray;
                         self.onFlyerBack(@"");
                         
                     });
-                    
                 }
                 
                 // Here we Add Video In Flyerly Album
@@ -4606,8 +4606,17 @@ NSArray *coloursArray;
     }
     
     printViewController.flyer = self.flyer;
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(didDismissPrintViewController)
+                                                 name:@"PrintViewControllerDismissed"
+                                               object:nil];
     [self presentModalViewController:printViewController animated:NO];
+}
+
+-(void)didDismissPrintViewController {
+    
+    InviteForPrint *inviteForPrint = [[InviteForPrint alloc]initWithNibName:@"InviteForPrint" bundle:nil];
+	[self.navigationController pushViewController:inviteForPrint animated:YES];
 }
 
 @end

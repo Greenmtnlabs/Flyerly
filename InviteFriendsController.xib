@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1280" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
@@ -119,12 +119,12 @@
         </view>
     </objects>
     <resources>
-        <image name="invite_facebook.png" width="213" height="90"/>
-        <image name="invite_facebook_selected.png" width="213" height="90"/>
-        <image name="invite_sms.png" width="213" height="90"/>
-        <image name="invite_sms_selected.png" width="213" height="90"/>
-        <image name="invite_twitter.png" width="213" height="90"/>
-        <image name="invite_twitter_selected.png" width="213" height="90"/>
-        <image name="searchicon.png" width="26" height="27"/>
+        <image name="invite_facebook.png" width="106" height="45"/>
+        <image name="invite_facebook_selected.png" width="106" height="45"/>
+        <image name="invite_sms.png" width="106" height="45"/>
+        <image name="invite_sms_selected.png" width="106" height="45"/>
+        <image name="invite_twitter.png" width="106" height="45"/>
+        <image name="invite_twitter_selected.png" width="106" height="45"/>
+        <image name="searchicon.png" width="13" height="13"/>
     </resources>
 </document>
