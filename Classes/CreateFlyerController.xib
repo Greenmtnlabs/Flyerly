@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment version="784" defaultVersion="1280" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
@@ -25,6 +25,7 @@
                 <outlet property="clipArtTabButton" destination="LPQ-8t-r0c" id="nAp-O1-pYM"/>
                 <outlet property="colorTabButton" destination="RCh-PH-bvk" id="kzT-0A-OKE"/>
                 <outlet property="contextView" destination="rbq-e2-wbO" id="BDJ-TX-Ld1"/>
+                <outlet property="drawingTabButton" destination="jfO-Kb-CHA" id="RH5-Qh-7xZ"/>
                 <outlet property="durationChange" destination="tOL-PL-xlu" id="c1O-G7-Aad"/>
                 <outlet property="durationLabel" destination="gqJ-fV-ZCI" id="8Hk-8V-eSV"/>
                 <outlet property="emoticonsTabButton" destination="gde-ht-Yew" id="Nz7-l8-Wtc"/>
@@ -441,12 +442,12 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
         </view>
-        <view contentMode="scaleToFill" id="weP-Ld-FsM">
+        <view contentMode="scaleToFill" id="weP-Ld-FsM" userLabel="View - ClipArtsTabs">
             <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <button opaque="NO" tag="10001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="LPQ-8t-r0c">
-                    <rect key="frame" x="0.0" y="0.0" width="80" height="45"/>
+                    <rect key="frame" x="0.0" y="0.0" width="64" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Font"/>
                     <state key="normal" image="clipart_tab.png">
@@ -457,8 +458,20 @@
                         <action selector="setArtsTabAction:" destination="-1" eventType="touchUpInside" id="L5P-AP-wZ3"/>
                     </connections>
                 </button>
+                <button opaque="NO" tag="10001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="jfO-Kb-CHA" userLabel="Button - drawingTabButton">
+                    <rect key="frame" x="128" y="0.0" width="64" height="45"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <accessibility key="accessibilityConfiguration" label="Font"/>
+                    <state key="normal" image="clipart_tab.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="selected" image="clipart_tab_selected.png"/>
+                    <connections>
+                        <action selector="setArtsTabAction:" destination="-1" eventType="touchUpInside" id="z5K-bp-dcP"/>
+                    </connections>
+                </button>
                 <button opaque="NO" tag="10002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="gde-ht-Yew">
-                    <rect key="frame" x="80" y="0.0" width="80" height="45"/>
+                    <rect key="frame" x="64" y="0.0" width="64" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Color"/>
                     <state key="normal" image="emoticons_tab.png">
@@ -470,7 +483,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" tag="10003" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="Dde-Nb-nED">
-                    <rect key="frame" x="160" y="0.0" width="80" height="45"/>
+                    <rect key="frame" x="192" y="0.0" width="64" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Size"/>
                     <state key="normal" image="color_tab.png">
@@ -482,7 +495,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" tag="10004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="5Cl-rC-EDu">
-                    <rect key="frame" x="240" y="0.0" width="80" height="45"/>
+                    <rect key="frame" x="256" y="0.0" width="64" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="TextBorder"/>
                     <state key="normal" image="size_tab.png">

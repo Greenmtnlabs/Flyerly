@@ -25,7 +25,7 @@ UIButton *backButton;
 
 
 @synthesize selectedFont,selectedColor,selectedTemplate,fontTabButton,colorTabButton,sizeTabButton,fontEditButton,selectedSize,
-fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sharePanel,clipArtTabButton,emoticonsTabButton,artsColorTabButton,artsSizeTabButton;
+fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sharePanel,clipArtTabButton,emoticonsTabButton,artsColorTabButton,drawingTabButton,artsSizeTabButton;
 @synthesize cameraTabButton,photoTabButton,widthTabButton,heightTabButton,deleteAlert,signInAlert,spaceUnavailableAlert;
 @synthesize imgPickerFlag,layerScrollView,flyerPath;
 @synthesize contextView,libraryContextView,libFlyer,backgroundTabButton,addMoreFontTabButton;
@@ -36,11 +36,11 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 int selectedAddMoreLayerTab = -1;
 
 
-ResourcesView *emoticonsView,*clipartsView,*fontsView,*textBordersView;
+ResourcesView *emoticonsView,*clipartsView,*fontsView,*textBordersView,*drawingView;
 
-NSString *fontsViewResourcePath,*clipartsViewResourcePath,*emoticonsViewResourcePath;
+NSString *fontsViewResourcePath,*clipartsViewResourcePath,*emoticonsViewResourcePath,*drawingViewResourcePath;
 
-NSMutableArray *fontsArray,*clipartsArray,*emoticonsArray;
+NSMutableArray *fontsArray,*clipartsArray,*emoticonsArray, *drawingArray;
 
 NSArray *coloursArray;
 
@@ -419,6 +419,8 @@ NSArray *coloursArray;
             [self addClipArtsInSubView];
             
             [self addEmoticonsInSubView];
+            [self addDrawingInSubView];
+            
             
         } else {
             
@@ -677,6 +679,66 @@ NSArray *coloursArray;
                 i++;
             }
         }// Loop
+    });
+}
+
+/*
+ * Add Drawing styles(line,dotted,dashed ..etc) in scroll views
+ */
+-(void)addDrawingInSubView{
+    
+    //DELETE SUBVIEWS
+    [self deleteSubviewsFromScrollView];
+    
+    CGFloat curXLoc = 0;
+    CGFloat curYLoc = 5;
+    int increment = 5;
+    
+    if(IS_IPHONE_5){
+        curXLoc = 13;
+        curYLoc = 10;
+        increment = 8;
+    }
+    
+    NSMutableDictionary *textLayer;
+    __block NSString *textSize;
+    
+    //Getting Last Info of Text Layer
+    if (![currentLayer isEqualToString:@""]) {
+        textLayer = [flyer getLayerFromMaster:currentLayer];
+        textSize = [textLayer objectForKey:@"fontsize"];
+    }
+    
+    // Load sizes xib asynchronously
+    dispatch_async( dispatch_get_main_queue(), ^{
+        
+        if(IS_IPHONE_5){
+            
+            [layerScrollView addSubview:drawingView];
+            [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
+            
+        } else {
+            
+            [layerScrollView addSubview:drawingView];
+            [layerScrollView setContentSize:CGSizeMake(drawingView.frame.size.width, [layerScrollView bounds].size.height)];
+            
+        }
+        
+        textSize = [NSString stringWithFormat:@"%f", ([textSize floatValue]/3.0)];
+        
+        NSArray *sizesArray = drawingView.subviews;
+        for (int i = 1; i <=  3 ; i++)
+        {
+            
+            UIButton *size;
+            if ([sizesArray[i-1] isKindOfClass:[UIButton class]]) {
+                size = (UIButton *) sizesArray[i-1];
+            }
+            
+            NSString *sizeValue =SIZE_ARRAY[(i-1)];
+            [size setTitle:sizeValue forState:UIControlStateNormal];
+        }
+        
     });
 }
 
@@ -1057,7 +1119,6 @@ NSArray *coloursArray;
         [layerScrollView setContentSize:CGSizeMake(clipartsView.size.width , heightValue)];
     }
 }
-
 
 /*
  * Add Emoticons in scroll views
@@ -3723,6 +3784,7 @@ NSArray *coloursArray;
     [clipArtTabButton setSelected:NO];
     [emoticonsTabButton setSelected:NO];
     [artsColorTabButton setSelected:NO];
+    [drawingTabButton setSelected:NO];
     [artsSizeTabButton setSelected:NO];
     UIButton *selectedButton = (UIButton*)sender;
     
@@ -3845,6 +3907,41 @@ NSArray *coloursArray;
         
 		[artsSizeTabButton setSelected:YES];
 	}
+    else if(selectedButton == drawingTabButton ){
+        //HERE WE SET ANIMATION
+        [UIView animateWithDuration:0.4f
+                         animations:^{
+                             
+                             if(IS_IPHONE_5){
+                                 
+                                 // Delete SubViews from ScrollView and add Emoticons view
+                                 [self deleteSubviewsFromScrollView];
+                                 [layerScrollView addSubview:emoticonsView];
+                                 [layerScrollView setContentSize:CGSizeMake(320, emoticonsView.size.height)];
+                                 
+                                 [self setSelectedItem:FLYER_LAYER_EMOTICON inView:emoticonsView ofLayerAttribute:LAYER_ATTRIBUTE_IMAGE];
+                                 
+                             } else {
+                                 
+                                 
+                                 // Delete SubViews from ScrollView and add Emoticons view
+                                 [self deleteSubviewsFromScrollView];
+                                 [layerScrollView addSubview:emoticonsView];
+                                 [layerScrollView setContentSize:CGSizeMake(emoticonsView.size.width , emoticonsView.size.height)];
+                                 
+                                 [self setSelectedItem:FLYER_LAYER_EMOTICON inView:emoticonsView ofLayerAttribute:LAYER_ATTRIBUTE_IMAGE];
+                                 //[layerScrollView setContentSize:CGSizeMake(([symbolArray count]*(symbolScrollWidth+5)), [layerScrollView bounds].size.height)];
+                             }
+                         }
+                         completion:^(BOOL finished){
+                             [layerScrollView flashScrollIndicators];
+                         }];
+        //END ANIMATION
+        
+        //Add ContextView
+        [self addScrollView:layerScrollView];
+        [drawingTabButton setSelected:YES];
+    }
     
     
 }

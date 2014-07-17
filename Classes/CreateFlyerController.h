@@ -149,6 +149,7 @@
 @property (nonatomic, strong)IBOutlet UIButton *clipArtTabButton;
 @property (nonatomic, strong)IBOutlet UIButton *emoticonsTabButton;
 @property (nonatomic, strong)IBOutlet UIButton *artsColorTabButton;
+@property (nonatomic, strong)IBOutlet UIButton *drawingTabButton;
 @property (nonatomic, strong)IBOutlet UIButton *artsSizeTabButton;
 
 //These are LibPhoto
