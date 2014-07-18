@@ -274,7 +274,6 @@
     }
 }
 
-
 /*
  * Mehod called to get contacts
  */
@@ -294,67 +293,93 @@
         
         ABRecordRef ref = CFArrayGetValueAtIndex(allPeople,i);
         
-        //For username and surname
-        ABMultiValueRef phones =(__bridge ABMultiValueRef)((NSString*)CFBridgingRelease(ABRecordCopyValue(ref, kABPersonPhoneProperty)));
-        CFStringRef firstName, lastName;
-        firstName = ABRecordCopyValue(ref, kABPersonFirstNameProperty);
-        lastName  = ABRecordCopyValue(ref, kABPersonLastNameProperty);
+        // For Contact adress
+        NSMutableDictionary *contactInfoDict = [[NSMutableDictionary alloc]
+                                                initWithObjects:@[@"", @"", @"", @"", @""]
+                                                forKeys:@[@"streetAddress",@"city",@"state",@"zip",@"country"]];
         
-        
-        if(!firstName)
-            firstName = (CFStringRef) @"";
-        if(!lastName)
-            lastName = (CFStringRef) @"";
-        
-        model.name = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
-        
-        // For contact picture
-        UIImage *contactPicture;
-        
-        if (ref != nil && ABPersonHasImageData(ref)) {
-            if ( &ABPersonCopyImageDataWithFormat != nil ) {
-                // iOS >= 4.1
-                contactPicture = [UIImage imageWithData:(NSData *)CFBridgingRelease(ABPersonCopyImageDataWithFormat(ref, kABPersonImageFormatThumbnail))];
-                model.img = contactPicture;
-            } else {
-                // iOS < 4.1
-                contactPicture = [UIImage imageWithData:(NSData *)CFBridgingRelease(ABPersonCopyImageData(ref))];
-                model.img = contactPicture;
-            }
-        }
-        
-        
-        
-        //For Phone number
-        NSString* mobileLabel;
-        
-        for(CFIndex i = 0; i < ABMultiValueGetCount(phones); i++) {
+        ABMultiValueRef addressRef = ABRecordCopyValue(ref, kABPersonAddressProperty);
+        if (ABMultiValueGetCount(addressRef) > 0) {
+            NSDictionary *addressDict = (__bridge NSDictionary *)ABMultiValueCopyValueAtIndex(addressRef, 0);
             
-            mobileLabel = (NSString*)CFBridgingRelease(ABMultiValueCopyLabelAtIndex(phones, i));
-            if([mobileLabel isEqualToString:(NSString *)kABPersonPhoneMobileLabel])
-            {
-                model.description = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
-                [contactsArray addObject:model];
-                break ;
+            if( [addressDict objectForKey:(NSString *)kABPersonAddressStreetKey] != nil ){
+                [contactInfoDict setObject:[addressDict objectForKey:(NSString *)kABPersonAddressStreetKey] forKey:@"streetAddress"];
             }
-            else if ([mobileLabel isEqualToString:(NSString*)kABPersonPhoneIPhoneLabel])
-            {
-                model.description = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
-                [contactsArray addObject:model];
-                break ;
-            }else if ([mobileLabel isEqualToString:(NSString*)kABHomeLabel])
-            {
-                model.description = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
-                [contactsArray addObject:model];
-                break ;
-            }else if ([mobileLabel isEqualToString:(NSString*)kABWorkLabel])
-            {
-                model.description = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
-                [contactsArray addObject:model];
-                break ;
+            if( [addressDict objectForKey:(NSString *)kABPersonAddressCityKey] != nil ){
+                [contactInfoDict setObject:[addressDict objectForKey:(NSString *)kABPersonAddressCityKey] forKey:@"city"];
+            }
+            if( [addressDict objectForKey:(NSString *)kABPersonAddressStateKey] != nil ){
+                [contactInfoDict setObject:[addressDict objectForKey:(NSString *)kABPersonAddressStateKey] forKey:@"state"];
+            }
+            if( [addressDict objectForKey:(NSString *)kABPersonAddressZIPKey] != nil ){
+                [contactInfoDict setObject:[addressDict objectForKey:(NSString *)kABPersonAddressZIPKey] forKey:@"zip"];
+            }
+            if( [addressDict objectForKey:(NSString *)kABPersonAddressCountryKey] != nil ){
+                [contactInfoDict setObject:[addressDict objectForKey:(NSString *)kABPersonAddressCountryKey] forKey:@"country"];
+            }
+            
+        }
+        CFRelease(addressRef);
+        //-------
+        
+        if ( ![[contactInfoDict objectForKey:@"streetAddress"] isEqualToString:@""] && ![[contactInfoDict objectForKey:@"city"] isEqualToString:@""] && ![[contactInfoDict objectForKey:@"country"] isEqualToString:@""] ) {
+            //For username and surname
+            ABMultiValueRef phones =(__bridge ABMultiValueRef)((NSString*)CFBridgingRelease(ABRecordCopyValue(ref, kABPersonPhoneProperty)));
+            CFStringRef firstName, lastName;
+            firstName = ABRecordCopyValue(ref, kABPersonFirstNameProperty);
+            lastName  = ABRecordCopyValue(ref, kABPersonLastNameProperty);
+            
+            if(!firstName)
+                firstName = (CFStringRef) @"";
+            if(!lastName)
+                lastName = (CFStringRef) @"";
+            
+            model.name = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
+            
+            // For contact picture
+            UIImage *contactPicture;
+            
+            if (ref != nil && ABPersonHasImageData(ref)) {
+                if ( &ABPersonCopyImageDataWithFormat != nil ) {
+                    // iOS >= 4.1
+                    contactPicture = [UIImage imageWithData:(NSData *)CFBridgingRelease(ABPersonCopyImageDataWithFormat(ref, kABPersonImageFormatThumbnail))];
+                    model.img = contactPicture;
+                } else {
+                    // iOS < 4.1
+                    contactPicture = [UIImage imageWithData:(NSData *)CFBridgingRelease(ABPersonCopyImageData(ref))];
+                    model.img = contactPicture;
+                }
+            }
+            
+            //For Phone number
+            NSString* mobileLabel;
+            for(CFIndex i = 0; i < ABMultiValueGetCount(phones); i++) {
+                
+                mobileLabel = (NSString*)CFBridgingRelease(ABMultiValueCopyLabelAtIndex(phones, i));
+                if([mobileLabel isEqualToString:(NSString *)kABPersonPhoneMobileLabel])
+                {
+                    model.description = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
+                    [contactsArray addObject:model];
+                    break ;
+                }
+                else if ([mobileLabel isEqualToString:(NSString*)kABPersonPhoneIPhoneLabel])
+                {
+                    model.description = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
+                    [contactsArray addObject:model];
+                    break ;
+                }else if ([mobileLabel isEqualToString:(NSString*)kABHomeLabel])
+                {
+                    model.description = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
+                    [contactsArray addObject:model];
+                    break ;
+                }else if ([mobileLabel isEqualToString:(NSString*)kABWorkLabel])
+                {
+                    model.description = (NSString*)CFBridgingRelease(ABMultiValueCopyValueAtIndex(phones, i));
+                    [contactsArray addObject:model];
+                    break ;
+                }
             }
         }
-        
     }
     
     // Reload table data after all the contacts get loaded
@@ -364,6 +389,7 @@
     [self hideLoadingIndicator];
     
 }
+
 
 #pragma mark Table view methods
 

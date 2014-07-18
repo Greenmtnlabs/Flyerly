@@ -4610,7 +4610,7 @@ NSArray *coloursArray;
                                              selector:@selector(didDismissPrintViewController)
                                                  name:@"PrintViewControllerDismissed"
                                                object:nil];
-    [self presentModalViewController:printViewController animated:NO];
+    [self presentModalViewController:printViewController animated:YES];
 }
 
 -(void)didDismissPrintViewController {
