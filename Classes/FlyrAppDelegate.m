@@ -7,6 +7,7 @@
 //
 
 #import "FlyrAppDelegate.h"
+#import "PaypalMobile.h"
 
 
 NSString *kCheckTokenStep1 = @"kCheckTokenStep";
@@ -149,6 +150,11 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     /* Uncomment this line if you want to remove transactions from the phone.
     [_persistence removeTransactions];
     */
+    
+    // Setup paypal
+    [PayPalMobile initializeWithClientIdsForEnvironments:
+     @{PayPalEnvironmentProduction : @"",
+       PayPalEnvironmentSandbox : @"AWdPPxAB1tPoTWBPDw2kc18IE-JK62B0m0lUkPEpibC9it_4p7Vv2Y3PCpgl"}];
     
     // Configurator initialization
     FlyerlyConfigurator *flyerConfigurator = [[FlyerlyConfigurator alloc] init];

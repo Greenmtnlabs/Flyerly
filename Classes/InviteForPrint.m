@@ -16,6 +16,13 @@
 #import "Flurry.h"
 #import "UserVoice.h"
 
+@interface InviteForPrint ()
+
+@property (nonatomic, strong, readwrite) PayPalConfiguration *payPalConfiguration;
+
+@end
+
+
 @implementation InviteForPrint
 @synthesize uiTableView, contactsArray, selectedIdentifiers, searchTextField, iPhoneinvited;
 @synthesize contactBackupArray;
@@ -141,6 +148,10 @@
     identifiers = selectedIdentifiers;
     NSLog(@"%@",identifiers);
     
+    if([identifiers count] > 0) {
+    
+        [self openBuyPanel:selectedIdentifiers.count];
+    }
     /*if([identifiers count] > 0){
         
         // Send invitations
@@ -461,7 +472,7 @@
     
     
     // HERE WE PASS DATA TO CELL CLASS
-    [cell setCellObjects:receivedDic :status];
+    [cell setCellObjects:receivedDic :status :@"PrintInvites"];
     
     return cell;
 }
@@ -495,6 +506,7 @@
             
             //REMOVE FROM SENDING LIST
             [selectedIdentifiers removeObject:model.description];
+            
         }
 }
 
@@ -658,6 +670,54 @@
 
 -(void) friendsInvited {
     [Flurry logEvent:@"Friends Invited"];
+}
+
+
+/*
+ * Here we Open Buy Panel
+ */
+-(void)openBuyPanel : (int) totalContactsToSendPrint {
+    // Create a PayPalPayment
+    PayPalPayment *payment = [[PayPalPayment alloc] init];
+    
+    // Amount, currency, and description
+    NSDecimalNumber *totalAmount = [[NSDecimalNumber alloc] initWithInt:(2 * totalContactsToSendPrint)];
+    payment.amount = totalAmount;//[NSDecimalNumber decimalNumberWithDecimal:totalAmount];
+    payment.currencyCode = @"USD";
+    payment.shortDescription = @"Printing";//pqProduct.title;
+    
+    // Use the intent property to indicate that this is a "sale" payment,
+    // meaning combined Authorization + Capture. To perform Authorization only,
+    // and defer Capture to your server, use PayPalPaymentIntentAuthorize.
+    payment.intent = PayPalPaymentIntentSale;
+    
+    // Check whether payment is processable.
+    if ( payment.processable ) {
+        // If, for example, the amount was negative or the shortDescription was empty, then
+        // this payment would not be processable. You would want to handle that here.
+        PayPalPaymentViewController *paymentViewController;
+        paymentViewController = [[PayPalPaymentViewController alloc] initWithPayment:payment
+                                                                       configuration:self.payPalConfiguration
+                                                                            delegate:self];
+        
+        // Present the PayPalPaymentViewController.
+        [self presentViewController:paymentViewController animated:YES completion:nil];
+    }
+}
+
+#pragma mark - Paypal delegate
+
+- (void)payPalPaymentViewController:(PayPalPaymentViewController *)paymentViewController
+                 didCompletePayment:(PayPalPayment *)completedPayment {
+    
+    NSLog(@"taktaktaktak %@",completedPayment);
+    // Dismiss the PayPalPaymentViewController.
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)payPalPaymentDidCancel:(PayPalPaymentViewController *)paymentViewController {
+    // The payment was canceled; dismiss the PayPalPaymentViewController.
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

@@ -20,7 +20,7 @@
 /*
  * Set CellObjects
  */
--(void)setCellObjects :(ContactsModel *)model :(int)status {
+-(void)setCellObjects :(ContactsModel *)model :(int)status :(NSString*) tableName {
 
     // Set Values
     [dName setText:model.name];
@@ -31,9 +31,12 @@
         [description setText:model.others];
     }
     [imgview setImage:model.img];
-     model.delegate = self;
-    [model setInvitedStatus:status];
-   
+    model.delegate = self;
+    if ( [tableName isEqualToString:@"InviteFriends"] ){
+        [model setInvitedStatus:status];
+    }else if ( [tableName isEqualToString:@"PrintInvites"] ){
+        [model setInvitedStatus:0];
+    }
     
 }
 
