@@ -266,6 +266,8 @@
 		20CC6926180DA44C002F2E6F /* icon-120.png in Resources */ = {isa = PBXBuildFile; fileRef = 20CC6924180DA44C002F2E6F /* icon-120.png */; };
 		20D7474117BE77E900966BA6 /* splash_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 20D7473F17BE77E900966BA6 /* splash_bg.png */; };
 		20D7474717BE7A9900966BA6 /* login_email_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 20D7474317BE7A9900966BA6 /* login_email_icon.png */; };
+		20E4638A197E3FB600473921 /* UIImagePDF.m in Sources */ = {isa = PBXBuildFile; fileRef = 20E46388197E3FB600473921 /* UIImagePDF.m */; };
+		20E4638D197E688600473921 /* pdf_Bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 20E4638C197E688600473921 /* pdf_Bg.png */; };
 		20ECF9A918D6E1AD0035E3DE /* UIPlaceHolderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 20ECF9A818D6E1AD0035E3DE /* UIPlaceHolderTextView.m */; };
 		20F1FB061976526600D40E60 /* closeAd@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20F1FB051976526600D40E60 /* closeAd@2x.png */; };
 		20F1FB09197690D500D40E60 /* printer_sharing_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 20F1FB07197690D500D40E60 /* printer_sharing_selected.png */; };
@@ -1448,6 +1450,9 @@
 		20CC6924180DA44C002F2E6F /* icon-120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-120.png"; sourceTree = "<group>"; };
 		20D7473F17BE77E900966BA6 /* splash_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash_bg.png; sourceTree = "<group>"; };
 		20D7474317BE7A9900966BA6 /* login_email_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_email_icon.png; sourceTree = "<group>"; };
+		20E46387197E3FB600473921 /* UIImagePDF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImagePDF.h; sourceTree = "<group>"; };
+		20E46388197E3FB600473921 /* UIImagePDF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImagePDF.m; sourceTree = "<group>"; };
+		20E4638C197E688600473921 /* pdf_Bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pdf_Bg.png; sourceTree = "<group>"; };
 		20ECF9A718D6E1AD0035E3DE /* UIPlaceHolderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPlaceHolderTextView.h; sourceTree = "<group>"; };
 		20ECF9A818D6E1AD0035E3DE /* UIPlaceHolderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPlaceHolderTextView.m; sourceTree = "<group>"; };
 		20F1FB051976526600D40E60 /* closeAd@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "closeAd@2x.png"; sourceTree = "<group>"; };
@@ -2554,6 +2559,7 @@
 		0DF3A361108DF47400D6C887 /* ImageLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				20E4638C197E688600473921 /* pdf_Bg.png */,
 				20F1FB07197690D500D40E60 /* printer_sharing_selected.png */,
 				20F1FB08197690D500D40E60 /* printer_sharing.png */,
 				20F1FB051976526600D40E60 /* closeAd@2x.png */,
@@ -3286,6 +3292,7 @@
 		209BCFAA1975434C006EC811 /* Print Screen */ = {
 			isa = PBXGroup;
 			children = (
+				20E46386197E3F9900473921 /* PDF Views */,
 				200D1933197CF4BA00CFE04B /* PayPal */,
 				2094609F1977AC7D0050B5DE /* New Group */,
 				209BCFA51975433D006EC811 /* PrintViewController.h */,
@@ -3307,6 +3314,15 @@
 				20D7473F17BE77E900966BA6 /* splash_bg.png */,
 			);
 			name = NewLayOuts;
+			sourceTree = "<group>";
+		};
+		20E46386197E3F9900473921 /* PDF Views */ = {
+			isa = PBXGroup;
+			children = (
+				20E46387197E3FB600473921 /* UIImagePDF.h */,
+				20E46388197E3FB600473921 /* UIImagePDF.m */,
+			);
+			name = "PDF Views";
 			sourceTree = "<group>";
 		};
 		20F359741888D5B9001376B6 /* LoginControllers */ = {
@@ -4733,6 +4749,7 @@
 				30D58D7310FB1BF800E0C7E8 /* Template53.jpg in Resources */,
 				20F8385A196D292C006B72A0 /* uv_logo@2x.png in Resources */,
 				247858C81948764D0062F1E4 /* LinLibertine-Regular.ttf in Resources */,
+				20E4638D197E688600473921 /* pdf_Bg.png in Resources */,
 				30D58D7410FB1BF800E0C7E8 /* Template54.jpg in Resources */,
 				30D58D7510FB1BF800E0C7E8 /* Template55.jpg in Resources */,
 				246EF50C193C515D004539B2 /* emoticon46@2x.png in Resources */,
@@ -5514,6 +5531,7 @@
 				0D4903BB1091893B00855C30 /* FlyrViewController.m in Sources */,
 				202C47FC187D6E4B00FE0975 /* BitlyRequest.m in Sources */,
 				E8A7347D1092CFF300661AAD /* ShareViewController.m in Sources */,
+				20E4638A197E3FB600473921 /* UIImagePDF.m in Sources */,
 				208C684F186DAA59004A74F2 /* FlyerlyConfigurator.m in Sources */,
 				2032DCD01871BDFF007036B2 /* CropViewController.m in Sources */,
 				49B8898A188652A2003766AD /* NSData+Extras.m in Sources */,

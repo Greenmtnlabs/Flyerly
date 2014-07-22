@@ -4616,6 +4616,7 @@ NSArray *coloursArray;
 -(void)didDismissPrintViewController {
     
     InviteForPrint *inviteForPrint = [[InviteForPrint alloc]initWithNibName:@"InviteForPrint" bundle:nil];
+    inviteForPrint.flyer = self.flyer;
 	[self.navigationController pushViewController:inviteForPrint animated:YES];
 }
 

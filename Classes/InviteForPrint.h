@@ -9,13 +9,21 @@
 #import <UIKit/UIKit.h>
 #import <ParentViewController.h>
 #import "PayPalMobile.h"
+#import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
+#import "ParentViewController.h"
+#import "Flyer.h"
 
 @class FlyerlySingleton;
 
-@interface InviteForPrint : ParentViewController<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,PayPalPaymentDelegate>{
+@interface InviteForPrint : ParentViewController<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,PayPalPaymentDelegate,MFMailComposeViewControllerDelegate>{
     
     FlyerlySingleton *globle;
 }
+
+- (NSMutableData *)exportFlyerToPDF;
+
+@property (nonatomic,strong) Flyer *flyer;
 
 @property(nonatomic,strong) IBOutlet UITextField *searchTextField;
 

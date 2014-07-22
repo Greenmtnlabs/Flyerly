@@ -14,6 +14,7 @@
 #import "CreateFlyerController.h"
 #import "HelpController.h"
 #import "Flurry.h"
+#import "UIImagePDF.h"
 #import "UserVoice.h"
 
 @interface InviteForPrint ()
@@ -24,7 +25,7 @@
 
 
 @implementation InviteForPrint
-@synthesize uiTableView, contactsArray, selectedIdentifiers, searchTextField, iPhoneinvited;
+@synthesize uiTableView, contactsArray, selectedIdentifiers, searchTextField, iPhoneinvited,flyer;
 @synthesize contactBackupArray;
 
 
@@ -710,14 +711,441 @@
 - (void)payPalPaymentViewController:(PayPalPaymentViewController *)paymentViewController
                  didCompletePayment:(PayPalPayment *)completedPayment {
     
-    NSLog(@"taktaktaktak %@",completedPayment);
+
     // Dismiss the PayPalPaymentViewController.
     [self dismissViewControllerAnimated:YES completion:nil];
+    [self sendPdfFlyer];
 }
 
 - (void)payPalPaymentDidCancel:(PayPalPaymentViewController *)paymentViewController {
     // The payment was canceled; dismiss the PayPalPaymentViewController.
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void) sendPdfFlyer {
+    
+    if ( [MFMailComposeViewController canSendMail] ) {
+        
+        // Prepare the email in a background thread.
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW,0), ^{
+            
+            // Prepare email.
+            MFMailComposeViewController* mailer = [[MFMailComposeViewController alloc] init];
+            mailer.mailComposeDelegate = self;
+            
+            // The subject.
+            NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+            [dateFormat setDateFormat:@"MMMM d, YYY"];
+            
+            [mailer setSubject:@"Flyer"];
+
+            
+            [mailer addAttachmentData:[self exportFlyerToPDF] mimeType:@"application/pdf" fileName:@"Flyer.pdf"];
+            
+            // We are done. Now bring up the email in main thread.
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [self.navigationController.visibleViewController presentModalViewController:mailer animated:YES];
+            });
+        });
+    }
+}
+
+/**
+ * Prepare the flyer in PDF format.
+ */
+- (NSMutableData *) exportFlyerToPDF {
+    
+    // Create the PDF context using the default page size of 612 x 792.
+    CGSize pageSize = CGSizeMake( 1800, 1200);
+    NSMutableData *pdfData = [NSMutableData data];
+    
+    // Make the context.
+    UIGraphicsBeginPDFContextToData(pdfData, CGRectZero, nil);
+    
+    // Get reference to context.
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    // Prepare the page.
+    UIView *page = [self newPageInPDFWithTitle:@"Flyer" pageSize:pageSize];
+    
+    NSString *imageToPrintPath = [flyer getFlyerImage];
+    UIImage *imageToPrint =  [UIImage imageWithContentsOfFile:imageToPrintPath];
+    
+    //You need to specify the frame of the view
+    UIView *catView = [[UIView alloc] initWithFrame:CGRectMake(0,0,1200,1200)];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:imageToPrint];
+    
+    //specify the frame of the imageView in the superview , here it will fill the superview
+    imageView.frame = catView.bounds;
+    
+    // add the imageview to the superview
+    [catView addSubview:imageView];
+    
+    [page addSubview:catView];
+    
+    // Show teams information.
+    /*CGRect frame = CGRectMake( 20, 65, 266, 300);
+    UIView *team = [self teamInformationInPDF:match.firstTeam frame:frame];
+    [page addSubview:team];
+    
+    // Second team.
+    frame.origin = CGPointMake( frame.size.width + 60, 65);
+    team = [self teamInformationInPDF:match.secondTeam frame:frame];
+    [page addSubview:team];
+    
+    // Versus label.
+    UILabelPDF *versus = [[UILabelPDF alloc] initWithFrame:CGRectMake( 282, 180, 50, 25)];
+    versus.backgroundColor = [UIColor clearColor];
+    versus.textColor = [UIColor lightGrayColor];
+    versus.font = [UIFont fontWithName:@"Gurmukhi MN"
+                                  size:25.0f];
+    versus.textAlignment = UITextAlignmentCenter;
+    versus.text = @"vs";
+    [page addSubview:versus];
+    
+    // Rules label.
+    UILabelPDF *rules = [[UILabelPDF alloc] initWithFrame:CGRectMake( 20, 375, 266, 25)];
+    rules.backgroundColor = [UIColor clearColor];
+    rules.textColor = [UIColor lightGrayColor];
+    rules.font = [UIFont fontWithName:@"Gurmukhi MN"
+                                 size:17.0f];
+    rules.textAlignment = UITextAlignmentLeft;
+    rules.text = @"Rules";
+    [page addSubview:rules];
+    
+    UIView *rulesView = [self rulesInformationInPDFForFrame:CGRectMake(20, 400, 266, 165)];
+    [page addSubview:rulesView];
+    
+    // Officials label.
+    UILabelPDF *officials = [[UILabelPDF alloc] initWithFrame:CGRectMake( frame.origin.x, 375, 266, 25)];
+    officials.backgroundColor = [UIColor clearColor];
+    officials.textColor = [UIColor lightGrayColor];
+    officials.font = [UIFont fontWithName:@"Gurmukhi MN"
+                                     size:17.0f];
+    officials.textAlignment = UITextAlignmentLeft;
+    officials.text = @"Officials";
+    [page addSubview:officials];
+    
+    // List of officials
+    UIView *officialsView = [self officialsInformationInPDFForFrame:CGRectMake( frame.origin.x, 400,
+                                                                               266, 165)];
+    [page addSubview:officialsView];
+    
+    // Venue, weather and date.
+    UIView *venueAndWeather = [self venueAndWeatherInformationInPDFForFrame:CGRectMake(20, 575, 572, 180)];
+    [page addSubview:venueAndWeather];
+    
+    // Attributions.
+    UIImageView *gImg = [[UIImageView alloc] initWithFrame:CGRectMake(20, 765, 104, 16)];
+    gImg.image = [UIImage imageNamed:@"powered-by-google.png"];
+    [page addSubview:gImg];
+    
+    UIImageView *wImg = [[UIImageView alloc] initWithFrame:CGRectMake(110, 762, 104, 20)];
+    wImg.contentMode = UIViewContentModeScaleAspectFit;
+    wImg.image = [UIImage imageNamed:@"wunderground.png"];
+    [page addSubview:wImg];
+    
+    [page.layer renderInContext:context];
+    
+    // Match Analysis page.
+    page = [self newPageInPDFWithTitle:@"Match Analysis" pageSize:pageSize];
+    
+    // Prepare the worm sections.
+    UIImageView *sectionWorm = [[UIImageView alloc] initWithFrame:CGRectMake(20, 60, 572, 220)];
+    sectionWorm.backgroundColor = [UIColor whiteColor];
+    sectionWorm.layer.cornerRadius = 5.0;
+    
+    AnalysisViewController *analysisW = [[AnalysisViewController alloc] initWithFrame:CGRectMake(5, 5,
+                                                                                                 sectionWorm.frame.size.width - 10, sectionWorm.frame.size.height - 10)
+                                                                                 type:FOW_TYPE_WORM];
+    sectionWorm.image = [analysisW.hostView.hostedGraph imageOfLayer];
+    [page addSubview:sectionWorm];
+    
+    // Prepare the manhattan section.
+    UIImageView *sectionManhattan = [[UIImageView alloc] initWithFrame:CGRectMake(20, 300, 572, 220)];
+    sectionManhattan.backgroundColor = [UIColor whiteColor];
+    sectionManhattan.layer.cornerRadius = 5.0;
+    
+    AnalysisViewController *analysisM = [[AnalysisViewController alloc] initWithFrame:CGRectMake(5, 5,
+                                                                                                 sectionManhattan.frame.size.width - 10,
+                                                                                                 sectionManhattan.frame.size.height - 10)
+                                                                                 type:FOW_TYPE_MANHATTAN];
+    sectionManhattan.image = [analysisM.hostView.hostedGraph imageOfLayer];
+    [page addSubview:sectionManhattan];
+    
+    // Prepare the run rate section.
+    UIImageView *sectionRunrate = [[UIImageView alloc] initWithFrame:CGRectMake(20, 540, 572, 220)];
+    sectionRunrate.backgroundColor = [UIColor whiteColor];
+    sectionRunrate.layer.cornerRadius = 5.0;
+    
+    AnalysisViewController *analysisR = [[AnalysisViewController alloc] initWithFrame:CGRectMake(5, 5,
+                                                                                                 sectionRunrate.frame.size.width - 10,
+                                                                                                 sectionRunrate.frame.size.height - 10)
+                                                                                 type:FOW_TYPE_RUNRATE];
+    sectionRunrate.image = [analysisR.hostView.hostedGraph imageOfLayer];
+    [page addSubview:sectionRunrate];
+    
+    // Render the page.
+    [page.layer renderInContext:context];
+    
+    // Second page
+    page = [self newPageInPDFWithTitle:@"Scorecard - 1st Innings" pageSize:pageSize];
+    
+    UIView *innings1 = [self inningScorecardInPDF:0 frame:CGRectMake(0, 40,
+                                                                     pageSize.width,
+                                                                     pageSize.height )];
+    [page addSubview:innings1];
+    
+    // Render the page.
+    [page.layer renderInContext:context];
+    
+    
+    // Third page
+    page = [self newPageInPDFWithTitle:@"Scorecard - 2nd Innings" pageSize:pageSize];
+    
+    UIView *innings2 = [self inningScorecardInPDF:1 frame:CGRectMake(0, 40,
+                                                                     pageSize.width,
+                                                                     pageSize.height )];
+    [page addSubview:innings2];
+    
+    // Render the page.
+    [page.layer renderInContext:context];
+    
+    // Head to Head.
+    // Prepare the list we will use.
+    NSArray *list = [self headToHead];
+    
+    // Get the innings string.
+    HeadToHead *headToHead = [list objectAtIndex:0];
+    int inning = headToHead.inning;
+    
+    // Start with a new page.
+    if ( inning == 0 ) {
+        page = [self newPageInPDFWithTitle:@"Head to Head Comparison - 1st Innings" pageSize:pageSize];
+    } else if ( inning == 1 ) {
+        page = [self newPageInPDFWithTitle:@"Head to Head Comparison - 2nd Innings" pageSize:pageSize];
+    }
+    
+    CGFloat currentHeight = 40;
+    CGFloat requiredHeight = 0;
+    
+    for ( int i = 0; i < list.count; i++ ) {
+        HeadToHead *element = [list objectAtIndex:i];
+        
+        UIView *item = nil;
+        
+        // Display header for this batsman.
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"HeadToHeadHeader" owner:nil options:nil];
+        HeadToHeadHeaderView *summary = (HeadToHeadHeaderView *)[nib objectAtIndex:0];
+        summary.frame = CGRectMake( 0, currentHeight, pageSize.width, 35);
+        
+        // Set name of the batsman.
+        summary.name.text = PLAYER_SHORT_NAME( element.batsman );
+        item = summary;
+        
+        // We should have atleast this height on the page
+        requiredHeight = 85;
+        
+        NSArray *statsAgainstBowlers = element.statsAgainstBowlers;
+        for ( int j = 0; j < statsAgainstBowlers.count + 1; j++ ) {
+            if ( j > 0 ) {
+                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"HeadToHeadView" owner:nil options:nil];
+                HeadToHeadView *summary = (HeadToHeadView *)[nib objectAtIndex:0];
+                summary.frame = CGRectMake( 0, currentHeight, pageSize.width, 25);
+                
+                BattingStats *stats = [statsAgainstBowlers objectAtIndex:j - 1];
+                
+                NSString *wktString = @"";
+                if( stats.wicketType == BOWLED ) {
+                    wktString = @"Bowled";
+                } else if ( stats.wicketType == CAUGHT ) {
+                    wktString = @"Caught";
+                } else if ( stats.wicketType == LBW ) {
+                    wktString = @"LBW";
+                } else if ( stats.wicketType == STUMPED ) {
+                    wktString = @"Stumped";
+                } else if ( stats.wicketType == RUNOUT ) {
+                    wktString = @"Runout";
+                } else if ( stats.wicketType == RETIREOUT ){
+                    wktString = @"Retired";
+                }
+                
+                // Fill data.
+                summary.bowler.text = PLAYER_SHORT_NAME( stats.bowler );
+                summary.zero.text = [NSString stringWithFormat:@"%u", stats.zeros];
+                summary.one.text = [NSString stringWithFormat:@"%u", stats.ones];
+                summary.two.text = [NSString stringWithFormat:@"%u", stats.twos];
+                summary.three.text = [NSString stringWithFormat:@"%u", stats.threes];
+                summary.four.text = [NSString stringWithFormat:@"%u", stats.fours];
+                summary.six.text = [NSString stringWithFormat:@"%u", stats.sixes];
+                summary.seven.text = [NSString stringWithFormat:@"%u", stats.sevenAndMore];
+                summary.dismissal.text = wktString;
+                summary.runs.text = [NSString stringWithFormat:@"%u", stats.runs];
+                summary.balls.text = [NSString stringWithFormat:@"%u", stats.ballsCount];
+                summary.sr.text = [NSString stringWithFormat:@"%.0f", stats.sr];
+                
+                item = summary;
+                
+                // We should have atleast this height on the page.
+                requiredHeight = 45;
+            }
+            
+            // If this is a new innings, just go to a new page.
+            if ( inning != element.inning ) {
+                inning = element.inning;
+                
+                // Start a new page.
+                // Render the previous one.
+                [page.layer renderInContext:context];
+                
+                if ( inning == 0 ) {
+                    page = [self newPageInPDFWithTitle:@"Head to Head Comparison - 1st Innings" pageSize:pageSize];
+                } else if ( inning == 1 ) {
+                    page = [self newPageInPDFWithTitle:@"Head to Head Comparison - 2nd Innings" pageSize:pageSize];
+                }
+                
+                CGRect fr = item.frame;
+                fr.origin.y = 40;
+                item.frame = fr;
+                
+                [page addSubview:item];
+                currentHeight = 40 + item.frame.size.height;
+                
+                // Update the innings.
+                inning = element.inning;
+                
+            } // If the item can fit within the page and we are not on a different innings.
+            else if ( currentHeight + requiredHeight < pageSize.height  ) {
+                currentHeight += item.frame.size.height;
+                [page addSubview:item];
+            } else {
+                inning = element.inning;
+                
+                // Otherwise start a new page.
+                // Render the previous one.
+                [page.layer renderInContext:context];
+                
+                if ( inning == 0 ) {
+                    page = [self newPageInPDFWithTitle:@"Head to Head Comparison - 1st Innings" pageSize:pageSize];
+                } else if ( inning == 1 ) {
+                    page = [self newPageInPDFWithTitle:@"Head to Head Comparison - 2nd Innings" pageSize:pageSize];
+                }
+                
+                CGRect fr = item.frame;
+                fr.origin.y = 40;
+                item.frame = fr;
+                
+                [page addSubview:item];
+                currentHeight = 40 + item.frame.size.height;
+            }
+        }
+    }*/
+    
+    // Render the last page.
+    [page.layer renderInContext:context];
+    
+    // Close the PDF context and write the contents out.
+    UIGraphicsEndPDFContext();
+    
+    return pdfData;
+    
+}
+
+/**
+ * Prepare a new page.
+ */
+- (UIView *)newPageInPDFWithTitle:(NSString *)titleStr pageSize:(CGSize)pageSize {
+
+    // First Page
+    CGRect pageFrame = CGRectMake(0, 0, pageSize.width, pageSize.height);
+    UIGraphicsBeginPDFPageWithInfo( pageFrame, nil);
+    
+    // Fill with background color.
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, pageSize.width,
+                                                            pageSize.height)];
+    view.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"pdf_Bg.png"]];
+
+    //You need to specify the frame of the view
+    UIView *catView = [[UIView alloc] initWithFrame:CGRectMake(1600,1140,150,60)];
+    
+    UIImage *image = [UIImage imageNamed:@"flyerlylogo.png"];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+    
+    //specify the frame of the imageView in the superview , here it will fill the superview
+    imageView.frame = catView.bounds;
+    
+    // add the imageview to the superview
+    [catView addSubview:imageView];
+    
+    //add the view to the main view
+    
+    //[self.view addSubview:catView];
+//    /[attribution : [UIImage imageNamed:@"pdf_Bg.png"]];
+    
+    // Attribution
+    /*UILabelPDF *attribution = [[UILabelPDF alloc] initWithFrame:
+                               CGRectMake(0, pageSize.height - 12, pageSize.width - 5, 12)];
+    attribution.backgroundColor = [UIColor clearColor];
+    attribution.textColor = [UIColor darkGrayColor];
+    attribution.font = [UIFont fontWithName:@"Georgia"
+                                       size:10.0f];
+    attribution.textAlignment = UITextAlignmentRight;
+    
+    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ) {
+        attribution.text = @"Match scored using Cricket Scorekeeper for iPad";
+    } else {
+        attribution.text = @"Match scored using Cricket Scorekeeper for iPhone";
+    }*/
+    
+    [view addSubview:catView];
+    
+    // HEADING Bar
+    /*UIView *headingBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, barSize.width, barSize.height)];
+    headingBar.backgroundColor = [UIColor colorWithRed:(255.0/255.0)
+                                                 green:(236.0/255.0)
+                                                  blue:(219.0/255.0)
+                                                 alpha:1];
+    
+    UILabelPDF *title = [[UILabelPDF alloc] initWithFrame:CGRectMake(0, 0, barSize.width, barSize.height)];
+    title.backgroundColor = [UIColor clearColor];
+    title.textColor = [UIColor colorWithRed:(161.0/255.0)
+                                      green:(142.0/255.0)
+                                       blue:(92.0/255.0)
+                                      alpha:1.0];
+    title.font = [UIFont fontWithName:@"Oswald-Regular"
+                                 size:18.0f];
+    title.textAlignment = UITextAlignmentCenter;
+    title.text = titleStr;
+    [headingBar addSubview:title];
+    
+    // Add heading bar to page view.
+    [view addSubview:headingBar];*/
+    
+    return view;
+}
+
+#pragma mark - Message UI Delegate
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
+    
+    [self.navigationController.visibleViewController dismissModalViewControllerAnimated:YES];
+    NSString* message = nil;
+    switch(result)
+    {
+        case MFMailComposeResultCancelled:
+            message = @"Not sent at user request.";
+            break;
+        case MFMailComposeResultSaved:
+            message = @"Saved";
+            break;
+        case MFMailComposeResultSent:
+            message = @"Sent";
+            break;
+        case MFMailComposeResultFailed:
+            message = @"Error";
+    }
+    NSLog(@"%s %@", __PRETTY_FUNCTION__, message);
 }
 
 @end
