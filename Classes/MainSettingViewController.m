@@ -15,7 +15,7 @@
 @end
 
 @implementation MainSettingViewController
-@synthesize tableView;
+@synthesize tableView,_persistence;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -65,7 +65,6 @@
     
     [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:backBarButton,helpBarButton,nil ]];
     
-    
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-35, -6, 50, 50)];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:TITLE_FONT size:18];
@@ -92,6 +91,8 @@
     //Checking if the user is valid or anonymus
     if ([[PFUser currentUser] sessionToken].length != 0) {
         [category addObject:@"Sign Out"];
+        // will remove in production build
+        [category addObject:@"Clear Purchases"];
     } else {
         [category addObject:@"Sign In"];
     }
@@ -278,8 +279,19 @@
             
             warningAlert = [[UIAlertView  alloc]initWithTitle:@"Are you sure?" message:@"" delegate:self cancelButtonTitle:@"Sign out" otherButtonTitles:@"Cancel",nil];
             [warningAlert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:NO];
+         
+        //------
+        //This will remove in production build
+        }else if(indexPath.row == 7){
+        
+            _persistence = [[RMStoreKeychainPersistence alloc] init];
+            [RMStore defaultStore].transactionPersistor = _persistence;
+            
+             //Uncomment this line if you want to remove transactions from the phone.
+             [_persistence removeTransactions];
             
         }
+        //-------
         [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
     
         // Otherwise the user is anonymous

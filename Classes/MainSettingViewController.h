@@ -20,6 +20,7 @@
 #import "UserPurchases.h"
 #import <ShareKit.h>
 #import "FlyerlyTwitterLike.h"
+#import "RMStoreKeychainPersistence.h"
 
 
 @class InputViewController,FlyerlySingleton ;
@@ -37,6 +38,7 @@
 
 }
 @property (strong, nonatomic)IBOutlet UITableView *tableView;
+@property (nonatomic, strong) RMStoreKeychainPersistence *_persistence;
 - (void)changeSwitch:(id)sender;
 + (void)signOut;
 -(void)goBack;
