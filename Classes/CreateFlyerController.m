@@ -33,7 +33,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 @synthesize libText,libBackground,libArts,libPhoto,libEmpty,backtemplates,cameraTakePhoto,cameraRoll,flyerBorder;
 @synthesize flyimgView,currentLayer,layersDic,flyer,player,playerView,playerToolBar,playButton,playerSlider,tempelateView;
 @synthesize durationLabel,durationChange,onFlyerBack,shouldShowAdd;
-@synthesize backgroundsView,flyerBordersView,colorsView,sizesView,bannerAddView,bannerAddBackView,bannerAddDismissButton;
+@synthesize backgroundsView,flyerBordersView,colorsView,sizesView,bannerAddView,bannerAddDismissButton;
 int selectedAddMoreLayerTab = -1;
 
 
@@ -139,7 +139,6 @@ NSArray *coloursArray;
 // Dismiss action for banner ad
 -(IBAction)dissmisBannerAdd:(id)sender{
     
-    [self.bannerAddBackView removeFromSuperview];
     [self.bannerAddView removeFromSuperview];
 }
 

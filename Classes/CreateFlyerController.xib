@@ -16,8 +16,7 @@
                 <outlet property="artsSizeTabButton" destination="5Cl-rC-EDu" id="I6i-9N-PRr"/>
                 <outlet property="backgroundTabButton" destination="zoh-mW-4K3" id="jKZ-37-kHq"/>
                 <outlet property="backtemplates" destination="WvZ-dV-5Fn" id="5XB-pz-W0O"/>
-                <outlet property="bannerAddBackView" destination="290-zh-BTa" id="g0v-Oy-1wF"/>
-                <outlet property="bannerAddDismissButton" destination="r8c-KP-iPm" id="Ngt-Pt-r6S"/>
+                <outlet property="bannerAddDismissButton" destination="RQx-vR-Lnk" id="DhR-pQ-ORA"/>
                 <outlet property="bannerAddView" destination="24Y-ZP-E8v" id="ZUu-Pr-Gsc"/>
                 <outlet property="cameraRoll" destination="t0N-7F-yOw" id="jXi-au-Q5l"/>
                 <outlet property="cameraTabButton" destination="iEv-dA-2If" id="MFy-NX-MwQ"/>
@@ -102,26 +101,21 @@
                     <color key="backgroundColor" red="0.96078431369999995" green="0.94509803920000002" blue="0.87058823529999996" alpha="1" colorSpace="calibratedRGB"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="0.0"/>
                 </view>
-                <view contentMode="scaleToFill" id="290-zh-BTa">
-                    <rect key="frame" x="0.0" y="453" width="320" height="70"/>
+                <view contentMode="scaleToFill" id="24Y-ZP-E8v">
+                    <rect key="frame" x="0.0" y="473" width="320" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="r8c-KP-iPm">
-                            <rect key="frame" x="295" y="0.0" width="23" height="21"/>
+                        <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="RQx-vR-Lnk">
+                            <rect key="frame" x="300" y="-3" width="23" height="23"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" image="closeAd.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
-                                <action selector="dissmisBannerAdd:" destination="-1" eventType="touchUpInside" id="b1I-03-29c"/>
+                                <action selector="dissmisBannerAdd:" destination="-1" eventType="touchUpInside" id="Aql-bh-EgN"/>
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                </view>
-                <view contentMode="scaleToFill" id="24Y-ZP-E8v">
-                    <rect key="frame" x="0.0" y="473" width="320" height="50"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
                 <view autoresizesSubviews="NO" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="hm4-bV-Hep">

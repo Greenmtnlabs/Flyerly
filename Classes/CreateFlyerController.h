@@ -76,7 +76,6 @@
 @property(nonatomic, strong) GADBannerView *bannerAdd;
 
 @property(nonatomic, strong) IBOutlet UIView *bannerAddView;
-@property(nonatomic, strong) IBOutlet UIView *bannerAddBackView;
 
 @property (nonatomic, strong)IBOutlet UIButton *bannerAddDismissButton;
 
