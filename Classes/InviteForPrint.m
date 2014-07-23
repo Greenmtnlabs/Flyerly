@@ -16,6 +16,7 @@
 #import "Flurry.h"
 #import "UIImagePDF.h"
 #import "UserVoice.h"
+#import "SendingPrintViewController.h"
 
 @interface InviteForPrint ()
 
@@ -713,8 +714,11 @@
     
 
     // Dismiss the PayPalPaymentViewController.
-    [self dismissViewControllerAnimated:YES completion:nil];
-    [self sendPdfFlyer];
+    [self dismissViewControllerAnimated:YES completion:^{
+        NSLog(@"Successfully logged in.");
+        [self sendPdfFlyer];
+    }];
+    
 }
 
 - (void)payPalPaymentDidCancel:(PayPalPaymentViewController *)paymentViewController {
@@ -724,7 +728,14 @@
 
 - (void) sendPdfFlyer {
     
-    if ( [MFMailComposeViewController canSendMail] ) {
+    SendingPrintViewController *sendingControoler = [[SendingPrintViewController alloc]initWithNibName:@"SendingPrintViewController" bundle:nil];
+    sendingControoler.flyer = self.flyer;
+	[self.navigationController pushViewController:sendingControoler animated:YES];
+    
+    /*sendingControoler.flyer = self.flyer;
+    // Present the Sending Print Controller.
+    [self presentModalViewController:sendingControoler animated:NO];*/
+    /*if ( [MFMailComposeViewController canSendMail] ) {
         
         // Prepare the email in a background thread.
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW,0), ^{
@@ -748,7 +759,7 @@
                 [self.navigationController.visibleViewController presentModalViewController:mailer animated:YES];
             });
         });
-    }
+    }*/
 }
 
 /**
@@ -809,7 +820,7 @@
     view.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"pdf_Bg.png"]];
 
     //You need to specify the frame of the view
-    UIView *catView = [[UIView alloc] initWithFrame:CGRectMake(1650,1130,150,60)];
+    UIView *catView = [[UIView alloc] initWithFrame:CGRectMake(1620,1130,150,60)];
     
     UIImage *image = [UIImage imageNamed:@"flyerlylogo.png"];
     UIImageView *imageView = [[UIImageView alloc] initWithImage:image];

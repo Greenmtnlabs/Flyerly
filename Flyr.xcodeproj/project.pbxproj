@@ -266,6 +266,8 @@
 		20CC6926180DA44C002F2E6F /* icon-120.png in Resources */ = {isa = PBXBuildFile; fileRef = 20CC6924180DA44C002F2E6F /* icon-120.png */; };
 		20D7474117BE77E900966BA6 /* splash_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 20D7473F17BE77E900966BA6 /* splash_bg.png */; };
 		20D7474717BE7A9900966BA6 /* login_email_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 20D7474317BE7A9900966BA6 /* login_email_icon.png */; };
+		20E38AA4197FB39200D1CFA9 /* SendingPrintViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20E38AA2197FB39200D1CFA9 /* SendingPrintViewController.m */; };
+		20E38AA5197FB39200D1CFA9 /* SendingPrintViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20E38AA3197FB39200D1CFA9 /* SendingPrintViewController.xib */; };
 		20E4638A197E3FB600473921 /* UIImagePDF.m in Sources */ = {isa = PBXBuildFile; fileRef = 20E46388197E3FB600473921 /* UIImagePDF.m */; };
 		20E4638D197E688600473921 /* pdf_Bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 20E4638C197E688600473921 /* pdf_Bg.png */; };
 		20ECF9A918D6E1AD0035E3DE /* UIPlaceHolderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 20ECF9A818D6E1AD0035E3DE /* UIPlaceHolderTextView.m */; };
@@ -1450,6 +1452,9 @@
 		20CC6924180DA44C002F2E6F /* icon-120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-120.png"; sourceTree = "<group>"; };
 		20D7473F17BE77E900966BA6 /* splash_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash_bg.png; sourceTree = "<group>"; };
 		20D7474317BE7A9900966BA6 /* login_email_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_email_icon.png; sourceTree = "<group>"; };
+		20E38AA1197FB39200D1CFA9 /* SendingPrintViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendingPrintViewController.h; sourceTree = "<group>"; };
+		20E38AA2197FB39200D1CFA9 /* SendingPrintViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendingPrintViewController.m; sourceTree = "<group>"; };
+		20E38AA3197FB39200D1CFA9 /* SendingPrintViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SendingPrintViewController.xib; sourceTree = "<group>"; };
 		20E46387197E3FB600473921 /* UIImagePDF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImagePDF.h; sourceTree = "<group>"; };
 		20E46388197E3FB600473921 /* UIImagePDF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImagePDF.m; sourceTree = "<group>"; };
 		20E4638C197E688600473921 /* pdf_Bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pdf_Bg.png; sourceTree = "<group>"; };
@@ -3196,6 +3201,7 @@
 		2094609F1977AC7D0050B5DE /* New Group */ = {
 			isa = PBXGroup;
 			children = (
+				20E38AA0197FB30C00D1CFA9 /* SendingPrintViewController */,
 				209460A01977AD1A0050B5DE /* InviteForPrint.h */,
 				209460A11977AD1A0050B5DE /* InviteForPrint.m */,
 				209460A21977AD1A0050B5DE /* InviteForPrint.xib */,
@@ -3314,6 +3320,16 @@
 				20D7473F17BE77E900966BA6 /* splash_bg.png */,
 			);
 			name = NewLayOuts;
+			sourceTree = "<group>";
+		};
+		20E38AA0197FB30C00D1CFA9 /* SendingPrintViewController */ = {
+			isa = PBXGroup;
+			children = (
+				20E38AA1197FB39200D1CFA9 /* SendingPrintViewController.h */,
+				20E38AA2197FB39200D1CFA9 /* SendingPrintViewController.m */,
+				20E38AA3197FB39200D1CFA9 /* SendingPrintViewController.xib */,
+			);
+			name = SendingPrintViewController;
 			sourceTree = "<group>";
 		};
 		20E46386197E3F9900473921 /* PDF Views */ = {
@@ -5121,6 +5137,7 @@
 				24218496194B4AEC00FDDA97 /* emoticon135@2x.png in Resources */,
 				249F1F8B193F55D50072835E /* 07_camera@2x.png in Resources */,
 				249F1FC5193F55E90072835E /* email_box@2x.png in Resources */,
+				20E38AA5197FB39200D1CFA9 /* SendingPrintViewController.xib in Resources */,
 				247858DF1948788C0062F1E4 /* QuattrocentoSans-Regular.otf in Resources */,
 				249F2026193F562C0072835E /* icon_button@2x.png in Resources */,
 				242184B5194B4AEC00FDDA97 /* emoticon167@2x.png in Resources */,
@@ -5580,6 +5597,7 @@
 				20967D9818C8973200B273FC /* FlyerlyTwitterLike.m in Sources */,
 				2026992B18CED6B000945218 /* RMStore.m in Sources */,
 				204635621895E4AF00A94C42 /* Flyer.m in Sources */,
+				20E38AA4197FB39200D1CFA9 /* SendingPrintViewController.m in Sources */,
 				2044FF96185088ED00A26B42 /* MainSettingCell.m in Sources */,
 				2478E5E3192C7A6E0081B31B /* InAppViewController.m in Sources */,
 				2022C63518D1BAF000BCD5F7 /* RMStoreKeychainPersistence.m in Sources */,
