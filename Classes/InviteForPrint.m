@@ -683,9 +683,9 @@
     
     // Amount, currency, and description
     NSDecimalNumber *totalAmount = [[NSDecimalNumber alloc] initWithInt:(2 * totalContactsToSendPrint)];
-    payment.amount = totalAmount;//[NSDecimalNumber decimalNumberWithDecimal:totalAmount];
+    payment.amount = totalAmount;
     payment.currencyCode = @"USD";
-    payment.shortDescription = @"Printing";//pqProduct.title;
+    payment.shortDescription = @"Printing";
     
     // Use the intent property to indicate that this is a "sale" payment,
     // meaning combined Authorization + Capture. To perform Authorization only,
