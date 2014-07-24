@@ -13,6 +13,7 @@
 #import <MessageUI/MessageUI.h>
 #import "ParentViewController.h"
 #import "Flyer.h"
+#import <AFNetworking/AFNetworking.h>
 
 @class FlyerlySingleton;
 

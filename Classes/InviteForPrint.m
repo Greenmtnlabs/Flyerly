@@ -17,6 +17,7 @@
 #import "UIImagePDF.h"
 #import "UserVoice.h"
 #import "SendingPrintViewController.h"
+#import <AFNetworking/AFNetworking.h>
 
 @interface InviteForPrint ()
 
@@ -35,6 +36,8 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    
+    [self ebayUploadPicture];
     
     UVConfig *config = [UVConfig configWithSite:@"http://flyerly.uservoice.com/"];
     [UserVoice initialize:config];
@@ -761,6 +764,62 @@
         });
     }*/
 }
+
+/**
+ * Upload picture to ebay.
+ */
+-(void)ebayUploadPicture{
+    
+    NSString *urlString = @"https://api.lob.com/v1/postcards";
+    
+    NSData *pdfData = [NSData dataWithData:[self exportFlyerToPDF]];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    [manager POST:urlString parameters:@"test_0dc8d51e0acffcb1880e0f19c79b2f5b0cc" constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        
+        //[formData appendPartWithFileData:pdfData name:@"FlyerPDF" fileName:@"flyer.pdf" mimeType:@"application/pdf"];
+        [formData appendPartWithFormData:pdfData name:@"FlyerPDF"];
+        
+    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"Response: %@", responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+    }];
+
+
+
+    /*AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSDictionary *params = @{@"name": @"My Name",
+                             @"to[name]=Harry Zhang": weight
+                             @"to[address_line1]":
+                             @"to[address_city]":
+                             @"to[address_state]":
+                             @"to[address_zip]":
+                             @"to[address_country]":
+                             @"from[name]":
+                             @"from[address_line1]":
+                             @"from[address_city]":
+                             @"from[address_state]":
+                             @"from[address_zip]":
+                             @"from[address_country]":};
+    [manager POST:@"https://mysite.com/myobject" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"JSON: %@", responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+    }];
+    
+    
+   
+    
+   
+    
+    
+    
+-d "front=https://www.lob.com/postcardfront.pdf" \
+    -d "back=https://www.lob.com/postcardback.pdf"*/
+}
+
 
 /**
  * Prepare the flyer in PDF format.
