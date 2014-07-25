@@ -14,7 +14,7 @@
 
 @implementation SendingPrintViewController
 
-@synthesize messageFeild,addressFeild,flyerImage,flyer;
+@synthesize messageFeild,streetAddress,state,city,country,flyerImage,flyer;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -67,5 +67,29 @@
 - (IBAction)dismiss:(UIButton *)sender {
 }
 - (IBAction)send:(UIButton *)sender {
+}
+
+/**
+ * Sending PDF to Lob to post on physical address.
+ */
+-(void)ebayUploadPicture{
+    
+    /*if ( ![self.streetAddress.text isEqualToString:@""] && ![self.city.text isEqualToString:@""] && ![self.state.text isEqualToString:@""]
+         && ![self.zip.text isEqualToString:@""] && ![self.country.text isEqualToString:@""] ) {*/
+        
+            //LobAddressModel *sendingFromAddress = [[LobAddressModel alloc] initAddressWithName:model__.name email:@"" phone:@"" addressLine1:self.streetAddress.text  addressLine2:self.streetAddress.text addressCity:self.city.text addressState:self.state.text addressZip:self.zip.text addressCountry:self.country.text];
+    
+    //}
+    
+    
+    /*for (int i=0;i<contactsArray.count;i++){
+        
+        ContactsModel *model__ = [[ContactsModel alloc] init];
+        model__ = [contactsArray objectAtIndex:i];*/
+        
+        //LobAddressModel *sendingToAddress = [[LobAddressModel alloc] initAddressWithName:model__.name email:@"" phone:@"" addressLine1:model__.streetAddress addressLine2:model__.streetAddress addressCity:model__.city addressState:@"" addressZip:@"" addressCountry:model__.country];
+        
+        //LobPostcardModel *flyerPostCard = [LobPostcardModel alloc] initPostcardWithName:@"My Flyer" message:@"Please Checkout my new flyer" toAddress:sendingToAddress fromAddress:<#(LobAddressModel *)#> status:<#(NSString *)#> price:<#(NSString *)#> frontUrl:<#(NSString *)#> backUrl:<#(NSString *)#> fullBleed:<#(BOOL)#>];
+    //
 }
 @end

@@ -12,11 +12,16 @@
 @interface SendingPrintViewController : UIViewController
 
 @property (nonatomic,strong) Flyer *flyer;
+@property(nonatomic,strong) NSMutableArray *contactsArray;
 
-- (IBAction)dismiss:(UIButton *)sender;
+
 @property (nonatomic, strong) IBOutlet UILabel *messageFeild;
 @property (nonatomic, strong) IBOutlet UIImageView *flyerImage;
-@property (nonatomic, strong) IBOutlet UITextField *addressFeild;
+@property (nonatomic, strong) IBOutlet UITextField *streetAddress;
+@property (nonatomic, strong) IBOutlet UITextField *state;
+@property (nonatomic, strong) IBOutlet UITextField *city;
+@property (nonatomic, strong) IBOutlet UITextField *country;
 - (IBAction)send:(UIButton *)sender;
+- (IBAction)dismiss:(UIButton *)sender;
 
 @end

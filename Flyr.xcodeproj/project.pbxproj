@@ -260,6 +260,21 @@
 		20A1CD6318EEF63200484391 /* SubNBUCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 20A1CD6218EEF63200484391 /* SubNBUCamera.m */; };
 		20A1CD6518EF0B0400484391 /* ShareVideoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20A1CD6418EF0B0400484391 /* ShareVideoViewController.xib */; };
 		20A1CD6F18EF19B400484391 /* YouTubeSubClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 20A1CD6E18EF19B400484391 /* YouTubeSubClass.m */; };
+		20A38EA11982531F007C279F /* LobAbstractModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 20A38E7C1982531F007C279F /* LobAbstractModel.m */; };
+		20A38EA21982531F007C279F /* LobAddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 20A38E7F1982531F007C279F /* LobAddressModel.m */; };
+		20A38EA31982531F007C279F /* LobBankAccountModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 20A38E821982531F007C279F /* LobBankAccountModel.m */; };
+		20A38EA41982531F007C279F /* LobCheckModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 20A38E851982531F007C279F /* LobCheckModel.m */; };
+		20A38EA51982531F007C279F /* LobCountryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 20A38E881982531F007C279F /* LobCountryModel.m */; };
+		20A38EA61982531F007C279F /* LobJobModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 20A38E8B1982531F007C279F /* LobJobModel.m */; };
+		20A38EA71982531F007C279F /* LobObjectModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 20A38E8E1982531F007C279F /* LobObjectModel.m */; };
+		20A38EA81982531F007C279F /* LobPackagingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 20A38E911982531F007C279F /* LobPackagingModel.m */; };
+		20A38EA91982531F007C279F /* LobPostcardModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 20A38E941982531F007C279F /* LobPostcardModel.m */; };
+		20A38EAA1982531F007C279F /* LobServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 20A38E971982531F007C279F /* LobServiceModel.m */; };
+		20A38EAB1982531F007C279F /* LobSettingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 20A38E9A1982531F007C279F /* LobSettingModel.m */; };
+		20A38EAC1982531F007C279F /* LobStateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 20A38E9D1982531F007C279F /* LobStateModel.m */; };
+		20A38EAD1982531F007C279F /* LobVerifyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 20A38EA01982531F007C279F /* LobVerifyModel.m */; };
+		20A38EC819825387007C279F /* AbstractBlockRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 20A38EB019825387007C279F /* AbstractBlockRequest.m */; };
+		20A38ED219825387007C279F /* LobRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 20A38EC719825387007C279F /* LobRequest.m */; };
 		20BA7DED18BE083300991DCC /* Flyr-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D1107310486CEB800E47090 /* Flyr-Info.plist */; };
 		20CC6922180DA416002F2E6F /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2061ED8B17FF212100E9BECA /* icon.png */; };
 		20CC6925180DA44C002F2E6F /* icon-60.png in Resources */ = {isa = PBXBuildFile; fileRef = 20CC6923180DA44C002F2E6F /* icon-60.png */; };
@@ -1447,6 +1462,38 @@
 		20A1CD6418EF0B0400484391 /* ShareVideoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareVideoViewController.xib; sourceTree = "<group>"; };
 		20A1CD6D18EF19B400484391 /* YouTubeSubClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouTubeSubClass.h; sourceTree = "<group>"; };
 		20A1CD6E18EF19B400484391 /* YouTubeSubClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YouTubeSubClass.m; sourceTree = "<group>"; };
+		20A38E7B1982531F007C279F /* LobAbstractModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LobAbstractModel.h; sourceTree = "<group>"; };
+		20A38E7C1982531F007C279F /* LobAbstractModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LobAbstractModel.m; sourceTree = "<group>"; };
+		20A38E7E1982531F007C279F /* LobAddressModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LobAddressModel.h; sourceTree = "<group>"; };
+		20A38E7F1982531F007C279F /* LobAddressModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LobAddressModel.m; sourceTree = "<group>"; };
+		20A38E811982531F007C279F /* LobBankAccountModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LobBankAccountModel.h; sourceTree = "<group>"; };
+		20A38E821982531F007C279F /* LobBankAccountModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LobBankAccountModel.m; sourceTree = "<group>"; };
+		20A38E841982531F007C279F /* LobCheckModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LobCheckModel.h; sourceTree = "<group>"; };
+		20A38E851982531F007C279F /* LobCheckModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LobCheckModel.m; sourceTree = "<group>"; };
+		20A38E871982531F007C279F /* LobCountryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LobCountryModel.h; sourceTree = "<group>"; };
+		20A38E881982531F007C279F /* LobCountryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LobCountryModel.m; sourceTree = "<group>"; };
+		20A38E8A1982531F007C279F /* LobJobModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LobJobModel.h; sourceTree = "<group>"; };
+		20A38E8B1982531F007C279F /* LobJobModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LobJobModel.m; sourceTree = "<group>"; };
+		20A38E8D1982531F007C279F /* LobObjectModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LobObjectModel.h; sourceTree = "<group>"; };
+		20A38E8E1982531F007C279F /* LobObjectModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LobObjectModel.m; sourceTree = "<group>"; };
+		20A38E901982531F007C279F /* LobPackagingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LobPackagingModel.h; sourceTree = "<group>"; };
+		20A38E911982531F007C279F /* LobPackagingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LobPackagingModel.m; sourceTree = "<group>"; };
+		20A38E931982531F007C279F /* LobPostcardModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LobPostcardModel.h; sourceTree = "<group>"; };
+		20A38E941982531F007C279F /* LobPostcardModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LobPostcardModel.m; sourceTree = "<group>"; };
+		20A38E961982531F007C279F /* LobServiceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LobServiceModel.h; sourceTree = "<group>"; };
+		20A38E971982531F007C279F /* LobServiceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LobServiceModel.m; sourceTree = "<group>"; };
+		20A38E991982531F007C279F /* LobSettingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LobSettingModel.h; sourceTree = "<group>"; };
+		20A38E9A1982531F007C279F /* LobSettingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LobSettingModel.m; sourceTree = "<group>"; };
+		20A38E9C1982531F007C279F /* LobStateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LobStateModel.h; sourceTree = "<group>"; };
+		20A38E9D1982531F007C279F /* LobStateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LobStateModel.m; sourceTree = "<group>"; };
+		20A38E9F1982531F007C279F /* LobVerifyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LobVerifyModel.h; sourceTree = "<group>"; };
+		20A38EA01982531F007C279F /* LobVerifyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LobVerifyModel.m; sourceTree = "<group>"; };
+		20A38EAF19825387007C279F /* AbstractBlockRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractBlockRequest.h; sourceTree = "<group>"; };
+		20A38EB019825387007C279F /* AbstractBlockRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbstractBlockRequest.m; sourceTree = "<group>"; };
+		20A38EC619825387007C279F /* LobRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LobRequest.h; sourceTree = "<group>"; };
+		20A38EC719825387007C279F /* LobRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LobRequest.m; sourceTree = "<group>"; };
+		20A38ED3198253B2007C279F /* LobLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LobLibrary.h; sourceTree = "<group>"; };
+		20A38ED4198253B2007C279F /* LobProjectConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LobProjectConstants.h; sourceTree = "<group>"; };
 		20B996D2180450CC007B616D /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
 		20CC6923180DA44C002F2E6F /* icon-60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-60.png"; sourceTree = "<group>"; };
 		20CC6924180DA44C002F2E6F /* icon-120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-120.png"; sourceTree = "<group>"; };
@@ -3298,6 +3345,7 @@
 		209BCFAA1975434C006EC811 /* Print Screen */ = {
 			isa = PBXGroup;
 			children = (
+				20A38E7419825208007C279F /* Lob */,
 				20E46386197E3F9900473921 /* PDF Views */,
 				200D1933197CF4BA00CFE04B /* PayPal */,
 				2094609F1977AC7D0050B5DE /* New Group */,
@@ -3306,6 +3354,189 @@
 				209BCFA71975433D006EC811 /* PrintViewController.xib */,
 			);
 			name = "Print Screen";
+			sourceTree = "<group>";
+		};
+		20A38E7419825208007C279F /* Lob */ = {
+			isa = PBXGroup;
+			children = (
+				20A38E77198252AD007C279F /* Requests */,
+				20A38E76198252A4007C279F /* Models */,
+				20A38E7519825291007C279F /* Constants */,
+			);
+			name = Lob;
+			sourceTree = "<group>";
+		};
+		20A38E7519825291007C279F /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				20A38ED3198253B2007C279F /* LobLibrary.h */,
+				20A38ED4198253B2007C279F /* LobProjectConstants.h */,
+			);
+			name = Constants;
+			sourceTree = "<group>";
+		};
+		20A38E76198252A4007C279F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				20A38E7A1982531F007C279F /* Abstract */,
+				20A38E7D1982531F007C279F /* Address */,
+				20A38E801982531F007C279F /* BankAccount */,
+				20A38E831982531F007C279F /* Check */,
+				20A38E861982531F007C279F /* Country */,
+				20A38E891982531F007C279F /* Job */,
+				20A38E8C1982531F007C279F /* Object */,
+				20A38E8F1982531F007C279F /* Packaging */,
+				20A38E921982531F007C279F /* Postcard */,
+				20A38E951982531F007C279F /* Service */,
+				20A38E981982531F007C279F /* Setting */,
+				20A38E9B1982531F007C279F /* State */,
+				20A38E9E1982531F007C279F /* Verify */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		20A38E77198252AD007C279F /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				20A38EAE19825387007C279F /* AbstractRequest */,
+				20A38EC519825387007C279F /* Lob */,
+			);
+			name = Requests;
+			sourceTree = "<group>";
+		};
+		20A38E7A1982531F007C279F /* Abstract */ = {
+			isa = PBXGroup;
+			children = (
+				20A38E7B1982531F007C279F /* LobAbstractModel.h */,
+				20A38E7C1982531F007C279F /* LobAbstractModel.m */,
+			);
+			path = Abstract;
+			sourceTree = "<group>";
+		};
+		20A38E7D1982531F007C279F /* Address */ = {
+			isa = PBXGroup;
+			children = (
+				20A38E7E1982531F007C279F /* LobAddressModel.h */,
+				20A38E7F1982531F007C279F /* LobAddressModel.m */,
+			);
+			path = Address;
+			sourceTree = "<group>";
+		};
+		20A38E801982531F007C279F /* BankAccount */ = {
+			isa = PBXGroup;
+			children = (
+				20A38E811982531F007C279F /* LobBankAccountModel.h */,
+				20A38E821982531F007C279F /* LobBankAccountModel.m */,
+			);
+			path = BankAccount;
+			sourceTree = "<group>";
+		};
+		20A38E831982531F007C279F /* Check */ = {
+			isa = PBXGroup;
+			children = (
+				20A38E841982531F007C279F /* LobCheckModel.h */,
+				20A38E851982531F007C279F /* LobCheckModel.m */,
+			);
+			path = Check;
+			sourceTree = "<group>";
+		};
+		20A38E861982531F007C279F /* Country */ = {
+			isa = PBXGroup;
+			children = (
+				20A38E871982531F007C279F /* LobCountryModel.h */,
+				20A38E881982531F007C279F /* LobCountryModel.m */,
+			);
+			path = Country;
+			sourceTree = "<group>";
+		};
+		20A38E891982531F007C279F /* Job */ = {
+			isa = PBXGroup;
+			children = (
+				20A38E8A1982531F007C279F /* LobJobModel.h */,
+				20A38E8B1982531F007C279F /* LobJobModel.m */,
+			);
+			path = Job;
+			sourceTree = "<group>";
+		};
+		20A38E8C1982531F007C279F /* Object */ = {
+			isa = PBXGroup;
+			children = (
+				20A38E8D1982531F007C279F /* LobObjectModel.h */,
+				20A38E8E1982531F007C279F /* LobObjectModel.m */,
+			);
+			path = Object;
+			sourceTree = "<group>";
+		};
+		20A38E8F1982531F007C279F /* Packaging */ = {
+			isa = PBXGroup;
+			children = (
+				20A38E901982531F007C279F /* LobPackagingModel.h */,
+				20A38E911982531F007C279F /* LobPackagingModel.m */,
+			);
+			path = Packaging;
+			sourceTree = "<group>";
+		};
+		20A38E921982531F007C279F /* Postcard */ = {
+			isa = PBXGroup;
+			children = (
+				20A38E931982531F007C279F /* LobPostcardModel.h */,
+				20A38E941982531F007C279F /* LobPostcardModel.m */,
+			);
+			path = Postcard;
+			sourceTree = "<group>";
+		};
+		20A38E951982531F007C279F /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				20A38E961982531F007C279F /* LobServiceModel.h */,
+				20A38E971982531F007C279F /* LobServiceModel.m */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		20A38E981982531F007C279F /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				20A38E991982531F007C279F /* LobSettingModel.h */,
+				20A38E9A1982531F007C279F /* LobSettingModel.m */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		20A38E9B1982531F007C279F /* State */ = {
+			isa = PBXGroup;
+			children = (
+				20A38E9C1982531F007C279F /* LobStateModel.h */,
+				20A38E9D1982531F007C279F /* LobStateModel.m */,
+			);
+			path = State;
+			sourceTree = "<group>";
+		};
+		20A38E9E1982531F007C279F /* Verify */ = {
+			isa = PBXGroup;
+			children = (
+				20A38E9F1982531F007C279F /* LobVerifyModel.h */,
+				20A38EA01982531F007C279F /* LobVerifyModel.m */,
+			);
+			path = Verify;
+			sourceTree = "<group>";
+		};
+		20A38EAE19825387007C279F /* AbstractRequest */ = {
+			isa = PBXGroup;
+			children = (
+				20A38EAF19825387007C279F /* AbstractBlockRequest.h */,
+				20A38EB019825387007C279F /* AbstractBlockRequest.m */,
+			);
+			path = AbstractRequest;
+			sourceTree = "<group>";
+		};
+		20A38EC519825387007C279F /* Lob */ = {
+			isa = PBXGroup;
+			children = (
+				20A38EC619825387007C279F /* LobRequest.h */,
+				20A38EC719825387007C279F /* LobRequest.m */,
+			);
+			path = Lob;
 			sourceTree = "<group>";
 		};
 		20D7473D17BE77C800966BA6 /* NewLayOuts */ = {
@@ -5530,6 +5761,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20A38EA71982531F007C279F /* LobObjectModel.m in Sources */,
 				202C47F9187D6E4B00FE0975 /* BitlyConfig.m in Sources */,
 				20A1CD6318EEF63200484391 /* SubNBUCamera.m in Sources */,
 				2095C90E18C5E89900E244A8 /* FlyerlyTwitterFriends.m in Sources */,
@@ -5539,19 +5771,24 @@
 				202C47FA187D6E4B00FE0975 /* BitlyDebug.m in Sources */,
 				200D196818998BEB00EAD645 /* LayerTileButton.m in Sources */,
 				204635651895F90000A94C42 /* FlyerImageView.m in Sources */,
+				20A38EA11982531F007C279F /* LobAbstractModel.m in Sources */,
 				1D3623260D0F684500981E51 /* FlyrAppDelegate.m in Sources */,
 				209460A31977AD1A0050B5DE /* InviteForPrint.m in Sources */,
 				0DF3A2C5108DF1D200D6C887 /* FlyerlyMainScreen.m in Sources */,
+				20A38EA61982531F007C279F /* LobJobModel.m in Sources */,
 				0DF3A2C6108DF1D200D6C887 /* CreateFlyerController.m in Sources */,
 				49B88989188652A2003766AD /* FacebookLikeView.m in Sources */,
 				202C47FE187D6E4B00FE0975 /* BitlyTweetSheet.m in Sources */,
+				20A38EA51982531F007C279F /* LobCountryModel.m in Sources */,
 				0D4903BB1091893B00855C30 /* FlyrViewController.m in Sources */,
 				202C47FC187D6E4B00FE0975 /* BitlyRequest.m in Sources */,
 				E8A7347D1092CFF300661AAD /* ShareViewController.m in Sources */,
 				20E4638A197E3FB600473921 /* UIImagePDF.m in Sources */,
+				20A38EA91982531F007C279F /* LobPostcardModel.m in Sources */,
 				208C684F186DAA59004A74F2 /* FlyerlyConfigurator.m in Sources */,
 				2032DCD01871BDFF007036B2 /* CropViewController.m in Sources */,
 				49B8898A188652A2003766AD /* NSData+Extras.m in Sources */,
+				20A38EA31982531F007C279F /* LobBankAccountModel.m in Sources */,
 				202C4803187D6E4B00FE0975 /* BitlyURLShortener.m in Sources */,
 				2002C89618888CD4005B18C9 /* SaveFlyerCell.m in Sources */,
 				20ECF9A918D6E1AD0035E3DE /* UIPlaceHolderTextView.m in Sources */,
@@ -5564,9 +5801,11 @@
 				65E2615D171C2FA800C485B5 /* InviteFriendsController.m in Sources */,
 				654B255317202B360047C8F6 /* AfterUpdateController.m in Sources */,
 				20920015184F40330034C4F6 /* InviteFriendsCell.m in Sources */,
+				20A38EAB1982531F007C279F /* LobSettingModel.m in Sources */,
 				49B8898118865273003766AD /* Reachability.m in Sources */,
 				202C4827187D7A6B00FE0975 /* CJSONDeserializer.m in Sources */,
 				2004C8451913AE8200E4BBFB /* InAppPurchaseCell.m in Sources */,
+				20A38EA41982531F007C279F /* LobCheckModel.m in Sources */,
 				65BDB2DF17341D290084E032 /* CustomLabel.m in Sources */,
 				0FEF2DA9174E66FC00FDD8C9 /* HelpController.m in Sources */,
 				209BCFA81975433D006EC811 /* PrintViewController.m in Sources */,
@@ -5577,6 +5816,7 @@
 				202C4829187D7A6B00FE0975 /* CJSONSerializer.m in Sources */,
 				202C4800187D6E4B00FE0975 /* BitlyTwitterOAuthAccount.m in Sources */,
 				202F992718BCAD1B002A25D9 /* FlyerlyFacebookFriends.m in Sources */,
+				20A38EAA1982531F007C279F /* LobServiceModel.m in Sources */,
 				202C4826187D7A6B00FE0975 /* CDataScanner_Extensions.m in Sources */,
 				0F80C386178561C200D36795 /* LaunchController.m in Sources */,
 				0F80C38B178578CB00D36795 /* RegisterController.m in Sources */,
@@ -5591,6 +5831,7 @@
 				202C47FD187D6E4B00FE0975 /* BitlyTextView.m in Sources */,
 				2087B6C017C73B40007A6A90 /* ResetPWViewController.m in Sources */,
 				24803523192F3207009403F7 /* CameraViewController.m in Sources */,
+				20A38EA21982531F007C279F /* LobAddressModel.m in Sources */,
 				202C4802187D6E4B00FE0975 /* BitlyTwitterOAuthViewController.m in Sources */,
 				2095C91118C5F92700E244A8 /* FlyerlyFacebookInvite.m in Sources */,
 				203E0B7617DDDD720039C3A7 /* InputViewController.m in Sources */,
@@ -5602,10 +5843,15 @@
 				2478E5E3192C7A6E0081B31B /* InAppViewController.m in Sources */,
 				2022C63518D1BAF000BCD5F7 /* RMStoreKeychainPersistence.m in Sources */,
 				202C4825187D7A6B00FE0975 /* CDataScanner.m in Sources */,
+				20A38EAD1982531F007C279F /* LobVerifyModel.m in Sources */,
 				49997FF717DF786400CF1038 /* ParentViewController.m in Sources */,
+				20A38EAC1982531F007C279F /* LobStateModel.m in Sources */,
+				20A38EC819825387007C279F /* AbstractBlockRequest.m in Sources */,
 				2478E5ED192C8C0A0081B31B /* FreeFeatureCell.m in Sources */,
 				4986857018B4FFC7002113E4 /* LibraryViewController.m in Sources */,
 				49997FFB17E07FA100CF1038 /* SKProduct+LocalPrice.m in Sources */,
+				20A38EA81982531F007C279F /* LobPackagingModel.m in Sources */,
+				20A38ED219825387007C279F /* LobRequest.m in Sources */,
 				202C47FB187D6E4B00FE0975 /* BitlyLibUtil.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -17,14 +17,21 @@
 #import "UIImagePDF.h"
 #import "UserVoice.h"
 #import "SendingPrintViewController.h"
-#import <AFNetworking/AFNetworking.h>
+#import "LobPostcardModel.h"
+#import "LobAddressModel.h"
+#import "Lob/LobRequest.h"
+#import "LobObjectModel.h"
+
+static NSString *testApiKey = @"test_13fb536c2d9e23b0e25657d9f923261b03b";
 
 @interface InviteForPrint ()
+
 
 @property (nonatomic, strong, readwrite) PayPalConfiguration *payPalConfiguration;
 
 @end
 
+LobRequest *request;
 
 @implementation InviteForPrint
 @synthesize uiTableView, contactsArray, selectedIdentifiers, searchTextField, iPhoneinvited,flyer;
@@ -38,6 +45,8 @@
     [super viewDidLoad];
     
     [self ebayUploadPicture];
+    
+    
     
     UVConfig *config = [UVConfig configWithSite:@"http://flyerly.uservoice.com/"];
     [UserVoice initialize:config];
@@ -153,6 +162,7 @@
     identifiers = selectedIdentifiers;
     NSLog(@"%@",identifiers);
     
+    NSLog(@"%lu",(unsigned long)contactsArray.count);
     if([identifiers count] > 0) {
     
         [self openBuyPanel:selectedIdentifiers.count];
@@ -338,7 +348,14 @@
         CFRelease(addressRef);
         //-------
         
-        if ( ![[contactInfoDict objectForKey:@"streetAddress"] isEqualToString:@""] && ![[contactInfoDict objectForKey:@"city"] isEqualToString:@""] && ![[contactInfoDict objectForKey:@"country"] isEqualToString:@""] ) {
+        if ( ![[contactInfoDict objectForKey:@"streetAddress"] isEqualToString:@""] && ![[contactInfoDict objectForKey:@"state"] isEqualToString:@""] && ![[contactInfoDict objectForKey:@"city"] isEqualToString:@""] && ![[contactInfoDict objectForKey:@"country"] isEqualToString:@""] ) {
+            
+            model.streetAddress = [contactInfoDict objectForKey:@"streetAddress"];
+            model.state = [contactInfoDict objectForKey:@"state"];
+            model.city = [contactInfoDict objectForKey:@"city"];
+            model.country = [contactInfoDict objectForKey:@"country"];
+            
+            
             //For username and surname
             ABMultiValueRef phones =(__bridge ABMultiValueRef)((NSString*)CFBridgingRelease(ABRecordCopyValue(ref, kABPersonPhoneProperty)));
             CFStringRef firstName, lastName;
@@ -367,8 +384,10 @@
                 }
             }
             
+            [contactsArray addObject:model];
+            
             //For Phone number
-            NSString* mobileLabel;
+            /*NSString* mobileLabel;
             for(CFIndex i = 0; i < ABMultiValueGetCount(phones); i++) {
                 
                 mobileLabel = (NSString*)CFBridgingRelease(ABMultiValueCopyLabelAtIndex(phones, i));
@@ -394,7 +413,7 @@
                     [contactsArray addObject:model];
                     break ;
                 }
-            }
+            }*/
         }
     }
     
@@ -733,6 +752,7 @@
     
     SendingPrintViewController *sendingControoler = [[SendingPrintViewController alloc]initWithNibName:@"SendingPrintViewController" bundle:nil];
     sendingControoler.flyer = self.flyer;
+    sendingControoler.contactsArray = self.contactsArray;
 	[self.navigationController pushViewController:sendingControoler animated:YES];
     
     /*sendingControoler.flyer = self.flyer;
@@ -770,7 +790,126 @@
  */
 -(void)ebayUploadPicture{
     
-    NSString *urlString = @"https://api.lob.com/v1/postcards";
+    #define Test_Address_Harry @{@"name" : @"HARRY ZHANG", \
+    @"email" : [NSNull null], \
+    @"phone" : [NSNull null], \
+    @"address_line1" : @"1600 AMPHITHEATRE PKWY", \
+    @"address_line2" : @"UNIT 199", \
+    @"address_city" : @"MOUNTAIN VIEW", \
+    @"address_state" : @"CA", \
+    @"address_zip" : @"94085", \
+    @"address_country" : @"UNITED STATES"}
+    
+    NSMutableDictionary *sendingFromAddress_ = [[NSMutableDictionary alloc] init];
+    [sendingFromAddress_ setObject:@"Jenn" forKey:@"name"];
+    [sendingFromAddress_ setObject:@"123 Test Avenue" forKey:@"address_line1"];
+    [sendingFromAddress_ setObject:@"Seattle" forKey:@"address_city"];
+    [sendingFromAddress_ setObject:@"WA" forKey:@"address_state"];
+    [sendingFromAddress_ setObject:@"94041" forKey:@"address_zip"];
+    [sendingFromAddress_ setObject:@"US" forKey:@"address_country"];
+    
+    NSDictionary *postcardDict = @{@"name" : @"Demo Postcard",
+                                   @"front" : @"https://www.lob.com/postcardfront.pdf",
+                                   @"back" : @"https://www.lob.com/postcardback.pdf",
+                                   @"to" : Test_Address_Harry,
+                                   @"from" : Test_Address_Harry};
+    
+    LobPostcardModel *postcardModel = [LobPostcardModel initWithDictionary:postcardDict];
+    
+    request = [[LobRequest alloc] initWithAPIKey:testApiKey];
+    
+    [request createPostcardWithModel:postcardModel
+                        withResponse:^(LobPostcardModel *postcard, NSError *error)
+     {
+         NSLog(@"*** Postcard Create Response ***");
+         
+         NSLog(@"%u", request.statusCode);
+
+     }];
+    
+    return;
+    
+    //NSDictionary *pdfDictionary = (NSDictionary*) [NSKeyedUnarchiver unarchiveObjectWithData:[self exportFlyerToPDF]];
+    
+    NSDictionary *objectDict = @{@"name" : @"Go Blue",
+                                 @"setting" : @{@"id" : @"100"},
+                                 @"file" : [self exportFlyerToPDF]};
+    
+    LobObjectModel *objectModel = [LobObjectModel initWithDictionary:objectDict];
+    objectModel.localFilePath = YES;
+    
+    
+    NSMutableDictionary *sendingToAddress = [[NSMutableDictionary alloc] init];
+    [sendingToAddress setObject:@"Zhang" forKey:@"name"];
+    [sendingToAddress setObject:@"123 Test Street" forKey:@"address_line1"];
+    [sendingToAddress setObject:@"Mountain View" forKey:@"address_city"];
+    [sendingToAddress setObject:@"CA" forKey:@"address_state"];
+    [sendingToAddress setObject:@"94041" forKey:@"address_zip"];
+    [sendingToAddress setObject:@"US" forKey:@"address_country"];
+    
+    NSMutableDictionary *sendingFromAddress = [[NSMutableDictionary alloc] init];
+    [sendingFromAddress setObject:@"Jenn" forKey:@"name"];
+    [sendingFromAddress setObject:@"123 Test Avenue" forKey:@"address_line1"];
+    [sendingFromAddress setObject:@"Seattle" forKey:@"address_city"];
+    [sendingFromAddress setObject:@"WA" forKey:@"address_state"];
+    [sendingFromAddress setObject:@"94041" forKey:@"address_zip"];
+    [sendingFromAddress setObject:@"US" forKey:@"address_country"];
+    
+    
+    NSMutableDictionary *lodDictionary = [[NSMutableDictionary alloc] init];
+    
+    [lodDictionary setObject:@"Post card ID" forKey:@"id"];
+    [lodDictionary setObject:@"Custom Name" forKey:@"name"];
+    [lodDictionary setObject:@"Custom Message" forKey:@"message"];
+    [lodDictionary setObject:sendingToAddress forKey:@"to"];
+    [lodDictionary setObject:sendingFromAddress forKey:@"from"];
+    [lodDictionary setObject:@"https://www.lob.com/postcardfront.pdf" forKey:@"front"];
+    [lodDictionary setObject:@"https://www.lob.com/postcardback.pdf" forKey:@"back"];
+    
+    /*LobPostcardModel *flyerPostCard = [[LobPostcardModel alloc] initWithDictionary:lodDictionary];
+    
+    [request createPostcardWithModel:flyerPostCard withResponse:^(LobPostcardModel *postcard, NSError *error){
+         NSLog(@"%@",postcard);
+         NSLog(@"%@",error);
+     }];*/
+    
+    /*
+    LobAddressModel *sendingFromAddress_ = [[LobAddressModel alloc] initAddressWithName:@"Jenn" email:@"sample@gmail.com" phone:@"123456789" addressLine1:@"123 Test Avenue" addressLine2:@"123 Test Avenue" addressCity:@"Seattle" addressState:@"WA" addressZip:@"94041" addressCountry:@"US"];
+    
+    
+    //for (int i=0;i<contactsArray.count;i++){
+        
+        //ContactsModel *model__ = [[ContactsModel alloc] init];
+        //model__ = [contactsArray objectAtIndex:i];
+        
+        LobAddressModel *sendingToAddress_ = [[LobAddressModel alloc] initAddressWithName:@"Zhang" email:@"sample@gmail.com" phone:@"123456789" addressLine1:@"123 Test Street" addressLine2:@"123 Test Street"  addressCity:@"Mountain View" addressState:@"CA" addressZip:@"94041" addressCountry:@"US"];
+        
+        LobPostcardModel *flyerPostCard_ = [[LobPostcardModel alloc] initPostcardWithName:@"My Flyer" message:@"Please Checkout my new flyer" toAddress:sendingToAddress_ fromAddress:sendingFromAddress_ status:@"2" price:@"$2" frontUrl:@"https://www.lob.com/postcardfront.pdf" backUrl:@"https://www.lob.com/postcardback.pdf" fullBleed:YES];
+    
+    //}
+    
+    //LobPostcardModel *flyerPostCard = [[LobPostcardModel alloc] init];
+    
+    request = [[LobRequest alloc] initWithAPIKey:testApiKey];
+    
+    [request createPostcardWithModel:flyerPostCard_ withResponse:^(LobPostcardModel *postcard, NSError *error){
+        
+        NSLog(@"%@", postcard.status);
+        NSLog(@"%@", error.debugDescription);
+        
+    }];
+
+    
+    /*
+    self.status = dict[@"status"];
+    self.price = dict[@"price"];
+    self.frontUrl = dict[@"front"];
+    self.backUrl = dict[@"back"];
+    
+    if(dict[@"full_bleed"]) self.fullBleed = [dict[@"full_bleed"] boolValue];
+    else self.fullBleed = false;*/
+        
+    /*NSString *urlString = @"https://api.lob.com/v1/postcards";
     
     NSData *pdfData = [NSData dataWithData:[self exportFlyerToPDF]];
     
@@ -778,46 +917,16 @@
     
     [manager POST:urlString parameters:@"test_0dc8d51e0acffcb1880e0f19c79b2f5b0cc" constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         
-        //[formData appendPartWithFileData:pdfData name:@"FlyerPDF" fileName:@"flyer.pdf" mimeType:@"application/pdf"];
-        [formData appendPartWithFormData:pdfData name:@"FlyerPDF"];
+        [formData appendPartWithFileData:pdfData name:@"FlyerPDF" fileName:@"flyer.pdf" mimeType:@"application/pdf"];
+        [formData appendPartWithFormData:[[NSString stringWithUTF8String:"Preston Junger"] dataUsingEncoding:NSUTF8StringEncoding]
+                                    name:@"name"];
         
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"Response: %@", responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
-    }];
-
-
-
-    /*AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSDictionary *params = @{@"name": @"My Name",
-                             @"to[name]=Harry Zhang": weight
-                             @"to[address_line1]":
-                             @"to[address_city]":
-                             @"to[address_state]":
-                             @"to[address_zip]":
-                             @"to[address_country]":
-                             @"from[name]":
-                             @"from[address_line1]":
-                             @"from[address_city]":
-                             @"from[address_state]":
-                             @"from[address_zip]":
-                             @"from[address_country]":};
-    [manager POST:@"https://mysite.com/myobject" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"JSON: %@", responseObject);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
-    }];
+    }];*/
     
-    
-   
-    
-   
-    
-    
-    
--d "front=https://www.lob.com/postcardfront.pdf" \
-    -d "back=https://www.lob.com/postcardback.pdf"*/
 }
 
 
