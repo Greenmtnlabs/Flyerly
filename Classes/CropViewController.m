@@ -66,20 +66,20 @@
     // Set the grid size.
     self.cropGuideSize = desiredImageSize;
     
-    // Configure and set all available filters
-    // Configure and set all available filters
-    NSMutableArray *allFilters = [NSMutableArray arrayWithArray:[NBUFilterProvider availableFilters]];
+    // Get only the core image filters.
+    NSArray *filterTypes = [NBUCoreImageFilterProvider availableFilterTypes];
     
-    // Remove the filters we do not want.
-    for ( int i = allFilters.count - 1; i >= 0; i--) {
-        NBUFilter *filter = [allFilters objectAtIndex:i];
-        
-        if ( filter.type == NBUFilterTypeNone ) {
-            [allFilters removeObject:filter];
-        }
+    NSMutableArray * filters = [NSMutableArray array];
+    NBUFilter * filter;
+    
+    for (NSString * type in filterTypes) {
+        filter = [NBUCoreImageFilterProvider filterWithName:nil
+                    type:type
+                    values:nil];
+        [filters addObject:filter];
     }
-    
-    self.filters = allFilters;
+
+    self.filters = filters;
 
     // Configure crop view. We may get big pixels with this factor!
     self.maximumScaleFactor = 10.0;
