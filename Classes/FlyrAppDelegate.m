@@ -154,7 +154,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     // Setup paypal
     [PayPalMobile initializeWithClientIdsForEnvironments:
      @{PayPalEnvironmentProduction : @"",
-       PayPalEnvironmentSandbox : @"AWdPPxAB1tPoTWBPDw2kc18IE-JK62B0m0lUkPEpibC9it_4p7Vv2Y3PCpgl"}];
+       PayPalEnvironmentSandbox : @"AWGYCRB32qMlpNyIY9_kKXXsDIZN7UG5JNM5zjCWwXWvLu66SQP3WjbU9v-A"}];
     
     // Configurator initialization
     FlyerlyConfigurator *flyerConfigurator = [[FlyerlyConfigurator alloc] init];

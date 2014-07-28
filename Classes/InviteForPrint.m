@@ -21,6 +21,7 @@
 #import "LobAddressModel.h"
 #import "Lob/LobRequest.h"
 #import "LobObjectModel.h"
+#import "PayPalPaymentViewController.h"
 
 static NSString *testApiKey = @"test_13fb536c2d9e23b0e25657d9f923261b03b";
 
@@ -44,9 +45,10 @@ LobRequest *request;
     
     [super viewDidLoad];
     
-    [self ebayUploadPicture];
-    
-    
+    //[self ebayUploadPicture];
+
+    // use default environment, should be Production in real life
+    //self.environment = PayPalEnvironmentSandbox;
     
     UVConfig *config = [UVConfig configWithSite:@"http://flyerly.uservoice.com/"];
     [UserVoice initialize:config];
@@ -111,6 +113,7 @@ LobRequest *request;
 
 -(void)viewWillAppear:(BOOL)animated{
     
+    [PayPalMobile preconnectWithEnvironment:PayPalEnvironmentSandbox];
     self.navigationItem.leftItemsSupplementBackButton = YES;
 }
 
@@ -522,14 +525,14 @@ LobRequest *request;
         if (model.status == 0) {
             
             [model setInvitedStatus:1];
-            [selectedIdentifiers addObject:model.description];
+            [selectedIdentifiers addObject:model.streetAddress];
             
         }else if (model.status == 1) {
             
             [model setInvitedStatus:0];
             
             //REMOVE FROM SENDING LIST
-            [selectedIdentifiers removeObject:model.description];
+            [selectedIdentifiers removeObject:model.streetAddress];
             
         }
 }
