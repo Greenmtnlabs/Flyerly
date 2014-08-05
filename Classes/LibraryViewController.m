@@ -21,6 +21,7 @@
 #import "LibraryViewController.h"
 #import "AssetsGroupViewController.h"
 #import "FlyerlySingleton.h"
+#import "AssetGroupViewControllerWithSearchFeild.h"
 #import <NBUCompatibility.h>
 #import <NBUAssetsLibrary.h>
 
@@ -68,6 +69,15 @@
     UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     [self.navigationItem setLeftBarButtonItem:leftBarButton];
     
+    // Buy Images Button
+    UIButton *buyImagesButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+    buyImagesButton.titleLabel.font = [UIFont systemFontOfSize:14.0];
+    [buyImagesButton addTarget:self action:@selector(buyImages) forControlEvents:UIControlEventTouchUpInside];
+    [buyImagesButton setBackgroundImage:[UIImage imageNamed:@"share_button"] forState:UIControlStateNormal];
+    buyImagesButton.showsTouchWhenHighlighted = YES;
+    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:buyImagesButton];
+    [self.navigationItem setRightBarButtonItem:rightBarButton];
+    
     // Set the title view.
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-35, -6, 50, 50)];
     label.backgroundColor = [UIColor clearColor];
@@ -89,7 +99,7 @@
     if (![NBUAssetsLibrary sharedLibrary].userDeniedAccess)
     {
         // No need for info button
-        self.navigationItem.rightBarButtonItem = nil;
+        //self.navigationItem.rightBarButtonItem = nil;
     }
 }
 
@@ -122,6 +132,15 @@
 - (void)goBack {
     self.onVideoCancel();
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+/**
+ * Buy Images .
+ */
+- (void)buyImages {
+    NSLog(@"Buy Images Pressed");
+    AssetGroupViewControllerWithSearchFeild *buyImagesController= [[AssetGroupViewControllerWithSearchFeild alloc]initWithNibName:@"AssetGroupViewControllerWithSearchFeild" bundle:nil];
+	[self.navigationController pushViewController:buyImagesController animated:YES];
 }
 
 @end
