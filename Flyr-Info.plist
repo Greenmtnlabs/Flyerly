@@ -160,6 +160,7 @@
 		<string>YanoneKaffeesatz-Light.ttf</string>
 		<string>MontserratAlternates-Regular.ttf</string>
 		<string>Lobster.ttf</string>
+		<string>icomoon.ttf</string>
 	</array>
 	<key>UIPrerenderedIcon</key>
 	<true/>

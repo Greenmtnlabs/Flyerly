@@ -275,7 +275,6 @@
 		20A38EAD1982531F007C279F /* LobVerifyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 20A38EA01982531F007C279F /* LobVerifyModel.m */; };
 		20A38EC819825387007C279F /* AbstractBlockRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 20A38EB019825387007C279F /* AbstractBlockRequest.m */; };
 		20A38ED219825387007C279F /* LobRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 20A38EC719825387007C279F /* LobRequest.m */; };
-		20BA7DED18BE083300991DCC /* Flyr-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D1107310486CEB800E47090 /* Flyr-Info.plist */; };
 		20CC6922180DA416002F2E6F /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2061ED8B17FF212100E9BECA /* icon.png */; };
 		20CC6925180DA44C002F2E6F /* icon-60.png in Resources */ = {isa = PBXBuildFile; fileRef = 20CC6923180DA44C002F2E6F /* icon-60.png */; };
 		20CC6926180DA44C002F2E6F /* icon-120.png in Resources */ = {isa = PBXBuildFile; fileRef = 20CC6924180DA44C002F2E6F /* icon-120.png */; };
@@ -319,6 +318,8 @@
 		20F93DD317B2262200F6F88C /* MainSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F93DD117B2262200F6F88C /* MainSettingViewController.m */; };
 		20F93DD417B2262200F6F88C /* MainSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20F93DD217B2262200F6F88C /* MainSettingViewController.xib */; };
 		20FA7E731872AAF50057C3F3 /* CameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20FA7E711872AAF50057C3F3 /* CameraViewController.xib */; };
+		2405D3481990AC4B007F2596 /* AssetGroupViewControllerWithSearchFeild.m in Sources */ = {isa = PBXBuildFile; fileRef = 2405D3461990AC4B007F2596 /* AssetGroupViewControllerWithSearchFeild.m */; };
+		2405D3491990AC4B007F2596 /* AssetGroupViewControllerWithSearchFeild.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2405D3471990AC4B007F2596 /* AssetGroupViewControllerWithSearchFeild.xib */; };
 		24218392194AF29C00FDDA97 /* Fonts-paid.plist in Resources */ = {isa = PBXBuildFile; fileRef = 24218391194AF29C00FDDA97 /* Fonts-paid.plist */; };
 		24218394194B02B500FDDA97 /* Emoticons.plist in Resources */ = {isa = PBXBuildFile; fileRef = 24218393194B02B500FDDA97 /* Emoticons.plist */; };
 		24218396194B02C500FDDA97 /* Emoticons-paid.plist in Resources */ = {isa = PBXBuildFile; fileRef = 24218395194B02C500FDDA97 /* Emoticons-paid.plist */; };
@@ -1551,6 +1552,9 @@
 		20F93DD217B2262200F6F88C /* MainSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainSettingViewController.xib; sourceTree = "<group>"; };
 		20FA7E6F1872AAF50057C3F3 /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
 		20FA7E711872AAF50057C3F3 /* CameraViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraViewController.xib; sourceTree = "<group>"; };
+		2405D3451990AC4B007F2596 /* AssetGroupViewControllerWithSearchFeild.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssetGroupViewControllerWithSearchFeild.h; sourceTree = "<group>"; };
+		2405D3461990AC4B007F2596 /* AssetGroupViewControllerWithSearchFeild.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssetGroupViewControllerWithSearchFeild.m; sourceTree = "<group>"; };
+		2405D3471990AC4B007F2596 /* AssetGroupViewControllerWithSearchFeild.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AssetGroupViewControllerWithSearchFeild.xib; sourceTree = "<group>"; };
 		24218391194AF29C00FDDA97 /* Fonts-paid.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Fonts-paid.plist"; sourceTree = "<group>"; };
 		24218393194B02B500FDDA97 /* Emoticons.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Emoticons.plist; sourceTree = "<group>"; };
 		24218395194B02C500FDDA97 /* Emoticons-paid.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Emoticons-paid.plist"; sourceTree = "<group>"; };
@@ -3628,6 +3632,7 @@
 		20F3597C1888DC8A001376B6 /* CreateFlyer */ = {
 			isa = PBXGroup;
 			children = (
+				2405D3441990ABD8007F2596 /* BuyImagesController */,
 				2075A9921899EAB600F410FB /* FlyerlyCustomClasses */,
 				2046355F1895E47100A94C42 /* Models */,
 				204635661895F90900A94C42 /* Controller */,
@@ -3738,6 +3743,16 @@
 				20A1CD6218EEF63200484391 /* SubNBUCamera.m */,
 			);
 			name = Camera;
+			sourceTree = "<group>";
+		};
+		2405D3441990ABD8007F2596 /* BuyImagesController */ = {
+			isa = PBXGroup;
+			children = (
+				2405D3451990AC4B007F2596 /* AssetGroupViewControllerWithSearchFeild.h */,
+				2405D3461990AC4B007F2596 /* AssetGroupViewControllerWithSearchFeild.m */,
+				2405D3471990AC4B007F2596 /* AssetGroupViewControllerWithSearchFeild.xib */,
+			);
+			name = BuyImagesController;
 			sourceTree = "<group>";
 		};
 		246EF477193C515D004539B2 /* Emoticons */ = {
@@ -5033,6 +5048,7 @@
 				247858891948736B0062F1E4 /* AMBROSIA_DEMO-Regular.ttf in Resources */,
 				654B255017202B1C0047C8F6 /* AfterUpdateController.xib in Resources */,
 				242184C5194B4AEC00FDDA97 /* emoticon183@2x.png in Resources */,
+				2405D3491990AC4B007F2596 /* AssetGroupViewControllerWithSearchFeild.xib in Resources */,
 				242184CA194B4AEC00FDDA97 /* fencing-icon.png in Resources */,
 				246EF50E193C515D004539B2 /* emoticon48@2x.png in Resources */,
 				2421850C194B4AEC00FDDA97 /* turtle-icon.png in Resources */,
@@ -5814,6 +5830,7 @@
 				202C4825187D7A6B00FE0975 /* CDataScanner.m in Sources */,
 				20A38EAD1982531F007C279F /* LobVerifyModel.m in Sources */,
 				49997FF717DF786400CF1038 /* ParentViewController.m in Sources */,
+				2405D3481990AC4B007F2596 /* AssetGroupViewControllerWithSearchFeild.m in Sources */,
 				20A38EAC1982531F007C279F /* LobStateModel.m in Sources */,
 				20A38EC819825387007C279F /* AbstractBlockRequest.m in Sources */,
 				2478E5ED192C8C0A0081B31B /* FreeFeatureCell.m in Sources */,

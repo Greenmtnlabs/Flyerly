@@ -1112,8 +1112,9 @@ NSArray *coloursArray;
     }
     
     if(IS_IPHONE_5){
-        clipartsView.size = CGSizeMake(320, curYLoc + (heightValue + 7) );
-        [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
+        clipartsView.size = CGSizeMake(320, curYLoc + 85 );//(heightValue + 7) );
+        [layerScrollView setContentSize:CGSizeMake(320, curYLoc + 50)];//  heightValue)];
+        
     }else {
         clipartsView.size = CGSizeMake(curXLoc + heightValue + 5 , heightValue + 5);
         [layerScrollView setContentSize:CGSizeMake(clipartsView.size.width , heightValue)];
