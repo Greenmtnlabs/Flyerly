@@ -185,15 +185,21 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
                 
                 NSLog(@"User with facebook signed up and logged in!");
                 
-                FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-                
-                 // here we Checking  User Merge required or not
-                [appDelegate fbChangeforNewVersion];
-                
                 //Saving User Info for again login
                 [[NSUserDefaults standardUserDefaults]  setObject:[user.username lowercaseString] forKey:@"User"];
                 
-               [self onRegistrationSuccess];
+                // Login success Move to Flyerly
+                launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil] ;
+                
+                FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+                appDelegate.lauchController = launchController;
+                
+                // For Parse New User Merge to old Facebook User
+                
+                [appDelegate fbChangeforNewVersion];
+                
+                [self onRegistrationSuccess];
+                
                 
             } else {
                 
@@ -202,8 +208,20 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
                 //Saving User Info for again login
                 [[NSUserDefaults standardUserDefaults]  setObject:[user.username lowercaseString] forKey:@"User"];
                 
-                [self onRegistrationSuccess];
+                // Login success Move to Flyerly
+                launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil] ;
                 
+                // Temp on for Testing here
+                FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+                
+                UserPurchases *userPurchases_ = [UserPurchases getInstance];
+                
+                //GET UPDATED USER PUCHASES INFO
+                [userPurchases_ setUserPurcahsesFromParse];
+                
+                appDelegate.lauchController = launchController;
+                
+                [self onRegistrationSuccess];
             }
         }];
 
@@ -374,10 +392,11 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
         [self.signInController onSignInSuccess];
     }
     
-    if( appDelegate.lauchController == nil ) {
+    if( appDelegate.lauchController != nil ) {
         launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil];
-        [self.navigationController pushViewController:launchController animated:YES];
+        [navigationController pushViewController:launchController animated:YES];
     }
+    
 }
 
 
