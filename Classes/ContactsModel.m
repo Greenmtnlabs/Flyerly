@@ -34,7 +34,6 @@
         checkImageName = @"checkgray";
     }
     
-    
     [self.delegate contactInvited:self];
 }
 

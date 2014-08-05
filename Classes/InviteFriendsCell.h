@@ -19,7 +19,7 @@
 @property (nonatomic,strong)IBOutlet UILabel *description;
 @property (nonatomic,strong)IBOutlet UIImageView *checkBtn;
 
--(void)setCellObjects :(ContactsModel *)model :(int)status;
+-(void)setCellObjects :(ContactsModel *)model :(int)status :(NSString *)tableName;
 
 
 @end

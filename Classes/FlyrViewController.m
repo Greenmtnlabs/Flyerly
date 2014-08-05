@@ -33,9 +33,10 @@
     
     self.navigationItem.hidesBackButton = YES;
     searchTextField.font = [UIFont systemFontOfSize:12.0];
-    searchTextField.textAlignment = UITextAlignmentLeft;
+    //searchTextField.textAlignment = UITextAlignmentLeft;
     searchTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     [searchTextField setBorderStyle:UITextBorderStyleRoundedRect];
+    [searchTextField setReturnKeyType:UIReturnKeyDone];
     
     [self.tView setBackgroundColor:[UIColor colorWithRed:245/255.0 green:241/255.0 blue:222/255.0 alpha:1.0]];
 	tView.dataSource = self;
@@ -111,6 +112,14 @@
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
 
+    if([string isEqualToString:@"\n"]){
+        if([searchTextField canResignFirstResponder])
+        {
+            [searchTextField resignFirstResponder];
+        }
+        return NO;
+    }
+    
     if(searching){
         if([string isEqualToString:@"\n"]){
             

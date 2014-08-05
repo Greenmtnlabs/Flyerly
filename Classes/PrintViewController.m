@@ -8,6 +8,7 @@
 
 #import "PrintViewController.h"
 #import "CreateFlyerController.h"
+#import "InviteForPrint.h"
 
 @interface PrintViewController ()
 
@@ -66,6 +67,11 @@
 }
 
 - (IBAction)startButton:(UIButton *)sender {
+    
+    [self.presentingViewController dismissViewControllerAnimated:NO completion:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"PrintViewControllerDismissed"
+                                                        object:nil
+                                                      userInfo:nil];
 }
 
 @end

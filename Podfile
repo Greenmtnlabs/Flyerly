@@ -1,5 +1,7 @@
 platform :ios, '7.0'
 
+pod 'AFNetworking', '~> 2.2'
+
 #pod "ShareKit"
 pod 'Google-API-Client', '0.1.1'
 pod 'ShareKit', :podspec => "Podspecs/ShareKit.podspec"

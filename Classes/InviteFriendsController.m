@@ -743,7 +743,7 @@ const int CONTACTS_TAB = 0;
     
 
     // HERE WE PASS DATA TO CELL CLASS
-    [cell setCellObjects:receivedDic :status];
+    [cell setCellObjects:receivedDic :status :@"InviteFriends"];
         
     return cell;
 }

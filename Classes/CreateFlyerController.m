@@ -15,6 +15,7 @@
 #import "GADBannerView.h"
 #import "GADBannerViewDelegate.h"
 #import "PrintViewController.h"
+#import "InviteForPrint.h"
 
 @implementation CreateFlyerController
 
@@ -32,7 +33,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 @synthesize libText,libBackground,libArts,libPhoto,libEmpty,backtemplates,cameraTakePhoto,cameraRoll,flyerBorder;
 @synthesize flyimgView,currentLayer,layersDic,flyer,player,playerView,playerToolBar,playButton,playerSlider,tempelateView;
 @synthesize durationLabel,durationChange,onFlyerBack,shouldShowAdd;
-@synthesize backgroundsView,flyerBordersView,colorsView,sizesView,bannerAddView,bannerAddBackView,bannerAddDismissButton;
+@synthesize backgroundsView,flyerBordersView,colorsView,sizesView,bannerAddView,bannerAddDismissButton;
 int selectedAddMoreLayerTab = -1;
 
 
@@ -138,7 +139,6 @@ NSArray *coloursArray;
 // Dismiss action for banner ad
 -(IBAction)dissmisBannerAdd:(id)sender{
     
-    [self.bannerAddBackView removeFromSuperview];
     [self.bannerAddView removeFromSuperview];
 }
 
@@ -2907,7 +2907,6 @@ NSArray *coloursArray;
                         self.onFlyerBack(@"");
                         
                     });
-                    
                 }
                 
                 // Here we Add Video In Flyerly Album
@@ -4703,8 +4702,18 @@ NSArray *coloursArray;
     }
     
     printViewController.flyer = self.flyer;
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(didDismissPrintViewController)
+                                                 name:@"PrintViewControllerDismissed"
+                                               object:nil];
+    [self presentModalViewController:printViewController animated:YES];
+}
+
+-(void)didDismissPrintViewController {
     
-    [self presentModalViewController:printViewController animated:NO];
+    InviteForPrint *inviteForPrint = [[InviteForPrint alloc]initWithNibName:@"InviteForPrint" bundle:nil];
+    inviteForPrint.flyer = self.flyer;
+	[self.navigationController pushViewController:inviteForPrint animated:YES];
 }
 
 @end

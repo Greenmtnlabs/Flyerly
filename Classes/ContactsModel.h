@@ -34,6 +34,10 @@
 @property (nonatomic,strong)NSString *imageUrl;
 @property (nonatomic,strong) NSString *checkImageName;
 @property (nonatomic,assign)int status;
-
+//--- Address
+@property (nonatomic,strong)NSString *streetAddress;
+@property (nonatomic,strong)NSString *state;
+@property (nonatomic,strong)NSString *city;
+@property (nonatomic,strong)NSString *country;
 
 @end
