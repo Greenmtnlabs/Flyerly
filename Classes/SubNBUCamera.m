@@ -38,11 +38,8 @@
                                                           error:&error];
     if ( error ) {
         NSLog( @"Error creating an AVCaptureDeviceInput for audio: %@", error );
-        return;
-    }
-    
-    // Add audio input to session
-    if ( [_captureSession canAddInput:_audioInput] ) {
+    } else if ( [_captureSession canAddInput:_audioInput] ) {
+        // Add audio input to session
         [_captureSession addInput:_audioInput];
     } else {
         NSLog( @"Unable to add audio to recording." );
