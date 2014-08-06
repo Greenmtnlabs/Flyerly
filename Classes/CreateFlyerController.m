@@ -1674,11 +1674,17 @@ NSArray *coloursArray;
 
     [nbuGallary setOnImageTaken:^(UIImage *img) {
         
+        [uiBusy stopAnimating];
+        [uiBusy removeFromSuperview];
+        
+        // If there is no image do no further processing.
+        if ( img == nil ) {
+            return;
+        }
+        
         //Remove tag of selected background
         [flyer setImageTag:@"Template" Tag:[NSString stringWithFormat:@"%d",-1]];
         
-        [uiBusy stopAnimating];
-        [uiBusy removeFromSuperview];
         dispatch_async( dispatch_get_main_queue(), ^{
             
             // Do any UI operation here (render layer).
@@ -1802,12 +1808,18 @@ NSArray *coloursArray;
     
     // Callback once image is selected.
     [nbuCamera setOnImageTaken:^(UIImage *img) {
+    
+        [uiBusy stopAnimating];
+        [uiBusy removeFromSuperview];
+        
+        // If there is no image, do no further processing.
+        if ( img == nil ) {
+            return;
+        }
         
         //Remove tag of selected background
         [flyer setImageTag:@"Template" Tag:[NSString stringWithFormat:@"%d",-1]];
-        
-        [uiBusy stopAnimating];
-        [uiBusy removeFromSuperview];
+    
         dispatch_async( dispatch_get_main_queue(), ^{
 
             if ( imgPickerFlag == 2 ) {

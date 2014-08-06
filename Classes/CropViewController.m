@@ -117,6 +117,8 @@
 -(void) goBack {
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
     [self.navigationController popViewControllerAnimated:YES];
+    
+    self.onImageTaken( nil );
 }
 
 /**
