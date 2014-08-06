@@ -627,6 +627,7 @@
 		246EF546193C515D004539B2 /* emoticon99@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 246EF4DE193C515D004539B2 /* emoticon99@2x.png */; };
 		246EF547193C515D004539B2 /* emoticon9@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 246EF4DF193C515D004539B2 /* emoticon9@2x.png */; };
 		246EF549193C5AE0004539B2 /* Emoticons-iPhone4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 246EF548193C5AE0004539B2 /* Emoticons-iPhone4.xib */; };
+		246FAD1D199241D20096B669 /* icomoon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 246FAD1C199241D20096B669 /* icomoon.ttf */; };
 		247058E7194F348300678CC5 /* ResourcesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 247058E6194F348300678CC5 /* ResourcesView.m */; };
 		2471593219408E5F00B30301 /* facebook@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2471592419408E5F00B30301 /* facebook@2x.png */; };
 		2471593419408E5F00B30301 /* flickr_share_saved@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2471592619408E5F00B30301 /* flickr_share_saved@2x.png */; };
@@ -1862,6 +1863,7 @@
 		246EF4DE193C515D004539B2 /* emoticon99@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emoticon99@2x.png"; sourceTree = "<group>"; };
 		246EF4DF193C515D004539B2 /* emoticon9@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emoticon9@2x.png"; sourceTree = "<group>"; };
 		246EF548193C5AE0004539B2 /* Emoticons-iPhone4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Emoticons-iPhone4.xib"; sourceTree = "<group>"; };
+		246FAD1C199241D20096B669 /* icomoon.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = icomoon.ttf; path = Data/fonts/icomoon.ttf; sourceTree = "<group>"; };
 		247058E5194F348300678CC5 /* ResourcesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourcesView.h; sourceTree = "<group>"; };
 		247058E6194F348300678CC5 /* ResourcesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResourcesView.m; sourceTree = "<group>"; };
 		2471592419408E5F00B30301 /* facebook@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook@2x.png"; sourceTree = "<group>"; };
@@ -4539,6 +4541,7 @@
 		6513C1AB1716FE0F00355FC3 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				246FAD1C199241D20096B669 /* icomoon.ttf */,
 				2479A29B19658ABF00B57F86 /* Sofia-Regular.otf */,
 				20563E0B1962D64200C206FD /* CutiveMono-Regular.ttf */,
 				20563E0D1962D64200C206FD /* Lora-Italic.ttf */,
@@ -5184,6 +5187,7 @@
 				65C1A41E1742516D00947D5E /* Template6@2x.jpg in Resources */,
 				65C1A41F1742516D00947D5E /* Template7@2x.jpg in Resources */,
 				247858A71948757C0062F1E4 /* Hightide-Regular.ttf in Resources */,
+				246FAD1D199241D20096B669 /* icomoon.ttf in Resources */,
 				247858CE1948764D0062F1E4 /* Moonhouse-Regular.ttf in Resources */,
 				65C1A4201742516D00947D5E /* Template8@2x.jpg in Resources */,
 				65C1A4211742516D00947D5E /* Template9@2x.jpg in Resources */,

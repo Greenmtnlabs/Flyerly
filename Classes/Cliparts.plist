@@ -250,5 +250,11 @@
 		<key>character</key>
 		<string>👎</string>
 	</dict>
+	<dict>
+		<key>fontType</key>
+		<string>icomoon</string>
+		<key>character</key>
+		<string></string>
+	</dict>
 </array>
 </plist>
