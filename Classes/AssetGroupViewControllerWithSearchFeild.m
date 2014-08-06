@@ -14,6 +14,8 @@
 
 @implementation AssetGroupViewControllerWithSearchFeild
 
+@synthesize searchTextField;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -27,6 +29,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    // Configure the grid view
+    //self.gridView.margin = CGSizeMake(5.0, 5.0);
+    //self.gridView.nibNameForViews = @"CustomAssetThumbnailView";
 }
 
 - (void)didReceiveMemoryWarning
