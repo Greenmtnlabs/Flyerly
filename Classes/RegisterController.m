@@ -37,6 +37,11 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     
     globle = [FlyerlySingleton RetrieveSingleton];
     
+    //Setting up the Scroll size
+    [scrollView setContentSize:CGSizeMake(320, 660)];
+    //Setting the initial position for scroll view
+    scrollView.contentOffset = CGPointMake(0,60);
+    
     self.navigationController.navigationBarHidden = NO;
     
     // for Navigation Bar Background
@@ -454,7 +459,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    CGRect textFieldRect =
+    /*CGRect textFieldRect =
     [self.view.window convertRect:textField.bounds fromView:textField];
     CGRect viewRect =
     [self.view.window convertRect:self.view.bounds fromView:self.view];
@@ -498,7 +503,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     
     [self.view setFrame:viewFrame];
     
-    [UIView commitAnimations];
+    [UIView commitAnimations];*/
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
@@ -518,6 +523,8 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
+    // Reseting the scrollview position
+    [scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
     return YES;
 }
 
