@@ -1531,7 +1531,6 @@
 		20F83819196D292B006B72A0 /* UVDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UVDelegate.h; sourceTree = "<group>"; };
 		20F8381A196D292B006B72A0 /* UVStyleSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UVStyleSheet.h; sourceTree = "<group>"; };
 		20F83823196D292B006B72A0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/UserVoice.strings; sourceTree = "<group>"; };
-		20F83824196D292B006B72A0 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/UserVoice.strings; sourceTree = "<group>"; };
 		20F8383A196D292B006B72A0 /* uv_article.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = uv_article.png; sourceTree = "<group>"; };
 		20F8383B196D292B006B72A0 /* uv_article@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "uv_article@2x.png"; sourceTree = "<group>"; };
 		20F8383C196D292B006B72A0 /* uv_default_avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = uv_default_avatar.png; sourceTree = "<group>"; };
@@ -3699,6 +3698,7 @@
 			);
 			path = "UserVoiceSDK-3.0.0";
 			sourceTree = "<group>";
+			usesTabs = 0;
 		};
 		20F83816196D292B006B72A0 /* UVHeaders */ = {
 			isa = PBXGroup;
@@ -5853,7 +5853,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				20F83823196D292B006B72A0 /* en */,
-				20F83824196D292B006B72A0 /* es */,
 			);
 			name = UserVoice.strings;
 			sourceTree = "<group>";
