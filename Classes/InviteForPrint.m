@@ -169,7 +169,7 @@ LobRequest *request;
     if([identifiers count] > 0) {
     
         [self openBuyPanel:selectedIdentifiers.count];
-    }
+    
     /*if([identifiers count] > 0){
         
         // Send invitations
@@ -220,13 +220,13 @@ LobRequest *request;
             
             [[SHK currentHelper] showViewController:rootView];
             
-        }
+        }*/
         
     } else {
         [self showAlert:@"Please select any contact to invite !" message:@""];
     }
     
-    [Flurry logEvent:@"Friends Invited"];*/
+    [Flurry logEvent:@"Friends Invited"];
 }
 
 
@@ -520,9 +520,11 @@ LobRequest *request;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	
         ContactsModel *model = [self getArrayOfSelectedTab][(indexPath.row)];
-        
+    
+    [selectedIdentifiers addObject:model.streetAddress];
+    [model setInvitedStatus:1];
         //CHECK FOR ALREADY SELECTED
-        if (model.status == 0) {
+        /*if (model.status == 0) {
             
             [model setInvitedStatus:1];
             [selectedIdentifiers addObject:model.streetAddress];
@@ -534,7 +536,7 @@ LobRequest *request;
             //REMOVE FROM SENDING LIST
             [selectedIdentifiers removeObject:model.streetAddress];
             
-        }
+        }*/
 }
 
 - (IBAction)onSearchClick:(UIButton *)sender{
