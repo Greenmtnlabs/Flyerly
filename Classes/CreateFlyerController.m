@@ -4226,11 +4226,11 @@ NSArray *coloursArray;
     dicPath = @"Photo";
     
     //Create Unique Id for Image
-    int timestamp = [[NSDate date] timeIntervalSince1970];
+    NSString *uniqueId = [flyer getUniqueId];
     
-    NSString *imageFolderPath = [NSString stringWithFormat:@"%@/%d.%@", FolderPath,timestamp,IMAGETYPE];
+    NSString *imageFolderPath = [NSString stringWithFormat:@"%@/%@.%@", FolderPath, uniqueId, IMAGETYPE];
     
-    dicPath = [dicPath stringByAppendingString:[NSString stringWithFormat:@"/%d.%@",timestamp,IMAGETYPE]];
+    dicPath = [dicPath stringByAppendingString:[NSString stringWithFormat:@"/%@.%@", uniqueId, IMAGETYPE]];
     
     NSData *imgData = UIImagePNGRepresentation(img);
     
@@ -4296,10 +4296,10 @@ NSArray *coloursArray;
     } else {
         
         //Create Unique Id for Image
-        int timestamp = [[NSDate date] timeIntervalSince1970];
+        NSString *uniqueId = [flyer getUniqueId];
         
-        imageFolderPath = [NSString stringWithFormat:@"%@/%d.%@", FolderPath,timestamp,IMAGETYPE];
-        dicPath = [dicPath stringByAppendingString:[NSString stringWithFormat:@"/%d.%@",timestamp,IMAGETYPE]];
+        imageFolderPath = [NSString stringWithFormat:@"%@/%@.%@", FolderPath, uniqueId, IMAGETYPE];
+        dicPath = [dicPath stringByAppendingString:[NSString stringWithFormat:@"/%@.%@", uniqueId, IMAGETYPE]];
         
         //Getting Image From Bundle
         existImagePath =[[NSBundle mainBundle] pathForResource:imgName ofType:@"png"];
@@ -4320,18 +4320,16 @@ NSArray *coloursArray;
 -(NSString *)getEmoticon:(NSString *) imgName {
     
     // Create Symbol direcrory if not created
-    static int randomNumber = 0;
     NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
     
     NSString *FolderPath = [NSString stringWithFormat:@"%@/Symbol", currentpath];
     NSString *dicPath = @"Symbol";
 
     //Create Unique Id for Image
-    int timestamp = [[NSDate date] timeIntervalSince1970];
-    randomNumber = (randomNumber + 1) % 100;
+    NSString *uniqueId = [flyer getUniqueId];
     
-    NSString *imageFolderPath = [NSString stringWithFormat:@"%@/%u%u.%@", FolderPath, timestamp, randomNumber, IMAGETYPE];
-    dicPath = [dicPath stringByAppendingString:[NSString stringWithFormat:@"/%u%u.%@", timestamp, randomNumber, IMAGETYPE]];
+    NSString *imageFolderPath = [NSString stringWithFormat:@"%@/%@.%@", FolderPath, uniqueId, IMAGETYPE];
+    dicPath = [dicPath stringByAppendingString:[NSString stringWithFormat:@"/%@.%@", uniqueId, IMAGETYPE]];
     
     //Getting Image From Bundle
     NSString *existImagePath =[[NSBundle mainBundle] pathForResource:imgName ofType:@"png"];

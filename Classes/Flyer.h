@@ -147,10 +147,12 @@
 -(float)getHight :(NSString *)uid;
 -(NSString *)getFlyerImage;
 -(BOOL)isVideoMergeProcessRequired;
+-(NSString *)getUniqueId;
 
 +(NSString *)newFlyerPath;
-+ (NSMutableArray *)recentFlyerPreview:(NSInteger)flyCount;
-+ (BOOL) compareColor:(UIColor*)color1 withColor:(UIColor*)color2;
++(NSMutableArray *)recentFlyerPreview:(NSInteger)flyCount;
++(BOOL) compareColor:(UIColor*)color1 withColor:(UIColor*)color2;
+
 
 @property (strong, readonly) NSMutableDictionary *masterLayers;
 @property (strong, nonatomic) NSMutableArray *socialArray;
