@@ -745,8 +745,8 @@ NSInteger compareTimestamps(id stringLeft, id stringRight, void *context) {
 NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     
     // Convert both strings to integers
-    int intLeft = [stringLeft intValue];
-    int intRight = [stringRight intValue];
+    long long intLeft = [stringLeft longLongValue];
+    long long intRight = [stringRight longLongValue];
     
     if (intLeft < intRight)
         return NSOrderedDescending;
@@ -909,8 +909,8 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     if ([[NSFileManager defaultManager] fileExistsAtPath:usernamePath isDirectory:NULL])
             [[NSFileManager defaultManager] createDirectoryAtPath:usernamePath withIntermediateDirectories:YES attributes:nil error:&error];
         
-        int timestamp = [[NSDate date] timeIntervalSince1970];
-        NSString *flyerPath = [usernamePath stringByAppendingString:[NSString stringWithFormat:@"/%d",timestamp]];
+    NSString *uniqueId = [Flyer getUniqueId];
+        NSString *flyerPath = [usernamePath stringByAppendingString:[NSString stringWithFormat:@"/%@", uniqueId]];
         
     return flyerPath;
 
