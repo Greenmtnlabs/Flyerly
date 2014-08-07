@@ -73,8 +73,6 @@
 
 -(void)setFlyerBorder :(NSString *)uid RGBColor:(id)rgb;
 
--(NSString *) getCurrentTimestamp;
-
 -(void)setFlyerTypeVideo;
 -(NSString *)getFlyerTypeVideo;
 -(void)setFlyerTypeImage;
@@ -147,7 +145,7 @@
 -(float)getHight :(NSString *)uid;
 -(NSString *)getFlyerImage;
 -(BOOL)isVideoMergeProcessRequired;
--(NSString *)getUniqueId;
++(NSString *)getUniqueId;
 
 +(NSString *)newFlyerPath;
 +(NSMutableArray *)recentFlyerPreview:(NSInteger)flyCount;

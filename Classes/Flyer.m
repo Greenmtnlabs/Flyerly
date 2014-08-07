@@ -488,7 +488,7 @@ NSString * const CLIPARTHEIGHT = @"100.000000";
             }
             
             //Create History  folder Path
-            NSString *uniqueId = [self getUniqueId];
+            NSString *uniqueId = [Flyer getUniqueId];
             NSString* historyDestinationpath  =   [NSString stringWithFormat:@"%@/History/%@", currentSourcepath,
                                                    uniqueId];
     
@@ -524,7 +524,7 @@ NSString * const CLIPARTHEIGHT = @"100.000000";
         }
         
         //Create History  folder Path
-        NSString *uniqueId = [self getUniqueId];
+        NSString *uniqueId = [Flyer getUniqueId];
         NSString* historyDestinationpath  =   [NSString stringWithFormat:@"%@/History/%@", currentSourcepath,
                                                uniqueId];
         
@@ -771,7 +771,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
  */
 -(NSString *)addImage{
     
-    NSString *uniqueId = [self getUniqueId];
+    NSString *uniqueId = [Flyer getUniqueId];
     
     //Create Dictionary for Symbol
     NSMutableDictionary *imageDetailDictionary = [[NSMutableDictionary alloc] init];
@@ -969,7 +969,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 
     NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
     
-    NSString *uniqueId = [self getUniqueId];
+    NSString *uniqueId = [Flyer getUniqueId];
     NSString *replaceDirName = uniqueId;
     
     // Here we Rename the Directory Name
@@ -1096,7 +1096,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
  *      UniqueID
  */
 -(NSString *)addText {
-    NSString *uniqueId = [self getUniqueId];
+    NSString *uniqueId = [Flyer getUniqueId];
     
     //Add Defaualt dictionary
     NSMutableDictionary *textDetailDictionary = [[NSMutableDictionary alloc] init];
@@ -1125,7 +1125,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
  *      UniqueID
  */
 -(NSString *)addClipArt {
-    NSString *uniqueId = [self getUniqueId];
+    NSString *uniqueId = [Flyer getUniqueId];
     
     //Add Defaualt dictionary
     NSMutableDictionary *textDetailDictionary = [[NSMutableDictionary alloc] init];
@@ -1291,7 +1291,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     [templateDictionary setValue:@"video" forKey:@"FlyerType"];
     
     // Set timeStamp
-    [templateDictionary setValue:[self getUniqueId] forKey:@"Timestamp"];
+    [templateDictionary setValue:[Flyer getUniqueId] forKey:@"Timestamp"];
 
     // Set to Master Dictionary
     [masterLayers setValue:templateDictionary forKey:@"Template"];
@@ -1317,7 +1317,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     [templateDictionary setValue:@"image" forKey:@"FlyerType"];
     
     // Set timeStamp
-    [templateDictionary setValue:[self getUniqueId] forKey:@"Timestamp"];
+    [templateDictionary setValue:[Flyer getUniqueId] forKey:@"Timestamp"];
     
     // Set to Master Dictionary
     [masterLayers setValue:templateDictionary forKey:@"Template"];
@@ -1959,7 +1959,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
  *
  * This method ensures a unique ID is assigned to each element.
  */
-- (NSString *)getUniqueId {
++ (NSString *)getUniqueId {
     static int randomNumber = 0;
     
     // Create Unique ID even within a second

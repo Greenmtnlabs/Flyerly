@@ -4226,7 +4226,7 @@ NSArray *coloursArray;
     dicPath = @"Photo";
     
     //Create Unique Id for Image
-    NSString *uniqueId = [flyer getUniqueId];
+    NSString *uniqueId = [Flyer getUniqueId];
     
     NSString *imageFolderPath = [NSString stringWithFormat:@"%@/%@.%@", FolderPath, uniqueId, IMAGETYPE];
     
@@ -4296,7 +4296,7 @@ NSArray *coloursArray;
     } else {
         
         //Create Unique Id for Image
-        NSString *uniqueId = [flyer getUniqueId];
+        NSString *uniqueId = [Flyer getUniqueId];
         
         imageFolderPath = [NSString stringWithFormat:@"%@/%@.%@", FolderPath, uniqueId, IMAGETYPE];
         dicPath = [dicPath stringByAppendingString:[NSString stringWithFormat:@"/%@.%@", uniqueId, IMAGETYPE]];
@@ -4326,7 +4326,7 @@ NSArray *coloursArray;
     NSString *dicPath = @"Symbol";
 
     //Create Unique Id for Image
-    NSString *uniqueId = [flyer getUniqueId];
+    NSString *uniqueId = [Flyer getUniqueId];
     
     NSString *imageFolderPath = [NSString stringWithFormat:@"%@/%@.%@", FolderPath, uniqueId, IMAGETYPE];
     dicPath = [dicPath stringByAppendingString:[NSString stringWithFormat:@"/%@.%@", uniqueId, IMAGETYPE]];

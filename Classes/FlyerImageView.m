@@ -10,7 +10,7 @@
 #import "Flyer.h"
 
 @implementation FlyerImageView
-@synthesize layers,flyerTapGesture,flyer;
+@synthesize layers,flyerTapGesture;
 
 /**
  * Image initialization.
@@ -418,7 +418,7 @@
             [self bringSubviewToFront:recognizer.view];
             
             // When we bring a view to front, we need to change its key
-             NSString *newKey = [flyer getUniqueId];
+            NSString *newKey = [Flyer getUniqueId];
             
             // Update the layer dictionary with new key
             id l = [layers objectForKey:key];
