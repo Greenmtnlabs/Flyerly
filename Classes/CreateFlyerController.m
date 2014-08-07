@@ -149,9 +149,10 @@ NSArray *coloursArray;
         //Making dismiss button visible,and bring it to front
         bannerAddDismissButton.alpha = 1.0;
         [self.bannerAddView bringSubviewToFront:bannerAddDismissButton];
-        
+        return;
     }
     
+    [self.bannerAddView removeFromSuperview];
 }
 
 // Dismiss action for banner ad
