@@ -55,6 +55,15 @@
     self.navigationItem.titleView = label;
 }
 
+#pragma mark - Button Handlers
+
+/**
+ * Cancel and go back.
+ */
+- (void)goBack {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
