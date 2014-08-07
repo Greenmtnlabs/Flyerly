@@ -79,6 +79,18 @@ NSArray *coloursArray;
     self.interstitialAdd.adUnitID = @"ca-app-pub-5409664730066465/9926514430";
     self.interstitialAdd.delegate = self;
     [self.interstitialAdd loadRequest:[self request]];
+
+    //Here we remove Borders from layer if user touch any layer
+    [self.flyimgView layerStoppedEditing:currentLayer];
+     
+     //Here we take Snap shot of Flyer and
+     //Flyer Add to Gallery if user allow to Access there photos
+     [flyer setUpdatedSnapshotWithImage:[self getFlyerSnapShot]];
+     
+     dispatch_async( dispatch_get_main_queue(), ^{
+     //Here we Open Share Panel for Share Flyer
+         [self openPanel];
+     });
 }
 
 - (GADRequest *)request {
@@ -129,11 +141,17 @@ NSArray *coloursArray;
 // We've received an Banner ad successfully.
 - (void)adViewDidReceiveAd:(GADBannerView *)adView {
     
-    //Adding ad in custom view
-    [self.bannerAddView addSubview:self.bannerAdd];
-    //Making dismiss button visible,and bring it to front
-    bannerAddDismissButton.alpha = 1.0;
-    [self.bannerAddView bringSubviewToFront:bannerAddDismissButton];
+    UserPurchases *userPurchases_ = [UserPurchases getInstance];
+    if ( ![userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]){
+        
+        //Adding ad in custom view
+        [self.bannerAddView addSubview:self.bannerAdd];
+        //Making dismiss button visible,and bring it to front
+        bannerAddDismissButton.alpha = 1.0;
+        [self.bannerAddView bringSubviewToFront:bannerAddDismissButton];
+        
+    }
+    
 }
 
 // Dismiss action for banner ad
@@ -3346,6 +3364,19 @@ NSArray *coloursArray;
         //Background Thread
         dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
             
+            
+            UserPurchases *userPurchases_ = [UserPurchases getInstance];
+            
+            if ( ![userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ) {
+                if ( [self.interstitialAdd isReady]  && ![self.interstitialAdd hasBeenUsed] ) {
+                    
+                    dispatch_async( dispatch_get_main_queue(), ^{
+                    [self.interstitialAdd presentFromRootViewController:self];
+                         });
+                }
+                return;
+            }
+            
             //Here we remove Borders from layer if user touch any layer
             [self.flyimgView layerStoppedEditing:currentLayer];
             
@@ -3357,6 +3388,7 @@ NSArray *coloursArray;
                 //Here we Open Share Panel for Share Flyer
                 [self openPanel];
             });
+            
         });
     }
 }
@@ -4716,5 +4748,6 @@ NSArray *coloursArray;
     inviteForPrint.flyer = self.flyer;
 	[self.navigationController pushViewController:inviteForPrint animated:YES];
 }
+
 
 @end
