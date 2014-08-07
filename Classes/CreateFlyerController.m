@@ -2326,8 +2326,6 @@ NSArray *coloursArray;
     // Remove Border if Any Layer Selected check the entire layers in a flyer
     for ( NSString* key in self.flyimgView.layers ) {
         [self.flyimgView layerStoppedEditing:key];
-        NSLog(@ "%@",self.flyimgView.layer);
-        NSLog(@ "%@",key);
         
         //Delete Empty Layer if Exist
         if (key != nil && ![key isEqualToString:@""]) {
