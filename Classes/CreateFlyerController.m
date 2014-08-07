@@ -1851,11 +1851,17 @@ NSArray *coloursArray;
 
     [nbuGallary setOnImageTaken:^(UIImage *img) {
         
+        [uiBusy stopAnimating];
+        [uiBusy removeFromSuperview];
+        
+        // If there is no image do no further processing.
+        if ( img == nil ) {
+            return;
+        }
+        
         //Remove tag of selected background
         [flyer setImageTag:@"Template" Tag:[NSString stringWithFormat:@"%d",-1]];
         
-        [uiBusy stopAnimating];
-        [uiBusy removeFromSuperview];
         dispatch_async( dispatch_get_main_queue(), ^{
             
             // Do any UI operation here (render layer).
@@ -1979,12 +1985,18 @@ NSArray *coloursArray;
     
     // Callback once image is selected.
     [nbuCamera setOnImageTaken:^(UIImage *img) {
+    
+        [uiBusy stopAnimating];
+        [uiBusy removeFromSuperview];
+        
+        // If there is no image, do no further processing.
+        if ( img == nil ) {
+            return;
+        }
         
         //Remove tag of selected background
         [flyer setImageTag:@"Template" Tag:[NSString stringWithFormat:@"%d",-1]];
-        
-        [uiBusy stopAnimating];
-        [uiBusy removeFromSuperview];
+    
         dispatch_async( dispatch_get_main_queue(), ^{
 
             if ( imgPickerFlag == 2 ) {
@@ -2491,8 +2503,6 @@ NSArray *coloursArray;
     // Remove Border if Any Layer Selected check the entire layers in a flyer
     for ( NSString* key in self.flyimgView.layers ) {
         [self.flyimgView layerStoppedEditing:key];
-        NSLog(@ "%@",self.flyimgView.layer);
-        NSLog(@ "%@",key);
         
         //Delete Empty Layer if Exist
         if (key != nil && ![key isEqualToString:@""]) {
@@ -2648,12 +2658,6 @@ NSArray *coloursArray;
  * This resets the flyer image view by removing and readding all its subviews
  */
 -(void)renderFlyer {
-    
-//    // Remove all Subviews inside image view
-//    NSArray *viewsToRemove = [self.flyimgView subviews];
-//    for (UIView *v in viewsToRemove) {
-//        [v removeFromSuperview];
-//    }
     
     NSArray *flyerPiecesKeys = [flyer allKeys];
     
@@ -3154,6 +3158,12 @@ NSArray *coloursArray;
  * A layer needs to be brought to the front.
  */
 -(void)bringLayerToFront:(NSString *)oldUid new:(NSString *)uid {
+    
+    // Should we update the current layer?
+    if ( [currentLayer isEqualToString:oldUid] ) {
+        currentLayer = uid;
+    }
+    
     [self.flyer updateLayerKey:oldUid newKey:uid];
     
     // Only update layers if we are not editing any layer.
@@ -4443,11 +4453,11 @@ NSArray *coloursArray;
     dicPath = @"Photo";
     
     //Create Unique Id for Image
-    int timestamp = [[NSDate date] timeIntervalSince1970];
+    NSString *uniqueId = [Flyer getUniqueId];
     
-    NSString *imageFolderPath = [NSString stringWithFormat:@"%@/%d.%@", FolderPath,timestamp,IMAGETYPE];
+    NSString *imageFolderPath = [NSString stringWithFormat:@"%@/%@.%@", FolderPath, uniqueId, IMAGETYPE];
     
-    dicPath = [dicPath stringByAppendingString:[NSString stringWithFormat:@"/%d.%@",timestamp,IMAGETYPE]];
+    dicPath = [dicPath stringByAppendingString:[NSString stringWithFormat:@"/%@.%@", uniqueId, IMAGETYPE]];
     
     NSData *imgData = UIImagePNGRepresentation(img);
     
@@ -4513,10 +4523,10 @@ NSArray *coloursArray;
     } else {
         
         //Create Unique Id for Image
-        int timestamp = [[NSDate date] timeIntervalSince1970];
+        NSString *uniqueId = [Flyer getUniqueId];
         
-        imageFolderPath = [NSString stringWithFormat:@"%@/%d.%@", FolderPath,timestamp,IMAGETYPE];
-        dicPath = [dicPath stringByAppendingString:[NSString stringWithFormat:@"/%d.%@",timestamp,IMAGETYPE]];
+        imageFolderPath = [NSString stringWithFormat:@"%@/%@.%@", FolderPath, uniqueId, IMAGETYPE];
+        dicPath = [dicPath stringByAppendingString:[NSString stringWithFormat:@"/%@.%@", uniqueId, IMAGETYPE]];
         
         //Getting Image From Bundle
         existImagePath =[[NSBundle mainBundle] pathForResource:imgName ofType:@"png"];
@@ -4537,18 +4547,16 @@ NSArray *coloursArray;
 -(NSString *)getEmoticon:(NSString *) imgName {
     
     // Create Symbol direcrory if not created
-    static int randomNumber = 0;
     NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
     
     NSString *FolderPath = [NSString stringWithFormat:@"%@/Symbol", currentpath];
     NSString *dicPath = @"Symbol";
 
     //Create Unique Id for Image
-    int timestamp = [[NSDate date] timeIntervalSince1970];
-    randomNumber = (randomNumber + 1) % 100;
+    NSString *uniqueId = [Flyer getUniqueId];
     
-    NSString *imageFolderPath = [NSString stringWithFormat:@"%@/%u%u.%@", FolderPath, timestamp, randomNumber, IMAGETYPE];
-    dicPath = [dicPath stringByAppendingString:[NSString stringWithFormat:@"/%u%u.%@", timestamp, randomNumber, IMAGETYPE]];
+    NSString *imageFolderPath = [NSString stringWithFormat:@"%@/%@.%@", FolderPath, uniqueId, IMAGETYPE];
+    dicPath = [dicPath stringByAppendingString:[NSString stringWithFormat:@"/%@.%@", uniqueId, IMAGETYPE]];
     
     //Getting Image From Bundle
     NSString *existImagePath =[[NSBundle mainBundle] pathForResource:imgName ofType:@"png"];
@@ -4705,7 +4713,7 @@ NSArray *coloursArray;
         
         NSLog(@"Memory Capacity of %llu MiB with %llu MiB Free memory available.",totalSpace , totalFreeSpace);
     } else {
-        NSLog(@"Error Obtaining System Memory Info: Domain = %@, Code = %@", [error domain], [error code]);
+        NSLog(@"Error Obtaining System Memory Info: Domain = %@, Code = %u", [error domain], [error code]);
     }
     
     return totalFreeSpace;

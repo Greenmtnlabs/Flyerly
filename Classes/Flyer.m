@@ -488,8 +488,9 @@ NSString * const CLIPARTHEIGHT = @"100.000000";
             }
             
             //Create History  folder Path
-            int timestamp = [[NSDate date] timeIntervalSince1970];
-            NSString* historyDestinationpath  =   [NSString stringWithFormat:@"%@/History/%d",currentSourcepath,timestamp];
+            NSString *uniqueId = [Flyer getUniqueId];
+            NSString* historyDestinationpath  =   [NSString stringWithFormat:@"%@/History/%@", currentSourcepath,
+                                                   uniqueId];
     
             //Create Flyer folder
             [[NSFileManager defaultManager] createDirectoryAtPath:historyDestinationpath withIntermediateDirectories:YES attributes:nil error:&error];
@@ -523,8 +524,9 @@ NSString * const CLIPARTHEIGHT = @"100.000000";
         }
         
         //Create History  folder Path
-        int timestamp = [[NSDate date] timeIntervalSince1970];
-        NSString* historyDestinationpath  =   [NSString stringWithFormat:@"%@/History/%d",currentSourcepath,timestamp];
+        NSString *uniqueId = [Flyer getUniqueId];
+        NSString* historyDestinationpath  =   [NSString stringWithFormat:@"%@/History/%@", currentSourcepath,
+                                               uniqueId];
         
         //Create Flyer folder
         [[NSFileManager defaultManager] createDirectoryAtPath:historyDestinationpath withIntermediateDirectories:YES attributes:nil error:&error];
@@ -654,8 +656,12 @@ NSString * const CLIPARTHEIGHT = @"100.000000";
  */
 -(void)updateLayerKey:(NSString *)old newKey:(NSString *)key {
     id obj = [masterLayers objectForKey:old];
-    [masterLayers removeObjectForKey:old];
-    [masterLayers setObject:obj forKey:key];
+    
+    // Sanity check, make sure the object is not nil.
+    if ( obj != nil ) {
+        [masterLayers removeObjectForKey:old];
+        [masterLayers setObject:obj forKey:key];
+    }
 }
 
 /*
@@ -720,8 +726,8 @@ NSString * const CLIPARTHEIGHT = @"100.000000";
 NSInteger compareTimestamps(id stringLeft, id stringRight, void *context) {
     
     // Convert both strings to integers
-    int intLeft = [stringLeft intValue];
-    int intRight = [stringRight intValue];
+    long long intLeft = [stringLeft longLongValue];
+    long long intRight = [stringRight longLongValue];
     
     if (intLeft < intRight)
         return NSOrderedAscending;
@@ -739,8 +745,8 @@ NSInteger compareTimestamps(id stringLeft, id stringRight, void *context) {
 NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     
     // Convert both strings to integers
-    int intLeft = [stringLeft intValue];
-    int intRight = [stringRight intValue];
+    long long intLeft = [stringLeft longLongValue];
+    long long intRight = [stringRight longLongValue];
     
     if (intLeft < intRight)
         return NSOrderedDescending;
@@ -765,9 +771,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
  */
 -(NSString *)addImage{
     
-    int timestamp = [[NSDate date] timeIntervalSince1970];
-    
-    NSString *uniqueId = [NSString stringWithFormat:@"%d",timestamp];
+    NSString *uniqueId = [Flyer getUniqueId];
     
     //Create Dictionary for Symbol
     NSMutableDictionary *imageDetailDictionary = [[NSMutableDictionary alloc] init];
@@ -905,9 +909,8 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     if ([[NSFileManager defaultManager] fileExistsAtPath:usernamePath isDirectory:NULL])
             [[NSFileManager defaultManager] createDirectoryAtPath:usernamePath withIntermediateDirectories:YES attributes:nil error:&error];
         
-        int timestamp = [[NSDate date] timeIntervalSince1970];
-        
-        NSString *flyerPath = [usernamePath stringByAppendingString:[NSString stringWithFormat:@"/%d",timestamp]];
+    NSString *uniqueId = [Flyer getUniqueId];
+        NSString *flyerPath = [usernamePath stringByAppendingString:[NSString stringWithFormat:@"/%@", uniqueId]];
         
     return flyerPath;
 
@@ -966,8 +969,8 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 
     NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
     
-    int timestamp = [[NSDate date] timeIntervalSince1970];
-    NSString *replaceDirName = [NSString stringWithFormat: @"%d",timestamp];
+    NSString *uniqueId = [Flyer getUniqueId];
+    NSString *replaceDirName = uniqueId;
     
     // Here we Rename the Directory Name
     NSString *newPath = [[currentpath stringByDeletingLastPathComponent] stringByAppendingPathComponent:replaceDirName];
@@ -1093,9 +1096,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
  *      UniqueID
  */
 -(NSString *)addText {
-    int timestamp = [[NSDate date] timeIntervalSince1970];
-    
-    NSString *uniqueId = [NSString stringWithFormat:@"%d",timestamp];
+    NSString *uniqueId = [Flyer getUniqueId];
     
     //Add Defaualt dictionary
     NSMutableDictionary *textDetailDictionary = [[NSMutableDictionary alloc] init];
@@ -1124,9 +1125,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
  *      UniqueID
  */
 -(NSString *)addClipArt {
-    int timestamp = [[NSDate date] timeIntervalSince1970];
-    
-    NSString *uniqueId = [NSString stringWithFormat:@"%d",timestamp];
+    NSString *uniqueId = [Flyer getUniqueId];
     
     //Add Defaualt dictionary
     NSMutableDictionary *textDetailDictionary = [[NSMutableDictionary alloc] init];
@@ -1292,7 +1291,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     [templateDictionary setValue:@"video" forKey:@"FlyerType"];
     
     // Set timeStamp
-    [templateDictionary setValue:[self getCurrentTimestamp] forKey:@"Timestamp"];
+    [templateDictionary setValue:[Flyer getUniqueId] forKey:@"Timestamp"];
 
     // Set to Master Dictionary
     [masterLayers setValue:templateDictionary forKey:@"Template"];
@@ -1309,14 +1308,6 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     
 }
 
-/**
- * Only @returns timeStampString
- */
--(NSString *) getCurrentTimestamp {
-    int timestamp = [[NSDate date] timeIntervalSince1970];
-    return [NSString stringWithFormat:@"%d",timestamp];
-}
-
 /*
  * Here we Set Flyer Type to Image Flyer
  */
@@ -1324,8 +1315,9 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     NSMutableDictionary *templateDictionary = [self getLayerFromMaster:@"Template"];
     
     [templateDictionary setValue:@"image" forKey:@"FlyerType"];
+    
     // Set timeStamp
-    [templateDictionary setValue:[self getCurrentTimestamp] forKey:@"Timestamp"];
+    [templateDictionary setValue:[Flyer getUniqueId] forKey:@"Timestamp"];
     
     // Set to Master Dictionary
     [masterLayers setValue:templateDictionary forKey:@"Template"];
@@ -1960,6 +1952,22 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     }
     
     return equal;
+}
+
+/**
+ * getUniqueId
+ *
+ * This method ensures a unique ID is assigned to each element.
+ */
++ (NSString *)getUniqueId {
+    static int randomNumber = 0;
+    
+    // Create Unique ID even within a second
+    int timestamp = [[NSDate date] timeIntervalSince1970];
+    randomNumber = (randomNumber + 1) % 100;
+    
+    NSString *uniqueId = [NSString stringWithFormat:@"%u%u", timestamp, randomNumber];
+    return uniqueId;
 }
 
 @end
