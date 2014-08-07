@@ -726,8 +726,8 @@ NSString * const CLIPARTHEIGHT = @"100.000000";
 NSInteger compareTimestamps(id stringLeft, id stringRight, void *context) {
     
     // Convert both strings to integers
-    int intLeft = [stringLeft intValue];
-    int intRight = [stringRight intValue];
+    long long intLeft = [stringLeft longLongValue];
+    long long intRight = [stringRight longLongValue];
     
     if (intLeft < intRight)
         return NSOrderedAscending;

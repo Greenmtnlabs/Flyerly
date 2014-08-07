@@ -2482,12 +2482,6 @@ NSArray *coloursArray;
  */
 -(void)renderFlyer {
     
-//    // Remove all Subviews inside image view
-//    NSArray *viewsToRemove = [self.flyimgView subviews];
-//    for (UIView *v in viewsToRemove) {
-//        [v removeFromSuperview];
-//    }
-    
     NSArray *flyerPiecesKeys = [flyer allKeys];
     
     for (int i = 0 ; i < flyerPiecesKeys.count; i++) {
@@ -4486,7 +4480,7 @@ NSArray *coloursArray;
         
         NSLog(@"Memory Capacity of %llu MiB with %llu MiB Free memory available.",totalSpace , totalFreeSpace);
     } else {
-        NSLog(@"Error Obtaining System Memory Info: Domain = %@, Code = %@", [error domain], [error code]);
+        NSLog(@"Error Obtaining System Memory Info: Domain = %@, Code = %u", [error domain], [error code]);
     }
     
     return totalFreeSpace;
