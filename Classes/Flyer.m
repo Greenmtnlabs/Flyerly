@@ -654,8 +654,12 @@ NSString * const CLIPARTHEIGHT = @"100.000000";
  */
 -(void)updateLayerKey:(NSString *)old newKey:(NSString *)key {
     id obj = [masterLayers objectForKey:old];
-    [masterLayers removeObjectForKey:old];
-    [masterLayers setObject:obj forKey:key];
+    
+    // Sanity check, make sure the object is not nil.
+    if ( obj != nil ) {
+        [masterLayers removeObjectForKey:old];
+        [masterLayers setObject:obj forKey:key];
+    }
 }
 
 /*

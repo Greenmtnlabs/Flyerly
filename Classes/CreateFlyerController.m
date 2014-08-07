@@ -2988,6 +2988,12 @@ NSArray *coloursArray;
  * A layer needs to be brought to the front.
  */
 -(void)bringLayerToFront:(NSString *)oldUid new:(NSString *)uid {
+    
+    // Should we update the current layer?
+    if ( [currentLayer isEqualToString:oldUid] ) {
+        currentLayer = uid;
+    }
+    
     [self.flyer updateLayerKey:oldUid newKey:uid];
     
     // Only update layers if we are not editing any layer.
