@@ -472,10 +472,14 @@ BOOL adLoaded = false;
         
         dispatch_async( dispatch_get_main_queue(), ^{
             
-            if ( [weakSelf.interstitial isReady]  && ![weakSelf.interstitial hasBeenUsed] ) {
-                [weakSelf.interstitial presentFromRootViewController:weakSelf];
+            UserPurchases *userPurchases_ = [UserPurchases getInstance];
+            if ( ![userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]){
+                
+                if ([weakSelf.interstitial isReady]  && ![weakSelf.interstitial hasBeenUsed]){
+                    [weakSelf.interstitial presentFromRootViewController:weakSelf];
+                }
+                                                         
             }
-            
         });
         
     }];
