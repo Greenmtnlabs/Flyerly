@@ -388,14 +388,16 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 
 -(void) onRegistrationSuccess {
 
+    [FlyerUser mergeAnonymousUser];
+    
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     
     UINavigationController* navigationController = self.navigationController;
-    [navigationController popViewControllerAnimated:NO];
+    //[navigationController popViewControllerAnimated:NO];
     
-    if (self.signInController != nil) {        
+    /*if (self.signInController != nil) {
         [self.signInController onSignInSuccess];
-    }
+    }*/
     
     if( appDelegate.lauchController != nil ) {
         launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil];
