@@ -183,9 +183,14 @@
         UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(layerResized:)];
         [view addGestureRecognizer:pinchGesture];
         
-        // Gesture for editing layers
+        // PinchGesture for editing layers
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editLayer:)];
         [view addGestureRecognizer:tapGesture];
+        
+        UIRotationGestureRecognizer *rotationRecognizer = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(handleRotateGesture:)];
+        //[rotationRecognizer setDelegate:self];
+        [view addGestureRecognizer:rotationRecognizer];
+        
     }
 }
 
@@ -198,6 +203,7 @@
     //SetFrame
     [imgView setFrame:CGRectMake([[detail valueForKey:@"x"] floatValue], [[detail valueForKey:@"y"] floatValue], [[detail valueForKey:@"width"] floatValue], [[detail valueForKey:@"height"] floatValue])];
               
+    imgView.transform = CGAffineTransformMakeRotation([[detail valueForKey:@"rotation"] floatValue]);
     
     //Set Image
     if ([detail objectForKey:@"image"] != nil) {
@@ -391,6 +397,21 @@
  * This method does drag and drop functionality on the layer.
  */
 - (void)layerMoved:(UIPanGestureRecognizer *)recognizer {
+    
+    //CGPoint translatedPoint = [(UIPanGestureRecognizer*)sender translationInView:canvas];
+    /*CGPoint translatedPoint = [recognizer translationInView:self];
+    
+    if([(UIPanGestureRecognizer*)sender state] == UIGestureRecognizerStateBegan) {
+        _firstX = [recognizer.view center].x;
+        _firstY = [recognizer.view center].y;
+    }
+    
+    translatedPoint = CGPointMake(_firstX+translatedPoint.x, _firstY+translatedPoint.y);
+    
+    [recognizer.view setCenter:translatedPoint];
+    [self.frame showOverlayWithFrame:recognizer.view.frame];*/
+    
+    
     CGPoint translation = [recognizer translationInView:self];
     recognizer.view.center = CGPointMake(recognizer.view.center.x + translation.x,
                                          recognizer.view.center.y + translation.y);
@@ -483,5 +504,26 @@
        
     }
 }
-
+                                                           
+/**
+ * Rotate view on rotate Gesture.
+ */
+-(void) handleRotateGesture:(UIGestureRecognizer *) sender {
+    
+    UIView *_view = sender.view;
+    
+    CGFloat rotation = [(UIRotationGestureRecognizer *) sender rotation];
+    
+    NSArray *keys = [layers allKeysForObject:_view];
+    // Let the delegate know that we changed frame.
+    for ( int i = 0; i < keys.count; i++ ) {
+        NSString *key = [keys objectAtIndex:i];
+        [self.delegate rotationAngleChangedForLayer:key rotationAngle:rotation];
+    }
+    CGAffineTransform transform = CGAffineTransformMakeRotation(rotation );//+ netRotation);
+    sender.view.transform = transform;
+    if (sender.state == UIGestureRecognizerStateEnded) {
+          rotation += rotation;
+    }
+}
 @end

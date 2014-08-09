@@ -122,8 +122,6 @@ NSArray *coloursArray;
 }
 
 - (void)showTopBanner:(UIView *)banner{
-    
-    //if (banner &amp;&amp; [banner isHidden]) {
         
         [UIView beginAnimations:@"bannerOn" context:NULL];
         
@@ -133,8 +131,6 @@ NSArray *coloursArray;
         
         banner.hidden = NO;
         
-   // }
-    
 }
 
 
@@ -2634,7 +2630,7 @@ NSArray *coloursArray;
 }
 
 /*
- * Here we Getting Snap Shot of Flyer Image View Context
+ * Here we Getting Snap Shot o f Flyer Image View Context
  * Return
  *  Image
  */
@@ -3089,6 +3085,36 @@ NSArray *coloursArray;
     
     //Update Dictionary
     [flyer setImageFrame:uid :frame];
+    
+    //Update Controller
+    [self.flyimgView renderLayer:uid layerDictionary:[flyer getLayerFromMaster:uid]];
+}
+
+/**
+ * Rotation Angle changed for layer, let the model know.
+ */
+- (void)rotationAngleChangedForLayer:(NSString *)uid rotationAngle:(CGFloat)rotationAngle {
+    
+    /*if ([widthTabButton isSelected]) {
+        
+        CGRect lastFrame = [flyer getImageFrame:uid];
+        
+        lastFrame.origin.x = frame.origin.x;
+        lastFrame.size.width = frame.size.width;
+        frame = lastFrame;
+        
+    } else if ([heightTabButton isSelected]) {
+        
+        CGRect lastFrame = [flyer getImageFrame:uid];
+        
+        lastFrame.origin.y = frame.origin.y;
+        lastFrame.size.height = frame.size.height;
+        frame = lastFrame;
+        
+    }*/
+    
+    //Update Dictionary
+    [flyer setImageRotationAngle:uid :rotationAngle];
     
     //Update Controller
     [self.flyimgView renderLayer:uid layerDictionary:[flyer getLayerFromMaster:uid]];
@@ -4578,7 +4604,7 @@ NSArray *coloursArray;
     return YES;
 }
 // this enables you to handle multiple recognizers on single view
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyxWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
     return YES;
 }
 

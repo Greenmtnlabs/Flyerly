@@ -50,7 +50,8 @@
 /**
  * This method does drag and drop functionality on the layer.
  */
-- (void)layerMoved:(UIPanGestureRecognizer *)recognizer {
+- (void)layerMoved:(UIPanGestureRecognizer *)recognizer :(id) sender {
+    
     CGPoint translation = [recognizer translationInView:self];
     
     if ( _fixedX ) {
@@ -60,7 +61,6 @@
         // Do not move y
         translation.y = 0;
     }
-    
     recognizer.view.center = CGPointMake(recognizer.view.center.x + translation.x,
                                          recognizer.view.center.y + translation.y);
     [recognizer setTranslation:CGPointMake(0, 0) inView:self];

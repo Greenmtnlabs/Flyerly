@@ -10,9 +10,13 @@
 
 @interface CropView : UIView {
     CAShapeLayer *_border;
+    
+    CGFloat _firstX;
+    CGFloat _firstY;
 }
 
 @property BOOL fixedX;
 @property BOOL fixedY;
+
 
 @end

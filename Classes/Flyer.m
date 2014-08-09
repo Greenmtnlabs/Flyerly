@@ -798,6 +798,20 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 }
 
 
+-(void) setImageRotationAngle : (NSString *)uid :(CGFloat) rotation {
+    
+    NSMutableDictionary *imageDetailDictionary = [self getLayerFromMaster:uid];
+    imageDetailDictionary[@"rotation"] = [NSString stringWithFormat:@"%f",rotation];
+    
+    [masterLayers setValue:imageDetailDictionary forKey:uid];
+}
+
+-(CGFloat) getImageRotationAngle : (NSString *)uid :(CGFloat) rotation {
+    
+    NSMutableDictionary *detail = [self getLayerFromMaster:uid];
+    return ([[detail valueForKey:@"rotation"] floatValue]);
+
+}
 /*
  * Set Image Tag For Highlight Last image
  */
