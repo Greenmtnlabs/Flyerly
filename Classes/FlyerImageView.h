@@ -25,7 +25,14 @@
 
 @end
 
-@interface FlyerImageView : UIImageView <UIGestureRecognizerDelegate>
+@interface FlyerImageView : UIImageView <UIGestureRecognizerDelegate> {
+    
+    CGFloat _firstX;
+	CGFloat _firstY;
+    CGFloat _lastScale;
+    
+    CAShapeLayer *_marque;
+}
 
 
 -(void)renderLayer :(NSString *)uid layerDictionary:(NSMutableDictionary *)layDic;

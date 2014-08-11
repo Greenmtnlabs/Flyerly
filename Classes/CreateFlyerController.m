@@ -3117,7 +3117,7 @@ NSArray *coloursArray;
     [flyer setImageRotationAngle:uid :rotationAngle];
     
     //Update Controller
-    [self.flyimgView renderLayer:uid layerDictionary:[flyer getLayerFromMaster:uid]];
+    //[self.flyimgView renderLayer:uid layerDictionary:[flyer getLayerFromMaster:uid]];
 }
 
 

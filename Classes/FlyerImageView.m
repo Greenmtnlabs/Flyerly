@@ -398,18 +398,17 @@
  */
 - (void)layerMoved:(UIPanGestureRecognizer *)recognizer {
     
-    //CGPoint translatedPoint = [(UIPanGestureRecognizer*)sender translationInView:canvas];
-    /*CGPoint translatedPoint = [recognizer translationInView:self];
+    /*CGPoint translatedPoint = [(UIPanGestureRecognizer*)recognizer translationInView:self];
     
-    if([(UIPanGestureRecognizer*)sender state] == UIGestureRecognizerStateBegan) {
-        _firstX = [recognizer.view center].x;
-        _firstY = [recognizer.view center].y;
+    if([(UIPanGestureRecognizer*)recognizer state] == UIGestureRecognizerStateBegan) {
+        _firstX = recognizer.view.center.x;
+        _firstY = recognizer.view.center.y;
     }
     
     translatedPoint = CGPointMake(_firstX+translatedPoint.x, _firstY+translatedPoint.y);
     
     [recognizer.view setCenter:translatedPoint];
-    [self.frame showOverlayWithFrame:recognizer.view.frame];*/
+    [self showOverlayWithFrame:recognizer.view.frame :recognizer.view];*/
     
     
     CGPoint translation = [recognizer translationInView:self];
@@ -451,12 +450,55 @@
     }
 }
 
+#pragma mark - Private Methods
+
+-(void)showOverlayWithFrame:(CGRect)frame :(UIView*)view{
+    
+    if (![_marque actionForKey:@"linePhase"]) {
+        CABasicAnimation *dashAnimation;
+        dashAnimation = [CABasicAnimation animationWithKeyPath:@"lineDashPhase"];
+        [dashAnimation setFromValue:[NSNumber numberWithFloat:0.0f]];
+        [dashAnimation setToValue:[NSNumber numberWithFloat:15.0f]];
+        [dashAnimation setDuration:0.5f];
+        [dashAnimation setRepeatCount:HUGE_VALF];
+        [_marque addAnimation:dashAnimation forKey:@"linePhase"];
+    }
+    
+    _marque.bounds = CGRectMake(frame.origin.x, frame.origin.y, 0, 0);
+    _marque.position = CGPointMake(frame.origin.x + view.frame.origin.x, frame.origin.y + view.frame.origin.y);
+    
+    CGMutablePathRef path = CGPathCreateMutable();
+    CGPathAddRect(path, NULL, frame);
+    [_marque setPath:path];
+    CGPathRelease(path);
+    
+    _marque.hidden = NO;
+    
+}
+
 #pragma mark - Resize functionality
 
 /**
  * Resize view when pinched.
  */
 - (void)layerResized:(UIGestureRecognizer *)sender {
+    
+    
+    /*if([(UIPinchGestureRecognizer*)sender state] == UIGestureRecognizerStateBegan) {
+        _lastScale = 1.0;
+    }
+    
+    CGFloat scale = 1.0 - (_lastScale - [(UIPinchGestureRecognizer*)sender scale]);
+    
+    CGAffineTransform currentTransform = sender.view.transform;
+    CGAffineTransform newTransform = CGAffineTransformScale(currentTransform, scale, scale);
+    
+    [sender.view setTransform:newTransform];
+    
+    _lastScale = [(UIPinchGestureRecognizer*)sender scale];
+    [self showOverlayWithFrame:sender.view.frame :sender.view];*/
+    
+    
     static CGRect initialBounds;
     
     UIView *_view = sender.view;
