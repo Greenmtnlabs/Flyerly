@@ -16,6 +16,7 @@
 
 - (void)frameChangedForLayer:(NSString *)uid frame:(CGRect)frame;
 - (void)rotationAngleChangedForLayer:(NSString *)uid rotationAngle:(CGFloat)rotationAngle;
+- (void)rotationAngleChangedForLayer:(NSString *)uid rotationAngle:(CGFloat)rotationAngle;
 - (void)bringLayerToFront:(NSString *)oldUid new:(NSString *)uid;
 - (void)sendLayerToEditMode:(NSString *)uid;
 - (void)toggleImageViewInteraction;

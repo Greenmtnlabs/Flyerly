@@ -12,6 +12,8 @@
 @implementation FlyerImageView
 @synthesize layers,flyerTapGesture;
 
+CGAffineTransform previuosTransform;
+
 /**
  * Image initialization.
  */
@@ -187,7 +189,9 @@
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editLayer:)];
         [view addGestureRecognizer:tapGesture];
         
-        UIRotationGestureRecognizer *rotationRecognizer = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(handleRotateGesture:)];
+        SEL handleRotateGestureSelector = @selector(handleRotateGesture:uid:);
+        
+        UIRotationGestureRecognizer *rotationRecognizer = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(handleRotateGestureSelector)];
         //[rotationRecognizer setDelegate:self];
         [view addGestureRecognizer:rotationRecognizer];
         
@@ -550,11 +554,16 @@
 /**
  * Rotate view on rotate Gesture.
  */
--(void) handleRotateGesture:(UIGestureRecognizer *) sender {
+-(void) handleRotateGesture:(UIGestureRecognizer *) sender  :(NSString *)uid{
     
     UIView *_view = sender.view;
     
+    
+    
+    CGFloat currentAngle = [self.delegate previuosrotationAngle :uid :];//Get rotation from current layer
+    
     CGFloat rotation = [(UIRotationGestureRecognizer *) sender rotation];
+    //rotation += currentAngle
     
     NSArray *keys = [layers allKeysForObject:_view];
     // Let the delegate know that we changed frame.
@@ -562,10 +571,15 @@
         NSString *key = [keys objectAtIndex:i];
         [self.delegate rotationAngleChangedForLayer:key rotationAngle:rotation];
     }
-    CGAffineTransform transform = CGAffineTransformMakeRotation(rotation );//+ netRotation);
-    sender.view.transform = transform;
+    CGAffineTransform transform = CGAffineTransformMakeRotation(rotation);
+    //+ netRotation);
+    //CGAffineTransform CGAffineTransformConcat(CGAffineTransform previuosTransform,CGAffineTransform transform);
+    //selectedView.transform = CGAffineTransformConcat(selectedView.transform, viewFlipTrans);
+    CGAffineTransform newTransform = CGAffineTransformConcat( previuosTransform, transform);
+    sender.view.transform = transform;//CGAffineTransformConcat( previuosTransform, transform);
     if (sender.state == UIGestureRecognizerStateEnded) {
           rotation += rotation;
     }
+    previuosTransform = transform;
 }
 @end

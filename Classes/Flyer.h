@@ -110,6 +110,7 @@
 
 -(NSMutableDictionary *)getLayerFromMaster :(NSString *)uid;
 -(NSString *)getImageTag :(NSString *)uid;
+-(CGFloat)getImageRotationAngle:(NSString *)uid;
 -(NSString *)getYouTubeStatus;
 -(NSString *)getFacebookStatus;
 -(NSString *)getTwitterStatus;

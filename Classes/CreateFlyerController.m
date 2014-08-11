@@ -3091,6 +3091,14 @@ NSArray *coloursArray;
 }
 
 /**
+ * Get previous Rotation Angle
+ */
+- (CGFloat)previuosRotationAngle:(NSString *)uid rotationAngle:(CGFloat)rotationAngle {
+    
+    return [flyer getImageRotationAngle:uid];
+
+}
+/**
  * Rotation Angle changed for layer, let the model know.
  */
 - (void)rotationAngleChangedForLayer:(NSString *)uid rotationAngle:(CGFloat)rotationAngle {
