@@ -13,6 +13,7 @@
 @synthesize layers,flyerTapGesture;
 
 CGAffineTransform previuosTransform;
+NSString *abc;
 
 /**
  * Image initialization.
@@ -189,9 +190,11 @@ CGAffineTransform previuosTransform;
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editLayer:)];
         [view addGestureRecognizer:tapGesture];
         
-        SEL handleRotateGestureSelector = @selector(handleRotateGesture:uid:);
+        //SEL handleRotateGestureSelector = @selector(handleRotateGesture:uid:);
         
-        UIRotationGestureRecognizer *rotationRecognizer = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(handleRotateGestureSelector)];
+        UIRotationGestureRecognizer *rotationRecognizer = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(handleRotateGesture:)];
+        abc = uid;
+        //[abc isEqualToString:uid];
         //[rotationRecognizer setDelegate:self];
         [view addGestureRecognizer:rotationRecognizer];
         
@@ -415,7 +418,7 @@ CGAffineTransform previuosTransform;
     [self showOverlayWithFrame:recognizer.view.frame :recognizer.view];*/
     
     
-    CGPoint translation = [recognizer translationInView:self];
+    /*CGPoint translation = [recognizer translationInView:self];
     recognizer.view.center = CGPointMake(recognizer.view.center.x + translation.x,
                                          recognizer.view.center.y + translation.y);
     [recognizer setTranslation:CGPointMake(0, 0) inView:self];
@@ -451,7 +454,7 @@ CGAffineTransform previuosTransform;
             
             [self.delegate bringLayerToFront:key new:newKey];
         }
-    }
+    }*/
 }
 
 #pragma mark - Private Methods
@@ -554,32 +557,73 @@ CGAffineTransform previuosTransform;
 /**
  * Rotate view on rotate Gesture.
  */
--(void) handleRotateGesture:(UIGestureRecognizer *) sender  :(NSString *)uid{
+-(void)handleRotateGesture:(UIGestureRecognizer *)sender{
     
+    NSLog(@"rotate");
+    
+    // Rotated view
     UIView *_view = sender.view;
     
+    // Angle of rotation
+    CGFloat rotation = [(UIRotationGestureRecognizer *) sender rotation];
     
+    static CGAffineTransform origTr;
     
-    CGFloat currentAngle = [self.delegate previuosrotationAngle :uid :];//Get rotation from current layer
+    if (sender.state == UIGestureRecognizerStateBegan) {
+        origTr = sender.view.transform;
+        
+    } else if (sender.state == UIGestureRecognizerStateChanged) {
+        
+        CGFloat temp = rotation * ((CGFloat)57.2957795);
+        NSLog(@"%f", temp);
+        // Scale
+        CGAffineTransform tr =
+        CGAffineTransformConcat(
+                                origTr,
+                                CGAffineTransformMakeRotation(rotation));
+        
+        [sender.view setTransform:tr];
+        
+    } else if (sender.state == UIGestureRecognizerStateEnded) {
+        // Rotation has ended we need to save the angle in layer information
+        
+        // Get all layer keys for this flyer
+        NSArray *keys = [layers allKeysForObject:_view];
+        // Find key for rotated layer
+        for ( int i = 0; i < keys.count; i++ ) {
+            NSString *key = [keys objectAtIndex:i];
+            
+            // Save rotation angle for layer
+            [self.delegate rotationAngleChangedForLayer:key rotationAngle:rotation];
+        }
+    }
+    
+    /*
+    UIView *_view = sender.view;
+    
+    //CGFloat currentAngle = [self.delegate previuosrotationAngle:abc];//Get rotation from current layer
     
     CGFloat rotation = [(UIRotationGestureRecognizer *) sender rotation];
-    //rotation += currentAngle
+    //rotation += currentAngle;
+    CGAffineTransform currentTransform = sender.view. transform;
+    
     
     NSArray *keys = [layers allKeysForObject:_view];
     // Let the delegate know that we changed frame.
     for ( int i = 0; i < keys.count; i++ ) {
         NSString *key = [keys objectAtIndex:i];
         [self.delegate rotationAngleChangedForLayer:key rotationAngle:rotation];
+        //[self.delegate previuosrotationAngle:key];
     }
     CGAffineTransform transform = CGAffineTransformMakeRotation(rotation);
     //+ netRotation);
     //CGAffineTransform CGAffineTransformConcat(CGAffineTransform previuosTransform,CGAffineTransform transform);
     //selectedView.transform = CGAffineTransformConcat(selectedView.transform, viewFlipTrans);
-    CGAffineTransform newTransform = CGAffineTransformConcat( previuosTransform, transform);
+    //CGAffineTransform newTransform = CGAffineTransformConcat( previuosTransform, transform);
     sender.view.transform = transform;//CGAffineTransformConcat( previuosTransform, transform);
     if (sender.state == UIGestureRecognizerStateEnded) {
           rotation += rotation;
     }
-    previuosTransform = transform;
+    previuosTransform = transform;*/
 }
 @end

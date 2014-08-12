@@ -57,7 +57,7 @@
 
 -(void)setImageFrame :(NSString *)uid :(CGRect )photoFrame;
 
--(void)setImageRotationAngle:(NSString *)uid :(CGFloat )rotationAngle;
+-(void)addImageRotationAngle:(NSString *)uid :(CGFloat )rotationAngle;
 
 -(void)setImageTag :(NSString *)uid Tag :(NSString *)tag;
 

@@ -3093,9 +3093,10 @@ NSArray *coloursArray;
 /**
  * Get previous Rotation Angle
  */
-- (CGFloat)previuosRotationAngle:(NSString *)uid rotationAngle:(CGFloat)rotationAngle {
+- (void)previuosRotationAngle:(NSString *)uid{
     
-    return [flyer getImageRotationAngle:uid];
+    NSLog(@"previuos Rotation Angle called");
+    //return [flyer getImageRotationAngle:uid];
 
 }
 /**
@@ -3122,7 +3123,7 @@ NSArray *coloursArray;
     }*/
     
     //Update Dictionary
-    [flyer setImageRotationAngle:uid :rotationAngle];
+    [flyer addImageRotationAngle:uid :rotationAngle];
     
     //Update Controller
     //[self.flyimgView renderLayer:uid layerDictionary:[flyer getLayerFromMaster:uid]];

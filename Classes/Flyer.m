@@ -797,15 +797,22 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     [masterLayers setValue:imageDetailDictionary forKey:uid];
 }
 
--(void) setImageRotationAngle :(NSString *)uid :(CGFloat) rotation {
+-(void) addImageRotationAngle :(NSString *)uid :(CGFloat) rotation {
     
     NSMutableDictionary *imageDetailDictionary = [self getLayerFromMaster:uid];
+    
+    // First get the previous rotation angle
+    CGFloat currentAngle = [[imageDetailDictionary valueForKey:@"rotation"] floatValue];
+    
+    // Now add it to current rotation
+    rotation = rotation + currentAngle;
+    
     imageDetailDictionary[@"rotation"] = [NSString stringWithFormat:@"%f",rotation];
     
     [masterLayers setValue:imageDetailDictionary forKey:uid];
 }
 
--(CGFloat) getImageRotationAngle : (NSString *)uid :(CGFloat) rotation {
+-(CGFloat) getImageRotationAngle : (NSString *)uid {
     
     NSMutableDictionary *detail = [self getLayerFromMaster:uid];
     return ([[detail valueForKey:@"rotation"] floatValue]);
