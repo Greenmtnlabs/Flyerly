@@ -405,7 +405,7 @@ NSString *abc;
  */
 - (void)layerMoved:(UIPanGestureRecognizer *)recognizer {
     
-    /*CGPoint translatedPoint = [(UIPanGestureRecognizer*)recognizer translationInView:self];
+    CGPoint translatedPoint = [(UIPanGestureRecognizer*)recognizer translationInView:self];
     
     if([(UIPanGestureRecognizer*)recognizer state] == UIGestureRecognizerStateBegan) {
         _firstX = recognizer.view.center.x;
@@ -415,7 +415,7 @@ NSString *abc;
     translatedPoint = CGPointMake(_firstX+translatedPoint.x, _firstY+translatedPoint.y);
     
     [recognizer.view setCenter:translatedPoint];
-    [self showOverlayWithFrame:recognizer.view.frame :recognizer.view];*/
+    [self showOverlayWithFrame:recognizer.view.frame :recognizer.view];
     
     
     /*CGPoint translation = [recognizer translationInView:self];
