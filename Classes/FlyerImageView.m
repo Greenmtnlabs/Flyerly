@@ -460,17 +460,7 @@ NSString *abc;
 #pragma mark - Private Methods
 
 -(void)showOverlayWithFrame:(CGRect)frame :(UIView*)view{
-    
-    if (![_marque actionForKey:@"linePhase"]) {
-        CABasicAnimation *dashAnimation;
-        dashAnimation = [CABasicAnimation animationWithKeyPath:@"lineDashPhase"];
-        [dashAnimation setFromValue:[NSNumber numberWithFloat:0.0f]];
-        [dashAnimation setToValue:[NSNumber numberWithFloat:15.0f]];
-        [dashAnimation setDuration:0.5f];
-        [dashAnimation setRepeatCount:HUGE_VALF];
-        [_marque addAnimation:dashAnimation forKey:@"linePhase"];
-    }
-    
+
     _marque.bounds = CGRectMake(frame.origin.x, frame.origin.y, 0, 0);
     _marque.position = CGPointMake(frame.origin.x + view.frame.origin.x, frame.origin.y + view.frame.origin.y);
     
@@ -491,7 +481,7 @@ NSString *abc;
 - (void)layerResized:(UIGestureRecognizer *)sender {
     
     
-    /*if([(UIPinchGestureRecognizer*)sender state] == UIGestureRecognizerStateBegan) {
+    if([(UIPinchGestureRecognizer*)sender state] == UIGestureRecognizerStateBegan) {
         _lastScale = 1.0;
     }
     
@@ -503,10 +493,10 @@ NSString *abc;
     [sender.view setTransform:newTransform];
     
     _lastScale = [(UIPinchGestureRecognizer*)sender scale];
-    [self showOverlayWithFrame:sender.view.frame :sender.view];*/
+    [self showOverlayWithFrame:sender.view.frame :sender.view];
     
     
-    static CGRect initialBounds;
+    /*static CGRect initialBounds;
     
     UIView *_view = sender.view;
     
@@ -529,7 +519,7 @@ NSString *abc;
         [self.delegate frameChangedForLayer:key frame:_view.frame];
     }
 
-    return;
+    return;*/
 }
 
 #pragma mark - Tap to edit functionality
