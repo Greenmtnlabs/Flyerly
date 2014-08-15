@@ -3420,7 +3420,7 @@ NSArray *coloursArray;
                     [self.interstitialAdd presentFromRootViewController:self];
                          });
                 }
-                return;
+                //return;
             }
             
             //Here we remove Borders from layer if user touch any layer
