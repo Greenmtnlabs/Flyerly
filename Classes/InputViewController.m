@@ -71,18 +71,30 @@
 }
 
 -(IBAction)post{
-    if ([txtfield.text isEqualToString:@""]) {
-        [self showAlert:@"Please Enter Comments" message:@""];
-    }else{
-      
-        // Current Item For Sharing
-        SHKItem *item = [SHKItem text:[NSString stringWithFormat:@"%@ @flyerlyapp",txtfield.text]];
+    
+    Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
+    if (networkStatus == NotReachable) {
+        NSLog(@"There IS NO internet connection");
+        [self showAlert:@"No internet available,please connect to the internet first" message:@""];
+    } else {
+        NSLog(@"There IS internet connection");
         
-        //Calling ShareKit for Sharing
-        iosSharer = [[ SHKSharer alloc] init];
-        iosSharer = [SHKTwitter shareItem:item];
-        iosSharer.shareDelegate = self;
+        if ([txtfield.text isEqualToString:@""]) {
+            [self showAlert:@"Please Enter Comments" message:@""];
+        }else{
+            
+            // Current Item For Sharing
+            SHKItem *item = [SHKItem text:[NSString stringWithFormat:@"%@ @flyerlyapp",txtfield.text]];
+            
+            //Calling ShareKit for Sharing
+            iosSharer = [[ SHKSharer alloc] init];
+            iosSharer = [SHKTwitter shareItem:item];
+            iosSharer.shareDelegate = self;
+        }
     }
+    
+    
 }
 
 
