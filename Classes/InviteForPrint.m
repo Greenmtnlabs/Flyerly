@@ -486,13 +486,13 @@ LobRequest *request;
     int status = 0;
     
     if ([self ckeckExistdb:receivedDic.description]) {
-        status = 2;
+        //status = 2;
     }else{
         if ([self ckeckExistContact:receivedDic.description]) {
-            status = 1;
+            //status = 1;
             
         }else{
-            status = 0;
+            //status = 0;
             
         }
     }
