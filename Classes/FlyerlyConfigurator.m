@@ -57,11 +57,13 @@
 
 //Parse Offline Keys
 - (NSString*)parseOfflineAppId{
-    return @"1zE9CnuScHj4l7dGFbT8NG15uTNb8VazMpsdoCis";
+    return @"q9bK4kuAV7se1SPuNJ4wvffTSVU5k4MLDnVgJpbI";
+    //---oziar's account---// 1zE9CnuScHj4l7dGFbT8NG15uTNb8VazMpsdoCis
 }
 
 - (NSString*)parseOfflineClientKey{
-    return @"rFdNdJfzWt8YIf66G7twr0D5zp9uVsWuAkMEnkpc";
+    return @"fXPKQXaId9M2qz3Xd74iUo7LDt8gHEbMVJUM2dYt";
+    //----//rFdNdJfzWt8YIf66G7twr0D5zp9uVsWuAkMEnkpc
 }
 
 //Flurry SessionKey

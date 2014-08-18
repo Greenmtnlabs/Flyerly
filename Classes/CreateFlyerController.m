@@ -3422,7 +3422,7 @@ NSArray *coloursArray;
                 }
                 //return;
             }
-            
+    
             //Here we remove Borders from layer if user touch any layer
             [self.flyimgView layerStoppedEditing:currentLayer];
             
@@ -3557,7 +3557,8 @@ NSArray *coloursArray;
                                        otherButtonTitles:@"Sign In",nil];
         
         
-        [signInAlert show];
+        if ( !self.interstitialAdd.hasBeenUsed )
+            [signInAlert show];
     }
 
 }
@@ -4783,7 +4784,8 @@ NSArray *coloursArray;
                                              selector:@selector(didDismissPrintViewController)
                                                  name:@"PrintViewControllerDismissed"
                                                object:nil];
-    [self presentModalViewController:printViewController animated:YES];
+    //[self presentModalViewController:printViewController animated:NO];
+    [self presentViewController:printViewController animated:NO completion:nil];
 }
 
 -(void)didDismissPrintViewController {

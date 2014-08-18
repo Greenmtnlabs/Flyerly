@@ -93,8 +93,6 @@
             iosSharer.shareDelegate = self;
         }
     }
-    
-    
 }
 
 

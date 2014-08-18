@@ -231,11 +231,6 @@
                 // Temp on for Testing here
                 FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
                 
-                UserPurchases *userPurchases_ = [UserPurchases getInstance];
-                
-                //GET UPDATED USER PUCHASES INFO
-                [userPurchases_ setUserPurcahsesFromParse];
-                
                 appDelegate.lauchController = launchController;
                 [appDelegate fbChangeforNewVersion];
 

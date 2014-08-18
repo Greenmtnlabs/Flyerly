@@ -219,10 +219,12 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
                 // Temp on for Testing here
                 FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
                 
+                /*
                 UserPurchases *userPurchases_ = [UserPurchases getInstance];
                 
                 //GET UPDATED USER PUCHASES INFO
                 [userPurchases_ setUserPurcahsesFromParse];
+                */
                 
                 appDelegate.lauchController = launchController;
                 
@@ -383,6 +385,8 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
             [self onRegistrationSuccess];
             
         }
+        
+        
     }];
 }
 
@@ -393,11 +397,12 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     
     UINavigationController* navigationController = self.navigationController;
-    //[navigationController popViewControllerAnimated:NO];
     
-    /*if (self.signInController != nil) {
-        [self.signInController onSignInSuccess];
-    }*/
+    UserPurchases *userPurchases_ = [UserPurchases getInstance];
+    userPurchases_.delegate = self.signInController.launchController;
+    
+    //GET UPDATED USER PUCHASES INFO
+    [userPurchases_ setUserPurcahsesFromParse];
     
     if( appDelegate.lauchController != nil ) {
         launchController = [[FlyerlyMainScreen alloc]initWithNibName:@"FlyerlyMainScreen" bundle:nil];

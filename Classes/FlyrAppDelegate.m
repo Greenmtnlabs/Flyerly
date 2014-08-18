@@ -169,7 +169,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     
 #ifdef DEBUG
     
-    // Setup parse Offline
+    // Setup parse Offline ozair's account
     [Parse setApplicationId:[flyerConfigurator parseOfflineAppId]
                   clientKey:[flyerConfigurator parseOfflineClientKey]];
 #else
@@ -356,12 +356,8 @@ if it exist then we call Merging Process
                     [lauchController updateRecentFlyer:lauchController.recentFlyers];
                     [lauchController hideLoadingIndicator];
                     
-
-
                 }
             }];
-
-
         }
     }];
 }

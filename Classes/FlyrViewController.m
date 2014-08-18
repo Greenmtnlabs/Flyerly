@@ -416,7 +416,8 @@
     }else {
         inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController-iPhone4" bundle:nil];
     }
-    [self presentModalViewController:inappviewcontroller animated:YES];
+    //[self presentModalViewController:inappviewcontroller animated:YES];
+    [self presentViewController:inappviewcontroller animated:NO completion:nil];
     
     [inappviewcontroller requestProduct];
     inappviewcontroller.buttondelegate = self;
@@ -444,7 +445,6 @@
             
             UINavigationController* navigationController = flyrViewController.navigationController;
             [navigationController popViewControllerAnimated:NO];
-            [userPurchases_ setUserPurcahsesFromParse];
         };
         
         [self.navigationController pushViewController:signInController animated:YES];
@@ -468,7 +468,8 @@
         [inappviewcontroller.paidFeaturesTview reloadData];
     }else {
             
-            [self presentModalViewController:inappviewcontroller animated:YES];
+            //[self presentModalViewController:inappviewcontroller animated:YES];
+        [self presentViewController:inappviewcontroller animated:NO completion:nil];
     }
 
 }
