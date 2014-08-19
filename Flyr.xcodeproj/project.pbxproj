@@ -3220,7 +3220,7 @@
 			name = Config;
 			sourceTree = "<group>";
 		};
-		2094609F1977AC7D0050B5DE /* New Group */ = {
+		2094609F1977AC7D0050B5DE /* InviteForPrint */ = {
 			isa = PBXGroup;
 			children = (
 				20E38AA0197FB30C00D1CFA9 /* SendingPrintViewController */,
@@ -3228,7 +3228,7 @@
 				209460A11977AD1A0050B5DE /* InviteForPrint.m */,
 				209460A21977AD1A0050B5DE /* InviteForPrint.xib */,
 			);
-			name = "New Group";
+			name = InviteForPrint;
 			sourceTree = "<group>";
 		};
 		20967D9518C896E500B273FC /* FlyerlyLike */ = {
@@ -3323,7 +3323,7 @@
 				20A38E7419825208007C279F /* Lob */,
 				20E46386197E3F9900473921 /* PDF Views */,
 				200D1933197CF4BA00CFE04B /* PayPal */,
-				2094609F1977AC7D0050B5DE /* New Group */,
+				2094609F1977AC7D0050B5DE /* InviteForPrint */,
 				209BCFA51975433D006EC811 /* PrintViewController.h */,
 				209BCFA61975433D006EC811 /* PrintViewController.m */,
 				209BCFA71975433D006EC811 /* PrintViewController.xib */,
