@@ -4788,11 +4788,13 @@ NSArray *coloursArray;
     [self presentViewController:printViewController animated:NO completion:nil];
 }
 
+
 -(void)didDismissPrintViewController {
     
     InviteForPrint *inviteForPrint = [[InviteForPrint alloc]initWithNibName:@"InviteForPrint" bundle:nil];
     inviteForPrint.flyer = self.flyer;
 	[self.navigationController pushViewController:inviteForPrint animated:YES];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"PrintViewControllerDismissed" object:nil];
 }
 
 
