@@ -32,6 +32,7 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import "GADInterstitialDelegate.h"
 #import "GADBannerView.h"
+#import "DrawingView.h"
 
 @class FlyerlySingleton, Flyer, FlyerImageView, ShareViewController, SigninController,InAppViewController,PrintViewController;
 @interface CreateFlyerController :ParentViewController<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, FlyerImageViewDelegate,UIGestureRecognizerDelegate,InAppPurchasePanelButtonProtocol, UserPurchasesDelegate, GADInterstitialDelegate, GADBannerViewDelegate>
@@ -69,6 +70,9 @@
     BOOL *isVideoReadyForShare;
     BOOL *panelWillOpen;
     float videoDuration;
+    
+    DrawingView *drawingView;
+    UIImageView *displayView;
     
 }
 
@@ -117,8 +121,10 @@
 @property(nonatomic, strong) IBOutlet UIView *libEmpty;
 @property(nonatomic, strong) IBOutlet UIView *playerView;
 @property(nonatomic, strong) IBOutlet UIView *playerToolBar;
+@property(nonatomic, strong) IBOutlet UIView *libDrawing;
 
-
+@property (strong,nonatomic) IBOutlet   DrawingView *drawingView;
+@property (strong,nonatomic) IBOutlet   UIImageView *displayView;
 
 //--------
 @property(nonatomic, strong) IBOutlet UIView *tempelateView;
@@ -130,6 +136,8 @@
 @property (nonatomic, strong)IBOutlet UIButton *addVideoTabButton;
 @property (nonatomic, strong)IBOutlet UIButton *addArtsTabButton;
 @property (nonatomic, strong)IBOutlet UIButton *backgroundTabButton;
+@property (nonatomic, strong)IBOutlet UIButton *drawingMenueButton;
+
 
 //These are LibBackground
 @property (nonatomic, strong)IBOutlet UIButton *backtemplates;

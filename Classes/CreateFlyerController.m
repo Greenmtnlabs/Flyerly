@@ -16,6 +16,9 @@
 #import "GADBannerViewDelegate.h"
 #import "PrintViewController.h"
 #import "InviteForPrint.h"
+#import "DrawingPoint.h"
+#import "LineSegment.h"
+
 
 @implementation CreateFlyerController
 
@@ -23,14 +26,14 @@ CameraViewController *nbuCamera;
 
 UIButton *backButton;
 
-
+@synthesize drawingView,displayView;
 
 @synthesize selectedFont,selectedColor,selectedTemplate,fontTabButton,colorTabButton,sizeTabButton,fontEditButton,selectedSize,
 fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sharePanel,clipArtTabButton,emoticonsTabButton,artsColorTabButton,drawingTabButton,artsSizeTabButton;
 @synthesize cameraTabButton,photoTabButton,widthTabButton,heightTabButton,deleteAlert,signInAlert,spaceUnavailableAlert;
 @synthesize imgPickerFlag,layerScrollView,flyerPath;
-@synthesize contextView,libraryContextView,libFlyer,backgroundTabButton,addMoreFontTabButton;
-@synthesize libText,libBackground,libArts,libPhoto,libEmpty,backtemplates,cameraTakePhoto,cameraRoll,flyerBorder;
+@synthesize contextView,libraryContextView,libFlyer,backgroundTabButton,addMoreFontTabButton,drawingMenueButton;
+@synthesize libText,libBackground,libArts,libPhoto,libEmpty,backtemplates,cameraTakePhoto,cameraRoll,flyerBorder,libDrawing;
 @synthesize flyimgView,currentLayer,layersDic,flyer,player,playerView,playerToolBar,playButton,playerSlider,tempelateView;
 @synthesize durationLabel,durationChange,onFlyerBack,shouldShowAdd;
 @synthesize backgroundsView,flyerBordersView,colorsView,sizesView,bannerAddView,bannerAddDismissButton;
@@ -4309,6 +4312,7 @@ NSArray *coloursArray;
     [addArtsTabButton setSelected:NO];
     [addVideoTabButton setSelected:NO];
     [backgroundTabButton setSelected:NO];
+    [drawingMenueButton setSelected:NO];
 
 
 	if(selectedButton == addMoreFontTabButton)
@@ -4391,7 +4395,7 @@ NSArray *coloursArray;
         //Add ContextView
         [self addBottomTabs:libArts];
         
-        // SET BOTTOM BAR
+        // FORCE CLICK ON FIRST BUTTON OF addBottomTab, then it will auto select SET BOTTOM BAR
         [self setArtsTabAction:clipArtTabButton];
         
 	}
@@ -4444,6 +4448,48 @@ NSArray *coloursArray;
         [self setlibBackgroundTabAction:backtemplates];
 
     }
+    else if( selectedButton == drawingMenueButton)
+    {
+        [drawingMenueButton setSelected:YES];
+        
+        if ([currentLayer isEqualToString:@""]) {
+            currentLayer = [flyer addDrawingImage];
+            
+            CGRect imageFrame  = CGRectMake(0,0,300,300);
+            [flyer setImageFrame:currentLayer :imageFrame];
+            NSMutableDictionary *dic = [flyer getLayerFromMaster:currentLayer];
+            [self.flyimgView renderLayer:currentLayer layerDictionary:dic];
+            
+        }
+        //Here we Highlight The ImageView
+        [self.flyimgView layerIsBeingEdited:currentLayer];
+
+        //HERE WE SET ANIMATION
+        [UIView animateWithDuration:0.4f
+                         animations:^{
+                             //Create ScrollView
+                             //[self addFlyerIconInSubView];
+                         }
+                         completion:^(BOOL finished){
+                             [layerScrollView flashScrollIndicators];
+                         }];
+        
+        
+
+        //Add right Bar button
+        [self addDonetoRightBarBotton];
+        
+        //Add Context
+        [self addScrollView:layerScrollView];
+        
+        //Add ContextView
+        [self addBottomTabs:libDrawing];
+        
+        // FORCE CLICK ON FIRST BUTTON OF addBottomTab, then it will auto select SET BOTTOM BAR
+        //[self setArtsTabAction:clipArtTabButton];
+        
+	}
+
 }
 
 

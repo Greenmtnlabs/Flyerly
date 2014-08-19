@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
-        <deployment version="784" defaultVersion="1280" identifier="iOS"/>
+        <deployment version="784" defaultVersion="1552" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <objects>
@@ -24,6 +24,7 @@
                 <outlet property="clipArtTabButton" destination="LPQ-8t-r0c" id="nAp-O1-pYM"/>
                 <outlet property="colorTabButton" destination="RCh-PH-bvk" id="kzT-0A-OKE"/>
                 <outlet property="contextView" destination="rbq-e2-wbO" id="BDJ-TX-Ld1"/>
+                <outlet property="drawingMenueButton" destination="Vgg-5n-pbd" id="FYW-eA-xnr"/>
                 <outlet property="drawingTabButton" destination="jfO-Kb-CHA" id="RH5-Qh-7xZ"/>
                 <outlet property="durationChange" destination="tOL-PL-xlu" id="c1O-G7-Aad"/>
                 <outlet property="durationLabel" destination="gqJ-fV-ZCI" id="8Hk-8V-eSV"/>
@@ -36,7 +37,7 @@
                 <outlet property="heightTabButton" destination="5Ya-yN-kTr" id="RhP-af-MbU"/>
                 <outlet property="libArts" destination="weP-Ld-FsM" id="x98-Xu-7Y9"/>
                 <outlet property="libBackground" destination="wtn-Zi-MKo" id="Lbb-GH-gzo"/>
-                <outlet property="libEmpty" destination="suF-K7-Eeb" id="3h4-F6-z4R"/>
+                <outlet property="libDrawing" destination="d9d-07-lCf" id="zdt-Pr-VV1"/>
                 <outlet property="libFlyer" destination="P8i-Fw-Gci" id="DAb-aV-gaf"/>
                 <outlet property="libPhoto" destination="qGs-4G-Rgw" id="0fl-Oq-GpK"/>
                 <outlet property="libText" destination="8Ew-aX-Xah" id="Haw-gJ-FkB"/>
@@ -134,8 +135,19 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
             <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="zoh-mW-4K3">
+                    <rect key="frame" x="0.0" y="0.0" width="53" height="45"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <accessibility key="accessibilityConfiguration" label="Background"/>
+                    <state key="normal" image="bg_tab.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="setAddMoreLayerTabAction:" destination="-1" eventType="touchUpInside" id="AgZ-fy-AkO"/>
+                    </connections>
+                </button>
                 <button opaque="NO" tag="10001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="rb6-j8-Siq">
-                    <rect key="frame" x="64" y="0.0" width="64" height="45"/>
+                    <rect key="frame" x="53" y="0.0" width="53" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Text"/>
                     <state key="normal" image="text_icon.png">
@@ -146,7 +158,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" tag="10002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="fcG-xw-IqZ">
-                    <rect key="frame" x="128" y="0.0" width="64" height="45"/>
+                    <rect key="frame" x="106" y="0.0" width="53" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Photo"/>
                     <state key="normal" image="image_icon.png">
@@ -158,7 +170,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" tag="10003" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="fpi-NX-k5V">
-                    <rect key="frame" x="192" y="0.0" width="64" height="45"/>
+                    <rect key="frame" x="159" y="0.0" width="53" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Symbols"/>
                     <state key="normal" image="video_tab_lock.png">
@@ -170,7 +182,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" tag="10004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="a4z-OF-QiI">
-                    <rect key="frame" x="256" y="0.0" width="64" height="45"/>
+                    <rect key="frame" x="212" y="0.0" width="53" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Clipart"/>
                     <state key="normal" image="art_tab.png">
@@ -180,15 +192,15 @@
                         <action selector="setAddMoreLayerTabAction:" destination="-1" eventType="touchUpInside" id="a7u-gC-Jvt"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="zoh-mW-4K3">
-                    <rect key="frame" x="0.0" y="0.0" width="64" height="45"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="Vgg-5n-pbd">
+                    <rect key="frame" x="265" y="0.0" width="55" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Background"/>
-                    <state key="normal" image="bg_tab.png">
+                    <state key="normal" image="image_icon.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="setAddMoreLayerTabAction:" destination="-1" eventType="touchUpInside" id="AgZ-fy-AkO"/>
+                        <action selector="setAddMoreLayerTabAction:" destination="-1" eventType="touchUpInside" id="66Y-sF-H9P"/>
                     </connections>
                 </button>
             </subviews>
@@ -250,7 +262,7 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
         </view>
-        <view contentMode="scaleToFill" id="8Ew-aX-Xah">
+        <view contentMode="scaleToFill" id="8Ew-aX-Xah" userLabel="View - Art sub menue">
             <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
@@ -312,6 +324,75 @@
                     <state key="selected" image="text_edit_selected.png"/>
                     <connections>
                         <action selector="setStyleTabAction:" destination="-1" eventType="touchUpInside" id="u7X-nm-VDF"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <accessibility key="accessibilityConfiguration" label=""/>
+        </view>
+        <view contentMode="scaleToFill" id="d9d-07-lCf" userLabel="View - Drawing sub menue">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button opaque="NO" tag="10001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="wAe-vw-k4U">
+                    <rect key="frame" x="0.0" y="0.0" width="64" height="45"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <accessibility key="accessibilityConfiguration" label="Font"/>
+                    <state key="normal" image="font_button.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="selected" image="font_button_selected.png"/>
+                    <connections>
+                        <action selector="setStyleTabAction:" destination="-1" eventType="touchUpInside" id="hFG-Eu-HPr"/>
+                    </connections>
+                </button>
+                <button opaque="NO" tag="10002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="TK4-Zc-FSy">
+                    <rect key="frame" x="64" y="0.0" width="64" height="45"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <accessibility key="accessibilityConfiguration" label="Color"/>
+                    <state key="normal" image="color_button.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="selected" image="color_button_selected.png"/>
+                    <connections>
+                        <action selector="setStyleTabAction:" destination="-1" eventType="touchUpInside" id="2hv-tf-zeR"/>
+                    </connections>
+                </button>
+                <button opaque="NO" tag="10003" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="eQC-yK-NOb">
+                    <rect key="frame" x="128" y="0.0" width="64" height="45"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <accessibility key="accessibilityConfiguration" label="Size"/>
+                    <state key="normal" image="size_button.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="selected" image="size_button_selected.png"/>
+                    <connections>
+                        <action selector="setStyleTabAction:" destination="-1" eventType="touchUpInside" id="xFv-Be-OUW"/>
+                    </connections>
+                </button>
+                <button opaque="NO" tag="10004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="mHh-ES-MNJ">
+                    <rect key="frame" x="192" y="0.0" width="64" height="45"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <accessibility key="accessibilityConfiguration" label="TextBorder"/>
+                    <state key="normal" image="outline_button.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="selected" image="outline_button_selected.png"/>
+                    <connections>
+                        <action selector="setStyleTabAction:" destination="-1" eventType="touchUpInside" id="0mh-kz-UTK"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="zbo-w0-0NL">
+                    <rect key="frame" x="256" y="0.0" width="64" height="45"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <accessibility key="accessibilityConfiguration" label="Edit"/>
+                    <state key="normal">
+                        <color key="titleColor" red="0.58103330291970801" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="selected" image="text_edit_selected.png"/>
+                    <connections>
+                        <action selector="setStyleTabAction:" destination="-1" eventType="touchUpInside" id="03M-1e-fyt"/>
                     </connections>
                 </button>
             </subviews>

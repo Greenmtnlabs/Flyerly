@@ -240,6 +240,10 @@
 		2087B6C017C73B40007A6A90 /* ResetPWViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2087B6BE17C73B40007A6A90 /* ResetPWViewController.m */; };
 		2087B6C117C73B40007A6A90 /* ResetPWViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2087B6BF17C73B40007A6A90 /* ResetPWViewController.xib */; };
 		208C684F186DAA59004A74F2 /* FlyerlyConfigurator.m in Sources */ = {isa = PBXBuildFile; fileRef = 208C684E186DAA59004A74F2 /* FlyerlyConfigurator.m */; };
+		208CF96D19A39E9C00EA3404 /* DrawingPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 208CF96619A39E9C00EA3404 /* DrawingPoint.m */; };
+		208CF96E19A39E9C00EA3404 /* DrawingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 208CF96819A39E9C00EA3404 /* DrawingView.m */; };
+		208CF96F19A39E9C00EA3404 /* LineSegment.m in Sources */ = {isa = PBXBuildFile; fileRef = 208CF96A19A39E9C00EA3404 /* LineSegment.m */; };
+		208CF97019A39E9C00EA3404 /* Marker.m in Sources */ = {isa = PBXBuildFile; fileRef = 208CF96C19A39E9C00EA3404 /* Marker.m */; };
 		208E35A217C1F5C500CE54BE /* SigninController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 208E35A117C1F5C500CE54BE /* SigninController.xib */; };
 		208E35A417C20CC700CE54BE /* RegisterViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 208E35A317C20CC700CE54BE /* RegisterViewController_iPhone5.xib */; };
 		208E35AC17C224B100CE54BE /* welcome_bg-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 208E35AB17C224B100CE54BE /* welcome_bg-568h@2x.png */; };
@@ -1408,6 +1412,14 @@
 		2087B6BF17C73B40007A6A90 /* ResetPWViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResetPWViewController.xib; sourceTree = "<group>"; };
 		208C684D186DAA59004A74F2 /* FlyerlyConfigurator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = FlyerlyConfigurator.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		208C684E186DAA59004A74F2 /* FlyerlyConfigurator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FlyerlyConfigurator.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		208CF96519A39E9C00EA3404 /* DrawingPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DrawingPoint.h; path = Drawing/DrawingPoint.h; sourceTree = "<group>"; };
+		208CF96619A39E9C00EA3404 /* DrawingPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DrawingPoint.m; path = Drawing/DrawingPoint.m; sourceTree = "<group>"; };
+		208CF96719A39E9C00EA3404 /* DrawingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DrawingView.h; path = Drawing/DrawingView.h; sourceTree = "<group>"; };
+		208CF96819A39E9C00EA3404 /* DrawingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DrawingView.m; path = Drawing/DrawingView.m; sourceTree = "<group>"; };
+		208CF96919A39E9C00EA3404 /* LineSegment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LineSegment.h; path = Drawing/LineSegment.h; sourceTree = "<group>"; };
+		208CF96A19A39E9C00EA3404 /* LineSegment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LineSegment.m; path = Drawing/LineSegment.m; sourceTree = "<group>"; };
+		208CF96B19A39E9C00EA3404 /* Marker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Marker.h; path = Drawing/Marker.h; sourceTree = "<group>"; };
+		208CF96C19A39E9C00EA3404 /* Marker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Marker.m; path = Drawing/Marker.m; sourceTree = "<group>"; };
 		208E35A117C1F5C500CE54BE /* SigninController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SigninController.xib; path = ../SigninController.xib; sourceTree = "<group>"; };
 		208E35A317C20CC700CE54BE /* RegisterViewController_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RegisterViewController_iPhone5.xib; path = ../RegisterViewController_iPhone5.xib; sourceTree = "<group>"; };
 		208E35AB17C224B100CE54BE /* welcome_bg-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "welcome_bg-568h@2x.png"; sourceTree = "<group>"; };
@@ -2541,6 +2553,7 @@
 		080E96DDFE201D6D7F000001 /* FlyerlyClasses */ = {
 			isa = PBXGroup;
 			children = (
+				20F3597C1888DC8A001376B6 /* CreateFlyer */,
 				1D3623240D0F684500981E51 /* FlyrAppDelegate.h */,
 				1D3623250D0F684500981E51 /* FlyrAppDelegate.m */,
 				2026992818CED69600945218 /* Purchase */,
@@ -2552,7 +2565,6 @@
 				2013528B188C5FC900822073 /* LaunchScreen */,
 				20F359741888D5B9001376B6 /* LoginControllers */,
 				20F3597B1888DBEE001376B6 /* FlyerlyMainScreen */,
-				20F3597C1888DC8A001376B6 /* CreateFlyer */,
 				209BCFAA1975434C006EC811 /* Print Screen */,
 				2002C8981888CF3F005B18C9 /* ShareScreen */,
 				20F359781888D92E001376B6 /* InviteScreen */,
@@ -3220,6 +3232,21 @@
 			name = Config;
 			sourceTree = "<group>";
 		};
+		208CF96419A39E8300EA3404 /* Drawing */ = {
+			isa = PBXGroup;
+			children = (
+				208CF96519A39E9C00EA3404 /* DrawingPoint.h */,
+				208CF96619A39E9C00EA3404 /* DrawingPoint.m */,
+				208CF96719A39E9C00EA3404 /* DrawingView.h */,
+				208CF96819A39E9C00EA3404 /* DrawingView.m */,
+				208CF96919A39E9C00EA3404 /* LineSegment.h */,
+				208CF96A19A39E9C00EA3404 /* LineSegment.m */,
+				208CF96B19A39E9C00EA3404 /* Marker.h */,
+				208CF96C19A39E9C00EA3404 /* Marker.m */,
+			);
+			name = Drawing;
+			sourceTree = "<group>";
+		};
 		2094609F1977AC7D0050B5DE /* New Group */ = {
 			isa = PBXGroup;
 			children = (
@@ -3633,6 +3660,7 @@
 		20F3597C1888DC8A001376B6 /* CreateFlyer */ = {
 			isa = PBXGroup;
 			children = (
+				208CF96419A39E8300EA3404 /* Drawing */,
 				2405D3441990ABD8007F2596 /* BuyImagesController */,
 				2075A9921899EAB600F410FB /* FlyerlyCustomClasses */,
 				2046355F1895E47100A94C42 /* Models */,
@@ -5768,6 +5796,7 @@
 				0DF3A2C6108DF1D200D6C887 /* CreateFlyerController.m in Sources */,
 				49B88989188652A2003766AD /* FacebookLikeView.m in Sources */,
 				202C47FE187D6E4B00FE0975 /* BitlyTweetSheet.m in Sources */,
+				208CF96E19A39E9C00EA3404 /* DrawingView.m in Sources */,
 				20A38EA51982531F007C279F /* LobCountryModel.m in Sources */,
 				0D4903BB1091893B00855C30 /* FlyrViewController.m in Sources */,
 				202C47FC187D6E4B00FE0975 /* BitlyRequest.m in Sources */,
@@ -5790,6 +5819,7 @@
 				65E2615D171C2FA800C485B5 /* InviteFriendsController.m in Sources */,
 				654B255317202B360047C8F6 /* AfterUpdateController.m in Sources */,
 				20920015184F40330034C4F6 /* InviteFriendsCell.m in Sources */,
+				208CF97019A39E9C00EA3404 /* Marker.m in Sources */,
 				20A38EAB1982531F007C279F /* LobSettingModel.m in Sources */,
 				49B8898118865273003766AD /* Reachability.m in Sources */,
 				202C4827187D7A6B00FE0975 /* CJSONDeserializer.m in Sources */,
@@ -5809,12 +5839,14 @@
 				202C4826187D7A6B00FE0975 /* CDataScanner_Extensions.m in Sources */,
 				0F80C386178561C200D36795 /* LaunchController.m in Sources */,
 				0F80C38B178578CB00D36795 /* RegisterController.m in Sources */,
+				208CF96D19A39E9C00EA3404 /* DrawingPoint.m in Sources */,
 				0F80C3901785813E00D36795 /* SigninController.m in Sources */,
 				2099301118BF0C5000A177A4 /* ContactsModel.m in Sources */,
 				49F109D1192C7926002B0CD4 /* CropVideoViewController.m in Sources */,
 				200E6764191B6318003849D4 /* UserPurchases.m in Sources */,
 				20F93DD317B2262200F6F88C /* MainSettingViewController.m in Sources */,
 				20F4D8E017BA3D0A007B2DF5 /* ProfileViewController.m in Sources */,
+				208CF96F19A39E9C00EA3404 /* LineSegment.m in Sources */,
 				20F4D8E517BA40EA007B2DF5 /* FlyerlySingleton.m in Sources */,
 				202C4828187D7A6B00FE0975 /* CJSONScanner.m in Sources */,
 				202C47FD187D6E4B00FE0975 /* BitlyTextView.m in Sources */,

@@ -786,6 +786,30 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     return uniqueId;
 }
 
+
+/*
+ * When New Drawing layer Add on Flyer
+ * its will call and Add one Content in MasterLayers Dictionary
+ * return
+ *      UniqueID
+ */
+-(NSString *)addDrawingImage{
+    
+    NSString *uniqueId = [Flyer getUniqueId];
+    
+    //Create Dictionary for Symbol
+    NSMutableDictionary *imageDetailDictionary = [[NSMutableDictionary alloc] init];
+    imageDetailDictionary[@"image"] = @"";
+    imageDetailDictionary[@"imageTag"] = @"DrawingImgLayer";
+    imageDetailDictionary[@"x"] = @"0";
+    imageDetailDictionary[@"y"] = @"0";
+    imageDetailDictionary[@"width"] = @"300";
+    imageDetailDictionary[@"height"] = @"300";
+    
+    [masterLayers setValue:imageDetailDictionary forKey:uniqueId];
+    return uniqueId;
+}
+
 -(void)setImageFrame :(NSString *)uid :(CGRect)photoFrame {
 
     NSMutableDictionary *imageDetailDictionary = [self getLayerFromMaster:uid];

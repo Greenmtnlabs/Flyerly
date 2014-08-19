@@ -142,7 +142,8 @@ NSString *abc;
                 [layers setValue:img forKey:uid];
             }
         }
-    } else {
+    }
+    else {
         id lastControl = [layers objectForKey:uid];
         
         // If we have switched from an text to a image view, then we need to
@@ -173,9 +174,18 @@ NSString *abc;
         }
     }
     
+    if ([layDic objectForKey:@"imageTag"] != nil && [[layDic objectForKey:@"imageTag"] isEqual:@"DrawingImgLayer"]) {
+        
+        view.userInteractionEnabled = YES;
+        
+        // Gesture for moving layers
+        UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(drawingLayerMoved:)];
+        [view addGestureRecognizer:panGesture];
+    
+    }
     // Do the generic stuff that needs to happen for all views. For now,
     // we add support for drag.
-    if ( view != nil ) {
+    else if ( view != nil ) {
         view.userInteractionEnabled = YES;
         
         // Gesture for moving layers
@@ -396,6 +406,27 @@ NSString *abc;
         [l setBorderWidth:0.0];
         [l setBorderColor:[[UIColor clearColor] CGColor]];
     }
+}
+
+#pragma mark - Move start on imageTag=DrawingImgLayer
+
+/**
+ * This method does drag and drop functionality on the layer.
+ */
+- (void)drawingLayerMoved:(UIPanGestureRecognizer *)recognizer {
+    
+    CGPoint translatedPoint = [(UIPanGestureRecognizer*)recognizer translationInView:self];
+    
+    if([(UIPanGestureRecognizer*)recognizer state] == UIGestureRecognizerStateBegan) {
+        _firstX = recognizer.view.center.x;
+        _firstY = recognizer.view.center.y;
+    }
+    
+    translatedPoint = CGPointMake(_firstX+translatedPoint.x, _firstY+translatedPoint.y);
+    
+    [recognizer.view setCenter:translatedPoint];
+    
+     
 }
 
 #pragma mark - Drag & Drop Functionality
