@@ -482,6 +482,9 @@ NSArray *coloursArray;
     [lastTextView removeFromSuperview];
     lastTextView = nil;
     
+    isPlaying = NO;
+    [player pause];
+    
     // If the sharing panel is open, we are just going to close it down.
     // Do not need to do any thing else.
     float yValue = self.view.frame.size.height - 425;
