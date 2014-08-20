@@ -16,17 +16,28 @@
 #import "GADBannerViewDelegate.h"
 #import "PrintViewController.h"
 #import "InviteForPrint.h"
-#import "DrawingPoint.h"
-#import "LineSegment.h"
 
+//Drawing required files
+//#import "DrawingPoint.h"
+//#import "LineSegment.h"
+
+//DrawingClass required files
+#import "Twitter/TWTweetComposeViewController.h"
 
 @implementation CreateFlyerController
+
+//Drawing required vars
+//@synthesize drawingView,displayView;
+
+//Drawing required files
+@synthesize mainImage;
+@synthesize tempDrawImage;
 
 CameraViewController *nbuCamera;
 
 UIButton *backButton;
 
-@synthesize drawingView,displayView;
+
 
 @synthesize selectedFont,selectedColor,selectedTemplate,fontTabButton,colorTabButton,sizeTabButton,fontEditButton,selectedSize,
 fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sharePanel,clipArtTabButton,emoticonsTabButton,artsColorTabButton,drawingTabButton,artsSizeTabButton;
@@ -164,6 +175,14 @@ NSArray *coloursArray;
  * View setup. This is done once per instance.
  */
 -(void)viewDidLoad{
+
+    //DrawingClass required vars
+    red = 0.0/255.0;
+    green = 0.0/255.0;
+    blue = 0.0/255.0;
+    brush = 10.0;
+    opacity = 1.0;
+    
 	[super viewDidLoad];
 
     // Create a new GADInterstitial each time. A GADInterstitial will only show one request in its
@@ -470,6 +489,14 @@ NSArray *coloursArray;
         }
             });
     });
+}
+
+- (void)viewDidUnload
+{
+    [self setMainImage:nil];
+    [self setTempDrawImage:nil];
+    [super viewDidUnload];
+    // Release any retained subviews of the main view.
 }
 
 #pragma mark -  View DisAppear Methods
@@ -2509,6 +2536,8 @@ NSArray *coloursArray;
             NSString *flyerImg = [flyer getImageName:key];
             NSString *flyertext = [flyer getText:key];
             
+            NSLog(@"flyerImg: %@,  flyertext: %@",flyerImg,flyertext);
+            
             if ([flyerImg isEqualToString:@""]) {
                 [flyer deleteLayer:key];
             }
@@ -4453,12 +4482,57 @@ NSArray *coloursArray;
         [drawingMenueButton setSelected:YES];
         
         if ([currentLayer isEqualToString:@""]) {
-            currentLayer = [flyer addDrawingImage];
+            //create/add layer with drawing type
+            NSString *tempDrawImageLayer = [flyer addDrawingImage:NO];
             
-            CGRect imageFrame  = CGRectMake(0,0,300,300);
-            [flyer setImageFrame:currentLayer :imageFrame];
+            currentLayer = [flyer addDrawingImage:YES];
+
+            
+            // work for main layer
+            [flyer setImageFrame:currentLayer:CGRectMake(0,0,300,300)];
+            
             NSMutableDictionary *dic = [flyer getLayerFromMaster:currentLayer];
             [self.flyimgView renderLayer:currentLayer layerDictionary:dic];
+            
+            //here we Update ImageView
+            UIImageView *img = [self.flyimgView.layers objectForKey:currentLayer];
+            [self configureDrawingView:img ImageViewDictionary:dic];
+            //[self.flyimgView.layers setValue:img forKey:currentLayer];
+            
+            // Here We Write Code for Image
+            self.mainImage = img;
+            //For testing
+            //self.mainImage.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:@"https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQYTICesnr754K3H0Qxi5g66WyF7rGzWyBVdBh_i1GaZiMiLhim"]]];
+            //add in subview
+            [self.flyimgView addSubview:self.mainImage];
+
+            
+            // work for tempDrawImageLayer
+            [flyer setImageFrame:tempDrawImageLayer:CGRectMake(0,0,300,300)];
+            
+            NSMutableDictionary *dic2 = [flyer getLayerFromMaster:tempDrawImageLayer];
+            [self.flyimgView renderLayer:tempDrawImageLayer layerDictionary:dic2];
+            
+            
+            //here we Update ImageView
+            UIImageView *img2 = [self.flyimgView.layers objectForKey:tempDrawImageLayer];
+            [self configureDrawingView:img ImageViewDictionary:dic];
+            //[self.flyimgView.layers setValue:img forKey:tempDrawImageLayer];
+            
+            self.tempDrawImage = img2;
+            //add in subview
+            [self.flyimgView addSubview:self.tempDrawImage];
+            
+            //For testing
+            //self.tempDrawImage.image =   [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:@"http://t0.gstatic.com/images?q=tbn:ANd9GcS-H8VyAsE37V3m7rrvWoAsP-0cupyFZwfLOQO5ZpgiB-4AKCby"]]];
+            
+            //self.tempDrawImage.frame = CGRectMake(tempDrawImage.frame.origin.x,tempDrawImage.frame.origin.y, tempDrawImage.frame.size.width , tempDrawImage.frame.size.height);
+            
+            self.tempDrawImage.userInteractionEnabled = YES; // CAN receive touches
+           
+            // Gesture for moving layers
+            UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(drawingLayerMoved:)];
+            [self.tempDrawImage addGestureRecognizer:panGesture];
             
         }
         //Here we Highlight The ImageView
@@ -4842,4 +4916,93 @@ NSArray *coloursArray;
 }
 
 
+#pragma mark - Drawing Methods
+
+#pragma mark - Move start on imageTag=DrawingImgLayer
+
+/**
+ * This method does drag and drop functionality on the layer.
+ */
+- (void)drawingLayerMoved:(UIPanGestureRecognizer *)recognizer {
+    
+    if (recognizer.state == UIGestureRecognizerStateBegan) {
+        mouseSwiped = NO;
+        lastPoint = [recognizer locationInView:self.mainImage];
+        
+    } else if (recognizer.state == UIGestureRecognizerStateChanged) {
+        //MOVE
+        mouseSwiped = YES;
+        CGPoint currentPoint = [recognizer locationInView:self.mainImage];
+        
+        UIGraphicsBeginImageContext(self.mainImage.frame.size);
+        [self.tempDrawImage.image drawInRect:CGRectMake(0, 0, self.mainImage.frame.size.width, self.mainImage.frame.size.height)];
+        CGContextMoveToPoint(UIGraphicsGetCurrentContext(), lastPoint.x, lastPoint.y);
+        CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), currentPoint.x, currentPoint.y);
+        CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound);
+        CGContextSetLineWidth(UIGraphicsGetCurrentContext(), brush );
+        CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), red, green, blue, 1.0);
+        CGContextSetBlendMode(UIGraphicsGetCurrentContext(),kCGBlendModeNormal);
+        
+        CGContextStrokePath(UIGraphicsGetCurrentContext());
+        self.tempDrawImage.image = UIGraphicsGetImageFromCurrentImageContext();
+        [self.tempDrawImage setAlpha:opacity];
+        UIGraphicsEndImageContext();
+        
+        lastPoint = currentPoint;
+        
+    } else if (recognizer.state == UIGestureRecognizerStateEnded) {
+        //ENDED
+        if(!mouseSwiped) {
+            UIGraphicsBeginImageContext(self.mainImage.frame.size);
+            [self.tempDrawImage.image drawInRect:CGRectMake(0, 0, self.mainImage.frame.size.width, self.mainImage.frame.size.height)];
+            CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound);
+            CGContextSetLineWidth(UIGraphicsGetCurrentContext(), brush);
+            CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), red, green, blue, opacity);
+            CGContextMoveToPoint(UIGraphicsGetCurrentContext(), lastPoint.x, lastPoint.y);
+            CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), lastPoint.x, lastPoint.y);
+            CGContextStrokePath(UIGraphicsGetCurrentContext());
+            CGContextFlush(UIGraphicsGetCurrentContext());
+            self.tempDrawImage.image = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+        }
+        
+        
+        UIGraphicsBeginImageContext(self.mainImage.frame.size);
+        [self.mainImage.image drawInRect:CGRectMake(0, 0, self.mainImage.frame.size.width, self.mainImage.frame.size.height) blendMode:kCGBlendModeNormal alpha:1.0];
+        [self.tempDrawImage.image drawInRect:CGRectMake(0, 0, self.tempDrawImage.frame.size.width, self.tempDrawImage.frame.size.height) blendMode:kCGBlendModeNormal alpha:opacity];
+        
+        self.mainImage.image = UIGraphicsGetImageFromCurrentImageContext();
+        self.tempDrawImage.image = nil;
+        UIGraphicsEndImageContext();
+        
+    }
+    
+}
+
+
+/*
+ * Here we set Properties of UIImageView
+ */
+-(void)configureDrawingView :(UIImageView *)imgView ImageViewDictionary:(NSMutableDictionary *)detail {
+    
+    //SetFrame
+    [imgView setFrame:CGRectMake([[detail valueForKey:@"x"] floatValue], [[detail valueForKey:@"y"] floatValue], [[detail valueForKey:@"width"] floatValue], [[detail valueForKey:@"height"] floatValue])];
+    
+    imgView.transform = CGAffineTransformMakeRotation([[detail valueForKey:@"rotation"] floatValue]);
+    
+    //Set Image
+    if ([detail objectForKey:@"image"] != nil) {
+        
+        if ( ![[detail valueForKey:@"image"] isEqualToString:@""]) {
+            NSError *error = nil;
+            NSData *imageData = [[NSData alloc] initWithContentsOfFile:[detail valueForKey:@"image"]
+                                                               options:NSDataReadingMappedIfSafe
+                                                                 error:&error];
+            //NSData *imageData = [[NSData alloc ]initWithContentsOfMappedFile:[detail valueForKey:@"image"]];
+            UIImage *currentImage = [UIImage imageWithData:imageData];
+            [imgView setImage:currentImage];
+        }
+    }
+    
+}
 @end

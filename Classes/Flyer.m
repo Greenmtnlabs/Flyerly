@@ -645,7 +645,7 @@ NSString * const CLIPARTHEIGHT = @"100.000000";
  * and Front View also..
  */
 -(void)deleteLayer :(NSString *)uid{
-    
+    NSLog(@"Deleting layer");
     //Delete From Dictionary
     [masterLayers removeObjectForKey:uid];
 
@@ -793,13 +793,18 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
  * return
  *      UniqueID
  */
--(NSString *)addDrawingImage{
+-(NSString *)addDrawingImage: (BOOL)isMainLayer{
     
     NSString *uniqueId = [Flyer getUniqueId];
     
     //Create Dictionary for Symbol
     NSMutableDictionary *imageDetailDictionary = [[NSMutableDictionary alloc] init];
+    
+    if( isMainLayer )
+    imageDetailDictionary[@"image"] = @"DrawingImgLayer.png";
+    else
     imageDetailDictionary[@"image"] = @"";
+    
     imageDetailDictionary[@"imageTag"] = @"DrawingImgLayer";
     imageDetailDictionary[@"x"] = @"0";
     imageDetailDictionary[@"y"] = @"0";

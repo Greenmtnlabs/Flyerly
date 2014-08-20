@@ -240,10 +240,6 @@
 		2087B6C017C73B40007A6A90 /* ResetPWViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2087B6BE17C73B40007A6A90 /* ResetPWViewController.m */; };
 		2087B6C117C73B40007A6A90 /* ResetPWViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2087B6BF17C73B40007A6A90 /* ResetPWViewController.xib */; };
 		208C684F186DAA59004A74F2 /* FlyerlyConfigurator.m in Sources */ = {isa = PBXBuildFile; fileRef = 208C684E186DAA59004A74F2 /* FlyerlyConfigurator.m */; };
-		208CF96D19A39E9C00EA3404 /* DrawingPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 208CF96619A39E9C00EA3404 /* DrawingPoint.m */; };
-		208CF96E19A39E9C00EA3404 /* DrawingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 208CF96819A39E9C00EA3404 /* DrawingView.m */; };
-		208CF96F19A39E9C00EA3404 /* LineSegment.m in Sources */ = {isa = PBXBuildFile; fileRef = 208CF96A19A39E9C00EA3404 /* LineSegment.m */; };
-		208CF97019A39E9C00EA3404 /* Marker.m in Sources */ = {isa = PBXBuildFile; fileRef = 208CF96C19A39E9C00EA3404 /* Marker.m */; };
 		208E35A217C1F5C500CE54BE /* SigninController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 208E35A117C1F5C500CE54BE /* SigninController.xib */; };
 		208E35A417C20CC700CE54BE /* RegisterViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 208E35A317C20CC700CE54BE /* RegisterViewController_iPhone5.xib */; };
 		208E35AC17C224B100CE54BE /* welcome_bg-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 208E35AB17C224B100CE54BE /* welcome_bg-568h@2x.png */; };
@@ -261,6 +257,8 @@
 		2099498D196E78DB0081B1BD /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2099498C196E78DB0081B1BD /* CoreTelephony.framework */; };
 		209BCFA81975433D006EC811 /* PrintViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 209BCFA61975433D006EC811 /* PrintViewController.m */; };
 		209BCFA91975433D006EC811 /* PrintViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 209BCFA71975433D006EC811 /* PrintViewController.xib */; };
+		209F8E4119A47A4E00323559 /* DrawingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 209F8E4019A47A4E00323559 /* DrawingViewController.m */; };
+		209F8E4419A47B2200323559 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 209F8E4319A47B2200323559 /* SettingsViewController.m */; };
 		20A1CD6318EEF63200484391 /* SubNBUCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 20A1CD6218EEF63200484391 /* SubNBUCamera.m */; };
 		20A1CD6518EF0B0400484391 /* ShareVideoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20A1CD6418EF0B0400484391 /* ShareVideoViewController.xib */; };
 		20A1CD6F18EF19B400484391 /* YouTubeSubClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 20A1CD6E18EF19B400484391 /* YouTubeSubClass.m */; };
@@ -1412,14 +1410,6 @@
 		2087B6BF17C73B40007A6A90 /* ResetPWViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResetPWViewController.xib; sourceTree = "<group>"; };
 		208C684D186DAA59004A74F2 /* FlyerlyConfigurator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = FlyerlyConfigurator.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		208C684E186DAA59004A74F2 /* FlyerlyConfigurator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FlyerlyConfigurator.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		208CF96519A39E9C00EA3404 /* DrawingPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DrawingPoint.h; path = Drawing/DrawingPoint.h; sourceTree = "<group>"; };
-		208CF96619A39E9C00EA3404 /* DrawingPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DrawingPoint.m; path = Drawing/DrawingPoint.m; sourceTree = "<group>"; };
-		208CF96719A39E9C00EA3404 /* DrawingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DrawingView.h; path = Drawing/DrawingView.h; sourceTree = "<group>"; };
-		208CF96819A39E9C00EA3404 /* DrawingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DrawingView.m; path = Drawing/DrawingView.m; sourceTree = "<group>"; };
-		208CF96919A39E9C00EA3404 /* LineSegment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LineSegment.h; path = Drawing/LineSegment.h; sourceTree = "<group>"; };
-		208CF96A19A39E9C00EA3404 /* LineSegment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LineSegment.m; path = Drawing/LineSegment.m; sourceTree = "<group>"; };
-		208CF96B19A39E9C00EA3404 /* Marker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Marker.h; path = Drawing/Marker.h; sourceTree = "<group>"; };
-		208CF96C19A39E9C00EA3404 /* Marker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Marker.m; path = Drawing/Marker.m; sourceTree = "<group>"; };
 		208E35A117C1F5C500CE54BE /* SigninController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SigninController.xib; path = ../SigninController.xib; sourceTree = "<group>"; };
 		208E35A317C20CC700CE54BE /* RegisterViewController_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RegisterViewController_iPhone5.xib; path = ../RegisterViewController_iPhone5.xib; sourceTree = "<group>"; };
 		208E35AB17C224B100CE54BE /* welcome_bg-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "welcome_bg-568h@2x.png"; sourceTree = "<group>"; };
@@ -1471,6 +1461,10 @@
 		209BCFA51975433D006EC811 /* PrintViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrintViewController.h; sourceTree = "<group>"; };
 		209BCFA61975433D006EC811 /* PrintViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrintViewController.m; sourceTree = "<group>"; };
 		209BCFA71975433D006EC811 /* PrintViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrintViewController.xib; sourceTree = "<group>"; };
+		209F8E3F19A47A4E00323559 /* DrawingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DrawingViewController.h; path = DrawingClass/DrawingViewController.h; sourceTree = "<group>"; };
+		209F8E4019A47A4E00323559 /* DrawingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DrawingViewController.m; path = DrawingClass/DrawingViewController.m; sourceTree = "<group>"; };
+		209F8E4219A47B2200323559 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		209F8E4319A47B2200323559 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		20A1CD6118EEF63200484391 /* SubNBUCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubNBUCamera.h; sourceTree = "<group>"; };
 		20A1CD6218EEF63200484391 /* SubNBUCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubNBUCamera.m; sourceTree = "<group>"; };
 		20A1CD6418EF0B0400484391 /* ShareVideoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareVideoViewController.xib; sourceTree = "<group>"; };
@@ -3232,21 +3226,6 @@
 			name = Config;
 			sourceTree = "<group>";
 		};
-		208CF96419A39E8300EA3404 /* Drawing */ = {
-			isa = PBXGroup;
-			children = (
-				208CF96519A39E9C00EA3404 /* DrawingPoint.h */,
-				208CF96619A39E9C00EA3404 /* DrawingPoint.m */,
-				208CF96719A39E9C00EA3404 /* DrawingView.h */,
-				208CF96819A39E9C00EA3404 /* DrawingView.m */,
-				208CF96919A39E9C00EA3404 /* LineSegment.h */,
-				208CF96A19A39E9C00EA3404 /* LineSegment.m */,
-				208CF96B19A39E9C00EA3404 /* Marker.h */,
-				208CF96C19A39E9C00EA3404 /* Marker.m */,
-			);
-			name = Drawing;
-			sourceTree = "<group>";
-		};
 		2094609F1977AC7D0050B5DE /* New Group */ = {
 			isa = PBXGroup;
 			children = (
@@ -3356,6 +3335,17 @@
 				209BCFA71975433D006EC811 /* PrintViewController.xib */,
 			);
 			name = "Print Screen";
+			sourceTree = "<group>";
+		};
+		209F8E3E19A479B800323559 /* DrawingClass */ = {
+			isa = PBXGroup;
+			children = (
+				209F8E4219A47B2200323559 /* SettingsViewController.h */,
+				209F8E4319A47B2200323559 /* SettingsViewController.m */,
+				209F8E3F19A47A4E00323559 /* DrawingViewController.h */,
+				209F8E4019A47A4E00323559 /* DrawingViewController.m */,
+			);
+			name = DrawingClass;
 			sourceTree = "<group>";
 		};
 		20A38E7419825208007C279F /* Lob */ = {
@@ -3660,7 +3650,7 @@
 		20F3597C1888DC8A001376B6 /* CreateFlyer */ = {
 			isa = PBXGroup;
 			children = (
-				208CF96419A39E8300EA3404 /* Drawing */,
+				209F8E3E19A479B800323559 /* DrawingClass */,
 				2405D3441990ABD8007F2596 /* BuyImagesController */,
 				2075A9921899EAB600F410FB /* FlyerlyCustomClasses */,
 				2046355F1895E47100A94C42 /* Models */,
@@ -5796,7 +5786,6 @@
 				0DF3A2C6108DF1D200D6C887 /* CreateFlyerController.m in Sources */,
 				49B88989188652A2003766AD /* FacebookLikeView.m in Sources */,
 				202C47FE187D6E4B00FE0975 /* BitlyTweetSheet.m in Sources */,
-				208CF96E19A39E9C00EA3404 /* DrawingView.m in Sources */,
 				20A38EA51982531F007C279F /* LobCountryModel.m in Sources */,
 				0D4903BB1091893B00855C30 /* FlyrViewController.m in Sources */,
 				202C47FC187D6E4B00FE0975 /* BitlyRequest.m in Sources */,
@@ -5819,7 +5808,6 @@
 				65E2615D171C2FA800C485B5 /* InviteFriendsController.m in Sources */,
 				654B255317202B360047C8F6 /* AfterUpdateController.m in Sources */,
 				20920015184F40330034C4F6 /* InviteFriendsCell.m in Sources */,
-				208CF97019A39E9C00EA3404 /* Marker.m in Sources */,
 				20A38EAB1982531F007C279F /* LobSettingModel.m in Sources */,
 				49B8898118865273003766AD /* Reachability.m in Sources */,
 				202C4827187D7A6B00FE0975 /* CJSONDeserializer.m in Sources */,
@@ -5839,18 +5827,17 @@
 				202C4826187D7A6B00FE0975 /* CDataScanner_Extensions.m in Sources */,
 				0F80C386178561C200D36795 /* LaunchController.m in Sources */,
 				0F80C38B178578CB00D36795 /* RegisterController.m in Sources */,
-				208CF96D19A39E9C00EA3404 /* DrawingPoint.m in Sources */,
 				0F80C3901785813E00D36795 /* SigninController.m in Sources */,
 				2099301118BF0C5000A177A4 /* ContactsModel.m in Sources */,
 				49F109D1192C7926002B0CD4 /* CropVideoViewController.m in Sources */,
 				200E6764191B6318003849D4 /* UserPurchases.m in Sources */,
 				20F93DD317B2262200F6F88C /* MainSettingViewController.m in Sources */,
 				20F4D8E017BA3D0A007B2DF5 /* ProfileViewController.m in Sources */,
-				208CF96F19A39E9C00EA3404 /* LineSegment.m in Sources */,
 				20F4D8E517BA40EA007B2DF5 /* FlyerlySingleton.m in Sources */,
 				202C4828187D7A6B00FE0975 /* CJSONScanner.m in Sources */,
 				202C47FD187D6E4B00FE0975 /* BitlyTextView.m in Sources */,
 				2087B6C017C73B40007A6A90 /* ResetPWViewController.m in Sources */,
+				209F8E4119A47A4E00323559 /* DrawingViewController.m in Sources */,
 				24803523192F3207009403F7 /* CameraViewController.m in Sources */,
 				20A38EA21982531F007C279F /* LobAddressModel.m in Sources */,
 				202C4802187D6E4B00FE0975 /* BitlyTwitterOAuthViewController.m in Sources */,
@@ -5868,6 +5855,7 @@
 				49997FF717DF786400CF1038 /* ParentViewController.m in Sources */,
 				2405D3481990AC4B007F2596 /* AssetGroupViewControllerWithSearchFeild.m in Sources */,
 				20A38EAC1982531F007C279F /* LobStateModel.m in Sources */,
+				209F8E4419A47B2200323559 /* SettingsViewController.m in Sources */,
 				20A38EC819825387007C279F /* AbstractBlockRequest.m in Sources */,
 				2478E5ED192C8C0A0081B31B /* FreeFeatureCell.m in Sources */,
 				4986857018B4FFC7002113E4 /* LibraryViewController.m in Sources */,
