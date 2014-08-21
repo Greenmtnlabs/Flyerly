@@ -805,11 +805,12 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     else
     imageDetailDictionary[@"image"] = @"";
     
-    imageDetailDictionary[@"imageTag"] = @"DrawingImgLayer";
+    imageDetailDictionary[@"imageTag"] = @"";
+    imageDetailDictionary[@"type"] = FLYER_LAYER_DRAWING;
     imageDetailDictionary[@"x"] = @"0";
     imageDetailDictionary[@"y"] = @"0";
-    imageDetailDictionary[@"width"] = @"300";
-    imageDetailDictionary[@"height"] = @"300";
+    imageDetailDictionary[@"width"] = @"612"; //DRAWING_LAYER_W
+    imageDetailDictionary[@"height"] = @"612"; //DRAWING_LAYER_H
     
     [masterLayers setValue:imageDetailDictionary forKey:uniqueId];
     return uniqueId;

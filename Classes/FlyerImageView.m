@@ -143,7 +143,19 @@ NSString *abc;
             }
         }
     }
-    else {
+    else if ([layDic objectForKey:@"type"] != nil && [[layDic objectForKey:@"type"] isEqual:FLYER_LAYER_DRAWING]) {
+        //done do any thing if working for drawing layer
+        
+        // Here We Write Code for Image
+        UIImageView *img = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, DRAWING_LAYER_W, DRAWING_LAYER_H)];
+        
+        [self configureImageView:img ImageViewDictionary:layDic];
+        [self addSubview:img];
+        [layers setValue:img forKey:uid];
+        
+        view = img;
+    }
+    else{
         id lastControl = [layers objectForKey:uid];
         
         // If we have switched from an text to a image view, then we need to
@@ -174,15 +186,8 @@ NSString *abc;
         }
     }
     
-    if ([layDic objectForKey:@"imageTag"] != nil && [[layDic objectForKey:@"imageTag"] isEqual:@"DrawingImgLayer"]) {
-        /*
-        view.userInteractionEnabled = YES;
-        
-        // Gesture for moving layers
-        UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(drawingLayerMoved:)];
-        [view addGestureRecognizer:panGesture];
-         */
-    
+    if ([layDic objectForKey:@"type"] != nil && [[layDic objectForKey:@"type"] isEqual:FLYER_LAYER_DRAWING]) {
+        //we hooked the events(Gesture) of drawing in createFlyerController.h in function: drawingLayerMoved
     }
     // Do the generic stuff that needs to happen for all views. For now,
     // we add support for drag.

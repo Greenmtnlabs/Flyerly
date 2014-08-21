@@ -2278,6 +2278,13 @@ NSArray *coloursArray;
     if(alertView == deleteAlert && buttonIndex == 1) {
         
         editButtonGlobal.uid = currentLayer;
+        NSString *type = [flyer getLayerType:currentLayer];
+        if ( [type isEqualToString:FLYER_LAYER_DRAWING] ){
+            self.mainImage.image = nil;
+            self.tempDrawImage.image = nil;
+            self.tempDrawImage.userInteractionEnabled = NO; //disable drawing interaction
+        }
+        
         [self deleteLayer:editButtonGlobal overrided:nil];
         [Flurry logEvent:@"Layer Deleted"];
         
@@ -3015,7 +3022,71 @@ NSArray *coloursArray;
         
         [self addDonetoRightBarBotton];
     }
+    else if ( [type isEqualToString:FLYER_LAYER_DRAWING] ) {
+        [self editDrawingLayer];
+    }
     
+}
+
+-(void)editDrawingLayer{
+    // work for tempDrawImageLayer -----------------------------------------------
+    //create/add layer with drawing type
+    NSString *tempDrawImageLayer = [flyer addDrawingImage:NO];
+    
+    [flyer setImageFrame:tempDrawImageLayer:CGRectMake(0,0,DRAWING_LAYER_W,DRAWING_LAYER_H)];
+    
+    NSMutableDictionary *dic2 = [flyer getLayerFromMaster:tempDrawImageLayer];
+    [self.flyimgView renderLayer:tempDrawImageLayer layerDictionary:dic2];
+    
+    
+    //here we Update ImageView
+    UIImageView *img2 = [self.flyimgView.layers objectForKey:tempDrawImageLayer];
+    
+    self.tempDrawImage = img2;
+    //add in subview
+    [self.flyimgView addSubview:self.tempDrawImage];
+    
+    self.tempDrawImage.userInteractionEnabled = YES; // CAN receive touches
+    
+    
+    // work for main layer -----------------------------------------------
+    //currentLayer = [flyer addDrawingImage:YES];
+    [flyer setImageFrame:currentLayer:CGRectMake(0,0,DRAWING_LAYER_W,DRAWING_LAYER_H)];
+    
+    NSMutableDictionary *dic = [flyer getLayerFromMaster:currentLayer];
+    //[self.flyimgView renderLayer:currentLayer layerDictionary:dic];
+    
+    //here we Update ImageView
+    UIImageView *img = [self.flyimgView.layers objectForKey:currentLayer];
+    [self configureDrawingView:img ImageViewDictionary:dic];
+    
+    // Here We Write Code for Image
+    self.mainImage = img;
+    //add in subview
+    [self.flyimgView addSubview:self.mainImage];
+    
+    // Hook event of Gesture for moving layers -----------------------------------------------
+    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(drawingLayerMoved:)];
+    [self.tempDrawImage addGestureRecognizer:panGesture];
+    
+/*
+//Here we Highlight The ImageView
+[self.flyimgView layerIsBeingEdited:currentLayer];
+
+//HERE WE SET ANIMATION
+[UIView animateWithDuration:0.4f
+                 animations:^{
+                     //Create ScrollView
+                     //[self addFlyerIconInSubView];
+                 }
+                 completion:^(BOOL finished){
+                     [layerScrollView flashScrollIndicators];
+                 }];
+
+*/
+
+//Add right Bar button
+[self addDonetoRightBarBotton];
 }
 
 /*
@@ -3349,24 +3420,12 @@ NSArray *coloursArray;
     [widthTabButton setSelected:NO];
     [heightTabButton setSelected:NO];
 
-
+    
+    //disable drawing interaction
+    self.tempDrawImage.userInteractionEnabled = NO;
     
     //Empty Layer Delete
-    if (currentLayer != nil && ![currentLayer isEqualToString:@""]) {
-        
-        NSString *flyerImg = [flyer getImageName:currentLayer];
-        NSString *flyertext = [flyer getText:currentLayer];
-        
-        if ([flyerImg isEqualToString:@""]) {
-            [flyer deleteLayer:currentLayer];
-            [self.flyimgView deleteLayer:currentLayer];
-        }
-        
-        if ([flyertext isEqualToString:@""]) {
-            [flyer deleteLayer:currentLayer];
-            [self.flyimgView deleteLayer:currentLayer];
-        }
-    }
+    [self deSelectPreviousLayer];
     
     //Save OnBack
     //Here we remove Borders from layer if user touch any layer
@@ -3388,7 +3447,6 @@ NSArray *coloursArray;
     [self addAllLayersIntoScrollView];
     [UIView commitAnimations];
     //End Animation
-    
     
     currentLayer = @"";
    
@@ -4490,7 +4548,7 @@ NSArray *coloursArray;
             //create/add layer with drawing type
             NSString *tempDrawImageLayer = [flyer addDrawingImage:NO];
             
-            [flyer setImageFrame:tempDrawImageLayer:CGRectMake(0,0,300,300)];
+            [flyer setImageFrame:tempDrawImageLayer:CGRectMake(0,0,DRAWING_LAYER_W,DRAWING_LAYER_H)];
             
             NSMutableDictionary *dic2 = [flyer getLayerFromMaster:tempDrawImageLayer];
             [self.flyimgView renderLayer:tempDrawImageLayer layerDictionary:dic2];
@@ -4508,7 +4566,7 @@ NSArray *coloursArray;
             
             // work for main layer -----------------------------------------------
             currentLayer = [flyer addDrawingImage:YES];
-            [flyer setImageFrame:currentLayer:CGRectMake(0,0,300,300)];
+            [flyer setImageFrame:currentLayer:CGRectMake(0,0,DRAWING_LAYER_W,DRAWING_LAYER_H)];
             
             NSMutableDictionary *dic = [flyer getLayerFromMaster:currentLayer];
             [self.flyimgView renderLayer:currentLayer layerDictionary:dic];
@@ -4910,7 +4968,7 @@ NSArray *coloursArray;
 
 #pragma mark - Drawing Methods
 
-#pragma mark - Move start on imageTag=DrawingImgLayer
+#pragma mark - Move start on type=FLYER_LAYER_DRAWING (FLYER_LAYER_DRAWING=DrawingImgLayer)
 
 /**
  * This method does drag and drop functionality on the layer.
@@ -4962,8 +5020,8 @@ NSArray *coloursArray;
         //Here we Create ImageView Layer
         [self.flyimgView renderLayer:self.currentLayer layerDictionary:[self.flyer getLayerFromMaster:self.currentLayer]];
         
-        [self.flyimgView layerStoppedEditing:self.currentLayer];
-        self.tempDrawImage.userInteractionEnabled = NO; // CAN receive touches
+        //[self.flyimgView layerStoppedEditing:self.currentLayer];
+        
         
         // End of save flyer and drawing layer
 
