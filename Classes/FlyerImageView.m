@@ -176,6 +176,7 @@ NSString *abc;
     // Do the generic stuff that needs to happen for all views. For now,
     // we add support for drag.
     if ( view != nil ) {
+        
         view.userInteractionEnabled = YES;
         
         // Gesture for moving layers

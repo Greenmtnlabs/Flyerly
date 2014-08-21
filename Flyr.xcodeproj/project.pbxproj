@@ -517,6 +517,7 @@
 		243D8E4419347BAE00D5312D /* InAppViewController-iPhone4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 243D8E4319347BAE00D5312D /* InAppViewController-iPhone4.xib */; };
 		243DD521192B24B500391786 /* FlyerIcons.xib in Resources */ = {isa = PBXBuildFile; fileRef = 243DD520192B24B500391786 /* FlyerIcons.xib */; };
 		243DD523192B24CB00391786 /* FlyerIcons-iPhone4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 243DD522192B24CB00391786 /* FlyerIcons-iPhone4.xib */; };
+		2441584819A4E85B00F12FAD /* ImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 2441584719A4E85B00F12FAD /* ImageLoader.m */; };
 		2459E8B0196130810072A56C /* greenButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 2459E8AF196130810072A56C /* greenButton.png */; };
 		245C0FA51933081200B5B31C /* free-features.plist in Resources */ = {isa = PBXBuildFile; fileRef = 245C0FA41933081200B5B31C /* free-features.plist */; };
 		245D48E2193DEF9000E670E6 /* Entypo-Social.otf in Resources */ = {isa = PBXBuildFile; fileRef = 245D48E1193DEF9000E670E6 /* Entypo-Social.otf */; };
@@ -1752,6 +1753,8 @@
 		243D8E4319347BAE00D5312D /* InAppViewController-iPhone4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "InAppViewController-iPhone4.xib"; sourceTree = "<group>"; };
 		243DD520192B24B500391786 /* FlyerIcons.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FlyerIcons.xib; sourceTree = "<group>"; };
 		243DD522192B24CB00391786 /* FlyerIcons-iPhone4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "FlyerIcons-iPhone4.xib"; sourceTree = "<group>"; };
+		2441584619A4E85B00F12FAD /* ImageLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageLoader.h; sourceTree = "<group>"; };
+		2441584719A4E85B00F12FAD /* ImageLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageLoader.m; sourceTree = "<group>"; };
 		2459E8AF196130810072A56C /* greenButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greenButton.png; sourceTree = "<group>"; };
 		245C0FA41933081200B5B31C /* free-features.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "free-features.plist"; sourceTree = "<group>"; };
 		245D48E1193DEF9000E670E6 /* Entypo-Social.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Entypo-Social.otf"; path = "Data/fonts/Entypo-Social.otf"; sourceTree = "<group>"; };
@@ -3753,6 +3756,8 @@
 				2405D3451990AC4B007F2596 /* AssetGroupViewControllerWithSearchFeild.h */,
 				2405D3461990AC4B007F2596 /* AssetGroupViewControllerWithSearchFeild.m */,
 				2405D3471990AC4B007F2596 /* AssetGroupViewControllerWithSearchFeild.xib */,
+				2441584619A4E85B00F12FAD /* ImageLoader.h */,
+				2441584719A4E85B00F12FAD /* ImageLoader.m */,
 			);
 			name = BuyImagesController;
 			sourceTree = "<group>";
@@ -5832,6 +5837,7 @@
 				2478E5E3192C7A6E0081B31B /* InAppViewController.m in Sources */,
 				2022C63518D1BAF000BCD5F7 /* RMStoreKeychainPersistence.m in Sources */,
 				202C4825187D7A6B00FE0975 /* CDataScanner.m in Sources */,
+				2441584819A4E85B00F12FAD /* ImageLoader.m in Sources */,
 				20A38EAD1982531F007C279F /* LobVerifyModel.m in Sources */,
 				49997FF717DF786400CF1038 /* ParentViewController.m in Sources */,
 				2405D3481990AC4B007F2596 /* AssetGroupViewControllerWithSearchFeild.m in Sources */,

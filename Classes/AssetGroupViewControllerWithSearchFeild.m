@@ -8,6 +8,7 @@
 
 #import "AssetGroupViewControllerWithSearchFeild.h"
 #import "Common.h"
+#import "ImageLoader.h"
 
 @interface AssetGroupViewControllerWithSearchFeild ()
 
@@ -16,7 +17,7 @@
 NSString *account_id;
 id jsonObject;
 NSDictionary *tableData;
-NSArray *imagesPreview;
+NSMutableArray *imagesPreview;
 
 @implementation AssetGroupViewControllerWithSearchFeild
 
@@ -159,6 +160,8 @@ NSArray *imagesPreview;
         //lbl_status.text = [@"Api status = " stringByAppendingFormat:@"%i",status];
         NSLog(@"msg = %@",[jsonObject objectForKey:@"message"]);
         
+        imagesPreview = [[NSMutableArray alloc]init];
+        
         if( status == 200 ){
             NSLog(@"Creating list from parsed data");
             //lbl_status.text = @"Creating list";
@@ -170,9 +173,14 @@ NSArray *imagesPreview;
                 
                 NSDictionary *imageObject = [images objectAtIndex:i];
                 NSDictionary *thumbDetails = [imageObject objectForKey:@"small_thumb"];
-                imagesPreview = [thumbDetails objectForKey:@"url"];
+                [imagesPreview addObject :[thumbDetails objectForKey:@"url"]];
+                
                 
             }
+            
+            ImageLoader *obj = [[ImageLoader alloc]init];
+            self.imageLoader = obj;
+            self.objectArray = imagesPreview;
             
             //NSMutableArray *imagesArray = [tableData objectForKey:@"images"];
             //NSLog(@"%@",imagesArray);

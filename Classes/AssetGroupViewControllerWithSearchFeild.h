@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "NBUImagePickerPrivate.h"
+#import "NBUGalleryViewController.h"
 
 @class ObjectGridView, NBUAssetsGroup;
 
-@interface AssetGroupViewControllerWithSearchFeild : UIViewController
+@interface AssetGroupViewControllerWithSearchFeild : NBUGalleryViewController
 
 // The maximum number of assets that can be selected. Default `0` which means no limit.
 @property (nonatomic) NSUInteger selectionCountLimit;
