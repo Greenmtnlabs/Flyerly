@@ -22,7 +22,7 @@ NSMutableArray *imagesPreview;
 @implementation AssetGroupViewControllerWithSearchFeild
 
 
-@synthesize searchTextField;
+@synthesize searchTextField,scrollGridView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -37,13 +37,15 @@ NSMutableArray *imagesPreview;
 {
     [super viewDidLoad];
     
+    // Configure grid view
+    //self.objectTableView.nibNameForViews = @"CustomAssetsGroupView";
+    
+    // Customization
+    self.thumbnailsGridView = scrollGridView;
+
     //change to your account id at bigstock.com/partners
     account_id = @"862265";
     // Do any additional setup after loading the view from its nib.
-    // Configure the grid view
-    //self.gridView.margin = CGSizeMake(5.0, 5.0);
-    //self.gridView.nibNameForViews = @"CustomAssetThumbnailView";
-    
     // Configure the grid view
     self.gridView.margin = CGSizeMake(5.0, 5.0);
     self.gridView.nibNameForViews = @"CustomAssetThumbnailView";
@@ -73,6 +75,8 @@ NSMutableArray *imagesPreview;
     [searchTextField addTarget:self action:@selector(textFieldFinished:) forControlEvents: UIControlEventEditingDidEndOnExit];
     
     self.navigationItem.titleView = label;
+    
+    [self apiRequestWithSearchingKeyWord:@"dog"];
 }
 
 - (void)textFieldFinished:(id)sender {
@@ -181,6 +185,9 @@ NSMutableArray *imagesPreview;
             ImageLoader *obj = [[ImageLoader alloc]init];
             self.imageLoader = obj;
             self.objectArray = imagesPreview;
+            
+            //self.thumbnailsGridView = scrollGridView;
+            [self setShowThumbnailsView:YES];
             
             //NSMutableArray *imagesArray = [tableData objectForKey:@"images"];
             //NSLog(@"%@",imagesArray);

@@ -139,7 +139,7 @@
  */
 - (void)buyImages {
     NSLog(@"Buy Images Pressed");
-    AssetGroupViewControllerWithSearchFeild *buyImagesController= [[AssetGroupViewControllerWithSearchFeild alloc]initWithNibName:@"AssetGroupViewControllerWithSearchFeild" bundle:nil];
+    AssetGroupViewControllerWithSearchFeild *buyImagesController= [[AssetGroupViewControllerWithSearchFeild alloc]initWithNibName:@"AssetTest" bundle:nil];
 	[self.navigationController pushViewController:buyImagesController animated:YES];
 }
 

@@ -32,7 +32,7 @@ static NBUImageLoader * _sharedLoader;
 
 - (void)imageForObject:(id)object
                   size:(NBUImageSize)size
-           resultBlock:(NBUImageLoaderResultBlock)resultBlock
+           resultBlock:(ImageLoaderResultBlock)resultBlock
 {
     // Already an image?
     if ([object isKindOfClass:[UIImage class]])
@@ -52,7 +52,7 @@ static NBUImageLoader * _sharedLoader;
         requestOperation.responseSerializer = [AFImageResponseSerializer serializer];
         [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"Response: %@", responseObject);
-            resultBlock(((NBUAsset *)responseObject).thumbnailImage,nil);
+            resultBlock(responseObject,nil);
             //return;
             //_imageView.image = responseObject;
             

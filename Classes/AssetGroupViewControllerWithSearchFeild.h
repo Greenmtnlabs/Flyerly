@@ -10,7 +10,7 @@
 #import "NBUImagePickerPrivate.h"
 #import "NBUGalleryViewController.h"
 
-@class ObjectGridView, NBUAssetsGroup;
+@class ObjectGridView, NBUGalleryViewController;
 
 @interface AssetGroupViewControllerWithSearchFeild : NBUGalleryViewController
 
@@ -18,6 +18,12 @@
 @property (nonatomic) NSUInteger selectionCountLimit;
 //A text feild to search images on shutterstock
 @property ( nonatomic, strong ) IBOutlet UITextField *searchTextField;
+
+// An ObjectGridView used to display shutterstock api objects.
+//@property (weak, nonatomic) IBOutlet UIScrollView * scrollGridView;
+
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollGridView;
+
 // An ObjectGridView used to display shutterstock api objects.
 @property (weak, nonatomic) IBOutlet ObjectGridView * gridView;
 @property (nonatomic, assign, getter=isLoading)   BOOL loading;
