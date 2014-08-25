@@ -519,7 +519,9 @@
 		243D8E4419347BAE00D5312D /* InAppViewController-iPhone4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 243D8E4319347BAE00D5312D /* InAppViewController-iPhone4.xib */; };
 		243DD521192B24B500391786 /* FlyerIcons.xib in Resources */ = {isa = PBXBuildFile; fileRef = 243DD520192B24B500391786 /* FlyerIcons.xib */; };
 		243DD523192B24CB00391786 /* FlyerIcons-iPhone4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 243DD522192B24CB00391786 /* FlyerIcons-iPhone4.xib */; };
+		2441584819A4E85B00F12FAD /* ImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 2441584719A4E85B00F12FAD /* ImageLoader.m */; };
 		2459E8B0196130810072A56C /* greenButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 2459E8AF196130810072A56C /* greenButton.png */; };
+		245A016F19A74E3C005A414A /* AssetTest.xib in Resources */ = {isa = PBXBuildFile; fileRef = 245A016E19A74E3C005A414A /* AssetTest.xib */; };
 		245C0FA51933081200B5B31C /* free-features.plist in Resources */ = {isa = PBXBuildFile; fileRef = 245C0FA41933081200B5B31C /* free-features.plist */; };
 		245D48E2193DEF9000E670E6 /* Entypo-Social.otf in Resources */ = {isa = PBXBuildFile; fileRef = 245D48E1193DEF9000E670E6 /* Entypo-Social.otf */; };
 		246264DF1947416A00933A69 /* Cliparts-paid.plist in Resources */ = {isa = PBXBuildFile; fileRef = 246264DE1947416A00933A69 /* Cliparts-paid.plist */; };
@@ -1758,7 +1760,10 @@
 		243D8E4319347BAE00D5312D /* InAppViewController-iPhone4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "InAppViewController-iPhone4.xib"; sourceTree = "<group>"; };
 		243DD520192B24B500391786 /* FlyerIcons.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FlyerIcons.xib; sourceTree = "<group>"; };
 		243DD522192B24CB00391786 /* FlyerIcons-iPhone4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "FlyerIcons-iPhone4.xib"; sourceTree = "<group>"; };
+		2441584619A4E85B00F12FAD /* ImageLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageLoader.h; sourceTree = "<group>"; };
+		2441584719A4E85B00F12FAD /* ImageLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageLoader.m; sourceTree = "<group>"; };
 		2459E8AF196130810072A56C /* greenButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greenButton.png; sourceTree = "<group>"; };
+		245A016E19A74E3C005A414A /* AssetTest.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AssetTest.xib; sourceTree = "<group>"; };
 		245C0FA41933081200B5B31C /* free-features.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "free-features.plist"; sourceTree = "<group>"; };
 		245D48E1193DEF9000E670E6 /* Entypo-Social.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Entypo-Social.otf"; path = "Data/fonts/Entypo-Social.otf"; sourceTree = "<group>"; };
 		246264DE1947416A00933A69 /* Cliparts-paid.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Cliparts-paid.plist"; sourceTree = "<group>"; };
@@ -3226,7 +3231,7 @@
 			name = Config;
 			sourceTree = "<group>";
 		};
-		2094609F1977AC7D0050B5DE /* New Group */ = {
+		2094609F1977AC7D0050B5DE /* InviteForPrint */ = {
 			isa = PBXGroup;
 			children = (
 				20E38AA0197FB30C00D1CFA9 /* SendingPrintViewController */,
@@ -3234,7 +3239,7 @@
 				209460A11977AD1A0050B5DE /* InviteForPrint.m */,
 				209460A21977AD1A0050B5DE /* InviteForPrint.xib */,
 			);
-			name = "New Group";
+			name = InviteForPrint;
 			sourceTree = "<group>";
 		};
 		20967D9518C896E500B273FC /* FlyerlyLike */ = {
@@ -3329,7 +3334,7 @@
 				20A38E7419825208007C279F /* Lob */,
 				20E46386197E3F9900473921 /* PDF Views */,
 				200D1933197CF4BA00CFE04B /* PayPal */,
-				2094609F1977AC7D0050B5DE /* New Group */,
+				2094609F1977AC7D0050B5DE /* InviteForPrint */,
 				209BCFA51975433D006EC811 /* PrintViewController.h */,
 				209BCFA61975433D006EC811 /* PrintViewController.m */,
 				209BCFA71975433D006EC811 /* PrintViewController.xib */,
@@ -3771,6 +3776,9 @@
 				2405D3451990AC4B007F2596 /* AssetGroupViewControllerWithSearchFeild.h */,
 				2405D3461990AC4B007F2596 /* AssetGroupViewControllerWithSearchFeild.m */,
 				2405D3471990AC4B007F2596 /* AssetGroupViewControllerWithSearchFeild.xib */,
+				2441584619A4E85B00F12FAD /* ImageLoader.h */,
+				2441584719A4E85B00F12FAD /* ImageLoader.m */,
+				245A016E19A74E3C005A414A /* AssetTest.xib */,
 			);
 			name = BuyImagesController;
 			sourceTree = "<group>";
@@ -5421,6 +5429,7 @@
 				247858B9194875D20062F1E4 /* KlinicSlabMedium.otf in Resources */,
 				0F8007E6175378F0000FF7FA /* ricon15.png in Resources */,
 				242184B3194B4AEC00FDDA97 /* emoticon165@2x.png in Resources */,
+				245A016F19A74E3C005A414A /* AssetTest.xib in Resources */,
 				24218497194B4AEC00FDDA97 /* emoticon136@2x.png in Resources */,
 				0F8007E8175378F0000FF7FA /* ricon16.png in Resources */,
 				2030B1C6196BEC99004DE050 /* black_yuan.png in Resources */,
@@ -5851,6 +5860,7 @@
 				2478E5E3192C7A6E0081B31B /* InAppViewController.m in Sources */,
 				2022C63518D1BAF000BCD5F7 /* RMStoreKeychainPersistence.m in Sources */,
 				202C4825187D7A6B00FE0975 /* CDataScanner.m in Sources */,
+				2441584819A4E85B00F12FAD /* ImageLoader.m in Sources */,
 				20A38EAD1982531F007C279F /* LobVerifyModel.m in Sources */,
 				49997FF717DF786400CF1038 /* ParentViewController.m in Sources */,
 				2405D3481990AC4B007F2596 /* AssetGroupViewControllerWithSearchFeild.m in Sources */,

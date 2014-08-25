@@ -515,6 +515,9 @@ NSArray *coloursArray;
     [lastTextView removeFromSuperview];
     lastTextView = nil;
     
+    isPlaying = NO;
+    [player pause];
+    
     // If the sharing panel is open, we are just going to close it down.
     // Do not need to do any thing else.
     float yValue = self.view.frame.size.height - 425;
@@ -4958,11 +4961,13 @@ NSArray *coloursArray;
     [self presentViewController:printViewController animated:NO completion:nil];
 }
 
+
 -(void)didDismissPrintViewController {
     
     InviteForPrint *inviteForPrint = [[InviteForPrint alloc]initWithNibName:@"InviteForPrint" bundle:nil];
     inviteForPrint.flyer = self.flyer;
 	[self.navigationController pushViewController:inviteForPrint animated:YES];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"PrintViewControllerDismissed" object:nil];
 }
 
 
