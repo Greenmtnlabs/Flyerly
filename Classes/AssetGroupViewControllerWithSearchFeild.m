@@ -9,6 +9,7 @@
 #import "AssetGroupViewControllerWithSearchFeild.h"
 #import "Common.h"
 #import "ImageLoader.h"
+#import "InAppViewController.h"
 
 @interface AssetGroupViewControllerWithSearchFeild ()
 
@@ -190,8 +191,6 @@ NSMutableArray *imagesPreview;
   
         }
         
-        
-        
     } else{
         NSLog(@"Json parsin may error aya hy, error=%@", error);
         //lbl_status.text = @"Json parsin may error aya hy";
@@ -199,8 +198,76 @@ NSMutableArray *imagesPreview;
     
 }
 
+
+
+
+- (void) purchaseProduct {
+    
+    //This line pop up login screen if user not exist
+    [[RMStore defaultStore] addStoreObserver:self];
+    
+    NSString* productIdentifier= @"com.flyerly.SelectedSymbol";
+    
+    //Purchasing the product on the basis of product identifier
+    [self purchaseProductID:productIdentifier];
+}
+
+/* HERE WE PURCHASE PRODUCT FROM APP STORE
+ */
+-(void)purchaseProductID:(NSString *)pid{
+    
+    [[RMStore defaultStore] addPayment:pid success:^(SKPaymentTransaction *transaction) {
+        
+        NSLog(@"Product purchased");
+        
+        NSString *strWithOutDot = [pid stringByReplacingOccurrencesOfString:@"." withString:@""];
+        
+        if(![[NSUserDefaults standardUserDefaults] stringForKey:@"InAppPurchases"]){
+            
+            NSMutableDictionary *userPurchase =[[NSMutableDictionary alloc] initWithDictionary:[[NSUserDefaults standardUserDefaults]valueForKey:@"InAppPurchases"]];
+            
+            [userPurchase setValue:@"1" forKey:strWithOutDot];
+            [[NSUserDefaults standardUserDefaults]setValue:userPurchase forKey:@"InAppPurchases"];
+            
+        }else {
+            NSMutableDictionary *userPurchase =[[NSMutableDictionary alloc] init];
+            [userPurchase setValue:@"1" forKey:strWithOutDot];
+            [[NSUserDefaults standardUserDefaults]setValue:userPurchase forKey:@"InAppPurchases"];
+            
+        }
+        
+        [self productSuccesfullyPurchased];
+        
+        
+    } failure:^(SKPaymentTransaction *transaction, NSError *error) {
+        
+        NSLog(@"Something went wrong");
+        
+    }];
+}
+
+- ( void )productSuccesfullyPurchased{
+    
+    NSLog(@"succesfully purchased image");
+    
+}
+
+
 -(void)thumbnailWasTapped :(id)objectId {
-    NSLog(@"tapped");
+
+    //Checking if the user is valid or anonymus
+    if ([[PFUser currentUser] sessionToken].length != 0) {
+        
+        [self purchaseProduct];
+        
+        
+    }else {
+        UIAlertView *someError = [[UIAlertView alloc] initWithTitle: @"Please sign in first"
+                                                            message: @"To purchase any product, you need to sign in first."
+                                                           delegate: self cancelButtonTitle: @"OK" otherButtonTitles: nil];
+        
+        [someError show];
+    }
     
 }
 
@@ -228,6 +295,155 @@ NSMutableArray *imagesPreview;
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+/*** HERE WE SAVE IMAGE INTO GALLERY
+ * AND LINK WITH FLYERLY ALBUM
+ *
+ */
+-(void)saveInGallery :(NSData *)imgData {
+    
+    
+    // CREATE LIBRARY OBJECT FIRST
+    if ( _library == nil ) {
+        _library = [[ALAssetsLibrary alloc] init];
+    }
+    
+    __weak ALAssetsLibrary* library = _library;
+    
+    //Checking Group Path should be not null for Flyer Saving In Gallery
+    if ([[NSUserDefaults standardUserDefaults] stringForKey:@"FlyerlPurchasedyAlbum"] == nil) {
+        return;
+    }
+    
+    //HERE WE CHECK USER DID ALLOWED TO ACESS PHOTO library
+    //if not allow so ignore Flyer saving in Gallery
+    if ([ALAssetsLibrary authorizationStatus] == ALAuthorizationStatusRestricted || [ALAssetsLibrary authorizationStatus] == ALAuthorizationStatusDenied) {
+        return;
+    }
+    
+    
+    // HERE WE GET FLYERLY ALBUM URL
+    NSURL *groupUrl  = [[NSURL alloc] initWithString:[[NSUserDefaults standardUserDefaults] stringForKey:@"FlyerlPurchasedyAlbum"]];
+    
+    
+    // HERE WE GET GROUP OF IMAGE IN GALLERY
+    [_library groupForURL:groupUrl resultBlock:^(ALAssetsGroup *group) {
+        
+        //CHECKING ALBUM EXIST IN DEVICE
+        if ( group == nil ) {
+            
+            //ALBUM NOT FOUND
+            [self createFlyerlyAlbum:imgData];
+            
+        } else {
+            
+            //ALBUM FOUND
+            //GETTING IMAGE OR VIDEO URL IF EXIST IN FLYER INFO FILE .TXT
+            NSString *currentUrl;
+            
+            currentUrl = [self getFlyerURL];
+            
+            
+            // CHECKING CRITERIA CREATE OR MODIFY
+            if ( [currentUrl isEqualToString:@""]) {
+                
+                if ( [self isVideoFlyer] ){
+                    [self createVideoToFlyerlyAlbum:groupUrl VideoData:[NSURL fileURLWithPath:[self getSharingVideoPath]]];
+                }else {
+                    [self createImageToFlyerlyAlbum:groupUrl ImageData:imgData];
+                }
+                
+            } else { // URL FOUND WE USE EXISTING URL FOR REPLACE IMAGE
+                
+                // CONVERT STRING TO URL
+                NSURL *imageUrl = [[NSURL alloc] initWithString:currentUrl];
+                
+                // GETTING GENERATED IMAGE WITH URL
+                [library assetForURL:imageUrl resultBlock:^(ALAsset *asset) {
+                    
+                    if (asset == nil) {
+                        
+                        // URL Exist and Image Not Found
+                        // we Create New Content In Gallery
+                        if ( [self isVideoFlyer] ){
+                            
+                            //For Video
+                            [self createVideoToFlyerlyAlbum:groupUrl VideoData:[NSURL fileURLWithPath:[self getSharingVideoPath]]];
+                        }else {
+                            
+                            //For Image
+                            [self createImageToFlyerlyAlbum:groupUrl ImageData:imgData];
+                        }
+                    } else {
+                        
+                        // URL Exist and Image Found
+                        //HERE WE UPDATE Content WITH LATEST UPDATE
+                        
+                        if ( [self isVideoFlyer] ){
+                            
+                            //Update Video
+                            [asset setVideoAtPath:[NSURL fileURLWithPath:[self getSharingVideoPath]] completionBlock:^(NSURL *assetURL, NSError *error) {
+                            }];
+                        }else {
+                            
+                            //Update Image
+                            [asset setImageData:imgData metadata:nil completionBlock:^(NSURL *assetURL, NSError *error) {
+                            }];
+                        }
+                    }
+                    
+                } failureBlock:^(NSError *error) {
+                }];
+                
+                
+            }
+        }
+        
+    }
+             failureBlock:^(NSError *error) {
+             }];
+}
+
+
+/* APPLY OVER LOADING HERE
+ * THIS METHOD CREATE ALBUM ON DEVICE AFTER IT SAVING IMAGE IN LIBRARY
+ */
+-(void)createFlyerlyAlbum :(NSData *)imgdata {
+    
+    if ( _library == nil ) {
+        _library = [[ALAssetsLibrary alloc] init];
+    }
+    __weak Flyer *weakSelf = self;
+    
+    
+    //HERE WE SEN REQUEST FOR CREATE ALBUM
+    [_library addAssetsGroupAlbumWithName:FLYER_ALBUM_NAME
+                              resultBlock:^(ALAssetsGroup *group) {
+                                  
+                                  // GETTING CREATED URL OF ALBUM
+                                  NSURL *groupURL = [group valueForProperty:ALAssetsGroupPropertyURL];
+                                  
+                                  //SAVING IN PREFERENCES .PLIST FOR FUTURE USE
+                                  [[NSUserDefaults standardUserDefaults]   setObject:groupURL.absoluteString forKey:@"FlyerlyPurchasedAlbum"];
+                                  
+                                  //Checking Content Type
+                                  if ([weakSelf isVideoFlyer]) {
+                                      
+                                      //Create Video
+                                      [weakSelf createVideoToFlyerlyAlbum:groupURL VideoData:[NSURL fileURLWithPath:[weakSelf getSharingVideoPath]]];
+                                  }else {
+                                      
+                                      //Create Image
+                                      [weakSelf createImageToFlyerlyAlbum:groupURL ImageData:imgdata];
+                                  }
+                              }
+     
+                             failureBlock:^(NSError *error) {
+                                 NSLog( @"Error adding album: %@", error.localizedDescription );
+                             }];
+    
+    
 }
 
 @end

@@ -9,10 +9,18 @@
 #import <UIKit/UIKit.h>
 #import "NBUImagePickerPrivate.h"
 #import "NBUGalleryViewController.h"
+#import "InAppViewController.h"
+#import "RMStore.h"
 
-@class ObjectGridView, NBUGalleryViewController;
+@class ObjectGridView, NBUGalleryViewController,InAppViewController;
 
-@interface AssetGroupViewControllerWithSearchFeild : NBUGalleryViewController
+@interface AssetGroupViewControllerWithSearchFeild : NBUGalleryViewController <RMStoreObserver,InAppPurchasePanelButtonProtocol,UserPurchasesDelegate>{
+    
+    InAppViewController *inappviewcontroller;
+}
+
+@property (strong, nonatomic) ALAssetsLibrary *library;
+
 
 // The maximum number of assets that can be selected. Default `0` which means no limit.
 @property (nonatomic) NSUInteger selectionCountLimit;
