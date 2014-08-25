@@ -645,7 +645,7 @@ NSString * const CLIPARTHEIGHT = @"100.000000";
  * and Front View also..
  */
 -(void)deleteLayer :(NSString *)uid{
-    
+    NSLog(@"Deleting layer");
     //Delete From Dictionary
     [masterLayers removeObjectForKey:uid];
 
@@ -781,6 +781,36 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     imageDetailDictionary[@"y"] = @"10";
     imageDetailDictionary[@"width"] = @"90";
     imageDetailDictionary[@"height"] = @"70";
+    
+    [masterLayers setValue:imageDetailDictionary forKey:uniqueId];
+    return uniqueId;
+}
+
+
+/*
+ * When New Drawing layer Add on Flyer
+ * its will call and Add one Content in MasterLayers Dictionary
+ * return
+ *      UniqueID
+ */
+-(NSString *)addDrawingImage: (BOOL)isMainLayer{
+    
+    NSString *uniqueId = [Flyer getUniqueId];
+    
+    //Create Dictionary for Symbol
+    NSMutableDictionary *imageDetailDictionary = [[NSMutableDictionary alloc] init];
+    
+    if( isMainLayer )
+    imageDetailDictionary[@"image"] = @"DrawingImgLayer.png";
+    else
+    imageDetailDictionary[@"image"] = @"";
+    
+    imageDetailDictionary[@"imageTag"] = @"";
+    imageDetailDictionary[@"type"] = FLYER_LAYER_DRAWING;
+    imageDetailDictionary[@"x"] = @"0";
+    imageDetailDictionary[@"y"] = @"0";
+    imageDetailDictionary[@"width"] = @"612"; //DRAWING_LAYER_W
+    imageDetailDictionary[@"height"] = @"612"; //DRAWING_LAYER_H
     
     [masterLayers setValue:imageDetailDictionary forKey:uniqueId];
     return uniqueId;

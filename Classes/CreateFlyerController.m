@@ -17,7 +17,24 @@
 #import "PrintViewController.h"
 #import "InviteForPrint.h"
 
+#define IMAGEPICKER_TEMPLATE 1
+#define IMAGEPICKER_PHOTO 2
+
+//Drawing required files
+//#import "DrawingPoint.h"
+//#import "LineSegment.h"
+
+//DrawingClass required files
+#import "Twitter/TWTweetComposeViewController.h"
+
 @implementation CreateFlyerController
+
+//Drawing required vars
+//@synthesize drawingView,displayView;
+
+//Drawing required files
+@synthesize mainImage;
+@synthesize tempDrawImage;
 
 CameraViewController *nbuCamera;
 
@@ -29,8 +46,8 @@ UIButton *backButton;
 fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sharePanel,clipArtTabButton,emoticonsTabButton,artsColorTabButton,drawingTabButton,artsSizeTabButton;
 @synthesize cameraTabButton,photoTabButton,widthTabButton,heightTabButton,deleteAlert,signInAlert,spaceUnavailableAlert;
 @synthesize imgPickerFlag,layerScrollView,flyerPath;
-@synthesize contextView,libraryContextView,libFlyer,backgroundTabButton,addMoreFontTabButton;
-@synthesize libText,libBackground,libArts,libPhoto,libEmpty,backtemplates,cameraTakePhoto,cameraRoll,flyerBorder;
+@synthesize contextView,libraryContextView,libFlyer,backgroundTabButton,addMoreFontTabButton,drawingMenueButton;
+@synthesize libText,libBackground,libArts,libPhoto,libEmpty,backtemplates,cameraTakePhoto,cameraRoll,flyerBorder,libDrawing;
 @synthesize flyimgView,currentLayer,layersDic,flyer,player,playerView,playerToolBar,playButton,playerSlider,tempelateView;
 @synthesize durationLabel,durationChange,onFlyerBack,shouldShowAdd;
 @synthesize backgroundsView,flyerBordersView,colorsView,sizesView,bannerAddView,bannerAddDismissButton;
@@ -161,6 +178,14 @@ NSArray *coloursArray;
  * View setup. This is done once per instance.
  */
 -(void)viewDidLoad{
+
+    //DrawingClass required vars
+    red = 0.0/255.0;
+    green = 0.0/255.0;
+    blue = 0.0/255.0;
+    brush = 10.0;
+    opacity = 1.0;
+    
 	[super viewDidLoad];
 
     // Create a new GADInterstitial each time. A GADInterstitial will only show one request in its
@@ -280,7 +305,7 @@ NSArray *coloursArray;
     // Main Scroll Views Initialize
     layersDic = [[NSMutableDictionary alloc] init];
 	templateArray = [[NSMutableArray alloc] init];
-	imgPickerFlag = 1;
+	imgPickerFlag = IMAGEPICKER_TEMPLATE;
     selectedAddMoreLayerTab = -1;
     
     // Current selected layer.
@@ -469,6 +494,14 @@ NSArray *coloursArray;
     });
 }
 
+- (void)viewDidUnload
+{
+    [self setMainImage:nil];
+    [self setTempDrawImage:nil];
+    [super viewDidUnload];
+    // Release any retained subviews of the main view.
+}
+
 #pragma mark -  View DisAppear Methods
 
 /*
@@ -591,7 +624,7 @@ NSArray *coloursArray;
     
     // Load sizes xib asynchronously
     dispatch_async( dispatch_get_main_queue(), ^{
-        imgPickerFlag =1;
+        imgPickerFlag = IMAGEPICKER_TEMPLATE;
 
         [templateArray removeAllObjects];
 
@@ -1837,7 +1870,7 @@ NSArray *coloursArray;
     
     nbuGallary.videoAllow = videoAllow;
     
-    if ( imgPickerFlag == 2 ) {
+    if ( imgPickerFlag == IMAGEPICKER_PHOTO ) {
         NSDictionary *dict = [flyer getLayerFromMaster:currentLayer];
         nbuGallary.desiredImageSize = CGSizeMake( [[dict valueForKey:@"width"] floatValue],
                                                 [[dict valueForKey:@"height"] floatValue]);
@@ -1864,7 +1897,7 @@ NSArray *coloursArray;
         dispatch_async( dispatch_get_main_queue(), ^{
             
             // Do any UI operation here (render layer).
-            if (weakSelf.imgPickerFlag == 2) {
+            if (weakSelf.imgPickerFlag == IMAGEPICKER_PHOTO) {
                 
                 NSString *imgPath = [weakSelf getImagePathforPhoto:img];
                 
@@ -1876,7 +1909,7 @@ NSArray *coloursArray;
                 
                 [weakSelf.flyimgView layerStoppedEditing:weakSelf.currentLayer];
                 
-                weakSelf.imgPickerFlag = 1;
+                weakSelf.imgPickerFlag = IMAGEPICKER_TEMPLATE;
                 
                 //Render Flyer
                 //[self renderFlyer];
@@ -1971,7 +2004,7 @@ NSArray *coloursArray;
     
     nbuCamera.videoAllow = forVideo;
     
-    if ( imgPickerFlag == 2 ) {
+    if ( imgPickerFlag == IMAGEPICKER_PHOTO ) {
         NSDictionary *dict = [flyer getLayerFromMaster:currentLayer];
         nbuCamera.desiredImageSize = CGSizeMake( [[dict valueForKey:@"width"] floatValue],
                                                  [[dict valueForKey:@"height"] floatValue]);
@@ -1998,7 +2031,7 @@ NSArray *coloursArray;
     
         dispatch_async( dispatch_get_main_queue(), ^{
 
-            if ( imgPickerFlag == 2 ) {
+            if ( imgPickerFlag == IMAGEPICKER_PHOTO ) {
                 NSString *imgPath = [weakSelf getImagePathforPhoto:img];
                 
                 // Set Image to dictionary
@@ -2009,7 +2042,7 @@ NSArray *coloursArray;
                 
                 [weakSelf.flyimgView layerStoppedEditing:weakSelf.currentLayer];
                 
-                weakSelf.imgPickerFlag = 1;
+                weakSelf.imgPickerFlag = IMAGEPICKER_TEMPLATE;
                 
             } else {
             
@@ -2248,6 +2281,13 @@ NSArray *coloursArray;
     if(alertView == deleteAlert && buttonIndex == 1) {
         
         editButtonGlobal.uid = currentLayer;
+        NSString *type = [flyer getLayerType:currentLayer];
+        if ( [type isEqualToString:FLYER_LAYER_DRAWING] ){
+            self.mainImage.image = nil;
+            self.tempDrawImage.image = nil;
+            self.tempDrawImage.userInteractionEnabled = NO; //disable drawing interaction
+        }
+        
         [self deleteLayer:editButtonGlobal overrided:nil];
         [Flurry logEvent:@"Layer Deleted"];
         
@@ -2508,6 +2548,8 @@ NSArray *coloursArray;
             
             NSString *flyerImg = [flyer getImageName:key];
             NSString *flyertext = [flyer getText:key];
+            
+            NSLog(@"flyerImg: %@,  flyertext: %@",flyerImg,flyertext);
             
             if ([flyerImg isEqualToString:@""]) {
                 [flyer deleteLayer:key];
@@ -2983,7 +3025,71 @@ NSArray *coloursArray;
         
         [self addDonetoRightBarBotton];
     }
+    else if ( [type isEqualToString:FLYER_LAYER_DRAWING] ) {
+        [self editDrawingLayer];
+    }
     
+}
+
+-(void)editDrawingLayer{
+    // work for tempDrawImageLayer -----------------------------------------------
+    //create/add layer with drawing type
+    NSString *tempDrawImageLayer = [flyer addDrawingImage:NO];
+    
+    [flyer setImageFrame:tempDrawImageLayer:CGRectMake(0,0,DRAWING_LAYER_W,DRAWING_LAYER_H)];
+    
+    NSMutableDictionary *dic2 = [flyer getLayerFromMaster:tempDrawImageLayer];
+    [self.flyimgView renderLayer:tempDrawImageLayer layerDictionary:dic2];
+    
+    
+    //here we Update ImageView
+    UIImageView *img2 = [self.flyimgView.layers objectForKey:tempDrawImageLayer];
+    
+    self.tempDrawImage = img2;
+    //add in subview
+    [self.flyimgView addSubview:self.tempDrawImage];
+    
+    self.tempDrawImage.userInteractionEnabled = YES; // CAN receive touches
+    
+    
+    // work for main layer -----------------------------------------------
+    //currentLayer = [flyer addDrawingImage:YES];
+    [flyer setImageFrame:currentLayer:CGRectMake(0,0,DRAWING_LAYER_W,DRAWING_LAYER_H)];
+    
+    NSMutableDictionary *dic = [flyer getLayerFromMaster:currentLayer];
+    //[self.flyimgView renderLayer:currentLayer layerDictionary:dic];
+    
+    //here we Update ImageView
+    UIImageView *img = [self.flyimgView.layers objectForKey:currentLayer];
+    [self configureDrawingView:img ImageViewDictionary:dic];
+    
+    // Here We Write Code for Image
+    self.mainImage = img;
+    //add in subview
+    [self.flyimgView addSubview:self.mainImage];
+    
+    // Hook event of Gesture for moving layers -----------------------------------------------
+    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(drawingLayerMoved:)];
+    [self.tempDrawImage addGestureRecognizer:panGesture];
+    
+/*
+//Here we Highlight The ImageView
+[self.flyimgView layerIsBeingEdited:currentLayer];
+
+//HERE WE SET ANIMATION
+[UIView animateWithDuration:0.4f
+                 animations:^{
+                     //Create ScrollView
+                     //[self addFlyerIconInSubView];
+                 }
+                 completion:^(BOOL finished){
+                     [layerScrollView flashScrollIndicators];
+                 }];
+
+*/
+
+//Add right Bar button
+[self addDonetoRightBarBotton];
 }
 
 /*
@@ -3317,24 +3423,12 @@ NSArray *coloursArray;
     [widthTabButton setSelected:NO];
     [heightTabButton setSelected:NO];
 
-
+    
+    //disable drawing interaction
+    self.tempDrawImage.userInteractionEnabled = NO;
     
     //Empty Layer Delete
-    if (currentLayer != nil && ![currentLayer isEqualToString:@""]) {
-        
-        NSString *flyerImg = [flyer getImageName:currentLayer];
-        NSString *flyertext = [flyer getText:currentLayer];
-        
-        if ([flyerImg isEqualToString:@""]) {
-            [flyer deleteLayer:currentLayer];
-            [self.flyimgView deleteLayer:currentLayer];
-        }
-        
-        if ([flyertext isEqualToString:@""]) {
-            [flyer deleteLayer:currentLayer];
-            [self.flyimgView deleteLayer:currentLayer];
-        }
-    }
+    [self deSelectPreviousLayer];
     
     //Save OnBack
     //Here we remove Borders from layer if user touch any layer
@@ -3356,7 +3450,6 @@ NSArray *coloursArray;
     [self addAllLayersIntoScrollView];
     [UIView commitAnimations];
     //End Animation
-    
     
     currentLayer = @"";
    
@@ -4245,13 +4338,13 @@ NSArray *coloursArray;
     
     if( selectedButton == cameraTabButton )
 	{
-        imgPickerFlag = 2;
+        imgPickerFlag = IMAGEPICKER_PHOTO;
         [self openCustomCamera:NO];
 
     }
     else if( selectedButton == photoTabButton )
 	{
-        imgPickerFlag =2;
+        imgPickerFlag = IMAGEPICKER_PHOTO;
         
         //HERE WE CHECK USER DID ALLOWED TO ACESS PHOTO library
         if ([ALAssetsLibrary authorizationStatus] == ALAuthorizationStatusRestricted || [ALAssetsLibrary authorizationStatus] == ALAuthorizationStatusDenied) {
@@ -4312,6 +4405,7 @@ NSArray *coloursArray;
     [addArtsTabButton setSelected:NO];
     [addVideoTabButton setSelected:NO];
     [backgroundTabButton setSelected:NO];
+    [drawingMenueButton setSelected:NO];
 
 
 	if(selectedButton == addMoreFontTabButton)
@@ -4352,7 +4446,7 @@ NSArray *coloursArray;
         _videoLabel.alpha = 0;
 	    
         [self choosePhoto];
-		imgPickerFlag = 2;
+		imgPickerFlag = IMAGEPICKER_PHOTO;
         [addMorePhotoTabButton setSelected:YES];
         
 
@@ -4394,7 +4488,7 @@ NSArray *coloursArray;
         //Add ContextView
         [self addBottomTabs:libArts];
         
-        // SET BOTTOM BAR
+        // FORCE CLICK ON FIRST BUTTON OF addBottomTab, then it will auto select SET BOTTOM BAR
         [self setArtsTabAction:clipArtTabButton];
         
 	}
@@ -4447,6 +4541,82 @@ NSArray *coloursArray;
         [self setlibBackgroundTabAction:backtemplates];
 
     }
+    else if( selectedButton == drawingMenueButton)
+    {
+        [drawingMenueButton setSelected:YES];
+        
+        if ([currentLayer isEqualToString:@""]) {
+
+            // work for tempDrawImageLayer -----------------------------------------------
+            //create/add layer with drawing type
+            NSString *tempDrawImageLayer = [flyer addDrawingImage:NO];
+            
+            [flyer setImageFrame:tempDrawImageLayer:CGRectMake(0,0,DRAWING_LAYER_W,DRAWING_LAYER_H)];
+            
+            NSMutableDictionary *dic2 = [flyer getLayerFromMaster:tempDrawImageLayer];
+            [self.flyimgView renderLayer:tempDrawImageLayer layerDictionary:dic2];
+            
+            
+            //here we Update ImageView
+            UIImageView *img2 = [self.flyimgView.layers objectForKey:tempDrawImageLayer];
+            
+            self.tempDrawImage = img2;
+            //add in subview
+            [self.flyimgView addSubview:self.tempDrawImage];
+            
+            self.tempDrawImage.userInteractionEnabled = YES; // CAN receive touches
+           
+            
+            // work for main layer -----------------------------------------------
+            currentLayer = [flyer addDrawingImage:YES];
+            [flyer setImageFrame:currentLayer:CGRectMake(0,0,DRAWING_LAYER_W,DRAWING_LAYER_H)];
+            
+            NSMutableDictionary *dic = [flyer getLayerFromMaster:currentLayer];
+            [self.flyimgView renderLayer:currentLayer layerDictionary:dic];
+            
+            //here we Update ImageView
+            UIImageView *img = [self.flyimgView.layers objectForKey:currentLayer];
+            [self configureDrawingView:img ImageViewDictionary:dic];
+            
+            // Here We Write Code for Image
+            self.mainImage = img;
+            //add in subview
+            [self.flyimgView addSubview:self.mainImage];
+            
+            // Hook event of Gesture for moving layers -----------------------------------------------
+            UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(drawingLayerMoved:)];
+            [self.tempDrawImage addGestureRecognizer:panGesture];
+            
+        }
+        //Here we Highlight The ImageView
+        [self.flyimgView layerIsBeingEdited:currentLayer];
+
+        //HERE WE SET ANIMATION
+        [UIView animateWithDuration:0.4f
+                         animations:^{
+                             //Create ScrollView
+                             //[self addFlyerIconInSubView];
+                         }
+                         completion:^(BOOL finished){
+                             [layerScrollView flashScrollIndicators];
+                         }];
+        
+        
+
+        //Add right Bar button
+        [self addDonetoRightBarBotton];
+        
+        //Add Context
+        [self addScrollView:layerScrollView];
+        
+        //Add ContextView
+        [self addBottomTabs:libDrawing];
+        
+        // FORCE CLICK ON FIRST BUTTON OF addBottomTab, then it will auto select SET BOTTOM BAR
+        //[self setArtsTabAction:clipArtTabButton];
+        
+	}
+
 }
 
 
@@ -4801,4 +4971,94 @@ NSArray *coloursArray;
 }
 
 
+#pragma mark - Drawing Methods
+
+#pragma mark - Move start on type=FLYER_LAYER_DRAWING (FLYER_LAYER_DRAWING=DrawingImgLayer)
+
+/**
+ * This method does drag and drop functionality on the layer.
+ */
+- (void)drawingLayerMoved:(UIPanGestureRecognizer *)recognizer {
+    
+    if (recognizer.state == UIGestureRecognizerStateBegan) {
+        mouseSwiped = NO;
+        lastPoint = [recognizer locationInView:self.mainImage];
+        
+    } else if (recognizer.state == UIGestureRecognizerStateChanged) {
+        //MOVE
+        mouseSwiped = YES;
+        CGPoint currentPoint = [recognizer locationInView:self.mainImage];
+        
+        UIGraphicsBeginImageContext(self.mainImage.frame.size);
+        [self.tempDrawImage.image drawInRect:CGRectMake(0, 0, self.mainImage.frame.size.width, self.mainImage.frame.size.height)];
+        CGContextMoveToPoint(UIGraphicsGetCurrentContext(), lastPoint.x, lastPoint.y);
+        CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), currentPoint.x, currentPoint.y);
+        CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound);
+        CGContextSetLineWidth(UIGraphicsGetCurrentContext(), brush );
+        CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), red, green, blue, 1.0);
+        CGContextSetBlendMode(UIGraphicsGetCurrentContext(),kCGBlendModeNormal);
+        
+        CGContextStrokePath(UIGraphicsGetCurrentContext());
+        self.tempDrawImage.image = UIGraphicsGetImageFromCurrentImageContext();
+        [self.tempDrawImage setAlpha:opacity];
+        UIGraphicsEndImageContext();
+        
+        lastPoint = currentPoint;
+        
+    } else if (recognizer.state == UIGestureRecognizerStateEnded) {
+        //ENDED
+        UIGraphicsBeginImageContext(self.mainImage.frame.size);
+        [self.mainImage.image drawInRect:CGRectMake(0, 0, self.mainImage.frame.size.width, self.mainImage.frame.size.height) blendMode:kCGBlendModeNormal alpha:1.0];
+        [self.tempDrawImage.image drawInRect:CGRectMake(0, 0, self.tempDrawImage.frame.size.width, self.tempDrawImage.frame.size.height) blendMode:kCGBlendModeNormal alpha:opacity];
+        
+        self.mainImage.image = UIGraphicsGetImageFromCurrentImageContext();
+        self.tempDrawImage.image = nil;
+        UIGraphicsEndImageContext();
+        
+        // Save drawing layer and flyer
+        
+        NSString *imgPath = [self getImagePathforPhoto:self.mainImage.image];
+        
+        //Set Image to dictionary
+        [self.flyer setImagePath:self.currentLayer ImgPath:imgPath];
+        
+        //Here we Create ImageView Layer
+        [self.flyimgView renderLayer:self.currentLayer layerDictionary:[self.flyer getLayerFromMaster:self.currentLayer]];
+        
+        //[self.flyimgView layerStoppedEditing:self.currentLayer];
+        
+        
+        // End of save flyer and drawing layer
+
+        
+    }
+    
+}
+
+
+/*
+ * Here we set Properties of UIImageView
+ */
+-(void)configureDrawingView :(UIImageView *)imgView ImageViewDictionary:(NSMutableDictionary *)detail {
+    
+    //SetFrame
+    [imgView setFrame:CGRectMake([[detail valueForKey:@"x"] floatValue], [[detail valueForKey:@"y"] floatValue], [[detail valueForKey:@"width"] floatValue], [[detail valueForKey:@"height"] floatValue])];
+    
+    imgView.transform = CGAffineTransformMakeRotation([[detail valueForKey:@"rotation"] floatValue]);
+    
+    //Set Image
+    if ([detail objectForKey:@"image"] != nil) {
+        
+        if ( ![[detail valueForKey:@"image"] isEqualToString:@""]) {
+            NSError *error = nil;
+            NSData *imageData = [[NSData alloc] initWithContentsOfFile:[detail valueForKey:@"image"]
+                                                               options:NSDataReadingMappedIfSafe
+                                                                 error:&error];
+            //NSData *imageData = [[NSData alloc ]initWithContentsOfMappedFile:[detail valueForKey:@"image"]];
+            UIImage *currentImage = [UIImage imageWithData:imageData];
+            [imgView setImage:currentImage];
+        }
+    }
+    
+}
 @end

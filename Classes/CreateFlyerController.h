@@ -33,6 +33,14 @@
 #import "GADInterstitialDelegate.h"
 #import "GADBannerView.h"
 
+//Drawing required files
+//#import "DrawingView.h"
+
+//DrawingClass required files
+#import "SettingsViewController.h"
+
+
+
 @class FlyerlySingleton, Flyer, FlyerImageView, ShareViewController, SigninController,InAppViewController,PrintViewController;
 @interface CreateFlyerController :ParentViewController<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, FlyerImageViewDelegate,UIGestureRecognizerDelegate,InAppPurchasePanelButtonProtocol, UserPurchasesDelegate, GADInterstitialDelegate, GADBannerViewDelegate>
 
@@ -69,6 +77,20 @@
     BOOL *isVideoReadyForShare;
     BOOL *panelWillOpen;
     float videoDuration;
+    
+    //Drawing required vars
+    //DrawingView *drawingView;
+    //UIImageView *displayView;
+
+    //DrawingClass required vars
+    CGPoint lastPoint;
+    CGFloat red;
+    CGFloat green;
+    CGFloat blue;
+    CGFloat brush;
+    CGFloat opacity;
+    BOOL mouseSwiped;
+    
     
 }
 
@@ -117,8 +139,7 @@
 @property(nonatomic, strong) IBOutlet UIView *libEmpty;
 @property(nonatomic, strong) IBOutlet UIView *playerView;
 @property(nonatomic, strong) IBOutlet UIView *playerToolBar;
-
-
+@property(nonatomic, strong) IBOutlet UIView *libDrawing;
 
 //--------
 @property(nonatomic, strong) IBOutlet UIView *tempelateView;
@@ -130,6 +151,8 @@
 @property (nonatomic, strong)IBOutlet UIButton *addVideoTabButton;
 @property (nonatomic, strong)IBOutlet UIButton *addArtsTabButton;
 @property (nonatomic, strong)IBOutlet UIButton *backgroundTabButton;
+@property (nonatomic, strong)IBOutlet UIButton *drawingMenueButton;
+
 
 //These are LibBackground
 @property (nonatomic, strong)IBOutlet UIButton *backtemplates;
@@ -212,5 +235,22 @@
 -(IBAction)slide:(id)sender;
 
 -(IBAction)dissmisBannerAdd:(id)sender;
+
+
+
+//Drawing required vars
+//@property (strong,nonatomic) IBOutlet   DrawingView *drawingView;
+//@property (strong,nonatomic) IBOutlet   UIImageView *displayView;
+
+//DrawingClass required vars
+@property (weak, nonatomic) IBOutlet UIImageView *mainImage;
+@property (weak, nonatomic) IBOutlet UIImageView *tempDrawImage;
+
+//DrawingClass required functions
+- (IBAction)pencilPressed:(id)sender;
+- (IBAction)eraserPressed:(id)sender;
+- (IBAction)reset:(id)sender;
+- (IBAction)settings:(id)sender;
+- (IBAction)save:(id)sender;
 
 @end

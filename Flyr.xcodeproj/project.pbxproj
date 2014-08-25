@@ -257,6 +257,8 @@
 		2099498D196E78DB0081B1BD /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2099498C196E78DB0081B1BD /* CoreTelephony.framework */; };
 		209BCFA81975433D006EC811 /* PrintViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 209BCFA61975433D006EC811 /* PrintViewController.m */; };
 		209BCFA91975433D006EC811 /* PrintViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 209BCFA71975433D006EC811 /* PrintViewController.xib */; };
+		209F8E4119A47A4E00323559 /* DrawingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 209F8E4019A47A4E00323559 /* DrawingViewController.m */; };
+		209F8E4419A47B2200323559 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 209F8E4319A47B2200323559 /* SettingsViewController.m */; };
 		20A1CD6318EEF63200484391 /* SubNBUCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 20A1CD6218EEF63200484391 /* SubNBUCamera.m */; };
 		20A1CD6518EF0B0400484391 /* ShareVideoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20A1CD6418EF0B0400484391 /* ShareVideoViewController.xib */; };
 		20A1CD6F18EF19B400484391 /* YouTubeSubClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 20A1CD6E18EF19B400484391 /* YouTubeSubClass.m */; };
@@ -1461,6 +1463,10 @@
 		209BCFA51975433D006EC811 /* PrintViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrintViewController.h; sourceTree = "<group>"; };
 		209BCFA61975433D006EC811 /* PrintViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrintViewController.m; sourceTree = "<group>"; };
 		209BCFA71975433D006EC811 /* PrintViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrintViewController.xib; sourceTree = "<group>"; };
+		209F8E3F19A47A4E00323559 /* DrawingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DrawingViewController.h; path = DrawingClass/DrawingViewController.h; sourceTree = "<group>"; };
+		209F8E4019A47A4E00323559 /* DrawingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DrawingViewController.m; path = DrawingClass/DrawingViewController.m; sourceTree = "<group>"; };
+		209F8E4219A47B2200323559 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		209F8E4319A47B2200323559 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		20A1CD6118EEF63200484391 /* SubNBUCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubNBUCamera.h; sourceTree = "<group>"; };
 		20A1CD6218EEF63200484391 /* SubNBUCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubNBUCamera.m; sourceTree = "<group>"; };
 		20A1CD6418EF0B0400484391 /* ShareVideoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareVideoViewController.xib; sourceTree = "<group>"; };
@@ -2546,6 +2552,7 @@
 		080E96DDFE201D6D7F000001 /* FlyerlyClasses */ = {
 			isa = PBXGroup;
 			children = (
+				20F3597C1888DC8A001376B6 /* CreateFlyer */,
 				1D3623240D0F684500981E51 /* FlyrAppDelegate.h */,
 				1D3623250D0F684500981E51 /* FlyrAppDelegate.m */,
 				2026992818CED69600945218 /* Purchase */,
@@ -2557,7 +2564,6 @@
 				2013528B188C5FC900822073 /* LaunchScreen */,
 				20F359741888D5B9001376B6 /* LoginControllers */,
 				20F3597B1888DBEE001376B6 /* FlyerlyMainScreen */,
-				20F3597C1888DC8A001376B6 /* CreateFlyer */,
 				209BCFAA1975434C006EC811 /* Print Screen */,
 				2002C8981888CF3F005B18C9 /* ShareScreen */,
 				20F359781888D92E001376B6 /* InviteScreen */,
@@ -3336,6 +3342,17 @@
 			name = "Print Screen";
 			sourceTree = "<group>";
 		};
+		209F8E3E19A479B800323559 /* DrawingClass */ = {
+			isa = PBXGroup;
+			children = (
+				209F8E4219A47B2200323559 /* SettingsViewController.h */,
+				209F8E4319A47B2200323559 /* SettingsViewController.m */,
+				209F8E3F19A47A4E00323559 /* DrawingViewController.h */,
+				209F8E4019A47A4E00323559 /* DrawingViewController.m */,
+			);
+			name = DrawingClass;
+			sourceTree = "<group>";
+		};
 		20A38E7419825208007C279F /* Lob */ = {
 			isa = PBXGroup;
 			children = (
@@ -3638,6 +3655,7 @@
 		20F3597C1888DC8A001376B6 /* CreateFlyer */ = {
 			isa = PBXGroup;
 			children = (
+				209F8E3E19A479B800323559 /* DrawingClass */,
 				2405D3441990ABD8007F2596 /* BuyImagesController */,
 				2075A9921899EAB600F410FB /* FlyerlyCustomClasses */,
 				2046355F1895E47100A94C42 /* Models */,
@@ -5828,6 +5846,7 @@
 				202C4828187D7A6B00FE0975 /* CJSONScanner.m in Sources */,
 				202C47FD187D6E4B00FE0975 /* BitlyTextView.m in Sources */,
 				2087B6C017C73B40007A6A90 /* ResetPWViewController.m in Sources */,
+				209F8E4119A47A4E00323559 /* DrawingViewController.m in Sources */,
 				24803523192F3207009403F7 /* CameraViewController.m in Sources */,
 				20A38EA21982531F007C279F /* LobAddressModel.m in Sources */,
 				202C4802187D6E4B00FE0975 /* BitlyTwitterOAuthViewController.m in Sources */,
@@ -5846,6 +5865,7 @@
 				49997FF717DF786400CF1038 /* ParentViewController.m in Sources */,
 				2405D3481990AC4B007F2596 /* AssetGroupViewControllerWithSearchFeild.m in Sources */,
 				20A38EAC1982531F007C279F /* LobStateModel.m in Sources */,
+				209F8E4419A47B2200323559 /* SettingsViewController.m in Sources */,
 				20A38EC819825387007C279F /* AbstractBlockRequest.m in Sources */,
 				2478E5ED192C8C0A0081B31B /* FreeFeatureCell.m in Sources */,
 				4986857018B4FFC7002113E4 /* LibraryViewController.m in Sources */,

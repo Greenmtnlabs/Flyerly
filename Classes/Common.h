@@ -260,3 +260,8 @@ nil]
 #define FLYER_LAYER_IMAGE     @"1"
 #define FLYER_LAYER_CLIP_ART  @"2"
 #define FLYER_LAYER_EMOTICON  @"3"
+#define FLYER_LAYER_DRAWING  @"DrawingImgLayer"
+#define DRAWING_LAYER_H  612
+#define DRAWING_LAYER_W  612
+
+
