@@ -48,10 +48,10 @@
     PrintViewController *printViewController;
     InAppViewController *inappviewcontroller;
     UIActivityIndicatorView *uiBusy;
-
+    
     UIScrollView *layerScrollView;
     NSInteger imgPickerFlag;
-		
+    
 	NSMutableArray *templateArray;
 	NSMutableArray *iconArray;
 	NSMutableArray *symbolArray;
@@ -62,7 +62,7 @@
     
     NSInteger widthValue;
 	NSInteger heightValue;
-
+    
     LayerTileButton *editButtonGlobal;
     UIBarButtonItem *rightUndoBarButton;
     UIButton *shareButton;
@@ -81,7 +81,7 @@
     //Drawing required vars
     //DrawingView *drawingView;
     //UIImageView *displayView;
-
+    
     //DrawingClass required vars
     CGPoint lastPoint;
     CGFloat red;
@@ -167,6 +167,11 @@
 @property (nonatomic, strong)IBOutlet UIButton *fontBorderTabButton;
 @property (nonatomic, strong)IBOutlet UIButton *fontEditButton;
 
+//These are drawing tab buttons
+@property (nonatomic, strong)IBOutlet UIButton *drawingColorTabButton;
+@property (nonatomic, strong)IBOutlet UIButton *drawingPatternTabButton;
+@property (nonatomic, strong)IBOutlet UIButton *drawingSizeTabButton;
+
 //These are Art Tab Buttons
 @property (nonatomic, strong)IBOutlet UIButton *clipArtTabButton;
 @property (nonatomic, strong)IBOutlet UIButton *emoticonsTabButton;
@@ -224,6 +229,7 @@
 -(IBAction)setAddMoreLayerTabAction:(id)sender;
 -(IBAction)setlibBackgroundTabAction:(id)sender;
 -(IBAction)setStyleTabAction:(id) sender;
+-(IBAction)drawingSetStyleTabAction:(id) sender;
 -(IBAction)selectBorder:(id)sender;
 -(IBAction)selectSize:(id)sender;
 -(IBAction)selectColor:(id)sender;

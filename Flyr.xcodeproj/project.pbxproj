@@ -246,6 +246,8 @@
 		20920015184F40330034C4F6 /* InviteFriendsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 20920013184F40330034C4F6 /* InviteFriendsCell.m */; };
 		20920016184F40330034C4F6 /* InviteFriendsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20920014184F40330034C4F6 /* InviteFriendsCell.xib */; };
 		2092FFCC184E00BF0034C4F6 /* flyerlylogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2092FFCA184E00BF0034C4F6 /* flyerlylogo@2x.png */; };
+		20930D7B19AB5F22004B9F93 /* drawing_tab_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20930D7919AB5F22004B9F93 /* drawing_tab_selected@2x.png */; };
+		20930D7C19AB5F22004B9F93 /* drawing_tab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20930D7A19AB5F22004B9F93 /* drawing_tab@2x.png */; };
 		209460A31977AD1A0050B5DE /* InviteForPrint.m in Sources */ = {isa = PBXBuildFile; fileRef = 209460A11977AD1A0050B5DE /* InviteForPrint.m */; };
 		209460A41977AD1A0050B5DE /* InviteForPrint.xib in Resources */ = {isa = PBXBuildFile; fileRef = 209460A21977AD1A0050B5DE /* InviteForPrint.xib */; };
 		2095C90E18C5E89900E244A8 /* FlyerlyTwitterFriends.m in Sources */ = {isa = PBXBuildFile; fileRef = 2095C90D18C5E89900E244A8 /* FlyerlyTwitterFriends.m */; };
@@ -1419,6 +1421,8 @@
 		20920013184F40330034C4F6 /* InviteFriendsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteFriendsCell.m; sourceTree = "<group>"; };
 		20920014184F40330034C4F6 /* InviteFriendsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteFriendsCell.xib; sourceTree = "<group>"; };
 		2092FFCA184E00BF0034C4F6 /* flyerlylogo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flyerlylogo@2x.png"; sourceTree = "<group>"; };
+		20930D7919AB5F22004B9F93 /* drawing_tab_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "drawing_tab_selected@2x.png"; sourceTree = "<group>"; };
+		20930D7A19AB5F22004B9F93 /* drawing_tab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "drawing_tab@2x.png"; sourceTree = "<group>"; };
 		209460A01977AD1A0050B5DE /* InviteForPrint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteForPrint.h; sourceTree = "<group>"; };
 		209460A11977AD1A0050B5DE /* InviteForPrint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteForPrint.m; sourceTree = "<group>"; };
 		209460A21977AD1A0050B5DE /* InviteForPrint.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteForPrint.xib; sourceTree = "<group>"; };
@@ -2597,6 +2601,8 @@
 		0DF3A361108DF47400D6C887 /* ImageLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				20930D7919AB5F22004B9F93 /* drawing_tab_selected@2x.png */,
+				20930D7A19AB5F22004B9F93 /* drawing_tab@2x.png */,
 				20E4638C197E688600473921 /* pdf_Bg.png */,
 				20F1FB07197690D500D40E60 /* printer_sharing_selected.png */,
 				20F1FB08197690D500D40E60 /* printer_sharing.png */,
@@ -4888,6 +4894,7 @@
 				30D58D3410FB1BF800E0C7E8 /* icon57.jpg in Resources */,
 				30D58D3510FB1BF800E0C7E8 /* icon58.jpg in Resources */,
 				30D58D3610FB1BF800E0C7E8 /* icon59.jpg in Resources */,
+				20930D7B19AB5F22004B9F93 /* drawing_tab_selected@2x.png in Resources */,
 				242184BC194B4AEC00FDDA97 /* emoticon174@2x.png in Resources */,
 				30D58D3710FB1BF800E0C7E8 /* icon6.jpg in Resources */,
 				24218469194B4AEC00FDDA97 /* bucket-icon.png in Resources */,
@@ -5519,6 +5526,7 @@
 				242184E2194B4AEC00FDDA97 /* kayak-slalom-icon.png in Resources */,
 				249F1FAB193F55D50072835E /* checkgray@2x.png in Resources */,
 				202C638C17EA06E800CB9A75 /* ricon26.png in Resources */,
+				20930D7C19AB5F22004B9F93 /* drawing_tab@2x.png in Resources */,
 				249F1F9F193F55D50072835E /* back_button@2x.png in Resources */,
 				242184C7194B4AEC00FDDA97 /* equestrian-eventing-icon.png in Resources */,
 				24218465194B4AEC00FDDA97 /* beach-volley-icon.png in Resources */,

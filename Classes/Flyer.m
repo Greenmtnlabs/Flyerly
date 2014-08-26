@@ -27,6 +27,8 @@ NSString * const CLIPARTyPOS = @"5.000000";
 NSString * const CLIPARTWIDTH = @"160.000000";
 NSString * const CLIPARTHEIGHT = @"100.000000";
 
+NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
+
 @implementation Flyer
 
 @synthesize masterLayers;
@@ -811,6 +813,14 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     imageDetailDictionary[@"y"] = @"0";
     imageDetailDictionary[@"width"] = @"612"; //DRAWING_LAYER_W
     imageDetailDictionary[@"height"] = @"612"; //DRAWING_LAYER_H
+
+
+    imageDetailDictionary[@"textcolor"] = LINECOLOR;
+    imageDetailDictionary[@"line_type"] = @"1"; //Line style( 1=plane, 2=doted, 3=dashed )
+    imageDetailDictionary[@"brush"] = @"10.0"; //thikness of brush
+    imageDetailDictionary[@"opacity"] = @"1.0"; //opacity of line
+    
+    
     
     [masterLayers setValue:imageDetailDictionary forKey:uniqueId];
     return uniqueId;
@@ -1247,8 +1257,13 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
         [labelToStore.textColor getWhite:&wht alpha:&alpha];
     }
     
-    [textDetailDictionary setValue:[NSString stringWithFormat:@"%f, %f, %f", red, green, blue] forKey:@"textcolor"];
-    [textDetailDictionary setValue:[NSString stringWithFormat:@"%f, %f", wht, alpha] forKey:@"textWhitecolor"];
+    NSString *type = [textDetailDictionary objectForKey:@"type"];
+    if ( type != nil && [type isEqual:FLYER_LAYER_DRAWING]) {
+        [textDetailDictionary setValue:[NSString stringWithFormat:@"%f, %f, %f", red, green, blue] forKey:@"textcolor"];
+    } else{
+        [textDetailDictionary setValue:[NSString stringWithFormat:@"%f, %f, %f", red, green, blue] forKey:@"textcolor"];
+        [textDetailDictionary setValue:[NSString stringWithFormat:@"%f, %f", wht, alpha] forKey:@"textWhitecolor"];
+    }
     
     // Set to Master Dictionary
     [masterLayers setValue:textDetailDictionary forKey:uid];
