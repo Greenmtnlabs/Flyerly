@@ -23,6 +23,7 @@ id jsonObject;
 NSDictionary *tableData;
 NSMutableArray *imagesPreview;
 NSMutableArray *imagesIDs;
+NSString *imageID_;
 NSMutableArray * thumbnailViews;
 NSMutableArray *productArray;
 NSArray *requestedProducts;
@@ -386,22 +387,6 @@ NSString *imageToBuy;
         
         NSLog(@"Product purchased");
         
-        NSString *strWithOutDot = [pid stringByReplacingOccurrencesOfString:@"." withString:@""];
-        
-        if(![[NSUserDefaults standardUserDefaults] stringForKey:@"InAppPurchases"]){
-            
-            NSMutableDictionary *userPurchase =[[NSMutableDictionary alloc] initWithDictionary:[[NSUserDefaults standardUserDefaults]valueForKey:@"InAppPurchases"]];
-            
-            [userPurchase setValue:@"1" forKey:strWithOutDot];
-            [[NSUserDefaults standardUserDefaults]setValue:userPurchase forKey:@"InAppPurchases"];
-            
-        }else {
-            NSMutableDictionary *userPurchase =[[NSMutableDictionary alloc] init];
-            [userPurchase setValue:@"1" forKey:strWithOutDot];
-            [[NSUserDefaults standardUserDefaults]setValue:userPurchase forKey:@"InAppPurchases"];
-            
-        }
-        
         [self productSuccesfullyPurchased];
     
     } failure:^(SKPaymentTransaction *transaction, NSError *error) {
@@ -469,6 +454,8 @@ NSString *imageToBuy;
 - ( void )productSuccesfullyPurchased{
     
     NSLog(@"succesfully purchased image");
+    //Download request for purchsed image
+    [self apiRequestForPurchasingImage:imageID_];
     
 }
 
@@ -478,10 +465,10 @@ NSString *imageToBuy;
     //Checking if the user is valid or anonymus
     if ([[PFUser currentUser] sessionToken].length != 0) {
         
-        //[self purchaseProduct];
+        [self purchaseProduct];
         NSLog(@"%ld",(long)sender.tag);
-        NSString *id_ = [imagesIDs objectAtIndex:sender.tag];
-        [self apiRequestForPurchasingImage:id_];
+        imageID_ = [imagesIDs objectAtIndex:sender.tag];
+        
         
     }else {
         UIAlertView *someError = [[UIAlertView alloc] initWithTitle: @"Please sign in first"
