@@ -163,6 +163,9 @@ nil]
 
 #define SIZE_ARRAY [NSArray arrayWithObjects: @"10", @"11" ,@"12",@"14",@"16",@"18",@"20",@"22",@"24",  @"26", @"28", @"30",@"36",@"42",@"48",@"52",@"60",@"72",@"74",@"80",@"90",nil]
 
+#define DRAWING_PATTERNS_ARRAY [NSArray arrayWithObjects: DRAWING_PLANE_LINE, DRAWING_DASHED_LINE ,DRAWING_DOTTED_LINE,nil]
+
+
 #define WIDTH_ARRAY [NSArray arrayWithObjects: @"50", @"75" ,@"100",@"120",@"140",@"160",@"175",@"200",@"220",@"240",@"260",nil]
 
 #define HEIGHT_ARRAY [NSArray arrayWithObjects: @"50", @"75" ,@"100",@"120",@"140",@"160",@"175",@"200",@"220",@"240",@"260",@"300",@"320",nil]
@@ -176,6 +179,7 @@ nil]
 #define LAYER_ATTRIBUTE_BORDER @"Border"
 #define LAYER_ATTRIBUTE_IMAGE @"Image"
 #define LAYER_ATTRIBUTE_FONT @"Font"
+#define LAYER_ATTRIBUTE_DRAWING_PATTERN @"DRAWING_PATTERN"
 
 
 #define FlickrAPIKey @"b2ea05c41f53e1dc4d6e6edee9e6ee06"
@@ -263,5 +267,7 @@ nil]
 #define FLYER_LAYER_DRAWING  @"DrawingImgLayer"
 #define DRAWING_LAYER_H  612
 #define DRAWING_LAYER_W  612
-
+#define DRAWING_PLANE_LINE @"line_plane"
+#define DRAWING_DASHED_LINE @"line_dashed"
+#define DRAWING_DOTTED_LINE @"line_dotted"
 

@@ -88,6 +88,7 @@
     CGFloat green;
     CGFloat blue;
     CGFloat brush;
+    NSString *brushType;
     CGFloat opacity;
     BOOL mouseSwiped;
     
@@ -109,6 +110,7 @@
 @property (nonatomic, strong) ResourcesView *colorsView;
 @property (nonatomic, strong) ResourcesView *sizesView;
 @property (nonatomic, strong) ResourcesView *textBordersView;
+@property (nonatomic, strong) ResourcesView *drawingPatternsView;
 //-----
 
 @property (nonatomic,strong)  IBOutlet UILabel *takeOrAddPhotoLabel;
@@ -239,6 +241,7 @@
 -(IBAction)setlibPhotoTabAction:(id) sender;
 -(IBAction)play:(id)sender;
 -(IBAction)slide:(id)sender;
+-(IBAction)selectDrawingLine:(id)sender;
 
 -(IBAction)dissmisBannerAdd:(id)sender;
 

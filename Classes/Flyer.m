@@ -816,7 +816,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 
 
     imageDetailDictionary[@"textcolor"] = LINECOLOR;
-    imageDetailDictionary[@"line_type"] = @"1"; //Line style( 1=plane, 2=doted, 3=dashed )
+    imageDetailDictionary[@"line_type"] = DRAWING_PLANE_LINE; //Line style( 1=plane, 2=doted, 3=dashed )
     imageDetailDictionary[@"brush"] = @"10.0"; //thikness of brush
     imageDetailDictionary[@"opacity"] = @"1.0"; //opacity of line
     

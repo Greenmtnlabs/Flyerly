@@ -29,8 +29,6 @@
 
 @implementation CreateFlyerController
 
-//Drawing required vars
-//@synthesize drawingView,displayView;
 
 //Drawing required files
 @synthesize mainImage;
@@ -50,7 +48,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 @synthesize libText,libBackground,libArts,libPhoto,libEmpty,backtemplates,cameraTakePhoto,cameraRoll,flyerBorder,libDrawing;
 @synthesize flyimgView,currentLayer,layersDic,flyer,player,playerView,playerToolBar,playButton,playerSlider,tempelateView;
 @synthesize durationLabel,durationChange,onFlyerBack,shouldShowAdd;
-@synthesize backgroundsView,flyerBordersView,colorsView,sizesView,bannerAddView,bannerAddDismissButton;
+@synthesize backgroundsView,flyerBordersView,colorsView,sizesView,bannerAddView,bannerAddDismissButton,drawingPatternsView;
 int selectedAddMoreLayerTab = -1;
 
 
@@ -183,7 +181,8 @@ NSArray *coloursArray;
     red = 0.0/255.0;
     green = 0.0/255.0;
     blue = 0.0/255.0;
-    brush = 10.0;
+    brush = 5.0;
+    brushType = DRAWING_PLANE_LINE;
     opacity = 1.0;
     
 	[super viewDidLoad];
@@ -450,6 +449,10 @@ NSArray *coloursArray;
                 NSArray *fontColorsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Colours" owner:self options:nil];
                 colorsView = [fontColorsViewArray objectAtIndex:0];
                 
+                NSArray *drawingPatternsViewArray = [[NSBundle mainBundle] loadNibNamed:@"DrawingPatterns" owner:self options:nil];
+                drawingPatternsView = [drawingPatternsViewArray objectAtIndex:0];
+                
+                
                 NSArray *fontSizesViewArray = [[NSBundle mainBundle] loadNibNamed:@"Sizes" owner:self options:nil];
                 sizesView = [fontSizesViewArray objectAtIndex:0];
                 
@@ -478,6 +481,10 @@ NSArray *coloursArray;
                 
                 NSArray *fontColorsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Colours-iPhone4s" owner:self options:nil];
                 colorsView = [fontColorsViewArray objectAtIndex:0];
+                
+                NSArray *drawingPatternsViewArray = [[NSBundle mainBundle] loadNibNamed:@"DrawingPatterns-iPhone4s" owner:self options:nil];
+                drawingPatternsView = [drawingPatternsViewArray objectAtIndex:0];
+                
                 
                 NSArray *fontSizesViewArray = [[NSBundle mainBundle] loadNibNamed:@"Sizes-iPhone4" owner:self options:nil];
                 sizesView = [fontSizesViewArray objectAtIndex:0];
@@ -709,18 +716,18 @@ NSArray *coloursArray;
                 
                 NSString *tcolor;
                 NSString *twhite;
-                CGFloat red = 0.0, green = 0.0, blue = 0.0, alpha = 0.0,wht = 0.0;
+                CGFloat r = 0.0, g = 0.0, b = 0.0, a = 0.0,wht = 0.0;
                 
                 UILabel *labelToStore = [[UILabel alloc]init];
                 labelToStore.textColor = colorName;
                 
                 //Getting RGB Color Code
-                [labelToStore.textColor getRed:&red green:&green blue:&blue alpha:&alpha];
+                [labelToStore.textColor getRed:&r green:&g blue:&b alpha:&a];
                 
-                tcolor = [NSString stringWithFormat:@"%f, %f, %f", red, green, blue];
+                tcolor = [NSString stringWithFormat:@"%f, %f, %f", r, g, b];
                 
-                [labelToStore.textColor getWhite:&wht alpha:&alpha];
-                twhite = [NSString stringWithFormat:@"%f, %f", wht, alpha];
+                [labelToStore.textColor getWhite:&wht alpha:&a];
+                twhite = [NSString stringWithFormat:@"%f, %f", wht, a];
                 
                 if ([textColor isEqualToString:tcolor] && [textWhiteColor isEqualToString:twhite] ) {
                     // Add border to selected layer thumbnail
@@ -730,66 +737,6 @@ NSArray *coloursArray;
                 i++;
             }
         }// Loop
-    });
-}
-
-/*
- * Add Drawing styles(line,dotted,dashed ..etc) in scroll views
- */
--(void)addDrawingInSubView{
-    
-    //DELETE SUBVIEWS
-    [self deleteSubviewsFromScrollView];
-    
-    CGFloat curXLoc = 0;
-    CGFloat curYLoc = 5;
-    int increment = 5;
-    
-    if(IS_IPHONE_5){
-        curXLoc = 13;
-        curYLoc = 10;
-        increment = 8;
-    }
-    
-    NSMutableDictionary *textLayer;
-    __block NSString *textSize;
-    
-    //Getting Last Info of Text Layer
-    if (![currentLayer isEqualToString:@""]) {
-        textLayer = [flyer getLayerFromMaster:currentLayer];
-        textSize = [textLayer objectForKey:@"fontsize"];
-    }
-    
-    // Load sizes xib asynchronously
-    dispatch_async( dispatch_get_main_queue(), ^{
-        
-        if(IS_IPHONE_5){
-            
-            [layerScrollView addSubview:drawingView];
-            [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
-            
-        } else {
-            
-            [layerScrollView addSubview:drawingView];
-            [layerScrollView setContentSize:CGSizeMake(drawingView.frame.size.width, [layerScrollView bounds].size.height)];
-            
-        }
-        
-        textSize = [NSString stringWithFormat:@"%f", ([textSize floatValue]/3.0)];
-        
-        NSArray *sizesArray = drawingView.subviews;
-        for (int i = 1; i <=  3 ; i++)
-        {
-            
-            UIButton *size;
-            if ([sizesArray[i-1] isKindOfClass:[UIButton class]]) {
-                size = (UIButton *) sizesArray[i-1];
-            }
-            
-            NSString *sizeValue =SIZE_ARRAY[(i-1)];
-            [size setTitle:sizeValue forState:UIControlStateNormal];
-        }
-        
     });
 }
 
@@ -994,9 +941,10 @@ NSArray *coloursArray;
             [layerScrollView setContentSize:CGSizeMake(sizesView.frame.size.width, [layerScrollView bounds].size.height)];
             
         }
+        NSMutableDictionary *layerDic = [flyer getLayerFromMaster:currentLayer];
         
         // Get the type of layer
-        NSString *type = [flyer getLayerType:currentLayer];
+        NSString *type = [layerDic objectForKey:@"type"];//[flyer getLayerType:currentLayer];
         if( [type isEqualToString:FLYER_LAYER_CLIP_ART] ){
             
             textSize = [NSString stringWithFormat:@"%f", ([textSize floatValue]/3.0)];
@@ -1005,6 +953,10 @@ NSArray *coloursArray;
             
             CGRect lastFrame = [flyer getImageFrame:currentLayer];
             textSize = [NSString stringWithFormat:@"%f", (lastFrame.size.height/1.5)];
+        }
+        else if ( [type isEqualToString:FLYER_LAYER_DRAWING] ) {
+            
+            textSize = [layerDic objectForKey:@"brush"];
         }
         
         NSArray *sizesArray = sizesView.subviews;
@@ -1021,7 +973,7 @@ NSArray *coloursArray;
         }
         
         //Handling Select Unselect
-        [self setSelectedItem:[flyer getLayerType:currentLayer] inView:sizesView ofLayerAttribute:LAYER_ATTRIBUTE_SIZE];
+        [self setSelectedItem:type inView:sizesView ofLayerAttribute:LAYER_ATTRIBUTE_SIZE];
     });
 }
 
@@ -1436,7 +1388,7 @@ NSArray *coloursArray;
                     
                 }
                 else if( [type isEqualToString:FLYER_LAYER_DRAWING] ){
-                    [self setDrawingRGB:selectedColor];
+                    [self setDrawingRGB:selectedColor updateDic:YES];
                     
                     //Handling Select Unselect
                     [self setSelectedItem:FLYER_LAYER_DRAWING inView:colorsView ofLayerAttribute:LAYER_ATTRIBUTE_COLOR];
@@ -1473,12 +1425,13 @@ NSArray *coloursArray;
             if(tempView == view)
             {
                 NSString *flyerImg = [flyer getImageName:currentLayer];
+                NSString *type = [flyer getLayerType:currentLayer];
                 
                 if ( flyerImg == nil ) {
                     
                     NSString *sizeStr = SIZE_ARRAY[i-1];
                     selectedSize = [sizeStr intValue];
-                    NSString *type = [flyer getLayerType:currentLayer];
+                    
                     
                     //Checking if layer in clip art,we do not open text editing mood
                     if( [type isEqualToString:FLYER_LAYER_CLIP_ART] ){
@@ -1496,13 +1449,24 @@ NSArray *coloursArray;
                         
                         //Handling Select Unselect
                         [self setSelectedItem:FLYER_LAYER_CLIP_ART inView:sizesView ofLayerAttribute:LAYER_ATTRIBUTE_SIZE];
-                    }else {
+                    }
+                    else {
                         
                         //Handling Select Unselect
                         [self setSelectedItem:FLYER_LAYER_TEXT inView:sizesView ofLayerAttribute:LAYER_ATTRIBUTE_SIZE];
                     }
                     
-                }else {
+                }
+                else if( [type isEqualToString:FLYER_LAYER_DRAWING] ){
+                    NSString *sizeStr = SIZE_ARRAY[i-1];
+                    selectedSize = [sizeStr intValue];
+                    
+                    [self setDrawingBrushRadius:selectedSize updateDic:YES];
+                    
+                    //Handling Select Unselect
+                    [self setSelectedItem:FLYER_LAYER_DRAWING inView:sizesView ofLayerAttribute:LAYER_ATTRIBUTE_SIZE];
+                }
+                else {
                     
                     NSString *sizeStr = SIZE_ARRAY[i-1];
                     
@@ -3041,67 +3005,6 @@ NSArray *coloursArray;
     
 }
 
--(void)editDrawingLayer{
-    // work for tempDrawImageLayer -----------------------------------------------
-    //create/add layer with drawing type
-    NSString *tempDrawImageLayer = [flyer addDrawingImage:NO];
-    
-    [flyer setImageFrame:tempDrawImageLayer:CGRectMake(0,0,DRAWING_LAYER_W,DRAWING_LAYER_H)];
-    
-    NSMutableDictionary *dic2 = [flyer getLayerFromMaster:tempDrawImageLayer];
-    [self.flyimgView renderLayer:tempDrawImageLayer layerDictionary:dic2];
-    
-    
-    //here we Update ImageView
-    UIImageView *img2 = [self.flyimgView.layers objectForKey:tempDrawImageLayer];
-    
-    self.tempDrawImage = img2;
-    //add in subview
-    [self.flyimgView addSubview:self.tempDrawImage];
-    
-    self.tempDrawImage.userInteractionEnabled = YES; // CAN receive touches
-    
-    
-    // work for main layer -----------------------------------------------
-    //currentLayer = [flyer addDrawingImage:YES];
-    [flyer setImageFrame:currentLayer:CGRectMake(0,0,DRAWING_LAYER_W,DRAWING_LAYER_H)];
-    
-    NSMutableDictionary *dic = [flyer getLayerFromMaster:currentLayer];
-    //[self.flyimgView renderLayer:currentLayer layerDictionary:dic];
-    
-    //here we Update ImageView
-    UIImageView *img = [self.flyimgView.layers objectForKey:currentLayer];
-    [self configureDrawingView:img ImageViewDictionary:dic];
-    
-    // Here We Write Code for Image
-    self.mainImage = img;
-    //add in subview
-    [self.flyimgView addSubview:self.mainImage];
-    
-    // Hook event of Gesture for moving layers -----------------------------------------------
-    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(drawingLayerMoved:)];
-    [self.tempDrawImage addGestureRecognizer:panGesture];
-    
-    /*
-     //Here we Highlight The ImageView
-     [self.flyimgView layerIsBeingEdited:currentLayer];
-     
-     //HERE WE SET ANIMATION
-     [UIView animateWithDuration:0.4f
-     animations:^{
-     //Create ScrollView
-     //[self addFlyerIconInSubView];
-     }
-     completion:^(BOOL finished){
-     [layerScrollView flashScrollIndicators];
-     }];
-     
-     */
-    
-    //Add right Bar button
-    [self addDonetoRightBarBotton];
-}
-
 /*
  * When any Layer Tap for Edit its Call
  * and Here we manage all Layers
@@ -3847,6 +3750,43 @@ NSArray *coloursArray;
     return tag;
 }
 
+-(NSString *) getTagForDrawingPattern:(NSString*)layerType ofView:(ResourcesView*)view{
+    [view dehighlightResource];
+    
+    NSString* tag = nil;
+    /* // kam karna hy
+    NSMutableDictionary *textLayer;
+    NSString *textSize;
+    
+    //Getting Last Info of Text Layer
+    
+    textLayer = [flyer getLayerFromMaster:currentLayer];
+    textSize = [NSString stringWithFormat:@"%f", [[textLayer objectForKey:@"line_type"] floatValue]];
+    
+    
+    
+    NSArray *drawingPatternsArray = drawingView.subviews;
+    for (int i = 1; i <=  [drawingPatternsArray count] ; i++)
+    {
+        
+        UIButton *size;
+        if ([drawingPatternsArray[i-1] isKindOfClass:[UIButton class]]) {
+            size = (UIButton *) drawingPatternsArray[i-1];
+        }
+        
+        NSString *btnTitleToBeHighlighted = [NSString stringWithFormat:@"%f", [size.currentTitle floatValue]];
+        
+        if ( [btnTitleToBeHighlighted isEqualToString:textSize] ){
+            
+            tag = [NSString stringWithFormat: @"%d", size.tag];
+            break;
+        }
+    }
+    */
+    return tag;
+
+}
+
 -(NSString *) getTagForSize:(NSString*)layerType ofView:(ResourcesView*)view{
     
     [view dehighlightResource];
@@ -3857,7 +3797,11 @@ NSArray *coloursArray;
     NSString *textSize;
     
     //Getting Last Info of Text Layer
-    if (![currentLayer isEqualToString:@""]) {
+    if ( [layerType isEqualToString:FLYER_LAYER_DRAWING] ) {
+        textLayer = [flyer getLayerFromMaster:currentLayer];
+        textSize = [NSString stringWithFormat:@"%f", [[textLayer objectForKey:@"brush"] floatValue]];
+    }
+    else if (![currentLayer isEqualToString:@""]) {
         textLayer = [flyer getLayerFromMaster:currentLayer];
         textSize = [textLayer objectForKey:@"fontsize"];
     }
@@ -3875,6 +3819,8 @@ NSArray *coloursArray;
         
         
     }
+    
+    
     
     NSArray *sizesArray = sizesView.subviews;
     for (int i = 1; i <=  [sizesArray count] ; i++)
@@ -3936,6 +3882,10 @@ NSArray *coloursArray;
         tag = [self getTagForColor:layerType ofView:view];
         if ( [layerAttribute isEqualToString:LAYER_ATTRIBUTE_COLOR] ) {
             tag = [self getTagForColor:layerType ofView:view];
+        } else if ( [layerAttribute isEqualToString:LAYER_ATTRIBUTE_SIZE] ) {
+            tag = [self getTagForSize:layerType ofView:view];
+        } else if ( [layerAttribute isEqualToString:LAYER_ATTRIBUTE_DRAWING_PATTERN] ) {
+            tag = [self getTagForDrawingPattern:layerType ofView:view];
         }
         
     }
@@ -4406,7 +4356,6 @@ NSArray *coloursArray;
 }
 
 
-
 /* Main Bottom Tab Botton Handler
  * When we click any Tab
  * This Method Manage SubTabs
@@ -4561,6 +4510,9 @@ NSArray *coloursArray;
     {
         [drawingMenueButton setSelected:YES];
         
+        NSMutableDictionary *dic;
+        
+        //Run for addDrawing layer case
         if ([currentLayer isEqualToString:@""]) {
             
             // work for tempDrawImageLayer -----------------------------------------------
@@ -4587,7 +4539,7 @@ NSArray *coloursArray;
             currentLayer = [flyer addDrawingImage:YES];
             [flyer setImageFrame:currentLayer:CGRectMake(0,0,DRAWING_LAYER_W,DRAWING_LAYER_H)];
             
-            NSMutableDictionary *dic = [flyer getLayerFromMaster:currentLayer];
+            dic = [flyer getLayerFromMaster:currentLayer];
             [self.flyimgView renderLayer:currentLayer layerDictionary:dic];
             
             //here we Update ImageView
@@ -4604,6 +4556,48 @@ NSArray *coloursArray;
             [self.tempDrawImage addGestureRecognizer:panGesture];
             
         }
+        // Run for editDrawing layer case
+        else{
+            // work for tempDrawImageLayer -----------------------------------------------
+            //create/add layer with drawing type
+            NSString *tempDrawImageLayer = [flyer addDrawingImage:NO];
+            
+            [flyer setImageFrame:tempDrawImageLayer:CGRectMake(0,0,DRAWING_LAYER_W,DRAWING_LAYER_H)];
+            
+            NSMutableDictionary *dic2 = [flyer getLayerFromMaster:tempDrawImageLayer];
+            [self.flyimgView renderLayer:tempDrawImageLayer layerDictionary:dic2];
+            
+            
+            //here we Update ImageView
+            UIImageView *img2 = [self.flyimgView.layers objectForKey:tempDrawImageLayer];
+            
+            self.tempDrawImage = img2;
+            //add in subview
+            [self.flyimgView addSubview:self.tempDrawImage];
+            
+            self.tempDrawImage.userInteractionEnabled = YES; // CAN receive touches
+            
+            
+            // work for main layer -----------------------------------------------
+            //currentLayer = [flyer addDrawingImage:YES];
+            [flyer setImageFrame:currentLayer:CGRectMake(0,0,DRAWING_LAYER_W,DRAWING_LAYER_H)];
+            
+            dic = [flyer getLayerFromMaster:currentLayer];
+            
+            //here we Update ImageView
+            UIImageView *img = [self.flyimgView.layers objectForKey:currentLayer];
+            [self configureDrawingView:img ImageViewDictionary:dic];
+            
+            // Here We Write Code for Image
+            self.mainImage = img;
+            //add in subview
+            [self.flyimgView addSubview:self.mainImage];
+            
+            // Hook event of Gesture for moving layers -----------------------------------------------
+            UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(drawingLayerMoved:)];
+            [self.tempDrawImage addGestureRecognizer:panGesture];
+        }
+        
         //Here we Highlight The ImageView
         [self.flyimgView layerIsBeingEdited:currentLayer];
         
@@ -4617,8 +4611,6 @@ NSArray *coloursArray;
                              [layerScrollView flashScrollIndicators];
                          }];
         
-        
-        
         //Add right Bar button
         [self addDonetoRightBarBotton];
         
@@ -4629,7 +4621,9 @@ NSArray *coloursArray;
         [self addBottomTabs:libDrawing];
         
         // FORCE CLICK ON FIRST BUTTON OF addBottomTab, then it will auto select SET BOTTOM BAR
-        //[self setArtsTabAction:clipArtTabButton];
+        [self drawingSetStyleTabAction:drawingSizeTabButton];
+        
+        [self setDrawingTools:dic];
         
 	}
     
@@ -4988,6 +4982,168 @@ NSArray *coloursArray;
 
 
 #pragma mark - Drawing Methods
+-(IBAction)selectDrawingLine:(id)sender
+{
+	int  i=1;
+	UIButton *view = sender;
+    
+	for(UIView *tempView  in [drawingPatternsView subviews])
+	{
+        //CHECK UIIMAGEVIEW BECAUSE SCROLL VIEW HAVE ADDITIONAL
+        //SUBVIEWS OF UIIMAGEVIEW FOR FLASH INDICATORS
+        if (![tempView isKindOfClass:[UIImageView class]]) {
+            
+            if(tempView == view)
+            {
+
+                [self setDrawingLine:drawingArray[i-1] updateDic:YES];
+                
+                //Here we set Font
+                //[flyer setFlyerTextFont:currentLayer FontName:[NSString stringWithFormat:@"%@",[selectedFont familyName]]];
+                
+                //Here we call Render Layer on View
+                //[flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
+                
+                //Handling Select Unselect
+                [self setSelectedItem:FLYER_LAYER_DRAWING inView:drawingView ofLayerAttribute:LAYER_ATTRIBUTE_DRAWING_PATTERN];
+            }
+            i++;
+        }// uiImageView Found
+        
+	}// Loop
+}
+
+-(void)addDrawingPatternsInSubView {
+    
+    drawingArray = [[NSMutableArray alloc] initWithArray:DRAWING_PATTERNS_ARRAY];
+    
+    //-------
+    /*
+    
+    NSInteger dBtnW = 299;
+    NSInteger dBtnH = 35;
+    
+    drawingView = [[ResourcesView alloc] init];
+    
+    
+    //NSArray *fontFamilies = [[NSArray alloc] initWithContentsOfFile:drawingViewResourcePath]; //   fontsViewResourcePath];
+    
+    //for ( NSString *fontFamily in fontFamilies ) {
+      //  [ drawingArray addObject:[UIFont fontWithName:fontFamily size:27]];
+    //}
+    
+    [self deleteSubviewsFromScrollView];
+    
+    CGFloat curXLoc = 0;
+    CGFloat curYLoc = 5;
+    int increment = 5;
+    
+    if(IS_IPHONE_5){
+        curXLoc = 13;
+        curYLoc = 10;
+        increment = 8;
+    }
+    
+	for (int i = 1; i <=[drawingArray count] ; i++)
+	{
+		UIButton *line = [UIButton buttonWithType:UIButtonTypeCustom];
+		line.frame = CGRectMake(0, 0, dBtnW, dBtnH);
+        [line addTarget:self action:@selector(selectDrawingLine:) forControlEvents:UIControlEventTouchUpInside];
+        [line setTitle:@" " forState:UIControlStateNormal];
+		//UIFont *fontname = drawingArray[(i-1)];
+		//[line.titleLabel setFont: fontname];
+		//[line setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+		line.tag = i;
+		[line setBackgroundImage:[UIImage imageNamed:drawingArray[i-1]] forState:UIControlStateNormal];
+        
+        //SET BUTTON POSITION ON SCROLLVIEW
+        CGRect frame = line.frame;
+        line.origin = CGPointMake(curXLoc, curYLoc);
+        line.frame = frame;
+        curXLoc += (dBtnW)+increment;
+        
+        if(IS_IPHONE_5){
+            if(curXLoc >= 300){
+                curXLoc = 13;
+                curYLoc = curYLoc + dBtnW + 7;
+            }
+        }
+        
+        [drawingView addSubview:line];
+    }
+    
+    if(IS_IPHONE_5){
+        drawingView.size = CGSizeMake(320, curYLoc + dBtnH + 5);
+        [layerScrollView setContentSize:CGSizeMake(320, curYLoc + dBtnH)];
+    }else {
+        drawingView.size = CGSizeMake(curXLoc , dBtnH + 5);
+        [layerScrollView setContentSize:CGSizeMake(drawingView.size.width , dBtnH)];
+    }
+    //-------
+     */
+    [self deleteSubviewsFromScrollView];
+    [layerScrollView addSubview:drawingPatternsView];
+    [layerScrollView setContentSize:CGSizeMake(drawingPatternsView.frame.size.width, [drawingPatternsView bounds].size.height)];
+    
+}
+
+/*
+ * Add Drawing styles(line,dotted,dashed ..etc) in scroll views
+ */
+-(void)addDrawingInSubView{
+    
+    //DELETE SUBVIEWS
+    [self deleteSubviewsFromScrollView];
+    
+    CGFloat curXLoc = 0;
+    CGFloat curYLoc = 5;
+    int increment = 5;
+    
+    if(IS_IPHONE_5){
+        curXLoc = 13;
+        curYLoc = 10;
+        increment = 8;
+    }
+    
+   // NSMutableDictionary *textLayer = [flyer getLayerFromMaster:currentLayer];
+    
+    // Load sizes xib asynchronously
+    dispatch_async( dispatch_get_main_queue(), ^{
+        
+        if(IS_IPHONE_5){
+            
+            [layerScrollView addSubview:drawingView];
+            [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
+            
+        } else {
+            
+            [layerScrollView addSubview:drawingView];
+            [layerScrollView setContentSize:CGSizeMake(drawingView.frame.size.width, [layerScrollView bounds].size.height)];
+            
+        }
+        
+
+        
+        NSArray *sizesArray = drawingView.subviews;
+        for (int i = 1; i <=  3 ; i++)
+        {
+            
+            UIButton *size;
+            if ([sizesArray[i-1] isKindOfClass:[UIButton class]]) {
+                size = (UIButton *) sizesArray[i-1];
+            }
+            
+            NSString *sizeValue =SIZE_ARRAY[(i-1)];
+            [size setTitle:sizeValue forState:UIControlStateNormal];
+        }
+        
+    });
+}
+
+-(void)editDrawingLayer{
+    //show drawing layer menu
+    [self setAddMoreLayerTabAction:drawingMenueButton];
+}
 #pragma mark -  Drawing tab's tap actions
 /*
  * When we click on Drawing Tab
@@ -4995,6 +5151,7 @@ NSArray *coloursArray;
  */
 -(IBAction)drawingSetStyleTabAction:(id) sender
 {
+    NSMutableDictionary *dic = [flyer getLayerFromMaster:currentLayer];
     
     //[self addBottomTabs:libText];
     
@@ -5007,30 +5164,15 @@ NSArray *coloursArray;
 	
     if(selectedButton == drawingPatternTabButton)
 	{
+        
+        // brush = dic[@"brush"];
+        
+        
         //HERE WE SET ANIMATION
         [UIView animateWithDuration:0.4f
                          animations:^{
                              //Create ScrollView
-                             if(IS_IPHONE_5){
-                                 
-                                 //Delete SubViews from ScrollView
-                                 [self deleteSubviewsFromScrollView];
-                                 [layerScrollView addSubview:fontsView];
-                                 [layerScrollView setContentSize:CGSizeMake(320, fontsView.size.height)];
-                                 
-                                 [self setSelectedItem:FLYER_LAYER_DRAWING inView:fontsView ofLayerAttribute:LAYER_ATTRIBUTE_FONT];
-                                 
-                             } else {
-                                 
-                                 //Delete SubViews from ScrollView
-                                 [self deleteSubviewsFromScrollView];
-                                 [layerScrollView addSubview:fontsView];
-                                 [layerScrollView setContentSize:CGSizeMake(fontsView.size.width , fontsView.size.height)];
-                                 
-                                 [self setSelectedItem:FLYER_LAYER_DRAWING inView:fontsView ofLayerAttribute:LAYER_ATTRIBUTE_FONT];
-                                 
-                             }
-                             
+                             [self addDrawingPatternsInSubView];
                          }
                          completion:^(BOOL finished){
                              [layerScrollView flashScrollIndicators];
@@ -5044,6 +5186,11 @@ NSArray *coloursArray;
 	}
 	else if(selectedButton == drawingColorTabButton)
 	{
+        
+        NSArray *stringArray = [dic[@"textcolor"] componentsSeparatedByString:@", "];
+        red = (CGFloat)[stringArray[0] floatValue];
+        green = (CGFloat)[stringArray[1] floatValue];
+        blue = (CGFloat)[stringArray[2] floatValue];
         
         //HERE WE SET ANIMATION
         [UIView animateWithDuration:0.4f
@@ -5064,6 +5211,9 @@ NSArray *coloursArray;
 	else if(selectedButton == drawingSizeTabButton)
 	{
         
+       // brush = dic[@"brush"];
+        
+        
         //HERE WE SET ANIMATION
         [UIView animateWithDuration:0.4f
                          animations:^{
@@ -5082,17 +5232,58 @@ NSArray *coloursArray;
 	}
 }
 
-// Input is without the # ie : white = FFFFFF
-- (void)setDrawingRGB:(UIColor *) color
+- (void)setDrawingTools:(NSMutableDictionary *)dic
+{
+    //setDrawingRGB
+    NSArray* colorAry = [[dic objectForKey:@"textcolor"] componentsSeparatedByString: @", "];
+    red   = (CGFloat)[[colorAry objectAtIndex: 0] integerValue];
+    green = (CGFloat)[[colorAry objectAtIndex: 1] integerValue];
+    blue  = (CGFloat)[[colorAry objectAtIndex: 2] integerValue];
+    
+    [self setDrawingBrushRadius:[[dic objectForKey:@"brush"] integerValue] updateDic:NO];
+    [self setDrawingLine:[dic objectForKey:@"line_type"] updateDic:NO];
+}
+
+// Set value of rgb of drawing tool
+- (void)setDrawingRGB:(UIColor *) color updateDic:(BOOL)updateDic
 {
     CGFloat alpha;
-    
     //Getting RGB Color Code
     [color getRed:&red green:&green blue:&blue alpha:&alpha];
+    //[color getWhite:&white alpha:&alpha];
     
-    //[color getWhite:&w alpha:&a];
-    
+    if( updateDic ) {
+        NSMutableDictionary *dic = [flyer getLayerFromMaster:currentLayer];
+        [dic setObject: [NSString stringWithFormat:@"%f, %f, %f",red,green,blue] forKey:@"textcolor"];
+        [flyer.masterLayers setValue:dic forKey:currentLayer];
+    }
 }
+
+// Set value brush radius
+- (void)setDrawingBrushRadius:(NSInteger)brushRadiusSize  updateDic:(BOOL)updateDic
+{
+    brush = (CGFloat)brushRadiusSize;
+    
+    if( updateDic ) {
+        NSMutableDictionary *dic = [flyer getLayerFromMaster:currentLayer];
+        [dic setObject:[NSString stringWithFormat:@"%f",brush] forKey:@"brush"];
+        [flyer.masterLayers setValue:dic forKey:currentLayer];
+    }
+}
+
+// Set value of
+- (void)setDrawingLine:(NSString *)lineType updateDic:(BOOL)updateDic
+{
+    brushType   =  lineType;
+    
+    if( updateDic ) {
+        NSMutableDictionary *dic = [flyer getLayerFromMaster:currentLayer];
+        [dic setObject:brushType forKey:@"line_type"];
+        [flyer.masterLayers setValue:dic forKey:currentLayer];
+    }
+}
+
+
 
 #pragma mark - Move start on type=FLYER_LAYER_DRAWING (FLYER_LAYER_DRAWING=DrawingImgLayer)
 
@@ -5106,19 +5297,51 @@ NSArray *coloursArray;
         lastPoint = [recognizer locationInView:self.mainImage];
         
     } else if (recognizer.state == UIGestureRecognizerStateChanged) {
+        
         //MOVE
         mouseSwiped = YES;
         CGPoint currentPoint = [recognizer locationInView:self.mainImage];
         
         UIGraphicsBeginImageContext(self.mainImage.frame.size);
         [self.tempDrawImage.image drawInRect:CGRectMake(0, 0, self.mainImage.frame.size.width, self.mainImage.frame.size.height)];
-        CGContextMoveToPoint(UIGraphicsGetCurrentContext(), lastPoint.x, lastPoint.y);
-        CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), currentPoint.x, currentPoint.y);
-        CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound);
-        CGContextSetLineWidth(UIGraphicsGetCurrentContext(), brush );
-        CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), red, green, blue, 1.0);
-        CGContextSetBlendMode(UIGraphicsGetCurrentContext(),kCGBlendModeNormal);
         
+        if( [brushType  isEqual: DRAWING_DASHED_LINE] || [brushType  isEqual: DRAWING_DOTTED_LINE] ) {
+            
+            CGFloat dash[] = {2,brush*3,brush*2,brush};
+            if( [brushType  isEqual: DRAWING_DOTTED_LINE] ) {
+               CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound);
+            }
+            else if( [brushType  isEqual: DRAWING_DASHED_LINE] ) {
+               CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapSquare);
+            }
+            CGContextSetLineWidth(UIGraphicsGetCurrentContext(), brush);
+            
+            // brush color
+            CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), red, green, blue, 1.0);
+            
+            CGContextSetLineDash(UIGraphicsGetCurrentContext(), 1, dash, 4);
+            
+            CGContextMoveToPoint(UIGraphicsGetCurrentContext(), lastPoint.x, lastPoint.y);
+            CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), currentPoint.x, currentPoint.y);
+            CGContextStrokePath(UIGraphicsGetCurrentContext());
+            CGContextClosePath(UIGraphicsGetCurrentContext());
+        }
+        else if( [brushType  isEqual: DRAWING_PLANE_LINE]  ) {
+            // brush width / size
+            CGContextSetLineWidth(UIGraphicsGetCurrentContext(), brush );
+            
+            // brush color
+            CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), red, green, blue, 1.0);
+            
+            CGContextMoveToPoint(UIGraphicsGetCurrentContext(), lastPoint.x, lastPoint.y);
+            CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), currentPoint.x, currentPoint.y);
+            CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound);
+        }
+        
+        
+        
+        
+        CGContextSetBlendMode(UIGraphicsGetCurrentContext(),kCGBlendModeNormal);
         CGContextStrokePath(UIGraphicsGetCurrentContext());
         self.tempDrawImage.image = UIGraphicsGetImageFromCurrentImageContext();
         [self.tempDrawImage setAlpha:opacity];
