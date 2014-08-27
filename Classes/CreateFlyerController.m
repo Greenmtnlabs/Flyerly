@@ -43,7 +43,7 @@ UIButton *backButton;
 
 
 @synthesize selectedFont,selectedColor,selectedTemplate,fontTabButton,colorTabButton,sizeTabButton,fontEditButton,selectedSize,
-fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sharePanel,clipArtTabButton,emoticonsTabButton,artsColorTabButton,drawingTabButton,artsSizeTabButton;
+fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sharePanel,clipArtTabButton,emoticonsTabButton,artsColorTabButton,drawingTabButton,artsSizeTabButton, drawingColorTabButton,drawingPatternTabButton, drawingSizeTabButton;
 @synthesize cameraTabButton,photoTabButton,widthTabButton,heightTabButton,deleteAlert,signInAlert,spaceUnavailableAlert;
 @synthesize imgPickerFlag,layerScrollView,flyerPath;
 @synthesize contextView,libraryContextView,libFlyer,backgroundTabButton,addMoreFontTabButton,drawingMenueButton;
@@ -96,18 +96,18 @@ NSArray *coloursArray;
     self.interstitialAdd.adUnitID = @"ca-app-pub-5409664730066465/9926514430";
     self.interstitialAdd.delegate = self;
     [self.interstitialAdd loadRequest:[self request]];
-
+    
     //Here we remove Borders from layer if user touch any layer
     [self.flyimgView layerStoppedEditing:currentLayer];
-     
-     //Here we take Snap shot of Flyer and
-     //Flyer Add to Gallery if user allow to Access there photos
-     [flyer setUpdatedSnapshotWithImage:[self getFlyerSnapShot]];
-     
-     dispatch_async( dispatch_get_main_queue(), ^{
-     //Here we Open Share Panel for Share Flyer
-         [self openPanel];
-     });
+    
+    //Here we take Snap shot of Flyer and
+    //Flyer Add to Gallery if user allow to Access there photos
+    [flyer setUpdatedSnapshotWithImage:[self getFlyerSnapShot]];
+    
+    dispatch_async( dispatch_get_main_queue(), ^{
+        //Here we Open Share Panel for Share Flyer
+        [self openPanel];
+    });
 }
 
 - (GADRequest *)request {
@@ -139,15 +139,15 @@ NSArray *coloursArray;
 }
 
 - (void)showTopBanner:(UIView *)banner{
-        
-        [UIView beginAnimations:@"bannerOn" context:NULL];
-        
-        banner.frame = CGRectOffset(banner.frame, 0, banner.frame.size.height);
-        
-        [UIView commitAnimations];
-        
-        banner.hidden = NO;
-        
+    
+    [UIView beginAnimations:@"bannerOn" context:NULL];
+    
+    banner.frame = CGRectOffset(banner.frame, 0, banner.frame.size.height);
+    
+    [UIView commitAnimations];
+    
+    banner.hidden = NO;
+    
 }
 
 
@@ -178,7 +178,7 @@ NSArray *coloursArray;
  * View setup. This is done once per instance.
  */
 -(void)viewDidLoad{
-
+    
     //DrawingClass required vars
     red = 0.0/255.0;
     green = 0.0/255.0;
@@ -187,7 +187,7 @@ NSArray *coloursArray;
     opacity = 1.0;
     
 	[super viewDidLoad];
-
+    
     // Create a new GADInterstitial each time. A GADInterstitial will only show one request in its
     // lifetime. The property will release the old one and set the new one.
     self.interstitialAdd = [[GADInterstitial alloc] init];
@@ -200,10 +200,10 @@ NSArray *coloursArray;
     
     // If 50mb space not availble then go to Back
     [self isDiskSpaceAvailable];
-
+    
     UVConfig *config = [UVConfig configWithSite:@"http://flyerly.uservoice.com/"];
     [UserVoice initialize:config];
-
+    
     // Here we Set Top Bar Item
     titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
     titleLabel.backgroundColor = [UIColor clearColor];
@@ -318,7 +318,7 @@ NSArray *coloursArray;
         
         //Checking if user valid purchases
         if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]   ||
-             [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"]    ) {
+            [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"]    ) {
             
             //Unloking features
             UIImage *buttonImage = [UIImage imageNamed:@"video_tab.png"];
@@ -327,7 +327,7 @@ NSArray *coloursArray;
         
         //Checking if user valid purchases
         if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]   ||
-             [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyIconsBundle"]    ) {
+            [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyIconsBundle"]    ) {
             
             fontsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Fonts-paid" ofType:@"plist"];
             clipartsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Cliparts-paid" ofType:@"plist"];
@@ -336,7 +336,7 @@ NSArray *coloursArray;
             [self addClipArtsInSubView];
             [self addFontsInSubView];
             
-        
+            
         } else {
             
             fontsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Fonts" ofType:@"plist"];
@@ -423,74 +423,74 @@ NSArray *coloursArray;
         // Execute the rest of the stuff, a little delayed to speed up loading.
         dispatch_async( dispatch_get_main_queue(), ^{
             
-        if(IS_IPHONE_5){
-            
-            // Initialize the banner at the bottom of the screen.
-            CGPoint origin;
-            origin = CGPointMake(0.0,0.0);
-            
-            // Use predefined GADAdSize constants to define the GADBannerView.
-            self.bannerAdd = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner origin:origin];
-            
-            // Note: Edit SampleConstants.h to provide a definition for kSampleAdUnitID before compiling.
-            self.bannerAdd.adUnitID = @"ca-app-pub-5409664730066465/8030978831";;
-            self.bannerAdd.delegate = self;
-            self.bannerAdd.rootViewController = self;
-            
-            [self.bannerAdd loadRequest:[self request]];
-            
-            NSArray *flyerbackgroundsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Backgrounds" owner:self options:nil];
-            backgroundsView = [flyerbackgroundsViewArray objectAtIndex:0];
-            
-            NSArray *flyerBordersViewArray = [[NSBundle mainBundle] loadNibNamed:@"Borders" owner:self options:nil];
-            flyerBordersView = [flyerBordersViewArray objectAtIndex:0];
-        
-            [self addFontsInSubView];
-            
-            NSArray *fontColorsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Colours" owner:self options:nil];
-            colorsView = [fontColorsViewArray objectAtIndex:0];
-            
-            NSArray *fontSizesViewArray = [[NSBundle mainBundle] loadNibNamed:@"Sizes" owner:self options:nil];
-            sizesView = [fontSizesViewArray objectAtIndex:0];
-            
-            NSArray *textBordersViewArray = [[NSBundle mainBundle] loadNibNamed:@"TextBorders" owner:self options:nil];
-            textBordersView = [textBordersViewArray objectAtIndex:0];
-            
-            [self addClipArtsInSubView];
-            
-            [self addEmoticonsInSubView];
-            [self addDrawingInSubView];
-            
-            
-        } else {
-            
-            [self.bannerAddView removeFromSuperview];
-            
-            NSArray *flyerbackgroundsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Backgrounds-iPhone4" owner:self options:nil];
-            backgroundsView = [flyerbackgroundsViewArray objectAtIndex:0];
-            
-            NSArray *flyerBordersViewArray = [[NSBundle mainBundle] loadNibNamed:@"Borders-iPhone4" owner:self options:nil];
-            flyerBordersView = [flyerBordersViewArray objectAtIndex:0];
-            
-            [self addFontsInSubView];
-            //NSArray *fontViewArray = [[NSBundle mainBundle] loadNibNamed:@"Fonts-iPhone4" owner:self options:nil];
-            //fontsView = [fontViewArray objectAtIndex:0];
-            
-            NSArray *fontColorsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Colours-iPhone4s" owner:self options:nil];
-            colorsView = [fontColorsViewArray objectAtIndex:0];
-            
-            NSArray *fontSizesViewArray = [[NSBundle mainBundle] loadNibNamed:@"Sizes-iPhone4" owner:self options:nil];
-            sizesView = [fontSizesViewArray objectAtIndex:0];
-            
-            NSArray *textBordersViewArray = [[NSBundle mainBundle] loadNibNamed:@"TextBorders-iPhone4" owner:self options:nil];
-            textBordersView = [textBordersViewArray objectAtIndex:0];
-            
-            [self addClipArtsInSubView];
-            
-            [self addEmoticonsInSubView];
-            
-        }
-            });
+            if(IS_IPHONE_5){
+                
+                // Initialize the banner at the bottom of the screen.
+                CGPoint origin;
+                origin = CGPointMake(0.0,0.0);
+                
+                // Use predefined GADAdSize constants to define the GADBannerView.
+                self.bannerAdd = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner origin:origin];
+                
+                // Note: Edit SampleConstants.h to provide a definition for kSampleAdUnitID before compiling.
+                self.bannerAdd.adUnitID = @"ca-app-pub-5409664730066465/8030978831";;
+                self.bannerAdd.delegate = self;
+                self.bannerAdd.rootViewController = self;
+                
+                [self.bannerAdd loadRequest:[self request]];
+                
+                NSArray *flyerbackgroundsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Backgrounds" owner:self options:nil];
+                backgroundsView = [flyerbackgroundsViewArray objectAtIndex:0];
+                
+                NSArray *flyerBordersViewArray = [[NSBundle mainBundle] loadNibNamed:@"Borders" owner:self options:nil];
+                flyerBordersView = [flyerBordersViewArray objectAtIndex:0];
+                
+                [self addFontsInSubView];
+                
+                NSArray *fontColorsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Colours" owner:self options:nil];
+                colorsView = [fontColorsViewArray objectAtIndex:0];
+                
+                NSArray *fontSizesViewArray = [[NSBundle mainBundle] loadNibNamed:@"Sizes" owner:self options:nil];
+                sizesView = [fontSizesViewArray objectAtIndex:0];
+                
+                NSArray *textBordersViewArray = [[NSBundle mainBundle] loadNibNamed:@"TextBorders" owner:self options:nil];
+                textBordersView = [textBordersViewArray objectAtIndex:0];
+                
+                [self addClipArtsInSubView];
+                
+                [self addEmoticonsInSubView];
+                [self addDrawingInSubView];
+                
+                
+            } else {
+                
+                [self.bannerAddView removeFromSuperview];
+                
+                NSArray *flyerbackgroundsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Backgrounds-iPhone4" owner:self options:nil];
+                backgroundsView = [flyerbackgroundsViewArray objectAtIndex:0];
+                
+                NSArray *flyerBordersViewArray = [[NSBundle mainBundle] loadNibNamed:@"Borders-iPhone4" owner:self options:nil];
+                flyerBordersView = [flyerBordersViewArray objectAtIndex:0];
+                
+                [self addFontsInSubView];
+                //NSArray *fontViewArray = [[NSBundle mainBundle] loadNibNamed:@"Fonts-iPhone4" owner:self options:nil];
+                //fontsView = [fontViewArray objectAtIndex:0];
+                
+                NSArray *fontColorsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Colours-iPhone4s" owner:self options:nil];
+                colorsView = [fontColorsViewArray objectAtIndex:0];
+                
+                NSArray *fontSizesViewArray = [[NSBundle mainBundle] loadNibNamed:@"Sizes-iPhone4" owner:self options:nil];
+                sizesView = [fontSizesViewArray objectAtIndex:0];
+                
+                NSArray *textBordersViewArray = [[NSBundle mainBundle] loadNibNamed:@"TextBorders-iPhone4" owner:self options:nil];
+                textBordersView = [textBordersViewArray objectAtIndex:0];
+                
+                [self addClipArtsInSubView];
+                
+                [self addEmoticonsInSubView];
+                
+            }
+        });
     });
 }
 
@@ -509,7 +509,7 @@ NSArray *coloursArray;
  * and its Save Flyer then Exits Screen
  */
 -(void) goBack {
-
+    
     // Make sure we hide the keyboard.
     [lastTextView resignFirstResponder];
     [lastTextView removeFromSuperview];
@@ -529,11 +529,11 @@ NSArray *coloursArray;
         
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0.4f];
-            [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height, 320, 425)];
+        [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height, 320, 425)];
         [UIView commitAnimations];
         [shareviewcontroller.titleView resignFirstResponder];
         [shareviewcontroller.descriptionView resignFirstResponder];
-
+        
         rightUndoBarButton.enabled = YES;
         shareButton.enabled = YES;
         helpButton.enabled = YES;
@@ -625,12 +625,12 @@ NSArray *coloursArray;
     // Load sizes xib asynchronously
     dispatch_async( dispatch_get_main_queue(), ^{
         imgPickerFlag = IMAGEPICKER_TEMPLATE;
-
+        
         [templateArray removeAllObjects];
-
+        
         //Delete SubViews From ScrollView
         [self deleteSubviewsFromScrollView];
-
+        
         if(IS_IPHONE_5){
             
             [layerScrollView addSubview:backgroundsView];
@@ -887,12 +887,16 @@ NSArray *coloursArray;
         increment = 8;
     }
     
-    NSMutableDictionary *textLayer;
+    NSMutableDictionary *textLayer,*drawingLayer;
     NSString *textColor;
     NSString *textWhiteColor;
     
+    NSString *type = [flyer getLayerType:currentLayer];
+    if ( [type isEqualToString:FLYER_LAYER_DRAWING] ){
+        drawingLayer = [flyer getLayerFromMaster:currentLayer];
+    }
     //Getting Last Info of Text Layer
-    if (![currentLayer isEqualToString:@""]) {
+    else if (![currentLayer isEqualToString:@""]) {
         textLayer = [flyer getLayerFromMaster:currentLayer];
         textColor = [textLayer objectForKey:@"textcolor"];
         textWhiteColor = [textLayer objectForKey:@"textWhitecolor"];
@@ -923,7 +927,7 @@ NSArray *coloursArray;
             
             id colorName = colorArray[(i-1)];
             //Here we Highlight Last Color Selected
-            if (textLayer) {
+            if (textLayer || drawingLayer) {
                 
                 NSString *tcolor;
                 NSString *twhite;
@@ -969,7 +973,7 @@ NSArray *coloursArray;
     
     NSMutableDictionary *textLayer;
     __block NSString *textSize;
-
+    
     //Getting Last Info of Text Layer
     if (![currentLayer isEqualToString:@""]) {
         textLayer = [flyer getLayerFromMaster:currentLayer];
@@ -1410,7 +1414,7 @@ NSArray *coloursArray;
     
 	for(UIView *tempView  in [colorsView subviews])
 	{
-
+        
         //CHECK UIIMAGEVIEW BECAUSE SCROLL VIEW HAVE ADDITIONAL
         //SUBVIEWS OF UIIMAGEVIEW FOR FLASH INDICATORS
         if (![tempView isKindOfClass:[UIImageView class]]) {
@@ -1418,20 +1422,26 @@ NSArray *coloursArray;
             if(tempView == view)
             {
                 selectedColor = colorArray[i-1];
-            
+                
                 [flyer setFlyerTextColor:currentLayer RGBColor:selectedColor];
-            
+                
                 //Here we call Render Layer on View
                 [flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
-            
+                
                 NSString *type = [flyer getLayerType:currentLayer];
                 if( [type isEqualToString:FLYER_LAYER_CLIP_ART] ){
                     
                     //Handling Select Unselect
                     [self setSelectedItem:FLYER_LAYER_CLIP_ART inView:colorsView ofLayerAttribute:LAYER_ATTRIBUTE_COLOR];
                     
-                }else {
+                }
+                else if( [type isEqualToString:FLYER_LAYER_DRAWING] ){
+                    [self setDrawingRGB:selectedColor];
                     
+                    //Handling Select Unselect
+                    [self setSelectedItem:FLYER_LAYER_DRAWING inView:colorsView ofLayerAttribute:LAYER_ATTRIBUTE_COLOR];
+                }
+                else {
                     //Handling Select Unselect
                     [self setSelectedItem:FLYER_LAYER_TEXT inView:colorsView ofLayerAttribute:LAYER_ATTRIBUTE_COLOR];
                 }
@@ -1449,7 +1459,7 @@ NSArray *coloursArray;
  * When any size is selected
  */
 -(IBAction)selectSize:(id)sender{
-
+    
     int  i=1;
 	UIButton *view = sender;
     
@@ -1478,7 +1488,7 @@ NSArray *coloursArray;
                     selectedFont = [selectedFont fontWithSize:selectedSize];
                     
                     [flyer setFlyerTextSize:currentLayer Size:selectedFont];
-                
+                    
                     //Here we call Render Layer on View
                     [flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
                     
@@ -1491,7 +1501,7 @@ NSArray *coloursArray;
                         //Handling Select Unselect
                         [self setSelectedItem:FLYER_LAYER_TEXT inView:sizesView ofLayerAttribute:LAYER_ATTRIBUTE_SIZE];
                     }
-                
+                    
                 }else {
                     
                     NSString *sizeStr = SIZE_ARRAY[i-1];
@@ -1502,7 +1512,7 @@ NSArray *coloursArray;
                     [flyer setImageFrame:currentLayer :imageFrame];
                     NSMutableDictionary *dic = [flyer getLayerFromMaster:currentLayer];
                     [self.flyimgView renderLayer:currentLayer layerDictionary:dic];
-            
+                    
                     //Here we call Render Layer on View
                     [flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
                     
@@ -1544,8 +1554,8 @@ NSArray *coloursArray;
             NSString *lastTag = [flyer getImageTag:@"Template"];
             
             if (![lastTag isEqualToString:@""]) lstTag = [lastTag intValue];
-
-
+            
+            
             if (lstTag != view.tag || view.tag == 0) {
                 
                 //Here we Set Flyer Type
@@ -1553,7 +1563,7 @@ NSArray *coloursArray;
                 
                 //Getting Image Path
                 NSString *imgPath = [self getImagePathByTag:[NSString stringWithFormat:@"Template%d",view.tag]];
-            
+                
                 //set template Image
                 [self.flyimgView setTemplate:imgPath];
                 
@@ -1587,18 +1597,18 @@ NSArray *coloursArray;
     
     if ( view != nil ) {
         l = view.layer;
-   
+        
         currentFrame = [flyer getImageFrame:currentLayer];
         float currentCenterX = l.frame.origin.x + (l.frame.size.width / 2);
         float currentCenterY = l.frame.origin.y + (l.frame.size.height / 2);
-            
+        
         float artLayerSize = 10.0f;
         
         if ( [fromLayerType isEqualToString:FLYER_LAYER_CLIP_ART] ) {
             
             NSDictionary* textLayer = [flyer getLayerFromMaster:currentLayer];
             artLayerSize = [[textLayer objectForKey:@"fontsize"] floatValue] / 3.0;
-                   
+            
             currentFrame.size.height = artLayerSize * 1.5;
             currentFrame.size.width = artLayerSize * 1.5;
             
@@ -1608,7 +1618,7 @@ NSArray *coloursArray;
         } else if ( [fromLayerType isEqualToString:FLYER_LAYER_EMOTICON] ) {
             
             artLayerSize = currentFrame.size.height / 1.5;
-          
+            
             currentFrame.size.height = artLayerSize * 3.0;
             currentFrame.size.width = artLayerSize * 3.0;
             
@@ -1622,7 +1632,7 @@ NSArray *coloursArray;
     
     return currentFrame;
 }
-    
+
 /*
  * Called when select emoticon
  */
@@ -1640,7 +1650,7 @@ NSArray *coloursArray;
     // Getting info of selected layer
     UIView *layerView = [flyimgView.layers objectForKey:currentLayer];
     if ( layerView != nil ) {
-    //if (![currentLayer isEqualToString:@""]) {
+        //if (![currentLayer isEqualToString:@""]) {
         
         if ( ![previousLayerType isEqualToString:FLYER_LAYER_EMOTICON] ) {
             
@@ -1652,8 +1662,8 @@ NSArray *coloursArray;
             //fontType = [UIFont fontWithName:[clipartsArray[i] objectForKey:@"fontType"] size:[[textLayer objectForKey:@"fontsize"] floatValue]];
             
         }
-    
-    // If no layer is selected then have the emoticon of default size
+        
+        // If no layer is selected then have the emoticon of default size
     } else {
         [flyer setImageFrame:currentLayer:CGRectMake(5, 5, 90, 90)];
     }
@@ -1705,11 +1715,11 @@ NSArray *coloursArray;
     [flyer setImageTag:currentLayer Tag:nil];
     
     UIFont* fontType = nil;
-
+    
     // Getting info of selected layer
     UIView *layerView = [flyimgView.layers objectForKey:currentLayer];
     if ( layerView != nil ) {
-    //if (![currentLayer isEqualToString:@""]) {
+        //if (![currentLayer isEqualToString:@""]) {
         
         if ( ![previousLayerType isEqualToString:FLYER_LAYER_CLIP_ART] ) {
             
@@ -1726,7 +1736,7 @@ NSArray *coloursArray;
         }
         
     } else {
-    
+        
         //Set default icon (entypo) size
         fontType = [UIFont fontWithName:[clipartsArray[i] objectForKey:@"fontType"] size:(60 * 3.0)];
         
@@ -1836,7 +1846,7 @@ NSArray *coloursArray;
             [l setCornerRadius:8];
             UIColor * c = [UIColor colorWithRed:1/255.0 green:151/255.0 blue:221/255.0 alpha:1];
             [l setBorderColor:c.CGColor];
-        } 
+        }
         
 	}//LOOP
 }
@@ -1857,7 +1867,7 @@ NSArray *coloursArray;
  * Here we Load Gallery
  */
 -(void)loadCustomPhotoLibrary :(BOOL)videoAllow {
-
+    
     uiBusy = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     [uiBusy setFrame:CGRectMake(280, 5, 20, 20)];
     [uiBusy setColor:[UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0]];
@@ -1873,14 +1883,14 @@ NSArray *coloursArray;
     if ( imgPickerFlag == IMAGEPICKER_PHOTO ) {
         NSDictionary *dict = [flyer getLayerFromMaster:currentLayer];
         nbuGallary.desiredImageSize = CGSizeMake( [[dict valueForKey:@"width"] floatValue],
-                                                [[dict valueForKey:@"height"] floatValue]);
+                                                 [[dict valueForKey:@"height"] floatValue]);
     } else {
         nbuGallary.desiredImageSize = self.flyimgView.size;
         nbuGallary.desiredVideoSize = CGSizeMake( flyerlyWidth, flyerlyHeight );
     }
     
     __weak CreateFlyerController *weakSelf = self;
-
+    
     [nbuGallary setOnImageTaken:^(UIImage *img) {
         
         [uiBusy stopAnimating];
@@ -1917,7 +1927,7 @@ NSArray *coloursArray;
                 
                 //Here we Set Flyer Type
                 [weakSelf.flyer setFlyerTypeImage];
-
+                
                 //Create Copy of Image
                 [weakSelf copyImageToTemplate:img];
                 
@@ -1934,7 +1944,7 @@ NSArray *coloursArray;
         
         [uiBusy stopAnimating];
         [uiBusy removeFromSuperview];
-
+        
         NSLog(@"%@",recvUrl);
         NSError *error = nil;
         
@@ -2007,7 +2017,7 @@ NSArray *coloursArray;
     if ( imgPickerFlag == IMAGEPICKER_PHOTO ) {
         NSDictionary *dict = [flyer getLayerFromMaster:currentLayer];
         nbuCamera.desiredImageSize = CGSizeMake( [[dict valueForKey:@"width"] floatValue],
-                                                 [[dict valueForKey:@"height"] floatValue]);
+                                                [[dict valueForKey:@"height"] floatValue]);
     } else {
         nbuCamera.desiredImageSize = self.flyimgView.size;
         nbuCamera.desiredVideoSize = CGSizeMake( flyerlyWidth, flyerlyHeight );
@@ -2017,7 +2027,7 @@ NSArray *coloursArray;
     
     // Callback once image is selected.
     [nbuCamera setOnImageTaken:^(UIImage *img) {
-    
+        
         [uiBusy stopAnimating];
         [uiBusy removeFromSuperview];
         
@@ -2028,9 +2038,9 @@ NSArray *coloursArray;
         
         //Remove tag of selected background
         [flyer setImageTag:@"Template" Tag:[NSString stringWithFormat:@"%d",-1]];
-    
+        
         dispatch_async( dispatch_get_main_queue(), ^{
-
+            
             if ( imgPickerFlag == IMAGEPICKER_PHOTO ) {
                 NSString *imgPath = [weakSelf getImagePathforPhoto:img];
                 
@@ -2045,7 +2055,7 @@ NSArray *coloursArray;
                 weakSelf.imgPickerFlag = IMAGEPICKER_TEMPLATE;
                 
             } else {
-            
+                
                 //Here we Set Flyer Type
                 [weakSelf.flyer setFlyerTypeImage];
                 
@@ -2060,7 +2070,7 @@ NSArray *coloursArray;
             
         });
     }];
-
+    
     // Call back for when video is selected.
     [nbuCamera setOnVideoFinished:^(NSURL *recvUrl, CGRect cropRect, CGFloat scale ) {
         
@@ -2070,7 +2080,7 @@ NSArray *coloursArray;
         
         [uiBusy stopAnimating];
         [uiBusy removeFromSuperview];
-
+        
         NSError *error = nil;
         
         [weakSelf.view addSubview:flyimgView];
@@ -2078,12 +2088,12 @@ NSArray *coloursArray;
         
         // Move video in to the sour flyer.
         NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
-
+        
         NSString *destination = [NSString stringWithFormat:@"%@/Template/template.mov",currentpath];
         [weakSelf.flyer setOriginalVideoUrl:@"Template/template.mov"];
         
         NSURL *movieURL = [NSURL fileURLWithPath:destination];
-
+        
         // Make sure the video does not exist already. If it does, delete it.
         if ([[NSFileManager defaultManager] fileExistsAtPath:destination isDirectory:NULL]) {
             [[NSFileManager defaultManager] removeItemAtPath:destination error:&error];
@@ -2095,21 +2105,21 @@ NSArray *coloursArray;
                 case AVAssetExportSessionStatusFailed:
                     NSLog (@"FAIL = %@", error );
                     break;
-                
+                    
                 case AVAssetExportSessionStatusCompleted:
                     
                     // Main Thread
                     dispatch_async( dispatch_get_main_queue(), ^{
-                            
+                        
                         // Render the movie player.
                         [weakSelf.flyimgView renderLayer:@"Template" layerDictionary:[self.flyer getLayerFromMaster:@"Template"]];
-                            
+                        
                     });
                     break;
             }
         }];
         
-      }];
+    }];
     
     [nbuCamera setOnVideoCancel:^() {
         dispatch_async( dispatch_get_main_queue(), ^{
@@ -2162,14 +2172,14 @@ NSArray *coloursArray;
                                              selector:@selector(MPMoviePlayerLoadStateDidChange:)
                                                  name:MPMoviePlayerLoadStateDidChangeNotification
                                                object:nil];
-
+    
     self.flyimgView.image = nil;
     
     [self.playerView addSubview:player.view];
-
+    
     [playerToolBar setFrame:CGRectMake(0, self.playerView.frame.size.height - 40, 306, 40)];
     [self.flyimgView addSubview:playerToolBar];
-
+    
     player.accessibilityElementsHidden = YES;
     player.shouldAutoplay = NO;
     player.fullscreen = NO;
@@ -2187,28 +2197,28 @@ NSArray *coloursArray;
         [playButton setSelected:NO];
         isPlaying = NO;
         [player pause];
-
+        
     }else {
         [playButton setSelected:YES];
         isPlaying = YES;
         player.currentPlaybackTime = playerSlider.value;
         [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateTime:) userInfo:nil repeats:NO];
         [player play];
-   
+        
     }
 }
 
 -(IBAction)slide:(id)sender {
-
+    
     NSLog(@"%f",playerSlider.value);
     player.currentPlaybackTime = playerSlider.value;
     durationChange.text =[self stringFromTimeInterval:playerSlider.value];
-
+    
 }
 
 - (void)updateTime:(NSTimer *)timer {
     
-     NSLog(@"%f",player.currentPlaybackTime);
+    NSLog(@"%f",player.currentPlaybackTime);
     playerSlider.value = player.currentPlaybackTime;
     durationChange.text =[self stringFromTimeInterval:player.currentPlaybackTime];
     
@@ -2231,7 +2241,7 @@ NSArray *coloursArray;
         
         videolastImage = [player thumbnailImageAtTime:player.duration /2
                                            timeOption:MPMovieTimeOptionNearestKeyFrame];
-
+        
         playerSlider.maximumValue = player.duration;
         NSTimeInterval duration = player.duration;
         durationLabel.text =[NSString stringWithFormat:@"%@",[self stringFromTimeInterval:player.duration]] ;
@@ -2269,8 +2279,8 @@ NSArray *coloursArray;
     playerSlider.value = 0.0;
     isPlaying = NO;
     [playButton setSelected:NO];
-     player.currentPlaybackTime = playerSlider.value;
-
+    player.currentPlaybackTime = playerSlider.value;
+    
 }
 
 
@@ -2303,7 +2313,7 @@ NSArray *coloursArray;
         shareButton.enabled = YES;
         helpButton.enabled = YES;
         
-        [self hideLoadingIndicator];        
+        [self hideLoadingIndicator];
         
     }else if(alertView == signInAlert && buttonIndex == 1) {
         
@@ -2335,8 +2345,8 @@ NSArray *coloursArray;
         [self.navigationController pushViewController:signInController animated:YES];
         
     }
-
-  }
+    
+}
 
 
 #pragma mark - Custom Methods
@@ -2346,7 +2356,7 @@ NSArray *coloursArray;
  */
 
 -(void)loadHelpController{
-
+    
     [UserVoice presentUserVoiceInterfaceForParentViewController:self];
 }
 
@@ -2356,7 +2366,7 @@ NSArray *coloursArray;
  * and Set Menu for Text Layer
  */
 -(void)callWrite{
-
+    
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:TITLE_FONT size:18];
@@ -2364,8 +2374,8 @@ NSArray *coloursArray;
     label.textColor = [UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0];;
     label.text = @"TEXT";
     self.navigationItem.titleView = label;
-
-
+    
+    
     UIButton *nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
 	[nextButton addTarget:self action:@selector(callStyle) forControlEvents:UIControlEventTouchUpInside];
     [nextButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
@@ -2376,10 +2386,10 @@ NSArray *coloursArray;
     UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
 	[backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
     [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
-     backButton.showsTouchWhenHighlighted = YES;
+    backButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     [self.navigationItem setLeftBarButtonItem:backBarButton];
-
+    
     
     //Add Context Library
     [self addBottomTabs:libText];
@@ -2412,7 +2422,7 @@ NSArray *coloursArray;
     
     lastTextView.textAlignment = UITextAlignmentCenter;
 	lastTextView.backgroundColor = [UIColor colorWithWhite:1 alpha:0.3f];
-
+    
 	CALayer * l = [lastTextView layer];
 	[l setMasksToBounds:YES];
 	[l setCornerRadius:10];
@@ -2444,7 +2454,7 @@ NSArray *coloursArray;
     UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [doneButton addTarget:self action:@selector(callAddMoreLayers) forControlEvents:UIControlEventTouchUpInside];
     [doneButton addTarget:self action:@selector(logPhotoAddedEvent) forControlEvents:UIControlEventTouchUpInside];
-
+    
     [doneButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
     doneButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
@@ -2462,18 +2472,18 @@ NSArray *coloursArray;
     UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [doneButton addTarget:self action:@selector(callAddMoreLayers) forControlEvents:UIControlEventTouchUpInside];
     [doneButton addTarget:self action:@selector(logTextAddedEvent) forControlEvents:UIControlEventTouchUpInside];
-
+    
     [doneButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
-         doneButton.showsTouchWhenHighlighted = YES;
+    doneButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *DoneBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
-        
+    
     //Delete Button
     UIButton *delButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [delButton addTarget:self action:@selector(callDeleteLayer) forControlEvents:UIControlEventTouchUpInside];
     [delButton setBackgroundImage:[UIImage imageNamed:@"delete_button"] forState:UIControlStateNormal];
     delButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *delBarButton = [[UIBarButtonItem alloc] initWithCustomView:delButton];
-        
+    
     [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:DoneBarButton,delBarButton,nil]];
     
     //Checking Empty String
@@ -2482,7 +2492,7 @@ NSArray *coloursArray;
         [lastTextView resignFirstResponder];
         [lastTextView removeFromSuperview];
         lastTextView = nil;
-
+        
         [self callAddMoreLayers];
         return;
     }
@@ -2496,12 +2506,12 @@ NSArray *coloursArray;
     
     //Here we Highlight The ImageView
     [self.flyimgView layerIsBeingEdited:currentLayer];
-
+    
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     
     //Checking if user valid purchases
     if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]   ||
-         [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyIconsBundle"]    ) {
+        [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyIconsBundle"]    ) {
         
         fontsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Fonts-paid" ofType:@"plist"];
         clipartsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Cliparts-paid" ofType:@"plist"];
@@ -2520,11 +2530,11 @@ NSArray *coloursArray;
         [self addFontsInSubView];
         
     }
-
+    
     
     // SET BOTTOM BAR
     [self setStyleTabAction:fontTabButton];
-
+    
 	[lastTextView resignFirstResponder];
 	[lastTextView removeFromSuperview];
     lastTextView = nil;
@@ -2561,7 +2571,7 @@ NSArray *coloursArray;
         }
         
     }
-
+    
 }
 
 -(void)choosePhoto
@@ -2580,17 +2590,17 @@ NSArray *coloursArray;
     [delButton setBackgroundImage:[UIImage imageNamed:@"delete_button"] forState:UIControlStateNormal];
     delButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *delBarButton = [[UIBarButtonItem alloc] initWithCustomView:delButton];
-
+    
     UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     [doneButton addTarget:self action:@selector(donePhoto) forControlEvents:UIControlEventTouchUpInside];
     [doneButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
     doneButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
     [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:doneBarButton,delBarButton,nil]];
- 
+    
     //Add Context Library
     [self addBottomTabs:libPhoto];
-
+    
 }
 
 -(void)deleteLayer:(UIButton *)crossButton{
@@ -2717,7 +2727,7 @@ NSArray *coloursArray;
 
 
 /**
- * Rotate frames to ensure they are in their correct orientation. This method returns and instraction that we 
+ * Rotate frames to ensure they are in their correct orientation. This method returns and instraction that we
  * can use to set it right.
  *
  * Details here: http://stackoverflow.com/questions/12136841/avmutablevideocomposition-rotated-video-captured-in-portrait-mode
@@ -2864,16 +2874,16 @@ NSArray *coloursArray;
     
     // If an image is given, then put that in the animation.
     if ( image != nil ) {
-    
+        
         // Layer that merges the video and image
         CALayer *parentLayer = [CALayer layer];
         parentLayer.frame = CGRectMake( 0, 0, crop.size.width, crop.size.height);
-    
+        
         // Layer that renders the video.
         CALayer *videoLayer = [CALayer layer];
         videoLayer.frame = CGRectMake(0, 0, crop.size.width, crop.size.height );
         [parentLayer addSublayer:videoLayer];
-    
+        
         // Layer that renders flyerly image.
         CALayer *imageLayer = [CALayer layer];
         imageLayer.frame = CGRectMake(0, 0, crop.size.width, crop.size.height );
@@ -2881,7 +2891,7 @@ NSArray *coloursArray;
         [imageLayer setMasksToBounds:YES];
         
         [parentLayer addSublayer:imageLayer];
-    
+        
         // Setup the animation tool
         videoComposition.animationTool = [AVVideoCompositionCoreAnimationTool videoCompositionCoreAnimationToolWithPostProcessingAsVideoLayer:videoLayer inLayer:parentLayer];
     }
@@ -2910,7 +2920,7 @@ NSArray *coloursArray;
     // CREATING PATH FOR FLYER OVERLAY VIDEO
     NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
     NSString *originalVideoPath = [NSString stringWithFormat:@"%@/Template/template.mov", currentpath];
-
+    
     // URL of the movie.
     NSURL *url = [NSURL fileURLWithPath:originalVideoPath];
     
@@ -3072,24 +3082,24 @@ NSArray *coloursArray;
     UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(drawingLayerMoved:)];
     [self.tempDrawImage addGestureRecognizer:panGesture];
     
-/*
-//Here we Highlight The ImageView
-[self.flyimgView layerIsBeingEdited:currentLayer];
-
-//HERE WE SET ANIMATION
-[UIView animateWithDuration:0.4f
-                 animations:^{
-                     //Create ScrollView
-                     //[self addFlyerIconInSubView];
-                 }
-                 completion:^(BOOL finished){
-                     [layerScrollView flashScrollIndicators];
-                 }];
-
-*/
-
-//Add right Bar button
-[self addDonetoRightBarBotton];
+    /*
+     //Here we Highlight The ImageView
+     [self.flyimgView layerIsBeingEdited:currentLayer];
+     
+     //HERE WE SET ANIMATION
+     [UIView animateWithDuration:0.4f
+     animations:^{
+     //Create ScrollView
+     //[self addFlyerIconInSubView];
+     }
+     completion:^(BOOL finished){
+     [layerScrollView flashScrollIndicators];
+     }];
+     
+     */
+    
+    //Add right Bar button
+    [self addDonetoRightBarBotton];
 }
 
 /*
@@ -3115,10 +3125,10 @@ NSArray *coloursArray;
     if(layerButton.uid != nil ){
         //Delete From Master Dictionary
         [flyer deleteLayer:layerButton.uid];
-    
+        
         //Delete From View
         [flyimgView deleteLayer:layerButton.uid];
-    
+        
         NSLog(@"Delete Layer Tag: %d", layerButton.tag);
         
         //Set Main View On Screen
@@ -3159,7 +3169,7 @@ NSArray *coloursArray;
         
         //Set Main View On Screen
         [self callAddMoreLayers];
-
+        
         // Render flyer
         [self renderFlyer];
         
@@ -3206,7 +3216,7 @@ NSArray *coloursArray;
     
     NSLog(@"previuos Rotation Angle called");
     //return [flyer getImageRotationAngle:uid];
-
+    
 }
 /**
  * Rotation Angle changed for layer, let the model know.
@@ -3214,22 +3224,22 @@ NSArray *coloursArray;
 - (void)rotationAngleChangedForLayer:(NSString *)uid rotationAngle:(CGFloat)rotationAngle {
     
     /*if ([widthTabButton isSelected]) {
-        
-        CGRect lastFrame = [flyer getImageFrame:uid];
-        
-        lastFrame.origin.x = frame.origin.x;
-        lastFrame.size.width = frame.size.width;
-        frame = lastFrame;
-        
-    } else if ([heightTabButton isSelected]) {
-        
-        CGRect lastFrame = [flyer getImageFrame:uid];
-        
-        lastFrame.origin.y = frame.origin.y;
-        lastFrame.size.height = frame.size.height;
-        frame = lastFrame;
-        
-    }*/
+     
+     CGRect lastFrame = [flyer getImageFrame:uid];
+     
+     lastFrame.origin.x = frame.origin.x;
+     lastFrame.size.width = frame.size.width;
+     frame = lastFrame;
+     
+     } else if ([heightTabButton isSelected]) {
+     
+     CGRect lastFrame = [flyer getImageFrame:uid];
+     
+     lastFrame.origin.y = frame.origin.y;
+     lastFrame.size.height = frame.size.height;
+     frame = lastFrame;
+     
+     }*/
     
     //Update Dictionary
     [flyer addImageRotationAngle:uid :rotationAngle];
@@ -3254,7 +3264,7 @@ NSArray *coloursArray;
         lastTextView = nil;
         
         self.currentLayer = uid;
-
+        
         // Edit the current layer.
         [self editCurrentLayer];
     } else if ( [flyer getText:self.currentLayer] != nil ) {
@@ -3295,7 +3305,7 @@ NSArray *coloursArray;
     } else {
         [playerToolBar setHidden:YES];
     }
-
+    
 }
 
 /**
@@ -3336,7 +3346,7 @@ NSArray *coloursArray;
     
     //Here we send Request to Model for Move Back
     [flyer replaceFromHistory];
-        
+    
     //set Undo Bar Button Status
     [self setUndoStatus];
     
@@ -3354,7 +3364,7 @@ NSArray *coloursArray;
     [self addAllLayersIntoScrollView];
     
     [Flurry logEvent:@"Undone"];
-
+    
 }
 
 
@@ -3363,7 +3373,7 @@ NSArray *coloursArray;
  * other wise we Disable Undo Bar Button
  */
 -(void)setUndoStatus {
-
+    
     //Getting Current Flyer folder Path
     NSString* currentPath  =   [[NSFileManager defaultManager] currentDirectoryPath];
     
@@ -3376,7 +3386,7 @@ NSArray *coloursArray;
         [rightUndoBarButton setEnabled:YES];
         
     } else {
-    
+        
         [rightUndoBarButton setEnabled:NO];
     }
     
@@ -3400,8 +3410,8 @@ NSArray *coloursArray;
     }
     self.navigationItem.titleView = label;
     
-
-     //ShareButton
+    
+    //ShareButton
     [shareButton setBackgroundImage:[UIImage imageNamed:@"share_button"] forState:UIControlStateNormal];
     
     //UndoButton
@@ -3414,15 +3424,15 @@ NSArray *coloursArray;
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
     rightUndoBarButton = [[UIBarButtonItem alloc] initWithCustomView:undoButton];
     
-
+    
     [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,rightUndoBarButton,nil]];
     
     [self addBottomTabs:libFlyer];
     
-    //Set here Un-Selected State of HIGHT & WIDTH Buttons IF selected 
+    //Set here Un-Selected State of HIGHT & WIDTH Buttons IF selected
     [widthTabButton setSelected:NO];
     [heightTabButton setSelected:NO];
-
+    
     
     //disable drawing interaction
     self.tempDrawImage.userInteractionEnabled = NO;
@@ -3439,20 +3449,20 @@ NSArray *coloursArray;
     
     //Here we Create One History BackUp for Future Undo Request
     [flyer addToHistory];
-
+    
     //Here we Set Undo Bar Button Status
     [self setUndoStatus];
     
     // Here we Start Animation
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.4f];
-        //Here we Add All Generated Layers add into ScrollView
+    //Here we Add All Generated Layers add into ScrollView
     [self addAllLayersIntoScrollView];
     [UIView commitAnimations];
     //End Animation
     
     currentLayer = @"";
-   
+    
 }
 
 
@@ -3469,7 +3479,7 @@ NSArray *coloursArray;
     rightUndoBarButton.enabled = NO;
     shareButton.enabled = NO;
     helpButton.enabled = NO;
-
+    
     [self showLoadingIndicator];
     
     //Here we Merge Video for Sharing
@@ -3482,13 +3492,13 @@ NSArray *coloursArray;
             
             if ( ![userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ) {
                 if ( [self.interstitialAdd isReady]  && ![self.interstitialAdd hasBeenUsed] ) {
-                     [self.interstitialAdd presentFromRootViewController:self];
+                    [self.interstitialAdd presentFromRootViewController:self];
                 }
             }
             
             
             panelWillOpen = YES;
-
+            
             //Background Thread
             dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
                 
@@ -3513,12 +3523,12 @@ NSArray *coloursArray;
                 if ( [self.interstitialAdd isReady]  && ![self.interstitialAdd hasBeenUsed] ) {
                     
                     dispatch_async( dispatch_get_main_queue(), ^{
-                    [self.interstitialAdd presentFromRootViewController:self];
-                         });
+                        [self.interstitialAdd presentFromRootViewController:self];
+                    });
                 }
                 //return;
             }
-    
+            
             //Here we remove Borders from layer if user touch any layer
             [self.flyimgView layerStoppedEditing:currentLayer];
             
@@ -3656,7 +3666,7 @@ NSArray *coloursArray;
         if ( !self.interstitialAdd.hasBeenUsed )
             [signInAlert show];
     }
-
+    
 }
 /*
  *Here we Set Stars
@@ -3674,7 +3684,7 @@ NSArray *coloursArray;
         [shareviewcontroller.star1 setSelected:YES];
         [shareviewcontroller.star2 setSelected:YES];
         [shareviewcontroller.star3 setSelected:YES];
-
+        
     }else if ([rate isEqualToString:@"4"]) {
         [shareviewcontroller.star1 setSelected:YES];
         [shareviewcontroller.star2 setSelected:YES];
@@ -3718,7 +3728,7 @@ NSArray *coloursArray;
             UIButton *btn = (UIButton *) tempView;
             if ( [btn.currentTitle isEqualToString:clipart] ) {
                 return [NSString stringWithFormat: @"%d", btn.tag];
-
+                
             }
         }
         
@@ -3746,7 +3756,7 @@ NSArray *coloursArray;
     
     NSArray *RGB = [textColor componentsSeparatedByString:@","];
     UIColor *fontColor = [UIColor colorWithRed:[RGB[0] floatValue] green:[RGB[1] floatValue] blue:[RGB[2] floatValue] alpha:1.0];
-   
+    
     for (int i = 1; i <=  [colorArray count] ; i++)
     {
         UIButton *color;
@@ -3777,7 +3787,7 @@ NSArray *coloursArray;
             
             //if ([textColor isEqualToString:tcolor] && [textWhiteColor isEqualToString:twhite] ) {
             if ( [Flyer compareColor:buttonColor withColor:fontColor] ) {
-                  
+                
                 tag = [NSString stringWithFormat: @"%d", color.tag];
                 break;
             }
@@ -3788,7 +3798,7 @@ NSArray *coloursArray;
 }
 
 -(NSString *) getTagForTextBorder:(NSString*)layerType ofView:(ResourcesView*)view{
-
+    
     [view dehighlightResource];
     
     NSString* tag = nil;
@@ -3824,14 +3834,14 @@ NSArray *coloursArray;
         UIColor* buttonColor = border.backgroundColor;
         
         if ( [Flyer compareColor:buttonColor withColor:borderColor] ) {
-        //if( [buttonColor isEqual:borderColor] ) {
+            //if( [buttonColor isEqual:borderColor] ) {
             tag = [NSString stringWithFormat: @"%d", ((border.tag) - 1)];
             break;
             
         }
         
         i++;
-    
+        
     }// Loop
     
     return tag;
@@ -3842,7 +3852,7 @@ NSArray *coloursArray;
     [view dehighlightResource];
     
     NSString* tag = nil;
-   
+    
     NSMutableDictionary *textLayer;
     NSString *textSize;
     
@@ -3876,7 +3886,7 @@ NSArray *coloursArray;
         }
         
         NSString *btnTitleToBeHighlighted = [NSString stringWithFormat:@"%f", [size.currentTitle floatValue]];
-                       
+        
         if ( [btnTitleToBeHighlighted isEqualToString:textSize] ){
             
             tag = [NSString stringWithFormat: @"%d", size.tag];
@@ -3921,6 +3931,13 @@ NSArray *coloursArray;
         }
         
         
+    } else if ( [layerType isEqualToString:FLYER_LAYER_DRAWING] ) {
+        
+        tag = [self getTagForColor:layerType ofView:view];
+        if ( [layerAttribute isEqualToString:LAYER_ATTRIBUTE_COLOR] ) {
+            tag = [self getTagForColor:layerType ofView:view];
+        }
+        
     }
     
     return tag;
@@ -3954,7 +3971,7 @@ NSArray *coloursArray;
  */
 -(IBAction)setArtsTabAction:(id) sender
 {
-
+    
     [self addBottomTabs:libArts];
     [clipArtTabButton setSelected:NO];
     [emoticonsTabButton setSelected:NO];
@@ -4015,7 +4032,7 @@ NSArray *coloursArray;
                                  [layerScrollView setContentSize:CGSizeMake(320, emoticonsView.size.height)];
                                  
                                  [self setSelectedItem:FLYER_LAYER_EMOTICON inView:emoticonsView ofLayerAttribute:LAYER_ATTRIBUTE_IMAGE];
-
+                                 
                              } else {
                                  
                                  
@@ -4164,14 +4181,14 @@ NSArray *coloursArray;
                                  [self setSelectedItem:FLYER_LAYER_TEXT inView:fontsView ofLayerAttribute:LAYER_ATTRIBUTE_FONT];
                                  //[layerScrollView setContentSize:CGSizeMake(([symbolArray count]*(symbolScrollWidth+5)), [layerScrollView bounds].size.height)];
                              }
-
+                             
                          }
                          completion:^(BOOL finished){
                              [layerScrollView flashScrollIndicators];
                          }];
         //END ANIMATION
-      
-         //Add ContextView
+        
+        //Add ContextView
         [self addScrollView:layerScrollView];
         
 		[fontTabButton setSelected:YES];
@@ -4197,7 +4214,7 @@ NSArray *coloursArray;
 	}
 	else if(selectedButton == sizeTabButton)
 	{
-
+        
         //HERE WE SET ANIMATION
         [UIView animateWithDuration:0.4f
                          animations:^{
@@ -4216,7 +4233,7 @@ NSArray *coloursArray;
 	}
 	else if(selectedButton == fontBorderTabButton)
 	{
-
+        
         //HERE WE SET ANIMATION
         [UIView animateWithDuration:0.4f
                          animations:^{
@@ -4240,7 +4257,6 @@ NSArray *coloursArray;
 	}
     
 }
-
 
 /*
  * When we click on Background Tab
@@ -4276,17 +4292,17 @@ NSArray *coloursArray;
     }
     else if(selectedButton == cameraTakePhoto)
     {
-
+        
         [self openCustomCamera:YES];
         _videoLabel.alpha = 1;
         
         _addMoreLayerOrSaveFlyerLabel.alpha = 0;
         _takeOrAddPhotoLabel.alpha = 0;
-
+        
     }
     else if(selectedButton == cameraRoll)
     {
-
+        
         //HERE WE CHECK USER DID ALLOWED TO ACCESS PHOTO library
         if ([ALAssetsLibrary authorizationStatus] == ALAuthorizationStatusRestricted || [ALAssetsLibrary authorizationStatus] == ALAuthorizationStatusDenied) {
             
@@ -4303,7 +4319,7 @@ NSArray *coloursArray;
         
         _addMoreLayerOrSaveFlyerLabel.alpha = 0;
         _takeOrAddPhotoLabel.alpha = 0;
-
+        
     }
     else if(selectedButton == flyerBorder)
     {
@@ -4313,7 +4329,7 @@ NSArray *coloursArray;
         [UIView animateWithDuration:0.4f
                          animations:^{
                              //Create ScrollView
-                            [self addFlyerBorderInSubView];
+                             [self addFlyerBorderInSubView];
                          }
                          completion:^(BOOL finished){
                              [layerScrollView flashScrollIndicators];
@@ -4322,9 +4338,9 @@ NSArray *coloursArray;
         
         //Add ContextView
         [self addScrollView:layerScrollView];
-    
+        
     }
-
+    
 }
 
 /*
@@ -4340,7 +4356,7 @@ NSArray *coloursArray;
 	{
         imgPickerFlag = IMAGEPICKER_PHOTO;
         [self openCustomCamera:NO];
-
+        
     }
     else if( selectedButton == photoTabButton )
 	{
@@ -4363,12 +4379,12 @@ NSArray *coloursArray;
             
             //Set here Un-Selected
             [widthTabButton setSelected:NO];
-        
+            
         } else {
             //FOR PINCH
             [widthTabButton  setSelected:YES];
             [heightTabButton setSelected:NO];
-
+            
         }
         
     }
@@ -4379,12 +4395,12 @@ NSArray *coloursArray;
             
             //Set here Un-Selected State
             [heightTabButton setSelected:NO];
-        
+            
         } else {
             //FOR PINCH
             [heightTabButton  setSelected:YES];
             [widthTabButton setSelected:NO];
-
+            
         }
     }
 }
@@ -4406,13 +4422,13 @@ NSArray *coloursArray;
     [addVideoTabButton setSelected:NO];
     [backgroundTabButton setSelected:NO];
     [drawingMenueButton setSelected:NO];
-
-
+    
+    
 	if(selectedButton == addMoreFontTabButton)
 	{
-
+        
         selectedAddMoreLayerTab = ADD_MORE_TEXTTAB;
-
+        
         [addMoreFontTabButton setSelected:YES];
         
         if ([currentLayer isEqualToString:@""]) {
@@ -4425,7 +4441,7 @@ NSArray *coloursArray;
 	{
         selectedAddMoreLayerTab = ADD_MORE_PHOTOTAB;
         
-
+        
         if ([currentLayer isEqualToString:@""]) {
             currentLayer = [flyer addImage];
             
@@ -4433,7 +4449,7 @@ NSArray *coloursArray;
             [flyer setImageFrame:currentLayer :imageFrame];
             NSMutableDictionary *dic = [flyer getLayerFromMaster:currentLayer];
             [self.flyimgView renderLayer:currentLayer layerDictionary:dic];
-           
+            
         }
         
         //Here we Highlight The ImageView
@@ -4449,7 +4465,7 @@ NSArray *coloursArray;
 		imgPickerFlag = IMAGEPICKER_PHOTO;
         [addMorePhotoTabButton setSelected:YES];
         
-
+        
 	}
 	else if(selectedButton == addArtsTabButton)
 	{
@@ -4476,7 +4492,7 @@ NSArray *coloursArray;
                              [layerScrollView flashScrollIndicators];
                          }];
         
-
+        
         
         [clipArtTabButton setSelected:YES];
         //Add right Bar button
@@ -4495,10 +4511,10 @@ NSArray *coloursArray;
 	else if(selectedButton == addVideoTabButton)
 	{
         UserPurchases *userPurchases_ = [UserPurchases getInstance];
-    
+        
         if ([[PFUser currentUser] sessionToken].length != 0) {
             if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
-                 [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"] ) {
+                [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"] ) {
                 
                 [self openCustomCamera:YES];
                 _videoLabel.alpha = 1;
@@ -4537,16 +4553,16 @@ NSArray *coloursArray;
         
         //Add ContextView
         [self addBottomTabs:libBackground];
-       
+        
         [self setlibBackgroundTabAction:backtemplates];
-
+        
     }
     else if( selectedButton == drawingMenueButton)
     {
         [drawingMenueButton setSelected:YES];
         
         if ([currentLayer isEqualToString:@""]) {
-
+            
             // work for tempDrawImageLayer -----------------------------------------------
             //create/add layer with drawing type
             NSString *tempDrawImageLayer = [flyer addDrawingImage:NO];
@@ -4565,7 +4581,7 @@ NSArray *coloursArray;
             [self.flyimgView addSubview:self.tempDrawImage];
             
             self.tempDrawImage.userInteractionEnabled = YES; // CAN receive touches
-           
+            
             
             // work for main layer -----------------------------------------------
             currentLayer = [flyer addDrawingImage:YES];
@@ -4590,7 +4606,7 @@ NSArray *coloursArray;
         }
         //Here we Highlight The ImageView
         [self.flyimgView layerIsBeingEdited:currentLayer];
-
+        
         //HERE WE SET ANIMATION
         [UIView animateWithDuration:0.4f
                          animations:^{
@@ -4602,7 +4618,7 @@ NSArray *coloursArray;
                          }];
         
         
-
+        
         //Add right Bar button
         [self addDonetoRightBarBotton];
         
@@ -4616,7 +4632,7 @@ NSArray *coloursArray;
         //[self setArtsTabAction:clipArtTabButton];
         
 	}
-
+    
 }
 
 
@@ -4760,7 +4776,7 @@ NSArray *coloursArray;
     
     NSString *FolderPath = [NSString stringWithFormat:@"%@/Symbol", currentpath];
     NSString *dicPath = @"Symbol";
-
+    
     //Create Unique Id for Image
     NSString *uniqueId = [Flyer getUniqueId];
     
@@ -4772,7 +4788,7 @@ NSArray *coloursArray;
     
     UIImage *realImage =  [UIImage imageWithContentsOfFile:existImagePath];
     NSData *imgData = UIImagePNGRepresentation(realImage);
-
+    
     //Create a Image Copy to Current Flyer Folder
     [[NSFileManager defaultManager] createFileAtPath:imageFolderPath contents:imgData attributes:nil];
     
@@ -4796,7 +4812,7 @@ NSArray *coloursArray;
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     
     if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
-         [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"] ) {
+        [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"] ) {
         
         UIImage *buttonImage = [UIImage imageNamed:@"video_tab.png"];
         [addVideoTabButton setImage:buttonImage forState:UIControlStateNormal];
@@ -4870,16 +4886,16 @@ NSArray *coloursArray;
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     
     if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]  ||
-         [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"] ) {
+        [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"] ) {
         
         
         UIImage *buttonImage = [UIImage imageNamed:@"video_tab.png"];
         [addVideoTabButton setImage:buttonImage forState:UIControlStateNormal];
         [inappviewcontroller.paidFeaturesTview reloadData];
         
-    //Checking if user valid purchases
+        //Checking if user valid purchases
     } else if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]   ||
-                [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyIconsBundle"]    )     {
+               [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyIconsBundle"]    )     {
         
         fontsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Fonts-paid" ofType:@"plist"];
         clipartsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Cliparts-paid" ofType:@"plist"];
@@ -4894,14 +4910,14 @@ NSArray *coloursArray;
         if ( [sharePanel isHidden] ) {
             [self presentModalViewController:inappviewcontroller animated:YES];
         }
-       
+        
         
     }
     
 }
 
 -(void)enableHome:(BOOL)enable{
-
+    
     [backButton setEnabled:enable];
     
 }
@@ -4935,10 +4951,10 @@ NSArray *coloursArray;
     
     if( totalFreeSpace < 50 ){
         spaceUnavailableAlert = [[UIAlertView alloc] initWithTitle:@"Not Enough Storage"
-                                                     message:@"Please clear storage space in your device then try again"
-                                                     delegate:self
-                                                     cancelButtonTitle:@"OK"
-                                                     otherButtonTitles:nil];
+                                                           message:@"Please clear storage space in your device then try again"
+                                                          delegate:self
+                                                 cancelButtonTitle:@"OK"
+                                                 otherButtonTitles:nil];
         
         [spaceUnavailableAlert show];
     }
@@ -4972,6 +4988,111 @@ NSArray *coloursArray;
 
 
 #pragma mark - Drawing Methods
+#pragma mark -  Drawing tab's tap actions
+/*
+ * When we click on Drawing Tab
+ * This Method Manage Drawing SubTabs
+ */
+-(IBAction)drawingSetStyleTabAction:(id) sender
+{
+    
+    //[self addBottomTabs:libText];
+    
+    [drawingPatternTabButton setSelected:NO];
+    [drawingColorTabButton setSelected:NO];
+    [drawingSizeTabButton setSelected:NO];
+    
+    
+    UIButton *selectedButton = (UIButton*)sender;
+	
+    if(selectedButton == drawingPatternTabButton)
+	{
+        //HERE WE SET ANIMATION
+        [UIView animateWithDuration:0.4f
+                         animations:^{
+                             //Create ScrollView
+                             if(IS_IPHONE_5){
+                                 
+                                 //Delete SubViews from ScrollView
+                                 [self deleteSubviewsFromScrollView];
+                                 [layerScrollView addSubview:fontsView];
+                                 [layerScrollView setContentSize:CGSizeMake(320, fontsView.size.height)];
+                                 
+                                 [self setSelectedItem:FLYER_LAYER_DRAWING inView:fontsView ofLayerAttribute:LAYER_ATTRIBUTE_FONT];
+                                 
+                             } else {
+                                 
+                                 //Delete SubViews from ScrollView
+                                 [self deleteSubviewsFromScrollView];
+                                 [layerScrollView addSubview:fontsView];
+                                 [layerScrollView setContentSize:CGSizeMake(fontsView.size.width , fontsView.size.height)];
+                                 
+                                 [self setSelectedItem:FLYER_LAYER_DRAWING inView:fontsView ofLayerAttribute:LAYER_ATTRIBUTE_FONT];
+                                 
+                             }
+                             
+                         }
+                         completion:^(BOOL finished){
+                             [layerScrollView flashScrollIndicators];
+                         }];
+        //END ANIMATION
+        
+        //Add ContextView
+        [self addScrollView:layerScrollView];
+        
+		[drawingPatternTabButton setSelected:YES];
+	}
+	else if(selectedButton == drawingColorTabButton)
+	{
+        
+        //HERE WE SET ANIMATION
+        [UIView animateWithDuration:0.4f
+                         animations:^{
+                             //Create ScrollView
+                             [self addColorsInSubView];
+                         }
+                         completion:^(BOOL finished){
+                             [layerScrollView flashScrollIndicators];
+                         }];
+        //END ANIMATION
+        
+        //Add ContextView
+        [self addScrollView:layerScrollView];
+        [drawingColorTabButton setSelected:YES];
+        
+	}
+	else if(selectedButton == drawingSizeTabButton)
+	{
+        
+        //HERE WE SET ANIMATION
+        [UIView animateWithDuration:0.4f
+                         animations:^{
+                             //Create ScrollView
+                             [self addSizeInSubView];
+                         }
+                         completion:^(BOOL finished){
+                             [layerScrollView flashScrollIndicators];
+                         }];
+        //END ANIMATION
+        
+        //Add ContextView
+        [self addScrollView:layerScrollView];
+        
+		[drawingSizeTabButton setSelected:YES];
+	}
+}
+
+// Input is without the # ie : white = FFFFFF
+- (void)setDrawingRGB:(UIColor *) color
+{
+    CGFloat alpha;
+    
+    //Getting RGB Color Code
+    [color getRed:&red green:&green blue:&blue alpha:&alpha];
+    
+    //[color getWhite:&w alpha:&a];
+    
+}
 
 #pragma mark - Move start on type=FLYER_LAYER_DRAWING (FLYER_LAYER_DRAWING=DrawingImgLayer)
 
@@ -5029,7 +5150,7 @@ NSArray *coloursArray;
         
         
         // End of save flyer and drawing layer
-
+        
         
     }
     
