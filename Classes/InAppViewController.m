@@ -273,7 +273,7 @@
         cancelRequest = NO;
         
         //These are over Products on App Store
-        NSSet *productIdentifiers = [NSSet setWithArray:@[@"com.flyerly.AllDesignBundle",@"com.flyerly.UnlockSavedFlyers",@"com.flyerly.UnlockCreateVideoFlyerOption",@"com.flyerly.IconsBundle",@"com.flyerly.SelectedSymbol"]];
+        NSSet *productIdentifiers = [NSSet setWithArray:@[@"com.flyerly.AllDesignBundle",@"com.flyerly.UnlockSavedFlyers",@"com.flyerly.UnlockCreateVideoFlyerOption",@"com.flyerly.IconsBundle"]];
         
         [[RMStore defaultStore] requestProducts:productIdentifiers success:^(NSArray *products, NSArray *invalidProductIdentifiers) {
             

@@ -10,6 +10,9 @@
 #import "Common.h"
 #import "ImageLoader.h"
 #import "InAppViewController.h"
+#import "AFHTTPRequestOperation.h"
+#import "CropViewController.h"
+#include <CommonCrypto/CommonDigest.h>
 
 @interface AssetGroupViewControllerWithSearchFeild ()
 
@@ -19,6 +22,13 @@ NSString *account_id;
 id jsonObject;
 NSDictionary *tableData;
 NSMutableArray *imagesPreview;
+NSMutableArray *imagesIDs;
+NSMutableArray * thumbnailViews;
+NSMutableArray *productArray;
+NSArray *requestedProducts;
+
+NSString *bigStockApiSecretKey = @"e84301b7de141bc89517fc708de3285c825bb648";
+NSString *imageToBuy;
 
 @implementation AssetGroupViewControllerWithSearchFeild
 
@@ -43,6 +53,13 @@ NSMutableArray *imagesPreview;
     // Customization
     self.thumbnailsGridView = scrollGridView;
 
+    [self requestProduct];
+    
+    // HERE WE CREATE FLYERLY ALBUM ON DEVICE
+    if(![[NSUserDefaults standardUserDefaults] stringForKey:@"FlyerlyPurchasedAlbum"]){
+        [self createFlyerlyPurchasedAlbum];
+    }
+    
     //change to your account id at bigstock.com/partners
     account_id = @"862265";
     // Do any additional setup after loading the view from its nib.
@@ -105,11 +122,6 @@ NSMutableArray *imagesPreview;
     //sets the receiver’s HTTP request method
     [urlRequest setHTTPMethod:@"GET"];
     
-    //create string for parameters that we need to send in the HTTP POST body
-    //NSString *body =  [NSString stringWithFormat:@"countryCode=%@", @"PKR"];
-    //sets the request body of the receiver to the specified data.
-    //[urlRequest setHTTPBody:[body dataUsingEncoding:NSUTF8StringEncoding]];
-    
     //allocate a new operation queue
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     //Loads the data for a URL request and executes a handler block on an
@@ -128,7 +140,7 @@ NSMutableArray *imagesPreview;
                  //lbl_status.text = @"Got api data, parsing data";
                  NSLog(@"Got api data, parsing data");
                  
-                 [self parseResponse:data];
+                 [self parseSearchResponse:data];
              });
          }
          else if ([data length] == 0 && error == nil){
@@ -142,8 +154,79 @@ NSMutableArray *imagesPreview;
      }];
 }
 
-// Here we got response from api, parsing json response
-- (void) parseResponse:(NSData *) data {
+- (NSString *)sha1:(NSString *)str {
+    const char *cStr = [str UTF8String];
+    unsigned char result[CC_SHA1_DIGEST_LENGTH];
+    CC_SHA1(cStr, strlen(cStr), result);
+    if (result) {
+        /* SHA-1 hash has been calculated and stored in 'result'. */
+        
+        NSMutableString *output = [NSMutableString stringWithCapacity:CC_SHA1_DIGEST_LENGTH];
+        
+        for(int i = 0; i < CC_SHA1_DIGEST_LENGTH; i++) {
+            [output appendFormat:@"%02x", result[i]];
+        }
+        
+        return output;
+        
+    }
+    return nil;
+}
+
+// Send api request with lat long
+- (void) apiRequestForPurchasingImage: (NSString *)imageID {
+    
+    NSString *encoded = [self sha1:[NSString stringWithFormat:@"%@%@%@", bigStockApiSecretKey, account_id, imageID]];
+    
+    NSString *myUrlString = [NSString stringWithFormat:@"http://api.bigstockphoto.com/2/%@/purchase?image_id=%@&size_code=s&auth_key=%@", account_id, imageID,encoded];
+    
+    NSLog(@"%@", myUrlString);
+    
+    //create a NSURL object from the string data
+    NSURL *myUrl = [NSURL URLWithString:myUrlString];
+    
+    //create a mutable HTTP request
+    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:myUrl];
+    //sets the receiver’s timeout interval, in seconds
+    [urlRequest setTimeoutInterval:30.0f];
+    //sets the receiver’s HTTP request method
+    [urlRequest setHTTPMethod:@"GET"];
+    
+    //allocate a new operation queue
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    
+    //Loads the data for a URL request and executes a handler block on an
+    //operation queue when the request completes or fails.
+    [NSURLConnection
+     sendAsynchronousRequest:urlRequest
+     queue:queue
+     completionHandler:^(NSURLResponse *response,
+                         NSData *data,
+                         NSError *error) {
+         if ([data length] >0 && error == nil){
+             //process the JSON response
+             //use the main queue so that we can interact with the screen
+             dispatch_async(dispatch_get_main_queue(), ^{
+                 
+                 //lbl_status.text = @"Got api data, parsing data";
+                 NSLog(@"Got api data, parsing data");
+                 
+                 [self parsePurchaseResponse:data];
+             });
+         }
+         else if ([data length] == 0 && error == nil){
+             NSLog(@"Api data was empty");
+             //lbl_status.text = @"Api data was empty";
+         }
+         else if (error != nil){
+             NSLog(@"Error occured, error = %@", error);
+             //lbl_status.text = @"Error occured";
+         }
+     }];
+}
+
+// Here we got response from api, parsing purchasing json response
+- (void) parsePurchaseResponse:(NSData *) data {
     
     NSString *myData = [[NSString alloc] initWithData:data
                                              encoding:NSUTF8StringEncoding];
@@ -165,6 +248,73 @@ NSMutableArray *imagesPreview;
         NSLog(@"msg = %@",[jsonObject objectForKey:@"message"]);
         
         imagesPreview = [[NSMutableArray alloc]init];
+        imagesIDs = [[NSMutableArray alloc]init];
+        
+        if( status == 200 ){
+            NSLog(@"Creating list from parsed data");
+            //lbl_status.text = @"Creating list";
+            tableData = [jsonObject objectForKey:@"data"];
+            
+            NSArray *purchasedImageDownloadID = [tableData objectForKey:@"download_id"];
+            
+            NSString *encoded = [self sha1:[NSString stringWithFormat:@"%@%@%@", bigStockApiSecretKey, account_id, purchasedImageDownloadID]];
+            
+            NSString *purchaseImageUrlString = [NSString stringWithFormat:@"http://api.bigstockphoto.com/2/%@/download?auth_key=%@&download_id=%@", account_id, encoded,purchasedImageDownloadID];
+            
+            NSURL *purchaseImageUrl = [[NSURL alloc] initWithString:purchaseImageUrlString];
+            NSURLRequest *purchaseImageUrlRequest = [[NSURLRequest alloc] initWithURL:purchaseImageUrl];
+            
+            AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:purchaseImageUrlRequest];
+            requestOperation.responseSerializer = [AFImageResponseSerializer serializer];
+            [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+                NSLog(@"Response: %@", responseObject);
+                
+                UIImage *thumbnail = (UIImage *) responseObject;
+                
+                NSData* data = UIImagePNGRepresentation(thumbnail);
+                
+                [self saveInGallery:data];
+                
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                NSLog(@"Image error: %@", error);
+            }];
+            [requestOperation start];
+            NSLog(@"");
+        }
+        
+    } else{
+        NSLog(@"Json parsin may error aya hy, error=%@", error);
+        //lbl_status.text = @"Json parsin may error aya hy";
+    }
+    
+}
+
+
+
+// Here we got response from api, parsing json response
+- (void) parseSearchResponse:(NSData *) data {
+    
+    NSString *myData = [[NSString alloc] initWithData:data
+                                             encoding:NSUTF8StringEncoding];
+    NSLog(@"in parseResponse, JSON data = %@", myData);
+    NSError *error = nil;
+    
+    //parsing the JSON response
+    jsonObject = [NSJSONSerialization
+                  JSONObjectWithData:data
+                  options:NSJSONReadingAllowFragments
+                  error:&error];
+    
+    if (jsonObject != nil && error == nil){
+        
+        // Test/Access any key of json object( KEY , VALUE )
+        int status = [[jsonObject objectForKey:@"response_code"] intValue];
+        NSLog(@"Api status = %i",status);
+        //lbl_status.text = [@"Api status = " stringByAppendingFormat:@"%i",status];
+        NSLog(@"msg = %@",[jsonObject objectForKey:@"message"]);
+        
+        imagesPreview = [[NSMutableArray alloc]init];
+        imagesIDs = [[NSMutableArray alloc]init];
         
         if( status == 200 ){
             NSLog(@"Creating list from parsed data");
@@ -177,8 +327,9 @@ NSMutableArray *imagesPreview;
                 
                 NSDictionary *imageObject = [images objectAtIndex:i];
                 NSDictionary *thumbDetails = [imageObject objectForKey:@"small_thumb"];
+                NSString *imageId = [imageObject objectForKey:@"id"];
                 [imagesPreview addObject :[thumbDetails objectForKey:@"url"]];
-                
+                [imagesIDs addObject:imageId];
                 
             }
             
@@ -198,7 +349,22 @@ NSMutableArray *imagesPreview;
     
 }
 
-
+- (void)loadThumbnailImageWithIndex:(NSUInteger)index
+{
+    NBULogVerbose(@"%@ %@", THIS_METHOD, @(index));
+    
+    [self.imageLoader imageForObject:self.objectArray[index]
+                            size:NBUImageSizeThumbnail
+                     resultBlock:^(UIImage * image,
+                                   NSError * error)
+     {
+         thumbnailViews = [[NSMutableArray alloc] init];
+         thumbnailViews = [self valueForKey:@"_thumbnailViews"];
+         ((NBUGalleryThumbnailView *)thumbnailViews[index]).imageView.backgroundColor = [UIColor whiteColor];
+         ((NBUGalleryThumbnailView *)thumbnailViews[index]).imageView.contentMode = UIViewContentModeScaleAspectFit;
+         ((NBUGalleryThumbnailView *)thumbnailViews[index]).imageView.image = image;
+     }];
+}
 
 
 - (void) purchaseProduct {
@@ -237,14 +403,68 @@ NSMutableArray *imagesPreview;
         }
         
         [self productSuccesfullyPurchased];
-        
-        
+    
     } failure:^(SKPaymentTransaction *transaction, NSError *error) {
         
         NSLog(@"Something went wrong");
         
     }];
 }
+
+#pragma mark  PURCHASE PRODUCT
+
+-(void)requestProduct {
+    
+    if ([FlyerlySingleton connected]) {
+        
+        //Check For Crash Maintain
+        cancelRequest = NO;
+        
+        //These are over Products on App Store
+        NSSet *productIdentifiers = [NSSet setWithArray:@[@"com.flyerly.AllDesignBundle",@"com.flyerly.UnlockSavedFlyers",@"com.flyerly.UnlockCreateVideoFlyerOption",@"com.flyerly.IconsBundle",@"com.flyerly.SelectedSymbol"]];
+        
+        [[RMStore defaultStore] requestProducts:productIdentifiers success:^(NSArray *products, NSArray *invalidProductIdentifiers) {
+            
+            if (cancelRequest) return ;
+            
+            NSLog(@"Products loaded");
+            
+            requestedProducts = products;
+            bool disablePurchase = ([[PFUser currentUser] sessionToken].length == 0);
+            
+            NSString *sheetTitle = @"Choose Product";
+            
+            if (disablePurchase) {
+                sheetTitle = @"This feature requires Sign In";
+            }
+            
+            productArray = [[NSMutableArray alloc] init];
+            for(SKProduct *product in products)
+            {
+                
+                NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
+                                      product.localizedTitle,@"packagename",
+                                      product.priceAsString,@"packageprice" ,
+                                      product.localizedDescription,@"packagedesciption",
+                                      product.productIdentifier,@"productidentifier" , nil];
+                
+                
+                [productArray addObject:dict];
+            }
+            
+            
+        } failure:^(NSError *error) {
+            NSLog(@"Something went wrong");
+        }];
+    } else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You're not connected to the internet. Please connect and retry." message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        
+        [alert show];
+        
+        
+    }
+}
+
 
 - ( void )productSuccesfullyPurchased{
     
@@ -253,13 +473,15 @@ NSMutableArray *imagesPreview;
 }
 
 
--(void)thumbnailWasTapped :(id)objectId {
+-(void)thumbnailWasTapped :(UIView *)sender {
 
     //Checking if the user is valid or anonymus
     if ([[PFUser currentUser] sessionToken].length != 0) {
         
-        [self purchaseProduct];
-        
+        //[self purchaseProduct];
+        NSLog(@"%ld",(long)sender.tag);
+        NSString *id_ = [imagesIDs objectAtIndex:sender.tag];
+        [self apiRequestForPurchasingImage:id_];
         
     }else {
         UIAlertView *someError = [[UIAlertView alloc] initWithTitle: @"Please sign in first"
@@ -278,8 +500,6 @@ NSMutableArray *imagesPreview;
     
     // Refresh selected assets
     NBUAssetThumbnailView *assetView = (NBUAssetThumbnailView *)notification.object;
-    NBUAsset *asset = assetView.asset;
-    NSLog(@"image selected");
 }
 
 #pragma mark - Button Handlers
@@ -312,7 +532,7 @@ NSMutableArray *imagesPreview;
     __weak ALAssetsLibrary* library = _library;
     
     //Checking Group Path should be not null for Flyer Saving In Gallery
-    if ([[NSUserDefaults standardUserDefaults] stringForKey:@"FlyerlPurchasedyAlbum"] == nil) {
+    if ([[NSUserDefaults standardUserDefaults] stringForKey:@"FlyerlyPurchasedAlbum"] == nil) {
         return;
     }
     
@@ -324,7 +544,7 @@ NSMutableArray *imagesPreview;
     
     
     // HERE WE GET FLYERLY ALBUM URL
-    NSURL *groupUrl  = [[NSURL alloc] initWithString:[[NSUserDefaults standardUserDefaults] stringForKey:@"FlyerlPurchasedyAlbum"]];
+    NSURL *groupUrl  = [[NSURL alloc] initWithString:[[NSUserDefaults standardUserDefaults] stringForKey:@"FlyerlyPurchasedAlbum"]];
     
     
     // HERE WE GET GROUP OF IMAGE IN GALLERY
@@ -334,70 +554,12 @@ NSMutableArray *imagesPreview;
         if ( group == nil ) {
             
             //ALBUM NOT FOUND
-            [self createFlyerlyAlbum:imgData];
+            [self createFlyerlyPurchasedAlbum];
             
         } else {
             
-            //ALBUM FOUND
-            //GETTING IMAGE OR VIDEO URL IF EXIST IN FLYER INFO FILE .TXT
-            NSString *currentUrl;
-            
-            currentUrl = [self getFlyerURL];
-            
-            
-            // CHECKING CRITERIA CREATE OR MODIFY
-            if ( [currentUrl isEqualToString:@""]) {
-                
-                if ( [self isVideoFlyer] ){
-                    [self createVideoToFlyerlyAlbum:groupUrl VideoData:[NSURL fileURLWithPath:[self getSharingVideoPath]]];
-                }else {
-                    [self createImageToFlyerlyAlbum:groupUrl ImageData:imgData];
-                }
-                
-            } else { // URL FOUND WE USE EXISTING URL FOR REPLACE IMAGE
-                
-                // CONVERT STRING TO URL
-                NSURL *imageUrl = [[NSURL alloc] initWithString:currentUrl];
-                
-                // GETTING GENERATED IMAGE WITH URL
-                [library assetForURL:imageUrl resultBlock:^(ALAsset *asset) {
-                    
-                    if (asset == nil) {
-                        
-                        // URL Exist and Image Not Found
-                        // we Create New Content In Gallery
-                        if ( [self isVideoFlyer] ){
-                            
-                            //For Video
-                            [self createVideoToFlyerlyAlbum:groupUrl VideoData:[NSURL fileURLWithPath:[self getSharingVideoPath]]];
-                        }else {
-                            
-                            //For Image
-                            [self createImageToFlyerlyAlbum:groupUrl ImageData:imgData];
-                        }
-                    } else {
-                        
-                        // URL Exist and Image Found
-                        //HERE WE UPDATE Content WITH LATEST UPDATE
-                        
-                        if ( [self isVideoFlyer] ){
-                            
-                            //Update Video
-                            [asset setVideoAtPath:[NSURL fileURLWithPath:[self getSharingVideoPath]] completionBlock:^(NSURL *assetURL, NSError *error) {
-                            }];
-                        }else {
-                            
-                            //Update Image
-                            [asset setImageData:imgData metadata:nil completionBlock:^(NSURL *assetURL, NSError *error) {
-                            }];
-                        }
-                    }
-                    
-                } failureBlock:^(NSError *error) {
-                }];
-                
-                
-            }
+            [self createImageToFlyerlyPurchasedAlbum:groupUrl ImageData:imgData];
+
         }
         
     }
@@ -409,16 +571,16 @@ NSMutableArray *imagesPreview;
 /* APPLY OVER LOADING HERE
  * THIS METHOD CREATE ALBUM ON DEVICE AFTER IT SAVING IMAGE IN LIBRARY
  */
--(void)createFlyerlyAlbum :(NSData *)imgdata {
+-(void)createFlyerlyPurchasedAlbum  {
     
     if ( _library == nil ) {
         _library = [[ALAssetsLibrary alloc] init];
     }
-    __weak Flyer *weakSelf = self;
+    __weak AssetGroupViewControllerWithSearchFeild *weakSelf = self;
     
     
     //HERE WE SEN REQUEST FOR CREATE ALBUM
-    [_library addAssetsGroupAlbumWithName:FLYER_ALBUM_NAME
+    [_library addAssetsGroupAlbumWithName:FLYER_PURCHASED_ALBUM_NAME
                               resultBlock:^(ALAssetsGroup *group) {
                                   
                                   // GETTING CREATED URL OF ALBUM
@@ -427,21 +589,52 @@ NSMutableArray *imagesPreview;
                                   //SAVING IN PREFERENCES .PLIST FOR FUTURE USE
                                   [[NSUserDefaults standardUserDefaults]   setObject:groupURL.absoluteString forKey:@"FlyerlyPurchasedAlbum"];
                                   
-                                  //Checking Content Type
-                                  if ([weakSelf isVideoFlyer]) {
-                                      
-                                      //Create Video
-                                      [weakSelf createVideoToFlyerlyAlbum:groupURL VideoData:[NSURL fileURLWithPath:[weakSelf getSharingVideoPath]]];
-                                  }else {
-                                      
-                                      //Create Image
-                                      [weakSelf createImageToFlyerlyAlbum:groupURL ImageData:imgdata];
-                                  }
                               }
      
                              failureBlock:^(NSError *error) {
                                  NSLog( @"Error adding album: %@", error.localizedDescription );
                              }];
+    
+    
+}
+
+
+/*
+ * HERE WE CREATE NEW IMAGE IN GALLERY
+ */
+-(void)createImageToFlyerlyPurchasedAlbum :(NSURL *)groupURL ImageData :(NSData *)imgData {
+    
+    // CREATE LIBRARY OBJECT FIRST
+    if ( _library == nil ) {
+        _library = [[ALAssetsLibrary alloc] init];
+    }
+    
+    __weak ALAssetsLibrary* library = _library;
+    
+    // HERE WE GET GROUP OF IMAGE IN GALLERY
+    [_library groupForURL:groupURL resultBlock:^(ALAssetsGroup *group) {
+        
+        //HERE WE CREATE IMAGE IN GALLERY
+        [library  writeImageDataToSavedPhotosAlbum:imgData metadata:nil completionBlock:^(NSURL *assetURL, NSError *error) {
+            
+            // GETTING GENERATED IMAGE WITH URL
+            [library assetForURL:assetURL resultBlock:^(ALAsset *asset) {
+                
+                //HERE WE LINK IMAGE WITH FLYERLY ALBUM
+                [group addAsset:asset];
+                
+                [self goBack];
+                
+            } failureBlock:^(NSError *error) {
+                NSLog( @"Image not linked: %@", error.localizedDescription );
+            }];
+            
+        }];
+        
+        
+    } failureBlock:^(NSError *error) {
+        NSLog( @"Image not created in gallery: %@", error.localizedDescription );
+    }];
     
     
 }

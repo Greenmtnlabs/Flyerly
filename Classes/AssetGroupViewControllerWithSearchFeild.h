@@ -14,9 +14,10 @@
 
 @class ObjectGridView, NBUGalleryViewController,InAppViewController;
 
-@interface AssetGroupViewControllerWithSearchFeild : NBUGalleryViewController <RMStoreObserver,InAppPurchasePanelButtonProtocol,UserPurchasesDelegate>{
+@interface AssetGroupViewControllerWithSearchFeild : NBUGalleryViewController <RMStoreObserver,UserPurchasesDelegate>{
     
     InAppViewController *inappviewcontroller;
+    BOOL cancelRequest;
 }
 
 @property (strong, nonatomic) ALAssetsLibrary *library;

@@ -16,6 +16,7 @@
 #define VIDEOFRAME 30
 #define MAX_VIDEO_LENGTH 30
 #define FLYER_ALBUM_NAME @"Flyerly"
+#define FLYER_PURCHASED_ALBUM_NAME @"Flyerly Purchased"
 
 
 #define RADIANS(degrees) ((degrees * M_PI) / 180.0)

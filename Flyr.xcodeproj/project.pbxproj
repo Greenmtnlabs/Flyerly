@@ -321,7 +321,6 @@
 		20F93DD417B2262200F6F88C /* MainSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20F93DD217B2262200F6F88C /* MainSettingViewController.xib */; };
 		20FA7E731872AAF50057C3F3 /* CameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20FA7E711872AAF50057C3F3 /* CameraViewController.xib */; };
 		2405D3481990AC4B007F2596 /* AssetGroupViewControllerWithSearchFeild.m in Sources */ = {isa = PBXBuildFile; fileRef = 2405D3461990AC4B007F2596 /* AssetGroupViewControllerWithSearchFeild.m */; };
-		2405D3491990AC4B007F2596 /* AssetGroupViewControllerWithSearchFeild.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2405D3471990AC4B007F2596 /* AssetGroupViewControllerWithSearchFeild.xib */; };
 		24218392194AF29C00FDDA97 /* Fonts-paid.plist in Resources */ = {isa = PBXBuildFile; fileRef = 24218391194AF29C00FDDA97 /* Fonts-paid.plist */; };
 		24218394194B02B500FDDA97 /* Emoticons.plist in Resources */ = {isa = PBXBuildFile; fileRef = 24218393194B02B500FDDA97 /* Emoticons.plist */; };
 		24218396194B02C500FDDA97 /* Emoticons-paid.plist in Resources */ = {isa = PBXBuildFile; fileRef = 24218395194B02C500FDDA97 /* Emoticons-paid.plist */; };
@@ -520,6 +519,7 @@
 		243DD521192B24B500391786 /* FlyerIcons.xib in Resources */ = {isa = PBXBuildFile; fileRef = 243DD520192B24B500391786 /* FlyerIcons.xib */; };
 		243DD523192B24CB00391786 /* FlyerIcons-iPhone4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 243DD522192B24CB00391786 /* FlyerIcons-iPhone4.xib */; };
 		2441584819A4E85B00F12FAD /* ImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 2441584719A4E85B00F12FAD /* ImageLoader.m */; };
+		2453E39F19AC5E0300CB2958 /* buy@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2453E39E19AC5E0300CB2958 /* buy@2x.png */; };
 		2459E8B0196130810072A56C /* greenButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 2459E8AF196130810072A56C /* greenButton.png */; };
 		245A016F19A74E3C005A414A /* AssetTest.xib in Resources */ = {isa = PBXBuildFile; fileRef = 245A016E19A74E3C005A414A /* AssetTest.xib */; };
 		245C0FA51933081200B5B31C /* free-features.plist in Resources */ = {isa = PBXBuildFile; fileRef = 245C0FA41933081200B5B31C /* free-features.plist */; };
@@ -1562,7 +1562,6 @@
 		20FA7E711872AAF50057C3F3 /* CameraViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraViewController.xib; sourceTree = "<group>"; };
 		2405D3451990AC4B007F2596 /* AssetGroupViewControllerWithSearchFeild.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssetGroupViewControllerWithSearchFeild.h; sourceTree = "<group>"; };
 		2405D3461990AC4B007F2596 /* AssetGroupViewControllerWithSearchFeild.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssetGroupViewControllerWithSearchFeild.m; sourceTree = "<group>"; };
-		2405D3471990AC4B007F2596 /* AssetGroupViewControllerWithSearchFeild.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AssetGroupViewControllerWithSearchFeild.xib; sourceTree = "<group>"; };
 		24218391194AF29C00FDDA97 /* Fonts-paid.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Fonts-paid.plist"; sourceTree = "<group>"; };
 		24218393194B02B500FDDA97 /* Emoticons.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Emoticons.plist; sourceTree = "<group>"; };
 		24218395194B02C500FDDA97 /* Emoticons-paid.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Emoticons-paid.plist"; sourceTree = "<group>"; };
@@ -1762,6 +1761,7 @@
 		243DD522192B24CB00391786 /* FlyerIcons-iPhone4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "FlyerIcons-iPhone4.xib"; sourceTree = "<group>"; };
 		2441584619A4E85B00F12FAD /* ImageLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageLoader.h; sourceTree = "<group>"; };
 		2441584719A4E85B00F12FAD /* ImageLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageLoader.m; sourceTree = "<group>"; };
+		2453E39E19AC5E0300CB2958 /* buy@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "buy@2x.png"; sourceTree = "<group>"; };
 		2459E8AF196130810072A56C /* greenButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greenButton.png; sourceTree = "<group>"; };
 		245A016E19A74E3C005A414A /* AssetTest.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AssetTest.xib; sourceTree = "<group>"; };
 		245C0FA41933081200B5B31C /* free-features.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "free-features.plist"; sourceTree = "<group>"; };
@@ -2597,6 +2597,7 @@
 		0DF3A361108DF47400D6C887 /* ImageLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				2453E39E19AC5E0300CB2958 /* buy@2x.png */,
 				20E4638C197E688600473921 /* pdf_Bg.png */,
 				20F1FB07197690D500D40E60 /* printer_sharing_selected.png */,
 				20F1FB08197690D500D40E60 /* printer_sharing.png */,
@@ -3775,7 +3776,6 @@
 			children = (
 				2405D3451990AC4B007F2596 /* AssetGroupViewControllerWithSearchFeild.h */,
 				2405D3461990AC4B007F2596 /* AssetGroupViewControllerWithSearchFeild.m */,
-				2405D3471990AC4B007F2596 /* AssetGroupViewControllerWithSearchFeild.xib */,
 				2441584619A4E85B00F12FAD /* ImageLoader.h */,
 				2441584719A4E85B00F12FAD /* ImageLoader.m */,
 				245A016E19A74E3C005A414A /* AssetTest.xib */,
@@ -5077,7 +5077,6 @@
 				247858891948736B0062F1E4 /* AMBROSIA_DEMO-Regular.ttf in Resources */,
 				654B255017202B1C0047C8F6 /* AfterUpdateController.xib in Resources */,
 				242184C5194B4AEC00FDDA97 /* emoticon183@2x.png in Resources */,
-				2405D3491990AC4B007F2596 /* AssetGroupViewControllerWithSearchFeild.xib in Resources */,
 				242184CA194B4AEC00FDDA97 /* fencing-icon.png in Resources */,
 				246EF50E193C515D004539B2 /* emoticon48@2x.png in Resources */,
 				2421850C194B4AEC00FDDA97 /* turtle-icon.png in Resources */,
@@ -5532,6 +5531,7 @@
 				242184BA194B4AEC00FDDA97 /* emoticon172@2x.png in Resources */,
 				4986857118B4FFC7002113E4 /* LibraryViewController.xib in Resources */,
 				202C639617EA06E800CB9A75 /* ricon31.png in Resources */,
+				2453E39F19AC5E0300CB2958 /* buy@2x.png in Resources */,
 				249F2035193F562C0072835E /* outline_button_selected@2x.png in Resources */,
 				202C639817EA06E800CB9A75 /* ricon32.png in Resources */,
 				247858EB194878CE0062F1E4 /* Sintony-Regular.otf in Resources */,
