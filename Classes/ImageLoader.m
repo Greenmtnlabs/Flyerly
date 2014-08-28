@@ -62,62 +62,6 @@ static NBUImageLoader * _sharedLoader;
         
     }
     
-    // An asset?
-    /*if ([object isKindOfClass:[NBUAsset class]])
-    {
-        switch (size)
-        {
-            case NBUImageSizeThumbnail:
-            {
-                resultBlock(((NBUAsset *)object).thumbnailImage,
-                            nil);
-                return;
-            }
-            case NBUImageSizeFullScreen:
-            {
-                resultBlock(((NBUAsset *)object).fullScreenImage,
-                            nil);
-                return;
-                
-            }
-            case NBUImageSizeFullResolution:
-            default:
-            {
-                resultBlock(((NBUAsset *)object).fullResolutionImage,
-                            nil);
-                return;
-                
-            }
-        }
-        return;
-    }
-    
-    // Media info?
-    if ([object isKindOfClass:[NBUMediaInfo class]])
-    {
-        switch (size)
-        {
-            case NBUImageSizeThumbnail:
-            {
-                resultBlock([(NBUMediaInfo *)object editedThumbnailWithSize:CGSizeMake(100.0, 100.0)],
-                            nil);
-                return;
-            }
-            case NBUImageSizeFullScreen:
-            case NBUImageSizeFullResolution:
-            default:
-            {
-                resultBlock(((NBUMediaInfo *)object).editedImage,
-                            nil);
-                return;
-            }
-        }
-        return;
-    }*/
-    
-    // A url?
-    // ...
-    
     // Give up
     NSError * error = [NSError errorWithDomain:NBUImageLoaderErrorDomain
                                           code:NBUImageLoaderObjectKindNotSupported

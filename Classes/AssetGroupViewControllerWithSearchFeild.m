@@ -68,7 +68,11 @@ NSString *imageToBuy;
     // Do any additional setup after loading the view from its nib.
     // Configure the grid view
     self.gridView.margin = CGSizeMake(5.0, 5.0);
-    self.gridView.nibNameForViews = @"CustomAssetThumbnailView";
+    //self.gridView.nibNameForViews = @"CustomAssetThumbnailView";
+    
+    self.nibNameForThumbnails = @"CustomThumbnailView";
+    CGSize thumbSize = CGSizeMake(100.0,120.0);
+    self.thumbnailSize = thumbSize;
     
     // Configure the selection behaviour
     self.selectionCountLimit = 1;
@@ -339,6 +343,8 @@ NSString *imageToBuy;
             ImageLoader *obj = [[ImageLoader alloc]init];
             self.imageLoader = obj;
             self.objectArray = imagesPreview;
+            
+            //self.
             
             //self.thumbnailsGridView = scrollGridView;
             [self setShowThumbnailsView:YES];
