@@ -229,6 +229,7 @@
 
 
 -(IBAction)setAddMoreLayerTabAction:(id)sender;
+-(IBAction)addDrawingLayer:(id) sender;
 -(IBAction)setlibBackgroundTabAction:(id)sender;
 -(IBAction)setStyleTabAction:(id) sender;
 -(IBAction)drawingSetStyleTabAction:(id) sender;
