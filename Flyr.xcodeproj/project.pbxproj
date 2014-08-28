@@ -1004,7 +1004,6 @@
 		365A9D1719AF697300E284B5 /* drawing_tab_pencil@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 365A9D0E19AF697300E284B5 /* drawing_tab_pencil@2x.png */; };
 		365A9D1819AF697300E284B5 /* drawing_tab_size_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 365A9D0F19AF697300E284B5 /* drawing_tab_size_selected@2x.png */; };
 		365A9D1919AF697300E284B5 /* drawing_tab_size@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 365A9D1019AF697300E284B5 /* drawing_tab_size@2x.png */; };
-		365A9D1A19AF697300E284B5 /* drawing_tabs_160x.psd in Resources */ = {isa = PBXBuildFile; fileRef = 365A9D1119AF697300E284B5 /* drawing_tabs_160x.psd */; };
 		36A93F2419AE067000D0A810 /* DrawingPatterns.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36A93F2319AE067000D0A810 /* DrawingPatterns.xib */; };
 		36A93F2619AE0B5400D0A810 /* DrawingPatterns-iPhone4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36A93F2519AE0B5400D0A810 /* DrawingPatterns-iPhone4.xib */; };
 		36A93F3619AE243D00D0A810 /* line_dashed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36A93F3319AE243D00D0A810 /* line_dashed@2x.png */; };
@@ -2379,7 +2378,6 @@
 		365A9D0E19AF697300E284B5 /* drawing_tab_pencil@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "drawing_tab_pencil@2x.png"; sourceTree = "<group>"; };
 		365A9D0F19AF697300E284B5 /* drawing_tab_size_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "drawing_tab_size_selected@2x.png"; sourceTree = "<group>"; };
 		365A9D1019AF697300E284B5 /* drawing_tab_size@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "drawing_tab_size@2x.png"; sourceTree = "<group>"; };
-		365A9D1119AF697300E284B5 /* drawing_tabs_160x.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = drawing_tabs_160x.psd; sourceTree = "<group>"; };
 		36A93F2319AE067000D0A810 /* DrawingPatterns.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DrawingPatterns.xib; sourceTree = "<group>"; };
 		36A93F2519AE0B5400D0A810 /* DrawingPatterns-iPhone4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "DrawingPatterns-iPhone4.xib"; sourceTree = "<group>"; };
 		36A93F3319AE243D00D0A810 /* line_dashed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "line_dashed@2x.png"; sourceTree = "<group>"; };
@@ -2637,7 +2635,6 @@
 				365A9D0E19AF697300E284B5 /* drawing_tab_pencil@2x.png */,
 				365A9D0F19AF697300E284B5 /* drawing_tab_size_selected@2x.png */,
 				365A9D1019AF697300E284B5 /* drawing_tab_size@2x.png */,
-				365A9D1119AF697300E284B5 /* drawing_tabs_160x.psd */,
 				36A93F3319AE243D00D0A810 /* line_dashed@2x.png */,
 				36A93F3419AE243D00D0A810 /* line_dotted@2x.png */,
 				36A93F3519AE243D00D0A810 /* line_plane@2x.png */,
@@ -5212,7 +5209,6 @@
 				65A464FE1726D703002C32FB /* ITC Avant Garde CE Gothic Book.ttf in Resources */,
 				24218477194B4AEC00FDDA97 /* eMail-icon.png in Resources */,
 				65A464FF1726D703002C32FB /* segoeui.ttf in Resources */,
-				365A9D1A19AF697300E284B5 /* drawing_tabs_160x.psd in Resources */,
 				6560C1C51727FAF9005BE8DD /* grids.png in Resources */,
 				246EF535193C515D004539B2 /* emoticon83@2x.png in Resources */,
 				24218464194B4AEC00FDDA97 /* beach-chair-icon.png in Resources */,
