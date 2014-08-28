@@ -53,6 +53,9 @@ NSString *imageToBuy;
 {
     [super viewDidLoad];
     
+    [self requestProduct];
+    
+    
     // HERE WE CREATE FLYERLY ALBUM ON DEVICE
     if(![[NSUserDefaults standardUserDefaults] stringForKey:@"FlyerlyPurchasedAlbum"]){
         [self createFlyerlyPurchasedAlbum];
@@ -61,9 +64,7 @@ NSString *imageToBuy;
     
     // Customization
     self.thumbnailsGridView = scrollGridView;
-    
-    [self requestProduct];
-    
+
     //change to your account id at bigstock.com/partners
     // Do any additional setup after loading the view from its nib.
     // Configure the grid view
@@ -99,8 +100,6 @@ NSString *imageToBuy;
     [searchTextField addTarget:self action:@selector(textFieldFinished:) forControlEvents: UIControlEventEditingDidEndOnExit];
     
     self.navigationItem.titleView = label;
-    
-    [self apiRequestWithSearchingKeyWord:@"dog"];
 }
 
 - (void)textFieldFinished:(id)sender {
@@ -445,6 +444,8 @@ NSString *imageToBuy;
                 [productArray addObject:dict];
             }
             
+            [self apiRequestWithSearchingKeyWord:@"dog"];
+            
             
         } failure:^(NSError *error) {
             NSLog(@"Something went wrong");
@@ -635,7 +636,24 @@ NSString *imageToBuy;
                 //HERE WE LINK IMAGE WITH FLYERLY ALBUM
                 [group addAsset:asset];
                 
-                [self goBack];
+                NBUAsset * asset_ = [NBUAsset assetForALAsset:asset];
+                
+                // Get out of full screen mode.
+                [self viewWillDisappear:NO];
+                
+                CropViewController *nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController" bundle:nil];
+                nbuCrop.desiredImageSize = self.desiredImageSize;
+                nbuCrop.image = [asset_.fullResolutionImage imageWithOrientationUp];
+                nbuCrop.onImageTaken = self.onImageTaken;
+                
+                // Pop the current view, and push the crop view.
+                NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[[self navigationController] viewControllers]];
+                [viewControllers removeLastObject];
+                [viewControllers removeLastObject];
+                [viewControllers addObject:nbuCrop];
+                [[self navigationController] setViewControllers:viewControllers animated:YES];
+                
+                //[self goBack];
                 
             } failureBlock:^(NSError *error) {
                 NSLog( @"Image not linked: %@", error.localizedDescription );
