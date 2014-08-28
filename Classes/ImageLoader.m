@@ -53,8 +53,6 @@ static NBUImageLoader * _sharedLoader;
         [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"Response: %@", responseObject);
             resultBlock(responseObject,nil);
-            //return;
-            //_imageView.image = responseObject;
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Image error: %@", error);

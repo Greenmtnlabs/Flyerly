@@ -73,7 +73,7 @@
     UIButton *buyImagesButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     buyImagesButton.titleLabel.font = [UIFont systemFontOfSize:14.0];
     [buyImagesButton addTarget:self action:@selector(buyImages) forControlEvents:UIControlEventTouchUpInside];
-    [buyImagesButton setBackgroundImage:[UIImage imageNamed:@"share_button"] forState:UIControlStateNormal];
+    [buyImagesButton setBackgroundImage:[UIImage imageNamed:@"buy"] forState:UIControlStateNormal];
     buyImagesButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:buyImagesButton];
     [self.navigationItem setRightBarButtonItem:rightBarButton];
