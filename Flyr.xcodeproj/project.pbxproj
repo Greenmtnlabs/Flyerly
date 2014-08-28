@@ -322,6 +322,8 @@
 		20F93DD317B2262200F6F88C /* MainSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F93DD117B2262200F6F88C /* MainSettingViewController.m */; };
 		20F93DD417B2262200F6F88C /* MainSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20F93DD217B2262200F6F88C /* MainSettingViewController.xib */; };
 		20FA7E731872AAF50057C3F3 /* CameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20FA7E711872AAF50057C3F3 /* CameraViewController.xib */; };
+		2404CDD819AF506600139E52 /* BigStockThumbnailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2404CDD719AF506600139E52 /* BigStockThumbnailView.m */; };
+		2404CDDA19AF514B00139E52 /* CustomThumbnailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2404CDD919AF514B00139E52 /* CustomThumbnailView.xib */; };
 		2405D3481990AC4B007F2596 /* AssetGroupViewControllerWithSearchFeild.m in Sources */ = {isa = PBXBuildFile; fileRef = 2405D3461990AC4B007F2596 /* AssetGroupViewControllerWithSearchFeild.m */; };
 		24218392194AF29C00FDDA97 /* Fonts-paid.plist in Resources */ = {isa = PBXBuildFile; fileRef = 24218391194AF29C00FDDA97 /* Fonts-paid.plist */; };
 		24218394194B02B500FDDA97 /* Emoticons.plist in Resources */ = {isa = PBXBuildFile; fileRef = 24218393194B02B500FDDA97 /* Emoticons.plist */; };
@@ -1577,6 +1579,9 @@
 		20F93DD217B2262200F6F88C /* MainSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainSettingViewController.xib; sourceTree = "<group>"; };
 		20FA7E6F1872AAF50057C3F3 /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
 		20FA7E711872AAF50057C3F3 /* CameraViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraViewController.xib; sourceTree = "<group>"; };
+		2404CDD619AF506600139E52 /* BigStockThumbnailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BigStockThumbnailView.h; sourceTree = "<group>"; };
+		2404CDD719AF506600139E52 /* BigStockThumbnailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BigStockThumbnailView.m; sourceTree = "<group>"; };
+		2404CDD919AF514B00139E52 /* CustomThumbnailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomThumbnailView.xib; sourceTree = "<group>"; };
 		2405D3451990AC4B007F2596 /* AssetGroupViewControllerWithSearchFeild.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssetGroupViewControllerWithSearchFeild.h; sourceTree = "<group>"; };
 		2405D3461990AC4B007F2596 /* AssetGroupViewControllerWithSearchFeild.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssetGroupViewControllerWithSearchFeild.m; sourceTree = "<group>"; };
 		24218391194AF29C00FDDA97 /* Fonts-paid.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Fonts-paid.plist"; sourceTree = "<group>"; };
@@ -3824,6 +3829,9 @@
 				2441584619A4E85B00F12FAD /* ImageLoader.h */,
 				2441584719A4E85B00F12FAD /* ImageLoader.m */,
 				245A016E19A74E3C005A414A /* AssetTest.xib */,
+				2404CDD619AF506600139E52 /* BigStockThumbnailView.h */,
+				2404CDD719AF506600139E52 /* BigStockThumbnailView.m */,
+				2404CDD919AF514B00139E52 /* CustomThumbnailView.xib */,
 			);
 			name = BuyImagesController;
 			sourceTree = "<group>";
@@ -5311,6 +5319,7 @@
 				65C1A4381742516D00947D5E /* Template32@2x.jpg in Resources */,
 				24218394194B02B500FDDA97 /* Emoticons.plist in Resources */,
 				2479BC651941FB8400FF5FF5 /* TextBorders-iPhone4.xib in Resources */,
+				2404CDDA19AF514B00139E52 /* CustomThumbnailView.xib in Resources */,
 				242184A2194B4AEC00FDDA97 /* emoticon147@2x.png in Resources */,
 				242184FB194B4AEC00FDDA97 /* Skiing-icon.png in Resources */,
 				249F214D193F62020072835E /* pinned_flyer_bg2@2x.png in Resources */,
@@ -5838,6 +5847,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				20A38EA71982531F007C279F /* LobObjectModel.m in Sources */,
+				2404CDD819AF506600139E52 /* BigStockThumbnailView.m in Sources */,
 				202C47F9187D6E4B00FE0975 /* BitlyConfig.m in Sources */,
 				20A1CD6318EEF63200484391 /* SubNBUCamera.m in Sources */,
 				2095C90E18C5E89900E244A8 /* FlyerlyTwitterFriends.m in Sources */,
