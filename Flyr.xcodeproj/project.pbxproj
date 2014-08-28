@@ -999,6 +999,14 @@
 		30D58D8310FB1BF800E0C7E8 /* Template8.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 30D58CFD10FB1BF800E0C7E8 /* Template8.jpg */; };
 		30D58D8410FB1BF800E0C7E8 /* Template9.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 30D58CFE10FB1BF800E0C7E8 /* Template9.jpg */; };
 		30D58E3510FB260200E0C7E8 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30D58E3410FB260200E0C7E8 /* MediaPlayer.framework */; };
+		365A9D1219AF697300E284B5 /* drawing_tab_color_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 365A9D0919AF697300E284B5 /* drawing_tab_color_selected@2x.png */; };
+		365A9D1319AF697300E284B5 /* drawing_tab_color@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 365A9D0A19AF697300E284B5 /* drawing_tab_color@2x.png */; };
+		365A9D1419AF697300E284B5 /* drawing_tab_eraser_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 365A9D0B19AF697300E284B5 /* drawing_tab_eraser_selected@2x.png */; };
+		365A9D1519AF697300E284B5 /* drawing_tab_eraser@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 365A9D0C19AF697300E284B5 /* drawing_tab_eraser@2x.png */; };
+		365A9D1619AF697300E284B5 /* drawing_tab_pencil_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 365A9D0D19AF697300E284B5 /* drawing_tab_pencil_selected@2x.png */; };
+		365A9D1719AF697300E284B5 /* drawing_tab_pencil@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 365A9D0E19AF697300E284B5 /* drawing_tab_pencil@2x.png */; };
+		365A9D1819AF697300E284B5 /* drawing_tab_size_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 365A9D0F19AF697300E284B5 /* drawing_tab_size_selected@2x.png */; };
+		365A9D1919AF697300E284B5 /* drawing_tab_size@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 365A9D1019AF697300E284B5 /* drawing_tab_size@2x.png */; };
 		36A93F2419AE067000D0A810 /* DrawingPatterns.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36A93F2319AE067000D0A810 /* DrawingPatterns.xib */; };
 		36A93F2619AE0B5400D0A810 /* DrawingPatterns-iPhone4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36A93F2519AE0B5400D0A810 /* DrawingPatterns-iPhone4.xib */; };
 		36A93F3619AE243D00D0A810 /* line_dashed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36A93F3319AE243D00D0A810 /* line_dashed@2x.png */; };
@@ -2369,6 +2377,14 @@
 		30D58CFD10FB1BF800E0C7E8 /* Template8.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Template8.jpg; sourceTree = "<group>"; };
 		30D58CFE10FB1BF800E0C7E8 /* Template9.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Template9.jpg; sourceTree = "<group>"; };
 		30D58E3410FB260200E0C7E8 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		365A9D0919AF697300E284B5 /* drawing_tab_color_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "drawing_tab_color_selected@2x.png"; sourceTree = "<group>"; };
+		365A9D0A19AF697300E284B5 /* drawing_tab_color@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "drawing_tab_color@2x.png"; sourceTree = "<group>"; };
+		365A9D0B19AF697300E284B5 /* drawing_tab_eraser_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "drawing_tab_eraser_selected@2x.png"; sourceTree = "<group>"; };
+		365A9D0C19AF697300E284B5 /* drawing_tab_eraser@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "drawing_tab_eraser@2x.png"; sourceTree = "<group>"; };
+		365A9D0D19AF697300E284B5 /* drawing_tab_pencil_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "drawing_tab_pencil_selected@2x.png"; sourceTree = "<group>"; };
+		365A9D0E19AF697300E284B5 /* drawing_tab_pencil@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "drawing_tab_pencil@2x.png"; sourceTree = "<group>"; };
+		365A9D0F19AF697300E284B5 /* drawing_tab_size_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "drawing_tab_size_selected@2x.png"; sourceTree = "<group>"; };
+		365A9D1019AF697300E284B5 /* drawing_tab_size@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "drawing_tab_size@2x.png"; sourceTree = "<group>"; };
 		36A93F2319AE067000D0A810 /* DrawingPatterns.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DrawingPatterns.xib; sourceTree = "<group>"; };
 		36A93F2519AE0B5400D0A810 /* DrawingPatterns-iPhone4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "DrawingPatterns-iPhone4.xib"; sourceTree = "<group>"; };
 		36A93F3319AE243D00D0A810 /* line_dashed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "line_dashed@2x.png"; sourceTree = "<group>"; };
@@ -2619,6 +2635,14 @@
 			isa = PBXGroup;
 			children = (
 				24F9928019AF78FB005C478B /* post@2x.png */,
+				365A9D0919AF697300E284B5 /* drawing_tab_color_selected@2x.png */,
+				365A9D0A19AF697300E284B5 /* drawing_tab_color@2x.png */,
+				365A9D0B19AF697300E284B5 /* drawing_tab_eraser_selected@2x.png */,
+				365A9D0C19AF697300E284B5 /* drawing_tab_eraser@2x.png */,
+				365A9D0D19AF697300E284B5 /* drawing_tab_pencil_selected@2x.png */,
+				365A9D0E19AF697300E284B5 /* drawing_tab_pencil@2x.png */,
+				365A9D0F19AF697300E284B5 /* drawing_tab_size_selected@2x.png */,
+				365A9D1019AF697300E284B5 /* drawing_tab_size@2x.png */,
 				36A93F3319AE243D00D0A810 /* line_dashed@2x.png */,
 				36A93F3419AE243D00D0A810 /* line_dotted@2x.png */,
 				36A93F3519AE243D00D0A810 /* line_plane@2x.png */,
@@ -5217,6 +5241,7 @@
 				6501CAF2173249C900A89E59 /* FlyerlyMainScreen.xib in Resources */,
 				249F2063193F562C0072835E /* Zqemail_box@2x.png in Resources */,
 				246EF510193C515D004539B2 /* emoticon4@2x.png in Resources */,
+				365A9D1919AF697300E284B5 /* drawing_tab_size@2x.png in Resources */,
 				249F1FD2193F55E90072835E /* flat_text_box@2x.png in Resources */,
 				247858CF1948764D0062F1E4 /* Myra 4F Caps-Regular.ttf in Resources */,
 				246EF52F193C515D004539B2 /* emoticon78@2x.png in Resources */,
@@ -5308,6 +5333,7 @@
 				249F2045193F562C0072835E /* separator@2x.png in Resources */,
 				247159411940907800B30301 /* premium_features@2x.png in Resources */,
 				65C1A43B1742516D00947D5E /* Template35@2x.jpg in Resources */,
+				365A9D1519AF697300E284B5 /* drawing_tab_eraser@2x.png in Resources */,
 				65C1A43C1742516D00947D5E /* Template36@2x.jpg in Resources */,
 				20F7371C195D985E00B24C1D /* Kankin.ttf in Resources */,
 				65C1A43D1742516D00947D5E /* Template37@2x.jpg in Resources */,
@@ -5362,6 +5388,7 @@
 				65C1A4531742516D00947D5E /* Template59@2x.jpg in Resources */,
 				242184F6194B4AEC00FDDA97 /* sand-castle-icon.png in Resources */,
 				246EF4E6193C515D004539B2 /* emoticon11@2x.png in Resources */,
+				365A9D1419AF697300E284B5 /* drawing_tab_eraser_selected@2x.png in Resources */,
 				24218481194B4AEC00FDDA97 /* emoticon114@2x.png in Resources */,
 				24218473194B4AEC00FDDA97 /* cycling-road-icon.png in Resources */,
 				65C1A4541742516D00947D5E /* Template60@2x.jpg in Resources */,
@@ -5403,6 +5430,7 @@
 				247858E11948788C0062F1E4 /* Raleway-Regular.otf in Resources */,
 				2478E5EE192C8C0A0081B31B /* FreeFeatureCell.xib in Resources */,
 				242184ED194B4AEC00FDDA97 /* Pictures-icon.png in Resources */,
+				365A9D1319AF697300E284B5 /* drawing_tab_color@2x.png in Resources */,
 				24785893194873E60062F1E4 /* Canter Light.otf in Resources */,
 				206068A71924FFEB00AB5230 /* Fonts-iPhone4.xib in Resources */,
 				242184B7194B4AEC00FDDA97 /* emoticon169@2x.png in Resources */,
@@ -5411,6 +5439,7 @@
 				247858A51948757C0062F1E4 /* Gnuolane-Regular.ttf in Resources */,
 				249F2054193F562C0072835E /* t_setting_button@2x.png in Resources */,
 				4977B1DD193C90CC0024A209 /* delete_button@2x.png in Resources */,
+				365A9D1219AF697300E284B5 /* drawing_tab_color_selected@2x.png in Resources */,
 				2421846E194B4AEC00FDDA97 /* Cricket-icon.png in Resources */,
 				246EF543193C515D004539B2 /* emoticon96@2x.png in Resources */,
 				0FBC37F7174F980600004F21 /* twt_setting_selected@2x.png in Resources */,
@@ -5508,6 +5537,7 @@
 				242184F8194B4AEC00FDDA97 /* shell-icon.png in Resources */,
 				246EF500193C515D004539B2 /* emoticon35@2x.png in Resources */,
 				242184F5194B4AEC00FDDA97 /* sand-bucket-icon.png in Resources */,
+				365A9D1619AF697300E284B5 /* drawing_tab_pencil_selected@2x.png in Resources */,
 				209BCFA91975433D006EC811 /* PrintViewController.xib in Resources */,
 				20F4D8E117BA3D0A007B2DF5 /* ProfileViewController.xib in Resources */,
 				249F2037193F562C0072835E /* panel_close_button@2x.png in Resources */,
@@ -5520,6 +5550,7 @@
 				246EF519193C515D004539B2 /* emoticon58@2x.png in Resources */,
 				246EF53A193C515D004539B2 /* emoticon88@2x.png in Resources */,
 				242184A4194B4AEC00FDDA97 /* emoticon150@2x.png in Resources */,
+				365A9D1719AF697300E284B5 /* drawing_tab_pencil@2x.png in Resources */,
 				24751A6C1938A41A00DF03B2 /* art_tab@2x.png in Resources */,
 				2099498B196E6AAD0081B1BD /* README.txt in Resources */,
 				208E35A217C1F5C500CE54BE /* SigninController.xib in Resources */,
@@ -5539,6 +5570,7 @@
 				246EF539193C515D004539B2 /* emoticon87@2x.png in Resources */,
 				203E0B7717DDDD720039C3A7 /* InputViewController.xib in Resources */,
 				24218472194B4AEC00FDDA97 /* cycling-mountain-biking-icon.png in Resources */,
+				365A9D1819AF697300E284B5 /* drawing_tab_size_selected@2x.png in Resources */,
 				202C638417EA06E800CB9A75 /* ricon22.png in Resources */,
 				242184BD194B4AEC00FDDA97 /* emoticon175@2x.png in Resources */,
 				2092FFCC184E00BF0034C4F6 /* flyerlylogo@2x.png in Resources */,

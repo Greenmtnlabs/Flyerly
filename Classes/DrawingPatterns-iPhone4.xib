@@ -7,48 +7,47 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CreateFlyerController"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="zsW-vT-HtG">
-            <rect key="frame" x="0.0" y="0.0" width="510" height="60"/>
+        <view contentMode="scaleToFill" id="zsW-vT-HtG" customClass="ResourcesView">
+            <rect key="frame" x="0.0" y="0.0" width="940" height="64"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="snV-mA-QEE" userLabel="Button - line_solid">
-                    <rect key="frame" x="10" y="12" width="160" height="35"/>
+                    <rect key="frame" x="10" y="14" width="300" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" title="A">
+                    <state key="normal" image="line_plane.png">
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="KFW-M6-ezw"/>
+                        <action selector="selectDrawingLine:" destination="-1" eventType="touchUpInside" id="waU-fn-tcw"/>
                     </connections>
                 </button>
                 <button opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="1tB-dE-M71" userLabel="Button - line_dotted">
-                    <rect key="frame" x="175" y="12" width="160" height="35"/>
+                    <rect key="frame" x="320" y="14" width="300" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" title="A">
+                    <state key="normal" image="line_dashed.png">
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="alG-i7-hgx"/>
+                        <action selector="selectDrawingLine:" destination="-1" eventType="touchUpInside" id="AGC-IZ-0P0"/>
                     </connections>
                 </button>
                 <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="GHv-Ar-lQm" userLabel="Button - line_dashes">
-                    <rect key="frame" x="340" y="12" width="160" height="35"/>
+                    <rect key="frame" x="630" y="14" width="300" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" title="A">
+                    <state key="normal" image="line_dotted.png">
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="selectFont:" destination="-1" eventType="touchUpInside" id="zVO-c9-SDG"/>
-                        <action selector="setAddMoreLayerTabAction:" destination="-1" eventType="touchUpInside" id="LfD-yB-oub"/>
+                        <action selector="selectDrawingLine:" destination="-1" eventType="touchUpInside" id="oul-L4-Gsa"/>
                     </connections>
                 </button>
             </subviews>
@@ -56,4 +55,9 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
     </objects>
+    <resources>
+        <image name="line_dashed.png" width="300" height="30"/>
+        <image name="line_dotted.png" width="300" height="30"/>
+        <image name="line_plane.png" width="300" height="30"/>
+    </resources>
 </document>

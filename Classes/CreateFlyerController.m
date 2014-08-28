@@ -4050,6 +4050,7 @@ NSArray *coloursArray;
 		[artsSizeTabButton setSelected:YES];
 	}
     else if(selectedButton == drawingTabButton ){
+        /*
         //HERE WE SET ANIMATION
         [UIView animateWithDuration:0.4f
                          animations:^{
@@ -4083,6 +4084,7 @@ NSArray *coloursArray;
         //Add ContextView
         [self addScrollView:layerScrollView];
         [drawingTabButton setSelected:YES];
+        */
     }
     
     
@@ -5138,6 +5140,12 @@ NSArray *coloursArray;
         }
         
     });
+}
+
+-(IBAction)addDrawingLayer:(id) sender {
+    currentLayer = @"";
+    //show drawing layer menu
+    [self setAddMoreLayerTabAction:drawingMenueButton];
 }
 
 -(void)editDrawingLayer{
