@@ -862,6 +862,7 @@
 		24B7511E193DA02F007B6B85 /* Cliparts.plist in Resources */ = {isa = PBXBuildFile; fileRef = 24B7511D193DA02F007B6B85 /* Cliparts.plist */; };
 		24B75120193DA06D007B6B85 /* Cliparts.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24B7511F193DA06D007B6B85 /* Cliparts.xib */; };
 		24B75122193DA07C007B6B85 /* Cliparts-iPhone4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24B75121193DA07C007B6B85 /* Cliparts-iPhone4.xib */; };
+		24F9928119AF78FB005C478B /* post@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24F9928019AF78FB005C478B /* post@2x.png */; };
 		2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
 		30D58CFF10FB1BF800E0C7E8 /* icon0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 30D58C7810FB1BF800E0C7E8 /* icon0.jpg */; };
 		30D58D0010FB1BF800E0C7E8 /* icon1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 30D58C7910FB1BF800E0C7E8 /* icon1.jpg */; };
@@ -2228,6 +2229,7 @@
 		24B7511D193DA02F007B6B85 /* Cliparts.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Cliparts.plist; sourceTree = "<group>"; };
 		24B7511F193DA06D007B6B85 /* Cliparts.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Cliparts.xib; sourceTree = "<group>"; };
 		24B75121193DA07C007B6B85 /* Cliparts-iPhone4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Cliparts-iPhone4.xib"; sourceTree = "<group>"; };
+		24F9928019AF78FB005C478B /* post@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "post@2x.png"; sourceTree = "<group>"; };
 		26D73E02307543D994C6C8BE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		28A0AAE50D9B0CCF005BE974 /* Flyr_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flyr_Prefix.pch; sourceTree = "<group>"; };
@@ -2616,6 +2618,7 @@
 		0DF3A361108DF47400D6C887 /* ImageLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				24F9928019AF78FB005C478B /* post@2x.png */,
 				36A93F3319AE243D00D0A810 /* line_dashed@2x.png */,
 				36A93F3419AE243D00D0A810 /* line_dotted@2x.png */,
 				36A93F3519AE243D00D0A810 /* line_plane@2x.png */,
@@ -5386,6 +5389,7 @@
 				242184EB194B4AEC00FDDA97 /* pearl-icon.png in Resources */,
 				246EF516193C515D004539B2 /* emoticon55@2x.png in Resources */,
 				207AB32B18ED473400945924 /* ShareKit.podspec in Resources */,
+				24F9928119AF78FB005C478B /* post@2x.png in Resources */,
 				246EF536193C515D004539B2 /* emoticon84@2x.png in Resources */,
 				0FEF2D9A174E65B100FDD8C9 /* HelpController.xib in Resources */,
 				242184E0194B4AEC00FDDA97 /* Hockey-icon.png in Resources */,

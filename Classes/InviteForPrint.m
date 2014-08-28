@@ -90,7 +90,7 @@ LobRequest *request;
     // INVITE BAR BUTTON
     UIButton *inviteButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
 	[inviteButton addTarget:self action:@selector(invite) forControlEvents:UIControlEventTouchUpInside];
-    [inviteButton setBackgroundImage:[UIImage imageNamed:@"invite_friend"] forState:UIControlStateNormal];
+    [inviteButton setBackgroundImage:[UIImage imageNamed:@"post"] forState:UIControlStateNormal];
     inviteButton.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:inviteButton];
     [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
