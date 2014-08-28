@@ -18,7 +18,6 @@
 
 @end
 
-NSString *account_id;
 id jsonObject;
 NSDictionary *tableData;
 NSMutableArray *imagesPreview;
@@ -27,8 +26,6 @@ NSString *imageID_;
 NSMutableArray * thumbnailViews;
 NSMutableArray *productArray;
 NSArray *requestedProducts;
-
-NSString *bigStockApiSecretKey = @"e84301b7de141bc89517fc708de3285c825bb648";
 NSString *imageToBuy;
 
 @implementation AssetGroupViewControllerWithSearchFeild
@@ -45,24 +42,29 @@ NSString *imageToBuy;
     return self;
 }
 
+- (void)viewDidAppear {
+    
+    
+    
+}
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    // Configure grid view
-    //self.objectTableView.nibNameForViews = @"CustomAssetsGroupView";
-    // Customization
-    self.thumbnailsGridView = scrollGridView;
-
-    [self requestProduct];
     
     // HERE WE CREATE FLYERLY ALBUM ON DEVICE
     if(![[NSUserDefaults standardUserDefaults] stringForKey:@"FlyerlyPurchasedAlbum"]){
         [self createFlyerlyPurchasedAlbum];
     }
     
+    
+    // Customization
+    self.thumbnailsGridView = scrollGridView;
+    
+    [self requestProduct];
+    
     //change to your account id at bigstock.com/partners
-    account_id = @"862265";
     // Do any additional setup after loading the view from its nib.
     // Configure the grid view
     self.gridView.margin = CGSizeMake(5.0, 5.0);
@@ -107,11 +109,11 @@ NSString *imageToBuy;
 // Send api request with lat long
 - (void) apiRequestWithSearchingKeyWord: (NSString *)keyword {
     
-    NSLog(@"in apiRequestWithSearchingKeyWord, sending api call with %@",account_id);
+    NSLog(@"in apiRequestWithSearchingKeyWord, sending api call with %@",BIGSTOCKAPI_ACCOUNT_ID);
     
     //string for the URL request
     //[NSString stringWithFormat:@"api.bigstockphoto.com/2/%@/search/?q=%@/&response_detail=all", account_id, keyword];
-    NSString *myUrlString = [NSString stringWithFormat:@"http://api.bigstockphoto.com/2/%@/search/?q=%@/&response_detail=all", account_id, keyword];
+    NSString *myUrlString = [NSString stringWithFormat:@"http://api.bigstockphoto.com/2/%@/search/?q=%@/&response_detail=all", BIGSTOCKAPI_ACCOUNT_ID, keyword];
     
     //create a NSURL object from the string data
     NSURL *myUrl = [NSURL URLWithString:myUrlString];
@@ -177,9 +179,9 @@ NSString *imageToBuy;
 // Send api request with lat long
 - (void) apiRequestForPurchasingImage: (NSString *)imageID {
     
-    NSString *encoded = [self sha1:[NSString stringWithFormat:@"%@%@%@", bigStockApiSecretKey, account_id, imageID]];
+    NSString *encoded = [self sha1:[NSString stringWithFormat:@"%@%@%@", BIGSTOCKAPI_SECRETKEY, BIGSTOCKAPI_ACCOUNT_ID, imageID]];
     
-    NSString *myUrlString = [NSString stringWithFormat:@"http://api.bigstockphoto.com/2/%@/purchase?image_id=%@&size_code=s&auth_key=%@", account_id, imageID,encoded];
+    NSString *myUrlString = [NSString stringWithFormat:@"http://api.bigstockphoto.com/2/%@/purchase?image_id=%@&size_code=s&auth_key=%@", BIGSTOCKAPI_ACCOUNT_ID, imageID,encoded];
     
     NSLog(@"%@", myUrlString);
     
@@ -258,9 +260,9 @@ NSString *imageToBuy;
             
             NSArray *purchasedImageDownloadID = [tableData objectForKey:@"download_id"];
             
-            NSString *encoded = [self sha1:[NSString stringWithFormat:@"%@%@%@", bigStockApiSecretKey, account_id, purchasedImageDownloadID]];
+            NSString *encoded = [self sha1:[NSString stringWithFormat:@"%@%@%@", BIGSTOCKAPI_SECRETKEY, BIGSTOCKAPI_ACCOUNT_ID, purchasedImageDownloadID]];
             
-            NSString *purchaseImageUrlString = [NSString stringWithFormat:@"http://api.bigstockphoto.com/2/%@/download?auth_key=%@&download_id=%@", account_id, encoded,purchasedImageDownloadID];
+            NSString *purchaseImageUrlString = [NSString stringWithFormat:@"http://api.bigstockphoto.com/2/%@/download?auth_key=%@&download_id=%@", BIGSTOCKAPI_ACCOUNT_ID, encoded,purchasedImageDownloadID];
             
             NSURL *purchaseImageUrl = [[NSURL alloc] initWithString:purchaseImageUrlString];
             NSURLRequest *purchaseImageUrlRequest = [[NSURLRequest alloc] initWithURL:purchaseImageUrl];
@@ -340,7 +342,7 @@ NSString *imageToBuy;
             
             //self.thumbnailsGridView = scrollGridView;
             [self setShowThumbnailsView:YES];
-  
+            
         }
         
     } else{
@@ -355,9 +357,9 @@ NSString *imageToBuy;
     NBULogVerbose(@"%@ %@", THIS_METHOD, @(index));
     
     [self.imageLoader imageForObject:self.objectArray[index]
-                            size:NBUImageSizeThumbnail
-                     resultBlock:^(UIImage * image,
-                                   NSError * error)
+                                size:NBUImageSizeThumbnail
+                         resultBlock:^(UIImage * image,
+                                       NSError * error)
      {
          thumbnailViews = [[NSMutableArray alloc] init];
          thumbnailViews = [self valueForKey:@"_thumbnailViews"];
@@ -388,7 +390,7 @@ NSString *imageToBuy;
         NSLog(@"Product purchased");
         
         [self productSuccesfullyPurchased];
-    
+        
     } failure:^(SKPaymentTransaction *transaction, NSError *error) {
         
         NSLog(@"Something went wrong");
@@ -461,7 +463,7 @@ NSString *imageToBuy;
 
 
 -(void)thumbnailWasTapped :(UIView *)sender {
-
+    
     //Checking if the user is valid or anonymus
     if ([[PFUser currentUser] sessionToken].length != 0) {
         
@@ -480,14 +482,6 @@ NSString *imageToBuy;
     
 }
 
-/**
- * An asset was selected. Process it.
- */
-- (void)thumbnailViewSelectionStateChanged:(NSNotification *)notification {
-    
-    // Refresh selected assets
-    NBUAssetThumbnailView *assetView = (NBUAssetThumbnailView *)notification.object;
-}
 
 #pragma mark - Button Handlers
 
@@ -515,8 +509,6 @@ NSString *imageToBuy;
     if ( _library == nil ) {
         _library = [[ALAssetsLibrary alloc] init];
     }
-    
-    __weak ALAssetsLibrary* library = _library;
     
     //Checking Group Path should be not null for Flyer Saving In Gallery
     if ([[NSUserDefaults standardUserDefaults] stringForKey:@"FlyerlyPurchasedAlbum"] == nil) {
@@ -546,7 +538,7 @@ NSString *imageToBuy;
         } else {
             
             [self createImageToFlyerlyPurchasedAlbum:groupUrl ImageData:imgData];
-
+            
         }
         
     }
@@ -560,28 +552,55 @@ NSString *imageToBuy;
  */
 -(void)createFlyerlyPurchasedAlbum  {
     
+    
     if ( _library == nil ) {
         _library = [[ALAssetsLibrary alloc] init];
     }
-    __weak AssetGroupViewControllerWithSearchFeild *weakSelf = self;
     
+    __weak ALAssetsLibrary* library = _library;
     
     //HERE WE SEN REQUEST FOR CREATE ALBUM
     [_library addAssetsGroupAlbumWithName:FLYER_PURCHASED_ALBUM_NAME
                               resultBlock:^(ALAssetsGroup *group) {
                                   
-                                  // GETTING CREATED URL OF ALBUM
-                                  NSURL *groupURL = [group valueForProperty:ALAssetsGroupPropertyURL];
-                                  
-                                  //SAVING IN PREFERENCES .PLIST FOR FUTURE USE
-                                  [[NSUserDefaults standardUserDefaults]   setObject:groupURL.absoluteString forKey:@"FlyerlyPurchasedAlbum"];
-                                  
+                                  //CHECKING ALBUM FOUND IN LIBRARY
+                                  if (group == nil) {
+                                      
+                                      //ALBUM NAME ALREADY EXIST IN LIBRARY
+                                      [library enumerateGroupsWithTypes:ALAssetsGroupAlbum usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+                                          
+                                          NSString *existAlbumName = [group valueForProperty: ALAssetsGroupPropertyName];
+                                          
+                                          if ([existAlbumName isEqualToString:FLYER_PURCHASED_ALBUM_NAME]) {
+                                              *stop = YES;
+                                              
+                                              // GETTING CREATED URL OF ALBUM
+                                              NSURL *groupURL = [group valueForProperty:ALAssetsGroupPropertyURL];
+                                              
+                                              //SAVING IN PREFERENCES .PLIST FOR FUTURE USE
+                                              [[NSUserDefaults standardUserDefaults]   setObject:groupURL.absoluteString forKey:@"FlyerlyPurchasedAlbum"];
+                                              
+                                              
+                                          }
+                                          
+                                      } failureBlock:^(NSError *error) {
+                                          NSLog( @"Error adding album: %@", error.localizedDescription );
+                                      }];
+                                      
+                                  }else {
+                                      
+                                      //CREATE NEW ALBUM IN LIBRARY
+                                      // GETTING CREATED URL OF ALBUM
+                                      NSURL *groupURL = [group valueForProperty:ALAssetsGroupPropertyURL];
+                                      
+                                      //SAVING IN PREFERENCES .PLIST FOR FUTURE USE
+                                      [[NSUserDefaults standardUserDefaults]   setObject:groupURL.absoluteString forKey:@"FlyerlyPuchasedAlbum"];
+                                  }
                               }
      
                              failureBlock:^(NSError *error) {
                                  NSLog( @"Error adding album: %@", error.localizedDescription );
                              }];
-    
     
 }
 
