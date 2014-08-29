@@ -4534,13 +4534,6 @@ NSArray *coloursArray;
             
             //here we Update ImageView
             self.mainImage = [self.flyimgView.layers objectForKey:currentLayer];
-
-            
-            // Hook event of Gesture for moving layers -----------------------------------------------
-            self.tempDrawImage.userInteractionEnabled = YES; // CAN receive touches
-            
-            UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(drawingLayerMoved:)];
-            [self.tempDrawImage addGestureRecognizer:panGesture];
             
         }
         // Run for editDrawing layer case
@@ -4560,12 +4553,13 @@ NSArray *coloursArray;
             
             //here we Update ImageView
             self.mainImage = [self.flyimgView.layers objectForKey:currentLayer];
-            
-            // Hook event of Gesture for moving layers -----------------------------------------------
-            self.tempDrawImage.userInteractionEnabled = YES; // CAN receive touches
-            UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(drawingLayerMoved:)];
-            [self.tempDrawImage addGestureRecognizer:panGesture];
         }
+        
+        // Hook event of Gesture for moving layers -----------------------------------------------
+        self.tempDrawImage.userInteractionEnabled = YES; // CAN receive touches
+        UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(drawingLayerMoved:)];
+        [self.tempDrawImage addGestureRecognizer:panGesture];
+        //Hook event end-----
         
         //Here we Highlight The ImageView
         [self.flyimgView layerIsBeingEdited:currentLayer];
