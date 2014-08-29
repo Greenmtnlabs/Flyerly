@@ -4518,8 +4518,7 @@ NSArray *coloursArray;
         if ([currentLayer isEqualToString:@""]) {
             
             // work for tempDrawImageLayer -----------------------------------------------
-            //create/add layer with drawing type
-            NSString *tempDrawImageLayer = [flyer addDrawingImage:NO];
+            NSString *tempDrawImageLayer = [flyer addDrawingImage:NO]; //create/add layer with drawing type
             NSMutableDictionary *dic2 = [flyer getLayerFromMaster:tempDrawImageLayer];
             
             [self.flyimgView renderLayer:tempDrawImageLayer layerDictionary:dic2];
@@ -4532,15 +4531,14 @@ NSArray *coloursArray;
 
             [self.flyimgView renderLayer:currentLayer layerDictionary:dic];
             
-            //here we Update ImageView
+            //here we get ImageView
             self.mainImage = [self.flyimgView.layers objectForKey:currentLayer];
             
         }
         // Run for editDrawing layer case
         else{
             // work for tempDrawImageLayer -----------------------------------------------
-            //create/add layer with drawing type
-            NSString *tempDrawImageLayer = [flyer addDrawingImage:NO];
+            NSString *tempDrawImageLayer = [flyer addDrawingImage:NO]; //create/add layer with drawing type
             NSMutableDictionary *dic2 = [flyer getLayerFromMaster:tempDrawImageLayer];
             
             [self.flyimgView renderLayer:tempDrawImageLayer layerDictionary:dic2];
@@ -4551,7 +4549,7 @@ NSArray *coloursArray;
             //currentLayer = [flyer addDrawingImage:YES];
             dic = [flyer getLayerFromMaster:currentLayer];
             
-            //here we Update ImageView
+            //here we get layer ImageView
             self.mainImage = [self.flyimgView.layers objectForKey:currentLayer];
         }
         
