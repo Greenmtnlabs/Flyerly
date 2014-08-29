@@ -30,46 +30,20 @@ NSString *imageToBuy;
 
 @implementation AssetGroupViewControllerWithSearchFeild
 
-
-@synthesize searchTextField,scrollGridView;
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
-- (void)viewDidAppear {
-    
-    
-    
-}
-
+@synthesize searchTextField;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    [self requestProduct];
+    [self showLoadingIndicator];
     
+    [self requestProduct];
     
     // HERE WE CREATE FLYERLY ALBUM ON DEVICE
     if(![[NSUserDefaults standardUserDefaults] stringForKey:@"FlyerlyPurchasedAlbum"]){
         [self createFlyerlyPurchasedAlbum];
     }
-    
-    
-    // Customization
-    self.thumbnailsGridView = scrollGridView;
-
-    //change to your account id at bigstock.com/partners
-    // Do any additional setup after loading the view from its nib.
-    // Configure the grid view
-    self.gridView.margin = CGSizeMake(5.0, 5.0);
-    //self.gridView.nibNameForViews = @"CustomAssetThumbnailView";
     
     self.nibNameForThumbnails = @"CustomThumbnailView";
     CGSize thumbSize = CGSizeMake(100.0,120.0);
@@ -111,11 +85,8 @@ NSString *imageToBuy;
 
 // Send api request with lat long
 - (void) apiRequestWithSearchingKeyWord: (NSString *)keyword {
-    
-    NSLog(@"in apiRequestWithSearchingKeyWord, sending api call with %@",BIGSTOCKAPI_ACCOUNT_ID);
-    
+
     //string for the URL request
-    //[NSString stringWithFormat:@"api.bigstockphoto.com/2/%@/search/?q=%@/&response_detail=all", account_id, keyword];
     NSString *myUrlString = [NSString stringWithFormat:@"http://api.bigstockphoto.com/2/%@/search/?q=%@/&response_detail=all", BIGSTOCKAPI_ACCOUNT_ID, keyword];
     
     //create a NSURL object from the string data
@@ -142,10 +113,7 @@ NSString *imageToBuy;
              //process the JSON response
              //use the main queue so that we can interact with the screen
              dispatch_async(dispatch_get_main_queue(), ^{
-                 
-                 //lbl_status.text = @"Got api data, parsing data";
-                 NSLog(@"Got api data, parsing data");
-                 
+
                  [self parseSearchResponse:data];
              });
          }
@@ -186,8 +154,6 @@ NSString *imageToBuy;
     
     NSString *myUrlString = [NSString stringWithFormat:@"http://api.bigstockphoto.com/2/%@/purchase?image_id=%@&size_code=s&auth_key=%@", BIGSTOCKAPI_ACCOUNT_ID, imageID,encoded];
     
-    NSLog(@"%@", myUrlString);
-    
     //create a NSURL object from the string data
     NSURL *myUrl = [NSURL URLWithString:myUrlString];
     
@@ -214,9 +180,6 @@ NSString *imageToBuy;
              //use the main queue so that we can interact with the screen
              dispatch_async(dispatch_get_main_queue(), ^{
                  
-                 //lbl_status.text = @"Got api data, parsing data";
-                 NSLog(@"Got api data, parsing data");
-                 
                  [self parsePurchaseResponse:data];
              });
          }
@@ -236,7 +199,6 @@ NSString *imageToBuy;
     
     NSString *myData = [[NSString alloc] initWithData:data
                                              encoding:NSUTF8StringEncoding];
-    NSLog(@"in parseResponse, JSON data = %@", myData);
     NSError *error = nil;
     
     //parsing the JSON response
@@ -249,16 +211,10 @@ NSString *imageToBuy;
         
         // Test/Access any key of json object( KEY , VALUE )
         int status = [[jsonObject objectForKey:@"response_code"] intValue];
-        NSLog(@"Api status = %i",status);
-        //lbl_status.text = [@"Api status = " stringByAppendingFormat:@"%i",status];
-        NSLog(@"msg = %@",[jsonObject objectForKey:@"message"]);
-        
         imagesPreview = [[NSMutableArray alloc]init];
         imagesIDs = [[NSMutableArray alloc]init];
         
         if( status == 200 ){
-            NSLog(@"Creating list from parsed data");
-            //lbl_status.text = @"Creating list";
             tableData = [jsonObject objectForKey:@"data"];
             
             NSArray *purchasedImageDownloadID = [tableData objectForKey:@"download_id"];
@@ -273,7 +229,7 @@ NSString *imageToBuy;
             AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:purchaseImageUrlRequest];
             requestOperation.responseSerializer = [AFImageResponseSerializer serializer];
             [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-                NSLog(@"Response: %@", responseObject);
+                
                 
                 UIImage *thumbnail = (UIImage *) responseObject;
                 
@@ -302,7 +258,6 @@ NSString *imageToBuy;
     
     NSString *myData = [[NSString alloc] initWithData:data
                                              encoding:NSUTF8StringEncoding];
-    NSLog(@"in parseResponse, JSON data = %@", myData);
     NSError *error = nil;
     
     //parsing the JSON response
@@ -315,16 +270,11 @@ NSString *imageToBuy;
         
         // Test/Access any key of json object( KEY , VALUE )
         int status = [[jsonObject objectForKey:@"response_code"] intValue];
-        NSLog(@"Api status = %i",status);
-        //lbl_status.text = [@"Api status = " stringByAppendingFormat:@"%i",status];
-        NSLog(@"msg = %@",[jsonObject objectForKey:@"message"]);
         
         imagesPreview = [[NSMutableArray alloc]init];
         imagesIDs = [[NSMutableArray alloc]init];
         
         if( status == 200 ){
-            NSLog(@"Creating list from parsed data");
-            //lbl_status.text = @"Creating list";
             tableData = [jsonObject objectForKey:@"data"];
             
             NSArray *images = [tableData objectForKey:@"images"];
@@ -342,11 +292,9 @@ NSString *imageToBuy;
             ImageLoader *obj = [[ImageLoader alloc]init];
             self.imageLoader = obj;
             self.objectArray = imagesPreview;
-            
-            //self.
-            
-            //self.thumbnailsGridView = scrollGridView;
             [self setShowThumbnailsView:YES];
+            
+            [self hideLoadingIndicator];
             
         }
         
@@ -391,14 +339,15 @@ NSString *imageToBuy;
 -(void)purchaseProductID:(NSString *)pid{
     
     [[RMStore defaultStore] addPayment:pid success:^(SKPaymentTransaction *transaction) {
-        
-        NSLog(@"Product purchased");
-        
+    
         [self productSuccesfullyPurchased];
         
     } failure:^(SKPaymentTransaction *transaction, NSError *error) {
         
         NSLog(@"Something went wrong");
+        
+        [self.thumbnailsGridView setUserInteractionEnabled:YES];
+        [self hideLoadingIndicator];
         
     }];
 }
@@ -418,8 +367,6 @@ NSString *imageToBuy;
         [[RMStore defaultStore] requestProducts:productIdentifiers success:^(NSArray *products, NSArray *invalidProductIdentifiers) {
             
             if (cancelRequest) return ;
-            
-            NSLog(@"Products loaded");
             
             requestedProducts = products;
             bool disablePurchase = ([[PFUser currentUser] sessionToken].length == 0);
@@ -444,11 +391,16 @@ NSString *imageToBuy;
                 [productArray addObject:dict];
             }
             
+            // we will move it when UI Related issues fixed,here we explicitly requesting the BigStock API for the key word "dog"
             [self apiRequestWithSearchingKeyWord:@"dog"];
             
             
         } failure:^(NSError *error) {
             NSLog(@"Something went wrong");
+            
+            [self.thumbnailsGridView setUserInteractionEnabled:YES];
+            
+            [self hideLoadingIndicator];
         }];
     } else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You're not connected to the internet. Please connect and retry." message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
@@ -462,7 +414,6 @@ NSString *imageToBuy;
 
 - ( void )productSuccesfullyPurchased{
     
-    NSLog(@"succesfully purchased image");
     //Download request for purchsed image
     [self apiRequestForPurchasingImage:imageID_];
     
@@ -471,11 +422,14 @@ NSString *imageToBuy;
 
 -(void)thumbnailWasTapped :(UIView *)sender {
     
+    [self.thumbnailsGridView setUserInteractionEnabled:NO];
+    
+    [self showLoadingIndicator];
+    
     //Checking if the user is valid or anonymus
     if ([[PFUser currentUser] sessionToken].length != 0) {
         
         [self purchaseProduct];
-        NSLog(@"%ld",(long)sender.tag);
         imageID_ = [imagesIDs objectAtIndex:sender.tag];
         
         
@@ -485,6 +439,8 @@ NSString *imageToBuy;
                                                            delegate: self cancelButtonTitle: @"OK" otherButtonTitles: nil];
         
         [someError show];
+        
+        [self hideLoadingIndicator];
     }
     
 }
@@ -641,6 +597,8 @@ NSString *imageToBuy;
                 // Get out of full screen mode.
                 [self viewWillDisappear:NO];
                 
+                [self hideLoadingIndicator];
+                
                 CropViewController *nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController" bundle:nil];
                 nbuCrop.desiredImageSize = self.desiredImageSize;
                 nbuCrop.image = [asset_.fullResolutionImage imageWithOrientationUp];
@@ -665,8 +623,30 @@ NSString *imageToBuy;
     } failureBlock:^(NSError *error) {
         NSLog( @"Image not created in gallery: %@", error.localizedDescription );
     }];
-    
-    
 }
+
+/**
+ * Show a loding indicator in the right bar button.
+ */
+- (void)showLoadingIndicator {
+    // Remember the right bar button item.
+    rightBarButtonItem = self.navigationItem.rightBarButtonItem;
+    
+    UIActivityIndicatorView *uiBusy = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    [uiBusy setColor:[UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0]];
+    uiBusy.hidesWhenStopped = YES;
+    [uiBusy startAnimating];
+    
+    UIBarButtonItem *btn = [[UIBarButtonItem alloc] initWithCustomView:uiBusy];
+    [self.navigationItem setRightBarButtonItem:btn animated:NO];
+}
+
+/**
+ * Hide previously shown indicator.
+ */
+- (void)hideLoadingIndicator {
+    [self.navigationItem setRightBarButtonItem:rightBarButtonItem animated:NO];
+}
+
 
 @end

@@ -39,6 +39,7 @@
     
     // Configure the grid view
     self.gridView.margin = CGSizeMake(5.0, 5.0);
+    self.gridView.sizeToFit;
     self.gridView.nibNameForViews = @"CustomAssetThumbnailView";
     
     // Configure the selection behaviour
