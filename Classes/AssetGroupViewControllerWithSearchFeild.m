@@ -30,48 +30,28 @@ NSString *imageToBuy;
 
 @implementation AssetGroupViewControllerWithSearchFeild
 
-
 @synthesize searchTextField,scrollGridView;
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
-- (void)viewDidAppear {
-    
-    
-    
-}
-
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    [self requestProduct];
+    [self showLoadingIndicator];
     
+    [self requestProduct];
     
     // HERE WE CREATE FLYERLY ALBUM ON DEVICE
     if(![[NSUserDefaults standardUserDefaults] stringForKey:@"FlyerlyPurchasedAlbum"]){
         [self createFlyerlyPurchasedAlbum];
     }
     
-    
     // Customization
     self.thumbnailsGridView = scrollGridView;
-    self.thumbnailsGridView.frame = CGRectMake(0, 150, 320 , 670);
-
-
+    
     //change to your account id at bigstock.com/partners
     // Do any additional setup after loading the view from its nib.
     // Configure the grid view
     self.gridView.margin = CGSizeMake(5.0, 5.0);
-    //self.gridView.nibNameForViews = @"CustomAssetThumbnailView";
     
     self.nibNameForThumbnails = @"CustomThumbnailView";
     CGSize thumbSize = CGSizeMake(100.0,120.0);
@@ -258,6 +238,7 @@ NSString *imageToBuy;
             requestOperation.responseSerializer = [AFImageResponseSerializer serializer];
             [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
                 
+                
                 UIImage *thumbnail = (UIImage *) responseObject;
                 
                 NSData* data = UIImagePNGRepresentation(thumbnail);
@@ -319,11 +300,9 @@ NSString *imageToBuy;
             ImageLoader *obj = [[ImageLoader alloc]init];
             self.imageLoader = obj;
             self.objectArray = imagesPreview;
-            
-            //self.
-            
-            //self.thumbnailsGridView = scrollGridView;
             [self setShowThumbnailsView:YES];
+            
+            [self hideLoadingIndicator];
             
         }
         
@@ -375,6 +354,9 @@ NSString *imageToBuy;
         
         NSLog(@"Something went wrong");
         
+        [self.thumbnailsGridView setUserInteractionEnabled:YES];
+        [self hideLoadingIndicator];
+        
     }];
 }
 
@@ -417,11 +399,16 @@ NSString *imageToBuy;
                 [productArray addObject:dict];
             }
             
+            // we will move it when UI Related issues fixed,here we explicitly requesting the BigStock API for the key word "dog"
             [self apiRequestWithSearchingKeyWord:@"dog"];
             
             
         } failure:^(NSError *error) {
             NSLog(@"Something went wrong");
+            
+            [self.thumbnailsGridView setUserInteractionEnabled:YES];
+            
+            [self hideLoadingIndicator];
         }];
     } else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You're not connected to the internet. Please connect and retry." message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
@@ -443,6 +430,10 @@ NSString *imageToBuy;
 
 -(void)thumbnailWasTapped :(UIView *)sender {
     
+    [self.thumbnailsGridView setUserInteractionEnabled:NO];
+    
+    [self showLoadingIndicator];
+    
     //Checking if the user is valid or anonymus
     if ([[PFUser currentUser] sessionToken].length != 0) {
         
@@ -456,6 +447,8 @@ NSString *imageToBuy;
                                                            delegate: self cancelButtonTitle: @"OK" otherButtonTitles: nil];
         
         [someError show];
+        
+        [self hideLoadingIndicator];
     }
     
 }
@@ -612,6 +605,8 @@ NSString *imageToBuy;
                 // Get out of full screen mode.
                 [self viewWillDisappear:NO];
                 
+                [self hideLoadingIndicator];
+                
                 CropViewController *nbuCrop = [[CropViewController alloc] initWithNibName:@"CropViewController" bundle:nil];
                 nbuCrop.desiredImageSize = self.desiredImageSize;
                 nbuCrop.image = [asset_.fullResolutionImage imageWithOrientationUp];
@@ -636,8 +631,30 @@ NSString *imageToBuy;
     } failureBlock:^(NSError *error) {
         NSLog( @"Image not created in gallery: %@", error.localizedDescription );
     }];
-    
-    
 }
+
+/**
+ * Show a loding indicator in the right bar button.
+ */
+- (void)showLoadingIndicator {
+    // Remember the right bar button item.
+    rightBarButtonItem = self.navigationItem.rightBarButtonItem;
+    
+    UIActivityIndicatorView *uiBusy = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    [uiBusy setColor:[UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0]];
+    uiBusy.hidesWhenStopped = YES;
+    [uiBusy startAnimating];
+    
+    UIBarButtonItem *btn = [[UIBarButtonItem alloc] initWithCustomView:uiBusy];
+    [self.navigationItem setRightBarButtonItem:btn animated:NO];
+}
+
+/**
+ * Hide previously shown indicator.
+ */
+- (void)hideLoadingIndicator {
+    [self.navigationItem setRightBarButtonItem:rightBarButtonItem animated:NO];
+}
+
 
 @end

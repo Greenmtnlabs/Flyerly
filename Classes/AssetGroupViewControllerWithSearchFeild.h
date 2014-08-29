@@ -18,6 +18,7 @@
     
     InAppViewController *inappviewcontroller;
     BOOL cancelRequest;
+    UIBarButtonItem  *rightBarButtonItem;
 }
 
 @property (strong, nonatomic) ALAssetsLibrary *library;
