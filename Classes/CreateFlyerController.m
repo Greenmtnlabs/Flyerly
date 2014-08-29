@@ -517,6 +517,9 @@ NSArray *coloursArray;
  */
 -(void) goBack {
     
+    //Delete extra layers
+    [self deSelectPreviousLayer];
+    
     // Make sure we hide the keyboard.
     [lastTextView resignFirstResponder];
     [lastTextView removeFromSuperview];
@@ -5102,6 +5105,13 @@ NSArray *coloursArray;
 }
 
 -(IBAction)addDrawingLayer:(id) sender {
+    NSMutableDictionary *dic    =   [self.flyer getLayerFromMaster:currentLayer];
+    NSString   *text = [dic objectForKey:@"text"];
+    NSString   *image = [dic objectForKey:@"image"];
+    
+    if( (text == nil || [text  isEqual: @""]) && (image == nil || [image  isEqual: @""]) )
+    [flyer deleteLayer:currentLayer];
+    
     currentLayer = @"";
     //show drawing layer menu
     [self setAddMoreLayerTabAction:drawingMenueButton];
