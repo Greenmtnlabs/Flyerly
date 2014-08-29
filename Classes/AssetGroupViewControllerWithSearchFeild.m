@@ -64,6 +64,8 @@ NSString *imageToBuy;
     
     // Customization
     self.thumbnailsGridView = scrollGridView;
+    self.thumbnailsGridView.frame = CGRectMake(0, 150, 320 , 670);
+
 
     //change to your account id at bigstock.com/partners
     // Do any additional setup after loading the view from its nib.
@@ -111,11 +113,8 @@ NSString *imageToBuy;
 
 // Send api request with lat long
 - (void) apiRequestWithSearchingKeyWord: (NSString *)keyword {
-    
-    NSLog(@"in apiRequestWithSearchingKeyWord, sending api call with %@",BIGSTOCKAPI_ACCOUNT_ID);
-    
+
     //string for the URL request
-    //[NSString stringWithFormat:@"api.bigstockphoto.com/2/%@/search/?q=%@/&response_detail=all", account_id, keyword];
     NSString *myUrlString = [NSString stringWithFormat:@"http://api.bigstockphoto.com/2/%@/search/?q=%@/&response_detail=all", BIGSTOCKAPI_ACCOUNT_ID, keyword];
     
     //create a NSURL object from the string data
@@ -142,10 +141,7 @@ NSString *imageToBuy;
              //process the JSON response
              //use the main queue so that we can interact with the screen
              dispatch_async(dispatch_get_main_queue(), ^{
-                 
-                 //lbl_status.text = @"Got api data, parsing data";
-                 NSLog(@"Got api data, parsing data");
-                 
+
                  [self parseSearchResponse:data];
              });
          }
@@ -186,8 +182,6 @@ NSString *imageToBuy;
     
     NSString *myUrlString = [NSString stringWithFormat:@"http://api.bigstockphoto.com/2/%@/purchase?image_id=%@&size_code=s&auth_key=%@", BIGSTOCKAPI_ACCOUNT_ID, imageID,encoded];
     
-    NSLog(@"%@", myUrlString);
-    
     //create a NSURL object from the string data
     NSURL *myUrl = [NSURL URLWithString:myUrlString];
     
@@ -214,9 +208,6 @@ NSString *imageToBuy;
              //use the main queue so that we can interact with the screen
              dispatch_async(dispatch_get_main_queue(), ^{
                  
-                 //lbl_status.text = @"Got api data, parsing data";
-                 NSLog(@"Got api data, parsing data");
-                 
                  [self parsePurchaseResponse:data];
              });
          }
@@ -236,7 +227,6 @@ NSString *imageToBuy;
     
     NSString *myData = [[NSString alloc] initWithData:data
                                              encoding:NSUTF8StringEncoding];
-    NSLog(@"in parseResponse, JSON data = %@", myData);
     NSError *error = nil;
     
     //parsing the JSON response
@@ -249,16 +239,10 @@ NSString *imageToBuy;
         
         // Test/Access any key of json object( KEY , VALUE )
         int status = [[jsonObject objectForKey:@"response_code"] intValue];
-        NSLog(@"Api status = %i",status);
-        //lbl_status.text = [@"Api status = " stringByAppendingFormat:@"%i",status];
-        NSLog(@"msg = %@",[jsonObject objectForKey:@"message"]);
-        
         imagesPreview = [[NSMutableArray alloc]init];
         imagesIDs = [[NSMutableArray alloc]init];
         
         if( status == 200 ){
-            NSLog(@"Creating list from parsed data");
-            //lbl_status.text = @"Creating list";
             tableData = [jsonObject objectForKey:@"data"];
             
             NSArray *purchasedImageDownloadID = [tableData objectForKey:@"download_id"];
@@ -273,7 +257,6 @@ NSString *imageToBuy;
             AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:purchaseImageUrlRequest];
             requestOperation.responseSerializer = [AFImageResponseSerializer serializer];
             [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-                NSLog(@"Response: %@", responseObject);
                 
                 UIImage *thumbnail = (UIImage *) responseObject;
                 
@@ -302,7 +285,6 @@ NSString *imageToBuy;
     
     NSString *myData = [[NSString alloc] initWithData:data
                                              encoding:NSUTF8StringEncoding];
-    NSLog(@"in parseResponse, JSON data = %@", myData);
     NSError *error = nil;
     
     //parsing the JSON response
@@ -315,16 +297,11 @@ NSString *imageToBuy;
         
         // Test/Access any key of json object( KEY , VALUE )
         int status = [[jsonObject objectForKey:@"response_code"] intValue];
-        NSLog(@"Api status = %i",status);
-        //lbl_status.text = [@"Api status = " stringByAppendingFormat:@"%i",status];
-        NSLog(@"msg = %@",[jsonObject objectForKey:@"message"]);
         
         imagesPreview = [[NSMutableArray alloc]init];
         imagesIDs = [[NSMutableArray alloc]init];
         
         if( status == 200 ){
-            NSLog(@"Creating list from parsed data");
-            //lbl_status.text = @"Creating list";
             tableData = [jsonObject objectForKey:@"data"];
             
             NSArray *images = [tableData objectForKey:@"images"];
@@ -391,9 +368,7 @@ NSString *imageToBuy;
 -(void)purchaseProductID:(NSString *)pid{
     
     [[RMStore defaultStore] addPayment:pid success:^(SKPaymentTransaction *transaction) {
-        
-        NSLog(@"Product purchased");
-        
+    
         [self productSuccesfullyPurchased];
         
     } failure:^(SKPaymentTransaction *transaction, NSError *error) {
@@ -418,8 +393,6 @@ NSString *imageToBuy;
         [[RMStore defaultStore] requestProducts:productIdentifiers success:^(NSArray *products, NSArray *invalidProductIdentifiers) {
             
             if (cancelRequest) return ;
-            
-            NSLog(@"Products loaded");
             
             requestedProducts = products;
             bool disablePurchase = ([[PFUser currentUser] sessionToken].length == 0);
@@ -462,7 +435,6 @@ NSString *imageToBuy;
 
 - ( void )productSuccesfullyPurchased{
     
-    NSLog(@"succesfully purchased image");
     //Download request for purchsed image
     [self apiRequestForPurchasingImage:imageID_];
     
@@ -475,7 +447,6 @@ NSString *imageToBuy;
     if ([[PFUser currentUser] sessionToken].length != 0) {
         
         [self purchaseProduct];
-        NSLog(@"%ld",(long)sender.tag);
         imageID_ = [imagesIDs objectAtIndex:sender.tag];
         
         
