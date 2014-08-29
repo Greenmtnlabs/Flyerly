@@ -4520,10 +4520,10 @@ NSArray *coloursArray;
             // work for tempDrawImageLayer -----------------------------------------------
             //create/add layer with drawing type
             NSString *tempDrawImageLayer = [flyer addDrawingImage:NO];
+            NSMutableDictionary *dic2 = [flyer getLayerFromMaster:tempDrawImageLayer];
             
             [flyer setImageFrame:tempDrawImageLayer:CGRectMake(0,0,DRAWING_LAYER_W,DRAWING_LAYER_H)];
             
-            NSMutableDictionary *dic2 = [flyer getLayerFromMaster:tempDrawImageLayer];
             [self.flyimgView renderLayer:tempDrawImageLayer layerDictionary:dic2];
             
             
@@ -4533,9 +4533,6 @@ NSArray *coloursArray;
             self.tempDrawImage = img2;
             //add in subview
             [self.flyimgView addSubview:self.tempDrawImage];
-            
-            self.tempDrawImage.userInteractionEnabled = YES; // CAN receive touches
-            
             
             // work for main layer -----------------------------------------------
             currentLayer = [flyer addDrawingImage:YES];
@@ -4554,6 +4551,8 @@ NSArray *coloursArray;
             [self.flyimgView addSubview:self.mainImage];
             
             // Hook event of Gesture for moving layers -----------------------------------------------
+            self.tempDrawImage.userInteractionEnabled = YES; // CAN receive touches
+            
             UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(drawingLayerMoved:)];
             [self.tempDrawImage addGestureRecognizer:panGesture];
             
