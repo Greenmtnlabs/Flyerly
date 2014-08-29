@@ -32,16 +32,12 @@
 @property CGSize desiredImageSize;
 
 
-// An ObjectGridView used to display shutterstock api objects.
-//@property (weak, nonatomic) IBOutlet UIScrollView * scrollGridView;
-
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollGridView;
-
 @property (nonatomic, copy) void (^onImageTaken)(UIImage *);
 
 // An ObjectGridView used to display shutterstock api objects.
-@property (weak, nonatomic) IBOutlet ObjectGridView * gridView;
+
 @property (nonatomic, assign, getter=isLoading)   BOOL loading;
+
 /// The number of assets to be incrementally loaded. Default `100`, set to `0` to load all at once;
 @property (nonatomic) NSUInteger loadSize;
 

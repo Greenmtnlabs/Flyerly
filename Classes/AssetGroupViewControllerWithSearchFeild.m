@@ -30,7 +30,7 @@ NSString *imageToBuy;
 
 @implementation AssetGroupViewControllerWithSearchFeild
 
-@synthesize searchTextField,scrollGridView;
+@synthesize searchTextField;
 
 - (void)viewDidLoad
 {
@@ -44,14 +44,6 @@ NSString *imageToBuy;
     if(![[NSUserDefaults standardUserDefaults] stringForKey:@"FlyerlyPurchasedAlbum"]){
         [self createFlyerlyPurchasedAlbum];
     }
-    
-    // Customization
-    self.thumbnailsGridView = scrollGridView;
-    
-    //change to your account id at bigstock.com/partners
-    // Do any additional setup after loading the view from its nib.
-    // Configure the grid view
-    self.gridView.margin = CGSizeMake(5.0, 5.0);
     
     self.nibNameForThumbnails = @"CustomThumbnailView";
     CGSize thumbSize = CGSizeMake(100.0,120.0);
