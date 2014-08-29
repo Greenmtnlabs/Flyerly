@@ -3829,9 +3829,9 @@
 			children = (
 				2405D3451990AC4B007F2596 /* AssetGroupViewControllerWithSearchFeild.h */,
 				2405D3461990AC4B007F2596 /* AssetGroupViewControllerWithSearchFeild.m */,
+				245A016E19A74E3C005A414A /* AssetGroupViewControllerWithSearchFeild.xib */,
 				2441584619A4E85B00F12FAD /* ImageLoader.h */,
 				2441584719A4E85B00F12FAD /* ImageLoader.m */,
-				245A016E19A74E3C005A414A /* AssetGroupViewControllerWithSearchFeild.xib */,
 				2404CDD619AF506600139E52 /* BigStockThumbnailView.h */,
 				2404CDD719AF506600139E52 /* BigStockThumbnailView.m */,
 				2404CDD919AF514B00139E52 /* CustomThumbnailView.xib */,
