@@ -12,7 +12,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" image="NBUImagePicker.bundle/image_notloaded.png" id="fur-Jh-XAS">
-                    <rect key="frame" x="1" y="0.0" width="98" height="119"/>
+                    <rect key="frame" x="1" y="1" width="98" height="118"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </imageView>
             </subviews>
