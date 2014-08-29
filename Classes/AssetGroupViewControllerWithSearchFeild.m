@@ -18,6 +18,8 @@
 
 @end
 
+@implementation AssetGroupViewControllerWithSearchFeild
+
 id jsonObject;
 NSDictionary *tableData;
 NSMutableArray *imagesPreview;
@@ -28,7 +30,6 @@ NSMutableArray *productArray;
 NSArray *requestedProducts;
 NSString *imageToBuy;
 
-@implementation AssetGroupViewControllerWithSearchFeild
 
 @synthesize searchTextField,scrollGridView;
 
@@ -205,8 +206,6 @@ NSString *imageToBuy;
 // Here we got response from api, parsing purchasing json response
 - (void) parsePurchaseResponse:(NSData *) data {
     
-    NSString *myData = [[NSString alloc] initWithData:data
-                                             encoding:NSUTF8StringEncoding];
     NSError *error = nil;
     
     //parsing the JSON response
@@ -264,8 +263,6 @@ NSString *imageToBuy;
 // Here we got response from api, parsing json response
 - (void) parseSearchResponse:(NSData *) data {
     
-    NSString *myData = [[NSString alloc] initWithData:data
-                                             encoding:NSUTF8StringEncoding];
     NSError *error = nil;
     
     //parsing the JSON response

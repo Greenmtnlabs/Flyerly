@@ -38,8 +38,6 @@ CameraViewController *nbuCamera;
 
 UIButton *backButton;
 
-
-
 @synthesize selectedFont,selectedColor,selectedTemplate,fontTabButton,colorTabButton,sizeTabButton,fontEditButton,selectedSize,
 fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sharePanel,clipArtTabButton,emoticonsTabButton,artsColorTabButton,drawingTabButton,artsSizeTabButton, drawingColorTabButton,drawingPatternTabButton, drawingSizeTabButton;
 @synthesize cameraTabButton,photoTabButton,widthTabButton,heightTabButton,deleteAlert,signInAlert,spaceUnavailableAlert;
@@ -3081,6 +3079,18 @@ NSArray *coloursArray;
 
 #pragma mark - Delegate for Flyerly ImageView
 
+/**
+ *  Transformation changed for layer, let the model know.
+ */
+- (void)layerTransformedforKey:(NSString *)uid :(CGAffineTransform *) transform {
+   
+    //Update Dictionary
+    [flyer setImageTransform:uid :transform];
+    
+    //Update Controller
+    [self.flyimgView renderLayer:uid layerDictionary:[flyer getLayerFromMaster:uid]];
+
+}
 
 /**
  * Frame changed for layer, let the model know.
@@ -3755,36 +3765,36 @@ NSArray *coloursArray;
     
     NSString* tag = nil;
     /* // kam karna hy
-    NSMutableDictionary *textLayer;
-    NSString *textSize;
-    
-    //Getting Last Info of Text Layer
-    
-    textLayer = [flyer getLayerFromMaster:currentLayer];
-    textSize = [NSString stringWithFormat:@"%f", [[textLayer objectForKey:@"line_type"] floatValue]];
-    
-    
-    
-    NSArray *drawingPatternsArray = drawingView.subviews;
-    for (int i = 1; i <=  [drawingPatternsArray count] ; i++)
-    {
-        
-        UIButton *size;
-        if ([drawingPatternsArray[i-1] isKindOfClass:[UIButton class]]) {
-            size = (UIButton *) drawingPatternsArray[i-1];
-        }
-        
-        NSString *btnTitleToBeHighlighted = [NSString stringWithFormat:@"%f", [size.currentTitle floatValue]];
-        
-        if ( [btnTitleToBeHighlighted isEqualToString:textSize] ){
-            
-            tag = [NSString stringWithFormat: @"%d", size.tag];
-            break;
-        }
-    }
-    */
+     NSMutableDictionary *textLayer;
+     NSString *textSize;
+     
+     //Getting Last Info of Text Layer
+     
+     textLayer = [flyer getLayerFromMaster:currentLayer];
+     textSize = [NSString stringWithFormat:@"%f", [[textLayer objectForKey:@"line_type"] floatValue]];
+     
+     
+     
+     NSArray *drawingPatternsArray = drawingView.subviews;
+     for (int i = 1; i <=  [drawingPatternsArray count] ; i++)
+     {
+     
+     UIButton *size;
+     if ([drawingPatternsArray[i-1] isKindOfClass:[UIButton class]]) {
+     size = (UIButton *) drawingPatternsArray[i-1];
+     }
+     
+     NSString *btnTitleToBeHighlighted = [NSString stringWithFormat:@"%f", [size.currentTitle floatValue]];
+     
+     if ( [btnTitleToBeHighlighted isEqualToString:textSize] ){
+     
+     tag = [NSString stringWithFormat: @"%d", size.tag];
+     break;
+     }
+     }
+     */
     return tag;
-
+    
 }
 
 -(NSString *) getTagForSize:(NSString*)layerType ofView:(ResourcesView*)view{
@@ -4051,40 +4061,40 @@ NSArray *coloursArray;
 	}
     else if(selectedButton == drawingTabButton ){
         /*
-        //HERE WE SET ANIMATION
-        [UIView animateWithDuration:0.4f
-                         animations:^{
-                             
-                             if(IS_IPHONE_5){
-                                 
-                                 // Delete SubViews from ScrollView and add Emoticons view
-                                 [self deleteSubviewsFromScrollView];
-                                 [layerScrollView addSubview:emoticonsView];
-                                 [layerScrollView setContentSize:CGSizeMake(320, emoticonsView.size.height)];
-                                 
-                                 [self setSelectedItem:FLYER_LAYER_EMOTICON inView:emoticonsView ofLayerAttribute:LAYER_ATTRIBUTE_IMAGE];
-                                 
-                             } else {
-                                 
-                                 
-                                 // Delete SubViews from ScrollView and add Emoticons view
-                                 [self deleteSubviewsFromScrollView];
-                                 [layerScrollView addSubview:emoticonsView];
-                                 [layerScrollView setContentSize:CGSizeMake(emoticonsView.size.width , emoticonsView.size.height)];
-                                 
-                                 [self setSelectedItem:FLYER_LAYER_EMOTICON inView:emoticonsView ofLayerAttribute:LAYER_ATTRIBUTE_IMAGE];
-                                 //[layerScrollView setContentSize:CGSizeMake(([symbolArray count]*(symbolScrollWidth+5)), [layerScrollView bounds].size.height)];
-                             }
-                         }
-                         completion:^(BOOL finished){
-                             [layerScrollView flashScrollIndicators];
-                         }];
-        //END ANIMATION
-        
-        //Add ContextView
-        [self addScrollView:layerScrollView];
-        [drawingTabButton setSelected:YES];
-        */
+         //HERE WE SET ANIMATION
+         [UIView animateWithDuration:0.4f
+         animations:^{
+         
+         if(IS_IPHONE_5){
+         
+         // Delete SubViews from ScrollView and add Emoticons view
+         [self deleteSubviewsFromScrollView];
+         [layerScrollView addSubview:emoticonsView];
+         [layerScrollView setContentSize:CGSizeMake(320, emoticonsView.size.height)];
+         
+         [self setSelectedItem:FLYER_LAYER_EMOTICON inView:emoticonsView ofLayerAttribute:LAYER_ATTRIBUTE_IMAGE];
+         
+         } else {
+         
+         
+         // Delete SubViews from ScrollView and add Emoticons view
+         [self deleteSubviewsFromScrollView];
+         [layerScrollView addSubview:emoticonsView];
+         [layerScrollView setContentSize:CGSizeMake(emoticonsView.size.width , emoticonsView.size.height)];
+         
+         [self setSelectedItem:FLYER_LAYER_EMOTICON inView:emoticonsView ofLayerAttribute:LAYER_ATTRIBUTE_IMAGE];
+         //[layerScrollView setContentSize:CGSizeMake(([symbolArray count]*(symbolScrollWidth+5)), [layerScrollView bounds].size.height)];
+         }
+         }
+         completion:^(BOOL finished){
+         [layerScrollView flashScrollIndicators];
+         }];
+         //END ANIMATION
+         
+         //Add ContextView
+         [self addScrollView:layerScrollView];
+         [drawingTabButton setSelected:YES];
+         */
     }
     
     
@@ -4997,7 +5007,7 @@ NSArray *coloursArray;
             
             if(tempView == view)
             {
-
+                
                 [self setDrawingLine:drawingArray[i-1] updateDic:YES];
                 
                 //Here we set Font
@@ -5021,67 +5031,67 @@ NSArray *coloursArray;
     
     //-------
     /*
-    
-    NSInteger dBtnW = 299;
-    NSInteger dBtnH = 35;
-    
-    drawingView = [[ResourcesView alloc] init];
-    
-    
-    //NSArray *fontFamilies = [[NSArray alloc] initWithContentsOfFile:drawingViewResourcePath]; //   fontsViewResourcePath];
-    
-    //for ( NSString *fontFamily in fontFamilies ) {
-      //  [ drawingArray addObject:[UIFont fontWithName:fontFamily size:27]];
-    //}
-    
-    [self deleteSubviewsFromScrollView];
-    
-    CGFloat curXLoc = 0;
-    CGFloat curYLoc = 5;
-    int increment = 5;
-    
-    if(IS_IPHONE_5){
-        curXLoc = 13;
-        curYLoc = 10;
-        increment = 8;
-    }
-    
-	for (int i = 1; i <=[drawingArray count] ; i++)
-	{
-		UIButton *line = [UIButton buttonWithType:UIButtonTypeCustom];
-		line.frame = CGRectMake(0, 0, dBtnW, dBtnH);
-        [line addTarget:self action:@selector(selectDrawingLine:) forControlEvents:UIControlEventTouchUpInside];
-        [line setTitle:@" " forState:UIControlStateNormal];
-		//UIFont *fontname = drawingArray[(i-1)];
-		//[line.titleLabel setFont: fontname];
-		//[line setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-		line.tag = i;
-		[line setBackgroundImage:[UIImage imageNamed:drawingArray[i-1]] forState:UIControlStateNormal];
-        
-        //SET BUTTON POSITION ON SCROLLVIEW
-        CGRect frame = line.frame;
-        line.origin = CGPointMake(curXLoc, curYLoc);
-        line.frame = frame;
-        curXLoc += (dBtnW)+increment;
-        
-        if(IS_IPHONE_5){
-            if(curXLoc >= 300){
-                curXLoc = 13;
-                curYLoc = curYLoc + dBtnW + 7;
-            }
-        }
-        
-        [drawingView addSubview:line];
-    }
-    
-    if(IS_IPHONE_5){
-        drawingView.size = CGSizeMake(320, curYLoc + dBtnH + 5);
-        [layerScrollView setContentSize:CGSizeMake(320, curYLoc + dBtnH)];
-    }else {
-        drawingView.size = CGSizeMake(curXLoc , dBtnH + 5);
-        [layerScrollView setContentSize:CGSizeMake(drawingView.size.width , dBtnH)];
-    }
-    //-------
+     
+     NSInteger dBtnW = 299;
+     NSInteger dBtnH = 35;
+     
+     drawingView = [[ResourcesView alloc] init];
+     
+     
+     //NSArray *fontFamilies = [[NSArray alloc] initWithContentsOfFile:drawingViewResourcePath]; //   fontsViewResourcePath];
+     
+     //for ( NSString *fontFamily in fontFamilies ) {
+     //  [ drawingArray addObject:[UIFont fontWithName:fontFamily size:27]];
+     //}
+     
+     [self deleteSubviewsFromScrollView];
+     
+     CGFloat curXLoc = 0;
+     CGFloat curYLoc = 5;
+     int increment = 5;
+     
+     if(IS_IPHONE_5){
+     curXLoc = 13;
+     curYLoc = 10;
+     increment = 8;
+     }
+     
+     for (int i = 1; i <=[drawingArray count] ; i++)
+     {
+     UIButton *line = [UIButton buttonWithType:UIButtonTypeCustom];
+     line.frame = CGRectMake(0, 0, dBtnW, dBtnH);
+     [line addTarget:self action:@selector(selectDrawingLine:) forControlEvents:UIControlEventTouchUpInside];
+     [line setTitle:@" " forState:UIControlStateNormal];
+     //UIFont *fontname = drawingArray[(i-1)];
+     //[line.titleLabel setFont: fontname];
+     //[line setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+     line.tag = i;
+     [line setBackgroundImage:[UIImage imageNamed:drawingArray[i-1]] forState:UIControlStateNormal];
+     
+     //SET BUTTON POSITION ON SCROLLVIEW
+     CGRect frame = line.frame;
+     line.origin = CGPointMake(curXLoc, curYLoc);
+     line.frame = frame;
+     curXLoc += (dBtnW)+increment;
+     
+     if(IS_IPHONE_5){
+     if(curXLoc >= 300){
+     curXLoc = 13;
+     curYLoc = curYLoc + dBtnW + 7;
+     }
+     }
+     
+     [drawingView addSubview:line];
+     }
+     
+     if(IS_IPHONE_5){
+     drawingView.size = CGSizeMake(320, curYLoc + dBtnH + 5);
+     [layerScrollView setContentSize:CGSizeMake(320, curYLoc + dBtnH)];
+     }else {
+     drawingView.size = CGSizeMake(curXLoc , dBtnH + 5);
+     [layerScrollView setContentSize:CGSizeMake(drawingView.size.width , dBtnH)];
+     }
+     //-------
      */
     [self deleteSubviewsFromScrollView];
     [layerScrollView addSubview:drawingPatternsView];
@@ -5107,7 +5117,7 @@ NSArray *coloursArray;
         increment = 8;
     }
     
-   // NSMutableDictionary *textLayer = [flyer getLayerFromMaster:currentLayer];
+    // NSMutableDictionary *textLayer = [flyer getLayerFromMaster:currentLayer];
     
     // Load sizes xib asynchronously
     dispatch_async( dispatch_get_main_queue(), ^{
@@ -5124,7 +5134,7 @@ NSArray *coloursArray;
             
         }
         
-
+        
         
         NSArray *sizesArray = drawingView.subviews;
         for (int i = 1; i <=  3 ; i++)
@@ -5219,7 +5229,7 @@ NSArray *coloursArray;
 	else if(selectedButton == drawingSizeTabButton)
 	{
         
-       // brush = dic[@"brush"];
+        // brush = dic[@"brush"];
         
         
         //HERE WE SET ANIMATION
@@ -5317,10 +5327,10 @@ NSArray *coloursArray;
             
             CGFloat dash[] = {2,brush*3,brush*2,brush};
             if( [brushType  isEqual: DRAWING_DOTTED_LINE] ) {
-               CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound);
+                CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound);
             }
             else if( [brushType  isEqual: DRAWING_DASHED_LINE] ) {
-               CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapSquare);
+                CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapSquare);
             }
             CGContextSetLineWidth(UIGraphicsGetCurrentContext(), brush);
             
