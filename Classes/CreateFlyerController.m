@@ -4522,33 +4522,19 @@ NSArray *coloursArray;
             NSString *tempDrawImageLayer = [flyer addDrawingImage:NO];
             NSMutableDictionary *dic2 = [flyer getLayerFromMaster:tempDrawImageLayer];
             
-            [flyer setImageFrame:tempDrawImageLayer:CGRectMake(0,0,DRAWING_LAYER_W,DRAWING_LAYER_H)];
-            
             [self.flyimgView renderLayer:tempDrawImageLayer layerDictionary:dic2];
             
-            
-            //here we Update ImageView
-            UIImageView *img2 = [self.flyimgView.layers objectForKey:tempDrawImageLayer];
-            
-            self.tempDrawImage = img2;
-            //add in subview
-            [self.flyimgView addSubview:self.tempDrawImage];
+            self.tempDrawImage = [self.flyimgView.layers objectForKey:tempDrawImageLayer];
             
             // work for main layer -----------------------------------------------
             currentLayer = [flyer addDrawingImage:YES];
-            [flyer setImageFrame:currentLayer:CGRectMake(0,0,DRAWING_LAYER_W,DRAWING_LAYER_H)];
-            
             dic = [flyer getLayerFromMaster:currentLayer];
+
             [self.flyimgView renderLayer:currentLayer layerDictionary:dic];
             
             //here we Update ImageView
-            UIImageView *img = [self.flyimgView.layers objectForKey:currentLayer];
-            [self configureDrawingView:img ImageViewDictionary:dic];
-            
-            // Here We Write Code for Image
-            self.mainImage = img;
-            //add in subview
-            [self.flyimgView addSubview:self.mainImage];
+            self.mainImage = [self.flyimgView.layers objectForKey:currentLayer];
+
             
             // Hook event of Gesture for moving layers -----------------------------------------------
             self.tempDrawImage.userInteractionEnabled = YES; // CAN receive touches
@@ -4562,39 +4548,21 @@ NSArray *coloursArray;
             // work for tempDrawImageLayer -----------------------------------------------
             //create/add layer with drawing type
             NSString *tempDrawImageLayer = [flyer addDrawingImage:NO];
-            
-            [flyer setImageFrame:tempDrawImageLayer:CGRectMake(0,0,DRAWING_LAYER_W,DRAWING_LAYER_H)];
-            
             NSMutableDictionary *dic2 = [flyer getLayerFromMaster:tempDrawImageLayer];
+            
             [self.flyimgView renderLayer:tempDrawImageLayer layerDictionary:dic2];
-            
-            
-            //here we Update ImageView
-            UIImageView *img2 = [self.flyimgView.layers objectForKey:tempDrawImageLayer];
-            
-            self.tempDrawImage = img2;
-            //add in subview
-            [self.flyimgView addSubview:self.tempDrawImage];
-            
-            self.tempDrawImage.userInteractionEnabled = YES; // CAN receive touches
-            
+
+            self.tempDrawImage = [self.flyimgView.layers objectForKey:tempDrawImageLayer];
             
             // work for main layer -----------------------------------------------
             //currentLayer = [flyer addDrawingImage:YES];
-            [flyer setImageFrame:currentLayer:CGRectMake(0,0,DRAWING_LAYER_W,DRAWING_LAYER_H)];
-            
             dic = [flyer getLayerFromMaster:currentLayer];
             
             //here we Update ImageView
-            UIImageView *img = [self.flyimgView.layers objectForKey:currentLayer];
-            [self configureDrawingView:img ImageViewDictionary:dic];
-            
-            // Here We Write Code for Image
-            self.mainImage = img;
-            //add in subview
-            [self.flyimgView addSubview:self.mainImage];
+            self.mainImage = [self.flyimgView.layers objectForKey:currentLayer];
             
             // Hook event of Gesture for moving layers -----------------------------------------------
+            self.tempDrawImage.userInteractionEnabled = YES; // CAN receive touches
             UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(drawingLayerMoved:)];
             [self.tempDrawImage addGestureRecognizer:panGesture];
         }
