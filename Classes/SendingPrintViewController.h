@@ -8,14 +8,22 @@
 
 #import <UIKit/UIKit.h>
 #import "Flyer.h"
+#import <UIKit/UIKit.h>
+#import <ParentViewController.h>
+#import "PayPalMobile.h"
+#import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
+#import "ParentViewController.h"
+#import "Flyer.h"
+#import <AFNetworking/AFNetworking.h>
 
-@interface SendingPrintViewController : UIViewController
+@interface SendingPrintViewController : UIViewController < MFMailComposeViewControllerDelegate >
 
 @property (nonatomic,strong) Flyer *flyer;
 @property(nonatomic,strong) NSMutableArray *contactsArray;
 
 
-@property (nonatomic, strong) IBOutlet UILabel *messageFeild;
+@property (nonatomic, strong) IBOutlet UITextField *messageFeild;
 @property (nonatomic, strong) IBOutlet UIImageView *flyerImage;
 @property (nonatomic, strong) IBOutlet UITextField *streetAddress;
 @property (nonatomic, strong) IBOutlet UITextField *state;

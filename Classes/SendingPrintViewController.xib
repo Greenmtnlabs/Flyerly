@@ -10,7 +10,7 @@
                 <outlet property="city" destination="Tvh-Qk-doC" id="iLY-jQ-8zS"/>
                 <outlet property="country" destination="8Wc-wF-dcr" id="X0c-5i-OZZ"/>
                 <outlet property="flyerImage" destination="mpt-BP-emQ" id="TJf-Mk-bVB"/>
-                <outlet property="messageFeild" destination="shP-uR-3Wj" id="adY-gP-8Wc"/>
+                <outlet property="messageFeild" destination="udV-dR-mpa" id="Vgs-U2-x9d"/>
                 <outlet property="state" destination="H5X-d5-vuf" id="SdP-AO-FBo"/>
                 <outlet property="streetAddress" destination="Kfp-a8-9Kr" id="zln-DT-zgi"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="mhH-6r-sW5"/>
@@ -62,12 +62,12 @@
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="shP-uR-3Wj">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="udV-dR-mpa">
                     <rect key="frame" x="20" y="90" width="173" height="100"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>

@@ -169,58 +169,6 @@ LobRequest *request;
     if([identifiers count] > 0) {
     
         [self openBuyPanel:selectedIdentifiers.count];
-    
-    /*if([identifiers count] > 0){
-        
-        // Send invitations
-        if(selectedTab == 0){
-            globle.accounts = [[NSMutableArray alloc] initWithArray:selectedIdentifiers];
-            
-            SHKItem *item = [SHKItem text:@"I'm using the Flyerly app to create and share flyers on the go! Want to give it a try? Flyer.ly/Invite "];
-            item.textMessageToRecipients = selectedIdentifiers;
-            
-            iosSharer = [[ SHKSharer alloc] init];
-            iosSharer = [SHKTextMessage shareItem:item];
-            iosSharer.shareDelegate = self;
-            
-            
-        }else if(selectedTab == 1){
-            
-            SHKItem *i = [SHKItem text:@"I'm using the Flyerly app to create and share flyers on the go! Want to give it a try? http://Flyer.ly/Invite"];
-            
-            NSArray *shareFormFields = [SHKFacebookCommon shareFormFieldsForItem:i];
-            SHKFormController *rootView = [[SHKCONFIG(SHKFormControllerSubclass) alloc] initWithStyle:UITableViewStyleGrouped
-                                                                                                title:nil
-                                                                                     rightButtonTitle:SHKLocalizedString(@"Send to Facebook")
-                                           ];
-            
-            [rootView addSection:shareFormFields header:nil footer:i.URL!=nil?i.URL.absoluteString:nil];
-            
-            
-            rootView.validateBlock = ^(SHKFormController *form) {
-                
-                // default does no checking and proceeds to share
-                [form saveForm];
-                
-            };
-            
-            
-            rootView.saveBlock = ^(SHKFormController *form) {
-                
-                [self updateItemWithForm:form];
-                [self fbSend];
-                
-            };
-            
-            rootView.cancelBlock = ^(SHKFormController *form) {
-                
-                [self fbCancel];
-                
-            };
-            
-            [[SHK currentHelper] showViewController:rootView];
-            
-        }*/
         
     } else {
         [self showAlert:@"Please select any contact to invite !" message:@""];
@@ -761,6 +709,9 @@ LobRequest *request;
     /*sendingControoler.flyer = self.flyer;
     // Present the Sending Print Controller.
     [self presentModalViewController:sendingControoler animated:NO];*/
+    
+    
+    
     /*if ( [MFMailComposeViewController canSendMail] ) {
         
         // Prepare the email in a background thread.
