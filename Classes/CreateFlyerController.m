@@ -56,7 +56,7 @@ ResourcesView *emoticonsView,*clipartsView,*fontsView,*textBordersView,*drawingV
 
 NSString *fontsViewResourcePath,*clipartsViewResourcePath,*emoticonsViewResourcePath,*drawingViewResourcePath;
 
-NSMutableArray *fontsArray,*clipartsArray,*emoticonsArray, *drawingArray;
+NSMutableArray *fontsArray,*clipartsArray,*emoticonsArray;
 
 NSArray *coloursArray;
 
@@ -3757,35 +3757,26 @@ NSArray *coloursArray;
     [view dehighlightResource];
     
     NSString* tag = nil;
-    /* // kam karna hy
-    NSMutableDictionary *textLayer;
-    NSString *textSize;
+    NSMutableDictionary *dic;
+    NSString *line_type;
+   
+    dic = [flyer getLayerFromMaster:currentLayer];
+    line_type = [dic objectForKey:@"line_type"];
     
-    //Getting Last Info of Text Layer
-    
-    textLayer = [flyer getLayerFromMaster:currentLayer];
-    textSize = [NSString stringWithFormat:@"%f", [[textLayer objectForKey:@"line_type"] floatValue]];
-    
-    
-    
-    NSArray *drawingPatternsArray = drawingView.subviews;
-    for (int i = 1; i <=  [drawingPatternsArray count] ; i++)
+    NSArray *drawingPatternsArrayInSV = drawingPatternsView.subviews;
+    for (int i = 1; i <=  [drawingPatternsArrayInSV count] ; i++)
     {
-        
-        UIButton *size;
-        if ([drawingPatternsArray[i-1] isKindOfClass:[UIButton class]]) {
-            size = (UIButton *) drawingPatternsArray[i-1];
-        }
-        
-        NSString *btnTitleToBeHighlighted = [NSString stringWithFormat:@"%f", [size.currentTitle floatValue]];
-        
-        if ( [btnTitleToBeHighlighted isEqualToString:textSize] ){
+        UIButton *lineBtn;
+        if ([drawingPatternsArrayInSV[i-1] isKindOfClass:[UIButton class]]) {
             
-            tag = [NSString stringWithFormat: @"%d", size.tag];
-            break;
+            lineBtn = (UIButton *) drawingPatternsArrayInSV[i-1];
+            
+            if ( [DRAWING_PATTERNS_ARRAY[i-1] isEqualToString:line_type] ){
+                tag = [NSString stringWithFormat: @"%d", lineBtn.tag];
+                break;
+            }
         }
     }
-    */
     return tag;
 
 }
@@ -4930,17 +4921,14 @@ NSArray *coloursArray;
             
             if(tempView == view)
             {
-
-                [self setDrawingLine:drawingArray[i-1] updateDic:YES];
-                
-                //Here we set Font
-                //[flyer setFlyerTextFont:currentLayer FontName:[NSString stringWithFormat:@"%@",[selectedFont familyName]]];
+                //Here we set line
+                [self setDrawingLine:DRAWING_PATTERNS_ARRAY[i-1] updateDic:YES];
                 
                 //Here we call Render Layer on View
                 //[flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
                 
                 //Handling Select Unselect
-                [self setSelectedItem:FLYER_LAYER_DRAWING inView:drawingView ofLayerAttribute:LAYER_ATTRIBUTE_DRAWING_PATTERN];
+                [self setSelectedItem:FLYER_LAYER_DRAWING inView:drawingPatternsView ofLayerAttribute:LAYER_ATTRIBUTE_DRAWING_PATTERN];
             }
             i++;
         }// uiImageView Found
@@ -4950,75 +4938,81 @@ NSArray *coloursArray;
 
 -(void)addDrawingPatternsInSubView {
     
-    drawingArray = [[NSMutableArray alloc] initWithArray:DRAWING_PATTERNS_ARRAY];
-    
-    //-------
-    /*
-    
-    NSInteger dBtnW = 299;
-    NSInteger dBtnH = 35;
-    
-    drawingView = [[ResourcesView alloc] init];
-    
-    
-    //NSArray *fontFamilies = [[NSArray alloc] initWithContentsOfFile:drawingViewResourcePath]; //   fontsViewResourcePath];
-    
-    //for ( NSString *fontFamily in fontFamilies ) {
-      //  [ drawingArray addObject:[UIFont fontWithName:fontFamily size:27]];
-    //}
-    
     [self deleteSubviewsFromScrollView];
-    
-    CGFloat curXLoc = 0;
-    CGFloat curYLoc = 5;
-    int increment = 5;
-    
-    if(IS_IPHONE_5){
-        curXLoc = 13;
-        curYLoc = 10;
-        increment = 8;
-    }
-    
-	for (int i = 1; i <=[drawingArray count] ; i++)
-	{
-		UIButton *line = [UIButton buttonWithType:UIButtonTypeCustom];
-		line.frame = CGRectMake(0, 0, dBtnW, dBtnH);
-        [line addTarget:self action:@selector(selectDrawingLine:) forControlEvents:UIControlEventTouchUpInside];
-        [line setTitle:@" " forState:UIControlStateNormal];
-		//UIFont *fontname = drawingArray[(i-1)];
-		//[line.titleLabel setFont: fontname];
-		//[line setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-		line.tag = i;
-		[line setBackgroundImage:[UIImage imageNamed:drawingArray[i-1]] forState:UIControlStateNormal];
-        
-        //SET BUTTON POSITION ON SCROLLVIEW
-        CGRect frame = line.frame;
-        line.origin = CGPointMake(curXLoc, curYLoc);
-        line.frame = frame;
-        curXLoc += (dBtnW)+increment;
-        
-        if(IS_IPHONE_5){
-            if(curXLoc >= 300){
-                curXLoc = 13;
-                curYLoc = curYLoc + dBtnW + 7;
-            }
-        }
-        
-        [drawingView addSubview:line];
-    }
-    
-    if(IS_IPHONE_5){
-        drawingView.size = CGSizeMake(320, curYLoc + dBtnH + 5);
-        [layerScrollView setContentSize:CGSizeMake(320, curYLoc + dBtnH)];
-    }else {
-        drawingView.size = CGSizeMake(curXLoc , dBtnH + 5);
-        [layerScrollView setContentSize:CGSizeMake(drawingView.size.width , dBtnH)];
-    }
-    //-------
-     */
-    [self deleteSubviewsFromScrollView];
+
     [layerScrollView addSubview:drawingPatternsView];
     [layerScrollView setContentSize:CGSizeMake(drawingPatternsView.frame.size.width, [drawingPatternsView bounds].size.height)];
+    [self setSelectedItem:FLYER_LAYER_DRAWING inView:drawingPatternsView ofLayerAttribute:LAYER_ATTRIBUTE_DRAWING_PATTERN];
+    
+
+    //-------
+    /*
+     
+     int dBtnW = 300;
+     int dBtnH = 30;
+     
+     drawingPatternsView = [[ResourcesView alloc] init];
+
+     
+     [self deleteSubviewsFromScrollView];
+     
+     CGFloat curXLoc = 0;
+     CGFloat curYLoc = 5;
+     int increment = 5;
+     
+     if(IS_IPHONE_5){
+     curXLoc = 10;
+     curYLoc = 10;
+     increment = 10;
+     }
+     
+     NSMutableDictionary *thisDrawingLayer;
+     NSString *line_type;
+     
+     //Getting Last Info of Text Layer
+     if (![currentLayer isEqualToString:@""]) {
+     thisDrawingLayer = [flyer getLayerFromMaster:currentLayer];
+     line_type = [thisDrawingLayer objectForKey:@"line_type"];
+     }
+     
+     for (int i = 1; i <=[DRAWING_PATTER_ARRAY count] ; i++)
+     {
+     UIButton *line = [UIButton buttonWithType:UIButtonTypeCustom];
+     line.frame = CGRectMake(0, 0, dBtnW, dBtnH);
+     [line addTarget:self action:@selector(selectDrawingLine::) forControlEvents:UIControlEventTouchUpInside];
+     [line setTitle:DRAWING_PATTERNS_ARRAY[i-1] forState:UIControlStateNormal];
+     [line setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+     line.tag = i;
+     [line setBackgroundImage:[UIImage imageNamed:DRAWING_PATTERNS_ARRAY[i-1]] forState:UIControlStateNormal];
+     
+     //SET BUTTON POSITION ON SCROLLVIEW
+     CGRect frame = line.frame;
+     frame.origin = CGPointMake(curXLoc, curYLoc);
+     line.frame = frame;
+     curXLoc += (dBtnW)+increment;
+     
+     if(IS_IPHONE_5){
+         if(curXLoc >= 300){
+             curXLoc = 13;
+             curYLoc = curYLoc + dBtnW + 10;
+         }
+     }
+     
+     [drawingPatternsView addSubview:line];
+     }
+     
+     if(IS_IPHONE_5){
+         drawingPatternsView.size = CGSizeMake(320, curYLoc + dBtnH + 5);
+         [layerScrollView setContentSize:CGSizeMake(320, curYLoc + dBtnH)];
+     }else {
+         drawingPatternsView.size = CGSizeMake(curXLoc , dBtnH + 5);
+         [layerScrollView setContentSize:CGSizeMake(drawingPatternsView.size.width , dBtnH)];
+     }
+    */
+     
+    
+    //-------
+    
     
 }
 
