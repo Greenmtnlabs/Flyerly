@@ -41,7 +41,7 @@ UIButton *backButton;
 
 
 @synthesize selectedFont,selectedColor,selectedTemplate,fontTabButton,colorTabButton,sizeTabButton,fontEditButton,selectedSize,
-fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sharePanel,clipArtTabButton,emoticonsTabButton,artsColorTabButton,drawingTabButton,artsSizeTabButton, drawingColorTabButton,drawingPatternTabButton, drawingSizeTabButton;
+fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sharePanel,clipArtTabButton,emoticonsTabButton,artsColorTabButton,artsSizeTabButton, drawingColorTabButton,drawingPatternTabButton, drawingSizeTabButton;
 @synthesize cameraTabButton,photoTabButton,widthTabButton,heightTabButton,deleteAlert,signInAlert,spaceUnavailableAlert;
 @synthesize imgPickerFlag,layerScrollView,flyerPath;
 @synthesize contextView,libraryContextView,libFlyer,backgroundTabButton,addMoreFontTabButton,drawingMenueButton;
@@ -3924,13 +3924,17 @@ NSArray *coloursArray;
  */
 -(IBAction)setArtsTabAction:(id) sender
 {
-    
+    //add clipart sub menu in bottom
     [self addBottomTabs:libArts];
+    
+    //deselect previously selected buttons
     [clipArtTabButton setSelected:NO];
     [emoticonsTabButton setSelected:NO];
     [artsColorTabButton setSelected:NO];
-    [drawingTabButton setSelected:NO];
+    [drawingMenueButton setSelected:NO];
     [artsSizeTabButton setSelected:NO];
+    
+    //currently pressed button
     UIButton *selectedButton = (UIButton*)sender;
     
     if(selectedButton == clipArtTabButton)
@@ -4052,42 +4056,8 @@ NSArray *coloursArray;
         
 		[artsSizeTabButton setSelected:YES];
 	}
-    else if(selectedButton == drawingTabButton ){
-        /*
-        //HERE WE SET ANIMATION
-        [UIView animateWithDuration:0.4f
-                         animations:^{
-                             
-                             if(IS_IPHONE_5){
-                                 
-                                 // Delete SubViews from ScrollView and add Emoticons view
-                                 [self deleteSubviewsFromScrollView];
-                                 [layerScrollView addSubview:emoticonsView];
-                                 [layerScrollView setContentSize:CGSizeMake(320, emoticonsView.size.height)];
-                                 
-                                 [self setSelectedItem:FLYER_LAYER_EMOTICON inView:emoticonsView ofLayerAttribute:LAYER_ATTRIBUTE_IMAGE];
-                                 
-                             } else {
-                                 
-                                 
-                                 // Delete SubViews from ScrollView and add Emoticons view
-                                 [self deleteSubviewsFromScrollView];
-                                 [layerScrollView addSubview:emoticonsView];
-                                 [layerScrollView setContentSize:CGSizeMake(emoticonsView.size.width , emoticonsView.size.height)];
-                                 
-                                 [self setSelectedItem:FLYER_LAYER_EMOTICON inView:emoticonsView ofLayerAttribute:LAYER_ATTRIBUTE_IMAGE];
-                                 //[layerScrollView setContentSize:CGSizeMake(([symbolArray count]*(symbolScrollWidth+5)), [layerScrollView bounds].size.height)];
-                             }
-                         }
-                         completion:^(BOOL finished){
-                             [layerScrollView flashScrollIndicators];
-                         }];
-        //END ANIMATION
-        
-        //Add ContextView
-        [self addScrollView:layerScrollView];
-        [drawingTabButton setSelected:YES];
-        */
+    else if(selectedButton == drawingMenueButton ){
+        //for drawing we are doing all(add/edit) work in setAddMoreLayerTabAction
     }
     
     
@@ -4369,13 +4339,13 @@ NSArray *coloursArray;
     
 	UIButton *selectedButton = (UIButton*)sender;
     
-    //Set Unselected All
+    //Unselected All main menue buttons
     [addMoreFontTabButton setSelected:NO];
     [addMorePhotoTabButton setSelected:NO];
     [addArtsTabButton setSelected:NO];
     [addVideoTabButton setSelected:NO];
     [backgroundTabButton setSelected:NO];
-    [drawingMenueButton setSelected:NO];
+    
     
     
 	if(selectedButton == addMoreFontTabButton)

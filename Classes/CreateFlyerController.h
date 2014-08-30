@@ -153,7 +153,6 @@
 @property (nonatomic, strong)IBOutlet UIButton *addVideoTabButton;
 @property (nonatomic, strong)IBOutlet UIButton *addArtsTabButton;
 @property (nonatomic, strong)IBOutlet UIButton *backgroundTabButton;
-@property (nonatomic, strong)IBOutlet UIButton *drawingMenueButton;
 
 
 //These are LibBackground
@@ -177,8 +176,8 @@
 //These are Art Tab Buttons
 @property (nonatomic, strong)IBOutlet UIButton *clipArtTabButton;
 @property (nonatomic, strong)IBOutlet UIButton *emoticonsTabButton;
+@property (nonatomic, strong)IBOutlet UIButton *drawingMenueButton;
 @property (nonatomic, strong)IBOutlet UIButton *artsColorTabButton;
-@property (nonatomic, strong)IBOutlet UIButton *drawingTabButton;
 @property (nonatomic, strong)IBOutlet UIButton *artsSizeTabButton;
 
 //These are LibPhoto
