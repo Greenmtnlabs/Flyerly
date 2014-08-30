@@ -4554,10 +4554,11 @@ NSArray *coloursArray;
         //Add ContextView
         [self addBottomTabs:libDrawing];
         
-        // FORCE CLICK ON FIRST BUTTON OF addBottomTab, then it will auto select SET BOTTOM BAR
-        [self drawingSetStyleTabAction:drawingSizeTabButton];
-        
+        //Assign dic values(pattern,color,size) to class level variables
         [self setDrawingTools:dic];
+        
+        // FORCE CLICK ON FIRST BUTTON OF drawingSubMenuButton, then it will auto select SET BOTTOM BAR
+        [self drawingSetStyleTabAction:drawingPatternTabButton];
         
 	}
     
@@ -5098,23 +5099,18 @@ NSArray *coloursArray;
  */
 -(IBAction)drawingSetStyleTabAction:(id) sender
 {
-    NSMutableDictionary *dic = [flyer getLayerFromMaster:currentLayer];
-    
-    //[self addBottomTabs:libText];
-    
+    //unselect drawing sub menu's
     [drawingPatternTabButton setSelected:NO];
     [drawingColorTabButton setSelected:NO];
     [drawingSizeTabButton setSelected:NO];
+    
+   //NSMutableDictionary *dic = [flyer getLayerFromMaster:currentLayer];
     
     
     UIButton *selectedButton = (UIButton*)sender;
 	
     if(selectedButton == drawingPatternTabButton)
 	{
-        
-        // brush = dic[@"brush"];
-        
-        
         //HERE WE SET ANIMATION
         [UIView animateWithDuration:0.4f
                          animations:^{
@@ -5133,12 +5129,6 @@ NSArray *coloursArray;
 	}
 	else if(selectedButton == drawingColorTabButton)
 	{
-        
-        NSArray *stringArray = [dic[@"textcolor"] componentsSeparatedByString:@", "];
-        red = (CGFloat)[stringArray[0] floatValue];
-        green = (CGFloat)[stringArray[1] floatValue];
-        blue = (CGFloat)[stringArray[2] floatValue];
-        
         //HERE WE SET ANIMATION
         [UIView animateWithDuration:0.4f
                          animations:^{
@@ -5157,10 +5147,6 @@ NSArray *coloursArray;
 	}
 	else if(selectedButton == drawingSizeTabButton)
 	{
-        
-       // brush = dic[@"brush"];
-        
-        
         //HERE WE SET ANIMATION
         [UIView animateWithDuration:0.4f
                          animations:^{
@@ -5179,13 +5165,14 @@ NSArray *coloursArray;
 	}
 }
 
+//Assign dic values(pattern,color,size) to class level variables
 - (void)setDrawingTools:(NSMutableDictionary *)dic
 {
-    //setDrawingRGB
-    NSArray* colorAry = [[dic objectForKey:@"textcolor"] componentsSeparatedByString: @", "];
-    red   = (CGFloat)[[colorAry objectAtIndex: 0] integerValue];
-    green = (CGFloat)[[colorAry objectAtIndex: 1] integerValue];
-    blue  = (CGFloat)[[colorAry objectAtIndex: 2] integerValue];
+    //Get color(r,g,b) from dic, then assign them to class level red,green,blue
+    NSArray *colorAry = [dic[@"textcolor"] componentsSeparatedByString: @", "];
+    red   = (CGFloat)[colorAry[0] floatValue];
+    green = (CGFloat)[colorAry[1] floatValue];
+    blue  = (CGFloat)[colorAry[2] floatValue];
     
     [self setDrawingBrushRadius:[[dic objectForKey:@"brush"] integerValue] updateDic:NO];
     [self setDrawingLine:[dic objectForKey:@"line_type"] updateDic:NO];
