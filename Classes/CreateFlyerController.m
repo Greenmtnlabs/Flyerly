@@ -39,7 +39,7 @@ CameraViewController *nbuCamera;
 UIButton *backButton;
 
 @synthesize selectedFont,selectedColor,selectedTemplate,fontTabButton,colorTabButton,sizeTabButton,fontEditButton,selectedSize,
-fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sharePanel,clipArtTabButton,emoticonsTabButton,artsColorTabButton,artsSizeTabButton, drawingColorTabButton,drawingPatternTabButton, drawingSizeTabButton;
+fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sharePanel,clipArtTabButton,emoticonsTabButton,artsColorTabButton,artsSizeTabButton, drawingColorTabButton,drawingPatternTabButton, drawingSizeTabButton,drawingEraserTabButton;
 @synthesize cameraTabButton,photoTabButton,widthTabButton,heightTabButton,deleteAlert,signInAlert,spaceUnavailableAlert;
 @synthesize imgPickerFlag,layerScrollView,flyerPath;
 @synthesize contextView,libraryContextView,libFlyer,backgroundTabButton,addMoreFontTabButton,drawingMenueButton;
@@ -182,6 +182,7 @@ NSArray *coloursArray;
     brush = 5.0;
     brushType = DRAWING_PLANE_LINE;
     opacity = 1.0;
+    drawingLayerMode    =   DRAWING_LAYER_MODE_EDIT;
     
 	[super viewDidLoad];
     
@@ -4554,9 +4555,6 @@ NSArray *coloursArray;
         //Add ContextView
         [self addBottomTabs:libDrawing];
         
-        //Assign dic values(pattern,color,size) to class level variables
-        [self setDrawingTools:dic];
-        
         // FORCE CLICK ON FIRST BUTTON OF drawingSubMenuButton, then it will auto select SET BOTTOM BAR
         [self drawingSetStyleTabAction:drawingPatternTabButton];
         
@@ -5038,9 +5036,10 @@ NSArray *coloursArray;
     [drawingPatternTabButton setSelected:NO];
     [drawingColorTabButton setSelected:NO];
     [drawingSizeTabButton setSelected:NO];
+    [drawingEraserTabButton setSelected:NO];
     
-   //NSMutableDictionary *dic = [flyer getLayerFromMaster:currentLayer];
     
+    NSMutableDictionary *dic = [flyer getLayerFromMaster:currentLayer];
     
     UIButton *selectedButton = (UIButton*)sender;
 	
@@ -5060,7 +5059,12 @@ NSArray *coloursArray;
         //Add ContextView
         [self addScrollView:layerScrollView];
         
+        //Assign dic values(pattern,color,size) to class level variables
+        [self setDrawingTools:dic callFrom:DRAWING_LAYER_MODE_EDIT];
+        
+        //SHOW button selected
 		[drawingPatternTabButton setSelected:YES];
+
 	}
 	else if(selectedButton == drawingColorTabButton)
 	{
@@ -5077,6 +5081,11 @@ NSArray *coloursArray;
         
         //Add ContextView
         [self addScrollView:layerScrollView];
+        
+        //Assign dic values(pattern,color,size) to class level variables
+        [self setDrawingTools:dic callFrom:DRAWING_LAYER_MODE_EDIT];
+        
+        //SHOW button selected
         [drawingColorTabButton setSelected:YES];
         
 	}
@@ -5095,14 +5104,30 @@ NSArray *coloursArray;
         
         //Add ContextView
         [self addScrollView:layerScrollView];
+
+        //Assign dic values(pattern,color,size) to class level variables
+        [self setDrawingTools:dic callFrom:DRAWING_LAYER_MODE_EDIT];
         
+        //SHOW button selected
 		[drawingSizeTabButton setSelected:YES];
+
 	}
+    else if(selectedButton == drawingEraserTabButton)
+	{
+        //Assign dic values(pattern,color,size) to class level variables
+        [self setDrawingTools:dic callFrom:DRAWING_LAYER_MODE_ERASER];
+        
+        //SHOW button selected
+		[drawingEraserTabButton setSelected:YES];
+	}
+    
 }
 
 //Assign dic values(pattern,color,size) to class level variables
-- (void)setDrawingTools:(NSMutableDictionary *)dic
+- (void)setDrawingTools:(NSMutableDictionary *)dic callFrom:(NSString *)callFrom
 {
+    drawingLayerMode = callFrom;
+    
     //Get color(r,g,b) from dic, then assign them to class level red,green,blue
     NSArray *colorAry = [dic[@"textcolor"] componentsSeparatedByString: @", "];
     red   = (CGFloat)[colorAry[0] floatValue];
@@ -5161,91 +5186,97 @@ NSArray *coloursArray;
  */
 - (void)drawingLayerMoved:(UIPanGestureRecognizer *)recognizer {
     
-    if (recognizer.state == UIGestureRecognizerStateBegan) {
-        mouseSwiped = NO;
-        lastPoint = [recognizer locationInView:self.mainImage];
-        
-    } else if (recognizer.state == UIGestureRecognizerStateChanged) {
-        
-        //MOVE
-        mouseSwiped = YES;
-        CGPoint currentPoint = [recognizer locationInView:self.mainImage];
-        
-        UIGraphicsBeginImageContext(self.mainImage.frame.size);
-        [self.tempDrawImage.image drawInRect:CGRectMake(0, 0, self.mainImage.frame.size.width, self.mainImage.frame.size.height)];
-        
-        if( [brushType  isEqual: DRAWING_DASHED_LINE] || [brushType  isEqual: DRAWING_DOTTED_LINE] ) {
+    if( [drawingLayerMode isEqualToString:DRAWING_LAYER_MODE_EDIT] ){
+        if (recognizer.state == UIGestureRecognizerStateBegan) {
+            mouseSwiped = NO;
+            lastPoint = [recognizer locationInView:self.mainImage];
             
-            CGFloat dash[] = {2,brush*3,brush*2,brush};
-            if( [brushType  isEqual: DRAWING_DOTTED_LINE] ) {
+        }
+        else if (recognizer.state == UIGestureRecognizerStateChanged) {
+            
+            //MOVE
+            mouseSwiped = YES;
+            CGPoint currentPoint = [recognizer locationInView:self.mainImage];
+            
+            UIGraphicsBeginImageContext(self.mainImage.frame.size);
+            [self.tempDrawImage.image drawInRect:CGRectMake(0, 0, self.mainImage.frame.size.width, self.mainImage.frame.size.height)];
+            
+            if( [brushType  isEqual: DRAWING_DASHED_LINE] || [brushType  isEqual: DRAWING_DOTTED_LINE] ) {
+                
+                CGFloat dash[] = {2,brush*3,brush*2,brush};
+                if( [brushType  isEqual: DRAWING_DOTTED_LINE] ) {
+                    CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound);
+                }
+                else if( [brushType  isEqual: DRAWING_DASHED_LINE] ) {
+                    CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapSquare);
+                }
+                CGContextSetLineWidth(UIGraphicsGetCurrentContext(), brush);
+                
+                // brush color
+                CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), red, green, blue, 1.0);
+                
+                CGContextSetLineDash(UIGraphicsGetCurrentContext(), 1, dash, 4);
+                
+                CGContextMoveToPoint(UIGraphicsGetCurrentContext(), lastPoint.x, lastPoint.y);
+                CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), currentPoint.x, currentPoint.y);
+                CGContextStrokePath(UIGraphicsGetCurrentContext());
+                CGContextClosePath(UIGraphicsGetCurrentContext());
+            }
+            else if( [brushType  isEqual: DRAWING_PLANE_LINE]  ) {
+                // brush width / size
+                CGContextSetLineWidth(UIGraphicsGetCurrentContext(), brush );
+                
+                // brush color
+                CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), red, green, blue, 1.0);
+                
+                CGContextMoveToPoint(UIGraphicsGetCurrentContext(), lastPoint.x, lastPoint.y);
+                CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), currentPoint.x, currentPoint.y);
                 CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound);
             }
-            else if( [brushType  isEqual: DRAWING_DASHED_LINE] ) {
-                CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapSquare);
-            }
-            CGContextSetLineWidth(UIGraphicsGetCurrentContext(), brush);
             
-            // brush color
-            CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), red, green, blue, 1.0);
             
-            CGContextSetLineDash(UIGraphicsGetCurrentContext(), 1, dash, 4);
             
-            CGContextMoveToPoint(UIGraphicsGetCurrentContext(), lastPoint.x, lastPoint.y);
-            CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), currentPoint.x, currentPoint.y);
+            
+            CGContextSetBlendMode(UIGraphicsGetCurrentContext(),kCGBlendModeNormal);
             CGContextStrokePath(UIGraphicsGetCurrentContext());
-            CGContextClosePath(UIGraphicsGetCurrentContext());
-        }
-        else if( [brushType  isEqual: DRAWING_PLANE_LINE]  ) {
-            // brush width / size
-            CGContextSetLineWidth(UIGraphicsGetCurrentContext(), brush );
+            self.tempDrawImage.image = UIGraphicsGetImageFromCurrentImageContext();
+            [self.tempDrawImage setAlpha:opacity];
+            UIGraphicsEndImageContext();
             
-            // brush color
-            CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), red, green, blue, 1.0);
+            lastPoint = currentPoint;
             
-            CGContextMoveToPoint(UIGraphicsGetCurrentContext(), lastPoint.x, lastPoint.y);
-            CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), currentPoint.x, currentPoint.y);
-            CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound);
         }
-        
-        
-        
-        
-        CGContextSetBlendMode(UIGraphicsGetCurrentContext(),kCGBlendModeNormal);
-        CGContextStrokePath(UIGraphicsGetCurrentContext());
-        self.tempDrawImage.image = UIGraphicsGetImageFromCurrentImageContext();
-        [self.tempDrawImage setAlpha:opacity];
-        UIGraphicsEndImageContext();
-        
-        lastPoint = currentPoint;
-        
-    } else if (recognizer.state == UIGestureRecognizerStateEnded) {
-        //ENDED
-        UIGraphicsBeginImageContext(self.mainImage.frame.size);
-        [self.mainImage.image drawInRect:CGRectMake(0, 0, self.mainImage.frame.size.width, self.mainImage.frame.size.height) blendMode:kCGBlendModeNormal alpha:1.0];
-        [self.tempDrawImage.image drawInRect:CGRectMake(0, 0, self.tempDrawImage.frame.size.width, self.tempDrawImage.frame.size.height) blendMode:kCGBlendModeNormal alpha:opacity];
-        
-        self.mainImage.image = UIGraphicsGetImageFromCurrentImageContext();
-        self.tempDrawImage.image = nil;
-        UIGraphicsEndImageContext();
-        
-        // Save drawing layer and flyer
-        
-        NSString *imgPath = [self getImagePathforPhoto:self.mainImage.image];
-        
-        //Set Image to dictionary
-        [self.flyer setImagePath:self.currentLayer ImgPath:imgPath];
-        
-        //Here we Create ImageView Layer
-        [self.flyimgView renderLayer:self.currentLayer layerDictionary:[self.flyer getLayerFromMaster:self.currentLayer]];
-        
-        //[self.flyimgView layerStoppedEditing:self.currentLayer];
-        
-        
-        // End of save flyer and drawing layer
-        
+        else if (recognizer.state == UIGestureRecognizerStateEnded) {
+            //ENDED
+            UIGraphicsBeginImageContext(self.mainImage.frame.size);
+            [self.mainImage.image drawInRect:CGRectMake(0, 0, self.mainImage.frame.size.width, self.mainImage.frame.size.height) blendMode:kCGBlendModeNormal alpha:1.0];
+            [self.tempDrawImage.image drawInRect:CGRectMake(0, 0, self.tempDrawImage.frame.size.width, self.tempDrawImage.frame.size.height) blendMode:kCGBlendModeNormal alpha:opacity];
+            
+            self.mainImage.image = UIGraphicsGetImageFromCurrentImageContext();
+            self.tempDrawImage.image = nil;
+            UIGraphicsEndImageContext();
+            
+            // Save drawing layer and flyer
+            
+            NSString *imgPath = [self getImagePathforPhoto:self.mainImage.image];
+            
+            //Set Image to dictionary
+            [self.flyer setImagePath:self.currentLayer ImgPath:imgPath];
+            
+            //Here we Create ImageView Layer
+            [self.flyimgView renderLayer:self.currentLayer layerDictionary:[self.flyer getLayerFromMaster:self.currentLayer]];
+            
+            //[self.flyimgView layerStoppedEditing:self.currentLayer];
+            
+            
+            // End of save flyer and drawing layer
+            
+            
+        }
+    }
+    else if( [drawingLayerMode isEqualToString:DRAWING_LAYER_MODE_ERASER] ){
         
     }
-    
 }
 
 
