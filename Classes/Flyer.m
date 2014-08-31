@@ -820,8 +820,6 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     imageDetailDictionary[@"brush"] = @"10.0"; //thikness of brush
     imageDetailDictionary[@"opacity"] = @"1.0"; //opacity of line
     
-    
-    
     [masterLayers setValue:imageDetailDictionary forKey:uniqueId];
     return uniqueId;
 }
@@ -833,6 +831,20 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     imageDetailDictionary[@"y"] = [NSString stringWithFormat:@"%f",photoFrame.origin.y];
     imageDetailDictionary[@"width"] = [NSString stringWithFormat:@"%f",photoFrame.size.width];
     imageDetailDictionary[@"height"] = [NSString stringWithFormat:@"%f",photoFrame.size.height];
+    
+    [masterLayers setValue:imageDetailDictionary forKey:uid];
+}
+
+-(void)setImageTransform :(NSString *)uid :(CGAffineTransform *) transform {
+    
+    NSMutableDictionary *imageDetailDictionary = [self getLayerFromMaster:uid];
+
+    imageDetailDictionary[@"a"] = [NSString stringWithFormat:@"%f", transform->a ];
+    imageDetailDictionary[@"b"] = [NSString stringWithFormat:@"%f", transform->b ];
+    imageDetailDictionary[@"c"] = [NSString stringWithFormat:@"%f", transform->c ];
+    imageDetailDictionary[@"d"] = [NSString stringWithFormat:@"%f", transform->d ];
+    imageDetailDictionary[@"tx"] = [NSString stringWithFormat:@"%f", transform->tx ];
+    imageDetailDictionary[@"ty"] = [NSString stringWithFormat:@"%f", transform->ty ];
     
     [masterLayers setValue:imageDetailDictionary forKey:uid];
 }

@@ -38,8 +38,6 @@ CameraViewController *nbuCamera;
 
 UIButton *backButton;
 
-
-
 @synthesize selectedFont,selectedColor,selectedTemplate,fontTabButton,colorTabButton,sizeTabButton,fontEditButton,selectedSize,
 fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sharePanel,clipArtTabButton,emoticonsTabButton,artsColorTabButton,artsSizeTabButton, drawingColorTabButton,drawingPatternTabButton, drawingSizeTabButton;
 @synthesize cameraTabButton,photoTabButton,widthTabButton,heightTabButton,deleteAlert,signInAlert,spaceUnavailableAlert;
@@ -3084,6 +3082,18 @@ NSArray *coloursArray;
 
 #pragma mark - Delegate for Flyerly ImageView
 
+/**
+ *  Transformation changed for layer, let the model know.
+ */
+- (void)layerTransformedforKey:(NSString *)uid :(CGAffineTransform *) transform {
+   
+    //Update Dictionary
+    [flyer setImageTransform:uid :transform];
+    
+    //Update Controller
+    [self.flyimgView renderLayer:uid layerDictionary:[flyer getLayerFromMaster:uid]];
+
+}
 
 /**
  * Frame changed for layer, let the model know.
@@ -3778,7 +3788,7 @@ NSArray *coloursArray;
         }
     }
     return tag;
-
+    
 }
 
 -(NSString *) getTagForSize:(NSString*)layerType ofView:(ResourcesView*)view{
@@ -4050,7 +4060,6 @@ NSArray *coloursArray;
     else if(selectedButton == drawingMenueButton ){
         //for drawing we are doing all(add/edit) work in setAddMoreLayerTabAction
     }
-    
     
 }
 
@@ -4924,6 +4933,9 @@ NSArray *coloursArray;
                 //Here we set line
                 [self setDrawingLine:DRAWING_PATTERNS_ARRAY[i-1] updateDic:YES];
                 
+                //Here we set Font
+                //[flyer setFlyerTextFont:currentLayer FontName:[NSString stringWithFormat:@"%@",[selectedFont familyName]]];
+                
                 //Here we call Render Layer on View
                 //[flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
                 
@@ -4947,12 +4959,17 @@ NSArray *coloursArray;
 
     //-------
     /*
+     NSInteger dBtnW = 299;
+     NSInteger dBtnH = 35;
      
-     int dBtnW = 300;
-     int dBtnH = 30;
+     drawingView = [[ResourcesView alloc] init];
      
-     drawingPatternsView = [[ResourcesView alloc] init];
-
+     
+     //NSArray *fontFamilies = [[NSArray alloc] initWithContentsOfFile:drawingViewResourcePath]; //   fontsViewResourcePath];
+     
+     //for ( NSString *fontFamily in fontFamilies ) {
+     //  [ drawingArray addObject:[UIFont fontWithName:fontFamily size:27]];
+     //}
      
      [self deleteSubviewsFromScrollView];
      
@@ -4961,59 +4978,48 @@ NSArray *coloursArray;
      int increment = 5;
      
      if(IS_IPHONE_5){
-     curXLoc = 10;
+     curXLoc = 13;
      curYLoc = 10;
-     increment = 10;
+     increment = 8;
      }
      
-     NSMutableDictionary *thisDrawingLayer;
-     NSString *line_type;
-     
-     //Getting Last Info of Text Layer
-     if (![currentLayer isEqualToString:@""]) {
-     thisDrawingLayer = [flyer getLayerFromMaster:currentLayer];
-     line_type = [thisDrawingLayer objectForKey:@"line_type"];
-     }
-     
-     for (int i = 1; i <=[DRAWING_PATTER_ARRAY count] ; i++)
+     for (int i = 1; i <=[drawingArray count] ; i++)
      {
      UIButton *line = [UIButton buttonWithType:UIButtonTypeCustom];
      line.frame = CGRectMake(0, 0, dBtnW, dBtnH);
-     [line addTarget:self action:@selector(selectDrawingLine::) forControlEvents:UIControlEventTouchUpInside];
-     [line setTitle:DRAWING_PATTERNS_ARRAY[i-1] forState:UIControlStateNormal];
-     [line setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+     [line addTarget:self action:@selector(selectDrawingLine:) forControlEvents:UIControlEventTouchUpInside];
+     [line setTitle:@" " forState:UIControlStateNormal];
+     //UIFont *fontname = drawingArray[(i-1)];
+     //[line.titleLabel setFont: fontname];
+     //[line setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
      line.tag = i;
-     [line setBackgroundImage:[UIImage imageNamed:DRAWING_PATTERNS_ARRAY[i-1]] forState:UIControlStateNormal];
+     [line setBackgroundImage:[UIImage imageNamed:drawingArray[i-1]] forState:UIControlStateNormal];
      
      //SET BUTTON POSITION ON SCROLLVIEW
      CGRect frame = line.frame;
-     frame.origin = CGPointMake(curXLoc, curYLoc);
+     line.origin = CGPointMake(curXLoc, curYLoc);
      line.frame = frame;
      curXLoc += (dBtnW)+increment;
      
      if(IS_IPHONE_5){
-         if(curXLoc >= 300){
-             curXLoc = 13;
-             curYLoc = curYLoc + dBtnW + 10;
-         }
+     if(curXLoc >= 300){
+     curXLoc = 13;
+     curYLoc = curYLoc + dBtnW + 7;
+     }
      }
      
-     [drawingPatternsView addSubview:line];
+     [drawingView addSubview:line];
      }
      
      if(IS_IPHONE_5){
-         drawingPatternsView.size = CGSizeMake(320, curYLoc + dBtnH + 5);
-         [layerScrollView setContentSize:CGSizeMake(320, curYLoc + dBtnH)];
+     drawingView.size = CGSizeMake(320, curYLoc + dBtnH + 5);
+     [layerScrollView setContentSize:CGSizeMake(320, curYLoc + dBtnH)];
      }else {
-         drawingPatternsView.size = CGSizeMake(curXLoc , dBtnH + 5);
-         [layerScrollView setContentSize:CGSizeMake(drawingPatternsView.size.width , dBtnH)];
+     drawingView.size = CGSizeMake(curXLoc , dBtnH + 5);
+     [layerScrollView setContentSize:CGSizeMake(drawingView.size.width , dBtnH)];
      }
-    */
-     
-    
-    //-------
-    
-    
+     //-------
+     */
 }
 
 /*
@@ -5034,7 +5040,7 @@ NSArray *coloursArray;
         increment = 8;
     }
     
-   // NSMutableDictionary *textLayer = [flyer getLayerFromMaster:currentLayer];
+    // NSMutableDictionary *textLayer = [flyer getLayerFromMaster:currentLayer];
     
     // Load sizes xib asynchronously
     dispatch_async( dispatch_get_main_queue(), ^{
@@ -5051,7 +5057,7 @@ NSArray *coloursArray;
             
         }
         
-
+        
         
         NSArray *sizesArray = drawingView.subviews;
         for (int i = 1; i <=  3 ; i++)
@@ -5237,10 +5243,10 @@ NSArray *coloursArray;
             
             CGFloat dash[] = {2,brush*3,brush*2,brush};
             if( [brushType  isEqual: DRAWING_DOTTED_LINE] ) {
-               CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound);
+                CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound);
             }
             else if( [brushType  isEqual: DRAWING_DASHED_LINE] ) {
-               CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapSquare);
+                CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapSquare);
             }
             CGContextSetLineWidth(UIGraphicsGetCurrentContext(), brush);
             

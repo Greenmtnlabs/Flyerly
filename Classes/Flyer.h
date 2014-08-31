@@ -58,6 +58,8 @@
 
 -(void)setImageFrame :(NSString *)uid :(CGRect )photoFrame;
 
+-(void)setImageTransform :(NSString *)uid :(CGAffineTransform *) transform;
+
 -(void)addImageRotationAngle:(NSString *)uid :(CGFloat )rotationAngle;
 
 -(void)setImageTag :(NSString *)uid Tag :(NSString *)tag;
