@@ -2965,14 +2965,18 @@ NSArray *coloursArray;
  */
 - (void)editCurrentLayer {
     
-    [self renderFlyer];
+    // Get the type of layer
+    NSString *type = [flyer getLayerType:currentLayer];
+    
+    if( !([type isEqualToString:FLYER_LAYER_DRAWING]) ){
+        [self renderFlyer];
+    }
     
     [self deSelectPreviousLayer];
     
     [self.flyimgView layerIsBeingEdited:currentLayer];
     
-    // Get the type of layer
-    NSString *type = [flyer getLayerType:currentLayer];
+
     
     if ( [type isEqualToString:FLYER_LAYER_TEXT] ) {
         

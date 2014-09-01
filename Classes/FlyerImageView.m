@@ -144,9 +144,7 @@ NSString *abc;
         }
     }
     else if ([layDic objectForKey:@"type"] != nil && [[layDic objectForKey:@"type"] isEqual:FLYER_LAYER_DRAWING]) {
-        //done do any thing if working for drawing layer
-        
-        // Here We Write Code for Image
+        //keep in mind call this code for drawing layer only once(render flyer time, add drawing layer[not for edit/reRenderings])
         UIImageView *img = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, DRAWING_LAYER_W, DRAWING_LAYER_H)];
         
         [self configureImageView:img ImageViewDictionary:layDic];
