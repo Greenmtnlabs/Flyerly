@@ -182,7 +182,8 @@ NSArray *coloursArray;
     brush = 5.0;
     brushType = DRAWING_PLANE_LINE;
     opacity = 1.0;
-    drawingLayerMode    =   DRAWING_LAYER_MODE_EDIT;
+    self.flyimgView.isDrawingLayerInEditMode = NO;
+    drawingLayerMode  =  DRAWING_LAYER_MODE_EDIT;
     
 	[super viewDidLoad];
     
@@ -502,8 +503,6 @@ NSArray *coloursArray;
 
 - (void)viewDidUnload
 {
-    [self setMainImage:nil];
-    [self setTempDrawImage:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -2259,7 +2258,6 @@ NSArray *coloursArray;
         editButtonGlobal.uid = currentLayer;
         NSString *type = [flyer getLayerType:currentLayer];
         if ( [type isEqualToString:FLYER_LAYER_DRAWING] ){
-            self.mainImage.image = nil;
             self.tempDrawImage.image = nil;
             self.tempDrawImage.userInteractionEnabled = NO; //disable drawing interaction
         }
@@ -3384,8 +3382,7 @@ NSArray *coloursArray;
     [UIView commitAnimations];
     //End Animation
     
-    currentLayer = @"";
-    
+    currentLayer = @"";    
 }
 
 
@@ -4496,12 +4493,10 @@ NSArray *coloursArray;
         
         // addDrawing layer case
         if ([currentLayer isEqualToString:@""]) {
-            
-            // work for main layer -----------------------------------------------
             currentLayer = [flyer addDrawingImage:YES];
             dic = [flyer getLayerFromMaster:currentLayer];
+            self.flyimgView.isDrawingLayerInEditMode    =   NO;
             [self.flyimgView renderLayer:currentLayer layerDictionary:dic];
-            
         }
         // editDrawing layer case
         else{
@@ -4509,11 +4504,9 @@ NSArray *coloursArray;
         }
         
         //here we get ImageView
-        self.mainImage      = [self.flyimgView.layers objectForKey:currentLayer];
-        self.tempDrawImage  =  self.mainImage;
-        
-        
-        // Hook event of Gesture for moving layers -----------------------------------------------
+        self.tempDrawImage   = [self.flyimgView.layers objectForKey:currentLayer];
+
+        // Hook event of Gesture for moving layers ------------------
         self.tempDrawImage.userInteractionEnabled = YES; // CAN receive touches
         
         UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(drawingLayerMoved:)];
@@ -5177,17 +5170,17 @@ NSArray *coloursArray;
     if( [drawingLayerMode isEqualToString:DRAWING_LAYER_MODE_EDIT] ){
         if (recognizer.state == UIGestureRecognizerStateBegan) {
             mouseSwiped = NO;
-            lastPoint = [recognizer locationInView:self.mainImage];
+            lastPoint = [recognizer locationInView:self.tempDrawImage];
             
         }
         else if (recognizer.state == UIGestureRecognizerStateChanged) {
             
             //MOVE
             mouseSwiped = YES;
-            CGPoint currentPoint = [recognizer locationInView:self.mainImage];
+            CGPoint currentPoint = [recognizer locationInView:self.tempDrawImage];
             
-            UIGraphicsBeginImageContext(self.mainImage.frame.size);
-            [self.tempDrawImage.image drawInRect:CGRectMake(0, 0, self.mainImage.frame.size.width, self.mainImage.frame.size.height)];
+            UIGraphicsBeginImageContext(self.tempDrawImage.frame.size);
+            [self.tempDrawImage.image drawInRect:CGRectMake(0, 0, self.tempDrawImage.frame.size.width, self.tempDrawImage.frame.size.height)];
             
             if( [brushType  isEqual: DRAWING_DASHED_LINE] || [brushType  isEqual: DRAWING_DOTTED_LINE] ) {
                 
@@ -5235,14 +5228,6 @@ NSArray *coloursArray;
             
         }
         else if (recognizer.state == UIGestureRecognizerStateEnded) {
-            //ENDED
-            UIGraphicsBeginImageContext(self.mainImage.frame.size);
-            [self.mainImage.image drawInRect:CGRectMake(0, 0, self.mainImage.frame.size.width, self.mainImage.frame.size.height) blendMode:kCGBlendModeNormal alpha:1.0];
-            [self.tempDrawImage.image drawInRect:CGRectMake(0, 0, self.tempDrawImage.frame.size.width, self.tempDrawImage.frame.size.height) blendMode:kCGBlendModeNormal alpha:opacity];
-            
-            self.mainImage.image = UIGraphicsGetImageFromCurrentImageContext();
-            //self.tempDrawImage.image = nil;
-            UIGraphicsEndImageContext();
         }
     }
     else if( [drawingLayerMode isEqualToString:DRAWING_LAYER_MODE_ERASER] ){
@@ -5279,20 +5264,17 @@ NSArray *coloursArray;
 
 -(void) saveDrawingLayer {
     // End of save flyer and drawing layer
-    [self.flyimgView.layers setObject:self.mainImage forKey:currentLayer];
+    [self.flyimgView.layers setObject:self.tempDrawImage forKey:currentLayer];
     
     // Save drawing layer and flyer
-    NSString *imgPath = [self getImagePathforPhoto:self.mainImage.image];
+    NSString *imgPath = [self getImagePathforPhoto:self.tempDrawImage.image];
     
     //Set Image to dictionary
     [self.flyer setImagePath:self.currentLayer ImgPath:imgPath];
     
-    //Here we Create ImageView Layer
-    //[self.flyimgView renderLayer:self.currentLayer layerDictionary:[self.flyer getLayerFromMaster:self.currentLayer]];
-    
     //disable drawing interaction
+    self.tempDrawImage.userInteractionEnabled = NO;
     self.tempDrawImage  = nil;
-    self.mainImage  = nil;
-    self.tempDrawImage.userInteractionEnabled   = NO;
+
 }
 @end
