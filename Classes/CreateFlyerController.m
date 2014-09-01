@@ -4494,16 +4494,8 @@ NSArray *coloursArray;
         
         NSMutableDictionary *dic;
         
-        //Run for addDrawing layer case
+        // addDrawing layer case
         if ([currentLayer isEqualToString:@""]) {
-            
-            // work for tempDrawImageLayer -----------------------------------------------
-            //NSString *tempDrawImageLayer = [flyer addDrawingImage:NO]; //create/add layer with drawing type
-            //NSMutableDictionary *dic2 = [flyer getLayerFromMaster:tempDrawImageLayer];
-            
-            //[self.flyimgView renderLayer:tempDrawImageLayer layerDictionary:dic2];
-            
-            //self.tempDrawImage = [self.flyimgView.layers objectForKey:tempDrawImageLayer];
             
             // work for main layer -----------------------------------------------
             currentLayer = [flyer addDrawingImage:YES];
@@ -4511,28 +4503,10 @@ NSArray *coloursArray;
             [self.flyimgView renderLayer:currentLayer layerDictionary:dic];
             
         }
-        // Run for editDrawing layer case
+        // editDrawing layer case
         else{
             dic = [flyer getLayerFromMaster:currentLayer];
-            /*
-            // work for tempDrawImageLayer -----------------------------------------------
-            NSString *tempDrawImageLayer = [flyer addDrawingImage:NO]; //create/add layer with drawing type
-            NSMutableDictionary *dic2 = [flyer getLayerFromMaster:tempDrawImageLayer];
-            
-            [self.flyimgView renderLayer:tempDrawImageLayer layerDictionary:dic2];
-
-            self.tempDrawImage = [self.flyimgView.layers objectForKey:tempDrawImageLayer];
-            
-            // work for main layer -----------------------------------------------
-            //currentLayer = [flyer addDrawingImage:YES];
-            dic = [flyer getLayerFromMaster:currentLayer];
-            
-            //here we get layer ImageView
-            self.mainImage = [self.flyimgView.layers objectForKey:currentLayer];
-             */
         }
-        
-
         
         //here we get ImageView
         self.mainImage      = [self.flyimgView.layers objectForKey:currentLayer];
