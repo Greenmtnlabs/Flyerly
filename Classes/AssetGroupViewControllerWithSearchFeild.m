@@ -20,18 +20,8 @@
 
 @implementation AssetGroupViewControllerWithSearchFeild
 
-id jsonObject;
-NSDictionary *tableData;
-NSMutableArray *imagesPreview;
 NSMutableArray *imagesIDs;
 NSString *imageID_;
-NSMutableArray * thumbnailViews;
-NSMutableArray *productArray;
-NSArray *requestedProducts;
-NSString *imageToBuy;
-
-
-@synthesize searchTextField;
 
 - (void)viewDidLoad
 {
@@ -71,10 +61,60 @@ NSString *imageToBuy;
     label.textColor = [UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0];
     label.text = @"Stock Photos";
     
-    [searchTextField setReturnKeyType:UIReturnKeyDone];
-    [searchTextField addTarget:self action:@selector(textFieldFinished:) forControlEvents: UIControlEventEditingDidEndOnExit];
+    //[searchTextField addTarget:self action:@selector(textFieldFinished:) forControlEvents: UIControlEventEditingDidEndOnExit];
+    // Bring the search field to front
+    [self.view bringSubviewToFront:_searchTextField];
     
     self.navigationItem.titleView = label;
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    
+    //showing the laoding indicator on the top right corner
+    [self showLoadingIndicator];
+    //requesting the bigstock api with the entered keyword
+    [self apiRequestWithSearchingKeyWord:searchBar.text];
+    // hiding the keyboard
+    [searchBar resignFirstResponder];
+    
+}
+
+-(BOOL)searchDisplayController:(UISearchDisplayController *)controller
+shouldReloadTableForSearchString:(NSString *)searchString
+{
+    return YES;
+}
+
+/**
+ * Override parent method.
+ */
+- (void)adjustThumbnailsView {
+    
+    // Calculate bar height
+    CGFloat topInset = 0.0;
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0"))
+    {
+#if XCODE_VERSION_MAJOR >= 0500
+        topInset = self.topLayoutGuide.length;
+#endif
+    }
+    else
+    {
+        topInset = self.navigationController.navigationBar.translucent ? self.navigationController.navigationBar.frame.size.height : 0.0;
+    }
+    
+    topInset += 44.0;
+    
+	self.thumbnailsGridView.frame = self.view.bounds;
+    self.view.backgroundColor = [UIColor whiteColor];
+    self.thumbnailsGridView.contentInset = UIEdgeInsetsMake(topInset,
+                                                        0.0,
+                                                        0.0,
+                                                        0.0);
+    self.thumbnailsGridView.scrollIndicatorInsets = UIEdgeInsetsMake(topInset,
+                                                                 0.0,
+                                                                 0.0,
+                                                                 0.0);
 }
 
 - (void)textFieldFinished:(id)sender {
@@ -201,7 +241,7 @@ NSString *imageToBuy;
     NSError *error = nil;
     
     //parsing the JSON response
-    jsonObject = [NSJSONSerialization
+    id jsonObject = [NSJSONSerialization
                   JSONObjectWithData:data
                   options:NSJSONReadingAllowFragments
                   error:&error];
@@ -210,11 +250,11 @@ NSString *imageToBuy;
         
         // Test/Access any key of json object( KEY , VALUE )
         int status = [[jsonObject objectForKey:@"response_code"] intValue];
-        imagesPreview = [[NSMutableArray alloc]init];
+        //NSMutableArray *imagesPreview = [[NSMutableArray alloc]init];
         imagesIDs = [[NSMutableArray alloc]init];
         
         if( status == 200 ){
-            tableData = [jsonObject objectForKey:@"data"];
+            NSDictionary *tableData = [jsonObject objectForKey:@"data"];
             
             NSArray *purchasedImageDownloadID = [tableData objectForKey:@"download_id"];
             
@@ -258,7 +298,7 @@ NSString *imageToBuy;
     NSError *error = nil;
     
     //parsing the JSON response
-    jsonObject = [NSJSONSerialization
+    id jsonObject = [NSJSONSerialization
                   JSONObjectWithData:data
                   options:NSJSONReadingAllowFragments
                   error:&error];
@@ -268,11 +308,11 @@ NSString *imageToBuy;
         // Test/Access any key of json object( KEY , VALUE )
         int status = [[jsonObject objectForKey:@"response_code"] intValue];
         
-        imagesPreview = [[NSMutableArray alloc]init];
+        NSMutableArray *imagesPreview = [[NSMutableArray alloc]init];
         imagesIDs = [[NSMutableArray alloc]init];
         
         if( status == 200 ){
-            tableData = [jsonObject objectForKey:@"data"];
+            NSDictionary *tableData = [jsonObject objectForKey:@"data"];
             
             NSArray *images = [tableData objectForKey:@"images"];
             
@@ -311,7 +351,7 @@ NSString *imageToBuy;
                          resultBlock:^(UIImage * image,
                                        NSError * error)
      {
-         thumbnailViews = [[NSMutableArray alloc] init];
+         NSMutableArray *thumbnailViews = [[NSMutableArray alloc] init];
          thumbnailViews = [self valueForKey:@"_thumbnailViews"];
          ((NBUGalleryThumbnailView *)thumbnailViews[index]).imageView.backgroundColor = [UIColor whiteColor];
          ((NBUGalleryThumbnailView *)thumbnailViews[index]).imageView.contentMode = UIViewContentModeScaleAspectFit;
@@ -365,7 +405,7 @@ NSString *imageToBuy;
             
             if (cancelRequest) return ;
             
-            requestedProducts = products;
+            //NSArray *requestedProducts = products;
             bool disablePurchase = ([[PFUser currentUser] sessionToken].length == 0);
             
             NSString *sheetTitle = @"Choose Product";
@@ -374,7 +414,7 @@ NSString *imageToBuy;
                 sheetTitle = @"This feature requires Sign In";
             }
             
-            productArray = [[NSMutableArray alloc] init];
+            NSMutableArray *productArray = [[NSMutableArray alloc] init];
             for(SKProduct *product in products)
             {
                 
@@ -389,7 +429,7 @@ NSString *imageToBuy;
             }
             
             // we will move it when UI Related issues fixed,here we explicitly requesting the BigStock API for the key word "dog"
-            [self apiRequestWithSearchingKeyWord:@"dog"];
+            [self apiRequestWithSearchingKeyWord:@"flyer"];
             
             
         } failure:^(NSError *error) {

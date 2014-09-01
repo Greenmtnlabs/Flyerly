@@ -23,14 +23,11 @@
 
 @property (strong, nonatomic) ALAssetsLibrary *library;
 
-
-// The maximum number of assets that can be selected. Default `0` which means no limit.
 @property (nonatomic) NSUInteger selectionCountLimit;
 //A text feild to search images on shutterstock
-@property ( nonatomic, strong ) IBOutlet UITextField *searchTextField;
+@property ( nonatomic, strong ) IBOutlet UISearchBar *searchTextField;
 
 @property CGSize desiredImageSize;
-
 
 @property (nonatomic, copy) void (^onImageTaken)(UIImage *);
 
