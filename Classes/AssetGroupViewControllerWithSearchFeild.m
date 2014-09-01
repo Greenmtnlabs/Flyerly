@@ -30,9 +30,6 @@ NSMutableArray *productArray;
 NSArray *requestedProducts;
 NSString *imageToBuy;
 
-
-@synthesize searchTextField;
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -71,10 +68,43 @@ NSString *imageToBuy;
     label.textColor = [UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0];
     label.text = @"Stock Photos";
     
-    [searchTextField setReturnKeyType:UIReturnKeyDone];
-    [searchTextField addTarget:self action:@selector(textFieldFinished:) forControlEvents: UIControlEventEditingDidEndOnExit];
+    //[_searchTextField setReturnKeyType:UIReturnKeyDone];
+    //[searchTextField addTarget:self action:@selector(textFieldFinished:) forControlEvents: UIControlEventEditingDidEndOnExit];
+    // Bring the search field to front
+    [self.view bringSubviewToFront:_searchTextField];
     
     self.navigationItem.titleView = label;
+}
+
+/**
+ * Override parent method.
+ */
+- (void)adjustThumbnailsView {
+    
+    // Calculate bar height
+    CGFloat topInset = 0.0;
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0"))
+    {
+#if XCODE_VERSION_MAJOR >= 0500
+        topInset = self.topLayoutGuide.length;
+#endif
+    }
+    else
+    {
+        topInset = self.navigationController.navigationBar.translucent ? self.navigationController.navigationBar.frame.size.height : 0.0;
+    }
+    
+    topInset += 44.0;
+    
+	self.thumbnailsGridView.frame = self.view.bounds;
+    self.thumbnailsGridView.contentInset = UIEdgeInsetsMake(topInset,
+                                                        0.0,
+                                                        0.0,
+                                                        0.0);
+    self.thumbnailsGridView.scrollIndicatorInsets = UIEdgeInsetsMake(topInset,
+                                                                 0.0,
+                                                                 0.0,
+                                                                 0.0);
 }
 
 - (void)textFieldFinished:(id)sender {
