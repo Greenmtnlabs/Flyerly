@@ -68,12 +68,28 @@ NSString *imageToBuy;
     label.textColor = [UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0];
     label.text = @"Stock Photos";
     
-    //[_searchTextField setReturnKeyType:UIReturnKeyDone];
     //[searchTextField addTarget:self action:@selector(textFieldFinished:) forControlEvents: UIControlEventEditingDidEndOnExit];
     // Bring the search field to front
     [self.view bringSubviewToFront:_searchTextField];
     
     self.navigationItem.titleView = label;
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    
+    //showing the laoding indicator on the top right corner
+    [self showLoadingIndicator];
+    //requesting the bigstock api with the entered keyword
+    [self apiRequestWithSearchingKeyWord:searchBar.text];
+    // hiding the keyboard
+    [searchBar resignFirstResponder];
+    
+}
+
+-(BOOL)searchDisplayController:(UISearchDisplayController *)controller
+shouldReloadTableForSearchString:(NSString *)searchString
+{
+    return YES;
 }
 
 /**
@@ -419,7 +435,7 @@ NSString *imageToBuy;
             }
             
             // we will move it when UI Related issues fixed,here we explicitly requesting the BigStock API for the key word "dog"
-            [self apiRequestWithSearchingKeyWord:@"dog"];
+            [self apiRequestWithSearchingKeyWord:@"flyer"];
             
             
         } failure:^(NSError *error) {
