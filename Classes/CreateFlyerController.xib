@@ -518,7 +518,7 @@
                     <state key="normal" image="drawing_tab.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="selected" image="clipart_tab_selected.png"/>
+                    <state key="selected" image="drawing_tab_selected.png"/>
                     <connections>
                         <action selector="addDrawingLayer:" destination="-1" eventType="touchUpInside" id="H0h-ii-zYp"/>
                     </connections>
@@ -600,6 +600,7 @@
         <image name="drawing_tab_eraser_selected.png" width="80" height="45"/>
         <image name="drawing_tab_pencil.png" width="80" height="45"/>
         <image name="drawing_tab_pencil_selected.png" width="80" height="45"/>
+        <image name="drawing_tab_selected.png" width="64" height="45"/>
         <image name="drawing_tab_size.png" width="80" height="45"/>
         <image name="drawing_tab_size_selected.png" width="80" height="45"/>
         <image name="emoticons_tab.png" width="64" height="45"/>

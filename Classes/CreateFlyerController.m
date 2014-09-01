@@ -39,7 +39,7 @@ CameraViewController *nbuCamera;
 UIButton *backButton;
 
 @synthesize selectedFont,selectedColor,selectedTemplate,fontTabButton,colorTabButton,sizeTabButton,fontEditButton,selectedSize,
-fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sharePanel,clipArtTabButton,emoticonsTabButton,artsColorTabButton,drawingTabButton,artsSizeTabButton, drawingColorTabButton,drawingPatternTabButton, drawingSizeTabButton;
+fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sharePanel,clipArtTabButton,emoticonsTabButton,artsColorTabButton,artsSizeTabButton, drawingColorTabButton,drawingPatternTabButton, drawingSizeTabButton;
 @synthesize cameraTabButton,photoTabButton,widthTabButton,heightTabButton,deleteAlert,signInAlert,spaceUnavailableAlert;
 @synthesize imgPickerFlag,layerScrollView,flyerPath;
 @synthesize contextView,libraryContextView,libFlyer,backgroundTabButton,addMoreFontTabButton,drawingMenueButton;
@@ -54,7 +54,7 @@ ResourcesView *emoticonsView,*clipartsView,*fontsView,*textBordersView,*drawingV
 
 NSString *fontsViewResourcePath,*clipartsViewResourcePath,*emoticonsViewResourcePath,*drawingViewResourcePath;
 
-NSMutableArray *fontsArray,*clipartsArray,*emoticonsArray, *drawingArray;
+NSMutableArray *fontsArray,*clipartsArray,*emoticonsArray;
 
 NSArray *coloursArray;
 
@@ -3767,35 +3767,26 @@ NSArray *coloursArray;
     [view dehighlightResource];
     
     NSString* tag = nil;
-    /* // kam karna hy
-     NSMutableDictionary *textLayer;
-     NSString *textSize;
-     
-     //Getting Last Info of Text Layer
-     
-     textLayer = [flyer getLayerFromMaster:currentLayer];
-     textSize = [NSString stringWithFormat:@"%f", [[textLayer objectForKey:@"line_type"] floatValue]];
-     
-     
-     
-     NSArray *drawingPatternsArray = drawingView.subviews;
-     for (int i = 1; i <=  [drawingPatternsArray count] ; i++)
-     {
-     
-     UIButton *size;
-     if ([drawingPatternsArray[i-1] isKindOfClass:[UIButton class]]) {
-     size = (UIButton *) drawingPatternsArray[i-1];
-     }
-     
-     NSString *btnTitleToBeHighlighted = [NSString stringWithFormat:@"%f", [size.currentTitle floatValue]];
-     
-     if ( [btnTitleToBeHighlighted isEqualToString:textSize] ){
-     
-     tag = [NSString stringWithFormat: @"%d", size.tag];
-     break;
-     }
-     }
-     */
+    NSMutableDictionary *dic;
+    NSString *line_type;
+   
+    dic = [flyer getLayerFromMaster:currentLayer];
+    line_type = [dic objectForKey:@"line_type"];
+    
+    NSArray *drawingPatternsArrayInSV = drawingPatternsView.subviews;
+    for (int i = 1; i <=  [drawingPatternsArrayInSV count] ; i++)
+    {
+        UIButton *lineBtn;
+        if ([drawingPatternsArrayInSV[i-1] isKindOfClass:[UIButton class]]) {
+            
+            lineBtn = (UIButton *) drawingPatternsArrayInSV[i-1];
+            
+            if ( [DRAWING_PATTERNS_ARRAY[i-1] isEqualToString:line_type] ){
+                tag = [NSString stringWithFormat: @"%d", lineBtn.tag];
+                break;
+            }
+        }
+    }
     return tag;
     
 }
@@ -3934,13 +3925,17 @@ NSArray *coloursArray;
  */
 -(IBAction)setArtsTabAction:(id) sender
 {
-    
+    //add clipart sub menu in bottom
     [self addBottomTabs:libArts];
+    
+    //deselect previously selected buttons
     [clipArtTabButton setSelected:NO];
     [emoticonsTabButton setSelected:NO];
     [artsColorTabButton setSelected:NO];
-    [drawingTabButton setSelected:NO];
+    [drawingMenueButton setSelected:NO];
     [artsSizeTabButton setSelected:NO];
+    
+    //currently pressed button
     UIButton *selectedButton = (UIButton*)sender;
     
     if(selectedButton == clipArtTabButton)
@@ -4062,44 +4057,9 @@ NSArray *coloursArray;
         
 		[artsSizeTabButton setSelected:YES];
 	}
-    else if(selectedButton == drawingTabButton ){
-        /*
-         //HERE WE SET ANIMATION
-         [UIView animateWithDuration:0.4f
-         animations:^{
-         
-         if(IS_IPHONE_5){
-         
-         // Delete SubViews from ScrollView and add Emoticons view
-         [self deleteSubviewsFromScrollView];
-         [layerScrollView addSubview:emoticonsView];
-         [layerScrollView setContentSize:CGSizeMake(320, emoticonsView.size.height)];
-         
-         [self setSelectedItem:FLYER_LAYER_EMOTICON inView:emoticonsView ofLayerAttribute:LAYER_ATTRIBUTE_IMAGE];
-         
-         } else {
-         
-         
-         // Delete SubViews from ScrollView and add Emoticons view
-         [self deleteSubviewsFromScrollView];
-         [layerScrollView addSubview:emoticonsView];
-         [layerScrollView setContentSize:CGSizeMake(emoticonsView.size.width , emoticonsView.size.height)];
-         
-         [self setSelectedItem:FLYER_LAYER_EMOTICON inView:emoticonsView ofLayerAttribute:LAYER_ATTRIBUTE_IMAGE];
-         //[layerScrollView setContentSize:CGSizeMake(([symbolArray count]*(symbolScrollWidth+5)), [layerScrollView bounds].size.height)];
-         }
-         }
-         completion:^(BOOL finished){
-         [layerScrollView flashScrollIndicators];
-         }];
-         //END ANIMATION
-         
-         //Add ContextView
-         [self addScrollView:layerScrollView];
-         [drawingTabButton setSelected:YES];
-         */
+    else if(selectedButton == drawingMenueButton ){
+        //for drawing we are doing all(add/edit) work in setAddMoreLayerTabAction
     }
-    
     
 }
 
@@ -4379,13 +4339,13 @@ NSArray *coloursArray;
     
 	UIButton *selectedButton = (UIButton*)sender;
     
-    //Set Unselected All
+    //Unselected All main menue buttons
     [addMoreFontTabButton setSelected:NO];
     [addMorePhotoTabButton setSelected:NO];
     [addArtsTabButton setSelected:NO];
     [addVideoTabButton setSelected:NO];
     [backgroundTabButton setSelected:NO];
-    [drawingMenueButton setSelected:NO];
+    
     
     
 	if(selectedButton == addMoreFontTabButton)
@@ -4594,10 +4554,11 @@ NSArray *coloursArray;
         //Add ContextView
         [self addBottomTabs:libDrawing];
         
-        // FORCE CLICK ON FIRST BUTTON OF addBottomTab, then it will auto select SET BOTTOM BAR
-        [self drawingSetStyleTabAction:drawingSizeTabButton];
-        
+        //Assign dic values(pattern,color,size) to class level variables
         [self setDrawingTools:dic];
+        
+        // FORCE CLICK ON FIRST BUTTON OF drawingSubMenuButton, then it will auto select SET BOTTOM BAR
+        [self drawingSetStyleTabAction:drawingPatternTabButton];
         
 	}
     
@@ -4969,8 +4930,8 @@ NSArray *coloursArray;
             
             if(tempView == view)
             {
-                
-                [self setDrawingLine:drawingArray[i-1] updateDic:YES];
+                //Here we set line
+                [self setDrawingLine:DRAWING_PATTERNS_ARRAY[i-1] updateDic:YES];
                 
                 //Here we set Font
                 //[flyer setFlyerTextFont:currentLayer FontName:[NSString stringWithFormat:@"%@",[selectedFont familyName]]];
@@ -4979,7 +4940,7 @@ NSArray *coloursArray;
                 //[flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
                 
                 //Handling Select Unselect
-                [self setSelectedItem:FLYER_LAYER_DRAWING inView:drawingView ofLayerAttribute:LAYER_ATTRIBUTE_DRAWING_PATTERN];
+                [self setSelectedItem:FLYER_LAYER_DRAWING inView:drawingPatternsView ofLayerAttribute:LAYER_ATTRIBUTE_DRAWING_PATTERN];
             }
             i++;
         }// uiImageView Found
@@ -4989,76 +4950,11 @@ NSArray *coloursArray;
 
 -(void)addDrawingPatternsInSubView {
     
-    drawingArray = [[NSMutableArray alloc] initWithArray:DRAWING_PATTERNS_ARRAY];
-    
-    //-------
-    /*
-     
-     NSInteger dBtnW = 299;
-     NSInteger dBtnH = 35;
-     
-     drawingView = [[ResourcesView alloc] init];
-     
-     
-     //NSArray *fontFamilies = [[NSArray alloc] initWithContentsOfFile:drawingViewResourcePath]; //   fontsViewResourcePath];
-     
-     //for ( NSString *fontFamily in fontFamilies ) {
-     //  [ drawingArray addObject:[UIFont fontWithName:fontFamily size:27]];
-     //}
-     
-     [self deleteSubviewsFromScrollView];
-     
-     CGFloat curXLoc = 0;
-     CGFloat curYLoc = 5;
-     int increment = 5;
-     
-     if(IS_IPHONE_5){
-     curXLoc = 13;
-     curYLoc = 10;
-     increment = 8;
-     }
-     
-     for (int i = 1; i <=[drawingArray count] ; i++)
-     {
-     UIButton *line = [UIButton buttonWithType:UIButtonTypeCustom];
-     line.frame = CGRectMake(0, 0, dBtnW, dBtnH);
-     [line addTarget:self action:@selector(selectDrawingLine:) forControlEvents:UIControlEventTouchUpInside];
-     [line setTitle:@" " forState:UIControlStateNormal];
-     //UIFont *fontname = drawingArray[(i-1)];
-     //[line.titleLabel setFont: fontname];
-     //[line setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-     line.tag = i;
-     [line setBackgroundImage:[UIImage imageNamed:drawingArray[i-1]] forState:UIControlStateNormal];
-     
-     //SET BUTTON POSITION ON SCROLLVIEW
-     CGRect frame = line.frame;
-     line.origin = CGPointMake(curXLoc, curYLoc);
-     line.frame = frame;
-     curXLoc += (dBtnW)+increment;
-     
-     if(IS_IPHONE_5){
-     if(curXLoc >= 300){
-     curXLoc = 13;
-     curYLoc = curYLoc + dBtnW + 7;
-     }
-     }
-     
-     [drawingView addSubview:line];
-     }
-     
-     if(IS_IPHONE_5){
-     drawingView.size = CGSizeMake(320, curYLoc + dBtnH + 5);
-     [layerScrollView setContentSize:CGSizeMake(320, curYLoc + dBtnH)];
-     }else {
-     drawingView.size = CGSizeMake(curXLoc , dBtnH + 5);
-     [layerScrollView setContentSize:CGSizeMake(drawingView.size.width , dBtnH)];
-     }
-     //-------
-     */
     [self deleteSubviewsFromScrollView];
+
     [layerScrollView addSubview:drawingPatternsView];
     [layerScrollView setContentSize:CGSizeMake(drawingPatternsView.frame.size.width, [drawingPatternsView bounds].size.height)];
-    
+    [self setSelectedItem:FLYER_LAYER_DRAWING inView:drawingPatternsView ofLayerAttribute:LAYER_ATTRIBUTE_DRAWING_PATTERN];
 }
 
 /*
@@ -5138,23 +5034,18 @@ NSArray *coloursArray;
  */
 -(IBAction)drawingSetStyleTabAction:(id) sender
 {
-    NSMutableDictionary *dic = [flyer getLayerFromMaster:currentLayer];
-    
-    //[self addBottomTabs:libText];
-    
+    //unselect drawing sub menu's
     [drawingPatternTabButton setSelected:NO];
     [drawingColorTabButton setSelected:NO];
     [drawingSizeTabButton setSelected:NO];
+    
+   //NSMutableDictionary *dic = [flyer getLayerFromMaster:currentLayer];
     
     
     UIButton *selectedButton = (UIButton*)sender;
 	
     if(selectedButton == drawingPatternTabButton)
 	{
-        
-        // brush = dic[@"brush"];
-        
-        
         //HERE WE SET ANIMATION
         [UIView animateWithDuration:0.4f
                          animations:^{
@@ -5173,12 +5064,6 @@ NSArray *coloursArray;
 	}
 	else if(selectedButton == drawingColorTabButton)
 	{
-        
-        NSArray *stringArray = [dic[@"textcolor"] componentsSeparatedByString:@", "];
-        red = (CGFloat)[stringArray[0] floatValue];
-        green = (CGFloat)[stringArray[1] floatValue];
-        blue = (CGFloat)[stringArray[2] floatValue];
-        
         //HERE WE SET ANIMATION
         [UIView animateWithDuration:0.4f
                          animations:^{
@@ -5197,10 +5082,6 @@ NSArray *coloursArray;
 	}
 	else if(selectedButton == drawingSizeTabButton)
 	{
-        
-        // brush = dic[@"brush"];
-        
-        
         //HERE WE SET ANIMATION
         [UIView animateWithDuration:0.4f
                          animations:^{
@@ -5219,13 +5100,14 @@ NSArray *coloursArray;
 	}
 }
 
+//Assign dic values(pattern,color,size) to class level variables
 - (void)setDrawingTools:(NSMutableDictionary *)dic
 {
-    //setDrawingRGB
-    NSArray* colorAry = [[dic objectForKey:@"textcolor"] componentsSeparatedByString: @", "];
-    red   = (CGFloat)[[colorAry objectAtIndex: 0] integerValue];
-    green = (CGFloat)[[colorAry objectAtIndex: 1] integerValue];
-    blue  = (CGFloat)[[colorAry objectAtIndex: 2] integerValue];
+    //Get color(r,g,b) from dic, then assign them to class level red,green,blue
+    NSArray *colorAry = [dic[@"textcolor"] componentsSeparatedByString: @", "];
+    red   = (CGFloat)[colorAry[0] floatValue];
+    green = (CGFloat)[colorAry[1] floatValue];
+    blue  = (CGFloat)[colorAry[2] floatValue];
     
     [self setDrawingBrushRadius:[[dic objectForKey:@"brush"] integerValue] updateDic:NO];
     [self setDrawingLine:[dic objectForKey:@"line_type"] updateDic:NO];
