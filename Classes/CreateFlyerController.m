@@ -482,7 +482,7 @@ NSArray *coloursArray;
                 NSArray *fontColorsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Colours-iPhone4s" owner:self options:nil];
                 colorsView = [fontColorsViewArray objectAtIndex:0];
                 
-                NSArray *drawingPatternsViewArray = [[NSBundle mainBundle] loadNibNamed:@"DrawingPatterns-iPhone4s" owner:self options:nil];
+                NSArray *drawingPatternsViewArray = [[NSBundle mainBundle] loadNibNamed:@"DrawingPatterns-iPhone4" owner:self options:nil];
                 drawingPatternsView = [drawingPatternsViewArray objectAtIndex:0];
                 
                 
