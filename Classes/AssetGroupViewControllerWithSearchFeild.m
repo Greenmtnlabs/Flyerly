@@ -20,15 +20,8 @@
 
 @implementation AssetGroupViewControllerWithSearchFeild
 
-id jsonObject;
-NSDictionary *tableData;
-NSMutableArray *imagesPreview;
 NSMutableArray *imagesIDs;
 NSString *imageID_;
-NSMutableArray * thumbnailViews;
-NSMutableArray *productArray;
-NSArray *requestedProducts;
-NSString *imageToBuy;
 
 - (void)viewDidLoad
 {
@@ -113,6 +106,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
     topInset += 44.0;
     
 	self.thumbnailsGridView.frame = self.view.bounds;
+    self.view.backgroundColor = [UIColor whiteColor];
     self.thumbnailsGridView.contentInset = UIEdgeInsetsMake(topInset,
                                                         0.0,
                                                         0.0,
@@ -247,7 +241,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
     NSError *error = nil;
     
     //parsing the JSON response
-    jsonObject = [NSJSONSerialization
+    id jsonObject = [NSJSONSerialization
                   JSONObjectWithData:data
                   options:NSJSONReadingAllowFragments
                   error:&error];
@@ -256,11 +250,11 @@ shouldReloadTableForSearchString:(NSString *)searchString
         
         // Test/Access any key of json object( KEY , VALUE )
         int status = [[jsonObject objectForKey:@"response_code"] intValue];
-        imagesPreview = [[NSMutableArray alloc]init];
+        //NSMutableArray *imagesPreview = [[NSMutableArray alloc]init];
         imagesIDs = [[NSMutableArray alloc]init];
         
         if( status == 200 ){
-            tableData = [jsonObject objectForKey:@"data"];
+            NSDictionary *tableData = [jsonObject objectForKey:@"data"];
             
             NSArray *purchasedImageDownloadID = [tableData objectForKey:@"download_id"];
             
@@ -304,7 +298,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
     NSError *error = nil;
     
     //parsing the JSON response
-    jsonObject = [NSJSONSerialization
+    id jsonObject = [NSJSONSerialization
                   JSONObjectWithData:data
                   options:NSJSONReadingAllowFragments
                   error:&error];
@@ -314,11 +308,11 @@ shouldReloadTableForSearchString:(NSString *)searchString
         // Test/Access any key of json object( KEY , VALUE )
         int status = [[jsonObject objectForKey:@"response_code"] intValue];
         
-        imagesPreview = [[NSMutableArray alloc]init];
+        NSMutableArray *imagesPreview = [[NSMutableArray alloc]init];
         imagesIDs = [[NSMutableArray alloc]init];
         
         if( status == 200 ){
-            tableData = [jsonObject objectForKey:@"data"];
+            NSDictionary *tableData = [jsonObject objectForKey:@"data"];
             
             NSArray *images = [tableData objectForKey:@"images"];
             
@@ -357,7 +351,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
                          resultBlock:^(UIImage * image,
                                        NSError * error)
      {
-         thumbnailViews = [[NSMutableArray alloc] init];
+         NSMutableArray *thumbnailViews = [[NSMutableArray alloc] init];
          thumbnailViews = [self valueForKey:@"_thumbnailViews"];
          ((NBUGalleryThumbnailView *)thumbnailViews[index]).imageView.backgroundColor = [UIColor whiteColor];
          ((NBUGalleryThumbnailView *)thumbnailViews[index]).imageView.contentMode = UIViewContentModeScaleAspectFit;
@@ -411,7 +405,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
             
             if (cancelRequest) return ;
             
-            requestedProducts = products;
+            //NSArray *requestedProducts = products;
             bool disablePurchase = ([[PFUser currentUser] sessionToken].length == 0);
             
             NSString *sheetTitle = @"Choose Product";
@@ -420,7 +414,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
                 sheetTitle = @"This feature requires Sign In";
             }
             
-            productArray = [[NSMutableArray alloc] init];
+            NSMutableArray *productArray = [[NSMutableArray alloc] init];
             for(SKProduct *product in products)
             {
                 
