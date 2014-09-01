@@ -154,6 +154,7 @@ NSString *abc;
         [layers setValue:img forKey:uid];
         
         view = img;
+        
     }
     else{
         id lastControl = [layers objectForKey:uid];

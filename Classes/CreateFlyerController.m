@@ -3309,8 +3309,13 @@ NSArray *coloursArray;
     
 }
 
-
+//When user pressed done button
 -(void)callAddMoreLayers {
+    
+    NSString *type = [flyer getLayerType:currentLayer];
+    if ( [type isEqualToString:FLYER_LAYER_DRAWING] ){
+        [self saveDrawingLayer];
+    }
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
     label.backgroundColor = [UIColor clearColor];
@@ -3349,10 +3354,7 @@ NSArray *coloursArray;
     //Set here Un-Selected State of HIGHT & WIDTH Buttons IF selected
     [widthTabButton setSelected:NO];
     [heightTabButton setSelected:NO];
-    
-    
-    //disable drawing interaction
-    self.tempDrawImage.userInteractionEnabled = NO;
+
     
     //Empty Layer Delete
     [self deSelectPreviousLayer];
@@ -4492,25 +4494,23 @@ NSArray *coloursArray;
         if ([currentLayer isEqualToString:@""]) {
             
             // work for tempDrawImageLayer -----------------------------------------------
-            NSString *tempDrawImageLayer = [flyer addDrawingImage:NO]; //create/add layer with drawing type
-            NSMutableDictionary *dic2 = [flyer getLayerFromMaster:tempDrawImageLayer];
+            //NSString *tempDrawImageLayer = [flyer addDrawingImage:NO]; //create/add layer with drawing type
+            //NSMutableDictionary *dic2 = [flyer getLayerFromMaster:tempDrawImageLayer];
             
-            [self.flyimgView renderLayer:tempDrawImageLayer layerDictionary:dic2];
+            //[self.flyimgView renderLayer:tempDrawImageLayer layerDictionary:dic2];
             
-            self.tempDrawImage = [self.flyimgView.layers objectForKey:tempDrawImageLayer];
+            //self.tempDrawImage = [self.flyimgView.layers objectForKey:tempDrawImageLayer];
             
             // work for main layer -----------------------------------------------
             currentLayer = [flyer addDrawingImage:YES];
             dic = [flyer getLayerFromMaster:currentLayer];
-
             [self.flyimgView renderLayer:currentLayer layerDictionary:dic];
-            
-            //here we get ImageView
-            self.mainImage = [self.flyimgView.layers objectForKey:currentLayer];
             
         }
         // Run for editDrawing layer case
         else{
+            dic = [flyer getLayerFromMaster:currentLayer];
+            /*
             // work for tempDrawImageLayer -----------------------------------------------
             NSString *tempDrawImageLayer = [flyer addDrawingImage:NO]; //create/add layer with drawing type
             NSMutableDictionary *dic2 = [flyer getLayerFromMaster:tempDrawImageLayer];
@@ -4525,12 +4525,22 @@ NSArray *coloursArray;
             
             //here we get layer ImageView
             self.mainImage = [self.flyimgView.layers objectForKey:currentLayer];
+             */
         }
+        
+
+        
+        //here we get ImageView
+        self.mainImage      = [self.flyimgView.layers objectForKey:currentLayer];
+        self.tempDrawImage  =  self.mainImage;
+        
         
         // Hook event of Gesture for moving layers -----------------------------------------------
         self.tempDrawImage.userInteractionEnabled = YES; // CAN receive touches
+        
         UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(drawingLayerMoved:)];
         [self.tempDrawImage addGestureRecognizer:panGesture];
+        
         //Hook event end-----
         
         //Here we Highlight The ImageView
@@ -5253,25 +5263,8 @@ NSArray *coloursArray;
             [self.tempDrawImage.image drawInRect:CGRectMake(0, 0, self.tempDrawImage.frame.size.width, self.tempDrawImage.frame.size.height) blendMode:kCGBlendModeNormal alpha:opacity];
             
             self.mainImage.image = UIGraphicsGetImageFromCurrentImageContext();
-            self.tempDrawImage.image = nil;
+            //self.tempDrawImage.image = nil;
             UIGraphicsEndImageContext();
-            
-            // Save drawing layer and flyer
-            
-            NSString *imgPath = [self getImagePathforPhoto:self.mainImage.image];
-            
-            //Set Image to dictionary
-            [self.flyer setImagePath:self.currentLayer ImgPath:imgPath];
-            
-            //Here we Create ImageView Layer
-            [self.flyimgView renderLayer:self.currentLayer layerDictionary:[self.flyer getLayerFromMaster:self.currentLayer]];
-            
-            //[self.flyimgView layerStoppedEditing:self.currentLayer];
-            
-            
-            // End of save flyer and drawing layer
-            
-            
         }
     }
     else if( [drawingLayerMode isEqualToString:DRAWING_LAYER_MODE_ERASER] ){
@@ -5304,5 +5297,24 @@ NSArray *coloursArray;
         }
     }
     
+}
+
+-(void) saveDrawingLayer {
+    // End of save flyer and drawing layer
+    [self.flyimgView.layers setObject:self.mainImage forKey:currentLayer];
+    
+    // Save drawing layer and flyer
+    NSString *imgPath = [self getImagePathforPhoto:self.mainImage.image];
+    
+    //Set Image to dictionary
+    [self.flyer setImagePath:self.currentLayer ImgPath:imgPath];
+    
+    //Here we Create ImageView Layer
+    //[self.flyimgView renderLayer:self.currentLayer layerDictionary:[self.flyer getLayerFromMaster:self.currentLayer]];
+    
+    //disable drawing interaction
+    self.tempDrawImage  = nil;
+    self.mainImage  = nil;
+    self.tempDrawImage.userInteractionEnabled   = NO;
 }
 @end
