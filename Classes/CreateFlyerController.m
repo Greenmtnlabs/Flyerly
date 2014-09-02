@@ -176,7 +176,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     dw_red = 0.0/255.0;
     dw_green = 0.0/255.0;
     dw_blue = 0.0/255.0;
-    dw_brush = 5.0;
+    dw_brush = 10.0;
     dw_brushType = DRAWING_PLANE_LINE;
     dw_opacity = 1.0;
     self.flyimgView.addUiImgForDrawingLayer = YES; //must set:NO after renderLayers
@@ -5202,8 +5202,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             CGContextSetLineDash(UIGraphicsGetCurrentContext(), 1, dw_dash, 4);
         }
         
-        //BRUSH WIDTH
-        CGContextSetLineWidth(UIGraphicsGetCurrentContext(), dw_brush);
+        //BRUSH WIDTH ( we have devided it on 3 )
+        CGContextSetLineWidth(UIGraphicsGetCurrentContext(), (dw_brush/3));
         
         if( [dw_drawingLayerMode isEqualToString:DRAWING_LAYER_MODE_ERASER] ){
             //BRUSH CLEAR COLOR
