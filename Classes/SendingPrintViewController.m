@@ -46,12 +46,17 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    self.streetAddress.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
+    self.state.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
+    self.city.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
+    self.country.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
+    
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-28, -6, 50, 50)];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:TITLE_FONT size:18];
     label.textAlignment = UITextAlignmentCenter;
     label.textColor = [UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0];
-    label.text = @"Send Fylers";
+    label.text = @"SEND FLYERS";
     self.navigationItem.titleView = label;
     
     // Navigation buttons
@@ -73,13 +78,13 @@
     [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
     
     if ( [flyer.getFlyerDescription isEqualToString:@""] ){
-        self.messageFeild.placeholder = [NSString stringWithFormat:@"Enter message here..."];
+        self.messageFeild.textColor = [UIColor lightGrayColor];
+        self.messageFeild.text = @"Enter message here...";
     }else {
         messageFeild.text = flyer.getFlyerDescription;
     }
     
     flyerImage.image = [UIImage imageWithContentsOfFile:flyer.getFlyerImage];
-    [messageFeild sizeToFit];
 }
 
 - (void)sendFlyer{
