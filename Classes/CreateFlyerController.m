@@ -70,6 +70,8 @@ NSArray *coloursArray;
     
     //Render Flyer
     [self renderFlyer];
+    self.flyimgView.addUiImgForDrawingLayer = NO;//must set:NO after renderFlyer all layers first time
+    
     
     //Set Context View
     [self addAllLayersIntoScrollView];
@@ -182,8 +184,8 @@ NSArray *coloursArray;
     brush = 5.0;
     brushType = DRAWING_PLANE_LINE;
     opacity = 1.0;
-    self.flyimgView.isDrawingLayerInEditMode = NO;
-    drawingLayerMode  =  DRAWING_LAYER_MODE_EDIT;
+    self.flyimgView.addUiImgForDrawingLayer = YES; //must set:NO after renderLayers
+    drawingLayerMode  =  DRAWING_LAYER_MODE_NORMAL;
     
 	[super viewDidLoad];
     
@@ -2677,15 +2679,12 @@ NSArray *coloursArray;
     NSArray *flyerPiecesKeys = [flyer allKeys];
     
     for (int i = 0 ; i < flyerPiecesKeys.count; i++) {
-        
         //Getting Layers Detail from Master Dictionary
         NSMutableDictionary *dic = [flyer getLayerFromMaster:[flyerPiecesKeys objectAtIndex:i]];
         
         //Create Subview from dictionary
         [self.flyimgView renderLayer:[flyerPiecesKeys objectAtIndex:i] layerDictionary:dic];
-        
     }
-    
 }
 
 
@@ -2966,9 +2965,7 @@ NSArray *coloursArray;
     // Get the type of layer
     NSString *type = [flyer getLayerType:currentLayer];
     
-    if( !([type isEqualToString:FLYER_LAYER_DRAWING]) ){
-        [self renderFlyer];
-    }
+    [self renderFlyer];
     
     [self deSelectPreviousLayer];
     
@@ -4493,10 +4490,12 @@ NSArray *coloursArray;
         
         // addDrawing layer case
         if ([currentLayer isEqualToString:@""]) {
+            [self deSelectPreviousLayer];
             currentLayer = [flyer addDrawingImage:YES];
             dic = [flyer getLayerFromMaster:currentLayer];
-            self.flyimgView.isDrawingLayerInEditMode    =   NO;
+            self.flyimgView.addUiImgForDrawingLayer    =   YES;
             [self.flyimgView renderLayer:currentLayer layerDictionary:dic];
+            self.flyimgView.addUiImgForDrawingLayer    =   NO;//AFTER renderLayer set this flag is: YES
         }
         // editDrawing layer case
         else{
@@ -5041,7 +5040,7 @@ NSArray *coloursArray;
         [self addScrollView:layerScrollView];
         
         //Assign dic values(pattern,color,size) to class level variables
-        [self setDrawingTools:dic callFrom:DRAWING_LAYER_MODE_EDIT];
+        [self setDrawingTools:dic callFrom:DRAWING_LAYER_MODE_NORMAL];
         
         //SHOW button selected
 		[drawingPatternTabButton setSelected:YES];
@@ -5064,7 +5063,7 @@ NSArray *coloursArray;
         [self addScrollView:layerScrollView];
         
         //Assign dic values(pattern,color,size) to class level variables
-        [self setDrawingTools:dic callFrom:DRAWING_LAYER_MODE_EDIT];
+        [self setDrawingTools:dic callFrom:DRAWING_LAYER_MODE_NORMAL];
         
         //SHOW button selected
         [drawingColorTabButton setSelected:YES];
@@ -5087,7 +5086,7 @@ NSArray *coloursArray;
         [self addScrollView:layerScrollView];
 
         //Assign dic values(pattern,color,size) to class level variables
-        [self setDrawingTools:dic callFrom:DRAWING_LAYER_MODE_EDIT];
+        [self setDrawingTools:dic callFrom:DRAWING_LAYER_MODE_NORMAL];
         
         //SHOW button selected
 		[drawingSizeTabButton setSelected:YES];
@@ -5167,7 +5166,7 @@ NSArray *coloursArray;
  */
 - (void)drawingLayerMoved:(UIPanGestureRecognizer *)recognizer {
     
-    if( [drawingLayerMode isEqualToString:DRAWING_LAYER_MODE_EDIT] ){
+    if( [drawingLayerMode isEqualToString:DRAWING_LAYER_MODE_NORMAL] ){
         if (recognizer.state == UIGestureRecognizerStateBegan) {
             mouseSwiped = NO;
             lastPoint = [recognizer locationInView:self.tempDrawImage];
