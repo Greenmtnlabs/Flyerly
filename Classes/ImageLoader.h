@@ -10,12 +10,8 @@
 
 @interface ImageLoader : NBUImageLoader
 
-
 /// Retrieve the shared singleton.
 + (NBUImageLoader *)sharedLoader;
-
-
-
 
 /// Retrieve an image related to an arbitrary object.
 /// @param object The reference object the loader should use to load an image.

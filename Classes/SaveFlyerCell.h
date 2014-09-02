@@ -9,12 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
 #import "Flyer.h"
-@interface SaveFlyerCell : UITableViewCell {
-
-
-
-}
-
+@interface SaveFlyerCell : UITableViewCell
 
 @property(nonatomic, strong)IBOutlet UILabel *createLabel;
 @property(nonatomic, strong)IBOutlet UILabel *updatedLabel;

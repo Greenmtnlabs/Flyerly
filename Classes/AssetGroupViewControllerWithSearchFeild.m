@@ -14,14 +14,16 @@
 #import "CropViewController.h"
 #include <CommonCrypto/CommonDigest.h>
 
-@interface AssetGroupViewControllerWithSearchFeild ()
+@interface AssetGroupViewControllerWithSearchFeild () {
+    NSMutableArray *imagesIDs;
+    NSString *imageID_;
+}
 
 @end
 
 @implementation AssetGroupViewControllerWithSearchFeild
 
-NSMutableArray *imagesIDs;
-NSString *imageID_;
+
 
 - (void)viewDidLoad
 {

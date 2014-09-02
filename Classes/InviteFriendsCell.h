@@ -9,10 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ContactsModel.h"
 
-@interface InviteFriendsCell : UITableViewCell < ContactsDelegate >{
-
-}
-
+@interface InviteFriendsCell : UITableViewCell < ContactsDelegate >
 
 @property (nonatomic,strong)IBOutlet UIImageView *imgview;
 @property (nonatomic,strong)IBOutlet UILabel *dName;

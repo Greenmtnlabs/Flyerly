@@ -7,9 +7,6 @@
 #import "Reachability.h"
 
 @interface FlyerlySingleton : NSObject
-{
-    
-}
 
 @property (nonatomic, strong) NSMutableArray *accounts;
 @property (nonatomic, strong) NSString *twitterUser;
