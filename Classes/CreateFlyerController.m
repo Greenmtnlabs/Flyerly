@@ -20,12 +20,20 @@
 #define IMAGEPICKER_TEMPLATE 1
 #define IMAGEPICKER_PHOTO 2
 
-//Drawing required files
-//#import "DrawingPoint.h"
-//#import "LineSegment.h"
-
 //DrawingClass required files
 #import "Twitter/TWTweetComposeViewController.h"
+
+@interface CreateFlyerController () {
+    CameraViewController *nbuCamera;
+    UIButton *backButton;
+    ResourcesView *emoticonsView,*clipartsView,*fontsView,*textBordersView,*drawingView;
+    NSString *fontsViewResourcePath,*clipartsViewResourcePath,*emoticonsViewResourcePath,*drawingViewResourcePath;
+    NSMutableArray *fontsArray,*clipartsArray,*emoticonsArray;
+    NSArray *coloursArray;
+    int selectedAddMoreLayerTab;
+}
+
+@end
 
 @implementation CreateFlyerController
 
@@ -33,10 +41,6 @@
 //Drawing required files
 @synthesize mainImage;
 @synthesize tempDrawImage;
-
-CameraViewController *nbuCamera;
-
-UIButton *backButton;
 
 @synthesize selectedFont,selectedColor,selectedTemplate,fontTabButton,colorTabButton,sizeTabButton,fontEditButton,selectedSize,
 fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sharePanel,clipArtTabButton,emoticonsTabButton,artsColorTabButton,artsSizeTabButton, drawingColorTabButton,drawingPatternTabButton, drawingSizeTabButton,drawingEraserTabButton;
@@ -47,16 +51,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 @synthesize flyimgView,currentLayer,layersDic,flyer,player,playerView,playerToolBar,playButton,playerSlider,tempelateView;
 @synthesize durationLabel,durationChange,onFlyerBack,shouldShowAdd;
 @synthesize backgroundsView,flyerBordersView,colorsView,sizesView,bannerAddView,bannerAddDismissButton,drawingPatternsView;
-int selectedAddMoreLayerTab = -1;
-
-
-ResourcesView *emoticonsView,*clipartsView,*fontsView,*textBordersView,*drawingView;
-
-NSString *fontsViewResourcePath,*clipartsViewResourcePath,*emoticonsViewResourcePath,*drawingViewResourcePath;
-
-NSMutableArray *fontsArray,*clipartsArray,*emoticonsArray;
-
-NSArray *coloursArray;
 
 #pragma mark -  View Appear Methods
 
@@ -176,6 +170,7 @@ NSArray *coloursArray;
  * View setup. This is done once per instance.
  */
 -(void)viewDidLoad{
+    selectedAddMoreLayerTab = -1;
     
     //DrawingClass required vars
     red = 0.0/255.0;
@@ -312,44 +307,6 @@ NSArray *coloursArray;
     // Current selected layer.
     currentLayer = @"";
     
-    //HERE WE GET USER PURCHASES INFO FROM PARSE
-    if(![[NSUserDefaults standardUserDefaults] stringForKey:@"InAppPurchases"]){
-        
-        UserPurchases *userPurchases_ = [UserPurchases getInstance];
-        
-        //Checking if user valid purchases
-        if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]   ||
-            [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"]    ) {
-            
-            //Unloking features
-            UIImage *buttonImage = [UIImage imageNamed:@"video_tab.png"];
-            [addVideoTabButton setImage:buttonImage forState:UIControlStateNormal];
-        }
-        
-        //Checking if user valid purchases
-        if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]   ||
-            [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyIconsBundle"]    ) {
-            
-            fontsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Fonts-paid" ofType:@"plist"];
-            clipartsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Cliparts-paid" ofType:@"plist"];
-            emoticonsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Emoticons-paid" ofType:@"plist"];
-            [self addEmoticonsInSubView];
-            [self addClipArtsInSubView];
-            [self addFontsInSubView];
-            
-            
-        } else {
-            
-            fontsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Fonts" ofType:@"plist"];
-            clipartsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Cliparts" ofType:@"plist"];
-            emoticonsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Emoticons" ofType:@"plist"];
-            [self addEmoticonsInSubView];
-            [self addClipArtsInSubView];
-            [self addFontsInSubView];
-            
-        }
-    }
-    
     // Execute the rest of the stuff, a little delayed to speed up loading.
     dispatch_async( dispatch_get_main_queue(), ^{
         
@@ -423,6 +380,36 @@ NSArray *coloursArray;
         
         // Execute the rest of the stuff, a little delayed to speed up loading.
         dispatch_async( dispatch_get_main_queue(), ^{
+            
+            //HERE WE GET USER PURCHASES INFO FROM PARSE
+            if(![[NSUserDefaults standardUserDefaults] stringForKey:@"InAppPurchases"]){
+                
+                UserPurchases *userPurchases_ = [UserPurchases getInstance];
+                
+                //Checking if user valid purchases
+                if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]   ||
+                    [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"]    ) {
+                    
+                    //Unloking features
+                    UIImage *buttonImage = [UIImage imageNamed:@"video_tab.png"];
+                    [addVideoTabButton setImage:buttonImage forState:UIControlStateNormal];
+                }
+                
+                //Checking if user valid purchases
+                if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]   ||
+                    [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyIconsBundle"]    ) {
+                    
+                    fontsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Fonts-paid" ofType:@"plist"];
+                    clipartsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Cliparts-paid" ofType:@"plist"];
+                    emoticonsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Emoticons-paid" ofType:@"plist"];
+                    
+                } else {
+                    
+                    fontsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Fonts" ofType:@"plist"];
+                    clipartsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Cliparts" ofType:@"plist"];
+                    emoticonsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Emoticons" ofType:@"plist"];
+                }
+            }
             
             if(IS_IPHONE_5){
                 
@@ -752,70 +739,75 @@ NSArray *coloursArray;
     heightValue = 35;
     
     fontsView = [[ResourcesView alloc] init];
+    [self deleteSubviewsFromScrollView];
     fontsArray = [[NSMutableArray alloc] init];
     
-    NSArray *fontFamilies = [[NSArray alloc] initWithContentsOfFile:fontsViewResourcePath];
+    // Low the fonts in background.
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
     
-    for ( NSString *fontFamily in fontFamilies ) {
-        [ fontsArray addObject:[UIFont fontWithName:fontFamily size:27]];
-    }
+        NSArray *fontFamilies = [[NSArray alloc] initWithContentsOfFile:fontsViewResourcePath];
     
-    [self deleteSubviewsFromScrollView];
-    
-    CGFloat curXLoc = 0;
-    CGFloat curYLoc = 5;
-    int increment = 5;
-    
-    if(IS_IPHONE_5){
-        curXLoc = 13;
-        curYLoc = 10;
-        increment = 8;
-    }
-    
-    NSMutableDictionary *textLayer;
-    NSString *textFamily;
-    
-    //Getting Last Info of Text Layer
-    if (![currentLayer isEqualToString:@""]) {
-        textLayer = [flyer getLayerFromMaster:currentLayer];
-        textFamily = [textLayer objectForKey:@"fontname"];
-    }
-    
-	for (int i = 1; i <=[fontsArray count] ; i++)
-	{
-		UIButton *font = [UIButton buttonWithType:UIButtonTypeCustom];
-		font.frame = CGRectMake(0, 0, widthValue, heightValue);
-        [font addTarget:self action:@selector(selectFont:) forControlEvents:UIControlEventTouchUpInside];
-        [font setTitle:@"A" forState:UIControlStateNormal];
-		UIFont *fontname = fontsArray[(i-1)];
-		[font.titleLabel setFont: fontname];
-		[font setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-		font.tag = i;
-		[font setBackgroundImage:[UIImage imageNamed:@"a_bg"] forState:UIControlStateNormal];
-        
-        //SET BUTTON POSITION ON SCROLLVIEW
-        CGRect frame = font.frame;
-        frame.origin = CGPointMake(curXLoc, curYLoc);
-        font.frame = frame;
-        curXLoc += (widthValue)+increment;
-        
-        if(IS_IPHONE_5){
-            if(curXLoc >= 300){
-                curXLoc = 13;
-                curYLoc = curYLoc + widthValue + 7;
-            }
+        for ( NSString *fontFamily in fontFamilies ) {
+            [ fontsArray addObject:[UIFont fontWithName:fontFamily size:27]];
         }
         
-        [fontsView addSubview:font];
-    }
+        dispatch_async( dispatch_get_main_queue(), ^{
     
-    if(IS_IPHONE_5){
-        fontsView.size = CGSizeMake(320, curYLoc + heightValue + 5);
-        [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
-    }else {
-        fontsView.size = CGSizeMake(curXLoc , heightValue + 5);
-        [layerScrollView setContentSize:CGSizeMake(fontsView.size.width , heightValue)];
-    }
+            CGFloat curXLoc = 0;
+            CGFloat curYLoc = 5;
+            int increment = 5;
+    
+            if(IS_IPHONE_5){
+                curXLoc = 13;
+                curYLoc = 10;
+                increment = 8;
+            }
+    
+            NSMutableDictionary *textLayer;
+            NSString *textFamily;
+    
+            //Getting Last Info of Text Layer
+            if (![currentLayer isEqualToString:@""]) {
+                textLayer = [flyer getLayerFromMaster:currentLayer];
+                textFamily = [textLayer objectForKey:@"fontname"];
+            }
+    
+            for (int i = 1; i <=[fontsArray count] ; i++) {
+                UIButton *font = [UIButton buttonWithType:UIButtonTypeCustom];
+                font.frame = CGRectMake(0, 0, widthValue, heightValue);
+                [font addTarget:self action:@selector(selectFont:) forControlEvents:UIControlEventTouchUpInside];
+                [font setTitle:@"A" forState:UIControlStateNormal];
+                UIFont *fontname = fontsArray[(i-1)];
+                [font.titleLabel setFont: fontname];
+                [font setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+                font.tag = i;
+                [font setBackgroundImage:[UIImage imageNamed:@"a_bg"] forState:UIControlStateNormal];
+        
+                //SET BUTTON POSITION ON SCROLLVIEW
+                CGRect frame = font.frame;
+                frame.origin = CGPointMake(curXLoc, curYLoc);
+                font.frame = frame;
+                curXLoc += (widthValue)+increment;
+        
+                if(IS_IPHONE_5){
+                    if(curXLoc >= 300){
+                        curXLoc = 13;
+                        curYLoc = curYLoc + widthValue + 7;
+                    }
+                }
+        
+                [fontsView addSubview:font];
+            }
+    
+            if ( IS_IPHONE_5 ) {
+                fontsView.size = CGSizeMake(320, curYLoc + heightValue + 5);
+                [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
+            } else {
+                fontsView.size = CGSizeMake(curXLoc , heightValue + 5);
+                [layerScrollView setContentSize:CGSizeMake(fontsView.size.width , heightValue)];
+            }
+        });
+    });
 }
 
 
@@ -1071,64 +1063,72 @@ NSArray *coloursArray;
     heightValue = 35;
     
     clipartsView = [[ResourcesView alloc] init];
-    clipartsArray  = [[NSMutableArray alloc] initWithContentsOfFile:clipartsViewResourcePath];
-    
     [self deleteSubviewsFromScrollView];
     
-    CGFloat curXLoc = 0;
-    CGFloat curYLoc = 5;
-    int increment = 5;
+    // We need to load the contents of file and images in background. Doing this in the
+    // main ui thread makes the app less responsive.
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        clipartsArray  = [[NSMutableArray alloc] initWithContentsOfFile:clipartsViewResourcePath];
     
-    if(IS_IPHONE_5){
-        curXLoc = 13;
-        curYLoc = 10;
-        increment = 8;
-    }
+        // Now do the work in UI thread.
+        dispatch_async(dispatch_get_main_queue(), ^{
+            CGFloat curXLoc = 0;
+            CGFloat curYLoc = 5;
+            int increment = 5;
     
-    NSMutableDictionary *textLayer;
-    NSString *textFamily;
-    
-    //Getting Last Info of Text Layer
-    if (![currentLayer isEqualToString:@""]) {
-        textLayer = [flyer getLayerFromMaster:currentLayer];
-        textFamily = [textLayer objectForKey:@"fontname"];
-    }
-    
-	for (int i = 1; i <=[clipartsArray count] ; i++)
-	{
-		UIButton *font = [UIButton buttonWithType:UIButtonTypeCustom];
-		font.frame = CGRectMake(0, 0, widthValue, heightValue);
-        [font addTarget:self action:@selector(selectIcon:) forControlEvents:UIControlEventTouchUpInside];
-        UIFont *fontType = [UIFont fontWithName:[clipartsArray[i-1] objectForKey:@"fontType"] size:33.0f];
-        [font.titleLabel setFont: fontType];
-        [font setTitle:[clipartsArray[i-1] objectForKey:@"character"] forState:UIControlStateNormal];
-		[font setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-		font.tag = i;
-		[font setBackgroundImage:[UIImage imageNamed:@"a_bg"] forState:UIControlStateNormal];
-        
-        //SET BUTTON POSITION ON SCROLLVIEW
-        CGRect frame = font.frame;
-        frame.origin = CGPointMake(curXLoc, curYLoc);
-        font.frame = frame;
-        curXLoc += (widthValue)+increment;
-        
-        if(IS_IPHONE_5){
-            if(curXLoc >= 300){
+            if(IS_IPHONE_5){
                 curXLoc = 13;
-                curYLoc = curYLoc + widthValue + 7;
+                curYLoc = 10;
+                increment = 8;
             }
-        }
-        [clipartsView addSubview:font];
-    }
     
-    if(IS_IPHONE_5){
-        clipartsView.size = CGSizeMake(320, curYLoc + 85 );//(heightValue + 7) );
-        [layerScrollView setContentSize:CGSizeMake(320, curYLoc + 50)];//  heightValue)];
+            NSMutableDictionary *textLayer;
+            NSString *textFamily;
+    
+            //Getting Last Info of Text Layer
+            if (![currentLayer isEqualToString:@""]) {
+                textLayer = [flyer getLayerFromMaster:currentLayer];
+                textFamily = [textLayer objectForKey:@"fontname"];
+            }
+    
+            for (int i = 1; i <=[clipartsArray count] ; i++) {
+            
+                UIButton *font = [UIButton buttonWithType:UIButtonTypeCustom];
+                font.frame = CGRectMake(0, 0, widthValue, heightValue);
+                [font addTarget:self action:@selector(selectIcon:) forControlEvents:UIControlEventTouchUpInside];
+                UIFont *fontType = [UIFont fontWithName:[clipartsArray[i-1] objectForKey:@"fontType"] size:33.0f];
+                [font.titleLabel setFont: fontType];
+                [font setTitle:[clipartsArray[i-1] objectForKey:@"character"] forState:UIControlStateNormal];
+                [font setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+                font.tag = i;
+                [font setBackgroundImage:[UIImage imageNamed:@"a_bg"] forState:UIControlStateNormal];
         
-    }else {
-        clipartsView.size = CGSizeMake(curXLoc + heightValue + 5 , heightValue + 5);
-        [layerScrollView setContentSize:CGSizeMake(clipartsView.size.width , heightValue)];
-    }
+                //SET BUTTON POSITION ON SCROLLVIEW
+                CGRect frame = font.frame;
+                frame.origin = CGPointMake(curXLoc, curYLoc);
+                font.frame = frame;
+                curXLoc += (widthValue)+increment;
+        
+                if(IS_IPHONE_5){
+                    if(curXLoc >= 300){
+                        curXLoc = 13;
+                        curYLoc = curYLoc + widthValue + 7;
+                    }
+                }
+                
+                [clipartsView addSubview:font];
+            }
+            
+            if(IS_IPHONE_5){
+                clipartsView.size = CGSizeMake(320, curYLoc + 85 );//(heightValue + 7) );
+                [layerScrollView setContentSize:CGSizeMake(320, curYLoc + 50)];//  heightValue)];
+                
+            }else {
+                clipartsView.size = CGSizeMake(curXLoc + heightValue + 5 , heightValue + 5);
+                [layerScrollView setContentSize:CGSizeMake(clipartsView.size.width , heightValue)];
+            }
+        });
+    });
 }
 
 /*
@@ -1140,53 +1140,58 @@ NSArray *coloursArray;
     heightValue = 35;
     
     emoticonsView = [[ResourcesView alloc] init];
-    emoticonsArray = [[NSMutableArray alloc] initWithContentsOfFile:emoticonsViewResourcePath];
     
-    NSInteger symbolScrollWidth = 60;
-    NSInteger symbolScrollHeight = 60;
+    // We need to load the contents of file and images in background. Doing this in the
+    // main ui thread makes the app less responsive.
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        emoticonsArray = [[NSMutableArray alloc] initWithContentsOfFile:emoticonsViewResourcePath];
     
-    symbolArray = [[NSMutableArray alloc]init];
+        NSInteger symbolScrollWidth = 60;
+        NSInteger symbolScrollHeight = 60;
     
-    CGFloat curXLoc = 0;
-    CGFloat curYLoc = 5;
+        __block CGFloat curXLoc = 0;
+        __block CGFloat curYLoc = 5;
     
-    for( int i=1 ; i<= emoticonsArray.count ; i++ ) {
+        for( int i=1 ; i<= emoticonsArray.count ; i++ ) {
         
-        NSString* symbolName = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"%@",[emoticonsArray objectAtIndex:(i-1)]] ofType:@"png"];
-        UIImage *symbolImg = [UIImage imageWithContentsOfFile:symbolName];
-        
-        [symbolArray addObject:symbolImg];
-        
-        UIButton *symbolButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        symbolButton.frame =CGRectMake(0, 0, symbolScrollWidth, symbolScrollHeight);
-        [symbolButton setImage:symbolImg forState:UIControlStateNormal];
-        
-        symbolButton.tag = i;
-        [symbolButton addTarget:self action:@selector(selectEmoticon:) forControlEvents:UIControlEventTouchUpInside];
-        
-        CGRect frame = symbolButton.frame;
-        frame.origin = CGPointMake(curXLoc, curYLoc);
-        symbolButton.frame = frame;
-        curXLoc += (symbolScrollWidth)+5;
-        
-        if(IS_IPHONE_5){
-            if(curXLoc >= 320){
-                curXLoc = 0;
-                curYLoc = curYLoc + symbolScrollHeight + 7;
-            }
-        }
-        
-        [emoticonsView addSubview:symbolButton];
-        
-    }//loop
-    
-    if(IS_IPHONE_5){
-        emoticonsView.size = CGSizeMake(320, curYLoc + symbolScrollHeight + 5);
-        [layerScrollView setContentSize:CGSizeMake(320, curYLoc + symbolScrollHeight)];
-    }else {
-        emoticonsView.size = CGSizeMake(curXLoc + symbolScrollWidth + 5 , symbolScrollHeight + 5);
-        [layerScrollView setContentSize:CGSizeMake(emoticonsView.size.width , symbolScrollHeight)];
-    }
+            NSString* symbolName = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"%@",[emoticonsArray objectAtIndex:(i-1)]] ofType:@"png"];
+            UIImage *symbolImg = [UIImage imageWithContentsOfFile:symbolName];
+            
+            [symbolArray addObject:symbolImg];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+            
+                UIButton *symbolButton = [UIButton buttonWithType:UIButtonTypeCustom];
+                symbolButton.frame =CGRectMake(0, 0, symbolScrollWidth, symbolScrollHeight);
+                [symbolButton setImage:symbolImg forState:UIControlStateNormal];
+            
+                symbolButton.tag = i;
+                [symbolButton addTarget:self action:@selector(selectEmoticon:) forControlEvents:UIControlEventTouchUpInside];
+            
+                CGRect frame = symbolButton.frame;
+                frame.origin = CGPointMake(curXLoc, curYLoc);
+                symbolButton.frame = frame;
+                curXLoc += (symbolScrollWidth)+5;
+            
+                if(IS_IPHONE_5){
+                    if(curXLoc >= 320){
+                        curXLoc = 0;
+                        curYLoc = curYLoc + symbolScrollHeight + 7;
+                    }
+                }
+                
+                [emoticonsView addSubview:symbolButton];
+                
+                if(IS_IPHONE_5){
+                    emoticonsView.size = CGSizeMake(320, curYLoc + symbolScrollHeight + 5);
+                    [layerScrollView setContentSize:CGSizeMake(320, curYLoc + symbolScrollHeight)];
+                }else {
+                    emoticonsView.size = CGSizeMake(curXLoc + symbolScrollWidth + 5 , symbolScrollHeight + 5);
+                    [layerScrollView setContentSize:CGSizeMake(emoticonsView.size.width , symbolScrollHeight)];
+                }
+            });
+        } // Loop
+    });
 }
 
 /*
