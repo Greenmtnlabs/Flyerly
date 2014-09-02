@@ -5188,41 +5188,42 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         
         dw_mouseSwiped = YES;
         CGPoint currentPoint = [recognizer locationInView:self.tempDrawImage];
+        CGContextRef dw_context = UIGraphicsGetCurrentContext();
         
         if( [dw_brushType  isEqual: DRAWING_DOTTED_LINE] ) {
-            CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound);
+            CGContextSetLineCap(dw_context, kCGLineCapRound);
         }
         else if( [dw_brushType  isEqual: DRAWING_DASHED_LINE] ) {
-            CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapSquare);
+            CGContextSetLineCap(dw_context, kCGLineCapSquare);
         }
         else if( [dw_brushType  isEqual: DRAWING_PLANE_LINE]  ) {
-            CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound);
+            CGContextSetLineCap(dw_context, kCGLineCapRound);
         }
         
         // ADD FEW SPACES B/W DOTS OF LINE
         if( [dw_brushType  isEqual: DRAWING_DASHED_LINE] || [dw_brushType  isEqual: DRAWING_DOTTED_LINE] ) {
             CGFloat dw_dash[] = {2,dw_brush*3,dw_brush*2,dw_brush};
-            CGContextSetLineDash(UIGraphicsGetCurrentContext(), 1, dw_dash, 4);
+            CGContextSetLineDash(dw_context, 1, dw_dash, 4);
         }
         
         //BRUSH WIDTH ( we have devided it on 3 )
-        CGContextSetLineWidth(UIGraphicsGetCurrentContext(), (dw_brush/3));
+        CGContextSetLineWidth(dw_context, (dw_brush/3));
         
         if( [dw_drawingLayerMode isEqualToString:DRAWING_LAYER_MODE_ERASER] ){
             //BRUSH CLEAR COLOR
-            CGContextSetFillColorWithColor( UIGraphicsGetCurrentContext(), [UIColor clearColor].CGColor );
+            CGContextSetFillColorWithColor( dw_context, [UIColor clearColor].CGColor );
             //CLEAR DRAWING
-            CGContextSetBlendMode(UIGraphicsGetCurrentContext(), kCGBlendModeClear);
+            CGContextSetBlendMode(dw_context, kCGBlendModeClear);
         } else{
             // BRUSH RGB COLOR
-            CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), dw_red, dw_green, dw_blue, dw_opacity);
+            CGContextSetRGBStrokeColor(dw_context, dw_red, dw_green, dw_blue, dw_opacity);
             //NORMAL DRAWING
-            CGContextSetBlendMode(UIGraphicsGetCurrentContext(),kCGBlendModeNormal);
+            CGContextSetBlendMode(dw_context,kCGBlendModeNormal);
         }
         
-        CGContextMoveToPoint(UIGraphicsGetCurrentContext(), dw_lastPoint.x, dw_lastPoint.y);
-        CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), currentPoint.x, currentPoint.y);
-        CGContextStrokePath(UIGraphicsGetCurrentContext());
+        CGContextMoveToPoint(dw_context, dw_lastPoint.x, dw_lastPoint.y);
+        CGContextAddLineToPoint(dw_context, currentPoint.x, currentPoint.y);
+        CGContextStrokePath(dw_context);
 
         //SAVE CURRENT MOVE INFO IN TEMP IMG
         self.tempDrawImage.image = UIGraphicsGetImageFromCurrentImageContext();
