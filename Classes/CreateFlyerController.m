@@ -5167,7 +5167,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 #pragma mark - Move start on type=FLYER_LAYER_DRAWING (FLYER_LAYER_DRAWING=DrawingImgLayer)
 
 /**
- * This method does drag and drop functionality on the layer.
+ * When user starts drawing
  */
 - (void)drawingLayerMoved:(UIPanGestureRecognizer *)recognizer {
     
@@ -5182,7 +5182,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     }
     //MOVING
     else if (recognizer.state == UIGestureRecognizerStateChanged) {
-
+        
         mouseSwiped = YES;
         CGPoint currentPoint = [recognizer locationInView:self.tempDrawImage];
         
@@ -5220,7 +5220,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         CGContextMoveToPoint(UIGraphicsGetCurrentContext(), lastPoint.x, lastPoint.y);
         CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), currentPoint.x, currentPoint.y);
         CGContextStrokePath(UIGraphicsGetCurrentContext());
-        CGContextClosePath(UIGraphicsGetCurrentContext());
 
         //SAVE CURRENT MOVE INFO IN TEMP IMG
         self.tempDrawImage.image = UIGraphicsGetImageFromCurrentImageContext();
@@ -5233,7 +5232,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     else if (recognizer.state == UIGestureRecognizerStateEnded) {
         UIGraphicsEndImageContext();
     }
-    
 }
 
 
