@@ -13,7 +13,7 @@
 @synthesize layers,flyerTapGesture;
 
 //Flag for drawing layer
-@synthesize isDrawingLayerInEditMode;
+@synthesize addUiImgForDrawingLayer;
 
 CGAffineTransform previuosTransform;
 NSString *abc;
@@ -28,10 +28,6 @@ NSString *abc;
     
     //Set Master Layers
     layers = [[NSMutableDictionary alloc] init];
-    
-    //initial at object creation time
-    isDrawingLayerInEditMode = NO;
-    
 }
 
 /**
@@ -69,6 +65,8 @@ NSString *abc;
  */
 -(void)renderLayer :(NSString *)uid layerDictionary:(NSMutableDictionary *)layDic {
    
+    NSLog(@"bool %s", self.addUiImgForDrawingLayer ? "true" : "false");
+    
     // This is a reference to the view that we use to do some generic stuff.
     UIView *view = nil;
 
@@ -150,8 +148,8 @@ NSString *abc;
         }
     }
     else if ([layDic objectForKey:@"type"] != nil && [[layDic objectForKey:@"type"] isEqual:FLYER_LAYER_DRAWING]) {
-
-        if( !(isDrawingLayerInEditMode) ){
+        
+        if( self.addUiImgForDrawingLayer ){
             //keep in mind call this code for drawing layer only once(render flyer time, add drawing layer[not for edit/reRenderings])
             UIImageView *img = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, DRAWING_LAYER_W, DRAWING_LAYER_H)];
             
@@ -161,7 +159,6 @@ NSString *abc;
             
             view = img;
         }
-        
     }
     else{
         id lastControl = [layers objectForKey:uid];
@@ -196,7 +193,7 @@ NSString *abc;
     
     if ([layDic objectForKey:@"type"] != nil && [[layDic objectForKey:@"type"] isEqual:FLYER_LAYER_DRAWING]) {
         //we hooked the events(Gesture) of drawing in createFlyerController.h in function: drawingLayerMoved
-        if( !(isDrawingLayerInEditMode) ){
+        if( self.addUiImgForDrawingLayer ){
         }
     }
     // Do the generic stuff that needs to happen for all views. For now,
@@ -402,7 +399,6 @@ NSString *abc;
  * Visually show a layer as being edited
  */
 - (void)layerIsBeingEdited:(NSString *)uid {
-    isDrawingLayerInEditMode = YES;
     UIView *view = [layers objectForKey:uid];
     
     // Show the layer as being edited.
@@ -418,7 +414,6 @@ NSString *abc;
  * Layer stopped editing.
  */
 - (void)layerStoppedEditing:(NSString *)uid {
-    isDrawingLayerInEditMode = NO;
     UIView *view = [layers objectForKey:uid];
     
     // Show the layer as being edited.
