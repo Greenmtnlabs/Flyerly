@@ -173,14 +173,14 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     selectedAddMoreLayerTab = -1;
     
     //DrawingClass required vars
-    red = 0.0/255.0;
-    green = 0.0/255.0;
-    blue = 0.0/255.0;
-    brush = 5.0;
-    brushType = DRAWING_PLANE_LINE;
-    opacity = 1.0;
+    dw_red = 0.0/255.0;
+    dw_green = 0.0/255.0;
+    dw_blue = 0.0/255.0;
+    dw_brush = 5.0;
+    dw_brushType = DRAWING_PLANE_LINE;
+    dw_opacity = 1.0;
     self.flyimgView.addUiImgForDrawingLayer = YES; //must set:NO after renderLayers
-    drawingLayerMode  =  DRAWING_LAYER_MODE_NORMAL;
+    dw_drawingLayerMode  =  DRAWING_LAYER_MODE_NORMAL;
     
 	[super viewDidLoad];
     
@@ -5111,13 +5111,13 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 //Assign dic values(pattern,color,size) to class level variables
 - (void)setDrawingTools:(NSMutableDictionary *)dic callFrom:(NSString *)callFrom
 {
-    drawingLayerMode = callFrom;
+    dw_drawingLayerMode = callFrom;
     
     //Get color(r,g,b) from dic, then assign them to class level red,green,blue
     NSArray *colorAry = [dic[@"textcolor"] componentsSeparatedByString: @", "];
-    red   = (CGFloat)[colorAry[0] floatValue];
-    green = (CGFloat)[colorAry[1] floatValue];
-    blue  = (CGFloat)[colorAry[2] floatValue];
+    dw_red   = (CGFloat)[colorAry[0] floatValue];
+    dw_green = (CGFloat)[colorAry[1] floatValue];
+    dw_blue  = (CGFloat)[colorAry[2] floatValue];
     
     [self setDrawingBrushRadius:[[dic objectForKey:@"brush"] integerValue] updateDic:NO];
     [self setDrawingLine:[dic objectForKey:@"line_type"] updateDic:NO];
@@ -5128,12 +5128,12 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 {
     CGFloat alpha;
     //Getting RGB Color Code
-    [color getRed:&red green:&green blue:&blue alpha:&alpha];
+    [color getRed:&dw_red green:&dw_green blue:&dw_blue alpha:&alpha];
     //[color getWhite:&white alpha:&alpha];
     
     if( updateDic ) {
         NSMutableDictionary *dic = [flyer getLayerFromMaster:currentLayer];
-        [dic setObject: [NSString stringWithFormat:@"%f, %f, %f",red,green,blue] forKey:@"textcolor"];
+        [dic setObject: [NSString stringWithFormat:@"%f, %f, %f",dw_red,dw_green,dw_blue] forKey:@"textcolor"];
         [flyer.masterLayers setValue:dic forKey:currentLayer];
     }
 }
@@ -5141,11 +5141,11 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 // Set value brush radius
 - (void)setDrawingBrushRadius:(NSInteger)brushRadiusSize  updateDic:(BOOL)updateDic
 {
-    brush = (CGFloat)brushRadiusSize;
+    dw_brush = (CGFloat)brushRadiusSize;
     
     if( updateDic ) {
         NSMutableDictionary *dic = [flyer getLayerFromMaster:currentLayer];
-        [dic setObject:[NSString stringWithFormat:@"%f",brush] forKey:@"brush"];
+        [dic setObject:[NSString stringWithFormat:@"%f",dw_brush] forKey:@"brush"];
         [flyer.masterLayers setValue:dic forKey:currentLayer];
     }
 }
@@ -5153,11 +5153,11 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 // Set value of
 - (void)setDrawingLine:(NSString *)lineType updateDic:(BOOL)updateDic
 {
-    brushType   =  lineType;
+    dw_brushType   =  lineType;
     
     if( updateDic ) {
         NSMutableDictionary *dic = [flyer getLayerFromMaster:currentLayer];
-        [dic setObject:brushType forKey:@"line_type"];
+        [dic setObject:dw_brushType forKey:@"line_type"];
         [flyer.masterLayers setValue:dic forKey:currentLayer];
     }
 }
@@ -5173,8 +5173,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     //MOVE START
     if (recognizer.state == UIGestureRecognizerStateBegan) {
-        mouseSwiped = NO;
-        lastPoint = [recognizer locationInView:self.tempDrawImage];
+        dw_mouseSwiped = NO;
+        dw_lastPoint = [recognizer locationInView:self.tempDrawImage];
         
         UIGraphicsBeginImageContext(self.tempDrawImage.frame.size);
         [self.tempDrawImage.image drawInRect:CGRectMake(0, 0, self.tempDrawImage.frame.size.width, self.tempDrawImage.frame.size.height)];
@@ -5183,49 +5183,49 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     //MOVING
     else if (recognizer.state == UIGestureRecognizerStateChanged) {
         
-        mouseSwiped = YES;
+        dw_mouseSwiped = YES;
         CGPoint currentPoint = [recognizer locationInView:self.tempDrawImage];
         
-        if( [brushType  isEqual: DRAWING_DOTTED_LINE] ) {
+        if( [dw_brushType  isEqual: DRAWING_DOTTED_LINE] ) {
             CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound);
         }
-        else if( [brushType  isEqual: DRAWING_DASHED_LINE] ) {
+        else if( [dw_brushType  isEqual: DRAWING_DASHED_LINE] ) {
             CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapSquare);
         }
-        else if( [brushType  isEqual: DRAWING_PLANE_LINE]  ) {
+        else if( [dw_brushType  isEqual: DRAWING_PLANE_LINE]  ) {
             CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound);
         }
         
         // ADD FEW SPACES B/W DOTS OF LINE
-        if( [brushType  isEqual: DRAWING_DASHED_LINE] || [brushType  isEqual: DRAWING_DOTTED_LINE] ) {
-            CGFloat dash[] = {2,brush*3,brush*2,brush};
-            CGContextSetLineDash(UIGraphicsGetCurrentContext(), 1, dash, 4);
+        if( [dw_brushType  isEqual: DRAWING_DASHED_LINE] || [dw_brushType  isEqual: DRAWING_DOTTED_LINE] ) {
+            CGFloat dw_dash[] = {2,dw_brush*3,dw_brush*2,dw_brush};
+            CGContextSetLineDash(UIGraphicsGetCurrentContext(), 1, dw_dash, 4);
         }
         
         //BRUSH WIDTH
-        CGContextSetLineWidth(UIGraphicsGetCurrentContext(), brush);
+        CGContextSetLineWidth(UIGraphicsGetCurrentContext(), dw_brush);
         
-        if( [drawingLayerMode isEqualToString:DRAWING_LAYER_MODE_ERASER] ){
+        if( [dw_drawingLayerMode isEqualToString:DRAWING_LAYER_MODE_ERASER] ){
             //BRUSH CLEAR COLOR
             CGContextSetFillColorWithColor( UIGraphicsGetCurrentContext(), [UIColor clearColor].CGColor );
             //CLEAR DRAWING
             CGContextSetBlendMode(UIGraphicsGetCurrentContext(), kCGBlendModeClear);
         } else{
             // BRUSH RGB COLOR
-            CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), red, green, blue, opacity);
+            CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), dw_red, dw_green, dw_blue, dw_opacity);
             //NORMAL DRAWING
             CGContextSetBlendMode(UIGraphicsGetCurrentContext(),kCGBlendModeNormal);
         }
         
-        CGContextMoveToPoint(UIGraphicsGetCurrentContext(), lastPoint.x, lastPoint.y);
+        CGContextMoveToPoint(UIGraphicsGetCurrentContext(), dw_lastPoint.x, dw_lastPoint.y);
         CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), currentPoint.x, currentPoint.y);
         CGContextStrokePath(UIGraphicsGetCurrentContext());
 
         //SAVE CURRENT MOVE INFO IN TEMP IMG
         self.tempDrawImage.image = UIGraphicsGetImageFromCurrentImageContext();
 
-        //SAVE CURRENT MOVE POINT AS lastPoint
-        lastPoint = currentPoint;
+        //SAVE CURRENT MOVE POINT AS dw_lastPoint
+        dw_lastPoint = currentPoint;
         
     }
     //MOVE END

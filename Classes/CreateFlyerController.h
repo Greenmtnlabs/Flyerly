@@ -83,15 +83,15 @@
     //UIImageView *displayView;
     
     //DrawingClass required vars
-    CGPoint lastPoint;
-    CGFloat red;
-    CGFloat green;
-    CGFloat blue;
-    CGFloat brush;
-    NSString *brushType;
-    CGFloat opacity;
-    BOOL mouseSwiped;
-    NSString *drawingLayerMode;
+    CGPoint dw_lastPoint;
+    CGFloat dw_red;
+    CGFloat dw_green;
+    CGFloat dw_blue;
+    CGFloat dw_brush;
+    NSString *dw_brushType;
+    CGFloat dw_opacity;
+    BOOL dw_mouseSwiped;
+    NSString *dw_drawingLayerMode;
     
     
 }

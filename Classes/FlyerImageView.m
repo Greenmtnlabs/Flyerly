@@ -23,8 +23,7 @@ NSString *abc;
  */
 - (void)awakeFromNib
 {
-    [super awakeFromNib];
-    
+    [super awakeFromNib];    
     
     //Set Master Layers
     layers = [[NSMutableDictionary alloc] init];
@@ -65,8 +64,6 @@ NSString *abc;
  */
 -(void)renderLayer :(NSString *)uid layerDictionary:(NSMutableDictionary *)layDic {
    
-    NSLog(@"bool %s", self.addUiImgForDrawingLayer ? "true" : "false");
-    
     // This is a reference to the view that we use to do some generic stuff.
     UIView *view = nil;
 
@@ -150,7 +147,7 @@ NSString *abc;
     else if ([layDic objectForKey:@"type"] != nil && [[layDic objectForKey:@"type"] isEqual:FLYER_LAYER_DRAWING]) {
         
         if( self.addUiImgForDrawingLayer ){
-            //keep in mind call this code for drawing layer only once(render flyer time, add drawing layer[not for edit/reRenderings])
+            //keep in mind call this code for drawing layer only once(render flyer time, add drawing layer[not for edit/reRenderings layers])
             UIImageView *img = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, DRAWING_LAYER_W, DRAWING_LAYER_H)];
             
             [self configureImageView:img ImageViewDictionary:layDic];
