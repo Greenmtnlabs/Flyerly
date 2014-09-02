@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
-        <deployment defaultVersion="1280" identifier="iOS"/>
+        <deployment defaultVersion="1552" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <objects>
@@ -170,12 +170,12 @@
         </view>
     </objects>
     <resources>
-        <image name="Zregister_flyer.png" width="84" height="111"/>
-        <image name="Zsignup_button.png" width="505" height="70"/>
-        <image name="email_box.png" width="505" height="70"/>
-        <image name="facebook_login.png" width="398" height="68"/>
-        <image name="password_box.png" width="505" height="70"/>
-        <image name="register-bg-iPhone5.png" width="640" height="1096"/>
-        <image name="twitter_login.png" width="199" height="35"/>
+        <image name="Zregister_flyer.png" width="42" height="55"/>
+        <image name="Zsignup_button.png" width="252" height="35"/>
+        <image name="email_box.png" width="252" height="35"/>
+        <image name="facebook_login.png" width="199" height="34"/>
+        <image name="password_box.png" width="252" height="35"/>
+        <image name="register-bg-iPhone5.png" width="320" height="548"/>
+        <image name="twitter_login.png" width="199" height="34"/>
     </resources>
 </document>

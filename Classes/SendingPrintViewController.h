@@ -23,7 +23,7 @@
 @property(nonatomic,strong) NSMutableArray *contactsArray;
 
 
-@property (nonatomic, strong) IBOutlet UITextField *messageFeild;
+@property (nonatomic, strong) IBOutlet UITextView *messageFeild;
 @property (nonatomic, strong) IBOutlet UIImageView *flyerImage;
 @property (nonatomic, strong) IBOutlet UITextField *streetAddress;
 @property (nonatomic, strong) IBOutlet UITextField *state;
