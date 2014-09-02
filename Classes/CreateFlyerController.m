@@ -5172,71 +5172,61 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 - (void)drawingLayerMoved:(UIPanGestureRecognizer *)recognizer {
     
     if( [drawingLayerMode isEqualToString:DRAWING_LAYER_MODE_NORMAL] ){
+        //MOVE START
         if (recognizer.state == UIGestureRecognizerStateBegan) {
             mouseSwiped = NO;
             lastPoint = [recognizer locationInView:self.tempDrawImage];
             
-        }
-        else if (recognizer.state == UIGestureRecognizerStateChanged) {
-            
-            //MOVE
-            mouseSwiped = YES;
-            CGPoint currentPoint = [recognizer locationInView:self.tempDrawImage];
-            
             UIGraphicsBeginImageContext(self.tempDrawImage.frame.size);
             [self.tempDrawImage.image drawInRect:CGRectMake(0, 0, self.tempDrawImage.frame.size.width, self.tempDrawImage.frame.size.height)];
             
-            if( [brushType  isEqual: DRAWING_DASHED_LINE] || [brushType  isEqual: DRAWING_DOTTED_LINE] ) {
-                
-                CGFloat dash[] = {2,brush*3,brush*2,brush};
-                if( [brushType  isEqual: DRAWING_DOTTED_LINE] ) {
-                    CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound);
-                }
-                else if( [brushType  isEqual: DRAWING_DASHED_LINE] ) {
-                    CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapSquare);
-                }
-                CGContextSetLineWidth(UIGraphicsGetCurrentContext(), brush);
-                
-                // brush color
-                CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), red, green, blue, 1.0);
-                
-                CGContextSetLineDash(UIGraphicsGetCurrentContext(), 1, dash, 4);
-                
-                CGContextMoveToPoint(UIGraphicsGetCurrentContext(), lastPoint.x, lastPoint.y);
-                CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), currentPoint.x, currentPoint.y);
-                CGContextStrokePath(UIGraphicsGetCurrentContext());
-                CGContextClosePath(UIGraphicsGetCurrentContext());
+        }
+        //MOVE
+        else if (recognizer.state == UIGestureRecognizerStateChanged) {
+
+            mouseSwiped = YES;
+            CGPoint currentPoint = [recognizer locationInView:self.tempDrawImage];
+            
+            if( [brushType  isEqual: DRAWING_DOTTED_LINE] ) {
+                CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound);
+            }
+            else if( [brushType  isEqual: DRAWING_DASHED_LINE] ) {
+                CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapSquare);
             }
             else if( [brushType  isEqual: DRAWING_PLANE_LINE]  ) {
-                // brush width / size
-                CGContextSetLineWidth(UIGraphicsGetCurrentContext(), brush );
-                
-                // brush color
-                CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), red, green, blue, 1.0);
-                
-                CGContextMoveToPoint(UIGraphicsGetCurrentContext(), lastPoint.x, lastPoint.y);
-                CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), currentPoint.x, currentPoint.y);
                 CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound);
             }
             
+            // GAP B/W DOTS OF LINE
+            if( [brushType  isEqual: DRAWING_DASHED_LINE] || [brushType  isEqual: DRAWING_DOTTED_LINE] ) {
+                CGFloat dash[] = {2,brush*3,brush*2,brush};
+                CGContextSetLineDash(UIGraphicsGetCurrentContext(), 1, dash, 4);
+            }
+            
+            //BRUSH WIDTH
+            CGContextSetLineWidth(UIGraphicsGetCurrentContext(), brush);
+            
+            // BRUSH COLOR
+            CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), red, green, blue, 1.0);
             
             
-            
-            CGContextSetBlendMode(UIGraphicsGetCurrentContext(),kCGBlendModeNormal);
+            CGContextMoveToPoint(UIGraphicsGetCurrentContext(), lastPoint.x, lastPoint.y);
+            CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), currentPoint.x, currentPoint.y);
             CGContextStrokePath(UIGraphicsGetCurrentContext());
+            CGContextClosePath(UIGraphicsGetCurrentContext());
+            CGContextSetBlendMode(UIGraphicsGetCurrentContext(),kCGBlendModeNormal);
+
+            //SAVE CURRENT MOVE INFO IN TEMP IMG
             self.tempDrawImage.image = UIGraphicsGetImageFromCurrentImageContext();
-            [self.tempDrawImage setAlpha:opacity];
-            UIGraphicsEndImageContext();
-            
+
+            //SAVE CURRENT MOVE POINT AS lastPoint
             lastPoint = currentPoint;
             
         }
         else if (recognizer.state == UIGestureRecognizerStateEnded) {
+            UIGraphicsEndImageContext();
         }
-    }
-    else if( [drawingLayerMode isEqualToString:DRAWING_LAYER_MODE_ERASER] ){
-        
-    }
+    }    
 }
 
 
