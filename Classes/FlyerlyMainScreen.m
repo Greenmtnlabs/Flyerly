@@ -43,6 +43,7 @@
 BOOL adLoaded = false;
 
 -(IBAction)doNew:(id)sender{
+    
     [Flurry logEvent:@"Create Flyer"];
 
     NSString *flyPath = [Flyer newFlyerPath];
@@ -76,6 +77,18 @@ BOOL adLoaded = false;
             [button setUserInteractionEnabled:YES];
         }
     }];
+    
+    [createFlyer setShouldShowAdd:^(NSString *flyPath) {
+        dispatch_async( dispatch_get_main_queue(), ^{
+            UserPurchases *userPurchases_ = [UserPurchases getInstance];
+            if ( ![userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]){
+                if ([weakSelf.interstitial isReady] && ![weakSelf.interstitial hasBeenUsed]){
+                    [weakSelf.interstitial presentFromRootViewController:weakSelf];
+                }
+            }
+        });
+    }];
+    
     
 	[self.navigationController pushViewController:createFlyer animated:YES];
     

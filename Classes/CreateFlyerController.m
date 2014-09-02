@@ -512,8 +512,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     [lastTextView removeFromSuperview];
     lastTextView = nil;
     
-    isPlaying = NO;
-    [player pause];
+    
     
     // If the sharing panel is open, we are just going to close it down.
     // Do not need to do any thing else.
@@ -557,6 +556,10 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     // This work will be done in the background to prevent the UI from being
     // stuck.
     dispatch_async( dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        
+        isPlaying = NO;
+        [player pause];
+        
         // Save flyer to disk
         [flyer saveFlyer];
         
