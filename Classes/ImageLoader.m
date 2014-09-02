@@ -51,14 +51,13 @@ static NBUImageLoader * _sharedLoader;
         AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:urlRequest];
         requestOperation.responseSerializer = [AFImageResponseSerializer serializer];
         [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"Response: %@", responseObject);
+            
             resultBlock(responseObject,nil);
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Image error: %@", error);
         }];
         [requestOperation start];
-        NSLog(@"");
         
     }
     

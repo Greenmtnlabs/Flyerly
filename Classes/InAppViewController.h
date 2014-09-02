@@ -28,7 +28,7 @@
 #import "ParentViewController.h"
 #import "SigninController.h"
 
-@interface InAppViewController : ParentViewController <UITableViewDelegate,UITableViewDataSource,RMStoreObserver> {
+@interface InAppViewController : ParentViewController <UITableViewDelegate,UITableViewDataSource,RMStoreObserver>{
     
     NSArray *requestedProducts;
     BOOL cancelRequest;

@@ -17,11 +17,7 @@
 @end
 
 
-@interface ContactsModel : NSObject {
-
-   
-
-}
+@interface ContactsModel : NSObject 
 
 -(void)setInvitedStatus :(int)status;
 

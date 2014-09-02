@@ -25,7 +25,7 @@
     [self.layer addSublayer:_border];
     
     // Gesture for moving layers
-    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(layerMoved:)];
+    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(videolayerMoved:)];
     [self addGestureRecognizer:panGesture];
     
     // Gesture for resizing layers
@@ -50,7 +50,7 @@
 /**
  * This method does drag and drop functionality on the layer.
  */
-- (void)layerMoved:(UIPanGestureRecognizer *)recognizer :(id) sender {
+- (void)videolayerMoved:(UIPanGestureRecognizer *)recognizer {
     
     CGPoint translation = [recognizer translationInView:self];
     
