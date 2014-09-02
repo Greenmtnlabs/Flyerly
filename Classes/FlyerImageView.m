@@ -12,6 +12,9 @@
 @implementation FlyerImageView
 @synthesize layers,flyerTapGesture;
 
+//Flag for drawing layer
+@synthesize isDrawingLayerInEditMode;
+
 CGAffineTransform previuosTransform;
 NSString *abc;
 
@@ -25,6 +28,9 @@ NSString *abc;
     
     //Set Master Layers
     layers = [[NSMutableDictionary alloc] init];
+    
+    //initial at object creation time
+    isDrawingLayerInEditMode = NO;
     
 }
 
@@ -144,16 +150,18 @@ NSString *abc;
         }
     }
     else if ([layDic objectForKey:@"type"] != nil && [[layDic objectForKey:@"type"] isEqual:FLYER_LAYER_DRAWING]) {
-        //done do any thing if working for drawing layer
+
+        if( !(isDrawingLayerInEditMode) ){
+            //keep in mind call this code for drawing layer only once(render flyer time, add drawing layer[not for edit/reRenderings])
+            UIImageView *img = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, DRAWING_LAYER_W, DRAWING_LAYER_H)];
+            
+            [self configureImageView:img ImageViewDictionary:layDic];
+            [self addSubview:img];
+            [layers setValue:img forKey:uid];
+            
+            view = img;
+        }
         
-        // Here We Write Code for Image
-        UIImageView *img = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, DRAWING_LAYER_W, DRAWING_LAYER_H)];
-        
-        [self configureImageView:img ImageViewDictionary:layDic];
-        [self addSubview:img];
-        [layers setValue:img forKey:uid];
-        
-        view = img;
     }
     else{
         id lastControl = [layers objectForKey:uid];
@@ -188,6 +196,8 @@ NSString *abc;
     
     if ([layDic objectForKey:@"type"] != nil && [[layDic objectForKey:@"type"] isEqual:FLYER_LAYER_DRAWING]) {
         //we hooked the events(Gesture) of drawing in createFlyerController.h in function: drawingLayerMoved
+        if( !(isDrawingLayerInEditMode) ){
+        }
     }
     // Do the generic stuff that needs to happen for all views. For now,
     // we add support for drag.
@@ -223,9 +233,6 @@ NSString *abc;
  */
 -(void)configureImageView :(UIImageView *)imgView ImageViewDictionary:(NSMutableDictionary *)detail {
     
-    //SetFrame
-    [imgView setFrame:CGRectMake([[detail valueForKey:@"x"] floatValue], [[detail valueForKey:@"y"] floatValue], [[detail valueForKey:@"width"] floatValue], [[detail valueForKey:@"height"] floatValue])];
-              
     //imgView.transform = CGAffineTransformMakeRotation([[detail valueForKey:@"rotation"] floatValue]);
     
     if ( ([detail objectForKey:@"a"] != nil) && ([detail objectForKey:@"b"] != nil) && ([detail objectForKey:@"c"] != nil) && ([detail objectForKey:@"d"] != nil) && ([detail objectForKey:@"tx"] != nil ) && ([detail objectForKey:@"ty"] != nil) ) {
@@ -233,6 +240,10 @@ NSString *abc;
         CGAffineTransform ttransform = CGAffineTransformMake([[detail valueForKey:@"a"] floatValue], [[detail valueForKey:@"b"] floatValue], [[detail valueForKey:@"c"] floatValue], [[detail valueForKey:@"d"] floatValue], [[detail valueForKey:@"tx"] floatValue], [[detail valueForKey:@"ty"] floatValue]);
         
         imgView.transform = ttransform;
+        
+    } else {
+        //SetFrame
+        [imgView setFrame:CGRectMake([[detail valueForKey:@"x"] floatValue], [[detail valueForKey:@"y"] floatValue], [[detail valueForKey:@"width"] floatValue], [[detail valueForKey:@"height"] floatValue])];
         
     }
     
@@ -391,6 +402,7 @@ NSString *abc;
  * Visually show a layer as being edited
  */
 - (void)layerIsBeingEdited:(NSString *)uid {
+    isDrawingLayerInEditMode = YES;
     UIView *view = [layers objectForKey:uid];
     
     // Show the layer as being edited.
@@ -406,6 +418,7 @@ NSString *abc;
  * Layer stopped editing.
  */
 - (void)layerStoppedEditing:(NSString *)uid {
+    isDrawingLayerInEditMode = NO;
     UIView *view = [layers objectForKey:uid];
     
     // Show the layer as being edited.
@@ -423,32 +436,29 @@ NSString *abc;
  */
 - (void)layerMoved:(UIPanGestureRecognizer *)recognizer {
     
-    CGPoint translatedPoint = [(UIPanGestureRecognizer*)recognizer translationInView:self];
-    
-    if([(UIPanGestureRecognizer*)recognizer state] == UIGestureRecognizerStateBegan) {
-        _firstX = recognizer.view.center.x;
-        _firstY = recognizer.view.center.y;
-    }
-    
-    translatedPoint = CGPointMake(_firstX+translatedPoint.x, _firstY+translatedPoint.y);
-    
-    CGAffineTransform currentTransform = recognizer.view.transform;
-    
-    [recognizer.view setCenter:translatedPoint];
-    
-    [self showOverlayWithFrame:recognizer.view.frame :recognizer.view];
+    static CGAffineTransform currentTransform;
     
     if (recognizer.state == UIGestureRecognizerStateBegan) {
         
+        currentTransform = recognizer.view.transform;
         
     } else if (recognizer.state == UIGestureRecognizerStateChanged) {
         
+        CGPoint translatedPoint = [(UIPanGestureRecognizer*)recognizer translationInView:self];
+    
+        // Scale
+        CGAffineTransform tr =
+        CGAffineTransformConcat(
+                                currentTransform,
+                                CGAffineTransformMakeTranslation ( translatedPoint.x,translatedPoint.y ));
         
+        [recognizer.view setTransform:tr];
+
+        //[self showOverlayWithFrame:recognizer.view.frame :recognizer.view];
         
     } else if (recognizer.state == UIGestureRecognizerStateEnded) {
         
-        CGRect fr = recognizer.view.frame;
-        
+        CGAffineTransform newTransForm = recognizer.view.transform;
         // Get all layer keys for this flyer
         NSArray *keys = [layers allKeysForObject:recognizer.view];
         // Find key for rotated layer
@@ -456,8 +466,10 @@ NSString *abc;
             NSString *key = [keys objectAtIndex:i];
             
             // Save rotation angle for layer
-            [self.delegate layerTransformedforKey:key :&currentTransform];
-            [self.delegate frameChangedForLayer:key frame:fr];
+            [self.delegate layerTransformedforKey:key :&newTransForm];
+            
+            //[self.delegate frameChangedForLayer:key frame:_view.frame];
+            
         }
     }
     
@@ -521,44 +533,42 @@ NSString *abc;
 /**
  * Resize view when pinched.
  */
-- (void)layerResized:(UIGestureRecognizer *)sender {
+- (void)layerResized:(UIGestureRecognizer *)recognizer {
     
-    CGAffineTransform newTransform;
+    static CGAffineTransform currentTransform;
     
-    if([(UIPinchGestureRecognizer*)sender state] == UIGestureRecognizerStateBegan) {
-        _lastScale = 1.0;
-    }
-    
-    CGFloat scale = 1.0 - (_lastScale - [(UIPinchGestureRecognizer*)sender scale]);
-    
-    CGAffineTransform currentTransform = sender.view.transform;
-    newTransform = CGAffineTransformScale(currentTransform, scale, scale);
-    
-    [sender.view setTransform:newTransform];
-    
-    _lastScale = [(UIPinchGestureRecognizer*)sender scale];
-    [self showOverlayWithFrame:sender.view.frame :sender.view];
-    
-    
-    if (sender.state == UIGestureRecognizerStateBegan) {
+    if (recognizer.state == UIGestureRecognizerStateBegan) {
         
+        currentTransform = recognizer.view.transform;
         
-    } else if (sender.state == UIGestureRecognizerStateChanged) {
+    } else if (recognizer.state == UIGestureRecognizerStateChanged) {
         
+        CGFloat scale = [(UIPinchGestureRecognizer*)recognizer scale];
+    
+        // Scale
+        CGAffineTransform tr =
+        CGAffineTransformConcat(
+                                currentTransform,
+                                CGAffineTransformMakeScale ( scale, scale ));
         
+        [recognizer.view setTransform:tr];
         
-    } else if (sender.state == UIGestureRecognizerStateEnded) {
+        //[self showOverlayWithFrame:recognizer.view.frame :recognizer.view];
+        
+    } else if (recognizer.state == UIGestureRecognizerStateEnded) {
      
+        CGAffineTransform newTransForm = recognizer.view.transform;
         // Get all layer keys for this flyer
-        NSArray *keys = [layers allKeysForObject:sender.view];
+        NSArray *keys = [layers allKeysForObject:recognizer.view];
         // Find key for rotated layer
         for ( int i = 0; i < keys.count; i++ ) {
             NSString *key = [keys objectAtIndex:i];
             
             // Save rotation angle for layer
-            [self.delegate layerTransformedforKey:key :&newTransform];
-            [self.delegate frameChangedForLayer:key frame:sender.view.frame];
+            [self.delegate layerTransformedforKey:key :&newTransForm];
+        
         }
+
     }
     
     /*static CGRect initialBounds;
@@ -612,45 +622,40 @@ NSString *abc;
 /**
  * Rotate view on rotate Gesture.
  */
--(void)handleRotateGesture:(UIGestureRecognizer *)sender{
-    
-    NSLog(@"rotate");
-    
-    // Rotated view
-    UIView *_view = sender.view;
-    
-    // Angle of rotation
-    CGFloat rotation = [(UIRotationGestureRecognizer *) sender rotation];
+-(void)handleRotateGesture:(UIRotationGestureRecognizer *)recognizer{
     
     static CGAffineTransform origTr;
     
-    if (sender.state == UIGestureRecognizerStateBegan) {
-        origTr = sender.view.transform;
+    //recognizer.view.layer.anchorPoint = CGPointMake(recognizer.view.center.x, recognizer.view.center.y);
+    
+    if (recognizer.state == UIGestureRecognizerStateBegan) {
+        origTr = recognizer.view.transform;
         
-    } else if (sender.state == UIGestureRecognizerStateChanged) {
+    } else if (recognizer.state == UIGestureRecognizerStateChanged) {
         
-        CGFloat temp = rotation * ((CGFloat)57.2957795);
-        NSLog(@"%f", temp);
+        // Angle of rotation
+        CGFloat rotation = [(UIRotationGestureRecognizer *) recognizer rotation];
+        
         // Scale
         CGAffineTransform tr =
         CGAffineTransformConcat(
                                 origTr,
                                 CGAffineTransformMakeRotation(rotation));
         
-        [sender.view setTransform:tr];
+        [recognizer.view setTransform:tr];
         
-    } else if (sender.state == UIGestureRecognizerStateEnded) {
+    } else if (recognizer.state == UIGestureRecognizerStateEnded) {
         // Rotation has ended we need to save the angle in layer information
         
-        CGAffineTransform newTransForm = sender.view.transform;
+        CGAffineTransform newTransForm = recognizer.view.transform;
         // Get all layer keys for this flyer
-        NSArray *keys = [layers allKeysForObject:_view];
+        NSArray *keys = [layers allKeysForObject:recognizer.view];
         // Find key for rotated layer
         for ( int i = 0; i < keys.count; i++ ) {
             NSString *key = [keys objectAtIndex:i];
             
             // Save rotation angle for layer
-            //[self.delegate layerTransformedforKey:key :&newTransForm];
+            [self.delegate layerTransformedforKey:key :&newTransForm];
             
             //[self.delegate frameChangedForLayer:key frame:_view.frame];
             

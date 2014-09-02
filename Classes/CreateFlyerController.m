@@ -43,7 +43,7 @@
 @synthesize tempDrawImage;
 
 @synthesize selectedFont,selectedColor,selectedTemplate,fontTabButton,colorTabButton,sizeTabButton,fontEditButton,selectedSize,
-fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sharePanel,clipArtTabButton,emoticonsTabButton,artsColorTabButton,artsSizeTabButton, drawingColorTabButton,drawingPatternTabButton, drawingSizeTabButton;
+fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sharePanel,clipArtTabButton,emoticonsTabButton,artsColorTabButton,artsSizeTabButton, drawingColorTabButton,drawingPatternTabButton, drawingSizeTabButton,drawingEraserTabButton;
 @synthesize cameraTabButton,photoTabButton,widthTabButton,heightTabButton,deleteAlert,signInAlert,spaceUnavailableAlert;
 @synthesize imgPickerFlag,layerScrollView,flyerPath;
 @synthesize contextView,libraryContextView,libFlyer,backgroundTabButton,addMoreFontTabButton,drawingMenueButton;
@@ -177,6 +177,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     brush = 5.0;
     brushType = DRAWING_PLANE_LINE;
     opacity = 1.0;
+    self.flyimgView.isDrawingLayerInEditMode = NO;
+    drawingLayerMode  =  DRAWING_LAYER_MODE_EDIT;
     
 	[super viewDidLoad];
     
@@ -467,7 +469,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 NSArray *fontColorsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Colours-iPhone4s" owner:self options:nil];
                 colorsView = [fontColorsViewArray objectAtIndex:0];
                 
-                NSArray *drawingPatternsViewArray = [[NSBundle mainBundle] loadNibNamed:@"DrawingPatterns-iPhone4s" owner:self options:nil];
+                NSArray *drawingPatternsViewArray = [[NSBundle mainBundle] loadNibNamed:@"DrawingPatterns-iPhone4" owner:self options:nil];
                 drawingPatternsView = [drawingPatternsViewArray objectAtIndex:0];
                 
                 
@@ -488,8 +490,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 
 - (void)viewDidUnload
 {
-    [self setMainImage:nil];
-    [self setTempDrawImage:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -2263,7 +2263,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         editButtonGlobal.uid = currentLayer;
         NSString *type = [flyer getLayerType:currentLayer];
         if ( [type isEqualToString:FLYER_LAYER_DRAWING] ){
-            self.mainImage.image = nil;
             self.tempDrawImage.image = nil;
             self.tempDrawImage.userInteractionEnabled = NO; //disable drawing interaction
         }
@@ -2969,14 +2968,18 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
  */
 - (void)editCurrentLayer {
     
-    [self renderFlyer];
+    // Get the type of layer
+    NSString *type = [flyer getLayerType:currentLayer];
+    
+    if( !([type isEqualToString:FLYER_LAYER_DRAWING]) ){
+        [self renderFlyer];
+    }
     
     [self deSelectPreviousLayer];
     
     [self.flyimgView layerIsBeingEdited:currentLayer];
     
-    // Get the type of layer
-    NSString *type = [flyer getLayerType:currentLayer];
+
     
     if ( [type isEqualToString:FLYER_LAYER_TEXT] ) {
         
@@ -3313,8 +3316,13 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
 }
 
-
+//When user pressed done button
 -(void)callAddMoreLayers {
+    
+    NSString *type = [flyer getLayerType:currentLayer];
+    if ( [type isEqualToString:FLYER_LAYER_DRAWING] ){
+        [self saveDrawingLayer];
+    }
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
     label.backgroundColor = [UIColor clearColor];
@@ -3353,10 +3361,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     //Set here Un-Selected State of HIGHT & WIDTH Buttons IF selected
     [widthTabButton setSelected:NO];
     [heightTabButton setSelected:NO];
-    
-    
-    //disable drawing interaction
-    self.tempDrawImage.userInteractionEnabled = NO;
+
     
     //Empty Layer Delete
     [self deSelectPreviousLayer];
@@ -3382,8 +3387,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     [UIView commitAnimations];
     //End Animation
     
-    currentLayer = @"";
-    
+    currentLayer = @"";    
 }
 
 
@@ -4492,49 +4496,27 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         
         NSMutableDictionary *dic;
         
-        //Run for addDrawing layer case
+        // addDrawing layer case
         if ([currentLayer isEqualToString:@""]) {
-            
-            // work for tempDrawImageLayer -----------------------------------------------
-            NSString *tempDrawImageLayer = [flyer addDrawingImage:NO]; //create/add layer with drawing type
-            NSMutableDictionary *dic2 = [flyer getLayerFromMaster:tempDrawImageLayer];
-            
-            [self.flyimgView renderLayer:tempDrawImageLayer layerDictionary:dic2];
-            
-            self.tempDrawImage = [self.flyimgView.layers objectForKey:tempDrawImageLayer];
-            
-            // work for main layer -----------------------------------------------
             currentLayer = [flyer addDrawingImage:YES];
             dic = [flyer getLayerFromMaster:currentLayer];
-
+            self.flyimgView.isDrawingLayerInEditMode    =   NO;
             [self.flyimgView renderLayer:currentLayer layerDictionary:dic];
-            
-            //here we get ImageView
-            self.mainImage = [self.flyimgView.layers objectForKey:currentLayer];
-            
         }
-        // Run for editDrawing layer case
+        // editDrawing layer case
         else{
-            // work for tempDrawImageLayer -----------------------------------------------
-            NSString *tempDrawImageLayer = [flyer addDrawingImage:NO]; //create/add layer with drawing type
-            NSMutableDictionary *dic2 = [flyer getLayerFromMaster:tempDrawImageLayer];
-            
-            [self.flyimgView renderLayer:tempDrawImageLayer layerDictionary:dic2];
-
-            self.tempDrawImage = [self.flyimgView.layers objectForKey:tempDrawImageLayer];
-            
-            // work for main layer -----------------------------------------------
-            //currentLayer = [flyer addDrawingImage:YES];
             dic = [flyer getLayerFromMaster:currentLayer];
-            
-            //here we get layer ImageView
-            self.mainImage = [self.flyimgView.layers objectForKey:currentLayer];
         }
         
-        // Hook event of Gesture for moving layers -----------------------------------------------
+        //here we get ImageView
+        self.tempDrawImage   = [self.flyimgView.layers objectForKey:currentLayer];
+
+        // Hook event of Gesture for moving layers ------------------
         self.tempDrawImage.userInteractionEnabled = YES; // CAN receive touches
+        
         UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(drawingLayerMoved:)];
         [self.tempDrawImage addGestureRecognizer:panGesture];
+        
         //Hook event end-----
         
         //Here we Highlight The ImageView
@@ -4558,9 +4540,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         
         //Add ContextView
         [self addBottomTabs:libDrawing];
-        
-        //Assign dic values(pattern,color,size) to class level variables
-        [self setDrawingTools:dic];
         
         // FORCE CLICK ON FIRST BUTTON OF drawingSubMenuButton, then it will auto select SET BOTTOM BAR
         [self drawingSetStyleTabAction:drawingPatternTabButton];
@@ -5043,9 +5022,10 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     [drawingPatternTabButton setSelected:NO];
     [drawingColorTabButton setSelected:NO];
     [drawingSizeTabButton setSelected:NO];
+    [drawingEraserTabButton setSelected:NO];
     
-   //NSMutableDictionary *dic = [flyer getLayerFromMaster:currentLayer];
     
+    NSMutableDictionary *dic = [flyer getLayerFromMaster:currentLayer];
     
     UIButton *selectedButton = (UIButton*)sender;
 	
@@ -5065,7 +5045,12 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         //Add ContextView
         [self addScrollView:layerScrollView];
         
+        //Assign dic values(pattern,color,size) to class level variables
+        [self setDrawingTools:dic callFrom:DRAWING_LAYER_MODE_EDIT];
+        
+        //SHOW button selected
 		[drawingPatternTabButton setSelected:YES];
+
 	}
 	else if(selectedButton == drawingColorTabButton)
 	{
@@ -5082,6 +5067,11 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         
         //Add ContextView
         [self addScrollView:layerScrollView];
+        
+        //Assign dic values(pattern,color,size) to class level variables
+        [self setDrawingTools:dic callFrom:DRAWING_LAYER_MODE_EDIT];
+        
+        //SHOW button selected
         [drawingColorTabButton setSelected:YES];
         
 	}
@@ -5100,14 +5090,30 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         
         //Add ContextView
         [self addScrollView:layerScrollView];
+
+        //Assign dic values(pattern,color,size) to class level variables
+        [self setDrawingTools:dic callFrom:DRAWING_LAYER_MODE_EDIT];
         
+        //SHOW button selected
 		[drawingSizeTabButton setSelected:YES];
+
 	}
+    else if(selectedButton == drawingEraserTabButton)
+	{
+        //Assign dic values(pattern,color,size) to class level variables
+        [self setDrawingTools:dic callFrom:DRAWING_LAYER_MODE_ERASER];
+        
+        //SHOW button selected
+		[drawingEraserTabButton setSelected:YES];
+	}
+    
 }
 
 //Assign dic values(pattern,color,size) to class level variables
-- (void)setDrawingTools:(NSMutableDictionary *)dic
+- (void)setDrawingTools:(NSMutableDictionary *)dic callFrom:(NSString *)callFrom
 {
+    drawingLayerMode = callFrom;
+    
     //Get color(r,g,b) from dic, then assign them to class level red,green,blue
     NSArray *colorAry = [dic[@"textcolor"] componentsSeparatedByString: @", "];
     red   = (CGFloat)[colorAry[0] floatValue];
@@ -5166,91 +5172,72 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
  */
 - (void)drawingLayerMoved:(UIPanGestureRecognizer *)recognizer {
     
-    if (recognizer.state == UIGestureRecognizerStateBegan) {
-        mouseSwiped = NO;
-        lastPoint = [recognizer locationInView:self.mainImage];
-        
-    } else if (recognizer.state == UIGestureRecognizerStateChanged) {
-        
-        //MOVE
-        mouseSwiped = YES;
-        CGPoint currentPoint = [recognizer locationInView:self.mainImage];
-        
-        UIGraphicsBeginImageContext(self.mainImage.frame.size);
-        [self.tempDrawImage.image drawInRect:CGRectMake(0, 0, self.mainImage.frame.size.width, self.mainImage.frame.size.height)];
-        
-        if( [brushType  isEqual: DRAWING_DASHED_LINE] || [brushType  isEqual: DRAWING_DOTTED_LINE] ) {
+    if( [drawingLayerMode isEqualToString:DRAWING_LAYER_MODE_EDIT] ){
+        if (recognizer.state == UIGestureRecognizerStateBegan) {
+            mouseSwiped = NO;
+            lastPoint = [recognizer locationInView:self.tempDrawImage];
             
-            CGFloat dash[] = {2,brush*3,brush*2,brush};
-            if( [brushType  isEqual: DRAWING_DOTTED_LINE] ) {
+        }
+        else if (recognizer.state == UIGestureRecognizerStateChanged) {
+            
+            //MOVE
+            mouseSwiped = YES;
+            CGPoint currentPoint = [recognizer locationInView:self.tempDrawImage];
+            
+            UIGraphicsBeginImageContext(self.tempDrawImage.frame.size);
+            [self.tempDrawImage.image drawInRect:CGRectMake(0, 0, self.tempDrawImage.frame.size.width, self.tempDrawImage.frame.size.height)];
+            
+            if( [brushType  isEqual: DRAWING_DASHED_LINE] || [brushType  isEqual: DRAWING_DOTTED_LINE] ) {
+                
+                CGFloat dash[] = {2,brush*3,brush*2,brush};
+                if( [brushType  isEqual: DRAWING_DOTTED_LINE] ) {
+                    CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound);
+                }
+                else if( [brushType  isEqual: DRAWING_DASHED_LINE] ) {
+                    CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapSquare);
+                }
+                CGContextSetLineWidth(UIGraphicsGetCurrentContext(), brush);
+                
+                // brush color
+                CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), red, green, blue, 1.0);
+                
+                CGContextSetLineDash(UIGraphicsGetCurrentContext(), 1, dash, 4);
+                
+                CGContextMoveToPoint(UIGraphicsGetCurrentContext(), lastPoint.x, lastPoint.y);
+                CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), currentPoint.x, currentPoint.y);
+                CGContextStrokePath(UIGraphicsGetCurrentContext());
+                CGContextClosePath(UIGraphicsGetCurrentContext());
+            }
+            else if( [brushType  isEqual: DRAWING_PLANE_LINE]  ) {
+                // brush width / size
+                CGContextSetLineWidth(UIGraphicsGetCurrentContext(), brush );
+                
+                // brush color
+                CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), red, green, blue, 1.0);
+                
+                CGContextMoveToPoint(UIGraphicsGetCurrentContext(), lastPoint.x, lastPoint.y);
+                CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), currentPoint.x, currentPoint.y);
                 CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound);
             }
-            else if( [brushType  isEqual: DRAWING_DASHED_LINE] ) {
-                CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapSquare);
-            }
-            CGContextSetLineWidth(UIGraphicsGetCurrentContext(), brush);
             
-            // brush color
-            CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), red, green, blue, 1.0);
             
-            CGContextSetLineDash(UIGraphicsGetCurrentContext(), 1, dash, 4);
             
-            CGContextMoveToPoint(UIGraphicsGetCurrentContext(), lastPoint.x, lastPoint.y);
-            CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), currentPoint.x, currentPoint.y);
+            
+            CGContextSetBlendMode(UIGraphicsGetCurrentContext(),kCGBlendModeNormal);
             CGContextStrokePath(UIGraphicsGetCurrentContext());
-            CGContextClosePath(UIGraphicsGetCurrentContext());
-        }
-        else if( [brushType  isEqual: DRAWING_PLANE_LINE]  ) {
-            // brush width / size
-            CGContextSetLineWidth(UIGraphicsGetCurrentContext(), brush );
+            self.tempDrawImage.image = UIGraphicsGetImageFromCurrentImageContext();
+            [self.tempDrawImage setAlpha:opacity];
+            UIGraphicsEndImageContext();
             
-            // brush color
-            CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), red, green, blue, 1.0);
+            lastPoint = currentPoint;
             
-            CGContextMoveToPoint(UIGraphicsGetCurrentContext(), lastPoint.x, lastPoint.y);
-            CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), currentPoint.x, currentPoint.y);
-            CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound);
         }
-        
-        
-        
-        
-        CGContextSetBlendMode(UIGraphicsGetCurrentContext(),kCGBlendModeNormal);
-        CGContextStrokePath(UIGraphicsGetCurrentContext());
-        self.tempDrawImage.image = UIGraphicsGetImageFromCurrentImageContext();
-        [self.tempDrawImage setAlpha:opacity];
-        UIGraphicsEndImageContext();
-        
-        lastPoint = currentPoint;
-        
-    } else if (recognizer.state == UIGestureRecognizerStateEnded) {
-        //ENDED
-        UIGraphicsBeginImageContext(self.mainImage.frame.size);
-        [self.mainImage.image drawInRect:CGRectMake(0, 0, self.mainImage.frame.size.width, self.mainImage.frame.size.height) blendMode:kCGBlendModeNormal alpha:1.0];
-        [self.tempDrawImage.image drawInRect:CGRectMake(0, 0, self.tempDrawImage.frame.size.width, self.tempDrawImage.frame.size.height) blendMode:kCGBlendModeNormal alpha:opacity];
-        
-        self.mainImage.image = UIGraphicsGetImageFromCurrentImageContext();
-        self.tempDrawImage.image = nil;
-        UIGraphicsEndImageContext();
-        
-        // Save drawing layer and flyer
-        
-        NSString *imgPath = [self getImagePathforPhoto:self.mainImage.image];
-        
-        //Set Image to dictionary
-        [self.flyer setImagePath:self.currentLayer ImgPath:imgPath];
-        
-        //Here we Create ImageView Layer
-        [self.flyimgView renderLayer:self.currentLayer layerDictionary:[self.flyer getLayerFromMaster:self.currentLayer]];
-        
-        //[self.flyimgView layerStoppedEditing:self.currentLayer];
-        
-        
-        // End of save flyer and drawing layer
-        
+        else if (recognizer.state == UIGestureRecognizerStateEnded) {
+        }
+    }
+    else if( [drawingLayerMode isEqualToString:DRAWING_LAYER_MODE_ERASER] ){
         
     }
-    
 }
 
 
@@ -5278,5 +5265,21 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         }
     }
     
+}
+
+-(void) saveDrawingLayer {
+    // End of save flyer and drawing layer
+    [self.flyimgView.layers setObject:self.tempDrawImage forKey:currentLayer];
+    
+    // Save drawing layer and flyer
+    NSString *imgPath = [self getImagePathforPhoto:self.tempDrawImage.image];
+    
+    //Set Image to dictionary
+    [self.flyer setImagePath:self.currentLayer ImgPath:imgPath];
+    
+    //disable drawing interaction
+    self.tempDrawImage.userInteractionEnabled = NO;
+    self.tempDrawImage  = nil;
+
 }
 @end

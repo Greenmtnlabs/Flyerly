@@ -91,6 +91,7 @@
     NSString *brushType;
     CGFloat opacity;
     BOOL mouseSwiped;
+    NSString *drawingLayerMode;
     
     
 }
@@ -172,6 +173,7 @@
 @property (nonatomic, strong)IBOutlet UIButton *drawingColorTabButton;
 @property (nonatomic, strong)IBOutlet UIButton *drawingPatternTabButton;
 @property (nonatomic, strong)IBOutlet UIButton *drawingSizeTabButton;
+@property (nonatomic, strong)IBOutlet UIButton *drawingEraserTabButton;
 
 //These are Art Tab Buttons
 @property (nonatomic, strong)IBOutlet UIButton *clipArtTabButton;

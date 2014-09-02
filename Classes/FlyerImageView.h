@@ -47,6 +47,7 @@
 
 @property (strong, readonly) NSMutableDictionary *layers;
 @property (strong, nonatomic)UITapGestureRecognizer *flyerTapGesture;
+@property BOOL *isDrawingLayerInEditMode;
 
 @property (weak, nonatomic) id<FlyerImageViewDelegate> IBOutlet delegate;
 

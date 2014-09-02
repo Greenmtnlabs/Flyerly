@@ -25,6 +25,7 @@
                 <outlet property="colorTabButton" destination="RCh-PH-bvk" id="kzT-0A-OKE"/>
                 <outlet property="contextView" destination="rbq-e2-wbO" id="BDJ-TX-Ld1"/>
                 <outlet property="drawingColorTabButton" destination="TK4-Zc-FSy" id="1ro-Y8-avg"/>
+                <outlet property="drawingEraserTabButton" destination="Xly-Pv-JvX" id="5LE-og-uvW"/>
                 <outlet property="drawingMenueButton" destination="jfO-Kb-CHA" id="kQT-Lg-PVQ"/>
                 <outlet property="drawingPatternTabButton" destination="wAe-vw-k4U" id="9gj-2j-Rhz"/>
                 <outlet property="drawingSizeTabButton" destination="eQC-yK-NOb" id="cRh-iJ-62T"/>
