@@ -5249,7 +5249,11 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 
 
 #pragma mark - Move start on type=FLYER_LAYER_DRAWING (FLYER_LAYER_DRAWING=DrawingImgLayer)
-
+-(CGFloat) distanceBtwPoints:(CGPoint)p1 p2:(CGPoint)p2{
+    CGFloat xDist = (p2.x - p1.x);
+    CGFloat yDist = (p2.y - p1.y);
+    return sqrt((xDist * xDist) + (yDist * yDist));
+}
 /**
  * When user starts drawing
  */
@@ -5269,51 +5273,74 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         
         dw_mouseSwiped = YES;
         CGPoint currentPoint = [recognizer locationInView:self.tempDrawImage];
-        CGContextRef dw_context = UIGraphicsGetCurrentContext();
+        BOOL dw_addThisPointInLine  =   YES;
         
-        if( [dw_brushType  isEqual: DRAWING_DOTTED_LINE] ) {
-            CGContextSetLineCap(dw_context, kCGLineCapRound);
-        }
-        else if( [dw_brushType  isEqual: DRAWING_DASHED_LINE] ) {
-            CGContextSetLineCap(dw_context, kCGLineCapSquare);
-        }
-        else if( [dw_brushType  isEqual: DRAWING_PLANE_LINE]  ) {
-            CGContextSetLineCap(dw_context, kCGLineCapRound);
-        }
         
-        // ADD FEW SPACES B/W DOTS OF LINE
-        if( [dw_brushType  isEqual: DRAWING_DASHED_LINE] || [dw_brushType  isEqual: DRAWING_DOTTED_LINE] ) {
-            CGFloat dw_dash[] = {2,dw_brush*3,dw_brush*2,dw_brush};
-            CGContextSetLineDash(dw_context, 1, dw_dash, 4);
-        }
-        
-        //BRUSH WIDTH ( we have devided it on 3 )
-        CGContextSetLineWidth(dw_context, (dw_brush/3));
-        
-        if( [dw_drawingLayerMode isEqualToString:DRAWING_LAYER_MODE_ERASER] ){
-            //BRUSH CLEAR COLOR
-            CGContextSetFillColorWithColor( dw_context, [UIColor clearColor].CGColor );
-            //CLEAR DRAWING
-            CGContextSetBlendMode(dw_context, kCGBlendModeClear);
-        } else{
-            // BRUSH RGB COLOR
-            CGContextSetRGBStrokeColor(dw_context, dw_red, dw_green, dw_blue, dw_opacity);
-            //NORMAL DRAWING
-            CGContextSetBlendMode(dw_context,kCGBlendModeNormal);
+        if( ([dw_brushType  isEqual: DRAWING_DASHED_LINE] || [dw_brushType  isEqual: DRAWING_DOTTED_LINE]) && !([dw_drawingLayerMode isEqualToString:DRAWING_LAYER_MODE_ERASER]) ) {
+            
+            CGFloat dw_points_distance  = 0.0;
+            dw_points_distance = [self distanceBtwPoints:currentPoint p2:dw_lastPoint];
+            
+            if( dw_points_distance < dw_brush)
+            dw_addThisPointInLine  =   NO;
+            
+            if( !(dw_addThisPointInLine) ) {
+                if( dw_points_distance > 30 && dw_brush < 50)
+                dw_addThisPointInLine  =   YES;
+                else if( dw_points_distance > 40 && dw_brush < 80)
+                dw_addThisPointInLine  =   YES;
+                else if( dw_points_distance > 50 && dw_brush < 100)
+                dw_addThisPointInLine  =   YES;
+            }
         }
         
-        CGContextMoveToPoint(dw_context, dw_lastPoint.x, dw_lastPoint.y);
-        CGContextAddLineToPoint(dw_context, currentPoint.x, currentPoint.y);
-        CGContextStrokePath(dw_context);
+        if( dw_addThisPointInLine ) {
+            CGContextRef dw_context = UIGraphicsGetCurrentContext();
+            
+            if( [dw_brushType  isEqual: DRAWING_DOTTED_LINE] ) {
+                CGContextSetLineCap(dw_context, kCGLineCapRound);
+            }
+            else if( [dw_brushType  isEqual: DRAWING_DASHED_LINE] ) {
+                CGContextSetLineCap(dw_context, kCGLineCapSquare);
+            }
+            else if( [dw_brushType  isEqual: DRAWING_PLANE_LINE]  ) {
+                CGContextSetLineCap(dw_context, kCGLineCapRound);
+            }
+            
+            // ADD FEW SPACES B/W DOTS OF LINE
+            if( [dw_brushType  isEqual: DRAWING_DASHED_LINE] || [dw_brushType  isEqual: DRAWING_DOTTED_LINE] ) {
+                CGFloat dw_dash[] = {2,dw_brush*2,dw_brush,dw_brush/2};
+                CGContextSetLineDash(dw_context, 0, dw_dash, 4);
+            }
+            
+            //BRUSH WIDTH ( we have devided it on 3 )
+            CGContextSetLineWidth(dw_context, (dw_brush/3));
+            
+            if( [dw_drawingLayerMode isEqualToString:DRAWING_LAYER_MODE_ERASER] ){
+                //BRUSH CLEAR COLOR
+                CGContextSetFillColorWithColor( dw_context, [UIColor clearColor].CGColor );
+                //CLEAR DRAWING
+                CGContextSetBlendMode(dw_context, kCGBlendModeClear);
+            } else{
+                // BRUSH RGB COLOR
+                CGContextSetRGBStrokeColor(dw_context, dw_red, dw_green, dw_blue, dw_opacity);
+                //NORMAL DRAWING
+                CGContextSetBlendMode(dw_context,kCGBlendModeNormal);
+            }
+            
+            CGContextMoveToPoint(dw_context, dw_lastPoint.x, dw_lastPoint.y);
+            CGContextAddLineToPoint(dw_context, currentPoint.x, currentPoint.y);
+            CGContextStrokePath(dw_context);
 
-        //SAVE CURRENT MOVE INFO IN TEMP IMG
-        self.tempDrawImage.image = UIGraphicsGetImageFromCurrentImageContext();
-        
-        //when it is not an empty drawing layer so save drawing layer
-        dw_layer_save   =   YES;
-        
-        //SAVE CURRENT MOVE POINT AS dw_lastPoint
-        dw_lastPoint = currentPoint;
+            //SAVE CURRENT MOVE INFO IN TEMP IMG
+            self.tempDrawImage.image = UIGraphicsGetImageFromCurrentImageContext();
+            
+            //when it is not an empty drawing layer so save drawing layer
+            dw_layer_save   =   YES;
+            
+            //SAVE CURRENT MOVE POINT AS dw_lastPoint
+            dw_lastPoint = currentPoint;
+        }
         
     }
     //MOVE END
