@@ -116,10 +116,10 @@ NSString *abc;
             //NSString *type = [flyer getLayerType:currentLayer];
             //if( [type isEqualToString:FLYER_LAYER_CLIP_ART] ){
 
-            lble.textAlignment = UITextAlignmentCenter;//    UITextAlignmentCenter;
+            lble.textAlignment = NSTextAlignmentCenter;//    UITextAlignmentCenter;
             //}
             lble.adjustsFontSizeToFitWidth = YES;
-            lble.lineBreakMode = UILineBreakModeClip;
+            lble.lineBreakMode = NSLineBreakByWordWrapping;
             lble.numberOfLines = 80;
             [self configureLabel:lble labelDictionary:layDic ];
             [self addSubview:lble];
@@ -306,7 +306,7 @@ NSString *abc;
     
     // Make sure we are vertically aligned to the top and centerally aligned.
     if( [[detail valueForKey:@"type"] isEqualToString:FLYER_LAYER_CLIP_ART] ){
-        lbl.textAlignment = UITextAlignmentCenter;
+        lbl.textAlignment = NSTextAlignmentCenter;
         [lbl setNumberOfLines:0];
         [lbl sizeToFit];
         
@@ -315,7 +315,7 @@ NSString *abc;
         lbl.frame = fr;
         
     } else{
-       lbl.textAlignment = UITextAlignmentCenter;//UITextAlignmentLeft;//
+       lbl.textAlignment = NSTextAlignmentCenter;//UITextAlignmentLeft;//
        [lbl setNumberOfLines:0];
        [lbl sizeToFit];
        

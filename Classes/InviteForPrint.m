@@ -65,7 +65,7 @@ LobRequest *request;
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-28, -6, 50, 50)];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:TITLE_FONT size:18];
-    label.textAlignment = UITextAlignmentCenter;
+    label.textAlignment = NSTextAlignmentCenter;
     label.textColor = [UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0];
     label.text = @"INVITE";
     self.navigationItem.titleView = label;
@@ -219,11 +219,11 @@ LobRequest *request;
     } else {
         
         contactsArray = [[NSMutableArray alloc] init];
-        ABAddressBookRef m_addressbook = ABAddressBookCreate();
+        ABAddressBookRef m_addressbook = ABAddressBookCreateWithOptions(NULL, NULL);
         searchTextField.text = @"";
         
         if (m_addressbook == NULL) {
-            m_addressbook = ABAddressBookCreate();
+            m_addressbook = ABAddressBookCreateWithOptions(NULL, NULL);
         }
         
         if (m_addressbook) {
@@ -962,7 +962,7 @@ LobRequest *request;
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
     
-    [self.navigationController.visibleViewController dismissModalViewControllerAnimated:YES];
+    [self.navigationController.visibleViewController dismissViewControllerAnimated:NO completion:nil];
     NSString* message = nil;
     switch(result)
     {

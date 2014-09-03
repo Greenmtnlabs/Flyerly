@@ -32,7 +32,7 @@
     [self.description setBackgroundColor:[UIColor clearColor]];
     [self.description setTextColor:[UIColor darkGrayColor]];
 	[self.description setFont:[UIFont fontWithName:@"AvenirNext-Bold" size:14]];
-	[self.description setTextAlignment:UITextAlignmentLeft];
+	[self.description setTextAlignment:NSTextAlignmentCenter];
     [self.contentView addSubview:self.description];
     
     return self;
