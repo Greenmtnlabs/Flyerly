@@ -285,7 +285,7 @@ BOOL adLoaded = false;
         [inappviewcontroller setModalPresentationStyle:UIModalPresentationFullScreen];
         
     }
-    [self presentModalViewController:inappviewcontroller animated:YES];
+    [self presentViewController:inappviewcontroller animated:YES completion:nil];
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:NO];
     
     [inappviewcontroller requestProduct];

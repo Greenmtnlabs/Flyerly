@@ -210,7 +210,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
     titleLabel.backgroundColor = [UIColor clearColor];
     titleLabel.font = [UIFont fontWithName:TITLE_FONT size:18];
-    titleLabel.textAlignment = UITextAlignmentCenter;
+    titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.textColor = [UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0];
     
     self.navigationItem.titleView = titleLabel;
@@ -1248,9 +1248,9 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 CustomLabel *lbl = lay;
                 CustomLabel *scrollLabel = [[CustomLabel alloc] initWithFrame:lbl.frame];
                 scrollLabel.backgroundColor = [UIColor clearColor];
-                scrollLabel.textAlignment = UITextAlignmentCenter;
+                scrollLabel.textAlignment = NSTextAlignmentCenter;
                 scrollLabel.adjustsFontSizeToFitWidth = YES;
-                scrollLabel.lineBreakMode = UILineBreakModeTailTruncation;
+                scrollLabel.lineBreakMode = NSLineBreakByTruncatingTail;
                 scrollLabel.numberOfLines = 80;
                 scrollLabel.lineWidth = 2;
                 scrollLabel.text = lbl.text;
@@ -2350,7 +2350,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:TITLE_FONT size:18];
-    label.textAlignment = UITextAlignmentCenter;
+    label.textAlignment = NSTextAlignmentCenter;
     label.textColor = [UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0];;
     label.text = @"TEXT";
     self.navigationItem.titleView = label;
@@ -2400,7 +2400,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         
     }
     
-    lastTextView.textAlignment = UITextAlignmentCenter;
+    lastTextView.textAlignment = NSTextAlignmentCenter;
 	lastTextView.backgroundColor = [UIColor colorWithWhite:1 alpha:0.3f];
     
 	CALayer * l = [lastTextView layer];
@@ -2559,7 +2559,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-45, -6, 50, 50)];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:TITLE_FONT size:18];
-    label.textAlignment = UITextAlignmentCenter;
+    label.textAlignment = NSTextAlignmentCenter;
     label.textColor = [UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0];;
     label.text = @"PHOTO";
     self.navigationItem.titleView = label;
@@ -3333,7 +3333,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:TITLE_FONT size:18];
-    label.textAlignment = UITextAlignmentCenter;
+    label.textAlignment = NSTextAlignmentCenter;
     label.textColor = [UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0];
     
     NSString *title = [flyer getFlyerTitle];
@@ -3486,7 +3486,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     }else {
         inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController-iPhone4" bundle:nil];
     }
-    [self presentModalViewController:inappviewcontroller animated:YES];
+    [self presentViewController:inappviewcontroller animated:YES completion:nil];
     [inappviewcontroller requestProduct];
     inappviewcontroller.buttondelegate = self;
     
@@ -4829,7 +4829,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     }else {
         
         if ( [sharePanel isHidden] ) {
-            [self presentModalViewController:inappviewcontroller animated:YES];
+            [self presentViewController:inappviewcontroller animated:YES completion:nil];
         }
         
         
@@ -4894,7 +4894,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                                              selector:@selector(didDismissPrintViewController)
                                                  name:@"PrintViewControllerDismissed"
                                                object:nil];
-    //[self presentModalViewController:printViewController animated:NO];
     [self presentViewController:printViewController animated:NO completion:nil];
 }
 

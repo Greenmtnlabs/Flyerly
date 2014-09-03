@@ -33,7 +33,7 @@
     
     self.navigationItem.hidesBackButton = YES;
     searchTextField.font = [UIFont systemFontOfSize:12.0];
-    //searchTextField.textAlignment = UITextAlignmentLeft;
+    searchTextField.textAlignment = NSTextAlignmentCenter;
     searchTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     [searchTextField setBorderStyle:UITextBorderStyleRoundedRect];
     [searchTextField setReturnKeyType:UIReturnKeyDone];
@@ -234,7 +234,7 @@
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:TITLE_FONT size:18];
-    label.textAlignment = UITextAlignmentCenter;
+    label.textAlignment = NSTextAlignmentCenter;
     label.textColor = [UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0];
     label.text = @"SAVED";
     self.navigationItem.titleView = label;
@@ -416,7 +416,7 @@
     }else {
         inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController-iPhone4" bundle:nil];
     }
-    //[self presentModalViewController:inappviewcontroller animated:YES];
+    
     [self presentViewController:inappviewcontroller animated:NO completion:nil];
     
     [inappviewcontroller requestProduct];
@@ -468,7 +468,6 @@
         [inappviewcontroller.paidFeaturesTview reloadData];
     }else {
             
-            //[self presentModalViewController:inappviewcontroller animated:YES];
         [self presentViewController:inappviewcontroller animated:NO completion:nil];
     }
 

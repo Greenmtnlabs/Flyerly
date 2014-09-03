@@ -42,7 +42,7 @@
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:TITLE_FONT size:18];
-    label.textAlignment = UITextAlignmentCenter;
+    label.textAlignment = NSTextAlignmentCenter;
     label.textColor = [UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0];
     label.text = @"HELP CENTER";
     self.navigationItem.titleView = label;
@@ -134,7 +134,7 @@
         [toRecipients addObject:@"info@greenmtnlabs.com"];
         [picker setToRecipients:toRecipients];
 
-        [self presentModalViewController:picker animated:YES];
+        [self presentViewController:picker animated:YES completion:nil];
     }
 }
 
@@ -150,7 +150,7 @@
 			break;
 	}
     
-    [controller dismissModalViewControllerAnimated:YES];
+    [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(IBAction)goBack{

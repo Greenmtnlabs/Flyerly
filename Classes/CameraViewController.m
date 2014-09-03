@@ -118,7 +118,7 @@
     }else {
         inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController-iPhone4" bundle:nil];
     }
-    [self presentModalViewController:inappviewcontroller animated:YES];
+    [self presentViewController:inappviewcontroller animated:YES completion:nil];
     
     [inappviewcontroller requestProduct];
     inappviewcontroller.buttondelegate = self;
@@ -411,7 +411,7 @@
         [inappviewcontroller.paidFeaturesTview reloadData];
     }else {
         
-        [self presentModalViewController:inappviewcontroller animated:YES];
+        [self presentViewController:inappviewcontroller animated:YES completion:nil];
     }
     
 }
@@ -425,7 +425,7 @@
         
         UIImage *buttonImage = [UIImage imageNamed:@"ModeVideo.png"];
         [_mode setImage:buttonImage forState:UIControlStateNormal];
-        [self dismissModalViewControllerAnimated:NO];
+        [self dismissViewControllerAnimated:NO completion:nil];
     }
     
 }

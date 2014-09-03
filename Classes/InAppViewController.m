@@ -49,7 +49,7 @@
     //Checking if the user is valid or anonymus
     if ([[PFUser currentUser] sessionToken].length != 0) {
         [loginButton setTitle:(@"Restore Purchases")];
-        loginButton.titleLabel.textAlignment = UITextAlignmentCenter;
+        loginButton.titleLabel.textAlignment = NSTextAlignmentCenter;
     }else {
         [loginButton setTitle:(@"Sign In")];
     }
@@ -236,7 +236,7 @@
         
         if([[product objectForKey:@"productidentifier"] isEqualToString:@"com.flyerly.AllDesignBundle"]) {
             [completeDesignBundleButton setTitle:@"Help us grow Flyerly!"];
-            [completeDesignBundleButton.titleLabel setTextAlignment:UITextAlignmentCenter];
+            [completeDesignBundleButton.titleLabel setTextAlignment:NSTextAlignmentCenter];
         }
         
         //Setting the packagename,packageprice,packagedesciption values for cell view

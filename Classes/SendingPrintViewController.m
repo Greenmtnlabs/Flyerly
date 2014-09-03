@@ -32,15 +32,6 @@
 
 @synthesize messageFeild,streetAddress,state,city,country,flyerImage,flyer;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -54,7 +45,7 @@
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-28, -6, 50, 50)];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:TITLE_FONT size:18];
-    label.textAlignment = UITextAlignmentCenter;
+    label.textAlignment = NSTextAlignmentCenter;
     label.textColor = [UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0];
     label.text = @"SEND FLYERS";
     self.navigationItem.titleView = label;
@@ -89,8 +80,6 @@
 
 - (void)sendFlyer{
     
-    NSLog(@"Sending Flye");
-    
     if ( [MFMailComposeViewController canSendMail] ) {
         
         // Prepare the email in a background thread.
@@ -111,7 +100,7 @@
             // We are done. Now bring up the email in main thread.
             dispatch_async(dispatch_get_main_queue(), ^{
                 
-                [self.navigationController.visibleViewController presentModalViewController:mailer animated:YES];
+                [self.navigationController.visibleViewController presentViewController:mailer animated:YES completion:nil];
             });
         });
     }
@@ -123,7 +112,7 @@
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
     
-    [self.navigationController.visibleViewController dismissModalViewControllerAnimated:YES];
+    [self.navigationController.visibleViewController dismissViewControllerAnimated:YES completion:nil];
     NSString* message = nil;
     switch(result)
     {

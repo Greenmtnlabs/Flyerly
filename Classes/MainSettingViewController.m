@@ -68,7 +68,7 @@
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-35, -6, 50, 50)];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:TITLE_FONT size:18];
-    label.textAlignment = UITextAlignmentCenter;
+    label.textAlignment = NSTextAlignmentCenter;
     label.textColor = [UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0];
     label.text = @"SETTINGS";
     
@@ -203,7 +203,7 @@
         }else {
             inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController-iPhone4" bundle:nil];
         }
-        [self presentModalViewController:inappviewcontroller animated:YES];
+        [self presentViewController:inappviewcontroller animated:YES completion:nil];
         
         [inappviewcontroller requestProduct];
         inappviewcontroller.buttondelegate = self;
@@ -391,7 +391,7 @@
     
     globle.inputValue = @"twitter";
     InputViewController  *inputcontroller = [[InputViewController alloc]initWithNibName:@"InputViewController" bundle:nil];
-    [self.navigationController presentModalViewController:inputcontroller animated:YES];
+    [self.navigationController presentViewController:inputcontroller animated:YES completion:nil];
     
 }
 
@@ -410,7 +410,7 @@
         [toRecipients addObject:@"support@greenmtnlabs.com"];
         [picker setToRecipients:toRecipients];
 
-        [self presentModalViewController:picker animated:YES];
+        [self presentViewController:picker animated:YES completion:nil];
     }
 
 }
@@ -427,7 +427,7 @@
 			break;
 	}
     
-    [controller dismissModalViewControllerAnimated:YES];
+    [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(void)goBack{
@@ -546,7 +546,7 @@
         [inappviewcontroller.paidFeaturesTview reloadData];
     }else {
         
-        [self presentModalViewController:inappviewcontroller animated:YES];
+        [self presentViewController:inappviewcontroller animated:YES completion:nil];
     }
     
 }
