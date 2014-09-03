@@ -142,6 +142,12 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
 }
 
+//When we failed to recieve due to not availibility of network or any other reason
+- (void)adView:(GADBannerView *)view didFailToReceiveAdWithError:(GADRequestError *)error {
+    
+    [self.bannerAddView removeFromSuperview];
+
+}
 
 // We've received an Banner ad successfully.
 - (void)adViewDidReceiveAd:(GADBannerView *)adView {
