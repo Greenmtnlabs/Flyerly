@@ -90,10 +90,13 @@
     CGFloat dw_brush;
     NSString *dw_brushType;
     CGFloat dw_opacity;
-    BOOL dw_mouseSwiped;
     NSString *dw_drawingLayerMode;
+    BOOL dw_mouseSwiped;
     
-    
+    //HANDLER FOR IF WE ADD NEW D/W LAYER AND DIDN'T PERFORM ANY THING AND PRESSED (DONE,BACK) SO delete THAT LAYER
+    //IF THAT IS OLD LAYER SO KEEP LAYER BUT DO NOT DELETE LAYER
+    BOOL dw_layer_save;
+    BOOL dw_isOldLayer;
 }
 
 @property(nonatomic, strong) GADInterstitial *interstitialAdd;
@@ -112,6 +115,7 @@
 @property (nonatomic, strong) ResourcesView *sizesView;
 @property (nonatomic, strong) ResourcesView *textBordersView;
 @property (nonatomic, strong) ResourcesView *drawingPatternsView;
+@property (nonatomic, strong) ResourcesView *drawingEraserMsgView;
 //-----
 
 @property (nonatomic,strong)  IBOutlet UILabel *takeOrAddPhotoLabel;
@@ -174,6 +178,10 @@
 @property (nonatomic, strong)IBOutlet UIButton *drawingPatternTabButton;
 @property (nonatomic, strong)IBOutlet UIButton *drawingSizeTabButton;
 @property (nonatomic, strong)IBOutlet UIButton *drawingEraserTabButton;
+
+//Lables in xib for eraser(drawing sub tab) 
+@property (nonatomic, strong)IBOutlet UITextView *drawingEraserMsg;
+
 
 //These are Art Tab Buttons
 @property (nonatomic, strong)IBOutlet UIButton *clipArtTabButton;
