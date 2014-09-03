@@ -184,6 +184,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     dw_opacity = 1.0;
     self.flyimgView.addUiImgForDrawingLayer = YES; //must set:NO after renderLayers
     dw_drawingLayerMode  =  DRAWING_LAYER_MODE_NORMAL;
+    dw_layer_save   = NO;
+    dw_isOldLayer   = NO;
     
 	[super viewDidLoad];
     
@@ -548,11 +550,22 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     // Delete empty layer if it exists.
     if ( currentLayer != nil && ![currentLayer isEqualToString:@""] ) {
+        BOOL deleteThisLayer    =   NO;
         
-        NSString *flyerImg = [flyer getImageName:currentLayer];
-        NSString *flyertext = [flyer getText:currentLayer];
+        NSMutableDictionary *layerDic = [flyer getLayerFromMaster:currentLayer];
+        NSString *type = [layerDic objectForKey:@"type"];
+        NSString *flyerImg = [layerDic objectForKey:@"image"];//[flyer getImageName:currentLayer];
+        NSString *flyertext = [layerDic objectForKey:@"text"];//[flyer getText:currentLayer];
         
-        if ( [flyerImg isEqualToString:@""] || [flyertext isEqualToString:@""] ) {
+        //IF NEW DRAWING LAYER
+        if ( [type isEqualToString:FLYER_LAYER_DRAWING] && !(dw_isOldLayer) ){
+            deleteThisLayer =   YES;
+        }
+        
+        deleteThisLayer = ( deleteThisLayer || [flyerImg isEqualToString:@""] ) ?  YES : NO;
+        deleteThisLayer = ( deleteThisLayer || [flyertext isEqualToString:@""]) ?  YES : NO;
+        
+        if ( deleteThisLayer ) {
             [flyer deleteLayer:currentLayer];
             [self.flyimgView deleteLayer:currentLayer];
         }
@@ -2278,8 +2291,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         editButtonGlobal.uid = currentLayer;
         NSString *type = [flyer getLayerType:currentLayer];
         if ( [type isEqualToString:FLYER_LAYER_DRAWING] ){
-            self.tempDrawImage.image = nil;
-            self.tempDrawImage.userInteractionEnabled = NO; //disable drawing interaction
+            [self flushTempDrawImg:@"alertView"];
         }
         
         [self deleteLayer:editButtonGlobal overrided:nil];
@@ -4514,10 +4526,14 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             self.flyimgView.addUiImgForDrawingLayer    =   YES;
             [self.flyimgView renderLayer:currentLayer layerDictionary:dic];
             self.flyimgView.addUiImgForDrawingLayer    =   NO;//AFTER renderLayer set this flag is: YES
+            dw_layer_save   =   NO;
+            dw_isOldLayer   =   NO;
         }
         // editDrawing layer case
         else{
             dic = [flyer getLayerFromMaster:currentLayer];
+            dw_layer_save   =   YES;
+            dw_isOldLayer   =   YES;
         }
         
         //here we get ImageView
@@ -5292,7 +5308,10 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 
         //SAVE CURRENT MOVE INFO IN TEMP IMG
         self.tempDrawImage.image = UIGraphicsGetImageFromCurrentImageContext();
-
+        
+        //when it is not an empty drawing layer so save drawing layer
+        dw_layer_save   =   YES;
+        
         //SAVE CURRENT MOVE POINT AS dw_lastPoint
         dw_lastPoint = currentPoint;
         
@@ -5302,6 +5321,36 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         UIGraphicsEndImageContext();
     }
 }
+
+-(void) saveDrawingLayer {
+    //when it is not an empty drawing layer so save drawing layer
+    if(dw_layer_save){
+        // End of save flyer and drawing layer
+        [self.flyimgView.layers setObject:self.tempDrawImage forKey:currentLayer];
+        
+        // Save drawing layer and flyer
+        NSString *imgPath = [self getImagePathforPhoto:self.tempDrawImage.image];
+        
+        //Set Image to dictionary
+        [self.flyer setImagePath:self.currentLayer ImgPath:imgPath];
+    }
+    else if( !(dw_isOldLayer) ){
+        //if layer is not old layer(new layer) and user didn't perform any thing then delete that layer
+        [flyer deleteLayer:currentLayer];
+        currentLayer  = @"";
+    }
+    
+    [self flushTempDrawImg:@"saveDrawingLayer"];
+    
+}
+-(void) flushTempDrawImg:callFrom {
+    dw_layer_save   =   NO;
+    
+    //disable drawing interaction
+    self.tempDrawImage.userInteractionEnabled = NO;
+    self.tempDrawImage  = nil;
+}
+
 
 
 /*
@@ -5328,21 +5377,5 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         }
     }
     
-}
-
--(void) saveDrawingLayer {
-    // End of save flyer and drawing layer
-    [self.flyimgView.layers setObject:self.tempDrawImage forKey:currentLayer];
-    
-    // Save drawing layer and flyer
-    NSString *imgPath = [self getImagePathforPhoto:self.tempDrawImage.image];
-    
-    //Set Image to dictionary
-    [self.flyer setImagePath:self.currentLayer ImgPath:imgPath];
-    
-    //disable drawing interaction
-    self.tempDrawImage.userInteractionEnabled = NO;
-    self.tempDrawImage  = nil;
-
 }
 @end

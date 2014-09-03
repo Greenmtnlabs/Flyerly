@@ -671,8 +671,8 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
  */
 -(NSString *)getText :(NSString *)uid{
 
-    NSMutableDictionary *textDic = [self getLayerFromMaster:uid];
-    return [textDic objectForKey:@"text"];
+    NSMutableDictionary *layerDic = [self getLayerFromMaster:uid];
+    return [layerDic objectForKey:@"text"];
 }
 
 /*
@@ -688,8 +688,8 @@ NSString * const LINECOLOR = @"0.000000, 0.000000, 0.000000";
 }
 
 -(NSString *)getImageName :(NSString *)uid{
-    NSMutableDictionary *layDic = [self getLayerFromMaster:uid];
-    return [layDic objectForKey:@"image"];
+    NSMutableDictionary *layerDic = [self getLayerFromMaster:uid];
+    return [layerDic objectForKey:@"image"];
 
 }
 
