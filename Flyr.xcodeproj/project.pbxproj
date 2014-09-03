@@ -1007,6 +1007,8 @@
 		365A9D1719AF697300E284B5 /* drawing_tab_pencil@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 365A9D0E19AF697300E284B5 /* drawing_tab_pencil@2x.png */; };
 		365A9D1819AF697300E284B5 /* drawing_tab_size_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 365A9D0F19AF697300E284B5 /* drawing_tab_size_selected@2x.png */; };
 		365A9D1919AF697300E284B5 /* drawing_tab_size@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 365A9D1019AF697300E284B5 /* drawing_tab_size@2x.png */; };
+		368ADADB19B6FD0700EAB305 /* DrawingEraserMsg.xib in Resources */ = {isa = PBXBuildFile; fileRef = 368ADADA19B6FD0700EAB305 /* DrawingEraserMsg.xib */; };
+		368ADADD19B6FF0400EAB305 /* DrawingEraserMsg-iPhone4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 368ADADC19B6FF0400EAB305 /* DrawingEraserMsg-iPhone4.xib */; };
 		36A93F2419AE067000D0A810 /* DrawingPatterns.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36A93F2319AE067000D0A810 /* DrawingPatterns.xib */; };
 		36A93F2619AE0B5400D0A810 /* DrawingPatterns-iPhone4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36A93F2519AE0B5400D0A810 /* DrawingPatterns-iPhone4.xib */; };
 		36A93F3619AE243D00D0A810 /* line_dashed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36A93F3319AE243D00D0A810 /* line_dashed@2x.png */; };
@@ -2385,6 +2387,8 @@
 		365A9D0E19AF697300E284B5 /* drawing_tab_pencil@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "drawing_tab_pencil@2x.png"; sourceTree = "<group>"; };
 		365A9D0F19AF697300E284B5 /* drawing_tab_size_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "drawing_tab_size_selected@2x.png"; sourceTree = "<group>"; };
 		365A9D1019AF697300E284B5 /* drawing_tab_size@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "drawing_tab_size@2x.png"; sourceTree = "<group>"; };
+		368ADADA19B6FD0700EAB305 /* DrawingEraserMsg.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DrawingEraserMsg.xib; sourceTree = "<group>"; };
+		368ADADC19B6FF0400EAB305 /* DrawingEraserMsg-iPhone4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "DrawingEraserMsg-iPhone4.xib"; sourceTree = "<group>"; };
 		36A93F2319AE067000D0A810 /* DrawingPatterns.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DrawingPatterns.xib; sourceTree = "<group>"; };
 		36A93F2519AE0B5400D0A810 /* DrawingPatterns-iPhone4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "DrawingPatterns-iPhone4.xib"; sourceTree = "<group>"; };
 		36A93F3319AE243D00D0A810 /* line_dashed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "line_dashed@2x.png"; sourceTree = "<group>"; };
@@ -3721,6 +3725,8 @@
 				206068A21924F68400AB5230 /* Borders-iPhone4.xib */,
 				2479BC661941FB9400FF5FF5 /* TextBorders.xib */,
 				2479BC631941FB8400FF5FF5 /* TextBorders-iPhone4.xib */,
+				368ADADA19B6FD0700EAB305 /* DrawingEraserMsg.xib */,
+				368ADADC19B6FF0400EAB305 /* DrawingEraserMsg-iPhone4.xib */,
 				36A93F2319AE067000D0A810 /* DrawingPatterns.xib */,
 				36A93F2519AE0B5400D0A810 /* DrawingPatterns-iPhone4.xib */,
 				206068A41924FFD300AB5230 /* Fonts.xib */,
@@ -4855,6 +4861,7 @@
 				30D58D0D10FB1BF800E0C7E8 /* icon21.jpg in Resources */,
 				20F8384F196D292C006B72A0 /* README.md in Resources */,
 				30D58D0E10FB1BF800E0C7E8 /* icon22.jpg in Resources */,
+				368ADADB19B6FD0700EAB305 /* DrawingEraserMsg.xib in Resources */,
 				20449F93196181A6007BE4BF /* discount.png in Resources */,
 				30D58D0F10FB1BF800E0C7E8 /* icon23.jpg in Resources */,
 				246EF530193C515D004539B2 /* emoticon79@2x.png in Resources */,
@@ -5312,6 +5319,7 @@
 				65C1A4331742516D00947D5E /* Template27@2x.jpg in Resources */,
 				65C1A4341742516D00947D5E /* Template28@2x.jpg in Resources */,
 				2471593819408E5F00B30301 /* invite_facebook@2x.png in Resources */,
+				368ADADD19B6FF0400EAB305 /* DrawingEraserMsg-iPhone4.xib in Resources */,
 				24B75122193DA07C007B6B85 /* Cliparts-iPhone4.xib in Resources */,
 				65C1A4351742516D00947D5E /* Template29@2x.jpg in Resources */,
 				24218507194B4AEC00FDDA97 /* treasure-icon.png in Resources */,

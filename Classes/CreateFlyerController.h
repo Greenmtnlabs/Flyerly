@@ -112,6 +112,7 @@
 @property (nonatomic, strong) ResourcesView *sizesView;
 @property (nonatomic, strong) ResourcesView *textBordersView;
 @property (nonatomic, strong) ResourcesView *drawingPatternsView;
+@property (nonatomic, strong) ResourcesView *drawingEraserMsgView;
 //-----
 
 @property (nonatomic,strong)  IBOutlet UILabel *takeOrAddPhotoLabel;
@@ -174,6 +175,10 @@
 @property (nonatomic, strong)IBOutlet UIButton *drawingPatternTabButton;
 @property (nonatomic, strong)IBOutlet UIButton *drawingSizeTabButton;
 @property (nonatomic, strong)IBOutlet UIButton *drawingEraserTabButton;
+
+//Lables in xib for eraser(drawing sub tab) 
+@property (nonatomic, strong)IBOutlet UITextView *drawingEraserMsg;
+
 
 //These are Art Tab Buttons
 @property (nonatomic, strong)IBOutlet UIButton *clipArtTabButton;
