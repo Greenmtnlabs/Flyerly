@@ -243,8 +243,6 @@ BOOL adLoaded = false;
     } else {
         NSLog(@"Anonymous, User is NOT authenticated.");
     }
-    
-    
 }
 
 /*
@@ -479,6 +477,7 @@ BOOL adLoaded = false;
             [button setUserInteractionEnabled:YES];
         }
         
+        
     }];
     
     [createFlyer setShouldShowAdd:^(NSString *flyPath) {
@@ -491,11 +490,18 @@ BOOL adLoaded = false;
                 if ([weakSelf.interstitial isReady]  && ![weakSelf.interstitial hasBeenUsed]){
                     [weakSelf.interstitial presentFromRootViewController:weakSelf];
                 }
-                                                         
+                
             }
         });
         
     }];
+    
+    
+    dispatch_async( dispatch_get_main_queue(), ^{
+        
+        [self.interstitial loadRequest:[self request]];
+        
+    });
 
 	[self.navigationController pushViewController:createFlyer animated:YES];
     

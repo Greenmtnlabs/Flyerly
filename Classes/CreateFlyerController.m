@@ -518,8 +518,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     [lastTextView removeFromSuperview];
     lastTextView = nil;
     
-    
-    
     // If the sharing panel is open, we are just going to close it down.
     // Do not need to do any thing else.
     float yValue = self.view.frame.size.height - 425;
@@ -3419,6 +3417,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         //Here Compare Current Flyer with history Flyer
         if ([self.flyer isVideoMergeProcessRequired]) {
             
+            
             UserPurchases *userPurchases_ = [UserPurchases getInstance];
             
             if ( ![userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ) {
@@ -3426,12 +3425,12 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     [self.interstitialAdd presentFromRootViewController:self];
                 }
             }
-            
-            
-            panelWillOpen = YES;
+        
             
             //Background Thread
             dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+                
+                panelWillOpen = YES;
                 
                 //Here we Merge All Layers in Video File
                 [self videoMergeProcess];
@@ -3447,17 +3446,18 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         //Background Thread
         dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
             
-            
-            UserPurchases *userPurchases_ = [UserPurchases getInstance];
-            
-            if ( ![userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ) {
-                if ( [self.interstitialAdd isReady]  && ![self.interstitialAdd hasBeenUsed] ) {
-                    
-                    dispatch_async( dispatch_get_main_queue(), ^{
-                        [self.interstitialAdd presentFromRootViewController:self];
-                    });
+            if ( [[PFUser currentUser] sessionToken] ) {
+                UserPurchases *userPurchases_ = [UserPurchases getInstance];
+                
+                if ( ![userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ) {
+                    if ( [self.interstitialAdd isReady]  && ![self.interstitialAdd hasBeenUsed] ) {
+                        
+                        dispatch_async( dispatch_get_main_queue(), ^{
+                            [self.interstitialAdd presentFromRootViewController:self];
+                        });
+                    }
+                    //return;
                 }
-                //return;
             }
             
             //Here we remove Borders from layer if user touch any layer
@@ -4829,7 +4829,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     }else {
         
         if ( [sharePanel isHidden] ) {
-            [self presentViewController:inappviewcontroller animated:YES completion:nil];
+            [self presentViewController:inappviewcontroller animated:NO completion:nil];
         }
         
         
