@@ -160,7 +160,6 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     
 }
 
-
 /*
  * Here we Using Parse Utility for Loign by Facebook
  */
@@ -180,10 +179,24 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
             
             if ( !user ) {
                 
+                
                 if (!error) {
                     NSLog(@"Uh oh. The user cancelled the Facebook login.");
                 } else {
                     NSLog(@"Uh oh. An error occurred: %@", error);
+                    NSDictionary *errorDict = [[NSDictionary alloc] initWithDictionary:error.userInfo];
+                    NSString *error = [errorDict objectForKey:@"NSLocalizedFailureReason"];
+                    if ( [error isEqualToString:@"com.facebook.sdk:SystemLoginDisallowedWithoutError"] ) {
+                        // handle error here, for example by showing an alert to the user
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Could not login with Facebook"
+                                                                        message:@"Facebook login failed. Please check your Facebook settings on your phone."
+                                                                       delegate:nil
+                                                              cancelButtonTitle:@"OK"
+                                                              otherButtonTitles:nil];
+                    
+                        [alert show];
+                    }
+                    
                 }
                 
             } else if (user.isNew) {
