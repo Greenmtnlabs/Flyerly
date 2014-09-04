@@ -14,5 +14,7 @@
 @property(nonatomic, retain)IBOutlet UILabel *featureDesc;
 
 -(void)setCellValueswithProductTitle :(NSString *)title ProductDescription: (NSString *)description;
+-(void)setCellValuesColourWhite;
+-(void)setCellValuesSize;
 
 @end

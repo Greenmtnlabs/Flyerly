@@ -25,4 +25,14 @@
     featureName.text = title;
     featureDesc.text = description;
 }
+
+-(void)setCellValuesColourWhite {
+    
+    [featureDesc setTextColor:[UIColor whiteColor]];
+}
+
+-(void)setCellValuesSize {
+    
+    [featureDesc setFont:[UIFont fontWithName:@"HelveticaNeue" size:14.0]];
+}
 @end
