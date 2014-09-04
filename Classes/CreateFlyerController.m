@@ -3345,10 +3345,11 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 //When user pressed done button
 -(void)callAddMoreLayers {
     
-    NSString *type = [flyer getLayerType:currentLayer];
-    if ( [type isEqualToString:FLYER_LAYER_DRAWING] ){
-        [self saveDrawingLayer];
-    }
+    //NSString *type = [flyer getLayerType:currentLayer];
+    [self deleteEmptyTextCliptartEmoticonDrawingLayer];
+    
+    //Empty Layer Delete
+    [self deSelectPreviousLayer];
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
     label.backgroundColor = [UIColor clearColor];
@@ -3389,8 +3390,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     [heightTabButton setSelected:NO];
 
     
-    //Empty Layer Delete
-    [self deSelectPreviousLayer];
+    
     
     //Save OnBack
     //Here we remove Borders from layer if user touch any layer
@@ -5054,15 +5054,15 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     });
 }
 
+
+
 -(IBAction)addDrawingLayer:(id) sender {
-    NSMutableDictionary *dic    =   [self.flyer getLayerFromMaster:currentLayer];
-    NSString   *text = [dic objectForKey:@"text"];
-    NSString   *image = [dic objectForKey:@"image"];
     
-    if( (text == nil || [text  isEqual: @""]) && (image == nil || [image  isEqual: @""]) )
-    [flyer deleteLayer:currentLayer];
+    [self deleteEmptyTextCliptartEmoticonDrawingLayer];
     
+    //reSet currentLayer for new drawing layer
     currentLayer = @"";
+    
     //show drawing layer menu
     [self setAddMoreLayerTabAction:drawingMenueButton];
 }
@@ -5354,7 +5354,40 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     }
 }
 
--(void) saveDrawingLayer {
+-(void)deleteEmptyTextCliptartEmoticonDrawingLayer{
+    NSMutableDictionary *dic    =   [self.flyer getLayerFromMaster:currentLayer];
+    if( dic != nil) {
+        NSString   *layerType  =  [dic objectForKey:@"type"];
+        NSString   *text  = [dic objectForKey:@"text"];
+        NSString   *image = [dic objectForKey:@"image"];
+        
+        if( [layerType isEqualToString:FLYER_LAYER_DRAWING] ) {
+            [self saveDeleteDrawingLayerAfterEmptyCheck];
+        }
+        else{
+            BOOL  deleteLayer = NO;
+            if( (text == nil || [text  isEqual: @""]) && (image == nil || [image  isEqual: @""]) )
+            deleteLayer = YES;
+            /*
+            if( [layerType isEqualToString:FLYER_LAYER_EMOTICON] ) {
+                
+                if(image == nil || [image  isEqual: @""])
+                    deleteLayer = YES;
+                
+            }else if ( [layerType isEqualToString:FLYER_LAYER_TEXT] || [layerType isEqualToString:FLYER_LAYER_CLIP_ART]) {
+                if(text == nil || [text  isEqual: @""])
+                    deleteLayer = YES;
+            }
+            */
+            
+            if( deleteLayer  ){
+                [flyer deleteLayer:currentLayer];
+            }
+        }
+    }
+}
+
+-(void) saveDeleteDrawingLayerAfterEmptyCheck {
     //when it is not an empty drawing layer so save drawing layer
     if(dw_layer_save){
         // End of save flyer and drawing layer
@@ -5372,7 +5405,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         currentLayer  = @"";
     }
     
-    [self flushTempDrawImg:@"saveDrawingLayer"];
+    [self flushTempDrawImg:@"saveDeleteDrawingLayerAfterEmptyCheck"];
     
 }
 -(void) flushTempDrawImg:callFrom {
