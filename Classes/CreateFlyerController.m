@@ -5459,10 +5459,20 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 
 #pragma mark - ZOOM FUNCTIONS
 -(void)zoom_init{
+    
+    NSLog(@"flyImgView size %f,%f,%f,%f",flyimgView.frame.origin.x,flyimgView.frame.origin.y,flyimgView.frame.size.width,flyimgView.frame.size.height);
+    NSLog(@"zoom_scrollView size %f,%f,%f,%f",zoom_scrollView.frame.origin.x,zoom_scrollView.frame.origin.y,zoom_scrollView.frame.size.width,zoom_scrollView.frame.size.height);
+    
     //hide zoom elements on load
     [self zoom_elementsSetAlpha:0.0];
     
     zoom_start =   NO;
+    
+    zoom_scrollView.minimumZoomScale    = 10.0;
+    zoom_scrollView.maximumZoomScale    = 20.0;
+    
+    zoom_scrollView.backgroundColor = [UIColor redColor];
+
     
     UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(zoom_magnifyerMove:)];
     [zoom_screenShot addGestureRecognizer:panGesture];
@@ -5470,6 +5480,17 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 -(void)zoom_start{
     zoom_start   =   YES;
     [self zoom_elementsSetAlpha:1.0];
+    
+    /*
+     /----
+    zoom_scrollView.autoresizesSubviews = YES;
+    zoom_scrollView.showsVerticalScrollIndicator = YES;
+    zoom_scrollView.showsHorizontalScrollIndicator = NO;
+    zoom_scrollView.bouncesZoom = YES;
+    zoom_scrollView.alwaysBounceVertical = YES;
+    zoom_scrollView.delegate = self;
+    //----
+     */
     
     zoom_screenShot.image   = [self getFlyerSnapShot];
     [zoom_scrollView addSubview:flyimgView];
@@ -5484,7 +5505,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 
 -(void)zoom_elementsSetAlpha:(CGFloat)zoom_alpha{
     NSLog(@"zoom_alpha=%f",zoom_alpha);
-    [zoom_layoutOnFlyr setAlpha:zoom_alpha];
+    //[zoom_layoutOnFlyr setAlpha:zoom_alpha];
     [zoom_scrollView setAlpha:zoom_alpha];
     [zoom_screenShot setAlpha:zoom_alpha];
     [zoom_magnifyingGlass setAlpha:zoom_alpha];
@@ -5501,24 +5522,32 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     //MOVING
     else if (recognizer.state == UIGestureRecognizerStateChanged) {
         CGPoint magnifierCurLoc = [recognizer locationInView:self.zoom_screenShot];
-        NSLog(@"changed");
         int x = magnifierCurLoc.x;
         int y = magnifierCurLoc.y;
-        NSLog(@"A-(%i,%i)",x,y);
-        int xSV = (flyimgView.size.width*x)/100;
-        int ySV = (flyimgView.size.width*y)/100;
-        //CGRect recSv = CGRectMake(xSV, ySV, zoom_scrollView.size.width, zoom_scrollView.size.height);
-        //[zoom_scrollView scrollRectToVisible:recSv animated:YES];
-        zoom_scrollView.contentOffset = CGPointMake(xSV, ySV);
-        
-        
-        x  += zoom_screenShot.origin.x-15;
-        y  += zoom_screenShot.origin.y-15;
-        NSLog(@"B-(%i,%i)",x,y);
-        
-        
-        
-        zoom_magnifyingGlass.frame  =   CGRectMake(x,y, zoom_magnifyingGlass.size.width, zoom_magnifyingGlass.size.height);
+//        NSLog(@"cp(x,y)=(%i,%i)",x,y);
+        int zssW = zoom_screenShot.size.width-5;
+        int zssH = zoom_screenShot.size.height-5;
+        NSLog(@"cp(x,y)=(%i,%i), zssW=%i,zssH=%i",x,y,zssW,zssH);
+        if( (x > 5 && x < zssW ) && (y > 5 && y < zssH) ){
+            NSLog(@"changed");
+            
+            int xSV = (flyimgView.size.width*x)/100;
+            int ySV = (flyimgView.size.width*y)/100;
+            zoom_scrollView.contentOffset   = CGPointMake(xSV-20,ySV+25);
+            
+            CGRect recSv = CGRectMake(xSV, ySV, zoom_scrollView.size.width, zoom_scrollView.size.height);
+            [zoom_scrollView scrollRectToVisible:recSv animated:YES];
+            [zoom_scrollView zoomToRect:recSv animated:YES];
+
+
+            
+            
+            x  += zoom_screenShot.origin.x-15;
+            y  += zoom_screenShot.origin.y-15;
+            NSLog(@"M-(%i,%i)",x,y);
+            //Change mangifier location
+            zoom_magnifyingGlass.frame  =   CGRectMake(x,y, zoom_magnifyingGlass.size.width, zoom_magnifyingGlass.size.height);
+        }
     }
     //MOVE END
     else if (recognizer.state == UIGestureRecognizerStateEnded) {
