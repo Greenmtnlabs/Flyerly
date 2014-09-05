@@ -175,6 +175,7 @@ NSString *abc;
             UIImageView *img = [[UIImageView alloc]initWithFrame:CGRectMake(10,10, 90, 70)];
 
             [self configureImageView:img ImageViewDictionary:layDic];
+            [self applyTransform:img ImageViewDictionary:layDic];
             [self addSubview:img];
             [layers setValue:img forKey:uid];
             
@@ -182,7 +183,7 @@ NSString *abc;
         } else {
         
             UIImageView *img = [layers objectForKey:uid];
-            [self configureImageView:img ImageViewDictionary:layDic];
+            [self applyTransform:img ImageViewDictionary:layDic];
             [layers setValue:img forKey:uid];
         
         }
@@ -227,19 +228,8 @@ NSString *abc;
  */
 -(void)configureImageView :(UIImageView *)imgView ImageViewDictionary:(NSMutableDictionary *)detail {
     
-    //imgView.transform = CGAffineTransformMakeRotation([[detail valueForKey:@"rotation"] floatValue]);
-    
-    if ( ([detail objectForKey:@"a"] != nil) && ([detail objectForKey:@"b"] != nil) && ([detail objectForKey:@"c"] != nil) && ([detail objectForKey:@"d"] != nil) && ([detail objectForKey:@"tx"] != nil ) && ([detail objectForKey:@"ty"] != nil) ) {
-        
-        CGAffineTransform ttransform = CGAffineTransformMake([[detail valueForKey:@"a"] floatValue], [[detail valueForKey:@"b"] floatValue], [[detail valueForKey:@"c"] floatValue], [[detail valueForKey:@"d"] floatValue], [[detail valueForKey:@"tx"] floatValue], [[detail valueForKey:@"ty"] floatValue]);
-        
-        imgView.transform = ttransform;
-        
-    } else {
-        
-        //SetFrame
-        [imgView setFrame:CGRectMake([[detail valueForKey:@"x"] floatValue], [[detail valueForKey:@"y"] floatValue], [[detail valueForKey:@"width"] floatValue], [[detail valueForKey:@"height"] floatValue])];
-    }
+    //SetFrame
+    [imgView setFrame:CGRectMake([[detail valueForKey:@"x"] floatValue], [[detail valueForKey:@"y"] floatValue], [[detail valueForKey:@"width"] floatValue], [[detail valueForKey:@"height"] floatValue])];
     
     //Set Image
     if ([detail objectForKey:@"image"] != nil) {
@@ -255,6 +245,34 @@ NSString *abc;
         }
     }
 
+}
+
+/*
+ *Here we set Transformation Properties of UIImageView
+ */
+
+- (void) applyTransform:(UIImageView *)imgView ImageViewDictionary:(NSMutableDictionary *)detail {
+    
+    if ( ([detail objectForKey:@"a"] != nil) && ([detail objectForKey:@"b"] != nil) && ([detail objectForKey:@"c"] != nil) && ([detail objectForKey:@"d"] != nil) && ([detail objectForKey:@"tx"] != nil ) && ([detail objectForKey:@"ty"] != nil) ) {
+        
+        CGAffineTransform ttransform = CGAffineTransformMake([[detail valueForKey:@"a"] floatValue], [[detail valueForKey:@"b"] floatValue], [[detail valueForKey:@"c"] floatValue], [[detail valueForKey:@"d"] floatValue], [[detail valueForKey:@"tx"] floatValue], [[detail valueForKey:@"ty"] floatValue]);
+        
+        imgView.transform = ttransform;
+    }
+    
+    //Set Image
+    if ([detail objectForKey:@"image"] != nil) {
+        
+        if ( ![[detail valueForKey:@"image"] isEqualToString:@""]) {
+            NSError *error = nil;
+            NSData *imageData = [[NSData alloc] initWithContentsOfFile:[detail valueForKey:@"image"]
+                                                               options:NSDataReadingMappedIfSafe
+                                                                 error:&error];
+            //NSData *imageData = [[NSData alloc ]initWithContentsOfMappedFile:[detail valueForKey:@"image"]];
+            UIImage *currentImage = [UIImage imageWithData:imageData];
+            [imgView setImage:currentImage];
+        }
+    }
 }
 
 /*
