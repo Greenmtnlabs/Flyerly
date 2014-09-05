@@ -59,11 +59,16 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 @synthesize backgroundsView,flyerBordersView,colorsView,sizesView,bannerAddView,bannerAddDismissButton,drawingPatternsView,drawingEraserMsgView;
 
 #pragma mark -  View Appear Methods
+- (void)viewWillAppear:(BOOL)animated{
+    //hide zoom elements on load
+    [self zoom_elementsSetAlpha:0.0];
+}
 
 /**
  * Update the view once it appears.
  */
 -(void)viewDidAppear:(BOOL)animated {
+    
     [super viewDidAppear:animated];
     
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
@@ -182,6 +187,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
  * View setup. This is done once per instance.
  */
 -(void)viewDidLoad{
+    
     selectedAddMoreLayerTab = -1;
     
     //DrawingClass required vars
@@ -5454,12 +5460,19 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 
 #pragma mark - ZOOM FUNCTIONS
 -(void)zoom_init{
-    [zoom_layoutOnFlyr setAlpha:1.0];
-    [zoom_scrollView setAlpha:1.0];
-    [zoom_screenShot setAlpha:1.0];
-    [zoom_screenShot setAlpha:1.0];
+    [self zoom_elementsSetAlpha:1.0];
     
     zoom_screenShot.image   =[self getFlyerSnapShot];
-    
+    [zoom_scrollView addSubview:flyimgView];
 }
+-(void)zoom_elementsSetAlpha:(CGFloat)zoom_alpha{
+    NSLog(@"zoom_alpha=%f",zoom_alpha);
+    [zoom_layoutOnFlyr setAlpha:zoom_alpha];
+    [zoom_scrollView setAlpha:zoom_alpha];
+    [zoom_screenShot setAlpha:zoom_alpha];
+    [zoom_magnifyingGlass setAlpha:zoom_alpha];
+    
+   
+}
+
 @end
