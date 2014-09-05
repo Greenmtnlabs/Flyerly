@@ -453,6 +453,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 drawingPatternsView = [drawingPatternsViewArray objectAtIndex:0];
                 
                 NSArray *drawingEraserMsgViewArray = [[NSBundle mainBundle] loadNibNamed:@"DrawingEraserMsg" owner:self options:nil];
+                
                 drawingEraserMsgView = [drawingEraserMsgViewArray objectAtIndex:0];
                 [self setLabelsAfterXibsLoad];
                 

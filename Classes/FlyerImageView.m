@@ -241,8 +241,6 @@ NSString *abc;
         [imgView setFrame:CGRectMake([[detail valueForKey:@"x"] floatValue], [[detail valueForKey:@"y"] floatValue], [[detail valueForKey:@"width"] floatValue], [[detail valueForKey:@"height"] floatValue])];
     }
     
-    
-    
     //Set Image
     if ([detail objectForKey:@"image"] != nil) {
         
@@ -433,6 +431,7 @@ NSString *abc;
     if (recognizer.state == UIGestureRecognizerStateBegan) {
         
         currentTransform = recognizer.view.transform;
+        recognizer.view.layer.anchorPoint = CGPointMake( 0.5, 0.5 );
         
     } else if (recognizer.state == UIGestureRecognizerStateChanged) {
         
@@ -446,7 +445,6 @@ NSString *abc;
         
         [recognizer.view setTransform:tr];
 
-        //[self showOverlayWithFrame:recognizer.view.frame :recognizer.view];
         
     } else if (recognizer.state == UIGestureRecognizerStateEnded) {
         
@@ -460,48 +458,11 @@ NSString *abc;
             // Save rotation angle for layer
             [self.delegate layerTransformedforKey:key :&newTransForm];
             
-            //[self.delegate frameChangedForLayer:key frame:_view.frame];
-            
+            //[self.delegate frameChangedForLayer:key frame:recognizer.view.frame];
+
         }
     }
     
-    /*CGPoint translation = [recognizer translationInView:self];
-    recognizer.view.center = CGPointMake(recognizer.view.center.x + translation.x,
-                                         recognizer.view.center.y + translation.y);
-    [recognizer setTranslation:CGPointMake(0, 0) inView:self];
-    
-    // Get the key for this view.
-    NSArray *keys = [layers allKeysForObject:recognizer.view];
-    
-    // Let the delegate know that we changed frame.
-    for ( int i = 0; i < keys.count; i++ ) {
-        NSString *key = [keys objectAtIndex:i];
-        
-        CGRect fr = recognizer.view.frame;
-        
-        // If this is a UILable, the size may have changed due to alignment issues.
-        // so we send the default size.
-        if ( [recognizer.view.class isSubclassOfClass:[CustomLabel class]] ) {
-            fr.size = [(CustomLabel *)recognizer.view originalSize];
-        }
-        
-        [self.delegate frameChangedForLayer:key frame:fr];
-        
-        // See if this view is at the front
-        if ( [self.subviews lastObject] != recognizer.view ) {
-            [self bringSubviewToFront:recognizer.view];
-            
-            // When we bring a view to front, we need to change its key
-            NSString *newKey = [Flyer getUniqueId];
-            
-            // Update the layer dictionary with new key
-            id l = [layers objectForKey:key];
-            [layers removeObjectForKey:key];
-            [layers setObject:l forKey:newKey];
-            
-            [self.delegate bringLayerToFront:key new:newKey];
-        }
-    }*/
 }
 
 #pragma mark - Private Methods
@@ -546,8 +507,6 @@ NSString *abc;
         
         [recognizer.view setTransform:tr];
         
-        //[self showOverlayWithFrame:recognizer.view.frame :recognizer.view];
-        
     } else if (recognizer.state == UIGestureRecognizerStateEnded) {
      
         CGAffineTransform newTransForm = recognizer.view.transform;
@@ -563,31 +522,6 @@ NSString *abc;
         }
 
     }
-    
-    /*static CGRect initialBounds;
-    
-    UIView *_view = sender.view;
-    
-    if (sender.state == UIGestureRecognizerStateBegan)
-    {
-        initialBounds = _view.bounds;
-    }
-    CGFloat factor = [(UIPinchGestureRecognizer *)sender scale];
-    
-    CGAffineTransform zt = CGAffineTransformScale(CGAffineTransformIdentity, factor, factor);
-    _view.bounds = CGRectApplyAffineTransform(initialBounds, zt);
-    
-    //Here we update frame of layer in Dictionary
-    // Get the key for this view.
-    NSArray *keys = [layers allKeysForObject:_view];
-    
-    // Let the delegate know that we changed frame.
-    for ( int i = 0; i < keys.count; i++ ) {
-        NSString *key = [keys objectAtIndex:i];
-        [self.delegate frameChangedForLayer:key frame:_view.frame];
-    }
-
-    return;*/
 }
 
 #pragma mark - Tap to edit functionality
@@ -630,9 +564,8 @@ NSString *abc;
         
         // Scale
         CGAffineTransform tr =
-        CGAffineTransformConcat(
-                                origTr,
-                                CGAffineTransformMakeRotation(rotation));
+        CGAffineTransformConcat(CGAffineTransformMakeRotation(rotation),
+                                origTr);
         
         [recognizer.view setTransform:tr];
         
@@ -649,39 +582,9 @@ NSString *abc;
             // Save rotation angle for layer
             [self.delegate layerTransformedforKey:key :&newTransForm];
             
-            //[self.delegate frameChangedForLayer:key frame:_view.frame];
-            
-            // Save rotation angle for layer
-            //[self.delegate rotationAngleChangedForLayer:key rotationAngle:rotation];
         }
     }
     
-    /*
-    UIView *_view = sender.view;
-    
-    //CGFloat currentAngle = [self.delegate previuosrotationAngle:abc];//Get rotation from current layer
-    
-    CGFloat rotation = [(UIRotationGestureRecognizer *) sender rotation];
-    //rotation += currentAngle;
-    CGAffineTransform currentTransform = sender.view. transform;
-    
-    
-    NSArray *keys = [layers allKeysForObject:_view];
-    // Let the delegate know that we changed frame.
-    for ( int i = 0; i < keys.count; i++ ) {
-        NSString *key = [keys objectAtIndex:i];
-        [self.delegate rotationAngleChangedForLayer:key rotationAngle:rotation];
-        //[self.delegate previuosrotationAngle:key];
-    }
-    CGAffineTransform transform = CGAffineTransformMakeRotation(rotation);
-    //+ netRotation);
-    //CGAffineTransform CGAffineTransformConcat(CGAffineTransform previuosTransform,CGAffineTransform transform);
-    //selectedView.transform = CGAffineTransformConcat(selectedView.transform, viewFlipTrans);
-    //CGAffineTransform newTransform = CGAffineTransformConcat( previuosTransform, transform);
-    sender.view.transform = transform;//CGAffineTransformConcat( previuosTransform, transform);
-    if (sender.state == UIGestureRecognizerStateEnded) {
-          rotation += rotation;
-    }
-    previuosTransform = transform;*/
 }
+
 @end
