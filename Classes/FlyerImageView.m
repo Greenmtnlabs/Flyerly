@@ -292,7 +292,19 @@ NSString *abc;
  */
 -(void)configureLabelColor :(NSString *)uid labelDictionary:(NSMutableDictionary *)detail {
     
-    CustomLabel *lble = [layers objectForKey:uid];
+    CustomLabel *lbl = [layers objectForKey:uid];
+    
+    if ([[detail valueForKey:@"textcolor"] isEqualToString:@"0.000000, 0.000000, 0.000000"]) {
+        if ([detail valueForKey:@"textWhitecolor"]  != nil) {
+            NSArray *rgb = [[detail valueForKey:@"textWhitecolor"]  componentsSeparatedByString:@","];
+            lbl.textColor = [UIColor colorWithWhite:[rgb[0] floatValue] alpha:[rgb[1] floatValue]];
+        }
+    }else{
+        NSArray *rgb = [[detail valueForKey:@"textcolor"] componentsSeparatedByString:@","];
+        
+        lbl.textColor = [UIColor colorWithRed:[rgb[0] floatValue] green:[rgb[1] floatValue] blue:[rgb[2] floatValue] alpha:1];
+        
+    }
 }
 
 
@@ -323,6 +335,9 @@ NSString *abc;
 -(void)configureLabelFont :(NSString *)uid labelDictionary:(NSMutableDictionary *)detail {
     
     CustomLabel *lble = [layers objectForKey:uid];
+    
+    //set Label Font
+    lble.font = [UIFont fontWithName:[detail valueForKey:@"fontname"] size:[[detail valueForKey:@"fontsize"] floatValue]];
 }
 
 /*

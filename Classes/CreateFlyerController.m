@@ -1382,8 +1382,9 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 //Here we set Font
                 [flyer setFlyerTextFont:currentLayer FontName:[NSString stringWithFormat:@"%@",[selectedFont familyName]]];
                 
+                [flyimgView configureLabelFont :currentLayer labelDictionary:[flyer getLayerFromMaster:currentLayer]];
                 //Here we call Render Layer on View
-                [flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
+                //[flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
                 
                 //Handling Select Unselect
                 [self setSelectedItem:FLYER_LAYER_TEXT inView:fontsView ofLayerAttribute:LAYER_ATTRIBUTE_FONT];
@@ -1417,7 +1418,9 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 [flyer setFlyerTextColor:currentLayer RGBColor:selectedColor];
                 
                 //Here we call Render Layer on View
-                [flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
+                //[flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
+                [flyimgView configureLabelColor :currentLayer labelDictionary:[flyer getLayerFromMaster:currentLayer]];
+                
                 
                 NSString *type = [flyer getLayerType:currentLayer];
                 if( [type isEqualToString:FLYER_LAYER_CLIP_ART] ){
