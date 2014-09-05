@@ -1508,7 +1508,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     [self setSelectedItem:FLYER_LAYER_DRAWING inView:sizesView ofLayerAttribute:LAYER_ATTRIBUTE_SIZE];
                 }
                 else {
-                    
+                //<##>
                     NSString *sizeStr = SIZE_ARRAY[i-1];
                     
                     CGRect lastFrame = [flyer getImageFrame:currentLayer];
@@ -1523,7 +1523,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     
                     //Handling Select Unselect
                     [self setSelectedItem:FLYER_LAYER_EMOTICON inView:sizesView ofLayerAttribute:LAYER_ATTRIBUTE_SIZE];
-                    
+                    //<##>
                 }
             }
             i++;
