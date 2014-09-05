@@ -203,7 +203,7 @@
 //Outlets form zoom
 @property (strong, nonatomic) IBOutlet UIView *zoom_layoutOnFlyr;
 @property (strong, nonatomic) IBOutlet UIScrollView *zoom_scrollView;
-@property (strong, nonatomic) IBOutlet UIImageView *zoom_screenShort;
+@property (strong, nonatomic) IBOutlet UIImageView *zoom_screenShot;
 @property (strong, nonatomic) IBOutlet UIImageView *zoom_magnifyingGlass;
 
 

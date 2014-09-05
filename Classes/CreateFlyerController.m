@@ -42,7 +42,7 @@
 
 
 //Outlets form zoom
-@synthesize zoom_layoutOnFlyr,zoom_scrollView,zoom_screenShort,zoom_magnifyingGlass;
+@synthesize zoom_layoutOnFlyr,zoom_scrollView,zoom_screenShot,zoom_magnifyingGlass;
 
 //Drawing required files
 @synthesize mainImage;
@@ -4401,7 +4401,12 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         }
         [self callWrite];
 	}
-	else if(selectedButton == addMorePhotoTabButton)
+	else if(selectedButton == addMorePhotoTabButton){
+        //for testing of zoom , start zoom work when user tab on addMorePhotoTab
+        //just delete this else if after zoom work,
+        [self zoom_init];
+    }
+    else if(selectedButton == addMorePhotoTabButton)
 	{
         selectedAddMoreLayerTab = ADD_MORE_PHOTOTAB;
         
@@ -5444,6 +5449,17 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             [imgView setImage:currentImage];
         }
     }
+    
+}
+
+#pragma mark - ZOOM FUNCTIONS
+-(void)zoom_init{
+    [zoom_layoutOnFlyr setAlpha:1.0];
+    [zoom_scrollView setAlpha:1.0];
+    [zoom_screenShot setAlpha:1.0];
+    [zoom_screenShot setAlpha:1.0];
+    
+    zoom_screenShot.image   =[self getFlyerSnapShot];
     
 }
 @end

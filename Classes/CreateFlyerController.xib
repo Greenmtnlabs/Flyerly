@@ -57,7 +57,7 @@
                 <outlet property="widthTabButton" destination="IOq-dI-vvl" id="TYH-DW-B0O"/>
                 <outlet property="zoom_layoutOnFlyr" destination="zHG-bn-jdO" id="9uK-NU-L3o"/>
                 <outlet property="zoom_magnifyingGlass" destination="e7R-ga-ZuC" id="xlQ-Jm-hQO"/>
-                <outlet property="zoom_screenShort" destination="koI-LW-qvU" id="CgQ-Xr-e4m"/>
+                <outlet property="zoom_screenShot" destination="koI-LW-qvU" id="kZx-Kl-F6I"/>
                 <outlet property="zoom_scrollView" destination="OgZ-hl-Uai" id="eVu-gO-bsy"/>
             </connections>
         </placeholder>
@@ -137,15 +137,15 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" red="0.75510204079999999" green="0.75510204079999999" blue="0.75510204079999999" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="OgZ-hl-Uai" userLabel="Scroll View - ZOOM">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="scaleToFill" id="OgZ-hl-Uai" userLabel="Scroll View - ZOOM">
                     <rect key="frame" x="5" y="65" width="200" height="200"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                 </scrollView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="koI-LW-qvU" userLabel="UiimageView - ScreenShotForZoom">
+                <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="koI-LW-qvU" userLabel="UiimageView - ScreenShotForZoom">
                     <rect key="frame" x="210" y="125" width="100" height="100"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="magnifyingGlass.png" id="e7R-ga-ZuC" userLabel="Image View - MagnifyingGlassImg">
+                <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="magnifyingGlass.png" id="e7R-ga-ZuC" userLabel="Image View - MagnifyingGlassImg">
                     <rect key="frame" x="223" y="138" width="32" height="32"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </imageView>
