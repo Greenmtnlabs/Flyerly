@@ -122,6 +122,7 @@ NSString *abc;
             lble.lineBreakMode = NSLineBreakByWordWrapping;
             lble.numberOfLines = 80;
             [self configureLabel:lble labelDictionary:layDic ];
+            [self applyTransformOnLabel:lble CustomLableDictionary:layDic];
             [self addSubview:lble];
             [layers setValue:lble forKey:uid];
             
@@ -132,7 +133,8 @@ NSString *abc;
                 
                 //here we Update Label
                 CustomLabel *lble = [layers objectForKey:uid];
-                [self configureLabel:lble labelDictionary:layDic ];
+                //[self configureLabel:lble labelDictionary:layDic ];
+                [self applyTransformOnLabel:lble CustomLableDictionary:layDic];
                 [layers setValue:lble forKey:uid];
             
             } else {
@@ -273,6 +275,54 @@ NSString *abc;
             [imgView setImage:currentImage];
         }
     }
+}
+
+- (void) applyTransformOnLabel:(CustomLabel *)lbl CustomLableDictionary:(NSMutableDictionary *)detail {
+
+    if ( ([detail objectForKey:@"a"] != nil) && ([detail objectForKey:@"b"] != nil) && ([detail objectForKey:@"c"] != nil) && ([detail objectForKey:@"d"] != nil) && ([detail objectForKey:@"tx"] != nil ) && ([detail objectForKey:@"ty"] != nil) ) {
+        
+        CGAffineTransform ttransform = CGAffineTransformMake([[detail valueForKey:@"a"] floatValue], [[detail valueForKey:@"b"] floatValue], [[detail valueForKey:@"c"] floatValue], [[detail valueForKey:@"d"] floatValue], [[detail valueForKey:@"tx"] floatValue], [[detail valueForKey:@"ty"] floatValue]);
+        
+        lbl.transform = ttransform;
+    }
+}
+
+/*
+ *Here we set color Properties of uiLabel
+ */
+-(void)configureLabelColor :(NSString *)uid labelDictionary:(NSMutableDictionary *)detail {
+    
+    CustomLabel *lble = [layers objectForKey:uid];
+}
+
+
+/*
+ *Here we set size Properties of uiLabel
+ */
+-(void)configureLabelSize :(NSString *)uid labelDictionary:(NSMutableDictionary *)detail {
+    
+    CustomLabel *lbl = [layers objectForKey:uid];
+    
+    //SetFrame
+    [lbl setFrame:CGRectMake([[detail valueForKey:@"x"] floatValue], [[detail valueForKey:@"y"] floatValue], [[detail valueForKey:@"width"] floatValue], [[detail valueForKey:@"height"] floatValue])];
+    
+    // Remember originalsize
+    lbl.originalSize = lbl.frame.size;
+    
+    //set Label Text
+    [lbl setText:[detail valueForKey:@"text"]];
+    
+    //set Label Font
+    lbl.font = [UIFont fontWithName:[detail valueForKey:@"fontname"] size:[[detail valueForKey:@"fontsize"] floatValue]];
+}
+
+
+/*
+ *Here we set font of uiLabel
+ */
+-(void)configureLabelFont :(NSString *)uid labelDictionary:(NSMutableDictionary *)detail {
+    
+    CustomLabel *lble = [layers objectForKey:uid];
 }
 
 /*

@@ -37,6 +37,10 @@
 }
 
 
+//---------
+-(void)configureLabelSize :(NSString *)uid labelDictionary:(NSMutableDictionary *)detail;
+//---------
+
 -(void)renderLayer :(NSString *)uid layerDictionary:(NSMutableDictionary *)layDic;
 -(void)deleteLayer :(NSString *)uid;
 -(void)setTemplate :(NSString *)imgPath;

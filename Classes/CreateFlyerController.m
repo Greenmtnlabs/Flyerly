@@ -1482,7 +1482,9 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     [flyer setFlyerTextSize:currentLayer Size:selectedFont];
                     
                     //Here we call Render Layer on View
-                    [flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
+                    [flyimgView configureLabelSize:currentLayer labelDictionary:[flyer getLayerFromMaster:currentLayer]];
+                    
+                    //[flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
                     
                     if( [type isEqualToString:FLYER_LAYER_CLIP_ART] ){
                         
