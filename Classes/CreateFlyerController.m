@@ -5450,20 +5450,17 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 //set values at viewWillAppear
 -(void)zoom_init{
     
-    NSLog(@"flyImgView size %f,%f,%f,%f",flyimgView.frame.origin.x,flyimgView.frame.origin.y,flyimgView.frame.size.width,flyimgView.frame.size.height);
-    NSLog(@"zoom_scrollView size %f,%f,%f,%f",zoom_scrollView.frame.origin.x,zoom_scrollView.frame.origin.y,zoom_scrollView.frame.size.width,zoom_scrollView.frame.size.height);
+    zoom_start =   NO;
     
     //hide zoom elements on init
     [self zoom_elementsSetAlpha:0.0];
     
-    zoom_start =   NO;
-
     //HOOK MOVE GESTURE ON SCREEN SHOT IMAGE
     UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(zoom_magnifyerMove:)];
     [zoom_screenShot addGestureRecognizer:panGesture];
 }
 
-//WHEN USER START MOVING MAGNIFYING GLASS
+// Enable zooming, (for testing , when you tap on PHOTO TAB it will start, after start when you again tap on PHOT TAB, zooming will end )
 -(void)zoom_start{
     zoom_start   =   YES;
     [self zoom_elementsSetAlpha:1.0];
@@ -5481,7 +5478,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 	zoom_scrollView.maximumZoomScale = 2.0;
 	[zoom_scrollView setZoomScale:zoom_scrollView.minimumZoomScale];
     
-    //ZOOM FLYER FIRST TIME , I WANT TO TEST ZOOMING IS WORKING OR NOT
+    //ZOOM FLYER FIRST TIME , I WANT TO TEST ZOOMING IS WORKING OR NOT (but its not working :( )
     CGRect recSv = CGRectMake(100, 100, 500,500);
     [zoom_scrollView zoomToRect:recSv animated:YES];
     
@@ -5489,6 +5486,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     //[zoom_scrollView setContentOffset:CGPointMake(10,70)];
     
 }
+// Enable zooming, (for testing , when you tap on PHOTO TAB it will start, after start when you again tap on PHOT TAB, zooming will end )
 -(void)zoom_end{
     zoom_start   =   NO;
     [self zoom_elementsSetAlpha:0.0];
@@ -5506,6 +5504,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     zoom_screenShot.userInteractionEnabled = ( zoom_start ) ? YES : NO;
 }
 
+//WHEN USER MOVING MAGNIFYING GLASS
 - (void)zoom_magnifyerMove:(UIPanGestureRecognizer *)recognizer {
     
     //MOVE START
