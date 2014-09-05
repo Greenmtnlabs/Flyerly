@@ -49,6 +49,11 @@
 -(void)layerStoppedEditing:(NSString *)uid;
 -(void)removeAllLayers;
 
+
+//-----
+@property (nonatomic, assign) BOOL heightIsSelected;
+@property (nonatomic, assign) BOOL widthIsSelected;
+//-----
 @property (strong, readonly) NSMutableDictionary *layers;
 @property (strong, nonatomic)UITapGestureRecognizer *flyerTapGesture;
 @property BOOL *addUiImgForDrawingLayer;

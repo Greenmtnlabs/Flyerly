@@ -13,7 +13,7 @@
 @synthesize layers,flyerTapGesture;
 
 //Flag for drawing layer
-@synthesize addUiImgForDrawingLayer;
+@synthesize addUiImgForDrawingLayer,heightIsSelected,widthIsSelected;
 
 CGAffineTransform previuosTransform;
 NSString *abc;
@@ -567,11 +567,28 @@ NSString *abc;
         
         CGFloat scale = [(UIPinchGestureRecognizer*)recognizer scale];
     
+       
         // Scale
-        CGAffineTransform tr =
-        CGAffineTransformConcat(
-                                currentTransform,
-                                CGAffineTransformMakeScale ( scale, scale ));
+        CGAffineTransform tr;
+        if ( heightIsSelected ) {
+        
+            tr =
+            CGAffineTransformConcat(
+                                    currentTransform,
+                                    CGAffineTransformMakeScale ( 1, scale ));
+        }else if ( widthIsSelected ){
+            tr =
+            CGAffineTransformConcat(
+                                    currentTransform,
+                                    CGAffineTransformMakeScale ( scale, 1 ));
+        } else if ( widthIsSelected == NO && heightIsSelected == NO ) {
+            
+            tr =
+            CGAffineTransformConcat(
+                                    currentTransform,
+                                    CGAffineTransformMakeScale ( scale, scale ));
+        }
+        
         
         [recognizer.view setTransform:tr];
         

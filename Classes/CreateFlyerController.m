@@ -3139,19 +3139,23 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     if ([widthTabButton isSelected]) {
         
-        CGRect lastFrame = [flyer getImageFrame:uid];
+        self.flyimgView.widthIsSelected = YES;
+        
+        /*CGRect lastFrame = [flyer getImageFrame:uid];
         
         lastFrame.origin.x = frame.origin.x;
         lastFrame.size.width = frame.size.width;
-        frame = lastFrame;
+        frame = lastFrame;*/
         
     } else if ([heightTabButton isSelected]) {
         
-        CGRect lastFrame = [flyer getImageFrame:uid];
+        self.flyimgView.heightIsSelected = YES;
+
+        /*CGRect lastFrame = [flyer getImageFrame:uid];
         
         lastFrame.origin.y = frame.origin.y;
         lastFrame.size.height = frame.size.height;
-        frame = lastFrame;
+        frame = lastFrame;*/
         
     }
     
@@ -4352,6 +4356,9 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             
         }
         
+        self.flyimgView.widthIsSelected = YES;
+        self.flyimgView.heightIsSelected = NO;
+        
     }
     else if( selectedButton == heightTabButton )
 	{
@@ -4367,6 +4374,9 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             [widthTabButton setSelected:NO];
             
         }
+        
+        self.flyimgView.widthIsSelected = NO;
+        self.flyimgView.heightIsSelected = YES;
     }
 }
 
