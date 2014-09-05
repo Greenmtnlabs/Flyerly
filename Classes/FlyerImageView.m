@@ -236,9 +236,9 @@ NSString *abc;
         imgView.transform = ttransform;
         
     } else {
+        
         //SetFrame
         [imgView setFrame:CGRectMake([[detail valueForKey:@"x"] floatValue], [[detail valueForKey:@"y"] floatValue], [[detail valueForKey:@"width"] floatValue], [[detail valueForKey:@"height"] floatValue])];
-        
     }
     
     
@@ -532,6 +532,7 @@ NSString *abc;
     if (recognizer.state == UIGestureRecognizerStateBegan) {
         
         currentTransform = recognizer.view.transform;
+        recognizer.view.layer.anchorPoint = CGPointMake( 0.5, 0.5 );
         
     } else if (recognizer.state == UIGestureRecognizerStateChanged) {
         
@@ -618,10 +619,9 @@ NSString *abc;
     
     static CGAffineTransform origTr;
     
-    //recognizer.view.layer.anchorPoint = CGPointMake(recognizer.view.center.x, recognizer.view.center.y);
-    
     if (recognizer.state == UIGestureRecognizerStateBegan) {
         origTr = recognizer.view.transform;
+        recognizer.view.layer.anchorPoint = CGPointMake( 0.5, 0.5 );
         
     } else if (recognizer.state == UIGestureRecognizerStateChanged) {
         
