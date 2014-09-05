@@ -60,8 +60,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 
 #pragma mark -  View Appear Methods
 - (void)viewWillAppear:(BOOL)animated{
-    //hide zoom elements on load
-    [self zoom_elementsSetAlpha:0.0];
+    [self zoom_init];
 }
 
 /**
@@ -4410,7 +4409,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 	else if(selectedButton == addMorePhotoTabButton){
         //for testing of zoom , start zoom work when user tab on addMorePhotoTab
         //just delete this else if after zoom work,
-        [self zoom_init];
+        ( zoom_start ) ? [self zoom_end] :  [self zoom_start];
     }
     else if(selectedButton == addMorePhotoTabButton)
 	{
@@ -5460,11 +5459,29 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 
 #pragma mark - ZOOM FUNCTIONS
 -(void)zoom_init{
+    //hide zoom elements on load
+    [self zoom_elementsSetAlpha:0.0];
+    
+    zoom_start =   NO;
+    
+    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(zoom_magnifyerMove:)];
+    [zoom_screenShot addGestureRecognizer:panGesture];
+}
+-(void)zoom_start{
+    zoom_start   =   YES;
     [self zoom_elementsSetAlpha:1.0];
     
-    zoom_screenShot.image   =[self getFlyerSnapShot];
+    zoom_screenShot.image   = [self getFlyerSnapShot];
     [zoom_scrollView addSubview:flyimgView];
 }
+-(void)zoom_end{
+    zoom_start   =   NO;
+    [self zoom_elementsSetAlpha:0.0];
+    
+    zoom_screenShot.image   = nil;
+    [self.view addSubview:flyimgView];
+}
+
 -(void)zoom_elementsSetAlpha:(CGFloat)zoom_alpha{
     NSLog(@"zoom_alpha=%f",zoom_alpha);
     [zoom_layoutOnFlyr setAlpha:zoom_alpha];
@@ -5472,7 +5489,40 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     [zoom_screenShot setAlpha:zoom_alpha];
     [zoom_magnifyingGlass setAlpha:zoom_alpha];
     
-   
+    zoom_screenShot.userInteractionEnabled = ( zoom_start ) ? YES : NO;
 }
 
+- (void)zoom_magnifyerMove:(UIPanGestureRecognizer *)recognizer {
+    
+    //MOVE START
+    if (recognizer.state == UIGestureRecognizerStateBegan) {
+        NSLog(@"Began");
+    }
+    //MOVING
+    else if (recognizer.state == UIGestureRecognizerStateChanged) {
+        CGPoint magnifierCurLoc = [recognizer locationInView:self.zoom_screenShot];
+        NSLog(@"changed");
+        int x = magnifierCurLoc.x;
+        int y = magnifierCurLoc.y;
+        NSLog(@"A-(%i,%i)",x,y);
+        int xSV = (flyimgView.size.width*x)/100;
+        int ySV = (flyimgView.size.width*y)/100;
+        //CGRect recSv = CGRectMake(xSV, ySV, zoom_scrollView.size.width, zoom_scrollView.size.height);
+        //[zoom_scrollView scrollRectToVisible:recSv animated:YES];
+        zoom_scrollView.contentOffset = CGPointMake(xSV, ySV);
+        
+        
+        x  += zoom_screenShot.origin.x-15;
+        y  += zoom_screenShot.origin.y-15;
+        NSLog(@"B-(%i,%i)",x,y);
+        
+        
+        
+        zoom_magnifyingGlass.frame  =   CGRectMake(x,y, zoom_magnifyingGlass.size.width, zoom_magnifyingGlass.size.height);
+    }
+    //MOVE END
+    else if (recognizer.state == UIGestureRecognizerStateEnded) {
+                NSLog(@"END");
+    }
+}
 @end

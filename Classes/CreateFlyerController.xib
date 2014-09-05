@@ -139,11 +139,11 @@
                 </view>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="scaleToFill" id="OgZ-hl-Uai" userLabel="Scroll View - ZOOM">
                     <rect key="frame" x="5" y="65" width="200" height="200"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <autoresizingMask key="autoresizingMask"/>
                 </scrollView>
                 <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="koI-LW-qvU" userLabel="UiimageView - ScreenShotForZoom">
                     <rect key="frame" x="210" y="125" width="100" height="100"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <autoresizingMask key="autoresizingMask"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="magnifyingGlass.png" id="e7R-ga-ZuC" userLabel="Image View - MagnifyingGlassImg">
                     <rect key="frame" x="223" y="138" width="32" height="32"/>
