@@ -42,7 +42,7 @@
 
 
 @class FlyerlySingleton, Flyer, FlyerImageView, ShareViewController, SigninController,InAppViewController,PrintViewController;
-@interface CreateFlyerController :ParentViewController<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, FlyerImageViewDelegate,UIGestureRecognizerDelegate,InAppPurchasePanelButtonProtocol, UserPurchasesDelegate, GADInterstitialDelegate, GADBannerViewDelegate>
+@interface CreateFlyerController :ParentViewController<UIScrollViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, FlyerImageViewDelegate,UIGestureRecognizerDelegate,InAppPurchasePanelButtonProtocol, UserPurchasesDelegate, GADInterstitialDelegate, GADBannerViewDelegate>
 
 {
     PrintViewController *printViewController;
@@ -200,9 +200,14 @@
 @property (nonatomic,strong)IBOutlet UILabel *durationLabel;
 @property (nonatomic,strong)IBOutlet UILabel *durationChange;
 
+//Outlets form zoom
+@property (strong, nonatomic) IBOutlet UIView *zoom_layoutOnFlyr;
+@property (strong, nonatomic) IBOutlet UIScrollView *zoom_scrollView;
+@property (strong, nonatomic) IBOutlet UIImageView *zoom_screenShort;
+@property (strong, nonatomic) IBOutlet UIImageView *zoom_magnifyingGlass;
+
 
 @property (nonatomic,strong)MPMoviePlayerController *player;
-
 @property (nonatomic,strong) Flyer *flyer;
 @property(strong,nonatomic) NSString *currentLayer;
 @property(strong,nonatomic) NSMutableDictionary *layersDic;

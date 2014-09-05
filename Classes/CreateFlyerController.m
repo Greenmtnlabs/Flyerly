@@ -41,6 +41,9 @@
 @implementation CreateFlyerController
 
 
+//Outlets form zoom
+@synthesize zoom_layoutOnFlyr,zoom_scrollView,zoom_screenShort,zoom_magnifyingGlass;
+
 //Drawing required files
 @synthesize mainImage;
 @synthesize tempDrawImage;
