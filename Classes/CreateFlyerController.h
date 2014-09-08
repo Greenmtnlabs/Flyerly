@@ -99,7 +99,7 @@
     BOOL dw_isOldLayer;
     
     //ZOOM
-    BOOL zoom_start;
+    BOOL zooming;
 }
 
 @property(nonatomic, strong) GADInterstitial *interstitialAdd;

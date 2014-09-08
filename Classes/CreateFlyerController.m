@@ -4409,7 +4409,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 	else if(selectedButton == addMorePhotoTabButton){
         //for testing of zoom , start zoom work when user tab on addMorePhotoTab
         //just delete this else if after zoom work,
-        ( zoom_start ) ? [self zoom_end] :  [self zoom_start];
+        ( zooming ) ? [self zoom_end] :  [self zoom_start];
     }
     else if(selectedButton == addMorePhotoTabButton)
 	{
@@ -5450,7 +5450,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 //set values at viewWillAppear
 -(void)zoom_init{
     
-    zoom_start =   NO;
+    zooming =   NO;
     
     //hide zoom elements on init
     [self zoom_elementsSetAlpha:0.0];
@@ -5462,7 +5462,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 
 // Enable zooming, (for testing , when you tap on PHOTO TAB it will start, after start when you again tap on PHOT TAB, zooming will end )
 -(void)zoom_start{
-    zoom_start   =   YES;
+    zooming   =   YES;
     [self zoom_elementsSetAlpha:1.0];
 
     zoom_screenShot.image   = [self getFlyerSnapShot];
@@ -5488,7 +5488,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 }
 // Enable zooming, (for testing , when you tap on PHOTO TAB it will start, after start when you again tap on PHOT TAB, zooming will end )
 -(void)zoom_end{
-    zoom_start   =   NO;
+    zooming   =   NO;
     [self zoom_elementsSetAlpha:0.0];
     
     zoom_screenShot.image   = nil;
@@ -5501,7 +5501,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     [zoom_screenShot setAlpha:zoom_alpha];
     [zoom_magnifyingGlass setAlpha:zoom_alpha];
     
-    zoom_screenShot.userInteractionEnabled = ( zoom_start ) ? YES : NO;
+    zoom_screenShot.userInteractionEnabled = ( zooming ) ? YES : NO;
 }
 
 //WHEN USER MOVING MAGNIFYING GLASS
