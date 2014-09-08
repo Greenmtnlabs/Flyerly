@@ -1257,16 +1257,18 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     [zoomButton setBackgroundColor:[UIColor clearColor]];
 
     [zoomButton.layer setBorderWidth:2];
-    UIColor * lightGray = [UIColor lightGrayColor];
     [zoomButton.layer setCornerRadius:8];
+    UIColor * lightGray = [UIColor lightGrayColor];
     [zoomButton.layer setBorderColor:lightGray.CGColor];
-    
+    zoomButton.tag = @"magnifyingGlass";
     
     UIImageView *tileImageView = [[UIImageView alloc] initWithFrame:CGRectMake(5.0,5.0,10.0,10.0)];
     tileImageView.image = [UIImage imageNamed:@"magnifyingGlass.png"];
     tileImageView.frame  = CGRectMake(zoomButton.frame.origin.x+5, zoomButton.frame.origin.y-2, zoomButton.frame.size.width-20, zoomButton.frame.size.height-10);
     
     tileImageView.contentMode = UIViewContentModeScaleAspectFit;
+    tileImageView.tag = @"magnifyingGlassImg";
+    
     
     [zoomButton addSubview:tileImageView];
     
@@ -4414,6 +4416,9 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
  */
 -(IBAction) setAddMoreLayerTabAction:(id) sender {
     
+    if( flyimgView.zoomedIn )
+    [self zoomEnd];
+    
 	UIButton *selectedButton = (UIButton*)sender;
     
     //Unselected All main menue buttons
@@ -5503,7 +5508,18 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     [zoomScreenShot setAlpha:zoomAlpha];
     [zoomMagnifyingGlass setAlpha:zoomAlpha];
     
-    zoomScreenShot.userInteractionEnabled = ( flyimgView.zoomedIn ) ? YES : NO;
+
+    
+    UIButton *zoomButton = (UIButton *)[layerScrollView viewWithTag:@"magnifyingGlass"];
+    if( flyimgView.zoomedIn ){
+        [zoomButton.layer setBorderColor:[UIColor redColor].CGColor];
+        zoomScreenShot.userInteractionEnabled = YES;
+    } else{
+        [zoomButton.layer setBorderColor:[UIColor grayColor].CGColor];
+        zoomScreenShot.userInteractionEnabled = NO;
+    }
+
+    
 }
 
 //WHEN USER MOVING MAGNIFYING GLASS
