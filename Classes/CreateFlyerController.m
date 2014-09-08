@@ -3332,6 +3332,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 
 -(void)undoFlyer{
     if( !(flyimgView.zoomedIn) ) {
+        
         //Here we remove Borders from layer if user touch any layer
         [self.flyimgView layerStoppedEditing:currentLayer];
         
@@ -3355,12 +3356,16 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         //Here we Re-Initialize Flyer Instance
         NSString* currentPath  =   [[NSFileManager defaultManager] currentDirectoryPath];
         self.flyer = [[Flyer alloc]initWithPath:currentPath setDirectory:YES];
+
+
         
         // Remove all sub views
         [self.flyimgView removeAllLayers];
         
+        self.flyimgView.addUiImgForDrawingLayer = YES; //AFTER removing all layer set it yes for drawing layers
         //Here we Render Flyer
         [self renderFlyer];
+        self.flyimgView.addUiImgForDrawingLayer = NO; // After rendering all layers set it no
         
         //Here we Load Current Layer in ScrollView
         [self addAllLayersIntoScrollView];
