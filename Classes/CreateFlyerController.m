@@ -3060,12 +3060,13 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
  */
 -(void)editLayer:(LayerTileButton *)editButton{
     
-    
-    editButtonGlobal = editButton;
-    currentLayer =  editButton.uid;
-    editButtonGlobal.uid = currentLayer;
-    
-    [self editCurrentLayer];
+    if( !(flyimgView.zoomedIn) ){
+        editButtonGlobal = editButton;
+        currentLayer =  editButton.uid;
+        editButtonGlobal.uid = currentLayer;
+        
+        [self editCurrentLayer];
+    }
 }
 
 
