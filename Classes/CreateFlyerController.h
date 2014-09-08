@@ -277,4 +277,6 @@
 - (IBAction)settings:(id)sender;
 - (IBAction)save:(id)sender;
 
+- (IBAction)zoom:(id)sender;
+
 @end

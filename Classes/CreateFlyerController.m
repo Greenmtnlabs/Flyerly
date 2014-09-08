@@ -1249,6 +1249,31 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     NSInteger layerScrollWidth = 55;
     NSInteger layerScrollHeight = 40;
+
+    //--add zoom button as first layer button----start
+    UIButton* zoomButton = [UIButton  buttonWithType:UIButtonTypeCustom];
+    [zoomButton addTarget:self action:@selector(zoom:) forControlEvents:UIControlEventTouchUpInside];
+    zoomButton.frame = CGRectMake(10, 10, layerScrollWidth, layerScrollHeight);
+    [zoomButton setBackgroundColor:[UIColor clearColor]];
+
+    [zoomButton.layer setBorderWidth:2];
+    UIColor * lightGray = [UIColor lightGrayColor];
+    [zoomButton.layer setCornerRadius:8];
+    [zoomButton.layer setBorderColor:lightGray.CGColor];
+    
+    
+    UIImageView *tileImageView = [[UIImageView alloc] initWithFrame:CGRectMake(5.0,5.0,10.0,10.0)];
+    tileImageView.image = [UIImage imageNamed:@"magnifyingGlass.png"];
+    tileImageView.frame  = CGRectMake(zoomButton.frame.origin.x+5, zoomButton.frame.origin.y-2, zoomButton.frame.size.width-20, zoomButton.frame.size.height-10);
+    
+    tileImageView.contentMode = UIViewContentModeScaleAspectFit;
+    
+    [zoomButton addSubview:tileImageView];
+    
+    
+    [layerScrollView addSubview:zoomButton];
+    //--add zoom button as first layer button----end
+    
     
     if( self.flyimgView.layers.count == 0 ){
         _addMoreLayerOrSaveFlyerLabel.alpha = 1;
@@ -1262,7 +1287,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     if(IS_IPHONE_5)
     {
-        curXLoc = 10;
+        curXLoc = 70;
         curYLoc = 10;
     }
     
@@ -4413,12 +4438,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         }
         [self callWrite];
 	}
-	else if(selectedButton == addMorePhotoTabButton){
-        //for testing of zoom , start zoom work when user tab on addMorePhotoTab
-        //just delete this else if after zoom work,
-        ( flyimgView.zoomedIn ) ? [self zoomEnd] :  [self zoomStart];
-        
-    }
     else if(selectedButton == addMorePhotoTabButton)
 	{
         selectedAddMoreLayerTab = ADD_MORE_PHOTOTAB;
@@ -5448,13 +5467,16 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 }
 
 // Enable zooming, (for testing , when you tap on PHOTO TAB it will start, after start when you again tap on PHOT TAB, zooming will end )
--(void)zoomStart{
-    
+- (IBAction)zoom:(id)sender {
+    ( flyimgView.zoomedIn ) ? [self zoomEnd] : [self zoomStart];
+}
+
+-(void)zoomStart {
     flyimgView.zoomedIn = YES;
     [self zoomElementsSetAlpha:1.0];
     
     zoomScreenShot.image = [self getFlyerSnapShot];
-
+    
     zoomScrollView.delegate = self;
     [zoomScrollView addSubview:flyimgView];
     zoomScrollView.backgroundColor = [UIColor redColor];
@@ -5462,7 +5484,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     [self zoomMoveToPoint:CGPointMake(50.0,50.0)];
 }
-
 
 // Enable zooming, (for testing , when you tap on PHOTO TAB it will start, after start when you again tap on PHOT TAB, zooming will end )
 -(void)zoomEnd {
