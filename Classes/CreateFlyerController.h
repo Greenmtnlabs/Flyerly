@@ -204,10 +204,10 @@
 @property (nonatomic,strong)IBOutlet UILabel *durationChange;
 
 //Outlets form zoom
-@property (strong, nonatomic) IBOutlet UIView *zoom_layoutOnFlyr;
-@property (strong, nonatomic) IBOutlet UIScrollView *zoom_scrollView;
-@property (strong, nonatomic) IBOutlet UIImageView *zoom_screenShot;
-@property (strong, nonatomic) IBOutlet UIImageView *zoom_magnifyingGlass;
+@property (strong, nonatomic) IBOutlet UIView *zoomLayoutOnFlyr;
+@property (strong, nonatomic) IBOutlet UIScrollView *zoomScrollView;
+@property (strong, nonatomic) IBOutlet UIImageView *zoomScreenShot;
+@property (strong, nonatomic) IBOutlet UIImageView *zoomMagnifyingGlass;
 
 
 @property (nonatomic,strong)MPMoviePlayerController *player;

@@ -42,7 +42,7 @@
 
 
 //Outlets form zoom
-@synthesize zoom_layoutOnFlyr,zoom_scrollView,zoom_screenShot,zoom_magnifyingGlass;
+@synthesize zoomLayoutOnFlyr,zoomScrollView,zoomScreenShot,zoomMagnifyingGlass;
 
 //Drawing required files
 @synthesize mainImage;
@@ -60,7 +60,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 
 #pragma mark -  View Appear Methods
 - (void)viewWillAppear:(BOOL)animated{
-    //[self zoom_init];
+    
 }
 
 /**
@@ -515,7 +515,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         });
     });
     
-    [self zoom_init];
+    [self zoomInit];
 }
 
 - (void)viewDidUnload
@@ -4411,7 +4411,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 	else if(selectedButton == addMorePhotoTabButton){
         //for testing of zoom , start zoom work when user tab on addMorePhotoTab
         //just delete this else if after zoom work,
-        ( zooming ) ? [self zoom_end] :  [self zoom_start];
+        ( zooming ) ? [self zoom_end] :  [self zoomStart];
     }
     else if(selectedButton == addMorePhotoTabButton)
 	{
@@ -5450,9 +5450,9 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 
 #pragma mark - ZOOM FUNCTIONS
 //set values at viewWillAppear
--(void)zoom_init{
+-(void)zoomInit{
     //disable scrolling in scrollView
-    [zoom_scrollView setScrollEnabled:NO];
+    [zoomScrollView setScrollEnabled:NO];
 
     //on load time zooming is disabled
     zooming = NO;
@@ -5461,24 +5461,24 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     [self zoom_elementsSetAlpha:0.0];
     
     //HOOK MOVE GESTURE ON SCREEN SHOT IMAGE
-    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(zoom_magnifyerMove:)];
-    [zoom_screenShot addGestureRecognizer:panGesture];
+    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(zoomMagnifyerMove:)];
+    [zoomScreenShot addGestureRecognizer:panGesture];
     
-    zoom_scrollView.minimumZoomScale = FLYER_ZOOM_MIN_SCALE;
-	zoom_scrollView.maximumZoomScale = FLYER_ZOOM_MAX_SCALE;
+    zoomScrollView.minimumZoomScale = FLYER_ZOOM_MIN_SCALE;
+	zoomScrollView.maximumZoomScale = FLYER_ZOOM_MAX_SCALE;
 }
 
 // Enable zooming, (for testing , when you tap on PHOTO TAB it will start, after start when you again tap on PHOT TAB, zooming will end )
--(void)zoom_start{
+-(void)zoomStart{
     zooming = YES;
     [self zoom_elementsSetAlpha:1.0];
     
-    zoom_screenShot.image = [self getFlyerSnapShot];
+    zoomScreenShot.image = [self getFlyerSnapShot];
 
-    zoom_scrollView.delegate = self;
-    [zoom_scrollView addSubview:flyimgView];
-    zoom_scrollView.backgroundColor = [UIColor redColor];
-	[zoom_scrollView setZoomScale:FLYER_ZOOM_SET_SCALE];
+    zoomScrollView.delegate = self;
+    [zoomScrollView addSubview:flyimgView];
+    zoomScrollView.backgroundColor = [UIColor redColor];
+	[zoomScrollView setZoomScale:FLYER_ZOOM_SET_SCALE];
     
     /*
     CGRect recSv = CGRectMake(0, 0, zoom_scrollView.size.width, zoom_scrollView.size.height);
@@ -5491,7 +5491,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                                               zoom_magnifyingGlass.size.height);
     */
     
-    [self zoom_MoveToPoint:CGPointMake(50.0,50.0)];
+    [self zoomMoveToPoint:CGPointMake(50.0,50.0)];
 }
 
 
@@ -5500,32 +5500,32 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     zooming   =   NO;
     [self zoom_elementsSetAlpha:0.0];
     
-    zoom_screenShot.image   = nil;
+    zoomScreenShot.image   = nil;
     [self.view addSubview:flyimgView];
-    [zoom_scrollView setZoomScale:zoom_scrollView.minimumZoomScale];
+    [zoomScrollView setZoomScale:zoomScrollView.minimumZoomScale];
 }
 
 -(void)zoom_elementsSetAlpha:(CGFloat)zoom_alpha{
-    [zoom_layoutOnFlyr setAlpha:zoom_alpha];
-    [zoom_scrollView setAlpha:zoom_alpha];
-    [zoom_screenShot setAlpha:zoom_alpha];
-    [zoom_magnifyingGlass setAlpha:zoom_alpha];
+    [zoomLayoutOnFlyr setAlpha:zoom_alpha];
+    [zoomScrollView setAlpha:zoom_alpha];
+    [zoomScreenShot setAlpha:zoom_alpha];
+    [zoomMagnifyingGlass setAlpha:zoom_alpha];
     
-    zoom_screenShot.userInteractionEnabled = ( zooming ) ? YES : NO;
+    zoomScreenShot.userInteractionEnabled = ( zooming ) ? YES : NO;
 }
 
 //WHEN USER MOVING MAGNIFYING GLASS
-- (void)zoom_magnifyerMove:(UIPanGestureRecognizer *)recognizer {
+- (void)zoomMagnifyerMove:(UIPanGestureRecognizer *)recognizer {
     
     //MOVE START
     if (recognizer.state == UIGestureRecognizerStateBegan) {
-        NSLog(@"ZOOM BEGAN , MG W*H(%f,%f)",zoom_magnifyingGlass.size.width,zoom_magnifyingGlass.size.height);
+        NSLog(@"ZOOM BEGAN , MG W*H(%f,%f)",zoomMagnifyingGlass.size.width,zoomMagnifyingGlass.size.height);
 
     }
     //MOVING
     else if (recognizer.state == UIGestureRecognizerStateChanged) {
-        CGPoint magnifierCurLoc = [recognizer locationInView:self.zoom_screenShot];
-        [self zoom_MoveToPoint:magnifierCurLoc];
+        CGPoint magnifierCurLoc = [recognizer locationInView:self.zoomScreenShot];
+        [self zoomMoveToPoint:magnifierCurLoc];
     }
     //MOVE END
     else if (recognizer.state == UIGestureRecognizerStateEnded) {
@@ -5533,7 +5533,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     }
 }
 
-- (void)zoom_MoveToPoint:(CGPoint) magnifierCurLoc{
+- (void)zoomMoveToPoint:(CGPoint) magnifierCurLoc{
     int x = magnifierCurLoc.x;
     int y = magnifierCurLoc.y;
     
@@ -5542,8 +5542,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     int zSsHE   = 10;
 
     // width/height of zoom screenshot
-    int zSsW = zoom_screenShot.size.width+zSsWE;
-    int zSsH = zoom_screenShot.size.height+zSsHE;
+    int zSsW = zoomScreenShot.size.width+zSsWE;
+    int zSsH = zoomScreenShot.size.height+zSsHE;
     
     NSLog(@"(x,y)=(%i,%i)",x,y);
     
@@ -5554,13 +5554,13 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         CGFloat xSv = ( flyimgView.size.width * x ) / 100;
         CGFloat ySv = ( flyimgView.size.width * y ) / 100;
         
-        CGRect recSv = CGRectMake(xSv, ySv, zoom_scrollView.size.width, zoom_scrollView.size.height);
-        [zoom_scrollView scrollRectToVisible:recSv animated:YES];
+        CGRect recSv = CGRectMake(xSv, ySv, zoomScrollView.size.width, zoomScrollView.size.height);
+        [zoomScrollView scrollRectToVisible:recSv animated:YES];
         
         //CHANGE MAGNIFIER POSITION ON SCREEN SHORT
-        CGFloat xMg  = x+zoom_screenShot.origin.x-15;
-        CGFloat yMg  = y+zoom_screenShot.origin.y-15;
-        zoom_magnifyingGlass.frame  =  CGRectMake(xMg,yMg, zoom_magnifyingGlass.size.width, zoom_magnifyingGlass.size.height);
+        CGFloat xMg  = x+zoomScreenShot.origin.x-15;
+        CGFloat yMg  = y+zoomScreenShot.origin.y-15;
+        zoomMagnifyingGlass.frame  =  CGRectMake(xMg,yMg, zoomMagnifyingGlass.size.width, zoomMagnifyingGlass.size.height);
         
         NSLog(@"Cp(x,y)=(%i,%i),scrollX,scrollY=(%f,%f), mgX,yMg(%f,%f)",x,y, xSv,ySv, xMg,yMg);
     }
