@@ -146,7 +146,7 @@
                     <autoresizingMask key="autoresizingMask"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="magnifyingGlass.png" id="e7R-ga-ZuC" userLabel="Image View - MagnifyingGlassImg">
-                    <rect key="frame" x="223" y="138" width="32" height="32"/>
+                    <rect key="frame" x="210" y="125" width="32" height="32"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </imageView>
             </subviews>

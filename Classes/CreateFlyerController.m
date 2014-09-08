@@ -60,7 +60,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 
 #pragma mark -  View Appear Methods
 - (void)viewWillAppear:(BOOL)animated{
-    [self zoom_init];
+    //[self zoom_init];
 }
 
 /**
@@ -514,6 +514,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             }
         });
     });
+    
+    [self zoom_init];
 }
 
 - (void)viewDidUnload
@@ -5450,6 +5452,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 //set values at viewWillAppear
 -(void)zoom_init{
     
+    [zoom_scrollView setScrollEnabled:NO];
+    
     zooming =   NO;
     
     //hide zoom elements on init
@@ -5458,6 +5462,11 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     //HOOK MOVE GESTURE ON SCREEN SHOT IMAGE
     UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(zoom_magnifyerMove:)];
     [zoom_screenShot addGestureRecognizer:panGesture];
+    
+    zoom_scrollView.minimumZoomScale = 1.0;
+	zoom_scrollView.maximumZoomScale = 5.0;
+    [zoom_scrollView setContentSize:flyimgView.frame.size];
+    
 }
 
 // Enable zooming, (for testing , when you tap on PHOTO TAB it will start, after start when you again tap on PHOT TAB, zooming will end )
@@ -5467,25 +5476,18 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 
     zoom_screenShot.image   = [self getFlyerSnapShot];
     
-    zoom_scrollView.backgroundColor = [UIColor redColor];
     zoom_scrollView.delegate  = self;
-    [zoom_scrollView setContentSize:flyimgView.frame.size];
     [zoom_scrollView addSubview:flyimgView];
-    //zoom_scrollView.showsHorizontalScrollIndicator  =   NO;
-    //zoom_scrollView.showsVerticalScrollIndicator    = NO;
-    
-    zoom_scrollView.minimumZoomScale = 1.0;//zoom_scrollView.frame.size.width / flyimgView.frame.size.width;
-	zoom_scrollView.maximumZoomScale = 2.0;
-	[zoom_scrollView setZoomScale:zoom_scrollView.minimumZoomScale];
-    
-    //ZOOM FLYER FIRST TIME , I WANT TO TEST ZOOMING IS WORKING OR NOT (but its not working :( )
-    CGRect recSv = CGRectMake(100, 100, 500,500);
-    [zoom_scrollView zoomToRect:recSv animated:YES];
-    
+    zoom_scrollView.backgroundColor = [UIColor redColor];
+    [zoom_scrollView setContentSize:flyimgView.frame.size];
+	[zoom_scrollView setZoomScale:FLYER_ZOOMSCALE];
 
-    //[zoom_scrollView setContentOffset:CGPointMake(10,70)];
+    CGRect recSv = CGRectMake(0, 0, 200, 200);
+    [zoom_scrollView scrollRectToVisible:recSv animated:YES];
     
 }
+
+
 // Enable zooming, (for testing , when you tap on PHOTO TAB it will start, after start when you again tap on PHOT TAB, zooming will end )
 -(void)zoom_end{
     zooming   =   NO;
@@ -5493,6 +5495,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     zoom_screenShot.image   = nil;
     [self.view addSubview:flyimgView];
+    [zoom_scrollView setZoomScale:1.0];
 }
 
 -(void)zoom_elementsSetAlpha:(CGFloat)zoom_alpha{
@@ -5528,12 +5531,12 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             //LOGIC OF MAKING X,Y FOR flyImageView a/c to screen short magnifier postion
             int xSV = (flyimgView.size.width*x)/100;
             int ySV = (flyimgView.size.width*y)/100;
-            zoom_scrollView.contentOffset = CGPointMake(xSV-20,ySV+25);
+            //zoom_scrollView.contentOffset = CGPointMake(xSV-20,ySV+25);
             
             //CODE FOR ZOOM
             CGRect recSv = CGRectMake(xSV, ySV, zoom_scrollView.size.width, zoom_scrollView.size.height);
-            [zoom_scrollView zoomToRect:recSv animated:YES]; //NOT WORKING
-            //[zoom_scrollView scrollRectToVisible:recSv animated:YES]; //NOT WORKING
+            [zoom_scrollView scrollRectToVisible:recSv animated:YES]; //NOT WORKING
+            //[zoom_scrollView zoomToRect:recSv animated:YES]; //NOT WORKING
             
             //CHANGE MAGNIFIER POSITION ON SCREEN SHORT
             x  += zoom_screenShot.origin.x-15;
@@ -5547,4 +5550,33 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         NSLog(@"END");
     }
 }
+
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
+    return self.flyimgView;
+}
+
+- (void)scrollViewDidZoom:(UIScrollView *)scrollView {
+    // The scroll view has zoomed, so you need to re-center the contents
+    //[self centerScrollViewContents];
+}
+
+- (void)centerScrollViewContents {
+    CGSize boundsSize = zoom_scrollView.bounds.size;
+    CGRect contentsFrame = self.flyimgView.frame;
+    
+    if (contentsFrame.size.width < boundsSize.width) {
+        contentsFrame.origin.x = (boundsSize.width - contentsFrame.size.width) / 2.0f;
+    } else {
+        contentsFrame.origin.x = 0.0f;
+    }
+    
+    if (contentsFrame.size.height < boundsSize.height) {
+        contentsFrame.origin.y = (boundsSize.height - contentsFrame.size.height) / 2.0f;
+    } else {
+        contentsFrame.origin.y = 0.0f;
+    }
+    
+    self.flyimgView.frame = contentsFrame;
+}
+
 @end
