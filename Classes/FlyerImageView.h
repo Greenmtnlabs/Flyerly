@@ -33,7 +33,8 @@
 	CGFloat _firstY;
     CGFloat _lastScale;
     
-    CAShapeLayer *_marque;
+    CAShapeLayer *_marque;    
+    
 }
 
 
@@ -48,6 +49,7 @@
 @property (strong, readonly) NSMutableDictionary *layers;
 @property (strong, nonatomic)UITapGestureRecognizer *flyerTapGesture;
 @property BOOL *addUiImgForDrawingLayer;
+@property BOOL *zoomedIn;
 
 @property (weak, nonatomic) id<FlyerImageViewDelegate> IBOutlet delegate;
 

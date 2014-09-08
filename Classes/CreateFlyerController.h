@@ -97,9 +97,6 @@
     //IF THAT IS OLD LAYER SO KEEP LAYER BUT DO NOT DELETE LAYER
     BOOL dw_layer_save;
     BOOL dw_isOldLayer;
-    
-    //ZOOM
-    BOOL zooming;
 }
 
 @property(nonatomic, strong) GADInterstitial *interstitialAdd;

@@ -4411,7 +4411,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 	else if(selectedButton == addMorePhotoTabButton){
         //for testing of zoom , start zoom work when user tab on addMorePhotoTab
         //just delete this else if after zoom work,
-        ( zooming ) ? [self zoomEnd] :  [self zoomStart];
+        ( flyimgView.zoomedIn ) ? [self zoomEnd] :  [self zoomStart];
+        
     }
     else if(selectedButton == addMorePhotoTabButton)
 	{
@@ -5428,7 +5429,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     [zoomScrollView setScrollEnabled:NO];
 
     //on load time zooming is disabled
-    zooming = NO;
+    flyimgView.zoomedIn = NO;
     
     //hide zoom elements on init
     [self zoomElementsSetAlpha:0.0];
@@ -5444,7 +5445,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 // Enable zooming, (for testing , when you tap on PHOTO TAB it will start, after start when you again tap on PHOT TAB, zooming will end )
 -(void)zoomStart{
     
-    zooming = YES;
+    flyimgView.zoomedIn = YES;
     [self zoomElementsSetAlpha:1.0];
     
     zoomScreenShot.image = [self getFlyerSnapShot];
@@ -5461,7 +5462,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 // Enable zooming, (for testing , when you tap on PHOTO TAB it will start, after start when you again tap on PHOT TAB, zooming will end )
 -(void)zoomEnd {
     
-    zooming   =   NO;
+    flyimgView.zoomedIn   =   NO;
     [self zoomElementsSetAlpha:0.0];
     
     zoomScreenShot.image   = nil;
@@ -5476,7 +5477,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     [zoomScreenShot setAlpha:zoomAlpha];
     [zoomMagnifyingGlass setAlpha:zoomAlpha];
     
-    zoomScreenShot.userInteractionEnabled = ( zooming ) ? YES : NO;
+    zoomScreenShot.userInteractionEnabled = ( flyimgView.zoomedIn ) ? YES : NO;
 }
 
 //WHEN USER MOVING MAGNIFYING GLASS

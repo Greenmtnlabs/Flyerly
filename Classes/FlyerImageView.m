@@ -10,7 +10,7 @@
 #import "Flyer.h"
 
 @implementation FlyerImageView
-@synthesize layers,flyerTapGesture;
+@synthesize layers,flyerTapGesture,zoomedIn;
 
 //Flag for drawing layer
 @synthesize addUiImgForDrawingLayer;
@@ -595,22 +595,24 @@ NSString *abc;
  * Edit view when tapped.
  */
 - (void)editLayer:(UIGestureRecognizer *)sender {
-    UIView *_view = sender.view;
-    
-    // Here we send the first matching layer in Dictionary
-    // in to edit mode.
-    NSArray *keys = [layers allKeysForObject:_view];
-    
-    // Let the delegate know that this layer needs to go in to edit mode.
-    if ( keys.count > 0 ) {
-        NSString *key = [keys objectAtIndex:0];
-        [self.delegate sendLayerToEditMode:key];
-    }else {
-        [self.delegate toggleImageViewInteraction];
-       
+    if( !(self.zoomedIn) ){
+        UIView *_view = sender.view;
+        
+        // Here we send the first matching layer in Dictionary
+        // in to edit mode.
+        NSArray *keys = [layers allKeysForObject:_view];
+        
+        // Let the delegate know that this layer needs to go in to edit mode.
+        if ( keys.count > 0 ) {
+            NSString *key = [keys objectAtIndex:0];
+            [self.delegate sendLayerToEditMode:key];
+        }else {
+            [self.delegate toggleImageViewInteraction];
+           
+        }
     }
 }
-                                                           
+
 /**
  * Rotate view on rotate Gesture.
  */
