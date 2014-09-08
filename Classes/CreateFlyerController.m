@@ -5451,10 +5451,11 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 #pragma mark - ZOOM FUNCTIONS
 //set values at viewWillAppear
 -(void)zoom_init{
-    
+    //disable scrolling in scrollView
     [zoom_scrollView setScrollEnabled:NO];
-    
-    zooming =   NO;
+
+    //on load time zooming is disabled
+    zooming = NO;
     
     //hide zoom elements on init
     [self zoom_elementsSetAlpha:0.0];
@@ -5463,28 +5464,34 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(zoom_magnifyerMove:)];
     [zoom_screenShot addGestureRecognizer:panGesture];
     
-    zoom_scrollView.minimumZoomScale = 1.0;
-	zoom_scrollView.maximumZoomScale = 5.0;
-    [zoom_scrollView setContentSize:flyimgView.frame.size];
-    
+    zoom_scrollView.minimumZoomScale = FLYER_ZOOM_MIN_SCALE;
+	zoom_scrollView.maximumZoomScale = FLYER_ZOOM_MAX_SCALE;
 }
 
 // Enable zooming, (for testing , when you tap on PHOTO TAB it will start, after start when you again tap on PHOT TAB, zooming will end )
 -(void)zoom_start{
-    zooming   =   YES;
+    zooming = YES;
     [self zoom_elementsSetAlpha:1.0];
-
-    zoom_screenShot.image   = [self getFlyerSnapShot];
     
-    zoom_scrollView.delegate  = self;
+    zoom_screenShot.image = [self getFlyerSnapShot];
+
+    zoom_scrollView.delegate = self;
     [zoom_scrollView addSubview:flyimgView];
     zoom_scrollView.backgroundColor = [UIColor redColor];
-    [zoom_scrollView setContentSize:flyimgView.frame.size];
-	[zoom_scrollView setZoomScale:FLYER_ZOOMSCALE];
-
-    CGRect recSv = CGRectMake(0, 0, 200, 200);
-    [zoom_scrollView scrollRectToVisible:recSv animated:YES];
+	[zoom_scrollView setZoomScale:FLYER_ZOOM_SET_SCALE];
     
+    /*
+    CGRect recSv = CGRectMake(0, 0, zoom_scrollView.size.width, zoom_scrollView.size.height);
+    [zoom_scrollView scrollRectToVisible:recSv animated:YES];
+   
+    //reset location of magnifyingGlass
+    zoom_magnifyingGlass.frame  =  CGRectMake(zoom_screenShot.frame.origin.x,
+                                              zoom_screenShot.frame.origin.y,
+                                              zoom_magnifyingGlass.size.width,
+                                              zoom_magnifyingGlass.size.height);
+    */
+    
+    [self zoom_MoveToPoint:CGPointMake(50.0,50.0)];
 }
 
 
@@ -5495,7 +5502,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     zoom_screenShot.image   = nil;
     [self.view addSubview:flyimgView];
-    [zoom_scrollView setZoomScale:1.0];
+    [zoom_scrollView setZoomScale:zoom_scrollView.minimumZoomScale];
 }
 
 -(void)zoom_elementsSetAlpha:(CGFloat)zoom_alpha{
@@ -5512,71 +5519,54 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     //MOVE START
     if (recognizer.state == UIGestureRecognizerStateBegan) {
-        NSLog(@"Began");
+        NSLog(@"ZOOM BEGAN , MG W*H(%f,%f)",zoom_magnifyingGlass.size.width,zoom_magnifyingGlass.size.height);
+
     }
     //MOVING
     else if (recognizer.state == UIGestureRecognizerStateChanged) {
         CGPoint magnifierCurLoc = [recognizer locationInView:self.zoom_screenShot];
-        int x = magnifierCurLoc.x;
-        int y = magnifierCurLoc.y; //  NSLog(@"cp(x,y)=(%i,%i)",x,y);
-        
-        int zssW = zoom_screenShot.size.width-5;
-        int zssH = zoom_screenShot.size.height-5;
-        NSLog(@"cp(x,y)=(%i,%i), zssW=%i,zssH=%i",x,y,zssW,zssH);
-
-        //MOVE MAGNIFIER WHEN USER MOVE IT IN THE BOUNDRY OF SCREEN SHORT
-        if( (x > 5 && x < zssW ) && (y > 5 && y < zssH) ){
-            NSLog(@"changed");
-            
-            //LOGIC OF MAKING X,Y FOR flyImageView a/c to screen short magnifier postion
-            int xSV = (flyimgView.size.width*x)/100;
-            int ySV = (flyimgView.size.width*y)/100;
-            //zoom_scrollView.contentOffset = CGPointMake(xSV-20,ySV+25);
-            
-            //CODE FOR ZOOM
-            CGRect recSv = CGRectMake(xSV, ySV, zoom_scrollView.size.width, zoom_scrollView.size.height);
-            [zoom_scrollView scrollRectToVisible:recSv animated:YES]; //NOT WORKING
-            //[zoom_scrollView zoomToRect:recSv animated:YES]; //NOT WORKING
-            
-            //CHANGE MAGNIFIER POSITION ON SCREEN SHORT
-            x  += zoom_screenShot.origin.x-15;
-            y  += zoom_screenShot.origin.y-15;
-            NSLog(@"M-(%i,%i)",x,y);
-            zoom_magnifyingGlass.frame  =  CGRectMake(x,y, zoom_magnifyingGlass.size.width, zoom_magnifyingGlass.size.height);
-        }
+        [self zoom_MoveToPoint:magnifierCurLoc];
     }
     //MOVE END
     else if (recognizer.state == UIGestureRecognizerStateEnded) {
-        NSLog(@"END");
+        NSLog(@"ZOOM END");
+    }
+}
+
+- (void)zoom_MoveToPoint:(CGPoint) magnifierCurLoc{
+    int x = magnifierCurLoc.x;
+    int y = magnifierCurLoc.y;
+    
+    //extras in width/height of zoom screenshot
+    int zSsWE   = 10;
+    int zSsHE   = 10;
+
+    // width/height of zoom screenshot
+    int zSsW = zoom_screenShot.size.width+zSsWE;
+    int zSsH = zoom_screenShot.size.height+zSsHE;
+    
+    NSLog(@"(x,y)=(%i,%i)",x,y);
+    
+    //MOVE MAGNIFIER WHEN USER MOVE IT IN THE BOUNDRY OF SCREEN SHORT
+    if( (x > 5 && x < (zSsW-zSsWE) ) && (y > 5 && y < (zSsH-zSsHE) ) ){
+
+        //LOGIC OF MAKING X,Y FOR flyImageView a/c to screenshot magnifier postion(% logic)
+        CGFloat xSv = ( flyimgView.size.width * x ) / 100;
+        CGFloat ySv = ( flyimgView.size.width * y ) / 100;
+        
+        CGRect recSv = CGRectMake(xSv, ySv, zoom_scrollView.size.width, zoom_scrollView.size.height);
+        [zoom_scrollView scrollRectToVisible:recSv animated:YES];
+        
+        //CHANGE MAGNIFIER POSITION ON SCREEN SHORT
+        CGFloat xMg  = x+zoom_screenShot.origin.x-15;
+        CGFloat yMg  = y+zoom_screenShot.origin.y-15;
+        zoom_magnifyingGlass.frame  =  CGRectMake(xMg,yMg, zoom_magnifyingGlass.size.width, zoom_magnifyingGlass.size.height);
+        
+        NSLog(@"Cp(x,y)=(%i,%i),scrollX,scrollY=(%f,%f), mgX,yMg(%f,%f)",x,y, xSv,ySv, xMg,yMg);
     }
 }
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
     return self.flyimgView;
 }
-
-- (void)scrollViewDidZoom:(UIScrollView *)scrollView {
-    // The scroll view has zoomed, so you need to re-center the contents
-    //[self centerScrollViewContents];
-}
-
-- (void)centerScrollViewContents {
-    CGSize boundsSize = zoom_scrollView.bounds.size;
-    CGRect contentsFrame = self.flyimgView.frame;
-    
-    if (contentsFrame.size.width < boundsSize.width) {
-        contentsFrame.origin.x = (boundsSize.width - contentsFrame.size.width) / 2.0f;
-    } else {
-        contentsFrame.origin.x = 0.0f;
-    }
-    
-    if (contentsFrame.size.height < boundsSize.height) {
-        contentsFrame.origin.y = (boundsSize.height - contentsFrame.size.height) / 2.0f;
-    } else {
-        contentsFrame.origin.y = 0.0f;
-    }
-    
-    self.flyimgView.frame = contentsFrame;
-}
-
 @end
