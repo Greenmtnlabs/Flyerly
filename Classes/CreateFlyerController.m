@@ -532,6 +532,10 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
  */
 -(void) goBack {
     
+    if( flyimgView.zoomedIn ){
+        [self zoomEnd];
+    }
+    
     //Delete extra layers
     [self deSelectPreviousLayer];
     
