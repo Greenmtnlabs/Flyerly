@@ -3331,42 +3331,42 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 #pragma mark - Undo Implementation
 
 -(void)undoFlyer{
-    
-    //Here we remove Borders from layer if user touch any layer
-    [self.flyimgView layerStoppedEditing:currentLayer];
-    
-    //Here we take Snap shot of Flyer and
-    //Flyer Add to Gallery if user allow to Access there photos
-    [flyer setUpdatedSnapshotWithImage:[self getFlyerSnapShot]];
-    
-    //First we Save Current flyer in history,
-    //if we didn't do this here, so when we undo, it will back to 2 steps back.
-    [flyer saveFlyer];
-    
-    //Add Flyer in History if any Change Exists
-    [flyer addToHistory];
-    
-    //Here we send Request to Model for Move Back
-    [flyer replaceFromHistory];
-    
-    //set Undo Bar Button Status
-    [self setUndoStatus];
-    
-    //Here we Re-Initialize Flyer Instance
-    NSString* currentPath  =   [[NSFileManager defaultManager] currentDirectoryPath];
-    self.flyer = [[Flyer alloc]initWithPath:currentPath setDirectory:YES];
-    
-    // Remove all sub views
-    [self.flyimgView removeAllLayers];
-    
-    //Here we Render Flyer
-    [self renderFlyer];
-    
-    //Here we Load Current Layer in ScrollView
-    [self addAllLayersIntoScrollView];
-    
-    [Flurry logEvent:@"Undone"];
-    
+    if( !(flyimgView.zoomedIn) ) {
+        //Here we remove Borders from layer if user touch any layer
+        [self.flyimgView layerStoppedEditing:currentLayer];
+        
+        //Here we take Snap shot of Flyer and
+        //Flyer Add to Gallery if user allow to Access there photos
+        [flyer setUpdatedSnapshotWithImage:[self getFlyerSnapShot]];
+        
+        //First we Save Current flyer in history,
+        //if we didn't do this here, so when we undo, it will back to 2 steps back.
+        [flyer saveFlyer];
+        
+        //Add Flyer in History if any Change Exists
+        [flyer addToHistory];
+        
+        //Here we send Request to Model for Move Back
+        [flyer replaceFromHistory];
+        
+        //set Undo Bar Button Status
+        [self setUndoStatus];
+        
+        //Here we Re-Initialize Flyer Instance
+        NSString* currentPath  =   [[NSFileManager defaultManager] currentDirectoryPath];
+        self.flyer = [[Flyer alloc]initWithPath:currentPath setDirectory:YES];
+        
+        // Remove all sub views
+        [self.flyimgView removeAllLayers];
+        
+        //Here we Render Flyer
+        [self renderFlyer];
+        
+        //Here we Load Current Layer in ScrollView
+        [self addAllLayersIntoScrollView];
+        
+        [Flurry logEvent:@"Undone"];
+    }    
 }
 
 
