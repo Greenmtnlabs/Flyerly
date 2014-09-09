@@ -5563,7 +5563,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     [zoomScrollView addSubview:flyimgView];
     zoomScrollView.backgroundColor = [UIColor clearColor];
 	[zoomScrollView setZoomScale:FLYER_ZOOM_SET_SCALE];
-    
+
+    //FOR TESTING SHOW RED RECT AROUND CURSOR
     //[zoomMagnifyingGlass.layer setBorderColor: [[UIColor redColor] CGColor]];
     //[zoomMagnifyingGlass.layer setBorderWidth: 2.0];
     
@@ -5595,12 +5596,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 //WHEN USER MOVING MAGNIFYING GLASS
 - (void)zoomMagnifyerMove:(UIPanGestureRecognizer *)recognizer {
 
-    //MOVE START
-    if (recognizer.state == UIGestureRecognizerStateBegan) {
-        NSLog(@"zoomMagnifyerMove - START");
-    }
     //MOVE
-    else if (recognizer.state == UIGestureRecognizerStateChanged) {
+    if (recognizer.state == UIGestureRecognizerStateChanged) {
         //dispatch_async( dispatch_get_main_queue(), ^{
             CGPoint magnifierCurLoc = [recognizer locationInView:self.zoomScreenShot];
             [self zoomMoveToPoint:magnifierCurLoc];
@@ -5609,14 +5606,14 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     //MOVE END
     else if (recognizer.state == UIGestureRecognizerStateEnded) {
         //dispatch_async( dispatch_get_main_queue(), ^{
-            //CGPoint magnifierCurLoc = [recognizer locationInView:self.zoomScreenShot];
-           // [self zoomMoveToPoint:magnifierCurLoc];
+            CGPoint magnifierCurLoc = [recognizer locationInView:self.zoomScreenShot];
+            [self zoomMoveToPoint:magnifierCurLoc];
             //NSLog(@"zoomMagnifyerMove - END");
         //});
     }
 }
 - (void)zoomMagnifyerMoveOnTap:(UITapGestureRecognizer *)recognizer {
-    NSLog(@"zoomMagnifyerMoveOnTap");
+    //NSLog(@"zoomMagnifyerMoveOnTap");
     CGPoint magnifierCurLoc = [recognizer locationInView:self.zoomScreenShot];
     [self zoomMoveToPoint:magnifierCurLoc];
 }
@@ -5624,57 +5621,44 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 - (void)zoomMoveToPoint:(CGPoint) magnifierCurLoc{
     int x = magnifierCurLoc.x;
     int y = magnifierCurLoc.y;
-    
-    int zSsW   = zoomScreenShot.size.width;
-    int zSsH   = zoomScreenShot.size.height;
-    
-    int zMgW   = zoomMagnifyingGlass.size.width;
-    int zMgH   = zoomMagnifyingGlass.size.height;
-    
-    //NSLog(@"(x,y)=(%i,%i)",x,y);
-    
-    //MOVE MAGNIFIER WHEN USER MOVE IT IN THE BOUNDRY OF SCREEN SHORT
-    if( (x > 0 &&  x < zSsW ) && (y > 0 && y < zSsH ) ) {
 
+    //MOVE MAGNIFIER WHEN USER MOVE IT IN THE BOUNDRY OF SCREEN SHORT
+    if( (x > 0 &&  x < zoomScreenShot.size.width ) && (y > 0 && y < zoomScreenShot.size.height ) ) {
+
+        //CHANGE ZOOM SCOLLVIEW
         CGFloat xSv = x, ySv = y;
-        //dont show gray background in top
         if( ySv < 11)
-        ySv = 11;
-        //dont show gray background in bottom
-        if( ySv > 60)
-        ySv = 60;
-        //dont show gray background in right
-        if( xSv > 50)
-            xSv = 50;
+        ySv = 11; //dont show gray background in top
+        else if( ySv > 60)
+        ySv = 60; //dont show gray background in bottom
         
-        //LOGIC OF MAKING X,Y FOR flyImageView a/c to screenshot magnifier postion(% logic)
+        if( xSv > 50)
+        xSv = 50; //dont show gray background in right
+        
+        //Logic of scrolling the zoom view a/c to magnifier postion on screenshot( % logic )
         xSv = ( flyimgView.size.width * xSv ) / 100;
         ySv = ( flyimgView.size.width * ySv ) / 100;
-        
-       // NSLog(@"Cp(x,y)=(%i,%i),(x2,y2)=(%i,%i),xSv,ySv=(%f,%f)",x,y, x2,y2, xSv,ySv);
-        
-        CGRect recSv = CGRectMake(xSv, ySv, 10,10);//zoomScrollView.size.width, zoomScrollView.size.height);
+       
+        CGRect recSv = CGRectMake(xSv, ySv, 10,10);
         [zoomScrollView scrollRectToVisible:recSv animated:NO];
         [zoomScrollView setContentOffset:CGPointMake(xSv, ySv) animated:NO];
-        
         
         //CHANGE MAGNIFIER POSITION ON SCREEN SHORT
         CGFloat xMg = x, yMg = y;
         if( xMg < 12 )
-         xMg =  12;
-        if( xMg > 93)
+        xMg =  12;
+        else if( xMg > 93)
         xMg =   93;
         
         if( yMg < 10)
         yMg =   10;
         
-        xMg  = xMg+zoomScreenShot.origin.x-15;
-        yMg  = yMg+zoomScreenShot.origin.y-15;
-       
+        xMg  = xMg + zoomScreenShot.origin.x - 15;
+        yMg  = yMg + zoomScreenShot.origin.y - 15;
         
-        zoomMagnifyingGlass.frame  =  CGRectMake(xMg,yMg, zMgW, zMgH);
+        zoomMagnifyingGlass.frame  =  CGRectMake(xMg,yMg, zoomMagnifyingGlass.size.width, zoomMagnifyingGlass.size.height);
         
-        NSLog(@"Cp(x,y)=(%i,%i), xSv,ySv=(%f,%f), mgX,yMg(%f,%f)",x,y, xSv,ySv, xMg,yMg);
+        //NSLog(@"Cp(x,y)=(%i,%i), xSv,ySv=(%f,%f), mgX,yMg(%f,%f)",x,y, xSv,ySv, xMg,yMg);
     }
 }
 
