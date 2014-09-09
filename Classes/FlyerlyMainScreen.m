@@ -314,6 +314,20 @@ BOOL adLoaded = false;
     //[self.interstitial presentFromRootViewController:self];
 }
 
+
+- (void)interstitialDidDismissScreen:(GADInterstitial *)ad {
+    
+    self.interstitial.delegate = nil;
+    
+    // Prepare next interstitial.
+    self.interstitial = [[GADInterstitial alloc] init];
+    self.interstitial.adUnitID = @"ca-app-pub-5409664730066465/9926514430";
+    self.interstitial.delegate = self;
+    [self.interstitial loadRequest:[self request]];
+    
+}
+
+
 - (void)viewDidLoad {
     
     [super viewDidLoad];

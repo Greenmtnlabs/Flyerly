@@ -669,6 +669,7 @@ NSString *abc;
         }
     }
     
+    [self editLayer:recognizer];
 }
 
 #pragma mark - Private Methods
@@ -745,6 +746,8 @@ NSString *abc;
         }
 
     }
+    
+    [self editLayer:recognizer];
 }
 
 #pragma mark - Tap to edit functionality
@@ -810,6 +813,7 @@ NSString *abc;
         }
     }
     
+    [self editLayer:recognizer];
 }
 
 @end
