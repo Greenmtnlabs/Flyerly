@@ -224,6 +224,43 @@ NSString *abc;
     }
 }
 
+-(void)configureImageViewSize :(NSString *)uid {
+
+
+    UIImageView *imgView = [layers objectForKey:uid];
+    
+    static CGAffineTransform currentTransform;
+
+    currentTransform = imgView.transform;
+    //imgView.layer.anchorPoint = CGPointMake( 0.5, 0.5 );
+        
+    CGFloat scale  = 2.0;//= [(UIPinchGestureRecognizer*)imgView scale];
+    
+    
+    // Scale
+    CGAffineTransform tr;
+    tr =
+    CGAffineTransformConcat(
+                            currentTransform,
+                            CGAffineTransformMakeScale ( scale, scale ));
+    
+    [imgView setTransform:tr];
+    
+        
+        CGAffineTransform newTransForm = imgView.transform;
+        // Get all layer keys for this flyer
+        NSArray *keys = [layers allKeysForObject:imgView];
+        // Find key for rotated layer
+        for ( int i = 0; i < keys.count; i++ ) {
+            NSString *key = [keys objectAtIndex:i];
+            
+            // Save rotation angle for layer
+            [self.delegate layerTransformedforKey:key :&newTransForm];
+            
+        }
+        
+    
+}
 
 /*
  *Here we set Properties of UIImageView
@@ -646,8 +683,8 @@ NSString *abc;
             
             tr =
             CGAffineTransformConcat(
-                                    currentTransform,
-                                    CGAffineTransformMakeScale ( scale, scale ));
+                                    CGAffineTransformMakeScale ( scale, scale ),
+                                    currentTransform);
         }
         
         
