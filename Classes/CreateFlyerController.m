@@ -1455,33 +1455,36 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             if(tempView == view)
             {
                 selectedColor = colorArray[i-1];
-                
-                [flyer setFlyerTextColor:currentLayer RGBColor:selectedColor];
-                
-                //Here we call Render Layer on View
-                //[flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
-                [flyimgView configureLabelColor :currentLayer labelDictionary:[flyer getLayerFromMaster:currentLayer]];
-                
-                
                 NSString *type = [flyer getLayerType:currentLayer];
-                if( [type isEqualToString:FLYER_LAYER_CLIP_ART] ){
-                    
-                    //Handling Select Unselect
-                    [self setSelectedItem:FLYER_LAYER_CLIP_ART inView:colorsView ofLayerAttribute:LAYER_ATTRIBUTE_COLOR];
-                    
-                }
-                else if( [type isEqualToString:FLYER_LAYER_DRAWING] ){
+                if( [type isEqualToString:FLYER_LAYER_DRAWING] ){
+                   
                     [self setDrawingRGB:selectedColor updateDic:YES];
-                    
                     //Handling Select Unselect
                     [self setSelectedItem:FLYER_LAYER_DRAWING inView:colorsView ofLayerAttribute:LAYER_ATTRIBUTE_COLOR];
+                    
                 }
                 else {
-                    //Handling Select Unselect
-                    [self setSelectedItem:FLYER_LAYER_TEXT inView:colorsView ofLayerAttribute:LAYER_ATTRIBUTE_COLOR];
+                
+                    [flyer setFlyerTextColor:currentLayer RGBColor:selectedColor];
+                    
+                    //Here we call Render Layer on View
+                    //[flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
+                    [flyimgView configureLabelColor :currentLayer labelDictionary:[flyer getLayerFromMaster:currentLayer]];
+                    
+                    
+                    
+                    if( [type isEqualToString:FLYER_LAYER_CLIP_ART] ){
+                        
+                        //Handling Select Unselect
+                        [self setSelectedItem:FLYER_LAYER_CLIP_ART inView:colorsView ofLayerAttribute:LAYER_ATTRIBUTE_COLOR];
+                        
+                    }
+                    else {
+                        //Handling Select Unselect
+                        [self setSelectedItem:FLYER_LAYER_TEXT inView:colorsView ofLayerAttribute:LAYER_ATTRIBUTE_COLOR];
+                    }
                 }
                 break;
-                
             }
             
             i++;
