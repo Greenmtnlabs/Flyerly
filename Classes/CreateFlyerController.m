@@ -1238,6 +1238,65 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         } // Loop
     });
 }
+-(void)zoomAddLayerButtonsIntoScrollView:(NSString *)callFor{
+    NSInteger layerScrollWidth = 55;
+    NSInteger layerScrollHeight = 40;
+
+    //Add zoom button as first layer button
+    if( [callFor isEqualToString:@"addAllLayersIntoScrollView"] ||
+        [callFor isEqualToString:@"zoomStart_inside"]
+       ) {
+        UIButton* zoomButton = [UIButton  buttonWithType:UIButtonTypeCustom];
+        [zoomButton addTarget:self action:@selector(zoom:) forControlEvents:UIControlEventTouchUpInside];
+        zoomButton.frame = CGRectMake(10, 10, layerScrollWidth, layerScrollHeight);
+        [zoomButton setBackgroundColor:[UIColor clearColor]];
+        
+        [zoomButton.layer setBorderWidth:2];
+        [zoomButton.layer setCornerRadius:8];
+        UIColor * lightGray = [UIColor lightGrayColor];
+        [zoomButton.layer setBorderColor:lightGray.CGColor];
+        zoomButton.tag = @"magnifyingGlass";
+        
+        UIImageView *tileImageView = [[UIImageView alloc] initWithFrame:CGRectMake(5.0,5.0,10.0,10.0)];
+
+        tileImageView.image = [UIImage imageNamed:@"magnifyingGlass2.png"];
+        if( [callFor isEqualToString:@"zoomStart_inside"] )
+        tileImageView.image = [UIImage imageNamed:@"magnifyingGlass3.png"];
+            
+        tileImageView.frame  = CGRectMake(zoomButton.frame.origin.x-5, zoomButton.frame.origin.y-6, zoomButton.frame.size.width-10, zoomButton.frame.size.height-7);
+        
+        tileImageView.contentMode = UIViewContentModeScaleAspectFit;
+        tileImageView.tag = @"magnifyingGlassImg";
+        
+        [zoomButton addSubview:tileImageView];
+        
+        [layerScrollView addSubview:zoomButton];
+    }
+    else if( [callFor isEqualToString:@"zoomStart"]) {
+        //Remove Subviews of ScrollView
+        [self deleteSubviewsFromScrollView];
+        [self zoomAddLayerButtonsIntoScrollView:@"zoomStart_inside"];
+        
+        UIButton *zoomButton = (UIButton *)[layerScrollView viewWithTag:@"magnifyingGlass"];
+        [zoomButton.layer setBorderColor:[UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0].CGColor];
+        [layerScrollView setScrollEnabled:NO];
+        
+        
+        zoomScreenShot.frame = CGRectMake(80, 10, 100, 100);
+        [layerScrollView addSubview:zoomScreenShot];
+        
+        zoomMagnifyingGlass.frame = CGRectMake(50, 50, 32, 32);
+        [layerScrollView addSubview:zoomMagnifyingGlass];
+        
+        [self zoomMoveToPoint:CGPointMake(5.0,5.0)];
+        
+
+    }
+    else if( [callFor isEqualToString:@"zoomEnd"]){
+        [self addAllLayersIntoScrollView];
+        [layerScrollView setScrollEnabled:YES];
+    }
+}
 
 /*
  * When we Back To Main View its
@@ -1247,35 +1306,24 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     //Remove Subviews of ScrollView
     [self deleteSubviewsFromScrollView];
-    
+
+    //Default for iPhone 4
     NSInteger layerScrollWidth = 55;
     NSInteger layerScrollHeight = 40;
+    CGFloat curXLoc = 0;
+    CGFloat curYLoc = 5;
+    
+    if(IS_IPHONE_5){
+        curXLoc = 70;
+        curYLoc = 10;
+    }
+    
 
-    //--add zoom button as first layer button----start
-    UIButton* zoomButton = [UIButton  buttonWithType:UIButtonTypeCustom];
-    [zoomButton addTarget:self action:@selector(zoom:) forControlEvents:UIControlEventTouchUpInside];
-    zoomButton.frame = CGRectMake(10, 10, layerScrollWidth, layerScrollHeight);
-    [zoomButton setBackgroundColor:[UIColor clearColor]];
-
-    [zoomButton.layer setBorderWidth:2];
-    [zoomButton.layer setCornerRadius:8];
-    UIColor * lightGray = [UIColor lightGrayColor];
-    [zoomButton.layer setBorderColor:lightGray.CGColor];
-    zoomButton.tag = @"magnifyingGlass";
-    
-    UIImageView *tileImageView = [[UIImageView alloc] initWithFrame:CGRectMake(5.0,5.0,10.0,10.0)];
-    tileImageView.image = [UIImage imageNamed:@"magnifyingGlass.png"];
-    tileImageView.frame  = CGRectMake(zoomButton.frame.origin.x+5, zoomButton.frame.origin.y-2, zoomButton.frame.size.width-20, zoomButton.frame.size.height-10);
-    
-    tileImageView.contentMode = UIViewContentModeScaleAspectFit;
-    tileImageView.tag = @"magnifyingGlassImg";
-    
-    
-    [zoomButton addSubview:tileImageView];
-    
-    
-    [layerScrollView addSubview:zoomButton];
-    //--add zoom button as first layer button----end
+    //--Add zoom button as first layer button----start
+    if( IS_IPHONE_5 ) {
+        [self zoomAddLayerButtonsIntoScrollView:@"addAllLayersIntoScrollView"];
+    }
+    //--Add zoom button as first layer button----end
     
     
     if( self.flyimgView.layers.count == 0 ){
@@ -1284,15 +1332,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         _videoLabel.alpha = 0;
         return;
     }
+
     
-    CGFloat curXLoc = 0;
-    CGFloat curYLoc = 5;
-    
-    if(IS_IPHONE_5)
-    {
-        curXLoc = 70;
-        curYLoc = 10;
-    }
     
     NSArray *sortedLayers = [flyer allKeys];
     NSMutableDictionary *layers = self.flyimgView.layers ;
@@ -5511,13 +5552,14 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     [self zoomElementsSetAlpha:1.0];
     
     zoomScreenShot.image = [self getFlyerSnapShot];
+    zoomScreenShot.userInteractionEnabled = YES;
     
     zoomScrollView.delegate = self;
     [zoomScrollView addSubview:flyimgView];
     zoomScrollView.backgroundColor = [UIColor redColor];
 	[zoomScrollView setZoomScale:FLYER_ZOOM_SET_SCALE];
     
-    [self zoomMoveToPoint:CGPointMake(50.0,50.0)];
+    [self zoomAddLayerButtonsIntoScrollView:@"zoomStart"];
 }
 
 // Enable zooming, (for testing , when you tap on PHOTO TAB it will start, after start when you again tap on PHOT TAB, zooming will end )
@@ -5529,6 +5571,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     zoomScreenShot.image   = nil;
     [self.view addSubview:flyimgView];
     [zoomScrollView setZoomScale:zoomScrollView.minimumZoomScale];
+    [self zoomAddLayerButtonsIntoScrollView:@"zoomEnd"];
 }
 
 -(void)zoomElementsSetAlpha:(CGFloat)zoomAlpha{
@@ -5537,28 +5580,29 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     [zoomScrollView setAlpha:zoomAlpha];
     [zoomScreenShot setAlpha:zoomAlpha];
     [zoomMagnifyingGlass setAlpha:zoomAlpha];
-    
-
-    
-    UIButton *zoomButton = (UIButton *)[layerScrollView viewWithTag:@"magnifyingGlass"];
-    if( flyimgView.zoomedIn ){
-
-        [zoomButton.layer setBorderColor:[UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0].CGColor];
-        zoomScreenShot.userInteractionEnabled = YES;
-    } else{
-        [zoomButton.layer setBorderColor:[UIColor grayColor].CGColor];
-        zoomScreenShot.userInteractionEnabled = NO;
-    }
-
-    
 }
 
 //WHEN USER MOVING MAGNIFYING GLASS
 - (void)zoomMagnifyerMove:(UIPanGestureRecognizer *)recognizer {
-    
-    if (recognizer.state == UIGestureRecognizerStateChanged) {
-        CGPoint magnifierCurLoc = [recognizer locationInView:self.zoomScreenShot];
-        [self zoomMoveToPoint:magnifierCurLoc];
+
+    //MOVE START
+    if (recognizer.state == UIGestureRecognizerStateBegan) {
+        NSLog(@"zoomMagnifyerMove - START");
+    }
+    //MOVE
+    else if (recognizer.state == UIGestureRecognizerStateChanged) {
+        dispatch_async( dispatch_get_main_queue(), ^{
+            CGPoint magnifierCurLoc = [recognizer locationInView:self.zoomScreenShot];
+            [self zoomMoveToPoint:magnifierCurLoc];
+        });
+    }
+    //MOVE END
+    else if (recognizer.state == UIGestureRecognizerStateEnded) {
+        dispatch_async( dispatch_get_main_queue(), ^{
+            CGPoint magnifierCurLoc = [recognizer locationInView:self.zoomScreenShot];
+            [self zoomMoveToPoint:magnifierCurLoc];
+            NSLog(@"zoomMagnifyerMove - END");
+        });
     }
 }
 
@@ -5577,7 +5621,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     NSLog(@"(x,y)=(%i,%i)",x,y);
     
     //MOVE MAGNIFIER WHEN USER MOVE IT IN THE BOUNDRY OF SCREEN SHORT
-    if( (x > 5 && x < (zSsW-zSsWE) ) && (y > 5 && y < (zSsH-zSsHE) ) ){
+    if( (x >= 5 && x < (zSsW-zSsWE) ) && (y >= 5 && y < (zSsH-zSsHE) ) ){
 
         //LOGIC OF MAKING X,Y FOR flyImageView a/c to screenshot magnifier postion(% logic)
         CGFloat xSv = ( flyimgView.size.width * x ) / 100;

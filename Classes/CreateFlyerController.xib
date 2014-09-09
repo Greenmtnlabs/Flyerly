@@ -106,6 +106,14 @@
                             <color key="textColor" white="0.49971487226277378" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="magnifyingGlass.png" id="e7R-ga-ZuC" userLabel="Image View - MagnifyingGlassImg">
+                            <rect key="frame" x="110" y="41" width="32" height="32"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="koI-LW-qvU" userLabel="UiimageView - ScreenShotForZoom">
+                            <rect key="frame" x="80" y="10" width="100" height="100"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </imageView>
                     </subviews>
                     <color key="backgroundColor" red="0.96078431369999995" green="0.94509803920000002" blue="0.87058823529999996" alpha="1" colorSpace="calibratedRGB"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="0.0"/>
@@ -138,17 +146,10 @@
                     <color key="backgroundColor" red="0.75510204079999999" green="0.75510204079999999" blue="0.75510204079999999" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="scaleToFill" id="OgZ-hl-Uai" userLabel="Scroll View - ZOOM">
-                    <rect key="frame" x="5" y="65" width="200" height="200"/>
+                    <rect key="frame" x="5" y="65" width="310" height="310"/>
                     <autoresizingMask key="autoresizingMask"/>
+                    <inset key="contentInset" minX="0.0" minY="5" maxX="0.0" maxY="65"/>
                 </scrollView>
-                <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="koI-LW-qvU" userLabel="UiimageView - ScreenShotForZoom">
-                    <rect key="frame" x="210" y="125" width="100" height="100"/>
-                    <autoresizingMask key="autoresizingMask"/>
-                </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="magnifyingGlass.png" id="e7R-ga-ZuC" userLabel="Image View - MagnifyingGlassImg">
-                    <rect key="frame" x="210" y="125" width="32" height="32"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                </imageView>
             </subviews>
             <color key="backgroundColor" red="0.96078431372549022" green="0.94509803921568625" blue="0.87058823529411766" alpha="1" colorSpace="calibratedRGB"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>

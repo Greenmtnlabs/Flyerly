@@ -1015,6 +1015,8 @@
 		36A93F3719AE243D00D0A810 /* line_dotted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36A93F3419AE243D00D0A810 /* line_dotted@2x.png */; };
 		36A93F3819AE243D00D0A810 /* line_plane@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36A93F3519AE243D00D0A810 /* line_plane@2x.png */; };
 		36AECB9719B99D9C007763B9 /* magnifyingGlass.png in Resources */ = {isa = PBXBuildFile; fileRef = 36AECB9619B99D9C007763B9 /* magnifyingGlass.png */; };
+		36AF4CAD19BF21D4003C9FE3 /* magnifyingGlass2.png in Resources */ = {isa = PBXBuildFile; fileRef = 36AF4CAB19BF21D4003C9FE3 /* magnifyingGlass2.png */; };
+		36AF4CAE19BF21D4003C9FE3 /* magnifyingGlass3.png in Resources */ = {isa = PBXBuildFile; fileRef = 36AF4CAC19BF21D4003C9FE3 /* magnifyingGlass3.png */; };
 		490FBB16192B4E0500AA3C18 /* AssetsGroupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 490FBB15192B4E0400AA3C18 /* AssetsGroupViewController.xib */; };
 		4977B1DD193C90CC0024A209 /* delete_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4977B1DC193C90CC0024A209 /* delete_button@2x.png */; };
 		4977B1DF193C90FA0024A209 /* tick@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4977B1DE193C90FA0024A209 /* tick@2x.png */; };
@@ -2396,6 +2398,8 @@
 		36A93F3419AE243D00D0A810 /* line_dotted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "line_dotted@2x.png"; sourceTree = "<group>"; };
 		36A93F3519AE243D00D0A810 /* line_plane@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "line_plane@2x.png"; sourceTree = "<group>"; };
 		36AECB9619B99D9C007763B9 /* magnifyingGlass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = magnifyingGlass.png; sourceTree = "<group>"; };
+		36AF4CAB19BF21D4003C9FE3 /* magnifyingGlass2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = magnifyingGlass2.png; sourceTree = "<group>"; };
+		36AF4CAC19BF21D4003C9FE3 /* magnifyingGlass3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = magnifyingGlass3.png; sourceTree = "<group>"; };
 		490FBB15192B4E0400AA3C18 /* AssetsGroupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AssetsGroupViewController.xib; sourceTree = "<group>"; };
 		4977B1DC193C90CC0024A209 /* delete_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "delete_button@2x.png"; path = "Data/delete_button@2x.png"; sourceTree = "<group>"; };
 		4977B1DE193C90FA0024A209 /* tick@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tick@2x.png"; path = "Data/tick@2x.png"; sourceTree = "<group>"; };
@@ -2640,6 +2644,8 @@
 		0DF3A361108DF47400D6C887 /* ImageLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				36AF4CAB19BF21D4003C9FE3 /* magnifyingGlass2.png */,
+				36AF4CAC19BF21D4003C9FE3 /* magnifyingGlass3.png */,
 				36AECB9619B99D9C007763B9 /* magnifyingGlass.png */,
 				24F9928019AF78FB005C478B /* post@2x.png */,
 				365A9D0919AF697300E284B5 /* drawing_tab_color_selected@2x.png */,
@@ -5020,6 +5026,7 @@
 				30D58D5410FB1BF800E0C7E8 /* Template25.jpg in Resources */,
 				248A3631193F22CE0005FCAD /* color_tab_selected@2x.png in Resources */,
 				30D58D5510FB1BF800E0C7E8 /* Template26.jpg in Resources */,
+				36AF4CAD19BF21D4003C9FE3 /* magnifyingGlass2.png in Resources */,
 				30D58D5610FB1BF800E0C7E8 /* Template27.jpg in Resources */,
 				20563E151962D64200C206FD /* Lora-Italic.ttf in Resources */,
 				242184DC194B4AEC00FDDA97 /* gymnastics-rhythmic-icon.png in Resources */,
@@ -5602,6 +5609,7 @@
 				242184E2194B4AEC00FDDA97 /* kayak-slalom-icon.png in Resources */,
 				249F1FAB193F55D50072835E /* checkgray@2x.png in Resources */,
 				202C638C17EA06E800CB9A75 /* ricon26.png in Resources */,
+				36AF4CAE19BF21D4003C9FE3 /* magnifyingGlass3.png in Resources */,
 				20930D7C19AB5F22004B9F93 /* drawing_tab@2x.png in Resources */,
 				249F1F9F193F55D50072835E /* back_button@2x.png in Resources */,
 				242184C7194B4AEC00FDDA97 /* equestrian-eventing-icon.png in Resources */,
