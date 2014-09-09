@@ -108,7 +108,7 @@ NSString *abc;
         
         //Check Layer Exist in Master Layers
         if ( lastControl == nil) {
-            
+            //----
             CustomLabel *lble = [[CustomLabel alloc] init];
             lble.tag = layers.count;
             lble.backgroundColor = [UIColor clearColor];
@@ -127,6 +127,8 @@ NSString *abc;
             [layers setValue:lble forKey:uid];
             
             view = lble;
+            
+            //----
         } else {
 
             if ([lastControl isKindOfClass:[CustomLabel class]]) {
@@ -134,6 +136,10 @@ NSString *abc;
                 //here we Update Label
                 CustomLabel *lble = [layers objectForKey:uid];
                 //[self configureLabel:lble labelDictionary:layDic ];
+                if( [[layDic valueForKey:@"type"] isEqualToString:FLYER_LAYER_CLIP_ART] ){
+                    NSLog(@"its clipart");
+                    [self configureLabelFont:uid labelDictionary:layDic];
+                }
                 [self applyTransformOnLabel:lble CustomLableDictionary:layDic];
                 [layers setValue:lble forKey:uid];
             
@@ -325,6 +331,38 @@ NSString *abc;
 }
 
 /*
+ *Here we set text of Clipart Icon
+ */
+-(void)configureClipartFont :(NSString *)uid labelDictionary:(NSMutableDictionary *)detail {
+    
+    CustomLabel *lble = [[CustomLabel alloc] init];
+    [layers setValue:lble forKey:uid];
+    
+    //set Label Text
+    [lble setText:[detail valueForKey:@"text"]];
+    
+    //set Label Font
+    lble.font = [UIFont fontWithName:[detail valueForKey:@"fontname"] size:[[detail valueForKey:@"fontsize"] floatValue]];
+}
+
+/*
+ *Here we set dimensions of Clipart Icon
+ */
+-(void)configureClipartDimensions :(NSString *)uid labelDictionary:(NSMutableDictionary *)detail {
+    
+    CustomLabel *lbl = [layers objectForKey:uid];
+    
+    lbl.textAlignment = NSTextAlignmentCenter;
+    [lbl setNumberOfLines:0];
+    [lbl sizeToFit];
+
+    CGRect fr = lbl.frame;
+    fr.size.width = 150;
+    lbl.frame = fr;
+}
+
+
+/*
  *Here we set color Properties of uiLabel
  */
 -(void)configureLabelColor :(NSString *)uid labelDictionary:(NSMutableDictionary *)detail {
@@ -353,7 +391,7 @@ NSString *abc;
     CustomLabel *lbl = [layers objectForKey:uid];
     
     //SetFrame
-    [lbl setFrame:CGRectMake([[detail valueForKey:@"x"] floatValue], [[detail valueForKey:@"y"] floatValue], [[detail valueForKey:@"width"] floatValue], [[detail valueForKey:@"height"] floatValue])];
+    //[lbl setFrame:CGRectMake([[detail valueForKey:@"x"] floatValue], [[detail valueForKey:@"y"] floatValue], [[detail valueForKey:@"width"] floatValue], [[detail valueForKey:@"height"] floatValue])];
     
     // Remember originalsize
     lbl.originalSize = lbl.frame.size;
@@ -375,6 +413,8 @@ NSString *abc;
     
     //set Label Font
     lble.font = [UIFont fontWithName:[detail valueForKey:@"fontname"] size:[[detail valueForKey:@"fontsize"] floatValue]];
+    
+    [lble setText:[detail valueForKey:@"text"]];
 }
 
 /*

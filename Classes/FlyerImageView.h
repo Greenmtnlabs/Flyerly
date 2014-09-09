@@ -44,6 +44,9 @@
 -(void)configureLabelColor :(NSString *)uid labelDictionary:(NSMutableDictionary *)detail;
 -(void)configureLabelBorder :(NSString *)uid labelDictionary:(NSMutableDictionary *)detail;
 -(void)configureImageViewSize :(NSString *)uid;
+
+-(void)configureClipartFont :(NSString *)uid labelDictionary:(NSMutableDictionary *)detail;
+-(void)configureClipartDimensions :(NSString *)uid labelDictionary:(NSMutableDictionary *)detail;
 //---------
 
 -(void)renderLayer :(NSString *)uid layerDictionary:(NSMutableDictionary *)layDic;

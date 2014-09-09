@@ -1817,6 +1817,10 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 
                 //Here we call Render Layer on View
                 [flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
+                //[flyimgView configureClipartFont :currentLayer labelDictionary:[flyer getLayerFromMaster:currentLayer]];
+                //[flyimgView configureClipartDimensions :currentLayer labelDictionary:[flyer getLayerFromMaster:currentLayer]];
+                
+                
                 
                 [self setSelectedItem:FLYER_LAYER_CLIP_ART inView:clipartsView ofLayerAttribute:LAYER_ATTRIBUTE_IMAGE];
             }
