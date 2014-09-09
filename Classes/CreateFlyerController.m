@@ -5058,8 +5058,9 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     if( [msgFor isEqualToString:DRAWING_MSG_4_COLOR] || [msgFor isEqualToString:DRAWING_MSG_4_ERASER] ) {
         [self deleteSubviewsFromScrollView];
-        
-        drawingEraserMsg.text   = @"Note: Eraser can only be applied on selected drawing layer.";
+        [drawingEraserMsg setFont:[UIFont fontWithName:@"Signika-Semibold" size:16]];
+        drawingEraserMsg.textColor = [UIColor grayColor];
+        drawingEraserMsg.text   = @"NOTE: ERASER CAN ONLY BE APPLIED ON SELECTED DRAWING LAYER.";
         if( [msgFor isEqualToString:DRAWING_MSG_4_COLOR])
         drawingEraserMsg.text   = @"COLORS CANNOT BE APPLIED ON ERASER";
         
