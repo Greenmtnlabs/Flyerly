@@ -13,6 +13,9 @@
 #define YOUTUBEPREFIX @"https://youtube.com/watch?v="
 #define flyerlyWidth 620
 #define flyerlyHeight 620
+#define FLYER_ZOOM_MIN_SCALE 1.0
+#define FLYER_ZOOM_SET_SCALE 2.0 //THIS MUST BE IN RANGE OF MIN AND MAX
+#define FLYER_ZOOM_MAX_SCALE 5.0
 #define VIDEOFRAME 30
 #define MAX_VIDEO_LENGTH 30
 #define FLYER_ALBUM_NAME @"Flyerly"

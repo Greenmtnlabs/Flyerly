@@ -41,6 +41,9 @@
 @implementation CreateFlyerController
 
 
+//Outlets form zoom
+@synthesize zoomLayoutOnFlyr,zoomScrollView,zoomScreenShot,zoomMagnifyingGlass;
+
 //Drawing required files
 @synthesize mainImage;
 @synthesize tempDrawImage;
@@ -56,11 +59,15 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 @synthesize backgroundsView,flyerBordersView,colorsView,sizesView,bannerAddView,bannerAddDismissButton,drawingPatternsView,drawingEraserMsgView;
 
 #pragma mark -  View Appear Methods
+- (void)viewWillAppear:(BOOL)animated{
+    
+}
 
 /**
  * Update the view once it appears.
  */
 -(void)viewDidAppear:(BOOL)animated {
+    
     [super viewDidAppear:animated];
     
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
@@ -179,6 +186,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
  * View setup. This is done once per instance.
  */
 -(void)viewDidLoad{
+    
     selectedAddMoreLayerTab = -1;
     
     //DrawingClass required vars
@@ -507,6 +515,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             }
         });
     });
+    
+    [self zoomInit];
 }
 
 - (void)viewDidUnload
@@ -522,6 +532,10 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
  * and its Save Flyer then Exits Screen
  */
 -(void) goBack {
+    
+    if( flyimgView.zoomedIn ){
+        [self zoomEnd];
+    }
     
     //Delete extra layers
     [self deSelectPreviousLayer];
@@ -1236,6 +1250,33 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     NSInteger layerScrollWidth = 55;
     NSInteger layerScrollHeight = 40;
+
+    //--add zoom button as first layer button----start
+    UIButton* zoomButton = [UIButton  buttonWithType:UIButtonTypeCustom];
+    [zoomButton addTarget:self action:@selector(zoom:) forControlEvents:UIControlEventTouchUpInside];
+    zoomButton.frame = CGRectMake(10, 10, layerScrollWidth, layerScrollHeight);
+    [zoomButton setBackgroundColor:[UIColor clearColor]];
+
+    [zoomButton.layer setBorderWidth:2];
+    [zoomButton.layer setCornerRadius:8];
+    UIColor * lightGray = [UIColor lightGrayColor];
+    [zoomButton.layer setBorderColor:lightGray.CGColor];
+    zoomButton.tag = @"magnifyingGlass";
+    
+    UIImageView *tileImageView = [[UIImageView alloc] initWithFrame:CGRectMake(5.0,5.0,10.0,10.0)];
+    tileImageView.image = [UIImage imageNamed:@"magnifyingGlass.png"];
+    tileImageView.frame  = CGRectMake(zoomButton.frame.origin.x+5, zoomButton.frame.origin.y-2, zoomButton.frame.size.width-20, zoomButton.frame.size.height-10);
+    
+    tileImageView.contentMode = UIViewContentModeScaleAspectFit;
+    tileImageView.tag = @"magnifyingGlassImg";
+    
+    
+    [zoomButton addSubview:tileImageView];
+    
+    
+    [layerScrollView addSubview:zoomButton];
+    //--add zoom button as first layer button----end
+    
     
     if( self.flyimgView.layers.count == 0 ){
         _addMoreLayerOrSaveFlyerLabel.alpha = 1;
@@ -1249,7 +1290,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     if(IS_IPHONE_5)
     {
-        curXLoc = 10;
+        curXLoc = 70;
         curYLoc = 10;
     }
     
@@ -1414,33 +1455,36 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             if(tempView == view)
             {
                 selectedColor = colorArray[i-1];
-                
-                [flyer setFlyerTextColor:currentLayer RGBColor:selectedColor];
-                
-                //Here we call Render Layer on View
-                //[flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
-                [flyimgView configureLabelColor :currentLayer labelDictionary:[flyer getLayerFromMaster:currentLayer]];
-                
-                
                 NSString *type = [flyer getLayerType:currentLayer];
-                if( [type isEqualToString:FLYER_LAYER_CLIP_ART] ){
-                    
-                    //Handling Select Unselect
-                    [self setSelectedItem:FLYER_LAYER_CLIP_ART inView:colorsView ofLayerAttribute:LAYER_ATTRIBUTE_COLOR];
-                    
-                }
-                else if( [type isEqualToString:FLYER_LAYER_DRAWING] ){
+                if( [type isEqualToString:FLYER_LAYER_DRAWING] ){
+                   
                     [self setDrawingRGB:selectedColor updateDic:YES];
-                    
                     //Handling Select Unselect
                     [self setSelectedItem:FLYER_LAYER_DRAWING inView:colorsView ofLayerAttribute:LAYER_ATTRIBUTE_COLOR];
+                    
                 }
                 else {
-                    //Handling Select Unselect
-                    [self setSelectedItem:FLYER_LAYER_TEXT inView:colorsView ofLayerAttribute:LAYER_ATTRIBUTE_COLOR];
+                
+                    [flyer setFlyerTextColor:currentLayer RGBColor:selectedColor];
+                    
+                    //Here we call Render Layer on View
+                    //[flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
+                    [flyimgView configureLabelColor :currentLayer labelDictionary:[flyer getLayerFromMaster:currentLayer]];
+                    
+                    
+                    
+                    if( [type isEqualToString:FLYER_LAYER_CLIP_ART] ){
+                        
+                        //Handling Select Unselect
+                        [self setSelectedItem:FLYER_LAYER_CLIP_ART inView:colorsView ofLayerAttribute:LAYER_ATTRIBUTE_COLOR];
+                        
+                    }
+                    else {
+                        //Handling Select Unselect
+                        [self setSelectedItem:FLYER_LAYER_TEXT inView:colorsView ofLayerAttribute:LAYER_ATTRIBUTE_COLOR];
+                    }
                 }
                 break;
-                
             }
             
             i++;
@@ -3057,12 +3101,13 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
  */
 -(void)editLayer:(LayerTileButton *)editButton{
     
-    
-    editButtonGlobal = editButton;
-    currentLayer =  editButton.uid;
-    editButtonGlobal.uid = currentLayer;
-    
-    [self editCurrentLayer];
+    if( !(flyimgView.zoomedIn) ){
+        editButtonGlobal = editButton;
+        currentLayer =  editButton.uid;
+        editButtonGlobal.uid = currentLayer;
+        
+        [self editCurrentLayer];
+    }
 }
 
 
@@ -3294,42 +3339,47 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 #pragma mark - Undo Implementation
 
 -(void)undoFlyer{
-    
-    //Here we remove Borders from layer if user touch any layer
-    [self.flyimgView layerStoppedEditing:currentLayer];
-    
-    //Here we take Snap shot of Flyer and
-    //Flyer Add to Gallery if user allow to Access there photos
-    [flyer setUpdatedSnapshotWithImage:[self getFlyerSnapShot]];
-    
-    //First we Save Current flyer in history,
-    //if we didn't do this here, so when we undo, it will back to 2 steps back.
-    [flyer saveFlyer];
-    
-    //Add Flyer in History if any Change Exists
-    [flyer addToHistory];
-    
-    //Here we send Request to Model for Move Back
-    [flyer replaceFromHistory];
-    
-    //set Undo Bar Button Status
-    [self setUndoStatus];
-    
-    //Here we Re-Initialize Flyer Instance
-    NSString* currentPath  =   [[NSFileManager defaultManager] currentDirectoryPath];
-    self.flyer = [[Flyer alloc]initWithPath:currentPath setDirectory:YES];
-    
-    // Remove all sub views
-    [self.flyimgView removeAllLayers];
-    
-    //Here we Render Flyer
-    [self renderFlyer];
-    
-    //Here we Load Current Layer in ScrollView
-    [self addAllLayersIntoScrollView];
-    
-    [Flurry logEvent:@"Undone"];
-    
+    if( !(flyimgView.zoomedIn) ) {
+        
+        //Here we remove Borders from layer if user touch any layer
+        [self.flyimgView layerStoppedEditing:currentLayer];
+        
+        //Here we take Snap shot of Flyer and
+        //Flyer Add to Gallery if user allow to Access there photos
+        [flyer setUpdatedSnapshotWithImage:[self getFlyerSnapShot]];
+        
+        //First we Save Current flyer in history,
+        //if we didn't do this here, so when we undo, it will back to 2 steps back.
+        [flyer saveFlyer];
+        
+        //Add Flyer in History if any Change Exists
+        [flyer addToHistory];
+        
+        //Here we send Request to Model for Move Back
+        [flyer replaceFromHistory];
+        
+        //set Undo Bar Button Status
+        [self setUndoStatus];
+        
+        //Here we Re-Initialize Flyer Instance
+        NSString* currentPath  =   [[NSFileManager defaultManager] currentDirectoryPath];
+        self.flyer = [[Flyer alloc]initWithPath:currentPath setDirectory:YES];
+
+
+        
+        // Remove all sub views
+        [self.flyimgView removeAllLayers];
+        
+        self.flyimgView.addUiImgForDrawingLayer = YES; //AFTER removing all layer set it yes for drawing layers
+        //Here we Render Flyer
+        [self renderFlyer];
+        self.flyimgView.addUiImgForDrawingLayer = NO; // After rendering all layers set it no
+        
+        //Here we Load Current Layer in ScrollView
+        [self addAllLayersIntoScrollView];
+        
+        [Flurry logEvent:@"Undone"];
+    }    
 }
 
 
@@ -4395,6 +4445,9 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
  */
 -(IBAction) setAddMoreLayerTabAction:(id) sender {
     
+    if( flyimgView.zoomedIn )
+    [self zoomEnd];
+    
 	UIButton *selectedButton = (UIButton*)sender;
     
     //Unselected All main menue buttons
@@ -4419,7 +4472,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         }
         [self callWrite];
 	}
-	else if(selectedButton == addMorePhotoTabButton)
+    else if(selectedButton == addMorePhotoTabButton)
 	{
         selectedAddMoreLayerTab = ADD_MORE_PHOTOTAB;
         
@@ -5011,7 +5064,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     if( [msgFor isEqualToString:DRAWING_MSG_4_COLOR] || [msgFor isEqualToString:DRAWING_MSG_4_ERASER] ) {
         [self deleteSubviewsFromScrollView];
         
-        drawingEraserMsg.text   = @"ERASER CAN ONLY APPLIED ON SELECTED DRAWING LAYER";
+        drawingEraserMsg.text   = @"Note: Eraser can only be applied on selected drawing layer.";
         if( [msgFor isEqualToString:DRAWING_MSG_4_COLOR])
         drawingEraserMsg.text   = @"COLORS CANNOT BE APPLIED ON ERASER";
         
@@ -5389,17 +5442,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             BOOL  deleteLayer = NO;
             if( (text == nil || [text  isEqual: @""]) && (image == nil || [image  isEqual: @""]) )
             deleteLayer = YES;
-            /*
-            if( [layerType isEqualToString:FLYER_LAYER_EMOTICON] ) {
-                
-                if(image == nil || [image  isEqual: @""])
-                    deleteLayer = YES;
-                
-            }else if ( [layerType isEqualToString:FLYER_LAYER_TEXT] || [layerType isEqualToString:FLYER_LAYER_CLIP_ART]) {
-                if(text == nil || [text  isEqual: @""])
-                    deleteLayer = YES;
-            }
-            */
             
             if( deleteLayer  ){
                 [flyer deleteLayer:currentLayer];
@@ -5437,31 +5479,121 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     self.tempDrawImage  = nil;
 }
 
+#pragma mark - ZOOM FUNCTIONS
+//set values at viewWillAppear
+-(void)zoomInit{
+    
+    //disable scrolling in scrollView
+    [zoomScrollView setScrollEnabled:NO];
 
+    //on load time zooming is disabled
+    flyimgView.zoomedIn = NO;
+    
+    //hide zoom elements on init
+    [self zoomElementsSetAlpha:0.0];
+    
+    //HOOK MOVE GESTURE ON SCREEN SHOT IMAGE
+    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(zoomMagnifyerMove:)];
+    [zoomScreenShot addGestureRecognizer:panGesture];
+    
+    zoomScrollView.minimumZoomScale = FLYER_ZOOM_MIN_SCALE;
+	zoomScrollView.maximumZoomScale = FLYER_ZOOM_MAX_SCALE;
+}
 
-/*
- * Here we set Properties of UIImageView
- */
--(void)configureDrawingView :(UIImageView *)imgView ImageViewDictionary:(NSMutableDictionary *)detail {
+// Enable zooming, (for testing , when you tap on PHOTO TAB it will start, after start when you again tap on PHOT TAB, zooming will end )
+- (IBAction)zoom:(id)sender {
+    ( flyimgView.zoomedIn ) ? [self zoomEnd] : [self zoomStart];
+}
+
+-(void)zoomStart {
+    flyimgView.zoomedIn = YES;
+    [self zoomElementsSetAlpha:1.0];
     
-    //SetFrame
-    [imgView setFrame:CGRectMake([[detail valueForKey:@"x"] floatValue], [[detail valueForKey:@"y"] floatValue], [[detail valueForKey:@"width"] floatValue], [[detail valueForKey:@"height"] floatValue])];
+    zoomScreenShot.image = [self getFlyerSnapShot];
     
-    imgView.transform = CGAffineTransformMakeRotation([[detail valueForKey:@"rotation"] floatValue]);
+    zoomScrollView.delegate = self;
+    [zoomScrollView addSubview:flyimgView];
+    zoomScrollView.backgroundColor = [UIColor redColor];
+	[zoomScrollView setZoomScale:FLYER_ZOOM_SET_SCALE];
     
-    //Set Image
-    if ([detail objectForKey:@"image"] != nil) {
-        
-        if ( ![[detail valueForKey:@"image"] isEqualToString:@""]) {
-            NSError *error = nil;
-            NSData *imageData = [[NSData alloc] initWithContentsOfFile:[detail valueForKey:@"image"]
-                                                               options:NSDataReadingMappedIfSafe
-                                                                 error:&error];
-            //NSData *imageData = [[NSData alloc ]initWithContentsOfMappedFile:[detail valueForKey:@"image"]];
-            UIImage *currentImage = [UIImage imageWithData:imageData];
-            [imgView setImage:currentImage];
-        }
+    [self zoomMoveToPoint:CGPointMake(50.0,50.0)];
+}
+
+// Enable zooming, (for testing , when you tap on PHOTO TAB it will start, after start when you again tap on PHOT TAB, zooming will end )
+-(void)zoomEnd {
+    
+    flyimgView.zoomedIn   =   NO;
+    [self zoomElementsSetAlpha:0.0];
+    
+    zoomScreenShot.image   = nil;
+    [self.view addSubview:flyimgView];
+    [zoomScrollView setZoomScale:zoomScrollView.minimumZoomScale];
+}
+
+-(void)zoomElementsSetAlpha:(CGFloat)zoomAlpha{
+    
+    [zoomLayoutOnFlyr setAlpha:zoomAlpha];
+    [zoomScrollView setAlpha:zoomAlpha];
+    [zoomScreenShot setAlpha:zoomAlpha];
+    [zoomMagnifyingGlass setAlpha:zoomAlpha];
+    
+
+    
+    UIButton *zoomButton = (UIButton *)[layerScrollView viewWithTag:@"magnifyingGlass"];
+    if( flyimgView.zoomedIn ){
+        [zoomButton.layer setBorderColor:[UIColor redColor].CGColor];
+        zoomScreenShot.userInteractionEnabled = YES;
+    } else{
+        [zoomButton.layer setBorderColor:[UIColor grayColor].CGColor];
+        zoomScreenShot.userInteractionEnabled = NO;
     }
+
     
+}
+
+//WHEN USER MOVING MAGNIFYING GLASS
+- (void)zoomMagnifyerMove:(UIPanGestureRecognizer *)recognizer {
+    
+    if (recognizer.state == UIGestureRecognizerStateChanged) {
+        CGPoint magnifierCurLoc = [recognizer locationInView:self.zoomScreenShot];
+        [self zoomMoveToPoint:magnifierCurLoc];
+    }
+}
+
+- (void)zoomMoveToPoint:(CGPoint) magnifierCurLoc{
+    int x = magnifierCurLoc.x;
+    int y = magnifierCurLoc.y;
+    
+    //extras in width/height of zoom screenshot
+    int zSsWE   = 10;
+    int zSsHE   = 10;
+
+    // width/height of zoom screenshot
+    int zSsW = zoomScreenShot.size.width+zSsWE;
+    int zSsH = zoomScreenShot.size.height+zSsHE;
+    
+    NSLog(@"(x,y)=(%i,%i)",x,y);
+    
+    //MOVE MAGNIFIER WHEN USER MOVE IT IN THE BOUNDRY OF SCREEN SHORT
+    if( (x > 5 && x < (zSsW-zSsWE) ) && (y > 5 && y < (zSsH-zSsHE) ) ){
+
+        //LOGIC OF MAKING X,Y FOR flyImageView a/c to screenshot magnifier postion(% logic)
+        CGFloat xSv = ( flyimgView.size.width * x ) / 100;
+        CGFloat ySv = ( flyimgView.size.width * y ) / 100;
+        
+        CGRect recSv = CGRectMake(xSv, ySv, zoomScrollView.size.width, zoomScrollView.size.height);
+        [zoomScrollView scrollRectToVisible:recSv animated:YES];
+        
+        //CHANGE MAGNIFIER POSITION ON SCREEN SHORT
+        CGFloat xMg  = x+zoomScreenShot.origin.x-15;
+        CGFloat yMg  = y+zoomScreenShot.origin.y-15;
+        zoomMagnifyingGlass.frame  =  CGRectMake(xMg,yMg, zoomMagnifyingGlass.size.width, zoomMagnifyingGlass.size.height);
+        
+        NSLog(@"Cp(x,y)=(%i,%i),scrollX,scrollY=(%f,%f), mgX,yMg(%f,%f)",x,y, xSv,ySv, xMg,yMg);
+    }
+}
+
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
+    return self.flyimgView;
 }
 @end
