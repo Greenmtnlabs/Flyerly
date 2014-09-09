@@ -8,6 +8,7 @@
 
 #import "FlyerImageView.h"
 #import "Flyer.h"
+#import "ImageLayer.h"
 
 @implementation FlyerImageView
 @synthesize layers,flyerTapGesture,zoomedIn;
@@ -180,7 +181,7 @@ NSString *abc;
         if ( lastControl == nil) {
             
             // Here We Write Code for Image
-            UIImageView *img = [[UIImageView alloc]initWithFrame:CGRectMake(10,10, 90, 70)];
+            ImageLayer *img = [[ImageLayer alloc]initWithFrame:CGRectMake(10,10, 90, 70)];
 
             [self configureImageView:img ImageViewDictionary:layDic];
             [self applyTransform:img ImageViewDictionary:layDic];
@@ -190,7 +191,7 @@ NSString *abc;
             view = img;
         } else {
         
-            UIImageView *img = [layers objectForKey:uid];
+            ImageLayer *img = [layers objectForKey:uid];
             [self applyTransform:img ImageViewDictionary:layDic];
             [layers setValue:img forKey:uid];
         
@@ -253,18 +254,18 @@ NSString *abc;
     [imgView setTransform:tr];
     
         
-        CGAffineTransform newTransForm = imgView.transform;
-        // Get all layer keys for this flyer
-        NSArray *keys = [layers allKeysForObject:imgView];
-        // Find key for rotated layer
-        for ( int i = 0; i < keys.count; i++ ) {
-            NSString *key = [keys objectAtIndex:i];
-            
-            // Save rotation angle for layer
-            [self.delegate layerTransformedforKey:key :&newTransForm];
-            
-        }
+    CGAffineTransform newTransForm = imgView.transform;
+    // Get all layer keys for this flyer
+    NSArray *keys = [layers allKeysForObject:imgView];
+    // Find key for rotated layer
+    for ( int i = 0; i < keys.count; i++ ) {
+        NSString *key = [keys objectAtIndex:i];
         
+        // Save rotation angle for layer
+        [self.delegate layerTransformedforKey:key :&newTransForm];
+        
+    }
+    
     
 }
 

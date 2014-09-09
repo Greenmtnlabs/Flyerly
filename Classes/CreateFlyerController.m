@@ -16,6 +16,7 @@
 #import "GADBannerViewDelegate.h"
 #import "PrintViewController.h"
 #import "InviteForPrint.h"
+#import "ImageLayer.h"
 
 #define IMAGEPICKER_TEMPLATE 1
 #define IMAGEPICKER_PHOTO 2
@@ -1558,8 +1559,48 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 //<##>
                     NSString *sizeStr = SIZE_ARRAY[i-1];
                     
-                    CGRect lastFrame = [flyer getImageFrame:currentLayer];
+                    ImageLayer *img = [flyimgView.layers objectForKey:currentLayer];
                     
+                    // Because emoticons are always sized squrely, we are just considering width here, assuming height is the same
+                    CGFloat currentSize = [img newSize].width;
+                    
+                    CGFloat newSize = [sizeStr floatValue]*1.5;
+                    
+                    CGFloat scale = newSize / currentSize;
+                    
+                    CGAffineTransform currentTransform = img.transform;
+                    
+                    img.layer.anchorPoint = CGPointMake( 0.5, 0.5 );
+                    
+                    CGAffineTransform tr =
+                    CGAffineTransformConcat(
+                                            currentTransform,
+                                            CGAffineTransformMakeScale(scale, scale));
+                    
+                    img.transform = tr;
+                    
+                    // Save the new transform
+                    /*NSMutableDictionary *dic = [flyer getLayerFromMaster:currentLayer];
+                    
+                    NSArray *keys = [flyimgView.layers allKeysForObject:img];
+                    // Find key for rotated layer
+                    for ( int i = 0; i < keys.count; i++ ) {
+                        
+                        CGAffineTransform newTransForm = img.transform;
+                        
+                        NSString *key = [keys objectAtIndex:i];
+                        
+                        // Save rotation angle for layer
+                        [self layerTransformedforKey:key :&newTransForm];
+                        
+                    }*/
+                    //[self.flyimgView renderLayer:currentLayer layerDictionary:dic];
+                    
+                    
+                    // Show selected size
+                    [self setSelectedItem:FLYER_LAYER_EMOTICON inView:sizesView ofLayerAttribute:LAYER_ATTRIBUTE_SIZE];
+                    
+                    /*
                     CGRect imageFrame  = CGRectMake(lastFrame.origin.x,lastFrame.origin.y,([sizeStr floatValue]*1.5),([sizeStr floatValue]*1.5));
                     [flyer setImageFrame:currentLayer :imageFrame];
                     NSMutableDictionary *dic = [flyer getLayerFromMaster:currentLayer];
@@ -1573,6 +1614,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     //Handling Select Unselect
                     [self setSelectedItem:FLYER_LAYER_EMOTICON inView:sizesView ofLayerAttribute:LAYER_ATTRIBUTE_SIZE];
                     //<##>
+                     */
                 }
             }
             i++;
@@ -3185,7 +3227,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     [flyer setImageTransform:uid :transform];
     
     //Update Controller
-    [self.flyimgView renderLayer:uid layerDictionary:[flyer getLayerFromMaster:uid]];
+    //[self.flyimgView renderLayer:uid layerDictionary:[flyer getLayerFromMaster:uid]];
 
 }
 
@@ -3924,6 +3966,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         
         CGRect lastFrame = [flyer getImageFrame:currentLayer];
         textSize = [NSString stringWithFormat:@"%f", (lastFrame.size.height/1.5)];
+        
         
     }else if ( [layerType isEqualToString:FLYER_LAYER_TEXT] ) {
         

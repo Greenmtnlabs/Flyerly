@@ -522,6 +522,7 @@
 		243D8E4419347BAE00D5312D /* InAppViewController-iPhone4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 243D8E4319347BAE00D5312D /* InAppViewController-iPhone4.xib */; };
 		243DD521192B24B500391786 /* FlyerIcons.xib in Resources */ = {isa = PBXBuildFile; fileRef = 243DD520192B24B500391786 /* FlyerIcons.xib */; };
 		243DD523192B24CB00391786 /* FlyerIcons-iPhone4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 243DD522192B24CB00391786 /* FlyerIcons-iPhone4.xib */; };
+		243EA07119BF4ABB0047D0E1 /* ImageLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 243EA07019BF4ABB0047D0E1 /* ImageLayer.m */; };
 		2441584819A4E85B00F12FAD /* ImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 2441584719A4E85B00F12FAD /* ImageLoader.m */; };
 		2453E39F19AC5E0300CB2958 /* buy@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2453E39E19AC5E0300CB2958 /* buy@2x.png */; };
 		2459E8B0196130810072A56C /* greenButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 2459E8AF196130810072A56C /* greenButton.png */; };
@@ -1785,6 +1786,8 @@
 		243D8E4319347BAE00D5312D /* InAppViewController-iPhone4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "InAppViewController-iPhone4.xib"; sourceTree = "<group>"; };
 		243DD520192B24B500391786 /* FlyerIcons.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FlyerIcons.xib; sourceTree = "<group>"; };
 		243DD522192B24CB00391786 /* FlyerIcons-iPhone4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "FlyerIcons-iPhone4.xib"; sourceTree = "<group>"; };
+		243EA06F19BF4ABB0047D0E1 /* ImageLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageLayer.h; sourceTree = "<group>"; };
+		243EA07019BF4ABB0047D0E1 /* ImageLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageLayer.m; sourceTree = "<group>"; };
 		2441584619A4E85B00F12FAD /* ImageLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageLoader.h; sourceTree = "<group>"; };
 		2441584719A4E85B00F12FAD /* ImageLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageLoader.m; sourceTree = "<group>"; };
 		2453E39E19AC5E0300CB2958 /* buy@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "buy@2x.png"; sourceTree = "<group>"; };
@@ -3268,6 +3271,8 @@
 				200D196718998BEA00EAD645 /* LayerTileButton.m */,
 				247058E5194F348300678CC5 /* ResourcesView.h */,
 				247058E6194F348300678CC5 /* ResourcesView.m */,
+				243EA06F19BF4ABB0047D0E1 /* ImageLayer.h */,
+				243EA07019BF4ABB0047D0E1 /* ImageLayer.m */,
 			);
 			name = FlyerlyCustomClasses;
 			sourceTree = "<group>";
@@ -5921,6 +5926,7 @@
 				20A38EAA1982531F007C279F /* LobServiceModel.m in Sources */,
 				202C4826187D7A6B00FE0975 /* CDataScanner_Extensions.m in Sources */,
 				0F80C386178561C200D36795 /* LaunchController.m in Sources */,
+				243EA07119BF4ABB0047D0E1 /* ImageLayer.m in Sources */,
 				0F80C38B178578CB00D36795 /* RegisterController.m in Sources */,
 				0F80C3901785813E00D36795 /* SigninController.m in Sources */,
 				2099301118BF0C5000A177A4 /* ContactsModel.m in Sources */,
