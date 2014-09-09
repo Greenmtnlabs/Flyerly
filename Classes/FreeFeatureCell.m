@@ -33,6 +33,10 @@
 
 -(void)setCellValuesSize {
     
-    [featureDesc setFont:[UIFont fontWithName:@"HelveticaNeue" size:14.0]];
+    CGRect featureNameFrame = CGRectMake(0, 0, 0, 0);
+    featureName.frame = featureNameFrame;
+    CGRect featureDescFrame = CGRectMake(0,0,136,66);
+    featureDesc.frame = featureDescFrame;
+    [featureDesc setFont:[UIFont fontWithName:@"HelveticaNeue" size:12.0]];
 }
 @end
