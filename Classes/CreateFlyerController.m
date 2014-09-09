@@ -5537,7 +5537,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     UIButton *zoomButton = (UIButton *)[layerScrollView viewWithTag:@"magnifyingGlass"];
     if( flyimgView.zoomedIn ){
-        [zoomButton.layer setBorderColor:[UIColor redColor].CGColor];
+
+        [zoomButton.layer setBorderColor:[UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0].CGColor];
         zoomScreenShot.userInteractionEnabled = YES;
     } else{
         [zoomButton.layer setBorderColor:[UIColor grayColor].CGColor];
