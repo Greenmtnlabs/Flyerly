@@ -5059,7 +5059,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     if( [msgFor isEqualToString:DRAWING_MSG_4_COLOR] || [msgFor isEqualToString:DRAWING_MSG_4_ERASER] ) {
         [self deleteSubviewsFromScrollView];
         
-        drawingEraserMsg.text   = @"ERASER CAN ONLY APPLIED ON SELECTED DRAWING LAYER";
+        drawingEraserMsg.text   = @"Note: Eraser can only be applied on selected drawing layer.";
         if( [msgFor isEqualToString:DRAWING_MSG_4_COLOR])
         drawingEraserMsg.text   = @"COLORS CANNOT BE APPLIED ON ERASER";
         
