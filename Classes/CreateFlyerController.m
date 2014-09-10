@@ -441,7 +441,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 self.bannerAdd = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner origin:origin];
                 
                 // Note: Edit SampleConstants.h to provide a definition for kSampleAdUnitID before compiling.
-                self.bannerAdd.adUnitID = @"ca-app-pub-5409664730066465/8030978831";;
+                self.bannerAdd.adUnitID = @"ca-app-pub-5409664730066465/8030978831";
                 self.bannerAdd.delegate = self;
                 self.bannerAdd.rootViewController = self;
                 
@@ -4014,9 +4014,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         
         
     }
-    
-    
-    
+
     NSArray *sizesArray = sizesView.subviews;
     for (int i = 1; i <=  [sizesArray count] ; i++)
     {
