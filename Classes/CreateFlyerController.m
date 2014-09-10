@@ -1615,13 +1615,13 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     
                     CGAffineTransform tr =
                     CGAffineTransformConcat(
-                                            currentTransform,
-                                            CGAffineTransformMakeScale(scale, scale));
+                                            CGAffineTransformMakeScale(scale, scale),
+                                            currentTransform);
                     
                     img.transform = tr;
                     
                     // Save the new transform
-                    /*NSMutableDictionary *dic = [flyer getLayerFromMaster:currentLayer];
+                    NSMutableDictionary *dic = [flyer getLayerFromMaster:currentLayer];
                     
                     NSArray *keys = [flyimgView.layers allKeysForObject:img];
                     // Find key for rotated layer
@@ -1634,7 +1634,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                         // Save rotation angle for layer
                         [self layerTransformedforKey:key :&newTransForm];
                         
-                    }*/
+                    }
                     //[self.flyimgView renderLayer:currentLayer layerDictionary:dic];
                     
                     
@@ -4005,9 +4005,10 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         
     } else if ( [layerType isEqualToString:FLYER_LAYER_EMOTICON] ) {
         
-        CGRect lastFrame = [flyer getImageFrame:currentLayer];
-        textSize = [NSString stringWithFormat:@"%f", (lastFrame.size.height/1.5)];
-        
+        ImageLayer *img = [flyimgView.layers objectForKey:currentLayer];
+        // Because emoticons are always sized squrely, we are just considering width here, assuming height is the same
+        textSize = [NSString stringWithFormat:@"%f", roundf(([img newSize].width)/1.5)];
+
         
     }else if ( [layerType isEqualToString:FLYER_LAYER_TEXT] ) {
         
