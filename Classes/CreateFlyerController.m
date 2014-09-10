@@ -1283,10 +1283,10 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         [layerScrollView setScrollEnabled:NO];
         
         
-        zoomScreenShot.frame = CGRectMake(80, 10, 100, 100);
+        zoomScreenShot.frame = CGRectMake(80, 10, zoomScreenShot.size.width, zoomScreenShot.size.height);
         [layerScrollView addSubview:zoomScreenShot];
         
-        zoomMagnifyingGlass.frame = CGRectMake(50, 50, 32, 32);
+        zoomMagnifyingGlass.frame = CGRectMake(50, 50, zoomMagnifyingGlass.size.width, zoomMagnifyingGlass.size.height);
         [layerScrollView addSubview:zoomMagnifyingGlass];
         
         [self zoomMoveToPoint:CGPointMake(50.0,50.0)];
@@ -5668,18 +5668,26 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 - (void)zoomMoveToPoint:(CGPoint) magnifierCurLoc{
     int x = magnifierCurLoc.x;
     int y = magnifierCurLoc.y;
-
+    
     //MOVE MAGNIFIER WHEN USER MOVE IT IN THE BOUNDRY OF SCREEN SHORT
     if( (x > 0 &&  x < zoomScreenShot.size.width ) && (y > 0 && y < zoomScreenShot.size.height ) ) {
 
+        int x2 = floor( (x*100)/zoomScreenShot.size.width );
+        int y2 = floor( (y*100)/zoomScreenShot.size.height);
+        
+        NSLog(@"x,y(%i,%i) x2,y2(%i,%i)",x,y, x2,y2);
+        
+        
         //CHANGE ZOOM SCOLLVIEW
-        CGFloat xSv = x, ySv = y;
+        CGFloat xSv = x2, ySv = y2;
         if( ySv < 11)
         ySv = 11; //dont show gray background in top
         else if( ySv > 60)
         ySv = 60; //dont show gray background in bottom
         
-        if( xSv > 50)
+        if( xSv < 1)
+        xSv = 1;//dont show gray background in left
+        else if( xSv > 50)
         xSv = 50; //dont show gray background in right
         
         //Logic of scrolling the zoom view a/c to magnifier postion on screenshot( % logic )
@@ -5692,20 +5700,20 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         
         //CHANGE MAGNIFIER POSITION ON SCREEN SHORT
         CGFloat xMg = x, yMg = y;
-        if( xMg < 12 )
-        xMg =  12;
-        else if( xMg > 93)
-        xMg =   93;
+        if( xMg < 2 )
+        xMg =  2;
+        else if( xMg > 95)
+        xMg =  95;
         
-        if( yMg < 10)
-        yMg =   10;
+        if( yMg < 4)
+        yMg =   4;
+        if( yMg > 100)
+        yMg =  100;
         
-        xMg  = xMg + zoomScreenShot.origin.x - 15;
-        yMg  = yMg + zoomScreenShot.origin.y - 15;
+        xMg  = xMg + zoomScreenShot.origin.x - 5;
+        yMg  = yMg + zoomScreenShot.origin.y - 9;
         
         zoomMagnifyingGlass.frame  =  CGRectMake(xMg,yMg, zoomMagnifyingGlass.size.width, zoomMagnifyingGlass.size.height);
-        
-        //NSLog(@"Cp(x,y)=(%i,%i), xSv,ySv=(%f,%f), mgX,yMg(%f,%f)",x,y, xSv,ySv, xMg,yMg);
     }
 }
 
