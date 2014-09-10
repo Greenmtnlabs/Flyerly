@@ -5612,8 +5612,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 	[zoomScrollView setZoomScale:FLYER_ZOOM_SET_SCALE];
 
     //FOR TESTING SHOW RED RECT AROUND CURSOR
-    [zoomMagnifyingGlass.layer setBorderColor: [[UIColor redColor] CGColor]];
-    [zoomMagnifyingGlass.layer setBorderWidth: 2.0];
+    //[zoomMagnifyingGlass.layer setBorderColor: [[UIColor redColor] CGColor]];
+    //[zoomMagnifyingGlass.layer setBorderWidth: 2.0];
     
     [self zoomAddLayerButtonsIntoScrollView:@"zoomStart"];
     
@@ -5642,10 +5642,10 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 
 //WHEN USER MOVING MAGNIFYING GLASS
 - (void)zoomMagnifyerMove:(UIPanGestureRecognizer *)recognizer {
-
     //MOVE
-    if (recognizer.state == UIGestureRecognizerStateChanged) {
+    if (YES || recognizer.state == UIGestureRecognizerStateChanged) {
         //dispatch_async( dispatch_get_main_queue(), ^{
+        
             CGPoint magnifierCurLoc = [recognizer locationInView:self.zoomScreenShot];
             [self zoomMoveToPoint:magnifierCurLoc];
         //});
@@ -5677,7 +5677,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         int x2 = floor( (x*100)/zoomScreenShot.size.width );
         int y2 = floor( (y*100)/zoomScreenShot.size.height);
         
-       // NSLog(@"x,y(%i,%i) x2,y2(%i,%i)",x,y, x2,y2);
+        NSLog(@"x,y(%i,%i) x2,y2(%i,%i)",x,y, x2,y2);
         
         
         //CHANGE ZOOM SCOLLVIEW
@@ -5703,7 +5703,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     //CHANGE MAGNIFIER POSITION ON SCREEN SHORT
     CGFloat xMg = x, yMg = y, xMgE = 9, yMgE = -5;
-    if( xMg < 0 ){
+    if( xMg < -9 ){
         xMg =  0;
         xMgE = 0;
     }
