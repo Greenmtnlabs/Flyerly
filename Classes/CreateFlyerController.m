@@ -253,23 +253,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     [_takeOrAddPhotoLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:18]];
     [_videoLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:16]];
     
-    //Right ShareButton
-    shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    shareButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
-	[shareButton addTarget:self action:@selector(share) forControlEvents:UIControlEventTouchUpInside];
-    [shareButton setBackgroundImage:[UIImage imageNamed:@"share_button"] forState:UIControlStateNormal];
-    shareButton.showsTouchWhenHighlighted = YES;
-    
-    // Right UndoButton
-    UIButton *undoButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    undoButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
-	[undoButton addTarget:self action:@selector(undoFlyer) forControlEvents:UIControlEventTouchUpInside];
-    [undoButton setBackgroundImage:[UIImage imageNamed:@"undo"] forState:UIControlStateNormal];
-    undoButton.showsTouchWhenHighlighted = YES;
-    
-    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
-    rightUndoBarButton = [[UIBarButtonItem alloc] initWithCustomView:undoButton];
-    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,rightUndoBarButton,nil]];
+    [self addButtonsInRightNavigation:@"viewDidLoad"];
     
     // Left BackButton
     backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
@@ -2517,13 +2501,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     label.text = @"TEXT";
     self.navigationItem.titleView = label;
     
-    
-    UIButton *nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-	[nextButton addTarget:self action:@selector(callStyle) forControlEvents:UIControlEventTouchUpInside];
-    [nextButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
-    nextButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
-    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
+    [self addButtonsInRightNavigation:@"callWrite"];
     
     UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
 	[backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
@@ -2584,24 +2562,116 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
  * Here we add or Replace Two Button on Top Bar
  */
 -(void)addDonetoRightBarBotton{
+    [self addButtonsInRightNavigation:@"addDonetoRightBarBotton"];
     
-    //Delete Bar Button
-    UIButton *delButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    [delButton addTarget:self action:@selector(callDeleteLayer) forControlEvents:UIControlEventTouchUpInside];
-    [delButton setBackgroundImage:[UIImage imageNamed:@"delete_button"] forState:UIControlStateNormal];
-    delButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *delBarButton = [[UIBarButtonItem alloc] initWithCustomView:delButton];
-    
-    
-    UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    [doneButton addTarget:self action:@selector(callAddMoreLayers) forControlEvents:UIControlEventTouchUpInside];
-    [doneButton addTarget:self action:@selector(logPhotoAddedEvent) forControlEvents:UIControlEventTouchUpInside];
-    
-    [doneButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
-    doneButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
-    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:doneBarButton,delBarButton,nil]];
-    
+}
+
+-(void)addButtonsInRightNavigation:(NSString *)callFrom {
+    if( [callFrom isEqualToString:@"zoomEnd"] ){
+        //[self addButtonsInRightNavigation:@"callAddMoreLayers"];
+       // return;
+    }
+    else{
+        NSMutableArray  *barItems   =   [NSMutableArray arrayWithObjects:nil];
+        if( [callFrom isEqualToString:@"callWrite"] ){
+            UIButton *nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+            [nextButton addTarget:self action:@selector(callStyle) forControlEvents:UIControlEventTouchUpInside];
+            [nextButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
+            nextButton.showsTouchWhenHighlighted = YES;
+            UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
+            barItems  = [NSMutableArray arrayWithObjects:rightBarButton,nil];
+        }
+        if( [callFrom isEqualToString:@"viewDidLoad"] ){
+            //Right ShareButton
+            shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+            shareButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
+            [shareButton addTarget:self action:@selector(share) forControlEvents:UIControlEventTouchUpInside];
+            [shareButton setBackgroundImage:[UIImage imageNamed:@"share_button"] forState:UIControlStateNormal];
+            shareButton.showsTouchWhenHighlighted = YES;
+            
+            // Right UndoButton
+            UIButton *undoButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+            undoButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
+            [undoButton addTarget:self action:@selector(undoFlyer) forControlEvents:UIControlEventTouchUpInside];
+            [undoButton setBackgroundImage:[UIImage imageNamed:@"undo"] forState:UIControlStateNormal];
+            undoButton.showsTouchWhenHighlighted = YES;
+
+            
+            UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
+            rightUndoBarButton = [[UIBarButtonItem alloc] initWithCustomView:undoButton];
+            barItems  = [NSMutableArray arrayWithObjects:rightBarButton,rightUndoBarButton,nil];
+        }
+        else if( [callFrom isEqualToString:@"choosePhoto"] ){
+            //Delete Bar Button
+            UIButton *delButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+            [delButton addTarget:self action:@selector(callDeleteLayer) forControlEvents:UIControlEventTouchUpInside];
+            [delButton setBackgroundImage:[UIImage imageNamed:@"delete_button"] forState:UIControlStateNormal];
+            delButton.showsTouchWhenHighlighted = YES;
+            UIBarButtonItem *delBarButton = [[UIBarButtonItem alloc] initWithCustomView:delButton];
+            
+            UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+            [doneButton addTarget:self action:@selector(donePhoto) forControlEvents:UIControlEventTouchUpInside];
+            [doneButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
+            doneButton.showsTouchWhenHighlighted = YES;
+            UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
+            barItems  = [NSMutableArray arrayWithObjects:doneBarButton,delBarButton,nil];
+        }
+        else if( [callFrom isEqualToString:@"callStyle"] ){
+            // Done Bar Button
+            UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+            [doneButton addTarget:self action:@selector(callAddMoreLayers) forControlEvents:UIControlEventTouchUpInside];
+            [doneButton addTarget:self action:@selector(logTextAddedEvent) forControlEvents:UIControlEventTouchUpInside];
+            
+            [doneButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
+            doneButton.showsTouchWhenHighlighted = YES;
+            UIBarButtonItem *DoneBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
+            
+            //Delete Button
+            UIButton *delButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+            [delButton addTarget:self action:@selector(callDeleteLayer) forControlEvents:UIControlEventTouchUpInside];
+            [delButton setBackgroundImage:[UIImage imageNamed:@"delete_button"] forState:UIControlStateNormal];
+            delButton.showsTouchWhenHighlighted = YES;
+            UIBarButtonItem *delBarButton = [[UIBarButtonItem alloc] initWithCustomView:delButton];
+            barItems  = [NSMutableArray arrayWithObjects:DoneBarButton,delBarButton,nil];
+        }
+        else if( [callFrom isEqualToString:@"callAddMoreLayers"] ){
+            //ShareButton
+            [shareButton setBackgroundImage:[UIImage imageNamed:@"share_button"] forState:UIControlStateNormal];
+            
+            //UndoButton
+            UIButton *undoButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+            undoButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
+            [undoButton addTarget:self action:@selector(undoFlyer) forControlEvents:UIControlEventTouchUpInside];
+            [undoButton setBackgroundImage:[UIImage imageNamed:@"undo"] forState:UIControlStateNormal];
+            undoButton.showsTouchWhenHighlighted = YES;
+            
+            UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
+            rightUndoBarButton = [[UIBarButtonItem alloc] initWithCustomView:undoButton];
+            
+            
+            barItems  = [NSMutableArray arrayWithObjects:rightBarButton,rightUndoBarButton,nil];
+        }
+        else if( [callFrom isEqualToString:@"addDonetoRightBarBotton"] ) {
+            //Delete Bar Button
+            UIButton *delButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+            [delButton addTarget:self action:@selector(callDeleteLayer) forControlEvents:UIControlEventTouchUpInside];
+            [delButton setBackgroundImage:[UIImage imageNamed:@"delete_button"] forState:UIControlStateNormal];
+            delButton.showsTouchWhenHighlighted = YES;
+            UIBarButtonItem *delBarButton = [[UIBarButtonItem alloc] initWithCustomView:delButton];
+            
+            
+            UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+            [doneButton addTarget:self action:@selector(callAddMoreLayers) forControlEvents:UIControlEventTouchUpInside];
+            [doneButton addTarget:self action:@selector(logPhotoAddedEvent) forControlEvents:UIControlEventTouchUpInside];
+            
+            [doneButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
+            doneButton.showsTouchWhenHighlighted = YES;
+            UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
+            barItems  = [NSMutableArray arrayWithObjects:doneBarButton,delBarButton,nil];
+        }
+            
+        [self.navigationItem setRightBarButtonItems:barItems];
+    }
 }
 
 /*
@@ -2610,23 +2680,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
  */
 -(void)callStyle
 {
-    // Done Bar Button
-    UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    [doneButton addTarget:self action:@selector(callAddMoreLayers) forControlEvents:UIControlEventTouchUpInside];
-    [doneButton addTarget:self action:@selector(logTextAddedEvent) forControlEvents:UIControlEventTouchUpInside];
-    
-    [doneButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
-    doneButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *DoneBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
-    
-    //Delete Button
-    UIButton *delButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    [delButton addTarget:self action:@selector(callDeleteLayer) forControlEvents:UIControlEventTouchUpInside];
-    [delButton setBackgroundImage:[UIImage imageNamed:@"delete_button"] forState:UIControlStateNormal];
-    delButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *delBarButton = [[UIBarButtonItem alloc] initWithCustomView:delButton];
-    
-    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:DoneBarButton,delBarButton,nil]];
+    [self addButtonsInRightNavigation:@"callStyle"];
     
     //Checking Empty String
     if ([lastTextView.text isEqualToString:@""] ) {
@@ -2725,20 +2779,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     label.textColor = [UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0];;
     label.text = @"PHOTO";
     self.navigationItem.titleView = label;
-    
-    //Delete Bar Button
-    UIButton *delButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    [delButton addTarget:self action:@selector(callDeleteLayer) forControlEvents:UIControlEventTouchUpInside];
-    [delButton setBackgroundImage:[UIImage imageNamed:@"delete_button"] forState:UIControlStateNormal];
-    delButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *delBarButton = [[UIBarButtonItem alloc] initWithCustomView:delButton];
-    
-    UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    [doneButton addTarget:self action:@selector(donePhoto) forControlEvents:UIControlEventTouchUpInside];
-    [doneButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
-    doneButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
-    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:doneBarButton,delBarButton,nil]];
+
+    [self addButtonsInRightNavigation:@"choosePhoto"];
     
     //Add Context Library
     [self addBottomTabs:libPhoto];
@@ -3519,21 +3561,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     self.navigationItem.titleView = label;
     
     
-    //ShareButton
-    [shareButton setBackgroundImage:[UIImage imageNamed:@"share_button"] forState:UIControlStateNormal];
+    [self addButtonsInRightNavigation:@"callAddMoreLayers"];
     
-    //UndoButton
-    UIButton *undoButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    undoButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
-	[undoButton addTarget:self action:@selector(undoFlyer) forControlEvents:UIControlEventTouchUpInside];
-    [undoButton setBackgroundImage:[UIImage imageNamed:@"undo"] forState:UIControlStateNormal];
-    undoButton.showsTouchWhenHighlighted = YES;
-    
-    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
-    rightUndoBarButton = [[UIBarButtonItem alloc] initWithCustomView:undoButton];
-    
-    
-    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,rightUndoBarButton,nil]];
     
     [self addBottomTabs:libFlyer];
     
@@ -5600,6 +5629,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 }
 
 -(void)zoomStart {
+    [self addButtonsInRightNavigation:@"zoomStart"];
     flyimgView.zoomedIn = YES;
     [self zoomElementsSetAlpha:1.0];
     
@@ -5634,6 +5664,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     [self.view addSubview:flyimgView];
     [zoomScrollView setZoomScale:zoomScrollView.minimumZoomScale];
     [self zoomAddLayerButtonsIntoScrollView:@"zoomEnd"];
+    [self addButtonsInRightNavigation:@"zoomEnd"];
 }
 
 -(void)zoomElementsSetAlpha:(CGFloat)zoomAlpha{
