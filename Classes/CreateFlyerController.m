@@ -5603,7 +5603,11 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     flyimgView.zoomedIn = YES;
     [self zoomElementsSetAlpha:1.0];
     
+    if ( [flyer isVideoFlyer] )
+    zoomScreenShot.image = [flyer  getSharingVideoCover];
+    else
     zoomScreenShot.image = [self getFlyerSnapShot];
+    
     zoomScreenShot.userInteractionEnabled = YES;
     
     zoomScrollView.delegate = self;
@@ -5634,7 +5638,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 
 -(void)zoomElementsSetAlpha:(CGFloat)zoomAlpha{
     
-    [zoomLayoutOnFlyr setAlpha:zoomAlpha];
+    //[zoomLayoutOnFlyr setAlpha:zoomAlpha];
     [zoomScrollView setAlpha:zoomAlpha];
     [zoomScreenShot setAlpha:zoomAlpha];
     [zoomMagnifyingGlass setAlpha:zoomAlpha];
