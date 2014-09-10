@@ -5695,8 +5695,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         ySv = ( flyimgView.size.width * ySv ) / 100;
        
         CGRect recSv = CGRectMake(xSv, ySv, 10,10);
-        [zoomScrollView scrollRectToVisible:recSv animated:NO];
-        [zoomScrollView setContentOffset:CGPointMake(xSv, ySv) animated:NO];
+        [zoomScrollView scrollRectToVisible:recSv animated:YES];
+        [zoomScrollView setContentOffset:CGPointMake(xSv, ySv) animated:YES];
         
         //CHANGE MAGNIFIER POSITION ON SCREEN SHORT
         CGFloat xMg = x, yMg = y;
