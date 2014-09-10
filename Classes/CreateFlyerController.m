@@ -5642,25 +5642,10 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 
 //WHEN USER MOVING MAGNIFYING GLASS
 - (void)zoomMagnifyerMove:(UIPanGestureRecognizer *)recognizer {
-    //MOVE
-    if (YES || recognizer.state == UIGestureRecognizerStateChanged) {
-        //dispatch_async( dispatch_get_main_queue(), ^{
-        
-            CGPoint magnifierCurLoc = [recognizer locationInView:self.zoomScreenShot];
-            [self zoomMoveToPoint:magnifierCurLoc];
-        //});
-    }
-    //MOVE END
-    else if (recognizer.state == UIGestureRecognizerStateEnded) {
-        //dispatch_async( dispatch_get_main_queue(), ^{
-            CGPoint magnifierCurLoc = [recognizer locationInView:self.zoomScreenShot];
-            [self zoomMoveToPoint:magnifierCurLoc];
-            //NSLog(@"zoomMagnifyerMove - END");
-        //});
-    }
+    CGPoint magnifierCurLoc = [recognizer locationInView:self.zoomScreenShot];
+    [self zoomMoveToPoint:magnifierCurLoc];
 }
 - (void)zoomMagnifyerMoveOnTap:(UITapGestureRecognizer *)recognizer {
-    //NSLog(@"zoomMagnifyerMoveOnTap");
     CGPoint magnifierCurLoc = [recognizer locationInView:self.zoomScreenShot];
     magnifierCurLoc.x += -20;
     magnifierCurLoc.y += -20;
@@ -5671,35 +5656,30 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     int x = magnifierCurLoc.x;
     int y = magnifierCurLoc.y;
     
-    //MOVE MAGNIFIER WHEN USER MOVE IT IN THE BOUNDRY OF SCREEN SHORT
-    //if( YES ||  ((x > 0 &&  x < zoomScreenShot.size.width ) && (y > 0 && y < zoomScreenShot.size.height )) ) {
-
-        int x2 = floor( (x*100)/zoomScreenShot.size.width );
-        int y2 = floor( (y*100)/zoomScreenShot.size.height);
-        
-        //NSLog(@"x,y(%i,%i) x2,y2(%i,%i)",x,y, x2,y2);
-        
-        
-        //CHANGE ZOOM SCOLLVIEW
-        CGFloat xSv = x2, ySv = y2;
-        if( ySv < 11)
-        ySv = 11; //dont show gray background in top
-        else if( ySv > 60)
-        ySv = 60; //dont show gray background in bottom
-        
-        if( xSv < 1)
-        xSv = 1;//dont show gray background in left
-        else if( xSv > 50)
-        xSv = 50; //dont show gray background in right
-        
-        //Logic of scrolling the zoom view a/c to magnifier postion on screenshot( % logic )
-        xSv = ( flyimgView.size.width * xSv ) / 100;
-        ySv = ( flyimgView.size.width * ySv ) / 100;
-       
-        CGRect recSv = CGRectMake(xSv, ySv, 10,10);
-        [zoomScrollView scrollRectToVisible:recSv animated:YES];
-        [zoomScrollView setContentOffset:CGPointMake(xSv, ySv) animated:YES];
-    //}
+    int x2 = floor( (x*100)/zoomScreenShot.size.width );
+    int y2 = floor( (y*100)/zoomScreenShot.size.height);
+    
+    //NSLog(@"x,y(%i,%i) x2,y2(%i,%i)",x,y, x2,y2);
+    
+    //CHANGE ZOOM SCOLLVIEW
+    CGFloat xSv = x2, ySv = y2;
+    if( ySv < 11)
+    ySv = 11; //dont show gray background in top
+    else if( ySv > 60)
+    ySv = 60; //dont show gray background in bottom
+    
+    if( xSv < 1)
+    xSv = 1;//dont show gray background in left
+    else if( xSv > 50)
+    xSv = 50; //dont show gray background in right
+    
+    //Logic of scrolling the zoom view a/c to magnifier postion on screenshot( % logic )
+    xSv = ( flyimgView.size.width * xSv ) / 100;
+    ySv = ( flyimgView.size.width * ySv ) / 100;
+   
+    CGRect recSv = CGRectMake(xSv, ySv, 10,10);
+    [zoomScrollView scrollRectToVisible:recSv animated:YES];
+    [zoomScrollView setContentOffset:CGPointMake(xSv, ySv) animated:YES];
     
     //CHANGE MAGNIFIER POSITION ON SCREEN SHORT
     CGFloat xMg = x, yMg = y, xMgE = 9, yMgE = -5;
@@ -5708,19 +5688,17 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         xMgE = 0;
     }
     else if( xMg > 82)
-        xMg =  82;
+    xMg =  82;
     
     if( yMg < 0)
-        yMg =   0;
+    yMg =   0;
     if( yMg > 95)
-        yMg =  95;
+    yMg =  95;
     
     xMg  = xMg + zoomScreenShot.origin.x + xMgE;
     yMg  = yMg + zoomScreenShot.origin.y + yMgE;
     
     zoomMagnifyingGlass.frame  =  CGRectMake(xMg,yMg, zoomMagnifyingGlass.size.width, zoomMagnifyingGlass.size.height);
-    
-    
 }
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
