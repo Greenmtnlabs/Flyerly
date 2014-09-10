@@ -5677,7 +5677,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         int x2 = floor( (x*100)/zoomScreenShot.size.width );
         int y2 = floor( (y*100)/zoomScreenShot.size.height);
         
-        NSLog(@"x,y(%i,%i) x2,y2(%i,%i)",x,y, x2,y2);
+        //NSLog(@"x,y(%i,%i) x2,y2(%i,%i)",x,y, x2,y2);
         
         
         //CHANGE ZOOM SCOLLVIEW
