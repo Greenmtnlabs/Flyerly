@@ -43,7 +43,7 @@
 
 
 //Outlets form zoom
-@synthesize zoomLayoutOnFlyr,zoomScrollView,zoomScreenShot,zoomMagnifyingGlass;
+@synthesize zoomScrollView,zoomScreenShot,zoomMagnifyingGlass;
 
 //Drawing required files
 @synthesize mainImage;
@@ -5638,7 +5638,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 
 -(void)zoomElementsSetAlpha:(CGFloat)zoomAlpha{
     
-    //[zoomLayoutOnFlyr setAlpha:zoomAlpha];
     [zoomScrollView setAlpha:zoomAlpha];
     [zoomScreenShot setAlpha:zoomAlpha];
     [zoomMagnifyingGlass setAlpha:zoomAlpha];
