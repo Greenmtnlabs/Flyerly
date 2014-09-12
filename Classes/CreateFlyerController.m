@@ -5639,25 +5639,35 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     flyimgView.zoomedIn = YES;
     [self zoomElementsSetAlpha:1.0];
     
-    if ( [flyer isVideoFlyer] )
-    zoomScreenShot.image = [flyer  getSharingVideoCover];
-    else
-    zoomScreenShot.image = [self getFlyerSnapShot];
-    
-    zoomScreenShot.userInteractionEnabled = YES;
-    
-    zoomScrollView.delegate = self;
-    [zoomScrollView addSubview:flyimgView];
-    zoomScrollView.backgroundColor = [UIColor clearColor];
-	[zoomScrollView setZoomScale:FLYER_ZOOM_SET_SCALE];
+    if ( [flyer isVideoFlyer] && [self.flyer isVideoMergeProcessRequired] ) {
+            [self videoMergeProcess];
+        dispatch_async( dispatch_get_main_queue(), ^{
+            [self zoomStart];
+        });
+    } else{
+       
+        if ( [flyer isVideoFlyer] ){
+            zoomScreenShot.image = [flyer  getSharingVideoCover];
+        }
+        else{
+            zoomScreenShot.image = [self getFlyerSnapShot];
+        }
+        
+        zoomScreenShot.userInteractionEnabled = YES;
+        
+        zoomScrollView.delegate = self;
+        [zoomScrollView addSubview:flyimgView];
+        zoomScrollView.backgroundColor = [UIColor clearColor];
+        [zoomScrollView setZoomScale:FLYER_ZOOM_SET_SCALE];
 
-    //FOR TESTING SHOW RED RECT AROUND CURSOR
-    //[zoomMagnifyingGlass.layer setBorderColor: [[UIColor redColor] CGColor]];
-    //[zoomMagnifyingGlass.layer setBorderWidth: 2.0];
-    
-    [self zoomAddLayerButtonsIntoScrollView:@"zoomStart"];
-    
-    [zoomScrollView setContentSize:CGSizeMake(flyimgView.frame.size.width, flyimgView.frame.size.height)];
+        //FOR TESTING SHOW RED RECT AROUND CURSOR
+        //[zoomMagnifyingGlass.layer setBorderColor: [[UIColor redColor] CGColor]];
+        //[zoomMagnifyingGlass.layer setBorderWidth: 2.0];
+        
+        [self zoomAddLayerButtonsIntoScrollView:@"zoomStart"];
+        
+        [zoomScrollView setContentSize:CGSizeMake(flyimgView.frame.size.width, flyimgView.frame.size.height)];
+    }
 }
 
 // Enable zooming, (for testing , when you tap on PHOTO TAB it will start, after start when you again tap on PHOT TAB, zooming will end )
