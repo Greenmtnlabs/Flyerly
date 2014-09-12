@@ -392,7 +392,7 @@ NSString *abc;
     CustomLabel *lbl = [layers objectForKey:uid];
     
     //SetFrame
-    //[lbl setFrame:CGRectMake([[detail valueForKey:@"x"] floatValue], [[detail valueForKey:@"y"] floatValue], [[detail valueForKey:@"width"] floatValue], [[detail valueForKey:@"height"] floatValue])];
+    [lbl setFrame:CGRectMake([[detail valueForKey:@"x"] floatValue], [[detail valueForKey:@"y"] floatValue], [[detail valueForKey:@"width"] floatValue], [[detail valueForKey:@"height"] floatValue])];
     
     // Remember originalsize
     lbl.originalSize = lbl.frame.size;
@@ -424,6 +424,9 @@ NSString *abc;
 -(void)configureLabelBorder :(NSString *)uid labelDictionary:(NSMutableDictionary *)detail {
     
     CustomLabel *lbl = [layers objectForKey:uid];
+    
+    //SetFrame
+    //[lbl setFrame:CGRectMake([[detail valueForKey:@"x"] floatValue], [[detail valueForKey:@"y"] floatValue], [[detail valueForKey:@"width"] floatValue], [[detail valueForKey:@"height"] floatValue])];
     
     // Remember originalsize
     lbl.originalSize = lbl.frame.size;
@@ -461,6 +464,46 @@ NSString *abc;
         lbl.borderColor = [UIColor colorWithRed:[rgbBorder[0] floatValue] green:[rgbBorder[1] floatValue] blue:[rgbBorder[2] floatValue] alpha:1];
     }
     lbl.lineWidth = 2;
+    
+    
+    /*CustomLabel *lbl = [layers objectForKey:uid];
+    
+    // Remember originalsize
+    lbl.originalSize = lbl.frame.size;
+    
+    //set Label Text
+    [lbl setText:[detail valueForKey:@"text"]];
+    
+    //set Label Font
+    lbl.font = [UIFont fontWithName:[detail valueForKey:@"fontname"] size:[[detail valueForKey:@"fontsize"] floatValue]];
+    
+    if ([[detail valueForKey:@"textcolor"] isEqualToString:@"0.000000, 0.000000, 0.000000"]) {
+        if ([detail valueForKey:@"textWhitecolor"]  != nil) {
+            NSArray *rgb = [[detail valueForKey:@"textWhitecolor"]  componentsSeparatedByString:@","];
+            lbl.textColor = [UIColor colorWithWhite:[rgb[0] floatValue] alpha:[rgb[1] floatValue]];
+        }
+    }else{
+        NSArray *rgb = [[detail valueForKey:@"textcolor"] componentsSeparatedByString:@","];
+        
+        lbl.textColor = [UIColor colorWithRed:[rgb[0] floatValue] green:[rgb[1] floatValue] blue:[rgb[2] floatValue] alpha:1];
+        
+    }
+    
+    if ([[detail valueForKey:@"textbordercolor"] isEqualToString:@"0.000000, 0.000000, 0.000000"]) {
+        
+        if ([detail valueForKey:@"textborderWhite"] != nil) {
+            NSArray *rgbBorder = [[detail valueForKey:@"textborderWhite"] componentsSeparatedByString:@","];
+            
+            lbl.borderColor = [UIColor colorWithWhite:[rgbBorder[0] floatValue] alpha:[rgbBorder[1] floatValue]];
+            
+        }
+    }else{
+        
+        NSArray *rgbBorder = [[detail valueForKey:@"textbordercolor"] componentsSeparatedByString:@","];
+        
+        lbl.borderColor = [UIColor colorWithRed:[rgbBorder[0] floatValue] green:[rgbBorder[1] floatValue] blue:[rgbBorder[2] floatValue] alpha:1];
+    }
+    lbl.lineWidth = 2;*/
 
 }
 
@@ -670,7 +713,7 @@ NSString *abc;
         }
     }
     
-    [self editLayer:recognizer];
+    //[self editLayer:recognizer];
 }
 
 #pragma mark - Private Methods
@@ -697,6 +740,7 @@ NSString *abc;
 - (void)layerResized:(UIGestureRecognizer *)recognizer {
     
     static CGAffineTransform currentTransform;
+    static CGFloat fontScale = 0.0;
     
     if (recognizer.state == UIGestureRecognizerStateBegan) {
         
@@ -706,7 +750,7 @@ NSString *abc;
     } else if (recognizer.state == UIGestureRecognizerStateChanged) {
         
         CGFloat scale = [(UIPinchGestureRecognizer*)recognizer scale];
-    
+        fontScale += scale;
        
         // Scale
         CGAffineTransform tr;
@@ -743,13 +787,16 @@ NSString *abc;
             
             // Save rotation angle for layer
             [self.delegate layerTransformedforKey:key :&newTransForm];
-        
-        }
 
+            // Inform the delegate/controller that a layer has been resized,
+            // and it might want to do something with the contents.
+            [self.delegate layerResizedForKey:key :fontScale];
+                
+                fontScale = 0.0;
+            }
+        }
     }
-    
-    [self editLayer:recognizer];
-}
+
 
 #pragma mark - Tap to edit functionality
 
@@ -814,7 +861,7 @@ NSString *abc;
         }
     }
     
-    [self editLayer:recognizer];
+    //[self editLayer:recognizer];
 }
 
 @end
