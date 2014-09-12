@@ -201,7 +201,6 @@
 @property (nonatomic,strong)IBOutlet UILabel *durationChange;
 
 //Outlets form zoom
-@property (strong, nonatomic) IBOutlet UIView *zoomLayoutOnFlyr;
 @property (strong, nonatomic) IBOutlet UIScrollView *zoomScrollView;
 @property (strong, nonatomic) IBOutlet UIImageView *zoomScreenShot;
 @property (strong, nonatomic) IBOutlet UIImageView *zoomMagnifyingGlass;

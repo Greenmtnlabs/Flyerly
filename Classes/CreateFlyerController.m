@@ -43,7 +43,7 @@
 
 
 //Outlets form zoom
-@synthesize zoomLayoutOnFlyr,zoomScrollView,zoomScreenShot,zoomMagnifyingGlass;
+@synthesize zoomScrollView,zoomScreenShot,zoomMagnifyingGlass;
 
 //Drawing required files
 @synthesize mainImage;
@@ -253,23 +253,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     [_takeOrAddPhotoLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:18]];
     [_videoLabel setFont:[UIFont fontWithName:@"Signika-Semibold" size:16]];
     
-    //Right ShareButton
-    shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    shareButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
-	[shareButton addTarget:self action:@selector(share) forControlEvents:UIControlEventTouchUpInside];
-    [shareButton setBackgroundImage:[UIImage imageNamed:@"share_button"] forState:UIControlStateNormal];
-    shareButton.showsTouchWhenHighlighted = YES;
-    
-    // Right UndoButton
-    UIButton *undoButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    undoButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
-	[undoButton addTarget:self action:@selector(undoFlyer) forControlEvents:UIControlEventTouchUpInside];
-    [undoButton setBackgroundImage:[UIImage imageNamed:@"undo"] forState:UIControlStateNormal];
-    undoButton.showsTouchWhenHighlighted = YES;
-    
-    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
-    rightUndoBarButton = [[UIBarButtonItem alloc] initWithCustomView:undoButton];
-    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,rightUndoBarButton,nil]];
+    [self addButtonsInRightNavigation:@"viewDidLoad"];
     
     // Left BackButton
     backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
@@ -1283,13 +1267,13 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         [layerScrollView setScrollEnabled:NO];
         
         
-        zoomScreenShot.frame = CGRectMake(80, 10, 100, 100);
+        zoomScreenShot.frame = CGRectMake(80, 10, zoomScreenShot.size.width, zoomScreenShot.size.height);
         [layerScrollView addSubview:zoomScreenShot];
         
-        zoomMagnifyingGlass.frame = CGRectMake(50, 50, 32, 32);
+        zoomMagnifyingGlass.frame = CGRectMake(50, 50, zoomMagnifyingGlass.size.width, zoomMagnifyingGlass.size.height);
         [layerScrollView addSubview:zoomMagnifyingGlass];
         
-        [self zoomMoveToPoint:CGPointMake(50.0,50.0)];
+        [self zoomMoveToPoint:CGPointMake(34.0, 45.0)];
         
 
     }
@@ -2509,13 +2493,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     label.text = @"TEXT";
     self.navigationItem.titleView = label;
     
-    
-    UIButton *nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-	[nextButton addTarget:self action:@selector(callStyle) forControlEvents:UIControlEventTouchUpInside];
-    [nextButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
-    nextButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
-    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
+    [self addButtonsInRightNavigation:@"callWrite"];
     
     UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
 	[backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
@@ -2576,24 +2554,122 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
  * Here we add or Replace Two Button on Top Bar
  */
 -(void)addDonetoRightBarBotton{
+    [self addButtonsInRightNavigation:@"addDonetoRightBarBotton"];
     
-    //Delete Bar Button
-    UIButton *delButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    [delButton addTarget:self action:@selector(callDeleteLayer) forControlEvents:UIControlEventTouchUpInside];
-    [delButton setBackgroundImage:[UIImage imageNamed:@"delete_button"] forState:UIControlStateNormal];
-    delButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *delBarButton = [[UIBarButtonItem alloc] initWithCustomView:delButton];
+}
+
+-(void)addButtonsInRightNavigation:(NSString *)callFrom {
     
+    NSMutableArray  *barItems   =   [NSMutableArray arrayWithObjects:nil];
+    if( [callFrom isEqualToString:@"callWrite"] ){
+        UIButton *nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+        [nextButton addTarget:self action:@selector(callStyle) forControlEvents:UIControlEventTouchUpInside];
+        [nextButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
+        nextButton.showsTouchWhenHighlighted = YES;
+        UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
+        barItems  = [NSMutableArray arrayWithObjects:rightBarButton,nil];
+    }
+    if( [callFrom isEqualToString:@"viewDidLoad"] ){
+        //Right ShareButton
+        shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+        shareButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
+        [shareButton addTarget:self action:@selector(share) forControlEvents:UIControlEventTouchUpInside];
+        [shareButton setBackgroundImage:[UIImage imageNamed:@"share_button"] forState:UIControlStateNormal];
+        shareButton.showsTouchWhenHighlighted = YES;
+        
+        // Right UndoButton
+        UIButton *undoButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+        undoButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
+        [undoButton addTarget:self action:@selector(undoFlyer) forControlEvents:UIControlEventTouchUpInside];
+        [undoButton setBackgroundImage:[UIImage imageNamed:@"undo"] forState:UIControlStateNormal];
+        undoButton.showsTouchWhenHighlighted = YES;
+
+        
+        UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
+        rightUndoBarButton = [[UIBarButtonItem alloc] initWithCustomView:undoButton];
+        barItems  = [NSMutableArray arrayWithObjects:rightBarButton,rightUndoBarButton,nil];
+    }
+    else if( [callFrom isEqualToString:@"choosePhoto"] ){
+        //Delete Bar Button
+        UIButton *delButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+        [delButton addTarget:self action:@selector(callDeleteLayer) forControlEvents:UIControlEventTouchUpInside];
+        [delButton setBackgroundImage:[UIImage imageNamed:@"delete_button"] forState:UIControlStateNormal];
+        delButton.showsTouchWhenHighlighted = YES;
+        UIBarButtonItem *delBarButton = [[UIBarButtonItem alloc] initWithCustomView:delButton];
+        
+        UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+        [doneButton addTarget:self action:@selector(donePhoto) forControlEvents:UIControlEventTouchUpInside];
+        [doneButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
+        doneButton.showsTouchWhenHighlighted = YES;
+        UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
+        barItems  = [NSMutableArray arrayWithObjects:doneBarButton,delBarButton,nil];
+    }
+    else if( [callFrom isEqualToString:@"callStyle"] ){
+        // Done Bar Button
+        UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+        [doneButton addTarget:self action:@selector(callAddMoreLayers) forControlEvents:UIControlEventTouchUpInside];
+        [doneButton addTarget:self action:@selector(logTextAddedEvent) forControlEvents:UIControlEventTouchUpInside];
+        
+        [doneButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
+        doneButton.showsTouchWhenHighlighted = YES;
+        UIBarButtonItem *DoneBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
+        
+        //Delete Button
+        UIButton *delButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+        [delButton addTarget:self action:@selector(callDeleteLayer) forControlEvents:UIControlEventTouchUpInside];
+        [delButton setBackgroundImage:[UIImage imageNamed:@"delete_button"] forState:UIControlStateNormal];
+        delButton.showsTouchWhenHighlighted = YES;
+        UIBarButtonItem *delBarButton = [[UIBarButtonItem alloc] initWithCustomView:delButton];
+        barItems  = [NSMutableArray arrayWithObjects:DoneBarButton,delBarButton,nil];
+    }
+    else if( [callFrom isEqualToString:@"addDonetoRightBarBotton"] ) {
+        //Delete Bar Button
+        UIButton *delButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+        [delButton addTarget:self action:@selector(callDeleteLayer) forControlEvents:UIControlEventTouchUpInside];
+        [delButton setBackgroundImage:[UIImage imageNamed:@"delete_button"] forState:UIControlStateNormal];
+        delButton.showsTouchWhenHighlighted = YES;
+        UIBarButtonItem *delBarButton = [[UIBarButtonItem alloc] initWithCustomView:delButton];
+        
+        
+        UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+        [doneButton addTarget:self action:@selector(callAddMoreLayers) forControlEvents:UIControlEventTouchUpInside];
+        [doneButton addTarget:self action:@selector(logPhotoAddedEvent) forControlEvents:UIControlEventTouchUpInside];
+        
+        [doneButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
+        doneButton.showsTouchWhenHighlighted = YES;
+        UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
+        barItems  = [NSMutableArray arrayWithObjects:doneBarButton,delBarButton,nil];
+    }
+    else if( [callFrom isEqualToString:@"zoomStart"] ){
+        // Done Bar Button
+        UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+        [doneButton addTarget:self action:@selector(zoomEnd) forControlEvents:UIControlEventTouchUpInside];
+        
+        [doneButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
+        doneButton.showsTouchWhenHighlighted = YES;
+        UIBarButtonItem *DoneBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
+        
+        barItems  = [NSMutableArray arrayWithObjects:DoneBarButton,nil];
+    }
+    else if( [callFrom isEqualToString:@"callAddMoreLayers"] || [callFrom isEqualToString:@"zoomEnd"]){
+        //ShareButton
+        [shareButton setBackgroundImage:[UIImage imageNamed:@"share_button"] forState:UIControlStateNormal];
+        
+        //UndoButton
+        UIButton *undoButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+        undoButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
+        [undoButton addTarget:self action:@selector(undoFlyer) forControlEvents:UIControlEventTouchUpInside];
+        [undoButton setBackgroundImage:[UIImage imageNamed:@"undo"] forState:UIControlStateNormal];
+        undoButton.showsTouchWhenHighlighted = YES;
+        
+        UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
+        rightUndoBarButton = [[UIBarButtonItem alloc] initWithCustomView:undoButton];
+        
+        
+        barItems  = [NSMutableArray arrayWithObjects:rightBarButton,rightUndoBarButton,nil];
+    }
     
-    UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    [doneButton addTarget:self action:@selector(callAddMoreLayers) forControlEvents:UIControlEventTouchUpInside];
-    [doneButton addTarget:self action:@selector(logPhotoAddedEvent) forControlEvents:UIControlEventTouchUpInside];
-    
-    [doneButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
-    doneButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
-    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:doneBarButton,delBarButton,nil]];
-    
+    [self.navigationItem setRightBarButtonItems:barItems];
 }
 
 /*
@@ -2602,23 +2678,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
  */
 -(void)callStyle
 {
-    // Done Bar Button
-    UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    [doneButton addTarget:self action:@selector(callAddMoreLayers) forControlEvents:UIControlEventTouchUpInside];
-    [doneButton addTarget:self action:@selector(logTextAddedEvent) forControlEvents:UIControlEventTouchUpInside];
-    
-    [doneButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
-    doneButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *DoneBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
-    
-    //Delete Button
-    UIButton *delButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    [delButton addTarget:self action:@selector(callDeleteLayer) forControlEvents:UIControlEventTouchUpInside];
-    [delButton setBackgroundImage:[UIImage imageNamed:@"delete_button"] forState:UIControlStateNormal];
-    delButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *delBarButton = [[UIBarButtonItem alloc] initWithCustomView:delButton];
-    
-    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:DoneBarButton,delBarButton,nil]];
+    [self addButtonsInRightNavigation:@"callStyle"];
     
     //Checking Empty String
     if ([lastTextView.text isEqualToString:@""] ) {
@@ -2717,20 +2777,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     label.textColor = [UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0];;
     label.text = @"PHOTO";
     self.navigationItem.titleView = label;
-    
-    //Delete Bar Button
-    UIButton *delButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    [delButton addTarget:self action:@selector(callDeleteLayer) forControlEvents:UIControlEventTouchUpInside];
-    [delButton setBackgroundImage:[UIImage imageNamed:@"delete_button"] forState:UIControlStateNormal];
-    delButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *delBarButton = [[UIBarButtonItem alloc] initWithCustomView:delButton];
-    
-    UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    [doneButton addTarget:self action:@selector(donePhoto) forControlEvents:UIControlEventTouchUpInside];
-    [doneButton setBackgroundImage:[UIImage imageNamed:@"tick"] forState:UIControlStateNormal];
-    doneButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
-    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:doneBarButton,delBarButton,nil]];
+
+    [self addButtonsInRightNavigation:@"choosePhoto"];
     
     //Add Context Library
     [self addBottomTabs:libPhoto];
@@ -3511,21 +3559,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     self.navigationItem.titleView = label;
     
     
-    //ShareButton
-    [shareButton setBackgroundImage:[UIImage imageNamed:@"share_button"] forState:UIControlStateNormal];
+    [self addButtonsInRightNavigation:@"callAddMoreLayers"];
     
-    //UndoButton
-    UIButton *undoButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    undoButton.titleLabel.font = [UIFont fontWithName:@"Signika-Semibold" size:13];
-	[undoButton addTarget:self action:@selector(undoFlyer) forControlEvents:UIControlEventTouchUpInside];
-    [undoButton setBackgroundImage:[UIImage imageNamed:@"undo"] forState:UIControlStateNormal];
-    undoButton.showsTouchWhenHighlighted = YES;
-    
-    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
-    rightUndoBarButton = [[UIBarButtonItem alloc] initWithCustomView:undoButton];
-    
-    
-    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,rightUndoBarButton,nil]];
     
     [self addBottomTabs:libFlyer];
     
@@ -5591,24 +5626,39 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 }
 
 -(void)zoomStart {
+    [self addButtonsInRightNavigation:@"zoomStart"];
     flyimgView.zoomedIn = YES;
     [self zoomElementsSetAlpha:1.0];
     
-    zoomScreenShot.image = [self getFlyerSnapShot];
-    zoomScreenShot.userInteractionEnabled = YES;
-    
-    zoomScrollView.delegate = self;
-    [zoomScrollView addSubview:flyimgView];
-    zoomScrollView.backgroundColor = [UIColor clearColor];
-	[zoomScrollView setZoomScale:FLYER_ZOOM_SET_SCALE];
+    if ( [flyer isVideoFlyer] && [self.flyer isVideoMergeProcessRequired] ) {
+            [self videoMergeProcess];
+        dispatch_async( dispatch_get_main_queue(), ^{
+            [self zoomStart];
+        });
+    } else{
+       
+        if ( [flyer isVideoFlyer] ){
+            zoomScreenShot.image = [flyer  getSharingVideoCover];
+        }
+        else{
+            zoomScreenShot.image = [self getFlyerSnapShot];
+        }
+        
+        zoomScreenShot.userInteractionEnabled = YES;
+        
+        zoomScrollView.delegate = self;
+        [zoomScrollView addSubview:flyimgView];
+        zoomScrollView.backgroundColor = [UIColor clearColor];
+        [zoomScrollView setZoomScale:FLYER_ZOOM_SET_SCALE];
 
-    //FOR TESTING SHOW RED RECT AROUND CURSOR
-    //[zoomMagnifyingGlass.layer setBorderColor: [[UIColor redColor] CGColor]];
-    //[zoomMagnifyingGlass.layer setBorderWidth: 2.0];
-    
-    [self zoomAddLayerButtonsIntoScrollView:@"zoomStart"];
-    
-    [zoomScrollView setContentSize:CGSizeMake(flyimgView.frame.size.width, flyimgView.frame.size.height)];
+        //FOR TESTING SHOW RED RECT AROUND CURSOR
+        //[zoomMagnifyingGlass.layer setBorderColor: [[UIColor redColor] CGColor]];
+        //[zoomMagnifyingGlass.layer setBorderWidth: 2.0];
+        
+        [self zoomAddLayerButtonsIntoScrollView:@"zoomStart"];
+        
+        [zoomScrollView setContentSize:CGSizeMake(flyimgView.frame.size.width, flyimgView.frame.size.height)];
+    }
 }
 
 // Enable zooming, (for testing , when you tap on PHOTO TAB it will start, after start when you again tap on PHOT TAB, zooming will end )
@@ -5621,11 +5671,11 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     [self.view addSubview:flyimgView];
     [zoomScrollView setZoomScale:zoomScrollView.minimumZoomScale];
     [self zoomAddLayerButtonsIntoScrollView:@"zoomEnd"];
+    [self addButtonsInRightNavigation:@"zoomEnd"];
 }
 
 -(void)zoomElementsSetAlpha:(CGFloat)zoomAlpha{
     
-    [zoomLayoutOnFlyr setAlpha:zoomAlpha];
     [zoomScrollView setAlpha:zoomAlpha];
     [zoomScreenShot setAlpha:zoomAlpha];
     [zoomMagnifyingGlass setAlpha:zoomAlpha];
@@ -5633,71 +5683,63 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 
 //WHEN USER MOVING MAGNIFYING GLASS
 - (void)zoomMagnifyerMove:(UIPanGestureRecognizer *)recognizer {
-
-    //MOVE
-    if (recognizer.state == UIGestureRecognizerStateChanged) {
-        //dispatch_async( dispatch_get_main_queue(), ^{
-            CGPoint magnifierCurLoc = [recognizer locationInView:self.zoomScreenShot];
-            [self zoomMoveToPoint:magnifierCurLoc];
-        //});
-    }
-    //MOVE END
-    else if (recognizer.state == UIGestureRecognizerStateEnded) {
-        //dispatch_async( dispatch_get_main_queue(), ^{
-            CGPoint magnifierCurLoc = [recognizer locationInView:self.zoomScreenShot];
-            [self zoomMoveToPoint:magnifierCurLoc];
-            //NSLog(@"zoomMagnifyerMove - END");
-        //});
-    }
+    CGPoint magnifierCurLoc = [recognizer locationInView:self.zoomScreenShot];
+    [self zoomMoveToPoint:magnifierCurLoc];
 }
 - (void)zoomMagnifyerMoveOnTap:(UITapGestureRecognizer *)recognizer {
-    //NSLog(@"zoomMagnifyerMoveOnTap");
     CGPoint magnifierCurLoc = [recognizer locationInView:self.zoomScreenShot];
+    magnifierCurLoc.x += -20;
+    magnifierCurLoc.y += -20;
     [self zoomMoveToPoint:magnifierCurLoc];
 }
 
 - (void)zoomMoveToPoint:(CGPoint) magnifierCurLoc{
     int x = magnifierCurLoc.x;
     int y = magnifierCurLoc.y;
-
-    //MOVE MAGNIFIER WHEN USER MOVE IT IN THE BOUNDRY OF SCREEN SHORT
-    if( (x > 0 &&  x < zoomScreenShot.size.width ) && (y > 0 && y < zoomScreenShot.size.height ) ) {
-
-        //CHANGE ZOOM SCOLLVIEW
-        CGFloat xSv = x, ySv = y;
-        if( ySv < 11)
-        ySv = 11; //dont show gray background in top
-        else if( ySv > 60)
-        ySv = 60; //dont show gray background in bottom
-        
-        if( xSv > 50)
-        xSv = 50; //dont show gray background in right
-        
-        //Logic of scrolling the zoom view a/c to magnifier postion on screenshot( % logic )
-        xSv = ( flyimgView.size.width * xSv ) / 100;
-        ySv = ( flyimgView.size.width * ySv ) / 100;
-       
-        CGRect recSv = CGRectMake(xSv, ySv, 10,10);
-        [zoomScrollView scrollRectToVisible:recSv animated:NO];
-        [zoomScrollView setContentOffset:CGPointMake(xSv, ySv) animated:NO];
-        
-        //CHANGE MAGNIFIER POSITION ON SCREEN SHORT
-        CGFloat xMg = x, yMg = y;
-        if( xMg < 12 )
-        xMg =  12;
-        else if( xMg > 93)
-        xMg =   93;
-        
-        if( yMg < 10)
-        yMg =   10;
-        
-        xMg  = xMg + zoomScreenShot.origin.x - 15;
-        yMg  = yMg + zoomScreenShot.origin.y - 15;
-        
-        zoomMagnifyingGlass.frame  =  CGRectMake(xMg,yMg, zoomMagnifyingGlass.size.width, zoomMagnifyingGlass.size.height);
-        
-        //NSLog(@"Cp(x,y)=(%i,%i), xSv,ySv=(%f,%f), mgX,yMg(%f,%f)",x,y, xSv,ySv, xMg,yMg);
+    
+    int x2 = floor( (x*100)/zoomScreenShot.size.width );
+    int y2 = floor( (y*100)/zoomScreenShot.size.height);
+    
+    //NSLog(@"x,y(%i,%i) x2,y2(%i,%i)",x,y, x2,y2);
+    
+    //CHANGE ZOOM SCOLLVIEW
+    CGFloat xSv = x2, ySv = y2;
+    if( ySv < 11)
+    ySv = 11; //dont show gray background in top
+    else if( ySv > 60)
+    ySv = 60; //dont show gray background in bottom
+    
+    if( xSv < 1)
+    xSv = 1;//dont show gray background in left
+    else if( xSv > 50)
+    xSv = 50; //dont show gray background in right
+    
+    //Logic of scrolling the zoom view a/c to magnifier postion on screenshot( % logic )
+    xSv = ( flyimgView.size.width * xSv ) / 100;
+    ySv = ( flyimgView.size.width * ySv ) / 100;
+   
+    CGRect recSv = CGRectMake(xSv, ySv, 10,10);
+    [zoomScrollView scrollRectToVisible:recSv animated:YES];
+    [zoomScrollView setContentOffset:CGPointMake(xSv, ySv) animated:YES];
+    
+    //CHANGE MAGNIFIER POSITION ON SCREEN SHORT
+    CGFloat xMg = x, yMg = y, xMgE = 9, yMgE = -5;
+    if( xMg < -9 ){
+        xMg =  0;
+        xMgE = 0;
     }
+    else if( xMg > 82)
+    xMg =  82;
+    
+    if( yMg < 0)
+    yMg =   0;
+    if( yMg > 95)
+    yMg =  95;
+    
+    xMg  = xMg + zoomScreenShot.origin.x + xMgE;
+    yMg  = yMg + zoomScreenShot.origin.y + yMgE;
+    
+    zoomMagnifyingGlass.frame  =  CGRectMake(xMg,yMg, zoomMagnifyingGlass.size.width, zoomMagnifyingGlass.size.height);
 }
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {

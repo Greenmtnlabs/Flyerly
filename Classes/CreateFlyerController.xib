@@ -55,7 +55,6 @@
                 <outlet property="videoLabel" destination="ZrQ-EX-OBl" id="aAe-h5-6DW"/>
                 <outlet property="view" destination="1" id="3"/>
                 <outlet property="widthTabButton" destination="IOq-dI-vvl" id="TYH-DW-B0O"/>
-                <outlet property="zoomLayoutOnFlyr" destination="zHG-bn-jdO" id="fOr-ua-Qee"/>
                 <outlet property="zoomMagnifyingGlass" destination="e7R-ga-ZuC" id="dwE-yx-fXk"/>
                 <outlet property="zoomScreenShot" destination="koI-LW-qvU" id="AQk-OJ-tF0"/>
                 <outlet property="zoomScrollView" destination="OgZ-hl-Uai" id="zcn-HA-dsx"/>
@@ -107,11 +106,11 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="magnifyingGlass.png" id="e7R-ga-ZuC" userLabel="Image View - MagnifyingGlassImg">
-                            <rect key="frame" x="110" y="41" width="32" height="32"/>
+                            <rect key="frame" x="110" y="41" width="64" height="64"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         </imageView>
                         <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="koI-LW-qvU" userLabel="UiimageView - ScreenShotForZoom">
-                            <rect key="frame" x="80" y="10" width="100" height="100"/>
+                            <rect key="frame" x="80" y="7" width="130" height="130"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </imageView>
                     </subviews>
@@ -139,11 +138,6 @@
                     <rect key="frame" x="0.0" y="523" width="320" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                     <color key="backgroundColor" red="0.3575665864" green="0.76047690010000002" blue="0.97315449620000005" alpha="1" colorSpace="calibratedRGB"/>
-                </view>
-                <view alpha="0.0" contentMode="scaleToFill" id="zHG-bn-jdO" userLabel="View - GrayLaoutOnFlyrWhenZoomEnable">
-                    <rect key="frame" x="5" y="65" width="310" height="310"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <color key="backgroundColor" red="0.75510204079999999" green="0.75510204079999999" blue="0.75510204079999999" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="scaleToFill" id="OgZ-hl-Uai" userLabel="Scroll View - ZOOM">
                     <rect key="frame" x="5" y="65" width="310" height="310"/>
@@ -636,7 +630,7 @@
         <image name="font_button_selected.png" width="64" height="45"/>
         <image name="image_icon.png" width="64" height="45"/>
         <image name="image_icon_selected" width="612" height="612"/>
-        <image name="magnifyingGlass.png" width="32" height="32"/>
+        <image name="magnifyingGlass.png" width="64" height="64"/>
         <image name="outline_button.png" width="64" height="45"/>
         <image name="outline_button_selected.png" width="64" height="45"/>
         <image name="pause_icon.png" width="40" height="40"/>
