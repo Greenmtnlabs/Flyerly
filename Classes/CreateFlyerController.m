@@ -3113,14 +3113,18 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         callback( exportSession.status, exportSession.error );
     }];
 }
+-(void)hidePlayerControlls:(BOOL)showHide {
+    // Make sure we hide the play bar.
+    [playerToolBar setHidden:showHide];
+
+}
 
 /*
  * Here we Merge Video
  */
 -(void)videoMergeProcess {
     
-    // Make sure we hide the play bar.
-    [playerToolBar setHidden:YES];
+    [self hidePlayerControlls:YES];
     
     // CREATING PATH FOR FLYER OVERLAY VIDEO
     NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
@@ -5624,6 +5628,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 #pragma mark - ZOOM FUNCTIONS
 //set values at viewWillAppear
 -(void)zoomInit{
+    [zoomScreenShotForVideo setFrame:flyimgView.frame];
+    [flyimgView addSubview:zoomScreenShotForVideo];
     
     //disable scrolling in scrollView
     [zoomScrollView setScrollEnabled:NO];
@@ -5653,6 +5659,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 }
 
 -(void)zoomStart {
+    [self hidePlayerControlls:YES];
+    
     [self addButtonsInRightNavigation:@"zoomStart"];
     flyimgView.zoomedIn = YES;
     [self.playerView setAlpha:0];
@@ -5673,6 +5681,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             zoomScreenShot.image = [flyer mergeImages:videoImg withImage:flyerSnapshot
                                                 width:flyerSnapshot.size.width height:flyerSnapshot.size.height];
             zoomScreenShotForVideo.image = videoImg;
+            zoomScreenShotForVideo.frame    = CGRectMake(0, 0, flyimgView.size.width*2, flyimgView.size.height*2);
         }
         else{
             zoomScreenShot.image = flyerSnapshot;//[self getFlyerSnapShot];
@@ -5682,7 +5691,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         
         zoomScrollView.delegate = self;
         
-        [flyimgView addSubview:zoomScreenShotForVideo];
+
         [zoomScrollView addSubview:flyimgView];
 
         
@@ -5709,7 +5718,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     zoomScreenShot.image   = nil;
     zoomScreenShotForVideo.image = nil;
     
-    [self.view addSubview:zoomScreenShotForVideo];
+    //[self.view addSubview:zoomScreenShotForVideo];
     [self.view addSubview:flyimgView];
     
     [zoomScrollView setZoomScale:zoomScrollView.minimumZoomScale];
