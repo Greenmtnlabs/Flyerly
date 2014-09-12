@@ -3596,7 +3596,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             //Background Thread
             dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
                 
-                panelWillOpen = YES;
+                //panelWillOpen = YES;
                 
                 //Here we Merge All Layers in Video File
                 [self videoMergeProcess];
@@ -3622,7 +3622,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                             [self.interstitialAdd presentFromRootViewController:self];
                         });
                     }
-                    //return;
+                    return;
                 }
             }
             
