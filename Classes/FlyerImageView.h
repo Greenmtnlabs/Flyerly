@@ -15,6 +15,7 @@
 @protocol FlyerImageViewDelegate <NSObject>
 
 - (void)layerTransformedforKey:(NSString *)uid :(CGAffineTransform *) transform;
+- (void)layerResizedForKey:(NSString *)uid : (CGFloat) scale;
 - (void)frameChangedForLayer:(NSString *)uid frame:(CGRect)frame;
 - (void)rotationAngleChangedForLayer:(NSString *)uid rotationAngle:(CGFloat)rotationAngle;
 - (void)previuosrotationAngle:(NSString *)uid;
