@@ -1560,7 +1560,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     NSString *sizeStr = SIZE_ARRAY[i-1];
                     selectedSize = [sizeStr intValue];
                     
-                    
                     //Checking if layer in clip art,we do not open text editing mood
                     if( [type isEqualToString:FLYER_LAYER_CLIP_ART] ){
                         selectedSize = selectedSize * 3.0;
@@ -1572,8 +1571,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     
                     //Here we call Render Layer on View
                     [flyimgView configureLabelSize:currentLayer labelDictionary:[flyer getLayerFromMaster:currentLayer]];
-                    
-                    //[flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
                     
                     if( [type isEqualToString:FLYER_LAYER_CLIP_ART] ){
                         
@@ -1597,12 +1594,12 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     [self setSelectedItem:FLYER_LAYER_DRAWING inView:sizesView ofLayerAttribute:LAYER_ATTRIBUTE_SIZE];
                 }
                 else {
-                //<##>
+    
                     NSString *sizeStr = SIZE_ARRAY[i-1];
                     
                     ImageLayer *img = [flyimgView.layers objectForKey:currentLayer];
                     
-                    // Because emoticons are always sized squrely, we are just considering width here, assuming height is the same
+                    // Because emoticons are always sized squarely, we are just considering width here, assuming height is the same
                     CGFloat currentSize = [img newSize].width;
                     
                     CGFloat newSize = [sizeStr floatValue]*1.5;
@@ -1620,9 +1617,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     
                     img.transform = tr;
                     
-                    // Save the new transform
-                    NSMutableDictionary *dic = [flyer getLayerFromMaster:currentLayer];
-                    
                     NSArray *keys = [flyimgView.layers allKeysForObject:img];
                     // Find key for rotated layer
                     for ( int i = 0; i < keys.count; i++ ) {
@@ -1635,27 +1629,10 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                         [self layerTransformedforKey:key :&newTransForm];
                         
                     }
-                    //[self.flyimgView renderLayer:currentLayer layerDictionary:dic];
-                    
                     
                     // Show selected size
                     [self setSelectedItem:FLYER_LAYER_EMOTICON inView:sizesView ofLayerAttribute:LAYER_ATTRIBUTE_SIZE];
                     
-                    /*
-                    CGRect imageFrame  = CGRectMake(lastFrame.origin.x,lastFrame.origin.y,([sizeStr floatValue]*1.5),([sizeStr floatValue]*1.5));
-                    [flyer setImageFrame:currentLayer :imageFrame];
-                    NSMutableDictionary *dic = [flyer getLayerFromMaster:currentLayer];
-                    [self.flyimgView renderLayer:currentLayer layerDictionary:dic];
-                    
-                    //Here we call Render Layer on View
-                    //[flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
-                    
-                    [self.flyimgView configureImageViewSize :currentLayer];
-                    
-                    //Handling Select Unselect
-                    [self setSelectedItem:FLYER_LAYER_EMOTICON inView:sizesView ofLayerAttribute:LAYER_ATTRIBUTE_SIZE];
-                    //<##>
-                     */
                 }
             }
             i++;
@@ -1665,6 +1642,21 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 	}//LOOP
 }
 
+/*
+ * Used to resize a font after a label has been resized via a transform
+ */
+- (void)layerResizedForKey:(NSString *)uid : (CGFloat) scale {
+    
+    if ( [[[flyer getLayerFromMaster:uid] objectForKey:@"type"] isEqualToString:FLYER_LAYER_CLIP_ART] ||
+        [[[flyer getLayerFromMaster:uid] objectForKey:@"type"] isEqualToString:FLYER_LAYER_TEXT ]) {
+    
+        UIFont* currentFont = [self.flyer getTextFont:uid];
+        
+        UIFont* newFont = [currentFont fontWithSize:(currentFont.pointSize * scale)];
+        
+        [self.flyer setFlyerTextSize:uid Size:newFont];
+    }
+}
 
 /*
  * When any template is selected
@@ -1929,7 +1921,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             
             //Here we call Render Layer on View
             //[flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
-            
+            [flyimgView configureLabelColor :currentLayer labelDictionary:[flyer getLayerFromMaster:currentLayer]];
             [self.flyimgView configureLabelBorder:currentLayer labelDictionary:[flyer getLayerFromMaster:currentLayer]];
             
             
@@ -5073,7 +5065,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     if(IS_IPHONE_5){
         printViewController = [[PrintViewController alloc] initWithNibName:@"PrintViewController" bundle:nil];
     }else {
-        printViewController = [[PrintViewController alloc] initWithNibName:@"InAppViewController-iPhone4" bundle:nil];
+        printViewController = [[PrintViewController alloc] initWithNibName:@"PrintViewController-iPhone4" bundle:nil];
     }
     
     printViewController.flyer = self.flyer;

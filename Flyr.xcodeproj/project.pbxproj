@@ -519,6 +519,7 @@
 		24218512194B4AEC00FDDA97 /* wrestling-freestyle-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 24218453194B4AEC00FDDA97 /* wrestling-freestyle-icon.png */; };
 		24218513194B4AEC00FDDA97 /* wrestling-greco-roman-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 24218454194B4AEC00FDDA97 /* wrestling-greco-roman-icon.png */; };
 		24218514194B4AEC00FDDA97 /* Wrestling-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 24218455194B4AEC00FDDA97 /* Wrestling-icon.png */; };
+		2431D46319C2ED750008A301 /* PrintViewController-iPhone4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2431D46219C2ED750008A301 /* PrintViewController-iPhone4.xib */; };
 		243D8E4419347BAE00D5312D /* InAppViewController-iPhone4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 243D8E4319347BAE00D5312D /* InAppViewController-iPhone4.xib */; };
 		243DD521192B24B500391786 /* FlyerIcons.xib in Resources */ = {isa = PBXBuildFile; fileRef = 243DD520192B24B500391786 /* FlyerIcons.xib */; };
 		243DD523192B24CB00391786 /* FlyerIcons-iPhone4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 243DD522192B24CB00391786 /* FlyerIcons-iPhone4.xib */; };
@@ -1785,6 +1786,7 @@
 		24218453194B4AEC00FDDA97 /* wrestling-freestyle-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wrestling-freestyle-icon.png"; sourceTree = "<group>"; };
 		24218454194B4AEC00FDDA97 /* wrestling-greco-roman-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wrestling-greco-roman-icon.png"; sourceTree = "<group>"; };
 		24218455194B4AEC00FDDA97 /* Wrestling-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Wrestling-icon.png"; sourceTree = "<group>"; };
+		2431D46219C2ED750008A301 /* PrintViewController-iPhone4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "PrintViewController-iPhone4.xib"; sourceTree = "<group>"; };
 		243D8E4319347BAE00D5312D /* InAppViewController-iPhone4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "InAppViewController-iPhone4.xib"; sourceTree = "<group>"; };
 		243DD520192B24B500391786 /* FlyerIcons.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FlyerIcons.xib; sourceTree = "<group>"; };
 		243DD522192B24CB00391786 /* FlyerIcons-iPhone4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "FlyerIcons-iPhone4.xib"; sourceTree = "<group>"; };
@@ -3408,6 +3410,7 @@
 				209BCFA51975433D006EC811 /* PrintViewController.h */,
 				209BCFA61975433D006EC811 /* PrintViewController.m */,
 				209BCFA71975433D006EC811 /* PrintViewController.xib */,
+				2431D46219C2ED750008A301 /* PrintViewController-iPhone4.xib */,
 			);
 			name = "Print Screen";
 			sourceTree = "<group>";
@@ -4941,6 +4944,7 @@
 				2060689B1924CC6100AB5230 /* Backgrounds.xib in Resources */,
 				243D8E4419347BAE00D5312D /* InAppViewController-iPhone4.xib in Resources */,
 				30D58D2810FB1BF800E0C7E8 /* icon46.jpg in Resources */,
+				2431D46319C2ED750008A301 /* PrintViewController-iPhone4.xib in Resources */,
 				30D58D2910FB1BF800E0C7E8 /* icon47.jpg in Resources */,
 				30D58D2A10FB1BF800E0C7E8 /* icon48.jpg in Resources */,
 				242184B1194B4AEC00FDDA97 /* emoticon163@2x.png in Resources */,
