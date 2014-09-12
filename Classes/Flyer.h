@@ -131,6 +131,11 @@
 -(NSString *)getSharingVideoPath;
 -(UIImage *)getSharingVideoCover;
 
+-(UIImage *)getVideoFlyerSnapShot;
+- (UIImage*)mergeImages:(UIImage*)firstImage withImage:(UIImage*)secondImage;
+
+
+
 -(NSString *)getShareType;
 -(NSString *)getFlyerUpdateDate;
 -(NSString *)getVideoAssetURL;

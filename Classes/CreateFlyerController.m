@@ -2892,6 +2892,24 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     return snapshotImage;
 }
+/*
+ * Here we Getting Snap Shot o f Flyer Image View Context
+ * Return
+ *  Image
+ */
+-(UIImage *)getVideoFlyerSnapShot {
+    
+    //Here we take Snap shot of Flyer
+    UIGraphicsBeginImageContextWithOptions( self.playerView.frame.size, NO, 0);
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    [self.playerView.layer renderInContext:context];
+    UIImage *snapshotImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    return snapshotImage;
+}
 
 
 
@@ -5639,15 +5657,16 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     flyimgView.zoomedIn = YES;
     [self zoomElementsSetAlpha:1.0];
     
-    if ( [flyer isVideoFlyer] && [self.flyer isVideoMergeProcessRequired] ) {
+    if ( NO && [flyer isVideoFlyer] && [flyer isVideoMergeProcessRequired] ) {
             [self videoMergeProcess];
         dispatch_async( dispatch_get_main_queue(), ^{
-            [self zoomStart];
+            //[self zoomStart];
         });
     } else{
        
         if ( [flyer isVideoFlyer] ){
-            zoomScreenShot.image = [flyer  getSharingVideoCover];
+            //zoomScreenShot.image = [flyer getVideoFlyerSnapShot]; //[flyer  getSharingVideoCover];
+            zoomScreenShot.image = [flyer mergeImages:[flyer getVideoFlyerSnapShot] withImage:[self getFlyerSnapShot]];
         }
         else{
             zoomScreenShot.image = [self getFlyerSnapShot];
@@ -5657,6 +5676,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         
         zoomScrollView.delegate = self;
         [zoomScrollView addSubview:flyimgView];
+
+        
         zoomScrollView.backgroundColor = [UIColor clearColor];
         [zoomScrollView setZoomScale:FLYER_ZOOM_SET_SCALE];
 
@@ -5678,6 +5699,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     zoomScreenShot.image   = nil;
     [self.view addSubview:flyimgView];
+    
     [zoomScrollView setZoomScale:zoomScrollView.minimumZoomScale];
     [self zoomAddLayerButtonsIntoScrollView:@"zoomEnd"];
     [self addButtonsInRightNavigation:@"zoomEnd"];

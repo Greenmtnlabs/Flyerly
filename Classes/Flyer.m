@@ -1456,7 +1456,19 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 -(UIImage *)getSharingVideoCover {
 
     NSString* filePath = [self getSharingVideoPath];
+   return [self getSnapShotOfVideoPath:filePath];
+}
+
+/*
+ * Here we Return Over generated Video Snap Shot For Main screen
+ */
+-(UIImage *)getVideoFlyerSnapShot {
     
+    NSString* filePath = [self getOriginalVideoURL];
+    return [self getSnapShotOfVideoPath:filePath];
+}
+
+-(UIImage *)getSnapShotOfVideoPath:(NSString *) filePath {
     UIImage *img;
     if ([[NSFileManager defaultManager] fileExistsAtPath:filePath isDirectory:NULL]) {
         
@@ -1474,16 +1486,32 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
         CGImageRef imgRef = [generator copyCGImageAtTime: thumbnailTime  actualTime:NULL error:&err];
         
         img = [[UIImage alloc] initWithCGImage:imgRef];
-
+        
         CGImageRelease(imgRef);
     } else {
         NSLog( @"Video cover not found" );
     }
-    
-    
     return img;
 }
 
+- (UIImage*)mergeImages:(UIImage*)firstImage withImage:(UIImage*)secondImage {
+        UIImage *image = nil;
+        
+        CGSize newImageSize = CGSizeMake(MAX(firstImage.size.width, secondImage.size.width), MAX(firstImage.size.height, secondImage.size.height));
+        if (UIGraphicsBeginImageContextWithOptions != NULL) {
+            UIGraphicsBeginImageContextWithOptions(newImageSize, NO, [[UIScreen mainScreen] scale]);
+        } else {
+            UIGraphicsBeginImageContext(newImageSize);
+        }
+        [firstImage drawAtPoint:CGPointMake(roundf((newImageSize.width-firstImage.size.width)/2),
+                                            roundf((newImageSize.height-firstImage.size.height)/2))];
+        [secondImage drawAtPoint:CGPointMake(roundf((newImageSize.width-secondImage.size.width)/2),
+                                             roundf((newImageSize.height-secondImage.size.height)/2))];
+        image = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        
+        return image;
+    }
     
 /*
  * HERE WE ADD VIDEO ICON WITH VIDEO IMAGE
