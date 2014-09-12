@@ -17,6 +17,7 @@
 @synthesize searchTextField;
 @synthesize flyerPaths;
 @synthesize flyer;
+@synthesize interstitial;
 
 #pragma mark  View Methods
 
@@ -192,6 +193,17 @@
         
     }];
 
+    [createFlyer setShouldShowAdd:^(NSString *flyPath) {
+        dispatch_async( dispatch_get_main_queue(), ^{
+            UserPurchases *userPurchases_ = [UserPurchases getInstance];
+            if ( ![userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]){
+                if ([weakSelf.interstitial isReady] && ![weakSelf.interstitial hasBeenUsed]){
+                    [weakSelf.interstitial presentFromRootViewController:weakSelf];
+                }
+            }
+        });
+    }];
+    
 	[self.navigationController pushViewController:createFlyer animated:YES];
     
 }
