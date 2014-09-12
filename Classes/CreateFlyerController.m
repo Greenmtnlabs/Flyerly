@@ -43,7 +43,7 @@
 
 
 //Outlets form zoom
-@synthesize zoomScrollView,zoomScreenShot,zoomMagnifyingGlass;
+@synthesize zoomScrollView,zoomScreenShot,zoomMagnifyingGlass,zoomScreenShotForVideo;
 
 //Drawing required files
 @synthesize mainImage;
@@ -5655,6 +5655,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 -(void)zoomStart {
     [self addButtonsInRightNavigation:@"zoomStart"];
     flyimgView.zoomedIn = YES;
+    [self.playerView setAlpha:0];
     [self zoomElementsSetAlpha:1.0];
     
     if ( NO && [flyer isVideoFlyer] && [flyer isVideoMergeProcessRequired] ) {
@@ -5663,18 +5664,25 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             //[self zoomStart];
         });
     } else{
-       
+        UIImage *flyerSnapshot  =   [self getFlyerSnapShot];
         if ( [flyer isVideoFlyer] ){
             //zoomScreenShot.image = [flyer getVideoFlyerSnapShot]; //[flyer  getSharingVideoCover];
-            zoomScreenShot.image = [flyer mergeImages:[flyer getVideoFlyerSnapShot] withImage:[self getFlyerSnapShot]];
+            //zoomScreenShot.image = [self getFlyerSnapShot];
+            
+            UIImage *videoImg    = [flyer getVideoFlyerSnapShot];
+            zoomScreenShot.image = [flyer mergeImages:videoImg withImage:flyerSnapshot
+                                                width:flyerSnapshot.size.width height:flyerSnapshot.size.height];
+            zoomScreenShotForVideo.image = videoImg;
         }
         else{
-            zoomScreenShot.image = [self getFlyerSnapShot];
+            zoomScreenShot.image = flyerSnapshot;//[self getFlyerSnapShot];
         }
         
         zoomScreenShot.userInteractionEnabled = YES;
         
         zoomScrollView.delegate = self;
+        
+        [flyimgView addSubview:zoomScreenShotForVideo];
         [zoomScrollView addSubview:flyimgView];
 
         
@@ -5695,9 +5703,13 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 -(void)zoomEnd {
     
     flyimgView.zoomedIn   =   NO;
+    [self.playerView setAlpha:1];
     [self zoomElementsSetAlpha:0.0];
     
     zoomScreenShot.image   = nil;
+    zoomScreenShotForVideo.image = nil;
+    
+    [self.view addSubview:zoomScreenShotForVideo];
     [self.view addSubview:flyimgView];
     
     [zoomScrollView setZoomScale:zoomScrollView.minimumZoomScale];
@@ -5706,7 +5718,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 }
 
 -(void)zoomElementsSetAlpha:(CGFloat)zoomAlpha{
-    
+    [zoomScreenShotForVideo setAlpha:zoomAlpha];
     [zoomScrollView setAlpha:zoomAlpha];
     [zoomScreenShot setAlpha:zoomAlpha];
     [zoomMagnifyingGlass setAlpha:zoomAlpha];
