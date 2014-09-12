@@ -5628,14 +5628,18 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 #pragma mark - ZOOM FUNCTIONS
 //set values at viewWillAppear
 -(void)zoomInit{
+    
+    zoomScrollView.backgroundColor = [UIColor clearColor];
+    
+    //on load time zooming is disabled
+    flyimgView.zoomedIn = NO;
+    
+    //inject zoomScreenShotForVideo as a first layer in flyer
     [zoomScreenShotForVideo setFrame:flyimgView.frame];
     [flyimgView addSubview:zoomScreenShotForVideo];
     
     //disable scrolling in scrollView
     [zoomScrollView setScrollEnabled:NO];
-
-    //on load time zooming is disabled
-    flyimgView.zoomedIn = NO;
     
     //hide zoom elements on init
     [self zoomElementsSetAlpha:0.0];
@@ -5659,53 +5663,43 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 }
 
 -(void)zoomStart {
-    [self hidePlayerControlls:YES];
-    
     [self addButtonsInRightNavigation:@"zoomStart"];
     flyimgView.zoomedIn = YES;
     [self.playerView setAlpha:0];
     [self zoomElementsSetAlpha:1.0];
     
-    if ( NO && [flyer isVideoFlyer] && [flyer isVideoMergeProcessRequired] ) {
-            [self videoMergeProcess];
-        dispatch_async( dispatch_get_main_queue(), ^{
-            //[self zoomStart];
-        });
-    } else{
-        UIImage *flyerSnapshot  =   [self getFlyerSnapShot];
-        if ( [flyer isVideoFlyer] ){
-            //zoomScreenShot.image = [flyer getVideoFlyerSnapShot]; //[flyer  getSharingVideoCover];
-            //zoomScreenShot.image = [self getFlyerSnapShot];
-            
-            UIImage *videoImg    = [flyer getVideoFlyerSnapShot];
-            zoomScreenShot.image = [flyer mergeImages:videoImg withImage:flyerSnapshot
-                                                width:flyerSnapshot.size.width height:flyerSnapshot.size.height];
-            zoomScreenShotForVideo.image = videoImg;
-            zoomScreenShotForVideo.frame    = CGRectMake(0, 0, flyimgView.size.width*2, flyimgView.size.height*2);
-        }
-        else{
-            zoomScreenShot.image = flyerSnapshot;//[self getFlyerSnapShot];
-        }
-        
-        zoomScreenShot.userInteractionEnabled = YES;
-        
-        zoomScrollView.delegate = self;
-        
 
-        [zoomScrollView addSubview:flyimgView];
-
+    UIImage *flyerSnapshot  =   [self getFlyerSnapShot];
+    
+    if ( [flyer isVideoFlyer] ){
+        //if video flyer then hide controlls
+        [self hidePlayerControlls:YES];
         
-        zoomScrollView.backgroundColor = [UIColor clearColor];
-        [zoomScrollView setZoomScale:FLYER_ZOOM_SET_SCALE];
-
-        //FOR TESTING SHOW RED RECT AROUND CURSOR
-        //[zoomMagnifyingGlass.layer setBorderColor: [[UIColor redColor] CGColor]];
-        //[zoomMagnifyingGlass.layer setBorderWidth: 2.0];
-        
-        [self zoomAddLayerButtonsIntoScrollView:@"zoomStart"];
-        
-        [zoomScrollView setContentSize:CGSizeMake(flyimgView.frame.size.width, flyimgView.frame.size.height)];
+        UIImage *videoImg    = [flyer getVideoFlyerSnapShot];
+        zoomScreenShot.image = [flyer mergeImages:videoImg withImage:flyerSnapshot
+                                            width:flyerSnapshot.size.width height:flyerSnapshot.size.height];
+        zoomScreenShotForVideo.image = videoImg;
+        zoomScreenShotForVideo.frame = CGRectMake(0, 0, flyimgView.size.width*2, flyimgView.size.height*2);
     }
+    else{
+        zoomScreenShot.image = flyerSnapshot;
+    }
+    
+    zoomScreenShot.userInteractionEnabled = YES;
+    
+    zoomScrollView.delegate = self;
+    [zoomScrollView addSubview:flyimgView];
+
+    [zoomScrollView setZoomScale:FLYER_ZOOM_SET_SCALE];
+
+    //FOR TESTING SHOW RED RECT AROUND CURSOR
+    //[zoomMagnifyingGlass.layer setBorderColor: [[UIColor redColor] CGColor]];
+    //[zoomMagnifyingGlass.layer setBorderWidth: 2.0];
+    
+    [zoomScrollView setContentSize:CGSizeMake(flyimgView.frame.size.width, flyimgView.frame.size.height)];
+
+    // set buttons in right nav
+    [self zoomAddLayerButtonsIntoScrollView:@"zoomStart"];
 }
 
 // Enable zooming, (for testing , when you tap on PHOTO TAB it will start, after start when you again tap on PHOT TAB, zooming will end )
@@ -5715,7 +5709,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     [self.playerView setAlpha:1];
     [self zoomElementsSetAlpha:0.0];
     
-    zoomScreenShot.image   = nil;
+    zoomScreenShot.image         = nil;
     zoomScreenShotForVideo.image = nil;
     
     //[self.view addSubview:zoomScreenShotForVideo];
