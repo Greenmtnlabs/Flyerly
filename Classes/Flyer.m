@@ -787,7 +787,31 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     [masterLayers setValue:imageDetailDictionary forKey:uniqueId];
     return uniqueId;
 }
+-(NSString *)addWatermark{
+    
+    NSString *uniqueId = [Flyer getUniqueId];
+    
+    //Create Dictionary for Symbol
+    NSMutableDictionary *imageDetailDictionary = [[NSMutableDictionary alloc] init];
+    imageDetailDictionary[@"image"] = @"Photo/watermark.png";
+    imageDetailDictionary[@"imageTag"] = @"";
+    imageDetailDictionary[@"x"] = @"10";
+    imageDetailDictionary[@"y"] = @"10";
+    imageDetailDictionary[@"width"] = @"48";
+    imageDetailDictionary[@"height"] = @"20";
 
+    
+    imageDetailDictionary[@"type"] = FLYER_LAYER_WATER_MARK;
+    imageDetailDictionary[@"tx"] = @"233.00";
+    imageDetailDictionary[@"ty"] = @"273.00";
+    imageDetailDictionary[@"a"] = @"1.00";
+    imageDetailDictionary[@"b"] = @"0.00";
+    imageDetailDictionary[@"c"] = @"0.00";
+    imageDetailDictionary[@"d"] = @"1.00";
+    
+    [masterLayers setValue:imageDetailDictionary forKey:uniqueId];
+    return uniqueId;
+}
 
 /*
  * When New Drawing layer Add on Flyer

@@ -51,6 +51,7 @@
 
 -(NSString *)addText;
 -(NSString *)addImage;
+-(NSString *)addWatermark;
 -(NSString *)addDrawingImage:(BOOL) isMainLayer;
 -(NSString *)addClipArt;
 

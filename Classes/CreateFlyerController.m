@@ -5783,7 +5783,9 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     return self.flyimgView;
 }
 
+//Tasks after create new flyer
 -(void)tasksOnCreateNewFlyer{
+    //------- set white bg --- Start ----
     //Here we Set Flyer Type
     [flyer setFlyerTypeImage];
     
@@ -5797,6 +5799,20 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     //Set Image Tag
     [flyer setImageTag:@"Template" Tag:[NSString stringWithFormat:@"%d",viewTag]];
+    //------- set white bg --- End ----
+    
+    //------- Add water mark layer --- start ---
+    [flyer addWatermark];
+    /*
+    NSString *watermarkLayer     = [flyer addWatermark];
+    
+    CGRect imageFrame  = CGRectMake(310,490,310,130);
+    [flyer setImageFrame:watermarkLayer :imageFrame];
+    NSMutableDictionary *dic = [flyer getLayerFromMaster:watermarkLayer];
+    [self.flyimgView renderLayer:currentLayer layerDictionary:dic];
+    */
+    //------- Add water mark layer --- end ---
+    
 }
 
 @end
