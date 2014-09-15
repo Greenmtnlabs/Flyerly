@@ -182,6 +182,8 @@
     createFlyer.flyerPath = flyPath;
     createFlyer.flyer = flyer;
     
+    [createFlyer tasksOnCreateNewFlyer];
+    
     __weak FlyrViewController *weakSelf = self;
     
     //Here we Manage Block for Update

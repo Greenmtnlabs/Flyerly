@@ -1643,7 +1643,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 }
 
 /*
- * When any template is selected
+ * When any template(background image) is selected
  */
 -(void)selectTemplate:(id)sender
 {
@@ -5782,4 +5782,21 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
     return self.flyimgView;
 }
+
+-(void)tasksOnCreateNewFlyer{
+    //Here we Set Flyer Type
+    [flyer setFlyerTypeImage];
+    
+    int viewTag = 74;// white bg tag number
+    
+    //Getting Image Path
+    NSString *imgPath = [self getImagePathByTag:[NSString stringWithFormat:@"Template%d",viewTag]];
+    
+    //set template Image
+    [self.flyimgView setTemplate:imgPath];
+    
+    //Set Image Tag
+    [flyer setImageTag:@"Template" Tag:[NSString stringWithFormat:@"%d",viewTag]];
+}
+
 @end

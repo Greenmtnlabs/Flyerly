@@ -279,4 +279,6 @@
 
 - (IBAction)zoom:(id)sender;
 
+
+-(void)tasksOnCreateNewFlyer;
 @end

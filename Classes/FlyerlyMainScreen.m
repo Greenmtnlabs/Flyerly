@@ -42,6 +42,8 @@
 
 BOOL adLoaded = false;
 
+
+//When user tap on create new flyer
 -(IBAction)doNew:(id)sender{
     
     [Flurry logEvent:@"Create Flyer"];
@@ -53,6 +55,9 @@ BOOL adLoaded = false;
 	createFlyer = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
     createFlyer.flyerPath = flyPath;
     createFlyer.flyer = flyer;
+
+    
+    [createFlyer tasksOnCreateNewFlyer];
     
     __weak FlyerlyMainScreen *weakSelf = self;
     __weak CreateFlyerController *weakCreate = createFlyer;
