@@ -5815,4 +5815,36 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
 }
 
+
+/**
+ * canPerformAction
+ * When user perform action on watermark layer and has no complete design bundle then show in app panel
+ */
+- (BOOL)canPerformAction:(NSString *)uid{
+    BOOL canPerformAct = YES;
+    BOOL isInAppPanelAlreadyOpen = NO;
+
+    
+    NSMutableDictionary *dic = [flyer getLayerFromMaster:uid];
+    if( [[dic objectForKey:@"type"] isEqualToString:FLYER_LAYER_WATER_MARK] ){
+        
+        UserPurchases *userPurchases_ = [UserPurchases getInstance];
+        
+        if ([[PFUser currentUser] sessionToken].length != 0) {
+            if ( ![userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ) {
+                canPerformAct   =   NO;
+            }
+        } else{
+               canPerformAct   =   NO;
+        }
+    }
+    
+    
+    if( !canPerformAct && !isInAppPanelAlreadyOpen )
+    [self openInAppPanel];
+    
+    return canPerformAct;
+}
+
+
 @end

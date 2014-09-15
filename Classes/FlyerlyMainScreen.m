@@ -446,7 +446,7 @@ BOOL adLoaded = false;
     
 }
 
-
+//When user tap on flyer from main screen
 -(IBAction)showFlyerDetail:(id)sender {
     
     UIButton *clickButton = sender;
