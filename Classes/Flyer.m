@@ -787,7 +787,31 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     [masterLayers setValue:imageDetailDictionary forKey:uniqueId];
     return uniqueId;
 }
+-(NSString *)addWatermark{
+    
+    NSString *uniqueId = [Flyer getUniqueId];
+    
+    //Create Dictionary for Symbol
+    NSMutableDictionary *imageDetailDictionary = [[NSMutableDictionary alloc] init];
+    imageDetailDictionary[@"image"] = @"Photo/watermark.png";
+    imageDetailDictionary[@"imageTag"] = @"";
+    imageDetailDictionary[@"x"] = @"10";
+    imageDetailDictionary[@"y"] = @"10";
+    imageDetailDictionary[@"width"] = @"48";
+    imageDetailDictionary[@"height"] = @"20";
 
+    
+    imageDetailDictionary[@"type"] = FLYER_LAYER_WATER_MARK;
+    imageDetailDictionary[@"tx"] = @"233.00";
+    imageDetailDictionary[@"ty"] = @"273.00";
+    imageDetailDictionary[@"a"] = @"1.00";
+    imageDetailDictionary[@"b"] = @"0.00";
+    imageDetailDictionary[@"c"] = @"0.00";
+    imageDetailDictionary[@"d"] = @"1.00";
+    
+    [masterLayers setValue:imageDetailDictionary forKey:uniqueId];
+    return uniqueId;
+}
 
 /*
  * When New Drawing layer Add on Flyer
@@ -1456,7 +1480,19 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 -(UIImage *)getSharingVideoCover {
 
     NSString* filePath = [self getSharingVideoPath];
+   return [self getSnapShotOfVideoPath:filePath];
+}
+
+/*
+ * Here we Return Over generated Video Snap Shot For Main screen
+ */
+-(UIImage *)getVideoFlyerSnapShot {
     
+    NSString* filePath = [self getOriginalVideoURL];
+    return [self getSnapShotOfVideoPath:filePath];
+}
+
+-(UIImage *)getSnapShotOfVideoPath:(NSString *) filePath {
     UIImage *img;
     if ([[NSFileManager defaultManager] fileExistsAtPath:filePath isDirectory:NULL]) {
         
@@ -1474,16 +1510,31 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
         CGImageRef imgRef = [generator copyCGImageAtTime: thumbnailTime  actualTime:NULL error:&err];
         
         img = [[UIImage alloc] initWithCGImage:imgRef];
-
+        
         CGImageRelease(imgRef);
     } else {
         NSLog( @"Video cover not found" );
     }
-    
-    
     return img;
 }
 
+- (UIImage*)mergeImages:(UIImage*)firstImage withImage:(UIImage*)secondImage width:(int)width height:(int)height {
+        UIImage *image = nil;
+        
+        //CGSize newImageSize = CGSizeMake(MAX(firstImage.size.width, secondImage.size.width), MAX(firstImage.size.height, secondImage.size.height));
+        CGSize newImageSize = CGSizeMake(width, height);
+        if (UIGraphicsBeginImageContextWithOptions != NULL) {
+            UIGraphicsBeginImageContextWithOptions(newImageSize, NO, [[UIScreen mainScreen] scale]);
+        } else {
+            UIGraphicsBeginImageContext(newImageSize);
+        }
+        [firstImage drawAtPoint:CGPointMake(0,0)];
+        [secondImage drawAtPoint:CGPointMake(0,0)];
+        image = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        
+        return image;
+    }
     
 /*
  * HERE WE ADD VIDEO ICON WITH VIDEO IMAGE

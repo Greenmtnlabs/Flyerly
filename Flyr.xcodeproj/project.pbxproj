@@ -1,4 +1,4 @@
-	// !$*UTF8*$!
+// !$*UTF8*$!
 {
 	archiveVersion = 1;
 	classes = {
@@ -1019,6 +1019,8 @@
 		36AECB9719B99D9C007763B9 /* magnifyingGlass.png in Resources */ = {isa = PBXBuildFile; fileRef = 36AECB9619B99D9C007763B9 /* magnifyingGlass.png */; };
 		36AF4CAD19BF21D4003C9FE3 /* magnifyingGlass2.png in Resources */ = {isa = PBXBuildFile; fileRef = 36AF4CAB19BF21D4003C9FE3 /* magnifyingGlass2.png */; };
 		36AF4CAE19BF21D4003C9FE3 /* magnifyingGlass3.png in Resources */ = {isa = PBXBuildFile; fileRef = 36AF4CAC19BF21D4003C9FE3 /* magnifyingGlass3.png */; };
+		36EBCFDC19C6C98100ECDD8B /* Template74@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 36EBCFDA19C6C98000ECDD8B /* Template74@2x.jpg */; };
+		36EBCFDE19C6CA1000ECDD8B /* Template74.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 36EBCFDD19C6CA1000ECDD8B /* Template74.jpg */; };
 		490FBB16192B4E0500AA3C18 /* AssetsGroupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 490FBB15192B4E0400AA3C18 /* AssetsGroupViewController.xib */; };
 		4977B1DD193C90CC0024A209 /* delete_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4977B1DC193C90CC0024A209 /* delete_button@2x.png */; };
 		4977B1DF193C90FA0024A209 /* tick@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4977B1DE193C90FA0024A209 /* tick@2x.png */; };
@@ -2405,6 +2407,8 @@
 		36AECB9619B99D9C007763B9 /* magnifyingGlass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = magnifyingGlass.png; sourceTree = "<group>"; };
 		36AF4CAB19BF21D4003C9FE3 /* magnifyingGlass2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = magnifyingGlass2.png; sourceTree = "<group>"; };
 		36AF4CAC19BF21D4003C9FE3 /* magnifyingGlass3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = magnifyingGlass3.png; sourceTree = "<group>"; };
+		36EBCFDA19C6C98000ECDD8B /* Template74@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Template74@2x.jpg"; sourceTree = "<group>"; };
+		36EBCFDD19C6CA1000ECDD8B /* Template74.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Template74.jpg; sourceTree = "<group>"; };
 		490FBB15192B4E0400AA3C18 /* AssetsGroupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AssetsGroupViewController.xib; sourceTree = "<group>"; };
 		4977B1DC193C90CC0024A209 /* delete_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "delete_button@2x.png"; path = "Data/delete_button@2x.png"; sourceTree = "<group>"; };
 		4977B1DE193C90FA0024A209 /* tick@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tick@2x.png"; path = "Data/tick@2x.png"; sourceTree = "<group>"; };
@@ -4454,6 +4458,8 @@
 		30D58CBB10FB1BF800E0C7E8 /* Templates */ = {
 			isa = PBXGroup;
 			children = (
+				36EBCFDD19C6CA1000ECDD8B /* Template74.jpg */,
+				36EBCFDA19C6C98000ECDD8B /* Template74@2x.jpg */,
 				65C1A3D51742516B00947D5E /* Template0@2x.jpg */,
 				65C1A3D61742516B00947D5E /* Template1@2x.jpg */,
 				65C1A3D71742516B00947D5E /* Template2@2x.jpg */,
@@ -5174,6 +5180,7 @@
 				247858D5194878080062F1E4 /* ONRAMP-Regular.ttf in Resources */,
 				200D1938197CF4CC00CFE04B /* PaypalViewController.xib in Resources */,
 				246EF476193C506B004539B2 /* Emoticons.xib in Resources */,
+				36EBCFDE19C6CA1000ECDD8B /* Template74.jpg in Resources */,
 				2471593E19408E5F00B30301 /* tumblr_share_saved@2x.png in Resources */,
 				246EF4F7193C515D004539B2 /* emoticon27@2x.png in Resources */,
 				2421845F194B4AEC00FDDA97 /* ball-trophy-icon.png in Resources */,
@@ -5407,6 +5414,7 @@
 				242184B8194B4AEC00FDDA97 /* emoticon170@2x.png in Resources */,
 				249F2020193F562C0072835E /* font_button_selected@2x.png in Resources */,
 				24218490194B4AEC00FDDA97 /* emoticon129@2x.png in Resources */,
+				36EBCFDC19C6C98100ECDD8B /* Template74@2x.jpg in Resources */,
 				249F203D193F562C0072835E /* public_on@2x.png in Resources */,
 				65C1A4501742516D00947D5E /* Template56@2x.jpg in Resources */,
 				24751A6A1938A3B300DF03B2 /* clipart_tab@2x.png in Resources */,

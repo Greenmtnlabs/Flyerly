@@ -169,7 +169,7 @@
     [self.tView reloadData];
 }
 
-
+//when user tap on create new flyer(from saved flyer)
 -(IBAction)createFlyer:(id)sender {
     
     cancelRequest = YES;
@@ -181,6 +181,9 @@
 	createFlyer = [[CreateFlyerController alloc]initWithNibName:@"CreateFlyerController" bundle:nil];
     createFlyer.flyerPath = flyPath;
     createFlyer.flyer = flyer;
+
+    //Tasks after create new flyer
+    [createFlyer tasksOnCreateNewFlyer];
     
     __weak FlyrViewController *weakSelf = self;
     

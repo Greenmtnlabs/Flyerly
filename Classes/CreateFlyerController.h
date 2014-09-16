@@ -200,6 +200,7 @@
 @property (strong, nonatomic) IBOutlet UIScrollView *zoomScrollView;
 @property (strong, nonatomic) IBOutlet UIImageView *zoomScreenShot;
 @property (strong, nonatomic) IBOutlet UIImageView *zoomMagnifyingGlass;
+@property (strong, nonatomic) IBOutlet UIImageView *zoomScreenShotForVideo;
 
 
 @property (nonatomic,strong)MPMoviePlayerController *player;
@@ -273,4 +274,6 @@
 
 - (IBAction)zoom:(id)sender;
 
+
+-(void)tasksOnCreateNewFlyer;
 @end

@@ -55,6 +55,7 @@
                 <outlet property="widthTabButton" destination="IOq-dI-vvl" id="TYH-DW-B0O"/>
                 <outlet property="zoomMagnifyingGlass" destination="e7R-ga-ZuC" id="dwE-yx-fXk"/>
                 <outlet property="zoomScreenShot" destination="koI-LW-qvU" id="AQk-OJ-tF0"/>
+                <outlet property="zoomScreenShotForVideo" destination="a9C-ON-Lpo" id="d05-Wk-LRu"/>
                 <outlet property="zoomScrollView" destination="OgZ-hl-Uai" id="zcn-HA-dsx"/>
             </connections>
         </placeholder>
@@ -120,6 +121,10 @@
                     <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                     <color key="backgroundColor" red="0.3575665864" green="0.76047690010000002" blue="0.97315449620000005" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="a9C-ON-Lpo" userLabel="zoomScreenShotForVideo">
+                    <rect key="frame" x="5" y="65" width="310" height="310"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                </imageView>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="scaleToFill" id="OgZ-hl-Uai" userLabel="Scroll View - ZOOM">
                     <rect key="frame" x="5" y="65" width="310" height="310"/>
                     <autoresizingMask key="autoresizingMask"/>

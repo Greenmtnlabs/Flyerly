@@ -24,6 +24,8 @@
 - (void)toggleImageViewInteraction;
 - (void)addVideo :(NSString *)url;
 
+- (BOOL)canPerformAction:(NSString *)uid;
+
 
 
 @end

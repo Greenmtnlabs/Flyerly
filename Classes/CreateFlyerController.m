@@ -43,7 +43,7 @@
 
 
 //Outlets form zoom
-@synthesize zoomScrollView,zoomScreenShot,zoomMagnifyingGlass;
+@synthesize zoomScrollView,zoomScreenShot,zoomMagnifyingGlass,zoomScreenShotForVideo;
 
 //Drawing required files
 @synthesize mainImage;
@@ -1652,7 +1652,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 }
 
 /*
- * When any template is selected
+ * When any template(background image) is selected
  */
 -(void)selectTemplate:(id)sender
 {
@@ -2893,6 +2893,24 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     return snapshotImage;
 }
+/*
+ * Here we Getting Snap Shot o f Flyer Image View Context
+ * Return
+ *  Image
+ */
+-(UIImage *)getVideoFlyerSnapShot {
+    
+    //Here we take Snap shot of Flyer
+    UIGraphicsBeginImageContextWithOptions( self.playerView.frame.size, NO, 0);
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    [self.playerView.layer renderInContext:context];
+    UIImage *snapshotImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    return snapshotImage;
+}
 
 
 
@@ -3096,14 +3114,18 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         callback( exportSession.status, exportSession.error );
     }];
 }
+-(void)hidePlayerControlls:(BOOL)showHide {
+    // Make sure we hide the play bar.
+    [playerToolBar setHidden:showHide];
+
+}
 
 /*
  * Here we Merge Video
  */
 -(void)videoMergeProcess {
     
-    // Make sure we hide the play bar.
-    [playerToolBar setHidden:YES];
+    [self hidePlayerControlls:YES];
     
     // CREATING PATH FOR FLYER OVERLAY VIDEO
     NSString* currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
@@ -5607,11 +5629,17 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 //set values at viewWillAppear
 -(void)zoomInit{
     
-    //disable scrolling in scrollView
-    [zoomScrollView setScrollEnabled:NO];
-
+    zoomScrollView.backgroundColor = [UIColor clearColor];
+    
     //on load time zooming is disabled
     flyimgView.zoomedIn = NO;
+    
+    //inject zoomScreenShotForVideo as a first layer in flyer
+    [zoomScreenShotForVideo setFrame:flyimgView.frame];
+    [flyimgView addSubview:zoomScreenShotForVideo];
+    
+    //disable scrolling in scrollView
+    [zoomScrollView setScrollEnabled:NO];
     
     //hide zoom elements on init
     [self zoomElementsSetAlpha:0.0];
@@ -5637,54 +5665,63 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 -(void)zoomStart {
     [self addButtonsInRightNavigation:@"zoomStart"];
     flyimgView.zoomedIn = YES;
+    [self.playerView setAlpha:0];
     [self zoomElementsSetAlpha:1.0];
     
-    if ( [flyer isVideoFlyer] && [self.flyer isVideoMergeProcessRequired] ) {
-            [self videoMergeProcess];
-        dispatch_async( dispatch_get_main_queue(), ^{
-            [self zoomStart];
-        });
-    } else{
-       
-        if ( [flyer isVideoFlyer] ){
-            zoomScreenShot.image = [flyer  getSharingVideoCover];
-        }
-        else{
-            zoomScreenShot.image = [self getFlyerSnapShot];
-        }
-        
-        zoomScreenShot.userInteractionEnabled = YES;
-        
-        zoomScrollView.delegate = self;
-        [zoomScrollView addSubview:flyimgView];
-        zoomScrollView.backgroundColor = [UIColor clearColor];
-        [zoomScrollView setZoomScale:FLYER_ZOOM_SET_SCALE];
 
-        //FOR TESTING SHOW RED RECT AROUND CURSOR
-        //[zoomMagnifyingGlass.layer setBorderColor: [[UIColor redColor] CGColor]];
-        //[zoomMagnifyingGlass.layer setBorderWidth: 2.0];
+    UIImage *flyerSnapshot  =   [self getFlyerSnapShot];
+    
+    if ( [flyer isVideoFlyer] ){
+        //if video flyer then hide controlls
+        [self hidePlayerControlls:YES];
         
-        [self zoomAddLayerButtonsIntoScrollView:@"zoomStart"];
-        
-        [zoomScrollView setContentSize:CGSizeMake(flyimgView.frame.size.width, flyimgView.frame.size.height)];
+        UIImage *videoImg    = [flyer getVideoFlyerSnapShot];
+        zoomScreenShot.image = [flyer mergeImages:videoImg withImage:flyerSnapshot
+                                            width:flyerSnapshot.size.width height:flyerSnapshot.size.height];
+        zoomScreenShotForVideo.image = videoImg;
+        zoomScreenShotForVideo.frame = CGRectMake(0, 0, flyimgView.size.width*2, flyimgView.size.height*2);
     }
+    else{
+        zoomScreenShot.image = flyerSnapshot;
+    }
+    
+    zoomScreenShot.userInteractionEnabled = YES;
+    
+    zoomScrollView.delegate = self;
+    [zoomScrollView addSubview:flyimgView];
+
+    [zoomScrollView setZoomScale:FLYER_ZOOM_SET_SCALE];
+
+    //FOR TESTING SHOW RED RECT AROUND CURSOR
+    //[zoomMagnifyingGlass.layer setBorderColor: [[UIColor redColor] CGColor]];
+    //[zoomMagnifyingGlass.layer setBorderWidth: 2.0];
+    
+    [zoomScrollView setContentSize:CGSizeMake(flyimgView.frame.size.width, flyimgView.frame.size.height)];
+
+    // set buttons in right nav
+    [self zoomAddLayerButtonsIntoScrollView:@"zoomStart"];
 }
 
 // Enable zooming, (for testing , when you tap on PHOTO TAB it will start, after start when you again tap on PHOT TAB, zooming will end )
 -(void)zoomEnd {
     
     flyimgView.zoomedIn   =   NO;
+    [self.playerView setAlpha:1];
     [self zoomElementsSetAlpha:0.0];
     
-    zoomScreenShot.image   = nil;
+    zoomScreenShot.image         = nil;
+    zoomScreenShotForVideo.image = nil;
+    
+    //[self.view addSubview:zoomScreenShotForVideo];
     [self.view addSubview:flyimgView];
+    
     [zoomScrollView setZoomScale:zoomScrollView.minimumZoomScale];
     [self zoomAddLayerButtonsIntoScrollView:@"zoomEnd"];
     [self addButtonsInRightNavigation:@"zoomEnd"];
 }
 
 -(void)zoomElementsSetAlpha:(CGFloat)zoomAlpha{
-    
+    [zoomScreenShotForVideo setAlpha:zoomAlpha];
     [zoomScrollView setAlpha:zoomAlpha];
     [zoomScreenShot setAlpha:zoomAlpha];
     [zoomMagnifyingGlass setAlpha:zoomAlpha];
@@ -5754,4 +5791,69 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
     return self.flyimgView;
 }
+
+//Tasks after create new flyer
+-(void)tasksOnCreateNewFlyer{
+    //------- set white bg --- Start ----
+    //Here we Set Flyer Type
+    [flyer setFlyerTypeImage];
+    
+    int viewTag = 74;// white bg tag number
+    
+    //Getting Image Path
+    NSString *imgPath = [self getImagePathByTag:[NSString stringWithFormat:@"Template%d",viewTag]];
+    
+    //set template Image
+    [self.flyimgView setTemplate:imgPath];
+    
+    //Set Image Tag
+    [flyer setImageTag:@"Template" Tag:[NSString stringWithFormat:@"%d",viewTag]];
+    //------- set white bg --- End ----
+    
+    //------- Add water mark layer --- start ---
+    [flyer addWatermark];
+    /*
+    NSString *watermarkLayer     = [flyer addWatermark];
+    
+    CGRect imageFrame  = CGRectMake(310,490,310,130);
+    [flyer setImageFrame:watermarkLayer :imageFrame];
+    NSMutableDictionary *dic = [flyer getLayerFromMaster:watermarkLayer];
+    [self.flyimgView renderLayer:currentLayer layerDictionary:dic];
+    */
+    //------- Add water mark layer --- end ---
+    
+}
+
+
+/**
+ * canPerformAction
+ * When user perform action on watermark layer and has no complete design bundle then show in app panel
+ */
+- (BOOL)canPerformAction:(NSString *)uid{
+    BOOL canPerformAct = YES;
+    BOOL isInAppPanelAlreadyOpen = NO;
+
+    
+    NSMutableDictionary *dic = [flyer getLayerFromMaster:uid];
+    if( [[dic objectForKey:@"type"] isEqualToString:FLYER_LAYER_WATER_MARK] ){
+        
+        UserPurchases *userPurchases_ = [UserPurchases getInstance];
+        
+        if ([[PFUser currentUser] sessionToken].length != 0) {
+            if ( ![userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ) {
+                canPerformAct   =   NO;
+            }
+        } else{
+               canPerformAct   =   NO;
+        }
+    }
+    
+    
+    if( !canPerformAct && !isInAppPanelAlreadyOpen )
+    [self openInAppPanel];
+    
+    return canPerformAct;
+}
+
+
 @end

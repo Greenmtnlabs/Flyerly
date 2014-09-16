@@ -51,6 +51,7 @@
 
 -(NSString *)addText;
 -(NSString *)addImage;
+-(NSString *)addWatermark;
 -(NSString *)addDrawingImage:(BOOL) isMainLayer;
 -(NSString *)addClipArt;
 
@@ -130,6 +131,11 @@
 -(NSString *)getOriginalVideoURL;
 -(NSString *)getSharingVideoPath;
 -(UIImage *)getSharingVideoCover;
+
+-(UIImage *)getVideoFlyerSnapShot;
+- (UIImage*)mergeImages:(UIImage*)firstImage withImage:(UIImage*)secondImage width:(int)width height:(int)height;
+
+
 
 -(NSString *)getShareType;
 -(NSString *)getFlyerUpdateDate;
