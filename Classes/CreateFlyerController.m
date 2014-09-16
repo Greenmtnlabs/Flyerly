@@ -5823,22 +5823,21 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 - (BOOL)canPerformAction:(NSString *)uid{
     BOOL canPerformAct = YES;
     BOOL isInAppPanelAlreadyOpen = NO;
-
     
     NSMutableDictionary *dic = [flyer getLayerFromMaster:uid];
+    
     if( [[dic objectForKey:@"type"] isEqualToString:FLYER_LAYER_WATER_MARK] ){
-        
+
         UserPurchases *userPurchases_ = [UserPurchases getInstance];
         
         if ([[PFUser currentUser] sessionToken].length != 0) {
             if ( ![userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ) {
-                canPerformAct   =   NO;
+                canPerformAct = NO;
             }
         } else{
-               canPerformAct   =   NO;
+           canPerformAct = NO;
         }
     }
-    
     
     if( !canPerformAct && !isInAppPanelAlreadyOpen )
     [self openInAppPanel];

@@ -802,8 +802,8 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 
     
     imageDetailDictionary[@"type"] = FLYER_LAYER_WATER_MARK;
-    imageDetailDictionary[@"tx"] = @"233.00";
-    imageDetailDictionary[@"ty"] = @"273.00";
+    imageDetailDictionary[@"tx"] = @"248.00";
+    imageDetailDictionary[@"ty"] = @"276.00";
     imageDetailDictionary[@"a"] = @"1.00";
     imageDetailDictionary[@"b"] = @"0.00";
     imageDetailDictionary[@"c"] = @"0.00";

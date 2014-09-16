@@ -452,6 +452,7 @@ BOOL adLoaded = false;
     UIButton *clickButton = sender;
     NSString *flyPath;
     
+    BOOL isNewFlyer = NO;
     if (clickButton.tag < [recentFlyers count]) {
         
         NSString *pathWitFileName = [recentFlyers objectAtIndex:clickButton.tag];
@@ -462,7 +463,7 @@ BOOL adLoaded = false;
     }else {
         
         flyPath = [Flyer newFlyerPath];
-        
+        isNewFlyer = YES;
     }
     
     
@@ -473,8 +474,10 @@ BOOL adLoaded = false;
     // Set CreateFlyer Screen
     createFlyer.flyer = flyer;
     
-    //Tasks after create new flyer
-    [createFlyer tasksOnCreateNewFlyer];
+    if( isNewFlyer ){
+        //Tasks after create new flyer
+        [createFlyer tasksOnCreateNewFlyer];
+    }
     
 
     __weak FlyerlyMainScreen *weakSelf = self;
