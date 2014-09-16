@@ -1264,7 +1264,10 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         
         [zoomButton addSubview:tileImageView];
         
-        [layerScrollView addSubview:zoomButton];
+        //1st layer is bg layer, thats why we set count > 1
+        if( [flyer allKeys].count > 1 ) {
+            [layerScrollView addSubview:zoomButton];
+        }
     }
     else if( [callFor isEqualToString:@"zoomStart"]) {
         //Remove Subviews of ScrollView
@@ -5803,6 +5806,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 
 //Tasks after create new flyer
 -(void)tasksOnCreateNewFlyer{
+    //we have updated the flyer.pieces and flyer.txt, so whitebg and watermark layer work will be in default bundle.
+    /*
     //------- set white bg --- Start ----
     //Here we Set Flyer Type
     [flyer setFlyerTypeImage];
@@ -5821,15 +5826,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     //------- Add water mark layer --- start ---
     [flyer addWatermark];
-    /*
-    NSString *watermarkLayer     = [flyer addWatermark];
-    
-    CGRect imageFrame  = CGRectMake(310,490,310,130);
-    [flyer setImageFrame:watermarkLayer :imageFrame];
-    NSMutableDictionary *dic = [flyer getLayerFromMaster:watermarkLayer];
-    [self.flyimgView renderLayer:currentLayer layerDictionary:dic];
-    */
     //------- Add water mark layer --- end ---
+    */
     
 }
 
