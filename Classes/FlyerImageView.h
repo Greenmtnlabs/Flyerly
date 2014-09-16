@@ -20,6 +20,7 @@
 - (void)rotationAngleChangedForLayer:(NSString *)uid rotationAngle:(CGFloat)rotationAngle;
 - (void)previuosrotationAngle:(NSString *)uid;
 - (void)bringLayerToFront:(NSString *)oldUid new:(NSString *)uid;
+- (void)bringNotEditableLayersToFront;
 - (void)sendLayerToEditMode:(NSString *)uid;
 - (void)toggleImageViewInteraction;
 - (void)addVideo :(NSString *)url;

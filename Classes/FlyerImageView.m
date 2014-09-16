@@ -705,6 +705,7 @@ CGAffineTransform previuosTransform;
             currentTransform = recognizer.view.transform;
             recognizer.view.layer.anchorPoint = CGPointMake( 0.5, 0.5 );
             
+            [self bringLayerToFrontFiv:recognizer];
         }
         else if (recognizer.state == UIGestureRecognizerStateChanged) {
             
@@ -733,8 +734,8 @@ CGAffineTransform previuosTransform;
                 [self.delegate layerTransformedforKey:key :&newTransForm];
                 
                 //[self.delegate frameChangedForLayer:key frame:recognizer.view.frame];
-
             }
+
         }
         
         //[self editLayer:recognizer];
@@ -899,5 +900,38 @@ CGAffineTransform previuosTransform;
         //[self editLayer:recognizer];
     }
 }
-
+-(void) bringLayerToFrontFiv:(UIPanGestureRecognizer *)recognizer{
+    // Get the key for this view.
+    NSArray *keys = [layers allKeysForObject:recognizer.view];
+    
+    // Let the delegate know that we changed frame.
+    for ( int i = 0; i < keys.count; i++ ) {
+        NSString *key = [keys objectAtIndex:i];
+        
+        CGRect fr = recognizer.view.frame;
+        
+        // If this is a UILable, the size may have changed due to alignment issues.
+        // so we send the default size.
+        if ( [recognizer.view.class isSubclassOfClass:[CustomLabel class]] ) {
+            fr.size = [(CustomLabel *)recognizer.view originalSize];
+        }
+        
+        //[self.delegate frameChangedForLayer:key frame:fr];
+        
+        // See if this view is at the front
+        if ( [self.subviews lastObject] != recognizer.view ) {
+            [self bringSubviewToFront:recognizer.view];
+            
+            // When we bring a view to front, we need to change its key
+            NSString *newKey = [Flyer getUniqueId];
+            
+            // Update the layer dictionary with new key
+            id l = [layers objectForKey:key];
+            [layers removeObjectForKey:key];
+            [layers setObject:l forKey:newKey];
+            
+            [self.delegate bringLayerToFront:key new:newKey];
+        }
+    }
+}
 @end

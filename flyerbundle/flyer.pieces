@@ -14,6 +14,8 @@
             <string>1.00</string>
             <key>height</key>
             <string>20</string>
+            <key>isEditable</key>
+            <string>NO</string>
             <key>image</key>
             <string>Photo/watermark.png</string>
             <key>imageTag</key>

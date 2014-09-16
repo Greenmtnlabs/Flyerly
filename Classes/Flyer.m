@@ -793,6 +793,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     
     //Create Dictionary for Symbol
     NSMutableDictionary *imageDetailDictionary = [[NSMutableDictionary alloc] init];
+    imageDetailDictionary[@"isEditable"] = @"NO";
     imageDetailDictionary[@"image"] = @"Photo/watermark.png";
     imageDetailDictionary[@"imageTag"] = @"";
     imageDetailDictionary[@"x"] = @"10";

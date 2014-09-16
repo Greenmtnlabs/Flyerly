@@ -2751,6 +2751,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     [self deSelectPreviousLayer];
     [self callAddMoreLayers];
     [self logPhotoAddedEvent];
+
+    [self bringNotEditableLayersToFront];
     
 }
 
@@ -2931,7 +2933,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         //Create Subview from dictionary
         [self.flyimgView renderLayer:[flyerPiecesKeys objectAtIndex:i] layerDictionary:dic];
     }
-    
+    [self bringNotEditableLayersToFront];
 }
 
 
@@ -3504,6 +3506,27 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     if ( [currentLayer isEqualToString:@""] ) {
         [self addAllLayersIntoScrollView];
     }
+    [self bringNotEditableLayersToFront];
+}
+
+/**
+  * Keep non editable layer on top
+ */
+-(void)bringNotEditableLayersToFront{
+
+    NSArray *flyerPiecesKeys = [flyer allKeys];
+    
+    // we need to loop layers in revers order because first non editable layer should be on top
+    int i = flyerPiecesKeys.count;
+    while ( i > 0) {
+        i--;
+        //Getting Layers Detail from Master Dictionary
+        NSMutableDictionary *dic = [flyer getLayerFromMaster:[flyerPiecesKeys objectAtIndex:i]];
+        if( [[dic objectForKey:@"isEditable"]  isEqual: @"NO"] ){
+            UIView *view = [self.flyimgView.layers objectForKey:[flyerPiecesKeys objectAtIndex:i]];
+            [self.flyimgView bringSubviewToFront:view];
+        }
+    }
 }
 
 #pragma mark - Undo Implementation
@@ -3636,6 +3659,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     //End Animation
     
     currentLayer = @"";    
+    [self bringNotEditableLayersToFront];
 }
 
 
