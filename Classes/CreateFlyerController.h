@@ -101,11 +101,7 @@
 
 @property(nonatomic, strong) GADInterstitial *interstitialAdd;
 @property(nonatomic, strong) GADBannerView *bannerAdd;
-
-@property(nonatomic, strong) IBOutlet UIView *bannerAddView;
-
-@property (nonatomic, strong)IBOutlet UIButton *bannerAddDismissButton;
-
+@property (nonatomic, strong) UIView *bannerAddView;
 
 //-----
 @property (nonatomic, strong) ResourcesView *backgroundsView;
@@ -258,7 +254,6 @@
 -(IBAction)slide:(id)sender;
 -(IBAction)selectDrawingLine:(id)sender;
 
--(IBAction)dissmisBannerAdd:(id)sender;
 
 
 

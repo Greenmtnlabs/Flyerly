@@ -57,7 +57,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 @synthesize libText,libBackground,libArts,libPhoto,libEmpty,backtemplates,cameraTakePhoto,cameraRoll,flyerBorder,libDrawing;
 @synthesize flyimgView,currentLayer,layersDic,flyer,player,playerView,playerToolBar,playButton,playerSlider,tempelateView;
 @synthesize durationLabel,durationChange,onFlyerBack,shouldShowAdd;
-@synthesize backgroundsView,flyerBordersView,colorsView,sizesView,bannerAddView,bannerAddDismissButton,drawingPatternsView,drawingEraserMsgView;
+@synthesize backgroundsView,flyerBordersView,colorsView,sizesView,bannerAddView,drawingPatternsView,drawingEraserMsgView;
 
 #pragma mark -  View Appear Methods
 - (void)viewWillAppear:(BOOL)animated{
@@ -153,12 +153,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
 }
 
-//When we failed to recieve due to not availibility of network or any other reason
-- (void)adView:(GADBannerView *)view didFailToReceiveAdWithError:(GADRequestError *)error {
-    
-    [self.bannerAddView removeFromSuperview];
-
-}
 
 // We've received an Banner ad successfully.
 - (void)adViewDidReceiveAd:(GADBannerView *)adView {
@@ -166,21 +160,36 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     if ( ![userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]){
         
+        
+        bannerAddView = [[UIView alloc] initWithFrame:CGRectMake(0, 473, 320, 50)];
+        
+        UIButton *bannerAdDismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(296, 5, 23, 23)];
+        
+        
+        [bannerAdDismissBtn addTarget:self action:@selector(dissmisBannerAdd) forControlEvents:UIControlEventTouchUpInside];
+        
+        
+        [bannerAdDismissBtn setImage:[UIImage imageNamed:@"closeAd.png"] forState:UIControlStateNormal];
+        
+        [bannerAddView addSubview:bannerAdDismissBtn];
+        //[bannerAdDismissBtn setImage:closeAd forState:UIControlStateNormal];
+        
+        [self.view addSubview:bannerAddView];
         //Adding ad in custom view
-        [self.bannerAddView addSubview:self.bannerAdd];
+        [bannerAddView addSubview:self.bannerAdd];
         //Making dismiss button visible,and bring it to front
-        bannerAddDismissButton.alpha = 1.0;
-        [self.bannerAddView bringSubviewToFront:bannerAddDismissButton];
+        bannerAdDismissBtn.alpha = 1.0;
+        [bannerAddView bringSubviewToFront:bannerAdDismissBtn];
         return;
     }
     
-    [self.bannerAddView removeFromSuperview];
+    [bannerAddView removeFromSuperview];
 }
 
 // Dismiss action for banner ad
--(IBAction)dissmisBannerAdd:(id)sender{
+-(void)dissmisBannerAdd {
     
-    [self.bannerAddView removeFromSuperview];
+    [bannerAddView removeFromSuperview];
 }
 
 /**
@@ -1905,7 +1914,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             
             //Here we call Render Layer on View
             //[flyimgView renderLayer:currentLayer layerDictionary:[flyer getLayerFromMaster:currentLayer]];
-            [flyimgView configureLabelColor :currentLayer labelDictionary:[flyer getLayerFromMaster:currentLayer]];
+            //[flyimgView configureLabelColor :currentLayer labelDictionary:[flyer getLayerFromMaster:currentLayer]];
             [self.flyimgView configureLabelBorder:currentLayer labelDictionary:[flyer getLayerFromMaster:currentLayer]];
             
             

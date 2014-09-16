@@ -9,7 +9,10 @@
 #import "MainSettingViewController.h"
 #import "UserVoice.h"
 
-@interface MainSettingViewController ()
+@interface MainSettingViewController () {
+    
+    SHKSharer *iosSharer;
+}
 
 
 @end
@@ -386,12 +389,44 @@
     
 }
 
+-(void)showAlert:(NSString *)title message:(NSString *)message{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+                                                    message:message
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+}
 
 -(IBAction)gotwitter:(id)sender{
     
     globle.inputValue = @"twitter";
-    InputViewController  *inputcontroller = [[InputViewController alloc]initWithNibName:@"InputViewController" bundle:nil];
-    [self.navigationController presentViewController:inputcontroller animated:YES completion:nil];
+    
+    Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
+    if (networkStatus == NotReachable) {
+        NSLog(@"There IS NO internet connection");
+        [self showAlert:@"No internet available,please connect to the internet first" message:@""];
+    } else {
+        NSLog(@"There IS internet connection");
+        
+        /*if ([txtfield.text isEqualToString:@""]) {
+            [self showAlert:@"Please Enter Comments" message:@""];
+        }else{*/
+            
+            // Current Item For Sharing
+            //SHKItem *item = [SHKItem text:[NSString stringWithFormat:@"%@ @flyerlyapp",@" "]];
+            SHKItem *item = [SHKItem text:[NSString stringWithFormat:@"@flyerlyapp "]];
+            
+            //Calling ShareKit for Sharing
+            iosSharer = [[ SHKSharer alloc] init];
+            iosSharer = [SHKTwitter shareItem:item];
+            iosSharer.shareDelegate = self;
+        //}
+    }
+    
+    /*InputViewController  *inputcontroller = [[InputViewController alloc]initWithNibName:@"InputViewController" bundle:nil];
+    [self.navigationController presentViewController:inputcontroller animated:YES completion:nil];*/
     
 }
 
@@ -551,5 +586,81 @@
     
 }
 
+
+// These are used if you do not provide your own custom UI and delegate
+- (void)sharerStartedSending:(SHKSharer *)sharer
+{
+    
+	if (!sharer.quiet)
+		[[SHKActivityIndicator currentIndicator] displayActivity:SHKLocalizedString(@"Saving to %@", [[sharer class] sharerTitle]) forSharer:sharer];
+}
+
+- (void)sharerFinishedSending:(SHKSharer *)sharer
+{
+    
+    // Here we show Messege after Sending
+    [self showAlert:@"Thank you. Your feedback has been sent to @flyerlyapp on Twitter." message:@""];
+    
+    if (!sharer.quiet)
+		[[SHKActivityIndicator currentIndicator] displayCompleted:SHKLocalizedString(@"Saved!") forSharer:sharer];
+}
+
+- (void)sharer:(SHKSharer *)sharer failedWithError:(NSError *)error shouldRelogin:(BOOL)shouldRelogin
+{
+    
+    [[SHKActivityIndicator currentIndicator] hideForSharer:sharer];
+	NSLog(@"Sharing Error");
+}
+
+- (void)sharerCancelledSending:(SHKSharer *)sharer
+{
+    NSLog(@"Sending cancelled.");
+}
+
+- (void)sharerShowBadCredentialsAlert:(SHKSharer *)sharer
+{
+    NSString *errorMessage = SHKLocalizedString(@"Sorry, %@ did not accept your credentials. Please try again.", [[sharer class] sharerTitle]);
+    
+    [[[UIAlertView alloc] initWithTitle:SHKLocalizedString(@"Login Error")
+                                message:errorMessage
+                               delegate:nil
+                      cancelButtonTitle:SHKLocalizedString(@"Close")
+                      otherButtonTitles:nil] show];
+}
+
+- (void)sharerShowOtherAuthorizationErrorAlert:(SHKSharer *)sharer
+{
+    NSString *errorMessage = SHKLocalizedString(@"Sorry, %@ encountered an error. Please try again.", [[sharer class] sharerTitle]);
+    
+    [[[UIAlertView alloc] initWithTitle:SHKLocalizedString(@"Login Error")
+                                message:errorMessage
+                               delegate:nil
+                      cancelButtonTitle:SHKLocalizedString(@"Close")
+                      otherButtonTitles:nil] show];
+}
+
+- (void)hideActivityIndicatorForSharer:(SHKSharer *)sharer {
+    
+    [[SHKActivityIndicator currentIndicator]  hideForSharer:sharer];
+}
+
+- (void)displayActivity:(NSString *)activityDescription forSharer:(SHKSharer *)sharer {
+    
+    if (sharer.quiet) return;
+    
+    [[SHKActivityIndicator currentIndicator]  displayActivity:activityDescription forSharer:sharer];
+}
+
+- (void)displayCompleted:(NSString *)completionText forSharer:(SHKSharer *)sharer {
+    
+    if (sharer.quiet) return;
+    [[SHKActivityIndicator currentIndicator]  displayCompleted:completionText forSharer:sharer];
+}
+
+- (void)showProgress:(CGFloat)progress forSharer:(SHKSharer *)sharer {
+    
+    if (sharer.quiet) return;
+    [[SHKActivityIndicator currentIndicator]  showProgress:progress forSharer:sharer];
+}
 
 @end
