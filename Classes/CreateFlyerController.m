@@ -1264,7 +1264,10 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         
         [zoomButton addSubview:tileImageView];
         
-        [layerScrollView addSubview:zoomButton];
+        //1st layer is bg layer, thats why we set count > 1
+        if( [flyer allKeys].count > 1 ) {
+            [layerScrollView addSubview:zoomButton];
+        }
     }
     else if( [callFor isEqualToString:@"zoomStart"]) {
         //Remove Subviews of ScrollView
