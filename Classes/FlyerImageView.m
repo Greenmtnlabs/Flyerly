@@ -808,28 +808,27 @@ CGAffineTransform previuosTransform;
 #pragma mark - Tap to edit functionality
 
 /**
- * Edit view when tapped.
+ * Edit view when just tapped on layer(or on layerboxes from scrollview)
  */
 - (void)editLayer:(UIGestureRecognizer *)sender {
-   if( [self.delegate wmCanPerformAction:[[layers allKeysForObject:sender.view] objectAtIndex:0]] ) {
+    
+    if( !(self.zoomedIn) ) {
+        UIView *_view = sender.view;
         
-        if( !(self.zoomedIn) ){
-            UIView *_view = sender.view;
-            
-            // Here we send the first matching layer in Dictionary
-            // in to edit mode.
-            NSArray *keys = [layers allKeysForObject:_view];
-            
-            // Let the delegate know that this layer needs to go in to edit mode.
-            if ( keys.count > 0 ) {
+        // Here we send the first matching layer in Dictionary
+        // in to edit mode.
+        NSArray *keys = [layers allKeysForObject:_view];
+        
+        // Let the delegate know that this layer needs to go in to edit mode.
+        if ( keys.count > 0 ) { //edit layer's except video layer
+            if( [self.delegate wmCanPerformAction:[[layers allKeysForObject:sender.view] objectAtIndex:0]] ) {
                 NSString *key = [keys objectAtIndex:0];
                 [self.delegate sendLayerToEditMode:key];
-            }else {
-                [self.delegate toggleImageViewInteraction];
-               
             }
+        } else { //edit video layer
+              [self.delegate toggleImageViewInteraction];
         }
-    }
+    }//zoomIn
 }
 
 /**

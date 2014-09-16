@@ -2919,6 +2919,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         //Create Subview from dictionary
         [self.flyimgView renderLayer:[flyerPiecesKeys objectAtIndex:i] layerDictionary:dic];
     }
+    
 }
 
 
@@ -3220,11 +3221,19 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         
         // For Immediate Showing Delete button
         [self callStyle];
-    } else if ( [type isEqualToString:FLYER_LAYER_IMAGE] ) {
+    }
+    else if ( [type isEqualToString:FLYER_LAYER_WATER_MARK] ) {
+        if( [self wmCanPerformAction:currentLayer] ) {
+               // Call Photo Tab
+               [self setAddMoreLayerTabAction:addMorePhotoTabButton];
+        }
+    }
+    else if ( [type isEqualToString:FLYER_LAYER_IMAGE] ) {
         
         // Call Photo Tab
         [self setAddMoreLayerTabAction:addMorePhotoTabButton];
-    }else if ( [type isEqualToString:FLYER_LAYER_CLIP_ART] ) {
+    }
+    else if ( [type isEqualToString:FLYER_LAYER_CLIP_ART] ) {
         
         // Call Photo Tab
         [self setArtsTabAction:clipArtTabButton];
@@ -5839,8 +5848,12 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         }
     }
     
-    if( !canPerformAct && !isInAppPanelAlreadyOpen )
-    [self openInAppPanel];
+    if( !canPerformAct && !isInAppPanelAlreadyOpen ){
+        currentLayer = @"";
+        [self deSelectPreviousLayer];
+        
+        [self openInAppPanel];
+    }
     
     return canPerformAct;
 }
