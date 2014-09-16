@@ -5817,10 +5817,10 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 
 
 /**
- * canPerformAction
+ * wmCanPerformAction
  * When user perform action on watermark layer and has no complete design bundle then show in app panel
  */
-- (BOOL)canPerformAction:(NSString *)uid{
+- (BOOL)wmCanPerformAction:(NSString *)uid{
     BOOL canPerformAct = YES;
     BOOL isInAppPanelAlreadyOpen = NO;
     

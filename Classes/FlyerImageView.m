@@ -673,7 +673,7 @@ CGAffineTransform previuosTransform;
  * This method does drag and drop functionality on the layer.
  */
 - (void)layerMoved:(UIPanGestureRecognizer *)recognizer {
-    if( [self.delegate canPerformAction:[[layers allKeysForObject:recognizer.view] objectAtIndex:0]] ) {
+    if( [self.delegate wmCanPerformAction:[[layers allKeysForObject:recognizer.view] objectAtIndex:0]] ) {
 
         static CGAffineTransform currentTransform;
         
@@ -741,7 +741,7 @@ CGAffineTransform previuosTransform;
  */
 - (void)layerResized:(UIGestureRecognizer *)recognizer {
     
-    if( [self.delegate canPerformAction:[[layers allKeysForObject:recognizer.view] objectAtIndex:0]] ) {
+    if( [self.delegate wmCanPerformAction:[[layers allKeysForObject:recognizer.view] objectAtIndex:0]] ) {
         
         static CGAffineTransform currentTransform;
         static CGFloat fontScale = 0.0;
@@ -811,7 +811,7 @@ CGAffineTransform previuosTransform;
  * Edit view when tapped.
  */
 - (void)editLayer:(UIGestureRecognizer *)sender {
-   if( [self.delegate canPerformAction:[[layers allKeysForObject:sender.view] objectAtIndex:0]] ) {
+   if( [self.delegate wmCanPerformAction:[[layers allKeysForObject:sender.view] objectAtIndex:0]] ) {
         
         if( !(self.zoomedIn) ){
             UIView *_view = sender.view;
@@ -836,7 +836,7 @@ CGAffineTransform previuosTransform;
  * Rotate view on rotate Gesture.
  */
 -(void)handleRotateGesture:(UIRotationGestureRecognizer *)recognizer{
-   if( [self.delegate canPerformAction:[[layers allKeysForObject:recognizer.view] objectAtIndex:0]] ) {
+   if( [self.delegate wmCanPerformAction:[[layers allKeysForObject:recognizer.view] objectAtIndex:0]] ) {
 
         static CGAffineTransform origTr;
         
