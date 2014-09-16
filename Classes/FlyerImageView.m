@@ -390,7 +390,7 @@ CGAffineTransform previuosTransform;
     CustomLabel *lbl = [layers objectForKey:uid];
     
     //SetFrame
-    [lbl setFrame:CGRectMake([[detail valueForKey:@"x"] floatValue], [[detail valueForKey:@"y"] floatValue], [[detail valueForKey:@"width"] floatValue], [[detail valueForKey:@"height"] floatValue])];
+    //[lbl setFrame:CGRectMake([[detail valueForKey:@"x"] floatValue], [[detail valueForKey:@"y"] floatValue], [[detail valueForKey:@"width"] floatValue], [[detail valueForKey:@"height"] floatValue])];
     
     // Remember originalsize
     lbl.originalSize = lbl.frame.size;
@@ -400,6 +400,29 @@ CGAffineTransform previuosTransform;
     
     //set Label Font
     lbl.font = [UIFont fontWithName:[detail valueForKey:@"fontname"] size:[[detail valueForKey:@"fontsize"] floatValue]];
+    
+    // Make sure we are vertically aligned to the top and centerally aligned.
+    if( [[detail valueForKey:@"type"] isEqualToString:FLYER_LAYER_CLIP_ART] ){
+        lbl.textAlignment = NSTextAlignmentCenter;
+        [lbl setNumberOfLines:0];
+        [lbl sizeToFit];
+        
+        CGRect fr = lbl.frame;
+        fr.size.width = 150;
+        lbl.frame = fr;
+        
+    } else{
+        lbl.textAlignment = NSTextAlignmentCenter;//UITextAlignmentLeft;//
+        [lbl setNumberOfLines:0];
+        [lbl sizeToFit];
+        
+        // Resize the frame's width to actual
+        CGRect fr = lbl.frame;
+        fr.size.width = [[detail valueForKey:@"width"] floatValue];
+        //fr.origin.x = [[detail valueForKey:@"x"] floatValue];
+        //fr.origin.y = [[detail valueForKey:@"y"] floatValue];
+        lbl.frame = fr;
+    }
 }
 
 
