@@ -421,7 +421,7 @@ CGAffineTransform previuosTransform;
         fr.size.width = [[detail valueForKey:@"width"] floatValue];
         //fr.origin.x = [[detail valueForKey:@"x"] floatValue];
         //fr.origin.y = [[detail valueForKey:@"y"] floatValue];
-        lbl.frame = fr;
+        //lbl.frame = fr;
     }
 }
 
@@ -819,7 +819,7 @@ CGAffineTransform previuosTransform;
 
                 // Inform the delegate/controller that a layer has been resized,
                 // and it might want to do something with the contents.
-                [self.delegate layerResizedForKey:key :fontScale];
+                //[self.delegate layerResizedForKey:key :fontScale];
                     
                     fontScale = 0.0;
                 }
