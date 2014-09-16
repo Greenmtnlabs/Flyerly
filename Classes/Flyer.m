@@ -1006,7 +1006,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
             [[NSFileManager defaultManager] createDirectoryAtPath:usernamePath withIntermediateDirectories:YES attributes:nil error:&error];
         
     NSString *uniqueId = [Flyer getUniqueId];
-        NSString *flyerPath = [usernamePath stringByAppendingString:[NSString stringWithFormat:@"/%@", uniqueId]];
+    NSString *flyerPath = [usernamePath stringByAppendingString:[NSString stringWithFormat:@"/%@", uniqueId]];
         
     return flyerPath;
 
@@ -2094,7 +2094,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     int timestamp = [[NSDate date] timeIntervalSince1970];
     randomNumber = (randomNumber + 1) % 100;
     
-    NSString *uniqueId = [NSString stringWithFormat:@"%u%u", timestamp, randomNumber];
+    NSString *uniqueId = [NSString stringWithFormat:@"%u%02u", timestamp, randomNumber];
     return uniqueId;
 }
 
