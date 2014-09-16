@@ -1,11 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<dict>
-	<key>Template</key>
-	<dict>
-		<key>image</key>
-		<string>Template/template.png</string>
-	</dict>
-</dict>
+    <dict>
+        <key>141086204635</key>
+        <dict>
+            <key>a</key>
+            <string>1.00</string>
+            <key>b</key>
+            <string>0.00</string>
+            <key>c</key>
+            <string>0.00</string>
+            <key>d</key>
+            <string>1.00</string>
+            <key>height</key>
+            <string>20</string>
+            <key>image</key>
+            <string>Photo/watermark.png</string>
+            <key>imageTag</key>
+            <string></string>
+            <key>tx</key>
+            <string>248.00</string>
+            <key>ty</key>
+            <string>276.00</string>
+            <key>type</key>
+            <string>WATER_MARK</string>
+            <key>width</key>
+            <string>48</string>
+            <key>x</key>
+            <string>10</string>
+            <key>y</key>
+            <string>10</string>
+        </dict>
+        <key>Template</key>
+        <dict>
+            <key>FlyerType</key>
+            <string>image</string>
+            <key>Timestamp</key>
+            <string>141086204634</string>
+            <key>image</key>
+            <string>Template/template.png</string>
+            <key>imageTag</key>
+            <string>74</string>
+        </dict>
+    </dict>
 </plist>
