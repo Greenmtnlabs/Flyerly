@@ -3493,7 +3493,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 /**
  * A layer needs to be brought to the front.
  */
--(void)bringLayerToFront:(NSString *)oldUid new:(NSString *)uid {
+-(void)bringLayerToFrontCf:(NSString *)oldUid new:(NSString *)uid {
     
     // Should we update the current layer?
     if ( [currentLayer isEqualToString:oldUid] ) {
@@ -5888,6 +5888,4 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     return canPerformAct;
 }
-
-
 @end

@@ -664,7 +664,7 @@ CGAffineTransform previuosTransform;
             currentTransform = recognizer.view.transform;
             recognizer.view.layer.anchorPoint = CGPointMake( 0.5, 0.5 );
             
-            [self bringLayerToFrontFiv:recognizer];
+            [self bringLayerToFrontFiv:recognizer bypassIsFront:YES];
         }
         else if (recognizer.state == UIGestureRecognizerStateChanged) {
             
@@ -733,7 +733,8 @@ CGAffineTransform previuosTransform;
             
             currentTransform = recognizer.view.transform;
             recognizer.view.layer.anchorPoint = CGPointMake( 0.5, 0.5 );
-            
+
+            [self bringLayerToFrontFiv:(UIPanGestureRecognizer *)recognizer bypassIsFront:YES];
         }
         else if (recognizer.state == UIGestureRecognizerStateChanged) {
             
@@ -794,8 +795,8 @@ CGAffineTransform previuosTransform;
  * Edit view when just tapped on layer(or on layerboxes from scrollview)
  */
 - (void)editLayer:(UIGestureRecognizer *)sender {
-    
     if( !(self.zoomedIn) ) {
+        [self bringLayerToFrontFiv:(UIPanGestureRecognizer *)sender bypassIsFront:YES];
         UIView *_view = sender.view;
         
         // Here we send the first matching layer in Dictionary
@@ -819,13 +820,14 @@ CGAffineTransform previuosTransform;
  */
 -(void)handleRotateGesture:(UIRotationGestureRecognizer *)recognizer{
    if( [self.delegate wmCanPerformAction:[[layers allKeysForObject:recognizer.view] objectAtIndex:0]] ) {
-
+       
         static CGAffineTransform origTr;
         
         if (recognizer.state == UIGestureRecognizerStateBegan) {
             origTr = recognizer.view.transform;
             recognizer.view.layer.anchorPoint = CGPointMake( 0.5, 0.5 );
-            
+
+            [self bringLayerToFrontFiv:(UIPanGestureRecognizer *)recognizer bypassIsFront:YES];
         }
         else if (recognizer.state == UIGestureRecognizerStateChanged) {
             
@@ -859,7 +861,7 @@ CGAffineTransform previuosTransform;
         //[self editLayer:recognizer];
     }
 }
--(void) bringLayerToFrontFiv:(UIPanGestureRecognizer *)recognizer{
+-(void) bringLayerToFrontFiv:(UIPanGestureRecognizer *)recognizer bypassIsFront:(BOOL)bypassIsFront{
     // Get the key for this view.
     NSArray *keys = [layers allKeysForObject:recognizer.view];
     
@@ -878,7 +880,7 @@ CGAffineTransform previuosTransform;
         //[self.delegate frameChangedForLayer:key frame:fr];
         
         // See if this view is at the front
-        if ( [self.subviews lastObject] != recognizer.view ) {
+        if ( bypassIsFront || [self.subviews lastObject] != recognizer.view ) {
             [self bringSubviewToFront:recognizer.view];
             
             // When we bring a view to front, we need to change its key
@@ -889,7 +891,7 @@ CGAffineTransform previuosTransform;
             [layers removeObjectForKey:key];
             [layers setObject:l forKey:newKey];
             
-            [self.delegate bringLayerToFront:key new:newKey];
+            [self.delegate bringLayerToFrontCf:key new:newKey];
         }
     }
 }
