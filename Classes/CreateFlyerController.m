@@ -2892,8 +2892,13 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
  */
 -(UIImage *)getFlyerSnapShot {
     
+    CGSize size;
+    //size = self.flyimgView.frame.size;
+    size = CGSizeMake(310.00,310.00);
+    
+    NSLog(@"self.flyimgView= width = %f, height = %f", self.flyimgView.frame.size.width, self.flyimgView.frame.size.height);
     //Here we take Snap shot of Flyer
-    UIGraphicsBeginImageContextWithOptions( self.flyimgView.frame.size, NO, 0);
+    UIGraphicsBeginImageContextWithOptions( size, NO, 0);
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     [self.flyimgView.layer renderInContext:context];
@@ -2910,8 +2915,13 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
  */
 -(UIImage *)getVideoFlyerSnapShot {
     
+    CGSize size;
+    //size = self.playerView.frame.size;
+    size = CGSizeMake(310.00,310.00);
+    
+    NSLog(@"self.playerView= width = %f, height = %f", self.playerView.frame.size.width, self.playerView.frame.size.height);
     //Here we take Snap shot of Flyer
-    UIGraphicsBeginImageContextWithOptions( self.playerView.frame.size, NO, 0);
+    UIGraphicsBeginImageContextWithOptions( size, NO, 0);
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     [self.playerView.layer renderInContext:context];
@@ -5720,22 +5730,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     [self.playerView setAlpha:0];
     [self zoomElementsSetAlpha:1.0];
     
-
-    UIImage *flyerSnapshot  =   [self getFlyerSnapShot];
+    [self zoomUpdateScreenshot];
     
-    if ( [flyer isVideoFlyer] ){
-        //if video flyer then hide controlls
-        [self hidePlayerControlls:YES];
-        
-        UIImage *videoImg    = [flyer getVideoFlyerSnapShot];
-        zoomScreenShot.image = [flyer mergeImages:videoImg withImage:flyerSnapshot
-                                            width:flyerSnapshot.size.width height:flyerSnapshot.size.height];
-        zoomScreenShotForVideo.image = videoImg;
-        zoomScreenShotForVideo.frame = CGRectMake(0, 0, flyimgView.size.width*2, flyimgView.size.height*2);
-    }
-    else{
-        zoomScreenShot.image = flyerSnapshot;
-    }
     
     zoomScreenShot.userInteractionEnabled = YES;
     
@@ -5753,6 +5749,35 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     // set buttons in right nav
     [self zoomAddLayerButtonsIntoScrollView:@"zoomStart"];
 }
+
+-(void)zoomUpdateScreenshot{
+    UIImage *flyerSnapshot  =   [self getFlyerSnapShot];
+    
+    if ( [flyer isVideoFlyer] ){
+        //if video flyer then hide controlls
+        [self hidePlayerControlls:YES];
+        
+        UIImage *videoImg    = [flyer getVideoFlyerSnapShot];
+        zoomScreenShot.image = [flyer mergeImages:videoImg withImage:flyerSnapshot
+                                            width:flyerSnapshot.size.width height:flyerSnapshot.size.height];
+        zoomScreenShotForVideo.image = [self imageWithImage:videoImg scaledToSize:flyimgView.size];
+        zoomScreenShotForVideo.frame = CGRectMake(0, 0, flyimgView.size.width, flyimgView.size.height);
+    }
+    else{
+        zoomScreenShot.image = flyerSnapshot;
+    }    
+}
+-(UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
+    //UIGraphicsBeginImageContext(newSize);
+    // In next line, pass 0.0 to use the current device's pixel scaling factor (and thus account for Retina resolution).
+    // Pass 1.0 to force exact pixel size.
+    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+
 
 // Enable zooming, (for testing , when you tap on PHOTO TAB it will start, after start when you again tap on PHOT TAB, zooming will end )
 -(void)zoomEnd {

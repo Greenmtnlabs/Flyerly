@@ -695,6 +695,7 @@ CGAffineTransform previuosTransform;
                 //[self.delegate frameChangedForLayer:key frame:recognizer.view.frame];
             }
 
+            [self.delegate zoomUpdateScreenshot];
         }
         
         //[self editLayer:recognizer];
@@ -783,8 +784,10 @@ CGAffineTransform previuosTransform;
                 //[self.delegate layerResizedForKey:key :fontScale];
                     
                     fontScale = 0.0;
-                }
             }
+            
+            [self.delegate zoomUpdateScreenshot];
+        }
     }
 }
 
@@ -856,6 +859,8 @@ CGAffineTransform previuosTransform;
                 [self.delegate layerTransformedforKey:key :&newTransForm];
                 
             }
+
+            [self.delegate zoomUpdateScreenshot];
         }
 
     }

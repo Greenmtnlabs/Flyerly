@@ -27,6 +27,7 @@
 -(void)bringNotEditableLayersToFront;
 -(BOOL)wmCanPerformAction:(NSString *)uid;
 
+-(void)zoomUpdateScreenshot;
 
 
 @end
