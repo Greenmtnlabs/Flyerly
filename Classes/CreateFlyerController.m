@@ -5844,6 +5844,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     return self.flyimgView;
 }
 
+#pragma mark -  Watermark funcs
 //Tasks after create new flyer
 -(void)tasksOnCreateNewFlyer{
     //we have updated the flyer.pieces and flyer.txt, so whitebg and watermark layer work will be in default bundle.
