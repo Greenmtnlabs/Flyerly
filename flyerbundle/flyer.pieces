@@ -13,7 +13,7 @@
             <key>d</key>
             <string>1.00</string>
             <key>height</key>
-            <string>20</string>
+            <string>38</string>
             <key>isEditable</key>
             <string>NO</string>
             <key>image</key>
@@ -21,13 +21,13 @@
             <key>imageTag</key>
             <string></string>
             <key>tx</key>
-            <string>248.00</string>
+            <string>193.75</string>
             <key>ty</key>
-            <string>276.00</string>
+            <string>256.50</string>
             <key>type</key>
             <string>WATER_MARK</string>
             <key>width</key>
-            <string>48</string>
+            <string>102</string>
             <key>x</key>
             <string>10</string>
             <key>y</key>
