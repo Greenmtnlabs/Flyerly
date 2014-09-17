@@ -664,7 +664,7 @@ CGAffineTransform previuosTransform;
             currentTransform = recognizer.view.transform;
             recognizer.view.layer.anchorPoint = CGPointMake( 0.5, 0.5 );
             
-            [self bringLayerToFrontFiv:recognizer];
+            [self bringLayerToFrontFiv:recognizer.view bypassIsFront:YES updateSv:YES];
         }
         else if (recognizer.state == UIGestureRecognizerStateChanged) {
             
@@ -733,7 +733,8 @@ CGAffineTransform previuosTransform;
             
             currentTransform = recognizer.view.transform;
             recognizer.view.layer.anchorPoint = CGPointMake( 0.5, 0.5 );
-            
+
+            [self bringLayerToFrontFiv:recognizer.view bypassIsFront:YES updateSv:YES];
         }
         else if (recognizer.state == UIGestureRecognizerStateChanged) {
             
@@ -791,10 +792,10 @@ CGAffineTransform previuosTransform;
 #pragma mark - Tap to edit functionality
 
 /**
- * Edit view when just tapped on layer(or on layerboxes from scrollview)
+ * Edit view when just tapped on layer(in flyerimageView screen)
  */
 - (void)editLayer:(UIGestureRecognizer *)sender {
-    
+    [self bringLayerToFrontFiv:sender.view bypassIsFront:YES updateSv:YES];
     if( !(self.zoomedIn) ) {
         UIView *_view = sender.view;
         
@@ -819,13 +820,14 @@ CGAffineTransform previuosTransform;
  */
 -(void)handleRotateGesture:(UIRotationGestureRecognizer *)recognizer{
    if( [self.delegate wmCanPerformAction:[[layers allKeysForObject:recognizer.view] objectAtIndex:0]] ) {
-
+       
         static CGAffineTransform origTr;
         
         if (recognizer.state == UIGestureRecognizerStateBegan) {
             origTr = recognizer.view.transform;
             recognizer.view.layer.anchorPoint = CGPointMake( 0.5, 0.5 );
-            
+
+            [self bringLayerToFrontFiv:recognizer.view bypassIsFront:YES updateSv:YES];
         }
         else if (recognizer.state == UIGestureRecognizerStateChanged) {
             
@@ -855,31 +857,32 @@ CGAffineTransform previuosTransform;
                 
             }
         }
-        
-        //[self editLayer:recognizer];
+
     }
 }
--(void) bringLayerToFrontFiv:(UIPanGestureRecognizer *)recognizer{
+
+-(void)bringLayerToFrontFiv:(UIView *)view bypassIsFront:(BOOL)bypassIsFront updateSv:(BOOL)updateSv{
+    
     // Get the key for this view.
-    NSArray *keys = [layers allKeysForObject:recognizer.view];
+    NSArray *keys = [layers allKeysForObject:view];
     
     // Let the delegate know that we changed frame.
     for ( int i = 0; i < keys.count; i++ ) {
         NSString *key = [keys objectAtIndex:i];
         
-        CGRect fr = recognizer.view.frame;
+        CGRect fr = view.frame;
         
         // If this is a UILable, the size may have changed due to alignment issues.
         // so we send the default size.
-        if ( [recognizer.view.class isSubclassOfClass:[CustomLabel class]] ) {
-            fr.size = [(CustomLabel *)recognizer.view originalSize];
+        if ( [view.class isSubclassOfClass:[CustomLabel class]] ) {
+            fr.size = [(CustomLabel *)view originalSize];
         }
         
         //[self.delegate frameChangedForLayer:key frame:fr];
         
         // See if this view is at the front
-        if ( [self.subviews lastObject] != recognizer.view ) {
-            [self bringSubviewToFront:recognizer.view];
+        if ( bypassIsFront || [self.subviews lastObject] != view ) {
+            [self bringSubviewToFront:view];
             
             // When we bring a view to front, we need to change its key
             NSString *newKey = [Flyer getUniqueId];
@@ -889,7 +892,7 @@ CGAffineTransform previuosTransform;
             [layers removeObjectForKey:key];
             [layers setObject:l forKey:newKey];
             
-            [self.delegate bringLayerToFront:key new:newKey];
+            [self.delegate bringLayerToFrontCf:key new:newKey updateSv:updateSv];
         }
     }
 }

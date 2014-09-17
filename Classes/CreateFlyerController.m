@@ -1820,11 +1820,13 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     //Handling Select Unselect
     [self setSelectedItem:FLYER_LAYER_EMOTICON inView:emoticonsView ofLayerAttribute:LAYER_ATTRIBUTE_IMAGE];
+    
+    [self bringNotEditableLayersToFront:@"call from selectEmoticon"];
 }
 
 
 /*
- * Called when select icon
+ * Called when select icon(clipart)
  */
 -(void)selectIcon:(id)sender
 {
@@ -1899,6 +1901,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         }
         
     }// Loop
+    
+    [self bringNotEditableLayersToFront:@"call from selectIcon"];
 }
 /*
  * When any font border is selected
@@ -2559,6 +2563,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 	
     // Show the keyboard.
 	[lastTextView becomeFirstResponder];
+    
+    [self bringNotEditableLayersToFront:@"call from callWrite"];
 }
 
 
@@ -2752,8 +2758,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     [self callAddMoreLayers];
     [self logPhotoAddedEvent];
 
-    [self bringNotEditableLayersToFront];
-    
+    [self bringNotEditableLayersToFront:@"call from donePhoto"];
 }
 
 -(void)deSelectPreviousLayer {
@@ -2933,7 +2938,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         //Create Subview from dictionary
         [self.flyimgView renderLayer:[flyerPiecesKeys objectAtIndex:i] layerDictionary:dic];
     }
-    [self bringNotEditableLayersToFront];
+    [self bringNotEditableLayersToFront:@"call from renderFlyer"];
 }
 
 
@@ -3268,8 +3273,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 }
 
 /*
- * When any Layer Tap for Edit its Call
- * and Here we manage all Layers
+ * When any Layer Tap for Edit its Call (when just tapped on layerboxes from scrollview)
  */
 -(void)editLayer:(LayerTileButton *)editButton{
     
@@ -3280,9 +3284,9 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         
         [self editCurrentLayer];
     }
+    
+    [self bringThisLayerToFront:editButton.uid];
 }
-
-
 /*
  * Here we Delete Layer form Dictionary and Controller
  */
@@ -3490,10 +3494,14 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
 }
 
+#pragma mark - Bring layer to front
 /**
  * A layer needs to be brought to the front.
+ * @updateSv: YES means reinit layers scrollivew
+ * @oldUid: oldLayerid
+ * @uid: layerid
  */
--(void)bringLayerToFront:(NSString *)oldUid new:(NSString *)uid {
+-(void)bringLayerToFrontCf:(NSString *)oldUid new:(NSString *)uid updateSv:(BOOL)updateSv{
     
     // Should we update the current layer?
     if ( [currentLayer isEqualToString:oldUid] ) {
@@ -3503,17 +3511,23 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     [self.flyer updateLayerKey:oldUid newKey:uid];
     
     // Only update layers if we are not editing any layer.
-    if ( [currentLayer isEqualToString:@""] ) {
+    if ( [currentLayer isEqualToString:@""] && !(self.flyimgView.zoomedIn) && updateSv) {
         [self addAllLayersIntoScrollView];
     }
-    [self bringNotEditableLayersToFront];
+    [self bringNotEditableLayersToFront:@"call from bringLayerToFrontCf"];
+}
+
+-(void)bringThisLayerToFront:(NSString *)layerId{
+    [self.flyimgView bringLayerToFrontFiv:[self.flyimgView.layers objectForKey:layerId] bypassIsFront:YES updateSv:NO];
 }
 
 /**
   * Keep non editable layer on top
  */
--(void)bringNotEditableLayersToFront{
+-(void)bringNotEditableLayersToFront:(NSString *)callFrom{
 
+    NSLog(@"bringNotEditableLayersToFront callFrom = %@",callFrom);
+    
     NSArray *flyerPiecesKeys = [flyer allKeys];
     
     // we need to loop layers in revers order because first non editable layer should be on top
@@ -3522,11 +3536,13 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         i--;
         //Getting Layers Detail from Master Dictionary
         NSMutableDictionary *dic = [flyer getLayerFromMaster:[flyerPiecesKeys objectAtIndex:i]];
+
         if( [[dic objectForKey:@"isEditable"]  isEqual: @"NO"] ){
             UIView *view = [self.flyimgView.layers objectForKey:[flyerPiecesKeys objectAtIndex:i]];
             [self.flyimgView bringSubviewToFront:view];
         }
     }
+    
 }
 
 #pragma mark - Undo Implementation
@@ -3659,7 +3675,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     //End Animation
     
     currentLayer = @"";    
-    [self bringNotEditableLayersToFront];
+    [self bringNotEditableLayersToFront:@"call from callAddMoreLayers"];
 }
 
 
@@ -4681,7 +4697,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 		imgPickerFlag = IMAGEPICKER_PHOTO;
         [addMorePhotoTabButton setSelected:YES];
         
-        
+        [self bringNotEditableLayersToFront:@"call from setAddMoreLayerTabAction"];
 	}
 	else if(selectedButton == addArtsTabButton)
 	{
@@ -5888,6 +5904,4 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     return canPerformAct;
 }
-
-
 @end
