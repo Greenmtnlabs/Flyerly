@@ -19,13 +19,13 @@
 - (void)frameChangedForLayer:(NSString *)uid frame:(CGRect)frame;
 - (void)rotationAngleChangedForLayer:(NSString *)uid rotationAngle:(CGFloat)rotationAngle;
 - (void)previuosrotationAngle:(NSString *)uid;
-- (void)bringLayerToFrontCf:(NSString *)oldUid new:(NSString *)uid;
-- (void)bringNotEditableLayersToFront;
 - (void)sendLayerToEditMode:(NSString *)uid;
 - (void)toggleImageViewInteraction;
 - (void)addVideo :(NSString *)url;
 
-- (BOOL)wmCanPerformAction:(NSString *)uid;
+-(void)bringLayerToFrontCf:(NSString *)oldUid new:(NSString *)uid updateSv:(BOOL)updateSv;
+-(void)bringNotEditableLayersToFront;
+-(BOOL)wmCanPerformAction:(NSString *)uid;
 
 
 
@@ -61,6 +61,7 @@
 -(void)layerStoppedEditing:(NSString *)uid;
 -(void)removeAllLayers;
 
+- (void)bringLayerToFrontFiv:(UIView *)view bypassIsFront:(BOOL)bypassIsFront updateSv:(BOOL)updateSv;
 
 //-----
 @property (nonatomic, assign) BOOL heightIsSelected;
