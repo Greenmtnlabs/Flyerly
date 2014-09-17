@@ -29,6 +29,9 @@
                     <state key="normal" image="panel_close_button.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="dismissPrintViewPanel:" destination="-1" eventType="touchUpInside" id="Bdc-ut-bNF"/>
+                    </connections>
                 </button>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Free" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qEh-gE-Qy2">
                     <rect key="frame" x="65" y="127" width="35" height="20"/>

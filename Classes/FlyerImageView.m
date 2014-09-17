@@ -404,12 +404,12 @@ CGAffineTransform previuosTransform;
     // Make sure we are vertically aligned to the top and centerally aligned.
     if( [[detail valueForKey:@"type"] isEqualToString:FLYER_LAYER_CLIP_ART] ){
         lbl.textAlignment = NSTextAlignmentCenter;
-        [lbl setNumberOfLines:0];
+        //[lbl setNumberOfLines:0];
         [lbl sizeToFit];
         
         CGRect fr = lbl.frame;
         fr.size.width = 150;
-        lbl.frame = fr;
+        //lbl.frame = fr;
         
     } else{
         lbl.textAlignment = NSTextAlignmentCenter;//UITextAlignmentLeft;//
