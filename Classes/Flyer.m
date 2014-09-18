@@ -798,13 +798,13 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     imageDetailDictionary[@"imageTag"] = @"";
     imageDetailDictionary[@"x"] = @"10";
     imageDetailDictionary[@"y"] = @"10";
-    imageDetailDictionary[@"width"] = @"48";
-    imageDetailDictionary[@"height"] = @"20";
+    imageDetailDictionary[@"width"] = @"102";
+    imageDetailDictionary[@"height"] = @"38";
 
     
     imageDetailDictionary[@"type"] = FLYER_LAYER_WATER_MARK;
-    imageDetailDictionary[@"tx"] = @"248.00";
-    imageDetailDictionary[@"ty"] = @"276.00";
+    imageDetailDictionary[@"tx"] = @"193.75";
+    imageDetailDictionary[@"ty"] = @"256.50";
     imageDetailDictionary[@"a"] = @"1.00";
     imageDetailDictionary[@"b"] = @"0.00";
     imageDetailDictionary[@"c"] = @"0.00";
