@@ -2891,12 +2891,16 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
  *  Image
  */
 -(UIImage *)getFlyerSnapShot {
+    return [self getFlyerSnapShotWithSize:self.flyimgView.size];
+}
+-(UIImage *)getFlyerSnapShotWithSize:(CGSize)size{
     
-    CGSize size;
-    //size = self.flyimgView.frame.size;
-    size = CGSizeMake(310.00,310.00);
+    //NSLog(@"getFlyerSnapShot1 = width = %f, height = %f", self.flyimgView.frame.size.width, self.flyimgView.frame.size.height);
     
-    NSLog(@"self.flyimgView= width = %f, height = %f", self.flyimgView.frame.size.width, self.flyimgView.frame.size.height);
+    CGFloat alphaOfZoomScreenShotForVideo = zoomScreenShotForVideo.alpha;
+    [zoomScreenShotForVideo setAlpha:0.0];
+
+    
     //Here we take Snap shot of Flyer
     UIGraphicsBeginImageContextWithOptions( size, NO, 0);
     
@@ -2905,6 +2909,10 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     UIImage *snapshotImage = UIGraphicsGetImageFromCurrentImageContext();
     
     UIGraphicsEndImageContext();
+
+    [zoomScreenShotForVideo setAlpha:alphaOfZoomScreenShotForVideo];
+
+    //NSLog(@"getFlyerSnapShot2 = width = %f, height = %f", self.flyimgView.frame.size.width, self.flyimgView.frame.size.height);
     
     return snapshotImage;
 }
@@ -5751,23 +5759,37 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 }
 
 -(void)zoomUpdateScreenshot{
-    UIImage *flyerSnapshot  =   [self getFlyerSnapShot];
-    
-    if ( [flyer isVideoFlyer] ){
-        //if video flyer then hide controlls
-        [self hidePlayerControlls:YES];
+    if( self.flyimgView.zoomedIn ){
+        CGFloat width = flyerlyWidth/2;
+        CGFloat height = flyerlyHeight/2;
+        CGSize size = CGSizeMake(width,height);
         
-        UIImage *videoImg    = [flyer getVideoFlyerSnapShot];
-        zoomScreenShot.image = [flyer mergeImages:videoImg withImage:flyerSnapshot
-                                            width:flyerSnapshot.size.width height:flyerSnapshot.size.height];
-        zoomScreenShotForVideo.image = [self imageWithImage:videoImg scaledToSize:flyimgView.size];
-        zoomScreenShotForVideo.frame = CGRectMake(0, 0, flyimgView.size.width, flyimgView.size.height);
+        NSLog(@"zoomScreenShot = width = %f, height = %f", zoomScreenShot.size.width, zoomScreenShot.size.height);
+        
+        if ( [flyer isVideoFlyer] ){
+            [self hidePlayerControlls:YES];
+            
+            UIImage *flyerSnapshot = [self getFlyerSnapShotWithSize:size];
+            
+            UIImage *videoImg = [flyer getVideoFlyerSnapShot];
+            videoImg      = [self setSizeOfImage:videoImg size:size]; //set size of image for required size
+            
+
+            zoomScreenShot.image = [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.size.width height:zoomScreenShot.size.height];
+            
+            //Video first fram snap short for bg of flyer
+            zoomScreenShotForVideo.image = [self setSizeOfImage:videoImg size:size];
+            zoomScreenShotForVideo.frame = CGRectMake(0, 0, width, height);
+        }
+        else{
+            UIImage *flyerSnapshot = [self getFlyerSnapShotWithSize:size];
+            //flyerSnapshot = [self setSizeOfImage:flyerSnapshot size:CGSizeMake(130.00, 130.00)]; //set size of image for required size
+            
+            zoomScreenShot.image = flyerSnapshot;
+        }
     }
-    else{
-        zoomScreenShot.image = flyerSnapshot;
-    }    
 }
--(UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
+-(UIImage *)setSizeOfImage:(UIImage *)image size:(CGSize)newSize {
     //UIGraphicsBeginImageContext(newSize);
     // In next line, pass 0.0 to use the current device's pixel scaling factor (and thus account for Retina resolution).
     // Pass 1.0 to force exact pixel size.
@@ -5775,6 +5797,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
+    
+    //NSLog(@"new setSizeOfImage is= width = %f, height = %f", newImage.size.width, newImage.size.height);
     return newImage;
 }
 

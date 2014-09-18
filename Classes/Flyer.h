@@ -133,7 +133,7 @@
 -(UIImage *)getSharingVideoCover;
 
 -(UIImage *)getVideoFlyerSnapShot;
-- (UIImage*)mergeImages:(UIImage*)firstImage withImage:(UIImage*)secondImage width:(int)width height:(int)height;
+- (UIImage*)mergeImages:(UIImage*)firstImage withImage:(UIImage*)secondImage width:(CGFloat)width height:(CGFloat)height;
 
 
 
