@@ -240,7 +240,7 @@
 
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     
-    if ( self.isVideoFlyer )
+    if ( self.isVideoFlyer && _videoAllow)
         _mode.selected = NO;
     
     if ([[PFUser currentUser] sessionToken].length != 0) {
