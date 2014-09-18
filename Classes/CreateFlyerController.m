@@ -5721,17 +5721,26 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     [zoomScreenShot addGestureRecognizer:tapGesture];
     
     zoomScrollView.minimumZoomScale = FLYER_ZOOM_MIN_SCALE;
-	zoomScrollView.maximumZoomScale = FLYER_ZOOM_MAX_SCALE;
+	zoomScrollView.maximumZoomScale = FLYER_ZOOM_SET_SCALE;//FLYER_ZOOM_MAX_SCALE;
+    
+    // Gesture for resizing zommScrollView
+    UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(zoomScrollViewOnPinch:)];
+    [zoomScrollView addGestureRecognizer:pinchGesture];
     
     [zoomScrollView setContentSize:CGSizeMake(zoomScrollView.contentSize.width, zoomScrollView.frame.size.height)];
-    
 }
 
-// Enable zooming, (for testing , when you tap on PHOTO TAB it will start, after start when you again tap on PHOT TAB, zooming will end )
+//when ever user try to pin the main scrollview then reset it with it zomm value
+- (void)zoomScrollViewOnPinch:(UIGestureRecognizer *)sender {
+    [zoomScrollView setZoomScale:FLYER_ZOOM_SET_SCALE];
+}
+
+// When user tap on zomm glass layer
 - (IBAction)zoom:(id)sender {
     ( flyimgView.zoomedIn ) ? [self zoomEnd] : [self zoomStart];
 }
 
+//Start zoom
 -(void)zoomStart {
     [self addButtonsInRightNavigation:@"zoomStart"];
     flyimgView.zoomedIn = YES;
@@ -5739,7 +5748,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     [self zoomElementsSetAlpha:1.0];
     
     [self zoomUpdateScreenshot];
-    
     
     zoomScreenShot.userInteractionEnabled = YES;
     
