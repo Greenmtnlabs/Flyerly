@@ -1485,9 +1485,9 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 }
 
 /*
- * Here we Return Over generated Video Snap Shot For Main screen
+ * Here we return orignal video screenshot without merge
  */
--(UIImage *)getVideoFlyerSnapShot {
+-(UIImage *)getVideoWithoutMergeSnapshot {
     
     NSString* filePath = [self getOriginalVideoURL];
     return [self getSnapShotOfVideoPath:filePath];
