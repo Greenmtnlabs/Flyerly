@@ -158,7 +158,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 - (void)adViewDidReceiveAd:(GADBannerView *)adView {
     
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
-    if ( ![userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]){
+    if ( !(bannerAddClosed) && ![userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]){
         
         
         bannerAddView = [[UIView alloc] initWithFrame:CGRectMake(0, 473, 320, 50)];
@@ -166,7 +166,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         UIButton *bannerAdDismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(296, 5, 23, 23)];
         
         
-        [bannerAdDismissBtn addTarget:self action:@selector(dissmisBannerAdd) forControlEvents:UIControlEventTouchUpInside];
+        [bannerAdDismissBtn addTarget:self action:@selector(dissmisBannerAddOnTap) forControlEvents:UIControlEventTouchUpInside];
         
         
         [bannerAdDismissBtn setImage:[UIImage imageNamed:@"closeAd.png"] forState:UIControlStateNormal];
@@ -184,19 +184,25 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         return;
     }
     
-    [self dissmisBannerAdd];
+    [self dissmisBannerAdd:bannerAddClosed];
 }
-
+-(void)dissmisBannerAddOnTap{
+    [self dissmisBannerAdd:YES];
+}
 // Dismiss action for banner ad
--(void)dissmisBannerAdd {
+-(void)dissmisBannerAdd:(BOOL)valForBannerClose{
     [bannerAddView removeFromSuperview];
      bannerAddView = nil;
+
+     bannerAddClosed = valForBannerClose;
 }
 
 /**
  * View setup. This is done once per instance.
  */
 -(void)viewDidLoad{
+    
+    bannerAddClosed = NO;
     
     selectedAddMoreLayerTab = -1;
     
@@ -474,7 +480,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 
             } else {
                 
-                [self dissmisBannerAdd];
+                [self dissmisBannerAdd:NO];
                 
                 NSArray *flyerbackgroundsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Backgrounds-iPhone4" owner:self options:nil];
                 backgroundsView = [flyerbackgroundsViewArray objectAtIndex:0];
