@@ -446,27 +446,10 @@ CGAffineTransform previuosTransform;
     
     CustomLabel *lbl = [layers objectForKey:uid];
     
-    //SetFrame
-    //[lbl setFrame:CGRectMake([[detail valueForKey:@"x"] floatValue], [[detail valueForKey:@"y"] floatValue], [[detail valueForKey:@"width"] floatValue], [[detail valueForKey:@"height"] floatValue])];
-    
     //set Label Text
     [lbl setText:[detail valueForKey:@"text"]];
     
-    //set Label Font
-    //lbl.font = [UIFont fontWithName:[detail valueForKey:@"fontname"] size:[[detail valueForKey:@"fontsize"] floatValue]];
-    /*
-    if ([[detail valueForKey:@"textcolor"] isEqualToString:@"0.000000, 0.000000, 0.000000"]) {
-        if ([detail valueForKey:@"textWhitecolor"]  != nil) {
-            NSArray *rgb = [[detail valueForKey:@"textWhitecolor"]  componentsSeparatedByString:@","];
-            lbl.textColor = [UIColor colorWithWhite:[rgb[0] floatValue] alpha:[rgb[1] floatValue]];
-        }
-    }else{
-        NSArray *rgb = [[detail valueForKey:@"textcolor"] componentsSeparatedByString:@","];
-        
-        lbl.textColor = [UIColor colorWithRed:[rgb[0] floatValue] green:[rgb[1] floatValue] blue:[rgb[2] floatValue] alpha:1];
-        
-    }
-    */
+    
     if ([[detail valueForKey:@"textbordercolor"] isEqualToString:@"0.000000, 0.000000, 0.000000"]) {
         
         if ([detail valueForKey:@"textborderWhite"] != nil) {
@@ -481,10 +464,12 @@ CGAffineTransform previuosTransform;
         
         lbl.borderColor = [UIColor colorWithRed:[rgbBorder[0] floatValue] green:[rgbBorder[1] floatValue] blue:[rgbBorder[2] floatValue] alpha:1];
     }
+    
+    // This was required as border was not showing up immediately on iOS 7.0. it was ok on 7.1
+    [lbl setNeedsDisplay];
+    
     lbl.lineWidth = 2;
     
-    
-
 }
 
 /*
