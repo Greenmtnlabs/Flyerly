@@ -158,7 +158,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 - (void)adViewDidReceiveAd:(GADBannerView *)adView {
     
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
-    if ( !(bannerAddClosed) && ![userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]){
+    if ( bannerAddClosed == NO && ![userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]){
         
         
         bannerAddView = [[UIView alloc] initWithFrame:CGRectMake(0, 473, 320, 50)];
