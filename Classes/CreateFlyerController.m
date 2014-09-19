@@ -174,22 +174,23 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         [bannerAddView addSubview:bannerAdDismissBtn];
         //[bannerAdDismissBtn setImage:closeAd forState:UIControlStateNormal];
         
-        [self.view addSubview:bannerAddView];
         //Adding ad in custom view
         [bannerAddView addSubview:self.bannerAdd];
         //Making dismiss button visible,and bring it to front
         bannerAdDismissBtn.alpha = 1.0;
         [bannerAddView bringSubviewToFront:bannerAdDismissBtn];
+        
+        [self.view addSubview:bannerAddView];
         return;
     }
     
-    [bannerAddView removeFromSuperview];
+    [self dissmisBannerAdd];
 }
 
 // Dismiss action for banner ad
 -(void)dissmisBannerAdd {
-    
     [bannerAddView removeFromSuperview];
+     bannerAddView = nil;
 }
 
 /**
@@ -473,7 +474,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 
             } else {
                 
-                [self.bannerAddView removeFromSuperview];
+                [self dissmisBannerAdd];
                 
                 NSArray *flyerbackgroundsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Backgrounds-iPhone4" owner:self options:nil];
                 backgroundsView = [flyerbackgroundsViewArray objectAtIndex:0];
