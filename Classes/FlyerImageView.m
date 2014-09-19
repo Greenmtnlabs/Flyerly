@@ -406,9 +406,7 @@ CGAffineTransform previuosTransform;
     
     // Make sure we are vertically aligned to the top and centerally aligned.
     if( [[detail valueForKey:@"type"] isEqualToString:FLYER_LAYER_CLIP_ART] ){
-        lbl.textAlignment = NSTextAlignmentCenter;
-        //[lbl setNumberOfLines:0];
-        //[lbl sizeToFit];
+        
         
         // Keep existing layer's transform
         CGAffineTransform tempTransform = lbl.transform;
@@ -416,12 +414,15 @@ CGAffineTransform previuosTransform;
         // Now apply the identity transform
         lbl.transform = CGAffineTransformIdentity;
         
-        //[flyer setImageFrame:currentLayer :[self convertFrameFromLayerType:previousLayerType toLayerType:FLYER_LAYER_EMOTICON forClipart:nil]];
+        lbl.textAlignment = NSTextAlignmentCenter;
+        [lbl setNumberOfLines:0];
+        
         
         CGRect fr = lbl.frame;
         fr.size.width = 150;
         lbl.frame = fr;
 
+        [lbl sizeToFit];
         
         // Now apply the previous transform again
         lbl.transform = tempTransform;
@@ -429,9 +430,7 @@ CGAffineTransform previuosTransform;
 
         
     } else{
-        lbl.textAlignment = NSTextAlignmentCenter;//UITextAlignmentLeft;//
-        [lbl setNumberOfLines:0];
-        [lbl sizeToFit];
+       
         
         // Keep existing layer's transform
         CGAffineTransform tempTransform = lbl.transform;
@@ -439,14 +438,19 @@ CGAffineTransform previuosTransform;
         // Now apply the identity transform
         lbl.transform = CGAffineTransformIdentity;
         
+        lbl.textAlignment = NSTextAlignmentCenter;//UITextAlignmentLeft;//
+        [lbl setNumberOfLines:0];
         
         // Resize the frame's width to actual
         CGRect fr = lbl.frame;
         fr.size.width = [[detail valueForKey:@"width"] floatValue];
         //fr.origin.x = [[detail valueForKey:@"x"] floatValue];
         //fr.origin.y = [[detail valueForKey:@"y"] floatValue];
-        //lbl.frame = fr;
+        lbl.frame = fr;
         
+        [lbl sizeToFit];
+        
+        lbl.layer.anchorPoint = CGPointMake( 0.5, 0.5 );
         // Now apply the previous transform again
         lbl.transform = tempTransform;
     }
