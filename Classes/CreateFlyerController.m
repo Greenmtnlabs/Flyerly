@@ -1786,7 +1786,17 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         
         if ( ![previousLayerType isEqualToString:FLYER_LAYER_EMOTICON] ) {
             
+            // Keep existing layer's transform
+            CGAffineTransform tempTransform = layerView.transform;
+            
+            // Now apply the identity transform
+            layerView.transform = CGAffineTransformIdentity;
+            
             [flyer setImageFrame:currentLayer :[self convertFrameFromLayerType:previousLayerType toLayerType:FLYER_LAYER_EMOTICON forClipart:nil]];
+            
+            // Now apply the previous transform again
+            layerView.transform = tempTransform;
+            
         }else {
             
             // Get size of current clipart and set it for new clipart
@@ -1857,9 +1867,19 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         
         if ( ![previousLayerType isEqualToString:FLYER_LAYER_CLIP_ART] ) {
             
+            // Keep existing layer's transform
+            CGAffineTransform tempTransform = layerView.transform;
+            
+            // Now apply the identity transform
+            layerView.transform = CGAffineTransformIdentity;
+            
             CGRect frame = [self convertFrameFromLayerType:previousLayerType toLayerType:FLYER_LAYER_EMOTICON forClipart:view.currentTitle];
             [flyer setImageFrame:currentLayer:frame];
             fontType = [UIFont fontWithName:[clipartsArray[i] objectForKey:@"fontType"] size:frame.size.height];
+            
+            // Now apply the previous transform again
+            layerView.transform = tempTransform;
+            
             
         } else {
             
