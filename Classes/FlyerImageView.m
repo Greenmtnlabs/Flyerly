@@ -212,10 +212,7 @@ CGAffineTransform previuosTransform;
         [view addGestureRecognizer:panGesture];
         
         // We are only going to allow pinch gesture on non text/clipart layers
-        if( [layDic valueForKey:@"type"] != nil &&
-            ![[layDic valueForKey:@"type"] isEqualToString:FLYER_LAYER_CLIP_ART] &&
-            ![[layDic valueForKey:@"type"] isEqualToString:FLYER_LAYER_TEXT]) {
-            
+        if ( [layDic valueForKey:@"image"] ) {
             // Gesture for resizing layers
             UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(layerResized:)];
             [view addGestureRecognizer:pinchGesture];
@@ -409,25 +406,53 @@ CGAffineTransform previuosTransform;
     
     // Make sure we are vertically aligned to the top and centerally aligned.
     if( [[detail valueForKey:@"type"] isEqualToString:FLYER_LAYER_CLIP_ART] ){
+        
+        
+        // Keep existing layer's transform
+        CGAffineTransform tempTransform = lbl.transform;
+        
+        // Now apply the identity transform
+        lbl.transform = CGAffineTransformIdentity;
+        
         lbl.textAlignment = NSTextAlignmentCenter;
-        //[lbl setNumberOfLines:0];
-        //[lbl sizeToFit];
+        [lbl setNumberOfLines:0];
+        
         
         CGRect fr = lbl.frame;
         fr.size.width = 150;
-        //lbl.frame = fr;
+        lbl.frame = fr;
+
+        [lbl sizeToFit];
+        
+        // Now apply the previous transform again
+        lbl.transform = tempTransform;
+
+
         
     } else{
+       
+        
+        // Keep existing layer's transform
+        CGAffineTransform tempTransform = lbl.transform;
+        
+        // Now apply the identity transform
+        lbl.transform = CGAffineTransformIdentity;
+        
         lbl.textAlignment = NSTextAlignmentCenter;//UITextAlignmentLeft;//
         [lbl setNumberOfLines:0];
-        [lbl sizeToFit];
         
         // Resize the frame's width to actual
         CGRect fr = lbl.frame;
         fr.size.width = [[detail valueForKey:@"width"] floatValue];
         //fr.origin.x = [[detail valueForKey:@"x"] floatValue];
         //fr.origin.y = [[detail valueForKey:@"y"] floatValue];
-        //lbl.frame = fr;
+        lbl.frame = fr;
+        
+        [lbl sizeToFit];
+        
+        lbl.layer.anchorPoint = CGPointMake( 0.5, 0.5 );
+        // Now apply the previous transform again
+        lbl.transform = tempTransform;
     }
 }
 
