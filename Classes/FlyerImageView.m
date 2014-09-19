@@ -212,10 +212,7 @@ CGAffineTransform previuosTransform;
         [view addGestureRecognizer:panGesture];
         
         // We are only going to allow pinch gesture on non text/clipart layers
-        if( [layDic valueForKey:@"type"] != nil &&
-            ![[layDic valueForKey:@"type"] isEqualToString:FLYER_LAYER_CLIP_ART] &&
-            ![[layDic valueForKey:@"type"] isEqualToString:FLYER_LAYER_TEXT]) {
-            
+        if ( [layDic valueForKey:@"image"] ) {
             // Gesture for resizing layers
             UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(layerResized:)];
             [view addGestureRecognizer:pinchGesture];
@@ -413,14 +410,35 @@ CGAffineTransform previuosTransform;
         //[lbl setNumberOfLines:0];
         //[lbl sizeToFit];
         
+        // Keep existing layer's transform
+        CGAffineTransform tempTransform = lbl.transform;
+        
+        // Now apply the identity transform
+        lbl.transform = CGAffineTransformIdentity;
+        
+        //[flyer setImageFrame:currentLayer :[self convertFrameFromLayerType:previousLayerType toLayerType:FLYER_LAYER_EMOTICON forClipart:nil]];
+        
         CGRect fr = lbl.frame;
         fr.size.width = 150;
-        //lbl.frame = fr;
+        lbl.frame = fr;
+
+        
+        // Now apply the previous transform again
+        lbl.transform = tempTransform;
+
+
         
     } else{
         lbl.textAlignment = NSTextAlignmentCenter;//UITextAlignmentLeft;//
         [lbl setNumberOfLines:0];
         [lbl sizeToFit];
+        
+        // Keep existing layer's transform
+        CGAffineTransform tempTransform = lbl.transform;
+        
+        // Now apply the identity transform
+        lbl.transform = CGAffineTransformIdentity;
+        
         
         // Resize the frame's width to actual
         CGRect fr = lbl.frame;
@@ -428,6 +446,9 @@ CGAffineTransform previuosTransform;
         //fr.origin.x = [[detail valueForKey:@"x"] floatValue];
         //fr.origin.y = [[detail valueForKey:@"y"] floatValue];
         //lbl.frame = fr;
+        
+        // Now apply the previous transform again
+        lbl.transform = tempTransform;
     }
 }
 
