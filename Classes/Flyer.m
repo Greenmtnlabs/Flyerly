@@ -798,13 +798,13 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     imageDetailDictionary[@"imageTag"] = @"";
     imageDetailDictionary[@"x"] = @"10";
     imageDetailDictionary[@"y"] = @"10";
-    imageDetailDictionary[@"width"] = @"48";
-    imageDetailDictionary[@"height"] = @"20";
+    imageDetailDictionary[@"width"] = @"102";
+    imageDetailDictionary[@"height"] = @"38";
 
     
     imageDetailDictionary[@"type"] = FLYER_LAYER_WATER_MARK;
-    imageDetailDictionary[@"tx"] = @"248.00";
-    imageDetailDictionary[@"ty"] = @"276.00";
+    imageDetailDictionary[@"tx"] = @"193.75";
+    imageDetailDictionary[@"ty"] = @"256.50";
     imageDetailDictionary[@"a"] = @"1.00";
     imageDetailDictionary[@"b"] = @"0.00";
     imageDetailDictionary[@"c"] = @"0.00";
@@ -1485,9 +1485,9 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 }
 
 /*
- * Here we Return Over generated Video Snap Shot For Main screen
+ * Here we return orignal video screenshot without merge
  */
--(UIImage *)getVideoFlyerSnapShot {
+-(UIImage *)getVideoWithoutMergeSnapshot {
     
     NSString* filePath = [self getOriginalVideoURL];
     return [self getSnapShotOfVideoPath:filePath];
@@ -1516,18 +1516,18 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     } else {
         NSLog( @"Video cover not found" );
     }
-    NSLog(@"img= width = %f, height = %f", img.size.width, img.size.height);
+    NSLog(@"getSnapShotOfVideoPath = width = %f, height = %f", img.size.width, img.size.height);
 
     return img;
 }
 
-- (UIImage*)mergeImages:(UIImage*)firstImage withImage:(UIImage*)secondImage width:(int)width height:(int)height {
+- (UIImage*)mergeImages:(UIImage*)firstImage withImage:(UIImage*)secondImage width:(CGFloat)width height:(CGFloat)height {
     
     
         NSLog(@"firstImage= width = %f, height = %f", firstImage.size.width, firstImage.size.height);
         NSLog(@"secondImage= width = %f, height = %f", secondImage.size.width, secondImage.size.height);
     
-        UIImage *image = nil;
+        UIImage *mergedImg = nil;
         
         //CGSize newImageSize = CGSizeMake(MAX(firstImage.size.width, secondImage.size.width), MAX(firstImage.size.height, secondImage.size.height));
         CGSize newImageSize = CGSizeMake(width, height);
@@ -1542,10 +1542,11 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
         [secondImage drawInRect:CGRectMake(0, 0, width, height)];
     
     
-        image = UIGraphicsGetImageFromCurrentImageContext();
+        mergedImg = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
-        
-        return image;
+
+        NSLog(@"merged image= width = %f, height = %f", mergedImg.size.width, mergedImg.size.height);
+        return mergedImg;
     }
     
 /*

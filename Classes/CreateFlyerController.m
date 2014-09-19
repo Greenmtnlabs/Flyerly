@@ -2885,18 +2885,18 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     _videoLabel.alpha = 0;
 }
 
-/*
- * Here we Getting Snap Shot o f Flyer Image View Context
- * Return
- *  Image
- */
+#pragma mark - Screenshot funcs
+//Here we Getting Snap Shot of Flyer Image View Context
 -(UIImage *)getFlyerSnapShot {
+    return [self getFlyerSnapshotWithSize:self.flyimgView.size];
+}
+
+//Here we Getting Snap Shot of Flyer Image View Context for desired size
+-(UIImage *)getFlyerSnapshotWithSize:(CGSize)size{
     
-    CGSize size;
-    //size = self.flyimgView.frame.size;
-    size = CGSizeMake(310.00,310.00);
+    CGFloat alphaOfZoomScreenShotForVideo = zoomScreenShotForVideo.alpha;
+    [zoomScreenShotForVideo setAlpha:0.0];
     
-    NSLog(@"self.flyimgView= width = %f, height = %f", self.flyimgView.frame.size.width, self.flyimgView.frame.size.height);
     //Here we take Snap shot of Flyer
     UIGraphicsBeginImageContextWithOptions( size, NO, 0);
     
@@ -2905,34 +2905,25 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     UIImage *snapshotImage = UIGraphicsGetImageFromCurrentImageContext();
     
     UIGraphicsEndImageContext();
+
+    [zoomScreenShotForVideo setAlpha:alphaOfZoomScreenShotForVideo];
     
     return snapshotImage;
 }
-/*
- * Here we Getting Snap Shot o f Flyer Image View Context
- * Return
- *  Image
+
+/**
+ * Return video flyer screenshot
+ * @videoImg: can be nil, or any fram of video
  */
--(UIImage *)getVideoFlyerSnapShot {
+-(UIImage *)getVideoWithMergeSnapshot:(CGSize)size videoFramImg:(UIImage *)videoImg {
+
+    UIImage *flyerSnapshot = [self getFlyerSnapshotWithSize:size];
     
-    CGSize size;
-    //size = self.playerView.frame.size;
-    size = CGSizeMake(310.00,310.00);
+    videoImg = ( videoImg == nil ) ? [flyer getVideoWithoutMergeSnapshot] : videoImg;
+    videoImg = [self setSizeOfImage:videoImg size:size]; //set size of image for required size
     
-    NSLog(@"self.playerView= width = %f, height = %f", self.playerView.frame.size.width, self.playerView.frame.size.height);
-    //Here we take Snap shot of Flyer
-    UIGraphicsBeginImageContextWithOptions( size, NO, 0);
-    
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    [self.playerView.layer renderInContext:context];
-    UIImage *snapshotImage = UIGraphicsGetImageFromCurrentImageContext();
-    
-    UIGraphicsEndImageContext();
-    
-    return snapshotImage;
+return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.size.width height:zoomScreenShot.size.height];
 }
-
-
 
 /*
  * This resets the flyer image view by removing and readding all its subviews
@@ -5353,7 +5344,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     //show drawing layer menu
     [self setAddMoreLayerTabAction:drawingMenueButton];
 }
-#pragma mark -  Drawing tab's tap actions
+#pragma mark -  DRAWING FUNCTIONS
 /*
  * When we click on Drawing Tab
  * This Method Manage Drawing SubTabs
@@ -5533,9 +5524,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     }
 }
 
-
-
-#pragma mark - Move start on type=FLYER_LAYER_DRAWING (FLYER_LAYER_DRAWING=DrawingImgLayer)
 -(CGFloat) distanceBtwPoints:(CGPoint)p1 p2:(CGPoint)p2{
     CGFloat xDist = (p2.x - p1.x);
     CGFloat yDist = (p2.y - p1.y);
@@ -5713,17 +5701,26 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     [zoomScreenShot addGestureRecognizer:tapGesture];
     
     zoomScrollView.minimumZoomScale = FLYER_ZOOM_MIN_SCALE;
-	zoomScrollView.maximumZoomScale = FLYER_ZOOM_MAX_SCALE;
+	zoomScrollView.maximumZoomScale = FLYER_ZOOM_SET_SCALE;//FLYER_ZOOM_MAX_SCALE;
+    
+    // Gesture for resizing zommScrollView
+    UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(zoomScrollViewOnPinch:)];
+    [zoomScrollView addGestureRecognizer:pinchGesture];
     
     [zoomScrollView setContentSize:CGSizeMake(zoomScrollView.contentSize.width, zoomScrollView.frame.size.height)];
-    
 }
 
-// Enable zooming, (for testing , when you tap on PHOTO TAB it will start, after start when you again tap on PHOT TAB, zooming will end )
+//when ever user try to pin the main scrollview then reset it with it zomm value
+- (void)zoomScrollViewOnPinch:(UIGestureRecognizer *)sender {
+    [zoomScrollView setZoomScale:FLYER_ZOOM_SET_SCALE];
+}
+
+// When user tap on zomm glass layer
 - (IBAction)zoom:(id)sender {
     ( flyimgView.zoomedIn ) ? [self zoomEnd] : [self zoomStart];
 }
 
+//Start zoom
 -(void)zoomStart {
     [self addButtonsInRightNavigation:@"zoomStart"];
     flyimgView.zoomedIn = YES;
@@ -5731,7 +5728,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     [self zoomElementsSetAlpha:1.0];
     
     [self zoomUpdateScreenshot];
-    
     
     zoomScreenShot.userInteractionEnabled = YES;
     
@@ -5751,35 +5747,39 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 }
 
 -(void)zoomUpdateScreenshot{
-    UIImage *flyerSnapshot  =   [self getFlyerSnapShot];
-    
-    if ( [flyer isVideoFlyer] ){
-        //if video flyer then hide controlls
-        [self hidePlayerControlls:YES];
+    if( self.flyimgView.zoomedIn ){
+        CGFloat width = flyerlyWidth/2;
+        CGFloat height = flyerlyHeight/2;
+        CGSize size = CGSizeMake(width,height);
         
-        UIImage *videoImg    = [flyer getVideoFlyerSnapShot];
-        zoomScreenShot.image = [flyer mergeImages:videoImg withImage:flyerSnapshot
-                                            width:flyerSnapshot.size.width height:flyerSnapshot.size.height];
-        zoomScreenShotForVideo.image = [self imageWithImage:videoImg scaledToSize:flyimgView.size];
-        zoomScreenShotForVideo.frame = CGRectMake(0, 0, flyimgView.size.width, flyimgView.size.height);
+        if ( [flyer isVideoFlyer] ){
+            [self hidePlayerControlls:YES];
+            
+            UIImage *videoImg = [flyer getVideoWithoutMergeSnapshot]; //get a framof video
+            zoomScreenShot.image = [self getVideoWithMergeSnapshot:size videoFramImg:videoImg];
+
+            //Video first fram snap short for bg of flyer
+            zoomScreenShotForVideo.image = [self setSizeOfImage:videoImg size:size];
+            zoomScreenShotForVideo.frame = CGRectMake(0, 0, width, height);
+        }
+        else{
+            UIImage *flyerSnapshot = [self getFlyerSnapshotWithSize:size];
+            zoomScreenShot.image = flyerSnapshot;
+        }
     }
-    else{
-        zoomScreenShot.image = flyerSnapshot;
-    }    
 }
--(UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
-    //UIGraphicsBeginImageContext(newSize);
-    // In next line, pass 0.0 to use the current device's pixel scaling factor (and thus account for Retina resolution).
-    // Pass 1.0 to force exact pixel size.
+
+// reset size of image
+-(UIImage *)setSizeOfImage:(UIImage *)image size:(CGSize)newSize {
+
     UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
     [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
+    
     return newImage;
 }
 
-
-// Enable zooming, (for testing , when you tap on PHOTO TAB it will start, after start when you again tap on PHOT TAB, zooming will end )
 -(void)zoomEnd {
     
     flyimgView.zoomedIn   =   NO;
@@ -5897,11 +5897,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
 }
 
-
-/**
- * wmCanPerformAction
- * When user perform action on watermark layer and has no complete design bundle then show in app panel
- */
+//When user perform action on watermark layer and has no complete design bundle then show in app panel
 - (BOOL)wmCanPerformAction:(NSString *)uid{
     BOOL canPerformAct = YES;
     BOOL isInAppPanelAlreadyOpen = NO;
