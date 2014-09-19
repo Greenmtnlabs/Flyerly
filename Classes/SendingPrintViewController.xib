@@ -27,22 +27,32 @@
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="-64"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="text_box.png" id="Rhg-KO-QMp">
-                    <rect key="frame" x="16" y="230" width="280" height="35"/>
+                    <rect key="frame" x="16" y="268" width="280" height="35"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="-64"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="text_box.png" id="We4-OW-qck">
+                    <rect key="frame" x="18" y="230" width="280" height="35"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="-64"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="text_box.png" id="xbu-yT-gkV">
-                    <rect key="frame" x="16" y="306" width="280" height="35"/>
+                    <rect key="frame" x="16" y="384" width="280" height="35"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="-64"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="text_box.png" id="b0l-t8-JYW">
+                    <rect key="frame" x="16" y="345" width="280" height="35"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="-64"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="text_box.png" id="4wS-DN-3Sk">
-                    <rect key="frame" x="16" y="268" width="120" height="35"/>
+                    <rect key="frame" x="16" y="306" width="120" height="35"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="-64"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="text_box.png" id="Zi5-ry-DDz">
-                    <rect key="frame" x="165" y="268" width="130" height="35"/>
+                    <rect key="frame" x="165" y="306" width="130" height="35"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="64" maxX="0.0" maxY="-64"/>
                 </imageView>
@@ -64,25 +74,37 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Street Address" minimumFontSize="17" id="Kfp-a8-9Kr">
-                    <rect key="frame" x="20" y="230" width="280" height="35"/>
+                    <rect key="frame" x="20" y="268" width="280" height="35"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" minimumFontSize="17" id="Mko-OG-ddW">
+                    <rect key="frame" x="20" y="229" width="280" height="35"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="State" minimumFontSize="17" id="H5X-d5-vuf">
-                    <rect key="frame" x="20" y="268" width="115" height="35"/>
+                    <rect key="frame" x="20" y="306" width="115" height="35"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="City" minimumFontSize="17" id="Tvh-Qk-doC">
-                    <rect key="frame" x="168" y="268" width="128" height="35"/>
+                    <rect key="frame" x="168" y="306" width="128" height="35"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Country" minimumFontSize="17" id="8Wc-wF-dcr">
-                    <rect key="frame" x="20" y="306" width="140" height="35"/>
+                    <rect key="frame" x="20" y="384" width="140" height="35"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="ZIP" minimumFontSize="17" id="WRG-kB-eeS">
+                    <rect key="frame" x="20" y="345" width="140" height="35"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>

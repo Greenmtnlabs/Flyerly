@@ -405,7 +405,7 @@ CGAffineTransform previuosTransform;
     if( [[detail valueForKey:@"type"] isEqualToString:FLYER_LAYER_CLIP_ART] ){
         lbl.textAlignment = NSTextAlignmentCenter;
         //[lbl setNumberOfLines:0];
-        [lbl sizeToFit];
+        //[lbl sizeToFit];
         
         CGRect fr = lbl.frame;
         fr.size.width = 150;

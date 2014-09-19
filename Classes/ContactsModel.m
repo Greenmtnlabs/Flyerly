@@ -11,7 +11,7 @@
 
 @implementation ContactsModel
 
-@synthesize delegate,name,description,img,checkImageName,status,others,imageUrl;
+@synthesize delegate,name,description,img,checkImageName,status,others,imageUrl,zip;
 
 
 -(id)init{
