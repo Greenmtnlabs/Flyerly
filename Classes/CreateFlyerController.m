@@ -184,7 +184,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         return;
     }
     
-    [self dissmisBannerAdd:bannerAddClosed];
+    //[self dissmisBannerAdd:bannerAddClosed];
 }
 -(void)dissmisBannerAddOnTap{
     [self dissmisBannerAdd:YES];
