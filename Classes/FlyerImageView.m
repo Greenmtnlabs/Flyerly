@@ -211,9 +211,15 @@ CGAffineTransform previuosTransform;
         UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(layerMoved:)];
         [view addGestureRecognizer:panGesture];
         
-        // Gesture for resizing layers
-        UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(layerResized:)];
-        [view addGestureRecognizer:pinchGesture];
+        // We are only going to allow pinch gesture on non text/clipart layers
+        if( [layDic valueForKey:@"type"] != nil &&
+            ![[layDic valueForKey:@"type"] isEqualToString:FLYER_LAYER_CLIP_ART] &&
+            ![[layDic valueForKey:@"type"] isEqualToString:FLYER_LAYER_TEXT]) {
+            
+            // Gesture for resizing layers
+            UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(layerResized:)];
+            [view addGestureRecognizer:pinchGesture];
+        }
         
         // PinchGesture for editing layers
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editLayer:)];

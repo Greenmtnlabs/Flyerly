@@ -2716,6 +2716,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         return;
     }
     
+    [flyer setLayerType:currentLayer type:FLYER_LAYER_TEXT];
     
     //Set Text of Layer
     [flyer setFlyerText:currentLayer text:lastTextView.text ];
