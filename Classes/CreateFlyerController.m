@@ -848,8 +848,13 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 fontsView.size = CGSizeMake(curXLoc , heightValue + 5);
                 [layerScrollView setContentSize:CGSizeMake(fontsView.size.width , heightValue)];
             }
+            
+            //Handling Select Unselect
+            [self setSelectedItem:[flyer getLayerType:currentLayer] inView:fontsView ofLayerAttribute:LAYER_ATTRIBUTE_FONT];
         });
     });
+    
+    
 }
 
 
