@@ -330,10 +330,10 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         colorArray = [[NSArray  alloc] initWithObjects: [UIColor redColor],
                       [UIColor blueColor],
                       [UIColor greenColor],
-                      [UIColor blackColor],
+                      [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1],//[UIColor blackColor],
                       [UIColor colorWithRed:164.0/255.0 green:166.0/255.0 blue:131.0/255.0 alpha:1],
-                      [UIColor colorWithWhite:1.0f alpha:1.0f],
-                      [UIColor grayColor],
+                      [UIColor colorWithRed:255.0 green:255.0 blue:255.0 alpha:1],//[UIColor colorWithWhite:1.0f alpha:1.0f],
+                      [UIColor colorWithRed:128.0/255.0 green:128.0/255.0 blue:128.0/255.0 alpha:1],//[UIColor grayColor],
                       [UIColor magentaColor],
                       [UIColor yellowColor],
                       [UIColor colorWithRed:0.0/255.0 green:77.0/255.0 blue:92.0/255.0 alpha:1],
@@ -4032,7 +4032,11 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
             [labelToStore.textColor getWhite:&wht alpha:&alpha];
             twhite = [NSString stringWithFormat:@"%f, %f", wht, alpha];
             
-            //if ([textColor isEqualToString:tcolor] && [textWhiteColor isEqualToString:twhite] ) {
+            
+           // NSLog(@"%i=i, Ary-r,g,b,alpha(%f,%f,%f,%f) == Dic-r,g,b,alpha(%@,%@,%@,%f)",i,red,green,blue,alpha,RGB[0],RGB[1],RGB[2],1.0);
+            
+            
+            //if ([textColor isEqualToString:tcolor] && [textWhiteColor isEqualToString:twhite] )
             if ( [Flyer compareColor:buttonColor withColor:fontColor] ) {
                 
                 tag = [NSString stringWithFormat: @"%d", color.tag];
