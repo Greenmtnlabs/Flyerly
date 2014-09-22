@@ -160,22 +160,18 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     UserPurchases *userPurchases_ = [UserPurchases getInstance];
     if ( bannerAddClosed == NO && ![userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]){
         
-        
         self.bannerAddView = [[UIView alloc] initWithFrame:CGRectMake(0, 473, 320, 50)];
         
         UIButton *bannerAdDismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(296, 5, 23, 23)];
         
-        
         [bannerAdDismissBtn addTarget:self action:@selector(dissmisBannerAddOnTap) forControlEvents:UIControlEventTouchUpInside];
-        
         
         [bannerAdDismissBtn setImage:[UIImage imageNamed:@"closeAd.png"] forState:UIControlStateNormal];
         
         [self.bannerAddView addSubview:bannerAdDismissBtn];
-        //[bannerAdDismissBtn setImage:closeAd forState:UIControlStateNormal];
         
         //Adding ad in custom view
-        [self.bannerAddView addSubview:self.bannerAdd];
+        [self.bannerAddView addSubview:adView];
         //Making dismiss button visible,and bring it to front
         bannerAdDismissBtn.alpha = 1.0;
         [self.bannerAddView bringSubviewToFront:bannerAdDismissBtn];
