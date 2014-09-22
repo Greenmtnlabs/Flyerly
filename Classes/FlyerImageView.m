@@ -328,6 +328,8 @@ CGAffineTransform previuosTransform;
         
         CGAffineTransform ttransform = CGAffineTransformMake([[detail valueForKey:@"a"] floatValue], [[detail valueForKey:@"b"] floatValue], [[detail valueForKey:@"c"] floatValue], [[detail valueForKey:@"d"] floatValue], [[detail valueForKey:@"tx"] floatValue], [[detail valueForKey:@"ty"] floatValue]);
         
+        
+        lbl.layer.anchorPoint = CGPointMake( 0.5, 0.5 );
         lbl.transform = ttransform;
     }
 }
@@ -396,7 +398,7 @@ CGAffineTransform previuosTransform;
     //[lbl setFrame:CGRectMake([[detail valueForKey:@"x"] floatValue], [[detail valueForKey:@"y"] floatValue], [[detail valueForKey:@"width"] floatValue], [[detail valueForKey:@"height"] floatValue])];
     
     // Remember originalsize
-    lbl.originalSize = lbl.frame.size;
+    //lbl.originalSize = lbl.frame.size;
     
     //set Label Text
     [lbl setText:[detail valueForKey:@"text"]];
@@ -407,7 +409,6 @@ CGAffineTransform previuosTransform;
     // Make sure we are vertically aligned to the top and centerally aligned.
     if( [[detail valueForKey:@"type"] isEqualToString:FLYER_LAYER_CLIP_ART] ){
         
-        
         // Keep existing layer's transform
         CGAffineTransform tempTransform = lbl.transform;
         
@@ -416,8 +417,7 @@ CGAffineTransform previuosTransform;
         
         lbl.textAlignment = NSTextAlignmentCenter;
         [lbl setNumberOfLines:0];
-        
-        
+    
         CGRect fr = lbl.frame;
         fr.size.width = 150;
         lbl.frame = fr;
@@ -426,8 +426,6 @@ CGAffineTransform previuosTransform;
         
         // Now apply the previous transform again
         lbl.transform = tempTransform;
-
-
         
     } else{
        
@@ -552,16 +550,17 @@ CGAffineTransform previuosTransform;
     if( [[detail valueForKey:@"type"] isEqualToString:FLYER_LAYER_CLIP_ART] ){
         lbl.textAlignment = NSTextAlignmentCenter;
         [lbl setNumberOfLines:0];
-        [lbl sizeToFit];
+        
         
         CGRect fr = lbl.frame;
         fr.size.width = 150;
         lbl.frame = fr;
+        [lbl sizeToFit];
         
     } else{
        lbl.textAlignment = NSTextAlignmentCenter;//UITextAlignmentLeft;//
        [lbl setNumberOfLines:0];
-       [lbl sizeToFit];
+       
        
        // Resize the frame's width to actual
        CGRect fr = lbl.frame;
@@ -569,6 +568,7 @@ CGAffineTransform previuosTransform;
        //fr.origin.x = [[detail valueForKey:@"x"] floatValue];
        //fr.origin.y = [[detail valueForKey:@"y"] floatValue];
        lbl.frame = fr;
+        [lbl sizeToFit];
     }
 }
 

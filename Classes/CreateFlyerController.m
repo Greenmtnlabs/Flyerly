@@ -1878,6 +1878,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             [flyer setImageFrame:currentLayer:frame];
             fontType = [UIFont fontWithName:[clipartsArray[i] objectForKey:@"fontType"] size:frame.size.height];
             
+            [layerView sizeToFit];
+            
             // Now apply the previous transform again
             layerView.transform = tempTransform;
             
