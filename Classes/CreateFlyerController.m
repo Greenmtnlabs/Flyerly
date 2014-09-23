@@ -790,7 +790,10 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         NSArray *fontFamilies = [[NSArray alloc] initWithContentsOfFile:fontsViewResourcePath];
     
         for ( NSString *fontFamily in fontFamilies ) {
-            [ fontsArray addObject:[UIFont fontWithName:fontFamily size:27]];
+            UIFont *itemForFontArray = [UIFont fontWithName:fontFamily size:27];
+            
+            if( itemForFontArray != nil)
+            [fontsArray addObject:itemForFontArray];
         }
         
         dispatch_async( dispatch_get_main_queue(), ^{
