@@ -157,8 +157,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 // We've received an Banner ad successfully.
 - (void)adViewDidReceiveAd:(GADBannerView *)adView {
     
-    UserPurchases *userPurchases_ = [UserPurchases getInstance];
-    if ( bannerAddClosed == NO && ![userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]){
+    /*UserPurchases *userPurchases_ = [UserPurchases getInstance];
+    if ( bannerAddClosed == NO && ![userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]){*/
         
         self.bannerAddView = [[UIView alloc] initWithFrame:CGRectMake(0, 473, 320, 50)];
         
@@ -177,8 +177,9 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         [self.bannerAddView bringSubviewToFront:bannerAdDismissBtn];
         
         [self.view addSubview:self.bannerAddView];
+    
         return;
-    }
+    //}
     
     //[self dissmisBannerAdd:bannerAddClosed];
 }
@@ -3739,11 +3740,11 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
             
             UserPurchases *userPurchases_ = [UserPurchases getInstance];
             
-            if ( ![userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ) {
+            //if ( ![userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ) {
                 if ( [self.interstitialAdd isReady]  && ![self.interstitialAdd hasBeenUsed] ) {
                     [self.interstitialAdd presentFromRootViewController:self];
                 }
-            }
+            //}
         
             
             //Background Thread
@@ -3768,7 +3769,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
             if ( [[PFUser currentUser] sessionToken] ) {
                 UserPurchases *userPurchases_ = [UserPurchases getInstance];
                 
-                if ( ![userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ) {
+                //if ( ![userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ) {
                     if ( [self.interstitialAdd isReady]  && ![self.interstitialAdd hasBeenUsed] ) {
                         
                         dispatch_async( dispatch_get_main_queue(), ^{
@@ -3776,7 +3777,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
                         });
                     }
                     return;
-                }
+                //}
             }
             
             //Here we remove Borders from layer if user touch any layer

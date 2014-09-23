@@ -22,7 +22,27 @@
 #import "LobAddressModel.h"
 #import "Lob/LobRequest.h"
 #import "LobObjectModel.h"
+#import "LobSettingModel.h"
 #import "PayPalPaymentViewController.h"
+#import "LobProjectConstants.h"
+#import "AbstractBlockRequest.h"
+
+
+#import "LobRequest.h"
+#import "AFNetworking.h"
+#import "LobAddressModel.h"
+#import "LobBankAccountModel.h"
+#import "LobCheckModel.h"
+#import "LobCountryModel.h"
+#import "LobJobModel.h"
+#import "LobObjectModel.h"
+#import "LobPackagingModel.h"
+#import "LobPostcardModel.h"
+#import "LobServiceModel.h"
+#import "LobSettingModel.h"
+#import "LobStateModel.h"
+#import "LobVerifyModel.h"
+
 
 @interface SendingPrintViewController ()
 
@@ -88,6 +108,7 @@ static NSString *testApiKey = @"test_13fb536c2d9e23b0e25657d9f923261b03b";
 - (void)sendFlyer{
     
     [self sendrequestOnLob];
+    //[self exportFlyerToPDF];
     
     /*if ( [MFMailComposeViewController canSendMail] ) {
         
@@ -145,7 +166,7 @@ static NSString *testApiKey = @"test_13fb536c2d9e23b0e25657d9f923261b03b";
 /**
  * Prepare the flyer in PDF format.
  */
-- (NSMutableData *) exportFlyerToPDF {
+- (NSString *) exportFlyerToPDF {
     
     // Create the PDF context using the default page size of 612 x 792.
     CGSize pageSize = CGSizeMake( 1800, 1200);
@@ -181,8 +202,14 @@ static NSString *testApiKey = @"test_13fb536c2d9e23b0e25657d9f923261b03b";
     // Close the PDF context and write the contents out.
     UIGraphicsEndPDFContext();
     
-    return pdfData;
     
+    // Get path of current flyer background and remove it
+    NSString *currentpath  =   [[NSFileManager defaultManager] currentDirectoryPath];
+    NSString *destination = [NSString stringWithFormat:@"%@/PDF/Flyer.pdf",currentpath];
+    [pdfData writeToFile:destination atomically:YES];
+    
+    NSURL* URL = [NSURL fileURLWithPath:destination];
+    return destination;
 }
 
 
@@ -233,6 +260,83 @@ static NSString *testApiKey = @"test_13fb536c2d9e23b0e25657d9f923261b03b";
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+
+- (void)createObjectWithModel:(LobObjectModel* )object withResponse:(void(^) (LobObjectModel *object, NSError *error))response
+{
+    NSString *urlStr = [@"https://api.lob.com/v1" stringByAppendingString:@"/objects"];
+    //NSURL *url = [NSURL URLWithString:urlStr];
+    if(object.localFilePath)
+    {
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+        manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html",@"application/json",nil];
+        NSString *user = [testApiKey substringToIndex:testApiKey.length-1];
+        [manager.requestSerializer setAuthorizationHeaderFieldWithUsername:user password:@""];
+        NSMutableDictionary *paramDict = [NSMutableDictionary dictionary];
+        if(object.name) paramDict[@"name"] = object.name;
+        paramDict[@"setting_id"] = object.setting.settingId;
+        if(object.quantity) paramDict[@"quantity"] = object.quantity;
+        paramDict[@"double_sided"] = object.doubleSided ? @"1" : @"0";
+        
+        [manager POST:urlStr parameters:@{} constructingBodyWithBlock:^(id<AFMultipartFormData> formData)
+        {
+            [formData throttleBandwidthWithPacketSize:kAFUploadStream3GSuggestedPacketSize delay:kAFUploadStream3GSuggestedDelay];
+            NSData *data = [NSData dataWithContentsOfFile:object.file];
+            [formData appendPartWithFileData:data name:@"file" fileName:@"file" mimeType:@"application/pdf"];;
+            [formData appendPartWithFormData:[object.name dataUsingEncoding:NSUTF8StringEncoding] name:@"name"];
+            [formData appendPartWithFormData:[object.setting.settingId dataUsingEncoding:NSUTF8StringEncoding] name:@"setting_id"];
+        } success:^(AFHTTPRequestOperation *operation, id responseObject)
+        {
+            NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
+            requestClass.statusCode = operation.response.statusCode;
+            response([LobObjectModel initWithDictionary:responseDict],NULL);
+        } failure:^(AFHTTPRequestOperation *operation, id responseObject)
+        {
+            NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
+            requestClass.statusCode = operation.response.statusCode;
+            response([LobObjectModel initWithDictionary:responseDict],NULL);
+        }];
+        
+        
+    }
+    else
+    {
+        [self createModelWithURLStr:urlStr params:[object urlParamsForCreateRequest]
+                  withResponseClass:NSStringFromClass([LobObjectModel class])
+                        andResponse:^(LobAbstractModel *model, NSError *error)
+         {
+             response((LobObjectModel* )model,error);
+         }];
+    }
+}
+
+- (void)createModelWithURLStr:(NSString* )urlStr
+                       params:(NSString* )params
+            withResponseClass:(NSString* )classStr
+                  andResponse:(void(^) (LobAbstractModel *model, NSError *error))response
+{
+    [requestClass getUrlStr:urlStr withMethod:HTTP_Post withEdit:^(NSMutableURLRequest *request)
+    {
+        [self addAuthorizationToRequest:request];
+        [request setHTTPBody:[params dataUsingEncoding:NSUTF8StringEncoding]];
+    }
+    andResponse:^(NSData *data, NSError *error)
+    {
+        NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+        response([NSClassFromString(@"LobErrorModel") initWithDictionary:responseDict],error);
+    }];
+}
+
+-(void)addAuthorizationToRequest:(NSMutableURLRequest * )request
+{
+    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    NSData *authData = [testApiKey dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *authValue = [NSString stringWithFormat:@"Basic %@",[AbstractBlockRequest base64forData:authData]];
+    [request addValue:authValue forHTTPHeaderField:@"Authorization"];
+}
+
+
 /**
  * Sending the request on Lob,with total coantacts details and flyer as PDF file that needs to printed
  */
@@ -279,14 +383,41 @@ static NSString *testApiKey = @"test_13fb536c2d9e23b0e25657d9f923261b03b";
     
     request = [[LobRequest alloc] initWithAPIKey:testApiKey];
     
-    [request createPostcardWithModel:postcardModel
+    /*[request createPostcardWithModel:postcardModel
                         withResponse:^(LobPostcardModel *postcard, NSError *error)
      {
          NSLog(@"*** Postcard Create Response ***");
          
          NSLog(@"%u", request.statusCode);
          
+     }];*/
+    
+    LobSettingModel *lobSettingObj = [[LobSettingModel alloc] initSettingWithId:@"200"];
+                            
+    LobObjectModel *objModal = [[LobObjectModel alloc] initObjectName:@"Flyer" quantity:@"1" doubleSided:NO fullBleed:NO setting:lobSettingObj file:[self exportFlyerToPDF] localFilePath:YES];
+    
+    NSDictionary *objectDict = @{@"name" : @"Go Blue",
+                                 @"setting" : @{@"id" : @"200"},
+                                 @"file" : [self exportFlyerToPDF]};
+    
+    LobObjectModel *objectModel = [LobObjectModel initWithDictionary:objectDict];
+    objectModel.localFilePath = YES;
+    
+    [request createObjectWithModel:objectModel
+                      withResponse:^(LobObjectModel *object, NSError *error)
+     {
+         NSLog(@"*** Object Create Local Response ***");
+         NSLog(@"%u", request.statusCode);
+
+         //XCTAssertEqual(request.statusCode, 200, @"");
+         //[self verifyObject:object testOrigin:@"Object create local"];
+         
+        // dispatch_semaphore_signal(sem);
      }];
+    
+    
+    
+    return;
     
     NSString *urlString = @"https://api.lob.com/v1/postcards";
     
@@ -310,12 +441,12 @@ static NSString *testApiKey = @"test_13fb536c2d9e23b0e25657d9f923261b03b";
     
     //NSDictionary *pdfDictionary = (NSDictionary*) [NSKeyedUnarchiver unarchiveObjectWithData:[self exportFlyerToPDF]];
     
-    NSDictionary *objectDict = @{@"name" : @"Go Blue",
+    NSDictionary *objectDict_ = @{@"name" : @"Go Blue",
                                  @"setting" : @{@"id" : @"100"},
                                  @"file" : [self exportFlyerToPDF]};
     
-    LobObjectModel *objectModel = [LobObjectModel initWithDictionary:objectDict];
-    objectModel.localFilePath = YES;
+    LobObjectModel *objectModel_ = [LobObjectModel initWithDictionary:objectDict_];
+    objectModel_.localFilePath = YES;
     
     
     NSMutableDictionary *sendingToAddress = [[NSMutableDictionary alloc] init];

@@ -86,11 +86,11 @@ BOOL adLoaded = false;
     [createFlyer setShouldShowAdd:^(NSString *flyPath) {
         dispatch_async( dispatch_get_main_queue(), ^{
             UserPurchases *userPurchases_ = [UserPurchases getInstance];
-            if ( ![userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]){
+            //if ( ![userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]){
                 if ([weakSelf.interstitial isReady] && ![weakSelf.interstitial hasBeenUsed]){
                     [weakSelf.interstitial presentFromRootViewController:weakSelf];
                 }
-            }
+            //}
         });
     }];
     
@@ -511,13 +511,13 @@ BOOL adLoaded = false;
         dispatch_async( dispatch_get_main_queue(), ^{
             
             UserPurchases *userPurchases_ = [UserPurchases getInstance];
-            if ( ![userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]){
+            //if ( ![userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]){
                 
                 if ([weakSelf.interstitial isReady]  && ![weakSelf.interstitial hasBeenUsed]){
                     [weakSelf.interstitial presentFromRootViewController:weakSelf];
                 }
                 
-            }
+            //}
         });
         
     }];

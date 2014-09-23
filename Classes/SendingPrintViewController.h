@@ -16,8 +16,13 @@
 #import "ParentViewController.h"
 #import "Flyer.h"
 #import <AFNetworking/AFNetworking.h>
+#import "AbstractBlockRequest.h"
 
-@interface SendingPrintViewController : UIViewController < MFMailComposeViewControllerDelegate >
+@class AbstractBlockRequest;
+@interface SendingPrintViewController : UIViewController< MFMailComposeViewControllerDelegate> {
+    
+    AbstractBlockRequest *requestClass;
+}
 
 @property (nonatomic,strong) Flyer *flyer;
 @property(nonatomic,strong) NSMutableArray *contactsArray;
