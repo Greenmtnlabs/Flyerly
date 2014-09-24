@@ -7,8 +7,6 @@
 
 By [RIKSOF](https://github.com/RIKSOF).
 
-[![Code Climate](Code Climate Badge IMG URL goes here)](Code Climate URL goes here)
-
 ## Description
 **Untechable** folder for new project
 
