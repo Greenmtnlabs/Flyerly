@@ -19,7 +19,8 @@
     self.window.backgroundColor = [UIColor whiteColor];
     
     AddUntechableController *mainViewController = [[AddUntechableController alloc] initWithNibName:@"AddUntechableController" bundle:nil];
-    self.window.rootViewController = mainViewController;
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
+    self.window.rootViewController = navigationController;
     
     
     [self.window makeKeyAndVisible];

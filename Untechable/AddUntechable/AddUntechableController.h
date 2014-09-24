@@ -9,5 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface AddUntechableController : UIViewController
-
+{
+    //Navigation buttons
+    UILabel *titleLabel;
+    UIButton *helpButton;
+    UIButton *backButton;
+    UIButton *nextButton;
+}
 @end
