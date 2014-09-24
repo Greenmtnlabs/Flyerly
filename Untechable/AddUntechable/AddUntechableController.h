@@ -10,10 +10,13 @@
 
 @interface AddUntechableController : UIViewController
 {
-    //Navigation buttons
-    UILabel *titleLabel;
-    UIButton *helpButton;
-    UIButton *backButton;
-    UIButton *nextButton;
+    
 }
+
+@property (strong, nonatomic) IBOutlet UIButton *btnStartTime;
+@property (strong, nonatomic) IBOutlet UIButton *btnEndTime;
+@property (strong, nonatomic) IBOutlet UIDatePicker *picker;
+
+@property (nonatomic, strong) NSDateFormatter *dateFormatter;
+
 @end

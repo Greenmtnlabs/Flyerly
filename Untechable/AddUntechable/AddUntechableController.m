@@ -8,12 +8,28 @@
 
 #import "AddUntechableController.h"
 
+
 @interface AddUntechableController ()
 
 @end
 
+//Class level vars ___start
+    //Navigation buttons
+    UILabel *titleLabel;
+    UIButton *helpButton;
+    UIButton *backButton;
+    UIButton *nextButton;
+
+    NSString *pickerOpenFor = @"";
+
+//Class level vars ___end
+
 @implementation AddUntechableController
 
+@synthesize btnEndTime,btnStartTime,picker;
+
+
+#pragma mark -  Default iOs functions
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -31,6 +47,25 @@
     [self setNavigationDefaults];
     
     [self setNavigation:@"viewDidLoad"];
+    
+    
+	self.dateFormatter = [[NSDateFormatter alloc] init];
+    [self.dateFormatter setDateStyle:NSDateFormatterShortStyle];    // show short-style date format
+    [self.dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
+
+    
+    NSDate *now = [NSDate date];
+	NSString * date = [self.dateFormatter stringFromDate:now];
+    [btnStartTime setTitle:date forState:UIControlStateNormal];
+    [btnEndTime setTitle:date forState:UIControlStateNormal];
+    
+    picker.alpha = 0.0;
+    picker.datePickerMode = UIDatePickerModeDateAndTime;
+    picker.minimumDate = now;
+    [picker setDate:now animated:YES];
+    
+    pickerOpenFor = @"";
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -47,7 +82,8 @@
     [super viewDidAppear:animated];
 
 }
-
+// ________________________     Custom functions    ___________________________
+#pragma mark -  Navigation functions
 
 - (void)setNavigationDefaults{
     //[[self navigationController] setNavigationBarHidden:YES animated:YES]; //hide navigation bar
@@ -59,10 +95,11 @@
 -(void)setNavigation:(NSString *)callFrom
 {
     if([callFrom isEqualToString:@"viewDidLoad"])
-    {
+    {   /*
        // Left Navigation ________________________________________________________________________________________________________
         backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
         [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+         */
         /*
         //[backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
         // HERE WE SET BACK BUTTON IMAGE AS REQUIRED
@@ -76,7 +113,8 @@
             //[backButton setBackgroundImage:[UIImage imageNamed:@"home_button"] forState:UIControlStateNormal];
         }
         */
-
+        
+        /*
         [backButton setTitle:@"Back" forState:normal];
         
         backButton.showsTouchWhenHighlighted = YES;
@@ -90,7 +128,7 @@
         UIBarButtonItem *leftBarHelpButton = [[UIBarButtonItem alloc] initWithCustomView:helpButton];
         NSMutableArray  *leftNavItems  = [NSMutableArray arrayWithObjects:backBarButton,leftBarHelpButton,nil];
         [self.navigationItem setLeftBarButtonItems:leftNavItems]; //Left button ___________
-        
+        */
         
         
         
@@ -108,7 +146,7 @@
 
         // Right Navigation ________________________________________________________________________________________________________
         
-        
+        /*
         nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
         //[nextButton addTarget:self action:@selector(next) forControlEvents:UIControlEventTouchUpInside];
         //[nextButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
@@ -120,8 +158,41 @@
         NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton,nil];
         
         [self.navigationItem setRightBarButtonItems:rightNavItems];//Right button ___________
+        */
         
     }
 }
+
+#pragma mark -  Select Date
+-(IBAction)changeDate:(id)sender
+{
+    picker.alpha = 1.0;
+    
+    UIButton *clickedBtn = sender;
+    if( clickedBtn == btnStartTime ){
+        pickerOpenFor = @"btnStartTime";
+    }
+    else if( clickedBtn == btnEndTime ){
+        pickerOpenFor = @"btnEndTime";
+    }
+    
+}
+
+-(IBAction)onDateChange:(id)sender {
+    picker.alpha = 0.0;
+	NSString * date = [self.dateFormatter stringFromDate:[picker date]];
+    
+    NSLog(@"onDateChange: %@",date);
+    
+	if( [pickerOpenFor isEqualToString:@"btnStartTime"] ){
+      [btnStartTime setTitle:date forState:UIControlStateNormal];
+        
+    }
+    else if( [pickerOpenFor isEqualToString:@"btnEndTime"] ){
+      [btnEndTime setTitle:date forState:UIControlStateNormal];
+    }
+}
+
+
 
 @end
