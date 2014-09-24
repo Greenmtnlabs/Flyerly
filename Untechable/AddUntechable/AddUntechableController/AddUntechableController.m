@@ -2,15 +2,18 @@
 //  AddUntechableController.m
 //  Untechable
 //
-//  Created by Muhammad Raheel on 24/09/2014.
+//  Created by Abdul Rauf on 23/sep/2014
 //  Copyright (c) 2014 RIKSOF (Pvt) Ltd. All rights reserved.
 //
 
 #import "AddUntechableController.h"
+#import "PhoneSetupController.h"
 
 
-@interface AddUntechableController ()
 
+@interface AddUntechableController (){
+    PhoneSetupController *phoneSetup;
+}
 @end
 
 //Class level vars ___start
@@ -19,12 +22,14 @@
     UIButton *helpButton;
     UIButton *backButton;
     UIButton *nextButton;
+    UIColor *defBlueColor;
 
     NSString *pickerOpenFor = @"";
 
 //Class level vars ___end
 
 @implementation AddUntechableController
+
 
 @synthesize btnEndTime,btnStartTime,picker;
 
@@ -44,10 +49,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 
+    defBlueColor =  [UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0];
+    
     [self setNavigationDefaults];
     
     [self setNavigation:@"viewDidLoad"];
     
+    [self setDefaultModel];
     
 	self.dateFormatter = [[NSDateFormatter alloc] init];
     [self.dateFormatter setDateStyle:NSDateFormatterShortStyle];    // show short-style date format
@@ -55,14 +63,14 @@
 
     
     NSDate *now = [NSDate date];
-	NSString * date = [self.dateFormatter stringFromDate:now];
-    [btnStartTime setTitle:date forState:UIControlStateNormal];
-    [btnEndTime setTitle:date forState:UIControlStateNormal];
+	NSString *date = [self.dateFormatter stringFromDate:now];
+    [self.btnStartTime setTitle:date forState:UIControlStateNormal];
+    [self.btnEndTime setTitle:date forState:UIControlStateNormal];
     
-    picker.alpha = 0.0;
-    picker.datePickerMode = UIDatePickerModeDateAndTime;
-    picker.minimumDate = now;
-    [picker setDate:now animated:YES];
+    self.picker.alpha = 0.0;
+    self.picker.datePickerMode = UIDatePickerModeDateAndTime;
+    self.picker.minimumDate = now;
+    [self.picker setDate:now animated:YES];
     
     pickerOpenFor = @"";
 
@@ -137,7 +145,7 @@
         titleLabel.backgroundColor = [UIColor clearColor];
         //titleLabel.font = [UIFont fontWithName:TITLE_FONT size:18];
         titleLabel.textAlignment = NSTextAlignmentCenter;
-        titleLabel.textColor = [UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0];
+        titleLabel.textColor = defBlueColor;
         titleLabel.text = @"Untechable";
         
         self.navigationItem.titleView = titleLabel; //Center title ___________
@@ -146,53 +154,81 @@
 
         // Right Navigation ________________________________________________________________________________________________________
         
-        /*
+        
         nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-        //[nextButton addTarget:self action:@selector(next) forControlEvents:UIControlEventTouchUpInside];
+        [nextButton addTarget:self action:@selector(onNext) forControlEvents:UIControlEventTouchUpInside];
         //[nextButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
-        [nextButton setTitle:@"next" forState:normal];
-        [nextButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-        [nextButton setTitleColor:[UIColor greenColor] forState:UIControlStateHighlighted];
+        [nextButton setTitle:@"Next" forState:normal];
+        [nextButton setTitleColor:defBlueColor forState:UIControlStateNormal];
+
         nextButton.showsTouchWhenHighlighted = YES;
         UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
         NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton,nil];
         
         [self.navigationItem setRightBarButtonItems:rightNavItems];//Right button ___________
-        */
+        
         
     }
+}
+
+-(void)onNext{
+    phoneSetup = [[PhoneSetupController alloc]initWithNibName:@"PhoneSetupController" bundle:nil];
+    phoneSetup.untechable = untechable;
+    [self.navigationController pushViewController:phoneSetup animated:YES];
 }
 
 #pragma mark -  Select Date
+//when user tap on dates
 -(IBAction)changeDate:(id)sender
 {
-    picker.alpha = 1.0;
+    self.picker.alpha = 1.0;
     
     UIButton *clickedBtn = sender;
-    if( clickedBtn == btnStartTime ){
-        pickerOpenFor = @"btnStartTime";
+    if( clickedBtn == self.btnStartTime ){
+        pickerOpenFor = @"self.btnStartTime";
     }
-    else if( clickedBtn == btnEndTime ){
-        pickerOpenFor = @"btnEndTime";
+    else if( clickedBtn == self.btnEndTime ){
+        pickerOpenFor = @"self.btnEndTime";
     }
     
 }
 
+//when user select the date from datepicker
 -(IBAction)onDateChange:(id)sender {
-    picker.alpha = 0.0;
+    self.picker.alpha = 0.0;
 	NSString * date = [self.dateFormatter stringFromDate:[picker date]];
+    untechable.test1 = @"test1dfafs";
+    NSLog(@" untechable.test1 == %@",untechable.test1);
     
     NSLog(@"onDateChange: %@",date);
     
-	if( [pickerOpenFor isEqualToString:@"btnStartTime"] ){
-      [btnStartTime setTitle:date forState:UIControlStateNormal];
+	if( [pickerOpenFor isEqualToString:@"self.btnStartTime"] ){
+      untechable.startDate = date;
+        
+      [self.btnStartTime setTitle:date forState:UIControlStateNormal];
         
     }
-    else if( [pickerOpenFor isEqualToString:@"btnEndTime"] ){
-      [btnEndTime setTitle:date forState:UIControlStateNormal];
+    else if( [pickerOpenFor isEqualToString:@"self.btnEndTime"] ){
+      untechable.endDate = date;
+      [self.btnEndTime setTitle:date forState:UIControlStateNormal];
     }
+    
+
 }
 
+#pragma mark -  Model funcs
 
+// set default vaules in model
+-(void)setDefaultModel{
+    NSDate *now = [NSDate date];
+	NSString *date = [self.dateFormatter stringFromDate:now];
+    
+    untechable.startDate = date;
+    untechable.endDate = date;
+    
+    untechable.forwardingNumber = @"";
+    untechable.emergencyNumbers = @"";
+    untechable.emergencyContacts = [[NSMutableDictionary alloc] init];
+}
 
 @end

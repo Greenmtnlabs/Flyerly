@@ -19,8 +19,11 @@
 		36561D8719D2C8A40069D897 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36561D6F19D2C8A40069D897 /* UIKit.framework */; };
 		36561D8F19D2C8A40069D897 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 36561D8D19D2C8A40069D897 /* InfoPlist.strings */; };
 		36561D9119D2C8A40069D897 /* UntechableTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 36561D9019D2C8A40069D897 /* UntechableTests.m */; };
-		366ECD7919D2D5DE00F71A11 /* AddUntechableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 366ECD7719D2D5DE00F71A11 /* AddUntechableController.m */; };
-		366ECD7A19D2D5DE00F71A11 /* AddUntechableController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 366ECD7819D2D5DE00F71A11 /* AddUntechableController.xib */; };
+		366ECD7E19D3135200F71A11 /* Untechable.m in Sources */ = {isa = PBXBuildFile; fileRef = 366ECD7D19D3135200F71A11 /* Untechable.m */; };
+		366ECD9619D323DA00F71A11 /* AddUntechableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 366ECD9419D323DA00F71A11 /* AddUntechableController.m */; };
+		366ECD9719D323DA00F71A11 /* AddUntechableController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 366ECD9519D323DA00F71A11 /* AddUntechableController.xib */; };
+		366ECD9B19D323E200F71A11 /* PhoneSetupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 366ECD9919D323E200F71A11 /* PhoneSetupController.m */; };
+		366ECD9C19D323E200F71A11 /* PhoneSetupController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 366ECD9A19D323E200F71A11 /* PhoneSetupController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,9 +53,15 @@
 		36561D8C19D2C8A40069D897 /* UntechableTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UntechableTests-Info.plist"; sourceTree = "<group>"; };
 		36561D8E19D2C8A40069D897 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		36561D9019D2C8A40069D897 /* UntechableTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UntechableTests.m; sourceTree = "<group>"; };
-		366ECD7619D2D5DE00F71A11 /* AddUntechableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddUntechableController.h; path = AddUntechable/AddUntechableController.h; sourceTree = "<group>"; };
-		366ECD7719D2D5DE00F71A11 /* AddUntechableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddUntechableController.m; path = AddUntechable/AddUntechableController.m; sourceTree = "<group>"; };
-		366ECD7819D2D5DE00F71A11 /* AddUntechableController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AddUntechableController.xib; path = AddUntechable/AddUntechableController.xib; sourceTree = "<group>"; };
+		366ECD7C19D3135200F71A11 /* Untechable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Untechable.h; path = AddUntechable/Models/Untechable.h; sourceTree = "<group>"; };
+		366ECD7D19D3135200F71A11 /* Untechable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Untechable.m; path = AddUntechable/Models/Untechable.m; sourceTree = "<group>"; };
+		366ECD8019D3181000F71A11 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Common.h; path = Config/Common.h; sourceTree = "<group>"; };
+		366ECD9319D323DA00F71A11 /* AddUntechableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddUntechableController.h; path = AddUntechable/AddUntechableController/AddUntechableController.h; sourceTree = "<group>"; };
+		366ECD9419D323DA00F71A11 /* AddUntechableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddUntechableController.m; path = AddUntechable/AddUntechableController/AddUntechableController.m; sourceTree = "<group>"; };
+		366ECD9519D323DA00F71A11 /* AddUntechableController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AddUntechableController.xib; path = AddUntechable/AddUntechableController/AddUntechableController.xib; sourceTree = "<group>"; };
+		366ECD9819D323E200F71A11 /* PhoneSetupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhoneSetupController.h; path = AddUntechable/PhoneSetupController/PhoneSetupController.h; sourceTree = "<group>"; };
+		366ECD9919D323E200F71A11 /* PhoneSetupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhoneSetupController.m; path = AddUntechable/PhoneSetupController/PhoneSetupController.m; sourceTree = "<group>"; };
+		366ECD9A19D323E200F71A11 /* PhoneSetupController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PhoneSetupController.xib; path = AddUntechable/PhoneSetupController/PhoneSetupController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +123,7 @@
 			children = (
 				36561D7A19D2C8A40069D897 /* AppDelegate.h */,
 				36561D7B19D2C8A40069D897 /* AppDelegate.m */,
+				366ECD7F19D317E200F71A11 /* Config */,
 				366ECD7519D2D24600F71A11 /* AddUntechable */,
 				36561D7D19D2C8A40069D897 /* Images.xcassets */,
 				36561D7219D2C8A40069D897 /* Supporting Files */,
@@ -153,11 +163,48 @@
 		366ECD7519D2D24600F71A11 /* AddUntechable */ = {
 			isa = PBXGroup;
 			children = (
-				366ECD7619D2D5DE00F71A11 /* AddUntechableController.h */,
-				366ECD7719D2D5DE00F71A11 /* AddUntechableController.m */,
-				366ECD7819D2D5DE00F71A11 /* AddUntechableController.xib */,
+				366ECD7B19D312BE00F71A11 /* Models */,
+				366ECD8619D322D700F71A11 /* AddUntechableController */,
+				366ECD8719D322F800F71A11 /* PhoneSetupController */,
 			);
 			name = AddUntechable;
+			sourceTree = "<group>";
+		};
+		366ECD7B19D312BE00F71A11 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				366ECD7C19D3135200F71A11 /* Untechable.h */,
+				366ECD7D19D3135200F71A11 /* Untechable.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		366ECD7F19D317E200F71A11 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				366ECD8019D3181000F71A11 /* Common.h */,
+			);
+			name = Config;
+			sourceTree = "<group>";
+		};
+		366ECD8619D322D700F71A11 /* AddUntechableController */ = {
+			isa = PBXGroup;
+			children = (
+				366ECD9319D323DA00F71A11 /* AddUntechableController.h */,
+				366ECD9419D323DA00F71A11 /* AddUntechableController.m */,
+				366ECD9519D323DA00F71A11 /* AddUntechableController.xib */,
+			);
+			name = AddUntechableController;
+			sourceTree = "<group>";
+		};
+		366ECD8719D322F800F71A11 /* PhoneSetupController */ = {
+			isa = PBXGroup;
+			children = (
+				366ECD9819D323E200F71A11 /* PhoneSetupController.h */,
+				366ECD9919D323E200F71A11 /* PhoneSetupController.m */,
+				366ECD9A19D323E200F71A11 /* PhoneSetupController.xib */,
+			);
+			name = PhoneSetupController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -235,7 +282,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				366ECD7A19D2D5DE00F71A11 /* AddUntechableController.xib in Resources */,
+				366ECD9C19D323E200F71A11 /* PhoneSetupController.xib in Resources */,
+				366ECD9719D323DA00F71A11 /* AddUntechableController.xib in Resources */,
 				36561D7619D2C8A40069D897 /* InfoPlist.strings in Resources */,
 				36561D7E19D2C8A40069D897 /* Images.xcassets in Resources */,
 			);
@@ -256,8 +304,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				366ECD7919D2D5DE00F71A11 /* AddUntechableController.m in Sources */,
+				366ECD9619D323DA00F71A11 /* AddUntechableController.m in Sources */,
+				366ECD9B19D323E200F71A11 /* PhoneSetupController.m in Sources */,
 				36561D7C19D2C8A40069D897 /* AppDelegate.m in Sources */,
+				366ECD7E19D3135200F71A11 /* Untechable.m in Sources */,
 				36561D7819D2C8A40069D897 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
