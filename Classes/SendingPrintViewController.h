@@ -34,7 +34,5 @@
 @property (nonatomic, strong) IBOutlet UITextField *state;
 @property (nonatomic, strong) IBOutlet UITextField *city;
 @property (nonatomic, strong) IBOutlet UITextField *country;
-- (IBAction)send:(UIButton *)sender;
-- (IBAction)dismiss:(UIButton *)sender;
 
 @end
