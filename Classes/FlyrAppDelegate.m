@@ -8,6 +8,7 @@
 
 #import "FlyrAppDelegate.h"
 #import "PaypalMobile.h"
+#import "LobRequest.h"
 
 
 NSString *kCheckTokenStep1 = @"kCheckTokenStep";
@@ -21,7 +22,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 
 @synthesize window;
 @synthesize navigationController;
-@synthesize  lauchController,accountController;
+@synthesize  lauchController,accountController,flyerConfigurator;
 @synthesize sharingProgressParentView,_persistence;
 
 
@@ -151,13 +152,8 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     [_persistence removeTransactions];
     */
     
-    // Setup paypal
-    [PayPalMobile initializeWithClientIdsForEnvironments:
-     @{PayPalEnvironmentProduction : @"",
-       PayPalEnvironmentSandbox : @"AWGYCRB32qMlpNyIY9_kKXXsDIZN7UG5JNM5zjCWwXWvLu66SQP3WjbU9v-A"}];
-    
     // Configurator initialization
-    FlyerlyConfigurator *flyerConfigurator = [[FlyerlyConfigurator alloc] init];
+    flyerConfigurator = [[FlyerlyConfigurator alloc] init];
     DefaultSHKConfigurator  *configurator = flyerConfigurator;
     
     [SHKConfiguration sharedInstanceWithConfigurator:configurator];
@@ -165,7 +161,13 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     // Crittercism for crash reports.
     [Crittercism enableWithAppID:[flyerConfigurator crittercismAppId]];
     
+    // Setup paypal
+    [PayPalMobile initializeWithClientIdsForEnvironments:
+     @{[flyerConfigurator paypalEnvironment] : [flyerConfigurator paypalEnvironmentId]}];
     
+    [PayPalMobile preconnectWithEnvironment:[flyerConfigurator paypalEnvironment]];
+    
+    [LobRequest initWithAPIKey:[flyerConfigurator lobAppId]];
     
 #ifdef DEBUG
     
