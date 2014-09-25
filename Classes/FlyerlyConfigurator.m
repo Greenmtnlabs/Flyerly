@@ -9,6 +9,7 @@
 #import "FlyerlyConfigurator.h"
 #import "SHKFile.h"
 
+
 @implementation FlyerlyConfigurator
 
 /*
@@ -41,6 +42,64 @@
  leaving that decision up to the user.
  */
 
+
+//Lob ApiKey
+- (NSString*)lobAppId {
+
+#ifdef DEBUG
+
+	return @"test_b5d690f19a73468edc528b5a4c63f9875c8";
+
+#else
+
+    return @"live_889eeb7a75372e642ceaece3aa9d2ac0dfc Authorized";
+
+#endif
+
+}
+
+- (NSString*)bigstockAccountId {
+
+#ifdef DEBUG
+    
+    //ozair.nazir@riksof.com / riksof123
+	return @"862265";
+    
+#else
+    
+    return @"328312";
+    
+#endif
+    
+}
+
+- (NSString*)bigstockSecretKey {
+    
+#ifdef DEBUG
+    
+	return @"e84301b7de141bc89517fc708de3285c825bb648";
+    
+#else
+    
+    return @"f5d82349baeb5243b61599591536b97d95950d72";
+    
+#endif
+    
+}
+
+- (NSString*)paypalEnvironmentId {
+    
+#ifdef DEBUG
+    
+    return @"AWGYCRB32qMlpNyIY9_kKXXsDIZN7UG5JNM5zjCWwXWvLu66SQP3WjbU9v-A";
+    
+#else
+    
+    return @"";
+    
+#endif
+    
+}
 
 //Crittercism ApiKey
 - (NSString*)crittercismAppId {

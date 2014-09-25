@@ -27,6 +27,11 @@
 - (NSString*)parseOfflineClientKey;
 - (NSString*)flurrySessionId;
 
+- (NSString*)lobAppId;
+- (NSString*)paypalEnvironmentId;
+- (NSString*)bigstockSecretKey;
+- (NSString*)bigstockAccountId;
+
 - (NSString*)vkontakteAppId;
 - (NSString*)facebookAppId;
 - (NSString*)facebookLocalAppId;
