@@ -23,8 +23,8 @@
 #import "LobObjectModel.h"
 #import "PayPalPaymentViewController.h"
 
-@interface InviteForPrint ()
 
+@interface InviteForPrint ()
 
 @property (nonatomic, strong, readwrite) PayPalConfiguration *payPalConfiguration;
 
@@ -40,9 +40,6 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    
-    // use default environment, should be Production in real life
-    //self.environment = PayPalEnvironmentSandbox;
     
     UVConfig *config = [UVConfig configWithSite:@"http://flyerly.uservoice.com/"];
     [UserVoice initialize:config];
@@ -107,7 +104,6 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     
-    [PayPalMobile preconnectWithEnvironment:PayPalEnvironmentSandbox];
     self.navigationItem.leftItemsSupplementBackButton = YES;
 }
 
@@ -314,14 +310,13 @@
              ![[contactInfoDict objectForKey:@"city"] isEqualToString:@""] &&
              ![[contactInfoDict objectForKey:@"country"] isEqualToString:@""] &&
              ![[contactInfoDict objectForKey:@"zip"] isEqualToString:@""]) {
-            
+    
             model.streetAddress = [contactInfoDict objectForKey:@"streetAddress"];
             model.state = [contactInfoDict objectForKey:@"state"];
             model.city = [contactInfoDict objectForKey:@"city"];
             model.country = [codeForCountryDictionary objectForKey:[contactInfoDict objectForKey:@"country"]];
             model.zip = [contactInfoDict objectForKey:@"zip"];
-            
-            
+        
             //For username and surname
             ABMultiValueRef phones =(__bridge ABMultiValueRef)((NSString*)CFBridgingRelease(ABRecordCopyValue(ref, kABPersonPhoneProperty)));
             CFStringRef firstName, lastName;
@@ -350,7 +345,11 @@
                 }
             }
             
-            [contactsArray addObject:model];
+            if ( [model.country isEqualToString:@"US"] ) {
+                
+                [contactsArray addObject:model];
+                
+            }
             
             //For Phone number
             /*NSString* mobileLabel;
@@ -720,113 +719,7 @@
     sendingControoler.flyer = self.flyer;
     sendingControoler.contactsArray = self.selectedIdentifiers;
 	[self.navigationController pushViewController:sendingControoler animated:YES];
-    
-    /*sendingControoler.flyer = self.flyer;
-    // Present the Sending Print Controller.
-    [self presentModalViewController:sendingControoler animated:NO];*/
-    
-    
-    
-    /*if ( [MFMailComposeViewController canSendMail] ) {
-        
-        // Prepare the email in a background thread.
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW,0), ^{
-            
-            // Prepare email.
-            MFMailComposeViewController* mailer = [[MFMailComposeViewController alloc] init];
-            mailer.mailComposeDelegate = self;
-            
-            // The subject.
-            NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-            [dateFormat setDateFormat:@"MMMM d, YYY"];
-            
-            [mailer setSubject:@"Flyer"];
 
-            
-            [mailer addAttachmentData:[self exportFlyerToPDF] mimeType:@"application/pdf" fileName:@"Flyer.pdf"];
-            
-            // We are done. Now bring up the email in main thread.
-            dispatch_async(dispatch_get_main_queue(), ^{
-                
-                [self.navigationController.visibleViewController presentModalViewController:mailer animated:YES];
-            });
-        });
-    }*/
-}
-
-
-/**
- * Prepare the flyer in PDF format.
- */
-- (NSMutableData *) exportFlyerToPDF {
-    
-    // Create the PDF context using the default page size of 612 x 792.
-    CGSize pageSize = CGSizeMake( 1800, 1200);
-    NSMutableData *pdfData = [NSMutableData data];
-    
-    // Make the context.
-    UIGraphicsBeginPDFContextToData(pdfData, CGRectZero, nil);
-    
-    // Get reference to context.
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    
-    // Prepare the page.
-    UIView *page = [self newPageInPDFWithTitle:@"Flyer" pageSize:pageSize];
-    
-    NSString *imageToPrintPath = [flyer getFlyerImage];
-    UIImage *imageToPrint =  [UIImage imageWithContentsOfFile:imageToPrintPath];
-    
-    //You need to specify the frame of the view
-    UIView *catView = [[UIView alloc] initWithFrame:CGRectMake(200,0,1200,1200)];
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:imageToPrint];
-    
-    //specify the frame of the imageView in the superview , here it will fill the superview
-    imageView.frame = catView.bounds;
-    
-    // add the imageview to the superview
-    [catView addSubview:imageView];
-    
-    [page addSubview:catView];
-
-    // Render the last page.
-    [page.layer renderInContext:context];
-    
-    // Close the PDF context and write the contents out.
-    UIGraphicsEndPDFContext();
-    
-    return pdfData;
-    
-}
-
-/**
- * Prepare a new page.
- */
-- (UIView *)newPageInPDFWithTitle:(NSString *)titleStr pageSize:(CGSize)pageSize {
-
-    // First Page
-    CGRect pageFrame = CGRectMake(0, 0, pageSize.width, pageSize.height);
-    UIGraphicsBeginPDFPageWithInfo( pageFrame, nil);
-    
-    // Fill with background color.
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, pageSize.width,
-                                                            pageSize.height)];
-    view.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"pdf_Bg.png"]];
-
-    //You need to specify the frame of the view
-    UIView *catView = [[UIView alloc] initWithFrame:CGRectMake(1620,1130,150,60)];
-    
-    UIImage *image = [UIImage imageNamed:@"flyerlylogo.png"];
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-    
-    //specify the frame of the imageView in the superview , here it will fill the superview
-    imageView.frame = catView.bounds;
-    
-    // add the imageview to the superview
-    [catView addSubview:imageView];
-    
-    [view addSubview:catView];
-    
-    return view;
 }
 
 #pragma mark - Message UI Delegate
