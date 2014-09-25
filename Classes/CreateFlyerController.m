@@ -175,7 +175,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         //Making dismiss button visible,and bring it to front
         bannerAdDismissBtn.alpha = 1.0;
         [self.bannerAddView bringSubviewToFront:bannerAdDismissBtn];
-        
+    
+        if (sharePanel.hidden)
         [self.view addSubview:self.bannerAddView];
     
         return;
@@ -3767,7 +3768,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
             
             if ( [[PFUser currentUser] sessionToken] ) {
-                UserPurchases *userPurchases_ = [UserPurchases getInstance];
+                //UserPurchases *userPurchases_ = [UserPurchases getInstance];
                 
                 //if ( ![userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ) {
                     if ( [self.interstitialAdd isReady]  && ![self.interstitialAdd hasBeenUsed] ) {
@@ -3775,8 +3776,9 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
                         dispatch_async( dispatch_get_main_queue(), ^{
                             [self.interstitialAdd presentFromRootViewController:self];
                         });
+                        return;
                     }
-                    return;
+                
                 //}
             }
             
