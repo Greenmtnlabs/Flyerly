@@ -28,6 +28,7 @@
 - (NSString*)flurrySessionId;
 
 - (NSString*)lobAppId;
+- (NSString *const)paypalEnvironment;
 - (NSString*)paypalEnvironmentId;
 - (NSString*)bigstockSecretKey;
 - (NSString*)bigstockAccountId;

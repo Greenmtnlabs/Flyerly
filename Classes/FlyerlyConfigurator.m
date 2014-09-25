@@ -8,7 +8,7 @@
 
 #import "FlyerlyConfigurator.h"
 #import "SHKFile.h"
-
+#import "PaypalMobile.h"
 
 @implementation FlyerlyConfigurator
 
@@ -82,6 +82,20 @@
 #else
     
     return @"f5d82349baeb5243b61599591536b97d95950d72";
+    
+#endif
+    
+}
+
+- (NSString *const)paypalEnvironment {
+    
+#ifdef DEBUG
+    
+    return PayPalEnvironmentSandbox;
+    
+#else
+    
+    return PayPalEnvironmentProduction;
     
 #endif
     
