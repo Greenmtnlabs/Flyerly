@@ -14,13 +14,24 @@
     
 }
 
+@property (nonatomic, strong) NSDateFormatter *dateFormatter;
 
-//vars for screen1
-@property (strong, nonatomic)  NSString *startDate, *endDate, *test1;
+//0-Phone permissions vars
+@property (nonatomic, assign) BOOL hasFbPermission, hasTwitterPermission, hasLinkedinPermission;
 
-//vars for screen2
+
+//1-vars for screen1
+@property (strong, nonatomic) NSString *startDate,*endDate;
+
+
+
+//2-vars for screen2
 @property (strong, nonatomic)  NSString *forwardingNumber, *emergencyNumbers;
 @property (strong, nonatomic)  NSDictionary *emergencyContacts;
+
+
+-(void)initObj;
+-(NSDate *)stringToDate:(NSString *)inputStrFormate dateString:(NSString *)dateString;
 
 
 @end

@@ -8,25 +8,13 @@
 
 #import "AddUntechableController.h"
 #import "PhoneSetupController.h"
-
+#import "Common.h"
 
 
 @interface AddUntechableController (){
-    PhoneSetupController *phoneSetup;
+    
 }
 @end
-
-//Class level vars ___start
-    //Navigation buttons
-    UILabel *titleLabel;
-    UIButton *helpButton;
-    UIButton *backButton;
-    UIButton *nextButton;
-    UIColor *defBlueColor;
-
-    NSString *pickerOpenFor = @"";
-
-//Class level vars ___end
 
 @implementation AddUntechableController
 
@@ -52,28 +40,21 @@
     defBlueColor =  [UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0];
     
     [self setNavigationDefaults];
-    
     [self setNavigation:@"viewDidLoad"];
+
     
+
     [self setDefaultModel];
     
-	self.dateFormatter = [[NSDateFormatter alloc] init];
-    [self.dateFormatter setDateStyle:NSDateFormatterShortStyle];    // show short-style date format
-    [self.dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
-
+    [self.btnStartTime setTitle:untechable.startDate forState:UIControlStateNormal];
+    [self.btnEndTime setTitle:untechable.endDate forState:UIControlStateNormal];
     
-    NSDate *now = [NSDate date];
-	NSString *date = [self.dateFormatter stringFromDate:now];
-    [self.btnStartTime setTitle:date forState:UIControlStateNormal];
-    [self.btnEndTime setTitle:date forState:UIControlStateNormal];
-    
-    self.picker.alpha = 0.0;
+    self.picker.alpha = 0.0; //default hide picker
     self.picker.datePickerMode = UIDatePickerModeDateAndTime;
-    self.picker.minimumDate = now;
-    [self.picker setDate:now animated:YES];
+    self.picker.minimumDate = now1;
+    [self.picker setDate:now1 animated:YES];
     
     pickerOpenFor = @"";
-
 }
 
 - (void)didReceiveMemoryWarning
@@ -94,6 +75,15 @@
 #pragma mark -  Navigation functions
 
 - (void)setNavigationDefaults{
+    
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+    [df setDateFormat:@"EEEE, dd MMMM yyyy HH:mm"];
+    
+    NSDate *date = [df dateFromString:@"Sep 25, 2014 05:27 PM"];
+
+    NSLog(@"\n\n  DATE: %@ \n\n\n", date);
+    
+    
     //[[self navigationController] setNavigationBarHidden:YES animated:YES]; //hide navigation bar
     [[self navigationController] setNavigationBarHidden:NO animated:YES]; //show navigation bar
     
@@ -172,9 +162,22 @@
 }
 
 -(void)onNext{
-    phoneSetup = [[PhoneSetupController alloc]initWithNibName:@"PhoneSetupController" bundle:nil];
-    phoneSetup.untechable = untechable;
-    [self.navigationController pushViewController:phoneSetup animated:YES];
+    BOOL goToNext = NO;
+    NSDate *d1 = [untechable stringToDate:DATE_FORMATE_1 dateString:untechable.startDate];
+    NSDate *d2 = [untechable stringToDate:DATE_FORMATE_1 dateString:untechable.endDate];
+    if( d2 > d1 ) {
+        goToNext = YES;
+    }
+    
+    
+    NSLog(goToNext ? @"goToNext- YES" : @"goToNext- NO");
+    
+    if( NO ) {
+        PhoneSetupController *phoneSetup;
+        phoneSetup = [[PhoneSetupController alloc]initWithNibName:@"PhoneSetupController" bundle:nil];
+        phoneSetup.untechable = untechable;
+        [self.navigationController pushViewController:phoneSetup animated:YES];
+    }
 }
 
 #pragma mark -  Select Date
@@ -196,17 +199,11 @@
 //when user select the date from datepicker
 -(IBAction)onDateChange:(id)sender {
     self.picker.alpha = 0.0;
-	NSString * date = [self.dateFormatter stringFromDate:[picker date]];
-    untechable.test1 = @"test1dfafs";
-    NSLog(@" untechable.test1 == %@",untechable.test1);
-    
-    NSLog(@"onDateChange: %@",date);
+	NSString * date = [untechable.dateFormatter stringFromDate:[picker date]];
     
 	if( [pickerOpenFor isEqualToString:@"self.btnStartTime"] ){
       untechable.startDate = date;
-        
       [self.btnStartTime setTitle:date forState:UIControlStateNormal];
-        
     }
     else if( [pickerOpenFor isEqualToString:@"self.btnEndTime"] ){
       untechable.endDate = date;
@@ -220,12 +217,20 @@
 
 // set default vaules in model
 -(void)setDefaultModel{
-    NSDate *now = [NSDate date];
-	NSString *date = [self.dateFormatter stringFromDate:now];
+    //init object
+    untechable  = [[Untechable alloc] init];
+
+    //init object with its default values
+    [untechable initObj];
     
-    untechable.startDate = date;
-    untechable.endDate = date;
+    //1-vars for screen1
+    now1 = [[NSDate date] dateByAddingTimeInterval:(60*2)]; //current time + 2mint
+    now2 = [[NSDate date] dateByAddingTimeInterval:(60*120)]; //current time + 2hr
     
+    untechable.startDate = [untechable.dateFormatter stringFromDate:now1];
+    untechable.endDate = [untechable.dateFormatter stringFromDate:now2];
+
+    //2-vars for screen2
     untechable.forwardingNumber = @"";
     untechable.emergencyNumbers = @"";
     untechable.emergencyContacts = [[NSMutableDictionary alloc] init];

@@ -8,15 +8,53 @@
 //
 
 #import "Untechable.h"
+#import "Common.h"
 
 
 @implementation Untechable
 
-//vars for screen1
-@synthesize startDate, endDate,test1;
+@synthesize dateFormatter;
 
-//vars for screen2
+//0-Phone permissions vars
+@synthesize hasFbPermission, hasTwitterPermission, hasLinkedinPermission;
+
+//1-vars for screen1
+@synthesize startDate, endDate;
+
+//2-vars for screen2
 @synthesize forwardingNumber, emergencyContacts, emergencyNumbers;
+
+
+-(void)initObj{
+    self.hasFbPermission          = NO;
+    self.hasTwitterPermission     = NO;
+    self.hasLinkedinPermission    = NO;
+
+    self.dateFormatter = [[NSDateFormatter alloc] init];
+    [self.dateFormatter setDateFormat:DATE_FORMATE_1];
+    //[self.dateFormatter setDateStyle:NSDateFormatterShortStyle];    // show short-style date format
+    //[self.dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
+}
+
+-(NSDate *)stringToDate:(NSString *)inputStrFormate dateString:(NSString *)dateString{
+        NSLog(@"dateString is %@", dateString);
+    NSDateFormatter *dateFormatterTemp = [[NSDateFormatter alloc] init];
+
+    if( [inputStrFormate  isEqual:DATE_FORMATE_1] ){
+        dateFormatterTemp.dateFormat = inputStrFormate;
+
+        NSDate *dateFrmString = [dateFormatterTemp dateFromString:dateString];
+
+        NSString *formattedDateString = [dateFormatterTemp stringFromDate:dateFrmString];
+        NSLog(@"Date in new format is %@", formattedDateString);
+        
+        
+        return dateFrmString;
+    }
+    
+    return [NSDate date];//default
+}
+
 
 @end
 

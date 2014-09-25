@@ -11,6 +11,16 @@
 
 @interface AddUntechableController : UIViewController
 {
+    UILabel *titleLabel;
+    UIButton *helpButton;
+    UIButton *backButton;
+    UIButton *nextButton;
+    UIColor *defBlueColor;
+    NSString *pickerOpenFor;
+    
+    NSDate *now1; //current time + 2mint
+    NSDate *now2; //current time + 2hr
+    
     Untechable *untechable;
 }
 
@@ -20,7 +30,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *btnEndTime;
 @property (strong, nonatomic) IBOutlet UIDatePicker *picker;
 
-@property (nonatomic, strong) NSDateFormatter *dateFormatter;
+
 
 
 
