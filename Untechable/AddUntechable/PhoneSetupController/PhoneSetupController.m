@@ -8,13 +8,19 @@
 
 #import "PhoneSetupController.h"
 
-@interface PhoneSetupController ()
+
+@interface PhoneSetupController (){
+    NSArray *tableViewArray;
+}
 
 @end
 
 @implementation PhoneSetupController
 
+
+
 @synthesize untechable;
+@synthesize btnforwardingNumber;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -28,14 +34,124 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSLog(@"B-self.untechable.startDate startDate==%@",self.untechable.startDate);
     // Do any additional setup after loading the view from its nib.
+    
+    NSLog(@"B-self.untechable.startDate startDate==%@",self.untechable.startDate);
+    
+    [self setNavigationDefaults];
+    [self setNavigation:@"viewDidLoad"];
+    
+    [self setDefaultModel];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+// ________________________     Custom functions    ___________________________
+#pragma mark -  Navigation functions
+
+- (void)setNavigationDefaults{
+    defBlueColor =  [UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0];
+
+    [[self navigationController] setNavigationBarHidden:NO animated:YES]; //show navigation bar
+    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+}
+
+-(void)setNavigation:(NSString *)callFrom
+{
+    if([callFrom isEqualToString:@"viewDidLoad"])
+    {
+        // Center title ________________________________________
+        titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
+        titleLabel.backgroundColor = [UIColor clearColor];
+        //titleLabel.font = [UIFont fontWithName:TITLE_FONT size:18];
+        titleLabel.textAlignment = NSTextAlignmentCenter;
+        titleLabel.textColor = defBlueColor;
+        titleLabel.text = @"Phone Setup";
+        
+        self.navigationItem.titleView = titleLabel; //Center title ___________
+        
+        
+        // Right Navigation ________________________________________
+        nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+        [nextButton addTarget:self action:@selector(onNext) forControlEvents:UIControlEventTouchUpInside];
+        //[nextButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
+        [nextButton setTitle:@"Next" forState:normal];
+        [nextButton setTitleColor:defBlueColor forState:UIControlStateNormal];
+        
+        nextButton.showsTouchWhenHighlighted = YES;
+        UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
+        NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton,nil];
+        
+        [self.navigationItem setRightBarButtonItems:rightNavItems];//Right buttons ___________
+        
+        
+    }
+}
+
+-(void)onNext{
+    BOOL goToNext = NO;
+    
+    if( goToNext ) {
+        PhoneSetupController *phoneSetup;
+        phoneSetup = [[PhoneSetupController alloc]initWithNibName:@"PhoneSetupController" bundle:nil];
+        phoneSetup.untechable = untechable;
+        [self.navigationController pushViewController:phoneSetup animated:YES];
+    }
+}
+
+#pragma mark -  Model funcs
+-(void)setTextIn:(NSString *)txtIn str:(NSString *)txt{
+    if( [txtIn isEqualToString:@"btnforwardingNumber"] ) {
+      [self.btnforwardingNumber setTitle:txt forState:UIControlStateNormal];
+    }
+}
+
+-(void)setDefaultModel{
+    if( !([untechable.forwardingNumber isEqualToString:@""]) ){
+        [self setTextIn:@"btnforwardingNumber" str:untechable.startDate];
+    }
+}
+
+-(IBAction)getForwardingNum{
+    if( [self.btnforwardingNumber.titleLabel.text isEqualToString:@"Click here to get Forwarding #"] ){
+        [self setTextIn:@"btnforwardingNumber" str:@"Please wait..."];
+        
+        double delayInSeconds = 3.0;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            [self setTextIn:@"btnforwardingNumber" str:@"123"];
+        });
+
+    }
+}
+
+#pragma mark -  Table view functions
+//3
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [tableViewArray count];
+}
+//4
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    //5
+    static NSString *cellIdentifier = @"SettingsCell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    
+    //5.1 you do not need this if you have set SettingsCell as identifier in the storyboard (else you can remove the comments on this code)
+    //if (cell == nil)
+    //    {
+    //        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
+    //   }
+    
+    //6
+    NSString *tweet = [self.tweetsArray objectAtIndex:indexPath.row];
+    //7
+    [cell.textLabel setText:tweet];
+    [cell.detailTextLabel setText:@"via Codigator"];
+    return cell;
 }
 
 @end

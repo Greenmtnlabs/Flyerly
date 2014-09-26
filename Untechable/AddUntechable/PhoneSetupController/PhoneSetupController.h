@@ -9,12 +9,20 @@
 #import <UIKit/UIKit.h>
 #import "Untechable.h"
 
-@interface PhoneSetupController : UIViewController
+@interface PhoneSetupController : UIViewController < UITableViewDataSource >
 {
-    
-}
+    UILabel *titleLabel;
+    UIButton *helpButton;
+    UIButton *backButton;
+    UIButton *nextButton;
+    UIColor *defBlueColor;
 
+}
+//Properties
 @property (strong, nonatomic) NSString *startDate;
 @property (nonatomic,strong)  Untechable *untechable;
+
+@property (strong, nonatomic) IBOutlet UIButton *btnforwardingNumber;
+
 
 @end

@@ -22,7 +22,7 @@
 @synthesize btnEndTime,btnStartTime,picker;
 
 
-#pragma mark -  Default iOs functions
+#pragma mark -  Default functions
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -36,13 +36,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-
-    defBlueColor =  [UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0];
     
     [self setNavigationDefaults];
     [self setNavigation:@"viewDidLoad"];
-
-    
 
     [self setDefaultModel];
     
@@ -83,6 +79,7 @@
 
     NSLog(@"\n\n  DATE: %@ \n\n\n", date);
     
+    defBlueColor =  [UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0];
     
     //[[self navigationController] setNavigationBarHidden:YES animated:YES]; //hide navigation bar
     [[self navigationController] setNavigationBarHidden:NO animated:YES]; //show navigation bar
@@ -162,6 +159,7 @@
 }
 
 -(void)onNext{
+    /* WILL WORK FOR IT
     BOOL goToNext = NO;
     NSDate *d1 = [untechable stringToDate:DATE_FORMATE_1 dateString:untechable.startDate];
     NSDate *d2 = [untechable stringToDate:DATE_FORMATE_1 dateString:untechable.endDate];
@@ -171,8 +169,9 @@
     
     
     NSLog(goToNext ? @"goToNext- YES" : @"goToNext- NO");
+    */
     
-    if( NO ) {
+    if( YES ) {
         PhoneSetupController *phoneSetup;
         phoneSetup = [[PhoneSetupController alloc]initWithNibName:@"PhoneSetupController" bundle:nil];
         phoneSetup.untechable = untechable;
