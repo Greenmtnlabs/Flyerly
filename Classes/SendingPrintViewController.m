@@ -32,15 +32,23 @@
 @end
 
 LobRequest *request;
+UIButton *backButton;
 
 @implementation SendingPrintViewController
 
-@synthesize messageFeild,streetAddress,state,city,country,flyerImage,flyer,contactsArray;
+@synthesize messageFeild,streetAddress,state,city,zip,country,name,flyerImage,flyer,contactsArray,scrollView;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    messageFeild.delegate = self;
+    
+    //Setting up the Scroll size
+    [scrollView setContentSize:CGSizeMake(320, 660)];
+    //Setting the initial position for scroll view
+    scrollView.contentOffset = CGPointMake(0,0);
     
     self.streetAddress.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
     self.state.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
@@ -57,7 +65,7 @@ LobRequest *request;
     
     // Navigation buttons
     // BackButton
-    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+    backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
     backButton.titleLabel.font = [UIFont systemFontOfSize:14.0];
     [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
     [backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
@@ -76,6 +84,7 @@ LobRequest *request;
     if ( [flyer.getFlyerDescription isEqualToString:@""] ){
         self.messageFeild.textColor = [UIColor lightGrayColor];
         self.messageFeild.text = @"Enter message here...";
+        
     }else {
         messageFeild.text = flyer.getFlyerDescription;
     }
@@ -83,14 +92,79 @@ LobRequest *request;
     flyerImage.image = [UIImage imageWithContentsOfFile:flyer.getFlyerImage];
 }
 
+
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView{
+    NSLog(@"textViewShouldBeginEditing:");
+    if ( [textView.text isEqualToString:@"Enter message here..."]) {
+    
+        [textView setText:@""];
+    }
+    return YES;
+}
+
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    NSLog(@"textViewDidBeginEditing:");
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    // Reseting the scrollview position
+    [scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+    return YES;
+}
+
 -(NSArray *) getArrayOfSelectedTab{
     
     return contactsArray;
 }
 
+- (void) showAlert:(NSString *) error {
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Invalid Address." message:error delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    
+    [alert show];
+    [self hideLoadingIndicator];
+}
+
 - (void)sendFlyer{
     
-    [self sendrequestOnLob];
+    
+    
+    [self showLoadingIndicator];
+    
+    if ( [messageFeild.text isEqualToString:@""] ) {
+    
+        [self showAlert:@"Please enter message."];
+        
+    } else if ( [name.text isEqualToString:@""] ){
+    
+        [self showAlert:@"Please enter sender name."];
+        
+    } else if ( [streetAddress.text isEqualToString:@""] ){
+    
+        [self showAlert:@"Please enter street address."];
+        
+    }else if ( [zip.text isEqualToString:@""] ){
+        
+        [self showAlert:@"Please enter zip code."];
+        
+    }else if ( [city.text isEqualToString:@""] ){
+        
+        [self showAlert:@"Please enter city."];
+    
+    }else if ( [state.text isEqualToString:@""] ){
+        
+        [self showAlert:@"Please enter state."];
+        
+    }else {
+        
+        [self sendrequestOnLob];
+        
+        backButton.enabled = NO;
+    }
+    
+    
 }
 
 
@@ -234,23 +308,22 @@ LobRequest *request;
     request = [LobRequest initWithAPIKey:[flyerConfigurator lobAppId]];
     
     NSMutableDictionary *fromAddress = [[NSMutableDictionary alloc] init];
-    [fromAddress setObject:@"HARRY ZHANG" forKey:@"name"];
+    [fromAddress setObject:messageFeild.text forKey:@"name"];
     [fromAddress setObject:@"" forKey:@"email"];
     [fromAddress setObject:@"" forKey:@"phone"];
-    [fromAddress setObject:@"1600 AMPHITHEATRE PKWY" forKey:@"address_line1"];
-    [fromAddress setObject:@"UNIT 199" forKey:@"address_line2"];
-    [fromAddress setObject:@"MOUNTAIN VIEW" forKey:@"address_city"];
-    [fromAddress setObject:@"CA" forKey:@"address_state"];
-    [fromAddress setObject:@"94085" forKey:@"address_zip"];
+    [fromAddress setObject:streetAddress.text forKey:@"address_line1"];
+    [fromAddress setObject:@"" forKey:@"address_line2"];
+    [fromAddress setObject:city.text forKey:@"address_city"];
+    [fromAddress setObject:state.text forKey:@"address_state"];
+    [fromAddress setObject:zip.text forKey:@"address_zip"];
     [fromAddress setObject:@"US" forKey:@"address_country"];
     
-    NSDictionary *objectDict = @{@"name" : @"Go Blue",
+    NSDictionary *objectDict = @{@"name" : @"Flyer Postcard",
                                  @"setting" : @{@"id" : @"200"},
                                  @"file" : [self exportFlyerToPDF]};
     
     LobObjectModel *objectModel = [LobObjectModel initWithDictionary:objectDict];
     objectModel.localFilePath = YES;
-    
     
     [request createObjectWithModel:objectModel
                       withResponse:^(LobObjectModel *object, NSError *error)
@@ -261,7 +334,7 @@ LobRequest *request;
          for ( int i = 0;i<contactsArray.count;i++) {
              
              ContactsModel *model = [self getArrayOfSelectedTab][i];
-             
+            
              toAddress = [[NSMutableDictionary alloc] init];
              [toAddress setObject:model.name forKey:@"name"];
              [toAddress setObject:@"" forKey:@"email"];
@@ -283,13 +356,23 @@ LobRequest *request;
              LobPostcardModel *flyerPostCard = [[LobPostcardModel alloc] initWithDictionary:postcardDict];
               
             [request createPostcardWithModel:flyerPostCard withResponse:^(LobPostcardModel *postcard, NSError *error){
-                  
-                  NSLog(@"%@",postcard);
-                  NSLog(@"%@",error);
+                
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"PostCard Send" message:@"Your postcard hase been send to print"  delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                
+                if (error != nil){
+                    [alert show];
+                }else {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"PostCard could not send" message:@"Please send again"  delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                }
+                
+                NSLog(@"%@",postcard);
+                NSLog(@"%@",error);
                   
             }];
          }
          
+         [self hideLoadingIndicator];
+         backButton.enabled = YES;
      }];
     
     return;

@@ -19,7 +19,7 @@
 #import "AbstractBlockRequest.h"
 
 @class AbstractBlockRequest;
-@interface SendingPrintViewController : UIViewController< MFMailComposeViewControllerDelegate> {
+@interface SendingPrintViewController : ParentViewController< MFMailComposeViewControllerDelegate> {
     
     AbstractBlockRequest *requestClass;
 }
@@ -28,10 +28,13 @@
 @property(nonatomic,strong) NSMutableArray *contactsArray;
 
 
+@property(nonatomic, strong) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, strong) IBOutlet UITextView *messageFeild;
 @property (nonatomic, strong) IBOutlet UIImageView *flyerImage;
+@property (nonatomic, strong) IBOutlet UITextField *name;
 @property (nonatomic, strong) IBOutlet UITextField *streetAddress;
 @property (nonatomic, strong) IBOutlet UITextField *state;
+@property (nonatomic, strong) IBOutlet UITextField *zip;
 @property (nonatomic, strong) IBOutlet UITextField *city;
 @property (nonatomic, strong) IBOutlet UITextField *country;
 
