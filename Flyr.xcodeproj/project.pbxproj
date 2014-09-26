@@ -6172,8 +6172,8 @@
 					"-lc++",
 				);
 				PRODUCT_NAME = Flyr;
-				PROVISIONING_PROFILE = "96b183d0-6f5b-4dcd-ac4a-b5b3b1091424";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "96b183d0-6f5b-4dcd-ac4a-b5b3b1091424";
+				PROVISIONING_PROFILE = "3f681535-9de3-4ecc-9e55-7b92c6f86d80";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3f681535-9de3-4ecc-9e55-7b92c6f86d80";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 i386 x86_64 armv7s";
@@ -6218,8 +6218,8 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				PREBINDING = NO;
-				PROVISIONING_PROFILE = "96b183d0-6f5b-4dcd-ac4a-b5b3b1091424";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "96b183d0-6f5b-4dcd-ac4a-b5b3b1091424";
+				PROVISIONING_PROFILE = "3f681535-9de3-4ecc-9e55-7b92c6f86d80";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3f681535-9de3-4ecc-9e55-7b92c6f86d80";
 				SDKROOT = iphoneos;
 			};
 			name = Release;
