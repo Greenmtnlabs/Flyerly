@@ -27,7 +27,7 @@
 
 //2-vars for screen2
 @property (strong, nonatomic)  NSString *forwardingNumber, *emergencyNumbers;
-@property (strong, nonatomic)  NSDictionary *emergencyContacts;
+@property (strong, nonatomic)  NSMutableDictionary *emergencyContacts;
 
 
 -(void)initObj;

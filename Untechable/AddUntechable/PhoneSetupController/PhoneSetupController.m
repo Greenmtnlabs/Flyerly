@@ -7,13 +7,15 @@
 //
 
 #import "PhoneSetupController.h"
-
+#import "CommonFunctions.h"
 
 @interface PhoneSetupController (){
     NSString *tableViewFor;
+    CommonFunctions *commonFunctions;
 }
 
 @property (strong, nonatomic) IBOutlet UITableView *contactsTableView;
+@property (strong, nonatomic) UIAlertView *importContacts;
 
 @end
 
@@ -38,8 +40,6 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
-    NSLog(@"B-self.untechable.startDate startDate==%@",self.untechable.startDate);
     
     [self setNavigationDefaults];
     [self setNavigation:@"viewDidLoad"];
@@ -114,7 +114,9 @@
 
 -(void)setDefaultModel{
     
-    _contactsTableView.dataSource = self;
+    commonFunctions = [[CommonFunctions alloc] init];
+    
+    [self tableViewSR:@"start" callFor:@"contactsTableView"];
     
     if( !([untechable.forwardingNumber isEqualToString:@""]) ){
         [self setTextIn:@"btnforwardingNumber" str:untechable.startDate];
@@ -135,40 +137,135 @@
 }
 
 #pragma mark -  Table view functions
--(NSInteger)getCountForTableView {
-    if([tableViewFor isEqualToString:@"abc"]){
+-(void)tableViewSR:(NSString*)startRestart callFor:callFor{
+    
+    if( [startRestart isEqualToString:@"start"] ){
         
+        if( [callFor isEqualToString:@"contactsTableView"] ) {
+            tableViewFor = @"contactsTableView";
+            _contactsTableView.allowsMultipleSelectionDuringEditing = NO;
+            _contactsTableView.dataSource = self;
+        }
+    }
+    else if( [startRestart isEqualToString:@"reStart"] ){
+        
+        if( [callFor isEqualToString:@"contactsTableView"] ) {
+           NSLog(@"tableViewSR restart untechable.emergencyContacts = %@",untechable.emergencyContacts);
+            _contactsTableView.allowsMultipleSelectionDuringEditing = NO;
+            tableViewFor = @"contactsTableView";
+            [_contactsTableView reloadData];
+        }
     }
     
-    return 3;//[tableViewArray count];
 }
+-(NSInteger)getCountOf:(NSString *)contOf {
+    NSInteger count = 0;
 
+    if([contOf isEqualToString:@"contactsTableView"]) {
+        NSArray * allKeys = [untechable.emergencyContacts allKeys];
+        count   =   [allKeys count];
+    }
+    
+    
+    NSLog(@"getCountForTableView Count of %@ : %d", tableViewFor, count);
+    return count;
+}
 
 //3
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self getCountForTableView];
+    return [self getCountOf:tableViewFor];
 }
 //4
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     //5
     static NSString *cellIdentifier = @"SettingsCell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     
+    UITableViewCell *cell = nil;
     //5.1 you do not need this if you have set SettingsCell as identifier in the storyboard (else you can remove the comments on this code)
     if (cell == nil)
         {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
        }
-    
-    //6
-    NSString *txt = [NSString stringWithFormat:@"My friend name %i", indexPath.row ];
-    //[self.tweetsArray objectAtIndex:indexPath.row];
-    
-    //7
-    [cell.textLabel setText:txt];
-    [cell.detailTextLabel setText:@"00923453017449"];
+
+    if([tableViewFor isEqualToString:@"contactsTableView"]) {
+        
+         //get sorted keys
+         NSArray *arrayOfKeys = [[untechable.emergencyContacts allKeys] sortedArrayUsingSelector: @selector(compare:)];
+        //NSLog(@"Keys: %@", arrayOfKeys);
+        //NSArray *arrayOfValues = [untechable.emergencyContacts allValues];
+        //NSLog(@"Values: %@", arrayOfValues);
+        
+        
+        //6
+        //NSString *txt = [NSString stringWithFormat:@"My friend name %i", indexPath.row ];
+        //NSString *number = [arrayOfValues objectAtIndex:indexPath.row];
+        NSString *name = [arrayOfKeys objectAtIndex:indexPath.row];
+        NSString *number = [untechable.emergencyContacts objectForKey:name];
+       
+        
+        
+        //7
+        [cell.textLabel setText:name];
+        [cell.detailTextLabel setText:number];
+    }
     return cell;
+}
+
+// Override to support editing the table view.
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Return YES if you want the specified item to be editable.
+    return YES;
+}
+
+// Override to support editing the table view.
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+
+    //add code here for when you hit delete
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+
+        if( [tableViewFor isEqualToString:@"contactsTableView"] ) {
+
+            [commonFunctions deleteKeyFromDic:untechable.emergencyContacts delKeyAtIndex:indexPath.row];
+            
+            [self tableViewSR:@"reStart" callFor:@"contactsTableView"];
+        }
+    }
+    
+}
+
+
+
+
+#pragma mark - UIAlertView delegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    if(alertView == _importContacts && buttonIndex == 1) {
+        NSDictionary *dic = @{@"Khurram ali": @"222222222222",
+                                         @"Ozair": @"33333333333333",
+                                         @"Rehan ali": @"444444444",
+                                         @"Abdul Rauf": @"00923453017449"};
+        
+        [untechable.emergencyContacts setDictionary:dic];
+
+        //[commonFunctions sortDic:untechable.emergencyContacts]; //zarorat nhe pari , ya auto sort kar raha hy
+        
+        [self tableViewSR:@"reStart" callFor:@"contactsTableView"];
+    }
+}
+
+#pragma mark -  Import Contacts
+- (IBAction)importContacts:(id)sender {
+    _importContacts = [[UIAlertView alloc ]
+                                       initWithTitle:@""
+                                       message:@"Untechable want to import your contacts"
+                                       delegate:self
+                                       cancelButtonTitle:@"Cancel"
+                                       otherButtonTitles:@"Allow" ,
+                                   nil];
+    [_importContacts show];
+    
 }
 
 @end
