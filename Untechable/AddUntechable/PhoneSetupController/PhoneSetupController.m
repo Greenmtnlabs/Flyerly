@@ -10,8 +10,10 @@
 
 
 @interface PhoneSetupController (){
-    NSArray *tableViewArray;
+    NSString *tableViewFor;
 }
+
+@property (strong, nonatomic) IBOutlet UITableView *contactsTableView;
 
 @end
 
@@ -21,6 +23,7 @@
 
 @synthesize untechable;
 @synthesize btnforwardingNumber;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -110,6 +113,9 @@
 }
 
 -(void)setDefaultModel{
+    
+    _contactsTableView.dataSource = self;
+    
     if( !([untechable.forwardingNumber isEqualToString:@""]) ){
         [self setTextIn:@"btnforwardingNumber" str:untechable.startDate];
     }
@@ -129,9 +135,18 @@
 }
 
 #pragma mark -  Table view functions
+-(NSInteger)getCountForTableView {
+    if([tableViewFor isEqualToString:@"abc"]){
+        
+    }
+    
+    return 3;//[tableViewArray count];
+}
+
+
 //3
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [tableViewArray count];
+    return [self getCountForTableView];
 }
 //4
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -141,16 +156,18 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     
     //5.1 you do not need this if you have set SettingsCell as identifier in the storyboard (else you can remove the comments on this code)
-    //if (cell == nil)
-    //    {
-    //        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
-    //   }
+    if (cell == nil)
+        {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
+       }
     
     //6
-    NSString *tweet = [self.tweetsArray objectAtIndex:indexPath.row];
+    NSString *txt = [NSString stringWithFormat:@"My friend name %i", indexPath.row ];
+    //[self.tweetsArray objectAtIndex:indexPath.row];
+    
     //7
-    [cell.textLabel setText:tweet];
-    [cell.detailTextLabel setText:@"via Codigator"];
+    [cell.textLabel setText:txt];
+    [cell.detailTextLabel setText:@"00923453017449"];
     return cell;
 }
 

@@ -7,6 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhoneSetupController">
             <connections>
                 <outlet property="btnforwardingNumber" destination="pXq-pf-VrB" id="r1I-Pv-JQc"/>
+                <outlet property="contactsTableView" destination="nng-nJ-ySq" id="afL-0M-PJL"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
