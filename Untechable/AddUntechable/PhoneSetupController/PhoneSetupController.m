@@ -15,6 +15,9 @@
     NSString *tableViewFor;
     CommonFunctions *commonFunctions;
 }
+@property (strong, nonatomic) IBOutlet UILabel *canContactTxt;
+@property (strong, nonatomic) IBOutlet UIButton *btnImport;
+
 
 @property (strong, nonatomic) IBOutlet UITableView *contactsTableView;
 @property (strong, nonatomic) UIAlertView *importContacts;
@@ -43,9 +46,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    defColor = [UIColor colorWithRed:66.0/255.0 green:247.0/255.0 blue:206.0/255.0 alpha:1.0];//GREEN
-    defColor2 = [UIColor colorWithRed:184.0/255.0 green:184.0/255.0 blue:184.0/255.0 alpha:1.0];//GRAY
-    
     [self setNavigationDefaults];
     [self setNavigation:@"viewDidLoad"];
     
@@ -58,10 +58,24 @@
     // Dispose of any resources that can be recreated.
 }
 // ________________________     Custom functions    ___________________________
+#pragma mark -  UI functions
+-(void)updateUI
+{    
+    _canContactTxt.font = [UIFont fontWithName:APP_FONT size:30];
+    
+    self.btnforwardingNumber.titleLabel.font = [UIFont fontWithName:APP_FONT size:20];
+    self.btnImport.titleLabel.font = [UIFont fontWithName:APP_FONT size:20];
+}
+
+
 #pragma mark -  Navigation functions
 
 - (void)setNavigationDefaults{
-
+    
+    defGreen = [UIColor colorWithRed:66.0/255.0 green:247.0/255.0 blue:206.0/255.0 alpha:1.0];//GREEN
+    defGray = [UIColor colorWithRed:184.0/255.0 green:184.0/255.0 blue:184.0/255.0 alpha:1.0];//GRAY
+    
+    
     [[self navigationController] setNavigationBarHidden:NO animated:YES]; //show navigation bar
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
 }
@@ -77,7 +91,7 @@
         [backButton addTarget:self action:@selector(onBack) forControlEvents:UIControlEventTouchUpInside];
         backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
         [backButton setTitle:TITLE_BACK_TXT forState:normal];
-        [backButton setTitleColor:defColor2 forState:UIControlStateNormal];
+        [backButton setTitleColor:defGray forState:UIControlStateNormal];
         [backButton addTarget:self action:@selector(btnBackTouchStart) forControlEvents:UIControlEventTouchDown];
         [backButton addTarget:self action:@selector(btnBackTouchEnd) forControlEvents:UIControlEventTouchUpInside];
         
@@ -94,7 +108,7 @@
         titleLabel.backgroundColor = [UIColor clearColor];
         titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_FONT_SIZE];
         titleLabel.textAlignment = NSTextAlignmentCenter;
-        titleLabel.textColor = defColor;
+        titleLabel.textColor = defGreen;
         titleLabel.text = APP_NAME;
         
         
@@ -106,7 +120,7 @@
         [nextButton addTarget:self action:@selector(onNext) forControlEvents:UIControlEventTouchUpInside];
         nextButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
         [nextButton setTitle:TITLE_NEXT_TXT forState:normal];
-        [nextButton setTitleColor:defColor2 forState:UIControlStateNormal];
+        [nextButton setTitleColor:defGray forState:UIControlStateNormal];
         [nextButton addTarget:self action:@selector(btnNextTouchStart) forControlEvents:UIControlEventTouchDown];
         [nextButton addTarget:self action:@selector(btnNextTouchEnd) forControlEvents:UIControlEventTouchUpInside];
         
@@ -129,7 +143,7 @@
     [self setNextHighlighted:NO];
 }
 - (void)setNextHighlighted:(BOOL)highlighted {
-    (highlighted) ? [nextButton setBackgroundColor:defColor] : [nextButton setBackgroundColor:[UIColor clearColor]];
+    (highlighted) ? [nextButton setBackgroundColor:defGreen] : [nextButton setBackgroundColor:[UIColor clearColor]];
 }
 
 -(void)btnBackTouchStart{
@@ -140,7 +154,7 @@
     [self onBack];
 }
 - (void)setBackHighlighted:(BOOL)highlighted {
-    (highlighted) ? [backButton setBackgroundColor:defColor] : [backButton setBackgroundColor:[UIColor clearColor]];
+    (highlighted) ? [backButton setBackgroundColor:defGreen] : [backButton setBackgroundColor:[UIColor clearColor]];
 }
 
 -(void)onBack{
@@ -175,6 +189,7 @@
     commonFunctions = [[CommonFunctions alloc] init];
     
     [self tableViewSR:@"start" callFor:@"contactsTableView"];
+    [self importContactsAfterAllow];//for testing
     
     if( !([untechable.forwardingNumber isEqualToString:@""]) ){
         [self setTextIn:@"btnforwardingNumber" str:untechable.startDate];
@@ -266,9 +281,9 @@
         
         //7
         [cell.textLabel setText:name];
-        cell.textLabel.textColor = defColor;
+        cell.textLabel.textColor = defGreen;
         [cell.detailTextLabel setText:number];
-        cell.detailTextLabel.textColor = defColor2;
+        cell.detailTextLabel.textColor = defGray;
     }
     return cell;
 }
@@ -302,23 +317,7 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     
     if(alertView == _importContacts && buttonIndex == 1) {
-        NSDictionary *dic = @{@"Khurram ali": @"3333333333",
-                              @"Ozair": @"5555555555",
-                              @"Rehan ali": @"7777777777",
-                              @"Abdul Rauf": @"00923453017449",
-                              @"Raheel Mateen": @"6666666666",
-                              @"Arbab": @"2222222222",
-                              @"M.Zeshan": @"4444444444",
-                              @"Zeshan Lalani": @"00923453017449",
-                              @"Shoaib": @"9999999999",
-                              @"Sharjeel Shahni": @"8888888888"
-                              };
-        
-        [untechable.emergencyContacts setDictionary:dic];
-
-        //[commonFunctions sortDic:untechable.emergencyContacts]; //zarorat nhe pari , ya auto sort kar raha hy
-        
-        [self tableViewSR:@"reStart" callFor:@"contactsTableView"];
+        [self importContactsAfterAllow];
     }
 }
 
@@ -333,6 +332,25 @@
                                    nil];
     [_importContacts show];
     
+}
+-(void)importContactsAfterAllow {
+    NSDictionary *dic = @{@"Khurram ali": @"3333333333",
+                          @"Ozair": @"5555555555",
+                          @"Rehan ali": @"7777777777",
+                          @"Abdul Rauf": @"00923453017449",
+                          @"Raheel Mateen": @"6666666666",
+                          @"Arbab": @"2222222222",
+                          @"M.Zeshan": @"4444444444",
+                          @"Zeshan Lalani": @"00923453017449",
+                          @"Shoaib": @"9999999999",
+                          @"Sharjeel Shahni": @"8888888888"
+                          };
+    
+    [untechable.emergencyContacts setDictionary:dic];
+    
+    //[commonFunctions sortDic:untechable.emergencyContacts]; //zarorat nhe pari , ya auto sort kar raha hy
+    
+    [self tableViewSR:@"reStart" callFor:@"contactsTableView"];
 }
 
 @end

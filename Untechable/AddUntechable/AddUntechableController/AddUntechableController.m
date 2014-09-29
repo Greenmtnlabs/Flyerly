@@ -42,24 +42,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    defColor = [UIColor colorWithRed:66.0/255.0 green:247.0/255.0 blue:206.0/255.0 alpha:1.0];//GREEN
-    defColor2 = [UIColor colorWithRed:184.0/255.0 green:184.0/255.0 blue:184.0/255.0 alpha:1.0];//GRAY
-    
     [self setNavigationDefaults];
     [self setNavigation:@"viewDidLoad"];
 
     [self setDefaultModel];
     
-    
-    _lblStartTime.font = [UIFont fontWithName:APP_FONT size:30];
-    _lblEndTime.font   = [UIFont fontWithName:APP_FONT size:30];
-    
-    self.btnStartTime.titleLabel.font = [UIFont fontWithName:APP_FONT size:20];
-    [self.btnStartTime setTitle:untechable.startDate forState:UIControlStateNormal];
-
-    self.btnEndTime.titleLabel.font = [UIFont fontWithName:APP_FONT size:20];
-    [self.btnEndTime setTitle:untechable.endDate forState:UIControlStateNormal];
-    
+    [self updateUI];
     
     self.picker.alpha = 0.0; //default hide picker
     self.picker.datePickerMode = UIDatePickerModeDateAndTime;
@@ -84,8 +72,21 @@
 
 }
 // ________________________     Custom functions    ___________________________
-#pragma mark -  Navigation functions
+#pragma mark -  UI functions
+-(void)updateUI
+{
+    
+    _lblStartTime.font = [UIFont fontWithName:APP_FONT size:30];
+    _lblEndTime.font   = [UIFont fontWithName:APP_FONT size:30];
+    
+    self.btnStartTime.titleLabel.font = [UIFont fontWithName:APP_FONT size:20];
+    [self.btnStartTime setTitle:untechable.startDate forState:UIControlStateNormal];
+    
+    self.btnEndTime.titleLabel.font = [UIFont fontWithName:APP_FONT size:20];
+    [self.btnEndTime setTitle:untechable.endDate forState:UIControlStateNormal];
+}
 
+#pragma mark -  Navigation functions
 - (void)setNavigationDefaults{
 
     /*
@@ -94,6 +95,9 @@
     NSDate *date = [df dateFromString:@"Sep 25, 2014 05:27 PM"];
     NSLog(@"\n\n  DATE: %@ \n\n\n", date);
     */
+
+    defGreen = [UIColor colorWithRed:66.0/255.0 green:247.0/255.0 blue:206.0/255.0 alpha:1.0];//GREEN
+    defGray = [UIColor colorWithRed:184.0/255.0 green:184.0/255.0 blue:184.0/255.0 alpha:1.0];//GRAY
     
     [[self navigationController] setNavigationBarHidden:NO animated:YES]; //show navigation bar
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
@@ -109,7 +113,7 @@
         titleLabel.backgroundColor = [UIColor clearColor];
         titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_FONT_SIZE];
         titleLabel.textAlignment = NSTextAlignmentCenter;
-        titleLabel.textColor = defColor;
+        titleLabel.textColor = defGreen;
         titleLabel.text = APP_NAME;
         
         self.navigationItem.titleView = titleLabel; //Center title ___________        
@@ -123,7 +127,7 @@
         //[nextButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
         nextButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
         [nextButton setTitle:TITLE_NEXT_TXT forState:normal];
-        [nextButton setTitleColor:defColor2 forState:UIControlStateNormal];
+        [nextButton setTitleColor:defGray forState:UIControlStateNormal];
         [nextButton addTarget:self action:@selector(btnNextTouchStart) forControlEvents:UIControlEventTouchDown];
         [nextButton addTarget:self action:@selector(btnNextTouchEnd) forControlEvents:UIControlEventTouchUpInside];
         
@@ -144,7 +148,7 @@
     [self setNextHighlighted:NO];
 }
 - (void)setNextHighlighted:(BOOL)highlighted {
-    (highlighted) ? [nextButton setBackgroundColor:defColor] : [nextButton setBackgroundColor:[UIColor clearColor]];
+    (highlighted) ? [nextButton setBackgroundColor:defGreen] : [nextButton setBackgroundColor:[UIColor clearColor]];
 }
 
 
@@ -203,9 +207,9 @@
 }
 
 #pragma mark -  Model funcs
-
 // set default vaules in model
 -(void)setDefaultModel{
+    
     //init object
     untechable  = [[Untechable alloc] init];
 

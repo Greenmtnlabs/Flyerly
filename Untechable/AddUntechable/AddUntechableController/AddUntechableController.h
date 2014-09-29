@@ -15,8 +15,8 @@
     UIButton *helpButton;
     UIButton *backButton;
     UIButton *nextButton;
-    UIColor *defColor;//GREEN
-    UIColor *defColor2;//GRAY
+    UIColor *defGreen;//GREEN
+    UIColor *defGray;//GRAY
     NSString *pickerOpenFor;
     
     NSDate *now1; //current time + 2mint
