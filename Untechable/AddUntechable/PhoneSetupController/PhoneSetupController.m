@@ -8,6 +8,7 @@
 
 #import "PhoneSetupController.h"
 #import "CommonFunctions.h"
+#import "SocialnetworkController.h"
 
 @interface PhoneSetupController (){
     NSString *tableViewFor;
@@ -95,13 +96,13 @@
 }
 
 -(void)onNext{
-    BOOL goToNext = NO;
+    BOOL goToNext = YES;
     
     if( goToNext ) {
-        PhoneSetupController *phoneSetup;
-        phoneSetup = [[PhoneSetupController alloc]initWithNibName:@"PhoneSetupController" bundle:nil];
-        phoneSetup.untechable = untechable;
-        [self.navigationController pushViewController:phoneSetup animated:YES];
+        SocialnetworkController *socialnetwork;
+        socialnetwork = [[SocialnetworkController alloc]initWithNibName:@"SocialnetworkController" bundle:nil];
+        socialnetwork.untechable = untechable;
+        [self.navigationController pushViewController:socialnetwork animated:YES];
     }
 }
 

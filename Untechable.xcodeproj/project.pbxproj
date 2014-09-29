@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		36524AF119D940F4006DCAAF /* SocialnetworkController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36524AEF19D940F4006DCAAF /* SocialnetworkController.m */; };
+		36524AF219D940F4006DCAAF /* SocialnetworkController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36524AF019D940F4006DCAAF /* SocialnetworkController.xib */; };
 		36561D6C19D2C8A40069D897 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36561D6B19D2C8A40069D897 /* Foundation.framework */; };
 		36561D6E19D2C8A40069D897 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36561D6D19D2C8A40069D897 /* CoreGraphics.framework */; };
 		36561D7019D2C8A40069D897 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36561D6F19D2C8A40069D897 /* UIKit.framework */; };
@@ -38,6 +40,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		36524AEE19D940F4006DCAAF /* SocialnetworkController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SocialnetworkController.h; path = AddUntechable/SocialnetworkController/SocialnetworkController.h; sourceTree = "<group>"; };
+		36524AEF19D940F4006DCAAF /* SocialnetworkController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SocialnetworkController.m; path = AddUntechable/SocialnetworkController/SocialnetworkController.m; sourceTree = "<group>"; };
+		36524AF019D940F4006DCAAF /* SocialnetworkController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SocialnetworkController.xib; path = AddUntechable/SocialnetworkController/SocialnetworkController.xib; sourceTree = "<group>"; };
 		36561D6819D2C8A40069D897 /* Untechable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Untechable.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		36561D6B19D2C8A40069D897 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		36561D6D19D2C8A40069D897 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -91,6 +96,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		36524AED19D9409C006DCAAF /* SocialnetworkController */ = {
+			isa = PBXGroup;
+			children = (
+				36524AEE19D940F4006DCAAF /* SocialnetworkController.h */,
+				36524AEF19D940F4006DCAAF /* SocialnetworkController.m */,
+				36524AF019D940F4006DCAAF /* SocialnetworkController.xib */,
+			);
+			name = SocialnetworkController;
+			sourceTree = "<group>";
+		};
 		36561D5F19D2C8A40069D897 = {
 			isa = PBXGroup;
 			children = (
@@ -179,6 +194,7 @@
 				366ECD7B19D312BE00F71A11 /* Models */,
 				366ECD8619D322D700F71A11 /* AddUntechableController */,
 				366ECD8719D322F800F71A11 /* PhoneSetupController */,
+				36524AED19D9409C006DCAAF /* SocialnetworkController */,
 			);
 			name = AddUntechable;
 			sourceTree = "<group>";
@@ -296,6 +312,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				366ECD9C19D323E200F71A11 /* PhoneSetupController.xib in Resources */,
+				36524AF219D940F4006DCAAF /* SocialnetworkController.xib in Resources */,
 				366ECD9719D323DA00F71A11 /* AddUntechableController.xib in Resources */,
 				36561D7619D2C8A40069D897 /* InfoPlist.strings in Resources */,
 				36561D7E19D2C8A40069D897 /* Images.xcassets in Resources */,
@@ -322,6 +339,7 @@
 				3663932519D6A0A700512965 /* CommonFunctions.m in Sources */,
 				36561D7C19D2C8A40069D897 /* AppDelegate.m in Sources */,
 				366ECD7E19D3135200F71A11 /* Untechable.m in Sources */,
+				36524AF119D940F4006DCAAF /* SocialnetworkController.m in Sources */,
 				36561D7819D2C8A40069D897 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
