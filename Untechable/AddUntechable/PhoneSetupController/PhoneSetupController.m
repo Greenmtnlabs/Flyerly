@@ -9,6 +9,7 @@
 #import "PhoneSetupController.h"
 #import "CommonFunctions.h"
 #import "SocialnetworkController.h"
+#import "Common.h"
 
 @interface PhoneSetupController (){
     NSString *tableViewFor;
@@ -42,6 +43,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    defColor = [UIColor colorWithRed:66.0/255.0 green:247.0/255.0 blue:206.0/255.0 alpha:1.0];//GREEN
+    defColor2 = [UIColor colorWithRed:184.0/255.0 green:184.0/255.0 blue:184.0/255.0 alpha:1.0];//GRAY
+    
     [self setNavigationDefaults];
     [self setNavigation:@"viewDidLoad"];
     
@@ -57,7 +61,6 @@
 #pragma mark -  Navigation functions
 
 - (void)setNavigationDefaults{
-    defBlueColor =  [UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0];
 
     [[self navigationController] setNavigationBarHidden:NO animated:YES]; //show navigation bar
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
@@ -67,13 +70,33 @@
 {
     if([callFrom isEqualToString:@"viewDidLoad"])
     {
+        
+       
+         // Left Navigation ________________________________________________________________________________________________________
+         backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+        [backButton addTarget:self action:@selector(onBack) forControlEvents:UIControlEventTouchUpInside];
+        backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
+        [backButton setTitle:TITLE_BACK_TXT forState:normal];
+        [backButton setTitleColor:defColor2 forState:UIControlStateNormal];
+        [backButton addTarget:self action:@selector(btnBackTouchStart) forControlEvents:UIControlEventTouchDown];
+        [backButton addTarget:self action:@selector(btnBackTouchEnd) forControlEvents:UIControlEventTouchUpInside];
+        
+        
+        backButton.showsTouchWhenHighlighted = YES;
+        UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+        NSMutableArray  *leftNavItems  = [NSMutableArray arrayWithObjects:leftBarButton,nil];
+        
+        [self.navigationItem setLeftBarButtonItems:leftNavItems]; //Left button ___________
+       
+        
         // Center title ________________________________________
         titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
         titleLabel.backgroundColor = [UIColor clearColor];
-        //titleLabel.font = [UIFont fontWithName:TITLE_FONT size:18];
+        titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_FONT_SIZE];
         titleLabel.textAlignment = NSTextAlignmentCenter;
-        titleLabel.textColor = defBlueColor;
-        titleLabel.text = @"Phone Setup";
+        titleLabel.textColor = defColor;
+        titleLabel.text = APP_NAME;
+        
         
         self.navigationItem.titleView = titleLabel; //Center title ___________
         
@@ -81,9 +104,13 @@
         // Right Navigation ________________________________________
         nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
         [nextButton addTarget:self action:@selector(onNext) forControlEvents:UIControlEventTouchUpInside];
-        //[nextButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
-        [nextButton setTitle:@"Next" forState:normal];
-        [nextButton setTitleColor:defBlueColor forState:UIControlStateNormal];
+        nextButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
+        [nextButton setTitle:TITLE_NEXT_TXT forState:normal];
+        [nextButton setTitleColor:defColor2 forState:UIControlStateNormal];
+        [nextButton addTarget:self action:@selector(btnNextTouchStart) forControlEvents:UIControlEventTouchDown];
+        [nextButton addTarget:self action:@selector(btnNextTouchEnd) forControlEvents:UIControlEventTouchUpInside];
+        
+        
         
         nextButton.showsTouchWhenHighlighted = YES;
         UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
@@ -95,7 +122,37 @@
     }
 }
 
+-(void)btnNextTouchStart{
+    [self setNextHighlighted:YES];
+}
+-(void)btnNextTouchEnd{
+    [self setNextHighlighted:NO];
+}
+- (void)setNextHighlighted:(BOOL)highlighted {
+    (highlighted) ? [nextButton setBackgroundColor:defColor] : [nextButton setBackgroundColor:[UIColor clearColor]];
+}
+
+-(void)btnBackTouchStart{
+    [self setBackHighlighted:YES];
+}
+-(void)btnBackTouchEnd{
+    [self setBackHighlighted:NO];
+    [self onBack];
+}
+- (void)setBackHighlighted:(BOOL)highlighted {
+    (highlighted) ? [backButton setBackgroundColor:defColor] : [backButton setBackgroundColor:[UIColor clearColor]];
+}
+
+-(void)onBack{
+    [self.navigationController popViewControllerAnimated:YES];
+    // Remove observers
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 -(void)onNext{
+
+    [self setNextHighlighted:NO];
+    
     BOOL goToNext = YES;
     
     if( goToNext ) {
@@ -125,7 +182,7 @@
 }
 
 -(IBAction)getForwardingNum{
-    if( [self.btnforwardingNumber.titleLabel.text isEqualToString:@"Click here to get Forwarding #"] ){
+    if( [self.btnforwardingNumber.titleLabel.text isEqualToString:@"Get Forwarding #"] ){
         [self setTextIn:@"btnforwardingNumber" str:@"Please wait..."];
         
         double delayInSeconds = 3.0;
@@ -209,7 +266,9 @@
         
         //7
         [cell.textLabel setText:name];
+        cell.textLabel.textColor = defColor;
         [cell.detailTextLabel setText:number];
+        cell.detailTextLabel.textColor = defColor2;
     }
     return cell;
 }
@@ -243,10 +302,17 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     
     if(alertView == _importContacts && buttonIndex == 1) {
-        NSDictionary *dic = @{@"Khurram ali": @"222222222222",
-                                         @"Ozair": @"33333333333333",
-                                         @"Rehan ali": @"444444444",
-                                         @"Abdul Rauf": @"00923453017449"};
+        NSDictionary *dic = @{@"Khurram ali": @"3333333333",
+                              @"Ozair": @"5555555555",
+                              @"Rehan ali": @"7777777777",
+                              @"Abdul Rauf": @"00923453017449",
+                              @"Raheel Mateen": @"6666666666",
+                              @"Arbab": @"2222222222",
+                              @"M.Zeshan": @"4444444444",
+                              @"Zeshan Lalani": @"00923453017449",
+                              @"Shoaib": @"9999999999",
+                              @"Sharjeel Shahni": @"8888888888"
+                              };
         
         [untechable.emergencyContacts setDictionary:dic];
 

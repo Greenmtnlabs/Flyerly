@@ -31,11 +31,11 @@
 
     NSString *key   = [[dic allKeys] objectAtIndex:rowNumber];
     
-    NSLog(@"dic before delete rowNumber: %i, key: %@, dic: %@",rowNumber,key,dic);
+    NSLog(@"dic before delete rowNumber: %i, key: %@, dic: %@", rowNumber, key, dic);
     
     [dic removeObjectForKey:key];
 
-    NSLog(@"dic after delete rowNumber: %i, key: %@, dic: %@",rowNumber,key,dic);
+    NSLog(@"dic after delete rowNumber: %i, key: %@, dic: %@", rowNumber, key, dic);
 
     //return dic;
 }

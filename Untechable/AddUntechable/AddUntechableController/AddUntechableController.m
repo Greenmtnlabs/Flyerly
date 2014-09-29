@@ -14,6 +14,11 @@
 @interface AddUntechableController (){
     
 }
+
+@property (strong, nonatomic) IBOutlet UILabel *lblStartTime;
+
+@property (strong, nonatomic) IBOutlet UILabel *lblEndTime;
+
 @end
 
 @implementation AddUntechableController
@@ -37,13 +42,24 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    defColor = [UIColor colorWithRed:66.0/255.0 green:247.0/255.0 blue:206.0/255.0 alpha:1.0];//GREEN
+    defColor2 = [UIColor colorWithRed:184.0/255.0 green:184.0/255.0 blue:184.0/255.0 alpha:1.0];//GRAY
+    
     [self setNavigationDefaults];
     [self setNavigation:@"viewDidLoad"];
 
     [self setDefaultModel];
     
+    
+    _lblStartTime.font = [UIFont fontWithName:APP_FONT size:30];
+    _lblEndTime.font   = [UIFont fontWithName:APP_FONT size:30];
+    
+    self.btnStartTime.titleLabel.font = [UIFont fontWithName:APP_FONT size:20];
     [self.btnStartTime setTitle:untechable.startDate forState:UIControlStateNormal];
+
+    self.btnEndTime.titleLabel.font = [UIFont fontWithName:APP_FONT size:20];
     [self.btnEndTime setTitle:untechable.endDate forState:UIControlStateNormal];
+    
     
     self.picker.alpha = 0.0; //default hide picker
     self.picker.datePickerMode = UIDatePickerModeDateAndTime;
@@ -71,72 +87,32 @@
 #pragma mark -  Navigation functions
 
 - (void)setNavigationDefaults{
-    
+
+    /*
     NSDateFormatter *df = [[NSDateFormatter alloc] init];
     [df setDateFormat:@"EEEE, dd MMMM yyyy HH:mm"];
-    
     NSDate *date = [df dateFromString:@"Sep 25, 2014 05:27 PM"];
-
     NSLog(@"\n\n  DATE: %@ \n\n\n", date);
+    */
     
-    defBlueColor =  [UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0];
-    
-    //[[self navigationController] setNavigationBarHidden:YES animated:YES]; //hide navigation bar
     [[self navigationController] setNavigationBarHidden:NO animated:YES]; //show navigation bar
-    
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
 }
 
 -(void)setNavigation:(NSString *)callFrom
 {
     if([callFrom isEqualToString:@"viewDidLoad"])
-    {   /*
-       // Left Navigation ________________________________________________________________________________________________________
-        backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-        [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-         */
-        /*
-        //[backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
-        // HERE WE SET BACK BUTTON IMAGE AS REQUIRED
-        NSArray * arrayOfControllers =  self.navigationController.viewControllers;
-        int idx = [arrayOfControllers count] -2 ;
-        id previous = [arrayOfControllers objectAtIndex:idx];
-        if ([previous isKindOfClass:[AddUntechableController class]])
-        {
-            //[backButton setBackgroundImage:[UIImage imageNamed:@"back_button"] forState:UIControlStateNormal];
-        } else {
-            //[backButton setBackgroundImage:[UIImage imageNamed:@"home_button"] forState:UIControlStateNormal];
-        }
-        */
-        
-        /*
-        [backButton setTitle:@"Back" forState:normal];
-        
-        backButton.showsTouchWhenHighlighted = YES;
-        UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-
-        helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-        //[helpButton addTarget:self action:@selector(loadHelpController) forControlEvents:UIControlEventTouchUpInside];
-        //[helpButton setBackgroundImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
-        [helpButton setTitle:@"Help" forState:normal];
-        helpButton.showsTouchWhenHighlighted = YES;
-        UIBarButtonItem *leftBarHelpButton = [[UIBarButtonItem alloc] initWithCustomView:helpButton];
-        NSMutableArray  *leftNavItems  = [NSMutableArray arrayWithObjects:backBarButton,leftBarHelpButton,nil];
-        [self.navigationItem setLeftBarButtonItems:leftNavItems]; //Left button ___________
-        */
-        
-        
+    {
         
         // Center title ________________________________________________________________________________________________________
         titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
         titleLabel.backgroundColor = [UIColor clearColor];
-        //titleLabel.font = [UIFont fontWithName:TITLE_FONT size:18];
+        titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_FONT_SIZE];
         titleLabel.textAlignment = NSTextAlignmentCenter;
-        titleLabel.textColor = defBlueColor;
-        titleLabel.text = @"Untechable";
+        titleLabel.textColor = defColor;
+        titleLabel.text = APP_NAME;
         
-        self.navigationItem.titleView = titleLabel; //Center title ___________
-        
+        self.navigationItem.titleView = titleLabel; //Center title ___________        
         
 
         // Right Navigation ________________________________________________________________________________________________________
@@ -145,8 +121,12 @@
         nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
         [nextButton addTarget:self action:@selector(onNext) forControlEvents:UIControlEventTouchUpInside];
         //[nextButton setBackgroundImage:[UIImage imageNamed:@"next_button"] forState:UIControlStateNormal];
-        [nextButton setTitle:@"Next" forState:normal];
-        [nextButton setTitleColor:defBlueColor forState:UIControlStateNormal];
+        nextButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
+        [nextButton setTitle:TITLE_NEXT_TXT forState:normal];
+        [nextButton setTitleColor:defColor2 forState:UIControlStateNormal];
+        [nextButton addTarget:self action:@selector(btnNextTouchStart) forControlEvents:UIControlEventTouchDown];
+        [nextButton addTarget:self action:@selector(btnNextTouchEnd) forControlEvents:UIControlEventTouchUpInside];
+        
 
         nextButton.showsTouchWhenHighlighted = YES;
         UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
@@ -157,6 +137,16 @@
         
     }
 }
+-(void)btnNextTouchStart{
+    [self setNextHighlighted:YES];
+}
+-(void)btnNextTouchEnd{
+    [self setNextHighlighted:NO];
+}
+- (void)setNextHighlighted:(BOOL)highlighted {
+    (highlighted) ? [nextButton setBackgroundColor:defColor] : [nextButton setBackgroundColor:[UIColor clearColor]];
+}
+
 
 -(void)onNext{
     /* WILL WORK FOR IT

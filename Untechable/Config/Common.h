@@ -9,6 +9,16 @@
 
 #define APP_NAME @"Untechable"
 
+
 // http://iosdevelopertips.com/cocoa/date-formatters-examples-take-2.html
 #define DATE_FORMATE_1 @"MMM dd, YYYY hh:mm a"
 #define DATE_FORMATE_2 @""
+#define APP_FONT @"Pigiarniq"
+
+
+#define TITLE_NEXT_TXT @"NEXT"
+#define TITLE_BACK_TXT @"BACK"
+#define TITLE_FONT @"Pigiarniq-Bold"
+#define TITLE_FONT_SIZE 18
+#define TITLE_LEFT_SIZE 12
+#define TITLE_RIGHT_SIZE 12

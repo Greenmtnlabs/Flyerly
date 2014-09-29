@@ -16,7 +16,8 @@
     UIButton *helpButton;
     UIButton *backButton;
     UIButton *nextButton;
-    UIColor *defBlueColor;
+    UIColor *defColor;//GREEN
+    UIColor *defColor2;//GRAY
 
 }
 //Properties

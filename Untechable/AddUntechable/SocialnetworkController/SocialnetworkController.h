@@ -14,7 +14,7 @@
     UILabel *titleLabel;
     UIButton *helpButton;
     UIButton *backButton;
-    UIColor *defBlueColor;
+    UIColor *defColor;
     
 }
 //Properties
