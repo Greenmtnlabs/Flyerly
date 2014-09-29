@@ -50,6 +50,8 @@
     [self setNavigation:@"viewDidLoad"];
     
     [self setDefaultModel];
+    
+    [self updateUI];
 }
 
 - (void)didReceiveMemoryWarning
@@ -61,12 +63,11 @@
 #pragma mark -  UI functions
 -(void)updateUI
 {    
-    _canContactTxt.font = [UIFont fontWithName:APP_FONT size:30];
+    _canContactTxt.font = [UIFont fontWithName:APP_FONT size:15];
     
     self.btnforwardingNumber.titleLabel.font = [UIFont fontWithName:APP_FONT size:20];
     self.btnImport.titleLabel.font = [UIFont fontWithName:APP_FONT size:20];
 }
-
 
 #pragma mark -  Navigation functions
 

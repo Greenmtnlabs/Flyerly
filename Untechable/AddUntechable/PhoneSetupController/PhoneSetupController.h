@@ -21,10 +21,12 @@
 
 }
 //Properties
-@property (strong, nonatomic) NSString *startDate;
 @property (nonatomic,strong)  Untechable *untechable;
 
+
+
 @property (strong, nonatomic) IBOutlet UIButton *btnforwardingNumber;
+
 
 
 

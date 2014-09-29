@@ -12,6 +12,7 @@
 		36474F2419D9780100084F34 /* Pigiarniq Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36474F1F19D9780100084F34 /* Pigiarniq Italic.ttf */; };
 		36474F2519D9780100084F34 /* Pigiarniq Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36474F2019D9780100084F34 /* Pigiarniq Light.ttf */; };
 		36474F2619D9780100084F34 /* Pigiarniq Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36474F2119D9780100084F34 /* Pigiarniq Regular.ttf */; };
+		36474F2919D9AC3800084F34 /* UIPlaceHolderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 36474F2819D9AC3800084F34 /* UIPlaceHolderTextView.m */; };
 		36524AF119D940F4006DCAAF /* SocialnetworkController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36524AEF19D940F4006DCAAF /* SocialnetworkController.m */; };
 		36524AF219D940F4006DCAAF /* SocialnetworkController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36524AF019D940F4006DCAAF /* SocialnetworkController.xib */; };
 		36561D6C19D2C8A40069D897 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36561D6B19D2C8A40069D897 /* Foundation.framework */; };
@@ -50,6 +51,8 @@
 		36474F1F19D9780100084F34 /* Pigiarniq Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pigiarniq Italic.ttf"; sourceTree = "<group>"; };
 		36474F2019D9780100084F34 /* Pigiarniq Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pigiarniq Light.ttf"; sourceTree = "<group>"; };
 		36474F2119D9780100084F34 /* Pigiarniq Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pigiarniq Regular.ttf"; sourceTree = "<group>"; };
+		36474F2719D9AC3800084F34 /* UIPlaceHolderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIPlaceHolderTextView.h; path = AddUntechable/Models/UIPlaceHolderTextView.h; sourceTree = "<group>"; };
+		36474F2819D9AC3800084F34 /* UIPlaceHolderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIPlaceHolderTextView.m; path = AddUntechable/Models/UIPlaceHolderTextView.m; sourceTree = "<group>"; };
 		36524AEE19D940F4006DCAAF /* SocialnetworkController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SocialnetworkController.h; path = AddUntechable/SocialnetworkController/SocialnetworkController.h; sourceTree = "<group>"; };
 		36524AEF19D940F4006DCAAF /* SocialnetworkController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SocialnetworkController.m; path = AddUntechable/SocialnetworkController/SocialnetworkController.m; sourceTree = "<group>"; };
 		36524AF019D940F4006DCAAF /* SocialnetworkController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SocialnetworkController.xib; path = AddUntechable/SocialnetworkController/SocialnetworkController.xib; sourceTree = "<group>"; };
@@ -226,6 +229,8 @@
 		366ECD7B19D312BE00F71A11 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				36474F2719D9AC3800084F34 /* UIPlaceHolderTextView.h */,
+				36474F2819D9AC3800084F34 /* UIPlaceHolderTextView.m */,
 				366ECD7C19D3135200F71A11 /* Untechable.h */,
 				366ECD7D19D3135200F71A11 /* Untechable.m */,
 			);
@@ -369,6 +374,7 @@
 				366ECD9619D323DA00F71A11 /* AddUntechableController.m in Sources */,
 				366ECD9B19D323E200F71A11 /* PhoneSetupController.m in Sources */,
 				3663932519D6A0A700512965 /* CommonFunctions.m in Sources */,
+				36474F2919D9AC3800084F34 /* UIPlaceHolderTextView.m in Sources */,
 				36561D7C19D2C8A40069D897 /* AppDelegate.m in Sources */,
 				366ECD7E19D3135200F71A11 /* Untechable.m in Sources */,
 				36524AF119D940F4006DCAAF /* SocialnetworkController.m in Sources */,

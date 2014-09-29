@@ -8,18 +8,20 @@
 
 #import <UIKit/UIKit.h>
 #import "Untechable.h"
-
+#import "UIPlaceHolderTextView.h"
 @interface SocialnetworkController : UIViewController
 {
     UILabel *titleLabel;
     UIButton *helpButton;
     UIButton *backButton;
-    UIColor *defGreen;
-    UIColor *defGray;
+    UIButton *finishButton;
+    UIColor *defGreen;//GREEN
+    UIColor *defGray;//GRAY
     
 }
 //Properties
 @property (nonatomic,strong)  Untechable *untechable;
+@property(nonatomic,strong) IBOutlet UIPlaceHolderTextView *descriptionView;
 
 
 
