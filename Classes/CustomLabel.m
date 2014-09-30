@@ -30,7 +30,7 @@
     
     CGContextSetTextDrawingMode(c, kCGTextStroke);
     self.textColor = borderColor;
-    [super drawTextInRect:rect];
+    //[super drawTextInRect:rect];
     
     CGContextSetTextDrawingMode(c, kCGTextFill);
     self.textColor = textColor;
