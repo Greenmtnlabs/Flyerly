@@ -93,6 +93,7 @@
     [self.btnforwardingNumber setTitleColor:defGray forState:UIControlStateNormal];
     self.btnforwardingNumber.titleLabel.font = [UIFont fontWithName:APP_FONT size:20];
 
+    self.inputForwadingNumber.userInteractionEnabled = NO;
     [self.inputForwadingNumber setTextColor:defGreen];
     self.inputForwadingNumber.font = [UIFont fontWithName:APP_FONT size:16];
     self.inputForwadingNumber.delegate = self;
@@ -252,6 +253,7 @@
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
             [self setTextIn:@"_btnforwardingNumber" str:@"Forward call here"];
+            self.btnforwardingNumber.userInteractionEnabled = NO;
             self.inputForwadingNumber.text = @"123456789";
         });
         

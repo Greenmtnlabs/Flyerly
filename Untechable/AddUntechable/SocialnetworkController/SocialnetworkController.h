@@ -9,12 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "Untechable.h"
 #import "UIPlaceHolderTextView.h"
-@interface SocialnetworkController : UIViewController
+@interface SocialnetworkController : UIViewController < UITextFieldDelegate >
 {
     UILabel *titleLabel;
     UIButton *helpButton;
     UIButton *backButton;
-    UIButton *finishButton;
+    UIButton *nextButton;
     UIColor *defGreen;//GREEN
     UIColor *defGray;//GRAY
     
@@ -23,6 +23,7 @@
 @property (nonatomic,strong)  Untechable *untechable;
 @property(nonatomic,strong) IBOutlet UIPlaceHolderTextView *descriptionView;
 
+- (IBAction)shareOn:(id)sender;
 
 
 @end

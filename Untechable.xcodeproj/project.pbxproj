@@ -34,6 +34,8 @@
 		366ECD9B19D323E200F71A11 /* PhoneSetupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 366ECD9919D323E200F71A11 /* PhoneSetupController.m */; };
 		366ECD9C19D323E200F71A11 /* PhoneSetupController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 366ECD9A19D323E200F71A11 /* PhoneSetupController.xib */; };
 		36B0369E19DAD37200E8CD21 /* inputBottomBg2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36B0369D19DAD37200E8CD21 /* inputBottomBg2@2x.png */; };
+		36B036A619DAF44D00E8CD21 /* EmailSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B036A419DAF44D00E8CD21 /* EmailSettingController.m */; };
+		36B036A719DAF44D00E8CD21 /* EmailSettingController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36B036A519DAF44D00E8CD21 /* EmailSettingController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +87,9 @@
 		366ECD9919D323E200F71A11 /* PhoneSetupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhoneSetupController.m; path = AddUntechable/PhoneSetupController/PhoneSetupController.m; sourceTree = "<group>"; };
 		366ECD9A19D323E200F71A11 /* PhoneSetupController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PhoneSetupController.xib; path = AddUntechable/PhoneSetupController/PhoneSetupController.xib; sourceTree = "<group>"; };
 		36B0369D19DAD37200E8CD21 /* inputBottomBg2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "inputBottomBg2@2x.png"; sourceTree = "<group>"; };
+		36B036A319DAF44D00E8CD21 /* EmailSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EmailSettingController.h; path = AddUntechable/EmailSettingController/EmailSettingController.h; sourceTree = "<group>"; };
+		36B036A419DAF44D00E8CD21 /* EmailSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EmailSettingController.m; path = AddUntechable/EmailSettingController/EmailSettingController.m; sourceTree = "<group>"; };
+		36B036A519DAF44D00E8CD21 /* EmailSettingController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EmailSettingController.xib; path = AddUntechable/EmailSettingController/EmailSettingController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,6 +178,7 @@
 				366ECD7F19D317E200F71A11 /* Config */,
 				3663932219D6A0A700512965 /* CommonFunctions */,
 				366ECD7519D2D24600F71A11 /* AddUntechable */,
+				36B0369F19DAF3E400E8CD21 /* EmailSettingController */,
 				36561D7D19D2C8A40069D897 /* Images.xcassets */,
 			);
 			path = Untechable;
@@ -277,6 +283,16 @@
 			path = Untechable/images;
 			sourceTree = "<group>";
 		};
+		36B0369F19DAF3E400E8CD21 /* EmailSettingController */ = {
+			isa = PBXGroup;
+			children = (
+				36B036A319DAF44D00E8CD21 /* EmailSettingController.h */,
+				36B036A419DAF44D00E8CD21 /* EmailSettingController.m */,
+				36B036A519DAF44D00E8CD21 /* EmailSettingController.xib */,
+			);
+			name = EmailSettingController;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -364,6 +380,7 @@
 				36474F2519D9780100084F34 /* Pigiarniq Light.ttf in Resources */,
 				36524AF219D940F4006DCAAF /* SocialnetworkController.xib in Resources */,
 				366ECD9719D323DA00F71A11 /* AddUntechableController.xib in Resources */,
+				36B036A719DAF44D00E8CD21 /* EmailSettingController.xib in Resources */,
 				36561D7619D2C8A40069D897 /* InfoPlist.strings in Resources */,
 				36561D7E19D2C8A40069D897 /* Images.xcassets in Resources */,
 			);
@@ -388,6 +405,7 @@
 				366ECD9B19D323E200F71A11 /* PhoneSetupController.m in Sources */,
 				3663932519D6A0A700512965 /* CommonFunctions.m in Sources */,
 				36474F2919D9AC3800084F34 /* UIPlaceHolderTextView.m in Sources */,
+				36B036A619DAF44D00E8CD21 /* EmailSettingController.m in Sources */,
 				36561D7C19D2C8A40069D897 /* AppDelegate.m in Sources */,
 				366ECD7E19D3135200F71A11 /* Untechable.m in Sources */,
 				36524AF119D940F4006DCAAF /* SocialnetworkController.m in Sources */,

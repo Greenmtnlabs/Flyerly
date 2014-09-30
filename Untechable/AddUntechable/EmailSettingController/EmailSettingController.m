@@ -1,30 +1,28 @@
 //
-//  SocialnetworkController.m
+//  EmailSettingController.m
 //  Untechable
 //
-//  Created by Muhammad Raheel on 29/09/2014.
-//  Copyright (c) 2014 RIKSOF (Pvt) Ltd. All rights reserved.
+//  Created by Muhammad Raheel on 30/09/2014.
+//  Copyright (c) 2014 Green MTN Labs Inc. All rights reserved.
 //
 
-#import "SocialnetworkController.h"
 #import "EmailSettingController.h"
+#import "CommonFunctions.h"
 #import "Common.h"
 
-@interface SocialnetworkController ()
-
-@property (strong, nonatomic) IBOutlet UITextField *inputSetSocialStatus;
-
-@property (strong, nonatomic) IBOutlet UIButton *btnFacebook;
-
-@property (strong, nonatomic) IBOutlet UIButton *btnTwitter;
-
-@property (strong, nonatomic) IBOutlet UIButton *btnLinkedin;
 
 
+@interface EmailSettingController ()
+
+@property (strong, nonatomic) IBOutlet UILabel *lbl1;
+@property (strong, nonatomic) IBOutlet UITextField *inputEmail;
+
+@property (strong, nonatomic) IBOutlet UITextField *inputPassword;
+@property (strong, nonatomic) IBOutlet UITextField *inputMsg;
 
 @end
 
-@implementation SocialnetworkController
+@implementation EmailSettingController
 
 @synthesize untechable;
 
@@ -75,19 +73,24 @@
 #pragma mark -  UI functions
 -(void)updateUI
 {
-
-    [self.inputSetSocialStatus setTextColor:defGreen];
-    self.inputSetSocialStatus.font = [UIFont fontWithName:APP_FONT size:16];
-    self.inputSetSocialStatus.delegate = self;
     
-    [self.btnFacebook setTitleColor:defGray forState:UIControlStateNormal];
-    self.btnFacebook.titleLabel.font = [UIFont fontWithName:APP_FONT size:20];
+    [_lbl1 setTextColor:defGray];
+    _lbl1.font = [UIFont fontWithName:APP_FONT size:17];
     
-    [self.btnTwitter setTitleColor:defGray forState:UIControlStateNormal];
-    self.btnTwitter.titleLabel.font = [UIFont fontWithName:APP_FONT size:20];
+    [self.inputEmail setTextColor:defGreen];
+    self.inputEmail.font = [UIFont fontWithName:APP_FONT size:16];
+    self.inputEmail.delegate = self;
     
-    [self.btnLinkedin setTitleColor:defGray forState:UIControlStateNormal];
-    self.btnLinkedin.titleLabel.font = [UIFont fontWithName:APP_FONT size:20];
+    [self.inputPassword setTextColor:defGreen];
+    self.inputPassword.font = [UIFont fontWithName:APP_FONT size:16];
+    self.inputEmail.delegate = self;
+    
+    [self.inputMsg setTextColor:defGreen];
+    self.inputMsg.font = [UIFont fontWithName:APP_FONT size:16];
+    self.inputMsg.delegate = self;
+    
+    
+    
 }
 #pragma mark -  Navigation functions
 
@@ -138,9 +141,9 @@
         // Right Navigation ________________________________________
         
         nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
-        [nextButton addTarget:self action:@selector(onNext) forControlEvents:UIControlEventTouchUpInside];
+        [nextButton addTarget:self action:@selector(onFinish) forControlEvents:UIControlEventTouchUpInside];
         nextButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
-        [nextButton setTitle:@"NEXT" forState:normal];
+        [nextButton setTitle:@"FINISH" forState:normal];
         [nextButton setTitleColor:defGray forState:UIControlStateNormal];
         [nextButton addTarget:self action:@selector(btnNextTouchStart) forControlEvents:UIControlEventTouchDown];
         [nextButton addTarget:self action:@selector(btnNextTouchEnd) forControlEvents:UIControlEventTouchUpInside];
@@ -182,37 +185,10 @@
     [untechable goBack:self.navigationController];
 }
 
--(void)onNext{
-    
+-(void)onFinish{
     [self setNextHighlighted:NO];
-    
-    BOOL goToNext = YES;
-    
-    if( goToNext ) {
-        EmailSettingController *emailSettingController;
-        emailSettingController = [[EmailSettingController alloc]initWithNibName:@"EmailSettingController" bundle:nil];
-        emailSettingController.untechable = untechable;
-        [self.navigationController pushViewController:emailSettingController animated:YES];
-    }
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    // Remove observers
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-
-
-
-
-- (IBAction)shareOn:(id)sender {
-    if(sender == self.btnFacebook){
-        [self activateBtn:self.btnFacebook];
-    }
-    else if(sender == self.btnTwitter){
-        [self activateBtn:self.btnTwitter];
-    }
-    else if(sender == self.btnLinkedin){
-        [self activateBtn:self.btnLinkedin];
-    }
-}
-
--(void)activateBtn:btnPointer {
-   [btnPointer setTitleColor:defGreen forState:UIControlStateNormal];
-}
-
 @end
