@@ -20,6 +20,8 @@
 
 @implementation SocialnetworkController
 
+@synthesize untechable;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -46,6 +48,15 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+/**
+ * Update the view once it appears.
+ */
+-(void)viewDidAppear:(BOOL)animated {
+    
+    [super viewDidAppear:animated];
+    [untechable printNavigation:[self navigationController]];
+    
 }
 // ________________________     Custom functions    ___________________________
 #pragma mark -  UI functions
@@ -76,8 +87,7 @@
         
         
         // Left Navigation ________________________________________________________________________________________________________
-        backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-        [backButton addTarget:self action:@selector(onBack) forControlEvents:UIControlEventTouchUpInside];
+        backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
         [backButton setTitle:TITLE_BACK_TXT forState:normal];
         [backButton setTitleColor:defGray forState:UIControlStateNormal];
@@ -105,7 +115,7 @@
         
         
         // Right Navigation ________________________________________
-        finishButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+        finishButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         [finishButton addTarget:self action:@selector(onFinish) forControlEvents:UIControlEventTouchUpInside];
         finishButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
         [finishButton setTitle:@"Finish" forState:normal];
@@ -147,16 +157,11 @@
 }
 
 -(void)onBack{
-    [self.navigationController popViewControllerAnimated:YES];
-    // Remove observers
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [untechable goBack:self.navigationController];
 }
 
 -(void)onFinish{
-    
-    [self setNextHighlighted:NO];
-    
+    [self setNextHighlighted:NO];    
 }
-
 
 @end

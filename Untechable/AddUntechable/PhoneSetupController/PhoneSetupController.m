@@ -59,6 +59,15 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+/**
+ * Update the view once it appears.
+ */
+-(void)viewDidAppear:(BOOL)animated {
+    
+    [super viewDidAppear:animated];
+    [untechable printNavigation:[self navigationController]];
+    
+}
 // ________________________     Custom functions    ___________________________
 #pragma mark -  UI functions
 -(void)updateUI
@@ -88,8 +97,7 @@
         
        
          // Left Navigation ________________________________________________________________________________________________________
-         backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-        [backButton addTarget:self action:@selector(onBack) forControlEvents:UIControlEventTouchUpInside];
+        backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
         [backButton setTitle:TITLE_BACK_TXT forState:normal];
         [backButton setTitleColor:defGray forState:UIControlStateNormal];
@@ -117,7 +125,7 @@
         
         
         // Right Navigation ________________________________________
-        nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+        nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         [nextButton addTarget:self action:@selector(onNext) forControlEvents:UIControlEventTouchUpInside];
         nextButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
         [nextButton setTitle:TITLE_NEXT_TXT forState:normal];
@@ -159,9 +167,7 @@
 }
 
 -(void)onBack{
-    [self.navigationController popViewControllerAnimated:YES];
-    // Remove observers
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [untechable goBack:self.navigationController];    
 }
 
 -(void)onNext{
@@ -204,7 +210,7 @@
         double delayInSeconds = 3.0;
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            [self setTextIn:@"btnforwardingNumber" str:@"123"];
+            [self setTextIn:@"btnforwardingNumber" str:@"123456789"];
         });
 
     }
@@ -241,7 +247,7 @@
     }
     
     
-    NSLog(@"getCountForTableView Count of %@ : %d", tableViewFor, count);
+    NSLog(@"getCountForTableView Count of %@ : %ld", tableViewFor, (long)count);
     return count;
 }
 
@@ -342,7 +348,7 @@
                           @"Raheel Mateen": @"6666666666",
                           @"Arbab": @"2222222222",
                           @"M.Zeshan": @"4444444444",
-                          @"Zeshan Lalani": @"00923453017449",
+                          @"Zeshan Lalani": @"10101010101010",
                           @"Shoaib": @"9999999999",
                           @"Sharjeel Shahni": @"8888888888"
                           };

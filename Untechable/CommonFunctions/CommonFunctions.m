@@ -28,8 +28,8 @@
 }
 
 -(void)deleteKeyFromDic:dic delKeyAtIndex:(int)rowNumber {
-
-    NSString *key   = [[dic allKeys] objectAtIndex:rowNumber];
+    NSArray *arrayOfKeys = [[dic allKeys] sortedArrayUsingSelector: @selector(compare:)];
+    NSString *key   = [arrayOfKeys objectAtIndex:rowNumber];
     
     NSLog(@"dic before delete rowNumber: %i, key: %@, dic: %@", rowNumber, key, dic);
     
