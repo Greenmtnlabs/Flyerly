@@ -289,6 +289,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
 
     [lauchController showLoadingIndicator];
 
+    if ([PFUser currentUser] != nil) {
     //Checking user Exist in Parse
     PFQuery *query = [PFUser  query];
     [query whereKey:@"username" equalTo:[olduser lowercaseString]];
@@ -311,7 +312,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
             
         }
     }];
-
+    }
 
 
 }
