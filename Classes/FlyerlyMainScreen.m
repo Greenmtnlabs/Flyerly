@@ -23,7 +23,10 @@
 #import "GADInterstitial.h"
 #import "GADInterstitialDelegate.h"
 
-@interface FlyerlyMainScreen () 
+@interface FlyerlyMainScreen ()  {
+    
+    FlyerlyConfigurator *flyerConfigurator;
+}
 
 @end
 
@@ -326,7 +329,7 @@ BOOL adLoaded = false;
     
     // Prepare next interstitial.
     self.interstitial = [[GADInterstitial alloc] init];
-    self.interstitial.adUnitID = @"ca-app-pub-5409664730066465/9926514430";
+    self.interstitial.adUnitID = [flyerConfigurator interstitialAdID];
     self.interstitial.delegate = self;
     [self.interstitial loadRequest:[self request]];
     
@@ -345,8 +348,11 @@ BOOL adLoaded = false;
     self.interstitial = [[GADInterstitial alloc] init];
     self.interstitial.delegate = self;
     
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    flyerConfigurator = appDelegate.flyerConfigurator;
+    
     // Note: Edit SampleConstants.h to update kSampleAdUnitId with your interstitial ad unit id.
-    self.interstitial.adUnitID = @"ca-app-pub-5409664730066465/9926514430";
+    self.interstitial.adUnitID = [flyerConfigurator interstitialAdID];
     
     dispatch_async( dispatch_get_main_queue(), ^{
         
