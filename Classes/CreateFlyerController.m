@@ -36,6 +36,7 @@
     NSArray *coloursArray;
     int selectedAddMoreLayerTab;
     FlyerlyConfigurator *flyerConfigurator;
+    UserPurchases *userPurchases;
 }
 
 @end
@@ -405,11 +406,12 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             //HERE WE GET USER PURCHASES INFO FROM PARSE
             if(![[NSUserDefaults standardUserDefaults] stringForKey:@"InAppPurchases"]){
                 
-                UserPurchases *userPurchases_ = [UserPurchases getInstance];
+                userPurchases = [UserPurchases getInstance];
+                userPurchases.delegate = self;
                 
                 //Checking if user valid purchases
-                if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]   ||
-                    [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"]    ) {
+                if ( [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]   ||
+                    [userPurchases checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"]    ) {
                     
                     //Unloking features
                     UIImage *buttonImage = [UIImage imageNamed:@"video_tab.png"];
@@ -417,8 +419,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 }
                 
                 //Checking if user valid purchases
-                if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]   ||
-                    [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyIconsBundle"]    ) {
+                if ( [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]   ||
+                    [userPurchases checkKeyExistsInPurchases:@"comflyerlyIconsBundle"]    ) {
                     
                     fontsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Fonts-paid" ofType:@"plist"];
                     clipartsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Cliparts-paid" ofType:@"plist"];
@@ -2497,8 +2499,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         
         __weak CreateFlyerController *weakSelf = self;
         
-        UserPurchases *userPurchases_ = [UserPurchases getInstance];
-        userPurchases_.delegate = self;
+        userPurchases = [UserPurchases getInstance];
+        userPurchases.delegate = self;
         
         //__weak CreateFlyerController *weakCreateFlyerController = signInController;
         
@@ -2507,7 +2509,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             
             UINavigationController* navigationController = weakSelf.navigationController;
             [navigationController popViewControllerAnimated:NO];
-            [userPurchases_ setUserPurcahsesFromParse];
+            [userPurchases setUserPurcahsesFromParse];
             
             [weakSelf openPanel];
             
@@ -2515,9 +2517,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         };
         
         [self.navigationController pushViewController:signInController animated:YES];
-        
     }
-    
 }
 
 
@@ -2758,11 +2758,12 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     //Here we Highlight The ImageView
     [self.flyimgView layerIsBeingEdited:currentLayer];
     
-    UserPurchases *userPurchases_ = [UserPurchases getInstance];
+    userPurchases = [UserPurchases getInstance];
+    userPurchases.delegate = self;
     
     //Checking if user valid purchases
-    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]   ||
-        [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyIconsBundle"]    ) {
+    if ( [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]   ||
+         [userPurchases checkKeyExistsInPurchases:@"comflyerlyIconsBundle"]    ) {
         
         fontsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Fonts-paid" ofType:@"plist"];
         clipartsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Cliparts-paid" ofType:@"plist"];
@@ -3741,8 +3742,8 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         //Here Compare Current Flyer with history Flyer
         if ([self.flyer isVideoMergeProcessRequired]) {
             
-            
-            UserPurchases *userPurchases_ = [UserPurchases getInstance];
+            userPurchases = [UserPurchases getInstance];
+            userPurchases.delegate = self;
             
             //if ( ![userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ) {
                 if ( [self.interstitialAdd isReady]  && ![self.interstitialAdd hasBeenUsed] ) {
@@ -4787,11 +4788,12 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
 	}
 	else if(selectedButton == addVideoTabButton)
 	{
-        UserPurchases *userPurchases_ = [UserPurchases getInstance];
+        userPurchases = [UserPurchases getInstance];
+        userPurchases.delegate = self;
         
         if ([[PFUser currentUser] sessionToken].length != 0) {
-            if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
-                [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"] ) {
+            if ( [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
+                [userPurchases checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"] ) {
                 
                 [self openCustomCamera:YES];
                 _videoLabel.alpha = 1;
@@ -5072,10 +5074,11 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
 
 - ( void )productSuccesfullyPurchased: (NSString *)productId {
     
-    UserPurchases *userPurchases_ = [UserPurchases getInstance];
+    userPurchases = [UserPurchases getInstance];
+    userPurchases.delegate = self;
     
-    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
-        [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"] ) {
+    if ( [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ||
+        [userPurchases checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"] ) {
         
         UIImage *buttonImage = [UIImage imageNamed:@"video_tab.png"];
         [addVideoTabButton setImage:buttonImage forState:UIControlStateNormal];
@@ -5084,8 +5087,8 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     }
     
     //Checking if user valid purchases
-    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]   ||
-        [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyIconsBundle"]    ) {
+    if ( [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]   ||
+        [userPurchases checkKeyExistsInPurchases:@"comflyerlyIconsBundle"]    ) {
         
         fontsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Fonts-paid" ofType:@"plist"];
         clipartsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Cliparts-paid" ofType:@"plist"];
@@ -5123,8 +5126,8 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         
         __weak CreateFlyerController *createFlyerController = self;
         
-        UserPurchases *userPurchases_ = [UserPurchases getInstance];
-        userPurchases_.delegate = self;
+        userPurchases = [UserPurchases getInstance];
+        userPurchases.delegate = self;
         
         [inappviewcontroller_.presentingViewController dismissViewControllerAnimated:YES completion:nil];
         
@@ -5132,7 +5135,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
             
             UINavigationController* navigationController = createFlyerController.navigationController;
             [navigationController popViewControllerAnimated:NO];
-            [userPurchases_ setUserPurcahsesFromParse];
+            [userPurchases setUserPurcahsesFromParse];
         };
         
         [self.navigationController pushViewController:signInController animated:YES];
@@ -5146,10 +5149,11 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
 
 - (void) userPurchasesLoaded {
     
-    UserPurchases *userPurchases_ = [UserPurchases getInstance];
+    userPurchases = [UserPurchases getInstance];
+    userPurchases.delegate = self;
     
-    if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]  ||
-        [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"] ) {
+    if ( [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]  ||
+        [userPurchases checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"] ) {
         
         
         UIImage *buttonImage = [UIImage imageNamed:@"video_tab.png"];
@@ -5157,8 +5161,8 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         [inappviewcontroller.paidFeaturesTview reloadData];
         
         //Checking if user valid purchases
-    } else if ( [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]   ||
-               [userPurchases_ checkKeyExistsInPurchases:@"comflyerlyIconsBundle"]    )     {
+    } else if ( [userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]   ||
+               [userPurchases checkKeyExistsInPurchases:@"comflyerlyIconsBundle"]    )     {
         
         fontsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Fonts-paid" ofType:@"plist"];
         clipartsViewResourcePath = [[NSBundle mainBundle] pathForResource:@"Cliparts-paid" ofType:@"plist"];
@@ -5950,10 +5954,11 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     
     if( [[dic objectForKey:@"type"] isEqualToString:FLYER_LAYER_WATER_MARK] ){
 
-        UserPurchases *userPurchases_ = [UserPurchases getInstance];
+        userPurchases = [UserPurchases getInstance];
+        userPurchases.delegate = self;
         
         if ([[PFUser currentUser] sessionToken].length != 0) {
-            if ( ![userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ) {
+            if ( ![userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"] ) {
                 canPerformAct = NO;
             }
         } else{
