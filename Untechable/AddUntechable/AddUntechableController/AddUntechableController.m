@@ -77,13 +77,19 @@
 -(void)updateUI
 {
     
-    _lblStartTime.font = [UIFont fontWithName:APP_FONT size:30];
-    _lblEndTime.font   = [UIFont fontWithName:APP_FONT size:30];
+    [_lblStartTime setTextColor:defGray];
+    _lblStartTime.font = [UIFont fontWithName:APP_FONT size:25];
     
-    self.btnStartTime.titleLabel.font = [UIFont fontWithName:APP_FONT size:20];
+    [self.btnStartTime setTitleColor:defGreen forState:UIControlStateNormal];
+    self.btnStartTime.titleLabel.font = [UIFont fontWithName:APP_FONT size:18];
     [self.btnStartTime setTitle:untechable.startDate forState:UIControlStateNormal];
     
-    self.btnEndTime.titleLabel.font = [UIFont fontWithName:APP_FONT size:20];
+
+    [_lblEndTime setTextColor:defGray];
+    _lblEndTime.font   = [UIFont fontWithName:APP_FONT size:25];
+
+    [self.btnEndTime setTitleColor:defGreen forState:UIControlStateNormal];
+    self.btnEndTime.titleLabel.font = [UIFont fontWithName:APP_FONT size:18];
     [self.btnEndTime setTitle:untechable.endDate forState:UIControlStateNormal];
 }
 
