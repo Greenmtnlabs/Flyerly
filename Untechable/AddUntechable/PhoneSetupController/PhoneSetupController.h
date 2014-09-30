@@ -10,7 +10,7 @@
 #import "Untechable.h"
 
 
-@interface PhoneSetupController : UIViewController < UITableViewDataSource >
+@interface PhoneSetupController : UIViewController < UITableViewDataSource, UITextFieldDelegate >
 {
     UILabel *titleLabel;
     UIButton *helpButton;
@@ -22,12 +22,5 @@
 }
 //Properties
 @property (nonatomic,strong)  Untechable *untechable;
-
-
-
-@property (strong, nonatomic) IBOutlet UIButton *btnforwardingNumber;
-
-
-
 
 @end

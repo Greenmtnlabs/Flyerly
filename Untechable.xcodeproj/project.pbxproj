@@ -33,6 +33,7 @@
 		366ECD9719D323DA00F71A11 /* AddUntechableController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 366ECD9519D323DA00F71A11 /* AddUntechableController.xib */; };
 		366ECD9B19D323E200F71A11 /* PhoneSetupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 366ECD9919D323E200F71A11 /* PhoneSetupController.m */; };
 		366ECD9C19D323E200F71A11 /* PhoneSetupController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 366ECD9A19D323E200F71A11 /* PhoneSetupController.xib */; };
+		36B0369E19DAD37200E8CD21 /* inputBottomBg2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36B0369D19DAD37200E8CD21 /* inputBottomBg2@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +84,7 @@
 		366ECD9819D323E200F71A11 /* PhoneSetupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhoneSetupController.h; path = AddUntechable/PhoneSetupController/PhoneSetupController.h; sourceTree = "<group>"; };
 		366ECD9919D323E200F71A11 /* PhoneSetupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhoneSetupController.m; path = AddUntechable/PhoneSetupController/PhoneSetupController.m; sourceTree = "<group>"; };
 		366ECD9A19D323E200F71A11 /* PhoneSetupController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PhoneSetupController.xib; path = AddUntechable/PhoneSetupController/PhoneSetupController.xib; sourceTree = "<group>"; };
+		36B0369D19DAD37200E8CD21 /* inputBottomBg2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "inputBottomBg2@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				36561D7119D2C8A40069D897 /* Untechable */,
+				36B0369A19DAD2AB00E8CD21 /* images */,
 				36561D7219D2C8A40069D897 /* Supporting Files */,
 				36561D8A19D2C8A40069D897 /* UntechableTests */,
 				36561D6A19D2C8A40069D897 /* Frameworks */,
@@ -265,6 +268,15 @@
 			name = PhoneSetupController;
 			sourceTree = "<group>";
 		};
+		36B0369A19DAD2AB00E8CD21 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				36B0369D19DAD37200E8CD21 /* inputBottomBg2@2x.png */,
+			);
+			name = images;
+			path = Untechable/images;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -346,6 +358,7 @@
 				366ECD9C19D323E200F71A11 /* PhoneSetupController.xib in Resources */,
 				36474F2619D9780100084F34 /* Pigiarniq Regular.ttf in Resources */,
 				36474F2219D9780100084F34 /* Pigiarniq Bold.ttf in Resources */,
+				36B0369E19DAD37200E8CD21 /* inputBottomBg2@2x.png in Resources */,
 				36474F2419D9780100084F34 /* Pigiarniq Italic.ttf in Resources */,
 				36474F2319D9780100084F34 /* Pigiarniq Heavy.ttf in Resources */,
 				36474F2519D9780100084F34 /* Pigiarniq Light.ttf in Resources */,

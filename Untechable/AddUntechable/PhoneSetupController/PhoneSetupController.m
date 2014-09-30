@@ -15,11 +15,19 @@
     NSString *tableViewFor;
     CommonFunctions *commonFunctions;
 }
-@property (strong, nonatomic) IBOutlet UILabel *canContactTxt;
+
+@property (strong, nonatomic) IBOutlet UIButton *btnforwardingNumber;
+@property (strong, nonatomic) IBOutlet UITextField *inputForwadingNumber;
+
+@property (strong, nonatomic) IBOutlet UILabel *lblEmergencyNumber;
+@property (strong, nonatomic) IBOutlet UITextField *inputEmergencyNumber;
+
 @property (strong, nonatomic) IBOutlet UIButton *btnImport;
 
-
 @property (strong, nonatomic) IBOutlet UITableView *contactsTableView;
+@property (strong, nonatomic) IBOutlet UILabel *lblCanContactTxt;
+
+
 @property (strong, nonatomic) UIAlertView *importContacts;
 
 @end
@@ -29,7 +37,7 @@
 
 
 @synthesize untechable;
-@synthesize btnforwardingNumber;
+
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -52,6 +60,7 @@
     [self setDefaultModel];
     
     [self updateUI];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -68,14 +77,46 @@
     [untechable printNavigation:[self navigationController]];
     
 }
+/*
+ Hide keyboard on done button of keyboard press
+ */
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return NO;
+}
+
 // ________________________     Custom functions    ___________________________
 #pragma mark -  UI functions
 -(void)updateUI
-{    
-    _canContactTxt.font = [UIFont fontWithName:APP_FONT size:15];
-    
+{
+
+    [self.btnforwardingNumber setTitleColor:defGray forState:UIControlStateNormal];
     self.btnforwardingNumber.titleLabel.font = [UIFont fontWithName:APP_FONT size:20];
+
+    [self.inputForwadingNumber setTextColor:defGreen];
+    self.inputForwadingNumber.font = [UIFont fontWithName:APP_FONT size:16];
+    self.inputForwadingNumber.delegate = self;
+    
+    
+    
+    
+    
+    [_lblEmergencyNumber setTextColor:defGray];
+    _lblEmergencyNumber.font = [UIFont fontWithName:APP_FONT size:20];
+    
+    [self.inputEmergencyNumber setTextColor:defGreen];
+    self.inputEmergencyNumber.font = [UIFont fontWithName:APP_FONT size:16];
+    self.inputEmergencyNumber.delegate = self;
+    
+    
+    
+    [self.btnImport setTitleColor:defGray forState:UIControlStateNormal];
     self.btnImport.titleLabel.font = [UIFont fontWithName:APP_FONT size:20];
+
+    [_lblCanContactTxt setTextColor:defGray];
+    _lblCanContactTxt.font = [UIFont fontWithName:APP_FONT size:15];
+    
+    
 }
 
 #pragma mark -  Navigation functions
@@ -186,7 +227,7 @@
 
 #pragma mark -  Model funcs
 -(void)setTextIn:(NSString *)txtIn str:(NSString *)txt{
-    if( [txtIn isEqualToString:@"btnforwardingNumber"] ) {
+    if( [txtIn isEqualToString:@"_btnforwardingNumber"] ) {
       [self.btnforwardingNumber setTitle:txt forState:UIControlStateNormal];
     }
 }
@@ -199,19 +240,21 @@
     [self importContactsAfterAllow];//for testing
     
     if( !([untechable.forwardingNumber isEqualToString:@""]) ){
-        [self setTextIn:@"btnforwardingNumber" str:untechable.startDate];
+        [self setTextIn:@"_btnforwardingNumber" str:untechable.startDate];
     }
 }
 
 -(IBAction)getForwardingNum{
-    if( [self.btnforwardingNumber.titleLabel.text isEqualToString:@"Get Forwarding #"] ){
-        [self setTextIn:@"btnforwardingNumber" str:@"Please wait..."];
+    if( [self.btnforwardingNumber.titleLabel.text isEqualToString:@"Get A Number"] ){
+        [self setTextIn:@"_btnforwardingNumber" str:@"Please wait..."];
         
         double delayInSeconds = 3.0;
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            [self setTextIn:@"btnforwardingNumber" str:@"123456789"];
+            [self setTextIn:@"_btnforwardingNumber" str:@"Forward call here"];
+            self.inputForwadingNumber.text = @"123456789";
         });
+        
 
     }
 }
@@ -359,5 +402,4 @@
     
     [self tableViewSR:@"reStart" callFor:@"contactsTableView"];
 }
-
 @end
