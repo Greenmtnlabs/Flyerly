@@ -42,6 +42,37 @@
  leaving that decision up to the user.
  */
 
+//BannerAd Id
+- (NSString*)bannerAdID {
+    
+#ifdef DEBUG
+    
+    //ozair's account
+	return @"ca-app-pub-5409664730066465/8030978831";
+    
+#else
+    
+    return @"ca-app-pub-5409664730066465/8030978831";
+    
+#endif
+
+}
+
+//InterstitialAdd Id
+- (NSString*)interstitialAdID {
+    
+#ifdef DEBUG
+    
+    //ozair's account
+	return @"ca-app-pub-5409664730066465/9926514430";
+    
+#else
+    
+    return @"ca-app-pub-5409664730066465/9926514430";
+    
+#endif
+    
+}
 
 //Lob ApiKey
 - (NSString*)lobAppId {

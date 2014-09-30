@@ -35,6 +35,7 @@
     NSMutableArray *fontsArray,*clipartsArray,*emoticonsArray;
     NSArray *coloursArray;
     int selectedAddMoreLayerTab;
+    FlyerlyConfigurator *flyerConfigurator;
 }
 
 @end
@@ -77,7 +78,9 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     [self renderFlyer];
     self.flyimgView.addUiImgForDrawingLayer = NO;//must set:NO after renderFlyer all layers first time
     
-    
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    flyerConfigurator = appDelegate.flyerConfigurator;
+
     //Set Context View
     [self addAllLayersIntoScrollView];
     
@@ -96,7 +99,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     
     // Prepare next interstitial.
     self.interstitialAdd = [[GADInterstitial alloc] init];
-    self.interstitialAdd.adUnitID = @"ca-app-pub-5409664730066465/9926514430";
+    self.interstitialAdd.adUnitID = [flyerConfigurator interstitialAdID];
     self.interstitialAdd.delegate = self;
     [self.interstitialAdd loadRequest:[self request]];
     
@@ -224,7 +227,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     self.interstitialAdd.delegate = self;
     
     // Note: Edit SampleConstants.h to update kSampleAdUnitId with your interstitial ad unit id.
-    self.interstitialAdd.adUnitID = @"ca-app-pub-5409664730066465/9926514430";
+    self.interstitialAdd.adUnitID = [flyerConfigurator interstitialAdID];
     
     [self.interstitialAdd loadRequest:[self request]];
     
@@ -439,7 +442,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 self.bannerAdd = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner origin:origin];
                 
                 // Note: Edit SampleConstants.h to provide a definition for kSampleAdUnitID before compiling.
-                self.bannerAdd.adUnitID = @"ca-app-pub-5409664730066465/8030978831";
+                self.bannerAdd.adUnitID = [flyerConfigurator bannerAdID];
                 self.bannerAdd.delegate = self;
                 self.bannerAdd.rootViewController = self;
                 

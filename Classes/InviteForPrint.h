@@ -22,8 +22,6 @@
     FlyerlySingleton *globle;
 }
 
-- (NSMutableData *)exportFlyerToPDF;
-
 @property (nonatomic,strong) Flyer *flyer;
 
 @property(nonatomic,strong) IBOutlet UITextField *searchTextField;

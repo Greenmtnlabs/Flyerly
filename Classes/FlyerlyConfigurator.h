@@ -26,6 +26,8 @@
 - (NSString*)parseOfflineAppId;
 - (NSString*)parseOfflineClientKey;
 - (NSString*)flurrySessionId;
+- (NSString*)interstitialAdID;
+- (NSString*)bannerAdID;
 
 - (NSString*)lobAppId;
 - (NSString *const)paypalEnvironment;
