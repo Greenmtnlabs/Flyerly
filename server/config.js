@@ -59,6 +59,11 @@ else if( config.app.mode.current == config.app.mode.DEVELOPMENT  ) {
 	config.http.host	=	'http://api.typepath.com:3000';
 }
 
+// ACCOUNT TYPES
+config.acType = {};
+config.acType.GMAIL = 'GMAIL';
+config.acType.HOTMAIL = 'HOTMAIL';
+config.acType.YAHOO = 'YAHOO';
 
 
 // Make the configuration parameters available.
