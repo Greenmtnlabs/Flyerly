@@ -5174,7 +5174,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         
     }else {
         
-        if ( [sharePanel isHidden] ) {
+        if ( [sharePanel isHidden] && inappviewcontroller!= nil ) {
             [self presentViewController:inappviewcontroller animated:NO completion:nil];
         }
         

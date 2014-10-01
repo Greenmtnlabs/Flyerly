@@ -204,10 +204,6 @@ nil]
 #define FOURSQUARE_CLIENT_ID @"N2UKFTKALD4UBCB0ADNF30O5KIRV03X4UVG0S5Q5V43EDLPN"
 #define FOURSQUARE_CALLBACK_URL @"fsqapi://foursquare"
 
-#define BIGSTOCKAPI_ACCOUNT_ID @"862265"
-#define BIGSTOCKAPI_SECRETKEY @"e84301b7de141bc89517fc708de3285c825bb648"
-
-
 #define AddCaptionText @"Add caption here"
 #define NameYourFlyerText @"Name your Flyer"
 #define FlyerDateFormat @"MM/dd/YYYY"

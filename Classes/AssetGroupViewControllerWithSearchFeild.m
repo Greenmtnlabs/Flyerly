@@ -17,13 +17,12 @@
 @interface AssetGroupViewControllerWithSearchFeild () {
     NSMutableArray *imagesIDs;
     NSString *imageID_;
+    FlyerlyConfigurator *flyerConfigurator;
 }
 
 @end
 
 @implementation AssetGroupViewControllerWithSearchFeild
-
-
 
 - (void)viewDidLoad
 {
@@ -32,6 +31,9 @@
     [self showLoadingIndicator];
     
     [self requestProduct];
+    
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    flyerConfigurator = appDelegate.flyerConfigurator;
     
     // HERE WE CREATE FLYERLY ALBUM ON DEVICE
     if(![[NSUserDefaults standardUserDefaults] stringForKey:@"FlyerlyPurchasedAlbum"]){
@@ -130,7 +132,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
 - (void) apiRequestWithSearchingKeyWord: (NSString *)keyword {
 
     //string for the URL request
-    NSString *myUrlString = [NSString stringWithFormat:@"http://api.bigstockphoto.com/2/%@/search/?q=%@/&response_detail=all", BIGSTOCKAPI_ACCOUNT_ID, keyword];
+    NSString *myUrlString = [NSString stringWithFormat:@"http://api.bigstockphoto.com/2/%@/search/?q=%@/&response_detail=all", [flyerConfigurator bigstockAccountId], keyword];
     
     //create a NSURL object from the string data
     NSURL *myUrl = [NSURL URLWithString:myUrlString];
@@ -193,9 +195,9 @@ shouldReloadTableForSearchString:(NSString *)searchString
 // Send api request with lat long
 - (void) apiRequestForPurchasingImage: (NSString *)imageID {
     
-    NSString *encoded = [self sha1:[NSString stringWithFormat:@"%@%@%@", BIGSTOCKAPI_SECRETKEY, BIGSTOCKAPI_ACCOUNT_ID, imageID]];
+    NSString *encoded = [self sha1:[NSString stringWithFormat:@"%@%@%@", [flyerConfigurator bigstockSecretKey], [flyerConfigurator bigstockAccountId] , imageID]];
     
-    NSString *myUrlString = [NSString stringWithFormat:@"http://api.bigstockphoto.com/2/%@/purchase?image_id=%@&size_code=s&auth_key=%@", BIGSTOCKAPI_ACCOUNT_ID, imageID,encoded];
+    NSString *myUrlString = [NSString stringWithFormat:@"http://api.bigstockphoto.com/2/%@/purchase?image_id=%@&size_code=s&auth_key=%@", [flyerConfigurator bigstockAccountId] , imageID,encoded];
     
     //create a NSURL object from the string data
     NSURL *myUrl = [NSURL URLWithString:myUrlString];
@@ -260,9 +262,9 @@ shouldReloadTableForSearchString:(NSString *)searchString
             
             NSArray *purchasedImageDownloadID = [tableData objectForKey:@"download_id"];
             
-            NSString *encoded = [self sha1:[NSString stringWithFormat:@"%@%@%@", BIGSTOCKAPI_SECRETKEY, BIGSTOCKAPI_ACCOUNT_ID, purchasedImageDownloadID]];
+            NSString *encoded = [self sha1:[NSString stringWithFormat:@"%@%@%@", [flyerConfigurator bigstockSecretKey], [flyerConfigurator bigstockAccountId], purchasedImageDownloadID]];
             
-            NSString *purchaseImageUrlString = [NSString stringWithFormat:@"http://api.bigstockphoto.com/2/%@/download?auth_key=%@&download_id=%@", BIGSTOCKAPI_ACCOUNT_ID, encoded,purchasedImageDownloadID];
+            NSString *purchaseImageUrlString = [NSString stringWithFormat:@"http://api.bigstockphoto.com/2/%@/download?auth_key=%@&download_id=%@", [flyerConfigurator bigstockAccountId], encoded,purchasedImageDownloadID];
             
             NSURL *purchaseImageUrl = [[NSURL alloc] initWithString:purchaseImageUrlString];
             NSURLRequest *purchaseImageUrlRequest = [[NSURLRequest alloc] initWithURL:purchaseImageUrl];
