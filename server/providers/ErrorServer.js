@@ -49,36 +49,5 @@ errorServer.setup = function( app ) {
 	  	
 		// Response to client.
 		res.jsonp( 500, errorJSON );
-	});
-	/*
-	// Errors due to a resource not being found are handled
-	// here.
-	app.get('*', function(req, res){
-		
-		// Construct error JSON
-		var errorJSON = {
-	  	  request: {
-			  params: req.params,
-			  query: req.query,
-			  body: req.body,
-			  files: req.files,
-			  route: req.route,
-			  cookies: req.cookies,
-			  signedCookies: req.signedCookies,
-			  originalUrl: req.originalUrl,
-			  acceptedLanguages: req.acceptedLanguages,
-			  acceptedCharsets: req.acceptedCharsets 
-	  	  }, 
-	  	  response: {
-	  	  	  charset: res.charset,
-			  locals: res.locals
-	  	  }
-	    }
-		
-		// Log
-		logger.error( '404 - Not Found: ' + JSON.stringify( errorJSON ) );
-		
-		// Response to client.
-	    res.jsonp( 404, errorJSON );
-	});*/
+	});	
 }
