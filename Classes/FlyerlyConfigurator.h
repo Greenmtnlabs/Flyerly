@@ -28,6 +28,7 @@
 - (NSString*)flurrySessionId;
 - (NSString*)interstitialAdID;
 - (NSString*)bannerAdID;
+- (BOOL)currentDebugMood;
 
 - (NSString*)lobAppId;
 - (NSString *const)paypalEnvironment;

@@ -42,6 +42,22 @@
  leaving that decision up to the user.
  */
 
+//Debug mood
+- (BOOL)currentDebugMood {
+    
+#ifdef DEBUG
+    
+	return true;
+    
+#else
+    
+    return false;
+    
+#endif
+    
+}
+
+
 //BannerAd Id
 - (NSString*)bannerAdID {
     

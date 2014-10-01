@@ -12,6 +12,7 @@
 @interface MainSettingViewController () {
     
     SHKSharer *iosSharer;
+    FlyerlyConfigurator *flyerConfigurator;
 }
 
 
@@ -34,6 +35,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    flyerConfigurator = appDelegate.flyerConfigurator;
     
     UVConfig *config = [UVConfig configWithSite:@"http://flyerly.uservoice.com/"];
     [UserVoice initialize:config];
@@ -95,7 +99,9 @@
     if ([[PFUser currentUser] sessionToken].length != 0) {
         [category addObject:@"Sign Out"];
         // will remove in production build
-        [category addObject:@"Clear Purchases"];
+        if ( [flyerConfigurator currentDebugMood] ){
+            [category addObject:@"Clear Purchases"];
+        }
     } else {
         [category addObject:@"Sign In"];
     }
