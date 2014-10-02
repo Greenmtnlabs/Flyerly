@@ -522,6 +522,7 @@
 		243DD521192B24B500391786 /* FlyerIcons.xib in Resources */ = {isa = PBXBuildFile; fileRef = 243DD520192B24B500391786 /* FlyerIcons.xib */; };
 		243DD523192B24CB00391786 /* FlyerIcons-iPhone4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 243DD522192B24CB00391786 /* FlyerIcons-iPhone4.xib */; };
 		243EA07119BF4ABB0047D0E1 /* ImageLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 243EA07019BF4ABB0047D0E1 /* ImageLayer.m */; };
+		243FCF1919DD75C3003661EF /* watermark.png in Resources */ = {isa = PBXBuildFile; fileRef = 243FCF1819DD75C3003661EF /* watermark.png */; };
 		2441584819A4E85B00F12FAD /* ImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 2441584719A4E85B00F12FAD /* ImageLoader.m */; };
 		2447091719C342AD009A5585 /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2447091519C342AD009A5585 /* libGoogleAdMobAds.a */; };
 		2447091819C342AD009A5585 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2447091619C342AD009A5585 /* README.txt */; };
@@ -1765,6 +1766,7 @@
 		243DD522192B24CB00391786 /* FlyerIcons-iPhone4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "FlyerIcons-iPhone4.xib"; sourceTree = "<group>"; };
 		243EA06F19BF4ABB0047D0E1 /* ImageLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageLayer.h; sourceTree = "<group>"; };
 		243EA07019BF4ABB0047D0E1 /* ImageLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageLayer.m; sourceTree = "<group>"; };
+		243FCF1819DD75C3003661EF /* watermark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = watermark.png; sourceTree = "<group>"; };
 		2441584619A4E85B00F12FAD /* ImageLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageLoader.h; sourceTree = "<group>"; };
 		2441584719A4E85B00F12FAD /* ImageLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageLoader.m; sourceTree = "<group>"; };
 		244708F819C342AD009A5585 /* DFPBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFPBannerView.h; sourceTree = "<group>"; };
@@ -2653,6 +2655,7 @@
 		0DF3A361108DF47400D6C887 /* ImageLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				243FCF1819DD75C3003661EF /* watermark.png */,
 				36AF4CAB19BF21D4003C9FE3 /* magnifyingGlass2.png */,
 				36AF4CAC19BF21D4003C9FE3 /* magnifyingGlass3.png */,
 				36AECB9619B99D9C007763B9 /* magnifyingGlass.png */,
@@ -5257,6 +5260,7 @@
 				6560C1C51727FAF9005BE8DD /* grids.png in Resources */,
 				246EF535193C515D004539B2 /* emoticon83@2x.png in Resources */,
 				24218464194B4AEC00FDDA97 /* beach-chair-icon.png in Resources */,
+				243FCF1919DD75C3003661EF /* watermark.png in Resources */,
 				246EF517193C515D004539B2 /* emoticon56@2x.png in Resources */,
 				249F2060193F562C0072835E /* youtube_share_selected@2x.png in Resources */,
 				246EF4FE193C515D004539B2 /* emoticon33@2x.png in Resources */,
