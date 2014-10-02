@@ -290,7 +290,7 @@
             [warningAlert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:NO];
          
         //------
-        //This will remove in production build
+        //This code will not called in Production,as this row is not adding in view
         }else if(indexPath.row == 7){
         
             _persistence = [[RMStoreKeychainPersistence alloc] init];

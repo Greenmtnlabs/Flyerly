@@ -599,6 +599,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         [self.flyimgView layerStoppedEditing:currentLayer];
     }
     
+    userPurchases.delegate = nil;
+    
     // This work will be done in the background to prevent the UI from being
     // stuck.
     dispatch_async( dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
@@ -648,6 +650,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 self.onFlyerBack( @"" );
             });
         }
+        
         
         [Flurry logEvent:@"Saved Flyer"];
     });
@@ -5177,8 +5180,6 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         if ( [sharePanel isHidden] && inappviewcontroller!= nil ) {
             [self presentViewController:inappviewcontroller animated:NO completion:nil];
         }
-        
-        
     }
     
 }
