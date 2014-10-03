@@ -41,7 +41,6 @@
 @synthesize savedFlyrButton;
 @synthesize recentFlyers;
 @synthesize inviteFriendButton;
-@synthesize interstitial;
 
 BOOL adLoaded = false;
 
@@ -90,8 +89,8 @@ BOOL adLoaded = false;
         dispatch_async( dispatch_get_main_queue(), ^{
             UserPurchases *userPurchases_ = [UserPurchases getInstance];
             //if ( ![userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]){
-                if ([weakSelf.interstitial isReady] && ![weakSelf.interstitial hasBeenUsed]){
-                    [weakSelf.interstitial presentFromRootViewController:weakSelf];
+                if ([weakSelf.addInterstialFms isReady] && ![weakSelf.addInterstialFms hasBeenUsed]){
+                    [weakSelf.addInterstialFms presentFromRootViewController:weakSelf];
                 }
             //}
         });
@@ -319,19 +318,19 @@ BOOL adLoaded = false;
 - (void)interstitialDidReceiveAd:(GADInterstitial *)ad
 {
     //adLoaded = true;
-    //[self.interstitial presentFromRootViewController:self];
+    //[self.addInterstialFms presentFromRootViewController:self];
 }
 
 
 - (void)interstitialDidDismissScreen:(GADInterstitial *)ad {
     
-    self.interstitial.delegate = nil;
+    self.addInterstialFms.delegate = nil;
     
-    // Prepare next interstitial.
-    self.interstitial = [[GADInterstitial alloc] init];
-    self.interstitial.adUnitID = [flyerConfigurator interstitialAdID];
-    self.interstitial.delegate = self;
-    [self.interstitial loadRequest:[self request]];
+    // Prepare next addInterstialFms.
+    self.addInterstialFms = [[GADInterstitial alloc] init];
+    self.addInterstialFms.adUnitID = [flyerConfigurator interstitialAdID];
+    self.addInterstialFms.delegate = self;
+    [self.addInterstialFms loadRequest:[self request]];
     
 }
 
@@ -343,22 +342,23 @@ BOOL adLoaded = false;
     UVConfig *config = [UVConfig configWithSite:@"http://flyerly.uservoice.com/"];
     [UserVoice initialize:config];
     
-    // Create a new GADInterstitial each time. A GADInterstitial will only show one request in its
-    // lifetime. The property will release the old one and set the new one.
-    self.interstitial = [[GADInterstitial alloc] init];
-    self.interstitial.delegate = self;
-    
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     flyerConfigurator = appDelegate.flyerConfigurator;
     
-    // Note: Edit SampleConstants.h to update kSampleAdUnitId with your interstitial ad unit id.
-    self.interstitial.adUnitID = [flyerConfigurator interstitialAdID];
+    // Create a new GADInterstitial each time. A GADInterstitial will only show one request in its
+    // lifetime. The property will release the old one and set the new one.
     
     dispatch_async( dispatch_get_main_queue(), ^{
         
-        [self.interstitial loadRequest:[self request]];
+        self.addInterstialFms = [[GADInterstitial alloc] init];
+        self.addInterstialFms.delegate = self;
+        
+        // Note: Edit SampleConstants.h to update kSampleAdUnitId with your addInterstialFms ad unit id.
+        self.addInterstialFms.adUnitID = [flyerConfigurator interstitialAdID];
+        [self.addInterstialFms loadRequest:[self request]];
         
     });
+ 
     
     // Determin if the user has been greeted?
     NSString *greeted = [[NSUserDefaults standardUserDefaults] stringForKey:@"greeted"];
@@ -519,8 +519,8 @@ BOOL adLoaded = false;
             UserPurchases *userPurchases_ = [UserPurchases getInstance];
             //if ( ![userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]){
                 
-                if ([weakSelf.interstitial isReady]  && ![weakSelf.interstitial hasBeenUsed]){
-                    [weakSelf.interstitial presentFromRootViewController:weakSelf];
+                if ([weakSelf.addInterstialFms isReady]  && ![weakSelf.addInterstialFms hasBeenUsed]){
+                    [weakSelf.addInterstialFms presentFromRootViewController:weakSelf];
                 }
                 
             //}
@@ -531,7 +531,7 @@ BOOL adLoaded = false;
     
     dispatch_async( dispatch_get_main_queue(), ^{
         
-        [self.interstitial loadRequest:[self request]];
+        [self.addInterstialFms loadRequest:[self request]];
         
     });
 

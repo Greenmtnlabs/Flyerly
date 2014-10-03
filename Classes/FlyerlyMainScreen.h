@@ -39,7 +39,7 @@
 
 }
 
-@property(nonatomic, strong) GADInterstitial *interstitial;
+@property(nonatomic, strong) GADInterstitial *addInterstialFms;
 
 @property(nonatomic,strong) FlyrViewController *tpController;
 @property(nonatomic,strong) InviteFriendsController *addFriendsController;
