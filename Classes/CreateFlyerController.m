@@ -79,9 +79,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     [self renderFlyer];
     self.flyimgView.addUiImgForDrawingLayer = NO;//must set:NO after renderFlyer all layers first time
     
-    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
-    flyerConfigurator = appDelegate.flyerConfigurator;
-
     //Set Context View
     [self addAllLayersIntoScrollView];
     
@@ -221,6 +218,9 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
     dw_isOldLayer   = NO;
     
 	[super viewDidLoad];
+    
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    flyerConfigurator = appDelegate.flyerConfigurator;
     
     // Create a new GADInterstitial each time. A GADInterstitial will only show one request in its
     // lifetime. The property will release the old one and set the new one.
@@ -449,6 +449,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 self.bannerAdd.rootViewController = self;
                 
                 [self.bannerAdd loadRequest:[self request]];
+                
                 
                 NSArray *flyerbackgroundsViewArray = [[NSBundle mainBundle] loadNibNamed:@"Backgrounds" owner:self options:nil];
                 backgroundsView = [flyerbackgroundsViewArray objectAtIndex:0];
