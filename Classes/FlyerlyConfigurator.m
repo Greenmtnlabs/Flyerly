@@ -71,9 +71,8 @@
     
 #else
     
-    //return @"ca-app-pub-5409664730066465/8030978831";
-    //Rehan's a/c
-    return @"ca-app-pub-1703558915514520/3048145896";
+    //Live Jen'account
+    return @"ca-app-pub-3218409375181552/2458746629";
     
 #endif
 
@@ -91,9 +90,8 @@
     
 #else
     
-    //return @"ca-app-pub-5409664730066465/9926514430";
-    //Rehan's a/c
-    return @"ca-app-pub-1703558915514520/8955078699";
+    //Live Jen'account
+    return @" ca-app-pub-3218409375181552/5412213028";
     
 #endif
     
