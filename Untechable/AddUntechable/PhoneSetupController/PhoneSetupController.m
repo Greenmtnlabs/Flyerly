@@ -431,6 +431,8 @@
     
 }
 -(void)importContactsAfterAllow {
+    [self getAllContacts];
+    
     NSDictionary *dic = @{@"Khurram ali": @"3333333333",
                           @"Ozair": @"5555555555",
                           @"Rehan ali": @"7777777777",
@@ -448,5 +450,39 @@
     //[commonFunctions sortDic:untechable.emergencyContacts]; //zarorat nhe pari , ya auto sort kar raha hy
     
     [self tableViewSR:@"reStart" callFor:@"contactsTableView"];
+}
+
+
+-(void)getAllContacts{
+    CFErrorRef *error = NULL;
+    ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, error);
+    CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople(addressBook);
+    CFIndex numberOfPeople = ABAddressBookGetPersonCount(addressBook);
+    
+    for(int i = 0; i < numberOfPeople; i++) {
+        
+        ABRecordRef person = CFArrayGetValueAtIndex( allPeople, i );
+        
+        NSString *firstName = (__bridge NSString *)(ABRecordCopyValue(person, kABPersonFirstNameProperty));
+        NSString *lastName = (__bridge NSString *)(ABRecordCopyValue(person, kABPersonLastNameProperty));
+        
+        #ifdef DEBUG
+                NSLog(@"Name:%@ %@", firstName, lastName);
+        #endif
+      
+        
+        ABMultiValueRef phoneNumbers = ABRecordCopyValue(person, kABPersonPhoneProperty);
+        
+        for (CFIndex i = 0; i < ABMultiValueGetCount(phoneNumbers); i++) {
+            NSString *phoneNumber = (__bridge_transfer NSString *) ABMultiValueCopyValueAtIndex(phoneNumbers, i);
+
+            #ifdef DEBUG
+                NSLog(@"phone:%@", phoneNumber);
+            #endif
+        }
+        
+        NSLog(@"=============================================");
+        
+    }
 }
 @end
