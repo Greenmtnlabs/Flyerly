@@ -183,7 +183,7 @@
     {
         
        
-         // Left Navigation ________________________________________________________________________________________________________
+         // Left Navigation ___________________________________________________________
         backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
         [backButton setTitle:TITLE_BACK_TXT forState:normal];

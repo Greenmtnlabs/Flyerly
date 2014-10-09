@@ -1,8 +1,8 @@
 //
 //  AddFriendsController.h
-//  Flyr
+//  Untechable
 //
-//  Created by Riksof on 4/15/13.
+//  Created by Riksof on 4/15/13, update on 10/10/2014 by Abdul Rauf
 //
 //
 
@@ -20,6 +20,8 @@
 
 @interface InviteFriendsController : UIViewController <UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>{
     
+    UIColor *defGreen;//GREEN
+    UIColor *defGray;//GRAY
 
 }
 
@@ -31,17 +33,17 @@
 
 
 @property(nonatomic,strong) NSMutableArray *contactBackupArray;
-@property(nonatomic,strong) NSMutableArray *selectedIdentifiers;
+
+@property(nonatomic,strong) NSMutableDictionary *selectedContacts;
 @property(nonatomic,strong) NSMutableArray *iPhoneinvited;
 
 
 
 
 
-- (IBAction)loadLocalContacts:(UIButton *)sender;
-- (IBAction)onSearchClick:(UIButton *)sender;
+-(IBAction)loadLocalContacts:(UIButton *)sender;
+-(IBAction)onSearchClick:(UIButton *)sender;
 -(IBAction)goBack;
--(IBAction)invite;
-- (BOOL)ckeckExistContact:(NSString *)identifier;
+-(BOOL)ckeckExistContact:(NSString *)identifier;
 
 @end

@@ -1,8 +1,8 @@
 //
 //  AddFriendsDetail.h
-//  Flyr
+//  Untechable
 //
-//  Created by Riksof on 04/12/2013.
+//  Created by Khurram on 04/12/2013, update on 10/10/2014 by Abdul Rauf
 //
 //
 

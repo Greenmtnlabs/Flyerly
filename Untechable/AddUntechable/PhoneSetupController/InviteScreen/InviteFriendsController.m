@@ -1,8 +1,8 @@
 //
 //  AddFriendsController.m
-//  Flyr
+//  Untechable
 //
-//  Created by Riksof on 4/15/13.
+//  Created by Riksof on 4/15/13, update on 10/10/2014 by Abdul Rauf
 //
 //
 
@@ -17,68 +17,24 @@
 @end
 
 @implementation InviteFriendsController
-@synthesize uiTableView, contactsArray, selectedIdentifiers,contactsButton, searchTextField,iPhoneinvited;
+@synthesize uiTableView, contactsArray, selectedContacts ,contactsButton, searchTextField,iPhoneinvited;
 @synthesize contactBackupArray;
 
 #pragma mark  View Appear Methods
-
 - (void)viewDidLoad {
 
     [super viewDidLoad];
+    
+    [self setNavigation:@"viewDidLoad"];
 
     commonFunctions = [[CommonFunctions alloc] init];
-
     
-    self.selectedIdentifiers = [[NSMutableArray alloc] init];
-
-    self.navigationItem.hidesBackButton = YES;
-    [self.view setBackgroundColor:[UIColor colorWithRed:245/255.0 green:241/255.0 blue:222/255.0 alpha:1]];
-
-
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-28, -6, 50, 50)];
-    label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont fontWithName:TITLE_FONT size:18];
-    label.textAlignment = NSTextAlignmentCenter;
-    label.textColor = [UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0];
-    label.text = @"INVITE";
-    self.navigationItem.titleView = label;
-    
-    // Create left bar help button
-    UIButton *helpButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    [helpButton addTarget:self action:@selector(loadHelpController) forControlEvents:UIControlEventTouchUpInside];
-    [helpButton setImage:[UIImage imageNamed:@"help_icon"] forState:UIControlStateNormal];
-    helpButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:helpButton];
-    
-    
-    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-    [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-    [backButton setBackgroundImage:[UIImage imageNamed:@"home_button"] forState:UIControlStateNormal];
-    [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
-    backButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-    [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:backBarButton,leftBarButton,nil]];
-    
-    
-    // INVITE BAR BUTTON
-    UIButton *inviteButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-	[inviteButton addTarget:self action:@selector(invite) forControlEvents:UIControlEventTouchUpInside];
-    [inviteButton setBackgroundImage:[UIImage imageNamed:@"invite_friend"] forState:UIControlStateNormal];
-    inviteButton.showsTouchWhenHighlighted = YES;
-    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:inviteButton];
-    [self.navigationItem setRightBarButtonItems:[NSMutableArray arrayWithObjects:rightBarButton,nil]];
-    
-    [self.uiTableView  setBackgroundColor:[UIColor colorWithRed:245/255.0 green:241/255.0 blue:222/255.0 alpha:1.0]];
-    [searchTextField setReturnKeyType:UIReturnKeyDone];
-    
-    
-
+    [self initContactsDic];
     
     self.iPhoneinvited = [[NSMutableArray alloc] init];
 
     // Load device contacts
     [self loadLocalContacts:self.contactsButton];
-    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -95,18 +51,68 @@
     [super didReceiveMemoryWarning];
 }
 
+
 #pragma mark  Custom Methods
 
--(IBAction)goBack{
-    [self.navigationController popViewControllerAnimated:YES];
+-(void)initContactsDic{
+    self.selectedContacts = nil;
+    self.selectedContacts = [[NSMutableDictionary alloc] init];
+}
+- (void)setNavigationDefaults{
     
+    defGreen = [UIColor colorWithRed:66.0/255.0 green:247.0/255.0 blue:206.0/255.0 alpha:1.0];//GREEN
+    defGray = [UIColor colorWithRed:184.0/255.0 green:184.0/255.0 blue:184.0/255.0 alpha:1.0];//GRAY
+    
+    
+    [[self navigationController] setNavigationBarHidden:NO animated:YES]; //show navigation bar
+    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+}
+
+-(void)setNavigation:(NSString *)callFrom
+{
+    if([callFrom isEqualToString:@"viewDidLoad"])
+    {
+        
+        
+        // Center title ________________________________________
+        self.navigationItem.hidesBackButton = YES;
+        [self.view setBackgroundColor:[UIColor colorWithRed:245/255.0 green:241/255.0 blue:222/255.0 alpha:1]];
+        
+        
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-28, -6, 50, 50)];
+        label.backgroundColor = [UIColor clearColor];
+        label.font = [UIFont fontWithName:TITLE_FONT size:18];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.textColor = defGreen;
+        label.text = APP_NAME;
+        self.navigationItem.titleView = label;
+        
+        
+        // Left Navigation ___________________________________________________________
+        UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
+        [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+        [backButton setBackgroundImage:[UIImage imageNamed:@"searchicon"] forState:UIControlStateNormal];
+        [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+        backButton.showsTouchWhenHighlighted = YES;
+        UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+        [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:backBarButton,nil]];
+
+        
+        
+        
+        [self.uiTableView  setBackgroundColor:[UIColor colorWithRed:245/255.0 green:241/255.0 blue:222/255.0 alpha:1.0]];
+        [searchTextField setReturnKeyType:UIReturnKeyDone];
+    }
 }
 
 
 
+
+
+
 - (BOOL)ckeckExistContact:(NSString *)identifier{
-    for (int i = 0; i < selectedIdentifiers.count ; i++) {
-        if ([identifier isEqualToString:selectedIdentifiers[i]]) {
+    for(id key in selectedContacts) {
+        if ([identifier isEqualToString:[selectedContacts objectForKey:key]]) {
             return YES;
         }
     }
@@ -117,22 +123,16 @@
     return NO;
 }
 
--(IBAction)invite{
+-(IBAction)goBack{
     
-    NSMutableArray *identifiers = [[NSMutableArray alloc] init];
-    identifiers = selectedIdentifiers;
-    NSLog(@"%@",identifiers);
-    
-    if([identifiers count] > 0){
-        
-        
-        
+    NSLog(@"selectedContacts %@",selectedContacts);
+    /*
+    if([selectedContacts count] > 0){
     } else {
-
         [commonFunctions showAlert:@"Please select any contact to invite !" message:@""];
     }
-    
-
+    */
+    //[self.navigationController popViewControllerAnimated:YES];
 }
 
 
@@ -149,11 +149,9 @@
     // UNSELECTED BUTTON
     [contactsButton setSelected:YES];
 
-
-
     
-    self.selectedIdentifiers = nil;
-    self.selectedIdentifiers = [[NSMutableArray alloc] init];
+    
+    [self initContactsDic];
     
     
     [self.uiTableView reloadData];
@@ -343,28 +341,6 @@
     }
 }
 
-
-
-
-
-
-/*
- * Here we Hide our facebook post View
- */
-- (void)fbCancel {
-    [selectedIdentifiers removeAllObjects];
-    [uiTableView reloadData];
-    
-}
-
-
-
-
-
-
-
-
-
 #pragma mark Table view methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -398,8 +374,8 @@
     }
         
     
-    if(!self.selectedIdentifiers){
-        self.selectedIdentifiers = [[NSMutableArray alloc] init];
+    if(!self.selectedContacts){
+        [self initContactsDic];
     }
     
     ContactsModel *receivedDic;
@@ -455,14 +431,14 @@
         if (model.status == 0) {
             
             [model setInvitedStatus:1];
-            [selectedIdentifiers addObject:model.description];
+            [selectedContacts setObject:model.name forKey:model.description];
             
         }else if (model.status == 1) {
             
             [model setInvitedStatus:0];
             
             //REMOVE FROM SENDING LIST
-            [selectedIdentifiers removeObject:model.description];
+            [selectedContacts removeObjectForKey:model.description];
         }
         
     }

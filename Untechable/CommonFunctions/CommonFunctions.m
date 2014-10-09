@@ -40,6 +40,8 @@
     //return dic;
 }
 
+
+//[commonFunctions showAlert:@"Please select any contact to invite !" message:@""];
 -(void)showAlert:(NSString *)title message:(NSString *)message{
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
                                                     message:message
