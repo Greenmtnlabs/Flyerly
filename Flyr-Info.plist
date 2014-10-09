@@ -57,7 +57,7 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>477</string>
-	<key>FacebookAppID</key>
+			<key>FacebookAppID</key>
 	<string>136691489852349</string>
 	<key>FacebookDisplayName</key>
 	<string>Flyerly</string>
