@@ -13,8 +13,8 @@ config.app.errorUrl   = '/error';
 config.app.mode.LOCALHOST = 'localhost'; //Port: 3000
 config.app.mode.PRODUCTION = 'production';   //Port: 80
 config.app.mode.DEVELOPMENT = 'development'; //Port: 3000
-config.app.mode.current = config.app.mode.LOCALHOST;
-
+config.app.mode.current = config.app.mode.DEVELOPMENT;
+ 
 // HTTP server configuration
 config.http = {}
 config.http.host	=	'';
@@ -35,10 +35,9 @@ config.logger.maxFiles = 1;
 config.crons = {}
 config.crons.cron1 = 1;
 
-// Db Configuration
-config.db = {}
 
-config.db.modelVersion = 1.0;
+
+// Check if we are on local host
 if( config.app.mode.current == config.app.mode.LOCALHOST  ) {
 	config.http.port = 3000;
  	// 1-Database setting
@@ -55,8 +54,8 @@ else if( config.app.mode.current == config.app.mode.PRODUCTION  ) {
 else if( config.app.mode.current == config.app.mode.DEVELOPMENT  ) {
 	config.http.port = 3000;
 	// 1-Database setting
-	config.db.host =  '';	
-	config.http.host	=	'http://api.typepath.com:3000';
+	//config.db.host =  '';	
+	config.http.host	=	'http://localhost:3000';
 }
 
 // ACCOUNT TYPES
@@ -65,6 +64,9 @@ config.acType.GMAIL = 'GMAIL';
 config.acType.HOTMAIL = 'HOTMAIL';
 config.acType.YAHOO = 'YAHOO';
 
-
+// Db Configuration
+config.db = {}
+config.db.host =  'mongodb://admin:untechable@ds043180.mongolab.com:43180/untechable';
+config.db.modelVersion = 1.0;
 // Make the configuration parameters available.
 module.exports = config;

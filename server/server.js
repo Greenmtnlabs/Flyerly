@@ -37,6 +37,12 @@ app.use( express.compress() );
 var emailServer = require( __dirname + '/providers/EmailServer' );
 emailServer.setup( app );
 
+var twillio = require( __dirname + '/providers/Twillio' );
+twillio.setup( app );
+
+var event = require( __dirname + '/providers/Events' );
+event.setup( app );
+
 // Start the http server
 var httpServer;
 

@@ -78,5 +78,4 @@ EmailServer.setup = function( app ) {
 		}
 
 	});
-
 }
