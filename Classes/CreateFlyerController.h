@@ -127,6 +127,7 @@
 @property (nonatomic, strong) UIImage *selectedTemplate;
 @property (nonatomic, strong) UIAlertView *deleteAlert;
 @property (nonatomic, strong) UIAlertView *signInAlert;
+@property (nonatomic, strong) UIAlertView *waterMarkPurchasingAlert;
 @property (nonatomic, strong) UIAlertView *spaceUnavailableAlert;
 @property (nonatomic, assign) NSInteger imgPickerFlag;
 @property (nonatomic, strong) NSString *flyerPath;

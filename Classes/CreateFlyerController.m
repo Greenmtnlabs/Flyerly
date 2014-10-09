@@ -53,7 +53,7 @@
 
 @synthesize selectedFont,selectedColor,selectedTemplate,fontTabButton,colorTabButton,sizeTabButton,fontEditButton,selectedSize,
 fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sharePanel,clipArtTabButton,emoticonsTabButton,artsColorTabButton,artsSizeTabButton, drawingColorTabButton,drawingPatternTabButton, drawingSizeTabButton,drawingEraserTabButton,drawingEraserMsg;
-@synthesize cameraTabButton,photoTabButton,widthTabButton,heightTabButton,deleteAlert,signInAlert,spaceUnavailableAlert;
+@synthesize cameraTabButton,photoTabButton,widthTabButton,heightTabButton,deleteAlert,signInAlert,waterMarkPurchasingAlert,spaceUnavailableAlert;
 @synthesize imgPickerFlag,layerScrollView,flyerPath;
 @synthesize contextView,libraryContextView,libFlyer,backgroundTabButton,addMoreFontTabButton,drawingMenueButton;
 @synthesize libText,libBackground,libArts,libPhoto,libEmpty,backtemplates,cameraTakePhoto,cameraRoll,flyerBorder,libDrawing;
@@ -190,6 +190,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 }
 // Dismiss action for banner ad
 -(void)dissmisBannerAdd:(BOOL)valForBannerClose{
+    
     [self.bannerAddView removeFromSuperview];
      self.bannerAddView = nil;
 
@@ -2493,6 +2494,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         
         [self hideLoadingIndicator];
         
+    }else if (alertView == waterMarkPurchasingAlert && buttonIndex == 1) {
+        [self openInAppPanel];
     }else if(alertView == signInAlert && buttonIndex == 1) {
         
         NSLog(@"Sign In was selected.");
@@ -2503,8 +2506,8 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
         
         __weak CreateFlyerController *weakSelf = self;
         
-        userPurchases = [UserPurchases getInstance];
-        userPurchases.delegate = self;
+        UserPurchases *userPurchases_ = [UserPurchases getInstance];
+        userPurchases_.delegate = self;
         
         //__weak CreateFlyerController *weakCreateFlyerController = signInController;
         
@@ -2513,7 +2516,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             
             UINavigationController* navigationController = weakSelf.navigationController;
             [navigationController popViewControllerAnimated:NO];
-            [userPurchases setUserPurcahsesFromParse];
+            [userPurchases_ setUserPurcahsesFromParse];
             
             [weakSelf openPanel];
             
@@ -5130,8 +5133,8 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         
         __weak CreateFlyerController *createFlyerController = self;
         
-        userPurchases = [UserPurchases getInstance];
-        userPurchases.delegate = self;
+        UserPurchases *userPurchases_ = [UserPurchases getInstance];
+        userPurchases_.delegate = self;
         
         [inappviewcontroller_.presentingViewController dismissViewControllerAnimated:YES completion:nil];
         
@@ -5139,7 +5142,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
             
             UINavigationController* navigationController = createFlyerController.navigationController;
             [navigationController popViewControllerAnimated:NO];
-            [userPurchases setUserPurcahsesFromParse];
+            [userPurchases_ setUserPurcahsesFromParse];
         };
         
         [self.navigationController pushViewController:signInController animated:YES];
@@ -5972,7 +5975,17 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         currentLayer = @"";
         [self deSelectPreviousLayer];
         
-        [self openInAppPanel];
+        // Alert when user logged in as anonymous
+        waterMarkPurchasingAlert = [[UIAlertView alloc] initWithTitle:@"Want to remove watermark?"
+                                                 message:@"Purchase complete bundle."
+                                                delegate:self
+                                       cancelButtonTitle:@"Cancel"
+                                       otherButtonTitles:@"OK",nil];
+        
+        
+        
+        [waterMarkPurchasingAlert show];
+        
     }
     
     return canPerformAct;
