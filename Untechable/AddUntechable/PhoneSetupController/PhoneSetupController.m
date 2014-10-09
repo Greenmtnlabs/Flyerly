@@ -10,6 +10,7 @@
 #import "CommonFunctions.h"
 #import "SocialnetworkController.h"
 #import "Common.h"
+#import "BSKeyboardControls.h"
 
 @interface PhoneSetupController (){
     NSString *tableViewFor;
@@ -29,6 +30,8 @@
 
 
 @property (strong, nonatomic) UIAlertView *importContacts;
+
+@property (nonatomic, strong) BSKeyboardControls *keyboardControls;
 
 @end
 
@@ -61,6 +64,12 @@
     
     [self updateUI];
     
+    NSArray *fields = @[ self.inputEmergencyNumber, self.inputForwadingNumber ];
+    
+    [self setKeyboardControls:[[BSKeyboardControls alloc] initWithFields:fields]];
+    [self.keyboardControls setDelegate:self];
+
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -86,6 +95,46 @@
 }
 
 // ________________________     Custom functions    ___________________________
+#pragma mark -
+#pragma mark Text Field Delegate
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    [self.keyboardControls setActiveField:textField];
+}
+
+#pragma mark -
+#pragma mark Text View Delegate
+
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+    [self.keyboardControls setActiveField:textView];
+}
+
+#pragma mark -
+#pragma mark Keyboard Controls Delegate
+
+- (void)keyboardControls:(BSKeyboardControls *)keyboardControls selectedField:(UIView *)field inDirection:(BSKeyboardControlsDirection)direction
+{
+    /*
+    UIView *view;
+    
+    if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
+        view = field.superview.superview;
+    } else {
+        view = field.superview.superview.superview;
+    }
+    
+    [self.tableView scrollRectToVisible:view.frame animated:YES];
+     */
+}
+
+- (void)keyboardControlsDonePressed:(BSKeyboardControls *)keyboardControls
+{
+    [self.view endEditing:YES];
+}
+
+
 #pragma mark -  UI functions
 -(void)updateUI
 {

@@ -36,6 +36,8 @@
 		36B0369E19DAD37200E8CD21 /* inputBottomBg2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36B0369D19DAD37200E8CD21 /* inputBottomBg2@2x.png */; };
 		36B036A619DAF44D00E8CD21 /* EmailSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B036A419DAF44D00E8CD21 /* EmailSettingController.m */; };
 		36B036A719DAF44D00E8CD21 /* EmailSettingController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36B036A519DAF44D00E8CD21 /* EmailSettingController.xib */; };
+		36FD975519E694AC00427507 /* BSKeyboardControls.m in Sources */ = {isa = PBXBuildFile; fileRef = 36FD974B19E694AC00427507 /* BSKeyboardControls.m */; };
+		36FD975619E694AC00427507 /* BSKeyboardControls.strings in Resources */ = {isa = PBXBuildFile; fileRef = 36FD974C19E694AC00427507 /* BSKeyboardControls.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +92,16 @@
 		36B036A319DAF44D00E8CD21 /* EmailSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EmailSettingController.h; path = AddUntechable/EmailSettingController/EmailSettingController.h; sourceTree = "<group>"; };
 		36B036A419DAF44D00E8CD21 /* EmailSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EmailSettingController.m; path = AddUntechable/EmailSettingController/EmailSettingController.m; sourceTree = "<group>"; };
 		36B036A519DAF44D00E8CD21 /* EmailSettingController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EmailSettingController.xib; path = AddUntechable/EmailSettingController/EmailSettingController.xib; sourceTree = "<group>"; };
+		36FD974A19E694AC00427507 /* BSKeyboardControls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSKeyboardControls.h; sourceTree = "<group>"; };
+		36FD974B19E694AC00427507 /* BSKeyboardControls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSKeyboardControls.m; sourceTree = "<group>"; };
+		36FD974D19E694AC00427507 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/BSKeyboardControls.strings; sourceTree = "<group>"; };
+		36FD974E19E694AC00427507 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/BSKeyboardControls.strings; sourceTree = "<group>"; };
+		36FD974F19E694AC00427507 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/BSKeyboardControls.strings; sourceTree = "<group>"; };
+		36FD975019E694AC00427507 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/BSKeyboardControls.strings; sourceTree = "<group>"; };
+		36FD975119E694AC00427507 /* ru-RU */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "ru-RU"; path = "ru-RU.lproj/BSKeyboardControls.strings"; sourceTree = "<group>"; };
+		36FD975219E694AC00427507 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/BSKeyboardControls.strings; sourceTree = "<group>"; };
+		36FD975319E694AC00427507 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/BSKeyboardControls.strings; sourceTree = "<group>"; };
+		36FD975419E694AC00427507 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/BSKeyboardControls.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -249,6 +261,7 @@
 		366ECD7F19D317E200F71A11 /* Config */ = {
 			isa = PBXGroup;
 			children = (
+				36FD974919E694AC00427507 /* BSKeyboardControls */,
 				366ECD8019D3181000F71A11 /* Common.h */,
 			);
 			name = Config;
@@ -291,6 +304,17 @@
 				36B036A519DAF44D00E8CD21 /* EmailSettingController.xib */,
 			);
 			name = EmailSettingController;
+			sourceTree = "<group>";
+		};
+		36FD974919E694AC00427507 /* BSKeyboardControls */ = {
+			isa = PBXGroup;
+			children = (
+				36FD974A19E694AC00427507 /* BSKeyboardControls.h */,
+				36FD974B19E694AC00427507 /* BSKeyboardControls.m */,
+				36FD974C19E694AC00427507 /* BSKeyboardControls.strings */,
+			);
+			name = BSKeyboardControls;
+			path = Config/BSKeyboardControls;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -354,6 +378,13 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				da,
+				es,
+				pt,
+				"ru-RU",
+				ru,
+				sv,
+				uk,
 			);
 			mainGroup = 36561D5F19D2C8A40069D897;
 			productRefGroup = 36561D6919D2C8A40069D897 /* Products */;
@@ -379,6 +410,7 @@
 				36474F2319D9780100084F34 /* Pigiarniq Heavy.ttf in Resources */,
 				36474F2519D9780100084F34 /* Pigiarniq Light.ttf in Resources */,
 				36524AF219D940F4006DCAAF /* SocialnetworkController.xib in Resources */,
+				36FD975619E694AC00427507 /* BSKeyboardControls.strings in Resources */,
 				366ECD9719D323DA00F71A11 /* AddUntechableController.xib in Resources */,
 				36B036A719DAF44D00E8CD21 /* EmailSettingController.xib in Resources */,
 				36561D7619D2C8A40069D897 /* InfoPlist.strings in Resources */,
@@ -408,6 +440,7 @@
 				36B036A619DAF44D00E8CD21 /* EmailSettingController.m in Sources */,
 				36561D7C19D2C8A40069D897 /* AppDelegate.m in Sources */,
 				366ECD7E19D3135200F71A11 /* Untechable.m in Sources */,
+				36FD975519E694AC00427507 /* BSKeyboardControls.m in Sources */,
 				36524AF119D940F4006DCAAF /* SocialnetworkController.m in Sources */,
 				36561D7819D2C8A40069D897 /* main.m in Sources */,
 			);
@@ -446,6 +479,21 @@
 				36561D8E19D2C8A40069D897 /* en */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		36FD974C19E694AC00427507 /* BSKeyboardControls.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				36FD974D19E694AC00427507 /* da */,
+				36FD974E19E694AC00427507 /* en */,
+				36FD974F19E694AC00427507 /* es */,
+				36FD975019E694AC00427507 /* pt */,
+				36FD975119E694AC00427507 /* ru-RU */,
+				36FD975219E694AC00427507 /* ru */,
+				36FD975319E694AC00427507 /* sv */,
+				36FD975419E694AC00427507 /* uk */,
+			);
+			name = BSKeyboardControls.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
