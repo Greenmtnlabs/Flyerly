@@ -33,6 +33,16 @@
 		366ECD9719D323DA00F71A11 /* AddUntechableController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 366ECD9519D323DA00F71A11 /* AddUntechableController.xib */; };
 		366ECD9B19D323E200F71A11 /* PhoneSetupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 366ECD9919D323E200F71A11 /* PhoneSetupController.m */; };
 		366ECD9C19D323E200F71A11 /* PhoneSetupController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 366ECD9A19D323E200F71A11 /* PhoneSetupController.xib */; };
+		3681603C19E6B81E00B9B64C /* ContactsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3681603519E6B81E00B9B64C /* ContactsModel.m */; };
+		3681603D19E6B81E00B9B64C /* InviteFriendsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3681603719E6B81E00B9B64C /* InviteFriendsCell.m */; };
+		3681603E19E6B81E00B9B64C /* InviteFriendsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3681603819E6B81E00B9B64C /* InviteFriendsCell.xib */; };
+		3681603F19E6B81E00B9B64C /* InviteFriendsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3681603A19E6B81E00B9B64C /* InviteFriendsController.m */; };
+		3681604019E6B81E00B9B64C /* InviteFriendsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3681603B19E6B81E00B9B64C /* InviteFriendsController.xib */; };
+		3681604619E6CBA400B9B64C /* checkBlue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3681604119E6CBA400B9B64C /* checkBlue@2x.png */; };
+		3681604719E6CBA400B9B64C /* checkDouble@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3681604219E6CBA400B9B64C /* checkDouble@2x.png */; };
+		3681604819E6CBA400B9B64C /* checkgray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3681604319E6CBA400B9B64C /* checkgray@2x.png */; };
+		3681604919E6CBA400B9B64C /* invite_Bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3681604419E6CBA400B9B64C /* invite_Bg@2x.png */; };
+		3681604A19E6CBA400B9B64C /* searchicon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3681604519E6CBA400B9B64C /* searchicon@2x.png */; };
 		36B0369E19DAD37200E8CD21 /* inputBottomBg2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36B0369D19DAD37200E8CD21 /* inputBottomBg2@2x.png */; };
 		36B036A619DAF44D00E8CD21 /* EmailSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B036A419DAF44D00E8CD21 /* EmailSettingController.m */; };
 		36B036A719DAF44D00E8CD21 /* EmailSettingController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36B036A519DAF44D00E8CD21 /* EmailSettingController.xib */; };
@@ -88,6 +98,19 @@
 		366ECD9819D323E200F71A11 /* PhoneSetupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhoneSetupController.h; path = AddUntechable/PhoneSetupController/PhoneSetupController.h; sourceTree = "<group>"; };
 		366ECD9919D323E200F71A11 /* PhoneSetupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhoneSetupController.m; path = AddUntechable/PhoneSetupController/PhoneSetupController.m; sourceTree = "<group>"; };
 		366ECD9A19D323E200F71A11 /* PhoneSetupController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PhoneSetupController.xib; path = AddUntechable/PhoneSetupController/PhoneSetupController.xib; sourceTree = "<group>"; };
+		3681603419E6B81E00B9B64C /* ContactsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsModel.h; sourceTree = "<group>"; };
+		3681603519E6B81E00B9B64C /* ContactsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsModel.m; sourceTree = "<group>"; };
+		3681603619E6B81E00B9B64C /* InviteFriendsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteFriendsCell.h; sourceTree = "<group>"; };
+		3681603719E6B81E00B9B64C /* InviteFriendsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteFriendsCell.m; sourceTree = "<group>"; };
+		3681603819E6B81E00B9B64C /* InviteFriendsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteFriendsCell.xib; sourceTree = "<group>"; };
+		3681603919E6B81E00B9B64C /* InviteFriendsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteFriendsController.h; sourceTree = "<group>"; };
+		3681603A19E6B81E00B9B64C /* InviteFriendsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteFriendsController.m; sourceTree = "<group>"; };
+		3681603B19E6B81E00B9B64C /* InviteFriendsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteFriendsController.xib; sourceTree = "<group>"; };
+		3681604119E6CBA400B9B64C /* checkBlue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkBlue@2x.png"; sourceTree = "<group>"; };
+		3681604219E6CBA400B9B64C /* checkDouble@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkDouble@2x.png"; sourceTree = "<group>"; };
+		3681604319E6CBA400B9B64C /* checkgray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkgray@2x.png"; sourceTree = "<group>"; };
+		3681604419E6CBA400B9B64C /* invite_Bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "invite_Bg@2x.png"; sourceTree = "<group>"; };
+		3681604519E6CBA400B9B64C /* searchicon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "searchicon@2x.png"; sourceTree = "<group>"; };
 		36B0369D19DAD37200E8CD21 /* inputBottomBg2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "inputBottomBg2@2x.png"; sourceTree = "<group>"; };
 		36B036A319DAF44D00E8CD21 /* EmailSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EmailSettingController.h; path = AddUntechable/EmailSettingController/EmailSettingController.h; sourceTree = "<group>"; };
 		36B036A419DAF44D00E8CD21 /* EmailSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EmailSettingController.m; path = AddUntechable/EmailSettingController/EmailSettingController.m; sourceTree = "<group>"; };
@@ -280,6 +303,7 @@
 		366ECD8719D322F800F71A11 /* PhoneSetupController */ = {
 			isa = PBXGroup;
 			children = (
+				3681603319E6B81E00B9B64C /* InviteScreen */,
 				366ECD9819D323E200F71A11 /* PhoneSetupController.h */,
 				366ECD9919D323E200F71A11 /* PhoneSetupController.m */,
 				366ECD9A19D323E200F71A11 /* PhoneSetupController.xib */,
@@ -287,9 +311,30 @@
 			name = PhoneSetupController;
 			sourceTree = "<group>";
 		};
+		3681603319E6B81E00B9B64C /* InviteScreen */ = {
+			isa = PBXGroup;
+			children = (
+				3681603619E6B81E00B9B64C /* InviteFriendsCell.h */,
+				3681603719E6B81E00B9B64C /* InviteFriendsCell.m */,
+				3681603819E6B81E00B9B64C /* InviteFriendsCell.xib */,
+				3681603419E6B81E00B9B64C /* ContactsModel.h */,
+				3681603519E6B81E00B9B64C /* ContactsModel.m */,
+				3681603919E6B81E00B9B64C /* InviteFriendsController.h */,
+				3681603A19E6B81E00B9B64C /* InviteFriendsController.m */,
+				3681603B19E6B81E00B9B64C /* InviteFriendsController.xib */,
+			);
+			name = InviteScreen;
+			path = AddUntechable/PhoneSetupController/InviteScreen;
+			sourceTree = "<group>";
+		};
 		36B0369A19DAD2AB00E8CD21 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				3681604119E6CBA400B9B64C /* checkBlue@2x.png */,
+				3681604219E6CBA400B9B64C /* checkDouble@2x.png */,
+				3681604319E6CBA400B9B64C /* checkgray@2x.png */,
+				3681604419E6CBA400B9B64C /* invite_Bg@2x.png */,
+				3681604519E6CBA400B9B64C /* searchicon@2x.png */,
 				36B0369D19DAD37200E8CD21 /* inputBottomBg2@2x.png */,
 			);
 			name = images;
@@ -403,15 +448,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				366ECD9C19D323E200F71A11 /* PhoneSetupController.xib in Resources */,
+				3681604A19E6CBA400B9B64C /* searchicon@2x.png in Resources */,
 				36474F2619D9780100084F34 /* Pigiarniq Regular.ttf in Resources */,
 				36474F2219D9780100084F34 /* Pigiarniq Bold.ttf in Resources */,
+				3681604619E6CBA400B9B64C /* checkBlue@2x.png in Resources */,
 				36B0369E19DAD37200E8CD21 /* inputBottomBg2@2x.png in Resources */,
+				3681604719E6CBA400B9B64C /* checkDouble@2x.png in Resources */,
 				36474F2419D9780100084F34 /* Pigiarniq Italic.ttf in Resources */,
 				36474F2319D9780100084F34 /* Pigiarniq Heavy.ttf in Resources */,
+				3681604919E6CBA400B9B64C /* invite_Bg@2x.png in Resources */,
 				36474F2519D9780100084F34 /* Pigiarniq Light.ttf in Resources */,
+				3681604019E6B81E00B9B64C /* InviteFriendsController.xib in Resources */,
+				3681604819E6CBA400B9B64C /* checkgray@2x.png in Resources */,
 				36524AF219D940F4006DCAAF /* SocialnetworkController.xib in Resources */,
 				36FD975619E694AC00427507 /* BSKeyboardControls.strings in Resources */,
 				366ECD9719D323DA00F71A11 /* AddUntechableController.xib in Resources */,
+				3681603E19E6B81E00B9B64C /* InviteFriendsCell.xib in Resources */,
 				36B036A719DAF44D00E8CD21 /* EmailSettingController.xib in Resources */,
 				36561D7619D2C8A40069D897 /* InfoPlist.strings in Resources */,
 				36561D7E19D2C8A40069D897 /* Images.xcassets in Resources */,
@@ -434,8 +486,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				366ECD9619D323DA00F71A11 /* AddUntechableController.m in Sources */,
+				3681603C19E6B81E00B9B64C /* ContactsModel.m in Sources */,
 				366ECD9B19D323E200F71A11 /* PhoneSetupController.m in Sources */,
+				3681603F19E6B81E00B9B64C /* InviteFriendsController.m in Sources */,
 				3663932519D6A0A700512965 /* CommonFunctions.m in Sources */,
+				3681603D19E6B81E00B9B64C /* InviteFriendsCell.m in Sources */,
 				36474F2919D9AC3800084F34 /* UIPlaceHolderTextView.m in Sources */,
 				36B036A619DAF44D00E8CD21 /* EmailSettingController.m in Sources */,
 				36561D7C19D2C8A40069D897 /* AppDelegate.m in Sources */,
