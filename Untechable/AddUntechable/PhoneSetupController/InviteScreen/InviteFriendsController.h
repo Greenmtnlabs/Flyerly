@@ -15,15 +15,23 @@
 #import <SystemConfiguration/SystemConfiguration.h>
 #import "InviteFriendsCell.h"
 #import "ContactsModel.h"
+#import "Untechable.h"
 
 
-
-@interface InviteFriendsController : UIViewController <UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>{
+@interface InviteFriendsController : UIViewController <UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
+{
+    
+    UILabel *titleLabel;
+    //UIButton *helpButton;
+    UIButton *backButton;
+    //UIButton *nextButton;
     
     UIColor *defGreen;//GREEN
     UIColor *defGray;//GRAY
-
+    
 }
+
+@property (nonatomic,strong)  Untechable *untechable;
 
 @property(nonatomic,strong) IBOutlet UIButton *contactsButton;
 @property(nonatomic,strong) IBOutlet UITextField *searchTextField;

@@ -11,12 +11,16 @@
 #import "CommonFunctions.h"
 #import <QuartzCore/QuartzCore.h>
 
-@interface InviteFriendsController (){
+@interface InviteFriendsController () {
+    
   CommonFunctions *commonFunctions;
+    
 }
 @end
 
 @implementation InviteFriendsController
+
+@synthesize untechable;
 @synthesize uiTableView, contactsArray, selectedContacts ,contactsButton, searchTextField,iPhoneinvited;
 @synthesize contactBackupArray;
 
@@ -25,7 +29,9 @@
 
     [super viewDidLoad];
     
+    [self setNavigationDefaults];
     [self setNavigation:@"viewDidLoad"];
+
 
     commonFunctions = [[CommonFunctions alloc] init];
     
@@ -55,8 +61,9 @@
 #pragma mark  Custom Methods
 
 -(void)initContactsDic{
-    self.selectedContacts = nil;
-    self.selectedContacts = [[NSMutableDictionary alloc] init];
+    //self.selectedContacts = nil;
+    //self.selectedContacts = [[NSMutableDictionary alloc] init];
+    self.selectedContacts   =   untechable.emergencyContacts;
 }
 - (void)setNavigationDefaults{
     
@@ -66,42 +73,44 @@
     
     [[self navigationController] setNavigationBarHidden:NO animated:YES]; //show navigation bar
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+    
+    [self.uiTableView  setBackgroundColor:[UIColor colorWithRed:245/255.0 green:241/255.0 blue:222/255.0 alpha:1.0]];
+    [searchTextField setReturnKeyType:UIReturnKeyDone];
+    
+    self.navigationItem.hidesBackButton = YES;
+    
+    [self.view setBackgroundColor:[UIColor colorWithRed:245/255.0 green:241/255.0 blue:222/255.0 alpha:1]];
 }
 
 -(void)setNavigation:(NSString *)callFrom
 {
     if([callFrom isEqualToString:@"viewDidLoad"])
     {
+
+        // Left Navigation ___________________________________________________________
+        backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
+        backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
+        [backButton setTitle:TITLE_BACK_TXT forState:normal];
+        [backButton setTitleColor:defGray forState:UIControlStateNormal];
+        [backButton addTarget:self action:@selector(btnBackTouchStart) forControlEvents:UIControlEventTouchDown];
+        [backButton addTarget:self action:@selector(btnBackTouchEnd) forControlEvents:UIControlEventTouchUpInside];
         
+        
+        backButton.showsTouchWhenHighlighted = YES;
+        UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+        NSMutableArray  *leftNavItems  = [NSMutableArray arrayWithObjects:leftBarButton,nil];
+        
+        [self.navigationItem setLeftBarButtonItems:leftNavItems]; //Left button ___________
         
         // Center title ________________________________________
-        self.navigationItem.hidesBackButton = YES;
-        [self.view setBackgroundColor:[UIColor colorWithRed:245/255.0 green:241/255.0 blue:222/255.0 alpha:1]];
+        titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
+        titleLabel.backgroundColor = [UIColor clearColor];
+        titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_FONT_SIZE];
+        titleLabel.textAlignment = NSTextAlignmentCenter;
+        titleLabel.textColor = defGreen;
+        titleLabel.text = APP_NAME;
         
-        
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-28, -6, 50, 50)];
-        label.backgroundColor = [UIColor clearColor];
-        label.font = [UIFont fontWithName:TITLE_FONT size:18];
-        label.textAlignment = NSTextAlignmentCenter;
-        label.textColor = defGreen;
-        label.text = APP_NAME;
-        self.navigationItem.titleView = label;
-        
-        
-        // Left Navigation ___________________________________________________________
-        UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 42)];
-        [backButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-        [backButton setBackgroundImage:[UIImage imageNamed:@"searchicon"] forState:UIControlStateNormal];
-        [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
-        backButton.showsTouchWhenHighlighted = YES;
-        UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-        [self.navigationItem setLeftBarButtonItems:[NSMutableArray arrayWithObjects:backBarButton,nil]];
-
-        
-        
-        
-        [self.uiTableView  setBackgroundColor:[UIColor colorWithRed:245/255.0 green:241/255.0 blue:222/255.0 alpha:1.0]];
-        [searchTextField setReturnKeyType:UIReturnKeyDone];
+        self.navigationItem.titleView = titleLabel; //Center title ___________
     }
 }
 
@@ -112,7 +121,8 @@
 
 - (BOOL)ckeckExistContact:(NSString *)identifier{
     for(id key in selectedContacts) {
-        if ([identifier isEqualToString:[selectedContacts objectForKey:key]]) {
+        //if ([identifier isEqualToString:[selectedContacts objectForKey:key]])
+        if ([identifier isEqualToString:key]) {
             return YES;
         }
     }
@@ -126,13 +136,27 @@
 -(IBAction)goBack{
     
     NSLog(@"selectedContacts %@",selectedContacts);
+    untechable.emergencyContacts = selectedContacts;
+
+    [untechable goBack:self.navigationController];
+    
     /*
     if([selectedContacts count] > 0){
     } else {
         [commonFunctions showAlert:@"Please select any contact to invite !" message:@""];
     }
     */
-    //[self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void)btnBackTouchStart{
+    [self setBackHighlighted:YES];
+}
+-(void)btnBackTouchEnd{
+    [self setBackHighlighted:NO];
+    [self goBack];
+}
+- (void)setBackHighlighted:(BOOL)highlighted {
+    (highlighted) ? [backButton setBackgroundColor:defGreen] : [backButton setBackgroundColor:[UIColor clearColor]];
 }
 
 
@@ -149,8 +173,7 @@
     // UNSELECTED BUTTON
     [contactsButton setSelected:YES];
 
-    
-    
+
     [self initContactsDic];
     
     
@@ -299,47 +322,6 @@
 
 
 
-/* HERE WE CREATE ARRAY LIST FOR UITABLEVIEW WHICH RECIVED FROM FACEBOOK REQUEST
- *@PARAM
- *  followers DICTIONARY
- */
--(void)makeFacebookArray :(NSDictionary *)result{
-    
-    for (NSDictionary *friendData in result[@"data"]) {
-        
-        NSString *imageURL = friendData[@"picture"][@"data"][@"url"];
-        
-        // Here we will get the facebook contacts
-        ContactsModel *model = [[ContactsModel   alloc]init];
-        
-        model.name = friendData[@"name"];
-        model.description = friendData[@"id"];
-        if (friendData[@"gender"]) {
-            model.others = friendData[@"gender"];
-        }
-        if(imageURL){
-            model.img = nil;
-            model.imageUrl = imageURL;
-        }
-        
-
-        
-    }
-    
-
-
-
-    
-    // Filter contacts on new tab selection
-    [self onSearchClick:nil];
-    
-    [[self uiTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
-    {
-        
-
-        
-    }
-}
 
 #pragma mark Table view methods
 
@@ -397,17 +379,13 @@
 
     
     // HERE WE CHECK STATUS OF FRIEND INVITE
-    int status = 0;
+    int status = CHECKBOX_EMPTY;
     
     if ([self ckeckExistdb:receivedDic.description]) {
-        status = 2;
+        status = CHECKBOX_TICK;
     }else{
         if ([self ckeckExistContact:receivedDic.description]) {
-            status = 1;
-            
-        }else{
-            status = 0;
-            
+            status = CHECKBOX_TICK;
         }
     }
     
@@ -427,15 +405,15 @@
         
         ContactsModel *model = [self getArrayOfSelectedTab][(indexPath.row)];
         
-        //CHECK FOR ALREADY SELECTED
-        if (model.status == 0) {
+
+        if (model.status == CHECKBOX_EMPTY ) {
             
-            [model setInvitedStatus:1];
+            [model setInvitedStatus:CHECKBOX_TICK];
             [selectedContacts setObject:model.name forKey:model.description];
             
-        }else if (model.status == 1) {
+        }else if (model.status == CHECKBOX_TICK ) {
             
-            [model setInvitedStatus:0];
+            [model setInvitedStatus:CHECKBOX_EMPTY];
             
             //REMOVE FROM SENDING LIST
             [selectedContacts removeObjectForKey:model.description];

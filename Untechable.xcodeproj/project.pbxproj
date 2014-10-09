@@ -38,11 +38,11 @@
 		3681603E19E6B81E00B9B64C /* InviteFriendsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3681603819E6B81E00B9B64C /* InviteFriendsCell.xib */; };
 		3681603F19E6B81E00B9B64C /* InviteFriendsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3681603A19E6B81E00B9B64C /* InviteFriendsController.m */; };
 		3681604019E6B81E00B9B64C /* InviteFriendsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3681603B19E6B81E00B9B64C /* InviteFriendsController.xib */; };
-		3681604619E6CBA400B9B64C /* checkBlue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3681604119E6CBA400B9B64C /* checkBlue@2x.png */; };
-		3681604719E6CBA400B9B64C /* checkDouble@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3681604219E6CBA400B9B64C /* checkDouble@2x.png */; };
-		3681604819E6CBA400B9B64C /* checkgray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3681604319E6CBA400B9B64C /* checkgray@2x.png */; };
 		3681604919E6CBA400B9B64C /* invite_Bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3681604419E6CBA400B9B64C /* invite_Bg@2x.png */; };
 		3681604A19E6CBA400B9B64C /* searchicon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3681604519E6CBA400B9B64C /* searchicon@2x.png */; };
+		3681604E19E6ED8C00B9B64C /* CHECKBOX_EMPTY@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3681604B19E6ED8C00B9B64C /* CHECKBOX_EMPTY@2x.png */; };
+		3681604F19E6ED8C00B9B64C /* CHECKBOX_FILLED@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3681604C19E6ED8C00B9B64C /* CHECKBOX_FILLED@2x.png */; };
+		3681605019E6ED8C00B9B64C /* CHECKBOX_TICK@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3681604D19E6ED8C00B9B64C /* CHECKBOX_TICK@2x.png */; };
 		36B0369E19DAD37200E8CD21 /* inputBottomBg2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36B0369D19DAD37200E8CD21 /* inputBottomBg2@2x.png */; };
 		36B036A619DAF44D00E8CD21 /* EmailSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B036A419DAF44D00E8CD21 /* EmailSettingController.m */; };
 		36B036A719DAF44D00E8CD21 /* EmailSettingController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36B036A519DAF44D00E8CD21 /* EmailSettingController.xib */; };
@@ -106,11 +106,11 @@
 		3681603919E6B81E00B9B64C /* InviteFriendsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteFriendsController.h; sourceTree = "<group>"; };
 		3681603A19E6B81E00B9B64C /* InviteFriendsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteFriendsController.m; sourceTree = "<group>"; };
 		3681603B19E6B81E00B9B64C /* InviteFriendsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteFriendsController.xib; sourceTree = "<group>"; };
-		3681604119E6CBA400B9B64C /* checkBlue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkBlue@2x.png"; sourceTree = "<group>"; };
-		3681604219E6CBA400B9B64C /* checkDouble@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkDouble@2x.png"; sourceTree = "<group>"; };
-		3681604319E6CBA400B9B64C /* checkgray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkgray@2x.png"; sourceTree = "<group>"; };
 		3681604419E6CBA400B9B64C /* invite_Bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "invite_Bg@2x.png"; sourceTree = "<group>"; };
 		3681604519E6CBA400B9B64C /* searchicon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "searchicon@2x.png"; sourceTree = "<group>"; };
+		3681604B19E6ED8C00B9B64C /* CHECKBOX_EMPTY@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CHECKBOX_EMPTY@2x.png"; sourceTree = "<group>"; };
+		3681604C19E6ED8C00B9B64C /* CHECKBOX_FILLED@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CHECKBOX_FILLED@2x.png"; sourceTree = "<group>"; };
+		3681604D19E6ED8C00B9B64C /* CHECKBOX_TICK@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CHECKBOX_TICK@2x.png"; sourceTree = "<group>"; };
 		36B0369D19DAD37200E8CD21 /* inputBottomBg2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "inputBottomBg2@2x.png"; sourceTree = "<group>"; };
 		36B036A319DAF44D00E8CD21 /* EmailSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EmailSettingController.h; path = AddUntechable/EmailSettingController/EmailSettingController.h; sourceTree = "<group>"; };
 		36B036A419DAF44D00E8CD21 /* EmailSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EmailSettingController.m; path = AddUntechable/EmailSettingController/EmailSettingController.m; sourceTree = "<group>"; };
@@ -330,9 +330,9 @@
 		36B0369A19DAD2AB00E8CD21 /* images */ = {
 			isa = PBXGroup;
 			children = (
-				3681604119E6CBA400B9B64C /* checkBlue@2x.png */,
-				3681604219E6CBA400B9B64C /* checkDouble@2x.png */,
-				3681604319E6CBA400B9B64C /* checkgray@2x.png */,
+				3681604B19E6ED8C00B9B64C /* CHECKBOX_EMPTY@2x.png */,
+				3681604C19E6ED8C00B9B64C /* CHECKBOX_FILLED@2x.png */,
+				3681604D19E6ED8C00B9B64C /* CHECKBOX_TICK@2x.png */,
 				3681604419E6CBA400B9B64C /* invite_Bg@2x.png */,
 				3681604519E6CBA400B9B64C /* searchicon@2x.png */,
 				36B0369D19DAD37200E8CD21 /* inputBottomBg2@2x.png */,
@@ -448,18 +448,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				366ECD9C19D323E200F71A11 /* PhoneSetupController.xib in Resources */,
+				3681604E19E6ED8C00B9B64C /* CHECKBOX_EMPTY@2x.png in Resources */,
+				3681605019E6ED8C00B9B64C /* CHECKBOX_TICK@2x.png in Resources */,
+				3681604F19E6ED8C00B9B64C /* CHECKBOX_FILLED@2x.png in Resources */,
 				3681604A19E6CBA400B9B64C /* searchicon@2x.png in Resources */,
 				36474F2619D9780100084F34 /* Pigiarniq Regular.ttf in Resources */,
 				36474F2219D9780100084F34 /* Pigiarniq Bold.ttf in Resources */,
-				3681604619E6CBA400B9B64C /* checkBlue@2x.png in Resources */,
 				36B0369E19DAD37200E8CD21 /* inputBottomBg2@2x.png in Resources */,
-				3681604719E6CBA400B9B64C /* checkDouble@2x.png in Resources */,
 				36474F2419D9780100084F34 /* Pigiarniq Italic.ttf in Resources */,
 				36474F2319D9780100084F34 /* Pigiarniq Heavy.ttf in Resources */,
 				3681604919E6CBA400B9B64C /* invite_Bg@2x.png in Resources */,
 				36474F2519D9780100084F34 /* Pigiarniq Light.ttf in Resources */,
 				3681604019E6B81E00B9B64C /* InviteFriendsController.xib in Resources */,
-				3681604819E6CBA400B9B64C /* checkgray@2x.png in Resources */,
 				36524AF219D940F4006DCAAF /* SocialnetworkController.xib in Resources */,
 				36FD975619E694AC00427507 /* BSKeyboardControls.strings in Resources */,
 				366ECD9719D323DA00F71A11 /* AddUntechableController.xib in Resources */,

@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 
-#import "InviteFriendsController.h"
+#import "AddUntechableController.h"
 
 @implementation AppDelegate
 
@@ -18,7 +18,7 @@
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     
-    InviteFriendsController *mainViewController = [[InviteFriendsController alloc] initWithNibName:@"InviteFriendsController" bundle:nil];
+    AddUntechableController *mainViewController = [[AddUntechableController alloc] initWithNibName:@"AddUntechableController" bundle:nil];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
     self.window.rootViewController = navigationController;
     

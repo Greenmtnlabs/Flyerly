@@ -7,6 +7,7 @@
 //
 
 #import "ContactsModel.h"
+#import "Common.h"
 
 
 @implementation ContactsModel
@@ -26,12 +27,12 @@
     
     status = sts;
     
-    if (status == 1) {
-        checkImageName = @"checkBlue";
-    } else if (status == 2) {
-        checkImageName = @"checkDouble";
+    if (status == CHECKBOX_FILLED ) {
+        checkImageName = @"CHECKBOX_FILLED";
+    } else if (status == CHECKBOX_TICK) {
+        checkImageName = @"CHECKBOX_TICK";
     }else {
-        checkImageName = @"checkgray";
+        checkImageName = @"CHECKBOX_EMPTY";
     }
     
     [self.delegate contactInvited:self];

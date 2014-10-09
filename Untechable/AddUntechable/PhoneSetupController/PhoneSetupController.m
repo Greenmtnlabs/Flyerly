@@ -11,6 +11,7 @@
 #import "SocialnetworkController.h"
 #import "Common.h"
 #import "BSKeyboardControls.h"
+#import "InviteScreen/InviteFriendsController.h"
 
 @interface PhoneSetupController (){
     NSString *tableViewFor;
@@ -60,7 +61,7 @@
     [self setNavigationDefaults];
     [self setNavigation:@"viewDidLoad"];
     
-    [self setDefaultModel];
+    //[self setDefaultModel];
     
     [self updateUI];
     
@@ -70,20 +71,26 @@
     [self.keyboardControls setDelegate:self];
     
 }
+-(void)viewWillAppear:(BOOL)animated {
+    
+    [self setDefaultModel];
+    
+}
+
+/**
+ * Update the view once it appears.
+ */
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [untechable printNavigation:[self navigationController]];
+}
+
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-/**
- * Update the view once it appears.
- */
--(void)viewDidAppear:(BOOL)animated {
-    
-    [super viewDidAppear:animated];
-    [untechable printNavigation:[self navigationController]];
-    
 }
 /*
  Hide keyboard on done button of keyboard press
@@ -371,8 +378,8 @@
         //6
         //NSString *txt = [NSString stringWithFormat:@"My friend name %i", indexPath.row ];
         //NSString *number = [arrayOfValues objectAtIndex:indexPath.row];
-        NSString *name = [arrayOfKeys objectAtIndex:indexPath.row];
-        NSString *number = [untechable.emergencyContacts objectForKey:name];
+        NSString *number = [arrayOfKeys objectAtIndex:indexPath.row];
+        NSString *name = [untechable.emergencyContacts objectForKey:number];
        
         
         
@@ -418,8 +425,17 @@
     }
 }
 
+
 #pragma mark -  Import Contacts
+//Show select contacts screen
 - (IBAction)importContacts:(id)sender {
+    InviteFriendsController *ifc;
+    ifc = [[InviteFriendsController alloc]initWithNibName:@"InviteFriendsController" bundle:nil];
+    ifc.untechable = untechable;
+    [self.navigationController pushViewController:ifc animated:YES];
+}
+
+- (IBAction)importContacts2:(id)sender {
     _importContacts = [[UIAlertView alloc ]
                                        initWithTitle:@""
                                        message:@"Untechable want to import your contacts"
@@ -432,7 +448,7 @@
 }
 -(void)importContactsAfterAllow {
     [self getAllContacts];
-    
+    /*
     NSDictionary *dic = @{@"Khurram ali": @"3333333333",
                           @"Ozair": @"5555555555",
                           @"Rehan ali": @"7777777777",
@@ -446,6 +462,7 @@
                           };
     
     [untechable.emergencyContacts setDictionary:dic];
+    */
     
     //[commonFunctions sortDic:untechable.emergencyContacts]; //zarorat nhe pari , ya auto sort kar raha hy
     
