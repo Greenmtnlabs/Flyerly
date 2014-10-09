@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "Untechable.h"
 #import "UIPlaceHolderTextView.h"
-@interface SocialnetworkController : UIViewController < UITextFieldDelegate >
+#import "BSKeyboardControls.h"
+
+@interface SocialnetworkController : UIViewController < UITextFieldDelegate , BSKeyboardControlsDelegate >
 {
     UILabel *titleLabel;
     UIButton *helpButton;

@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "Untechable.h"
-
-@interface EmailSettingController : UIViewController < UITextFieldDelegate >
+#import "BSKeyboardControls.h"
+@interface EmailSettingController : UIViewController < UITextFieldDelegate , BSKeyboardControlsDelegate >
 {
     UILabel *titleLabel;
     UIButton *helpButton;

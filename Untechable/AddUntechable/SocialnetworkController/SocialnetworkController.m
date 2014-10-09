@@ -10,6 +10,7 @@
 #import "EmailSettingController.h"
 #import "Common.h"
 
+
 @interface SocialnetworkController ()
 
 @property (strong, nonatomic) IBOutlet UITextField *inputSetSocialStatus;
@@ -20,7 +21,7 @@
 
 @property (strong, nonatomic) IBOutlet UIButton *btnLinkedin;
 
-
+@property (nonatomic, strong) BSKeyboardControls *keyboardControls;
 
 @end
 
@@ -48,6 +49,10 @@
     //[self setDefaultModel];
     
     [self updateUI];
+    
+    NSArray *fields = @[ self.inputSetSocialStatus ];
+    [self setKeyboardControls:[[BSKeyboardControls alloc] initWithFields:fields]];
+    [self.keyboardControls setDelegate:self];
 }
 
 - (void)didReceiveMemoryWarning
@@ -72,6 +77,34 @@
     return NO;
 }
 // ________________________     Custom functions    ___________________________
+
+#pragma mark - Text Field Delegate
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    [self.keyboardControls setActiveField:textField];
+}
+
+#pragma mark - Text View Delegate
+
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+    [self.keyboardControls setActiveField:textView];
+}
+
+#pragma mark - Keyboard Controls(< PREV , NEXT > )  Delegate
+
+- (void)keyboardControls:(BSKeyboardControls *)keyboardControls selectedField:(UIView *)field inDirection:(BSKeyboardControlsDirection)direction
+{
+    
+}
+
+- (void)keyboardControlsDonePressed:(BSKeyboardControls *)keyboardControls
+{
+    [self.view endEditing:YES];
+}
+
+
 #pragma mark -  UI functions
 -(void)updateUI
 {
