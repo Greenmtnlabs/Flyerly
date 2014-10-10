@@ -34,55 +34,36 @@ app.use(function noCachePlease(req, res, next) {
 app.use( express.compress() );
 
 // Configure all servers for this application
-var emailServer = require( __dirname + '/providers/EmailServer' );
-emailServer.setup( app );
+var flyerlyServer = require( __dirname + '/providers/FlyerlyServer' );
+flyerlyServer.setup( app );
 
 // Start the http server
 var httpServer;
 
-//Bellow work for server auto restart when server crash
-//http://shapeshed.com/uncaught-exceptions-in-node/
 
-var cluster = require('cluster');
-var workers = 1;//process.env.WORKERS || require('os').cpus().length;
+// SSL Configurations
+if ( config.http.enableSSL ) {
+	// We will use https
+	var https = require('https');
 
-if (cluster.isMaster) {
+	// The certificate and ssl key
+	var fs = require('fs');
+	var privateKey  = fs.readFileSync( config.http.serverKey, 'utf8');
+	var certificate = fs.readFileSync( config.http.serverCertificate, 'utf8');
 
-  for (var i = 0; i < workers; ++i) {
-    var worker = cluster.fork().process;
-  }
-
-  cluster.on('exit', function(worker) {
-    cluster.fork();
-  });
-
+	// Create the server
+	httpsServer = https.createServer(credentials, app);
+} else {
+	var http = require('http');
+	httpServer = http.createServer(app);
 }
-else {
-		
-	// SSL Configurations
-	if ( config.http.enableSSL ) {
-		// We will use https
-		var https = require('https');
-	
-		// The certificate and ssl key
-		var fs = require('fs');
-		var privateKey  = fs.readFileSync( config.http.serverKey, 'utf8');
-		var certificate = fs.readFileSync( config.http.serverCertificate, 'utf8');
-	
-		// Create the server
-		httpsServer = https.createServer(credentials, app);
-	} else {
-		var http = require('http');
-		httpServer = http.createServer(app);
-	}
 
 
-	// Make the server listen
-	httpServer.listen( config.http.port );
-	logger.info( 'Listening on port ' + config.http.port + ' with SSL ' + config.http.enableSSL );
-	
-	
-}
+// Make the server listen
+httpServer.listen( config.http.port );
+logger.info( 'Listening on port ' + config.http.port + ' with SSL ' + config.http.enableSSL );
+
+
 
 //Exception handler
 process.on('uncaughtException', function (err) {
@@ -90,4 +71,11 @@ process.on('uncaughtException', function (err) {
 	    errorMsg +=	', err.stack:'+err.stack;
 	logger.info('errorMsg:'+errorMsg);
 	logger.info(err);     
+});
+
+
+
+app.get('/gbhai', function( req, res ) {
+	
+	red.end("g bhai");
 });

@@ -18,7 +18,7 @@ config.app.mode.current = config.app.mode.LOCALHOST;
 // HTTP server configuration
 config.http = {}
 config.http.host	=	'';
-config.http.sessionSecret = 'asrhlja sdflkjsdf';
+config.http.sessionSecret = '1234567890FlyerlyApis';
 config.http.enableSSL = false;
 config.http.serverKey = __dirname + '/../sslcert/server.key';
 config.http.serverCertificate = __dirname + '/../sslcert/server.crt';
@@ -37,6 +37,10 @@ config.crons.cron1 = 1;
 
 // Db Configuration
 config.db = {}
+config.parse = {}
+config.parse.appId = "rrU7ilSR4TZNQD9xlDtH8wFoQNK4st5AaITq6Fan";
+config.parse.jsKey = "Q87FRu5s8QFvCbN1rwFXUj19somLIU0aqh9SavHH";
+
 
 config.db.modelVersion = 1.0;
 if( config.app.mode.current == config.app.mode.LOCALHOST  ) {
