@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleDisplayName</key>
@@ -46,18 +48,21 @@
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.flyerly.greenmtnlabs</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>oatransdemo</string>
 				<string>Flyerly</string>
 				<string>fb136691489852349</string>
 				<string>fsqapi</string>
+				<string>flyerlyapp</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>477</string>
-			<key>FacebookAppID</key>
+	<key>FacebookAppID</key>
 	<string>136691489852349</string>
 	<key>FacebookDisplayName</key>
 	<string>Flyerly</string>

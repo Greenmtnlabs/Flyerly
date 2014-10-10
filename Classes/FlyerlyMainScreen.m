@@ -345,6 +345,71 @@ BOOL adLoaded = false;
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     flyerConfigurator = appDelegate.flyerConfigurator;
     
+    if ( [[PFUser currentUser] sessionToken].length != 0 )
+    {
+        PFQuery *query = [PFUser query];
+        [query whereKey:@"username" equalTo:[[PFUser currentUser] objectForKey:@"username"]];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            if (!error) {
+                if (objects.count) {
+                    for (PFObject *object in objects){
+                        NSLog(@"Object ID: %@", object.objectId);
+                        
+                    }
+                }
+            }
+        }];
+        
+        //Getting Current User
+        /*PFUser *user = [PFUser currentUser];
+        
+        //Create query for get user purchases
+        PFQuery *query = [PFQuery queryWithClassName:@"InApp"];
+        
+        //define criteria
+        [query whereKey:@"user" equalTo:user];
+        
+        //run query on Parse
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            
+            if (!error) {
+                
+                if (objects.count >= 1) {
+                    
+                    //Here we set User purchse details which returned from Parse
+                    oldPurchases = [[objects objectAtIndex:0] valueForKey:@"json"];
+                    
+                    [[NSUserDefaults standardUserDefaults]setValue:oldPurchases forKey:@"InAppPurchases"];
+                    
+                } else {
+                    
+                    //Here we set User purchse details which returned from Parse
+                    oldPurchases = nil;
+                }
+                
+                if ( delegate != nil ) {
+                    [delegate userPurchasesLoaded];
+                }
+                
+                
+                // The find succeeded. The first 100 objects are available in objects
+            } else {
+                
+                // Log details of the failure
+                NSLog(@"Error: %@ %@", error, [error userInfo]);
+            }
+        }];*/
+        
+    }
+    
+    //ios code for open this url in safari
+    NSURL *url = [NSURL URLWithString:@"http://192.168.0.108:3000/session-check"];
+    
+    if (![[UIApplication sharedApplication] openURL:url]) {
+        NSLog(@"%@%@",@"Failed to open url:",[url description]);
+    }
+    
+    
     // Create a new GADInterstitial each time. A GADInterstitial will only show one request in its
     // lifetime. The property will release the old one and set the new one.
     
@@ -370,6 +435,7 @@ BOOL adLoaded = false;
         
         if( ![previuosVersion isEqualToString:[self appVersion]] ||
             previuosVersion == nil ) {
+    
             [self openPanel];
         }
         

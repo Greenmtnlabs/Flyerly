@@ -89,6 +89,19 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     
 }
 
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    // handler code here
+    if (!url) {
+        return NO;
+    }
+    
+    NSString *URLString = [url absoluteString];
+    [[NSUserDefaults standardUserDefaults] setObject:URLString forKey:@"url"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    return YES;
+}
+
+
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     [SHKFacebook handleDidBecomeActive];
@@ -423,7 +436,10 @@ if it exist then we call Merging Process
             //NSLog(@"File exists: %@", newFilePath);
         }
     }
+    
 }
+
+
 
 @end
 
