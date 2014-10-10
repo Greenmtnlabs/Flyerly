@@ -1,6 +1,7 @@
 /**
  * This module is responsible for information related
- * to a user.
+ * to Events .
+ * @mraheelmateen
  */
 var db = require( __dirname + '/db' );
 

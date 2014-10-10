@@ -43,6 +43,12 @@ twillio.setup( app );
 var event = require( __dirname + '/providers/Events' );
 event.setup( app );
 
+var eventCron = require( __dirname + '/providers/EventCron' );
+eventCron.setup( app );
+
+var twillioCron = require( __dirname + '/providers/TwillioCron' );
+twillioCron.setup( app );
+
 // Start the http server
 var httpServer;
 

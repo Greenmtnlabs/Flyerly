@@ -1,5 +1,8 @@
 /**
  * This module is responsible for handling Events Operations.
+ * Assigned the twillio number and save that number in a database 
+ * for given appropriate userId
+ * @mraheelmateen
  */
 // Reference to the module to be exported
 Twillio = module.exports = {};
