@@ -2518,9 +2518,9 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             [navigationController popViewControllerAnimated:NO];
             [userPurchases_ setUserPurcahsesFromParse];
             
-            [weakSelf openPanel];
+            //[weakSelf openPanel];
             
-            [weakSelf hideLoadingIndicator];
+            //[weakSelf hideLoadingIndicator];
         };
         
         [self.navigationController pushViewController:signInController animated:YES];
@@ -5181,8 +5181,10 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         
     }else {
         
-        if ( [sharePanel isHidden] && inappviewcontroller!= nil ) {
-            [self presentViewController:inappviewcontroller animated:NO completion:nil];
+        if ( [sharePanel isHidden] && inappviewcontroller != nil &&
+            ![[self presentedViewController] isKindOfClass:[InAppViewController class]])
+        {
+            [self presentViewController:inappviewcontroller animated:YES completion:nil];
         }
     }
     
