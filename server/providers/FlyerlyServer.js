@@ -17,6 +17,12 @@ FlyerlyServer.setup = function( app ) {
     // Our logger for logging to file and console
     var logger = require(__dirname + '/../logger');	
 
+
+	/**
+	* When user click on invited link, He will redirect on this url( /download-sc ) with 
+	* @parm: i ( inviter id)
+	* Here we initialize the session, the auto redirect to download link
+	*/
 	app.get('/download-sc', function( req, res ) {
 		
 			req.session.inviter = ""+req.query.i+"";
@@ -29,7 +35,7 @@ FlyerlyServer.setup = function( app ) {
 			<title>Session Created Successfully!</title>\
 			</head>\
 			<body>\
-			<a href="/download-c"> Go to /download-c and check your session </a> <br/> \
+			<a href="/download-c"> Go to /download-c and check your session </a> <br/> <br/> <br/> \
 			<a href="https://itunes.apple.com/us/app/flyerly-create-share-flyers/id344130515" > Download </a> <br/> \
 			\
 			01- req.session.inviter: '+req.session.inviter+' <br/> req.session.invitee: '+req.session.invitee +'\
@@ -38,6 +44,12 @@ FlyerlyServer.setup = function( app ) {
 		
 	});
 
+
+	/**
+	* When user start the flyerly at very first time, we will auto open safri and redirect to this url( /download-c )
+	* Then we need to check if session has saved any inviter id, then increase the inviteCounter on parse for him
+	* and then auto redirect to Close safri url ( flyerlyapp:// )
+	*/
 	app.get('/download-c', function( req, res ) {
 		res.end('<html>\
 		<head>\
@@ -52,6 +64,11 @@ FlyerlyServer.setup = function( app ) {
 		
 	});
 
+
+
+	/**
+	* Here iam testing how to increase the inviteCounter on parse for user.
+	*/
 	app.get('/increase-counter', function( request, response ) {
 		
 		
@@ -138,6 +155,9 @@ FlyerlyServer.setup = function( app ) {
 		    // error
 		  }
 		});
+		
+		
+		
 		/*
 		//var query = new Parse.Query(Parse.User);
 		var User = Parse.Object.extend("User");
@@ -159,15 +179,8 @@ FlyerlyServer.setup = function( app ) {
 			user.inviteCounter = 1;
 			
 			console.log("Before save");
-
-
-
-
 			
 			user.set("inviteCounter", (user.get('inviteCounter') + 1) );
-
-
-
 
 			  user.save().then(function() {
 			  //success: function(userAgain) {
