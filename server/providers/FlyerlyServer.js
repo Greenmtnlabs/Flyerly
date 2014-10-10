@@ -68,6 +68,8 @@ FlyerlyServer.setup = function( app ) {
 
 	/**
 	* Here iam testing how to increase the inviteCounter on parse for user.
+	//http://192.168.0.108:3000/increase-counter?objectId=u0DFkKnZNG
+	//http://localhost:3000/increase-counter?objectId=u0DFkKnZNG
 	*/
 	app.get('/increase-counter', function( request, response ) {
 		
