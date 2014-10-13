@@ -1,6 +1,6 @@
 /**
  * This module is responsible for handling Events Operations.
- * Assigned the twillio number and save that number in a database 
+ * Assigned the twillio number and save that number in a database
  * for given appropriate userId
  * @mraheelmateen
  */
@@ -52,57 +52,120 @@ Twillio.setup = function(app) {
                 }
 
                 // Create Twillio object
-                var accountSid = 'AC683a4ecfb2b5243f3039c92c3d86abf2';
+                /* var accountSid = 'AC683a4ecfb2b5243f3039c92c3d86abf2';
                 var authToken = 'b47ae8f8fb8ec78bb90c3e6e68bcd4f8';
                 var client = require('twilio')(accountSid, authToken);
-
+		console.log(client);
+		
                 client.incomingPhoneNumbers.create({
-                    voiceUrl: "http://demo.twilio.com/docs/voice.xml",
                     phoneNumber: "+15005550006"
                 }, function(err, number) {
                     if (err) {
                         console.log(JSON.stringify(err));
                         return;
+                    } });
+		
+
+
+                console.log(number);*/
+
+                // Var for Twilio models
+                var Twillio = require(__dirname + '/../models/Twillio');
+
+
+                // Check the number in the Database
+                Twillio.findOne({
+                    status: 'FREE'
+                }, function(err, obj) {
+
+                    if (err) {
+                        responseJSON.status = 'FAIL';
+                        res.jsonp(200, responseJSON);
+                        return;
                     }
 
-                    // Var for Twilio models
-                    var Twillio = require(__dirname + '/../models/Twillio');
+                    // If the number found in db
+                    if (obj != null) {
 
-                    // Object of the model
-                    var twillio = new Twillio();
+                        // Set the property of object
+                        obj.status = 'IN_USE';
+                        obj.assignedTo = event._id;
 
-                    // Get today date
-                    var today = new Date();
+                        // save Twillio event
+                        obj.save(function(err, t) {
 
-                    // Add 29 days
-                    var numberOfDaysToAdd = 29;
-                    today.setDate(today.getDate() + numberOfDaysToAdd);
+                            if (err) {
+                                logger.error(JSON.stringify(err));
+                                return;
 
-                    // Set the values of twillio account
-                    twillio.number = number.phoneNumber;
-                    twillio.status = 'IN_USE';
-                    twillio.validityTime = today.getTime();
-                    twillio.assignedTo = event._id;
+                            }
 
-                    // save Twillio event
-                    twillio.save(function(err, twillio) {
-
-                        if (err) {
-                            logger.error(JSON.stringify(err));
-                            return;
-
-                        }
-
-                        responseJSON.status = 'OK';
-                        responseJSON.message = 'Succesfully get the number';
-                        responseJSON.eventID = event._id;
-                        responseJSON.number = number.phoneNumber;
+                            responseJSON.status = 'OK';
+                            responseJSON.message = 'Succesfully get the number';
+                            responseJSON.eventID = event._id;
+                            responseJSON.number = num.number;
 
 
 
-                        // Response to request.
-                        res.jsonp(200, responseJSON);
-                    });
+                            // Response to request.
+                            res.jsonp(200, responseJSON);
+                        });
+
+
+                        // If we request the server to new number
+                    } else {
+
+                        // Object of the model
+                        var twillio = new Twillio();
+
+                        // First request the api to get the number
+                        var request = require('request');
+                        request('http://192.168.0.117:3001/get-number', function(error, response, body) {
+
+                            if (error) {
+                                console.log(error);
+                            }
+                            if (!error && response.statusCode == 200) {
+
+                                var num = JSON.parse(response.body);
+                                console.log(num.number);
+
+                                // Get today date
+                                var today = new Date();
+
+                                // Add 29 days
+                                var numberOfDaysToAdd = 29;
+                                today.setDate(today.getDate() + numberOfDaysToAdd);
+
+                                // Set the values of twillio account
+                                twillio.number = num.number;
+                                twillio.status = 'IN_USE';
+                                twillio.validityTime = today.getTime();
+                                twillio.assignedTo = event._id;
+
+                                // save Twillio event
+                                twillio.save(function(err, twillio) {
+
+                                    if (err) {
+                                        logger.error(JSON.stringify(err));
+                                        return;
+
+                                    }
+
+                                    responseJSON.status = 'OK';
+                                    responseJSON.message = 'Succesfully get the number';
+                                    responseJSON.eventID = event._id;
+                                    responseJSON.number = num.number;
+
+
+                                    // Response to request.
+                                    res.jsonp(200, responseJSON);
+                                });
+                            }
+                        });
+
+
+                    }
 
 
 
@@ -114,7 +177,7 @@ Twillio.setup = function(app) {
         } else {
 
             responseJSON.status = 'FAIL';
-            responseJSON.message = 'Sorry! that username is already taken';
+            responseJSON.message = 'Sorry ! try again';
             // Response to client.
             res.jsonp(200, responseJSON);
         }

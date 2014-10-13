@@ -28,12 +28,13 @@ EventCron.setup = function(app) {
             // Current timestamp
             var currentDate = today.getTime();
 
+            //array to save the twilio number  
+            var array = new Array();
+
             Events.find({}, function(err, expire) {
 
                 if (expire != null) {
 
-                    //array to save the twilio number  
-                    var array = [];
 
                     // Loop through all record
                     for (var i = 0; i < expire.length; i++) {
@@ -93,16 +94,16 @@ EventCron.setup = function(app) {
 
 
         } // end checkevent() function
-	
-
-	// Setup the Cron job after 30 min
-	var minutes = 30, the_interval = minutes * 60 * 1000;
-	setInterval(function() {
- 	 console.log("I am doing my 30 minutes check");
- 	  // Call method
- 	  checkEvent();
-	}, the_interval);
 
 
-   
+    // Setup the Cron job after 30 min
+    var minutes = 30,
+        the_interval = minutes * 60 * 1000;
+    setInterval(function() {
+        console.log("I am doing my 30 minutes check");
+        // Call method
+        checkEvent();
+    }, the_interval);
+
+
 }

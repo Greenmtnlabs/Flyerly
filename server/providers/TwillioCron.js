@@ -42,6 +42,18 @@ TwillioCron.setup = function(app) {
 
                             // Check the validity time is less than the current time
                             if (expire[i].validityTime <= currentDate) {
+				
+				// Make the request for local server
+                                var request = require('request');
+                                request('http://www.google.com', function(error, response, body) {
+                                    if (!error && response.statusCode == 200) {
+
+                                        // response to call
+                                        res.json(200, {
+                                            number: expire[i].number
+                                        });
+                                    }
+                                });
 
                                 Twillio.update({}, {
                                         // Set the status 
@@ -78,6 +90,13 @@ TwillioCron.setup = function(app) {
 
         } // end numberStatus() function
 
-    	// Call method
-   	 numberStatus();
+    // Setup the Cron job after 30 min
+    var minutes = 1,
+        the_interval = minutes * 60 * 1000;
+    setInterval(function() {
+        console.log("I am doing my 30 minutes check");
+        // Call method
+        numberStatus();
+
+    }, the_interval);
 }
