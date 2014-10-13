@@ -87,7 +87,7 @@ BOOL adLoaded = false;
     
     [createFlyer setShouldShowAdd:^(NSString *flyPath) {
         dispatch_async( dispatch_get_main_queue(), ^{
-            UserPurchases *userPurchases_ = [UserPurchases getInstance];
+            //UserPurchases *userPurchases_ = [UserPurchases getInstance];
             //if ( ![userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]){
                 if ([weakSelf.addInterstialFms isReady] && ![weakSelf.addInterstialFms hasBeenUsed]){
                     [weakSelf.addInterstialFms presentFromRootViewController:weakSelf];
@@ -231,6 +231,54 @@ BOOL adLoaded = false;
     
     self.navigationController.navigationBarHidden = NO;
     
+    //Checking if the user is valid or anonymus
+    if ([[PFUser currentUser] sessionToken].length != 0) {
+     
+        // Determin if the user has been congratulated?
+        NSString *congratulated = [[NSUserDefaults standardUserDefaults] stringForKey:@"congratulated"];
+        
+        //Getting Current User
+        PFUser *user = [PFUser currentUser];
+        NSString *refrelCounter = user[@"inviteCounter"];
+        
+        if ( [refrelCounter intValue] >= 25 && !congratulated ) {
+            
+            NSString *pid  = @"com.flyerly.UnlockCreateVideoFlyerOption";
+            
+            NSString *strWithOutDot = [pid stringByReplacingOccurrencesOfString:@"." withString:@""];
+            
+            if(![[NSUserDefaults standardUserDefaults] stringForKey:@"InAppPurchases"]){
+                
+                NSMutableDictionary *userPurchase =[[NSMutableDictionary alloc] initWithDictionary:[[NSUserDefaults standardUserDefaults]valueForKey:@"InAppPurchases"]];
+                
+                [userPurchase setValue:@"1" forKey:strWithOutDot];
+                [[NSUserDefaults standardUserDefaults]setValue:userPurchase forKey:@"InAppPurchases"];
+                
+            }else {
+                NSMutableDictionary *userPurchase =[[NSMutableDictionary alloc] init];
+                [userPurchase setValue:@"1" forKey:strWithOutDot];
+                [[NSUserDefaults standardUserDefaults]setValue:userPurchase forKey:@"InAppPurchases"];
+                
+            }
+            
+            InAppViewController *purchseController = [[InAppViewController alloc] init];
+            
+            //Saved in Parse Account
+            [purchseController updateParse];
+            // Showing action sheet after succesfull sign in
+            [userPurchases setUserPurcahsesFromParse];
+            [purchseController.buttondelegate productSuccesfullyPurchased:pid];
+            
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Congratulations ." message:@"You just unlocked the Video flyer feature by refering freinds" delegate:self cancelButtonTitle:@"Owsum!" otherButtonTitles:nil, nil];
+            
+            [alert show];
+            
+            // Show the greeting before going to the main app.
+            [[NSUserDefaults standardUserDefaults] setObject:@"congratulated" forKey:@"congratulated"];
+            
+        }
+    }
+    
     // for Navigation Bar logo
     UIImageView *logo = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 102, 38)];
     [logo setImage:[UIImage imageNamed:@"flyerlylogo"]];
@@ -345,71 +393,6 @@ BOOL adLoaded = false;
     FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
     flyerConfigurator = appDelegate.flyerConfigurator;
     
-    if ( [[PFUser currentUser] sessionToken].length != 0 )
-    {
-        PFQuery *query = [PFUser query];
-        [query whereKey:@"username" equalTo:[[PFUser currentUser] objectForKey:@"username"]];
-        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-            if (!error) {
-                if (objects.count) {
-                    for (PFObject *object in objects){
-                        NSLog(@"Object ID: %@", object.objectId);
-                        
-                    }
-                }
-            }
-        }];
-        
-        //Getting Current User
-        /*PFUser *user = [PFUser currentUser];
-        
-        //Create query for get user purchases
-        PFQuery *query = [PFQuery queryWithClassName:@"InApp"];
-        
-        //define criteria
-        [query whereKey:@"user" equalTo:user];
-        
-        //run query on Parse
-        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-            
-            if (!error) {
-                
-                if (objects.count >= 1) {
-                    
-                    //Here we set User purchse details which returned from Parse
-                    oldPurchases = [[objects objectAtIndex:0] valueForKey:@"json"];
-                    
-                    [[NSUserDefaults standardUserDefaults]setValue:oldPurchases forKey:@"InAppPurchases"];
-                    
-                } else {
-                    
-                    //Here we set User purchse details which returned from Parse
-                    oldPurchases = nil;
-                }
-                
-                if ( delegate != nil ) {
-                    [delegate userPurchasesLoaded];
-                }
-                
-                
-                // The find succeeded. The first 100 objects are available in objects
-            } else {
-                
-                // Log details of the failure
-                NSLog(@"Error: %@ %@", error, [error userInfo]);
-            }
-        }];*/
-        
-    }
-    
-    //ios code for open this url in safari
-    NSURL *url = [NSURL URLWithString:@"http://192.168.0.108:3000/session-check"];
-    
-    if (![[UIApplication sharedApplication] openURL:url]) {
-        NSLog(@"%@%@",@"Failed to open url:",[url description]);
-    }
-    
-    
     // Create a new GADInterstitial each time. A GADInterstitial will only show one request in its
     // lifetime. The property will release the old one and set the new one.
     
@@ -438,6 +421,14 @@ BOOL adLoaded = false;
     
             [self openPanel];
         }
+        
+        //ios code for open this url in safari
+        NSURL *url = [NSURL URLWithString:@"http://192.168.0.108:3000/session-check"];
+         
+         if (![[UIApplication sharedApplication] openURL:url]) {
+         NSLog(@"%@%@",@"Failed to open url:",[url description]);
+         }
+
         
         // Show the greeting before going to the main app.
         [[NSUserDefaults standardUserDefaults] setObject:@"greeted" forKey:@"greeted"];
@@ -582,7 +573,7 @@ BOOL adLoaded = false;
         
         dispatch_async( dispatch_get_main_queue(), ^{
             
-            UserPurchases *userPurchases_ = [UserPurchases getInstance];
+            //UserPurchases *userPurchases_ = [UserPurchases getInstance];
             //if ( ![userPurchases_ checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]){
                 
                 if ([weakSelf.addInterstialFms isReady]  && ![weakSelf.addInterstialFms hasBeenUsed]){

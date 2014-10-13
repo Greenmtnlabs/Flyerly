@@ -47,5 +47,6 @@
 -(void) requestProduct;
 -(void) inAppDataLoaded;
 -(void) restorePurchase;
+-(void) updateParse;
 
 @end
