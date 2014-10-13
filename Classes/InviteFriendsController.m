@@ -16,7 +16,11 @@
 #import "Flurry.h"
 #import "UserVoice.h"
 
-@implementation InviteFriendsController
+@implementation InviteFriendsController {
+
+    NSString *userUniqueObjectId;
+    FlyerlyConfigurator *flyerConfigurator;
+}
 @synthesize uiTableView, contactsArray, selectedIdentifiers,contactsButton, facebookButton, twitterButton,  searchTextField, facebookArray, twitterArray,fbinvited,twitterInvited,iPhoneinvited;
 @synthesize contactBackupArray, facebookBackupArray, twitterBackupArray;
 @synthesize fbText;
@@ -83,6 +87,28 @@ const int CONTACTS_TAB = 0;
     [self.uiTableView  setBackgroundColor:[UIColor colorWithRed:245/255.0 green:241/255.0 blue:222/255.0 alpha:1.0]];
     [searchTextField setReturnKeyType:UIReturnKeyDone];
     
+    
+    if ( [[PFUser currentUser] sessionToken].length != 0 )
+    {
+        
+        PFQuery *query = [PFUser query];
+        [query whereKey:@"username" equalTo:[[PFUser currentUser] objectForKey:@"username"]];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            if (!error) {
+                if (objects.count) {
+                    for (PFObject *object in objects){
+                        NSLog(@"Object ID: %@", object.objectId);
+                        userUniqueObjectId = object.objectId;
+                        
+                        
+                    }
+                }
+            }
+        }];
+    }
+    
+    FlyrAppDelegate *appDelegate = (FlyrAppDelegate*) [[UIApplication sharedApplication]delegate];
+    flyerConfigurator = appDelegate.flyerConfigurator;
     
     //HERE WE GET ALREADY INVITED FRIENDS
     PFUser *user = [PFUser currentUser];
@@ -174,6 +200,8 @@ const int CONTACTS_TAB = 0;
     NSMutableArray *identifiers = [[NSMutableArray alloc] init];
     identifiers = selectedIdentifiers;
     NSLog(@"%@",identifiers);
+
+    NSString *sharingText = [NSString stringWithFormat:@"I'm using the Flyerly app to create and share flyers on the go! Want to give it a try? %@%@", flyerConfigurator.referralURL, userUniqueObjectId];
     
     if([identifiers count] > 0){
         
@@ -181,7 +209,7 @@ const int CONTACTS_TAB = 0;
         if(selectedTab == 0){
             globle.accounts = [[NSMutableArray alloc] initWithArray:selectedIdentifiers];
             
-            SHKItem *item = [SHKItem text:@"I'm using the Flyerly app to create and share flyers on the go! Want to give it a try? Flyer.ly/Invite "];
+            SHKItem *item = [SHKItem text:sharingText];
             item.textMessageToRecipients = selectedIdentifiers;
             
             iosSharer = [[ SHKSharer alloc] init];
@@ -191,7 +219,7 @@ const int CONTACTS_TAB = 0;
             
         }else if(selectedTab == 1){
             
-            SHKItem *i = [SHKItem text:@"I'm using the Flyerly app to create and share flyers on the go! Want to give it a try? http://Flyer.ly/Invite"];
+            SHKItem *i = [SHKItem text:sharingText];
             
             NSArray *shareFormFields = [SHKFacebookCommon shareFormFieldsForItem:i];
             SHKFormController *rootView = [[SHKCONFIG(SHKFormControllerSubclass) alloc] initWithStyle:UITableViewStyleGrouped
@@ -801,6 +829,8 @@ const int CONTACTS_TAB = 0;
         
         ContactsModel *model = [self getArrayOfSelectedTab][(indexPath.row)];
         
+        NSString *sharingText = [NSString stringWithFormat:@"I'm using the Flyerly app to create and share flyers on the go! Want to give it a try? %@%@", flyerConfigurator.referralURL, userUniqueObjectId];
+        
         //CHECK FOR ALREADY SELECTED
         if (model.status == 0) {
             [model setInvitedStatus:1];
@@ -809,7 +839,7 @@ const int CONTACTS_TAB = 0;
             
             //Calling ShareKit for Sharing
             iosSharer = [[ SHKSharer alloc] init];
-            NSString *tweet = [NSString stringWithFormat:@"I'm using the @flyerlyapp to create and share flyers on the go! Want to give it a try? Flyer.ly/Twitter @%@ #flyerly",model.description];
+            NSString *tweet = [NSString stringWithFormat:@"%@ @%@ #flyerly",sharingText,model.description];
             
             [selectedIdentifiers addObject:model.description];
             iosSharer = [SHKTwitter shareText:tweet];
