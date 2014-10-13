@@ -25,6 +25,11 @@
 	return @"http://www.flyer.ly";
 }
 
+- (NSString*)referralURL{
+    return @"http://192.168.0.110:3000/download-sc?i=";
+}
+
+
 /*
  API Keys
  --------

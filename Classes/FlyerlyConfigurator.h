@@ -13,6 +13,7 @@
 
 - (NSString*)appName;
 - (NSString*)appURL;
+- (NSString*)referralURL;
 - (NSArray*)defaultFavoriteURLSharers;
 - (NSArray*)defaultFavoriteImageSharers;
 - (NSArray*)defaultFavoriteTextSharers;
