@@ -38,8 +38,10 @@ config.crons.cron1 = 1;
 // Db Configuration
 config.db = {}
 config.parse = {}
-config.parse.appId = "rrU7ilSR4TZNQD9xlDtH8wFoQNK4st5AaITq6Fan";
-config.parse.jsKey = "Q87FRu5s8QFvCbN1rwFXUj19somLIU0aqh9SavHH";
+config.parse.appId = "1zE9CnuScHj4l7dGFbT8NG15uTNb8VazMpsdoCis";
+//"rrU7ilSR4TZNQD9xlDtH8wFoQNK4st5AaITq6Fan";
+config.parse.jsKey = "qvXpwLM96caqnyHH0kAZ3sNMe8byfs36fw1U5uoR";
+//"Q87FRu5s8QFvCbN1rwFXUj19somLIU0aqh9SavHH";
 
 
 config.db.modelVersion = 1.0;
