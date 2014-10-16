@@ -130,7 +130,7 @@ Parse.Cloud.define("increaseInviteCounter", function(request, response) {
   Parse.Cloud.useMasterKey();
 
   var query = new Parse.Query(Parse.User);
-  query.equalTo("objectId", req.params.objectId);
+  query.equalTo("objectId", request.params.objectId);
 
 
 
@@ -143,7 +143,7 @@ Parse.Cloud.define("increaseInviteCounter", function(request, response) {
       // keys and values you might want to change about
       // this user.
       //anotherUser.set("inviteCounter", 2);
-	  anotherUser.set("inviteCounter", (user.get('inviteCounter') + 1) );
+	  anotherUser.set("inviteCounter", ( anotherUser.get('inviteCounter') + 1 )  );
 
       // Save the changes.
       anotherUser.save(null, {
@@ -151,10 +151,10 @@ Parse.Cloud.define("increaseInviteCounter", function(request, response) {
           // The user was saved successfully.
           response.success("1- Successfully updated user.",anotherUser);
         },
-        error: function(gameScore, error) {
+        error: function(errUser, error) {
           // The save failed.
           // error is a Parse.Error with an error code and description.
-          response.error("2- Could not save changes to user.",gameScore,error);
+          response.error("2- Could not save changes to user.",errUser,error);
         }
       });
     },
