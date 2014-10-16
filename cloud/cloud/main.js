@@ -45,7 +45,7 @@ response.success(status);
 		  			
 			});
 //response.success(status + " test ="+newInApp.get("user"));
-});
+
 */
 
 
@@ -120,4 +120,46 @@ response.success(status);
       //response.success(status);
   });
 
+});
+
+
+// Increase invite count
+Parse.Cloud.define("increaseInviteCounter", function(request, response) {
+
+
+  Parse.Cloud.useMasterKey();
+
+  var query = new Parse.Query(Parse.User);
+  query.equalTo("objectId", req.params.objectId);
+
+
+
+  // Get the first user which matches the above constraints.
+  query.first({
+    success: function(anotherUser) {
+	  // Successfully retrieved the user.
+      // Modify any parameters as you see fit.
+      // You can use request.params to pass specific
+      // keys and values you might want to change about
+      // this user.
+      //anotherUser.set("inviteCounter", 2);
+	  anotherUser.set("inviteCounter", (user.get('inviteCounter') + 1) );
+
+      // Save the changes.
+      anotherUser.save(null, {
+        success: function(anotherUser) {
+          // The user was saved successfully.
+          response.success("1- Successfully updated user.",anotherUser);
+        },
+        error: function(gameScore, error) {
+          // The save failed.
+          // error is a Parse.Error with an error code and description.
+          response.error("2- Could not save changes to user.",gameScore,error);
+        }
+      });
+    },
+    error: function(error) {
+      response.error("3- Could not find user.",error);
+    }
+  });
 });
