@@ -423,12 +423,10 @@ BOOL adLoaded = false;
         }
         
         //ios code for open this url in safari
-        NSURL *url = [NSURL URLWithString:@"http://192.168.0.108:3000/session-check"];
-         
-         if (![[UIApplication sharedApplication] openURL:url]) {
-         NSLog(@"%@%@",@"Failed to open url:",[url description]);
-         }
-
+        NSURL *url = [NSURL URLWithString:@"http://192.168.0.114:3000/es"];
+        
+        [[UIApplication sharedApplication] openURL:url];
+        
         
         // Show the greeting before going to the main app.
         [[NSUserDefaults standardUserDefaults] setObject:@"greeted" forKey:@"greeted"];
