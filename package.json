@@ -5,8 +5,6 @@
   "private": true,
   "dependencies": {
 	"winston": "0.7.2",
-    "express": "3.4.0",
-	"parse" : "1.2.19",
-	"parse-cloud" : "0.0.6"
+    "express": "3.4.0"
   }
 }
