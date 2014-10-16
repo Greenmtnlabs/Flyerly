@@ -1,6 +1,7 @@
 platform :ios, '7.0'
 
 pod 'AFNetworking', '~> 2.2'
+pod 'uservoice-iphone-sdk', '~> 3.0'
 
 #pod "ShareKit"
 pod 'Google-API-Client', '0.1.1'
