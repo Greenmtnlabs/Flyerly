@@ -529,6 +529,9 @@
 		243FCF1919DD75C3003661EF /* watermark.png in Resources */ = {isa = PBXBuildFile; fileRef = 243FCF1819DD75C3003661EF /* watermark.png */; };
 		2441584819A4E85B00F12FAD /* ImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 2441584719A4E85B00F12FAD /* ImageLoader.m */; };
 		2453E39F19AC5E0300CB2958 /* buy@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2453E39E19AC5E0300CB2958 /* buy@2x.png */; };
+		24556D8119EE7E2E005FCDFE /* more.png in Resources */ = {isa = PBXBuildFile; fileRef = 24556D7E19EE7E2E005FCDFE /* more.png */; };
+		24556D8319EE7E2E005FCDFE /* more@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24556D8019EE7E2E005FCDFE /* more@3x.png */; };
+		24556D8519EE7E65005FCDFE /* more@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24556D8419EE7E65005FCDFE /* more@2x.png */; };
 		2459E8B0196130810072A56C /* greenButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 2459E8AF196130810072A56C /* greenButton.png */; };
 		245A016F19A74E3C005A414A /* AssetGroupViewControllerWithSearchFeild.xib in Resources */ = {isa = PBXBuildFile; fileRef = 245A016E19A74E3C005A414A /* AssetGroupViewControllerWithSearchFeild.xib */; };
 		245C0FA51933081200B5B31C /* free-features.plist in Resources */ = {isa = PBXBuildFile; fileRef = 245C0FA41933081200B5B31C /* free-features.plist */; };
@@ -1805,6 +1808,9 @@
 		2441584619A4E85B00F12FAD /* ImageLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageLoader.h; sourceTree = "<group>"; };
 		2441584719A4E85B00F12FAD /* ImageLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageLoader.m; sourceTree = "<group>"; };
 		2453E39E19AC5E0300CB2958 /* buy@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "buy@2x.png"; sourceTree = "<group>"; };
+		24556D7E19EE7E2E005FCDFE /* more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = more.png; sourceTree = "<group>"; };
+		24556D8019EE7E2E005FCDFE /* more@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "more@3x.png"; sourceTree = "<group>"; };
+		24556D8419EE7E65005FCDFE /* more@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "more@2x.png"; sourceTree = "<group>"; };
 		2459E8AF196130810072A56C /* greenButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greenButton.png; sourceTree = "<group>"; };
 		245A016E19A74E3C005A414A /* AssetGroupViewControllerWithSearchFeild.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AssetGroupViewControllerWithSearchFeild.xib; sourceTree = "<group>"; };
 		245C0FA41933081200B5B31C /* free-features.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "free-features.plist"; sourceTree = "<group>"; };
@@ -2664,6 +2670,9 @@
 		0DF3A361108DF47400D6C887 /* ImageLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				24556D8419EE7E65005FCDFE /* more@2x.png */,
+				24556D7E19EE7E2E005FCDFE /* more.png */,
+				24556D8019EE7E2E005FCDFE /* more@3x.png */,
 				243FCF1819DD75C3003661EF /* watermark.png */,
 				36AF4CAB19BF21D4003C9FE3 /* magnifyingGlass2.png */,
 				36AF4CAC19BF21D4003C9FE3 /* magnifyingGlass3.png */,
@@ -4860,6 +4869,7 @@
 				249F203C193F562C0072835E /* private_off_button@2x.png in Resources */,
 				249F202E193F562C0072835E /* login_email_icon@2x.png in Resources */,
 				247858CD1948764D0062F1E4 /* Montserrat-Regular.ttf in Resources */,
+				24556D8519EE7E65005FCDFE /* more@2x.png in Resources */,
 				30D58CFF10FB1BF800E0C7E8 /* icon0.jpg in Resources */,
 				30D58D0010FB1BF800E0C7E8 /* icon1.jpg in Resources */,
 				242184C2194B4AEC00FDDA97 /* emoticon180@2x.png in Resources */,
@@ -4922,6 +4932,7 @@
 				30D58D1610FB1BF800E0C7E8 /* icon3.jpg in Resources */,
 				30D58D1710FB1BF800E0C7E8 /* icon30.jpg in Resources */,
 				242184B2194B4AEC00FDDA97 /* emoticon164@2x.png in Resources */,
+				24556D8119EE7E2E005FCDFE /* more.png in Resources */,
 				249F1F9C193F55D50072835E /* app_store_selected@2x.png in Resources */,
 				242184D1194B4AEC00FDDA97 /* flippers-icon.png in Resources */,
 				30D58D1810FB1BF800E0C7E8 /* icon31.jpg in Resources */,
@@ -5180,6 +5191,7 @@
 				249F2028193F562C0072835E /* inAppPurchaseViewBg@2x.png in Resources */,
 				24218461194B4AEC00FDDA97 /* Baseball-icon.png in Resources */,
 				24218514194B4AEC00FDDA97 /* Wrestling-icon.png in Resources */,
+				24556D8319EE7E2E005FCDFE /* more@3x.png in Resources */,
 				2004C83F1913AA5F00E4BBFB /* InAppPurchaseCell.xib in Resources */,
 				246EF53E193C515D004539B2 /* emoticon91@2x.png in Resources */,
 				247858891948736B0062F1E4 /* AMBROSIA_DEMO-Regular.ttf in Resources */,
