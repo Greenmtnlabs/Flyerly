@@ -19,6 +19,8 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *lblEndTime;
 
+@property (strong, nonatomic) IBOutlet UIButton *cbNoEndDate;
+
 @end
 
 @implementation AddUntechableController
@@ -239,5 +241,10 @@
     untechable.emergencyNumbers = @"";
     untechable.emergencyContacts = [[NSMutableDictionary alloc] init];
 }
+
+- (IBAction)noEndDate:(id)sender {
+    [_cbNoEndDate setSelected:!([_cbNoEndDate isSelected]) ];
+}
+
 
 @end
