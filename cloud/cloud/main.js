@@ -131,6 +131,7 @@ Parse.Cloud.define("increaseInviteCounter", function(request, response) {
 
   var query = new Parse.Query(Parse.User);
   query.equalTo("objectId", request.params.objectId);
+    //query.equalTo("objectId", "u0DFkKnZNG");
 
 
 
