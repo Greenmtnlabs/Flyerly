@@ -26,7 +26,7 @@
 }
 
 - (NSString*)referralURL{
-    return @"http://192.168.0.110:3000/download-sc?i=";
+    return @"192.168.0.114:3000/cs?i=";
 }
 
 
