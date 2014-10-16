@@ -858,6 +858,14 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 [fontsView addSubview:font];
             }
     
+            if ( IS_IPHONE_5 ) {
+                fontsView.size = CGSizeMake(320, curYLoc + heightValue + 5);
+                [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
+            } else {
+                fontsView.size = CGSizeMake(curXLoc , heightValue + 5);
+                [layerScrollView setContentSize:CGSizeMake(fontsView.size.width , heightValue)];
+            }
+            
             userPurchases = [UserPurchases getInstance];
             userPurchases.delegate = self;
             
@@ -866,7 +874,12 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                  ![userPurchases checkKeyExistsInPurchases:@"comflyerlyIconsBundle"]    ) {
                 
                 UIButton *font = [UIButton buttonWithType:UIButtonTypeCustom];
-                font.frame = CGRectMake(0, 0, 300, heightValue);
+                if ( IS_IPHONE_5 ) {
+                    font.frame = CGRectMake(0, 0, 300, heightValue);
+                } else {
+                    font.frame = CGRectMake(0, 0, 150, heightValue);
+                }
+                
                 [font addTarget:self action:@selector(openPanel:) forControlEvents:UIControlEventTouchUpInside];
                 [font setTitle:@"More" forState:UIControlStateNormal];
                 
@@ -874,7 +887,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 [font.titleLabel setFont: fontname];
                 [font setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
                 
-                [font setBackgroundImage:[UIImage imageNamed:@"a_bg"] forState:UIControlStateNormal];
+                [font setBackgroundImage:[UIImage imageNamed:@"more"] forState:UIControlStateNormal];
                 
                 //SET BUTTON POSITION ON SCROLLVIEW
                 CGRect frame = font.frame;
@@ -882,16 +895,18 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 font.frame = frame;
 
                 [fontsView addSubview:font];
+                
+                if ( IS_IPHONE_5 ) {
+                    fontsView.size = CGSizeMake(320, curYLoc + heightValue + 5);
+                    [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
+                } else {
+                    fontsView.size = CGSizeMake(curXLoc + 155 , heightValue + 5);
+                    [layerScrollView setContentSize:CGSizeMake(fontsView.size.width , heightValue)];
+                }
             }
             
             
-            if ( IS_IPHONE_5 ) {
-                fontsView.size = CGSizeMake(320, curYLoc + heightValue + 5);
-                [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
-            } else {
-                fontsView.size = CGSizeMake(curXLoc , heightValue + 5);
-                [layerScrollView setContentSize:CGSizeMake(fontsView.size.width , heightValue)];
-            }
+            
             
             //Handling Select Unselect
             [self setSelectedItem:[flyer getLayerType:currentLayer] inView:fontsView ofLayerAttribute:LAYER_ATTRIBUTE_FONT];
@@ -1208,32 +1223,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 [clipartsView addSubview:font];
             }
             
-            userPurchases = [UserPurchases getInstance];
-            userPurchases.delegate = self;
-            
-            //Checking if user valid purchases
-            if ( ![userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]   ||
-                ![userPurchases checkKeyExistsInPurchases:@"comflyerlyIconsBundle"]    ) {
-                
-                UIButton *font = [UIButton buttonWithType:UIButtonTypeCustom];
-                font.frame = CGRectMake(0, 0, 300, heightValue);
-                [font addTarget:self action:@selector(openPanel:) forControlEvents:UIControlEventTouchUpInside];
-                [font setTitle:@"More" forState:UIControlStateNormal];
-                
-                UIFont *fontname = [UIFont fontWithName:@"Helvetica" size:15.0];
-                [font.titleLabel setFont: fontname];
-                [font setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-                
-                [font setBackgroundImage:[UIImage imageNamed:@"a_bg"] forState:UIControlStateNormal];
-                
-                //SET BUTTON POSITION ON SCROLLVIEW
-                CGRect frame = font.frame;
-                frame.origin = CGPointMake(curXLoc, curYLoc);
-                font.frame = frame;
-                
-                [clipartsView addSubview:font];
-            }
-            
             if(IS_IPHONE_5){
                 clipartsView.size = CGSizeMake(320, curYLoc + 85 );//(heightValue + 7) );
                 [layerScrollView setContentSize:CGSizeMake(320, curYLoc + 50)];//  heightValue)];
@@ -1242,6 +1231,46 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 clipartsView.size = CGSizeMake(curXLoc + heightValue + 5 , heightValue + 5);
                 [layerScrollView setContentSize:CGSizeMake(clipartsView.size.width , heightValue)];
             }
+            
+            userPurchases = [UserPurchases getInstance];
+            userPurchases.delegate = self;
+            
+            //Checking if user valid purchases
+            if ( ![userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]   ||
+                ![userPurchases checkKeyExistsInPurchases:@"comflyerlyIconsBundle"]    ) {
+                
+                UIButton *font = [UIButton buttonWithType:UIButtonTypeCustom];
+                if ( IS_IPHONE_5 ) {
+                    font.frame = CGRectMake(0, 0, 300, heightValue);
+                } else {
+                    font.frame = CGRectMake(0, 0, 150, heightValue);
+                }
+                [font addTarget:self action:@selector(openPanel:) forControlEvents:UIControlEventTouchUpInside];
+                [font setTitle:@"More" forState:UIControlStateNormal];
+                
+                UIFont *fontname = [UIFont fontWithName:@"Helvetica" size:15.0];
+                [font.titleLabel setFont: fontname];
+                [font setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+                
+                [font setBackgroundImage:[UIImage imageNamed:@"more"] forState:UIControlStateNormal];
+                
+                //SET BUTTON POSITION ON SCROLLVIEW
+                CGRect frame = font.frame;
+                frame.origin = CGPointMake(curXLoc, curYLoc);
+                font.frame = frame;
+                
+                [clipartsView addSubview:font];
+                
+                if ( IS_IPHONE_5 ) {
+                    clipartsView.size = CGSizeMake(320, curYLoc + heightValue + 5);
+                    [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
+                } else {
+                    clipartsView.size = CGSizeMake(curXLoc + 155 , heightValue + 5);
+                    [layerScrollView setContentSize:CGSizeMake(fontsView.size.width , heightValue)];
+                }
+            }
+            
+            
         });
     });
 }
@@ -1303,32 +1332,6 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
             
         } // Loop
             
-            userPurchases = [UserPurchases getInstance];
-            userPurchases.delegate = self;
-            
-            //Checking if user valid purchases
-            if ( ![userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]   ||
-                 ![userPurchases checkKeyExistsInPurchases:@"comflyerlyIconsBundle"]    ) {
-                
-                UIButton *font = [UIButton buttonWithType:UIButtonTypeCustom];
-                font.frame = CGRectMake(0, 50, 300, heightValue);
-                [font addTarget:self action:@selector(openPanel:) forControlEvents:UIControlEventTouchUpInside];
-                [font setTitle:@"More" forState:UIControlStateNormal];
-                
-                UIFont *fontname = [UIFont fontWithName:@"Helvetica" size:15.0];
-                [font.titleLabel setFont: fontname];
-                [font setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-                
-                [font setBackgroundImage:[UIImage imageNamed:@"a_bg"] forState:UIControlStateNormal];
-                
-                //SET BUTTON POSITION ON SCROLLVIEW
-                CGRect frame = font.frame;
-                frame.origin = CGPointMake(10, curYLoc + 70);
-                font.frame = frame;
-                
-                [emoticonsView addSubview:font];
-            }
-            
             if(IS_IPHONE_5){
                 emoticonsView.size = CGSizeMake(320, curYLoc + symbolScrollHeight + 75);
                 [layerScrollView setContentSize:CGSizeMake(320, curYLoc + symbolScrollHeight)];
@@ -1337,6 +1340,50 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                 [layerScrollView setContentSize:CGSizeMake(emoticonsView.size.width , symbolScrollHeight)];
             }
             
+            userPurchases = [UserPurchases getInstance];
+            userPurchases.delegate = self;
+            
+            //Checking if user valid purchases
+            if ( ![userPurchases checkKeyExistsInPurchases:@"comflyerlyAllDesignBundle"]   ||
+                 ![userPurchases checkKeyExistsInPurchases:@"comflyerlyIconsBundle"]    ) {
+                
+                UIButton *font = [UIButton buttonWithType:UIButtonTypeCustom];
+                if ( IS_IPHONE_5 ) {
+                    font.frame = CGRectMake(0, 0, 300, heightValue);
+                } else {
+                    font.frame = CGRectMake(0, 0, 150, heightValue);
+                }
+                [font addTarget:self action:@selector(openPanel:) forControlEvents:UIControlEventTouchUpInside];
+                [font setTitle:@"More" forState:UIControlStateNormal];
+                
+                UIFont *fontname = [UIFont fontWithName:@"Helvetica" size:15.0];
+                [font.titleLabel setFont: fontname];
+                [font setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+                
+                [font setBackgroundImage:[UIImage imageNamed:@"more"] forState:UIControlStateNormal];
+                
+                //SET BUTTON POSITION ON SCROLLVIEW
+                CGRect frame = font.frame;
+                if ( IS_IPHONE_5 ) {
+                    frame.origin = CGPointMake(10, curYLoc + 70);
+                } else {
+                    frame.origin = CGPointMake(curXLoc, curYLoc + 10);
+                }
+
+                
+                font.frame = frame;
+                
+                [emoticonsView addSubview:font];
+                
+                if ( IS_IPHONE_5 ) {
+                    emoticonsView.size = CGSizeMake(320, curYLoc + heightValue + 75);
+                    [layerScrollView setContentSize:CGSizeMake(320, curYLoc + heightValue)];
+                } else {
+                    emoticonsView.size = CGSizeMake(curXLoc + 155 , heightValue + 5);
+                    [layerScrollView setContentSize:CGSizeMake(fontsView.size.width , heightValue)];
+                }
+            }
+        
             });
     });
 }
