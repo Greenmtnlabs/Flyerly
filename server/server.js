@@ -33,10 +33,6 @@ app.use(function noCachePlease(req, res, next) {
 // We want to gzip all our content before sending.
 app.use( express.compress() );
 
-// Configure all servers for this application
-var emailServer = require( __dirname + '/providers/EmailServer' );
-emailServer.setup( app );
-
 var twillio = require( __dirname + '/providers/Twillio' );
 twillio.setup( app );
 
@@ -49,6 +45,9 @@ eventCron.setup( app );
 var twillioCron = require( __dirname + '/providers/TwillioCron' );
 twillioCron.setup( app );
 
+var twillioServer = require( __dirname + '/providers/TwillioServer' );
+twillioServer.setup( app );
+
 // Start the http server
 var httpServer;
 
@@ -58,7 +57,7 @@ var httpServer;
 var cluster = require('cluster');
 var workers = 1;//process.env.WORKERS || require('os').cpus().length;
 
-if (cluster.isMaster) {
+/*if (cluster.isMaster) {
 
   for (var i = 0; i < workers; ++i) {
     var worker = cluster.fork().process;
@@ -69,7 +68,7 @@ if (cluster.isMaster) {
   });
 
 }
-else {
+else {*/
 		
 	// SSL Configurations
 	if ( config.http.enableSSL ) {
@@ -94,7 +93,7 @@ else {
 	logger.info( 'Listening on port ' + config.http.port + ' with SSL ' + config.http.enableSSL );
 	
 	
-}
+//}
 
 //Exception handler
 process.on('uncaughtException', function (err) {

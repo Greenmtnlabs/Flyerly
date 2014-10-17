@@ -11,7 +11,7 @@ var db = require( __dirname + '/db' );
 var twillioSchema = db.Schema({
 
 	// Twillio Number
-	number : Number,
+	number : String,
 	
 	// Status of Number
 	status : String,

@@ -18,7 +18,7 @@ Twillio.setup = function(app) {
 
     // Our logger for logging to file and console
     var logger = require(__dirname + '/../logger');
-
+    console.log('Twillio');
     // Get the request
     app.get('/get-forwading-number', function(req, res) {
 
@@ -50,24 +50,6 @@ Twillio.setup = function(app) {
                     return;
 
                 }
-
-                // Create Twillio object
-                /* var accountSid = 'AC683a4ecfb2b5243f3039c92c3d86abf2';
-                var authToken = 'b47ae8f8fb8ec78bb90c3e6e68bcd4f8';
-                var client = require('twilio')(accountSid, authToken);
-		console.log(client);
-		
-                client.incomingPhoneNumbers.create({
-                    phoneNumber: "+15005550006"
-                }, function(err, number) {
-                    if (err) {
-                        console.log(JSON.stringify(err));
-                        return;
-                    } });
-		
-
-
-                console.log(number);*/
 
                 // Var for Twilio models
                 var Twillio = require(__dirname + '/../models/Twillio');
@@ -118,7 +100,7 @@ Twillio.setup = function(app) {
                         // Object of the model
                         var twillio = new Twillio();
 
-                        // First request the api to get the number
+                        // First request the api to get the number (testing)
                         var request = require('request');
                         request('http://192.168.0.117:3001/get-number', function(error, response, body) {
 
@@ -135,7 +117,7 @@ Twillio.setup = function(app) {
 
                                 // Add 29 days
                                 var numberOfDaysToAdd = 29;
-                                today.setDate(today.getDate() + numberOfDaysToAdd);
+                                //today.setDate(today.getDate() + numberOfDaysToAdd);
 
                                 // Set the values of twillio account
                                 twillio.number = num.number;
@@ -186,4 +168,5 @@ Twillio.setup = function(app) {
 
 
     });
+
 }

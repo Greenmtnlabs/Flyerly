@@ -64,6 +64,11 @@ config.acType.GMAIL = 'GMAIL';
 config.acType.HOTMAIL = 'HOTMAIL';
 config.acType.YAHOO = 'YAHOO';
 
+// Twilio Account 
+config.twilio.accountSid = 'AC683a4ecfb2b5243f3039c92c3d86abf2';
+config.twilio.authToken = 'b47ae8f8fb8ec78bb90c3e6e68bcd4f8';
+config.twilio.tokenExpiry = 604800;
+
 // Db Configuration
 config.db = {}
 config.db.host =  'mongodb://admin:untechable@ds043180.mongolab.com:43180/untechable';

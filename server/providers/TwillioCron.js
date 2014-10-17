@@ -21,6 +21,8 @@ TwillioCron.setup = function(app) {
 
     // Check if the number is Free
     function numberStatus() {
+
+	     console.log('numberStatus');
             // Var for Twilio models
             var Twillio = require(__dirname + '/../models/Twillio');
 
@@ -42,37 +44,25 @@ TwillioCron.setup = function(app) {
 
                             // Check the validity time is less than the current time
                             if (expire[i].validityTime <= currentDate) {
-				
-				// Make the request for local server
-                                var request = require('request');
-                                request('http://www.google.com', function(error, response, body) {
-                                    if (!error && response.statusCode == 200) {
 
+                                // Make the request for local server to release the number (testing)
+                                var request = require('request');
+                                request('http://192.168.0.117:3001/release-number', function(error, response, body) {
+                                    if (!error && response.statusCode == 200) {
                                         // response to call
-                                        res.json(200, {
+                                        response.json(200, {
                                             number: expire[i].number
                                         });
                                     }
                                 });
 
-                                Twillio.update({}, {
-                                        // Set the status 
-                                        status: '',
-                                        assignedTo: '',
-                                        number: '',
-                                        validityTime: ''
-                                    },
-                                    function(err, model) {
-
-                                        if (err) {
-                                            logger.error(JSON.stringify(err));
-                                            return;
-                                        }
-
-                                        // add message to log
-                                        logger.info('Number updated successfully');
-
-                                    }); // end update
+                                // Now delete the record
+				expire[i].remove({
+                                    "_id": expire[i]._id
+                                },
+                                function(err, removed) {
+                                    console.log(removed);
+                                }); // delete end
 
 
                             }
@@ -89,14 +79,15 @@ TwillioCron.setup = function(app) {
 
 
         } // end numberStatus() function
+ numberStatus();
 
-    // Setup the Cron job after 30 min
-    var minutes = 1,
-        the_interval = minutes * 60 * 1000;
+   /* // Setup the Cron job after 30 min
+    var minutes = 30;
+    the_interval = minutes * 60 * 1000;
     setInterval(function() {
         console.log("I am doing my 30 minutes check");
         // Call method
         numberStatus();
 
-    }, the_interval);
+    }, the_interval);*/
 }
