@@ -8,6 +8,8 @@
 
 @protocol InAppPurchasePanelButtonProtocol
 
+-(void)inAppPanelDismissed;
+
 -(void)inAppPurchasePanelButtonTappedWasPressed:(NSString *)inAppPurchasePanelButtonCurrentTitle;
 
 -(void)inAppPurchasePanelContent;

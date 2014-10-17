@@ -237,46 +237,66 @@ BOOL adLoaded = false;
         // Determin if the user has been congratulated?
         NSString *congratulated = [[NSUserDefaults standardUserDefaults] stringForKey:@"congratulated"];
         
-        //Getting Current User
-        PFUser *user = [PFUser currentUser];
-        NSString *refrelCounter = user[@"inviteCounter"];
-        
-        if ( [refrelCounter intValue] >= 25 && !congratulated ) {
-            
-            NSString *pid  = @"com.flyerly.UnlockCreateVideoFlyerOption";
-            
-            NSString *strWithOutDot = [pid stringByReplacingOccurrencesOfString:@"." withString:@""];
-            
-            if(![[NSUserDefaults standardUserDefaults] stringForKey:@"InAppPurchases"]){
-                
-                NSMutableDictionary *userPurchase =[[NSMutableDictionary alloc] initWithDictionary:[[NSUserDefaults standardUserDefaults]valueForKey:@"InAppPurchases"]];
-                
-                [userPurchase setValue:@"1" forKey:strWithOutDot];
-                [[NSUserDefaults standardUserDefaults]setValue:userPurchase forKey:@"InAppPurchases"];
-                
-            }else {
-                NSMutableDictionary *userPurchase =[[NSMutableDictionary alloc] init];
-                [userPurchase setValue:@"1" forKey:strWithOutDot];
-                [[NSUserDefaults standardUserDefaults]setValue:userPurchase forKey:@"InAppPurchases"];
-                
+        PFQuery *query = [PFUser query];
+        [query whereKey:@"username" equalTo:[[PFUser currentUser] objectForKey:@"username"]];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            if (!error) {
+                if (objects.count) {
+                    for (PFObject *object in objects){
+                        NSLog(@"Object ID: %@", object.objectId);
+                        
+                        PFQuery *query = [PFUser  query];
+                        [query whereKey:@"objectId" equalTo:object.objectId];
+                        [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error){
+                            
+                            if (!error) {
+                                NSMutableDictionary *counterDictionary = [object valueForKey:@"estimatedData"];
+                                int refrelCounter = [[counterDictionary objectForKey:@"inviteCounter"] intValue];
+                           
+                                if ( refrelCounter >= 25 && !congratulated ) {
+                                    
+                                    NSString *pid  = @"com.flyerly.UnlockCreateVideoFlyerOption";
+                                    
+                                    NSString *strWithOutDot = [pid stringByReplacingOccurrencesOfString:@"." withString:@""];
+                                    
+                                    if(![[NSUserDefaults standardUserDefaults] stringForKey:@"InAppPurchases"]){
+                                        
+                                        NSMutableDictionary *userPurchase =[[NSMutableDictionary alloc] initWithDictionary:[[NSUserDefaults standardUserDefaults]valueForKey:@"InAppPurchases"]];
+                                        
+                                        [userPurchase setValue:@"1" forKey:strWithOutDot];
+                                        [[NSUserDefaults standardUserDefaults]setValue:userPurchase forKey:@"InAppPurchases"];
+                                        
+                                    }else {
+                                        NSMutableDictionary *userPurchase =[[NSMutableDictionary alloc] init];
+                                        [userPurchase setValue:@"1" forKey:strWithOutDot];
+                                        [[NSUserDefaults standardUserDefaults]setValue:userPurchase forKey:@"InAppPurchases"];
+                                        
+                                    }
+                                    
+                                    InAppViewController *purchseController = [[InAppViewController alloc] init];
+                                    
+                                    //Saved in Parse Account
+                                    [purchseController updateParse];
+                                    // Showing action sheet after succesfull sign in
+                                    [userPurchases setUserPurcahsesFromParse];
+                                    [purchseController.buttondelegate productSuccesfullyPurchased:pid];
+                                    
+                                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Congratulations ." message:@"You just unlocked the Video flyer feature by refering freinds" delegate:self cancelButtonTitle:@"Owsum!" otherButtonTitles:nil, nil];
+                                    
+                                    [alert show];
+                                    
+                                    // Show the greeting before going to the main app.
+                                    [[NSUserDefaults standardUserDefaults] setObject:@"congratulated" forKey:@"congratulated"];
+                                    
+                                }
+                            }
+                        }];
+                    }
+                }
             }
-            
-            InAppViewController *purchseController = [[InAppViewController alloc] init];
-            
-            //Saved in Parse Account
-            [purchseController updateParse];
-            // Showing action sheet after succesfull sign in
-            [userPurchases setUserPurcahsesFromParse];
-            [purchseController.buttondelegate productSuccesfullyPurchased:pid];
-            
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Congratulations ." message:@"You just unlocked the Video flyer feature by refering freinds" delegate:self cancelButtonTitle:@"Owsum!" otherButtonTitles:nil, nil];
-            
-            [alert show];
-            
-            // Show the greeting before going to the main app.
-            [[NSUserDefaults standardUserDefaults] setObject:@"congratulated" forKey:@"congratulated"];
-            
-        }
+        }];
+
+        
     }
     
     // for Navigation Bar logo
@@ -413,19 +433,20 @@ BOOL adLoaded = false;
     
     if( !greeted ) {
         
+        
+        
+        
+        
         // Determining the previous version of app
         NSString *previuosVersion = [[NSUserDefaults standardUserDefaults] stringForKey:@"previousVersion"];
         
         if( ![previuosVersion isEqualToString:[self appVersion]] ||
             previuosVersion == nil ) {
     
+            
             [self openPanel];
         }
         
-        //ios code for open this url in safari
-        NSURL *url = [NSURL URLWithString:@"http://192.168.0.114:3000/es"];
-        
-        [[UIApplication sharedApplication] openURL:url];
         
         
         // Show the greeting before going to the main app.
@@ -455,6 +476,14 @@ BOOL adLoaded = false;
     } else {
         NSLog(@"Anonymous, User is NOT authenticated.");
     }
+    
+}
+
+- (void)inAppPanelDismissed {
+    
+    //ios code for open this url in safari
+    NSURL *url = [NSURL URLWithString:@"http://192.168.0.107:3000/es"];
+    [[UIApplication sharedApplication] openURL:url];
     
 }
 

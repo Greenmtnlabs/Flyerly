@@ -61,6 +61,7 @@
  */
 -(IBAction)hideMe {
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    [self.buttondelegate inAppPanelDismissed];
 }
 
 /*

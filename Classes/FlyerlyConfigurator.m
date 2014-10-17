@@ -26,7 +26,7 @@
 }
 
 - (NSString*)referralURL{
-    return @"192.168.0.114:3000/cs?i=";
+    return @"192.168.0.107:3000/cs?i=";
 }
 
 
