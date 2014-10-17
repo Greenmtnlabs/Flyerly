@@ -9,17 +9,34 @@
 #import "AddUntechableController.h"
 #import "PhoneSetupController.h"
 #import "Common.h"
-
+#import "BSKeyboardControls.h"
 
 @interface AddUntechableController (){
     
 }
 
+
+@property (strong, nonatomic) IBOutlet UILabel *lbl1S1;
+@property (strong, nonatomic) IBOutlet UILabel *lbl2S1;
+@property (strong, nonatomic) IBOutlet UILabel *lbl3S1;
+@property (strong, nonatomic) IBOutlet UILabel *lbl4S1;
+@property (strong, nonatomic) IBOutlet UILabel *lbl5S1;
+
+
+@property (strong, nonatomic) IBOutlet UITextField *inputSpendingTimeTxt;
+
 @property (strong, nonatomic) IBOutlet UILabel *lblStartTime;
+
+
+
 
 @property (strong, nonatomic) IBOutlet UILabel *lblEndTime;
 
 @property (strong, nonatomic) IBOutlet UIButton *cbNoEndDate;
+
+@property (strong, nonatomic) IBOutlet UIButton *pickerCloseBtn;
+
+@property (nonatomic, strong) BSKeyboardControls *keyboardControls;
 
 @end
 
@@ -51,12 +68,18 @@
     
     [self updateUI];
     
-    self.picker.alpha = 0.0; //default hide picker
+    [self showHideDateTimePicker:NO];
+    
     self.picker.datePickerMode = UIDatePickerModeDateAndTime;
     self.picker.minimumDate = now1;
     [self.picker setDate:now1 animated:YES];
     
     pickerOpenFor = @"";
+    
+    NSArray *fields = @[ _inputSpendingTimeTxt ];
+    [self setKeyboardControls:[[BSKeyboardControls alloc] initWithFields:fields]];
+    [self.keyboardControls setDelegate:self];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -75,9 +98,59 @@
 
 }
 // ________________________     Custom functions    ___________________________
+#pragma mark - Text Field Delegate
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    [self.keyboardControls setActiveField:textField];
+}
+
+#pragma mark - Text View Delegate
+
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+    [self.keyboardControls setActiveField:textView];
+}
+
+#pragma mark - Keyboard Controls Delegate
+
+- (void)keyboardControls:(BSKeyboardControls *)keyboardControls selectedField:(UIView *)field inDirection:(BSKeyboardControlsDirection)direction
+{
+    /*
+     UIView *view;
+     
+     if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
+     view = field.superview.superview;
+     } else {
+     view = field.superview.superview.superview;
+     }
+     
+     [self.tableView scrollRectToVisible:view.frame animated:YES];
+     */
+}
+
+- (void)keyboardControlsDonePressed:(BSKeyboardControls *)keyboardControls
+{
+    [self.view endEditing:YES];
+}
+
+
+
 #pragma mark -  UI functions
 -(void)updateUI
 {
+
+    [_lbl1S1 setTextColor:defGray];
+    _lbl1S1.font = [UIFont fontWithName:APP_FONT size:14];
+    
+    [_inputSpendingTimeTxt setTextColor:defGreen];
+    _inputSpendingTimeTxt.font = [UIFont fontWithName:APP_FONT size:14];
+    
+    [_lbl2S1 setTextColor:defGray];
+    _lbl2S1.font = [UIFont fontWithName:APP_FONT size:14];
+    
+    
+    
     
     [_lblStartTime setTextColor:defGray];
     _lblStartTime.font = [UIFont fontWithName:APP_FONT size:25];
@@ -86,13 +159,29 @@
     self.btnStartTime.titleLabel.font = [UIFont fontWithName:APP_FONT size:18];
     [self.btnStartTime setTitle:untechable.startDate forState:UIControlStateNormal];
     
-
+    [_lbl3S1 setTextColor:defGray];
+    _lbl3S1.font = [UIFont fontWithName:APP_FONT size:14];
+    
+    
+    
+    
+    
     [_lblEndTime setTextColor:defGray];
     _lblEndTime.font   = [UIFont fontWithName:APP_FONT size:25];
-
+    
     [self.btnEndTime setTitleColor:defGreen forState:UIControlStateNormal];
     self.btnEndTime.titleLabel.font = [UIFont fontWithName:APP_FONT size:18];
     [self.btnEndTime setTitle:untechable.endDate forState:UIControlStateNormal];
+    
+    [_lbl4S1 setTextColor:defGray];
+    _lbl4S1.font = [UIFont fontWithName:APP_FONT size:14];
+    
+    [_lbl5S1 setTextColor:defGray];
+    _lbl5S1.font = [UIFont fontWithName:APP_FONT size:14];
+    
+    [_pickerCloseBtn setTitleColor:defGray forState:UIControlStateNormal];
+    _pickerCloseBtn.titleLabel.font = [UIFont fontWithName:APP_FONT size:25];
+
 }
 
 #pragma mark -  Navigation functions
@@ -183,6 +272,8 @@
         phoneSetup = [[PhoneSetupController alloc]initWithNibName:@"PhoneSetupController" bundle:nil];
         phoneSetup.untechable = untechable;
         [self.navigationController pushViewController:phoneSetup animated:YES];
+        
+        [self showHideDateTimePicker:NO];
     }
 }
 
@@ -190,7 +281,7 @@
 //when user tap on dates
 -(IBAction)changeDate:(id)sender
 {
-    self.picker.alpha = 1.0;
+    [self showHideDateTimePicker:YES];
     
     UIButton *clickedBtn = sender;
     if( clickedBtn == self.btnStartTime ){
@@ -202,9 +293,22 @@
     
 }
 
+- (IBAction)closeDateTimePicker:(id)sender {
+   [self showHideDateTimePicker:NO];
+}
+
+-(void)showHideDateTimePicker:(BOOL)showHide{
+
+    float alpha = (showHide) ? 1.0 : 0.0;
+    
+    self.picker.alpha = alpha;
+    _pickerCloseBtn.alpha = alpha;
+    
+}
+
 //when user select the date from datepicker
 -(IBAction)onDateChange:(id)sender {
-    self.picker.alpha = 0.0;
+    
 	NSString * date = [untechable.dateFormatter stringFromDate:[picker date]];
     
 	if( [pickerOpenFor isEqualToString:@"self.btnStartTime"] ){
@@ -215,8 +319,6 @@
       untechable.endDate = date;
       [self.btnEndTime setTitle:date forState:UIControlStateNormal];
     }
-    
-
 }
 
 #pragma mark -  Model funcs
@@ -230,12 +332,15 @@
     [untechable initObj];
     
     //1-vars for screen1
+    untechable.hasEndDate = YES;
     now1 = [[NSDate date] dateByAddingTimeInterval:(60*2)]; //current time + 2mint
     now2 = [[NSDate date] dateByAddingTimeInterval:(60*120)]; //current time + 2hr
     
     untechable.startDate = [untechable.dateFormatter stringFromDate:now1];
     untechable.endDate = [untechable.dateFormatter stringFromDate:now2];
 
+    [_cbNoEndDate setSelected:!(untechable.hasEndDate)];
+    
     //2-vars for screen2
     untechable.forwardingNumber = @"";
     untechable.emergencyNumbers = @"";
@@ -243,7 +348,8 @@
 }
 
 - (IBAction)noEndDate:(id)sender {
-    [_cbNoEndDate setSelected:!([_cbNoEndDate isSelected]) ];
+    untechable.hasEndDate = [_cbNoEndDate isSelected];
+    [_cbNoEndDate setSelected:!(untechable.hasEndDate)];
 }
 
 

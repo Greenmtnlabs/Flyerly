@@ -19,7 +19,7 @@
 @synthesize hasFbPermission, hasTwitterPermission, hasLinkedinPermission;
 
 //1-vars for screen1
-@synthesize startDate, endDate;
+@synthesize startDate, endDate, hasEndDate;
 
 //2-vars for screen2
 @synthesize forwardingNumber, emergencyContacts, emergencyNumbers;
