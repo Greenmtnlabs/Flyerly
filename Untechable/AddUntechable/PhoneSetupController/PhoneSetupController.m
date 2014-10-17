@@ -21,6 +21,10 @@
 @property (strong, nonatomic) IBOutlet UIButton *btnforwardingNumber;
 @property (strong, nonatomic) IBOutlet UITextField *inputForwadingNumber;
 
+@property (strong, nonatomic) IBOutlet UILabel *lblLocation;
+@property (strong, nonatomic) IBOutlet UITextField *inputLocation;
+
+
 @property (strong, nonatomic) IBOutlet UILabel *lblEmergencyNumber;
 @property (strong, nonatomic) IBOutlet UITextField *inputEmergencyNumber;
 
@@ -30,7 +34,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblCanContactTxt;
 
 
-@property (strong, nonatomic) UIAlertView *importContacts;
+@property (strong, nonatomic) UIAlertView *importContacts, *getANumberAlert;
 
 @property (nonatomic, strong) BSKeyboardControls *keyboardControls;
 
@@ -297,21 +301,31 @@
     }
 }
 
--(IBAction)getForwardingNum{
+-(IBAction)getForwardingNum {
     if( [self.btnforwardingNumber.titleLabel.text isEqualToString:@"Get A Number"] ){
-        [self setTextIn:@"_btnforwardingNumber" str:@"Please wait..."];
-        
-        double delayInSeconds = 3.0;
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            [self setTextIn:@"_btnforwardingNumber" str:@"Forward call here"];
-            self.btnforwardingNumber.userInteractionEnabled = NO;
-            self.inputForwadingNumber.text = @"123456789";
-        });
-        
-
+        _getANumberAlert = [[UIAlertView alloc ]
+                           initWithTitle:@""
+                           message:@"Would you like to purchase a forwarding number? This number will have a customizeable auto-response feature & can be used to forward your calls to while you're away."
+                           delegate:self
+                           cancelButtonTitle:@"No"
+                           otherButtonTitles:@"Yes" ,
+                           nil];
+        [_getANumberAlert show];
     }
 }
+-(void)getForwadingNumAfterAllow {
+    [self setTextIn:@"_btnforwardingNumber" str:@"Please wait..."];
+    
+    double delayInSeconds = 3.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self setTextIn:@"_btnforwardingNumber" str:@"Forward call here"];
+        self.btnforwardingNumber.userInteractionEnabled = NO;
+        self.inputForwadingNumber.text = @"123456789";
+    });
+}
+
+
 
 #pragma mark -  Table view functions
 -(void)tableViewSR:(NSString*)startRestart callFor:callFor{
@@ -419,8 +433,10 @@
 
 #pragma mark - UIAlertView delegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    
-    if(alertView == _importContacts && buttonIndex == 1) {
+    if(alertView == _getANumberAlert && buttonIndex == 1) {
+        [self getForwadingNumAfterAllow];
+    }
+    else if(alertView == _importContacts && buttonIndex == 1) {
         [self importContactsAfterAllow];
     }
 }
