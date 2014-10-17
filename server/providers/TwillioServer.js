@@ -20,59 +20,46 @@ TwillioServer.setup = function(app) {
     /**
      * Initial greetings.
      */
-    app.post('/handle-call', function(req, res) {
+    app.post('/ut-handle-call', function(req, res) {
 
         // Get the number we are being called from.
         var callerId = req.body.From;
-        var response = "";
 
-            // Queue the call
-            var response =
-                "<Response>\
-					<Enqueue waitUrl='/call-waiting-queue-twiml'>\
-						CallQueue\
-					</Enqueue>\
-					<Play>/audio/voicemail.wav</Play>\
-				</Response>";
+		var response =
+	            "<Response>\
+						<Play>/audio/PleaseWait.wav</Play>\
+						<Play>/audio/waves.wav</Play>\
+						<Leave />\
+					</Response>";
 
-            res.writeHead(200, {
-                'Content-Type': 'text/xml'
-            });
-            res.end(response);
+	        res.writeHead(200, {
+	            'Content-Type': 'text/xml'
+	        });
+	        res.end(response);		
+			
+			//When user has emergency number then after playing auto, give an option of press 1 to call for emergency,
+			//When  user pressed 1 then call on emergency number
+				
+			var hasEmgNumber = false;
+			if( hasEmgNumber ) {
+				var  emergencyNumber = "client:raafay";
+				
+	            // Initiate call to the agent.
+	            var client = require('twilio')(config.twilio.accountSid, config.twilio.authToken);
 
-            // Initiate call to the agent.
-            var client = require('twilio')(config.twilio.accountSid, config.twilio.authToken);
-
-            client.calls.create({
-                url: "http://www.riksof.com/agent-called-twiml",
-                to: "client:raafay",
-                from: callerId,
-                timeout: 20
-            }, function(err, call) {
-                console.log('Call completion for first agent');
-            });
+	            client.calls.create({
+	                url: "http://www.riksof.com/agent-called-twiml",
+	                to: emergencyNumber,
+	                from: callerId,
+	                timeout: 20
+	            }, function(err, call) {
+	                console.log('Call forwaded to emergency number: '+emergencyNumber+);
+	            });
+			}
         }
     });
 
 
-    /**
-     * While we wait in the queue.
-     */
-    app.post('/call-waiting-queue-twiml', function(req, res) {
-        // Queue the call. Play two audios and then leave
-        // to be taken to answering machine.
-        var response =
-            "<Response>\
-					<Play>/audio/PleaseWait.wav</Play>\
-					<Play>/audio/waves.wav</Play>\
-					<Leave />\
-				</Response>";
-
-        res.writeHead(200, {
-            'Content-Type': 'text/xml'
-        });
-        res.end(response);
-    });
 
     /**
      * Connecting to an agent.
