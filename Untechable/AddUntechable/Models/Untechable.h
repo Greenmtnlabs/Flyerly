@@ -21,7 +21,7 @@
 
 
 //1-vars for screen1
-@property (strong, nonatomic) NSString *startDate,*endDate;
+@property (strong, nonatomic) NSString *spendingTimeTxt, *startDate, *endDate;
 @property (nonatomic, assign) BOOL hasEndDate;
 
 

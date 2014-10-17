@@ -180,7 +180,7 @@
     _lbl5S1.font = [UIFont fontWithName:APP_FONT size:14];
     
     [_pickerCloseBtn setTitleColor:defGray forState:UIControlStateNormal];
-    _pickerCloseBtn.titleLabel.font = [UIFont fontWithName:APP_FONT size:25];
+    _pickerCloseBtn.titleLabel.font = [UIFont fontWithName:APP_FONT size:18];
 
 }
 
@@ -273,14 +273,25 @@
         phoneSetup.untechable = untechable;
         [self.navigationController pushViewController:phoneSetup animated:YES];
         
-        [self showHideDateTimePicker:NO];
+        
+        untechable.spendingTimeTxt = _inputSpendingTimeTxt.text;
+        
+        [self hideAllControlls];
     }
 }
+
+-(void) hideAllControlls {
+    [self showHideDateTimePicker:NO];
+    [_inputSpendingTimeTxt resignFirstResponder];
+}
+
 
 #pragma mark -  Select Date
 //when user tap on dates
 -(IBAction)changeDate:(id)sender
 {
+    [self hideAllControlls];
+    
     [self showHideDateTimePicker:YES];
     
     UIButton *clickedBtn = sender;
@@ -333,6 +344,7 @@
     
     //1-vars for screen1
     untechable.hasEndDate = YES;
+    untechable.spendingTimeTxt = @"";
     now1 = [[NSDate date] dateByAddingTimeInterval:(60*2)]; //current time + 2mint
     now2 = [[NSDate date] dateByAddingTimeInterval:(60*120)]; //current time + 2hr
     
