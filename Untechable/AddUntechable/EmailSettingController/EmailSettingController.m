@@ -2,7 +2,7 @@
 //  EmailSettingController.m
 //  Untechable
 //
-//  Created by Muhammad Raheel on 30/09/2014.
+//  Created by ABDUL RAUF on 30/09/2014.
 //  Copyright (c) 2014 Green MTN Labs Inc. All rights reserved.
 //
 

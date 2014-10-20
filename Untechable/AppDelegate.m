@@ -2,7 +2,7 @@
 //  AppDelegate.m
 //  Untechable
 //
-//  Created by Muhammad Raheel on 24/09/2014.
+//  Created by ABDUL RAUF on 24/09/2014.
 //  Copyright (c) 2014 RIKSOF (Pvt) Ltd. All rights reserved.
 //
 

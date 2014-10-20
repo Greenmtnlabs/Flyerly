@@ -2,7 +2,7 @@
 //  PhoneSetupController.m
 //  Untechable
 //
-//  Created by Muhammad Raheel on 24/09/2014.
+//  Created by ABDUL RAUF on 24/09/2014.
 //  Copyright (c) 2014 RIKSOF (Pvt) Ltd. All rights reserved.
 //
 
@@ -12,6 +12,7 @@
 #import "Common.h"
 #import "BSKeyboardControls.h"
 #import "InviteScreen/InviteFriendsController.h"
+#import "RecordController.h"
 
 @interface PhoneSetupController (){
     NSString *tableViewFor;
@@ -274,7 +275,12 @@
     
     BOOL goToNext = YES;
     
-    if( goToNext ) {
+    if( YES ) {
+        RecordController *recordController;
+        recordController = [[RecordController alloc]initWithNibName:@"RecordController" bundle:nil];
+        [self.navigationController pushViewController:recordController animated:YES];
+    }
+    else if( goToNext ) {
         SocialnetworkController *socialnetwork;
         socialnetwork = [[SocialnetworkController alloc]initWithNibName:@"SocialnetworkController" bundle:nil];
         socialnetwork.untechable = untechable;

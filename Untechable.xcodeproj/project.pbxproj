@@ -65,6 +65,9 @@
 		3681604E19E6ED8C00B9B64C /* CHECKBOX_EMPTY@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3681604B19E6ED8C00B9B64C /* CHECKBOX_EMPTY@2x.png */; };
 		3681604F19E6ED8C00B9B64C /* CHECKBOX_FILLED@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3681604C19E6ED8C00B9B64C /* CHECKBOX_FILLED@2x.png */; };
 		3681605019E6ED8C00B9B64C /* CHECKBOX_TICK@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3681604D19E6ED8C00B9B64C /* CHECKBOX_TICK@2x.png */; };
+		36A370B519F53DC2005A7AFE /* RecordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36A370B319F53DC2005A7AFE /* RecordController.m */; };
+		36A370B619F53DC2005A7AFE /* RecordController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36A370B419F53DC2005A7AFE /* RecordController.xib */; };
+		36A370B819F53E6D005A7AFE /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36A370B719F53E6D005A7AFE /* AVFoundation.framework */; };
 		36B0369E19DAD37200E8CD21 /* inputBottomBg2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36B0369D19DAD37200E8CD21 /* inputBottomBg2@2x.png */; };
 		36B036A619DAF44D00E8CD21 /* EmailSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B036A419DAF44D00E8CD21 /* EmailSettingController.m */; };
 		36B036A719DAF44D00E8CD21 /* EmailSettingController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36B036A519DAF44D00E8CD21 /* EmailSettingController.xib */; };
@@ -155,6 +158,10 @@
 		3681604B19E6ED8C00B9B64C /* CHECKBOX_EMPTY@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CHECKBOX_EMPTY@2x.png"; sourceTree = "<group>"; };
 		3681604C19E6ED8C00B9B64C /* CHECKBOX_FILLED@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CHECKBOX_FILLED@2x.png"; sourceTree = "<group>"; };
 		3681604D19E6ED8C00B9B64C /* CHECKBOX_TICK@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CHECKBOX_TICK@2x.png"; sourceTree = "<group>"; };
+		36A370B219F53DC2005A7AFE /* RecordController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordController.h; sourceTree = "<group>"; };
+		36A370B319F53DC2005A7AFE /* RecordController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordController.m; sourceTree = "<group>"; };
+		36A370B419F53DC2005A7AFE /* RecordController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecordController.xib; sourceTree = "<group>"; };
+		36A370B719F53E6D005A7AFE /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		36B0369D19DAD37200E8CD21 /* inputBottomBg2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "inputBottomBg2@2x.png"; sourceTree = "<group>"; };
 		36B036A319DAF44D00E8CD21 /* EmailSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EmailSettingController.h; path = AddUntechable/EmailSettingController/EmailSettingController.h; sourceTree = "<group>"; };
 		36B036A419DAF44D00E8CD21 /* EmailSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EmailSettingController.m; path = AddUntechable/EmailSettingController/EmailSettingController.m; sourceTree = "<group>"; };
@@ -176,6 +183,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36A370B819F53E6D005A7AFE /* AVFoundation.framework in Frameworks */,
 				36561D6E19D2C8A40069D897 /* CoreGraphics.framework in Frameworks */,
 				36561D7019D2C8A40069D897 /* UIKit.framework in Frameworks */,
 				36561D6C19D2C8A40069D897 /* Foundation.framework in Frameworks */,
@@ -277,6 +285,7 @@
 		36561D6A19D2C8A40069D897 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				36A370B719F53E6D005A7AFE /* AVFoundation.framework */,
 				36561D6B19D2C8A40069D897 /* Foundation.framework */,
 				36561D6D19D2C8A40069D897 /* CoreGraphics.framework */,
 				36561D6F19D2C8A40069D897 /* UIKit.framework */,
@@ -383,6 +392,7 @@
 		366ECD8719D322F800F71A11 /* PhoneSetupController */ = {
 			isa = PBXGroup;
 			children = (
+				36A370B119F53D99005A7AFE /* Record */,
 				3681603319E6B81E00B9B64C /* InviteScreen */,
 				366ECD9819D323E200F71A11 /* PhoneSetupController.h */,
 				366ECD9919D323E200F71A11 /* PhoneSetupController.m */,
@@ -405,6 +415,17 @@
 			);
 			name = InviteScreen;
 			path = AddUntechable/PhoneSetupController/InviteScreen;
+			sourceTree = "<group>";
+		};
+		36A370B119F53D99005A7AFE /* Record */ = {
+			isa = PBXGroup;
+			children = (
+				36A370B219F53DC2005A7AFE /* RecordController.h */,
+				36A370B319F53DC2005A7AFE /* RecordController.m */,
+				36A370B419F53DC2005A7AFE /* RecordController.xib */,
+			);
+			name = Record;
+			path = AddUntechable/PhoneSetupController/Record;
 			sourceTree = "<group>";
 		};
 		36B0369A19DAD2AB00E8CD21 /* images */ = {
@@ -537,6 +558,7 @@
 				3681605019E6ED8C00B9B64C /* CHECKBOX_TICK@2x.png in Resources */,
 				3681604F19E6ED8C00B9B64C /* CHECKBOX_FILLED@2x.png in Resources */,
 				362317AF19F00C1B004CBFDE /* Default-Landscape-736h@3x.png in Resources */,
+				36A370B619F53DC2005A7AFE /* RecordController.xib in Resources */,
 				3681604A19E6CBA400B9B64C /* searchicon@2x.png in Resources */,
 				36474F2619D9780100084F34 /* Pigiarniq Regular.ttf in Resources */,
 				36474F2219D9780100084F34 /* Pigiarniq Bold.ttf in Resources */,
@@ -595,6 +617,7 @@
 				3681603F19E6B81E00B9B64C /* InviteFriendsController.m in Sources */,
 				3663932519D6A0A700512965 /* CommonFunctions.m in Sources */,
 				3681603D19E6B81E00B9B64C /* InviteFriendsCell.m in Sources */,
+				36A370B519F53DC2005A7AFE /* RecordController.m in Sources */,
 				36474F2919D9AC3800084F34 /* UIPlaceHolderTextView.m in Sources */,
 				36B036A619DAF44D00E8CD21 /* EmailSettingController.m in Sources */,
 				36561D7C19D2C8A40069D897 /* AppDelegate.m in Sources */,
