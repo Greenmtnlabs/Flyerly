@@ -19,7 +19,7 @@
 
 @implementation InAppViewController 
 
-@synthesize freeFeaturesTview,paidFeaturesTview,loginButton,completeDesignBundleButton;
+@synthesize freeFeaturesTview,paidFeaturesTview,loginButton,completeDesignBundleButton,loadingIndicator;
 
 
 - (void)viewDidLoad
@@ -243,8 +243,9 @@
         //Setting the packagename,packageprice,packagedesciption values for cell view
         [inAppCell setCellValueswithProductTitle:[product objectForKey:@"packagename"] ProductPrice:[product objectForKey:@"packageprice"] ProductDescription:[product objectForKey:@"packagedesciption"]];
         
-        return inAppCell;
+        [loadingIndicator stopAnimating];
         
+        return inAppCell;
     }else {
         
         static NSString *cellId = @"FreeFeatureCell";

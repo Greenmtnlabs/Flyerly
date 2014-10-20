@@ -43,6 +43,7 @@
 @property(nonatomic,strong) IBOutlet UITableView *paidFeaturesTview;
 @property(nonatomic,strong) IBOutlet UIButton *loginButton;
 @property(nonatomic,strong) IBOutlet UIButton *completeDesignBundleButton;
+@property(nonatomic,strong) IBOutlet UIActivityIndicatorView *loadingIndicator;
 
 -(IBAction)hideMe;
 -(IBAction)purchaseCompleteBundle;
