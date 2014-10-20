@@ -231,8 +231,11 @@ BOOL adLoaded = false;
     
     self.navigationController.navigationBarHidden = NO;
     
-    //Checking if the user is valid or anonymus
-    if ([[PFUser currentUser] sessionToken].length != 0) {
+    // Execute the rest of the stuff, a little delayed to speed up loading.
+    dispatch_async( dispatch_get_main_queue(), ^{
+        
+        //Checking if the user is valid or anonymus
+        if ([[PFUser currentUser] sessionToken].length != 0) {
      
         // Determin if the user has been congratulated?
         NSString *congratulated = [[NSUserDefaults standardUserDefaults] stringForKey:@"congratulated"];
@@ -243,7 +246,7 @@ BOOL adLoaded = false;
             if (!error) {
                 if (objects.count) {
                     for (PFObject *object in objects){
-                        NSLog(@"Object ID: %@", object.objectId);
+                        NSLog(@"ParseUser unique object ID: %@", object.objectId);
                         
                         PFQuery *query = [PFUser  query];
                         [query whereKey:@"objectId" equalTo:object.objectId];
@@ -295,9 +298,11 @@ BOOL adLoaded = false;
                 }
             }
         }];
+        
 
         
     }
+    });
     
     // for Navigation Bar logo
     UIImageView *logo = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 102, 38)];
