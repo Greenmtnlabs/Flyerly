@@ -7,6 +7,8 @@
 //
 
 #import "RecordController.h"
+#define RECORDING_LIMIT_IN_SEC 60
+
 
 @interface RecordController (){
     AVAudioRecorder *recorder;
@@ -21,7 +23,7 @@
 @implementation RecordController
 @synthesize stopButton, playButton, recordPauseButton;
 
-@synthesize recordTimeLabel,playTimeLabel;
+@synthesize recordTimeLabel,playTimeLabel,progressBar;
 
 - (void)viewDidLoad
 {
@@ -85,37 +87,43 @@
         [recorder pause];
         [recordPauseButton setTitle:@"Record" forState:UIControlStateNormal];
         
-        [self timerInit:NO callFor:1];
+        
     }
-    
-    [stopButton setEnabled:YES];
-    [playButton setEnabled:NO];
 }
 
 - (IBAction)stopTapped:(id)sender {
-    
-    if ( recorder.recording ) {
+    [self stopRec];
+}
+
+-(void)stopRec{
+    if ( recTimer != nil ) {
         [recorder stop];
         
         AVAudioSession *audioSession = [AVAudioSession sharedInstance];
         [audioSession setActive:NO error:nil];
-        
-        [self timerInit:NO callFor:1];
     }
-    else if ( player.playing ) {
+    else if ( playTimer != nil ) {
         [player stop];
         [self timerInit:NO callFor:2];
     }
+
 }
 
 - (IBAction)playTapped:(id)sender {
-    if ( !recorder.recording ){
-        player = [[AVAudioPlayer alloc] initWithContentsOfURL:recorder.url error:nil];
-        [player setDelegate:self];
-        [player play];
+    if ( !recorder.recording ) {
+        if( [playTimeLabel.text isEqualToString:@"00:00"] ){
+            player = [[AVAudioPlayer alloc] initWithContentsOfURL:recorder.url error:nil];
+            [player setDelegate:self];
+            [player play];
 
-        [self timerInit:YES callFor:2];
-        [stopButton setEnabled:YES];
+            [self timerInit:YES callFor:2];
+        }
+        else{
+            NSString *tempLastPlayTime = playTimeLabel.text;
+            [player play];
+            [self timerInit:YES callFor:2];
+            playTimeLabel.text = tempLastPlayTime;
+        }
     }
 }
 - (void)timerInit :(BOOL) init callFor:(int)callFor{
@@ -126,12 +134,18 @@
         if( init ){
             //this is nstimer to initiate update method
             recTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateRecSlider) userInfo:nil repeats:YES];
-            recordTimeLabel.text = @"0:0";
+            recordTimeLabel.text = @"00:00";
+            
+            [stopButton setEnabled:YES];
+            [playButton setEnabled:NO];
             
         }
         else{
             [recTimer invalidate];
             recTimer = nil;
+            
+            [stopButton setEnabled:NO];
+            [playButton setEnabled:YES];
         }
         
     }
@@ -141,11 +155,18 @@
         if( init ){
             //this is nstimer to initiate update method
             playTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updatePlaySlider) userInfo:nil repeats:YES];
-            playTimeLabel.text = @"0:0";
+            playTimeLabel.text = @"00:00";
+            
+            [stopButton setEnabled:YES];
+            [playButton setEnabled:NO];
+
         }
         else{
             [playTimer invalidate];
             playTimer = nil;
+            
+            [stopButton setEnabled:NO];
+            [playButton setEnabled:YES];
         }
     }
     
@@ -160,10 +181,17 @@
         float seconds = recorder.currentTime - (minutes * 60);
         
         NSString *time = [[NSString alloc]
-                          initWithFormat:@"%0.0f.%0.0f",
+                          initWithFormat:@"%02.0f:%02.0f",
                           minutes, seconds];
         NSLog(@"recordTimeLabel time: %@", time);
         recordTimeLabel.text = time;
+        
+        [self updateSlider:1 seconds:seconds];
+        
+        if( seconds >= RECORDING_LIMIT_IN_SEC ){
+            [self stopRec];
+        }
+        
     }
 }
 
@@ -171,41 +199,53 @@
     NSLog(@"updatePlaySlider counter: %i", i);
     // Update the slider about the music time
     //if ( recorder.recording ) {
-        
+    
         float minutes = floor(player.currentTime/60);
         float seconds = player.currentTime - (minutes * 60);
         
         NSString *time = [[NSString alloc]
-                          initWithFormat:@"%0.0f.%0.0f",
+                          initWithFormat:@"%02.0f:%02.0f",
                           minutes, seconds];
         NSLog(@"player time: %@", time);
         playTimeLabel.text = time;
+    
+        [self updateSlider:2 seconds:seconds];
+    
     //}
 }
 
+-(void)updateSlider:(int)callFor seconds:(float)seconds {
+    //1 //rec
+    //2 play
+    
+    float progIn1Percentage;
+    
+    //if( callFor == 1 )
+    progIn1Percentage = (seconds/RECORDING_LIMIT_IN_SEC);
+    //else
+    //progIn1Percentage = (seconds/player.duration);
+    
+    progressBar.progress = progIn1Percentage;
+    
+    
+}
+
+-(void)endRec{
+    [recordPauseButton setTitle:@"Record" forState:UIControlStateNormal];
+    [self timerInit:NO callFor:1];
+}
 
 #pragma mark - AVAudioRecorderDelegate
-
 - (void) audioRecorderDidFinishRecording:(AVAudioRecorder *)avrecorder successfully:(BOOL)flag{
-    [recordPauseButton setTitle:@"Record" forState:UIControlStateNormal];
-    //[stopButton setEnabled:NO];
-    [playButton setEnabled:YES];
+    [self endRec];
 }
+
+
 
 #pragma mark - AVAudioPlayerDelegate
 
 - (void) audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag{
-    /*
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Done"
-                                                    message: @"Finish playing the recording!"
-                                                   delegate: nil
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
-    [alert show];
-     */
-    
     [self timerInit:NO callFor:2];
-    [stopButton setEnabled:YES];
     
 }
 

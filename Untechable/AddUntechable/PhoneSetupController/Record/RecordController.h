@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *playButton;
 @property (strong, nonatomic) IBOutlet UILabel *recordTimeLabel;
 @property (strong, nonatomic) IBOutlet UILabel *playTimeLabel;
+@property (strong, nonatomic) IBOutlet UIProgressView *progressBar;
 
 - (IBAction)recordPauseTapped:(id)sender;
 - (IBAction)stopTapped:(id)sender;
