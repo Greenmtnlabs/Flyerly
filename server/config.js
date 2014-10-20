@@ -65,6 +65,7 @@ config.acType.HOTMAIL = 'HOTMAIL';
 config.acType.YAHOO = 'YAHOO';
 
 // Twilio Account 
+config.twilio = {};
 config.twilio.accountSid = 'ACece60cc985b5c0558faeb7ff554bbef2';
 config.twilio.authToken = '7f0988c2ff41a130ad850f47e6dd1d6d';
 config.twilio.tokenExpiry = 604800;

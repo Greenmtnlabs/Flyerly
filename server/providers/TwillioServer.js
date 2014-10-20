@@ -53,10 +53,9 @@ TwillioServer.setup = function(app) {
 	                from: callerId,
 	                timeout: 20
 	            }, function(err, call) {
-	                console.log('Call forwaded to emergency number: '+emergencyNumber+);
+	                console.log('Call forwaded to emergency number: '+emergencyNumber);
 	            });
-			}
-        }
+			}        
     });
 
 
