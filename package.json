@@ -10,6 +10,7 @@
 	"mongoose": "3.6.20",
 	"mail-listener2" : "0.1.7",
 	"mail-notifier" : "0.2.3",
-	"twilio" : "1.7.0"
+	"twilio" : "1.7.0",
+	"request": "2.45.0"
   }
 }

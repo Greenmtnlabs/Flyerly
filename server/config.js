@@ -74,5 +74,12 @@ config.twilio.tokenExpiry = 604800;
 config.db = {}
 config.db.host =  'mongodb://admin:untechable@ds043180.mongolab.com:43180/untechable';
 config.db.modelVersion = 1.0;
+
+//Urls of apis
+config.urls = {};
+config.urls.getForwadingNumUrl = "http://localhost:3001/get-number";
+
+
+
 // Make the configuration parameters available.
 module.exports = config;

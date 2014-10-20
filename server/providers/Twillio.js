@@ -60,14 +60,12 @@ Twillio.setup = function(app) {
                     status: 'FREE'
                 }, function(err, obj) {
 
-                    if (err) {
+                    if ( err ) {
                         responseJSON.status = 'FAIL';
                         res.jsonp(200, responseJSON);
                         return;
                     }
-
-                    // If the number found in db
-                    if (obj != null) {
+                    else if( obj != null ){
 
                         // Set the property of object
                         obj.status = 'IN_USE';
@@ -80,29 +78,30 @@ Twillio.setup = function(app) {
                                 logger.error(JSON.stringify(err));
                                 return;
 
-                            }
-
-                            responseJSON.status = 'OK';
-                            responseJSON.message = 'Succesfully get the number';
-                            responseJSON.eventID = event._id;
-                            responseJSON.number = num.number;
-
+                            } else{
+	                            responseJSON.status = 'OK';
+	                            responseJSON.message = 'Succesfully get the number';
+	                            responseJSON.eventID = event._id;
+	                            responseJSON.number = num.number;
 
 
-                            // Response to request.
-                            res.jsonp(200, responseJSON);
+
+	                            // Response to request.
+	                            res.jsonp(200, responseJSON);
+							}
                         });
 
 
                         // If we request the server to new number
-                    } else {
+                    } 
+					else {
 
                         // Object of the model
                         var twillio = new Twillio();
 
                         // First request the api to get the number (testing)
                         var request = require('request');
-                        request('http://192.168.0.117:3001/get-number', function(error, response, body) {
+                        request(config.urls.getForwadingNumUrl, function(error, response, body) {
 
                             if (error) {
                                 console.log(error);
@@ -148,9 +147,6 @@ Twillio.setup = function(app) {
 
 
                     }
-
-
-
                 });
 
 
