@@ -487,7 +487,7 @@ BOOL adLoaded = false;
 - (void)inAppPanelDismissed {
     
     //ios code for open this url in safari
-    NSURL *url = [NSURL URLWithString:@"http://192.168.0.107:3000/es"];
+    NSURL *url = [NSURL URLWithString:@"http://riksof.com/es"];
     [[UIApplication sharedApplication] openURL:url];
     
 }
