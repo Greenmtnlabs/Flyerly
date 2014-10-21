@@ -335,12 +335,17 @@
 #pragma mark -  Model funcs
 // set default vaules in model
 -(void)setDefaultModel{
-    
     //init object
     untechable  = [[Untechable alloc] init];
 
     //init object with its default values
     [untechable initObj];
+    
+    //Settings
+    untechable.userId   = @"1";
+    untechable.uniqueId = [untechable getUniqueId];
+    
+    untechable.untechablePath = [untechable getNewUntechablePath];
     
     //1-vars for screen1
     untechable.hasEndDate = YES;
@@ -349,14 +354,15 @@
     now2 = [[NSDate date] dateByAddingTimeInterval:(60*120)]; //current time + 2hr
     
     untechable.startDate = [untechable.dateFormatter stringFromDate:now1];
-    untechable.endDate = [untechable.dateFormatter stringFromDate:now2];
+    untechable.endDate   = [untechable.dateFormatter stringFromDate:now2];
 
     [_cbNoEndDate setSelected:!(untechable.hasEndDate)];
     
     //2-vars for screen2
-    untechable.forwardingNumber = @"";
-    untechable.emergencyNumbers = @"";
+    untechable.forwardingNumber  = @"";
+    untechable.emergencyNumbers  = @"";
     untechable.emergencyContacts = [[NSMutableDictionary alloc] init];
+    untechable.recPath           = @"";
 }
 
 - (IBAction)noEndDate:(id)sender {

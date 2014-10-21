@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
+#import "Untechable.h"
 
 @interface RecordController : UIViewController <AVAudioRecorderDelegate, AVAudioPlayerDelegate>
 
@@ -21,5 +22,8 @@
 - (IBAction)recordPauseTapped:(id)sender;
 - (IBAction)stopTapped:(id)sender;
 - (IBAction)playTapped:(id)sender;
+
+//Properties
+@property (nonatomic,strong)  Untechable *untechable;
 
 @end

@@ -278,6 +278,7 @@
     if( YES ) {
         RecordController *recordController;
         recordController = [[RecordController alloc]initWithNibName:@"RecordController" bundle:nil];
+        recordController.untechable = untechable;
         [self.navigationController pushViewController:recordController animated:YES];
     }
     else if( goToNext ) {
@@ -300,7 +301,7 @@
     commonFunctions = [[CommonFunctions alloc] init];
     
     [self tableViewSR:@"start" callFor:@"contactsTableView"];
-    [self importContactsAfterAllow];//for testing
+    //[self importContactsAfterAllow];//for testing
     
     if( !([untechable.forwardingNumber isEqualToString:@""]) ){
         [self setTextIn:@"_btnforwardingNumber" str:untechable.startDate];

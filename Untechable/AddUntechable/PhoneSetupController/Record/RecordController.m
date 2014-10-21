@@ -7,6 +7,7 @@
 //
 
 #import "RecordController.h"
+#import "Common.h"
 #define RECORDING_LIMIT_IN_SEC 60
 
 
@@ -21,6 +22,9 @@
 @end
 
 @implementation RecordController
+
+@synthesize untechable;
+
 @synthesize stopButton, playButton, recordPauseButton;
 
 @synthesize recordTimeLabel,playTimeLabel,progressBar;
@@ -34,12 +38,7 @@
     [stopButton setEnabled:NO];
     [playButton setEnabled:NO];
     
-    // Set the audio file
-    NSArray *pathComponents = [NSArray arrayWithObjects:
-                               [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject],
-                               @"MyAudioMemo.m4a",
-                               nil];
-    NSURL *outputFileURL = [NSURL fileURLWithPathComponents:pathComponents];
+    NSURL *outputFileURL = [untechable getEventDirectoryUrl];
     
     // Setup audio session
     AVAudioSession *session = [AVAudioSession sharedInstance];
@@ -248,6 +247,4 @@
     [self timerInit:NO callFor:2];
     
 }
-
-
 @end
