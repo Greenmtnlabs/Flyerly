@@ -451,6 +451,9 @@
     return selectedAssets;
 }
 
+- (void)inAppPanelDismissed {
+
+}
 
 @end
 

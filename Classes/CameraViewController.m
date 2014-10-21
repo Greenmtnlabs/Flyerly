@@ -445,7 +445,9 @@
     }
 }
 
+- (void)inAppPanelDismissed {
 
+}
 
 @end
 

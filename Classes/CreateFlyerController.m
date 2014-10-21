@@ -6091,6 +6091,10 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
     
 }
 
+- (void)inAppPanelDismissed {
+
+}
+
 //When user perform action on watermark layer and has no complete design bundle then show in app panel
 - (BOOL)wmCanPerformAction:(NSString *)uid{
     BOOL canPerformAct = YES;

@@ -573,6 +573,10 @@
     }
 }
 
+- (void)inAppPanelDismissed {
+
+}
+
 - ( void )inAppPurchasePanelContent {
     [inappviewcontroller inAppDataLoaded];
 }
