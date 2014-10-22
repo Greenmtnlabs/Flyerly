@@ -47,6 +47,7 @@
 
 -(NSString *)getNewUntechablePath;
 -(NSString *)getRecFilePath;
+-(NSString *)getRecFileName;
 -(NSString *)getUniqueId;
 -(BOOL)initUntechableDirectory;
 -(NSMutableDictionary *)getUntechable:(int)count;

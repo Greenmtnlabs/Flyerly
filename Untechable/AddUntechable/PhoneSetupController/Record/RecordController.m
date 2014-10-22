@@ -55,7 +55,7 @@
     
     [self configuredPlayerFn];
     
-    NSLog(@"player.duration: %f",player.duration);
+   // NSLog(@"player.duration: %f",player.duration);
     
     if( player.duration > 0.0 ){
         [playButton setEnabled:YES];
@@ -107,6 +107,7 @@
 }
 
 -(void)stopRec{
+    
     if ( recTimer != nil ) {
         [recorder stop];
         
@@ -116,11 +117,23 @@
         untechable.hasRecording = YES;
         [self timerInit:NO callFor:1];
     }
-    else if ( playTimer != nil ) {
+    
+    if ( playTimer != nil ) {
         [player stop];
         [self timerInit:NO callFor:2];
     }
 
+}
+
+-(void) stopAllTask
+{
+    [self stopRec];
+    /*
+     [player stop];
+     [recorder stop];
+     [self timerInit:NO callFor:1];
+     [self timerInit:NO callFor:2];
+     */
 }
 
 - (IBAction)playTapped:(id)sender {
@@ -148,6 +161,8 @@
     
     }
 }
+
+
 - (void)timerInit :(BOOL) init callFor:(int)callFor{
     
     //Record
@@ -380,10 +395,15 @@
 }
 
 -(void)onBack{
+    
+    [self stopAllTask];
+    
     [untechable goBack:self.navigationController];
 }
 
 -(void)onNext{
+    
+    [self stopAllTask];
     
     [self setNextHighlighted:NO];
     

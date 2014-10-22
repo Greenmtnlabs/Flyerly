@@ -367,7 +367,7 @@
     else if( [startRestart isEqualToString:@"reStart"] ){
         
         if( [callFor isEqualToString:@"contactsTableView"] ) {
-           NSLog(@"tableViewSR restart untechable.emergencyContacts = %@",untechable.emergencyContacts);
+            //NSLog(@"tableViewSR restart untechable.emergencyContacts = %@",untechable.emergencyContacts);
             _contactsTableView.allowsMultipleSelectionDuringEditing = NO;
             tableViewFor = @"contactsTableView";
             [_contactsTableView reloadData];
@@ -384,7 +384,7 @@
     }
     
     
-    NSLog(@"getCountForTableView Count of %@ : %ld", tableViewFor, (long)count);
+   // NSLog(@"getCountForTableView Count of %@ : %ld", tableViewFor, (long)count);
     return count;
 }
 

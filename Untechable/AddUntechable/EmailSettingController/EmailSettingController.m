@@ -224,13 +224,94 @@
     [untechable goBack:self.navigationController];
 }
 
--(void)onFinish{
+-(void)onFinish {
     
     [untechable setOrSaveVars:SAVE];
-    
+    [self sendToApi];
+    /*
     [self setNextHighlighted:NO];
     [self.navigationController popToRootViewControllerAnimated:YES];
     // Remove observers
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+     */
+}
+-(void) sendToApi{
+    
+    //NSLog(@"API_SAVE = %@ ",API_SAVE);
+    //NSLog(@"[untechable getRecFilePath]: %@",[untechable getRecFilePath]);
+    //NSLog(@"[untechable getRecFileName]: %@",[untechable getRecFileName]);
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:API_SAVE]];
+    [request setHTTPMethod:@"POST"];
+
+    NSMutableData *body = [NSMutableData data];
+    NSString *boundary = @"---------------------------14737809831466499882746641449";
+    
+    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
+    [request addValue:contentType forHTTPHeaderField: @"Content-Type"];
+    
+    
+    // -------------------- ---- Audio Upload Status ---------------------------\\
+    //pass MediaType file
+    
+    [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"recording\"; filename=\"%@\"\r\n",[untechable getRecFileName]] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[@"Content-Type: audio/caf\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[@"Content-Transfer-Encoding: binary\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    // get the audio data from main bundle directly into NSData object
+    NSData *audioData;
+    audioData = [[NSData alloc] initWithContentsOfFile:[NSURL URLWithString:[untechable getRecFilePath]]];
+    // add it to body
+    [body appendData:audioData];
+    [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+
+    
+    
+    //  parameter username
+    
+    [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"spendingTimeTxt\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    [body appendData:[untechable.spendingTimeTxt dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    
+    //  parameter token
+    [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"forwardingNumber\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    [body appendData:[untechable.forwardingNumber dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    
+    // parameter method
+    [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"location\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    [body appendData:[untechable.location dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    
+    
+    
+    
+    
+    // close form
+    [body appendData:[[NSString stringWithFormat:@"--%@--\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    
+    // setting the body of the post to the reqeust
+    [request setHTTPBody:body];
+    
+    
+    NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+    // NSString *returnString = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
+    
+    if( returnData != nil ){
+        NSDictionary *dict=[NSJSONSerialization JSONObjectWithData:returnData options:NSJSONReadingMutableLeaves error:nil];
+        NSLog(@"In response of save api: %@",dict);
+    }
 }
 @end

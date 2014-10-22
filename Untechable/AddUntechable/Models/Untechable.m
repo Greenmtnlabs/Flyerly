@@ -47,8 +47,11 @@
 {
 
     // Pop the current view, and push the crop view.
-    NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[navigationControllerPointer viewControllers]];
-    NSLog(@"NSMutableArray *viewControllers = %@", viewControllers);
+    //NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[navigationControllerPointer viewControllers]];
+    //NSLog(@"NSMutableArray *viewControllers = %@", viewControllers);
+    
+    
+    
     /*
     [viewControllers removeLastObject];
     [viewControllers removeLastObject];
@@ -94,9 +97,12 @@
  */
 -(NSString *)getRecFilePath
 {
-    return [NSString stringWithFormat:@"%@/%@%@",untechablePath, uniqueId, REC_FORMATE];
+    return [NSString stringWithFormat:@"%@/%@",untechablePath, [self getRecFileName]];
 }
-
+-(NSString *)getRecFileName
+{
+    return [NSString stringWithFormat:@"%@_%@%@",userId,uniqueId, REC_FORMATE];
+}
 
 /*
  * Here we Getting Path for new Untechable
@@ -104,7 +110,7 @@
 -(NSString *)getNewUntechablePath
 {
 	NSString *userPath = [self getUserPath];
-    NSString *retUntechablePath = [userPath stringByAppendingString:[NSString stringWithFormat:@"/%@", uniqueId]];
+    NSString *retUntechablePath = [userPath stringByAppendingString:[NSString stringWithFormat:@"/%@_%@", userId, uniqueId]];
     
     return retUntechablePath;
 }
@@ -207,7 +213,7 @@
         hasRecording = ([dic[@"hasRecording"] isEqualToString:@"YES"]) ? YES : NO;
     }
     
-    NSLog(@"dic: %@", dic);
+    //NSLog(@"dic: %@", dic);
 }
 -(void)initWithDefValues
 {
@@ -295,7 +301,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
         }
     }
     
-    NSLog(@"in fn getUntechable retDic: %@",retDic);
+    //NSLog(@"in fn getUntechable retDic: %@",retDic);
     
     return retDic;
 }
