@@ -16,7 +16,7 @@
     AVAudioPlayer *player;
     NSTimer *recTimer;
     NSTimer *playTimer;
-    int i;
+    int timerI;
 }
 
 @end
@@ -33,7 +33,8 @@
 {
     [super viewDidLoad];
 	
-    i = 0;
+    timerI = 0;
+    
     // Disable Stop/Play button when application launches
     [stopButton setEnabled:NO];
     [playButton setEnabled:NO];
@@ -43,14 +44,13 @@
     // Setup audio session
     AVAudioSession *session = [AVAudioSession sharedInstance];
     [session setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
-    
-    // Define the recorder setting
-    NSMutableDictionary *recordSetting = [[NSMutableDictionary alloc] init];
-    
-    [recordSetting setValue:[NSNumber numberWithInt:kAudioFormatMPEG4AAC] forKey:AVFormatIDKey];
-    [recordSetting setValue:[NSNumber numberWithFloat:44100.0] forKey:AVSampleRateKey];
-    [recordSetting setValue:[NSNumber numberWithInt: 2] forKey:AVNumberOfChannelsKey];
-    
+
+    NSMutableDictionary* recordSetting = [[NSMutableDictionary alloc]init];
+    [recordSetting setValue :[NSNumber  numberWithInt:kAudioFormatLinearPCM] forKey:AVFormatIDKey];
+    [recordSetting setValue:[NSNumber numberWithFloat:11025.0] forKey:AVSampleRateKey];
+    [recordSetting setValue:[NSNumber numberWithInt: 1] forKey:AVNumberOfChannelsKey];
+    [recordSetting setValue:[NSNumber numberWithInt:16] forKey:AVLinearPCMBitDepthKey];
+
     // Initiate and prepare the recorder
     recorder = [[AVAudioRecorder alloc] initWithURL:outputFileURL settings:recordSetting error:nil];
     recorder.delegate = self;
@@ -172,7 +172,7 @@
 }
 
 - (void)updateRecSlider {
-    NSLog(@"updateRecSlider counter: %i", i);
+    NSLog(@"updateRecSlider counter: %i", timerI);
     // Update the slider about the music time
     if ( recorder.recording ) {
         
@@ -195,7 +195,7 @@
 }
 
 - (void)updatePlaySlider {
-    NSLog(@"updatePlaySlider counter: %i", i);
+    NSLog(@"updatePlaySlider counter: %i", timerI);
     // Update the slider about the music time
     //if ( recorder.recording ) {
     

@@ -27,7 +27,7 @@
 #define CHECKBOX_TICK 2
 #define CHECKBOX_EMPTY 3
 
-#define REC_FORMATE @".m4a"
+#define REC_FORMATE @".wav"
 #define ADD_UNTECHABLE @"ADD"
 #define EDIT_UNTECHABLE @"EDIT"
 
