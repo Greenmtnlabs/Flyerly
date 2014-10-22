@@ -29,6 +29,8 @@
 
 #define REC_FORMATE @".wav"
 #define PIECES_FILE @"untechable.pieces"
+#define RECORDING_LIMIT_IN_SEC 60
+
 #define SAVE @"SAVE"
 #define SET @"SET"
 

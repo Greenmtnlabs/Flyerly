@@ -11,6 +11,18 @@
 #import "Untechable.h"
 
 @interface RecordController : UIViewController <AVAudioRecorderDelegate, AVAudioPlayerDelegate>
+{
+    UILabel *titleLabel;
+    UIButton *helpButton;
+    UIButton *backButton;
+    UIButton *nextButton;
+    
+    UIColor *defGreen;//GREEN
+    UIColor *defGray;//GRAY
+    
+}
+
+
 
 @property (weak, nonatomic) IBOutlet UIButton *recordPauseButton;
 @property (weak, nonatomic) IBOutlet UIButton *stopButton;

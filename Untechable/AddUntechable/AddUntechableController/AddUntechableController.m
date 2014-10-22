@@ -134,58 +134,6 @@
     [self.view endEditing:YES];
 }
 
-
-
-#pragma mark -  UI functions
--(void)updateUI
-{
-
-    [_cbNoEndDate setSelected:!(untechable.hasEndDate)];
-    
-    [_lbl1S1 setTextColor:defGray];
-    _lbl1S1.font = [UIFont fontWithName:APP_FONT size:14];
-    
-    [_inputSpendingTimeTxt setTextColor:defGreen];
-    _inputSpendingTimeTxt.font = [UIFont fontWithName:APP_FONT size:14];
-    
-    [_lbl2S1 setTextColor:defGray];
-    _lbl2S1.font = [UIFont fontWithName:APP_FONT size:14];
-    
-    
-    
-    
-    [_lblStartTime setTextColor:defGray];
-    _lblStartTime.font = [UIFont fontWithName:APP_FONT size:25];
-    
-    [self.btnStartTime setTitleColor:defGreen forState:UIControlStateNormal];
-    self.btnStartTime.titleLabel.font = [UIFont fontWithName:APP_FONT size:18];
-    [self.btnStartTime setTitle:untechable.startDate forState:UIControlStateNormal];
-    
-    [_lbl3S1 setTextColor:defGray];
-    _lbl3S1.font = [UIFont fontWithName:APP_FONT size:14];
-    
-    
-    
-    
-    
-    [_lblEndTime setTextColor:defGray];
-    _lblEndTime.font   = [UIFont fontWithName:APP_FONT size:25];
-    
-    [self.btnEndTime setTitleColor:defGreen forState:UIControlStateNormal];
-    self.btnEndTime.titleLabel.font = [UIFont fontWithName:APP_FONT size:18];
-    [self.btnEndTime setTitle:untechable.endDate forState:UIControlStateNormal];
-    
-    [_lbl4S1 setTextColor:defGray];
-    _lbl4S1.font = [UIFont fontWithName:APP_FONT size:14];
-    
-    [_lbl5S1 setTextColor:defGray];
-    _lbl5S1.font = [UIFont fontWithName:APP_FONT size:14];
-    
-    [_pickerCloseBtn setTitleColor:defGray forState:UIControlStateNormal];
-    _pickerCloseBtn.titleLabel.font = [UIFont fontWithName:APP_FONT size:18];
-
-}
-
 #pragma mark -  Navigation functions
 - (void)setNavigationDefaults{
 
@@ -270,16 +218,20 @@
     */
     
     if( YES ) {
+        [self storeSceenVarsInDic];
+        
         PhoneSetupController *phoneSetup;
         phoneSetup = [[PhoneSetupController alloc]initWithNibName:@"PhoneSetupController" bundle:nil];
         phoneSetup.untechable = untechable;
         [self.navigationController pushViewController:phoneSetup animated:YES];
         
-        
-        untechable.spendingTimeTxt = _inputSpendingTimeTxt.text;
-        
         [self hideAllControlls];
     }
+}
+-(void)storeSceenVarsInDic
+{
+    untechable.spendingTimeTxt = _inputSpendingTimeTxt.text;
+    [untechable setOrSaveVars:SAVE];
 }
 
 -(void) hideAllControlls {
@@ -356,59 +308,84 @@
     
     if( showThisUntechable > -1 ) {
         sUntechable = [untechable getUntechable: showThisUntechable ];
-        
+
+        //Old Untechable going to edit, set the vars
         if( sUntechable != nil ){
             isNew = NO;
+            
+            //Settings
+            untechable.uniqueId = sUntechable[@"uniqueId"];
+            untechable.untechablePath = sUntechable[@"untechablePath"];
         }
     }
-    
-    if( isNew == NO ){
 
-        //Settings
-        untechable.uniqueId = sUntechable[@"uniqueId"];
-        untechable.untechablePath = sUntechable[@"untechablePath"];
-        
-        //-----------------{--
-        now1 = [[NSDate date] dateByAddingTimeInterval:(60*2)]; //current time + 2mint
-        now2 = [[NSDate date] dateByAddingTimeInterval:(60*120)]; //current time + 2hr
-        
-        untechable.startDate = [untechable.dateFormatter stringFromDate:now1];
-        untechable.endDate   = [untechable.dateFormatter stringFromDate:now2];
-        //-----------------}--
-        
-        [untechable initUntechableDirectory];
+    //New, set the vars
+    if( isNew ){
+        [untechable initWithDefValues];
     }
-    //New
-    else {
-        
-        //Settings
-        untechable.uniqueId = [untechable getUniqueId];
-        untechable.untechablePath = [untechable getNewUntechablePath];
-        
-        untechable.hasFbPermission          = NO;
-        untechable.hasTwitterPermission     = NO;
-        untechable.hasLinkedinPermission    = NO;
-        
-        
-        //1-vars for screen1
-        untechable.spendingTimeTxt = @"";
-        now1 = [[NSDate date] dateByAddingTimeInterval:(60*2)]; //current time + 2mint
-        now2 = [[NSDate date] dateByAddingTimeInterval:(60*120)]; //current time + 2hr
-        
-        untechable.startDate = [untechable.dateFormatter stringFromDate:now1];
-        untechable.endDate   = [untechable.dateFormatter stringFromDate:now2];
-        
-        untechable.hasEndDate = YES;
-        
-        //2-vars for screen2
-        untechable.forwardingNumber  = @"";
-        untechable.emergencyNumbers  = @"";
-        untechable.emergencyContacts = [[NSMutableDictionary alloc] init];
-        untechable.hasRecording = NO;
-        
-        [untechable initUntechableDirectory];
-        
-    }
+    
+    //-----------------{--
+    now1 = [[NSDate date] dateByAddingTimeInterval:(60*2)]; //current time + 2mint
+    now2 = [[NSDate date] dateByAddingTimeInterval:(60*120)]; //current time + 2hr
+    
+    untechable.startDate = [untechable.dateFormatter stringFromDate:now1];
+    untechable.endDate   = [untechable.dateFormatter stringFromDate:now2];
+    //-----------------}--
+    
+    
+    [untechable initUntechableDirectory];
+}
+
+
+#pragma mark -  UI functions
+-(void)updateUI
+{
+    
+    _inputSpendingTimeTxt.text = untechable.spendingTimeTxt;
+    
+    [_lbl1S1 setTextColor:defGray];
+    _lbl1S1.font = [UIFont fontWithName:APP_FONT size:14];
+    
+    [_inputSpendingTimeTxt setTextColor:defGreen];
+    _inputSpendingTimeTxt.font = [UIFont fontWithName:APP_FONT size:14];
+    
+    [_lbl2S1 setTextColor:defGray];
+    _lbl2S1.font = [UIFont fontWithName:APP_FONT size:14];
+    
+    
+    //---------
+    
+    [_lblStartTime setTextColor:defGray];
+    _lblStartTime.font = [UIFont fontWithName:APP_FONT size:25];
+    
+    [self.btnStartTime setTitleColor:defGreen forState:UIControlStateNormal];
+    self.btnStartTime.titleLabel.font = [UIFont fontWithName:APP_FONT size:18];
+    [self.btnStartTime setTitle:untechable.startDate forState:UIControlStateNormal];
+    
+    [_lbl3S1 setTextColor:defGray];
+    _lbl3S1.font = [UIFont fontWithName:APP_FONT size:14];
+    
+    
+    //----------
+    
+    
+    [_lblEndTime setTextColor:defGray];
+    _lblEndTime.font   = [UIFont fontWithName:APP_FONT size:25];
+    
+    [self.btnEndTime setTitleColor:defGreen forState:UIControlStateNormal];
+    self.btnEndTime.titleLabel.font = [UIFont fontWithName:APP_FONT size:18];
+    [self.btnEndTime setTitle:untechable.endDate forState:UIControlStateNormal];
+    
+    [_lbl4S1 setTextColor:defGray];
+    _lbl4S1.font = [UIFont fontWithName:APP_FONT size:14];
+    
+    [_lbl5S1 setTextColor:defGray];
+    _lbl5S1.font = [UIFont fontWithName:APP_FONT size:14];
+    
+    [_cbNoEndDate setSelected:!(untechable.hasEndDate)];
+    
+    [_pickerCloseBtn setTitleColor:defGray forState:UIControlStateNormal];
+    _pickerCloseBtn.titleLabel.font = [UIFont fontWithName:APP_FONT size:18];
     
 }
 

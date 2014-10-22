@@ -8,7 +8,7 @@
 
 #import "RecordController.h"
 #import "Common.h"
-#define RECORDING_LIMIT_IN_SEC 60
+#import "SocialnetworkController.h"
 
 
 @interface RecordController (){
@@ -17,6 +17,9 @@
     NSTimer *recTimer;
     NSTimer *playTimer;
     int timerI;
+    NSString *recFilePath;
+    NSURL *outputFileURL;
+    BOOL configuredRecorder, configuredPlayer;
 }
 
 @end
@@ -32,30 +35,39 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self setNavigationDefaults];
+    [self setNavigation:@"viewDidLoad"];
+    
 	
     timerI = 0;
+    configuredRecorder = NO;
+    configuredPlayer = NO;
     
     // Disable Stop/Play button when application launches
     [stopButton setEnabled:NO];
     [playButton setEnabled:NO];
     
-    NSURL *outputFileURL = [NSURL URLWithString:[untechable getRecFilePath]];
+    recFilePath = [untechable getRecFilePath];
+    outputFileURL = [NSURL URLWithString:recFilePath];
     
-    // Setup audio session
-    AVAudioSession *session = [AVAudioSession sharedInstance];
-    [session setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
-
-    NSMutableDictionary* recordSetting = [[NSMutableDictionary alloc]init];
-    [recordSetting setValue :[NSNumber  numberWithInt:kAudioFormatLinearPCM] forKey:AVFormatIDKey];
-    [recordSetting setValue:[NSNumber numberWithFloat:11025.0] forKey:AVSampleRateKey];
-    [recordSetting setValue:[NSNumber numberWithInt: 1] forKey:AVNumberOfChannelsKey];
-    [recordSetting setValue:[NSNumber numberWithInt:16] forKey:AVLinearPCMBitDepthKey];
-
-    // Initiate and prepare the recorder
-    recorder = [[AVAudioRecorder alloc] initWithURL:outputFileURL settings:recordSetting error:nil];
-    recorder.delegate = self;
-    recorder.meteringEnabled = YES;
-    [recorder prepareToRecord];
+    //[self playTapped];
+    
+    [self configuredPlayerFn];
+    
+    NSLog(@"player.duration: %f",player.duration);
+    
+    if( player.duration > 0.0 ){
+        [playButton setEnabled:YES];
+        [self updateLableOf:@"playTimeLabelOfRecorded"];
+    }
+    else{
+        [self configureRecorder];
+    }
+    
+}
+-(void)viewWillAppear:(BOOL)animated {
+    [self updateUI];
 }
 
 - (void)didReceiveMemoryWarning
@@ -102,7 +114,7 @@
         [audioSession setActive:NO error:nil];
         
         untechable.hasRecording = YES;
-        
+        [self timerInit:NO callFor:1];
     }
     else if ( playTimer != nil ) {
         [player stop];
@@ -112,20 +124,28 @@
 }
 
 - (IBAction)playTapped:(id)sender {
-    if ( !recorder.recording ) {
+    [self playTapped];
+}
+-(void)playTapped
+{
+    if ( !recorder.recording || player.duration > 0.0 ) {
+        BOOL configured = NO;
         if( [playTimeLabel.text isEqualToString:@"00:00"] ){
-            player = [[AVAudioPlayer alloc] initWithContentsOfURL:recorder.url error:nil];
-            [player setDelegate:self];
+            //WE MUST NEED CONFIGURED FOR PLAY EVERY TIME, BECAUSE FILE ALWAYS UPDATING ON NEW RECORDING
+            if( [self configuredPlayerFn] ) {
+                configured = YES;
+            }
+        }
+        else {
+            configured = YES;
+        }
+        
+        if( configured ) {
             [player play];
-
             [self timerInit:YES callFor:2];
         }
-        else{
-            NSString *tempLastPlayTime = playTimeLabel.text;
-            [player play];
-            [self timerInit:YES callFor:2];
-            playTimeLabel.text = tempLastPlayTime;
-        }
+    
+    
     }
 }
 - (void)timerInit :(BOOL) init callFor:(int)callFor{
@@ -178,7 +198,14 @@
     NSLog(@"updateRecSlider counter: %i", timerI);
     // Update the slider about the music time
     if ( recorder.recording ) {
-        
+        [self updateLableOf:@"recordTimeLabel"];
+    }
+}
+
+-(void)updateLableOf:(NSString *)labelOf
+{
+    
+    if( [labelOf isEqualToString:@"recordTimeLabel"] ) {
         float minutes = floor(recorder.currentTime/60);
         float seconds = recorder.currentTime - (minutes * 60);
         
@@ -193,15 +220,8 @@
         if( seconds >= RECORDING_LIMIT_IN_SEC ){
             [self stopRec];
         }
-        
     }
-}
-
-- (void)updatePlaySlider {
-    NSLog(@"updatePlaySlider counter: %i", timerI);
-    // Update the slider about the music time
-    //if ( recorder.recording ) {
-    
+    else if( [labelOf isEqualToString:@"playTimeLabel"] ) {
         float minutes = floor(player.currentTime/60);
         float seconds = player.currentTime - (minutes * 60);
         
@@ -210,9 +230,28 @@
                           minutes, seconds];
         NSLog(@"player time: %@", time);
         playTimeLabel.text = time;
-    
+        
         [self updateSlider:2 seconds:seconds];
-    
+    }
+    else if( [labelOf isEqualToString:@"playTimeLabelOfRecorded"] ) {
+        float minutes = floor(player.duration/60);
+        float seconds = player.duration - (minutes * 60);
+        
+        NSString *time = [[NSString alloc]
+                          initWithFormat:@"%02.0f:%02.0f",
+                          minutes, seconds];
+        NSLog(@"player time: %@", time);
+        recordTimeLabel.text = time;
+        
+        [self updateSlider:2 seconds:0.0];
+    }
+}
+
+- (void)updatePlaySlider {
+    NSLog(@"updatePlaySlider counter: %i", timerI);
+    // Update the slider about the music time
+    //if ( recorder.recording ) {
+        [self updateLableOf:@"playTimeLabel"];
     //}
 }
 
@@ -248,6 +287,163 @@
 
 - (void) audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag{
     [self timerInit:NO callFor:2];
+}
+
+#pragma mark -  Navigation functions
+
+- (void)setNavigationDefaults{
+    
+    defGreen = [UIColor colorWithRed:66.0/255.0 green:247.0/255.0 blue:206.0/255.0 alpha:1.0];//GREEN
+    defGray = [UIColor colorWithRed:184.0/255.0 green:184.0/255.0 blue:184.0/255.0 alpha:1.0];//GRAY
+    
+    
+    [[self navigationController] setNavigationBarHidden:NO animated:YES]; //show navigation bar
+    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+}
+
+
+-(void)setNavigation:(NSString *)callFrom
+{
+    if([callFrom isEqualToString:@"viewDidLoad"])
+    {
+        
+        
+        // Left Navigation ___________________________________________________________
+        backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
+        backButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_LEFT_SIZE];
+        [backButton setTitle:TITLE_BACK_TXT forState:normal];
+        [backButton setTitleColor:defGray forState:UIControlStateNormal];
+        [backButton addTarget:self action:@selector(btnBackTouchStart) forControlEvents:UIControlEventTouchDown];
+        [backButton addTarget:self action:@selector(btnBackTouchEnd) forControlEvents:UIControlEventTouchUpInside];
+        
+        
+        backButton.showsTouchWhenHighlighted = YES;
+        UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+        NSMutableArray  *leftNavItems  = [NSMutableArray arrayWithObjects:leftBarButton,nil];
+        
+        [self.navigationItem setLeftBarButtonItems:leftNavItems]; //Left button ___________
+        
+        
+        // Center title ________________________________________
+        titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
+        titleLabel.backgroundColor = [UIColor clearColor];
+        titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_FONT_SIZE];
+        titleLabel.textAlignment = NSTextAlignmentCenter;
+        titleLabel.textColor = defGreen;
+        titleLabel.text = APP_NAME;
+        
+        
+        self.navigationItem.titleView = titleLabel; //Center title ___________
+        
+        
+        // Right Navigation ________________________________________
+        nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
+        [nextButton addTarget:self action:@selector(onNext) forControlEvents:UIControlEventTouchUpInside];
+        nextButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];
+        [nextButton setTitle:TITLE_NEXT_TXT forState:normal];
+        [nextButton setTitleColor:defGray forState:UIControlStateNormal];
+        [nextButton addTarget:self action:@selector(btnNextTouchStart) forControlEvents:UIControlEventTouchDown];
+        [nextButton addTarget:self action:@selector(btnNextTouchEnd) forControlEvents:UIControlEventTouchUpInside];
+        
+        
+        
+        nextButton.showsTouchWhenHighlighted = YES;
+        UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
+        NSMutableArray  *rightNavItems  = [NSMutableArray arrayWithObjects:rightBarButton,nil];
+        
+        [self.navigationItem setRightBarButtonItems:rightNavItems];//Right buttons ___________
+        
+        
+    }
+}
+
+
+-(void)btnNextTouchStart{
+    [self setNextHighlighted:YES];
+}
+-(void)btnNextTouchEnd{
+    [self setNextHighlighted:NO];
+}
+- (void)setNextHighlighted:(BOOL)highlighted {
+    (highlighted) ? [nextButton setBackgroundColor:defGreen] : [nextButton setBackgroundColor:[UIColor clearColor]];
+}
+
+-(void)btnBackTouchStart{
+    [self setBackHighlighted:YES];
+}
+-(void)btnBackTouchEnd{
+    [self setBackHighlighted:NO];
+    [self onBack];
+}
+- (void)setBackHighlighted:(BOOL)highlighted {
+    (highlighted) ? [backButton setBackgroundColor:defGreen] : [backButton setBackgroundColor:[UIColor clearColor]];
+}
+
+-(void)onBack{
+    [untechable goBack:self.navigationController];
+}
+
+-(void)onNext{
+    
+    [self setNextHighlighted:NO];
+    
+    BOOL goToNext = YES;
+    
+    if( goToNext ) {
+        SocialnetworkController *socialnetwork;
+        socialnetwork = [[SocialnetworkController alloc]initWithNibName:@"SocialnetworkController" bundle:nil];
+        socialnetwork.untechable = untechable;
+        [self.navigationController pushViewController:socialnetwork animated:YES];
+        //[self storeSceenVarsInDic];
+    }
+}
+
+#pragma mark -  UI functions
+-(void)updateUI
+{
     
 }
+-(void)configureRecorder
+{
+    configuredRecorder = YES;
+    if( configuredRecorder ) {
+        // Setup audio session
+        AVAudioSession *session = [AVAudioSession sharedInstance];
+        [session setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
+        
+        NSMutableDictionary* recordSetting = [[NSMutableDictionary alloc]init];
+        [recordSetting setValue :[NSNumber  numberWithInt:kAudioFormatLinearPCM] forKey:AVFormatIDKey];
+        [recordSetting setValue:[NSNumber numberWithFloat:11025.0] forKey:AVSampleRateKey];
+        [recordSetting setValue:[NSNumber numberWithInt: 1] forKey:AVNumberOfChannelsKey];
+        [recordSetting setValue:[NSNumber numberWithInt:16] forKey:AVLinearPCMBitDepthKey];
+        
+        
+        // Initiate and prepare the recorder
+        recorder = [[AVAudioRecorder alloc] initWithURL:outputFileURL settings:recordSetting error:nil];
+        recorder.delegate = self;
+        recorder.meteringEnabled = YES;
+        [recorder prepareToRecord];
+    }
+}
+
+-(BOOL)configuredPlayerFn{
+    BOOL configured = NO;
+    NSError *error;
+    player = [[AVAudioPlayer alloc]
+              initWithContentsOfURL:outputFileURL
+              error:&error];
+    if (error)
+    {
+        NSLog(@"Error in audioPlayer: %@",
+              [error localizedDescription]);
+    } else {
+        player.delegate = self;
+        [player prepareToPlay];
+        
+        configured = YES;
+    }
+    
+    return configured;
+}
+
 @end

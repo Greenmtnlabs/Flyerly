@@ -42,8 +42,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    [untechable setOrSaveVars:SAVE];
-    
     [self setNavigationDefaults];
     [self setNavigation:@"viewDidLoad"];
     
@@ -69,10 +67,11 @@
     [super viewDidAppear:animated];
     [untechable printNavigation:[self navigationController]];
     
+    [untechable setOrSaveVars:SAVE];
+    
 }
 -(void)viewWillAppear:(BOOL)animated {
     
-    [untechable setOrSaveVars:SAVE];
 }
 
 /*

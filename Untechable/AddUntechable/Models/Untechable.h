@@ -34,7 +34,7 @@
 
 
 //2-vars for screen2
-@property (strong, nonatomic)  NSString *forwardingNumber, *emergencyNumbers;
+@property (strong, nonatomic)  NSString *forwardingNumber, *emergencyNumbers, *location;
 @property (strong, nonatomic)  NSMutableDictionary *emergencyContacts;
 @property (nonatomic, assign) BOOL hasRecording;
 
@@ -51,5 +51,6 @@
 -(BOOL)initUntechableDirectory;
 -(NSMutableDictionary *)getUntechable:(int)count;
 -(void)setOrSaveVars:(NSString *)setOrSAve;
+-(void)initWithDefValues;
 
 @end

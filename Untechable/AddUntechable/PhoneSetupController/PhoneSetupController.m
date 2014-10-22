@@ -14,6 +14,12 @@
 #import "InviteScreen/InviteFriendsController.h"
 #import "RecordController.h"
 
+# define MSG_FORWADING_1 @"Get A Number"
+# define MSG_FORWADING_2 @"Please wait..."
+# define MSG_FORWADING_3 @"Forward call here"
+
+
+
 @interface PhoneSetupController (){
     NSString *tableViewFor;
     CommonFunctions *commonFunctions;
@@ -66,23 +72,17 @@
     [self setNavigationDefaults];
     [self setNavigation:@"viewDidLoad"];
     
-    //[self setDefaultModel];
+    [self setDefaultModel];
+    [self tableViewSR:@"start" callFor:@"contactsTableView"];
     
-    [self updateUI];
-    
-    
-    NSArray *fields = @[ self.inputEmergencyNumber, self.inputForwadingNumber ];
+    NSArray *fields = @[ self.inputEmergencyNumber, self.inputLocation, self.inputForwadingNumber];
     [self setKeyboardControls:[[BSKeyboardControls alloc] initWithFields:fields]];
     [self.keyboardControls setDelegate:self];
     
 }
 
 -(void)viewWillAppear:(BOOL)animated {
-    
-    [untechable setOrSaveVars:SAVE];
-    
-    [self setDefaultModel];
-    
+    [self updateUI];
 }
 
 /**
@@ -90,8 +90,7 @@
  */
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
-    [untechable printNavigation:[self navigationController]];
+    [untechable setOrSaveVars:SAVE];
 }
 
 
@@ -143,41 +142,6 @@
 - (void)keyboardControlsDonePressed:(BSKeyboardControls *)keyboardControls
 {
     [self.view endEditing:YES];
-}
-
-
-#pragma mark -  UI functions
--(void)updateUI
-{
-
-    [self.btnforwardingNumber setTitleColor:defGray forState:UIControlStateNormal];
-    self.btnforwardingNumber.titleLabel.font = [UIFont fontWithName:APP_FONT size:20];
-
-    self.inputForwadingNumber.userInteractionEnabled = NO;
-    [self.inputForwadingNumber setTextColor:defGreen];
-    self.inputForwadingNumber.font = [UIFont fontWithName:APP_FONT size:16];
-    self.inputForwadingNumber.delegate = self;
-    
-    
-    
-    
-    
-    [_lblEmergencyNumber setTextColor:defGray];
-    _lblEmergencyNumber.font = [UIFont fontWithName:APP_FONT size:20];
-    
-    [self.inputEmergencyNumber setTextColor:defGreen];
-    self.inputEmergencyNumber.font = [UIFont fontWithName:APP_FONT size:16];
-    self.inputEmergencyNumber.delegate = self;
-    
-    
-    
-    [self.btnImport setTitleColor:defGray forState:UIControlStateNormal];
-    self.btnImport.titleLabel.font = [UIFont fontWithName:APP_FONT size:20];
-
-    [_lblCanContactTxt setTextColor:defGray];
-    _lblCanContactTxt.font = [UIFont fontWithName:APP_FONT size:15];
-    
-    
 }
 
 #pragma mark -  Navigation functions
@@ -278,41 +242,93 @@
     
     BOOL goToNext = YES;
     
-    if( YES ) {
+    if( goToNext ) {
         RecordController *recordController;
         recordController = [[RecordController alloc]initWithNibName:@"RecordController" bundle:nil];
         recordController.untechable = untechable;
         [self.navigationController pushViewController:recordController animated:YES];
+       [self storeSceenVarsInDic];
     }
-    else if( goToNext ) {
+    /*
         SocialnetworkController *socialnetwork;
         socialnetwork = [[SocialnetworkController alloc]initWithNibName:@"SocialnetworkController" bundle:nil];
         socialnetwork.untechable = untechable;
         [self.navigationController pushViewController:socialnetwork animated:YES];
-    }
+     */
+
+}
+
+-(void)storeSceenVarsInDic{
+    untechable.forwardingNumber = _inputForwadingNumber.text;
+    untechable.location = _inputLocation.text;
+    untechable.emergencyNumbers = _inputEmergencyNumber.text;
+    //untechable.emergencyContacts = untechable.emergencyContacts; //no need
+    
+    [untechable setOrSaveVars:SAVE];
 }
 
 #pragma mark -  Model funcs
--(void)setTextIn:(NSString *)txtIn str:(NSString *)txt{
-    if( [txtIn isEqualToString:@"_btnforwardingNumber"] ) {
-      [self.btnforwardingNumber setTitle:txt forState:UIControlStateNormal];
-    }
+-(void)setDefaultModel{
+    commonFunctions = [[CommonFunctions alloc] init];
 }
 
--(void)setDefaultModel{
+#pragma mark -  UI functions
+-(void)updateUI
+{
     
-    commonFunctions = [[CommonFunctions alloc] init];
+    [self.btnforwardingNumber setTitleColor:defGray forState:UIControlStateNormal];
+    self.btnforwardingNumber.titleLabel.font = [UIFont fontWithName:APP_FONT size:20];
     
-    [self tableViewSR:@"start" callFor:@"contactsTableView"];
-    //[self importContactsAfterAllow];//for testing
-    
-    if( !([untechable.forwardingNumber isEqualToString:@""]) ){
-        [self setTextIn:@"_btnforwardingNumber" str:untechable.startDate];
+    self.inputForwadingNumber.userInteractionEnabled = NO;
+    [self.inputForwadingNumber setTextColor:defGreen];
+    self.inputForwadingNumber.font = [UIFont fontWithName:APP_FONT size:16];
+    self.inputForwadingNumber.delegate = self;
+
+    if( ![untechable.forwardingNumber isEqualToString:@""] ){
+        [self.inputForwadingNumber setText:untechable.forwardingNumber];
+        [self.btnforwardingNumber setTitle:MSG_FORWADING_3 forState:UIControlStateNormal];
     }
+    
+    
+    [_lblLocation setTextColor:defGray];
+    _lblLocation.font = [UIFont fontWithName:APP_FONT size:20];
+    
+    [self.inputLocation setTextColor:defGreen];
+    self.inputLocation.font = [UIFont fontWithName:APP_FONT size:16];
+    self.inputLocation.delegate = self;
+    
+    if( ![untechable.location isEqualToString:@""] )
+    [self.inputLocation setText:untechable.location];
+
+    
+    
+    [_lblEmergencyNumber setTextColor:defGray];
+    _lblEmergencyNumber.font = [UIFont fontWithName:APP_FONT size:20];
+    
+    
+    [self.inputEmergencyNumber setTextColor:defGreen];
+    self.inputEmergencyNumber.font = [UIFont fontWithName:APP_FONT size:16];
+    self.inputEmergencyNumber.delegate = self;
+    
+    if( ![untechable.forwardingNumber isEqualToString:@""] )
+    [self.inputEmergencyNumber setText:untechable.emergencyNumbers];
+
+    [self tableViewSR:@"reStart" callFor:@"contactsTableView"];
+    
+    
+    
+    [self.btnImport setTitleColor:defGray forState:UIControlStateNormal];
+    self.btnImport.titleLabel.font = [UIFont fontWithName:APP_FONT size:20];
+    
+    [_lblCanContactTxt setTextColor:defGray];
+    _lblCanContactTxt.font = [UIFont fontWithName:APP_FONT size:15];
+    
+    
 }
+
 
 -(IBAction)getForwardingNum {
-    if( [self.btnforwardingNumber.titleLabel.text isEqualToString:@"Get A Number"] ){
+    if( [self.btnforwardingNumber.titleLabel.text isEqualToString:MSG_FORWADING_1] ){
         _getANumberAlert = [[UIAlertView alloc ]
                            initWithTitle:@""
                            message:@"Would you like to purchase a forwarding number? This number will have a customizeable auto-response feature & can be used to forward your calls to while you're away."
@@ -324,12 +340,12 @@
     }
 }
 -(void)getForwadingNumAfterAllow {
-    [self setTextIn:@"_btnforwardingNumber" str:@"Please wait..."];
+    [self.btnforwardingNumber setTitle:MSG_FORWADING_2 forState:UIControlStateNormal];
     
     double delayInSeconds = 3.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        [self setTextIn:@"_btnforwardingNumber" str:@"Forward call here"];
+        [self.btnforwardingNumber setTitle:MSG_FORWADING_3 forState:UIControlStateNormal];
         self.btnforwardingNumber.userInteractionEnabled = NO;
         self.inputForwadingNumber.text = @"123456789";
     });
@@ -474,24 +490,6 @@
 }
 -(void)importContactsAfterAllow {
     [self getAllContacts];
-    /*
-    NSDictionary *dic = @{@"Khurram ali": @"3333333333",
-                          @"Ozair": @"5555555555",
-                          @"Rehan ali": @"7777777777",
-                          @"Abdul Rauf": @"00923453017449",
-                          @"Raheel Mateen": @"6666666666",
-                          @"Arbab": @"2222222222",
-                          @"M.Zeshan": @"4444444444",
-                          @"Zeshan Lalani": @"10101010101010",
-                          @"Shoaib": @"9999999999",
-                          @"Sharjeel Shahni": @"8888888888"
-                          };
-    
-    [untechable.emergencyContacts setDictionary:dic];
-    */
-    
-    //[commonFunctions sortDic:untechable.emergencyContacts]; //zarorat nhe pari , ya auto sort kar raha hy
-    
     [self tableViewSR:@"reStart" callFor:@"contactsTableView"];
 }
 

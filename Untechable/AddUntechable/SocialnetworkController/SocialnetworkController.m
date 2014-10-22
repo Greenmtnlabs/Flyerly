@@ -56,8 +56,6 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated {
-    
-    [untechable setOrSaveVars:SAVE];
 }
 
 - (void)didReceiveMemoryWarning
@@ -72,6 +70,7 @@
     
     [super viewDidAppear:animated];
     [untechable printNavigation:[self navigationController]];
+    [untechable setOrSaveVars:SAVE];
     
 }
 /*

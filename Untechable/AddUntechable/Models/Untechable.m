@@ -23,7 +23,7 @@
 @synthesize spendingTimeTxt, startDate, endDate, hasEndDate;
 
 //2-vars for screen2
-@synthesize forwardingNumber, emergencyContacts, emergencyNumbers, hasRecording;
+@synthesize forwardingNumber, location, emergencyContacts, emergencyNumbers, hasRecording;
 
 -(NSDate *)stringToDate:(NSString *)inputStrFormate dateString:(NSString *)dateString{
         NSLog(@"dateString is %@", dateString);
@@ -170,6 +170,7 @@
         
 
         dic[@"forwardingNumber"] = forwardingNumber;
+        dic[@"location"] = location;
         dic[@"emergencyNumbers"] = emergencyNumbers;
         dic[@"emergencyContacts"] = emergencyContacts;
         dic[@"hasRecording"] = hasRecording ? @"YES" : @"NO";
@@ -200,6 +201,7 @@
         
         //2-vars for screen2
         forwardingNumber  = dic[@"forwardingNumber"];
+        location   = dic[@"location"];
         emergencyNumbers  = dic[@"emergencyNumbers"];
         emergencyContacts = dic[@"emergencyContacts"];
         hasRecording = ([dic[@"hasRecording"] isEqualToString:@"YES"]) ? YES : NO;
@@ -207,7 +209,36 @@
     
     NSLog(@"dic: %@", dic);
 }
-
+-(void)initWithDefValues
+{
+    //Settings
+    uniqueId = [self getUniqueId];
+    untechablePath = [self getNewUntechablePath];
+    
+    hasFbPermission          = NO;
+    hasTwitterPermission     = NO;
+    hasLinkedinPermission    = NO;
+    
+    
+    //1-vars for screen1
+    spendingTimeTxt = @"";
+    /*
+    now1 = [[NSDate date] dateByAddingTimeInterval:(60*2)]; //current time + 2mint
+    now2 = [[NSDate date] dateByAddingTimeInterval:(60*120)]; //current time + 2hr
+    
+    startDate = [dateFormatter stringFromDate:now1];
+    endDate   = [dateFormatter stringFromDate:now2];
+    */
+    
+    hasEndDate = YES;
+    
+    //2-vars for screen2
+    forwardingNumber  = @"";
+    location  = @"";
+    emergencyNumbers  = @"";
+    emergencyContacts = [[NSMutableDictionary alloc] init];
+    hasRecording = NO;
+}
 
 /*
  *Here we sort Array in Desending order for Exact Render of Flyer
@@ -246,7 +277,7 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     for(int i = 0 ; i < sortedList.count ;i++)
     {
         uniqueId_temp = sortedList[i];
-        untechablePath_temp = [NSString stringWithFormat:@"%@/%@",userPath,uniqueId];
+        untechablePath_temp = [NSString stringWithFormat:@"%@/%@",userPath,uniqueId_temp];
 
         if ( count == i ) {
             retDic =   [[NSMutableDictionary alloc] init];
