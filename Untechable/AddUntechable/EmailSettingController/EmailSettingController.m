@@ -237,6 +237,8 @@
 }
 -(void) sendToApi{
     
+    NSLog(@"dic = %@ ",untechable.dic);
+    
     //NSLog(@"API_SAVE = %@ ",API_SAVE);
     //NSLog(@"[untechable getRecFilePath]: %@",[untechable getRecFilePath]);
     //NSLog(@"[untechable getRecFileName]: %@",[untechable getRecFileName]);
@@ -267,8 +269,35 @@
     [body appendData:audioData];
     [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
 
+    NSArray *stringVarsAry = [[NSArray alloc] initWithObjects:@"userId",
+                              @"spendingTimeTxt",@"startDate",@"endDate",@"hasEndDate"
+                              ,@"forwardingNumber",@"emergencyNumbers",@"location",
+                              @"hasRecording",nil];
     
+    for (NSString* key in untechable.dic) {
+        id value = [untechable.dic objectForKey:key];
+        
+        if( [stringVarsAry containsObject:key]){
+        
+            [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+            [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n",key] dataUsingEncoding:NSUTF8StringEncoding]];
+            
+            [body appendData:[value dataUsingEncoding:NSUTF8StringEncoding]];
+            [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+        }
+        else if([ key isEqualToString:@"emergencyContacts"] ){
+            for (NSString* keyD in value) {
+                id valueD = [untechable.dic objectForKey:keyD];
+                [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+                [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n",key] dataUsingEncoding:NSUTF8StringEncoding]];
+                
+                [body appendData:[valueD dataUsingEncoding:NSUTF8StringEncoding]];
+                [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+            }//for
+        }
+    }//for
     
+    /*
     //  parameter username
     
     [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
@@ -292,7 +321,7 @@
     
     [body appendData:[untechable.location dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-    
+    */
     
     
     

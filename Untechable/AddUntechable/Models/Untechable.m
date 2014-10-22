@@ -14,7 +14,7 @@
 @implementation Untechable
 
 //Settings
-@synthesize dic, piecesFile, userId, uniqueId, untechablePath, dateFormatter;
+@synthesize dic, piecesFile, userId, uniqueId, eventId, untechablePath, dateFormatter;
 
 //0-Phone permissions vars
 @synthesize hasFbPermission, hasTwitterPermission, hasLinkedinPermission;
@@ -164,6 +164,7 @@
 
         dic[@"userId"] = userId;
         dic[@"uniqueId"]    =   uniqueId;
+        dic[@"eventId"]    =   eventId;
         dic[@"untechablePath"]  =   untechablePath;
         dic[@"hasFbPermission"] = hasFbPermission ? @"YES" : @"NO";
         dic[@"hasTwitterPermission"] = hasTwitterPermission ? @"YES" : @"NO";
@@ -195,6 +196,7 @@
         //Settings
         userId = dic[@"userId"];
         uniqueId = dic[@"uniqueId"];
+        eventId =   dic[@"eventId"];
         untechablePath = dic[@"untechablePath"];
         hasFbPermission       = ([dic[@"hasFbPermission"] isEqualToString:@"YES"]) ? YES : NO;
         hasTwitterPermission  = ([dic[@"hasTwitterPermission"] isEqualToString:@"YES"]) ? YES : NO;
@@ -219,6 +221,7 @@
 {
     //Settings
     uniqueId = [self getUniqueId];
+    eventId = @"0";
     untechablePath = [self getNewUntechablePath];
     
     hasFbPermission          = NO;
