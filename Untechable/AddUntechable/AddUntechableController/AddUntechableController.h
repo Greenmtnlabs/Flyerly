@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "Untechable.h"
+#import "BSKeyboardControls.h"
 
-@interface AddUntechableController : UIViewController
+@interface AddUntechableController : UIViewController < BSKeyboardControlsDelegate >
 {
     UILabel *titleLabel;
     UIButton *helpButton;

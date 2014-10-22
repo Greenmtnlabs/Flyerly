@@ -28,6 +28,9 @@
 #define CHECKBOX_EMPTY 3
 
 #define REC_FORMATE @".wav"
-#define ADD_UNTECHABLE @"ADD"
-#define EDIT_UNTECHABLE @"EDIT"
+#define PIECES_FILE @"untechable.pieces"
+#define SAVE @"SAVE"
+#define SET @"SET"
+
+
 

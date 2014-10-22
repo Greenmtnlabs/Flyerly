@@ -23,19 +23,7 @@
 @synthesize spendingTimeTxt, startDate, endDate, hasEndDate;
 
 //2-vars for screen2
-@synthesize forwardingNumber, emergencyContacts, emergencyNumbers,recPath;
-
-
--(void)initObj{
-    self.hasFbPermission          = NO;
-    self.hasTwitterPermission     = NO;
-    self.hasLinkedinPermission    = NO;
-
-    self.dateFormatter = [[NSDateFormatter alloc] init];
-    [self.dateFormatter setDateFormat:DATE_FORMATE_1];
-    //[self.dateFormatter setDateStyle:NSDateFormatterShortStyle];    // show short-style date format
-    //[self.dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
-}
+@synthesize forwardingNumber, emergencyContacts, emergencyNumbers, hasRecording;
 
 -(NSDate *)stringToDate:(NSString *)inputStrFormate dateString:(NSString *)dateString{
         NSLog(@"dateString is %@", dateString);
@@ -102,112 +90,122 @@
 }
 
 /*
- *Here we Getting Path of new Untechable
+ * Get path of recording file
+ */
+-(NSString *)getRecFilePath
+{
+    return [NSString stringWithFormat:@"%@/%@%@",untechablePath, uniqueId, REC_FORMATE];
+}
+
+
+/*
+ * Here we Getting Path for new Untechable
  */
 -(NSString *)getNewUntechablePath
 {
-    
-    //PFUser *user = [PFUser currentUser];
-    //NSString *username = [user objectForKey:@"username"]
-
-    NSError *error;
-
 	NSString *userPath = [self getUserPath];
-    
-    
-    if ([[NSFileManager defaultManager] fileExistsAtPath:userPath isDirectory:NULL])
-        [[NSFileManager defaultManager] createDirectoryAtPath:userPath withIntermediateDirectories:YES attributes:nil error:&error];
-    
     NSString *retUntechablePath = [userPath stringByAppendingString:[NSString stringWithFormat:@"/%@", uniqueId]];
     
     return retUntechablePath;
 }
 
-
--(NSURL *)getEventDirectoryUrl
+/*
+    Check untechablePath ( folder ) exist in device, if not then create and return the directory url
+ */
+-(BOOL)initUntechableDirectory
 {
-    NSURL *outputFileURL;
-    NSMutableDictionary *_1Untechable = [self getUntechable:0];
-    if( YES && _1Untechable != nil){
+    BOOL hasInit = NO;
+    BOOL isDir;
+    NSFileManager *fm = [NSFileManager defaultManager];
 
-        outputFileURL = [NSURL fileURLWithPath:[_1Untechable objectForKey:@"recFileURL"]];
+    if(![fm fileExistsAtPath:untechablePath isDirectory:&isDir])
+    {
+        if([fm createDirectoryAtPath:untechablePath withIntermediateDirectories:YES attributes:nil error:nil]){
+            NSLog(@"New Directory Created");
+            
+           [self setOrSaveVars:SAVE];
+            
+            hasInit = YES;
+        }
+        else{
+            NSLog(@"Directory Creation Failed");
+        }
     }
     else {
-    
-        NSString *dirName = untechablePath;
-        
-        BOOL isDir;
-        NSFileManager *fm = [NSFileManager defaultManager];
-        if(![fm fileExistsAtPath:dirName isDirectory:&isDir])
-        {
-            if([fm createDirectoryAtPath:dirName withIntermediateDirectories:YES attributes:nil error:nil]){
-                NSLog(@"Directory Created");
-               [self addEditDicForUntechable:ADD_UNTECHABLE];
-            }
-            else{
-                NSLog(@"Directory Creation Failed");
-            }
-        }
-        else {
-            NSLog(@"Directory Already Exist");
-           [self addEditDicForUntechable:EDIT_UNTECHABLE];
-        }
-        
-        
-        
-        
-        NSString *fileName = [NSString stringWithFormat:@"%@%@", uniqueId, REC_FORMATE];
-
-        // Set the audio file
-        NSArray *pathComponents = [NSArray arrayWithObjects:
-                                   untechablePath,
-                                   fileName,
-                                   nil];
-        outputFileURL = [NSURL fileURLWithPathComponents:pathComponents];
+        NSLog(@"Directory Already Exist");
+       [self setOrSaveVars:SET];
+        hasInit = YES;
     }
-    return outputFileURL;
+    
+    return hasInit;
 }
 
-
--(void)addEditDicForUntechable:(NSString *)addEdit{
+/*
+    if setOrSAve: SAVE
+    save instance variables into dic, then save that dic into .piecs file
+ 
+    else if setOrSAve: SAVE
+    get dic( must have untechablePath ) , then update instance variables a/c .pieces file
+ */
+-(void)setOrSaveVars:(NSString *)setOrSAve
+{
     
-    if( [addEdit isEqualToString:ADD_UNTECHABLE] ) {
+    if( [setOrSAve isEqualToString:SAVE] ) {
         
-        piecesFile = [untechablePath stringByAppendingPathComponent:@"/untechable.pieces"];
-        
+        piecesFile = [untechablePath stringByAppendingPathComponent:[NSString stringWithFormat:@"/%@", PIECES_FILE]];
         
         dic = [[NSMutableDictionary alloc] init];
 
+        dic[@"userId"] = userId;
+        dic[@"uniqueId"]    =   uniqueId;
+        dic[@"untechablePath"]  =   untechablePath;
+        dic[@"hasFbPermission"] = hasFbPermission ? @"YES" : @"NO";
+        dic[@"hasTwitterPermission"] = hasTwitterPermission ? @"YES" : @"NO";
+        dic[@"hasLinkedinPermission"] = hasLinkedinPermission ? @"YES" : @"NO";
         
-        //Create Dictionary for this untechable
-        NSMutableDictionary *imageDetailDictionary = [[NSMutableDictionary alloc] init];
-        imageDetailDictionary[@"userId"] = userId;
-        imageDetailDictionary[@"spendingTimeTxt"] = spendingTimeTxt;
-        imageDetailDictionary[@"startDate"] = startDate;
-        imageDetailDictionary[@"endDate"] = endDate;
-        imageDetailDictionary[@"hasEndDate"] = hasEndDate ? @"YES" : @"NO";
+        dic[@"spendingTimeTxt"] = spendingTimeTxt;
+        dic[@"startDate"] = startDate;
+        dic[@"endDate"] = endDate;
+        dic[@"hasEndDate"] = hasEndDate ? @"YES" : @"NO";
         
-        imageDetailDictionary[@"forwardingNumber"] = forwardingNumber;
-        imageDetailDictionary[@"emergencyNumbers"] = emergencyNumbers;
-        imageDetailDictionary[@"emergencyContacts"] = emergencyContacts;
-        
-        [dic setValue:imageDetailDictionary forKey:@"dic"];
+
+        dic[@"forwardingNumber"] = forwardingNumber;
+        dic[@"emergencyNumbers"] = emergencyNumbers;
+        dic[@"emergencyContacts"] = emergencyContacts;
+        dic[@"hasRecording"] = hasRecording ? @"YES" : @"NO";
+
         
         //Here we write the dictionary of .peices files
         [dic writeToFile:piecesFile atomically:YES];
-        
-        
-        NSLog(@"%@",[dic objectForKey:@"dic"]);
-        
-        NSLog(@"%@",[dic objectForKey:@"dic"]);
-        
 
     }
-    else if( [addEdit isEqualToString:EDIT_UNTECHABLE] ) {
-        piecesFile = [untechablePath stringByAppendingString:[NSString stringWithFormat:@"/untechable.pieces"]];
+    else if( [setOrSAve isEqualToString:SET] ) {
+        
+        piecesFile = [untechablePath stringByAppendingString:[NSString stringWithFormat:@"/%@", PIECES_FILE]];
         dic = [[NSMutableDictionary alloc] initWithContentsOfFile:piecesFile];
-
+        
+        
+        //Settings
+        userId = dic[@"userId"];
+        uniqueId = dic[@"uniqueId"];
+        untechablePath = dic[@"untechablePath"];
+        hasFbPermission       = ([dic[@"hasFbPermission"] isEqualToString:@"YES"]) ? YES : NO;
+        hasTwitterPermission  = ([dic[@"hasTwitterPermission"] isEqualToString:@"YES"]) ? YES : NO;
+        hasLinkedinPermission = ([dic[@"hasLinkedinPermission"] isEqualToString:@"YES"]) ? YES : NO;
+        
+        
+        //1-vars for screen1
+        spendingTimeTxt =   dic[@"spendingTimeTxt"];
+        hasEndDate = ([dic[@"hasEndDate"] isEqualToString:@"YES"]) ? YES : NO;
+        
+        //2-vars for screen2
+        forwardingNumber  = dic[@"forwardingNumber"];
+        emergencyNumbers  = dic[@"emergencyNumbers"];
+        emergencyContacts = dic[@"emergencyContacts"];
+        hasRecording = ([dic[@"hasRecording"] isEqualToString:@"YES"]) ? YES : NO;
     }
+    
+    NSLog(@"dic: %@", dic);
 }
 
 
@@ -230,50 +228,43 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
 }
 
 /*
- * Here we Getting flyer directories which name are timestamp
- * return
- *      Decending Sorted Array
+ * Here we get the dictionary of saved untechable
  */
-- (NSMutableDictionary *)getUntechable:(int)count{
-    
+- (NSMutableDictionary *)getUntechable:(int)count
+{
     NSMutableDictionary *retDic;
-
 	NSString *userPath = [self getUserPath];
     
     
     //List of folder names create for this userid
     NSArray *UntechablesList = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:userPath error:nil];
+    //sort list
+    NSArray *sortedList = [UntechablesList sortedArrayUsingFunction:compareDesc context:NULL];
     
-    NSArray *sortedFlyersList = [UntechablesList sortedArrayUsingFunction:compareDesc context:NULL];
+    NSString *uniqueId_temp,*untechablePath_temp;
     
-    NSString *folderName,*folderPath;
-   // NSMutableArray *recentFlyers = [[NSMutableArray alloc] init];
-    
-    
-    for(int i = 0 ; i < sortedFlyersList.count ;i++)
+    for(int i = 0 ; i < sortedList.count ;i++)
     {
-        folderName = sortedFlyersList[i];
-        folderPath = [NSString stringWithFormat:@"%@/%@",userPath,folderName];
+        uniqueId_temp = sortedList[i];
+        untechablePath_temp = [NSString stringWithFormat:@"%@/%@",userPath,uniqueId];
 
         if ( count == i ) {
             retDic =   [[NSMutableDictionary alloc] init];
             
             //Checking For Integer Dir Names Only
-            if ([[NSScanner scannerWithString:folderName] scanInt:nil]) {
-                NSString *piecesF =[folderPath stringByAppendingString:[NSString stringWithFormat:@"/untechable.pieces"]];
+            if ([[NSScanner scannerWithString:uniqueId_temp] scanInt:nil]) {
+                NSString *piecesF =[untechablePath_temp stringByAppendingString:[NSString stringWithFormat:@"/%@", PIECES_FILE]];
                 retDic = [[NSMutableDictionary alloc] initWithContentsOfFile:piecesF];
-                [retDic setValue:folderName forKey:@"folderName"];
-                [retDic setValue:folderPath forKey:@"folderPath"];
-                [retDic setValue:[NSString stringWithFormat:@"%@/%@%@", folderPath,folderName,REC_FORMATE] forKey:@"recFileURL"];
+                [retDic setValue:uniqueId_temp forKey:@"uniqueId"];
+                [retDic setValue:untechablePath_temp forKey:@"untechablePath"];
+                //[retDic setValue:[NSString stringWithFormat:@"%@/%@%@", untechablePath_temp,uniqueId_temp,REC_FORMATE] forKey:@"recFileURL"];
                 
             }
-            
-            NSLog(@"lastFileName: %@",folderName);
-
             break;
         }
-        
     }
+    
+    NSLog(@"in fn getUntechable retDic: %@",retDic);
     
     return retDic;
 }

@@ -140,6 +140,8 @@
 -(void)updateUI
 {
 
+    [_cbNoEndDate setSelected:!(untechable.hasEndDate)];
+    
     [_lbl1S1 setTextColor:defGray];
     _lbl1S1.font = [UIFont fontWithName:APP_FONT size:14];
     
@@ -335,34 +337,79 @@
 #pragma mark -  Model funcs
 // set default vaules in model
 -(void)setDefaultModel{
+    
     //init object
     untechable  = [[Untechable alloc] init];
+    //Set Date formate
+    untechable.dateFormatter = [[NSDateFormatter alloc] init];
+    [untechable.dateFormatter setDateFormat:DATE_FORMATE_1];
+    //[untechable.dateFormatter setDateStyle:NSDateFormatterShortStyle];    // show short-style date format
+    //[untechable.dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
 
-    //init object with its default values
-    [untechable initObj];
-    
-    //Settings
     untechable.userId   = @"1";
-    untechable.uniqueId = [untechable getUniqueId];
     
-    untechable.untechablePath = [untechable getNewUntechablePath];
-    
-    //1-vars for screen1
-    untechable.hasEndDate = YES;
-    untechable.spendingTimeTxt = @"";
-    now1 = [[NSDate date] dateByAddingTimeInterval:(60*2)]; //current time + 2mint
-    now2 = [[NSDate date] dateByAddingTimeInterval:(60*120)]; //current time + 2hr
-    
-    untechable.startDate = [untechable.dateFormatter stringFromDate:now1];
-    untechable.endDate   = [untechable.dateFormatter stringFromDate:now2];
 
-    [_cbNoEndDate setSelected:!(untechable.hasEndDate)];
+    BOOL isNew = YES;
+    int showThisUntechable = 0;
     
-    //2-vars for screen2
-    untechable.forwardingNumber  = @"";
-    untechable.emergencyNumbers  = @"";
-    untechable.emergencyContacts = [[NSMutableDictionary alloc] init];
-    untechable.recPath           = @"";
+    NSMutableDictionary *sUntechable; //Selected Untechable
+    
+    if( showThisUntechable > -1 ) {
+        sUntechable = [untechable getUntechable: showThisUntechable ];
+        
+        if( sUntechable != nil ){
+            isNew = NO;
+        }
+    }
+    
+    if( isNew == NO ){
+
+        //Settings
+        untechable.uniqueId = sUntechable[@"uniqueId"];
+        untechable.untechablePath = sUntechable[@"untechablePath"];
+        
+        //-----------------{--
+        now1 = [[NSDate date] dateByAddingTimeInterval:(60*2)]; //current time + 2mint
+        now2 = [[NSDate date] dateByAddingTimeInterval:(60*120)]; //current time + 2hr
+        
+        untechable.startDate = [untechable.dateFormatter stringFromDate:now1];
+        untechable.endDate   = [untechable.dateFormatter stringFromDate:now2];
+        //-----------------}--
+        
+        [untechable initUntechableDirectory];
+    }
+    //New
+    else {
+        
+        //Settings
+        untechable.uniqueId = [untechable getUniqueId];
+        untechable.untechablePath = [untechable getNewUntechablePath];
+        
+        untechable.hasFbPermission          = NO;
+        untechable.hasTwitterPermission     = NO;
+        untechable.hasLinkedinPermission    = NO;
+        
+        
+        //1-vars for screen1
+        untechable.spendingTimeTxt = @"";
+        now1 = [[NSDate date] dateByAddingTimeInterval:(60*2)]; //current time + 2mint
+        now2 = [[NSDate date] dateByAddingTimeInterval:(60*120)]; //current time + 2hr
+        
+        untechable.startDate = [untechable.dateFormatter stringFromDate:now1];
+        untechable.endDate   = [untechable.dateFormatter stringFromDate:now2];
+        
+        untechable.hasEndDate = YES;
+        
+        //2-vars for screen2
+        untechable.forwardingNumber  = @"";
+        untechable.emergencyNumbers  = @"";
+        untechable.emergencyContacts = [[NSMutableDictionary alloc] init];
+        untechable.hasRecording = NO;
+        
+        [untechable initUntechableDirectory];
+        
+    }
+    
 }
 
 - (IBAction)noEndDate:(id)sender {

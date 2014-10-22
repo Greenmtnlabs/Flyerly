@@ -42,6 +42,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    [untechable setOrSaveVars:SAVE];
+    
     [self setNavigationDefaults];
     [self setNavigation:@"viewDidLoad"];
     
@@ -68,6 +70,11 @@
     [untechable printNavigation:[self navigationController]];
     
 }
+-(void)viewWillAppear:(BOOL)animated {
+    
+    [untechable setOrSaveVars:SAVE];
+}
+
 /*
  Hide keyboard on done button of keyboard press
  */
@@ -219,6 +226,9 @@
 }
 
 -(void)onFinish{
+    
+    [untechable setOrSaveVars:SAVE];
+    
     [self setNextHighlighted:NO];
     [self.navigationController popToRootViewControllerAnimated:YES];
     // Remove observers

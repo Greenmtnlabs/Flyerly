@@ -76,7 +76,10 @@
     [self.keyboardControls setDelegate:self];
     
 }
+
 -(void)viewWillAppear:(BOOL)animated {
+    
+    [untechable setOrSaveVars:SAVE];
     
     [self setDefaultModel];
     

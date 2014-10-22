@@ -39,7 +39,7 @@
     [stopButton setEnabled:NO];
     [playButton setEnabled:NO];
     
-    NSURL *outputFileURL = [untechable getEventDirectoryUrl];
+    NSURL *outputFileURL = [NSURL URLWithString:[untechable getRecFilePath]];
     
     // Setup audio session
     AVAudioSession *session = [AVAudioSession sharedInstance];
@@ -100,6 +100,9 @@
         
         AVAudioSession *audioSession = [AVAudioSession sharedInstance];
         [audioSession setActive:NO error:nil];
+        
+        untechable.hasRecording = YES;
+        
     }
     else if ( playTimer != nil ) {
         [player stop];

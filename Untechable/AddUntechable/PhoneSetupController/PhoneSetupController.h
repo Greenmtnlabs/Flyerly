@@ -10,8 +10,9 @@
 #import "Untechable.h"
 #import <AddressBookUI/AddressBookUI.h>
 #import <AddressBook/AddressBook.h>
+#import "BSKeyboardControls.h"
 
-@interface PhoneSetupController : UIViewController < UITableViewDataSource, UITextFieldDelegate >
+@interface PhoneSetupController : UIViewController < UITableViewDataSource, UITextFieldDelegate , BSKeyboardControlsDelegate >
 {
     UILabel *titleLabel;
     UIButton *helpButton;

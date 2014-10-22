@@ -55,6 +55,11 @@
     [self.keyboardControls setDelegate:self];
 }
 
+-(void)viewWillAppear:(BOOL)animated {
+    
+    [untechable setOrSaveVars:SAVE];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

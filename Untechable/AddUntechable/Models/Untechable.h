@@ -36,16 +36,20 @@
 //2-vars for screen2
 @property (strong, nonatomic)  NSString *forwardingNumber, *emergencyNumbers;
 @property (strong, nonatomic)  NSMutableDictionary *emergencyContacts;
-@property (strong, nonatomic)  NSString *recPath;
+@property (nonatomic, assign) BOOL hasRecording;
 
--(void)initObj;
+
+
 -(NSDate *)stringToDate:(NSString *)inputStrFormate dateString:(NSString *)dateString;
 -(void)printNavigation:navigationControllerPointer;
 -(void)goBack:navigationControllerPointer;
 
 
 -(NSString *)getNewUntechablePath;
-- (NSString *)getUniqueId;
--(NSURL *)getEventDirectoryUrl;
+-(NSString *)getRecFilePath;
+-(NSString *)getUniqueId;
+-(BOOL)initUntechableDirectory;
+-(NSMutableDictionary *)getUntechable:(int)count;
+-(void)setOrSaveVars:(NSString *)setOrSAve;
 
 @end
