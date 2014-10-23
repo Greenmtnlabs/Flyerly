@@ -171,7 +171,7 @@
     } else {
         CGFloat maxHeight = 568.0;
         
-        if ( IS_IPHONE ) {
+        if ( IS_IPHONE_4 ) {
             maxHeight = 480;
         }
         

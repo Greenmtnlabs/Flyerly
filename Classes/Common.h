@@ -174,9 +174,10 @@ nil]
 
 #define HEIGHT_ARRAY [NSArray arrayWithObjects: @"50", @"75" ,@"100",@"120",@"140",@"160",@"175",@"200",@"220",@"240",@"260",@"300",@"320",nil]
 
-#define HEIGHT_IPHONE_5 568
-#define IS_IPHONE   ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
-#define IS_IPHONE_5 ([[UIScreen mainScreen] bounds ].size.height == HEIGHT_IPHONE_5 )
+#define IS_IPHONE_4 (fabs((double)[[UIScreen mainScreen]bounds].size.height - (double)480) < DBL_EPSILON)
+#define IS_IPHONE_5 (fabs((double)[[UIScreen mainScreen]bounds].size.height - (double)568) < DBL_EPSILON)
+#define IS_IPHONE_6 (fabs((double)[[UIScreen mainScreen]bounds].size.height - (double)667) < DBL_EPSILON)
+#define IS_IPHONE_6_PLUS (fabs((double)[[UIScreen mainScreen]bounds].size.height - (double)736) < DBL_EPSILON)
 
 #define LAYER_ATTRIBUTE_SIZE @"Size"
 #define LAYER_ATTRIBUTE_COLOR @"Color"
