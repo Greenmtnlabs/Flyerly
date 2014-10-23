@@ -2,7 +2,7 @@
  * This module is responsible for handling Events Operations.
  * Assigned the twillio number and save that number in a database
  * for given appropriate userId
- * @mraheelmateen
+ * @mraheelmateen 
  */
 // Reference to the module to be exported
 Twillio = module.exports = {};
@@ -19,54 +19,79 @@ Twillio.setup = function(app) {
     // Our logger for logging to file and console
     var logger = require(__dirname + '/../logger');
     
-    // Get the request
+	// Get the request
     app.get('/get-forwading-number', function(req, res) {
 
-        // Our logger for logging to file and console
+		function retError1( res, error, lineNum ) {
+			var responseJSON = {};
+			responseJSON.status = 'FAIL';
+			responseJSON.message = JSON.stringify(error);
+			responseJSON.message4Dev = "Error: Twillio.js, twillio.save line#: "+lineNum+", error: " + responseJSON.message;
+	        logger.error( responseJSON.error4Dev );
+	        res.jsonp(200, responseJSON);
+		}
+	
+		function retSuccess1( res, eventID, number , line) {
+			var responseJSON = {};
+			responseJSON.status = 'OK';
+	        responseJSON.message = 'Succesfully get the number';
+	        responseJSON.message4Dev = "Success: Twillio.js, twillio.save line#: "+line;
+			responseJSON.eventID = eventID;
+	        responseJSON.number = number;
+	    	// Response to request.
+			res.jsonp(200, responseJSON);
+		}
+		
+		function print( msg ){
+			console.log( msg );
+		}
+		
+		
+		var twilioTestingNumber = "+16464551382";
+		
+	    // Our logger for logging to file and console
         var logger = require(__dirname + '/../logger');
-
-        // Construct response JSON
-        var responseJSON = {};
 
         // Var for Events models
         var Events = require(__dirname + '/../models/Events');
 
+		var params  = req.query;
+
         // Object of the model
-        var event = new Events();
-
-        // Fetch the Get object
-        var data = req.query;
-
+        var event = new Events( {
+					  "userId" : params.userId
+					});
+		   	 
+		print("CL-Line#66 event obj: ", event); 
+		
         // If Object is not null
-        if (data.userId) {
-
-            // Set the User Id
-            event.userId = data.userId;
-
-            // save User event
-            event.save(function(error, e) {
+        if ( event.userId ) {
+			
+			
+			event.save(function (error) {
+				
+				print("CL-Line#66 event obj: ", event); 
 				
                 if (error) {
-                    logger.error(JSON.stringify(error));
-                    return;
+					retError1( res, error, 70);
                 } 
 				else {
+					retSuccess1( res, event._id, twilioTestingNumber , 98);
 					
-	                // Var for Twilio models
+					/*
+	                
+					// Var for Twilio models
 	                var Twillio = require(__dirname + '/../models/Twillio');
-
+					var twillio = new Twillio();
 	                // Check the number in the Database
-	                Twillio.findOne({
+	                twillio.findOne({
 	                    status: 'FREE'
 	                }, function(error, obj) {
 
 	                    if ( error ) {
-	                        responseJSON.status = 'FAIL';
-	                        res.jsonp(200, responseJSON);
-	                        return;
-	                    }
+	                        retError1( res, error, 83);
+	                    }						
 	                    else if( obj != null ) {
-
 	                        // Set the property of object
 	                        obj.status = 'IN_USE';
 	                        obj.assignedTo = event._id;
@@ -75,26 +100,33 @@ Twillio.setup = function(app) {
 	                        obj.save(function(error, t) {
 
 	                            if (error) {
-	                                logger.error( "err1 in Twillio.js:" + JSON.stringify(error) );
-			                        
-									responseJSON.status = 'FAIL';
-									responseJSON.error = JSON.stringify(error);
-			                        res.jsonp(200, responseJSON);
-			                        return;
-
+									retError1( res, error, 112);
 	                            } else{
-		                            responseJSON.status  = 'OK';
-		                            responseJSON.message = 'Succesfully get the number';
-		                            responseJSON.eventID = event._id;
-		                            responseJSON.number  = num.number;
-		                            // Response to request.
-		                            res.jsonp(200, responseJSON);
+									retSuccess1( res, event._id, obj.number , 114);
 								}
 	                        });
 
 
 	                        // If we request the server to new number
-	                    } 
+	                    }
+						//Rufi created code for obj == null						
+	                    else if( obj == null ) {
+							
+							twillio.number		= twilioTestingNumber;
+	                        twillio.status 		= 'IN_USE';
+	                        twillio.assignedTo 	= event._id;
+							
+				            twillio.save(function(error, e) {
+				
+				                if (error) {
+									retError1( res, error, 95);
+				                } 
+								else { 
+									retSuccess1( res, event._id, twillio.number , 98);
+									 }
+							});
+							
+						}
 						else {
 
 	                        // Object of the model
@@ -105,20 +137,11 @@ Twillio.setup = function(app) {
 	                        request(config.urls.getForwadingNumUrl, function(error, response, body) {
 
 	                            if( error ){
-	                                logger.error( "error2 in Twillio.js:" + JSON.stringify(error) );
-			                        
-									responseJSON.status = 'FAIL';
-									responseJSON.error = JSON.stringify(error);
-			                        res.jsonp(200, responseJSON);
-			                        return;
+	                                retError1( res, error, 131);
 	                            }
 								else if ( response.statusCode != 200 ) {
-	                                logger.error( "error3 in Twillio.js: response.statusCode != 200" );
-			                        
-									responseJSON.status = 'FAIL';
-									responseJSON.error = "error3 in Twillio.js: response.statusCode != 200";
-			                        res.jsonp(200, responseJSON);
-			                        return;
+									retError1( res, "error3 in Twillio.js: response.statusCode != 200", 134);
+									
 								}
 								else if ( response.statusCode == 200 ) {
 
@@ -142,17 +165,10 @@ Twillio.setup = function(app) {
 	                                twillio.save(function(err, twillio) {
 
 	                                    if (err) {
-	                                        logger.error(JSON.stringify(err));
-	                                        return;
+	                                        retError1( res, error, 159);
 	                                    }
 										else {
-		                                    responseJSON.status = 'OK';
-		                                    responseJSON.message = 'Succesfully get the number';
-		                                    responseJSON.eventID = event._id;
-		                                    responseJSON.number = num.number;
-										
-	                                    	// Response to request.
-											res.jsonp(200, responseJSON);
+		                                    retSuccess1( res, eventID, number , 162);
 										}
 										
 	                                });
@@ -164,23 +180,20 @@ Twillio.setup = function(app) {
 
 
 	                    }
+									
+						
 	                });
+					
+					*/
 				}
-
-
             });
 
-        } else {
-
-            responseJSON.status = 'FAIL';
-            responseJSON.message = 'Sorry ! try again';
-            // Response to client.
-            res.jsonp(200, responseJSON);
-        }
-
-
-
-
+        } 		
+		else{
+			console.log("CL-Line#194, params data: ", data);			
+			retError1( res, "userId not found", 183 );
+		}
+		
     });
 
 }

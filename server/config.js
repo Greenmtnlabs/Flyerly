@@ -36,25 +36,30 @@ config.crons = {}
 config.crons.cron1 = 1;
 
 
+// Db Configuration
+config.db = {}
+//config.db.host =  'mongodb://admin:untechable@ds043180.mongolab.com:43180/untechable';//M.Zeshan A/c
+config.db.modelVersion = 1.0;
+
 
 // Check if we are on local host
 if( config.app.mode.current == config.app.mode.LOCALHOST  ) {
 	config.http.port = 3000;
  	// 1-Database setting
- 	config.db.host =  '';	
+	config.db.host =  'mongodb://admin:untechable@ds047930.mongolab.com:47930/untechable';
 	config.http.host	=	'http://localhost:3001';
 	
 }
 else if( config.app.mode.current == config.app.mode.PRODUCTION  ) {
 	config.http.port = 80;
 	// 1-Database setting
-	config.db.host =  '';	
+	config.db.host =  'mongodb://admin:untechable@ds047930.mongolab.com:47930/untechable';
 	config.http.host	=	'http://api.typepath.com';
 } 
 else if( config.app.mode.current == config.app.mode.DEVELOPMENT  ) {
 	config.http.port = 3000;
 	// 1-Database setting
-	//config.db.host =  '';	
+	config.db.host =  'mongodb://admin:untechable@ds047930.mongolab.com:47930/untechable';
 	config.http.host	=	'http://localhost:3000';
 }
 
@@ -69,11 +74,6 @@ config.twilio = {};
 config.twilio.accountSid = 'ACece60cc985b5c0558faeb7ff554bbef2';
 config.twilio.authToken = '7f0988c2ff41a130ad850f47e6dd1d6d';
 config.twilio.tokenExpiry = 604800;
-
-// Db Configuration
-config.db = {}
-config.db.host =  'mongodb://admin:untechable@ds043180.mongolab.com:43180/untechable';
-config.db.modelVersion = 1.0;
 
 //Urls of apis
 config.urls = {};

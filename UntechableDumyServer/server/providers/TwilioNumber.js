@@ -43,7 +43,7 @@ TwillioNumber.setup = function(app) {
 	    number :myArray[0]
         });
 	
-	myArray.splice(0, 1);
+		myArray.splice(0, 1);
 
 
     });
