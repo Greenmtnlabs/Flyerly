@@ -238,6 +238,8 @@
 
 -(void)onNext{
 
+    [self storeSceenVarsInDic];
+    
     [self setNextHighlighted:NO];
     
     BOOL goToNext = YES;
@@ -247,7 +249,6 @@
         recordController = [[RecordController alloc]initWithNibName:@"RecordController" bundle:nil];
         recordController.untechable = untechable;
         [self.navigationController pushViewController:recordController animated:YES];
-       [self storeSceenVarsInDic];
     }
     /*
         SocialnetworkController *socialnetwork;
@@ -301,7 +302,6 @@
     [self.inputLocation setText:untechable.location];
 
     
-    
     [_lblEmergencyNumber setTextColor:defGray];
     _lblEmergencyNumber.font = [UIFont fontWithName:APP_FONT size:20];
     
@@ -309,6 +309,7 @@
     [self.inputEmergencyNumber setTextColor:defGreen];
     self.inputEmergencyNumber.font = [UIFont fontWithName:APP_FONT size:16];
     self.inputEmergencyNumber.delegate = self;
+    [self.inputEmergencyNumber setText:untechable.emergencyNumbers];
     
     if( ![untechable.forwardingNumber isEqualToString:@""] )
     [self.inputEmergencyNumber setText:untechable.emergencyNumbers];
@@ -416,12 +417,8 @@
         
         
         //6
-        //NSString *txt = [NSString stringWithFormat:@"My friend name %i", indexPath.row ];
-        //NSString *number = [arrayOfValues objectAtIndex:indexPath.row];
-        NSString *number = [arrayOfKeys objectAtIndex:indexPath.row];
-        NSString *name = [untechable.emergencyContacts objectForKey:number];
-       
-        
+        NSString *name = [arrayOfKeys objectAtIndex:indexPath.row];
+        NSString *number = [untechable.emergencyContacts objectForKey:name];
         
         //7
         [cell.textLabel setText:name];

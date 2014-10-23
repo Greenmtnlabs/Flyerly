@@ -61,8 +61,6 @@
 #pragma mark  Custom Methods
 
 -(void)initContactsDic{
-    //self.selectedContacts = nil;
-    //self.selectedContacts = [[NSMutableDictionary alloc] init];
     self.selectedContacts   =   untechable.emergencyContacts;
 }
 - (void)setNavigationDefaults{
@@ -114,15 +112,9 @@
     }
 }
 
-
-
-
-
-
 - (BOOL)ckeckExistContact:(NSString *)identifier{
     for(id key in selectedContacts) {
-        //if ([identifier isEqualToString:[selectedContacts objectForKey:key]])
-        if ([identifier isEqualToString:key]) {
+        if ([identifier isEqualToString:[selectedContacts objectForKey:key]]){
             return YES;
         }
     }
@@ -139,13 +131,6 @@
     untechable.emergencyContacts = selectedContacts;
 
     [untechable goBack:self.navigationController];
-    
-    /*
-    if([selectedContacts count] > 0){
-    } else {
-        [commonFunctions showAlert:@"Please select any contact to invite !" message:@""];
-    }
-    */
 }
 
 -(void)btnBackTouchStart{
@@ -409,14 +394,14 @@
         if (model.status == CHECKBOX_EMPTY ) {
             
             [model setInvitedStatus:CHECKBOX_TICK];
-            [selectedContacts setObject:model.name forKey:model.description];
+            [selectedContacts setObject:model.description forKey:model.name];
             
         }else if (model.status == CHECKBOX_TICK ) {
             
             [model setInvitedStatus:CHECKBOX_EMPTY];
             
             //REMOVE FROM SENDING LIST
-            [selectedContacts removeObjectForKey:model.description];
+            [selectedContacts removeObjectForKey:model.name];
         }
         
     }

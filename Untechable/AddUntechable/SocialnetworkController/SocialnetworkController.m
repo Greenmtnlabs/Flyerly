@@ -48,15 +48,15 @@
     
     //[self setDefaultModel];
     
-    [self updateUI];
-    
     NSArray *fields = @[ self.inputSetSocialStatus ];
     [self setKeyboardControls:[[BSKeyboardControls alloc] initWithFields:fields]];
     [self.keyboardControls setDelegate:self];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
+    [self updateUI];
 }
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -116,14 +116,15 @@
     [self.inputSetSocialStatus setTextColor:defGreen];
     self.inputSetSocialStatus.font = [UIFont fontWithName:APP_FONT size:16];
     self.inputSetSocialStatus.delegate = self;
+    [self.inputSetSocialStatus setText:untechable.socialStatus];
     
-    [self.btnFacebook setTitleColor:defGray forState:UIControlStateNormal];
+    [self.btnFacebook setTitleColor:( [untechable.fbAuth isEqualToString:@""] ? defGray : defGreen ) forState:UIControlStateNormal];
     self.btnFacebook.titleLabel.font = [UIFont fontWithName:APP_FONT size:20];
     
-    [self.btnTwitter setTitleColor:defGray forState:UIControlStateNormal];
+    [self.btnTwitter setTitleColor:( [untechable.twitterAuth isEqualToString:@""] ? defGray : defGreen ) forState:UIControlStateNormal];
     self.btnTwitter.titleLabel.font = [UIFont fontWithName:APP_FONT size:20];
     
-    [self.btnLinkedin setTitleColor:defGray forState:UIControlStateNormal];
+    [self.btnLinkedin setTitleColor:( [untechable.linkedinAuth isEqualToString:@""] ? defGray : defGreen ) forState:UIControlStateNormal];
     self.btnLinkedin.titleLabel.font = [UIFont fontWithName:APP_FONT size:20];
 }
 #pragma mark -  Navigation functions
@@ -226,6 +227,8 @@
     BOOL goToNext = YES;
     
     if( goToNext ) {
+        [self storeSceenVarsInDic];
+        
         EmailSettingController *emailSettingController;
         emailSettingController = [[EmailSettingController alloc]initWithNibName:@"EmailSettingController" bundle:nil];
         emailSettingController.untechable = untechable;
@@ -233,6 +236,11 @@
     }
 }
 
+-(void)storeSceenVarsInDic
+{
+    untechable.socialStatus = _inputSetSocialStatus.text;
+    [untechable setOrSaveVars:SAVE];
+}
 
 
 

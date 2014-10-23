@@ -298,7 +298,11 @@
     //[untechable.dateFormatter setDateStyle:NSDateFormatterShortStyle];    // show short-style date format
     //[untechable.dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
 
+    //For testing -------- { --
     untechable.userId   = @"1";
+    untechable.eventId = @"5448e76a55c04a3f0e000001";
+    //For testing -------- } --
+    
     
 
     BOOL isNew = YES;
@@ -334,6 +338,11 @@
     
     
     [untechable initUntechableDirectory];
+    
+    //For testing -------- { --
+    untechable.userId   = @"1";
+    untechable.eventId = @"5448e76a55c04a3f0e000001";
+    //For testing -------- } --
 }
 
 

@@ -302,7 +302,6 @@
 				366ECD7F19D317E200F71A11 /* Config */,
 				3663932219D6A0A700512965 /* CommonFunctions */,
 				366ECD7519D2D24600F71A11 /* AddUntechable */,
-				36B0369F19DAF3E400E8CD21 /* EmailSettingController */,
 				36561D7D19D2C8A40069D897 /* Images.xcassets */,
 			);
 			path = Untechable;
@@ -355,6 +354,7 @@
 				366ECD8619D322D700F71A11 /* AddUntechableController */,
 				366ECD8719D322F800F71A11 /* PhoneSetupController */,
 				36524AED19D9409C006DCAAF /* SocialnetworkController */,
+				36B0369F19DAF3E400E8CD21 /* EmailSettingController */,
 			);
 			name = AddUntechable;
 			sourceTree = "<group>";

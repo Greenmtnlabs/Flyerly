@@ -18,4 +18,5 @@
 
 -(void)deleteKeyFromDic:dic delKeyAtIndex:(int)rowNumber;
 -(void)showAlert:(NSString *)title message:(NSString *)message;
+-(NSString *)convertDicIntoJsonString:(NSMutableDictionary *)value;
 @end

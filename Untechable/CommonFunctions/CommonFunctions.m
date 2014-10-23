@@ -50,6 +50,12 @@
                                           otherButtonTitles:nil];
     [alert show];
 }
+-(NSString *)convertDicIntoJsonString:(NSMutableDictionary *)value
+{
+    NSError *writeError = nil;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:value options:NSJSONWritingPrettyPrinted error:&writeError];
+    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    NSLog(@"JSON Output: %@", jsonString);
+    return jsonString;
+}
 @end
-
-	

@@ -16,14 +16,18 @@
 //Settings
 @synthesize dic, piecesFile, userId, uniqueId, eventId, untechablePath, dateFormatter;
 
-//0-Phone permissions vars
-@synthesize hasFbPermission, hasTwitterPermission, hasLinkedinPermission;
-
 //1-vars for screen1
 @synthesize spendingTimeTxt, startDate, endDate, hasEndDate;
 
 //2-vars for screen2
 @synthesize forwardingNumber, location, emergencyContacts, emergencyNumbers, hasRecording;
+
+//3-vars for screen3
+@synthesize socialStatus, fbAuth, twitterAuth, linkedinAuth;
+
+//4-vars for screen4
+@synthesize email, password, respondingEmail;
+
 
 -(NSDate *)stringToDate:(NSString *)inputStrFormate dateString:(NSString *)dateString{
         NSLog(@"dateString is %@", dateString);
@@ -166,22 +170,30 @@
         dic[@"uniqueId"]    =   uniqueId;
         dic[@"eventId"]    =   eventId;
         dic[@"untechablePath"]  =   untechablePath;
-        dic[@"hasFbPermission"] = hasFbPermission ? @"YES" : @"NO";
-        dic[@"hasTwitterPermission"] = hasTwitterPermission ? @"YES" : @"NO";
-        dic[@"hasLinkedinPermission"] = hasLinkedinPermission ? @"YES" : @"NO";
-        
+
+        //Screen1 vars
         dic[@"spendingTimeTxt"] = spendingTimeTxt;
         dic[@"startDate"] = startDate;
         dic[@"endDate"] = endDate;
         dic[@"hasEndDate"] = hasEndDate ? @"YES" : @"NO";
         
-
+        //Screen2 vars
         dic[@"forwardingNumber"] = forwardingNumber;
         dic[@"location"] = location;
         dic[@"emergencyNumbers"] = emergencyNumbers;
         dic[@"emergencyContacts"] = emergencyContacts;
         dic[@"hasRecording"] = hasRecording ? @"YES" : @"NO";
 
+        //Screen3 vars
+        dic[@"socialStatus"] = socialStatus;
+        dic[@"fbAuth"] = fbAuth;
+        dic[@"twitterAuth"] = twitterAuth;
+        dic[@"linkedinAuth"] = linkedinAuth;
+        
+        //Screen4 vars
+        dic[@"email"] = email;
+        dic[@"password"] = password;
+        dic[@"respondingEmail"] = respondingEmail;
         
         //Here we write the dictionary of .peices files
         [dic writeToFile:piecesFile atomically:YES];
@@ -194,25 +206,35 @@
         
         
         //Settings
-        userId = dic[@"userId"];
-        uniqueId = dic[@"uniqueId"];
-        eventId =   dic[@"eventId"];
+        userId         = dic[@"userId"];
+        uniqueId       = dic[@"uniqueId"];
+        eventId        = dic[@"eventId"];
         untechablePath = dic[@"untechablePath"];
-        hasFbPermission       = ([dic[@"hasFbPermission"] isEqualToString:@"YES"]) ? YES : NO;
-        hasTwitterPermission  = ([dic[@"hasTwitterPermission"] isEqualToString:@"YES"]) ? YES : NO;
-        hasLinkedinPermission = ([dic[@"hasLinkedinPermission"] isEqualToString:@"YES"]) ? YES : NO;
         
         
-        //1-vars for screen1
-        spendingTimeTxt =   dic[@"spendingTimeTxt"];
-        hasEndDate = ([dic[@"hasEndDate"] isEqualToString:@"YES"]) ? YES : NO;
+        //Screen1 vars
+        spendingTimeTxt = dic[@"spendingTimeTxt"];
+        hasEndDate      = ([dic[@"hasEndDate"] isEqualToString:@"YES"]) ? YES : NO;
         
-        //2-vars for screen2
+        //Screen2 vars
         forwardingNumber  = dic[@"forwardingNumber"];
-        location   = dic[@"location"];
+        location          = dic[@"location"];
         emergencyNumbers  = dic[@"emergencyNumbers"];
         emergencyContacts = dic[@"emergencyContacts"];
-        hasRecording = ([dic[@"hasRecording"] isEqualToString:@"YES"]) ? YES : NO;
+        hasRecording      = ([dic[@"hasRecording"] isEqualToString:@"YES"]) ? YES : NO;
+        
+        //Screen3 vars
+        socialStatus = dic[@"socialStatus"];
+        fbAuth       = dic[@"fbAuth"];
+        twitterAuth  = dic[@"twitterAuth"];
+        linkedinAuth = dic[@"linkedinAuth"];
+
+        
+        //Screen3 vars
+        email           = dic[@"email"];
+        password        = dic[@"password"];
+        respondingEmail = dic[@"respondingEmail"];
+        
     }
     
     //NSLog(@"dic: %@", dic);
@@ -221,15 +243,9 @@
 {
     //Settings
     uniqueId = [self getUniqueId];
-    eventId = @"0";
     untechablePath = [self getNewUntechablePath];
     
-    hasFbPermission          = NO;
-    hasTwitterPermission     = NO;
-    hasLinkedinPermission    = NO;
-    
-    
-    //1-vars for screen1
+    //Screen1
     spendingTimeTxt = @"";
     /*
     now1 = [[NSDate date] dateByAddingTimeInterval:(60*2)]; //current time + 2mint
@@ -238,15 +254,28 @@
     startDate = [dateFormatter stringFromDate:now1];
     endDate   = [dateFormatter stringFromDate:now2];
     */
-    
     hasEndDate = YES;
     
-    //2-vars for screen2
+    
+    //Screen2
     forwardingNumber  = @"";
     location  = @"";
     emergencyNumbers  = @"";
     emergencyContacts = [[NSMutableDictionary alloc] init];
     hasRecording = NO;
+    
+    //Screen3
+    socialStatus = @"";
+    fbAuth       = @"";
+    twitterAuth  = @"";
+    linkedinAuth = @"";
+    
+    //Screen4
+    email           = @"";
+    password        = @"";
+    respondingEmail = @"";
+
+    
 }
 
 /*

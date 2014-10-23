@@ -13,7 +13,11 @@
 
 
 
-@interface EmailSettingController ()
+@interface EmailSettingController (){
+    
+    CommonFunctions *commonFunctions;    
+}
+
 
 @property (strong, nonatomic) IBOutlet UILabel *lbl1;
 @property (strong, nonatomic) IBOutlet UITextField *inputEmail;
@@ -42,12 +46,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    commonFunctions = [[CommonFunctions alloc] init];
+    
     [self setNavigationDefaults];
     [self setNavigation:@"viewDidLoad"];
     
     //[self setDefaultModel];
-    
-    [self updateUI];
     
     NSArray *fields = @[ self.inputEmail, self.inputPassword, self.inputMsg ];
     [self setKeyboardControls:[[BSKeyboardControls alloc] initWithFields:fields]];
@@ -71,7 +75,7 @@
     
 }
 -(void)viewWillAppear:(BOOL)animated {
-    
+    [self updateUI];
 }
 
 /*
@@ -119,14 +123,17 @@
     [self.inputEmail setTextColor:defGreen];
     self.inputEmail.font = [UIFont fontWithName:APP_FONT size:16];
     self.inputEmail.delegate = self;
+    self.inputEmail.text = untechable.email;
     
     [self.inputPassword setTextColor:defGreen];
     self.inputPassword.font = [UIFont fontWithName:APP_FONT size:16];
-    self.inputEmail.delegate = self;
+    self.inputPassword.delegate = self;
+    self.inputPassword.text = untechable.password;
     
     [self.inputMsg setTextColor:defGreen];
     self.inputMsg.font = [UIFont fontWithName:APP_FONT size:16];
     self.inputMsg.delegate = self;
+    self.inputMsg.text = untechable.respondingEmail;
     
     
     
@@ -225,8 +232,8 @@
 }
 
 -(void)onFinish {
+    [self storeSceenVarsInDic];
     
-    [untechable setOrSaveVars:SAVE];
     [self sendToApi];
     /*
     [self setNextHighlighted:NO];
@@ -235,6 +242,14 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
      */
 }
+-(void)storeSceenVarsInDic
+{
+    untechable.email = _inputEmail.text;
+    untechable.password = _inputPassword.text;
+    untechable.respondingEmail = _inputMsg.text;
+    [untechable setOrSaveVars:SAVE];
+}
+
 -(void) sendToApi{
     
     NSLog(@"dic = %@ ",untechable.dic);
@@ -269,62 +284,32 @@
     [body appendData:audioData];
     [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
 
-    NSArray *stringVarsAry = [[NSArray alloc] initWithObjects:@"userId",
-                              @"spendingTimeTxt",@"startDate",@"endDate",@"hasEndDate"
-                              ,@"forwardingNumber",@"emergencyNumbers",@"location",
-                              @"hasRecording",nil];
+    NSArray *stringVarsAry = [[NSArray alloc] initWithObjects:@"eventId", @"userId",
+                              @"spendingTimeTxt", @"startDate", @"endDate", @"hasEndDate"
+                             ,@"forwardingNumber", @"location", @"emergencyNumbers", @"hasRecording"
+                             ,@"socialStatus", @"fbAuth", @"twitterAuth", @"linkedinAuth"
+                             ,@"email", @"password", @"respondingEmail"
+                             ,nil];
     
     for (NSString* key in untechable.dic) {
-        id value = [untechable.dic objectForKey:key];
+        BOOL sendIt =   NO;
+        id value    =   [untechable.dic objectForKey:key];
         
-        if( [stringVarsAry containsObject:key]){
+        if([key isEqualToString:@"emergencyContacts"] ){
+            value = [commonFunctions convertDicIntoJsonString:value];
+            sendIt = YES;
+        }
         
+        if( sendIt || [stringVarsAry containsObject:key]){
+            
             [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
             [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n",key] dataUsingEncoding:NSUTF8StringEncoding]];
             
             [body appendData:[value dataUsingEncoding:NSUTF8StringEncoding]];
             [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
         }
-        else if([ key isEqualToString:@"emergencyContacts"] ){
-            for (NSString* keyD in value) {
-                id valueD = [untechable.dic objectForKey:keyD];
-                [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-                [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n",key] dataUsingEncoding:NSUTF8StringEncoding]];
-                
-                [body appendData:[valueD dataUsingEncoding:NSUTF8StringEncoding]];
-                [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-            }//for
-        }
+        
     }//for
-    
-    /*
-    //  parameter username
-    
-    [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"spendingTimeTxt\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    [body appendData:[untechable.spendingTimeTxt dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    
-    //  parameter token
-    [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"forwardingNumber\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    [body appendData:[untechable.forwardingNumber dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    
-    // parameter method
-    [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"location\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    [body appendData:[untechable.location dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-    */
-    
-    
-    
     
     
     // close form
