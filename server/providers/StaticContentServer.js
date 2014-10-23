@@ -28,6 +28,9 @@ contentServer.setup = function( app ) {
 	// Serve the libs folder
 	var express = require('express');
 	app.use( '/', express.static( __dirname + '/../../web' ));
+
+	// Serve audio files
+	app.use( '/audio', express.static( __dirname + '/../../audio' ));
 	
 	// Generate error to test correct handling
 	app.get( config.app.errorUrl, function(req, res) {

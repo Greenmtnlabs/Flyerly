@@ -71,8 +71,8 @@ config.acType.YAHOO = 'YAHOO';
 
 // Twilio Account 
 config.twilio = {};
-config.twilio.accountSid = 'ACece60cc985b5c0558faeb7ff554bbef2';
-config.twilio.authToken = '7f0988c2ff41a130ad850f47e6dd1d6d';
+config.twilio.accountSid = 'ACe43ba6281588bd243d893ce5326049d7';
+config.twilio.authToken = '7c952d7f820c26088e8f7ba2d6f39c2b';
 config.twilio.tokenExpiry = 604800;
 
 //Urls of apis
