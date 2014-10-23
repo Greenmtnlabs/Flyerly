@@ -10,14 +10,15 @@ var db = require( __dirname + '/db' );
  */
 var eventsSchema = db.Schema({
 	// String vars 	
+	eventId : String ,
 	userId : String ,
 	spendingTimeTxt : String ,
 	startDate : String ,
 	endDate : String ,
 	hasEndDate : String ,
+	location : String ,	
 	forwardingNumber : String ,
 	emergencyNumbers : String ,
-	location : String ,
 	hasRecording : String ,
 	emergencyContacts: Object	
 });
