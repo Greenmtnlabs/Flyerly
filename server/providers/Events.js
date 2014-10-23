@@ -20,24 +20,25 @@ Events.setup = function(app) {
 
 	
 	// Get the request
-    app.post('/event/save', function(req, res) {
+    app.all('/event/save', function(req, res) {
 		
 		function retError1( res, error, lineNum ) {
 			var responseJSON = {};
 			responseJSON.status = 'FAIL';
 			responseJSON.message = JSON.stringify(error);
 			responseJSON.message4Dev = "Error: Twillio.js, twillio.save line#: "+lineNum+", error: " + responseJSON.message;
-	        logger.error( responseJSON.error4Dev );
+
+			//Log event
+	        logger.error( responseJSON.message4Dev );
+	    	// Response to request.
 	        res.jsonp(200, responseJSON);
 		}
 	
-		function retSuccess1( res, eventID, number , line) {
+		function retSuccess1( res ) {
 			var responseJSON = {};
 			responseJSON.status = 'OK';
-	        responseJSON.message = 'Succesfully get the number';
-	        responseJSON.message4Dev = "Success: Twillio.js, twillio.save line#: "+line;
-			responseJSON.eventID = eventID;
-	        responseJSON.number = number;
+	        responseJSON.message = 'Event updated successfully.';
+			
 	    	// Response to request.
 			res.jsonp(200, responseJSON);
 		}
@@ -75,10 +76,10 @@ Events.setup = function(app) {
 		};
 
 
-        console.log( "params: ", params.eventId );
+        console.log( "params: ", params );
 
 
-        if ( params.eventId ) {
+        if ( false && params.eventId ) {
             // update for the given event 
             Events.update({
                     _id: params.eventId
@@ -108,29 +109,29 @@ Events.setup = function(app) {
 
         }
 		else{
-			
+			retError1( res, "eventId not found.", __line );
 		}
-
 
     }); // end post
 	
+	app.all('/test-CommonFunctions', function(req, res) {		
+		var CommonFunctions = require( __dirname + '/CommonFunctions' );
+		CommonFunctions.print( "CommonFunctions.print: hello print");
+		res.jsonp(__line);
+				
+	});
 	
-	
-	/// Test save event
-	console.log('save1-live, config.http.host: ',config.http.host);
-
+	/*
 	function save(req,res){
 		console.log('/save1');
 
 		if( req.body.emergencyContacts )
 		req.body.emergencyContacts	= JSON.parse( req.body.emergencyContacts );
 		
-		/*
-		for(var attributename in emergencyContacts){
-		    console.log(attributename+": "+emergencyContacts[attributename]);
-		}
-		*/
-		
+		//for(var attributename in emergencyContacts){
+		  //  console.log(attributename+": "+emergencyContacts[attributename]);
+		//}
+	
 		var responseJSON = {
             status: "OK",
 			testObj:{a:1, 2:'b', c:"3"},
@@ -181,13 +182,7 @@ Events.setup = function(app) {
 	app.all('/save1', function(req, res) {
 		save(req,res);
 	});
-	
-	app.all('/test-CommonFunctions', function(req, res) {		
-		var CommonFunctions = require( __dirname + '/CommonFunctions' );
-		CommonFunctions.print( "CommonFunctions.print: hello print");
-		res.jsonp(__line);
-				
-	});
+	*/
 	
 
 }
