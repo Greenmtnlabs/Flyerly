@@ -10,5 +10,5 @@ pod 'Facebook-iOS-SDK', '3.14.1'
 
 # Pre-release versions:
 pod 'GPUImage', '0.1.4'
-pod 'NBUKit', '2.2.0'
-pod 'NBUImagePicker', '1.3.1' 
+pod 'NBUKit', '2.3.1'
+pod 'NBUImagePicker', '1.4.0'
