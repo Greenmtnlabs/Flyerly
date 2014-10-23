@@ -61,28 +61,39 @@ Events.setup = function(app) {
 			params.emergencyContacts	= JSON.parse( params.emergencyContacts );
 		}
 
+		var eventId = params.eventId,
 		params = {
-			eventId: params.eventId,
 			userId: params.userId,
+			
 			spendingTimeTxt: params.spendingTimeTxt,
 		    startTime: params.startDate,
 		    endTime: params.endDate,
-			hasEndDate: hasEndDate,
-		    location: location,
+			hasEndDate: params.hasEndDate,
+		    
 			forwardingNumber: params.forwardingNumber,
+			location: params.location,
 		    emergencyNumbers: params.emergencyNumbers,
 			emergencyContacts: params.emergencyContacts,
-			hasRecording: params.hasRecording
+			hasRecording: params.hasRecording,
+			
+			socialStatus: params.socialStatus,
+			fbAuth: params.fbAuth,
+			twitterAuth: params.twitterAuth,
+			linkedinAuth: params.linkedinAuth,
+			
+			email: params.email,
+			password: params.password,
+			respondingEmail: params.respondingEmail
 		};
 
 
         console.log( "params: ", params );
 
 
-        if ( false && params.eventId ) {
+        if ( eventId ) {
             // update for the given event 
             Events.update({
-                    _id: params.eventId
+                    _id: eventId
                 }, {
                     // Set the values of request to event and update
                     $set: params
@@ -93,18 +104,11 @@ Events.setup = function(app) {
                 function(err, model) {
 
                     if (err) {
-                        logger.error(JSON.stringify(err));
-                        return;
+						retError1( res, err, __line );
                     }
-
-                    // add message to log
-                    logger.info('Event updated successfully');
-
-                    // response to call
-                    res.json(200, {
-                        status: "OK",
-                        eventId: eventId
-                    });
+					else{
+                    	retSuccess1( res );
+					}
                 });
 
         }
