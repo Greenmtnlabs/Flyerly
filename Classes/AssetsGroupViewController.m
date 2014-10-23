@@ -383,6 +383,7 @@
                                  reverseOrder:YES
                           incrementalLoadSize:self.loadSize
                                   resultBlock:^(NSArray * assets,
+                                                BOOL finished,
                                                 NSError * error)
          {
              if (!error)
