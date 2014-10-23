@@ -137,7 +137,11 @@
 
             UISwitch *mSwitch;
              if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
-                 mSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(263, 4, 0, 0)] ;
+                 mSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(263, 4, 0, 0)];
+                 if ( IS_IPHONE_6 )
+                     mSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(320, 4, 0, 0)];
+                 else if ( IS_IPHONE_6_PLUS )
+                     mSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(350, 4, 0, 0)];
              }else{
                  mSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(223, 4, 0, 0)] ;
              }
@@ -157,6 +161,10 @@
         UISwitch *mSwitch;
         if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
             mSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(263, 4, 0, 0)] ;
+            if ( IS_IPHONE_6 )
+                mSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(320, 4, 0, 0)];
+            else if ( IS_IPHONE_6_PLUS )
+                mSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(350, 4, 0, 0)];
         }else{
             mSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(223, 4, 0, 0)] ;
         }
