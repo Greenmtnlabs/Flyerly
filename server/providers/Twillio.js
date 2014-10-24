@@ -22,9 +22,10 @@ Twillio.setup = function(app) {
 	// Get the request
     app.get('/get-forwading-number', function(req, res) {
 
-		function retError1( res, error, lineNum ) {
+		function retError1( res, error, lineNum, code ) {
 			var responseJSON = {};
 			responseJSON.status = 'FAIL';
+			responseJSON.code = code;
 			responseJSON.message = JSON.stringify(error);
 			responseJSON.message4Dev = "Error: Twillio.js, twillio.save line#: "+lineNum+", error: " + responseJSON.message;
 	        logger.error( responseJSON.error4Dev );
@@ -62,7 +63,7 @@ Twillio.setup = function(app) {
 					  "userId" : params.userId
 					});
 		   	 
-		print("CL-Line#66 event obj: ", event); 
+		console.log("CL-Line#"+__line+" event obj: ", event); 
 		
         // If Object is not null
         if ( event.userId ) {
@@ -70,10 +71,10 @@ Twillio.setup = function(app) {
 			
 			event.save(function (error) {
 				
-				print("CL-Line#66 event obj: ", event); 
+				console.log("CL-Line#"+__line+" event obj: ", event); 
 				
                 if (error) {
-					retError1( res, error, __line);
+					retError1( res, error, __line, "E1");
                 } 
 				else {
 					
@@ -88,7 +89,7 @@ Twillio.setup = function(app) {
 	                }, function(error, obj) {
 
 	                    if ( error ) {
-	                        retError1( res, error, __line);
+	                        retError1( res, error, __line, "E2");
 	                    }						
 	                    else if( obj != null ) {
 							
@@ -102,7 +103,7 @@ Twillio.setup = function(app) {
 	                        obj.save(function(error, t) {
 
 	                            if (error) {
-									retError1( res, error, __line);
+									retError1( res, error, __line, "E3");
 	                            } else{
 
 									logger.info('Twillio number updated successfully');
@@ -115,7 +116,7 @@ Twillio.setup = function(app) {
 	                    }
 						else {
 							
-							retError1( res, 'No Twillio number found. Please contact abdul.rauf@riksof.com', __line);
+							retError1( res, 'No Twillio number found. Please contact abdul.rauf@riksof.com', __line, "number_unavailable");
 							
 							// Object of the model
 	                       /* var twillio = new Twillio();
@@ -184,7 +185,7 @@ Twillio.setup = function(app) {
         } 		
 		else{
 			console.log("CL-Line#182, params data: ", params);			
-			retError1( res, "userId not found", __line );
+			retError1( res, "userId not found", __line , "E5");
 		}
 		
     });
