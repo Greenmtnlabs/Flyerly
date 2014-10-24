@@ -82,9 +82,9 @@ Events.setup = function(app) {
 					hasEndDate: params.hasEndDate,
 		    
 
-					forwardingNumber: params.forwardingNumber,
+					twillioNumber: params.twillioNumber,
 					location: params.location,
-				    emergencyNumbers: params.emergencyNumbers,
+				    emergencyNumber: params.emergencyNumber,
 					emergencyContacts: params.emergencyContacts,
 					hasRecording: params.hasRecording,
 					recording: recordingFileName,

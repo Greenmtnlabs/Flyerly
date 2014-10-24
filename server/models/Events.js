@@ -17,7 +17,7 @@ var eventsSchema = db.Schema({
     endTime: String ,
 	hasEndDate: String ,
     
-	forwardingNumber: String ,
+	twillioNumber: String ,
 	location: String ,
     emergencyNumber: String ,
 	emergencyContacts: Object ,
