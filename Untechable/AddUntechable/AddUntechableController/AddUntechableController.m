@@ -357,8 +357,8 @@
 -(void) configureTestData
 {
     untechable.userId   = TEST_UID;
-    untechable.eventId = TEST_EID;
-    untechable.twillioNumber = TEST_TWILLIO_NUM;
+    //untechable.eventId = TEST_EID;
+    //untechable.twillioNumber = TEST_TWILLIO_NUM;
 }
 
 #pragma mark -  UI functions

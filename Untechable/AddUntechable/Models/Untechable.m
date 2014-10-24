@@ -166,10 +166,10 @@
         
         dic = [[NSMutableDictionary alloc] init];
 
-        dic[@"userId"] = userId;
-        dic[@"uniqueId"]    =   uniqueId;
-        dic[@"eventId"]    =   eventId;
-        dic[@"untechablePath"]  =   untechablePath;
+        dic[@"eventId"]         = eventId;
+        dic[@"userId"]          = userId;
+        dic[@"uniqueId"]        = uniqueId;
+        dic[@"untechablePath"]  = untechablePath;
 
         //Screen1 vars
         dic[@"timezoneOffset"]  = timezoneOffset;
@@ -207,9 +207,9 @@
         
         
         //Settings
+        eventId        = dic[@"eventId"];
         userId         = dic[@"userId"];
         uniqueId       = dic[@"uniqueId"];
-        eventId        = dic[@"eventId"];
         untechablePath = dic[@"untechablePath"];
         
         
@@ -243,11 +243,17 @@
     
     //NSLog(@"dic: %@", dic);
 }
+
+/*
+ Set default values for new event
+ */
 -(void)initWithDefValues
 {
     //Settings
+    eventId  = @"";
     uniqueId = [self getUniqueId];
     untechablePath = [self getNewUntechablePath];
+
     
     //Screen1
     timezoneOffset  = [commonFunctions getTimeZoneOffset];

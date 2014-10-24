@@ -37,9 +37,11 @@
 #define SERVER_URL @"http://192.168.0.116:3001"
 //#define SERVER_URL @"http://www.riksof.com:8000"
 
+#define API_GET_NUMBER SERVER_URL@"/get-forwading-number"
 #define API_SAVE SERVER_URL@"/event/save"
 
 
 #define TEST_UID @"0"
-#define TEST_EID @"5448e76a55c04a3f0e000001"
-#define TEST_TWILLIO_NUM @"+16464551382"
+#define TEST_EID @"544a794d1a98ea2315000002"
+#define TEST_TWILLIO_NUM @""
+//#define TEST_TWILLIO_NUM @"+16464551382"

@@ -242,19 +242,21 @@
     
     BOOL goToNext = YES;
     
-    if( goToNext ) {
+    if( [untechable.twillioNumber isEqualToString:@""] ){
+        UIAlertView *temAlert = [[UIAlertView alloc ]
+                                 initWithTitle:@""
+                                 message:@"Forwarding number required."
+                                 delegate:self
+                                 cancelButtonTitle:@"OK"
+                                 otherButtonTitles:nil];
+        [temAlert show];
+    }
+    else if( goToNext ) {
         RecordController *recordController;
         recordController = [[RecordController alloc]initWithNibName:@"RecordController" bundle:nil];
         recordController.untechable = untechable;
         [self.navigationController pushViewController:recordController animated:YES];
     }
-    /*
-        SocialnetworkController *socialnetwork;
-        socialnetwork = [[SocialnetworkController alloc]initWithNibName:@"SocialnetworkController" bundle:nil];
-        socialnetwork.untechable = untechable;
-        [self.navigationController pushViewController:socialnetwork animated:YES];
-     */
-
 }
 
 -(void)storeSceenVarsInDic{
@@ -341,13 +343,45 @@
 -(void)getForwadingNumAfterAllow {
     [self.btnforwardingNumber setTitle:MSG_FORWADING_2 forState:UIControlStateNormal];
     
-    double delayInSeconds = 3.0;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        [self.btnforwardingNumber setTitle:MSG_FORWADING_3 forState:UIControlStateNormal];
-        self.btnforwardingNumber.userInteractionEnabled = NO;
-        self.inputForwadingNumber.text = @"123456789";
-    });
+    NSString *API_GETNUM = [NSString stringWithFormat:@"%@?userId=%@",API_GET_NUMBER,untechable.userId];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:API_GETNUM]];
+    [request setHTTPMethod:@"GET"];
+    
+    NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+    // NSString *returnString = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
+    
+    if( returnData != nil ){
+        NSDictionary *dict=[NSJSONSerialization JSONObjectWithData:returnData options:NSJSONReadingMutableLeaves error:nil];
+        NSLog(@"In response of save api: %@",dict);
+        
+        if( [[dict valueForKey:@"status"] isEqualToString:@"OK"] ) {
+            untechable.eventId       = [dict valueForKey:@"eventID"];
+            untechable.twillioNumber = [dict valueForKey:@"number"];
+            self.inputForwadingNumber.text = untechable.twillioNumber;
+            
+            [untechable setOrSaveVars:SAVE];
+            
+            [self.btnforwardingNumber setTitle:MSG_FORWADING_3 forState:UIControlStateNormal];
+            self.btnforwardingNumber.userInteractionEnabled = NO;
+        }
+        else if( [[dict valueForKey:@"code"] isEqualToString:@"number_unavailable"] ) {
+            [self.btnforwardingNumber setTitle:MSG_FORWADING_1 forState:UIControlStateNormal];
+            self.btnforwardingNumber.userInteractionEnabled = YES;
+            
+            UIAlertView *temAlert = [[UIAlertView alloc ]
+                                initWithTitle:@""
+                                message:[dict valueForKey:@"message"]
+                                delegate:self
+                                cancelButtonTitle:@"OK"
+                                otherButtonTitles:nil];
+            [temAlert show];
+        }
+        
+    }
+
+    
 }
 
 
