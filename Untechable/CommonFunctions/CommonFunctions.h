@@ -19,5 +19,8 @@
 -(void)deleteKeyFromDic:dic delKeyAtIndex:(int)rowNumber;
 -(void)showAlert:(NSString *)title message:(NSString *)message;
 -(NSString *)convertDicIntoJsonString:(NSMutableDictionary *)value;
--(float)getTimeZoneOffset;
+-(NSString *)getTimeZoneOffset;
+-(NSString *)nsDateToTimeStampStr:(NSDate *)inpDate;
+-(NSDate *)timestampStrToNsDate:(NSString *)timeStamp;
+-(NSString *)timestampStrToAppDate:(NSString *)timeStamp;
 @end

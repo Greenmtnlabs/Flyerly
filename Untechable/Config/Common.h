@@ -34,8 +34,12 @@
 #define SAVE @"SAVE"
 #define SET @"SET"
 
-#define SERVER_URL @"http://192.168.0.116:3000"
+#define SERVER_URL @"http://192.168.0.116:3001"
+//#define SERVER_URL @"http://www.riksof.com:8000"
+
 #define API_SAVE SERVER_URL@"/event/save"
 
 
-
+#define TEST_UID @"0"
+#define TEST_EID @"5448e76a55c04a3f0e000001"
+#define TEST_TWILLIO_NUM @"+16464551382"

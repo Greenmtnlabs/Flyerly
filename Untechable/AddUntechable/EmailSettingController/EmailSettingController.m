@@ -7,15 +7,13 @@
 //
 
 #import "EmailSettingController.h"
-#import "CommonFunctions.h"
 #import "Common.h"
 #import "BSKeyboardControls.h"
 
 
 
 @interface EmailSettingController (){
-    
-    CommonFunctions *commonFunctions;    
+ 
 }
 
 
@@ -45,8 +43,6 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
-    commonFunctions = [[CommonFunctions alloc] init];
     
     [self setNavigationDefaults];
     [self setNavigation:@"viewDidLoad"];
@@ -285,8 +281,8 @@
     [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
 
     NSArray *stringVarsAry = [[NSArray alloc] initWithObjects:@"eventId", @"userId",
-                              @"spendingTimeTxt", @"startDate", @"endDate", @"hasEndDate"
-                             ,@"forwardingNumber", @"location", @"emergencyNumbers", @"hasRecording"
+                              @"timezoneOffset", @"spendingTimeTxt", @"startDate", @"endDate", @"hasEndDate"
+                             ,@"twillioNumber", @"location", @"emergencyNumber", @"hasRecording"
                              ,@"socialStatus", @"fbAuth", @"twitterAuth", @"linkedinAuth"
                              ,@"email", @"password", @"respondingEmail"
                              ,nil];
@@ -296,7 +292,7 @@
         id value    =   [untechable.dic objectForKey:key];
         
         if([key isEqualToString:@"emergencyContacts"] ){
-            value = [commonFunctions convertDicIntoJsonString:value];
+            value = [untechable.commonFunctions convertDicIntoJsonString:value];
             sendIt = YES;
         }
         

@@ -9,6 +9,7 @@
 
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
+#import "CommonFunctions.h"
 
 @interface Untechable : NSObject{
     
@@ -16,6 +17,7 @@
 
 
 //Settings
+@property (strong, nonatomic) CommonFunctions *commonFunctions;
 @property (strong, readonly)  NSMutableDictionary *dic;
 @property (strong, nonatomic) NSString *piecesFile;
 @property (strong, nonatomic) NSString *userId;
@@ -25,13 +27,13 @@
 @property (nonatomic, strong) NSDateFormatter *dateFormatter;
 
 //Screen1
-@property (strong, nonatomic) NSString *spendingTimeTxt, *startDate, *endDate;
+@property (strong, nonatomic) NSString *timezoneOffset, *spendingTimeTxt, *startDate, *endDate;
 @property (nonatomic, assign) BOOL hasEndDate;
 
 
 
 //Screen2
-@property (strong, nonatomic) NSString *forwardingNumber, *emergencyNumbers, *location;
+@property (strong, nonatomic) NSString *twillioNumber, *emergencyNumber, *location;
 @property (strong, nonatomic) NSMutableDictionary *emergencyContacts;
 @property (nonatomic, assign) BOOL hasRecording;
 
@@ -40,6 +42,7 @@
 
 //Screen4
 @property (strong, nonatomic) NSString *email, *password, *respondingEmail;
+
 
 
 -(NSDate *)stringToDate:(NSString *)inputStrFormate dateString:(NSString *)dateString;
@@ -55,5 +58,5 @@
 -(NSMutableDictionary *)getUntechable:(int)count;
 -(void)setOrSaveVars:(NSString *)setOrSAve;
 -(void)initWithDefValues;
-
+- (NSString *)timestampStrToAppDate:(NSString *)timeStamp;
 @end

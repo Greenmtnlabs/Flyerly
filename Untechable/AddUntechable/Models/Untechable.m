@@ -14,13 +14,13 @@
 @implementation Untechable
 
 //Settings
-@synthesize dic, piecesFile, userId, uniqueId, eventId, untechablePath, dateFormatter;
+@synthesize commonFunctions, dic, piecesFile, userId, uniqueId, eventId, untechablePath, dateFormatter;
 
 //1-vars for screen1
-@synthesize spendingTimeTxt, startDate, endDate, hasEndDate;
+@synthesize timezoneOffset, spendingTimeTxt, startDate, endDate, hasEndDate;
 
 //2-vars for screen2
-@synthesize forwardingNumber, location, emergencyContacts, emergencyNumbers, hasRecording;
+@synthesize twillioNumber, location, emergencyContacts, emergencyNumber, hasRecording;
 
 //3-vars for screen3
 @synthesize socialStatus, fbAuth, twitterAuth, linkedinAuth;
@@ -172,15 +172,16 @@
         dic[@"untechablePath"]  =   untechablePath;
 
         //Screen1 vars
+        dic[@"timezoneOffset"]  = timezoneOffset;
         dic[@"spendingTimeTxt"] = spendingTimeTxt;
-        dic[@"startDate"] = startDate;
-        dic[@"endDate"] = endDate;
-        dic[@"hasEndDate"] = hasEndDate ? @"YES" : @"NO";
+        dic[@"startDate"]       = startDate;
+        dic[@"endDate"]         = endDate;
+        dic[@"hasEndDate"]      = hasEndDate ? @"YES" : @"NO";
         
         //Screen2 vars
-        dic[@"forwardingNumber"] = forwardingNumber;
+        dic[@"twillioNumber"] = twillioNumber;
         dic[@"location"] = location;
-        dic[@"emergencyNumbers"] = emergencyNumbers;
+        dic[@"emergencyNumber"] = emergencyNumber;
         dic[@"emergencyContacts"] = emergencyContacts;
         dic[@"hasRecording"] = hasRecording ? @"YES" : @"NO";
 
@@ -213,13 +214,16 @@
         
         
         //Screen1 vars
+        timezoneOffset  = dic[@"timezoneOffset"];
         spendingTimeTxt = dic[@"spendingTimeTxt"];
+        startDate       = dic[@"startDate"];
+        endDate         = dic[@"endDate"];
         hasEndDate      = ([dic[@"hasEndDate"] isEqualToString:@"YES"]) ? YES : NO;
         
         //Screen2 vars
-        forwardingNumber  = dic[@"forwardingNumber"];
+        twillioNumber     = dic[@"twillioNumber"];
         location          = dic[@"location"];
-        emergencyNumbers  = dic[@"emergencyNumbers"];
+        emergencyNumber   = dic[@"emergencyNumber"];
         emergencyContacts = dic[@"emergencyContacts"];
         hasRecording      = ([dic[@"hasRecording"] isEqualToString:@"YES"]) ? YES : NO;
         
@@ -246,21 +250,16 @@
     untechablePath = [self getNewUntechablePath];
     
     //Screen1
+    timezoneOffset  = [commonFunctions getTimeZoneOffset];
     spendingTimeTxt = @"";
-    /*
-    now1 = [[NSDate date] dateByAddingTimeInterval:(60*2)]; //current time + 2mint
-    now2 = [[NSDate date] dateByAddingTimeInterval:(60*120)]; //current time + 2hr
-    
-    startDate = [dateFormatter stringFromDate:now1];
-    endDate   = [dateFormatter stringFromDate:now2];
-    */
+    startDate = [commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(60*60)] ];  //current time +60mint
+    endDate   = [commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(60*120)] ]; //current time +2hr
     hasEndDate = YES;
     
-    
     //Screen2
-    forwardingNumber  = @"";
+    twillioNumber  = @"";
     location  = @"";
-    emergencyNumbers  = @"";
+    emergencyNumber  = @"";
     emergencyContacts = [[NSMutableDictionary alloc] init];
     hasRecording = NO;
     
@@ -274,7 +273,6 @@
     email           = @"";
     password        = @"";
     respondingEmail = @"";
-
     
 }
 
@@ -337,6 +335,4 @@ NSInteger compareDesc(id stringLeft, id stringRight, void *context) {
     
     return retDic;
 }
-
-
 @end

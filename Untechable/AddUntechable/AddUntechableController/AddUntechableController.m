@@ -231,6 +231,8 @@
 -(void)storeSceenVarsInDic
 {
     untechable.spendingTimeTxt = _inputSpendingTimeTxt.text;
+    untechable.hasEndDate = !([_cbNoEndDate isSelected]);
+    
     [untechable setOrSaveVars:SAVE];
 }
 
@@ -274,15 +276,24 @@
 //when user select the date from datepicker
 -(IBAction)onDateChange:(id)sender {
     
-	NSString * date = [untechable.dateFormatter stringFromDate:[picker date]];
+    NSString *dateStr, *timeStampStr;
+    
+	dateStr = [untechable.dateFormatter stringFromDate:[picker date]];
+    //NSLog(@"date str dateStr %@", dateStr); //    "startTime": "Oct 24, 2014 03:04 PM",
+    
+    timeStampStr = [untechable.commonFunctions nsDateToTimeStampStr:[picker date]];
+    
+    //NSLog(@"time stamp dateStr %@", timeStampStr); //1414329211
+    //NSLog(@"newDateStr: %@", [untechable.commonFunctions timestampStrToAppDate:dateStr]); // "startTime": "Oct 24, 2014 03:04 PM",
+    
     
 	if( [pickerOpenFor isEqualToString:@"self.btnStartTime"] ){
-      untechable.startDate = date;
-      [self.btnStartTime setTitle:date forState:UIControlStateNormal];
+      untechable.startDate = timeStampStr;
+      [self.btnStartTime setTitle:dateStr forState:UIControlStateNormal];
     }
     else if( [pickerOpenFor isEqualToString:@"self.btnEndTime"] ){
-      untechable.endDate = date;
-      [self.btnEndTime setTitle:date forState:UIControlStateNormal];
+      untechable.endDate = timeStampStr;
+      [self.btnEndTime setTitle:dateStr forState:UIControlStateNormal];
     }
 }
 
@@ -292,6 +303,8 @@
     
     //init object
     untechable  = [[Untechable alloc] init];
+    untechable.commonFunctions = [[CommonFunctions alloc] init];
+    
     //Set Date formate
     untechable.dateFormatter = [[NSDateFormatter alloc] init];
     [untechable.dateFormatter setDateFormat:DATE_FORMATE_1];
@@ -299,8 +312,7 @@
     //[untechable.dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
 
     //For testing -------- { --
-    untechable.userId   = @"1";
-    untechable.eventId = @"5448e76a55c04a3f0e000001";
+        [self configureTestData];
     //For testing -------- } --
     
     
@@ -325,26 +337,29 @@
 
     //New, set the vars
     if( isNew ){
+        
         [untechable initWithDefValues];
+        
+        //For testing -------- { --
+            [self configureTestData];
+        //For testing -------- } --
     }
-    
-    //-----------------{--
-    now1 = [[NSDate date] dateByAddingTimeInterval:(60*2)]; //current time + 2mint
-    now2 = [[NSDate date] dateByAddingTimeInterval:(60*120)]; //current time + 2hr
-    
-    untechable.startDate = [untechable.dateFormatter stringFromDate:now1];
-    untechable.endDate   = [untechable.dateFormatter stringFromDate:now2];
-    //-----------------}--
-    
     
     [untechable initUntechableDirectory];
     
-    //For testing -------- { --
-    untechable.userId   = @"1";
-    untechable.eventId = @"5448e76a55c04a3f0e000001";
-    //For testing -------- } --
+    now1 = [[NSDate date] dateByAddingTimeInterval:(60*60)]; //current time +60mint
+    
 }
 
+/*
+ Variable we must need in model, for testing we can use these vars
+ */
+-(void) configureTestData
+{
+    untechable.userId   = TEST_UID;
+    untechable.eventId = TEST_EID;
+    untechable.twillioNumber = TEST_TWILLIO_NUM;
+}
 
 #pragma mark -  UI functions
 -(void)updateUI
@@ -369,7 +384,7 @@
     
     [self.btnStartTime setTitleColor:defGreen forState:UIControlStateNormal];
     self.btnStartTime.titleLabel.font = [UIFont fontWithName:APP_FONT size:18];
-    [self.btnStartTime setTitle:untechable.startDate forState:UIControlStateNormal];
+    [self.btnStartTime setTitle:[untechable.commonFunctions timestampStrToAppDate:untechable.startDate] forState:UIControlStateNormal];
     
     [_lbl3S1 setTextColor:defGray];
     _lbl3S1.font = [UIFont fontWithName:APP_FONT size:14];
@@ -383,7 +398,7 @@
     
     [self.btnEndTime setTitleColor:defGreen forState:UIControlStateNormal];
     self.btnEndTime.titleLabel.font = [UIFont fontWithName:APP_FONT size:18];
-    [self.btnEndTime setTitle:untechable.endDate forState:UIControlStateNormal];
+    [self.btnEndTime setTitle:[untechable.commonFunctions timestampStrToAppDate:untechable.endDate] forState:UIControlStateNormal];
     
     [_lbl4S1 setTextColor:defGray];
     _lbl4S1.font = [UIFont fontWithName:APP_FONT size:14];

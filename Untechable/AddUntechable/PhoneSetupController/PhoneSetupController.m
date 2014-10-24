@@ -7,7 +7,6 @@
 //
 
 #import "PhoneSetupController.h"
-#import "CommonFunctions.h"
 #import "SocialnetworkController.h"
 #import "Common.h"
 #import "BSKeyboardControls.h"
@@ -22,7 +21,6 @@
 
 @interface PhoneSetupController (){
     NSString *tableViewFor;
-    CommonFunctions *commonFunctions;
 }
 
 @property (strong, nonatomic) IBOutlet UIButton *btnforwardingNumber;
@@ -260,9 +258,9 @@
 }
 
 -(void)storeSceenVarsInDic{
-    untechable.forwardingNumber = _inputForwadingNumber.text;
+    untechable.twillioNumber = _inputForwadingNumber.text;
     untechable.location = _inputLocation.text;
-    untechable.emergencyNumbers = _inputEmergencyNumber.text;
+    untechable.emergencyNumber = _inputEmergencyNumber.text;
     //untechable.emergencyContacts = untechable.emergencyContacts; //no need
     
     [untechable setOrSaveVars:SAVE];
@@ -270,7 +268,7 @@
 
 #pragma mark -  Model funcs
 -(void)setDefaultModel{
-    commonFunctions = [[CommonFunctions alloc] init];
+    untechable.commonFunctions = [[CommonFunctions alloc] init];
 }
 
 #pragma mark -  UI functions
@@ -285,8 +283,8 @@
     self.inputForwadingNumber.font = [UIFont fontWithName:APP_FONT size:16];
     self.inputForwadingNumber.delegate = self;
 
-    if( ![untechable.forwardingNumber isEqualToString:@""] ){
-        [self.inputForwadingNumber setText:untechable.forwardingNumber];
+    if( ![untechable.twillioNumber isEqualToString:@""] ){
+        [self.inputForwadingNumber setText:untechable.twillioNumber];
         [self.btnforwardingNumber setTitle:MSG_FORWADING_3 forState:UIControlStateNormal];
     }
     
@@ -309,10 +307,10 @@
     [self.inputEmergencyNumber setTextColor:defGreen];
     self.inputEmergencyNumber.font = [UIFont fontWithName:APP_FONT size:16];
     self.inputEmergencyNumber.delegate = self;
-    [self.inputEmergencyNumber setText:untechable.emergencyNumbers];
+    [self.inputEmergencyNumber setText:untechable.emergencyNumber];
     
-    if( ![untechable.forwardingNumber isEqualToString:@""] )
-    [self.inputEmergencyNumber setText:untechable.emergencyNumbers];
+    if( ![untechable.twillioNumber isEqualToString:@""] )
+    [self.inputEmergencyNumber setText:untechable.emergencyNumber];
 
     [self tableViewSR:@"reStart" callFor:@"contactsTableView"];
     
@@ -443,7 +441,7 @@
 
         if( [tableViewFor isEqualToString:@"contactsTableView"] ) {
 
-            [commonFunctions deleteKeyFromDic:untechable.emergencyContacts delKeyAtIndex:indexPath.row];
+            [untechable.commonFunctions deleteKeyFromDic:untechable.emergencyContacts delKeyAtIndex:indexPath.row];
             
             [self tableViewSR:@"reStart" callFor:@"contactsTableView"];
         }

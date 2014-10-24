@@ -20,8 +20,7 @@
     UIColor *defGray;//GRAY
     NSString *pickerOpenFor;
     
-    NSDate *now1; //current time + 2mint
-    NSDate *now2; //current time + 2hr
+    NSDate *now1; //current time +60mint
     
     Untechable *untechable;
 }

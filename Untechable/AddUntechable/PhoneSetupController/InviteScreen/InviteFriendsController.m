@@ -8,12 +8,9 @@
 
 #import "InviteFriendsController.h"
 #import "Common.h"
-#import "CommonFunctions.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface InviteFriendsController () {
-    
-  CommonFunctions *commonFunctions;
     
 }
 @end
@@ -31,9 +28,6 @@
     
     [self setNavigationDefaults];
     [self setNavigation:@"viewDidLoad"];
-
-
-    commonFunctions = [[CommonFunctions alloc] init];
     
     [self initContactsDic];
     
