@@ -76,7 +76,7 @@ config.twilio.tokenExpiry = 604800;
 
 //Urls of apis
 config.urls = {};
-config.urls.getForwadingNumUrl = "http://localhost:3001/get-number";
+config.urls.TWILLIO_CALL_URL = "http://ec2-54-69-199-28.us-west-2.compute.amazonaws.com:3000/ut-handle-call";
 
 // Make the configuration parameters available.
 module.exports = config;
