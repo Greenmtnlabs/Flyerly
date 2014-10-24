@@ -65,8 +65,8 @@ event.setup( app );
 var eventCron = require( __dirname + '/providers/EventCron' );
 eventCron.setup( app );
 
-var twillioCron = require( __dirname + '/providers/TwillioCron' );
-twillioCron.setup( app );
+//var twillioCron = require( __dirname + '/providers/TwillioCron' );
+//twillioCron.setup( app );
 
 var twillioServer = require( __dirname + '/providers/TwillioServer' );
 twillioServer.setup( app );
