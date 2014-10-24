@@ -11,7 +11,8 @@ var db = require( __dirname + '/db' );
 var eventsSchema = db.Schema({
 
 	userId: String ,	
-
+	
+	timezoneOffset: String ,
 	spendingTimeTxt: String ,
     startTime: String ,
     endTime: String ,

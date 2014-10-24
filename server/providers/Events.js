@@ -75,7 +75,8 @@ Events.setup = function(app) {
 				}
 				params = {
 					userId: params.userId,
-			
+					
+					timezoneOffset: params.timezoneOffset,
 					spendingTimeTxt: params.spendingTimeTxt,
 				    startTime: params.startDate,
 				    endTime: params.endDate,
@@ -98,6 +99,8 @@ Events.setup = function(app) {
 					password: params.password,
 					respondingEmail: params.respondingEmail
 				};
+				
+				print( ["params"+__line+": ", params] );
 				
 	            // update for the given event 
 	            Events.update({
@@ -157,7 +160,7 @@ Events.setup = function(app) {
 	app.all('/test-CommonFunctions', function(req, res) {		
 		var CommonFunctions = require( __dirname + '/CommonFunctions' );
 		CommonFunctions.print( "CommonFunctions.print: hello print");
-		res.jsonp(__line);
+		res.jsonp({"__line":__line});
 				
 	});
 	

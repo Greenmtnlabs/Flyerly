@@ -12,7 +12,7 @@ config.app.errorUrl   = '/error';
 config.app.mode.LOCALHOST = 'localhost'; //Port: 3000
 config.app.mode.PRODUCTION = 'production';   //Port: 80
 config.app.mode.DEVELOPMENT = 'development'; //Port: 3000
-config.app.mode.current = config.app.mode.DEVELOPMENT;
+config.app.mode.current = config.app.mode.LOCALHOST;
  
 // HTTP server configuration
 config.http = {}
@@ -43,10 +43,10 @@ config.db.modelVersion = 1.0;
 
 // Check if we are on local host
 if( config.app.mode.current == config.app.mode.LOCALHOST  ) {
-	config.http.port = 3000;
+	config.http.port = 3001;
  	// 1-Database setting
 	config.db.host =  'mongodb://admin:untechable@ds047930.mongolab.com:47930/untechable';
-	config.http.host	=	'http://localhost:3001';
+	config.http.host	=	'http://localhost:'+config.http.port ;
 	
 }
 else if( config.app.mode.current == config.app.mode.PRODUCTION  ) {
@@ -59,7 +59,7 @@ else if( config.app.mode.current == config.app.mode.DEVELOPMENT  ) {
 	config.http.port = 8000;
 	// 1-Database setting
 	config.db.host =  'mongodb://admin:untechable@ds047930.mongolab.com:47930/untechable';
-	config.http.host	=	'http://www.riksof.com:8000';
+	config.http.host	=	'http://www.riksof.com:'+config.http.port;
 }
 
 // ACCOUNT TYPES
@@ -81,6 +81,8 @@ config.urls.TWILLIO_CALL_URL = config.http.host + "/ut-handle-call";
 //Directory paths
 config.dir = {};
 config.dir.recordingsPath = __dirname+'/../recordings/';
+
+console.log("config.http.host",config.http.host);
 
 
 // Make the configuration parameters available.
