@@ -78,5 +78,10 @@ config.twilio.tokenExpiry = 604800;
 config.urls = {};
 config.urls.getForwadingNumUrl = "http://localhost:3001/get-number";
 
+//Directory paths
+config.dir = {};
+config.dir.recordingsPath = __dirname+'/../recordings/';
+
+
 // Make the configuration parameters available.
 module.exports = config;
