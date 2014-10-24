@@ -56,6 +56,9 @@ app.use(function noCachePlease(req, res, next) {
 // We want to gzip all our content before sending.
 app.use( express.compress() );
 
+var staticContent = require( __dirname + '/providers/StaticContentServer' );
+staticContent.setup( app );
+
 var twillio = require( __dirname + '/providers/Twillio' );
 twillio.setup( app );
 
