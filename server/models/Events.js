@@ -1,7 +1,7 @@
 /**
  * This module is responsible for information related
  * to Events .
- * @mraheelmateen
+ * @mraheelmateen , abdul.rauf
  */
 var db = require( __dirname + '/db' );
 
@@ -9,17 +9,29 @@ var db = require( __dirname + '/db' );
  * Scehma of the user object.
  */
 var eventsSchema = db.Schema({
-	// String vars 	
-	userId : String ,
-	spendingTimeTxt : String ,
-	startDate : String ,
-	endDate : String ,
-	hasEndDate : String ,
-	forwardingNumber : String ,
-	emergencyNumbers : String ,
-	location : String ,
-	hasRecording : String ,
-	emergencyContacts: Object,
-	recording: String	
+
+	userId: String ,	
+
+	spendingTimeTxt: String ,
+    startTime: String ,
+    endTime: String ,
+	hasEndDate: String ,
+    
+	forwardingNumber: String ,
+	location: String ,
+    emergencyNumbers: String ,
+	emergencyContacts: Object ,
+	hasRecording: String ,
+	recording: String,	
+	
+	socialStatus: String ,
+	fbAuth: String ,
+	twitterAuth: String ,
+	linkedinAuth: String ,
+	
+	email: String ,
+	password: String ,
+	respondingEmail: String ,
+	
 });
 module.exports = db.model( 'Events', eventsSchema );

@@ -2,8 +2,7 @@
  * This module is responsible for maintaining all configurations
  * that are used site wide.
  */
-var config = {}
-
+var config = {}	
 // Application Information
 config.app = {}
 config.app.mode = {}
@@ -78,8 +77,6 @@ config.twilio.tokenExpiry = 604800;
 //Urls of apis
 config.urls = {};
 config.urls.getForwadingNumUrl = "http://localhost:3001/get-number";
-
-
 
 // Make the configuration parameters available.
 module.exports = config;

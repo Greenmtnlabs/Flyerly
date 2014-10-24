@@ -18,10 +18,35 @@ Events.setup = function(app) {
     // Our logger for logging to file and console
     var logger = require(__dirname + '/../logger');
 
-	/*
+	
 	// Get the request
-    app.post('/event/save', function(req, res) {
+    app.all('/event/save', function(req, res) {
+		
+		function retError1( res, error, lineNum ) {
+			var responseJSON = {};
+			responseJSON.status = 'FAIL';
+			responseJSON.message = JSON.stringify(error);
+			responseJSON.message4Dev = "Error: Twillio.js, twillio.save line#: "+lineNum+", error: " + responseJSON.message;
 
+			//Log event
+	        logger.error( responseJSON.message4Dev );
+	    	// Response to request.
+	        res.jsonp(200, responseJSON);
+		}
+	
+		function retSuccess1( res ) {
+			var responseJSON = {};
+			responseJSON.status = 'OK';
+	        responseJSON.message = 'Event updated successfully.';
+			
+	    	// Response to request.
+			res.jsonp(200, responseJSON);
+		}
+		
+		function print( msg ){
+			console.log( msg );
+		}
+		
         // Our logger for logging to file and console
         var logger = require(__dirname + '/../logger');
 
@@ -31,32 +56,47 @@ Events.setup = function(app) {
         // Var for Events models
         var Events = require(__dirname + '/../models/Events');
 
-        var data = req.body;
+        var params = req.body;
+		if( params.emergencyContacts ){
+			params.emergencyContacts	= JSON.parse( params.emergencyContacts );
+		}
 
-        // Get the event id from request
-        var eventId = data.eventId;
+		var eventId = params.eventId,
+		params = {
+			userId: params.userId,
+			
+			spendingTimeTxt: params.spendingTimeTxt,
+		    startTime: params.startDate,
+		    endTime: params.endDate,
+			hasEndDate: params.hasEndDate,
+		    
+			forwardingNumber: params.forwardingNumber,
+			location: params.location,
+		    emergencyNumbers: params.emergencyNumbers,
+			emergencyContacts: params.emergencyContacts,
+			hasRecording: params.hasRecording,
+			
+			socialStatus: params.socialStatus,
+			fbAuth: params.fbAuth,
+			twitterAuth: params.twitterAuth,
+			linkedinAuth: params.linkedinAuth,
+			
+			email: params.email,
+			password: params.password,
+			respondingEmail: params.respondingEmail
+		};
 
-        console.log( "eventId: ", eventId );
+
+        console.log( "params: ", params );
 
 
-        if ( data ) {
+        if ( eventId ) {
             // update for the given event 
             Events.update({
                     _id: eventId
                 }, {
                     // Set the values of request to event and update
-                    $set: {
-                        userId: data.userId,
-						spendingTimeTxt: data.spendingTimeTxt,
-                        startTime: data.startDate,
-                        endTime: data.endDate,
-						hasEndDate: hasEndDate,
-                        location: location,
-						forwardingNumber: data.forwardingNumber,
-                        emergencyNumbers: data.emergencyNumbers,
-						emergencyContacts: data.emergencyContacts,
-						hasRecording: data.hasRecording
-                    }
+                    $set: params
                 }, {
                     safe: true,
                     upsert: true
@@ -64,38 +104,46 @@ Events.setup = function(app) {
                 function(err, model) {
 
                     if (err) {
-                        logger.error(JSON.stringify(err));
-                        return;
+						retError1( res, err, __line );
                     }
-
-                    // add message to log
-                    logger.info('Event updated successfully');
-
-                    // response to call
-                    res.json(200, {
-                        status: "OK",
-                        eventId: eventId
-                    });
+					else{
+                    	retSuccess1( res );
+					}
                 });
 
-        } //end if 
-
+        }
+		else{
+			retError1( res, "eventId not found.", __line );
+		}
 
     }); // end post
-	*/
 	
+	app.all('/test-CommonFunctions', function(req, res) {		
+		var CommonFunctions = require( __dirname + '/CommonFunctions' );
+		CommonFunctions.print( "CommonFunctions.print: hello print");
+		res.jsonp(__line);
+				
+	});
 	
-	/// Test save event
-	console.log('save1-live, config.http.host: ',config.http.host);
-
+	/*
 	function save(req,res){
-		console.log('save1-in');
+		console.log('/save1');
+
+		if( req.body.emergencyContacts )
+		req.body.emergencyContacts	= JSON.parse( req.body.emergencyContacts );
 		
+		//for(var attributename in emergencyContacts){
+		  //  console.log(attributename+": "+emergencyContacts[attributename]);
+		//}
+	
 		var responseJSON = {
             status: "OK",
+			testObj:{a:1, 2:'b', c:"3"},
+			testAry:["a","b"],			
 			reqBod: req.body,
 			reqQuery: req.query,
 			reqFiles: req.files
+
         };
 		
 		function retResponse(){			
@@ -138,6 +186,7 @@ Events.setup = function(app) {
 	app.all('/save1', function(req, res) {
 		save(req,res);
 	});
+	*/
 	
 
 }
