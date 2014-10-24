@@ -73,26 +73,28 @@ Twillio.setup = function(app) {
 				print("CL-Line#66 event obj: ", event); 
 				
                 if (error) {
-					retError1( res, error, 70);
+					retError1( res, error, 76);
                 } 
 				else {
-					retSuccess1( res, event._id, twilioTestingNumber , 98);
 					
-					/*
-	                
+					logger.info('Event created successfully');	
+					
 					// Var for Twilio models
 	                var Twillio = require(__dirname + '/../models/Twillio');
-					var twillio = new Twillio();
+					//var twillio = new Twillio();
 	                // Check the number in the Database
-	                twillio.findOne({
+	                Twillio.findOne({
 	                    status: 'FREE'
 	                }, function(error, obj) {
 
 	                    if ( error ) {
-	                        retError1( res, error, 83);
+	                        retError1( res, error, 91);
 	                    }						
 	                    else if( obj != null ) {
-	                        // Set the property of object
+							
+							logger.info('Twillio number found in Db');
+	                        
+							// Set the property of object
 	                        obj.status = 'IN_USE';
 	                        obj.assignedTo = event._id;
 
@@ -100,63 +102,50 @@ Twillio.setup = function(app) {
 	                        obj.save(function(error, t) {
 
 	                            if (error) {
-									retError1( res, error, 112);
+									retError1( res, error, 106);
 	                            } else{
-									retSuccess1( res, event._id, obj.number , 114);
+
+									logger.info('Twillio number updated successfully');
+									retSuccess1( res, event._id, obj.number , 109);
 								}
 	                        });
 
 
 	                        // If we request the server to new number
 	                    }
-						//Rufi created code for obj == null						
-	                    else if( obj == null ) {
-							
-							twillio.number		= twilioTestingNumber;
-	                        twillio.status 		= 'IN_USE';
-	                        twillio.assignedTo 	= event._id;
-							
-				            twillio.save(function(error, e) {
-				
-				                if (error) {
-									retError1( res, error, 95);
-				                } 
-								else { 
-									retSuccess1( res, event._id, twillio.number , 98);
-									 }
-							});
-							
-						}
 						else {
 
 	                        // Object of the model
 	                        var twillio = new Twillio();
 
-	                        // First request the api to get the number (testing)
-	                        var request = require('request');
-	                        request(config.urls.getForwadingNumUrl, function(error, response, body) {
-
+							//require the Twilio module and create a REST client 
+							var client = require('twilio')(config.twilio.accountSid, config.twilio.authToken); 
+							logger.info('Get new number from Twillio');
+	                        // create a new number 
+							client.incomingPhoneNumbers.create({
+								 voiceUrl: "http://ec2-54-69-199-28.us-west-2.compute.amazonaws.com:3000/ut-handle-call",
+								 voiceMethod: "GET",
+								 areaCode: "646"
+							     		                  
+							}, function(err, number) {
 	                            if( error ){
-	                                retError1( res, error, 131);
-	                            }
-								else if ( response.statusCode != 200 ) {
-									retError1( res, "error3 in Twillio.js: response.statusCode != 200", 134);
-									
-								}
-								else if ( response.statusCode == 200 ) {
+	                                retError1( res, error, 132);
+	                            } else {
 
-	                                var num = JSON.parse(response.body);
-	                                console.log(num.number);
+									var twillioNumber = number.phone_number;
+									logger.info('New number is: ' + twillioNumber);
+									logger.info('New sid is: ' + number.sid);
 
-	                                // Get today date
+	                                // Get today's date
 	                                var today = new Date();
-
+					
 	                                // Add 29 days
 	                                var numberOfDaysToAdd = 29;
-	                                //today.setDate(today.getDate() + numberOfDaysToAdd);
+	                                today.setDate(today.getDate() + numberOfDaysToAdd);
 
 	                                // Set the values of twillio account
-	                                twillio.number = num.number;
+	                                twillio.number = number.twillioNumber;
+									twillio.sId = number.sid;
 	                                twillio.status = 'IN_USE';
 	                                twillio.validityTime = today.getTime();
 	                                twillio.assignedTo = event._id;
@@ -165,32 +154,34 @@ Twillio.setup = function(app) {
 	                                twillio.save(function(err, twillio) {
 
 	                                    if (err) {
-	                                        retError1( res, error, 159);
+	                                        retError1( res, error, 156);
 	                                    }
 										else {
-		                                    retSuccess1( res, eventID, number , 162);
+	
+											logger.info('New Twillio number saved successfully');
+		                                    retSuccess1( res, event._id, twillioNumber , 161);
 										}
 										
 	                                });
+								
+								}// end of else from twillio 
 									
-	                            }
-								
-								
 	                        });
 
 
-	                    }
+	                    } // end of else
 									
 						
 	                });
 					
-					*/
+					
 				}
-            });
+
+            }); // event save
 
         } 		
 		else{
-			console.log("CL-Line#194, params data: ", data);			
+			console.log("CL-Line#182, params data: ", params);			
 			retError1( res, "userId not found", 183 );
 		}
 		

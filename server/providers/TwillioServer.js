@@ -23,59 +23,70 @@ TwillioServer.setup = function(app) {
     app.post('/ut-handle-call', function(req, res) {
 
         // Get the number we are being called from.
-        var callerId = req.body.From;
+        //var callerId = req.body.From;
 
+		logger.info('inside ut-handle-call');
+		logger.info('=========== REQUEST BODY ===========');
+		logger.info(req.body);
 		var response =
 	            "<Response>\
-						<Play>/audio/PleaseWait.wav</Play>\
-						<Play>/audio/waves.wav</Play>\
-						<Leave />\
+						<Play>/audio/voice.wav</Play>\
+							<Gather action='/handle-keypress' method='GET' timeout='5'>\
+								<Say>Press 1 to forward this call</Say>\
+							</Gather>\
+							<Say>We didn't receive any input. Goodbye!</Say>\
 					</Response>";
 
-	        res.writeHead(200, {
+	   	res.writeHead(200, {
 	            'Content-Type': 'text/xml'
 	        });
-	        res.end(response);		
-			
-			//When user has emergency number then after playing auto, give an option of press 1 to call for emergency,
-			//When  user pressed 1 then call on emergency number
-				
-			var hasEmgNumber = false;
-			if( hasEmgNumber ) {
-				var  emergencyNumber = "client:raafay";
-				
-	            // Initiate call to the agent.
-	            var client = require('twilio')(config.twilio.accountSid, config.twilio.authToken);
-
-	            client.calls.create({
-	                url: "http://www.riksof.com/agent-called-twiml",
-	                to: emergencyNumber,
-	                from: callerId,
-	                timeout: 20
-	            }, function(err, call) {
-	                console.log('Call forwaded to emergency number: '+emergencyNumber);
-	            });
-			}        
+	 	res.end(response);		
+		
     });
+
+	app.get('/handle-keypress', function(req, res) {
+		
+		logger.info('inside handle-keypress');
+		logger.info('Digits = ' + req.query.Digits);
+
+		if ( req.query.Digits == '1' ) {
+		
+		var response =
+			"<Response>\
+    			<Dial action='/handle-forward-call-status' method='POST' timeout='10'>\
+					+9223222569865\
+    			</Dial>\
+    			<Say>I am unreachable</Say>\
+				</Response>";
+			
+			res.writeHead(200, {
+	            'Content-Type': 'text/xml'
+	        });
+	 		res.end(response);
+			
+		} else {
+
+			var response =		
+					"<Response><Say>You entered " + req.query.Digits + "</Say></Response>";
+
+				res.writeHead(200, {
+	            'Content-Type': 'text/xml'
+	        });
+	 		res.end(response);
+		}
+	});
 
 
 
     /**
-     * Connecting to an agent.
+     * Handle forward call
      */
-    app.post('/agent-called-twiml', function(req, res) {
-        // Queue the call
-        var response =
-            "<Response>\
-					<Dial>\
-						<Queue url='/dial-tone-twiml'>CallQueue</Queue>\
-					</Dial>\
-				</Response>";
-
-        res.writeHead(200, {
-            'Content-Type': 'text/xml'
-        });
-        res.end(response);
+    app.post('/handle-forward-call-status', function(req, res) {
+       
+		logger.info('inside handle-forward-call-status');
+		logger.info('=========== REQUEST BODY 1 ===========');
+		logger.info(req.body);
+		
     });
 
     /**
