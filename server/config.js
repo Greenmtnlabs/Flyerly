@@ -78,5 +78,10 @@ config.twilio.tokenExpiry = 604800;
 config.urls = {};
 config.urls.TWILLIO_CALL_URL = "http://ec2-54-69-199-28.us-west-2.compute.amazonaws.com:3000/ut-handle-call";
 
+//Directory paths
+config.dir = {};
+config.dir.recordingsPath = __dirname+'/../recordings/';
+
+
 // Make the configuration parameters available.
 module.exports = config;

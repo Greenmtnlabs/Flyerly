@@ -47,70 +47,106 @@ Events.setup = function(app) {
 			console.log( msg );
 		}
 		
+		print( "req.body: ", req.body );
+		
         // Our logger for logging to file and console
         var logger = require(__dirname + '/../logger');
 
         // Construct response JSON
         var responseJSON = {};
 
-        // Var for Events models
-        var Events = require(__dirname + '/../models/Events');
-
-        var params = req.body;
-		if( params.emergencyContacts ){
-			params.emergencyContacts	= JSON.parse( params.emergencyContacts );
-		}
-
-		var eventId = params.eventId,
-		params = {
-			userId: params.userId,
-			
-			spendingTimeTxt: params.spendingTimeTxt,
-		    startTime: params.startDate,
-		    endTime: params.endDate,
-			hasEndDate: params.hasEndDate,
-		    
-			forwardingNumber: params.forwardingNumber,
-			location: params.location,
-		    emergencyNumber: params.emergencyNumber,
-			emergencyContacts: params.emergencyContacts,
-			hasRecording: params.hasRecording,
-			
-			socialStatus: params.socialStatus,
-			fbAuth: params.fbAuth,
-			twitterAuth: params.twitterAuth,
-			linkedinAuth: params.linkedinAuth,
-			
-			email: params.email,
-			password: params.password,
-			respondingEmail: params.respondingEmail
-		};
-
-
-        console.log( "params: ", params );
-
-
+        var eventId = req.body.eventId;
+		
         if ( eventId ) {
-            // update for the given event 
-            Events.update({
-                    _id: eventId
-                }, {
-                    // Set the values of request to event and update
-                    $set: params
-                }, {
-                    safe: true,
-                    upsert: true
-                },
-                function(err, model) {
+			
+			//1-If recording exist then upload file, 2-then update event, 3-then return response.
+			var recordingFileName = "";
+			
+			//2-then update event, 3-then return response.
+			function updateEventAndRetResponse() {
+				
+		        // Var for Events models
+		        var Events = require(__dirname + '/../models/Events');
+		
+		        var params = req.body;
 
-                    if (err) {
-						retError1( res, err, __line );
-                    }
-					else{
-                    	retSuccess1( res );
+				if( params.emergencyContacts ){
+					params.emergencyContacts	= JSON.parse( params.emergencyContacts );
+				}
+				params = {
+					userId: params.userId,
+			
+					spendingTimeTxt: params.spendingTimeTxt,
+				    startTime: params.startDate,
+				    endTime: params.endDate,
+					hasEndDate: params.hasEndDate,
+		    
+
+					forwardingNumber: params.forwardingNumber,
+					location: params.location,
+				    emergencyNumbers: params.emergencyNumbers,
+					emergencyContacts: params.emergencyContacts,
+					hasRecording: params.hasRecording,
+					recording: recordingFileName,
+			
+					socialStatus: params.socialStatus,
+					fbAuth: params.fbAuth,
+					twitterAuth: params.twitterAuth,
+					linkedinAuth: params.linkedinAuth,
+			
+					email: params.email,
+					password: params.password,
+					respondingEmail: params.respondingEmail
+				};
+				
+	            // update for the given event 
+	            Events.update({
+	                    _id: eventId
+	                }, {
+	                    // Set the values of request to event and update
+	                    $set: params
+	                }, {
+	                    safe: true,
+	                    upsert: true
+	                },
+	             	function(err, model) {
+						
+	                    if (err) {
+							retError1( res, err, __line );
+	                    }
+						else{
+	                    	retSuccess1( res );
+						}
 					}
-                });
+				);
+				
+			} //End functions
+			
+			
+			
+			var file1 = req.files.recording;
+			//var profileImageDir  = __dirname+'/../../recordings/'; //config.dir.recordingsPath
+			
+			if( file1 != undefined ) {
+				fs = require("fs");
+				recordingFileName  = file1.name;
+		
+				//Upload file
+		        fs.rename(
+				  file1.path, 
+				  (config.dir.recordingsPath + recordingFileName), 
+				  function (error) {
 
+					 if (error) {
+						retError1( res, error, __line );
+		             } else {            	
+						updateEventAndRetResponse();
+		             }				 
+		        });
+			}
+			else{
+				updateEventAndRetResponse();
+			}
         }
 		else{
 			retError1( res, "eventId not found.", __line );
