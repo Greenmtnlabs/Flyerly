@@ -73,7 +73,7 @@ Twillio.setup = function(app) {
 				print("CL-Line#66 event obj: ", event); 
 				
                 if (error) {
-					retError1( res, error, 76);
+					retError1( res, error, __line);
                 } 
 				else {
 					
@@ -88,7 +88,7 @@ Twillio.setup = function(app) {
 	                }, function(error, obj) {
 
 	                    if ( error ) {
-	                        retError1( res, error, 91);
+	                        retError1( res, error, __line);
 	                    }						
 	                    else if( obj != null ) {
 							
@@ -102,11 +102,11 @@ Twillio.setup = function(app) {
 	                        obj.save(function(error, t) {
 
 	                            if (error) {
-									retError1( res, error, 106);
+									retError1( res, error, __line);
 	                            } else{
 
 									logger.info('Twillio number updated successfully');
-									retSuccess1( res, event._id, obj.number , 109);
+									retSuccess1( res, event._id, obj.number , __line);
 								}
 	                        });
 
@@ -114,22 +114,24 @@ Twillio.setup = function(app) {
 	                        // If we request the server to new number
 	                    }
 						else {
-
-	                        // Object of the model
-	                        var twillio = new Twillio();
+							
+							retError1( res, 'No Twillio number found. Please contact abdul.rauf@riksof.com', __line);
+							
+							// Object of the model
+	                       /* var twillio = new Twillio();
 
 							//require the Twilio module and create a REST client 
 							var client = require('twilio')(config.twilio.accountSid, config.twilio.authToken); 
 							logger.info('Get new number from Twillio');
 	                        // create a new number 
 							client.incomingPhoneNumbers.create({
-								 voiceUrl: "http://ec2-54-69-199-28.us-west-2.compute.amazonaws.com:3000/ut-handle-call",
+								 voiceUrl: config.urls.TWILLIO_CALL_URL,
 								 voiceMethod: "POST",
 								 areaCode: "646"
 							     		                  
 							}, function(err, number) {
 	                            if( error ){
-	                                retError1( res, error, 132);
+	                                retError1( res, error, __line);
 	                            } else {
 
 									var twillioNumber = number.phone_number;
@@ -154,19 +156,19 @@ Twillio.setup = function(app) {
 	                                twillio.save(function(err, twillio) {
 
 	                                    if (err) {
-	                                        retError1( res, error, 156);
+	                                        retError1( res, error, __line);
 	                                    }
 										else {
 	
 											logger.info('New Twillio number saved successfully');
-		                                    retSuccess1( res, event._id, twillioNumber , 161);
+		                                    retSuccess1( res, event._id, twillioNumber , __line);
 										}
 										
 	                                });
 								
 								}// end of else from twillio 
 									
-	                        });
+	                        });*/
 
 
 	                    } // end of else
@@ -182,7 +184,7 @@ Twillio.setup = function(app) {
         } 		
 		else{
 			console.log("CL-Line#182, params data: ", params);			
-			retError1( res, "userId not found", 183 );
+			retError1( res, "userId not found", __line );
 		}
 		
     });

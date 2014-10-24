@@ -56,10 +56,10 @@ else if( config.app.mode.current == config.app.mode.PRODUCTION  ) {
 	config.http.host	=	'http://api.typepath.com';
 } 
 else if( config.app.mode.current == config.app.mode.DEVELOPMENT  ) {
-	config.http.port = 3000;
+	config.http.port = 8000;
 	// 1-Database setting
 	config.db.host =  'mongodb://admin:untechable@ds047930.mongolab.com:47930/untechable';
-	config.http.host	=	'http://localhost:3000';
+	config.http.host	=	'http://www.riksof.com:8000';
 }
 
 // ACCOUNT TYPES
@@ -76,7 +76,7 @@ config.twilio.tokenExpiry = 604800;
 
 //Urls of apis
 config.urls = {};
-config.urls.TWILLIO_CALL_URL = "http://ec2-54-69-199-28.us-west-2.compute.amazonaws.com:3000/ut-handle-call";
+config.urls.TWILLIO_CALL_URL = config.http.host + "/ut-handle-call";
 
 //Directory paths
 config.dir = {};
