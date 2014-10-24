@@ -19,6 +19,7 @@ var eventsSchema = db.Schema({
 	emergencyNumbers : String ,
 	location : String ,
 	hasRecording : String ,
-	emergencyContacts: Object	
+	emergencyContacts: Object,
+	recording: String	
 });
 module.exports = db.model( 'Events', eventsSchema );
