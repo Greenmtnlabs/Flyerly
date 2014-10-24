@@ -35,7 +35,7 @@
 #define SET @"SET"
 
 //#define SERVER_URL @"http://192.168.0.116:3001"
-#define SERVER_URL @"http://www.riksof.com:8000"
+#define SERVER_URL @"http://riksof.com:8000"
 
 #define API_GET_NUMBER SERVER_URL@"/get-forwading-number"
 #define API_SAVE SERVER_URL@"/event/save"
