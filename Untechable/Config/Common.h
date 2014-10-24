@@ -34,7 +34,7 @@
 #define SAVE @"SAVE"
 #define SET @"SET"
 
-#define SERVER_URL @"http://192.168.0.111:3000"
+#define SERVER_URL @"http://192.168.0.116:3000"
 #define API_SAVE SERVER_URL@"/event/save"
 
 

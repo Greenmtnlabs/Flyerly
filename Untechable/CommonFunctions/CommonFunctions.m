@@ -58,4 +58,10 @@
     NSLog(@"JSON Output: %@", jsonString);
     return jsonString;
 }
+
+-(float)getTimeZoneOffset
+{
+    float timezoneoffset3 = ([[NSTimeZone systemTimeZone] secondsFromGMT] / 3600.0);
+    return timezoneoffset3;
+}
 @end
