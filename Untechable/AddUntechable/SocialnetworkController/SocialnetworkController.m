@@ -238,6 +238,7 @@
 
 -(void)storeSceenVarsInDic
 {
+    //untechable.socialStatus = [NSString stringWithFormat:@"%@",_inputSetSocialStatus.text];
     untechable.socialStatus = _inputSetSocialStatus.text;
     [untechable setOrSaveVars:SAVE];
 }

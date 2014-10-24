@@ -36,7 +36,7 @@
 @property (nonatomic, assign) BOOL hasRecording;
 
 //Screen3
-@property (nonatomic, assign) NSString *socialStatus, *fbAuth, *twitterAuth, *linkedinAuth;
+@property (strong, nonatomic) NSString *socialStatus, *fbAuth, *twitterAuth, *linkedinAuth;
 
 //Screen4
 @property (strong, nonatomic) NSString *email, *password, *respondingEmail;
