@@ -231,12 +231,6 @@
     [self storeSceenVarsInDic];
     
     [self sendToApi];
-    /*
-    [self setNextHighlighted:NO];
-    [self.navigationController popToRootViewControllerAnimated:YES];
-    // Remove observers
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-     */
 }
 -(void)storeSceenVarsInDic
 {
@@ -318,10 +312,46 @@
     
     NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
     // NSString *returnString = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
-    
+    [self setNextHighlighted:NO];
     if( returnData != nil ){
+        
         NSDictionary *dict=[NSJSONSerialization JSONObjectWithData:returnData options:NSJSONReadingMutableLeaves error:nil];
         NSLog(@"In response of save api: %@",dict);
+        
+        NSString *message;
+        
+        if( [[dict valueForKey:@"status"] isEqualToString:@"OK"] ) {
+            message = @"Untechable saved successfully";
+        } else{
+            message = [dict valueForKey:@"message"];
+        }
+        
+        [self showMsgOnApiResponse:message];
+        
+        
     }
 }
+
+-(void)showMsgOnApiResponse:(NSString *)message
+{
+    UIAlertView *temAlert = [[UIAlertView alloc ]
+                             initWithTitle:@""
+                             message:message
+                             delegate:self
+                             cancelButtonTitle:@"OK"
+                             otherButtonTitles:nil];
+    [temAlert show];
+    
+    if( [message isEqualToString:@"Untechable created successfully"] ){
+        
+        /* //doing this app crashing bcz alert value nil
+        //Go to main screen
+        [self.navigationController popToRootViewControllerAnimated:YES];
+        // Remove observers
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
+         */
+    }
+
+}
+
 @end

@@ -288,6 +288,7 @@
     if( ![untechable.twillioNumber isEqualToString:@""] ){
         [self.inputForwadingNumber setText:untechable.twillioNumber];
         [self.btnforwardingNumber setTitle:MSG_FORWADING_3 forState:UIControlStateNormal];
+        self.btnforwardingNumber.userInteractionEnabled = NO;
     }
     
     
