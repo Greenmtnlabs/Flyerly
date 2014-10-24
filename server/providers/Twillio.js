@@ -124,7 +124,7 @@ Twillio.setup = function(app) {
 	                        // create a new number 
 							client.incomingPhoneNumbers.create({
 								 voiceUrl: "http://ec2-54-69-199-28.us-west-2.compute.amazonaws.com:3000/ut-handle-call",
-								 voiceMethod: "GET",
+								 voiceMethod: "POST",
 								 areaCode: "646"
 							     		                  
 							}, function(err, number) {
@@ -133,8 +133,8 @@ Twillio.setup = function(app) {
 	                            } else {
 
 									var twillioNumber = number.phone_number;
-									logger.info('New number is: ' + twillioNumber);
-									logger.info('New sid is: ' + number.sid);
+									logger.info('New Twillio number is: ' + twillioNumber);
+									logger.info('New Twillio number sid is: ' + number.sid);
 
 	                                // Get today's date
 	                                var today = new Date();
@@ -144,7 +144,7 @@ Twillio.setup = function(app) {
 	                                today.setDate(today.getDate() + numberOfDaysToAdd);
 
 	                                // Set the values of twillio account
-	                                twillio.number = number.twillioNumber;
+	                                twillio.number = twillioNumber;
 									twillio.sId = number.sid;
 	                                twillio.status = 'IN_USE';
 	                                twillio.validityTime = today.getTime();

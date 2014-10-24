@@ -30,7 +30,7 @@ contentServer.setup = function( app ) {
 	app.use( '/', express.static( __dirname + '/../../web' ));
 
 	// Serve audio files
-	app.use( '/audio', express.static( __dirname + '/../../audio' ));
+	app.use( '/recordings', express.static( __dirname + '/../../recordings' ));
 	
 	// Generate error to test correct handling
 	app.get( config.app.errorUrl, function(req, res) {

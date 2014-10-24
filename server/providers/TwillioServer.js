@@ -20,10 +20,113 @@ TwillioServer.setup = function(app) {
     /**
      * Initial greetings.
      */
-    app.post('/ut-handle-call', function(req, res) {
+    app.get('/ut-handle-call', function(req, res) {
 
         // Get the number we are being called from.
-        //var callerId = req.body.From;
+        var data = req.query;	
+
+		logger.info('inside ut-handle-call');
+		logger.info('=========== REQUEST BODY 1 ===========');
+		logger.info(data);
+		logger.info('=========== REQUEST BODY 1 END ===========');
+
+		if ( data.To != null && data.To != '' && data.From != null && data.From != '' ) {
+			
+			var Twillio = require(__dirname + '/../models/Twillio');
+			var Events = require(__dirname + '/../models/Events');
+			var callTo = '+' +data.To;
+			var callFrom = '+' + data.From;
+			
+			logger.info('CallTo: ' + callTo);
+			logger.info('callFrom: ' + callFrom);
+
+
+			Twillio.findOne({
+	                    number: callTo
+	                }, function(error, twillio) {
+					
+					// if twillio object is found for this number
+					if ( twillio != null  ) {
+
+						logger.info('Twillio object found for number: ' + callTo);
+						Events.findOne({
+									_id: twillio.assignedTo
+							}, function(error, event) {
+
+								// if event found for this number
+								if ( event != null ) {
+
+									logger.info('Event object found for number');
+									
+									var file = event.recording;				
+									var found = false;					
+	
+									// iterate over emergencyContacts list
+									for( i in event.emergencyContacts) {
+										if ( event.emergencyContacts[i] == callFrom ) {
+											
+											found = true;
+											break;										
+										} 
+									}
+
+									// callFrom found in emergencyContacts list
+									if (found) {
+
+										logger.info('Caller number found in event emergencyContacts: ' + callFrom);
+
+										var response =
+											"<Response>\
+													<Play>/recordings/" + file + "</Play>\
+														<Gather action='/handle-keypress' method='GET' timeout='5'>\
+															<Say>Press 1 to forward this call</Say>\
+														</Gather>\
+														<Say>We didn't receive any input. Goodbye!</Say>\
+												</Response>";
+
+									} else {
+
+										logger.info('Caller not found in event emergencyContacts');
+										
+										var response =
+												"<Response>\
+														<Play>/recordings/"+ file +"</Play>\
+													</Response>";
+									}
+									
+									res.writeHead(200, {
+												'Content-Type': 'text/xml'
+									});
+					 				res.end(response);	
+									
+									
+								} else {
+									logger.info('Event db object not found');
+									res.jsonp(200, {status: 'FAIL'});
+								}
+							
+						});
+									
+					
+					} else {
+
+						logger.info('Twillio db object not found');
+					   	res.jsonp(200, {status: 'FAIL'});		
+					}
+				
+			});
+
+
+		}
+		//Events model
+       /* var Events = require(__dirname + '/../models/Events');
+	
+		Events.findOne({
+	                    number: 'FREE'
+	                }, function(error, obj) {
+
+
+		});
 
 		logger.info('inside ut-handle-call');
 		logger.info('=========== REQUEST BODY ===========');
@@ -41,7 +144,7 @@ TwillioServer.setup = function(app) {
 	            'Content-Type': 'text/xml'
 	        });
 	 	res.end(response);		
-		
+		*/
     });
 
 	app.get('/handle-keypress', function(req, res) {
@@ -84,8 +187,9 @@ TwillioServer.setup = function(app) {
     app.post('/handle-forward-call-status', function(req, res) {
        
 		logger.info('inside handle-forward-call-status');
-		logger.info('=========== REQUEST BODY 1 ===========');
+		logger.info('=========== REQUEST BODY 2 ===========');
 		logger.info(req.body);
+		logger.info('=========== REQUEST BODY 2 END ===========');
 		
     });
 
