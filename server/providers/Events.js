@@ -72,7 +72,7 @@ Events.setup = function(app) {
 		    
 			forwardingNumber: params.forwardingNumber,
 			location: params.location,
-		    emergencyNumbers: params.emergencyNumbers,
+		    emergencyNumber: params.emergencyNumber,
 			emergencyContacts: params.emergencyContacts,
 			hasRecording: params.hasRecording,
 			

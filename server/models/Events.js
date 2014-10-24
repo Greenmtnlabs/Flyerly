@@ -19,7 +19,7 @@ var eventsSchema = db.Schema({
     
 	forwardingNumber: String ,
 	location: String ,
-    emergencyNumbers: String ,
+    emergencyNumber: String ,
 	emergencyContacts: Object ,
 	hasRecording: String ,
 	recording: String,	
