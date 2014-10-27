@@ -222,7 +222,7 @@
 }
 -(void)storeSceenVarsInDic
 {
-    untechable.spendingTimeTxt = _inputSpendingTimeTxt.text;
+    //untechable.spendingTimeTxt = _inputSpendingTimeTxt.text;
     untechable.hasEndDate = !([_cbNoEndDate isSelected]);
     
     [untechable setOrSaveVars:SAVE];

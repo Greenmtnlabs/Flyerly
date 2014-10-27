@@ -180,6 +180,7 @@
         else{
             [recTimer invalidate];
             recTimer = nil;
+            timerI = 0;
             
             [stopButton setEnabled:NO];
             [playButton setEnabled:YES];
@@ -201,6 +202,7 @@
         else{
             [playTimer invalidate];
             playTimer = nil;
+            timerI = 0;
             
             [stopButton setEnabled:NO];
             [playButton setEnabled:YES];
@@ -210,7 +212,7 @@
 }
 
 - (void)updateRecSlider {
-    NSLog(@"updateRecSlider counter: %i", timerI);
+    NSLog(@"updateRecSlider counter: %i", timerI++);
     // Update the slider about the music time
     if ( recorder.recording ) {
         [self updateLableOf:@"recordTimeLabel"];
@@ -263,7 +265,7 @@
 }
 
 - (void)updatePlaySlider {
-    NSLog(@"updatePlaySlider counter: %i", timerI);
+    NSLog(@"updatePlaySlider counter: %i", timerI++);
     // Update the slider about the music time
     //if ( recorder.recording ) {
         [self updateLableOf:@"playTimeLabel"];

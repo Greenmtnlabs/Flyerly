@@ -21,7 +21,24 @@
 
 @interface PhoneSetupController (){
     NSString *tableViewFor;
+    
+    AVAudioRecorder *recorder;
+    AVAudioPlayer *player;
+    NSTimer *recTimer;
+    NSTimer *playTimer;
+    int timerRec, timerPlay;
+    NSString *recFilePath;
+    NSURL *outputFileURL;
+    BOOL configuredRecorder, configuredPlayer;
+    
 }
+
+
+@property (strong, nonatomic) IBOutlet UILabel *lbl1CustomVoic;
+@property (strong, nonatomic) IBOutlet UILabel *lbl2CustomVoic;
+@property (strong, nonatomic) IBOutlet UILabel *lbl3CustomVoic;
+@property (strong, nonatomic) IBOutlet UILabel *lblRecTime;
+
 
 @property (strong, nonatomic) IBOutlet UIButton *btnforwardingNumber;
 @property (strong, nonatomic) IBOutlet UITextField *inputForwadingNumber;
@@ -50,6 +67,7 @@
 
 
 @synthesize untechable;
+@synthesize btnPlay,btnRec,progressBar;
 
 
 
@@ -74,9 +92,11 @@
     
     [self tableViewSR:@"start" callFor:@"contactsTableView"];
     
-    NSArray *fields = @[ self.inputEmergencyNumber, self.inputLocation, self.inputForwadingNumber];
+    NSArray *fields = @[ self.inputEmergencyNumber ];
     [self setKeyboardControls:[[BSKeyboardControls alloc] initWithFields:fields]];
     [self.keyboardControls setDelegate:self];
+    
+    [self initPlayRecSetting];
     
 }
 
@@ -253,8 +273,8 @@
 }
 
 -(void)storeSceenVarsInDic{
-    untechable.twillioNumber = _inputForwadingNumber.text;
-    untechable.location = _inputLocation.text;
+    //untechable.twillioNumber = _inputForwadingNumber.text;
+    //untechable.location = _inputLocation.text;
     untechable.emergencyNumber = _inputEmergencyNumber.text;
     //untechable.emergencyContacts = untechable.emergencyContacts; //no need
     
@@ -270,47 +290,27 @@
 -(void)updateUI
 {
     
-    [self.btnforwardingNumber setTitleColor:defGray forState:UIControlStateNormal];
-    self.btnforwardingNumber.titleLabel.font = [UIFont fontWithName:APP_FONT size:20];
-    
-    self.inputForwadingNumber.userInteractionEnabled = NO;
-    [self.inputForwadingNumber setTextColor:defGreen];
-    self.inputForwadingNumber.font = [UIFont fontWithName:APP_FONT size:16];
-    self.inputForwadingNumber.delegate = self;
+    [_lbl1CustomVoic setTextColor:defGray];
+    _lbl1CustomVoic.font = [UIFont fontWithName:APP_FONT size:20];
 
-    if( ![untechable.twillioNumber isEqualToString:@""] ){
-        [self.inputForwadingNumber setText:untechable.twillioNumber];
-        [self.btnforwardingNumber setTitle:MSG_FORWADING_3 forState:UIControlStateNormal];
-        self.btnforwardingNumber.userInteractionEnabled = NO;
-    }
+    [_lbl2CustomVoic setTextColor:defGray];
+    _lbl2CustomVoic.font = [UIFont fontWithName:APP_FONT size:15];
     
+    [_lbl3CustomVoic setTextColor:defGray];
+    _lbl3CustomVoic.font = [UIFont fontWithName:APP_FONT size:15];
     
-    [_lblLocation setTextColor:defGray];
-    _lblLocation.font = [UIFont fontWithName:APP_FONT size:20];
-    
-    [self.inputLocation setTextColor:defGreen];
-    self.inputLocation.font = [UIFont fontWithName:APP_FONT size:16];
-    self.inputLocation.delegate = self;
-    
-    if( ![untechable.location isEqualToString:@""] )
-    [self.inputLocation setText:untechable.location];
-
+    [_lblRecTime setTextColor:defGray];
+    _lblRecTime.font = [UIFont fontWithName:APP_FONT size:15];
     
     [_lblEmergencyNumber setTextColor:defGray];
     _lblEmergencyNumber.font = [UIFont fontWithName:APP_FONT size:20];
-    
     
     [self.inputEmergencyNumber setTextColor:defGreen];
     self.inputEmergencyNumber.font = [UIFont fontWithName:APP_FONT size:16];
     self.inputEmergencyNumber.delegate = self;
     [self.inputEmergencyNumber setText:untechable.emergencyNumber];
-    
-    if( ![untechable.twillioNumber isEqualToString:@""] )
-    [self.inputEmergencyNumber setText:untechable.emergencyNumber];
 
     [self tableViewSR:@"reStart" callFor:@"contactsTableView"];
-    
-    
     
     [self.btnImport setTitleColor:defGray forState:UIControlStateNormal];
     self.btnImport.titleLabel.font = [UIFont fontWithName:APP_FONT size:20];
@@ -318,67 +318,7 @@
     [_lblCanContactTxt setTextColor:defGray];
     _lblCanContactTxt.font = [UIFont fontWithName:APP_FONT size:15];
     
-    
 }
-
-
--(IBAction)getForwardingNum {
-    if( [self.btnforwardingNumber.titleLabel.text isEqualToString:MSG_FORWADING_1] ){
-        _getANumberAlert = [[UIAlertView alloc ]
-                           initWithTitle:@""
-                           message:@"Would you like to purchase a forwarding number? This number will have a customizeable auto-response feature & can be used to forward your calls to while you're away."
-                           delegate:self
-                           cancelButtonTitle:@"No"
-                           otherButtonTitles:@"Yes" ,
-                           nil];
-        [_getANumberAlert show];
-    }
-}
--(void)getForwadingNumAfterAllow {
-    [self.btnforwardingNumber setTitle:MSG_FORWADING_2 forState:UIControlStateNormal];
-    
-    NSString *API_GETNUM = [NSString stringWithFormat:@"%@?userId=%@",API_GET_NUMBER,untechable.userId];
-    
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setURL:[NSURL URLWithString:API_GETNUM]];
-    [request setHTTPMethod:@"GET"];
-    
-    NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-    // NSString *returnString = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
-    
-    if( returnData != nil ){
-        NSDictionary *dict=[NSJSONSerialization JSONObjectWithData:returnData options:NSJSONReadingMutableLeaves error:nil];
-        NSLog(@"In response of save api: %@",dict);
-        
-        if( [[dict valueForKey:@"status"] isEqualToString:@"OK"] ) {
-            untechable.eventId       = [dict valueForKey:@"eventID"];
-            untechable.twillioNumber = [dict valueForKey:@"number"];
-            self.inputForwadingNumber.text = untechable.twillioNumber;
-            
-            [untechable setOrSaveVars:SAVE];
-            
-            [self.btnforwardingNumber setTitle:MSG_FORWADING_3 forState:UIControlStateNormal];
-            self.btnforwardingNumber.userInteractionEnabled = NO;
-        }
-        else if( [[dict valueForKey:@"code"] isEqualToString:@"number_unavailable"] ) {
-            [self.btnforwardingNumber setTitle:MSG_FORWADING_1 forState:UIControlStateNormal];
-            self.btnforwardingNumber.userInteractionEnabled = YES;
-            
-            UIAlertView *temAlert = [[UIAlertView alloc ]
-                                initWithTitle:@""
-                                message:[dict valueForKey:@"message"]
-                                delegate:self
-                                cancelButtonTitle:@"OK"
-                                otherButtonTitles:nil];
-            [temAlert show];
-        }
-        
-    }
-
-    
-}
-
-
 
 #pragma mark -  Table view functions
 -(void)tableViewSR:(NSString*)startRestart callFor:callFor{
@@ -482,10 +422,7 @@
 
 #pragma mark - UIAlertView delegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if(alertView == _getANumberAlert && buttonIndex == 1) {
-        [self getForwadingNumAfterAllow];
-    }
-    else if(alertView == _importContacts && buttonIndex == 1) {
+   if(alertView == _importContacts && buttonIndex == 1) {
         [self importContactsAfterAllow];
     }
 }
@@ -549,4 +486,278 @@
         
     }
 }
+
+#pragma mark -  Recording functions
+-(void)initPlayRecSetting
+{
+    
+    timerRec = 0;
+    timerPlay = 0;
+    configuredRecorder = NO;
+    configuredPlayer = NO;
+    
+    // Disable Stop/Play button when application launches
+    [self setEnable:btnPlay enable:NO];
+    
+    recFilePath = [untechable getRecFilePath];
+    outputFileURL = [NSURL URLWithString:recFilePath];
+    
+    //[self playTapped];
+    
+    [self configuredPlayerFn];
+    
+    NSLog(@"player.duration: %f",player.duration);
+}
+
+- (IBAction)recordPauseTapped:(id)sender {
+    
+    [self stopPlay];
+    
+    if ( recTimer == nil ) {
+        
+        [self configureRecorder];
+        
+        AVAudioSession *session = [AVAudioSession sharedInstance];
+        [session setActive:YES error:nil];
+        
+        // Start recording
+        [recorder record];
+        [self timerInit:YES callFor:1];
+        
+    } else {
+        [self stopRec];
+    }
+}
+
+- (IBAction)stopTapped:(id)sender {
+    [self stopRec];
+}
+-(void)stopRec{
+    
+    if ( recTimer != nil ) {
+        [recorder stop];
+        
+        AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+        [audioSession setActive:NO error:nil];
+        
+        untechable.hasRecording = YES;
+        [self timerInit:NO callFor:1];
+    }
+}
+-(void) stopAllTask
+{
+    [self stopRec];
+    [self stopPlay];
+}
+
+-(void)stopPlay{
+    if ( playTimer != nil ) {
+        [player stop];
+        [self timerInit:NO callFor:2];
+    }
+}
+
+
+- (IBAction)playTapped:(id)sender {
+    [self playTapped];
+    
+}
+-(void)playTapped
+{
+    [self stopRec];
+    
+    
+    [self configuredPlayerFn];
+    
+    if ( player.duration > 0.0 ) {
+        if( playTimer == nil ){
+            [player play];
+            [self timerInit:YES callFor:2];
+        }
+        else{
+            [self stopPlay];
+        }
+    }
+}
+
+
+- (void)timerInit :(BOOL) init callFor:(int)callFor{
+    
+    //Record
+    if( callFor == 1 ){
+        
+        if( init ){
+            //this is nstimer to initiate update method
+            recTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateRecSlider) userInfo:nil repeats:YES];
+            _lblRecTime.text = @"00:00";
+        }
+        else{
+            [recTimer invalidate];
+            recTimer = nil;
+        }
+        
+    }
+    //Play timer
+    else if( callFor == 2 ){
+        
+        if( init ){
+            //this is nstimer to initiate update method
+            playTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updatePlaySlider) userInfo:nil repeats:YES];
+            _lblRecTime.text = @"00:00";
+            
+        }
+        else{
+            [playTimer invalidate];
+            playTimer = nil;
+        }
+    }
+    
+    
+    if( !(init) ){
+        progressBar.progress = 1.0;
+    }
+    
+}
+
+- (void)updateRecSlider {
+    NSLog(@"updateRecSlider counter: %i", timerRec++);
+    // Update the slider about the music time
+    if ( recorder.recording ) {
+        [self updateLableOf:@"recordTimeLabel"];
+    }
+}
+
+-(void)updateLableOf:(NSString *)labelOf
+{
+    
+    if( [labelOf isEqualToString:@"recordTimeLabel"] ) {
+        float minutes = floor(recorder.currentTime/60);
+        float seconds = recorder.currentTime - (minutes * 60);
+        
+        NSString *time = [[NSString alloc]
+                          initWithFormat:@"%02.0f:%02.0f",
+                          minutes, seconds];
+        NSLog(@"recordTimeLabel time: %@", time);
+        _lblRecTime.text = time;
+        
+        [self updateSlider:1 seconds:seconds];
+        
+        if( seconds >= RECORDING_LIMIT_IN_SEC ){
+            [self stopRec];
+        }
+    }
+    else if( [labelOf isEqualToString:@"playTimeLabel"] ) {
+        float minutes = floor(player.currentTime/60);
+        float seconds = player.currentTime - (minutes * 60);
+        
+        NSString *time = [[NSString alloc]
+                          initWithFormat:@"%02.0f:%02.0f",
+                          minutes, seconds];
+        NSLog(@"player time: %@", time);
+        _lblRecTime.text = time;
+        
+        [self updateSlider:2 seconds:seconds];
+    }
+    else if( [labelOf isEqualToString:@"playTimeLabelOfRecorded"] ) {
+        float minutes = floor(player.duration/60);
+        float seconds = player.duration - (minutes * 60);
+        
+        NSString *time = [[NSString alloc]
+                          initWithFormat:@"%02.0f:%02.0f",
+                          minutes, seconds];
+        NSLog(@"player time: %@", time);
+        _lblRecTime.text = time;
+        
+        [self updateSlider:2 seconds:0.0];
+    }
+}
+
+- (void)updatePlaySlider {
+    NSLog(@"updatePlaySlider counter: %i", timerPlay++);
+    // Update the slider about the music time
+    //if ( recorder.recording ) {
+    [self updateLableOf:@"playTimeLabel"];
+    //}
+}
+
+-(void)updateSlider:(int)callFor seconds:(float)seconds {
+    //1 //rec
+    //2 play
+    
+    float progIn1Percentage;
+    
+    if( callFor == 1 )
+    progIn1Percentage = (seconds/RECORDING_LIMIT_IN_SEC);
+    else
+    progIn1Percentage = (seconds/player.duration);
+    
+    progressBar.progress = progIn1Percentage;
+}
+
+#pragma mark - AVAudioRecorderDelegate
+- (void) audioRecorderDidFinishRecording:(AVAudioRecorder *)avrecorder successfully:(BOOL)flag{
+    [self stopRec];
+}
+
+
+
+#pragma mark - AVAudioPlayerDelegate
+
+- (void) audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag{
+    [self stopPlay];
+}
+
+
+-(void)configureRecorder
+{
+    configuredRecorder = YES;
+    if( configuredRecorder ) {
+        // Setup audio session
+        AVAudioSession *session = [AVAudioSession sharedInstance];
+        [session setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
+        
+        NSMutableDictionary* recordSetting = [[NSMutableDictionary alloc]init];
+        [recordSetting setValue :[NSNumber  numberWithInt:kAudioFormatLinearPCM] forKey:AVFormatIDKey];
+        [recordSetting setValue:[NSNumber numberWithFloat:11025.0] forKey:AVSampleRateKey];
+        [recordSetting setValue:[NSNumber numberWithInt: 1] forKey:AVNumberOfChannelsKey];
+        [recordSetting setValue:[NSNumber numberWithInt:16] forKey:AVLinearPCMBitDepthKey];
+        
+        
+        // Initiate and prepare the recorder
+        recorder = [[AVAudioRecorder alloc] initWithURL:outputFileURL settings:recordSetting error:nil];
+        recorder.delegate = self;
+        recorder.meteringEnabled = YES;
+        [recorder prepareToRecord];
+    }
+}
+
+-(BOOL)configuredPlayerFn
+{
+    BOOL configured = NO;
+    NSError *error;
+    player = [[AVAudioPlayer alloc]
+              initWithContentsOfURL:outputFileURL
+              error:&error];
+    if (error)
+    {
+        NSLog(@"Error in audioPlayer: %@",
+              [error localizedDescription]);
+    } else {
+        player.delegate = self;
+        [player prepareToPlay];
+        
+        configured = YES;
+    }
+    
+    [self setEnable:btnPlay enable:YES];
+    [self updateLableOf:@"playTimeLabelOfRecorded"];
+    
+    return configured;
+}
+
+-(void) setEnable:(UIButton *)btn enable:(BOOL)enable
+{
+    //[btn setEnabled:enable];
+}
+
 @end
