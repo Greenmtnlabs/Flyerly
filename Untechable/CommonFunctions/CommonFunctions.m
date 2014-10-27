@@ -89,4 +89,18 @@
     return newDateStr;
 }
 
+-(UIImageView *) navigationGetTitleView
+{
+    /*
+     titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
+     titleLabel.backgroundColor = [UIColor clearColor];
+     titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_FONT_SIZE];
+     titleLabel.textAlignment = NSTextAlignmentCenter;
+     titleLabel.textColor = defGreen;
+     titleLabel.text = APP_NAME;
+     self.navigationItem.titleView = titleLabel; //Center title ___________
+     */
+    return  [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo.png"]];
+}
+
 @end

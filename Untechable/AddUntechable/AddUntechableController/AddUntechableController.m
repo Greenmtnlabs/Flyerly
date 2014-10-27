@@ -61,10 +61,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    [self setDefaultModel];
+    
     [self setNavigationDefaults];
     [self setNavigation:@"viewDidLoad"];
-
-    [self setDefaultModel];
     
     [self updateUI];
     
@@ -156,21 +156,14 @@
     if([callFrom isEqualToString:@"viewDidLoad"])
     {
         
-        // Center title ________________________________________________________________________________________________________
-        titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
-        titleLabel.backgroundColor = [UIColor clearColor];
-        titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_FONT_SIZE];
-        titleLabel.textAlignment = NSTextAlignmentCenter;
-        titleLabel.textColor = defGreen;
-        titleLabel.text = APP_NAME;
-        
-        self.navigationItem.titleView = titleLabel; //Center title ___________        
-        
+        // Center title __________________________________________________
+        self.navigationItem.titleView = [untechable.commonFunctions navigationGetTitleView];
 
-        // Right Navigation ________________________________________________________________________________________________________
+        // Right Navigation ______________________________________________
         
         
         nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
+        //[nextButton setBackgroundColor:[UIColor redColor]];//for testing
 
         nextButton.titleLabel.shadowColor = [UIColor clearColor];
         //nextButton.titleLabel.shadowOffset = CGSizeMake(0.0f, -1.0f);
@@ -182,7 +175,6 @@
         [nextButton setTitleColor:defGray forState:UIControlStateNormal];
         [nextButton addTarget:self action:@selector(btnNextTouchStart) forControlEvents:UIControlEventTouchDown];
         [nextButton addTarget:self action:@selector(btnNextTouchEnd) forControlEvents:UIControlEventTouchUpInside];
-        
 
         nextButton.showsTouchWhenHighlighted = YES;
         UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:nextButton];

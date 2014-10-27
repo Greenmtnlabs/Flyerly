@@ -30,7 +30,7 @@
     if (status == CHECKBOX_FILLED ) {
         checkImageName = @"CHECKBOX_FILLED";
     } else if (status == CHECKBOX_TICK) {
-        checkImageName = @"CHECKBOX_TICK";
+        checkImageName = @"CHECKBOX_FILLED";
     }else {
         checkImageName = @"CHECKBOX_EMPTY";
     }
