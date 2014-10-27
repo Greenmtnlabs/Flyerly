@@ -274,6 +274,12 @@
     //NSLog(@"date str dateStr %@", dateStr); //    "startTime": "Oct 24, 2014 03:04 PM",
     
     timeStampStr = [untechable.commonFunctions nsDateToTimeStampStr:[picker date]];
+    NSString *nowDateStr = [untechable.dateFormatter stringFromDate:[NSDate date]];
+    
+    if( [nowDateStr isEqualToString:dateStr] ){
+        dateStr = @"NOW";
+    }
+    
     
     //NSLog(@"time stamp dateStr %@", timeStampStr); //1414329211
     //NSLog(@"newDateStr: %@", [untechable.commonFunctions timestampStrToAppDate:dateStr]); // "startTime": "Oct 24, 2014 03:04 PM",
@@ -339,7 +345,7 @@
     
     [untechable initUntechableDirectory];
     
-    now1 = [[NSDate date] dateByAddingTimeInterval:(60*60)]; //current time +60mint
+    now1 = [[NSDate date] dateByAddingTimeInterval:(60)]; //current time
     
 }
 

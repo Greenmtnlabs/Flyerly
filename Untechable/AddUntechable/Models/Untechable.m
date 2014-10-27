@@ -258,7 +258,7 @@
     //Screen1
     timezoneOffset  = [commonFunctions getTimeZoneOffset];
     spendingTimeTxt = @"";
-    startDate = [commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(60*60)] ];  //current time +60mint
+    startDate = [commonFunctions nsDateToTimeStampStr: [NSDate date] ]; //start now
     endDate   = [commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(60*120)] ]; //current time +2hr
     hasEndDate = YES;
     
