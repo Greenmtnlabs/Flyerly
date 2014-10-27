@@ -67,10 +67,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    [self setDefaultModel];
+    
     [self setNavigationDefaults];
     [self setNavigation:@"viewDidLoad"];
     
-    [self setDefaultModel];
     [self tableViewSR:@"start" callFor:@"contactsTableView"];
     
     NSArray *fields = @[ self.inputEmergencyNumber, self.inputLocation, self.inputForwadingNumber];
@@ -176,19 +177,11 @@
         [self.navigationItem setLeftBarButtonItems:leftNavItems]; //Left button ___________
        
         
-        // Center title ________________________________________
-        titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
-        titleLabel.backgroundColor = [UIColor clearColor];
-        titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_FONT_SIZE];
-        titleLabel.textAlignment = NSTextAlignmentCenter;
-        titleLabel.textColor = defGreen;
-        titleLabel.text = APP_NAME;
+        // Center title __________________________________________________
+        self.navigationItem.titleView = [untechable.commonFunctions navigationGetTitleView];
         
         
-        self.navigationItem.titleView = titleLabel; //Center title ___________
-        
-        
-        // Right Navigation ________________________________________
+        // Right Navigation ______________________________________________
         nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66, 42)];
         [nextButton addTarget:self action:@selector(onNext) forControlEvents:UIControlEventTouchUpInside];
         nextButton.titleLabel.font = [UIFont fontWithName:TITLE_FONT size:TITLE_RIGHT_SIZE];

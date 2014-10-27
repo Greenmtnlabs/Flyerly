@@ -366,7 +366,7 @@
     _inputSpendingTimeTxt.text = untechable.spendingTimeTxt;
     
     [_lbl1S1 setTextColor:defGray];
-    _lbl1S1.font = [UIFont fontWithName:APP_FONT size:14];
+    _lbl1S1.font = [UIFont fontWithName:APP_FONT size:25];
     
     [_inputSpendingTimeTxt setTextColor:defGreen];
     _inputSpendingTimeTxt.font = [UIFont fontWithName:APP_FONT size:14];
