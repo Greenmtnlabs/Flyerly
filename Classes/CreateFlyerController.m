@@ -3953,7 +3953,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
  */
 -(void)openInAppPanel {
     
-    if(IS_IPHONE_5){
+    if( IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS ){
         inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
     }else {
         inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController-iPhone4" bundle:nil];
@@ -3983,8 +3983,16 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         
         shareviewcontroller.cfController = self;
         
-        sharePanel = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.origin.y, 320,400 )];
         
+        
+        sharePanel = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.origin.y, 320,400 )];
+        if ( IS_IPHONE_6) {
+            sharePanel = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.origin.y, 340,500 )];
+        }else if ( IS_IPHONE_6_PLUS){
+            sharePanel = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.origin.y, 400,600 )];
+        }
+        
+        sharePanel.backgroundColor = [UIColor redColor];
         sharePanel = shareviewcontroller.view;
         
         [self.view addSubview:sharePanel];
@@ -4052,7 +4060,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height, 320,425 )];
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0.4f];
-        [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height -425, 320,425 )];
+        [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height - 550, 375,550 )];
         [UIView commitAnimations];
         
         [self hideLoadingIndicator];

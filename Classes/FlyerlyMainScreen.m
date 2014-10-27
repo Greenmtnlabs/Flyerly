@@ -354,7 +354,7 @@ BOOL adLoaded = false;
  */
 -(void)openPanel {
     
-    if(IS_IPHONE_5){
+    if( IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS ){
         inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
         [inappviewcontroller setModalPresentationStyle:UIModalPresentationFullScreen];
         

@@ -140,7 +140,7 @@ NSString *FacebookDidLoginNotification = @"FacebookDidLoginNotification";
     
     if ([[url absoluteString] hasPrefix:[NSString stringWithFormat:@"fb%@", SHKCONFIG(facebookAppId)]]) {
         [SHKFacebook handleOpenURL:url];
-        [PFFacebookUtils handleOpenURL:url];
+        [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
         return YES;
     }
     

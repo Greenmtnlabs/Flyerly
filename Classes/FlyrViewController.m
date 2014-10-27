@@ -34,7 +34,7 @@
     
     self.navigationItem.hidesBackButton = YES;
     searchTextField.font = [UIFont systemFontOfSize:12.0];
-    searchTextField.textAlignment = NSTextAlignmentCenter;
+    searchTextField.textAlignment = NSTextAlignmentLeft;
     searchTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     [searchTextField setBorderStyle:UITextBorderStyleRoundedRect];
     [searchTextField setReturnKeyType:UIReturnKeyDone];
@@ -439,7 +439,7 @@
  */
 -(void)openPanel {
     
-    if(IS_IPHONE_5){
+    if( IS_IPHONE_5 || IS_IPHONE_6 || IS_IPHONE_6_PLUS ){
         inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController" bundle:nil];
     }else {
         inappviewcontroller = [[InAppViewController alloc] initWithNibName:@"InAppViewController-iPhone4" bundle:nil];
