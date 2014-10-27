@@ -74,16 +74,6 @@
 		200A818618D32C9D0095AA3E /* crop_and_resize.png in Resources */ = {isa = PBXBuildFile; fileRef = 200A818318D32C9D0095AA3E /* crop_and_resize.png */; };
 		200A818718D32C9D0095AA3E /* done_with_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 200A818418D32C9D0095AA3E /* done_with_3.png */; };
 		200A818818D32C9D0095AA3E /* filter.png in Resources */ = {isa = PBXBuildFile; fileRef = 200A818518D32C9D0095AA3E /* filter.png */; };
-		200D1929197CED6500CFE04B /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 200D1918197CED6400CFE04B /* .gitignore */; };
-		200D192A197CED6500CFE04B /* acknowledgments.md in Resources */ = {isa = PBXBuildFile; fileRef = 200D1919197CED6400CFE04B /* acknowledgments.md */; };
-		200D192B197CED6500CFE04B /* future_payments_mobile.md in Resources */ = {isa = PBXBuildFile; fileRef = 200D191B197CED6400CFE04B /* future_payments_mobile.md */; };
-		200D192C197CED6500CFE04B /* future_payments_server.md in Resources */ = {isa = PBXBuildFile; fileRef = 200D191C197CED6400CFE04B /* future_payments_server.md */; };
-		200D192D197CED6500CFE04B /* sdk-screens.png in Resources */ = {isa = PBXBuildFile; fileRef = 200D191D197CED6400CFE04B /* sdk-screens.png */; };
-		200D192E197CED6500CFE04B /* single_payment.md in Resources */ = {isa = PBXBuildFile; fileRef = 200D191E197CED6400CFE04B /* single_payment.md */; };
-		200D192F197CED6500CFE04B /* LICENSE.md in Resources */ = {isa = PBXBuildFile; fileRef = 200D191F197CED6400CFE04B /* LICENSE.md */; };
-		200D1930197CED6500CFE04B /* libPayPalMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 200D1921197CED6500CFE04B /* libPayPalMobile.a */; };
-		200D1931197CED6500CFE04B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 200D1927197CED6500CFE04B /* README.md */; };
-		200D1932197CED6500CFE04B /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 200D1928197CED6500CFE04B /* release_notes.md */; };
 		200D1937197CF4CC00CFE04B /* PaypalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 200D1935197CF4CC00CFE04B /* PaypalViewController.m */; };
 		200D1938197CF4CC00CFE04B /* PaypalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 200D1936197CF4CC00CFE04B /* PaypalViewController.xib */; };
 		200D196818998BEB00EAD645 /* LayerTileButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 200D196718998BEA00EAD645 /* LayerTileButton.m */; };
@@ -1421,21 +1411,6 @@
 		200A818318D32C9D0095AA3E /* crop_and_resize.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = crop_and_resize.png; path = ../Classes/crop_and_resize.png; sourceTree = "<group>"; };
 		200A818418D32C9D0095AA3E /* done_with_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = done_with_3.png; path = ../Classes/done_with_3.png; sourceTree = "<group>"; };
 		200A818518D32C9D0095AA3E /* filter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = filter.png; path = ../Classes/filter.png; sourceTree = "<group>"; };
-		200D1918197CED6400CFE04B /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
-		200D1919197CED6400CFE04B /* acknowledgments.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = acknowledgments.md; sourceTree = "<group>"; };
-		200D191B197CED6400CFE04B /* future_payments_mobile.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = future_payments_mobile.md; sourceTree = "<group>"; };
-		200D191C197CED6400CFE04B /* future_payments_server.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = future_payments_server.md; sourceTree = "<group>"; };
-		200D191D197CED6400CFE04B /* sdk-screens.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sdk-screens.png"; sourceTree = "<group>"; };
-		200D191E197CED6400CFE04B /* single_payment.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = single_payment.md; sourceTree = "<group>"; };
-		200D191F197CED6400CFE04B /* LICENSE.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.md; sourceTree = "<group>"; };
-		200D1921197CED6500CFE04B /* libPayPalMobile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libPayPalMobile.a; sourceTree = "<group>"; };
-		200D1922197CED6500CFE04B /* PayPalConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayPalConfiguration.h; sourceTree = "<group>"; };
-		200D1923197CED6500CFE04B /* PayPalFuturePaymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayPalFuturePaymentViewController.h; sourceTree = "<group>"; };
-		200D1924197CED6500CFE04B /* PayPalMobile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayPalMobile.h; sourceTree = "<group>"; };
-		200D1925197CED6500CFE04B /* PayPalPayment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayPalPayment.h; sourceTree = "<group>"; };
-		200D1926197CED6500CFE04B /* PayPalPaymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayPalPaymentViewController.h; sourceTree = "<group>"; };
-		200D1927197CED6500CFE04B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
-		200D1928197CED6500CFE04B /* release_notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.md; sourceTree = "<group>"; };
 		200D1934197CF4CC00CFE04B /* PaypalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaypalViewController.h; sourceTree = "<group>"; };
 		200D1935197CF4CC00CFE04B /* PaypalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaypalViewController.m; sourceTree = "<group>"; };
 		200D1936197CF4CC00CFE04B /* PaypalViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PaypalViewController.xib; sourceTree = "<group>"; };
@@ -2965,7 +2940,6 @@
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				0DF3A542108E0E5C00D6C887 /* libsqlite3.0.dylib in Frameworks */,
 				0DEE01A0108ED97400967DA5 /* QuartzCore.framework in Frameworks */,
-				200D1930197CED6500CFE04B /* libPayPalMobile.a in Frameworks */,
 				0D33511F109ABB6A0082810A /* CFNetwork.framework in Frameworks */,
 				498BAB6C1885B21800221DFB /* Parse.framework in Frameworks */,
 				0D335123109ABB6A0082810A /* libz.dylib in Frameworks */,
@@ -3009,7 +2983,6 @@
 			isa = PBXGroup;
 			children = (
 				243AA6FD19DE8136004A5613 /* GoogleMobileAdsSdkiOS-6.12.0 */,
-				200D1917197CED6400CFE04B /* PayPal-iOS-SDK-master */,
 				201D647018C4832300F0D7D8 /* Flurry */,
 				49B88982188652A2003766AD /* FacebookLikeView */,
 				49B8897E18865273003766AD /* Reachability */,
@@ -3595,44 +3568,6 @@
 				20ECF9A818D6E1AD0035E3DE /* UIPlaceHolderTextView.m */,
 			);
 			name = ShareScreen;
-			sourceTree = "<group>";
-		};
-		200D1917197CED6400CFE04B /* PayPal-iOS-SDK-master */ = {
-			isa = PBXGroup;
-			children = (
-				200D1918197CED6400CFE04B /* .gitignore */,
-				200D1919197CED6400CFE04B /* acknowledgments.md */,
-				200D191A197CED6400CFE04B /* docs */,
-				200D191F197CED6400CFE04B /* LICENSE.md */,
-				200D1920197CED6400CFE04B /* PayPalMobile */,
-				200D1927197CED6500CFE04B /* README.md */,
-				200D1928197CED6500CFE04B /* release_notes.md */,
-			);
-			path = "PayPal-iOS-SDK-master";
-			sourceTree = "<group>";
-		};
-		200D191A197CED6400CFE04B /* docs */ = {
-			isa = PBXGroup;
-			children = (
-				200D191B197CED6400CFE04B /* future_payments_mobile.md */,
-				200D191C197CED6400CFE04B /* future_payments_server.md */,
-				200D191D197CED6400CFE04B /* sdk-screens.png */,
-				200D191E197CED6400CFE04B /* single_payment.md */,
-			);
-			path = docs;
-			sourceTree = "<group>";
-		};
-		200D1920197CED6400CFE04B /* PayPalMobile */ = {
-			isa = PBXGroup;
-			children = (
-				200D1921197CED6500CFE04B /* libPayPalMobile.a */,
-				200D1922197CED6500CFE04B /* PayPalConfiguration.h */,
-				200D1923197CED6500CFE04B /* PayPalFuturePaymentViewController.h */,
-				200D1924197CED6500CFE04B /* PayPalMobile.h */,
-				200D1925197CED6500CFE04B /* PayPalPayment.h */,
-				200D1926197CED6500CFE04B /* PayPalPaymentViewController.h */,
-			);
-			path = PayPalMobile;
 			sourceTree = "<group>";
 		};
 		200D1933197CF4BA00CFE04B /* PayPal */ = {
@@ -5473,7 +5408,6 @@
 				30D58D1B10FB1BF800E0C7E8 /* icon34.jpg in Resources */,
 				30D58D1C10FB1BF800E0C7E8 /* icon35.jpg in Resources */,
 				246EF520193C515D004539B2 /* emoticon64@2x.png in Resources */,
-				200D1931197CED6500CFE04B /* README.md in Resources */,
 				242184BE194B4AEC00FDDA97 /* emoticon176@2x.png in Resources */,
 				245C0FA51933081200B5B31C /* free-features.plist in Resources */,
 				20F1FB09197690D500D40E60 /* printer_sharing_selected.png in Resources */,
@@ -5745,7 +5679,6 @@
 				24861EFF19F9147100670F6D /* fb_Like@3x.png in Resources */,
 				246EF4E9193C515D004539B2 /* emoticon14@2x.png in Resources */,
 				24218498194B4AEC00FDDA97 /* emoticon137@2x.png in Resources */,
-				200D192F197CED6500CFE04B /* LICENSE.md in Resources */,
 				65CC0AB6171802DF003D0BE7 /* Settings.bundle in Resources */,
 				242184F2194B4AEC00FDDA97 /* rowing-icon.png in Resources */,
 				249F1F95193F55D50072835E /* addbg_cameraroll_selected@2x.png in Resources */,
@@ -5759,7 +5692,6 @@
 				20714DF3187F1B9D000D6838 /* cameraline.png in Resources */,
 				246EF4F6193C515D004539B2 /* emoticon26@2x.png in Resources */,
 				247858A61948757C0062F1E4 /* Gutsy-Regular.ttf in Resources */,
-				200D192B197CED6500CFE04B /* future_payments_mobile.md in Resources */,
 				249F2028193F562C0072835E /* inAppPurchaseViewBg@2x.png in Resources */,
 				24218461194B4AEC00FDDA97 /* Baseball-icon.png in Resources */,
 				24218514194B4AEC00FDDA97 /* Wrestling-icon.png in Resources */,
@@ -5883,7 +5815,6 @@
 				6501CAF0173242FC00A89E59 /* Swiss_721_Black_Extended_BT.ttf in Resources */,
 				24861ECE19F9147100670F6D /* camera_grid@3x.png in Resources */,
 				24751A641938A1F600DF03B2 /* color_tab@2x.png in Resources */,
-				200D1932197CED6500CFE04B /* release_notes.md in Resources */,
 				24861F0F19F9147100670F6D /* icon_button@3x.png in Resources */,
 				249F1FA2193F55D50072835E /* camera_bottombg@2x.png in Resources */,
 				242184CB194B4AEC00FDDA97 /* field-hockey-icon.png in Resources */,
@@ -5902,7 +5833,6 @@
 				246EF52F193C515D004539B2 /* emoticon78@2x.png in Resources */,
 				249F205B193F562C0072835E /* tumblr_share@2x.png in Resources */,
 				4986857718B50657002113E4 /* CustomAssetsGroupView.xib in Resources */,
-				200D192A197CED6500CFE04B /* acknowledgments.md in Resources */,
 				24861EF919F9147100670F6D /* emoticons_tab@3x.png in Resources */,
 				2478587F19485BAC0062F1E4 /* Fonts.plist in Resources */,
 				246EF527193C515D004539B2 /* emoticon70@2x.png in Resources */,
@@ -6162,7 +6092,6 @@
 				242184C0194B4AEC00FDDA97 /* emoticon178@2x.png in Resources */,
 				24861F0A19F9147100670F6D /* grids@3x.png in Resources */,
 				2471593C19408E5F00B30301 /* invite_twitter@2x.png in Resources */,
-				200D192E197CED6500CFE04B /* single_payment.md in Resources */,
 				246EF52B193C515D004539B2 /* emoticon74@2x.png in Resources */,
 				0F8007CA175378F0000FF7FA /* ricon1.png in Resources */,
 				0F8007CC175378F0000FF7FA /* ricon2.png in Resources */,
@@ -6235,7 +6164,6 @@
 				246EF52D193C515D004539B2 /* emoticon76@2x.png in Resources */,
 				20824B371908DFDA00AC0CB5 /* signin@2x.png in Resources */,
 				0F80C3B61785B41300D36795 /* twitter_login@2x.png in Resources */,
-				200D192D197CED6500CFE04B /* sdk-screens.png in Resources */,
 				246EF4FF193C515D004539B2 /* emoticon34@2x.png in Resources */,
 				0FD887061786C3810059BC54 /* current_location@2x.png in Resources */,
 				0FD2C406178FFCDE00257E33 /* undo@2x.png in Resources */,
@@ -6359,7 +6287,6 @@
 				249F1FB3193F55D50072835E /* createButton@2x.png in Resources */,
 				242184F9194B4AEC00FDDA97 /* shooting-icon.png in Resources */,
 				2030B1C4196BEC99004DE050 /* black_euro.png in Resources */,
-				200D192C197CED6500CFE04B /* future_payments_server.md in Resources */,
 				202C63AE17EA06E800CB9A75 /* ricon43.png in Resources */,
 				246EF501193C515D004539B2 /* emoticon36@2x.png in Resources */,
 				24861F6519F9147100670F6D /* twt_setting@3x.png in Resources */,
@@ -6459,7 +6386,6 @@
 				24218479194B4AEC00FDDA97 /* emoticon106@2x.png in Resources */,
 				246EF507193C515D004539B2 /* emoticon41@2x.png in Resources */,
 				24861F2519F9147100670F6D /* magnifyingGlass3@3x.png in Resources */,
-				200D1929197CED6500CFE04B /* .gitignore in Resources */,
 				246EF4EA193C515D004539B2 /* emoticon15@2x.png in Resources */,
 				202C640217EA06E800CB9A75 /* ricon85.png in Resources */,
 				247858EA194878CE0062F1E4 /* Seagle-Regular.otf in Resources */,
