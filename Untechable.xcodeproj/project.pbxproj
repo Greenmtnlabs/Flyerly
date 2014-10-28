@@ -38,8 +38,6 @@
 		3681603E19E6B81E00B9B64C /* InviteFriendsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3681603819E6B81E00B9B64C /* InviteFriendsCell.xib */; };
 		3681603F19E6B81E00B9B64C /* InviteFriendsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3681603A19E6B81E00B9B64C /* InviteFriendsController.m */; };
 		3681604019E6B81E00B9B64C /* InviteFriendsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3681603B19E6B81E00B9B64C /* InviteFriendsController.xib */; };
-		36A370B519F53DC2005A7AFE /* RecordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36A370B319F53DC2005A7AFE /* RecordController.m */; };
-		36A370B619F53DC2005A7AFE /* RecordController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36A370B419F53DC2005A7AFE /* RecordController.xib */; };
 		36A370B819F53E6D005A7AFE /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36A370B719F53E6D005A7AFE /* AVFoundation.framework */; };
 		36B036A619DAF44D00E8CD21 /* EmailSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B036A419DAF44D00E8CD21 /* EmailSettingController.m */; };
 		36B036A719DAF44D00E8CD21 /* EmailSettingController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36B036A519DAF44D00E8CD21 /* EmailSettingController.xib */; };
@@ -84,6 +82,8 @@
 		36BB7B7F19FFBD9A00562069 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 36BB7B5619FFBD9A00562069 /* logo.png */; };
 		36BB7B8019FFBD9A00562069 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36BB7B5719FFBD9A00562069 /* logo@2x.png */; };
 		36BB7B8119FFBD9A00562069 /* logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36BB7B5819FFBD9A00562069 /* logo@3x.png */; };
+		36BB7B8919FFD98C00562069 /* ThankyouController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BB7B8719FFD98C00562069 /* ThankyouController.m */; };
+		36BB7B8A19FFD98C00562069 /* ThankyouController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36BB7B8819FFD98C00562069 /* ThankyouController.xib */; };
 		36FD975519E694AC00427507 /* BSKeyboardControls.m in Sources */ = {isa = PBXBuildFile; fileRef = 36FD974B19E694AC00427507 /* BSKeyboardControls.m */; };
 		36FD975619E694AC00427507 /* BSKeyboardControls.strings in Resources */ = {isa = PBXBuildFile; fileRef = 36FD974C19E694AC00427507 /* BSKeyboardControls.strings */; };
 /* End PBXBuildFile section */
@@ -144,9 +144,6 @@
 		3681603919E6B81E00B9B64C /* InviteFriendsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteFriendsController.h; sourceTree = "<group>"; };
 		3681603A19E6B81E00B9B64C /* InviteFriendsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteFriendsController.m; sourceTree = "<group>"; };
 		3681603B19E6B81E00B9B64C /* InviteFriendsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteFriendsController.xib; sourceTree = "<group>"; };
-		36A370B219F53DC2005A7AFE /* RecordController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordController.h; sourceTree = "<group>"; };
-		36A370B319F53DC2005A7AFE /* RecordController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordController.m; sourceTree = "<group>"; };
-		36A370B419F53DC2005A7AFE /* RecordController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecordController.xib; sourceTree = "<group>"; };
 		36A370B719F53E6D005A7AFE /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		36B036A319DAF44D00E8CD21 /* EmailSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EmailSettingController.h; path = AddUntechable/EmailSettingController/EmailSettingController.h; sourceTree = "<group>"; };
 		36B036A419DAF44D00E8CD21 /* EmailSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EmailSettingController.m; path = AddUntechable/EmailSettingController/EmailSettingController.m; sourceTree = "<group>"; };
@@ -192,6 +189,9 @@
 		36BB7B5619FFBD9A00562069 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		36BB7B5719FFBD9A00562069 /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
 		36BB7B5819FFBD9A00562069 /* logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@3x.png"; sourceTree = "<group>"; };
+		36BB7B8619FFD98C00562069 /* ThankyouController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThankyouController.h; sourceTree = "<group>"; };
+		36BB7B8719FFD98C00562069 /* ThankyouController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThankyouController.m; sourceTree = "<group>"; };
+		36BB7B8819FFD98C00562069 /* ThankyouController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ThankyouController.xib; sourceTree = "<group>"; };
 		36FD974A19E694AC00427507 /* BSKeyboardControls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSKeyboardControls.h; sourceTree = "<group>"; };
 		36FD974B19E694AC00427507 /* BSKeyboardControls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSKeyboardControls.m; sourceTree = "<group>"; };
 		36FD974D19E694AC00427507 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/BSKeyboardControls.strings; sourceTree = "<group>"; };
@@ -345,6 +345,7 @@
 				366ECD8719D322F800F71A11 /* PhoneSetupController */,
 				36524AED19D9409C006DCAAF /* SocialnetworkController */,
 				36B0369F19DAF3E400E8CD21 /* EmailSettingController */,
+				36BB7B8219FFD94D00562069 /* ThankyouController */,
 			);
 			name = AddUntechable;
 			sourceTree = "<group>";
@@ -382,7 +383,6 @@
 		366ECD8719D322F800F71A11 /* PhoneSetupController */ = {
 			isa = PBXGroup;
 			children = (
-				36A370B119F53D99005A7AFE /* Record */,
 				3681603319E6B81E00B9B64C /* InviteScreen */,
 				366ECD9819D323E200F71A11 /* PhoneSetupController.h */,
 				366ECD9919D323E200F71A11 /* PhoneSetupController.m */,
@@ -405,17 +405,6 @@
 			);
 			name = InviteScreen;
 			path = AddUntechable/PhoneSetupController/InviteScreen;
-			sourceTree = "<group>";
-		};
-		36A370B119F53D99005A7AFE /* Record */ = {
-			isa = PBXGroup;
-			children = (
-				36A370B219F53DC2005A7AFE /* RecordController.h */,
-				36A370B319F53DC2005A7AFE /* RecordController.m */,
-				36A370B419F53DC2005A7AFE /* RecordController.xib */,
-			);
-			name = Record;
-			path = AddUntechable/PhoneSetupController/Record;
 			sourceTree = "<group>";
 		};
 		36B0369A19DAD2AB00E8CD21 /* images */ = {
@@ -491,6 +480,17 @@
 				36BB7B5819FFBD9A00562069 /* logo@3x.png */,
 			);
 			path = untechablesplashscreensandlogotext;
+			sourceTree = "<group>";
+		};
+		36BB7B8219FFD94D00562069 /* ThankyouController */ = {
+			isa = PBXGroup;
+			children = (
+				36BB7B8619FFD98C00562069 /* ThankyouController.h */,
+				36BB7B8719FFD98C00562069 /* ThankyouController.m */,
+				36BB7B8819FFD98C00562069 /* ThankyouController.xib */,
+			);
+			name = ThankyouController;
+			path = AddUntechable/ThankyouController;
 			sourceTree = "<group>";
 		};
 		36FD974919E694AC00427507 /* BSKeyboardControls */ = {
@@ -596,7 +596,6 @@
 				36BB7B5F19FFBD9A00562069 /* icon-50.png in Resources */,
 				36BB7B6119FFBD9A00562069 /* icon-60.png in Resources */,
 				36BB7B6919FFBD9A00562069 /* icon.png in Resources */,
-				36A370B619F53DC2005A7AFE /* RecordController.xib in Resources */,
 				36BB7B5C19FFBD9A00562069 /* CHECKBOX_FILLED@2x.png in Resources */,
 				36474F2619D9780100084F34 /* Pigiarniq Regular.ttf in Resources */,
 				36474F2219D9780100084F34 /* Pigiarniq Bold.ttf in Resources */,
@@ -612,6 +611,7 @@
 				36BB7B7B19FFBD9A00562069 /* Default-667h@2x.png in Resources */,
 				36BB7B7019FFBD9A00562069 /* play_gray@2x.png in Resources */,
 				36BB7B6D19FFBD9A00562069 /* pause.png in Resources */,
+				36BB7B8A19FFD98C00562069 /* ThankyouController.xib in Resources */,
 				36BB7B6619FFBD9A00562069 /* icon-76@2x.png in Resources */,
 				36474F2519D9780100084F34 /* Pigiarniq Light.ttf in Resources */,
 				36BB7B6519FFBD9A00562069 /* icon-76.png in Resources */,
@@ -663,13 +663,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36BB7B8919FFD98C00562069 /* ThankyouController.m in Sources */,
 				366ECD9619D323DA00F71A11 /* AddUntechableController.m in Sources */,
 				3681603C19E6B81E00B9B64C /* ContactsModel.m in Sources */,
 				366ECD9B19D323E200F71A11 /* PhoneSetupController.m in Sources */,
 				3681603F19E6B81E00B9B64C /* InviteFriendsController.m in Sources */,
 				3663932519D6A0A700512965 /* CommonFunctions.m in Sources */,
 				3681603D19E6B81E00B9B64C /* InviteFriendsCell.m in Sources */,
-				36A370B519F53DC2005A7AFE /* RecordController.m in Sources */,
 				36474F2919D9AC3800084F34 /* UIPlaceHolderTextView.m in Sources */,
 				36B036A619DAF44D00E8CD21 /* EmailSettingController.m in Sources */,
 				36561D7C19D2C8A40069D897 /* AppDelegate.m in Sources */,

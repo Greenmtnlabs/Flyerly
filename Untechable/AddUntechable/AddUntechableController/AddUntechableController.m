@@ -235,7 +235,7 @@
 }
 -(void)storeSceenVarsInDic
 {
-    //untechable.spendingTimeTxt = _inputSpendingTimeTxt.text;
+    untechable.spendingTimeTxt = _inputSpendingTimeTxt.text;
     untechable.hasEndDate = !([_cbNoEndDate isSelected]);
     
     [untechable setOrSaveVars:SAVE];
@@ -370,6 +370,16 @@
     [untechable initUntechableDirectory];
     
     now1 = [NSDate date]; //current date
+    
+
+    if( isNew ) {
+        //if this is old event, user trying to re-open, then directly go to thankyou screen
+        if( !([untechable.eventId isEqualToString:@""]) ){
+            
+        }
+    }
+    
+    
     
 }
 

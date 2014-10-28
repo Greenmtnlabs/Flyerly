@@ -7,6 +7,7 @@
 //
 
 #import "EmailSettingController.h"
+#import "ThankyouController.h"
 #import "Common.h"
 #import "BSKeyboardControls.h"
 
@@ -231,6 +232,7 @@
     [self storeSceenVarsInDic];
     
     [self sendToApi];
+        
 }
 -(void)storeSceenVarsInDic
 {
@@ -241,6 +243,18 @@
 }
 
 -(void) sendToApi{
+    //ui work , priorty
+    //dispatch_async( dispatch_get_main_queue(), ^{
+       [self changeNavigation:@"ON_FINISH"];
+    //});
+    
+    //Background work
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+        [self sendToApiAfterTask];
+    });
+}
+                   
+-(void) sendToApiAfterTask{
     
     NSLog(@"dic = %@ ",untechable.dic);
     
@@ -274,7 +288,7 @@
     [body appendData:audioData];
     [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
 
-    NSArray *stringVarsAry = [[NSArray alloc] initWithObjects:@"eventId", @"userId",
+    NSArray *stringVarsAry = [[NSArray alloc] initWithObjects:@"eventId", @"paid", @"userId",
                               @"timezoneOffset", @"spendingTimeTxt", @"startDate", @"endDate", @"hasEndDate"
                              ,@"twillioNumber", @"location", @"emergencyNumber", @"hasRecording"
                              ,@"socialStatus", @"fbAuth", @"twitterAuth", @"linkedinAuth"
@@ -305,13 +319,15 @@
     // close form
     [body appendData:[[NSString stringWithFormat:@"--%@--\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     
-    
+
     // setting the body of the post to the reqeust
     [request setHTTPBody:body];
     
     
     NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
     // NSString *returnString = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
+
+    BOOL errorOnFinish = NO;
     [self setNextHighlighted:NO];
     if( returnData != nil ){
         
@@ -324,13 +340,93 @@
             message = @"Untechable saved successfully";
         } else{
             message = [dict valueForKey:@"message"];
+            errorOnFinish = YES;
         }
         
-        [self showMsgOnApiResponse:message];
+        dispatch_async( dispatch_get_main_queue(), ^{
+            [self showMsgOnApiResponse:message];
+        });
+    }
+    else{
+        errorOnFinish = YES;
+    }
+    
+    
+    if( errorOnFinish ){
+        dispatch_async( dispatch_get_main_queue(), ^{
+            [self changeNavigation:@"ERROR_ON_FINISH"];
+        });
+    }
+    
+    
+}
+-(void)changeNavigation:(NSString *)option
+{
+    // DISABLE NAVIGATION ON SEND DATA TO API
+    if([option isEqualToString:@"ON_FINISH"] ){
+    
+        nextButton.userInteractionEnabled = NO;
+        backButton.userInteractionEnabled = NO;
+        
+        [self showHidLoadingIndicator:YES];
+        
+    }
+    
+    // RE-ENABLE NAVIGATION WHEN ANY ERROR OCCURED
+    else if([option isEqualToString:@"ERROR_ON_FINISH"] ){
+        
+        nextButton.userInteractionEnabled = YES;
+        backButton.userInteractionEnabled = YES;
+        
+        [self showHidLoadingIndicator:NO];
         
         
     }
+    
+    // ON DATA SAVED TO API SUCCESSFULLY
+    else if([option isEqualToString:@"GO_TO_THANKYOU"] ){
+        
+        [self next:@"GO_TO_THANKYOU"];
+    }
 }
+
+-(void)next:(NSString *)after
+{
+    if( [after isEqualToString:@"GO_TO_THANKYOU"] ) {
+        
+        ThankyouController *thankyouController;
+        thankyouController = [[ThankyouController alloc]initWithNibName:@"ThankyouController" bundle:nil];
+        thankyouController.untechable = untechable;
+        [self.navigationController pushViewController:thankyouController animated:YES];
+        
+    }
+}
+/**
+ * Show / hide, a loding indicator in the right bar button.
+ */
+- (void)showHidLoadingIndicator:(BOOL)show {
+    if( show ){
+        // Remember the right bar button item.
+        //nextButton = self.navigationItem.rightBarButtonItem;
+        nextButton.enabled = NO;
+        
+        UIActivityIndicatorView *uiBusy = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+        [uiBusy setColor:[UIColor colorWithRed:0 green:155.0/255.0 blue:224.0/255.0 alpha:1.0]];
+        uiBusy.hidesWhenStopped = YES;
+        [uiBusy startAnimating];
+        
+        UIBarButtonItem *btn = [[UIBarButtonItem alloc] initWithCustomView:uiBusy];
+        [self.navigationItem setRightBarButtonItem:btn animated:NO];
+    }
+    else{
+        nextButton.enabled = YES;
+        [self setNavigation:@"viewDidLoad"];
+    }
+}
+
+
+
+
 
 -(void)showMsgOnApiResponse:(NSString *)message
 {

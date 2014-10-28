@@ -11,7 +11,6 @@
 #import "Common.h"
 #import "BSKeyboardControls.h"
 #import "InviteScreen/InviteFriendsController.h"
-#import "RecordController.h"
 
 # define MSG_FORWADING_1 @"Get A Number"
 # define MSG_FORWADING_2 @"Please wait..."
@@ -57,7 +56,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblCanContactTxt;
 
 
-@property (strong, nonatomic) UIAlertView *importContacts, *getANumberAlert;
+@property (strong, nonatomic) UIAlertView *importContacts, *getANumberAlert, *buyAlert;
 
 @property (nonatomic, strong) BSKeyboardControls *keyboardControls;
 
@@ -254,27 +253,38 @@
     
     [self setNextHighlighted:NO];
     
-    if( [untechable.twillioNumber isEqualToString:@""] ){
-        UIAlertView *temAlert = [[UIAlertView alloc ]
-                                 initWithTitle:@""
-                                 message:@"Forwarding number required."
-                                 delegate:self
-                                 cancelButtonTitle:@"OK"
-                                 otherButtonTitles:nil];
-        [temAlert show];
+    if( untechable.paid == YES ) {
+        [self next:@"GO_TO_NEXT"];
     }
     else {
+        _buyAlert = [[UIAlertView alloc ]
+                                 initWithTitle:@""
+                                 message:@"Would you like to buy"
+                                 delegate:self
+                                 cancelButtonTitle:@"Yes"
+                                 otherButtonTitles:@"No", nil];
         
-        BOOL goToNext = YES;
         
-        if( goToNext ) {
-            RecordController *recordController;
-            recordController = [[RecordController alloc]initWithNibName:@"RecordController" bundle:nil];
-            recordController.untechable = untechable;
-            [self.navigationController pushViewController:recordController animated:YES];
-        }
+        [_buyAlert show];
     }
+    
 }
+-(void)next:(NSString *)after{
+    
+    if( [after isEqualToString:@"GO_TO_NEXT"] || [after isEqualToString:@"ON_SKIP"] ) {
+        [self storeSceenVarsInDic];
+        SocialnetworkController *socialnetwork;
+        socialnetwork = [[SocialnetworkController alloc]initWithNibName:@"SocialnetworkController" bundle:nil];
+        socialnetwork.untechable = untechable;
+        [self.navigationController pushViewController:socialnetwork animated:YES];
+    }
+    else if( [after isEqualToString:@"GO_FOR_BUY"] ) {
+    
+    }
+    
+}
+
+
 
 -(void)storeSceenVarsInDic{
     //untechable.twillioNumber = _inputForwadingNumber.text;
@@ -434,7 +444,18 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
    if(alertView == _importContacts && buttonIndex == 1) {
         [self importContactsAfterAllow];
-    }
+   }
+   else if(alertView == _buyAlert) {
+       //BUY
+       if( buttonIndex == 0 ){
+           [self next:@"GO_FOR_BUY"];
+       }
+       //SKIP
+       else if( buttonIndex == 1 ){
+           [self next:@"ON_SKIP"];
+       }
+       
+   }
 }
 
 
