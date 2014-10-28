@@ -64,6 +64,17 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
 #pragma mark -  View Appear Methods
 - (void)viewWillAppear:(BOOL)animated{
     
+    CGRect newFrame = CGRectMake( 0, 0,
+                                 libraryContextView.frame.size.width,
+                                 libraryContextView.frame.size.height);
+    
+    [libFlyer setFrame:newFrame];
+    [libArts setFrame:newFrame];
+    [libBackground setFrame:newFrame];
+    [libText setFrame:newFrame];
+    [libPhoto setFrame:newFrame];
+    [libDrawing setFrame:newFrame];
+    
     //Set Context Tabs
     [self addBottomTabs:libFlyer];
 }
@@ -418,7 +429,7 @@ fontBorderTabButton,addVideoTabButton,addMorePhotoTabButton,addArtsTabButton,sha
                     
                     //Unloking features
                     UIImage *buttonImage = [UIImage imageNamed:@"video_tab.png"];
-                    [addVideoTabButton setImage:buttonImage forState:UIControlStateNormal];
+                    [addVideoTabButton setBackgroundImage:buttonImage forState:UIControlStateNormal];
                 }
                 
                 //Checking if user valid purchases
@@ -3983,11 +3994,9 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         
         shareviewcontroller.cfController = self;
         
-        
-        
         sharePanel = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.origin.y, 320,400 )];
         if ( IS_IPHONE_6) {
-            sharePanel = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.origin.y, 340,500 )];
+            sharePanel = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.origin.y, 340,350 )];
         }else if ( IS_IPHONE_6_PLUS){
             sharePanel = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.origin.y, 400,600 )];
         }
@@ -4057,10 +4066,20 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         }
         
         //Create Animation Here
-        [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height, 320,425 )];
+        [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height, 320,475 )];
+        if ( IS_IPHONE_6) {
+            [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height, 375,350 )];
+        }else if ( IS_IPHONE_6_PLUS){
+            [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height, 375,550 )];
+        }
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0.4f];
-        [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height - 550, 375,550 )];
+        [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height - 505, 320,505 )];
+        if ( IS_IPHONE_6) {
+            [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height-350, 375,350 )];
+        }else if ( IS_IPHONE_6_PLUS){
+            [sharePanel setFrame:CGRectMake(0, self.view.frame.size.height-550, 420,550 )];
+        }
         [UIView commitAnimations];
         
         [self hideLoadingIndicator];
@@ -5235,7 +5254,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         [userPurchases checkKeyExistsInPurchases:@"comflyerlyUnlockCreateVideoFlyerOption"] ) {
         
         UIImage *buttonImage = [UIImage imageNamed:@"video_tab.png"];
-        [addVideoTabButton setImage:buttonImage forState:UIControlStateNormal];
+        [addVideoTabButton setBackgroundImage:buttonImage forState:UIControlStateNormal];
         [inappviewcontroller.paidFeaturesTview reloadData];
         [inappviewcontroller.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     }
@@ -5311,7 +5330,7 @@ return [flyer mergeImages:videoImg withImage:flyerSnapshot width:zoomScreenShot.
         
         
         UIImage *buttonImage = [UIImage imageNamed:@"video_tab.png"];
-        [addVideoTabButton setImage:buttonImage forState:UIControlStateNormal];
+        [addVideoTabButton setBackgroundImage:buttonImage forState:UIControlStateNormal];
         [inappviewcontroller.paidFeaturesTview reloadData];
         
         //Checking if user valid purchases
