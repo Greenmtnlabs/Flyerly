@@ -601,7 +601,7 @@
     else if( callFor == 2 ){
         
         if( init ){
-            progressBar.progress = 0.0;            
+            progressBar.progress = 0.0;
             //this is nstimer to initiate update method
             playTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updatePlaySlider) userInfo:nil repeats:YES];
             _lblRecTime.text = @"00:00";
