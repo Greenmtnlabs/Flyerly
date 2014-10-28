@@ -34,9 +34,9 @@
 }
 
 
-@property (strong, nonatomic) IBOutlet UILabel *lbl1CustomVoic;
-@property (strong, nonatomic) IBOutlet UILabel *lbl2CustomVoic;
-@property (strong, nonatomic) IBOutlet UILabel *lbl3CustomVoic;
+@property (strong, nonatomic) IBOutlet UILabel *lbl1;
+@property (strong, nonatomic) IBOutlet UILabel *lbl2;
+@property (strong, nonatomic) IBOutlet UILabel *lbl3;
 @property (strong, nonatomic) IBOutlet UILabel *lblRecTime;
 
 
@@ -290,17 +290,17 @@
 -(void)updateUI
 {
     
-    [_lbl1CustomVoic setTextColor:defGray];
-    _lbl1CustomVoic.font = [UIFont fontWithName:APP_FONT size:20];
+    [_lbl1 setTextColor:defGray];
+    _lbl1.font = [UIFont fontWithName:APP_FONT size:20];
 
-    [_lbl2CustomVoic setTextColor:defGray];
-    _lbl2CustomVoic.font = [UIFont fontWithName:APP_FONT size:15];
+    [_lbl2 setTextColor:defGreen];
+    _lbl2.font = [UIFont fontWithName:APP_FONT size:20];
     
-    [_lbl3CustomVoic setTextColor:defGray];
-    _lbl3CustomVoic.font = [UIFont fontWithName:APP_FONT size:15];
+    [_lbl3 setTextColor:defGray];
+    _lbl3.font = [UIFont fontWithName:APP_FONT size:20];
     
     [_lblRecTime setTextColor:defGray];
-    _lblRecTime.font = [UIFont fontWithName:APP_FONT size:15];
+    _lblRecTime.font = [UIFont fontWithName:APP_FONT size:20];
     
     [_lblEmergencyNumber setTextColor:defGray];
     _lblEmergencyNumber.font = [UIFont fontWithName:APP_FONT size:20];
@@ -496,17 +496,65 @@
     configuredRecorder = NO;
     configuredPlayer = NO;
     
-    // Disable Stop/Play button when application launches
-    [self setEnable:btnPlay enable:NO];
-    
     recFilePath = [untechable getRecFilePath];
     outputFileURL = [NSURL URLWithString:recFilePath];
     
-    //[self playTapped];
-    
     [self configuredPlayerFn];
+}
+
+
+
+- (IBAction)stopTapped:(id)sender {
+    [self stopRec];
+}
+-(void)stopRec{
     
-    NSLog(@"player.duration: %f",player.duration);
+    if ( recTimer != nil ) {
+        [recorder stop];
+        
+        AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+        [audioSession setActive:NO error:nil];
+        
+        untechable.hasRecording = YES;
+        [self timerInit:NO callFor:1];
+        
+        [self configuredPlayerFn];
+    }
+}
+
+-(void)stopPlay{
+    if ( playTimer != nil ) {
+        [player stop];
+        [self timerInit:NO callFor:2];
+    }
+}
+
+-(void) stopAllTask
+{
+    [self stopRec];
+    [self stopPlay];
+}
+
+
+- (IBAction)playTapped:(id)sender {
+    [self playTapped];
+    
+}
+-(void)playTapped
+{
+    [self stopRec];
+    
+    if ( playTimer == nil ) {
+        [self configuredPlayerFn];
+        
+        if ( player.duration > 0.0 ) {
+                [player play];
+                [self timerInit:YES callFor:2];
+        }
+    }
+    else{
+        [self stopPlay];
+    }
 }
 
 - (IBAction)recordPauseTapped:(id)sender {
@@ -529,64 +577,15 @@
     }
 }
 
-- (IBAction)stopTapped:(id)sender {
-    [self stopRec];
-}
--(void)stopRec{
-    
-    if ( recTimer != nil ) {
-        [recorder stop];
-        
-        AVAudioSession *audioSession = [AVAudioSession sharedInstance];
-        [audioSession setActive:NO error:nil];
-        
-        untechable.hasRecording = YES;
-        [self timerInit:NO callFor:1];
-    }
-}
--(void) stopAllTask
-{
-    [self stopRec];
-    [self stopPlay];
-}
-
--(void)stopPlay{
-    if ( playTimer != nil ) {
-        [player stop];
-        [self timerInit:NO callFor:2];
-    }
-}
-
-
-- (IBAction)playTapped:(id)sender {
-    [self playTapped];
-    
-}
--(void)playTapped
-{
-    [self stopRec];
-    
-    
-    [self configuredPlayerFn];
-    
-    if ( player.duration > 0.0 ) {
-        if( playTimer == nil ){
-            [player play];
-            [self timerInit:YES callFor:2];
-        }
-        else{
-            [self stopPlay];
-        }
-    }
-}
-
 
 - (void)timerInit :(BOOL) init callFor:(int)callFor{
+    [self activateBtn:init callFor:callFor];
     
     //Record
     if( callFor == 1 ){
         
         if( init ){
+            progressBar.progress = 0.0;
             //this is nstimer to initiate update method
             recTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateRecSlider) userInfo:nil repeats:YES];
             _lblRecTime.text = @"00:00";
@@ -594,6 +593,7 @@
         else{
             [recTimer invalidate];
             recTimer = nil;
+            progressBar.progress = 1.0;
         }
         
     }
@@ -601,6 +601,7 @@
     else if( callFor == 2 ){
         
         if( init ){
+            progressBar.progress = 0.0;            
             //this is nstimer to initiate update method
             playTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updatePlaySlider) userInfo:nil repeats:YES];
             _lblRecTime.text = @"00:00";
@@ -611,12 +612,6 @@
             playTimer = nil;
         }
     }
-    
-    
-    if( !(init) ){
-        progressBar.progress = 1.0;
-    }
-    
 }
 
 - (void)updateRecSlider {
@@ -637,10 +632,10 @@
         NSString *time = [[NSString alloc]
                           initWithFormat:@"%02.0f:%02.0f",
                           minutes, seconds];
-        NSLog(@"recordTimeLabel time: %@", time);
+        NSLog(@"rec timer: %@", time);
         _lblRecTime.text = time;
         
-        [self updateSlider:1 seconds:seconds];
+        [self updateProgressBar:1 seconds:seconds];
         
         if( seconds >= RECORDING_LIMIT_IN_SEC ){
             [self stopRec];
@@ -653,22 +648,10 @@
         NSString *time = [[NSString alloc]
                           initWithFormat:@"%02.0f:%02.0f",
                           minutes, seconds];
-        NSLog(@"player time: %@", time);
+        NSLog(@"player timer: %@", time);
         _lblRecTime.text = time;
         
-        [self updateSlider:2 seconds:seconds];
-    }
-    else if( [labelOf isEqualToString:@"playTimeLabelOfRecorded"] ) {
-        float minutes = floor(player.duration/60);
-        float seconds = player.duration - (minutes * 60);
-        
-        NSString *time = [[NSString alloc]
-                          initWithFormat:@"%02.0f:%02.0f",
-                          minutes, seconds];
-        NSLog(@"player time: %@", time);
-        _lblRecTime.text = time;
-        
-        [self updateSlider:2 seconds:0.0];
+        [self updateProgressBar:2 seconds:seconds];
     }
 }
 
@@ -680,7 +663,7 @@
     //}
 }
 
--(void)updateSlider:(int)callFor seconds:(float)seconds {
+-(void)updateProgressBar:(int)callFor seconds:(float)seconds {
     //1 //rec
     //2 play
     
@@ -741,23 +724,41 @@
     if (error)
     {
         NSLog(@"Error in audioPlayer: %@",
-              [error localizedDescription]);
+        [error localizedDescription]);
+        
+        [self setEnable:btnPlay enable:NO];
     } else {
         player.delegate = self;
         [player prepareToPlay];
         
         configured = YES;
+        [self setEnable:btnPlay enable:YES];
     }
     
-    [self setEnable:btnPlay enable:YES];
-    [self updateLableOf:@"playTimeLabelOfRecorded"];
+    NSLog(@"player.duration: %f",player.duration);
     
     return configured;
 }
 
 -(void) setEnable:(UIButton *)btn enable:(BOOL)enable
 {
-    //[btn setEnabled:enable];
+    [btn setEnabled:enable];
 }
 
+-(void)activateBtn:(BOOL)init callFor:(int)callFor{
+    UIButton *btnPointer;
+    //Record
+    if( callFor == 1 ){
+        btnPointer = btnRec;
+    }
+    //Play
+    else if( callFor == 2 ){
+        btnPointer = btnPlay;
+    }
+    
+    if( init )
+    [btnPointer setBackgroundColor:defGreen];
+    else
+    [btnPointer setBackgroundColor:[UIColor clearColor]];
+}
 @end
