@@ -14,7 +14,7 @@
 @implementation Untechable
 
 //Settings
-@synthesize commonFunctions, dic, piecesFile, userId, uniqueId, eventId, untechablePath, dateFormatter;
+@synthesize commonFunctions, dic, piecesFile, paid, userId, uniqueId, eventId, untechablePath, dateFormatter;
 
 //1-vars for screen1
 @synthesize timezoneOffset, spendingTimeTxt, startDate, endDate, hasEndDate;
@@ -167,6 +167,7 @@
         dic = [[NSMutableDictionary alloc] init];
 
         dic[@"eventId"]         = eventId;
+        dic[@"paid"]            = paid ? @"YES" : @"NO";
         dic[@"userId"]          = userId;
         dic[@"uniqueId"]        = uniqueId;
         dic[@"untechablePath"]  = untechablePath;
@@ -207,37 +208,38 @@
         
         
         //Settings
-        eventId        = dic[@"eventId"];
-        userId         = dic[@"userId"];
-        uniqueId       = dic[@"uniqueId"];
-        untechablePath = dic[@"untechablePath"];
+        eventId        = ( dic[@"eventId"] ) ? dic[@"eventId"] : @"";
+        paid           = ([dic[@"paid"] isEqualToString:@"YES"]) ? YES : NO;
+        userId         = ( dic[@"userId"] ) ? dic[@"userId"] : @"";
+        uniqueId       = ( dic[@"uniqueId"] ) ? dic[@"uniqueId"] : [self getUniqueId];
+        untechablePath = ( dic[@"untechablePath"] ) ? dic[@"untechablePath"] : [self getNewUntechablePath];
         
         
         //Screen1 vars
-        timezoneOffset  = dic[@"timezoneOffset"];
-        spendingTimeTxt = dic[@"spendingTimeTxt"];
-        startDate       = dic[@"startDate"];
-        endDate         = dic[@"endDate"];
-        hasEndDate      = ([dic[@"hasEndDate"] isEqualToString:@"YES"]) ? YES : NO;
+        timezoneOffset  = ( dic[@"timezoneOffset"] ) ? dic[@"timezoneOffset"] : [commonFunctions getTimeZoneOffset];
+        spendingTimeTxt = ( dic[@"spendingTimeTxt"] ) ? dic[@"spendingTimeTxt"] : @"";
+        startDate       = ( dic[@"startDate"] ) ? dic[@"startDate"] : [commonFunctions nsDateToTimeStampStr: [NSDate date] ]; //start now
+        endDate         = ( dic[@"endDate"] ) ? dic[@"endDate"] : [commonFunctions nsDateToTimeStampStr: [[NSDate date] dateByAddingTimeInterval:(60*120)] ]; //current time +2hr
+        hasEndDate      = ([dic[@"hasEndDate"] isEqualToString:@"NO"]) ? NO : YES;
         
         //Screen2 vars
-        twillioNumber     = dic[@"twillioNumber"];
-        location          = dic[@"location"];
-        emergencyNumber   = dic[@"emergencyNumber"];
-        emergencyContacts = dic[@"emergencyContacts"];
+        twillioNumber     = ( dic[@"twillioNumber"] ) ? dic[@"twillioNumber"] : @"";
+        location          = ( dic[@"location"] ) ? dic[@"location"] : @"";
+        emergencyNumber   = ( dic[@"emergencyNumber"] ) ? dic[@"emergencyNumber"] : @"";
+        emergencyContacts = ( dic[@"emergencyContacts"] ) ? dic[@"emergencyContacts"] : @"";
         hasRecording      = ([dic[@"hasRecording"] isEqualToString:@"YES"]) ? YES : NO;
         
         //Screen3 vars
-        socialStatus = dic[@"socialStatus"];
-        fbAuth       = dic[@"fbAuth"];
-        twitterAuth  = dic[@"twitterAuth"];
-        linkedinAuth = dic[@"linkedinAuth"];
+        socialStatus = ( dic[@"socialStatus"] ) ? dic[@"socialStatus"] : @"";
+        fbAuth       = ( dic[@"fbAuth"] ) ? dic[@"fbAuth"] : @"";
+        twitterAuth  = ( dic[@"twitterAuth"] ) ? dic[@"twitterAuth"] : @"";
+        linkedinAuth = ( dic[@"linkedinAuth"] ) ? dic[@"linkedinAuth"] : @"";
 
         
         //Screen3 vars
-        email           = dic[@"email"];
-        password        = dic[@"password"];
-        respondingEmail = dic[@"respondingEmail"];
+        email           = ( dic[@"email"] ) ? dic[@"email"] : @"";
+        password        = ( dic[@"password"] ) ? dic[@"password"] : @"";
+        respondingEmail = ( dic[@"respondingEmail"] ) ? dic[@"respondingEmail"] : @"";
         
     }
     
@@ -251,6 +253,7 @@
 {
     //Settings
     eventId  = @"";
+    paid     = NO;
     uniqueId = [self getUniqueId];
     untechablePath = [self getNewUntechablePath];
 

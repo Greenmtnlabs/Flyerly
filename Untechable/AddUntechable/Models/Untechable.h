@@ -20,6 +20,7 @@
 @property (strong, nonatomic) CommonFunctions *commonFunctions;
 @property (strong, readonly)  NSMutableDictionary *dic;
 @property (strong, nonatomic) NSString *piecesFile;
+@property (nonatomic, assign) BOOL paid;
 @property (strong, nonatomic) NSString *userId;
 @property (strong, nonatomic) NSString *uniqueId;
 @property (strong, nonatomic) NSString *eventId;
