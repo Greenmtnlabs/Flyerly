@@ -249,7 +249,9 @@
 
 -(void)onNext{
 
+
     [self storeSceenVarsInDic];
+    [self stopAllTask];
     
     [self setNextHighlighted:NO];
     
@@ -272,7 +274,7 @@
 -(void)next:(NSString *)after{
     
     if( [after isEqualToString:@"GO_TO_NEXT"] || [after isEqualToString:@"ON_SKIP"] ) {
-        [self storeSceenVarsInDic];
+        
         SocialnetworkController *socialnetwork;
         socialnetwork = [[SocialnetworkController alloc]initWithNibName:@"SocialnetworkController" bundle:nil];
         socialnetwork.untechable = untechable;
