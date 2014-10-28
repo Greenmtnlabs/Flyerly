@@ -39,8 +39,10 @@
     titleView.placeholder = @"Flyerly Title (e.g. \"Parker's Party\")";
 
 
-    descriptionView = [[UIPlaceHolderTextView alloc] initWithFrame:CGRectMake(12, 79, 296, 83)];
+    //descriptionView = [[UIPlaceHolderTextView alloc] initWithFrame:CGRectMake(12, 79, 296, 83)];
  
+    descriptionView = [[UIPlaceHolderTextView alloc] init];
+    
     descriptionView.placeholder = @"Add a comment (example: \"Show this flyer for a free drink at the bar from 4pm-7pm\")";
     /*
     descriptionView.placeholderColor = [UIColor colorWithWhite: 0.80 alpha:1];
